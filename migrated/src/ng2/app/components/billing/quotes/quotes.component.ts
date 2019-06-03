@@ -180,6 +180,10 @@ export class QuotesComponent implements OnInit {
     this.quoteStateService.setEditQuote(quote);
   }
 
+  goToPreview(quote) {
+    this.quoteStateService.goToPreview(quote);
+  }
+
   public checkStatus(quote, statusForShowingArray) {
     const elems = statusForShowingArray.filter((item) => item.toLowerCase() === quote.status.toLowerCase());
     return elems.length > 0;
@@ -226,6 +230,7 @@ export class QuotesComponent implements OnInit {
    * archive quote
    */
   approveQuote(item) {
+    console.log(item, 'ITEM');
     this.quoteServices.approveQuote(item.company, item.id).subscribe((res) => {
       console.log(res, 'RES');
     });

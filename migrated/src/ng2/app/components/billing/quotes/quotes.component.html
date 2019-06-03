@@ -78,7 +78,9 @@
           </span>
         </label>
       </div>
-      <div class="col-md-1 pointer">#{{item.number}}</div>
+      <div class="col-md-1 pointer"
+           (click)="goToPreview(item)"
+      >#{{item.number}}</div>
       <div class="col-md-3 g-m">{{item.company.name}}</div>
       <div class="col-md-2">{{getDate(item.date)}}</div>
       <div class="col-md-1">{{getDate(item.validUntil)}}</div>

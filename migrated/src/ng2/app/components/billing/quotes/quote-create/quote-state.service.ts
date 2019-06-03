@@ -1,5 +1,6 @@
 import { EventEmitter, Inject, Injectable } from '@angular/core';
 import { DateService } from "../../../../services/date/date.service";
+import {QuoteService} from "../../../../services/quote/quote.service";
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,8 @@ export class QuoteStateService {
   public subTotalServices = 0;
   public totalTaxes = 0;
   public total = 0;
+  public productsArray: any;
+  public servicesArray: any;
   public selectedNoteFull: any;
   public quoteForCreate = {
     startDate: '',
@@ -215,6 +218,91 @@ export class QuoteStateService {
     this.setPurchaseOrder(quote.purchaseOrder);
     this.setRequestPayment(quote.requestPayment);
     this.goToState('quote-create-component', { editMode: true});
+  }
+
+  goToPreview(quote) {
+    this.quoteForCreate = quote;
+    this.setClient(quote.company);
+    const itemsArray = [...quote.products, ...quote.services];
+    this.setItemArray(itemsArray);
+    this.setNumber(quote.number);
+    this.setEndDate(this.dateService.getStartDate(quote.date));
+    this.setStartDate(this.dateService.getStartDate(quote.endDate));
+    this.setGlobalNote(quote.globalNote);
+    this.setSelectedNote(quote.regularNote);
+    this.setPartialDeposit(quote.partialDeposit);
+    this.setPurchaseOrder(quote.purchaseOrder);
+    this.setRequestPayment(quote.requestPayment);
+    this.resolveTaxes();
+    this.resolveTotal();
+    this.goToState('quote-preview-component', {editMode: true});
+  }
+
+  public divideArray() {
+    this.itemsArray = this.getItemArray();
+    this.productsArray = this.getProductItems(this.itemsArray, 'product');
+    this.servicesArray = this.getProductItems(this.itemsArray, 'service');
+  }
+
+  public resolveTotal() {
+    this.divideArray();
+    this.subTotalServices = 0;
+    this.subTotalProducts = 0;
+    this.productsArray.map((item) => {
+      const product = item.item;
+      this.subTotalProducts += product.sale * product.quantity;
+    });
+    this.servicesArray.map((item) => {
+      const service = item.item;
+      this.subTotalServices += service.rate * service.quantity;
+
+    });
+    this.setSubTotalProducts(this.subTotalProducts);
+    this.setSubTotalServices(this.subTotalServices);
+    this.resolveTaxes();
+    this.total = this.getTotal();
+    this.setTotal(this.total);
+  }
+
+  public getTotal() {
+    return this.totalTaxes + this.subTotalServices + this.subTotalProducts
+  }
+
+  public resolveTaxes() {
+    this.totalTaxes = 0;
+    if (this.itemsArray.length > 0) {
+      this.itemsArray.map((item) => {
+        const taxes = item && item.taxes[0];
+        const product = item;
+        if (taxes) {
+          this.totalTaxes += (((taxes.rate) / 100) * (product.sale || product.rate)) * product.quantity;
+        }
+        this.setTotalTaxes(this.totalTaxes);
+      });
+    } else {
+      this.totalTaxes = 0;
+      this.setTotalTaxes(this.totalTaxes);
+    }
+  }
+
+  getProductItems(itemsAray, type) {
+    if (type === 'service') {
+      itemsAray = itemsAray.filter((item) => item.hasOwnProperty('rate'));
+      return itemsAray.map((item, index) => ({
+        item: item,
+        "itemOrder": index,
+        "quantity": 1,
+        "discountType":"PERCENT"
+      }))
+    } else {
+      itemsAray = itemsAray.filter((item) => !item.hasOwnProperty('rate'));
+      return itemsAray.map((item, index) => ({
+        item: item,
+        "itemOrder": index,
+        "quantity": item.quantity,
+        "discountType":"PERCENT"
+      }))
+    }
   }
 
 }

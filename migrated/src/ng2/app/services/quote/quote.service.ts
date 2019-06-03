@@ -119,9 +119,10 @@ export class QuoteService {
       [quote_id])
   }
 
-  approveQuote(company, quote_id) {
+  approveQuote(company, quoteId) {
+    console.log(quoteId, 'quoteId');
     return this.http.post(this.apiUrl +
-      `saleQuotes/approveQuote?companyId=${company.id}`, [quote_id]
+      `saleQuotes/approveQuote?companyId=${company.id}`, [quoteId]
     )
   }
 
