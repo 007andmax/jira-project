@@ -47,6 +47,7 @@ import { AddItemComponent } from './components/billing/quotes/quote-create/quote
 import { MultiDatepickerComponent } from './components/shared/multi-datepicker/multi-datepicker.component';
 import { LeftPanelBillingComponent } from './components/left-panel/left-panel-billing/left-panel-billing.component';
 import { ToNumerPipe } from './pipe/to-numer.pipe';
+import { ModalQuoteComponent } from './services/modal/modal-quote/modal-quote.component';
 
 
 declare var angular: any;
@@ -111,7 +112,8 @@ angular.module('quicktech')
     AddItemComponent,
     MultiDatepickerComponent,
     LeftPanelBillingComponent,
-    ToNumerPipe
+    ToNumerPipe,
+    ModalQuoteComponent
   ],
   imports: [
     BrowserModule,
@@ -160,7 +162,8 @@ angular.module('quicktech')
       })
   ],
   entryComponents: [
-    LeftPanelComponent
+    LeftPanelComponent,
+    ModalQuoteComponent
   ],
   providers: [
 

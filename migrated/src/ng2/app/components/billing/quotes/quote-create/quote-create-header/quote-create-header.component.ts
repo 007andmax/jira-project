@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { QuoteStateService } from "../quote-state.service";
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalQuoteComponent } from "../../../../../services/modal/modal-quote/modal-quote.component";
 
 /**
  * Password quotes header component
@@ -18,6 +20,7 @@ export class QuoteCreateHeaderComponent {
   @Output() download = new EventEmitter<string>();
 
   constructor(
+    private modalService: NgbModal,
     private quoteStateService: QuoteStateService
   ) { }
 
@@ -68,6 +71,13 @@ export class QuoteCreateHeaderComponent {
    */
   public goToState(state) {
     this.quoteStateService.goToState(state);
+  }
+
+  /**
+   * save quote and open send modal
+   */
+  public saveAndSend() {
+    this.modalService.open(ModalQuoteComponent);
   }
 
 }
