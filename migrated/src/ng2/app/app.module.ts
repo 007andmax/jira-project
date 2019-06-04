@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, NgZone } from '@angular/core';
 import { RouterModule, UrlHandlingStrategy } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +14,9 @@ import { SidebarModule } from 'ng-sidebar';
 import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 import { ClickOutsideModule } from 'ng4-click-outside';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { MatSelectModule} from '@angular/material/select';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from "@angular/material";
 
 import { AppComponent } from './app.component';
 import { PasswordManagerComponent } from './components/password-manager/password-manager.component';
@@ -127,6 +131,10 @@ angular.module('quicktech')
     ClickOutsideModule,
     ShowHidePasswordModule,
     NgxSelectModule,
+    MatSelectModule,
+    MatChipsModule,
+    MatIconModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     SidebarModule.forRoot(),
     RouterModule.forRoot([

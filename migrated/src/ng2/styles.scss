@@ -1,5 +1,6 @@
 @import './assets/styles/dropdowns.scss';
 @import './assets/styles/icons.scss';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 .main-container:nth-child(2) {
   display: none;
@@ -171,3 +172,6 @@ ngb-typeahead-window {
 .ngb-dp-day.hidden {
   display: block !important;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
