@@ -25,6 +25,7 @@ export class UsersService {
   getCurrentUser() {
     return this.http.get(this.apiUrl + 'users/current').subscribe((res) => {
       this.currentUser = res;
+      console.log(res);
     });
   }
 
