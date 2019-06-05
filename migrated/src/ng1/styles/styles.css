@@ -5645,7 +5645,7 @@ tbody.collapse.in {
 
 .dropdown-menu, .uib-dropdown-menu.dropdown-menu-services-create {
   top: auto;
-  bottom: 100%;
+  bottom: calc(100% + 10px);
   left: 50%;
   right: auto;
   transform: translate(-50%, 0);
