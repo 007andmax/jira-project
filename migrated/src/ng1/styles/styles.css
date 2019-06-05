@@ -5643,7 +5643,7 @@ tbody.collapse.in {
   background-clip: padding-box;
 }
 
-.dropdown-menu, .uib-dropdown-menu.dropdown-menu-services-create {
+.uib-dropdown-menu.dropdown-menu-services-create {
   top: auto;
   bottom: calc(100% + 10px);
   left: 50%;
