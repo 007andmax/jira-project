@@ -14,17 +14,24 @@
                <!--uib-typeahead="service as service.name for service in serviceList |  orderBy:'name'"-->
                <!--typeahead-append-to-body="true"-->
                <!--qt-typeahead-async-show-on-focus>-->
-        <div uib-dropdown keyboard-nav="true">
-          <button style="padding: 0; height: 45px;text-align: left"
-                  class="form-control form-validation-dropdown no-cursor has-dropdown"
-                  uib-dropdown-toggle aria-expanded="true" tabindex="7">
-            {{ serviceExpense.item.name }}
-          </button>
-          <i class="icn-sm report-caret-icon"></i>
-          <ul class="dropdown-menu dropdown-account-type">
-            <li ng-repeat="service in serviceList | orderBy:'name'" ng-click="serviceExpense.item = service">
-              <a href="javascript:void(0)"> 11{{ service.name }}22 </a>
+        <div uib-dropdown>
+          <input type="text" value="Onsite" class="new-input form-control has-dropdown" placeholder="Service"
+                 name="serviceName" placeholder="Service" uib-dropdown-toggle aria-expanded="false"
+                 ng-model="serviceExpense.item.name" required
+                 uib-tooltip="Service"
+                 tooltip-placement="top"
+                 tooltip-append-to-body="true">
+          <i style="top: 14px;" class="icn-sm report-caret-icon"></i>
+
+          <ul class="dropdown-menu dropdown-menu-services">
+
+            <li role="presentation"
+                ng-repeat="service in serviceList | orderBy: 'name'">
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)" ng-click="serviceExpense.item = service">
+                {{ service.name }}
+              </a>
             </li>
+
           </ul>
         </div>
 
