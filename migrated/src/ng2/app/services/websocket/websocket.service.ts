@@ -45,7 +45,9 @@ export class WebsocketService {
   subsribeToQuote() {
     setTimeout(() => {
       this.companiesService.getTechCompany().subscribe((res) => {
+        console.log('1111111');
         this.stompClient.subscribe(`/saleQuotes/${res['id']}`, (message) => {
+          console.log('222222');
           var newChange = JSON.parse(message.body);
           // commit console.log before prod update
           console.log(newChange, 'newChange');
