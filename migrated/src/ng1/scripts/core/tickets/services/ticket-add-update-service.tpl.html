@@ -2,18 +2,31 @@
   <div class="ticket-add-service-content">
     <div class="col-5">
       <div uib-dropdown>
-        <input type="text"
-               name="serviceName"
-               ng-class="{'has-error has-error-service': getErrorStatus()}"
-               ng-disabled="!serviceList.length"
-               ng-model="serviceExpense.item"
-               ng-minlength="1"
-               autocomplete="off"
-               placeholder="Service"
-               class="new-input form-control-dropdown dropdown-toggle new-service-input"
-               uib-typeahead="service as service.name for service in serviceList |  orderBy:'name'"
-               typeahead-append-to-body="true"
-               qt-typeahead-async-show-on-focus>
+        <!--<input type="text"-->
+               <!--name="serviceName"-->
+               <!--ng-class="{'has-error has-error-service': getErrorStatus()}"-->
+               <!--ng-disabled="!serviceList.length"-->
+               <!--ng-model="serviceExpense.item"-->
+               <!--ng-minlength="1"-->
+               <!--autocomplete="off"-->
+               <!--placeholder="Service"-->
+               <!--class="new-input form-control-dropdown dropdown-toggle new-service-input"-->
+               <!--uib-typeahead="service as service.name for service in serviceList |  orderBy:'name'"-->
+               <!--typeahead-append-to-body="true"-->
+               <!--qt-typeahead-async-show-on-focus>-->
+        <div uib-dropdown keyboard-nav="true">
+          <button style="padding: 0; height: 45px;text-align: left"
+                  class="form-control form-validation-dropdown no-cursor has-dropdown"
+                  uib-dropdown-toggle aria-expanded="true" tabindex="7">
+            {{ serviceExpense.item.name }}
+          </button>
+          <i class="icn-sm report-caret-icon"></i>
+          <ul class="dropdown-menu dropdown-account-type">
+            <li ng-repeat="service in serviceList | orderBy:'name'" ng-click="serviceExpense.item = service">
+              <a href="javascript:void(0)"> 11{{ service.name }}22 </a>
+            </li>
+          </ul>
+        </div>
 
         <div style="position: absolute;right: 10px;top: 9px;cursor: pointer;"
              typeahead-input-icon="serviceExpense.item"></div>
