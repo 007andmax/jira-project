@@ -54,6 +54,34 @@ export class QuoteService {
     })
   }
 
+  public editQuote(value) {
+    this.itemsListArray = this.quoteStateService.getItemArray();
+    this.productsArray = this.getProductItems(this.itemsListArray, 'product');
+    this.servicesArray = this.getProductItems(this.itemsListArray, 'service');
+    console.log(value, 'value');
+    return this.http.put(`${this.apiUrl}saleQuotes?sendNotification=true` ,{
+      "companyId": (value.client && value.client.item) ? value.client.item.id : value.client.id,
+      "number": this.quoteStateService.getQuoteNumber(),
+      "quoteItems":{
+        "type":"MIXED",
+        "shares":[],
+        "ticket":null,
+        "products": this.productsArray,
+        "services": this.servicesArray
+      },
+      "requestPayment": this.quoteStateService.getRequestPayment()? this.quoteStateService.getRequestPayment() : false,
+      "draft":false,
+      "purchaseOrder": this.quoteStateService.getPurchaseOrder() || null,
+      "partialDeposit": this.quoteStateService.getPartialDeposit() || null,
+      "validUntil": this.getMsDate(value.endDate),
+      "date": this.getMsDate(value.startDate),
+      "recipients":["user@gmail.com"],
+      "message":"My message string with styles",
+      "globalNote": value.globalNote ? value.globalNote : this.quoteStateService.getGlobalNote(),
+      "regularNote": value.regularNote ? value.regularNote : this.quoteStateService.getSelectedNote()
+    })
+  }
+
   getQuoteNumber() {
     return this.http.get(this.apiUrl + `data/actualNumber?type=SALE_QUOTE`)
   }

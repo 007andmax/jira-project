@@ -44,7 +44,6 @@ export class QuoteCreateComponent {
 
   public getState() {
     this.editMode = this.quoteStateService.getState().params.editMode;
-    console.log(this.editMode, 'editMode');
   }
 
 }

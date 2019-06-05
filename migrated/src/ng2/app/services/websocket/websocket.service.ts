@@ -44,9 +44,7 @@ export class WebsocketService {
 
   subsribeToQuote() {
     setTimeout(() => {
-      this.companiesService.getTechCompany().subscribe((res) => {
-        console.log('1111111');
-        this.stompClient.subscribe(`/saleQuotes/${res['id']}`, (message) => {
+        this.stompClient.subscribe(`/saleQuotes//saleQuotes/72381bff-127c-4a63-9d2e-6e952350dcbd`, (message) => {
           console.log('222222');
           var newChange = JSON.parse(message.body);
           // commit console.log before prod update
@@ -55,7 +53,6 @@ export class WebsocketService {
             console.log('test')
           }
         });
-      })
     }, 3000);
   }
 
