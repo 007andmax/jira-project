@@ -25,7 +25,7 @@ export class WebsocketService {
     let that = this;
     this.stompClient.connect({}, function() {
       that.subsribeToPermissions();
-      that.test();
+      that.subsribeToQuote();
     });
   }
 
@@ -42,22 +42,9 @@ export class WebsocketService {
     }, 3000);
   }
 
-  // subsribeToQuote() {
-  //   setTimeout(() => {
-  //       this.stompClient.subscribe(`/watch/saleQuotes/72381bff-127c-4a63-9d2e-6e952350dcbd`, (message) => {
-  //         var newChange = JSON.parse(message.body);
-  //         // commit console.log before prod update
-  //         console.log(newChange, 'newChange');
-  //         if (message.body) {
-  //           console.log('test')
-  //         }
-  //       });
-  //   }, 3000);
-  // }
-
-  test() {
+  subsribeToQuote() {
     setTimeout(() => {
-        this.stompClient.subscribe(`/user/watch/tickets`, (message) => {
+        this.stompClient.subscribe(`/watch/saleQuotes/72381bff-127c-4a63-9d2e-6e952350dcbd`, (message) => {
           var newChange = JSON.parse(message.body);
           // commit console.log before prod update
           console.log(newChange, 'newChange');
