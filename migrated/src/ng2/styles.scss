@@ -167,11 +167,17 @@ ngb-typeahead-window {
   }
 }
 
-@import './assets/styles/mobile.scss';
-
 .ngb-dp-day.hidden {
   display: block !important;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+@import './assets/styles/mobile.scss';

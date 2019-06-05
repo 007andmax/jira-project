@@ -490,13 +490,19 @@ img {
   display: flex;
 }
 
-.aic {
+.ai-c {
   align-items: center;
 }
-.df-fe{
+
+.jc-sb {
+  justify-content: space-between;
+}
+
+.df-fe {
   display: flex;
   justify-content: flex-end;
 }
+
 .img-responsive,
 .thumbnail > img,
 .thumbnail a > img {

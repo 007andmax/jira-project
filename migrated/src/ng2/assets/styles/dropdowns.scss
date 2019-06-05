@@ -2,6 +2,12 @@
 .light-dropdown,
 .grey-dropdown {
   position: relative;
+  &.to-left {
+    .dropdown-menu {
+      left: auto !important;
+      right: 0;
+    }
+  }
   .dropdown-menu {
     background: #fff;
     width: 100%;
