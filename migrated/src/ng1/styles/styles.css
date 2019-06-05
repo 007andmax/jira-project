@@ -4875,6 +4875,10 @@ tbody.collapse.in {
   box-shadow: 0 4px 20px 0 rgba(10, 45, 89, 0.1);
   background-clip: padding-box;
 }
+
+.dropdown-menu, .uib-dropdown-menu.dropdown-menu-services-create {
+  top: -360px;
+}
 .dropdown-menu .divider {
   height: 1px;
   margin: 10px 0;
