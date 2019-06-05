@@ -2256,6 +2256,7 @@ span.sort-span {
 
 .new-input {
   width: 100%;
+  height: 40px;
   border-radius: 3px;
   border: solid 1px #c4cbd5;
   padding: 7px 12px;

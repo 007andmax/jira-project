@@ -46,6 +46,10 @@
   color: #9ca5b6;
 }
 
+.ticket-add-service-content .report-caret-icon {
+  margin: 0 2px 2px 0;
+}
+
 .ticket-add-product-actions,
 .ticket-add-service-actions {
   position: absolute;
@@ -232,8 +236,8 @@
 
 .without-input-arrows input::-webkit-outer-spin-button,
 .without-input-arrows input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .ticket-add-content-actions {
