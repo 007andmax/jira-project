@@ -53,6 +53,7 @@ export class WebsocketService {
             console.log('test')
           }
         });
+      });
     }, 3000);
   }
 
