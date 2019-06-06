@@ -243,9 +243,9 @@ export class QuotesComponent implements OnInit {
     this.quoteRealTimeService.changeQuotesArray.subscribe((newChange) => {
       console.log(newChange,'quote');
       if (newChange.action === 'SALE_QUOTE_CREATED') {
-        this.quotesList.push(newChange.data);
+        return this.quotesList.push(newChange.data);
       } else {
-        this.quotesList.map((item) => {
+        return this.quotesList.map((item) => {
           if (item.id === newChange.data.id) {
             return item = newChange.data;
           } else {
