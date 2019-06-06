@@ -1,6 +1,6 @@
 {
   "/": {
-    "target": "http://109.197.223.16:1111",
+    "target": "http://109.197.223.16",
     "secure": false,
     "pathRewrite": {
       "^/": "",
