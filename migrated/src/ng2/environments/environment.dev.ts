@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://dev.quicktech.com/'
+  apiUrl: 'http://109.197.223.16:1111'
 };

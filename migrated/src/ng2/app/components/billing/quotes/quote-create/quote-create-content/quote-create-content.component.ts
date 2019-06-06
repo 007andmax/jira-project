@@ -109,15 +109,13 @@ export class QuoteCreateContentComponent implements OnInit {
   saveAndContinue() {
     const isFormReady = this.quoteStateService.getType();
     console.log(this.quoteForm.value, 'this.quoteForm.value');
-    const currenntQuote = this.quoteStateService.getQuoteCreate();
+    const currentQuote = this.quoteStateService.getQuoteCreate();
     if (isFormReady) {
-      console.log(0);
-      console.log(0);
-      console.log(currenntQuote);
+      console.log(currentQuote);
       console.log(this.editMode);
-      if (this.editMode && currenntQuote && currenntQuote['id']) {
+      if (this.editMode && currentQuote && currentQuote['id']) {
         console.log(1);
-        this.quoteService.editQuote(this.quoteForm.value, currenntQuote['id']).subscribe((res) => {
+        this.quoteService.editQuote(this.quoteForm.value, currentQuote['id']).subscribe((res) => {
           this.quoteStateService.goToQuote();
         })
       } else {
