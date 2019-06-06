@@ -86,9 +86,6 @@ export class QuoteCreateContentComponent implements OnInit {
    */
   public initEditMode() {
     const quote = this.quoteStateService.getQuoteCreate();
-    console.log(quote.startDate, 'quote.startDate');
-    console.log(quote.endDate, 'quote.endDate');
-    console.log(this.quoteStateService.getClient(), 'quote.endDate');
     this.quoteForm = this.fb.group({
       client: [this.quoteStateService.getClient(), Validators.required],
       startDate: this.dateService.getStartDate(new Date(this.dateService.getDateFromBootstrap(quote.startDate))),
@@ -100,7 +97,6 @@ export class QuoteCreateContentComponent implements OnInit {
       globalNote: '',
       purchaseOrder: ''
     });
-    console.log(this.quoteForm, 'quoteForm');
   }
 
   /**
@@ -108,11 +104,8 @@ export class QuoteCreateContentComponent implements OnInit {
    */
   saveAndContinue() {
     const isFormReady = this.quoteStateService.getType();
-    console.log(this.quoteForm.value, 'this.quoteForm.value');
     const currentQuote = this.quoteStateService.getQuoteCreate();
     if (isFormReady) {
-      console.log(currentQuote);
-      console.log(this.editMode);
       if (this.editMode && currentQuote && currentQuote['id']) {
         console.log(1);
         this.quoteService.editQuote(this.quoteForm.value, currentQuote['id']).subscribe((res) => {

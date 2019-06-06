@@ -3,7 +3,7 @@ import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import { UsersService } from "../users/users.service";
 import { CompaniesService } from "../company/companies.service";
-import {QuoteRealtimeService} from "../../components/billing/quotes/quote-realtime.service";
+import { QuoteRealTimeService } from "../../components/billing/quotes/quote-realtime.service";
 
 
 @Injectable({
@@ -17,7 +17,7 @@ export class WebsocketService {
   constructor(
     private usersService: UsersService,
     private companiesService: CompaniesService,
-    private quoteRealTimeService: QuoteRealtimeService
+    private quoteRealTimeService: QuoteRealTimeService
   ) {
   }
 
