@@ -6,6 +6,7 @@ import { CompaniesService } from '../../../services/company/companies.service';
 import { QUOTE_STATUS } from '../../../const/quote-status';
 import { DateService } from "../../../services/date/date.service";
 import { QuoteStateService } from "./quote-create/quote-state.service";
+import { QuoteRealTimeService } from "./quote-realtime.service";
 
 /**
  * Password quotes component
@@ -41,13 +42,15 @@ export class QuotesComponent implements OnInit {
    * @param {DateService} dateService Service to work with date
    * @param {ChangeDetectorRef} cdRef Service to work with date
    * @param {QuoteStateService} quoteStateService to work quote state
+   * @param {QuoteRealTimeService} quoteRealTimeService to work quote state
    */
   constructor(
     private quoteServices: QuoteService,
     private companiesService: CompaniesService,
     private dateService: DateService,
     private cdRef:ChangeDetectorRef,
-    private quoteStateService: QuoteStateService
+    private quoteStateService: QuoteStateService,
+    private quoteRealTimeService: QuoteRealTimeService
   ) { }
 
   ngOnInit() {
@@ -56,6 +59,7 @@ export class QuotesComponent implements OnInit {
     if (!this.cdRef['destroyed']) {
       this.cdRef.detectChanges();
     }
+    this.changeQuotesListItem();
   }
 
   /**
@@ -230,15 +234,25 @@ export class QuotesComponent implements OnInit {
    * archive quote
    */
   approveQuote(item) {
-    console.log(item, 'ITEM');
     this.quoteServices.approveQuote(item.company, item.id).subscribe((res) => {
       console.log(res, 'RES');
     });
   }
 
-  public changeQuotesListItem(quote) {
-    this.quotesList.map((item) => {
-      // item.id === quote.id ? quote
+  public changeQuotesListItem() {
+    this.quoteRealTimeService.changeQuotesArray.subscribe((newChange) => {
+      console.log(newChange,'quote');
+      if (newChange.action === 'SALE_QUOTE_CREATED') {
+        this.quotesList.push(newChange.data);
+      } else {
+        this.quotesList.map((item) => {
+          if (item.id === newChange.data.id) {
+            return item = newChange.data;
+          } else {
+            return item
+          }
+        })
+      }
     })
   }
 
