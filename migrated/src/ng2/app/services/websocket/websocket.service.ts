@@ -51,7 +51,7 @@ export class WebsocketService {
           var newChange = JSON.parse(message.body);
           // commit console.log before prod update
           console.log(newChange, 'newChange');
-          this.quoteStateService.handleRealTimeChanges(newChange);
+          // this.quoteStateService.handleRealTimeChanges(newChange);
           if (message.body) {
             console.log('test')
           }
