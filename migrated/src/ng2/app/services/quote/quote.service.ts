@@ -54,12 +54,12 @@ export class QuoteService {
     })
   }
 
-  public editQuote(value) {
+  public editQuote(value, quoteId) {
     this.itemsListArray = this.quoteStateService.getItemArray();
     this.productsArray = this.getProductItems(this.itemsListArray, 'product');
     this.servicesArray = this.getProductItems(this.itemsListArray, 'service');
     console.log(value, 'value');
-    return this.http.put(`${this.apiUrl}saleQuotes?sendNotification=true` ,{
+    return this.http.put(`${this.apiUrl}saleQuotes/${quoteId}` ,{
       "companyId": (value.client && value.client.item) ? value.client.item.id : value.client.id,
       "number": this.quoteStateService.getQuoteNumber(),
       "quoteItems":{

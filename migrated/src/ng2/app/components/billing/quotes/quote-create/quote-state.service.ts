@@ -206,8 +206,8 @@ export class QuoteStateService {
     this.quoteForCreate = quote;
     this.setClient(quote.company);
     const itemsArray = [...quote.products, ...quote.services];
-
     this.setItemArray(itemsArray);
+    this.setType(true);
     console.log(quote, 'QUOTE');
     this.setNumber(quote.number);
     this.setEndDate(this.dateService.getStartDate(quote.date));
@@ -305,6 +305,10 @@ export class QuoteStateService {
         "discountType":"PERCENT"
       }))
     }
+  }
+
+  public handleRealTimeChanges(newChange) {
+    console.log(newChange, 'newChange');
   }
 
 }
