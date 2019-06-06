@@ -1,10 +1,10 @@
 {
   "/": {
-    "target": "http://109.197.223.16",
+    "target": "https://dev.quicktech.com",
     "secure": false,
     "pathRewrite": {
       "^/": "",
-      "port": 1111
+      "port": 9000
     },
     "changeOrigin": true
   }

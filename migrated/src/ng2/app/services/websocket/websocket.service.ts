@@ -3,8 +3,7 @@ import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import { UsersService } from "../users/users.service";
 import { CompaniesService } from "../company/companies.service";
-import {QuoteStateService} from "../../components/billing/quotes/quote-create/quote-state.service";
-import {QuoteService} from "../quote/quote.service";
+import {QuoteRealtimeService} from "../../components/billing/quotes/quote-realtime.service";
 
 
 @Injectable({
@@ -17,7 +16,8 @@ export class WebsocketService {
 
   constructor(
     private usersService: UsersService,
-    private companiesService: CompaniesService
+    private companiesService: CompaniesService,
+    private quoteRealTimeService: QuoteRealtimeService
   ) {
   }
 
@@ -51,8 +51,8 @@ export class WebsocketService {
           var newChange = JSON.parse(message.body);
           // commit console.log before prod update
           console.log(newChange, 'newChange');
-          this.usersService.handleRealTimeChanges(newChange);
-          // this.quoteStateService.handleRealTimeChanges(newChange);
+          // this.usersService.handleRealTimeChanges(newChange);
+          this.quoteRealTimeService.handleRealTimeChanges(newChange);
           if (message.body) {
             console.log('test')
           }
