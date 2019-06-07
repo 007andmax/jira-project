@@ -136,7 +136,7 @@ export class QuoteCreateContentComponent implements OnInit {
   approveQuote() {
     const isFormReady = this.quoteStateService.getType();
     isFormReady ?
-      this.quoteService.createQuote(this.quoteForm.value).subscribe((res) => {
+      this.quoteService.createQuote(this.quoteForm.value, false).subscribe((res) => {
         this.quoteService.approveQuote(res['company'].id, res['id']).subscribe((res) => {
           this.quoteStateService.goToQuote();
         });
@@ -147,7 +147,7 @@ export class QuoteCreateContentComponent implements OnInit {
   public downloadPdf() {
     const isFormReady = this.quoteStateService.getType();
     isFormReady ?
-      this.quoteService.createQuote(this.quoteForm.value).subscribe((res) => {
+      this.quoteService.createQuote(this.quoteForm.value, false).subscribe((res) => {
         const id = res['id'];
         this.quoteService.downloadPdf(res['id']).subscribe((res) => this.downLoadFile(res,id));
       })
