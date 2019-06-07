@@ -241,17 +241,13 @@ export class QuotesComponent implements OnInit {
 
   public changeQuotesListItem() {
     this.quoteRealTimeService.changeQuotesArray.subscribe((newChange) => {
-      console.log(newChange,'quote');
       if (newChange.action === 'SALE_QUOTE_CREATED') {
         return this.quotesList.push(newChange.data);
       } else {
-        return this.quotesList.map((item) => {
-          if (item.id === newChange.data.id) {
-            return item = newChange.data;
-          } else {
-            return item
-          }
-        })
+        const elemIndex = this.quotesList.findIndex((item) => item.id === newChange.data.id);
+        console.log(elemIndex, 'elemIndex');
+        console.log(this.quotesList[elemIndex], 'this.quotesList[elemIndex]');
+        return this.quotesList[elemIndex] = newChange.data;
       }
     })
   }

@@ -9,7 +9,6 @@ export class QuoteRealTimeService {
   constructor() { }
 
   public handleRealTimeChanges(newChange) {
-    console.log(newChange, 'newChange');
     this.changeQuotesArray.emit(newChange);
   }
 

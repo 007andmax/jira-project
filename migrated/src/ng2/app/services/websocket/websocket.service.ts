@@ -49,9 +49,6 @@ export class WebsocketService {
       this.companiesService.getTechCompany().subscribe((res) => {
         this.stompClient.subscribe(`/user/watch/saleQuotes/${res['id']}`, (message) => {
           var newChange = JSON.parse(message.body);
-          // commit console.log before prod update
-          console.log(newChange, 'newChange');
-          // this.usersService.handleRealTimeChanges(newChange);
           this.quoteRealTimeService.handleRealTimeChanges(newChange);
           if (message.body) {
             console.log('test')
