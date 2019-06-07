@@ -181,3 +181,15 @@ body {
 }
 
 @import './assets/styles/mobile.scss';
+
+
+.modal.fade {
+  opacity: 1;
+  transition: none;
+
+  .modal-content {
+    padding: 40px;
+    height: 500px;
+  }
+
+}

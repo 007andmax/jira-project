@@ -12,6 +12,7 @@ export class QuoteStateService {
   public type = false;
   public validateForm: EventEmitter<any> = new EventEmitter();
   public quoteNumber: number;
+  public startQuoteNumber: number;
   public state;
   public subTotalProducts = 0;
   public subTotalServices = 0;
@@ -92,6 +93,12 @@ export class QuoteStateService {
   public setNumber(value) {
     this.quoteNumber = value;
     this.quoteForCreate.quoteNumber = value;
+    console.log(this.quoteNumber, 'this.quoteNumber');
+    console.log(this.quoteForCreate.quoteNumber, 'this.quoteForCreate.quoteNumber');
+  }
+
+  public setStartQuoteNumber(value) {
+    this.startQuoteNumber = value;
   }
 
   public getQuoteNumber() {
@@ -210,6 +217,7 @@ export class QuoteStateService {
     this.setType(true);
     console.log(quote, 'QUOTE');
     this.setNumber(quote.number);
+    this.setStartQuoteNumber(quote.number);
     this.setEndDate(this.dateService.getStartDate(quote.date));
     this.setStartDate(this.dateService.getStartDate(quote.endDate));
     this.setGlobalNote(quote.globalNote);

@@ -19,6 +19,7 @@ export class QuoteCreateContentTopComponent implements OnInit {
   public partialDeposit: any;
   public purchaseOrder: any;
   public requestPayment: any;
+  public startQuoteNumber: number;
   public editItem: any;
   public editMode: any;
   public currentClient = null;
@@ -44,7 +45,6 @@ export class QuoteCreateContentTopComponent implements OnInit {
     this.selectedItem.next(selectClient);
     this.quoteStateService.setClient(selectClient);
     this.currentClient = selectClient.item;
-    console.log(this.currentClient);
   }
 
   /**
@@ -53,6 +53,7 @@ export class QuoteCreateContentTopComponent implements OnInit {
   private getQuoteNumber() {
     this.quoteService.getQuoteNumber().subscribe((res) => {
       this.quoteNumber = this.editMode ? this.quoteStateService.getQuoteNumber() : res['number'];
+      this.startQuoteNumber = this.editMode ? this.quoteStateService.getQuoteNumber() : res['number'];
     });
   }
 
@@ -60,6 +61,7 @@ export class QuoteCreateContentTopComponent implements OnInit {
    * Follow quote number change
    */
   private setNumber(value) {
+    console.log(value, 'value');
     this.quoteStateService.setNumber(value)
   }
 

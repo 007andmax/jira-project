@@ -65,7 +65,6 @@ export class QuoteCreateContentComponent implements OnInit {
   public initForm(editMode?) {
     if (editMode) {
       this.initEditMode();
-      this.selectedClient
     } else {
       this.quoteForm = this.fb.group({
         client: ['', Validators.required],

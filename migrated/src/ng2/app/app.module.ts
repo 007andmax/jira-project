@@ -16,7 +16,7 @@ import { ClickOutsideModule } from 'ng4-click-outside';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MatSelectModule} from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
-import { MatIconModule } from "@angular/material";
+import { MatAutocompleteModule, MatIconModule } from "@angular/material";
 
 import { AppComponent } from './app.component';
 import { PasswordManagerComponent } from './components/password-manager/password-manager.component';
@@ -134,6 +134,7 @@ angular.module('quicktech')
     MatSelectModule,
     MatChipsModule,
     MatIconModule,
+    MatAutocompleteModule,
     BrowserAnimationsModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     SidebarModule.forRoot(),
