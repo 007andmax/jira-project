@@ -1,23 +1,23 @@
 <div>
   Subject
-  <input type="text">
+  <input type="text" [(ngModel)]="subject" (ngModelChange)="setSubject($event)">
 </div>
 
 
 <mat-form-field class="example-chip-list">
   <mat-chip-list #chipList aria-label="Fruit selection">
     <mat-chip
-      *ngFor="let fruit of fruits"
+      *ngFor="let user of selectedUsers"
       [selectable]="selectable"
       [removable]="removable"
-      (removed)="remove(fruit)">
-      {{fruit}}
+      (removed)="remove(selectedUsers)">
+      {{user.firstName + user.lastName}}
       <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
     </mat-chip>
     <input
       placeholder="New fruit..."
-      #fruitInput
-      [formControl]="fruitCtrl"
+      #userInput
+      [formControl]="inputCtrl"
       [matAutocomplete]="auto"
       [matChipInputFor]="chipList"
       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
@@ -25,13 +25,15 @@
       (matChipInputTokenEnd)="add($event)">
   </mat-chip-list>
   <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-    <mat-option *ngFor="let fruit of allFruits" [value]="fruit">
-      {{fruit}}
+    <mat-option *ngFor="let user of users" [value]="user">
+      {{user.firstName + user.lastName}}
     </mat-option>
   </mat-autocomplete>
 </mat-form-field>
 
 <div>
   Message
-  <input type="text">
+  <input type="text" [(ngModel)]="message" (ngModelChange)="setMessage($event)">
 </div>
+
+<button (click)="save()">Save and send</button>

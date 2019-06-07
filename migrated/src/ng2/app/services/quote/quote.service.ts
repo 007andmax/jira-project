@@ -26,12 +26,11 @@ export class QuoteService {
     private quoteStateService: QuoteStateService
   ) {}
 
-   public createQuote(value) {
+   public createQuote(value, notification) {
     this.itemsListArray = this.quoteStateService.getItemArray();
     this.productsArray = this.getProductItems(this.itemsListArray, 'product');
     this.servicesArray = this.getProductItems(this.itemsListArray, 'service');
-    console.log(value, 'value');
-    return this.http.post(`${this.apiUrl}saleQuotes?sendNotification=true` ,{
+    return this.http.post(`${this.apiUrl}saleQuotes?sendNotification=${notification}` ,{
        "companyId": (value.client && value.client.item) ? value.client.item.id : value.client.id,
        "number": this.quoteStateService.getQuoteNumber(),
        "quoteItems":{
@@ -48,19 +47,20 @@ export class QuoteService {
        "validUntil": this.getMsDate(value.endDate),
        "date": this.getMsDate(value.startDate),
        "recipients":["user@gmail.com"],
-       "message":"My message string with styles",
+      "message": notification? this.quoteStateService.getQuoteCreate()['message'] : 'null',
+      "subject": notification? this.quoteStateService.getQuoteCreate()['subject'] : 'null',
        "globalNote": value.globalNote ? value.globalNote : this.quoteStateService.getGlobalNote(),
        "regularNote": value.regularNote ? value.regularNote : this.quoteStateService.getSelectedNote()
     })
   }
 
-  public editQuote(value, quoteId) {
+  public editQuote(value, quoteId, notification) {
     this.itemsListArray = this.quoteStateService.getItemArray();
     this.productsArray = this.getProductItems(this.itemsListArray, 'product');
     this.servicesArray = this.getProductItems(this.itemsListArray, 'service');
-    return this.http.put(`${this.apiUrl}saleQuotes/${quoteId}?sendNotification=false` ,{
+    return this.http.put(`${this.apiUrl}saleQuotes/${quoteId}?sendNotification=${notification}` ,{
       "companyId": (value.client && value.client.item) ? value.client.item.id : value.client.id,
-      "number": this.quoteStateService.getQuoteNumber(),
+      "number": this.getQuoteNumberForEdit(),
       "quoteItems":{
         "type":"MIXED",
         "shares":[],
@@ -75,7 +75,8 @@ export class QuoteService {
       "validUntil": this.getMsDate(value.endDate),
       "date": this.getMsDate(value.startDate),
       "recipients":["user@gmail.com"],
-      "message":"My message string with styles",
+      "message": notification? this.quoteStateService.getQuoteCreate()['message'] : 'null',
+      "subject": notification? this.quoteStateService.getQuoteCreate()['subject'] : 'null',
       "globalNote": value.globalNote ? value.globalNote : this.quoteStateService.getGlobalNote(),
       "regularNote": value.regularNote ? value.regularNote : this.quoteStateService.getSelectedNote()
     })
@@ -199,6 +200,15 @@ export class QuoteService {
         break;
     }
   }
+
+  public getQuoteNumberForEdit() {
+    if (this.quoteStateService.getQuoteNumber() === this.quoteStateService.getStartQuotenumber()) {
+      return null
+    } else {
+      this.quoteStateService.getQuoteNumber()
+    }
+  }
+
 
 
 }

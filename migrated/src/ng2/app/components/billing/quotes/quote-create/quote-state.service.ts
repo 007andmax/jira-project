@@ -11,6 +11,7 @@ export class QuoteStateService {
   public itemsArray: any;
   public type = false;
   public validateForm: EventEmitter<any> = new EventEmitter();
+  public handeSendMode: EventEmitter<any> = new EventEmitter();
   public quoteNumber: number;
   public startQuoteNumber: number;
   public state;
@@ -35,7 +36,9 @@ export class QuoteStateService {
     selectedNote: '',
     partialDeposit: '',
     purchaseOrder: '',
-    requestPayment: ''
+    requestPayment: '',
+    subject: '',
+    message: ''
   };
 
 
@@ -93,8 +96,6 @@ export class QuoteStateService {
   public setNumber(value) {
     this.quoteNumber = value;
     this.quoteForCreate.quoteNumber = value;
-    console.log(this.quoteNumber, 'this.quoteNumber');
-    console.log(this.quoteForCreate.quoteNumber, 'this.quoteForCreate.quoteNumber');
   }
 
   public setStartQuoteNumber(value) {
@@ -211,6 +212,7 @@ export class QuoteStateService {
 
   public setEditQuote(quote) {
     this.quoteForCreate = quote;
+    this.startQuoteNumber = quote.number;
     this.setClient(quote.company);
     const itemsArray = [...quote.products, ...quote.services];
     this.setItemArray(itemsArray);
@@ -226,6 +228,10 @@ export class QuoteStateService {
     this.setPurchaseOrder(quote.purchaseOrder);
     this.setRequestPayment(quote.requestPayment);
     this.goToState('quote-create-component', { editMode: true});
+  }
+
+  public getStartQuotenumber() {
+    return this.startQuoteNumber;
   }
 
   goToPreview(quote) {
@@ -313,6 +319,18 @@ export class QuoteStateService {
         "discountType":"PERCENT"
       }))
     }
+  }
+
+  public setSubject(value) {
+    this.quoteForCreate.subject = value;
+  }
+
+  public setMessage(value) {
+    this.quoteForCreate.message = value;
+  }
+
+  public saveSandMode() {
+    this.handeSendMode.emit();
   }
 
 }

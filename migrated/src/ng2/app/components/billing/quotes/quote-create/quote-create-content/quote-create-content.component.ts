@@ -47,6 +47,7 @@ export class QuoteCreateContentComponent implements OnInit {
     this.companiesService.getCompaniesList();
     this.getQuoteNumber();
     this.initForm(this.editMode);
+    this.handeSendMode();
   }
 
   /**
@@ -101,20 +102,31 @@ export class QuoteCreateContentComponent implements OnInit {
   /**
    * Create quote
    */
-  saveAndContinue() {
+  saveAndContinue(notification?: boolean) {
+
     const isFormReady = this.quoteStateService.getType();
     const currentQuote = this.quoteStateService.getQuoteCreate();
     if (isFormReady) {
       if (this.editMode && currentQuote && currentQuote['id']) {
-        console.log(1);
-        this.quoteService.editQuote(this.quoteForm.value, currentQuote['id']).subscribe((res) => {
-          this.quoteStateService.goToQuote();
-        })
+        if (notification) {
+          this.quoteService.editQuote(this.quoteForm.value, currentQuote['id'], true).subscribe((res) => {
+            this.quoteStateService.goToQuote();
+          })
+        } else {
+          this.quoteService.editQuote(this.quoteForm.value, currentQuote['id'], false).subscribe((res) => {
+            this.quoteStateService.goToQuote();
+          })
+        }
       } else {
-        console.log(2);
-        this.quoteService.createQuote(this.quoteForm.value).subscribe((res) => {
-          this.quoteStateService.goToQuote();
-        })
+        if (notification) {
+          this.quoteService.createQuote(this.quoteForm.value, true).subscribe((res) => {
+            this.quoteStateService.goToQuote();
+          })
+        } else {
+          this.quoteService.createQuote(this.quoteForm.value, false).subscribe((res) => {
+            this.quoteStateService.goToQuote();
+          })
+        }
       }
     } else {
       this.quoteStateService.emitValidation();
@@ -179,6 +191,12 @@ export class QuoteCreateContentComponent implements OnInit {
    */
   public setGlobalNote(value) {
     this.quoteForm.controls['globalNote'].setValue(value);
+  }
+
+  public handeSendMode() {
+    this.quoteStateService.handeSendMode.subscribe((res) => {
+      this.saveAndContinue(true);
+    })
   }
 
 }

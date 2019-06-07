@@ -4,6 +4,9 @@ import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
+import {USER} from "../../../const/users";
+import {UsersService} from "../../users/users.service";
+import {QuoteStateService} from "../../../components/billing/quotes/quote-create/quote-state.service";
 
 @Component({
   selector: 'app-modal-quote',
@@ -16,19 +19,23 @@ export class ModalQuoteComponent {
   selectable = true;
   removable = true;
   addOnBlur = true;
+  message: string;
+  subject: string;
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  fruitCtrl = new FormControl();
-  filteredFruits = [];
-  fruits: string[] = [];
+  userCtrl = new FormControl();
+  selectedUsers = [];
+  users = [];
   allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
 
-  @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
+  @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
   constructor(
-    public activeModal: NgbActiveModal
+    public activeModal: NgbActiveModal,
+    private userService: UsersService,
+    private quoteStateService: QuoteStateService
   ) {
-    this.filteredFruits = this.allFruits;
+    this.getAllUsers();
 
   }
 
@@ -41,7 +48,7 @@ export class ModalQuoteComponent {
 
       // Add our fruit
       if ((value || '').trim()) {
-        this.fruits.push(value.trim());
+        this.selectedUsers.push(value.trim());
       }
 
       // Reset the input value
@@ -49,29 +56,52 @@ export class ModalQuoteComponent {
         input.value = '';
       }
 
-      this.fruitCtrl.setValue(null);
+      this.userCtrl.setValue(null);
     }
   }
 
   remove(fruit: string): void {
-    const index = this.fruits.indexOf(fruit);
+    const index = this.selectedUsers.indexOf(fruit);
 
     if (index >= 0) {
-      this.fruits.splice(index, 1);
+      this.selectedUsers.splice(index, 1);
     }
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
     console.log(event, 'EVENT');
-    this.fruits.push(event.option.viewValue);
-    this.fruitInput.nativeElement.value = '';
-    this.fruitCtrl.setValue(null);
+    this.selectedUsers.push(event.option.viewValue);
+    this.userInput.nativeElement.value = '';
+    this.userCtrl.setValue(null);
   }
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
     return this.allFruits.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
+  }
+
+  private getAllUsers() {
+    const companyId = this.quoteStateService.getClient();
+    this.userService.getAllusers().subscribe((res: any) => {
+      const techUser = res = res.filter((item) =>  item.accountType === USER.TYPE.TECH && !item.deletedAt);
+      const clientUser = res = res.filter((item) =>  item.company.id == companyId &&  !item.deletedAt);
+      this.users = [...techUser, ...clientUser];
+    })
+  }
+
+  public setSubject(value) {
+    console.log(value, 'setSubject');
+    this.quoteStateService.setSubject(value);
+  }
+
+  public setMessage(value) {
+    console.log(value, 'setMessage');
+    this.quoteStateService.setMessage(value);
+  }
+
+  public save() {
+    this.quoteStateService.saveSandMode();
   }
 
 }
