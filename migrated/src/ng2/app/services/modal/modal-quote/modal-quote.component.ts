@@ -3,13 +3,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
-
-export interface Fruit {
-  name: string;
-}
 
 @Component({
   selector: 'app-modal-quote',
@@ -17,10 +11,6 @@ export interface Fruit {
   styleUrls: ['./modal-quote.component.scss']
 })
 export class ModalQuoteComponent {
-
-  constructor(
-    public activeModal: NgbActiveModal
-  ) { }
 
   visible = true;
   selectable = true;
@@ -35,8 +25,11 @@ export class ModalQuoteComponent {
   @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
-  constructor() {
+  constructor(
+    public activeModal: NgbActiveModal
+  ) {
     this.filteredFruits = this.allFruits;
+
   }
 
   add(event: MatChipInputEvent): void {
