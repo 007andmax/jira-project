@@ -245,8 +245,6 @@ export class QuotesComponent implements OnInit {
         return this.quotesList.push(newChange.data);
       } else {
         const elemIndex = this.quotesList.findIndex((item) => item.id === newChange.data.id);
-        console.log(elemIndex, 'elemIndex');
-        console.log(this.quotesList[elemIndex], 'this.quotesList[elemIndex]');
         return this.quotesList[elemIndex] = newChange.data;
       }
     })
