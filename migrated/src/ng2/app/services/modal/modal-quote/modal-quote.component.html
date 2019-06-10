@@ -7,11 +7,11 @@
 <mat-form-field class="example-chip-list">
   <mat-chip-list #chipList aria-label="Fruit selection">
     <mat-chip
-      *ngFor="let user of selectedUsers"
+      *ngFor="let user of selectedUsers; let i = index"
       [selectable]="selectable"
       [removable]="removable"
-      (removed)="remove(selectedUsers)">
-      {{user.firstName + user.lastName}}
+      (removed)="remove(i)">
+      {{user}}
       <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
     </mat-chip>
     <input

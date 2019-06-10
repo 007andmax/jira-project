@@ -62,9 +62,7 @@ export class ModalQuoteComponent {
     }
   }
 
-  remove(fruit: string): void {
-    const index = this.selectedUsers.indexOf(fruit);
-
+  remove(index): void {
     if (index >= 0) {
       this.selectedUsers.splice(index, 1);
       this.usersEmails.splice(index, 1);
