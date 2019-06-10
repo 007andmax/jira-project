@@ -1,39 +1,56 @@
-<div>
-  Subject
-  <input type="text" [(ngModel)]="subject" (ngModelChange)="setSubject($event)">
+<div class="create-new create-quote-mail">
+  <div class="quote--header">
+    <h2>Write ...</h2>
+    <button class="close-modal"></button>
+  </div>
+  <div class="quote--content">
+    <div class="col-md-12">
+      <div class="placeholder">Write Subject</div>
+      <input
+        type="text"
+        placeholder=""
+        [(ngModel)]="subject"
+        (ngModelChange)="setSubject($event)">
+    </div>
+    <div class="col-md-12">
+      <mat-form-field>
+        <mat-chip-list #chipList aria-label="Fruit selection">
+          <mat-chip
+            *ngFor="let user of selectedUsers; let i = index"
+            [selectable]="selectable"
+            [removable]="removable"
+            (removed)="remove(i)">
+            {{user}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input
+            placeholder="Add receipt email address"
+            #userInput
+            class="pointer"
+            [formControl]="userCtrl"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+          <mat-option *ngFor="let user of users" [value]="user">
+            {{user.firstName + user.lastName}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+    <div class="col-md-12">
+      <textarea
+        class="quote-text-block"
+        placeholder="Click here to write a message"
+        [(ngModel)]="message"
+        (ngModelChange)="setMessage($event)"></textarea>
+    </div>
+  </div>
+  <div class="quote--footer">
+    <button class="btn btn-primary" (click)="save()">Send and send</button>
+    <button class="btn btn-default">Cancel</button>
+  </div>
 </div>
-
-
-<mat-form-field class="example-chip-list">
-  <mat-chip-list #chipList aria-label="Fruit selection">
-    <mat-chip
-      *ngFor="let user of selectedUsers; let i = index"
-      [selectable]="selectable"
-      [removable]="removable"
-      (removed)="remove(i)">
-      {{user}}
-      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-    </mat-chip>
-    <input
-      placeholder="New fruit..."
-      #userInput
-      [formControl]="userCtrl"
-      [matAutocomplete]="auto"
-      [matChipInputFor]="chipList"
-      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-      [matChipInputAddOnBlur]="addOnBlur"
-      (matChipInputTokenEnd)="add($event)">
-  </mat-chip-list>
-  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-    <mat-option *ngFor="let user of users" [value]="user">
-      {{user.firstName + user.lastName}}
-    </mat-option>
-  </mat-autocomplete>
-</mat-form-field>
-
-<div>
-  Message
-  <input type="text" [(ngModel)]="message" (ngModelChange)="setMessage($event)">
-</div>
-
-<button (click)="save()">Save and send</button>

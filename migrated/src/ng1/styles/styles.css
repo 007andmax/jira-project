@@ -10547,7 +10547,7 @@ button.close {
   position: relative;
   background-color: #fff;
   border: 1px solid transparent;
-  border-radius: 3px;
+  border-radius: 10px;
   -webkit-box-shadow: 0 8px 25px 0 rgba(21, 30, 41, 0.4);
   box-shadow: 0 8px 25px 0 rgba(21, 30, 41, 0.4);
   background-clip: padding-box;
