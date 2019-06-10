@@ -79,10 +79,10 @@
           <div class="col-md-1" style="width: 13%;">{{(item.sale || item.rate) | currency}}</div>
           <div class="col-md-1" style="width: 13%;">{{item.quantity}}</div>
           <div class="col-md-1">
-            {{getTaxPrice((item.sale || item.rate), item.quantity, item.taxes[0]) | currency}}
+            {{getTaxPrice((item.sale || item.rate), item.quantity, item.taxes) | currency}}
           </div>
           <div class="col-md-1 text-right" style="width: 13%;">
-            {{getPrice((item.sale || item.rate), item.quantity, item.taxes[0]) | currency}}
+            {{getPrice((item.sale || item.rate), item.quantity, item.taxes) | currency}}
           </div>
         </div>
       </div>
