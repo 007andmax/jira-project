@@ -70,11 +70,11 @@
   </div>
   <div class="col-md-1 text-right"
        style="width: 6%;padding: 8px 15px;">
-    {{getTaxPrice((item.sale || item.rate), item.quantity, item.taxes[0]) | currency}}
+    {{getTaxPrice((item.sale || item.rate), item.quantity, item.taxes) | currency}}
   </div>
   <div class="col-md-1 text-right"
        style="width: 6%;padding: 8px 15px;">
-    {{getPrice((item.sale || item.rate), item.quantity, item.taxes[0]) | currency}}
+    {{getPrice((item.sale || item.rate), item.quantity, item.taxes) | currency}}
   </div>
   <i class="icn-delete" (click)="deleteItem(i)"></i>
 </div>

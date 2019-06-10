@@ -60,7 +60,7 @@ export class QuoteService {
     this.servicesArray = this.getProductItems(this.itemsListArray, 'service');
     return this.http.put(`${this.apiUrl}saleQuotes/${quoteId}?sendNotification=${notification}` ,{
       "companyId": (value.client && value.client.item) ? value.client.item.id : value.client.id,
-      "number": this.getQuoteNumberForEdit(),
+      "number": this.quoteStateService.getQuoteNumber(),
       "quoteItems":{
         "type":"MIXED",
         "shares":[],
@@ -200,15 +200,4 @@ export class QuoteService {
         break;
     }
   }
-
-  public getQuoteNumberForEdit() {
-    if (this.quoteStateService.getQuoteNumber() === this.quoteStateService.getStartQuotenumber()) {
-      return null
-    } else {
-      this.quoteStateService.getQuoteNumber()
-    }
-  }
-
-
-
 }

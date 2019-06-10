@@ -70,7 +70,14 @@ export class QuoteStateService {
   }
 
   public getTaxPrice(cost, count, tax) {
-    return tax ? ((tax.rate)/100)*cost* count : 0;
+    let sum = 0;
+    if (tax && tax.length > 0) {
+      tax.map((item) => {
+        sum += ((item.rate)/100) * cost * count
+      })
+    }
+    return sum;
+
   }
 
   public setItemArray(itemsArray) {

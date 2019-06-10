@@ -55,6 +55,7 @@ export class AddItemComponent implements OnInit {
   }
 
   public setItem(item) {
+    console.log(item, 'ITTEM');
     if (this.type === 'service') {
       item = {...item, ...{description: '', quantity: 1}};
     } else {
