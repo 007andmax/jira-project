@@ -22,6 +22,7 @@ export class QuoteStateService {
   public productsArray: any;
   public servicesArray: any;
   public selectedNoteFull: any;
+  public usersEmail: any;
   public quoteForCreate = {
     startDate: '',
     endDate: '',
@@ -326,11 +327,20 @@ export class QuoteStateService {
   }
 
   public setMessage(value) {
+    console.log('test', value);
     this.quoteForCreate.message = value;
   }
 
   public saveSandMode() {
     this.handeSendMode.emit();
+  }
+
+  public setUsersEmail(value) {
+    this.usersEmail = value;
+  }
+
+  public getUsersEmail() {
+    return this.usersEmail;
   }
 
 }

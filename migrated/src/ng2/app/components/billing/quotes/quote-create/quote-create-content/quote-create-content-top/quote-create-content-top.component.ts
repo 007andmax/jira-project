@@ -61,7 +61,6 @@ export class QuoteCreateContentTopComponent implements OnInit {
    * Follow quote number change
    */
   private setNumber(value) {
-    console.log(value, 'value');
     this.quoteStateService.setNumber(value)
   }
 

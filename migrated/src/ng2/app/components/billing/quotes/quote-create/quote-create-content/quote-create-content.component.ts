@@ -103,7 +103,6 @@ export class QuoteCreateContentComponent implements OnInit {
    * Create quote
    */
   saveAndContinue(notification?: boolean) {
-
     const isFormReady = this.quoteStateService.getType();
     const currentQuote = this.quoteStateService.getQuoteCreate();
     if (isFormReady) {

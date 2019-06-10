@@ -24,6 +24,7 @@ export class ModalQuoteComponent {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   userCtrl = new FormControl();
   selectedUsers = [];
+  usersEmails = [];
   users = [];
   allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
 
@@ -48,6 +49,7 @@ export class ModalQuoteComponent {
 
       // Add our fruit
       if ((value || '').trim()) {
+        console.log(value, 'value');
         this.selectedUsers.push(value.trim());
       }
 
@@ -65,19 +67,22 @@ export class ModalQuoteComponent {
 
     if (index >= 0) {
       this.selectedUsers.splice(index, 1);
+      this.usersEmails.splice(index, 1);
+      this.quoteStateService.setUsersEmail(this.usersEmails);
     }
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
     console.log(event, 'EVENT');
     this.selectedUsers.push(event.option.viewValue);
+    this.usersEmails.push(event.option.value.primaryEmail);
+    this.quoteStateService.setUsersEmail(this.usersEmails);
     this.userInput.nativeElement.value = '';
     this.userCtrl.setValue(null);
   }
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-
     return this.allFruits.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
   }
 
@@ -91,7 +96,6 @@ export class ModalQuoteComponent {
   }
 
   public setSubject(value) {
-    console.log(value, 'setSubject');
     this.quoteStateService.setSubject(value);
   }
 
@@ -102,6 +106,7 @@ export class ModalQuoteComponent {
 
   public save() {
     this.quoteStateService.saveSandMode();
+    this.activeModal.close();
   }
 
 }
