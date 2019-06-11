@@ -75,6 +75,7 @@ export class ModalQuoteComponent implements OnInit {
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
+    this.showError = false;
     this.selectedUsers.push(event.option.viewValue);
     this.usersEmails.push(event.option.value.primaryEmail);
     this.quoteStateService.setUsersEmail(this.usersEmails);
@@ -108,17 +109,12 @@ export class ModalQuoteComponent implements OnInit {
   }
 
   public save() {
-    console.log(1111);
-    console.log(this.isResend);
-    console.log(1111);
     this.showError = false;
     if (this.data.recipients.length > 0 && !!this.data.recipients[0]) {
       if (!this.isResend) {
         this.quoteStateService.saveSandMode();
       } else {
-        console.log(2222);
         this.quoteService.resend(this.data).subscribe((res) => {
-          console.log(res);
         })
       }
       this.activeModal.close();
