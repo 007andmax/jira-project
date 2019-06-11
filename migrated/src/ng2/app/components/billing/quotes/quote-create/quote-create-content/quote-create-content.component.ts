@@ -118,6 +118,7 @@ export class QuoteCreateContentComponent implements OnInit {
         }
       } else {
         if (notification) {
+          console.log(111);
           this.quoteService.createQuote(this.quoteForm.value, true).subscribe((res) => {
             this.quoteStateService.goToQuote();
           })
