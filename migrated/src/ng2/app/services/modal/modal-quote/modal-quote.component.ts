@@ -49,7 +49,7 @@ export class ModalQuoteComponent {
 
       // Add our fruit
       if ((value || '').trim()) {
-        console.log(value, 'value');
+
         this.selectedUsers.push(value.trim());
       }
 
@@ -71,7 +71,7 @@ export class ModalQuoteComponent {
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    console.log(event, 'EVENT');
+
     this.selectedUsers.push(event.option.viewValue);
     this.usersEmails.push(event.option.value.primaryEmail);
     this.quoteStateService.setUsersEmail(this.usersEmails);
@@ -98,7 +98,7 @@ export class ModalQuoteComponent {
   }
 
   public setMessage(value) {
-    console.log(value, 'setMessage');
+
     this.quoteStateService.setMessage(value);
   }
 

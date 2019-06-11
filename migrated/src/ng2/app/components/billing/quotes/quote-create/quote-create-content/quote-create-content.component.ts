@@ -6,6 +6,8 @@ import { CompaniesService } from "../../../../../services/company/companies.serv
 import { QuoteService } from "../../../../../services/quote/quote.service";
 import { QuoteStateService } from "../quote-state.service";
 import {environment} from "../../../../../../environments/environment";
+import {Subject} from "rxjs";
+import {takeUntil} from "rxjs/operators";
 
 /**
  *  Quotes content component
@@ -23,6 +25,7 @@ export class QuoteCreateContentComponent implements OnInit {
   private quoteNumber: number;
   private apiUrl = environment.apiUrl;
   @Input() editMode: any;
+  private unsubscribe: Subject<void> = new Subject();
 
   /**
    * Creates an instance of the QuoteCreateContentComponent with the injected services
@@ -108,23 +111,31 @@ export class QuoteCreateContentComponent implements OnInit {
     if (isFormReady) {
       if (this.editMode && currentQuote && currentQuote['id']) {
         if (notification) {
-          this.quoteService.editQuote(this.quoteForm.value, currentQuote['id'], true).subscribe((res) => {
-            this.quoteStateService.goToQuote();
-          })
+          this.quoteService.editQuote(this.quoteForm.value, currentQuote['id'], true)
+            .pipe(takeUntil(this.unsubscribe))
+            .subscribe((res) => {
+              this.quoteStateService.goToQuote();
+            })
         } else {
-          this.quoteService.editQuote(this.quoteForm.value, currentQuote['id'], false).subscribe((res) => {
-            this.quoteStateService.goToQuote();
-          })
+          this.quoteService.editQuote(this.quoteForm.value, currentQuote['id'], false)
+            .pipe(takeUntil(this.unsubscribe))
+            .subscribe((res) => {
+              this.quoteStateService.goToQuote();
+            })
         }
       } else {
         if (notification) {
-          console.log(111);
-          this.quoteService.createQuote(this.quoteForm.value, true).subscribe((res) => {
-            this.quoteStateService.goToQuote();
-          })
+          this.quoteService.createQuote(this.quoteForm.value, true)
+            .pipe(takeUntil(this.unsubscribe))
+            .subscribe((res) => {
+              console.log('0000012315');
+              this.quoteStateService.goToQuote();
+            })
         } else {
-          this.quoteService.createQuote(this.quoteForm.value, false).subscribe((res) => {
-            this.quoteStateService.goToQuote();
+          this.quoteService.createQuote(this.quoteForm.value, false)
+            .pipe(takeUntil(this.unsubscribe))
+            .subscribe((res) => {
+              this.quoteStateService.goToQuote();
           })
         }
       }
@@ -136,10 +147,14 @@ export class QuoteCreateContentComponent implements OnInit {
   approveQuote() {
     const isFormReady = this.quoteStateService.getType();
     isFormReady ?
-      this.quoteService.createQuote(this.quoteForm.value, false).subscribe((res) => {
-        this.quoteService.approveQuote(res['company'].id, res['id']).subscribe((res) => {
-          this.quoteStateService.goToQuote();
-        });
+      this.quoteService.createQuote(this.quoteForm.value, false)
+        .pipe(takeUntil(this.unsubscribe))
+        .subscribe((res) => {
+          this.quoteService.approveQuote(res['company'].id, res['id'])
+            .pipe(takeUntil(this.unsubscribe))
+            .subscribe((res) => {
+              this.quoteStateService.goToQuote();
+            });
       })
       : this.quoteStateService.emitValidation();
   }
@@ -147,11 +162,12 @@ export class QuoteCreateContentComponent implements OnInit {
   public downloadPdf() {
     const isFormReady = this.quoteStateService.getType();
     isFormReady ?
-      this.quoteService.createQuote(this.quoteForm.value, false).subscribe((res) => {
-        const id = res['id'];
-        this.quoteService.downloadPdf(res['id']).subscribe((res) => this.downLoadFile(res,id));
-      })
-      : this.quoteStateService.emitValidation();
+      this.quoteService.createQuote(this.quoteForm.value, false).pipe(takeUntil(this.unsubscribe))
+        .subscribe((res) => {
+          const id = res['id'];
+          this.quoteService.downloadPdf(res['id']).subscribe((res) => this.downLoadFile(res,id));
+        })
+        : this.quoteStateService.emitValidation();
 
   }
 
@@ -194,9 +210,17 @@ export class QuoteCreateContentComponent implements OnInit {
   }
 
   public handeSendMode() {
-    this.quoteStateService.handeSendMode.subscribe((res) => {
-      this.saveAndContinue(true);
-    })
+    this.quoteStateService.handeSendMode
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((res) => {
+        this.saveAndContinue(true);
+      })
+  }
+
+  ngOnDestroy() {
+    console.log('ngOnDestory');
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 
 }

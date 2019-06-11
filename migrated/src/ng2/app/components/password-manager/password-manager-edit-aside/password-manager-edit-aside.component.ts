@@ -86,7 +86,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public opened: boolean = false;
 
   public _toggleSidebar() {
-    console.log('_toggleSidebar');
+
     this.submitted = false;
     this.showSelect = false;
     this.userDevice = [];
@@ -99,7 +99,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
   public showAddForm() {
     this.subShowAddForm = this.passwordManagerService.showAddForm.subscribe((res) => {
-      console.log('showAddForm');
+
       this.editItem = res;
       if (this.editItem) this.isEditmode = true;
       this.opened = true;
@@ -109,7 +109,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
   public hideAddForm() {
     this.subHideAddForm = this.passwordManagerService.hideAddForm.subscribe((res) => {
-      console.log('hideAddForm');
+
       this.submitted = false;
       this.showSelect = false;
       this.userDevice = [];
@@ -130,7 +130,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public initForm(){
-    console.log('test');
+
     this.expiryDate = this.editItem && this.editItem.expiredDate ? this.getStartDate(this.editItem.expiredDate) : null;
     this.createPasswordRecord = this.fb.group({
       description: [this.editItem ? this.editItem.description : '', Validators.maxLength(5000)],
