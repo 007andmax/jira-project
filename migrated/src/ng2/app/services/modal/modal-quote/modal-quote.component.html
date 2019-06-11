@@ -1,10 +1,10 @@
 <div class="create-new create-quote-mail">
   <div class="quote--header">
     <h2>Write ...</h2>
-    <button class="close-modal" (click)="modal.dismiss('Cross click')"></button>
+    <button class="close-modal" (click)="activeModal.dismiss('Cross click')"></button>
   </div>
   <div class="quote--content">
-    <div class="col-md-12" [ngClass]="{'active-field': focus===true}">
+    <div class="col-md-12" [ngClass]="{'active-field': (focus===true || (subject && subject.length > 0))}">
       <div class="placeholder">Write Subject</div>
       <input
         type="text"
@@ -53,6 +53,6 @@
   </div>
   <div class="quote--footer">
     <button class="btn btn-primary" (click)="save()">Send and send</button>
-    <button class="btn btn-default" (click)="modal.dismiss('Cross click')">Cancel</button>
+    <button class="btn btn-default" (click)="activeModal.dismiss('Cross click')">Cancel</button>
   </div>
 </div>
