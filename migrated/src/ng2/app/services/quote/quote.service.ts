@@ -82,6 +82,31 @@ export class QuoteService {
     })
   }
 
+  public resend(item) {
+    return this.http.put(`${this.apiUrl}saleQuotes/${item.id}?sendNotification=true`, {
+      "companyId": item.company.id,
+      "number": item.number,
+      "quoteItems":{
+        "type":"MIXED",
+        "shares":[],
+        "ticket":null,
+        "products": item.products,
+        "services": item.services,
+      },
+      "requestPayment": item.requestPayment,
+      "draft": false,
+      "purchaseOrder": item.purchaseOrder,
+      "partialDeposit": item.partialDeposit,
+      "validUntil": item.validUntil,
+      "date": item.date,
+      "recipients": item.recipients,
+      "message": item.message,
+      "subject": item.subject,
+      "globalNote": item.globalNote,
+      "regularNote": item.regularNote,
+    })
+  }
+
   getQuoteNumber() {
     return this.http.get(this.apiUrl + `data/actualNumber?type=SALE_QUOTE`)
   }

@@ -1,19 +1,21 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
-import {USER} from "../../../const/users";
-import {UsersService} from "../../users/users.service";
-import {QuoteStateService} from "../../../components/billing/quotes/quote-create/quote-state.service";
+
+import { USER } from "../../../const/users";
+import { UsersService } from "../../users/users.service";
+import { QuoteStateService } from "../../../components/billing/quotes/quote-create/quote-state.service";
+import {QuoteService} from "../../quote/quote.service";
 
 @Component({
   selector: 'app-modal-quote',
   templateUrl: './modal-quote.component.html',
   styleUrls: ['./modal-quote.component.scss']
 })
-export class ModalQuoteComponent {
+export class ModalQuoteComponent implements OnInit {
 
   visible = true;
   selectable = true;
@@ -22,12 +24,14 @@ export class ModalQuoteComponent {
   message: string;
   subject: string;
   focus = false;
+  isResend = false;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   userCtrl = new FormControl();
   selectedUsers = [];
   usersEmails = [];
   users = [];
   allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
+  @Input() public data;
 
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
@@ -35,30 +39,27 @@ export class ModalQuoteComponent {
   constructor(
     public activeModal: NgbActiveModal,
     private userService: UsersService,
-    private quoteStateService: QuoteStateService
+    private quoteStateService: QuoteStateService,
+    private quoteService: QuoteService
   ) {
     this.getAllUsers();
+  }
 
+  ngOnInit() {
+    console.log(this.data);
+    (this.data) && this.initResendMode();
   }
 
   add(event: MatChipInputEvent): void {
-    // Add fruit only when MatAutocomplete is not open
-    // To make sure this does not conflict with OptionSelected Event
     if (!this.matAutocomplete.isOpen) {
       const input = event.input;
       const value = event.value;
-
-      // Add our fruit
       if ((value || '').trim()) {
-
         this.selectedUsers.push(value.trim());
       }
-
-      // Reset the input value
       if (input) {
         input.value = '';
       }
-
       this.userCtrl.setValue(null);
     }
   }
@@ -68,14 +69,15 @@ export class ModalQuoteComponent {
       this.selectedUsers.splice(index, 1);
       this.usersEmails.splice(index, 1);
       this.quoteStateService.setUsersEmail(this.usersEmails);
+      this.data.recipients = this.usersEmails;
     }
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-
     this.selectedUsers.push(event.option.viewValue);
     this.usersEmails.push(event.option.value.primaryEmail);
     this.quoteStateService.setUsersEmail(this.usersEmails);
+    this.data.recipients = this.usersEmails;
     this.userInput.nativeElement.value = '';
     this.userCtrl.setValue(null);
   }
@@ -96,16 +98,35 @@ export class ModalQuoteComponent {
 
   public setSubject(value) {
     this.quoteStateService.setSubject(value);
+    this.data.subject = value;
   }
 
   public setMessage(value) {
-
     this.quoteStateService.setMessage(value);
+    this.data.message = value;
   }
 
   public save() {
-    this.quoteStateService.saveSandMode();
+    console.log(1111);
+    console.log(this.isResend);
+    console.log(1111);
+    if (!this.isResend) {
+      this.quoteStateService.saveSandMode();
+    } else {
+      console.log(2222);
+      this.quoteService.resend(this.data).subscribe((res) => {
+        console.log(res);
+      })
+    }
     this.activeModal.close();
+  }
+
+  public initResendMode() {
+    console.log('aaaa');
+    this.isResend = true;
+    this.selectedUsers = this.data.recipients.length > 0 && this.data.recipients[0] !== "" ?  this.data.recipients : [];
+    this.message = this.data.message || this.data.message !== "null" ? this.data.message : '';
+    this.subject = this.data.subject || this.data.subject !== "null" ? this.data.subject: '';
   }
 
 }

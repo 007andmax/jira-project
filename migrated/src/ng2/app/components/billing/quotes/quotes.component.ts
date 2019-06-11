@@ -7,6 +7,8 @@ import { QUOTE_STATUS } from '../../../const/quote-status';
 import { DateService } from "../../../services/date/date.service";
 import { QuoteStateService } from "./quote-create/quote-state.service";
 import { QuoteRealTimeService } from "./quote-realtime.service";
+import {ModalQuoteComponent} from "../../../services/modal/modal-quote/modal-quote.component";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 /**
  * Password quotes component
@@ -43,6 +45,7 @@ export class QuotesComponent implements OnInit {
    * @param {ChangeDetectorRef} cdRef Service to work with date
    * @param {QuoteStateService} quoteStateService to work quote state
    * @param {QuoteRealTimeService} quoteRealTimeService to work quote state
+   * @param {NgbModal} modalService to work quote state
    */
   constructor(
     private quoteServices: QuoteService,
@@ -50,7 +53,8 @@ export class QuotesComponent implements OnInit {
     private dateService: DateService,
     private cdRef:ChangeDetectorRef,
     private quoteStateService: QuoteStateService,
-    private quoteRealTimeService: QuoteRealTimeService
+    private quoteRealTimeService: QuoteRealTimeService,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit() {
@@ -247,6 +251,14 @@ export class QuotesComponent implements OnInit {
         return this.quotesList[elemIndex] = newChange.data;
       }
     })
+  }
+
+  /**
+   * open send modal for resend
+   */
+  public resend(item) {
+    const modalRef = this.modalService.open(ModalQuoteComponent,  item);
+    modalRef.componentInstance.data = item;
   }
 
 }
