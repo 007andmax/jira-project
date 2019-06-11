@@ -29,6 +29,7 @@ export class ModalQuoteComponent implements OnInit {
   userCtrl = new FormControl();
   selectedUsers = [];
   showError = false;
+  showErrorClient = false;
   usersEmails = [];
   users = [];
   allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
@@ -90,12 +91,22 @@ export class ModalQuoteComponent implements OnInit {
   }
 
   private getAllUsers() {
-    const companyId = this.quoteStateService.getClient();
-    this.userService.getAllusers().subscribe((res: any) => {
-      const techUser = res = res.filter((item) =>  item.accountType === USER.TYPE.TECH && !item.deletedAt);
-      const clientUser = res = res.filter((item) =>  item.company.id == companyId &&  !item.deletedAt);
-      this.users = [...techUser, ...clientUser];
-    })
+    this.showErrorClient = false;
+    const company = this.quoteStateService.getClient();
+    if (company && company.id) {
+      this.userService.getAllusers().subscribe((res: any) => {
+        const techUser  = res.filter((item) =>  item.accountType === USER.TYPE.TECH && !item.deletedAt);
+        const clientUser = res.filter((item) =>  {
+          console.log(item);
+          console.log(company, 'companyId');
+          return item.accountType === USER.TYPE.CLIENT && item.company.id == company.id && !item.deletedAt
+        });
+        this.users = [...techUser, ...clientUser];
+      })
+    } else {
+      this.showErrorClient = true;
+    }
+
   }
 
   public setSubject(value) {
@@ -125,7 +136,6 @@ export class ModalQuoteComponent implements OnInit {
   }
 
   public initResendMode() {
-
     this.isResend = true;
     this.selectedUsers = this.data.recipients.length > 0 && this.data.recipients[0] !== "" ?  this.data.recipients : [];
     this.message = this.data.message && this.data.message !== "null" ? this.data.message : '';
