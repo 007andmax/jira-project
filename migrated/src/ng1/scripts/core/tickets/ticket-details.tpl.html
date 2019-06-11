@@ -909,7 +909,7 @@
           Ticket Update will be appear here</p>
         <img src="ng1/images/new-icons/no-ticketupdate.png" alt="">
       </div>
-      <div class="mob-ticket-buttons">
+      <div class="mob-ticket-buttons" ng-show="isLoaded">
         <button class="mob-add-ticket-btn mobile-btn primary"
                 ng-if="!(ticketDetails.status === 'COMPLETED') && !(!ticketDetails.assignPerformer || !ticketDetails.assignPerformer.id)"
                 ng-class="{ 'class-disabled': TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'billable') || TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'open') }"

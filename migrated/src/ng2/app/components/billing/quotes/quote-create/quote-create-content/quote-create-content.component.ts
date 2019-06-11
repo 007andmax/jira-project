@@ -150,7 +150,7 @@ export class QuoteCreateContentComponent implements OnInit {
       this.quoteService.createQuote(this.quoteForm.value, false)
         .pipe(takeUntil(this.unsubscribe))
         .subscribe((res) => {
-          this.quoteService.approveQuote(res['company'].id, res['id'])
+          this.quoteService.approveQuote(res['company'], res['id'])
             .pipe(takeUntil(this.unsubscribe))
             .subscribe((res) => {
               this.quoteStateService.goToQuote();

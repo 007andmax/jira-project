@@ -21,6 +21,7 @@ export class ModalQuoteComponent {
   addOnBlur = true;
   message: string;
   subject: string;
+  focus = false;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   userCtrl = new FormControl();
   selectedUsers = [];
