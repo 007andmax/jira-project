@@ -125,8 +125,8 @@ export class ModalQuoteComponent implements OnInit {
     console.log('aaaa');
     this.isResend = true;
     this.selectedUsers = this.data.recipients.length > 0 && this.data.recipients[0] !== "" ?  this.data.recipients : [];
-    this.message = this.data.message || this.data.message !== "null" ? this.data.message : '';
-    this.subject = this.data.subject || this.data.subject !== "null" ? this.data.subject: '';
+    this.message = this.data.message && this.data.message !== "null" ? this.data.message : '';
+    this.subject = this.data.subject && this.data.subject !== "null" ? this.data.subject: '';
   }
 
 }
