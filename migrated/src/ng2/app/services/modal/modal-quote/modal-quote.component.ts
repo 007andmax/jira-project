@@ -28,6 +28,7 @@ export class ModalQuoteComponent implements OnInit {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   userCtrl = new FormControl();
   selectedUsers = [];
+  showError = false;
   usersEmails = [];
   users = [];
   allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
@@ -110,19 +111,25 @@ export class ModalQuoteComponent implements OnInit {
     console.log(1111);
     console.log(this.isResend);
     console.log(1111);
-    if (!this.isResend) {
-      this.quoteStateService.saveSandMode();
+    this.showError = false;
+    if (this.data.recipients.length > 0 && !!this.data.recipients[0]) {
+      if (!this.isResend) {
+        this.quoteStateService.saveSandMode();
+      } else {
+        console.log(2222);
+        this.quoteService.resend(this.data).subscribe((res) => {
+          console.log(res);
+        })
+      }
+      this.activeModal.close();
     } else {
-      console.log(2222);
-      this.quoteService.resend(this.data).subscribe((res) => {
-        console.log(res);
-      })
+      this.showError = true;
     }
-    this.activeModal.close();
+
   }
 
   public initResendMode() {
-    console.log('aaaa');
+
     this.isResend = true;
     this.selectedUsers = this.data.recipients.length > 0 && this.data.recipients[0] !== "" ?  this.data.recipients : [];
     this.message = this.data.message && this.data.message !== "null" ? this.data.message : '';
