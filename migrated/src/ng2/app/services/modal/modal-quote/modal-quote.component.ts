@@ -97,8 +97,6 @@ export class ModalQuoteComponent implements OnInit {
       this.userService.getAllusers().subscribe((res: any) => {
         const techUser  = res.filter((item) =>  item.accountType === USER.TYPE.TECH && !item.deletedAt);
         const clientUser = res.filter((item) =>  {
-          console.log(item);
-          console.log(company, 'companyId');
           return item.accountType === USER.TYPE.CLIENT && item.company.id == company.id && !item.deletedAt
         });
         this.users = [...techUser, ...clientUser];
@@ -121,7 +119,7 @@ export class ModalQuoteComponent implements OnInit {
 
   public save() {
     this.showError = false;
-    if (this.data.recipients.length > 0 && !!this.data.recipients[0]) {
+    if ((this.data && this.data.recipients.length > 0 && !!this.data.recipients[0]) || (this.usersEmails && this.usersEmails.length > 0)) {
       if (!this.isResend) {
         this.quoteStateService.saveSandMode();
       } else {
