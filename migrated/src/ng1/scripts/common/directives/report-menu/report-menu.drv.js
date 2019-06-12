@@ -621,7 +621,7 @@
                 withResponseTime: $scope.customerTicketWithResponseTime,
                 withTimeSpent: true,
                 showTotalTicketAmount: $scope.customerTicketShowTotalTicketAmount,
-                startDate: $filter('date')(new Date($scope.currentCompany.createdAt), 'yyyy/MM/dd'),
+                startDate: $filter('date')(new Date($scope.startDate || $scope.currentCompany.createdAt), 'yyyy/MM/dd'),
                 endDate: $filter('date')(new Date($scope.endDate || now), 'yyyy/MM/dd')
               };
 
