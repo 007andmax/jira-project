@@ -30,35 +30,7 @@ export class QuoteService {
     this.itemsListArray = this.quoteStateService.getItemArray();
     this.productsArray = this.getProductItems(this.itemsListArray, 'product');
     this.servicesArray = this.getProductItems(this.itemsListArray, 'service');
-    return this.http.post(`${this.apiUrl}saleQuotes?sendNotification=${notification}` ,{
-       "companyId": (value.client && value.client.item) ? value.client.item.id : value.client.id,
-       "number": this.quoteStateService.getQuoteNumber(),
-       "quoteItems":{
-       "type":"MIXED",
-         "shares":[],
-         "ticket":null,
-         "products": this.productsArray,
-         "services": this.servicesArray
-     },
-       "requestPayment": this.quoteStateService.getRequestPayment()? this.quoteStateService.getRequestPayment() : false,
-       "draft":false,
-       "purchaseOrder": this.quoteStateService.getPurchaseOrder() || null,
-       "partialDeposit": this.quoteStateService.getPartialDeposit() || null,
-       "validUntil": this.getMsDate(value.endDate),
-       "date": this.getMsDate(value.startDate),
-       "recipients": this.quoteStateService.getUsersEmail() ? this.quoteStateService.getUsersEmail() : [],
-      "message": notification? this.quoteStateService.getQuoteCreate()['message'] : 'null',
-      "subject": notification? this.quoteStateService.getQuoteCreate()['subject'] : 'null',
-       "globalNote": value.globalNote ? value.globalNote : this.quoteStateService.getGlobalNote(),
-       "regularNote": value.regularNote ? value.regularNote : this.quoteStateService.getSelectedNote()
-    })
-  }
-
-  public editQuote(value, quoteId, notification) {
-    this.itemsListArray = this.quoteStateService.getItemArray();
-    this.productsArray = this.getProductItems(this.itemsListArray, 'product');
-    this.servicesArray = this.getProductItems(this.itemsListArray, 'service');
-    return this.http.put(`${this.apiUrl}saleQuotes/${quoteId}?sendNotification=${notification}` ,{
+    return this.http.post(`${this.apiUrl}saleQuotes?` ,{
       "companyId": (value.client && value.client.item) ? value.client.item.id : value.client.id,
       "number": this.quoteStateService.getQuoteNumber(),
       "quoteItems":{
@@ -78,12 +50,42 @@ export class QuoteService {
       "message": notification? this.quoteStateService.getQuoteCreate()['message'] : 'null',
       "subject": notification? this.quoteStateService.getQuoteCreate()['subject'] : 'null',
       "globalNote": value.globalNote ? value.globalNote : this.quoteStateService.getGlobalNote(),
-      "regularNote": value.regularNote ? value.regularNote : this.quoteStateService.getSelectedNote()
+      "regularNote": value.regularNote ? value.regularNote : this.quoteStateService.getSelectedNote(),
+      "sendNotification":notification
+    })
+  }
+
+  public editQuote(value, quoteId, notification) {
+    this.itemsListArray = this.quoteStateService.getItemArray();
+    this.productsArray = this.getProductItems(this.itemsListArray, 'product');
+    this.servicesArray = this.getProductItems(this.itemsListArray, 'service');
+    return this.http.put(`${this.apiUrl}saleQuotes/${quoteId}` ,{
+      "companyId": (value.client && value.client.item) ? value.client.item.id : value.client.id,
+      "number": this.quoteStateService.getQuoteNumber(),
+      "quoteItems":{
+        "type":"MIXED",
+        "shares":[],
+        "ticket":null,
+        "products": this.productsArray,
+        "services": this.servicesArray
+      },
+      "requestPayment": this.quoteStateService.getRequestPayment()? this.quoteStateService.getRequestPayment() : false,
+      "draft":false,
+      "purchaseOrder": this.quoteStateService.getPurchaseOrder() || null,
+      "partialDeposit": this.quoteStateService.getPartialDeposit() || null,
+      "validUntil": this.getMsDate(value.endDate),
+      "date": this.getMsDate(value.startDate),
+      "recipients": this.quoteStateService.getUsersEmail() ? this.quoteStateService.getUsersEmail() : [],
+      "message": notification? this.quoteStateService.getQuoteCreate()['message'] : 'null',
+      "subject": notification? this.quoteStateService.getQuoteCreate()['subject'] : 'null',
+      "globalNote": value.globalNote ? value.globalNote : this.quoteStateService.getGlobalNote(),
+      "regularNote": value.regularNote ? value.regularNote : this.quoteStateService.getSelectedNote(),
+      "sendNotification": notification
     })
   }
 
   public resend(item) {
-    return this.http.put(`${this.apiUrl}saleQuotes/${item.id}?sendNotification=true`, {
+    return this.http.put(`${this.apiUrl}saleQuotes/${item.id}`, {
       "companyId": item.company.id,
       "number": item.number,
       "quoteItems":{
@@ -104,6 +106,7 @@ export class QuoteService {
       "subject": item.subject,
       "globalNote": item.globalNote,
       "regularNote": item.regularNote,
+      "sendNotification": true
     })
   }
 

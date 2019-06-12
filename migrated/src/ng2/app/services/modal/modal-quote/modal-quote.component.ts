@@ -71,7 +71,7 @@ export class ModalQuoteComponent implements OnInit {
       this.selectedUsers.splice(index, 1);
       this.usersEmails.splice(index, 1);
       this.quoteStateService.setUsersEmail(this.usersEmails);
-      this.data.recipients = this.usersEmails;
+      this.isResend && (this.data.recipients = this.usersEmails);
     }
   }
 
@@ -80,7 +80,7 @@ export class ModalQuoteComponent implements OnInit {
     this.selectedUsers.push(event.option.viewValue);
     this.usersEmails.push(event.option.value.primaryEmail);
     this.quoteStateService.setUsersEmail(this.usersEmails);
-    this.data.recipients = this.usersEmails;
+    this.isResend && (this.data.recipients = this.usersEmails);
     this.userInput.nativeElement.value = '';
     this.userCtrl.setValue(null);
   }
@@ -111,12 +111,12 @@ export class ModalQuoteComponent implements OnInit {
 
   public setSubject(value) {
     this.quoteStateService.setSubject(value);
-    this.data.subject = value;
+    this.isResend && (this.data.subject = value);
   }
 
   public setMessage(value) {
     this.quoteStateService.setMessage(value);
-    this.data.message = value;
+    this.isResend && (this.data.message = value);
   }
 
   public save() {
