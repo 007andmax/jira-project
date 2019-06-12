@@ -44,12 +44,11 @@ export class ModalQuoteComponent implements OnInit {
     private quoteStateService: QuoteStateService,
     private quoteService: QuoteService
   ) {
-    this.getAllUsers();
   }
 
   ngOnInit() {
-    console.log(this.data);
     (this.data) && this.initResendMode();
+    this.getAllUsers();
   }
 
   add(event: MatChipInputEvent): void {
@@ -77,10 +76,12 @@ export class ModalQuoteComponent implements OnInit {
 
   selected(event: MatAutocompleteSelectedEvent): void {
     this.showError = false;
-    this.selectedUsers.push(event.option.viewValue);
+    // this.selectedUsers.push(event.option.viewValue);
+    console.log(event.option.viewValue, 'event.option.viewValue');
     this.usersEmails.push(event.option.value.primaryEmail);
     this.quoteStateService.setUsersEmail(this.usersEmails);
-    this.isResend && (this.data.recipients = this.usersEmails);
+    this.isResend && (this.data.recipients.push(event.option.value.primaryEmail));
+
     this.userInput.nativeElement.value = '';
     this.userCtrl.setValue(null);
   }
@@ -92,8 +93,8 @@ export class ModalQuoteComponent implements OnInit {
 
   private getAllUsers() {
     this.showErrorClient = false;
-    const company = this.quoteStateService.getClient();
-    if (company && company.id) {
+    const company = this.data.company.id || this.quoteStateService.getClient();
+    if (company || company.id) {
       this.userService.getAllusers().subscribe((res: any) => {
         const techUser  = res.filter((item) =>  item.accountType === USER.TYPE.TECH && !item.deletedAt);
         const clientUser = res.filter((item) =>  {
@@ -104,7 +105,6 @@ export class ModalQuoteComponent implements OnInit {
     } else {
       this.showErrorClient = true;
     }
-
   }
 
   public setSubject(value) {
