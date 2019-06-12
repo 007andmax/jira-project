@@ -613,12 +613,6 @@
             $scope.reducedCompanies = Object.keys(reducedData);
           }
         })
-
-
-
-
-
-
       }
 
       function normalizeString(str) {
@@ -636,12 +630,15 @@
         $scope.isReportAvailable = false;
 
         if (data.companyId) {
-          $scope.company = CompaniesService.getOneById(data.companyId)
+          $scope.company = CompaniesService.getOneById(data.companyId);
         }
 
         $scope.showProducts = $rootScope.customerTicketWithProducts;
         $scope.showServices = $rootScope.customerTicketWithServices;
 
+
+
+        console.log(data, 'DATA');
 
         StatisticsService.getCustomerTicketReport(data, function (resp){
           if(resp) {
@@ -674,13 +671,14 @@
             if ($rootScope.customerTicketShowTotalTicketAmount === false) {
               $scope.ticketReport.hideTotalTickets = true;
             }
-            $scope.showHeader = $rootScope.customerTicketWithTimeSpent
+
+            $scope.showHeader = $rootScope.customerTicketWithTimeSpent;
             $scope.ticketReport.startDate = moment(new Date(resp.startDate)).format('ll');
             $scope.ticketReport.endDate = moment(new Date(resp.endDate)).format('ll');
             $scope.loadingInProgress = false;
             $scope.isReportAvailable = true;
           }
-        })
+        });
       }
 
       $scope.formatResponseTime = function(time) {

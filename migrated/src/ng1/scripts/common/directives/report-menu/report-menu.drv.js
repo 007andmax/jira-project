@@ -140,7 +140,6 @@
       ($location.url() === '/reports/software-summary') && ($scope.loadingInProgressSoft = false);
       $http.get('/devices/extended?companyId='+ companyId).then(function (resp) {
         $rootScope.softwareSummarySelectedCompany = resp;
-        console.log($rootScope.softwareSummarySelectedCompany);
         $scope.softSelect = [];
         if(resp) {
           Object.keys(resp.data).map(function(key) {
@@ -593,6 +592,7 @@
               }
             }
           } else if (location === '/reports/ticket-report') {
+            console.log(reportSettings.techUser, 'reportSettings.techUser');
             if (reportSettings.company) {
               var dataToSend = {
                 company: reportSettings.company,
@@ -612,6 +612,25 @@
               lastSentData = dataToSend;
               $scope.$emit("requestReportData", dataToSend, location, techType);
 
+            } else if (reportSettings.techUser) {
+              console.log($scope.currentCompany.createdAt, '$scope.currentCompany.createdAt');
+              var dataToSend = {
+                company: '',
+                companyId: '',
+                extendedReport: ($scope.customerTicketType === 'Extended report'),
+                withResponseTime: $scope.customerTicketWithResponseTime,
+                withTimeSpent: true,
+                showTotalTicketAmount: $scope.customerTicketShowTotalTicketAmount,
+                startDate: $filter('date')(new Date($scope.currentCompany.createdAt), 'yyyy/MM/dd'),
+                endDate: $filter('date')(new Date($scope.endDate || now), 'yyyy/MM/dd')
+              };
+
+              if ($ctrl.isShowTechSelectField && reportSettings && reportSettings.techUser) {
+                dataToSend.userId = reportSettings.techUser.id
+              }
+
+              lastSentData = dataToSend;
+              $scope.$emit("requestReportData", dataToSend, location, techType);
             } else {
               $scope.errorNassageForCompany = false;
             }

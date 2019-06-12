@@ -77,6 +77,7 @@
         $scope.getCustomerTicketReport = function (form) {
           if (form.$valid) {
             var dto = $scope.dto;
+            console.log(form, 'form');
             dto.startDate = formatDate(new Date(dto.startDate || $scope.currentCompany.createdAt));
             dto.endDate = formatDate(new Date(dto.endDate || undefined));
             dto.companyId = dto.company.id;
