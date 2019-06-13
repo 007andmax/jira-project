@@ -76,7 +76,7 @@ export class ModalQuoteComponent implements OnInit {
 
   selected(event: MatAutocompleteSelectedEvent): void {
     this.showError = false;
-    // this.selectedUsers.push(event.option.viewValue);
+    !this.isResend && this.selectedUsers.push(event.option.viewValue);
     console.log(event.option.viewValue, 'event.option.viewValue');
     this.usersEmails.push(event.option.value.primaryEmail);
     this.quoteStateService.setUsersEmail(this.usersEmails);
@@ -93,7 +93,7 @@ export class ModalQuoteComponent implements OnInit {
 
   private getAllUsers() {
     this.showErrorClient = false;
-    const company = this.data.company.id || this.quoteStateService.getClient();
+    const company = (this.data && this.data.company.id) || this.quoteStateService.getClient();
     if (company || company.id) {
       this.userService.getAllusers().subscribe((res: any) => {
         const techUser  = res.filter((item) =>  item.accountType === USER.TYPE.TECH && !item.deletedAt);

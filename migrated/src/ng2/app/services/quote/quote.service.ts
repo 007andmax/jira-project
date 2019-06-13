@@ -30,7 +30,7 @@ export class QuoteService {
     this.itemsListArray = this.quoteStateService.getItemArray();
     this.productsArray = this.getProductItems(this.itemsListArray, 'product');
     this.servicesArray = this.getProductItems(this.itemsListArray, 'service');
-    return this.http.post(`${this.apiUrl}saleQuotes?` ,{
+    return this.http.post(`${this.apiUrl}saleQuotes` ,{
       "companyId": (value.client && value.client.item) ? value.client.item.id : value.client.id,
       "number": this.quoteStateService.getQuoteNumber(),
       "quoteItems":{
