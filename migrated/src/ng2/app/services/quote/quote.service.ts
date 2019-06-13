@@ -62,6 +62,7 @@ export class QuoteService {
     return this.http.put(`${this.apiUrl}saleQuotes/${quoteId}` ,{
       "companyId": (value.client && value.client.item) ? value.client.item.id : value.client.id,
       "number": this.quoteStateService.getQuoteNumber(),
+      "id": quoteId,
       "quoteItems":{
         "type":"MIXED",
         "shares":[],
