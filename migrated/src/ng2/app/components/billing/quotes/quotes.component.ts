@@ -60,9 +60,6 @@ export class QuotesComponent implements OnInit {
   ngOnInit() {
     this.getQuotes();
     this.companiesService.getCompaniesList();
-    if (!this.cdRef['destroyed']) {
-      this.cdRef.detectChanges();
-    }
     this.changeQuotesListItem();
   }
 

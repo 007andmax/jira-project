@@ -25,7 +25,6 @@ export class UsersService {
   getCurrentUser() {
     return this.http.get(this.apiUrl + 'users/current').subscribe((res) => {
       this.currentUser = res;
-      console.log(res);
     });
   }
 
@@ -35,21 +34,6 @@ export class UsersService {
 
   getCurrentUserInfo() {
     return this.http.get(this.apiUrl + 'users/current');
-  }
-
-  public handleRealTimeChanges(newChange) {
-    console.log(newChange, 'newChange');
-    // if (newChange.action === 'SALE_QUOTE_CREATED') {
-    //   this.itemsArray.push(newChange.data);
-    // } else {
-    //   this.itemsArray.map((item) => {
-    //     if (item.id === newChange.data.id) {
-    //       return item = newChange.data;
-    //     } else {
-    //       return item
-    //     }
-    //   })
-    // }
   }
 
 }

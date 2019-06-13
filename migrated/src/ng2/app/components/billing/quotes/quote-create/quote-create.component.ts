@@ -1,6 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import { QuoteCreateContentComponent } from "./quote-create-content/quote-create-content.component";
 import { QuoteStateService } from "./quote-state.service";
+
+class ChangeDetectorRefv {
+}
 
 /**
  * Password quotes create component
@@ -10,15 +13,23 @@ import { QuoteStateService } from "./quote-state.service";
   templateUrl: './quote-create.component.html',
   styleUrls: ['./quote-create.component.scss']
 })
-export class QuoteCreateComponent {
+export class QuoteCreateComponent implements OnInit {
 
   @ViewChild(QuoteCreateContentComponent) quoteCreateContentComponent:QuoteCreateContentComponent;
   public editMode = false;
 
   constructor(
-    private quoteStateService: QuoteStateService
+    private quoteStateService: QuoteStateService,
+    private cdRef:ChangeDetectorRef
   ) {
     this.getState();
+  }
+
+  ngOnInit() {
+    // if (!this.cdRef['destroyed']) {
+    //   console.log('init QuotePreviewComponent');
+    //   this.cdRef.detectChanges();
+    // }
   }
 
   /**

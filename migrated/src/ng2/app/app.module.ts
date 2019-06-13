@@ -182,11 +182,6 @@ angular.module('quicktech')
       deps: ['$injector']
     },
     {provide: UrlHandlingStrategy, useClass: CustomHandlingStrategy},
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: ApiInterceptor,
-    //   multi: true
-    // },
     ApiPasswordManagerService
   ],
   bootstrap: [AppComponent]

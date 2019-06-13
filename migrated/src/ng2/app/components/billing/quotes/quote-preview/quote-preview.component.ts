@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { QuoteStateService } from "../quote-create/quote-state.service";
 import { CompaniesService } from "../../../../services/company/companies.service";
 import { DateService } from "../../../../services/date/date.service";
@@ -19,13 +19,18 @@ export class QuotePreviewComponent implements OnInit {
   constructor(
     private quoteStateService: QuoteStateService,
     private companiesService: CompaniesService,
-    private dateService: DateService
+    private dateService: DateService,
+    private cdRef:ChangeDetectorRef
   ) { }
 
   ngOnInit() {
     this.getQuoteInfo();
     this.getCurrentCompany();
     this.getItemsArray();
+    // if (!this.cdRef['destroyed']) {
+    //   console.log('init QuotePreviewComponent');
+    //   this.cdRef.detectChanges();
+    // }
   }
 
   public getQuoteInfo() {
