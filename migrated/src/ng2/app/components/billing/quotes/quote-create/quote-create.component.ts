@@ -26,10 +26,10 @@ export class QuoteCreateComponent implements OnInit {
   }
 
   ngOnInit() {
-    // if (!this.cdRef['destroyed']) {
-    //   console.log('init QuotePreviewComponent');
-    //   this.cdRef.detectChanges();
-    // }
+    if (!this.cdRef['destroyed']) {
+      console.log('init QuotePreviewComponent');
+      this.cdRef.detectChanges();
+    }
   }
 
   /**
