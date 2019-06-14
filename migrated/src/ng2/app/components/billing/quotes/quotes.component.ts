@@ -254,11 +254,8 @@ export class QuotesComponent implements OnInit {
    * open send modal for resend
    */
   public resend(item) {
-    console.log(item, 'item');
-    if (item.status === 'DRAFT' || item.status === 'INVOICED') {
-      this.quoteServices.repeatSend(item.id).subscribe((res) => {
-        console.log(res, '99999');
-      });
+    if (item.status === 'TICKETED' || item.status === 'INVOICED') {
+      this.quoteServices.repeatSend(item.id).subscribe();
     } else {
       const modalRef = this.modalService.open(ModalQuoteComponent,  item);
       modalRef.componentInstance.data = item;

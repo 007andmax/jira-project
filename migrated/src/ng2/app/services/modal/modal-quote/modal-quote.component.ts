@@ -77,13 +77,12 @@ export class ModalQuoteComponent implements OnInit {
   selected(event: MatAutocompleteSelectedEvent): void {
     this.showError = false;
     !this.isResend && this.selectedUsers.push(event.option.viewValue);
-    console.log(event.option.viewValue, 'event.option.viewValue');
     this.usersEmails.push(event.option.value.primaryEmail);
     this.quoteStateService.setUsersEmail(this.usersEmails);
     this.isResend && (this.data.recipients.push(event.option.value.primaryEmail));
-
     this.userInput.nativeElement.value = '';
     this.userCtrl.setValue(null);
+    console.log(this.usersEmails, 'this.usersEmails');
   }
 
   private _filter(value: string): string[] {
@@ -124,7 +123,6 @@ export class ModalQuoteComponent implements OnInit {
         this.quoteStateService.saveSandMode();
       } else {
         this.quoteService.resend(this.data).subscribe((res) => {
-          console.log(res);
           this.quoteService.repeatSend(res).subscribe((res) => {})
         })
       }
@@ -137,7 +135,16 @@ export class ModalQuoteComponent implements OnInit {
 
   public initResendMode() {
     this.isResend = true;
-    this.selectedUsers = this.data.recipients.length > 0 && this.data.recipients[0] !== "" ?  this.data.recipients : [];
+    if (this.data.recipients.length === 0 ) {
+
+    }
+
+      if (this.data.recipients.length > 0 && this.data.recipients[0] !== "") {
+        this.selectedUsers = this.data.recipients;
+      } else {
+        this.data.recipients = [];
+        this.selectedUsers = this.data.recipients;
+      }
     this.message = this.data.message && this.data.message !== "null" ? this.data.message : '';
     this.subject = this.data.subject && this.data.subject !== "null" ? this.data.subject: '';
   }
