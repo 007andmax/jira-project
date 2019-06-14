@@ -170,7 +170,11 @@ angular.module('quicktech')
   ],
   entryComponents: [
     LeftPanelComponent,
-    ModalQuoteComponent
+    ModalQuoteComponent,
+    QuotesComponent,
+    QuoteCreateComponent,
+    QuotePreviewComponent,
+    PasswordManagerComponent
   ],
   providers: [
     {

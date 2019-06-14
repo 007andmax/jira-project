@@ -93,12 +93,20 @@ export class ModalQuoteComponent implements OnInit {
   private getAllUsers() {
     this.showErrorClient = false;
     const company = (this.data && this.data.company.id) || this.quoteStateService.getClient();
+    console.log(company, 'company');
     if (company || company.id) {
       this.userService.getAllusers().subscribe((res: any) => {
         const techUser  = res.filter((item) =>  item.accountType === USER.TYPE.TECH && !item.deletedAt);
-        const clientUser = res.filter((item) =>  {
-          return item.accountType === USER.TYPE.CLIENT && item.company.id == company.id && !item.deletedAt
-        });
+        let clientUser = [];
+        if (typeof company === 'string' || company instanceof String) {
+           clientUser = res.filter((item) =>  {
+            return item.accountType === USER.TYPE.CLIENT && item.company.id == company && !item.deletedAt
+          });
+        } else {
+          clientUser = res.filter((item) =>  {
+            return item.accountType === USER.TYPE.CLIENT && item.company.id == company.id && !item.deletedAt
+          });
+        }
         this.users = [...techUser, ...clientUser];
       })
     } else {
