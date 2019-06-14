@@ -139,18 +139,18 @@
         }))
         .state('quotes-component', {
           url: '/ng2/quotes',
-          template: ''
+          template: '<quotes-component></quotes-component>'
         })
         .state('quote-create-component', {
           url: '/ng2/quotes/quote-create',
           params: {
             editMode: null
           },
-          template: ''
+          template: '<quote-create-component></quote-create-component>'
         })
         .state('quote-preview-component', {
           url: '/ng2/quotes/quote-preview',
-          template: ''
+          template: '<quote-preview-component></quote-preview-component>'
         })
         .state('accounting', waitForServices({
           url: '/accounting',
