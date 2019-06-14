@@ -167,7 +167,7 @@ angular.module('quicktech')
       ],
       {
         useHash: true,
-        enableTracing: false
+        enableTracing: true
       })
   ],
   entryComponents: [

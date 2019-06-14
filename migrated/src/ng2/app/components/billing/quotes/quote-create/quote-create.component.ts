@@ -19,17 +19,12 @@ export class QuoteCreateComponent implements OnInit {
   public editMode = false;
 
   constructor(
-    private quoteStateService: QuoteStateService,
-    private cdRef:ChangeDetectorRef
+    private quoteStateService: QuoteStateService
   ) {
     this.getState();
   }
 
   ngOnInit() {
-    if (!this.cdRef['destroyed']) {
-      console.log('init QuotePreviewComponent');
-      this.cdRef.detectChanges();
-    }
   }
 
   /**

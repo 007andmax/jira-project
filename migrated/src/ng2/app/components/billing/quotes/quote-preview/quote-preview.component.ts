@@ -19,18 +19,13 @@ export class QuotePreviewComponent implements OnInit {
   constructor(
     private quoteStateService: QuoteStateService,
     private companiesService: CompaniesService,
-    private dateService: DateService,
-    private cdRef:ChangeDetectorRef
+    private dateService: DateService
   ) { }
 
   ngOnInit() {
     this.getQuoteInfo();
     this.getCurrentCompany();
     this.getItemsArray();
-    // if (!this.cdRef['destroyed']) {
-    //   console.log('init QuotePreviewComponent');
-    //   this.cdRef.detectChanges();
-    // }
   }
 
   public getQuoteInfo() {
