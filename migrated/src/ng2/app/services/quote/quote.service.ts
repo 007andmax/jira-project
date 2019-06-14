@@ -112,6 +112,10 @@ export class QuoteService {
     })
   }
 
+  public repeatSend(quoteId) {
+    return this.http.post(`${this.apiUrl}saleQuotes/${quoteId}/send`, {});
+  }
+
   getQuoteNumber() {
     return this.http.get(this.apiUrl + `data/actualNumber?type=SALE_QUOTE`)
   }

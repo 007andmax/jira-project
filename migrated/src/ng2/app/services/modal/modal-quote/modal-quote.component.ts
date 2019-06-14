@@ -124,6 +124,8 @@ export class ModalQuoteComponent implements OnInit {
         this.quoteStateService.saveSandMode();
       } else {
         this.quoteService.resend(this.data).subscribe((res) => {
+          console.log(res);
+          this.quoteService.repeatSend(res).subscribe((res) => {})
         })
       }
       this.activeModal.close();

@@ -60,9 +60,7 @@ export class CustomHandlingStrategy implements UrlHandlingStrategy {
   shouldProcessUrl(url) {
     return url.toString().startsWith("/ng2") || url.toString() == "/"
   }
-
   extract(url) { return url }
-
   merge(url, whole) { return url }
 }
 
@@ -175,7 +173,6 @@ angular.module('quicktech')
     ModalQuoteComponent
   ],
   providers: [
-
     {
       provide: '$state',
       useFactory: ($injector: any) => $injector.get('$state'),

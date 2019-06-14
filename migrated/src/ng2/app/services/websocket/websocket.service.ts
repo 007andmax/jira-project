@@ -35,11 +35,8 @@ export class WebsocketService {
     setTimeout(() => {
       this.stompClient.subscribe("/user/watch/permissions", (message) => {
         var newChange = JSON.parse(message.body);
-        // commit console.log before prod update
         this.usersService.changeUserPermissions(newChange.data.permissions);
-        if (message.body) {
-          console.log('test')
-        }
+        if (message.body) {}
       });
     }, 3000);
   }
