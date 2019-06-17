@@ -164,6 +164,16 @@ export class QuotesComponent implements OnInit {
   }
 
   /**
+   *
+   */
+  public clearStatus() {
+    this.selectedStatus = null;
+    this.dataToSend.status = null;
+    this.refreshQuoteAndPage();
+    this.getQuotes();
+  }
+
+  /**
    * add status class for quotes
    */
   public getClass(className) {
