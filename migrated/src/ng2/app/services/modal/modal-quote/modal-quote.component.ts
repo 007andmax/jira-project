@@ -135,14 +135,15 @@ export class ModalQuoteComponent implements OnInit {
   }
 
   public initResendMode() {
+    console.log('11111');
     this.isResend = true;
     if (this.data.recipients.length === 0) {
     } else {
       if (this.data.recipients.length > 0 && this.data.recipients[0] !== "") {
-        this.selectedUsers = this.data.recipients;
+        this.selectedUsers = [...this.data.recipients];
       } else {
         this.data.recipients = [];
-        this.selectedUsers = this.data.recipients;
+        this.selectedUsers = [...this.data.recipients];
       }
       this.message = this.data.message && this.data.message !== "null" ? this.data.message : '';
       this.subject = this.data.subject && this.data.subject !== "null" ? this.data.subject : '';
@@ -150,7 +151,12 @@ export class ModalQuoteComponent implements OnInit {
   }
 
   public close() {
+    console.log('2424');
     this.selectedUsers = [];
+    this.usersEmails = [];
+    this.users = [];
+    // this.data.recipients = [];
+    // this.data = {};
     this.activeModal.dismiss('Cross click');
   }
 

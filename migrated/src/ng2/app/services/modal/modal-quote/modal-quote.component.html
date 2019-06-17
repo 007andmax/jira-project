@@ -38,7 +38,7 @@
         </mat-chip-list>
         <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
           <mat-option *ngFor="let user of users" [value]="user">
-            {{user.firstName + user.lastName}}
+            {{user.firstName + ' ' + user.lastName}}
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
