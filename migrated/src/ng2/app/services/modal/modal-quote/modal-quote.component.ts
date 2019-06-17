@@ -34,7 +34,6 @@ export class ModalQuoteComponent implements OnInit {
   users = [];
   allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
   @Input() public data;
-
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
@@ -80,20 +79,14 @@ export class ModalQuoteComponent implements OnInit {
     this.usersEmails.push(event.option.value.primaryEmail);
     this.quoteStateService.setUsersEmail(this.usersEmails);
     this.isResend && (this.data.recipients.push(event.option.value.primaryEmail));
-    this.userInput.nativeElement.value = '';
+    this.userInput.nativeElement.blur();
     this.userCtrl.setValue(null);
     console.log(this.usersEmails, 'this.usersEmails');
-  }
-
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    return this.allFruits.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
   }
 
   private getAllUsers() {
     this.showErrorClient = false;
     const company = (this.data && this.data.company.id) || this.quoteStateService.getClient();
-    console.log(company, 'company');
     if (company || company.id) {
       this.userService.getAllusers().subscribe((res: any) => {
         const techUser  = res.filter((item) =>  item.accountType === USER.TYPE.TECH && !item.deletedAt);

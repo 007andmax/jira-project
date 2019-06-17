@@ -6,7 +6,7 @@ import { CompaniesService } from '../../../services/company/companies.service';
 import { QUOTE_STATUS } from '../../../const/quote-status';
 import { DateService } from "../../../services/date/date.service";
 import { QuoteStateService } from "./quote-create/quote-state.service";
-import { QuoteRealTimeService } from "./quote-realtime.service";
+import { QuoteRealTimeService } from "./quote-realtime/quote-realtime.service";
 import {ModalQuoteComponent} from "../../../services/modal/modal-quote/modal-quote.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
