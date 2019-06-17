@@ -1,7 +1,9 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { QuoteStateService } from "../quote-create/quote-state.service";
 import { CompaniesService } from "../../../../services/company/companies.service";
 import { DateService } from "../../../../services/date/date.service";
+import { QuoteCreateContentComponent } from "../quote-create/quote-create-content/quote-create-content.component";
+import {QuoteService} from "../../../../services/quote/quote.service";
 
 @Component({
   selector: 'app-quote-preview',
@@ -14,12 +16,15 @@ export class QuotePreviewComponent implements OnInit {
   public quoteForCreate: any;
   public company: any;
   public itemsArray = [];
+  @Output() saveAndContinue = new EventEmitter<string>();
   public stopCache = Math.floor(Math.random() * 100000);
+  @ViewChild(QuoteCreateContentComponent) quoteCreateContentComponent:QuoteCreateContentComponent;
 
   constructor(
     private quoteStateService: QuoteStateService,
     private companiesService: CompaniesService,
-    private dateService: DateService
+    private dateService: DateService,
+    private quoteService: QuoteService
   ) { }
 
   ngOnInit() {
@@ -82,6 +87,19 @@ export class QuotePreviewComponent implements OnInit {
 
   goToCreate() {
     this.quoteStateService.goToState('quote-create-component', { editMode: true});
+  }
+
+  /**
+   * Create quote and save
+   */
+  public save() {
+    this.quoteService.createQuote({
+      client: this.quote.client,
+      startDate: this.quoteForCreate.endDate,
+      endDate: this.quoteForCreate.startDate,
+      globalNote: this.quoteForCreate.globalNote,
+      regularNote: this.quoteForCreate.selectedNote
+    }, false).subscribe();
   }
 
 }

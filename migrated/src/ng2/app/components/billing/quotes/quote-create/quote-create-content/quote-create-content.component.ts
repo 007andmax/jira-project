@@ -217,10 +217,19 @@ export class QuoteCreateContentComponent implements OnInit {
       })
   }
 
+  onChanges(): void {
+    console.log('23421');
+    this.quoteForm.valueChanges.subscribe(val => {
+      console.log('1235235');
+    });
+  }
+
   ngOnDestroy() {
     console.log('ngOnDestory');
     this.unsubscribe.next();
     this.unsubscribe.complete();
   }
+
+
 
 }

@@ -45,7 +45,6 @@ export class ModalQuoteComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.data);
     (this.data) && this.initResendMode();
     this.getAllUsers();
   }
@@ -74,7 +73,6 @@ export class ModalQuoteComponent implements OnInit {
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    console.log(event.option.viewValue, 'event.option.viewValue');
     this.showError = false;
     this.selectedUsers.push(event.option.viewValue);
     this.usersEmails.push(event.option.value.primaryEmail);
@@ -135,7 +133,6 @@ export class ModalQuoteComponent implements OnInit {
   }
 
   public initResendMode() {
-    console.log('11111');
     this.isResend = true;
     if (this.data.recipients.length === 0) {
     } else {
@@ -151,7 +148,6 @@ export class ModalQuoteComponent implements OnInit {
   }
 
   public close() {
-    console.log('2424');
     this.selectedUsers = [];
     this.usersEmails = [];
     this.users = [];

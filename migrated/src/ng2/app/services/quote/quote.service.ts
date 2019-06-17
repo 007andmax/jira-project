@@ -27,6 +27,7 @@ export class QuoteService {
   ) {}
 
    public createQuote(value, notification) {
+    console.log(value);
     this.itemsListArray = this.quoteStateService.getItemArray();
     this.productsArray = this.getProductItems(this.itemsListArray, 'product');
     this.servicesArray = this.getProductItems(this.itemsListArray, 'service');
