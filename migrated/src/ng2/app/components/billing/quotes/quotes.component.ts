@@ -186,7 +186,7 @@ export class QuotesComponent implements OnInit {
   }
 
   goToPreview(quote) {
-    this.quoteStateService.goToPreview(quote);
+    this.quoteStateService.goToPreview(quote, false);
   }
 
   public checkStatus(quote, statusForShowingArray) {

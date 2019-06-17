@@ -150,6 +150,10 @@
         })
         .state('quote-preview-component', {
           url: '/ng2/quotes/quote-preview',
+          params: {
+            editMode: null,
+            editable: null
+          },
           template: '<quote-preview-component></quote-preview-component>'
         })
         .state('accounting', waitForServices({

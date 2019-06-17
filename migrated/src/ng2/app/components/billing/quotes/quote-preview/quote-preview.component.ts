@@ -16,6 +16,7 @@ export class QuotePreviewComponent implements OnInit {
   public quoteForCreate: any;
   public company: any;
   public itemsArray = [];
+  public editable: any;
   @Output() saveAndContinue = new EventEmitter<string>();
   public stopCache = Math.floor(Math.random() * 100000);
   @ViewChild(QuoteCreateContentComponent) quoteCreateContentComponent:QuoteCreateContentComponent;
@@ -31,6 +32,8 @@ export class QuotePreviewComponent implements OnInit {
     this.getQuoteInfo();
     this.getCurrentCompany();
     this.getItemsArray();
+    this.editable = this.quoteStateService.getState().params.editable;
+    console.log(this.editable, 'editable');
   }
 
   public getQuoteInfo() {
@@ -100,6 +103,13 @@ export class QuotePreviewComponent implements OnInit {
       globalNote: this.quoteForCreate.globalNote,
       regularNote: this.quoteForCreate.selectedNote
     }, false).subscribe();
+  }
+
+  /**
+   * Return to quotes
+   */
+  public goToQuotes() {
+    this.quoteStateService.goToState('quotes-component');
   }
 
 }

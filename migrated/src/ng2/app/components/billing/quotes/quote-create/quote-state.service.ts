@@ -127,6 +127,7 @@ export class QuoteStateService {
   }
 
   public goToState(state, params?) {
+    console.log('11111');
     this.state.go(state, params);
   }
 
@@ -242,7 +243,7 @@ export class QuoteStateService {
     return this.startQuoteNumber;
   }
 
-  goToPreview(quote) {
+  goToPreview(quote, editable?) {
     this.quoteForCreate = quote;
     this.setClient(quote.company);
     const itemsArray = [...quote.products, ...quote.services];
@@ -257,7 +258,7 @@ export class QuoteStateService {
     this.setRequestPayment(quote.requestPayment);
     this.resolveTaxes();
     this.resolveTotal();
-    this.goToState('quote-preview-component', {editMode: true});
+    this.goToState('quote-preview-component', {editMode: true, editable: editable ? editable : true});
   }
 
   public divideArray() {
