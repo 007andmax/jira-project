@@ -32,7 +32,6 @@ export class ModalQuoteComponent implements OnInit {
   showErrorClient = false;
   usersEmails = [];
   users = [];
-  allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
   @Input() public data;
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
@@ -46,6 +45,7 @@ export class ModalQuoteComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.data);
     (this.data) && this.initResendMode();
     this.getAllUsers();
   }
@@ -69,19 +69,19 @@ export class ModalQuoteComponent implements OnInit {
       this.selectedUsers.splice(index, 1);
       this.usersEmails.splice(index, 1);
       this.quoteStateService.setUsersEmail(this.usersEmails);
-      this.isResend && (this.data.recipients = this.usersEmails);
+      // this.isResend && (this.data.recipients = this.usersEmails);
     }
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
+    console.log(event.option.viewValue, 'event.option.viewValue');
     this.showError = false;
-    !this.isResend && this.selectedUsers.push(event.option.viewValue);
+    this.selectedUsers.push(event.option.viewValue);
     this.usersEmails.push(event.option.value.primaryEmail);
     this.quoteStateService.setUsersEmail(this.usersEmails);
-    this.isResend && (this.data.recipients.push(event.option.value.primaryEmail));
+    // this.isResend && (this.data.recipients.push(event.option.value.primaryEmail));
     this.userInput.nativeElement.blur();
     this.userCtrl.setValue(null);
-    console.log(this.usersEmails, 'this.usersEmails');
   }
 
   private getAllUsers() {
@@ -136,18 +136,22 @@ export class ModalQuoteComponent implements OnInit {
 
   public initResendMode() {
     this.isResend = true;
-    if (this.data.recipients.length === 0 ) {
-
-    }
-
+    if (this.data.recipients.length === 0) {
+    } else {
       if (this.data.recipients.length > 0 && this.data.recipients[0] !== "") {
         this.selectedUsers = this.data.recipients;
       } else {
         this.data.recipients = [];
         this.selectedUsers = this.data.recipients;
       }
-    this.message = this.data.message && this.data.message !== "null" ? this.data.message : '';
-    this.subject = this.data.subject && this.data.subject !== "null" ? this.data.subject: '';
+      this.message = this.data.message && this.data.message !== "null" ? this.data.message : '';
+      this.subject = this.data.subject && this.data.subject !== "null" ? this.data.subject : '';
+    }
+  }
+
+  public close() {
+    this.selectedUsers = [];
+    this.activeModal.dismiss('Cross click');
   }
 
 }
