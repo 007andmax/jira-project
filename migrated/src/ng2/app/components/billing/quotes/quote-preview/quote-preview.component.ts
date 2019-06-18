@@ -212,4 +212,9 @@ export class QuotePreviewComponent implements OnInit {
     }
   }
 
+  ngOnDestroy() {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
+  }
+
 }

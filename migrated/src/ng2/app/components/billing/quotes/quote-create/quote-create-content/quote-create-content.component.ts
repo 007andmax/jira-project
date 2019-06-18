@@ -222,6 +222,4 @@ export class QuoteCreateContentComponent implements OnInit {
     this.unsubscribe.complete();
   }
 
-
-
 }
