@@ -152,8 +152,8 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public save() {
-    console.log('0000');
-    // this.submitted = true;
+    this.submitted = true;
+    console.log(this.createPasswordRecord, 'createPasswordRecord');
     const isUserRequired = this.checkLinks();
     const isSsidRequired = this.checkSsid();
     if (this.type === 8) this.createPasswordRecord.controls['userName'].setValue('block');
@@ -200,6 +200,10 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       }
       this.showGadgetsForm = false;
     }
+  }
+
+  get form() {
+    return this.createPasswordRecord.controls;
   }
 
   changeSelectedUserAndDevices(newItem, index?, type?) {
