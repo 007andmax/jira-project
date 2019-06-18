@@ -130,7 +130,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public initForm(){
-
     this.expiryDate = this.editItem && this.editItem.expiredDate ? this.getStartDate(this.editItem.expiredDate) : null;
     this.createPasswordRecord = this.fb.group({
       description: [this.editItem ? this.editItem.description : '', Validators.maxLength(5000)],
@@ -155,7 +154,8 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public save() {
-    this.submitted = true;
+    console.log('0000');
+    // this.submitted = true;
     const isUserRequired = this.checkLinks();
     const isSsidRequired = this.checkSsid();
     if (this.type === 8) this.createPasswordRecord.controls['userName'].setValue('block');
@@ -169,7 +169,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       this.subSaveRecord = this.passwordManagerService.saveRecord(this.createPasswordRecord.value)
         .subscribe((res) => this.afterSaveRecord());
     }
-
   }
 
   public afterSaveRecord() {
