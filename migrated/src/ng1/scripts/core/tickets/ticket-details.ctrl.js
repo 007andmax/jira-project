@@ -31,6 +31,7 @@
           $scope.hour = today.getHours();
           $scope.minute = Math.floor(today.getMinutes() / 5) * 5;
           $scope.isLoaded = false;
+        
           $timeout(function() {
             ticketMobileSettings.data = $scope;
           }, 3000);
@@ -87,6 +88,7 @@
           //$scope.ticketDetails = { id: $stateParams.ticketId };
           TicketsService.getOne($scope.ticketDetails, $scope, function (details) {
             $scope.ticketDetails = details;
+            console.log('$scope.ticketDetails',$scope.ticketDetails);
             if (isFromRemote) {
               ServicesService.getAllByCompany($scope, details.company.id, function (resp) {
                 $scope.ticketUpdate.services[0].item = resp.find(function (service) {

@@ -1,0 +1,41 @@
+<div class="service-form-wrapper edit-form-checkbox create-new"
+     ng-controller="quicktech.editPreviewCtrl" ng-show="showModal">
+  <div class="service--header">
+    <h2>Preview</h2>
+    <button class="close-modal" ng-click="closeWindowWithConfirm()"></button>
+  </div>
+  <div class="service--content row">
+    <div class="col-md-12">
+     <img ng-src="{{img_url}}" />
+    </div>
+  </div>
+  <div class="service--footer">
+
+    <button-with-loading-indicator class="btn btn-primary"
+                                   ng-click="saveEditService(editServiceForm, true)" loading="disabledSaveButton"
+                                   label="{{ editService.versionedId.id ? 'Save Service' : 'Create Service' }}">
+    </button-with-loading-indicator>
+    <!-- <button class="btn btn-primary">Create Service</button> -->
+    <button class="btn btn-default" ng-click="closeWindowWithConfirm()">Cancel</button>
+  </div>
+
+</div>
+
+
+<script>
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+  ga('create', 'UA-93441341-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
