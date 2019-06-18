@@ -194,25 +194,21 @@ export class QuotePreviewComponent implements OnInit {
    * Create quote
    */
   saveAndContinueMode(notification?: boolean) {
+    console.log(this.quoteForCreate, 'quoteForCreate');
     const isFormReady = this.quoteStateService.getType();
     const currentQuote = this.quoteStateService.getQuoteCreate();
-    if (isFormReady) {
-      // if (notification) {
-      //   this.quoteService.createQuote(this.quoteForm.value, true)
-      //     .pipe(takeUntil(this.unsubscribe))
-      //     .subscribe((res) => {
-      //       console.log('0000012315');
-      //       this.quoteStateService.goToQuote();
-      //     })
-      // } else {
-      //   this.quoteService.createQuote(this.quoteForm.value, false)
-      //     .pipe(takeUntil(this.unsubscribe))
-      //     .subscribe((res) => {
-      //       this.quoteStateService.goToQuote();
-      //     })
-      // }
+    if (notification) {
+      this.quoteService.createQuote(this.quoteForCreate, true)
+        .pipe(takeUntil(this.unsubscribe))
+        .subscribe((res) => {
+          this.quoteStateService.goToQuote();
+        })
     } else {
-      this.quoteStateService.emitValidation();
+      this.quoteService.createQuote(this.quoteForCreate, false)
+        .pipe(takeUntil(this.unsubscribe))
+        .subscribe((res) => {
+          this.quoteStateService.goToQuote();
+        })
     }
   }
 
