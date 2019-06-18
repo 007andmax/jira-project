@@ -8,6 +8,9 @@
         Save and Continue
         <i class="report-caret-icon-white"></i>
       </button>
+      <button class="dropdown-item" ngbDropdownItem (click)="approveQuote()">Approve a quote</button>
+      <button class="dropdown-item" ngbDropdownItem (click)="downloadPdf()">Save and Download</button>
+      <button class="dropdown-item" ngbDropdownItem (click)="saveAndSend()">Save and Send</button>
     </div>
     <div class="quote-create--header__btn" *ngIf="editable">
       <button class="btn-new default" (click)="goToQuotes()">Back</button>
