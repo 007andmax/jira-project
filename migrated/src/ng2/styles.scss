@@ -74,6 +74,9 @@ ngb-typeahead-window {
 .left-panel-closed {
   .quotes__header {
     width: calc(100vw - 85px) !important;
+    @media (max-width: 1280px) {
+      width: calc(100vw - 76px) !important;
+    }
   }
 }
 
@@ -91,7 +94,7 @@ ngb-typeahead-window {
       width: 10%;
     }
     .col-md-2 {
-      width: 25%;
+      width: 24%;
     }
     .col-md-3 {
       width: 45%;

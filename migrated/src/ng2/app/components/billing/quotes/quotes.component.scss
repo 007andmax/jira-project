@@ -6,13 +6,18 @@
     background: #f3f7f9;
     padding: 24px;
     position: fixed;
-    width: calc(100vw - 325px);
+    width: calc(100vw - 324px);
     transition: all .3s;
     z-index: 1;
+    @media (max-width: 1600px) {
+      width: calc(100vw - 316px);
+    }
     &--top {
       display: flex;
       justify-content: space-between;
+      margin-bottom: 25px;
       h1 {
+        margin: 0;
         font-size: 20px;
         font-weight: 500;
         font-family: "Graphik Regular", sans-serif;
@@ -22,6 +27,12 @@
         .input-field {
           margin-right: 8px;
           width: 220px;
+          @media (max-width: 1366px) {
+            width: 200px;
+          }
+          @media (max-width: 1280px) {
+            width: 180px;
+          }
           .report-caret-icon {
             top: 16px !important;
           }
@@ -29,6 +40,9 @@
         .btn-new {
           margin-left: 8px;
           width: 150px;
+          @media (max-width: 1280px) {
+            width: 120px;
+          }
         }
       }
     }
@@ -38,6 +52,9 @@
         font-family: "Graphik-Medium", sans-serif;
         font-size: 11px;
         font-weight: bold;
+        @media (max-width: 1366px) {
+          font-size: 10px;
+        }
       }
     }
   }
@@ -52,6 +69,9 @@
       [class*='col-md-'] {
         font-family: "Graphik Regular", sans-serif;
         font-size: 13px;
+        @media (max-width: 1366px) {
+          font-size: 11px;
+        }
         .quote-status {
           &:before {
             display: none;
@@ -71,19 +91,54 @@
 
   .w-280 {
     width: 280px !important;
+    @media (max-width: 1366px) {
+      width: 240px !important;
+    }
+    @media (max-width: 1280px) {
+      width: 200px !important;
+    }
   }
 
   .w-160 {
     width: 160px !important;
+    @media (max-width: 1366px) {
+      width: 140px !important;
+    }
+    @media (max-width: 1280px) {
+      width: 135px !important;
+      input {
+        padding: 10px;
+      }
+    }
   }
 
   .col-md-1 {
     width: 11.2%;
+    @media (max-width: 1600px) {
+      width: 11%;
+    }
+    @media (max-width: 1366px) {
+      width: 10.9%;
+    }
+    &.df.jc-sb {
+      @media (max-width: 1366px) {
+        width: 14%;
+      }
+    }
   }
-
+  .col-md-2 {
+    @media (max-width: 1366px) {
+      width: 14%;
+    }
+  }
   [class*='col-md-'].g-m {
     font-weight: bold;
     font-family: "Graphik-Medium", sans-serif;
+  }
+  .btn-new {
+    @media (max-width: 1280px) {
+      padding: 5px !important;
+    }
   }
 }
 

@@ -14,9 +14,13 @@
         margin-right: 16px;
         text-align: right;
         width: 25%;
+        white-space: nowrap;
+        @media (max-width: 1366px) {
+          margin-right: 12px;
+        }
       }
-      .date-picker{
-        input{
+      .date-picker {
+        input {
           width: 100%;
         }
       }

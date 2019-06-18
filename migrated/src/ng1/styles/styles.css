@@ -12530,6 +12530,10 @@ button.close {
 }
 
 @media only screen and (max-width: 1280px) {
+  .quotes .input-field input {
+    font-size: 11px;
+  }
+  
   .opened-ticket .ticket-add-content .ticket-add-product .qt-table li .col-1 {
     width: calc(100% - 500px);
   }

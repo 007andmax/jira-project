@@ -4581,7 +4581,7 @@ Devices tab
 .payment-status,
 .network-scan-status,
 .invoice-status,
-.quote-status{
+.quote-status {
   padding: 0 10px;
   font-size: 11px;
   border-radius: 3px;
@@ -5493,6 +5493,10 @@ Devices tab
 }
 
 @media only screen and (max-width: 1366px) {
+  .quote-status {
+    font-size: 9px;
+  }
+  
   .qt-users .checkbox, .company-devices .checkbox {
     margin: 11px 0 0 0 !important;
   }
