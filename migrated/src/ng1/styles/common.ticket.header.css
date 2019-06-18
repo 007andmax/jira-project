@@ -431,7 +431,7 @@
   color: #9ca5b6;
 }
 
-.attachments li > .onhover .file-download {
+.attachments li > .onhover .file-download,.attachments li > .onhover .file-preview {
   height: 16px;
   width: 16px;
 }

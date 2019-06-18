@@ -34,7 +34,8 @@
             } else {
               element.addClass('disabled');
             }
-console.log('attrs.createNewEntity',attrs.createNewEntity);
+
+            window.localStorage.setItem('file-id',attrs.fileId);
             $rootScope.$broadcast('createNewEntity', attrs.createNewEntity);
 
             if (!angular.element(document).find('.create-popup.modal-create-ticket').length) {
