@@ -99,7 +99,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
   public showAddForm() {
     this.subShowAddForm = this.passwordManagerService.showAddForm.subscribe((res) => {
-
       this.editItem = res;
       if (this.editItem) this.isEditmode = true;
       this.opened = true;
@@ -109,7 +108,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
   public hideAddForm() {
     this.subHideAddForm = this.passwordManagerService.hideAddForm.subscribe((res) => {
-
       this.submitted = false;
       this.showSelect = false;
       this.userDevice = [];
@@ -180,7 +178,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.submitted = false;
     this.type = 0;
     this.opened = false;
-
   }
 
   checkLinks() {
