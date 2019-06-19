@@ -23,7 +23,7 @@ export class QuoteStateService {
   public servicesArray: any;
   public selectedNoteFull: any;
   public usersEmail: any;
-  public quoteForCreate = {
+  public quoteForCreate:any = {
     startDate: '',
     endDate: '',
     quoteNumber: '',

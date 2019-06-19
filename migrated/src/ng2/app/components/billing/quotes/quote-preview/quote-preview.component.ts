@@ -160,7 +160,8 @@ export class QuotePreviewComponent implements OnInit {
    * save quote and open send modal
    */
   public saveAndSend() {
-    this.modalService.open(ModalQuoteComponent);
+    const modalRef = this.modalService.open(ModalQuoteComponent,  this.quoteForCreate);
+    modalRef.componentInstance.data = this.quoteForCreate;
   }
 
   /**

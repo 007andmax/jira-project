@@ -77,7 +77,8 @@ export class QuoteCreateHeaderComponent {
    * save quote and open send modal
    */
   public saveAndSend() {
-    this.modalService.open(ModalQuoteComponent);
+    const modalRef = this.modalService.open(ModalQuoteComponent,  this.quoteStateService.quoteForCreate);
+    modalRef.componentInstance.data = this.quoteStateService.quoteForCreate;
   }
 
 }

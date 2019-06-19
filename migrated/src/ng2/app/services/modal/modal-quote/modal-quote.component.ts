@@ -45,6 +45,7 @@ export class ModalQuoteComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('this.data',this.data);
     (this.data) && this.initResendMode();
     this.getAllUsers();
   }
