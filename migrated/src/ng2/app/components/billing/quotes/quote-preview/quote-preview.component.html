@@ -4,13 +4,32 @@
     <div class="quote-create--header__btn" *ngIf="!editable">
       <button class="btn-new default">Preview</button>
       <button class="btn-new default" (click)="goToCreate()">Edit</button>
-      <button class="btn-new btn-success" (click)="save()">
-        Save and Continue
-        <i class="report-caret-icon-white"></i>
-      </button>
-      <button class="dropdown-item" ngbDropdownItem (click)="approveQuote()">Approve a quote</button>
-      <button class="dropdown-item" ngbDropdownItem (click)="downloadPdf()">Save and Download</button>
-      <button class="dropdown-item" ngbDropdownItem (click)="saveAndSend()">Save and Send</button>
+
+
+
+      <div class="btn-new btn-success btn-with-dropdown">
+        <button type="button" (click)="save()">Save and Continue</button>
+        <div class="light-dropdown" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+          <button class="dropdown-toggle-split" ngbDropdownToggle>
+            <i class="icn-sm pointer report-caret-icon-white"></i>
+          </button>
+          <div class="dropdown-menu" ngbDropdownMenu>
+            <button class="dropdown-item" ngbDropdownItem (click)="approveQuote()">Approve a quote</button>
+            <button class="dropdown-item" ngbDropdownItem (click)="downloadPdf()">Save and Download</button>
+            <button class="dropdown-item" ngbDropdownItem (click)="saveAndSend()">Save and Send</button>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!--<button class="btn-new btn-success" (click)="save()">-->
+        <!--Save and Continue-->
+        <!--<i class="report-caret-icon-white"></i>-->
+      <!--</button>-->
+      <!--<button class="dropdown-item" ngbDropdownItem (click)="approveQuote()">Approve a quote</button>-->
+      <!--<button class="dropdown-item" ngbDropdownItem (click)="downloadPdf()">Save and Download</button>-->
+      <!--<button class="dropdown-item" ngbDropdownItem (click)="saveAndSend()">Save and Send</button>-->
     </div>
     <div class="quote-create--header__btn" *ngIf="editable">
       <button class="btn-new default" (click)="goToQuotes()">Back</button>

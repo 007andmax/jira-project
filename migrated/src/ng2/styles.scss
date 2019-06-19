@@ -2,6 +2,51 @@
 @import './assets/styles/icons.scss';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+.btn-with-dropdown {
+  display: flex !important;
+  padding: 0 !important;
+  > button {
+    background: transparent;
+    border: none;
+    padding: 0 20px;
+    height: 100%;
+  }
+  > div {
+    display: flex;
+    height: 100%;
+    .dropdown-menu {
+      right: 0 !important;
+      left: auto !important;
+      width: 197px !important;
+      .dropdown-item {
+        height: 40px;
+        font-size: 13px;
+      }
+    }
+    > button {
+      height: 100%;
+      padding: 0 20px;
+      position: relative;
+      background: transparent;
+      border: none;
+      &:before {
+        content: '';
+        position: absolute;
+        top: 1px;
+        left: -1px;
+        width: 1px;
+        height: 36px;
+        background: #fff;
+      }
+      .report-caret-icon-white {
+        position: absolute;
+        top: calc(50% - 8.5px);
+        left: calc(50% - 7px);
+      }
+    }
+  }
+}
+
 .main-container:nth-child(2) {
   display: none;
 }

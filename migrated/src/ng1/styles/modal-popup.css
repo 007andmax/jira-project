@@ -1277,7 +1277,6 @@ _::-webkit-:not(:root:root),
 }
 
 .invoices .invoices-header .invoice-create--header__btn .btn-success,
-.quote-create--header__btn .btn-success,
 .invoices .invoices-header .invoices-header-filters .save-invoice-button .btn-success {
   padding-left: 25px;
   width: 184px !important;

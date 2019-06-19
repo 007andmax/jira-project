@@ -1,7 +1,7 @@
 .quote-create {
   &--header {
     &__btn {
-      button {
+      > button {
         &:first-child {
           width: 110px;
         }
