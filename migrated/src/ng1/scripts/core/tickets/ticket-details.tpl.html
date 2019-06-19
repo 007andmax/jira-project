@@ -1,5 +1,5 @@
-<div class="container-ticket-content nano" show-ticket-details >
-  <div class="nano-content" >
+<div class="container-ticket-content nano" show-ticket-details>
+  <div class="nano-content">
     <loading-indicator loading-trigger="!isLoaded"></loading-indicator>
     <div class="ticket-content" ng-show="isLoaded">
       <div ng-form="editTicketForm">
@@ -180,7 +180,7 @@
                 </li>
                 <li ng-if="TicketsPermissionsService.isActionVisible('send_to_trash', ticketDetails)">
                   <a tabindex="-1" class="trash-user" href="javascript:void(0)" ng-click="moveToTrash(true)">Move to
-                    Trash</a>
+                                                                                                             Trash</a>
                 </li>
                 <li ng-if="TicketsPermissionsService.isActionVisible('send_to_spam', ticketDetails)">
                   <a tabindex="-1" class="spam-user" href="javascript:void(0)" ng-if="currentUser.isOwner"
@@ -267,11 +267,13 @@
                  ng-click="downloadAttachment(attachment.file.id, attachment.file.name)">
                 <span class="icon-sm attachments"></span>
               </a>
-              <a href="javascript:void(0)" class="tp-hide file-preview has-tooltip combined-shape"
-              uib-tooltip="Preview" tooltip-placement="top"
-              create-new-entity="preview" ng-if="attachment.file.contentType == 'image/png' || attachment.file.contentType == 'image/jpg'" file-id="{{attachment.file.id}}">
-             <span class="icon-sm attachments"  ></span>
-           </a>
+              <a href="javascript:void(0)" class="tp-hide file-preview has-tooltip"
+                 uib-tooltip="Preview" tooltip-placement="top"
+                 create-new-entity="preview"
+                 ng-if="attachment.file.contentType == 'image/png' || attachment.file.contentType == 'image/jpg'"
+                 file-id="{{attachment.file.id}}">
+                <span class="icon-sm attachments"></span>
+              </a>
             </div>
           </li>
         </ul>
@@ -602,7 +604,7 @@
         </div>
         <div class="no-ticket-updates" ng-if="!ticketDetails.updates.length">
           <p>No ticket Update posted yet!
-            Ticket Update will be appear here</p>
+             Ticket Update will be appear here</p>
           <img src="ng1/images/new-icons/no-ticketupdate.png" alt="">
         </div>
       </div>
@@ -707,7 +709,7 @@
                      ng-click="downloadAttachment(attachment.file.id, attachment.file.name)">
                     <span class="icon-sm attachments"></span>
                   </a>
-                
+
                 </div>
               </li>
             </ul>
@@ -888,7 +890,7 @@
       </div>
       <div class="no-ticket-updates" ng-if="!ticketDetails.updates.length">
         <p>No ticket Update posted yet!
-          Ticket Update will be appear here</p>
+           Ticket Update will be appear here</p>
         <img src="ng1/images/new-icons/no-ticketupdate.png" alt="">
       </div>
       <div class="mob-ticket-buttons">
