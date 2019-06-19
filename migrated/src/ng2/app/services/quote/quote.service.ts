@@ -27,8 +27,6 @@ export class QuoteService {
   ) {}
 
    public createQuote(value, notification) {
-    console.log(value);
-    console.log(!!(value.client && value.client.item), 'value.client && value.client.item');
     this.itemsListArray = this.quoteStateService.getItemArray();
     this.productsArray = this.getProductItems(this.itemsListArray, 'product');
     this.servicesArray = this.getProductItems(this.itemsListArray, 'service');
@@ -58,9 +56,12 @@ export class QuoteService {
   }
 
   public editQuote(value, quoteId, notification) {
+    console.log(1111);
     this.itemsListArray = this.quoteStateService.getItemArray();
     this.productsArray = this.getProductItems(this.itemsListArray, 'product');
     this.servicesArray = this.getProductItems(this.itemsListArray, 'service');
+    console.log(this.productsArray, 'this.productsArray');
+    console.log(this.servicesArray, 'this.servicesArray');
     return this.http.put(`${this.apiUrl}saleQuotes/${quoteId}` ,{
       "companyId": (value.client && value.client.item) ? value.client.item.id : value.client.id,
       "number": this.quoteStateService.getQuoteNumber(),
@@ -88,6 +89,8 @@ export class QuoteService {
   }
 
   public resend(item) {
+    this.productsArray = this.getProductItems([...item.products, item.services], 'product');
+    this.servicesArray = this.getProductItems([...item.products, item.services], 'service');
     return this.http.put(`${this.apiUrl}saleQuotes/${item.id}`, {
       "companyId": item.company.id,
       "number": item.number,
@@ -96,8 +99,8 @@ export class QuoteService {
         "type":"MIXED",
         "shares":[],
         "ticket":null,
-        "products": item.products,
-        "services": item.services,
+        "products": this.productsArray,
+        "services": this.servicesArray,
       },
       "requestPayment": item.requestPayment,
       "draft": false,
@@ -136,6 +139,8 @@ export class QuoteService {
   }
 
   getProductItems(itemsAray, type) {
+    console.log(itemsAray, 'itemsAray');
+    console.log(type, 'service');
     if (type === 'service') {
       itemsAray = itemsAray.filter((item) => item.hasOwnProperty('rate'));
       return itemsAray.map((item, index) => ({
