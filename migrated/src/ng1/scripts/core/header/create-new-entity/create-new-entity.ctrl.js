@@ -77,7 +77,7 @@
           alreadyPushCloseButton = false;
         }
 
-
+      
         $scope.closeWindowWithConfirm = function () {
           alreadyPushCloseButton = true;
           $scope.$broadcast('createNewWindowClosing');

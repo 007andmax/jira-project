@@ -20,7 +20,7 @@
               return $scope.item;
             };
           }
-
+         
           if($scope.categoryForModal || attrs.categoryForModal) {
             existingCategory = function() {
               return $scope.categoryForModal;
@@ -34,8 +34,8 @@
             } else {
               element.addClass('disabled');
             }
-
-            window.localStorage.setItem('file-id',attrs.fileId);
+            if (attrs.createNewEntity == 'preview') $scope.setFileId(attrs.fileId);
+            
             $rootScope.$broadcast('createNewEntity', attrs.createNewEntity);
 
             if (!angular.element(document).find('.create-popup.modal-create-ticket').length) {
@@ -84,6 +84,9 @@
             $scope.$apply();
 
           });
+          $scope.setFileId = function(id) {
+            $rootScope.fileId = id;
+        };
         }
       }
     }]);

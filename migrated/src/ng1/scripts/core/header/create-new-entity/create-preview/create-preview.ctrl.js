@@ -3,10 +3,10 @@
 (function () {
 
   angular.module('quicktech').controller('quicktech.editPreviewCtrl',
-    ['$scope', '$timeout',
-      function ($scope, $timeout) {
+    ['$scope','$rootScope', '$timeout',
+      function ($scope,$rootScope, $timeout) {
         $scope.showModal = false;
-        $scope.img_url = '/file/' + window.localStorage.getItem('file-id');
+        $scope.img_url = '/file/' + $rootScope.fileId;
         $timeout(function () {
           $scope.showModal = true;
         }, 50)
