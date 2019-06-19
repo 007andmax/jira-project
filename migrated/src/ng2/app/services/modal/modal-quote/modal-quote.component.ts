@@ -128,7 +128,9 @@ export class ModalQuoteComponent implements OnInit {
         this.quoteService.resend(this.data)
           .pipe(takeUntil(this.unsubscribe))
           .subscribe((res) => {
-            this.quoteService.repeatSend(res.id).subscribe((res) => {})
+            if (res) {
+              this.quoteService.repeatSend(res['id']).subscribe((res) => {})
+            }
             this.unsubscribe.next();
             this.unsubscribe.complete();
         })
