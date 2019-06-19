@@ -17,14 +17,13 @@ export class ProductListComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+   
     this.itemList.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-
-    // this.itemList.map((item) => item.products.sort((a,b) => (a.description.toLowerCase() > b.description.toLowerCase()) ?
-    //   1 : ((b.description.toLowerCase() > a.description.toLowerCase()) ? -1 : 0))
-    // );
+      this.itemList.forEach(item => item.products.sort((a,b) => (a.description.toLowerCase() > b.description.toLowerCase()) ?
+      1 : ((b.description.toLowerCase() > a.description.toLowerCase()) ? -1 : 0)) );
+  
   }
-
   setProduct(productItem) {
     this.selectedProductItem.next(productItem);
   }
