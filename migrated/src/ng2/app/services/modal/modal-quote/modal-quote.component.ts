@@ -9,6 +9,8 @@ import { USER } from "../../../const/users";
 import { UsersService } from "../../users/users.service";
 import { QuoteStateService } from "../../../components/billing/quotes/quote-create/quote-state.service";
 import {QuoteService} from "../../quote/quote.service";
+import {takeUntil} from "rxjs/operators";
+import {Subject} from "rxjs";
 
 @Component({
   selector: 'app-modal-quote',
@@ -32,6 +34,7 @@ export class ModalQuoteComponent implements OnInit {
   showErrorClient = false;
   usersEmails = [];
   users = [];
+  private unsubscribe: Subject<void> = new Subject();
   @Input() public data;
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
@@ -122,8 +125,12 @@ export class ModalQuoteComponent implements OnInit {
       if (!this.isResend) {
         this.quoteStateService.saveSandMode();
       } else {
-        this.quoteService.resend(this.data).subscribe((res) => {
-          this.quoteService.repeatSend(res).subscribe((res) => {})
+        this.quoteService.resend(this.data)
+          .pipe(takeUntil(this.unsubscribe))
+          .subscribe((res) => {
+            this.quoteService.repeatSend(res.id).subscribe((res) => {})
+            this.unsubscribe.next();
+            this.unsubscribe.complete();
         })
       }
       this.activeModal.close();

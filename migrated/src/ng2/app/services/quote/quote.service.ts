@@ -89,8 +89,8 @@ export class QuoteService {
   }
 
   public resend(item) {
-    this.productsArray = this.getProductItems([...item.products, item.services], 'product');
-    this.servicesArray = this.getProductItems([...item.products, item.services], 'service');
+    this.productsArray = this.getProductItems([...item.products], 'product');
+    this.servicesArray = this.getProductItems([...item.services], 'service');
     return this.http.put(`${this.apiUrl}saleQuotes/${item.id}`, {
       "companyId": item.company.id,
       "number": item.number,
