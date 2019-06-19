@@ -40,15 +40,16 @@ export class QuotePreviewComponent implements OnInit {
     this.getQuoteInfo();
     this.getCurrentCompany();
     this.getItemsArray();
+    console.log('this.quoteStateService.getState().params',this.quoteStateService.getState().params);
     this.editable = this.quoteStateService.getState().params.editable;
     this.handeSendMode();
   }
 
   public getQuoteInfo() {
     this.quote = this.quoteStateService.getQuote();
-    console.log(this.quote, '123512');
+    console.log(this.quote, 'quote');
     this.quoteForCreate = this.quoteStateService.getQuoteCreate();
-    console.log(this.quoteForCreate, '123512');
+    console.log(this.quoteForCreate, 'quoteForCreate');
   }
 
   public getCurrentCompany() {

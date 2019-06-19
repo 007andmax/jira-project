@@ -47,10 +47,21 @@ export class QuoteCreateContentComponent implements OnInit {
    * Initializes quotes content. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
+    
     this.companiesService.getCompaniesList();
-    this.getQuoteNumber();
+    if (this.editMode) {
+      this.onInitEditMode();
+    } else {
+      this.getQuoteNumber();
+    }
+   
     this.initForm(this.editMode);
     this.handeSendMode();
+  }
+
+  private onInitEditMode() {
+    this.quoteNumber = this.quoteStateService.quoteForCreate.quoteNumber;
+    this.quoteStateService.setNumber(this.quoteNumber);
   }
 
   /**
