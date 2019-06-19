@@ -46,7 +46,9 @@ export class QuotePreviewComponent implements OnInit {
 
   public getQuoteInfo() {
     this.quote = this.quoteStateService.getQuote();
+    console.log(this.quote, '123512');
     this.quoteForCreate = this.quoteStateService.getQuoteCreate();
+    console.log(this.quoteForCreate, '123512');
   }
 
   public getCurrentCompany() {

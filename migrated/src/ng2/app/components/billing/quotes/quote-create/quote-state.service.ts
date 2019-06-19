@@ -127,7 +127,6 @@ export class QuoteStateService {
   }
 
   public goToState(state, params?) {
-    console.log('11111');
     this.state.go(state, params);
   }
 
@@ -222,6 +221,7 @@ export class QuoteStateService {
   public setEditQuote(quote) {
     this.quoteForCreate = quote;
     this.startQuoteNumber = quote.number;
+    this.quoteNumber = quote.number;
     this.setClient(quote.company);
     const itemsArray = [...quote.products, ...quote.services];
     this.setItemArray(itemsArray);
