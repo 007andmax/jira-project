@@ -157,7 +157,7 @@ export class QuoteCreateContentComponent implements OnInit {
 
   approveQuote() {
     const isFormReady = this.quoteStateService.getType();
-    isFormReady ?
+    if (isFormReady && !this.editMode) {
       this.quoteService.createQuote(this.quoteForm.value, false)
         .pipe(takeUntil(this.unsubscribe))
         .subscribe((res) => {
@@ -167,18 +167,41 @@ export class QuoteCreateContentComponent implements OnInit {
               this.quoteStateService.goToQuote();
             });
       })
-      : this.quoteStateService.emitValidation();
+    } else if (isFormReady && this.editMode) {
+      const currentQuote = this.quoteStateService.getQuoteCreate();
+      this.quoteService.editQuote(this.quoteForm.value, currentQuote['id'], true)
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((res) => {
+        this.quoteService.approveQuote(res['company'], res['id'])
+            .pipe(takeUntil(this.unsubscribe))
+            .subscribe((res) => {
+              this.quoteStateService.goToQuote();
+            });
+      })
+    } else {
+      this.quoteStateService.emitValidation();
+    }
   }
 
   public downloadPdf() {
     const isFormReady = this.quoteStateService.getType();
-    isFormReady ?
+    if (isFormReady && !this.editMode) {
       this.quoteService.createQuote(this.quoteForm.value, false).pipe(takeUntil(this.unsubscribe))
-        .subscribe((res) => {
-          const id = res['id'];
-          this.quoteService.downloadPdf(res['id']).subscribe((res) => this.downLoadFile(res,id));
-        })
-        : this.quoteStateService.emitValidation();
+      .subscribe((res) => {
+        const id = res['id'];
+        this.quoteService.downloadPdf(res['id']).subscribe((res) => this.downLoadFile(res,id));
+      })
+    } else if (isFormReady && this.editMode) {
+      const currentQuote = this.quoteStateService.getQuoteCreate();
+      this.quoteService.editQuote(this.quoteForm.value, currentQuote['id'], true)
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((res) => {
+        const id = res['id'];
+        this.quoteService.downloadPdf(res['id']).subscribe((res) => this.downLoadFile(res,id));
+      })
+    } else {
+      this.quoteStateService.emitValidation();
+    }
 
   }
 
