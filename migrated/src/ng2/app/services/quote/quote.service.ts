@@ -29,7 +29,7 @@ export class QuoteService {
    public createQuote(value, notification) {
     this.itemsListArray = this.quoteStateService.getItemArray();
     this.productsArray = this.getProductItems(this.itemsListArray, 'product');
-    this.servicesArray = this.getProductItems(this.itemsListArray, 'service');
+    this.servicesArray = this.getProductItems(this.itemsListArray, 'service',true);
     return this.http.post(`${this.apiUrl}saleQuotes` ,{
       "companyId": (value.client && value.client.item) ? value.client.item.id : value.client.id,
       "number": this.quoteStateService.getQuoteNumber(),
@@ -59,7 +59,7 @@ export class QuoteService {
     console.log(1111);
     this.itemsListArray = this.quoteStateService.getItemArray();
     this.productsArray = this.getProductItems(this.itemsListArray, 'product');
-    this.servicesArray = this.getProductItems(this.itemsListArray, 'service');
+    this.servicesArray = this.getProductItems(this.itemsListArray, 'service',true);
     console.log(this.productsArray, 'this.productsArray');
     console.log(this.servicesArray, 'this.servicesArray');
     return this.http.put(`${this.apiUrl}saleQuotes/${quoteId}` ,{
@@ -138,17 +138,30 @@ export class QuoteService {
     return this.http.get(this.apiUrl + `services/${clientCompanyId}`);
   }
 
-  getProductItems(itemsAray, type) {
+  getProductItems(itemsAray, type, onInitSaveOrCreate = false) {
     console.log(itemsAray, 'itemsAray');
     console.log(type, 'service');
     if (type === 'service') {
       itemsAray = itemsAray.filter((item) => item.hasOwnProperty('rate'));
-      return itemsAray.map((item, index) => ({
+      return itemsAray.map((item, index) => {
+        let quantity = JSON.parse(JSON.stringify(item.quantity));
+        let description = "";
+        try {
+          description = JSON.parse(JSON.stringify(item.description));
+        } catch (error) {
+          
+        }
+        if (onInitSaveOrCreate) {
+          item.quantity = '1';
+          delete item.description;
+        } 
+        return {
         item: item,
         "itemOrder": index,
-        "quantity": 1,
-        "discountType":"PERCENT"
-      }))
+        "quantity": quantity,
+        "discountType":"PERCENT",
+        "description" : description
+      }})
     } else {
       itemsAray = itemsAray.filter((item) => !item.hasOwnProperty('rate'));
       return itemsAray.map((item, index) => ({
