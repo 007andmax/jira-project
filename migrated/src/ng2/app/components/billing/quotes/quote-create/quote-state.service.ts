@@ -23,24 +23,7 @@ export class QuoteStateService {
   public servicesArray: any;
   public selectedNoteFull: any;
   public usersEmail: any;
-  public quoteForCreate:any = {
-    startDate: '',
-    endDate: '',
-    quoteNumber: '',
-    itemsArray: '',
-    client: '',
-    subTotalProducts: '',
-    subTotalServices: '',
-    totalTaxes: '',
-    total: '',
-    globalNote: '',
-    selectedNote: '',
-    partialDeposit: '',
-    purchaseOrder: '',
-    requestPayment: '',
-    subject: '',
-    message: ''
-  };
+  public quoteForCreate:any = this.getDefaultquoteForCreate();
 
 
   constructor(
@@ -84,7 +67,7 @@ export class QuoteStateService {
     this.itemsArray = itemsArray;
     this.quoteForCreate.itemsArray = itemsArray;
   }
-
+  
   public getItemArray() {
     return this.itemsArray;
   }
@@ -141,7 +124,14 @@ export class QuoteStateService {
       total: this.total
     })
   }
-
+  public resetQuote () {
+    this.resetquoteForCreate();
+    this.itemsArray = [];
+    this.subTotalProducts = 0;
+    this.subTotalServices = 0;
+    this.totalTaxes = 0;
+    this.total = 0;
+  }
   public setSubTotalProducts(value) {
     this.subTotalProducts = value;
     this.quoteForCreate.subTotalProducts = value;
@@ -357,6 +347,29 @@ export class QuoteStateService {
   }
   public roundToTwo(num) {
     return parseFloat((Math.round(Number(num + 'e+2'))  + "e-2")).toFixed(2);
+  }
+  public resetquoteForCreate () {
+    this.quoteForCreate = this.getDefaultquoteForCreate();
+  }
+  private getDefaultquoteForCreate():any {
+    return {
+      startDate: '',
+      endDate: '',
+      quoteNumber: '',
+      itemsArray: '',
+      client: '',
+      subTotalProducts: '',
+      subTotalServices: '',
+      totalTaxes: '',
+      total: '',
+      globalNote: '',
+      selectedNote: '',
+      partialDeposit: '',
+      purchaseOrder: '',
+      requestPayment: '',
+      subject: '',
+      message: ''
+    }
   }
 
 }

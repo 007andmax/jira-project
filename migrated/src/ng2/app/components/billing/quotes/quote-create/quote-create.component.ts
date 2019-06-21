@@ -25,7 +25,8 @@ export class QuoteCreateComponent implements OnInit {
   }
 
   ngOnInit() {
-   
+   console.log('editMode',this.editMode);
+   if (!this.editMode) this.quoteStateService.resetQuote();
   }
 
   /**

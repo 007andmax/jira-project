@@ -49,7 +49,7 @@
           <img src="/company/default/logo.jpg" alt="logo" *ngIf="!(company && company.logo)">
         </div>
         <div class="col-md-7 text-right pr-30" *ngIf="company">
-          <h4 class="bold">Quote #<span>{{quoteForCreate && quoteForCreate.number}}</span></h4>
+          <h4 class="bold">Quote #<span>{{quoteForCreate && quoteForCreate.quoteNumber}}</span></h4>
           <p class="bold">{{company.name}}</p>
           <p>{{company.addresses[0].address}}</p>
           <p *ngFor="let item of company.addresses[0].phoneNumbers">{{item.number}}</p>
