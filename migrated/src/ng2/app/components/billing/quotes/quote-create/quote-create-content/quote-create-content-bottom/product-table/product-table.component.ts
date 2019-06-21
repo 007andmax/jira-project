@@ -51,7 +51,7 @@ export class ProductTableComponent implements OnInit {
   }
 
   public getPrice(cost, count, tax) {
-    return this.quoteStateService.roundToTwo(this.quoteStateService.getPrice(cost, count, tax));
+    return this.quoteStateService.roundToTwo(this.quoteStateService.getPrice(cost, count, tax) + this.quoteStateService.getTaxPrice(cost, count, tax)) ;
   }
 
   public getTaxPrice(cost, count, tax) {
@@ -108,7 +108,7 @@ export class ProductTableComponent implements OnInit {
     const item = this.itemsListArray[index];
     if (this.getMarkup(this.itemsListArray[index])) {
       this.itemsListArray[index].markup = (value - item.cost) / item.cost * 100;
-      this.itemsListArray[index].sales = value;
+      this.itemsListArray[index].sale = value;
       this.updateItemsArray();
     } else {
       this.itemsListArray[index].rate = value;

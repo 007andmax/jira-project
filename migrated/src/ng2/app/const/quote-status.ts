@@ -24,8 +24,8 @@ export const QUOTE_STATUS = [
     name: 'Expired'
   },
   {
-    type: 'DRAFT',
-    name: 'Draft'
+    type: 'INVOICED',
+    name: 'Invoiced'
   },
   {
     type: 'UNREAD',
