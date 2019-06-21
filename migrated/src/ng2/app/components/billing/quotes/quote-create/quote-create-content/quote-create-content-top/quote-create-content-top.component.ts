@@ -35,6 +35,7 @@ export class QuoteCreateContentTopComponent implements OnInit {
     this.startDateChanges(this.quoteForm.value.startDate);
     this.endDateChanges(this.quoteForm.value.endDate);
     this.getState();
+  
   }
 
   /**

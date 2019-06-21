@@ -229,8 +229,8 @@ export class QuoteStateService {
     console.log(quote, 'QUOTE');
     this.setNumber(quote.number);
     this.setStartQuoteNumber(quote.number);
-    this.setEndDate(this.dateService.getStartDate(quote.date));
-    this.setStartDate(this.dateService.getStartDate(quote.endDate));
+    this.setEndDate(this.dateService.getStartDate(quote.validUntil));
+    this.setStartDate(this.dateService.getStartDate(quote.date));
     this.setGlobalNote(quote.globalNote);
     this.setSelectedNote(quote.regularNote);
     this.setPartialDeposit(quote.partialDeposit);
