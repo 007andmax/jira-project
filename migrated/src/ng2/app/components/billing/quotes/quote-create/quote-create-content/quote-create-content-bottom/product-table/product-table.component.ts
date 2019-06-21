@@ -51,11 +51,11 @@ export class ProductTableComponent implements OnInit {
   }
 
   public getPrice(cost, count, tax) {
-    return this.roundToTwo(this.quoteStateService.getPrice(cost, count, tax));
+    return this.quoteStateService.roundToTwo(this.quoteStateService.getPrice(cost, count, tax));
   }
 
   public getTaxPrice(cost, count, tax) {
-    return this.roundToTwo(this.quoteStateService.getTaxPrice(cost, count, tax));
+    return this.quoteStateService.roundToTwo(this.quoteStateService.getTaxPrice(cost, count, tax));
   }
 
   public deleteItem(index) {
@@ -86,7 +86,7 @@ export class ProductTableComponent implements OnInit {
     if (type === 'service') {
       item = {...item, ...{description: '', quantity: 1}};
     } else {
-      item = {...item, ...{quantity: 1, markup: this.setMarkups(item)}};
+      item = {...item, ...{quantity: 1, markup: this.quoteStateService.setMarkups(item)}};
     }
     this.itemsListArray[index] = item;
     this.changedProductItemsArray.next(this.itemsListArray);
@@ -99,7 +99,7 @@ export class ProductTableComponent implements OnInit {
 
   public changeMarkup(value, index) {
     const item = this.itemsListArray[index];
-    this.itemsListArray[index].sale =  this.roundToTwo((value * item.cost / 100 + item.cost));
+    this.itemsListArray[index].sale =  this.quoteStateService.roundToTwo((value * item.cost / 100 + item.cost));
     this.itemsListArray[index].markup = value;
     this.updateItemsArray();
   }
@@ -118,26 +118,18 @@ export class ProductTableComponent implements OnInit {
   public changeCost(value, index) {
     const item = this.itemsListArray[index];
     if (this.getMarkup(this.itemsListArray[index])) {
-      this.itemsListArray[index].markup =  this.roundToTwo((item.sale - value)/value * 100);
-      this.itemsListArray[index].cost = this.roundToTwo(value);
+      this.itemsListArray[index].markup =  this.quoteStateService.roundToTwo((item.sale - value)/value * 100);
+      this.itemsListArray[index].cost = this.quoteStateService.roundToTwo(value);
     } else {
-      this.itemsListArray[index].rate = this.roundToTwo(value);
+      this.itemsListArray[index].rate = this.quoteStateService.roundToTwo(value);
     }
     this.updateItemsArray();
   }
 
-  public setMarkups(item) {
-    if (item.sale > 0 && item.cost > 0 )
-      return this.roundToTwo((item.sale - item.cost)/item.cost* 100);
-  }
 
   public updateItemsArray() {
     this.changedProductItemsArray.next(this.itemsListArray);
     this.quoteStateService.setItemArray(this.itemsListArray);
-  }
-
-  public roundToTwo(num) {
-    return parseFloat((Math.round(Number(num + 'e+2'))  + "e-2")).toFixed(2);
   }
 
 }

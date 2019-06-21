@@ -223,6 +223,7 @@ export class QuoteStateService {
     this.startQuoteNumber = quote.number;
     this.quoteNumber = quote.number;
     this.setClient(quote.company);
+    quote.products.forEach(element => element.markup = this.setMarkups(element));
     const itemsArray = [...quote.products, ...quote.services];
     this.setItemArray(itemsArray);
     this.setType(true);
@@ -349,6 +350,13 @@ export class QuoteStateService {
 
   public getUsersEmail() {
     return this.usersEmail;
+  }
+  public setMarkups(item) {
+    if (item.sale > 0 && item.cost > 0 )
+      return this.roundToTwo((item.sale - item.cost)/item.cost* 100);
+  }
+  public roundToTwo(num) {
+    return parseFloat((Math.round(Number(num + 'e+2'))  + "e-2")).toFixed(2);
   }
 
 }
