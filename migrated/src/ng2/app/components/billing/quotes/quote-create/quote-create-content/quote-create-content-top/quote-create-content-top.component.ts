@@ -43,8 +43,10 @@ export class QuoteCreateContentTopComponent implements OnInit {
    * @params selected Client
    */
   public selectClient(selectClient) {
+    console.log('selectClient',selectClient);
     this.selectedItem.next(selectClient);
     this.quoteStateService.setClient(selectClient);
+    if (!this.editMode) this.quoteStateService.setCompany(selectClient);
     this.currentClient = selectClient.item;
   }
 

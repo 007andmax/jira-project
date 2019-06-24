@@ -32,12 +32,14 @@ export class QuoteStateService {
   ) {
     this.state = $state;
   }
-
   public setClient(client) {
     this.client = client;
     this.quoteForCreate.client = client;
   }
-
+  public setCompany(company) {
+    this.client = company;
+    this.quoteForCreate.company = company;
+  }
   public getClient() {
     return this.client;
   }
@@ -213,7 +215,7 @@ export class QuoteStateService {
     this.startQuoteNumber = quote.number;
     this.quoteNumber = quote.number;
     this.setClient(quote.company);
-    quote.products.forEach(element => element.markup = this.setMarkups(element));
+    if (quote.products) quote.products.forEach(element => element.markup = this.setMarkups(element));
     const itemsArray = [...quote.products, ...quote.services];
     this.setItemArray(itemsArray);
     this.setType(true);
@@ -368,7 +370,10 @@ export class QuoteStateService {
       purchaseOrder: '',
       requestPayment: '',
       subject: '',
-      message: ''
+      message: '',
+      recipients: [],
+      products: [],
+      services: []
     }
   }
 

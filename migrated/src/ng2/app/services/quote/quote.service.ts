@@ -88,7 +88,7 @@ export class QuoteService {
     })
   }
 
-  public resend(item) {
+  public resend(item,recipients) {
     this.productsArray = this.getProductItems([...item.products], 'product');
     this.servicesArray = this.getProductItems([...item.services], 'service');
     return this.http.put(`${this.apiUrl}saleQuotes/${item.id}`, {
@@ -108,7 +108,7 @@ export class QuoteService {
       "partialDeposit": item.partialDeposit,
       "validUntil": item.validUntil,
       "date": item.date,
-      "recipients": item.recipients,
+      "recipients": recipients,
       "message": item.message,
       "subject": item.subject,
       "globalNote": item.globalNote,

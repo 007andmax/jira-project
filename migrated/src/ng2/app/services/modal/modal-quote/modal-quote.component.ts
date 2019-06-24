@@ -8,9 +8,10 @@ import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { USER } from "../../../const/users";
 import { UsersService } from "../../users/users.service";
 import { QuoteStateService } from "../../../components/billing/quotes/quote-create/quote-state.service";
-import {QuoteService} from "../../quote/quote.service";
-import {takeUntil} from "rxjs/operators";
-import {Subject} from "rxjs";
+import { QuoteService } from "../../quote/quote.service";
+import { takeUntil } from "rxjs/operators";
+import { Subject } from "rxjs";
+import { reqCreateQuote } from 'src/ng2/app/interfaces/http/req/req-create-quote';
 
 @Component({
   selector: 'app-modal-quote',
@@ -48,7 +49,7 @@ export class ModalQuoteComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('this.data',this.data);
+    console.log('this.data', this.data);
     (this.data) && this.initResendMode();
     this.getAllUsers();
   }
@@ -91,14 +92,14 @@ export class ModalQuoteComponent implements OnInit {
     const company = (this.data && this.data.company.id) || this.quoteStateService.getClient();
     if (company || company.id) {
       this.userService.getAllusers().subscribe((res: any) => {
-        const techUser  = res.filter((item) =>  item.accountType === USER.TYPE.TECH && !item.deletedAt);
+        const techUser = res.filter((item) => item.accountType === USER.TYPE.TECH && !item.deletedAt);
         let clientUser = [];
         if (typeof company === 'string' || company instanceof String) {
-           clientUser = res.filter((item) =>  {
+          clientUser = res.filter((item) => {
             return item.accountType === USER.TYPE.CLIENT && item.company.id == company && !item.deletedAt
           });
         } else {
-          clientUser = res.filter((item) =>  {
+          clientUser = res.filter((item) => {
             return item.accountType === USER.TYPE.CLIENT && item.company.id == company.id && !item.deletedAt
           });
         }
@@ -125,15 +126,20 @@ export class ModalQuoteComponent implements OnInit {
       if (!this.isResend) {
         this.quoteStateService.saveSandMode();
       } else {
-        this.quoteService.resend(this.data)
-          .pipe(takeUntil(this.unsubscribe))
-          .subscribe((res) => {
-            if (res) {
-              this.quoteService.repeatSend(res['id']).subscribe((res) => {})
-            }
-            this.unsubscribe.next();
-            this.unsubscribe.complete();
-        })
+        if (!this.data.id) {
+        this.quoteStateService.saveSandMode();
+        } else {
+         
+          this.quoteService.resend(this.data,this.selectedUsers)
+            .pipe(takeUntil(this.unsubscribe))
+            .subscribe((res) => {
+              if (res) {
+                this.quoteService.repeatSend(res['id']).subscribe((res) => { })
+              }
+              this.unsubscribe.next();
+              this.unsubscribe.complete();
+            })
+        }
       }
       this.activeModal.close();
     } else {
@@ -141,12 +147,11 @@ export class ModalQuoteComponent implements OnInit {
     }
 
   }
-
   public initResendMode() {
     this.isResend = true;
-    if (this.data.recipients.length === 0) {
+    if (this.data.recipients && this.data.recipients.length === 0) {
     } else {
-      if (this.data.recipients.length > 0 && this.data.recipients[0] !== "") {
+      if (this.data.recipients && this.data.recipients.length > 0 && this.data.recipients[0] !== "") {
         this.selectedUsers = [...this.data.recipients];
       } else {
         this.data.recipients = [];
