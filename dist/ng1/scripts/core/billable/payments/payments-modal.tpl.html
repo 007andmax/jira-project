@@ -1,0 +1,20 @@
+<div class="deposit-slip-modal clearfix">
+  <p>Deposit slip description</p> <p>Deposit number: {{depositNumber.number}}</p>
+  <i class="icn-sm icn-remove-old" ng-click="closeModal()"></i>
+  <ng-form name="depositModalForm">
+    <div class="form-group" ng-class="{'has-error': depositModalForm.$dirty && depositModalForm.$invalid}">
+
+      <label class="control-label" style="color: white;"
+             ng-class="{'hide': depositModalForm.$dirty && depositModalForm.$invalid}">
+        Note
+      </label>
+
+      <div ng-messages="depositModalForm.depositNote.$error" ng-show="depositModalForm.$dirty && depositModalForm.$invalid">
+        <div class="control-label" ng-message="maxlength" style="color: #D75A4A;margin: 6px 0;">Note is too large</div>
+      </div>
+
+      <textarea name="depositNote" ng-model="depositNote" ng-maxlength="500">Note:</textarea>
+    </div>
+    <button class="grey-btn-report" ng-click="createDepositSlipNote()" ng-disabled="disableButton || depositModalForm.$invalid">Save Deposit Slip</button>
+  </ng-form>
+</div>

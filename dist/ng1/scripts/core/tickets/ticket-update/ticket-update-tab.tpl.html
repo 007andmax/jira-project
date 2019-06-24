@@ -1,0 +1,697 @@
+<div ng-form="ticketUpdateForm" ng-controller="quicktech.core.tickets.ticketUpdateTabCtrl">
+
+
+  <div class="ticket-post-update-wrapper">
+    <div class="create-updates-header">
+      <img ng-src="{{ getUserAvatarUrl(user) }}" alt="...">
+      <button class="mob-note mobile-btn" custom-disabled="newEditExpense && !newEditExpense.note"
+              ng-click="openedTab('NOTE')" ng-class="{'active': currentOpenTab === 'NOTE'}">Chat
+      </button>
+      <button class="mob-product mobile-btn" custom-disabled="newEditExpense && !newEditExpense.product"
+              ng-click="openedTab('PRODUCT')" ng-class="{'active': currentOpenTab === 'PRODUCT'}">Product
+      </button>
+      <button class="mob-service mobile-btn" custom-disabled="newEditExpense && !newEditExpense.service"
+              ng-click="openedTab('SERVICE')" ng-class="{'active': currentOpenTab === 'SERVICE'}">Service
+      </button>
+    </div>
+
+    <div class="tab-content"
+         ng-style="{'margin-top': TicketsPermissionsService.isActionVisible('add_expense', ticketDetails) ? '0' : '68px' }">
+
+      <div class="tab-pane in active" id="Note" ng-if="currentOpenTab === 'NOTE' && !isMobileUpdateShown"
+           ng-controller="quicktech.core.tickets.ticketAddUpdateNoteCtrl">
+
+        <div class="ticket-add clearfix" ng-form="updateTicketNote" ng-required="false">
+
+          <div class="ticket-add-content clearfix" style="position: relative">
+
+            <div class="drop-area-wrapper" attach-files attach-func="addAttachmentFiles">
+                <span class="drop-area-subwrapper">
+                  <span class="drop-area">
+                    Drop Files Here
+                  </span>
+                </span>
+            </div>
+
+            <div ng-include="'/ng1/scripts/core/tickets/note/ticket-add-note.tpl.html'"></div>
+          </div>
+
+          <div ng-if="currentOpenTab === 'NOTE'" ng-controller="quicktech.core.tickets.ticketAddUpdateNoteCtrl">
+            <ul class="upload-attachments" ng-style="{ display: !ticketUpdate.attachments.length ? 'none' : 'block' }">
+              <li ng-repeat="file in ticketUpdate.attachments"
+                  ng-style="fileInfo[file.name].error && {'background-color': '#fff2f2'}">
+
+                <div style="max-width: 72%;width: 100%;">
+                  <span class="file-name ellipsis" style="max-width: 64%;font-weight: 900;">{{ file.name }}</span>
+                  <span class="file-size">{{ file.size | fileSizeFilter }}</span>
+                </div>
+
+                <a href="" class="hit-area" data-toggle="tooltip" data-placement="top" title="Re-Upload"
+                   ng-show="file.progress !== 100 && (fileInfo[file.name].code !== 500)"
+                   uib-tooltip="Re-Upload" tooltip-placement="top" ng-click="reloadAttachment(file)">
+                  <i class="icn-sm icn-reupload"></i>
+                </a>
+
+                <div class="progress progress-attachment" ng-show="file.progress !== 100">
+                  <div class="progress-bar" role="progressbar"
+                       aria-valuenow="{{ file.progress }}" aria-valuemin="0" aria-valuemax="100"
+                       ng-style="styleProgressBar(file.progress)">
+                    <span class="sr-only">{{ file.progress }}% Complete</span>
+                  </div>
+                </div>
+
+                <a href="javascript:void(0)"
+                   style="position: absolute;right: 12px;top: 8px;"
+                   class="hit-area"
+                   uib-tooltip="Remove" tooltip-placement="top"
+                   ng-click="removeAttachment($index, fileInfo[file.name].error)">
+                  <i class="icn-sm icn-remove-old"></i>
+                </a>
+
+              </li>
+            </ul>
+            <div ticket-attachment-files
+                 attachment-func="addAttachmentFiles"
+                 ng-model="ticketUpdate.ticketAttachments"
+                 class="petrovich">
+              <a href="javascript:void(0)">
+                <i class="icn-sm icn-ticket-attachment" uib-tooltip="add attachment" tooltip-placement="top"
+                   tooltip-append-to-body="true"></i>
+              </a>
+              <input type="file" style="display:none" multiple="" />
+            </div>
+          </div>
+
+          <div class="ticket--footer">
+            <div class="notify-user-dropdown">
+              <div class="dropdown-user-parent"
+                   ng-class="{'has-error': isShowingErrors(editTicketForm, 'ticketAssignTo')}"
+                   uib-dropdown auto-close="outsideClick">
+                <div uib-dropdown-toggle smart-dropdown-menu-position no-restricted="true">
+                  <img src="ng1/images/new-icons/add-user.png" class="pointer" style="margin: 0 20px 0 0;"
+                       uib-tooltip="add user" tooltip-placement="top" tooltip-append-to-body="true" />
+                </div>
+                <div uib-dropdown-menu
+                     class="dropdown-assign-ticket fixed-assign dropdown-menu without-max-height"
+                     stop-propagation="click"
+                     assign-user-button
+                     onUserAssign="'true'"
+                     aub-create-ticket="true"
+                     aub-is-bulk-operation="true"
+                     style="max-height: auto !important"
+                     aub-ticket-number="ticket.number"
+                     users="usersToWatch"
+                     aub-current-user="currentUser"></div>
+                <div typeahead-input-icon-sm="ticketAssignTo"></div>
+              </div>
+              <div class="shared-avatars">
+                <div class="client-users avatars" ng-if="filterByType(ticketSharedUsersList, 'CLIENT').length">
+                  <div class="shared-avatar pointer"
+                       uib-tooltip="{{ sharedUser.user.firstName + ' ' + sharedUser.user.lastName }}"
+                       ng-click="sharedUser.notify = !sharedUser.notify"
+                       ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'CLIENT')">
+                    <img ng-if="sharedUser.user.avatar" src="{{getUserAvatarUrl(sharedUser.user)}}" />
+                    <div class="default-user-avatar" ng-if="!(sharedUser.user.avatar)"
+                         ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
+                      <span>{{sharedUser.user.firstName[0].toUpperCase()}}</span>
+                      <span>{{sharedUser.user.lastName[0].toUpperCase()}}</span>
+                    </div>
+                    <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
+                      <img src="ng1/images/input-icons/checkbox-checked.png" />
+                    </div>
+                  </div>
+                </div>
+                <div class="tech-users avatars">
+                  <div class="shared-avatar pointer"
+                       uib-tooltip="{{ sharedUser.user.firstName + ' ' + sharedUser.user.lastName }}"
+                       ng-click="sharedUser.notify = !sharedUser.notify"
+                       ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'TECH')">
+                    <img ng-if="sharedUser.user.avatar" src="{{getUserAvatarUrl(sharedUser.user)}}" />
+
+                    <div class="default-user-avatar" ng-if="!(sharedUser.user.avatar)"
+                         ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
+                      <span>{{sharedUser.user.firstName[0].toUpperCase()}}</span>
+                      <span>{{sharedUser.user.lastName[0].toUpperCase()}}</span>
+                    </div>
+
+                    <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
+                      <img src="ng1/images/input-icons/checkbox-checked.png" />
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="df">
+              <div class="btn btn-success btn-new"
+                   custom-disabled="{{ (!haveNote() && !haveAttachments() && isCurrentTab('NOTE')) || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
+                   ng-click="saveTicketUpdate(ticketUpdateForm)">
+                Update
+              </div>
+              <div ng-show="TicketsPermissionsService.isActionVisible('update_and_close', ticketDetails)"
+                   class="btn btn-primary btn-new btn-update"
+                   custom-disabled="{{ ticketDetails.status === 'COMPLETED' || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
+                   ng-click="updateAndCloseTicket(ticketUpdateForm)">
+                Update &amp; Close
+              </div>
+            </div>
+          </div>
+          <!--<div ng-include="'/html/scripts/core/tickets/ticket-update/update-submit.tpl.html'"></div>-->
+        </div>
+      </div>
+
+      <div class="tab-pane in active" id="Product"
+           ng-if="currentOpenTab === 'PRODUCT' && TicketsPermissionsService.isActionVisible('add_expense', ticketDetails) && !isMobileUpdateShown"
+           ng-controller="quicktech.core.tickets.ticketAddUpdateProductsCtrl">
+
+        <div class="ticket-add clearfix" ng-form="addProductsForm">
+
+          <div class="ticket-add-content clearfix">
+
+            <!--<div style="max-height: 224px;overflow-y: scroll;overflow-x: hidden" scrollable>-->
+            <div>
+              <div ng-repeat="productExpense in ticketUpdate.products" ng-init="productExpense.itemOrder = $index">
+
+                <div ng-controller="quicktech.core.tickets.ticketAddUpdateProductCtrl"
+                     ng-form="addProductForm"
+                     ng-include="'/ng1/scripts/core/tickets/products/ticket-add-update-product.tpl.html'"></div>
+              </div>
+
+              <!--<div class="ticket-add-content-actions pull-left">-->
+
+              <!--<div class="ticket-add-amount pull-right">-->
+              <!--<span class="text-muted">Total amount </span>-->
+              <!--<strong>{{ (productTotalAmount | currency: '$': 2) || '$0.00' }}</strong>-->
+              <!--</div>-->
+
+              <!--</div>-->
+            </div>
+
+            <div class="ticket--footer">
+              <div class="notify-user-dropdown">
+                <div class="dropdown-user-parent"
+                     ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAssignTo')}"
+                     uib-dropdown auto-close="outsideClick">
+                  <div uib-dropdown-toggle smart-dropdown-menu-position no-restricted="true">
+                    <img src="ng1/images/new-icons/add-user.png" class="pointer" style="margin: 0 20px 0 0;"
+                         uib-tooltip="add user" tooltip-placement="top" tooltip-append-to-body="true" />
+                  </div>
+                  <div uib-dropdown-menu
+                       class="dropdown-assign-ticket fixed-assign dropdown-menu without-max-height"
+                       stop-propagation="click"
+                       assign-user-button
+                       onUserAssign="'true'"
+                       aub-create-ticket="true"
+                       aub-is-bulk-operation="true"
+                       style="max-height: auto !important"
+                       aub-ticket-number="ticket.number"
+                       users="usersToWatch"
+                       aub-current-user="currentUser"></div>
+                  <div typeahead-input-icon-sm="ticketAssignTo"></div>
+                </div>
+                <div class="shared-avatars">
+                  <div class="client-users avatars" ng-if="filterByType(ticketSharedUsersList, 'CLIENT').length">
+                    <div class="shared-avatar pointer"
+                         uib-tooltip="{{ sharedUser.user.firstName + ' ' + sharedUser.user.lastName }}"
+                         ng-click="sharedUser.notify = !sharedUser.notify"
+                         ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'CLIENT')">
+                      <img ng-if="sharedUser.user.avatar" src="{{getUserAvatarUrl(sharedUser.user)}}" />
+                      <div class="default-user-avatar" ng-if="!(sharedUser.user.avatar)"
+                           ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
+                        <span>{{sharedUser.user.firstName[0].toUpperCase()}}</span>
+                        <span>{{sharedUser.user.lastName[0].toUpperCase()}}</span>
+                      </div>
+                      <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
+                        <img src="ng1/images/input-icons/checkbox-checked.png" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tech-users avatars">
+                    <div class="shared-avatar pointer"
+                         uib-tooltip="{{ sharedUser.user.firstName + ' ' + sharedUser.user.lastName }}"
+                         ng-click="sharedUser.notify = !sharedUser.notify"
+                         ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'TECH')">
+                      <img ng-if="sharedUser.user.avatar" src="{{getUserAvatarUrl(sharedUser.user)}}" />
+
+                      <div class="default-user-avatar" ng-if="!(sharedUser.user.avatar)"
+                           ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
+                        <span>{{sharedUser.user.firstName[0].toUpperCase()}}</span>
+                        <span>{{sharedUser.user.lastName[0].toUpperCase()}}</span>
+                      </div>
+
+                      <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
+                        <img src="ng1/images/input-icons/checkbox-checked.png" />
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="df">
+                <div class="btn btn-success btn-new"
+                     custom-disabled="{{ (!haveNote() && !haveAttachments() && isCurrentTab('NOTE')) || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
+                     ng-click="saveTicketUpdate(ticketUpdateForm)">
+                  Update
+                </div>
+                <div ng-show="TicketsPermissionsService.isActionVisible('update_and_close', ticketDetails)"
+                     class="btn btn-primary btn-new btn-update"
+                     custom-disabled="{{ ticketDetails.status === 'COMPLETED' || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
+                     ng-click="updateAndCloseTicket(ticketUpdateForm)">
+                  Update &amp; Close
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="tab-pane in active" id="Service"
+           ng-if="currentOpenTab === 'SERVICE' && TicketsPermissionsService.isActionVisible('add_expense', ticketDetails) && !isMobileUpdateShown"
+           ng-controller="quicktech.core.tickets.ticketAddUpdateServicesCtrl">
+
+        <div class="ticket-add clearfix" ng-form="addServicesForm">
+
+          <div
+            ng-show="areTicketsTerminated || ((!areTicketsPresented || areTicketsTerminated) && !(serviceList.length === 0 && areTickets))">
+            <div style="width: 100%;font-size: 13px;" class="info-block">
+              <span ng-show="areTicketsTerminated">Your contacts are expired/terminated. Please recreate them in order to use contract's services or remove them in order to use default services.</span>
+              <span ng-show="!areTicketsPresented">You are using default services.</span>
+            </div>
+          </div>
+          <div class="service-not-yet" ng-show="areTicketsTerminated || (serviceList.length === 0 && areTickets)">
+            <!--<img src="images/hourly.svg" alt="">-->
+            <!--<p>No service Set up yet, <br>-->
+            <!--click on button to set up service</p>-->
+            <button class="btn btn-primary btn-new btn-create"
+                    ng-click="openContractAgreementsModal(company)">
+              Setup Service
+            </button>
+          </div>
+
+
+          <div class="ticket-add-content clearfix" scrollable
+               ng-show="!areTicketsTerminated && !(serviceList.length === 0 && areTickets)">
+            <div>
+              <div ng-repeat="serviceExpense in ticketUpdate.services" ng-init="serviceExpense.itemOrder = $index">
+                <div ng-controller="quicktech.core.tickets.ticketAddUpdateServiceCtrl"
+                     ng-include="'/ng1/scripts/core/tickets/services/ticket-add-update-service.tpl.html'"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ticket--footer">
+            <div class="notify-user-dropdown">
+              <div class="dropdown-user-parent"
+                   ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAssignTo')}"
+                   uib-dropdown auto-close="outsideClick">
+                <div uib-dropdown-toggle smart-dropdown-menu-position no-restricted="true">
+                  <img src="ng1/images/new-icons/add-user.png" class="pointer" style="margin: 0 20px 0 0;"
+                       uib-tooltip="add user" tooltip-placement="top" tooltip-append-to-body="true" />
+                </div>
+                <div uib-dropdown-menu
+                     class="dropdown-assign-ticket fixed-assign dropdown-menu without-max-height"
+                     stop-propagation="click"
+                     assign-user-button
+                     onUserAssign="'true'"
+                     aub-create-ticket="true"
+                     aub-is-bulk-operation="true"
+                     style="max-height: auto !important"
+                     aub-ticket-number="ticket.number"
+                     users="usersToWatch"
+                     aub-current-user="currentUser"></div>
+                <div typeahead-input-icon-sm="ticketAssignTo"></div>
+              </div>
+              <div class="shared-avatars">
+                <div class="client-users avatars" ng-if="filterByType(ticketSharedUsersList, 'CLIENT').length">
+                  <div class="shared-avatar pointer"
+                       uib-tooltip="{{ sharedUser.user.firstName + ' ' + sharedUser.user.lastName }}"
+                       ng-click="sharedUser.notify = !sharedUser.notify"
+                       ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'CLIENT')">
+                    <img ng-if="sharedUser.user.avatar" src="{{getUserAvatarUrl(sharedUser.user)}}" />
+                    <div class="default-user-avatar" ng-if="!(sharedUser.user.avatar)"
+                         ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
+                      <span>{{sharedUser.user.firstName[0].toUpperCase()}}</span>
+                      <span>{{sharedUser.user.lastName[0].toUpperCase()}}</span>
+                    </div>
+                    <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
+                      <img src="ng1/images/input-icons/checkbox-checked.png" />
+                    </div>
+                  </div>
+                </div>
+                <div class="tech-users avatars">
+                  <div class="shared-avatar pointer"
+                       uib-tooltip="{{ sharedUser.user.firstName + ' ' + sharedUser.user.lastName }}"
+                       ng-click="sharedUser.notify = !sharedUser.notify"
+                       ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'TECH')">
+                    <img ng-if="sharedUser.user.avatar" src="{{getUserAvatarUrl(sharedUser.user)}}" />
+
+                    <div class="default-user-avatar" ng-if="!(sharedUser.user.avatar)"
+                         ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
+                      <span>{{sharedUser.user.firstName[0].toUpperCase()}}</span>
+                      <span>{{sharedUser.user.lastName[0].toUpperCase()}}</span>
+                    </div>
+
+                    <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
+                      <img src="ng1/images/input-icons/checkbox-checked.png" />
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="df">
+              <div class="btn btn-success btn-new"
+                   custom-disabled="{{ (!haveNote() && !haveAttachments() && isCurrentTab('NOTE')) || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
+                   ng-click="saveTicketUpdate(ticketUpdateForm)">
+                Update
+              </div>
+              <div ng-show="TicketsPermissionsService.isActionVisible('update_and_close', ticketDetails)"
+                   class="btn btn-primary btn-new btn-update"
+                   custom-disabled="{{ ticketDetails.status === 'COMPLETED' || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
+                   ng-click="updateAndCloseTicket(ticketUpdateForm)">
+                Update &amp; Close
+              </div>
+            </div>
+          </div>
+          <!--<div ng-include="'/html/scripts/core/tickets/ticket-update/update-submit.tpl.html'"></div>-->
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+  <div class="mob-ticket-create-updates" ng-if="isMobileUpdateShown" ng-class="{ opened: isMobileUpdateShown }"
+       ng-init="setMobileForm(ticketUpdateForm)">
+    <div class="create-updates-header">
+      <img ng-src="{{ getUserAvatarUrl(user) }}" alt="...">
+      <button class="mob-note mobile-btn" custom-disabled="newEditExpense && !newEditExpense.note"
+              ng-click="openedTab('NOTE')" ng-class="{'active': currentOpenTab === 'NOTE'}"></button>
+      <button class="mob-product mobile-btn" custom-disabled="newEditExpense && !newEditExpense.product"
+              ng-click="openedTab('PRODUCT')" ng-class="{'active': currentOpenTab === 'PRODUCT'}"></button>
+      <button class="mob-service mobile-btn" custom-disabled="newEditExpense && !newEditExpense.service"
+              ng-click="openedTab('SERVICE')" ng-class="{'active': currentOpenTab === 'SERVICE'}"></button>
+    </div>
+
+    <div class="create-updates-content"
+         ng-style="{height:
+         ticketUpdate.attachments.length === 1 ? 'calc(100vh - 239px)' :
+         ticketUpdate.attachments.length === 2 ? 'calc(100vh - 285px)' :
+         ticketUpdate.attachments.length >= 3 ? 'calc(100vh - 370px)' :
+         'calc(100vh - 184px)'}">
+      <div class="create-updates-content-note" ng-if="currentOpenTab === 'NOTE'"
+           ng-class="{'show': currentOpenTab === 'NOTE'}">
+        <textarea placeholder="Write ticket conversation here…" ng-model="updateNote.note"
+                  style="color: rgb(64, 75, 95);"></textarea>
+
+      </div>
+
+      <div class="create-updates-content-product row" ng-if="currentOpenTab === 'PRODUCT'"
+           ng-class="{'show': currentOpenTab === 'PRODUCT'}"
+           ng-controller="quicktech.core.tickets.ticketAddUpdateProductsCtrl" ng-form="addProductsForm">
+        <div ng-controller="quicktech.core.tickets.ticketAddUpdateProductCtrl" ng-form="addProductForm">
+          <div class="col-xs-12 mob-product-input" ng-class="{'has-error': isShowingErrors(addProductForm, 'product')}">
+            <div products-list id="product-list-cont"
+                 click-outside="closeDropdown()" outside-if-not="product-list-cont">
+
+              <div uib-tooltip="Product" tooltip-placement="top">
+
+                <input ng-hide="isPLOpen" type="text" class="has-dropdown pointer" pl-product-input
+                       placeholder="Product" autocomplete="off">
+
+                <input ng-show="isPLOpen" type="text" class="has-dropdown pointer" pl-search-product-input
+                       placeholder="Search or Add Product" autocomplete="off" ng-model="searchProduct"
+                       smart-dropdown-menu-position="product-list">
+
+                <i class="icn-sm icn-caret-gray"></i>
+              </div>
+
+              <input type="hidden" name="product" ng-model="productExpense.item.description" ng-required="true">
+
+              <div class="nano dropdown-menu custom-product-list" pl-conteiner
+                   ng-include="'/ng1/scripts/common/templates/products-list.tpl.html'"></div>
+
+            </div>
+          </div>
+          <div class="col-xs-12 mob-serial-input"
+               ng-class="{'has-error': isShowingErrors(addProductForm, 'productSerialNumber')}">
+
+            <input type="text"
+                   name="productSerialNumber"
+                   ng-model="productExpense.serialNumber"
+                   ng-maxlength="55"
+                   execute-when-outfocused="isShowBarcotInputField = false"
+                   uib-tooltip="{{ productExpense.serialNumber }}"
+                   tooltip-placement="top"
+                   tooltip-append-to-body="true"
+                   ng-init="setEditForm(addProductForm, 'editProductForm')"
+            />
+          </div>
+          <div class="col-xs-12 mob-cost-input"
+               ng-class="{'has-error': isShowingErrors(addProductForm, 'productCost')}">
+
+            <input uib-tooltip="Cost"
+                   tooltip-placement="top"
+                   type="number"
+                   name="productCost"
+                   qt-to-fixed="2"
+                   hard-reset-pattern="pricePattern"
+                   ng-max="productExpense.item.sale"
+                   ng-model="productExpense.item.cost"
+                   tooltip-append-to-body="true"
+                   step="0.01"
+                   ng-readonly="!PermissionsService.isAllowed('MANAGE_PRODUCTS')" />
+          </div>
+          <div class="col-xs-6 mob-qty-input" ng-class="{'has-error': isShowingErrors(addProductForm, 'productQty')}">
+
+            <input uib-tooltip="Qty"
+                   tooltip-placement="top"
+                   type="text"
+                   maxlength="4"
+                   name="productQty" hard-reset-required="true" ng-change="controlProductQty(addProductForm)"
+                   ng-model="productExpense.quantity" ng-maxlength="10"
+                   hard-reset-pattern="quantityPattern">
+          </div>
+          <div class="col-xs-6 mob-price-input"
+               ng-class="{'has-error': isShowingErrors(addProductForm, 'productPrice')}">
+
+            <input uib-tooltip="Product Sale Price"
+                   tooltip-placement="top"
+                   type="number"
+                   class="text-right"
+                   qt-to-fixed="2"
+                   ng-readonly="!PermissionsService.isAllowed('MANAGE_PRODUCTS')"
+                   name="productPrice"
+                   ng-required="true"
+                   ng-model="productExpense.item.sale"
+                   hard-reset-pattern="pricePattern"
+                   step="0.01"
+                   hard-reset-required="true" />
+          </div>
+          <div class="col-xs-6 mob-disc-input"
+               ng-class="{'has-error': isShowingErrors(addProductForm, 'discountAmount')}">
+            <input maxlength="3"
+                   type="text"
+                   class="text-right"
+                   name="discountAmount"
+                   ng-model="productExpense.discountAmount"
+                   ng-max="100"
+                   ng-min="0"
+                   hard-reset-pattern="PERCENT"
+                   execute-when-outfocused="isShowInputField = false"
+                   ng-keydown="$event.which === 13 && $event.preventDefault()">
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="create-updates-content-service row" ng-if="currentOpenTab === 'SERVICE'"
+           ng-controller="quicktech.core.tickets.ticketAddUpdateServicesCtrl"
+           ng-class="{'show': currentOpenTab === 'SERVICE'}"
+           ng-form="addServicesForm">
+
+
+        <div style="width: 100%;" class="info-block"
+             ng-show="areTicketsTerminated || ((!areTicketsPresented || areTicketsTerminated) && !(serviceList.length === 0 && areTickets))">
+          <span ng-show="areTicketsTerminated">Your contacts are expired/terminated. Please recreate them in order to use contract's services or remove them in order to use default services.</span>
+          <span ng-show="!areTicketsPresented">You are using default services.</span>
+        </div>
+
+        <div ng-if="serviceList.length && !areTicketsTerminated" ng-controller="quicktech.core.tickets.ticketAddUpdateServiceCtrl">
+          <div ng-form="addServiceForm" class="clearfix">
+            <div class="col-xs-12">
+              <div uib-dropdown>
+
+                <input type="text"
+                       readonly
+                       name="serviceName"
+                       ng-disabled="!serviceList.length"
+                       ng-model="serviceToEdit[0].item.name"
+                       ng-minlength="1"
+                       autocomplete="off"
+                       placeholder="Service"
+                       class="form-control-dropdown dropdown-toggle"
+                       ng-init="setEditForm(addServiceForm, 'editServiceForm')"
+                       uib-typeahead="service as service.name for service in serviceList |  orderBy:'name'"
+                       qt-typeahead-async-show-on-focus>
+
+                <div style="position: absolute;right: 10px;top: 5px;cursor: pointer;"
+                     typeahead-input-icon="serviceToEdit[0].item"></div>
+                <div class="service-list-container"></div>
+                <input type="hidden" name="service" ng-model="serviceToEdit[0].item.versionedId.id"
+                >
+              </div>
+            </div>
+            <div ng-if="!hideInputs" class="col-xs-6 mob-timer" service-quantity-picker="serviceToEdit[0].quantity"
+                 sqp-is-show-format="false"
+                 ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceTime')}">
+              <input uib-tooltip="Hr(s) : Min(s)" tooltip-placement="top"
+                     id="service-quantity-picker" type="text" readonly
+                     placeholder="Hr(s) : Min(s)" sqp-input
+                     autocomplete="off" aria-expanded="true" />
+              <input type="hidden" ng-model="serviceToEdit[0].quantity" name="serviceTime"
+                     ng-required="serviceToEdit[0].item ? true : false" />
+            </div>
+            <div ng-if="!hideInputs" class="col-xs-6" data-date-picker ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceData')}">
+              <input type="text" class="has-dropdown" placeholder="Date" readonly
+                     qt-data-time-picker max-date="maxServiceDate" ng-model="serviceToEdit[0].date"
+                     name="serviceData" ng-required="true" uib-tooltip="select date">
+              <i class="new-calendar"></i>
+            </div>
+            <div class="col-xs-12" ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceDescription')}">
+              <input uib-tooltip="Description" tooltip-placement="top"
+                     type="text" placeholder="Description"
+                     ng-model="serviceToEdit[0].description" ng-maxlength="2000"
+                     name="serviceDescription" max-length-word="100" />
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+    <div class="create-updates-footer" ng-if="isMobileUpdateShown">
+      <div ng-if="currentOpenTab === 'NOTE'" ng-controller="quicktech.core.tickets.ticketAddUpdateNoteCtrl">
+        <ul class="upload-attachments" ng-style="{ display: !ticketUpdate.attachments.length ? 'none' : 'block' }">
+          <li ng-repeat="file in ticketUpdate.attachments"
+              ng-style="fileInfo[file.name].error && {'background-color': '#fff2f2'}">
+
+            <div style="max-width: 72%;width: 100%;">
+              <span class="file-name ellipsis" style="max-width: 64%;font-weight: 900;">{{ file.name }}</span>
+              <span class="file-size">{{ file.size | fileSizeFilter }}</span>
+            </div>
+
+            <!--<span-->
+            <!--ng-show="fileInfo[file.name].error"-->
+            <!--style="color: rgb(229, 57, 53);white-space: nowrap;overflow: hidden;max-width: 300px;">-->
+            <!--{{ fileInfo[file.name].message }}-->
+            <!--</span>-->
+
+            <a href="" class="hit-area" data-toggle="tooltip" data-placement="top" title="Re-Upload"
+               ng-show="file.progress !== 100 && (fileInfo[file.name].code !== 500)"
+               uib-tooltip="Re-Upload" tooltip-placement="top" ng-click="reloadAttachment(file)">
+              <i class="icn-sm icn-reupload"></i>
+            </a>
+
+            <div class="progress progress-attachment" ng-show="file.progress !== 100">
+              <div class="progress-bar" role="progressbar"
+                   aria-valuenow="{{ file.progress }}" aria-valuemin="0" aria-valuemax="100"
+                   ng-style="styleProgressBar(file.progress)">
+                <span class="sr-only">{{ file.progress }}% Complete</span>
+              </div>
+            </div>
+
+            <a href="javascript:void(0)"
+               style="position: absolute;right: 4px;top: 7px;"
+               class="hit-area"
+               uib-tooltip="Remove file" tooltip-placement="top"
+               ng-click="removeAttachment($index, fileInfo[file.name].error)">
+              <i class="icn-sm icn-remove-old"></i>
+            </a>
+
+          </li>
+        </ul>
+        <div ticket-attachment-files
+             attachment-func="addAttachmentFiles"
+             ng-model="ticketUpdate.ticketAttachments"
+             style="position: relative;">
+          <a href="javascript:void(0)" style="position: absolute;bottom: -38px;">
+            <i class="icn-sm icn-ticket-attachment"></i>
+          </a>
+          <input type="file" style="display:none" multiple="" />
+        </div>
+      </div>
+
+      <div class="create-updates-footer--notify">
+        <div class="notify-user-dropdown">
+          <div class="dropdown-user-parent" ng-class="{'has-error': isShowingErrors(editTicketForm, 'ticketAssignTo')}"
+               uib-dropdown auto-close="outsideClick">
+            <div uib-dropdown-toggle smart-dropdown-menu-position no-restricted="true">
+              <img src="ng1/images/new-icons/add-user.png" class="pointer" style="margin: 14px 20px 0 0;" />
+            </div>
+            <div uib-dropdown-menu
+                 class="dropdown-assign-ticket dropdown-menu without-max-height"
+                 stop-propagation="click"
+                 assign-user-button
+                 onUserAssign="'true'"
+                 aub-create-ticket="true"
+                 aub-is-bulk-operation="true"
+                 style="max-height: auto !important"
+                 aub-ticket-number="ticket.number"
+                 users="usersToWatch"
+                 aub-current-user="currentUser"></div>
+            <div typeahead-input-icon-sm="ticketAssignTo"></div>
+          </div>
+          <div class="shared-avatars">
+            <div class="client-users avatars" ng-if="filterByType(ticketSharedUsersList, 'CLIENT').length">
+              <div class="shared-avatar pointer"
+                   uib-tooltip="{{ sharedUser.user.firstName + ' ' + sharedUser.user.lastName }}"
+                   ng-click="sharedUser.notify = !sharedUser.notify"
+                   ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'CLIENT')">
+                <img ng-if="sharedUser.user.avatar" src="{{getUserAvatarUrl(sharedUser.user)}}" />
+                <div class="default-user-avatar" ng-if="!(sharedUser.user.avatar)"
+                     ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
+                  <span>{{sharedUser.user.firstName[0].toUpperCase()}}</span>
+                  <span>{{sharedUser.user.lastName[0].toUpperCase()}}</span>
+                </div>
+                <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
+                  <img src="ng1/images/input-icons/checkbox-checked.png" />
+                </div>
+              </div>
+            </div>
+            <div class="tech-users avatars">
+              <div class="shared-avatar pointer"
+                   uib-tooltip="{{ sharedUser.user.firstName + ' ' + sharedUser.user.lastName }}"
+                   ng-click="sharedUser.notify = !sharedUser.notify"
+                   ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'TECH')">
+                <img ng-if="sharedUser.user.avatar" src="{{getUserAvatarUrl(sharedUser.user)}}" />
+
+                <div class="default-user-avatar" ng-if="!(sharedUser.user.avatar)"
+                     ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
+                  <span>{{sharedUser.user.firstName[0].toUpperCase()}}</span>
+                  <span>{{sharedUser.user.lastName[0].toUpperCase()}}</span>
+                </div>
+
+                <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
+                  <img src="ng1/images/input-icons/checkbox-checked.png" />
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <button class="create-ticket-update mobile-btn"
+                custom-disabled="{{ (!haveNote() && !haveAttachments() && isCurrentTab('NOTE') && !newEditExpense) || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
+                ng-click="saveTicketUpdate(ticketUpdateForm, null, toggleUpdateWindow, newEditExpense);"></button>
+      </div>
+    </div>
+  </div>
+</div>

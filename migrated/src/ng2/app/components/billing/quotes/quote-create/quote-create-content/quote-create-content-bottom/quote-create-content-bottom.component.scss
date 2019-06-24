@@ -1,0 +1,47 @@
+.quote-create__content--bottom {
+  .quote-content-header {
+    padding: 8px 15px;
+    background-color: #4f5f79;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    [class*='col-md-'] {
+      color: #edf2f6;
+      font-size: 11px;
+      font-family: "Graphik Semibold", sans-serif;
+    }
+  }
+  .quote-content-body-choose {
+    border-bottom: 1px solid #edf2f6;
+    padding: 15.5px 15px;
+    .col-md-12 {
+      display: flex;
+      align-items: center;
+      p {
+        margin: 0 16px;
+        color: #9ca5b6;
+        font-size: 13px;
+      }
+    }
+  }
+  .quote-content-body {
+    padding: 24px 15px;
+    font-size: 13px;
+    [class*="col-md-"] {
+      &.text-right, &.text-left {
+        padding: 5px 15px;
+      }
+    }
+    .quote-content-body--bottom {
+      padding-top: 20px;
+      .col-md-11 {
+        font-size: 11px;
+        font-family: Graphik-Medium, sans-serif;
+        font-weight: bold;
+      }
+      .col-md-1.mt-10 {
+        font-size: 16px;
+        font-family: "Graphik Semibold", sans-serif;
+      }
+    }
+  }
+}

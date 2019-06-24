@@ -16,6 +16,7 @@ export class ApiPasswordManagerService {
   constructor(private http: HttpClient) {}
 
   getRecords() {
+    console.log('getRecords');
     this.subGetRecords = this.http.get(this.apiUrl + 'passwordRecords').subscribe((response)=> {
       this.dataChange.next(response);
     })

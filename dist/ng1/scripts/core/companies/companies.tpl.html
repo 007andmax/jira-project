@@ -1,0 +1,404 @@
+<div>
+  <div class="change-view-actions">
+    <div class="action-wrap clearfix">
+
+      <div class="view-change">
+        <!-- <div class="tile-btn view-change-btn" ng-class="{'active': companiesView === 'grid'}"
+             ng-click="changeView('grid')">
+          <img class="svg-icn tile" alt="tile" ng-if="companiesView === 'list'" src="images/input-icons/tile-gray.svg">
+          <img class="svg-icn tile" alt="tile" ng-if="companiesView === 'grid'"
+               src="images/input-icons/tile-deep-gray.svg">
+        </div>
+        <div class="list-btn view-change-btn" ng-class="{'active': companiesView === 'list'}"
+             ng-click="changeView('list')">
+          <img class="svg-icn tile" alt="tile" ng-if="companiesView === 'grid'" src="images/input-icons/list-gray.svg">
+          <img class="svg-icn tile" alt="tile" ng-if="companiesView === 'list'"
+               src="images/input-icons/list-deep-gray.svg">
+        </div> -->
+      </div>
+    </div>
+    <div ng-if="companiesView === 'list'">
+      <!--<button-->
+        <!--class="btn btn-success"-->
+        <!--style="position: absolute;right: 42px;z-index: 9;"-->
+        <!--modal-window-button="/html/scripts/core/header/create-new-entity/create-email/create-email.tpl.html"-->
+        <!--modal-window-class="create-popup modal-create-ticket"-->
+        <!--mw-controller="quicktech.createEmailCtrl">-->
+        <!--Send Email-->
+      <!--</button>-->
+
+
+      <div class="product-report-btn dropdown-email" style="position: absolute;right: 40px;z-index: 1;"
+            modal-window-button="/ng1/scripts/core/header/create-new-entity/create-email/create-email.tpl.html"
+            modal-window-class="create-popup modal-create-ticket"
+            mw-controller="quicktech.createEmailCtrl"
+           uib-tooltip="send mail" tooltip-placement="top">
+        <div style="height: 100%;width: 100%;" >
+          <img style="margin: 8px;" src="ng1/images/new-icons/message-icon.png" alt="send mail to">
+        </div>
+      </div>
+
+      <ul class="qt-list qt-users company-list-header" style="margin-bottom: 1px;">
+
+        <li class="list-heading" style="cursor: pointer !important; padding: 7px 15px; height: 0px">
+
+
+          <div class="col-md-3" style="width: 34%;" ng-click="setOrderByCompanies('name')">
+            <label class="control checkbox pull-left" ng-click="stopPropagation($event)">
+              <input type="checkbox" class="ng-pristine ng-untouched ng-valid ng-empty"
+                     ng-model="selectedCompanies['all']" ng-click="selectAllCompanies(selectedCompanies['all'])">
+              <span class="control-indicator"></span>
+            </label>
+            <span class="sort-span">
+              Name
+              <i class="icn-sm sort-icon icn-sort"
+                 ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'name'}"></i>
+            </span>
+          </div>
+          <div class="col-md-1" style="width: 160px;" ng-click="setOrderByCompanies('phone')">
+            <span class="sort-span">
+            Contact No.
+              <i class="icn-sm sort-icon icn-sort"
+                 ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'phone'}"></i>
+            </span>
+          </div>
+          <div class="col-md-2 company-email" ng-click="setOrderByCompanies('email')">
+            <span class="sort-span">
+              Email Address
+              <i class="icn-sm sort-icon icn-sort"
+                 ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'email'}"></i>
+            </span>
+          </div>
+          <div class="col-md-2" style="max-width: 190px;" ng-click="setOrderByCompanies('contact')">
+            <span class="sort-span">
+              Primary Contact
+              <i class="icn-sm sort-icon icn-sort"
+                 ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'contact'}"></i>
+            </span>
+          </div>
+          <div class="col-md-1" style="width: 70px;text-align: center" ng-click="setOrderByCompanies('tickets')">
+            <span class="sort-span">
+              Tickets
+              <i class="icn-sm sort-icon icn-sort"
+                 ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'tickets'}"></i>
+            </span>
+          </div>
+          <div class="col-md-1" style="width: 70px;text-align: center" ng-click="setOrderByCompanies('devices')">
+            <span class="sort-span">
+              Devices
+              <i class="icn-sm sort-icon icn-sort"
+                 ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'devices'}"></i>
+            </span>
+          </div>
+          <div class="col-md-1" style="width: 70px;text-align: center" ng-click="setOrderByCompanies('users')">
+            <span class="sort-span">
+              Users
+              <i class="icn-sm sort-icon icn-sort"
+                 ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'users'}"></i>
+            </span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="company-profile-content companies-list not-charts-companies-page" style="margin-top: -7px;">
+    <div class="card-view-wrapper clearfix" ng-if="companiesView === 'grid'" scroll-pagination qt-scroll-to="top"
+         offset="49">
+      <div class="card-wrapper clickable"
+           ng-repeat="company in (companiesCtrl.shownCompanies = (companies.concat(archivedCompanies) | filter: filterCompanies | orderBy: 'name')) | limitTo: displayLimit track by company.id"
+           ng-controller="quicktech.core.companies.companyCtrl"
+           ng-click="openCompany(company)">
+        <div class="card"
+             ng-style="{'border-left-color': tagColors[companiesColors[company.clientType]].backgroundColor}">
+          <div class="card-header clearfix">
+            <div class="edit-icn" ng-if="!company.deletedAt && PermissionsService.isAllowed('EDIT_COMPANIES')"
+                 create-new-entity="company" is-edit="true" item="company" stop-propagation="click"></div>
+            <i class="icon-sm icn-restore" ng-if="company.deletedAt" ng-click="dearchiveCompany(company)"></i>
+            <i style="position: absolute; top: 25px; right: -8px;"
+               class="company-remove-icn"
+               ng-if="company.id === exampleCompanyId && PermissionsService.isAllowed('ARCHIVE_COMPANIES')"
+               ng-click="confirmRemoval($event)"></i>
+
+            <div class="photo" ng-style="{'background': 'url(' + getCompanyLogoUrl(company) + ') no-repeat'}"></div>
+            <p class="ellipsis name"
+               uib-tooltip="{{ company.name }}" tooltip-placement="bottom" trimmed-tooltip-checker="company.name">
+            </p>
+          </div>
+          <div class="card__info">
+            <div class="clearfix">
+              <img src="ng1/images/settings-icon/user-profile.png" alt="">
+              <p class="ellipsis" style="width: 180px;"
+                 uib-tooltip="{{ getUserName(primaryContact) }}" tooltip-placement="bottom"
+                 trimmed-tooltip-checker="getUserName(primaryContact)">
+              </p>
+              <span class="right-align-tooltip">
+                <span style="max-width: 95px" class="ellipsis badge pull-right badge-default"
+                      ng-if="primaryContact.designation"
+                      uib-tooltip="{{ primaryContact.designation }}" tooltip-placement="bottom"
+                      trimmed-tooltip-checker="primaryContact.designation">{{ primaryContact.designation }}</span>
+              </span>
+            </div>
+            <div class="clearfix" ng-if="primaryPhone && primaryPhone.number">
+              <img src="ng1/images/company/smartphone-green.png" alt="">
+              <p>{{ primaryPhone.number }}</p>
+            </div>
+            <div class="clearfix" ng-if="primaryContact.primaryEmail">
+              <img src="ng1/images/company/email-purple.png" alt=""
+                   email-to="primaryContact.primaryEmail" stop-propagation="click">
+              <p style="width: 275px;" class="ellipsis" tooltip-append-to-body="true"
+                 uib-tooltip="{{ primaryContact.primaryEmail }}" tooltip-placement="bottom"
+                 trimmed-tooltip-checker="primaryContact.primaryEmail">
+              </p>
+            </div>
+            <div class="clearfix">
+              <img src="ng1/images/company/placeholder-red.png" alt="">
+              <p>{{ location }}</p>
+            </div>
+          </div>
+          <div class="card__stats clearfix">
+            <div>
+              <p>Tickets</p>
+              <p><strong>{{ company.companyStatistic.ticketsSubmitted || '0' }}</strong></p>
+            </div>
+            <div>
+              <p>Users</p>
+              <p><strong>{{ filterArchived(companyComponentsCount.users, company).length || '0' }}</strong></p>
+            </div>
+            <div>
+              <p>Devices</p>
+              <p><strong>{{ devicesCount[company.id].all || '0' }}</strong></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="desktop-hidden companies-mob-filters"><span ng-if="showArchivedCompanies">Archived Companies</span><span
+    ng-if="!showArchivedCompanies">All Companies</span></p>
+
+  <ul class="qt-list qt-companies qt-users users-bg"
+      style="margin-top: 65px; position: relative"
+      ng-if="companiesView === 'list'"
+      qt-scroll-to="top"
+      offset="83" scroll-pagination>
+    <li class="list-company-row"
+        ng-repeat="company in (companiesCtrl.shownCompanies = (companies.concat(archivedCompanies) | filter: filterCompanies | orderBy: orderByForCompanies: orderCompanies.reverse)) | limitTo: displayLimit track by company.id"
+        ng-controller="quicktech.core.companies.companyCtrl"
+        desktop-mobile-function
+        desktop="openCompany(company)"
+        mobile="mobileOpenCompany()"
+        company-name="company">
+      <div class="col-md-3 col-xs-3" style="width: 34%;" ng-init="companyName = company" mobile-open-company>
+        <label class="control checkbox" ng-click="stopPropagation($event)">
+          <input type="checkbox" ng-model="selectedCompanies[company.id]"
+                 ng-change="changeSelectedCompanies(selectedCompanies)">
+          <span class="control-indicator"></span>
+        </label>
+        <div style="min-height: 38px; display: flex;margin-right: 10px; align-items: center;padding-left: 22px;">
+          <img ng-src="{{ getCompanyLogoUrl(company) }}" class="qwe" alt=""
+               ng-if="(company && company.logo && company.logo.cropped && company.logo.cropped.id)">
+          <div class="default-company-logo"
+               ng-if="!(company && company.logo && company.logo.cropped && company.logo.cropped.id)"
+               ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
+            <span>{{company.name[0].toUpperCase()}}</span>
+          </div>
+        </div>
+        <div>
+          <span class="list-company-name">{{ company.name }}</span>
+          <span style="display: flex;">{{ location }}</span>
+          <span class="company-phone">{{ primaryPhone.number || '' }}</span>
+        </div>
+      </div>
+      <div class="company-location">
+        <span style="display: flex;">{{ location }}</span>
+        <a class="company-link" href="" ng-click="openMapModal(company.id)">Show Map</a>
+      </div>
+      <div class="col-md-1" style="width: 160px;">
+        <span>{{ primaryPhone.number || '' }}</span>
+      </div>
+      <div class="col-md-2 company-email" style="word-break: break-all">
+        <span>{{ primaryContact.primaryEmail }}</span>
+      </div>
+      <div class="col-md-2 company-primary-contact" style="max-width: 190px;">
+        <span>{{ getUserName(primaryContact) }}</span>
+      </div>
+      <div style="width: 70px;" class="col-md-1">
+        <div create-new-entity="ticket" company-id="{{ company.id }}"
+             style="margin-left: 15px; display: inline-block;" custom-disabled="{{ company.deletedAt }}"
+             uib-tooltip="Create Ticket" tooltip-placement="top" stop-propagation="click">
+          <span><i class="nav-icon icon-lg icn-unassigned"></i></span>
+          <span class="badge badge-primary-outline list-company-badge">
+            {{ company.companyStatistic.ticketsSubmitted || '0' }}
+          </span>
+        </div>
+      </div>
+      <div style="width: 70px;" class="col-md-1">
+        <div style="display: inline-block;margin-left: 15px;">
+          <span><i class="icon-lg icon-tab-devices" style="margin: 0;"></i></span>
+          <span class="badge badge-primary-outline list-company-badge">
+            {{ devicesCount[company.id].all || '0' }}
+          </span>
+        </div>
+      </div>
+      <div style="width: 70px;" class="col-md-1">
+        <div ng-click="openCompany(company, 'users')"
+             style="display: inline-block;margin-left: 15px;" stop-propagation="click">
+          <span><i class="nav-icon icon-lg icon-user-black" style="margin: 0;"></i></span>
+          <span class="badge badge-primary-outline list-company-badge">
+            {{ filterArchived(companyComponentsCount.users, company).length || '0' }}
+          </span>
+        </div>
+      </div>
+      <div class="dropdown-wo-max-height"
+           to-left="true"
+           style="position: absolute;right: 15px;">
+        <div style="display: inline-block;"
+             opened-from-list="true"
+             uib-dropdown-toggle
+             ng-click="downloadAgent($event, company)">
+          <div class="download-agent-company pointer">
+            <span>Download Agent</span>
+            <img src="./ng1/images/new-icons/download.svg"></img>
+          </div>
+        </div>
+
+      </div>
+      <div class="dropdown-wo-max-height"
+           to-left="true"
+           style="position: absolute;right: 15px;">
+        <div style="display: inline-block;"
+             opened-from-list="true"
+             uib-dropdown-toggle
+             ng-click="downloadAgent($event, company)">
+          <div class="download-agent-company download-agent-company-small pointer">
+            <span>Download Agent</span>
+            <img src="./ng1/images/new-icons/download.svg">
+          </div>
+        </div>
+      </div>
+      <div class="mob-company-footer">
+        <div>
+          <p>TICKETS</p>
+          <p> {{ company.companyStatistic.ticketsSubmitted || '0' }}</p>
+        </div>
+        <div>
+          <p>DEVICES</p>
+          <p> {{ devicesCount[cooriginmpany.id].all || '0' }} </p>
+        </div>
+        <div>
+          <p>USERS</p>
+          <p> {{ filterArchived(companyComponentsCount.users, company).length || '0' }} </p>
+        </div>
+      </div>
+      <button class="company-edit-icn company-edit-icn-sm desktop-hidden"
+              ng-if="!company.deletedAt && PermissionsService.isAllowed('EDIT_COMPANIES')"
+              create-new-entity="company" is-mobile-edit="true" item="company" stop-propagation="click"></button>
+
+      <img src="ng1/images/input-icons/history1.png" class="restore" ng-if="company.deletedAt"
+           ng-click="dearchiveCompany(company)" />
+    </li>
+    <button class="mob-filters-btn mobile-btn primary"
+            ng-click="toggleMobileCompanyFilters(true)">
+      Filters
+    </button>
+    <div class="mob-filters" ng-class="{ opened: areMobileFiltersOpened }"
+         ng-controller="quicktech.core.leftPanel.leftPanelCtrl">
+      <div class="mob-filters-header">
+        <button class="x-mark mobile-btn" ng-click="closeAndResetMobileFilters()"></button>
+        <div>Filters</div>
+      </div>
+      <div class="center-category">
+        <div class="left-panel-title">
+          by tags
+        </div>
+        <div class="center-category__category sked without-height">
+
+          <ticket-tags is-company="true" tag-filter="true" on-save-func=""
+                       ticket-tags="mobileFilterTags"></ticket-tags>
+
+        </div>
+
+        <div class="left-panel-hide-filter">
+          <div
+            style="font-family: 'Graphik Medium', sans-serif;font-weight: 500; font-size: 13px; color:#fff;text-transform: capitalize;"
+            class="left-panel-title left-panel-title-hover"
+            ng-click="dropdownByIndustryCompanyPage = !dropdownByIndustryCompanyPage">
+            by industry
+            <i class="report-caret-icon" ng-class="{'report-caret-icon-up': dropdownByIndustryCompanyPage}"></i>
+          </div>
+          <div class="filter-left-panel category-expanded angular-animate" ng-show="dropdownByIndustryCompanyPage">
+            <div class="x-mark-wrapper">
+              <qt-dropdown-typehead list-for-dropdown="industries"
+                                    selected-item="mobileIndustryFilter"
+                                    no-overflow="true"
+                                    qt-class="'form-control has-dropdown pointer'"
+                                    by-industry="true"
+                                    qt-ng-style="'{\'max-height\': \'160px\', \'overflow-y\': \'auto\', \'width\': \'100%\'}'">
+
+              </qt-dropdown-typehead>
+            </div>
+            <div class="recent-left-panel">
+              <h4 class="font-medium">recent</h4>
+              <p ng-repeat="item in industryFilterHistoryCompaniesPage track by $index"
+                 ng-click="mobileApplyIndustryFilter(item)">{{item}}
+              </p>
+            </div>
+          </div>
+
+          <div class="left-panel-hide-filter">
+
+            <div class="left-panel-title font-medium left-panel-title-hover"
+                 style="font-family: 'Graphik Medium', sans-serif;font-weight: 500; font-size: 13px; color:#fff;text-transform: capitalize;"
+                 ng-click="dropdownBySalesTicketPage = !dropdownBySalesTicketPage">
+              by sales person
+              <i class="report-caret-icon" ng-class="{'report-caret-icon-up': dropdownBySalesTicketPage}"></i>
+            </div>
+            <div class="filter-left-panel category-expanded angular-animate" ng-show="dropdownBySalesTicketPage">
+              <div class="x-mark-wrapper">
+                <input type="text" class="form-control has-dropdown pointer"
+                       placeholder="Select Sales Person"
+                       typeahead-input-formatter="getUserByID(mobileSalesPerson)"
+                       autocomplete="off" ng-model="mobileSalesPerson"
+                       ng-click="toggleClickedStatus(true)"
+                       uib-typeahead="company.id as getFullName(company) for company in activeTechUsers() | filter:{'firstName': $viewValue }:stateComparator | orderBy:'name'"
+                       qt-typeahead-async-show-on-focus
+                       no-overflow="true"
+                       name="mobileSalesPerson"
+                       custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
+
+                <div typeahead-input-icon="mobileSalesPerson"></div>
+              </div>
+
+              <div class="recent-left-panel">
+                <h4 class="font-medium">recent</h4>
+                <p ng-repeat="item in salesFilterHistoryCompaniesPage track by $index"
+                   ng-click="mobileApplySalesFilterFromHistoryListCompanyPage(item)">{{item}}</p>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <button class="mob-filters-btn mobile-btn primary" ng-click="applyMobileFilters()">Apply Filters</button>
+      </div>
+  </ul>
+</div>
+<script>
+  (function(i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function() {
+      (i[r].q = i[r].q || []).push(arguments);
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+  ga('create', 'UA-93441341-1', 'auto');
+  ga('send', 'pageview');
+
+</script>

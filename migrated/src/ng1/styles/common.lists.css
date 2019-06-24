@@ -4580,7 +4580,8 @@ Devices tab
 
 .payment-status,
 .network-scan-status,
-.invoice-status {
+.invoice-status,
+.quote-status {
   padding: 0 10px;
   font-size: 11px;
   border-radius: 3px;
@@ -5205,7 +5206,8 @@ Devices tab
   border-top: 1px solid #e7ecf2;
 }
 
-.invoice-list-heading {
+.invoice-list-heading,
+.quote-list-list-heading {
   padding: 0 30px;
 }
 
@@ -5214,11 +5216,13 @@ Devices tab
   padding-top: 10px;
 }
 
-.qt-list.invoice-list-heading li.list-heading {
+.qt-list.invoice-list-heading li.list-heading,
+.quote-list-heading li.list-heading {
   padding: 15px 0;
 }
 
-.qt-list.invoice-list-heading li.list-heading > .col-3 {
+.qt-list.invoice-list-heading li.list-heading > .col-3,
+.quote-list-heading li.list-heading > .col-3 {
   text-align: right;
 }
 
@@ -5489,6 +5493,10 @@ Devices tab
 }
 
 @media only screen and (max-width: 1366px) {
+  .quote-status {
+    font-size: 9px;
+  }
+  
   .qt-users .checkbox, .company-devices .checkbox {
     margin: 11px 0 0 0 !important;
   }

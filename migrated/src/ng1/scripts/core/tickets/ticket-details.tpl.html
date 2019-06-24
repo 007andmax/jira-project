@@ -378,61 +378,78 @@
                   </div>
                 </li>
               </ul>
+
+              <div class="table-wrapper product-upd clearfix"
+                   ng-repeat="product in ticketUpdate.products | orderBy: 'itemOrder'"
+                   ng-if="ticketUpdate.type === 'MIXED'">
+                <div class="table-content pull-left" ng-class="{'hide': product.id === editExpenseId}">
+                  <div class="table-content-top clearfix">
+                    <div class="col-md-9 ellipsis">
+                      <p>Product</p>
+                      <p class="pre-line">{{product.item.description}}</p>
+                    </div>
+                    <div class="col-md-1">
+                      <p>Price</p>
+                      <p>{{product.item.sale | currency:'$':2}}</p>
+                    </div>
+                    <div class="col-md-1">
+                      <p>Quantity</p>
+                      <p style="color: #9ca5b6">Qty {{ product.quantity }}</p>
+                    </div>
+                    <div class="col-md-1">
+                      <p>Total</p>
+                      <p>{{ product.item.sale * product.quantity || ''| currency :'$':2 }}</p>
+                    </div>
+                  </div>
+                  <div class="table-content-bottom clearfix">
+                    <div class="col-md-10">
+                      <p>Serial Number</p>
+                      <p>{{product.serialNumber}}</p>
+                    </div>
+                    <div class="col-md-2 text-right text-righttable-content-top clearfix" style="color:#2ec866 ">
+                      {{product.discountAmount}} <span ng-if="product.discountAmount">% Discount</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="table-wrapper clearfix" ng-repeat="service in ticketUpdate.services | orderBy: 'itemOrder'"
+                   ng-if=" ticketUpdate.type === 'MIXED'">
+                <div class="table-content service-table pull-left" ng-class="{'hide': service.id === editExpenseId}">
+                  <div class="table-content-top clearfix">
+                    <div class="col-md-2">
+                      <p>Date</p>
+                      <p>{{ service.date | date:'dd MMM yyyy'}}</p>
+                    </div>
+                    <div class="col-md-6">
+                      <p>Service name</p>
+                      <p>{{ service.item.name }}</p>
+                    </div>
+                    <div class="col-md-1">
+                      <p>Time in</p>
+                      <p>{{getFormatedTime(service.durationStart)}}</p>
+                    </div>
+                    <div class="col-md-1">
+                      <p>Time out</p>
+                      <p>{{getFormatedTime(service.durationEnd)}}</p>
+                    </div>
+                    <div class="col-md-1" style="width: 8%;">
+                      <p>Duration</p>
+                      <p>{{ service.quantity | durationFilter }}</p>
+                    </div>
+                  </div>
+                  <div class="table-content-bottom clearfix">
+                    <div class="col-md-12">
+                      <p>Description</p>
+                      <p class="pre-line" ng-bind-html="service.description"></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <div class="table-wrapper product-upd clearfix"
                    ng-repeat="product in ticketUpdate.products | orderBy: 'itemOrder'"
                    ng-if="ticketUpdate.type === 'PRODUCT'">
-                <!--<div class="table-content pull-left" ng-class="{'hide': product.id === editExpenseId}">-->
-                <!--<div class="col-2 col-2-has-serial-number fixed-tooltip" style="border-left: 0;"-->
-                <!--ng-class="{'has-ilc-pn': product.item.ilc || product.item.manufacture}">-->
-                <!--<span class="ellipsis pre-line" uib-tooltip="{{ product.item.description }}"-->
-                <!--trimmed-tooltip-checker="product.item.description"></span>-->
-                <!--<div style="color:#b2becd;font-size: 13px; line-height: 20px;">-->
-                <!--<span style="word-break: break-all" ng-show="product.item.ilc && product.item.ilc.length > 0">ILC: {{ product.item.ilc }}</span><br>-->
-                <!--<span style="word-break: break-all"-->
-                <!--ng-show="product.item.manufacture && product.item.manufacture.length > 0"-->
-                <!--&gt;P/N: {{ product.item.manufacture }}</span>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--<div class="col-3 ellipsis serial-width" ng-if="product.serialNumber"-->
-                <!--uib-tooltip="{{ product.serialNumber }}"-->
-                <!--trimmed-tooltip-checker="product.serialNumber">-->
-                <!--</div>-->
-                <!--<div class="col-5">-->
-                <!--<div class="ellipsis" ng-show="ticketDetails.status !== 'COMPLETED'"-->
-                <!--uib-tooltip="{{ product.item.sale * product.quantity || ''| currency :'$':2 }}"-->
-                <!--trimmed-tooltip-checker="product.item.sale * product.quantity || '' | currency :'$':2">-->
-                <!--</div>-->
-                <!--<div class="ellipsis" ng-show="ticketDetails.status === 'COMPLETED'"-->
-                <!--uib-tooltip="{{ product.sum | currency :'$':2 }}"-->
-                <!--trimmed-tooltip-checker="product.sum | currency:'$':2">-->
-                <!--</div>-->
-                <!--<div class="discount-ticket" ng-if="product.discountAmount>0">-->
-                <!--Discount:-->
-                <!--{{product.discountAmount}}&nbsp;%-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--<div class="col-4">-->
-                <!--<span class="ellipsis"-->
-                <!--uib-tooltip="{{ (product.item.sale | currency:'$':2) + '  Qty ' + product.quantity }}"-->
-                <!--trimmed-tooltip-checker="product.item.sale | currency:'$':2">-->
-                <!--</span>-->
-                <!--<span class="model">Qty {{ product.quantity }}</span>-->
-                <!--</div>-->
-                <!--<div class="table-content-action pull-right" ng-show="ticketDetails.status !== 'COMPLETED'">-->
-                <!--<a class="hit-area pull-right has-tooltip"-->
-                <!--tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit product"-->
-                <!--ng-click="setEditExpenseId(product.id, product, ticketUpdate.id)"-->
-                <!--custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">-->
-                <!--<i class="icon-sm edit-icon"></i>-->
-                <!--</a>-->
-                <!--<a class="hit-area pull-right has-tooltip"-->
-                <!--tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="delete product"-->
-                <!--ng-click="deleteExpence(ticketUpdate, [product.id], [])"-->
-                <!--custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">-->
-                <!--<i class="icon-sm icn-delete"></i>-->
-                <!--</a>-->
-                <!--</div>-->
-                <!--</div>-->
                 <div class="table-content pull-left" ng-class="{'hide': product.id === editExpenseId}">
                   <div class="table-content-top clearfix">
                     <div class="col-md-9 ellipsis">
@@ -746,7 +763,7 @@
                    ng-bind-html="getUpdateNote()">
               </div>
               <ul class="attachments clearfix" style="position: relative;"
-                  ng-if="ticketUpdate.type === 'NOTE' && ticketUpdate.attachments.length > 0">
+                  ng-if="((ticketUpdate.type === 'NOTE' && ticketUpdate.attachments.length > 0) || (ticketUpdate.type === 'MIXED'))">
                 <li class="{{ attachmentImageClass[attachment.file.contentType] }}"
                     ng-init="type = attachment.file.name.match(attachmentTypePattern)[0] || attachmentType[attachment.file.contentType]"
                     ng-repeat="attachment in ticketUpdate.attachments"
@@ -769,7 +786,7 @@
               </ul>
               <div class="ticket-update-product"
                    ng-repeat="product in ticketUpdate.products | orderBy: 'itemOrder'"
-                   ng-if="ticketUpdate.type === 'PRODUCT'">
+                   ng-if="ticketUpdate.type === 'PRODUCT'>
                 <!--@Leo for 'ticket-update-product-item' add class 'has-discount' if product has discount-->
                 <div class="ticket-update-product-item" ng-class="{'hide': product.id === editExpenseId}">
                   <div class="col desc-w" uib-tooltip="{{ product.item.description }}"
@@ -809,7 +826,7 @@
               </div>
               <div class="ticket-update-service"
                    ng-repeat="service in ticketUpdate.services | orderBy: 'itemOrder'"
-                   ng-if=" ticketUpdate.type === 'SERVICE'">
+                   ng-if=" ticketUpdate.type === 'SERVICE' || ticketUpdate.type === 'MIXED' ">
                 <div class="ticket-update-service-item">
                   <div class="ticket-update-service-date col w-26">
                     {{ service.date | date:'dd MMM yyyy'}}
@@ -838,6 +855,13 @@
                   </a>
                 </div>
               </div>
+              <p>222{{ticketUpdate.services | json}}333</p>
+              <div class="ticket-update-service"
+               ng-repeat="service in ticketUpdate.services"
+               ng-if="ticketUpdate.type === 'MIXED' ">
+               111 <p>{{service | json}}</p>222
+              </div>
+          <p>12351325123512351235123</p>
               <div class="ticket-update-meta clearfix" ng-init="showAllSharedUsers = false">
                 <div class="ticket-meta-wrapper">
                   <span class="update-timestamp pull-left">{{ ticketUpdate.createdAt | ticketCreateDate }}
@@ -885,7 +909,7 @@
           Ticket Update will be appear here</p>
         <img src="ng1/images/new-icons/no-ticketupdate.png" alt="">
       </div>
-      <div class="mob-ticket-buttons">
+      <div class="mob-ticket-buttons" ng-show="isLoaded">
         <button class="mob-add-ticket-btn mobile-btn primary"
                 ng-if="!(ticketDetails.status === 'COMPLETED') && !(!ticketDetails.assignPerformer || !ticketDetails.assignPerformer.id)"
                 ng-class="{ 'class-disabled': TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'billable') || TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'open') }"

@@ -1,7 +1,4 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Subject } from "rxjs";
 
 import { ApiPasswordManagerService } from "../../services/password-manager/api-password-manager.service";
@@ -43,8 +40,10 @@ export class PasswordManagerComponent implements OnInit {
     private companiesService: CompaniesService,
     private passwordManagerService: PasswordManagerService,
     private userService: UsersService,
-    private permissionsService: PermissionsService
-  ) {}
+    private permissionsService: PermissionsService,
+  ) {
+    this.companiesService.getCompaniesList();
+  }
 
   /**
    * Initializes Password manager. See [ngOnInit]{@see OnInit#ngOnInit}
@@ -56,7 +55,6 @@ export class PasswordManagerComponent implements OnInit {
     this.getSelectedDate();
     this.getCurrentUser();
     this.apiPasswordManagerService.getRecords();
-    this.companiesService.getCompaniesList();
     this.checkCloseFilters();
   };
 
@@ -149,11 +147,13 @@ export class PasswordManagerComponent implements OnInit {
    */
   public checkCloseFilters() {
     this.passwordManagerService.closeFilter.subscribe(() => {
-      console.log('0000000');
       this.isMobileFilterShowing = false
     } )
   }
 
+  /**
+   * destroy password manager component
+   */
   ngOnDestroy() {
     this.apiPasswordManagerService.deleteSubscription();
   }

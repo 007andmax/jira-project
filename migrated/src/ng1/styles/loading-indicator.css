@@ -19,6 +19,16 @@
   animation: spin 1s infinite linear;
 }
 
+.loading.xs {
+  top: 10px;
+  right: 10px;
+  left: auto;
+  width: 20px;
+  height: 20px;
+  border: 0.1rem solid #4f5f79;
+  border-top-color: #9ca5b6;
+}
+
 .loading-bg .loading {
   background: #ebebe4;
   z-index: 99;

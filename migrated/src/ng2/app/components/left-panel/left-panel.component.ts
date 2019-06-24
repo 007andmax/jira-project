@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-left-panel',
@@ -7,8 +8,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LeftPanelComponent implements OnInit {
 
-  constructor() {
+  public appType: string;
+
+
+  constructor(
+    private router: Router
+  ) {
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+    this.router.events
+      .subscribe((event) => {
+        const appType = this.router.url.startsWith('/ng2/quotes') ? '/ng2/quotes' : 'ng1';
+        this.setAppType(appType);
+      });
+  }
+
+  setAppType(appType) {
+    this.appType = appType;
+  }
+
+  isAppTypeIsNg2() {
+    return this.appType == '/ng2/quotes';
+  }
+
 }

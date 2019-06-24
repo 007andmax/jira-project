@@ -1,0 +1,17 @@
+.item-list {
+  width: 100%;
+  border-bottom: 1px solid red;
+  padding: 5px 10px;
+  cursor: pointer;
+  span {
+    width: 100%;
+  }
+}
+
+:host {
+  position: relative;
+  .no-valid {
+    border: 1px solid red;
+  }
+
+}

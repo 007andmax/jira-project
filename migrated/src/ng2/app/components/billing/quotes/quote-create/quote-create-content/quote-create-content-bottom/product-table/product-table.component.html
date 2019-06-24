@@ -1,0 +1,81 @@
+<div class="row"
+     *ngFor="let item of itemsListArray;  let i = index">
+  <!-- IF SERVICE -->
+  <div class="col-md-1"
+       style="width: 23%;"
+       *ngIf="!getMarkup(item)">
+    <div class="light-dropdown">
+      <input type="text"
+             class="pointer"
+             placeholder=""
+             (click)="toggleShowDropDown(i)"
+             [(ngModel)]="item.name || item.description ">
+      <i class="icn-sm report-caret-icon"></i>
+      <app-services-list
+        *ngIf="isDropDownShow[i] && !getMarkup(item)"
+        [itemList]="servicesList"
+        (selectedServicesItem)="setItem($event, i, 'service')"></app-services-list>
+    </div>
+  </div>
+  <div class="col-md-2"
+       *ngIf="!getMarkup(item)">
+    <input type="text"
+           [(ngModel)]="item && item.description"
+           placeholder="">
+  </div>
+
+  <!-- IF PRODUCT -->
+  <div class="col-md-3"
+       style="width: 47%;"
+       *ngIf="getMarkup(item)">
+    <div class="product-dropdown-new-ng light-dropdown">
+      <input type="text"
+             class="pointer"
+             placeholder=""
+             (click)="toggleShowDropDown(i)"
+             [(ngModel)]="item.name || item.description ">
+      <i class="icn-sm report-caret-icon"></i>
+      <app-product-list
+        *ngIf="isDropDownShow[i] && getMarkup(item)"
+        [itemList]="productList"
+        (selectedProductItem)="setItem($event, i, 'product')"></app-product-list>
+    </div>
+  </div>
+
+  <div class="col-md-1">
+    <input type="text"
+           [disabled]="!getMarkup(item)"
+           [ngModel]="item.cost"
+           (ngModelChange)="changeCost($event, i)"
+           placeholder="">
+  </div>
+  <div class="col-md-1">
+    <input type="text"
+           [(ngModel)]="item.markup"
+           [disabled]="!getMarkup(item)"
+           (ngModelChange)="changeMarkup($event, i)"
+           placeholder="">
+  </div>
+  <div class="col-md-1">
+    <input type="text"
+          [disabled]="!getMarkup(item)"
+           [ngModel]="(item.sale || item.rate)"
+           (ngModelChange)="changeSales($event, i)"
+           placeholder="">
+  </div>
+  <div class="col-md-1">
+    <input type="text"
+           [(ngModel)]="item && item.quantity"
+           (ngModelChange)="changedQuantity($event, i)"
+           placeholder="">
+  </div>
+  <div class="col-md-1 text-right"
+       style="width: 6%;padding: 8px 15px;">
+    {{getTaxPrice((item.sale || item.rate), item.quantity, item.taxes) | currency}}
+  </div>
+  <div class="col-md-1 text-right"
+       style="width: 6%;padding: 8px 15px;">
+    {{getPrice((item.sale || item.rate), item.quantity, item.taxes) | currency}}
+  </div>
+  <i class="icn-delete" (click)="deleteItem(i)"></i>
+</div>

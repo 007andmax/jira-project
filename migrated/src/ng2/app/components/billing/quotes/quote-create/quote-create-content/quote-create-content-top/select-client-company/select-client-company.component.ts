@@ -1,0 +1,97 @@
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { merge, Observable, Subject } from "rxjs";
+import { CompaniesService } from "../../../../../../../services/company/companies.service";
+import { ISubscription } from "rxjs/Subscription";
+import { debounceTime, distinctUntilChanged, filter, map } from "rxjs/operators";
+import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
+import { FormGroup } from "@angular/forms";
+
+/**
+ *  Select client component
+ */
+@Component({
+  selector: 'app-select-client-company',
+  templateUrl: './select-client-company.component.html',
+  styleUrls: ['./select-client-company.component.scss']
+})
+export class SelectClientCompanyComponent implements OnInit {
+
+  @ViewChild('instance') instance: NgbTypeahead;
+  @Output() selectedItem = new EventEmitter<any>();
+  @Input() formGroup: FormGroup;
+  @Input() editItem: any;
+  public selectedClient;
+  public subGetCompaniesList: ISubscription;
+  public clientsList: any;
+  focus$ = new Subject<string>();
+  click$ = new Subject<string>();
+
+  /**
+   *Creates an instance of the SelectClientCompanyComponent with the injected services
+   * @param {CompaniesService} companiesService to work with companiies
+   */
+  constructor(
+    private companiesService: CompaniesService
+  ) { }
+
+  /**
+   * Initializes select client. See [ngOnInit]{@see OnInit#ngOnInit}
+   */
+  ngOnInit() {
+    this.getCLientsList();
+    if (this.editItem) {
+      this.selectedClient = this.editItem;
+      this.selectedItem.emit(this.editItem);
+    }
+  }
+
+  /**
+   * Get client list
+   */
+  private getCLientsList() {
+    this.subGetCompaniesList = this.companiesService.clientsCompany.subscribe((res: any) => {
+      this.clientsList = res
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .filter((item) => !item.deletedAt)
+
+    })
+  }
+
+  /**
+   * boootstrap search method
+   */
+  search = (text$: Observable<string>) => {
+    const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
+    const clicksWithClosedPopup$ = this.click$.pipe(filter(() => !this.instance.isPopupOpen()));
+    const inputFocus$ = this.focus$;
+    return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
+      map(term => (term === '' ? this.clientsList
+        : this.clientsList && this.clientsList
+        .filter(v => v['name'].toLowerCase().indexOf(term.toLowerCase()) > -1)))
+    );
+  };
+
+  /**
+   * set selected item
+   */
+  public selectItem(companyId) {
+    this.selectedItem.emit(companyId);
+
+  }
+
+  /**
+   * formatter for bootstrap result
+   */
+  formatter = (result: string) => {
+    return result['name'];
+  };
+
+  /**
+   * clear client input
+   */
+  public clearClient() {
+    this.selectedItem.emit('null');
+    this.selectedClient = null;
+  }
+
+}

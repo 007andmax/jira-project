@@ -36,7 +36,8 @@ export class PasswordManagerTableComponent implements OnInit {
     this.getRecords();
     this.getSelectedCategory();
     this.subAddNewRecords = this.addNewRecords.subscribe(v => {
-      this.getRecords();
+      console.log('1251235');
+      this.apiPasswordManagerService.getRecords();
     });
     this.watchDeleteRecord();
   }
@@ -48,8 +49,10 @@ export class PasswordManagerTableComponent implements OnInit {
   }
 
   getRecords() {
+    console.log('----');
     this.subGetRecords = this.apiPasswordManagerService.dataChange.subscribe((res) => {
-      this.recordsData = res;
+      console.log(this.recordsData, 'this.recordsData');
+      return this.recordsData = res;
     });
   }
 

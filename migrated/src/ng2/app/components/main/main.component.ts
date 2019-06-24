@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationStart, Router } from "@angular/router";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-main',
@@ -13,7 +13,7 @@ export class MainComponent implements OnInit {
   constructor(private router: Router) {
      this.router.events
       .subscribe((event) => {
-        const appType = this.router.url.startsWith('/ng2') ? 'ng2' : 'ng1';
+        const appType = (this.router.url.startsWith('/ng2') || this.router.url.startsWith('/#/ng2')) ? 'ng2' : 'ng1';
         this.setAppType(appType);
       });
   }

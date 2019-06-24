@@ -1,0 +1,8 @@
+<div class="dropdown-menu show">
+  <button class="dropdown-item"
+          *ngFor="let item of itemList"
+          (click)="selectServicesItem(item)"
+  >
+    {{item.name}}
+  </button>
+</div>

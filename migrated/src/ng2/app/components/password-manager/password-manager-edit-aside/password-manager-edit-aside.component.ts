@@ -86,7 +86,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public opened: boolean = false;
 
   public _toggleSidebar() {
-    console.log('_toggleSidebar');
+
     this.submitted = false;
     this.showSelect = false;
     this.userDevice = [];
@@ -99,7 +99,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
   public showAddForm() {
     this.subShowAddForm = this.passwordManagerService.showAddForm.subscribe((res) => {
-      console.log('showAddForm');
       this.editItem = res;
       if (this.editItem) this.isEditmode = true;
       this.opened = true;
@@ -109,7 +108,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
   public hideAddForm() {
     this.subHideAddForm = this.passwordManagerService.hideAddForm.subscribe((res) => {
-      console.log('hideAddForm');
       this.submitted = false;
       this.showSelect = false;
       this.userDevice = [];
@@ -130,7 +128,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public initForm(){
-    console.log('test');
     this.expiryDate = this.editItem && this.editItem.expiredDate ? this.getStartDate(this.editItem.expiredDate) : null;
     this.createPasswordRecord = this.fb.group({
       description: [this.editItem ? this.editItem.description : '', Validators.maxLength(5000)],
@@ -156,6 +153,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
   public save() {
     this.submitted = true;
+    console.log(this.createPasswordRecord, 'createPasswordRecord');
     const isUserRequired = this.checkLinks();
     const isSsidRequired = this.checkSsid();
     if (this.type === 8) this.createPasswordRecord.controls['userName'].setValue('block');
@@ -169,7 +167,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       this.subSaveRecord = this.passwordManagerService.saveRecord(this.createPasswordRecord.value)
         .subscribe((res) => this.afterSaveRecord());
     }
-
   }
 
   public afterSaveRecord() {
@@ -181,7 +178,6 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.submitted = false;
     this.type = 0;
     this.opened = false;
-
   }
 
   checkLinks() {
@@ -204,6 +200,10 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       }
       this.showGadgetsForm = false;
     }
+  }
+
+  get form() {
+    return this.createPasswordRecord.controls;
   }
 
   changeSelectedUserAndDevices(newItem, index?, type?) {
@@ -327,22 +327,34 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     })
   }
 
+  /**
+   * show selecct wrapper
+   */
   public showSelectWrapper($event) {
     this.showSelect = !this.showSelect;
     this.stopEvent($event);
   }
 
+  /**
+   * hide select wrapper
+   */
   public hideSelectWrapper() {
     this.showSelect = false;
     this.showGadgetsForm = false;
   }
 
+  /**
+   * set current tab
+   */
   public setCurrentTab($event, item) {
     this.stopEvent($event);
     this.currentTab = item;
     this.showGadgetsForm = false;
   }
 
+  /**
+   * get all users
+   */
   private getAllUsers(companyId) {
     this.subGetAllUsers = this.userService.getAllusers().subscribe((res: any) => {
       res = res.filter((item) =>  item.company.id == companyId && !item.deletedAt);
@@ -362,6 +374,9 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     })
   }
 
+  /**
+   * add gadgets form
+   */
   public addGadgetsform() {
     const clientCompanyId = this.createPasswordRecord.value.client.id;
     const name = this.newGadgets;
@@ -371,11 +386,17 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     })
   }
 
+  /**
+   * get show gadgets add form
+   */
   public showGadgetsAddForm($event) {
     this.stopEvent($event);
     this.showGadgetsForm = !this.showGadgetsForm;
   }
 
+  /**
+   * get gadgets
+   */
   public getGadgets() {
     this.subGetGadgets = this.gadgetsService.getCompanyDevices().subscribe((res: any) => {
       this.gadgets = [...res];
@@ -397,17 +418,26 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     });
   }
 
+  /**
+   * stop event
+   */
   private stopEvent($event) {
     $event.preventDefault();
     $event.stopPropagation();
   }
 
+  /**
+   * delete gadget
+   */
   public deleteGadget($event, id) {
     this.stopEvent($event);
     this.gadgetsService.deleteGadget(id)
       .subscribe((res: any) => this.gadgets = this.gadgets.filter((item) => item.id !== id))
   }
 
+  /**
+   * change checked
+   */
   public changeChecked(type, i) {
     if (type === 'user') {
       this.usersCheckbox[i] = !this.usersCheckbox[i];
@@ -418,10 +448,16 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     }
   }
 
+  /**
+   * get history date
+   */
   public getHistoryDate(date) {
     return moment(date).format('DD MMMM, YYYY')
   }
 
+  /**
+   * get edit template
+   */
   public getEditTemplate(template) {
     const index  = PASSWORD_RECORD_TYPES.findIndex((item) => item.UPPERCASE === template);
     this.currentType = PASSWORD_RECORD_TYPES[index];
@@ -429,6 +465,9 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     return PASSWORD_RECORD_TYPES[index];
   }
 
+  /**
+   * get edit compnay
+   */
   public getEditCompany(id) {
     if (this.clientsList) {
       const company = this.clientsList.filter((item) => item.id === id);
@@ -437,6 +476,9 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     }
   }
 
+  /**
+   * get start date
+   */
   public getStartDate(date) {
     const dateTime = moment(date);
     return ({
@@ -446,7 +488,10 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     });
   }
 
-  deleteRecord(recordId){
+  /**
+   * delete record
+   */
+  public deleteRecord(recordId){
     this.passwordManagerService.deleteRecordFromEditForm(recordId);
     this.hideAddForm();
   }
@@ -458,18 +503,24 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     return this.permissionsService.isAllowed(action)
   }
 
+  /**
+   * Destroy password manager edit component
+   */
   ngOnDestroy() {
     this.apiPasswordManagerService.deleteSubscription();
-    this.subShowAddForm.unsubscribe();
-    this.subHideAddForm.unsubscribe();
-    this.subGetGadgets.unsubscribe();
-    this.subGetAllUsers.unsubscribe();
-    this.subSaveEditRecord.unsubscribe();
-    this.subSaveRecord.unsubscribe();
-    this.subGetDevices.unsubscribe();
-    this.subGetCompaniesList.unsubscribe();
+    this.subShowAddForm && this.subShowAddForm.unsubscribe();
+    this.subHideAddForm && this.subHideAddForm.unsubscribe();
+    this.subGetGadgets && this.subGetGadgets.unsubscribe();
+    this.subGetAllUsers && this.subGetAllUsers.unsubscribe();
+    this.subSaveEditRecord && this.subSaveEditRecord.unsubscribe();
+    this.subSaveRecord && this.subSaveRecord.unsubscribe();
+    this.subGetDevices && this.subGetDevices.unsubscribe();
+    this.subGetCompaniesList && this.subGetCompaniesList.unsubscribe();
   }
 
+  /**
+   * Show history
+   */
   showHistory($event) {
     this.stopEvent($event);
     // @ts-ignore

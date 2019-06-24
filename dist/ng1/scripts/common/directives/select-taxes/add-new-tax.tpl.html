@@ -1,0 +1,78 @@
+<div class="new-tax" ng-form="newTaxForm" ng-controller="quicktech.core.settings.taxesCtrl">
+  <div class="helping-additional-class modal-new-tax clearfix" >
+    <div class="close-btn btn" ng-click="closeModal()" tabindex="1">
+      <i class="icn-sm icn-remove-old"></i>
+    </div>
+
+    <div class="col-1" style="width: 293px;" ng-class="{'has-error': isShowingErrors(newTaxForm, 'name')}">
+
+      <label class="control-label" ng-class="{'hide': isShowingErrors(newTaxForm, 'name')}">
+        Name
+      </label>
+
+      <div ng-messages="newTaxForm.name.$error"
+           ng-class="{'hide': !isShowingErrors(newTaxForm, 'name')}">
+
+        <label class="control-label" ng-message="required">
+          Name is required.
+        </label>
+
+        <label class="control-label" ng-message="unique">
+          Name is already taken.
+        </label>
+
+        <label class="control-label" ng-message="minlength">
+          Name is too short.
+        </label>
+
+        <label class="control-label" ng-message="maxlength">
+          Name is too long.
+        </label>
+      </div>
+
+      <input no-select type="text" class="form-control" name="name" ng-model="newTax.name" required
+             is-uniq-validation validation-func="isUniqueName" ng-minlength="2" ng-maxlength="30">
+    </div>
+
+    <div class="col-1" style="width: 100px;" ng-class="{'has-error': isShowingErrors(newTaxForm, 'rate')}">
+
+      <p style="margin-bottom: 0">
+        <label class="control-label" ng-class="{'hide': isShowingErrors(newTaxForm, 'rate')}">
+          Rate (%)
+        </label>
+      </p>
+
+      <div ng-messages="newTaxForm.rate.$error" ng-class="{'hide': !isShowingErrors(newTaxForm, 'rate')}">
+        <label style="white-space: nowrap;" class="control-label" ng-message="required">
+          Required.
+        </label>
+        <label style="white-space: nowrap;" class="control-label" ng-message="number">
+          Only numbers.
+        </label>
+        <label style="white-space: nowrap;" class="control-label" ng-message="min">
+          To small.
+        </label>
+        <label style="white-space: nowrap;" class="control-label" ng-message="max">
+          To large.
+        </label>
+      </div>
+
+      <input no-select type="number" class="form-control" ng-model="newTax.rate" name="rate"
+             required min="0.01" max="99">
+    </div>
+
+    <div class="default-tax">
+      <div>Default</div>
+      <label class="control checkbox pull-left" style="margin: 10px 0 0 13px;">
+        <input no-select type="checkbox" ng-model="newTax.isDefault">
+        <span class="control-indicator"></span>
+      </label>
+    </div>
+    <div class="btn btn-lg btn-success pull-right"
+         style="transform: translateY(65%)"
+         ng-click="saveNewTax(newTaxForm)"
+         custom-disabled="{{ newTaxForm.$invalid || newTaxForm.$pristine }}">
+      Add
+    </div>
+  </div>
+</div>

@@ -753,6 +753,7 @@ _::-webkit-:not(:root:root),
 }
 
 .invoice--header, .invoice--content, .invoice--footer,
+.quote--header, .quote--content, .quote--footer,
 .email--header, .email--content, .email--footer,
 .service--header, .service--content, .service--footer,
 .user--header, .user--content, .user--footer,
@@ -762,16 +763,19 @@ _::-webkit-:not(:root:root),
   padding: 30px 40px;
 }
 
-.email--header {
+.email--header,
+.quote--header {
   padding: 28px 40px;
 }
 
-.email--content {
+.email--content,
+.quote--content {
   padding: 25px 40px;
 }
 
 .invoice--footer,
 .email--footer,
+.quote--footer,
 .company--footer,
 .product--footer,
 .ticket--footer,
@@ -1000,6 +1004,7 @@ _::-webkit-:not(:root:root),
 }
 
 .invoice--header,
+.quote--header,
 .email--header,
 .service--header,
 .user--header,
@@ -1014,6 +1019,7 @@ _::-webkit-:not(:root:root),
 }
 
 .invoice--header button,
+.quote--header button,
 .email--header button,
 .service--header button,
 .user--header button,
@@ -1029,6 +1035,7 @@ _::-webkit-:not(:root:root),
 
 .invoice--header h2,
 .email--header h2,
+.quote--header h2,
 .service--header h2,
 .user--header h2,
 .ticket--header h2,
@@ -1042,6 +1049,7 @@ _::-webkit-:not(:root:root),
 
 .invoice--content,
 .email--content,
+.quote--content,
 .service--content,
 .user--content,
 .ticket--content,
@@ -1050,53 +1058,63 @@ _::-webkit-:not(:root:root),
   margin: 0 -15px;
 }
 
-.email--content .tags {
+.email--content .tags,
+.quote--content .tags {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
 }
 
-.email--content .tags-action {
+.email--content .tags-action,
+.quote--content .tags-action {
   min-width: 100px;
   flex: 1;
-  padding-bottom: 10px;
 }
 
-.email--content .tags-wrap {
+.email--content .tags-wrap,
+.quote--content .tags-wrap {
   margin: 0;
   border: none;
   border-bottom: 1px solid #e5e7eb;
 }
 
-.email--content .tags-wrap input {
+.email--content .tags-wrap input,
+.quote--content .tags-wrap input {
   border: none;
 }
 
-.email--content .tags-wrap.focused {
+.email--content .tags-wrap.focused,
+.quote--content .tags-wrap.focused {
   border-color: #16a4fa !important;
+  border-radius: 0;
 }
 
-.email--content .tags-wrap .tags {
+.email--content .tags-wrap .tags,
+.quote--content .tags-wrap .tags {
   padding: 0;
   width: 100%;
 }
 
-.email--content .tags-wrap .tags .tag-label {
+.email--content .tags-wrap .tags .tag-label,
+.quote--content .tags-wrap .tags .tag-label {
   padding: 9px 15px 9px 5px;
   border-radius: 3px !important;
   border: 1px solid #edf2f6;
 }
 
-.email--content .tags-wrap .tags .tag-label span {
+.email--content .tags-wrap .tags .tag-label span,
+.quote--content .tags-wrap .tags .tag-label span {
   font-size: 12px;
   color: #4f5f79;
 }
 
-.email--content .tags-wrap .tags .tag-label .remove-tag {
+.email--content .tags-wrap .tags .tag-label .remove-tag,
+.quote--content .tags-wrap .tags .tag-label .remove-tag {
   top: 10px;
 }
 
-.email--content .tags-wrap .tags input {
+.email--content .tags-wrap .tags input,
+.quote--content .tags-wrap .tags input {
   width: 100%;
 }
 
@@ -1142,6 +1160,7 @@ _::-webkit-:not(:root:root),
 
 .invoice--content input,
 .email--content input,
+.quote--content input,
 .service--content input,
 .user--content input,
 .ticket--content input,
@@ -1150,6 +1169,7 @@ _::-webkit-:not(:root:root),
 .product--content input,
 .product--content textarea,
 .email--content .form-control,
+.quote--content .form-control,
 .invoice--content .form-control,
 .service--content .form-control,
 .user--content .form-control,
@@ -1167,6 +1187,7 @@ _::-webkit-:not(:root:root),
 
 .invoice--content [class*='col-md-'],
 .email--content [class*='col-md-'],
+.quote--content [class*='col-md-'],
 .service--content [class*='col-md-'],
 .user--content [class*='col-md-'],
 .ticket--content [class*='col-md-'],
@@ -1176,11 +1197,13 @@ _::-webkit-:not(:root:root),
   margin-bottom: 20px;
 }
 
-.email--content [class*='col-md-'] {
+.email--content [class*='col-md-'],
+.quote--content [class*='col-md-'] {
   margin-bottom: 17px;
 }
 
 .email--content input::placeholder,
+.quote--content input::placeholder,
 .invoice--content input::placeholder,
 .service--content input::placeholder,
 .user--content input::placeholder,
@@ -1197,6 +1220,7 @@ _::-webkit-:not(:root:root),
 
 .invoice--content p,
 .email--content p,
+.quote--content p,
 .service--content p,
 .user--content p,
 .ticket--content p,
@@ -1209,6 +1233,7 @@ _::-webkit-:not(:root:root),
 
 .invoice--content label,
 .email--content label,
+.quote--content label,
 .service--content label,
 .add-tax-dropdown label {
   color: #4f5f79;
@@ -1268,12 +1293,14 @@ _::-webkit-:not(:root:root),
   padding-left: 12px;
 }
 
-.invoice-create--header__btn .btn {
+.invoice-create--header__btn .btn,
+.quote-create--header__btn .btn {
   font-size: 13px !important;
 }
 
 .save-invoice-button .dropdown-menu li,
-.invoice-create--header__btn li {
+.invoice-create--header__btn li,
+.quote-create--header__btn li {
   font-size: 13px;
   transition: all .3s;
   height: 40px;
@@ -1283,7 +1310,8 @@ _::-webkit-:not(:root:root),
 }
 
 .save-invoice-button .dropdown-menu li:hover,
-.invoice-create--header__btn li:hover {
+.invoice-create--header__btn li:hover,
+.quote-create--header__btn li:hover {
   background-color: #16a4fa;
   color: #fff;
   font-weight: normal;
@@ -1360,13 +1388,15 @@ _::-webkit-:not(:root:root),
   border-bottom-left-radius: 0 !important;
 }
 
-.email-text-block {
+.email-text-block,
+.quote-text-block {
   border: 1px solid #edf2f6;
   border-radius: 4px;
   padding: 14px 20px;
 }
 
-.textarea.email-text-block {
+.textarea.email-text-block,
+.textarea.quote-text-block {
   width: 100%;
   min-height: 273px;
   outline: none;
@@ -1374,11 +1404,13 @@ _::-webkit-:not(:root:root),
   padding: 22px 20px;
 }
 
-.textarea.email-text-block::placeholder {
+.textarea.email-text-block::placeholder,
+.textarea.quote-text-block::placeholder {
   color: #c0bfcd;
 }
 
-.email-text-block textarea {
+.email-text-block textarea,
+.quote-text-block textarea {
   height: 170px;
   width: 100%;
   border: none;
@@ -1433,7 +1465,8 @@ _::-webkit-:not(:root:root),
   color: #4f5f79;
 }
 
-.create-email-form .create-new-link:before {
+.create-email-form .create-new-link:before,
+.create-quote-form .create-new-link:before {
   bottom: -1px;
   width: 100%;
 }
@@ -1443,15 +1476,18 @@ _::-webkit-:not(:root:root),
   bottom: 40px;
 }
 
-.create-email-form .email--content {
+.create-email-form .email--content,
+.create-quote-form .quote--content {
   padding-bottom: 0;
 }
 
-.create-new.create-email-form .email--footer .btn {
+.create-new.create-email-form .email--footer .btn,
+.create-new.create-quote-form .quote--footer .btn {
   width: 148px !important;
 }
 
-.create-new.create-email-form .email--footer .btn.btn-default {
+.create-new.create-email-form .email--footer .btn.btn-default,
+.create-new.create-quote-form .quote--footer .btn.btn-default {
   width: 111px !important;
 }
 
@@ -1463,7 +1499,8 @@ _::-webkit-:not(:root:root),
   padding-top: 8px;
 }
 
-.email-text-block textarea::placeholder {
+.email-text-block textarea::placeholder,
+.quote-text-block textarea::placeholder {
   color: #9ca5b6;
 }
 

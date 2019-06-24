@@ -29,10 +29,11 @@ export class UsersService {
   }
 
   changeUserPermissions(permissions) {
-    console.log(this.currentUser, '12351');
-    console.log(permissions, '12351');
     return this.currentUser.permissions = permissions;
+  }
 
+  getCurrentUserInfo() {
+    return this.http.get(this.apiUrl + 'users/current');
   }
 
 }

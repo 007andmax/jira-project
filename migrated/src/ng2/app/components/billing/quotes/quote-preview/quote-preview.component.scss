@@ -1,0 +1,56 @@
+.quote-create {
+  &--header {
+    &__btn {
+      > button {
+        &:first-child {
+          width: 110px;
+        }
+        &:nth-child(2) {
+          width: 82px;
+        }
+        &:last-child {
+          width: 184px;
+        }
+        &:not(:last-child) {
+          margin-right: 8px;
+        }
+        i {
+          margin-left: 6px;
+        }
+      }
+    }
+  }
+}
+
+.quote-list {
+  &--header {
+    &__top {
+      padding-bottom: 20px;
+    }
+  }
+  &--item {
+    padding: 0;
+    .col-md-4 {
+      width: 42%;
+    }
+
+    .col-md-2 {
+      width: 12%;
+    }
+    &__header {
+      background: #4f5f79;
+      color: #edf2f6;
+      font-size: 11px;
+      font-family: "Graphik Semibold", sans-serif;
+    }
+    &__content {
+      padding: 20px 15px;
+      font-size: 13px;
+      .row {
+        &:not(:last-child) {
+          margin-bottom: 20px;
+        }
+      }
+    }
+  }
+}
