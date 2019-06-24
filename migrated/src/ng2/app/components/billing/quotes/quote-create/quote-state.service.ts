@@ -242,8 +242,8 @@ export class QuoteStateService {
     const itemsArray = [...quote.products, ...quote.services];
     this.setItemArray(itemsArray);
     this.setNumber(quote.number);
-    this.setEndDate(this.dateService.getStartDate(quote.date));
-    this.setStartDate(this.dateService.getStartDate(quote.endDate));
+    this.setEndDate(this.dateService.getStartDate(quote.validUntil));
+    this.setStartDate(this.dateService.getStartDate(quote.date));
     this.setGlobalNote(quote.globalNote);
     this.setSelectedNote(quote.regularNote);
     this.setPartialDeposit(quote.partialDeposit);
