@@ -1,3 +1,6 @@
+/**
+ * Quote status
+ */
 export const QUOTE_STATUS = [
   {
     type: 'DRAFT',

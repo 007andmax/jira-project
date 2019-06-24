@@ -1,3 +1,6 @@
+/**
+ * Password records type
+ */
 export const PASSWORD_RECORD_TYPES = [
   {
     TITLE: 'Office 365 Account',

@@ -355,7 +355,6 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   }
 
   public closeMobileFilters() {
-    console.log('12351235');
     this.passwordManagerService.closeFilters();
   }
 

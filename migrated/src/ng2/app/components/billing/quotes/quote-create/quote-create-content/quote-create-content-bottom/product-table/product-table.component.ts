@@ -47,6 +47,7 @@ export class ProductTableComponent implements OnInit {
 
   /**
    * Hide dropdown for services and products
+   * @param i - item index
    */
   hideDropDown(i) {
     this.isDropDownShow[i] = false ;
@@ -64,6 +65,9 @@ export class ProductTableComponent implements OnInit {
 
   /**
    * get item price
+   * @param cost - item cost
+   * @param count - item count
+   * @param tax - item tax
    */
   public getPrice(cost, count, tax) {
     return this.quoteStateService.roundToTwo(this.quoteStateService.getPrice(cost, count, tax) + this.quoteStateService.getTaxPrice(cost, count, tax)) ;
@@ -71,6 +75,9 @@ export class ProductTableComponent implements OnInit {
 
   /**
    * get item tax price
+   * @param cost - item cost
+   * @param count - item count
+   * @param tax - item tax
    */
   public getTaxPrice(cost, count, tax) {
     return this.quoteStateService.roundToTwo(this.quoteStateService.getTaxPrice(cost, count, tax));
@@ -78,6 +85,7 @@ export class ProductTableComponent implements OnInit {
 
   /**
    * delete item from array
+   * @param index - item index
    */
   public deleteItem(index) {
     this.itemsListArray.splice(index, 1);
@@ -86,6 +94,8 @@ export class ProductTableComponent implements OnInit {
 
   /**
    * change item quantity
+   * @param value - item value
+   * @param index - item index
    */
   public changedQuantity(value, index) {
     this.itemsListArray[index].quantity = value;
@@ -94,6 +104,7 @@ export class ProductTableComponent implements OnInit {
 
   /**
    * toggle dropdown show status
+   * @param index - item index
    */
   public toggleShowDropDown(i) {
     this.isDropDownShow[i] = !this.isDropDownShow[i];
@@ -114,6 +125,9 @@ export class ProductTableComponent implements OnInit {
 
   /**
    * set new item
+   * @param item - new item
+   * @param index - new item index
+   * @param type - new item type
    */
   public setItem(item, index, type) {
     if (type === 'service') {
@@ -128,6 +142,7 @@ export class ProductTableComponent implements OnInit {
 
   /**
    * check item has markup
+   * @param index - item index
    */
   public getMarkup(item) {
     return item.hasOwnProperty('markup');
@@ -135,6 +150,8 @@ export class ProductTableComponent implements OnInit {
 
   /**
    * change item markup
+   * @param value - item value
+   * @param index - item index
    */
   public changeMarkup(value, index) {
     const item = this.itemsListArray[index];
@@ -145,6 +162,8 @@ export class ProductTableComponent implements OnInit {
 
   /**
    * change item sales
+   * @param value - item value
+   * @param index - item index
    */
   public changeSales(value, index) {
     const item = this.itemsListArray[index];
@@ -159,6 +178,8 @@ export class ProductTableComponent implements OnInit {
 
   /**
    * change item cost
+   * @param value - item value
+   * @param index - item index
    */
   public changeCost(value, index) {
     const item = this.itemsListArray[index];

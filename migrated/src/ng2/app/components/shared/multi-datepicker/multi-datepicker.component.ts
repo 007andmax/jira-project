@@ -2,6 +2,9 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgbDate, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { DateService } from "../../../services/date/date.service";
 
+/**
+ * Multi date picker
+ */
 @Component({
   selector: 'app-multi-datepicker',
   templateUrl: './multi-datepicker.component.html',
@@ -10,7 +13,6 @@ import { DateService } from "../../../services/date/date.service";
 export class MultiDatepickerComponent implements OnInit {
 
   hoveredDate: NgbDate;
-
   fromDate: NgbDate;
   toDate: NgbDate;
   public navigation = 'select';
@@ -18,6 +20,11 @@ export class MultiDatepickerComponent implements OnInit {
   public selectedDateModel = '';
   @Output() selectedDate = new EventEmitter<any>();
 
+  /**
+   * Creates an instance of the MultiDatepickerComponent with the injected services
+   * @param {NgbCalendar} calendar Service to work with date
+   * @param {DateService} dateService Service to work with date
+   */
   constructor (
     private calendar: NgbCalendar,
     private dateService: DateService
@@ -25,6 +32,10 @@ export class MultiDatepickerComponent implements OnInit {
 
   ngOnInit() {}
 
+  /**
+   * check type for hover
+   * @param date - date for select
+   */
   onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {
       this.fromDate = date;
@@ -44,26 +55,47 @@ export class MultiDatepickerComponent implements OnInit {
     }
   }
 
+  /**
+   * check type for hover
+   * @param date - date range for check
+   */
   isHovered(date: NgbDate) {
     return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
   }
 
-  isInside(date: NgbDate) {
+  /**
+   * check is inside
+   * @param date - date range for check
+   */
+  public isInside(date: NgbDate) {
     return date.after(this.fromDate) && date.before(this.toDate);
   }
 
-  isRange(date: NgbDate) {
+  /**
+   * check type for range
+   * @param date - date range for check
+   */
+  public isRange(date: NgbDate) {
     return date.equals(this.fromDate) || date.equals(this.toDate) || this.isInside(date) || this.isHovered(date);
   }
 
+  /**
+   * toggle date picker
+   */
   public toggleDatePicker() {
     this.showDatePicker = !this.showDatePicker;
   }
 
+  /**
+   * Hide datepicker
+   */
   public hideDatePicker() {
     this.showDatePicker = false;
   }
 
+  /**
+   * Set selected date
+   */
   public setSelectedDateModel(start, end) {
     if (start && end) {
       const startDate = new Date(this.dateService.getDateFromBootstrap(start));
@@ -74,7 +106,10 @@ export class MultiDatepickerComponent implements OnInit {
     }
   }
 
-  clearDate() {
+  /**
+   * Clear date picker date
+   */
+  public clearDate() {
     this.selectedDate.next({
       start: '',
       end: ''

@@ -67,6 +67,7 @@ export class QuoteCreateContentBottomComponent implements OnInit {
 
   /**
    * add item to array
+   * @param item - new item
    */
   public addItemToItemsArray(item) {
     this.itemsArray.push(item);
@@ -143,7 +144,6 @@ export class QuoteCreateContentBottomComponent implements OnInit {
       this.totalTaxes = 0;
       this.quoteStateServices.setTotalTaxes(this.totalTaxes);
     }
-
   }
 
   /**
@@ -155,6 +155,7 @@ export class QuoteCreateContentBottomComponent implements OnInit {
 
   /**
    * change type
+   * @param type - new type
    */
   public changeType(type) {
     this.type = type;
@@ -162,6 +163,7 @@ export class QuoteCreateContentBottomComponent implements OnInit {
 
   /**
    * refresh and calculate items array
+   * @param value - new items array value
    */
   public refreshItemsArray(value) {
     this.itemsArray = value;
