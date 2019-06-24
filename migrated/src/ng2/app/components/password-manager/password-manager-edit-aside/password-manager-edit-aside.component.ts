@@ -327,22 +327,34 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     })
   }
 
+  /**
+   * show selecct wrapper
+   */
   public showSelectWrapper($event) {
     this.showSelect = !this.showSelect;
     this.stopEvent($event);
   }
 
+  /**
+   * hide select wrapper
+   */
   public hideSelectWrapper() {
     this.showSelect = false;
     this.showGadgetsForm = false;
   }
 
+  /**
+   * set current tab
+   */
   public setCurrentTab($event, item) {
     this.stopEvent($event);
     this.currentTab = item;
     this.showGadgetsForm = false;
   }
 
+  /**
+   * get all users
+   */
   private getAllUsers(companyId) {
     this.subGetAllUsers = this.userService.getAllusers().subscribe((res: any) => {
       res = res.filter((item) =>  item.company.id == companyId && !item.deletedAt);
@@ -362,6 +374,9 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     })
   }
 
+  /**
+   * add gadgets form
+   */
   public addGadgetsform() {
     const clientCompanyId = this.createPasswordRecord.value.client.id;
     const name = this.newGadgets;
@@ -371,11 +386,17 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     })
   }
 
+  /**
+   * get show gadgets add form
+   */
   public showGadgetsAddForm($event) {
     this.stopEvent($event);
     this.showGadgetsForm = !this.showGadgetsForm;
   }
 
+  /**
+   * get gadgets
+   */
   public getGadgets() {
     this.subGetGadgets = this.gadgetsService.getCompanyDevices().subscribe((res: any) => {
       this.gadgets = [...res];
@@ -397,17 +418,26 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     });
   }
 
+  /**
+   * stop event
+   */
   private stopEvent($event) {
     $event.preventDefault();
     $event.stopPropagation();
   }
 
+  /**
+   * delete gadget
+   */
   public deleteGadget($event, id) {
     this.stopEvent($event);
     this.gadgetsService.deleteGadget(id)
       .subscribe((res: any) => this.gadgets = this.gadgets.filter((item) => item.id !== id))
   }
 
+  /**
+   * change checked
+   */
   public changeChecked(type, i) {
     if (type === 'user') {
       this.usersCheckbox[i] = !this.usersCheckbox[i];
@@ -418,10 +448,16 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     }
   }
 
+  /**
+   * get history date
+   */
   public getHistoryDate(date) {
     return moment(date).format('DD MMMM, YYYY')
   }
 
+  /**
+   * get edit template
+   */
   public getEditTemplate(template) {
     const index  = PASSWORD_RECORD_TYPES.findIndex((item) => item.UPPERCASE === template);
     this.currentType = PASSWORD_RECORD_TYPES[index];
@@ -429,6 +465,9 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     return PASSWORD_RECORD_TYPES[index];
   }
 
+  /**
+   * get edit compnay
+   */
   public getEditCompany(id) {
     if (this.clientsList) {
       const company = this.clientsList.filter((item) => item.id === id);
@@ -437,6 +476,9 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     }
   }
 
+  /**
+   * get start date
+   */
   public getStartDate(date) {
     const dateTime = moment(date);
     return ({
@@ -446,7 +488,10 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     });
   }
 
-  deleteRecord(recordId){
+  /**
+   * delete record
+   */
+  public deleteRecord(recordId){
     this.passwordManagerService.deleteRecordFromEditForm(recordId);
     this.hideAddForm();
   }
@@ -458,6 +503,9 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     return this.permissionsService.isAllowed(action)
   }
 
+  /**
+   * Destroy password manager edit component
+   */
   ngOnDestroy() {
     this.apiPasswordManagerService.deleteSubscription();
     this.subShowAddForm && this.subShowAddForm.unsubscribe();
@@ -470,6 +518,9 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.subGetCompaniesList && this.subGetCompaniesList.unsubscribe();
   }
 
+  /**
+   * Show history
+   */
   showHistory($event) {
     this.stopEvent($event);
     // @ts-ignore

@@ -19,6 +19,11 @@ export class QuoteCreateHeaderComponent {
   @Output() toTicket = new EventEmitter<string>();
   @Output() download = new EventEmitter<string>();
 
+  /**
+   * Creates an instance of the QuoteCreateHeaderComponent with the injected services
+   * @param {NgbModal} modalService Service to work with modli
+   * @param {QuoteStateService} quoteStateService to work quote state
+   */
   constructor(
     private modalService: NgbModal,
     private quoteStateService: QuoteStateService

@@ -25,12 +25,21 @@ export class ProductTableComponent implements OnInit {
   public isDropDownShow = [];
   public markups = [];
 
+  /**
+   * Creates an instance of the QuoteCreateContentComponent with the injected services
+   * @param {QuoteStateService} quoteStateService Service to work quote state
+   * @param {QuoteService} quoteService Service to work with api
+   * @param {ProductService} productService Service
+   */
   constructor(
     private quoteStateService: QuoteStateService,
     private productService: ProductService,
     private quoteService: QuoteService
   ) { }
 
+  /**
+   * Initializes product table. See [ngOnInit]{@see OnInit#ngOnInit}
+   */
   ngOnInit() {
     this.getItemListProducts();
     this.setDropDownArray();
@@ -43,6 +52,9 @@ export class ProductTableComponent implements OnInit {
     this.isDropDownShow[i] = false ;
   }
 
+  /**
+   * set array for dropdown
+   */
   setDropDownArray() {
     this.isDropDownShow = new Array(this.itemsListArray.length);
     this.isDropDownShow.map((item) => item = false );
@@ -50,28 +62,46 @@ export class ProductTableComponent implements OnInit {
     this.markups.map((item) => item = 0 );
   }
 
+  /**
+   * get item price
+   */
   public getPrice(cost, count, tax) {
     return this.quoteStateService.roundToTwo(this.quoteStateService.getPrice(cost, count, tax) + this.quoteStateService.getTaxPrice(cost, count, tax)) ;
   }
 
+  /**
+   * get item tax price
+   */
   public getTaxPrice(cost, count, tax) {
     return this.quoteStateService.roundToTwo(this.quoteStateService.getTaxPrice(cost, count, tax));
   }
 
+  /**
+   * delete item from array
+   */
   public deleteItem(index) {
     this.itemsListArray.splice(index, 1);
     this.updateItemsArray();
   }
 
+  /**
+   * change item quantity
+   */
   public changedQuantity(value, index) {
     this.itemsListArray[index].quantity = value;
     this.updateItemsArray();
   }
 
+  /**
+   * toggle dropdown show status
+   */
   public toggleShowDropDown(i) {
     this.isDropDownShow[i] = !this.isDropDownShow[i];
   }
 
+  /**
+   * get products list item
+   */
   public getItemListProducts() {
     this.productService.getCategories().subscribe((res: any) => {
       return this.productList = res
@@ -82,6 +112,9 @@ export class ProductTableComponent implements OnInit {
     });
   }
 
+  /**
+   * set new item
+   */
   public setItem(item, index, type) {
     if (type === 'service') {
       item = {...item, ...{description: '', quantity: 1}};
@@ -93,10 +126,16 @@ export class ProductTableComponent implements OnInit {
     this.hideDropDown(index);
   }
 
+  /**
+   * check item has markup
+   */
   public getMarkup(item) {
     return item.hasOwnProperty('markup');
   }
 
+  /**
+   * change item markup
+   */
   public changeMarkup(value, index) {
     const item = this.itemsListArray[index];
     this.itemsListArray[index].sale =  this.quoteStateService.roundToTwo((value * item.cost / 100 + item.cost));
@@ -104,6 +143,9 @@ export class ProductTableComponent implements OnInit {
     this.updateItemsArray();
   }
 
+  /**
+   * change item sales
+   */
   public changeSales(value, index) {
     const item = this.itemsListArray[index];
     if (this.getMarkup(this.itemsListArray[index])) {
@@ -115,6 +157,9 @@ export class ProductTableComponent implements OnInit {
     }
   }
 
+  /**
+   * change item cost
+   */
   public changeCost(value, index) {
     const item = this.itemsListArray[index];
     if (this.getMarkup(this.itemsListArray[index])) {
@@ -127,6 +172,9 @@ export class ProductTableComponent implements OnInit {
   }
 
 
+  /**
+   * update items array
+   */
   public updateItemsArray() {
     this.changedProductItemsArray.next(this.itemsListArray);
     this.quoteStateService.setItemArray(this.itemsListArray);

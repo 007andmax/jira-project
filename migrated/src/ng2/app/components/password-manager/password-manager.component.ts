@@ -147,11 +147,13 @@ export class PasswordManagerComponent implements OnInit {
    */
   public checkCloseFilters() {
     this.passwordManagerService.closeFilter.subscribe(() => {
-      console.log('0000000');
       this.isMobileFilterShowing = false
     } )
   }
 
+  /**
+   * destroy password manager component
+   */
   ngOnDestroy() {
     this.apiPasswordManagerService.deleteSubscription();
   }
