@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormGroup } from "@angular/forms";
 import { QuoteStateService } from "../../quote-state.service";
 import { QuoteService } from "../../../../../../services/quote/quote.service";
@@ -26,7 +26,8 @@ export class QuoteCreateContentTopComponent implements OnInit {
 
   constructor(
     private quoteStateService: QuoteStateService,
-    private quoteService: QuoteService
+    private quoteService: QuoteService,
+    public cd: ChangeDetectorRef
   ) {
     this.getQuoteNumber();
   }
@@ -43,11 +44,11 @@ export class QuoteCreateContentTopComponent implements OnInit {
    * @params selected Client
    */
   public selectClient(selectClient) {
-    console.log('selectClient',selectClient);
     this.selectedItem.next(selectClient);
     this.quoteStateService.setClient(selectClient);
-    if (!this.editMode) this.quoteStateService.setCompany(selectClient);
     this.currentClient = selectClient.item;
+    if (!this.editMode) this.quoteStateService.setCompany(selectClient);
+   this.cd.detectChanges();
   }
 
   /**
@@ -90,7 +91,7 @@ export class QuoteCreateContentTopComponent implements OnInit {
     this.editMode = this.quoteStateService.getState().params.editMode;
     if (this.editMode) {
       this.editItem = this.quoteStateService.getClient();
-      this.currentClient = this.quoteStateService.getClient();
+      //this.currentClient = this.quoteStateService.getClient();
       this.partialDeposit = this.quoteStateService.getPartialDeposit();
       this.purchaseOrder = this.quoteStateService.getPurchaseOrder();
       this.requestPayment = this.quoteStateService.getRequestPayment();
@@ -116,7 +117,6 @@ export class QuoteCreateContentTopComponent implements OnInit {
    */
   public setRequestPayment(value) {
     this.quoteStateService.setRequestPayment(value);
-    console.log(value, 'value');
   }
 
   /**

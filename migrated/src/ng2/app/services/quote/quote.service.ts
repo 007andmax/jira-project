@@ -56,7 +56,6 @@ export class QuoteService {
   }
 
   public editQuote(value, quoteId, notification) {
-    console.log(1111);
     this.itemsListArray = this.quoteStateService.getItemArray();
     this.productsArray = this.getProductItems(this.itemsListArray, 'product');
     this.servicesArray = this.getProductItems(this.itemsListArray, 'service',true);

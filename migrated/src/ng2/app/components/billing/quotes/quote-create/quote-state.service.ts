@@ -1,6 +1,6 @@
 import { EventEmitter, Inject, Injectable } from '@angular/core';
 import { DateService } from "../../../../services/date/date.service";
-import {QuoteService} from "../../../../services/quote/quote.service";
+import { QuoteService } from "../../../../services/quote/quote.service";
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +23,7 @@ export class QuoteStateService {
   public servicesArray: any;
   public selectedNoteFull: any;
   public usersEmail: any;
-  public quoteForCreate:any = this.getDefaultquoteForCreate();
+  public quoteForCreate: any = this.getDefaultquoteForCreate();
 
 
   constructor(
@@ -47,9 +47,9 @@ export class QuoteStateService {
   public getPrice(cost, count, tax) {
     let price = 0;
     if (tax && tax.rate) {
-      price = ((count * cost) * (tax.rate)/100 + (cost * count));
+      price = ((count * cost) * (tax.rate) / 100 + (cost * count));
     } else {
-      price = cost  * count
+      price = cost * count
     }
     return price;
   }
@@ -58,7 +58,7 @@ export class QuoteStateService {
     let sum = 0;
     if (tax && tax.length > 0) {
       tax.map((item) => {
-        sum += ((item.rate)/100) * cost * count
+        sum += ((item.rate) / 100) * cost * count
       })
     }
     return sum;
@@ -69,7 +69,7 @@ export class QuoteStateService {
     this.itemsArray = itemsArray;
     this.quoteForCreate.itemsArray = itemsArray;
   }
-  
+
   public getItemArray() {
     return this.itemsArray;
   }
@@ -126,7 +126,7 @@ export class QuoteStateService {
       total: this.total
     })
   }
-  public resetQuote () {
+  public resetQuote() {
     this.resetquoteForCreate();
     this.itemsArray = [];
     this.subTotalProducts = 0;
@@ -179,8 +179,8 @@ export class QuoteStateService {
   }
 
   public setSelectedNoteFull(value) {
-      this.selectedNoteFull = value;
-    }
+    this.selectedNoteFull = value;
+  }
 
   public getSelectedNote() {
     return this.selectedNoteFull;
@@ -229,7 +229,7 @@ export class QuoteStateService {
     this.setPartialDeposit(quote.partialDeposit);
     this.setPurchaseOrder(quote.purchaseOrder);
     this.setRequestPayment(quote.requestPayment);
-    this.goToState('quote-create-component', { editMode: true});
+    this.goToState('quote-create-component', { editMode: true });
   }
 
   public getStartQuotenumber() {
@@ -239,6 +239,7 @@ export class QuoteStateService {
   goToPreview(quote, editable?) {
     this.quoteForCreate = quote;
     this.setClient(quote.company);
+    this.setDataClientForPreview(quote.primaryContact, quote.client);
     const itemsArray = [...quote.products, ...quote.services];
     this.setItemArray(itemsArray);
     this.setNumber(quote.number);
@@ -251,7 +252,18 @@ export class QuoteStateService {
     this.setRequestPayment(quote.requestPayment);
     this.resolveTaxes();
     this.resolveTotal();
-    this.goToState('quote-preview-component', {editMode: true, editable: editable ? editable : true});
+    this.goToState('quote-preview-component', { editMode: true, editable: editable ? editable : true });
+  }
+
+  public setDataClientForPreview(approvedBy, client) {
+    client.companyInfo = {
+      contacts : [{
+        firstName: approvedBy.firstName,
+        lastName: approvedBy.lastName,
+        primaryEmail: approvedBy.primaryEmail
+      }],
+      addresses: client.addresses
+    };
   }
 
   public divideArray() {
@@ -310,7 +322,7 @@ export class QuoteStateService {
         item: item,
         "itemOrder": index,
         "quantity": 1,
-        "discountType":"PERCENT"
+        "discountType": "PERCENT"
       }))
     } else {
       itemsAray = itemsAray.filter((item) => !item.hasOwnProperty('rate'));
@@ -318,7 +330,7 @@ export class QuoteStateService {
         item: item,
         "itemOrder": index,
         "quantity": item.quantity,
-        "discountType":"PERCENT"
+        "discountType": "PERCENT"
       }))
     }
   }
@@ -344,16 +356,16 @@ export class QuoteStateService {
     return this.usersEmail;
   }
   public setMarkups(item) {
-    if (item.sale > 0 && item.cost > 0 )
-      return this.roundToTwo((item.sale - item.cost)/item.cost* 100);
+    if (item.sale > 0 && item.cost > 0)
+      return this.roundToTwo((item.sale - item.cost) / item.cost * 100);
   }
   public roundToTwo(num) {
-    return parseFloat((Math.round(Number(num + 'e+2'))  + "e-2")).toFixed(2);
+    return parseFloat((Math.round(Number(num + 'e+2')) + "e-2")).toFixed(2);
   }
-  public resetquoteForCreate () {
+  public resetquoteForCreate() {
     this.quoteForCreate = this.getDefaultquoteForCreate();
   }
-  private getDefaultquoteForCreate():any {
+  private getDefaultquoteForCreate(): any {
     return {
       startDate: '',
       endDate: '',

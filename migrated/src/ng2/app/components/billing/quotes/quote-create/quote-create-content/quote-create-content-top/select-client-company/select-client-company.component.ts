@@ -29,11 +29,6 @@ export class SelectClientCompanyComponent implements OnInit {
 
   ngOnInit() {
     this.getCLientsList();
-    if (this.editItem) {
-      this.selectedClient = this.editItem;
-      this.selectedItem.emit(this.editItem);
-      console.log(this.editItem.id, 'editItem');
-    }
   }
 
   private getCLientsList() {
@@ -41,7 +36,14 @@ export class SelectClientCompanyComponent implements OnInit {
       this.clientsList = res
         .sort((a, b) => a.name.localeCompare(b.name))
         .filter((item) => !item.deletedAt)
+      if (this.editItem) {
+        let index: number = this.clientsList.findIndex(item => item.id === this.editItem.id);
+        if (index > (-1)) {
+          this.selectedClient = this.clientsList[index];
+          this.selectedItem.emit({ item: this.clientsList[index] });
+        }
 
+      }
     })
   }
 
@@ -53,7 +55,7 @@ export class SelectClientCompanyComponent implements OnInit {
     return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
       map(term => (term === '' ? this.clientsList
         : this.clientsList && this.clientsList
-        .filter(v => v['name'].toLowerCase().indexOf(term.toLowerCase()) > -1)))
+          .filter(v => v['name'].toLowerCase().indexOf(term.toLowerCase()) > -1)))
     );
   };
 

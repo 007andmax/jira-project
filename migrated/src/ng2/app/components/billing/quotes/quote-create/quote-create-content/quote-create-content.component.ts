@@ -57,7 +57,6 @@ export class QuoteCreateContentComponent implements OnInit {
    
     this.initForm(this.editMode);
     this.handeSendMode();
-    this.subToaddQuoteBeforeSend();
   }
 
   private onInitEditMode() {
@@ -117,26 +116,6 @@ export class QuoteCreateContentComponent implements OnInit {
   /**
    * Create quote
    */
-  public subToaddQuoteBeforeSend() {
-    console.log('subToaddQuoteBeforeSend');
-   /* this.quoteStateService.addQuoteBeforeSend.subscribe((quote) => {
-      console.log('this.quoteForm.value',this.quoteForm.value);
-      this.quoteService.createQuote(this.quoteForm.value, false)
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe((res:reqCreateQuote) => {
-        console.log('res',res);
-        quote.id = res.id;
-        quote.company = res.company;
-        this.quoteService.resend(quote)
-          .subscribe((res) => {
-            if (res) {
-              this.quoteService.repeatSend(res['id']).subscribe((res) => {})
-            }
-            this.quoteStateService.goToQuote();
-        })
-    })
-    })*/
-  }
   saveAndContinue(notification?: boolean) {
     const isFormReady = this.quoteStateService.getType();
     const currentQuote = this.quoteStateService.getQuoteCreate();

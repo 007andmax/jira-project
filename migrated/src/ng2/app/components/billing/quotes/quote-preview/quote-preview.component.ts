@@ -3,12 +3,12 @@ import { QuoteStateService } from "../quote-create/quote-state.service";
 import { CompaniesService } from "../../../../services/company/companies.service";
 import { DateService } from "../../../../services/date/date.service";
 import { QuoteCreateContentComponent } from "../quote-create/quote-create-content/quote-create-content.component";
-import {QuoteService} from "../../../../services/quote/quote.service";
-import {takeUntil} from "rxjs/operators";
-import {Subject} from "rxjs";
-import {environment} from "../../../../../environments/environment";
-import {ModalQuoteComponent} from "../../../../services/modal/modal-quote/modal-quote.component";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import { QuoteService } from "../../../../services/quote/quote.service";
+import { takeUntil } from "rxjs/operators";
+import { Subject } from "rxjs";
+import { environment } from "../../../../../environments/environment";
+import { ModalQuoteComponent } from "../../../../services/modal/modal-quote/modal-quote.component";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-quote-preview',
@@ -26,7 +26,7 @@ export class QuotePreviewComponent implements OnInit {
   @Output() saveAndContinue = new EventEmitter<string>();
   public stopCache = Math.floor(Math.random() * 100000);
   private unsubscribe: Subject<void> = new Subject();
-  @ViewChild(QuoteCreateContentComponent) quoteCreateContentComponent:QuoteCreateContentComponent;
+  @ViewChild(QuoteCreateContentComponent) quoteCreateContentComponent: QuoteCreateContentComponent;
 
   constructor(
     private quoteStateService: QuoteStateService,
@@ -40,9 +40,10 @@ export class QuotePreviewComponent implements OnInit {
     this.getQuoteInfo();
     this.getCurrentCompany();
     this.getItemsArray();
-    console.log('this.quoteStateService.getState().params',this.quoteStateService.getState().params);
+    console.log('this.quoteStateService.getState().params', this.quoteStateService.getState().params);
     this.editable = this.quoteStateService.getState().params.editable;
     this.handeSendMode();
+
   }
 
   public getQuoteInfo() {
@@ -79,7 +80,7 @@ export class QuotePreviewComponent implements OnInit {
   }
 
   public roundToTwo(num) {
-    return parseFloat((Math.round(Number(num + 'e+2'))  + "e-2")).toFixed(2);
+    return parseFloat((Math.round(Number(num + 'e+2')) + "e-2")).toFixed(2);
   }
 
   public getFormatDate(date) {
@@ -100,7 +101,7 @@ export class QuotePreviewComponent implements OnInit {
   }
 
   goToCreate() {
-    this.quoteStateService.goToState('quote-create-component', { editMode: true});
+    this.quoteStateService.goToState('quote-create-component', { editMode: true });
   }
 
   /**
@@ -153,7 +154,7 @@ export class QuotePreviewComponent implements OnInit {
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((res) => {
         const id = res['id'];
-        this.quoteService.downloadPdf(res['id']).subscribe((res) => this.downLoadFile(res,id));
+        this.quoteService.downloadPdf(res['id']).subscribe((res) => this.downLoadFile(res, id));
       });
   }
 
@@ -161,7 +162,7 @@ export class QuotePreviewComponent implements OnInit {
    * save quote and open send modal
    */
   public saveAndSend() {
-    const modalRef = this.modalService.open(ModalQuoteComponent,  this.quoteForCreate);
+    const modalRef = this.modalService.open(ModalQuoteComponent, this.quoteForCreate);
     modalRef.componentInstance.data = this.quoteForCreate;
   }
 
@@ -174,7 +175,7 @@ export class QuotePreviewComponent implements OnInit {
     const data = window.URL.createObjectURL(res);
     var link = document.createElement('a');
     link.href = data;
-    link.download=`${this.apiUrl}saleQuotes/${id}/pdf.pdf`;
+    link.download = `${this.apiUrl}saleQuotes/${id}/pdf.pdf`;
     link.click();
     this.quoteStateService.goToQuote();
   }

@@ -59,9 +59,9 @@
         <div class="col-md-7 pl-30">
           <p style="font-size: 11px!important; margin-bottom: 10px;">Bill to</p>
           <p class="bold">{{quote.client && quote.client.name }}</p>
-          <!--<p>{{quote.client && getCLientUserName(quote.client.companyInfo)}}</p>-->
-          <!--<p>{{quote.client && getCLientAddress(quote.client.companyInfo)}}</p>-->
-          <!--<p>{{quote.client && quote.client.companyInfo.contacts[0].primaryEmail}}</p>-->
+         <p>{{quote.client && getCLientUserName(quote.client.companyInfo)}}</p>
+          <p>{{quote.client && getCLientAddress(quote.client.companyInfo)}}</p>
+          <p>{{quote.client && quote.client.companyInfo.contacts[0].primaryEmail}}</p>
         </div>
         <div class="col-md-5 pr-30">
           <p class="bold">
