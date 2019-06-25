@@ -64,6 +64,7 @@ export class SelectClientCompanyComponent implements OnInit {
 
   /**
    * boootstrap search method
+   * @param text$
    */
   search = (text$: Observable<string>) => {
     const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
@@ -78,6 +79,7 @@ export class SelectClientCompanyComponent implements OnInit {
 
   /**
    * set selected item
+   * @param companyId - id of company
    */
   public selectItem(companyId) {
     this.selectedItem.emit(companyId);
@@ -86,6 +88,7 @@ export class SelectClientCompanyComponent implements OnInit {
 
   /**
    * formatter for bootstrap result
+   * @param result
    */
   formatter = (result: string) => {
     return result['name'];
