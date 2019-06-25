@@ -56,7 +56,7 @@ export class QuotePreviewComponent implements OnInit {
     this.getItemsArray();
     console.log('this.quoteStateService.getState().params', this.quoteStateService.getState().params);
     this.editable = this.quoteStateService.getState().params.editable;
-    this.handeSendMode();
+    this.handleSendMode();
 
   }
 
@@ -233,8 +233,8 @@ export class QuotePreviewComponent implements OnInit {
   /**
    * hande send modee
    */
-  public handeSendMode() {
-    this.quoteStateService.handeSendMode
+  public handleSendMode() {
+    this.quoteStateService.handleSendMode
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((res) => {
         this.saveAndContinueMode(true);

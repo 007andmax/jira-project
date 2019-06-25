@@ -54,7 +54,7 @@ export class QuoteCreateContentComponent implements OnInit {
       this.getQuoteNumber();
     }
     this.initForm(this.editMode);
-    this.handeSendMode();
+    this.handleSendMode();
   }
 
   private onInitEditMode() {
@@ -245,8 +245,8 @@ export class QuoteCreateContentComponent implements OnInit {
   /**
    * Save and continue in hande end modee
    */
-  public handeSendMode() {
-    this.quoteStateService.handeSendMode
+  public handleSendMode() {
+    this.quoteStateService.handleSendMode
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((res) => {
         this.saveAndContinue(true);

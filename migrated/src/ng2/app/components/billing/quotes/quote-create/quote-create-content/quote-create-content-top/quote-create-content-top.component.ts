@@ -55,7 +55,7 @@ export class QuoteCreateContentTopComponent implements OnInit {
     this.quoteStateService.setClient(selectClient);
     this.currentClient = selectClient.item;
     if (!this.editMode) this.quoteStateService.setCompany(selectClient);
-   this.cd.detectChanges();
+    this.cd.detectChanges();
   }
 
   /**
@@ -140,4 +140,12 @@ export class QuoteCreateContentTopComponent implements OnInit {
     return `${companyInfo.addresses[0].address}`
   }
 
+  public getClients(items) {
+    if (this.editItem) {
+      let index: number = items.findIndex(item => item.id === this.editItem.id);
+      if (index > (-1)) {
+        this.currentClient = items[index];
+      }
+    }
+  }
 }

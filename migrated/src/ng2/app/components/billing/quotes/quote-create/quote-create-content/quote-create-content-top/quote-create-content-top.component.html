@@ -5,7 +5,8 @@
                                  class="light-dropdown"
                                  [formGroup]="quoteForm"
                                  [editItem]="editItem"
-                                 (selectedItem)="selectClient($event)">
+                                 (selectedItem)="selectClient($event)"
+                                 (getAllItems)="getClients($event)">
                                  
       </app-select-client-company>
     </div>

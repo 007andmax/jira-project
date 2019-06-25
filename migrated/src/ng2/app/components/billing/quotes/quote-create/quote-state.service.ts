@@ -11,7 +11,7 @@ export class QuoteStateService {
   public itemsArray: any;
   public type = false;
   public validateForm: EventEmitter<any> = new EventEmitter();
-  public handeSendMode: EventEmitter<any> = new EventEmitter();
+  public handleSendMode: EventEmitter<any> = new EventEmitter();
   public quoteNumber: number;
   public startQuoteNumber: number;
   public state;
@@ -215,6 +215,7 @@ export class QuoteStateService {
     this.startQuoteNumber = quote.number;
     this.quoteNumber = quote.number;
     this.setClient(quote.company);
+    this.setDataClientForPreview(quote.primaryContact, quote.client);
     if (quote.products) quote.products.forEach(element => element.markup = this.setMarkups(element));
     const itemsArray = [...quote.products, ...quote.services];
     this.setItemArray(itemsArray);
@@ -345,7 +346,7 @@ export class QuoteStateService {
   }
 
   public saveSandMode() {
-    this.handeSendMode.emit();
+    this.handleSendMode.emit();
   }
 
   public setUsersEmail(value) {
