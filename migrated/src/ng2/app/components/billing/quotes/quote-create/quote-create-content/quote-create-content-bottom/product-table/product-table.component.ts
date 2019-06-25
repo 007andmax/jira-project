@@ -25,12 +25,21 @@ export class ProductTableComponent implements OnInit {
   public isDropDownShow = [];
   public markups = [];
 
+  /**
+   * Creates an instance of the QuoteCreateContentComponent with the injected services
+   * @param {QuoteStateService} quoteStateService Service to work quote state
+   * @param {QuoteService} quoteService Service to work with api
+   * @param {ProductService} productService Service
+   */
   constructor(
     private quoteStateService: QuoteStateService,
     private productService: ProductService,
     private quoteService: QuoteService
   ) { }
 
+  /**
+   * Initializes product table. See [ngOnInit]{@see OnInit#ngOnInit}
+   */
   ngOnInit() {
     this.getItemListProducts();
     this.setDropDownArray();
@@ -38,11 +47,15 @@ export class ProductTableComponent implements OnInit {
 
   /**
    * Hide dropdown for services and products
+   * @param i - item index
    */
   hideDropDown(i) {
     this.isDropDownShow[i] = false ;
   }
 
+  /**
+   * set array for dropdown
+   */
   setDropDownArray() {
     this.isDropDownShow = new Array(this.itemsListArray.length);
     this.isDropDownShow.map((item) => item = false );
@@ -50,28 +63,56 @@ export class ProductTableComponent implements OnInit {
     this.markups.map((item) => item = 0 );
   }
 
+  /**
+   * get item price
+   * @param cost - item cost
+   * @param count - item count
+   * @param tax - item tax
+   */
   public getPrice(cost, count, tax) {
     return this.quoteStateService.roundToTwo(this.quoteStateService.getPrice(cost, count, tax) + this.quoteStateService.getTaxPrice(cost, count, tax)) ;
   }
 
+  /**
+   * get item tax price
+   * @param cost - item cost
+   * @param count - item count
+   * @param tax - item tax
+   */
   public getTaxPrice(cost, count, tax) {
     return this.quoteStateService.roundToTwo(this.quoteStateService.getTaxPrice(cost, count, tax));
   }
 
+  /**
+   * delete item from array
+   * @param index - item index
+   */
   public deleteItem(index) {
     this.itemsListArray.splice(index, 1);
     this.updateItemsArray();
   }
 
+  /**
+   * change item quantity
+   * @param value - item value
+   * @param index - item index
+   */
   public changedQuantity(value, index) {
     this.itemsListArray[index].quantity = value;
     this.updateItemsArray();
   }
 
+  /**
+   * toggle dropdown show status
+   * @param index - item index
+   */
   public toggleShowDropDown(i) {
     this.isDropDownShow[i] = !this.isDropDownShow[i];
   }
 
+  /**
+   * get products list item
+   */
   public getItemListProducts() {
     this.productService.getCategories().subscribe((res: any) => {
       return this.productList = res
@@ -82,6 +123,12 @@ export class ProductTableComponent implements OnInit {
     });
   }
 
+  /**
+   * set new item
+   * @param item - new item
+   * @param index - new item index
+   * @param type - new item type
+   */
   public setItem(item, index, type) {
     if (type === 'service') {
       item = {...item, ...{description: '', quantity: 1}};
@@ -93,10 +140,19 @@ export class ProductTableComponent implements OnInit {
     this.hideDropDown(index);
   }
 
+  /**
+   * check item has markup
+   * @param index - item index
+   */
   public getMarkup(item) {
     return item.hasOwnProperty('markup');
   }
 
+  /**
+   * change item markup
+   * @param value - item value
+   * @param index - item index
+   */
   public changeMarkup(value, index) {
     const item = this.itemsListArray[index];
     this.itemsListArray[index].sale =  this.quoteStateService.roundToTwo((value * item.cost / 100 + item.cost));
@@ -104,6 +160,11 @@ export class ProductTableComponent implements OnInit {
     this.updateItemsArray();
   }
 
+  /**
+   * change item sales
+   * @param value - item value
+   * @param index - item index
+   */
   public changeSales(value, index) {
     const item = this.itemsListArray[index];
     if (this.getMarkup(this.itemsListArray[index])) {
@@ -115,6 +176,11 @@ export class ProductTableComponent implements OnInit {
     }
   }
 
+  /**
+   * change item cost
+   * @param value - item value
+   * @param index - item index
+   */
   public changeCost(value, index) {
     const item = this.itemsListArray[index];
     if (this.getMarkup(this.itemsListArray[index])) {
@@ -127,6 +193,9 @@ export class ProductTableComponent implements OnInit {
   }
 
 
+  /**
+   * update items array
+   */
   public updateItemsArray() {
     this.changedProductItemsArray.next(this.itemsListArray);
     this.quoteStateService.setItemArray(this.itemsListArray);

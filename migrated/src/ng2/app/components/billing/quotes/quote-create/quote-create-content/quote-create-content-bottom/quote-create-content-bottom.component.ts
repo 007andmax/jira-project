@@ -2,6 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import {QuoteStateService} from "../../quote-state.service";
 import {QuoteService} from "../../../../../../services/quote/quote.service";
 
+/**
+ *  Quotes create content bottom component
+ */
 @Component({
   selector: 'app-quote-create-content-bottom',
   templateUrl: './quote-create-content-bottom.component.html',
@@ -29,36 +32,60 @@ export class QuoteCreateContentBottomComponent implements OnInit {
   public quote: any;
 
 
+  /**
+   * Creates an instance of the QuoteCreateContentComponent with the injected services
+   * @param {QuoteStateService} quoteStateServices Service to work quote state
+   * @param {QuoteService} quoteServices Service to work with api
+   */
   constructor(
     private quoteStateServices: QuoteStateService,
     private quoteServices: QuoteService,
 
   ) { }
 
+  /**
+   * Initializes quotes create bottom content. See [ngOnInit]{@see OnInit#ngOnInit}
+   */
   ngOnInit() {
     this.initEditItemsArray();
     this.getState();
   }
 
+  /**
+   * add product
+   */
   public addProduct() {
     this.type = 'product';
   }
 
+  /**
+   * add service
+   */
   public addService() {
     this.type = 'service';
   }
 
+  /**
+   * add item to array
+   * @param item - new item
+   */
   public addItemToItemsArray(item) {
     this.itemsArray.push(item);
     this.calculateArrays();
   }
 
+  /**
+   * divide arrays by type
+   */
   public divideArray() {
     this.itemsArray = this.quoteStateServices.getItemArray();
     this.productsArray = this.quoteServices.getProductItems(this.itemsArray, 'product');
     this.servicesArray = this.quoteServices.getProductItems(this.itemsArray, 'service');
   }
 
+  /**
+   * calculate arrays data and total sums
+   */
   public calculateArrays() {
     this.refreshTotals();
     this.divideArray();
@@ -66,6 +93,9 @@ export class QuoteCreateContentBottomComponent implements OnInit {
     this.resolveTaxes();
   }
 
+  /**
+   * refresh all total sums
+   */
   public refreshTotals() {
     this.subTotalServices = 0;
     this.subTotalProducts = 0;
@@ -73,6 +103,9 @@ export class QuoteCreateContentBottomComponent implements OnInit {
     this.total = 0;
   }
 
+  /**
+   * resolve total
+   */
   public resolveTotal() {
     this.divideArray();
     this.productsArray.map((item) => {
@@ -91,6 +124,9 @@ export class QuoteCreateContentBottomComponent implements OnInit {
     this.quoteStateServices.setTotal(this.total);
   }
 
+  /**
+   * resolve total taxes
+   */
   public resolveTaxes() {
     this.totalTaxes = 0;
     if (this.itemsArray.length > 0) {
@@ -108,22 +144,35 @@ export class QuoteCreateContentBottomComponent implements OnInit {
       this.totalTaxes = 0;
       this.quoteStateServices.setTotalTaxes(this.totalTaxes);
     }
-
   }
 
+  /**
+   * get total sum
+   */
   public getTotal() {
     return this.totalTaxes + this.subTotalServices + this.subTotalProducts
   }
 
+  /**
+   * change type
+   * @param type - new type
+   */
   public changeType(type) {
     this.type = type;
   }
 
+  /**
+   * refresh and calculate items array
+   * @param value - new items array value
+   */
   public refreshItemsArray(value) {
     this.itemsArray = value;
     this.calculateArrays();
   }
 
+  /**
+   * set edit items array
+   */
   public initEditItemsArray() {
     this.itemsArray = this.quoteStateServices.getItemArray();
   }

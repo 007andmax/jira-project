@@ -64,7 +64,7 @@ export class QuotesComponent implements OnInit {
   }
 
   /**
-   *
+   * get quote list
    */
   public getQuotes() {
     this.quoteServices.getQuotes(this.dataToSend).subscribe((res: any) => {
@@ -75,14 +75,14 @@ export class QuotesComponent implements OnInit {
   }
 
   /**
-   *
+   * get formated date
    */
   public getDate(value) {
     return this.dateService.getFormatDate(new Date(value));
   }
 
   /**
-   *
+   * Get quotes on scroll
    */
   public onScroll() {
     this.infiniteScrollDisabled = true;
@@ -90,7 +90,7 @@ export class QuotesComponent implements OnInit {
   }
 
   /**
-   *
+   * sort by status
    */
   public sortBy(value) {
     this.refreshQuoteAndPage();
@@ -99,7 +99,7 @@ export class QuotesComponent implements OnInit {
   }
 
   /**
-   *
+   * filter data by date
    */
   public filterByDate(value) {
     this.refreshQuoteAndPage();
@@ -108,7 +108,7 @@ export class QuotesComponent implements OnInit {
   }
 
   /**
-   *
+   * set data to send
    */
   private setDate(value) {
     this.dataToSend.startDate = value.start;
@@ -116,7 +116,7 @@ export class QuotesComponent implements OnInit {
   }
 
   /**
-   *
+   * refresh quote data and page
    */
   private refreshQuoteAndPage() {
     this.quotesList = [];
@@ -124,7 +124,7 @@ export class QuotesComponent implements OnInit {
   }
 
   /**
-   *
+   * Select client
    */
   public selectClient(value) {
     this.refreshQuoteAndPage();
@@ -133,7 +133,7 @@ export class QuotesComponent implements OnInit {
   }
 
   /**
-   *
+   * Set number on enter action
    */
   public setNumberEnter(event?) {
     if (event.key === "Enter") {
@@ -145,7 +145,7 @@ export class QuotesComponent implements OnInit {
   }
 
   /**
-   *
+   * Set number on blur action
    */
   public setNumberOnBlur(event?) {
     this.dataToSend.number = this.searchNumber;
@@ -154,7 +154,7 @@ export class QuotesComponent implements OnInit {
   }
 
   /**
-   *
+   * Set input status
    */
   public setStatus(item) {
     this.selectedStatus = item.name;
@@ -164,7 +164,7 @@ export class QuotesComponent implements OnInit {
   }
 
   /**
-   *
+   * Clear input status
    */
   public clearStatus() {
     this.selectedStatus = null;
@@ -195,10 +195,16 @@ export class QuotesComponent implements OnInit {
     this.quoteStateService.setEditQuote(quote);
   }
 
-  goToPreview(quote) {
+  /**
+   * Change state to preview
+   */
+  public goToPreview(quote) {
     this.quoteStateService.goToPreview(quote, false);
   }
 
+  /**
+   * Check elem status
+   */
   public checkStatus(quote, statusForShowingArray) {
     const elems = statusForShowingArray.filter((item) => item.toLowerCase() === quote.status.toLowerCase());
     return elems.length > 0;

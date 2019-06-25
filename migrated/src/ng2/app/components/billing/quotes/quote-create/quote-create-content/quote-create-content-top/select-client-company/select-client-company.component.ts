@@ -6,6 +6,9 @@ import { debounceTime, distinctUntilChanged, filter, map } from "rxjs/operators"
 import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
 import { FormGroup } from "@angular/forms";
 
+/**
+ *  Select client component
+ */
 @Component({
   selector: 'app-select-client-company',
   templateUrl: './select-client-company.component.html',
@@ -23,14 +26,24 @@ export class SelectClientCompanyComponent implements OnInit {
   focus$ = new Subject<string>();
   click$ = new Subject<string>();
 
+  /**
+   *Creates an instance of the SelectClientCompanyComponent with the injected services
+   * @param {CompaniesService} companiesService to work with companiies
+   */
   constructor(
     private companiesService: CompaniesService
   ) { }
 
+  /**
+   * Initializes select client. See [ngOnInit]{@see OnInit#ngOnInit}
+   */
   ngOnInit() {
     this.getCLientsList();
   }
 
+  /**
+   * Get client list
+   */
   private getCLientsList() {
     this.subGetCompaniesList = this.companiesService.clientsCompany.subscribe((res: any) => {
       this.clientsList = res
@@ -47,11 +60,13 @@ export class SelectClientCompanyComponent implements OnInit {
     })
   }
 
+  /**
+   * boootstrap search method
+   */
   search = (text$: Observable<string>) => {
     const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
     const clicksWithClosedPopup$ = this.click$.pipe(filter(() => !this.instance.isPopupOpen()));
     const inputFocus$ = this.focus$;
-
     return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
       map(term => (term === '' ? this.clientsList
         : this.clientsList && this.clientsList
@@ -59,15 +74,24 @@ export class SelectClientCompanyComponent implements OnInit {
     );
   };
 
+  /**
+   * set selected item
+   */
   public selectItem(companyId) {
     this.selectedItem.emit(companyId);
 
   }
 
+  /**
+   * formatter for bootstrap result
+   */
   formatter = (result: string) => {
     return result['name'];
   };
 
+  /**
+   * clear client input
+   */
   public clearClient() {
     this.selectedItem.emit('null');
     this.selectedClient = null;

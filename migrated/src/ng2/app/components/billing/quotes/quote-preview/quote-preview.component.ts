@@ -10,6 +10,9 @@ import { environment } from "../../../../../environments/environment";
 import { ModalQuoteComponent } from "../../../../services/modal/modal-quote/modal-quote.component";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
+/**
+ * Quote preview component
+ */
 @Component({
   selector: 'app-quote-preview',
   templateUrl: './quote-preview.component.html',
@@ -28,6 +31,14 @@ export class QuotePreviewComponent implements OnInit {
   private unsubscribe: Subject<void> = new Subject();
   @ViewChild(QuoteCreateContentComponent) quoteCreateContentComponent: QuoteCreateContentComponent;
 
+  /**
+   * Creates an instance of the QuoteCreateContentComponent with the injected services
+   * @param {CompaniesService} companiesService Service to work with api
+   * @param {NgbModal} modalService Service to work with modl
+   * @param {DateService} dateService Service to work with date
+   * @param {QuoteService} quoteService to work with api
+   * @param {QuoteStateService} quoteStateService to work quote state
+   */
   constructor(
     private quoteStateService: QuoteStateService,
     private companiesService: CompaniesService,
@@ -36,6 +47,9 @@ export class QuotePreviewComponent implements OnInit {
     private modalService: NgbModal
   ) { }
 
+  /**
+   * Initializes quotes preview. See [ngOnInit]{@see OnInit#ngOnInit}
+   */
   ngOnInit() {
     this.getQuoteInfo();
     this.getCurrentCompany();
@@ -46,43 +60,68 @@ export class QuotePreviewComponent implements OnInit {
 
   }
 
+  /**
+   * get Quote info for preview
+   */
   public getQuoteInfo() {
     this.quote = this.quoteStateService.getQuote();
-    console.log(this.quote, 'quote');
     this.quoteForCreate = this.quoteStateService.getQuoteCreate();
-    console.log(this.quoteForCreate, 'quoteForCreate');
   }
 
+  /**
+   * get quote compny
+   */
   public getCurrentCompany() {
     this.companiesService.getTechCompany().subscribe((res) => {
       return this.company = res;
     });
   }
 
+  /**
+   * get client user name
+   */
   public getCLientUserName(companyInfo) {
     return `${companyInfo.contacts[0].firstName} ${companyInfo.contacts[0].lastName}`
   }
 
+  /**
+   * get client address
+   */
   public getCLientAddress(companyInfo) {
     return `${companyInfo.addresses[0].address}`
   }
 
+  /**
+   * get items array
+   */
   public getItemsArray() {
     this.itemsArray = this.quoteStateService.getItemArray();
   }
 
+  /**
+   * get price
+   */
   public getPrice(cost, count, tax) {
     return this.roundToTwo(this.quoteStateService.getPrice(cost, count, tax));
   }
 
+  /**
+   * get tax price
+   */
   public getTaxPrice(cost, count, tax) {
     return this.roundToTwo(this.quoteStateService.getTaxPrice(cost, count, tax));
   }
 
+  /**
+   * get rounded number
+   */
   public roundToTwo(num) {
     return parseFloat((Math.round(Number(num + 'e+2')) + "e-2")).toFixed(2);
   }
 
+  /**
+   * get formated date
+   */
   public getFormatDate(date) {
     if (date) {
       date = `${date.year}/${date.month}/${date.day}`;
@@ -92,6 +131,9 @@ export class QuotePreviewComponent implements OnInit {
     }
   }
 
+  /**
+   * get global note
+   */
   public getGlobalNote() {
     if (this.quoteForCreate.globalNote.hasOwnProperty('line1')) {
       return this.quoteForCreate.globalNote.line1
@@ -100,6 +142,9 @@ export class QuotePreviewComponent implements OnInit {
     }
   }
 
+  /**
+   * go to create state
+   */
   goToCreate() {
     this.quoteStateService.goToState('quote-create-component', { editMode: true });
   }
@@ -116,8 +161,6 @@ export class QuotePreviewComponent implements OnInit {
       regularNote: this.quoteForCreate.selectedNote
     }, false).subscribe();
   }
-
-
 
   /**
    * Create quote and approve
@@ -187,6 +230,9 @@ export class QuotePreviewComponent implements OnInit {
     this.quoteStateService.goToState('quotes-component');
   }
 
+  /**
+   * hande send modee
+   */
   public handeSendMode() {
     this.quoteStateService.handeSendMode
       .pipe(takeUntil(this.unsubscribe))
@@ -199,7 +245,6 @@ export class QuotePreviewComponent implements OnInit {
    * Create quote
    */
   saveAndContinueMode(notification?: boolean) {
-    console.log(this.quoteForCreate, 'quoteForCreate');
     const isFormReady = this.quoteStateService.getType();
     const currentQuote = this.quoteStateService.getQuoteCreate();
     if (notification) {
@@ -217,6 +262,9 @@ export class QuotePreviewComponent implements OnInit {
     }
   }
 
+  /**
+   * Destroy preview component
+   */
   ngOnDestroy() {
     this.unsubscribe.next();
     this.unsubscribe.complete();

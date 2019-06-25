@@ -4,7 +4,9 @@ import { QuoteStateService } from "../../../quote-state.service";
 import { QuoteService } from "../../../../../../../services/quote/quote.service";
 import { ProductService } from "../../../../../../../services/product/product.service";
 
-
+/**
+ * Add item component
+ */
 @Component({
   selector: 'app-add-item',
   templateUrl: './add-item.component.html',
@@ -26,24 +28,42 @@ export class AddItemComponent implements OnInit {
   @Output() selectedServiceItem = new EventEmitter<any>();
   @Output() changeType = new EventEmitter<any>();
 
+  /**
+   * Creates an instance of the AddItemComponent with the injected services
+   * @param {QuoteStateService} quoteStateService Service to work quote state
+   * @param {QuoteService} quoteService Service to work with api
+   * @param {ProductService} productService Service
+   */
   constructor(
     private quoteStateService: QuoteStateService,
     private quoteService: QuoteService,
     private productService: ProductService
   ) { }
 
+  /**
+   * Initializes product list. See [ngOnInit]{@see OnInit#ngOnInit}
+   */
   ngOnInit() {
     this.subToFormValidation();
   }
 
+  /**
+   * toggle dropdown
+   */
   public toggleShowDropDown() {
     this.isDropDownShow = !this.isDropDownShow;
   }
 
+  /**
+   * hide dropdown
+   */
   public hideDropDown() {
     this.isDropDownShow = false;
   }
 
+  /**
+   * get services list
+   */
   public getServicesList() {
     this.productService.getCategories().subscribe((res) => {
      return this.itemListProducts = res
@@ -54,8 +74,10 @@ export class AddItemComponent implements OnInit {
     })
   }
 
+  /**
+   * set new item
+   */
   public setItem(item) {
-    console.log(item, 'ITTEM');
     if (this.type === 'service') {
       item = {...item, ...{description: '', quantity: 1}};
     } else {
@@ -68,6 +90,9 @@ export class AddItemComponent implements OnInit {
     this.quoteStateService.setType(true);
   }
 
+  /**
+   * hide add form
+   */
   public hideAddForm() {
     this.isDropDownShow = false;
     this.type = undefined;
@@ -76,12 +101,18 @@ export class AddItemComponent implements OnInit {
     this.changeType.next(undefined);
   }
 
+  /**
+   * subscribe to form validation
+   */
   public subToFormValidation() {
     this.quoteStateService.validateForm.subscribe((res) => {
       this.isFormValid = !res;
     })
   }
 
+  /**
+   * set murkups
+   */
   public setMarkups(item) {
     if (item.sale > 0 && item.cost > 0 )
       return Math.round((item.sale - item.cost)/item.cost* 100);

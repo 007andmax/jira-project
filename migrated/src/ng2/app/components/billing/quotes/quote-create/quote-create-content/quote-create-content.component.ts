@@ -47,14 +47,12 @@ export class QuoteCreateContentComponent implements OnInit {
    * Initializes quotes content. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-    
     this.companiesService.getCompaniesList();
     if (this.editMode) {
       this.onInitEditMode();
     } else {
       this.getQuoteNumber();
     }
-   
     this.initForm(this.editMode);
     this.handeSendMode();
   }
@@ -244,6 +242,9 @@ export class QuoteCreateContentComponent implements OnInit {
     this.quoteForm.controls['globalNote'].setValue(value);
   }
 
+  /**
+   * Save and continue in hande end modee
+   */
   public handeSendMode() {
     this.quoteStateService.handeSendMode
       .pipe(takeUntil(this.unsubscribe))
@@ -252,6 +253,9 @@ export class QuoteCreateContentComponent implements OnInit {
       })
   }
 
+  /**
+   * Deestroy quotes component
+   */
   ngOnDestroy() {
     this.unsubscribe.next();
     this.unsubscribe.complete();

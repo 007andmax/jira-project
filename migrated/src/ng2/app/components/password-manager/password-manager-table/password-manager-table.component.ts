@@ -26,37 +26,52 @@ export class PasswordManagerTableComponent implements OnInit {
   private subAddNewRecords: ISubscription;
   public recordsData: any;
 
+  /**
+   * Creates an instance of the PasswordManagerTableComponent with the injected services
+   * @param {ApiPasswordManagerService} apiPasswordManagerService Service to work with api
+   * @param {PasswordManagerService} passwordManagerService Service to work with filters
+   * @param {permissionsService} permissionsService to work with permissions service
+   */
   constructor(
     private apiPasswordManagerService: ApiPasswordManagerService,
     private passwordManagerService: PasswordManagerService,
     private permissionsService: PermissionsService
   ) { }
 
+  /**
+   * Initializes Password manager data table. See [ngOnInit]{@see OnInit#ngOnInit}
+   */
   ngOnInit() {
     this.getRecords();
     this.getSelectedCategory();
     this.subAddNewRecords = this.addNewRecords.subscribe(v => {
-      console.log('1251235');
       this.apiPasswordManagerService.getRecords();
     });
     this.watchDeleteRecord();
   }
 
+  /**
+   * Get selected category
+   */
   public getSelectedCategory() {
     this.passwordManagerService.emitSelectedCategory.subscribe((category) => {
        this.selectedCategory = category;
     });
   }
 
-  getRecords() {
-    console.log('----');
+  /**
+   * Get records list
+   */
+  public getRecords() {
     this.subGetRecords = this.apiPasswordManagerService.dataChange.subscribe((res) => {
-      console.log(this.recordsData, 'this.recordsData');
       return this.recordsData = res;
     });
   }
 
-  deleteRecord(recordId) {
+  /**
+   * delete record from list
+   */
+  public deleteRecord(recordId) {
     if (this.permissionsService.isAllowed('DELETE_PASSWORD')) {
       this.apiPasswordManagerService.deleteRecord(recordId).subscribe((res) => {
         this.passwordManagerService.deleteRecord(recordId);
@@ -65,29 +80,44 @@ export class PasswordManagerTableComponent implements OnInit {
     }
   }
 
+  /**
+   * subscription for deleting records
+   */
   public watchDeleteRecord() {
     this.passwordManagerService.deleteItemEditForm.subscribe((item) => {
       return this.deleteRecord(item);
     });
   }
 
-  editRecord(item) {
+  /**
+   * edit record
+   * @param item - item for edit
+   */
+  public editRecord(item) {
     if (this.permissionsService.isAllowed('VIEW_PASSWORD')) {
       this.passwordManagerService.addRecord(item);
     }
   }
 
+  /**
+   * get record type class
+   * @param type - record type
+   */
   public getRecordTypeClass(type) {
     return type.toLowerCase();
   }
 
   /**
    * getPermission
+   * @param action - permission type
    */
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
   }
 
+  /**
+   * destroy password manager data table component
+   */
   ngOnDestroy() {
     this.subGetRecords.unsubscribe();
     this.subAddNewRecords.unsubscribe();

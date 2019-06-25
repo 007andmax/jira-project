@@ -24,6 +24,11 @@ export class QuoteCreateContentTopComponent implements OnInit {
   public editMode: any;
   public currentClient = null;
 
+  /**
+  *Creates an instance of the QuoteCreateContentTopComponent with the injected services
+  * @param {QuoteService} quoteService to work with api
+  * @param {QuoteStateService} quoteStateService to work quote state
+  */
   constructor(
     private quoteStateService: QuoteStateService,
     private quoteService: QuoteService,
@@ -32,11 +37,13 @@ export class QuoteCreateContentTopComponent implements OnInit {
     this.getQuoteNumber();
   }
 
+  /**
+   * Initializes quotes craete content top. See [ngOnInit]{@see OnInit#ngOnInit}
+   */
   ngOnInit() {
     this.startDateChanges(this.quoteForm.value.startDate);
     this.endDateChanges(this.quoteForm.value.endDate);
     this.getState();
-  
   }
 
   /**
