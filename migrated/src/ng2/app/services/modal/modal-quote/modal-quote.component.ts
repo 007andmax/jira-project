@@ -1,7 +1,7 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
+import { MatAutocompleteSelectedEvent, MatAutocomplete, MatAutocompleteTrigger } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 
@@ -52,6 +52,13 @@ export class ModalQuoteComponent implements OnInit {
     console.log('this.data', this.data);
     (this.data) && this.initResendMode();
     this.getAllUsers();
+   this.userInput.nativeElement.onblur = (e) => {
+      if (this.matAutocomplete.isOpen) {
+        let modal = this.matAutocomplete.panel.nativeElement;
+        modal.parentNode.style.width = 'max-content';
+      }
+      
+    }
   }
 
   add(event: MatChipInputEvent): void {
@@ -76,7 +83,9 @@ export class ModalQuoteComponent implements OnInit {
       // this.isResend && (this.data.recipients = this.usersEmails);
     }
   }
-
+  onBlurChanges (event):void {
+console.log('onBlurChanges',event);
+  }
   selected(event: MatAutocompleteSelectedEvent): void {
     this.showError = false;
     this.selectedUsers.push(event.option.viewValue);
