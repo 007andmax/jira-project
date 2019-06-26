@@ -27,6 +27,7 @@ export class QuoteCreateContentNotesComponent implements OnInit {
   public isEditMode = false;
   public editMode = false;
   public isShowCreateNew = false;
+  public noteGlobalId:string;
   @ViewChild('instance') instance: NgbTypeahead;
   @Output() selectedRegularNoteItem = new EventEmitter<any>();
   @Output() selectedGlobalNoteItem = new EventEmitter<any>();
@@ -58,8 +59,10 @@ export class QuoteCreateContentNotesComponent implements OnInit {
    */
   getNotes() {
     this.quoteService.getQuoteNote().subscribe((res:any) => {
+      console.log('res',res);
       this.noteRegularList = res.filter((item) => item['noteType'] === 'REGULAR');
       this.noteGlobal = res.find((item) => item['noteType'] === 'GLOBAL');
+      this.noteGlobalId = this.noteGlobal.id;
       if (this.editMode) {
         this.noteGlobal = this.quoteStateService.getGlobalNote();
       }
@@ -122,7 +125,18 @@ export class QuoteCreateContentNotesComponent implements OnInit {
   }
 
   public onEditNote () {
-    
+    if (this.isEditMode) {
+      this.noteService.updateNote({
+        line1: this.editNoteNew,
+        line2: '',
+        noteType: 'GLOBAL',
+        title: null
+      }, this.noteGlobalId).subscribe((res:any) => {
+        if (res.result === "success") {
+          this.isShowEditNote = false;
+        }
+      })
+    } 
   }
 
   private getTitle(value) {
@@ -145,7 +159,6 @@ export class QuoteCreateContentNotesComponent implements OnInit {
    * set global note
    */
   public setGlobalNote(value,update = false) {
-    console.log('setGlobalNote');
     this.isShowEditNote = update;
     this.editNoteNew = value;
     this.selectedGlobalNoteItem.next(value);

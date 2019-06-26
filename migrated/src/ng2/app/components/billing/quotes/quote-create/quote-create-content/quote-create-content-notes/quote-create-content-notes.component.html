@@ -32,7 +32,7 @@
     <p>Terms & Conditions</p>
     <div class="new-link"
            *ngIf="isShowEditNote"
-           (click)="createNewNote()">Save Terms & Conditions</div>
+           (click)="onEditNote()">Save Terms & Conditions</div>
     <textarea
       *ngIf="noteGlobal && noteGlobal.line1"
       [(ngModel)]="noteGlobal.line1"
