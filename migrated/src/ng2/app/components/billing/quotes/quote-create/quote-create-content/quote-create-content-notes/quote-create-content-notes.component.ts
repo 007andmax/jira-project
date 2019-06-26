@@ -125,7 +125,6 @@ export class QuoteCreateContentNotesComponent implements OnInit {
   }
 
   public onEditNote () {
-    if (this.isEditMode) {
       this.noteService.updateNote({
         line1: this.editNoteNew,
         line2: '',
@@ -136,7 +135,6 @@ export class QuoteCreateContentNotesComponent implements OnInit {
           this.isShowEditNote = false;
         }
       })
-    } 
   }
 
   private getTitle(value) {
