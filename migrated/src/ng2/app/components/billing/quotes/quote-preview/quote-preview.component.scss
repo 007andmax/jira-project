@@ -21,17 +21,22 @@
     }
   }
 }
-.notes {
+
+.quote-notes {
   width: 784px;
-  margin: 0 auto;
-    .notes-item {
-      width: 100%;
-      box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1);
-      border: 1px solid #edf2f6;
-        border-radius: 5px;
-        background-color: #f9fbfc;
+  margin: 0 auto 20px;
+  &__item {
+    padding: 0 0 10px 0;
+    &:not(:last-child) {
+      border-bottom: 1px solid #eee;
+      margin-bottom: 10px;
     }
+    &--fullname {
+      font-weight: bold;
+    }
+  }
 }
+
 .quote-list {
   &--header {
     &__top {

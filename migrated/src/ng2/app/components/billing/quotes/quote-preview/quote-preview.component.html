@@ -5,7 +5,6 @@
       <button class="btn-new default" (click)="goToCreate()">Edit</button>
 
 
-
       <div class="btn-new btn-success btn-with-dropdown">
         <button type="button" (click)="save()">Save and Continue</button>
         <div class="light-dropdown" ngbDropdown role="group" aria-label="Button group with nested dropdown">
@@ -21,7 +20,6 @@
       </div>
 
 
-
       <!--<button class="btn-new btn-success" (click)="save()">-->
       <!--Save and Continue-->
       <!--<i class="report-caret-icon-white"></i>-->
@@ -34,30 +32,29 @@
       <button class="btn-new default" (click)="goToQuotes()">Back</button>
     </div>
   </div>
-
   <div class="info-block">
     <p style="display: inline-block">
       <span>This is a preview of your Quotation. Switch back to Edit if you need to make changes.</span>
     </p>
   </div>
-  <div class="notes">
-  <ng-template ngFor let-item [ngForOf]="quoteForCreate.reviewNotes" [ngForTrackBy]="trackById">
-    <div class="notes-item clearfix">
-      <div class="col-md-5">
-        <p [textContent]="getUserWhoSend(item.user.firstName,item.user.lastName)"></p>
-        <p [textContent]="item.user.primaryEmail"></p>
-        <p [textContent]="getFormatDate(item.startDate)"></p>
+  <div class="quote-notes">
+    <ng-template ngFor let-item [ngForOf]="quoteForCreate.reviewNotes" [ngForTrackBy]="trackById">
+      <div class="quote-notes__item clearfix">
+        <div class="col-md-4 pl-0">
+          <p class="quote-notes__item--fullname" [textContent]="getUserWhoSend(item.user.firstName,item.user.lastName)"></p>
+          <p class="quote-notes__item--email" [textContent]="item.user.primaryEmail"></p>
+          <p class="quote-notes__item--startdate" [textContent]="getFormatDate(item.startDate)"></p>
+        </div>
+        <div class="col-md-8 pr-0">
+          <p [textContent]="item.note"></p>
+        </div>
       </div>
-      <div class="col-md-7">
-        <p [textContent]="item.note"></p>
-      </div>
-    </div>
 
-  </ng-template>
-</div>
+    </ng-template>
+  </div>
   <div class="quote-list">
 
-    
+
     <div class="quote-list--header">
       <div class="quote-list--header__top clearfix">
         <div class="col-md-5 pl-30">
