@@ -53,9 +53,14 @@ import { LeftPanelBillingComponent } from './components/left-panel/left-panel-bi
 import { ToNumerPipe } from './pipe/to-numer.pipe';
 import { ModalQuoteComponent } from './services/modal/modal-quote/modal-quote.component';
 
-
+/**
+ * declare angular
+ */
 declare var angular: any;
 
+/**
+ * Hybrid mode
+ */
 export class CustomHandlingStrategy implements UrlHandlingStrategy {
   shouldProcessUrl(url) {
     return url.toString().startsWith("/ng2") || url.toString() == "/"
@@ -64,6 +69,9 @@ export class CustomHandlingStrategy implements UrlHandlingStrategy {
   merge(url, whole) { return url }
 }
 
+/**
+ * Component downgrade
+ */
 angular.module('quicktech')
   .directive(
     'passwordManager',
@@ -82,7 +90,9 @@ angular.module('quicktech')
     downgradeComponent({component: QuotePreviewComponent}))
   .factory('ngZone', downgradeInjectable(NgZone));
 
-
+/**
+ * This module represents the main application module
+ */
 @NgModule({
   declarations: [
     AppComponent,

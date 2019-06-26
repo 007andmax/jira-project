@@ -59,7 +59,6 @@ export class QuoteCreateContentNotesComponent implements OnInit {
    */
   getNotes() {
     this.quoteService.getQuoteNote().subscribe((res:any) => {
-      console.log('res',res);
       this.noteRegularList = res.filter((item) => item['noteType'] === 'REGULAR');
       this.noteGlobal = res.find((item) => item['noteType'] === 'GLOBAL');
       this.noteGlobalId = this.noteGlobal.id;
@@ -72,6 +71,7 @@ export class QuoteCreateContentNotesComponent implements OnInit {
 
   /**
    * show and find text in dropdown
+   * @param text$ - bootstrap text for searching
    */
   search = (text$: Observable<string>) => {
     const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
@@ -96,6 +96,7 @@ export class QuoteCreateContentNotesComponent implements OnInit {
 
   /**
    * format select output
+   * @param result - result for showing
    */
   formatter = (result: string) => {
     return result['title'];
@@ -106,7 +107,6 @@ export class QuoteCreateContentNotesComponent implements OnInit {
    */
   public createNewNote() {
     const data = this.getNoteData();
-    console.log(this.isEditMode, 'this.isEditMode');
     if (this.isEditMode) {
       this.noteService.updateNote({
         line1: this.selectedNoteText,
@@ -124,6 +124,9 @@ export class QuoteCreateContentNotesComponent implements OnInit {
     }
   }
 
+  /**
+   * Edit note
+   */
   public onEditNote () {
       this.noteService.updateNote({
         line1: this.editNoteNew,
@@ -137,6 +140,10 @@ export class QuoteCreateContentNotesComponent implements OnInit {
       })
   }
 
+  /**
+   * Return title
+   * @param value - title value
+   */
   private getTitle(value) {
     return value.title ? value.title : value;
   }
@@ -155,6 +162,8 @@ export class QuoteCreateContentNotesComponent implements OnInit {
 
   /**
    * set global note
+   * @param value - note value
+   * @param update
    */
   public setGlobalNote(value,update = false) {
     this.isShowEditNote = update;
@@ -165,6 +174,7 @@ export class QuoteCreateContentNotesComponent implements OnInit {
 
   /**
    * Show create new notes fields
+   * @param value - new note value
    */
   public showCreateNew(value) {
     this.selectedNote['line1'] = value;
