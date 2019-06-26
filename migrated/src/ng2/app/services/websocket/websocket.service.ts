@@ -5,7 +5,9 @@ import { UsersService } from "../users/users.service";
 import { CompaniesService } from "../company/companies.service";
 import { QuoteRealTimeService } from "../../components/billing/quotes/quote-realtime/quote-realtime.service";
 
-
+/**
+ * Websocket service to work with api
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -14,6 +16,12 @@ export class WebsocketService {
   private serverUrl = '/realtime';
   private stompClient;
 
+  /**
+   * Users api service constructor
+   * @param {UsersService} usersService Service to work users
+   * @param {CompaniesService} companiesService Service to work with companies
+   * @param {QuoteRealTimeService} quoteRealTimeService Service to work with real time
+   */
   constructor(
     private usersService: UsersService,
     private companiesService: CompaniesService,
@@ -21,7 +29,7 @@ export class WebsocketService {
   ) {
   }
 
-  initializeWebSocketConnection(){
+  public initializeWebSocketConnection(){
     let ws =  new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(ws);
     let that = this;
@@ -31,7 +39,10 @@ export class WebsocketService {
     });
   }
 
-  subsribeToPermissions() {
+  /**
+   * subscribe to quote permissions realtime
+   */
+  public subsribeToPermissions() {
     setTimeout(() => {
       this.stompClient.subscribe("/user/watch/permissions", (message) => {
         var newChange = JSON.parse(message.body);
@@ -41,7 +52,10 @@ export class WebsocketService {
     }, 3000);
   }
 
-  subsribeToQuote() {
+  /**
+   * subscribe to quote realtime
+   */
+  public subsribeToQuote() {
     setTimeout(() => {
       this.companiesService.getTechCompany().subscribe((res) => {
         this.stompClient.subscribe(`/user/watch/saleQuotes/${res['id']}`, (message) => {

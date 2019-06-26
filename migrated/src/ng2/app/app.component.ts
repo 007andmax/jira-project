@@ -6,7 +6,9 @@ import { setUpLocationSync } from '@angular/router/upgrade';
 import { UsersService } from "./services/users/users.service";
 import { WebsocketService } from "./services/websocket/websocket.service";
 
-
+/**
+ * Root component
+ */
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,13 +16,21 @@ import { WebsocketService } from "./services/websocket/websocket.service";
 })
 export class AppComponent implements OnInit {
 
-  constructor(private upgrade: UpgradeModule,
-              private userService: UsersService,
-              private websocketService: WebsocketService
-              ){
+  /**
+   * Creates an instance of the MainComponent with the injected services
+   * @param {UpgradeModule} upgrade service
+   * @param {UsersService} userService service
+   * @param {WebsocketService} websocketService service
+   */
+  constructor(
+    private upgrade: UpgradeModule,
+    private userService: UsersService,
+    private websocketService: WebsocketService
+  ){}
 
-  }
-
+  /**
+   * Initializes root. See [ngOnInit]{@see OnInit#ngOnInit}
+   */
   ngOnInit() {
     this.upgrade.bootstrap(document.body, ['quicktech']);
     setUpLocationSync(this.upgrade);

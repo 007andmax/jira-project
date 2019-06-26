@@ -57,6 +57,9 @@ export class QuotesComponent implements OnInit {
     private modalService: NgbModal
   ) { }
 
+  /**
+   * Initializes quotes. See [ngOnInit]{@see OnInit#ngOnInit}
+   */
   ngOnInit() {
     this.getQuotes();
     this.companiesService.getCompaniesList();
