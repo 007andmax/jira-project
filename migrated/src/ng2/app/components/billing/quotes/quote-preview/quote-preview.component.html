@@ -23,8 +23,8 @@
 
 
       <!--<button class="btn-new btn-success" (click)="save()">-->
-        <!--Save and Continue-->
-        <!--<i class="report-caret-icon-white"></i>-->
+      <!--Save and Continue-->
+      <!--<i class="report-caret-icon-white"></i>-->
       <!--</button>-->
       <!--<button class="dropdown-item" ngbDropdownItem (click)="approveQuote()">Approve a quote</button>-->
       <!--<button class="dropdown-item" ngbDropdownItem (click)="downloadPdf()">Save and Download</button>-->
@@ -40,8 +40,24 @@
       <span>This is a preview of your Quotation. Switch back to Edit if you need to make changes.</span>
     </p>
   </div>
+  <div class="notes">
+  <ng-template ngFor let-item [ngForOf]="quoteForCreate.reviewNotes" [ngForTrackBy]="trackById">
+    <div class="notes-item clearfix">
+      <div class="col-md-5">
+        <p [textContent]="getUserWhoSend(item.user.firstName,item.user.lastName)"></p>
+        <p [textContent]="item.user.primaryEmail"></p>
+        <p [textContent]="getFormatDate(item.startDate)"></p>
+      </div>
+      <div class="col-md-7">
+        <p [textContent]="item.note"></p>
+      </div>
+    </div>
 
+  </ng-template>
+</div>
   <div class="quote-list">
+
+    
     <div class="quote-list--header">
       <div class="quote-list--header__top clearfix">
         <div class="col-md-5 pl-30">
@@ -59,7 +75,7 @@
         <div class="col-md-7 pl-30">
           <p style="font-size: 11px!important; margin-bottom: 10px;">Bill to</p>
           <p class="bold">{{quote.client && quote.client.name }}</p>
-         <p>{{quote.client && getCLientUserName(quote.client.companyInfo)}}</p>
+          <p>{{quote.client && getCLientUserName(quote.client.companyInfo)}}</p>
           <p>{{quote.client && getCLientAddress(quote.client.companyInfo)}}</p>
           <p>{{quote.client && quote.client.companyInfo.contacts[0].primaryEmail}}</p>
         </div>

@@ -66,6 +66,7 @@ export class QuotePreviewComponent implements OnInit {
   public getQuoteInfo() {
     this.quote = this.quoteStateService.getQuote();
     this.quoteForCreate = this.quoteStateService.getQuoteCreate();
+    console.log('this.quote',this.quote);
   }
 
   /**
@@ -241,6 +242,13 @@ export class QuotePreviewComponent implements OnInit {
       })
   }
 
+  trackById(index, item) {
+    return item.id;
+  }
+
+  public getUserWhoSend(firstName,lastName) {
+return `${firstName} ${lastName}`;
+  }
   /**
    * Create quote
    */

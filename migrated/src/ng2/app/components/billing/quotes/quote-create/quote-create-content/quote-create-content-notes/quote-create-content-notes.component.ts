@@ -22,6 +22,8 @@ export class QuoteCreateContentNotesComponent implements OnInit {
   public selectedNote: any;
   public selectedNoteNew: string;
   public selectedNoteText: string;
+  public editNoteNew: string;
+  public isShowEditNote = false;
   public isEditMode = false;
   public editMode = false;
   public isShowCreateNew = false;
@@ -119,6 +121,10 @@ export class QuoteCreateContentNotesComponent implements OnInit {
     }
   }
 
+  public onEditNote () {
+    
+  }
+
   private getTitle(value) {
     return value.title ? value.title : value;
   }
@@ -138,7 +144,10 @@ export class QuoteCreateContentNotesComponent implements OnInit {
   /**
    * set global note
    */
-  public setGlobalNote(value) {
+  public setGlobalNote(value,update = false) {
+    console.log('setGlobalNote');
+    this.isShowEditNote = update;
+    this.editNoteNew = value;
     this.selectedGlobalNoteItem.next(value);
     this.quoteStateService.setGlobalNote(value);
   }
@@ -152,6 +161,7 @@ export class QuoteCreateContentNotesComponent implements OnInit {
     this.isShowCreateNew = true;
     this.quoteStateService.setSelectedNote(value);
   }
+  
 
   /**
    * get mode state

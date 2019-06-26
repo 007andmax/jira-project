@@ -225,6 +225,7 @@ export class QuoteStateService {
     this.setStartQuoteNumber(quote.number);
     this.setEndDate(this.dateService.getStartDate(quote.validUntil));
     this.setStartDate(this.dateService.getStartDate(quote.date));
+    if (quote.reviewNotes) quote.reviewNotes.forEach(element => element.startDate = this.dateService.getStartDate(element.createdAt));
     this.setGlobalNote(quote.globalNote);
     this.setSelectedNote(quote.regularNote);
     this.setPartialDeposit(quote.partialDeposit);
@@ -242,6 +243,7 @@ export class QuoteStateService {
     this.setClient(quote.company);
     this.setDataClientForPreview(quote.primaryContact, quote.client);
     const itemsArray = [...quote.products, ...quote.services];
+    if (quote.reviewNotes) quote.reviewNotes.forEach(element => element.startDate = this.dateService.getStartDate(element.createdAt));
     this.setItemArray(itemsArray);
     this.setNumber(quote.number);
     this.setEndDate(this.dateService.getStartDate(quote.validUntil));
