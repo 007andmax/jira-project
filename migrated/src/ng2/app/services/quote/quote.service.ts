@@ -219,6 +219,12 @@ export class QuoteService {
     )
   }
 
+  markAsRead(company, quote_id) {
+    return this.http.post(this.apiUrl +
+      `saleQuotes/${quote_id}/markAsRead?companyId=${company.id}`, {}
+    )
+  }
+
   downloadPdf(quote_id) {
     return this.http.get(this.apiUrl + `saleQuotes/${quote_id}/pdf`,{ headers: new HttpHeaders({
         'Content-Type': 'application/pdf',

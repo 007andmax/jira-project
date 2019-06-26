@@ -246,6 +246,12 @@ export class QuotesComponent implements OnInit {
     });
   }
 
+  markAsRead(item) {
+    this.quoteServices.markAsRead(item.company, item.id).subscribe((res) => {
+      console.log(res, 'RES');
+    });
+  }
+
   /**
    * archive quote
    */
