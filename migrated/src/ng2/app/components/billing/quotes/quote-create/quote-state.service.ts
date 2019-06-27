@@ -12,6 +12,7 @@ export class QuoteStateService {
   public type = false;
   public validateForm: EventEmitter<any> = new EventEmitter();
   public handleSendMode: EventEmitter<any> = new EventEmitter();
+  public handleErrors: EventEmitter<any> = new EventEmitter();
   public quoteNumber: number;
   public startQuoteNumber: number;
   public state;
@@ -32,6 +33,10 @@ export class QuoteStateService {
   ) {
     this.state = $state;
   }
+  public setError (error) {
+    this.handleErrors.emit(error);
+  }
+  public getErrorHandle () { return this.handleErrors;}
   public setClient(client) {
     this.client = client;
     this.quoteForCreate.client = client;

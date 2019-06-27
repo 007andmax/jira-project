@@ -23,6 +23,7 @@ export class QuoteCreateContentTopComponent implements OnInit {
   public editItem: any;
   public editMode: any;
   public currentClient = null;
+  public errorMessage:string = null;
 
   /**
   *Creates an instance of the QuoteCreateContentTopComponent with the injected services
@@ -44,6 +45,13 @@ export class QuoteCreateContentTopComponent implements OnInit {
     this.startDateChanges(this.quoteForm.value.startDate);
     this.endDateChanges(this.quoteForm.value.endDate);
     this.getState();
+    this.onInitErrorHedle();
+  }
+
+  public onInitErrorHedle () {
+    this.quoteStateService.getErrorHandle().subscribe((data) => {
+      this.errorMessage = data;
+    })
   }
 
   /**
@@ -73,6 +81,7 @@ export class QuoteCreateContentTopComponent implements OnInit {
    */
   private setNumber(value) {
     this.quoteStateService.setNumber(value)
+    this.quoteStateService.setError(null);
   }
 
   /**

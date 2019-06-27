@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 import {QuoteStateService} from "../../components/billing/quotes/quote-create/quote-state.service";
+import { catchError, tap } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -52,7 +54,9 @@ export class QuoteService {
       "globalNote": value.globalNote ? value.globalNote : this.quoteStateService.getGlobalNote(),
       "regularNote": value.regularNote ? value.regularNote : this.quoteStateService.getSelectedNote(),
       "sendNotification":notification
-    })
+    }).pipe(
+      tap(data => data), 
+      catchError(this.handleError));
   }
 
   public editQuote(value, quoteId, notification) {
@@ -84,7 +88,9 @@ export class QuoteService {
       "globalNote": value.globalNote ? value.globalNote : this.quoteStateService.getGlobalNote(),
       "regularNote": value.regularNote ? value.regularNote : this.quoteStateService.getSelectedNote(),
       "sendNotification": notification
-    })
+    }).pipe(
+      tap(data => data), 
+      catchError(this.handleError));
   }
 
   public resend(item,recipients) {
@@ -113,19 +119,27 @@ export class QuoteService {
       "globalNote": item.globalNote,
       "regularNote": item.regularNote,
       "sendNotification": true
-    })
+    }).pipe(
+      tap(data => data), 
+      catchError(this.handleError));
   }
 
   public repeatSend(quoteId) {
-    return this.http.post(`${this.apiUrl}saleQuotes/${quoteId}/send`, {});
+    return this.http.post(`${this.apiUrl}saleQuotes/${quoteId}/send`, {}).pipe(
+      tap(data => data), 
+      catchError(this.handleError));
   }
 
   getQuoteNumber() {
-    return this.http.get(this.apiUrl + `data/actualNumber?type=SALE_QUOTE`)
+    return this.http.get(this.apiUrl + `data/actualNumber?type=SALE_QUOTE`).pipe(
+      tap(data => data), 
+      catchError(this.handleError));
   }
 
   getQuoteNote() {
-    return this.http.get(this.apiUrl + `invoice/invoiceNote/getAll`);
+    return this.http.get(this.apiUrl + `invoice/invoiceNote/getAll`).pipe(
+      tap(data => data), 
+      catchError(this.handleError));
   }
 
   getMsDate(value) {
@@ -134,7 +148,9 @@ export class QuoteService {
   }
 
   getServiceList(clientCompanyId) {
-    return this.http.get(this.apiUrl + `services/${clientCompanyId}`);
+    return this.http.get(this.apiUrl + `services/${clientCompanyId}`).pipe(
+      tap(data => data), 
+      catchError(this.handleError));
   }
 
   getProductItems(itemsAray, type, onInitSaveOrCreate = false) {
@@ -183,7 +199,9 @@ export class QuoteService {
       "sortBy": this.sortType || 'DATE_DESC',
       "offset": this.offset * data.page,
       "limit": this.offset
-    })
+    }).pipe(
+      tap(data => data), 
+      catchError(this.handleError));
   }
 
   convertToInvoice(company, quote_id) {
@@ -191,44 +209,58 @@ export class QuoteService {
       `saleQuotes/convertToInvoice?companyId=${company.companyInfo.id}
       &billTo=${company.companyInfo.addresses[0].id}
       &shipTo=${company.companyInfo.addresses[0].id}`,
-      [quote_id])
+      [quote_id]).pipe(
+        tap(data => data), 
+        catchError(this.handleError));
   }
 
   convertToTicket(company, quote_id) {
     return this.http.post(this.apiUrl +
       `saleQuotes/convertToTicket?companyId=${company.id}`,
-      [quote_id])
+      [quote_id]).pipe(
+        tap(data => data), 
+        catchError(this.handleError));
   }
 
   approveQuote(company, quoteId) {
     console.log(quoteId, 'quoteId');
     return this.http.post(this.apiUrl +
       `saleQuotes/approveQuote?companyId=${company.id}`, [quoteId]
-    )
+    ).pipe(
+      tap(data => data), 
+      catchError(this.handleError));
   }
 
   refuseQuote(company, quote_id) {
     return this.http.post(this.apiUrl +
       `saleQuotes/refuseQuote?companyId=${company.id}`, [quote_id]
-    )
+    ).pipe(
+      tap(data => data), 
+      catchError(this.handleError));
   }
 
   archiveQuote(company, quote_id) {
     return this.http.post(this.apiUrl +
       `saleQuotes/archiveQuote?companyId=${company.id}`, [quote_id]
-    )
+    ).pipe(
+      tap(data => data), 
+      catchError(this.handleError));
   }
 
   markAsRead(company, quote_id) {
     return this.http.post(this.apiUrl +
       `saleQuotes/${quote_id}/markAsRead?companyId=${company.id}`, {}
-    )
+    ).pipe(
+      tap(data => data), 
+      catchError(this.handleError));
   }
 
   downloadPdf(quote_id) {
     return this.http.get(this.apiUrl + `saleQuotes/${quote_id}/pdf`,{ headers: new HttpHeaders({
         'Content-Type': 'application/pdf',
-      }), responseType: 'blob'})
+      }), responseType: 'blob'}).pipe(
+        tap(data => data), 
+        catchError(this.handleError));
   }
 
   getSortType(type) {
@@ -258,5 +290,13 @@ export class QuoteService {
         this.deposit = this.sortType;
         break;
     }
+  }
+  private handleError =(error)=> {
+    if (error.error instanceof ErrorEvent) {
+     this.quoteStateService.setError(error.error.message);
+    } else {
+      this.quoteStateService.setError(error.message);
+    }
+    return throwError(error);
   }
 }

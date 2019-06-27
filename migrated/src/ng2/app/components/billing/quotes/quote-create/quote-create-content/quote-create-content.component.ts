@@ -90,7 +90,14 @@ export class QuoteCreateContentComponent implements OnInit {
         regularNote: '',
         globalNote: ''
       })
+      this.onInitChengeForm();
     }
+  }
+
+  public onInitChengeForm () {
+    this.quoteForm.valueChanges.subscribe(val => {
+      this.quoteStateService.setError(null);
+    });
   }
 
   /**

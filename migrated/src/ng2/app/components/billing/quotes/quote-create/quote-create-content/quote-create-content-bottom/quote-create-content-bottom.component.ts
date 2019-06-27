@@ -72,6 +72,7 @@ export class QuoteCreateContentBottomComponent implements OnInit {
   public addItemToItemsArray(item) {
     this.itemsArray.push(item);
     this.calculateArrays();
+    this.quoteStateServices.setError(null);
   }
 
   /**
@@ -168,6 +169,7 @@ export class QuoteCreateContentBottomComponent implements OnInit {
   public refreshItemsArray(value) {
     this.itemsArray = value;
     this.calculateArrays();
+    this.quoteStateServices.setError(null);
   }
 
   /**
