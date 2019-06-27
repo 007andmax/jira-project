@@ -292,11 +292,8 @@ export class QuoteService {
     }
   }
   private handleError =(error)=> {
-    if (error.error instanceof ErrorEvent) {
-     this.quoteStateService.setError(error.error.message);
-    } else {
-      this.quoteStateService.setError(error.message);
-    }
+    let err = error.error;
+    this.quoteStateService.setError((err.validationResults && err.validationResults.saleQuotePostDto) ? err.validationResults.saleQuotePostDto : err.message);
     return throwError(error);
   }
 }
