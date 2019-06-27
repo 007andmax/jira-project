@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 /**
  *  Service list component
@@ -28,6 +28,7 @@ export class ServicesListComponent implements OnInit {
 
   /**
    * select service item and emit
+   * @param item - selected services item
    */
   public selectServicesItem(item) {
     this.selectedServicesItem.next(item)

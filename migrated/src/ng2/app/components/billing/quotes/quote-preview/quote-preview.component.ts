@@ -54,7 +54,6 @@ export class QuotePreviewComponent implements OnInit {
     this.getQuoteInfo();
     this.getCurrentCompany();
     this.getItemsArray();
-    console.log('this.quoteStateService.getState().params', this.quoteStateService.getState().params);
     this.editable = this.quoteStateService.getState().params.editable;
     this.handleSendMode();
 
@@ -66,7 +65,6 @@ export class QuotePreviewComponent implements OnInit {
   public getQuoteInfo() {
     this.quote = this.quoteStateService.getQuote();
     this.quoteForCreate = this.quoteStateService.getQuoteCreate();
-    console.log('this.quote',this.quote);
   }
 
   /**
@@ -215,7 +213,7 @@ export class QuotePreviewComponent implements OnInit {
    * @param res - Array Buffer data
    * @param id - type of the document.
    */
-  downLoadFile(res: any, id) {
+  public downLoadFile(res: any, id) {
     const data = window.URL.createObjectURL(res);
     var link = document.createElement('a');
     link.href = data;
@@ -242,12 +240,12 @@ export class QuotePreviewComponent implements OnInit {
       })
   }
 
-  trackById(index, item) {
+  public trackById(index, item) {
     return item.id;
   }
 
   public getUserWhoSend(firstName,lastName) {
-return `${firstName} ${lastName}`;
+    return `${firstName} ${lastName}`;
   }
   /**
    * Create quote
