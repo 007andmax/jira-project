@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, OnDestroy} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 import { DateService } from "../../../../../services/date/date.service";
@@ -266,6 +266,7 @@ export class QuoteCreateContentComponent implements OnInit {
   ngOnDestroy() {
     this.unsubscribe.next();
     this.unsubscribe.complete();
+    this.quoteStateService.setQuoteForm(this.quoteForm);
   }
 
 }

@@ -9,6 +9,7 @@ import { Subject } from "rxjs";
 import { environment } from "../../../../../environments/environment";
 import { ModalQuoteComponent } from "../../../../services/modal/modal-quote/modal-quote.component";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { FormGroup } from '@angular/forms';
 
 /**
  * Quote preview component
@@ -25,10 +26,12 @@ export class QuotePreviewComponent implements OnInit {
   public company: any;
   public itemsArray = [];
   public editable: any;
+  public editMode: boolean;
   private apiUrl = environment.apiUrl;
   @Output() saveAndContinue = new EventEmitter<string>();
   public stopCache = Math.floor(Math.random() * 100000);
   private unsubscribe: Subject<void> = new Subject();
+  public quoteForm: FormGroup;
   @ViewChild(QuoteCreateContentComponent) quoteCreateContentComponent: QuoteCreateContentComponent;
 
   /**
@@ -55,8 +58,9 @@ export class QuotePreviewComponent implements OnInit {
     this.getCurrentCompany();
     this.getItemsArray();
     this.editable = this.quoteStateService.getState().params.editable;
+    this.editMode = this.quoteStateService.getState().params.editMode;
     this.handleSendMode();
-
+    if (this.editMode) this.quoteForm = this.quoteStateService.getQuoteForm();
   }
 
   /**
@@ -152,52 +156,95 @@ export class QuotePreviewComponent implements OnInit {
    * Create quote and save
    */
   public save() {
-    this.quoteService.createQuote({
-      client: this.quote.client,
-      startDate: this.quoteForCreate.endDate,
-      endDate: this.quoteForCreate.startDate,
-      globalNote: this.quoteForCreate.globalNote,
-      regularNote: this.quoteForCreate.selectedNote
-    }, false).subscribe();
+    const isFormReady = this.quoteStateService.getType();
+    if (isFormReady) {
+      if (this.editMode) {
+        this.quoteService.editQuote(this.quoteForm.value, this.quoteForCreate.id, false)
+        .pipe(takeUntil(this.unsubscribe))
+        .subscribe((res) => {
+          this.quoteStateService.goToQuote();
+        })
+      } else {
+        this.quoteService.createQuote({
+          client: this.quote.client,
+          startDate: this.quoteForCreate.startDate,
+          endDate: this.quoteForCreate.endDate,
+          globalNote: this.quoteForCreate.globalNote,
+          regularNote: this.quoteForCreate.selectedNote
+        }, false).subscribe();
+      }
+    } else {
+      this.quoteStateService.emitValidation();
+    }
   }
 
   /**
    * Create quote and approve
    */
   public approveQuote() {
-    this.quoteService.createQuote({
-      client: this.quote.client,
-      startDate: this.quoteForCreate.endDate,
-      endDate: this.quoteForCreate.startDate,
-      globalNote: this.quoteForCreate.globalNote,
-      regularNote: this.quoteForCreate.selectedNote
-    }, false)
+
+    const isFormReady = this.quoteStateService.getType();
+    if (isFormReady && !this.editMode) {
+      this.quoteService.createQuote({
+        client: this.quote.client,
+        startDate: this.quoteForCreate.endDate,
+        endDate: this.quoteForCreate.startDate,
+        globalNote: this.quoteForCreate.globalNote,
+        regularNote: this.quoteForCreate.selectedNote
+      }, false)
+        .pipe(takeUntil(this.unsubscribe))
+        .subscribe((res) => {
+          this.quoteService.approveQuote(res['company'], res['id'])
+            .pipe(takeUntil(this.unsubscribe))
+            .subscribe((res) => {
+              this.quoteStateService.goToQuote();
+            });
+        });
+    } else if (isFormReady && this.editMode) {
+      const currentQuote = this.quoteStateService.getQuoteCreate();
+      this.quoteService.editQuote(this.quoteForm.value, currentQuote['id'], true)
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((res) => {
         this.quoteService.approveQuote(res['company'], res['id'])
-          .pipe(takeUntil(this.unsubscribe))
-          .subscribe((res) => {
-            this.quoteStateService.goToQuote();
-          });
-      });
+            .pipe(takeUntil(this.unsubscribe))
+            .subscribe((res) => {
+              this.quoteStateService.goToQuote();
+            });
+      })
+    } else {
+      this.quoteStateService.emitValidation();
+    }
   }
 
   /**
    * Create quote and approve
    */
   public downloadPdf() {
-    this.quoteService.createQuote({
-      client: this.quote.client,
-      startDate: this.quoteForCreate.endDate,
-      endDate: this.quoteForCreate.startDate,
-      globalNote: this.quoteForCreate.globalNote,
-      regularNote: this.quoteForCreate.selectedNote
-    }, false)
+    const isFormReady = this.quoteStateService.getType();
+    if (isFormReady && !this.editMode) {
+      this.quoteService.createQuote({
+        client: this.quote.client,
+        startDate: this.quoteForCreate.endDate,
+        endDate: this.quoteForCreate.startDate,
+        globalNote: this.quoteForCreate.globalNote,
+        regularNote: this.quoteForCreate.selectedNote
+      }, false)
+        .pipe(takeUntil(this.unsubscribe))
+        .subscribe((res) => {
+          const id = res['id'];
+          this.quoteService.downloadPdf(res['id']).subscribe((res) => this.downLoadFile(res, id));
+        });
+    } else if (isFormReady && this.editMode) {
+      const currentQuote = this.quoteStateService.getQuoteCreate();
+      this.quoteService.editQuote(this.quoteForm.value, currentQuote['id'], true)
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((res) => {
         const id = res['id'];
-        this.quoteService.downloadPdf(res['id']).subscribe((res) => this.downLoadFile(res, id));
-      });
+        this.quoteService.downloadPdf(res['id']).subscribe((res) => this.downLoadFile(res,id));
+      })
+    } else {
+      this.quoteStateService.emitValidation();
+    }
   }
 
   /**

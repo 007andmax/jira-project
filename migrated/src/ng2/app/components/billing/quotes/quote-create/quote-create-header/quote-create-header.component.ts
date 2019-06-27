@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { QuoteStateService } from "../quote-state.service";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalQuoteComponent } from "../../../../../services/modal/modal-quote/modal-quote.component";
@@ -18,6 +18,10 @@ export class QuoteCreateHeaderComponent {
   @Output() toInvoice = new EventEmitter<string>();
   @Output() toTicket = new EventEmitter<string>();
   @Output() download = new EventEmitter<string>();
+
+
+  @Input() editMode: boolean;
+
 
   /**
    * Creates an instance of the QuoteCreateHeaderComponent with the injected services
@@ -75,7 +79,7 @@ export class QuoteCreateHeaderComponent {
    * go to quotes state
    */
   public goToState(state) {
-    this.quoteStateService.goToState(state);
+    this.quoteStateService.goToState(state,{editMode:this.editMode});
   }
 
   /**

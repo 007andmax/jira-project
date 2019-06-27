@@ -1,6 +1,7 @@
 import { EventEmitter, Inject, Injectable } from '@angular/core';
 import { DateService } from "../../../../services/date/date.service";
 import { QuoteService } from "../../../../services/quote/quote.service";
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,7 @@ export class QuoteStateService {
   public selectedNoteFull: any;
   public usersEmail: any;
   public quoteForCreate: any = this.getDefaultquoteForCreate();
-
+  public quoteForm: FormGroup;
 
   constructor(
     @Inject('$state') $state: any,
@@ -33,6 +34,12 @@ export class QuoteStateService {
   ) {
     this.state = $state;
   }
+  public setQuoteForm (quoteForm) {
+    this.quoteForm = quoteForm;
+  }
+
+  public getQuoteForm () {return this.quoteForm;}
+
   public setError (error) {
     this.handleErrors.emit(error);
   }
