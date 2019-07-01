@@ -282,6 +282,9 @@ export class QuotesComponent implements OnInit {
     if (item.status === 'TICKETED' || item.status === 'INVOICED') {
       this.quoteServices.repeatSend(item.id).subscribe();
     } else {
+      let recipients = item.recipients;
+      if (recipients instanceof Array) console.log('is array');
+      if (recipients instanceof String) item.recipients = recipients.split(',');
       const modalRef = this.modalService.open(ModalQuoteComponent,  item);
       modalRef.componentInstance.data = item;
     }
