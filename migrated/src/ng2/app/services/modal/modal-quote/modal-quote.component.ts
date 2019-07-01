@@ -180,6 +180,7 @@ export class ModalQuoteComponent implements OnInit {
             .subscribe((res) => {
               if (res) {
                 this.quoteService.repeatSend(res['id']).subscribe((res) => { })
+                this.quoteStateService.goToQuote();
               }
               this.unsubscribe.next();
               this.unsubscribe.complete();
