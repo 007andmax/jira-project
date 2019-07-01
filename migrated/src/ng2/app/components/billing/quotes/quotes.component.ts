@@ -283,10 +283,7 @@ export class QuotesComponent implements OnInit {
       this.quoteServices.repeatSend(item.id).subscribe();
     } else {
       let recipients = item.recipients;
-      console.log('typeof',typeof recipients);
-      if (recipients instanceof Array) console.log('is array');
-      if (recipients instanceof String) console.log('is String');
-      if (recipients instanceof String) item.recipients = recipients.split(',');
+      if (typeof recipients === "string") item.recipients = recipients.split(',');
       const modalRef = this.modalService.open(ModalQuoteComponent,  item);
       modalRef.componentInstance.data = item;
     }
