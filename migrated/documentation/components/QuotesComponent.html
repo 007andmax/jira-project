@@ -1,0 +1,3011 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>migrated documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">migrated documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>QuotesComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/ng2/app/components/billing/quotes/quotes.component.ts</code>
+</p>
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Password quotes component</p>
+
+    </p>
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">providers</td>
+                <td class="col-md-9">
+                                <code><a href="https://angular.io/api/common/Location" target="_blank" >Location</a></code>
+                            <code>{ provide: LocationStrategy, useClass: PathLocationStrategy }</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-quotes</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./quotes.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./quotes.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#dataToSend">dataToSend</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#infiniteScrollDisabled">infiniteScrollDisabled</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#page">page</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#quotesList">quotesList</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#quoteStatuses">quoteStatuses</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#searchNumber">searchNumber</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#selectedStatus">selectedStatus</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#approveQuote">approveQuote</a>
+                            </li>
+                            <li>
+                                <a href="#archiveQuote">archiveQuote</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#changeQuotesListItem">changeQuotesListItem</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#checkStatus">checkStatus</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#clearStatus">clearStatus</a>
+                            </li>
+                            <li>
+                                <a href="#convertToInvoice">convertToInvoice</a>
+                            </li>
+                            <li>
+                                <a href="#convertToTicket">convertToTicket</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#filterByDate">filterByDate</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getClass">getClass</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getDate">getDate</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getQuotes">getQuotes</a>
+                            </li>
+                            <li>
+                                <a href="#goToCreate">goToCreate</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#goToPreview">goToPreview</a>
+                            </li>
+                            <li>
+                                <a href="#goToQuoteEdit">goToQuoteEdit</a>
+                            </li>
+                            <li>
+                                <a href="#markAsRead">markAsRead</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#onScroll">onScroll</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#refreshQuoteAndPage">refreshQuoteAndPage</a>
+                            </li>
+                            <li>
+                                <a href="#refuseQuote">refuseQuote</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#resend">resend</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#selectClient">selectClient</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#setDate">setDate</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#setNumberEnter">setNumberEnter</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#setNumberOnBlur">setNumberOnBlur</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#setStatus">setStatus</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#sortBy">sortBy</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(quoteServices: <a href="../injectables/QuoteService.html">QuoteService</a>, companiesService: <a href="../injectables/CompaniesService.html">CompaniesService</a>, dateService: <a href="../injectables/DateService.html">DateService</a>, cdRef: <a href="https://angular.io/api/core/ChangeDetectorRef" target="_blank">ChangeDetectorRef</a>, quoteStateService: <a href="../injectables/QuoteStateService.html">QuoteStateService</a>, quoteRealTimeService: <a href="../injectables/QuoteRealTimeService.html">QuoteRealTimeService</a>, modalService: NgbModal)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/ng2/app/components/billing/quotes/quotes.component.ts:38</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Creates an instance of the QuoteCreateContentComponent with the injected services</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>quoteServices</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/QuoteService.html" target="_self" >QuoteService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><p>to work with api</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>companiesService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/CompaniesService.html" target="_self" >CompaniesService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><p>Service to work with companies api</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>dateService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/DateService.html" target="_self" >DateService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><p>Service to work with date</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>cdRef</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/core/ChangeDetectorRef" target="_blank" >ChangeDetectorRef</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><p>Service to work with date</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>quoteStateService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/QuoteStateService.html" target="_self" >QuoteStateService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><p>to work quote state</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>quoteRealTimeService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/QuoteRealTimeService.html" target="_self" >QuoteRealTimeService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><p>to work quote state</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>modalService</td>
+                                                  
+                                                        <td>
+                                                                    <code>NgbModal</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><p>to work quote state</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="approveQuote"></a>
+                    <span class="name">
+                        <b>
+                            approveQuote
+                        </b>
+                        <a href="#approveQuote"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>approveQuote(item)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="261"
+                            class="link-to-prism">src/ng2/app/components/billing/quotes/quotes.component.ts:261</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>archive quote</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>item</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="archiveQuote"></a>
+                    <span class="name">
+                        <b>
+                            archiveQuote
+                        </b>
+                        <a href="#archiveQuote"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>archiveQuote(item)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="246"
+                            class="link-to-prism">src/ng2/app/components/billing/quotes/quotes.component.ts:246</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>archive quote</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>item</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="changeQuotesListItem"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            changeQuotesListItem
+                        </b>
+                        <a href="#changeQuotesListItem"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>changeQuotesListItem()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="267"
+                            class="link-to-prism">src/ng2/app/components/billing/quotes/quotes.component.ts:267</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="checkStatus"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            checkStatus
+                        </b>
+                        <a href="#checkStatus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>checkStatus(quote, statusForShowingArray)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="211"
+                            class="link-to-prism">src/ng2/app/components/billing/quotes/quotes.component.ts:211</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Check elem status</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>quote</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>statusForShowingArray</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="clearStatus"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            clearStatus
+                        </b>
+                        <a href="#clearStatus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>clearStatus()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="172"
+                            class="link-to-prism">src/ng2/app/components/billing/quotes/quotes.component.ts:172</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Clear input status</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="convertToInvoice"></a>
+                    <span class="name">
+                        <b>
+                            convertToInvoice
+                        </b>
+                        <a href="#convertToInvoice"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>convertToInvoice(item)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="219"
+                            class="link-to-prism">src/ng2/app/components/billing/quotes/quotes.component.ts:219</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>convert Quote to invoice</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>item</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="convertToTicket"></a>
+                    <span class="name">
+                        <b>
+                            convertToTicket
+                        </b>
+                        <a href="#convertToTicket"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>convertToTicket(item)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="228"
+                            class="link-to-prism">src/ng2/app/components/billing/quotes/quotes.component.ts:228</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>convert Quote to ticket</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>item</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filterByDate"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            filterByDate
+                        </b>
+                        <a href="#filterByDate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>filterByDate(value)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="107"
+                            class="link-to-prism">src/ng2/app/components/billing/quotes/quotes.component.ts:107</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>filter data by date</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>value</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getClass"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getClass
+                        </b>
+                        <a href="#getClass"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getClass(className)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="182"
+                            class="link-to-prism">src/ng2/app/components/billing/quotes/quotes.component.ts:182</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>add status class for quotes</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>className</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>&quot;error-status&quot; | &quot;status-in-progress&quot; | &quot;changing-status&quot; | &quot;status-warning&quot; | &quot;success-status&quot;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getDate"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getDate
+                        </b>
+                        <a href="#getDate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getDate(value)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="83"
+                            class="link-to-prism">src/ng2/app/components/billing/quotes/quotes.component.ts:83</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>get formated date</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>value</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getQuotes"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getQuotes
+                        </b>
+                        <a href="#getQuotes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getQuotes()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="72"
+                            class="link-to-prism">src/ng2/app/components/billing/quotes/quotes.component.ts:72</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>get quote list</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="goToCreate"></a>
+                    <span class="name">
+                        <b>
+                            goToCreate
+                        </b>
+                        <a href="#goToCreate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>goToCreate()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="193"
+                            class="link-to-prism">src/ng2/app/components/billing/quotes/quotes.component.ts:193</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Go to create state</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="goToPreview"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            goToPreview
+                        </b>
+                        <a href="#goToPreview"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>goToPreview(quote)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="204"
+                            class="link-to-prism">src/ng2/app/components/billing/quotes/quotes.component.ts:204</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Change state to preview</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>quote</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="goToQuoteEdit"></a>
+                    <span class="name">
+                        <b>
+                            goToQuoteEdit
+                        </b>
+                        <a href="#goToQuoteEdit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>goToQuoteEdit(quote)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="197"
+                            class="link-to-prism">src/ng2/app/components/billing/quotes/quotes.component.ts:197</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>quote</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="markAsRead"></a>
+                    <span class="name">
+                        <b>
+                            markAsRead
+                        </b>
+                        <a href="#markAsRead"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>markAsRead(item)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="252"
+                            class="link-to-prism">src/ng2/app/components/billing/quotes/quotes.component.ts:252</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>item</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <b>
+                            ngOnInit
+                        </b>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="63"
+                            class="link-to-prism">src/ng2/app/components/billing/quotes/quotes.component.ts:63</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Initializes quotes. See [ngOnInit]{@see OnInit#ngOnInit}</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onScroll"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            onScroll
+                        </b>
+                        <a href="#onScroll"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onScroll()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="90"
+                            class="link-to-prism">src/ng2/app/components/billing/quotes/quotes.component.ts:90</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Get quotes on scroll</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="refreshQuoteAndPage"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            refreshQuoteAndPage
+                        </b>
+                        <a href="#refreshQuoteAndPage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>refreshQuoteAndPage()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="124"
+                            class="link-to-prism">src/ng2/app/components/billing/quotes/quotes.component.ts:124</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>refresh quote data and page</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="refuseQuote"></a>
+                    <span class="name">
+                        <b>
+                            refuseQuote
+                        </b>
+                        <a href="#refuseQuote"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>refuseQuote(item)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="237"
+                            class="link-to-prism">src/ng2/app/components/billing/quotes/quotes.component.ts:237</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>refuse quote</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>item</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resend"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            resend
+                        </b>
+                        <a href="#resend"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>resend(item)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="281"
+                            class="link-to-prism">src/ng2/app/components/billing/quotes/quotes.component.ts:281</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>open send modal for resend</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>item</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectClient"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            selectClient
+                        </b>
+                        <a href="#selectClient"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>selectClient(value)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="132"
+                            class="link-to-prism">src/ng2/app/components/billing/quotes/quotes.component.ts:132</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Select client</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>value</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setDate"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            setDate
+                        </b>
+                        <a href="#setDate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>setDate(value)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="116"
+                            class="link-to-prism">src/ng2/app/components/billing/quotes/quotes.component.ts:116</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>set data to send</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>value</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setNumberEnter"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            setNumberEnter
+                        </b>
+                        <a href="#setNumberEnter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>setNumberEnter(event?)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="141"
+                            class="link-to-prism">src/ng2/app/components/billing/quotes/quotes.component.ts:141</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Set number on enter action</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>event</td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setNumberOnBlur"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            setNumberOnBlur
+                        </b>
+                        <a href="#setNumberOnBlur"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>setNumberOnBlur(event?)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="153"
+                            class="link-to-prism">src/ng2/app/components/billing/quotes/quotes.component.ts:153</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Set number on blur action</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>event</td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setStatus"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            setStatus
+                        </b>
+                        <a href="#setStatus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>setStatus(item)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="162"
+                            class="link-to-prism">src/ng2/app/components/billing/quotes/quotes.component.ts:162</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Set input status</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>item</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sortBy"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            sortBy
+                        </b>
+                        <a href="#sortBy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>sortBy(value)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="98"
+                            class="link-to-prism">src/ng2/app/components/billing/quotes/quotes.component.ts:98</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>sort by status</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>value</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="dataToSend"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            dataToSend</b>
+                            <a href="#dataToSend"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>{
+    startDate: null,
+    endDate: null,
+    company: null,
+    page: 0,
+    type: null,
+    number: undefined,
+    status: undefined
+  }</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/ng2/app/components/billing/quotes/quotes.component.ts:29</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="infiniteScrollDisabled"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            infiniteScrollDisabled</b>
+                            <a href="#infiniteScrollDisabled"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/ng2/app/components/billing/quotes/quotes.component.ts:38</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="page"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            page</b>
+                            <a href="#page"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>0</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/ng2/app/components/billing/quotes/quotes.component.ts:25</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="quotesList"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            quotesList</b>
+                            <a href="#quotesList"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/ng2/app/components/billing/quotes/quotes.component.ts:24</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="quoteStatuses"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            quoteStatuses</b>
+                            <a href="#quoteStatuses"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>QUOTE_STATUS</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/ng2/app/components/billing/quotes/quotes.component.ts:27</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="searchNumber"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            searchNumber</b>
+                            <a href="#searchNumber"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/ng2/app/components/billing/quotes/quotes.component.ts:26</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="selectedStatus"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            selectedStatus</b>
+                            <a href="#selectedStatus"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>&#x27;&#x27;</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/ng2/app/components/billing/quotes/quotes.component.ts:28</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ChangeDetectorRef,Component, OnInit } from &#x27;@angular/core&#x27;;
+import { Location, LocationStrategy, PathLocationStrategy } from &#x27;@angular/common&#x27;;
+
+import { QuoteService } from &#x27;../../../services/quote/quote.service&#x27;;
+import { CompaniesService } from &#x27;../../../services/company/companies.service&#x27;;
+import { QUOTE_STATUS } from &#x27;../../../const/quote-status&#x27;;
+import { DateService } from &quot;../../../services/date/date.service&quot;;
+import { QuoteStateService } from &quot;./quote-create/quote-state.service&quot;;
+import { QuoteRealTimeService } from &quot;./quote-realtime/quote-realtime.service&quot;;
+import {ModalQuoteComponent} from &quot;../../../services/modal/modal-quote/modal-quote.component&quot;;
+import {NgbModal} from &quot;@ng-bootstrap/ng-bootstrap&quot;;
+
+/**
+ * Password quotes component
+ */
+@Component({
+  selector: &#x27;app-quotes&#x27;,
+  templateUrl: &#x27;./quotes.component.html&#x27;,
+  styleUrls: [&#x27;./quotes.component.scss&#x27;],
+  providers: [Location, {provide: LocationStrategy, useClass: PathLocationStrategy}],
+})
+export class QuotesComponent implements OnInit {
+
+  public quotesList &#x3D; [];
+  public page &#x3D; 0;
+  public searchNumber: number;
+  public quoteStatuses &#x3D; QUOTE_STATUS;
+  public selectedStatus &#x3D; &#x27;&#x27;;
+  public dataToSend &#x3D; {
+    startDate: null,
+    endDate: null,
+    company: null,
+    page: 0,
+    type: null,
+    number: undefined,
+    status: undefined
+  };
+  public infiniteScrollDisabled &#x3D; false;
+
+  /**
+   * Creates an instance of the QuoteCreateContentComponent with the injected services
+   * @param {QuoteService} quoteServices to work with api
+   * @param {CompaniesService} companiesService Service to work with companies api
+   * @param {DateService} dateService Service to work with date
+   * @param {ChangeDetectorRef} cdRef Service to work with date
+   * @param {QuoteStateService} quoteStateService to work quote state
+   * @param {QuoteRealTimeService} quoteRealTimeService to work quote state
+   * @param {NgbModal} modalService to work quote state
+   */
+  constructor(
+    private quoteServices: QuoteService,
+    private companiesService: CompaniesService,
+    private dateService: DateService,
+    private cdRef:ChangeDetectorRef,
+    private quoteStateService: QuoteStateService,
+    private quoteRealTimeService: QuoteRealTimeService,
+    private modalService: NgbModal
+  ) { }
+
+  /**
+   * Initializes quotes. See [ngOnInit]{@see OnInit#ngOnInit}
+   */
+  ngOnInit() {
+    this.getQuotes();
+    this.companiesService.getCompaniesList();
+    this.changeQuotesListItem();
+  }
+
+  /**
+   * get quote list
+   */
+  public getQuotes() {
+    this.quoteServices.getQuotes(this.dataToSend).subscribe((res: any) &#x3D;&gt; {
+      this.quotesList &#x3D; [...this.quotesList, ...res];
+      this.dataToSend.page +&#x3D; 1;
+      this.infiniteScrollDisabled &#x3D; false;
+    })
+  }
+
+  /**
+   * get formated date
+   */
+  public getDate(value) {
+    return this.dateService.getFormatDate(new Date(value));
+  }
+
+  /**
+   * Get quotes on scroll
+   */
+  public onScroll() {
+    this.infiniteScrollDisabled &#x3D; true;
+    this.getQuotes();
+  }
+
+  /**
+   * sort by status
+   */
+  public sortBy(value) {
+    this.refreshQuoteAndPage();
+    this.dataToSend.type &#x3D; value;
+    this.getQuotes()
+  }
+
+  /**
+   * filter data by date
+   */
+  public filterByDate(value) {
+    this.refreshQuoteAndPage();
+    this.setDate(value);
+    this.getQuotes()
+  }
+
+  /**
+   * set data to send
+   */
+  private setDate(value) {
+    this.dataToSend.startDate &#x3D; value.start;
+    this.dataToSend.endDate &#x3D; value.end;
+  }
+
+  /**
+   * refresh quote data and page
+   */
+  private refreshQuoteAndPage() {
+    this.quotesList &#x3D; [];
+    this.dataToSend.page &#x3D; 0;
+  }
+
+  /**
+   * Select client
+   */
+  public selectClient(value) {
+    this.refreshQuoteAndPage();
+    this.dataToSend.company &#x3D; (value &amp;&amp; value.item) ? value.item.name : null;
+    this.getQuotes();
+  }
+
+  /**
+   * Set number on enter action
+   */
+  public setNumberEnter(event?) {
+    if (event.key &#x3D;&#x3D;&#x3D; &quot;Enter&quot;) {
+      this.dataToSend.number &#x3D; this.searchNumber;
+      this.refreshQuoteAndPage();
+      this.getQuotes();
+    }
+
+  }
+
+  /**
+   * Set number on blur action
+   */
+  public setNumberOnBlur(event?) {
+    this.dataToSend.number &#x3D; this.searchNumber;
+    this.refreshQuoteAndPage();
+    this.getQuotes();
+  }
+
+  /**
+   * Set input status
+   */
+  public setStatus(item) {
+    this.selectedStatus &#x3D; item.name;
+    this.dataToSend.status &#x3D; item.type;
+    this.refreshQuoteAndPage();
+    this.getQuotes();
+  }
+
+  /**
+   * Clear input status
+   */
+  public clearStatus() {
+    this.selectedStatus &#x3D; null;
+    this.dataToSend.status &#x3D; null;
+    this.refreshQuoteAndPage();
+    this.getQuotes();
+  }
+
+  /**
+   * add status class for quotes
+   */
+  public getClass(className) {
+    return className &#x3D;&#x3D;&#x3D; &#x27;EXPIRED&#x27; || className &#x3D;&#x3D;&#x3D; &#x27;REFUSED&#x27; ? &#x27;error-status&#x27; :
+      className &#x3D;&#x3D;&#x3D; &#x27;READ&#x27; ? &#x27;status-in-progress&#x27; :
+        className &#x3D;&#x3D;&#x3D; &#x27;DRAFT&#x27; ? &#x27;changing-status&#x27; :
+          className &#x3D;&#x3D;&#x3D; &#x27;UNREAD&#x27; ? &#x27;status-warning&#x27; :
+            &#x27;success-status&#x27;
+  }
+
+  /**
+   * Go to create state
+   */
+  goToCreate() {
+    this.quoteStateService.goToCreate();
+  }
+
+  goToQuoteEdit(quote) {
+    this.quoteStateService.setEditQuote(quote);
+  }
+
+  /**
+   * Change state to preview
+   */
+  public goToPreview(quote) {
+    this.quoteStateService.goToPreview(quote, false);
+  }
+
+  /**
+   * Check elem status
+   */
+  public checkStatus(quote, statusForShowingArray) {
+    const elems &#x3D; statusForShowingArray.filter((item) &#x3D;&gt; item.toLowerCase() &#x3D;&#x3D;&#x3D; quote.status.toLowerCase());
+    return elems.length &gt; 0;
+  }
+
+  /**
+   * convert Quote to invoice
+   */
+  convertToInvoice(item) {
+    this.quoteServices.convertToInvoice({companyInfo: item.company}, item.id).subscribe((res) &#x3D;&gt; {
+      console.log(res, &#x27;RES&#x27;);
+    });
+  }
+
+  /**
+   * convert Quote to ticket
+   */
+  convertToTicket(item) {
+    this.quoteServices.convertToTicket(item.company, item.id).subscribe((res) &#x3D;&gt; {
+      console.log(res, &#x27;RES&#x27;);
+    });
+  }
+
+  /**
+   * refuse quote
+   */
+  refuseQuote(item) {
+    this.quoteServices.refuseQuote(item.company, item.id).subscribe((res) &#x3D;&gt; {
+      console.log(res, &#x27;RES&#x27;);
+    });
+  }
+
+  /**
+   * archive quote
+   */
+  archiveQuote(item) {
+    this.quoteServices.archiveQuote(item.company, item.id).subscribe((res) &#x3D;&gt; {
+      console.log(res, &#x27;RES&#x27;);
+    });
+  }
+
+  markAsRead(item) {
+    this.quoteServices.markAsRead(item.company, item.id).subscribe((res) &#x3D;&gt; {
+      console.log(res, &#x27;RES&#x27;);
+    });
+  }
+
+  /**
+   * archive quote
+   */
+  approveQuote(item) {
+    this.quoteServices.approveQuote(item.company, item.id).subscribe((res) &#x3D;&gt; {
+      console.log(res, &#x27;RES&#x27;);
+    });
+  }
+
+  public changeQuotesListItem() {
+    this.quoteRealTimeService.changeQuotesArray.subscribe((newChange) &#x3D;&gt; {
+      if (newChange.action &#x3D;&#x3D;&#x3D; &#x27;SALE_QUOTE_CREATED&#x27;) {
+        return this.quotesList.push(newChange.data);
+      } else {
+        const elemIndex &#x3D; this.quotesList.findIndex((item) &#x3D;&gt; item.id &#x3D;&#x3D;&#x3D; newChange.data.id);
+        return this.quotesList[elemIndex] &#x3D; newChange.data;
+      }
+    })
+  }
+
+  /**
+   * open send modal for resend
+   */
+  public resend(item) {
+    if (item.status &#x3D;&#x3D;&#x3D; &#x27;TICKETED&#x27; || item.status &#x3D;&#x3D;&#x3D; &#x27;INVOICED&#x27;) {
+      this.quoteServices.repeatSend(item.id).subscribe();
+    } else {
+      let recipients &#x3D; item.recipients;
+      if (typeof recipients &#x3D;&#x3D;&#x3D; &quot;string&quot;) item.recipients &#x3D; recipients.split(&#x27;,&#x27;);
+      const modalRef &#x3D; this.modalService.open(ModalQuoteComponent,  item);
+      modalRef.componentInstance.data &#x3D; item;
+    }
+
+  }
+
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;!--&lt;app-left-panel-billing [ngClass]&#x3D;&quot;{&#x27;show&#x27;: isMobileFilterShowing }&quot;&gt;&lt;/app-left-panel-billing&gt;--&gt;
+&lt;div class&#x3D;&quot;quotes&quot;&gt;
+  &lt;div class&#x3D;&quot;quotes__header&quot;&gt;
+    &lt;div class&#x3D;&quot;quotes__header--top&quot;&gt;
+      &lt;h1&gt;Quotes&lt;/h1&gt;
+      &lt;div class&#x3D;&quot;quotes-actions&quot;&gt;
+        &lt;div class&#x3D;&quot;input-field&quot;&gt;
+          &lt;app-multi-datepicker (selectedDate)&#x3D;&quot;filterByDate($event)&quot;&gt;&lt;/app-multi-datepicker&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;input-field w-280&quot;&gt;
+          &lt;app-select-client-company style&#x3D;&quot;width: 75%;&quot;
+                                     class&#x3D;&quot;light-dropdown&quot;
+                                     (selectedItem)&#x3D;&quot;selectClient($event)&quot;&gt;
+          &lt;/app-select-client-company&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;input-field w-160&quot;&gt;
+          &lt;input type&#x3D;&quot;text&quot;
+                 placeholder&#x3D;&quot;Search by number&quot;
+                 [(ngModel)]&#x3D;&quot;searchNumber&quot;
+                 (blur)&#x3D;&quot;setNumberOnBlur()&quot;
+                 (keydown)&#x3D;&quot;setNumberEnter($event)&quot;&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;input-field w-160 light-dropdown&quot;
+             ngbDropdown&gt;
+          &lt;input type&#x3D;&quot;text&quot;
+                 [(ngModel)]&#x3D;&quot;selectedStatus&quot;
+                 class&#x3D;&quot;pointer&quot;
+                 id&#x3D;&quot;dropdownBasic1&quot;
+                 ngbDropdownToggle
+                 placeholder&#x3D;&quot;Sort by&quot;&gt;
+          &lt;i *ngIf&#x3D;&quot;selectedStatus&quot;
+             class&#x3D;&quot;icn-sm icn-remove-old&quot;
+             (click)&#x3D;&quot;clearStatus()&quot;&gt;&lt;/i&gt;
+          &lt;i *ngIf&#x3D;&quot;!selectedStatus&quot;
+             class&#x3D;&quot;icn-sm report-caret-icon&quot;&gt;&lt;/i&gt;
+          &lt;div ngbDropdownMenu aria-labelledby&#x3D;&quot;dropdownBasic1&quot;&gt;
+            &lt;button ngbDropdownItem *ngFor&#x3D;&quot;let item of quoteStatuses&quot; (click)&#x3D;&quot;setStatus(item)&quot;&gt;{{item.name}}&lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;button class&#x3D;&quot;btn-new btn-success&quot;
+                type&#x3D;&quot;button&quot; (click)&#x3D;&quot;goToCreate()&quot;&gt;
+          Сreate Quotation
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;quotes__header--bottom row&quot;&gt;
+      &lt;div class&#x3D;&quot;col-md-1 w-1-5&quot;&gt;
+        &lt;label class&#x3D;&quot;control checkbox&quot;&gt;
+          &lt;input type&#x3D;&quot;checkbox&quot;&gt;
+          &lt;span class&#x3D;&quot;control-indicator&quot;
+                style&#x3D;&quot;margin-top: 3px;&quot;&gt;
+          &lt;/span&gt;
+        &lt;/label&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;col-md-1 pointer&quot; (click)&#x3D;&quot;sortBy(&#x27;number&#x27;)&quot;&gt;Quote No.&lt;/div&gt;
+      &lt;div class&#x3D;&quot;col-md-3 pointer&quot; (click)&#x3D;&quot;sortBy(&#x27;customerName&#x27;)&quot;&gt;Company name&lt;/div&gt;
+      &lt;div class&#x3D;&quot;col-md-2 pointer&quot; (click)&#x3D;&quot;sortBy(&#x27;date&#x27;)&quot;&gt;Date&lt;/div&gt;
+      &lt;div class&#x3D;&quot;col-md-1 pointer&quot; (click)&#x3D;&quot;sortBy(&#x27;validUntil&#x27;)&quot;&gt;Valid Until&lt;/div&gt;
+      &lt;div class&#x3D;&quot;col-md-1 pointer&quot; (click)&#x3D;&quot;sortBy(&#x27;amount&#x27;)&quot;&gt;Amount&lt;/div&gt;
+      &lt;div class&#x3D;&quot;col-md-1 pointer&quot; (click)&#x3D;&quot;sortBy(&#x27;deposit&#x27;)&quot;&gt;Deposit&lt;/div&gt;
+      &lt;div class&#x3D;&quot;col-md-1 pointer&quot;&gt;Status&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class&#x3D;&quot;quotes__content&quot;
+       *ngIf&#x3D;&quot;quotesList.length&quot;
+       infiniteScroll
+       [infiniteScrollDistance]&#x3D;&quot;2&quot;
+       [infiniteScrollThrottle]&#x3D;&quot;50&quot;
+       [infiniteScrollDisabled]&#x3D;&quot;infiniteScrollDisabled&quot;
+       (scrolled)&#x3D;&quot;onScroll()&quot;&gt;
+    &lt;div class&#x3D;&quot;quotes__content--item row&quot;
+         *ngFor&#x3D;&quot;let item of quotesList&quot;&gt;
+      &lt;div class&#x3D;&quot;col-md-1 w-1-5&quot;&gt;
+        &lt;label class&#x3D;&quot;control checkbox&quot;&gt;
+          &lt;input type&#x3D;&quot;checkbox&quot;&gt;
+          &lt;span class&#x3D;&quot;control-indicator&quot;
+                style&#x3D;&quot;margin-top: 3px;&quot;&gt;
+          &lt;/span&gt;
+        &lt;/label&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;col-md-1 pointer&quot;
+           (click)&#x3D;&quot;goToPreview(item)&quot;
+      &gt;#{{item.number}}
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;col-md-3 g-m&quot;&gt;{{item.company.name}}&lt;/div&gt;
+      &lt;div class&#x3D;&quot;col-md-2&quot;&gt;{{getDate(item.date)}}&lt;/div&gt;
+      &lt;div class&#x3D;&quot;col-md-1&quot;&gt;{{getDate(item.validUntil)}}&lt;/div&gt;
+      &lt;div class&#x3D;&quot;col-md-1&quot;&gt;{{item.totalAmount | currency}}&lt;/div&gt;
+      &lt;div class&#x3D;&quot;col-md-1&quot;&gt;{{item.partialDeposit}}&lt;/div&gt;
+      &lt;div class&#x3D;&quot;col-md-1 df jc-sb&quot;&gt;
+        &lt;div class&#x3D;&quot;quote-status&quot; [ngClass]&#x3D;&quot;getClass(item.status)&quot;&gt; {{item.status}}&lt;/div&gt;
+        &lt;div ngbDropdown class&#x3D;&quot;light-dropdown to-left df ai-c&quot;&gt;
+          &lt;i class&#x3D;&quot;icn-sm icn-more-light-grey pointer&quot;
+             style&#x3D;&quot;height: 100%;background-position: -1664px 9px;&quot;
+             id&#x3D;&quot;status&quot; ngbDropdownToggle&gt;&lt;/i&gt;
+          &lt;div
+            class&#x3D;&quot;dropdown-menu show&quot;
+            style&#x3D;&quot;width: 170px;&quot;
+            ngbDropdownMenu
+            aria-labelledby&#x3D;&quot;status&quot;&gt;
+            &lt;button
+              class&#x3D;&quot;dropdown-item&quot;
+              (click)&#x3D;&quot;resend(item)&quot;
+              ngbDropdownItem&gt;
+              Resend quote
+            &lt;/button&gt;
+            &lt;button
+              class&#x3D;&quot;dropdown-item&quot;
+              ngbDropdownItem
+              *ngIf&#x3D;&quot;checkStatus(item, [&#x27;APPROVED&#x27;])&quot;
+              (click)&#x3D;&quot;convertToInvoice(item)&quot;&gt;
+              Convert to Invoice
+            &lt;/button&gt;
+            &lt;button
+              class&#x3D;&quot;dropdown-item&quot;
+              ngbDropdownItem
+              *ngIf&#x3D;&quot;checkStatus(item, [&#x27;APPROVED&#x27;])&quot;
+              (click)&#x3D;&quot;convertToTicket(item)&quot;&gt;
+              Convert to Ticket
+            &lt;/button&gt;
+            &lt;button
+              class&#x3D;&quot;dropdown-item&quot;
+              ngbDropdownItem
+              *ngIf&#x3D;&quot;checkStatus(item, [&#x27;DRAFT&#x27;, &#x27;READ&#x27;, &#x27;EXPIRED&#x27;, &#x27;UNREAD&#x27;])&quot;
+              (click)&#x3D;&quot;approveQuote(item)&quot;&gt;
+              Approve a quote
+            &lt;/button&gt;
+            &lt;button
+              class&#x3D;&quot;dropdown-item&quot;
+              ngbDropdownItem
+              *ngIf&#x3D;&quot;checkStatus(item, [&#x27;UNREAD&#x27;])&quot;
+              (click)&#x3D;&quot;markAsRead(item)&quot;&gt;
+              Mark as Read
+            &lt;/button&gt;
+            &lt;button
+              class&#x3D;&quot;dropdown-item&quot;
+              ngbDropdownItem
+              *ngIf&#x3D;&quot;checkStatus(item, [&#x27;READ&#x27;,&#x27;UNREAD&#x27;])&quot;
+              (click)&#x3D;&quot;refuseQuote(item)&quot;&gt;
+              Refuse a quote
+            &lt;/button&gt;
+            &lt;button
+              class&#x3D;&quot;dropdown-item&quot;
+              ngbDropdownItem
+              *ngIf&#x3D;&quot;checkStatus(item, [&#x27;UNREAD&#x27;,&#x27;DRAFT&#x27;, &#x27;EXPIRED&#x27;, &#x27;INVOICED&#x27;, &#x27;TICKETED&#x27;])&quot;
+              (click)&#x3D;&quot;archiveQuote(item)&quot;&gt;
+              Archive a quote
+            &lt;/button&gt;
+            &lt;button
+              class&#x3D;&quot;dropdown-item&quot;
+              ngbDropdownItem
+              *ngIf&#x3D;&quot;checkStatus(item, [&#x27;READ&#x27;,&#x27;UNREAD&#x27;,&#x27;DRAFT&#x27;, &#x27;APPROVED&#x27;, &#x27;REFUSED&#x27;, &#x27;EXPIRED&#x27;])&quot;
+              (click)&#x3D;&quot;goToQuoteEdit(item)&quot;&gt;
+              Edit a quote
+            &lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class&#x3D;&quot;loading&quot; *ngIf&#x3D;&quot;!quotesList.length&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./quotes.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.quotes {
+  background: #f3f7f9;
+  min-height: calc(100vh - 78px);
+  &amp;__header {
+    top: 78px;
+    background: #f3f7f9;
+    padding: 24px;
+    position: fixed;
+    width: calc(100vw - 324px);
+    transition: all .3s;
+    z-index: 1;
+    @media (max-width: 1600px) {
+      width: calc(100vw - 316px);
+    }
+    &amp;--top {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 25px;
+      h1 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 500;
+        font-family: &quot;Graphik Regular&quot;, sans-serif;
+      }
+      .quotes-actions {
+        display: flex;
+        .input-field {
+          margin-right: 8px;
+          width: 220px;
+          @media (max-width: 1366px) {
+            width: 200px;
+          }
+          @media (max-width: 1280px) {
+            width: 180px;
+          }
+          .report-caret-icon {
+            top: 16px !important;
+          }
+        }
+        .btn-new {
+          margin-left: 8px;
+          width: 150px;
+          @media (max-width: 1280px) {
+            width: 120px;
+          }
+        }
+      }
+    }
+    &amp;--bottom {
+      [class*&#x3D;&#x27;col-md-&#x27;] {
+        text-transform: uppercase;
+        font-family: &quot;Graphik-Medium&quot;, sans-serif;
+        font-size: 11px;
+        font-weight: bold;
+        @media (max-width: 1366px) {
+          font-size: 10px;
+        }
+      }
+    }
+  }
+  &amp;__content {
+    padding: 0 24px 24px;
+    margin-top: 135px;
+    &amp;--item {
+      background: #fff;
+      border-radius: 5px;
+      padding: 24px 0;
+      margin-bottom: 2px;
+      [class*&#x3D;&#x27;col-md-&#x27;] {
+        font-family: &quot;Graphik Regular&quot;, sans-serif;
+        font-size: 13px;
+        @media (max-width: 1366px) {
+          font-size: 11px;
+        }
+        .quote-status {
+          &amp;:before {
+            display: none;
+          }
+        }
+        a.hit-area {
+          position: absolute;
+          right: 15px;
+          top: 2px;
+        }
+      }
+    }
+  }
+  .w-1-5 {
+    width: 1.5% !important;
+  }
+
+  .w-280 {
+    width: 280px !important;
+    @media (max-width: 1366px) {
+      width: 240px !important;
+    }
+    @media (max-width: 1280px) {
+      width: 200px !important;
+    }
+  }
+
+  .w-160 {
+    width: 160px !important;
+    @media (max-width: 1366px) {
+      width: 140px !important;
+    }
+    @media (max-width: 1280px) {
+      width: 135px !important;
+      input {
+        padding: 10px;
+      }
+    }
+  }
+
+  .col-md-1 {
+    width: 11.2%;
+    @media (max-width: 1600px) {
+      width: 11%;
+    }
+    @media (max-width: 1366px) {
+      width: 10.9%;
+    }
+    &amp;.df.jc-sb {
+      @media (max-width: 1366px) {
+        width: 14%;
+      }
+    }
+  }
+  .col-md-2 {
+    @media (max-width: 1366px) {
+      width: 14%;
+    }
+  }
+  [class*&#x3D;&#x27;col-md-&#x27;].g-m {
+    font-weight: bold;
+    font-family: &quot;Graphik-Medium&quot;, sans-serif;
+  }
+  .btn-new {
+    @media (max-width: 1280px) {
+      padding: 5px !important;
+    }
+  }
+}
+
+
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><!--<app-left-panel-billing [ngClass]="{\'show\': isMobileFilterShowing }"></app-left-panel-billing>--><div class="quotes">  <div class="quotes__header">    <div class="quotes__header--top">      <h1>Quotes</h1>      <div class="quotes-actions">        <div class="input-field">          <app-multi-datepicker (selectedDate)="filterByDate($event)"></app-multi-datepicker>        </div>        <div class="input-field w-280">          <app-select-client-company style="width: 75%;"                                     class="light-dropdown"                                     (selectedItem)="selectClient($event)">          </app-select-client-company>        </div>        <div class="input-field w-160">          <input type="text"                 placeholder="Search by number"                 [(ngModel)]="searchNumber"                 (blur)="setNumberOnBlur()"                 (keydown)="setNumberEnter($event)">        </div>        <div class="input-field w-160 light-dropdown"             ngbDropdown>          <input type="text"                 [(ngModel)]="selectedStatus"                 class="pointer"                 id="dropdownBasic1"                 ngbDropdownToggle                 placeholder="Sort by">          <i *ngIf="selectedStatus"             class="icn-sm icn-remove-old"             (click)="clearStatus()"></i>          <i *ngIf="!selectedStatus"             class="icn-sm report-caret-icon"></i>          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">            <button ngbDropdownItem *ngFor="let item of quoteStatuses" (click)="setStatus(item)">{{item.name}}</button>          </div>        </div>        <button class="btn-new btn-success"                type="button" (click)="goToCreate()">          Сreate Quotation        </button>      </div>    </div>    <div class="quotes__header--bottom row">      <div class="col-md-1 w-1-5">        <label class="control checkbox">          <input type="checkbox">          <span class="control-indicator"                style="margin-top: 3px;">          </span>        </label>      </div>      <div class="col-md-1 pointer" (click)="sortBy(\'number\')">Quote No.</div>      <div class="col-md-3 pointer" (click)="sortBy(\'customerName\')">Company name</div>      <div class="col-md-2 pointer" (click)="sortBy(\'date\')">Date</div>      <div class="col-md-1 pointer" (click)="sortBy(\'validUntil\')">Valid Until</div>      <div class="col-md-1 pointer" (click)="sortBy(\'amount\')">Amount</div>      <div class="col-md-1 pointer" (click)="sortBy(\'deposit\')">Deposit</div>      <div class="col-md-1 pointer">Status</div>    </div>  </div>  <div class="quotes__content"       *ngIf="quotesList.length"       infiniteScroll       [infiniteScrollDistance]="2"       [infiniteScrollThrottle]="50"       [infiniteScrollDisabled]="infiniteScrollDisabled"       (scrolled)="onScroll()">    <div class="quotes__content--item row"         *ngFor="let item of quotesList">      <div class="col-md-1 w-1-5">        <label class="control checkbox">          <input type="checkbox">          <span class="control-indicator"                style="margin-top: 3px;">          </span>        </label>      </div>      <div class="col-md-1 pointer"           (click)="goToPreview(item)"      >#{{item.number}}      </div>      <div class="col-md-3 g-m">{{item.company.name}}</div>      <div class="col-md-2">{{getDate(item.date)}}</div>      <div class="col-md-1">{{getDate(item.validUntil)}}</div>      <div class="col-md-1">{{item.totalAmount | currency}}</div>      <div class="col-md-1">{{item.partialDeposit}}</div>      <div class="col-md-1 df jc-sb">        <div class="quote-status" [ngClass]="getClass(item.status)"> {{item.status}}</div>        <div ngbDropdown class="light-dropdown to-left df ai-c">          <i class="icn-sm icn-more-light-grey pointer"             style="height: 100%;background-position: -1664px 9px;"             id="status" ngbDropdownToggle></i>          <div            class="dropdown-menu show"            style="width: 170px;"            ngbDropdownMenu            aria-labelledby="status">            <button              class="dropdown-item"              (click)="resend(item)"              ngbDropdownItem>              Resend quote            </button>            <button              class="dropdown-item"              ngbDropdownItem              *ngIf="checkStatus(item, [\'APPROVED\'])"              (click)="convertToInvoice(item)">              Convert to Invoice            </button>            <button              class="dropdown-item"              ngbDropdownItem              *ngIf="checkStatus(item, [\'APPROVED\'])"              (click)="convertToTicket(item)">              Convert to Ticket            </button>            <button              class="dropdown-item"              ngbDropdownItem              *ngIf="checkStatus(item, [\'DRAFT\', \'READ\', \'EXPIRED\', \'UNREAD\'])"              (click)="approveQuote(item)">              Approve a quote            </button>            <button              class="dropdown-item"              ngbDropdownItem              *ngIf="checkStatus(item, [\'UNREAD\'])"              (click)="markAsRead(item)">              Mark as Read            </button>            <button              class="dropdown-item"              ngbDropdownItem              *ngIf="checkStatus(item, [\'READ\',\'UNREAD\'])"              (click)="refuseQuote(item)">              Refuse a quote            </button>            <button              class="dropdown-item"              ngbDropdownItem              *ngIf="checkStatus(item, [\'UNREAD\',\'DRAFT\', \'EXPIRED\', \'INVOICED\', \'TICKETED\'])"              (click)="archiveQuote(item)">              Archive a quote            </button>            <button              class="dropdown-item"              ngbDropdownItem              *ngIf="checkStatus(item, [\'READ\',\'UNREAD\',\'DRAFT\', \'APPROVED\', \'REFUSED\', \'EXPIRED\'])"              (click)="goToQuoteEdit(item)">              Edit a quote            </button>          </div>        </div>      </div>    </div>  </div>  <div class="loading" *ngIf="!quotesList.length"></div></div></div>'
+    var COMPONENTS = [{'name': 'AddItemComponent', 'selector': 'app-add-item'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'LeftPanelBillingComponent', 'selector': 'app-left-panel-billing'},{'name': 'LeftPanelComponent', 'selector': 'app-left-panel'},{'name': 'LeftPanelPasswordManagerComponent', 'selector': 'app-left-panel-password-manager'},{'name': 'MainComponent', 'selector': 'app-main'},{'name': 'ModalQuoteComponent', 'selector': 'app-modal-quote'},{'name': 'MultiDatepickerComponent', 'selector': 'app-multi-datepicker'},{'name': 'PasswoordManagerHeaderComponent', 'selector': 'app-passwoord-manager-header'},{'name': 'PasswordManagerComponent', 'selector': 'app-password-manager'},{'name': 'PasswordManagerEditAsideComponent', 'selector': 'app-password-manager-edit-aside'},{'name': 'PasswordManagerTableComponent', 'selector': 'app-password-manager-table'},{'name': 'PasswordRecordsTypesComponent', 'selector': 'app-password-records-types'},{'name': 'ProductListComponent', 'selector': 'app-product-list'},{'name': 'ProductTableComponent', 'selector': 'app-product-table'},{'name': 'QuoteCreateComponent', 'selector': 'app-quote-create'},{'name': 'QuoteCreateContentBottomComponent', 'selector': 'app-quote-create-content-bottom'},{'name': 'QuoteCreateContentComponent', 'selector': 'app-quote-create-content'},{'name': 'QuoteCreateContentNotesComponent', 'selector': 'app-quote-create-content-notes'},{'name': 'QuoteCreateContentTopComponent', 'selector': 'app-quote-create-content-top'},{'name': 'QuoteCreateHeaderComponent', 'selector': 'app-quote-create-header'},{'name': 'QuotePreviewComponent', 'selector': 'app-quote-preview'},{'name': 'QuotesComponent', 'selector': 'app-quotes'},{'name': 'SelectClientCompanyComponent', 'selector': 'app-select-client-company'},{'name': 'ServicesListComponent', 'selector': 'app-services-list'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'QuotesComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'QuotesComponent.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

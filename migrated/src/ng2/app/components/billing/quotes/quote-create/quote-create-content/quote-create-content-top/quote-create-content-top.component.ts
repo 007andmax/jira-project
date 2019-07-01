@@ -45,10 +45,13 @@ export class QuoteCreateContentTopComponent implements OnInit {
     this.startDateChanges(this.quoteForm.value.startDate);
     this.endDateChanges(this.quoteForm.value.endDate);
     this.getState();
-    this.onInitErrorHedle();
+    this.onInitErrorHandle();
   }
 
-  public onInitErrorHedle () {
+   /**
+   * Initialized error handle.
+   */
+  public onInitErrorHandle () {
     this.quoteStateService.getErrorHandle().subscribe((data) => {
       this.errorMessage = data;
     })
@@ -149,7 +152,11 @@ export class QuoteCreateContentTopComponent implements OnInit {
     return `${companyInfo.addresses[0].address}`
   }
 
-  public getClients(items) {
+  /**
+   * set client company
+   * @param items - list clients
+   */
+  public setClients(items) {
     if (this.editItem) {
       let index: number = items.findIndex(item => item.id === this.editItem.id);
       if (index > (-1)) {

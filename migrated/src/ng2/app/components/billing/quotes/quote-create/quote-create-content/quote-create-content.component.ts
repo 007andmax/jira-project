@@ -57,6 +57,9 @@ export class QuoteCreateContentComponent implements OnInit {
     this.handleSendMode();
   }
 
+   /**
+   * Initializes edit mode.
+   */
   private onInitEditMode() {
     this.quoteNumber = this.quoteStateService.quoteForCreate.quoteNumber;
     this.quoteStateService.setNumber(this.quoteNumber);
@@ -94,6 +97,9 @@ export class QuoteCreateContentComponent implements OnInit {
     }
   }
 
+ /**
+   * Initialized check quotes form on change
+   */
   public onInitChengeForm () {
     this.quoteForm.valueChanges.subscribe(val => {
       this.quoteStateService.setError(null);
@@ -160,6 +166,9 @@ export class QuoteCreateContentComponent implements OnInit {
     }
   }
 
+  /**
+   * Create quote and approve
+   */
   approveQuote() {
     const isFormReady = this.quoteStateService.getType();
     if (isFormReady && !this.editMode) {
@@ -188,6 +197,9 @@ export class QuoteCreateContentComponent implements OnInit {
     }
   }
 
+  /**
+   * Create quote and download
+   */
   public downloadPdf() {
     const isFormReady = this.quoteStateService.getType();
     if (isFormReady && !this.editMode) {

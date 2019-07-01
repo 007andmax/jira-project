@@ -34,28 +34,63 @@ export class QuoteStateService {
   ) {
     this.state = $state;
   }
+  /**
+   * set quote form
+   * @param quoteForm quote form
+   */
   public setQuoteForm (quoteForm) {
     this.quoteForm = quoteForm;
   }
 
+  /**
+   * Return quote form
+   */
   public getQuoteForm () {return this.quoteForm;}
 
+  /**
+   * set error when edit/create
+   * @param error error
+   */
   public setError (error) {
     this.handleErrors.emit(error);
   }
+
+  /**
+   * return error handle
+   */
   public getErrorHandle () { return this.handleErrors;}
+
+  /**
+   * set client
+   *  @param client client
+   */
   public setClient(client) {
     this.client = client;
     this.quoteForCreate.client = client;
   }
+
+   /**
+   * set company
+   *  @param company company
+   */
   public setCompany(company) {
     this.client = company;
     this.quoteForCreate.company = company;
   }
+
+   /**
+   * return client
+   */
   public getClient() {
     return this.client;
   }
 
+   /**
+   * return price quote
+   * @param cost cost
+   * @param count cost
+   * @param tax tax 
+   */
   public getPrice(cost, count, tax) {
     let price = 0;
     if (tax && tax.rate) {
@@ -66,6 +101,12 @@ export class QuoteStateService {
     return price;
   }
 
+  /**
+   * return tax price quote
+   * @param cost cost
+   * @param count cost
+   * @param tax tax 
+   */
   public getTaxPrice(cost, count, tax) {
     let sum = 0;
     if (tax && tax.length > 0) {
@@ -77,48 +118,82 @@ export class QuoteStateService {
 
   }
 
+  /**
+   * set product / service quote
+   * @param itemsArray quote
+   */
   public setItemArray(itemsArray) {
     this.itemsArray = itemsArray;
     this.quoteForCreate.itemsArray = itemsArray;
   }
 
+  /**
+   * get list product / service quote
+   */
   public getItemArray() {
     return this.itemsArray;
   }
 
+   /**
+   * set type for add product / service quote
+   * @param value type
+   */
   public setType(value) {
     this.type = value;
   }
 
+   /**
+   * get type for add product / service quote
+   */
   public getType() {
     return this.type;
   }
 
+  /**
+   * set valid for add product / service quote
+   */
   public emitValidation() {
     this.validateForm.emit(this.type)
   }
 
+  /**
+   * set number quote
+   * @param value number quote
+   */
   public setNumber(value) {
     this.quoteNumber = value;
     this.quoteForCreate.quoteNumber = value;
   }
 
+    
   public setStartQuoteNumber(value) {
     this.startQuoteNumber = value;
   }
 
+  /**
+   * get quote number
+   */
   public getQuoteNumber() {
     return this.quoteNumber;
   }
 
+  /**
+   * move to component for create quote
+   */
   public goToCreate() {
     this.state.go('quote-create-component');
   }
 
+  /**
+   * move to quote component
+   */
   public goToQuote() {
     this.state.go('quotes-component');
   }
 
+   /**
+   * return state
+   */
   public getState() {
     return this.state;
   }
