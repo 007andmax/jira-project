@@ -244,6 +244,7 @@ export class QuoteStateService {
     this.setPurchaseOrder(quote.purchaseOrder);
     this.setRequestPayment(quote.requestPayment);
     this.goToState('quote-create-component', { editMode: true });
+    this.setUsersEmail(quote.recipients);
   }
 
   public getStartQuotenumber() {
