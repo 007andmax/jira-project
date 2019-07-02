@@ -37,6 +37,8 @@ export class ModalQuoteComponent implements OnInit {
   showErrorClient = false;
   usersEmails = [];
   users = [];
+  
+
   private unsubscribe: Subject<void> = new Subject();
   @Input() public data;
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
@@ -60,6 +62,7 @@ export class ModalQuoteComponent implements OnInit {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
+    console.log('ngOnInit',this.data);
     (this.data) && this.initResendMode();
     this.getAllUsers();
    this.userInput.nativeElement.onblur = (e) => {
@@ -145,8 +148,9 @@ export class ModalQuoteComponent implements OnInit {
    * @param subject - subject email value
    */
   public setSubject(value) {
-    this.quoteStateService.setSubject(value);
-    this.isResend && (this.data.subject = value);
+    this.subject = value;
+   // this.quoteStateService.setSubject(value);
+   // this.isResend && (this.data.subject = value);
   }
 
   /**
@@ -154,8 +158,14 @@ export class ModalQuoteComponent implements OnInit {
    * @param value - email massage
    */
   public setMessage(value) {
-    this.quoteStateService.setMessage(value);
-    this.isResend && (this.data.message = value);
+    this.message = value;
+  //  this.quoteStateService.setMessage(value);
+   // this.isResend && (this.data.message = value);
+  }
+
+  private onInitSubjectAndMessage() {
+    this.quoteStateService.setSubject(this.subject);
+    this.quoteStateService.setMessage(this.message);
   }
 
   /**
@@ -165,12 +175,15 @@ export class ModalQuoteComponent implements OnInit {
     this.showError = false;
     if ((this.data && this.data.recipients.length > 0 && !!this.data.recipients[0]) || (this.usersEmails && this.usersEmails.length > 0)) {
       if (!this.isResend) {
+        this.onInitSubjectAndMessage();
         this.quoteStateService.saveSandMode();
       } else {
         if (!this.data.id) {
+          this.onInitSubjectAndMessage();
         this.quoteStateService.saveSandMode();
         } else {
-         
+         this.data.message = this.message;
+         this.data.subject = this.subject;
           this.quoteService.resend(this.data,this.selectedUsers)
             .pipe(takeUntil(this.unsubscribe))
             .subscribe((res) => {
@@ -195,8 +208,8 @@ export class ModalQuoteComponent implements OnInit {
   public initResendMode() {
     this.isResend = true;
     if (this.data.recipients && this.data.recipients.length === 0) {
-      this.message = this.data.message && this.data.message !== "null" ? this.data.message : '';
-      this.subject = this.data.subject && this.data.subject !== "null" ? this.data.subject : '';
+      this.message = this.data.message && this.data.message !== "null" ? JSON.parse(JSON.stringify(this.data.message)) : '';
+      this.subject = this.data.subject && this.data.subject !== "null" ? JSON.parse(JSON.stringify(this.data.subject)) : '';
     } else {
       if (this.data.recipients && this.data.recipients.length > 0 && this.data.recipients[0] !== "") {
         this.selectedUsers = [...this.data.recipients];
@@ -204,8 +217,8 @@ export class ModalQuoteComponent implements OnInit {
         this.data.recipients = [];
         this.selectedUsers = [...this.data.recipients];
       }
-      this.message = this.data.message && this.data.message !== "null" ? this.data.message : '';
-      this.subject = this.data.subject && this.data.subject !== "null" ? this.data.subject : '';
+      this.message = this.data.message && this.data.message !== "null" ? JSON.parse(JSON.stringify(this.data.message)) : '';
+      this.subject = this.data.subject && this.data.subject !== "null" ? JSON.parse(JSON.stringify(this.data.subject)) : '';
     }
   }
 
