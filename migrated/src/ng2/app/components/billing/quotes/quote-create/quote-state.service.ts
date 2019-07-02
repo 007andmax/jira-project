@@ -2,6 +2,8 @@ import { EventEmitter, Inject, Injectable } from '@angular/core';
 import { DateService } from "../../../../services/date/date.service";
 import { QuoteService } from "../../../../services/quote/quote.service";
 import { FormGroup } from '@angular/forms';
+import { ISubscription } from 'rxjs/Subscription';
+import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
 
 @Injectable({
   providedIn: 'root'
@@ -26,13 +28,34 @@ export class QuoteStateService {
   public selectedNoteFull: any;
   public usersEmail: any;
   public quoteForCreate: any = this.getDefaultquoteForCreate();
+  public subGetCompaniesList: ISubscription;
   public quoteForm: FormGroup;
+  public clientsList:any;
 
   constructor(
     @Inject('$state') $state: any,
-    private dateService: DateService
+    private dateService: DateService,
+    private companiesService: CompaniesService,
   ) {
     this.state = $state;
+    this.onInitCLientsList();
+  }
+
+  private onInitCLientsList() {
+    this.subGetCompaniesList = this.companiesService.clientsCompany.subscribe((res: any) => {
+      this.clientsList = res
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .filter((item) => !item.deletedAt)
+    })
+  }
+
+  public getClent () {
+    let index: number = this.clientsList.findIndex(item => item.id === this.client.id);
+    if (index > (-1)) {
+     return this.clientsList[index];
+    } else {
+      return this.client;
+    }
   }
   /**
    * set quote form
@@ -346,7 +369,7 @@ export class QuoteStateService {
     this.startQuoteNumber = quote.number;
     this.quoteNumber = quote.number;
     this.setClient(quote.company);
-    this.setDataClientForPreview(quote.primaryContact, quote.client);
+    quote.client = this.getClent();
     if (quote.products) quote.products.forEach(element => element.markup = this.setMarkups(element));
     const itemsArray = [...quote.products, ...quote.services];
     this.setItemArray(itemsArray);
@@ -378,7 +401,6 @@ export class QuoteStateService {
   goToPreview(quote, editable?) {
     this.quoteForCreate = quote;
     this.setClient(quote.company);
-    this.setDataClientForPreview(quote.primaryContact, quote.client);
     const itemsArray = [...quote.products, ...quote.services];
     if (quote.reviewNotes) quote.reviewNotes.forEach(element => element.startDate = this.dateService.getStartDate(element.createdAt));
     this.setItemArray(itemsArray);
@@ -393,17 +415,6 @@ export class QuoteStateService {
     this.resolveTaxes();
     this.resolveTotal();
     this.goToState('quote-preview-component', { editMode: true, editable: editable ? editable : true });
-  }
-
-  public setDataClientForPreview(approvedBy, client) {
-    client.companyInfo = {
-      contacts : [{
-        firstName: approvedBy.firstName,
-        lastName: approvedBy.lastName,
-        primaryEmail: approvedBy.primaryEmail
-      }],
-      addresses: client.addresses
-    };
   }
 
   public divideArray() {

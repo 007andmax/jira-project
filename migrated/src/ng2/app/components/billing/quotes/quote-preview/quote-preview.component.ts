@@ -10,6 +10,7 @@ import { environment } from "../../../../../environments/environment";
 import { ModalQuoteComponent } from "../../../../services/modal/modal-quote/modal-quote.component";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { FormGroup } from '@angular/forms';
+import { ISubscription } from 'rxjs/Subscription';
 
 /**
  * Quote preview component
@@ -61,6 +62,7 @@ export class QuotePreviewComponent implements OnInit {
     this.editMode = this.quoteStateService.getState().params.editMode;
     this.handleSendMode();
     if (this.editMode) this.quoteForm = this.quoteStateService.getQuoteForm();
+    this.quote.client = this.quoteStateService.getClent();
   }
 
   /**
