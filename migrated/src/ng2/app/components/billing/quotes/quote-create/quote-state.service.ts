@@ -41,6 +41,9 @@ export class QuoteStateService {
     this.onInitCLientsList();
   }
 
+  /**
+   * Initializes subscribe on clients 
+   */
   private onInitCLientsList() {
     this.subGetCompaniesList = this.companiesService.clientsCompany.subscribe((res: any) => {
       this.clientsList = res
@@ -49,6 +52,9 @@ export class QuoteStateService {
     })
   }
 
+  /**
+   * Return client 
+   */
   public getClent () {
     let index: number = this.clientsList.findIndex(item => item.id === this.client.id);
     if (index > (-1)) {
