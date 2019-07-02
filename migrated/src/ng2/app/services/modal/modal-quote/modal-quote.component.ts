@@ -101,10 +101,6 @@ export class ModalQuoteComponent implements OnInit {
     }
   }
 
-  onBlurChanges (event):void {
-    console.log('onBlurChanges',event);
-  }
-
   /**
    * Add user to selected
    * @param event - selected user

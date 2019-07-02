@@ -198,10 +198,18 @@ export class QuoteStateService {
     return this.state;
   }
 
+  /**
+   * move to  component with params
+   * @param state state
+   * @param params params
+   */
   public goToState(state, params?) {
     this.state.go(state, params);
   }
 
+  /**
+   * return quote
+   */
   getQuote() {
     return ({
       quoteNumber: this.quoteNumber,
@@ -213,6 +221,10 @@ export class QuoteStateService {
       total: this.total
     })
   }
+
+  /**
+   * reset quote
+   */
   public resetQuote() {
     this.resetquoteForCreate();
     this.itemsArray = [];
@@ -221,16 +233,26 @@ export class QuoteStateService {
     this.totalTaxes = 0;
     this.total = 0;
   }
+
+
   public setSubTotalProducts(value) {
     this.subTotalProducts = value;
     this.quoteForCreate.subTotalProducts = value;
   }
 
+   /**
+   * set total taxes
+   * @param value tax
+   */
   public setTotalTaxes(value) {
     this.totalTaxes = value;
     this.quoteForCreate.totalTaxes = value;
   }
 
+   /**
+   * set total quote
+   * @param value total
+   */
   public setTotal(value) {
     this.total = value;
     this.quoteForCreate.total = value;
@@ -245,22 +267,37 @@ export class QuoteStateService {
     this.quoteForCreate.startDate = value;
   }
 
+  
   public setEndDate(value) {
     this.quoteForCreate.endDate = value;
   }
 
+    /**
+   * return quote for create
+   */
   getQuoteCreate() {
     return this.quoteForCreate;
   }
 
+   /**
+   * set global note 
+   * @param value note
+   */
   public setGlobalNote(value) {
     this.quoteForCreate.globalNote = value;
   }
 
+    /**
+   * return global note 
+   */
   public getGlobalNote() {
     return this.quoteForCreate.globalNote;
   }
 
+   /**
+   * set note
+   * @param value note
+   */
   public setSelectedNote(value) {
     this.quoteForCreate.selectedNote = value;
   }
@@ -269,6 +306,9 @@ export class QuoteStateService {
     this.selectedNoteFull = value;
   }
 
+   /**
+   * return note
+   */
   public getSelectedNote() {
     return this.selectedNoteFull;
   }
@@ -297,6 +337,10 @@ export class QuoteStateService {
     return this.quoteForCreate.requestPayment
   }
 
+   /**
+   * set edit quote
+   * @param quote quote
+   */
   public setEditQuote(quote) {
     this.quoteForCreate = quote;
     this.startQuoteNumber = quote.number;
@@ -326,6 +370,11 @@ export class QuoteStateService {
     return this.startQuoteNumber;
   }
 
+  /**
+   * move to preview page
+   * @param quote quote
+   * @param editable edit mode
+   */
   goToPreview(quote, editable?) {
     this.quoteForCreate = quote;
     this.setClient(quote.company);
@@ -383,6 +432,9 @@ export class QuoteStateService {
     this.setTotal(this.total);
   }
 
+  /**
+   * return total quote
+   */
   public getTotal() {
     return this.totalTaxes + this.subTotalServices + this.subTotalProducts
   }
@@ -426,12 +478,19 @@ export class QuoteStateService {
     }
   }
 
+  /**
+   * set subject
+   * @param value subject
+   */
   public setSubject(value) {
     this.quoteForCreate.subject = value;
   }
 
+   /**
+   * set message
+   * @param value message
+   */
   public setMessage(value) {
-    console.log('test', value);
     this.quoteForCreate.message = value;
   }
 
@@ -439,10 +498,17 @@ export class QuoteStateService {
     this.handleSendMode.emit();
   }
 
+   /**
+   * set emails recipients
+   * @param value emails
+   */
   public setUsersEmail(value) {
     this.usersEmail = value;
   }
 
+   /**
+   * return emails recipients
+   */
   public getUsersEmail() {
     return this.usersEmail;
   }
@@ -456,6 +522,10 @@ export class QuoteStateService {
   public resetquoteForCreate() {
     this.quoteForCreate = this.getDefaultquoteForCreate();
   }
+
+   /**
+   * return structure quote for create
+   */
   private getDefaultquoteForCreate(): any {
     return {
       startDate: '',

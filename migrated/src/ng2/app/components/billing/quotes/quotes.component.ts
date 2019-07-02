@@ -194,6 +194,10 @@ export class QuotesComponent implements OnInit {
     this.quoteStateService.goToCreate();
   }
 
+   /**
+   * move to edit quote component
+   * @param quote - quote
+   */
   goToQuoteEdit(quote) {
     this.quoteStateService.setEditQuote(quote);
   }

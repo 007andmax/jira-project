@@ -28,6 +28,11 @@ export class QuoteService {
     private quoteStateService: QuoteStateService
   ) {}
 
+  /**
+   * create new quote
+   * @param value - quote
+   * @param notification - set notification or not
+   */
    public createQuote(value, notification) {
     this.itemsListArray = this.quoteStateService.getItemArray();
     this.productsArray = this.getProductItems(this.itemsListArray, 'product');
@@ -59,6 +64,12 @@ export class QuoteService {
       catchError(this.handleError));
   }
 
+  /**
+   * edit quote
+   * @param value - quote
+   * @param quoteId - id quote
+   * @param notification - set notification or not
+   */
   public editQuote(value, quoteId, notification) {
     this.itemsListArray = this.quoteStateService.getItemArray();
     this.productsArray = this.getProductItems(this.itemsListArray, 'product');
@@ -93,6 +104,11 @@ export class QuoteService {
       catchError(this.handleError));
   }
 
+   /**
+   * resend notifications to recipients
+   * @param item - quote
+   * @param recipients - emails recipients
+   */
   public resend(item,recipients) {
     this.productsArray = this.getProductItems([...item.products], 'product');
     this.servicesArray = this.getProductItems([...item.services], 'service');
@@ -130,12 +146,18 @@ export class QuoteService {
       catchError(this.handleError));
   }
 
+   /**
+   * get next quote number for create
+   */
   getQuoteNumber() {
     return this.http.get(this.apiUrl + `data/actualNumber?type=SALE_QUOTE`).pipe(
       tap(data => data), 
       catchError(this.handleError));
   }
 
+   /**
+   * get quote note
+   */
   getQuoteNote() {
     return this.http.get(this.apiUrl + `invoice/invoiceNote/getAll`).pipe(
       tap(data => data), 
@@ -188,6 +210,10 @@ export class QuoteService {
     }
   }
 
+   /**
+   * get quote by search
+   * @param data - quote
+   */
   getQuotes(data) {
     data.type && this.getSortType(data.type);
     return this.http.post(this.apiUrl + 'saleQuotes/search', {
@@ -222,6 +248,11 @@ export class QuoteService {
         catchError(this.handleError));
   }
 
+    /**
+   * approve quote
+   * @param company - company quote
+   * @param quoteId - id quote
+   */
   approveQuote(company, quoteId) {
     console.log(quoteId, 'quoteId');
     return this.http.post(this.apiUrl +
@@ -255,6 +286,10 @@ export class QuoteService {
       catchError(this.handleError));
   }
 
+    /**
+   * download Pdf
+   * @param quote_id - id quote
+   */
   downloadPdf(quote_id) {
     return this.http.get(this.apiUrl + `saleQuotes/${quote_id}/pdf`,{ headers: new HttpHeaders({
         'Content-Type': 'application/pdf',
@@ -291,6 +326,10 @@ export class QuoteService {
         break;
     }
   }
+  /**
+   * check error
+   * @param error - error
+   */
   private handleError =(error)=> {
     let err = error.error;
     this.quoteStateService.setError((err.validationResults && err.validationResults.saleQuotePostDto) ? err.validationResults.saleQuotePostDto : err.message);
