@@ -5,6 +5,9 @@ import {QuoteStateService} from "../../components/billing/quotes/quote-create/qu
 import { catchError, tap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
+/**
+ * Quote service to work with api
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -23,17 +26,22 @@ export class QuoteService {
   private deposit = 'DEPOSIT_DESC';
   private sortType = null;
 
+  /**
+   * Product api service constructor
+   * @param {HttpClient} http Service to work with request
+   * @param {QuoteStateService} quoteStateService  Service to work with quote state
+   */
   constructor(
     private http: HttpClient,
     private quoteStateService: QuoteStateService
   ) {}
 
   /**
-   * create new quote
-   * @param value - quote
-   * @param notification - set notification or not
+   * Create quote
+   * @param value - quote info
+   * @param notification - quote notification info
    */
-   public createQuote(value, notification) {
+  public createQuote(value, notification) {
     this.itemsListArray = this.quoteStateService.getItemArray();
     this.productsArray = this.getProductItems(this.itemsListArray, 'product');
     this.servicesArray = this.getProductItems(this.itemsListArray, 'service',true);
@@ -65,17 +73,15 @@ export class QuoteService {
   }
 
   /**
-   * edit quote
-   * @param value - quote
-   * @param quoteId - id quote
-   * @param notification - set notification or not
+   * Edit quote
+   * @param value - quote info
+   * @param quoteId - quote id
+   * @param notification - quote notification info
    */
   public editQuote(value, quoteId, notification) {
     this.itemsListArray = this.quoteStateService.getItemArray();
     this.productsArray = this.getProductItems(this.itemsListArray, 'product');
     this.servicesArray = this.getProductItems(this.itemsListArray, 'service',true);
-    console.log(this.productsArray, 'this.productsArray');
-    console.log(this.servicesArray, 'this.servicesArray');
     return this.http.put(`${this.apiUrl}saleQuotes/${quoteId}` ,{
       "companyId": (value.client && value.client.item) ? value.client.item.id : value.client.id,
       "number": this.quoteStateService.getQuoteNumber(),
@@ -104,10 +110,10 @@ export class QuoteService {
       catchError(this.handleError));
   }
 
-   /**
-   * resend notifications to recipients
-   * @param item - quote
-   * @param recipients - emails recipients
+  /**
+   * Resend quote
+   * @param item - item list
+   * @param recipients - users list
    */
   public resend(item,recipients) {
     this.productsArray = this.getProductItems([...item.products], 'product');
@@ -140,44 +146,59 @@ export class QuoteService {
       catchError(this.handleError));
   }
 
+  /**
+   * Repaet send
+   * @param quoteId - quote Id
+   */
   public repeatSend(quoteId) {
     return this.http.post(`${this.apiUrl}saleQuotes/${quoteId}/send`, {}).pipe(
       tap(data => data), 
       catchError(this.handleError));
   }
 
-   /**
-   * get next quote number for create
+  /**
+   * Get quote number
    */
-  getQuoteNumber() {
+  public getQuoteNumber() {
     return this.http.get(this.apiUrl + `data/actualNumber?type=SALE_QUOTE`).pipe(
       tap(data => data), 
       catchError(this.handleError));
   }
 
-   /**
-   * get quote note
+  /**
+   * Get quote note
    */
-  getQuoteNote() {
+  public getQuoteNote() {
     return this.http.get(this.apiUrl + `invoice/invoiceNote/getAll`).pipe(
       tap(data => data), 
       catchError(this.handleError));
   }
 
-  getMsDate(value) {
+  /**
+   * Get time in ms
+   */
+  public getMsDate(value) {
     const date = new Date(`${value.year}/${value.month}/${value.day}` );
     return date.getTime()
   }
 
-  getServiceList(clientCompanyId) {
+  /**
+   * Get services list
+   * @param clientCompanyId - client company id
+   */
+  public getServiceList(clientCompanyId) {
     return this.http.get(this.apiUrl + `services/${clientCompanyId}`).pipe(
       tap(data => data), 
       catchError(this.handleError));
   }
 
-  getProductItems(itemsAray, type, onInitSaveOrCreate = false) {
-    console.log(itemsAray, 'itemsAray');
-    console.log(type, 'service');
+  /**
+   * Get product items by type
+   * @param itemsAray - items array
+   * @param type - item type
+   * @param onInitSaveOrCreate - onInitSaveOrCreate
+   */
+  public getProductItems(itemsAray, type, onInitSaveOrCreate = false) {
     if (type === 'service') {
       itemsAray = itemsAray.filter((item) => item.hasOwnProperty('rate'));
       return itemsAray.map((item, index) => {
@@ -210,11 +231,11 @@ export class QuoteService {
     }
   }
 
-   /**
-   * get quote by search
-   * @param data - quote
+  /**
+   * Get quote object
+   * @param data - quote info
    */
-  getQuotes(data) {
+  public getQuotes(data) {
     data.type && this.getSortType(data.type);
     return this.http.post(this.apiUrl + 'saleQuotes/search', {
       "companyName": data.company || null,
@@ -230,7 +251,12 @@ export class QuoteService {
       catchError(this.handleError));
   }
 
-  convertToInvoice(company, quote_id) {
+  /**
+   * Convert quote to invoice
+   * @param company - company info
+   * @param quote_id - quote id
+   */
+  public convertToInvoice(company, quote_id) {
     return this.http.post(this.apiUrl +
       `saleQuotes/convertToInvoice?companyId=${company.companyInfo.id}
       &billTo=${company.companyInfo.addresses[0].id}
@@ -240,7 +266,12 @@ export class QuoteService {
         catchError(this.handleError));
   }
 
-  convertToTicket(company, quote_id) {
+  /**
+   * Convert quote to ticket
+   * @param company - company info
+   * @param quote_id - quote id
+   */
+  public convertToTicket(company, quote_id) {
     return this.http.post(this.apiUrl +
       `saleQuotes/convertToTicket?companyId=${company.id}`,
       [quote_id]).pipe(
@@ -248,13 +279,12 @@ export class QuoteService {
         catchError(this.handleError));
   }
 
-    /**
-   * approve quote
-   * @param company - company quote
-   * @param quoteId - id quote
+  /**
+   * Approve quote
+   * @param company - company info
+   * @param quoteId - quote id
    */
-  approveQuote(company, quoteId) {
-    console.log(quoteId, 'quoteId');
+  public approveQuote(company, quoteId) {
     return this.http.post(this.apiUrl +
       `saleQuotes/approveQuote?companyId=${company.id}`, [quoteId]
     ).pipe(
@@ -262,7 +292,12 @@ export class QuoteService {
       catchError(this.handleError));
   }
 
-  refuseQuote(company, quote_id) {
+  /**
+   * Refuse quote
+   * @param company - company info
+   * @param quote_id - quote id
+   */
+  public refuseQuote(company, quote_id) {
     return this.http.post(this.apiUrl +
       `saleQuotes/refuseQuote?companyId=${company.id}`, [quote_id]
     ).pipe(
@@ -270,7 +305,12 @@ export class QuoteService {
       catchError(this.handleError));
   }
 
-  archiveQuote(company, quote_id) {
+  /**
+   * Archive quote
+   * @param company - company info
+   * @param quote_id - quote id
+   */
+  public archiveQuote(company, quote_id) {
     return this.http.post(this.apiUrl +
       `saleQuotes/archiveQuote?companyId=${company.id}`, [quote_id]
     ).pipe(
@@ -278,7 +318,12 @@ export class QuoteService {
       catchError(this.handleError));
   }
 
-  markAsRead(company, quote_id) {
+  /**
+   * Mark quote as read
+   * @param company - company info
+   * @param quote_id - quote id
+   */
+  public markAsRead(company, quote_id) {
     return this.http.post(this.apiUrl +
       `saleQuotes/${quote_id}/markAsRead?companyId=${company.id}`, {}
     ).pipe(
@@ -286,11 +331,11 @@ export class QuoteService {
       catchError(this.handleError));
   }
 
-    /**
-   * download Pdf
-   * @param quote_id - id quote
+  /**
+   * Download quote information in pdf
+   * @param quote_id - quote id
    */
-  downloadPdf(quote_id) {
+  public downloadPdf(quote_id) {
     return this.http.get(this.apiUrl + `saleQuotes/${quote_id}/pdf`,{ headers: new HttpHeaders({
         'Content-Type': 'application/pdf',
       }), responseType: 'blob'}).pipe(
@@ -298,7 +343,11 @@ export class QuoteService {
         catchError(this.handleError));
   }
 
-  getSortType(type) {
+  /**
+   * Get sort type
+   * @param type - type of sort
+   */
+  public getSortType(type) {
     switch (type) {
       case 'number':
         this.sortType = this.quoteNumber === 'QUOTE_NUMBER_ASC' ? 'QUOTE_NUMBER_DESC' : 'QUOTE_NUMBER_ASC';

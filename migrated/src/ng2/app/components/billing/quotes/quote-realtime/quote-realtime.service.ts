@@ -1,16 +1,23 @@
 import { EventEmitter, Injectable } from '@angular/core';
 
+/**
+ * Quote real time service
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class QuoteRealTimeService {
 
   public changeQuotesArray: EventEmitter<any> = new EventEmitter();
+
+  /**
+   * Quote real time service constructor
+   */
   constructor() { }
 
   /**
-   * set handle for change in real time
-   * @param newChange - item
+   * Handle quote real time changes
+   * @newChange - new quotes array changes
    */
   public handleRealTimeChanges(newChange) {
     this.changeQuotesArray.emit(newChange);
