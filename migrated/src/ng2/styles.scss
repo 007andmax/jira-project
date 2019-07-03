@@ -262,7 +262,78 @@ ngb-typeahead-window {
   }
 }
 
-// product, password, recurring tickets
+// GLOBAL STYLES FOR QUOTES
+.quote-create {
+  &__content {
+    &--top,
+    &--bottom,
+    &--notes {
+      background: #fff;
+      border-radius: 5px;
+      border: solid 1px #edf2f6;
+    }
+    .col-md-1 {
+      width: 10%;
+    }
+    .col-md-2 {
+      width: 24%;
+    }
+    .col-md-3 {
+      width: 45%;
+    }
+    .col-md-9 {
+      width: 70%;
+    }
+    .col-md-10 {
+      width: 80%;
+    }
+    .col-md-11 {
+      width: 90%;
+    }
+    .pl-30 {
+      padding-left: 30px;
+    }
+    .pr-30 {
+      padding-right: 30px;
+    }
+    .new-link {
+      text-decoration: underline;
+    }
+    .mt-10 {
+      margin-top: 10px;
+    }
+  }
+  input {
+    font-size: 13px;
+    border: 1px solid #c4cbd5;
+    border-radius: 3px;
+    padding: 0 12px;
+    height: 40px;
+    width: 100%;
+    background: #fff;
+    &:focus {
+      outline: none;
+    }
+    &::placeholder {
+      opacity: 1;
+      color: #9ca5b6;
+    }
+  }
+  .report-caret-icon {
+    top: 16px !important;
+  }
+  textarea {
+    font-size: 13px;
+    &::placeholder {
+      color: #9ca5b6;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+// GLOBAL STYLES FOR product, password, recurring tickets
 .products-content,
 .recurring-tickets-content,
 .password-content {
