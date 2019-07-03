@@ -1609,14 +1609,14 @@ bold {
   margin-right: 11px;
 }
 
-.password-selected,
-.recurring-tickets-selected {
-  display: none;
-  padding: 8px 15px;
-  background: #fff;
-  border-radius: 6px;
-  margin-right: 10px;
-}
+/*.password-selected,*/
+/*.recurring-tickets-selected {*/
+  /*display: none;*/
+  /*padding: 8px 15px;*/
+  /*background: #fff;*/
+  /*border-radius: 6px;*/
+  /*margin-right: 10px;*/
+/*}*/
 
 .password-selected.show,
 .recurring-tickets-selected.show {
@@ -13365,18 +13365,21 @@ button.close {
 }
 
 .left-panel-filter i,
+.recurring-tickets-content__modal--content i,
 .password-content__modal--content i {
   position: absolute;
   right: 12px;
   bottom: 11px;
 }
 
+.recurring-tickets-content__modal--content .if i,
 .password-content__modal--content .if i {
   position: absolute;
   right: 25px;
   bottom: 8px;
 }
 
+.recurring-tickets-content__modal--content .if input,
 .password-content__modal--content .if input {
   padding-right: 65px;
 }
@@ -13386,6 +13389,7 @@ button.close {
   right: 10px;
 }
 
+.recurring-tickets-content__modal,
 .password-content__modal {
   position: fixed;
   top: 78px;
@@ -13398,15 +13402,18 @@ button.close {
   height: calc(100vh - 78px);
 }
 
+.recurring-tickets-content__modal.open,
 .password-content__modal.open {
   right: 0;
   box-shadow: 0 0 60px 0 rgba(0, 0, 0, 0.1);
 }
 
+.recurring-tickets-content__modal h3,
 .password-content__modal h3 {
   margin: 0;
 }
 
+.recurring-tickets-content__modal--header,
 .password-content__modal--header {
   display: flex;
   align-items: center;
@@ -13439,39 +13446,47 @@ button.close {
   margin: 0;
 }
 
+.recurring-tickets-content__modal .close-modal,
 .password-content__modal .close-modal {
   position: absolute;
   right: 50px;
   top: 33px;
 }
 
+.recurring-tickets-content__modal--content,
 .password-content__modal--content {
   padding: 0 35px;
 }
 
+.recurring-tickets-content__modal--content > [class*="col-md-"],
 .password-content__modal--content > [class*="col-md-"] {
   margin-top: 20px;
 }
 
+.recurring-tickets-content__modal--content > [class*="col-md-"] label,
 .password-content__modal--content > [class*="col-md-"] label {
   position: relative;
 }
 
+.recurring-tickets-content__modal--content > .password-links label,
 .password-content__modal--content > .password-links label {
   margin-bottom: 0;
   
 }
 
+.recurring-tickets-content__modal--content > [class*="col-md-"] input,
 .password-content__modal--content > [class*="col-md-"] input {
   width: 100%;
 }
 
+.recurring-tickets-content__modal--content > [class*="col-md-"] p,
 .password-content__modal--content > [class*="col-md-"] p {
   font-family: "Graphik Medium", sans-serif;
   font-size: 13px;
   margin-bottom: 8px;
 }
 
+.recurring-tickets-content__modal--content > [class*="col-md-"] input,
 .password-content__modal--content > [class*="col-md-"] input {
   outline: none;
   height: 40px;
@@ -13481,15 +13496,18 @@ button.close {
   border-radius: 4px;
 }
 
+.recurring-tickets-content__modal--content > [class*="col-md-"] input::placeholder,
 .password-content__modal--content > [class*="col-md-"] input::placeholder {
   opacity: 1;
   color: #9ca5b6;
 }
 
+.recurring-tickets-content__modal--content .password-actions .icn-16,
 .password-content__modal--content .password-actions .icn-16 {
   height: 18px;
 }
 
+.recurring-tickets-content__modal--content .password-actions,
 .password-content__modal--content .password-actions {
   display: flex;
   align-items: center;
@@ -13501,6 +13519,7 @@ button.close {
   z-index: 2;
 }
 
+.recurring-tickets-content__modal--content label.password:after,
 .password-content__modal--content label.password:after {
   position: absolute;
   content: 'Show';
@@ -13511,6 +13530,7 @@ button.close {
   right: 12px;
 }
 
+.recurring-tickets-content__modal--content label i.new-calendar,
 .password-content__modal--content label i.new-calendar {
   position: absolute;
   right: 12px;
@@ -13528,6 +13548,7 @@ button.close {
   color: #4f5f79;
 }
 
+.recurring-tickets-content__modal--content textarea,
 .password-content__modal--content textarea {
   background: #fff8eb;
   border: 1px solid #ffe3af;
@@ -13539,10 +13560,12 @@ button.close {
   outline: none;
 }
 
+.recurring-tickets-content__modal--content textarea::placeholder,
 .password-content__modal--content textarea::placeholder {
   color: #9ca5b6;
 }
 
+.recurring-tickets-content__modal--footer,
 .password-content__modal--footer {
   display: flex;
   align-items: center;
