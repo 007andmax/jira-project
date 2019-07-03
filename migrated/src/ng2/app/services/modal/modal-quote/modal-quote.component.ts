@@ -37,7 +37,7 @@ export class ModalQuoteComponent implements OnInit {
   showErrorClient = false;
   usersEmails = [];
   users = [];
-  
+
 
   private unsubscribe: Subject<void> = new Subject();
   @Input() public data;
@@ -56,16 +56,16 @@ export class ModalQuoteComponent implements OnInit {
     private userService: UsersService,
     private quoteStateService: QuoteStateService,
     private quoteService: QuoteService
-  ) {}
+  ) { }
 
   /**
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-    console.log('ngOnInit',this.data);
+    console.log('ngOnInit', this.data);
     (this.data) && this.initResendMode();
     this.getAllUsers();
-   this.userInput.nativeElement.onblur = (e) => {
+    this.userInput.nativeElement.onblur = (e) => {
       if (this.matAutocomplete.isOpen) {
         let modal = this.matAutocomplete.panel.nativeElement;
         modal.parentNode.style.width = 'max-content';
@@ -149,8 +149,8 @@ export class ModalQuoteComponent implements OnInit {
    */
   public setSubject(value) {
     this.subject = value;
-   // this.quoteStateService.setSubject(value);
-   // this.isResend && (this.data.subject = value);
+    // this.quoteStateService.setSubject(value);
+    // this.isResend && (this.data.subject = value);
   }
 
   /**
@@ -159,8 +159,8 @@ export class ModalQuoteComponent implements OnInit {
    */
   public setMessage(value) {
     this.message = value;
-  //  this.quoteStateService.setMessage(value);
-   // this.isResend && (this.data.message = value);
+    //  this.quoteStateService.setMessage(value);
+    // this.isResend && (this.data.message = value);
   }
 
   private onInitSubjectAndMessage() {
@@ -180,11 +180,11 @@ export class ModalQuoteComponent implements OnInit {
       } else {
         if (!this.data.id) {
           this.onInitSubjectAndMessage();
-        this.quoteStateService.saveSandMode();
+          this.quoteStateService.saveSandMode();
         } else {
-         this.data.message = this.message;
-         this.data.subject = this.subject;
-          this.quoteService.resend(this.data,this.selectedUsers)
+          this.data.message = this.message;
+          this.data.subject = this.subject;
+          this.quoteService.resend(this.data, this.selectedUsers)
             .pipe(takeUntil(this.unsubscribe))
             .subscribe((res) => {
               if (res) {
@@ -212,10 +212,10 @@ export class ModalQuoteComponent implements OnInit {
       this.subject = this.data.subject && this.data.subject !== "null" ? JSON.parse(JSON.stringify(this.data.subject)) : '';
     } else {
       if (this.data.recipients && this.data.recipients.length > 0 && this.data.recipients[0] !== "") {
-        this.selectedUsers = [...this.data.recipients];
+        this.selectedUsers = JSON.parse(JSON.stringify([...this.data.recipients]));
       } else {
         this.data.recipients = [];
-        this.selectedUsers = [...this.data.recipients];
+        this.selectedUsers = JSON.parse(JSON.stringify([...this.data.recipients]));
       }
       this.message = this.data.message && this.data.message !== "null" ? JSON.parse(JSON.stringify(this.data.message)) : '';
       this.subject = this.data.subject && this.data.subject !== "null" ? JSON.parse(JSON.stringify(this.data.subject)) : '';
@@ -230,6 +230,17 @@ export class ModalQuoteComponent implements OnInit {
     this.usersEmails = [];
     this.users = [];
     this.activeModal.dismiss('Cross click');
+  }
+
+  public keyup(e) {
+
+    if (e.keyCode === 13) {
+
+      if (this.userInput.nativeElement.value.length > 0) {
+        this.selectedUsers.push(this.userInput.nativeElement.value);
+        this.userInput.nativeElement.value = "";
+      }
+    }
   }
 
 }
