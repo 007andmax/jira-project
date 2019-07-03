@@ -412,6 +412,11 @@
              ng-click="stateGo($event, 'tickets', {listType: 'trash'})">
           Trash <span>{{ticketsCounter.TRASH}}</span>
         </div>
+        <div class="center-category__category"
+             ng-class="{active: $state.includes('recurring-tickets')}"
+             ng-click="stateGo($event, 'recurring-tickets')">
+          Recurring Tickets
+        </div>
         <div class="left-panel-title font-medium">
           By tags
         </div>

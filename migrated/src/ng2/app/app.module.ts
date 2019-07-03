@@ -52,6 +52,10 @@ import { MultiDatepickerComponent } from './components/shared/multi-datepicker/m
 import { LeftPanelBillingComponent } from './components/left-panel/left-panel-billing/left-panel-billing.component';
 import { ToNumerPipe } from './pipe/to-numer.pipe';
 import { ModalQuoteComponent } from './services/modal/modal-quote/modal-quote.component';
+import { RecurringTicketsComponent } from './components/tickets/recurring-tickets/recurring-tickets.component';
+import {RecurringTicketsHeaderComponent} from "./components/tickets/recurring-tickets/recurring-tickets-header/recurring-tickets-header.component";
+import {RecurringTicketsTableComponent} from "./components/tickets/recurring-tickets/recurring-tickets-table/recurring-tickets-table.component";
+import {RecurringTicketsEditAsideComponent} from "./components/tickets/recurring-tickets/recurring-tickets-edit-aside/recurring-tickets-edit-aside.component";
 
 /**
  * declare angular
@@ -88,6 +92,9 @@ angular.module('quicktech')
   .directive(
     'quotePreviewComponent',
     downgradeComponent({component: QuotePreviewComponent}))
+  .directive(
+    'recurringTicketsComponent',
+    downgradeComponent({component: RecurringTicketsComponent}))
   .factory('ngZone', downgradeInjectable(NgZone));
 
 /**
@@ -125,7 +132,11 @@ angular.module('quicktech')
     MultiDatepickerComponent,
     LeftPanelBillingComponent,
     ToNumerPipe,
-    ModalQuoteComponent
+    ModalQuoteComponent,
+    RecurringTicketsComponent,
+    RecurringTicketsHeaderComponent,
+    RecurringTicketsEditAsideComponent,
+    RecurringTicketsTableComponent
   ],
   imports: [
     BrowserModule,
@@ -171,6 +182,11 @@ angular.module('quicktech')
           path: 'ng2/quotes/quote-preview',
           component: QuotePreviewComponent,
           pathMatch: 'full'
+        },
+        {
+          path: 'ng2/recurring-tickets',
+          component: RecurringTicketsComponent,
+          pathMatch: 'full'
         }
       ],
       {
@@ -184,7 +200,8 @@ angular.module('quicktech')
     QuotesComponent,
     QuoteCreateComponent,
     QuotePreviewComponent,
-    PasswordManagerComponent
+    PasswordManagerComponent,
+    // RecurringTicketsComponent
   ],
   providers: [
     {

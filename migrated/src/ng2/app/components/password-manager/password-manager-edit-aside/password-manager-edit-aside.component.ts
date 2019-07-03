@@ -27,8 +27,8 @@ import { ApiPasswordManagerService } from "../../../services/password-manager/ap
 export class PasswordManagerEditAsideComponent implements OnInit {
 
   public createPasswordRecord: FormGroup;
-  @ViewChild('instance') instance: NgbTypeahead;
-  @ViewChild('clientType') clientType: NgbTypeahead;
+  @ViewChild('instance', {static: false}) instance: NgbTypeahead;
+  @ViewChild('clientType', {static: false}) clientType: NgbTypeahead;
   @Output() addRecord = new EventEmitter<any>();
   focus$ = new Subject<string>();
   click$ = new Subject<string>();

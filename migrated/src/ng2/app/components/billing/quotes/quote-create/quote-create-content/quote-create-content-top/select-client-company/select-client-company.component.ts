@@ -16,7 +16,7 @@ import { FormGroup } from "@angular/forms";
 })
 export class SelectClientCompanyComponent implements OnInit {
 
-  @ViewChild('instance') instance: NgbTypeahead;
+  @ViewChild('instance', {static: false}) instance: NgbTypeahead;
   @Output() selectedItem = new EventEmitter<any>();
   @Output() getAllItems = new EventEmitter<any>();
   @Input() formGroup: FormGroup;

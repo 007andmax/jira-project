@@ -1,0 +1,310 @@
+<ng-sidebar-container>
+  <ng-sidebar
+    [(opened)]="opened"
+    [position]="'right'"
+  >
+  <form
+  [formGroup] = "ticketForm"
+  >
+    <div class="recurring-tickets-content__modal open">
+      <div class="recurring-tickets-content__modal--header">
+        <h3>Create Recurring Service</h3>
+        <button class="close-modal" (click)="close()"></button>
+      </div>
+      <form class="recurring-tickets-content__modal--content clearfix">
+        <div class="col-md-12">
+          <p>Service Description</p>
+          <input type="text"
+                 placeholder="Write Description">
+        </div>
+
+       <!-- <form
+  [formGroup] = "quoteForm"
+  class="quote-create__content">
+  <app-quote-create-content-top
+    [quoteForm]="quoteForm"
+    (selectedItem)="setClient($event)"
+  ></app-quote-create-content-top>
+  <app-quote-create-content-bottom
+    [clientId]="selectedClient || quoteForm.value.client"
+  ></app-quote-create-content-bottom>
+  <app-quote-create-content-notes
+    (selectedRegularNoteItem)="setRegularNote($event)"
+    (selectedGlobalNoteItem)="setGlobalNote($event)"
+  ></app-quote-create-content-notes>
+</form>
+-->
+
+        <div class="col-md-12">
+            <app-select-client-company style="width: 75%;"
+                                 class="light-dropdown"
+                                 [formGroup]="ticketForm"
+                                 (selectedItem)="selectClient($event)"> </app-select-client-company>
+          <p>Assign to Company</p>
+          <div class="light-dropdown">
+            <input type="text"
+                   class="pointer"
+                   placeholder="Select Company">
+            <i class="icn-sm icn-remove-old" style="display: none;"></i>
+            <i class="icn-sm report-caret-icon"></i>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <p>Select Device</p>
+          <div class="light-dropdown">
+            <input type="text"
+                   class="pointer"
+                   placeholder="Select Device">
+            <i class="icn-sm report-caret-icon"></i>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <p>Date</p>
+          <div class="input-group"
+               ngbDropdown>
+            <input type="text"
+                   class="pointer"
+                   placeholder="Select Date"
+                   id="dropdownForm1"
+                   ngbDropdownToggle
+                   readonly>
+            <i class="icn-16 icn-calendar-light pointer"></i>
+            <div class="date-picker"
+                 ngbDropdownMenu
+                 aria-labelledby="dropdownForm1">
+              <ngb-datepicker [navigation]="navigation"
+                              style="border: none"></ngb-datepicker>
+              <div class="date-picker-actions clearfix">
+                <div class="col-md-12 p-0 mb-5">
+                  <button class="btn-new btn-primary-white">Start Now</button>
+                  <button class="btn-new btn-primary-white">Tomorrow</button>
+                </div>
+                <div class="col-md-12 p-0">
+                  <button class="btn-new btn-primary-white">Start of Month</button>
+                  <button class="btn-new btn-primary-white">End of Month</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <p>Set Interval</p>
+          <div class="light-dropdown right"
+               ngbDropdown>
+            <input type="text"
+                   class="pointer"
+                   placeholder="Select Interval"
+                   id="dropdownForm2"
+                   ngbDropdownToggle>
+            <i class="icn-sm report-caret-icon"></i>
+            <div class="recurring-interval-dropdown"
+                 ngbDropdownMenu
+                 aria-labelledby="dropdownForm2">
+              <div class="recurring-interval-dropdown">
+                <div class="recurring-interval-dropdown__header">
+                  <label class="radio-container">Daily
+                    <input type="radio"
+                           checked
+                           name="recurring-interval">
+                    <span class="radio-mark"></span>
+                  </label>
+                  <label class="radio-container">Weekly
+                    <input type="radio"
+                           name="recurring-interval">
+                    <span class="radio-mark"></span>
+                  </label>
+                  <label class="radio-container">Monthly
+                    <input type="radio"
+                           name="recurring-interval">
+                    <span class="radio-mark"></span>
+                  </label>
+                </div>
+
+                <!--IF TYPE 'DAILY' OR 'WEEKLY'-------------------------------->
+                <div class="recurring-interval-dropdown__content clearfix">
+                  <div class="col-md-6 p-0">
+                    <label class="checkbox-container">Monday
+                      <input type="checkbox">
+                      <span class="checkbox-mark"></span>
+                    </label>
+                    <label class="checkbox-container">Tuesday
+                      <input type="checkbox">
+                      <span class="checkbox-mark"></span>
+                    </label>
+                    <label class="checkbox-container">Wednesday
+                      <input type="checkbox">
+                      <span class="checkbox-mark"></span>
+                    </label>
+                    <label class="checkbox-container">Thursday
+                      <input type="checkbox">
+                      <span class="checkbox-mark"></span>
+                    </label>
+                  </div>
+                  <div class="col-md-6 p-0">
+                    <label class="checkbox-container">Friday
+                      <input type="checkbox">
+                      <span class="checkbox-mark"></span>
+                    </label>
+                    <label class="checkbox-container">Saturday
+                      <input type="checkbox">
+                      <span class="checkbox-mark"></span>
+                    </label>
+                    <label class="checkbox-container">Sunday
+                      <input type="checkbox">
+                      <span class="checkbox-mark"></span>
+                    </label>
+                  </div>
+                </div>
+                <!------------------------------------------------------------->
+
+                <!--IF TYPE 'MONTHLY'------------------------------------------>
+                <div class="date-picker">
+                  <ngb-datepicker
+                    style="width: 100%;border: none"
+                    [navigation]="navigation"></ngb-datepicker>
+                  <div class="date-picker-actions">
+                    <button class="btn-new btn-primary-white">Start of Month</button>
+                    <button class="btn-new btn-primary-white">End of Month</button>
+                  </div>
+                </div>
+                <!------------------------------------------------------------->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12 ticket-tabs">
+
+          <!--ONCLICK ADD CLASS 'active-tab'------------------------------------>
+          <div class="ticket-tabs-product d-f ai-c active-tab">
+            <i class="icn-20 tab-product"></i>
+            Products
+          </div>
+          <!-------------------------------------------------------------------->
+
+          <!--ONCLICK ADD CLASS 'active-tab'------------------------------------>
+          <div class="ticket-tabs-service d-f ai-c">
+            <i class="icn-20 tab-service"></i>
+            Service
+          </div>
+          <!-------------------------------------------------------------------->
+
+        </div>
+
+        <!--IF TAB IS 'PRODUCT'------------------------------------------------->
+        <div class="col-md-12 product-tab-content p-0">
+          <div class="col-md-12">
+            <p>Search Product</p>
+            <div class="light-dropdown">
+              <input type="text"
+                     class="pointer"
+                     placeholder="Search or Add products">
+              <i class="icn-sm icn-remove-old" style="display: none;"></i>
+              <i class="icn-sm report-caret-icon"></i>
+            </div>
+          </div>
+          <div class="col-md-4 mt-20">
+            <p>Serial No.</p>
+            <input type="text"
+                   placeholder="Write Serial No.">
+          </div>
+          <div class="col-md-4 mt-20">
+            <p>Product Cost</p>
+            <input type="text"
+                   placeholder="Write Product Cost">
+          </div>
+          <div class="col-md-4 mt-20">
+            <p>Quantity</p>
+            <input type="text"
+                   placeholder="Write Quantity">
+          </div>
+          <div class="col-md-4 mt-20">
+            <p>Product Price</p>
+            <input type="text"
+                   placeholder="Write Product Price">
+          </div>
+          <div class="col-md-4 mt-20">
+            <p>Discount</p>
+            <input type="text"
+                   placeholder="Write Discount">
+          </div>
+        </div>
+        <div class="new-link">+Add Product</div>
+        <!---------------------------------------------------------------------->
+
+        <br>
+
+        <!--IF TAB IS 'SERVICE'------------------------------------------------->
+        <div class="col-md-12 service-tab-content p-0">
+          <div class="col-md-8">
+            <p>Service</p>
+            <div class="light-dropdown">
+              <input type="text"
+                     class="pointer"
+                     placeholder="Select Service">
+              <i class="icn-sm icn-remove-old" style="display: none;"></i>
+              <i class="icn-sm report-caret-icon"></i>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <p>Duration</p>
+            <input type="text"
+                   class="pointer"
+                   placeholder="Hr(s) : Min(s)">
+          </div>
+          <div class="col-md-12 mt-20">
+            <p>Description</p>
+            <input type="text"
+                   placeholder="Write Description">
+          </div>
+        </div>
+        <div class="new-link">+Add Service</div>
+        <!---------------------------------------------------------------------->
+
+        <div class="col-md-12 tags-wrapper">
+          <p>Tags</p>
+          <input type="text"
+                 placeholder="Select Tag"
+                 class="pointer">
+        </div>
+
+        <div class="col-md-12 checkbox-wrapper">
+          <div class="with-checkbox">
+            <label class="checkbox-container">
+              <input type="checkbox">
+              <span class="checkbox-mark"></span>
+            </label>
+            <p>Require update Notes</p>
+          </div>
+          <div class="with-checkbox">
+            <label class="checkbox-container">
+              <input type="checkbox">
+              <span class="checkbox-mark"></span>
+            </label>
+            <p>Quick Close</p>
+          </div>
+          <div class="with-checkbox">
+            <label class="checkbox-container">
+              <input type="checkbox">
+              <span class="checkbox-mark"></span>
+            </label>
+            <p>Create Task for user</p>
+          </div>
+        </div>
+
+        <div class="col-md-12 recurring-tickets-content__modal--content-footer">
+          <div>
+            <button class="btn-new btn-primary">Save & Next</button>
+            <button class="btn-new disabled">Cancel</button>
+          </div>
+          <div class="save-template">Save as Template</div>
+        </div>
+      </form>
+    </div>
+  </form>
+
+  </ng-sidebar>
+</ng-sidebar-container>

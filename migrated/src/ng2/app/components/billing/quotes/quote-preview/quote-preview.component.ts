@@ -33,7 +33,7 @@ export class QuotePreviewComponent implements OnInit {
   public stopCache = Math.floor(Math.random() * 100000);
   private unsubscribe: Subject<void> = new Subject();
   public quoteForm: FormGroup;
-  @ViewChild(QuoteCreateContentComponent) quoteCreateContentComponent: QuoteCreateContentComponent;
+  @ViewChild(QuoteCreateContentComponent, {static: false}) quoteCreateContentComponent: QuoteCreateContentComponent;
 
   /**
    * Creates an instance of the QuoteCreateContentComponent with the injected services

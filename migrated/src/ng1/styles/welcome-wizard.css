@@ -2432,11 +2432,13 @@
     font-size: 13px;
   }
   
+  .recurring-tickets-content__header--search .mobile-btn.new-link,
   .password-content__header--search .mobile-btn.new-link {
     background: transparent;
     font-size: 13px;
   }
   
+  .recurring-tickets-content__header,
   .password-content__header {
     position: fixed;
     width: 100vw;
@@ -2452,6 +2454,7 @@
     min-height: calc(100vh - 110px);
   }
   
+  .recurring-tickets-selected,
   .password-selected {
     background: #fff;
     border-radius: 6px;

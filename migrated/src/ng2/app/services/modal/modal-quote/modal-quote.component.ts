@@ -1,16 +1,16 @@
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
-import { MatChipInputEvent } from '@angular/material/chips';
-import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
+import {MatChipInputEvent} from '@angular/material/chips';
+import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 
-import { USER } from "../../../const/users";
-import { UsersService } from "../../users/users.service";
-import { QuoteStateService } from "../../../components/billing/quotes/quote-create/quote-state.service";
-import { QuoteService } from "../../quote/quote.service";
-import { takeUntil } from "rxjs/operators";
-import { Subject } from "rxjs";
+import {USER} from "../../../const/users";
+import {UsersService} from "../../users/users.service";
+import {QuoteStateService} from "../../../components/billing/quotes/quote-create/quote-state.service";
+import {QuoteService} from "../../quote/quote.service";
+import {takeUntil} from "rxjs/operators";
+import {Subject} from "rxjs";
 
 /**
  * Modal quote component
@@ -37,12 +37,12 @@ export class ModalQuoteComponent implements OnInit {
   showErrorClient = false;
   usersEmails = [];
   users = [];
-  
+
 
   private unsubscribe: Subject<void> = new Subject();
   @Input() public data;
-  @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
-  @ViewChild('auto') matAutocomplete: MatAutocomplete;
+  @ViewChild('userInput', {static: false}) userInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
 
   /**
    * Creates an instance of the QuoteCreateContentComponent with the injected services
@@ -62,10 +62,10 @@ export class ModalQuoteComponent implements OnInit {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-    console.log('ngOnInit',this.data);
+    console.log('ngOnInit', this.data);
     (this.data) && this.initResendMode();
     this.getAllUsers();
-   this.userInput.nativeElement.onblur = (e) => {
+    this.userInput.nativeElement.onblur = (e) => {
       if (this.matAutocomplete.isOpen) {
         let modal = this.matAutocomplete.panel.nativeElement;
         modal.parentNode.style.width = 'max-content';
@@ -149,8 +149,8 @@ export class ModalQuoteComponent implements OnInit {
    */
   public setSubject(value) {
     this.subject = value;
-   // this.quoteStateService.setSubject(value);
-   // this.isResend && (this.data.subject = value);
+    // this.quoteStateService.setSubject(value);
+    // this.isResend && (this.data.subject = value);
   }
 
   /**
@@ -159,8 +159,8 @@ export class ModalQuoteComponent implements OnInit {
    */
   public setMessage(value) {
     this.message = value;
-  //  this.quoteStateService.setMessage(value);
-   // this.isResend && (this.data.message = value);
+    //  this.quoteStateService.setMessage(value);
+    // this.isResend && (this.data.message = value);
   }
 
   private onInitSubjectAndMessage() {
@@ -180,11 +180,11 @@ export class ModalQuoteComponent implements OnInit {
       } else {
         if (!this.data.id) {
           this.onInitSubjectAndMessage();
-        this.quoteStateService.saveSandMode();
+          this.quoteStateService.saveSandMode();
         } else {
-         this.data.message = this.message;
-         this.data.subject = this.subject;
-          this.quoteService.resend(this.data,this.selectedUsers)
+          this.data.message = this.message;
+          this.data.subject = this.subject;
+          this.quoteService.resend(this.data, this.selectedUsers)
             .pipe(takeUntil(this.unsubscribe))
             .subscribe((res) => {
               if (res) {
