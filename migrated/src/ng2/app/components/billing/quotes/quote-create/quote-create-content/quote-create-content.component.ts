@@ -21,7 +21,7 @@ export class QuoteCreateContentComponent implements OnInit {
 
   public quoteForm: FormGroup;
   public fifteenDays = 1296000000;
-  private selectedClient: any;
+  public selectedClient: any;
   private quoteNumber: number;
   private apiUrl = environment.apiUrl;
   @Input() editMode: any;

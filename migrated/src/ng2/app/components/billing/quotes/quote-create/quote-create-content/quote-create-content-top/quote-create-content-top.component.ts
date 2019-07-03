@@ -82,8 +82,8 @@ export class QuoteCreateContentTopComponent implements OnInit {
   /**
    * Follow quote number change
    */
-  private setNumber(value) {
-    this.quoteStateService.setNumber(value)
+  public setNumber(value) {
+    this.quoteStateService.setNumber(value);
     this.quoteStateService.setError(null);
   }
 
