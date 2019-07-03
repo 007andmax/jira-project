@@ -41,8 +41,8 @@ export class ModalQuoteComponent implements OnInit {
 
   private unsubscribe: Subject<void> = new Subject();
   @Input() public data;
-  @ViewChild('userInput', {static: false}) userInput: ElementRef<HTMLInputElement>;
-  @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
+  @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
   /**
    * Creates an instance of the QuoteCreateContentComponent with the injected services

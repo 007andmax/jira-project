@@ -12,7 +12,7 @@ import { QuoteStateService } from "./quote-state.service";
 })
 export class QuoteCreateComponent implements OnInit {
 
-  @ViewChild(QuoteCreateContentComponent, {static: false}) quoteCreateContentComponent:QuoteCreateContentComponent;
+  @ViewChild(QuoteCreateContentComponent) quoteCreateContentComponent:QuoteCreateContentComponent;
   public editMode = false;
 
   /**

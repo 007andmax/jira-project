@@ -28,7 +28,7 @@ export class QuoteCreateContentNotesComponent implements OnInit {
   public editMode = false;
   public isShowCreateNew = false;
   public noteGlobalId:string;
-  @ViewChild('instance', {static: false}) instance: NgbTypeahead;
+  @ViewChild('instance') instance: NgbTypeahead;
   @Output() selectedRegularNoteItem = new EventEmitter<any>();
   @Output() selectedGlobalNoteItem = new EventEmitter<any>();
   focus$ = new Subject<string>();
