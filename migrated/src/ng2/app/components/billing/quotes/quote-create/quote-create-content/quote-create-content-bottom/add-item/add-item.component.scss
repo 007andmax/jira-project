@@ -9,7 +9,14 @@
 }
 
 :host {
-  position: relative;
+  .row {
+    position: relative;
+    .icn-delete {
+      position: absolute;
+      right: -45px;
+      top: 10px;
+    }
+  }
   .no-valid {
     border: 1px solid red;
   }
