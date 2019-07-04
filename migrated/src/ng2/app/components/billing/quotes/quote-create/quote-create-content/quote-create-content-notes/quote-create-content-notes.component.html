@@ -34,14 +34,13 @@
            *ngIf="isShowEditNote"
            (click)="onEditNote()">Save Terms & Conditions</div>
     <textarea
-      *ngIf="noteGlobal && noteGlobal.line1"
-      [(ngModel)]="noteGlobal.line1"
+      [(ngModel)]="noteGlovalLine"
       (ngModelChange)="setGlobalNote($event,true)"
       placeholder="Mention your company's Terms and Conditions"></textarea>
-    <textarea
+    <!--<textarea
       *ngIf="!(noteGlobal && noteGlobal.line1)"
-      [(ngModel)]="noteGlobal"
+      [(ngModel)]="noteGlovalLine"
       (ngModelChange)="setGlobalNote($event,true)"
-      placeholder="Mention your company's Terms and Conditions"></textarea>
+      placeholder="Mention your company's Terms and Conditions"></textarea>-->
   </div>
 </div>
