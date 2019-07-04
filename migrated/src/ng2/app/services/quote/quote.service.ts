@@ -64,7 +64,7 @@ export class QuoteService {
       "recipients": this.quoteStateService.getUsersEmail() ? this.quoteStateService.getUsersEmail() : [],
       "message": notification? this.quoteStateService.getQuoteCreate()['message'] : 'null',
       "subject": notification? this.quoteStateService.getQuoteCreate()['subject'] : 'null',
-      "globalNote": value.globalNote ? value.globalNote : this.quoteStateService.getGlobalNote(),
+      "globalNote": value.globalNote ? value.globalNote : null,
       "regularNote": value.regularNote ? value.regularNote : this.quoteStateService.getSelectedNote(),
       "sendNotification":notification
     }).pipe(

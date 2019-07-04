@@ -136,6 +136,7 @@ export class QuoteCreateContentNotesComponent implements OnInit {
       }, this.noteGlobalId).subscribe((res:any) => {
         if (res.result === "success") {
           this.isShowEditNote = false;
+          this.getNotes();
         }
       })
   }
