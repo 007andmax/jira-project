@@ -70,7 +70,7 @@ export class QuoteCreateContentComponent implements OnInit {
    */
   private getQuoteNumber() {
     this.quoteService.getQuoteNumber().subscribe((res) => {
-      this.quoteNumber = res['number'];
+      this.quoteNumber = (res['number']) ? res['number'] : 1;
       this.quoteStateService.setNumber(this.quoteNumber);
     });
   }
