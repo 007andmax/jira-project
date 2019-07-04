@@ -273,19 +273,8 @@ export class QuotesComponent implements OnInit {
       if (newChange.action === 'SALE_QUOTE_CREATED') {
         return this.quotesList.push(newChange.data);
       } else {
-        let update_date = newChange.data;
-        let products = [];
-        let services = [];
-        if (update_date.ticket.updates && update_date.ticket.updates.length > 0)
-        {
-          products = update_date.ticket.updates[0].products;
-          services = update_date.ticket.updates[0].services;
-
-        }
-        update_date.products = products;
-        update_date.services = services;
-        const elemIndex = this.quotesList.findIndex((item) => item.id === update_date.id);
-        return this.quotesList[elemIndex] = update_date;
+        const elemIndex = this.quotesList.findIndex((item) => item.id === newChange.data.id);
+        return this.quotesList[elemIndex] = newChange.data;
       }
     })
   }
