@@ -2,6 +2,8 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Subscription } from "rxjs";
 import { TicketStateService } from "../../ticket-state.service";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ProductService } from 'src/ng2/app/services/product/product.service';
+import { Product } from '../class/product';
 
 @Component({
   selector: 'app-recurring-tickets-edit-aside',
@@ -14,15 +16,21 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
   public opened = false;
   public navigation = 'arrows';
   public ticketForm: FormGroup;
+  public product:Product;
+  public productList = [];
+  public isFormValid = false;
+  public isDropDownShow = false;
   constructor(
     private ticketStateService: TicketStateService,
+    private productService: ProductService,
     private fb: FormBuilder,
     public cd: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
     this.showTicketRecurring();
-   
+   this.getItemListProducts();
+   this.hideDropDown();
   }
 
   public selectClient(selectClient) {
@@ -32,7 +40,22 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
     this.ticketStateService.setClient(selectClient);
     this.cd.detectChanges();
   }
-  
+
+  /**
+   * get products list item
+   */
+  public getItemListProducts() {
+    this.productService.getCategories().subscribe((res: any) => {
+      return this.productList = res
+    });
+  /*  const value = this.quoteStateService.getClient();
+    value && this.quoteService.getServiceList(value.id).subscribe((res: any) => {
+      return this.servicesList = res
+    });*/
+  }
+  public hideDropDown() {
+    this.isDropDownShow = false;
+  }
 
   public initForm() {
     
@@ -61,4 +84,34 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
   public close() {
     this.opened = false;
   }
+
+  public toggleShowDropDown() {
+    this.isDropDownShow = !this.isDropDownShow;
+  }
+
+  /**
+   * set new item
+   */
+  public setItem(item) {
+    console.log('item',item);
+  /*  if (this.type === 'service') {
+      item = {...item, ...{description: '', quantity: 1}};
+    } else {
+      item = {...item, ...{quantity: 1, markup: this.setMarkups(item)}};
+    }*/
+    this.product = item;
+  //  this.selectedServiceItem.emit(item);
+    this.isDropDownShow = false;
+  //  this.type = undefined;
+  //  this.changeType.next(this.type);
+  //  this.quoteStateService.setType(true);
+  }
+public getProductNameOrDescription () {
+  if (this.product && this.product.name) return this.product.name;
+  if (this.product && this.product.description) return this.product.description;
+  return '';
+}
+
+  
+
 }

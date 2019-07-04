@@ -1,5 +1,6 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import { Ticket } from './class/ticket';
+import { CompaniesService } from '../../services/company/companies.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +10,13 @@ export class TicketStateService {
   public tecketForCreate: Ticket = new Ticket();
   public showTicketRecurringAside: EventEmitter<any> = new EventEmitter();
 
-  constructor() { }
+  constructor(
+    private companiesService: CompaniesService
+  ) { }
 
+  public onInitClientList () {
+this.companiesService.getCompaniesList();
+  }
   public setClient(client) {
     this.client = client;
     this.tecketForCreate.client = client;

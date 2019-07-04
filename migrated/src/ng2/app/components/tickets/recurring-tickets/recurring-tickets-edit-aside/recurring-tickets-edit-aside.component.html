@@ -41,13 +41,6 @@
                                  class="light-dropdown"
                                  [formGroup]="ticketForm"
                                  (selectedItem)="selectClient($event)"> </app-select-client-company>
-          <!--<div class="light-dropdown">-->
-            <!--<input type="text"-->
-                   <!--class="pointer"-->
-                   <!--placeholder="Select Company">-->
-            <!--<i class="icn-sm icn-remove-old" style="display: none;"></i>-->
-            <!--<i class="icn-sm report-caret-icon"></i>-->
-          <!--</div>-->
         </div>
 
         <div class="col-md-4">
@@ -196,7 +189,21 @@
 
         <!--IF TAB IS 'PRODUCT'------------------------------------------------->
         <div class="col-md-12 product-tab-content p-0">
-          <div class="col-md-12">
+          
+         <div class="product-dropdown-new-ng light-dropdown">
+           <input class="pointer"
+                  type="text"
+                  (click)="toggleShowDropDown()"
+                  [ngClass]="{'no-valid': isFormValid}"
+                  [value]="getProductNameOrDescription()"
+                  placeholder="Product">
+           <i class="icn-sm report-caret-icon"></i>
+           <app-product-list *ngIf="isDropDownShow"
+                             [itemList]="productList"
+                             (selectedProductItem)="setItem($event)"></app-product-list>
+       
+       </div>
+         <!-- <div class="col-md-12">
             <p>Search Product</p>
             <div class="light-dropdown">
               <input type="text"
@@ -205,7 +212,7 @@
               <i class="icn-sm icn-remove-old" style="display: none;"></i>
               <i class="icn-sm report-caret-icon"></i>
             </div>
-          </div>
+          </div>-->
           <div class="col-md-4 mt-20">
             <p>Serial No.</p>
             <input type="text"
