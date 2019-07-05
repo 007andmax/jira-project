@@ -18,8 +18,12 @@ export class TicketStateService {
 this.companiesService.getCompaniesList();
   }
   public setClient(client) {
-    this.client = client;
+    this.client = client.item;
     this.tecketForCreate.client = client;
+  }
+
+  public getClient () {
+    return this.client;
   }
 
   public toggleTicketRecurringAside() {

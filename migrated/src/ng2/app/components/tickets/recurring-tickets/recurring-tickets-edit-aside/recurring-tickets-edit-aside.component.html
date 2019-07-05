@@ -173,14 +173,14 @@
         <div class="col-md-12 ticket-tabs">
 
           <!--ONCLICK ADD CLASS 'active-tab'------------------------------------>
-          <div class="ticket-tabs-product d-f ai-c active-tab">
+          <div class="ticket-tabs-product d-f ai-c" (click)="type = 'products'" [ngClass]="(type === 'products') ? 'active-tab' : ''">
             <i class="icn-20 tab-product"></i>
             Products
           </div>
           <!-------------------------------------------------------------------->
 
           <!--ONCLICK ADD CLASS 'active-tab'------------------------------------>
-          <div class="ticket-tabs-service d-f ai-c">
+          <div class="ticket-tabs-service d-f ai-c" (click)="type = 'services'" [ngClass]="(type === 'services') ? 'active-tab' : ''">
             <i class="icn-20 tab-service"></i>
             Service
           </div>
@@ -189,31 +189,22 @@
         </div>
 
         <!--IF TAB IS 'PRODUCT'------------------------------------------------->
-        <div class="col-md-12 product-tab-content p-0">
+        <div class="col-md-12 product-tab-content p-0" *ngIf="type === 'products'">
           
          <div class="product-dropdown-new-ng light-dropdown">
            <input class="pointer"
                   type="text"
-                  (click)="toggleShowDropDown()"
+                  (click)="toggleShowDropDownProducts()"
                   [ngClass]="{'no-valid': isFormValid}"
-                  [value]="getProductNameOrDescription()"
+                  [value]="getNameOrDescription(product)"
                   placeholder="Product">
            <i class="icn-sm report-caret-icon"></i>
-           <app-product-list *ngIf="isDropDownShow"
+           <app-product-list *ngIf="isDropDownShowProducts"
                              [itemList]="productList"
-                             (selectedProductItem)="setItem($event)"></app-product-list>
+                             (selectedProductItem)="setProductItem($event)"></app-product-list>
        
        </div>
-         <!-- <div class="col-md-12">
-            <p>Search Product</p>
-            <div class="light-dropdown">
-              <input type="text"
-                     class="pointer"
-                     placeholder="Search or Add products">
-              <i class="icn-sm icn-remove-old" style="display: none;"></i>
-              <i class="icn-sm report-caret-icon"></i>
-            </div>
-          </div>-->
+        
           <div class="col-md-4 mt-20">
             <p>Serial No.</p>
             <input type="text"
@@ -246,16 +237,22 @@
         <br>
 
         <!--IF TAB IS 'SERVICE'------------------------------------------------->
-        <div class="col-md-12 service-tab-content p-0">
+        <div class="col-md-12 service-tab-content p-0" *ngIf="type === 'services'">
+           
           <div class="col-md-8">
-            <p>Service</p>
-            <div class="light-dropdown">
-              <input type="text"
-                     class="pointer"
-                     placeholder="Select Service">
-              <i class="icn-sm icn-remove-old" style="display: none;"></i>
-              <i class="icn-sm report-caret-icon"></i>
-            </div>
+              <div class="light-dropdown">
+                  <input class="pointer"
+                         type="text"
+                         (click)="toggleShowDropDownServices()"
+                         [ngClass]="{'no-valid': isFormValid}"
+                         [value]="getNameOrDescription(service)"
+                         placeholder="Service">
+                  <i class="icn-sm report-caret-icon"></i>
+                  <app-services-list
+                    *ngIf="isDropDownShowServices"
+                    [itemList]="servicesList"
+                    (selectedServicesItem)="setServiceItem($event)"></app-services-list>
+                </div>
           </div>
           <div class="col-md-4">
             <p>Duration</p>
