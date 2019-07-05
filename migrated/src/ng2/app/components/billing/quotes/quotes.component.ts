@@ -1,4 +1,4 @@
-import { ChangeDetectorRef,Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef,Component, OnInit, OnDestroy } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 import { QuoteService } from '../../../services/quote/quote.service';
@@ -9,6 +9,7 @@ import { QuoteStateService } from "./quote-create/quote-state.service";
 import { QuoteRealTimeService } from "./quote-realtime/quote-realtime.service";
 import {ModalQuoteComponent} from "../../../services/modal/modal-quote/modal-quote.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import { Subscription } from 'rxjs';
 
 /**
  * Password quotes component
@@ -19,7 +20,8 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
   styleUrls: ['./quotes.component.scss'],
   providers: [Location, {provide: LocationStrategy, useClass: PathLocationStrategy}],
 })
-export class QuotesComponent implements OnInit {
+export class QuotesComponent implements OnInit,OnDestroy {
+ 
 
   public quotesList = [];
   public page = 0;
@@ -35,7 +37,9 @@ export class QuotesComponent implements OnInit {
     number: undefined,
     status: undefined
   };
+  public successQuoteAdding:boolean = false;
   public infiniteScrollDisabled = false;
+  public sub:Subscription = new Subscription();
 
   /**
    * Creates an instance of the QuoteCreateContentComponent with the injected services
@@ -64,6 +68,29 @@ export class QuotesComponent implements OnInit {
     this.getQuotes();
     this.companiesService.getCompaniesList();
     this.changeQuotesListItem();
+    this.onInitCheackQuoteSent();
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
+  public onInitCheackQuoteSent() {
+    this.checkQuoteHasSent();
+    let quoteStateService = this.quoteStateService.getHandleQuoteHasSent().subscribe(() => {
+      this.checkQuoteHasSent();
+    });
+    this.sub.add(quoteStateService);
+  }
+
+  private checkQuoteHasSent () {
+    this.successQuoteAdding = this.quoteStateService.getQuoteHasSent();
+    if (this.successQuoteAdding) {
+     setTimeout(() => {
+       this.quoteStateService.setQuoteHasSent(false);
+       this.successQuoteAdding = false;
+     }, 2000);
+    }
   }
 
   /**

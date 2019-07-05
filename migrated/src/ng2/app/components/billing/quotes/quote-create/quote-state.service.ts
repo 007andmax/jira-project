@@ -16,6 +16,8 @@ export class QuoteStateService {
   public validateForm: EventEmitter<any> = new EventEmitter();
   public handleSendMode: EventEmitter<any> = new EventEmitter();
   public handleErrors: EventEmitter<any> = new EventEmitter();
+  public handleQuoteHasSent: EventEmitter<any> = new EventEmitter();
+  public quoteHasSent: boolean = false;
   public quoteNumber: number;
   public startQuoteNumber: number;
   public state;
@@ -39,6 +41,22 @@ export class QuoteStateService {
   ) {
     this.state = $state;
     this.onInitCLientsList();
+  }
+
+  public getQuoteHasSent() {
+    return this.quoteHasSent;
+  }
+  public getHandleQuoteHasSent() {
+    return this.handleQuoteHasSent;
+  }
+  public setHandleQuoteHasSent() {
+    this.setQuoteHasSent(true);
+    this.handleQuoteHasSent.emit(null);
+
+  }
+  public setQuoteHasSent(val) {
+    this.quoteHasSent = val;
+
   }
 
   /**

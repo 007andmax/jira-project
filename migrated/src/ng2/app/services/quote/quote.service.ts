@@ -68,7 +68,7 @@ export class QuoteService {
       "regularNote": value.regularNote ? value.regularNote : this.quoteStateService.getSelectedNote(),
       "sendNotification":notification
     }).pipe(
-      tap(data => data), 
+      tap(data => this.handleQuoteSent(data)), 
       catchError(this.handleError));
   }
 
@@ -106,7 +106,7 @@ export class QuoteService {
       "regularNote": value.regularNote ? value.regularNote : this.quoteStateService.getSelectedNote(),
       "sendNotification": notification
     }).pipe(
-      tap(data => data), 
+      tap(data => this.handleQuoteSent(data)),  
       catchError(this.handleError));
   }
 
@@ -142,7 +142,7 @@ export class QuoteService {
       "regularNote": item.regularNote,
       "sendNotification": true
     }).pipe(
-      tap(data => data), 
+      tap(data => this.handleQuoteSent(data)),  
       catchError(this.handleError));
   }
 
@@ -383,5 +383,10 @@ export class QuoteService {
     let err = error.error;
     this.quoteStateService.setError((err.validationResults && err.validationResults.saleQuotePostDto) ? err.validationResults.saleQuotePostDto : err.message);
     return throwError(error);
+  }
+
+  private handleQuoteSent = (data) => {
+    this.quoteStateService.setHandleQuoteHasSent();
+    return data;
   }
 }
