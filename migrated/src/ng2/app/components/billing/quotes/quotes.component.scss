@@ -144,10 +144,10 @@
 
 
 .products-content__header--search-result {
-  position: absolute;
+  position: fixed;
   width: 224px;
   right: calc(50% - 112px);
-  top: 20px;
+  top: 98px;
   font-size: 12px;
   background: #e0faec;
   border: 2px solid #b9f0d1;

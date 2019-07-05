@@ -10,6 +10,19 @@
   padding-right: 0 !important;
 }
 
+.with-dollar {
+  position: relative;
+  input {
+    padding-left: 20px !important;
+  }
+  &:before {
+    position: absolute;
+    content: '$';
+    left: 22px;
+    top: 8px;
+  }
+}
+
 .btn-with-dropdown {
   display: flex !important;
   padding: 0 !important;
