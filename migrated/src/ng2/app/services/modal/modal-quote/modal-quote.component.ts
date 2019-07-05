@@ -238,7 +238,10 @@ export class ModalQuoteComponent implements OnInit {
 
       if (this.userInput.nativeElement.value.length > 0) {
         this.selectedUsers.push(this.userInput.nativeElement.value);
+        this.usersEmails.push(this.userInput.nativeElement.value);
+        this.quoteStateService.setUsersEmail(this.usersEmails);
         this.userInput.nativeElement.value = "";
+        this.userCtrl.setValue(null);
       }
     }
   }
