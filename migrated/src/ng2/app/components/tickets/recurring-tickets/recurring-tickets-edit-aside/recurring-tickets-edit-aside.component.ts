@@ -31,6 +31,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
     this.showTicketRecurring();
    this.getItemListProducts();
    this.hideDropDown();
+   this.ticketStateService.onInitClientList();
   }
 
   public selectClient(selectClient) {
