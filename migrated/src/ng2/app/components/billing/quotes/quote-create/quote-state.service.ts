@@ -532,9 +532,12 @@ export class QuoteStateService {
   }
   public setMarkups(item) {
     if (item.sale > 0 && item.cost > 0)
-      return this.roundToTwo((item.sale - item.cost) / item.cost * 100);
+      return this.roundToOne((item.sale - item.cost) / item.cost * 100);
   }
   public roundToTwo(num) {
+    return parseFloat((Math.round(Number(num + 'e+2')) + "e-2")).toFixed(2);
+  }
+  public roundToOne(num) {
     return parseFloat((Math.round(Number(num + 'e+2')) + "e-2")).toFixed(2);
   }
   public resetquoteForCreate() {

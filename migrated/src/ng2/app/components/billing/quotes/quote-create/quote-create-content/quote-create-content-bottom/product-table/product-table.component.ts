@@ -157,6 +157,7 @@ export class ProductTableComponent implements OnInit {
     const item = this.itemsListArray[index];
     this.itemsListArray[index].sale =  this.quoteStateService.roundToTwo((value * item.cost / 100 + item.cost));
     this.itemsListArray[index].markup = value;
+    this.itemsListArray[index].markup = this.roundingMarkup(this.itemsListArray[index].markup);
     this.updateItemsArray();
   }
 
@@ -169,6 +170,7 @@ export class ProductTableComponent implements OnInit {
     const item = this.itemsListArray[index];
     if (this.getMarkup(this.itemsListArray[index])) {
       this.itemsListArray[index].markup = (value - item.cost) / item.cost * 100;
+      this.itemsListArray[index].markup = this.roundingMarkup(this.itemsListArray[index].markup);
       this.itemsListArray[index].sale = value;
       this.updateItemsArray();
     } else {
@@ -184,7 +186,8 @@ export class ProductTableComponent implements OnInit {
   public changeCost(value, index) {
     const item = this.itemsListArray[index];
     if (this.getMarkup(this.itemsListArray[index])) {
-      this.itemsListArray[index].markup =  this.quoteStateService.roundToTwo((item.sale - value)/value * 100);
+      this.itemsListArray[index].markup =  this.quoteStateService.roundToOne((item.sale - value)/value * 100);
+
       this.itemsListArray[index].cost = this.quoteStateService.roundToTwo(value);
     } else {
       this.itemsListArray[index].rate = this.quoteStateService.roundToTwo(value);
@@ -199,6 +202,14 @@ export class ProductTableComponent implements OnInit {
   public updateItemsArray() {
     this.changedProductItemsArray.next(this.itemsListArray);
     this.quoteStateService.setItemArray(this.itemsListArray);
+  }
+
+  private  isInteger(num):boolean {
+    return (num ^ 0) === num;
+  }
+
+  private roundingMarkup (markup) {
+    return (!this.isInteger(markup)) ?  Math.ceil(markup * 10) / 10 : markup;
   }
 
 }
