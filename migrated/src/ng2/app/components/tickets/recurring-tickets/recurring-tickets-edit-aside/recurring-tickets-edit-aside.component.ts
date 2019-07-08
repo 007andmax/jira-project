@@ -18,8 +18,8 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
   public opened = false;
   public navigation = 'arrows';
   public ticketForm: FormGroup;
-  public product:Product;
-  public service:Service;
+  public product:Product = new Product();
+  public service:Service = new Service();
   public productList = [];
   public servicesList = [];
   public isFormValid = false;
@@ -40,6 +40,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
    this.hideDropDownProducts();
    this.hideDropDownServices();
    this.ticketStateService.onInitClientList();
+   this.cd.detectChanges();
   }
 
   public selectClient(selectClient) {
@@ -61,6 +62,14 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
     });
     
   }
+public changeDescription (value) {
+  this.service.description = value;
+}
+
+public changeQuantity (value) {
+  this.product.quantity = value;
+  console.log('changeQuantity',this.product.quantity);
+}
   public getItemListServices () {
     const value = this.ticketStateService.getClient();
     console.log('value',value);
@@ -124,6 +133,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
       item = {...item, ...{quantity: 1, markup: this.setMarkups(item)}};
     }*/
     this.product = item;
+    this.product.quantity = 1;
   //  this.selectedServiceItem.emit(item);
     this.isDropDownShowProducts = false;
   //  this.type = undefined;
@@ -138,6 +148,9 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
       item = {...item, ...{quantity: 1, markup: this.setMarkups(item)}};
     }*/
     this.service = item;
+    this.service.description = '';
+    this.service.quantity = 1;
+  
   //  this.selectedServiceItem.emit(item);
     this.isDropDownShowServices = false;
   //  this.type = undefined;

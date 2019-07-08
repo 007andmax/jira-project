@@ -213,11 +213,15 @@
           <div class="col-md-4 mt-20">
             <p>Product Cost</p>
             <input type="text"
+            formControlName="cost"
+            [(ngModel)]="product.cost"
                    placeholder="Write Product Cost">
           </div>
           <div class="col-md-4 mt-20">
             <p>Quantity</p>
             <input type="text"
+            formControlName="quantity"
+            [(ngModel)]="product.quantity"
                    placeholder="Write Quantity">
           </div>
           <div class="col-md-4 mt-20">
@@ -230,8 +234,9 @@
             <input type="text"
                    placeholder="Write Discount">
           </div>
+          <div class="new-link">+Add Product</div>
         </div>
-        <div class="new-link">+Add Product</div>
+       
         <!---------------------------------------------------------------------->
 
         <br>
@@ -260,13 +265,18 @@
                    class="pointer"
                    placeholder="Hr(s) : Min(s)">
           </div>
+          
           <div class="col-md-12 mt-20">
             <p>Description</p>
             <input type="text"
+            [(ngModel)]="service.description"
+            formControlName="description"
+           
                    placeholder="Write Description">
           </div>
+          <div class="new-link">+Add Service</div>
         </div>
-        <div class="new-link">+Add Service</div>
+       
         <!---------------------------------------------------------------------->
 
         <div class="col-md-12 tags-wrapper">

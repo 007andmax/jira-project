@@ -12,5 +12,7 @@ export class Service {
     taxes: any;
     updatedAt: any;
     versionedId: any;
+    description:string = '';
+    quantity:number;
     constructor () {}
 }
