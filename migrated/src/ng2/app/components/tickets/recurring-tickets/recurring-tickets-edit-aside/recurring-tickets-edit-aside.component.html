@@ -61,6 +61,8 @@
             <input type="text"
                    class="pointer"
                    placeholder="Select Date"
+                   formControlName="date"
+                   [value]="ticket.date"
                    id="dropdownForm1"
                    ngbDropdownToggle
                    readonly>
@@ -69,14 +71,16 @@
                  ngbDropdownMenu
                  aria-labelledby="dropdownForm1">
               <ngb-datepicker [navigation]="navigation"
+              #dp [(ngModel)]="datepicker"
+              [ngModelOptions]="{standalone: true}"
                               style="border: none"></ngb-datepicker>
               <div class="date-picker-actions clearfix">
                 <div class="col-md-12 p-0 mb-5 d-f">
-                  <button class="btn-new btn-primary-white">Start Now</button>
-                  <button class="btn-new btn-primary-white">Tomorrow</button>
+                  <button class="btn-new btn-primary-white" (click)="selectToday();">Start Now</button>
+                  <button class="btn-new btn-primary-white" (click)="selectTomorrow();">Tomorrow</button>
                 </div>
                 <div class="col-md-12 p-0 d-f">
-                  <button class="btn-new btn-primary-white">Start of Month</button>
+                  <button class="btn-new btn-primary-white" (click)="selectStartMonth();">Start of Month</button>
                   <button class="btn-new btn-primary-white">End of Month</button>
                 </div>
               </div>

@@ -6,11 +6,15 @@ import { ProductService } from 'src/ng2/app/services/product/product.service';
 import { Product } from '../class/product';
 import { RecurringService } from 'src/ng2/app/services/recurring/recurring.service';
 import { Service } from '../class/service';
+import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+import { RecurringTicketsEditAsideService } from './services/recurring-tickets-edit-aside.service';
+import { RecurringTickets } from '../class/recurring-tickets';
 
 @Component({
   selector: 'app-recurring-tickets-edit-aside',
   templateUrl: './recurring-tickets-edit-aside.component.html',
-  styleUrls: ['./recurring-tickets-edit-aside.component.scss']
+  styleUrls: ['./recurring-tickets-edit-aside.component.scss'],
+  providers: [RecurringTicketsEditAsideService]
 })
 export class RecurringTicketsEditAsideComponent implements OnInit {
 
@@ -18,37 +22,41 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
   public opened = false;
   public navigation = 'arrows';
   public ticketForm: FormGroup;
-  public product:Product = new Product();
-  public service:Service = new Service();
+  public product: Product = new Product();
+  public service: Service = new Service();
   public productList = [];
   public servicesList = [];
   public isFormValid = false;
   public isDropDownShowProducts = false;
   public isDropDownShowServices = false;
-  public type:string = "products";
+  public type: string = "products";
+  public datepicker: NgbDateStruct;
+  public ticket: RecurringTickets = new RecurringTickets();
   constructor(
     private ticketStateService: TicketStateService,
     private productService: ProductService,
-    private recurringService:RecurringService,
+    private recurringService: RecurringService,
     private fb: FormBuilder,
-    public cd: ChangeDetectorRef
+    public cd: ChangeDetectorRef,
+    private editService: RecurringTicketsEditAsideService,
+    private calendar: NgbCalendar
   ) { }
 
   ngOnInit() {
     this.showTicketRecurring();
-   this.getItemListProducts();
-   this.hideDropDownProducts();
-   this.hideDropDownServices();
-   this.ticketStateService.onInitClientList();
-   this.cd.detectChanges();
+    this.getItemListProducts();
+    this.hideDropDownProducts();
+    this.hideDropDownServices();
+    this.ticketStateService.onInitClientList();
+    this.cd.detectChanges();
   }
 
   public selectClient(selectClient) {
     this.ticketForm.controls['client'].setValue(selectClient);
-   // this.selectedClient = value.item;
-    console.log('this.quoteForm',this.ticketForm);
+    // this.selectedClient = value.item;
+    console.log('this.quoteForm', this.ticketForm);
     this.ticketStateService.setClient(selectClient);
-    
+
     this.getItemListServices();
     this.cd.detectChanges();
   }
@@ -60,22 +68,40 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
     this.productService.getCategories().subscribe((res: any) => {
       return this.productList = res
     });
-    
-  }
-public changeDescription (value) {
-  this.service.description = value;
-}
 
-public changeQuantity (value) {
-  this.product.quantity = value;
-  console.log('changeQuantity',this.product.quantity);
-}
-  public getItemListServices () {
+  }
+  public changeDescription(value) {
+    this.service.description = value;
+  }
+  public selectTomorrow() {
+    let tomorrow = this.calendar.getToday();
+    tomorrow.day++;
+    this.datepicker = tomorrow;
+    this.ticket.setDate(this.editService.parseDatePickerModel(this.datepicker));
+    this.ticketForm.controls['date'].setValue(this.ticket.date);
+  }
+  public selectToday() {
+    this.datepicker = this.calendar.getToday();
+    this.ticket.setDate(this.editService.parseDatePickerModel(this.datepicker));
+    this.ticketForm.controls['date'].setValue(this.ticket.date);
+  }
+  public selectStartMonth () {
+    let startMonth = this.calendar.getToday();
+    startMonth.day = 1;
+    this.datepicker = startMonth;
+    this.ticket.setDate(this.editService.parseDatePickerModel(this.datepicker));
+    this.ticketForm.controls['date'].setValue(this.ticket.date);
+  }
+  public changeQuantity(value) {
+    this.product.quantity = value;
+    console.log('changeQuantity', this.product.quantity);
+  }
+  public getItemListServices() {
     const value = this.ticketStateService.getClient();
-    console.log('value',value);
-     this.recurringService.getServiceList(value.id).subscribe((res:any) => {
-      console.log('res',res);
-      console.log('this.servicesList',this.servicesList);
+    console.log('value', value);
+    this.recurringService.getServiceList(value.id).subscribe((res: any) => {
+      console.log('res', res);
+      console.log('this.servicesList', this.servicesList);
       return this.servicesList = res
     })
   }
@@ -88,20 +114,21 @@ public changeQuantity (value) {
   }
 
   public initForm() {
-    
-      this.ticketForm = this.fb.group({
-        client: ['', Validators.required],
-       /* startDate: this.dateService.getStartDate(new Date()),
-        endDate: this.dateService.getStartDate(new Date().getTime() + this.fifteenDays),
-        partialDeposit: '',
-        purchaseOrder: '',
-        quoteNumber: this.quoteNumber,
-        po: '',
-        regularNote: '',
-        globalNote: ''*/
-      })
-     // this.onInitChengeForm();
-    
+
+    this.ticketForm = this.fb.group({
+      client: ['', Validators.required],
+      date: ['', Validators.required],
+      /* startDate: this.dateService.getStartDate(new Date()),
+       endDate: this.dateService.getStartDate(new Date().getTime() + this.fifteenDays),
+       partialDeposit: '',
+       purchaseOrder: '',
+       quoteNumber: this.quoteNumber,
+       po: '',
+       regularNote: '',
+       globalNote: ''*/
+    })
+    // this.onInitChengeForm();
+
   }
 
   public showTicketRecurring() {
@@ -126,44 +153,44 @@ public changeQuantity (value) {
    * set new item
    */
   public setProductItem(item) {
-    console.log('item',item);
-  /*  if (this.type === 'service') {
-      item = {...item, ...{description: '', quantity: 1}};
-    } else {
-      item = {...item, ...{quantity: 1, markup: this.setMarkups(item)}};
-    }*/
+    console.log('item', item);
+    /*  if (this.type === 'service') {
+        item = {...item, ...{description: '', quantity: 1}};
+      } else {
+        item = {...item, ...{quantity: 1, markup: this.setMarkups(item)}};
+      }*/
     this.product = item;
     this.product.quantity = 1;
-  //  this.selectedServiceItem.emit(item);
+    //  this.selectedServiceItem.emit(item);
     this.isDropDownShowProducts = false;
-  //  this.type = undefined;
-  //  this.changeType.next(this.type);
-  //  this.quoteStateService.setType(true);
+    //  this.type = undefined;
+    //  this.changeType.next(this.type);
+    //  this.quoteStateService.setType(true);
   }
-  public setServiceItem (item) {
-    console.log('item',item);
-  /*  if (this.type === 'service') {
-      item = {...item, ...{description: '', quantity: 1}};
-    } else {
-      item = {...item, ...{quantity: 1, markup: this.setMarkups(item)}};
-    }*/
+  public setServiceItem(item) {
+    console.log('item', item);
+    /*  if (this.type === 'service') {
+        item = {...item, ...{description: '', quantity: 1}};
+      } else {
+        item = {...item, ...{quantity: 1, markup: this.setMarkups(item)}};
+      }*/
     this.service = item;
     this.service.description = '';
     this.service.quantity = 1;
-  
-  //  this.selectedServiceItem.emit(item);
-    this.isDropDownShowServices = false;
-  //  this.type = undefined;
-  //  this.changeType.next(this.type);
-  //  this.quoteStateService.setType(true);
-    
-  }
-public getNameOrDescription (item) {
-  if (item && item.name) return item.name;
-  if (item && item.description) return item.description;
-  return '';
-}
 
-  
+    //  this.selectedServiceItem.emit(item);
+    this.isDropDownShowServices = false;
+    //  this.type = undefined;
+    //  this.changeType.next(this.type);
+    //  this.quoteStateService.setType(true);
+
+  }
+  public getNameOrDescription(item) {
+    if (item && item.name) return item.name;
+    if (item && item.description) return item.description;
+    return '';
+  }
+
+
 
 }
