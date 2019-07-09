@@ -34,6 +34,9 @@
             const index = $scope.invocesList.findIndex((item) => item.id === newInvoice.data.id);
             $scope.invocesList[index] = newInvoice.data;
           }
+          console.log('$scope.invocesList',$scope.invocesList);
+          console.log('newInvoice.data',newInvoice);
+          $scope.$apply();
         });
 
         $rootScope.$on('receivableInvoicePayment', function(event, newInvoice){
