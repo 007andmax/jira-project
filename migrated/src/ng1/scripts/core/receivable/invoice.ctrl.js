@@ -10,6 +10,21 @@
         $scope.company = CompaniesService.getOneById($scope.invoice.company.id);
         $scope.invoice.companyName = CompaniesService.getOneById($scope.invoice.company.id).name;
 
+        $rootScope.$on('receivableInvoice', function(event, newInvoice){
+        /*  if (newInvoice.action === 'INVOICE_DELETED') {
+            $scope.invocesList = $scope.invocesList.filter((item) => item.id !==  newInvoice.data.id );
+          } else if(newInvoice.action === 'PAYMENT_CREATED') {
+            const index = $scope.invocesList.findIndex((item) => item.number === newInvoice.data.partialPaidInvoice);
+            $scope.invocesList[index].paidSum += newInvoice.data.partialPaidAmount;
+          } else {
+            const index = $scope.invocesList.findIndex((item) => item.id === newInvoice.data.id);
+            $scope.invocesList[index] = newInvoice.data;
+          }
+          console.log('$scope.invocesList',$scope.invocesList);
+          console.log('newInvoice.data',newInvoice);*/
+          console.log('receivableInvoice');
+          $scope.$apply();
+        });
         if ($scope.invoice.dueDate <= Date.now()) {
           $scope.$emit('indicatorInvoice');
           $scope.dueDate = {
