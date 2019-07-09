@@ -3,37 +3,17 @@
     [(opened)]="opened"
     [position]="'right'"
   >
-  <form
-  [formGroup] = "ticketForm"
-  >
     <div class="recurring-tickets-content__modal open">
       <div class="recurring-tickets-content__modal--header">
         <h3>Create Recurring Service</h3>
         <button class="close-modal" (click)="close()"></button>
       </div>
-      <form class="recurring-tickets-content__modal--content clearfix">
+      <form class="recurring-tickets-content__modal--content clearfix"  [formGroup]="ticketForm">
         <div class="col-md-12">
           <p>Service Description</p>
           <input type="text"
                  placeholder="Write Description">
         </div>
-
-       <!-- <form
-  [formGroup] = "quoteForm"
-  class="quote-create__content">
-  <app-quote-create-content-top
-    [quoteForm]="quoteForm"
-    (selectedItem)="setClient($event)"
-  ></app-quote-create-content-top>
-  <app-quote-create-content-bottom
-    [clientId]="selectedClient || quoteForm.value.client"
-  ></app-quote-create-content-bottom>
-  <app-quote-create-content-notes
-    (selectedRegularNoteItem)="setRegularNote($event)"
-    (selectedGlobalNoteItem)="setGlobalNote($event)"
-  ></app-quote-create-content-notes>
-</form>
--->
 
         <div class="col-md-12">
           <p>Assign to Company</p>
@@ -62,17 +42,20 @@
                    class="pointer"
                    placeholder="Select Date"
                    formControlName="date"
-                   [value]="ticket.date"
+                   [value]="date.title"
                    id="dropdownForm1"
-                   ngbDropdownToggle
+                   (click)="toggleDatePicker()"
                    readonly>
             <i class="icn-16 icn-calendar-light pointer"></i>
             <div class="date-picker"
-                 ngbDropdownMenu
-                 aria-labelledby="dropdownForm1">
+            *ngIf="showDatePicker">
               <ngb-datepicker [navigation]="navigation"
-              #dp [(ngModel)]="datepicker"
+
+              [(ngModel)]="datepicker"
+              (select)="selectDate($event)"
+              (navigate)="navigateDate($event)"
               [ngModelOptions]="{standalone: true}"
+              
                               style="border: none"></ngb-datepicker>
               <div class="date-picker-actions clearfix">
                 <div class="col-md-12 p-0 mb-5 d-f">
@@ -81,7 +64,7 @@
                 </div>
                 <div class="col-md-12 p-0 d-f">
                   <button class="btn-new btn-primary-white" (click)="selectStartMonth();">Start of Month</button>
-                  <button class="btn-new btn-primary-white">End of Month</button>
+                  <button class="btn-new btn-primary-white" (click)="selectEndMonth();">End of Month</button>
                 </div>
               </div>
             </div>
@@ -212,6 +195,8 @@
           <div class="col-md-4 mt-20">
             <p>Serial No.</p>
             <input type="text"
+            formControlName="serial"
+            [(ngModel)]="product.manufacture"
                    placeholder="Write Serial No.">
           </div>
           <div class="col-md-4 mt-20">
@@ -231,11 +216,15 @@
           <div class="col-md-4 mt-20">
             <p>Product Price</p>
             <input type="text"
+            formControlName="price"
+            [(ngModel)]="product.sale"
                    placeholder="Write Product Price">
           </div>
           <div class="col-md-4 mt-20">
             <p>Discount</p>
             <input type="text"
+            formControlName="discount"
+         
                    placeholder="Write Discount">
           </div>
           <div class="new-link">+Add Product</div>
@@ -323,7 +312,6 @@
         </div>
       </form>
     </div>
-  </form>
 
   </ng-sidebar>
 </ng-sidebar-container>

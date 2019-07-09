@@ -11,9 +11,7 @@ export class RecurringTickets {
     products:any;
     services: any;
     startDate: number;
-    date: string;
+  
     constructor () {}
-    public setDate (date) {
-        this.date = date;
-    }
+
 }
