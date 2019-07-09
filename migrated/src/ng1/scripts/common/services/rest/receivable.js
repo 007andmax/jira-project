@@ -52,11 +52,11 @@
       if (!scope || !scope.$id) {
         throw 'First argument must be Angularjs scope!'
       }
-      // return $http.post('/receivable', data).then(function (resp) {
-      //   if (callback) {
-      //     callback(resp.data);
-      //   }
-      // });
+       return $http.post('/receivable', data).then(function (resp) {
+         if (callback) {
+           callback(resp.data);
+         }
+       });
     }
 
     function getReceivableInvoicesData(scope, callback) {
