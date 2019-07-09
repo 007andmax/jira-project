@@ -183,21 +183,23 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
    */
   public setProductItem(item) {
     console.log('item', item);
+    item = {...item, ...{quantity: 1}};
     /*  if (this.type === 'service') {
         item = {...item, ...{description: '', quantity: 1}};
       } else {
         item = {...item, ...{quantity: 1, markup: this.setMarkups(item)}};
       }*/
     this.product = item;
-    this.product.quantity = 1;
+   // this.product.quantity = 1;
     //  this.selectedServiceItem.emit(item);
     this.isDropDownShowProducts = false;
+    console.log('this.product', this.product);
     //  this.type = undefined;
     //  this.changeType.next(this.type);
     //  this.quoteStateService.setType(true);
   }
   public setServiceItem(item) {
-    console.log('item', item);
+  
     /*  if (this.type === 'service') {
         item = {...item, ...{description: '', quantity: 1}};
       } else {
@@ -205,8 +207,8 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
       }*/
     this.service = item;
     this.service.description = '';
-    this.service.quantity = 1;
 
+    console.log('this.service', this.service);
     //  this.selectedServiceItem.emit(item);
     this.isDropDownShowServices = false;
     //  this.type = undefined;

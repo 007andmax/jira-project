@@ -8,6 +8,6 @@ export class Product {
     sale: number;
     taxes: any;
     versionedId: any;
-    quantity:number = 1;
+    quantity:number;
     constructor () {}
 }
