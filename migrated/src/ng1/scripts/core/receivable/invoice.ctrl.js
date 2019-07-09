@@ -7,9 +7,12 @@
       function ($scope, ReceivableService, $rootScope, CompaniesService, UserConfirmationsService, UserNotificationService) {
         var disableInvoiceButtons = false;
         var t0 = performance.now();
+        console.log('$scope.invoice.company.id',$scope.invoice.company.id);
+
         $scope.company = CompaniesService.getOneById($scope.invoice.company.id);
         $scope.invoice.companyName = CompaniesService.getOneById($scope.invoice.company.id).name;
-
+console.log('$scope.company',$scope.company);
+console.log(' $scope.invoice.companyName', $scope.invoice.companyName);
         $rootScope.$on('receivableInvoice', function(event, newInvoice){
         /*  if (newInvoice.action === 'INVOICE_DELETED') {
             $scope.invocesList = $scope.invocesList.filter((item) => item.id !==  newInvoice.data.id );
