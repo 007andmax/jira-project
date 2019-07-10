@@ -235,7 +235,7 @@ export class QuotePreviewComponent implements OnInit {
         .pipe(takeUntil(this.unsubscribe))
         .subscribe((res) => {
           const id = res['id'];
-          this.quoteService.downloadPdf(res['id']).subscribe((res) => this.downLoadFile(res, id));
+          this.quoteService.downloadPdf(res['id']).subscribe((res) => this.quoteService.downLoadFile(res, id,this.quote.client.name,this.quoteForCreate.quoteNumber));
         });
     } else if (isFormReady && this.editMode) {
       const currentQuote = this.quoteStateService.getQuoteCreate();
@@ -243,7 +243,7 @@ export class QuotePreviewComponent implements OnInit {
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((res) => {
         const id = res['id'];
-        this.quoteService.downloadPdf(res['id']).subscribe((res) => this.downLoadFile(res,id));
+        this.quoteService.downloadPdf(res['id']).subscribe((res) => this.quoteService.downLoadFile(res, id,this.quote.client.name,this.quoteForCreate.quoteNumber));
       })
     } else {
       this.quoteStateService.emitValidation();
@@ -263,14 +263,14 @@ export class QuotePreviewComponent implements OnInit {
    * @param res - Array Buffer data
    * @param id - type of the document.
    */
-  public downLoadFile(res: any, id) {
+  /*public downLoadFile(res: any, id) {
     const data = window.URL.createObjectURL(res);
     var link = document.createElement('a');
     link.href = data;
     link.download = `${this.apiUrl}saleQuotes/${id}/pdf.pdf`;
     link.click();
     this.quoteStateService.goToQuote();
-  }
+  }*/
 
   /**
    * Return to quotes

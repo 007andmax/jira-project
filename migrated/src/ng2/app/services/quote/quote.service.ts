@@ -343,6 +343,21 @@ export class QuoteService {
         catchError(this.handleError));
   }
 
+   /**
+   * Method is use to download file.
+   * @param res - Array Buffer data
+   * @param id - type of the document.
+   */
+  public downLoadFile(res: any, id,companyName,quoteNumber) {
+    const data = window.URL.createObjectURL(res);
+    var link = document.createElement('a');
+    link.href = data;
+    link.download=`${this.apiUrl}saleQuotes/${id}/pdf.pdf`;
+    link.download = `${companyName}_Quote-${quoteNumber}.pdf`;
+    link.click();
+    this.quoteStateService.goToQuote();
+  }
+
   /**
    * Get sort type
    * @param type - type of sort
