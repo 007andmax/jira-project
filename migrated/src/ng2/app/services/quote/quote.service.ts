@@ -70,7 +70,7 @@ export class QuoteService {
       "regularNote": value.regularNote ? value.regularNote : this.quoteStateService.getSelectedNote(),
       "sendNotification":notification
     }).pipe(
-      tap(data => data), 
+      tap(data => this.handleQuoteSent(data,'Quote has been saved')),  
       catchError(this.handleError));
   }
 
@@ -342,7 +342,7 @@ export class QuoteService {
     return this.http.get(this.apiUrl + `saleQuotes/${quote_id}/pdf`,{ headers: new HttpHeaders({
         'Content-Type': 'application/pdf',
       }), responseType: 'blob'}).pipe(
-        tap(data => data), 
+        tap(data => this.handleQuoteSent(data,'Quote has been saved')),  
         catchError(this.handleError));
   }
 
