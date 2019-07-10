@@ -238,7 +238,8 @@ export class QuoteService {
    * @param data - quote info
    */
   public getQuotes(data) {
-    data.type && this.getSortType(data.type);
+    //data.type && this.getSortType(data.type);
+    console.log('this.sortType',this.sortType);
     return this.http.post(this.apiUrl + 'saleQuotes/search', {
       "companyName": data.company || null,
       "quoteNumber": data.number || null,

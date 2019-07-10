@@ -129,6 +129,7 @@ export class QuotesComponent implements OnInit,OnDestroy {
    */
   public sortBy(value) {
     this.refreshQuoteAndPage();
+    this.quoteServices.getSortType(value);
     this.dataToSend.type = value;
     this.getQuotes()
   }
