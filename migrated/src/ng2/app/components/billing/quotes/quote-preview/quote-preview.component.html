@@ -43,7 +43,7 @@
         <div class="col-md-4 pl-0">
           <p class="quote-notes__item--fullname" [textContent]="getUserWhoSend(item.user.firstName,item.user.lastName)"></p>
           <p class="quote-notes__item--email" [textContent]="item.user.primaryEmail"></p>
-          <p class="quote-notes__item--startdate" [textContent]="getFormatDate(item.startDate)"></p>
+          <p class="quote-notes__item--startdate" [textContent]="getFormatDateWithTime(item.startDate,item.createdAt)"></p>
         </div>
         <div class="col-md-8 pr-0">
           <p [textContent]="item.note"></p>

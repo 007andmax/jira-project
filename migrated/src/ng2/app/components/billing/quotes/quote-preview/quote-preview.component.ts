@@ -71,6 +71,7 @@ export class QuotePreviewComponent implements OnInit {
   public getQuoteInfo() {
     this.quote = this.quoteStateService.getQuote();
     this.quoteForCreate = this.quoteStateService.getQuoteCreate();
+    console.log('this.quoteForCreate',this.quoteForCreate);
   }
 
   /**
@@ -314,6 +315,17 @@ export class QuotePreviewComponent implements OnInit {
         .subscribe((res) => {
           this.quoteStateService.goToQuote();
         })
+    }
+  }
+
+  public getFormatDateWithTime (date,milisecond) {
+    if (date) {
+      let full_date = new Date(milisecond);
+      let time = full_date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
+      date = `${date.year}/${date.month}/${date.day}`;
+      return `${this.dateService.getInvoiceDate(date)} ${time}`;
+    } else {
+      return ''
     }
   }
 
