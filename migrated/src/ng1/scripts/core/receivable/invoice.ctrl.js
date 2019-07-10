@@ -13,6 +13,7 @@
         $scope.invoice.companyName = CompaniesService.getOneById($scope.invoice.company.id).name;
 console.log('$scope.company',$scope.company);
 console.log(' $scope.invoice.companyName', $scope.invoice.companyName);
+console.log(' $scope', $scope);
         $rootScope.$on('receivableInvoice', function(event, newInvoice){
         /*  if (newInvoice.action === 'INVOICE_DELETED') {
             $scope.invocesList = $scope.invocesList.filter((item) => item.id !==  newInvoice.data.id );
