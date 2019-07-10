@@ -214,7 +214,7 @@ export class QuotesComponent implements OnInit,OnDestroy {
   public getClass(className) {
     return className === 'EXPIRED' || className === 'REFUSED' ? 'error-status' :
       className === 'READ' ? 'status-in-progress' :
-        className === 'DRAFT' ? 'changing-status' :
+        className === 'SAVED' ? 'changing-status' :
           className === 'UNREAD' ? 'status-warning' :
             'success-status'
   }
