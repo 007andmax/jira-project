@@ -27,6 +27,7 @@ console.log(' $scope', $scope);
           console.log('$scope.invocesList',$scope.invocesList);
           console.log('newInvoice.data',newInvoice);*/
           console.log('receivableInvoice');
+          console.log(' $scope', $scope);
           $scope.$apply();
         });
         if ($scope.invoice.dueDate <= Date.now()) {

@@ -5,7 +5,7 @@
     infinite-scroll-disabled= "stopScroll"
     class="qt-list company-devices qt-users invoices-list">
   <li class="list-item"
-      ng-repeat="invoice in invocesList track by $index"
+      ng-repeat="invoice in invocesList track by invoice.id"
       ng-controller="quicktech.core.receivable.invoiceCtrl"
       ng-show="true"
       on-finish-render="hideLoadingIndicator()">
