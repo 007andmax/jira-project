@@ -4,6 +4,7 @@ import { QuoteService } from "../../../../services/quote/quote.service";
 import { FormGroup } from '@angular/forms';
 import { ISubscription } from 'rxjs/Subscription';
 import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
+import { QuoteResult } from '../class/quote-result';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class QuoteStateService {
   public handleSendMode: EventEmitter<any> = new EventEmitter();
   public handleErrors: EventEmitter<any> = new EventEmitter();
   public handleQuoteHasSent: EventEmitter<any> = new EventEmitter();
-  public quoteHasSent: boolean = false;
+ // public quoteHasSent: boolean = false;
   public quoteNumber: number;
   public startQuoteNumber: number;
   public state;
@@ -33,7 +34,8 @@ export class QuoteStateService {
   public subGetCompaniesList: ISubscription;
   public quoteForm: FormGroup;
   public clientsList:any;
-
+  private quoteResult: QuoteResult;
+  
   constructor(
     @Inject('$state') $state: any,
     private dateService: DateService,
@@ -43,21 +45,29 @@ export class QuoteStateService {
     this.onInitCLientsList();
   }
 
-  public getQuoteHasSent() {
-    return this.quoteHasSent;
+  public setQuoteResult (message) {
+    this.quoteResult = new QuoteResult(message);
   }
+
+  public getQuoteResult () {
+    return this.quoteResult;
+  }
+
+  /*public getQuoteHasSent() {
+    return this.quoteHasSent;
+  }*/
   public getHandleQuoteHasSent() {
     return this.handleQuoteHasSent;
   }
   public setHandleQuoteHasSent() {
-    this.setQuoteHasSent(true);
+   // this.setQuoteHasSent(true);
     this.handleQuoteHasSent.emit(null);
 
   }
-  public setQuoteHasSent(val) {
+  /*public setQuoteHasSent(val) {
     this.quoteHasSent = val;
 
-  }
+  }*/
 
   /**
    * Initializes subscribe on clients 

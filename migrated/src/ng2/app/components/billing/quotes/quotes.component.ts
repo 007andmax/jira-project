@@ -10,6 +10,7 @@ import { QuoteRealTimeService } from "./quote-realtime/quote-realtime.service";
 import {ModalQuoteComponent} from "../../../services/modal/modal-quote/modal-quote.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import { Subscription } from 'rxjs';
+import { QuoteResult } from './class/quote-result';
 
 /**
  * Password quotes component
@@ -37,6 +38,7 @@ export class QuotesComponent implements OnInit,OnDestroy {
     number: undefined,
     status: undefined
   };
+  public quoteResultMessage:string = "";
   public successQuoteAdding:boolean = false;
   public infiniteScrollDisabled = false;
   public sub:Subscription = new Subscription();
@@ -78,16 +80,19 @@ export class QuotesComponent implements OnInit,OnDestroy {
   public onInitCheackQuoteSent() {
     this.checkQuoteHasSent();
     let quoteStateService = this.quoteStateService.getHandleQuoteHasSent().subscribe(() => {
+    //  this.quoteResultMessage = this.quoteStateService.getQuoteResult().getMessage();
       this.checkQuoteHasSent();
     });
     this.sub.add(quoteStateService);
   }
 
   private checkQuoteHasSent () {
-    this.successQuoteAdding = this.quoteStateService.getQuoteHasSent();
+    let result:QuoteResult =  this.quoteStateService.getQuoteResult();
+    this.successQuoteAdding = (result) ? result.getShow() : false;
     if (this.successQuoteAdding) {
+      this.quoteResultMessage = this.quoteStateService.getQuoteResult().getMessage();
      setTimeout(() => {
-       this.quoteStateService.setQuoteHasSent(false);
+      result.setShow(false);
        this.successQuoteAdding = false;
      }, 2000);
     }

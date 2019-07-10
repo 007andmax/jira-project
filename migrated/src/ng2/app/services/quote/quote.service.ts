@@ -4,6 +4,7 @@ import { environment } from "../../../environments/environment";
 import {QuoteStateService} from "../../components/billing/quotes/quote-create/quote-state.service";
 import { catchError, tap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { QuoteResult } from '../../components/billing/quotes/class/quote-result';
 
 /**
  * Quote service to work with api
@@ -25,6 +26,7 @@ export class QuoteService {
   private amount = 'AMOUNT_DESC';
   private deposit = 'DEPOSIT_DESC';
   private sortType = null;
+ 
 
   /**
    * Product api service constructor
@@ -68,7 +70,7 @@ export class QuoteService {
       "regularNote": value.regularNote ? value.regularNote : this.quoteStateService.getSelectedNote(),
       "sendNotification":notification
     }).pipe(
-      tap(data => this.handleQuoteSent(data)), 
+      tap(data => data), 
       catchError(this.handleError));
   }
 
@@ -106,7 +108,7 @@ export class QuoteService {
       "regularNote": value.regularNote ? value.regularNote : this.quoteStateService.getSelectedNote(),
       "sendNotification": notification
     }).pipe(
-      tap(data => this.handleQuoteSent(data)),  
+      tap(data => this.handleQuoteSent(data,'Quote has been saved')),  
       catchError(this.handleError));
   }
 
@@ -142,7 +144,7 @@ export class QuoteService {
       "regularNote": item.regularNote,
       "sendNotification": true
     }).pipe(
-      tap(data => this.handleQuoteSent(data)),  
+      tap(data => this.handleQuoteSent(data,'Quote has been sent')),  
       catchError(this.handleError));
   }
 
@@ -288,7 +290,7 @@ export class QuoteService {
     return this.http.post(this.apiUrl +
       `saleQuotes/approveQuote?companyId=${company.id}`, [quoteId]
     ).pipe(
-      tap(data => data), 
+      tap(data => this.handleQuoteSent(data,'Quote has been approved')),  
       catchError(this.handleError));
   }
 
@@ -400,8 +402,11 @@ export class QuoteService {
     return throwError(error);
   }
 
-  private handleQuoteSent = (data) => {
+  private handleQuoteSent = (data,message) => {
+    this.quoteStateService.setQuoteResult(message);
     this.quoteStateService.setHandleQuoteHasSent();
     return data;
   }
+
+
 }
