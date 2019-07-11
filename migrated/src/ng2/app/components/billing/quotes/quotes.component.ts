@@ -74,6 +74,7 @@ export class QuotesComponent implements OnInit,OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.quoteServices.setDefaultTypes();
     this.sub.unsubscribe();
   }
 

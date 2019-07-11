@@ -409,5 +409,15 @@ export class QuoteService {
     return data;
   }
 
+  public setDefaultTypes() {
+    this.offset = 30;
+    this.quoteNumber = 'QUOTE_NUMBER_DESC';
+    this.customerName = 'CUSTOMER_NAME_DESC';
+    this.date = 'DATE_DESC';
+    this.validUntil = 'VALID_UNTIL_DESC';
+    this.amount = 'AMOUNT_DESC';
+    this.deposit = 'DEPOSIT_DESC';
+    this.sortType = null;
+  }
 
 }
