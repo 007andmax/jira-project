@@ -22,14 +22,18 @@ export class numberDirective {
     }*/
     ValidateMoney(event: any) {
         let value = Number(event.target.value);
-        if (!value) {
+        if (!value && event.target.value !== "") {
             event.target.value = this.lastValue;
             return;
         }
         if (value < 0) {
             event.target.value = 1;
         } 
-        this.lastValue = Number(JSON.parse(JSON.stringify(event.target.value)));
+         if (event.target.value !== "") {
+            this.lastValue = Number(JSON.parse(JSON.stringify(event.target.value)));
+         } else {
+            this.lastValue = 1;
+         }
 
     }
 
