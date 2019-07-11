@@ -38,6 +38,7 @@ export class QuotesComponent implements OnInit,OnDestroy {
     number: undefined,
     status: undefined
   };
+  public showPreloader: boolean = true;
   public quoteResultMessage:string = "";
   public successQuoteAdding:boolean = false;
   public infiniteScrollDisabled = false;
@@ -105,6 +106,7 @@ export class QuotesComponent implements OnInit,OnDestroy {
   public getQuotes() {
     this.quoteServices.getQuotes(this.dataToSend).subscribe((res: any) => {
       this.quotesList = [...this.quotesList, ...res];
+      this.showPreloader = false;
       this.dataToSend.page += 1;
       this.infiniteScrollDisabled = false;
     })
@@ -157,6 +159,7 @@ export class QuotesComponent implements OnInit,OnDestroy {
    */
   private refreshQuoteAndPage() {
     this.quotesList = [];
+    this.showPreloader = true;
     this.dataToSend.page = 0;
   }
 
