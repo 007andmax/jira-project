@@ -27,7 +27,13 @@ console.log(' $scope', $scope);
           console.log('$scope.invocesList',$scope.invocesList);
           console.log('newInvoice.data',newInvoice);*/
           console.log('receivableInvoice');
-          console.log(' $scope', $scope);
+          if (newInvoice.action === 'INVOICE_DELETED') {
+            if ($scope.invoice.id === newInvoice.data.id)
+            {
+console.log('find ---------------------');
+            }
+          } 
+          console.log(' $scope', $scope.invoice.id);
           $scope.$apply();
         });
         if ($scope.invoice.dueDate <= Date.now()) {
