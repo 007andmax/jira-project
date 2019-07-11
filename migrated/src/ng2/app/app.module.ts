@@ -52,7 +52,7 @@ import { MultiDatepickerComponent } from './components/shared/multi-datepicker/m
 import { LeftPanelBillingComponent } from './components/left-panel/left-panel-billing/left-panel-billing.component';
 import { ToNumerPipe } from './pipe/to-numer.pipe';
 import { ModalQuoteComponent } from './services/modal/modal-quote/modal-quote.component';
-
+import { numberDirective } from './directives/number.directive';
 /**
  * declare angular
  */
@@ -125,7 +125,8 @@ angular.module('quicktech')
     MultiDatepickerComponent,
     LeftPanelBillingComponent,
     ToNumerPipe,
-    ModalQuoteComponent
+    ModalQuoteComponent,
+    numberDirective
   ],
   imports: [
     BrowserModule,
