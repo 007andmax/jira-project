@@ -192,6 +192,8 @@ export class ProductTableComponent implements OnInit {
     } else {
       this.itemsListArray[index].rate = this.quoteStateService.roundToTwo(value);
     }
+    if (typeof this.itemsListArray[index].markup !== 'number') this.itemsListArray[index].markup = "";
+    if (typeof this.itemsListArray[index].rate !== 'number') this.itemsListArray[index].rate = "";
     this.updateItemsArray();
   }
 
