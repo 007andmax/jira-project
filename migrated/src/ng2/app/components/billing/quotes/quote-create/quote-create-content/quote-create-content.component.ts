@@ -52,6 +52,7 @@ export class QuoteCreateContentComponent implements OnInit {
       this.onInitEditMode();
     } else {
       this.getQuoteNumber();
+      console.log('quote',this.quoteStateService.getQuoteCreate())
     }
     this.initForm(this.editMode);
     this.handleSendMode();

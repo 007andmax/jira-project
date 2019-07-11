@@ -245,6 +245,7 @@ export class QuoteStateService {
    * move to quote component
    */
   public goToQuote() {
+    this.setUsersEmail([]);
     this.state.go('quotes-component');
   }
 
