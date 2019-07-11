@@ -70,7 +70,7 @@ export class QuoteService {
       "regularNote": value.regularNote ? value.regularNote : this.quoteStateService.getSelectedNote(),
       "sendNotification":notification
     }).pipe(
-      tap(data => this.handleQuoteSent(data,'Quote has been saved')),  
+      tap(data => this.handleQuoteSent(data,(notification) ? 'Quote has been sent' : 'Quote has been saved')),  
       catchError(this.handleError));
   }
 
