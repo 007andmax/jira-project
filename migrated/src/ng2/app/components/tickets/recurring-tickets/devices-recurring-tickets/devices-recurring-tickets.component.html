@@ -1,0 +1,22 @@
+<input
+  id="typeahead-focus1"
+  placeholder="Select Company"
+  type="text"
+  [(ngModel)]="selectedClient"
+  class="pointer"
+  [inputFormatter]="formatter"
+  [resultFormatter]="formatter"
+  [ngbTypeahead]="search"
+  (selectItem)="selectItem($event)"
+  (focus)="focus$.next('')"
+  (click)="click$.next('')"
+  #instance="ngbTypeahead"
+/>
+<span *ngIf="clientsList">
+<i *ngIf="selectedClient"
+   class="icn-sm icn-remove-old"
+   (click)="clearClient($event)"></i>
+<i *ngIf="!selectedClient"
+   class="icn-sm report-caret-icon"></i>
+</span>
+<i class="loading xs" *ngIf="!clientsList"></i>

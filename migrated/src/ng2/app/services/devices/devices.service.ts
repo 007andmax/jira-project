@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 
 import { environment } from "../../../environments/environment";
+import { Subject } from 'rxjs';
 
 /**
  * Device service to work with api
@@ -12,7 +13,7 @@ import { environment } from "../../../environments/environment";
 export class DevicesService {
 
   private apiUrl = environment.apiUrl;
-
+  public devicesCompany = new Subject<any>();
   /**
    * Device api service constructor
    * @param {HttpClient} http Service to work with request
@@ -26,7 +27,11 @@ export class DevicesService {
    * @param companyId - id of company
    */
   public getCompanyDevices(companyId){
-    return this.http.get(this.apiUrl + `devices?companyId=${companyId}`);
+    return this.http.get(this.apiUrl + `devices?companyId=${companyId}`).subscribe((response)=> {
+      this.devicesCompany.next(response);
+    })
   }
+
+  
 
 }

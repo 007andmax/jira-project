@@ -11,6 +11,7 @@ import { RecurringTicketsEditAsideService } from './services/recurring-tickets-e
 import { RecurringTickets } from '../class/recurring-tickets';
 import { RecurringTicketsEditAsideDate } from './class/recurring-tickets-edit-aside-date';
 import { NgbDatepickerNavigateEvent, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker';
+import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
 
 @Component({
   selector: 'app-recurring-tickets-edit-aside',
@@ -37,6 +38,8 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
   public date: RecurringTicketsEditAsideDate = new RecurringTicketsEditAsideDate();
   public ticket: RecurringTickets = new RecurringTickets();
   public navDate: any;
+  public selectedClient:any;
+ public devicesList = [];
   constructor(
     private ticketStateService: TicketStateService,
     private productService: ProductService,
@@ -44,7 +47,8 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
     private fb: FormBuilder,
     public cd: ChangeDetectorRef,
     private editService: RecurringTicketsEditAsideService,
-    private calendar: NgbCalendar
+    private calendar: NgbCalendar,
+    private devicesService: DevicesService,
   ) { }
 
   ngOnInit() {
@@ -58,13 +62,20 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
 
   public selectClient(selectClient) {
     this.ticketForm.controls['client'].setValue(selectClient);
-    // this.selectedClient = value.item;
+     this.selectedClient = selectClient.item;
+     console.log(' this.selectedClient', this.selectedClient);
     console.log('this.quoteForm', this.ticketForm);
     this.ticketStateService.setClient(selectClient);
 
     this.getItemListServices();
+    this.getCompanyDevices();
     this.cd.detectChanges();
   }
+
+private getCompanyDevices () {
+  let company  =this.ticketStateService.getClient();
+  this.devicesService.getCompanyDevices(company.id); 
+}
 
   /**
    * get products list item
@@ -227,6 +238,11 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
      */
   public toggleDatePicker() {
     this.showDatePicker = !this.showDatePicker;
+  }
+
+
+  public selectDevice (item) {
+
   }
 
 }

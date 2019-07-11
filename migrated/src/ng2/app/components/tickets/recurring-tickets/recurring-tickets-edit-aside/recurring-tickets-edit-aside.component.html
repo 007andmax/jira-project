@@ -25,13 +25,28 @@
         </div>
 
         <div class="col-md-4">
-          <p>Select Device</p>
+            <app-devices-recurring-tickets style="width: 75%;"
+                                 class="light-dropdown"
+                                 [formGroup]="ticketForm"
+                                 [companyId]="selectedClient.id"
+                                 (selectedItem)="selectDevice($event)"> </app-devices-recurring-tickets>
+        <!--  <p>Select Device</p>
           <div class="light-dropdown">
             <input type="text"
                    class="pointer"
+                   type="text"
+                    [(ngModel)]="devicesList"
+                    class="pointer"
+                    [inputFormatter]="formatter"
+                    [resultFormatter]="formatter"
+                    [ngbTypeahead]="search"
+                    (selectItem)="selectDevice($event)"
+                    (focus)="focus$.next('')"
+                    (click)="click$.next('')"
+                    #instance="ngbTypeahead"
                    placeholder="Select Device">
             <i class="icn-sm report-caret-icon"></i>
-          </div>
+          </div>-->
         </div>
 
         <div class="col-md-4">
