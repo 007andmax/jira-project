@@ -4,11 +4,11 @@
     [position]="'right'"
   >
     <div class="recurring-tickets-content__modal open">
-      <div class="recurring-tickets-content__modal--header">
+    <!--  <div class="recurring-tickets-content__modal--header">
         <h3>Create Recurring Service</h3>
         <button class="close-modal" (click)="close()"></button>
       </div>
-      <form class="recurring-tickets-content__modal--content clearfix"  [formGroup]="ticketForm">
+      <form class="recurring-tickets-content__modal--content clearfix"  [formGroup]="ticketForm">-->
         <!--<div class="col-md-12">
           <p>Service Description</p>
           <input type="text"
@@ -69,7 +69,7 @@
           </div>
         </div>-->
 
-        <div class="col-md-4">
+       <!-- <div class="col-md-4">
           <p>Set Interval</p>
           <div class="light-dropdown right"
                ngbDropdown>
@@ -100,10 +100,10 @@
                            name="recurring-interval">
                     <span class="radio-mark"></span>
                   </label>
-                </div>
+                </div>-->
 
                 <!--IF TYPE 'DAILY' OR 'WEEKLY'-------------------------------->
-                <div class="recurring-interval-dropdown__content clearfix">
+              <!--  <div class="recurring-interval-dropdown__content clearfix">
                   <div class="col-md-6 p-0">
                     <label class="checkbox-container">Monday
                       <input type="checkbox">
@@ -137,10 +137,11 @@
                     </label>
                   </div>
                 </div>
+              -->
                 <!------------------------------------------------------------->
 
                 <!--IF TYPE 'MONTHLY'------------------------------------------>
-                <div class="date-picker">
+               <!-- <div class="date-picker">
                   <ngb-datepicker
                     style="width: 100%;border: none"
                     [navigation]="navigation"></ngb-datepicker>
@@ -148,14 +149,14 @@
                     <button class="btn-new btn-primary-white">Start of Month</button>
                     <button class="btn-new btn-primary-white">End of Month</button>
                   </div>
-                </div>
+                </div>-->
                 <!------------------------------------------------------------->
-              </div>
+            <!--  </div>
             </div>
           </div>
         </div>
 
-        <div class="col-md-12 ticket-tabs">
+        <div class="col-md-12 ticket-tabs">-->
 
           <!--ONCLICK ADD CLASS 'active-tab'------------------------------------>
           <div class="ticket-tabs-product d-f ai-c" (click)="type = 'products'" [ngClass]="(type === 'products') ? 'active-tab' : ''">
@@ -171,7 +172,7 @@
           </div>
           <!-------------------------------------------------------------------->
 
-        </div>
+         <!--</div>-->
 
         <!--IF TAB IS 'PRODUCT'------------------------------------------------->
      <!--   <div class="col-md-12 product-tab-content p-0" *ngIf="type === 'products'">
@@ -233,7 +234,7 @@
         <br>
 
         <!--IF TAB IS 'SERVICE'------------------------------------------------->
-        <div class="col-md-12 service-tab-content p-0" *ngIf="type === 'services'">
+       <!--<div class="col-md-12 service-tab-content p-0" *ngIf="type === 'services'">
            
           <div class="col-md-8">
               <div class="light-dropdown">
@@ -266,12 +267,12 @@
                    placeholder="Write Description">
           </div>
           <div class="new-link">+Add Service</div>
-        </div>
+        </div>-->
        
         <!---------------------------------------------------------------------->
-
+       
       
-          <app-tags></app-tags>
+       <!--   
     
        
 
@@ -306,7 +307,8 @@
           </div>
           <div class="save-template">Save as Template</div>
         </div>
-      </form>
+      </form>-->
+      <app-tags></app-tags>
     </div>
 
   </ng-sidebar>

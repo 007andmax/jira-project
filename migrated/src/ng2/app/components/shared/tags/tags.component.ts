@@ -1,18 +1,17 @@
-import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef, Input } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { ENTER, COMMA } from '@angular/cdk/keycodes';
-import { MatChipInputEvent, MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material';
-import { TagsService } from 'src/ng2/app/services/tags/tags.service';
-import { Subject, Observable } from 'rxjs';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { takeUntil, startWith, map } from 'rxjs/operators';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {Component, ElementRef, ViewChild, ChangeDetectorRef} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
+import {MatChipInputEvent} from '@angular/material/chips';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'app-tags',
   templateUrl: './tags.component.html',
   styleUrls: ['./tags.component.scss']
 })
-export class TagsComponent {
+export class TagsComponent  {
 
  visible = true;
 selectable = true;
@@ -27,11 +26,14 @@ allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
 @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
 @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
-constructor() {
+constructor( public cd: ChangeDetectorRef) {
   this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
-      startWith(null),
-      map((fruit: string | null) => fruit ? this._filter(fruit) : this.allFruits.slice()));
+    startWith(null),
+    map((fruit: string | null) => fruit ? this._filter(fruit) : this.allFruits.slice()));
+  
+    
 }
+
 
 add(event: MatChipInputEvent): void {
   // Add fruit only when MatAutocomplete is not open
@@ -51,7 +53,9 @@ add(event: MatChipInputEvent): void {
     }
 
     this.fruitCtrl.setValue(null);
+    
   }
+  this.cd.detectChanges();
 }
 
 remove(fruit: string): void {
