@@ -9,7 +9,7 @@
         <button class="close-modal" (click)="close()"></button>
       </div>
       <form class="recurring-tickets-content__modal--content clearfix"  [formGroup]="ticketForm">
-        <div class="col-md-12">
+        <!--<div class="col-md-12">
           <p>Service Description</p>
           <input type="text"
                  placeholder="Write Description">
@@ -25,33 +25,16 @@
         </div>
 
         <div class="col-md-4">
-            <app-devices-recurring-tickets style="width: 75%;"
+           <app-devices-recurring-tickets style="width: 75%;"
                                  class="light-dropdown"
                                  [formGroup]="ticketForm"
                                  [companyId]="(selectedClient) ? selectedClient.id : ''"
                                  (selectedItem)="selectDevice($event)"> </app-devices-recurring-tickets>
-        <!--  <p>Select Device</p>
-          <div class="light-dropdown">
-            <input type="text"
-                   class="pointer"
-                   type="text"
-                    [(ngModel)]="devicesList"
-                    class="pointer"
-                    [inputFormatter]="formatter"
-                    [resultFormatter]="formatter"
-                    [ngbTypeahead]="search"
-                    (selectItem)="selectDevice($event)"
-                    (focus)="focus$.next('')"
-                    (click)="click$.next('')"
-                    #instance="ngbTypeahead"
-                   placeholder="Select Device">
-            <i class="icn-sm report-caret-icon"></i>
-          </div>-->
         </div>
 
         <div class="col-md-4">
           <p>Date</p>
-          <div class="input-group"
+        <div class="input-group"
                ngbDropdown>
             <input type="text"
                    class="pointer"
@@ -84,7 +67,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div>-->
 
         <div class="col-md-4">
           <p>Set Interval</p>
@@ -191,10 +174,10 @@
         </div>
 
         <!--IF TAB IS 'PRODUCT'------------------------------------------------->
-        <div class="col-md-12 product-tab-content p-0" *ngIf="type === 'products'">
+     <!--   <div class="col-md-12 product-tab-content p-0" *ngIf="type === 'products'">
           
          <div class="product-dropdown-new-ng light-dropdown">
-           <input class="pointer"
+        <input class="pointer"
                   type="text"
                   (click)="toggleShowDropDownProducts()"
                   [ngClass]="{'no-valid': isFormValid}"
@@ -243,7 +226,7 @@
                    placeholder="Write Discount">
           </div>
           <div class="new-link">+Add Product</div>
-        </div>
+        </div>-->
        
         <!---------------------------------------------------------------------->
 
@@ -254,14 +237,14 @@
            
           <div class="col-md-8">
               <div class="light-dropdown">
-                  <input class="pointer"
+                   <input class="pointer"
                          type="text"
                          (click)="toggleShowDropDownServices()"
                          [ngClass]="{'no-valid': isFormValid}"
                          [value]="getNameOrDescription(service)"
                          placeholder="Service">
                   <i class="icn-sm report-caret-icon"></i>
-                  <app-services-list
+                <app-services-list
                     *ngIf="isDropDownShowServices"
                     [itemList]="servicesList"
                     (selectedServicesItem)="setServiceItem($event)"></app-services-list>
@@ -287,14 +270,12 @@
        
         <!---------------------------------------------------------------------->
 
-        <div class="col-md-12 tags-wrapper">
-          <p>Tags</p>
-          <input type="text"
-                 placeholder="Select Tag"
-                 class="pointer">
-        </div>
+      
+          <app-tags></app-tags>
+    
+       
 
-        <div class="col-md-12 checkbox-wrapper">
+       <div class="col-md-12 checkbox-wrapper">
           <div class="with-checkbox">
             <label class="checkbox-container">
               <input type="checkbox">

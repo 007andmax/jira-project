@@ -65,8 +65,9 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
      this.selectedClient = selectClient.item;
     this.ticketStateService.setClient(selectClient);
     this.getItemListServices();
-    this.cd.detectChanges();
+   
     this.getCompanyDevices();
+    this.cd.detectChanges();
     
   }
 

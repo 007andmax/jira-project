@@ -57,6 +57,7 @@ import {RecurringTicketsHeaderComponent} from "./components/tickets/recurring-ti
 import {RecurringTicketsTableComponent} from "./components/tickets/recurring-tickets/recurring-tickets-table/recurring-tickets-table.component";
 import {RecurringTicketsEditAsideComponent} from "./components/tickets/recurring-tickets/recurring-tickets-edit-aside/recurring-tickets-edit-aside.component";
 import { DevicesRecurringTicketsComponent } from './components/tickets/recurring-tickets/devices-recurring-tickets/devices-recurring-tickets.component';
+import { TagsComponent } from './components/shared/tags/tags.component';
 
 /**
  * declare angular
@@ -138,7 +139,8 @@ angular.module('quicktech')
     RecurringTicketsHeaderComponent,
     RecurringTicketsEditAsideComponent,
     RecurringTicketsTableComponent,
-    DevicesRecurringTicketsComponent
+    DevicesRecurringTicketsComponent,
+    TagsComponent
   ],
   imports: [
     BrowserModule,

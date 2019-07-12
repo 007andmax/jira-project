@@ -1,6 +1,6 @@
 export class Product {
     cost: any;
-    description: string;
+    description: string = "";
     glNumber: any;
     ilc: any;
     manufacture: string;
