@@ -1,7 +1,9 @@
 import {
     Directive,
-    ElementRef, Injectable
+    ElementRef, Injectable, Input
 } from '@angular/core';
+import { Validators } from '@angular/forms';
+import { CommonService } from '../services/common/common.service';
 
 @Directive({
     selector: '[number]',
@@ -9,12 +11,21 @@ import {
 @Injectable()
 export class numberDirective {
     lastValue:number = 1;
-    constructor(private element: ElementRef) { }
+    @Input("money") money: boolean = false;
+    constructor(private element: ElementRef, private commonService:CommonService) { }
     ngOnInit() {
 
-        this.element.nativeElement.addEventListener("keyup", (event) => {
-            this.ValidateMoney(event);
+        this.element.nativeElement.addEventListener("input", (event) => {
+           // this.ValidateMoney(event);
+         //  console.log('-----------------------');
+           event.target.value = this.commonService.validateNumber(event.target.value);
         });
+        if (this.money) {
+            this.element.nativeElement.addEventListener("blur", (event) => {
+                event.target.value = parseFloat(event.target.value).toFixed(2);
+             });
+        }
+      
     }
   /*  ngAfterViewChecked () {
      //   console.log('value',this.element.nativeElement.value);

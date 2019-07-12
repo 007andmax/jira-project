@@ -44,7 +44,8 @@
 
   <div class="col-md-1 with-dollar">
     <input type="text"
-    
+    number
+    [money]="true"
            [disabled]="!getMarkup(item)"
            [ngModel]="item.cost"
            (ngModelChange)="changeCost($event, i)"
@@ -60,7 +61,8 @@
   </div>
   <div class="col-md-1 with-dollar">
     <input type="text"
-    
+    number
+    [money]="true"
            [disabled]="!getMarkup(item)"
            [ngModel]="(item.sale || item.rate)"
            (ngModelChange)="changeSales($event, i)"
@@ -69,6 +71,7 @@
   <div class="col-md-1">
     <input type="text"
     number
+   
            [(ngModel)]="item && item.quantity"
            (ngModelChange)="changedQuantity($event, i)"
            placeholder="">
