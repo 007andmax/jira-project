@@ -27,11 +27,16 @@ export class DevicesService {
    * @param companyId - id of company
    */
   public getCompanyDevices(companyId){
-    return this.http.get(this.apiUrl + `devices?companyId=${companyId}`).subscribe((response)=> {
-      this.devicesCompany.next(response);
-    })
+
+    return this.http.get(this.apiUrl + `devices?companyId=${companyId}`);
+    
   }
 
   
-
+  public onInitHangle(companyId){
+    this.getCompanyDevices(companyId).subscribe((response)=> {
+      let devices = response[companyId];
+        this.devicesCompany.next((devices) ? [...devices] : []);
+      })
+  }
 }

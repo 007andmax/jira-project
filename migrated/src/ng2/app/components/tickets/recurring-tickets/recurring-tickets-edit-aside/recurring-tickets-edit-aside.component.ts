@@ -63,18 +63,16 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
   public selectClient(selectClient) {
     this.ticketForm.controls['client'].setValue(selectClient);
      this.selectedClient = selectClient.item;
-     console.log(' this.selectedClient', this.selectedClient);
-    console.log('this.quoteForm', this.ticketForm);
     this.ticketStateService.setClient(selectClient);
-
     this.getItemListServices();
-    this.getCompanyDevices();
     this.cd.detectChanges();
+    this.getCompanyDevices();
+    
   }
 
 private getCompanyDevices () {
-  let company  =this.ticketStateService.getClient();
-  this.devicesService.getCompanyDevices(company.id); 
+  let company  = this.ticketStateService.getClient();
+  this.devicesService.onInitHangle(company.id); 
 }
 
   /**

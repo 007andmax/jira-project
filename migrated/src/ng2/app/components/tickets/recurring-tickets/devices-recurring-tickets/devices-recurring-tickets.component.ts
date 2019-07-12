@@ -44,7 +44,10 @@ export class DevicesRecurringTicketsComponent implements OnInit {
    */
   private getCLientsList() {
     this.subGetDevicesList = this.devicesService.devicesCompany.subscribe((res: any) => {
-      this.devicesList = [...res[this.companyId]];
+      this.devicesList = res.map((item) => {
+        item.name = item.hostName;
+        return item;
+      });
       /*res
         .sort((a, b) => a.name.localeCompare(b.name))
         .filter((item) => !item.deletedAt)*/

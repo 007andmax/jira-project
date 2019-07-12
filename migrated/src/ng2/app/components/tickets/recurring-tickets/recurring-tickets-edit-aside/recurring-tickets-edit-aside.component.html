@@ -28,7 +28,7 @@
             <app-devices-recurring-tickets style="width: 75%;"
                                  class="light-dropdown"
                                  [formGroup]="ticketForm"
-                                 [companyId]="selectedClient.id"
+                                 [companyId]="(selectedClient) ? selectedClient.id : ''"
                                  (selectedItem)="selectDevice($event)"> </app-devices-recurring-tickets>
         <!--  <p>Select Device</p>
           <div class="light-dropdown">
