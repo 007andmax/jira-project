@@ -71,6 +71,10 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
     
   }
 
+  public  onChangeCron(data) {
+console.log('data',data);
+  }
+
 private getCompanyDevices () {
   let company  = this.ticketStateService.getClient();
   this.devicesService.onInitHangle(company.id); 
