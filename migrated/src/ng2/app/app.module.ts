@@ -17,6 +17,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MatSelectModule} from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule, MatIconModule } from "@angular/material";
+import { CronEditorModule } from "cron-editor";
+
 
 import { AppComponent } from './app.component';
 import { PasswordManagerComponent } from './components/password-manager/password-manager.component';
@@ -196,7 +198,8 @@ angular.module('quicktech')
       {
         useHash: true,
         enableTracing: false
-      })
+      }),
+      CronEditorModule
   ],
   entryComponents: [
     LeftPanelComponent,
