@@ -205,6 +205,98 @@
   position: absolute !important;
 }
 
+.recurring-tickets-content__modal--content {
+  app-tags {
+    > .col-md-12 {
+      margin-top: 40px;
+      .mat-form-field {
+        width: 100%;
+      }
+      .mat-form-field-infix {
+        border: none;
+      }
+      .mat-form-field-appearance-legacy .mat-form-field-underline,
+      .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+        display: none;
+      }
+      .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+        padding: 0;
+        position: relative;
+        &:before {
+          position: absolute;
+          content: 'Tags';
+          font-family: "Graphik Medium", sans-serif;
+          font-size: 13px;
+          left: 0;
+          top: -28px;
+        }
+      }
+      .mat-form-field-appearance-legacy .mat-form-field-label {
+        padding: 12px 10px 10px 36px;
+        font-size: 13px;
+        font-family: "Graphik Regular", sans-serif;
+        color: #9ca5b6;
+      }
+      .mat-form-field-infix {
+        border: 1px solid #c4cbd5;
+        border-radius: 4px;
+        padding-left: 36px;
+        position: relative;
+        min-height: 48px;
+        &:before {
+          left: 12px;
+          top: 15px;
+          position: absolute;
+          content: '';
+          width: 16px;
+          height: 16px;
+          background: url("./assets/img/icons/tag-ng2.png");
+        }
+        input {
+          height: 42px;
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
+.mat-chip.mat-standard-chip {
+  padding: 9px 15px 9px 5px;
+  border-radius: 3px !important;
+  border: 1px solid #edf2f6;
+  color: #4f5f79;
+  text-transform: none;
+  position: relative;
+  display: flex;
+  min-width: 35px;
+  margin: 2px;
+  line-height: 12px;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  background-color: #edf2f6;
+  float: left;
+  cursor: inherit;
+  .mat-chip-remove {
+    font-size: 0;
+    position: relative;
+    width: 0;
+    height: 0;
+    margin: 0;
+    &:before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      right: -6px;
+      width: 20px;
+      height: 20px;
+      background: url("assets/img/icons/close-16.png") no-repeat;
+      background-size: contain;
+    }
+  }
+}
+
 ngb-typeahead-window {
   .dropdown-menu {
     width: 100%;
@@ -608,6 +700,7 @@ ngb-typeahead-window {
       }
     }
     .new-link {
+      width: 100%;
       margin-top: 10px !important;
       padding: 0 15px !important;
       display: inline-block;
@@ -723,6 +816,92 @@ ngb-typeahead-window {
       }
     }
   }
+}
+
+.modal.fade {
+  opacity: 1;
+  transition: none;
+  background: rgba(16, 24, 39, 0.4);
+}
+
+.cdk-overlay-container {
+  z-index: 99999999;
+  top: 6px;
+  .mat-autocomplete-panel {
+    width: 255px;
+    &::-webkit-scrollbar-thumb {
+      background-color: #16a4fa;
+    }
+    .mat-option {
+      font-size: 14px;
+      transition: all .3s;
+      &:hover {
+        background-color: #16a4fa;
+        color: #fff;
+      }
+    }
+  }
+}
+
+.create-quote-mail {
+  .mat-form-field-infix {
+    border: none;
+  }
+  .quote-text-block {
+    outline: none;
+    width: 100%;
+    min-height: 200px;
+    font-size: 14px;
+    &::placeholder {
+      font-size: 14px;
+      color: #c0bfcd;
+    }
+  }
+  .mat-form-field-should-float {
+    .mat-form-field-label {
+      font-size: 14px;
+      top: 23px;
+      text-transform: uppercase;
+      color: #9ca5b6;
+    }
+  }
+  .mat-focused {
+    .mat-form-field-underline {
+      background-color: #16a4fa;
+      .mat-form-field-ripple {
+        display: none;
+      }
+    }
+  }
+  .mat-form-field-underline {
+    background-color: #e5e7eb;
+  }
+  .mat-form-field {
+    font-size: 16px;
+    text-transform: uppercase;
+  }
+  .mat-form-field {
+    width: 100%;
+    input {
+      border: none;
+    }
+  }
+  .mat-form-field-label {
+    top: 33px;
+    left: 0;
+    padding: 0;
+    color: #9ca5b6;
+    font-size: 13px;
+    text-transform: capitalize;
+    letter-spacing: 0;
+    pointer-events: none;
+    z-index: 99;
+    font-family: "Graphik Medium", sans-serif;
+  }
+}
+
+ngb-datepicker {
+  border: none !important;
 }
 
 @import './assets/styles/mobile.scss';

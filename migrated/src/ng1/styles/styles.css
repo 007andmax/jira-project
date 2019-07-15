@@ -1611,11 +1611,11 @@ bold {
 
 /*.password-selected,*/
 /*.recurring-tickets-selected {*/
-  /*display: none;*/
-  /*padding: 8px 15px;*/
-  /*background: #fff;*/
-  /*border-radius: 6px;*/
-  /*margin-right: 10px;*/
+/*display: none;*/
+/*padding: 8px 15px;*/
+/*background: #fff;*/
+/*border-radius: 6px;*/
+/*margin-right: 10px;*/
 /*}*/
 
 .password-selected.show,
@@ -13459,27 +13459,32 @@ button.close {
 }
 
 .recurring-tickets-content__modal--content > [class*="col-md-"],
+.recurring-tickets-content__modal--content app-interval > [class*="col-md-"],
 .password-content__modal--content > [class*="col-md-"] {
   margin-top: 20px;
 }
 
 .recurring-tickets-content__modal--content > [class*="col-md-"] label,
+.recurring-tickets-content__modal--content app-interval > [class*="col-md-"] label,
 .password-content__modal--content > [class*="col-md-"] label {
   position: relative;
 }
 
 .recurring-tickets-content__modal--content > .password-links label,
+.recurring-tickets-content__modal--content app-interval > .password-links label,
 .password-content__modal--content > .password-links label {
   margin-bottom: 0;
   
 }
 
 .recurring-tickets-content__modal--content > [class*="col-md-"] input,
+.recurring-tickets-content__modal--content app-interval > [class*="col-md-"] input,
 .password-content__modal--content > [class*="col-md-"] input {
   width: 100%;
 }
 
 .recurring-tickets-content__modal--content > [class*="col-md-"] p,
+.recurring-tickets-content__modal--content app-interval > [class*="col-md-"] p,
 .password-content__modal--content > [class*="col-md-"] p {
   font-family: "Graphik Medium", sans-serif;
   font-size: 13px;
@@ -13487,6 +13492,7 @@ button.close {
 }
 
 .recurring-tickets-content__modal--content > [class*="col-md-"] input,
+.recurring-tickets-content__modal--content app-interval > [class*="col-md-"] input,
 .password-content__modal--content > [class*="col-md-"] input {
   outline: none;
   height: 40px;
@@ -13497,6 +13503,7 @@ button.close {
 }
 
 .recurring-tickets-content__modal--content > [class*="col-md-"] input::placeholder,
+.recurring-tickets-content__modal--content app-interval > [class*="col-md-"] input::placeholder,
 .password-content__modal--content > [class*="col-md-"] input::placeholder {
   opacity: 1;
   color: #9ca5b6;

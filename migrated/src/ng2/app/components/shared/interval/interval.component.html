@@ -15,132 +15,139 @@
         <div class="recurring-interval-dropdown__header">
           <label class="radio-container">Daily
             <input type="radio"
-            [(ngModel)]="activeTab"  value="daily"
-            (change)="setActiveTab('daily', $event)"
+                   [(ngModel)]="activeTab" value="daily"
+                   (change)="setActiveTab('daily', $event)"
                    name="recurring-interval">
             <span class="radio-mark"></span>
           </label>
           <label class="radio-container">Weekly
             <input type="radio"
-            [(ngModel)]="activeTab"  value="weekly"
-            (change)="setActiveTab('weekly', $event)"
+                   [(ngModel)]="activeTab" value="weekly"
+                   (change)="setActiveTab('weekly', $event)"
                    name="recurring-interval">
             <span class="radio-mark"></span>
           </label>
           <label class="radio-container">Monthly
             <input type="radio"
-            [(ngModel)]="activeTab"  value="monthly"
-            (change)="setActiveTab('monthly', $event)"
+                   [(ngModel)]="activeTab" value="monthly"
+                   (change)="setActiveTab('monthly', $event)"
                    name="recurring-interval">
             <span class="radio-mark"></span>
           </label>
         </div>
-          <!--IF TYPE 'WEEKLY'-------------------------------->
-          <div class="recurring-interval-dropdown__content clearfix"  *ngIf="activeTab === 'daily'">
-            <div class="col-md-6 p-0">
-              <label class="checkbox-container">Monday
-                <input type="checkbox"
-                [disabled]="activeTab === 'monthly'" (change)="regenerateCron()" [(ngModel)]="state.daily.MON"
-                [ngClass]="options.formCheckboxClass"
-                >
-                <span class="checkbox-mark"></span>
-              </label>
-              <label class="checkbox-container">Tuesday
-                <input type="checkbox" [disabled]="activeTab === 'monthly'" (change)="regenerateCron()" [(ngModel)]="state.daily.TUE"
-                [ngClass]="options.formCheckboxClass">
-                <span class="checkbox-mark"></span>
-              </label>
-              <label class="checkbox-container">Wednesday
-                <input type="checkbox" [disabled]="activeTab === 'monthly'" (change)="regenerateCron()" [(ngModel)]="state.daily.WED"
-                [ngClass]="options.formCheckboxClass">
-                <span class="checkbox-mark"></span>
-              </label>
-              <label class="checkbox-container" >Thursday
-                <input type="checkbox" [disabled]="activeTab === 'monthly'" (change)="regenerateCron()" [(ngModel)]="state.daily.THU"
-                [ngClass]="options.formCheckboxClass">
-                <span class="checkbox-mark"></span>
-              </label>
-            </div>
-            <div class="col-md-6 p-0">
-              <label class="checkbox-container" >Friday
-                <input type="checkbox" [disabled]="activeTab === 'monthly'" (change)="regenerateCron()" [(ngModel)]="state.daily.FRI"
-                [ngClass]="options.formCheckboxClass">
-                <span class="checkbox-mark"></span>
-              </label>
-              <label class="checkbox-container">Saturday
-                <input type="checkbox" [disabled]="activeTab === 'monthly'" (change)="regenerateCron()" [(ngModel)]="state.daily.SAT"
-                [ngClass]="options.formCheckboxClass">
-                <span class="checkbox-mark"></span>
-              </label>
-              <label class="checkbox-container">Sunday
-                <input type="checkbox" [disabled]="activeTab === 'monthly'" (change)="regenerateCron()" [(ngModel)]="state.daily.SUN"
-                [ngClass]="options.formCheckboxClass">
-                <span class="checkbox-mark"></span>
-              </label>
-            </div>
-          </div>
-        
-          <!------------------------------------------------------------->
-
-        <!--IF TYPE 'DAILY' OR -------------------------------->
-        <div class="recurring-interval-dropdown__content clearfix"  *ngIf="activeTab === 'weekly'">
+        <!--IF TYPE 'WEEKLY'-------------------------------->
+        <div class="recurring-interval-dropdown__content clearfix" *ngIf="activeTab === 'daily'">
           <div class="col-md-6 p-0">
             <label class="checkbox-container">Monday
-              <input type="radio"
-              [disabled]="activeTab === 'monthly'"  (change)="setWeekly('MON')"  [checked]="state.weekly.MON"
-              [ngClass]="options.formCheckboxClass"
+              <input type="checkbox"
+                     [disabled]="activeTab === 'monthly'" (change)="regenerateCron()" [(ngModel)]="state.daily.MON"
+                     [ngClass]="options.formCheckboxClass"
               >
               <span class="checkbox-mark"></span>
             </label>
             <label class="checkbox-container">Tuesday
-              <input type="radio" [disabled]="activeTab === 'monthly'" (change)="setWeekly('TUE')" [checked]="state.weekly.TUE"
-              [ngClass]="options.formCheckboxClass">
+              <input type="checkbox" [disabled]="activeTab === 'monthly'" (change)="regenerateCron()"
+                     [(ngModel)]="state.daily.TUE"
+                     [ngClass]="options.formCheckboxClass">
               <span class="checkbox-mark"></span>
             </label>
             <label class="checkbox-container">Wednesday
-              <input type="radio" [disabled]="activeTab === 'monthly'"  (change)="setWeekly('WED')"  [checked]="state.weekly.WED"
-              [ngClass]="options.formCheckboxClass">
+              <input type="checkbox" [disabled]="activeTab === 'monthly'" (change)="regenerateCron()"
+                     [(ngModel)]="state.daily.WED"
+                     [ngClass]="options.formCheckboxClass">
               <span class="checkbox-mark"></span>
             </label>
-            <label class="checkbox-container" >Thursday
-              <input type="radio" [disabled]="activeTab === 'monthly'"  (change)="setWeekly('THU')" [checked]="state.weekly.THU"
-              [ngClass]="options.formCheckboxClass">
+            <label class="checkbox-container">Thursday
+              <input type="checkbox" [disabled]="activeTab === 'monthly'" (change)="regenerateCron()"
+                     [(ngModel)]="state.daily.THU"
+                     [ngClass]="options.formCheckboxClass">
               <span class="checkbox-mark"></span>
             </label>
           </div>
           <div class="col-md-6 p-0">
-            <label class="checkbox-container" >Friday
-              <input type="radio" [disabled]="activeTab === 'monthly'"  (change)="setWeekly('FRI')"  [checked]="state.weekly.FRI"
-              [ngClass]="options.formCheckboxClass">
+            <label class="checkbox-container">Friday
+              <input type="checkbox" [disabled]="activeTab === 'monthly'" (change)="regenerateCron()"
+                     [(ngModel)]="state.daily.FRI"
+                     [ngClass]="options.formCheckboxClass">
               <span class="checkbox-mark"></span>
             </label>
             <label class="checkbox-container">Saturday
-              <input type="radio" [disabled]="activeTab === 'monthly'"  (change)="setWeekly('SAT')"  [checked]="state.weekly.SAT"
-              [ngClass]="options.formCheckboxClass">
+              <input type="checkbox" [disabled]="activeTab === 'monthly'" (change)="regenerateCron()"
+                     [(ngModel)]="state.daily.SAT"
+                     [ngClass]="options.formCheckboxClass">
               <span class="checkbox-mark"></span>
             </label>
             <label class="checkbox-container">Sunday
-              <input type="radio" [disabled]="activeTab === 'monthly'"  (change)="setWeekly('SUN')"  [checked]="state.weekly.SUN"
-              [ngClass]="options.formCheckboxClass">
+              <input type="checkbox" [disabled]="activeTab === 'monthly'" (change)="regenerateCron()"
+                     [(ngModel)]="state.daily.SUN"
+                     [ngClass]="options.formCheckboxClass">
               <span class="checkbox-mark"></span>
             </label>
           </div>
         </div>
-      
         <!------------------------------------------------------------->
 
-
-       
+        <!--IF TYPE 'DAILY' OR -------------------------------->
+        <div class="recurring-interval-dropdown__content clearfix" *ngIf="activeTab === 'weekly'">
+          <div class="col-md-6 p-0">
+            <label class="checkbox-container">Monday
+              <input type="radio"
+                     [disabled]="activeTab === 'monthly'" (change)="setWeekly('MON')" [checked]="state.weekly.MON"
+                     [ngClass]="options.formCheckboxClass"
+              >
+              <span class="checkbox-mark"></span>
+            </label>
+            <label class="checkbox-container">Tuesday
+              <input type="radio" [disabled]="activeTab === 'monthly'" (change)="setWeekly('TUE')"
+                     [checked]="state.weekly.TUE"
+                     [ngClass]="options.formCheckboxClass">
+              <span class="checkbox-mark"></span>
+            </label>
+            <label class="checkbox-container">Wednesday
+              <input type="radio" [disabled]="activeTab === 'monthly'" (change)="setWeekly('WED')"
+                     [checked]="state.weekly.WED"
+                     [ngClass]="options.formCheckboxClass">
+              <span class="checkbox-mark"></span>
+            </label>
+            <label class="checkbox-container">Thursday
+              <input type="radio" [disabled]="activeTab === 'monthly'" (change)="setWeekly('THU')"
+                     [checked]="state.weekly.THU"
+                     [ngClass]="options.formCheckboxClass">
+              <span class="checkbox-mark"></span>
+            </label>
+          </div>
+          <div class="col-md-6 p-0">
+            <label class="checkbox-container">Friday
+              <input type="radio" [disabled]="activeTab === 'monthly'" (change)="setWeekly('FRI')"
+                     [checked]="state.weekly.FRI"
+                     [ngClass]="options.formCheckboxClass">
+              <span class="checkbox-mark"></span>
+            </label>
+            <label class="checkbox-container">Saturday
+              <input type="radio" [disabled]="activeTab === 'monthly'" (change)="setWeekly('SAT')"
+                     [checked]="state.weekly.SAT"
+                     [ngClass]="options.formCheckboxClass">
+              <span class="checkbox-mark"></span>
+            </label>
+            <label class="checkbox-container">Sunday
+              <input type="radio" [disabled]="activeTab === 'monthly'" (change)="setWeekly('SUN')"
+                     [checked]="state.weekly.SUN"
+                     [ngClass]="options.formCheckboxClass">
+              <span class="checkbox-mark"></span>
+            </label>
+          </div>
+        </div>
+        <!------------------------------------------------------------->
 
         <!--IF TYPE 'MONTHLY'------------------------------------------>
         <div class="date-picker" *ngIf=" activeTab === 'monthly'">
           <ngb-datepicker
-          [navigation]="navigation"
-          [(ngModel)]="datepicker"
-          (select)="selectDate($event)"
-          (navigate)="navigateDate($event)"
-          [startDate]="datepicker"
-          [ngModelOptions]="{standalone: true}"></ngb-datepicker>
+            [navigation]="navigation"
+            [(ngModel)]="datepicker"
+            (select)="selectDate($event)"
+            (navigate)="navigateDate($event)"
+            [startDate]="datepicker"
+            [ngModelOptions]="{standalone: true}"></ngb-datepicker>
           <div class="date-picker-actions d-f">
             <button class="btn-new btn-primary-white" (click)="selectStartMonth();">Start of Month</button>
             <button class="btn-new btn-primary-white" (click)="selectEndMonth();">End of Month</button>
@@ -149,7 +156,5 @@
         <!------------------------------------------------------------->
       </div>
     </div>
- 
   </div>
- 
 </div>
