@@ -587,7 +587,7 @@ export class QuoteStateService {
       subTotalServices: '',
       totalTaxes: '',
       total: '',
-      globalNote: '',
+      globalNote: null,
       selectedNote: '',
       partialDeposit: '',
       purchaseOrder: '',
