@@ -168,9 +168,10 @@
           </div>
           <div class="col-md-4">
             <p>Duration</p>
-            <input type="text"
-                   class="pointer"
-                   placeholder="Hr(s) : Min(s)">
+            <app-duration style="width: 75%;"
+            class="light-dropdown"
+            [formGroup]="ticketForm"
+            (selectedDucation)="selectDuration($event)"></app-duration>
           </div>
           <div class="col-md-12 mt-20">
             <p>Description</p>

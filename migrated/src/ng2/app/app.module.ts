@@ -61,6 +61,7 @@ import {RecurringTicketsEditAsideComponent} from "./components/tickets/recurring
 import { DevicesRecurringTicketsComponent } from './components/tickets/recurring-tickets/devices-recurring-tickets/devices-recurring-tickets.component';
 import { TagsComponent } from './components/shared/tags/tags.component';
 import { IntervalComponent } from './components/shared/interval/interval.component';
+import { DurationComponent } from './components/shared/duration/duration.component';
 
 /**
  * declare angular
@@ -144,7 +145,8 @@ angular.module('quicktech')
     RecurringTicketsTableComponent,
     DevicesRecurringTicketsComponent,
     TagsComponent,
-    IntervalComponent
+    IntervalComponent,
+    DurationComponent
   ],
   imports: [
     BrowserModule,

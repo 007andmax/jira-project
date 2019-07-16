@@ -250,4 +250,7 @@ private getCompanyDevices () {
   public onChangeTags (data) {
     console.log('data',data);
       }
+      public selectDuration (data) {
+        console.log('data',data);
+      }
 }
