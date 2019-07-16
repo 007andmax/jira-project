@@ -9,5 +9,6 @@ export class Product {
     taxes: any;
     versionedId: any;
     quantity:number;
+    isDropDownShowProducts: false;
     constructor () {}
 }

@@ -92,20 +92,21 @@
 
         <!--IF TAB IS 'PRODUCT'------------------------------------------------->
         <div class="col-md-12 product-tab-content p-0" *ngIf="type === 'products'">
+            <ng-template ngFor let-product [ngForOf]="products" let-i="index" [ngForTrackBy]="trackByIndex">
           <div class="col-md-12">
             <p>Search Product</p>
 
             <div class="product-dropdown-new-ng light-dropdown">
               <input class="pointer"
                      type="text"
-                     (click)="toggleShowDropDownProducts()"
+                     (click)="product.isDropDownShowProducts = true;"
                      [ngClass]="{'no-valid': isFormValid}"
                      [value]="getNameOrDescription(product)"
                      placeholder="Product">
               <i class="icn-sm report-caret-icon"></i>
-              <app-product-list *ngIf="isDropDownShowProducts"
+              <app-product-list *ngIf="product.isDropDownShowProducts"
                                 [itemList]="productList"
-                                (selectedProductItem)="setProductItem($event)"></app-product-list>
+                                (selectedProductItem)="selectProduct($event,i)"></app-product-list>
 
             </div>
           </div>
@@ -144,12 +145,14 @@
 
                    placeholder="Write Discount">
           </div>
-          <div class="new-link">+Add Product</div>
+          </ng-template>
+          <div class="new-link" (click)="addProduct()">+Add Product</div>
         </div>
         <!---------------------------------------------------------------------->
 
         <!--IF TAB IS 'SERVICE'------------------------------------------------->
         <div class="col-md-12 service-tab-content p-0" *ngIf="type === 'services'">
+            <ng-template ngFor let-service [ngForOf]="services" let-i="index" [ngForTrackBy]="trackByIndex">
           <div class="col-md-8">
             <p>Service</p>
             <div class="light-dropdown">
@@ -163,7 +166,7 @@
               <app-services-list
                 *ngIf="isDropDownShowServices"
                 [itemList]="servicesList"
-                (selectedServicesItem)="setServiceItem($event)"></app-services-list>
+                (selectedServicesItem)="setService($event,i)"></app-services-list>
             </div>
           </div>
           <div class="col-md-4">
@@ -181,7 +184,8 @@
 
                    placeholder="Write Description">
           </div>
-          <div class="new-link">+Add Service</div>
+          </ng-template>
+          <div class="new-link" (click)="addService()">+Add Service</div>
         </div>
         <!---------------------------------------------------------------------->
 

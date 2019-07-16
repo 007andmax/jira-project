@@ -26,10 +26,12 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
   public showDatePicker: boolean = false;
   public navigation = 'arrows';
   public ticketForm: FormGroup;
-  public product: Product = new Product();
-  public service: Service = new Service();
+  //public product: Product = new Product();
+  //public service: Service = new Service();
   public productList = [];
   public servicesList = [];
+  public products: Array<Product> = [new Product()];
+  public services: Array<Service> = [new Service()];
   public isFormValid = false;
   public isDropDownShowProducts = false;
   public isDropDownShowServices = false;
@@ -38,8 +40,8 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
   public date: RecurringTicketsEditAsideDate = new RecurringTicketsEditAsideDate();
   public ticket: RecurringTickets = new RecurringTickets();
   public navDate: any;
-  public selectedClient:any;
- public devicesList = [];
+  public selectedClient: any;
+  public devicesList = [];
   constructor(
     private ticketStateService: TicketStateService,
     private productService: ProductService,
@@ -62,30 +64,31 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
 
   public selectClient(selectClient) {
     this.ticketForm.controls['client'].setValue(selectClient);
-     this.selectedClient = selectClient.item;
+    this.selectedClient = selectClient.item;
     this.ticketStateService.setClient(selectClient);
     this.getItemListServices();
-   
+
     this.getCompanyDevices();
     this.cd.detectChanges();
-    
+
   }
 
-  public  onChangeCron(data) {
-console.log('data',data);
+  public onChangeCron(data) {
+    console.log('data', data);
   }
 
-private getCompanyDevices () {
-  let company  = this.ticketStateService.getClient();
-  this.devicesService.onInitHangle(company.id); 
-}
+  private getCompanyDevices() {
+    let company = this.ticketStateService.getClient();
+    this.devicesService.onInitHangle(company.id);
+  }
 
   /**
    * get products list item
    */
   public getItemListProducts() {
     this.productService.getCategories().subscribe((res: any) => {
-      return this.productList = res
+      this.productList = res;
+
     });
 
   }
@@ -195,34 +198,35 @@ private getCompanyDevices () {
   /**
    * set new item
    */
-  public setProductItem(item) {
+  public selectProduct(item, index) {
     console.log('item', item);
-    item = {...item, ...{quantity: 1}};
+    item = { ...item, ...{ quantity: 1 } };
     /*  if (this.type === 'service') {
         item = {...item, ...{description: '', quantity: 1}};
       } else {
         item = {...item, ...{quantity: 1, markup: this.setMarkups(item)}};
       }*/
-    this.product = item;
-   // this.product.quantity = 1;
+    this.products[index] = item;
+    // this.product.quantity = 1;
     //  this.selectedServiceItem.emit(item);
-    this.isDropDownShowProducts = false;
-    console.log('this.product', this.product);
+    this.products[index].isDropDownShowProducts = false;
+
     //  this.type = undefined;
     //  this.changeType.next(this.type);
     //  this.quoteStateService.setType(true);
+    this.cd.detectChanges();
   }
-  public setServiceItem(item) {
-  
+  public setService(item, index) {
+
     /*  if (this.type === 'service') {
         item = {...item, ...{description: '', quantity: 1}};
       } else {
         item = {...item, ...{quantity: 1, markup: this.setMarkups(item)}};
       }*/
-    this.service = item;
-    this.service.description = '';
+    this.services[index] = item;
+    this.services[index].description = '';
 
-    console.log('this.service', this.service);
+
     //  this.selectedServiceItem.emit(item);
     this.isDropDownShowServices = false;
     //  this.type = undefined;
@@ -244,13 +248,30 @@ private getCompanyDevices () {
   }
 
 
-  public selectDevice (item) {
+  public selectDevice(item) {
 
   }
-  public onChangeTags (data) {
-    console.log('data',data);
-      }
-      public selectDuration (data) {
-        console.log('data',data);
-      }
+  public onChangeTags(data) {
+    console.log('data', data);
+  }
+  public selectDuration(data) {
+    console.log('data', data);
+  }
+
+  public addProduct() {
+    let product:Product = new Product();
+    this.products.push(product);
+    console.log(' this.products', this.products);
+    this.cd.detectChanges();
+  }
+  public addService() {
+    this.services.push(new Service());
+  }
+  public trackById(index, item) {
+    return item.versionedId.id;
+  }
+
+  public trackByIndex(index, item) {
+    return index;
+  }
 }
