@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/ng2/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { tap, catchError } from 'rxjs/operators';
+import { Tag } from '../../interfaces/tag/tag';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,11 @@ export class TagsService {
 
   public getTags() {
     return this.http.get(this.apiUrl + `tags/getAll`).pipe(
+      tap((data:any) => data.data));
+  }
+
+  public setTags(tag:Tag) {
+    return this.http.post(this.apiUrl + `tags`,tag).pipe(
       tap((data:any) => data.data));
   }
 }

@@ -247,5 +247,7 @@ private getCompanyDevices () {
   public selectDevice (item) {
 
   }
-
+  public onChangeTags (data) {
+    console.log('data',data);
+      }
 }

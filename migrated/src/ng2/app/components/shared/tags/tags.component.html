@@ -2,7 +2,7 @@
   <mat-form-field>
     <mat-chip-list #chipList aria-label="Fruit selection">
       <mat-chip
-        *ngFor="let user of selectedUsers; let i = index"
+        *ngFor="let user of selectedTag; let i = index"
         [selectable]="selectable"
         [removable]="removable"
         (removed)="remove(i)">
@@ -13,7 +13,7 @@
         placeholder="eg. Window update, Monthly maintainace"
         #userInput
         class="pointer"
-        [formControl]="userCtrl"
+        [formControl]="tagCtrl"
         [matAutocomplete]="auto"
         [matChipInputFor]="chipList"
         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
@@ -21,11 +21,9 @@
         (matChipInputTokenEnd)="add($event)">
     </mat-chip-list>
     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-      <mat-option *ngFor="let user of users" [value]="user">
-        {{user.primaryEmail}}
+      <mat-option *ngFor="let tag of tags" [value]="tag">
+        {{tag.word}}
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
-  <p *ngIf="showError">at least 1 user</p>
-  <p *ngIf="showErrorClient">please choose Client</p>
 </div>
