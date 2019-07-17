@@ -10,11 +10,13 @@ export class TehUsersComponent implements OnInit {
   public usersList = [];
   public showSelect = false;
   public selectedUsers = [];
+  resUserList = [];
   @Output() usersChange = new EventEmitter();
   constructor(private tehService:TehUsersService) { }
 
   ngOnInit() {
     this.tehService.getUsersList().subscribe((data:any) => {
+this.resUserList = data.filter(item => item.accountType === 'TECH' && !item.deletedAt);;
       this.usersList = data.filter(item => item.accountType === 'TECH' && !item.deletedAt);
       console.log('usersList',this.usersList);
     })
@@ -43,5 +45,11 @@ export class TehUsersComponent implements OnInit {
   public selectUser (index) {
 this.selectedUsers.push(this.usersList[index]);
 this.usersChange.emit(this.selectedUsers);
+  }
+
+  public onSearch (event) {
+   
+    this.usersList =  this.resUserList.filter(item => (item.firstName+' '+item.lastName).includes(event.target.value));
+   
   }
 }
