@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TehUsersService } from 'src/ng2/app/services/teh-users/teh-users.service';
 
 @Component({
   selector: 'app-teh-users',
@@ -8,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 export class TehUsersComponent implements OnInit {
   public usersList = [];
   public showSelect = false;
-  constructor() { }
+  constructor(private tehService:TehUsersService) { }
 
   ngOnInit() {
+    this.tehService.getUsersList().subscribe((data:any) => {
+      this.usersList = data.filter(item => item.accountType === 'TECH' && !item.deletedAt);
+      console.log('usersList',this.usersList);
+    })
   }
 
     /**
@@ -27,5 +32,9 @@ export class TehUsersComponent implements OnInit {
   private stopEvent($event) {
     $event.preventDefault();
     $event.stopPropagation();
+  }
+
+  public trackByIndex(index, item) {
+    return index;
   }
 }
