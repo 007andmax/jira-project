@@ -38,6 +38,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
   public navDate: any;
   public selectedClient: any;
   public devicesList = [];
+
   constructor(
     private ticketStateService: TicketStateService,
     private productService: ProductService,
@@ -262,4 +263,8 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
   public removeService (i) {
     this.services.splice(i,1);
   }
+
+  
+
+
 }

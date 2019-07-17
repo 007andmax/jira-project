@@ -62,6 +62,7 @@ import { DevicesRecurringTicketsComponent } from './components/tickets/recurring
 import { TagsComponent } from './components/shared/tags/tags.component';
 import { IntervalComponent } from './components/shared/interval/interval.component';
 import { DurationComponent } from './components/shared/duration/duration.component';
+import { TehUsersComponent } from './components/shared/teh-users/teh-users.component';
 
 /**
  * declare angular
@@ -146,7 +147,8 @@ angular.module('quicktech')
     DevicesRecurringTicketsComponent,
     TagsComponent,
     IntervalComponent,
-    DurationComponent
+    DurationComponent,
+    TehUsersComponent
   ],
   imports: [
     BrowserModule,
