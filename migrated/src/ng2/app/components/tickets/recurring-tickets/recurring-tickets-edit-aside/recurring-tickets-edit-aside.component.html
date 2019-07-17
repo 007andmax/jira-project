@@ -8,7 +8,8 @@
         <h3>Create Recurring Service</h3>
         <button class="close-modal" (click)="close()"></button>
       </div>
-      <form class="recurring-tickets-content__modal--content clearfix" [formGroup]="ticketForm">
+     <!-- <form class="recurring-tickets-content__modal--content clearfix" [formGroup]="ticketForm">-->
+       <div class="recurring-tickets-content__modal--content clearfix">
         <div class="col-md-12">
           <p>Service Description</p>
           <input type="text"
@@ -38,7 +39,7 @@
             <input type="text"
                    class="pointer"
                    placeholder="Select Date"
-                   formControlName="date"
+                  
                    [value]="date.title"
                    id="dropdownForm1"
                    (click)="toggleDatePicker()"
@@ -113,38 +114,40 @@
           <div class="col-md-4 mt-20">
             <p>Serial No.</p>
             <input type="text"
-                   formControlName="serial"
+                  
                    [(ngModel)]="product.manufacture"
                    placeholder="Write Serial No.">
           </div>
           <div class="col-md-4 mt-20">
             <p>Product Cost</p>
             <input type="text"
-                   formControlName="cost"
+                  
                    [(ngModel)]="product.cost"
                    placeholder="Write Product Cost">
           </div>
           <div class="col-md-4 mt-20">
             <p>Quantity</p>
             <input type="text"
-                   formControlName="quantity"
+                  
                    [(ngModel)]="product.quantity"
                    placeholder="Write Quantity">
           </div>
           <div class="col-md-4 mt-20">
             <p>Product Price</p>
             <input type="text"
-                   formControlName="price"
+                  
                    [(ngModel)]="product.sale"
                    placeholder="Write Product Price">
           </div>
           <div class="col-md-4 mt-20">
             <p>Discount</p>
             <input type="text"
-                   formControlName="discount"
+                   
 
                    placeholder="Write Discount">
           </div>
+          <div class="new-link" *ngIf="products.length > 1" (click)="removeProduct(i)">Remove</div>
+          <hr  *ngIf="products.length > 1"/>
           </ng-template>
           <div class="new-link" (click)="addProduct()">+Add Product</div>
         </div>
@@ -180,10 +183,12 @@
             <p>Description</p>
             <input type="text"
                    [(ngModel)]="service.description"
-                   formControlName="description"
+                   
 
                    placeholder="Write Description">
           </div>
+          <div class="new-link" *ngIf="services.length > 1" (click)="removeService(i)">Remove</div>
+          <hr  *ngIf="services.length > 1"/>
           </ng-template>
           <div class="new-link" (click)="addService()">+Add Service</div>
         </div>
@@ -222,8 +227,8 @@
           </div>
           <div class="save-template">Save as Template</div>
         </div>
-      </form>
-
+     <!-- </form>-->
+    </div>
     </div>
 
   </ng-sidebar>

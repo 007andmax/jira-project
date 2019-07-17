@@ -274,4 +274,10 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
   public trackByIndex(index, item) {
     return index;
   }
+  public removeProduct (i) {
+    this.products.splice(i,1);
+  }
+  public removeService (i) {
+    this.services.splice(i,1);
+  }
 }
