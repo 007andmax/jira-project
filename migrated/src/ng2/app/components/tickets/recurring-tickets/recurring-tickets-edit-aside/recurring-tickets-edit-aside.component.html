@@ -172,8 +172,20 @@
           <div class="d-f">
             <button class="btn-new btn-primary">Save & Next</button>
             <button class="btn-new disabled">Cancel</button>
-           
-           <app-teh-users></app-teh-users>
+
+            <app-teh-users (usersChange)="onChangeTehUsers($event)"></app-teh-users>
+            <ng-template ngFor let-user [ngForOf]="tehUsers" let-i="index" [ngForTrackBy]="trackByIndex">
+              <div *ngIf="user.avatar">
+                  <img ng-if="user.avatar" class="img-circle avatar-26"
+                  [src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')"
+                  alt="...">
+              </div>
+              <div *ngIf="!user.avatar">
+                <div class="default-user-avatar avatar-background-color-odd ng-scope">
+                  <span [textContent]="user.firstName[0].toUpperCase()"></span><span
+                    [textContent]="user.lastName[0].toUpperCase()"></span></div>
+              </div>
+            </ng-template>
           </div>
           <div class="save-template">Save as Template</div>
         </div>

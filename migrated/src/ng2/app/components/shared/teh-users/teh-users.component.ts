@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TehUsersService } from 'src/ng2/app/services/teh-users/teh-users.service';
 
 @Component({
@@ -9,6 +9,8 @@ import { TehUsersService } from 'src/ng2/app/services/teh-users/teh-users.servic
 export class TehUsersComponent implements OnInit {
   public usersList = [];
   public showSelect = false;
+  public selectedUsers = [];
+  @Output() usersChange = new EventEmitter();
   constructor(private tehService:TehUsersService) { }
 
   ngOnInit() {
@@ -36,5 +38,10 @@ export class TehUsersComponent implements OnInit {
 
   public trackByIndex(index, item) {
     return index;
+  }
+
+  public selectUser (index) {
+this.selectedUsers.push(this.usersList[index]);
+this.usersChange.emit(this.selectedUsers);
   }
 }

@@ -38,7 +38,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
   public navDate: any;
   public selectedClient: any;
   public devicesList = [];
-
+  public tehUsers = [];
   constructor(
     private ticketStateService: TicketStateService,
     private productService: ProductService,
@@ -130,10 +130,10 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
     this.recurringService.getServiceList(value.id).subscribe((res: any) => {
       console.log('res', res);
       console.log('this.servicesList', this.servicesList);
-       this.servicesList = res;
+      this.servicesList = res;
     })
   }
-  
+
   private updateDate() {
     this.date.setTitle(this.datepicker);
     this.ticketForm.controls['date'].setValue(this.date.getTitle());
@@ -177,7 +177,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
     this.opened = false;
   }
 
- 
+
   /**
    * set new item
    */
@@ -242,7 +242,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
   }
 
   public addProduct() {
-    let product:Product = new Product();
+    let product: Product = new Product();
     this.products.push(product);
     console.log(' this.products', this.products);
     this.cd.detectChanges();
@@ -257,14 +257,17 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
   public trackByIndex(index, item) {
     return index;
   }
-  public removeProduct (i) {
-    this.products.splice(i,1);
+  public removeProduct(i) {
+    this.products.splice(i, 1);
   }
-  public removeService (i) {
-    this.services.splice(i,1);
+  public removeService(i) {
+    this.services.splice(i, 1);
+  }
+  public onChangeTehUsers(tehusers) {
+    this.tehUsers = tehusers;
+   
   }
 
-  
 
 
 }
