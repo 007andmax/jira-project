@@ -1,45 +1,49 @@
-<div class="col-md-6"><input
-  id="typeahead-focus3"
-  placeholder="Hr(s)"
-  type="text"
-  [(ngModel)]="selectedHours"
-  class="pointer"
-  [inputFormatter]="formatter"
-  [resultFormatter]="formatter"
-  [ngbTypeahead]="searchHours"
-  (selectItem)="selectHours($event)"
-  (focus)="focusHours$.next('')"
-  (click)="clickHours$.next('')"
-  #instanceHours="ngbTypeahead"
-/>
-<span >
-<i *ngIf="selectedHours"
-   class="icn-sm icn-remove-old"
-   (click)="clearHours($event)"></i>
-<i *ngIf="!selectedHours"
-   class="icn-sm report-caret-icon"></i>
+<div class="col-md-6 pl-0">
+  <input
+    id="typeahead-focus3"
+    placeholder="Hr(s)"
+    type="text"
+    [(ngModel)]="selectedHours"
+    class="pointer"
+    [inputFormatter]="formatter"
+    [resultFormatter]="formatter"
+    [ngbTypeahead]="searchHours"
+    (selectItem)="selectHours($event)"
+    (focus)="focusHours$.next('')"
+    (click)="clickHours$.next('')"
+    #instanceHours="ngbTypeahead"
+  />
+  <span>
+      <i *ngIf="selectedHours"
+         class="icn-sm icn-remove-old"
+         style="right: 25px;"
+         (click)="clearHours($event)"></i>
+      <i *ngIf="!selectedHours"
+         style="right: 25px;"
+         class="icn-sm report-caret-icon"></i>
 </span>
 </div>
-<div class="col-md-6">
-<input
-  id="typeahead-focus4"
-  placeholder="Mn"
-  type="text"
-  [(ngModel)]="selectedMin"
-  class="pointer"
-  [inputFormatter]="formatter"
-  [resultFormatter]="formatter"
-  [ngbTypeahead]="searchMin"
-  (selectItem)="selectMin($event)"
-  (focus)="focusMin$.next('')"
-  (click)="clickMin$.next('')"
-  #instanceMin="ngbTypeahead"
-/>
-<span >
-<i *ngIf="selectedMin"
-   class="icn-sm icn-remove-old"
-   (click)="clearMin($event)"></i>
-<i *ngIf="!selectedMin"
-   class="icn-sm report-caret-icon"></i>
+<div class="col-md-6 pr-0">
+  <input
+    id="typeahead-focus4"
+    placeholder="Mn"
+    type="text"
+    [(ngModel)]="selectedMin"
+    class="pointer"
+    [inputFormatter]="formatter"
+    [resultFormatter]="formatter"
+    [ngbTypeahead]="searchMin"
+    (selectItem)="selectMin($event)"
+    (focus)="focusMin$.next('')"
+    (click)="clickMin$.next('')"
+    #instanceMin="ngbTypeahead"
+  />
+  <span>
+      <i *ngIf="selectedMin"
+         class="icn-sm icn-remove-old"
+         style="right: 12px;"
+         (click)="clearMin($event)"></i>
+      <i *ngIf="!selectedMin"
+         class="icn-sm report-caret-icon"></i>
 </span>
 </div>

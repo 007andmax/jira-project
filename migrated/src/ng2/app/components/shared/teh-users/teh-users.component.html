@@ -1,8 +1,8 @@
-<div class="device-user pointer">
-  <button class="btn-new disabled" (click)="showSelectWrapper($event)">Users</button>
+<div class="device-user pointer" (click)="showSelectWrapper($event)">
+  Assigned Users
 </div>
 
-<div class="select-wrapper" *ngIf="showSelect">
+<div class="select-wrapper dropdown-assign-ticket fixed-assign" *ngIf="showSelect">
 
   <div class="content" (click)="$event.preventDefault()">
 
@@ -10,38 +10,37 @@
       <div class="assign-ticket" assign-user="">
 
         <div class="assign-ticket-content">
-          <div class="assign-ticket-header" >
-            <div class="clearfix" >
-              <div class="form-group" >
-                <input class="form-control" placeholder="Search Users" value="" autocomplete="off" (input)="onSearch($event)">
+          <div class="assign-ticket-header">
+            <div class="clearfix">
+              <div class="form-group">
+                <input class="form-control" placeholder="Search Users" value="" autocomplete="off"
+                       (input)="onSearch($event)">
 
               </div>
             </div>
           </div>
           <div class="scroll-pane">
-            <div class="users-list custom-scroll" tabindex="-1" style="position: absolute; z-index: 9999;">
-
+            <div class="users-list custom-scroll" tabindex="-1"
+                 style="position: absolute; z-index: 9999;padding: 0; max-height: 171px;">
               <ng-template ngFor let-user [ngForOf]="usersList" let-i="index" [ngForTrackBy]="trackByIndex">
                 <div class="user-item" data-index="1" (click)="selectUser(i)"><a href="javascript:void(0)"
-                    [id]="user.id" class="dropdown-link">
-                    <div class="default-user-avatar avatar-background-color-odd ng-scope" *ngIf="!user.avatar">
-                        <span [textContent]="user.firstName[0].toUpperCase()"></span>
-                        <span [textContent]="user.lastName[0].toUpperCase()"></span>
-                    </div>
-                    <div class="default-user-avatar avatar-background-color-odd ng-scope" *ngIf="user.avatar">
-                        <img ng-if="user.avatar" class="img-circle avatar-26"
-                        [src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')"
-                        alt="...">
-                    </div> 
-                    <span>
+                                                                                 [id]="user.id" class="dropdown-link">
+                  <div class="default-user-avatar avatar-background-color-odd ng-scope" *ngIf="!user.avatar">
+                    <span [textContent]="user.firstName[0].toUpperCase()"></span>
+                    <span [textContent]="user.lastName[0].toUpperCase()"></span>
+                  </div>
+                  <div class="default-user-avatar avatar-background-color-odd ng-scope" *ngIf="user.avatar">
+                    <img ng-if="user.avatar" class="img-circle avatar-26"
+                         style="margin: 0;"
+                         [src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')"
+                         alt="...">
+                  </div>
+                  <span>
                       <p [textContent]="user.firstName + ' ' + user.lastName"></p>
-                      <p [textContent]="user.primaryEmail"></p>
+                      <p [textContent]="user.primaryEmail" style="margin: 0;"></p>
                     </span>
-                  </a></div>
+                </a></div>
               </ng-template>
-
-
-
 
 
             </div>
@@ -53,7 +52,6 @@
 
 
     </form>
-
 
 
   </div>

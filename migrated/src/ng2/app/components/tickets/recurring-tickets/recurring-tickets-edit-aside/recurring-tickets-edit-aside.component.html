@@ -15,13 +15,14 @@
         <div class="col-md-12">
           <p>Assign to Company</p>
           <app-select-client-company style="width: 75%;" class="light-dropdown" [formGroup]="ticketForm"
-            (selectedItem)="selectClient($event)"></app-select-client-company>
+                                     (selectedItem)="selectClient($event)"></app-select-client-company>
         </div>
 
         <div class="col-md-4">
           <p>Device Name</p>
           <app-devices-recurring-tickets style="width: 75%;" class="light-dropdown" [formGroup]="ticketForm"
-            [companyId]="(selectedClient) ? selectedClient.id : ''" (selectedItem)="selectDevice($event)">
+                                         [companyId]="(selectedClient) ? selectedClient.id : ''"
+                                         (selectedItem)="selectDevice($event)">
           </app-devices-recurring-tickets>
         </div>
 
@@ -29,12 +30,13 @@
           <p>Date</p>
           <div class="input-group date-picker" ngbDropdown>
             <input type="text" class="pointer" placeholder="Select Date" [value]="date.title" id="dropdownDate"
-              (click)="toggleDatePicker()" readonly>
+                   (click)="toggleDatePicker()" readonly>
             <i class="icn-16 icn-calendar-light pointer"></i>
             <div *ngIf="showDatePicker" class="dropdown-menu show" style="top: 100%;">
               <ngb-datepicker [navigation]="navigation" [(ngModel)]="datepicker" (select)="selectDate($event)"
-                (navigate)="navigateDate($event)" [startDate]="datepicker" [ngModelOptions]="{standalone: true}"
-                style="border: none"></ngb-datepicker>
+                              (navigate)="navigateDate($event)" [startDate]="datepicker"
+                              [ngModelOptions]="{standalone: true}"
+                              style="border: none"></ngb-datepicker>
               <div class="date-picker-actions clearfix">
                 <div class="col-md-12 p-0 mb-5 d-f">
                   <button class="btn-new btn-primary-white" (click)="selectToday();">Start Now</button>
@@ -55,7 +57,7 @@
 
           <!--ONCLICK ADD CLASS 'active-tab'------------------------------------>
           <div class="ticket-tabs-product d-f ai-c" (click)="type = 'products'"
-            [ngClass]="(type === 'products') ? 'active-tab' : ''">
+               [ngClass]="(type === 'products') ? 'active-tab' : ''">
             <i class="icn-20 tab-product"></i>
             Products
           </div>
@@ -63,7 +65,7 @@
 
           <!--ONCLICK ADD CLASS 'active-tab'------------------------------------>
           <div class="ticket-tabs-service d-f ai-c" (click)="type = 'services'"
-            [ngClass]="(type === 'services') ? 'active-tab' : ''">
+               [ngClass]="(type === 'services') ? 'active-tab' : ''">
             <i class="icn-20 tab-service"></i>
             Service
           </div>
@@ -74,72 +76,77 @@
         <!--IF TAB IS 'PRODUCT'------------------------------------------------->
         <div class="col-md-12 product-tab-content p-0" *ngIf="type === 'products'">
           <ng-template ngFor let-product [ngForOf]="products" let-i="index" [ngForTrackBy]="trackByIndex">
-            <div class="col-md-12">
-              <p>Search Product</p>
+            <div [ngClass]="{'separator-hr': products.length > 1}" class="row product-tab-content__item">
+              <div class="col-md-12">
+                <p>Search Product</p>
 
-              <div class="product-dropdown-new-ng light-dropdown">
-                <input class="pointer" type="text" (click)="product.isDropDownShowProducts = true;"
-                  [ngClass]="{'no-valid': isFormValid}" [value]="getNameOrDescription(product)" placeholder="Product">
-                <i class="icn-sm report-caret-icon"></i>
-                <app-product-list *ngIf="product.isDropDownShowProducts" [itemList]="productList"
-                  (selectedProductItem)="selectProduct($event,i)"></app-product-list>
+                <div class="product-dropdown-new-ng light-dropdown">
+                  <input class="pointer" type="text" (click)="product.isDropDownShowProducts = true;"
+                         [ngClass]="{'no-valid': isFormValid}" [value]="getNameOrDescription(product)"
+                         placeholder="Product">
+                  <i class="icn-sm report-caret-icon"></i>
+                  <app-product-list *ngIf="product.isDropDownShowProducts" [itemList]="productList"
+                                    (selectedProductItem)="selectProduct($event,i)"></app-product-list>
+
+                </div>
+                <i class="icn-delete" *ngIf="products.length > 1" (click)="removeProduct(i)"></i>
 
               </div>
+              <div class="col-md-4 mt-20">
+                <p>Serial No.</p>
+                <input type="text" [(ngModel)]="product.manufacture" placeholder="Write Serial No.">
+              </div>
+              <div class="col-md-4 mt-20">
+                <p>Product Cost</p>
+                <input type="text" [(ngModel)]="product.cost" placeholder="Write Product Cost">
+              </div>
+              <div class="col-md-4 mt-20">
+                <p>Quantity</p>
+                <input type="text" [(ngModel)]="product.quantity" placeholder="Write Quantity">
+              </div>
+              <div class="col-md-4 mt-20">
+                <p>Product Price</p>
+                <input type="text" [(ngModel)]="product.sale" placeholder="Write Product Price">
+              </div>
+              <div class="col-md-4 mt-20">
+                <p>Discount</p>
+                <input type="text" placeholder="Write Discount">
+              </div>
             </div>
-            <div class="col-md-4 mt-20">
-              <p>Serial No.</p>
-              <input type="text" [(ngModel)]="product.manufacture" placeholder="Write Serial No.">
-            </div>
-            <div class="col-md-4 mt-20">
-              <p>Product Cost</p>
-              <input type="text" [(ngModel)]="product.cost" placeholder="Write Product Cost">
-            </div>
-            <div class="col-md-4 mt-20">
-              <p>Quantity</p>
-              <input type="text" [(ngModel)]="product.quantity" placeholder="Write Quantity">
-            </div>
-            <div class="col-md-4 mt-20">
-              <p>Product Price</p>
-              <input type="text" [(ngModel)]="product.sale" placeholder="Write Product Price">
-            </div>
-            <div class="col-md-4 mt-20">
-              <p>Discount</p>
-              <input type="text" placeholder="Write Discount">
-            </div>
-            <div class="new-link" *ngIf="products.length > 1" (click)="removeProduct(i)">Remove</div>
-            <hr *ngIf="products.length > 1" />
           </ng-template>
-          <div class="new-link" (click)="addProduct()">+Add Product</div>
         </div>
+        <div class="new-link" *ngIf="type === 'products'" (click)="addProduct()">+Add Product</div>
         <!---------------------------------------------------------------------->
 
         <!--IF TAB IS 'SERVICE'------------------------------------------------->
         <div class="col-md-12 service-tab-content p-0" *ngIf="type === 'services'">
           <ng-template ngFor let-service [ngForOf]="services" let-i="index" [ngForTrackBy]="trackByIndex">
-            <div class="col-md-8">
-              <p>Service</p>
-              <div class="light-dropdown">
-                <input class="pointer" type="text" (click)="service.isDropDownShowServices = true;"
-                  [ngClass]="{'no-valid': isFormValid}" [value]="getNameOrDescription(service)" placeholder="Service">
-                <i class="icn-sm report-caret-icon"></i>
-                <app-services-list *ngIf="service.isDropDownShowServices" [itemList]="servicesList"
-                  (selectedServicesItem)="setService($event,i)"></app-services-list>
+            <div [ngClass]="{'separator-hr': services.length > 1}" class="row service-tab-content__item">
+              <div class="col-md-8">
+                <p>Service</p>
+                <div class="light-dropdown">
+                  <input class="pointer" type="text" (click)="service.isDropDownShowServices = true;"
+                         [ngClass]="{'no-valid': isFormValid}" [value]="getNameOrDescription(service)"
+                         placeholder="Service">
+                  <i class="icn-sm report-caret-icon"></i>
+                  <app-services-list *ngIf="service.isDropDownShowServices" [itemList]="servicesList"
+                                     (selectedServicesItem)="setService($event,i)"></app-services-list>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <p>Duration</p>
+                <app-duration style="width: 75%;" class="light-dropdown" [formGroup]="ticketForm"
+                              (selectedDucation)="selectDuration($event)"></app-duration>
+                <i class="icn-delete" *ngIf="services.length > 1" (click)="removeService(i)"></i>
+              </div>
+              <div class="col-md-12 mt-20">
+                <p>Description</p>
+                <input type="text" [(ngModel)]="service.description" placeholder="Write Description">
               </div>
             </div>
-            <div class="col-md-4">
-              <p>Duration</p>
-              <app-duration style="width: 75%;" class="light-dropdown" [formGroup]="ticketForm"
-                (selectedDucation)="selectDuration($event)"></app-duration>
-            </div>
-            <div class="col-md-12 mt-20">
-              <p>Description</p>
-              <input type="text" [(ngModel)]="service.description" placeholder="Write Description">
-            </div>
-            <div class="new-link" *ngIf="services.length > 1" (click)="removeService(i)">Remove</div>
-            <hr *ngIf="services.length > 1" />
           </ng-template>
-          <div class="new-link" (click)="addService()">+Add Service</div>
         </div>
+        <div class="new-link" *ngIf="type === 'services'" (click)="addService()">+Add Service</div>
         <!---------------------------------------------------------------------->
 
         <app-tags (tagsChange)="onChangeTags($event)"></app-tags>
@@ -172,22 +179,22 @@
           <div class="d-f">
             <button class="btn-new btn-primary">Save & Next</button>
             <button class="btn-new disabled">Cancel</button>
-
-            <app-teh-users (usersChange)="onChangeTehUsers($event)"></app-teh-users>
-            <ng-template ngFor let-user [ngForOf]="tehUsers" let-i="index" [ngForTrackBy]="trackByIndex">
-              <div *ngIf="user.avatar">
-                  <img ng-if="user.avatar" class="img-circle avatar-26"
-                  [src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')"
-                  alt="...">
-              </div>
-              <div *ngIf="!user.avatar">
-                <div class="default-user-avatar avatar-background-color-odd ng-scope">
-                  <span [textContent]="user.firstName[0].toUpperCase()"></span><span
-                    [textContent]="user.lastName[0].toUpperCase()"></span></div>
-              </div>
-            </ng-template>
           </div>
-          <div class="save-template">Save as Template</div>
+          <div class="save-template">
+            <app-teh-users (usersChange)="onChangeTehUsers($event)"></app-teh-users>
+            <!--<ng-template ngFor let-user [ngForOf]="tehUsers" let-i="index" [ngForTrackBy]="trackByIndex">-->
+            <!--<div *ngIf="user.avatar" >-->
+            <!--<img ng-if="user.avatar" class="img-circle avatar-26"-->
+            <!--[src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')"-->
+            <!--alt="...">-->
+            <!--</div>-->
+            <!--<div *ngIf="!user.avatar">-->
+            <!--<div class="default-user-avatar avatar-background-color-odd ng-scope">-->
+            <!--<span [textContent]="user.firstName[0].toUpperCase()"></span><span-->
+            <!--[textContent]="user.lastName[0].toUpperCase()"></span></div>-->
+            <!--</div>-->
+            <!--</ng-template>-->
+          </div>
         </div>
         <!-- </form>-->
       </div>
