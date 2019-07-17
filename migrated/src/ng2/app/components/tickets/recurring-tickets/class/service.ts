@@ -14,5 +14,6 @@ export class Service {
     versionedId: any;
     description:string = '';
     quantity:number;
+    isDropDownShowServices:boolean = false;
     constructor () {}
 }

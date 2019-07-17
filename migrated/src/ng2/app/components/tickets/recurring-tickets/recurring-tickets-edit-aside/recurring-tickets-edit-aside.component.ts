@@ -26,15 +26,11 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
   public showDatePicker: boolean = false;
   public navigation = 'arrows';
   public ticketForm: FormGroup;
-  //public product: Product = new Product();
-  //public service: Service = new Service();
   public productList = [];
   public servicesList = [];
   public products: Array<Product> = [new Product()];
   public services: Array<Service> = [new Service()];
   public isFormValid = false;
-  public isDropDownShowProducts = false;
-  public isDropDownShowServices = false;
   public type: string = "products";
   public datepicker: NgbDateStruct;
   public date: RecurringTicketsEditAsideDate = new RecurringTicketsEditAsideDate();
@@ -56,8 +52,6 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
   ngOnInit() {
     this.showTicketRecurring();
     this.getItemListProducts();
-    this.hideDropDownProducts();
-    this.hideDropDownServices();
     this.ticketStateService.onInitClientList();
     this.cd.detectChanges();
   }
@@ -135,16 +129,10 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
     this.recurringService.getServiceList(value.id).subscribe((res: any) => {
       console.log('res', res);
       console.log('this.servicesList', this.servicesList);
-      return this.servicesList = res
+       this.servicesList = res;
     })
   }
-  public hideDropDownProducts() {
-    this.isDropDownShowProducts = false;
-  }
-
-  public hideDropDownServices() {
-    this.isDropDownShowServices = false;
-  }
+  
   private updateDate() {
     this.date.setTitle(this.datepicker);
     this.ticketForm.controls['date'].setValue(this.date.getTitle());
@@ -188,13 +176,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
     this.opened = false;
   }
 
-  public toggleShowDropDownProducts() {
-    this.isDropDownShowProducts = !this.isDropDownShowProducts;
-  }
-
-  public toggleShowDropDownServices() {
-    this.isDropDownShowServices = !this.isDropDownShowServices;
-  }
+ 
   /**
    * set new item
    */
@@ -228,7 +210,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
 
 
     //  this.selectedServiceItem.emit(item);
-    this.isDropDownShowServices = false;
+    this.services[index].isDropDownShowServices = false;
     //  this.type = undefined;
     //  this.changeType.next(this.type);
     //  this.quoteStateService.setType(true);

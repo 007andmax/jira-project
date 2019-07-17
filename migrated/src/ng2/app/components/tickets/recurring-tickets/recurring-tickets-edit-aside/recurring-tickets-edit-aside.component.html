@@ -161,13 +161,13 @@
             <div class="light-dropdown">
               <input class="pointer"
                      type="text"
-                     (click)="toggleShowDropDownServices()"
+                     (click)="service.isDropDownShowServices = true;"
                      [ngClass]="{'no-valid': isFormValid}"
                      [value]="getNameOrDescription(service)"
                      placeholder="Service">
               <i class="icn-sm report-caret-icon"></i>
               <app-services-list
-                *ngIf="isDropDownShowServices"
+                *ngIf="service.isDropDownShowServices"
                 [itemList]="servicesList"
                 (selectedServicesItem)="setService($event,i)"></app-services-list>
             </div>
