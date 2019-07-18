@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { merge, Observable, Subject } from "rxjs";
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { merge, Observable, Subject, Subscription } from "rxjs";
 import { ISubscription } from "rxjs/Subscription";
 import { debounceTime, distinctUntilChanged, filter, map } from "rxjs/operators";
 import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
 import { FormGroup } from "@angular/forms";
 import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
+import { DevicesStateService } from './services/devices-state.service';
 
 
 @Component({
@@ -12,7 +13,8 @@ import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
   templateUrl: './devices-recurring-tickets.component.html',
   styleUrls: ['./devices-recurring-tickets.component.scss']
 })
-export class DevicesRecurringTicketsComponent implements OnInit {
+export class DevicesRecurringTicketsComponent implements OnInit,OnDestroy {
+  
 
   @ViewChild('instance') instance: NgbTypeahead;
   @Output() selectedItem = new EventEmitter<any>();
@@ -23,13 +25,15 @@ export class DevicesRecurringTicketsComponent implements OnInit {
   public devicesList: any;
   focus$ = new Subject<string>();
   click$ = new Subject<string>();
-
+  sub = new Subscription();
   /**
    *Creates an instance of the SelectClientCompanyComponent with the injected services
    * @param {CompaniesService} companiesService to work with companiies
    */
   constructor(
-    private devicesService: DevicesService
+    private devicesService: DevicesService,
+    private devicesState: DevicesStateService,
+    public cd: ChangeDetectorRef,
   ) { }
 
   /**
@@ -37,8 +41,18 @@ export class DevicesRecurringTicketsComponent implements OnInit {
    */
   ngOnInit() {
     this.getCLientsList();
+    this.onInitClearState();
   }
 
+  private onInitClearState() {
+    let getClearState = this.devicesState.getClearState().subscribe(() => {
+      this.clearDevices();
+      this.devicesList = null;
+    
+    
+    });
+    this.sub.add(getClearState);
+   }
   /**
    * Get client list
    */
@@ -48,6 +62,8 @@ export class DevicesRecurringTicketsComponent implements OnInit {
         item.name = item.hostName;
         return item;
       });
+    
+      this.devicesList = (this.devicesList.length === 0) ? null : this.devicesList;
       /*res
         .sort((a, b) => a.name.localeCompare(b.name))
         .filter((item) => !item.deletedAt)*/
@@ -89,9 +105,13 @@ export class DevicesRecurringTicketsComponent implements OnInit {
   /**
    * clear client input
    */
-  public clearClient() {
+  public clearDevices() {
     this.selectedItem.emit('null');
     this.selectedDevice = null;
+  }
+
+  ngOnDestroy(): void {
+   this.sub.unsubscribe();
   }
 
 }

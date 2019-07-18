@@ -1,10 +1,12 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Component, ElementRef, ViewChild, ChangeDetectorRef, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, ElementRef, ViewChild, ChangeDetectorRef, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { TagsService } from 'src/ng2/app/services/tags/tags.service';
 import { Tag } from 'src/ng2/app/interfaces/tag/tag';
+import { TagsStateService } from './services/tags-state.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -12,7 +14,7 @@ import { Tag } from 'src/ng2/app/interfaces/tag/tag';
   templateUrl: './tags.component.html',
   styleUrls: ['./tags.component.scss']
 })
-export class TagsComponent implements OnInit {
+export class TagsComponent implements OnInit,OnDestroy {
 
   visible = true;
   selectable = true;
@@ -24,7 +26,7 @@ export class TagsComponent implements OnInit {
   tagCtrl = new FormControl();
   selectedTag = [];
   tags: Array<Tag> = [];
-
+  sub = new Subscription();
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
   @Output() tagsChange = new EventEmitter();
@@ -36,7 +38,8 @@ export class TagsComponent implements OnInit {
    * @param {QuoteStateService} quoteStateService to work quote state
    */
   public constructor(
-    private tagsService: TagsService
+    private tagsService: TagsService,
+    private tagsState: TagsStateService
   ) { }
 
   /**
@@ -53,9 +56,13 @@ export class TagsComponent implements OnInit {
         modal.parentNode.style.width = 'max-content';
       }
     }
+    this.onInitClearState();
   }
 
-
+  private onInitClearState() {
+    let getClearState = this.tagsState.getClearState().subscribe(() => this.close());
+    this.sub.add(getClearState);
+   }
 
   /**
    * Add selected user
@@ -117,5 +124,9 @@ export class TagsComponent implements OnInit {
     this.tags = [];
     this.tagsChange.emit(this.selectedTag);
   }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+   }
 
 }

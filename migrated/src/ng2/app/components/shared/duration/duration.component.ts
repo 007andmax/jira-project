@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { merge, Observable, Subject } from "rxjs";
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, OnDestroy } from '@angular/core';
+import { merge, Observable, Subject, Subscription } from "rxjs";
 import { ISubscription } from "rxjs/Subscription";
 import { debounceTime, distinctUntilChanged, filter, map } from "rxjs/operators";
 import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
@@ -7,13 +7,15 @@ import { FormGroup } from "@angular/forms";
 import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
 import { HOURS, MINUTES } from 'src/ng2/app/const/duration';
 import { Duration } from './class/duration';
+import { DurationStateService } from './services/duration-state.service';
 
 @Component({
   selector: 'app-duration',
   templateUrl: './duration.component.html',
   styleUrls: ['./duration.component.scss']
 })
-export class DurationComponent implements OnInit {
+export class DurationComponent implements OnInit,OnDestroy {
+  
 
   @ViewChild('instanceHours') instanceHours: NgbTypeahead;
   @ViewChild('instanceMin') instanceMin: NgbTypeahead;
@@ -28,24 +30,29 @@ export class DurationComponent implements OnInit {
   clickHours$ = new Subject<string>();
   focusMin$ = new Subject<string>();
   clickMin$ = new Subject<string>();
-  
+  sub = new Subscription();
 
   /**
    *Creates an instance of the SelectClientCompanyComponent with the injected services
    * @param {CompaniesService} companiesService to work with companiies
    */
   constructor(
-    private devicesService: DevicesService
+    private durationState:DurationStateService
+    
   ) { }
 
   /**
    * Initializes select client. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-    
+    this.onInitClearState();
   }
 
-
+  private onInitClearState() {
+    let getClearState = this.durationState.getClearState().subscribe(() => this.clearData());
+    this.sub.add(getClearState);
+   }
+   
   /**
    * boootstrap search method
    * @param text$
@@ -116,5 +123,17 @@ export class DurationComponent implements OnInit {
     this.duration.setMinutes(item.item.value);
     this.selectedDucation.emit(this.duration);
 
+  }
+
+  private clearData() {
+    this.selectedMin = null;
+    this.selectedHours = null;
+    this.duration.setHours(null);
+    this.duration.setMinutes(null);
+    this.selectedDucation.emit(this.duration);
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

@@ -12,6 +12,11 @@ import { RecurringTickets } from '../class/recurring-tickets';
 import { RecurringTicketsEditAsideDate } from './class/recurring-tickets-edit-aside-date';
 import { NgbDatepickerNavigateEvent, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker';
 import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
+import { SelectClientCompanyStateService } from '../../../billing/quotes/quote-create/quote-create-content/quote-create-content-top/select-client-company/services/select-client-company-state.service';
+import { DurationStateService } from '../../../shared/duration/services/duration-state.service';
+import { DevicesStateService } from '../devices-recurring-tickets/services/devices-state.service';
+import { TagsStateService } from '../../../shared/tags/services/tags-state.service';
+import { TehUsersSateService } from '../../../shared/teh-users/services/teh-users-sate.service';
 
 @Component({
   selector: 'app-recurring-tickets-edit-aside',
@@ -48,6 +53,11 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
     private editService: RecurringTicketsEditAsideService,
     private calendar: NgbCalendar,
     private devicesService: DevicesService,
+    private companiesState: SelectClientCompanyStateService,
+    private devicesState: DevicesStateService,
+    private tagsState: TagsStateService,
+    private tehState: TehUsersSateService,
+ 
   ) { }
 
   ngOnInit() {
@@ -58,6 +68,8 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
   }
 
   public selectClient(selectClient) {
+    if (!selectClient) return;
+    console.log('selectClient',selectClient);
     this.ticketForm.controls['client'].setValue(selectClient);
     this.selectedClient = selectClient.item;
     this.ticketStateService.setClient(selectClient);
@@ -74,7 +86,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
 
   private getCompanyDevices() {
     let company = this.ticketStateService.getClient();
-    this.devicesService.onInitHangle(company.id);
+    company &&  this.devicesService.onInitHangle(company.id);
   }
 
   /**
@@ -127,7 +139,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
   public getItemListServices() {
     const value = this.ticketStateService.getClient();
     console.log('value', value);
-    this.recurringService.getServiceList(value.id).subscribe((res: any) => {
+    value && this.recurringService.getServiceList(value.id).subscribe((res: any) => {
       console.log('res', res);
       console.log('this.servicesList', this.servicesList);
       this.servicesList = res;
@@ -175,6 +187,19 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
 
   public close() {
     this.opened = false;
+    this.showDatePicker = false;
+    this.products = [new Product()];
+    this.services = [new Service()];
+    this.isFormValid = false;
+    this.type = "products";
+    this.selectedClient = null;
+    this.devicesList = [];
+    this.tehUsers = [];
+    this.companiesState.onInitClear();
+    this.devicesState.onInitClear();
+    this.date.clearTitle();
+    this.tagsState.onInitClear();
+    this.tehState.onInitClear();
   }
 
 
@@ -265,7 +290,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
   }
   public onChangeTehUsers(tehusers) {
     this.tehUsers = tehusers;
-   
+
   }
 
 

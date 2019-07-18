@@ -1,35 +1,45 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { TehUsersService } from 'src/ng2/app/services/teh-users/teh-users.service';
+import { TehUsersSateService } from './services/teh-users-sate.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-teh-users',
   templateUrl: './teh-users.component.html',
   styleUrls: ['./teh-users.component.scss']
 })
-export class TehUsersComponent implements OnInit {
+export class TehUsersComponent implements OnInit, OnDestroy {
   public usersList = [];
   public showSelect = false;
   public selectedUsers = [];
   resUserList = [];
+  sub = new Subscription();
   @Output() usersChange = new EventEmitter();
-  constructor(private tehService:TehUsersService) { }
+  constructor(private tehService: TehUsersService,
+    private tehState: TehUsersSateService,
+  ) { }
 
   ngOnInit() {
-    this.tehService.getUsersList().subscribe((data:any) => {
-this.resUserList = data.filter(item => item.accountType === 'TECH' && !item.deletedAt);;
+    this.tehService.getUsersList().subscribe((data: any) => {
+      this.resUserList = data.filter(item => item.accountType === 'TECH' && !item.deletedAt);;
       this.usersList = data.filter(item => item.accountType === 'TECH' && !item.deletedAt);
-      console.log('usersList',this.usersList);
+
     })
+    this.onInitClearState();
   }
 
-    /**
-   * show selecct wrapper
-   */
+  private onInitClearState() {
+    let getClearState = this.tehState.getClearState().subscribe(() => this.clear());
+    this.sub.add(getClearState);
+  }
+  /**
+ * show selecct wrapper
+ */
   public showSelectWrapper($event) {
     this.showSelect = !this.showSelect;
     this.stopEvent($event);
   }
- 
+
   /**
    * stop event
    */
@@ -42,14 +52,24 @@ this.resUserList = data.filter(item => item.accountType === 'TECH' && !item.dele
     return index;
   }
 
-  public selectUser (index) {
-this.selectedUsers.push(this.usersList[index]);
-this.usersChange.emit(this.selectedUsers);
+  public selectUser(index) {
+    this.selectedUsers.push(this.usersList[index]);
+    this.usersChange.emit(this.selectedUsers);
   }
 
-  public onSearch (event) {
-   
-    this.usersList =  this.resUserList.filter(item => (item.firstName+' '+item.lastName).includes(event.target.value));
-   
+  public onSearch(event) {
+
+    this.usersList = this.resUserList.filter(item => (item.firstName + ' ' + item.lastName).includes(event.target.value));
+
+  }
+
+  private clear() {
+    this.showSelect = false;
+    this.selectedUsers = [];
+    this.usersChange.emit(this.selectedUsers);
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

@@ -8,4 +8,7 @@ export class RecurringTicketsEditAsideDate {
     public getTitle ( ) {
         return this.title;
     }
+    public clearTitle () {
+        this.title = '';
+    }
 }
