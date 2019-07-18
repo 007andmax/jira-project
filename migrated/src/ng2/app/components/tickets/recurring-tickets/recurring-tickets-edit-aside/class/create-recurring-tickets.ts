@@ -17,6 +17,18 @@ export class CreateRecurringTickets {
     constructor() {
 
     }
+public setRequireUpdate (requireUpdate) {
+    this.requireUpdate = requireUpdate;
+}
+public setQuickClose (quickClose) {
+    this.quickClose = quickClose;
+}
+
+public setCreateTask (createTask) {
+    this.createTask = createTask;
+}
+
+
     public clearTehUsers() {
         this.assignedUsers = [];
     }
@@ -35,6 +47,7 @@ export class CreateRecurringTickets {
         this.agents = [];
     }
     public addAgents(agent) {
+        console.log('agent',agent);
         this.agents.push(agent);
     }
     public setCronExpression(cronExpression) {
@@ -50,10 +63,16 @@ export class CreateRecurringTickets {
         this.description = description;
     }
     public clearProducts() {
-        this.agents = [];
+        this.products = [];
     }
     public addProdct(product) {
         this.products.push(product);
+    }
+    public clearServices() {
+        this.services = [];
+    }
+    public addService(service) {
+        this.services.push(service);
     }
 
 }

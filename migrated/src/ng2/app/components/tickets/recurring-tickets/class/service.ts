@@ -1,3 +1,5 @@
+import { VersionedId } from './versioned-id';
+
 export class Service {
     blockTimeServiceAgreement: any;
     canUseInTicket: boolean;
@@ -11,9 +13,10 @@ export class Service {
     serviceContractServiceAgreement: any;
     taxes: any;
     updatedAt: any;
-    versionedId: any;
+    versionedId: VersionedId;
     description:string = '';
     quantity:number;
+    duration:number;
     isDropDownShowServices:boolean = false;
     constructor () {}
 }

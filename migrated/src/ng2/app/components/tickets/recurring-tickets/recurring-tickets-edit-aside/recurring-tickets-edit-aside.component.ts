@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 import { Subscription } from "rxjs";
 import { TicketStateService } from "../../ticket-state.service";
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
@@ -19,12 +19,14 @@ import { TagsStateService } from '../../../shared/tags/services/tags-state.servi
 import { TehUsersSateService } from '../../../shared/teh-users/services/teh-users-sate.service';
 import { RecurringTicketsStateService } from '../services/recurring-tickets-state.service';
 import { CreateRecurringTicketsProduct } from './class/create-recurring-tickets-product';
+import { CreateRecurringTicketsService } from './class/create-recurring-tickets-service';
+import { RecurringTicketsService } from './services/recurring-tickets.service';
 
 @Component({
   selector: 'app-recurring-tickets-edit-aside',
   templateUrl: './recurring-tickets-edit-aside.component.html',
   styleUrls: ['./recurring-tickets-edit-aside.component.scss'],
-  providers: [RecurringTicketsEditAsideService]
+  providers: [RecurringTicketsEditAsideService,RecurringTicketsService]
 })
 export class RecurringTicketsEditAsideComponent implements OnInit {
 
@@ -60,6 +62,8 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
     private tagsState: TagsStateService,
     private tehState: TehUsersSateService,
     private recurringState: RecurringTicketsStateService,
+    private createService:RecurringTicketsService
+   
   ) { }
 
   ngOnInit() {
@@ -71,7 +75,6 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
 
   public selectClient(selectClient) {
     if (selectClient === 'null') return;
-    console.log('selectClient', selectClient);
     this.recurringState.getCreateTicket().setCompany(selectClient.item.id);
     this.ticketForm.controls['client'].setValue(selectClient);
     this.selectedClient = selectClient.item;
@@ -98,15 +101,12 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
    */
   public getItemListProducts() {
     this.productService.getCategories().subscribe((res: any) => {
-      console.log('res',res);
       this.productList = res;
-
     });
-
   }
 
-  public onChangeDescription (event) {
-this.recurringState.getCreateTicket().setDescription(event.target.value);
+  public onChangeDescription(event) {
+    this.recurringState.getCreateTicket().setDescription(event.target.value);
   }
   public selectDate(data: NgbDate) {
     this.datepicker = data;
@@ -115,7 +115,7 @@ this.recurringState.getCreateTicket().setDescription(event.target.value);
     this.ticketForm.controls['date'].setValue(this.date.getTitle());
     this.hideDatePicker();
     this.cd.detectChanges();
-    this.recurringState.getCreateTicket().setStartDate(this.datepicker.year,this.datepicker.month,this.datepicker.day);
+    this.recurringState.getCreateTicket().setStartDate(this.datepicker.day, this.datepicker.month, this.datepicker.year);
   }
 
   public selectTomorrow() {
@@ -147,10 +147,7 @@ this.recurringState.getCreateTicket().setDescription(event.target.value);
   }
   public getItemListServices() {
     const value = this.ticketStateService.getClient();
-    console.log('value', value);
     value && this.recurringService.getServiceList(value.id).subscribe((res: any) => {
-      console.log('res', res);
-      console.log('this.servicesList', this.servicesList);
       this.servicesList = res;
     })
   }
@@ -159,7 +156,7 @@ this.recurringState.getCreateTicket().setDescription(event.target.value);
     this.date.setTitle(this.datepicker);
     this.ticketForm.controls['date'].setValue(this.date.getTitle());
     this.hideDatePicker();
-    this.recurringState.getCreateTicket().setStartDate(this.datepicker.year,this.datepicker.month,this.datepicker.day);
+    this.recurringState.getCreateTicket().setStartDate(this.datepicker.year, this.datepicker.month, this.datepicker.day);
   }
   public navigateDate(data: NgbDatepickerNavigateEvent) {
     this.navDate = data;
@@ -225,6 +222,7 @@ this.recurringState.getCreateTicket().setDescription(event.target.value);
         item = {...item, ...{quantity: 1, markup: this.setMarkups(item)}};
       }*/
     this.products[index] = item;
+    this.products[index].discount = 1;
     // this.product.quantity = 1;
     //  this.selectedServiceItem.emit(item);
     this.products[index].isDropDownShowProducts = false;
@@ -243,7 +241,7 @@ this.recurringState.getCreateTicket().setDescription(event.target.value);
       }*/
     this.services[index] = item;
     this.services[index].description = '';
-
+    this.services[index].duration = 1;
 
     //  this.selectedServiceItem.emit(item);
     this.services[index].isDropDownShowServices = false;
@@ -267,9 +265,9 @@ this.recurringState.getCreateTicket().setDescription(event.target.value);
 
 
   public selectDevice(item) {
-    console.log('item',item);
+    console.log('item', item);
     this.recurringState.getCreateTicket().clearAgents();
-    if (item) this.recurringState.getCreateTicket().addAgents(item.item.id);
+    if (item) this.recurringState.getCreateTicket().addAgents(item.item.agentId);
   }
   public onChangeTags(tags) {
 
@@ -314,9 +312,14 @@ this.recurringState.getCreateTicket().setDescription(event.target.value);
 
   public save() {
     this.recurringState.getCreateTicket().clearProducts();
-    this.products.forEach((item) => {
-     // this.recurringState.getCreateTicket().addProdct(new CreateRecurringTicketsProduct(item.id))
-    })
-    console.log('data',this.recurringState.getCreateTicket());
+    this.recurringState.getCreateTicket().clearServices();
+    this.createService.setRulesCreateTicket(this.recurringState.getCreateTicket());
+    this.products.forEach((item: Product) =>  (item.name || item.description) && this.recurringState.getCreateTicket().addProdct(new CreateRecurringTicketsProduct(item.versionedId.id, item.quantity, item.discount)));
+    this.services.forEach((item: Service) => (item.name || item.description) && this.recurringState.getCreateTicket().addService(new CreateRecurringTicketsService(item.versionedId.id, item.description, item.duration)));
+    console.log('data', this.recurringState.getCreateTicket());
+    
+    this.recurringService.createTicket(this.recurringState.getCreateTicket()).subscribe((res) => {
+       console.log('res',res);
+     })
   }
 }

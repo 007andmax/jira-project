@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/ng2/environments/environment';
 import { tap, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { CreateRecurringTickets } from '../../components/tickets/recurring-tickets/recurring-tickets-edit-aside/class/create-recurring-tickets';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,12 @@ export class RecurringService {
       catchError(this.handleError));
   }
 
+
+  public createTicket(data:CreateRecurringTickets) {
+    return this.http.post(this.apiUrl + `recurringTickets`, data).pipe(
+      tap(res => res), 
+      catchError(this.handleError));
+  }
   /**
    * check error
    * @param error - error
