@@ -24,7 +24,7 @@ export class RecurringService {
 
 
   public createTicket(data:CreateRecurringTickets) {
-    return this.http.post(this.apiUrl + `recurringTickets`, data).pipe(
+    return this.http.post(this.apiUrl + `recurringTickets/create`, data).pipe(
       tap(res => res), 
       catchError(this.handleError));
   }

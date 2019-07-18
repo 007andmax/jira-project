@@ -320,6 +320,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
     
     this.recurringService.createTicket(this.recurringState.getCreateTicket()).subscribe((res) => {
        console.log('res',res);
+       this.close();
      })
   }
 }

@@ -21,8 +21,18 @@ export class TehUsersComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.tehService.getUsersList().subscribe((data: any) => {
-      this.resUserList = data.filter(item => item.accountType === 'TECH' && !item.deletedAt);;
-      this.usersList = data.filter(item => item.accountType === 'TECH' && !item.deletedAt);
+      this.resUserList = data.filter(item => {
+        if (item.accountType === 'TECH' && !item.deletedAt) {
+          item.selected = false;
+          return item;
+        }
+      });
+      this.usersList = data.filter(item => {
+        if (item.accountType === 'TECH' && !item.deletedAt) {
+          item.selected = false;
+          return item;
+        }
+      });
 
     })
     this.onInitClearState();
@@ -53,6 +63,7 @@ export class TehUsersComponent implements OnInit, OnDestroy {
   }
 
   public selectUser(index) {
+    this.usersList[index].selected = true;
     this.selectedUsers.push(this.usersList[index]);
     this.usersChange.emit(this.selectedUsers);
   }
@@ -66,6 +77,7 @@ export class TehUsersComponent implements OnInit, OnDestroy {
   private clear() {
     this.showSelect = false;
     this.selectedUsers = [];
+    this.usersList.forEach((item) => item.selected = false);
     this.usersChange.emit(this.selectedUsers);
   }
 

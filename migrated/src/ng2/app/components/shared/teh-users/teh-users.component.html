@@ -23,7 +23,7 @@
             <div class="users-list custom-scroll" tabindex="-1"
                  style="position: absolute; z-index: 9999;padding: 0; max-height: 171px;">
               <ng-template ngFor let-user [ngForOf]="usersList" let-i="index" [ngForTrackBy]="trackByIndex">
-                <div class="user-item" data-index="1" (click)="selectUser(i)"><a href="javascript:void(0)"
+                <div class="user-item" data-index="1" (click)="selectUser(i)" [ngClass]="(user.selected) ? 'active' : ''"><a href="javascript:void(0)"
                                                                                  [id]="user.id" class="dropdown-link">
                   <div class="default-user-avatar avatar-background-color-odd ng-scope" *ngIf="!user.avatar">
                     <span [textContent]="user.firstName[0].toUpperCase()"></span>
