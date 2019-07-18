@@ -1,86 +1,36 @@
 .select-wrapper {
-    position: absolute;
-    display: block;
-    width: 366px;
-    background: white;
-    height: 220px;
-    bottom: 55px;
-    margin-top: 5px;
-    border-radius: 3px;
-    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
-    z-index: 9999;
-    .tab-wrapper {
-      display: flex;
-      padding: 0 20px;
-      justify-content: space-between;
-      border-bottom: 1px solid #dce0e6;
-      .tab {
-        cursor: pointer;
-        height: 44px;
-        display: flex;
-        align-items: center;
-        padding: 0 12px;
-        border-bottom: 2px solid transparent;
-        font-family: Graphik-Medium, sans-serif;
-        color: #4f5f79;
-        font-size: 13px;
-        transition: all .3s;
-        font-weight: bold;
-        &.active, &:hover {
-          color: #16a4fa;
-          border-bottom: 2px solid #16a4fa;
-        }
+  position: absolute;
+  display: block;
+  background: white;
+  height: 240px;
+  bottom: 55px;
+  margin-top: 5px;
+  border-radius: 3px;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+  right: 0;
+  width: 290px;
+  .content {
+    .assign-ticket-header {
+      padding: 16px;
+      .form-group {
+        margin: 0;
       }
     }
-    .content {
-      height: 170px;
-      overflow: scroll;
-      padding: 20px 20px 0 20px;
-      > div {
-        .content-btn {
-          background: #16a4fa;
-          border-radius: 4px;
-          padding: 4px 15px;
+    .scroll-pane {
+      margin-top: 70px;
+      .user-list.custom-scroll {
+        padding: 0;
+      }
+    }
+    .user-item {
+      &:hover,
+      &.active {
+        background: #16a4fa;
+        p {
           color: #fff;
         }
-        .content-header {
-          display: flex;
-          align-items: center;
-          input {
-            padding: 4px 12px;
-            height: 20px;
-          }
-          > div {
-            margin-left: 20px;
-          }
-        }
-        > div {
-          display: flex;
-          align-items: center;
-          font-size: 13px !important;
-          height: 30px;
-          cursor: pointer;
-          i {
-            margin: 0 0 0 auto;
-            position: static;
-          }
-          &:not(:last-child) {
-  
-          }
-          label {
-            width: auto;
-            height: 16px;
-            font-size: 13px;
-            display: flex;
-            align-items: center;
-          }
-        }
-      }
-      &::-webkit-scrollbar-thumb {
-        background-color: #c4cbd5;
-      }
-      &::-webkit-scrollbar {
-        width: 4px;
       }
     }
   }
+}

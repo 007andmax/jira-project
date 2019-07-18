@@ -2113,7 +2113,7 @@ span.sort-span {
 .btn-new {
   outline: none;
   height: 40px;
-  padding: 5px 20px;
+  padding: 0 20px;
   font-size: 13px;
   font-weight: 500;
   border-radius: 4px;
