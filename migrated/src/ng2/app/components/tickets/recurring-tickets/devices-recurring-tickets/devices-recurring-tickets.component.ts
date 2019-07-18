@@ -107,7 +107,7 @@ export class DevicesRecurringTicketsComponent implements OnInit,OnDestroy {
    * clear client input
    */
   public clearDevices() {
-    this.selectedItem.emit('null');
+    this.selectedItem.emit(null);
     this.selectedDevice = null;
   }
 

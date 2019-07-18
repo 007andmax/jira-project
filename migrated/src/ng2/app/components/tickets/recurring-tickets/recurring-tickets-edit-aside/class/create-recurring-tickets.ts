@@ -35,7 +35,6 @@ export class CreateRecurringTickets {
         this.agents = [];
     }
     public addAgents(agent) {
-        console.log('agent',agent);
         this.agents.push(agent);
     }
     public setCronExpression(cronExpression) {
@@ -50,4 +49,11 @@ export class CreateRecurringTickets {
     public setDescription (description) {
         this.description = description;
     }
+    public clearProducts() {
+        this.agents = [];
+    }
+    public addProdct(product) {
+        this.products.push(product);
+    }
+
 }

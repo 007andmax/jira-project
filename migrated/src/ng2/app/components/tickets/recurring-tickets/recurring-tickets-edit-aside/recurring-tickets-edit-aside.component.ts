@@ -18,6 +18,7 @@ import { DevicesStateService } from '../devices-recurring-tickets/services/devic
 import { TagsStateService } from '../../../shared/tags/services/tags-state.service';
 import { TehUsersSateService } from '../../../shared/teh-users/services/teh-users-sate.service';
 import { RecurringTicketsStateService } from '../services/recurring-tickets-state.service';
+import { CreateRecurringTicketsProduct } from './class/create-recurring-tickets-product';
 
 @Component({
   selector: 'app-recurring-tickets-edit-aside',
@@ -69,7 +70,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
   }
 
   public selectClient(selectClient) {
-    if (selectClient == null) return;
+    if (selectClient === 'null') return;
     console.log('selectClient', selectClient);
     this.recurringState.getCreateTicket().setCompany(selectClient.item.id);
     this.ticketForm.controls['client'].setValue(selectClient);
@@ -97,6 +98,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
    */
   public getItemListProducts() {
     this.productService.getCategories().subscribe((res: any) => {
+      console.log('res',res);
       this.productList = res;
 
     });
@@ -267,7 +269,7 @@ this.recurringState.getCreateTicket().setDescription(event.target.value);
   public selectDevice(item) {
     console.log('item',item);
     this.recurringState.getCreateTicket().clearAgents();
-    if (item) this.recurringState.getCreateTicket().addAgents(item.item.agentId);
+    if (item) this.recurringState.getCreateTicket().addAgents(item.item.id);
   }
   public onChangeTags(tags) {
 
@@ -311,6 +313,10 @@ this.recurringState.getCreateTicket().setDescription(event.target.value);
   }
 
   public save() {
+    this.recurringState.getCreateTicket().clearProducts();
+    this.products.forEach((item) => {
+     // this.recurringState.getCreateTicket().addProdct(new CreateRecurringTicketsProduct(item.id))
+    })
     console.log('data',this.recurringState.getCreateTicket());
   }
 }
