@@ -64,6 +64,7 @@ export class DevicesRecurringTicketsComponent implements OnInit,OnDestroy {
       });
     
       this.devicesList = (this.devicesList.length === 0) ? null : this.devicesList;
+      if (!this.devicesList) this.clearDevices();
       /*res
         .sort((a, b) => a.name.localeCompare(b.name))
         .filter((item) => !item.deletedAt)*/

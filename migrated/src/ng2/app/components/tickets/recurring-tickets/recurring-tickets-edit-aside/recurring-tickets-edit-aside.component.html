@@ -9,7 +9,7 @@
       <div class="recurring-tickets-content__modal--content clearfix">
         <div class="col-md-12">
           <p>Service Description</p>
-          <input type="text" placeholder="Write Description">
+          <input type="text" placeholder="Write Description" (input)="onChangeDescription($event)">
         </div>
 
         <div class="col-md-12">
@@ -154,21 +154,21 @@
         <div class="col-md-12 checkbox-wrapper">
           <div class="with-checkbox">
             <label class="checkbox-container">
-              <input type="checkbox">
+              <input id="requireUpdate" type="checkbox">
               <span class="checkbox-mark"></span>
             </label>
             <p>Require update Notes</p>
           </div>
           <div class="with-checkbox">
             <label class="checkbox-container">
-              <input type="checkbox">
+              <input id="quickClose"  type="checkbox">
               <span class="checkbox-mark"></span>
             </label>
             <p>Quick Close</p>
           </div>
           <div class="with-checkbox">
             <label class="checkbox-container">
-              <input type="checkbox">
+              <input id="createTask"  type="checkbox">
               <span class="checkbox-mark"></span>
             </label>
             <p>Create Task for user</p>
@@ -177,7 +177,7 @@
 
         <div class="col-md-12 recurring-tickets-content__modal--content-footer">
           <div class="d-f">
-            <button class="btn-new btn-primary">Save & Next</button>
+            <button class="btn-new btn-primary" (click)="save()">Save & Next</button>
             <button class="btn-new disabled">Cancel</button>
           </div>
           <div class="save-template">

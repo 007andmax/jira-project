@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './tags.component.html',
   styleUrls: ['./tags.component.scss']
 })
-export class TagsComponent implements OnInit,OnDestroy {
+export class TagsComponent implements OnInit, OnDestroy {
 
   visible = true;
   selectable = true;
@@ -62,7 +62,7 @@ export class TagsComponent implements OnInit,OnDestroy {
   private onInitClearState() {
     let getClearState = this.tagsState.getClearState().subscribe(() => this.close());
     this.sub.add(getClearState);
-   }
+  }
 
   /**
    * Add selected user
@@ -76,16 +76,16 @@ export class TagsComponent implements OnInit,OnDestroy {
 
     if ((value || '').trim()) {
       let tag: Tag = {
-        colorCode: 0, usedCounter: 0, word: value.trim()
+        colorCode: 0, usedCounter: 0, word: value.trim(), id :''
       }
 
       this.tagsService.setTags(tag).subscribe((res) => {
-
+        tag.id = res.id;
         this.tags.push(tag);
+        this.selectedTag.push(tag);
+       this.tagsChange.emit(this.selectedTag);
       });
-
-      this.selectedTag.push(value.trim());
-      this.tagsChange.emit(this.selectedTag);
+    
     }
     if (input) {
       input.value = '';
@@ -110,7 +110,8 @@ export class TagsComponent implements OnInit,OnDestroy {
    * @param event - selected user
    */
   public selected(event: MatAutocompleteSelectedEvent): void {
-    this.selectedTag.push(event.option.viewValue);
+  
+    this.selectedTag.push(event.option.value);
     this.tagsChange.emit(this.selectedTag);
     this.userInput.nativeElement.blur();
     this.tagCtrl.setValue(null);
@@ -121,12 +122,11 @@ export class TagsComponent implements OnInit,OnDestroy {
    */
   public close() {
     this.selectedTag = [];
-    this.tags = [];
     this.tagsChange.emit(this.selectedTag);
   }
 
   ngOnDestroy(): void {
     this.sub.unsubscribe();
-   }
+  }
 
 }
