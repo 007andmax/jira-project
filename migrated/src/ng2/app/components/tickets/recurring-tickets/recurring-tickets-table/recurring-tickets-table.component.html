@@ -7,7 +7,7 @@
     <div class="circle-avatar" [textContent]="getParseShortName(ticket.company.name)"></div>
     <p class="ff-g-m fw-600" [textContent]="ticket.company.name"></p>
   </div>
-  <div class="col-md-2" [textContent]="(ticket.agents) ? ticket.agents[0].label : ''"></div>
+  <div class="col-md-2" [textContent]="(ticket.agent) ? ticket.agent[0].label : ''"></div>
   <div class="col-md-3" [textContent]="ticket.description"></div>
   <div class="col-md-1" [textContent]="getPareDate(ticket.startDate)"></div>
   <div class="col-md-1">Daily</div>
