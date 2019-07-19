@@ -13,4 +13,7 @@ export class RecurringTicketsService {
     data.setCreateTask(this.elRef.nativeElement.querySelector('#createTask').checked);
 
   }
+  public clearData() {
+    this.elRef.nativeElement.querySelector('#service-description').value = '';
+  }
 }

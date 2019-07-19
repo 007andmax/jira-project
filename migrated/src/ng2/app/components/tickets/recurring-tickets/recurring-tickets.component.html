@@ -9,13 +9,17 @@
         </label>
         <p>Company Name</p>
       </div>
-      <div class="col-md-2">Device</div>
-      <div class="col-md-3">Description</div>
-      <div class="col-md-1">Start Date</div>
+      <div class="col-md-2" (click)="sortBy('agents_label')">Device</div>
+      <div class="col-md-3" (click)="sortBy('description')">Description</div>
+      <div class="col-md-1" (click)="sortBy('startDate')">Start Date</div>
       <div class="col-md-1">Interval</div>
       <div class="col-md-2">Assigned User</div>
     </div>
-    <ng-template ngFor let-ticket [ngForOf]="ticketList" [ngForTrackBy]="trackById">
+    <ng-template ngFor let-ticket [ngForOf]="ticketList" [ngForTrackBy]="trackById"  infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="50"
+    [infiniteScrollDisabled]="infiniteScrollDisabled"
+    (scrolled)="onScroll()">
     <app-recurring-tickets-table [ticket]="ticket"></app-recurring-tickets-table>
     </ng-template>
     <div class="loading" *ngIf="!ticketList.length"></div>

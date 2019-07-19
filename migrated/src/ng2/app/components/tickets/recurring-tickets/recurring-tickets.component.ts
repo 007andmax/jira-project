@@ -31,6 +31,18 @@ public ticketList:Array<RecurringTicket> = [];
     })
   }
 
+ 
+  public onScroll() {
+    console.log('onScroll');
+    this.infiniteScrollDisabled = true;
+    
+  }
+  public sortBy (sort) {
+    this.sort = sort;
+    this.ticketList = [];
+    this.getTicket();
+  }
+
   public trackById(index, item) {
     return item.id;
   }

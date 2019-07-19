@@ -206,6 +206,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
     this.date.clearTitle();
     this.tagsState.onInitClear();
     this.tehState.onInitClear();
+    this.createService.clearData();
   }
 
 
