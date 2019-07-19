@@ -15,7 +15,10 @@
       <div class="col-md-1">Interval</div>
       <div class="col-md-2">Assigned User</div>
     </div>
-    <app-recurring-tickets-table></app-recurring-tickets-table>
+    <ng-template ngFor let-ticket [ngForOf]="ticketList" [ngForTrackBy]="trackById">
+    <app-recurring-tickets-table [ticket]="ticket"></app-recurring-tickets-table>
+    </ng-template>
+    <div class="loading" *ngIf="!ticketList.length"></div>
   </div>
 </div>
 <app-recurring-tickets-edit-aside></app-recurring-tickets-edit-aside>

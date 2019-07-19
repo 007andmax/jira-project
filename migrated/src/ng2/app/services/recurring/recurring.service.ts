@@ -12,12 +12,15 @@ export class RecurringService {
   private apiUrl = environment.apiUrl;
   constructor( private http: HttpClient) { }
 
-   /**
-   * Get services list
-   * @param clientCompanyId - client company id
-   */
+  
   public getServiceList(clientCompanyId) {
     return this.http.get(this.apiUrl + `services/${clientCompanyId}`).pipe(
+      tap(data => data), 
+      catchError(this.handleError));
+  }
+
+  public getTicketsList(page_number,items_per_page,sort,direction) {
+    return this.http.get(this.apiUrl + `recurringTickets?page=${page_number}&limit=${items_per_page}&sort=${sort}&direction=${direction}`).pipe(
       tap(data => data), 
       catchError(this.handleError));
   }

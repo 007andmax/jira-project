@@ -1,6 +1,7 @@
-import { VersionedId } from './versioned-id';
+import { VersionedId } from '../../../../interfaces/versioned-id';
+import { Product } from 'src/ng2/app/interfaces/product/product';
 
-export class Product {
+export class ForCreateProduct  {
     cost: any;
     description: string = '';
     glNumber: any;

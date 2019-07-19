@@ -1,9 +1,10 @@
-import { VersionedId } from './versioned-id';
+import { VersionedId } from '../../../../interfaces/versioned-id';
+import { Service } from 'src/ng2/app/interfaces/service/service';
 
-export class Service {
+export class ForCreateService implements Service  {
     blockTimeServiceAgreement: any;
     canUseInTicket: boolean;
-    commissionRate: any;
+    commissionRate: number;
     createdAt: number;
     deletedAt: any;
     name: string;
@@ -20,3 +21,5 @@ export class Service {
     isDropDownShowServices:boolean = false;
     constructor () {}
 }
+
+

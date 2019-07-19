@@ -3,17 +3,16 @@ import { Subscription } from "rxjs";
 import { TicketStateService } from "../../ticket-state.service";
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ProductService } from 'src/ng2/app/services/product/product.service';
-import { Product } from '../class/product';
+import { ForCreateProduct } from '../class/for-create-product';
 import { RecurringService } from 'src/ng2/app/services/recurring/recurring.service';
-import { Service } from '../class/service';
+import { ForCreateService } from '../class/for-create-service';
 import { NgbDateStruct, NgbCalendar, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { RecurringTicketsEditAsideService } from './services/recurring-tickets-edit-aside.service';
-import { RecurringTickets } from '../class/recurring-tickets';
+
 import { RecurringTicketsEditAsideDate } from './class/recurring-tickets-edit-aside-date';
 import { NgbDatepickerNavigateEvent, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker';
 import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
 import { SelectClientCompanyStateService } from '../../../billing/quotes/quote-create/quote-create-content/quote-create-content-top/select-client-company/services/select-client-company-state.service';
-import { DurationStateService } from '../../../shared/duration/services/duration-state.service';
 import { DevicesStateService } from '../devices-recurring-tickets/services/devices-state.service';
 import { TagsStateService } from '../../../shared/tags/services/tags-state.service';
 import { TehUsersSateService } from '../../../shared/teh-users/services/teh-users-sate.service';
@@ -37,13 +36,13 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
   public ticketForm: FormGroup;
   public productList = [];
   public servicesList = [];
-  public products: Array<Product> = [new Product()];
-  public services: Array<Service> = [new Service()];
+  public products: Array<ForCreateProduct> = [new ForCreateProduct()];
+  public services: Array<ForCreateService> = [new ForCreateService()];
   public isFormValid = false;
   public type: string = "products";
   public datepicker: NgbDateStruct;
   public date: RecurringTicketsEditAsideDate = new RecurringTicketsEditAsideDate();
-  public ticket: RecurringTickets = new RecurringTickets();
+ // public ticket: RecurringTickets = new RecurringTickets();
   public navDate: any;
   public selectedClient: any;
   public devicesList = [];
@@ -195,8 +194,8 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
   public close() {
     this.opened = false;
     this.showDatePicker = false;
-    this.products = [new Product()];
-    this.services = [new Service()];
+    this.products = [new ForCreateProduct()];
+    this.services = [new ForCreateService()];
     this.isFormValid = false;
     this.type = "products";
     this.selectedClient = null;
@@ -281,12 +280,12 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
   }
 
   public addProduct() {
-    let product: Product = new Product();
+    let product: ForCreateProduct = new ForCreateProduct();
     this.products.push(product);
     this.cd.detectChanges();
   }
   public addService() {
-    this.services.push(new Service());
+    this.services.push(new ForCreateService());
   }
   public trackById(index, item) {
     return item.versionedId.id;
@@ -314,8 +313,8 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
     this.recurringState.getCreateTicket().clearProducts();
     this.recurringState.getCreateTicket().clearServices();
     this.createService.setRulesCreateTicket(this.recurringState.getCreateTicket());
-    this.products.forEach((item: Product) =>  (item.name || item.description) && this.recurringState.getCreateTicket().addProdct(new CreateRecurringTicketsProduct(item.versionedId.id, item.quantity, item.discount)));
-    this.services.forEach((item: Service) => (item.name || item.description) && this.recurringState.getCreateTicket().addService(new CreateRecurringTicketsService(item.versionedId.id, item.description, item.duration)));
+    this.products.forEach((item: ForCreateProduct) =>  (item.name || item.description) && this.recurringState.getCreateTicket().addProdct(new CreateRecurringTicketsProduct(item.versionedId.id, item.quantity, item.discount)));
+    this.services.forEach((item: ForCreateService) => (item.name || item.description) && this.recurringState.getCreateTicket().addService(new CreateRecurringTicketsService(item.versionedId.id, item.description, item.duration)));
     console.log('data', this.recurringState.getCreateTicket());
     
     this.recurringService.createTicket(this.recurringState.getCreateTicket()).subscribe((res) => {

@@ -4,12 +4,12 @@
       <input type="checkbox">
       <span class="checkbox-mark"></span>
     </label>
-    <div class="circle-avatar">AD</div>
-    <p class="ff-g-m fw-600">Avenue Dental Care</p>
+    <div class="circle-avatar" [textContent]="getParseShortName(ticket.company.name)"></div>
+    <p class="ff-g-m fw-600" [textContent]="ticket.company.name"></p>
   </div>
-  <div class="col-md-2">Consult 01</div>
-  <div class="col-md-3">Monthly Managed Service</div>
-  <div class="col-md-1">21 Jul 2019</div>
+  <div class="col-md-2" [textContent]="(ticket.agents) ? ticket.agents[0].label : ''"></div>
+  <div class="col-md-3" [textContent]="ticket.description"></div>
+  <div class="col-md-1" [textContent]="getPareDate(ticket.startDate)"></div>
   <div class="col-md-1">Daily</div>
   <div class="col-md-2 assigned-container">
     <div class="assigned-wrapper"></div>
