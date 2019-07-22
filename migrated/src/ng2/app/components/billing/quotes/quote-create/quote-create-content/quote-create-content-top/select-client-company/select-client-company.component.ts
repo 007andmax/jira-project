@@ -15,8 +15,8 @@ import { SelectClientCompanyStateService } from './services/select-client-compan
   templateUrl: './select-client-company.component.html',
   styleUrls: ['./select-client-company.component.scss']
 })
-export class SelectClientCompanyComponent implements OnInit,OnDestroy {
- 
+export class SelectClientCompanyComponent implements OnInit, OnDestroy {
+
 
   @ViewChild('instance') instance: NgbTypeahead;
   @Output() selectedItem = new EventEmitter<any>();
@@ -45,12 +45,23 @@ export class SelectClientCompanyComponent implements OnInit,OnDestroy {
   ngOnInit() {
     this.getCLientsList();
     this.onInitClearState();
+    this.onCheckEditItem();
 
   }
-private onInitClearState() {
- let getClearState = this.companiesState.getClearState().subscribe(() => this.clearClient());
- this.sub.add(getClearState);
+
+private onCheckEditItem () {
+  let getCompanyFromEdit = this.companiesState.getCompanyFromEdit().subscribe((data) => {
+    this.editItem =data;
+    let index: number = this.clientsList.findIndex(item => item.id === this.editItem.id);
+    if (index > (-1))  this.selectedClient = this.clientsList[index];
+  });
+  this.sub.add(getCompanyFromEdit);
 }
+
+  private onInitClearState() {
+    let getClearState = this.companiesState.getClearState().subscribe(() => this.clearClient());
+    this.sub.add(getClearState);
+  }
 
   /**
    * Get client list
@@ -60,12 +71,13 @@ private onInitClearState() {
       this.clientsList = res
         .sort((a, b) => a.name.localeCompare(b.name))
         .filter((item) => !item.deletedAt)
-        this.getAllItems.emit(this.clientsList);
+      this.getAllItems.emit(this.clientsList);
+      console.log('editItem', this.editItem);
       if (this.editItem) {
         let index: number = this.clientsList.findIndex(item => item.id === this.editItem.id);
         if (index > (-1)) {
           this.selectedClient = this.clientsList[index];
-         // this.selectedItem.emit({ item: this.clientsList[index] });
+          // this.selectedItem.emit({ item: this.clientsList[index] });
         }
 
       }
@@ -114,7 +126,7 @@ private onInitClearState() {
 
 
   ngOnDestroy(): void {
-   this.sub.unsubscribe();
+    this.sub.unsubscribe();
   }
 
 }

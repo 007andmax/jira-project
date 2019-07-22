@@ -15,12 +15,14 @@
         <div class="col-md-12">
           <p>Assign to Company</p>
           <app-select-client-company style="width: 75%;" class="light-dropdown" [formGroup]="ticketForm"
+         
                                      (selectedItem)="selectClient($event)"></app-select-client-company>
         </div>
 
         <div class="col-md-4">
           <p>Device Name</p>
           <app-devices-recurring-tickets style="width: 75%;" class="light-dropdown" [formGroup]="ticketForm"
+          [editItem]="ticketForEdit.agent"
                                          [companyId]="(selectedClient) ? selectedClient.id : ''"
                                          (selectedItem)="selectDevice($event)">
           </app-devices-recurring-tickets>

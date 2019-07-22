@@ -20,6 +20,7 @@ export class DevicesRecurringTicketsComponent implements OnInit,OnDestroy {
   @Output() selectedItem = new EventEmitter<any>();
   @Output() getAllItems = new EventEmitter<any>();
   @Input() companyId: string;
+  @Input() editItem: any;
   public selectedDevice;
   public subGetDevicesList: ISubscription;
   public devicesList: any;
@@ -42,8 +43,8 @@ export class DevicesRecurringTicketsComponent implements OnInit,OnDestroy {
   ngOnInit() {
     this.getCLientsList();
     this.onInitClearState();
+   
   }
-
   private onInitClearState() {
     let getClearState = this.devicesState.getClearState().subscribe(() => {
       this.clearDevices();
@@ -68,6 +69,17 @@ export class DevicesRecurringTicketsComponent implements OnInit,OnDestroy {
       /*res
         .sort((a, b) => a.name.localeCompare(b.name))
         .filter((item) => !item.deletedAt)*/
+        console.log('this.editItem',this.editItem);
+        if (this.editItem)
+        {
+          let index: number = this.devicesList.findIndex(item => item.id === this.editItem.deviceId);
+          console.log('index',index);
+          if (index > (-1))  {
+            this.selectedDevice = this.devicesList[index];
+            this.selectItem({item:this.devicesList[index]});
+          }
+        }
+        
         this.getAllItems.emit(this.devicesList);
     })
   }
@@ -90,8 +102,8 @@ export class DevicesRecurringTicketsComponent implements OnInit,OnDestroy {
    * set selected item
    * @param companyId - id of company
    */
-  public selectItem(companyId) {
-    this.selectedItem.emit(companyId);
+  public selectItem(device) {
+    this.selectedItem.emit(device);
 
   }
 

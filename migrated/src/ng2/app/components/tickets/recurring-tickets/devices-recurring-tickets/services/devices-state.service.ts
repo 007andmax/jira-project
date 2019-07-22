@@ -6,6 +6,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 export class DevicesStateService {
 
   clearState = new EventEmitter<any>();
+  
   constructor() { }
   public onInitClear() {
     this.clearState.emit(null);

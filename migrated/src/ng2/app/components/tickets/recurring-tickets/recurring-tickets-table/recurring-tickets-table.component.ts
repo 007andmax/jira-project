@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { RecurringTicket } from '../class/recurring-ticket';
 import { MONTHS_SHORT } from 'src/ng2/app/const/date';
+import { TicketStateService } from '../../ticket-state.service';
+import { RecurringTicketsStateService } from '../services/recurring-tickets-state.service';
 
 @Component({
   selector: 'app-recurring-tickets-table',
@@ -9,7 +11,7 @@ import { MONTHS_SHORT } from 'src/ng2/app/const/date';
 })
 export class RecurringTicketsTableComponent implements OnInit {
   @Input() ticket: RecurringTicket;
-  constructor() { }
+  constructor(  private recurringState: RecurringTicketsStateService,) { }
 
   ngOnInit() {
     console.log('ticket',this.ticket);
@@ -22,6 +24,10 @@ export class RecurringTicketsTableComponent implements OnInit {
 
   public getParseShortName(name) {
     return `${name[0].toUpperCase()}${name[1].toUpperCase()}`;
+  }
+
+  public editTicket () {
+    this.recurringState.onInitEditTicket(this.ticket);
   }
 
 }

@@ -15,7 +15,7 @@ export class RecurringTicket {
     suspended: boolean;
     agreementNeedsChange: boolean;
     company: RecurringTicketCompany;
-    agent: Array<RecurringTicketAgent>;
+    agent: RecurringTicketAgent;
     tags: Array<Tag>;
     assignedUsers: Array<RecurringTicketUser>;
     services:Array<ServiceRecurringTicket>;

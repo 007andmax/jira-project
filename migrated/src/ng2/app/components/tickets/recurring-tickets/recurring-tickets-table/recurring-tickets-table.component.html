@@ -7,7 +7,7 @@
     <div class="circle-avatar" [textContent]="getParseShortName(ticket.company.name)"></div>
     <p class="ff-g-m fw-600" [textContent]="ticket.company.name"></p>
   </div>
-  <div class="col-md-2" [textContent]="(ticket.agent) ? ticket.agent[0].label : ''"></div>
+  <div class="col-md-2" [textContent]="(ticket.agent) ? ticket.agent.label : ''"></div>
   <div class="col-md-3" [textContent]="ticket.description"></div>
   <div class="col-md-1" [textContent]="getPareDate(ticket.startDate)"></div>
   <div class="col-md-1">Daily</div>
@@ -20,7 +20,7 @@
          id="dropdownBasic"
          ngbDropdownToggle></i>
       <div ngbDropdownMenu aria-labelledby="dropdownBasic">
-        <button ngbDropdownItem><i class="icn-16 edit-grey-ng2"></i>Edit</button>
+        <button ngbDropdownItem (click)="editTicket()"><i class="icn-16 edit-grey-ng2"></i>Edit</button>
         <button ngbDropdownItem><i class="icn-16 email-grey-ng2"></i>Email</button>
         <button ngbDropdownItem><i class="icn-16 archive-grey-ng2"></i>Archive</button>
       </div>

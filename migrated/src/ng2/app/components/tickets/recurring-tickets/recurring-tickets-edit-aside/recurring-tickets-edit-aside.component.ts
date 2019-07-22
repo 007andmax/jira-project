@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { Subscription } from "rxjs";
 import { TicketStateService } from "../../ticket-state.service";
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
@@ -20,14 +20,17 @@ import { RecurringTicketsStateService } from '../services/recurring-tickets-stat
 import { CreateRecurringTicketsProduct } from './class/create-recurring-tickets-product';
 import { CreateRecurringTicketsService } from './class/create-recurring-tickets-service';
 import { RecurringTicketsService } from './services/recurring-tickets.service';
+import { RecurringTicket } from '../class/recurring-ticket';
+import { RecurringTicketCompany } from '../interfaces/recurring-ticket-company';
 
 @Component({
   selector: 'app-recurring-tickets-edit-aside',
   templateUrl: './recurring-tickets-edit-aside.component.html',
   styleUrls: ['./recurring-tickets-edit-aside.component.scss'],
-  providers: [RecurringTicketsEditAsideService,RecurringTicketsService]
+  providers: [RecurringTicketsEditAsideService, RecurringTicketsService]
 })
-export class RecurringTicketsEditAsideComponent implements OnInit {
+export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
+
 
   public showTicketRecurringSub: Subscription;
   public opened = false;
@@ -42,11 +45,12 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
   public type: string = "products";
   public datepicker: NgbDateStruct;
   public date: RecurringTicketsEditAsideDate = new RecurringTicketsEditAsideDate();
- // public ticket: RecurringTickets = new RecurringTickets();
+  // public ticket: RecurringTickets = new RecurringTickets();
   public navDate: any;
   public selectedClient: any;
   public devicesList = [];
   public tehUsers = [];
+  public ticketForEdit: RecurringTicket = new RecurringTicket();
   constructor(
     private ticketStateService: TicketStateService,
     private productService: ProductService,
@@ -61,23 +65,46 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
     private tagsState: TagsStateService,
     private tehState: TehUsersSateService,
     private recurringState: RecurringTicketsStateService,
-    private createService:RecurringTicketsService
-   
+    public createService: RecurringTicketsService
+
   ) { }
 
   ngOnInit() {
     this.showTicketRecurring();
     this.getItemListProducts();
-    this.ticketStateService.onInitClientList();
-    this.cd.detectChanges();
-  }
+    this.recurringState.onInitClientList();
+    this.onCheckEditMode();
 
+  }
+  private onCheckEditMode() {
+    let editmode = this.recurringState.getEditMode().subscribe((data: RecurringTicket) => {
+      this.opened = true;
+      this.initForm();
+      this.onEditEditMode(data);
+    })
+    this.createService.addSubscription(editmode);
+  }
+  private onEditEditMode(data: RecurringTicket) {
+    this.createService.setDescription(data.description);
+    this.ticketForEdit = data;
+    this.companiesState.setCompanyFromtEdit(data.company);
+    this.devicesService.onInitHangle(data.company.id);
+    this.selectedClient = data.company;
+    let date = new Date(data.startDate);
+    this.navDate = this.createService.getNavDate(date);
+    let ngbDate: NgbDate = new NgbDate(date.getFullYear(), date.getMonth() + 1, date.getDay());
+    this.selectDate(ngbDate);
+    this.products = this.createService.getProductsForEdit(data.products);
+    this.services = this.createService.getServicesForEdit(data.services);
+
+    // this.cd.detectChanges();
+  }
   public selectClient(selectClient) {
     if (selectClient === 'null') return;
     this.recurringState.getCreateTicket().setCompany(selectClient.item.id);
     this.ticketForm.controls['client'].setValue(selectClient);
     this.selectedClient = selectClient.item;
-    this.ticketStateService.setClient(selectClient);
+    this.recurringState.setClient(selectClient);
     this.getItemListServices();
 
     this.getCompanyDevices();
@@ -91,7 +118,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
   }
 
   private getCompanyDevices() {
-    let company = this.ticketStateService.getClient();
+    let company = this.recurringState.getClient();
     company && this.devicesService.onInitHangle(company.id);
   }
 
@@ -145,7 +172,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
     this.updateDate();
   }
   public getItemListServices() {
-    const value = this.ticketStateService.getClient();
+    const value = this.recurringState.getClient();
     value && this.recurringService.getServiceList(value.id).subscribe((res: any) => {
       this.servicesList = res;
     })
@@ -159,6 +186,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
   }
   public navigateDate(data: NgbDatepickerNavigateEvent) {
     this.navDate = data;
+    console.log('this.navDate', this.navDate);
   }
 
   public initForm() {
@@ -314,13 +342,17 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
     this.recurringState.getCreateTicket().clearProducts();
     this.recurringState.getCreateTicket().clearServices();
     this.createService.setRulesCreateTicket(this.recurringState.getCreateTicket());
-    this.products.forEach((item: ForCreateProduct) =>  (item.name || item.description) && this.recurringState.getCreateTicket().addProdct(new CreateRecurringTicketsProduct(item.versionedId.id, item.quantity, item.discount)));
+    this.products.forEach((item: ForCreateProduct) => (item.name || item.description) && this.recurringState.getCreateTicket().addProdct(new CreateRecurringTicketsProduct(item.versionedId.id, item.quantity, item.discount)));
     this.services.forEach((item: ForCreateService) => (item.name || item.description) && this.recurringState.getCreateTicket().addService(new CreateRecurringTicketsService(item.versionedId.id, item.description, item.duration)));
     console.log('data', this.recurringState.getCreateTicket());
-    
+
     this.recurringService.createTicket(this.recurringState.getCreateTicket()).subscribe((res) => {
-       console.log('res',res);
-       this.close();
-     })
+      console.log('res', res);
+      this.close();
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.createService.clearSubscriptions();
   }
 }
