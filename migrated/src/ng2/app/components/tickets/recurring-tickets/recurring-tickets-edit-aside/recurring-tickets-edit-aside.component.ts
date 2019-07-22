@@ -96,7 +96,10 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.selectDate(ngbDate);
     this.products = this.createService.getProductsForEdit(data.products);
     this.services = this.createService.getServicesForEdit(data.services);
-
+    this.createService.setTagsForEdit(data.tags);
+    this.createService.setCreateTask(data.createTask);
+    this.createService.setRequireUpdate(data.requireUpdate);
+    this.createService.setQuickClose(data.quickClose);
     // this.cd.detectChanges();
   }
   public selectClient(selectClient) {
@@ -186,7 +189,6 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   }
   public navigateDate(data: NgbDatepickerNavigateEvent) {
     this.navDate = data;
-    console.log('this.navDate', this.navDate);
   }
 
   public initForm() {
@@ -235,6 +237,8 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.tagsState.onInitClear();
     this.tehState.onInitClear();
     this.createService.clearData();
+    this.navDate = null;
+    this.datepicker = this.calendar.getToday();
   }
 
 
@@ -293,7 +297,6 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
 
 
   public selectDevice(item) {
-    console.log('item', item);
     this.recurringState.getCreateTicket().clearAgents();
     if (item) this.recurringState.getCreateTicket().setAgents(item.item.agentId);
   }

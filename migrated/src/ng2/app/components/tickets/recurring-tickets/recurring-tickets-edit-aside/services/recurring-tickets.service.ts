@@ -6,15 +6,16 @@ import { ProductRecurringTicket } from '../../interfaces/product-recurring-ticke
 import { ForCreateProduct } from '../../class/for-create-product';
 import { ForCreateService } from '../../class/for-create-service';
 import { ServiceRecurringTicket } from '../../interfaces/service-recurring-ticket';
+import { TagsStateService } from 'src/ng2/app/components/shared/tags/services/tags-state.service';
 
 @Injectable()
 export class RecurringTicketsService {
-sub:Subscription = new Subscription();
-public editAgent:RecurringTicketAgent;
-  constructor( private elRef: ElementRef,) { }
+  sub: Subscription = new Subscription();
+  public editAgent: RecurringTicketAgent;
+  constructor(private elRef: ElementRef, private tagsState: TagsStateService) { }
 
-  public setRulesCreateTicket(data:CreateRecurringTickets) {
-   
+  public setRulesCreateTicket(data: CreateRecurringTickets) {
+
     data.setRequireUpdate(this.elRef.nativeElement.querySelector('#requireUpdate').checked);
     data.setQuickClose(this.elRef.nativeElement.querySelector('#quickClose').checked);
     data.setCreateTask(this.elRef.nativeElement.querySelector('#createTask').checked);
@@ -23,23 +24,37 @@ public editAgent:RecurringTicketAgent;
   public clearData() {
     this.elRef.nativeElement.querySelector('#service-description').value = '';
   }
-  public setDescription (val) {
-    this.elRef.nativeElement.querySelector('#service-description').value =val;
+  public setDescription(val) {
+    this.elRef.nativeElement.querySelector('#service-description').value = val;
   }
-  public addSubscription (data) {
+  public addSubscription(data) {
     this.sub.add(data);
   }
-  public clearSubscriptions () {
-   this.sub.unsubscribe();
+  public clearSubscriptions() {
+    this.sub.unsubscribe();
   }
-  public getNavDate(date:Date) {
-    return  {next :{
-      year: date.getFullYear(),
-      month: date.getMonth() + 1
-    }};
+  public getNavDate(date: Date) {
+    return {
+      next: {
+        year: date.getFullYear(),
+        month: date.getMonth() + 1
+      }
+    };
   }
-  public getProductsForEdit (list:Array<ProductRecurringTicket>) {
-    let products:Array<ForCreateProduct> = [];
+  public setTagsForEdit(tags) {
+    this.tagsState.setTagsFromtEdit(tags);
+  }
+  public setRequireUpdate (requireUpdate) {
+    this.elRef.nativeElement.querySelector('#requireUpdate').checked = requireUpdate;
+  }
+  public setQuickClose (quickClose) {
+    this.elRef.nativeElement.querySelector('#quickClose').checked = quickClose;
+  }
+  public setCreateTask (createTask) {
+    this.elRef.nativeElement.querySelector('#createTask').checked = createTask;
+  }
+  public getProductsForEdit(list: Array<ProductRecurringTicket>) {
+    let products: Array<ForCreateProduct> = [];
     list.forEach((item) => {
       let product = new ForCreateProduct();
       product.setDataFromEdit(item);
@@ -48,8 +63,8 @@ public editAgent:RecurringTicketAgent;
     return products;
   }
 
-  public getServicesForEdit (list:Array<ServiceRecurringTicket>) {
-    let services:Array<ForCreateService> = [];
+  public getServicesForEdit(list: Array<ServiceRecurringTicket>) {
+    let services: Array<ForCreateService> = [];
     list.forEach((item) => {
       let service = new ForCreateService();
       service.setDataFromEdit(item);

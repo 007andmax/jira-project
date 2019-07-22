@@ -27,6 +27,7 @@ export class TagsComponent implements OnInit, OnDestroy {
   selectedTag = [];
   tags: Array<Tag> = [];
   sub = new Subscription();
+  editItem:any;
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
   @Output() tagsChange = new EventEmitter();
@@ -57,6 +58,13 @@ export class TagsComponent implements OnInit, OnDestroy {
       }
     }
     this.onInitClearState();
+    this.onCheckEditItem();
+  }
+  private onCheckEditItem () {
+    let getTagsFromEdit = this.tagsState.getTagsFromEdit().subscribe((data) => {
+      this.selectedTag = data;
+    });
+    this.sub.add(getTagsFromEdit);
   }
 
   private onInitClearState() {
