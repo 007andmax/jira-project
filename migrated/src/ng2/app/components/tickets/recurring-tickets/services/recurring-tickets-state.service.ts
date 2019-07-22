@@ -3,6 +3,7 @@ import { CreateRecurringTickets } from '../recurring-tickets-edit-aside/class/cr
 import { RecurringTicket } from '../class/recurring-ticket';
 import { Ticket } from '../../class/ticket';
 import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
+import { RecurringTicketUser } from '../interfaces/recurring-ticket-user';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class RecurringTicketsStateService {
   public client: any;
   public tecketForCreate: Ticket = new Ticket();
   public onEditMode: EventEmitter<any> = new EventEmitter();
+ 
   constructor(  private companiesService: CompaniesService) { }
 
   public onInitClientList() {

@@ -11,10 +11,11 @@ import { RecurringTicketsStateService } from '../services/recurring-tickets-stat
 })
 export class RecurringTicketsTableComponent implements OnInit {
   @Input() ticket: RecurringTicket;
-  constructor(  private recurringState: RecurringTicketsStateService,) { }
+  public showSelect = false;
+  constructor(private recurringState: RecurringTicketsStateService, ) { }
 
   ngOnInit() {
-    console.log('ticket',this.ticket);
+    console.log('ticket', this.ticket);
   }
 
   public getPareDate(milisecong) {
@@ -26,8 +27,26 @@ export class RecurringTicketsTableComponent implements OnInit {
     return `${name[0].toUpperCase()}${name[1].toUpperCase()}`;
   }
 
-  public editTicket () {
+  public editTicket() {
     this.recurringState.onInitEditTicket(this.ticket);
+  }
+  public trackByIndex(index, item) {
+    return index;
+  }
+  /**
+ * show selecct wrapper
+ */
+  public showSelectWrapper($event) {
+    this.showSelect = !this.showSelect;
+    this.stopEvent($event);
+  }
+
+  /**
+   * stop event
+   */
+  private stopEvent($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
   }
 
 }

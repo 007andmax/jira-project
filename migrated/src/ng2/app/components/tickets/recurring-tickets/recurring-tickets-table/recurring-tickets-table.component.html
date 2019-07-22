@@ -12,6 +12,66 @@
   <div class="col-md-1" [textContent]="getPareDate(ticket.startDate)"></div>
   <div class="col-md-1">Daily</div>
   <div class="col-md-2 assigned-container">
+
+      <ng-template ngFor let-user [ngForOf]="ticket.assignedUsers" let-i="index" [ngForTrackBy]="trackByIndex" >
+          <img ng-if="user.avatar" class="img-circle avatar-26"
+          style="margin: 0;"
+          [src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')"
+          alt="..." *ngIf="i < 3">
+  
+
+        </ng-template>
+        <p *ngIf="ticket.assignedUsers.length > 3" [textContent]="'+' + (ticket.assignedUsers.length - 3) + ' more'" (click)="showSelectWrapper($event)"></p>
+
+        <div class="select-wrapper dropdown-assign-ticket fixed-assign" *ngIf="showSelect">
+
+            <div class="content" (click)="$event.preventDefault()">
+          
+              <form class="px-4 py-3">
+                <div class="assign-ticket" assign-user="">
+          
+                  <div class="assign-ticket-content">
+              
+                    <div class="scroll-pane">
+                      <div class="users-list custom-scroll" tabindex="-1"
+                           style="position: absolute; z-index: 9999;padding: 0; max-height: 171px;">
+                        <ng-template ngFor let-user [ngForOf]="ticket.assignedUsers" let-i="index" [ngForTrackBy]="trackByIndex">
+                          <div class="user-item" data-index="1"><a href="javascript:void(0)"
+                                                                                           [id]="user.id" class="dropdown-link">
+                            <div class="default-user-avatar avatar-background-color-odd ng-scope" *ngIf="!user.avatar">
+                              <span [textContent]="user.firstName[0].toUpperCase()"></span>
+                              <span [textContent]="user.lastName[0].toUpperCase()"></span>
+                            </div>
+                            <div class="default-user-avatar avatar-background-color-odd ng-scope" *ngIf="user.avatar">
+                              <img ng-if="user.avatar" class="img-circle avatar-26"
+                                   style="margin: 0;"
+                                   [src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')"
+                                   alt="...">
+                            </div>
+                            <span>
+                                <p [textContent]="user.firstName + ' ' + user.lastName"></p>
+                                <p [textContent]="user.primaryEmail" style="margin: 0;"></p>
+                              </span>
+                          </a></div>
+                        </ng-template>
+          
+          
+                      </div>
+                    </div>
+                  </div>
+          
+          
+                </div>
+          
+          
+              </form>
+          
+          
+            </div>
+          </div>
+          
+
+
     <div class="assigned-wrapper"></div>
 
     <div class="grey-dropdown right with-icons"

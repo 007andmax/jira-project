@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { RecurringService } from 'src/ng2/app/services/recurring/recurring.service';
 import { RecurringTicket } from './class/recurring-ticket';
 import { RecurringTicketsListService } from './services/recurring-tickets-list.service';
+import { RecurringTicketsStateService } from './services/recurring-tickets-state.service';
+import { RecurringTicketUser } from './interfaces/recurring-ticket-user';
 
 @Component({
   selector: 'app-recurring-tickets',
@@ -19,15 +21,15 @@ export class RecurringTicketsComponent implements OnInit {
   public ticketList: Array<RecurringTicket> = [];
   constructor(
     private recurringService: RecurringService,
-    private listSerivce: RecurringTicketsListService
+    private listSerivce: RecurringTicketsListService,
+    private recurringState: RecurringTicketsStateService
 
   ) { }
 
   ngOnInit() {
     this.getTicket();
+   
   }
-
-
   public getTicket() {
     this.recurringService.getTicketsList(this.page_number, this.items_per_page, this.sort, this.direction).subscribe((res: Array<RecurringTicket>) => {
       this.ticketList = [...this.ticketList, ...res];
