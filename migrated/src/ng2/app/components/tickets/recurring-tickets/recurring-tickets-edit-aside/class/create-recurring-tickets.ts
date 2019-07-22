@@ -9,7 +9,7 @@ export class CreateRecurringTickets {
     createTask: boolean;
     company: string;
     tags: Array<String>;
-    agents: Array<String>;
+    agent: String;
     assignedUsers: Array<String>;
     products: Array<CreateRecurringTicketsProduct>;
     services: Array<CreateRecurringTicketsService>;
@@ -44,11 +44,11 @@ public setCreateTask (createTask) {
     }
 
     public clearAgents() {
-        this.agents = [];
+        this.agent ='';
     }
-    public addAgents(agent) {
+    public setAgents(agent) {
         console.log('agent',agent);
-        this.agents.push(agent);
+        this.agent = agent;
     }
     public setCronExpression(cronExpression) {
         this.cronExpression = cronExpression;

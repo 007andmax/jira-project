@@ -267,7 +267,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit {
   public selectDevice(item) {
     console.log('item', item);
     this.recurringState.getCreateTicket().clearAgents();
-    if (item) this.recurringState.getCreateTicket().addAgents(item.item.agentId);
+    if (item) this.recurringState.getCreateTicket().setAgents(item.item.agentId);
   }
   public onChangeTags(tags) {
 
