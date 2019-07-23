@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Injectable()
 export class IntervalService {
-
+  sub:Subscription = new Subscription();
   constructor() { }
   public getDefaultOptions() {
     return  {
@@ -29,4 +30,11 @@ export class IntervalService {
       cronFlavor: "quartz"
     };
   }
+  public addSubscription(item) {
+    this.sub.add(item);
+  }
+  public clearSubscriptions () {
+    this.sub.unsubscribe();
+  }
+  
 }

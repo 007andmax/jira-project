@@ -4,6 +4,7 @@
        ngbDropdown>
     <input type="text"
            class="pointer"
+           [value]="title"
            placeholder="Select Interval"
            id="dropdownForm2"
            ngbDropdownToggle>
@@ -35,7 +36,7 @@
             <span class="radio-mark"></span>
           </label>
         </div>
-        <!--IF TYPE 'WEEKLY'-------------------------------->
+        <!--IF TYPE 'daily'-------------------------------->
         <div class="recurring-interval-dropdown__content clearfix" *ngIf="activeTab === 'daily'">
           <div class="col-md-6 p-0">
             <label class="checkbox-container">Monday
@@ -87,7 +88,7 @@
         </div>
         <!------------------------------------------------------------->
 
-        <!--IF TYPE 'DAILY' OR -------------------------------->
+        <!--IF TYPE 'weekly' OR -------------------------------->
         <div class="recurring-interval-dropdown__content clearfix" *ngIf="activeTab === 'weekly'">
           <div class="col-md-6 p-0">
             <label class="checkbox-container">Monday
@@ -144,8 +145,8 @@
           <ngb-datepicker
             [navigation]="navigation"
             [(ngModel)]="datepicker"
+            [outsideDays]="outsideDays"
             (select)="selectDate($event)"
-            (navigate)="navigateDate($event)"
             [startDate]="datepicker"
             [ngModelOptions]="{standalone: true}"></ngb-datepicker>
           <div class="date-picker-actions d-f">

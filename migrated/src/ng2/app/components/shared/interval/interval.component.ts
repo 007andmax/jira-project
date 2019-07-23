@@ -1,9 +1,10 @@
-import { Component, OnInit, OnChanges, Input, Output, EventEmitter, SimpleChanges, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter, SimpleChanges, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { CronOptions } from 'src/ng2/app/components/shared/interval/interfaces/cron/cront-option';
 import { Days, MonthWeeks, Months } from './config/enums';
 import { IntervalService } from './services/interval.service';
 import { NgbDateStruct, NgbCalendar, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDatepickerNavigateEvent } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker';
+import { IntervalStateService } from './services/interval-state.service';
 
 
 @Component({
@@ -12,12 +13,15 @@ import { NgbDatepickerNavigateEvent } from '@ng-bootstrap/ng-bootstrap/datepicke
   styleUrls: ['./interval.component.scss'],
   providers: [IntervalService]
 })
-export class IntervalComponent implements OnInit, OnChanges {
+export class IntervalComponent implements OnInit, OnChanges,OnDestroy {
+ 
   public disabled: boolean = false;
   public options: CronOptions;
   public datepicker: NgbDateStruct;
-  public navigation = 'arrows';
-  public navDate: any;
+  public navigation = 'none';
+  public outsideDays = 'hidden';
+  public title: string = 'Daily';
+ 
   @Input() get cron(): string { return this.localCron; }
   set cron(value: string) {
     this.localCron = value;
@@ -32,7 +36,7 @@ export class IntervalComponent implements OnInit, OnChanges {
   public state: any;
 
   private localCron: string;
-  private isDirty: boolean;
+ // private isDirty: boolean;
 
   get isCronFlavorQuartz() { return this.options.cronFlavor === 'quartz'; }
   get isCronFlavorStandard() { return this.options.cronFlavor === 'standard'; }
@@ -42,15 +46,14 @@ export class IntervalComponent implements OnInit, OnChanges {
   get monthDayDefaultChar() { return this.options.cronFlavor === 'quartz' ? "?" : "*"; }
   constructor(private intervalService: IntervalService,
     public cd: ChangeDetectorRef,
-    private calendar: NgbCalendar, ) {
+    private calendar: NgbCalendar,
+    private stateInterval: IntervalStateService) {
     this.datepicker = this.calendar.getToday();
   }
-  public ngOnInit() {
+  public async ngOnInit() {
     this.options = this.intervalService.getDefaultOptions();
     this.state = this.getDefaultState();
-
-    this.handleModelChange(this.cron);
-
+    this.onCheckClear();
   }
 
   public async ngOnChanges(changes: SimpleChanges) {
@@ -64,45 +67,31 @@ export class IntervalComponent implements OnInit, OnChanges {
     event; // makes the compiler happy
     if (!this.disabled) {
       this.activeTab = tab;
+      this.title = tab.charAt(0).toUpperCase() + tab.slice(1);
       this.regenerateCron();
     }
   }
+  private onCheckClear() {
+    console.log('onCheckClear 111');
+  let getClearState =  this.stateInterval.getClearState().subscribe(() => {
+      console.log('onCheckClear');
+      this.activeTab = 'daily';
+      this.title = 'Daily';
+      this.options = this.intervalService.getDefaultOptions();
+      this.state = this.getDefaultState();
 
-  public dayDisplay(day: string): string {
-    return Days[day];
+    })
+    this.intervalService.addSubscription(getClearState);
   }
 
-  public monthWeekDisplay(monthWeekNumber: number): string {
-    return MonthWeeks[monthWeekNumber];
-  }
 
-  public monthDisplay(month: number): string {
-    return Months[month];
-  }
-
-  public monthDayDisplay(month: string): string {
-    if (month === "L") {
-      return "Last Day";
-    } else if (month === "LW") {
-      return "Last Weekday";
-    } else if (month === "1W") {
-      return "First Weekday";
-    } else {
-      return `${month}${this.getOrdinalSuffix(month)} day`;
-    }
-  }
 
   public regenerateCron() {
     console.log('regenerateCron', this.datepicker);
-    this.isDirty = true;
+   // this.isDirty = true;
 
     switch (this.activeTab) {
-      case "minutes":
-        this.cron = `${this.isCronFlavorQuartz ? this.state.minutes.seconds : ''} 0/${this.state.minutes.minutes} * 1/1 * ${this.weekDayDefaultChar} ${this.yearDefaultChar}`.trim();
-        break;
-      case "hourly":
-        this.cron = `${this.isCronFlavorQuartz ? this.state.hourly.seconds : ''} ${this.state.hourly.minutes} 0/${this.state.hourly.hours} 1/1 * ${this.weekDayDefaultChar} ${this.yearDefaultChar}`.trim();
-        break;
+
       case "weekly":
         const days_weekly = this.selectOptions.days
           .reduce((acc, day) => this.state.weekly[day] ? acc.concat([day]) : acc, [])
@@ -116,34 +105,11 @@ export class IntervalComponent implements OnInit, OnChanges {
         this.cron = `${this.isCronFlavorQuartz ? this.state.daily.seconds : ''} ${this.state.daily.minutes} ${this.hourToCron(this.state.daily.hours, this.state.daily.hourType)} ${this.monthDayDefaultChar} * ${days} ${this.yearDefaultChar}`.trim();
         break;
       case "monthly":
-        switch (this.state.monthly.subTab) {
-          case "specificDay":
-            this.cron = `${this.isCronFlavorQuartz ? this.state.monthly.specificDay.seconds : ''} ${this.state.monthly.specificDay.minutes} ${this.hourToCron(this.state.monthly.specificDay.hours, this.state.monthly.specificDay.hourType)} ${this.datepicker.day} ${this.datepicker.month}/1 ${this.weekDayDefaultChar} ${this.yearDefaultChar}`.trim();
-            break;
-          case "specificWeekDay":
-            this.cron = `${this.isCronFlavorQuartz ? this.state.monthly.specificWeekDay.seconds : ''} ${this.state.monthly.specificWeekDay.minutes} ${this.hourToCron(this.state.monthly.specificWeekDay.hours, this.state.monthly.specificWeekDay.hourType)} ${this.monthDayDefaultChar} ${this.datepicker.month}/1 ${this.state.monthly.specificWeekDay.day}${this.state.monthly.specificWeekDay.monthWeek} ${this.yearDefaultChar}`.trim();
-            break;
-          default:
-            throw "Invalid cron monthly subtab selection";
-        }
+        if (this.datepicker.day <= 28) this.cron = `0 0 0 ${this.datepicker.day} JAN-DEC ? *`;
+        if (this.datepicker.day === 29 || this.datepicker.day === 30) this.cron = `0 0 0 ${this.datepicker.day} JAN,MAR-DEC ? *`;
+        if (this.datepicker.day === 31) this.cron = `0 0 0 L * ? *`;
         break;
-      case "yearly":
-        switch (this.state.yearly.subTab) {
-          case "specificMonthDay":
-            this.cron = `${this.isCronFlavorQuartz ? this.state.yearly.specificMonthDay.seconds : ''} ${this.state.yearly.specificMonthDay.minutes} ${this.hourToCron(this.state.yearly.specificMonthDay.hours, this.state.yearly.specificMonthDay.hourType)} ${this.state.yearly.specificMonthDay.day} ${this.state.yearly.specificMonthDay.month} ${this.weekDayDefaultChar} ${this.yearDefaultChar}`.trim();
-            break;
-          case "specificMonthWeek":
-            this.cron = `${this.isCronFlavorQuartz ? this.state.yearly.specificMonthWeek.seconds : ''} ${this.state.yearly.specificMonthWeek.minutes} ${this.hourToCron(this.state.yearly.specificMonthWeek.hours, this.state.yearly.specificMonthWeek.hourType)} ${this.monthDayDefaultChar} ${this.state.yearly.specificMonthWeek.month} ${this.state.yearly.specificMonthWeek.day}${this.state.yearly.specificMonthWeek.monthWeek} ${this.yearDefaultChar}`.trim();
-            break;
-          default:
-            throw "Invalid cron yearly subtab selection";
-        }
-        break;
-      case "advanced":
-        this.cron = this.state.advanced.expression;
-        break;
-      default:
-        throw "Invalid cron active tab selection";
+
     }
 
   }
@@ -165,12 +131,12 @@ export class IntervalComponent implements OnInit, OnChanges {
   }
 
   private handleModelChange(cron: string) {
-    if (this.isDirty) {
+    /*if (this.isDirty) {
       this.isDirty = false;
       return;
     } else {
       this.isDirty = false;
-    }
+    }*/
 
     if (!this.cronIsValid(cron)) {
       if (this.isCronFlavorQuartz)
@@ -294,10 +260,8 @@ export class IntervalComponent implements OnInit, OnChanges {
   private cronIsValid(cron: string): boolean {
     if (cron) {
       const cronParts = cron.split(" ");
-
       return (this.isCronFlavorQuartz && (cronParts.length === 6 || cronParts.length === 7) || (this.isCronFlavorStandard && cronParts.length === 5));
     }
-
     return false;
   }
 
@@ -305,15 +269,6 @@ export class IntervalComponent implements OnInit, OnChanges {
     const [defaultHours, defaultMinutes, defaultSeconds] = this.options.defaultTime.split(":").map(Number);
 
     return {
-      minutes: {
-        minutes: 1,
-        seconds: 0
-      },
-      hourly: {
-        hours: 1,
-        minutes: 0,
-        seconds: 0
-      },
       daily: {
         MON: true,
         TUE: false,
@@ -359,53 +314,11 @@ export class IntervalComponent implements OnInit, OnChanges {
           seconds: defaultSeconds,
           hourType: this.getHourType(defaultHours)
         }
-      },
-      yearly: {
-        subTab: "specificMonthDay",
-        specificMonthDay: {
-          month: 1,
-          day: "1",
-          hours: this.getAmPmHour(defaultHours),
-          minutes: defaultMinutes,
-          seconds: defaultSeconds,
-          hourType: this.getHourType(defaultHours)
-        },
-        specificMonthWeek: {
-          monthWeek: "#1",
-          day: "MON",
-          month: 1,
-          hours: this.getAmPmHour(defaultHours),
-          minutes: defaultMinutes,
-          seconds: defaultSeconds,
-          hourType: this.getHourType(defaultHours)
-        }
-      },
-      advanced: {
-        expression: this.isCronFlavorQuartz ? "0 15 10 L-2 * ? *" : "15 10 2 * *"
       }
     };
   }
 
-  private getOrdinalSuffix(value: string) {
-    if (value.length > 1) {
-      const secondToLastDigit = value.charAt(value.length - 2);
-      if (secondToLastDigit === "1") {
-        return "th";
-      }
-    }
 
-    const lastDigit = value.charAt(value.length - 1);
-    switch (lastDigit) {
-      case "1":
-        return "st";
-      case "2":
-        return "nd";
-      case "3":
-        return "rd";
-      default:
-        return "th";
-    }
-  }
 
   private getSelectOptions() {
     return {
@@ -435,9 +348,7 @@ export class IntervalComponent implements OnInit, OnChanges {
     this.regenerateCron();
   }
 
-  public navigateDate(data: NgbDatepickerNavigateEvent) {
-    this.navDate = data;
-  }
+
   public selectStartMonth() {
     let date = this.calendar.getToday();
     date.day = 1;
@@ -453,6 +364,8 @@ export class IntervalComponent implements OnInit, OnChanges {
     this.datepicker = date;
     this.regenerateCron();
   }
+  ngOnDestroy(): void {
+   this.intervalService.clearSubscriptions();
+  }
 
-  
 }

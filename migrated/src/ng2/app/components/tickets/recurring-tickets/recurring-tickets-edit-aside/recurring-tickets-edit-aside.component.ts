@@ -22,6 +22,7 @@ import { CreateRecurringTicketsService } from './class/create-recurring-tickets-
 import { RecurringTicketsService } from './services/recurring-tickets.service';
 import { RecurringTicket } from '../class/recurring-ticket';
 import { RecurringTicketCompany } from '../interfaces/recurring-ticket-company';
+import { IntervalStateService } from '../../../shared/interval/services/interval-state.service';
 
 @Component({
   selector: 'app-recurring-tickets-edit-aside',
@@ -66,6 +67,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     private tehState: TehUsersSateService,
     private recurringState: RecurringTicketsStateService,
     public createService: RecurringTicketsService,
+    private stateInterval:IntervalStateService 
 
   ) { }
 
@@ -240,6 +242,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.createService.clearData();
     this.navDate = null;
     this.datepicker = this.calendar.getToday();
+    this.stateInterval.onInitClearState();
   }
 
 
