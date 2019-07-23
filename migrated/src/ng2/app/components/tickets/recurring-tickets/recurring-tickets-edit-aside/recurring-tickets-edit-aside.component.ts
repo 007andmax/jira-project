@@ -65,7 +65,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     private tagsState: TagsStateService,
     private tehState: TehUsersSateService,
     private recurringState: RecurringTicketsStateService,
-    public createService: RecurringTicketsService
+    public createService: RecurringTicketsService,
 
   ) { }
 
@@ -100,6 +100,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.createService.setCreateTask(data.createTask);
     this.createService.setRequireUpdate(data.requireUpdate);
     this.createService.setQuickClose(data.quickClose);
+    this.tehState.setUsersFromtEdit(data.assignedUsers);
     // this.cd.detectChanges();
   }
   public selectClient(selectClient) {

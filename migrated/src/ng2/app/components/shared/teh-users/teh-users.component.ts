@@ -1,7 +1,8 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy, Input } from '@angular/core';
 import { TehUsersService } from 'src/ng2/app/services/teh-users/teh-users.service';
 import { TehUsersSateService } from './services/teh-users-sate.service';
 import { Subscription } from 'rxjs';
+import { RecurringTicketUser } from '../../tickets/recurring-tickets/interfaces/recurring-ticket-user';
 
 @Component({
   selector: 'app-teh-users',
@@ -9,11 +10,12 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./teh-users.component.scss']
 })
 export class TehUsersComponent implements OnInit, OnDestroy {
-  public usersList = [];
+  public usersList:any = [];
   public showSelect = false;
   public selectedUsers = [];
   resUserList = [];
   sub = new Subscription();
+ 
   @Output() usersChange = new EventEmitter();
   constructor(private tehService: TehUsersService,
     private tehState: TehUsersSateService,
@@ -36,6 +38,19 @@ export class TehUsersComponent implements OnInit, OnDestroy {
 
     })
     this.onInitClearState();
+    this.checUsersForEdit();
+  }
+  private checUsersForEdit () {
+   let getUsersFromEdit = this.tehState.getUsersFromEdit().subscribe((data:Array<RecurringTicketUser>) => {
+     console.log('data',data);
+     console.log('this.usersList',this.usersList);
+    this.usersList.forEach((item) => {
+      let index = data.findIndex(user => user.id === item.id);
+      if (index > (-1)) this.usersList[index].selected = true;
+    })
+
+    })
+    this.sub.add(getUsersFromEdit);
   }
 
   private onInitClearState() {
