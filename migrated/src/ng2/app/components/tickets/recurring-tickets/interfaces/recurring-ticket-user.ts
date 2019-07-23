@@ -1,3 +1,5 @@
+import { UserAvatar } from './user-avatar';
+
 export interface RecurringTicketUser {
     id: string;
     firstName:string;
@@ -11,4 +13,5 @@ export interface RecurringTicketUser {
     contact: boolean;
     owner: boolean;
     emailVerified: boolean;
+    avatar:UserAvatar;
 }
