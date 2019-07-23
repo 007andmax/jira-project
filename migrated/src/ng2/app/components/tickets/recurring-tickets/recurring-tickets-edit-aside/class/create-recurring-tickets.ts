@@ -17,16 +17,16 @@ export class CreateRecurringTickets {
     constructor() {
 
     }
-public setRequireUpdate (requireUpdate) {
-    this.requireUpdate = requireUpdate;
-}
-public setQuickClose (quickClose) {
-    this.quickClose = quickClose;
-}
+    public setRequireUpdate(requireUpdate) {
+        this.requireUpdate = requireUpdate;
+    }
+    public setQuickClose(quickClose) {
+        this.quickClose = quickClose;
+    }
 
-public setCreateTask (createTask) {
-    this.createTask = createTask;
-}
+    public setCreateTask(createTask) {
+        this.createTask = createTask;
+    }
 
 
     public clearTehUsers() {
@@ -44,10 +44,10 @@ public setCreateTask (createTask) {
     }
 
     public clearAgents() {
-        this.agent ='';
+        this.agent = '';
     }
     public setAgents(agent) {
-        console.log('agent',agent);
+        console.log('agent', agent);
         this.agent = agent;
     }
     public setCronExpression(cronExpression) {
@@ -59,7 +59,7 @@ public setCreateTask (createTask) {
     public setStartDate(day, month, year) {
         this.startDate = new Date(year, month - 1, day).getTime();
     }
-    public setDescription (description) {
+    public setDescription(description) {
         this.description = description;
     }
     public clearProducts() {

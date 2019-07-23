@@ -47,7 +47,7 @@ export class IntervalComponent implements OnInit, OnChanges,OnDestroy {
   constructor(private intervalService: IntervalService,
     public cd: ChangeDetectorRef,
     private calendar: NgbCalendar,
-    private stateInterval: IntervalStateService) {
+    private stateInterval: IntervalStateService,) {
     this.datepicker = this.calendar.getToday();
   }
   public async ngOnInit() {
@@ -79,6 +79,7 @@ export class IntervalComponent implements OnInit, OnChanges,OnDestroy {
       this.title = 'Daily';
       this.options = this.intervalService.getDefaultOptions();
       this.state = this.getDefaultState();
+      this.datepicker = this.calendar.getToday();
 
     })
     this.intervalService.addSubscription(getClearState);
@@ -129,6 +130,7 @@ export class IntervalComponent implements OnInit, OnChanges,OnDestroy {
       return hourType === "AM" ? (hour === 12 ? 0 : hour) : (hour === 12 ? 12 : hour + 12);
     }
   }
+  
 
   private handleModelChange(cron: string) {
     /*if (this.isDirty) {

@@ -49,4 +49,19 @@ export class RecurringTicketsTableComponent implements OnInit {
     $event.stopPropagation();
   }
 
+  public getTypeCron(cron: string) {
+   if (cron.match(/\d+ \d+ \d+ 1\/\d+ \* [\?\*] \*/)) {
+      return "Daily";
+    } else if (cron.match(/\d+ \d+ \d+ [\?\*] \* MON-FRI \*/)) {
+      return  "Daily";
+    } else if (cron.match(/\d+ \d+ \d+ [\?\*] \* (MON|TUE|WED|THU|FRI|SAT|SUN)(,(MON|TUE|WED|THU|FRI|SAT|SUN))* \*/)) {
+      return  "Weekly";
+    } else if (cron.match(/\d+ \d+ \d+ (\d+|L|LW|1W) 1\/\d+ [\?\*] \*/)) {
+      return  "Monthly";
+    } else if (cron.match(/\d+ \d+ \d+ [\?\*] 1\/\d+ (MON|TUE|WED|THU|FRI|SAT|SUN)((#[1-5])|L) \*/)) {
+      return  "Monthly";
+    } 
+    return "";
+  }
+
 }

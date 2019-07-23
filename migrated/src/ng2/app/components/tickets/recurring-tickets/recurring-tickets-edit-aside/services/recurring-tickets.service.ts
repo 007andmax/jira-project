@@ -7,12 +7,14 @@ import { ForCreateProduct } from '../../class/for-create-product';
 import { ForCreateService } from '../../class/for-create-service';
 import { ServiceRecurringTicket } from '../../interfaces/service-recurring-ticket';
 import { TagsStateService } from 'src/ng2/app/components/shared/tags/services/tags-state.service';
+import { IntervalStateService } from 'src/ng2/app/components/shared/interval/services/interval-state.service';
 
 @Injectable()
 export class RecurringTicketsService {
   sub: Subscription = new Subscription();
   public editAgent: RecurringTicketAgent;
-  constructor(private elRef: ElementRef, private tagsState: TagsStateService) { }
+  constructor(private elRef: ElementRef, private tagsState: TagsStateService,
+    private stateInterval: IntervalStateService) { }
 
   public setRulesCreateTicket(data: CreateRecurringTickets) {
 
@@ -44,13 +46,13 @@ export class RecurringTicketsService {
   public setTagsForEdit(tags) {
     this.tagsState.setTagsFromtEdit(tags);
   }
-  public setRequireUpdate (requireUpdate) {
+  public setRequireUpdate(requireUpdate) {
     this.elRef.nativeElement.querySelector('#requireUpdate').checked = requireUpdate;
   }
-  public setQuickClose (quickClose) {
+  public setQuickClose(quickClose) {
     this.elRef.nativeElement.querySelector('#quickClose').checked = quickClose;
   }
-  public setCreateTask (createTask) {
+  public setCreateTask(createTask) {
     this.elRef.nativeElement.querySelector('#createTask').checked = createTask;
   }
   public getProductsForEdit(list: Array<ProductRecurringTicket>) {
@@ -71,5 +73,8 @@ export class RecurringTicketsService {
       services.push(service);
     })
     return services;
+  }
+  public setDefaultDate() {
+    this.stateInterval.onInitClearState();
   }
 }

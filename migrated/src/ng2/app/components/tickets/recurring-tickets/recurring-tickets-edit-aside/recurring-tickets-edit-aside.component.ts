@@ -67,7 +67,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     private tehState: TehUsersSateService,
     private recurringState: RecurringTicketsStateService,
     public createService: RecurringTicketsService,
-    private stateInterval:IntervalStateService 
+   
 
   ) { }
 
@@ -242,7 +242,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.createService.clearData();
     this.navDate = null;
     this.datepicker = this.calendar.getToday();
-    this.stateInterval.onInitClearState();
+ this.createService.setDefaultDate();
   }
 
 
