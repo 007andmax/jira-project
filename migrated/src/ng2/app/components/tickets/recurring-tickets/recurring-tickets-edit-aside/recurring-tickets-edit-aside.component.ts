@@ -67,7 +67,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     private tehState: TehUsersSateService,
     private recurringState: RecurringTicketsStateService,
     public createService: RecurringTicketsService,
-   
+
 
   ) { }
 
@@ -76,6 +76,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.getItemListProducts();
     this.recurringState.onInitClientList();
     this.onCheckEditMode();
+    console.log('ticketForEdit', this.ticketForEdit);
 
   }
   private onCheckEditMode() {
@@ -95,14 +96,24 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     let date = new Date(data.startDate);
     this.navDate = this.createService.getNavDate(date);
     let ngbDate: NgbDate = new NgbDate(date.getFullYear(), date.getMonth() + 1, date.getDay());
-    this.selectDate(ngbDate);
+    this.selectDateEditMode(ngbDate);
+   
     this.products = this.createService.getProductsForEdit(data.products);
     this.services = this.createService.getServicesForEdit(data.services);
     this.createService.setTagsForEdit(data.tags);
     this.createService.setCreateTask(data.createTask);
     this.createService.setRequireUpdate(data.requireUpdate);
     this.createService.setQuickClose(data.quickClose);
+   // this.recurringState.getCreateTicket().setCreateTask(data.createTask);
+   // this.recurringState.getCreateTicket().setRequireUpdate(data.requireUpdate);
+  //  this.recurringState.getCreateTicket().setQuickClose(data.quickClose);
     this.tehState.setUsersFromtEdit(data.assignedUsers);
+  //  this.recurringState.getCreateTicket().setDescription(data.description);
+  //  this.selectClient({item: data.company});
+   // this.recurringState.getCreateTicket().setCronExpression(data.cronExpression);
+   // this.onChangeTags(data.tags);
+   //this.onChangeTehUsers(data.assignedUsers);
+   
     // this.cd.detectChanges();
   }
   public selectClient(selectClient) {
@@ -139,6 +150,11 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
 
   public onChangeDescription(event) {
     this.recurringState.getCreateTicket().setDescription(event.target.value);
+  }
+  public selectDateEditMode(data: NgbDate) {
+    this.datepicker = data;
+    if (this.navDate) this.editService.updateMonthAndYearDatePicker(this.datepicker, this.navDate);
+    this.date.setTitle(this.datepicker);
   }
   public selectDate(data: NgbDate) {
     this.datepicker = data;
@@ -224,26 +240,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     });
   }
 
-  public close() {
-    this.opened = false;
-    this.showDatePicker = false;
-    this.products = [new ForCreateProduct()];
-    this.services = [new ForCreateService()];
-    this.isFormValid = false;
-    this.type = "products";
-    this.selectedClient = null;
-    this.devicesList = [];
-    this.tehUsers = [];
-    this.companiesState.onInitClear();
-    this.devicesState.onInitClear();
-    this.date.clearTitle();
-    this.tagsState.onInitClear();
-    this.tehState.onInitClear();
-    this.createService.clearData();
-    this.navDate = null;
-    this.datepicker = this.calendar.getToday();
- this.createService.setDefaultDate();
-  }
+ 
 
 
   /**
@@ -351,14 +348,46 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.createService.setRulesCreateTicket(this.recurringState.getCreateTicket());
     this.products.forEach((item: ForCreateProduct) => (item.name || item.description) && this.recurringState.getCreateTicket().addProdct(new CreateRecurringTicketsProduct(item.versionedId.id, item.quantity, item.discount)));
     this.services.forEach((item: ForCreateService) => (item.name || item.description) && this.recurringState.getCreateTicket().addService(new CreateRecurringTicketsService(item.versionedId.id, item.description, item.duration)));
-    console.log('data', this.recurringState.getCreateTicket());
 
-    this.recurringService.createTicket(this.recurringState.getCreateTicket()).subscribe((res) => {
-      console.log('res', res);
-      this.close();
-    })
+        console.log('data', this.recurringState.getCreateTicket());
+    if (this.ticketForEdit.id) {
+    
+      this.recurringService.editTicket(this.ticketForEdit, this.recurringState.getCreateTicket()).subscribe((res) => {
+        console.log('res', res);
+        this.close();
+      })
+    } else {
+    
+      this.recurringService.createTicket(this.recurringState.getCreateTicket()).subscribe((res) => {
+        console.log('res', res);
+        this.close();
+      })
+    }
+
   }
+  public close() {
+    this.opened = false;
+    this.showDatePicker = false;
+    this.products = [new ForCreateProduct()];
+    this.services = [new ForCreateService()];
+    this.isFormValid = false;
+    this.type = "products";
+    this.selectedClient = null;
+    this.devicesList = [];
+    this.tehUsers = [];
+    this.companiesState.onInitClear();
+    this.devicesState.onInitClear();
+    this.date.clearTitle();
+    this.tagsState.onInitClear();
+    this.tehState.onInitClear();
+    this.createService.clearData();
+    this.navDate = null;
+    this.datepicker = this.calendar.getToday();
+    this.createService.setDefaultDate();
+    this.recurringState.clearCreateTicket();
 
+    this.ticketForEdit = new RecurringTicket();
+  }
   ngOnDestroy(): void {
     this.createService.clearSubscriptions();
   }

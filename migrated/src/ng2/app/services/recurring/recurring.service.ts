@@ -4,6 +4,7 @@ import { environment } from 'src/ng2/environments/environment';
 import { tap, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { CreateRecurringTickets } from '../../components/tickets/recurring-tickets/recurring-tickets-edit-aside/class/create-recurring-tickets';
+import { RecurringTicket } from '../../components/tickets/recurring-tickets/class/recurring-ticket';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,11 @@ export class RecurringService {
 
   public createTicket(data:CreateRecurringTickets) {
     return this.http.post(this.apiUrl + `recurringTickets/create`, data).pipe(
+      tap(res => res), 
+      catchError(this.handleError));
+  }
+  public editTicket(ticket:RecurringTicket, data:CreateRecurringTickets) {
+    return this.http.put(this.apiUrl + `recurringTickets/${ticket.id}/edit`, data).pipe(
       tap(res => res), 
       catchError(this.handleError));
   }

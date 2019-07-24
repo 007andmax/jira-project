@@ -28,7 +28,7 @@ export class RecurringTicketsComponent implements OnInit {
 
   ngOnInit() {
     this.getTicket();
-   
+
   }
   public getTicket() {
     this.recurringService.getTicketsList(this.page_number, this.items_per_page, this.sort, this.direction).subscribe((res: Array<RecurringTicket>) => {

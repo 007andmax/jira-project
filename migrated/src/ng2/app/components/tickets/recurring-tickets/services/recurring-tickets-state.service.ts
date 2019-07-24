@@ -36,4 +36,8 @@ export class RecurringTicketsStateService {
   public getEditMode() {
     return this.onEditMode;
   }
+  public clearCreateTicket () {
+    this.crate = new CreateRecurringTickets();
+  }
+ 
 }

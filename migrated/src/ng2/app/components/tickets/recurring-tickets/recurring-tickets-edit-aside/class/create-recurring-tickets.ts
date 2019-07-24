@@ -2,18 +2,18 @@ import { CreateRecurringTicketsProduct } from './create-recurring-tickets-produc
 import { CreateRecurringTicketsService } from './create-recurring-tickets-service';
 
 export class CreateRecurringTickets {
-    description: string;
-    cronExpression: string;
-    requireUpdate: boolean;
-    quickClose: boolean;
-    createTask: boolean;
-    company: string;
-    tags: Array<String>;
-    agent: String;
-    assignedUsers: Array<String>;
-    products: Array<CreateRecurringTicketsProduct>;
-    services: Array<CreateRecurringTicketsService>;
-    startDate: number;
+    description: string = null;
+    cronExpression: string = null;
+    requireUpdate: boolean = null;
+    quickClose: boolean = null;
+    createTask: boolean = null;
+    company: string = null;
+    tags: Array<String> = null;
+    agent: String = null;
+    assignedUsers: Array<String> = null;
+    products: Array<CreateRecurringTicketsProduct> = null;
+    services: Array<CreateRecurringTicketsService> = null;
+    startDate: number = null;
     constructor() {
 
     }

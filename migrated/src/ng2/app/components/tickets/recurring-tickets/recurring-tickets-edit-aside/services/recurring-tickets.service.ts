@@ -12,7 +12,6 @@ import { IntervalStateService } from 'src/ng2/app/components/shared/interval/ser
 @Injectable()
 export class RecurringTicketsService {
   sub: Subscription = new Subscription();
-  public editAgent: RecurringTicketAgent;
   constructor(private elRef: ElementRef, private tagsState: TagsStateService,
     private stateInterval: IntervalStateService) { }
 
@@ -77,4 +76,5 @@ export class RecurringTicketsService {
   public setDefaultDate() {
     this.stateInterval.onInitClearState();
   }
+
 }

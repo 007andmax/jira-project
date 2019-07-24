@@ -76,7 +76,7 @@ export class DevicesRecurringTicketsComponent implements OnInit,OnDestroy {
           console.log('index',index);
           if (index > (-1))  {
             this.selectedDevice = this.devicesList[index];
-            this.selectItem({item:this.devicesList[index]});
+          //  this.selectItem({item:this.devicesList[index]});
           }
         }
         
