@@ -81,7 +81,7 @@ export class WebsocketService {
     console.log('subsribeToRecurringTickets');
     setTimeout(() => {
       this.companiesService.getTechCompany().subscribe((res) => {
-        this.stompClient.subscribe(`/recurringTickets/{${res['id']}`, (message) => {
+        this.stompClient.subscribe(`/recurringTickets/${res['id']}`, (message) => {
           var newChange = JSON.parse(message.body);
           this.recurringTicketsRealTimeService.handleRealTimeChanges(newChange);
           if (message.body) {

@@ -116,8 +116,57 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
 
     // this.cd.detectChanges();
   }
+  public onChangeTags(tags) {
+    this.recurringState.getCreateTicket().clearTags();
+    tags.forEach((item) => {
+      this.recurringState.getCreateTicket().addTag(item.id);
+    })
+  }
+  public onChangeCron(data) {
+    console.log('data', data);
+    this.recurringState.getCreateTicket().setCronExpression(data);
+  }
+  public onChangeDescription(event) {
+    this.recurringState.getCreateTicket().setDescription(event.target.value);
+  }
+  private onInitCreateMod() {
+    this.recurringState.getCreateTicket().clearTehUsers();
+    this.recurringState.getCreateTicket().clearTags();
+    this.recurringState.getCreateTicket().clearAgents();
+    this.recurringState.getCreateTicket().setDefaultCron();
+  }
+  public onChangeTehUsers(tehusers) {
+    this.tehUsers = tehusers;
+    this.recurringState.getCreateTicket().clearTehUsers();
+    this.tehUsers.forEach((item) => {
+      this.recurringState.getCreateTicket().addAssignedUsers(item.id);
+    })
+
+  }
+  private getCompanyDevices() {
+    let company = this.recurringState.getClient();
+    company && this.devicesService.onInitHangle(company.id);
+  }
+
+  public getItemListProducts() {
+    this.productService.getCategories().subscribe((res: any) => {
+      this.productList = res;
+    });
+  }
+
+  public getItemListServices() {
+    const value = this.recurringState.getClient();
+    value && this.recurringService.getServiceList(value.id).subscribe((res: any) => {
+      this.servicesList = res;
+    })
+  }
+  public getNameOrDescription(item) {
+    if (item && item.name) return item.name;
+    if (item && item.description) return item.description;
+    return '';
+  }
   public selectClient(selectClient) {
-    
+
     if (selectClient === 'null') return;
     this.recurringState.getCreateTicket().setCompany(selectClient.item.id);
     this.ticketForm.controls['client'].setValue(selectClient);
@@ -130,28 +179,11 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
 
   }
 
-  public onChangeCron(data) {
-    console.log('data', data);
-    this.recurringState.getCreateTicket().setCronExpression(data);
-  }
 
-  private getCompanyDevices() {
-    let company = this.recurringState.getClient();
-    company && this.devicesService.onInitHangle(company.id);
-  }
 
-  /**
-   * get products list item
-   */
-  public getItemListProducts() {
-    this.productService.getCategories().subscribe((res: any) => {
-      this.productList = res;
-    });
-  }
 
-  public onChangeDescription(event) {
-    this.recurringState.getCreateTicket().setDescription(event.target.value);
-  }
+
+
   public selectDateEditMode(data: NgbDate) {
     this.datepicker = data;
     if (this.navDate) this.editService.updateMonthAndYearDatePicker(this.datepicker, this.navDate);
@@ -194,12 +226,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     if (this.navDate) this.editService.updateMonthAndYearDatePicker(this.datepicker, this.navDate);
     this.updateDate();
   }
-  public getItemListServices() {
-    const value = this.recurringState.getClient();
-    value && this.recurringService.getServiceList(value.id).subscribe((res: any) => {
-      this.servicesList = res;
-    })
-  }
+
 
   private updateDate() {
     this.date.setTitle(this.datepicker);
@@ -241,14 +268,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
       this.onInitCreateMod();
     });
   }
-  private onInitCreateMod() {
-    this.recurringState.getCreateTicket().clearTehUsers();
-    this.recurringState.getCreateTicket().clearTags();
-    this.recurringState.getCreateTicket().clearAgents();
-    this.recurringState.getCreateTicket().clearProducts();
-    this.recurringState.getCreateTicket().clearServices();
-    this.recurringState.getCreateTicket().setDefaultCron();
-  }
+
 
 
 
@@ -292,11 +312,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     //  this.quoteStateService.setType(true);
 
   }
-  public getNameOrDescription(item) {
-    if (item && item.name) return item.name;
-    if (item && item.description) return item.description;
-    return '';
-  }
+
 
   /**
      * toggle date picker
@@ -310,13 +326,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.recurringState.getCreateTicket().clearAgents();
     if (item) this.recurringState.getCreateTicket().setAgents(item.item.agentId);
   }
-  public onChangeTags(tags) {
 
-    this.recurringState.getCreateTicket().clearTags();
-    tags.forEach((item) => {
-      this.recurringState.getCreateTicket().addTag(item.id);
-    })
-  }
   public selectDuration(data) {
     console.log('data', data);
   }
@@ -329,27 +339,14 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   public addService() {
     this.services.push(new ForCreateService());
   }
-  public trackById(index, item) {
-    return item.versionedId.id;
-  }
-
-  public trackByIndex(index, item) {
-    return index;
-  }
+  
   public removeProduct(i) {
     this.products.splice(i, 1);
   }
   public removeService(i) {
     this.services.splice(i, 1);
   }
-  public onChangeTehUsers(tehusers) {
-    this.tehUsers = tehusers;
-    this.recurringState.getCreateTicket().clearTehUsers();
-    this.tehUsers.forEach((item) => {
-      this.recurringState.getCreateTicket().addAssignedUsers(item.id);
-    })
 
-  }
 
   public save() {
     this.recurringState.getCreateTicket().clearProducts();
@@ -396,6 +393,13 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.recurringState.clearCreateTicket();
 
     this.ticketForEdit = new RecurringTicket();
+  }
+  public trackById(index, item) {
+    return item.versionedId.id;
+  }
+
+  public trackByIndex(index, item) {
+    return index;
   }
   ngOnDestroy(): void {
     this.createService.clearSubscriptions();
