@@ -62,9 +62,8 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     private calendar: NgbCalendar,
     private devicesService: DevicesService,
     private companiesState: SelectClientCompanyStateService,
-    private devicesState: DevicesStateService,
-    private tagsState: TagsStateService,
-    private tehState: TehUsersSateService,
+   
+    
     private recurringState: RecurringTicketsStateService,
     public createService: RecurringTicketsService,
 
@@ -107,7 +106,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     // this.recurringState.getCreateTicket().setCreateTask(data.createTask);
     // this.recurringState.getCreateTicket().setRequireUpdate(data.requireUpdate);
     //  this.recurringState.getCreateTicket().setQuickClose(data.quickClose);
-    this.tehState.setUsersFromtEdit(data.assignedUsers);
+    this.createService.getTehState().setUsersFromtEdit(data.assignedUsers);
     //  this.recurringState.getCreateTicket().setDescription(data.description);
     //  this.selectClient({item: data.company});
     // this.recurringState.getCreateTicket().setCronExpression(data.cronExpression);
@@ -382,10 +381,10 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.devicesList = [];
     this.tehUsers = [];
     this.companiesState.onInitClear();
-    this.devicesState.onInitClear();
+    this.createService.getDevicesState().onInitClear();
     this.date.clearTitle();
-    this.tagsState.onInitClear();
-    this.tehState.onInitClear();
+    this.createService.getTagsState().onInitClear();
+    this.createService.getTehState().onInitClear();
     this.createService.clearData();
     this.navDate = null;
     this.datepicker = this.calendar.getToday();

@@ -8,12 +8,17 @@ import { ForCreateService } from '../../class/for-create-service';
 import { ServiceRecurringTicket } from '../../interfaces/service-recurring-ticket';
 import { TagsStateService } from 'src/ng2/app/components/shared/tags/services/tags-state.service';
 import { IntervalStateService } from 'src/ng2/app/components/shared/interval/services/interval-state.service';
+import { TehUsersSateService } from 'src/ng2/app/components/shared/teh-users/services/teh-users-sate.service';
+import { DevicesStateService } from '../../devices-recurring-tickets/services/devices-state.service';
 
 @Injectable()
 export class RecurringTicketsService {
   sub: Subscription = new Subscription();
   constructor(private elRef: ElementRef, private tagsState: TagsStateService,
-    private stateInterval: IntervalStateService) { }
+    private stateInterval: IntervalStateService,
+    private tehState: TehUsersSateService,
+    private devicesState: DevicesStateService,
+    ) { }
 
   public setRulesCreateTicket(data: CreateRecurringTickets) {
 
@@ -21,6 +26,15 @@ export class RecurringTicketsService {
     data.setQuickClose(this.elRef.nativeElement.querySelector('#quickClose').checked);
     data.setCreateTask(this.elRef.nativeElement.querySelector('#createTask').checked);
 
+  }
+  public getDevicesState () {
+    return this.devicesState;
+  }
+  public getTagsState () {
+    return this.tagsState;
+  }
+  public getTehState () {
+   return this.tehState;
   }
   public clearData() {
     this.elRef.nativeElement.querySelector('#service-description').value = '';
