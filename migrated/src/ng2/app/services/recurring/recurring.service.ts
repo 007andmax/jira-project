@@ -32,6 +32,21 @@ export class RecurringService {
       tap(res => res), 
       catchError(this.handleError));
   }
+  public removeTicket(id:string) {
+    return this.http.delete(this.apiUrl + `recurringTickets/${id}`).pipe(
+      tap(res => res), 
+      catchError(this.handleError));
+  }
+  public suspendTicket(id:string) {
+    return this.http.post(this.apiUrl + `recurringTickets/${id}/suspend`,{}).pipe(
+      tap(res => res), 
+      catchError(this.handleError));
+  }
+  public resumeTicket(id:string) {
+    return this.http.post(this.apiUrl + `recurringTickets/${id}/resume`,{}).pipe(
+      tap(res => res), 
+      catchError(this.handleError));
+  }
   public editTicket(ticket:RecurringTicket, data:CreateRecurringTickets) {
     return this.http.put(this.apiUrl + `recurringTickets/${ticket.id}/edit`, data).pipe(
       tap(res => res), 

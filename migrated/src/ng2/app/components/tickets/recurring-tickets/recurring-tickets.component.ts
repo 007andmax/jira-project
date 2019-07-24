@@ -4,6 +4,7 @@ import { RecurringTicket } from './class/recurring-ticket';
 import { RecurringTicketsListService } from './services/recurring-tickets-list.service';
 import { RecurringTicketsStateService } from './services/recurring-tickets-state.service';
 import { RecurringTicketUser } from './interfaces/recurring-ticket-user';
+import { RecurringTicketsRealTimeService } from './services/recurring-tickets-real-time.service';
 
 @Component({
   selector: 'app-recurring-tickets',
@@ -22,12 +23,14 @@ export class RecurringTicketsComponent implements OnInit {
   constructor(
     private recurringService: RecurringService,
     private listSerivce: RecurringTicketsListService,
-    private recurringState: RecurringTicketsStateService
+    private recurringState: RecurringTicketsStateService,
+    private recurringTicketsRealTimeService: RecurringTicketsRealTimeService
 
   ) { }
 
   ngOnInit() {
     this.getTicket();
+    this.changeTicketListItem();
 
   }
   public getTicket() {
@@ -39,7 +42,23 @@ export class RecurringTicketsComponent implements OnInit {
       this.infiniteScrollDisabled = false;
     })
   }
-
+  public changeTicketListItem() {
+    this.recurringTicketsRealTimeService.changeQuotesArray.subscribe((newChange) => {
+      if (newChange.action === 'RECURRING_TICKET_CREATED') {
+        return this.ticketList.push(newChange.data);
+      }
+      
+      if (newChange.action === 'RECURRING_TICKET_DELETED') {
+        const elemIndex = this.ticketList.findIndex((item) => item.id === newChange.data.id);
+        return this.ticketList.splice(elemIndex,1);
+      }
+      if (newChange.action === 'RECURRING_TICKET_SUSPENDED' || newChange.action === 'RECURRING_TICKET_RESUMED') {
+        const elemIndex = this.ticketList.findIndex((item) => item.id === newChange.data.id);
+        return this.ticketList[elemIndex] = newChange.data;
+      }
+      
+    })
+  }
 
   public onScroll() {
     console.log('onScroll');

@@ -3,6 +3,7 @@ import { RecurringTicket } from '../class/recurring-ticket';
 import { MONTHS_SHORT } from 'src/ng2/app/const/date';
 import { TicketStateService } from '../../ticket-state.service';
 import { RecurringTicketsStateService } from '../services/recurring-tickets-state.service';
+import { RecurringService } from 'src/ng2/app/services/recurring/recurring.service';
 
 @Component({
   selector: 'app-recurring-tickets-table',
@@ -12,7 +13,7 @@ import { RecurringTicketsStateService } from '../services/recurring-tickets-stat
 export class RecurringTicketsTableComponent implements OnInit {
   @Input() ticket: RecurringTicket;
   public showSelect = false;
-  constructor(private recurringState: RecurringTicketsStateService, ) { }
+  constructor(private recurringState: RecurringTicketsStateService, private recurringService: RecurringService) { }
 
   ngOnInit() {
     console.log('ticket', this.ticket);
@@ -49,18 +50,33 @@ export class RecurringTicketsTableComponent implements OnInit {
     $event.stopPropagation();
   }
 
+  public removeTicket() {
+    this.recurringService.removeTicket(this.ticket.id).subscribe(() => {
+
+    })
+  }
+  public suspendTicket () {
+    this.recurringService.suspendTicket(this.ticket.id).subscribe(() => {
+
+    })
+  }
+  public resumeTicket () {
+    this.recurringService.resumeTicket(this.ticket.id).subscribe(() => {
+
+    })
+  }
   public getTypeCron(cron: string) {
-   if (cron.match(/\d+ \d+ \d+ 1\/\d+ \* [\?\*] \*/)) {
+    if (cron.match(/\d+ \d+ \d+ 1\/\d+ \* [\?\*] \*/)) {
       return "Daily";
     } else if (cron.match(/\d+ \d+ \d+ [\?\*] \* MON-FRI \*/)) {
-      return  "Daily";
+      return "Daily";
     } else if (cron.match(/\d+ \d+ \d+ [\?\*] \* (MON|TUE|WED|THU|FRI|SAT|SUN)(,(MON|TUE|WED|THU|FRI|SAT|SUN))* \*/)) {
-      return  "Weekly";
+      return "Weekly";
     } else if (cron.match(/\d+ \d+ \d+ (\d+|L|LW|1W) 1\/\d+ [\?\*] \*/)) {
-      return  "Monthly";
+      return "Monthly";
     } else if (cron.match(/\d+ \d+ \d+ [\?\*] 1\/\d+ (MON|TUE|WED|THU|FRI|SAT|SUN)((#[1-5])|L) \*/)) {
-      return  "Monthly";
-    } 
+      return "Monthly";
+    }
     return "";
   }
 
