@@ -17,6 +17,9 @@ export class CreateRecurringTickets {
     constructor() {
 
     }
+    public setDefaultCron() {
+        this.cronExpression = '0 0 0 ? * MON *';
+    }
     public setRequireUpdate(requireUpdate) {
         this.requireUpdate = requireUpdate;
     }
