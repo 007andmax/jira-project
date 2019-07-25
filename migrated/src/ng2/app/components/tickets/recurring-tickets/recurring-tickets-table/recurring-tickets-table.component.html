@@ -10,7 +10,8 @@
   <div class="col-md-2" [textContent]="(ticket.agent) ? ticket.agent.label : ''"></div>
   <div class="col-md-3" [textContent]="ticket.description"></div>
   <div class="col-md-1" [textContent]="getPareDate(ticket.startDate)"></div>
-  <div class="col-md-1" [textContent]="getTypeCron(ticket.cronExpression)"></div>
+  <div class="col-md-1" *ngIf="!ticket.suspended" [textContent]="getTypeCron(ticket.cronExpression)"></div>
+  <div class="col-md-1" *ngIf="ticket.suspended">Suspend</div>
   <div class="col-md-2 assigned-container">
 
       <ng-template ngFor let-user [ngForOf]="ticket.assignedUsers" let-i="index" [ngForTrackBy]="trackByIndex" >
