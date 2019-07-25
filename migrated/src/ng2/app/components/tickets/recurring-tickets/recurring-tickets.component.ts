@@ -45,7 +45,8 @@ export class RecurringTicketsComponent implements OnInit {
   public changeTicketListItem() {
     this.recurringTicketsRealTimeService.changeQuotesArray.subscribe((newChange) => {
       if (newChange.action === 'RECURRING_TICKET_CREATED') {
-        return this.ticketList.push(newChange.data);
+       
+        return this.ticketList = [newChange.data,...this.ticketList];
       }
       
       if (newChange.action === 'RECURRING_TICKET_DELETED') {
