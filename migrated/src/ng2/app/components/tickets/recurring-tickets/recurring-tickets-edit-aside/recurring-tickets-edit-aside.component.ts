@@ -62,12 +62,8 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     private calendar: NgbCalendar,
     private devicesService: DevicesService,
     private companiesState: SelectClientCompanyStateService,
-   
-    
     private recurringState: RecurringTicketsStateService,
     public createService: RecurringTicketsService,
-
-
   ) { }
 
   ngOnInit() {
@@ -94,8 +90,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.selectedClient = data.company;
     let date = new Date(data.startDate);
     this.navDate = this.createService.getNavDate(date);
-    let ngbDate: NgbDate = new NgbDate(date.getFullYear(), date.getMonth() + 1, date.getDay());
-    this.selectDateEditMode(ngbDate);
+    this.selectDateEditMode(this.createService.getDateForDatePicker(data.startDate));
 
     this.products = this.createService.getProductsForEdit(data.products);
     this.services = this.createService.getServicesForEdit(data.services);
@@ -134,6 +129,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.recurringState.getCreateTicket().clearTags();
     this.recurringState.getCreateTicket().clearAgents();
     this.recurringState.getCreateTicket().setDefaultCron();
+    this.selectDate(this.createService.getDateForDatePicker(null));
   }
   public onChangeTehUsers(tehusers) {
     this.tehUsers = tehusers;
@@ -395,11 +391,11 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.createService.getTehState().onInitClear();
     this.createService.clearData();
     this.navDate = null;
-    this.datepicker = this.calendar.getToday();
     this.createService.setDefaultDate();
     this.recurringState.clearCreateTicket();
 
     this.ticketForEdit = new RecurringTicket();
+   
   }
   public trackById(index, item) {
     return item.versionedId.id;

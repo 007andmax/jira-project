@@ -11,6 +11,7 @@ import { IntervalStateService } from 'src/ng2/app/components/shared/interval/ser
 import { TehUsersSateService } from 'src/ng2/app/components/shared/teh-users/services/teh-users-sate.service';
 import { DevicesStateService } from '../../devices-recurring-tickets/services/devices-state.service';
 import { DurationStateService } from 'src/ng2/app/components/shared/duration/services/duration-state.service';
+import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable()
 export class RecurringTicketsService {
@@ -19,7 +20,7 @@ export class RecurringTicketsService {
     private stateInterval: IntervalStateService,
     private tehState: TehUsersSateService,
     private devicesState: DevicesStateService,
-    private durationState: DurationStateService
+   
     ) { }
 
   public setRulesCreateTicket(data: CreateRecurringTickets) {
@@ -29,9 +30,7 @@ export class RecurringTicketsService {
     data.setCreateTask(this.elRef.nativeElement.querySelector('#createTask').checked);
 
   }
-  public setDurationForEdit(data) {
- this.durationState.setDurationFromtEdit(data);
-  }
+ 
   public getDevicesState () {
     return this.devicesState;
   }
@@ -95,10 +94,11 @@ export class RecurringTicketsService {
   public setDefaultDate() {
     this.stateInterval.onInitClearState();
   }
-  public parseDuration(value) {
-    var timeInMinutes = value * 60,
-    hours = Math.floor(timeInMinutes / 60),
-    minutes = Math.round(timeInMinutes - (hours * 60));
+
+  public getDateForDatePicker(time) {
+    let date = (time) ? new Date(time) :  new Date();
+    return new NgbDate(date.getFullYear(), date.getMonth() + 1, date.getDate());
   }
+
 
 }
