@@ -12,6 +12,7 @@
     (focus)="focusHours$.next('')"
     (click)="clickHours$.next('')"
     #instanceHours="ngbTypeahead"
+    (input)="onChange($event,'hours')"
   />
   <span>
       <i *ngIf="selectedHours"
@@ -37,6 +38,7 @@
     (focus)="focusMin$.next('')"
     (click)="clickMin$.next('')"
     #instanceMin="ngbTypeahead"
+    (input)="onChange($event,'minutes')"
   />
   <span>
       <i *ngIf="selectedMin"

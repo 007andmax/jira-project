@@ -103,6 +103,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.createService.setCreateTask(data.createTask);
     this.createService.setRequireUpdate(data.requireUpdate);
     this.createService.setQuickClose(data.quickClose);
+    
     // this.recurringState.getCreateTicket().setCreateTask(data.createTask);
     // this.recurringState.getCreateTicket().setRequireUpdate(data.requireUpdate);
     //  this.recurringState.getCreateTicket().setQuickClose(data.quickClose);
@@ -326,8 +327,14 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     if (item) this.recurringState.getCreateTicket().setAgents(item.item.agentId);
   }
 
-  public selectDuration(data) {
+  public selectDuration(data,i) {
     console.log('data', data);
+   /* if (data.minutes)
+    {
+      console.log('min', (data.minutes * 100) / 60);
+    }*/
+    this.services[i].duration = data.hour + ((data.minutes) ? (data.minutes / 60) : 0);
+    console.log('this.services[i].duration',this.services[i].duration);
   }
 
   public addProduct() {
@@ -348,6 +355,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
 
 
   public save() {
+    console.log('this.services',this.services);
     this.recurringState.getCreateTicket().clearProducts();
     this.recurringState.getCreateTicket().clearServices();
     this.createService.setRulesCreateTicket(this.recurringState.getCreateTicket());

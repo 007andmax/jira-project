@@ -5,6 +5,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 })
 export class DurationStateService {
   clearState = new EventEmitter<any>();
+  
   constructor() { }
   public onInitClear() {
     this.clearState.emit(null);
@@ -12,4 +13,6 @@ export class DurationStateService {
   public getClearState () {
     return this.clearState
   }
+
+  
 }

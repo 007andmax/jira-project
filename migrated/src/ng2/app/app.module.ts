@@ -63,6 +63,7 @@ import { TagsComponent } from './components/shared/tags/tags.component';
 import { IntervalComponent } from './components/shared/interval/interval.component';
 import { DurationComponent } from './components/shared/duration/duration.component';
 import { TehUsersComponent } from './components/shared/teh-users/teh-users.component';
+import { DurationFilterPipe } from './pipe/duration-filter.pipe';
 
 /**
  * declare angular
@@ -148,7 +149,8 @@ angular.module('quicktech')
     TagsComponent,
     IntervalComponent,
     DurationComponent,
-    TehUsersComponent
+    TehUsersComponent,
+    DurationFilterPipe
   ],
   imports: [
     BrowserModule,
