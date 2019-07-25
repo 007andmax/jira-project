@@ -42,8 +42,6 @@ export class TehUsersComponent implements OnInit, OnDestroy {
   }
   private checUsersForEdit () {
    let getUsersFromEdit = this.tehState.getUsersFromEdit().subscribe((data:Array<RecurringTicketUser>) => {
-     console.log('data',data);
-     console.log('this.usersList',this.usersList);
     this.usersList.forEach((item) => {
       let index = data.findIndex(user => user.id === item.id);
       if (index > (-1)) this.usersList[index].selected = true;
@@ -73,9 +71,7 @@ export class TehUsersComponent implements OnInit, OnDestroy {
     $event.stopPropagation();
   }
 
-  public trackByIndex(index, item) {
-    return index;
-  }
+  
 
   public selectUser(index) {
     this.usersList[index].selected = true;
@@ -85,7 +81,7 @@ export class TehUsersComponent implements OnInit, OnDestroy {
 
   public onSearch(event) {
 
-    this.usersList = this.resUserList.filter(item => (item.firstName + ' ' + item.lastName).includes(event.target.value));
+    this.usersList = this.resUserList.filter(item => (item.firstName.toLowerCase() + ' ' + item.lastName.toLowerCase()).includes(event.target.value.toLowerCase()));
 
   }
 
@@ -94,6 +90,10 @@ export class TehUsersComponent implements OnInit, OnDestroy {
     this.selectedUsers = [];
     this.usersList.forEach((item) => item.selected = false);
     this.usersChange.emit(this.selectedUsers);
+  }
+
+  public trackByIndex(index, item) {
+    return index;
   }
 
   ngOnDestroy(): void {
