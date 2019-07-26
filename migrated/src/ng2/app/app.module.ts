@@ -46,7 +46,7 @@ import { PasswordManagerEditAsideComponent } from './components/password-manager
 import { DeviceUserPipe } from './pipe/device-user.pipe';
 import { PasswordCategoryPipe } from './pipe/password-category.pipe';
 import { SelectClientCompanyComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-top/select-client-company/select-client-company.component';
-import { ProductListComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-bottom/product-list/product-list.component';
+import { ProductListComponent } from './components/shared/product-list/product-list.component';
 import { ServicesListComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-bottom/services-list/services-list.component';
 import { ProductTableComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-bottom/product-table/product-table.component';
 import { AddItemComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-bottom/add-item/add-item.component';

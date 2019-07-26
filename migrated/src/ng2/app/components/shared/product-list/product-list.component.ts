@@ -1,0 +1,48 @@
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ElementRef } from '@angular/core';
+import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+
+/**
+ * Product list component
+ */
+@Component({
+  selector: 'app-product-list',
+  templateUrl: './product-list.component.html',
+  styleUrls: ['./product-list.component.scss']
+})
+export class ProductListComponent implements OnInit {
+  @ViewChild('products') products_dropDown: NgbDropdown;
+  @Output() selectedProductItem = new EventEmitter<any>();
+  @Input() itemList: any;
+
+  /**
+   * Creates an instance of the ProductListComponent with the injected services
+   */
+  constructor(private elRef: ElementRef) { }
+
+  /**
+   * Initializes product list. See [ngOnInit]{@see OnInit#ngOnInit}
+   */
+  ngOnInit() {
+    this.itemList.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+    this.itemList.forEach(item => item.products.sort((a, b) => (a.description.toLowerCase() > b.description.toLowerCase()) ?
+      1 : ((b.description.toLowerCase() > a.description.toLowerCase()) ? -1 : 0)));
+
+  }
+  getNameOrDescription(item) {
+    if (item && item.name) return item.name;
+    if (item && item.description) return item.description;
+    return '';
+  }
+
+  /**
+   * set and emit product item
+   */
+  setProduct(productItem) {
+
+    this.elRef.nativeElement.querySelector('#dropdownProducts').value = this.getNameOrDescription(productItem);
+    this.products_dropDown.close();
+    this.selectedProductItem.next(productItem);
+  }
+
+}

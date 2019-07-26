@@ -32,7 +32,7 @@ import { IntervalStateService } from '../../../shared/interval/services/interval
 })
 export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   @ViewChild('date') date_dropDown: NgbDropdown;
-
+  
   public showTicketRecurringSub: Subscription;
   public opened = false;
   public showDatePicker: boolean = false;
@@ -156,11 +156,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
       this.servicesList = res;
     })
   }
-  public getNameOrDescription(item) {
-    if (item && item.name) return item.name;
-    if (item && item.description) return item.description;
-    return '';
-  }
+ 
   public selectClient(selectClient) {
 
     if (selectClient === 'null') return;
@@ -276,11 +272,11 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.products[index].discount = 1;
     // this.product.quantity = 1;
     //  this.selectedServiceItem.emit(item);
-    this.products[index].isDropDownShowProducts = false;
 
     //  this.type = undefined;
     //  this.changeType.next(this.type);
     //  this.quoteStateService.setType(true);
+
     this.cd.detectChanges();
   }
   public setService(item, index) {

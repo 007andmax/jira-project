@@ -14,7 +14,7 @@ export class ForCreateProduct  {
     versionedId: VersionedId;
     quantity:number;
     discount: number;
-    isDropDownShowProducts: false;
+   
     constructor () {}
     public setDataFromEdit (data:ProductRecurringTicket) {
         this.quantity = data.quantity;

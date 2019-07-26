@@ -81,15 +81,8 @@
               <div class="col-md-12">
                 <p>Search Product</p>
 
-                <div class="product-dropdown-new-ng light-dropdown">
-                  <input class="pointer" type="text" (click)="product.isDropDownShowProducts = true;"
-                         [ngClass]="{'no-valid': isFormValid}" [value]="getNameOrDescription(product)"
-                         placeholder="Product">
-                  <i class="icn-sm report-caret-icon"></i>
-                  <app-product-list *ngIf="product.isDropDownShowProducts" [itemList]="productList"
-                                    (selectedProductItem)="selectProduct($event,i)"></app-product-list>
-
-                </div>
+                <app-product-list  [itemList]="productList"
+                (selectedProductItem)="selectProduct($event,i)"></app-product-list>
                 <i class="icn-delete" *ngIf="products.length > 1" (click)="removeProduct(i)"></i>
 
               </div>

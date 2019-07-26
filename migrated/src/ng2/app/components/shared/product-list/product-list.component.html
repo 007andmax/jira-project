@@ -1,0 +1,30 @@
+<div class="product-dropdown-new-ng light-dropdown" ngbDropdown [autoClose]="'outside'" #products="ngbDropdown">
+  <input class="pointer" type="text"
+    [ngClass]="{'no-valid': isFormValid}" placeholder="Product"
+    id="dropdownProducts" ngbDropdownToggle>
+  <i class="icn-sm report-caret-icon"></i>
+  <div ngbDropdownMenu aria-labelledby="dropdownProducts">
+    <ngb-accordion #acc="ngbAccordion" class="item-list products-accordion">
+      <ngb-panel *ngFor="let item of itemList">
+        <ng-template ngbPanelHeader>
+          <button ngbPanelToggle class="btn">
+            {{item.name}} <span *ngIf="item.products.length"> {{item.products.length}} items</span>
+            <span class="icn-sm report-caret-icon"></span>
+          </button>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          <div class="category-product" *ngFor="let productItem of item.products" (click)="setProduct(productItem)">
+            <div class="clearfix">
+              <div class="title col-md-10">{{ productItem.description }}</div>
+              <div class="text-right total-count col-md-2">{{ productItem.sale | currency: '$' }}</div>
+              <div class="col-md-12">
+                <span *ngIf="productItem.ilc">ILC: {{ productItem.ilc }}</span>
+                <span *ngIf="productItem.manufacture">P/N: {{ productItem.manufacture }}</span>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-panel>
+    </ngb-accordion>
+  </div>
+  </div>
