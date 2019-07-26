@@ -175,11 +175,6 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
 
   }
 
-
-
-
-
-
   public selectDateEditMode(data: NgbDate) {
     this.datepicker = data;
     if (this.navDate) this.editService.updateMonthAndYearDatePicker(this.datepicker, this.navDate);
