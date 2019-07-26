@@ -30,11 +30,10 @@
 
         <div class="col-md-4">
           <p>Date</p>
-          <div class="input-group date-picker" ngbDropdown>
-            <input type="text" class="pointer" placeholder="Select Date" [value]="date.title" id="dropdownDate"
-                   (click)="toggleDatePicker()" readonly>
+          <div class="input-group date-picker" ngbDropdown [autoClose]="'outside'" #date="ngbDropdown">
+            <input type="text" class="pointer" placeholder="Select Date" ngbDropdownToggle id="dropdownDate" readonly>
             <i class="icn-16 icn-calendar-light pointer"></i>
-            <div *ngIf="showDatePicker" class="dropdown-menu show" style="top: 100%;">
+            <div ngbDropdownMenu aria-labelledby="dropdownDate"><!-- <div *ngIf="showDatePicker" class="dropdown-menu show" style="top: 100%;">-->
               <ngb-datepicker [navigation]="navigation" [(ngModel)]="datepicker" (select)="selectDate($event)"
                               (navigate)="navigateDate($event)" [startDate]="datepicker"
                               [ngModelOptions]="{standalone: true}"

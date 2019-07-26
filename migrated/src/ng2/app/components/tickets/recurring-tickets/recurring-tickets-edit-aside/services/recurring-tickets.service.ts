@@ -99,6 +99,8 @@ export class RecurringTicketsService {
     let date = (time) ? new Date(time) :  new Date();
     return new NgbDate(date.getFullYear(), date.getMonth() + 1, date.getDate());
   }
-
+  public setTextInput (id,val) {
+    this.elRef.nativeElement.querySelector(`#${id}`).value = val;
+  }
 
 }
