@@ -15,13 +15,16 @@
       <div class="col-md-1">Interval</div>
       <div class="col-md-2">Assigned User</div>
     </div>
-    <ng-template ngFor let-ticket [ngForOf]="ticketList" [ngForTrackBy]="trackById"  infiniteScroll
+    <div class="ticket-content"  infiniteScroll
     [infiniteScrollDistance]="2"
     [infiniteScrollThrottle]="50"
     [infiniteScrollDisabled]="infiniteScrollDisabled"
     (scrolled)="onScroll()">
+    <ng-template ngFor let-ticket [ngForOf]="ticketList" [ngForTrackBy]="trackById"  >
     <app-recurring-tickets-table [ticket]="ticket"></app-recurring-tickets-table>
+ 
     </ng-template>
+  </div>
     <div class="loading" *ngIf="showPreloader"></div>
   </div>
 </div>

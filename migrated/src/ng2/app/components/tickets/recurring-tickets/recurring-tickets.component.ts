@@ -64,6 +64,7 @@ export class RecurringTicketsComponent implements OnInit {
   public onScroll() {
     console.log('onScroll');
     this.infiniteScrollDisabled = true;
+    this.getTicket();
 
   }
   public sortBy(sort) {
