@@ -69,7 +69,7 @@ export class DevicesRecurringTicketsComponent implements OnInit,OnDestroy {
       /*res
         .sort((a, b) => a.name.localeCompare(b.name))
         .filter((item) => !item.deletedAt)*/
-        console.log('this.editItem',this.editItem);
+      
         if (this.editItem)
         {
           let index: number = this.devicesList.findIndex(item => item.id === this.editItem.deviceId);

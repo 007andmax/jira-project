@@ -13,7 +13,7 @@ export class ProductListComponent implements OnInit {
   @ViewChild('products') products_dropDown: NgbDropdown;
   @Output() selectedProductItem = new EventEmitter<any>();
   @Input() itemList: any;
-
+  @Input() editItem: any;
   /**
    * Creates an instance of the ProductListComponent with the injected services
    */
@@ -23,10 +23,13 @@ export class ProductListComponent implements OnInit {
    * Initializes product list. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
+    console.log('this.editItem',this.editItem);
     this.itemList.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
     this.itemList.forEach(item => item.products.sort((a, b) => (a.description.toLowerCase() > b.description.toLowerCase()) ?
       1 : ((b.description.toLowerCase() > a.description.toLowerCase()) ? -1 : 0)));
+
+      if (this.editItem) this.elRef.nativeElement.querySelector('#dropdownProducts').value = this.getNameOrDescription(this.editItem);
 
   }
   getNameOrDescription(item) {

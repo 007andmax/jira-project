@@ -81,7 +81,7 @@
               <div class="col-md-12">
                 <p>Search Product</p>
 
-                <app-product-list  [itemList]="productList"
+                <app-product-list [editItem]="product"  [itemList]="productList"
                 (selectedProductItem)="selectProduct($event,i)"></app-product-list>
                 <i class="icn-delete" *ngIf="products.length > 1" (click)="removeProduct(i)"></i>
 
@@ -118,14 +118,8 @@
             <div [ngClass]="{'separator-hr': services.length > 1}" class="row service-tab-content__item">
               <div class="col-md-8">
                 <p>Service</p>
-                <div class="light-dropdown">
-                  <input class="pointer" type="text" (click)="service.isDropDownShowServices = true;"
-                         [ngClass]="{'no-valid': isFormValid}" [value]="getNameOrDescription(service)"
-                         placeholder="Service">
-                  <i class="icn-sm report-caret-icon"></i>
-                  <app-services-list *ngIf="service.isDropDownShowServices" [itemList]="servicesList"
+                <app-services-list [editItem]="service" [itemList]="servicesList"
                                      (selectedServicesItem)="setService($event,i)"></app-services-list>
-                </div>
               </div>
               <div class="col-md-4">
                 <p>Duration</p>
