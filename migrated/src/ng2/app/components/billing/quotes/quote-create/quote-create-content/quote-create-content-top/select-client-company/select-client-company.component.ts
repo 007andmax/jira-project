@@ -23,6 +23,7 @@ export class SelectClientCompanyComponent implements OnInit, OnDestroy {
   @Output() getAllItems = new EventEmitter<any>();
   @Input() formGroup: FormGroup;
   @Input() editItem: any;
+  @Input() filter: boolean = false;
   public selectedClient;
   public subGetCompaniesList: ISubscription;
   public clientsList: any;
@@ -46,6 +47,7 @@ export class SelectClientCompanyComponent implements OnInit, OnDestroy {
     this.getCLientsList();
     this.onInitClearState();
     this.onCheckEditItem();
+    
 
   }
 
@@ -73,13 +75,19 @@ private onCheckEditItem () {
         .filter((item) => !item.deletedAt)
       this.getAllItems.emit(this.clientsList);
       console.log('editItem', this.editItem);
+      console.log('filter',this.filter);
+      if (this.filter) 
+      {
+        this.clientsList = this.clientsList
+        .filter((item) => item.clientType === 'VENDOR')
+      }
+      console.log('this.clientsList',this.clientsList);
       if (this.editItem) {
         let index: number = this.clientsList.findIndex(item => item.id === this.editItem.id);
         if (index > (-1)) {
           this.selectedClient = this.clientsList[index];
           // this.selectedItem.emit({ item: this.clientsList[index] });
         }
-
       }
     })
   }
