@@ -185,6 +185,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.date.setTitle(this.datepicker);
     this.ticketForm.controls['date'].setValue(this.date.getTitle());
     this.createService.setTextInput('dropdownDate', this.date.getTitle());
+    console.log('this.datepicker',this.datepicker);
     this.recurringState.getCreateTicket().setStartDate(this.datepicker.day, this.datepicker.month, this.datepicker.year);
     this.date_dropDown.close();
     this.cd.detectChanges();
