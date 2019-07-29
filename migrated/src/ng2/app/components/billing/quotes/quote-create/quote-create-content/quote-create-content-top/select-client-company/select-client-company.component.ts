@@ -74,14 +74,11 @@ private onCheckEditItem () {
         .sort((a, b) => a.name.localeCompare(b.name))
         .filter((item) => !item.deletedAt)
       this.getAllItems.emit(this.clientsList);
-      console.log('editItem', this.editItem);
-      console.log('filter',this.filter);
       if (this.filter) 
       {
         this.clientsList = this.clientsList
-        .filter((item) => item.clientType === 'VENDOR')
+        .filter((item) => item.clientType !== 'VENDOR')
       }
-      console.log('this.clientsList',this.clientsList);
       if (this.editItem) {
         let index: number = this.clientsList.findIndex(item => item.id === this.editItem.id);
         if (index > (-1)) {

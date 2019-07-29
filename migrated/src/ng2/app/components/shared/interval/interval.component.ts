@@ -84,9 +84,6 @@ export class IntervalComponent implements OnInit, OnChanges,OnDestroy {
     })
     this.intervalService.addSubscription(getClearState);
   }
-
-
-
   public regenerateCron() {
     console.log('regenerateCron', this.datepicker);
    // this.isDirty = true;
