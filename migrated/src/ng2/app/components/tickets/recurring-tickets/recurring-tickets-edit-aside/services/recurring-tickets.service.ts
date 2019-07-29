@@ -20,6 +20,7 @@ export class RecurringTicketsService {
     private stateInterval: IntervalStateService,
     private tehState: TehUsersSateService,
     private devicesState: DevicesStateService,
+    
    
     ) { }
 
@@ -30,7 +31,12 @@ export class RecurringTicketsService {
     data.setCreateTask(this.elRef.nativeElement.querySelector('#createTask').checked);
 
   }
- 
+  public setCronForEdit(data) {
+    this.stateInterval.onInitEditMode(data);
+  }
+ public getIntervalState () {
+   return this.stateInterval;
+ }
   public getDevicesState () {
     return this.devicesState;
   }

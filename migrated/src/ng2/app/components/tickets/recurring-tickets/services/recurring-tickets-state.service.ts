@@ -39,5 +39,13 @@ export class RecurringTicketsStateService {
   public clearCreateTicket () {
     this.crate = new CreateRecurringTickets();
   }
+  public getTypeCron(cron: string) {
+    if (cron.match(/\d+ \d+ \d+ [\?\*] \* (MON|TUE|WED|THU|FRI|SAT|SUN)(,(MON|TUE|WED|THU|FRI|SAT|SUN))* \*/)) {
+      return "Daily";
+    }  else if (cron.match(/\d+ \d+ \d+ [\?\*] \* (MON|TUE|WED|THU|FRI|SAT|SUN)* \*/)) {
+      return "Weekly";
+    } 
+    return "Monthly";
+  }
  
 }

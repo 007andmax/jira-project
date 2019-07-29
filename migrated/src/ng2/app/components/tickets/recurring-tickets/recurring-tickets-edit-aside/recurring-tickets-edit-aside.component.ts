@@ -98,17 +98,8 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.createService.setCreateTask(data.createTask);
     this.createService.setRequireUpdate(data.requireUpdate);
     this.createService.setQuickClose(data.quickClose);
-
-    // this.recurringState.getCreateTicket().setCreateTask(data.createTask);
-    // this.recurringState.getCreateTicket().setRequireUpdate(data.requireUpdate);
-    //  this.recurringState.getCreateTicket().setQuickClose(data.quickClose);
     this.createService.getTehState().setUsersFromtEdit(data.assignedUsers);
-    //  this.recurringState.getCreateTicket().setDescription(data.description);
-    //  this.selectClient({item: data.company});
-    // this.recurringState.getCreateTicket().setCronExpression(data.cronExpression);
-    // this.onChangeTags(data.tags);
-    //this.onChangeTehUsers(data.assignedUsers);
-
+    this.createService.setCronForEdit(data.cronExpression);
     this.cd.detectChanges();
   }
   public onChangeTags(tags) {
@@ -118,7 +109,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     })
   }
   public onChangeCron(data) {
-    console.log('data', data);
+ 
     this.recurringState.getCreateTicket().setCronExpression(data);
   }
   public onChangeDescription(event) {

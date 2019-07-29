@@ -5,10 +5,18 @@ import { Injectable, EventEmitter } from '@angular/core';
 })
 export class IntervalStateService {
   clearState: EventEmitter<any> = new EventEmitter();
+  onEditMode: EventEmitter<any> = new EventEmitter();
   constructor() { }
 
+  public onInitEditMode(data) {
+   
+    this.onEditMode.emit(data);
+  }
+  public getEditMode() {
+    return this.onEditMode;
+  }
   public onInitClearState() {
-    console.log('onInitClearState');
+  
     this.clearState.emit(null);
   }
   public getClearState() {

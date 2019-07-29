@@ -13,7 +13,7 @@ import { RecurringService } from 'src/ng2/app/services/recurring/recurring.servi
 export class RecurringTicketsTableComponent implements OnInit {
   @Input() ticket: RecurringTicket;
   public showSelect = false;
-  constructor(private recurringState: RecurringTicketsStateService, private recurringService: RecurringService) { }
+  constructor(public recurringState: RecurringTicketsStateService, private recurringService: RecurringService) { }
 
   ngOnInit() {
     console.log('ticket', this.ticket);
@@ -65,14 +65,6 @@ export class RecurringTicketsTableComponent implements OnInit {
 
     })
   }
-  public getTypeCron(cron: string) {
-    
-    if (cron.match(/\d+ \d+ \d+ [\?\*] \* (MON|TUE|WED|THU|FRI|SAT|SUN)* \*/)) {
-      return "Weekly";
-    } else if (cron.match(/\d+ \d+ \d+ [\?\*] \* (MON|TUE|WED|THU|FRI|SAT|SUN)(,(MON|TUE|WED|THU|FRI|SAT|SUN))* \*/)) {
-      return "Daily";
-    } 
-    return "Monthly";
-  }
+ 
 
 }

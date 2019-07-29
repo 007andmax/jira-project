@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable()
 export class IntervalService {
@@ -36,5 +37,21 @@ export class IntervalService {
   public clearSubscriptions () {
     this.sub.unsubscribe();
   }
+  public geDefaultNavDate() {
+    return {
+      next: {
+        year: 2019,
+        month: 7
+      }
+    };
+  }
+  public getDateForDatePicker(day) {
   
+    return new NgbDate(2019, 7, day);
+  }
+  
+  public updateMonthAndYearDatePicker(datepicker, navDate) {
+    datepicker.month = navDate.next.month;
+    datepicker.year = navDate.next.year;
+}
 }

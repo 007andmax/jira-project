@@ -5,6 +5,7 @@ import { IntervalService } from './services/interval.service';
 import { NgbDateStruct, NgbCalendar, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDatepickerNavigateEvent } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker';
 import { IntervalStateService } from './services/interval-state.service';
+import { RecurringTicketsStateService } from '../../tickets/recurring-tickets/services/recurring-tickets-state.service';
 
 
 @Component({
@@ -13,31 +14,28 @@ import { IntervalStateService } from './services/interval-state.service';
   styleUrls: ['./interval.component.scss'],
   providers: [IntervalService]
 })
-export class IntervalComponent implements OnInit, OnChanges,OnDestroy {
- 
+export class IntervalComponent implements OnInit, OnChanges, OnDestroy {
+
   public disabled: boolean = false;
   public options: CronOptions;
   public datepicker: NgbDateStruct;
   public navigation = 'none';
   public outsideDays = 'hidden';
   public title: string = 'Daily';
- 
+
   @Input() get cron(): string { return this.localCron; }
   set cron(value: string) {
     this.localCron = value;
     this.cronChange.emit(this.localCron);
   }
-
   // the name is an Angular convention, @Input variable name + "Change" suffix
   @Output() cronChange = new EventEmitter();
 
   public activeTab: string = 'daily';
   public selectOptions = this.getSelectOptions();
   public state: any;
-
   private localCron: string;
- // private isDirty: boolean;
-
+  public navDate: any;
   get isCronFlavorQuartz() { return this.options.cronFlavor === 'quartz'; }
   get isCronFlavorStandard() { return this.options.cronFlavor === 'standard'; }
 
@@ -47,15 +45,54 @@ export class IntervalComponent implements OnInit, OnChanges,OnDestroy {
   constructor(private intervalService: IntervalService,
     public cd: ChangeDetectorRef,
     private calendar: NgbCalendar,
-    private stateInterval: IntervalStateService,) {
-    this.datepicker = this.calendar.getToday();
+    private stateInterval: IntervalStateService,
+    private recurringState: RecurringTicketsStateService ) {
+ 
   }
   public async ngOnInit() {
     this.options = this.intervalService.getDefaultOptions();
     this.state = this.getDefaultState();
     this.onCheckClear();
-  }
+    this.onInitEditMode();
 
+  }
+  public selectDateEditMode(data: NgbDate) {
+    this.datepicker = data;
+    if (this.navDate) this.intervalService.updateMonthAndYearDatePicker(this.datepicker, this.navDate);
+   
+  }
+  private onInitEditMode() {
+    let getEditMode = this.stateInterval.getEditMode().subscribe((data) => {
+      this.title = this.recurringState.getTypeCron(data);
+      this.activeTab = this.title.toLowerCase();
+      if (this.activeTab === "weekly") {
+        this.selectOptions.days.forEach(weekDay => this.state.weekly[weekDay] = false);
+        let weekly = data.substring(10,13);
+        console.log('weekly',weekly);
+        this.state.weekly[weekly] = true;
+      }
+      if (this.activeTab === "daily") {
+        this.selectOptions.days.forEach(weekDay => this.state.daily[weekDay] = false);
+        let daily = data.substring(10,data.lastIndexOf(" *")).split(",");
+        console.log('daily',daily);
+        daily.forEach((item) => this.state.daily[item] = true);
+      }
+      if (this.activeTab === "monthly") {
+      if (data === "0 0 0 L * ? *") {
+        this.navDate = this.intervalService.geDefaultNavDate();
+        this.selectDateEditMode(this.intervalService.getDateForDatePicker(31));
+      } else {
+        let day = Number(data.substring(6,8));
+        console.log('day',day);
+      //  let date = new Date(2019,6,day);
+        this.navDate = this.intervalService.geDefaultNavDate();
+        this.selectDateEditMode(this.intervalService.getDateForDatePicker(day));
+      }
+      }
+    
+    });
+    this.intervalService.addSubscription(getEditMode);
+  }
   public async ngOnChanges(changes: SimpleChanges) {
     const newCron = changes["cron"];
     if (newCron && !newCron.firstChange) {
@@ -73,7 +110,7 @@ export class IntervalComponent implements OnInit, OnChanges,OnDestroy {
   }
   private onCheckClear() {
     console.log('onCheckClear 111');
-  let getClearState =  this.stateInterval.getClearState().subscribe(() => {
+    let getClearState = this.stateInterval.getClearState().subscribe(() => {
       console.log('onCheckClear');
       this.activeTab = 'daily';
       this.title = 'Daily';
@@ -86,7 +123,7 @@ export class IntervalComponent implements OnInit, OnChanges,OnDestroy {
   }
   public regenerateCron() {
     console.log('regenerateCron', this.datepicker);
-   // this.isDirty = true;
+    // this.isDirty = true;
 
     switch (this.activeTab) {
 
@@ -127,7 +164,7 @@ export class IntervalComponent implements OnInit, OnChanges,OnDestroy {
       return hourType === "AM" ? (hour === 12 ? 0 : hour) : (hour === 12 ? 12 : hour + 12);
     }
   }
-  
+
 
   private handleModelChange(cron: string) {
     /*if (this.isDirty) {
@@ -356,6 +393,7 @@ export class IntervalComponent implements OnInit, OnChanges,OnDestroy {
 
   }
 
+
   public selectEndMonth() {
     let date = this.calendar.getToday();
     let day = 32 - new Date(date.year, date.month - 1, 32).getDate();
@@ -364,7 +402,7 @@ export class IntervalComponent implements OnInit, OnChanges,OnDestroy {
     this.regenerateCron();
   }
   ngOnDestroy(): void {
-   this.intervalService.clearSubscriptions();
+    this.intervalService.clearSubscriptions();
   }
 
 }
