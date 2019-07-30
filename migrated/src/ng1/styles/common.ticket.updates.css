@@ -417,6 +417,7 @@
 
 .table-wrapper .table-content .table-content-top [class^="col-"] {
   line-height: 0;
+  white-space: nowrap;
 }
 
 .table-wrapper .table-content .table-content-top > a {
@@ -761,13 +762,16 @@
   margin: 0 16px 0 8px;
 }
 
-.table-content .ticket-update-service-edit .action-update .dashboard-remove,
 .table-content .ticket-update-service-edit .action-update .icn-label-save-dashboard,
 .table-content .ticket-update-service-edit .action-update .assign-icn,
-.table-content .ticket-update-product-edit .action-update .dashboard-remove,
 .table-content .ticket-update-product-edit .action-update .icn-label-save-dashboard,
 .table-content .ticket-update-product-edit .action-update .assign-icn {
   margin: 0 8px;
+}
+
+.table-content .ticket-update-product-edit .action-update .dashboard-remove,
+.table-content .ticket-update-service-edit .action-update .dashboard-remove {
+  margin: 0 0 0 8px;
 }
 
 .ticket-update-service-edit .timer-quantity .time_drop_down ul {
@@ -946,6 +950,18 @@
 }
 
 @media screen and (max-width: 1600px) {
+  .table-content .ticket-update-service-edit .action-update .icn-label-save-dashboard,
+  .table-content .ticket-update-service-edit .action-update .assign-icn,
+  .table-content .ticket-update-product-edit .action-update .icn-label-save-dashboard,
+  .table-content .ticket-update-product-edit .action-update .assign-icn {
+    margin: 0 4px;
+  }
+
+  .table-content .ticket-update-product-edit .action-update .dashboard-remove,
+  .table-content .ticket-update-service-edit .action-update .dashboard-remove {
+    margin: 0 0 0 4px;
+  }
+
   .table-content input {
     font-size: 12px;
   }
@@ -956,14 +972,6 @@
 
   .table-content.service-table .col-3 {
     padding-left: 342px;
-  }
-
-  .table-wrapper .service-table .col-md-1 {
-    width: 15.8%;
-  }
-
-  .table-wrapper .service-table .col-md-6 {
-    width: 41.66666667%;
   }
 
   .table-wrapper .service-table .table-content-top.without-duration .service-title {
@@ -977,11 +985,6 @@
 
   .table-wrapper .service-table .col-md-1.timer-quantity {
     width: 9%;
-  }
-
-  .table-wrapper .service-table .col-md-3.service-datetimepicker,
-  .table-wrapper .service-table .col-md-2.new-quantity-picker {
-    width: 23%;
   }
 
   .table-wrapper .service-table .col-md-5.service-title {
@@ -1029,8 +1032,48 @@
 }
 
 @media screen and (max-width: 1366px) {
-  .opened-ticket-list .product-upd .table-content-top .col-md-1 {
-    width: 33.33333%;
+  /*.opened-ticket-list .product-upd .table-content-top .col-md-1 {*/
+  /*  width: 33.33333%;*/
+  /*}*/
+  .opened-ticket-list .ticket-update {
+    margin: 0 20px 30px;
+  }
+
+  .opened-ticket-list .table-content .action-update .icn-label-save-dashboard {
+    position: absolute;
+    right: -21px;
+    top: 0;
+  }
+
+  .opened-ticket-list .table-content .action-update .dashboard-remove {
+    position: absolute;
+    right: -15px;
+    top: 26px;
+  }
+
+  .opened-ticket-list .ticket-update-service-edit .action-update {
+    width: 12%;
+  }
+
+  .opened-ticket-list .ticket-update-service-edit .col-md-1 {
+    width: 14%;
+  }
+
+  .opened-ticket-list .service-table .col-md-6 {
+    width: 45%;
+  }
+
+  .opened-ticket-list .table-wrapper .service-table .col-md-2.new-quantity-picker {
+    width: 26%;
+  }
+
+  .opened-ticket-list .table-wrapper .service-table .col-md-1 {
+    width: 12.7%;
+    font-size: 12px;
+  }
+
+  .opened-ticket-list .table-wrapper .ticket-update-service-edit .col-md-1 {
+    width: 15%;
   }
 
   .opened-ticket-list .product-upd .table-content-top .col-md-9,
@@ -1086,25 +1129,18 @@
     width: 75%;
   }
 
-  .opened-ticket.opened-ticket-list .table-wrapper .service-table .col-md-3.service-datetimepicker,
-  .opened-ticket.opened-ticket-list .table-wrapper .service-table .col-md-2.new-quantity-picker,
-  .opened-ticket.opened-ticket-list .table-wrapper .service-table .col-md-1.timer-quantity {
-    width: 33.33333%;
-  }
-
   .opened-ticket.opened-ticket-list .table-wrapper .service-table .col-md-5.service-title {
     width: 66.66666%;
   }
 
-  .opened-ticket.opened-ticket-list .table-content-top .col-md-1,
-  .opened-ticket.opened-ticket-list .table-content-top .col-md-2 {
-    width: 33.33333333%;
-    text-align: left !important;
-  }
-
-  .opened-ticket.opened-ticket-list .table-content-top .col-md-6 {
-    width: 66.66666667%;
-  }
+  /*.opened-ticket.opened-ticket-list .table-content-top .col-md-1,*/
+  /*.opened-ticket.opened-ticket-list .table-content-top .col-md-2 {*/
+  /*  width: 33.33333333%;*/
+  /*  text-align: left !important;*/
+  /*}*/
+  /*.opened-ticket.opened-ticket-list .table-content-top .col-md-6 {*/
+  /*  width: 66.66666667%;*/
+  /*}*/
 }
 
 @media screen and (max-width: 1280px) {

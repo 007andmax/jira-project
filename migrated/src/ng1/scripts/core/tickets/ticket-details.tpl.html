@@ -531,7 +531,7 @@
                       </div>
                       <div class="col-md-1">{{product.item.sale | currency:'$':2}}</div>
                       <div class="col-md-1">{{ product.quantity }}</div>
-                      <div class="col-md-1 text-right">{{ product.item.sale * product.quantity || ''| currency :'$':2 }}</div>
+                      <div class="col-md-1 text-right gm">{{ product.item.sale * product.quantity || ''| currency :'$':2 }}</div>
                       <div class="col-md-2 action-update pr-0">
                         <i class="new-calendar-icn pointer"></i>
                         <i class="assign-icn pointer"></i>
@@ -565,7 +565,6 @@
                     <div class="col-md-1">Time In</div>
                     <div class="col-md-1">Time Out</div>
                     <div class="col-md-1 text-right">Duration</div>
-                    <div class="col-md-2"></div>
                     <a href="javascript:void(0)"
                        class="hit-area has-tooltip"
                        tooltip-placement="top"
