@@ -23,7 +23,6 @@ export class ProductListComponent implements OnInit {
    * Initializes product list. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-    console.log('this.editItem',this.editItem);
     this.itemList.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
     this.itemList.forEach(item => item.products.sort((a, b) => (a.description.toLowerCase() > b.description.toLowerCase()) ?

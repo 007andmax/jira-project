@@ -80,11 +80,9 @@
             <div [ngClass]="{'separator-hr': products.length > 1}" class="row product-tab-content__item">
               <div class="col-md-12">
                 <p>Search Product</p>
-
                 <app-product-list [editItem]="product"  [itemList]="productList"
                 (selectedProductItem)="selectProduct($event,i)"></app-product-list>
                 <i class="icn-delete" *ngIf="products.length > 1" (click)="removeProduct(i)"></i>
-
               </div>
               <div class="col-md-4 mt-20">
                 <p>Serial No.</p>

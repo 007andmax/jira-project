@@ -91,9 +91,8 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     let date = new Date(data.startDate);
     this.navDate = this.createService.getNavDate(date);
     this.selectDateEditMode(this.createService.getDateForDatePicker(data.startDate));
-
-    this.products = this.createService.getProductsForEdit(data.products);
-    this.services = this.createService.getServicesForEdit(data.services);
+    this.products = (data.products.length > 0) ? this.createService.getProductsForEdit(data.products) : [new ForCreateProduct()];
+    this.services = (data.services.length > 0) ? this.createService.getServicesForEdit(data.services) : [new ForCreateService()];
     this.createService.setTagsForEdit(data.tags);
     this.createService.setCreateTask(data.createTask);
     this.createService.setRequireUpdate(data.requireUpdate);
@@ -109,7 +108,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     })
   }
   public onChangeCron(data) {
- 
+
     this.recurringState.getCreateTicket().setCronExpression(data);
   }
   public onChangeDescription(event) {
@@ -123,6 +122,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.recurringState.getCreateTicket().clearAgents();
     this.recurringState.getCreateTicket().setDefaultCron();
     this.selectDate(this.createService.getDateForDatePicker(null));
+    this.cd.detectChanges();
   }
   public onChangeTehUsers(tehusers) {
     this.tehUsers = tehusers;
@@ -176,7 +176,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.date.setTitle(this.datepicker);
     this.ticketForm.controls['date'].setValue(this.date.getTitle());
     this.createService.setTextInput('dropdownDate', this.date.getTitle());
-    console.log('this.datepicker',this.datepicker);
+    console.log('this.datepicker', this.datepicker);
     this.recurringState.getCreateTicket().setStartDate(this.datepicker.day, this.datepicker.month, this.datepicker.year);
     this.date_dropDown.close();
     this.cd.detectChanges();
@@ -370,7 +370,8 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.navDate = null;
     this.createService.setDefaultDate();
     this.recurringState.clearCreateTicket();
-
+    this.products = [];
+    this.services = [];
     this.ticketForEdit = new RecurringTicket();
 
   }
