@@ -76,6 +76,8 @@ export class IntervalComponent implements OnInit, OnDestroy {
         
       }
       if (this.activeTab === "monthly") {
+        this.selectOptions.days.forEach(weekDay => this.state.weekly[weekDay] = false);
+        this.selectOptions.days.forEach(weekDay => this.state.daily[weekDay] = false);
         if (data === "0 0 0 L * ? *") {
           this.navDate = this.intervalService.geDefaultNavDate();
           this.selectDateEditMode(this.intervalService.getDateForDatePicker(31));
