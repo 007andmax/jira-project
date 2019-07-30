@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/ng2/environments/environment';
 import { tap, catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { throwError, forkJoin, Observable } from 'rxjs';
 import { CreateRecurringTickets } from '../../components/tickets/recurring-tickets/recurring-tickets-edit-aside/class/create-recurring-tickets';
 import { RecurringTicket } from '../../components/tickets/recurring-tickets/class/recurring-ticket';
 
@@ -13,7 +13,21 @@ export class RecurringService {
   private apiUrl = environment.apiUrl;
   constructor( private http: HttpClient) { }
 
-  
+  public onInitEditProducts(products): Observable<any[]> {
+    let out = [];
+    products.forEach(element => {
+      out.push(this.http.post(this.apiUrl + `products`,element))
+    });
+    // Observable.forkJoin (RxJS 5) changes to just forkJoin() in RxJS 6
+    return forkJoin(out);
+  }
+
+  public editProduct(data) {
+    return this.http.post(this.apiUrl + `products`,data).pipe(
+      tap(data => data), 
+      catchError(this.handleError));
+  }
+
   public getServiceList(clientCompanyId) {
     return this.http.get(this.apiUrl + `services/${clientCompanyId}`).pipe(
       tap(data => data), 

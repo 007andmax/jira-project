@@ -23,6 +23,8 @@ import { RecurringTicketsService } from './services/recurring-tickets.service';
 import { RecurringTicket } from '../class/recurring-ticket';
 import { RecurringTicketCompany } from '../interfaces/recurring-ticket-company';
 import { IntervalStateService } from '../../../shared/interval/services/interval-state.service';
+import { Product } from 'src/ng2/app/interfaces/product/product';
+import { EditProduct } from 'src/ng2/app/interfaces/product/edit-product';
 
 @Component({
   selector: 'app-recurring-tickets-edit-aside',
@@ -100,7 +102,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.createService.getTehState().setUsersFromtEdit(data.assignedUsers);
     this.createService.setCronForEdit(data.cronExpression);
     this.getListServices(data.company);
-   // this.getItemListServices();
+    // this.getItemListServices();
     this.cd.detectChanges();
   }
   public onChangeTags(tags) {
@@ -142,6 +144,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   public getItemListProducts() {
     this.productService.getCategories().subscribe((res: any) => {
       this.productList = res;
+      console.log('this.productList', this.productList);
     });
   }
 
@@ -150,7 +153,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     value && this.getListServices(value);
   }
 
-  private getListServices (value) {
+  private getListServices(value) {
     this.recurringService.getServiceList(value.id).subscribe((res: any) => {
       this.servicesList = res;
     })
@@ -334,8 +337,31 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     if (item && item.description) return item.description;
     return '';
   }
+  public onInitChackProduct() {
+    this.recurringState.clearEditProducts();
+    this.productList.forEach((category, catIndex) => {
+      category.products.forEach((prod, prodIndex) => {
+        let index = this.products.findIndex(item => item.versionedId.id === prod.versionedId.id);
+        if (index > (-1)) {
+          console.log('catIndex', catIndex);
+          console.log('prodIndex', prodIndex);
+          if (this.products[index].manufacture !== prod.manufacture || this.products[index].sale !== prod.sale || this.products[index].cost !== prod.cost) {
+            this.recurringState.addEditProduct(category, prod);
 
-  public save() {
+          }
+        }
+      })
+    })
+    if (this.recurringState.getEditProducts().length > 0) {
+      this.recurringService.onInitEditProducts(this.recurringState.getEditProducts()).subscribe(responseList => {
+        console.log('responseList', responseList);
+        this.onInitSave();
+      });
+    } else {
+      this.onInitSave();
+    }
+  }
+  public onInitSave() {
     console.log('this.services', this.services);
     this.recurringState.getCreateTicket().clearProducts();
     this.recurringState.getCreateTicket().clearServices();
@@ -357,6 +383,12 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
         this.close();
       })
     }
+  }
+  public save() {
+
+
+    this.onInitChackProduct();
+
 
   }
   public close() {

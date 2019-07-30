@@ -4,6 +4,9 @@ import { RecurringTicket } from '../class/recurring-ticket';
 import { Ticket } from '../../class/ticket';
 import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
 import { RecurringTicketUser } from '../interfaces/recurring-ticket-user';
+import { EditProduct } from 'src/ng2/app/interfaces/product/edit-product';
+import { Observable } from 'rxjs';
+import { RecurringService } from 'src/ng2/app/services/recurring/recurring.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +16,8 @@ export class RecurringTicketsStateService {
   public client: any;
   public tecketForCreate: Ticket = new Ticket();
   public onEditMode: EventEmitter<any> = new EventEmitter();
- 
-  constructor(  private companiesService: CompaniesService) { }
+  editProducts: Array<EditProduct> = [];
+  constructor(private companiesService: CompaniesService, private recurringService: RecurringService,) { }
 
   public onInitClientList() {
     this.companiesService.getCompaniesList();
@@ -23,7 +26,25 @@ export class RecurringTicketsStateService {
     this.client = client.item;
     this.tecketForCreate.client = client;
   }
-
+  public clearEditProducts() {
+    this.editProducts = [];
+  }
+  public getEditProducts() {
+    return this.editProducts;
+  }
+  public addEditProduct(category, prod) {
+    this.editProducts.push({
+      categoryId: category.id,
+      cost: prod.cost,
+      description: prod.description,
+      glNumber: null,
+      ilc: null,
+      manufacture: prod.manufacture,
+      sale: prod.sale,
+      taxIds: [],
+      versionedId: prod.versionedId
+    })
+  }
   public getClient() {
     return this.client;
   }
@@ -36,16 +57,16 @@ export class RecurringTicketsStateService {
   public getEditMode() {
     return this.onEditMode;
   }
-  public clearCreateTicket () {
+  public clearCreateTicket() {
     this.crate = new CreateRecurringTickets();
   }
   public getTypeCron(cron: string) {
     if (cron.match(/\d+ \d+ \d+ [\?\*] \* (MON|TUE|WED|THU|FRI|SAT|SUN)* \*/)) {
       return "Weekly";
-    }  else if (cron.match(/\d+ \d+ \d+ [\?\*] \* (MON|TUE|WED|THU|FRI|SAT|SUN)(,(MON|TUE|WED|THU|FRI|SAT|SUN))* \*/)) {
+    } else if (cron.match(/\d+ \d+ \d+ [\?\*] \* (MON|TUE|WED|THU|FRI|SAT|SUN)(,(MON|TUE|WED|THU|FRI|SAT|SUN))* \*/)) {
       return "Daily";
-    }  
+    }
     return "Monthly";
   }
- 
+
 }
