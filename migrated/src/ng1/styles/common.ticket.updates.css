@@ -149,18 +149,18 @@
   font-size: 10px;
 }
 
-.ticket-update-content .icn-delete,
-.ticket-add-product-actions .icn-delete,
-.ticket-add-service-actions .icn-delete {
-  background-image: url(../images/new-icons/company-remove.svg);
-  width: 12px;
-  height: 12px;
+.ticket-update-content .icn-delete-final,
+.ticket-add-product-actions .icn-delete-final,
+.ticket-add-service-actions .icn-delete-final {
+  background-image: url(../images/new-icons/remove-final.png);
+  width: 16px;
+  height: 16px;
 }
 
-.ticket-update-content .edit-icon {
-  background-image: url(../images/new-icons/company-edit.svg);
-  width: 14px;
-  height: 14px;
+.ticket-update-content .edit-icon-final {
+  background-image: url(../images/new-icons/edit-final.png);
+  width: 16px;
+  height: 16px;
   cursor: pointer;
 }
 
@@ -272,7 +272,7 @@
 .ticket-update-content {
   width: calc(100% - 48px);
   padding: 10px 0 30px;
-  border-bottom: 1px solid #e7ecf2;
+  /*border-bottom: 1px solid #e7ecf2;*/
   position: relative;
 }
 
@@ -360,7 +360,7 @@
   position: relative;
   list-style: none;
   color: #4f5f79;
-  background-color: #f6f8fa;
+  /*background-color: #f6f8fa;*/
 }
 
 .table-wrapper .table-content + .table-content {
@@ -419,6 +419,10 @@
   /*overflow: hidden;*/
 }
 
+.table-wrapper .table-content .table-content-top [class^="col-"] {
+  line-height: 0;
+}
+
 .table-wrapper .table-content .form-group {
   margin-bottom: 0;
 }
@@ -452,7 +456,7 @@
 }
 
 .table-wrapper .service-table .col-md-1 {
-  width: 11.8%;
+  width: 11.1%;
 }
 
 .table-wrapper .table-content .col-2 {
@@ -745,8 +749,46 @@
   padding-left: 268px;
 }
 
+.table-content .table-content-bottom .action-update {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.table-content .table-content-bottom .action-update .assign-icn {
+  margin: 0 16px 0 8px;
+}
+
+.table-content .table-content-bottom [class*='col-md-'] {
+  font-size: 13px;
+  font-family: "Graphik-Regular", sans-serif;
+}
+
+.gm {
+  font-family: "Graphik Medium", sans-serif !important;
+}
+
 .table-content .table-content-top {
-  border-bottom: 1px solid #edf2f6;
+  border-bottom: 1px solid #4f5f79;
+  font-size: 12px;
+  font-family: "Graphik Medium", sans-serif;
+  position: relative;
+}
+
+.table-content .table-content-top:before {
+  position: absolute;
+  content: 'SERVICE';
+  font-size: 9px;
+  font-family: "Graphik Semibold", sans-serif;
+  padding: 0 8px;
+  background: #edf2f6;
+  color: #4f5f79;
+  left: 0;
+  top: 6px;
+}
+
+.product-upd .table-content-top:before {
+  content: 'PRODUCT';
 }
 
 .table-content .table-content-top .timepicker {
@@ -778,7 +820,11 @@
 
 .table-content .table-content-top,
 .table-content .table-content-bottom {
-  padding: 6.5px 15px;
+  padding: 10px 0;
+}
+
+.table-content .table-content-bottom:not(:last-child) {
+  border-bottom: 1px solid #edf2f6;
 }
 
 .table-wrapper .service-table .col-md-1.timer-quantity {
@@ -791,6 +837,48 @@
 
 .table-wrapper .service-table .col-md-2.new-quantity-picker {
   width: 18%;
+}
+
+.checkbox-container {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.checkbox-container .checkbox-mark {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 22px;
+  height: 22px;
+  background: url("../images/new-icons/checkbox-ticket.png");
+}
+
+.checkbox-container input {
+  opacity: 0;
+}
+
+.checkbox-container input:checked ~ .checkbox-mark {
+  background-position: 24px 0;
+}
+
+.service-name p:first-child {
+  font-family: "Graphik Medium", sans-serif;
+  font-size: 13px;
+  display: flex;
+}
+
+.service-name p:first-child .checkbox-container {
+  margin-right: 10px;
+}
+
+.service-name p:last-child {
+  font-family: "Graphik Regular", sans-serif;
+  font-size: 12px;
+  line-height: 1.33;
+  padding-left: 33px;
 }
 
 @media screen and (min-width: 2048px) {
