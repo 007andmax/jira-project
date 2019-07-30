@@ -46,8 +46,8 @@ export class IntervalComponent implements OnInit, OnChanges, OnDestroy {
     public cd: ChangeDetectorRef,
     private calendar: NgbCalendar,
     private stateInterval: IntervalStateService,
-    private recurringState: RecurringTicketsStateService ) {
- 
+    private recurringState: RecurringTicketsStateService) {
+
   }
   public async ngOnInit() {
     this.options = this.intervalService.getDefaultOptions();
@@ -59,7 +59,7 @@ export class IntervalComponent implements OnInit, OnChanges, OnDestroy {
   public selectDateEditMode(data: NgbDate) {
     this.datepicker = data;
     if (this.navDate) this.intervalService.updateMonthAndYearDatePicker(this.datepicker, this.navDate);
-   
+
   }
   private onInitEditMode() {
     let getEditMode = this.stateInterval.getEditMode().subscribe((data) => {
@@ -67,56 +67,52 @@ export class IntervalComponent implements OnInit, OnChanges, OnDestroy {
       this.activeTab = this.title.toLowerCase();
       if (this.activeTab === "weekly") {
         this.selectOptions.days.forEach(weekDay => this.state.weekly[weekDay] = false);
-        let weekly = data.substring(10,13);
-        console.log('weekly',weekly);
+        let weekly = data.substring(10, 13);
+        console.log('weekly', weekly);
         this.state.weekly[weekly] = true;
       }
       if (this.activeTab === "daily") {
         this.selectOptions.days.forEach(weekDay => this.state.daily[weekDay] = false);
-        let daily = data.substring(10,data.lastIndexOf(" *")).split(",");
-        console.log('daily',daily);
+        let daily = data.substring(10, data.lastIndexOf(" *")).split(",");
+        console.log('daily', daily);
         daily.forEach((item) => this.state.daily[item] = true);
       }
       if (this.activeTab === "monthly") {
-      if (data === "0 0 0 L * ? *") {
-        this.navDate = this.intervalService.geDefaultNavDate();
-        this.selectDateEditMode(this.intervalService.getDateForDatePicker(31));
-      } else {
-        let day = Number(data.substring(6,8));
-        console.log('day',day);
-      //  let date = new Date(2019,6,day);
-        this.navDate = this.intervalService.geDefaultNavDate();
-        this.selectDateEditMode(this.intervalService.getDateForDatePicker(day));
+        if (data === "0 0 0 L * ? *") {
+          this.navDate = this.intervalService.geDefaultNavDate();
+          this.selectDateEditMode(this.intervalService.getDateForDatePicker(31));
+        } else {
+          let day = Number(data.substring(6, 8));
+          console.log('day', day);
+          this.navDate = this.intervalService.geDefaultNavDate();
+          this.selectDateEditMode(this.intervalService.getDateForDatePicker(day));
+        }
       }
-      }
-    
+
     });
     this.intervalService.addSubscription(getEditMode);
   }
   public async ngOnChanges(changes: SimpleChanges) {
     const newCron = changes["cron"];
     if (newCron && !newCron.firstChange) {
-      this.handleModelChange(this.cron);
+      //   this.handleModelChange(this.cron);
     }
   }
 
   public setActiveTab(tab: string, event: any) {
-    event; // makes the compiler happy
     if (!this.disabled) {
       this.activeTab = tab;
       this.title = tab.charAt(0).toUpperCase() + tab.slice(1);
-      this.regenerateCron();
+      //  this.regenerateCron();
     }
   }
   private onCheckClear() {
-    console.log('onCheckClear 111');
     let getClearState = this.stateInterval.getClearState().subscribe(() => {
-      console.log('onCheckClear');
       this.activeTab = 'daily';
       this.title = 'Daily';
       this.options = this.intervalService.getDefaultOptions();
       this.state = this.getDefaultState();
-      this.datepicker = this.calendar.getToday();
+      this.datepicker = null;
 
     })
     this.intervalService.addSubscription(getClearState);
@@ -131,13 +127,13 @@ export class IntervalComponent implements OnInit, OnChanges, OnDestroy {
         const days_weekly = this.selectOptions.days
           .reduce((acc, day) => this.state.weekly[day] ? acc.concat([day]) : acc, [])
           .join(",");
-        this.cron = `${this.isCronFlavorQuartz ? this.state.weekly.seconds : ''} ${this.state.weekly.minutes} ${this.hourToCron(this.state.weekly.hours, this.state.weekly.hourType)} ${this.monthDayDefaultChar} * ${days_weekly} ${this.yearDefaultChar}`.trim();
+        this.cron = `0 0 0 ${this.monthDayDefaultChar} * ${days_weekly} ${this.yearDefaultChar}`.trim();
         break;
       case "daily":
         const days = this.selectOptions.days
           .reduce((acc, day) => this.state.daily[day] ? acc.concat([day]) : acc, [])
           .join(",");
-        this.cron = `${this.isCronFlavorQuartz ? this.state.daily.seconds : ''} ${this.state.daily.minutes} ${this.hourToCron(this.state.daily.hours, this.state.daily.hourType)} ${this.monthDayDefaultChar} * ${days} ${this.yearDefaultChar}`.trim();
+        this.cron = `0 0 0 ${this.monthDayDefaultChar} * ${days} ${this.yearDefaultChar}`.trim();
         break;
       case "monthly":
         if (this.datepicker.day <= 28) this.cron = `0 0 0 ${this.datepicker.day} JAN-DEC ? *`;
@@ -167,6 +163,7 @@ export class IntervalComponent implements OnInit, OnChanges, OnDestroy {
 
 
   private handleModelChange(cron: string) {
+    console.log('handleModelChange');
     /*if (this.isDirty) {
       this.isDirty = false;
       return;
@@ -313,23 +310,16 @@ export class IntervalComponent implements OnInit, OnChanges, OnDestroy {
         FRI: false,
         SAT: false,
         SUN: false,
-        hours: this.getAmPmHour(defaultHours),
-        minutes: defaultMinutes,
-        seconds: defaultSeconds,
-        hourType: this.getHourType(defaultHours)
+
       },
       weekly: {
-        MON: true,
+        MON: false,
         TUE: false,
         WED: false,
         THU: false,
         FRI: false,
         SAT: false,
         SUN: false,
-        hours: this.getAmPmHour(defaultHours),
-        minutes: defaultMinutes,
-        seconds: defaultSeconds,
-        hourType: this.getHourType(defaultHours)
       },
       monthly: {
         subTab: "specificDay",
