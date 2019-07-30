@@ -6,6 +6,7 @@ import { debounceTime, distinctUntilChanged, filter, map } from "rxjs/operators"
 import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
 import { FormGroup } from "@angular/forms";
 import { SelectClientCompanyStateService } from './services/select-client-company-state.service';
+import { RecurringTicketsStateService } from 'src/ng2/app/components/tickets/recurring-tickets/services/recurring-tickets-state.service';
 
 /**
  *  Select client component
@@ -37,7 +38,8 @@ export class SelectClientCompanyComponent implements OnInit, OnDestroy {
    */
   constructor(
     private companiesService: CompaniesService,
-    private companiesState: SelectClientCompanyStateService
+    private companiesState: SelectClientCompanyStateService,
+    private recurringState: RecurringTicketsStateService,
   ) { }
 
   /**
@@ -47,18 +49,22 @@ export class SelectClientCompanyComponent implements OnInit, OnDestroy {
     this.getCLientsList();
     this.onInitClearState();
     this.onCheckEditItem();
-    
+
 
   }
 
-private onCheckEditItem () {
-  let getCompanyFromEdit = this.companiesState.getCompanyFromEdit().subscribe((data) => {
-    this.editItem =data;
-    let index: number = this.clientsList.findIndex(item => item.id === this.editItem.id);
-    if (index > (-1))  this.selectedClient = this.clientsList[index];
-  });
-  this.sub.add(getCompanyFromEdit);
-}
+  private onCheckEditItem() {
+    console.log('onCheckEditItem');
+    let getCompanyFromEdit = this.companiesState.getCompanyFromEdit().subscribe((data) => {
+      this.editItem = data;
+      let index: number = this.clientsList.findIndex(item => item.id === this.editItem.id);
+      if (index > (-1)) {
+      
+        this.selectedClient = this.clientsList[index];
+      }
+    });
+    this.sub.add(getCompanyFromEdit);
+  }
 
   private onInitClearState() {
     let getClearState = this.companiesState.getClearState().subscribe(() => this.clearClient());
@@ -74,10 +80,9 @@ private onCheckEditItem () {
         .sort((a, b) => a.name.localeCompare(b.name))
         .filter((item) => !item.deletedAt)
       this.getAllItems.emit(this.clientsList);
-      if (this.filter) 
-      {
+      if (this.filter) {
         this.clientsList = this.clientsList
-        .filter((item) => item.clientType !== 'VENDOR')
+          .filter((item) => item.clientType !== 'VENDOR')
       }
       if (this.editItem) {
         let index: number = this.clientsList.findIndex(item => item.id === this.editItem.id);

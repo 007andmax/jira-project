@@ -116,7 +116,7 @@
             <div [ngClass]="{'separator-hr': services.length > 1}" class="row service-tab-content__item">
               <div class="col-md-8">
                 <p>Service</p>
-                <app-services-list [editItem]="service" [itemList]="servicesList"
+                <app-services-list [editItem]="service"  [itemList]="servicesList"
                                      (selectedServicesItem)="setService($event,i)"></app-services-list>
               </div>
               <div class="col-md-4">

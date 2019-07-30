@@ -99,6 +99,8 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.createService.setQuickClose(data.quickClose);
     this.createService.getTehState().setUsersFromtEdit(data.assignedUsers);
     this.createService.setCronForEdit(data.cronExpression);
+    this.getListServices(data.company);
+   // this.getItemListServices();
     this.cd.detectChanges();
   }
   public onChangeTags(tags) {
@@ -143,9 +145,13 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     });
   }
 
-  public getItemListServices() {
+  public onCheckListServices() {
     const value = this.recurringState.getClient();
-    value && this.recurringService.getServiceList(value.id).subscribe((res: any) => {
+    value && this.getListServices(value);
+  }
+
+  private getListServices (value) {
+    this.recurringService.getServiceList(value.id).subscribe((res: any) => {
       this.servicesList = res;
     })
   }
@@ -157,7 +163,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.ticketForm.controls['client'].setValue(selectClient);
     this.selectedClient = selectClient.item;
     this.recurringState.setClient(selectClient);
-    this.getItemListServices();
+    this.onCheckListServices();
 
     this.getCompanyDevices();
     this.cd.detectChanges();
