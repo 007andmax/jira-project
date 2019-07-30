@@ -233,8 +233,7 @@
       <div class="ticket-attachment clearfix" ng-if="ticketDetails.attachments.length > 0" qt-toggle-slider>
         <div class="attachment-meta">
           <div class="icons-wrapper">
-            <b>{{ ticketDetails.attachments.length }} </b>
-            <span>Attachments</span>
+            <b>{{ ticketDetails.attachments.length }}&nbsp;</b><span>Attachments</span>
             <div class="attachments-icons">
               <div ng-repeat="type in reducedAttachmentsTypes" class="file-icon-name attach-type-{{ type }} pointer"
                    qt-icon-toggle-to-change></div>
@@ -300,84 +299,134 @@
           </ul>
         </div>
         <div class="ticket-updates-wrapper clearfix"
-             ng-if="ticketDetails.updates && ticketDetails.updates.length || !allUpdatesLoaded && ticketDetails.unloadedUpdates">
-          <div class="ticket-update clearfix" ng-repeat="ticketUpdate in ticketDetails.updates"
-               ng-controller="quicktech.core.tickets.ticketUpdateCtrl" ng-init="scrollToFirstUpdate($last)"
-               ng-class="{'has-attachment': ticketUpdate.attachments.length > 0}" ng-init="updateIndex = $index;">
-            <div class="ticket-update-avatar pull-left">
+             ng-if="ticketDetails.updates &&
+             ticketDetails.updates.length ||
+             !allUpdatesLoaded &&
+             ticketDetails.unloadedUpdates">
+          <div class="ticket-update clearfix"
+               ng-repeat="ticketUpdate in ticketDetails.updates"
+               ng-controller="quicktech.core.tickets.ticketUpdateCtrl"
+               ng-init="scrollToFirstUpdate($last)"
+               ng-class="{'has-attachment': ticketUpdate.attachments.length > 0}"
+               ng-init="updateIndex = $index;">
+
+            <div class="ticket-update-avatar"
+                 style="display: none;">
               <div class="indicator-new-update animation-hide angular-animate" ng-show="ticketUpdate.unread"
                    std-update="{{ ticketUpdate.id }}"></div>
-              <div class="pull-left avatar m-r">
-                <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="avatar-40 img-circle">
+              <div class="avatar m-r">
+                <img ng-src="{{ getUserAvatarUrl(user) }}"
+                     alt="..."
+                     class="avatar-40 img-circle">
               </div>
-            </div>
-            <div class="ticket-update-content pull-left">
               <div class="updater-name">{{ getUserName(user) }}
                 <span class="text-muted">added {{ updateType() }}</span>
-                <a href="javascript:void(0)" class="hit-area pull-right has-tooltip"
-                   tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Delete Update"
-                   ng-click="deleteUpdate()"
-                   custom-disabled="{{ !TicketsPermissionsService.isActionVisible('delete_update', ticketDetails, ticketUpdate.user) }}">
-                  <i class="icon-sm icn-delete-final"></i>
-                </a>
               </div>
-              <p class="ticket-update-message"
-                 ng-if="ticketUpdate.type === 'NOTE' && isNoteUpdating !== ticketUpdate.id"
-                 ng-bind-html="getUpdateNote()"
-                 contenteditable="{{ ticketUpdate.type === 'NOTE' && isNoteUpdating === ticketUpdate.id}}"></p>
-              <a ng-if="ticketUpdate.type === 'NOTE'" style="position: absolute;top: 40px;right: -3px;"
-                 class="hit-area pull-right has-tooltip"
-                 tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit update"
-                 ng-click="toggleNoteUpdate(ticketUpdate)"
-                 custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">
-                <i class="icon-sm edit-icon-final"></i>
-              </a>
-              <div ng-if="ticketUpdate.type === 'NOTE' && isNoteUpdating === ticketUpdate.id" class="clearfix"
-                   style="position: relative; float: left; width: 100%">
-                <div class="static-wysiwyg">
-                  <div class="ticket-update-note">
-                    <div text-editor te-initial-value="{{ ticketUpdate.note }}" ng-model="ticketUpdate.note"
-                         name="note" te-text-maxlength="5000" te-html-maxlength="50000">
-                      <div te-editor class="editor" contenteditable="true"
-                           data-text="Click here to respond to the Ticket"></div>
+            </div>
+
+            <div class="ticket-update-content clearfix">
+
+              <div class="table-wrapper note-upd"
+                   ng-if="ticketUpdate.type === 'NOTE'">
+                <div class="table-content">
+                  <div class="table-content-top clearfix">
+                    <div class="col-md-12">
+                      <div class="updater-name added-by text-muted">
+                        added {{ updateType() }} by {{ getUserName(user) }}
+                      </div>
                     </div>
+                    <a href="javascript:void(0)" class="hit-area pull-right has-tooltip"
+                       tooltip-placement="top"
+                       tooltip-append-to-body="true"
+                       uib-tooltip="Delete Update"
+                       ng-click="deleteUpdate()"
+                       custom-disabled="false"
+                       ng-disabled="false">
+                      <i class="icon-sm icn-delete-final"></i>
+                    </a>
                   </div>
-                  <div class="ticket-update-edit-actions clearfix">
-                    <div class="validation-msg pull-left">{{ validationMessage() }}</div>
-                    <div class="btn btn-primary" ng-click="cancelNoteUpdate(ticketUpdate)">
-                      Cancel
-                    </div>
-                    <div class="btn btn-success"
-                         custom-disabled="{{ disabledSave || updateTicketService.$invalid}}"
-                         ng-click="updateNoteRequest(ticketUpdate.id, ticketUpdate.note)">
-                      Save
+                  <div class="table-content-bottom clearfix">
+                    <div class="col-md-12">
+                      <a ng-if="isNoteUpdating !== ticketUpdate.id"
+                         style="position: absolute;top: 13px;right: 0;"
+                         class="hit-area pull-right has-tooltip"
+                         tooltip-placement="top"
+                         tooltip-append-to-body="true"
+                         uib-tooltip="edit update"
+                         ng-click="toggleNoteUpdate(ticketUpdate)"
+                         custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">
+                        <i class="icon-sm edit-icon-final"></i>
+                      </a>
+
+                      <p class="ticket-update-message"
+                         ng-if="isNoteUpdating !== ticketUpdate.id"
+                         ng-bind-html="getUpdateNote()"
+                         contenteditable="{{ ticketUpdate.type === 'NOTE' && isNoteUpdating === ticketUpdate.id}}"></p>
+
+                      <div ng-if="isNoteUpdating === ticketUpdate.id"
+                           class="clearfix"
+                           style="position: relative; float: left; width: 100%">
+                        <div class="static-wysiwyg">
+                          <div class="ticket-update-note">
+                            <div text-editor
+                                 te-initial-value="{{ ticketUpdate.note }}"
+                                 ng-model="ticketUpdate.note"
+                                 name="note"
+                                 te-text-maxlength="5000"
+                                 te-html-maxlength="50000">
+                              <div te-editor class="editor"
+                                   contenteditable="true"
+                                   data-text="Click here to respond to the Ticket"></div>
+                            </div>
+                          </div>
+                          <!--                          <div class="ticket- update-edit-actions clearfix">-->
+                          <!--                            <div class="validation-msg pull-left">{{ validationMessage() }}</div>-->
+                          <!--                            <div class="btn btn-primary" ng-click="cancelNoteUpdate(ticketUpdate)">-->
+                          <!--                              Cancel-->
+                          <!--                            </div>-->
+                          <!--                            <div class="btn btn-success"-->
+                          <!--                                 custom-disabled="{{ disabledSave || updateTicketService.$invalid}}"-->
+                          <!--                                 ng-click="updateNoteRequest(ticketUpdate.id, ticketUpdate.note)">-->
+                          <!--                              Save-->
+                          <!--                            </div>-->
+                          <!--                          </div>-->
+                        </div>
+                        <div class="note-upd--edit-actions">
+                          <i class="icn-sm icn-label-save-dashboard icn-label-save pointer"
+                             ng-click="updateNoteRequest(ticketUpdate.id, ticketUpdate.note)"></i>
+                          <i class="icn-sm dashboard-remove icn-remove-old pointer"
+                             ng-click="cancelNoteUpdate(ticketUpdate)"></i>
+                        </div>
+                      </div>
+
+                      <ul class="attachments clearfix"
+                          style="position: relative;"
+                          ng-if="isNoteUpdating !== ticketUpdate.id && ticketUpdate.attachments.length > 0">
+                        <li class="{{ attachmentImageClass[attachment.file.contentType] }}"
+                            ng-init="type = attachment.file.name.match(attachmentTypePattern)[0] || attachmentType[attachment.file.contentType]"
+                            ng-repeat="attachment in ticketUpdate.attachments"
+                            url="/ng1/scripts/core/tickets/image-preview.tpl.html"
+                            disable-if="{{ !attachmentType['image/' + type] }}"
+                            data="attachment.file" func="downloadAttachment" first-node-class="image-preview-tpl">
+                          <div class="file-icon-name attach-type-{{ type }}"></div>
+                          <div class="file-name" ng-bind="attachment.file.name"></div>
+                          <div class="onhover">
+                    <span class="file-name"
+                          style="text-align: left;line-height: 18px;font-weight: 700;color: #4f5f79;"
+                          ng-bind="attachment.file.name"></span>
+                            <span class="file-size">{{ attachment.file.size | fileSizeFilter }}</span>
+                            <a href="javascript:void(0)" class="tp-hide file-download has-tooltip combined-shape"
+                               data-placement="top" uib-tooltip="Download"
+                               ng-click="downloadAttachment(attachment.file.id, attachment.file.name)">
+                              <span class="icon-sm attachments"></span>
+                            </a>
+                          </div>
+                        </li>
+                      </ul>
                     </div>
                   </div>
                 </div>
               </div>
-              <ul class="attachments clearfix" style="position: relative;"
-                  ng-if="ticketUpdate.type === 'NOTE' && ticketUpdate.attachments.length > 0">
-                <li class="{{ attachmentImageClass[attachment.file.contentType] }}"
-                    ng-init="type = attachment.file.name.match(attachmentTypePattern)[0] || attachmentType[attachment.file.contentType]"
-                    ng-repeat="attachment in ticketUpdate.attachments"
-                    url="/ng1/scripts/core/tickets/image-preview.tpl.html"
-                    disable-if="{{ !attachmentType['image/' + type] }}"
-                    data="attachment.file" func="downloadAttachment" first-node-class="image-preview-tpl">
-                  <div class="file-icon-name attach-type-{{ type }}"></div>
-                  <div class="file-name" ng-bind="attachment.file.name"></div>
-                  <div class="onhover">
-                    <span class="file-name"
-                          style="text-align: left;line-height: 18px;font-weight: 700;color: #4f5f79;"
-                          ng-bind="attachment.file.name"></span>
-                    <span class="file-size">{{ attachment.file.size | fileSizeFilter }}</span>
-                    <a href="javascript:void(0)" class="tp-hide file-download has-tooltip combined-shape"
-                       data-placement="top" uib-tooltip="Download"
-                       ng-click="downloadAttachment(attachment.file.id, attachment.file.name)">
-                      <span class="icon-sm attachments"></span>
-                    </a>
-                  </div>
-                </li>
-              </ul>
 
               <div class="table-wrapper product-upd clearfix"
                    ng-repeat="product in ticketUpdate.products | orderBy: 'itemOrder'"
@@ -413,7 +462,8 @@
                 </div>
               </div>
 
-              <div class="table-wrapper clearfix" ng-repeat="service in ticketUpdate.services | orderBy: 'itemOrder'"
+              <div class="table-wrapper clearfix"
+                   ng-repeat="service in ticketUpdate.services | orderBy: 'itemOrder'"
                    ng-if=" ticketUpdate.type === 'MIXED'">
                 <div class="table-content service-table pull-left" ng-class="{'hide': service.id === editExpenseId}">
                   <div class="table-content-top clearfix">
@@ -448,179 +498,167 @@
               </div>
 
               <div class="table-wrapper product-upd clearfix"
-                   ng-repeat="product in ticketUpdate.products | orderBy: 'itemOrder'"
                    ng-if="ticketUpdate.type === 'PRODUCT'">
-                <div class="table-content pull-left" ng-class="{'hide': product.id === editExpenseId}">
+                <div class="table-content">
                   <div class="table-content-top clearfix">
-                    <div class="col-md-9 ellipsis">
-                      <p>Product</p>
-                      <p class="pre-line">{{product.item.description}}</p>
+                    <div class="col-md-6">
+                      <div class="updater-name added-by text-muted">
+                        added {{ updateType() }} by {{ getUserName(user) }}
+                      </div>
                     </div>
-                    <div class="col-md-1">
-                      <p>Price</p>
-                      <p>{{product.item.sale | currency:'$':2}}</p>
-                    </div>
-                    <div class="col-md-1">
-                      <p>Quantity</p>
-                      <p style="color: #9ca5b6">Qty {{ product.quantity }}</p>
-                    </div>
-                    <div class="col-md-1">
-                      <p>Total</p>
-                      <p>{{ product.item.sale * product.quantity || ''| currency :'$':2 }}</p>
-                    </div>
-                  </div>
-                  <div class="table-content-bottom clearfix">
-                    <div class="col-md-10">
-                      <p>Serial Number</p>
-                      <p>{{product.serialNumber}}</p>
-                    </div>
-                    <div class="col-md-2 text-right text-righttable-content-top clearfix" style="color:#2ec866 ">
-                      {{product.discountAmount}} <span ng-if="product.discountAmount">% Discount</span>
-                    </div>
-                  </div>
-                  <div class="table-content-action pull-right" ng-show="ticketDetails.status !== 'COMPLETED'">
-                    <a class="hit-area pull-right has-tooltip"
-                       tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit product"
-                       ng-click="setEditExpenseId(product.id, product, ticketUpdate.id)"
-                       custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">
-                      <i class="icon-sm edit-icon-final"></i>
-                    </a>
-                    <a class="hit-area pull-right has-tooltip"
-                       tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="delete product"
-                       ng-click="deleteExpence(ticketUpdate, [product.id], [])"
-                       custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">
+                    <div class="col-md-1">Price</div>
+                    <div class="col-md-1">Qty</div>
+                    <div class="col-md-1 text-right">Total</div>
+                    <a href="javascript:void(0)"
+                       class="hit-area has-tooltip"
+                       tooltip-placement="top"
+                       tooltip-append-to-body="true"
+                       uib-tooltip="Delete Update"
+                       ng-click="deleteUpdate()"
+                       custom-disabled="{{ !TicketsPermissionsService.isActionVisible('delete_update', ticketDetails, ticketUpdate.user) }}">
                       <i class="icon-sm icn-delete-final"></i>
                     </a>
                   </div>
-                </div>
-                <div class="ticket-update-edit" ng-class="{'hide': product.id !== editExpenseId}"
-                     ng-if="product.id === editExpenseId"
-                     ng-include="'/ng1/scripts/core/tickets/products/ticket-edit-update-product.tpl.html'"></div>
-              </div>
-              <div class="table-wrapper clearfix" ng-repeat="service in ticketUpdate.services | orderBy: 'itemOrder'"
-                   ng-if=" ticketUpdate.type === 'SERVICE'">
-                <div class="table-content service-table pull-left" ng-class="{'hide': service.id === editExpenseId}">
-                  <!--<div class="table-content-top clearfix">-->
-                  <!--<div class="col-md-2">-->
-                  <!--<p>Date</p>-->
-                  <!--<p>{{ service.date | date:'dd MMM yyyy'}}</p>-->
-                  <!--</div>-->
-                  <!--<div class="col-md-6">-->
-                  <!--<p>Service name</p>-->
-                  <!--<p>{{ service.item.name }}</p>-->
-                  <!--</div>-->
-                  <!--<div class="col-md-1">-->
-                  <!--<p>Time in</p>-->
-                  <!--<p>{{getFormatedTime(service.durationStart)}}</p>-->
-                  <!--</div>-->
-                  <!--<div class="col-md-1">-->
-                  <!--<p>Time out</p>-->
-                  <!--<p>{{getFormatedTime(service.durationEnd)}}</p>-->
-                  <!--</div>-->
-                  <!--<div class="col-md-1" style="width: 8%;">-->
-                  <!--<p>Duration</p>-->
-                  <!--<p>{{ service.quantity | durationFilter }}</p>-->
-                  <!--</div>-->
-                  <!--</div>-->
-                  <!--<div class="table-content-bottom clearfix">-->
-                  <!--<div class="col-md-12">-->
-                  <!--<p>Description</p>-->
-                  <!--<p class="pre-line" ng-bind-html="service.description"></p>-->
-                  <!--</div>-->
-                  <!--</div>-->
-                  <!--<div class="table-content-action pull-right" ng-show="ticketDetails.status != 'COMPLETED'">-->
-                  <!--<a class="hit-area pull-right has-tooltip"-->
-                  <!--tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit service"-->
-                  <!--ng-click="setEditExpenseId(service.id, service, ticketUpdate.id)"-->
-                  <!--custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">-->
-                  <!--<i class="icon-sm edit-icon-final"></i>-->
-                  <!--</a>-->
-                  <!--<a class="hit-area pull-right has-tooltip"-->
-                  <!--tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="delete service"-->
-                  <!--ng-click="deleteExpence(ticketUpdate, [], [service.id])"-->
-                  <!--custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">-->
-                  <!--<i class="icon-sm icn-delete-final"></i>-->
-                  <!--</a>-->
-                  <!--</div>-->
-
-                  <div class="table-content-top clearfix">
-                    <div class="col-md-6"></div>
-                    <div class="col-md-1">Time In</div>
-                    <div class="col-md-1">Time Out</div>
-                    <div class="col-md-1 text-right">Duration</div>
-                    <div class="col-md-2"></div>
-                  </div>
-                  <div class="table-content-bottom clearfix">
-                    <div class="col-md-6 service-name gm pl-0">
-                      <p>
+                  <div class="table-content-bottom clearfix"
+                       ng-repeat="product in ticketUpdate.products | orderBy: 'itemOrder'">
+                    <div ng-class="{'hide': product.id === editExpenseId}">
+                      <div class="col-md-6 gm pl-0">
                         <label class="checkbox-container">
                           <input type="checkbox">
                           <span class="checkbox-mark"></span>
                         </label>
-                        {{ service.item.name }}
-                      </p>
-                      <p class="pre-line" ng-bind-html="service.description"></p>
+                        <p class="pre-line" ng-bind-html="product.item.description"></p>
+                      </div>
+                      <div class="col-md-1">{{product.item.sale | currency:'$':2}}</div>
+                      <div class="col-md-1">{{ product.quantity }}</div>
+                      <div class="col-md-1 text-right">{{ product.item.sale * product.quantity || ''| currency :'$':2 }}</div>
+                      <div class="col-md-2 action-update pr-0">
+                        <i class="new-calendar-icn pointer"></i>
+                        <i class="assign-icn pointer"></i>
+                        <div uib-dropdown>
+                          <i class="more-vertical-icn pointer" uib-dropdown-toggle></i>
+                          <ul class="dropdown-menu" role="menu">
+                            <li ng-click="setEditExpenseId(product.id, product, ticketUpdate.id)">Edit</li>
+                            <li ng-click="deleteExpence(ticketUpdate, [product.id], [])">Delete</li>
+                          </ul>
+                        </div>
+                      </div>
+                      <p class="is-completed col-md-12">Completed on 05 Jan 2019, 12:30 AM</p>
                     </div>
-                    <div class="col-md-1">{{getFormatedTime(service.durationStart)}}</div>
-                    <div class="col-md-1">{{getFormatedTime(service.durationEnd)}}</div>
-                    <div class="col-md-1 text-right gm">{{ service.quantity | durationFilter }}</div>
-                    <div class="col-md-2 action-update pr-0">
-                      <i class="new-calendar-icn pointer"></i>
-                      <i class="assign-icn pointer"></i>
-                      <i class="more-vertical-icn pointer"></i>
+                    <div class="ticket-update-edit"
+                         ng-class="{'hide': product.id !== editExpenseId}"
+                         ng-if="product.id === editExpenseId"
+                         ng-include="'/ng1/scripts/core/tickets/products/ticket-edit-update-product.tpl.html'"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="table-wrapper clearfix"
+                   ng-if=" ticketUpdate.type === 'SERVICE'">
+                <div class="table-content service-table">
+                  <div class="table-content-top clearfix">
+                    <div class="col-md-6">
+                      <div class="updater-name added-by text-muted">
+                        added {{ updateType() }} by {{ getUserName(user) }}
+                      </div>
+                    </div>
+                    <div class="col-md-1">Time In</div>
+                    <div class="col-md-1">Time Out</div>
+                    <div class="col-md-1 text-right">Duration</div>
+                    <div class="col-md-2"></div>
+                    <a href="javascript:void(0)"
+                       class="hit-area has-tooltip"
+                       tooltip-placement="top"
+                       tooltip-append-to-body="true"
+                       uib-tooltip="Delete Update"
+                       ng-click="deleteUpdate()"
+                       custom-disabled="{{ !TicketsPermissionsService.isActionVisible('delete_update', ticketDetails, ticketUpdate.user) }}">
+                      <i class="icon-sm icn-delete-final"></i>
+                    </a>
+                  </div>
+                  <div class="table-content-bottom clearfix"
+                       ng-repeat="service in ticketUpdate.services | orderBy: 'itemOrder'">
+                    <div ng-class="{'hide': service.id === editExpenseId}">
+                      <div class="col-md-6 service-name gm pl-0">
+                        <p>
+                          <label class="checkbox-container">
+                            <input type="checkbox">
+                            <span class="checkbox-mark"></span>
+                          </label>
+                          {{ service.item.name }}
+                        </p>
+                        <p class="pre-line" ng-bind-html="service.description"></p>
+                      </div>
+                      <div class="col-md-1">{{getFormatedTime(service.durationStart)}}</div>
+                      <div class="col-md-1">{{getFormatedTime(service.durationEnd)}}</div>
+                      <div class="col-md-1 text-right gm">{{ service.quantity | durationFilter }}</div>
+                      <div class="col-md-2 action-update pr-0">
+                        <i class="new-calendar-icn pointer"></i>
+                        <i class="assign-icn pointer"></i>
+                        <div uib-dropdown>
+                          <i class="more-vertical-icn pointer" uib-dropdown-toggle></i>
+                          <ul class="dropdown-menu" role="menu">
+                            <li ng-click="setEditExpenseId(service.id, service, ticketUpdate.id)">Edit</li>
+                            <li ng-click="deleteExpence(ticketUpdate, [], [service.id])">Delete</li>
+                          </ul>
+                        </div>
+                      </div>
+                      <p class="is-completed col-md-12">Completed on 05 Jan 2019, 12:30 AM</p>
+                    </div>
+                    <div ng-class="{'hide': service.id !== editExpenseId}"
+                         ng-if="service.id === editExpenseId"
+                         ng-include="'/ng1/scripts/core/tickets/services/ticket-edit-update-service.tpl.html'"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ticket-update-meta clearfix" ng-init="showAllSharedUsers = false">
+                <div class="ticket-meta-wrapper">
+              <span class="update-timestamp pull-left">{{ ticketUpdate.createdAt | ticketCreateDate }}
+                <span class="dot-sep"></span>
+                {{ getLengthSharedUsers(ticketUpdate.shares) }} people added to this update
+              </span>
+                  <div class="added-users-wrapper pull-left">
+                    <div class="pull-left avatar userinfo-tooltip" ng-hide="showAllSharedUsers"
+                         ng-repeat="share in ticketUpdate.shares | filter: filterCurrentUser | orderBy: 'itemOrder' | limitTo: 5"
+                         tooltip-class="avatar-tooltip" tooltip-placement="top"
+                         uib-tooltip-template="'/ng1/scripts/core/tickets/popup-templates/update-shared-user-popup.tpl.html'">
+                      <img ng-if="(share.user.avatar)" alt="..." class="avatar-26 img-circle"
+                           ng-src="{{ share.user ? getUserAvatarUrl(getUserById(share.user.id)) : getContactAvatarUrl(share.contact) }}">
+                      <div class="default-user-avatar" ng-if="!(share.user.avatar)"
+                           ng-class-odd="'avatar-background-color-odd'"
+                           ng-class-even="'avatar-background-color-even'">
+                        <span>{{share.user.firstName[0].toUpperCase()}}</span>
+                        <span>{{share.user.lastName[0].toUpperCase()}}</span>
+                      </div>
+                    </div>
+                    <span class="pull-left label label-light btn-more-users" ng-click="showAllSharedUsers = true"
+                          ng-class="{'hide': (getLengthSharedUsers(ticketUpdate.shares) < 6) || showAllSharedUsers}">
+              {{ getLengthSharedUsers(ticketUpdate.shares) - 5 }} More
+              </span>
+                    <div class="users-added-to-update pull-left" ng-class="{'hide': !showAllSharedUsers}"
+                         style="margin-left: 0px;">
+                      <div class="pull-left avatar userinfo-tooltip"
+                           ng-repeat="share in ticketUpdate.shares | filter: filterCurrentUser | orderBy: 'itemOrder'"
+                           tooltip-class="avatar-tooltip" style="margin-left: 10px;" tooltip-placement="top"
+                           uib-tooltip-template="'/ng1/scripts/core/tickets/popup-templates/update-shared-user-popup.tpl.html'">
+                        <img ng-if="(share.user.avatar)" alt="..." class="avatar-26 img-circle"
+                             ng-src="{{ share.user ? getUserAvatarUrl(getUserById(share.user.id)) : getContactAvatarUrl(share.contact) }}">
+                        <div class="default-user-avatar" ng-if="!(share.user.avatar)"
+                             ng-class-odd="'avatar-background-color-odd'"
+                             ng-class-even="'avatar-background-color-even'">
+                          <span>{{share.user.firstName[0].toUpperCase()}}</span>
+                          <span>{{share.user.lastName[0].toUpperCase()}}</span>
+                        </div>
+                      </div>
+                      <div class="btn btn-icn pull-left btn-primary has-tooltip" ng-click="showAllSharedUsers = false"
+                           uib-tooltip="Show Fewer" data-placement="top">
+                        <i class="icn-sm icn-remove-token-light"></i>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div class="ticket-update-edit" ng-class="{'hide': service.id !== editExpenseId}"
-                     ng-if="service.id === editExpenseId"
-                     ng-include="'/ng1/scripts/core/tickets/services/ticket-edit-update-service.tpl.html'"></div>
               </div>
-              <!--<div class="ticket-update-meta clearfix" ng-init="showAllSharedUsers = false">-->
-              <!--<div class="ticket-meta-wrapper">-->
-              <!--<span class="update-timestamp pull-left">{{ ticketUpdate.createdAt | ticketCreateDate }}-->
-              <!--<span class="dot-sep"></span>-->
-              <!--{{ getLengthSharedUsers(ticketUpdate.shares) }} people added to this update-->
-              <!--</span>-->
-              <!--<div class="added-users-wrapper pull-left">-->
-              <!--<div class="pull-left avatar userinfo-tooltip" ng-hide="showAllSharedUsers"-->
-              <!--ng-repeat="share in ticketUpdate.shares | filter: filterCurrentUser | orderBy: 'itemOrder' | limitTo: 5"-->
-              <!--tooltip-class="avatar-tooltip" tooltip-placement="top"-->
-              <!--uib-tooltip-template="'/ng1/scripts/core/tickets/popup-templates/update-shared-user-popup.tpl.html'">-->
-              <!--<img ng-if="(share.user.avatar)" alt="..." class="avatar-26 img-circle"-->
-              <!--ng-src="{{ share.user ? getUserAvatarUrl(getUserById(share.user.id)) : getContactAvatarUrl(share.contact) }}">-->
-              <!--<div class="default-user-avatar" ng-if="!(share.user.avatar)"-->
-              <!--ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">-->
-              <!--<span>{{share.user.firstName[0].toUpperCase()}}</span>-->
-              <!--<span>{{share.user.lastName[0].toUpperCase()}}</span>-->
-              <!--</div>-->
-              <!--</div>-->
-              <!--<span class="pull-left label label-light btn-more-users" ng-click="showAllSharedUsers = true"-->
-              <!--ng-class="{'hide': (getLengthSharedUsers(ticketUpdate.shares) < 6) || showAllSharedUsers}">-->
-              <!--{{ getLengthSharedUsers(ticketUpdate.shares) - 5 }} More-->
-              <!--</span>-->
-              <!--<div class="users-added-to-update pull-left" ng-class="{'hide': !showAllSharedUsers}"-->
-              <!--style="margin-left: 0px;">-->
-              <!--<div class="pull-left avatar userinfo-tooltip"-->
-              <!--ng-repeat="share in ticketUpdate.shares | filter: filterCurrentUser | orderBy: 'itemOrder'"-->
-              <!--tooltip-class="avatar-tooltip" style="margin-left: 10px;" tooltip-placement="top"-->
-              <!--uib-tooltip-template="'/ng1/scripts/core/tickets/popup-templates/update-shared-user-popup.tpl.html'">-->
-              <!--<img ng-if="(share.user.avatar)" alt="..." class="avatar-26 img-circle"-->
-              <!--ng-src="{{ share.user ? getUserAvatarUrl(getUserById(share.user.id)) : getContactAvatarUrl(share.contact) }}">-->
-              <!--<div class="default-user-avatar" ng-if="!(share.user.avatar)"-->
-              <!--ng-class-odd="'avatar-background-color-odd'"-->
-              <!--ng-class-even="'avatar-background-color-even'">-->
-              <!--<span>{{share.user.firstName[0].toUpperCase()}}</span>-->
-              <!--<span>{{share.user.lastName[0].toUpperCase()}}</span>-->
-              <!--</div>-->
-              <!--</div>-->
-              <!--<div class="btn btn-icn pull-left btn-primary has-tooltip" ng-click="showAllSharedUsers = false"-->
-              <!--uib-tooltip="Show Fewer" data-placement="top">-->
-              <!--<i class="icn-sm icn-remove-token-light"></i>-->
-              <!--</div>-->
-              <!--</div>-->
-              <!--</div>-->
-              <!--</div>-->
-              <!--</div>-->
             </div>
           </div>
           <div class="btn btn-lg btn-primary btn-load-more"
@@ -951,9 +989,9 @@
   </div>
 </div>
 <script>
-  (function(i, s, o, g, r, a, m) {
+  (function (i, s, o, g, r, a, m) {
     i['GoogleAnalyticsObject'] = r;
-    i[r] = i[r] || function() {
+    i[r] = i[r] || function () {
       (i[r].q = i[r].q || []).push(arguments);
     }, i[r].l = 1 * new Date();
     a = s.createElement(o),

@@ -1,6 +1,5 @@
 .ticket-update {
-  margin-left: 30px;
-  margin-right: 30px;
+  margin: 0 30px 30px;
 }
 
 .ticket-update-header {
@@ -92,13 +91,15 @@
   font-size: 13px;
 }
 
-.ticket-update {
-  padding-top: 30px;
+.ticket-update-avatar {
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
-.ticket-update-avatar {
-  width: 48px;
-  padding-right: 10px;
+.ticket-update-avatar a {
+  position: absolute;
+  right: 0;
 }
 
 .ticket-update-avatar .icon-update {
@@ -107,11 +108,8 @@
 }
 
 .ticket-update-content .updater-name {
-  float: left;
-  width: 100%;
-  margin-top: -1px;
-  font-weight: bold;
-  color: #1f2a37;
+  display: flex;
+  white-space: nowrap;
 }
 
 .ticket-update-content .updater-name span {
@@ -125,7 +123,7 @@
 
 .ticket-update-content .ticket-update-message {
   float: left;
-  width: 96%;
+  width: 98%;
   margin-top: 4px;
   color: #748498;
   line-height: 20px;
@@ -149,7 +147,7 @@
   font-size: 10px;
 }
 
-.ticket-update-content .icn-delete-final,
+.ticket-update .icn-delete-final,
 .ticket-add-product-actions .icn-delete-final,
 .ticket-add-service-actions .icn-delete-final {
   background-image: url(../images/new-icons/remove-final.png);
@@ -220,7 +218,7 @@
 }
 
 .ticket-update-meta .tooltip-name, .shared-users-list .tooltip-name {
-  color: #fff;
+  color: #ffffff;
   line-height: 12px;
 }
 
@@ -260,7 +258,7 @@
 }
 
 .tooltip-users .tooltip-inner > li > span.username {
-  color: #fff;
+  color: #ffffff;
 }
 
 .tooltip-users .tooltip-inner > li > span.usertitle {
@@ -270,8 +268,8 @@
 }
 
 .ticket-update-content {
-  width: calc(100% - 48px);
-  padding: 10px 0 30px;
+  /*width: calc(100% - 48px);*/
+  padding: 10px 0;
   /*border-bottom: 1px solid #e7ecf2;*/
   position: relative;
 }
@@ -333,8 +331,6 @@
 .table-wrapper {
   float: left;
   width: 100%;
-  margin-top: 9px;
-  margin-bottom: 10px;
 }
 
 .table-wrapper + .table-wrapper {
@@ -354,7 +350,7 @@
 }
 
 .table-wrapper .table-content {
-  width: calc(100% - 30px);
+  /*width: calc(100% - 30px);*/
   margin: 0;
   padding: 0;
   position: relative;
@@ -421,6 +417,12 @@
 
 .table-wrapper .table-content .table-content-top [class^="col-"] {
   line-height: 0;
+}
+
+.table-wrapper .table-content .table-content-top > a {
+  position: absolute;
+  right: 0;
+  bottom: 7px;
 }
 
 .table-wrapper .table-content .form-group {
@@ -587,8 +589,8 @@
   clear: both;
   float: left;
   width: 100%;
-  height: 166px;
-  margin: 10px 0 0;
+  /*height: 166px;*/
+  /*margin: 10px 0 0;*/
 }
 
 .table-wrapper + .table-wrapper .table-content + .ticket-update-edit {
@@ -712,7 +714,7 @@
 }
 
 .product-upd .table-content-top .col-md-1 {
-  width: 12%;
+  width: 11.1%;
 }
 
 .product-upd .table-content-top .col-md-9 {
@@ -723,7 +725,7 @@
   .table-wrapper.product-upd .table-content .col-1 {
     width: 15%;
   }
-  
+
   .table-wrapper.product-upd .table-content .col-3 {
     width: 18%;
   }
@@ -759,6 +761,24 @@
   margin: 0 16px 0 8px;
 }
 
+.table-content .ticket-update-service-edit .action-update .dashboard-remove,
+.table-content .ticket-update-service-edit .action-update .icn-label-save-dashboard,
+.table-content .ticket-update-service-edit .action-update .assign-icn,
+.table-content .ticket-update-product-edit .action-update .dashboard-remove,
+.table-content .ticket-update-product-edit .action-update .icn-label-save-dashboard,
+.table-content .ticket-update-product-edit .action-update .assign-icn {
+  margin: 0 8px;
+}
+
+.ticket-update-service-edit .timer-quantity .time_drop_down ul {
+  width: 42px;
+}
+
+.ticket-update-service-edit .timer-quantity .time_drop_down ul li a:hover {
+  background: #16a4fa !important;
+  color: #ffffff;
+}
+
 .table-content .table-content-bottom [class*='col-md-'] {
   font-size: 13px;
   font-family: "Graphik-Regular", sans-serif;
@@ -791,7 +811,11 @@
   content: 'PRODUCT';
 }
 
-.table-content .table-content-top .timepicker {
+.note-upd .table-content-top:before {
+  content: 'NOTE';
+}
+
+.table-content .ticket-update-service-edit .timepicker {
   top: 6px;
 }
 
@@ -836,12 +860,12 @@
 }
 
 .table-wrapper .service-table .col-md-2.new-quantity-picker {
-  width: 18%;
+  width: 22.2%;
 }
 
 .checkbox-container {
   position: relative;
-  width: 22px;
+  min-width: 22px;
   height: 22px;
   margin: 0;
   cursor: pointer;
@@ -870,8 +894,21 @@
   display: flex;
 }
 
-.service-name p:first-child .checkbox-container {
+.service-name p:first-child .checkbox-container,
+.product-upd .col-md-6 label {
   margin-right: 10px;
+}
+
+.product-upd .col-md-6 {
+  display: flex;
+}
+
+.product-upd .col-md-6 p {
+  font-family: "Graphik Medium", sans-serif;
+}
+
+.product-upd .col-md-1 {
+  width: 11.1%;
 }
 
 .service-name p:last-child {
@@ -885,19 +922,19 @@
   .table-content.service-table .col-3 {
     width: 75%;
   }
-  
+
   .opened-ticket .table-wrapper .service-table .col-3 {
     width: calc(100% - 605px);
   }
-  
+
   .opened-ticket-list .table-wrapper .service-table .col-3 {
     width: calc(100% - 485px);
   }
-  
+
   _:-moz-tree-row(hover), .opened-ticket-list .table-wrapper .service-table .col-3 {
     width: calc(100% - 488px);
   }
-  
+
   .qt-recurring-invoices .table-wrapper .table-content .col-sm-4 {
     width: 33.333333%;
   }
@@ -912,80 +949,80 @@
   .table-content input {
     font-size: 12px;
   }
-  
+
   .table-content .table-content-top .timepicker {
     right: 0;
   }
-  
+
   .table-content.service-table .col-3 {
     padding-left: 342px;
   }
-  
+
   .table-wrapper .service-table .col-md-1 {
     width: 15.8%;
   }
-  
+
   .table-wrapper .service-table .col-md-6 {
     width: 41.66666667%;
   }
-  
+
   .table-wrapper .service-table .table-content-top.without-duration .service-title {
     width: 50%;
   }
-  
+
   .table-wrapper .service-table .table-content-top.without-duration .service-datetimepicker,
   .table-wrapper .service-table .table-content-top.without-duration .new-quantity-picker {
     width: 25%;
   }
-  
+
   .table-wrapper .service-table .col-md-1.timer-quantity {
     width: 9%;
   }
-  
+
   .table-wrapper .service-table .col-md-3.service-datetimepicker,
   .table-wrapper .service-table .col-md-2.new-quantity-picker {
     width: 23%;
   }
-  
+
   .table-wrapper .service-table .col-md-5.service-title {
     width: 36%;
   }
-  
+
   /*.ticket-update-service-edit {*/
   /*padding: 30px 40px 30px 50px;*/
   /*}*/
   .ticket-update-product-edit {
     padding: 0;
   }
-  
+
   .ticket-update-edit .icon-edit {
     left: 30px;
   }
-  
+
   .table-wrapper .service-table .col-3 {
     width: calc(100% - 563px);
   }
-  
+
   .opened-ticket-list .table-wrapper .service-table .col-3 {
     width: 36%;
   }
-  
+
   _::-webkit-:not(:root:root), .opened-ticket-list .table-wrapper .service-table .col-3 {
     width: 35%;
   }
-  
+
   .opened-ticket-list .table-wrapper .service-table .col-5 div {
     white-space: nowrap;
   }
-  
+
   .inventory-details .table-wrapper .service-table .col-3 {
     width: calc(100% - 290px);
   }
-  
+
   .table-wrapper .table-content .discount-ticket {
     white-space: normal;
   }
-  
+
   .table-wrapper .service-table .col-2 {
     width: 20%;
   }
@@ -995,76 +1032,76 @@
   .opened-ticket-list .product-upd .table-content-top .col-md-1 {
     width: 33.33333%;
   }
-  
+
   .opened-ticket-list .product-upd .table-content-top .col-md-9,
   .opened-ticket.opened-ticket-list .ticket-update-product-edit .table-content-top .col-md-6 {
     width: 100%;
   }
-  
+
   .table-content .table-content-top .timepicker {
     right: auto;
   }
-  
+
   .table-content .table-content-top.without-duration .timepicker {
     right: 0;
   }
-  
+
   .table-content.service-table .col-3 {
     padding-left: 295px;
   }
-  
+
   .opened-ticket.opened-ticket-list .table-wrapper .service-table .table-content-top.without-duration .service-title {
     width: 40%;
   }
-  
+
   .opened-ticket.opened-ticket-list .table-wrapper .service-table .table-content-top.without-duration .service-datetimepicker {
     width: 27%;
   }
-  
+
   .opened-ticket.opened-ticket-list .table-wrapper .service-table .table-content-top.without-duration .new-quantity-picker {
     width: 33%;
   }
-  
+
   .table-wrapper .table-content .form-group input {
     font-size: 12px;
   }
-  
+
   .tax-recurring input {
     font-size: 12px;
   }
-  
+
   .table-wrapper .table-content .discount-ticket {
     white-space: nowrap;
   }
-  
+
   .table-wrapper .service-table .col-3 {
     width: calc(100% - 464px);
   }
-  
+
   .inventory-details .table-wrapper .service-table .col-3 {
     width: calc(100% - 230px);
   }
-  
+
   .opened-ticket-list .table-wrapper .service-table .col-3 {
     width: 75%;
   }
-  
+
   .opened-ticket.opened-ticket-list .table-wrapper .service-table .col-md-3.service-datetimepicker,
   .opened-ticket.opened-ticket-list .table-wrapper .service-table .col-md-2.new-quantity-picker,
   .opened-ticket.opened-ticket-list .table-wrapper .service-table .col-md-1.timer-quantity {
     width: 33.33333%;
   }
-  
+
   .opened-ticket.opened-ticket-list .table-wrapper .service-table .col-md-5.service-title {
     width: 66.66666%;
   }
-  
+
   .opened-ticket.opened-ticket-list .table-content-top .col-md-1,
   .opened-ticket.opened-ticket-list .table-content-top .col-md-2 {
     width: 33.33333333%;
     text-align: left !important;
   }
-  
+
   .opened-ticket.opened-ticket-list .table-content-top .col-md-6 {
     width: 66.66666667%;
   }
@@ -1074,15 +1111,15 @@
   .inventory-details .table-wrapper .service-table .col-3 {
     width: calc(100% - 210px);
   }
-  
+
   .table-content.service-table .col-3 {
     padding-left: 278px;
   }
-  
+
   .table-wrapper .table-content .col-5 {
     width: 14%;
   }
-  
+
   .table-wrapper .table-content .col-2.col-2-has-serial-number {
     width: 71%;
   }
