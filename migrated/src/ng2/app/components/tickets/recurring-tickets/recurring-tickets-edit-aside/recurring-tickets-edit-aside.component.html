@@ -91,7 +91,7 @@
               </div>
               <div class="col-md-4 mt-20">
                 <p>Product Cost</p>
-                <input type="number" number [(ngModel)]="product.cost" placeholder="Write Product Cost">
+                <input type="text" number [money]="'true'" [(ngModel)]="product.cost" placeholder="Write Product Cost">
               </div>
               <div class="col-md-4 mt-20">
                 <p>Quantity</p>
@@ -99,7 +99,7 @@
               </div>
               <div class="col-md-4 mt-20">
                 <p>Product Price</p>
-                <input type="number" number [(ngModel)]="product.sale" placeholder="Write Product Price">
+                <input type="text" number [money]="'true'"  [(ngModel)]="product.sale" placeholder="Write Product Price">
               </div>
               <div class="col-md-4 mt-20">
                 <p>Discount</p>

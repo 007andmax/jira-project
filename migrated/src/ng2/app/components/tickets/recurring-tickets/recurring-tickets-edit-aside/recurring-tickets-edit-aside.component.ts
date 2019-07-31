@@ -346,7 +346,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
           if (index > (-1)) {
             console.log('catIndex', catIndex);
             console.log('prodIndex', prodIndex);
-            if (this.products[index].manufacture !== prod.manufacture || this.products[index].sale !== prod.sale || this.products[index].cost !== prod.cost) {
+            if (this.products[index].manufacture !== prod.manufacture || Number(this.products[index].sale) !== prod.sale || Number(this.products[index].cost) !== prod.cost) {
               this.recurringState.addEditProduct(category, this.products[index]);
   
             }
