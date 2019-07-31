@@ -35,12 +35,12 @@ export class RecurringTicketsStateService {
   public addEditProduct(category, prod) {
     this.editProducts.push({
       categoryId: category.id,
-      cost: prod.cost,
+      cost: Number(prod.cost),
       description: prod.description,
       glNumber: null,
       ilc: null,
       manufacture: prod.manufacture,
-      sale: prod.sale,
+      sale: Number(prod.sale),
       taxIds: [],
       versionedId: prod.versionedId
     })
