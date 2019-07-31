@@ -5,13 +5,15 @@ import { tap, catchError } from 'rxjs/operators';
 import { throwError, forkJoin, Observable } from 'rxjs';
 import { CreateRecurringTickets } from '../../components/tickets/recurring-tickets/recurring-tickets-edit-aside/class/create-recurring-tickets';
 import { RecurringTicket } from '../../components/tickets/recurring-tickets/class/recurring-ticket';
+import { RecurringTicketsStateService } from '../../components/tickets/recurring-tickets/services/recurring-tickets-state.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecurringService {
   private apiUrl = environment.apiUrl;
-  constructor( private http: HttpClient) { }
+  constructor( private http: HttpClient,
+    private recurringState: RecurringTicketsStateService,) { }
 
   public onInitEditProducts(products): Observable<any[]> {
     let out = [];
@@ -72,7 +74,7 @@ export class RecurringService {
    */
   private handleError =(error)=> {
     let err = error.error;
-    //this.quoteStateService.setError((err.validationResults && err.validationResults.saleQuotePostDto) ? err.validationResults.saleQuotePostDto : err.message);
+//    this.quoteStateService.setError((err.validationResults && err.validationResults.saleQuotePostDto) ? err.validationResults.saleQuotePostDto : err.message);
     return throwError(error);
   }
 }

@@ -20,10 +20,9 @@ export class RecurringTicketsService {
     private stateInterval: IntervalStateService,
     private tehState: TehUsersSateService,
     private devicesState: DevicesStateService,
-    
-   
-    ) { }
 
+
+  ) { }
   public setRulesCreateTicket(data: CreateRecurringTickets) {
 
     data.setRequireUpdate(this.elRef.nativeElement.querySelector('#requireUpdate').checked);
@@ -34,17 +33,17 @@ export class RecurringTicketsService {
   public setCronForEdit(data) {
     this.stateInterval.onInitEditMode(data);
   }
- public getIntervalState () {
-   return this.stateInterval;
- }
-  public getDevicesState () {
+  public getIntervalState() {
+    return this.stateInterval;
+  }
+  public getDevicesState() {
     return this.devicesState;
   }
-  public getTagsState () {
+  public getTagsState() {
     return this.tagsState;
   }
-  public getTehState () {
-   return this.tehState;
+  public getTehState() {
+    return this.tehState;
   }
   public clearData() {
     this.elRef.nativeElement.querySelector('#service-description').value = '';
@@ -102,10 +101,10 @@ export class RecurringTicketsService {
   }
 
   public getDateForDatePicker(time) {
-    let date = (time) ? new Date(time) :  new Date();
+    let date = (time) ? new Date(time) : new Date();
     return new NgbDate(date.getFullYear(), date.getMonth() + 1, date.getDate());
   }
-  public setTextInput (id,val) {
+  public setTextInput(id, val) {
     this.elRef.nativeElement.querySelector(`#${id}`).value = val;
   }
 

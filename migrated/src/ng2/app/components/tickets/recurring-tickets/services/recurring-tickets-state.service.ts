@@ -17,7 +17,7 @@ export class RecurringTicketsStateService {
   public tecketForCreate: Ticket = new Ticket();
   public onEditMode: EventEmitter<any> = new EventEmitter();
   editProducts: Array<EditProduct> = [];
-  constructor(private companiesService: CompaniesService, private recurringService: RecurringService,) { }
+  constructor(private companiesService: CompaniesService) { }
 
   public onInitClientList() {
     this.companiesService.getCompaniesList();
@@ -68,5 +68,4 @@ export class RecurringTicketsStateService {
     }
     return "Monthly";
   }
-
 }

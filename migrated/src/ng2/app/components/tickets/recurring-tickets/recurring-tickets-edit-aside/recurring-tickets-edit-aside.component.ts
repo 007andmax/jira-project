@@ -37,8 +37,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
 
   public showTicketRecurringSub: Subscription;
   public opened = false;
-  public showDatePicker: boolean = false;
-  public navigation = 'arrows';
+  // public showDatePicker: boolean = false;
   public ticketForm: FormGroup;
   public productList = [];
   public servicesList = [];
@@ -54,6 +53,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   public devicesList = [];
   public tehUsers = [];
   public ticketForEdit: RecurringTicket = new RecurringTicket();
+  public errors = { products: { show: false, text: "" } };
   constructor(
     private ticketStateService: TicketStateService,
     private productService: ProductService,
@@ -346,7 +346,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
           console.log('catIndex', catIndex);
           console.log('prodIndex', prodIndex);
           if (this.products[index].manufacture !== prod.manufacture || this.products[index].sale !== prod.sale || this.products[index].cost !== prod.cost) {
-            this.recurringState.addEditProduct(category, prod);
+            this.recurringState.addEditProduct(category, this.products[index]);
 
           }
         }
@@ -355,7 +355,15 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     if (this.recurringState.getEditProducts().length > 0) {
       this.recurringService.onInitEditProducts(this.recurringState.getEditProducts()).subscribe(responseList => {
         console.log('responseList', responseList);
+        responseList.forEach((item, index) => {
+          this.products[index].versionedId.id = item.id;
+          this.products[index].versionedId.version = item.version;
+        })
         this.onInitSave();
+        this.getItemListProducts();
+      }, (err) => {
+        this.errors.products.show = true;
+        this.errors.products.text = (err.validationResults && err.validationResults.saleQuotePostDto) ? err.validationResults.saleQuotePostDto : err.message;
       });
     } else {
       this.onInitSave();
@@ -393,7 +401,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   }
   public close() {
     this.opened = false;
-    this.showDatePicker = false;
+    //this.showDatePicker = false;
     this.isFormValid = false;
     this.type = "products";
     this.selectedClient = null;

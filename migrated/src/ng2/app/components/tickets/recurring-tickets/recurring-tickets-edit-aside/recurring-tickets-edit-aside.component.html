@@ -34,7 +34,7 @@
             <input type="text" class="pointer" placeholder="Select Date" ngbDropdownToggle id="dropdownDate" readonly>
             <i class="icn-16 icn-calendar-light pointer"></i>
             <div ngbDropdownMenu aria-labelledby="dropdownDate">
-              <ngb-datepicker [navigation]="navigation" [(ngModel)]="datepicker" (select)="selectDate($event)"
+              <ngb-datepicker [navigation]="'arrows'" [(ngModel)]="datepicker" (select)="selectDate($event)"
                               (navigate)="navigateDate($event)" [startDate]="datepicker"
                               [ngModelOptions]="{standalone: true}"
                               style="border: none"></ngb-datepicker>
@@ -76,6 +76,7 @@
 
         <!--IF TAB IS 'PRODUCT'------------------------------------------------->
         <div class="col-md-12 product-tab-content p-0" *ngIf="type === 'products'">
+          <div class="error-products" *ngIf="errors.products.show"><p [textContent]="errors.products.text"></p></div>
           <ng-template ngFor let-product [ngForOf]="products" let-i="index" [ngForTrackBy]="trackByIndex">
             <div [ngClass]="{'separator-hr': products.length > 1}" class="row product-tab-content__item">
               <div class="col-md-12">
