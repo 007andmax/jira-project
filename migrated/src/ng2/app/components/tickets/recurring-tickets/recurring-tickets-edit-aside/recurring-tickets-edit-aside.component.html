@@ -9,7 +9,7 @@
       <div class="recurring-tickets-content__modal--content clearfix">
         <div class="col-md-12">
           <p>Service Description</p>
-          <input type="text" id="service-description" placeholder="Write Description" (input)="onChangeDescription($event)">
+          <input type="text"  id="service-description" placeholder="Write Description" (input)="onChangeDescription($event)">
         </div>
 
         <div class="col-md-12">
@@ -91,7 +91,7 @@
               </div>
               <div class="col-md-4 mt-20">
                 <p>Product Cost</p>
-                <input type="text" [(ngModel)]="product.cost" placeholder="Write Product Cost">
+                <input type="number" number [(ngModel)]="product.cost" placeholder="Write Product Cost">
               </div>
               <div class="col-md-4 mt-20">
                 <p>Quantity</p>
@@ -99,7 +99,7 @@
               </div>
               <div class="col-md-4 mt-20">
                 <p>Product Price</p>
-                <input type="text" [(ngModel)]="product.sale" placeholder="Write Product Price">
+                <input type="number" number [(ngModel)]="product.sale" placeholder="Write Product Price">
               </div>
               <div class="col-md-4 mt-20">
                 <p>Discount</p>

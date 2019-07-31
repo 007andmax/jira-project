@@ -34,7 +34,6 @@ import { EditProduct } from 'src/ng2/app/interfaces/product/edit-product';
 })
 export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   @ViewChild('date') date_dropDown: NgbDropdown;
-
   public showTicketRecurringSub: Subscription;
   public opened = false;
   // public showDatePicker: boolean = false;
@@ -374,7 +373,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     }
   }
   public onInitSave() {
-    console.log('this.services', this.services);
+   
     this.recurringState.getCreateTicket().clearProducts();
     this.recurringState.getCreateTicket().clearServices();
     this.createService.setRulesCreateTicket(this.recurringState.getCreateTicket());
@@ -382,6 +381,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.services.forEach((item: ForCreateService) => (item.name || item.description) && this.recurringState.getCreateTicket().addService(new CreateRecurringTicketsService(item.versionedId.id, item.description, item.duration)));
 
     console.log('data', this.recurringState.getCreateTicket());
+    
     if (this.ticketForEdit.id) {
 
       this.recurringService.editTicket(this.ticketForEdit, this.recurringState.getCreateTicket()).subscribe((res) => {

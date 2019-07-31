@@ -7,6 +7,7 @@ import { CommonService } from '../services/common/common.service';
 
 @Directive({
     selector: '[number]',
+    providers:[CommonService]
 })
 @Injectable()
 export class numberDirective {
