@@ -71,6 +71,7 @@ export class QuotePreviewComponent implements OnInit {
   public getQuoteInfo() {
     this.quote = this.quoteStateService.getQuote();
     this.quoteForCreate = this.quoteStateService.getQuoteCreate();
+    console.log('this.quoteForCreate',this.quoteForCreate);
   }
 
   /**
@@ -234,7 +235,7 @@ export class QuotePreviewComponent implements OnInit {
         .pipe(takeUntil(this.unsubscribe))
         .subscribe((res) => {
           const id = res['id'];
-          this.quoteService.downloadPdf(res['id']).subscribe((res) => this.downLoadFile(res, id));
+          this.quoteService.downloadPdf(res['id']).subscribe((res) => this.quoteService.downLoadFile(res, id,this.quote.client.name,this.quoteForCreate.quoteNumber));
         });
     } else if (isFormReady && this.editMode) {
       const currentQuote = this.quoteStateService.getQuoteCreate();
@@ -242,7 +243,7 @@ export class QuotePreviewComponent implements OnInit {
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((res) => {
         const id = res['id'];
-        this.quoteService.downloadPdf(res['id']).subscribe((res) => this.downLoadFile(res,id));
+        this.quoteService.downloadPdf(res['id']).subscribe((res) => this.quoteService.downLoadFile(res, id,this.quote.client.name,this.quoteForCreate.quoteNumber));
       })
     } else {
       this.quoteStateService.emitValidation();
@@ -262,14 +263,14 @@ export class QuotePreviewComponent implements OnInit {
    * @param res - Array Buffer data
    * @param id - type of the document.
    */
-  public downLoadFile(res: any, id) {
+  /*public downLoadFile(res: any, id) {
     const data = window.URL.createObjectURL(res);
     var link = document.createElement('a');
     link.href = data;
     link.download = `${this.apiUrl}saleQuotes/${id}/pdf.pdf`;
     link.click();
     this.quoteStateService.goToQuote();
-  }
+  }*/
 
   /**
    * Return to quotes
@@ -314,6 +315,17 @@ export class QuotePreviewComponent implements OnInit {
         .subscribe((res) => {
           this.quoteStateService.goToQuote();
         })
+    }
+  }
+
+  public getFormatDateWithTime (date,milisecond) {
+    if (date) {
+      let full_date = new Date(milisecond);
+      let time = full_date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
+      date = `${date.year}/${date.month}/${date.day}`;
+      return `${this.dateService.getInvoiceDate(date)} ${time}`;
+    } else {
+      return ''
     }
   }
 

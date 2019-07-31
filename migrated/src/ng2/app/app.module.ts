@@ -64,6 +64,7 @@ import { IntervalComponent } from './components/shared/interval/interval.compone
 import { DurationComponent } from './components/shared/duration/duration.component';
 import { TehUsersComponent } from './components/shared/teh-users/teh-users.component';
 import { DurationFilterPipe } from './pipe/duration-filter.pipe';
+import { numberDirective } from './directives/number.directive';
 
 /**
  * declare angular
@@ -150,7 +151,8 @@ angular.module('quicktech')
     IntervalComponent,
     DurationComponent,
     TehUsersComponent,
-    DurationFilterPipe
+    DurationFilterPipe,
+    numberDirective
   ],
   imports: [
     BrowserModule,

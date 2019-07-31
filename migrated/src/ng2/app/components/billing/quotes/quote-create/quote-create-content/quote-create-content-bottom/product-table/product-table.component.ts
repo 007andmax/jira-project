@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { QuoteStateService } from "../../../quote-state.service";
 import { ProductService } from "../../../../../../../services/product/product.service";
 import { QuoteService } from "../../../../../../../services/quote/quote.service";
+import { CommonService } from 'src/ng2/app/services/common/common.service';
 
 /**
  * Product table component
@@ -10,6 +11,7 @@ import { QuoteService } from "../../../../../../../services/quote/quote.service"
   selector: 'app-product-table',
   templateUrl: './product-table.component.html',
   styleUrls: ['./product-table.component.scss'],
+  providers:[CommonService]
 })
 export class ProductTableComponent implements OnInit {
 
@@ -24,6 +26,7 @@ export class ProductTableComponent implements OnInit {
   public servicesList = [];
   public isDropDownShow = [];
   public markups = [];
+  unamePattern = "(?<=^| )\d+(\.\d+)?(?=$| )"; 
 
   /**
    * Creates an instance of the QuoteCreateContentComponent with the injected services
@@ -34,7 +37,8 @@ export class ProductTableComponent implements OnInit {
   constructor(
     private quoteStateService: QuoteStateService,
     private productService: ProductService,
-    private quoteService: QuoteService
+    private quoteService: QuoteService,
+    private commonService:CommonService
   ) { }
 
   /**
@@ -157,6 +161,7 @@ export class ProductTableComponent implements OnInit {
     const item = this.itemsListArray[index];
     this.itemsListArray[index].sale =  this.quoteStateService.roundToTwo((value * item.cost / 100 + item.cost));
     this.itemsListArray[index].markup = value;
+    this.itemsListArray[index].markup = this.roundingMarkup(this.itemsListArray[index].markup);
     this.updateItemsArray();
   }
 
@@ -169,10 +174,11 @@ export class ProductTableComponent implements OnInit {
     const item = this.itemsListArray[index];
     if (this.getMarkup(this.itemsListArray[index])) {
       this.itemsListArray[index].markup = (value - item.cost) / item.cost * 100;
-      this.itemsListArray[index].sale = value;
+      this.itemsListArray[index].markup = this.roundingMarkup(this.itemsListArray[index].markup);
+      this.itemsListArray[index].sale = this.commonService.validateNumber(value);;
       this.updateItemsArray();
     } else {
-      this.itemsListArray[index].rate = value;
+      this.itemsListArray[index].rate = this.commonService.validateNumber(value);;
     }
   }
 
@@ -184,10 +190,10 @@ export class ProductTableComponent implements OnInit {
   public changeCost(value, index) {
     const item = this.itemsListArray[index];
     if (this.getMarkup(this.itemsListArray[index])) {
-      this.itemsListArray[index].markup =  this.quoteStateService.roundToTwo((item.sale - value)/value * 100);
-      this.itemsListArray[index].cost = this.quoteStateService.roundToTwo(value);
+      this.itemsListArray[index].markup =  this.quoteStateService.roundToOne((item.sale - value)/value * 100);
+      this.itemsListArray[index].cost = this.commonService.validateNumber(value);
     } else {
-      this.itemsListArray[index].rate = this.quoteStateService.roundToTwo(value);
+      this.itemsListArray[index].rate = (this.isInteger(Number(value))) ? value :  this.quoteStateService.roundToTwo(value);
     }
     this.updateItemsArray();
   }
@@ -199,6 +205,14 @@ export class ProductTableComponent implements OnInit {
   public updateItemsArray() {
     this.changedProductItemsArray.next(this.itemsListArray);
     this.quoteStateService.setItemArray(this.itemsListArray);
+  }
+
+  private  isInteger(num):boolean {
+    return (num ^ 0) === num;
+  }
+
+  private roundingMarkup (markup) {
+    return (!this.isInteger(markup)) ?  Math.ceil(markup * 10) / 10 : markup;
   }
 
 }

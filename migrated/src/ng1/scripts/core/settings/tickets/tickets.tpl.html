@@ -33,6 +33,39 @@
     </div>
 
 
+    <h3>Quote Settings</h3>
+
+    <div class="template-form-wrapper" ticket-config>
+      <div class="form-row clearfix">
+        <div class="form-group full-width"
+             ng-class="{'has-error': isShowingErrors(invoiceAndTicketForm, 'quoteCount')}">
+
+          <label class="control-label" ng-class="{ 'hide': isShowingErrors(invoiceAndTicketForm, 'quoteCount')}">
+            Starting quote number
+          </label>
+
+          <div ng-messages="invoiceAndTicketForm.quoteCount.$error"
+               ng-class="{ 'hide': !isShowingErrors(invoiceAndTicketForm, 'quoteCount')}">
+            <label class="control-label" ng-message="required" for="">cannot be left empty</label>
+            <label class="control-label" ng-message="maxlength" for="">too large</label>
+            <label class="control-label" ng-message="minlength" for="">too short</label>
+            <label class="control-label" ng-message="pattern" for="">Please enter a valid number starts.</label>
+            <label class="control-label" ng-message="used">
+              Already used. Next free is
+              <span class="free-number-link" ng-click="saveTicketNumber(ticketConfig)">
+                {{ quoteParams.nextValid }}</span>.
+            </label>
+          </div>
+
+          <input class="form-control" tc-number-input type="text" ng-model="quoteParams.count"
+                 name="quoteCount" aria-expanded="true" make-dirty-on-blur ng-pattern="numberPattern"
+                 hard-reset-required="true" ng-minlength="1" ng-maxlength="7" hard-reset-pattern="numberPattern"
+                 execute-when-outfocused="changeQuoteIdData()">
+        </div>
+      </div>
+    </div>
+
+
     <h3>Invoice Settings</h3>
 
     <div class="template-form-wrapper" invoice-config>

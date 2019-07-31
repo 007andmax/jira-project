@@ -74,8 +74,8 @@ export class QuoteCreateContentTopComponent implements OnInit {
    */
   private getQuoteNumber() {
     this.quoteService.getQuoteNumber().subscribe((res) => {
-      this.quoteNumber = this.editMode ? this.quoteStateService.getQuoteNumber() : res['number'];
-      this.startQuoteNumber = this.editMode ? this.quoteStateService.getQuoteNumber() : res['number'];
+      this.quoteNumber = this.editMode ? this.quoteStateService.getQuoteNumber() : (res['number']) ? res['number'] : 1;
+      this.startQuoteNumber = this.editMode ? this.quoteStateService.getQuoteNumber() :(res['number']) ? res['number'] : 1;
     });
   }
 

@@ -56,7 +56,7 @@ export class ModalQuoteComponent implements OnInit {
     private userService: UsersService,
     private quoteStateService: QuoteStateService,
     private quoteService: QuoteService
-  ) {}
+  ) { }
 
   /**
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
@@ -212,10 +212,10 @@ export class ModalQuoteComponent implements OnInit {
       this.subject = this.data.subject && this.data.subject !== "null" ? JSON.parse(JSON.stringify(this.data.subject)) : '';
     } else {
       if (this.data.recipients && this.data.recipients.length > 0 && this.data.recipients[0] !== "") {
-        this.selectedUsers = [...this.data.recipients];
+        this.selectedUsers = JSON.parse(JSON.stringify([...this.data.recipients]));
       } else {
         this.data.recipients = [];
-        this.selectedUsers = [...this.data.recipients];
+        this.selectedUsers = JSON.parse(JSON.stringify([...this.data.recipients]));
       }
       this.message = this.data.message && this.data.message !== "null" ? JSON.parse(JSON.stringify(this.data.message)) : '';
       this.subject = this.data.subject && this.data.subject !== "null" ? JSON.parse(JSON.stringify(this.data.subject)) : '';
@@ -230,6 +230,20 @@ export class ModalQuoteComponent implements OnInit {
     this.usersEmails = [];
     this.users = [];
     this.activeModal.dismiss('Cross click');
+  }
+
+  public keyup(e) {
+
+    if (e.keyCode === 13) {
+
+      if (this.userInput.nativeElement.value.length > 0) {
+        this.selectedUsers.push(this.userInput.nativeElement.value);
+        this.usersEmails.push(this.userInput.nativeElement.value);
+        this.quoteStateService.setUsersEmail(this.usersEmails);
+        this.userInput.nativeElement.value = "";
+        this.userCtrl.setValue(null);
+      }
+    }
   }
 
 }

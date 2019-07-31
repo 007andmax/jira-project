@@ -16,7 +16,12 @@
         (click)="click$.next('')"
         #instance="ngbTypeahead"
       />
-      <i class="icn-sm report-caret-icon"></i>
+      <i *ngIf="selectedNoteNew"
+         class="icn-sm icn-remove-old"
+         (click)="clearClient($event)"></i>
+      <i *ngIf="!selectedNoteNew"
+         class="icn-sm report-caret-icon"></i>
+
       <div class="new-link"
            *ngIf="(selectedNoteNew && selectedNoteNew.length > 0) || isShowCreateNew"
            (click)="createNewNote()">Save note
@@ -32,14 +37,13 @@
          (click)="onEditNote()">Save Terms & Conditions
     </div>
     <textarea
-      *ngIf="noteGlobal && noteGlobal.line1"
-      [(ngModel)]="noteGlobal.line1"
+      [(ngModel)]="noteGlovalLine"
       (ngModelChange)="setGlobalNote($event,true)"
       placeholder="Mention your company's Terms and Conditions"></textarea>
-    <textarea
+    <!--<textarea
       *ngIf="!(noteGlobal && noteGlobal.line1)"
-      [(ngModel)]="noteGlobal"
+      [(ngModel)]="noteGlovalLine"
       (ngModelChange)="setGlobalNote($event,true)"
-      placeholder="Mention your company's Terms and Conditions"></textarea>
+      placeholder="Mention your company's Terms and Conditions"></textarea>-->
   </div>
 </div>

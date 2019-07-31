@@ -4,6 +4,7 @@ import { QuoteService } from "../../../../services/quote/quote.service";
 import { FormGroup } from '@angular/forms';
 import { ISubscription } from 'rxjs/Subscription';
 import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
+import { QuoteResult } from '../class/quote-result';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,8 @@ export class QuoteStateService {
   public validateForm: EventEmitter<any> = new EventEmitter();
   public handleSendMode: EventEmitter<any> = new EventEmitter();
   public handleErrors: EventEmitter<any> = new EventEmitter();
+  public handleQuoteHasSent: EventEmitter<any> = new EventEmitter();
+ // public quoteHasSent: boolean = false;
   public quoteNumber: number;
   public startQuoteNumber: number;
   public state;
@@ -31,7 +34,8 @@ export class QuoteStateService {
   public subGetCompaniesList: ISubscription;
   public quoteForm: FormGroup;
   public clientsList:any;
-
+  private quoteResult: QuoteResult;
+  
   constructor(
     @Inject('$state') $state: any,
     private dateService: DateService,
@@ -40,6 +44,30 @@ export class QuoteStateService {
     this.state = $state;
     this.onInitCLientsList();
   }
+
+  public setQuoteResult (message) {
+    this.quoteResult = new QuoteResult(message);
+  }
+
+  public getQuoteResult () {
+    return this.quoteResult;
+  }
+
+  /*public getQuoteHasSent() {
+    return this.quoteHasSent;
+  }*/
+  public getHandleQuoteHasSent() {
+    return this.handleQuoteHasSent;
+  }
+  public setHandleQuoteHasSent() {
+   // this.setQuoteHasSent(true);
+    this.handleQuoteHasSent.emit(null);
+
+  }
+  /*public setQuoteHasSent(val) {
+    this.quoteHasSent = val;
+
+  }*/
 
   /**
    * Initializes subscribe on clients 
@@ -217,6 +245,7 @@ export class QuoteStateService {
    * move to quote component
    */
   public goToQuote() {
+    this.setUsersEmail([]);
     this.state.go('quotes-component');
   }
 
@@ -532,9 +561,12 @@ export class QuoteStateService {
   }
   public setMarkups(item) {
     if (item.sale > 0 && item.cost > 0)
-      return this.roundToTwo((item.sale - item.cost) / item.cost * 100);
+      return this.roundToOne((item.sale - item.cost) / item.cost * 100);
   }
   public roundToTwo(num) {
+    return parseFloat((Math.round(Number(num + 'e+2')) + "e-2")).toFixed(2);
+  }
+  public roundToOne(num) {
     return parseFloat((Math.round(Number(num + 'e+2')) + "e-2")).toFixed(2);
   }
   public resetquoteForCreate() {
@@ -555,7 +587,7 @@ export class QuoteStateService {
       subTotalServices: '',
       totalTaxes: '',
       total: '',
-      globalNote: '',
+      globalNote: null,
       selectedNote: '',
       partialDeposit: '',
       purchaseOrder: '',

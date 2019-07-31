@@ -19,6 +19,7 @@ export class QuoteCreateContentNotesComponent implements OnInit {
 
   public noteRegularList = [];
   public noteGlobal: any;
+  public noteGlovalLine:string = "";
   public selectedNote: any;
   public selectedNoteNew: string;
   public selectedNoteText: string;
@@ -61,10 +62,12 @@ export class QuoteCreateContentNotesComponent implements OnInit {
     this.quoteService.getQuoteNote().subscribe((res:any) => {
       this.noteRegularList = res.filter((item) => item['noteType'] === 'REGULAR');
       this.noteGlobal = res.find((item) => item['noteType'] === 'GLOBAL');
+    
       this.noteGlobalId = this.noteGlobal.id;
       if (this.editMode) {
         this.noteGlobal = this.quoteStateService.getGlobalNote();
       }
+      if (this.noteGlobal) this.noteGlovalLine = this.noteGlobal.line1;
       this.setGlobalNote(this.noteGlobal);
     })
   }
@@ -136,6 +139,7 @@ export class QuoteCreateContentNotesComponent implements OnInit {
       }, this.noteGlobalId).subscribe((res:any) => {
         if (res.result === "success") {
           this.isShowEditNote = false;
+          this.getNotes();
         }
       })
   }

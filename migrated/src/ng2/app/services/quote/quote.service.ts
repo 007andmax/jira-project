@@ -4,6 +4,7 @@ import { environment } from "../../../environments/environment";
 import {QuoteStateService} from "../../components/billing/quotes/quote-create/quote-state.service";
 import { catchError, tap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { QuoteResult } from '../../components/billing/quotes/class/quote-result';
 
 /**
  * Quote service to work with api
@@ -25,6 +26,7 @@ export class QuoteService {
   private amount = 'AMOUNT_DESC';
   private deposit = 'DEPOSIT_DESC';
   private sortType = null;
+ 
 
   /**
    * Product api service constructor
@@ -62,13 +64,13 @@ export class QuoteService {
       "validUntil": this.getMsDate(value.endDate),
       "date": this.getMsDate(value.startDate),
       "recipients": this.quoteStateService.getUsersEmail() ? this.quoteStateService.getUsersEmail() : [],
-      "message": notification? this.quoteStateService.getQuoteCreate()['message'] : 'null',
-      "subject": notification? this.quoteStateService.getQuoteCreate()['subject'] : 'null',
+      "message": notification? this.quoteStateService.getQuoteCreate()['message'] : null,
+      "subject": notification? this.quoteStateService.getQuoteCreate()['subject'] : null,
       "globalNote": value.globalNote ? value.globalNote : this.quoteStateService.getGlobalNote(),
       "regularNote": value.regularNote ? value.regularNote : this.quoteStateService.getSelectedNote(),
       "sendNotification":notification
     }).pipe(
-      tap(data => data), 
+      tap(data => this.handleQuoteSent(data,(notification) ? 'Quote has been sent' : 'Quote has been saved')),  
       catchError(this.handleError));
   }
 
@@ -106,7 +108,7 @@ export class QuoteService {
       "regularNote": value.regularNote ? value.regularNote : this.quoteStateService.getSelectedNote(),
       "sendNotification": notification
     }).pipe(
-      tap(data => data), 
+      tap(data => this.handleQuoteSent(data,'Quote has been saved')),  
       catchError(this.handleError));
   }
 
@@ -142,7 +144,7 @@ export class QuoteService {
       "regularNote": item.regularNote,
       "sendNotification": true
     }).pipe(
-      tap(data => data), 
+      tap(data => this.handleQuoteSent(data,'Quote has been sent')),  
       catchError(this.handleError));
   }
 
@@ -236,7 +238,8 @@ export class QuoteService {
    * @param data - quote info
    */
   public getQuotes(data) {
-    data.type && this.getSortType(data.type);
+    //data.type && this.getSortType(data.type);
+    console.log('this.sortType',this.sortType);
     return this.http.post(this.apiUrl + 'saleQuotes/search', {
       "companyName": data.company || null,
       "quoteNumber": data.number || null,
@@ -288,7 +291,7 @@ export class QuoteService {
     return this.http.post(this.apiUrl +
       `saleQuotes/approveQuote?companyId=${company.id}`, [quoteId]
     ).pipe(
-      tap(data => data), 
+      tap(data => this.handleQuoteSent(data,'Quote has been approved')),  
       catchError(this.handleError));
   }
 
@@ -339,8 +342,23 @@ export class QuoteService {
     return this.http.get(this.apiUrl + `saleQuotes/${quote_id}/pdf`,{ headers: new HttpHeaders({
         'Content-Type': 'application/pdf',
       }), responseType: 'blob'}).pipe(
-        tap(data => data), 
+        tap(data => this.handleQuoteSent(data,'Quote has been saved')),  
         catchError(this.handleError));
+  }
+
+   /**
+   * Method is use to download file.
+   * @param res - Array Buffer data
+   * @param id - type of the document.
+   */
+  public downLoadFile(res: any, id,companyName,quoteNumber) {
+    const data = window.URL.createObjectURL(res);
+    var link = document.createElement('a');
+    link.href = data;
+    link.download=`${this.apiUrl}saleQuotes/${id}/pdf.pdf`;
+    link.download = `${companyName}_Quote-${quoteNumber}.pdf`;
+    link.click();
+    this.quoteStateService.goToQuote();
   }
 
   /**
@@ -384,4 +402,22 @@ export class QuoteService {
     this.quoteStateService.setError((err.validationResults && err.validationResults.saleQuotePostDto) ? err.validationResults.saleQuotePostDto : err.message);
     return throwError(error);
   }
+
+  private handleQuoteSent = (data,message) => {
+    this.quoteStateService.setQuoteResult(message);
+    this.quoteStateService.setHandleQuoteHasSent();
+    return data;
+  }
+
+  public setDefaultTypes() {
+    this.offset = 30;
+    this.quoteNumber = 'QUOTE_NUMBER_DESC';
+    this.customerName = 'CUSTOMER_NAME_DESC';
+    this.date = 'DATE_DESC';
+    this.validUntil = 'VALID_UNTIL_DESC';
+    this.amount = 'AMOUNT_DESC';
+    this.deposit = 'DEPOSIT_DESC';
+    this.sortType = null;
+  }
+
 }
