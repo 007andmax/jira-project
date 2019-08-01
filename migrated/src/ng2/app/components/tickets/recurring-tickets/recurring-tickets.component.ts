@@ -34,7 +34,15 @@ export class RecurringTicketsComponent implements OnInit {
 
   }
   public getTicket() {
-    this.recurringService.getTicketsList(this.page_number, this.items_per_page, this.sort, this.direction).subscribe((res: Array<RecurringTicket>) => {
+    this.recurringService.getTicketsList(this.page_number, this.items_per_page, this.sort, this.direction).subscribe((res: any) => {
+      console.log('res',res);
+     /* res.forEach(element => {
+        for (var prop in element.serviceErrors) {
+          element.noValid = true;
+         // console.log(element.serviceErrors[prop]);
+        }
+      });*/
+     
       this.ticketList = [...this.ticketList, ...res];
       this.page_number += 1;
       this.showPreloader = false;

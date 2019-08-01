@@ -1,4 +1,4 @@
-<div class="recurring-tickets-content__list--item clearfix">
+<div class="recurring-tickets-content__list--item clearfix" [ngClass]="(ticket.noValid) ? 'no-valid' : ''">
   <div class="col-md-3">
     <label class="checkbox-container">
       <input type="checkbox">

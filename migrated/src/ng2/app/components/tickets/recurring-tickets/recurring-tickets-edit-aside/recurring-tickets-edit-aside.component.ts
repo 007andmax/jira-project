@@ -51,7 +51,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   public selectedClient: any;
   public devicesList = [];
   public tehUsers = [];
-  public ticketForEdit: RecurringTicket = new RecurringTicket();
+  public ticketForEdit: RecurringTicket = null;
   public errors = { products: { show: false, text: "" } };
   constructor(
     private ticketStateService: TicketStateService,
@@ -102,6 +102,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.createService.setCronForEdit(data.cronExpression);
     this.getListServices(data.company);
     // this.getItemListServices();
+   
     this.cd.detectChanges();
   }
   public onChangeTags(tags) {
@@ -423,7 +424,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.recurringState.clearCreateTicket();
     this.products = [];
     this.services = [];
-    this.ticketForEdit = new RecurringTicket();
+    this.ticketForEdit = null;
 
   }
   public trackById(index, item) {
