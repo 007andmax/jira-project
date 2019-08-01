@@ -108,4 +108,13 @@ export class RecurringTicketsService {
     this.elRef.nativeElement.querySelector(`#${id}`).value = val;
   }
 
+  public checkProducts(products: Array<ForCreateProduct>) {
+    if (products.length === 0) return false;
+    let retulst = true;
+    products.forEach((item) => {
+     
+      if (item.versionedId === undefined) return retulst = false;
+    })
+    return retulst;
+  }
 }

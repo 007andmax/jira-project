@@ -9,7 +9,8 @@
       <div class="recurring-tickets-content__modal--content clearfix">
         <div class="col-md-12">
           <p>Service Description</p>
-          <input type="text"  id="service-description" placeholder="Write Description" (input)="onChangeDescription($event)">
+        <textarea id="service-description" placeholder="Write Description" (input)="onChangeDescription($event)"></textarea>
+        <!--  <input type="text"  id="service-description" placeholder="Write Description" (input)="onChangeDescription($event)">-->
         </div>
 
         <div class="col-md-12">
@@ -128,7 +129,8 @@
               </div>
               <div class="col-md-12 mt-20">
                 <p>Description</p>
-                <input type="text" [(ngModel)]="service.description" placeholder="Write Description">
+                <textarea [(ngModel)]="service.description" placeholder="Write Description"></textarea>
+              <!--  <input type="text" [(ngModel)]="service.description" placeholder="Write Description">-->
               </div>
             </div>
           </ng-template>
