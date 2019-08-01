@@ -29,7 +29,7 @@ export class TagsComponent implements OnInit, OnDestroy {
   sub = new Subscription();
   editItem:any;
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
-  @ViewChild('auto') matAutocomplete: MatAutocomplete;
+  //@ViewChild('auto') matAutocomplete: MatAutocomplete;
   @Output() tagsChange = new EventEmitter();
   /**
    * Creates an instance of the QuoteCreateContentComponent with the injected services
@@ -51,12 +51,12 @@ export class TagsComponent implements OnInit, OnDestroy {
     this.tagsService.getTags().subscribe((data) => {
       this.tags = data;
     })
-    this.userInput.nativeElement.onblur = (e) => {
+   /* this.userInput.nativeElement.onblur = (e) => {
       if (this.matAutocomplete.isOpen) {
         let modal = this.matAutocomplete.panel.nativeElement;
         modal.parentNode.style.width = 'max-content';
       }
-    }
+    }*/
     this.onInitClearState();
     this.onCheckEditItem();
   }
@@ -117,11 +117,11 @@ export class TagsComponent implements OnInit, OnDestroy {
    * Add user to selected
    * @param event - selected user
    */
-  public selected(event: MatAutocompleteSelectedEvent): void {
-  
-    this.selectedTag.push(event.option.value);
+  public selected(tag): void {
+  console.log('tag',tag);
+    this.selectedTag.push(tag);
     this.tagsChange.emit(this.selectedTag);
-    this.userInput.nativeElement.blur();
+  //  this.userInput.nativeElement.blur();
     this.tagCtrl.setValue(null);
   }
 
@@ -131,6 +131,10 @@ export class TagsComponent implements OnInit, OnDestroy {
   public close() {
     this.selectedTag = [];
     this.tagsChange.emit(this.selectedTag);
+  }
+
+  public trackById(index, item) {
+    return item.id;
   }
 
   ngOnDestroy(): void {
