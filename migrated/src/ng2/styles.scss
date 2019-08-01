@@ -57,6 +57,100 @@
   }
 }
 
+.circle-avatar {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(22, 164, 250, 0.2);
+  border-radius: 50%;
+  text-transform: uppercase;
+  font-size: 11px;
+  font-family: Graphik-Medium, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-new.btn-primary-white {
+  background: #fff;
+  color: #16a4fa;
+  border: 1px solid #16a4fa;
+  font-size: 12px;
+  font-family: "Graphik Semibold", sans-serif;
+  font-weight: 600;
+  &:hover {
+    background: #16a4fa;
+    color: #fff;
+  }
+}
+
+.radio-container {
+  display: flex;
+  margin: 0;
+  align-items: center;
+  position: relative;
+  padding-left: 22px;
+  cursor: pointer;
+  font-size: 13px;
+  user-select: none;
+  .radio-mark {
+    position: absolute;
+    top: -2px;
+    left: 0;
+    height: 16px;
+    width: 16px;
+    background-color: #fff;
+    border-radius: 50%;
+    border: 1px solid #c7cdd7;
+    transition: all .3s;
+    &:after {
+      content: "";
+      position: absolute;
+      opacity: 0;
+      display: block;
+      top: 4px;
+      left: 4px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #16a4fa;
+    }
+  }
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0 !important;
+    &:checked ~ .radio-mark {
+      border: 1px solid #16a4fa;
+    }
+    &:checked ~ .radio-mark:after {
+      opacity: 1;
+    }
+  }
+}
+
+.checkbox-container {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  cursor: pointer;
+  .checkbox-mark {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 16px;
+    height: 16px;
+    background: url("./assets/img/icons/checkbox-ng2.png");
+  }
+  input {
+    opacity: 0;
+  }
+  input:checked ~ .checkbox-mark {
+    background-position: 16px 0;
+  }
+}
+
 .btn-with-dropdown {
   display: flex !important;
   padding: 0 !important;
