@@ -385,7 +385,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
 
   
     
-    if (this.ticketForEdit.id) {
+    if (this.ticketForEdit && this.ticketForEdit.id) {
 
       this.recurringService.editTicket(this.ticketForEdit, this.recurringState.getCreateTicket()).subscribe((res) => {
         console.log('res', res);
