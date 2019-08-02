@@ -52,7 +52,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   public devicesList = [];
   public tehUsers = [];
   public ticketForEdit: RecurringTicket = null;
-  public errors = { products: { show: false, text: "" } };
+ // public errors = { products: { show: false, text: "" } };
   constructor(
     private ticketStateService: TicketStateService,
     private productService: ProductService,
@@ -85,6 +85,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   }
   private onEditEditMode(data: RecurringTicket) {
     this.createService.setDescription(data.description);
+    this.createService.onResetTextAreaState();
     this.ticketForEdit = data;
     console.log('this.ticketForEdit',this.ticketForEdit);
     this.companiesState.setCompanyFromtEdit(data.company);
@@ -368,8 +369,9 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
         this.onInitSave();
         this.getItemListProducts();
       }, (err) => {
-        this.errors.products.show = true;
-        this.errors.products.text = (err.validationResults && err.validationResults.saleQuotePostDto) ? err.validationResults.saleQuotePostDto : err.message;
+        console.log('err',err);
+       // this.errors.products.show = true;
+      //  this.errors.products.text = (err.validationResults && err.validationResults.saleQuotePostDto) ? err.validationResults.saleQuotePostDto : err.message;
       });
     } else {
       this.onInitSave();

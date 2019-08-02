@@ -14,7 +14,8 @@ export class ForCreateProduct  {
     versionedId: VersionedId;
     quantity:number;
     discount: number;
-   
+    noValid:boolean = false;
+    errors:Array<String>;
     constructor () {}
     public setDataFromEdit (data:ProductRecurringTicket) {
         this.quantity = data.quantity;

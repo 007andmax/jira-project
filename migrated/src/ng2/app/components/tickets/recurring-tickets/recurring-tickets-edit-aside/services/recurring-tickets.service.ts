@@ -13,6 +13,7 @@ import { DevicesStateService } from '../../devices-recurring-tickets/services/de
 import { DurationStateService } from 'src/ng2/app/components/shared/duration/services/duration-state.service';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { ServiceErrors } from '../../class/service-errors';
+import { TextAreaStateService } from 'src/ng2/app/directives/services/text-area-state.service';
 
 @Injectable()
 export class RecurringTicketsService {
@@ -21,7 +22,7 @@ export class RecurringTicketsService {
     private stateInterval: IntervalStateService,
     private tehState: TehUsersSateService,
     private devicesState: DevicesStateService,
-
+    private textAreaState:TextAreaStateService
 
   ) { }
   public setRulesCreateTicket(data: CreateRecurringTickets) {
@@ -30,6 +31,9 @@ export class RecurringTicketsService {
     data.setQuickClose(this.elRef.nativeElement.querySelector('#quickClose').checked);
     data.setCreateTask(this.elRef.nativeElement.querySelector('#createTask').checked);
 
+  }
+  public onResetTextAreaState() {
+    this.textAreaState.onInitReset();
   }
   public setCronForEdit(data) {
     this.stateInterval.onInitEditMode(data);
@@ -51,6 +55,7 @@ export class RecurringTicketsService {
   }
   public setDescription(val) {
     this.elRef.nativeElement.querySelector('#service-description').value = val;
+  
   }
   public addSubscription(data) {
     this.sub.add(data);

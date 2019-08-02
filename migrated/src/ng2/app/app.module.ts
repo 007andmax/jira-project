@@ -65,6 +65,7 @@ import { DurationComponent } from './components/shared/duration/duration.compone
 import { TehUsersComponent } from './components/shared/teh-users/teh-users.component';
 import { DurationFilterPipe } from './pipe/duration-filter.pipe';
 import { numberDirective } from './directives/number.directive';
+import { TextAreaDirective } from './directives/text-area.directive';
 
 
 /**
@@ -153,7 +154,8 @@ angular.module('quicktech')
     DurationComponent,
     TehUsersComponent,
     DurationFilterPipe,
-    numberDirective
+    numberDirective,
+    TextAreaDirective
   ],
   imports: [
     BrowserModule,
