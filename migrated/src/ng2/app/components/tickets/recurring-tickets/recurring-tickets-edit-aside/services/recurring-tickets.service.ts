@@ -12,6 +12,7 @@ import { TehUsersSateService } from 'src/ng2/app/components/shared/teh-users/ser
 import { DevicesStateService } from '../../devices-recurring-tickets/services/devices-state.service';
 import { DurationStateService } from 'src/ng2/app/components/shared/duration/services/duration-state.service';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import { ServiceErrors } from '../../class/service-errors';
 
 @Injectable()
 export class RecurringTicketsService {
@@ -87,11 +88,18 @@ export class RecurringTicketsService {
     return products;
   }
 
-  public getServicesForEdit(list: Array<ServiceRecurringTicket>) {
+  public getServicesForEdit(list: Array<ServiceRecurringTicket>,serviceErrors:Array<ServiceErrors>) {
     let services: Array<ForCreateService> = [];
     list.forEach((item) => {
       let service = new ForCreateService();
-      service.setDataFromEdit(item);
+      let errors = [];
+      serviceErrors.forEach((error) => {
+        if (error.id === item.service.versionedId.id)
+        {
+          errors = error.errors;
+        }
+      })
+      service.setDataFromEdit(item,errors);
       services.push(service);
     })
     return services;

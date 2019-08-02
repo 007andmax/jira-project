@@ -39,7 +39,7 @@ export class RecurringService {
 
   public getTicketsList(page_number, items_per_page, sort, direction) {
     return this.http.get(this.apiUrl + `recurringTickets?page=${page_number}&limit=${items_per_page}&sort=${sort}&direction=${direction}`).pipe(
-      map((data: any) => new RecurringTicket(data)),
+      map((data: any) =>  this.getRecurringTicket(data)),
       catchError(this.handleError));
   }
 
@@ -80,9 +80,11 @@ export class RecurringService {
   }
 
   private getRecurringTicket(items) {
-    return new Array(items.length).forEach((item) => {
-      item = new RecurringTicket(item);
+    let out = [];
+    items.forEach((item) => {
+      out.push(new RecurringTicket(item));
     })
+    return  out;
   }
 
 }

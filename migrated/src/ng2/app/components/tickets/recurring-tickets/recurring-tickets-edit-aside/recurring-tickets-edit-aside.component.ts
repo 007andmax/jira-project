@@ -86,6 +86,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   private onEditEditMode(data: RecurringTicket) {
     this.createService.setDescription(data.description);
     this.ticketForEdit = data;
+    console.log('this.ticketForEdit',this.ticketForEdit);
     this.companiesState.setCompanyFromtEdit(data.company);
     this.devicesService.onInitHangle(data.company.id);
     this.selectedClient = data.company;
@@ -93,7 +94,8 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.navDate = this.createService.getNavDate(date);
     this.selectDateEditMode(this.createService.getDateForDatePicker(data.startDate));
     this.products = (data.products.length > 0) ? this.createService.getProductsForEdit(data.products) : [new ForCreateProduct()];
-    this.services = (data.services.length > 0) ? this.createService.getServicesForEdit(data.services) : [new ForCreateService()];
+    this.services = (data.services.length > 0) ? this.createService.getServicesForEdit(data.services,data.serviceErrors) : [new ForCreateService()];
+    console.log(' this.services', this.services);
     this.createService.setTagsForEdit(data.tags);
     this.createService.setCreateTask(data.createTask);
     this.createService.setRequireUpdate(data.requireUpdate);

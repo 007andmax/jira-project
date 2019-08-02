@@ -20,9 +20,11 @@ export class ForCreateService implements Service  {
     quantity:number;
     duration:number;
     isDropDownShowServices:boolean = false;
+    noValid:boolean = false;
+    errors:Array<String>;
     constructor () {}
 
-    public setDataFromEdit (data:ServiceRecurringTicket) {
+    public setDataFromEdit (data:ServiceRecurringTicket,errors:Array<String>) {
         this.duration = data.duration;
         this.description = data.serviceDescription;
         this.blockTimeServiceAgreement = data.service.blockTimeServiceAgreement;
@@ -38,6 +40,10 @@ export class ForCreateService implements Service  {
         this.taxes = data.service.taxes;
         this.updatedAt = data.service.updatedAt;
         this.versionedId = data.service.versionedId;
+        if (errors.length > 0) {
+            this.errors = errors;
+            this.noValid = true;
+        }
     }
 }
 

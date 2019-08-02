@@ -116,7 +116,12 @@
         <div class="col-md-12 service-tab-content p-0" *ngIf="type === 'services'">
           <ng-template ngFor let-service [ngForOf]="services" let-i="index" [ngForTrackBy]="trackByIndex">
             <div [ngClass]="{'separator-hr': services.length > 1}" class="row service-tab-content__item">
-              <div class="col-md-8">
+              <div class="service-errors">
+                <ng-template ngFor let-error [ngForOf]="service.errors"  >
+                    <p [textContent]="error"></p>
+                  </ng-template>
+                </div>
+              <div class="col-md-8" [ngClass]="(service.noValid) ? 'no-valid-service' : ''">
                 <p>Service</p>
                 <app-services-list [editItem]="service"  [itemList]="servicesList"
                                      (selectedServicesItem)="setService($event,i)"></app-services-list>
