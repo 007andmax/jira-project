@@ -1,4 +1,5 @@
-<div class="col-md-12 light-dropdown" ngbDropdown #products="ngbDropdown" >
+<div class="col-md-12 light-dropdown"
+     ngbDropdown #products="ngbDropdown">
   <mat-form-field>
     <mat-chip-list #chipList aria-label="Fruit selection">
       <mat-chip
@@ -10,7 +11,7 @@
         <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
       </mat-chip>
       <input
-      id="dropdownServices" ngbDropdownToggle
+        id="dropdownServices" ngbDropdownToggle
         placeholder="eg. Window update, Monthly maintainace"
         #userInput
         class="pointer"
@@ -26,15 +27,14 @@
       </mat-option>
     </mat-autocomplete>-->
   </mat-form-field>
-
-  <div class="dropdown-menu show" ngbDropdownMenu aria-labelledby="dropdownServices">
-      <ng-template ngFor let-tag [ngForOf]="tags" [ngForTrackBy]="trackById">
+  <div class="dropdown-menu"
+       ngbDropdownMenu aria-labelledby="dropdownServices">
+    <ng-template ngFor let-tag [ngForOf]="tags" [ngForTrackBy]="trackById">
       <button ngbDropdownItem class="dropdown-item"
-      (click)="selected(tag)"
-              [textContent]="tag.word" >
+              (click)="selected(tag)"
+              [textContent]="tag.word">
       </button>
     </ng-template>
-    </div>
-  
+  </div>
 </div>
 
