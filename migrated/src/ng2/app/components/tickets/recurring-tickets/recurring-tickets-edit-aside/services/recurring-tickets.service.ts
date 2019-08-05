@@ -91,15 +91,20 @@ export class RecurringTicketsService {
 
   public getServicesForEdit(list: Array<ServiceRecurringTicket>,serviceErrors:Array<ServiceErrors>) {
     let services: Array<ForCreateService> = [];
+    console.log('serviceErrors',serviceErrors);
     list.forEach((item) => {
       let service = new ForCreateService();
       let errors = [];
-      serviceErrors.forEach((error) => {
-        if (error.id === item.service.versionedId.id)
-        {
-          errors = error.errors;
-        }
-      })
+      if (serviceErrors instanceof Array)
+      {
+        serviceErrors.forEach((error) => {
+          if (error.id === item.service.versionedId.id)
+          {
+            errors = error.errors;
+          }
+        })
+      }
+     
       service.setDataFromEdit(item,errors);
       services.push(service);
     })

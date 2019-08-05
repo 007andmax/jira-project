@@ -65,7 +65,7 @@ export class TextAreaDirective implements OnInit  {
     
   }
   private onUpdate =()=> {
-    console.log('onUpdate');
+   
     this.update();
 
    // this.cloned.innerHTML = this.element.nativeElement.value;
@@ -119,11 +119,11 @@ export class TextAreaDirective implements OnInit  {
 
   };
   private setNumberOfLines = (e) => {
-    console.log('setNumberOfLines');
+    
     this.lines = this.getNumberOfLines(this.element.nativeElement.value);
   };
   private limitPaste = (e) => {
-    console.log('limitPaste');
+   
     let clipboardData, pastedData, newValue, isOverflowed;
     // Stop data actually being pasted into div
     e.stopPropagation();
