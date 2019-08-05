@@ -212,7 +212,8 @@ angular.module('quicktech')
         useHash: true,
         enableTracing: false
       }),
-      CronEditorModule
+      CronEditorModule,
+      
   ],
   entryComponents: [
     LeftPanelComponent,

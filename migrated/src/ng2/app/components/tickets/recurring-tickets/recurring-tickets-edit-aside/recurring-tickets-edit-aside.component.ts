@@ -85,7 +85,6 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   }
   private onEditEditMode(data: RecurringTicket) {
     this.createService.setDescription(data.description);
-    this.createService.onResetTextAreaState();
     this.ticketForEdit = data;
     console.log('this.ticketForEdit',this.ticketForEdit);
     this.companiesState.setCompanyFromtEdit(data.company);

@@ -1,17 +1,21 @@
 import { Directive, OnInit, ElementRef, Injectable, Input, ChangeDetectorRef, OnChanges, SimpleChanges, AfterContentChecked } from '@angular/core';
-import { TextAreaStateService } from './services/text-area-state.service';
 
 @Directive({
   selector: '[appTextArea]'
 })
 @Injectable()
-export class TextAreaDirective implements OnInit,OnChanges  {
+export class TextAreaDirective implements OnInit  {
   
   cloned: HTMLTextAreaElement;
   lines: number = 1;
+  height:number = 0;
   @Input() limit;
-  constructor(private element: ElementRef, public cd: ChangeDetectorRef,private textAreaState:TextAreaStateService) { }
+  block: boolean = false;
+  constructor(private element: ElementRef, public cd: ChangeDetectorRef) {
+
+   }
   ngOnInit() {
+  
     this.onInitCLine();
     this.element.nativeElement.parentNode.style.position = 'relative';
     this.element.nativeElement.addEventListener('keydown', this.limitLines);
@@ -22,20 +26,16 @@ export class TextAreaDirective implements OnInit,OnChanges  {
   
  
     if (this.limit) this.onInitLimit();
-    this.onCheckReset();
-    this.onUpdate();// remove
-    console.log('efefefefefe');
-  }
-  ngOnChanges(changes: SimpleChanges){
-   console.log('changes',changes);
-   console.log('this.limit',this.limit);
+ //   this.onCheckReset();
   
+   
   }
-  private onCheckReset() {
-    this.textAreaState.getResetState().subscribe(() => {
-      this.onUpdate();
-    })
+  ngDoCheck(){
+  if (this.block) return;
+  if (this.element.nativeElement.value.length > 0) this.block = true;
+   this.onUpdate();// remove
   }
+  
   private onInitLimit() {
     this.element.nativeElement.style.overflow = 'hidden';
     this.cloned.style.overflow = 'hidden';
@@ -45,13 +45,13 @@ export class TextAreaDirective implements OnInit,OnChanges  {
   private update() {
    
     this.element.nativeElement.style.height = "auto";
-    let height = this.element.nativeElement.scrollHeight;
-    if (height > 0) {
+    this.height = this.element.nativeElement.scrollHeight;
+    if (this.height > 0) {
 
-      if (this.limit && height >= this.limit) {
+      if (this.limit && this.height >= this.limit) {
         this.element.nativeElement.style.height = this.limit + 'px';
       } else {
-        this.element.nativeElement.style.height = height + "px";
+        this.element.nativeElement.style.height = this.height + "px";
       }
 
     }
@@ -68,7 +68,7 @@ export class TextAreaDirective implements OnInit,OnChanges  {
     console.log('onUpdate');
     this.update();
 
-    this.cloned.innerHTML = this.element.nativeElement.value;
+   // this.cloned.innerHTML = this.element.nativeElement.value;
   }
   private getKeyNum(e) {
     let keynum;
@@ -130,7 +130,7 @@ export class TextAreaDirective implements OnInit,OnChanges  {
     e.preventDefault();
 
     // Get pasted data via clipboard API
-    clipboardData = e.clipboardData || window.clipboardData;
+   clipboardData = e.clipboardData || (<any>window).clipboardData;
     pastedData = clipboardData.getData('Text');
 
 
