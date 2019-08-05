@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class RecurringTicketsListService {
-
+blockList:boolean = false;
   constructor() { }
 
   public getDirection (direction,sort_c,sort_o) {
@@ -17,5 +17,11 @@ export class RecurringTicketsListService {
     return direction;
   //  return direction_c;
 
+  }
+  public getBlockList() {
+    return this.blockList;
+  }
+  public setBlockList (val) {
+    return this.blockList = val;
   }
 }

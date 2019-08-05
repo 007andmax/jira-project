@@ -82,13 +82,14 @@
          ngbDropdownToggle></i>
       <div ngbDropdownMenu aria-labelledby="dropdownBasic">
         <button ngbDropdownItem (click)="editTicket()"><i class="icn-16 edit-grey-ng2"></i>Edit</button>
-        <button ngbDropdownItem (click)="removeTicket()"><i class="icn-16 archive-grey-ng2"></i>Delete</button>
+      
         <button ngbDropdownItem (click)="suspendTicket()" *ngIf="!ticket.suspended"><i
           class="icn-16 archive-grey-ng2"></i>Suspend
         </button>
         <button ngbDropdownItem (click)="resumeTicket()" *ngIf="ticket.suspended"><i
           class="icn-16 archive-grey-ng2"></i>Resume
         </button>
+        <button ngbDropdownItem (click)="removeTicket()"><i class="icn-16 archive-grey-ng2"></i>Delete</button>
       </div>
     </div>
   </div>
