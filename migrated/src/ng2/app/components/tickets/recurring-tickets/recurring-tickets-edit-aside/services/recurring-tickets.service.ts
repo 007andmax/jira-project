@@ -113,24 +113,13 @@ export class RecurringTicketsService {
   public checkErrorsProducts(list: Array<ForCreateProduct>,validationResults) {
     let products: Array<ForCreateProduct> = [];
     list.forEach((item) => {
-      let erros= [];
-      for ( let i in validationResults) {
-      
-        let error:string = validationResults[i];
-       
+        let error:string = validationResults.sale;
         let id = error.substring(0,error.indexOf(";"));
         if (item.versionedId.id === id)  {
-          erros.push(error.substring(error.indexOf(";") + 1,error.length));
+          item.setErros([error.substring(error.indexOf(";") + 1,error.length)]);
+        } else {
+          item.clearErros();
         }
-  
-      }
-      if (erros.length > 0) {
-        item.setErros(erros);
-      } else {
-        item.clearErros();
-      }
-     
-    
     })
    
     products = list;
