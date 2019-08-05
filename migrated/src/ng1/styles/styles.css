@@ -13399,6 +13399,7 @@ button.close {
   background-color: #fff;
   transition: all .5s ease-in-out;
   overflow-y: scroll;
+  overflow-x: hidden;
   height: calc(100vh - 78px);
 }
 
@@ -13555,7 +13556,6 @@ button.close {
   color: #4f5f79;
 }
 
-.recurring-tickets-content__modal--content textarea,
 .password-content__modal--content textarea {
   background: #fff8eb;
   border: 1px solid #ffe3af;
