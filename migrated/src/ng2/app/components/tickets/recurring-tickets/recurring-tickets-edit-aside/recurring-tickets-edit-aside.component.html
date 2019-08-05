@@ -81,6 +81,11 @@
         <!--  <div class="error-products" *ngIf="errors.products.show"><p [textContent]="errors.products.text"></p></div>-->
           <ng-template ngFor let-product [ngForOf]="products" let-i="index" [ngForTrackBy]="trackByIndex">
             <div [ngClass]="{'separator-hr': products.length > 1}" class="row product-tab-content__item">
+                <div class="product-errors" *ngIf="product.noValid">
+                    <ng-template ngFor let-error [ngForOf]="product.errors"  >
+                        <p [textContent]="error"></p>
+                      </ng-template>
+                    </div>
               <div class="col-md-12">
                 <p>Search Product</p>
                 <app-product-list [editItem]="product"  [itemList]="productList"
@@ -117,7 +122,7 @@
         <div class="col-md-12 service-tab-content p-0" *ngIf="type === 'services'">
           <ng-template ngFor let-service [ngForOf]="services" let-i="index" [ngForTrackBy]="trackByIndex">
             <div [ngClass]="{'separator-hr': services.length > 1}" class="row service-tab-content__item">
-              <div class="service-errors">
+              <div class="service-errors" *ngIf="service.noValid">
                 <ng-template ngFor let-error [ngForOf]="service.errors"  >
                     <p [textContent]="error"></p>
                   </ng-template>

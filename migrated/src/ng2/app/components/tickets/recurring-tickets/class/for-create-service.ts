@@ -19,10 +19,28 @@ export class ForCreateService implements Service  {
     description:string = '';
     quantity:number;
     duration:number;
-    isDropDownShowServices:boolean = false;
     noValid:boolean = false;
     errors:Array<String>;
-    constructor () {}
+    constructor (data = null) {
+        if (!data) return;
+        this.blockTimeServiceAgreement = data.blockTimeServiceAgreement;
+        this.canUseInTicket = data.canUseInTicket;
+        this.commissionRate = data.commissionRate;
+        this.createdAt = data.createdAt;
+        this.deletedAt = data.deletedAt;
+        this.name = data.name;
+        this.oldVersion = data.oldVersion;
+        this.rate = data.rate;
+        this.serviceAgreement = data.serviceAgreement;
+        this.serviceContractServiceAgreement = data.serviceContractServiceAgreement;
+        this.taxes = data.taxes;
+        this.updatedAt = data.updatedAt;
+        this.versionedId = data.versionedId;
+        this.description = data.description;
+        this.quantity = data.quantity;
+        this.duration = data.duration;
+      
+    }
 
     public setDataFromEdit (data:ServiceRecurringTicket,errors:Array<String>) {
         this.duration = data.duration;

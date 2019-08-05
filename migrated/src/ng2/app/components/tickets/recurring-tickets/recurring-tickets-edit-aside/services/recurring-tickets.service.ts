@@ -110,6 +110,32 @@ export class RecurringTicketsService {
     })
     return services;
   }
+  public checkErrorsProducts(list: Array<ForCreateProduct>,validationResults) {
+    let products: Array<ForCreateProduct> = [];
+    list.forEach((item) => {
+      let erros= [];
+      for ( let i in validationResults) {
+      
+        let error:string = validationResults[i];
+       
+        let id = error.substring(0,error.indexOf(";"));
+        if (item.versionedId.id === id)  {
+          erros.push(error.substring(error.indexOf(";") + 1,error.length));
+        }
+  
+      }
+      if (erros.length > 0) {
+        item.setErros(erros);
+      } else {
+        item.clearErros();
+      }
+     
+    
+    })
+   
+    products = list;
+    return products;
+  }
   public setDefaultDate() {
     this.stateInterval.onInitClearState();
   }

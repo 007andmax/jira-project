@@ -121,6 +121,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.recurringState.getCreateTicket().setDescription(event.target.value);
   }
   private onInitCreateMod() {
+   
     this.products = [new ForCreateProduct()];
     this.services = [new ForCreateService()];
     this.recurringState.getCreateTicket().clearTehUsers();
@@ -267,14 +268,14 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
    */
   public selectProduct(item, index) {
     console.log('item', item);
-    item = { ...item, ...{ quantity: 1 } };
+    item = { ...item, ...{ quantity: 1,discount: 1 } };
     /*  if (this.type === 'service') {
         item = {...item, ...{description: '', quantity: 1}};
       } else {
         item = {...item, ...{quantity: 1, markup: this.setMarkups(item)}};
       }*/
-    this.products[index] = item;
-    this.products[index].discount = 1;
+    this.products[index] = new ForCreateProduct(item);
+   // this.products[index].discount = 1;
     // this.product.quantity = 1;
     //  this.selectedServiceItem.emit(item);
 
@@ -285,18 +286,17 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.cd.detectChanges();
   }
   public setService(item, index) {
-
+    item = { ...item, ...{ description: '',duration: 1 } };
     /*  if (this.type === 'service') {
         item = {...item, ...{description: '', quantity: 1}};
       } else {
         item = {...item, ...{quantity: 1, markup: this.setMarkups(item)}};
       }*/
-    this.services[index] = item;
-    this.services[index].description = '';
-    this.services[index].duration = 1;
+    this.services[index] = new ForCreateService(item);
+   
 
     //  this.selectedServiceItem.emit(item);
-    this.services[index].isDropDownShowServices = false;
+   
     //  this.type = undefined;
     //  this.changeType.next(this.type);
     //  this.quoteStateService.setType(true);
@@ -368,7 +368,10 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
         this.onInitSave();
         this.getItemListProducts();
       }, (err) => {
-        console.log('err',err);
+         console.log('this',this.products);
+        console.log('err',err.error.validationResults);
+        this.createService.checkErrorsProducts(this.products,err.error.validationResults);
+       
        // this.errors.products.show = true;
       //  this.errors.products.text = (err.validationResults && err.validationResults.saleQuotePostDto) ? err.validationResults.saleQuotePostDto : err.message;
       });
