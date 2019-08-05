@@ -54,7 +54,7 @@ export class RecurringTicketsComponent implements OnInit {
         const elemIndex = this.ticketList.findIndex((item) => item.id === newChange.data.id);
         return this.ticketList.splice(elemIndex,1);
       }
-      if (newChange.action === 'RECURRING_TICKET_SUSPENDED' || newChange.action === 'RECURRING_TICKET_RESUMED') {
+      if (newChange.action === 'RECURRING_TICKET_SUSPENDED' || newChange.action === 'RECURRING_TICKET_RESUMED' || newChange.action === 'RECURRING_TICKET_EDITED') {
         const elemIndex = this.ticketList.findIndex((item) => item.id === newChange.data.id);
         return this.ticketList[elemIndex] = newChange.data;
       }
