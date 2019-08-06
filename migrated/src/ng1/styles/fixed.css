@@ -2357,21 +2357,28 @@ span.sort-span {
   width: 50%;
 }
 
-.table-content-bottom .action-update .dropdown-menu {
+.table-content-bottom .action-update .dropdown-menu,
+.ticket-update-content .action-update .dropdown-menu {
   right: 0;
 }
 
 .ticket-settings-actions .dropdown-menu li a,
+.ticket-update-content .action-update .dropdown-menu li,
 .table-content-bottom .action-update .dropdown-menu li {
   padding: 9px 20px 9px 50px !important;
   font-size: 13px;
 }
 
 .ticket-settings-actions .dropdown-menu li a,
+.ticket-update-content .action-update .dropdown-menu li,
 .table-content-bottom .action-update .dropdown-menu li {
   position: relative;
   transition: all .3s;
   cursor: pointer;
+}
+
+.mob-ticket-content .is-completed {
+  margin-left: 28px;
 }
 
 .ticket-settings-actions .dropdown-menu li {
@@ -2379,6 +2386,7 @@ span.sort-span {
 }
 
 .ticket-settings-actions .dropdown-menu li a:before,
+.ticket-update-content .action-update .dropdown-menu li:before,
 .table-content-bottom .action-update .dropdown-menu li:before {
   position: absolute;
   content: '';
@@ -2415,11 +2423,13 @@ span.sort-span {
   border-bottom-left-radius: 4px;
 }
 
+.ticket-update-content .action-update .dropdown-menu li:first-child:before,
 .table-content-bottom .action-update .dropdown-menu li:first-child:before {
   background: url("../images/new-icons/edit-final.png");
   background-size: cover;
 }
 
+.ticket-update-content .action-update .dropdown-menu li:last-child:before,
 .table-content-bottom .action-update .dropdown-menu li:last-child:before {
   background: url("../images/new-icons/remove-final.png");
   background-size: cover;

@@ -385,7 +385,9 @@
   </div>
 
 
-  <div class="mob-ticket-create-updates" ng-if="isMobileUpdateShown" ng-class="{ opened: isMobileUpdateShown }"
+  <div class="mob-ticket-create-updates"
+       ng-if="isMobileUpdateShown"
+       ng-class="{ opened: isMobileUpdateShown }"
        ng-init="setMobileForm(ticketUpdateForm)">
     <div class="create-updates-header">
       <img ng-src="{{ getUserAvatarUrl(user) }}" alt="...">
@@ -466,7 +468,7 @@
                    step="0.01"
                    ng-readonly="!PermissionsService.isAllowed('MANAGE_PRODUCTS')" />
           </div>
-          <div class="col-xs-6 mob-qty-input" ng-class="{'has-error': isShowingErrors(addProductForm, 'productQty')}">
+          <div class="col-xs-6 mob-qty-input pr-10" ng-class="{'has-error': isShowingErrors(addProductForm, 'productQty')}">
 
             <input uib-tooltip="Qty"
                    tooltip-placement="top"
@@ -492,7 +494,7 @@
                    step="0.01"
                    hard-reset-required="true" />
           </div>
-          <div class="col-xs-6 mob-disc-input"
+          <div class="col-xs-6 mob-disc-input pr-10"
                ng-class="{'has-error': isShowingErrors(addProductForm, 'discountAmount')}">
             <input maxlength="3"
                    type="text"
@@ -548,7 +550,7 @@
                 >
               </div>
             </div>
-            <div ng-if="!hideInputs" class="col-xs-6 mob-timer" service-quantity-picker="serviceToEdit[0].quantity"
+            <div ng-if="!hideInputs" class="col-xs-6 mob-timer pr-10" service-quantity-picker="serviceToEdit[0].quantity"
                  sqp-is-show-format="false"
                  ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceTime')}">
               <input uib-tooltip="Hr(s) : Min(s)" tooltip-placement="top"

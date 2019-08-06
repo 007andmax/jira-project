@@ -130,13 +130,13 @@
   margin-bottom: 5px;
 }
 
-.ticket-update-content .ticket-update-meta {
+.ticket-update-meta {
   float: left;
   width: 100%;
   margin-top: 10px;
 }
 
-.ticket-update-content .ticket-update-meta .ticket-meta-wrapper {
+.ticket-update-meta .ticket-meta-wrapper {
   display: flex;
   align-items: center;
 }
@@ -147,15 +147,13 @@
   font-size: 10px;
 }
 
-.ticket-update .icn-delete-final,
-.ticket-add-product-actions .icn-delete-final,
-.ticket-add-service-actions .icn-delete-final {
+.icn-delete-final {
   background-image: url(../images/new-icons/remove-final.png);
   width: 16px;
   height: 16px;
 }
 
-.ticket-update-content .edit-icon-final {
+.edit-icon-final {
   background-image: url(../images/new-icons/edit-final.png);
   width: 16px;
   height: 16px;
@@ -177,7 +175,7 @@
   margin-left: 10px;
 }
 
-.ticket-update-content .ticket-update-meta .avatar {
+.ticket-update-meta .avatar {
   position: relative;
   margin-left: 10px;
 }
@@ -197,7 +195,7 @@
   display: block;
 }
 
-.ticket-update-content .ticket-update-meta span.update-timestamp {
+.ticket-update-meta span.update-timestamp {
   margin-top: 7px;
   margin-right: 10px;
   font-size: 11px;
@@ -571,7 +569,7 @@
   margin: 0;
   margin-bottom: 0px;
   margin-top: 0;
-  padding: 0;
+  padding: 5px !important;
   list-style: none;
 }
 
@@ -799,7 +797,13 @@
   position: relative;
 }
 
-.table-content .table-content-top:before {
+.mob-ticket-updates .ticket-update-header {
+  position: relative;
+  border-bottom: 1px solid #4f5f79;
+}
+
+.table-content .table-content-top:before,
+.mob-ticket-updates .ticket-update-header:before {
   position: absolute;
   content: 'SERVICE';
   font-size: 9px;
@@ -811,11 +815,29 @@
   top: 6px;
 }
 
-.product-upd .table-content-top:before {
+.mob-ticket-updates .ticket-update-header:before {
+  top: 0;
+}
+
+.product-upd .table-content-top:before,
+.mob-ticket-updates .mob-product-update .ticket-update-header:before {
   content: 'PRODUCT';
 }
 
-.note-upd .table-content-top:before {
+.mob-ticket-updates .mob-product-update .ticket-update-header {
+  padding-left: 65px;
+}
+
+.mob-ticket-updates .mob-note-update .ticket-update-header {
+  padding-left: 47px;
+}
+
+.mob-ticket-updates .mob-service-update .ticket-update-header {
+  padding-left: 59px;
+}
+
+.note-upd .table-content-top:before,
+.mob-ticket-updates .mob-note-update .ticket-update-header:before {
   content: 'NOTE';
 }
 
