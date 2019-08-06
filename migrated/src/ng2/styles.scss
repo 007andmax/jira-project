@@ -733,6 +733,31 @@ ngb-typeahead-window {
     }
   }
   &__modal {
+    .no-valid-service,
+    .no-valid-product {
+      input {
+        border:1px solid red !important;
+      }
+    }
+    .editable-description {
+      overflow-y: scroll;
+      overflow-x: hidden;
+      max-height: 150px;
+      width: 100%;
+      border: 1px solid #c4cbd5;
+      border-radius: 4px;
+      display: flex;
+      textarea {
+        width: 100%;
+        border: none;
+        padding: 12px;
+        font-size: 13px;
+        outline: none;
+        &:last-child {
+          visibility: hidden;
+        }
+      }
+    }
     .ticket-tabs {
       display: flex;
       position: relative;
@@ -983,7 +1008,6 @@ ngb-typeahead-window {
     font-family: "Graphik Medium", sans-serif;
   }
 }
-
 ngb-datepicker {
   border: none !important;
 }
