@@ -17,6 +17,13 @@ export class CreateRecurringTickets {
     constructor() {
 
     }
+    public getCompany() {
+        return this.company;
+    }
+    public getCrone() {
+       return this.cronExpression;
+    }
+
     public setDefaultCron() {
         this.cronExpression = '0 0 0 ? * MON *';
     }
@@ -72,7 +79,7 @@ export class CreateRecurringTickets {
     public clearProducts() {
         this.products = null
     }
-    
+
     public addProdct(product) {
         this.products.push(product);
     }

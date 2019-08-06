@@ -401,8 +401,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.recurringState.getCreateTicket().resetProducts();
     this.recurringState.getCreateTicket().resetServices();
     this.createService.setRulesCreateTicket(this.recurringState.getCreateTicket());
-    console.log('this.products',this.products);
-    console.log('this.ticketForEdit',this.ticketForEdit.products);
+  
     if (this.createService.checkProductsForSave(this.ticketForEdit,this.products)) {
       console.log('change products');
       this.products.forEach((item: ForCreateProduct) => (item.name || item.description) && this.recurringState.getCreateTicket().addProdct(new CreateRecurringTicketsProduct(item.versionedId.id, item.quantity, item.discount)));
@@ -436,7 +435,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   }
 
   public save() {
-
+if (!this.createService.validateTicket(this.recurringState.getCreateTicket())) return;
     console.log('data', this.recurringState.getCreateTicket());
     console.log('this.products', this.products);
     this.onInitChackProduct();

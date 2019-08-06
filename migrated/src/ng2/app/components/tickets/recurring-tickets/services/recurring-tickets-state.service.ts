@@ -12,7 +12,7 @@ import { RecurringService } from 'src/ng2/app/services/recurring/recurring.servi
   providedIn: 'root'
 })
 export class RecurringTicketsStateService {
-  crate: CreateRecurringTickets = new CreateRecurringTickets();
+  create: CreateRecurringTickets = new CreateRecurringTickets();
   public client: any;
   public tecketForCreate: Ticket = new Ticket();
   public onEditMode: EventEmitter<any> = new EventEmitter();
@@ -49,7 +49,7 @@ export class RecurringTicketsStateService {
     return this.client;
   }
   public getCreateTicket() {
-    return this.crate;
+    return this.create;
   }
   public onInitEditTicket(item: RecurringTicket) {
     this.onEditMode.emit(item);

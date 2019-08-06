@@ -14,6 +14,7 @@ import { DurationStateService } from 'src/ng2/app/components/shared/duration/ser
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { ServiceErrors } from '../../class/service-errors';
 import { RecurringTicket } from '../../class/recurring-ticket';
+import { create } from 'domain';
 
 @Injectable()
 export class RecurringTicketsService {
@@ -171,8 +172,14 @@ export class RecurringTicketsService {
         
         if (index >= services.length || service.duration !== service[index].duration || service.serviceDescription !== services[index].description) change = true;
       })
+      if (!ticketForEdit.services[0] && services[0].versionedId) change = true;
     } 
-    if (!ticketForEdit.services[0] && services[0].versionedId) change = true;
+   
     return change;
+  }
+  public validateTicket (create: CreateRecurringTickets) {
+    if (create.getCompany() !== null && create.getCrone() !== null) return true;
+    return false;
+
   }
 }
