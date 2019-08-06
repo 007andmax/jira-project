@@ -91,6 +91,7 @@ export class SelectClientCompanyComponent implements OnInit, OnDestroy {
           // this.selectedItem.emit({ item: this.clientsList[index] });
         }
       }
+      console.log(' this.clientsLis', this.clientsList);
     })
   }
 

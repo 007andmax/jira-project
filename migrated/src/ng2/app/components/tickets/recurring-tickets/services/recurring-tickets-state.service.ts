@@ -58,7 +58,7 @@ export class RecurringTicketsStateService {
     return this.onEditMode;
   }
   public clearCreateTicket() {
-    this.crate = new CreateRecurringTickets();
+    this.create = new CreateRecurringTickets();
   }
   public getTypeCron(cron: string) {
     if (cron.match(/\d+ \d+ \d+ [\?\*] \* (MON|TUE|WED|THU|FRI|SAT|SUN)* \*/)) {

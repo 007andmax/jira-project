@@ -66,8 +66,13 @@ export class CreateRecurringTickets {
     public setCompany(company) {
         this.company = company;
     }
-    public setStartDate(day, month, year) {
-        this.startDate = new Date(year, month - 1, day).getTime();
+    public setStartDate(day, month, year, timeOffset) {
+        let current = new Date();
+      let date = new Date(year, month - 1, day,current.getHours(),current.getMinutes());
+      console.log('date',date.getTime());
+    console.log('timeOffset',timeOffset);
+    console.log('date.getTimezoneOffset() * 60 * 1000',date.getTimezoneOffset() * 60 * 1000);
+        this.startDate = date.getTime() + (date.getTimezoneOffset() * 60 * 1000) + timeOffset;
     }
     public setDescription(description) {
         this.description = description;
