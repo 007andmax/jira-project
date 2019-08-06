@@ -65,13 +65,21 @@ export class CreateRecurringTickets {
     public setDescription(description) {
         this.description = description;
     }
-    public clearProducts() {
+    public resetProducts() {
         this.products = [];
     }
+
+    public clearProducts() {
+        this.products = null
+    }
+    
     public addProdct(product) {
         this.products.push(product);
     }
     public clearServices() {
+        this.services = null
+    }
+    public resetServices() {
         this.services = [];
     }
     public addService(service) {

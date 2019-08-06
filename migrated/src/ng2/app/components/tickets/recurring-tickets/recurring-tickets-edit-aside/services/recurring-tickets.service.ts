@@ -13,6 +13,7 @@ import { DevicesStateService } from '../../devices-recurring-tickets/services/de
 import { DurationStateService } from 'src/ng2/app/components/shared/duration/services/duration-state.service';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { ServiceErrors } from '../../class/service-errors';
+import { RecurringTicket } from '../../class/recurring-ticket';
 
 @Injectable()
 export class RecurringTicketsService {
@@ -145,5 +146,33 @@ export class RecurringTicketsService {
       if (item.versionedId === undefined) return retulst = false;
     })
     return retulst;
+  }
+  public checkProductsForSave(ticketForEdit: RecurringTicket ,products: Array<ForCreateProduct>) {
+    let change = false;
+    if (ticketForEdit !== null) {
+    
+      ticketForEdit.products.forEach((product,index) => {
+        
+        if (index >= products.length || product.product.manufacture !== products[index].manufacture || product.product.cost !== Number(products[index].cost) || products[index].quantity !== Number(product.quantity) || products[index].sale !== Number(product.product.sale) || products[index].discount !== Number(product.discount)) change = true;
+     
+      })
+      console.log("ticketForEdit.products[0]",ticketForEdit.products[0]);
+      if (!ticketForEdit.products[0] && products[0].versionedId) change = true;
+    } 
+   
+    return change;
+  }
+
+  public checkServicesForSave(ticketForEdit: RecurringTicket ,services: Array<ForCreateService>) {
+    let change = false;
+    if (ticketForEdit !== null) {
+    
+      ticketForEdit.services.forEach((service,index) => {
+        
+        if (index >= services.length || service.duration !== service[index].duration || service.serviceDescription !== services[index].description) change = true;
+      })
+    } 
+    if (!ticketForEdit.services[0] && services[0].versionedId) change = true;
+    return change;
   }
 }

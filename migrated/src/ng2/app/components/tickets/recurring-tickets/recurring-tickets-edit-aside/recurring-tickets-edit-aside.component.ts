@@ -379,15 +379,30 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
       this.onInitSave();
     }
   }
+ 
   public onInitSave() {
    
-    this.recurringState.getCreateTicket().clearProducts();
-    this.recurringState.getCreateTicket().clearServices();
+    this.recurringState.getCreateTicket().resetProducts();
+    this.recurringState.getCreateTicket().resetServices();
     this.createService.setRulesCreateTicket(this.recurringState.getCreateTicket());
-    this.products.forEach((item: ForCreateProduct) => (item.name || item.description) && this.recurringState.getCreateTicket().addProdct(new CreateRecurringTicketsProduct(item.versionedId.id, item.quantity, item.discount)));
-    this.services.forEach((item: ForCreateService) => (item.name || item.description) && this.recurringState.getCreateTicket().addService(new CreateRecurringTicketsService(item.versionedId.id, item.description, item.duration)));
-
+    console.log('this.products',this.products);
+    console.log('this.ticketForEdit',this.ticketForEdit.products);
+    if (this.createService.checkProductsForSave(this.ticketForEdit,this.products)) {
+      console.log('change products');
+      this.products.forEach((item: ForCreateProduct) => (item.name || item.description) && this.recurringState.getCreateTicket().addProdct(new CreateRecurringTicketsProduct(item.versionedId.id, item.quantity, item.discount)));
   
+    }  else {
+      console.log('no change products');
+      this.recurringState.getCreateTicket().clearProducts();
+    }
+    if (this.createService.checkServicesForSave(this.ticketForEdit,this.services)) {
+      this.services.forEach((item: ForCreateService) => (item.name || item.description) && this.recurringState.getCreateTicket().addService(new CreateRecurringTicketsService(item.versionedId.id, item.description, item.duration)));
+
+    } else {
+      this.recurringState.getCreateTicket().clearServices();
+    }
+    
+  console.log('this.recurringState.getCreateTicket()',this.recurringState.getCreateTicket());
     
     if (this.ticketForEdit && this.ticketForEdit.id) {
 
