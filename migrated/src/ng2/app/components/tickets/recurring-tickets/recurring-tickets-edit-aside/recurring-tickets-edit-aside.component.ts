@@ -395,7 +395,6 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
       this.onInitSave();
     }
   }
-<<<<<<< HEAD
  
   public onInitSave() {
    
@@ -421,18 +420,6 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     
   console.log('this.recurringState.getCreateTicket()',this.recurringState.getCreateTicket());
     
-=======
-
-  public onInitSave() {
-
-    this.recurringState.getCreateTicket().clearProducts();
-    this.recurringState.getCreateTicket().clearServices();
-    this.createService.setRulesCreateTicket(this.recurringState.getCreateTicket());
-    this.products.forEach((item: ForCreateProduct) => (item.name || item.description) && this.recurringState.getCreateTicket().addProdct(new CreateRecurringTicketsProduct(item.versionedId.id, item.quantity, item.discount)));
-    this.services.forEach((item: ForCreateService) => (item.name || item.description) && this.recurringState.getCreateTicket().addService(new CreateRecurringTicketsService(item.versionedId.id, item.description, item.duration)));
-
-
->>>>>>> 8c1810c558cd90c27e344d1f74568a1289571582
     if (this.ticketForEdit && this.ticketForEdit.id) {
 
       this.recurringService.editTicket(this.ticketForEdit, this.recurringState.getCreateTicket()).subscribe((res) => {
