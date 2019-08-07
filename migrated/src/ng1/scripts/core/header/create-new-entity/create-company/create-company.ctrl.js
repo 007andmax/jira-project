@@ -564,7 +564,7 @@
           if (!$scope.triedToSave) return false;
           return form[fieldName] && (form[fieldName].$dirty || $scope.triedToSave) && form[fieldName].$invalid;
         };
-        $scope.changeCompanyname = function () {
+     /*   $scope.changeCompanyname = function () {
        
           if ($scope.editCompany.name.includes('%')) {
             $scope.editCompany.name = $scope.editCompany.name.replace('%', '');
@@ -572,7 +572,7 @@
             $scope.$apply();
           }
         }
-
+*/
 
         $scope.validateCompanyName = function (ngModelCtrl, modelId, afterValidationCallback) {
 
