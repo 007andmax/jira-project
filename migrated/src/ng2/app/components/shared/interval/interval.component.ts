@@ -120,7 +120,10 @@ export class IntervalComponent implements OnInit, OnDestroy {
         const days_weekly = this.selectOptions.days
           .reduce((acc, day) => this.state.weekly[day] ? acc.concat([day]) : acc, [])
           .join(",");
+          console.log('days_weekly',days_weekly);
+         
         this.cron = `0 0 0 ? * ${days_weekly} *`.trim();
+        if (days_weekly === '') this.cron = null;
         this.selectOptions.days.forEach(weekDay => this.state.daily[weekDay] = false);
         this.datepicker = null;
         break;
@@ -128,11 +131,15 @@ export class IntervalComponent implements OnInit, OnDestroy {
         const days = this.selectOptions.days
           .reduce((acc, day) => this.state.daily[day] ? acc.concat([day]) : acc, [])
           .join(",");
+          console.log('days',days);
+        
         this.cron = `0 0 0 ? * ${days} *`.trim();
+        if (days === '') this.cron = null;
         this.selectOptions.days.forEach(weekDay => this.state.weekly[weekDay] = false);
         this.datepicker = null;
         break;
       case "monthly":
+        console.log('this.datepicker.day',this.datepicker.day);
         if (this.datepicker.day <= 28) this.cron = `0 0 0 ${this.datepicker.day} JAN-DEC ? *`;
         if (this.datepicker.day === 29 || this.datepicker.day === 30) this.cron = `0 0 0 ${this.datepicker.day} JAN,MAR-DEC ? *`;
         if (this.datepicker.day === 31) this.cron = `0 0 0 L * ? *`;

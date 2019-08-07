@@ -121,7 +121,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   }
 
   public onChangeCron(data) {
-
+console.log('data',data)
     this.recurringState.getCreateTicket().setCronExpression(data);
   }
 
