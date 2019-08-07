@@ -68,7 +68,10 @@ export class CreateRecurringTickets {
     }
     public setStartDate(day, month, year, timeOffset) {
         let current = new Date();
-        if (day !== current.getDate() || current.getMonth() !== (month - 1)) {
+        let date = new Date(year, month - 1, day, current.getHours(), current.getMinutes());
+
+            this.startDate = date.getTime() + (date.getTimezoneOffset() * 60 * 1000) + timeOffset;
+       /* if (day !== current.getDate() || current.getMonth() !== (month - 1)) {
             let date = new Date(year, month - 1, day);
 
             this.startDate = date.getTime();
@@ -77,7 +80,7 @@ export class CreateRecurringTickets {
 
             this.startDate = date.getTime() + (date.getTimezoneOffset() * 60 * 1000) + timeOffset;
             console.log('this.startDate',this.startDate);
-        }
+        }*/
 
     }
     public setDescription(description) {
