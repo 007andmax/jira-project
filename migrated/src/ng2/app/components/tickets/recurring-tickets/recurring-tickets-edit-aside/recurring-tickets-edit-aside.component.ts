@@ -93,7 +93,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.createService.setDescription(data.description);
     this.ticketForEdit = data;
     console.log('this.ticketForEdit', this.ticketForEdit);
-   // console.log('startDate',new Moment( data.startDate ));
+   console.log('startDate',new Moment( data.startDate ));
     this.companiesState.setCompanyFromtEdit(data.company);
     this.devicesService.onInitHangle(data.company.id);
     this.selectedClient = data.company;

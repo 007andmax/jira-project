@@ -25,10 +25,10 @@ export class RecurringTicketsTableComponent implements OnInit {
     let date = new Date(milisecong);
    // console.log('date',date);
           
-     let startDate = date.getTime() + (date.getTimezoneOffset() * 60 * 1000) + this.recurringState.getTehCompany().addresses[0].timeZone.timeOffset;
+     let startDate = new Date(date.getTime() + (date.getTimezoneOffset() * 60 * 1000) + this.recurringState.getTehCompany().addresses[0].timeZone.timeOffset);
     
    // console.log('this.startDate', new Date(startDate));
-    return `${date.getDate()} ${MONTHS_SHORT[date.getMonth()]} ${date.getFullYear()}`;
+    return `${startDate.getDate()} ${MONTHS_SHORT[startDate.getMonth()]} ${startDate.getFullYear()}`;
   }
 
   public getParseShortName(name) {
