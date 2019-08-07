@@ -25,6 +25,7 @@ import {RecurringTicketCompany} from '../interfaces/recurring-ticket-company';
 import {IntervalStateService} from '../../../shared/interval/services/interval-state.service';
 import {Product} from 'src/ng2/app/interfaces/product/product';
 import {EditProduct} from 'src/ng2/app/interfaces/product/edit-product';
+import { $mol_time_moment as Moment } from 'mol_time_all'
 
 @Component({
   selector: 'app-recurring-tickets-edit-aside',
@@ -74,7 +75,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.getItemListProducts();
     this.recurringState.onInitClientList();
     this.onCheckEditMode();
-    this.createService.onInitTehCompany();
+   
     console.log('ticketForEdit', this.ticketForEdit);
 
   }
@@ -92,6 +93,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.createService.setDescription(data.description);
     this.ticketForEdit = data;
     console.log('this.ticketForEdit', this.ticketForEdit);
+   // console.log('startDate',new Moment( data.startDate ));
     this.companiesState.setCompanyFromtEdit(data.company);
     this.devicesService.onInitHangle(data.company.id);
     this.selectedClient = data.company;
@@ -202,7 +204,7 @@ console.log('data',data)
     this.ticketForm.controls['date'].setValue(this.date.getTitle());
     this.createService.setTextInput('dropdownDate', this.date.getTitle());
     console.log('this.datepicker', this.datepicker);
-    this.recurringState.getCreateTicket().setStartDate(this.datepicker.day, this.datepicker.month, this.datepicker.year,this.createService.getTehCompany().addresses[0].timeZone.timeOffset);
+    this.recurringState.getCreateTicket().setStartDate(this.datepicker.day, this.datepicker.month, this.datepicker.year,this.recurringState.getTehCompany().addresses[0].timeZone.timeOffset);
     this.date_dropDown.close();
     this.cd.detectChanges();
 
@@ -243,7 +245,7 @@ console.log('data',data)
   private updateDate() {
     this.date.setTitle(this.datepicker);
     this.ticketForm.controls['date'].setValue(this.date.getTitle());
-    this.recurringState.getCreateTicket().setStartDate(this.datepicker.year, this.datepicker.month, this.datepicker.day,this.createService.getTehCompany().addresses[0].timeZone.timeOffset);
+    this.recurringState.getCreateTicket().setStartDate(this.datepicker.year, this.datepicker.month, this.datepicker.day,this.recurringState.getTehCompany().addresses[0].timeZone.timeOffset);
     this.createService.setTextInput('dropdownDate', this.date.getTitle());
     this.date_dropDown.close();
   }

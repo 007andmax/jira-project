@@ -1,5 +1,6 @@
 import { CreateRecurringTicketsProduct } from './create-recurring-tickets-product';
 import { CreateRecurringTicketsService } from './create-recurring-tickets-service';
+import { formatDate } from '@angular/common';
 
 export class CreateRecurringTickets {
     description: string = null;
@@ -68,19 +69,26 @@ export class CreateRecurringTickets {
     }
     public setStartDate(day, month, year, timeOffset) {
         let current = new Date();
-        let date = new Date(year, month - 1, day, current.getHours(), current.getMinutes());
+    
 
-            this.startDate = date.getTime() + (date.getTimezoneOffset() * 60 * 1000) + timeOffset;
-       /* if (day !== current.getDate() || current.getMonth() !== (month - 1)) {
-            let date = new Date(year, month - 1, day);
-
-            this.startDate = date.getTime();
+       if (day !== current.getDate() || current.getMonth() !== (month - 1)) {
+        let date = new Date(year, month - 1, day);
+          
+        this.startDate = date.getTime() + (date.getTimezoneOffset() * 60 * 1000) + timeOffset;
+        console.log('this.startDate',this.startDate);
+       /* let date = new Date(year, month - 1, day, current.getHours(), current.getMinutes());
+        let startDateTime = date.getTime() + (date.getTimezoneOffset() * 60 * 1000) + timeOffset;
+       let startDate = new Date(date.getTime() + (date.getTimezoneOffset() * 60 * 1000) + timeOffset);
+       startDateTime= (startDateTime - (startDate.getHours() * 3600000));
+        this.startDate = startDate.getTime();
+        console.log('this.startDate',this.startDate);*/
         } else {
             let date = new Date(year, month - 1, day, current.getHours(), current.getMinutes());
-
+          
             this.startDate = date.getTime() + (date.getTimezoneOffset() * 60 * 1000) + timeOffset;
             console.log('this.startDate',this.startDate);
-        }*/
+          
+        }
 
     }
     public setDescription(description) {

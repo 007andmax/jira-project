@@ -20,12 +20,12 @@ import { CompaniesService } from 'src/ng2/app/services/company/companies.service
 @Injectable()
 export class RecurringTicketsService {
   sub: Subscription = new Subscription();
-  tehCompany:any = null;
+ 
   constructor(private elRef: ElementRef, private tagsState: TagsStateService,
     private stateInterval: IntervalStateService,
     private tehState: TehUsersSateService,
     private devicesState: DevicesStateService,
-    private companiesService: CompaniesService,
+  
 
   ) { }
   public setRulesCreateTicket(data: CreateRecurringTickets) {
@@ -35,14 +35,7 @@ export class RecurringTicketsService {
     data.setCreateTask(this.elRef.nativeElement.querySelector('#createTask').checked);
 
   }
-  public onInitTehCompany() {
-    this.companiesService.getTechCompany().subscribe((res) => {
-       this.tehCompany = res;
-    });
-  }
-  public getTehCompany () {
-    return this.tehCompany;
-  }
+
 
   public setCronForEdit(data) {
     this.stateInterval.onInitEditMode(data);

@@ -17,8 +17,19 @@ export class RecurringTicketsStateService {
   public tecketForCreate: Ticket = new Ticket();
   public onEditMode: EventEmitter<any> = new EventEmitter();
   editProducts: Array<EditProduct> = [];
-  constructor(private companiesService: CompaniesService) { }
+  tehCompany:any = null;
+  constructor(private companiesService: CompaniesService) {
+    this.onInitTehCompany();
+   }
 
+  public onInitTehCompany() {
+    this.companiesService.getTechCompany().subscribe((res) => {
+       this.tehCompany = res;
+    });
+  }
+  public getTehCompany () {
+    return this.tehCompany;
+  }
   public onInitClientList() {
     this.companiesService.getCompaniesList();
   }

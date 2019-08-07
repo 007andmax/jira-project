@@ -5,6 +5,8 @@ import { TicketStateService } from '../../ticket-state.service';
 import { RecurringTicketsStateService } from '../services/recurring-tickets-state.service';
 import { RecurringService } from 'src/ng2/app/services/recurring/recurring.service';
 
+
+
 @Component({
   selector: 'app-recurring-tickets-table',
   templateUrl: './recurring-tickets-table.component.html',
@@ -21,6 +23,11 @@ export class RecurringTicketsTableComponent implements OnInit {
 
   public getPareDate(milisecong) {
     let date = new Date(milisecong);
+   // console.log('date',date);
+          
+     let startDate = date.getTime() + (date.getTimezoneOffset() * 60 * 1000) + this.recurringState.getTehCompany().addresses[0].timeZone.timeOffset;
+    
+   // console.log('this.startDate', new Date(startDate));
     return `${date.getDate()} ${MONTHS_SHORT[date.getMonth()]} ${date.getFullYear()}`;
   }
 
