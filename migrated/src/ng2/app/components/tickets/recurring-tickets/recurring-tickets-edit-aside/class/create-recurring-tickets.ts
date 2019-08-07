@@ -21,7 +21,7 @@ export class CreateRecurringTickets {
         return this.company;
     }
     public getCrone() {
-       return this.cronExpression;
+        return this.cronExpression;
     }
 
     public setDefaultCron() {
@@ -68,11 +68,16 @@ export class CreateRecurringTickets {
     }
     public setStartDate(day, month, year, timeOffset) {
         let current = new Date();
-      let date = new Date(year, month - 1, day,current.getHours(),current.getMinutes());
-      console.log('date',date.getTime());
-    console.log('timeOffset',timeOffset);
-    console.log('date.getTimezoneOffset() * 60 * 1000',date.getTimezoneOffset() * 60 * 1000);
-        this.startDate = date.getTime() + (date.getTimezoneOffset() * 60 * 1000) + timeOffset;
+        if (day !== current.getDate() || month !== (month - 1)) {
+            let date = new Date(year, month - 1, day);
+
+            this.startDate = date.getTime();
+        } else {
+            let date = new Date(year, month - 1, day, current.getHours(), current.getMinutes());
+
+            this.startDate = date.getTime() + (date.getTimezoneOffset() * 60 * 1000) + timeOffset;
+        }
+
     }
     public setDescription(description) {
         this.description = description;
