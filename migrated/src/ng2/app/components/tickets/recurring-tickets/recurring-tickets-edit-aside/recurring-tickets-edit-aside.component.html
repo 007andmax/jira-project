@@ -19,6 +19,9 @@
         </div>
 
         <div class="col-md-12">
+            <mat-error *ngIf="!validate.getCompany()">
+                Company name is required
+              </mat-error>
           <p>Assign to Company</p>
           <app-select-client-company style="width: 75%;" class="light-dropdown" [formGroup]="ticketForm"
                                      [filter]="true"
@@ -35,6 +38,7 @@
         </div>
 
         <div class="col-md-4">
+           
           <p>Date</p>
           <div class="input-group date-picker" ngbDropdown [autoClose]="'outside'" #date="ngbDropdown">
             <input type="text" class="pointer" placeholder="Select Date" ngbDropdownToggle id="dropdownDate" readonly>
@@ -57,7 +61,9 @@
             </div>
           </div>
         </div>
-
+        <mat-error *ngIf="!validate.getInterval()">
+            Interval is required
+          </mat-error>
         <app-interval (cronChange)="onChangeCron($event)"></app-interval>
 
         <div class="col-md-12 ticket-tabs">

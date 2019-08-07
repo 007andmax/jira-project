@@ -16,6 +16,7 @@ import { ServiceErrors } from '../../class/service-errors';
 import { RecurringTicket } from '../../class/recurring-ticket';
 import { create } from 'domain';
 import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
+import { Validate } from '../class/validate';
 
 @Injectable()
 export class RecurringTicketsService {
@@ -181,9 +182,5 @@ export class RecurringTicketsService {
    
     return change;
   }
-  public validateTicket (create: CreateRecurringTickets) {
-    if (create.getCompany() !== null && create.getCrone() !== null) return true;
-    return false;
-
-  }
+  
 }
