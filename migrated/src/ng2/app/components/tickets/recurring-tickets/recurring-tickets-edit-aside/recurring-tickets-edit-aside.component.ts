@@ -125,6 +125,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
 
   public onChangeCron(data) {
     console.log('data', data)
+    if (data !== null) this.validate.resetInterval();
     this.recurringState.getCreateTicket().setCronExpression(data);
   }
 
@@ -179,6 +180,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   public selectClient(selectClient) {
 
     if (selectClient === 'null') return;
+    this.validate.resetCompany();
     console.log('selectClient.item', selectClient.item);
     this.recurringState.getCreateTicket().setCompany(selectClient.item.id);
     this.ticketForm.controls['client'].setValue(selectClient);
@@ -485,6 +487,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.products = [];
     this.services = [];
     this.ticketForEdit = null;
+    this.validate = new Validate();
 
   }
 
