@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, OnDestroy, OnChanges, ElementRef } from '@angular/core';
 import { merge, Observable, Subject, Subscription } from "rxjs";
 import { CompaniesService } from "../../../../../../../services/company/companies.service";
 import { ISubscription } from "rxjs/Subscription";
@@ -19,9 +19,11 @@ import { RecurringTicketsStateService } from 'src/ng2/app/components/tickets/rec
 export class SelectClientCompanyComponent implements OnInit, OnDestroy {
 
 
+
   @ViewChild('instance') instance: NgbTypeahead;
   @Output() selectedItem = new EventEmitter<any>();
   @Output() getAllItems = new EventEmitter<any>();
+  @Input() valid: boolean = true;
   @Input() formGroup: FormGroup;
   @Input() editItem: any;
   @Input() filter: boolean = false;
@@ -40,6 +42,7 @@ export class SelectClientCompanyComponent implements OnInit, OnDestroy {
     private companiesService: CompaniesService,
     private companiesState: SelectClientCompanyStateService,
     private recurringState: RecurringTicketsStateService,
+   
   ) { }
 
   /**
@@ -52,6 +55,7 @@ export class SelectClientCompanyComponent implements OnInit, OnDestroy {
 
 
   }
+ 
 
   private onCheckEditItem() {
     console.log('onCheckEditItem');
@@ -59,7 +63,7 @@ export class SelectClientCompanyComponent implements OnInit, OnDestroy {
       this.editItem = data;
       let index: number = this.clientsList.findIndex(item => item.id === this.editItem.id);
       if (index > (-1)) {
-      
+
         this.selectedClient = this.clientsList[index];
       }
     });

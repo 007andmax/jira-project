@@ -23,7 +23,7 @@
                 Company name is required
               </mat-error>
           <p>Assign to Company</p>
-          <app-select-client-company style="width: 75%;" class="light-dropdown" [formGroup]="ticketForm"
+          <app-select-client-company [valid]="validate.getCompany()" style="width: 75%;" class="light-dropdown"
                                      [filter]="true"
                                      (selectedItem)="selectClient($event)"></app-select-client-company>
         </div>
@@ -64,7 +64,7 @@
         <mat-error *ngIf="!validate.getInterval()">
             Interval is required
           </mat-error>
-        <app-interval (cronChange)="onChangeCron($event)"></app-interval>
+        <app-interval  [valid]="validate.getInterval()" (cronChange)="onChangeCron($event)"></app-interval>
 
         <div class="col-md-12 ticket-tabs">
 

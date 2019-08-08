@@ -4,6 +4,7 @@
        ngbDropdown [autoClose]="'outside'">
     <input type="text"
            class="pointer"
+           [ngClass]="(!valid) ? 'no-valid' : ''"
            [value]="title"
            placeholder="Select Interval"
            id="dropdownForm2"

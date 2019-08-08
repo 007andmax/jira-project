@@ -22,7 +22,7 @@ export class IntervalComponent implements OnInit, OnDestroy {
   public navigation = 'none';
   public outsideDays = 'hidden';
   public title: string = 'Daily';
-
+  @Input() valid: boolean = true;
   @Input() get cron(): string { return this.localCron; }
   set cron(value: string) {
     this.localCron = value;
