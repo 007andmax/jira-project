@@ -1,4 +1,5 @@
 import { CreateRecurringTickets } from './create-recurring-tickets';
+import { RecurringTicket } from '../../class/recurring-ticket';
 
 export class Validate  {
     company: boolean = true;
@@ -23,6 +24,13 @@ export class Validate  {
         this.interval = false;
     }
     public checkValidatForCreate(create: CreateRecurringTickets) {
+        this.resetCompany();
+        this.resetInterval();
+        if (create.getCompany() === null) this.companyNoValid();
+        if (create.getCrone() === null) this.intervalNoValid();
+
+    }
+    public checkValidatForEdit(create: CreateRecurringTickets,ticketForEdit: RecurringTicket) {
         this.resetCompany();
         this.resetInterval();
         if (create.getCompany() === null) this.companyNoValid();

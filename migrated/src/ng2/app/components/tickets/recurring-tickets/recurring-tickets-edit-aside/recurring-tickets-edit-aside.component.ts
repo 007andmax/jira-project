@@ -178,17 +178,25 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   }
 
   public selectClient(selectClient) {
-
-    if (selectClient === 'null') return;
     this.validate.resetCompany();
-    console.log('selectClient.item', selectClient.item);
-    this.recurringState.getCreateTicket().setCompany(selectClient.item.id);
-    this.ticketForm.controls['client'].setValue(selectClient);
-    this.selectedClient = selectClient.item;
-    this.recurringState.setClient(selectClient);
-    this.onCheckListServices();
-
-    this.getCompanyDevices();
+    if (selectClient === 'null') {
+   
+      this.recurringState.getCreateTicket().setCompany(null);
+    //  this.ticketForm.controls['client'].setValue(selectClient);
+      this.selectedClient = null;
+      this.recurringState.setClient(selectClient);
+    } else {
+      
+      console.log('selectClient.item', selectClient.item);
+      this.recurringState.getCreateTicket().setCompany(selectClient.item.id);
+      this.ticketForm.controls['client'].setValue(selectClient);
+      this.selectedClient = selectClient.item;
+      this.recurringState.setClient(selectClient);
+      this.onCheckListServices();
+  
+      this.getCompanyDevices();
+     
+    }
     this.cd.detectChanges();
 
   }
