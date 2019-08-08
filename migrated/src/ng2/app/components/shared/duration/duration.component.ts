@@ -66,6 +66,10 @@ export class DurationComponent implements OnInit, OnDestroy {
         minutes = Math.round(timeInMinutes - (hours * 60));
       this.selectedHours = this.durationService.parse(hours);
       this.selectedMin = this.durationService.parse(minutes);
+      console.log(' this.selectedHours', this.selectedHours);
+      console.log(' this.selectedMin', this.selectedMin);
+      this.duration.setHours(this.selectedHours.value);
+      this.duration.setMinutes(this.selectedMin.value);
     }
   }
   private onInitClearState() {

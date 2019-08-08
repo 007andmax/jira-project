@@ -26,7 +26,7 @@ export class RecurringTicketsService {
     private stateInterval: IntervalStateService,
     private tehState: TehUsersSateService,
     private devicesState: DevicesStateService,
-  
+    private durationState: DurationStateService,
 
   ) { }
   public setRulesCreateTicket(data: CreateRecurringTickets) {

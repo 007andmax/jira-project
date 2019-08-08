@@ -308,7 +308,8 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   }
 
   public setService(item, index) {
-    item = { ...item, ...{ description: '', duration: 1 } };
+    item = { ...item, ...{ description: '', duration: (this.services[index].duration) ? this.services[index].duration :  1 } };
+    
     console.log('item', item);
     this.services[index] = new ForCreateService(item);
     console.log('this.services', this.services);
@@ -325,6 +326,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
      {
        console.log('min', (data.minutes * 100) / 60);
      }*/
+     console.log('data',data);
     this.services[i].duration = data.hour + ((data.minutes) ? (data.minutes / 60) : 0);
 
   }
@@ -426,6 +428,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     }
 
 console.log('this.recurringState.getCreateTicket()',this.recurringState.getCreateTicket());
+
     if (this.ticketForEdit && this.ticketForEdit.id) {
       this.recurringState.getCreateTicket().checkForEdit(this.ticketForEdit);
       this.recurringService.editTicket(this.ticketForEdit, this.recurringState.getCreateTicket()).subscribe((res) => {

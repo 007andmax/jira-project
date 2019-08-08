@@ -2,7 +2,7 @@ import { Component, OnInit, OnChanges, Input, Output, EventEmitter, SimpleChange
 import { CronOptions } from 'src/ng2/app/components/shared/interval/interfaces/cron/cront-option';
 import { Days, MonthWeeks, Months } from './config/enums';
 import { IntervalService } from './services/interval.service';
-import { NgbDateStruct, NgbCalendar, NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStruct, NgbCalendar, NgbDate, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDatepickerNavigateEvent } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker';
 import { IntervalStateService } from './services/interval-state.service';
 import { RecurringTicketsStateService } from '../../tickets/recurring-tickets/services/recurring-tickets-state.service';
@@ -40,8 +40,9 @@ export class IntervalComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     private calendar: NgbCalendar,
     private stateInterval: IntervalStateService,
-    private recurringState: RecurringTicketsStateService) {
-
+    private recurringState: RecurringTicketsStateService,
+   ) {
+     
   }
   public async ngOnInit() {
     this.options = this.intervalService.getDefaultOptions();
