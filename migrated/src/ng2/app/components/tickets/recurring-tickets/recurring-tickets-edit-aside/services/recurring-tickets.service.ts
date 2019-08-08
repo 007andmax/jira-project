@@ -164,7 +164,9 @@ export class RecurringTicketsService {
       })
       console.log("ticketForEdit.products[0]",ticketForEdit.products[0]);
       if (!ticketForEdit.products[0] && products[0].versionedId) change = true;
-    } 
+    } else {
+      if (products[0].versionedId) change = true;
+    }
    
     return change;
   }
@@ -175,10 +177,12 @@ export class RecurringTicketsService {
     
       ticketForEdit.services.forEach((service,index) => {
         
-        if (index >= services.length || service.duration !== service[index].duration || service.serviceDescription !== services[index].description) change = true;
+        if (index >= services.length || service.duration !== services[index].duration || service.serviceDescription !== services[index].description) change = true;
       })
       if (!ticketForEdit.services[0] && services[0].versionedId) change = true;
-    } 
+    }  else {
+      if (services[0].versionedId) change = true;
+    }
    
     return change;
   }

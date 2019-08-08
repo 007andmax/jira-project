@@ -23,18 +23,12 @@ export class Validate  {
     public intervalNoValid () {
         this.interval = false;
     }
-    public checkValidatForCreate(create: CreateRecurringTickets) {
+    public checkValidat(create: CreateRecurringTickets) {
         this.resetCompany();
         this.resetInterval();
         if (create.getCompany() === null) this.companyNoValid();
         if (create.getCrone() === null) this.intervalNoValid();
 
     }
-    public checkValidatForEdit(create: CreateRecurringTickets,ticketForEdit: RecurringTicket) {
-        this.resetCompany();
-        this.resetInterval();
-        if (create.getCompany() === null) this.companyNoValid();
-        if (create.getCrone() === null) this.intervalNoValid();
-
-    }
+ 
 }

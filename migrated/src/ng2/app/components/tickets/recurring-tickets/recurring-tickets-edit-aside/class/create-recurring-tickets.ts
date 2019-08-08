@@ -1,6 +1,7 @@
 import { CreateRecurringTicketsProduct } from './create-recurring-tickets-product';
 import { CreateRecurringTicketsService } from './create-recurring-tickets-service';
 import { formatDate } from '@angular/common';
+import { RecurringTicket } from '../../class/recurring-ticket';
 
 export class CreateRecurringTickets {
     description: string = null;
@@ -114,6 +115,13 @@ export class CreateRecurringTickets {
     }
     public addService(service) {
         this.services.push(service);
+    }
+
+    public checkForEdit(ticketForEdit: RecurringTicket) {
+        if (ticketForEdit.company.name === this.company) this.setCompany(null);
+        if (ticketForEdit.cronExpression === this.cronExpression) this.setCronExpression(null);
+        if (ticketForEdit.description === this.description) this.setDescription(null);
+
     }
 
 }
