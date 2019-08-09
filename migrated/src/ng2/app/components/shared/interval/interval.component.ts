@@ -41,10 +41,11 @@ export class IntervalComponent implements OnInit, OnDestroy {
     private calendar: NgbCalendar,
     private stateInterval: IntervalStateService,
     private recurringState: RecurringTicketsStateService,
-   ) {
-     
+  ) {
+
   }
   public async ngOnInit() {
+    this.datepicker = this.stateInterval.getDefaultDate();
     this.options = this.intervalService.getDefaultOptions();
     this.state = this.intervalService.getDefaultState();
     this.onCheckClear();
@@ -54,7 +55,7 @@ export class IntervalComponent implements OnInit, OnDestroy {
   }
   public selectDateEditMode(data: NgbDate) {
     this.datepicker = data;
-    console.log('this.datepicker',this.datepicker);
+    console.log('this.datepicker', this.datepicker);
     if (this.navDate) this.intervalService.updateMonthAndYearDatePicker(this.datepicker, this.navDate);
 
   }
@@ -75,7 +76,7 @@ export class IntervalComponent implements OnInit, OnDestroy {
         let daily = data.substring(10, data.lastIndexOf(" *")).split(",");
         console.log('daily', daily);
         daily.forEach((item) => this.state.daily[item] = true);
-        
+
       }
       if (this.activeTab === "monthly") {
         this.selectOptions.days.forEach(weekDay => this.state.weekly[weekDay] = false);
@@ -102,6 +103,7 @@ export class IntervalComponent implements OnInit, OnDestroy {
       this.title = tab.charAt(0).toUpperCase() + tab.slice(1);
       //  this.regenerateCron();
     }
+    console.log('this.datepicker', this.datepicker);
   }
   private onCheckClear() {
     let getClearState = this.stateInterval.getClearState().subscribe(() => {
@@ -115,15 +117,15 @@ export class IntervalComponent implements OnInit, OnDestroy {
     this.intervalService.addSubscription(getClearState);
   }
   public regenerateCron() {
-  
+
     switch (this.activeTab) {
 
       case "weekly":
         const days_weekly = this.selectOptions.days
           .reduce((acc, day) => this.state.weekly[day] ? acc.concat([day]) : acc, [])
           .join(",");
-          console.log('days_weekly',days_weekly);
-         
+        console.log('days_weekly', days_weekly);
+
         this.cron = `0 0 0 ? * ${days_weekly} *`.trim();
         if (days_weekly === '') this.cron = null;
         this.selectOptions.days.forEach(weekDay => this.state.daily[weekDay] = false);
@@ -133,15 +135,15 @@ export class IntervalComponent implements OnInit, OnDestroy {
         const days = this.selectOptions.days
           .reduce((acc, day) => this.state.daily[day] ? acc.concat([day]) : acc, [])
           .join(",");
-          console.log('days',days);
-        
+        console.log('days', days);
+
         this.cron = `0 0 0 ? * ${days} *`.trim();
         if (days === '') this.cron = null;
         this.selectOptions.days.forEach(weekDay => this.state.weekly[weekDay] = false);
         this.datepicker = null;
         break;
       case "monthly":
-        console.log('this.datepicker.day',this.datepicker.day);
+        console.log('this.datepicker.day', this.datepicker);
         if (this.datepicker.day <= 28) this.cron = `0 0 0 ${this.datepicker.day} JAN-DEC ? *`;
         if (this.datepicker.day === 29 || this.datepicker.day === 30) this.cron = `0 0 0 ${this.datepicker.day} JAN,MAR-DEC ? *`;
         if (this.datepicker.day === 31) this.cron = `0 0 0 L * ? *`;
@@ -168,15 +170,15 @@ export class IntervalComponent implements OnInit, OnDestroy {
   }
 
   public selectDate(data: NgbDate) {
-    this.datepicker = data;
-
+    // this.datepicker = this.stateInterval.getDefaultDate();
+    this.datepicker.day = data.day;
     this.cd.detectChanges();
     this.regenerateCron();
   }
 
 
   public selectStartMonth() {
-    let date = this.calendar.getToday();
+    let date = this.stateInterval.getDefaultDate();
     date.day = 1;
     this.datepicker = date;
     this.regenerateCron();
@@ -185,9 +187,9 @@ export class IntervalComponent implements OnInit, OnDestroy {
 
 
   public selectEndMonth() {
-    let date = this.calendar.getToday();
-    let day = 32 - new Date(date.year, date.month - 1, 32).getDate();
-    date.day = day;
+   // let date = this.calendar.getToday();
+    let date = this.stateInterval.getDefaultDate();
+    date.day = 31;
     this.datepicker = date;
     this.regenerateCron();
   }

@@ -22,4 +22,7 @@ export class IntervalStateService {
   public getClearState() {
     return this.clearState;
   }
+  public getDefaultDate() {
+    return {year: 2019, month: 7,day: null};
+  }
 }
