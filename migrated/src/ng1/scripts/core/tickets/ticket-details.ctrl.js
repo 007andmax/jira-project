@@ -106,8 +106,17 @@
             if (CompaniesService.getOneById($scope.ticketDetails.company.id).isDefault) {
               $rootScope.isRightPanelHidden = true;
             }
+            console.log('$scope.ticketDetails',$scope.ticketDetails);
             rightPanelSharedState.companyId = $scope.ticketDetails.company.id;
-            rightPanelSharedState.createUserId = $scope.ticketDetails.createdUser.id;
+            if ($scope.ticketDetails.ticketSource == "FROM_RECURRING_TICKET") {
+            //  rightPanelSharedState.companyId = $scope.ticketDetails.company;
+              rightPanelSharedState.createUserId = $scope.ticketDetails.createdUserId;
+            } else  {
+            //  rightPanelSharedState.companyId = $scope.ticketDetails.company.id;
+              rightPanelSharedState.createUserId = $scope.ticketDetails.createdUser.id;
+            }
+           
+       
             $timeout(function () {
               $scope.isLoaded = true;
               UserNotificationService.hide();
@@ -256,7 +265,13 @@
               // };
             }
             $scope.currentOpenTab = $scope.currentOpenTab || 'NOTE';
-            $scope.user = UsersService.getOneById($scope.ticketDetails.createdUser.id);
+            if ($scope.ticketDetails.ticketSource == "FROM_RECURRING_TICKET") {
+              $scope.user = UsersService.getOneById($scope.ticketDetails.createdUserId);
+              
+            } else {
+              $scope.user = UsersService.getOneById($scope.ticketDetails.createdUser.id);
+            }
+          
             CompaniesService.getCompanyData($scope, $scope.ticketDetails.company.id, companyDataRequestCallback);
             function companyDataRequestCallback(resp) {
               $scope.company = resp;

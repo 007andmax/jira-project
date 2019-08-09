@@ -73,6 +73,7 @@
       });
       var ticketsSharedState = SharedStateService.getSharedState('ticketsHeader');
       function getQueries(currentUserId) {
+   
         return {
           ALL: { excludeTrashSpam: true },
           UNASSIGNED: {
@@ -101,6 +102,13 @@
                     "path": "assignedUser.id",
                     "operator": "NULL",
                     "values": []
+                  },
+                  {  
+                    "path":"multiAssignedUsers.id",
+                    "operator":"IN",
+                    "values":[  
+                      currentUserId
+                    ]
                   }
                 ]
               },
@@ -243,6 +251,7 @@
       function fetchTickets(listType, userId, companyId, callback) {
         var query = queries[listType.toUpperCase()]
         // console.log(ticketsSharedState.filter, 'FILTER')
+        console.log('ticketsSharedState',ticketsSharedState);
         if(ticketsSharedState.filter.companyId || ticketsSharedState.filter.clientUserId || ticketsSharedState.filter.techUserId || (ticketsSharedState.filter.tags && ticketsSharedState.filter.tags.length)) {
           var groupedQuery = {
             excludeTrashSpam: true,
@@ -269,6 +278,7 @@
             //   ]
             // })
           }
+        
           if (ticketsSharedState.filter.tags && ticketsSharedState.filter.tags.length > 0) {
             var tagsQuery = {
               "path": "tags.id",
@@ -283,9 +293,11 @@
               operator: 'EQ',
               values: [ticketsSharedState.filter.clientUserId]
             };
+           
             groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(userIdQuery);
           }
           if(ticketsSharedState.filter.techUserId) {
+          
             var techUserIdQuery = {
               path: 'assignedUser.id',
               operator: 'EQ',
@@ -323,6 +335,7 @@
             }]
           });
         }
+        console.log('listType',listType);
         loadMore(listType, callback);
       }
       function loadMore(listType, callback) {
@@ -333,6 +346,7 @@
         if (storage.lastParams) {
           storage.lastParams.offset = storage.tickets.length;
         }
+        console.log('storage.lastParams',storage.lastParams);
         // storage.lastParams.offset = 14;
         loadingInProcess = true;
         $http.post('/v2/tickets/getTickets', storage.lastParams, { params: { listType: listType } }).then(function (resp) {
