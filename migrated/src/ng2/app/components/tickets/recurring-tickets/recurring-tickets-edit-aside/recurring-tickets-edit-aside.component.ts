@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { Subscription } from "rxjs";
 import { TicketStateService } from "../../ticket-state.service";
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import {  FormBuilder } from '@angular/forms';
 import { ProductService } from 'src/ng2/app/services/product/product.service';
 import { ForCreateProduct } from '../class/for-create-product';
 import { RecurringService } from 'src/ng2/app/services/recurring/recurring.service';
@@ -13,18 +13,11 @@ import { RecurringTicketsEditAsideDate } from './class/recurring-tickets-edit-as
 import { NgbDatepickerNavigateEvent, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker';
 import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
 import { SelectClientCompanyStateService } from '../../../billing/quotes/quote-create/quote-create-content/quote-create-content-top/select-client-company/services/select-client-company-state.service';
-import { DevicesStateService } from '../devices-recurring-tickets/services/devices-state.service';
-import { TagsStateService } from '../../../shared/tags/services/tags-state.service';
-import { TehUsersSateService } from '../../../shared/teh-users/services/teh-users-sate.service';
 import { RecurringTicketsStateService } from '../services/recurring-tickets-state.service';
 import { CreateRecurringTicketsProduct } from './class/create-recurring-tickets-product';
 import { CreateRecurringTicketsService } from './class/create-recurring-tickets-service';
 import { RecurringTicketsService } from './services/recurring-tickets.service';
 import { RecurringTicket } from '../class/recurring-ticket';
-import { RecurringTicketCompany } from '../interfaces/recurring-ticket-company';
-import { IntervalStateService } from '../../../shared/interval/services/interval-state.service';
-import { Product } from 'src/ng2/app/interfaces/product/product';
-import { EditProduct } from 'src/ng2/app/interfaces/product/edit-product';
 import { $mol_time_moment as Moment } from 'mol_time_all'
 import { Validate } from './class/validate';
 
@@ -39,12 +32,10 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   public showTicketRecurringSub: Subscription;
   public opened = false;
   // public showDatePicker: boolean = false;
-  public ticketForm: FormGroup;
   public productList = [];
   public servicesList = [];
   public products: Array<ForCreateProduct> = [];
   public services: Array<ForCreateService> = [];
-  public isFormValid = false;
   public type: string = "products";
   public datepicker: NgbDateStruct;
   public date: RecurringTicketsEditAsideDate = new RecurringTicketsEditAsideDate();
@@ -76,15 +67,12 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.getItemListProducts();
     this.recurringState.onInitClientList();
     this.onCheckEditMode();
-
-
-
   }
 
   private onCheckEditMode() {
     let editmode = this.recurringState.getEditMode().subscribe((data: RecurringTicket) => {
       this.opened = true;
-      this.initForm();
+      
       this.onEditEditMode(data);
     })
     this.createService.addSubscription(editmode);
@@ -186,7 +174,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     if (selectClient === 'null') {
 
       this.recurringState.getCreateTicket().setCompany(null);
-      //  this.ticketForm.controls['client'].setValue(selectClient);
+    
       this.selectedClient = null;
       this.recurringState.setClient(selectClient);
       this.services = [new ForCreateService()];
@@ -194,7 +182,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
 
 
       this.recurringState.getCreateTicket().setCompany(selectClient.item.id);
-      this.ticketForm.controls['client'].setValue(selectClient);
+    
       this.selectedClient = selectClient.item;
       this.recurringState.setClient(selectClient);
       if (this.ticketForEdit !== null && this.ticketForEdit.company.name !== this.recurringState.getCreateTicket().getCompany()) this.services = [new ForCreateService()];
@@ -219,7 +207,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.datepicker = data;
     if (this.navDate) this.editService.updateMonthAndYearDatePicker(this.datepicker, this.navDate);
     this.date.setTitle(this.datepicker);
-    this.ticketForm.controls['date'].setValue(this.date.getTitle());
+    
     this.createService.setTextInput('dropdownDate', this.date.getTitle());
 
     this.recurringState.getCreateTicket().setStartDate(this.datepicker.day, this.datepicker.month, this.datepicker.year, this.recurringState.getTehCompany().addresses[0].timeZone.timeOffset);
@@ -262,7 +250,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
 
   private updateDate() {
     this.date.setTitle(this.datepicker);
-    this.ticketForm.controls['date'].setValue(this.date.getTitle());
+   
     this.recurringState.getCreateTicket().setStartDate(this.datepicker.year, this.datepicker.month, this.datepicker.day, this.recurringState.getTehCompany().addresses[0].timeZone.timeOffset);
     this.createService.setTextInput('dropdownDate', this.date.getTitle());
     this.date_dropDown.close();
@@ -272,27 +260,11 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.navDate = data;
   }
 
-  public initForm() {
-
-    this.ticketForm = this.fb.group({
-      client: ['', Validators.required],
-      date: ['', Validators.required],
-      serial: new FormControl(''),
-      cost: new FormControl(''),
-      quantity: new FormControl(''),
-      price: new FormControl(''),
-      discount: new FormControl(''),
-      description: new FormControl('')
-    })
-    // this.onInitChengeForm();
-
-  }
-
 
   public showTicketRecurring() {
     this.showTicketRecurringSub = this.ticketStateService.showTicketRecurringAside.subscribe((res) => {
       this.opened = true;
-      this.initForm();
+    
       this.onInitCreateMod();
     });
   }
@@ -321,14 +293,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   }
 
   public selectDuration(data, i) {
-
-    /* if (data.minutes)
-     {
-       console.log('min', (data.minutes * 100) / 60);
-     }*/
-     console.log('data',data);
     this.services[i].duration = data.hour + ((data.minutes) ? (data.minutes / 60) : 0);
-
   }
 
   public addProduct() {
@@ -355,7 +320,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     return '';
   }
 
-  public onInitChackProduct() {
+  public onInitCheckProduct() {
     this.recurringState.clearEditProducts();
     if (this.createService.checkProducts(this.products)) {
       this.productList.forEach((category, catIndex) => {
@@ -400,24 +365,17 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.createService.setRulesCreateTicket(this.recurringState.getCreateTicket());
 
     if (this.createService.checkProductsForSave(this.ticketForEdit, this.products)) {
-
       this.products.forEach((item: ForCreateProduct) => (item.name || item.description) && this.recurringState.getCreateTicket().addProdct(new CreateRecurringTicketsProduct(item.versionedId.id, item.quantity, item.discount)));
-
     } else {
-
       if (this.ticketForEdit === null) {
         this.recurringState.getCreateTicket().resetProducts();
-
       } else {
         this.recurringState.getCreateTicket().clearProducts();
       }
-
     }
     console.log('this.ticketForEdit',this.ticketForEdit);
     if (this.createService.checkServicesForSave(this.ticketForEdit, this.services)) {
-    
       this.services.forEach((item: ForCreateService) => (item.name || item.description) && this.recurringState.getCreateTicket().addService(new CreateRecurringTicketsService(item.versionedId.id, item.description, item.duration)));
-
     } else {
       if (this.ticketForEdit === null) {
         this.recurringState.getCreateTicket().resetServices();
@@ -452,7 +410,7 @@ console.log('this.recurringState.getCreateTicket()',this.recurringState.getCreat
 
     console.log('this.recurringState.getCreateTicket()',this.recurringState.getCreateTicket());
 
-    this.onInitChackProduct();
+    this.onInitCheckProduct();
 
 
   }
@@ -460,7 +418,6 @@ console.log('this.recurringState.getCreateTicket()',this.recurringState.getCreat
   public close() {
     this.opened = false;
     //this.showDatePicker = false;
-    this.isFormValid = false;
     this.type = "products";
     this.selectedClient = null;
     this.devicesList = [];
