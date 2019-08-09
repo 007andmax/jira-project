@@ -4,11 +4,11 @@
 
   angular.module('quicktech').controller('quicktech.createCompanyCtrl',
     [
-      '$scope', '$uibModal','UsersService', 'SubscriptionsService', 'CompaniesService', 'AddressesService', 'ServicesService',
+      '$scope', '$uibModal', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'AddressesService', 'ServicesService',
       'quicktech.common.services.PhoneFormats', 'quicktech.common.services.SharedStateService', '$state', '$timeout',
       '$rootScope', 'quicktech.common.services.PermissionsService', 'TagsService',
       function ($scope, $uibModal, UsersService, SubscriptionsService, CompaniesService, AddressesService, ServicesService,
-                PhoneFormats, SharedStateService, $state, $timeout, $rootScope, PermissionsService, TagsService) {
+        PhoneFormats, SharedStateService, $state, $timeout, $rootScope, PermissionsService, TagsService) {
 
         $scope.descriptionMaxLength = 300;
         $scope.techUsers = UsersService.getTechUsers;
@@ -17,8 +17,8 @@
         $scope.showWorkingDaysSchedule = false;
         $scope.selectedContractType;
 
-        $scope.activeTechUsers = function() {
-          return UsersService.getTechUsers().filter(function(el) {
+        $scope.activeTechUsers = function () {
+          return UsersService.getTechUsers().filter(function (el) {
             return el.userEnabled && !el.deletedAt;
           })
         }
@@ -42,7 +42,7 @@
 
 
 
-        $scope.addAnotherLocation = function() {
+        $scope.addAnotherLocation = function () {
           $scope.editCompany.additionalAddresses.push({
             phoneNumbers: [],
             address: '',
@@ -146,19 +146,19 @@
 
               if ($scope.isMobilePhone) {
                 $scope.showModal = false;
-                $timeout(function() {
+                $timeout(function () {
                   $scope.showModal = true;
                 }, 400)
               }
               $scope.switchCompanyModal(false)
               $scope.switchCompanyModalBack(true)
 
-              setTimeout(function() {
+              setTimeout(function () {
                 $scope.$apply();
                 $scope.switchCompanyModal(true)
               }, 50)
 
-              setTimeout(function() {
+              setTimeout(function () {
 
                 $scope.$apply();
                 $scope.switchCompanyModal(true)
@@ -338,10 +338,10 @@
         }
 
 
-        $scope.selectContractType = function(type) {
-          if($scope.selectedContractType === type) {
+        $scope.selectContractType = function (type) {
+          if ($scope.selectedContractType === type) {
             $scope.selectedContractType = '';
-          }else {
+          } else {
             $scope.selectedContractType = type;
           }
         };
@@ -456,12 +456,12 @@
                 }
                 $rootScope.$broadcast('newCompanyHasBeenCreated', resp.id || resp);
 
-                TagsService.setTagsInCompany($scope.companyTags, resp.id || resp, function(res) {
+                TagsService.setTagsInCompany($scope.companyTags, resp.id || resp, function (res) {
                   $rootScope.newCompanyEditTags = CompaniesService.updateCompanyTags($scope.companyTags, companyId);
                 });
 
                 if (!($scope.savedState && $scope.savedState.items.length)) {
-                  if(isCreateContract && $scope.selectedContractType) {
+                  if (isCreateContract && $scope.selectedContractType) {
                     $scope.closeWindowWithoutConfirmation();
                     openCreateContractModal(editCompany, 'CREATE_NEW', resp);
                   } else {
@@ -511,16 +511,16 @@
         function openCreateContractModal(companyInfo, contractType, companyId) {
           var template;
           switch (contractType) {
-            case('CREATE_NEW'):
+            case ('CREATE_NEW'):
               template = '/ng1/scripts/core/service-agreements/modal/create-new-modal.tpl.html';
               break;
-            case('HOURLY'):
+            case ('HOURLY'):
               template = '/ng1/scripts/core/service-agreements/modal/hourly-service-modal.tpl.html';
               break;
-            case('BLOCK_TIME_BILLING'):
+            case ('BLOCK_TIME_BILLING'):
               template = '/ng1/scripts/core/service-agreements/modal/block-time-billing-modal.tpl.html';
               break;
-            case('PER_USER/DEVICE_BILLING'):
+            case ('PER_USER/DEVICE_BILLING'):
               template = '/ng1/scripts/core/service-agreements/modal/service-contract-modal.tpl.html';
               break;
             default:
@@ -543,7 +543,7 @@
               companyData: {
                 companyInfo: companyInfo,
                 companyId: companyId,
-                type:  contractType,
+                type: contractType,
                 editMode: true,
                 preSetupCompany: companyInfo
               }
@@ -564,6 +564,15 @@
           if (!$scope.triedToSave) return false;
           return form[fieldName] && (form[fieldName].$dirty || $scope.triedToSave) && form[fieldName].$invalid;
         };
+     /*   $scope.changeCompanyname = function () {
+       
+          if ($scope.editCompany.name.includes('%')) {
+            $scope.editCompany.name = $scope.editCompany.name.replace('%', '');
+
+            $scope.$apply();
+          }
+        }
+*/
 
         $scope.validateCompanyName = function (ngModelCtrl, modelId, afterValidationCallback) {
 
@@ -571,7 +580,7 @@
             ngModelCtrl.$setValidity('unique', true);
             return
           }
-
+        
           var validationResult = CompaniesService.isNameUnique(ngModelCtrl.$viewValue, $scope.editCompany.id || '', function () {
             ngModelCtrl.$setValidity('unique', validationResult.value);
             afterValidationCallback();
@@ -722,15 +731,15 @@
               || hasContact
               || company.login !== origin.login
               || company.password !== origin.password ||
-            company.techLeadIds !== origin.techLeadIds;
+              company.techLeadIds !== origin.techLeadIds;
 
           } else {
             hasClientType = company.clientType && company.clientType.trim();
             hasAddress = company.addresses && company.addresses.length && company.addresses[0].address;
             hasContact = company.contacts && company.contacts.length && (
-                company.contacts[0].firstName || company.contacts[0].lastName || company.contacts[0].primaryEmail ||
-                company.contacts[0].designation || company.contacts[0].avatar.cropped
-              );
+              company.contacts[0].firstName || company.contacts[0].lastName || company.contacts[0].primaryEmail ||
+              company.contacts[0].designation || company.contacts[0].avatar.cropped
+            );
 
             isCompanyChanged = company.name || company.domain || hasClientType || company.logo ||
               company.accountNumber || company.description || hasAddress || hasContact || company.login || company.password;
@@ -779,25 +788,25 @@
           return text.trim().split(' ').join('_').toUpperCase();
         }
 
-        $scope.getUserByID = function(userId) {
-          if(!userId) {
+        $scope.getUserByID = function (userId) {
+          if (!userId) {
             return
           }
           var user = UsersService.getOneById(userId);
-          if(user) {
-            if(user.lastName === '    ') {
+          if (user) {
+            if (user.lastName === '    ') {
               return user.firstName
             } else {
-              return user.firstName+' '+user.lastName;
+              return user.firstName + ' ' + user.lastName;
             }
           }
         };
 
-        $scope.getFullName = function(client) {
+        $scope.getFullName = function (client) {
 
           var isAllSpaces = client.lastName === "    ";
-          if(client.lastName && !isAllSpaces) {
-            return client.firstName+' '+client.lastName;
+          if (client.lastName && !isAllSpaces) {
+            return client.firstName + ' ' + client.lastName;
           } else {
             return client.firstName;
           }
