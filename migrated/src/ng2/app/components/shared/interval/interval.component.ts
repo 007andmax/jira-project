@@ -54,8 +54,9 @@ export class IntervalComponent implements OnInit, OnDestroy {
 
   }
   public selectDateEditMode(data: NgbDate) {
+   
     this.datepicker = data;
-    console.log('this.datepicker', this.datepicker);
+   
     if (this.navDate) this.intervalService.updateMonthAndYearDatePicker(this.datepicker, this.navDate);
 
   }
@@ -111,7 +112,7 @@ export class IntervalComponent implements OnInit, OnDestroy {
       this.title = 'Daily';
       this.options = this.intervalService.getDefaultOptions();
       this.state = this.intervalService.getDefaultState();
-      this.datepicker = null;
+      this.datepicker = this.stateInterval.getDefaultDate();
 
     })
     this.intervalService.addSubscription(getClearState);
@@ -129,7 +130,7 @@ export class IntervalComponent implements OnInit, OnDestroy {
         this.cron = `0 0 0 ? * ${days_weekly} *`.trim();
         if (days_weekly === '') this.cron = null;
         this.selectOptions.days.forEach(weekDay => this.state.daily[weekDay] = false);
-        this.datepicker = null;
+        this.datepicker = this.stateInterval.getDefaultDate();
         break;
       case "daily":
         const days = this.selectOptions.days
@@ -140,7 +141,7 @@ export class IntervalComponent implements OnInit, OnDestroy {
         this.cron = `0 0 0 ? * ${days} *`.trim();
         if (days === '') this.cron = null;
         this.selectOptions.days.forEach(weekDay => this.state.weekly[weekDay] = false);
-        this.datepicker = null;
+        this.datepicker = this.stateInterval.getDefaultDate();
         break;
       case "monthly":
         console.log('this.datepicker.day', this.datepicker);
