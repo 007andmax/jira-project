@@ -66,6 +66,7 @@ import { TehUsersComponent } from './components/shared/teh-users/teh-users.compo
 import { DurationFilterPipe } from './pipe/duration-filter.pipe';
 import { numberDirective } from './directives/number.directive';
 import { TextAreaDirective } from './directives/text-area.directive';
+import { DatePickerComponent } from './components/shared/date-picker/date-picker.component';
 
 
 /**
@@ -155,7 +156,8 @@ angular.module('quicktech')
     TehUsersComponent,
     DurationFilterPipe,
     numberDirective,
-    TextAreaDirective
+    TextAreaDirective,
+    DatePickerComponent
   ],
   imports: [
     BrowserModule,

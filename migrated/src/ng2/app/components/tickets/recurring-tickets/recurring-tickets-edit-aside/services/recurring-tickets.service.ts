@@ -17,6 +17,7 @@ import { RecurringTicket } from '../../class/recurring-ticket';
 import { create } from 'domain';
 import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
 import { Validate } from '../class/validate';
+import { DatePickerStateService } from 'src/ng2/app/components/shared/date-picker/services/date-picker-state.service';
 
 @Injectable()
 export class RecurringTicketsService {
@@ -27,7 +28,7 @@ export class RecurringTicketsService {
     private tehState: TehUsersSateService,
     private devicesState: DevicesStateService,
     private durationState: DurationStateService,
-
+    private stateDatePicker:DatePickerStateService
   ) { }
   public setRulesCreateTicket(data: CreateRecurringTickets) {
 
@@ -36,7 +37,9 @@ export class RecurringTicketsService {
     data.setCreateTask(this.elRef.nativeElement.querySelector('#createTask').checked);
 
   }
-
+public getStateDatePicker () {
+  return this.stateDatePicker;
+}
 
   public setCronForEdit(data) {
     this.stateInterval.onInitEditMode(data);

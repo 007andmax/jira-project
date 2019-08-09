@@ -7,7 +7,6 @@ import { ForCreateProduct } from '../class/for-create-product';
 import { RecurringService } from 'src/ng2/app/services/recurring/recurring.service';
 import { ForCreateService } from '../class/for-create-service';
 import { NgbDateStruct, NgbCalendar, NgbDate, NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
-import { RecurringTicketsEditAsideService } from './services/recurring-tickets-edit-aside.service';
 
 import { RecurringTicketsEditAsideDate } from './class/recurring-tickets-edit-aside-date';
 import { NgbDatepickerNavigateEvent, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker';
@@ -20,41 +19,35 @@ import { RecurringTicketsService } from './services/recurring-tickets.service';
 import { RecurringTicket } from '../class/recurring-ticket';
 import { $mol_time_moment as Moment } from 'mol_time_all'
 import { Validate } from './class/validate';
+import { ChangeDatePicker } from '../../../shared/date-picker/class/change-date-picker';
 
 @Component({
   selector: 'app-recurring-tickets-edit-aside',
   templateUrl: './recurring-tickets-edit-aside.component.html',
   styleUrls: ['./recurring-tickets-edit-aside.component.scss'],
-  providers: [RecurringTicketsEditAsideService, RecurringTicketsService]
+  providers: [RecurringTicketsService]
 })
 export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
-  @ViewChild('date') date_dropDown: NgbDropdown;
+ 
   public showTicketRecurringSub: Subscription;
   public opened = false;
-  // public showDatePicker: boolean = false;
+
   public productList = [];
   public servicesList = [];
   public products: Array<ForCreateProduct> = [];
   public services: Array<ForCreateService> = [];
   public type: string = "products";
-  public datepicker: NgbDateStruct;
-  public date: RecurringTicketsEditAsideDate = new RecurringTicketsEditAsideDate();
-  // public ticket: RecurringTickets = new RecurringTickets();
-  public navDate: any;
   public selectedClient: any;
   public devicesList = [];
   public tehUsers = [];
   public ticketForEdit: RecurringTicket = null;
   public validate: Validate = new Validate();
-  // public errors = { products: { show: false, text: "" } };
+ 
   constructor(
     private ticketStateService: TicketStateService,
     private productService: ProductService,
     private recurringService: RecurringService,
-    private fb: FormBuilder,
     public cd: ChangeDetectorRef,
-    private editService: RecurringTicketsEditAsideService,
-    private calendar: NgbCalendar,
     private devicesService: DevicesService,
     private companiesState: SelectClientCompanyStateService,
     private recurringState: RecurringTicketsStateService,
@@ -67,6 +60,12 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.getItemListProducts();
     this.recurringState.onInitClientList();
     this.onCheckEditMode();
+   
+  }
+  public onChangeDatePicker (data: ChangeDatePicker) {
+  console.log('data',data);
+      this.recurringState.getCreateTicket().setStartDate(data.day, data.month, data.year, this.recurringState.getTehCompany().addresses[0].timeZone.timeOffset);
+  
   }
 
   private onCheckEditMode() {
@@ -85,12 +84,12 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     console.log('startDate', new Moment(data.startDate));
     this.selectClient({ item: data.company });
     this.companiesState.setCompanyFromtEdit(data.company);
-    // this.selectDevice({item: {agentId: data.company.id}});
+  
     this.devicesService.onInitHangle(data.company.id);
     this.selectedClient = data.company;
-    let date = new Date(data.startDate);
-    this.navDate = this.createService.getNavDate(date);
-    this.selectDateEditMode(this.createService.getDateForDatePicker(data.startDate));
+    
+ 
+    this.createService.getStateDatePicker().onInitEditMode(data.startDate);
     this.products = (data.products.length > 0) ? this.createService.getProductsForEdit(data.products) : [new ForCreateProduct()];
     this.services = (data.services.length > 0) ? this.createService.getServicesForEdit(data.services, data.serviceErrors) : [new ForCreateService()];
 
@@ -133,7 +132,8 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.recurringState.getCreateTicket().clearTags();
     this.recurringState.getCreateTicket().clearAgents();
     this.recurringState.getCreateTicket().setDefaultCron();
-    this.selectDate(this.createService.getDateForDatePicker(null));
+    this.createService.getStateDatePicker().onInitReset();
+  
     this.cd.detectChanges();
   }
 
@@ -195,72 +195,6 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.cd.detectChanges();
 
   }
-
-  public selectDateEditMode(data: NgbDate) {
-    this.datepicker = data;
-    if (this.navDate) this.editService.updateMonthAndYearDatePicker(this.datepicker, this.navDate);
-    this.date.setTitle(this.datepicker);
-    this.createService.setTextInput('dropdownDate', this.date.getTitle());
-  }
-
-  public selectDate(data: NgbDate) {
-    this.datepicker = data;
-    if (this.navDate) this.editService.updateMonthAndYearDatePicker(this.datepicker, this.navDate);
-    this.date.setTitle(this.datepicker);
-    
-    this.createService.setTextInput('dropdownDate', this.date.getTitle());
-
-    this.recurringState.getCreateTicket().setStartDate(this.datepicker.day, this.datepicker.month, this.datepicker.year, this.recurringState.getTehCompany().addresses[0].timeZone.timeOffset);
-    this.date_dropDown.close();
-    this.cd.detectChanges();
-
-  }
-
-  public selectTomorrow() {
-    let date = this.calendar.getToday();
-    date.day++;
-    this.datepicker = date;
-    if (this.navDate) this.editService.updateMonthAndYearDatePicker(this.datepicker, this.navDate);
-    this.updateDate();
-  }
-
-  public selectToday() {
-    this.datepicker = this.calendar.getToday();
-    if (this.navDate) this.editService.updateMonthAndYearDatePicker(this.datepicker, this.navDate);
-    this.updateDate();
-  }
-
-  public selectEndMonth() {
-    let date = this.calendar.getToday();
-    let day = 32 - new Date(date.year, date.month - 1, 32).getDate();
-    date.day = day;
-    this.datepicker = date;
-    if (this.navDate) this.editService.updateMonthAndYearDatePicker(this.datepicker, this.navDate);
-    this.updateDate();
-  }
-
-  public selectStartMonth() {
-    let date = this.calendar.getToday();
-    date.day = 1;
-    this.datepicker = date;
-    if (this.navDate) this.editService.updateMonthAndYearDatePicker(this.datepicker, this.navDate);
-    this.updateDate();
-  }
-
-
-  private updateDate() {
-    this.date.setTitle(this.datepicker);
-   
-    this.recurringState.getCreateTicket().setStartDate(this.datepicker.year, this.datepicker.month, this.datepicker.day, this.recurringState.getTehCompany().addresses[0].timeZone.timeOffset);
-    this.createService.setTextInput('dropdownDate', this.date.getTitle());
-    this.date_dropDown.close();
-  }
-
-  public navigateDate(data: NgbDatepickerNavigateEvent) {
-    this.navDate = data;
-  }
-
-
   public showTicketRecurring() {
     this.showTicketRecurringSub = this.ticketStateService.showTicketRecurringAside.subscribe((res) => {
       this.opened = true;
@@ -417,18 +351,19 @@ console.log('this.recurringState.getCreateTicket()',this.recurringState.getCreat
 
   public close() {
     this.opened = false;
-    //this.showDatePicker = false;
+   
     this.type = "products";
     this.selectedClient = null;
     this.devicesList = [];
     this.tehUsers = [];
     this.companiesState.onInitClear();
     this.createService.getDevicesState().onInitClear();
-    this.date.clearTitle();
+  
     this.createService.getTagsState().onInitClear();
     this.createService.getTehState().onInitClear();
     this.createService.clearData();
-    this.navDate = null;
+  
+    this.createService.getStateDatePicker().onInitClear();
     this.createService.setDefaultDate();
     this.recurringState.clearCreateTicket();
     this.products = [];
