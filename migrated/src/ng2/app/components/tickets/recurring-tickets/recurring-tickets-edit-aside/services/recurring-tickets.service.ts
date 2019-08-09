@@ -159,7 +159,7 @@ export class RecurringTicketsService {
     
       ticketForEdit.products.forEach((product,index) => {
         
-        if (index >= products.length || product.product.manufacture !== products[index].manufacture || product.product.cost !== Number(products[index].cost) || products[index].quantity !== Number(product.quantity) || products[index].sale !== Number(product.product.sale) || products[index].discount !== Number(product.discount)) change = true;
+        if (index >= products.length || product.product.manufacture !== products[index].manufacture || product.product.cost !== Number(products[index].cost) || products[index].quantity !== Number(product.quantity) || products[index].sale !== Number(product.product.sale) || products[index].discount !== Number(product.discount) || product.product.versionedId.id !== products[index].versionedId.id) change = true;
      
       })
       console.log("ticketForEdit.products[0]",ticketForEdit.products[0]);
