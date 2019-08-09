@@ -177,7 +177,7 @@ export class RecurringTicketsService {
     
       ticketForEdit.services.forEach((service,index) => {
         
-        if (index >= services.length || service.duration !== services[index].duration || service.serviceDescription !== services[index].description) change = true;
+        if (index >= services.length || service.duration !== services[index].duration || service.serviceDescription !== services[index].description || service.service.versionedId.id !== services[index].versionedId.id) change = true;
       })
       if (!ticketForEdit.services[0] && services[0].versionedId) change = true;
     }  else {

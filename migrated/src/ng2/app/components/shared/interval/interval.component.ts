@@ -54,6 +54,7 @@ export class IntervalComponent implements OnInit, OnDestroy {
   }
   public selectDateEditMode(data: NgbDate) {
     this.datepicker = data;
+    console.log('this.datepicker',this.datepicker);
     if (this.navDate) this.intervalService.updateMonthAndYearDatePicker(this.datepicker, this.navDate);
 
   }
