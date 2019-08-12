@@ -47,6 +47,83 @@
             }
             return status;
           };
+          $scope.$on('onChangeService', function (evt, val) {
+console.log('val',val);
+            var editVersionedId = val.item.versionedId;
+            var serviceDate = new Date(item.date);
+            TicketsService.updateExpenseInTicketUpdate({
+            ticketUpdateId: $scope.ticketDetails.id,
+            serviceExpense: {
+              id: item.id,
+              item: { versionedId: { id: editVersionedId.id, version: editVersionedId.version } },
+              description: item.description,
+              quantity: item.quantity / 60,
+              date: new Date(serviceDate.getFullYear(), serviceDate.getMonth(), serviceDate.getDate()),
+              discountAmount: item.discountAmount,
+              discountType: "PERCENT",
+              completed:item.completed,
+              
+            }
+            }, function () {
+            UserNotificationService.show('The ticket update containing a service has been modified', true);
+            $scope.setEditExpenseId();
+            //  if (callback) callback()
+            })
+          });
+          $scope.onCompletedChange = function (item,type) {
+              console.log('item',item);
+              console.log('scrope',$scope);
+              console.log('ggg',$scope.ticketUpdateForm);
+              if (type == 'product') {
+              var product = item.item;
+              var editVersionedId = product.versionedId;
+              //  $scope.disabledSave = true;
+              TicketsService.updateExpenseInTicketUpdate({
+              ticketUpdateId: $scope.ticketDetails.id,
+              productExpense: {
+                id: item.id,
+                item: {
+                  sale: product.sale,
+                  versionedId: { id: editVersionedId.id, version: editVersionedId.version },
+                  cost: product.cost
+                },
+                completed:item.completed,
+                serialNumber: item.serialNumber,
+                quantity: item.quantity,
+                date: item.date,
+                discountAmount: item.discountAmount,
+                discountType: 'PERCENT'
+              }
+              }, function () {
+              UserNotificationService.show('The ticket update containing a product has been modified', true);
+
+              $scope.setEditExpenseId();
+              })
+              }
+              if (type == 'service') {
+                var editVersionedId = item.item.versionedId;
+              var serviceDate = new Date(item.date);
+              TicketsService.updateExpenseInTicketUpdate({
+              ticketUpdateId: $scope.ticketDetails.id,
+              serviceExpense: {
+                id: item.id,
+                item: { versionedId: { id: editVersionedId.id, version: editVersionedId.version } },
+                description: item.description,
+                quantity: item.quantity / 60,
+                date: new Date(serviceDate.getFullYear(), serviceDate.getMonth(), serviceDate.getDate()),
+                discountAmount: item.discountAmount,
+                discountType: "PERCENT",
+                completed:item.completed,
+                
+              }
+              }, function () {
+              UserNotificationService.show('The ticket update containing a service has been modified', true);
+              $scope.setEditExpenseId();
+              //  if (callback) callback()
+              })
+              }
+
+          }
           $rootScope.toggleUpdateWindow = function(state) {
             $rootScope.isMobileUpdateShown = state;
             $rootScope.isTicketEditOpened = state;
@@ -761,6 +838,8 @@
           };
           // ticket notify
           $scope.$on('userToAssignToTicket', function(evt, val) {
+          
+            if (val.type) return;
             var data = val.data;
             var id = data.id;
             var index = $scope.ticketSharedUsersList.findIndex(function(el) {
