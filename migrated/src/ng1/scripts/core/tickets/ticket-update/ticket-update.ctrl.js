@@ -13,42 +13,26 @@
           console.log('userToAssignToTicket',val);
           if (val.type) {
             if (val.type == "product") {
-              if (val.id == $scope.ticketUpdate.id) $scope.ticketUpdate.user.id = val.id;
+              console.log('$scope',$scope.ticketUpdate.services);
+              $scope.ticketUpdate.products.forEach( function(item) {
+                if (item.id == val.id) {
+                  item.user = {id:val.data.id };
+                  console.log('find');
+                  $rootScope.$broadcast('onChangeProduct', item);
+                }
+              })
 
             }
             if (val.type == "service") {
               console.log('$scope',$scope.ticketUpdate.services);
               $scope.ticketUpdate.services.forEach( function(item) {
                 if (item.id == val.id) {
-                  item.user.id = val.id;
-                  $rootScope.$broadcast('onChangeService', $scope.ticketUpdate);
+                  item.user = {id:val.data.id };
+                  console.log('find');
+                  $rootScope.$broadcast('onChangeService', item);
                 }
               })
-              if (val.id == $scope.ticketUpdate.id) {
-                $scope.ticketUpdate.user.id = val.id;
-                $rootScope.$broadcast('onChangeService', $scope.ticketUpdate);
-               /* var editVersionedId = item.item.versionedId;
-                var serviceDate = new Date(item.date);
-                TicketsService.updateExpenseInTicketUpdate({
-                ticketUpdateId: $scope.ticketDetails.id,
-                serviceExpense: {
-                  id: item.id,
-                  item: { versionedId: { id: editVersionedId.id, version: editVersionedId.version } },
-                  description: item.description,
-                  quantity: item.quantity / 60,
-                  date: new Date(serviceDate.getFullYear(), serviceDate.getMonth(), serviceDate.getDate()),
-                  discountAmount: item.discountAmount,
-                  discountType: "PERCENT",
-                  completed:item.completed,
-                  
-                }
-                }, function () {
-                UserNotificationService.show('The ticket update containing a service has been modified', true);
-                $scope.setEditExpenseId();
-                //  if (callback) callback()
-                })*/
-              } 
-
+            
             }
           }
 

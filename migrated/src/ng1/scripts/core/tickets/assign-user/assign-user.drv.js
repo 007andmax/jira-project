@@ -185,6 +185,7 @@
 
                   inputElement.data('autocomplete').container.focus();
                   $scope.setUserToAssign(selection.data);
+                 
                   if (isolate) {
                     var type = element[0].parentNode.getAttribute('type');
                     var id = element[0].parentNode.getAttribute('id-item');

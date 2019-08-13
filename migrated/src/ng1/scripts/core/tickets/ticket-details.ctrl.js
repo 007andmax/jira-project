@@ -31,6 +31,8 @@
           $scope.hour = today.getHours();
           $scope.minute = Math.floor(today.getMinutes() / 5) * 5;
           $scope.isLoaded = false;
+          var updateService = false;
+          var updateProduct = false;
           $timeout(function() {
             ticketMobileSettings.data = $scope;
           }, 3000);
@@ -47,24 +49,61 @@
             }
             return status;
           };
-          $scope.$on('onChangeService', function (evt, val) {
+          $rootScope.$on('onChangeProduct', function (evt, val) {
+            console.log('onChangeProduct');
+            if (updateProduct) return;
+            updateProduct = true;
+console.log('val',val);
+            var product = val.item;
+            var editVersionedId = product.versionedId;
+            //  $scope.disabledSave = true;
+            TicketsService.updateExpenseInTicketUpdate({
+              ticketUpdateId: $scope.ticketDetails.id,
+              productExpense: {
+                id: val.id,
+                item: {
+                  sale: product.sale,
+                  versionedId: { id: editVersionedId.id, version: editVersionedId.version },
+                  cost: product.cost
+                },
+                completed: val.completed,
+                serialNumber: val.serialNumber,
+                quantity: val.quantity,
+                date: val.date,
+                discountAmount: val.discountAmount,
+                discountType: 'PERCENT'
+              }
+            }, function () {
+              updateProduct = false;
+              UserNotificationService.show('The ticket update containing a product has been modified', true);
+
+              $scope.setEditExpenseId();
+          });
+        });
+          $rootScope.$on('onChangeService', function (evt, val) {
+            console.log('onChangeService');
+            if (updateService) return;
+            updateService = true;
 console.log('val',val);
             var editVersionedId = val.item.versionedId;
-            var serviceDate = new Date(item.date);
+            var serviceDate = new Date(val.date);
             TicketsService.updateExpenseInTicketUpdate({
             ticketUpdateId: $scope.ticketDetails.id,
             serviceExpense: {
-              id: item.id,
+              id: val.id,
               item: { versionedId: { id: editVersionedId.id, version: editVersionedId.version } },
-              description: item.description,
-              quantity: item.quantity / 60,
+              description: val.description,
+              quantity: val.quantity / 60,
               date: new Date(serviceDate.getFullYear(), serviceDate.getMonth(), serviceDate.getDate()),
-              discountAmount: item.discountAmount,
+              discountAmount: val.discountAmount,
               discountType: "PERCENT",
-              completed:item.completed,
-              
+              completed:val.completed,
+              user:(val.user) ? val.user : null,
+              durationStart: val.durationStart,
+              durationEnd: val.durationEnd
             }
             }, function () {
+              updateService = false;
             UserNotificationService.show('The ticket update containing a service has been modified', true);
             $scope.setEditExpenseId();
             //  if (callback) callback()
