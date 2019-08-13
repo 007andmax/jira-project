@@ -9,7 +9,7 @@
         $scope.usersToAssign = [];
         $scope.userToAssign = {};
         $scope.assignToModel = '';
-
+        console.log('$scope',$scope);
         $scope.setUserToAssign = function (user) {
           $scope.userToAssign = user;
 

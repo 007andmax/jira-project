@@ -187,6 +187,7 @@ var service = val.item;
             return !user.deletedAt;
           });
           $scope.usersToWatch = $scope.agents.slice();
+          console.log('$scope.usersToWatch',$scope.usersToWatch);
           $scope.editForms = {};
           $scope.setEditForm = function(form, name) {
             $scope.editForms[name] = form;

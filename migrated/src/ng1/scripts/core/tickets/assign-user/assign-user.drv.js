@@ -21,7 +21,7 @@
 
             // var
 
-
+console.log('$scope',$scope);
 
             $scope.usersToAssign = [];
 
@@ -205,7 +205,8 @@
                 onDoubleEnter: function () {
                   // Idea: use the callback return value to decide if the execution should continue or not
                   actionElement.click();
-                }
+                },
+                autoSelectFirst: true
               });
 
               // $scope.$apply();
@@ -262,7 +263,7 @@
 
             $scope.$watch('usersCurrentCompany.length', function () {
               users = $rootScope.usersToNotify || $scope.usersCurrentCompany;
-
+console.log('users',users);
               $scope.autoComplete();
             })
           }
