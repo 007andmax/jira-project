@@ -55,22 +55,24 @@
             updateProduct = true;
 console.log('val',val);
             var product = val.item;
-            var editVersionedId = product.versionedId;
+            var editVersionedId = product.item.versionedId;
+            var productDate = new Date(product.date);
             //  $scope.disabledSave = true;
             TicketsService.updateExpenseInTicketUpdate({
-              ticketUpdateId: $scope.ticketDetails.id,
+              ticketUpdateId: val.id,
               productExpense: {
-                id: val.id,
+                id: product.id,
                 item: {
-                  sale: product.sale,
+                  sale: product.item.sale,
                   versionedId: { id: editVersionedId.id, version: editVersionedId.version },
-                  cost: product.cost
+                  cost: product.item.cost
                 },
-                completed: val.completed,
-                serialNumber: val.serialNumber,
-                quantity: val.quantity,
-                date: val.date,
-                discountAmount: val.discountAmount,
+                completed: product.completed,
+                serialNumber: product.serialNumber,
+                quantity: product.quantity,
+                user:(product.user) ? {id: product.user.id}  : null,
+               // date:new Date(productDate.getFullYear(), productDate.getMonth(), productDate.getDate()),
+                discountAmount: product.discountAmount,
                 discountType: 'PERCENT'
               }
             }, function () {
@@ -85,22 +87,24 @@ console.log('val',val);
             if (updateService) return;
             updateService = true;
 console.log('val',val);
-            var editVersionedId = val.item.versionedId;
-            var serviceDate = new Date(val.date);
+var service = val.item;
+            var editVersionedId = service.item.versionedId;
+            var serviceDate = new Date(service.date);
+          
             TicketsService.updateExpenseInTicketUpdate({
-            ticketUpdateId: $scope.ticketDetails.id,
+            ticketUpdateId: val.id,
             serviceExpense: {
-              id: val.id,
+              id: service.id,
               item: { versionedId: { id: editVersionedId.id, version: editVersionedId.version } },
-              description: val.description,
-              quantity: val.quantity / 60,
+              description: service.description,
+              quantity: service.quantity / 60,
               date: new Date(serviceDate.getFullYear(), serviceDate.getMonth(), serviceDate.getDate()),
-              discountAmount: val.discountAmount,
+              discountAmount: service.discountAmount,
               discountType: "PERCENT",
-              completed:val.completed,
-              user:(val.user) ? val.user : null,
-              durationStart: val.durationStart,
-              durationEnd: val.durationEnd
+              completed:service.completed,
+              user:(service.user) ? {id: service.user.id} : null,
+              durationStart: service.durationStart,
+              durationEnd: service.durationEnd
             }
             }, function () {
               updateService = false;

@@ -16,9 +16,9 @@
               console.log('$scope',$scope.ticketUpdate.services);
               $scope.ticketUpdate.products.forEach( function(item) {
                 if (item.id == val.id) {
-                  item.user = {id:val.data.id };
+                  item.user = val.data;
                   console.log('find');
-                  $rootScope.$broadcast('onChangeProduct', item);
+                  $rootScope.$broadcast('onChangeProduct', {id:$scope.ticketUpdate.id,item: item });
                 }
               })
 
@@ -27,9 +27,9 @@
               console.log('$scope',$scope.ticketUpdate.services);
               $scope.ticketUpdate.services.forEach( function(item) {
                 if (item.id == val.id) {
-                  item.user = {id:val.data.id };
+                  item.user = val.data;
                   console.log('find');
-                  $rootScope.$broadcast('onChangeService', item);
+                  $rootScope.$broadcast('onChangeService', {id:$scope.ticketUpdate.id,item: item });
                 }
               })
             

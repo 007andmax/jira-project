@@ -290,6 +290,13 @@
   transition: border-radius 0.3s ease-out;
 }
 
+.date-picker-icon-ui {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  opacity: 0;
+}
+
 @-moz-document url-prefix() {
   .ticket-update-content .ticket-update-meta .btn-more-users {
     padding: 7px 12px 8px;

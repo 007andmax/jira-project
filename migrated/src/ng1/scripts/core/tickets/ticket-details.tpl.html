@@ -534,26 +534,58 @@
                       <div
                         class="col-md-1 text-right gm">{{ product.item.sale * product.quantity || ''| currency :'$':2 }}</div>
                       <div class="col-md-2 action-update pr-0">
-                        <i class="new-calendar-icn pointer"></i>
-                        <div uib-dropdown auto-close="outsideClick">
-                          <i class="assign-icn pointer" uib-dropdown-toggle smart-dropdown-menu-position no-restricted="true"></i>
-                          <div uib-dropdown-menu
-                           class="dropdown-assign-ticket fixed-assign dropdown-menu without-max-height"
-                           stop-propagation="click"
-                           assign-user-button
-                           onUserAssign="true"
-                           isolate="true"
-                           type="product"
-                          ng-attr-id-item="{{ product.id }}"
-                          
-                           aub-create-ticket="true"
-                           aub-is-bulk-operation="true"
-                           style="max-height: auto !important"
-                           aub-ticket-number="ticket.number"
-                           users="usersToWatch"
-                           aub-current-user="currentUser"></div>
-                           <div typeahead-input-icon-sm="ticketAssignTo"></div>
-                          </div>
+                          <div uib-dropdown>
+                              <i class="new-calendar-icn pointer"></i>
+                              <input type="text" qt-data-time-picker max-date="maxServiceDate"
+                                     class="form-control new-input has-dropdown date-picker-icon-ui" uib-dropdown-toggle aria-expanded="false"
+                                     placeholder="Date" ng-model="product.date"
+                                     name="serviceData" ng-required="true"
+                                     uib-tooltip="Date"
+                                     position-to-left="true"
+                                     tooltip-placement="top"
+                                     tooltip-append-to-body="true">
+                            </div>
+                       
+                            <div uib-dropdown auto-close="outsideClick" ng-if="!product.user">
+                                <i class="assign-icn pointer" uib-dropdown-toggle smart-dropdown-menu-position no-restricted="true"></i>
+                                <div uib-dropdown-menu
+                                 class="dropdown-assign-ticket fixed-assign dropdown-menu without-max-height"
+                                 stop-propagation="click"
+                                 assign-user-button
+                                 onUserAssign="'true'"
+                                 isolate="true"
+                                       type="product"
+                                       ng-attr-id-item="{{ product.id }}"
+                                 aub-create-ticket="true"
+                                 aub-is-bulk-operation="true"
+                                 style="max-height: auto !important"
+                                 aub-ticket-number="ticket.number"
+                                 users="usersToWatch"
+                                 aub-current-user="currentUser"></div>
+                                 <div typeahead-input-icon-sm="ticketAssignTo"></div>
+                                </div>
+                                <div class="shared-avatars" ng-if="product.user">
+                                  
+                                    <div class="tech-users avatars">
+                                      <div class="shared-avatar pointer"
+                                           uib-tooltip="{{ product.user.firstName + ' ' + product.user.lastName }}"
+                                           ng-click="product.notify = !product.notify"
+                                           >
+                                        <img ng-if="product.user.avatar" src="{{getUserAvatarUrl(product.user)}}" />
+                    
+                                        <div class="default-user-avatar" ng-if="!(product.user.avatar)"
+                                             ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
+                                          <span>{{product.user.firstName[0].toUpperCase()}}</span>
+                                          <span>{{product.user.lastName[0].toUpperCase()}}</span>
+                                        </div>
+                    
+                                        <div class="check-area" ng-class="{ 'checked': product.notify }">
+                                          <img src="ng1/images/input-icons/checkbox-checked.png" />
+                                        </div>
+                                      </div>
+                                    </div>
+                    
+                                  </div>
                         <div uib-dropdown>
                           <i class="more-vertical-icn pointer" uib-dropdown-toggle></i>
                           <ul class="dropdown-menu" role="menu">
@@ -611,8 +643,18 @@
                       <div class="col-md-1">{{getFormatedTime(service.durationEnd)}}</div>
                       <div class="col-md-1 text-right gm">{{ service.quantity | durationFilter }}</div>
                       <div class="col-md-2 action-update pr-0">
-                        <i class="new-calendar-icn pointer"></i>
-                        <div uib-dropdown auto-close="outsideClick">
+                          <div uib-dropdown>
+                              <i class="new-calendar-icn pointer"></i>
+                              <input type="text" qt-data-time-picker max-date="maxServiceDate"
+                                     class="form-control new-input has-dropdown date-picker-icon-ui" uib-dropdown-toggle aria-expanded="false"
+                                     placeholder="Date" ng-model="service.date"
+                                     name="serviceData" ng-required="true"
+                                     uib-tooltip="Date"
+                                     position-to-left="true"
+                                     tooltip-placement="top"
+                                     tooltip-append-to-body="true">
+                            </div>
+                        <div uib-dropdown auto-close="outsideClick" ng-if="!service.user">
                           <i class="assign-icn pointer" uib-dropdown-toggle smart-dropdown-menu-position no-restricted="true"></i>
                           <div uib-dropdown-menu
                            class="dropdown-assign-ticket fixed-assign dropdown-menu without-max-height"
@@ -631,6 +673,28 @@
                            aub-current-user="currentUser"></div>
                            <div typeahead-input-icon-sm="ticketAssignTo"></div>
                           </div>
+                          <div class="shared-avatars" ng-if="service.user">
+                                  
+                              <div class="tech-users avatars">
+                                <div class="shared-avatar pointer"
+                                     uib-tooltip="{{ service.user.firstName + ' ' + service.user.lastName }}"
+                                     ng-click="service.notify = !service.notify"
+                                     >
+                                  <img ng-if="service.user.avatar" src="{{getUserAvatarUrl(service.user)}}" />
+              
+                                  <div class="default-user-avatar" ng-if="!(service.user.avatar)"
+                                       ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
+                                    <span>{{service.user.firstName[0].toUpperCase()}}</span>
+                                    <span>{{service.user.lastName[0].toUpperCase()}}</span>
+                                  </div>
+              
+                                  <div class="check-area" ng-class="{ 'checked': service.notify }">
+                                    <img src="ng1/images/input-icons/checkbox-checked.png" />
+                                  </div>
+                                </div>
+                              </div>
+              
+                            </div>
                         <div uib-dropdown>
                           <i class="more-vertical-icn pointer" uib-dropdown-toggle></i>
                           <ul class="dropdown-menu" role="menu">
@@ -911,8 +975,19 @@
                     </div>
                   </div>
                   <div class="col-md-3 action-update pr-0 pl-0">
-                    <i class="new-calendar-icn pointer"></i>
-                    <div uib-dropdown auto-close="outsideClick">
+                      <div uib-dropdown>
+                          <i class="new-calendar-icn pointer"></i>
+                          <input type="text" qt-data-time-picker max-date="maxServiceDate"
+                                 class="form-control new-input has-dropdown date-picker-icon-ui" uib-dropdown-toggle aria-expanded="false"
+                                 placeholder="Date" ng-model="product.date"
+                                 name="serviceData" ng-required="true"
+                                 uib-tooltip="Date"
+                                 position-to-left="true"
+                                 tooltip-placement="top"
+                                 tooltip-append-to-body="true">
+                        </div>
+
+                    <div uib-dropdown auto-close="outsideClick" ng-if="!product.user">
                     <i class="assign-icn pointer" uib-dropdown-toggle smart-dropdown-menu-position no-restricted="true"></i>
                     <div uib-dropdown-menu
                      class="dropdown-assign-ticket fixed-assign dropdown-menu without-max-height"
@@ -930,6 +1005,27 @@
                      aub-current-user="currentUser"></div>
                      <div typeahead-input-icon-sm="ticketAssignTo"></div>
                     </div>
+                    <div class="shared-avatars" ng-if="product.user">
+                        <div class="tech-users avatars">
+                          <div class="shared-avatar pointer"
+                               uib-tooltip="{{ product.user.firstName + ' ' + product.user.lastName }}"
+                               ng-click="product.notify = !product.notify"
+                               >
+                            <img ng-if="product.user.avatar" src="{{getUserAvatarUrl(product.user)}}" />
+        
+                            <div class="default-user-avatar" ng-if="!(product.user.avatar)"
+                                 ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
+                              <span>{{product.user.firstName[0].toUpperCase()}}</span>
+                              <span>{{product.user.lastName[0].toUpperCase()}}</span>
+                            </div>
+        
+                            <div class="check-area" ng-class="{ 'checked': product.notify }">
+                              <img src="ng1/images/input-icons/checkbox-checked.png" />
+                            </div>
+                          </div>
+                        </div>
+        
+                      </div>
                 <div typeahead-input-icon-sm="ticketAssignTo"></div>
                     <div uib-dropdown
                          style="margin: 4px 0 0 10px;">
