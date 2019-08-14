@@ -35,7 +35,8 @@
       'nvd3',
       'vs-repeat',
       'daterangepicker',
-      'infinite-scroll'
+      'infinite-scroll',
+     
     ]);
 
 

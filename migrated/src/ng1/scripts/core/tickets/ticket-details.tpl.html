@@ -570,20 +570,12 @@
                                     </div>
                     
                                   </div>
-                                <div uib-dropdown-menu
-                                 class="dropdown-assign-ticket fixed-assign dropdown-menu without-max-height"
-                                 stop-propagation="click"
-                                 assign-user-button
-                                 onUserAssign="'true'"
-                                 isolate="true"
-                                       type="product"
-                                       ng-attr-id-item="{{ product.id }}"
-                                 aub-create-ticket="true"
-                                 aub-is-bulk-operation="true"
-                                 style="max-height: auto !important"
-                                 aub-ticket-number="ticketDetails.number"
-                                 users="usersToWatch"
-                                ></div>
+                                  <div uib-dropdown-menu class="dropdown-assign-ticket fixed-assign dropdown-menu without-max-height"
+                                  stop-propagation="click" onUserAssign="'true'" 
+                                   aub-is-bulk-operation="true" style="max-height: auto !important"
+                                   users="usersToWatch" aub-test="product.user" user="product.user">
+                                  <div ng-include="'/ng1/scripts/core/user-list/user-list.tpl.html'"></div>
+                                </div>
                                  <div typeahead-input-icon-sm="ticketAssignTo"></div>
                                 </div>
                               
@@ -681,7 +673,13 @@
                                     </div>
                     
                                   </div>
-                                <div uib-dropdown-menu
+                                  <div uib-dropdown-menu class="dropdown-assign-ticket fixed-assign dropdown-menu without-max-height"
+                                    stop-propagation="click" onUserAssign="'true'" 
+                                     aub-is-bulk-operation="true" style="max-height: auto !important"
+                                     users="usersToWatch" ng-attr-test="service.user" user="service.user" >
+                                    <div ng-include="'/ng1/scripts/core/user-list/user-list.tpl.html'"></div>
+                                  </div>
+                              <!--  <div uib-dropdown-menu
                                  class="dropdown-assign-ticket fixed-assign dropdown-menu without-max-height"
                                  stop-propagation="click"
                                  assign-user-button
@@ -695,7 +693,7 @@
                                  aub-ticket-number="ticketDetails.number"
                                  aub-current-user="service.user"
                                  users="usersToWatch"
-                                 ></div>
+                                 ></div>-->
                                  <div typeahead-input-icon-sm="ticketAssignTo"></div>
                                 </div>
                         <div uib-dropdown>
@@ -1014,20 +1012,12 @@
                                 </div>
                 
                               </div>
-                            <div uib-dropdown-menu
-                             class="dropdown-assign-ticket fixed-assign dropdown-menu without-max-height"
-                             stop-propagation="click"
-                             assign-user-button
-                             onUserAssign="'true'"
-                             isolate="true"
-                                   type="product"
-                                   ng-attr-id-item="{{ product.id }}"
-                             aub-create-ticket="true"
-                             aub-is-bulk-operation="true"
-                             style="max-height: auto !important"
-                             aub-ticket-number="ticketDetails.number"
-                             users="usersToWatch"
-                             ></div>
+                              <div uib-dropdown-menu class="dropdown-assign-ticket fixed-assign dropdown-menu without-max-height"
+                              stop-propagation="click" onUserAssign="'true'" 
+                               aub-is-bulk-operation="true" style="max-height: auto !important"
+                               users="usersToWatch" aub-test="product.user" user="product.user">
+                              <div ng-include="'/ng1/scripts/core/user-list/user-list.tpl.html'"></div>
+                            </div>
                              <div typeahead-input-icon-sm="ticketAssignTo"></div>
                             </div>
                 <div typeahead-input-icon-sm="ticketAssignTo"></div>

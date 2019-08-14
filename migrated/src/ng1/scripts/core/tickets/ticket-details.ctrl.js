@@ -101,7 +101,7 @@
                 discountAmount: service_gl.discountAmount,
                 discountType: "PERCENT",
                 completed: service_gl.completed,
-                user: (service_gl.user) ? { id: service_gl.user.id } : null,
+                user: (service_gl.user) ? { id: service_gl.user.id } : { id: "" },
                 durationStart: service_gl.durationStart,
                 durationEnd: service_gl.durationEnd
               }
@@ -170,25 +170,42 @@ console.log('val',val);
             console.log('onChangeService');
             if (updateService) return;
             updateService = true;
+            var service_gl = null;
+            let id = null;
+            $scope.ticketDetails.updates.forEach(function (item) {
+              if (item.type == "SERVICE") {
+            
+                item.services.forEach(function (service_item) {
+                  if (service_item.id == val.id) {
+                    id = item.id;
+                    service_gl = service_item;
+                    service_item.user = val.item;
+console.log('find');
+
+                  }
+                })
+              }
+
+            })
             console.log('val', val);
-            var service = val.item;
-            var editVersionedId = service.item.versionedId;
-            var serviceDate = new Date(service.date);
+         console.log('service_gl',service_gl);
+            var editVersionedId = service_gl.item.versionedId;
+            var serviceDate = new Date(service_gl.date);
 
            var data = {
-              ticketUpdateId: val.id,
+              ticketUpdateId: id,
               serviceExpense: {
-                id: service.id,
+                id: service_gl.id,
                 item: { versionedId: { id: editVersionedId.id, version: editVersionedId.version } },
-                description: service.description,
-                quantity: service.quantity / 60,
+                description: service_gl.description,
+                quantity: service_gl.quantity / 60,
                 date: new Date(serviceDate.getFullYear(), serviceDate.getMonth(), serviceDate.getDate()),
-                discountAmount: service.discountAmount,
+                discountAmount: service_gl.discountAmount,
                 discountType: "PERCENT",
-                completed: service.completed,
-                user: (service.user) ? { id: service.user.id } : null,
-                durationStart: service.durationStart,
-                durationEnd: service.durationEnd
+                completed: service_gl.completed,
+                user: (val.item) ? { id: val.item.id } : { id: "" },
+                durationStart: service_gl.durationStart,
+                durationEnd: service_gl.durationEnd
               }
             };
             $scope.updateService(data);
@@ -257,7 +274,7 @@ console.log('val',val);
                   discountAmount: item.discountAmount,
                   discountType: "PERCENT",
                   completed: item.completed,
-                  user: (item.user) ? { id: item.user.id } : null,
+                  user: (item.user) ? { id: item.user.id } : { id: "" },
                   durationStart: item.durationStart,
                   durationEnd: item.durationEnd
 
