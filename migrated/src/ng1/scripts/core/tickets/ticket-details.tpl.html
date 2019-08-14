@@ -524,7 +524,7 @@
                     <div ng-class="{'hide': product.id === editExpenseId}">
                       <div class="col-md-6 gm pl-0">
                         <label class="checkbox-container">
-                          <input type="checkbox" ng-model="product.completed" ng-change="onCompletedChange(product,'product')">
+                          <input type="checkbox" ng-model="product.completed" ng-change="onCompletedChange(product,'PRODUCT')">
                           <span class="checkbox-mark"></span>
                         </label>
                         <p class="pre-line" ng-bind-html="product.item.description"></p>
@@ -536,10 +536,10 @@
                       <div class="col-md-2 action-update pr-0">
                           <div uib-dropdown>
                               <i class="new-calendar-icn pointer"></i>
-                              <input type="text" qt-data-time-picker max-date="maxServiceDate"
+                              <input type="text" qt-data-time-picker  
                                      class="form-control new-input has-dropdown date-picker-icon-ui" uib-dropdown-toggle aria-expanded="false"
                                      placeholder="Date" ng-model="product.date"
-                                     name="serviceData" ng-required="true"
+                                    
                                      uib-tooltip="Date"
                                      position-to-left="true"
                                      tooltip-placement="top"
@@ -633,7 +633,7 @@
                       <div class="col-md-6 service-name gm pl-0">
                         <p>
                           <label class="checkbox-container">
-                            <input type="checkbox" ng-model="service.completed" ng-change="onCompletedChange(service,'service')">
+                            <input type="checkbox" ng-model="service.completed" ng-change="onCompletedChange(service,'SERVICE')">
                             <span class="checkbox-mark"></span>
                           </label>
                           {{ service.item.name }}
@@ -649,7 +649,9 @@
                               <input type="text" qt-data-time-picker
                                      class="form-control new-input has-dropdown date-picker-icon-ui" uib-dropdown-toggle aria-expanded="false"
                                      placeholder="Date" ng-model="service.date"
-                                     name="serviceData" ng-required="true"
+                                     isolate="true"
+                                     isolate-type="service"
+                                     ng-attr-id-item="{{ service.id }}"
                                      uib-tooltip="Date"
                                      position-to-left="true"
                                      tooltip-placement="top"
@@ -978,10 +980,10 @@
                   <div class="col-md-3 action-update pr-0 pl-0">
                       <div uib-dropdown>
                           <i class="new-calendar-icn pointer"></i>
-                          <input type="text" qt-data-time-picker max-date="maxServiceDate"
+                          <input type="text" qt-data-time-picker  
                                  class="form-control new-input has-dropdown date-picker-icon-ui" uib-dropdown-toggle aria-expanded="false"
                                  placeholder="Date" ng-model="product.date"
-                                 name="serviceData" ng-required="true"
+                                 
                                  uib-tooltip="Date"
                                  position-to-left="true"
                                  tooltip-placement="top"

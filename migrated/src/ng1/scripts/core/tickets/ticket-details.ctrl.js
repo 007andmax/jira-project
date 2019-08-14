@@ -5,10 +5,10 @@
         '$state', 'ProductsService', '$sce', '$timeout', 'quicktech.common.services.UserConfirmationsService',
         'quicktech.common.services.UserNotificationService', 'quicktech.common.services.SharedStateService',
         'quicktech.common.services.TicketsPermissionsService', 'DevicesService',
-        'quicktech.common.services.RemoteAccessService', 'ServicesService', 'quicktech.common.services.ticketMobileSettings', 'TagsService',
+        'quicktech.common.services.RemoteAccessService', 'ServicesService', 'quicktech.common.services.ticketMobileSettings', 'TagsService','$filter',
         function ($scope, TicketsService, $stateParams, UsersService, CompaniesService, Downloader, $rootScope, $state,
                   ProductsService, $sce, $timeout, UserConfirmationsService, UserNotificationService, SharedStateService,
-                  TicketsPermissionsService, DevicesService, RemoteAccessService, ServicesService, ticketMobileSettings, TagsService) {
+                  TicketsPermissionsService, DevicesService, RemoteAccessService, ServicesService, ticketMobileSettings, TagsService,$filter) {
           var rightPanelSharedState = SharedStateService.getSharedState('rightPanel'),
             ticketsSharedState = SharedStateService.getSharedState('ticketsHeader');
           rightPanelSharedState.companyId = '';
@@ -49,16 +49,74 @@
             }
             return status;
           };
-          $rootScope.$on('onChangeProduct', function (evt, val) {
+          $scope.updateProduct = function (data) {
+            TicketsService.updateExpenseInTicketUpdate(data, function () {
+              updateProduct = false;
+              UserNotificationService.show('The ticket update containing a product has been modified', true);
+
+              $scope.setEditExpenseId();
+          });
+          }
+          $scope.updateService = function (data) {
+            TicketsService.updateExpenseInTicketUpdate(data, function () {
+              updateService = false;
+              UserNotificationService.show('The ticket update containing a product has been modified', true);
+
+              $scope.setEditExpenseId();
+          });
+          }
+          $rootScope.$on('onChangeServiceDate', function (evt, val) {
+            console.log('onChangeServiceDate', updateService);
+            if (updateService) return;
+            updateService = true;
+            var service_gl = null;
+            let id = null;
+            $scope.ticketDetails.updates.forEach(function (item) {
+              if (item.type == "SERVICE") {
+            
+                item.services.forEach(function (service_item) {
+                  if (service_item.id == val.id) {
+                    id = item.id;
+                    service_gl = service_item;
+                    service_item.date = val.date;
+
+
+                  }
+                })
+              }
+
+            })
+            console.log('service', service_gl);
+            var editVersionedId = service_gl.item.versionedId;
+            var serviceDate = new Date(val.date);
+
+            var data = {
+              ticketUpdateId: id,
+              serviceExpense: {
+                id: service_gl.id,
+                item: { versionedId: { id: editVersionedId.id, version: editVersionedId.version } },
+                description: service_gl.description,
+                quantity: service_gl.quantity / 60,
+                date: new Date(serviceDate.getFullYear(), serviceDate.getMonth(), serviceDate.getDate()),
+                discountAmount: service_gl.discountAmount,
+                discountType: "PERCENT",
+                completed: service_gl.completed,
+                user: (service_gl.user) ? { id: service_gl.user.id } : null,
+                durationStart: service_gl.durationStart,
+                durationEnd: service_gl.durationEnd
+              }
+            };
+            $scope.updateService(data);
+          });
+          $rootScope.$on('onChangeProductDate', function (evt, val) {
             console.log('onChangeProduct');
             if (updateProduct) return;
             updateProduct = true;
-console.log('val',val);
             var product = val.item;
             var editVersionedId = product.item.versionedId;
             var productDate = new Date(product.date);
             //  $scope.disabledSave = true;
-            TicketsService.updateExpenseInTicketUpdate({
+            var data = {
               ticketUpdateId: val.id,
               productExpense: {
                 id: product.id,
@@ -75,96 +133,138 @@ console.log('val',val);
                 discountAmount: product.discountAmount,
                 discountType: 'PERCENT'
               }
-            }, function () {
-              updateProduct = false;
-              UserNotificationService.show('The ticket update containing a product has been modified', true);
+            };
+            $scope.updateProduct(data);
 
-              $scope.setEditExpenseId();
           });
+          $rootScope.$on('onChangeProduct', function (evt, val) {
+            console.log('onChangeProduct');
+            if (updateProduct) return;
+            updateProduct = true;
+console.log('val',val);
+            var product = val.item;
+            var editVersionedId = product.item.versionedId;
+            var productDate = new Date(product.date);
+            //  $scope.disabledSave = true;
+            let data = {
+              ticketUpdateId: val.id,
+              productExpense: {
+                id: product.id,
+                item: {
+                  sale: product.item.sale,
+                  versionedId: { id: editVersionedId.id, version: editVersionedId.version },
+                  cost: product.item.cost
+                },
+                completed: product.completed,
+                serialNumber: product.serialNumber,
+                quantity: product.quantity,
+                user:(product.user) ? {id: product.user.id}  : null,
+               // date:new Date(productDate.getFullYear(), productDate.getMonth(), productDate.getDate()),
+                discountAmount: product.discountAmount,
+                discountType: 'PERCENT'
+              }
+            };
+            $scope.updateProduct(data);
         });
           $rootScope.$on('onChangeService', function (evt, val) {
             console.log('onChangeService');
             if (updateService) return;
             updateService = true;
-console.log('val',val);
-var service = val.item;
+            console.log('val', val);
+            var service = val.item;
             var editVersionedId = service.item.versionedId;
             var serviceDate = new Date(service.date);
-          
-            TicketsService.updateExpenseInTicketUpdate({
-            ticketUpdateId: val.id,
-            serviceExpense: {
-              id: service.id,
-              item: { versionedId: { id: editVersionedId.id, version: editVersionedId.version } },
-              description: service.description,
-              quantity: service.quantity / 60,
-              date: new Date(serviceDate.getFullYear(), serviceDate.getMonth(), serviceDate.getDate()),
-              discountAmount: service.discountAmount,
-              discountType: "PERCENT",
-              completed:service.completed,
-              user:(service.user) ? {id: service.user.id} : null,
-              durationStart: service.durationStart,
-              durationEnd: service.durationEnd
-            }
-            }, function () {
-              updateService = false;
-            UserNotificationService.show('The ticket update containing a service has been modified', true);
-            $scope.setEditExpenseId();
-            //  if (callback) callback()
-            })
+
+           var data = {
+              ticketUpdateId: val.id,
+              serviceExpense: {
+                id: service.id,
+                item: { versionedId: { id: editVersionedId.id, version: editVersionedId.version } },
+                description: service.description,
+                quantity: service.quantity / 60,
+                date: new Date(serviceDate.getFullYear(), serviceDate.getMonth(), serviceDate.getDate()),
+                discountAmount: service.discountAmount,
+                discountType: "PERCENT",
+                completed: service.completed,
+                user: (service.user) ? { id: service.user.id } : null,
+                durationStart: service.durationStart,
+                durationEnd: service.durationEnd
+              }
+            };
+            $scope.updateService(data);
           });
-          $scope.onCompletedChange = function (item,type) {
-              console.log('item',item);
-              console.log('scrope',$scope);
-              console.log('ggg',$scope.ticketUpdateForm);
-              if (type == 'product') {
+          $scope.onCompletedChange = function (item,type,id) {
+
+            console.log('item', item);
+            console.log('scrope', $scope);
+            console.log('ggg', $scope.ticketUpdateForm);
+            var id_update = null;
+            $scope.ticketDetails.updates.forEach(function (update) {
+              if (update.type == type && type == "SERVICE") {
+
+                update.services.forEach(function (service_item) {
+                  if (service_item.id == item.id) {
+                    id_update = update.id;
+                    console.log('id_update', id_update);
+                  }
+                })
+              }
+              if (update.type == type && type == "PRODUCT") {
+
+                update.products.forEach(function (product_item) {
+                  if (product_item.id == item.id) {
+                    id_update = update.id;
+                    console.log('id_update', id_update);
+                  }
+                })
+              }
+
+            })
+            if (type == "PRODUCT") {
               var product = item.item;
               var editVersionedId = product.versionedId;
               //  $scope.disabledSave = true;
-              TicketsService.updateExpenseInTicketUpdate({
-              ticketUpdateId: $scope.ticketDetails.id,
-              productExpense: {
-                id: item.id,
-                item: {
-                  sale: product.sale,
-                  versionedId: { id: editVersionedId.id, version: editVersionedId.version },
-                  cost: product.cost
-                },
-                completed:item.completed,
-                serialNumber: item.serialNumber,
-                quantity: item.quantity,
-                date: item.date,
-                discountAmount: item.discountAmount,
-                discountType: 'PERCENT'
-              }
-              }, function () {
-              UserNotificationService.show('The ticket update containing a product has been modified', true);
-
-              $scope.setEditExpenseId();
-              })
-              }
-              if (type == 'service') {
-                var editVersionedId = item.item.versionedId;
+              var data = {
+                ticketUpdateId: id_update,
+                productExpense: {
+                  id: item.id,
+                  item: {
+                    sale: product.sale,
+                    versionedId: { id: editVersionedId.id, version: editVersionedId.version },
+                    cost: product.cost
+                  },
+                  completed: item.completed,
+                  serialNumber: item.serialNumber,
+                  quantity: item.quantity,
+                  date: item.date,
+                  discountAmount: item.discountAmount,
+                  discountType: 'PERCENT'
+                }
+              };
+              $scope.updateProduct(data);
+            }
+            if (type == 'SERVICE') {
+              var editVersionedId = item.item.versionedId;
               var serviceDate = new Date(item.date);
-              TicketsService.updateExpenseInTicketUpdate({
-              ticketUpdateId: $scope.ticketDetails.id,
-              serviceExpense: {
-                id: item.id,
-                item: { versionedId: { id: editVersionedId.id, version: editVersionedId.version } },
-                description: item.description,
-                quantity: item.quantity / 60,
-                date: new Date(serviceDate.getFullYear(), serviceDate.getMonth(), serviceDate.getDate()),
-                discountAmount: item.discountAmount,
-                discountType: "PERCENT",
-                completed:item.completed,
-                
-              }
-              }, function () {
-              UserNotificationService.show('The ticket update containing a service has been modified', true);
-              $scope.setEditExpenseId();
-              //  if (callback) callback()
-              })
-              }
+              var data = {
+                ticketUpdateId: id_update,
+                serviceExpense: {
+                  id: item.id,
+                  item: { versionedId: { id: editVersionedId.id, version: editVersionedId.version } },
+                  description: item.description,
+                  quantity: item.quantity / 60,
+                  date: new Date(serviceDate.getFullYear(), serviceDate.getMonth(), serviceDate.getDate()),
+                  discountAmount: item.discountAmount,
+                  discountType: "PERCENT",
+                  completed: item.completed,
+                  user: (item.user) ? { id: item.user.id } : null,
+                  durationStart: item.durationStart,
+                  durationEnd: item.durationEnd
+
+                }
+              };
+              $scope.updateService(data);
+            }
 
           }
           $rootScope.toggleUpdateWindow = function(state) {
@@ -212,7 +312,23 @@ var service = val.item;
           $scope.$watch('ticketDetails', function(val) {
           })
           TicketsService.getOne($scope.ticketDetails, $scope, function (details) {
+            details.updates.forEach(function(item) {
+              if (item.type == "PRODUCT") {
+                item.products.forEach(function (product) {
+                  product.date = $filter('date')(product.date, 'd MMM yyyy');
+                })
+            
+              }
+              if (item.type =="SERVICE") {
+                item.services.forEach(function (service) {
+                  service.date = $filter('date')(service.date, 'd MMM yyyy');
+                })
+              }
+         
+
+            });
             $scope.ticketDetails = details;
+         
             if (isFromRemote) {
               ServicesService.getAllByCompany($scope, details.company.id, function (resp) {
                 $scope.ticketUpdate.services[0].item = resp.find(function (service) {
