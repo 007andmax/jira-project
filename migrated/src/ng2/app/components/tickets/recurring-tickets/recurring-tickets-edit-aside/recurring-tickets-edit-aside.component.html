@@ -5,7 +5,7 @@
         <h3>Create Recurring Service</h3>
         <button class="close-modal" (click)="close()"></button>
       </div>
-     
+
       <div class="recurring-tickets-content__modal--content clearfix">
         <div class="col-md-12">
           <p>Service Description</p>
@@ -19,9 +19,9 @@
         </div>
 
         <div class="col-md-12">
-            <mat-error *ngIf="!validate.getCompany()">
-                Company name is required
-              </mat-error>
+          <mat-error *ngIf="!validate.getCompany()">
+            Company name is required
+          </mat-error>
           <p>Assign to Company</p>
           <app-select-client-company [valid]="validate.getCompany()" style="width: 75%;" class="light-dropdown"
                                      [filter]="true"
@@ -36,12 +36,17 @@
                                          (selectedItem)="selectDevice($event)">
           </app-devices-recurring-tickets>
         </div>
-        <app-date-picker (onChange)="onChangeDatePicker($event)"></app-date-picker>
-        <mat-error *ngIf="!validate.getInterval()">
+        <div class="col-md-4">
+          <p>Date</p>
+          <app-date-picker (onChange)="onChangeDatePicker($event)"></app-date-picker>
+        </div>
+        <div class="col-md-4">
+          <mat-error *ngIf="!validate.getInterval()">
             Interval is required
           </mat-error>
-        <app-interval  [valid]="validate.getInterval()" (cronChange)="onChangeCron($event)"></app-interval>
-
+          <p>Set Interval</p>
+          <app-interval [valid]="validate.getInterval()" (cronChange)="onChangeCron($event)"></app-interval>
+        </div>
         <div class="col-md-12 ticket-tabs">
 
           <!--ONCLICK ADD CLASS 'active-tab'------------------------------------>
@@ -190,7 +195,7 @@
             <!--</ng-template>-->
           </div>
         </div>
-      
+
       </div>
     </div>
 

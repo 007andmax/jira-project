@@ -736,7 +736,7 @@ ngb-typeahead-window {
     .no-valid-service,
     .no-valid-product {
       input {
-        border:1px solid red !important;
+        border: 1px solid red !important;
       }
     }
     .editable-description {
@@ -1008,8 +1008,17 @@ ngb-typeahead-window {
     font-family: "Graphik Medium", sans-serif;
   }
 }
+
 ngb-datepicker {
   border: none !important;
+}
+
+.recurring-tickets-content__modal {
+  .mat-error {
+    position: absolute;
+    top: -17px;
+    font-size: 12px;
+  }
 }
 
 @import './assets/styles/mobile.scss';
