@@ -128,7 +128,7 @@
                 completed: product.completed,
                 serialNumber: product.serialNumber,
                 quantity: product.quantity,
-                user:(product.user) ? {id: product.user.id}  : null,
+                user:(product.user) ? {id: product.user.id}  : { id: "" },
                // date:new Date(productDate.getFullYear(), productDate.getMonth(), productDate.getDate()),
                 discountAmount: product.discountAmount,
                 discountType: 'PERCENT'
@@ -141,26 +141,43 @@
             console.log('onChangeProduct');
             if (updateProduct) return;
             updateProduct = true;
-console.log('val',val);
-            var product = val.item;
-            var editVersionedId = product.item.versionedId;
-            var productDate = new Date(product.date);
+            console.log('val', val);
+            var product_gl = null;
+            let id = null;
+            $scope.ticketDetails.updates.forEach(function (item) {
+              if (item.type == "PRODUCT") {
+
+                item.products.forEach(function (product_item) {
+                  if (product_item.id == val.id) {
+                    id = item.id;
+                    product_gl = product_item;
+                    product_item.user = val.item;
+                    console.log('find');
+
+                  }
+                })
+              }
+
+            })
+
+            var editVersionedId = product_gl.item.versionedId;
+            var productDate = new Date(product_gl.date);
             //  $scope.disabledSave = true;
             let data = {
-              ticketUpdateId: val.id,
+              ticketUpdateId: id,
               productExpense: {
-                id: product.id,
+                id: product_gl.id,
                 item: {
-                  sale: product.item.sale,
+                  sale: product_gl.item.sale,
                   versionedId: { id: editVersionedId.id, version: editVersionedId.version },
-                  cost: product.item.cost
+                  cost: product_gl.item.cost
                 },
-                completed: product.completed,
-                serialNumber: product.serialNumber,
-                quantity: product.quantity,
-                user:(product.user) ? {id: product.user.id}  : null,
-               // date:new Date(productDate.getFullYear(), productDate.getMonth(), productDate.getDate()),
-                discountAmount: product.discountAmount,
+                completed: product_gl.completed,
+                serialNumber: product_gl.serialNumber,
+                quantity: product_gl.quantity,
+                user: (product_gl.user) ? { id: product_gl.user.id } : { id: "" },
+                // date:new Date(productDate.getFullYear(), productDate.getMonth(), productDate.getDate()),
+                discountAmount: product_gl.discountAmount,
                 discountType: 'PERCENT'
               }
             };
@@ -254,6 +271,7 @@ console.log('find');
                   serialNumber: item.serialNumber,
                   quantity: item.quantity,
                   date: item.date,
+                  user: (item.user) ? { id: item.user.id } : { id: "" },
                   discountAmount: item.discountAmount,
                   discountType: 'PERCENT'
                 }
