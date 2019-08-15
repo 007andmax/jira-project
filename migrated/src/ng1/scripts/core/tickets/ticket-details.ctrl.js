@@ -131,6 +131,7 @@
               }
 
             })
+            if (!product_gl) return;
             var editVersionedId = product_gl.item.versionedId;
             var productDate = new Date(val.date);
             //  $scope.disabledSave = true;
@@ -366,6 +367,7 @@ console.log('find');
           $scope.$watch('ticketDetails', function(val) {
           })
           TicketsService.getOne($scope.ticketDetails, $scope, function (details) {
+            console.log('TicketsService.getOne');
             details.updates.forEach(function(item) {
               if (item.type == "PRODUCT") {
                 item.products.forEach(function (product) {
