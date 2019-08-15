@@ -79,7 +79,7 @@
                     id = item.id;
                     service_gl = service_item;
                     service_item.date = val.date;
-
+                    service_item.date = $filter('date')(val.date, 'd MMM yyyy');
 
                   }
                 })
@@ -87,6 +87,7 @@
 
             })
             console.log('service', service_gl);
+            if (!service_gl) return;
             var editVersionedId = service_gl.item.versionedId;
             var serviceDate = new Date(val.date);
 
@@ -96,7 +97,7 @@
                 id: service_gl.id,
                 item: { versionedId: { id: editVersionedId.id, version: editVersionedId.version } },
                 description: service_gl.description,
-                quantity: service_gl.quantity / 60,
+                quantity: service_gl.quantity,
                 date: new Date(serviceDate.getFullYear(), serviceDate.getMonth(), serviceDate.getDate()),
                 discountAmount: service_gl.discountAmount,
                 discountType: "PERCENT",
@@ -122,7 +123,7 @@
                     id = item.id;
                     product_gl = product_item;
                    
-                    product_gl.date = val.date;
+                    product_gl.date = $filter('date')(val.date, 'd MMM yyyy');
                     console.log('find');
 
                   }
@@ -232,7 +233,7 @@ console.log('find');
                 id: service_gl.id,
                 item: { versionedId: { id: editVersionedId.id, version: editVersionedId.version } },
                 description: service_gl.description,
-                quantity: service_gl.quantity / 60,
+                quantity: service_gl.quantity,
                 date: new Date(serviceDate.getFullYear(), serviceDate.getMonth(), serviceDate.getDate()),
                 discountAmount: service_gl.discountAmount,
                 discountType: "PERCENT",
@@ -305,7 +306,7 @@ console.log('find');
                   id: item.id,
                   item: { versionedId: { id: editVersionedId.id, version: editVersionedId.version } },
                   description: item.description,
-                  quantity: item.quantity / 60,
+                  quantity: item.quantity,
                   date: new Date(serviceDate.getFullYear(), serviceDate.getMonth(), serviceDate.getDate()),
                   discountAmount: item.discountAmount,
                   discountType: "PERCENT",
@@ -866,7 +867,7 @@ console.log('find');
                   id: item.id,
                   item: { versionedId: { id: editVersionedId.id, version: editVersionedId.version } },
                   description: item.description,
-                  quantity: item.quantity / 60,
+                  quantity: item.quantity,
                   date: new Date(serviceDate.getFullYear(), serviceDate.getMonth(), serviceDate.getDate()),
                   discountAmount: item.discountAmount,
                   discountType: "PERCENT"
