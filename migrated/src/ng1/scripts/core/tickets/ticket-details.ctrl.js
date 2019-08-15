@@ -112,25 +112,42 @@
             console.log('onChangeProduct');
             if (updateProduct) return;
             updateProduct = true;
-            var product = val.item;
-            var editVersionedId = product.item.versionedId;
-            var productDate = new Date(product.date);
+            var product_gl = null;
+            let id = null;
+            $scope.ticketDetails.updates.forEach(function (item) {
+              if (item.type == "PRODUCT") {
+
+                item.products.forEach(function (product_item) {
+                  if (product_item.id == val.id) {
+                    id = item.id;
+                    product_gl = product_item;
+                   
+                    product_gl.date = val.date;
+                    console.log('find');
+
+                  }
+                })
+              }
+
+            })
+            var editVersionedId = product_gl.item.versionedId;
+            var productDate = new Date(val.date);
             //  $scope.disabledSave = true;
-            var data = {
-              ticketUpdateId: val.id,
+            let data = {
+              ticketUpdateId: id,
               productExpense: {
-                id: product.id,
+                id: product_gl.id,
                 item: {
-                  sale: product.item.sale,
+                  sale: product_gl.item.sale,
                   versionedId: { id: editVersionedId.id, version: editVersionedId.version },
-                  cost: product.item.cost
+                  cost: product_gl.item.cost
                 },
-                completed: product.completed,
-                serialNumber: product.serialNumber,
-                quantity: product.quantity,
-                user:(product.user) ? {id: product.user.id}  : { id: "" },
-               // date:new Date(productDate.getFullYear(), productDate.getMonth(), productDate.getDate()),
-                discountAmount: product.discountAmount,
+                completed: product_gl.completed,
+                serialNumber: product_gl.serialNumber,
+                quantity: product_gl.quantity,
+                user: (product_gl.user) ? { id: product_gl.user.id } : { id: "" },
+               date:new Date(productDate.getFullYear(), productDate.getMonth(), productDate.getDate()),
+                discountAmount: product_gl.discountAmount,
                 discountType: 'PERCENT'
               }
             };
@@ -176,7 +193,7 @@
                 serialNumber: product_gl.serialNumber,
                 quantity: product_gl.quantity,
                 user: (product_gl.user) ? { id: product_gl.user.id } : { id: "" },
-                // date:new Date(productDate.getFullYear(), productDate.getMonth(), productDate.getDate()),
+                date:new Date(productDate.getFullYear(), productDate.getMonth(), productDate.getDate()),
                 discountAmount: product_gl.discountAmount,
                 discountType: 'PERCENT'
               }
@@ -257,6 +274,7 @@ console.log('find');
             if (type == "PRODUCT") {
               var product = item.item;
               var editVersionedId = product.versionedId;
+              var productDate = new Date(item.date);
               //  $scope.disabledSave = true;
               var data = {
                 ticketUpdateId: id_update,
@@ -270,7 +288,7 @@ console.log('find');
                   completed: item.completed,
                   serialNumber: item.serialNumber,
                   quantity: item.quantity,
-                  date: item.date,
+                  date:new Date(productDate.getFullYear(), productDate.getMonth(), productDate.getDate()),
                   user: (item.user) ? { id: item.user.id } : { id: "" },
                   discountAmount: item.discountAmount,
                   discountType: 'PERCENT'
@@ -322,7 +340,7 @@ console.log('find');
             return !user.deletedAt;
           });
           $scope.usersToWatch = $scope.agents.slice();
-          console.log('$scope.usersToWatch',$scope.usersToWatch);
+          console.log('$scope.usersToWatch',$scope.agents.slice());
           $scope.editForms = {};
           $scope.setEditForm = function(form, name) {
             $scope.editForms[name] = form;
@@ -594,13 +612,22 @@ console.log('find');
             initUsers();
           });
           function initUsers() {
+         
             $scope.allUsers = UsersService.getAllUsers();
             $scope.allUsers = $scope.allUsers.filter(function(item){
               return (item.accountType === 'TECH' && !item.deletedAt)
             });
             $scope.allUsers.map(function(item) {
-              $scope.usersToWatch.push(item);
+              var index = $scope.usersToWatch.findIndex(function (user) {
+                if (user.id == item.id) return true;
+                return false;
+              })
+              if (index == -1)  {
+                $scope.usersToWatch.push(item);
+              }
+            
             });
+            console.log(' $scope.usersToWatch',JSON.parse(JSON.stringify( $scope.usersToWatch)));
           }
           $scope.setTicketUpdate = function (value) {
             $scope.ticketUpdate = value;

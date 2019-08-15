@@ -67,7 +67,7 @@
                 var id = element[0].getAttribute('id-item');
                 console.log('e.date._d',e.date._d);
                 if (type == "product") {
-                  $rootScope.$broadcast('onChangeProduct', {date:e.date._d,id: id});
+                  $rootScope.$broadcast('onChangeProductDate', {date:e.date._d,id: id});
                 }
                 if (type == "service") {
                   $rootScope.$broadcast('onChangeServiceDate', {date:e.date._d,id: id});

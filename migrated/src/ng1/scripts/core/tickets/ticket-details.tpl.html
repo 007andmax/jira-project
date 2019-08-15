@@ -539,7 +539,9 @@
                               <input type="text" qt-data-time-picker  
                                      class="form-control new-input has-dropdown date-picker-icon-ui" uib-dropdown-toggle aria-expanded="false"
                                      placeholder="Date" ng-model="product.date"
-                                    
+                                     isolate="true"
+                                     isolate-type="product"
+                                     ng-attr-id-item="{{ product.id }}"
                                      uib-tooltip="Date"
                                      position-to-left="true"
                                      tooltip-placement="top"
@@ -981,7 +983,10 @@
                           <input type="text" qt-data-time-picker  
                                  class="form-control new-input has-dropdown date-picker-icon-ui" uib-dropdown-toggle aria-expanded="false"
                                  placeholder="Date" ng-model="product.date"
-                                 
+                              
+                                 isolate="true"
+                                 isolate-type="product"
+                                 ng-attr-id-item="{{ product.id }}"
                                  uib-tooltip="Date"
                                  position-to-left="true"
                                  tooltip-placement="top"
