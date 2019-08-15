@@ -1839,22 +1839,25 @@
     width: 290px !important;
   }
 
-  .shared-avatars {
+  .ticket-update .shared-avatars {
     display: flex;
     max-width: 100%;
     overflow-x: scroll;
     /*overflow-y: hidden;*/
-    height: 46px;
+    height: 30px !important;
   }
 
   .shared-avatars .avatars {
-    padding: 2px 7px;
     display: flex;
   }
 
+  .ticket-update .shared-avatars .check-area {
+    display: none;
+  }
+
   .shared-avatars .shared-avatar {
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 24px;
     margin-right: 2px;
     position: relative;
   }
@@ -1864,8 +1867,8 @@
   }
 
   .shared-avatars .shared-avatar > img {
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
   }
 
