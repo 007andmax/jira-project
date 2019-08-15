@@ -31,6 +31,7 @@
           $scope.hour = today.getHours();
           $scope.minute = Math.floor(today.getMinutes() / 5) * 5;
           $scope.isLoaded = false;
+          $scope.editType = '';
           var updateService = false;
           var updateProduct = false;
           $timeout(function() {
@@ -64,6 +65,15 @@
 
               $scope.setEditExpenseId();
           });
+          }
+          $scope.modalEditDate = function (item,editType) {
+            $scope.editType = editType;
+            document.body.querySelector('.modal-ticket-edit-mask').style.display = 'block';
+            document.body.querySelector('.modal-ticket-edit').style.display = 'block';
+          }
+          $scope.closedEditModel = function () {
+            document.body.querySelector('.modal-ticket-edit-mask').style.display = 'none';
+            document.body.querySelector('.modal-ticket-edit').style.display = 'none';
           }
           $rootScope.$on('onChangeServiceDate', function (evt, val) {
             console.log('onChangeServiceDate', updateService);

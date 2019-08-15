@@ -536,7 +536,7 @@
                         class="col-md-1 text-right gm">{{ product.item.sale * product.quantity || ''| currency :'$':2 }}</div>
                       <div class="col-md-2 action-update pr-0">
                         <div uib-dropdown>
-                          <i class="new-calendar-icn pointer"></i>
+                          <i class="new-calendar-icn pointer" ></i>
                           <input type="text" qt-data-time-picker
                                  class="form-control new-input has-dropdown date-picker-icon-ui" uib-dropdown-toggle
                                  aria-expanded="false"
@@ -647,7 +647,7 @@
                       <div class="col-md-1 text-right gm">{{ service.quantity | durationFilter }}</div>
                       <div class="col-md-2 action-update pr-0">
                         <div uib-dropdown>
-                          <i class="new-calendar-icn pointer"></i>
+                          <i class="new-calendar-icn pointer" ></i>
                           <input type="text" qt-data-time-picker
                                  class="form-control new-input has-dropdown date-picker-icon-ui" uib-dropdown-toggle
                                  aria-expanded="false"
@@ -996,9 +996,9 @@
                     </div>
                   </div>
                   <div class="col-md-3 action-update pr-0 pl-0">
-                    <div uib-dropdown>
-                      <i class="new-calendar-icn pointer"></i>
-                      <input type="text" qt-data-time-picker
+                    <div >
+                      <i class="new-calendar-icn pointer" ng-click="modalEditDate(product,'datepicker')"></i>
+                    <!--  <input type="text" qt-data-time-picker
                              class="form-control new-input has-dropdown date-picker-icon-ui" uib-dropdown-toggle
                              aria-expanded="false"
                              placeholder="Date" ng-model="product.date"
@@ -1009,7 +1009,7 @@
                              uib-tooltip="Date"
                              position-to-left="true"
                              tooltip-placement="top"
-                             tooltip-append-to-body="true">
+                             tooltip-append-to-body="true"> -->
                     </div>
 
                     <div uib-dropdown auto-close="outsideClick">
@@ -1127,7 +1127,7 @@
                   </div>
                   <div class="col-md-8 pl-0 pr-0 gm">{{ service.item.name }}</div>
                   <div class="col-md-3 action-update pr-0 pl-0">
-                    <i class="new-calendar-icn pointer"></i>
+                    <i class="new-calendar-icn pointer" ng-click="modalEditDate(service,'datepicker')"></i>
                     <i class="assign-icn pointer"></i>
                     <div uib-dropdown>
                       <i class="more-vertical-icn pointer" uib-dropdown-toggle></i>
@@ -1262,6 +1262,10 @@
         </button>
       </div>
     </div>
+  </div>
+  <div class="modal-ticket-edit-mask" ng-click="closedEditModel()"></div>
+  <div class="modal-ticket-edit">
+<div ng-if="editType == 'datepicker'"></div>
   </div>
 </div>
 <script>

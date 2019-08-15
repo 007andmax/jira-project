@@ -296,6 +296,26 @@
   left: 0px;
   opacity: 0;
 }
+.modal-ticket-edit-mask {
+  display: none;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 998;
+  position: fixed;
+}
+.modal-ticket-edit {
+  display: none;
+  top: 10%;
+  left: 10%;
+  background-color: #ffffff;
+  z-index: 999;
+  position: fixed;
+  width: 50%;
+  height: 50%;
+}
 
 @-moz-document url-prefix() {
   .ticket-update-content .ticket-update-meta .btn-more-users {
