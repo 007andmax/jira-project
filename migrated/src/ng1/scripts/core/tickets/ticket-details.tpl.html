@@ -971,7 +971,8 @@
                 <div class="ticket-update-product-item row">
                   <div class="col-md-1 pl-0">
                     <label class="checkbox-container">
-                      <input type="checkbox">
+                      <input type="checkbox" ng-model="product.completed"
+                                 ng-change="onCompletedChange(product,'PRODUCT')">
                       <span class="checkbox-mark"></span>
                     </label>
                   </div>
@@ -1119,7 +1120,8 @@
                 <div class="ticket-update-service-item">
                   <div class="col-md-1 pl-0">
                     <label class="checkbox-container">
-                      <input type="checkbox">
+                      <input type="checkbox" ng-model="service.completed"
+                      ng-change="onCompletedChange(service,'SERVICE')">
                       <span class="checkbox-mark"></span>
                     </label>
                   </div>
