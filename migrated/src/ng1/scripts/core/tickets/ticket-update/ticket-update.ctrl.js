@@ -8,31 +8,42 @@
       function ($scope, TicketsService, UsersService, UserConfirmationsService, UserNotificationService, $sce, $rootScope) {
 
         $scope.user = UsersService.getOneById($scope.ticketUpdate.user.id);
-
+        $scope.showModelUser = false;
+        $scope.showModelDatePicker = false;
+        $scope.showModelEditUser = function () {
+          $scope.showModelUser = true;
+        }
+        $scope.showModelEditDatePciker = function () {
+          $scope.showModelDatePicker = true;
+        }
+        $scope.closedEditModel = function () {
+          $scope.showModelUser = false;
+          $scope.showModelDatePicker = false;
+        }
         $scope.$on('userToAssignToTicket', function (evt, val) {
-          console.log('userToAssignToTicket',val);
+          console.log('userToAssignToTicket', val);
           if (val.type) {
             if (val.type == "product") {
-              console.log('$scope',$scope.ticketUpdate.services);
-              $scope.ticketUpdate.products.forEach( function(item) {
+              console.log('$scope', $scope.ticketUpdate.services);
+              $scope.ticketUpdate.products.forEach(function (item) {
                 if (item.id == val.id) {
                   item.user = val.data;
                   console.log('find');
-                  $rootScope.$broadcast('onChangeProduct', {id:$scope.ticketUpdate.id,item: item });
+                  $rootScope.$broadcast('onChangeProduct', { id: $scope.ticketUpdate.id, item: item });
                 }
               })
 
             }
             if (val.type == "service") {
-              console.log('$scope',$scope.ticketUpdate.services);
-              $scope.ticketUpdate.services.forEach( function(item) {
+              console.log('$scope', $scope.ticketUpdate.services);
+              $scope.ticketUpdate.services.forEach(function (item) {
                 if (item.id == val.id) {
                   item.user = val.data;
                   console.log('find');
-                  $rootScope.$broadcast('onChangeService', {id:$scope.ticketUpdate.id,item: item });
+                  $rootScope.$broadcast('onChangeService', { id: $scope.ticketUpdate.id, item: item });
                 }
               })
-            
+
             }
           }
 

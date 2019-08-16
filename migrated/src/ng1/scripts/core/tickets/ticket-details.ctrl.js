@@ -66,15 +66,22 @@
               $scope.setEditExpenseId();
           });
           }
-          $scope.modalEditDate = function (item,editType) {
+        /*  $scope.modalEditDate = function (item,editType) {
             $scope.editType = editType;
             document.body.querySelector('.modal-ticket-edit-mask').style.display = 'block';
-            document.body.querySelector('.modal-ticket-edit').style.display = 'block';
-          }
-          $scope.closedEditModel = function () {
+           
+            if (editType == "datepicker") {
+              document.body.querySelector('.modal-ticket-edit').style.display = 'block';
+            }
+            if (editType == "user-list") {
+              document.body.querySelector('.modal-ticket-edit-user').style.display = 'block';
+            }
+          }*/
+       /*   $scope.closedEditModel = function () {
             document.body.querySelector('.modal-ticket-edit-mask').style.display = 'none';
             document.body.querySelector('.modal-ticket-edit').style.display = 'none';
-          }
+            document.body.querySelector('.modal-ticket-edit-user').style.display = 'none';
+          }*/
           $rootScope.$on('onChangeServiceDate', function (evt, val) {
             console.log('onChangeServiceDate', updateService);
             if (updateService) return;

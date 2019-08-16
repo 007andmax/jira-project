@@ -297,7 +297,7 @@
   opacity: 0;
 }
 .modal-ticket-edit-mask {
-  display: none;
+  display: block;
   top: 0;
   bottom: 0;
   right: 0;
@@ -306,8 +306,8 @@
   z-index: 998;
   position: fixed;
 }
-.modal-ticket-edit {
-  display: none;
+.modal-ticket-edit-datepicker {
+  display: block;
   top: 10%;
   left: 10%;
   background-color: #ffffff;
@@ -316,7 +316,16 @@
   width: 50%;
   height: 50%;
 }
-
+.modal-ticket-edit-user {
+  display: block;
+  top: 40%;
+  left: 0;
+  background-color: #ffffff;
+  z-index: 999;
+  position: fixed;
+  width: 100%;
+  height: 40%;
+}
 @-moz-document url-prefix() {
   .ticket-update-content .ticket-update-meta .btn-more-users {
     padding: 7px 12px 8px;

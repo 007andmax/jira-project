@@ -996,59 +996,42 @@
                     </div>
                   </div>
                   <div class="col-md-3 action-update pr-0 pl-0">
-                    <div >
-                      <i class="new-calendar-icn pointer" ng-click="modalEditDate(product,'datepicker')"></i>
-                    <!--  <input type="text" qt-data-time-picker
-                             class="form-control new-input has-dropdown date-picker-icon-ui" uib-dropdown-toggle
-                             aria-expanded="false"
-                             placeholder="Date" ng-model="product.date"
+                  
+                      <i class="new-calendar-icn pointer" ng-click="showModelEditDatePciker()"></i>
+                   
+                  
+                    <i class="assign-icn pointer" ng-click="showModelEditUser()" ng-if="!product.user"></i>
+                    <div class="shared-avatars" ng-click="showModelEditUser()"  ng-if="product.user">
 
-                             isolate="true"
-                             isolate-type="product"
-                             ng-attr-id-item="{{ product.id }}"
-                             uib-tooltip="Date"
-                             position-to-left="true"
-                             tooltip-placement="top"
-                             tooltip-append-to-body="true"> -->
+                 <div class="tech-users avatars">
+                   <div class="shared-avatar pointer"
+                        uib-tooltip="{{ product.user.firstName + ' ' + product.user.lastName }}"
+
+                   >
+                     <img ng-if="product.user.avatar" src="{{getUserAvatarUrl(product.user)}}" />
+
+                     <div class="default-user-avatar" ng-if="!(product.user.avatar)"
+                          ng-class-odd="'avatar-background-color-odd'"
+                          ng-class-even="'avatar-background-color-even'">
+                       <span>{{product.user.firstName[0].toUpperCase()}}</span>
+                       <span>{{product.user.lastName[0].toUpperCase()}}</span>
+                     </div>
+
+                     <div class="check-area" ng-class="{ 'checked': product.notify }">
+                       <img src="ng1/images/input-icons/checkbox-checked.png" />
+                     </div>
+                   </div>
+                 </div>
+
+               </div>
+                    <div class="modal-ticket-edit-mask" ng-if="showModelUser || showModelDatePicker" ng-click="closedEditModel()"></div>
+                    <div class="modal-ticket-edit-datepicker" ng-if="showModelDatePicker">
+                    
                     </div>
-
-                    <div uib-dropdown auto-close="outsideClick">
-                      <i class="assign-icn pointer" uib-dropdown-toggle smart-dropdown-menu-position
-                         no-restricted="true" ng-if="!product.user"></i>
-                      <div class="shared-avatars" uib-dropdown-toggle smart-dropdown-menu-position no-restricted="true"
-                           ng-if="product.user">
-
-                        <div class="tech-users avatars">
-                          <div class="shared-avatar pointer"
-                               uib-tooltip="{{ product.user.firstName + ' ' + product.user.lastName }}"
-
-                          >
-                            <img ng-if="product.user.avatar" src="{{getUserAvatarUrl(product.user)}}" />
-
-                            <div class="default-user-avatar" ng-if="!(product.user.avatar)"
-                                 ng-class-odd="'avatar-background-color-odd'"
-                                 ng-class-even="'avatar-background-color-even'">
-                              <span>{{product.user.firstName[0].toUpperCase()}}</span>
-                              <span>{{product.user.lastName[0].toUpperCase()}}</span>
-                            </div>
-
-                            <div class="check-area" ng-class="{ 'checked': product.notify }">
-                              <img src="ng1/images/input-icons/checkbox-checked.png" />
-                            </div>
-                          </div>
-                        </div>
-
-                      </div>
-                      <div uib-dropdown-menu
-                           class="dropdown-assign-ticket fixed-assign dropdown-menu without-max-height"
-                           stop-propagation="click" onUserAssign="'true'"
-                           aub-is-bulk-operation="true" style="max-height: auto !important"
-                           users="usersToWatch">
-                        <div ng-include="'/ng1/scripts/core/user-list/user-list.tpl.html'"></div>
-                      </div>
-                      <div typeahead-input-icon-sm="ticketAssignTo"></div>
+                    <div class="modal-ticket-edit-user" ng-if="showModelUser">
+                      <div ng-include="'/ng1/scripts/core/user-list/user-list.tpl.html'"></div>
                     </div>
-                    <div typeahead-input-icon-sm="ticketAssignTo"></div>
+                
                     <div uib-dropdown
                          style="margin: 4px 0 0 10px;">
                       <i class="more-vertical-icn pointer" uib-dropdown-toggle></i>
@@ -1127,8 +1110,33 @@
                   </div>
                   <div class="col-md-8 pl-0 pr-0 gm">{{ service.item.name }}</div>
                   <div class="col-md-3 action-update pr-0 pl-0">
-                    <i class="new-calendar-icn pointer" ng-click="modalEditDate(service,'datepicker')"></i>
-                    <i class="assign-icn pointer"></i>
+                    
+                      <i class="new-calendar-icn pointer" ng-click="showModelEditDatePciker()"></i>
+                      <i class="assign-icn pointer" ng-click="showModelEditUser()" ng-if="!service.user"></i>
+                      <div class="tech-users avatars" ng-click="showModelEditUser()" ng-if="service.user">
+                          <div class="shared-avatar pointer" uib-tooltip="{{ service.user.firstName + ' ' + service.user.lastName }}">
+                            <img ng-if="service.user.avatar" src="{{getUserAvatarUrl(service.user)}}" />
+                      
+                            <div class="default-user-avatar" ng-if="!(service.user.avatar)" ng-class-odd="'avatar-background-color-odd'"
+                              ng-class-even="'avatar-background-color-even'">
+                              <span>{{service.user.firstName[0].toUpperCase()}}</span>
+                              <span>{{service.user.lastName[0].toUpperCase()}}</span>
+                            </div>
+                      
+                            <div class="check-area" ng-class="{ 'checked': service.notify }">
+                              <img src="ng1/images/input-icons/checkbox-checked.png" />
+                            </div>
+                          </div>
+                        </div>
+                      
+                   
+                      <div class="modal-ticket-edit-mask" ng-if="showModelUser || showModelDatePicker" ng-click="closedEditModel()"></div>
+                      <div class="modal-ticket-edit-datepicker" ng-if="showModelDatePicker">
+                      
+                      </div>
+                      <div class="modal-ticket-edit-user" ng-if="showModelUser">
+                        <div ng-include="'/ng1/scripts/core/user-list/user-list.tpl.html'"></div>
+                      </div>
                     <div uib-dropdown>
                       <i class="more-vertical-icn pointer" uib-dropdown-toggle></i>
                       <ul class="dropdown-menu" role="menu">
@@ -1263,10 +1271,8 @@
       </div>
     </div>
   </div>
-  <div class="modal-ticket-edit-mask" ng-click="closedEditModel()"></div>
-  <div class="modal-ticket-edit">
-<div ng-if="editType == 'datepicker'"></div>
-  </div>
+  
+ 
 </div>
 <script>
   (function (i, s, o, g, r, a, m) {
