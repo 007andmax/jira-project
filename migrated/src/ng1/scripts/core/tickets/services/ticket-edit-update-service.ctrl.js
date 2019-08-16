@@ -275,7 +275,9 @@
                   discountAmount: $scope.editService.discountAmount,
                   discountType: 'PERCENT',
                   durationStart: $rootScope.saveForStartDate.getTime(),
-                  durationEnd: $rootScope.saveForEndDate.getTime()
+                  durationEnd: $rootScope.saveForEndDate.getTime(),
+                  completed: $scope.editService.completed,
+                user: ($scope.editService.user) ? { id: $scope.editService.user.id } : { id: "" },
                 }
               }, function () {
                 UserNotificationService.show('The ticket update containing a service has been modified', true);

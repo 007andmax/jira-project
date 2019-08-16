@@ -42,7 +42,7 @@
               }
 
               $scope.disabledSave = true;
-
+              var productDate = new Date($scope.editProduct.date);
               TicketsService.updateExpenseInTicketUpdate({
 
                 ticketUpdateId: $scope.ticketUpdate.id,
@@ -54,9 +54,12 @@
                     versionedId: { id: editVersionedId.id, version: editVersionedId.version },
                     cost: $scope.editProduct.item.cost
                   },
+                  completed: $scope.editProduct.completed,
                   serialNumber: $scope.editProduct.serialNumber,
                   quantity: $scope.editProduct.quantity,
-                  date: $scope.editProduct.date,
+                  date:new Date(productDate.getFullYear(), productDate.getMonth(), productDate.getDate()),
+                  user: ($scope.editProduct.user) ? { id: $scope.editProduct.user.id } : { id: "" },
+                
                   discountAmount: $scope.editProduct.discountAmount,
                   discountType: 'PERCENT'
                 }

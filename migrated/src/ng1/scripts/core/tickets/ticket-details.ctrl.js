@@ -835,7 +835,28 @@ console.log('find');
             $scope.triedToSaveUpdate = value;
           };
           $scope.saveUpdateProduct = function (form, item, callback) {
+            console.log('saveUpdateProduct');
             if (form.$valid) {
+            
+            /*  let id = null;
+              $scope.ticketDetails.updates.forEach(function (item) {
+                if (item.type == "PRODUCT") {
+  
+                  item.products.forEach(function (product_item) {
+                    if (product_item.id == val.id) {
+                      id = item.id;
+            
+                      console.log('find');
+  
+                    }
+                  })
+                }
+  
+              })*/
+           
+              //  $scope.disabledSave = true;
+            
+                var productDate = new Date(item.date);
               var product = item.item;
               var editVersionedId = product.versionedId;
               $scope.disabledSave = true;
@@ -848,9 +869,11 @@ console.log('find');
                     versionedId: { id: editVersionedId.id, version: editVersionedId.version },
                     cost: product.cost
                   },
+                  completed: item.completed,
                   serialNumber: item.serialNumber,
                   quantity: item.quantity,
-                  date: item.date,
+                  date:new Date(productDate.getFullYear(), productDate.getMonth(), productDate.getDate()),
+                  user: (item.user) ? { id: item.user.id } : { id: "" },
                   discountAmount: item.discountAmount,
                   discountType: 'PERCENT'
                 }
