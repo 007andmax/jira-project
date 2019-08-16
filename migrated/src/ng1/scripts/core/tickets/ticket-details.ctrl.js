@@ -910,6 +910,7 @@ console.log('find');
                   item: { versionedId: { id: editVersionedId.id, version: editVersionedId.version } },
                   description: item.description,
                   quantity: item.quantity,
+                 
                   date: new Date(serviceDate.getFullYear(), serviceDate.getMonth(), serviceDate.getDate()),
                   discountAmount: item.discountAmount,
                   discountType: "PERCENT"
@@ -929,7 +930,7 @@ console.log('find');
           $scope.$on('serviceExpenseItem', function (event, data) {
             $scope.showServicesError = false;
           });
-          $scope.saveTicketUpdate = function (form, disableRestoringDefaults, callback, isExpenseEdit, value, close) {
+          $scope.saveTicketUpdate = function (form, disableRestoringDefaults, callback, isExpenseEdit, value, close = false) {
             if (isExpenseEdit) {
               if (isExpenseEdit.note) {
                 var note = isExpenseEdit.note;
@@ -962,6 +963,8 @@ console.log('find');
               if ($scope.ticketUpdate && $scope.ticketUpdate.products && !isEmptyProductValid) {
                 for(var i=0; i<$scope.ticketUpdate.products.length; i++) {
                   $scope.ticketUpdate.products[i].discountType = 'PERCENT';
+                  if (close)   $scope.ticketUpdate.products[i].completed = close;
+                
                 }
                 ticketUpdateToSend.products = $scope.ticketUpdate.products;
               } else if ($scope.ticketUpdate && $scope.ticketUpdate.services) {
@@ -994,6 +997,7 @@ console.log('find');
                     ticketUpdateToSend.services[i].durationEnd = $rootScope.saveEndDate.getTime() ;
                   }
                   ticketUpdateToSend.services[i].date = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+                  if (close) ticketUpdateToSend.services[i].completed = close;
                 }
               } else if ($scope.haveAttachments() || $scope.haveNote()) {
                 ticketUpdateToSend.note = $scope.ticketUpdate.note;
