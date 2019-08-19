@@ -818,6 +818,14 @@
           storage.ticketsQuantityCallback && storage.ticketsQuantityCallback(storage.ticketsQuantity);
         } else if (ticketChangedActions.indexOf(newChange.action) > -1) {
           var isUpdate = newChange.action === 'EDITED_TICKET';
+          newChange.data.products.forEach(function (product) {
+            product.date = $filter('date')(product.date, 'd MMM yyyy');
+          })
+      
+      
+          newChange.data.services.forEach(function (service) {
+            service.date = $filter('date')(service.date, 'd MMM yyyy');
+          })
           var global = globalSearch.count;
           if (storage.openedTicket && newChange.data.id === storage.openedTicket.id) {
             Utils.customizeObj(newChange.data, storage.openedTicket);

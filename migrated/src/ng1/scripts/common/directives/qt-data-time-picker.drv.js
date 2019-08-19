@@ -64,6 +64,7 @@
 
             element.bind('dp.change', function (e) {
               var formattedDate = $filter('date')(e.date._d, 'dd MMM yyyy');
+              
               if (isolate && open) {
                 var type = element[0].getAttribute('isolate-type');
                 var id = element[0].getAttribute('id-item');
@@ -79,6 +80,7 @@
               ctrl.$setViewValue(formattedDate);
 
               element.data('DateTimePicker') && element.data('DateTimePicker').hide();
+              if (element.data('DateTimePicker') && mobile)  element.parents().find('.dropdown-menu').removeClass('mobile-datepicker');
               open = false;
             });
 
