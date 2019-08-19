@@ -10,6 +10,7 @@
         $scope.user = UsersService.getOneById($scope.ticketUpdate.user.id);
         $scope.showModelUser = false;
         $scope.showModelDatePicker = false;
+      // $scope.disabledFutureDatePicker = false;
         $scope.showModelEditUser = function () {
           $scope.showModelUser = true;
         }

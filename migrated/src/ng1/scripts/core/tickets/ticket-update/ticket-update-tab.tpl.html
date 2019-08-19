@@ -368,10 +368,10 @@
               </div>
               <div ng-show="TicketsPermissionsService.isActionVisible('update_and_close', ticketDetails)"
                    class="btn btn-primary btn-new btn-update"
-                   custom-disabled="{{ ticketDetails.status === 'COMPLETED' || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
+                   custom-disabled="{{ disabledFutureDatePicker || ticketDetails.status === 'COMPLETED' || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
                    ng-click="updateAndCloseTicket(ticketUpdateForm)">
-                Update &amp; Close
-              </div>
+                Update &amp; Close f
+              </div> 
             </div>
           </div>
           <!--<div ng-include="'/html/scripts/core/tickets/ticket-update/update-submit.tpl.html'"></div>-->

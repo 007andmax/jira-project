@@ -77,6 +77,7 @@
                 }
                 
               }
+              if (open)  $rootScope.$broadcast('resetBlockUpdateAndClosed', null);
               ctrl.$setViewValue(formattedDate);
 
               element.data('DateTimePicker') && element.data('DateTimePicker').hide();

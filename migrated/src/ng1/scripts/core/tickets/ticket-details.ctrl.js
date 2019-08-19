@@ -24,6 +24,7 @@
           $scope.selectUpdateSharedUser = {};
           $scope.ticketSharedUsersList = [];
           $scope.disabledWhenLoadAttachment = false;
+         $scope.disabledFutureDatePicker = false;
           $scope.autocompleteData = ProductsService.getFullListForAutocomplete($scope);
           $scope.tagColors = TagsService.getColors();
           var today = new Date();
@@ -125,6 +126,12 @@
               }
             };
             $scope.updateService(data);
+          });
+          $rootScope.$on('resetBlockUpdateAndClosed', function (evt, val) {
+            console.log('resetBlockUpdateAndClosed');
+            $scope.disabledFutureDatePicker = false;
+            $scope.$apply();
+
           });
           $rootScope.$on('onChangeProductDate', function (evt, val) {
             console.log('onChangeProduct');
@@ -963,7 +970,7 @@ console.log('find');
               if ($scope.ticketUpdate && $scope.ticketUpdate.products && !isEmptyProductValid) {
                 for(var i=0; i<$scope.ticketUpdate.products.length; i++) {
                   $scope.ticketUpdate.products[i].discountType = 'PERCENT';
-                  if (close)   $scope.ticketUpdate.products[i].completed = close;
+                  $scope.ticketUpdate.products[i].completed = true;
                 
                 }
                 ticketUpdateToSend.products = $scope.ticketUpdate.products;
@@ -981,7 +988,9 @@ console.log('find');
                 }
                 for (var i = 0; i < ticketUpdateToSend.services.length; i++) {
                   var date = new Date(ticketUpdateToSend.services[i].date);
-                  var startDate = new Date();
+               console.log('date',date);
+                  var currentDate = new Date();
+                  console.log('currentDate',currentDate);
                   var endDate = new Date();
                   if ($rootScope.serviceExpenseDurationPresentation === 'TIME_PICKER' || $rootScope.isMobileUpdateShown) {
                     $rootScope.saveStartDate = new Date($rootScope.saveStartDate);
@@ -997,7 +1006,27 @@ console.log('find');
                     ticketUpdateToSend.services[i].durationEnd = $rootScope.saveEndDate.getTime() ;
                   }
                   ticketUpdateToSend.services[i].date = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-                  if (close) ticketUpdateToSend.services[i].completed = close;
+                  if (!close) {
+                   
+                    if (date.getFullYear() <= currentDate.getFullYear() && date.getMonth() <= currentDate.getMonth() && date.getDate() <= currentDate.getDate())  {
+                      ticketUpdateToSend.services[i].completed = true;
+                    } else {
+                      ticketUpdateToSend.services[i].completed = false;
+                    }
+                
+                  } else {
+                    if (date.getFullYear() <= currentDate.getFullYear() && date.getMonth() <= currentDate.getMonth() && date.getDate() <= currentDate.getDate())  {
+                      ticketUpdateToSend.services[i].completed = true;
+                    } else {
+                      $scope.isSavingUpdate = false;
+                  
+                      $scope.disabledFutureDatePicker = true;
+                      $scope.$apply();
+                      return;
+                    // disabled
+                    }
+                  }
+                  
                 }
               } else if ($scope.haveAttachments() || $scope.haveNote()) {
                 ticketUpdateToSend.note = $scope.ticketUpdate.note;
