@@ -16,6 +16,7 @@
           link: function (scope, element, attrs, ctrl) {
             console.log('scope.type',element.get);
             var isolate = (element[0].getAttribute('isolate')) ? true : false;
+            var mobile = (element[0].getAttribute('mobile')) ? true : false;
           let open = false;
             var options = {
               keepOpen: true,
@@ -55,6 +56,7 @@
 
             element.bind('dp.show', function (e) {
               console.log('show');
+              if (mobile)   element.parents().find('.dropdown-menu').addClass('mobile-datepicker');
               open = true;
               element.parent().find('.datepicker').removeClass('datepicker');
             });

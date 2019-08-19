@@ -997,7 +997,21 @@
                   </div>
                   <div class="col-md-3 action-update pr-0 pl-0">
                   
-                      <i class="new-calendar-icn pointer" ng-click="showModelEditDatePciker()"></i>
+                    <div uib-dropdown>
+                      <i class="new-calendar-icn pointer" ></i>
+                      <input type="text" qt-data-time-picker
+                             class="form-control new-input has-dropdown date-picker-icon-ui" uib-dropdown-toggle
+                             aria-expanded="false"
+                             placeholder="Date" ng-model="product.date"
+                             isolate="true"
+                             isolate-type="product"
+                             mobile="true"
+                             ng-attr-id-item="{{ product.id }}"
+                             uib-tooltip="Date"
+                             position-to-left="true"
+                             tooltip-placement="top"
+                             tooltip-append-to-body="true">
+                    </div>
                    
                   
                     <i class="assign-icn pointer" ng-click="showModelEditUser()" ng-if="!product.user"></i>
@@ -1111,7 +1125,21 @@
                   <div class="col-md-8 pl-0 pr-0 gm">{{ service.item.name }}</div>
                   <div class="col-md-3 action-update pr-0 pl-0">
                     
-                      <i class="new-calendar-icn pointer" ng-click="showModelEditDatePciker()"></i>
+                    <div uib-dropdown>
+                      <i class="new-calendar-icn pointer" ></i>
+                      <input type="text" qt-data-time-picker
+                             class="form-control new-input has-dropdown date-picker-icon-ui" uib-dropdown-toggle
+                             aria-expanded="false"
+                             placeholder="Date" ng-model="service.date"
+                             isolate="true"
+                             isolate-type="service"
+                             mobile="true"
+                             ng-attr-id-item="{{ service.id }}"
+                             uib-tooltip="Date"
+                             position-to-left="true"
+                             tooltip-placement="top"
+                             tooltip-append-to-body="true">
+                    </div>
                       <i class="assign-icn pointer" ng-click="showModelEditUser()" ng-if="!service.user"></i>
                       <div class="tech-users avatars" ng-click="showModelEditUser()" ng-if="service.user">
                           <div class="shared-avatar pointer" uib-tooltip="{{ service.user.firstName + ' ' + service.user.lastName }}">
