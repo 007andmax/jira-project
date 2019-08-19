@@ -127,9 +127,9 @@
             };
             $scope.updateService(data);
           });
-          $rootScope.$on('resetBlockUpdateAndClosed', function (evt, val) {
-            console.log('resetBlockUpdateAndClosed');
-            $scope.disabledFutureDatePicker = false;
+          $rootScope.$on('setBlockUpdateAndClosed', function (evt, val) {
+            
+            $scope.disabledFutureDatePicker = val;
             $scope.$apply();
 
           });
@@ -765,9 +765,11 @@ console.log('find');
             }
           };
           $scope.openedTab = function (tabName) {
+
             if ($scope.currentOpenTab === tabName) {
               return;
             }
+       //     $scope.disabledFutureDatePicker = false;
             var ticketUpdate = $scope.ticketUpdate;
             if (ticketUpdate.note
               || (ticketUpdate.attachments && ticketUpdate.attachments.length)
