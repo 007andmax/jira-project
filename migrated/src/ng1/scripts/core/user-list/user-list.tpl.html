@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="scroll-pane users-list custom-scroll">
-      <div ng-repeat="user in users track by $index" style="margin-top:10px" class="user-item"
+      <div ng-repeat="user in users track by $index" class="user-item"
            ng-attr-data-index="{{$index}}" ng-class="{'active': user.selected == true}" ng-click="selectUser($index)"><a
         href="javascript:void(0)" ng-attr-id="{{user.id}}" class="dropdown-link">
         <img ng-if="user.avatar" ng-attr-src="{{getUserAvatarUrl(user)}}" alt="..."

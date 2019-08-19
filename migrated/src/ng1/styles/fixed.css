@@ -977,15 +977,15 @@ aside#left div.nav-title {
 .ticket-add-service-content .timer-quantity .time_drop_down {
   position: absolute;
   display: none;
-  left: 10px;
-  top: -380px !important;
+  left: 0;
+  top: -313px !important;
 }
 
 .ticket-add-service-content .timer-quantity .minutes_drop_down {
   position: absolute;
   display: none;
   left: 10px;
-  top: -170px !important;
+  top: -142px !important;
 }
 
 .ticket-add-service-content .timer-quantity .minutes_drop_down.FIVE_MINUTES {
@@ -2467,19 +2467,22 @@ span.sort-span {
   margin: 0 auto;
 }
 
-.ticket-update .shared-avatars {
+.ticket-update .shared-avatars{
   height: 24px;
   margin: 0 16px 0 8px
 }
 
 .ticket-update .shared-avatars img,
-.ticket-update .shared-avatars .default-user-avatar {
+.ticket-update .shared-avatars .default-user-avatar,
+.mob-ticket-content .shared-avatar img,
+.mob-ticket-content .shared-avatar .default-user-avatar{
   width: 24px;
   height: 24px;
   border-radius: 50%;
 }
 
-.ticket-update .shared-avatars .default-user-avatar span {
+.ticket-update .shared-avatars .default-user-avatar span,
+.mob-ticket-content .shared-avatar .default-user-avatar span {
   font-size: 11px;
 }
 
