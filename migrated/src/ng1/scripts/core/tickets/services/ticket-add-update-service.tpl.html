@@ -146,7 +146,7 @@
     <div class="col-2 new-date-picker" style="position: relative"
          ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceData')}">
       <input type="text" class="new-input absolute-stick-datepicker has-dropdown" placeholder="Date"
-             qt-data-time-picker data-position="ticket" max-date="maxServiceDate" ng-model="serviceExpense.date"
+             qt-data-time-picker data-position="ticket"  ng-model="serviceExpense.date"
              name="serviceData" ng-required="true">
     </div>
     <div class="col-1" ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceDescription')}">

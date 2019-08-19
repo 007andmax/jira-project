@@ -562,7 +562,7 @@
             </div>
             <div ng-if="!hideInputs" class="col-xs-6" data-date-picker ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceData')}">
               <input type="text" class="has-dropdown" placeholder="Date" readonly
-                     qt-data-time-picker max-date="maxServiceDate" ng-model="serviceToEdit[0].date"
+                     qt-data-time-picker   ng-model="serviceToEdit[0].date"
                      name="serviceData" ng-required="true" uib-tooltip="select date">
               <i class="new-calendar"></i>
             </div>
