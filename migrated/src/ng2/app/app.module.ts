@@ -17,6 +17,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MatSelectModule} from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule, MatIconModule } from "@angular/material";
+import { CronEditorModule } from "cron-editor";
+
 
 import { AppComponent } from './app.component';
 import { PasswordManagerComponent } from './components/password-manager/password-manager.component';
@@ -44,15 +46,29 @@ import { PasswordManagerEditAsideComponent } from './components/password-manager
 import { DeviceUserPipe } from './pipe/device-user.pipe';
 import { PasswordCategoryPipe } from './pipe/password-category.pipe';
 import { SelectClientCompanyComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-top/select-client-company/select-client-company.component';
-import { ProductListComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-bottom/product-list/product-list.component';
-import { ServicesListComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-bottom/services-list/services-list.component';
+import { ProductListComponent } from './components/shared/product-list/product-list.component';
+import { ServicesListComponent } from './components/shared/services-list/services-list.component';
 import { ProductTableComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-bottom/product-table/product-table.component';
 import { AddItemComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-bottom/add-item/add-item.component';
 import { MultiDatepickerComponent } from './components/shared/multi-datepicker/multi-datepicker.component';
 import { LeftPanelBillingComponent } from './components/left-panel/left-panel-billing/left-panel-billing.component';
 import { ToNumerPipe } from './pipe/to-numer.pipe';
 import { ModalQuoteComponent } from './services/modal/modal-quote/modal-quote.component';
+import { RecurringTicketsComponent } from './components/tickets/recurring-tickets/recurring-tickets.component';
+import {RecurringTicketsHeaderComponent} from "./components/tickets/recurring-tickets/recurring-tickets-header/recurring-tickets-header.component";
+import {RecurringTicketsTableComponent} from "./components/tickets/recurring-tickets/recurring-tickets-table/recurring-tickets-table.component";
+import {RecurringTicketsEditAsideComponent} from "./components/tickets/recurring-tickets/recurring-tickets-edit-aside/recurring-tickets-edit-aside.component";
+import { DevicesRecurringTicketsComponent } from './components/tickets/recurring-tickets/devices-recurring-tickets/devices-recurring-tickets.component';
+import { TagsComponent } from './components/shared/tags/tags.component';
+import { IntervalComponent } from './components/shared/interval/interval.component';
+import { DurationComponent } from './components/shared/duration/duration.component';
+import { TehUsersComponent } from './components/shared/teh-users/teh-users.component';
+import { DurationFilterPipe } from './pipe/duration-filter.pipe';
 import { numberDirective } from './directives/number.directive';
+import { TextAreaDirective } from './directives/text-area.directive';
+import { DatePickerComponent } from './components/shared/date-picker/date-picker.component';
+
+
 /**
  * declare angular
  */
@@ -88,6 +104,9 @@ angular.module('quicktech')
   .directive(
     'quotePreviewComponent',
     downgradeComponent({component: QuotePreviewComponent}))
+  .directive(
+    'recurringTicketsComponent',
+    downgradeComponent({component: RecurringTicketsComponent}))
   .factory('ngZone', downgradeInjectable(NgZone));
 
 /**
@@ -126,7 +145,19 @@ angular.module('quicktech')
     LeftPanelBillingComponent,
     ToNumerPipe,
     ModalQuoteComponent,
-    numberDirective
+    RecurringTicketsComponent,
+    RecurringTicketsHeaderComponent,
+    RecurringTicketsEditAsideComponent,
+    RecurringTicketsTableComponent,
+    DevicesRecurringTicketsComponent,
+    TagsComponent,
+    IntervalComponent,
+    DurationComponent,
+    TehUsersComponent,
+    DurationFilterPipe,
+    numberDirective,
+    TextAreaDirective,
+    DatePickerComponent
   ],
   imports: [
     BrowserModule,
@@ -172,12 +203,19 @@ angular.module('quicktech')
           path: 'ng2/quotes/quote-preview',
           component: QuotePreviewComponent,
           pathMatch: 'full'
+        },
+        {
+          path: 'ng2/recurring-tickets',
+          component: RecurringTicketsComponent,
+          pathMatch: 'full'
         }
       ],
       {
         useHash: true,
         enableTracing: false
-      })
+      }),
+      CronEditorModule,
+      
   ],
   entryComponents: [
     LeftPanelComponent,
@@ -185,7 +223,8 @@ angular.module('quicktech')
     QuotesComponent,
     QuoteCreateComponent,
     QuotePreviewComponent,
-    PasswordManagerComponent
+    PasswordManagerComponent,
+    // RecurringTicketsComponent
   ],
   providers: [
     {

@@ -2432,11 +2432,13 @@
     font-size: 13px;
   }
   
+  .recurring-tickets-content__header--search .mobile-btn.new-link,
   .password-content__header--search .mobile-btn.new-link {
     background: transparent;
     font-size: 13px;
   }
   
+  .recurring-tickets-content__header,
   .password-content__header {
     position: fixed;
     width: 100vw;
@@ -2452,6 +2454,7 @@
     min-height: calc(100vh - 110px);
   }
   
+  .recurring-tickets-selected,
   .password-selected {
     background: #fff;
     border-radius: 6px;
@@ -2489,6 +2492,7 @@
     margin-bottom: 8px;
   }
   
+  .recurring-tickets-content__modal,
   .password-content__modal {
     width: 100vw;
     right: -100%;
@@ -2497,25 +2501,30 @@
     height: 100vh;
   }
   
+  .recurring-tickets-content__modal.open,
   .password-content__modal.open {
     right: 0;
     left: auto;
   }
   
+  .recurring-tickets-content__modal--footer,
   .password-content__modal--footer {
     margin-bottom: 0;
     padding: 0 40px;
   }
   
+  .recurring-tickets-content__modal,
   .password-content__modal {
     padding: 0;
   }
   
+  .recurring-tickets-content__modal--header,
   .password-content__modal--header {
     background-color: #27303f;
     padding: 16px 12px 16px 56px;
   }
   
+  .recurring-tickets-content__modal h3,
   .password-content__modal h3 {
     font-family: "Graphik Medium", sans-serif;
     font-size: 16px;
@@ -2527,6 +2536,7 @@
     margin-right: 0;
   }
   
+  .recurring-tickets-content__modal .close-modal,
   .password-content__modal .close-modal {
     left: 18px;
     top: 16px;

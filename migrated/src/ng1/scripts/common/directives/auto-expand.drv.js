@@ -11,6 +11,7 @@
         },
 
         link: function(scope, element, attr){
+        
             var update = function(){
                 element.css("height", "auto");
                 var height = element[0].scrollHeight;

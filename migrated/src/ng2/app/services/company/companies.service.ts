@@ -13,6 +13,7 @@ export class CompaniesService {
 
   private apiUrl = environment.apiUrl;
   public filteredCompanyUpdate: EventEmitter<any> = new EventEmitter();
+  
   public filteredCompany: {
     name: '',
     id: ''
@@ -51,5 +52,8 @@ export class CompaniesService {
   public getTechCompany() {
     return this.http.get(this.apiUrl + '/company/current');
   }
+
+
+  
 
 }

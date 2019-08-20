@@ -4,6 +4,7 @@ import * as SockJS from 'sockjs-client';
 import { UsersService } from "../users/users.service";
 import { CompaniesService } from "../company/companies.service";
 import { QuoteRealTimeService } from "../../components/billing/quotes/quote-realtime/quote-realtime.service";
+import { RecurringTicketsRealTimeService } from '../../components/tickets/recurring-tickets/services/recurring-tickets-real-time.service';
 
 /**
  * Websocket service to work with api
@@ -25,7 +26,10 @@ export class WebsocketService {
   constructor(
     private usersService: UsersService,
     private companiesService: CompaniesService,
-    private quoteRealTimeService: QuoteRealTimeService
+    private quoteRealTimeService: QuoteRealTimeService,
+    private recurringTicketsRealTimeService: RecurringTicketsRealTimeService
+
+    
   ) {
   }
 
@@ -36,6 +40,7 @@ export class WebsocketService {
     this.stompClient.connect({}, function() {
       that.subsribeToPermissions();
       that.subsribeToQuote();
+      that.subsribeToRecurringTickets();
     });
   }
 
@@ -61,6 +66,24 @@ export class WebsocketService {
         this.stompClient.subscribe(`/user/watch/saleQuotes/${res['id']}`, (message) => {
           var newChange = JSON.parse(message.body);
           this.quoteRealTimeService.handleRealTimeChanges(newChange);
+          if (message.body) {
+            console.log('test')
+          }
+        });
+      });
+    }, 3000);
+  }
+
+   /**
+   * subscribe to recurring tickets realtime
+   */
+  public subsribeToRecurringTickets() {
+    console.log('subsribeToRecurringTickets');
+    setTimeout(() => {
+      this.companiesService.getTechCompany().subscribe((res) => {
+        this.stompClient.subscribe(`/user/watch/recurringTickets/${res['id']}`, (message) => {
+          var newChange = JSON.parse(message.body);
+          this.recurringTicketsRealTimeService.handleRealTimeChanges(newChange);
           if (message.body) {
             console.log('test')
           }

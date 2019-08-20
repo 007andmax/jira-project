@@ -49,13 +49,21 @@
     right: 15px;
   }
   .icn-remove-old {
-    top: 15px !important;
+    top: 12px !important;
     right: 12px;
   }
   &.right {
     .dropdown-menu {
       left: auto !important;
       right: 0 !important;
+    }
+  }
+  &.with-icons {
+    .dropdown-item {
+      display: flex;
+      i {
+        margin-right: 10px;
+      }
     }
   }
 }
@@ -90,6 +98,7 @@
 }
 
 .date-picker {
+  overflow-x: hidden;
   position: relative;
   i {
     position: absolute;
@@ -104,77 +113,68 @@
   .dropdown-menu {
     border: none;
     box-shadow: 0 4px 20px 0 rgba(10, 45, 89, .1);
-    .ngb-dp-header,
-    .ngb-dp-weekdays {
-      background: #16a4fa;
-      color: #fff;
+  }
+  .ngb-dp-header,
+  .ngb-dp-weekdays {
+    background: #16a4fa;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    .small {
       font-size: 14px;
-      font-weight: bold;
-      .small {
-        font-size: 14px;
-        font-style: normal;
-      }
+      font-style: normal;
     }
-    .ngb-dp-weekdays {
-      pointer-events: none;
+  }
+  .ngb-dp-weekdays {
+    pointer-events: none;
+  }
+  .ngb-dp-month-name {
+    font-size: 14px;
+  }
+  .custom-select {
+    background: #16a4fa;
+    border: 1px solid #fff;
+    border-radius: 3px;
+    cursor: pointer;
+    outline: none;
+    &:first-child {
+      margin-right: 5px;
     }
-    .custom-select {
-      background: #16a4fa;
-      border: 1px solid #fff;
+  }
+  .btn.btn-link {
+    color: #fff;
+    min-width: 20px;
+    span {
+      margin-bottom: 2px;
+    }
+  }
+  .ngb-dp-day {
+    border: none;
+    outline: none;
+    div {
+      transition: all .3s;
       border-radius: 3px;
-      cursor: pointer;
-      outline: none;
-      &:first-child {
-        margin-right: 5px;
+      &:hover {
+        background: #e7ecf2;
       }
     }
-    .btn.btn-link {
-      color: #fff;
-      min-width: 20px;
-      span {
-        margin-bottom: 2px;
-      }
-    }
-    .ngb-dp-day {
-      border: none;
-      outline: none;
-      div, span {
-        transition: all .3s;
-        border-radius: 3px;
-        &:hover {
-          background: #e7ecf2;
-          color: #404b5f;
-        }
-      }
-      .bg-primary {
-        background: #16a4fa;
-        color: #fff;
-        &:hover {
-          background: #16a4fa;
-          color: #fff;
-        }
-      }
-      .custom-day {
-        text-align: center;
-        padding: 0.185rem 0.25rem;
-        display: inline-block;
-        height: 2rem;
-        width: 2rem;
-      }
-      .custom-day.range {
-        background-color: #16a4fa;
-        color: #fff;
-      }
-      .custom-day.faded {
-        background-color: #e7ecf2;
-        color: #404b5f;
-      }
-    }
-    .ngb-dp-month-name {
-      font-size: .875rem;
+    .bg-primary {
       background: #16a4fa;
-      color: #fff;
-      font-weight: bold;
+      &:hover {
+        background: #16a4fa;
+      }
+    }
+  }
+  .date-picker-actions {
+    padding: 10px 20px 20px;
+    button {
+      font-family: Graphik-Medium, sans-serif;
+      font-size: 11px;
+      padding: 0 5px;
+      height: 24px;
+      &:not(:last-child) {
+        margin-right: 10px;
+      }
     }
   }
 }

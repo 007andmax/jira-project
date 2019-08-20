@@ -4,6 +4,7 @@
   type="text"
   [(ngModel)]="selectedClient"
   class="pointer"
+  [ngClass]="(!valid) ? 'no-valid' : ''"
   [inputFormatter]="formatter"
   [resultFormatter]="formatter"
   [ngbTypeahead]="search"

@@ -29,6 +29,11 @@
   border-top-color: #9ca5b6;
 }
 
+.recurring-tickets-content__modal--content .loading.xs,
+.quotes__header--top .loading.xs {
+  top: -3px;
+}
+
 .loading-bg .loading {
   background: #ebebe4;
   z-index: 99;

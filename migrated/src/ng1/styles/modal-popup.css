@@ -1026,6 +1026,7 @@ _::-webkit-:not(:root:root),
 .ticket--header button,
 .company--header button,
 .product--header button,
+.recurring-tickets-content__modal button,
 .password-content__modal button{
   border: none;
   outline: none;
@@ -1069,6 +1070,7 @@ _::-webkit-:not(:root:root),
 .quote--content .tags-action {
   min-width: 100px;
   flex: 1;
+  padding-bottom: 10px;
 }
 
 .email--content .tags-wrap,
@@ -1693,6 +1695,7 @@ _::-webkit-:not(:root:root),
 
 .create-new .close-modal,
 .download-agent-modal .close-modal,
+.recurring-tickets-content__modal .close-modal,
 .password-content__modal .close-modal {
   width: 24px;
   height: 24px;

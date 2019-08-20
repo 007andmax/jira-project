@@ -5,7 +5,10 @@
        style="width: 23%;"
        *ngIf="!getMarkup(item)">
     <div class="light-dropdown">
-      <input type="text"
+        <app-services-list [editItem]="item"  [itemList]="servicesList"
+        (selectedServicesItem)="setItem($event, i, 'service')"></app-services-list>
+        <i class="icn-sm report-caret-icon"></i>
+    <!--  <input type="text"
              class="pointer"
              placeholder=""
              (click)="toggleShowDropDown(i)"
@@ -14,7 +17,7 @@
       <app-services-list
         *ngIf="isDropDownShow[i] && !getMarkup(item)"
         [itemList]="servicesList"
-        (selectedServicesItem)="setItem($event, i, 'service')"></app-services-list>
+        (selectedServicesItem)="setItem($event, i, 'service')"></app-services-list>-->
     </div>
   </div>
   <div class="col-md-2"
@@ -29,16 +32,21 @@
        style="width: 47%;"
        *ngIf="getMarkup(item)">
     <div class="product-dropdown-new-ng light-dropdown">
-      <input type="text"
+        <app-product-list [editItem]="item"  [itemList]="productList"
+        (selectedProductItem)="setItem($event, i, 'product')"></app-product-list>
+     <!-- <input type="text"
              class="pointer"
              placeholder=""
              (click)="toggleShowDropDown(i)"
-             [(ngModel)]="item.name || item.description ">
+             [(ngModel)]="item.name || item.description ">-->
       <i class="icn-sm report-caret-icon"></i>
-      <app-product-list
+     <!-- <app-product-list
         *ngIf="isDropDownShow[i] && getMarkup(item)"
         [itemList]="productList"
-        (selectedProductItem)="setItem($event, i, 'product')"></app-product-list>
+        (selectedProductItem)="setItem($event, i, 'product')"></app-product-list>-->
+
+       
+      
     </div>
   </div>
 

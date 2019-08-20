@@ -1,16 +1,16 @@
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
-import { MatChipInputEvent } from '@angular/material/chips';
-import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
+import {MatChipInputEvent} from '@angular/material/chips';
+import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 
-import { USER } from "../../../const/users";
-import { UsersService } from "../../users/users.service";
-import { QuoteStateService } from "../../../components/billing/quotes/quote-create/quote-state.service";
-import { QuoteService } from "../../quote/quote.service";
-import { takeUntil } from "rxjs/operators";
-import { Subject } from "rxjs";
+import {USER} from "../../../const/users";
+import {UsersService} from "../../users/users.service";
+import {QuoteStateService} from "../../../components/billing/quotes/quote-create/quote-state.service";
+import {QuoteService} from "../../quote/quote.service";
+import {takeUntil} from "rxjs/operators";
+import {Subject} from "rxjs";
 
 /**
  * Modal quote component
