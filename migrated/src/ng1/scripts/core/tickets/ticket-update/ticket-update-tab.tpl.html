@@ -154,7 +154,7 @@
                 Update &amp; Close
               </div>
               <div class="tooltip-update-close" ng-if="disabledWhenNoCompleted" uib-tooltip="You cannot close the ticket. It contains incomplete products / services." tooltip-placement="top"></div>
-         
+             
             </div>
           </div>
           <!--<div ng-include="'/html/scripts/core/tickets/ticket-update/update-submit.tpl.html'"></div>-->
@@ -261,7 +261,7 @@
                   Update &amp; Close
                 </div>
                 <div class="tooltip-update-close" ng-if="disabledWhenNoCompleted" uib-tooltip="You cannot close the ticket. It contains incomplete products / services." tooltip-placement="top"></div>
-         
+               
               </div>
             </div>
 
@@ -377,6 +377,8 @@
                 Update &amp; Close
               </div> 
               <div class="tooltip-update-close" ng-if="disabledWhenNoCompleted" uib-tooltip="You cannot close the ticket. It contains incomplete products / services." tooltip-placement="top"></div>
+              <div class="tooltip-update-close" ng-if="disabledFutureDatePicker" uib-tooltip="You cannot Update & Close ticket with future date service." tooltip-placement="top"></div>
+         
             </div>
           </div>
           <!--<div ng-include="'/html/scripts/core/tickets/ticket-update/update-submit.tpl.html'"></div>-->
