@@ -440,3 +440,15 @@
 .shared-user-add .checkbox {
   margin-left: 10px;
 }
+.tooltip-update-close {
+  position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 135px;
+    height: 40px;
+    cursor: pointer;
+    z-index: 999;
+}
+.btn-add-container {
+  position: relative;
+}

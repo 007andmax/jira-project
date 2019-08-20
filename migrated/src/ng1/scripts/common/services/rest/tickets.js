@@ -3,8 +3,8 @@
 (function (window, $, undefined) {
   var numberPrefix = 'Tkt# ';
   var services = angular.module('main.services');
-  services.factory('TicketsService', ['$http', '$rootScope', 'RealTimeService', 'Utils', 'quicktech.common.services.SharedStateService', '$timeout',
-    function ($http, $rootScope, RealTimeService, Utils, SharedStateService, $timeout) {
+  services.factory('TicketsService', ['$http', '$rootScope', 'RealTimeService', 'Utils', 'quicktech.common.services.SharedStateService', '$timeout','$filter',
+    function ($http, $rootScope, RealTimeService, Utils, SharedStateService, $timeout,$filter) {
       var scope = $rootScope.$new();
       var ticketChangedActions = ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH', 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_SHARE', 'MARKED_AS_SPAM', 'EDITED_TICKET'];
       var queries, loadingInProcess, lastListType, queriesForCompanyProfilePage;
@@ -73,6 +73,7 @@
       });
       var ticketsSharedState = SharedStateService.getSharedState('ticketsHeader');
       function getQueries(currentUserId) {
+   
         return {
           ALL: { excludeTrashSpam: true },
           UNASSIGNED: {
@@ -101,6 +102,13 @@
                     "path": "assignedUser.id",
                     "operator": "NULL",
                     "values": []
+                  },
+                  {  
+                    "path":"multiAssignedUsers.id",
+                    "operator":"IN",
+                    "values":[  
+                      currentUserId
+                    ]
                   }
                 ]
               },
@@ -243,6 +251,7 @@
       function fetchTickets(listType, userId, companyId, callback) {
         var query = queries[listType.toUpperCase()]
         // console.log(ticketsSharedState.filter, 'FILTER')
+        console.log('ticketsSharedState',ticketsSharedState);
         if(ticketsSharedState.filter.companyId || ticketsSharedState.filter.clientUserId || ticketsSharedState.filter.techUserId || (ticketsSharedState.filter.tags && ticketsSharedState.filter.tags.length)) {
           var groupedQuery = {
             excludeTrashSpam: true,
@@ -269,6 +278,7 @@
             //   ]
             // })
           }
+        
           if (ticketsSharedState.filter.tags && ticketsSharedState.filter.tags.length > 0) {
             var tagsQuery = {
               "path": "tags.id",
@@ -283,9 +293,11 @@
               operator: 'EQ',
               values: [ticketsSharedState.filter.clientUserId]
             };
+           
             groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(userIdQuery);
           }
           if(ticketsSharedState.filter.techUserId) {
+          
             var techUserIdQuery = {
               path: 'assignedUser.id',
               operator: 'EQ',
@@ -323,6 +335,7 @@
             }]
           });
         }
+        console.log('listType',listType);
         loadMore(listType, callback);
       }
       function loadMore(listType, callback) {
@@ -333,6 +346,7 @@
         if (storage.lastParams) {
           storage.lastParams.offset = storage.tickets.length;
         }
+        console.log('storage.lastParams',storage.lastParams);
         // storage.lastParams.offset = 14;
         loadingInProcess = true;
         $http.post('/v2/tickets/getTickets', storage.lastParams, { params: { listType: listType } }).then(function (resp) {
@@ -435,8 +449,27 @@
             var update = Utils.findById(ticket.updates, newChange.data.id),
               attachments = newChange.data.attachments;
             if (update) {
+            
+                  newChange.data.products.forEach(function (product) {
+                    product.date = $filter('date')(product.date, 'd MMM yyyy');
+                  })
+              
+              
+                  newChange.data.services.forEach(function (service) {
+                    service.date = $filter('date')(service.date, 'd MMM yyyy');
+                  })
+                
+          
               Utils.customizeObj(newChange.data, update);
             } else {
+              newChange.data.products.forEach(function (product) {
+                product.date = $filter('date')(product.date, 'd MMM yyyy');
+              })
+          
+          
+              newChange.data.services.forEach(function (service) {
+                service.date = $filter('date')(service.date, 'd MMM yyyy');
+              })
               update = Utils.customizeObj(newChange.data);
               ticket.updates.unshift(update);
             }
@@ -792,7 +825,16 @@
           }
           storage.ticketsQuantityCallback && storage.ticketsQuantityCallback(storage.ticketsQuantity);
         } else if (ticketChangedActions.indexOf(newChange.action) > -1) {
+          console.log('newChange',newChange.data);
           var isUpdate = newChange.action === 'EDITED_TICKET';
+          /*newChange.data.products.forEach(function (product) {
+            product.date = $filter('date')(product.date, 'd MMM yyyy');
+          })
+      
+      
+          newChange.data.services.forEach(function (service) {
+            service.date = $filter('date')(service.date, 'd MMM yyyy');
+          })*/
           var global = globalSearch.count;
           if (storage.openedTicket && newChange.data.id === storage.openedTicket.id) {
             Utils.customizeObj(newChange.data, storage.openedTicket);

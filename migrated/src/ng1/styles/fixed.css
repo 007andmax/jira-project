@@ -932,22 +932,60 @@ aside#left div.nav-title {
 .timer-quantity .time_drop_down {
   position: absolute;
   display: none;
-  left: 10px;
+  left: 2px;
   top: 48px !important;
+}
+
+.timer-quantity .time_drop_down.minutes_drop_down {
+  left: 6px;
+}
+
+.added-by {
+  position: absolute;
+  left: 60px;
+  top: 8px;
+  font-family: Graphik-Regular, sans-serif;
+}
+
+.note-upd .added-by {
+  left: 46px;
+}
+
+.product-upd .added-by {
+  left: 66px;
+}
+
+.note-upd--edit-actions {
+  position: absolute;
+  right: -4px;
+  top: -12px;
+  display: flex;
+}
+
+.note-upd--edit-actions .icn-label-save-dashboard {
+  margin: 0 10px 2px 0;
+}
+
+.is-completed {
+  color: #2ec866;
+  font-size: 11px;
+  width: 100%;
+  margin-left: 32px;
+  padding: 0;
 }
 
 .ticket-add-service-content .timer-quantity .time_drop_down {
   position: absolute;
   display: none;
-  left: 10px;
-  top: -380px !important;
+  left: 0;
+  top: -313px !important;
 }
 
 .ticket-add-service-content .timer-quantity .minutes_drop_down {
   position: absolute;
   display: none;
   left: 10px;
-  top: -170px !important;
+  top: -142px !important;
 }
 
 .ticket-add-service-content .timer-quantity .minutes_drop_down.FIVE_MINUTES {
@@ -987,7 +1025,7 @@ aside#left div.nav-title {
 }
 
 .timer-quantity .time_drop_down li a {
-  border: solid #ffffff;
+  /*border: solid #ffffff;*/
   text-decoration: none;
   padding: 5px 10px;
   background: #ffffff;
@@ -2304,29 +2342,57 @@ span.sort-span {
   border-radius: 4px;
 }
 
-.ticket-settings-actions .dropdown-menu li:hover {
+.ticket-settings-actions .dropdown-menu li:hover,
+.table-content-bottom .action-update .more-dropdown .dropdown-menu li:hover {
   background-color: #16a4fa;
+  color: #ffffff;
 }
 
 .ticket-settings-actions .dropdown-menu li:hover a {
   color: #ffffff;
 }
 
-.ticket-settings-actions .dropdown-menu li a {
+.ticket-update-service-edit .col-md-1 > .col-md-1:first-child {
+  padding: 0 5px 0 0;
+  width: 50%;
+}
+
+.ticket-update-service-edit .col-md-1 > .col-md-1:last-child {
+  padding: 0 0 0 5px;
+  width: 50%;
+}
+
+.table-content-bottom .action-update .dropdown-menu,
+.ticket-update-content .action-update .dropdown-menu {
+  right: 0;
+}
+
+.ticket-settings-actions .dropdown-menu li a,
+.ticket-update-content .action-update .more-dropdown .dropdown-menu li,
+.table-content-bottom .action-update .more-dropdown .dropdown-menu li {
   padding: 9px 20px 9px 50px !important;
   font-size: 13px;
 }
 
-.ticket-settings-actions .dropdown-menu li a {
+.ticket-settings-actions .dropdown-menu li a,
+.ticket-update-content .action-update .dropdown-menu li,
+.table-content-bottom .action-update .dropdown-menu li {
   position: relative;
   transition: all .3s;
+  cursor: pointer;
+}
+
+.mob-ticket-content .is-completed {
+  margin-left: 28px;
 }
 
 .ticket-settings-actions .dropdown-menu li {
   transition: all .3s;
 }
 
-.ticket-settings-actions .dropdown-menu li a:before {
+.ticket-settings-actions .dropdown-menu li a:before,
+.ticket-update-content .action-update .more-dropdown .dropdown-menu li:before,
+.table-content-bottom .action-update .more-dropdown .dropdown-menu li:before {
   position: absolute;
   content: '';
   width: 16px;
@@ -2362,6 +2428,18 @@ span.sort-span {
   border-bottom-left-radius: 4px;
 }
 
+.ticket-update-content .action-update .more-dropdown .dropdown-menu li:first-child:before,
+.table-content-bottom .action-update .more-dropdown .dropdown-menu li:first-child:before {
+  background: url("../images/new-icons/edit-final.png");
+  background-size: cover;
+}
+
+.ticket-update-content .action-update .more-dropdown .dropdown-menu li:last-child:before,
+.table-content-bottom .action-update .more-dropdown .dropdown-menu li:last-child:before {
+  background: url("../images/new-icons/remove-final.png");
+  background-size: cover;
+}
+
 .ticket-settings-actions .dropdown-menu li .dropdown-submenu-wrapper {
   top: -6px;
 }
@@ -2392,4 +2470,35 @@ span.sort-span {
 .no-ticket-updates img {
   display: block;
   margin: 0 auto;
+}
+
+.ticket-update .shared-avatars{
+  height: 24px;
+  margin: 0 16px 0 8px
+}
+
+.ticket-update .shared-avatars img,
+.ticket-update .shared-avatars .default-user-avatar,
+.mob-ticket-content .shared-avatar img,
+.mob-ticket-content .shared-avatar .default-user-avatar{
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.ticket-update .shared-avatars .default-user-avatar span,
+.mob-ticket-content .shared-avatar .default-user-avatar span {
+  font-size: 11px;
+}
+
+.ticket-update .action-update .assign-ticket-content .assign-ticket-header {
+  display: none;
+}
+
+.ticket-update .action-update .assign-ticket-content .scroll-pane {
+  margin: 0;
+}
+
+.ticket-update .action-update .dropdown-assign-ticket.fixed-assign .users-list {
+  max-height: 220px;
 }

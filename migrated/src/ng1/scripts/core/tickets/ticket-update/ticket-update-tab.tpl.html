@@ -1,6 +1,5 @@
 <div ng-form="ticketUpdateForm" ng-controller="quicktech.core.tickets.ticketUpdateTabCtrl">
 
-
   <div class="ticket-post-update-wrapper">
     <div class="create-updates-header">
       <img ng-src="{{ getUserAvatarUrl(user) }}" alt="...">
@@ -142,7 +141,7 @@
 
               </div>
             </div>
-            <div class="df">
+            <div class="df btn-add-container">
               <div class="btn btn-success btn-new"
                    custom-disabled="{{ (!haveNote() && !haveAttachments() && isCurrentTab('NOTE')) || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
                    ng-click="saveTicketUpdate(ticketUpdateForm)">
@@ -150,10 +149,12 @@
               </div>
               <div ng-show="TicketsPermissionsService.isActionVisible('update_and_close', ticketDetails)"
                    class="btn btn-primary btn-new btn-update"
-                   custom-disabled="{{ ticketDetails.status === 'COMPLETED' || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
+                   custom-disabled="{{ disabledWhenNoCompleted || ticketDetails.status === 'COMPLETED' || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
                    ng-click="updateAndCloseTicket(ticketUpdateForm)">
                 Update &amp; Close
               </div>
+              <div class="tooltip-update-close" ng-if="disabledWhenNoCompleted" uib-tooltip="You cannot close the ticket. It contains incomplete products / services." tooltip-placement="top"></div>
+             
             </div>
           </div>
           <!--<div ng-include="'/html/scripts/core/tickets/ticket-update/update-submit.tpl.html'"></div>-->
@@ -247,7 +248,7 @@
 
                 </div>
               </div>
-              <div class="df">
+              <div class="df btn-add-container">
                 <div class="btn btn-success btn-new"
                      custom-disabled="{{ (!haveNote() && !haveAttachments() && isCurrentTab('NOTE')) || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
                      ng-click="saveTicketUpdate(ticketUpdateForm)">
@@ -255,10 +256,12 @@
                 </div>
                 <div ng-show="TicketsPermissionsService.isActionVisible('update_and_close', ticketDetails)"
                      class="btn btn-primary btn-new btn-update"
-                     custom-disabled="{{ ticketDetails.status === 'COMPLETED' || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
+                     custom-disabled="{{ disabledWhenNoCompleted || ticketDetails.status === 'COMPLETED' || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
                      ng-click="updateAndCloseTicket(ticketUpdateForm)">
                   Update &amp; Close
                 </div>
+                <div class="tooltip-update-close" ng-if="disabledWhenNoCompleted" uib-tooltip="You cannot close the ticket. It contains incomplete products / services." tooltip-placement="top"></div>
+               
               </div>
             </div>
 
@@ -361,7 +364,7 @@
 
               </div>
             </div>
-            <div class="df">
+            <div class="df btn-add-container">
               <div class="btn btn-success btn-new"
                    custom-disabled="{{ (!haveNote() && !haveAttachments() && isCurrentTab('NOTE')) || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
                    ng-click="saveTicketUpdate(ticketUpdateForm)">
@@ -369,10 +372,13 @@
               </div>
               <div ng-show="TicketsPermissionsService.isActionVisible('update_and_close', ticketDetails)"
                    class="btn btn-primary btn-new btn-update"
-                   custom-disabled="{{ ticketDetails.status === 'COMPLETED' || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
-                   ng-click="updateAndCloseTicket(ticketUpdateForm)">
+                   custom-disabled="{{ disabledWhenNoCompleted || disabledFutureDatePicker || ticketDetails.status === 'COMPLETED' || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
+                   ng-click="updateAndCloseTicket(ticketUpdateForm)"  >
                 Update &amp; Close
-              </div>
+              </div> 
+              <div class="tooltip-update-close" ng-if="disabledWhenNoCompleted" uib-tooltip="You cannot close the ticket. It contains incomplete products / services." tooltip-placement="top"></div>
+              <div class="tooltip-update-close" ng-if="disabledFutureDatePicker" uib-tooltip="You cannot Update & Close ticket with future date service." tooltip-placement="top"></div>
+         
             </div>
           </div>
           <!--<div ng-include="'/html/scripts/core/tickets/ticket-update/update-submit.tpl.html'"></div>-->
@@ -386,7 +392,9 @@
   </div>
 
 
-  <div class="mob-ticket-create-updates" ng-if="isMobileUpdateShown" ng-class="{ opened: isMobileUpdateShown }"
+  <div class="mob-ticket-create-updates"
+       ng-if="isMobileUpdateShown"
+       ng-class="{ opened: isMobileUpdateShown }"
        ng-init="setMobileForm(ticketUpdateForm)">
     <div class="create-updates-header">
       <img ng-src="{{ getUserAvatarUrl(user) }}" alt="...">
@@ -467,7 +475,7 @@
                    step="0.01"
                    ng-readonly="!PermissionsService.isAllowed('MANAGE_PRODUCTS')" />
           </div>
-          <div class="col-xs-6 mob-qty-input" ng-class="{'has-error': isShowingErrors(addProductForm, 'productQty')}">
+          <div class="col-xs-6 mob-qty-input pr-10" ng-class="{'has-error': isShowingErrors(addProductForm, 'productQty')}">
 
             <input uib-tooltip="Qty"
                    tooltip-placement="top"
@@ -493,7 +501,7 @@
                    step="0.01"
                    hard-reset-required="true" />
           </div>
-          <div class="col-xs-6 mob-disc-input"
+          <div class="col-xs-6 mob-disc-input pr-10"
                ng-class="{'has-error': isShowingErrors(addProductForm, 'discountAmount')}">
             <input maxlength="3"
                    type="text"
@@ -549,7 +557,7 @@
                 >
               </div>
             </div>
-            <div ng-if="!hideInputs" class="col-xs-6 mob-timer" service-quantity-picker="serviceToEdit[0].quantity"
+            <div ng-if="!hideInputs" class="col-xs-6 mob-timer pr-10" service-quantity-picker="serviceToEdit[0].quantity"
                  sqp-is-show-format="false"
                  ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceTime')}">
               <input uib-tooltip="Hr(s) : Min(s)" tooltip-placement="top"
@@ -561,7 +569,7 @@
             </div>
             <div ng-if="!hideInputs" class="col-xs-6" data-date-picker ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceData')}">
               <input type="text" class="has-dropdown" placeholder="Date" readonly
-                     qt-data-time-picker max-date="maxServiceDate" ng-model="serviceToEdit[0].date"
+                     qt-data-time-picker   ng-model="serviceToEdit[0].date"
                      name="serviceData" ng-required="true" uib-tooltip="select date">
               <i class="new-calendar"></i>
             </div>

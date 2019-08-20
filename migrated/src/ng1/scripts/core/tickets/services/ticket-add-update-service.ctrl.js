@@ -23,7 +23,24 @@
           $scope.$on('hideTimepicker', function(event, data) {
             if (data) { $scope.showTimePicker = false };
           });
-
+          $scope.$watch(function () {
+            if ($scope.serviceExpense && $scope.serviceExpense.date != undefined) return $scope.serviceExpense.date;
+          }, function (value) {
+            if ($scope.serviceExpense.date) {
+         
+              var date = new Date(value);
+              var currentDate = new Date();
+              if (date.getFullYear() <= currentDate.getFullYear() && date.getMonth() <= currentDate.getMonth() && date.getDate() <= currentDate.getDate())  {
+           
+              $rootScope.$broadcast('setBlockUpdateAndClosed', false);
+              } else {
+           
+                $rootScope.$broadcast('setBlockUpdateAndClosed', true);
+           
+              }
+            }
+       
+          });
 
           $scope.getMinutes = function () {
             var result = {};

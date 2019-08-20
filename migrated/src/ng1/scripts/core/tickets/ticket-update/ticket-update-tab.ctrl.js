@@ -126,7 +126,7 @@
             console.log()
           });
 
-
+       
           $scope.$watch('ticketUpdate', function(val) {
             if (!$scope.editExpense) {
               $scope.updateNote = $scope.ticketUpdate;
@@ -179,7 +179,7 @@
                   }
                 }
 
-                if ($scope.serviceToEdit[0].date) {
+                if ($scope.serviceToEdit &&  $scope.serviceToEdit[0].date) {
                   $scope.serviceToEdit[0].date = $filter('date')($scope.serviceToEdit[0].date, 'dd MMM yyyy');
 
                 }
