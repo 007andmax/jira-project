@@ -149,7 +149,7 @@
               </div>
               <div ng-show="TicketsPermissionsService.isActionVisible('update_and_close', ticketDetails)"
                    class="btn btn-primary btn-new btn-update"
-                   custom-disabled="{{ ticketDetails.status === 'COMPLETED' || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
+                   custom-disabled="{{ disabledWhenNoCompleted || ticketDetails.status === 'COMPLETED' || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
                    ng-click="updateAndCloseTicket(ticketUpdateForm)">
                 Update &amp; Close
               </div>
@@ -254,7 +254,7 @@
                 </div>
                 <div ng-show="TicketsPermissionsService.isActionVisible('update_and_close', ticketDetails)"
                      class="btn btn-primary btn-new btn-update"
-                     custom-disabled="{{ ticketDetails.status === 'COMPLETED' || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
+                     custom-disabled="{{ disabledWhenNoCompleted || ticketDetails.status === 'COMPLETED' || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
                      ng-click="updateAndCloseTicket(ticketUpdateForm)">
                   Update &amp; Close
                 </div>
@@ -368,7 +368,7 @@
               </div>
               <div ng-show="TicketsPermissionsService.isActionVisible('update_and_close', ticketDetails)"
                    class="btn btn-primary btn-new btn-update"
-                   custom-disabled="{{ disabledFutureDatePicker || ticketDetails.status === 'COMPLETED' || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
+                   custom-disabled="{{ disabledWhenNoCompleted || disabledFutureDatePicker || ticketDetails.status === 'COMPLETED' || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
                    ng-click="updateAndCloseTicket(ticketUpdateForm)">
                 Update &amp; Close
               </div> 

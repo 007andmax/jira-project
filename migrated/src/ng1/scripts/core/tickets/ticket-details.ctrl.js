@@ -25,6 +25,7 @@
           $scope.ticketSharedUsersList = [];
           $scope.disabledWhenLoadAttachment = false;
          $scope.disabledFutureDatePicker = false;
+         $scope.disabledWhenNoCompleted = false;
           $scope.autocompleteData = ProductsService.getFullListForAutocomplete($scope);
           $scope.tagColors = TagsService.getColors();
           var today = new Date();
@@ -57,6 +58,8 @@
               UserNotificationService.show('The ticket update containing a product has been modified', true);
 
               $scope.setEditExpenseId();
+              $scope.disabledWhenNoCompleted = (!$scope.checkCompleted()) ? true : false;
+
           });
           }
           $scope.updateService = function (data) {
@@ -65,6 +68,7 @@
               UserNotificationService.show('The ticket update containing a product has been modified', true);
 
               $scope.setEditExpenseId();
+              $scope.disabledWhenNoCompleted = (!$scope.checkCompleted()) ? true : false;
           });
           }
         /*  $scope.modalEditDate = function (item,editType) {
@@ -84,7 +88,7 @@
             document.body.querySelector('.modal-ticket-edit-user').style.display = 'none';
           }*/
           $rootScope.$on('onChangeServiceDate', function (evt, val) {
-            console.log('onChangeServiceDate', updateService);
+          
             if (updateService) return;
             updateService = true;
             var service_gl = null;
@@ -104,7 +108,7 @@
               }
 
             })
-            console.log('service', service_gl);
+           
             if (!service_gl) return;
             var editVersionedId = service_gl.item.versionedId;
             var serviceDate = new Date(val.date);
@@ -134,7 +138,7 @@
 
           });
           $rootScope.$on('onChangeProductDate', function (evt, val) {
-            console.log('onChangeProduct');
+         
             if (updateProduct) return;
             updateProduct = true;
             var product_gl = null;
@@ -148,7 +152,7 @@
                     product_gl = product_item;
                    
                     product_gl.date = $filter('date')(val.date, 'd MMM yyyy');
-                    console.log('find');
+                  
 
                   }
                 })
@@ -181,10 +185,10 @@
 
           });
           $rootScope.$on('onChangeProduct', function (evt, val) {
-            console.log('onChangeProduct');
+           
             if (updateProduct) return;
             updateProduct = true;
-            console.log('val', val);
+         
             var product_gl = null;
             let id = null;
             $scope.ticketDetails.updates.forEach(function (item) {
@@ -195,7 +199,7 @@
                     id = item.id;
                     product_gl = product_item;
                     product_item.user = val.item;
-                    console.log('find');
+                  
 
                   }
                 })
@@ -272,9 +276,7 @@ console.log('find');
           });
           $scope.onCompletedChange = function (item,type,id) {
 
-            console.log('item', item);
-            console.log('scrope', $scope);
-            console.log('ggg', $scope.ticketUpdateForm);
+         
             var id_update = null;
             $scope.ticketDetails.updates.forEach(function (update) {
               if (update.type == type && type == "SERVICE") {
@@ -358,6 +360,25 @@ console.log('find');
           $rootScope.closeTicket = function() {
             window.location.href = window.location.href.split('/').slice(0, -1).join('/');
           }
+          $scope.checkCompleted = function () {
+            var check = true;
+            $scope.ticketDetails.updates.forEach(function(item) {
+              if (item.type == "PRODUCT") {
+                item.products.forEach(function (product) {
+                  if (!product.completed) check = false;
+                })
+            
+              }
+              if (item.type =="SERVICE") {
+                item.services.forEach(function (service) {
+                  if (!service.completed) check = false;
+                })
+              }
+         
+
+            });
+            return check;
+          }
           $rootScope.isTicketOpened = true;
           $scope.$on('$destroy', function() {
             $rootScope.isTicketOpened = false;
@@ -408,7 +429,9 @@ console.log('find');
 
             });
             $scope.ticketDetails = details;
-         
+     
+          $scope.disabledWhenNoCompleted = (!$scope.checkCompleted()) ? true : false;
+       
             if (isFromRemote) {
               ServicesService.getAllByCompany($scope, details.company.id, function (resp) {
                 $scope.ticketUpdate.services[0].item = resp.find(function (service) {
@@ -1048,7 +1071,8 @@ console.log('find');
               }
               TicketsService.createTicketUpdate(ticketUpdateToSend, close || false, function () {
                 $scope.isSavingUpdate = false;
-                if (callback) callback()
+                if (callback) callback();
+                $scope.disabledWhenNoCompleted = (!$scope.checkCompleted()) ? true : false;
                 if (!disableRestoringDefaults) {
                   switch (ticketUpdateToSend.type) {
                     case 'NOTE':
