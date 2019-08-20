@@ -141,7 +141,7 @@
 
               </div>
             </div>
-            <div class="df">
+            <div class="df btn-add-container">
               <div class="btn btn-success btn-new"
                    custom-disabled="{{ (!haveNote() && !haveAttachments() && isCurrentTab('NOTE')) || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
                    ng-click="saveTicketUpdate(ticketUpdateForm)">
@@ -153,6 +153,8 @@
                    ng-click="updateAndCloseTicket(ticketUpdateForm)">
                 Update &amp; Close
               </div>
+              <div class="tooltip-update-close" ng-if="disabledWhenNoCompleted" uib-tooltip="You cannot close the ticket. It contains incomplete products / services." tooltip-placement="top"></div>
+         
             </div>
           </div>
           <!--<div ng-include="'/html/scripts/core/tickets/ticket-update/update-submit.tpl.html'"></div>-->
@@ -246,7 +248,7 @@
 
                 </div>
               </div>
-              <div class="df">
+              <div class="df btn-add-container">
                 <div class="btn btn-success btn-new"
                      custom-disabled="{{ (!haveNote() && !haveAttachments() && isCurrentTab('NOTE')) || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
                      ng-click="saveTicketUpdate(ticketUpdateForm)">
@@ -258,6 +260,8 @@
                      ng-click="updateAndCloseTicket(ticketUpdateForm)">
                   Update &amp; Close
                 </div>
+                <div class="tooltip-update-close" ng-if="disabledWhenNoCompleted" uib-tooltip="You cannot close the ticket. It contains incomplete products / services." tooltip-placement="top"></div>
+         
               </div>
             </div>
 
@@ -360,7 +364,7 @@
 
               </div>
             </div>
-            <div class="df">
+            <div class="df btn-add-container">
               <div class="btn btn-success btn-new"
                    custom-disabled="{{ (!haveNote() && !haveAttachments() && isCurrentTab('NOTE')) || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
                    ng-click="saveTicketUpdate(ticketUpdateForm)">
@@ -369,9 +373,10 @@
               <div ng-show="TicketsPermissionsService.isActionVisible('update_and_close', ticketDetails)"
                    class="btn btn-primary btn-new btn-update"
                    custom-disabled="{{ disabledWhenNoCompleted || disabledFutureDatePicker || ticketDetails.status === 'COMPLETED' || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
-                   ng-click="updateAndCloseTicket(ticketUpdateForm)">
+                   ng-click="updateAndCloseTicket(ticketUpdateForm)"  >
                 Update &amp; Close
               </div> 
+              <div class="tooltip-update-close" ng-if="disabledWhenNoCompleted" uib-tooltip="You cannot close the ticket. It contains incomplete products / services." tooltip-placement="top"></div>
             </div>
           </div>
           <!--<div ng-include="'/html/scripts/core/tickets/ticket-update/update-submit.tpl.html'"></div>-->
