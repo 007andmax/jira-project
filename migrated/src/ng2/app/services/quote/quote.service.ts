@@ -2,7 +2,13 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 import {QuoteStateService} from "../../components/billing/quotes/quote-create/quote-state.service";
+import { catchError, tap } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+import { QuoteResult } from '../../components/billing/quotes/class/quote-result';
 
+/**
+ * Quote service to work with api
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -20,13 +26,24 @@ export class QuoteService {
   private amount = 'AMOUNT_DESC';
   private deposit = 'DEPOSIT_DESC';
   private sortType = null;
+ 
 
+  /**
+   * Product api service constructor
+   * @param {HttpClient} http Service to work with request
+   * @param {QuoteStateService} quoteStateService  Service to work with quote state
+   */
   constructor(
     private http: HttpClient,
     private quoteStateService: QuoteStateService
   ) {}
 
-   public createQuote(value, notification) {
+  /**
+   * Create quote
+   * @param value - quote info
+   * @param notification - quote notification info
+   */
+  public createQuote(value, notification) {
     this.itemsListArray = this.quoteStateService.getItemArray();
     this.productsArray = this.getProductItems(this.itemsListArray, 'product');
     this.servicesArray = this.getProductItems(this.itemsListArray, 'service',true);
@@ -47,21 +64,26 @@ export class QuoteService {
       "validUntil": this.getMsDate(value.endDate),
       "date": this.getMsDate(value.startDate),
       "recipients": this.quoteStateService.getUsersEmail() ? this.quoteStateService.getUsersEmail() : [],
-      "message": notification? this.quoteStateService.getQuoteCreate()['message'] : 'null',
-      "subject": notification? this.quoteStateService.getQuoteCreate()['subject'] : 'null',
+      "message": notification? this.quoteStateService.getQuoteCreate()['message'] : null,
+      "subject": notification? this.quoteStateService.getQuoteCreate()['subject'] : null,
       "globalNote": value.globalNote ? value.globalNote : this.quoteStateService.getGlobalNote(),
       "regularNote": value.regularNote ? value.regularNote : this.quoteStateService.getSelectedNote(),
       "sendNotification":notification
-    })
+    }).pipe(
+      tap(data => this.handleQuoteSent(data,(notification) ? 'Quote has been sent' : 'Quote has been saved')),  
+      catchError(this.handleError));
   }
 
+  /**
+   * Edit quote
+   * @param value - quote info
+   * @param quoteId - quote id
+   * @param notification - quote notification info
+   */
   public editQuote(value, quoteId, notification) {
-    console.log(1111);
     this.itemsListArray = this.quoteStateService.getItemArray();
     this.productsArray = this.getProductItems(this.itemsListArray, 'product');
     this.servicesArray = this.getProductItems(this.itemsListArray, 'service',true);
-    console.log(this.productsArray, 'this.productsArray');
-    console.log(this.servicesArray, 'this.servicesArray');
     return this.http.put(`${this.apiUrl}saleQuotes/${quoteId}` ,{
       "companyId": (value.client && value.client.item) ? value.client.item.id : value.client.id,
       "number": this.quoteStateService.getQuoteNumber(),
@@ -80,14 +102,21 @@ export class QuoteService {
       "validUntil": this.getMsDate(value.endDate),
       "date": this.getMsDate(value.startDate),
       "recipients": this.quoteStateService.getUsersEmail() ? this.quoteStateService.getUsersEmail() : [],
-      "message": notification? this.quoteStateService.getQuoteCreate()['message'] : 'null',
-      "subject": notification? this.quoteStateService.getQuoteCreate()['subject'] : 'null',
+      "message": notification? this.quoteStateService.getQuoteCreate()['message'] : null,
+      "subject": notification? this.quoteStateService.getQuoteCreate()['subject'] : null,
       "globalNote": value.globalNote ? value.globalNote : this.quoteStateService.getGlobalNote(),
       "regularNote": value.regularNote ? value.regularNote : this.quoteStateService.getSelectedNote(),
       "sendNotification": notification
-    })
+    }).pipe(
+      tap(data => this.handleQuoteSent(data,'Quote has been saved')),  
+      catchError(this.handleError));
   }
 
+  /**
+   * Resend quote
+   * @param item - item list
+   * @param recipients - users list
+   */
   public resend(item,recipients) {
     this.productsArray = this.getProductItems([...item.products], 'product');
     this.servicesArray = this.getProductItems([...item.services], 'service');
@@ -114,33 +143,64 @@ export class QuoteService {
       "globalNote": item.globalNote,
       "regularNote": item.regularNote,
       "sendNotification": true
-    })
+    }).pipe(
+      tap(data => this.handleQuoteSent(data,'Quote has been sent')),  
+      catchError(this.handleError));
   }
 
+  /**
+   * Repaet send
+   * @param quoteId - quote Id
+   */
   public repeatSend(quoteId) {
-    return this.http.post(`${this.apiUrl}saleQuotes/${quoteId}/send`, {});
+    return this.http.post(`${this.apiUrl}saleQuotes/${quoteId}/send`, {}).pipe(
+      tap(data => data), 
+      catchError(this.handleError));
   }
 
-  getQuoteNumber() {
-    return this.http.get(this.apiUrl + `data/actualNumber?type=SALE_QUOTE`)
+  /**
+   * Get quote number
+   */
+  public getQuoteNumber() {
+    return this.http.get(this.apiUrl + `data/actualNumber?type=SALE_QUOTE`).pipe(
+      tap(data => data), 
+      catchError(this.handleError));
   }
 
-  getQuoteNote() {
-    return this.http.get(this.apiUrl + `invoice/invoiceNote/getAll`);
+  /**
+   * Get quote note
+   */
+  public getQuoteNote() {
+    return this.http.get(this.apiUrl + `invoice/invoiceNote/getAll`).pipe(
+      tap(data => data), 
+      catchError(this.handleError));
   }
 
-  getMsDate(value) {
+  /**
+   * Get time in ms
+   */
+  public getMsDate(value) {
     const date = new Date(`${value.year}/${value.month}/${value.day}` );
     return date.getTime()
   }
 
-  getServiceList(clientCompanyId) {
-    return this.http.get(this.apiUrl + `services/${clientCompanyId}`);
+  /**
+   * Get services list
+   * @param clientCompanyId - client company id
+   */
+  public getServiceList(clientCompanyId) {
+    return this.http.get(this.apiUrl + `services/${clientCompanyId}`).pipe(
+      tap(data => data), 
+      catchError(this.handleError));
   }
 
-  getProductItems(itemsAray, type, onInitSaveOrCreate = false) {
-    console.log(itemsAray, 'itemsAray');
-    console.log(type, 'service');
+  /**
+   * Get product items by type
+   * @param itemsAray - items array
+   * @param type - item type
+   * @param onInitSaveOrCreate - onInitSaveOrCreate
+   */
+  public getProductItems(itemsAray, type, onInitSaveOrCreate = false) {
     if (type === 'service') {
       itemsAray = itemsAray.filter((item) => item.hasOwnProperty('rate'));
       return itemsAray.map((item, index) => {
@@ -173,8 +233,13 @@ export class QuoteService {
     }
   }
 
-  getQuotes(data) {
-    data.type && this.getSortType(data.type);
+  /**
+   * Get quote object
+   * @param data - quote info
+   */
+  public getQuotes(data) {
+    //data.type && this.getSortType(data.type);
+    console.log('this.sortType',this.sortType);
     return this.http.post(this.apiUrl + 'saleQuotes/search', {
       "companyName": data.company || null,
       "quoteNumber": data.number || null,
@@ -184,49 +249,123 @@ export class QuoteService {
       "sortBy": this.sortType || 'DATE_DESC',
       "offset": this.offset * data.page,
       "limit": this.offset
-    })
+    }).pipe(
+      tap(data => data), 
+      catchError(this.handleError));
   }
 
-  convertToInvoice(company, quote_id) {
+  /**
+   * Convert quote to invoice
+   * @param company - company info
+   * @param quote_id - quote id
+   */
+  public convertToInvoice(company, quote_id) {
     return this.http.post(this.apiUrl +
       `saleQuotes/convertToInvoice?companyId=${company.companyInfo.id}
       &billTo=${company.companyInfo.addresses[0].id}
       &shipTo=${company.companyInfo.addresses[0].id}`,
-      [quote_id])
+      [quote_id]).pipe(
+        tap(data => data), 
+        catchError(this.handleError));
   }
 
-  convertToTicket(company, quote_id) {
+  /**
+   * Convert quote to ticket
+   * @param company - company info
+   * @param quote_id - quote id
+   */
+  public convertToTicket(company, quote_id) {
     return this.http.post(this.apiUrl +
       `saleQuotes/convertToTicket?companyId=${company.id}`,
-      [quote_id])
+      [quote_id]).pipe(
+        tap(data => data), 
+        catchError(this.handleError));
   }
 
-  approveQuote(company, quoteId) {
-    console.log(quoteId, 'quoteId');
+  /**
+   * Approve quote
+   * @param company - company info
+   * @param quoteId - quote id
+   */
+  public approveQuote(company, quoteId) {
     return this.http.post(this.apiUrl +
       `saleQuotes/approveQuote?companyId=${company.id}`, [quoteId]
-    )
+    ).pipe(
+      tap(data => this.handleQuoteSent(data,'Quote has been approved')),  
+      catchError(this.handleError));
   }
 
-  refuseQuote(company, quote_id) {
+  /**
+   * Refuse quote
+   * @param company - company info
+   * @param quote_id - quote id
+   */
+  public refuseQuote(company, quote_id) {
     return this.http.post(this.apiUrl +
       `saleQuotes/refuseQuote?companyId=${company.id}`, [quote_id]
-    )
+    ).pipe(
+      tap(data => data), 
+      catchError(this.handleError));
   }
 
-  archiveQuote(company, quote_id) {
+  /**
+   * Archive quote
+   * @param company - company info
+   * @param quote_id - quote id
+   */
+  public archiveQuote(company, quote_id) {
     return this.http.post(this.apiUrl +
       `saleQuotes/archiveQuote?companyId=${company.id}`, [quote_id]
-    )
+    ).pipe(
+      tap(data => data), 
+      catchError(this.handleError));
   }
 
-  downloadPdf(quote_id) {
+  /**
+   * Mark quote as read
+   * @param company - company info
+   * @param quote_id - quote id
+   */
+  public markAsRead(company, quote_id) {
+    return this.http.post(this.apiUrl +
+      `saleQuotes/${quote_id}/markAsRead?companyId=${company.id}`, {}
+    ).pipe(
+      tap(data => data), 
+      catchError(this.handleError));
+  }
+
+  /**
+   * Download quote information in pdf
+   * @param quote_id - quote id
+   */
+  public downloadPdf(quote_id) {
     return this.http.get(this.apiUrl + `saleQuotes/${quote_id}/pdf`,{ headers: new HttpHeaders({
         'Content-Type': 'application/pdf',
-      }), responseType: 'blob'})
+      }), responseType: 'blob'}).pipe(
+        tap(data => this.handleQuoteSent(data,'Quote has been saved')),  
+        catchError(this.handleError));
   }
 
-  getSortType(type) {
+   /**
+   * Method is use to download file.
+   * @param res - Array Buffer data
+   * @param id - type of the document.
+   */
+  public downLoadFile(res: any, id,companyName,quoteNumber) {
+    const data = window.URL.createObjectURL(res);
+    var link = document.createElement('a');
+    link.href = data;
+    link.download=`${this.apiUrl}saleQuotes/${id}/pdf.pdf`;
+    link.download = `${companyName}_Quote-${quoteNumber}.pdf`;
+    link.click();
+    this.quoteStateService.goToQuote();
+  }
+
+  /**
+   * Get sort type
+   * @param type - type of sort
+   */
+  public getSortType(type) {
     switch (type) {
       case 'number':
         this.sortType = this.quoteNumber === 'QUOTE_NUMBER_ASC' ? 'QUOTE_NUMBER_DESC' : 'QUOTE_NUMBER_ASC';
@@ -254,4 +393,31 @@ export class QuoteService {
         break;
     }
   }
+  /**
+   * check error
+   * @param error - error
+   */
+  private handleError =(error)=> {
+    let err = error.error;
+    this.quoteStateService.setError((err.validationResults && err.validationResults.saleQuotePostDto) ? err.validationResults.saleQuotePostDto : err.message);
+    return throwError(error);
+  }
+
+  private handleQuoteSent = (data,message) => {
+    this.quoteStateService.setQuoteResult(message);
+    this.quoteStateService.setHandleQuoteHasSent();
+    return data;
+  }
+
+  public setDefaultTypes() {
+    this.offset = 30;
+    this.quoteNumber = 'QUOTE_NUMBER_DESC';
+    this.customerName = 'CUSTOMER_NAME_DESC';
+    this.date = 'DATE_DESC';
+    this.validUntil = 'VALID_UNTIL_DESC';
+    this.amount = 'AMOUNT_DESC';
+    this.deposit = 'DEPOSIT_DESC';
+    this.sortType = null;
+  }
+
 }

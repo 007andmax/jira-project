@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormGroup } from "@angular/forms";
 import { QuoteStateService } from "../../quote-state.service";
 import { QuoteService } from "../../../../../../services/quote/quote.service";
@@ -23,6 +23,7 @@ export class QuoteCreateContentTopComponent implements OnInit {
   public editItem: any;
   public editMode: any;
   public currentClient = null;
+  public errorMessage:string = null;
 
   /**
   *Creates an instance of the QuoteCreateContentTopComponent with the injected services
@@ -31,7 +32,8 @@ export class QuoteCreateContentTopComponent implements OnInit {
   */
   constructor(
     private quoteStateService: QuoteStateService,
-    private quoteService: QuoteService
+    private quoteService: QuoteService,
+    public cd: ChangeDetectorRef
   ) {
     this.getQuoteNumber();
   }
@@ -43,6 +45,16 @@ export class QuoteCreateContentTopComponent implements OnInit {
     this.startDateChanges(this.quoteForm.value.startDate);
     this.endDateChanges(this.quoteForm.value.endDate);
     this.getState();
+    this.onInitErrorHandle();
+  }
+
+   /**
+   * Initialized error handle.
+   */
+  public onInitErrorHandle () {
+    this.quoteStateService.getErrorHandle().subscribe((data) => {
+      this.errorMessage = data;
+    })
   }
 
   /**
@@ -52,8 +64,9 @@ export class QuoteCreateContentTopComponent implements OnInit {
   public selectClient(selectClient) {
     this.selectedItem.next(selectClient);
     this.quoteStateService.setClient(selectClient);
-    if (!this.editMode) this.quoteStateService.setCompany(selectClient);
     this.currentClient = selectClient.item;
+    if (!this.editMode) this.quoteStateService.setCompany(selectClient);
+    this.cd.detectChanges();
   }
 
   /**
@@ -61,16 +74,17 @@ export class QuoteCreateContentTopComponent implements OnInit {
    */
   private getQuoteNumber() {
     this.quoteService.getQuoteNumber().subscribe((res) => {
-      this.quoteNumber = this.editMode ? this.quoteStateService.getQuoteNumber() : res['number'];
-      this.startQuoteNumber = this.editMode ? this.quoteStateService.getQuoteNumber() : res['number'];
+      this.quoteNumber = this.editMode ? this.quoteStateService.getQuoteNumber() : (res['number']) ? res['number'] : 1;
+      this.startQuoteNumber = this.editMode ? this.quoteStateService.getQuoteNumber() :(res['number']) ? res['number'] : 1;
     });
   }
 
   /**
    * Follow quote number change
    */
-  private setNumber(value) {
-    this.quoteStateService.setNumber(value)
+  public setNumber(value) {
+    this.quoteStateService.setNumber(value);
+    this.quoteStateService.setError(null);
   }
 
   /**
@@ -96,7 +110,7 @@ export class QuoteCreateContentTopComponent implements OnInit {
     this.editMode = this.quoteStateService.getState().params.editMode;
     if (this.editMode) {
       this.editItem = this.quoteStateService.getClient();
-      this.currentClient = this.quoteStateService.getClient();
+      //this.currentClient = this.quoteStateService.getClient();
       this.partialDeposit = this.quoteStateService.getPartialDeposit();
       this.purchaseOrder = this.quoteStateService.getPurchaseOrder();
       this.requestPayment = this.quoteStateService.getRequestPayment();
@@ -138,4 +152,16 @@ export class QuoteCreateContentTopComponent implements OnInit {
     return `${companyInfo.addresses[0].address}`
   }
 
+  /**
+   * set client company
+   * @param items - list clients
+   */
+  public setClients(items) {
+    if (this.editItem) {
+      let index: number = items.findIndex(item => item.id === this.editItem.id);
+      if (index > (-1)) {
+        this.currentClient = items[index];
+      }
+    }
+  }
 }

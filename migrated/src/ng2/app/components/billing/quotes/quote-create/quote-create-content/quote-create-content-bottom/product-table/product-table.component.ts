@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { QuoteStateService } from "../../../quote-state.service";
 import { ProductService } from "../../../../../../../services/product/product.service";
 import { QuoteService } from "../../../../../../../services/quote/quote.service";
+import { CommonService } from 'src/ng2/app/services/common/common.service';
 
 /**
  * Product table component
@@ -10,6 +11,7 @@ import { QuoteService } from "../../../../../../../services/quote/quote.service"
   selector: 'app-product-table',
   templateUrl: './product-table.component.html',
   styleUrls: ['./product-table.component.scss'],
+  providers:[CommonService]
 })
 export class ProductTableComponent implements OnInit {
 
@@ -24,6 +26,7 @@ export class ProductTableComponent implements OnInit {
   public servicesList = [];
   public isDropDownShow = [];
   public markups = [];
+  unamePattern = "(?<=^| )\d+(\.\d+)?(?=$| )"; 
 
   /**
    * Creates an instance of the QuoteCreateContentComponent with the injected services
@@ -34,7 +37,8 @@ export class ProductTableComponent implements OnInit {
   constructor(
     private quoteStateService: QuoteStateService,
     private productService: ProductService,
-    private quoteService: QuoteService
+    private quoteService: QuoteService,
+    private commonService:CommonService
   ) { }
 
   /**
@@ -47,6 +51,7 @@ export class ProductTableComponent implements OnInit {
 
   /**
    * Hide dropdown for services and products
+   * @param i - item index
    */
   hideDropDown(i) {
     this.isDropDownShow[i] = false ;
@@ -64,6 +69,9 @@ export class ProductTableComponent implements OnInit {
 
   /**
    * get item price
+   * @param cost - item cost
+   * @param count - item count
+   * @param tax - item tax
    */
   public getPrice(cost, count, tax) {
     return this.quoteStateService.roundToTwo(this.quoteStateService.getPrice(cost, count, tax) + this.quoteStateService.getTaxPrice(cost, count, tax)) ;
@@ -71,6 +79,9 @@ export class ProductTableComponent implements OnInit {
 
   /**
    * get item tax price
+   * @param cost - item cost
+   * @param count - item count
+   * @param tax - item tax
    */
   public getTaxPrice(cost, count, tax) {
     return this.quoteStateService.roundToTwo(this.quoteStateService.getTaxPrice(cost, count, tax));
@@ -78,6 +89,7 @@ export class ProductTableComponent implements OnInit {
 
   /**
    * delete item from array
+   * @param index - item index
    */
   public deleteItem(index) {
     this.itemsListArray.splice(index, 1);
@@ -86,6 +98,8 @@ export class ProductTableComponent implements OnInit {
 
   /**
    * change item quantity
+   * @param value - item value
+   * @param index - item index
    */
   public changedQuantity(value, index) {
     this.itemsListArray[index].quantity = value;
@@ -94,6 +108,7 @@ export class ProductTableComponent implements OnInit {
 
   /**
    * toggle dropdown show status
+   * @param index - item index
    */
   public toggleShowDropDown(i) {
     this.isDropDownShow[i] = !this.isDropDownShow[i];
@@ -114,6 +129,9 @@ export class ProductTableComponent implements OnInit {
 
   /**
    * set new item
+   * @param item - new item
+   * @param index - new item index
+   * @param type - new item type
    */
   public setItem(item, index, type) {
     if (type === 'service') {
@@ -128,6 +146,7 @@ export class ProductTableComponent implements OnInit {
 
   /**
    * check item has markup
+   * @param index - item index
    */
   public getMarkup(item) {
     return item.hasOwnProperty('markup');
@@ -135,38 +154,46 @@ export class ProductTableComponent implements OnInit {
 
   /**
    * change item markup
+   * @param value - item value
+   * @param index - item index
    */
   public changeMarkup(value, index) {
     const item = this.itemsListArray[index];
     this.itemsListArray[index].sale =  this.quoteStateService.roundToTwo((value * item.cost / 100 + item.cost));
     this.itemsListArray[index].markup = value;
+    this.itemsListArray[index].markup = this.roundingMarkup(this.itemsListArray[index].markup);
     this.updateItemsArray();
   }
 
   /**
    * change item sales
+   * @param value - item value
+   * @param index - item index
    */
   public changeSales(value, index) {
     const item = this.itemsListArray[index];
     if (this.getMarkup(this.itemsListArray[index])) {
       this.itemsListArray[index].markup = (value - item.cost) / item.cost * 100;
-      this.itemsListArray[index].sale = value;
+      this.itemsListArray[index].markup = this.roundingMarkup(this.itemsListArray[index].markup);
+      this.itemsListArray[index].sale = this.commonService.validateNumber(value);;
       this.updateItemsArray();
     } else {
-      this.itemsListArray[index].rate = value;
+      this.itemsListArray[index].rate = this.commonService.validateNumber(value);;
     }
   }
 
   /**
    * change item cost
+   * @param value - item value
+   * @param index - item index
    */
   public changeCost(value, index) {
     const item = this.itemsListArray[index];
     if (this.getMarkup(this.itemsListArray[index])) {
-      this.itemsListArray[index].markup =  this.quoteStateService.roundToTwo((item.sale - value)/value * 100);
-      this.itemsListArray[index].cost = this.quoteStateService.roundToTwo(value);
+      this.itemsListArray[index].markup =  this.quoteStateService.roundToOne((item.sale - value)/value * 100);
+      this.itemsListArray[index].cost = this.commonService.validateNumber(value);
     } else {
-      this.itemsListArray[index].rate = this.quoteStateService.roundToTwo(value);
+      this.itemsListArray[index].rate = (this.isInteger(Number(value))) ? value :  this.quoteStateService.roundToTwo(value);
     }
     this.updateItemsArray();
   }
@@ -178,6 +205,14 @@ export class ProductTableComponent implements OnInit {
   public updateItemsArray() {
     this.changedProductItemsArray.next(this.itemsListArray);
     this.quoteStateService.setItemArray(this.itemsListArray);
+  }
+
+  private  isInteger(num):boolean {
+    return (num ^ 0) === num;
+  }
+
+  private roundingMarkup (markup) {
+    return (!this.isInteger(markup)) ?  Math.ceil(markup * 10) / 10 : markup;
   }
 
 }

@@ -1,11 +1,14 @@
 <div class="quote-create__content--top row">
+<div class="error-message" *ngIf="errorMessage"><p [textContent]="errorMessage"></p></div>
   <div class="col-md-4">
     <div class="quote-create-field">
       <app-select-client-company style="width: 75%;"
                                  class="light-dropdown"
                                  [formGroup]="quoteForm"
                                  [editItem]="editItem"
-                                 (selectedItem)="selectClient($event)">
+                                 (selectedItem)="selectClient($event)"
+                                 (getAllItems)="setClients($event)">
+                                 
       </app-select-client-company>
     </div>
     <div *ngIf="currentClient">

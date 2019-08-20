@@ -722,7 +722,7 @@
       }
 
       function changeTimePickerType(type) {
-        $http.put('/settings/userProfile/serviceExpenseDurationPresentation', { presentation: type  }).then(function (resp) {
+        $http.put('/settings/companyProfile/serviceExpenseDurationPresentation', { presentation: type  }).then(function (resp) {
           if (status === 200) {
             $rootScope.currentUser.serviceExpenseDurationPresentation = type;
           }

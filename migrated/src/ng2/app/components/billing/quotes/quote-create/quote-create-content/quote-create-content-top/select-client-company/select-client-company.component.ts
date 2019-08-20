@@ -18,6 +18,7 @@ export class SelectClientCompanyComponent implements OnInit {
 
   @ViewChild('instance') instance: NgbTypeahead;
   @Output() selectedItem = new EventEmitter<any>();
+  @Output() getAllItems = new EventEmitter<any>();
   @Input() formGroup: FormGroup;
   @Input() editItem: any;
   public selectedClient;
@@ -39,10 +40,6 @@ export class SelectClientCompanyComponent implements OnInit {
    */
   ngOnInit() {
     this.getCLientsList();
-    if (this.editItem) {
-      this.selectedClient = this.editItem;
-      this.selectedItem.emit(this.editItem);
-    }
   }
 
   /**
@@ -53,12 +50,21 @@ export class SelectClientCompanyComponent implements OnInit {
       this.clientsList = res
         .sort((a, b) => a.name.localeCompare(b.name))
         .filter((item) => !item.deletedAt)
+        this.getAllItems.emit(this.clientsList);
+      if (this.editItem) {
+        let index: number = this.clientsList.findIndex(item => item.id === this.editItem.id);
+        if (index > (-1)) {
+          this.selectedClient = this.clientsList[index];
+         // this.selectedItem.emit({ item: this.clientsList[index] });
+        }
 
+      }
     })
   }
 
   /**
    * boootstrap search method
+   * @param text$
    */
   search = (text$: Observable<string>) => {
     const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
@@ -67,12 +73,13 @@ export class SelectClientCompanyComponent implements OnInit {
     return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
       map(term => (term === '' ? this.clientsList
         : this.clientsList && this.clientsList
-        .filter(v => v['name'].toLowerCase().indexOf(term.toLowerCase()) > -1)))
+          .filter(v => v['name'].toLowerCase().indexOf(term.toLowerCase()) > -1)))
     );
   };
 
   /**
    * set selected item
+   * @param companyId - id of company
    */
   public selectItem(companyId) {
     this.selectedItem.emit(companyId);
@@ -81,6 +88,7 @@ export class SelectClientCompanyComponent implements OnInit {
 
   /**
    * formatter for bootstrap result
+   * @param result
    */
   formatter = (result: string) => {
     return result['name'];

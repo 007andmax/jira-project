@@ -19,12 +19,16 @@ export class QuoteCreateContentNotesComponent implements OnInit {
 
   public noteRegularList = [];
   public noteGlobal: any;
+  public noteGlovalLine:string = "";
   public selectedNote: any;
   public selectedNoteNew: string;
   public selectedNoteText: string;
+  public editNoteNew: string;
+  public isShowEditNote = false;
   public isEditMode = false;
   public editMode = false;
   public isShowCreateNew = false;
+  public noteGlobalId:string;
   @ViewChild('instance') instance: NgbTypeahead;
   @Output() selectedRegularNoteItem = new EventEmitter<any>();
   @Output() selectedGlobalNoteItem = new EventEmitter<any>();
@@ -58,15 +62,19 @@ export class QuoteCreateContentNotesComponent implements OnInit {
     this.quoteService.getQuoteNote().subscribe((res:any) => {
       this.noteRegularList = res.filter((item) => item['noteType'] === 'REGULAR');
       this.noteGlobal = res.find((item) => item['noteType'] === 'GLOBAL');
+    
+      this.noteGlobalId = this.noteGlobal.id;
       if (this.editMode) {
         this.noteGlobal = this.quoteStateService.getGlobalNote();
       }
+      if (this.noteGlobal) this.noteGlovalLine = this.noteGlobal.line1;
       this.setGlobalNote(this.noteGlobal);
     })
   }
 
   /**
    * show and find text in dropdown
+   * @param text$ - bootstrap text for searching
    */
   search = (text$: Observable<string>) => {
     const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
@@ -91,6 +99,7 @@ export class QuoteCreateContentNotesComponent implements OnInit {
 
   /**
    * format select output
+   * @param result - result for showing
    */
   formatter = (result: string) => {
     return result['title'];
@@ -101,7 +110,6 @@ export class QuoteCreateContentNotesComponent implements OnInit {
    */
   public createNewNote() {
     const data = this.getNoteData();
-    console.log(this.isEditMode, 'this.isEditMode');
     if (this.isEditMode) {
       this.noteService.updateNote({
         line1: this.selectedNoteText,
@@ -119,6 +127,27 @@ export class QuoteCreateContentNotesComponent implements OnInit {
     }
   }
 
+  /**
+   * Edit note
+   */
+  public onEditNote () {
+      this.noteService.updateNote({
+        line1: this.editNoteNew,
+        line2: '',
+        noteType: 'GLOBAL',
+        title: null
+      }, this.noteGlobalId).subscribe((res:any) => {
+        if (res.result === "success") {
+          this.isShowEditNote = false;
+          this.getNotes();
+        }
+      })
+  }
+
+  /**
+   * Return title
+   * @param value - title value
+   */
   private getTitle(value) {
     return value.title ? value.title : value;
   }
@@ -137,14 +166,19 @@ export class QuoteCreateContentNotesComponent implements OnInit {
 
   /**
    * set global note
+   * @param value - note value
+   * @param update
    */
-  public setGlobalNote(value) {
+  public setGlobalNote(value,update = false) {
+    this.isShowEditNote = update;
+    this.editNoteNew = value;
     this.selectedGlobalNoteItem.next(value);
     this.quoteStateService.setGlobalNote(value);
   }
 
   /**
    * Show create new notes fields
+   * @param value - new note value
    */
   public showCreateNew(value) {
     this.selectedNote['line1'] = value;
@@ -152,6 +186,7 @@ export class QuoteCreateContentNotesComponent implements OnInit {
     this.isShowCreateNew = true;
     this.quoteStateService.setSelectedNote(value);
   }
+  
 
   /**
    * get mode state

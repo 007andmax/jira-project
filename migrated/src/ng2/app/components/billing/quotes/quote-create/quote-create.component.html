@@ -3,9 +3,8 @@
   <app-quote-create-header
     (saveAndContinue)="saveAndContinue()"
     (approve)="approve()"
-    (toInvoice)="toInvoice()"
-    (toTicket)="toTicket()"
     (download)="download()"
+    [editMode]="editMode"
   ></app-quote-create-header>
   <app-quote-create-content
     #quoteCreateContentComponent

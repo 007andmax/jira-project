@@ -11,6 +11,9 @@ import { ApiPasswordManagerService } from "../../../services/password-manager/ap
 import { GadgetsService } from "../../../services/gadgets/gadgets.service";
 import { ISubscription } from "rxjs-compat/Subscription";
 
+/**
+ * Left panel password manager component
+ */
 @Component({
   selector: 'app-left-panel-password-manager',
   templateUrl: './left-panel-password-manager.component.html',
@@ -31,7 +34,6 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   public passwordRecordsStart: any;
   public interval: any;
   private subGetRecords: ISubscription;
-  private subGetRecordsNew: ISubscription;
   private subNewRecordAdd: ISubscription;
   private subscriptions = new Subscription();
   public innerWidth: any;
@@ -41,6 +43,16 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
   };
   private subscription: ISubscription;
 
+  /**
+   * Creates an instance of the LeftPanelPasswordManagerComponent with the injected services
+   * @param {CompaniesService} companiesService Service to work with companies
+   * @param {DevicesService} devicesService Service to work with devices
+   * @param {UsersService} userService Service to work with users
+   * @param {PasswordManagerService} passwordManagerService Service to work with password manager
+   * @param {ApiPasswordManagerService} apiPasswordManagerService Service to work with api password manager
+   * @param {GadgetsService} gadgetsService Service to work with gadget
+   * @param {ChangeDetectorRef} cdRef Service to work with change detection
+   */
   constructor(
     private companiesService: CompaniesService,
     private devicesService: DevicesService,
@@ -50,26 +62,27 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     private gadgetsService: GadgetsService,
     private cdRef:ChangeDetectorRef
   ) {
-    console.log('11111111');
     this.getCompaniesList();
   }
 
+  /**
+   * Initializes left panel password manager. See [ngOnInit]{@see OnInit#ngOnInit}
+   */
   ngOnInit() {
-    console.log('222222222');
     this.getPasswordRecords();
     this.addNewRecord();
     this.deleteRecord();
     this.innerWidth = window.innerWidth;
   }
 
+  /**
+   * Get companies list
+   */
   public getCompaniesList() {
-    console.log('12351235');
     this.ngOnInit();
      return this.subscription = this.companiesService.clientsCompany
        .subscribe((company) => {
-         console.log('333333333');
          if (!this.cdRef['destroyed']) {
-           console.log('000000');
            this.cdRef.detectChanges();
          }
          this.companiesList = this.getCompaniesNames(company);
@@ -77,6 +90,9 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
      );
   }
 
+  /**
+   * Select company filter
+   */
   public selectCompany(item){
     this.selectedCompany = item.item;
     this.companiesService.setFilteredCompnay(item.item);
@@ -89,6 +105,9 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     }
   }
 
+  /**
+   * Select company mobile filter
+   */
   public selectCompanyMob(item){
     this.selectedCompany = item.item;
     this.passwordManagerService.setSelectedDeviceOrUser({});
@@ -99,11 +118,19 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     }
   }
 
+  /**
+   * Filter password records list
+   * @param company - value for filter
+   */
   public filterPasswordRecords(company) {
     if (company && company.companyId)
     return this.passwordRecords = this.passwordRecordsStart.filter((item) => item.companyId === company.companyId)
   };
 
+  /**
+   * Filter password records list by device or user
+   * @param deviceOrUser - value for filter
+   */
   public filterPasswordRecordsByDeviceOrUser(deviceOrUser) {
     return this.passwordRecords = this.passwordRecords.filter((item) => {
       const links = item.links.filter((item) => {
@@ -115,6 +142,10 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     });
   }
 
+  /**
+   * Filter password records list by date
+   * @param date - value for filter
+   */
   public filterPasswordRecordsByDate(date) {
     const selectedDate = `${date.year}/${this.formatDayAndMonth(date.month)}/${this.formatDayAndMonth(date.day)}`;
     this.selectedDateItem = date;
@@ -125,21 +156,36 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     })
   }
 
-  formatDayAndMonth(item) {
+  /**
+   * Get formated date and month
+   * @param item - value to format
+   */
+  public formatDayAndMonth(item) {
     return item < 10 ? `0${item}` : item;
   }
 
+  /**
+   * Select device or user
+   * @param item - value to set
+   */
   public selectDeviceOrUser(item) {
     this.selectedDeviceOrUser = item.item;
     this.passwordManagerService.setSelectedDeviceOrUser(item.item);
     this.filterPasswordRecordsByDeviceOrUser(item.item);
   }
 
+  /**
+   * Select device or user mobile version
+   * @param item - value to set
+   */
   public selectDeviceOrUserMob(item){
-    console.log(2);
     this.selectedDeviceOrUser = item.item;
   }
 
+  /**
+   * Get device from company
+   * @param companyId - id of company
+   */
   public getCompanyDevices(companyId) {
     this.devicesService.getCompanyDevices(companyId).subscribe((res) => {
       if (res[this.selectedCompany.companyId]) {
@@ -148,17 +194,27 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     })
   }
 
+  /**
+   * select date
+   * @param item - date to set
+   */
   public selectDate(item) {
     this.passwordManagerService.setDate(item);
     this.filterPasswordRecordsByDate(item);
   }
 
+  /**
+   * select date mobile version
+   * @param date - date to set
+   */
   public selectDateMob(date) {
     this.selectedDateItem = date;
   }
 
+  /**
+  * Get password records list
+  */
   public getPasswordRecords() {
-    console.log('12351235');
     if (this.innerWidth <= 414) {
       this.passwordManagerService.setMobileCategory();
     }
@@ -175,15 +231,26 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     });
   }
 
+  /**
+   * Show category if has records
+   */
   public showCategory() {
     return this.passwordRecords && this.passwordRecords.length > 0;
   }
 
-  formatter = (result: string) => {
+  /**
+   * Format output
+   * @param result - bootstrap output format
+   */
+  public formatter = (result: string) => {
     return result['name'];
   };
 
-  formatterDevices = (result: string) => {
+  /**
+   * Format device output
+   * @param result - bootstrap output format
+   */
+  public formatterDevices = (result: string) => {
     if (result.hasOwnProperty('hostName')) {
       return result['hostName']
     } else {
@@ -191,7 +258,11 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     }
   };
 
-  search = (text$: Observable<string>) => {
+  /**
+   * Search company
+   * @param text$ - text to find
+   */
+  public search = (text$: Observable<string>) => {
     return text$.pipe(
       debounceTime(100),
       distinctUntilChanged(),
@@ -203,7 +274,11 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
       }));
   };
 
-  searchDevices = (text$: Observable<string>) => {
+  /**
+   * Search device
+   * @param text$ - text to find
+   */
+  public searchDevices = (text$: Observable<string>) => {
     return text$.pipe(
       debounceTime(100),
       distinctUntilChanged(),
@@ -215,6 +290,11 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
       }));
   };
 
+  /**
+   * Search find or user
+   * @param item
+   * @param term
+   */
   private findUserOrDevice(item, term) {
     if (item.hasOwnProperty('hostName')) {
       return item['hostName'].toLowerCase().indexOf(term.toLowerCase()) > -1
@@ -224,6 +304,10 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     }
   }
 
+  /**
+   * Get companies list
+   * @param list
+   */
   private getCompaniesNames(list) {
     const filteredArray = [];
     list.map((item) => {
@@ -235,6 +319,9 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     return filteredArray;
   }
 
+  /**
+   * Clear company
+   */
   clearCompany() {
     this.devicesAndUsersList = [];
     this.refreshCompany();
@@ -242,6 +329,9 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.getPasswordRecords();
   }
 
+  /**
+   * Clear company mobile version
+   */
   clearCompanyMob() {
     this.devicesAndUsersList = [];
     this.company = null;
@@ -249,22 +339,34 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.clearDeviceMob();
   }
 
+  /**
+   * Clear device mobile version
+   */
   clearDeviceMob() {
     this.device = null;
     this.selectedDeviceOrUser = null;
   }
 
+  /**
+   * Clear date mobile version
+   */
   clearDateMob() {
     this.selectedDate = null;
     this.selectedDateItem = null;
   }
 
+  /**
+   * Clear device
+   */
   clearDevice() {
     this.passwordRecords = this.passwordRecordsStart;
     this.refreshDeviceOrUser();
     this.filterPasswordRecords(this.selectedCompany);
   }
 
+  /**
+   * Clear date
+   */
   clearDate($event) {
     $event.preventDefault();
     $event.stopPropagation();
@@ -274,22 +376,27 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.getPasswordRecords();
   }
 
-
+  /**
+   * Clear device or user
+   */
   private refreshDeviceOrUser() {
     this.device = null;
     this.selectDeviceOrUser({item: null});
   }
 
-  private refreshDate() {
-    this.selectedDate = null;
-  }
-
+  /**
+   * Clear company
+   */
   private refreshCompany() {
     this.selectCompany({item: this.clearCompanyItem});
     this.company = null;
     this.device = null;
   }
 
+  /**
+   * Get all user by company
+   * @param companyId - id of company
+   */
   private getAllUsers(companyId) {
     this.userService.getAllusers().subscribe((res: any) => {
       res = res.filter((item) =>  item.company.id == companyId);
@@ -297,11 +404,18 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     })
   }
 
+  /**
+   * Get all gadgets by company
+   * @param companyId - id of company
+   */
   private getGadgets(companyId) {
     this.gadgetsService.getCompanyDevices().subscribe((res: any) =>
       this.devicesAndUsersList = [...(res.filter((item) => item.clientCompanyId === companyId)), ...this.devicesAndUsersList])
   }
 
+  /**
+   * Add new record
+   */
   public addNewRecord() {
     this.subNewRecordAdd = this.passwordManagerService.newRecordsisAdd.subscribe(() => {
       if (this.innerWidth <= 414) {
@@ -320,6 +434,9 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     })
   }
 
+  /**
+   * Delete record
+   */
   public deleteRecord() {
     this.passwordManagerService.deleteItem.subscribe((item) => {
       if (this.innerWidth <= 414) {
@@ -338,14 +455,23 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     });
   }
 
-  public get loadStatus () {
+  /**
+   * Getter for load status
+   */
+  get loadStatus () {
     return this.company && this.companiesList;
   }
 
-  public get companiesListStatus () {
+  /**
+   * Getter for companies
+   */
+  get companiesListStatus () {
     return this.companiesList;
   }
 
+  /**
+   * Destroy component
+   */
   ngOnDestroy() {
     this.apiPasswordManagerService.deleteSubscription();
     this.subscription && this.subscription.unsubscribe();
@@ -354,8 +480,10 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.subscriptions && this.subscriptions.unsubscribe();
   }
 
+  /**
+   * Close filter mobile version
+   */
   public closeMobileFilters() {
-    console.log('12351235');
     this.passwordManagerService.closeFilters();
   }
 

@@ -1,9 +1,8 @@
 <div class="quote-preview invoice-create">
   <div class="quote-create--header">
-    <h3>Estimate #<span>3</span></h3>
+    <h3>Quote #<span>{{quoteForCreate && quoteForCreate.quoteNumber}}</span></h3>
     <div class="quote-create--header__btn" *ngIf="!editable">
       <button class="btn-new default" (click)="goToCreate()">Edit</button>
-
 
 
       <div class="btn-new btn-success btn-with-dropdown">
@@ -13,7 +12,7 @@
             <i class="icn-sm pointer report-caret-icon-white"></i>
           </button>
           <div class="dropdown-menu" ngbDropdownMenu>
-            <button class="dropdown-item" ngbDropdownItem (click)="approveQuote()">Approve a quote</button>
+            <button class="dropdown-item" ngbDropdownItem (click)="approveQuote()">Save and Approve</button>
             <button class="dropdown-item" ngbDropdownItem (click)="downloadPdf()">Save and Download</button>
             <button class="dropdown-item" ngbDropdownItem (click)="saveAndSend()">Save and Send</button>
           </div>
@@ -21,10 +20,9 @@
       </div>
 
 
-
       <!--<button class="btn-new btn-success" (click)="save()">-->
-        <!--Save and Continue-->
-        <!--<i class="report-caret-icon-white"></i>-->
+      <!--Save and Continue-->
+      <!--<i class="report-caret-icon-white"></i>-->
       <!--</button>-->
       <!--<button class="dropdown-item" ngbDropdownItem (click)="approveQuote()">Approve a quote</button>-->
       <!--<button class="dropdown-item" ngbDropdownItem (click)="downloadPdf()">Save and Download</button>-->
@@ -34,14 +32,29 @@
       <button class="btn-new default" (click)="goToQuotes()">Back</button>
     </div>
   </div>
-
   <div class="info-block">
     <p style="display: inline-block">
       <span>This is a preview of your Quotation. Switch back to Edit if you need to make changes.</span>
     </p>
   </div>
+  <div class="quote-notes">
+    <ng-template ngFor let-item [ngForOf]="quoteForCreate.reviewNotes" [ngForTrackBy]="trackById">
+      <div class="quote-notes__item clearfix">
+        <div class="col-md-4 pl-0">
+          <p class="quote-notes__item--fullname" [textContent]="getUserWhoSend(item.user.firstName,item.user.lastName)"></p>
+          <p class="quote-notes__item--email" [textContent]="item.user.primaryEmail"></p>
+          <p class="quote-notes__item--startdate" [textContent]="getFormatDateWithTime(item.startDate,item.createdAt)"></p>
+        </div>
+        <div class="col-md-8 pr-0">
+          <p [textContent]="item.note"></p>
+        </div>
+      </div>
 
+    </ng-template>
+  </div>
   <div class="quote-list">
+
+
     <div class="quote-list--header">
       <div class="quote-list--header__top clearfix">
         <div class="col-md-5 pl-30">
@@ -59,9 +72,9 @@
         <div class="col-md-7 pl-30">
           <p style="font-size: 11px!important; margin-bottom: 10px;">Bill to</p>
           <p class="bold">{{quote.client && quote.client.name }}</p>
-          <!--<p>{{quote.client && getCLientUserName(quote.client.companyInfo)}}</p>-->
-          <!--<p>{{quote.client && getCLientAddress(quote.client.companyInfo)}}</p>-->
-          <!--<p>{{quote.client && quote.client.companyInfo.contacts[0].primaryEmail}}</p>-->
+          <p>{{quote.client && getCLientUserName(quote.client.companyInfo)}}</p>
+          <p>{{quote.client && getCLientAddress(quote.client.companyInfo)}}</p>
+          <p>{{quote.client && quote.client.companyInfo.contacts[0].primaryEmail}}</p>
         </div>
         <div class="col-md-5 pr-30">
           <p class="bold">

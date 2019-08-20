@@ -1,7 +1,10 @@
+/**
+ * Quote status
+ */
 export const QUOTE_STATUS = [
   {
-    type: 'DRAFT',
-    name: 'Draft'
+    type: 'SAVED',
+    name: 'Saved'
   },
   {
     type: 'READ',

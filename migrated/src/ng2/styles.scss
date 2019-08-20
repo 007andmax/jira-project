@@ -2,6 +2,27 @@
 @import './assets/styles/icons.scss';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+.pl-0 {
+  padding-left: 0 !important;
+}
+
+.pr-0 {
+  padding-right: 0 !important;
+}
+
+.with-dollar {
+  position: relative;
+  input {
+    padding-left: 20px !important;
+  }
+  &:before {
+    position: absolute;
+    content: '$';
+    left: 22px;
+    top: 8px;
+  }
+}
+
 .btn-with-dropdown {
   display: flex !important;
   padding: 0 !important;

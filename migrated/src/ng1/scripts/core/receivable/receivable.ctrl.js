@@ -34,6 +34,9 @@
             const index = $scope.invocesList.findIndex((item) => item.id === newInvoice.data.id);
             $scope.invocesList[index] = newInvoice.data;
           }
+          console.log('$scope.invocesList',$scope.invocesList);
+          console.log('newInvoice.data',newInvoice);
+          $scope.$apply();
         });
 
         $rootScope.$on('receivableInvoicePayment', function(event, newInvoice){
@@ -184,20 +187,23 @@
           $scope.receivableCompanies = [];
           $scope.invoiceToSent = {};
 
-          for (var id in invoicesData.companies) {
-            var invoices = invoicesData.companies[id];
-            $scope.totalSum.companies[id] = 0;
-
-            for (var i = 0; i < invoices.length; i++) {
-              var invoice = invoices[i];
-
-              $scope.totalSum.invoices[invoice.id] = invoice.sum;
-              $scope.totalSum.companies[id] += invoice.sum;
+          if (invoicesData && invoicesData.companies) {
+            for (var id in invoicesData.companies) {
+              var invoices = invoicesData.companies[id];
+              $scope.totalSum.companies[id] = 0;
+  
+              for (var i = 0; i < invoices.length; i++) {
+                var invoice = invoices[i];
+  
+                $scope.totalSum.invoices[invoice.id] = invoice.sum;
+                $scope.totalSum.companies[id] += invoice.sum;
+              }
+  
+              $scope.totalReceivables += $scope.totalSum.companies[id];
+              $scope.receivableCompanies.push(CompaniesService.getOneById(id));
             }
-
-            $scope.totalReceivables += $scope.totalSum.companies[id];
-            $scope.receivableCompanies.push(CompaniesService.getOneById(id));
           }
+        
 
           if ($scope.mode === 'group-by-company') {
 
@@ -211,7 +217,7 @@
             $scope.invoiceToSent.invoices = {};
           }
 
-          if (!resp.list.length) {
+          if (resp && !resp.list.length) {
             $scope.loadingInProgress = false;
           }
 

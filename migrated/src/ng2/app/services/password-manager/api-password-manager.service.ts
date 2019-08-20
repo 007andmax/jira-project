@@ -4,6 +4,9 @@ import { environment } from '../../../environments/environment';
 import { Subject } from "rxjs";
 import { ISubscription } from "rxjs-compat/Subscription";
 
+/**
+ * Password manager service to work with api
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -13,24 +16,42 @@ export class ApiPasswordManagerService {
   public dataChange = new Subject<any>();
   private subGetRecords: ISubscription;
 
-  constructor(private http: HttpClient) {}
+  /**
+   * Password manager api service constructor
+   * @param {HttpClient} http Service to work with request
+   */
+  public constructor(
+    private http: HttpClient
+  ) {}
 
-  getRecords() {
-    console.log('getRecords');
+  /**
+   * Get records list
+   */
+  public getRecords() {
     this.subGetRecords = this.http.get(this.apiUrl + 'passwordRecords').subscribe((response)=> {
       this.dataChange.next(response);
     })
   }
 
-  getRecordsNew() {
+  /**
+   * Get records list
+   */
+  public getRecordsNew() {
     return this.http.get(this.apiUrl + 'passwordRecords');
   }
 
-  deleteRecord(recordId) {
+  /**
+   * Delete record
+   * @param recordId - id of record
+   */
+  public deleteRecord(recordId) {
     return this.http.delete(this.apiUrl + `passwordRecords/${recordId}`);
   }
 
-  deleteSubscription() {
+  /**
+   * Delete subscription
+   */
+  public deleteSubscription() {
     this.subGetRecords.unsubscribe();
   }
 }

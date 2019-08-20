@@ -259,6 +259,7 @@
               "src/ng1/scripts/common/services/local/user-notification.srv.js",
               "src/ng1/scripts/common/services/rest/address.js",
               "src/ng1/scripts/common/services/rest/billable.js",
+              "src/ng1/scripts/common/services/rest/quotes.js",
               "src/ng1/scripts/common/services/rest/colors.js",
               "src/ng1/scripts/common/services/rest/common.js",
               "src/ng1/scripts/common/services/rest/companies.js",

@@ -106,7 +106,6 @@
               // Utils.customizeObj(newChange.data, invoice);
             } else {
               // data.list.push(newChange.data);
-
               if (data.companies[newChange.data.company.id]) {
                 // data.companies[newChange.data.company.id].push(newChange.data);
               } else {
@@ -145,12 +144,10 @@
             Utils.customizeObj(newChange.data, invoice);
             invoice.status = newChange.data.status;
           }
-
           if (callback) {
             callback(data);
           }
         });
-
       }, function (err) {
         if (callback) {
           callback(err.code, err.message);

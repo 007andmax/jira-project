@@ -1,4 +1,4 @@
-import { ChangeDetectorRef,Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef,Component, OnInit, OnDestroy } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 import { QuoteService } from '../../../services/quote/quote.service';
@@ -9,6 +9,8 @@ import { QuoteStateService } from "./quote-create/quote-state.service";
 import { QuoteRealTimeService } from "./quote-realtime/quote-realtime.service";
 import {ModalQuoteComponent} from "../../../services/modal/modal-quote/modal-quote.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import { Subscription } from 'rxjs';
+import { QuoteResult } from './class/quote-result';
 
 /**
  * Password quotes component
@@ -19,7 +21,8 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
   styleUrls: ['./quotes.component.scss'],
   providers: [Location, {provide: LocationStrategy, useClass: PathLocationStrategy}],
 })
-export class QuotesComponent implements OnInit {
+export class QuotesComponent implements OnInit,OnDestroy {
+ 
 
   public quotesList = [];
   public page = 0;
@@ -35,7 +38,11 @@ export class QuotesComponent implements OnInit {
     number: undefined,
     status: undefined
   };
+  public showPreloader: boolean = true;
+  public quoteResultMessage:string = "";
+  public successQuoteAdding:boolean = false;
   public infiniteScrollDisabled = false;
+  public sub:Subscription = new Subscription();
 
   /**
    * Creates an instance of the QuoteCreateContentComponent with the injected services
@@ -57,10 +64,40 @@ export class QuotesComponent implements OnInit {
     private modalService: NgbModal
   ) { }
 
+  /**
+   * Initializes quotes. See [ngOnInit]{@see OnInit#ngOnInit}
+   */
   ngOnInit() {
     this.getQuotes();
     this.companiesService.getCompaniesList();
     this.changeQuotesListItem();
+    this.onInitCheackQuoteSent();
+  }
+
+  ngOnDestroy(): void {
+    this.quoteServices.setDefaultTypes();
+    this.sub.unsubscribe();
+  }
+
+  public onInitCheackQuoteSent() {
+    this.checkQuoteHasSent();
+    let quoteStateService = this.quoteStateService.getHandleQuoteHasSent().subscribe(() => {
+    //  this.quoteResultMessage = this.quoteStateService.getQuoteResult().getMessage();
+      this.checkQuoteHasSent();
+    });
+    this.sub.add(quoteStateService);
+  }
+
+  private checkQuoteHasSent () {
+    let result:QuoteResult =  this.quoteStateService.getQuoteResult();
+    this.successQuoteAdding = (result) ? result.getShow() : false;
+    if (this.successQuoteAdding) {
+      this.quoteResultMessage = this.quoteStateService.getQuoteResult().getMessage();
+     setTimeout(() => {
+      result.setShow(false);
+       this.successQuoteAdding = false;
+     }, 2000);
+    }
   }
 
   /**
@@ -69,6 +106,7 @@ export class QuotesComponent implements OnInit {
   public getQuotes() {
     this.quoteServices.getQuotes(this.dataToSend).subscribe((res: any) => {
       this.quotesList = [...this.quotesList, ...res];
+      this.showPreloader = false;
       this.dataToSend.page += 1;
       this.infiniteScrollDisabled = false;
     })
@@ -94,6 +132,7 @@ export class QuotesComponent implements OnInit {
    */
   public sortBy(value) {
     this.refreshQuoteAndPage();
+    this.quoteServices.getSortType(value);
     this.dataToSend.type = value;
     this.getQuotes()
   }
@@ -120,6 +159,7 @@ export class QuotesComponent implements OnInit {
    */
   private refreshQuoteAndPage() {
     this.quotesList = [];
+    this.showPreloader = true;
     this.dataToSend.page = 0;
   }
 
@@ -179,7 +219,7 @@ export class QuotesComponent implements OnInit {
   public getClass(className) {
     return className === 'EXPIRED' || className === 'REFUSED' ? 'error-status' :
       className === 'READ' ? 'status-in-progress' :
-        className === 'DRAFT' ? 'changing-status' :
+        className === 'SAVED' ? 'changing-status' :
           className === 'UNREAD' ? 'status-warning' :
             'success-status'
   }
@@ -191,6 +231,10 @@ export class QuotesComponent implements OnInit {
     this.quoteStateService.goToCreate();
   }
 
+   /**
+   * move to edit quote component
+   * @param quote - quote
+   */
   goToQuoteEdit(quote) {
     this.quoteStateService.setEditQuote(quote);
   }
@@ -246,6 +290,12 @@ export class QuotesComponent implements OnInit {
     });
   }
 
+  markAsRead(item) {
+    this.quoteServices.markAsRead(item.company, item.id).subscribe((res) => {
+      console.log(res, 'RES');
+    });
+  }
+
   /**
    * archive quote
    */
@@ -273,6 +323,8 @@ export class QuotesComponent implements OnInit {
     if (item.status === 'TICKETED' || item.status === 'INVOICED') {
       this.quoteServices.repeatSend(item.id).subscribe();
     } else {
+      let recipients = item.recipients;
+      if (typeof recipients === "string") item.recipients = recipients.split(',');
       const modalRef = this.modalService.open(ModalQuoteComponent,  item);
       modalRef.componentInstance.data = item;
     }

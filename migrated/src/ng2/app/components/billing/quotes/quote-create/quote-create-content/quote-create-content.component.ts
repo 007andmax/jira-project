@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, OnDestroy} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 import { DateService } from "../../../../../services/date/date.service";
@@ -21,7 +21,7 @@ export class QuoteCreateContentComponent implements OnInit {
 
   public quoteForm: FormGroup;
   public fifteenDays = 1296000000;
-  private selectedClient: any;
+  public selectedClient: any;
   private quoteNumber: number;
   private apiUrl = environment.apiUrl;
   @Input() editMode: any;
@@ -52,12 +52,15 @@ export class QuoteCreateContentComponent implements OnInit {
       this.onInitEditMode();
     } else {
       this.getQuoteNumber();
+      console.log('quote',this.quoteStateService.getQuoteCreate())
     }
     this.initForm(this.editMode);
-    this.handeSendMode();
-    this.subToaddQuoteBeforeSend();
+    this.handleSendMode();
   }
 
+   /**
+   * Initializes edit mode.
+   */
   private onInitEditMode() {
     this.quoteNumber = this.quoteStateService.quoteForCreate.quoteNumber;
     this.quoteStateService.setNumber(this.quoteNumber);
@@ -68,7 +71,7 @@ export class QuoteCreateContentComponent implements OnInit {
    */
   private getQuoteNumber() {
     this.quoteService.getQuoteNumber().subscribe((res) => {
-      this.quoteNumber = res['number'];
+      this.quoteNumber = (res['number']) ? res['number'] : 1;
       this.quoteStateService.setNumber(this.quoteNumber);
     });
   }
@@ -91,7 +94,17 @@ export class QuoteCreateContentComponent implements OnInit {
         regularNote: '',
         globalNote: ''
       })
+      this.onInitChengeForm();
     }
+  }
+
+ /**
+   * Initialized check quotes form on change
+   */
+  public onInitChengeForm () {
+    this.quoteForm.valueChanges.subscribe(val => {
+      this.quoteStateService.setError(null);
+    });
   }
 
   /**
@@ -115,26 +128,6 @@ export class QuoteCreateContentComponent implements OnInit {
   /**
    * Create quote
    */
-  public subToaddQuoteBeforeSend() {
-    console.log('subToaddQuoteBeforeSend');
-   /* this.quoteStateService.addQuoteBeforeSend.subscribe((quote) => {
-      console.log('this.quoteForm.value',this.quoteForm.value);
-      this.quoteService.createQuote(this.quoteForm.value, false)
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe((res:reqCreateQuote) => {
-        console.log('res',res);
-        quote.id = res.id;
-        quote.company = res.company;
-        this.quoteService.resend(quote)
-          .subscribe((res) => {
-            if (res) {
-              this.quoteService.repeatSend(res['id']).subscribe((res) => {})
-            }
-            this.quoteStateService.goToQuote();
-        })
-    })
-    })*/
-  }
   saveAndContinue(notification?: boolean) {
     const isFormReady = this.quoteStateService.getType();
     const currentQuote = this.quoteStateService.getQuoteCreate();
@@ -174,6 +167,9 @@ export class QuoteCreateContentComponent implements OnInit {
     }
   }
 
+  /**
+   * Create quote and approve
+   */
   approveQuote() {
     const isFormReady = this.quoteStateService.getType();
     if (isFormReady && !this.editMode) {
@@ -202,13 +198,16 @@ export class QuoteCreateContentComponent implements OnInit {
     }
   }
 
+  /**
+   * Create quote and download
+   */
   public downloadPdf() {
     const isFormReady = this.quoteStateService.getType();
     if (isFormReady && !this.editMode) {
       this.quoteService.createQuote(this.quoteForm.value, false).pipe(takeUntil(this.unsubscribe))
       .subscribe((res) => {
         const id = res['id'];
-        this.quoteService.downloadPdf(res['id']).subscribe((res) => this.downLoadFile(res,id));
+        this.quoteService.downloadPdf(res['id']).subscribe((res) => this.quoteService.downLoadFile(res, id,this.quoteStateService.getQuoteCreate().client.name,this.quoteNumber));
       })
     } else if (isFormReady && this.editMode) {
       const currentQuote = this.quoteStateService.getQuoteCreate();
@@ -216,7 +215,7 @@ export class QuoteCreateContentComponent implements OnInit {
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((res) => {
         const id = res['id'];
-        this.quoteService.downloadPdf(res['id']).subscribe((res) => this.downLoadFile(res,id));
+        this.quoteService.downloadPdf(res['id']).subscribe((res) => this.quoteService.downLoadFile(res, id,this.quoteStateService.getQuoteCreate().client.name,this.quoteNumber));
       })
     } else {
       this.quoteStateService.emitValidation();
@@ -230,14 +229,17 @@ export class QuoteCreateContentComponent implements OnInit {
    * @param res - Array Buffer data
    * @param id - type of the document.
    */
-  downLoadFile(res: any, id) {
+/*  downLoadFile(res: any, id) {
     const data = window.URL.createObjectURL(res);
+    console.log('data',data);
     var link = document.createElement('a');
     link.href = data;
     link.download=`${this.apiUrl}saleQuotes/${id}/pdf.pdf`;
+    link.download = `CompanyName_Quote-number.pdf`;
     link.click();
-    this.quoteStateService.goToQuote();
-  }
+    console.log('link',link);
+   // this.quoteStateService.goToQuote();
+  }*/
 
   /**
    * Set client for quote
@@ -266,8 +268,8 @@ export class QuoteCreateContentComponent implements OnInit {
   /**
    * Save and continue in hande end modee
    */
-  public handeSendMode() {
-    this.quoteStateService.handeSendMode
+  public handleSendMode() {
+    this.quoteStateService.handleSendMode
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((res) => {
         this.saveAndContinue(true);
@@ -280,6 +282,7 @@ export class QuoteCreateContentComponent implements OnInit {
   ngOnDestroy() {
     this.unsubscribe.next();
     this.unsubscribe.complete();
+    this.quoteStateService.setQuoteForm(this.quoteForm);
   }
 
 }

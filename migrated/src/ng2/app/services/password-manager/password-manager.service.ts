@@ -3,6 +3,9 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { environment } from "../../../environments/environment";
 import { HttpClient } from "@angular/common/http";
 
+/**
+ * Password manager service
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -21,62 +24,113 @@ export class PasswordManagerService {
   public mobileCategory: EventEmitter<any> = new EventEmitter();
   public newRecordsisAdd: EventEmitter<any> = new EventEmitter();
 
-  constructor(
+  /**
+   * Password manager service constructor
+   * @param {HttpClient} http Service to work with request
+   */
+  public constructor(
     private http: HttpClient
   ) { }
 
-  setSelectedDeviceOrUser(item) {
+  /**
+   * Set selected device or user
+   * @param item - item to set
+   */
+  public setSelectedDeviceOrUser(item) {
     this.selectedDeviceOrUser.emit(item)
   }
 
-  setSelectedCategory(item) {
+  /**
+   * Set selected category
+   * @param item - item to set
+   */
+  public setSelectedCategory(item) {
     this.getSelectedCategory(item)
   }
 
-  getSelectedCategory(item) {
+  /**
+   * Get selected category
+   * @param item
+   */
+  public getSelectedCategory(item) {
     this.emitSelectedCategory.emit(item)
   }
 
-  setDate(item) {
+  /**
+   * Set date
+   * @param item - date data
+   */
+  public setDate(item) {
     this.selectedDate.emit(item)
   }
 
-  addRecord(item?) {
+  /**
+   * Add new record
+   * @param item - record data
+   */
+  public addRecord(item?) {
     this.showAddForm.emit(item);
     this.newRecordsisAdd.emit();
   }
 
-  deleteRecord(recordId) {
+  /**
+   * Delete record
+   * @param recordId - id of record
+   */
+  public deleteRecord(recordId) {
     this.deleteItem.emit(recordId);
     this.hideAddForm.emit();
   }
 
-  deleteRecordFromEditForm(recordId) {
+  /**
+   * Delete record from edit form
+   * @param recordId - id of record
+   */
+  public deleteRecordFromEditForm(recordId) {
     this.deleteItemEditForm.emit(recordId);
     this.hideAddForm.emit();
   }
 
-  saveRecord(recordInfo) {
+  /**
+   * Save record
+   * @param recordInfo - record data
+   */
+  public saveRecord(recordInfo) {
     const date = recordInfo.expiredDate;
     return this.http.post(this.apiUrl + 'passwordRecords', this.getData(recordInfo));
   }
 
-  editRecord(recordInfo, recordId) {
+  /**
+   * Edit record
+   * @param recordId - id of record
+   * @param recordInfo - record data
+   */
+  public editRecord(recordInfo, recordId) {
     const date = recordInfo.expiredDate;
     return this.http.put(this.apiUrl + 'passwordRecords', Object.assign({id:recordId},this.getData(recordInfo)));
   }
 
-  formatDayAndMonth(item) {
+  /**
+   * Format day and mouth
+   * @param item - date data
+   */
+  public formatDayAndMonth(item) {
     return item < 10 ? `0${item}` : item;
   }
 
+  /**
+   * Get formated date
+   * @param date - date data
+   */
   public getFormatedDate(date) {
     return date && `${date.year}/${this.formatDayAndMonth(date.month)}/${this.formatDayAndMonth(date.day)}`;
   }
 
+  /**
+   * Get data info
+   * @param recordInfo - record information
+   */
   public getData(recordInfo) {
-    console.log(recordInfo.type.UPPERCASE, 'recordInfo.type.title');
-
     if (recordInfo.type.UPPERCASE === 'OFFICE_365_ACCOUNT') {
       return ({
         companyId: recordInfo.client && recordInfo.client.id,
@@ -188,10 +242,16 @@ export class PasswordManagerService {
     }
   }
 
+  /**
+   * Close filters
+   */
   public closeFilters() {
     this.closeFilter.emit();
   }
 
+  /**
+   * Set mobile category
+   */
   public setMobileCategory() {
     this.mobileCategory.emit();
   }
