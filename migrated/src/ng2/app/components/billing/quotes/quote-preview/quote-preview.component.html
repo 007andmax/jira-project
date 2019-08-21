@@ -5,19 +5,24 @@
       <button class="btn-new default" (click)="goToCreate()">Edit</button>
 
 
-      <div class="btn-new btn-success btn-with-dropdown">
-        <button type="button" (click)="save()">Save and Continue</button>
+      <div class="btn-new btn-success btn-with-dropdown" >
+        
+        <button type="button" (click)="save()" *ngIf="editMode">Save and Continue</button>
+        <button type="button" (click)="approveQuote()" *ngIf="!editMode">Save and Approve</button>
         <div class="light-dropdown" ngbDropdown role="group" aria-label="Button group with nested dropdown">
           <button class="dropdown-toggle-split" ngbDropdownToggle>
             <i class="icn-sm pointer report-caret-icon-white"></i>
           </button>
           <div class="dropdown-menu" ngbDropdownMenu>
-            <button class="dropdown-item" ngbDropdownItem (click)="approveQuote()">Save and Approve</button>
+            <button class="dropdown-item" ngbDropdownItem (click)="approveQuote()" *ngIf="editMode">Save and Approve</button>
+            <button class="dropdown-item" ngbDropdownItem (click)="save()" *ngIf="!editMode">Save and Continue</button>
+
             <button class="dropdown-item" ngbDropdownItem (click)="downloadPdf()">Save and Download</button>
             <button class="dropdown-item" ngbDropdownItem (click)="saveAndSend()">Save and Send</button>
           </div>
         </div>
       </div>
+     
 
 
       <!--<button class="btn-new btn-success" (click)="save()">-->
