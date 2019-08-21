@@ -15,6 +15,7 @@
           time: '<'
         },
         link: function (scope, element, attrs) {
+        
           if (scope.sqpDay) {
             scope.sqpInput = 'sqp-cond-input=' + '"' + scope.sqpDay + ' ' + scope.sqpPeriod + '"';
           } else {
@@ -144,6 +145,7 @@
           }
 
           function onInput() {
+          
             quantityDropdown.hide();
             isDropdownShow = false;
             scope.isDropdownShow = false;
@@ -173,7 +175,6 @@
                 savedValue = splited.join('');
               }
 
-
               input.val(savedValue);
               return;
             }
@@ -194,12 +195,13 @@
               } else {
                 savedValue = value;
               }
-
+           
               input.val(savedValue);
             }
           }
 
           function initPicker() {
+     
             scope.isWatchDisable = false;
             var url = '';
             if (scope.type === 'minutes') {
@@ -220,6 +222,8 @@
               minuteDropdown.bind('mousedown', chooseQuantity);
               formatDropdown.bind('mousedown', chooseQuantity);
               if (scope.quantity) {
+               
+              
                 setStartingValue(scope.quantity, hourDropdown, minuteDropdown, formatDropdown)
               }
               if (isFormatShow) {
@@ -333,7 +337,20 @@
           }
 
           function setStartingValue(value, hourDropdown, minuteDropdown, formatDropdown) {
+         
+            var timeInMinutes = value,
+            hours = Math.floor(timeInMinutes / 60),
+            minutes = Math.round(timeInMinutes - (hours * 60));
+            if (hours < 10) {
+              hours = '0' + hours;
+            }
+            if (minutes < 10) {
+              minutes = '0' + minutes;
+            }
+            input.val(hours + ' : ' + minutes);
+            /*
             if (scope.sqpDay) {
+              console.log('scope.sqpDay',scope.sqpDay);
               var time = value.split(':');
               var hour = time[0];
               var minute = time[1];
@@ -360,13 +377,15 @@
               if (minute < 10) {
                 minute = '0' + minute;
               }
+              console.log('setStartingValue',hour + " " + minute);
               setValue(hour, minute);
             } else {
               setValue('00', value < 10 ? '0' + value : value);
-            }
+            }*/
           }
 
             function setValue(hours, minute) {
+            
               if (scope.quantity) {
                 if (scope.type === 'minutes') {
                   minutesElement.val(Math.floor((scope.quantity - Math.floor(scope.quantity))*60));
@@ -374,6 +393,7 @@
                   hourElement.val(Math.floor(scope.quantity));
                 }
               } else if (isFormatShow) {
+              
                 input.val(hours + ' : ' + minute + ' ' + format);
                 dropdownElement.hoverHourElement = hourDropdown.find('li:nth-child(' + (+hours + 1) + ') a');
                 dropdownElement.hoverHourElement.css('background-color', '#f1f5fa');
@@ -398,6 +418,7 @@
 
               } else {
                 if (scope.type !== 'minutes' && scope.type !== 'hours') {
+               
                   input.val(hours + ' : ' + minute);
                 }
                 // input.val(hours + ' : ' + minute);
@@ -415,7 +436,8 @@
                 }
 
             }
-
+          //  input.val(1 + ' : ' + 30);
+scope.$apply();
           }
 
         }

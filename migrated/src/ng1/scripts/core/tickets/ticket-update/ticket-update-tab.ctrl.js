@@ -135,8 +135,7 @@
 
           if (window.innerWidth <= 414) {
             $scope.$watch('editExpense', function(val) {
-
-              $timeout(function() {
+            //  $timeout(function() {
 
                 $scope.newEditExpense = angular.copy($scope.editExpense);
                 if (val && val.note) {
@@ -178,23 +177,24 @@
                     $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) * 60).toFixed(0);
                   }
                 }
-
                 if ($scope.serviceToEdit &&  $scope.serviceToEdit[0].date) {
                   $scope.serviceToEdit[0].date = $filter('date')($scope.serviceToEdit[0].date, 'dd MMM yyyy');
 
                 }
+                $scope.$apply();
+             //   toggleDataSelector()
 
-                toggleDataSelector()
 
-
-              }, 100)
+         //     }, 100)
 
             }, true);
 
             $scope.$watch(function() {
               return $scope.ticketUpdate && $scope.ticketUpdate.services
             }, function(val) {
+              console.log('val',val);
               if (val) {
+                console.log('$scope.newEditExpense',$scope.newEditExpense);
                 if ($scope.newEditExpense && $scope.newEditExpense.service) {
                   $scope.openedTab('SERVICE');
                   $scope.serviceToEdit = [$scope.newEditExpense.service];
@@ -211,9 +211,10 @@
 
                     $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) / 60 );
                     $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) * 60).toFixed(0);
+
                   }
 
-
+                  console.log('$scope.serviceToEdit',$scope.serviceToEdit[0].quantity);
 
                 }
 
@@ -221,7 +222,7 @@
                   $scope.serviceToEdit[0].date = $filter('date')($scope.serviceToEdit[0].date, 'dd MMM yyyy');
                 }
 
-                toggleDataSelector()
+             //   toggleDataSelector()
 
 
 

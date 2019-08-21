@@ -1132,6 +1132,8 @@ console.log('find');
                     product: item
                   }
                 }
+              
+              $scope.$apply();
               } else {
                 $scope.toggleUpdateWindow(false)
               }

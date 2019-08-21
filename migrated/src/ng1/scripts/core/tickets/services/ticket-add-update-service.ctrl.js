@@ -26,7 +26,7 @@
           $scope.$watch(function () {
             if ($scope.serviceExpense && $scope.serviceExpense.date != undefined) return $scope.serviceExpense.date;
           }, function (value) {
-            if ($scope.serviceExpense.date) {
+            if ($scope.serviceExpense && $scope.serviceExpense.date) {
          
               var date = new Date(value);
               var currentDate = new Date();
