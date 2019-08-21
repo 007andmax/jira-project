@@ -22,9 +22,11 @@
   </div>
   <div class="col-md-2"
        *ngIf="type === 'service'">
-    <input type="text"
-           [ngClass]="{'no-valid': isFormValid}"
-           placeholder="">
+       <textarea
+       [ngClass]="{'no-valid': isFormValid}"
+       placeholder=""
+   ></textarea>
+  
   </div>
 
   <!-- IF PRODUCT -->
