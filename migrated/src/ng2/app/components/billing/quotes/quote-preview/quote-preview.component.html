@@ -115,7 +115,7 @@
           <div class="col-md-1" *ngIf="!item.sale" style="width: 35.4%;">{{item.description}}</div>
 
           <!--IF TYPE IS 'PRODUCT-->
-          <div class="col-md-1" *ngIf="item.sale" style="width: 52.2%;">{{item.description}}</div>
+          <div class="col-md-1" *ngIf="item.sale" style="width: 52.2%;white-space: pre-line;">{{item.description}}</div>
           <!----------------------------------------------------------------------------->
 
           <div class="col-md-1" style="width: 13%;">{{(item.sale || item.rate) | currency}}</div>

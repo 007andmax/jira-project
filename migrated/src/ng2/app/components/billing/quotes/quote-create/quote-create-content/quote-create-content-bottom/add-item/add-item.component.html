@@ -5,49 +5,49 @@
        *ngIf="type === 'service'"
        (clickOutside)="hideDropDown($event)">
     <div class="light-dropdown">
-        <app-services-list  [itemList]="itemListServices"
-        (selectedServicesItem)="setItem($event)"></app-services-list>
-        <i class="icn-sm report-caret-icon"></i>
-     <!--<input class="pointer"
-             type="text"
-             (click)="toggleShowDropDown()"
-             [ngClass]="{'no-valid': isFormValid}"
-             placeholder="Service">
+      <app-services-list [itemList]="itemListServices"
+                         (selectedServicesItem)="setItem($event)"></app-services-list>
       <i class="icn-sm report-caret-icon"></i>
-      <app-services-list
-        *ngIf="isDropDownShow"
-        [itemList]="itemListServices"
-        (selectedServicesItem)="setItem($event)"></app-services-list>--> 
+      <!--<input class="pointer"
+              type="text"
+              (click)="toggleShowDropDown()"
+              [ngClass]="{'no-valid': isFormValid}"
+              placeholder="Service">
+       <i class="icn-sm report-caret-icon"></i>
+       <app-services-list
+         *ngIf="isDropDownShow"
+         [itemList]="itemListServices"
+         (selectedServicesItem)="setItem($event)"></app-services-list>-->
     </div>
   </div>
   <div class="col-md-2"
        *ngIf="type === 'service'">
+    <div class="editable-description">
        <textarea
-       appTextArea
-                      [limit]="250"
-       [ngClass]="{'no-valid': isFormValid}"
-       placeholder=""
-   ></textarea>
-  
+         appTextArea
+         [limit]="250"
+         [ngClass]="{'no-valid': isFormValid}"
+         placeholder=""></textarea>
+    </div>
   </div>
 
   <!-- IF PRODUCT -->
   <div class="col-md-3"
-       style="width: 47%;"
+       style="width: 59%;"
        *ngIf="type === 'product'">
     <div class="product-dropdown-new-ng light-dropdown">
-        <app-product-list  [itemList]="itemListProducts"
-        (selectedProductItem)="setItem($event)"></app-product-list>
-        <i class="icn-sm report-caret-icon"></i>
-    <!-- <input class="pointer"
-             type="text"
-             (click)="toggleShowDropDown()"
-             [ngClass]="{'no-valid': isFormValid}"
-             placeholder="Product">
+      <app-product-list [itemList]="itemListProducts"
+                        (selectedProductItem)="setItem($event)"></app-product-list>
       <i class="icn-sm report-caret-icon"></i>
-      <app-product-list *ngIf="isDropDownShow"
-                        [itemList]="itemListProducts"
-                        (selectedProductItem)="setItem($event)"></app-product-list>--> 
+      <!-- <input class="pointer"
+               type="text"
+               (click)="toggleShowDropDown()"
+               [ngClass]="{'no-valid': isFormValid}"
+               placeholder="Product">
+        <i class="icn-sm report-caret-icon"></i>
+        <app-product-list *ngIf="isDropDownShow"
+                          [itemList]="itemListProducts"
+                          (selectedProductItem)="setItem($event)"></app-product-list>-->
     </div>
   </div>
 
@@ -57,7 +57,7 @@
            [disabled]="type === 'service'"
            placeholder="">
   </div>
-  <div class="col-md-1">
+  <div class="col-md-1 with-percent">
     <input type="text"
            [ngClass]="{'no-valid': isFormValid}"
            [disabled]="type === 'service'"

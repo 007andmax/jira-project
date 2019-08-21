@@ -44,7 +44,7 @@
   padding-right: 0 !important;
 }
 
-.with-dollar {
+.with-dollar, .with-percent {
   position: relative;
   input {
     padding-left: 20px !important;
@@ -56,7 +56,11 @@
     top: 8px;
   }
 }
-
+.with-percent{
+  &:before{
+    content: '%';
+  }
+}
 .circle-avatar {
   width: 40px;
   height: 40px;
@@ -138,7 +142,7 @@
   .checkbox-mark {
     position: absolute;
     left: 0;
-    top: 0;
+    top: 2px;
     width: 16px;
     height: 16px;
     background: url("./assets/img/icons/checkbox-ng2.png");
@@ -149,6 +153,10 @@
   input:checked ~ .checkbox-mark {
     background-position: 16px 0;
   }
+}
+
+.ng-sidebar {
+  z-index: 99 !important;
 }
 
 .btn-with-dropdown {
@@ -414,10 +422,10 @@ ngb-typeahead-window {
       border: solid 1px #edf2f6;
     }
     .col-md-1 {
-      width: 10%;
+      width: 7%;
     }
     .col-md-2 {
-      width: 24%;
+      width: 36%;
     }
     .col-md-3 {
       width: 45%;
@@ -470,6 +478,26 @@ ngb-typeahead-window {
     }
     &:focus {
       outline: none;
+    }
+  }
+}
+
+.quote-content-body .editable-description {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 150px;
+  border: 1px solid #c4cbd5;
+  border-radius: 4px;
+  display: flex;
+  textarea {
+    width: 103% !important;
+    border: none;
+    padding: 0 12px;
+    font-size: 13px;
+    outline: none;
+    &:last-child {
+      visibility: hidden;
+
     }
   }
 }

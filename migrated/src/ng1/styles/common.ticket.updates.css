@@ -933,7 +933,7 @@
   cursor: pointer;
 }
 
-.checkbox-container .checkbox-mark {
+.container-ticket-content .checkbox-container .checkbox-mark {
   position: absolute;
   left: 0;
   top: 0;
@@ -946,7 +946,7 @@
   opacity: 0;
 }
 
-.checkbox-container input:checked ~ .checkbox-mark {
+.container-ticket-content .checkbox-container input:checked ~ .checkbox-mark {
   background-position: 24px 0;
 }
 
