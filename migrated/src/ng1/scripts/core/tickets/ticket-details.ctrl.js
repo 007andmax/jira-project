@@ -923,7 +923,8 @@ console.log('find');
                   item: { versionedId: { id: editVersionedId.id, version: editVersionedId.version } },
                   description: item.description,
                   quantity: item.quantity,
-                 
+                  completed: item.completed,
+                  user: (item.user) ? { id: item.user.id } : { id: "" },
                   date: new Date(serviceDate.getFullYear(), serviceDate.getMonth(), serviceDate.getDate()),
                   discountAmount: item.discountAmount,
                   discountType: "PERCENT"
