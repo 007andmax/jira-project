@@ -28,8 +28,8 @@
                       [ngClass]="(user.selected) ? 'active' : ''"><a href="javascript:void(0)" [id]="user.id"
                         class="dropdown-link">
                         <div class="default-user-avatar avatar-background-color-odd ng-scope" *ngIf="!user.avatar">
-                          <span [textContent]="user.firstName[0].toUpperCase()"></span>
-                          <span [textContent]="user.lastName[0].toUpperCase()"></span>
+                          <span [textContent]="(user.firstName.length > 0) ? user.firstName[0].toUpperCase() : ''"></span>
+                          <span [textContent]="(user.lastName.length > 0) ? user.lastName[0].toUpperCase() : ''"></span>
                         </div>
                         <div class="default-user-avatar avatar-background-color-odd ng-scope" *ngIf="user.avatar">
                           <img ng-if="user.avatar" class="img-circle avatar-26" style="margin: 0;"
