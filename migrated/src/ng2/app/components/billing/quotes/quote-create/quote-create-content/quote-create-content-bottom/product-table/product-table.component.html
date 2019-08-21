@@ -22,9 +22,11 @@
   </div>
   <div class="col-md-2"
        *ngIf="!getMarkup(item)">
-    <input type="text"
+       <textarea
            [(ngModel)]="item && item.description"
-           placeholder="">
+           appTextArea
+                      [limit]="250"
+       ></textarea>
   </div>
 
   <!-- IF PRODUCT -->
