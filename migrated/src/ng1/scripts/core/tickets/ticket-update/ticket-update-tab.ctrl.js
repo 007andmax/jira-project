@@ -165,7 +165,7 @@
                   $scope.serviceToEdit = $scope.ticketUpdate.services;
                 }
 
-                if ($scope.serviceToEdit && ($scope.serviceToEdit[0].quantity || $scope.serviceToEdit[0].quantity == 0)) {
+            /*    if ($scope.serviceToEdit && ($scope.serviceToEdit[0].quantity || $scope.serviceToEdit[0].quantity == 0)) {
 
                   if ($scope.serviceToEdit[0].quantity / 60 >= 0.25) {
 
@@ -176,7 +176,7 @@
                     $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) / 60 );
                     $scope.serviceToEdit[0].quantity = +(($scope.serviceToEdit[0].quantity || 0) * 60).toFixed(0);
                   }
-                }
+                }*/
                 if ($scope.serviceToEdit &&  $scope.serviceToEdit[0].date) {
                   $scope.serviceToEdit[0].date = $filter('date')($scope.serviceToEdit[0].date, 'dd MMM yyyy');
 
@@ -202,7 +202,7 @@
                   $scope.serviceToEdit = $scope.ticketUpdate.services;
                 }
 
-                if ($scope.serviceToEdit && ($scope.serviceToEdit[0].quantity || $scope.serviceToEdit[0].quantity == 0)) {
+              /*  if ($scope.serviceToEdit && ($scope.serviceToEdit[0].quantity || $scope.serviceToEdit[0].quantity == 0)) {
                   if ($scope.serviceToEdit[0].quantity / 60 >= 0.25) {
 
                   } else {
@@ -216,7 +216,7 @@
 
                   console.log('$scope.serviceToEdit',$scope.serviceToEdit[0].quantity);
 
-                }
+                }*/
 
                 if ($scope.serviceToEdit[0].date) {
                   $scope.serviceToEdit[0].date = $filter('date')($scope.serviceToEdit[0].date, 'dd MMM yyyy');

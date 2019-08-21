@@ -201,7 +201,7 @@
           }
 
           function initPicker() {
-     
+     console.log('initPicker');
             scope.isWatchDisable = false;
             var url = '';
             if (scope.type === 'minutes') {
@@ -222,9 +222,26 @@
               minuteDropdown.bind('mousedown', chooseQuantity);
               formatDropdown.bind('mousedown', chooseQuantity);
               if (scope.quantity) {
-               
+               console.log('scope.quantity',scope.quantity);
+              if (!scope.type) {
+                var timeInMinutes = scope.quantity * 60,
+                hours = Math.floor(timeInMinutes / 60),
+                minutes = Math.round(timeInMinutes - (hours * 60));
               
+               
+                  if (hours < 10) {
+                    hours = '0' + hours;
+                  }
+                  if (minutes < 10) {
+                    minutes = '0' + minutes;
+                  }
+                  console.log('setStartingValue',hours + " " + minutes);
+                  input.val(hours + ' : ' + minutes);
+             
+              } else {
                 setStartingValue(scope.quantity, hourDropdown, minuteDropdown, formatDropdown)
+              }
+               
               }
               if (isFormatShow) {
                 formatDropdown.show();
@@ -337,18 +354,9 @@
           }
 
           function setStartingValue(value, hourDropdown, minuteDropdown, formatDropdown) {
-         
-            var timeInMinutes = value,
-            hours = Math.floor(timeInMinutes / 60),
-            minutes = Math.round(timeInMinutes - (hours * 60));
-            if (hours < 10) {
-              hours = '0' + hours;
-            }
-            if (minutes < 10) {
-              minutes = '0' + minutes;
-            }
-            input.val(hours + ' : ' + minutes);
-            /*
+         console.log('setStartingValue',value);
+          
+            
             if (scope.sqpDay) {
               console.log('scope.sqpDay',scope.sqpDay);
               var time = value.split(':');
@@ -381,7 +389,7 @@
               setValue(hour, minute);
             } else {
               setValue('00', value < 10 ? '0' + value : value);
-            }*/
+            }
           }
 
             function setValue(hours, minute) {
