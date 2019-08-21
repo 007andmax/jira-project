@@ -23,6 +23,8 @@
   <div class="col-md-2"
        *ngIf="type === 'service'">
        <textarea
+       appTextArea
+                      [limit]="250"
        [ngClass]="{'no-valid': isFormValid}"
        placeholder=""
    ></textarea>
