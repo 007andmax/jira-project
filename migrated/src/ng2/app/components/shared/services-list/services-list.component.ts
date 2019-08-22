@@ -17,7 +17,7 @@ export class ServicesListComponent implements OnInit {
   @Output() serviceList: any;
   @Output() selectedServicesItem = new EventEmitter<any>();
   public client: any;
-
+  public isFormValid = false;
   /**
    * Creates an instance of the ServicesListComponent with the injected services
    */
