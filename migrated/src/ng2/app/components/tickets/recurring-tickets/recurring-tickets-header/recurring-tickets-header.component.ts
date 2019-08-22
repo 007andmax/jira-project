@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RecurringTicketsStateService } from '../services/recurring-tickets-state.service';
 
-import { TicketStateService } from "../../ticket-state.service";
 
 @Component({
   selector: 'app-recurring-tickets-header',
@@ -10,14 +10,14 @@ import { TicketStateService } from "../../ticket-state.service";
 export class RecurringTicketsHeaderComponent implements OnInit {
 
   constructor(
-    private ticketStateService: TicketStateService
+    private ticketStateService: RecurringTicketsStateService
   ) { }
 
   ngOnInit() {
   }
 
-  public showTicketRecurringAside() {
-    this.ticketStateService.toggleTicketRecurringAside();
+  public showTicketAddRecurringAside() {
+    this.ticketStateService.toggleTicketAddRecurringAside();
   }
 
 }

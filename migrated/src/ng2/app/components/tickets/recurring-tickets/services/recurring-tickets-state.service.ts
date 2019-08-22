@@ -16,6 +16,7 @@ export class RecurringTicketsStateService {
   public client: any;
   public tecketForCreate: Ticket = new Ticket();
   public onEditMode: EventEmitter<any> = new EventEmitter();
+  public showTicketAddRecurringAside: EventEmitter<any> = new EventEmitter();
   editProducts: Array<EditProduct> = [];
   tehCompany:any = null;
   constructor(private companiesService: CompaniesService) {
@@ -70,6 +71,9 @@ export class RecurringTicketsStateService {
   }
   public clearCreateTicket() {
     this.create = new CreateRecurringTickets();
+  }
+  public toggleTicketAddRecurringAside() {
+    this.showTicketAddRecurringAside.emit();
   }
   public getTypeCron(cron: string) {
     if (cron.match(/\d+ \d+ \d+ [\?\*] \* (MON|TUE|WED|THU|FRI|SAT|SUN)* \*/)) {

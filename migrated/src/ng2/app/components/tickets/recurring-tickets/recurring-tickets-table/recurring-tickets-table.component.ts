@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { RecurringTicket } from '../class/recurring-ticket';
 import { MONTHS_SHORT } from 'src/ng2/app/const/date';
-import { TicketStateService } from '../../ticket-state.service';
+
 import { RecurringTicketsStateService } from '../services/recurring-tickets-state.service';
 import { RecurringService } from 'src/ng2/app/services/recurring/recurring.service';
 

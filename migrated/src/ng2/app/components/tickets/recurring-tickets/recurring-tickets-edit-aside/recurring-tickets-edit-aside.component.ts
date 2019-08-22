@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { Subscription } from "rxjs";
-import { TicketStateService } from "../../ticket-state.service";
+
 import {  FormBuilder } from '@angular/forms';
 import { ProductService } from 'src/ng2/app/services/product/product.service';
 import { ForCreateProduct } from '../class/for-create-product';
@@ -44,7 +44,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   public validate: Validate = new Validate();
  
   constructor(
-    private ticketStateService: TicketStateService,
+  
     private productService: ProductService,
     private recurringService: RecurringService,
     public cd: ChangeDetectorRef,
@@ -196,11 +196,11 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
 
   }
   public showTicketRecurring() {
-    this.showTicketRecurringSub = this.ticketStateService.showTicketRecurringAside.subscribe((res) => {
+  /*  this.showTicketRecurringSub = this.ticketStateService.showTicketRecurringAside.subscribe((res) => {
       this.opened = true;
     
       this.onInitCreateMod();
-    });
+    });*/
   }
 
 
