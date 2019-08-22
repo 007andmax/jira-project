@@ -347,13 +347,14 @@
                   </div>
                   <div class="table-content-bottom clearfix">
                     <div class="col-md-12">
-                      <a ng-if="isNoteUpdating !== ticketUpdate.id"
+                      <a ng-if="isNoteUpdating !== ticketUpdate.id && ticketUpdate.type !== 'SALE_QUOTE_REVIEW_NOTE'"
                          style="position: absolute;top: 13px;right: 0;"
                          class="hit-area pull-right has-tooltip"
                          tooltip-placement="top"
                          tooltip-append-to-body="true"
                          uib-tooltip="edit update"
                          ng-click="toggleNoteUpdate(ticketUpdate)"
+                        
                          custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">
                         <i class="icon-sm edit-icon-final"></i>
                       </a>

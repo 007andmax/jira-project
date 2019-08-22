@@ -94,6 +94,20 @@
               });
               return;
 
+
+              case 'SALE_QUOTE_REVIEW_NOTE':
+                var confirmMesage = 'The ticket update containing a note will become inaccessible. Continue with permanent deletion?',
+                  confirmButton = 'Delete',
+                  userPopUpMessage = 'The ticket update containing a note has been deleted';
+                UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
+                  TicketsService.deleteTicketUpdate($scope.ticketDetails.id, $scope.ticketUpdate.id, function () {
+                    UserNotificationService.show(userPopUpMessage, true);
+  
+                    $rootScope.attachmentsToDelete = $scope.ticketUpdate.attachments;
+                  });
+                });
+                return;
+
             case 'SERVICE':
               var confirmMesage,
                 userPopUpMessage,
