@@ -5,8 +5,8 @@
       <button class="btn-new default" (click)="goToCreate()">Edit</button>
 
 
-      <div class="btn-new btn-success btn-with-dropdown" >
-        
+      <div class="btn-new btn-success btn-with-dropdown">
+
         <button type="button" (click)="save()" *ngIf="editMode">Save and Continue</button>
         <button type="button" (click)="approveQuote()" *ngIf="!editMode">Save and Approve</button>
         <div class="light-dropdown" ngbDropdown role="group" aria-label="Button group with nested dropdown">
@@ -14,7 +14,8 @@
             <i class="icn-sm pointer report-caret-icon-white"></i>
           </button>
           <div class="dropdown-menu" ngbDropdownMenu>
-            <button class="dropdown-item" ngbDropdownItem (click)="approveQuote()" *ngIf="editMode">Save and Approve</button>
+            <button class="dropdown-item" ngbDropdownItem (click)="approveQuote()" *ngIf="editMode">Save and Approve
+            </button>
             <button class="dropdown-item" ngbDropdownItem (click)="save()" *ngIf="!editMode">Save and Continue</button>
 
             <button class="dropdown-item" ngbDropdownItem (click)="downloadPdf()">Save and Download</button>
@@ -22,7 +23,6 @@
           </div>
         </div>
       </div>
-     
 
 
       <!--<button class="btn-new btn-success" (click)="save()">-->
@@ -46,9 +46,11 @@
     <ng-template ngFor let-item [ngForOf]="quoteForCreate.reviewNotes" [ngForTrackBy]="trackById">
       <div class="quote-notes__item clearfix">
         <div class="col-md-4 pl-0">
-          <p class="quote-notes__item--fullname" [textContent]="getUserWhoSend(item.user.firstName,item.user.lastName)"></p>
+          <p class="quote-notes__item--fullname"
+             [textContent]="getUserWhoSend(item.user.firstName,item.user.lastName)"></p>
           <p class="quote-notes__item--email" [textContent]="item.user.primaryEmail"></p>
-          <p class="quote-notes__item--startdate" [textContent]="getFormatDateWithTime(item.startDate,item.createdAt)"></p>
+          <p class="quote-notes__item--startdate"
+             [textContent]="getFormatDateWithTime(item.startDate,item.createdAt)"></p>
         </div>
         <div class="col-md-8 pr-0">
           <p [textContent]="item.note"></p>
@@ -112,7 +114,8 @@
           <!----------------------------------------------------------------------------->
           <!--IF TYPE IS 'SERVICE'-->
           <div class="col-md-1" *ngIf="!item.sale" style="width: 16.7%;">{{item.name}}</div>
-          <div class="col-md-1" *ngIf="!item.sale" style="width: 35.4%;">{{item.description}}</div>
+          <div class="col-md-1" *ngIf="!item.sale"
+               style="width: 35.4%;white-space: pre-line;">{{item.description}}</div>
 
           <!--IF TYPE IS 'PRODUCT-->
           <div class="col-md-1" *ngIf="item.sale" style="width: 52.2%;white-space: pre-line;">{{item.description}}</div>
