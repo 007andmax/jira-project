@@ -14,6 +14,7 @@ export class ProductListComponent implements OnInit {
   @Output() selectedProductItem = new EventEmitter<any>();
   @Input() itemList: any;
   @Input() editItem: any;
+  public isFormValid = false;
   /**
    * Creates an instance of the ProductListComponent with the injected services
    */

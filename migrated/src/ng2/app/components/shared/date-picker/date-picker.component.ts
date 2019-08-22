@@ -91,6 +91,22 @@ export class DatePickerComponent implements OnInit, OnDestroy {
     this.sericeDatePicker.setTextInput('dropdownDate', this.date.getTitle());
     this.date_dropDown.close();
   }
+  public selectStartMonth() {
+    let date = this.calendar.getToday();
+    date.day = 1;
+    this.datepicker = date;
+    if (this.navDate) this.sericeDatePicker.updateMonthAndYearDatePicker(this.datepicker, this.navDate);
+    this.updateDate();
+
+  }
+  public selectEndMonth() {
+    // let date = this.calendar.getToday();
+     let date = this.calendar.getToday();
+     date.day = 31;
+     this.datepicker = date;
+     if (this.navDate) this.sericeDatePicker.updateMonthAndYearDatePicker(this.datepicker, this.navDate);
+     this.updateDate();
+   }
   public navigateDate(data: NgbDatepickerNavigateEvent) {
     this.navDate = data;
   }
