@@ -24,6 +24,7 @@
        *ngIf="!getMarkup(item)">
     <div class="editable-description">
        <textarea
+       [minHeight]="40"
          [(ngModel)]="item && item.description"
          appTextArea
          [limit]="250"></textarea>

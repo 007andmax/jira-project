@@ -10,6 +10,7 @@ export class TextAreaDirective implements OnInit  {
   lines: number = 1;
   height:number = 0;
   @Input() limit;
+  @Input() minHeight;
   block: boolean = false;
   constructor(private element: ElementRef, public cd: ChangeDetectorRef) {
 
@@ -26,6 +27,7 @@ export class TextAreaDirective implements OnInit  {
   
  
     if (this.limit) this.onInitLimit();
+  
  //   this.onCheckReset();
   
    
@@ -51,7 +53,13 @@ export class TextAreaDirective implements OnInit  {
       if (this.limit && this.height >= this.limit) {
         this.element.nativeElement.style.height = this.limit + 'px';
       } else {
-        this.element.nativeElement.style.height = this.height + "px";
+  
+        if (this.element.nativeElement.value.length === 0 && this.minHeight) {
+          this.element.nativeElement.style.height = this.minHeight + "px";
+        } else {
+          this.element.nativeElement.style.height = this.height + "px";
+        }
+   
       }
 
     }
