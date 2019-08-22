@@ -21,10 +21,9 @@ import { ChangeDatePicker } from '../../../shared/date-picker/class/change-date-
   providers: [RecurringTicketsService]
 })
 export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
- 
+
   public showTicketRecurringSub: Subscription;
   public opened = false;
-
   public productList = [];
   public servicesList = [];
   public products: Array<ForCreateProduct> = [];
@@ -34,9 +33,9 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   public devicesList = [];
   public tehUsers = [];
   public validate: Validate = new Validate();
- 
+
   constructor(
- 
+
     private productService: ProductService,
     private recurringService: RecurringService,
     public cd: ChangeDetectorRef,
@@ -51,10 +50,10 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.showTicketRecurring();
     this.getItemListProducts();
     this.recurringState.onInitClientList();
-   
+
   }
-  public onChangeDatePicker (data: ChangeDatePicker) {
-      this.recurringState.getCreateTicket().setStartDate(data.day, data.month, data.year, this.recurringState.getTehCompany().addresses[0].timeZone.timeOffset);
+  public onChangeDatePicker(data: ChangeDatePicker) {
+    this.recurringState.getCreateTicket().setStartDate(data.day, data.month, data.year, this.recurringState.getTehCompany().addresses[0].timeZone.timeOffset);
   }
 
   public onChangeTags(tags) {
@@ -83,7 +82,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.recurringState.getCreateTicket().clearAgents();
     this.recurringState.getCreateTicket().setDefaultCron();
     this.createService.getStateDatePicker().onInitReset();
-  
+
     this.cd.detectChanges();
   }
 
@@ -124,7 +123,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     if (selectClient === 'null') {
 
       this.recurringState.getCreateTicket().setCompany(null);
-    
+
       this.selectedClient = null;
       this.recurringState.setClient(selectClient);
       this.services = [new ForCreateService()];
@@ -143,7 +142,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   public showTicketRecurring() {
     this.showTicketRecurringSub = this.recurringState.showTicketAddRecurringAside.subscribe((res) => {
       this.opened = true;
-    
+
       this.onInitCreateMod();
     });
   }
@@ -159,7 +158,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   }
 
   public setService(item, index) {
-    item = { ...item, ...{ description: '', duration: (this.services[index].duration) ? this.services[index].duration :  1 } };
+    item = { ...item, ...{ description: '', duration: (this.services[index].duration) ? this.services[index].duration : 1 } };
     this.services[index] = new ForCreateService(item);
   }
 
@@ -220,32 +219,32 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
           this.products[index].versionedId.id = item.id;
           this.products[index].versionedId.version = item.version;
         })
-        this.onInitSave();
+        this.onCompleteAdd();
         this.getItemListProducts();
       }, (err) => {
 
         this.createService.checkErrorsProducts(this.products, err.error.validationResults);
 
-        });
+      });
     } else {
-      this.onInitSave();
+      this.onCompleteAdd();
     }
   }
 
-  public onInitSave() {
+  public onCompleteAdd() {
 
     this.recurringState.getCreateTicket().resetProducts();
     this.recurringState.getCreateTicket().resetServices();
     this.createService.setRulesCreateTicket(this.recurringState.getCreateTicket());
     this.products.forEach((item: ForCreateProduct) => (item.name || item.description) && this.recurringState.getCreateTicket().addProdct(new CreateRecurringTicketsProduct(item.versionedId.id, item.quantity, item.discount)));
-   this.services.forEach((item: ForCreateService) => (item.name || item.description) && this.recurringState.getCreateTicket().addService(new CreateRecurringTicketsService(item.versionedId.id, item.description, item.duration)));
-console.log('this.recurringState.getCreateTicket()',this.recurringState.getCreateTicket());
-this.recurringService.createTicket(this.recurringState.getCreateTicket()).subscribe((res) => {
-  this.close();
-})
+    this.services.forEach((item: ForCreateService) => (item.name || item.description) && this.recurringState.getCreateTicket().addService(new CreateRecurringTicketsService(item.versionedId.id, item.description, item.duration)));
+    console.log('this.recurringState.getCreateTicket()', this.recurringState.getCreateTicket());
+    this.recurringService.createTicket(this.recurringState.getCreateTicket()).subscribe((res) => {
+      this.close();
+    })
   }
 
-  public save() {
+  public onInitAdd() {
     this.validate.checkValidat(this.recurringState.getCreateTicket());
     if (!this.validate.getCompany() || !this.validate.getInterval()) return;
     this.onInitCheckProduct();
