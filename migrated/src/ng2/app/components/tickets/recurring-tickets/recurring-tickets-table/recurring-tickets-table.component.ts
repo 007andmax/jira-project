@@ -15,7 +15,8 @@ import { RecurringService } from 'src/ng2/app/services/recurring/recurring.servi
 export class RecurringTicketsTableComponent implements OnInit {
   @Input() ticket: RecurringTicket;
   public showSelect = false;
-  constructor(public recurringState: RecurringTicketsStateService, private recurringService: RecurringService) { }
+  constructor(public recurringState: RecurringTicketsStateService, private recurringService: RecurringService,
+   ) { }
 
   ngOnInit() {
     console.log('ticket', this.ticket);

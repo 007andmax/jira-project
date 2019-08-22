@@ -56,7 +56,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.showTicketRecurring();
+  //  this.showTicketRecurring();
     this.getItemListProducts();
     this.recurringState.onInitClientList();
     this.onCheckEditMode();
@@ -124,18 +124,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.recurringState.getCreateTicket().setDescription(event.target.value);
   }
 
-  private onInitCreateMod() {
 
-    this.products = [new ForCreateProduct()];
-    this.services = [new ForCreateService()];
-    this.recurringState.getCreateTicket().clearTehUsers();
-    this.recurringState.getCreateTicket().clearTags();
-    this.recurringState.getCreateTicket().clearAgents();
-    this.recurringState.getCreateTicket().setDefaultCron();
-    this.createService.getStateDatePicker().onInitReset();
-  
-    this.cd.detectChanges();
-  }
 
   public onChangeTehUsers(tehusers) {
     this.tehUsers = tehusers;
@@ -195,13 +184,13 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.cd.detectChanges();
 
   }
-  public showTicketRecurring() {
-  /*  this.showTicketRecurringSub = this.ticketStateService.showTicketRecurringAside.subscribe((res) => {
+  /*public showTicketRecurring() {
+    this.showTicketRecurringSub = this.recurringState.showTicketEditRecurringAside.subscribe((res) => {
       this.opened = true;
     
-      this.onInitCreateMod();
-    });*/
-  }
+     // this.onInitCreateMod();
+    });
+  }*/
 
 
   /**
