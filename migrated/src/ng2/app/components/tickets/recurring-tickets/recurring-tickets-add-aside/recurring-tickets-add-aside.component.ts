@@ -13,6 +13,7 @@ import { RecurringTicketsService } from '../services/recurring-tickets.service';
 import { Validate } from '../class/validate';
 import { CreateRecurringTicketsProduct } from '../class/create-recurring-tickets-product';
 import { CreateRecurringTicketsService } from '../class/create-recurring-tickets-service';
+import { AlertStateService } from '../../../shared/alert/services/alert-state.service';
 
 @Component({
   selector: 'app-recurring-tickets-add-aside',
@@ -43,6 +44,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     private companiesState: SelectClientCompanyStateService,
     private recurringState: RecurringTicketsStateService,
     public createService: RecurringTicketsService,
+    private alertState:AlertStateService
   ) {
   }
 
@@ -240,6 +242,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.services.forEach((item: ForCreateService) => (item.name || item.description) && this.recurringState.getCreateTicket().addService(new CreateRecurringTicketsService(item.versionedId.id, item.description, item.duration)));
     console.log('this.recurringState.getCreateTicket()', this.recurringState.getCreateTicket());
     this.recurringService.createTicket(this.recurringState.getCreateTicket()).subscribe((res) => {
+      this.alertState.oninitShowAlert("Recurring ticket has been created");
       this.close();
     })
   }

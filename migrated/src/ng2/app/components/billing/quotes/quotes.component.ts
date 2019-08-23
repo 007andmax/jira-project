@@ -11,6 +11,7 @@ import {ModalQuoteComponent} from "../../../services/modal/modal-quote/modal-quo
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import { Subscription } from 'rxjs';
 import { QuoteResult } from './class/quote-result';
+import { AlertStateService } from '../../shared/alert/services/alert-state.service';
 
 /**
  * Password quotes component
@@ -40,7 +41,6 @@ export class QuotesComponent implements OnInit,OnDestroy {
   };
   public showPreloader: boolean = true;
   public quoteResultMessage:string = "";
-  public successQuoteAdding:boolean = false;
   public infiniteScrollDisabled = false;
   public sub:Subscription = new Subscription();
 
@@ -61,7 +61,8 @@ export class QuotesComponent implements OnInit,OnDestroy {
     private cdRef:ChangeDetectorRef,
     private quoteStateService: QuoteStateService,
     private quoteRealTimeService: QuoteRealTimeService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private alertState:AlertStateService
   ) { }
 
   /**
@@ -90,12 +91,12 @@ export class QuotesComponent implements OnInit,OnDestroy {
 
   private checkQuoteHasSent () {
     let result:QuoteResult =  this.quoteStateService.getQuoteResult();
-    this.successQuoteAdding = (result) ? result.getShow() : false;
-    if (this.successQuoteAdding) {
-      this.quoteResultMessage = this.quoteStateService.getQuoteResult().getMessage();
+    let successQuoteAdding = (result) ? result.getShow() : false;
+    if (successQuoteAdding) {
+    //  this.quoteResultMessage = this.quoteStateService.getQuoteResult().getMessage();
+      this.alertState.oninitShowAlert(this.quoteStateService.getQuoteResult().getMessage());
      setTimeout(() => {
       result.setShow(false);
-       this.successQuoteAdding = false;
      }, 2000);
     }
   }
