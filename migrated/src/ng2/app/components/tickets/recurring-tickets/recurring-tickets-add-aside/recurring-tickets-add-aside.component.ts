@@ -281,6 +281,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.services = [];
     this.validate = new Validate();
     this.copy = false;
+    this.createService.resetAddAdditionalOptions();
   }
 
   public trackById(index, item) {

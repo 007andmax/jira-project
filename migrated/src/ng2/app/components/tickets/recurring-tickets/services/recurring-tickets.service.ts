@@ -26,9 +26,16 @@ export class RecurringTicketsService {
   ) { }
   public setRulesCreateTicket(data: CreateRecurringTickets) {
 
-    data.setRequireUpdate(this.elRef.nativeElement.querySelector('#requireUpdate').checked);
-    data.setQuickClose(this.elRef.nativeElement.querySelector('#quickClose').checked);
-    data.setCreateTask(this.elRef.nativeElement.querySelector('#createTask').checked);
+    data.setRequireUpdate(this.elRef.nativeElement.querySelector('#requireUpdate-add').checked);
+    data.setQuickClose(this.elRef.nativeElement.querySelector('#quickClose-add').checked);
+    data.setCreateTask(this.elRef.nativeElement.querySelector('#createTask-add').checked);
+
+  }
+  public setRulesUpdateTicket(data: CreateRecurringTickets) {
+
+    data.setRequireUpdate(this.elRef.nativeElement.querySelector('#requireUpdate-edit').checked);
+    data.setQuickClose(this.elRef.nativeElement.querySelector('#quickClose-edit').checked);
+    data.setCreateTask(this.elRef.nativeElement.querySelector('#createTask-edit').checked);
 
   }
 public getStateDatePicker () {
@@ -71,17 +78,27 @@ public getStateDatePicker () {
       }
     };
   }
+  public resetAddAdditionalOptions () {
+    this.elRef.nativeElement.querySelector('#requireUpdate-add').checked = false;
+    this.elRef.nativeElement.querySelector('#quickClose-add').checked = false;
+    this.elRef.nativeElement.querySelector('#createTask-add').checked = false;
+  }
+  public resetEditAdditionalOptions () {
+    this.elRef.nativeElement.querySelector('#requireUpdate-edit').checked = false;
+    this.elRef.nativeElement.querySelector('#quickClose-edit').checked = false;
+    this.elRef.nativeElement.querySelector('#createTask-edit').checked = false;
+  }
   public setTagsForEdit(tags) {
     this.tagsState.setTagsFromtEdit(tags);
   }
   public setRequireUpdate(requireUpdate) {
-    this.elRef.nativeElement.querySelector('#requireUpdate').checked = requireUpdate;
+    this.elRef.nativeElement.querySelector('#requireUpdate-edit').checked = requireUpdate;
   }
   public setQuickClose(quickClose) {
-    this.elRef.nativeElement.querySelector('#quickClose').checked = quickClose;
+    this.elRef.nativeElement.querySelector('#quickClose-edit').checked = quickClose;
   }
   public setCreateTask(createTask) {
-    this.elRef.nativeElement.querySelector('#createTask').checked = createTask;
+    this.elRef.nativeElement.querySelector('#createTask-edit').checked = createTask;
   }
   public getProductsForEdit(list: Array<ProductRecurringTicket>) {
     let products: Array<ForCreateProduct> = [];
