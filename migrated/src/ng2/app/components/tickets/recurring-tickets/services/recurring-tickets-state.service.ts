@@ -1,12 +1,10 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { CreateRecurringTickets } from '../recurring-tickets-edit-aside/class/create-recurring-tickets';
+import { CreateRecurringTickets } from '../class/create-recurring-tickets';
 import { RecurringTicket } from '../class/recurring-ticket';
 import { Ticket } from '../../class/ticket';
 import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
-import { RecurringTicketUser } from '../interfaces/recurring-ticket-user';
 import { EditProduct } from 'src/ng2/app/interfaces/product/edit-product';
-import { Observable } from 'rxjs';
-import { RecurringService } from 'src/ng2/app/services/recurring/recurring.service';
+ 
 
 @Injectable({
   providedIn: 'root'

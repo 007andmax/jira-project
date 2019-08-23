@@ -1,5 +1,4 @@
 import { CreateRecurringTickets } from './create-recurring-tickets';
-import { RecurringTicket } from '../../class/recurring-ticket';
 
 export class Validate  {
     company: boolean = true;

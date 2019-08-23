@@ -3,18 +3,16 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/ng2/environments/environment';
 import { tap, catchError } from 'rxjs/operators';
 import { throwError, forkJoin, Observable } from 'rxjs';
-import { CreateRecurringTickets } from '../../components/tickets/recurring-tickets/recurring-tickets-edit-aside/class/create-recurring-tickets';
+import { CreateRecurringTickets } from '../../components/tickets/recurring-tickets/class/create-recurring-tickets';
 import { RecurringTicket } from '../../components/tickets/recurring-tickets/class/recurring-ticket';
-import { RecurringTicketsStateService } from '../../components/tickets/recurring-tickets/services/recurring-tickets-state.service';
-import { filter, map } from 'rxjs/operators';
+import {  map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecurringService {
   private apiUrl = environment.apiUrl;
-  constructor(private http: HttpClient,
-    private recurringState: RecurringTicketsStateService, ) { }
+  constructor(private http: HttpClient ) { }
 
   public onInitEditProducts(products): Observable<any[]> {
     let out = [];

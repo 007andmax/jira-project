@@ -1,22 +1,17 @@
 import { Injectable, ElementRef } from '@angular/core';
 import { CreateRecurringTickets } from '../class/create-recurring-tickets';
-import { Subscribable, Subscription } from 'rxjs';
-import { RecurringTicketAgent } from '../../interfaces/recurring-ticket-agent';
-import { ProductRecurringTicket } from '../../interfaces/product-recurring-ticket';
-import { ForCreateProduct } from '../../class/for-create-product';
-import { ForCreateService } from '../../class/for-create-service';
-import { ServiceRecurringTicket } from '../../interfaces/service-recurring-ticket';
+import { Subscription } from 'rxjs';
+import { ProductRecurringTicket } from '../interfaces/product-recurring-ticket';
+import { ForCreateProduct } from '../class/for-create-product';
+import { ForCreateService } from '../class/for-create-service';
+import { ServiceRecurringTicket } from '../interfaces/service-recurring-ticket';
 import { TagsStateService } from 'src/ng2/app/components/shared/tags/services/tags-state.service';
 import { IntervalStateService } from 'src/ng2/app/components/shared/interval/services/interval-state.service';
 import { TehUsersSateService } from 'src/ng2/app/components/shared/teh-users/services/teh-users-sate.service';
-import { DevicesStateService } from '../../devices-recurring-tickets/services/devices-state.service';
-import { DurationStateService } from 'src/ng2/app/components/shared/duration/services/duration-state.service';
+import { DevicesStateService } from '../devices-recurring-tickets/services/devices-state.service';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
-import { ServiceErrors } from '../../class/service-errors';
-import { RecurringTicket } from '../../class/recurring-ticket';
-import { create } from 'domain';
-import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
-import { Validate } from '../class/validate';
+import { ServiceErrors } from '../class/service-errors';
+import { RecurringTicket } from '../class/recurring-ticket';
 import { DatePickerStateService } from 'src/ng2/app/components/shared/date-picker/services/date-picker-state.service';
 
 @Injectable()
@@ -27,7 +22,6 @@ export class RecurringTicketsService {
     private stateInterval: IntervalStateService,
     private tehState: TehUsersSateService,
     private devicesState: DevicesStateService,
-    private durationState: DurationStateService,
     private stateDatePicker:DatePickerStateService
   ) { }
   public setRulesCreateTicket(data: CreateRecurringTickets) {

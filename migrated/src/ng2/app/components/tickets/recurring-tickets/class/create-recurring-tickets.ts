@@ -1,7 +1,6 @@
 import { CreateRecurringTicketsProduct } from './create-recurring-tickets-product';
 import { CreateRecurringTicketsService } from './create-recurring-tickets-service';
-import { formatDate } from '@angular/common';
-import { RecurringTicket } from '../../class/recurring-ticket';
+import { RecurringTicket } from './recurring-ticket';
 
 export class CreateRecurringTickets {
     description: string = null;

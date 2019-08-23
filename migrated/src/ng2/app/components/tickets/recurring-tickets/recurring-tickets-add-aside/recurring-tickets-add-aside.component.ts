@@ -8,11 +8,11 @@ import { ForCreateService } from '../class/for-create-service';
 import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
 import { SelectClientCompanyStateService } from '../../../billing/quotes/quote-create/quote-create-content/quote-create-content-top/select-client-company/services/select-client-company-state.service';
 import { RecurringTicketsStateService } from '../services/recurring-tickets-state.service';
-import { CreateRecurringTicketsProduct } from './class/create-recurring-tickets-product';
-import { CreateRecurringTicketsService } from './class/create-recurring-tickets-service';
-import { RecurringTicketsService } from './services/recurring-tickets.service';
-import { Validate } from './class/validate';
 import { ChangeDatePicker } from '../../../shared/date-picker/class/change-date-picker';
+import { RecurringTicketsService } from '../services/recurring-tickets.service';
+import { Validate } from '../class/validate';
+import { CreateRecurringTicketsProduct } from '../class/create-recurring-tickets-product';
+import { CreateRecurringTicketsService } from '../class/create-recurring-tickets-service';
 
 @Component({
   selector: 'app-recurring-tickets-add-aside',

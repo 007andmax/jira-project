@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef, ElementRef, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { NgbDropdown, NgbDateStruct, NgbCalendar, NgbDate } from '@ng-bootstrap/ng-bootstrap';
-import { RecurringTicketsEditAsideDate } from '../../tickets/recurring-tickets/recurring-tickets-edit-aside/class/recurring-tickets-edit-aside-date';
+import { RecurringTicketsEditAsideDate } from '../../tickets/recurring-tickets/class/recurring-tickets-edit-aside-date';
 import { DatePickerStateService } from './services/date-picker-state.service';
 import { ChangeDatePicker } from './class/change-date-picker';
 import { NgbDatepickerNavigateEvent } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker';
