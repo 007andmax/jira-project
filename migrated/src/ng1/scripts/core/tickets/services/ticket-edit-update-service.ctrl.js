@@ -262,6 +262,7 @@
                 endDate.setHours($rootScope.saveEndDate.hour)
               }
               endDate.setMinutes($rootScope.saveEndDate.minute);
+              console.log('service.description',$scope.service.description);
               TicketsService.updateExpenseInTicketUpdate({
 
                 ticketUpdateId: $scope.ticketUpdate.id,
@@ -282,6 +283,7 @@
               }, function () {
                 UserNotificationService.show('The ticket update containing a service has been modified', true);
                 $scope.setEditExpenseId();
+                $scope.service.description = JSON.parse(JSON.stringify($scope.editService.description));
               });
             } else {
               $scope.triedToSaveService = true;

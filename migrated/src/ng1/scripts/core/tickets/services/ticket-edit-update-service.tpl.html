@@ -9,7 +9,12 @@
         </label>
         {{ service.item.name }}
       </p>
-      <p class="pre-line" ng-bind-html="service.description"></p>
+    <!--  <p class="pre-line" ng-bind-html="service.description"></p>-->
+      <textarea auto-expand limit="250"
+      value="editService.description"
+      type="text" style="width: 100%; border: none" type="text" class="form-validation modal-textarea"
+      ng-model="editService.description" ng-required="true" rows="1"
+       tabindex="1"></textarea>
     </div>
     <div class="col-md-2 new-quantity-picker">
       <input type="text"
