@@ -129,7 +129,7 @@
               </div>
               <div class="col-md-4">
                 <p>Duration</p>
-                <app-duration style="width: 75%;" class="light-dropdown" [formGroup]="ticketForm"
+                <app-duration style="width: 75%;" class="light-dropdown"  
                               (selectedDucation)="selectDuration($event,i)"
                               [editItem]="service.duration"></app-duration>
                 <i class="icn-delete" *ngIf="services.length > 1" (click)="removeService(i)"></i>

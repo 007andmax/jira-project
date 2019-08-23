@@ -31,10 +31,10 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   public services: Array<ForCreateService> = [];
   public type: string = "products";
   public selectedClient: any;
-  public devicesList = [];
+  //public devicesList = [];
   public tehUsers = [];
   public validate: Validate = new Validate();
-
+  copy: boolean = false;
   constructor(
 
     private productService: ProductService,
@@ -44,7 +44,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     private companiesState: SelectClientCompanyStateService,
     private recurringState: RecurringTicketsStateService,
     public createService: RecurringTicketsService,
-    private alertState:AlertStateService
+    private alertState: AlertStateService
   ) {
   }
 
@@ -232,7 +232,10 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
       this.onCompleteAdd();
     }
   }
-
+  public onInitAddAndCopy() {
+    this.copy = true;
+    this.onInitAdd();
+  }
   public onCompleteAdd() {
 
     this.recurringState.getCreateTicket().resetProducts();
@@ -243,7 +246,14 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     console.log('this.recurringState.getCreateTicket()', this.recurringState.getCreateTicket());
     this.recurringService.createTicket(this.recurringState.getCreateTicket()).subscribe((res) => {
       this.alertState.oninitShowAlert("Recurring ticket has been created");
-      this.close();
+      if (!this.copy) {
+        this.close();
+      } else {
+        this.copy = false;
+        this.resetDataForCopy();
+      }
+
+
     })
   }
 
@@ -257,7 +267,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.opened = false;
     this.type = "products";
     this.selectedClient = null;
-    this.devicesList = [];
+  //  this.devicesList = [];
     this.tehUsers = [];
     this.companiesState.onInitClear();
     this.createService.getDevicesState().onInitClear();
@@ -270,6 +280,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.products = [];
     this.services = [];
     this.validate = new Validate();
+    this.copy = false;
   }
 
   public trackById(index, item) {
@@ -278,6 +289,15 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
 
   public trackByIndex(index, item) {
     return index;
+  }
+  private resetDataForCopy() {
+    this.companiesState.onInitClear();
+    this.createService.getDevicesState().onInitClear();
+    this.selectedClient = null;
+    this.services = [];
+    this.type = "products";
+    this.validate = new Validate();
+   // this.devicesList = [];
   }
 
   ngOnDestroy(): void {
