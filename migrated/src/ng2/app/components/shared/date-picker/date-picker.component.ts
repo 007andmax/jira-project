@@ -15,10 +15,12 @@ import { DatePickerService } from './services/date-picker.service';
 export class DatePickerComponent implements OnInit, OnDestroy {
 
   @ViewChild('date') date_dropDown: NgbDropdown;
+ 
   @Output() onChange: EventEmitter<ChangeDatePicker> = new EventEmitter();
   public datepicker: NgbDateStruct;
   public date: RecurringTicketsEditAsideDate = new RecurringTicketsEditAsideDate();
   public navDate: any;
+  public minDate:NgbDateStruct;
   constructor(private calendar: NgbCalendar,
     public cd: ChangeDetectorRef,
 
@@ -26,6 +28,7 @@ export class DatePickerComponent implements OnInit, OnDestroy {
     private sericeDatePicker: DatePickerService) { }
 
   ngOnInit() {
+    this.minDate = this.calendar.getToday();;
     this.oninitreset();
     this.onInitEditMode();
     this.oninitClear();
