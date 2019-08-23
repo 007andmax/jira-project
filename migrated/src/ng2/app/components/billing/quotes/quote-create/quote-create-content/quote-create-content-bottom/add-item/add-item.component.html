@@ -22,14 +22,11 @@
   </div>
   <div class="col-md-2"
        *ngIf="type === 'service'">
-    <div class="editable-description">
-       <textarea
-       [minHeight]="40"
-         appTextArea
-         [limit]="250"
-         [ngClass]="{'no-valid': isFormValid}"
-         placeholder=""></textarea>
-    </div>
+       <input type="text"
+       [disabled]="true"
+       placeholder="">
+    
+       
   </div>
 
   <!-- IF PRODUCT -->
