@@ -1650,7 +1650,7 @@ bold {
 
 .products-content__header--search-result {
   position: absolute;
-  width: 224px;
+  width: 245px;
   right: calc(50% - 112px);
   top: 0;
   font-size: 12px;

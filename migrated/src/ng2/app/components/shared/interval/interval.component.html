@@ -14,21 +14,24 @@
     <div class="recurring-interval-dropdown__header">
       <label class="radio-container">Daily
         <input type="radio"
-               [(ngModel)]="activeTab" value="daily"
+               [(ngModel)]="activeTab"
+               value="daily"
                (change)="setActiveTab('daily', $event)"
                name="recurring-interval">
         <span class="radio-mark"></span>
       </label>
       <label class="radio-container">Weekly
         <input type="radio"
-               [(ngModel)]="activeTab" value="weekly"
+               [(ngModel)]="activeTab"
+               value="weekly"
                (change)="setActiveTab('weekly', $event)"
                name="recurring-interval">
         <span class="radio-mark"></span>
       </label>
       <label class="radio-container">Monthly
         <input type="radio"
-               [(ngModel)]="activeTab" value="monthly"
+               [(ngModel)]="activeTab"
+               value="monthly"
                (change)="setActiveTab('monthly', $event)"
                name="recurring-interval">
         <span class="radio-mark"></span>
