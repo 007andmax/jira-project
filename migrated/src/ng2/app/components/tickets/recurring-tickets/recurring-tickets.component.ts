@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { RecurringService } from 'src/ng2/app/services/recurring/recurring.service';
 import { RecurringTicket } from './class/recurring-ticket';
 import { RecurringTicketsListService } from './services/recurring-tickets-list.service';
-import { RecurringTicketsStateService } from './services/recurring-tickets-state.service';
-import { RecurringTicketUser } from './interfaces/recurring-ticket-user';
 import { RecurringTicketsRealTimeService } from './services/recurring-tickets-real-time.service';
 
 @Component({
@@ -20,19 +18,33 @@ export class RecurringTicketsComponent implements OnInit {
   public direction: string = 'ASC';
   public showPreloader: boolean = true;
   public ticketList: Array<RecurringTicket> = [];
+
+  /**
+   * Creates an instance of the RecurringTicketsComponent with the injected services
+   * @param {RecurringService} recurringService Service to work with recurring tickets
+   * @param {RecurringTicketsListService} listSerivce Service to work with recurring tickets
+   * @param {RecurringTicketsRealTimeService} recurringTicketsRealTimeService Service to work with real time recurring tickets
+   * 
+   */
   constructor(
     private recurringService: RecurringService,
     private listSerivce: RecurringTicketsListService,
-    private recurringState: RecurringTicketsStateService,
     private recurringTicketsRealTimeService: RecurringTicketsRealTimeService
 
   ) { }
 
+  /**
+   * Initializes recurring ticket. See [ngOnInit]{@see OnInit#ngOnInit}
+   */
   ngOnInit() {
     this.getTicket();
     this.changeTicketListItem();
 
   }
+
+  /**
+ * Get ticker
+ */
   public getTicket() {
     if (this.listSerivce.getBlockList()) {
       this.infiniteScrollDisabled = false;
@@ -48,6 +60,10 @@ export class RecurringTicketsComponent implements OnInit {
       this.infiniteScrollDisabled = false;
     })
   }
+
+  /**
+ * Subscribe to chacnge real time
+ */
   public changeTicketListItem() {
     this.recurringTicketsRealTimeService.changeQuotesArray.subscribe((newChange) => {
       if (newChange.action === 'RECURRING_TICKET_CREATED') {
@@ -67,12 +83,19 @@ export class RecurringTicketsComponent implements OnInit {
     })
   }
 
+  /**
+ * Scroll
+ */
   public onScroll() {
-    console.log('onScroll');
     this.infiniteScrollDisabled = true;
     this.getTicket();
 
   }
+
+  /**
+ * Sort 
+ * @param sort - type sort
+ */
   public sortBy(sort) {
     this.direction = this.listSerivce.getDirection(this.direction, this.sort, sort);
     this.sort = sort;
@@ -80,6 +103,9 @@ export class RecurringTicketsComponent implements OnInit {
     this.getTicket();
   }
 
+  /**
+ * Refresh ticket list
+ */
   private refreshTicketList() {
     this.page_number = 0;
     this.ticketList = [];

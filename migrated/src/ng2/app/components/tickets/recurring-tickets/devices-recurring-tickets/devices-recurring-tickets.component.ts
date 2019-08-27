@@ -27,9 +27,11 @@ export class DevicesRecurringTicketsComponent implements OnInit,OnDestroy {
   focus$ = new Subject<string>();
   click$ = new Subject<string>();
   sub = new Subscription();
-  /**
-   *Creates an instance of the SelectClientCompanyComponent with the injected services
-   * @param {CompaniesService} companiesService to work with companiies
+   /**
+   * Creates an instance of the DevicesRecurringTicketsComponent with the injected services
+   * @param {DevicesService} devicesService Service to work with devices
+   * @param {DevicesStateService} devicesState to work devices state
+   * @param {ChangeDetectorRef} cd Service to work with change detector
    */
   constructor(
     private devicesService: DevicesService,
@@ -38,24 +40,27 @@ export class DevicesRecurringTicketsComponent implements OnInit,OnDestroy {
   ) { }
 
   /**
-   * Initializes select client. See [ngOnInit]{@see OnInit#ngOnInit}
+   * Initializes deices. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
     this.getCLientsList();
     this.onInitClearState();
    
   }
+
+  /**
+   * Initializes subscribe to clear state.
+   */
   private onInitClearState() {
     let getClearState = this.devicesState.getClearState().subscribe(() => {
       this.clearDevices();
       this.devicesList = null;
-    
-    
     });
     this.sub.add(getClearState);
    }
+
   /**
-   * Get client list
+   * Get devices list
    */
   private getCLientsList() {
     this.subGetDevicesList = this.devicesService.devicesCompany.subscribe((res: any) => {
@@ -98,13 +103,13 @@ export class DevicesRecurringTicketsComponent implements OnInit,OnDestroy {
           .filter(v => v['name'].toLowerCase().indexOf(term.toLowerCase()) > -1)))
     );
   };
+  
   /**
    * set selected item
    * @param companyId - id of company
    */
   public selectItem(device) {
     this.selectedItem.emit(device);
-
   }
 
   /**

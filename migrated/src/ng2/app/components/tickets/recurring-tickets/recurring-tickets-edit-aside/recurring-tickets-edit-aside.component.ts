@@ -23,10 +23,9 @@ import { ChangeDatePicker } from '../../../shared/date-picker/class/change-date-
   providers: [RecurringTicketsService]
 })
 export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
- 
+
   public showTicketRecurringSub: Subscription;
   public opened = false;
-
   public productList = [];
   public servicesList = [];
   public products: Array<ForCreateProduct> = [];
@@ -37,9 +36,19 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   public tehUsers = [];
   public ticketForEdit: RecurringTicket = null;
   public validate: Validate = new Validate();
- 
+
+  /**
+   * Creates an instance of the RecurringTicketsAddAsideComponent with the injected services
+   * @param {ProductService} productService Service to work with products
+   * @param {RecurringService} recurringService Service to work with recurring tickets
+   * @param {ChangeDetectorRef} cd Service to work with change detector
+   * @param {DevicesService} devicesService Service to work with devices
+   * @param {SelectClientCompanyStateService} companiesState to work companies state
+   * @param {RecurringTicketsStateService} recurringState to work recurring state
+   * @param {RecurringTicketsService} createService Service to work with create recurring ticket
+   * 
+   */
   constructor(
-  
     private productService: ProductService,
     private recurringService: RecurringService,
     public cd: ChangeDetectorRef,
@@ -50,25 +59,39 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   ) {
   }
 
+  /**
+   * Initializes edit recurring ticket. See [ngOnInit]{@see OnInit#ngOnInit}
+   */
   ngOnInit() {
     this.getItemListProducts();
     this.recurringState.onInitClientList();
     this.onCheckEditMode();
-   
-  }
-  public onChangeDatePicker (data: ChangeDatePicker) {
-      this.recurringState.getCreateTicket().setStartDate(data.day, data.month, data.year, this.recurringState.getTehCompany().addresses[0].timeZone.timeOffset);
+
   }
 
+  /**
+ * Subscribe to change date picker
+ * @param data - date picker data
+ */
+  public onChangeDatePicker(data: ChangeDatePicker) {
+    this.recurringState.getCreateTicket().setStartDate(data.day, data.month, data.year, this.recurringState.getTehCompany().addresses[0].timeZone.timeOffset);
+  }
+
+  /**
+ * Subscribe to show ticker
+ */
   private onCheckEditMode() {
     let editmode = this.recurringState.getEditMode().subscribe((data: RecurringTicket) => {
       this.opened = true;
-      
+
       this.onEditEditMode(data);
     })
     this.createService.addSubscription(editmode);
   }
 
+  /**
+  * Initializes edit mod
+  */
   private onEditEditMode(data: RecurringTicket) {
     this.createService.setDescription(data.description);
     this.ticketForEdit = data;
@@ -91,6 +114,10 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
 
   }
 
+  /**
+    * Subscribe to change tags
+    * @param tags - tag data
+    */
   public onChangeTags(tags) {
     this.recurringState.getCreateTicket().clearTags();
     tags.forEach((item) => {
@@ -98,17 +125,28 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     })
   }
 
+  /**
+   * Subscribe to change cron
+   * @param data - cron data
+   */
   public onChangeCron(data) {
 
     if (data !== null) this.validate.resetInterval();
     this.recurringState.getCreateTicket().setCronExpression(data);
   }
 
+  /**
+  * Subscribe to change description
+  * @param event - description event
+  */
   public onChangeDescription(event) {
     this.recurringState.getCreateTicket().setDescription(event.target.value);
   }
 
-
+  /**
+   * Subscribe to change teh user
+   * @param tehusers - teh users
+   */
   public onChangeTehUsers(tehusers) {
     this.tehUsers = tehusers;
     this.recurringState.getCreateTicket().clearTehUsers();
@@ -118,11 +156,17 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
 
   }
 
+  /**
+    * Get company devices
+    */
   private getCompanyDevices() {
     let company = this.recurringState.getClient();
     company && this.devicesService.onInitHangle(company.id);
   }
 
+  /**
+   * Get product list
+   */
   public getItemListProducts() {
     this.productService.getCategories().subscribe((res: any) => {
       this.productList = res;
@@ -130,17 +174,27 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+  * Check company for services
+  */
   public onCheckListServices() {
     const value = this.recurringState.getClient();
     value && this.getListServices(value);
   }
 
+  /**
+ * Get list service
+ */
   private getListServices(value) {
     this.recurringService.getServiceList(value.id).subscribe((res: any) => {
       this.servicesList = res;
     })
   }
 
+  /**
+* Subscribe to change company
+* @param selectClient - company
+*/
   public selectClient(selectClient) {
     this.validate.resetCompany();
     if (selectClient === 'null') {
@@ -159,50 +213,91 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.cd.detectChanges();
 
   }
+
+  /**
+  * Set product item
+  * @param item - product
+  * @param index - index
+  */
   public selectProduct(item, index) {
     item = { ...item, ...{ quantity: 1, discount: 1 } };
     this.products[index] = new ForCreateProduct(item);
     this.cd.detectChanges();
   }
 
+  /**
+ * Set service item
+* @param item - service
+ * @param index - index
+ */
   public setService(item, index) {
-    item = { ...item, ...{ description: '', duration: (this.services[index].duration) ? this.services[index].duration :  1 } };
+    item = { ...item, ...{ description: '', duration: (this.services[index].duration) ? this.services[index].duration : 1 } };
     this.services[index] = new ForCreateService(item);
   }
 
+  /**
+ * Subscribe to change device
+ * @param item - device
+ */
   public selectDevice(item) {
     this.recurringState.getCreateTicket().clearAgents();
     if (item) this.recurringState.getCreateTicket().setAgents(item.item.agentId);
   }
 
+  /**
+  * Subscribe to change duration
+  * @param data - duration
+  * @param i - index
+  */
   public selectDuration(data, i) {
     this.services[i].duration = data.hour + ((data.minutes) ? (data.minutes / 60) : 0);
   }
 
+  /**
+  * Add new product
+  */
   public addProduct() {
     let product: ForCreateProduct = new ForCreateProduct();
     this.products.push(product);
     this.cd.detectChanges();
   }
 
+  /**
+ * Add new service
+ */
   public addService() {
     this.services.push(new ForCreateService());
   }
 
+  /**
+  * Remove product
+  * @param i - index
+  */
   public removeProduct(i) {
     this.products.splice(i, 1);
   }
 
+  /**
+  * Remove service
+  *  @param i - index
+  */
   public removeService(i) {
     this.services.splice(i, 1);
   }
 
+  /**
+ * Get name serivce / produuct
+ *  @param item - serivce / produuct
+ */
   public getNameOrDescription(item) {
     if (item && item.name) return item.name;
     if (item && item.description) return item.description;
     return '';
   }
 
+  /**
+   * Check products
+   */
   public onInitCheckProduct() {
     this.recurringState.clearEditProducts();
     if (this.createService.checkProducts(this.products)) {
@@ -231,12 +326,15 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
         this.getItemListProducts();
       }, (err) => {
         this.createService.checkErrorsProducts(this.products, err.error.validationResults);
-       });
+      });
     } else {
       this.onInitSave();
     }
   }
 
+  /**
+ * Initializes save ticket
+ */
   public onInitSave() {
 
     this.recurringState.getCreateTicket().resetProducts();
@@ -274,12 +372,18 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+ * Save ticket
+ */
   public save() {
     this.validate.checkValidat(this.recurringState.getCreateTicket());
     if (!this.validate.getCompany() || !this.validate.getInterval()) return;
     this.onInitCheckProduct();
   }
 
+  /**
+ * Close ticket
+ */
   public close() {
     this.opened = false;
     this.type = "products";

@@ -15,33 +15,45 @@ import { RecurringService } from 'src/ng2/app/services/recurring/recurring.servi
 export class RecurringTicketsTableComponent implements OnInit {
   @Input() ticket: RecurringTicket;
   public showSelect = false;
+
+  /**
+   * Creates an instance of the RecurringTicketsHeaderComponent with the injected services
+   * @param {RecurringTicketsStateService} recurringState to work recurring state
+   * @param {RecurringService} recurringService Service to work with recurring tickets
+   * 
+   */
   constructor(public recurringState: RecurringTicketsStateService, private recurringService: RecurringService,
-   ) { }
+  ) { }
 
   ngOnInit() {
-    console.log('ticket', this.ticket);
+
   }
 
+  /**
+  * Get Date
+  * @param milisecong - milisecong date
+  */
   public getPareDate(milisecong) {
     let date = new Date(milisecong);
-   // console.log('date',date);
-          
-     let startDate = new Date(date.getTime() + (date.getTimezoneOffset() * 60 * 1000) + this.recurringState.getTehCompany().addresses[0].timeZone.timeOffset);
-    
-   // console.log('this.startDate', new Date(startDate));
+    let startDate = new Date(date.getTime() + (date.getTimezoneOffset() * 60 * 1000) + this.recurringState.getTehCompany().addresses[0].timeZone.timeOffset);
     return `${startDate.getDate()} ${MONTHS_SHORT[startDate.getMonth()]} ${startDate.getFullYear()}`;
   }
 
+  /**
+  * Get short name
+  * @param name - name ticket
+  */
   public getParseShortName(name) {
     return `${name[0].toUpperCase()}${name[1].toUpperCase()}`;
   }
 
+  /**
+   * Show model for edit
+   */
   public editTicket() {
     this.recurringState.onInitEditTicket(this.ticket);
   }
-  public trackByIndex(index, item) {
-    return index;
-  }
+
   /**
  * show selecct wrapper
  */
@@ -58,21 +70,35 @@ export class RecurringTicketsTableComponent implements OnInit {
     $event.stopPropagation();
   }
 
+  /**
+   * Request for remove ticket
+   */
   public removeTicket() {
     this.recurringService.removeTicket(this.ticket.id).subscribe(() => {
 
     })
   }
-  public suspendTicket () {
+
+  /**
+  * Request for suspend ticket
+  */
+  public suspendTicket() {
     this.recurringService.suspendTicket(this.ticket.id).subscribe(() => {
 
     })
   }
-  public resumeTicket () {
+
+  /**
+  * Request for resume ticket
+  */
+  public resumeTicket() {
     this.recurringService.resumeTicket(this.ticket.id).subscribe(() => {
 
     })
   }
- 
+
+  public trackByIndex(index, item) {
+    return index;
+  }
 
 }

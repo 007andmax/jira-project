@@ -5,17 +5,18 @@ import { Injectable, EventEmitter } from '@angular/core';
 })
 export class RecurringTicketsRealTimeService {
 
+
   public changeQuotesArray: EventEmitter<any> = new EventEmitter();
 
   /**
-   * Quote real time service constructor
+   * Recurring Tickets time service constructor
    */
   constructor() { }
 
-  /**
-   * Handle quote real time changes
-   * @newChange - new quotes array changes
-   */
+    /**
+  * Handle ticket real time changes
+  * @param newChange - new ticket array changes
+  */
   public handleRealTimeChanges(newChange) {
     this.changeQuotesArray.emit(newChange);
   }
