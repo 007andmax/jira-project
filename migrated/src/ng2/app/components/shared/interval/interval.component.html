@@ -11,7 +11,9 @@
   <div class="recurring-interval-dropdown"
        ngbDropdownMenu
        aria-labelledby="dropdownForm2">
+       <form>
     <div class="recurring-interval-dropdown__header">
+    
       <label class="radio-container">Daily
         <input type="radio"
                [(ngModel)]="activeTab"
@@ -36,7 +38,9 @@
                name="recurring-interval">
         <span class="radio-mark"></span>
       </label>
+   
     </div>
+  </form>
     <!--IF TYPE 'daily'-------------------------------->
     <div class="recurring-interval-dropdown__content clearfix" *ngIf="activeTab === 'daily'">
       <div class="col-md-6 p-0">
