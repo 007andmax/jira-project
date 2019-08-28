@@ -7,7 +7,7 @@ import { ForCreateProduct } from '../class/for-create-product';
 import { RecurringService } from 'src/ng2/app/services/recurring/recurring.service';
 import { ForCreateService } from '../class/for-create-service';
 import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
-import { SelectClientCompanyStateService } from '../../../billing/quotes/quote-create/quote-create-content/quote-create-content-top/select-client-company/services/select-client-company-state.service';
+import { SelectClientCompanyStateService } from '../../../shared/select-client-company/services/select-client-company-state.service';
 import { RecurringTicketsStateService } from '../services/recurring-tickets-state.service';
 import { CreateRecurringTicketsProduct } from '../class/create-recurring-tickets-product';
 import { CreateRecurringTicketsService } from '../class/create-recurring-tickets-service';

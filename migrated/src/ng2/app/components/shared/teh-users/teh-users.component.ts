@@ -15,12 +15,20 @@ export class TehUsersComponent implements OnInit, OnDestroy {
   public selectedUsers = [];
   resUserList = [];
   sub = new Subscription();
- 
   @Output() usersChange = new EventEmitter();
+
+   /**
+   * Creates an instance of the TehUsersComponent with the injected services
+   * @param {tehService} TehUsersService Service to work with teh users
+   * @param {TehUsersSateService} tehState to work with teh users state
+   */
   constructor(private tehService: TehUsersService,
     private tehState: TehUsersSateService,
   ) { }
 
+  /**
+   * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
+   */
   ngOnInit() {
     this.tehService.getUsersList().subscribe((data: any) => {
       this.resUserList = data.filter(item => {
@@ -40,21 +48,30 @@ export class TehUsersComponent implements OnInit, OnDestroy {
     this.onInitClearState();
     this.checUsersForEdit();
   }
+
+  /**
+  * Subscribe for edit mode
+  */
   private checUsersForEdit () {
    let getUsersFromEdit = this.tehState.getUsersFromEdit().subscribe((data:Array<RecurringTicketUser>) => {
     this.usersList.forEach((item) => {
       let index = data.findIndex(user => user.id === item.id);
       if (index > (-1)) this.usersList[index].selected = true;
     })
-
     })
     this.sub.add(getUsersFromEdit);
   }
 
+
+  /**
+  * Subscribe for clear data
+  */
   private onInitClearState() {
     let getClearState = this.tehState.getClearState().subscribe(() => this.clear());
     this.sub.add(getClearState);
   }
+
+
   /**
  * show selecct wrapper
  */
@@ -70,21 +87,28 @@ export class TehUsersComponent implements OnInit, OnDestroy {
     $event.preventDefault();
     $event.stopPropagation();
   }
-
   
-
+/**
+   * Set selected user
+   * @param index index
+   */
   public selectUser(index) {
     this.usersList[index].selected = true;
     this.selectedUsers.push(this.usersList[index]);
     this.usersChange.emit(this.selectedUsers);
   }
 
+  /**
+   * Search user
+   * @param event event
+   */
   public onSearch(event) {
-
     this.usersList = this.resUserList.filter(item => (item.firstName.toLowerCase() + ' ' + item.lastName.toLowerCase()).includes(event.target.value.toLowerCase()));
-
   }
 
+  /**
+   * Clear data
+   */
   private clear() {
     this.showSelect = false;
     this.selectedUsers = [];

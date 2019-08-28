@@ -223,24 +223,6 @@ export class QuoteCreateContentComponent implements OnInit {
 
   }
 
-
-  /**
-   * Method is use to download file.
-   * @param res - Array Buffer data
-   * @param id - type of the document.
-   */
-/*  downLoadFile(res: any, id) {
-    const data = window.URL.createObjectURL(res);
-    console.log('data',data);
-    var link = document.createElement('a');
-    link.href = data;
-    link.download=`${this.apiUrl}saleQuotes/${id}/pdf.pdf`;
-    link.download = `CompanyName_Quote-number.pdf`;
-    link.click();
-    console.log('link',link);
-   // this.quoteStateService.goToQuote();
-  }*/
-
   /**
    * Set client for quote
    */

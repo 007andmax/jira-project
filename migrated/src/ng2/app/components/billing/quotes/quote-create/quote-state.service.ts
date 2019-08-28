@@ -45,29 +45,33 @@ export class QuoteStateService {
     this.onInitCLientsList();
   }
 
+  /**
+   * Set result after request for alert
+   */
   public setQuoteResult (message) {
     this.quoteResult = new QuoteResult(message);
   }
 
+   /**
+   * Get result for alert
+   */
   public getQuoteResult () {
     return this.quoteResult;
   }
 
-  /*public getQuoteHasSent() {
-    return this.quoteHasSent;
-  }*/
+   /**
+   * Get subscribe for check quote has benn sent
+   */
   public getHandleQuoteHasSent() {
     return this.handleQuoteHasSent;
   }
+
+   /**
+   * Initializes subscribe for check quote has benn sent
+   */
   public setHandleQuoteHasSent() {
-   // this.setQuoteHasSent(true);
     this.handleQuoteHasSent.emit(null);
-
   }
-  /*public setQuoteHasSent(val) {
-    this.quoteHasSent = val;
-
-  }*/
 
   /**
    * Initializes subscribe on clients 
@@ -222,7 +226,10 @@ export class QuoteStateService {
     this.quoteForCreate.quoteNumber = value;
   }
 
-    
+    /**
+   * set start number quote
+   * @param value number quote
+   */
   public setStartQuoteNumber(value) {
     this.startQuoteNumber = value;
   }
@@ -292,7 +299,10 @@ export class QuoteStateService {
     this.total = 0;
   }
 
-
+  /**
+   * set sub total products
+   * @param value total products
+   */
   public setSubTotalProducts(value) {
     this.subTotalProducts = value;
     this.quoteForCreate.subTotalProducts = value;
@@ -316,16 +326,27 @@ export class QuoteStateService {
     this.quoteForCreate.total = value;
   }
 
+   /**
+   * set sub total services
+   * @param value total services
+   */
   public setSubTotalServices(value) {
     this.subTotalServices = value;
     this.quoteForCreate.subTotalServices = value;
   }
 
+   /**
+   * Set start date
+   * @param value date
+   */
   public setStartDate(value) {
     this.quoteForCreate.startDate = value;
   }
 
-  
+   /**
+   * Set end date
+   * @param value date
+   */
   public setEndDate(value) {
     this.quoteForCreate.endDate = value;
   }
@@ -360,6 +381,10 @@ export class QuoteStateService {
     this.quoteForCreate.selectedNote = value;
   }
 
+   /**
+   * Set note
+   * @param value note
+   */
   public setSelectedNoteFull(value) {
     this.selectedNoteFull = value;
   }
@@ -371,26 +396,47 @@ export class QuoteStateService {
     return this.selectedNoteFull;
   }
 
+   /**
+   * Set deposit
+   * @param value deposit
+   */
   public setPartialDeposit(value) {
     this.quoteForCreate.partialDeposit = value;
   }
 
+    /**
+   * Get deposit
+   */
   public getPartialDeposit() {
     return this.quoteForCreate.partialDeposit
   }
 
+   /**
+   * Set order
+   * @param value order
+   */
   public setPurchaseOrder(value) {
     this.quoteForCreate.purchaseOrder = value;
   }
 
+  /**
+   * Get order
+   */
   public getPurchaseOrder() {
     return this.quoteForCreate.purchaseOrder
   }
 
+  /**
+   * Set payment
+   * @param value payment
+   */
   public setRequestPayment(value) {
     this.quoteForCreate.requestPayment = value;
   }
 
+   /**
+   * Get payment
+   */
   public getRequestPayment() {
     return this.quoteForCreate.requestPayment
   }
@@ -425,6 +471,9 @@ export class QuoteStateService {
     this.setUsersEmail(quote.recipients);
   }
 
+    /**
+   * Get start quote number
+   */
   public getStartQuotenumber() {
     return this.startQuoteNumber;
   }
@@ -453,12 +502,18 @@ export class QuoteStateService {
     this.goToState('quote-preview-component', { editMode: true, editable: editable ? editable : true });
   }
 
+   /**
+   * Set products / services
+   */
   public divideArray() {
     this.itemsArray = this.getItemArray();
     this.productsArray = this.getProductItems(this.itemsArray, 'product');
     this.servicesArray = this.getProductItems(this.itemsArray, 'service');
   }
 
+   /**
+   * Reset data quote
+   */
   public resolveTotal() {
     this.divideArray();
     this.subTotalServices = 0;
@@ -486,6 +541,9 @@ export class QuoteStateService {
     return this.totalTaxes + this.subTotalServices + this.subTotalProducts
   }
 
+  /**
+   * Reset taxes data quote
+   */
   public resolveTaxes() {
     this.totalTaxes = 0;
     if (this.itemsArray.length > 0) {
@@ -505,6 +563,11 @@ export class QuoteStateService {
     }
   }
 
+  /**
+   * Get products / services for request
+   * @param itemsAray services and products
+   * @param type type
+   */
   getProductItems(itemsAray, type) {
     if (type === 'service') {
       itemsAray = itemsAray.filter((item) => item.hasOwnProperty('rate'));
@@ -541,6 +604,9 @@ export class QuoteStateService {
     this.quoteForCreate.message = value;
   }
 
+   /**
+   * Initializes subscribe to save mod
+   */
   public saveSandMode() {
     this.handleSendMode.emit();
   }
@@ -559,16 +625,35 @@ export class QuoteStateService {
   public getUsersEmail() {
     return this.usersEmail;
   }
+
+  /**
+   * Set markup
+   * @param item markup
+   */
   public setMarkups(item) {
     if (item.sale > 0 && item.cost > 0)
       return this.roundToOne((item.sale - item.cost) / item.cost * 100);
   }
+
+  /**
+   * Round val
+   * @param num val
+   */
   public roundToTwo(num) {
     return parseFloat((Math.round(Number(num + 'e+2')) + "e-2")).toFixed(2);
   }
+
+   /**
+   * Round val
+   * @param num val
+   */
   public roundToOne(num) {
     return parseFloat((Math.round(Number(num + 'e+2')) + "e-2")).toFixed(2);
   }
+
+   /**
+   * Reset quote for create
+   */
   public resetquoteForCreate() {
     this.quoteForCreate = this.getDefaultquoteForCreate();
   }

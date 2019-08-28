@@ -49,7 +49,7 @@ export class QuotesComponent implements OnInit,OnDestroy {
    * @param {QuoteService} quoteServices to work with api
    * @param {CompaniesService} companiesService Service to work with companies api
    * @param {DateService} dateService Service to work with date
-   * @param {ChangeDetectorRef} cdRef Service to work with date
+   * @param {ChangeDetectorRef} cdRef Service to work with change detecto
    * @param {QuoteStateService} quoteStateService to work quote state
    * @param {QuoteRealTimeService} quoteRealTimeService to work quote state
    * @param {NgbModal} modalService to work quote state
@@ -80,6 +80,9 @@ export class QuotesComponent implements OnInit,OnDestroy {
     this.sub.unsubscribe();
   }
 
+   /**
+   * Subscribe to check quote has been sent
+   */
   public onInitCheackQuoteSent() {
     this.checkQuoteHasSent();
     let quoteStateService = this.quoteStateService.getHandleQuoteHasSent().subscribe(() => {
@@ -89,6 +92,9 @@ export class QuotesComponent implements OnInit,OnDestroy {
     this.sub.add(quoteStateService);
   }
 
+   /**
+   * Check quote has been sent
+   */
   private checkQuoteHasSent () {
     let result:QuoteResult =  this.quoteStateService.getQuoteResult();
     let successQuoteAdding = (result) ? result.getShow() : false;
@@ -306,6 +312,9 @@ export class QuotesComponent implements OnInit,OnDestroy {
     });
   }
 
+  /**
+   * Subscribe to real time quote
+   */
   public changeQuotesListItem() {
     this.quoteRealTimeService.changeQuotesArray.subscribe((newChange) => {
       if (newChange.action === 'SALE_QUOTE_CREATED') {

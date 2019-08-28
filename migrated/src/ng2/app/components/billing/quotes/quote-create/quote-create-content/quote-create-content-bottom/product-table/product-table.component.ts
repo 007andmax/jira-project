@@ -207,10 +207,16 @@ export class ProductTableComponent implements OnInit {
     this.quoteStateService.setItemArray(this.itemsListArray);
   }
 
+  /**
+   * Check val is integer
+   */
   private  isInteger(num):boolean {
     return (num ^ 0) === num;
   }
 
+  /**
+   * Roundin value
+   */
   private roundingMarkup (markup) {
     return (!this.isInteger(markup)) ?  Math.ceil(markup * 10) / 10 : markup;
   }

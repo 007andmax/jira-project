@@ -259,20 +259,6 @@ export class QuotePreviewComponent implements OnInit {
   }
 
   /**
-   * Method is use to download file.
-   * @param res - Array Buffer data
-   * @param id - type of the document.
-   */
-  /*public downLoadFile(res: any, id) {
-    const data = window.URL.createObjectURL(res);
-    var link = document.createElement('a');
-    link.href = data;
-    link.download = `${this.apiUrl}saleQuotes/${id}/pdf.pdf`;
-    link.click();
-    this.quoteStateService.goToQuote();
-  }*/
-
-  /**
    * Return to quotes
    */
   public goToQuotes() {
@@ -294,6 +280,11 @@ export class QuotePreviewComponent implements OnInit {
     return item.id;
   }
 
+  /**
+   * Get user first and last name
+   * @param firstName first name
+   * @param lastName last name
+   */
   public getUserWhoSend(firstName,lastName) {
     return `${firstName} ${lastName}`;
   }
@@ -318,6 +309,11 @@ export class QuotePreviewComponent implements OnInit {
     }
   }
 
+   /**
+   * Get format date
+   * @param date date
+   * @param milisecond milisecond
+   */
   public getFormatDateWithTime (date,milisecond) {
     if (date) {
       let full_date = new Date(milisecond);

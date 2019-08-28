@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, OnDestroy, OnChanges, ElementRef } from '@angular/core';
 import { merge, Observable, Subject, Subscription } from "rxjs";
-import { CompaniesService } from "../../../../../../../services/company/companies.service";
+import { CompaniesService } from "../../../services/company/companies.service";
 import { ISubscription } from "rxjs/Subscription";
 import { debounceTime, distinctUntilChanged, filter, map } from "rxjs/operators";
 import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
@@ -37,12 +37,11 @@ export class SelectClientCompanyComponent implements OnInit, OnDestroy {
   /**
    *Creates an instance of the SelectClientCompanyComponent with the injected services
    * @param {CompaniesService} companiesService to work with companiies
+   * @param {SelectClientCompanyStateService} companiesState to work with companiies state
    */
   constructor(
     private companiesService: CompaniesService,
     private companiesState: SelectClientCompanyStateService,
-    private recurringState: RecurringTicketsStateService,
-   
   ) { }
 
   /**
@@ -56,9 +55,10 @@ export class SelectClientCompanyComponent implements OnInit, OnDestroy {
 
   }
  
-
+/**
+  * Subscribe for edit mode
+  */
   private onCheckEditItem() {
-    console.log('onCheckEditItem');
     let getCompanyFromEdit = this.companiesState.getCompanyFromEdit().subscribe((data) => {
       this.editItem = data;
       let index: number = this.clientsList.findIndex(item => item.id === this.editItem.id);
@@ -70,6 +70,9 @@ export class SelectClientCompanyComponent implements OnInit, OnDestroy {
     this.sub.add(getCompanyFromEdit);
   }
 
+  /**
+  * Subscribe for clear data
+  */
   private onInitClearState() {
     let getClearState = this.companiesState.getClearState().subscribe(() => this.clearClient());
     this.sub.add(getClearState);
@@ -92,10 +95,8 @@ export class SelectClientCompanyComponent implements OnInit, OnDestroy {
         let index: number = this.clientsList.findIndex(item => item.id === this.editItem.id);
         if (index > (-1)) {
           this.selectedClient = this.clientsList[index];
-          // this.selectedItem.emit({ item: this.clientsList[index] });
         }
       }
-      console.log(' this.clientsLis', this.clientsList);
     })
   }
 

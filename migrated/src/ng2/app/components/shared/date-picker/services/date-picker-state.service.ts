@@ -5,32 +5,51 @@ import { ChangeDatePicker } from '../class/change-date-picker';
   providedIn: 'root'
 })
 export class DatePickerStateService {
-  
-   onReset: EventEmitter<any> = new EventEmitter();
-   onEditMode: EventEmitter<any> = new EventEmitter();
-   onClear: EventEmitter<any> = new EventEmitter();
+
+  onReset: EventEmitter<any> = new EventEmitter();
+  onEditMode: EventEmitter<any> = new EventEmitter();
+  onClear: EventEmitter<any> = new EventEmitter();
   constructor() { }
- /* public onInitChange(data:ChangeDatePicker) {
-    this.onChange.emit(data);
-  }
-  public getOnChange() {
-    return this.onChange;
-  }*/
+
+  /**
+  * Initializes to subscribe for reset data
+  */
   public onInitReset() {
     this.onReset.emit(null);
   }
-  public getOnReset () {
+
+  /**
+ * Get  subscribe for reset data
+ */
+  public getOnReset() {
     return this.onReset;
   }
+
+  /**
+ * Initializes to subscribe for edit mode
+ * @param data val date picker
+ */
   public onInitEditMode(data) {
     this.onEditMode.emit(data);
   }
+
+  /**
+ * Get subscribe for edit mode
+ */
   public getOnEditMode() {
     return this.onEditMode;
   }
+
+  /**
+ * Initializes subscribe for clear data
+ */
   public onInitClear() {
     this.onClear.emit(null);
   }
+
+  /**
+  * Get subscribe for clear data
+  */
   public getOnClear() {
     return this.onClear;
   }

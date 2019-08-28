@@ -1,7 +1,6 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Component, ElementRef, ViewChild, ChangeDetectorRef, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { TagsService } from 'src/ng2/app/services/tags/tags.service';
 import { Tag } from 'src/ng2/app/interfaces/tag/tag';
@@ -29,14 +28,12 @@ export class TagsComponent implements OnInit, OnDestroy {
   sub = new Subscription();
   editItem:any;
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
-  //@ViewChild('auto') matAutocomplete: MatAutocomplete;
   @Output() tagsChange = new EventEmitter();
+  
   /**
-   * Creates an instance of the QuoteCreateContentComponent with the injected services
-   * @param {UsersService} userService Service to work with users
-   * @param {NgbActiveModal} activeModal Service to work with modal
-   * @param {QuoteService} quoteService to work with api
-   * @param {QuoteStateService} quoteStateService to work quote state
+   * Creates an instance of the TagsComponent with the injected services
+   * @param {TagsService} tagsService Service to work with tags
+   * @param {TagsStateService} tagsState to work with tags state
    */
   public constructor(
     private tagsService: TagsService,
@@ -47,19 +44,16 @@ export class TagsComponent implements OnInit, OnDestroy {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-
     this.tagsService.getTags().subscribe((data) => {
       this.tags = data;
     })
-   /* this.userInput.nativeElement.onblur = (e) => {
-      if (this.matAutocomplete.isOpen) {
-        let modal = this.matAutocomplete.panel.nativeElement;
-        modal.parentNode.style.width = 'max-content';
-      }
-    }*/
     this.onInitClearState();
     this.onCheckEditItem();
   }
+
+  /**
+  * Subscribe for edit mode
+  */
   private onCheckEditItem () {
     let getTagsFromEdit = this.tagsState.getTagsFromEdit().subscribe((data) => {
       this.selectedTag = data;
@@ -67,14 +61,17 @@ export class TagsComponent implements OnInit, OnDestroy {
     this.sub.add(getTagsFromEdit);
   }
 
+  /**
+  * Subscribe for clear data
+  */
   private onInitClearState() {
     let getClearState = this.tagsState.getClearState().subscribe(() => this.close());
     this.sub.add(getClearState);
   }
 
   /**
-   * Add selected user
-   * @param event - selected user
+   * Add selected tag
+   * @param event - selected tag
    */
   public add(event: MatChipInputEvent): void {
 
@@ -103,7 +100,7 @@ export class TagsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Remove user from selected
+   * Remove tag from selected
    * @param index - user index
    */
   public remove(index): void {
@@ -114,11 +111,10 @@ export class TagsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Add user to selected
-   * @param event - selected user
+   * Add tag to selected
+   * @param tag - selected tag
    */
   public selected(tag): void {
-  console.log('tag',tag);
     this.selectedTag.push(tag);
     this.tagsChange.emit(this.selectedTag);
   //  this.userInput.nativeElement.blur();
@@ -126,7 +122,7 @@ export class TagsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Close send modal
+   * Close tags list
    */
   public close() {
     this.selectedTag = [];

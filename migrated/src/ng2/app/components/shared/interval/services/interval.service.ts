@@ -6,15 +6,17 @@ import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 export class IntervalService {
   sub: Subscription = new Subscription();
   constructor() { }
+
+   /**
+   * Get default state option
+   */
   public getDefaultOptions() {
     return {
       formInputClass: 'form-control cron-editor-input',
       formSelectClass: 'form-control cron-editor-select',
       formRadioClass: 'cron-editor-radio',
       formCheckboxClass: 'cron-editor-checkbox',
-
       defaultTime: "00:00:00",
-
       hideMinutesTab: false,
       hideHourlyTab: false,
       hideDailyTab: false,
@@ -24,19 +26,30 @@ export class IntervalService {
       hideAdvancedTab: false,
       hideSpecificWeekDayTab: false,
       hideSpecificMonthWeekTab: false,
-
       use24HourTime: true,
       hideSeconds: false,
-
       cronFlavor: "quartz"
     };
   }
+
+   /**
+   * Add subscription
+   * @param item - subscription
+   */
   public addSubscription(item) {
     this.sub.add(item);
   }
+
+    /**
+   * Clear subscriptions
+   */
   public clearSubscriptions() {
     this.sub.unsubscribe();
   }
+
+   /**
+   * Get default date
+   */
   public geDefaultNavDate() {
     return {
       next: {
@@ -45,15 +58,28 @@ export class IntervalService {
       }
     };
   }
-  public getDateForDatePicker(day) {
 
+   /**
+   * Get date fro date picker
+   * @param day - day
+   */
+  public getDateForDatePicker(day) {
     return new NgbDate(2019, 7, day);
   }
 
+    /**
+   * Update month after change year
+   * @param datepicker - datepicker
+   * @param navDate - date
+   */
   public updateMonthAndYearDatePicker(datepicker, navDate) {
     datepicker.month = navDate.next.month;
     datepicker.year = navDate.next.year;
   }
+
+  /**
+   * Get default state
+   */
   public getDefaultState() {
     return {
       daily: {
@@ -77,6 +103,10 @@ export class IntervalService {
       }
     };
   }
+
+  /**
+   * Get short day week
+   */
   public getSelectOptions() {
     return {
       days: ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"],

@@ -36,8 +36,9 @@ export class DurationComponent implements OnInit, OnDestroy {
 
 
   /**
-   *Creates an instance of the SelectClientCompanyComponent with the injected services
-   * @param {CompaniesService} companiesService to work with companiies
+   * Creates an instance of the DurationComponent with the injected services
+   * @param {DurationStateService} durationState to work duration state
+   * @param {DurationService} durationService Service to work with duration
    */
   constructor(
     private durationState: DurationStateService,
@@ -52,12 +53,21 @@ export class DurationComponent implements OnInit, OnDestroy {
     this.onInitClearState();
     this.onCheckEditItem();
   }
+
+  /**
+   * Subscribe to change data
+   * @param event - event
+   * @param type - type
+   */
   public onChange(event, type) {
-    console.log('this', event.target.value);
     if (type === 'hours') this.duration.setHours(Number(event.target.value));
     if (type === 'minutes') this.duration.setMinutes(Number(event.target.value));
     this.selectedDucation.emit(this.duration);
   }
+
+  /**
+   * Check if have edit item
+   */
   private onCheckEditItem() {
 
     if (this.editItem) {
@@ -66,12 +76,14 @@ export class DurationComponent implements OnInit, OnDestroy {
         minutes = Math.round(timeInMinutes - (hours * 60));
       this.selectedHours = this.durationService.parse(hours);
       this.selectedMin = this.durationService.parse(minutes);
-      console.log(' this.selectedHours', this.selectedHours);
-      console.log(' this.selectedMin', this.selectedMin);
       this.duration.setHours(this.selectedHours.value);
       this.duration.setMinutes(this.selectedMin.value);
     }
   }
+
+   /**
+   * Subscribe to clear data
+   */
   private onInitClearState() {
     let getClearState = this.durationState.getClearState().subscribe(() => this.clearData());
     this.durationService.addSubscription(getClearState);
@@ -119,7 +131,7 @@ export class DurationComponent implements OnInit, OnDestroy {
   };
 
   /**
-   * clear client input
+   * clear hours
    */
   public clearHours() {
     this.duration.setHours(null);
@@ -128,7 +140,7 @@ export class DurationComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * clear client input
+   * Clear min
    */
   public clearMin() {
     this.duration.setMinutes(null);
@@ -136,18 +148,28 @@ export class DurationComponent implements OnInit, OnDestroy {
     this.selectedMin = null;
   }
 
+  /**
+   * Set hour
+   * @param item hour
+   */
   public selectHours(item) {
     this.duration.setHours(item.item.value);
     this.selectedDucation.emit(this.duration);
-
   }
 
+   /**
+   * Set hour
+   * @param item hour
+   */
   public selectMin(item) {
     this.duration.setMinutes(item.item.value);
     this.selectedDucation.emit(this.duration);
 
   }
 
+  /**
+   * Clear data
+   */
   private clearData() {
     this.selectedMin = null;
     this.selectedHours = null;
