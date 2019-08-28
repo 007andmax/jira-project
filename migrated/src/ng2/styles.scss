@@ -56,11 +56,13 @@
     top: 8px;
   }
 }
-.with-percent{
-  &:before{
+
+.with-percent {
+  &:before {
     content: '%';
   }
 }
+
 .circle-avatar {
   width: 40px;
   height: 40px;
@@ -220,12 +222,14 @@
   box-shadow: 0 0 60px 0 rgba(0, 0, 0, 0.1);
 }
 
+.new-companies-content__modal,
 .recurring-tickets-content__modal,
 .password-content__modal {
   top: 0 !important;
   position: absolute !important;
 }
 
+.new-companies-content__modal--content,
 .recurring-tickets-content__modal--content {
   app-tags {
     > .col-md-12 {
@@ -505,6 +509,7 @@ ngb-typeahead-window {
 // GLOBAL STYLES FOR product, password, recurring tickets
 .products-content,
 .recurring-tickets-content,
+.new-companies-content,
 .password-content {
   padding: 21px 24px;
   background: #f5fafd;
@@ -514,6 +519,7 @@ ngb-typeahead-window {
 
 .products-content__header,
 .recurring-tickets-content__header,
+.new-companies-content__header,
 .password-content__header {
   display: flex;
   align-items: center;
@@ -523,6 +529,7 @@ ngb-typeahead-window {
 }
 
 .products-content__header h3,
+.new-companies-content__header h3,
 .recurring-tickets-content__header h3,
 .password-content__header h3 {
   font-family: "Graphik Regular", sans-serif;
@@ -581,18 +588,21 @@ ngb-typeahead-window {
 }
 
 .products-content__list .products-content__list--item [class*='col-md-'],
+.new-companies-content__list .new-companies-content__list--item [class*='col-md-'],
 .recurring-tickets-content__list .recurring-tickets-content__list--item [class*='col-md-'],
 .password-content__list .password-content__list--item [class*='col-md-'] {
   word-break: break-all;
 }
 
 .products-content__list .products-content__list--header [class*='col-md-'],
+.new-companies-content__list .new-companies-content__list--header [class*='col-md-'],
 .recurring-tickets-content__list .recurring-tickets-content__list--header [class*='col-md-'],
 .password-content__list .password-content__list--header [class*='col-md-'] {
   white-space: nowrap;
 }
 
 .products-content__list--header div,
+.new-companies-content__list--header div,
 .recurring-tickets-content__list--header div,
 .password-content__list--header div {
   text-transform: uppercase;
@@ -602,12 +612,14 @@ ngb-typeahead-window {
 }
 
 .products-content__list--header,
+.new-companies-content__list--header,
 .recurring-tickets-content__list--header,
 .password-content__list--header {
   padding: 15px 0;
 }
 
 .products-content__list--item,
+.new-companies-content__list--item,
 .recurring-tickets-content__list--item,
 .password-content__list--item {
   border-radius: 4px;
@@ -615,8 +627,10 @@ ngb-typeahead-window {
   background: #fff;
   padding: 24px 0;
   position: relative;
+  display: flex;
 }
 
+.new-companies-content__list--item,
 .recurring-tickets-content__list--item {
   padding: 16px 0;
 }
@@ -630,6 +644,7 @@ ngb-typeahead-window {
   top: -8px;
 }
 
+.new-companies-content__list--item .btn-actions,
 .recurring-tickets-content__list--item .btn-actions,
 .password-content__list--item .btn-actions {
   width: 4%;
@@ -638,6 +653,7 @@ ngb-typeahead-window {
 }
 
 .password-selected .new-link,
+.new-companies-selected .new-link,
 .recurring-tickets-selected .new-link {
   cursor: default;
   font-size: 13px;
@@ -645,6 +661,7 @@ ngb-typeahead-window {
 }
 
 .password-selected,
+.new-companies-selected,
 .recurring-tickets-selected {
   box-shadow: 0 3px 6px 0 rgba(186, 186, 186, 0.05);
   display: none;
@@ -661,12 +678,14 @@ ngb-typeahead-window {
   }
 }
 
+.new-companies-content__header--search,
 .recurring-tickets-content__header--search,
 .password-content__header--search {
   display: flex;
 }
 
 .password-selected-actions,
+.new-companies-selected-actions,
 .recurring-tickets-selected-actions,
 .password-modal-actions {
   display: flex;
@@ -674,6 +693,7 @@ ngb-typeahead-window {
 }
 
 .password-selected-actions i,
+.new-companies-selected-actions i,
 .recurring-tickets-selected-actions i,
 .password-modal-actions i {
   margin-left: 20px;
@@ -681,15 +701,38 @@ ngb-typeahead-window {
 }
 
 .products-content__list--item [class*='col-md-'],
+.new-companies-content__list--item [class*='col-md-'],
 .recurring-tickets-content__list--item [class*='col-md-'],
 .password-content__list--item [class*='col-md-'] {
   font-size: 13px;
   font-family: "Graphik Regular", sans-serif;
 }
 
-// Global styles for RECURRING TICKETS
-.recurring-tickets-content {
-  .recurring-tickets__list {
+// Global styles for RECURRING TICKETS and COMPANIES
+.new-companies__list {
+  .col-md-3 {
+    width: 21%;
+  }
+  .col-md-2 {
+    width: 7%;
+  }
+  .col-md-4 {
+    width: 17%;
+  }
+  .contact {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start !important;
+    p:last-child {
+      color: #9ca5b6;
+    }
+  }
+}
+
+.recurring-tickets-content,
+.new-companies-content {
+  .recurring-tickets__list,
+  .new-companies__list {
     &--header {
       margin-bottom: 15px;
       .with-checkbox {
@@ -1041,11 +1084,52 @@ ngb-datepicker {
   border: none !important;
 }
 
+.new-companies-content__modal,
 .recurring-tickets-content__modal {
   .mat-error {
     position: absolute;
     top: -17px;
     font-size: 12px;
+  }
+}
+
+// LEFT PANEL
+.left-panel-ng2 {
+  [class*="left-panel-ng2__content"] {
+    margin-bottom: 20px;
+  }
+  &__content {
+    margin-top: 110px;
+    color: #fff;
+    .list-item,
+    .types-item {
+      font-family: "Graphik Regular", sans-serif;
+      padding: 8px 24px;
+      border-left: 2px solid transparent;
+      transition: all .3s;
+      cursor: pointer;
+      &:hover,
+      &.active {
+        //font-family: "Graphik-Medium", sans-serif;
+        //font-weight: 500;
+        background: #3e4b61;
+        border-left: 2px solid #16a4fa;
+      }
+    }
+    &--lists {
+    }
+    &--types {
+    }
+    .types-header,
+    .tags-header,
+    .filter-item__header {
+      padding: 8px 24px;
+      opacity: .5;
+      font-family: "Graphik Semibold", sans-serif;
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
   }
 }
 

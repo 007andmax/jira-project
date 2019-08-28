@@ -69,6 +69,11 @@ import { TextAreaDirective } from './directives/text-area.directive';
 import { DatePickerComponent } from './components/shared/date-picker/date-picker.component';
 import { RecurringTicketsAddAsideComponent } from './components/tickets/recurring-tickets/recurring-tickets-add-aside/recurring-tickets-add-aside.component';
 import { AlertComponent } from './components/shared/alert/alert.component';
+import { CompaniesComponent } from './components/companies/companies.component';
+import { LeftPanelCompaniesComponent } from './components/left-panel/left-panel-companies/left-panel-companies.component';
+import { CompaniesHeaderComponent } from './components/companies/companies-header/companies-header.component';
+import { CompaniesTableComponent } from './components/companies/companies-table/companies-table.component';
+import { CompanyAddAsideComponent } from './components/companies/company-add-aside/company-add-aside.component';
 
 
 /**
@@ -109,6 +114,9 @@ angular.module('quicktech')
   .directive(
     'recurringTicketsComponent',
     downgradeComponent({component: RecurringTicketsComponent}))
+  .directive(
+    'companiesComponent',
+    downgradeComponent({component: CompaniesComponent}))
   .factory('ngZone', downgradeInjectable(NgZone));
 
 /**
@@ -161,7 +169,12 @@ angular.module('quicktech')
     TextAreaDirective,
     DatePickerComponent,
     RecurringTicketsAddAsideComponent,
-    AlertComponent
+    AlertComponent,
+    CompaniesComponent,
+    LeftPanelCompaniesComponent,
+    CompaniesHeaderComponent,
+    CompaniesTableComponent,
+    CompanyAddAsideComponent
   ],
   imports: [
     BrowserModule,
@@ -212,6 +225,11 @@ angular.module('quicktech')
           path: 'ng2/recurring-tickets',
           component: RecurringTicketsComponent,
           pathMatch: 'full'
+        },
+        {
+          path: 'ng2/new-companies',
+          component: CompaniesComponent,
+          pathMatch: 'full'
         }
       ],
       {
@@ -228,6 +246,7 @@ angular.module('quicktech')
     QuoteCreateComponent,
     QuotePreviewComponent,
     PasswordManagerComponent,
+    CompaniesComponent,
     // RecurringTicketsComponent
   ],
   providers: [

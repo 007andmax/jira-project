@@ -161,6 +161,10 @@
           url: '/ng2/recurring-tickets',
           template: '<recurring-tickets-component></recurring-tickets-component>'
         }))
+        .state('new-companies', waitForServices({
+          url: '/ng2/new-companies',
+          template: '<companies-component></companies-component>'
+        }))
         .state('accounting', waitForServices({
           url: '/accounting',
           template: '<div ui-view></div>',

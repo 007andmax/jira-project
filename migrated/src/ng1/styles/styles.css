@@ -1431,6 +1431,7 @@ bold {
 
 .products-content,
 .recurring-tickets-content,
+.new-companies-content,
 .services-content {
   float: left;
   width: 100%;
@@ -1448,6 +1449,7 @@ bold {
 
 .products-content,
 .recurring-tickets-content,
+.new-companies-content,
 .password-content {
   padding: 21px 24px;
   background: #f3f7f9;
@@ -1457,6 +1459,7 @@ bold {
 
 .products-content__header,
 .recurring-tickets-content__header,
+.new-companies-content__header,
 .password-content__header {
   display: flex;
   align-items: center;
@@ -1467,6 +1470,7 @@ bold {
 
 .products-content__header h3,
 .recurring-tickets-content__header h3,
+.new-companies-content__header h3,
 .password-content__header h3 {
   font-family: "Graphik Regular", sans-serif;
   font-size: 20px;
@@ -1603,7 +1607,8 @@ bold {
 }
 
 .password-selected .new-link,
-.recurring-tickets-selected .new-link {
+.recurring-tickets-selected .new-link,
+.new-companies-selected .new-link {
   cursor: default;
   font-size: 13px;
   margin-right: 11px;
@@ -1619,10 +1624,12 @@ bold {
 /*}*/
 
 .password-selected.show,
+.new-companies-selected.show,
 .recurring-tickets-selected.show {
   display: flex !important;
 }
 
+.new-companies-content__header--search,
 .recurring-tickets-content__header--search,
 .password-content__header--search {
   display: flex;
@@ -1630,12 +1637,14 @@ bold {
 
 .password-selected-actions,
 .recurring-tickets-selected-actions,
+.new-companies-selected-actions,
 .password-modal-actions {
   display: flex;
   align-items: center;
 }
 
 .password-selected-actions i,
+.new-companies-selected-actions i,
 .recurring-tickets-selected-actions i,
 .password-modal-actions i {
   margin-left: 20px;
@@ -13366,6 +13375,7 @@ button.close {
 
 .left-panel-filter i,
 .recurring-tickets-content__modal--content i,
+.new-companies-content__modal--content i,
 .password-content__modal--content i {
   position: absolute;
   right: 12px;
@@ -13373,6 +13383,7 @@ button.close {
 }
 
 .recurring-tickets-content__modal--content .if i,
+.new-companies-content__modal--content .if i,
 .password-content__modal--content .if i {
   position: absolute;
   right: 25px;
@@ -13380,6 +13391,7 @@ button.close {
 }
 
 .recurring-tickets-content__modal--content .if input,
+.new-companies-content__modal--content .if input,
 .password-content__modal--content .if input {
   padding-right: 65px;
 }
@@ -13390,6 +13402,7 @@ button.close {
 }
 
 .recurring-tickets-content__modal,
+.new-companies-content__modal,
 .password-content__modal {
   position: fixed;
   top: 78px;
@@ -13404,16 +13417,19 @@ button.close {
 }
 
 .recurring-tickets-content__modal.open,
+.new-companies-content.open,
 .password-content__modal.open {
   right: 0;
 }
 
 .recurring-tickets-content__modal h3,
+.new-companies-content__modal h3,
 .password-content__modal h3 {
   margin: 0;
 }
 
 .recurring-tickets-content__modal--header,
+.new-companies-content__modal--header,
 .password-content__modal--header {
   display: flex;
   align-items: center;
@@ -13447,6 +13463,7 @@ button.close {
 }
 
 .recurring-tickets-content__modal .close-modal,
+.new-companies-content__modal .close-modal,
 .password-content__modal .close-modal {
   position: absolute;
   right: 50px;
@@ -13454,22 +13471,27 @@ button.close {
 }
 
 .recurring-tickets-content__modal--content,
+.new-companies-content__modal--content,
 .password-content__modal--content {
   padding: 0 35px;
 }
 
+.new-companies-content--content > [class*="col-md-"],
 .recurring-tickets-content__modal--content > [class*="col-md-"],
 .recurring-tickets-content__modal--content app-interval > [class*="col-md-"],
 .password-content__modal--content > [class*="col-md-"] {
   margin-top: 20px;
 }
 
+.new-companies-content__modal--content > [class*="col-md-"] label,
 .recurring-tickets-content__modal--content > [class*="col-md-"] label,
+.new-companies-content--content > [class*="col-md-"] label,
 .recurring-tickets-content__modal--content app-interval > [class*="col-md-"] label,
 .password-content__modal--content > [class*="col-md-"] label {
   position: relative;
 }
 
+.new-companies-content__modal--content > .password-links label,
 .recurring-tickets-content__modal--content > .password-links label,
 .recurring-tickets-content__modal--content app-interval > .password-links label,
 .password-content__modal--content > .password-links label {
@@ -13477,12 +13499,14 @@ button.close {
 
 }
 
+.new-companies-content__modal--content > [class*="col-md-"] input,
 .recurring-tickets-content__modal--content > [class*="col-md-"] input,
 .recurring-tickets-content__modal--content app-interval > [class*="col-md-"] input,
 .password-content__modal--content > [class*="col-md-"] input {
   width: 100%;
 }
 
+.new-companies-content__modal--content > [class*="col-md-"] p,
 .recurring-tickets-content__modal--content > [class*="col-md-"] p,
 .recurring-tickets-content__modal--content app-interval > [class*="col-md-"] p,
 .password-content__modal--content > [class*="col-md-"] p {
@@ -13491,6 +13515,7 @@ button.close {
   margin-bottom: 8px;
 }
 
+.recurring-tickets-content__modal--content > [class*="col-md-"] input,
 .recurring-tickets-content__modal--content > [class*="col-md-"] input,
 .recurring-tickets-content__modal--content app-interval > [class*="col-md-"] input,
 .password-content__modal--content > [class*="col-md-"] input {
@@ -13502,6 +13527,7 @@ button.close {
   border-radius: 4px;
 }
 
+.new-companies-content__modal--content > [class*="col-md-"] input::placeholder,
 .recurring-tickets-content__modal--content > [class*="col-md-"] input::placeholder,
 .recurring-tickets-content__modal--content app-interval > [class*="col-md-"] input::placeholder,
 .password-content__modal--content > [class*="col-md-"] input::placeholder {
@@ -13509,11 +13535,13 @@ button.close {
   color: #9ca5b6;
 }
 
+.new-companies-content__modal--content .password-actions .icn-16,
 .recurring-tickets-content__modal--content .password-actions .icn-16,
 .password-content__modal--content .password-actions .icn-16 {
   height: 18px;
 }
 
+.new-companies-content__modal--content .password-actions,
 .recurring-tickets-content__modal--content .password-actions,
 .password-content__modal--content .password-actions {
   display: flex;
@@ -13526,6 +13554,7 @@ button.close {
   z-index: 2;
 }
 
+.new-companies-content__modal--content label.password:after,
 .recurring-tickets-content__modal--content label.password:after,
 .password-content__modal--content label.password:after {
   position: absolute;
@@ -13537,6 +13566,7 @@ button.close {
   right: 12px;
 }
 
+.new-companies-content__modal--content label i.new-calendar,
 .recurring-tickets-content__modal--content label i.new-calendar,
 .password-content__modal--content label i.new-calendar {
   position: absolute;
@@ -13566,11 +13596,13 @@ button.close {
   outline: none;
 }
 
+.new-companies-content__modal--content textarea::placeholder,
 .recurring-tickets-content__modal--content textarea::placeholder,
 .password-content__modal--content textarea::placeholder {
   color: #9ca5b6;
 }
 
+.new-companies-content__modal--footer,
 .recurring-tickets-content__modal--footer,
 .password-content__modal--footer {
   display: flex;

@@ -1,0 +1,27 @@
+<app-left-panel-companies></app-left-panel-companies>
+
+<div class="new-companies-content">
+  <app-companies-header></app-companies-header>
+  <div class="new-companies__list">
+    <div class="new-companies__list--header clearfix">
+      <div class="col-md-3 with-checkbox">
+        <label class="checkbox-container">
+          <input type="checkbox">
+          <span class="checkbox-mark"></span>
+        </label>
+        <p>Name</p>
+      </div>
+      <div class="col-md-3">Address</div>
+      <div class="col-md-4">Primary Contact</div>
+      <div class="col-md-4">Email Address</div>
+      <div class="col-md-1">Tickets</div>
+      <div class="col-md-1">Devices</div>
+      <div class="col-md-2">Users</div>
+    </div>
+    <div class="company-content">
+      <app-companies-table></app-companies-table>
+    </div>
+    <div class="loading"></div>
+  </div>
+</div>
+<app-company-add-aside></app-company-add-aside>
