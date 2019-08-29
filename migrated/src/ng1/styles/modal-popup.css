@@ -59,7 +59,7 @@
 }
 
 .create-window {
-  background: #fff;
+  background: #ffffff;
   border-radius: 3px;
 }
 
@@ -117,7 +117,7 @@
 }
 
 .create-window .checked {
-  color: #000 !important;
+  color: #000000 !important;
 }
 
 .pass-man-popup .close-btn,
@@ -153,7 +153,7 @@
 }
 
 .create-window .navigation__list--category a:hover {
-  color: #000;
+  color: #000000;
 }
 
 .create-window .general {
@@ -307,7 +307,7 @@ _:-ms-lang(x), .create-window .general .company-window .company-steps__list:befo
 }
 
 .create-window .general .company-window .company-steps__list--point:hover {
-  color: #000;
+  color: #000000;
 }
 
 .create-window .general .company-window .company-steps__list--point:before {
@@ -785,11 +785,11 @@ _::-webkit-:not(:root:root),
 }
 
 .ticket--footer .btn.btn-new.disabled, .ticket--footer .btn-new.disabled {
-  background: #fff;
+  background: #ffffff;
 }
 
 .ticket--footer .tech-users {
-  border-left: 1px solid #ccc;
+  border-left: 1px solid #cccccc;
 }
 
 .ticket--footer .dropdown-user-parent div[uib-dropdown-toggle] {
@@ -809,7 +809,7 @@ _::-webkit-:not(:root:root),
   bottom: 0;
   left: 0;
   transform: translate(50%, 50%);
-  
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -833,12 +833,12 @@ _::-webkit-:not(:root:root),
 .ticket--footer .shared-avatars .avatars {
   padding: 2px 7px;
   display: flex;
-  
+
 }
 
 .ticket--footer .shared-avatars .client-users {
   border-right: 1px solid #edf2f6;
-  
+
 }
 
 .ticket--footer .shared-avatars .shared-avatar {
@@ -871,13 +871,13 @@ _::-webkit-:not(:root:root),
   width: 32px;
   height: 32px;
   margin-right: 10px;
-  
+
 }
 
 .dropdown-menu .default-user-avatar {
   width: 32px;
   height: 32px;
-  
+
 }
 
 /* .avatar-background-color-even {
@@ -905,13 +905,13 @@ _::-webkit-:not(:root:root),
   width: 32px;
   height: 32px;
   margin-right: 10px;
-  
+
 }
 
 .dropdown-menu .default-user-avatar {
   width: 32px;
   height: 32px;
-  
+
 }
 
 /* .avatar-background-color-even {
@@ -941,7 +941,7 @@ _::-webkit-:not(:root:root),
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 15px;
   position: relative;
-  background: #fff;
+  background: #ffffff;
   margin: 0;
 }
 
@@ -951,7 +951,7 @@ _::-webkit-:not(:root:root),
   width: 0;
   height: 0;
   border: 9px solid transparent;
-  border-bottom-color: #fff;
+  border-bottom-color: #ffffff;
   border-top: 0;
   position: absolute;
   top: -8px;
@@ -1028,11 +1028,11 @@ _::-webkit-:not(:root:root),
 .product--header button,
 .new-companies-content__modal button,
 .recurring-tickets-content__modal button,
-.password-content__modal button{
+.password-content__modal button {
   border: none;
   outline: none;
   background-color: transparent;
-  color: #ccc
+  color: #cccccc
 }
 
 .invoice--header h2,
@@ -1185,7 +1185,7 @@ _::-webkit-:not(:root:root),
   border-bottom: 1px solid #e5e7eb;
   outline: none;
   padding: 10px 0;
-  background-color: #fff;
+  background-color: #ffffff;
 }
 
 .invoice--content [class*='col-md-'],
@@ -1316,7 +1316,7 @@ _::-webkit-:not(:root:root),
 .invoice-create--header__btn li:hover,
 .quote-create--header__btn li:hover {
   background-color: #16a4fa;
-  color: #fff;
+  color: #ffffff;
   font-weight: normal;
 }
 
@@ -1364,7 +1364,7 @@ _::-webkit-:not(:root:root),
 }
 
 .tab-btns .btn {
-  background-color: #fff;
+  background-color: #ffffff;
   font-size: 13px;
   font-weight: 500;
   color: #4f5f79;
@@ -1512,7 +1512,7 @@ _::-webkit-:not(:root:root),
 .add-category-lp-dropdown-btns .btn-success {
   background-color: #2ec866 !important;
   border: 1px solid #189947;
-  color: #fff;
+  color: #ffffff;
 }
 
 .add-category-lp-dropdown-btns {
@@ -1637,7 +1637,7 @@ _::-webkit-:not(:root:root),
   border-radius: 50%;
   background-color: #4f5f79;
   text-align: center;
-  color: #fff;
+  color: #ffffff;
 }
 
 .location {
@@ -1697,6 +1697,7 @@ _::-webkit-:not(:root:root),
 .create-new .close-modal,
 .download-agent-modal .close-modal,
 .recurring-tickets-content__modal .close-modal,
+.new-companies-content__modal .close-modal,
 .password-content__modal .close-modal {
   width: 24px;
   height: 24px;
@@ -1806,14 +1807,23 @@ _::-webkit-:not(:root:root),
   padding-right: 30px;
 }
 
+.new-companies-content__modal .google-plus:before,
 .create-new .google-plus:before {
   position: absolute;
   content: '';
   background-image: url(../images/new-icons/google-plus.png);
   width: 20px;
   height: 13px;
+}
+
+.create-new .google-plus:before {
   right: 20px;
   top: 20px;
+}
+
+.new-companies-content__modal .google-plus:before {
+  right: 25px;
+  top: 45px;
 }
 
 .ticket--header .ticket-priority {
@@ -1855,7 +1865,7 @@ _::-webkit-:not(:root:root),
 
 .ticket--header .ticket-priority .dropdown-priority li a:hover {
   background-color: #16a4fa;
-  color: #fff;
+  color: #ffffff;
 }
 
 .ticket--header .ticket-priority .dropdown-priority a {
@@ -1973,7 +1983,7 @@ _::-webkit-:not(:root:root),
 .create-new .dropdown-menu li a:hover,
 .create-new .dropdown-menu li label:hover {
   background-color: #16a4fa;
-  color: #fff;
+  color: #ffffff;
 }
 
 .create-new .dropdown-menu > .active > a {
@@ -1992,7 +2002,7 @@ _::-webkit-:not(:root:root),
 }
 
 .create-new .ticket-priority.dropdown > input {
-  background-color: #fff;
+  background-color: #ffffff;
 }
 
 .create-new .subscribe-tokens {
@@ -2043,7 +2053,7 @@ _::-webkit-:not(:root:root),
 }
 
 .create-new .dropdown-assign-ticket .users-list {
-  background-color: #fff;
+  background-color: #ffffff;
   max-height: 175px;
 }
 
@@ -2077,7 +2087,7 @@ _::-webkit-:not(:root:root),
 }
 
 .create-new .dropdown-assign-ticket .users-list .user-item:hover p {
-  color: #fff !important;
+  color: #ffffff !important;
 }
 
 .create-new .avatar-26 {
@@ -2095,7 +2105,7 @@ _::-webkit-:not(:root:root),
 }
 
 .create-new .checkbox-dd-item:hover label {
-  color: #fff;
+  color: #ffffff;
 }
 
 .create-updates-footer .user-item a,
@@ -2234,12 +2244,12 @@ _::-webkit-:not(:root:root),
 }
 
 .create-new .dropdown-content li a {
-  color: #000;
+  color: #000000;
 }
 
 .create-new .dropdown-content li:hover a,
 .create-new .dropdown-content li:hover span {
-  color: #fff;
+  color: #ffffff;
 }
 
 .create-new .barcode-icon {

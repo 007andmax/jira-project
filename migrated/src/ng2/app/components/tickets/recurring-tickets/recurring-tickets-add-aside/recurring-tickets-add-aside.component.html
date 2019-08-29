@@ -31,7 +31,7 @@
         <div class="col-md-4">
           <p>Device Name</p>
           <app-devices-recurring-tickets style="width: 75%;" class="light-dropdown"
-                                        
+
                                          [companyId]="(selectedClient) ? selectedClient.id : ''"
                                          (selectedItem)="selectDevice($event)">
           </app-devices-recurring-tickets>
@@ -129,7 +129,7 @@
               </div>
               <div class="col-md-4">
                 <p>Duration</p>
-                <app-duration style="width: 75%;" class="light-dropdown"  
+                <app-duration style="width: 75%;" class="light-dropdown"
                               (selectedDucation)="selectDuration($event,i)"
                               [editItem]="service.duration"></app-duration>
                 <i class="icn-delete" *ngIf="services.length > 1" (click)="removeService(i)"></i>
@@ -176,7 +176,7 @@
 
         <div class="col-md-12 recurring-tickets-content__modal--content-footer">
           <div class="d-f">
-              <button class="btn-new btn-primary" (click)="onInitAddAndCopy()">Save & Copy</button>
+            <button class="btn-new btn-primary" (click)="onInitAddAndCopy()">Save & Copy</button>
             <button class="btn-new btn-primary" (click)="onInitAdd()">Save</button>
             <button class="btn-new disabled" (click)="close()">Cancel</button>
           </div>
@@ -199,6 +199,5 @@
 
       </div>
     </div>
-
   </ng-sidebar>
 </ng-sidebar-container>

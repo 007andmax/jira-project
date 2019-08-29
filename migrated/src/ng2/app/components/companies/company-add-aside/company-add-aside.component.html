@@ -1,8 +1,215 @@
 <ng-sidebar-container>
   <ng-sidebar [(opened)]="opened" [position]="'right'">
+    <div class="new-companies-content__modal open">
+      <div class="new-companies-content__modal--header">
+        <h3>Add New Company</h3>
+        <button class="close-modal" (click)="close()"></button>
+      </div>
 
-<div class="new-companies-content__modal open">
-  aside
-</div>
-</ng-sidebar>
+
+      <!--      BASIC-->
+      <div class="new-companies-content__modal--content">
+
+        <div class="col-md-12 google-plus">
+          <p>Company Name</p>
+          <input type="text"
+                 placeholder="Write Company or Search Company">
+        </div>
+        <div class="col-md-6">
+          <p>Company Type</p>
+          <input type="text"
+                 placeholder="Select Company Type">
+        </div>
+        <div class="col-md-6">
+          <p>Primary Contact</p>
+          <input type="text"
+                 placeholder="Enter Primary Phone">
+        </div>
+        <div class="col-md-12">
+          <p>Domain Name</p>
+          <input type="text"
+                 placeholder="http://www.example.com">
+        </div>
+        <div class="col-md-6">
+          <p>First Name</p>
+          <input type="text"
+                 placeholder="Enter First Name">
+        </div>
+        <div class="col-md-6">
+          <p>Last Name</p>
+          <input type="text"
+                 placeholder="Enter Last Name">
+        </div>
+        <div class="col-md-6">
+          <p>Phone Number</p>
+          <input type="text"
+                 placeholder="Enter Phone Number">
+        </div>
+        <div class="col-md-6">
+          <p>Primary Contact Email</p>
+          <input type="text"
+                 placeholder="Primary Email Address">
+        </div>
+
+        <div class="new-link">Would you like to Create Company in Advance mode?</div>
+        <div class="info-block">
+          Advance Company mode will provide user to add more detail like Settings, Primary
+          Contact detail etc…
+        </div>
+
+        <div class="col-md-12 new-companies-content__modal--content-footer">
+          <div class="d-f">
+            <button class="btn-new btn-primary">Create Company</button>
+            <button class="btn-new disabled">Cancel</button>
+          </div>
+        </div>
+
+      </div>
+
+
+      <!--      ADVANCED -->
+      <div class="new-companies-content__modal--content advanced">
+
+        <div class="col-md-12">
+          <div class="logo-upload d-f">
+            <i class="icn-64 upload-logo"></i>
+            <div>
+              <div class="new-link">Upload Company logo</div>
+              <p>Maximum size of 2MB. JPG, GIF, PNG</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12 google-plus">
+          <p>Company Name</p>
+          <input type="text"
+                 placeholder="Write Company or Search Company">
+        </div>
+        <div class="col-md-6">
+          <p>Company Type</p>
+          <input type="text"
+                 placeholder="Select Company Type">
+        </div>
+        <div class="col-md-6">
+          <p>Client Type</p>
+          <input type="text"
+                 placeholder="Select Client Type">
+        </div>
+        <div class="col-md-12">
+          <p>Domain Name</p>
+          <input type="text"
+                 placeholder="http://www.example.com">
+        </div>
+        <div class="col-md-12">
+          <p>Location</p>
+          <input type="text"
+                 placeholder="Enter Location">
+        </div>
+        <div class="col-md-4">
+          <p>Suite No.</p>
+          <input type="text"
+                 placeholder="Enter Suite Number">
+        </div>
+        <div class="col-md-3">
+          <p>Zip</p>
+          <input type="text"
+                 placeholder="Enter Zip">
+        </div>
+        <div class="col-md-5">
+          <p>Phone Number</p>
+          <input type="text"
+                 placeholder="Enter Phone Number">
+        </div>
+
+        <div class="col-md-12 details-divider">
+          <p>Contact Detail</p>
+        </div>
+
+        <div class="col-md-6">
+          <p>First Name</p>
+          <input type="text"
+                 placeholder="Enter First Name">
+        </div>
+        <div class="col-md-6">
+          <p>Last Name</p>
+          <input type="text"
+                 placeholder="Enter Last Name">
+        </div>
+        <div class="col-md-6">
+          <p>Designation</p>
+          <input type="text"
+                 placeholder="Write Description">
+        </div>
+        <div class="col-md-6">
+          <p>Phone Number</p>
+          <input type="text"
+                 placeholder="Enter Phone Number">
+        </div>
+        <div class="col-md-6">
+          <p>Primary Contact Email</p>
+          <input type="text"
+                 placeholder="Primary Email Address">
+        </div>
+        <div class="col-md-6">
+          <p>Get Subscribe</p>
+          <input type="text"
+                 placeholder="Select Subscribe Type">
+        </div>
+
+        <div class="col-md-12 details-divider">
+          <p>Settings</p>
+        </div>
+
+        <div class="col-md-6">
+          <p>Time Zone</p>
+          <input type="text"
+                 placeholder="Select Time Zone">
+        </div>
+        <div class="col-md-6">
+          <p>Payment Terms</p>
+          <input type="text"
+                 placeholder="Select Payment Terms">
+        </div>
+        <div class="col-md-6">
+          <p>Payment Method</p>
+          <input type="text"
+                 placeholder="Select Payment Method">
+        </div>
+        <div class="col-md-6">
+          <p>Service Type</p>
+          <input type="text"
+                 placeholder="Select Service Type">
+        </div>
+        <div class="col-md-6">
+          <p>Sales Person</p>
+          <input type="text"
+                 placeholder="Select Sales Person">
+        </div>
+        <div class="col-md-12">
+          <p>Tags</p>
+          <input type="text"
+                 placeholder="eg. Window update, Monthly maintainace">
+        </div>
+        <div class="col-md-12 editable-field">
+          <p>Note for Company</p>
+          <div class="editable-description">
+            <textarea placeholder="Write note for company"></textarea>
+          </div>
+        </div>
+
+        <div class="col-md-12 new-companies-content__modal--content-footer">
+          <div class="d-f">
+            <button class="btn-new btn-primary">Create Company</button>
+            <button class="btn-new disabled">Cancel</button>
+          </div>
+          <div class="create-contract">
+            <div class="new-link">Create Contract</div>
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+  </ng-sidebar>
 </ng-sidebar-container>
