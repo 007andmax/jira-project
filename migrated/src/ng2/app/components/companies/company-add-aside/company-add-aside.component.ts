@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CompaniesStateService } from '../services/companies-state.service';
 
 @Component({
   selector: 'app-company-add-aside',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompanyAddAsideComponent implements OnInit {
 
-  constructor() { }
+  public opened = false;
+
+  constructor(private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
+
+    this.onShowAside();
   }
 
+  public onShowAside() {
+    this.companiesStateService.getShowAsideForAdd().subscribe(() => {
+      this.opened = true;
+    })
+  }
 }
