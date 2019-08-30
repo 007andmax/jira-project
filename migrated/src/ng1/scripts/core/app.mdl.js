@@ -138,6 +138,10 @@
           url: '/ng2/password-manager',
           template: '<password-manager></password-manager>'
         }))
+        .state('company-password-meneger', waitForServices({
+          url: '/ng2/company-password-meneger',
+          template: '<company-password-meneger></company-password-meneger>'
+        }))
         .state('quotes-component', {
           url: '/ng2/quotes',
           template: '<quotes-component></quotes-component>'

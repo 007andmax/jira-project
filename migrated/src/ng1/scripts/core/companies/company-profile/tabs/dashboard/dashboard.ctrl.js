@@ -8,7 +8,7 @@
       'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.PermissionsService', 'UsersService', '$uibModal', 'quicktech.common.services.PhoneFormats', "$rootScope",
       function ($scope, $state, $stateParams, CompaniesService, DevicesService, StatisticsService,
                 SharedStateService, $timeout, UserNotificationService, UserConfirmationsService, PermissionsService, UsersService, $uibModal, PhoneFormats, $rootScope) {
-
+localStorage.setItem('company_id',$scope.company.id)
         var daysOfWeek = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
         $scope.daysOfWeek = daysOfWeek;
         $scope.daysOfWeekMap = {

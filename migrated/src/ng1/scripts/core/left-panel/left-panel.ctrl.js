@@ -299,6 +299,11 @@
         }
 
         $scope.activateCompanyProfileTab = function (tabToActivate) {
+          if (tabToActivate == 'CompanyProfilePasswordManagerPage') {
+
+            window.location.href = '#/ng2/company-password-meneger';
+            return;
+          }
           var tab = $scope[tabToActivate];
           deactivateAllCompanyProfileTabs();
           if (tab === false) {
@@ -1548,7 +1553,7 @@
             return 'inbox';
           } else if (url.indexOf('companies') > -1) {
             return 'companies';
-          } else if (url.indexOf('companyProfile') > -1) {
+          } else if (url.indexOf('companyProfile') > -1 || url.indexOf('company-password-meneger') > -1) {
             return 'companyProfile';
           } else if (url.indexOf('users') > -1) {
             return 'users';
