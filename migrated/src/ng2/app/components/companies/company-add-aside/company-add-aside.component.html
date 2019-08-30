@@ -142,8 +142,24 @@
         </div>
         <div class="col-md-6">
           <p>Phone Number</p>
-          <input type="text"
-                 placeholder="Enter Phone Number">
+          <div class="with-number-types">
+            <div class="grey-dropdown"
+                 ngbDropdown>
+              <button class="types-btn"
+                      id="dropdownBasic"
+                      ngbDropdownToggle>
+                Mobile
+                <i class="icn-sm report-caret-icon"></i>
+              </button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic">
+                <button ngbDropdownItem>Office</button>
+                <button ngbDropdownItem>Mobile</button>
+                <button ngbDropdownItem>Fax</button>
+              </div>
+            </div>
+            <input type="text"
+                   placeholder="Enter Phone Number">
+          </div>
         </div>
         <div class="col-md-6">
           <p>Primary Contact Email</p>

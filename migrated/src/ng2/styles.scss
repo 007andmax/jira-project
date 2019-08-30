@@ -708,6 +708,42 @@ ngb-typeahead-window {
   font-family: "Graphik Regular", sans-serif;
 }
 
+.with-number-types {
+  display: flex;
+  .dropdown {
+    width: 48%;
+    .types-btn {
+      width: 100%;
+      height: 100%;
+      border: 1px solid #c4cbd5;
+      border-right: none;
+      border-bottom-left-radius: 4px;
+      border-top-left-radius: 4px;
+      color: #404b5f;
+      padding: 0 12px;
+      font-size: 12px;
+      text-align: left;
+      .report-caret-icon {
+        width: 8px;
+        height: 5px;
+        background-size: cover;
+      }
+    }
+    .dropdown-menu {
+      min-width: 80px;
+      button {
+        padding: 0 15px;
+        font-size: 12px;
+      }
+    }
+  }
+  input {
+    width: 60%;
+    border-bottom-left-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+  }
+}
+
 // Global styles for RECURRING TICKETS and COMPANIES
 .new-companies__list {
   .col-md-3 {
@@ -1093,7 +1129,6 @@ ngb-typeahead-window {
     }
   }
 }
-
 
 .new-companies-content__list--item {
   [class*='col-md-'] {
