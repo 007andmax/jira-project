@@ -1146,6 +1146,9 @@
               }
               getAgentsByCompany(scope, companyId, callback);
             });
+          } else {
+            console.log('no find');
+            $rootScope.isAgentsRequestSending = false;
           }
           checking++;
           if(checking > 4) {
