@@ -517,6 +517,10 @@ aside#right .company-devices {
   transform: translate(-50%, -50%);
 }
 
+.no-exist-devices p {
+  font-size: 20px;
+}
+
 aside#right .company-users {
   margin-bottom: 16px;
   padding-top: 3px;
