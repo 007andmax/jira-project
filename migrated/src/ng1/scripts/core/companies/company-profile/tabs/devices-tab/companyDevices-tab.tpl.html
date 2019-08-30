@@ -42,7 +42,6 @@
     <div class="col-md-2"></div>
   </li>
   <div class="loading" style="top: 450px;" ng-show="isAgentsRequestSending"></div>
-  <div class="no-exist-devices" ng-if="!isAgentsRequestSending && !agents"><p>No devices installed</p></div>
   <!--class="active-device-item"-->
   <li ng-repeat="agent in agents  | orderBy: [orderDevicesBy, uptimeOrder]"
       ng-controller="quicktech.core.companies.devicesTabCtrl"
@@ -307,4 +306,5 @@
       </div>
     </div>
   </li>
+  <div class="no-exist-devices" ng-if="!isAgentsRequestSending && !agents"><p>No devices installed</p></div>
 </ul>
