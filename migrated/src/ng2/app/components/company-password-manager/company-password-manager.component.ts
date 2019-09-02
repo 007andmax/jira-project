@@ -55,7 +55,7 @@ export class CompanyPasswordManagerComponent implements OnInit {
     this.checkCloseFilters();
 
     let subGetRecords = this.apiPasswordManagerService.dataChange.subscribe((res) => {
-      console.log('res',res);
+      console.log('CompanyPasswordManagerComponent');
       this.showPreloader = false;
        });
        this.sub.add(subGetRecords);
@@ -69,7 +69,7 @@ export class CompanyPasswordManagerComponent implements OnInit {
     if (localStorage.getItem('company_id')) {
       let company_id = localStorage.getItem('company_id');
       console.log('company_id',company_id);
-      this.subscription = this.companiesService.clientsCompany
+      let subscription = this.companiesService.clientsCompany
        .subscribe((company) => {
         this.refreshFilter();
          this.selectedCompany = company.find(item => item.id === company_id);
@@ -77,6 +77,7 @@ export class CompanyPasswordManagerComponent implements OnInit {
          console.log('this.selectedCompany',this.selectedCompany);
        }
      );
+     this.sub.add(subscription);
     }
    /* this.companiesService.filteredCompanyUpdate.subscribe((company) => {
       this.refreshFilter();

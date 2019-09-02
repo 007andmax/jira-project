@@ -69,6 +69,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
    * Initializes left panel password manager. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
+    console.log('ngOnInit');
     this.getPasswordRecords();
     this.addNewRecord();
     this.deleteRecord();
@@ -79,7 +80,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
    * Get companies list
    */
   public getCompaniesList() {
-    this.ngOnInit();
+  //  this.ngOnInit();
      return this.subscription = this.companiesService.clientsCompany
        .subscribe((company) => {
          if (!this.cdRef['destroyed']) {
@@ -218,7 +219,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     if (this.innerWidth <= 414) {
       this.passwordManagerService.setMobileCategory();
     }
-    this.apiPasswordManagerService.getRecords();
+     
     this.subGetRecords = this.apiPasswordManagerService.dataChange.subscribe((res: any) => {
       this.passwordRecordsStart = res;
       this.passwordRecords = res;
@@ -417,11 +418,14 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
    * Add new record
    */
   public addNewRecord() {
+    console.log('addNewRecord');
     this.subNewRecordAdd = this.passwordManagerService.newRecordsisAdd.subscribe(() => {
+      console.log('newRecordsisAdd');
       if (this.innerWidth <= 414) {
         this.passwordManagerService.setMobileCategory();
       }
       this.subscriptions.add(this.apiPasswordManagerService.getRecordsNew().subscribe((res: any) => {
+        console.log('getRecordsNew');
         this.passwordRecordsStart = res;
         this.passwordRecords = res;
         this.selectedCompany && this.selectCompany({item: this.selectedCompany});
@@ -478,6 +482,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.subGetRecords && this.subGetRecords.unsubscribe();
     this.subGetRecords && this.subGetRecords.unsubscribe();
     this.subscriptions && this.subscriptions.unsubscribe();
+    this.subNewRecordAdd && this.subNewRecordAdd.unsubscribe();
   }
 
   /**
