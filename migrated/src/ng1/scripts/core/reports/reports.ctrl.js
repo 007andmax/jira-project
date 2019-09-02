@@ -710,8 +710,13 @@
         }
       };
 
-      $scope.getRamSize = function (ramSize) {
-        return (ramSize > 0 && ramSize/1073741824 > 0)? Math.ceil(ramSize/1073741824) + 'GB' : 0 + 'GB';
+      $scope.getRamSize = function (slots) {
+        let ramSize = 0;
+        slots.forEach( function(item) {
+          ramSize = item.capacity;
+        })
+        return (ramSize > 0 && ramSize/1073741824 > 0)? (ramSize/1073741824) + 'GB' : 0 + 'GB';
+        //return (ramSize > 0 && ramSize/1073741824 > 0)? Math.ceil(ramSize/1073741824) + 'GB' : 0 + 'GB';
       };
 
       function calculateServicesTime(tickets) {
