@@ -322,7 +322,8 @@
 
         $scope.openCompany = function (company, tabName) {
           if (!company.deletedAt) {
-            $state.go('companyProfile', {companyId: company.id, tabName: 'dashboadr'});
+            console.log('openCompany');
+            $state.go('companyProfile', {companyId: company.id, tabName: 'dashboard'});
             companyProfileSharedState.tabName = 'dashboard';
           }
         };

@@ -7,11 +7,11 @@ import { UsersService } from '../../services/users/users.service';
 import { PermissionsService } from '../../services/permissions/permissions.service';
 
 @Component({
-  selector: 'company-password-meneger',
-  templateUrl: './company-password-meneger.component.html',
-  styleUrls: ['./company-password-meneger.component.scss']
+  selector: 'company-password-manager',
+  templateUrl: './company-password-manager.component.html',
+  styleUrls: ['./company-password-manager.component.scss']
 })
-export class CompanyPasswordMenegerComponent implements OnInit {
+export class CompanyPasswordManagerComponent implements OnInit {
 
   public companiesList: any;
   public selectedCompany: any;

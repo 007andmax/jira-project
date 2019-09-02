@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CompanyPasswordMenegerComponent } from './company-password-meneger.component';
+import { CompanyPasswordMenegerComponent } from './company-password-manager.component';
 
 describe('CompanyPasswordMenegerComponent', () => {
   let component: CompanyPasswordMenegerComponent;
