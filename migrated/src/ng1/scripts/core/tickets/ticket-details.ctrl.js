@@ -412,10 +412,12 @@
 
            
             fetch('/file/' + attachmentId)
-           
               .then(resp => {
-                console.log('resp',resp);
-               /* const url = window.URL.createObjectURL(new Blob([resp], {type: 'application/pdf'}));
+                console.log('resp.blob()',resp);
+                return resp.blob();
+              })
+              .then(blob => {
+                const url = window.URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.style.display = 'none';
                 a.href = url;
@@ -423,7 +425,7 @@
                 a.download = fileName;
                 document.body.appendChild(a);
                 a.click();
-                window.URL.revokeObjectURL(url);*/
+                window.URL.revokeObjectURL(url);
 
               });
           };
