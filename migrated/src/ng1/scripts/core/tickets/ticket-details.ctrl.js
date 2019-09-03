@@ -393,13 +393,39 @@
           $scope.downloadAllAttachments = function () {
             Downloader.downloadTicketAttachments($scope.ticketDetails.id);
           };
+          function downloadURI(uri, name) {
+            var link = document.createElement("a");
+            link.download = name;
+            link.href = uri;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            delete link;
+          }
           $scope.downloadAttachment = function (attachmentId, fileName) {
       //      Downloader.downloadFile(attachmentId, fileName)
 
-            Downloader.downloadByUrl(
-              '/file/' + attachmentId,
+           /* Downloader.downloadFile(
+              attachmentId,
               fileName
-            );
+            );*/
+
+           
+            fetch('/file/' + attachmentId)
+           
+              .then(resp => {
+                console.log('resp',resp);
+               /* const url = window.URL.createObjectURL(new Blob([resp], {type: 'application/pdf'}));
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                // the filename you want
+                a.download = fileName;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);*/
+
+              });
           };
           $scope.loadMoreUpdates = function () {
             TicketsService.loadRemainingTicketUpdates($scope.ticketDetails, function () {
