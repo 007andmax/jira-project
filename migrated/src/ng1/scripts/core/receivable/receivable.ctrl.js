@@ -70,7 +70,7 @@
               $scope.invocesList = [...$scope.invocesList, ...resp];
               $scope.invocesList = removeDuplicates($scope.invocesList, 'id');
               $rootScope.allInvoices = $scope.invocesList;
-
+ 
             }, data).then(() => {
                 $scope.stopReqeust = false;
                 $scope.stopScroll = false;
