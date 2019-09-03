@@ -394,7 +394,12 @@
             Downloader.downloadTicketAttachments($scope.ticketDetails.id);
           };
           $scope.downloadAttachment = function (attachmentId, fileName) {
-            Downloader.downloadFile(attachmentId, fileName)
+      //      Downloader.downloadFile(attachmentId, fileName)
+
+            Downloader.downloadByUrl(
+              '/file/' + attachmentId,
+              fileName
+            );
           };
           $scope.loadMoreUpdates = function () {
             TicketsService.loadRemainingTicketUpdates($scope.ticketDetails, function () {
