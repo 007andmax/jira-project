@@ -1013,14 +1013,15 @@ console.log('find');
                   ticketUpdateToSend.services[i].date = new Date(date.getFullYear(), date.getMonth(), date.getDate());
                   if (!close) {
                    
-                    if (date.getFullYear() <= currentDate.getFullYear() && date.getMonth() <= currentDate.getMonth() && date.getDate() <= currentDate.getDate())  {
+                    if (date.getFullYear() < currentDate.getFullYear() || date.getFullYear() && currentDate.getFullYear() &&  date.getMonth() < currentDate.getMonth() || date.getFullYear() == currentDate.getFullYear() && date.getMonth() == currentDate.getMonth() && date.getDate() <= currentDate.getDate())  {
                       ticketUpdateToSend.services[i].completed = true;
                     } else {
                       ticketUpdateToSend.services[i].completed = false;
                     }
                 
                   } else {
-                    if (date.getFullYear() <= currentDate.getFullYear() && date.getMonth() <= currentDate.getMonth() && date.getDate() <= currentDate.getDate())  {
+                    if (date.getFullYear() < currentDate.getFullYear() || date.getFullYear() && currentDate.getFullYear() &&  date.getMonth() < currentDate.getMonth() || date.getFullYear() == currentDate.getFullYear() && date.getMonth() == currentDate.getMonth() && date.getDate() <= currentDate.getDate())  {
+                
                       ticketUpdateToSend.services[i].completed = true;
                     } else {
                       $scope.isSavingUpdate = false;
