@@ -407,6 +407,25 @@
            // window.open('/file/' + attachmentId, 'Download');  
             
           Downloader.downloadFile(attachmentId, fileName)
+
+          /*   var postData = new FormData();
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'http://dev.quicktech.com' + url, true);
+        xhr.responseType = 'blob';
+        xhr.onload = function (e) {
+          var blob = xhr.response;
+       
+         var tempEl = document.createElement("a");
+          document.body.appendChild(tempEl);
+          tempEl.style = "display: none";
+          url = window.URL.createObjectURL(blob);
+          tempEl.href = url;
+          tempEl.download = fileName;
+          tempEl.click();
+          window.URL.revokeObjectURL(url);
+        }.bind(this)
+        xhr.send(postData);
+*/
           };
           $scope.loadMoreUpdates = function () {
             TicketsService.loadRemainingTicketUpdates($scope.ticketDetails, function () {
