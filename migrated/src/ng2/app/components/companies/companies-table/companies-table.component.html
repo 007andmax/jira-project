@@ -1,25 +1,28 @@
 <div class="new-companies-content__list--item clearfix">
-  <div class="col-md-3">
+  <div class="col-md-3 w-100">
     <label class="checkbox-container">
       <input type="checkbox">
       <span class="checkbox-mark"></span>
     </label>
     <div class="circle-avatar">AD</div>
-    <p class="ff-g-m fw-600">Avenue Dental Care</p>
+    <div class="mob-styles">
+      <p class="ff-g-m fw-600">Avenue Dental Care</p>
+      <p class="desktop-hidden company-phone">979-431-8937</p>
+    </div>
   </div>
-  <div class="col-md-3">
-    824 16th Avenue Southwest
-    Calgary, AB T2R 0S9
+  <div class="col-md-3 company-location w-100">
+    824 16th Avenue Southwest Calgary, AB T2R 0S9
+    <a class="company-link desktop-hidden">Show Map</a>
   </div>
-  <div class="col-md-4 contact">
+  <div class="col-md-4 contact w-100">
     <p>Matthew Padilla</p>
-    <p>979-431-8937</p>
+    <p class="mob-hidden">979-431-8937</p>
   </div>
-  <div class="col-md-4">klein.eve@yahoo.com</div>
-  <div class="col-md-1">178</div>
-  <div class="col-md-1">344</div>
-  <div class="col-md-1">655</div>
-  <div class="col-md-2">
+  <div class="col-md-4 mob-hidden">klein.eve@yahoo.com</div>
+  <div class="col-md-1 mob-hidden">178</div>
+  <div class="col-md-1 mob-hidden">344</div>
+  <div class="col-md-1 mob-hidden">655</div>
+  <div class="col-md-2 mob-hidden">
     <button><i class="icn-16 import-ng2"></i></button>
     <div class="grey-dropdown right with-icons"
          ngbDropdown>
@@ -30,6 +33,21 @@
         <button ngbDropdownItem><i class="icn-16 edit-grey-ng2"></i>Edit</button>
         <button ngbDropdownItem><i class="icn-16 archive-grey-ng2"></i>Delete</button>
       </div>
+    </div>
+  </div>
+
+  <div class="mob-company-footer desktop-hidden">
+    <div>
+      <p>TICKETS</p>
+      <p>178</p>
+    </div>
+    <div>
+      <p>DEVICES</p>
+      <p>344</p>
+    </div>
+    <div>
+      <p>USERS</p>
+      <p>655</p>
     </div>
   </div>
 </div>

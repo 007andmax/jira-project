@@ -1,9 +1,10 @@
-<app-left-panel-companies></app-left-panel-companies>
+<!--for show filters add class "show" for app-left-panel-->
+<app-left-panel-companies class=""></app-left-panel-companies>
 
 <div class="new-companies-content">
   <app-companies-header></app-companies-header>
   <div class="new-companies__list">
-    <div class="new-companies__list--header clearfix">
+    <div class="new-companies__list--header clearfix mob-hidden">
       <div class="col-md-3 with-checkbox">
         <label class="checkbox-container">
           <input type="checkbox">
@@ -22,7 +23,10 @@
     <div class="company-content">
       <app-companies-table></app-companies-table>
     </div>
-    <div class="loading"></div>
+    <button class="mob-filters-btn mobile-btn primary">
+      Filters
+    </button>
+    <div class="loading" style="display: none;"></div>
   </div>
 </div>
 <app-company-add-aside></app-company-add-aside>

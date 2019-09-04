@@ -1,11 +1,16 @@
 <div class="left-panel-ng2 new-companies">
-  <div class="left-panel-ng2__header">Companies</div>
+  <div class="left-panel-ng2__header mob-hidden">Companies</div>
   <div class="left-panel-ng2__content">
-    <div class="left-panel-ng2__content--lists">
+    <div class="mob-filters-header desktop-hidden">
+      <button class="x-mark mobile-btn"></button>
+      <div>Filters</div>
+    </div>
+
+    <div class="left-panel-ng2__content--lists mob-hidden">
       <div class="list-item active">All Companies</div>
       <div class="list-item">Archive</div>
     </div>
-    <div class="left-panel-ng2__content--types">
+    <div class="left-panel-ng2__content--types mob-hidden">
       <div class="types-header">By Types</div>
       <div class="types-item">Clients (56)</div>
       <div class="types-item">Leads (46)</div>
@@ -29,5 +34,10 @@
         </div>
       </div>
     </div>
+
+    <button class="mob-filters-btn apply-filters mobile-btn primary">
+      Apply Filters
+    </button>
+
   </div>
 </div>

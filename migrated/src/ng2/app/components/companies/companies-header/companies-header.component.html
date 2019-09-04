@@ -2,7 +2,7 @@
   <h3>Companies (79)</h3>
   <div class="new-companies-content__header--search">
     <!--add class "show" to <div class="new-companies-selected">-->
-    <div class="new-companies-selected show">
+    <div class="new-companies-selected">
       <div class="new-companies-selected-qty">
         <span>2</span> Selected
       </div>
@@ -12,6 +12,12 @@
         <!--<i class="icn-16 export-ng2"></i>-->
       </div>
     </div>
-    <button class="btn-new btn-primary-white" (click)="showAsideForAdd()">Add Company</button>
+    <button class="new-link desktop-hidden"
+            style="font-size: 13px;"
+            (click)="showAsideForAdd()">Add Company
+    </button>
+    <button class="btn-new btn-primary-white mob-hidden"
+            (click)="showAsideForAdd()">Add Company
+    </button>
   </div>
 </div>
