@@ -153,7 +153,7 @@
       if (isChrome) {
         var postData = new FormData();
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', url, true);
+        xhr.open('GET', 'http://dev.quicktech.com' + url, true);
         xhr.responseType = 'blob';
         xhr.onload = function (e) {
           var blob = xhr.response;

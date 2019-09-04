@@ -403,8 +403,10 @@
             delete link;
           }
           $scope.downloadAttachment = function (attachmentId, fileName) {
-         
-            Downloader.downloadFile(attachmentId, fileName)
+          //  window.location.assign('/file/' + attachmentId);
+           // window.open('/file/' + attachmentId, 'Download');  
+            
+          Downloader.downloadFile(attachmentId, fileName)
           };
           $scope.loadMoreUpdates = function () {
             TicketsService.loadRemainingTicketUpdates($scope.ticketDetails, function () {
