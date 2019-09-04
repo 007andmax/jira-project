@@ -907,6 +907,7 @@ console.log('find');
             }
           };
           $scope.saveUpdateService = function (form, item, callback) {
+            console.log('saveUpdateService');
             if (form.$valid) {
               var editVersionedId;
               if (typeof item.item.name === 'object') {
