@@ -13,7 +13,7 @@
 
         var unlockExpiredHeader = response.headers('SESSION_UNLOCK_EXPIRED');
         var userDisabledHeader = response.headers('USER_DISABLED');
-        var isUnauthorized= response.data.errorMessage === 'unauthorized' || response.data.authMessage === 'unauthorized',
+        var isUnauthorized = response.data.errorMessage === 'unauthorized' || response.data.authMessage === 'unauthorized',
           isDisabled = response.data.message === 'userDisabled';
 
         if (userDisabledHeader) {
@@ -118,7 +118,7 @@
 
   }]);
 
-  services.factory('$exceptionHandler', ['$log', function($log) {
+  services.factory('$exceptionHandler', ['$log', function ($log) {
     return function myExceptionHandler(exception, cause) {
       //todo: send errors to the backend (need endpoint)
       console.log('teste');
@@ -150,15 +150,35 @@
         return false;
       }
 
+      if (isChrome) {
+        var postData = new FormData();
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.responseType = 'blob';
+        xhr.onload = function (e) {
+          var blob = xhr.response;
 
 
-      //If in Chrome or Safari - download via virtual link click
-      if (isChrome || isFirefox) {
+
+          var tempEl = document.createElement("a");
+          document.body.appendChild(tempEl);
+          tempEl.style = "display: none";
+          url = window.URL.createObjectURL(blob);
+          tempEl.href = url;
+          tempEl.download = fileName;
+          tempEl.click();
+          window.URL.revokeObjectURL(url);
+
+        }.bind(this)
+        xhr.send(postData);
+      } else if (isFirefox) {
+
         //Creating new link node.
         var indexOf = url.indexOf('.com');
         var shortUrl = url.slice(url.indexOf('.com') + 4);
 
         if (indexOf !== -1) {
+
           return redownload(url, true) && redownload(shortUrl);
         } else {
 
@@ -197,6 +217,7 @@
         //   return true;
         // }
       } else if (isSafari) {
+
         $("#pdf").remove();
         $("body").append("<iframe id='pdf' style='display:none;'></iframe>");
         document.getElementById('pdf').src = url;
@@ -204,8 +225,8 @@
       }
 
       // Force file download (whether supported by server).
-//            url += '?download';
-//todo fix bug with multiple files download
+      //            url += '?download';
+      //todo fix bug with multiple files download
       window.open(url, '_blank');
       return true;
 
@@ -215,9 +236,11 @@
         link.href = url;
 
         if (link.download !== undefined) {
+
           //Set HTML5 download attribute. This will prevent file from opening if supported.
           if (!fileName) {
             fileName = url.substring(url.lastIndexOf('/') + 1, url.length);
+
           }
 
           // alert(url);
@@ -225,15 +248,17 @@
           if (!open) {
             link.download = fileName;
 
+
           }
 
           // alert(link.download)
         }
- 
         //Dispatching click event.
         if (document.createEvent) {
+          console.log(7);
           var e = document.createEvent('MouseEvents');
           e.initEvent('click', true, true);
+
           link.dispatchEvent(e);
           return true;
         }
@@ -244,6 +269,7 @@
 
 
     function downloadFile(fileId, fileName) {
+      console.log('downloadFile');
       downloadByUrl('/file/' + fileId, fileName);
     }
 
@@ -301,9 +327,9 @@
 
       targetObj = targetObj || sourceObj;
 
-//            if(targetObj['staticCopy']){
-//                throw 'Method staticCopy engaged by TicketsService!';
-//            }
+      //            if(targetObj['staticCopy']){
+      //                throw 'Method staticCopy engaged by TicketsService!';
+      //            }
 
       for (var prop in sourceObj) {
 
@@ -486,17 +512,17 @@
       return date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate();
     }
 
-   function removeFromArrayByCondition(array, condition) {
-     var i = 0;
-     while (i < array.length) {
-       if (condition(array[i], i)) {
-         array.splice(i, 1);
-       }
-       else {
-         ++i;
-       }
-     }
-   }
+    function removeFromArrayByCondition(array, condition) {
+      var i = 0;
+      while (i < array.length) {
+        if (condition(array[i], i)) {
+          array.splice(i, 1);
+        }
+        else {
+          ++i;
+        }
+      }
+    }
 
     function addNumberOfMonth(oldDate, amountOfMonth) {
       Date.isLeapYear = function (year) {
@@ -520,8 +546,8 @@
         var ifLastDay = this.getDate() == this.getDaysInMonth();
         this.setDate(1);
         this.setMonth(this.getMonth() + value);
-        if(ifLastDay) {
-          this.setDate( this.getDaysInMonth());
+        if (ifLastDay) {
+          this.setDate(this.getDaysInMonth());
         } else {
           this.setDate(Math.min(n, this.getDaysInMonth()));
         }
@@ -550,11 +576,11 @@
       var nOfIntervals = numOfIntervals || 1;
       var date = dateToChange;
       var day = 1000 * 60 * 60 * 24;
-      var utc_timestamp = Date.UTC(date.getUTCFullYear(),date.getUTCMonth(), date.getUTCDate() ,
+      var utc_timestamp = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(),
         date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds(), date.getUTCMilliseconds());
-      var calculatePlusDays = utc_timestamp + day*period*nOfIntervals;
+      var calculatePlusDays = utc_timestamp + day * period * nOfIntervals;
       var nd = new Date(calculatePlusDays);
-      date.setTime(calculatePlusDays - (nd.getTimezoneOffset()*60000));
+      date.setTime(calculatePlusDays - (nd.getTimezoneOffset() * 60000));
       return date;
     }
 

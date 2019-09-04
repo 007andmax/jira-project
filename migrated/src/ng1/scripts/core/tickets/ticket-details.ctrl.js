@@ -403,31 +403,8 @@
             delete link;
           }
           $scope.downloadAttachment = function (attachmentId, fileName) {
-      //      Downloader.downloadFile(attachmentId, fileName)
-
-           /* Downloader.downloadFile(
-              attachmentId,
-              fileName
-            );*/
-
-           
-            fetch('/file/' + attachmentId)
-              .then(resp => {
-                console.log('resp.blob()',resp);
-                return resp.blob();
-              })
-              .then(blob => {
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.style.display = 'none';
-                a.href = url;
-                // the filename you want
-                a.download = fileName;
-                document.body.appendChild(a);
-                a.click();
-                window.URL.revokeObjectURL(url);
-
-              });
+         
+            Downloader.downloadFile(attachmentId, fileName)
           };
           $scope.loadMoreUpdates = function () {
             TicketsService.loadRemainingTicketUpdates($scope.ticketDetails, function () {
