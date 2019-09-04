@@ -804,52 +804,52 @@
       </div>
       <div class="center-category collapsed-nav nano-content company-dashboard-left-panel">
         <a class="left-panel-title font-medium"
-           
-             href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=dashboard"
-             style="margin-bottom: 10px;"
-             ng-class="{'active': getOpenedUsersTab() ==='dashboard'}">
+
+           href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=dashboard"
+           style="margin-bottom: 10px;"
+           ng-class="{'active': getOpenedUsersTab() ==='dashboard'}">
           Dashboard
-      </a>
+        </a>
         <div class="left-panel-hide-filter">
           <a class="left-panel-title left-panel-title-hover"
-               ng-click="activateCompanyProfileTab('CompanyProfileTicketsPage')"
-               ng-class="{'left-panel-active': CompanyProfileTicketsPage}"
-               href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=tickets-all"
-               >
+             ng-click="activateCompanyProfileTab('CompanyProfileTicketsPage')"
+             ng-class="{'left-panel-active': CompanyProfileTicketsPage}"
+             href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=tickets-all"
+          >
             Tickets
             <i class="report-caret-icon" ng-class="{'report-caret-icon-up': CompanyProfileTicketsPage}"></i>
-        </a>
+          </a>
           <div class="filter-left-panel category-expanded angular-animate" ng-show="CompanyProfileTicketsPage">
             <a class="center-category__category sked"
-               
-                 href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=tickets-all"
-                 ng-class="{'active': getOpenedUsersTab() ==='tickets-all'}">
+
+               href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=tickets-all"
+               ng-class="{'active': getOpenedUsersTab() ==='tickets-all'}">
               All tickets <span>{{ticketsCounterByCompany.ALL}}</span>
-          </a>
+            </a>
             <a class="center-category__category sked"
-               
-                 href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=tickets-unassigned"
-                 ng-class="{'active': getOpenedUsersTab() ==='tickets-unassigned'}">
+
+               href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=tickets-unassigned"
+               ng-class="{'active': getOpenedUsersTab() ==='tickets-unassigned'}">
               Unassigned <span>{{ticketsCounterByCompany.UNASSIGNED}}</span>
-        </a>
+            </a>
             <a class="center-category__category sked"
-            href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=tickets-inProgress"
-               
-                 ng-class="{'active': getOpenedUsersTab() ==='tickets-inProgress'}">
+               href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=tickets-inProgress"
+
+               ng-class="{'active': getOpenedUsersTab() ==='tickets-inProgress'}">
               In progress <span>{{ticketsCounterByCompany.IN_PROGRESS}}</span>
-      </a>
+            </a>
             <a class="center-category__category sked"
-            href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=tickets-onHold"
-                 
-                 ng-class="{'active': getOpenedUsersTab() ==='tickets-onHold'}">
+               href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=tickets-onHold"
+
+               ng-class="{'active': getOpenedUsersTab() ==='tickets-onHold'}">
               On Hold <span>{{ticketsCounterByCompany.ON_HOLD}}</span>
-    </a>
+            </a>
             <a class="center-category__category sked"
-                
-                 href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=tickets-completed"
-                 ng-class="{'active': getOpenedUsersTab() ==='tickets-completed'}">
+
+               href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=tickets-completed"
+               ng-class="{'active': getOpenedUsersTab() ==='tickets-completed'}">
               Completed <span>{{ticketsCounterByCompany.COMPLETED}}</span>
-  </a>
+            </a>
             <div class="left-panel-hide-filter" style="margin: 0;">
               <div class="privet-andrey">
                 <div class="left-panel-title left-panel-title-hover"
@@ -911,92 +911,92 @@
         </div>
         <div class="left-panel-hide-filter">
           <a class="left-panel-title left-panel-title-hover"
-               ng-click="activateCompanyProfileTab('CompanyProfileUsersPage')"
-               ng-class="{'left-panel-active': CompanyProfileUsersPage}"
-               href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=users-all"
-             >
+             ng-click="activateCompanyProfileTab('CompanyProfileUsersPage')"
+             ng-class="{'left-panel-active': CompanyProfileUsersPage}"
+             href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=users-all"
+          >
             Users
             <i class="report-caret-icon" ng-class="{'report-caret-icon-up': CompanyProfileUsersPage}"></i>
-        </a>
+          </a>
           <div class="filter-left-panel category-expanded angular-animate" ng-show="CompanyProfileUsersPage">
             <a class="center-category__category sked"
-              
-                 href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=users-all"
-                 ng-class="{'active': getOpenedUsersTab() ==='users-all'}">
+
+               href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=users-all"
+               ng-class="{'active': getOpenedUsersTab() ==='users-all'}">
               All users
               <i class="icn-sm icn-label-save-left-panel" ng-show="getOpenedUsersTab() ==='users-all'"></i>
-          </a>
+            </a>
             <a class="center-category__category sked"
-                
-                 href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=users-managers"
-                 ng-class="{'active': getOpenedUsersTab() ==='users-managers'}">
+
+               href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=users-managers"
+               ng-class="{'active': getOpenedUsersTab() ==='users-managers'}">
               Managers
               <i class="icn-sm icn-label-save-left-panel" ng-show="getOpenedUsersTab() ==='users-managers'"></i>
-        </a>
+            </a>
             <a class="center-category__category sked"
-               
-                 href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=users-clients"
-                 ng-class="{'active': getOpenedUsersTab() ==='users-clients'}">
+
+               href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=users-clients"
+               ng-class="{'active': getOpenedUsersTab() ==='users-clients'}">
               Users
               <i class="icn-sm icn-label-save-left-panel" ng-show="getOpenedUsersTab() ==='users-clients'"></i>
-      </a>
+            </a>
           </div>
         </div>
         <div class="left-panel-hide-filter">
           <a class="left-panel-title  left-panel-title-hover"
-               ng-click="activateCompanyProfileTab('CompanyProfileDevicesPage')"
-               ng-class="{'left-panel-active': CompanyProfileDevicesPage}"
-           
-               href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=devices-all">
-               
+             ng-click="activateCompanyProfileTab('CompanyProfileDevicesPage')"
+             ng-class="{'left-panel-active': CompanyProfileDevicesPage}"
+
+             href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=devices-all">
+
             Devices
             <i class="report-caret-icon" ng-class="{'report-caret-icon-up': CompanyProfileDevicesPage}"></i>
-        </a>
+          </a>
           <div class="filter-left-panel category-expanded angular-animate" ng-show="CompanyProfileDevicesPage">
             <a class="center-category__category sked"
-              
-                 href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=devices-all"
-                 ng-class="{'active': getOpenedUsersTab() ==='devices-all'}">
+
+               href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=devices-all"
+               ng-class="{'active': getOpenedUsersTab() ==='devices-all'}">
               All devices
               <i class="icn-sm icn-label-save-left-panel" ng-show="getOpenedUsersTab() ==='devices-all'"></i>
             </a>
             <a class="center-category__category sked"
-               
-                 href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=devices-workstations"
-                 ng-class="{'active': getOpenedUsersTab() ==='devices-workstations'}">
+
+               href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=devices-workstations"
+               ng-class="{'active': getOpenedUsersTab() ==='devices-workstations'}">
               Workstations
               <i class="icn-sm icn-label-save-left-panel" ng-show="getOpenedUsersTab() ==='devices-workstations'"></i>
             </a>
             <a class="center-category__category sked"
-            
-                 href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=devices-servers"
-                 ng-class="{'active': getOpenedUsersTab() ==='devices-servers'}">
+
+               href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=devices-servers"
+               ng-class="{'active': getOpenedUsersTab() ==='devices-servers'}">
               Servers
               <i class="icn-sm icn-label-save-left-panel" ng-show="getOpenedUsersTab() ==='devices-servers'"></i>
             </a>
             <a class="center-category__category sked"
-               
-                 href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=devices-devices"
-                 ng-class="{'active': getOpenedUsersTab() ==='devices-devices'}">
+
+               href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=devices-devices"
+               ng-class="{'active': getOpenedUsersTab() ==='devices-devices'}">
               Devices
               <i class="icn-sm icn-label-save-left-panel" ng-show="getOpenedUsersTab() ==='devices-devices'"></i>
             </a>
           </div>
         </div>
         <a class="left-panel-title"
-             style="margin-bottom: 10px;"
-             
-             href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=network-scan"
-             ng-class="{'active': getOpenedUsersTab() ==='network-scan'}">
+           style="margin-bottom: 10px;"
+
+           href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=network-scan"
+           ng-class="{'active': getOpenedUsersTab() ==='network-scan'}">
           Network Scan
-      </a>
+        </a>
         <div class="left-panel-hide-filter" ng-if="PermissionsService.isAllowed('VIEW_PASSWORD_SECTION')">
           <div class="left-panel-title left-panel-title-hover"
                ng-click="activateCompanyProfileTab('CompanyProfilePasswordManagerPage')"
                ng-class="{'left-panel-active': CompanyProfilePasswordManagerPage}"
-              
+
                href="#/ng2/company-password-manager">
-               <!-- ui-sref="companyProfile({ tabName: 'password-manager' })"-->
+            <!-- ui-sref="companyProfile({ tabName: 'password-manager' })"-->
             Password Manager
             <i class="report-caret-icon" ng-class="{'report-caret-icon-up': CompanyProfilePasswordManagerPage}"></i>
           </div>
@@ -1071,20 +1071,20 @@
         </div>
         <div class="left-panel-hide-filter" ng-if="PermissionsService.isAllowed('VIEW_SALES_REPORT')">
           <a class="left-panel-title left-panel-title-hover"
-               ng-click="activateCompanyProfileTab('CompanyProfileProductsPage')"
-               ng-class="{'left-panel-active': CompanyProfileProductsPage}"
-               href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=products"
-              >
+             ng-click="activateCompanyProfileTab('CompanyProfileProductsPage')"
+             ng-class="{'left-panel-active': CompanyProfileProductsPage}"
+             href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=products"
+          >
             Products
             <i class="report-caret-icon" ng-class="{'report-caret-icon-up': CompanyProfileProductsPage}"></i>
-        </a>
+          </a>
           <div class="filter-left-panel category-expanded angular-animate" ng-show="CompanyProfileProductsPage">
             <a class="center-category__category sked"
-               
-                 href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=products"
-                 ng-class="{'active': getOpenedUsersTab() ==='products'}">
+
+               href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=products"
+               ng-class="{'active': getOpenedUsersTab() ==='products'}">
               List of products sold
-          </a>
+            </a>
           </div>
         </div>
         <!--<div class="left-panel-hide-filter">-->
@@ -1418,132 +1418,132 @@
 
     </div>
 
-  <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'tutorial' && !isLeftPanelHidden">
-    <div class="left-panel-full__head">
-      <span class="left-panel-full__head--header">Tutorial</span>
-    </div>
-    <div class="center-category collapsed-nav nano-content">
-      <div class="center-category__category sked" style="padding-left: 25px" ng-repeat="type in tutorialTypes"
-           ng-click="openTutorial(type)">{{ userReadable(type) }}
+    <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'tutorial' && !isLeftPanelHidden">
+      <div class="left-panel-full__head">
+        <span class="left-panel-full__head--header">Tutorial</span>
       </div>
-    </div>
-  </div>
-  <div class="left-panel-full-wrapper nano"
-       ng-show="openedCategory === 'settings' && !isLeftPanelHidden">
-    <div class="left-panel-full__head">
-      <span class="left-panel-full__head--header">Settings</span>
-    </div>
-    <div class="center-category collapsed-nav nano-content" style="overflow-y: auto;">
-      <div class="center-category__category" ng-click="stateGo($event, 'settings.myProfile')"
-           ng-class="{active: $state.is('settings.myProfile')}">
-        <!--<img class="icon-pos nav-icon icn-lg" src="images/input-icons/user-shape.svg">-->
-        My Profile
-      </div>
-      <div ng-style="{'height': $state.is('settings.myProfile') ? '175px' : '0'}"
-           class="category-expanded angular-animate">
-        <div ng-if="$state.is('settings.myProfile')" navigation-bar>
-          <div class="category-expanded-paragraph subsettings" navigate-to="#myProfileBasicInfo">Basic Info</div>
-          <div class="category-expanded-paragraph subsettings" navigate-to="#myProfileAboutMe">About Me</div>
-          <div class="category-expanded-paragraph subsettings" navigate-to="#myProfileChangePassword">Change
-                                                                                                      Password
-          </div>
-          <div class="category-expanded-paragraph subsettings" navigate-to="#myProfileContactInfo">Contact Info
-          </div>
-          <div class="category-expanded-paragraph subsettings" navigate-to="#deactivateAccount"
-               ng-if="currentUser.isOwner">
-            Deactivate Account
-          </div>
+      <div class="center-category collapsed-nav nano-content">
+        <div class="center-category__category sked" style="padding-left: 25px" ng-repeat="type in tutorialTypes"
+             ng-click="openTutorial(type)">{{ userReadable(type) }}
         </div>
       </div>
-      <div class="center-category__category" ng-click="stateGo($event, 'settings.emailNotifications')"
-           ng-class="{active: $state.is('settings.emailNotifications')}">
-        <!--<img class="icon-pos nav-icon icn-lg" src="images/input-icons/envelope.svg">-->
-        Email Notifications
+    </div>
+    <div class="left-panel-full-wrapper nano"
+         ng-show="openedCategory === 'settings' && !isLeftPanelHidden">
+      <div class="left-panel-full__head">
+        <span class="left-panel-full__head--header">Settings</span>
       </div>
-      <div class="center-category__category"
-           ng-click="stateGo($event, 'settings.tags.companies', {test: true})"
-           ng-class="{active: $state.is('settings.tags')}"
-           ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_TAGS_SETTINGS')">
-        <!--<img class="icon-pos nav-icon icn-lg" src="images/input-icons/tags.svg">-->
-        Manage Tags
-      </div>
-      <div
-        ng-style="{'height': ($state.is('settings.tags.companies') || $state.is('settings.tags.tickets'))  ? '70px' : '0'}"
-        class="category-expanded angular-animate">
-        <div ng-if="$state.is('settings.tags.companies') || $state.is('settings.tags.tickets')" navigation-bar>
-          <div class="category-expanded-paragraph subsettings"
-               ng-click="stateGo($event, 'settings.tags.companies')"
-               ng-class="{active: $state.is('settings.tags.companies')}"> Companies
-          </div>
-          <div class="category-expanded-paragraph subsettings"
-               ng-click="stateGo($event, 'settings.tags.tickets')"
-               ng-class="{active: $state.is('settings.tags.tickets')}"> Tickets
+      <div class="center-category collapsed-nav nano-content" style="overflow-y: auto;">
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.myProfile')"
+             ng-class="{active: $state.is('settings.myProfile')}">
+          <!--<img class="icon-pos nav-icon icn-lg" src="images/input-icons/user-shape.svg">-->
+          My Profile
+        </div>
+        <div ng-style="{'height': $state.is('settings.myProfile') ? '175px' : '0'}"
+             class="category-expanded angular-animate">
+          <div ng-if="$state.is('settings.myProfile')" navigation-bar>
+            <div class="category-expanded-paragraph subsettings" navigate-to="#myProfileBasicInfo">Basic Info</div>
+            <div class="category-expanded-paragraph subsettings" navigate-to="#myProfileAboutMe">About Me</div>
+            <div class="category-expanded-paragraph subsettings" navigate-to="#myProfileChangePassword">Change
+                                                                                                        Password
+            </div>
+            <div class="category-expanded-paragraph subsettings" navigate-to="#myProfileContactInfo">Contact Info
+            </div>
+            <div class="category-expanded-paragraph subsettings" navigate-to="#deactivateAccount"
+                 ng-if="currentUser.isOwner">
+              Deactivate Account
+            </div>
           </div>
         </div>
-      </div>
-      <div class="center-category__category" ng-click="stateGo($event, 'settings.activityHistory')"
-           ng-class="{active: $state.is('settings.activityHistory')}">
-        <!--<img class="icon-pos nav-icon icn-lg" src="images/input-icons/history.svg">-->
-        Activity History
-      </div>
-      <div class="center-category__category" ng-click="stateGo($event, 'settings.companyProfile')"
-           ng-class="{active: $state.is('settings.companyProfile')}"
-           ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_COMPANY_PROFILE_SETTINGS')">
-        <!--<img class="icon-pos nav-icon icn-lg" src="images/input-icons/building.svg">-->
-        Company Profile
-      </div>
-      <div ng-style="{'height': $state.is('settings.companyProfile') ? '105px' : '0'}"
-           class="category-expanded angular-animate"
-           ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_COMPANY_PROFILE_SETTINGS')">
-        <div ng-if="$state.is('settings.companyProfile')" navigation-bar>
-          <div class="category-expanded-paragraph subsettings" navigate-to="#companyInfoBasicInfo">Basic Info</div>
-          <div class="category-expanded-paragraph subsettings" navigate-to="#companyInfoContactInfo">Contact Info
-          </div>
-          <div class="category-expanded-paragraph subsettings" navigate-to="#responseTimeSettings">Response Time
-                                                                                                   Settings
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.emailNotifications')"
+             ng-class="{active: $state.is('settings.emailNotifications')}">
+          <!--<img class="icon-pos nav-icon icn-lg" src="images/input-icons/envelope.svg">-->
+          Email Notifications
+        </div>
+        <div class="center-category__category"
+             ng-click="stateGo($event, 'settings.tags.companies', {test: true})"
+             ng-class="{active: $state.is('settings.tags')}"
+             ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_TAGS_SETTINGS')">
+          <!--<img class="icon-pos nav-icon icn-lg" src="images/input-icons/tags.svg">-->
+          Manage Tags
+        </div>
+        <div
+          ng-style="{'height': ($state.is('settings.tags.companies') || $state.is('settings.tags.tickets'))  ? '70px' : '0'}"
+          class="category-expanded angular-animate">
+          <div ng-if="$state.is('settings.tags.companies') || $state.is('settings.tags.tickets')" navigation-bar>
+            <div class="category-expanded-paragraph subsettings"
+                 ng-click="stateGo($event, 'settings.tags.companies')"
+                 ng-class="{active: $state.is('settings.tags.companies')}"> Companies
+            </div>
+            <div class="category-expanded-paragraph subsettings"
+                 ng-click="stateGo($event, 'settings.tags.tickets')"
+                 ng-class="{active: $state.is('settings.tags.tickets')}"> Tickets
+            </div>
           </div>
         </div>
-      </div>
-      <div class="center-category__category" ng-click="stateGo($event, 'settings.techUsers')"
-           ng-class="{active: $state.is('settings.techUsers')}"
-           ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_TECH_USERS_SETTINGS')">
-        Tech Users
-      </div>
-      <div class="center-category__category" ng-click="stateGo($event, 'settings.email')"
-           ng-class="{active: $state.is('settings.email')}"
-           ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_EMAIL_SETTINGS')">
-        Email Settings
-      </div>
-      <div class="center-category__category" ng-click="stateGo($event, 'settings.taxes')"
-           ng-class="{active: $state.is('settings.taxes')}"
-           ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_TAXES_SETTINGS')">
-        Taxes
-      </div>
-      <div class="center-category__category" ng-click="stateGo($event, 'settings.tickets')"
-           ng-class="{active: $state.is('settings.tickets')}"
-           ng-if="PermissionsService.isAllowed('VIEW_TICKET_AND_INVOICE_SETTINGS')">
-        Ticket and Invoice
-      </div>
-      <div class="center-category__category" ng-click="stateGo($event, 'settings.permissionsManagement')"
-           ng-class="{active: $state.is('settings.permissionsManagement')}"
-           ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_PERMISSIONS_SETTINGS')">
-        Permission Management
-      </div>
-      <div class="center-category__category" ng-click="stateGo($event, 'settings.commissions')"
-           ng-class="{active: $state.is('settings.commissions')}" ng-if="currentUser.isOwner">
-        Commissions
-      </div>
-      <div class="center-category__category" ng-click="stateGo($event, 'settings.emailTemplates')"
-           ng-class="{active: $state.is('settings.emailTemplates')}"
-           ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_EMAIL_TEMPLATES_SETTINGS')">
-        Email Templates
-      </div>
-      <div class="center-category__category" ng-click="stateGo($event, 'settings.credit-card')"
-           ng-class="{active: $state.is('settings.credit-card')}">
-        Credit Card
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.activityHistory')"
+             ng-class="{active: $state.is('settings.activityHistory')}">
+          <!--<img class="icon-pos nav-icon icn-lg" src="images/input-icons/history.svg">-->
+          Activity History
+        </div>
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.companyProfile')"
+             ng-class="{active: $state.is('settings.companyProfile')}"
+             ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_COMPANY_PROFILE_SETTINGS')">
+          <!--<img class="icon-pos nav-icon icn-lg" src="images/input-icons/building.svg">-->
+          Company Profile
+        </div>
+        <div ng-style="{'height': $state.is('settings.companyProfile') ? '105px' : '0'}"
+             class="category-expanded angular-animate"
+             ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_COMPANY_PROFILE_SETTINGS')">
+          <div ng-if="$state.is('settings.companyProfile')" navigation-bar>
+            <div class="category-expanded-paragraph subsettings" navigate-to="#companyInfoBasicInfo">Basic Info</div>
+            <div class="category-expanded-paragraph subsettings" navigate-to="#companyInfoContactInfo">Contact Info
+            </div>
+            <div class="category-expanded-paragraph subsettings" navigate-to="#responseTimeSettings">Response Time
+                                                                                                     Settings
+            </div>
+          </div>
+        </div>
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.techUsers')"
+             ng-class="{active: $state.is('settings.techUsers')}"
+             ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_TECH_USERS_SETTINGS')">
+          Tech Users
+        </div>
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.email')"
+             ng-class="{active: $state.is('settings.email')}"
+             ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_EMAIL_SETTINGS')">
+          Email Settings
+        </div>
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.taxes')"
+             ng-class="{active: $state.is('settings.taxes')}"
+             ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_TAXES_SETTINGS')">
+          Taxes
+        </div>
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.tickets')"
+             ng-class="{active: $state.is('settings.tickets')}"
+             ng-if="PermissionsService.isAllowed('VIEW_TICKET_AND_INVOICE_SETTINGS')">
+          Ticket and Invoice
+        </div>
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.permissionsManagement')"
+             ng-class="{active: $state.is('settings.permissionsManagement')}"
+             ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_PERMISSIONS_SETTINGS')">
+          Permission Management
+        </div>
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.commissions')"
+             ng-class="{active: $state.is('settings.commissions')}" ng-if="currentUser.isOwner">
+          Commissions
+        </div>
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.emailTemplates')"
+             ng-class="{active: $state.is('settings.emailTemplates')}"
+             ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_EMAIL_TEMPLATES_SETTINGS')">
+          Email Templates
+        </div>
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.credit-card')"
+             ng-class="{active: $state.is('settings.credit-card')}">
+          Credit Card
+        </div>
       </div>
     </div>
-  </div>
   </div>
 </div>
 </div>

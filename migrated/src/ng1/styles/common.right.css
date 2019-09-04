@@ -510,6 +510,12 @@ aside#right .company-devices {
   position: relative;
 }
 
+.company-devices.fixed-col-2 .col-md-3 {
+  width: 21%;
+}
+.company-devices.fixed-col-2 .col-md-4 {
+  width: 41.333333%;
+}
 .no-exist-devices {
   position: absolute;
   left: 50%;

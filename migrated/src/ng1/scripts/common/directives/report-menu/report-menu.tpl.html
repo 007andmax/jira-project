@@ -9,7 +9,7 @@
       </button>
 
       <div class="new-reports-reverse">
-        <div class="form-group content" ng-show="$ctrl.isSoftListHidden">
+        <div class="form-group content more-width" ng-show="$ctrl.isSoftListHidden">
           <div uib-dropdown>
             <input type="text"
                    name="reportCompany"
@@ -23,7 +23,7 @@
                    uib-typeahead="soft as soft.name for soft in softSelect | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
                    placeholder="{{'Search software / publisher'}}"
                    qt-typeahead-async-show-on-focus
-                   custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}" />
+                   custom-style="{width: 'auto', 'max-height': '240px', 'overflow-y': 'auto'}" />
             <loading-indicator class="new-reports-reverse__loader loading-bg" loading-trigger="!loadingInProgressSoft"></loading-indicator>
             <div class="input-top-4" typeahead-input-icon="userCompany"></div>
           </div>
