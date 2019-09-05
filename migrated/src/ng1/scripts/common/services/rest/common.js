@@ -215,6 +215,7 @@
       //  link.target = "_blank";
         link.href = url;
         link.innerText = fileName;
+        link.download = fileName;
       /*  if (link.download !== undefined) {
 
           //Set HTML5 download attribute. This will prevent file from opening if supported.
@@ -234,7 +235,7 @@
           // alert(link.download)
         }*/
         console.log('link',link);
-        download(url, fileName);
+      /*  download(url, fileName);
         $(link).click(function () {
           console.log('click');
           $.fileDownload($(this).prop('href'))
@@ -242,7 +243,7 @@
               .fail(function () { alert('File download failed!'); });
        
           return false; //this is critical to stop the click event which will trigger a normal file download
-      });
+      });*/
         //Dispatching click event.
         if (document.createEvent) {
           console.log(7);
