@@ -87,7 +87,8 @@
               "src/ng1/styles/proton.multi-list-picker.css"
             ],
             "scripts": [
-              "src/ng1/bower_components/jquery/dist/jquery.js",
+              "src/ng1/scripts/js/vendors/jquery-1.8.2.min.js",
+          
               "src/ng1/bower_components/jquery-mousewheel/jquery.mousewheel.js",
               "src/ng1/bower_components/angular/angular.js",
               "src/ng1/bower_components/angular-messages/angular-messages.js",
@@ -466,7 +467,9 @@
               "src/ng1/scripts/js/vendors/nouislider.min.js",
               "src/ng1/scripts/js/vendors/date-range-picker/datepicker.js",
               "src/ng1/scripts/js/vendors/date-range-picker/datepicker.en.js",
-              "src/ng1/scripts/js/handlebars-v3.0.3.js"
+              "src/ng1/scripts/js/handlebars-v3.0.3.js",
+              "src/ng1/scripts/js/vendors/jquery.fileDownload.js",
+              "src/ng1/scripts/js/vendors/download2.js"
             ],
             "es5BrowserSupport": true
           },

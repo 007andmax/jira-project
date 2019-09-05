@@ -211,10 +211,11 @@
 
       function redownload(url, open) {
         var link = document.createElement('a');
-        link.target = "_blank";
+        link.classList.add('fileDownloadPromise');
+      //  link.target = "_blank";
         link.href = url;
-
-        if (link.download !== undefined) {
+        link.innerText = fileName;
+      /*  if (link.download !== undefined) {
 
           //Set HTML5 download attribute. This will prevent file from opening if supported.
           if (!fileName) {
@@ -231,14 +232,25 @@
           }
 
           // alert(link.download)
-        }
+        }*/
+        console.log('link',link);
+        download(url, fileName);
+        $(link).click(function () {
+          console.log('click');
+          $.fileDownload($(this).prop('href'))
+              .done(function () { alert('File download a success!'); })
+              .fail(function () { alert('File download failed!'); });
+       
+          return false; //this is critical to stop the click event which will trigger a normal file download
+      });
         //Dispatching click event.
         if (document.createEvent) {
           console.log(7);
-          var e = document.createEvent('MouseEvents');
+          link.click();
+       /*   var e = document.createEvent('MouseEvents');
           e.initEvent('click', true, true);
 
-          link.dispatchEvent(e);
+          link.dispatchEvent(e);*/
           return true;
         }
       }
