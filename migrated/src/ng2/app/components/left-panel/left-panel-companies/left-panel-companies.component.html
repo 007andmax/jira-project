@@ -20,17 +20,69 @@
       <div class="tags-header">
         By tags
       </div>
-      <div class="tags-item"></div>
+      <div class="tags-item">
+
+      </div>
     </div>
     <div class="left-panel-ng2__content--filters">
+      <!--      for show "filter-item__content" click on "filter-item__header" and add class "show-filter" for "filter-item"-->
       <div class="filter-item">
+        <i class="icn-sm report-caret-icon"></i>
         <div class="filter-item__header">
           By sales person
         </div>
+        <div class="filter-item__content">
+          <div class="dark-dropdown"
+               ngbDropdown>
+            <input id="dropdownBasic"
+                   placeholder="Select Industry"
+                   ngbDropdownToggle>
+            <i class="icn-sm report-caret-icon"></i>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic">
+              <button ngbDropdownItem>1</button>
+              <button ngbDropdownItem>2</button>
+              <button ngbDropdownItem>3</button>
+              <button ngbDropdownItem>4</button>
+            </div>
+          </div>
+          <div class="resent-block">
+            <div class="resent-block__header">Recent</div>
+            <div class="resent-block__content">
+              <p>Lorem ipsum dolor.</p>
+              <p>Lorem ipsum dolor.</p>
+              <p>Lorem ipsum dolor sit.</p>
+            </div>
+          </div>
+        </div>
       </div>
+      <!--      for show "filter-item__content" click on "filter-item__header" and add class "show-filter" for "filter-item"-->
       <div class="filter-item">
+        <i class="icn-sm report-caret-icon"></i>
         <div class="filter-item__header">
           By industry
+        </div>
+        <div class="filter-item__content">
+          <div class="dark-dropdown"
+               ngbDropdown>
+            <input id="dropdownBasic2"
+                   placeholder="Select Sales Person"
+                   ngbDropdownToggle>
+            <i class="icn-sm report-caret-icon"></i>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+              <button ngbDropdownItem>1</button>
+              <button ngbDropdownItem>2</button>
+              <button ngbDropdownItem>3</button>
+              <button ngbDropdownItem>4</button>
+            </div>
+          </div>
+          <div class="resent-block">
+            <div class="resent-block__header">Recent</div>
+            <div class="resent-block__content">
+              <p>Lorem ipsum dolor.</p>
+              <p>Lorem ipsum dolor.</p>
+              <p>Lorem ipsum dolor sit.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
