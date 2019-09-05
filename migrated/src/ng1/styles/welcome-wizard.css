@@ -2733,6 +2733,18 @@
     margin-top: 56px;
   }
 
+  .new-companies-content__modal--content {
+    padding: 0 5px 20px;
+  }
+
+  .new-companies-content__modal .advanced .create-contract {
+    margin-bottom: 10px;
+  }
+
+  .new-companies-content__modal .advanced .create-contract {
+    z-index: 1;
+  }
+
   .password-content__modal--content label i.new-calendar {
     top: auto !important;
   }
@@ -2748,6 +2760,28 @@
     font-family: "Graphik Medium", sans-serif;
     font-size: 14px;
     font-weight: 500;
+  }
+
+  .new-companies-content__modal--content .new-companies-content__modal--content-footer .d-f {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 2;
+  }
+
+  .new-companies-content__modal--content .new-companies-content__modal--content-footer .d-f .btn-new {
+    margin: 0;
+    width: 50%;
+    border: none;
+    height: 48px;
+    border-radius: 0;
+    font-family: "Graphik Medium", sans-serif;
+    font-size: 14px;
+  }
+
+  .new-companies-content__modal .advanced .logo-upload {
+    margin-top: 0;
   }
 
   .password-modal-footer-actions > div:first-child {
