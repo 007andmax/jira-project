@@ -335,6 +335,8 @@ export class PasswordManagerEditAsideComponent implements OnInit {
         this.showGadgetsForm = false;
         for (var i = 0; i < this.deviceCheckbox.length; ++i) { this.deviceCheckbox[i] = false; }
         this.devicesList = [...res[companyId.item.id]];
+        this.devicesList.sort((a, b) => (a.hostName.toLowerCase() > b.hostName.toLowerCase()) ?
+        1 : ((b.hostName.toLowerCase() > a.hostName.toLowerCase()) ? -1 : 0));
         if (this.isEditmode && this.editItem) {
           this.editItem.links.map((item) => {
             const index = this.devicesList.findIndex((deviceListItem) => {
