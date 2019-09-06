@@ -72,20 +72,6 @@ export class CreateRecurringTickets {
 
 
         if (day !== current.getDate() || current.getMonth() !== (month - 1)) {
-            /* let date = new Date(year, month - 1, day);
-             console.log('date.getTime()',date.getTime());
-             console.log('date.getTimezoneOffset()',date.getTimezoneOffset());
-             console.log('timeOffset',timeOffset);
-             this.startDate = date.getTime() + (date.getTimezoneOffset() * 60 * 1000) + timeOffset;
-            
-             console.log('this.startDate',new Date(this.startDate));*/
-            /* let date = new Date(year, month - 1, day, current.getHours(), current.getMinutes());
-             let startDateTime = date.getTime() + (date.getTimezoneOffset() * 60 * 1000) + timeOffset;
-            let startDate = new Date(date.getTime() + (date.getTimezoneOffset() * 60 * 1000) + timeOffset);
-            startDateTime= (startDateTime - (startDate.getHours() * 3600000));
-             this.startDate = startDate.getTime();
-             console.log('this.startDate',this.startDate);*/
-
             let d = new Date();
             let dt = + new Date(year, month - 1, day); // timestamp from calendar
             let dt2 = new Date(dt - (d.getTimezoneOffset() * 60000/* dont touch*/) - timeOffset /* timezone.timeOffset */).getTime();
@@ -95,9 +81,6 @@ export class CreateRecurringTickets {
             let dt = + new Date(d.getFullYear(), d.getMonth(), d.getDate());
             let dt2 = new Date(dt - (d.getTimezoneOffset() * 60000) - timeOffset).getTime();
             this.startDate = dt2;
-            /*  let date = new Date(year, month - 1, day, current.getHours(), current.getMinutes());
-  
-              this.startDate = date.getTime() + (date.getTimezoneOffset() * 60 * 1000) + timeOffset;*/
             console.log('this.startDate', this.startDate);
 
         }
