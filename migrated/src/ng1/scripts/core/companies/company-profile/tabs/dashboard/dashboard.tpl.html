@@ -176,8 +176,8 @@
             <li ng-repeat="day in workingDays"
                 ng-style="{'font-weight': daysOfWeek[getTodayDayOfWeek()-1] === day.dayOfWeek ? 'bold' : ''}">
               <div>{{daysOfWeekMap[day.dayOfWeek]}}:</div>
-              <span ng-show="day.isWorkingDay">{{day.startTime}}</span> <span ng-show="day.isWorkingDay">{{day.startTimeFormat}}</span><span
-              ng-show="day.isWorkingDay">-</span><span ng-show="day.isWorkingDay">{{day.endTime}}</span> <span
+              <span ng-show="day.isWorkingDay">{{convertTime(day.startTime)}}</span> <span ng-show="day.isWorkingDay">{{day.startTimeFormat}}</span><span
+              ng-show="day.isWorkingDay">-</span><span ng-show="day.isWorkingDay">{{convertTime(day.endTime)}}</span> <span
               ng-show="day.isWorkingDay">{{day.endTimeFormat}}</span><span
               ng-show="!day.isWorkingDay">Not working</span>
             </li>

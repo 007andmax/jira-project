@@ -293,8 +293,8 @@
         function getTimeFormat(time) {
           if (time && time > 0) {
 
-            var timeInHour = time / 3600;
-            if (time <= 12) {
+            var timeInHour = time / 60;
+            if (timeInHour <= 12) {
               return 'AM';
             } else {
               return 'PM';
@@ -303,7 +303,12 @@
             return 'AM';
           }
         }
-
+$scope.convertTime = function (time) {
+  var timeInMinutes = time * 60,
+  hours = Math.floor(timeInMinutes / 60),
+  minutes = Math.round(timeInMinutes - (hours * 60));
+  return ((hours > 10) ? hours : "0"+ hours) + ":" + ((minutes > 10) ? minutes : "0"+ minutes)
+}
         $scope.changePrimaryContact = function (user) {
           CompaniesService.changePrimaryContact(user.id, function (resp) {
             if (resp) {
