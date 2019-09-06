@@ -1458,7 +1458,7 @@
                 if (serviceContract.serviceExpenses[u] && serviceContract.serviceExpenses[u].name) {
                   var servExp = {
                     serviceId: serviceContract.serviceExpenses[u].name.serviceId,
-                    quantity: convertMinutesToHour(serviceContract.serviceExpenses[u].quantity),
+                    quantity: serviceContract.serviceExpenses[u].quantity,// convertMinutesToHour(serviceContract.serviceExpenses[u].quantity),
                     description: serviceContract.serviceExpenses[u].description,
                     date: new Date(serviceContract.serviceExpenses[u].date).getTime()
                   };
@@ -1536,6 +1536,8 @@
 
 
         $scope.validateAndCreateServiceContract = function (serviceContract) {
+       
+        
           disableCreateButtonTimeout();
           if(checkForInvalidFields()) {
             $scope.notAddedServiceError = false;

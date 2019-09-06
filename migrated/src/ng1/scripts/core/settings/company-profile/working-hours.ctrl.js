@@ -13,6 +13,7 @@
       };
 
       $scope.saveTicketResponseTimeSettings = function (form) {
+        console.log('saveTicketResponseTimeSettings');
         if (form.$valid) {
           var dto = angular.copy($scope.companyForSettingPage.responseTimeSettings);
 
