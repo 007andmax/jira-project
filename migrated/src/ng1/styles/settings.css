@@ -1121,7 +1121,7 @@
 }
 
 input.default-invoice-terms {
-  text-align: end;
+ /* text-align: end;*/
   padding-right: 45px;
   width: 100%;
 }
