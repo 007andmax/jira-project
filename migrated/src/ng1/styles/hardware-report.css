@@ -1040,7 +1040,7 @@
   vertical-align: middle;
 }
 
-.run-report-content .content.more-width .dropdown-menu{
+.run-report-content .content.more-width .dropdown-menu {
   min-height: 240px;
 }
 
@@ -1933,6 +1933,10 @@
   display: none;
 }
 
+.run-report-content {
+  margin-top: 50px;
+}
+
 @media screen and (max-width: 1600px) {
   .service-agreements-lists .col-width-3 {
     width: 22.2%;
@@ -1970,10 +1974,6 @@
   
   .run-report-content .content {
     width: 28.6%;
-  }
-  
-  .run-report-content {
-    margin-top: 50px;
   }
   
   .service-agreements-lists .col-width-3 {
