@@ -155,10 +155,10 @@
             }
           }
 
-          for(var g=0; g<$scope.serviceContract.serviceExpenses.length; g++) {
+      /*    for(var g=0; g<$scope.serviceContract.serviceExpenses.length; g++) {
             $scope.serviceContract.serviceExpenses[g].quantity = $scope.serviceContract.serviceExpenses[g].quantity * 60;
           }
-
+*/
           ProductsService.getFullListForAutocomplete($scope, function(resp) {
             var productsData = resp;
             if($scope.serviceContract.productExpenses.length>0) {
