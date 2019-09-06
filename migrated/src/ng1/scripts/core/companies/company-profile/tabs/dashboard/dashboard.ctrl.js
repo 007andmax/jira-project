@@ -225,7 +225,7 @@
               console.log('minutes', minutes);
             }
 
-            return (objectTimeFormat === 'AM' ? hours + ((minutes) ? (minutes / 60) : 0) : (hours + 12) + ((minutes) ? (minutes / 60) : 0));
+            return (objectTimeFormat === 'AM' ? timeInMinutes : timeInMinutes + 12 * 60);
 
           }
         }
@@ -265,14 +265,14 @@
         function parseQuantity(time) {
 
           if (time && time > 0) {
-            var timeInMinutes = time * 60,
-              hours = Math.floor(timeInMinutes / 60),
-              minutes = Math.round(timeInMinutes - (hours * 60));
+           
+              hours = Math.floor(time / 60),
+              minutes = Math.round(time - (hours * 60));
            // hours = (hours > 12) ? hours - 12 : hours;
 
 
-            console.log('minutes', minutes);
-            return (hours > 12) ? (time - 12) : time;
+           
+            return (hours > 12) ? (hours - 12) +  ((minutes) ? (minutes / 60) : 0) : hours + ((minutes) ? (minutes / 60) : 0);
           } else {
             return 0;
           }
