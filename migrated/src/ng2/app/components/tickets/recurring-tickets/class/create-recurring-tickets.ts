@@ -91,9 +91,13 @@ export class CreateRecurringTickets {
             let dt2 = new Date(dt - (d.getTimezoneOffset() * 60000/* dont touch*/) - 10800000 /* timezone.timeOffset */).getTime();
             this.startDate = dt2;
         } else {
-            let date = new Date(year, month - 1, day, current.getHours(), current.getMinutes());
-
-            this.startDate = date.getTime() + (date.getTimezoneOffset() * 60 * 1000) + timeOffset;
+            let d = new Date();
+            let dt = + new Date(d.getFullYear(), d.getMonth(), d.getDate());
+            let dt2 = new Date(dt - (d.getTimezoneOffset() * 60000) - 10800000).getTime();
+            this.startDate = dt2;
+            /*  let date = new Date(year, month - 1, day, current.getHours(), current.getMinutes());
+  
+              this.startDate = date.getTime() + (date.getTimezoneOffset() * 60 * 1000) + timeOffset;*/
             console.log('this.startDate', this.startDate);
 
         }
