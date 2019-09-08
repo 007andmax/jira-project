@@ -3,12 +3,12 @@
   <div ng-form="reportSettingForm">
     <div class="run-report-content clearfix {{ $ctrl.className || '' }}">
 
-      <button class="form-group btn btn-success" ng-click="$ctrl.sendReportRequest(reportSetting)"
-              ng-disabled="reportSettingForm.$invalid && !$ctrl.isCustomerHidden && !$ctrl.isRadioButtonHidden">Get
-                                                                                                                Report
-      </button>
-
       <div class="new-reports-reverse">
+        <button class="form-group btn btn-success" ng-click="$ctrl.sendReportRequest(reportSetting)"
+                ng-disabled="reportSettingForm.$invalid && !$ctrl.isCustomerHidden && !$ctrl.isRadioButtonHidden">Get
+                                                                                                                  Report
+        </button>
+
         <div class="form-group content custom-width dropdown-height" ng-show="$ctrl.isSoftListHidden">
           <div uib-dropdown>
             <input type="text"
@@ -241,6 +241,7 @@
             </div>
           </div>
         </div>
+
       </div>
 
       <div ng-show="$ctrl.isCustomerTicketOptions" class="col-md-11">

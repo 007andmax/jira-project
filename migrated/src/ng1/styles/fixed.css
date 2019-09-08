@@ -328,6 +328,17 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 @media screen and (max-width: 1366px) {
+  .run-report-content .btn {
+    width: 155px !important;
+  }
+  
+  .custom-width {
+    max-width: 350px !important;
+  }
+  
+  .remote-access-summary .custom-width {
+    max-width: 300px !important;
+  }
   
   .tax-recurring .select-taxes-drv .checkbox-dropdown label {
     padding: 13px 40px 13px 15px;

@@ -965,7 +965,7 @@
   flex-direction: column;
 }
 
-.new-reports .run-report-content .new-reports-reverse {
+.run-report-content .new-reports-reverse {
   display: flex;
   justify-content: center;
   flex-direction: row-reverse;
@@ -973,10 +973,6 @@
 
 .new-reports .run-report-content .btn.btn-success {
   display: none !important;
-}
-
-.new-reports .run-report-content .form-group {
-
 }
 
 .new-reports .run-report-content p {
@@ -1018,10 +1014,6 @@
 .run-report-content .form-group .report-caret-icon {
   top: 14px;
   right: 16px;
-}
-
-.run-report-content .form-group {
-  float: right;
 }
 
 .run-report-content .btn {
@@ -1089,7 +1081,7 @@
 
 .include-ticket-report {
   float: right;
-  margin-right: 75px;
+  margin-right: 115px;
 }
 
 .include-ticket-report label {
