@@ -1087,6 +1087,14 @@
         var future = $http.put('/v2/tickets/ticketUpdate/updateExpense', expense);
         Utils.handleCallback(future, callback);
       }
+      function updateAssignUsersTicket(users,ticket_id, callback) {
+        var ids = users.map(function (user) {
+          return user.id;
+        });
+       var value = ids.join(',');
+        var future = $http.put('/v2/tickets/' + ticket_id + '/assign', {value:value});
+        Utils.handleCallback(future, callback);
+      }
       function getCurrentlyWorkingWith(targetScope, callback) {
         if (!targetScope || !targetScope.$id) {
           throw 'First argument must be Angularjs scope!';
@@ -1130,6 +1138,7 @@
         loadRemainingTicketUpdates: loadRemainingTicketUpdates,
         markUpdateAsRead: markUpdateAsRead,
         updateExpenseInTicketUpdate: updateExpenseInTicketUpdate,
+        updateAssignUsersTicket: updateAssignUsersTicket,
         changeLinkedAgent: changeLinkedAgent,
         save: saveEditedTicket,
         updateDiscount: updateDiscount,

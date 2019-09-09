@@ -130,7 +130,26 @@
                 </button>
               </div>
             </div>
-            <div class="ticket-assign-actions dropdown-to-left" uib-dropdown auto-close="outsideClick"
+
+            <div uib-dropdown auto-close="outsideClick" class="ticket-assign-actions dropdown-to-left" >
+            
+                 <div uib-tooltip="Assign"
+                 tooltip-placement="top" uib-dropdown-toggle smart-dropdown-menu-position
+                 no-restricted="true">
+              <button class="ticket-assign"></button>
+            </div>
+              <div uib-dropdown-menu
+                   class="dropdown-assign-ticket fixed-assign dropdown-menu without-max-height"
+                   stop-propagation="click" onUserAssign="'true'"
+                   aub-is-bulk-operation="true" style="max-height: auto !important"
+                   users="usersToWatch">
+                <div ng-include="'/ng1/scripts/core/assign-user-list/assign-user-list.tpl.html'"></div>
+              </div>
+              <div typeahead-input-icon-sm="ticketAssignTo"></div>
+            </div>
+
+
+          <!--  <div class="ticket-assign-actions dropdown-to-left" uib-dropdown auto-close="outsideClick"
                  smart-dropdown-menu-position>
               <div uib-tooltip="Assign"
                    tooltip-placement="top" uib-dropdown-toggle no-restricted="true">
@@ -147,7 +166,7 @@
                    aub-current-user="currentUser">
               </div>
               <div typeahead-input-icon-sm="ticketAssignTo"></div>
-            </div>
+            </div>-->
             <div class="ticket-settings-actions" uib-dropdown>
               <div uib-tooltip="Settings"
                    tooltip-placement="top" aria-expanded="false"

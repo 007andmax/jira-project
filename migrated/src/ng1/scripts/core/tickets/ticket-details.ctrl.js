@@ -424,7 +424,7 @@ console.log('find');
 
             });
             $scope.ticketDetails = details;
-     
+     console.log('$scope.ticketDetails',$scope.ticketDetails);
           $scope.disabledWhenNoCompleted = (!$scope.checkCompleted()) ? true : false;
        
             if (isFromRemote) {
