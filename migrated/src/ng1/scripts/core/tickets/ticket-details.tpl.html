@@ -131,17 +131,23 @@
               </div>
             </div>
 
-            <div uib-dropdown auto-close="outsideClick" class="ticket-assign-actions dropdown-to-left" >
-            
-                 <div uib-tooltip="Assign"
-                 tooltip-placement="top" uib-dropdown-toggle smart-dropdown-menu-position
-                 no-restricted="true">
-              <button class="ticket-assign"></button>
-            </div>
+            <div class="ticket-assign-actions dropdown-to-left"
+                 uib-dropdown
+                 auto-close="outsideClick">
+
+              <div uib-tooltip="Assign"
+                   tooltip-placement="top">
+                <button class="ticket-assign"
+                        uib-dropdown-toggle
+                        smart-dropdown-menu-position
+                        no-restricted="true"></button>
+              </div>
               <div uib-dropdown-menu
                    class="dropdown-assign-ticket fixed-assign dropdown-menu without-max-height"
-                   stop-propagation="click" onUserAssign="'true'"
-                   aub-is-bulk-operation="true" style="max-height: auto !important"
+                   stop-propagation="click"
+                   onUserAssign="'true'"
+                   aub-is-bulk-operation="true"
+                   style="right: 0;"
                    users="usersToWatch">
                 <div ng-include="'/ng1/scripts/core/assign-user-list/assign-user-list.tpl.html'"></div>
               </div>
@@ -149,24 +155,24 @@
             </div>
 
 
-          <!--  <div class="ticket-assign-actions dropdown-to-left" uib-dropdown auto-close="outsideClick"
-                 smart-dropdown-menu-position>
-              <div uib-tooltip="Assign"
-                   tooltip-placement="top" uib-dropdown-toggle no-restricted="true">
-                <button class="ticket-assign"></button>
-              </div>
-              <div style="right: 0;"
-                   class="dropdown-assign-ticket dropdown-menu fixed-assign"
-                   stop-propagation="click"
-                   dropdown-menu
-                   assign-user-button aub-ticket-id="ticketDetails.id"
-                   ticket-assigned-user-id="ticketDetails.assignedUser.id"
-                   aub-ticket-number="ticketDetails.number"
-                   users="usersCurrentCompany"
-                   aub-current-user="currentUser">
-              </div>
-              <div typeahead-input-icon-sm="ticketAssignTo"></div>
-            </div>-->
+            <!--  <div class="ticket-assign-actions dropdown-to-left" uib-dropdown auto-close="outsideClick"
+                   smart-dropdown-menu-position>
+                <div uib-tooltip="Assign"
+                     tooltip-placement="top" uib-dropdown-toggle no-restricted="true">
+                  <button class="ticket-assign"></button>
+                </div>
+                <div style="right: 0;"
+                     class="dropdown-assign-ticket dropdown-menu fixed-assign"
+                     stop-propagation="click"
+                     dropdown-menu
+                     assign-user-button aub-ticket-id="ticketDetails.id"
+                     ticket-assigned-user-id="ticketDetails.assignedUser.id"
+                     aub-ticket-number="ticketDetails.number"
+                     users="usersCurrentCompany"
+                     aub-current-user="currentUser">
+                </div>
+                <div typeahead-input-icon-sm="ticketAssignTo"></div>
+              </div>-->
             <div class="ticket-settings-actions" uib-dropdown>
               <div uib-tooltip="Settings"
                    tooltip-placement="top" aria-expanded="false"
@@ -373,7 +379,7 @@
                          tooltip-append-to-body="true"
                          uib-tooltip="edit update"
                          ng-click="toggleNoteUpdate(ticketUpdate)"
-                        
+
                          custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">
                         <i class="icon-sm edit-icon-final"></i>
                       </a>
@@ -553,7 +559,8 @@
                       <div class="col-md-1">{{product.item.sale | currency:'$':2}}</div>
                       <div class="col-md-1">{{ product.quantity }}</div>
                       <div
-                        class="col-md-1 text-right gm">{{ product.item.sale * product.quantity || ''| currency :'$':2 }}</div>
+                        class="col-md-1 text-right gm">{{ product.item.sale * product.quantity || ''| currency :'$':2 }}
+                      </div>
                       <div class="col-md-2 action-update pr-0">
                         <div uib-dropdown>
                           <i class="new-calendar-icn pointer"></i>
@@ -616,9 +623,12 @@
                         </div>
                       </div>
                       <p class="is-completed col-md-12" ng-if="product.completed">Completed
-                                                                                  on {{ product.completedAt | date: 'd MMM yyyy, h:mm a'}}</p>
+                                                                                  on {{ product.completedAt | date: 'd
+                                                                                  MMM yyyy, h:mm a'}}</p>
                       <p class="is-completed col-md-12" ng-if="!product.completed && product.date">Due date
-                                                                                                   - {{ product.date | date: 'd MMM yyyy, h:mm a'}}</p>
+                                                                                                   - {{ product.date |
+                                                                                                   date: 'd MMM yyyy,
+                                                                                                   h:mm a'}}</p>
                     </div>
                     <div class="ticket-update-edit"
                          ng-class="{'hide': product.id !== editExpenseId}"
@@ -745,9 +755,12 @@
                         </div>
                       </div>
                       <p class="is-completed col-md-12" ng-if="service.completed">Completed
-                                                                                  on {{ service.completedAt | date: 'd MMM yyyy, h:mm a'}}</p>
+                                                                                  on {{ service.completedAt | date: 'd
+                                                                                  MMM yyyy, h:mm a'}}</p>
                       <p class="is-completed col-md-12" ng-if="!service.completed && service.date">Due date
-                                                                                                   - {{ service.date | date: 'd MMM yyyy, h:mm a'}}</p>
+                                                                                                   - {{ service.date |
+                                                                                                   date: 'd MMM yyyy,
+                                                                                                   h:mm a'}}</p>
                     </div>
                     <div ng-class="{'hide': service.id !== editExpenseId}"
                          ng-if="service.id === editExpenseId"
@@ -1080,9 +1093,12 @@
                     </div>
                   </div>
                   <p class="is-completed col-md-12" ng-if="product.completed">Completed
-                                                                              on {{ product.completedAt | date: 'd MMM yyyy, h:mm a'}}</p>
+                                                                              on {{ product.completedAt | date: 'd MMM
+                                                                              yyyy, h:mm a'}}</p>
                   <p class="is-completed col-md-12" ng-if="!product.completed && product.date">Due date
-                                                                                               - {{ product.date | date: 'd MMM yyyy, h:mm a'}}</p>
+                                                                                               - {{ product.date | date:
+                                                                                               'd MMM yyyy, h:mm
+                                                                                               a'}}</p>
                 </div>
               </div>
 
@@ -1223,9 +1239,12 @@
                     </div>
                   </div>
                   <p class="is-completed col-md-12" ng-if="service.completed">Completed
-                                                                              on {{ service.completedAt | date: 'd MMM yyyy, h:mm a'}}</p>
+                                                                              on {{ service.completedAt | date: 'd MMM
+                                                                              yyyy, h:mm a'}}</p>
                   <p class="is-completed col-md-12" ng-if="!service.completed && service.date">Due date
-                                                                                               - {{ service.date | date: 'd MMM yyyy, h:mm a'}}</p>
+                                                                                               - {{ service.date | date:
+                                                                                               'd MMM yyyy, h:mm
+                                                                                               a'}}</p>
                 </div>
               </div>
 
@@ -1336,9 +1355,9 @@
 
 </div>
 <script>
-  (function (i, s, o, g, r, a, m) {
+  (function(i, s, o, g, r, a, m) {
     i['GoogleAnalyticsObject'] = r;
-    i[r] = i[r] || function () {
+    i[r] = i[r] || function() {
       (i[r].q = i[r].q || []).push(arguments);
     }, i[r].l = 1 * new Date();
     a = s.createElement(o),
