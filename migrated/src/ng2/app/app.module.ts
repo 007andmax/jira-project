@@ -69,6 +69,7 @@ import { TextAreaDirective } from './directives/text-area.directive';
 import { DatePickerComponent } from './components/shared/date-picker/date-picker.component';
 import { RecurringTicketsAddAsideComponent } from './components/tickets/recurring-tickets/recurring-tickets-add-aside/recurring-tickets-add-aside.component';
 import { AlertComponent } from './components/shared/alert/alert.component';
+import { FilterPipe } from './pipe/filter.pipe';
 
 
 /**
@@ -161,7 +162,8 @@ angular.module('quicktech')
     TextAreaDirective,
     DatePickerComponent,
     RecurringTicketsAddAsideComponent,
-    AlertComponent
+    AlertComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

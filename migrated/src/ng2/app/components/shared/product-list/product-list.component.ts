@@ -15,6 +15,7 @@ export class ProductListComponent implements OnInit {
   @Input() itemList: any;
   @Input() editItem: any;
   public isFormValid = false;
+  search:string = '';
   /**
    * Creates an instance of the ProductListComponent with the injected services
    * @param {ElementRef} elRef Service to work with template
@@ -51,6 +52,11 @@ export class ProductListComponent implements OnInit {
     this.elRef.nativeElement.querySelector('#dropdownProducts').value = this.getNameOrDescription(productItem);
     this.products_dropDown.close();
     this.selectedProductItem.next(productItem);
+  }
+
+  onSearch (event) {
+    this.search = event.target.value;
+    console.log('search',this.search);
   }
 
 }
