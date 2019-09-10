@@ -755,8 +755,27 @@ console.log('find');
           $scope.downloadAllAttachments = function () {
             Downloader.downloadTicketAttachments($scope.ticketDetails.id);
           };
+          function downloadURI(uri, name) {
+            var link = document.createElement("a");
+            link.download = name;
+            link.href = uri;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            delete link;
+          }
           $scope.downloadAttachment = function (attachmentId, fileName) {
-            Downloader.downloadFile(attachmentId, fileName)
+          //  window.location.assign('/file/' + attachmentId);
+           // window.open('/file/' + attachmentId, 'Download');  
+            
+         
+          const indexOfDot = fileName && fileName.lastIndexOf('.');
+          const fileFormat = fileName && fileName.substring(indexOfDot);
+          if (fileFormat === '.pdf') {
+            window.open('/file/' + attachmentId, '_blank');
+          } else {
+            Downloader.downloadFile(attachmentId, fileName);
+          }
           };
           $scope.loadMoreUpdates = function () {
             TicketsService.loadRemainingTicketUpdates($scope.ticketDetails, function () {

@@ -266,6 +266,13 @@
                  ng-click="downloadAttachment(attachment.file.id, attachment.file.name)">
                 <span class="icon-sm attachments"></span>
               </a>
+              <a href="javascript:void(0)" class="tp-hide file-preview has-tooltip"
+                 uib-tooltip="Preview" tooltip-placement="top"
+                 create-new-entity="preview"
+                 ng-if="attachment.file.contentType == 'image/png' || attachment.file.contentType == 'image/jpg'"
+                 file-id="{{attachment.file.id}}">
+                <span class="icon-sm attachments"></span>
+              </a>
             </div>
           </li>
         </ul>
@@ -899,6 +906,7 @@
                      ng-click="downloadAttachment(attachment.file.id, attachment.file.name)">
                     <span class="icon-sm attachments"></span>
                   </a>
+
                 </div>
               </li>
             </ul>

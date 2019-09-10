@@ -341,6 +341,7 @@
               "src/ng1/scripts/core/header/create-new-entity/create-new-entity.drv.js",
               "src/ng1/scripts/core/header/create-new-entity/create-product/create-product.ctrl.js",
               "src/ng1/scripts/core/header/create-new-entity/create-service/create-service.crtl.js",
+              "src/ng1/scripts/core/header/create-new-entity/create-preview/create-preview.ctrl.js",
               "src/ng1/scripts/core/header/create-new-entity/create-ticket/create-ticket.ctrl.js",
               "src/ng1/scripts/core/header/create-new-entity/create-user/create-user.ctrl.js",
               "src/ng1/scripts/core/header/global-search/adjust-height.drv.js",

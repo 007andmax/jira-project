@@ -73,12 +73,12 @@
 
 .attachment-meta .file-icon-name {
   position: relative;
-
+  
   width: 20px;
   height: 22px;
   margin-right: 10px;
   background-size: contain;
-
+  
 }
 
 .attachments li.zip > .file-icon-name {
@@ -152,6 +152,14 @@
   height: 14px;
 }
 
+.attachments li > .onhover .file-preview {
+  left: 11px;
+  bottom: 13px;
+  position: absolute;
+  display: block;
+  background: url("../images/new-icons/preview-icn.png");
+}
+
 .attachments li > .onhover .image-preview {
   right: 32px;
   bottom: 10px;
@@ -167,7 +175,7 @@
   .ticket-attachment .download-all .btn {
     margin-top: 1px;
   }
-
+  
   .attachments li .file-name {
     padding: 24px 12px 1px;
   }

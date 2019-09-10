@@ -162,7 +162,7 @@
           return redownload(url, true) && redownload(shortUrl);
         } else {
 
-          return redownload(url);
+       //   return redownload(url);
           if (fileFormat === '.pdf' || fileFormat === '.html') {
             return redownload((url + fileFormat), true);
           } else {
