@@ -631,8 +631,9 @@ export class QuoteStateService {
    * @param item markup
    */
   public setMarkups(item) {
-    if (item.sale > 0 && item.cost > 0)
-      return this.roundToOne((item.sale - item.cost) / item.cost * 100);
+    if (item.sale > 0 && item.cost > 0)  return this.roundToOne((item.sale - item.cost) / item.cost * 100);
+    return 0;
+     
   }
 
   /**

@@ -1,9 +1,9 @@
 export interface Tax {
-    createdAt: number;
-    deletedAt: number;
+    companyId: any;
     id: string;
     isDefault: boolean;
     name: string;
+    productExpenseId: any;
     rate: number;
-    updatedAt: number;
+    serviceExpenseId: any;
 }
