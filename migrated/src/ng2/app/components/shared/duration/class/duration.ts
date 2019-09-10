@@ -1,6 +1,6 @@
 export class Duration {
-    hour:number;
-    minutes:number;
+    hour:number = 0;
+    minutes:number = 0;
     constructor () {
 
     }
