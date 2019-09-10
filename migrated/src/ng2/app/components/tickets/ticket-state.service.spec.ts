@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TicketStateService } from './ticket-state.service';
+ 
 
-describe('TicketStateService', () => {
+/*describe('TicketStateService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
@@ -10,3 +10,4 @@ describe('TicketStateService', () => {
     expect(service).toBeTruthy();
   });
 });
+*/

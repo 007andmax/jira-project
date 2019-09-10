@@ -21,7 +21,12 @@
       <div class="col-md-2"></div>
     </div>
     <div class="company-content">
-      <app-companies-table></app-companies-table>
+        <ng-template ngFor let-company
+                   [ngForOf]="CompaniesList"
+                   [ngForTrackBy]="trackById">
+      <app-companies-table [company]="company"></app-companies-table>
+      </ng-template>
+      <div class="loading" *ngIf="showPreloader"></div>
     </div>
     <button class="mob-filters-btn mobile-btn primary">
       Filters
