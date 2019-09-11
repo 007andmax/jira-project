@@ -97,7 +97,8 @@
                     </li>
                   </ul>
                 </div>
-                {{ userReadable(ticketDetails.ticketSource) }}
+                {{ userReadable(ticketDetails.ticketSource) }},  Agent - {{ticketDetails.agent.label}}
+               
                 <span ng-if="ticketDetails.sourceName && ticketDetails.ticketSource.toLowerCase() === 'from_agent'">
                   &nbsp;({{ ticketDetails.sourceName }})
                 </span>

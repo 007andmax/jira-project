@@ -201,7 +201,7 @@
           }
 
           function initPicker() {
-     console.log('initPicker');
+     
             scope.isWatchDisable = false;
             var url = '';
             if (scope.type === 'minutes') {
@@ -222,7 +222,7 @@
               minuteDropdown.bind('mousedown', chooseQuantity);
               formatDropdown.bind('mousedown', chooseQuantity);
               if (scope.quantity) {
-               console.log('scope.quantity',scope.quantity);
+          
               if (!scope.type) {
                 var timeInMinutes = scope.quantity * 60,
                 hours = Math.floor(timeInMinutes / 60),

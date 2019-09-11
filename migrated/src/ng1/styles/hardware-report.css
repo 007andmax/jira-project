@@ -965,7 +965,7 @@
   flex-direction: column;
 }
 
-.new-reports .run-report-content .new-reports-reverse {
+.run-report-content .new-reports-reverse {
   display: flex;
   justify-content: center;
   flex-direction: row-reverse;
@@ -973,10 +973,6 @@
 
 .new-reports .run-report-content .btn.btn-success {
   display: none !important;
-}
-
-.new-reports .run-report-content .form-group {
-
 }
 
 .new-reports .run-report-content p {
@@ -1020,10 +1016,6 @@
   right: 16px;
 }
 
-.run-report-content .form-group {
-  float: right;
-}
-
 .run-report-content .btn {
   margin-bottom: 20px;
   vertical-align: bottom;
@@ -1038,6 +1030,10 @@
   padding-bottom: 15px;
   position: relative;
   vertical-align: middle;
+}
+
+.run-report-content .content.more-width .dropdown-menu {
+  min-height: 240px;
 }
 
 .content-product-list-ticket label {
@@ -1085,7 +1081,7 @@
 
 .include-ticket-report {
   float: right;
-  margin-right: 75px;
+  margin-right: 115px;
 }
 
 .include-ticket-report label {
@@ -1929,6 +1925,10 @@
   display: none;
 }
 
+.run-report-content {
+  margin-top: 50px;
+}
+
 @media screen and (max-width: 1600px) {
   .service-agreements-lists .col-width-3 {
     width: 22.2%;
@@ -1959,19 +1959,15 @@
   .company-report .top-product-list-ticket [class*=col-md-] {
     font-size: 9px;
   }
-
+  
   .company-report .content-product-list-ticket [class*=col-md-] {
     font-size: 11px;
   }
-
+  
   .run-report-content .content {
     width: 28.6%;
   }
-
-  .run-report-content {
-    margin-top: 50px;
-  }
-
+  
   .service-agreements-lists .col-width-3 {
     width: 20%;
   }

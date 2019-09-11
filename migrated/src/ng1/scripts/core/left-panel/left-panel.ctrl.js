@@ -24,7 +24,7 @@
         var $win = $(window);
 
         $scope.newAngular = $location.url().startsWith('/ng2') ? true :  false;
-
+console.log('$scope',$scope);
         $scope.globalSearch = SharedStateService.getSharedState('globalSearch');
         $scope.usersSharedState = usersSharedState;
         $scope.companiesSharedState = companiesSharedState;
@@ -299,11 +299,19 @@
         }
 
         $scope.activateCompanyProfileTab = function (tabToActivate) {
+          if (tabToActivate == 'CompanyProfilePasswordManagerPage') {
+
+            window.location.href = '#/ng2/company-password-manager';
+            return;
+          }
+         
           var tab = $scope[tabToActivate];
           deactivateAllCompanyProfileTabs();
           if (tab === false) {
             $scope[tabToActivate] = true;
           }
+          console.log('activateCompanyProfileTab',tabToActivate);
+         
         };
 
         $scope.companyIconClick = function () {
@@ -1548,7 +1556,7 @@
             return 'inbox';
           } else if (url.indexOf('companies') > -1) {
             return 'companies';
-          } else if (url.indexOf('companyProfile') > -1) {
+          } else if (url.indexOf('companyProfile') > -1 || url.indexOf('company-password-manager') > -1) {
             return 'companyProfile';
           } else if (url.indexOf('users') > -1) {
             return 'users';

@@ -1114,14 +1114,14 @@
 .days {
   width: initial;
   position: absolute;
-  right: 15px;
+  right: 112px;
   top: 30px;
   color: #b2becd;
   padding-left: 13px;
 }
 
 input.default-invoice-terms {
-  text-align: end;
+ /* text-align: end;*/
   padding-right: 45px;
   width: 100%;
 }

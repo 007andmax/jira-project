@@ -69,6 +69,7 @@ export class PasswordManagerService {
    * @param item - record data
    */
   public addRecord(item?) {
+    console.log('addRecord');
     this.showAddForm.emit(item);
     this.newRecordsisAdd.emit();
   }

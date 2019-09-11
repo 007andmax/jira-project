@@ -8,7 +8,7 @@
       'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.PermissionsService', 'UsersService', '$uibModal', 'quicktech.common.services.PhoneFormats', "$rootScope",
       function ($scope, $state, $stateParams, CompaniesService, DevicesService, StatisticsService,
         SharedStateService, $timeout, UserNotificationService, UserConfirmationsService, PermissionsService, UsersService, $uibModal, PhoneFormats, $rootScope) {
-
+        localStorage.setItem('company_id', $scope.company.id)
         var daysOfWeek = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
         $scope.daysOfWeek = daysOfWeek;
         $scope.daysOfWeekMap = {
@@ -265,14 +265,14 @@
         function parseQuantity(time) {
 
           if (time && time > 0) {
-           
-              hours = Math.floor(time / 60),
+
+            hours = Math.floor(time / 60),
               minutes = Math.round(time - (hours * 60));
-           // hours = (hours > 12) ? hours - 12 : hours;
+            // hours = (hours > 12) ? hours - 12 : hours;
 
 
-           
-            return (hours > 12) ? (hours - 12) +  ((minutes) ? (minutes / 60) : 0) : hours + ((minutes) ? (minutes / 60) : 0);
+
+            return (hours > 12) ? (hours - 12) + ((minutes) ? (minutes / 60) : 0) : hours + ((minutes) ? (minutes / 60) : 0);
           } else {
             return 0;
           }
@@ -303,12 +303,12 @@
             return 'AM';
           }
         }
-$scope.convertTime = function (time) {
-  var timeInMinutes = time * 60,
-  hours = Math.floor(timeInMinutes / 60),
-  minutes = Math.round(timeInMinutes - (hours * 60));
-  return ((hours > 10) ? hours : "0"+ hours) + ":" + ((minutes > 10) ? minutes : "0"+ minutes)
-}
+        $scope.convertTime = function (time) {
+          var timeInMinutes = time * 60,
+            hours = Math.floor(timeInMinutes / 60),
+            minutes = Math.round(timeInMinutes - (hours * 60));
+          return ((hours > 10) ? hours : "0" + hours) + ":" + ((minutes > 10) ? minutes : "0" + minutes)
+        }
         $scope.changePrimaryContact = function (user) {
           CompaniesService.changePrimaryContact(user.id, function (resp) {
             if (resp) {

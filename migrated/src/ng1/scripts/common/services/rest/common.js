@@ -164,8 +164,10 @@
 
        //   return redownload(url);
           if (fileFormat === '.pdf' || fileFormat === '.html') {
+            console.log('1');
             return redownload((url + fileFormat), true);
           } else {
+            console.log('2');
             return redownload((url + fileFormat));
           }
         }

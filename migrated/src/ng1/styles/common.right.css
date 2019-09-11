@@ -20,7 +20,7 @@ aside#right.collapsed {
   aside#right {
     box-shadow: 0 0 26px 0 rgba(10, 45, 89, .1);
   }
-
+  
   @-moz-document url-prefix() {
     aside#right {
       box-shadow: 0 0 16px 0 rgba(10, 45, 89, .1);
@@ -247,7 +247,7 @@ aside#right .recent-activities-by .time-ago {
   display: block;
   font-size: 13px;
   line-height: 15px;
-  color: #94A4B8;
+  color: #94a4b8;
 }
 
 /* Popover styling start */
@@ -504,6 +504,27 @@ aside#right .companies-list-wrapper > li .company-numbers > div > .icn-sm {
 aside#right .company-devices {
   margin-bottom: 13px;
   padding-left: 0;
+}
+
+.company-devices {
+  position: relative;
+}
+
+.company-devices.fixed-col-2 .col-md-3 {
+  width: 21%;
+}
+.company-devices.fixed-col-2 .col-md-4 {
+  width: 41.333333%;
+}
+.no-exist-devices {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.no-exist-devices p {
+  font-size: 20px;
 }
 
 aside#right .company-users {

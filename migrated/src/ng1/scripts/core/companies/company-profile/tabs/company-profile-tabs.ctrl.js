@@ -15,8 +15,10 @@
 
         $scope.PermissionsService = PermissionsService;
         $scope.selectDevices = {};
+        console.log('($stateParams.tabName',$stateParams.tabName);
         if (tabs.indexOf($stateParams.tabName) === -1) {
-          $state.go('companyProfile', {tabName: 'devices'});
+          console.log('goooo');
+          $state.go('companyProfile', {tabName: 'devices-all'});
         }
         $scope.orderDevicesBy = 'hostName';
         $scope.uptimeOrder = '';
@@ -39,6 +41,7 @@
               if ($scope.isHasDevices) {
                 $state.go('companyProfile', {tabName: 'devices'});
               } else {
+                console.log('dashboard');
                 $state.go('companyProfile', {tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'dashboard' : 'network-scan'});
               }
             });
@@ -119,9 +122,13 @@
           } else {
             $scope.isHasDevices = false;
             if ($scope.currentOpenProfileTab === 'devices') {
-              $state.go('companyProfile', {
-                tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'dashboard' : 'network-scan'
-              });
+              console.log('dashboard');
+              if ($stateParams.tabName == 'dashboard') {
+                $state.go('companyProfile', {
+                  tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'dashboard' : 'network-scan'
+                });
+              }
+            
             }
 
           }

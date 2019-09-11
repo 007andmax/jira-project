@@ -99,6 +99,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.type = 0;
     this.currentType = PASSWORD_RECORD_TYPES[0];
     this.hideAddForm();
+    this.initForm();
   }
 
   /**
@@ -123,7 +124,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       this.editItem = res;
       if (this.editItem) this.isEditmode = true;
       this.opened = true;
-      return this.initForm();
+       this.initForm();
     });
   }
 
@@ -159,6 +160,8 @@ export class PasswordManagerEditAsideComponent implements OnInit {
    * init new form
    */
   public initForm(){
+    console.log('initForm');
+    console.log('this.editItem',this.editItem);
     this.expiryDate = this.editItem && this.editItem.expiredDate ? this.getStartDate(this.editItem.expiredDate) : null;
     this.createPasswordRecord = this.fb.group({
       description: [this.editItem ? this.editItem.description : '', Validators.maxLength(5000)],
@@ -332,6 +335,8 @@ export class PasswordManagerEditAsideComponent implements OnInit {
         this.showGadgetsForm = false;
         for (var i = 0; i < this.deviceCheckbox.length; ++i) { this.deviceCheckbox[i] = false; }
         this.devicesList = [...res[companyId.item.id]];
+        this.devicesList.sort((a, b) => (a.hostName.toLowerCase() > b.hostName.toLowerCase()) ?
+        1 : ((b.hostName.toLowerCase() > a.hostName.toLowerCase()) ? -1 : 0));
         if (this.isEditmode && this.editItem) {
           this.editItem.links.map((item) => {
             const index = this.devicesList.findIndex((deviceListItem) => {

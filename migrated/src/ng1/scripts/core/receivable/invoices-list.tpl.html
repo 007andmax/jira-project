@@ -2,7 +2,7 @@
     infinite-scroll="getInvoices()"
     infinite-scroll-distance="0"
     infinite-scroll-distance="5"
-    infinite-scroll-disabled= "stopScroll"
+    infinite-scroll-disabled="stopScroll"
     class="qt-list company-devices qt-users invoices-list">
   <li class="list-item"
       ng-repeat="invoice in invocesList track by invoice.id"
@@ -30,7 +30,7 @@
       </a>
     </div>
     <div class="col-md-3 w-22">
-      <bold>{{company.name}}</bold> 
+      <bold>{{company.name}}</bold>
     </div>
     <div class="col-md-2">{{invoice.date | date:'dd MMM yyyy'}}</div>
     <div class="col-md-1" style="width: 13.6%;">{{invoice.readedAt | date:'dd MMM yyyy'}}</div>
@@ -38,9 +38,9 @@
     <div class="col-md-1">{{((invoice.totalSum || invoice.sum) - invoice.paidSum) | currency: '$': 2 }}</div>
     <div class="col-md-2">
       <p class="invoice-status status-danger" ng-if="invoice.isOverDue && !invoice.paidOn">Overdue by {{getDueDate()}}
-        days</p>
+                                                                                           days</p>
       <p class="invoice-status status-warning" ng-if="!invoice.isOverDue && !invoice.paidOn">Outstanding by
-        {{getDueDate()}} days</p>
+                                                                                             {{getDueDate()}} days</p>
       <p class="invoice-status status-success" ng-if="invoice.paidOn">Paid {{getPaidOnDate()}} days ago</p>
     </div>
     <div class="col-md-1" style="width: 3%;">
@@ -53,7 +53,8 @@
         </div>
         <ul class="dropdown-menu dropdown-menu-right" style="overflow-y: visible" role="menu">
           <li><a ng-click="sentInvoice()">Resend</a></li>
-          <li><a ng-click="rollbackInvoice(invoice)" custom-disabled="{{ invoice.recurringInvoice }}"><span ng-if="!invoice.paidOn">Rollback</span> <span ng-if="invoice.paidOn">Refund Payment</span></a></li>
+          <li><a ng-click="rollbackInvoice(invoice)" custom-disabled="{{ invoice.recurringInvoice }}"><span
+            ng-if="!invoice.paidOn">Rollback</span> <span ng-if="invoice.paidOn">Refund Payment</span></a></li>
           <li ng-show="!invoice.readedAt"><a ng-click="markAsRead(invoice)">Mark as read</a></li>
           <li><a ng-click="deleteInvoice(invoice)">Remove</a></li>
           <li class="dropdown-submenu left-align" style="z-index: 100000">
@@ -91,7 +92,7 @@
     </div>
   </li>
 </ul>
-<div ng-if="isInvoiceShown" ng-controller="quicktech.core.receivable.invoicePreviewCtrl" >
+<div ng-if="isInvoiceShown" ng-controller="quicktech.core.receivable.invoicePreviewCtrl">
   <div invoice-modal-window>
     <div ng-model="invoiceLocks[showInvoiceLockIndex].invoiceDataDto || currentInvoice" invoice-content>
       <div class="invoice-preview invoice-create">
@@ -106,10 +107,11 @@
                       ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
                       tooltip-append-to-body="true"
                       class="btn btn-success"
-                      tooltip-placement="bottom">
+                      tooltip-placement="bottom"
+                      style="padding-left: 22px;">
                 Resend invoice
                 <!--<div class="caret-wrapper pointer" style="color: white; padding: 10px" >-->
-                <i class="icn-sm pointer report-caret-icon-white" ></i>
+                <i class="icn-sm pointer report-caret-icon-white"></i>
                 <!--</div>-->
                 <div class="open-dropdown-zone" uib-dropdown-toggle ng-click="$event.stopPropagation()"></div>
               </button>
@@ -156,11 +158,15 @@
                 <p style="margin-bottom: 20px;">{{ currentInvoice.invoiceContact.phoneNumbers[0].number }}</p>
               </div>
               <div class="col-md-5 pr-30">
-                <p ng-if="currentInvoice.taxId" class="bold"><span>{{currentInvoice.taxId}}</span>{{ currentInvoice.taxIdDescription || 'Tax Number' }}</p>
-                <p class="bold"><span class="detail-sub">{{ currentInvoice.date | date: 'dd MMM yyyy' }}</span>Invoice Date:</p>
+                <p ng-if="currentInvoice.taxId" class="bold"><span>{{currentInvoice.taxId}}</span>{{
+                                                                                                  currentInvoice.taxIdDescription
+                                                                                                  || 'Tax Number' }}</p>
+                <p class="bold"><span class="detail-sub">{{ currentInvoice.date | date: 'dd MMM yyyy' }}</span>Invoice
+                                                                                                               Date:</p>
                 <p class="bold"><span>{{ currentInvoice.dueDate | date: 'dd MMM yyyy'}}</span>Payment Due</p>
                 <p class="bold"><span style="font-weight: 700!important;">{{ currentInvoice.totalSum | currency: '$':2 }}</span>Amount
-                  Due:</p>
+                                                                                                                                Due:
+                </p>
               </div>
             </div>
           </div>
@@ -169,7 +175,15 @@
               <div class="pavlik clearfix">
                 <div class="col-md-2 bold pl-30" style="opacity: .7;">Ticket No.</div>
                 <div class="col-md-8 bold" style="opacity: .7;">Subject</div>
-                <div class="col-md-2 text-right pr-30" style="opacity: .7;font-family: Graphik Regular, sans-serif;">{{ ticket.closedAt | date: 'dd MMM yyyy' }}</div>
+                <div class="col-md-2 text-right pr-30" style="opacity: .7;font-family: Graphik Regular, sans-serif;">{{
+                                                                                                                     ticket.closedAt
+                                                                                                                     |
+                                                                                                                     date:
+                                                                                                                     'dd
+                                                                                                                     MMM
+                                                                                                                     yyyy'
+                                                                                                                     }}
+                </div>
               </div>
               <div class="clearfix">
                 <div class="col-md-2 pl-30">#{{ ticket.number }}</div>
@@ -190,18 +204,36 @@
                 <div class="col-md-2" style="width: 13%;">{{ productExpense.item.sale | currency: '$':2 }}</div>
                 <div class="col-md-2" style="width: 13%;">{{ productExpense.billableQuantity }}</div>
                 <div class="col-md-1">{{ productExpense.taxSum | currency: '$':2 }}</div>
-                <div class="col-md-2 text-right pr-30" style="width: 13%;">{{ productExpense.totalSum | currency: '$':2 }}</div>
+                <div class="col-md-2 text-right pr-30" style="width: 13%;">{{ productExpense.totalSum | currency: '$':2
+                                                                           }}
+                </div>
               </div>
               <div class="clearfix p-14" ng-repeat="serviceExpense in ticket.serviceExpenses">
                 <div class="col-md-5 pl-30" style="width: 51.9%;">
-                  <div class="col-md-5 no-padding" style="padding-left: 0 !important; padding-top: 0 !important; padding-bottom: 0 !important;">{{ serviceExpense.item.name }}</div>
-                  <div class="col-md-7 no-padding" style="padding-right: 0 !important; padding-top: 0 !important; padding-bottom: 0 !important;">{{ serviceExpense.description }}</div>
+                  <div class="col-md-5 no-padding"
+                       style="padding-left: 0 !important; padding-top: 0 !important; padding-bottom: 0 !important;">{{
+                                                                                                                    serviceExpense.item.name
+                                                                                                                    }}
+                  </div>
+                  <div class="col-md-7 no-padding"
+                       style="padding-right: 0 !important; padding-top: 0 !important; padding-bottom: 0 !important;">{{
+                                                                                                                     serviceExpense.description
+                                                                                                                     }}
+                  </div>
                 </div>
                 <div class="col-md-2" style="width: 13%;">{{ serviceExpense.item.rate | currency: '$':2 }}</div>
-                <div class="col-md-2" style="width: 13%;" ng-if="serviceExpense.description =='By User' || serviceExpense.description =='By Device' || serviceExpense.description =='Managed Service Contract'">{{ serviceExpense.billableQuantity  }} </div>
-                <div class="col-md-2" style="width: 13%;" ng-if="serviceExpense.description !=='By User' && serviceExpense.description !=='By Device' && serviceExpense.description !=='Managed Service Contract'">{{ serviceExpense.billableQuantity | durationFilter }} hr(s)</div>
+                <div class="col-md-2" style="width: 13%;"
+                     ng-if="serviceExpense.description =='By User' || serviceExpense.description =='By Device' || serviceExpense.description =='Managed Service Contract'">
+                  {{ serviceExpense.billableQuantity }}
+                </div>
+                <div class="col-md-2" style="width: 13%;"
+                     ng-if="serviceExpense.description !=='By User' && serviceExpense.description !=='By Device' && serviceExpense.description !=='Managed Service Contract'">
+                  {{ serviceExpense.billableQuantity | durationFilter }} hr(s)
+                </div>
                 <div class="col-md-1">{{ serviceExpense.taxSum | currency: '$':2 }}</div>
-                <div class="col-md-2 text-right pr-30" style="width: 13%;">{{ serviceExpense.totalSum | currency: '$':2 }}</div>
+                <div class="col-md-2 text-right pr-30" style="width: 13%;">{{ serviceExpense.totalSum | currency: '$':2
+                                                                           }}
+                </div>
               </div>
             </div>
           </div>
@@ -210,23 +242,31 @@
               <div class="clearfix" style="margin-bottom: 5px;">
                 <div class="col-md-8 bold pl-30">Customer Note Type</div>
                 <div class="col-md-2 bold fz-11">Sub Total</div>
-                <div class="col-md-2 text-right pr-30">{{ (currentInvoice.totalSum - currentInvoice.taxSum ) | currency: '$':2 }}</div>
+                <div class="col-md-2 text-right pr-30">{{ (currentInvoice.totalSum - currentInvoice.taxSum ) | currency:
+                                                       '$':2 }}
+                </div>
               </div>
               <div class="clearfix">
-                <div class="col-md-8 pl-30 notes">{{ currentInvoice.regularNote.line1 + (currentInvoice.regularNote.line2 || '') }}
+                <div class="col-md-8 pl-30 notes">{{ currentInvoice.regularNote.line1 +
+                                                  (currentInvoice.regularNote.line2 || '') }}
                 </div>
                 <div class="col-md-2 bold fz-11" style="padding: 8px 15px;">Tax</div>
-                <div class="col-md-2 text-right pr-30" style="padding: 8px 15px;">{{ (currentInvoice.taxSum) | currency: '$':2 }}</div>
+                <div class="col-md-2 text-right pr-30" style="padding: 8px 15px;">{{ (currentInvoice.taxSum) | currency:
+                                                                                  '$':2 }}
+                </div>
               </div>
               <div class="clearfix">
                 <div class="col-md-8 pl-30"></div>
                 <div class="col-md-2 bold fz-11">Total</div>
-                <div class="col-md-2 bold fz-16 text-right pr-30">{{ (currentInvoice.totalSum) | currency: '$':2 }}</div>
+                <div class="col-md-2 bold fz-16 text-right pr-30">{{ (currentInvoice.totalSum) | currency: '$':2 }}
+                </div>
               </div>
             </div>
             <div class="invoice-list--footer__bottom clearfix">
               <div class="col-md-12 bold pl-30">Terms & Conditions</div>
-              <div class="col-md-12 pl-30 notes">{{currentInvoice.globalNote.line1 + (currentInvoice.globalNote.line2 || '')}}</div>
+              <div class="col-md-12 pl-30 notes">{{currentInvoice.globalNote.line1 + (currentInvoice.globalNote.line2 ||
+                                                 '')}}
+              </div>
             </div>
           </div>
         </div>

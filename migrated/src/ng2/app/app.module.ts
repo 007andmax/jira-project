@@ -69,8 +69,11 @@ import { TextAreaDirective } from './directives/text-area.directive';
 import { DatePickerComponent } from './components/shared/date-picker/date-picker.component';
 import { RecurringTicketsAddAsideComponent } from './components/tickets/recurring-tickets/recurring-tickets-add-aside/recurring-tickets-add-aside.component';
 import { AlertComponent } from './components/shared/alert/alert.component';
+import { CompanyPasswordManagerComponent } from './components/company-password-manager/company-password-manager.component';
+import { CompanyPasswoordManagerHeaderComponent } from './components/company-password-manager/passwoord-manager-header/passwoord-manager-header.component';
+import { CompanyPasswordManagerEditAsideComponent } from './components/company-password-manager/password-manager-edit-aside/password-manager-edit-aside.component';
+import { CompanyPasswordManagerTableComponent } from './components/company-password-manager/password-manager-table/password-manager-table.component';
 import { FilterPipe } from './pipe/filter.pipe';
-
 
 /**
  * declare angular
@@ -95,6 +98,9 @@ angular.module('quicktech')
   .directive(
     'passwordManager',
     downgradeComponent({component: PasswordManagerComponent}))
+  .directive(
+      'companyPasswordManager',
+      downgradeComponent({component: CompanyPasswordManagerComponent}))
   .directive(
     'leftPanelComponent',
     downgradeComponent({component: LeftPanelComponent}))
@@ -163,6 +169,10 @@ angular.module('quicktech')
     DatePickerComponent,
     RecurringTicketsAddAsideComponent,
     AlertComponent,
+    CompanyPasswordManagerComponent,
+    CompanyPasswoordManagerHeaderComponent,
+    CompanyPasswordManagerEditAsideComponent,
+    CompanyPasswordManagerTableComponent,
     FilterPipe
   ],
   imports: [
@@ -193,6 +203,11 @@ angular.module('quicktech')
         {
           path: 'ng2/password-manager',
           component: PasswordManagerComponent,
+          pathMatch: 'full'
+        },
+        {
+          path: 'ng2/company-password-manager',
+          component: CompanyPasswordManagerComponent,
           pathMatch: 'full'
         },
         {
@@ -230,6 +245,7 @@ angular.module('quicktech')
     QuoteCreateComponent,
     QuotePreviewComponent,
     PasswordManagerComponent,
+    CompanyPasswordManagerComponent,
     // RecurringTicketsComponent
   ],
   providers: [

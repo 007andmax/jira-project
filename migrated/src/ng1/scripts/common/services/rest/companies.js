@@ -367,7 +367,7 @@
     }
 
     function archive(companyId, callback) {
-      var future = $http.get('https://dev.quicktech.com/company/archive/' + companyId);
+      var future = $http.get('/company/archive/' + companyId);
       Utils.handleCallback(future, callback);
     }
 

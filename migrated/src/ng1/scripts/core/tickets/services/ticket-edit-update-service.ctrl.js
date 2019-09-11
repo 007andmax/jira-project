@@ -223,8 +223,10 @@
           //TimePicker end
 
           $scope.saveUpdateService = function (form) {
+            console.log('saveUpdateService',form);
             $scope.disableQuantityWatcher = true;
             if (form.$valid) {
+            console.log('valid');
               var editVersionedId = $scope.editService.item.versionedId;
               var isServiceItemChange = $scope.service.item.versionedId.id != editVersionedId.id;
               var isDescriptionChange = $scope.service.description != $scope.editService.description;
@@ -263,6 +265,7 @@
               }
               endDate.setMinutes($rootScope.saveEndDate.minute);
               console.log('service.description',$scope.service.description);
+              console.log('$scope.editService',$scope.editService);
               TicketsService.updateExpenseInTicketUpdate({
 
                 ticketUpdateId: $scope.ticketUpdate.id,

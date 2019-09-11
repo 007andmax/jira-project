@@ -43,6 +43,7 @@
         }, function(val) {
 
           $scope.isAgentsRequestSending = val;
+          console.log('agents',$scope.agents);
         })
 
         $scope.changeUserSubscription = function (subsc) {

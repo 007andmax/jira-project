@@ -75,7 +75,7 @@
           <div class="control-label" ng-message="required">Amount is required.</div>
           <div class="control-label" ng-message="invalid">Amount is .</div>
         </div> -->
-        <input class="form-control disabled text-right" ng-show="countCheckedInvoices() !== 1" required qt-to-fixed="2" name="amount" style="font-weight: 500;margin-right: 13px; pointer-events: none" type="number" ng-model="balance" />
+        <input class="form-control disabled text-right" ng-show="countCheckedInvoices() !== 1" required qt-to-fixed="2" name="amount" style="font-weight: 500;margin-right: 13px;" type="number" ng-model="balance"  readonly/>
         <input class="form-control text-right" ng-show="countCheckedInvoices() === 1" qt-to-fixed="2" name="amount" style="font-weight: 500;margin-right: 13px;" type="number" ng-model="partialPaymentAmount" />
       </div>
       <div class="col-md-8 pr-10">Remaining balance</div>
