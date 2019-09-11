@@ -199,7 +199,7 @@
 
             $scope.companyInfo.workingDays.push(day);
           }
-        
+        console.log('$scope.companyInfo.workingDays',$scope.companyInfo.workingDays);
           $scope.showWorkingDaysEditFields = false;
           $scope.save();
         };

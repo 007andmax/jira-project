@@ -224,13 +224,18 @@
 
           $scope.saveUpdateService = function (form) {
             console.log('saveUpdateService',form);
+            console.log('$scope.service.quantity',$scope.service.quantity);
+            console.log('$scope.service.quantity',$scope.editService);
+            
             $scope.disableQuantityWatcher = true;
             if (form.$valid) {
             console.log('valid');
               var editVersionedId = $scope.editService.item.versionedId;
               var isServiceItemChange = $scope.service.item.versionedId.id != editVersionedId.id;
               var isDescriptionChange = $scope.service.description != $scope.editService.description;
-              var isQuantityChange = ($scope.service.quantity * 60) != $scope.editService.quantity;
+              var isQuantityChange = $scope.service.quantity != $scope.editService.quantity;
+           //   var isQuantityChange = ($scope.service.quantity * 60) != $scope.editService.quantity;
+           if (isQuantityChange) $rootScope.quantityForSave = $scope.editService.quantity;
               var isDateChange = checkDateOnDifferent(new Date($scope.service.date), new Date($scope.editService.date));
               var isDescountAmountChange = $scope.service.discountAmount != $scope.editService.discountAmount;
               var isDiscountTypeChange = $scope.service.discountType != $scope.editService.discountType;
