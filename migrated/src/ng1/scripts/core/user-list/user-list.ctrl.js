@@ -5,7 +5,6 @@
   angular.module('quicktech.core.tickets').controller('quicktech.core.user-list.userListCtrl',
     ['$scope', '$rootScope', function ($scope, $rootScope) {
       $scope.getUserAvatarUrl = $rootScope.getUserAvatarUrl;
-      console.log('$scope.usersToWatch',$scope.usersToWatch);
       $scope.users = JSON.parse(JSON.stringify($scope.usersToWatch));
       $scope.users.forEach(function (element) {
         element.selected = ($scope.service && $scope.service.user && $scope.service.user.id == element.id || $scope.product && $scope.product.user && $scope.product.user.id == element.id) ? true : false;
