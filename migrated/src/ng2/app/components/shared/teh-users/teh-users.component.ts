@@ -93,8 +93,8 @@ export class TehUsersComponent implements OnInit, OnDestroy {
    * @param index index
    */
   public selectUser(index) {
-    this.usersList[index].selected = true;
-    this.selectedUsers.push(this.usersList[index]);
+    this.usersList[index].selected = !this.usersList[index].selected;
+    this.selectedUsers = this.usersList.filter(item => item.selected);
     this.usersChange.emit(this.selectedUsers);
   }
 

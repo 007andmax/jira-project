@@ -1,11 +1,11 @@
-<div class="product-dropdown-new-ng light-dropdown" ngbDropdown [autoClose]="'outside'" #products="ngbDropdown">
+<div class="product-dropdown-new-ng light-dropdown" ngbDropdown [autoClose]="'outside'" #products="ngbDropdown" (openChange)="onCloseProducts($event)" >
   <input class="pointer" type="text"
     [ngClass]="{'no-valid': isFormValid}" placeholder="Product" (input)="onSearch($event)"
     id="dropdownProducts" ngbDropdownToggle>
   <i class="icn-sm report-caret-icon"></i>
-  <div ngbDropdownMenu aria-labelledby="dropdownProducts">
+  <div ngbDropdownMenu aria-labelledby="dropdownProducts" >
     <ngb-accordion #acc="ngbAccordion" class="item-list products-accordion">
-      <ngb-panel *ngFor="let item of itemList"> <!--| filter :'name' : search -->
+      <ngb-panel *ngFor="let item of itemList | filter : resetSearch : search"> <!--| filter :'name' : search -->
         <ng-template ngbPanelHeader>
           <button ngbPanelToggle class="btn">
             {{item.name}} <span *ngIf="item.products.length"> {{item.products.length}} items</span>

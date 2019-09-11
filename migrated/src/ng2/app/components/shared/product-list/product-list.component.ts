@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ElementRef } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 
 /**
@@ -16,11 +16,12 @@ export class ProductListComponent implements OnInit {
   @Input() editItem: any;
   public isFormValid = false;
   search:string = '';
+  resetSearch:boolean = false;
   /**
    * Creates an instance of the ProductListComponent with the injected services
    * @param {ElementRef} elRef Service to work with template
    */
-  constructor(private elRef: ElementRef) { }
+  constructor(private elRef: ElementRef,  public cd: ChangeDetectorRef,) { }
 
   /**
    * Initializes product list. See [ngOnInit]{@see OnInit#ngOnInit}
@@ -56,7 +57,13 @@ export class ProductListComponent implements OnInit {
 
   onSearch (event) {
     this.search = event.target.value;
-    console.log('search',this.search);
+   
+    this.resetSearch = false;
   }
+  onCloseProducts(open) {
+    this.resetSearch = true;
+   // this.cd.detectChanges();
+  }
+  
 
 }
