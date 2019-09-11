@@ -179,7 +179,7 @@
         };
 
         $scope.saveWorkingHours = function () {
-          console.log('saveWorkingHours', $scope.workingDays);
+         
           $scope.companyInfo.workingDays = [];
           for (var i = 0; i < 7; i++) {
             var day = {};
@@ -199,12 +199,32 @@
 
             $scope.companyInfo.workingDays.push(day);
           }
-          console.log('$scope.companyInfo.workingDays', $scope.companyInfo.workingDays);
+        
           $scope.showWorkingDaysEditFields = false;
           $scope.save();
         };
-
         function gotSecondFromTimeAndFormatObject(objectTime, objectTimeFormat) {
+          if (objectTime && objectTimeFormat) {
+            // console.log(objectTime, objectTimeFormat, '*******________**********  ');
+            var hours, minutes, separateTime;
+
+            if (typeof objectTime === 'string') {
+              separateTime = objectTime.split(':');
+              hours = parseInt(separateTime[0]);
+              minutes = parseInt(separateTime[1]);
+            } else {
+           /*   hours = Math.floor(objectTime / 60);
+              minutes = objectTime % 60;*/
+              var timeInMinutes = objectTime * 60,
+              hours = Math.floor(timeInMinutes / 60),
+              minutes = Math.round(timeInMinutes - (hours * 60));
+          
+            }
+
+            return (objectTimeFormat === 'AM' ? hours * 3600 + minutes * 60 : hours * 3600 + minutes * 60 + 12 * 3600);
+          }
+        }
+     /*   function gotSecondFromTimeAndFormatObject(objectTime, objectTimeFormat) {
           //  console.log('objectTime',)
           if (objectTime && objectTimeFormat) {
             // console.log(objectTime, objectTimeFormat, '*******________**********  ');
@@ -228,20 +248,20 @@
             return (objectTimeFormat === 'AM' ? timeInMinutes : timeInMinutes + 12 * 60);
 
           }
-        }
-        console.log('$scope.companyInfo', $scope.companyInfo);
+        }*/
+     
         function getCorrectWorkingTime() {
           $scope.workingDays = [];
-          console.log('$scope.companyInfo.workingDays', $scope.companyInfo.workingDays);
+       
           for (var i = 0; i < 7; i++) {
             var isWorkingDay = ($scope.companyInfo.workingDays && $scope.companyInfo.workingDays.length > 0 && ($scope.companyInfo.workingDays[i].startTime || $scope.companyInfo.workingDays[i].endTime)) ? true : false;
             var day;
 
             if (isWorkingDay) {
               day = {
-                startTime: parseQuantity($scope.companyInfo.workingDays && $scope.companyInfo.workingDays.length > 0 ? $scope.companyInfo.workingDays[i].startTime : 0),
+                startTime: timeFormatter($scope.companyInfo.workingDays && $scope.companyInfo.workingDays.length > 0 ? $scope.companyInfo.workingDays[i].startTime : 0),
                 startTimeFormat: getTimeFormat($scope.companyInfo.workingDays && $scope.companyInfo.workingDays.length > 0 ? $scope.companyInfo.workingDays[i].startTime : 0),
-                endTime: parseQuantity($scope.companyInfo.workingDays && $scope.companyInfo.workingDays.length > 0 ? $scope.companyInfo.workingDays[i].endTime : 0),
+                endTime: timeFormatter($scope.companyInfo.workingDays && $scope.companyInfo.workingDays.length > 0 ? $scope.companyInfo.workingDays[i].endTime : 0),
                 endTimeFormat: getTimeFormat($scope.companyInfo.workingDays && $scope.companyInfo.workingDays.length > 0 ? $scope.companyInfo.workingDays[i].endTime : 0),
 
               };
@@ -260,7 +280,7 @@
             $scope.workingDays.push(day);
             $scope.workingDayReserved = angular.copy($scope.workingDays);
           }
-          console.log(' $scope.workingDays', $scope.workingDays);
+      
         }
         function parseQuantity(time) {
 
@@ -284,16 +304,16 @@
             var hoursToReturn = hours.toString().length > 1 ? hours : '0' + hours;
             var minutes = Math.floor((seconds - (hours * 3600)) / 60);
             var minutesToreturn = minutes.toString().length > 1 ? minutes : '0' + minutes;
-            return hoursToReturn + ':' + minutesToreturn;
+            return hours  + ((minutes) ? (minutes / 60) : 0);
           } else {
-            return '12' + ':' + '00';
+            return 0;
           }
         }
 
         function getTimeFormat(time) {
           if (time && time > 0) {
-
-            var timeInHour = time / 60;
+            var timeInHour = time / 3600;
+           // var timeInHour = time / 60;
             if (timeInHour <= 12) {
               return 'AM';
             } else {
@@ -498,9 +518,13 @@
     [function () {
       return function (time) {
         if (typeof time === 'string') return time;
-
-        var hours = Math.floor(time / 60) + '';
-        var minutes = time % 60 + '';
+        var timeInMinutes = time * 60,
+        hours = Math.floor(timeInMinutes / 60),
+        minutes = Math.round(timeInMinutes - (hours * 60));
+        hours += '';
+        minutes += '';
+       // var hours = Math.floor(time / 60) + '';
+     //   var minutes = time % 60 + '';
 
         if (hours.length === 1) hours = '0' + hours;
         if (minutes.length === 1) minutes = '0' + minutes;
