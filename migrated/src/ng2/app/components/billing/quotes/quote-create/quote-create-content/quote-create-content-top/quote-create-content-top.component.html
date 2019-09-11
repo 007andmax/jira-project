@@ -1,5 +1,5 @@
 <div class="quote-create__content--top row">
-<div class="error-message" *ngIf="errorMessage"><p [textContent]="errorMessage"></p></div>
+  <div class="error-message" *ngIf="errorMessage"><p [textContent]="errorMessage"></p></div>
   <div class="col-md-4">
     <div class="quote-create-field">
       <app-select-client-company style="width: 75%;"
@@ -8,17 +8,18 @@
                                  [editItem]="editItem"
                                  (selectedItem)="selectClient($event)"
                                  (getAllItems)="setClients($event)">
-                                 
+
       </app-select-client-company>
     </div>
     <div *ngIf="currentClient">
       <p>{{getCLientUserName(currentClient.companyInfo)}}</p>
       <p>{{getCLientAddress(currentClient.companyInfo)}}</p>
-      <p>{{currentClient.companyInfo.contacts[0].primaryEmail}}</p>
+      <p style="margin-bottom: 12px;">{{currentClient.companyInfo.contacts[0].primaryEmail}}</p>
     </div>
-    <div class="quote-description">
+    <div class="quote-description editable-description"
+         style="width: 75%;">
       <textarea
-      [minHeight]="38"
+        [minHeight]="38"
         [(ngModel)]="description"
         (input)="onChangeDescription($event)"
         appTextArea
