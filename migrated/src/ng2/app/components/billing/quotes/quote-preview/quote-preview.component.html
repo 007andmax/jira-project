@@ -35,6 +35,21 @@
     </div>
     <div class="quote-create--header__btn" *ngIf="editable">
       <button class="btn-new default" (click)="goToQuotes()">Back</button>
+
+      <div class="btn-new btn-success btn-with-dropdown">
+ 
+          <button type="button" (click)="onlyDownloadPdf()"  >Download</button>
+          <div class="light-dropdown" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+            <button class="dropdown-toggle-split" ngbDropdownToggle>
+              <i class="icn-sm pointer report-caret-icon-white"></i>
+            </button>
+            <div class="dropdown-menu" ngbDropdownMenu>
+              <button class="dropdown-item" ngbDropdownItem (click)="onlySend()" *ngIf="editMode">Resend
+              </button>
+             
+            </div>
+          </div>
+        </div>
     </div>
   </div>
   <div class="info-block">

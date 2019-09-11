@@ -219,6 +219,16 @@ export class QuotePreviewComponent implements OnInit {
     }
   }
 
+  onlySend() {
+    const modalRef = this.modalService.open(ModalQuoteComponent, null);
+  }
+  onlyDownloadPdf () {
+    console.log('this.quote',this.quote);
+    console.log('this.quoteForCreate',this.quoteForCreate);
+    this.quoteService.downloadPdf(this.quoteForCreate.id).subscribe((res) => this.quoteService.downLoadFile(res, this.quoteForCreate.id,this.quote.client.name,this.quoteForCreate.quoteNumber));
+    
+  }
+
   /**
    * Create quote and approve
    */
@@ -235,7 +245,10 @@ export class QuotePreviewComponent implements OnInit {
         .pipe(takeUntil(this.unsubscribe))
         .subscribe((res) => {
           const id = res['id'];
-          this.quoteService.downloadPdf(res['id']).subscribe((res) => this.quoteService.downLoadFile(res, id,this.quote.client.name,this.quoteForCreate.quoteNumber));
+          this.quoteService.downloadPdf(res['id']).subscribe((res) => {
+            this.quoteService.downLoadFile(res, id,this.quote.client.name,this.quoteForCreate.quoteNumber);
+            this.quoteService.backToQuoteList();
+          });
         });
     } else if (isFormReady && this.editMode) {
       const currentQuote = this.quoteStateService.getQuoteCreate();
@@ -243,7 +256,10 @@ export class QuotePreviewComponent implements OnInit {
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((res) => {
         const id = res['id'];
-        this.quoteService.downloadPdf(res['id']).subscribe((res) => this.quoteService.downLoadFile(res, id,this.quote.client.name,this.quoteForCreate.quoteNumber));
+        this.quoteService.downloadPdf(res['id']).subscribe((res) => {
+          this.quoteService.downLoadFile(res, id,this.quote.client.name,this.quoteForCreate.quoteNumber)
+          this.quoteService.backToQuoteList();
+        })
       })
     } else {
       this.quoteStateService.emitValidation();

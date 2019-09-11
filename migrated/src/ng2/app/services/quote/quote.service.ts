@@ -358,8 +358,12 @@ export class QuoteService {
     link.download=`${this.apiUrl}saleQuotes/${id}/pdf.pdf`;
     link.download = `${companyName}_Quote-${quoteNumber}.pdf`;
     link.click();
-    this.quoteStateService.goToQuote();
+ //   this.quoteStateService.goToQuote();
   }
+
+  public backToQuoteList () {
+    this.quoteStateService.goToQuote();
+  } 
 
   /**
    * Get sort type

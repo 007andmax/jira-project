@@ -207,7 +207,10 @@ export class QuoteCreateContentComponent implements OnInit {
       this.quoteService.createQuote(this.quoteForm.value, false).pipe(takeUntil(this.unsubscribe))
       .subscribe((res) => {
         const id = res['id'];
-        this.quoteService.downloadPdf(res['id']).subscribe((res) => this.quoteService.downLoadFile(res, id,this.quoteStateService.getQuoteCreate().client.name,this.quoteNumber));
+        this.quoteService.downloadPdf(res['id']).subscribe((res) => {
+          this.quoteService.downLoadFile(res, id,this.quoteStateService.getQuoteCreate().client.name,this.quoteNumber);
+          this.quoteService.backToQuoteList();
+        });
       })
     } else if (isFormReady && this.editMode) {
       const currentQuote = this.quoteStateService.getQuoteCreate();
@@ -215,7 +218,10 @@ export class QuoteCreateContentComponent implements OnInit {
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((res) => {
         const id = res['id'];
-        this.quoteService.downloadPdf(res['id']).subscribe((res) => this.quoteService.downLoadFile(res, id,this.quoteStateService.getQuoteCreate().client.name,this.quoteNumber));
+        this.quoteService.downloadPdf(res['id']).subscribe((res) =>{
+          this.quoteService.downLoadFile(res, id,this.quoteStateService.getQuoteCreate().client.name,this.quoteNumber)
+          this.quoteService.backToQuoteList();
+        });
       })
     } else {
       this.quoteStateService.emitValidation();
