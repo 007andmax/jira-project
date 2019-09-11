@@ -55,7 +55,8 @@
         </label>
       </div>
       <div class="col-md-1 pointer" (click)="sortBy('number')">Quote No.</div>
-      <div class="col-md-3 pointer" (click)="sortBy('customerName')">Company name</div>
+      <div class="col-md-1 pointer" (click)="sortBy('customerName')">Company name</div>
+      <div class="col-md-2 pointer" >Description</div>
       <div class="col-md-2 pointer" (click)="sortBy('date')">Date</div>
       <div class="col-md-1 pointer" (click)="sortBy('validUntil')">Valid Until</div>
       <div class="col-md-1 pointer" (click)="sortBy('amount')">Amount</div>
@@ -84,7 +85,8 @@
            (click)="goToPreview(item)"
       >#{{item.number}}
       </div>
-      <div class="col-md-3 g-m">{{item.company.name}}</div>
+      <div class="col-md-1 g-m">{{item.company.name}}</div>
+      <div class="col-md-2 g-m">{{item.description}}</div>
       <div class="col-md-2">{{getDate(item.date)}}</div>
       <div class="col-md-1">{{getDate(item.validUntil)}}</div>
       <div class="col-md-1">{{item.totalAmount | currency}}</div>

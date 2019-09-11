@@ -57,6 +57,7 @@ export class QuoteService {
         "products": this.productsArray,
         "services": this.servicesArray
       },
+      "description" : this.quoteStateService.getDescription(),
       "requestPayment": this.quoteStateService.getRequestPayment()? this.quoteStateService.getRequestPayment() : false,
       "draft":false,
       "purchaseOrder": this.quoteStateService.getPurchaseOrder() || null,
@@ -95,6 +96,7 @@ export class QuoteService {
         "products": this.productsArray,
         "services": this.servicesArray
       },
+      "description" : this.quoteStateService.getDescription(),
       "requestPayment": this.quoteStateService.getRequestPayment()? this.quoteStateService.getRequestPayment() : false,
       "draft":false,
       "purchaseOrder": this.quoteStateService.getPurchaseOrder() || null,

@@ -16,6 +16,14 @@
       <p>{{getCLientAddress(currentClient.companyInfo)}}</p>
       <p>{{currentClient.companyInfo.contacts[0].primaryEmail}}</p>
     </div>
+    <div class="quote-description">
+      <textarea
+      [minHeight]="38"
+        [(ngModel)]="description"
+        (input)="onChangeDescription($event)"
+        appTextArea
+        [limit]="250"></textarea>
+    </div>
   </div>
   <div class="col-md-4">
     <div class="quote-create-field">

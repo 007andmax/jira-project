@@ -45,6 +45,12 @@ export class QuoteStateService {
     this.onInitCLientsList();
   }
 
+  public setDescription (description) {
+    this.quoteForCreate.description = description;
+  }
+  public getDescription() {
+    return this.quoteForCreate.description;
+  }
   /**
    * Set result after request for alert
    */
@@ -456,7 +462,7 @@ export class QuoteStateService {
     const itemsArray = [...quote.products, ...quote.services];
     this.setItemArray(itemsArray);
     this.setType(true);
-    
+    this.setDescription(quote.description);
     this.setNumber(quote.number);
     this.setStartQuoteNumber(quote.number);
     this.setEndDate(this.dateService.getStartDate(quote.validUntil));
@@ -668,6 +674,7 @@ export class QuoteStateService {
       endDate: '',
       quoteNumber: '',
       itemsArray: '',
+      description: '',
       client: '',
       subTotalProducts: '',
       subTotalServices: '',
