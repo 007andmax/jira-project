@@ -163,10 +163,12 @@
   display: flex !important;
   padding: 0 !important;
   > button {
+    min-width: 130px;
     background: transparent;
     border: none;
     padding: 0 20px;
     height: 100%;
+    text-align: left;
   }
   > div {
     display: flex;
@@ -174,7 +176,7 @@
     .dropdown-menu {
       right: 0 !important;
       left: auto !important;
-      width: 197px !important;
+      width: 172px !important;
       .dropdown-item {
         height: 40px;
         font-size: 13px;

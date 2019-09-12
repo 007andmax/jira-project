@@ -38,13 +38,13 @@
 
       <div class="btn-new btn-success btn-with-dropdown">
  
-          <button type="button" (click)="onlySend()"  >Resend</button>
+          <button type="button" (click)="onlySend()">Resend Quote</button>
           <div class="light-dropdown" ngbDropdown role="group" aria-label="Button group with nested dropdown">
             <button class="dropdown-toggle-split" ngbDropdownToggle>
               <i class="icn-sm pointer report-caret-icon-white"></i>
             </button>
             <div class="dropdown-menu" ngbDropdownMenu>
-              <button class="dropdown-item" ngbDropdownItem (click)="onlyDownloadPdf()" *ngIf="editMode">Download</button>
+              <button class="dropdown-item" ngbDropdownItem (click)="onlyDownloadPdf()" *ngIf="editMode">Download Quote</button>
              
             </div>
           </div>
