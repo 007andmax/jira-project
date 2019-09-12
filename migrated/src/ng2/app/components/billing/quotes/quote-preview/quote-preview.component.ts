@@ -11,6 +11,7 @@ import { ModalQuoteComponent } from "../../../../services/modal/modal-quote/moda
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { FormGroup } from '@angular/forms';
 import { ISubscription } from 'rxjs/Subscription';
+import { AlertStateService } from '../../../shared/alert/services/alert-state.service';
 
 /**
  * Quote preview component
@@ -48,7 +49,8 @@ export class QuotePreviewComponent implements OnInit {
     private companiesService: CompaniesService,
     private dateService: DateService,
     private quoteService: QuoteService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private alertState: AlertStateService
   ) { }
 
   /**
@@ -221,10 +223,11 @@ export class QuotePreviewComponent implements OnInit {
 
   onlySend() {
     const modalRef = this.modalService.open(ModalQuoteComponent, null);
+    modalRef.componentInstance.data = this.quoteForCreate;
+    modalRef.componentInstance.onlySendMpde = true;
   }
   onlyDownloadPdf () {
-    console.log('this.quote',this.quote);
-    console.log('this.quoteForCreate',this.quoteForCreate);
+    
     this.quoteService.downloadPdf(this.quoteForCreate.id).subscribe((res) => this.quoteService.downLoadFile(res, this.quoteForCreate.id,this.quote.client.name,this.quoteForCreate.quoteNumber));
     
   }
@@ -247,6 +250,7 @@ export class QuotePreviewComponent implements OnInit {
           const id = res['id'];
           this.quoteService.downloadPdf(res['id']).subscribe((res) => {
             this.quoteService.downLoadFile(res, id,this.quote.client.name,this.quoteForCreate.quoteNumber);
+            this.alertState.oninitShowAlert('Quote has been saved');
             this.quoteService.backToQuoteList();
           });
         });
@@ -258,6 +262,7 @@ export class QuotePreviewComponent implements OnInit {
         const id = res['id'];
         this.quoteService.downloadPdf(res['id']).subscribe((res) => {
           this.quoteService.downLoadFile(res, id,this.quote.client.name,this.quoteForCreate.quoteNumber)
+          this.alertState.oninitShowAlert('Quote has been saved');
           this.quoteService.backToQuoteList();
         })
       })

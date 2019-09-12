@@ -1,16 +1,17 @@
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
-import {MatChipInputEvent} from '@angular/material/chips';
-import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 
-import {USER} from "../../../const/users";
-import {UsersService} from "../../users/users.service";
-import {QuoteStateService} from "../../../components/billing/quotes/quote-create/quote-state.service";
-import {QuoteService} from "../../quote/quote.service";
-import {takeUntil} from "rxjs/operators";
-import {Subject} from "rxjs";
+import { USER } from "../../../const/users";
+import { UsersService } from "../../users/users.service";
+import { QuoteStateService } from "../../../components/billing/quotes/quote-create/quote-state.service";
+import { QuoteService } from "../../quote/quote.service";
+import { takeUntil } from "rxjs/operators";
+import { Subject } from "rxjs";
+import { AlertStateService } from 'src/ng2/app/components/shared/alert/services/alert-state.service';
 
 /**
  * Modal quote component
@@ -39,8 +40,10 @@ export class ModalQuoteComponent implements OnInit {
   users = [];
 
 
+
   private unsubscribe: Subject<void> = new Subject();
   @Input() public data;
+  @Input() public onlySendMpde = false;
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
@@ -55,7 +58,8 @@ export class ModalQuoteComponent implements OnInit {
     public activeModal: NgbActiveModal,
     private userService: UsersService,
     private quoteStateService: QuoteStateService,
-    private quoteService: QuoteService
+    private quoteService: QuoteService,
+    private alertState: AlertStateService
   ) { }
 
   /**
@@ -64,6 +68,7 @@ export class ModalQuoteComponent implements OnInit {
   public ngOnInit() {
     console.log('ngOnInit', this.data);
     (this.data) && this.initResendMode();
+
     this.getAllUsers();
     this.userInput.nativeElement.onblur = (e) => {
       if (this.matAutocomplete.isOpen) {
@@ -168,6 +173,8 @@ export class ModalQuoteComponent implements OnInit {
     this.quoteStateService.setMessage(this.message);
   }
 
+  
+
   /**
    * Save quote
    */
@@ -184,17 +191,21 @@ export class ModalQuoteComponent implements OnInit {
         } else {
           this.data.message = this.message;
           this.data.subject = this.subject;
+
           this.quoteService.resend(this.data, this.selectedUsers)
             .pipe(takeUntil(this.unsubscribe))
             .subscribe((res) => {
               if (res) {
                 this.quoteService.repeatSend(res['id']).subscribe((res) => { })
-                this.quoteStateService.goToQuote();
+               if (!this.onlySendMpde) this.quoteStateService.goToQuote();
+              
               }
               this.unsubscribe.next();
               this.unsubscribe.complete();
             })
         }
+
+
       }
       this.activeModal.close();
     } else {

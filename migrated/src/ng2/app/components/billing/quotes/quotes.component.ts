@@ -72,7 +72,7 @@ export class QuotesComponent implements OnInit,OnDestroy {
     this.getQuotes();
     this.companiesService.getCompaniesList();
     this.changeQuotesListItem();
-    this.onInitCheackQuoteSent();
+    //this.onInitCheackQuoteSent();
   }
 
   ngOnDestroy(): void {
@@ -83,19 +83,19 @@ export class QuotesComponent implements OnInit,OnDestroy {
    /**
    * Subscribe to check quote has been sent
    */
-  public onInitCheackQuoteSent() {
+/*  public onInitCheackQuoteSent() {
     this.checkQuoteHasSent();
     let quoteStateService = this.quoteStateService.getHandleQuoteHasSent().subscribe(() => {
     //  this.quoteResultMessage = this.quoteStateService.getQuoteResult().getMessage();
       this.checkQuoteHasSent();
     });
     this.sub.add(quoteStateService);
-  }
+  }*/
 
    /**
    * Check quote has been sent
    */
-  private checkQuoteHasSent () {
+  /*private checkQuoteHasSent () {
     let result:QuoteResult =  this.quoteStateService.getQuoteResult();
     let successQuoteAdding = (result) ? result.getShow() : false;
     if (successQuoteAdding) {
@@ -105,7 +105,7 @@ export class QuotesComponent implements OnInit,OnDestroy {
       result.setShow(false);
      }, 2000);
     }
-  }
+  }*/
 
   /**
    * get quote list
