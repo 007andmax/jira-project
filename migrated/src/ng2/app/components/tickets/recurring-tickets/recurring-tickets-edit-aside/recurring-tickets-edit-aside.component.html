@@ -10,11 +10,8 @@
         <div class="col-md-12">
           <p>Service Description</p>
           <div class="editable-description">
-            <textarea appTextArea
-                      [limit]="250"
-                      id="service-description"
-                      placeholder="Write Description"
-                      (input)="onChangeDescription($event)"></textarea>
+            <textarea appTextArea [limit]="250" id="service-description" placeholder="Write Description"
+              (input)="onChangeDescription($event)"></textarea>
           </div>
         </div>
 
@@ -24,16 +21,14 @@
           </mat-error>
           <p>Assign to Company</p>
           <app-select-client-company [valid]="validate.getCompany()" style="width: 75%;" class="light-dropdown"
-                                     [filter]="true"
-                                     (selectedItem)="selectClient($event)"></app-select-client-company>
+            [filter]="true" (selectedItem)="selectClient($event)"></app-select-client-company>
         </div>
 
         <div class="col-md-4">
           <p>Device Name</p>
           <app-devices-recurring-tickets style="width: 75%;" class="light-dropdown"
-                                         [editItem]="(ticketForEdit) ? ticketForEdit.agent : null"
-                                         [companyId]="(selectedClient) ? selectedClient.id : ''"
-                                         (selectedItem)="selectDevice($event)">
+            [editItem]="(ticketForEdit) ? ticketForEdit.agent : null"
+            [companyId]="(selectedClient) ? selectedClient.id : ''" (selectedItem)="selectDevice($event)">
           </app-devices-recurring-tickets>
         </div>
         <div class="col-md-4">
@@ -50,18 +45,19 @@
         <div class="col-md-12 ticket-tabs">
 
           <!--ONCLICK ADD CLASS 'active-tab'------------------------------------>
-          <div class="ticket-tabs-product d-f ai-c" (click)="type = 'products'"
-               [ngClass]="(type === 'products') ? 'active-tab' : ''">
-            <i class="icn-20 tab-product"></i>
-            Products
+          <div class="ticket-tabs-service d-f ai-c" (click)="type = 'services'"
+            [ngClass]="(type === 'services') ? 'active-tab' : ''">
+            <i class="icn-20 tab-service"></i>
+            Service
           </div>
+
           <!-------------------------------------------------------------------->
 
           <!--ONCLICK ADD CLASS 'active-tab'------------------------------------>
-          <div class="ticket-tabs-service d-f ai-c" (click)="type = 'services'"
-               [ngClass]="(type === 'services') ? 'active-tab' : ''">
-            <i class="icn-20 tab-service"></i>
-            Service
+          <div class="ticket-tabs-product d-f ai-c" (click)="type = 'products'"
+            [ngClass]="(type === 'products') ? 'active-tab' : ''">
+            <i class="icn-20 tab-product"></i>
+            Products
           </div>
           <!-------------------------------------------------------------------->
 
@@ -82,7 +78,7 @@
               <div class="col-md-12" [ngClass]="(product.noValid) ? 'no-valid-product' : ''">
                 <p>Search Product</p>
                 <app-product-list [editItem]="product" [itemList]="productList"
-                                  (selectedProductItem)="selectProduct($event,i)"></app-product-list>
+                  (selectedProductItem)="selectProduct($event,i)"></app-product-list>
                 <i class="icn-delete" *ngIf="products.length > 1" (click)="removeProduct(i)"></i>
               </div>
               <div class="col-md-4 mt-20">
@@ -125,21 +121,20 @@
               <div class="col-md-8" [ngClass]="(service.noValid) ? 'no-valid-service' : ''">
                 <p>Service</p>
                 <app-services-list [editItem]="service" [itemList]="servicesList"
-                                   (selectedServicesItem)="setService($event,i)"></app-services-list>
+                  (selectedServicesItem)="setService($event,i)"></app-services-list>
               </div>
               <div class="col-md-4">
                 <p>Duration</p>
-                <app-duration style="width: 75%;" class="light-dropdown"  
-                              (selectedDucation)="selectDuration($event,i)"
-                              [editItem]="service.duration"></app-duration>
+                <app-duration style="width: 75%;" class="light-dropdown" (selectedDucation)="selectDuration($event,i)"
+                  [editItem]="service.duration"></app-duration>
                 <i class="icn-delete" *ngIf="services.length > 1" (click)="removeService(i)"></i>
               </div>
               <div class="col-md-12 mt-20">
                 <p>Description</p>
                 <div class="editable-description">
                   <textarea appTextArea [limit]="250" [(ngModel)]="service.description"
-                            placeholder="Write Description"></textarea>
-                </div>   <!--  <input type="text" [(ngModel)]="service.description" placeholder="Write Description">-->
+                    placeholder="Write Description"></textarea>
+                </div> <!--  <input type="text" [(ngModel)]="service.description" placeholder="Write Description">-->
               </div>
             </div>
 
@@ -173,7 +168,7 @@
             <p>Create Task for user</p>
           </div>
         </div>
-        
+
         <div class="col-md-12 recurring-tickets-content__modal--content-footer">
           <div class="d-f">
             <button class="btn-new btn-primary" (click)="save()">Save</button>
