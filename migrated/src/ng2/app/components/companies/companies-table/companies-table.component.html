@@ -4,22 +4,26 @@
       <input type="checkbox">
       <span class="checkbox-mark"></span>
     </label>
-    <div class="circle-avatar">AD</div>
+    <div class="circle-avatar">
+      <img [src]="getCompanyLogoUrl()" class="qwe" alt=""
+      *ngIf="(company && company.logo && company.logo.cropped && company.logo.cropped.id)">
+   <span *ngIf="!(company && company.logo && company.logo.cropped && company.logo.cropped.id)" [textContent]="company.name[0].toUpperCase()"></span>
+    </div>
     <div class="mob-styles">
-      <p class="ff-g-m fw-600">Avenue Dental Care</p>
+      <p class="ff-g-m fw-600" [textContent]="company.name"></p>
       <p class="desktop-hidden company-phone">979-431-8937</p>
     </div>
   </div>
   <div class="col-md-3 company-location w-100">
-    824 16th Avenue Southwest Calgary, AB T2R 0S9
+    {{location}}
     <a class="company-link desktop-hidden">Show Map</a>
   </div>
   <div class="col-md-4 contact w-100">
-    <p>Matthew Padilla</p>
-    <p class="mob-hidden">979-431-8937</p>
+    <p [textContent]="getUserName()"></p>
+    <p class="mob-hidden" [textContent]="(primaryPhone && primaryPhone.number) ? primaryPhone.number : ''"></p>
   </div>
-  <div class="col-md-4 mob-hidden">klein.eve@yahoo.com</div>
-  <div class="col-md-1 mob-hidden">178</div>
+  <div class="col-md-4 mob-hidden" [textContent]="primaryContact.primaryEmail"></div>
+  <div class="col-md-1 mob-hidden" [textContent]="company.companyStatistic.ticketsSubmitted || '0'"></div>
   <div class="col-md-1 mob-hidden">344</div>
   <div class="col-md-1 mob-hidden">655</div>
   <div class="col-md-2 mob-hidden">

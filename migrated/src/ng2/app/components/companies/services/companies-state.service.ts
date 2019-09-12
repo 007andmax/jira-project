@@ -19,5 +19,10 @@ export class CompaniesStateService {
   public getShowAsideForAdd() {
     return this.showAsideForAdd;
   }
-
+  private getAllUsers(companyId) {
+    this.userService.getAllusers().subscribe((res: any) => {
+      res = res.filter((item) =>  item.company.id == companyId);
+      this.devicesAndUsersList = [...(res.filter((item) => item.accountType === USER.TYPE.CLIENT)), ...this.devicesAndUsersList]
+    })
+  }
 }

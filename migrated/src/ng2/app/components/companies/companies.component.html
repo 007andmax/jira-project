@@ -20,7 +20,12 @@
       <div class="col-md-1">Users</div>
       <div class="col-md-2"></div>
     </div>
-    <div class="company-content">
+    <div class="company-content"
+    infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="50"
+    [infiniteScrollDisabled]="infiniteScrollDisabled"
+    (scrolled)="onScroll()">>
         <ng-template ngFor let-company
                    [ngForOf]="CompaniesList"
                    [ngForTrackBy]="trackById">
