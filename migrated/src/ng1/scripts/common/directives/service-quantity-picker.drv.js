@@ -163,7 +163,7 @@
               var minVal = Number(minutesElement.val());
               scope.quantity = hours + ((minVal) ? (minVal / 60) : 0);
             }
-            console.log('scope.quantity',scope.quantity);
+         
             var value = input.val(),
               lastIndex = value.length - 1;
 
@@ -180,8 +180,9 @@
               } else {
                 savedValue = splited.join('');
               }
-console.log('savedValue',savedValue);
+console.log('scope.quantity',scope.quantity);
               input.val(savedValue);
+              scope.$emit('changeQuantity', scope.quantity);
               return;
             }
 
@@ -201,7 +202,8 @@ console.log('savedValue',savedValue);
               } else {
                 savedValue = value;
               }
-              console.log('savedValue',savedValue);
+              console.log('scope.quantity',scope.quantity);
+              scope.$emit('changeQuantity', scope.quantity);
               input.val(savedValue);
             }
           }
