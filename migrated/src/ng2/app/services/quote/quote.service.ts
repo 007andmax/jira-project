@@ -5,6 +5,7 @@ import {QuoteStateService} from "../../components/billing/quotes/quote-create/qu
 import { catchError, tap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { QuoteResult } from '../../components/billing/quotes/class/quote-result';
+import { AlertStateService } from '../../components/shared/alert/services/alert-state.service';
 
 /**
  * Quote service to work with api
@@ -35,7 +36,8 @@ export class QuoteService {
    */
   constructor(
     private http: HttpClient,
-    private quoteStateService: QuoteStateService
+    private quoteStateService: QuoteStateService,
+    private alertState: AlertStateService
   ) {}
 
   /**
@@ -344,7 +346,7 @@ export class QuoteService {
     return this.http.get(this.apiUrl + `saleQuotes/${quote_id}/pdf`,{ headers: new HttpHeaders({
         'Content-Type': 'application/pdf',
       }), responseType: 'blob'}).pipe(
-        tap(data => this.handleQuoteSent(data,'Quote has been saved')),  
+        tap(data => data),  
         catchError(this.handleError));
   }
 
@@ -360,8 +362,12 @@ export class QuoteService {
     link.download=`${this.apiUrl}saleQuotes/${id}/pdf.pdf`;
     link.download = `${companyName}_Quote-${quoteNumber}.pdf`;
     link.click();
-    this.quoteStateService.goToQuote();
+ //   this.quoteStateService.goToQuote();
   }
+
+  public backToQuoteList () {
+    this.quoteStateService.goToQuote();
+  } 
 
   /**
    * Get sort type
@@ -406,8 +412,9 @@ export class QuoteService {
   }
 
   private handleQuoteSent = (data,message) => {
-    this.quoteStateService.setQuoteResult(message);
-    this.quoteStateService.setHandleQuoteHasSent();
+    this.alertState.oninitShowAlert(message);
+   // this.quoteStateService.setQuoteResult(message);
+   // this.quoteStateService.setHandleQuoteHasSent();
     return data;
   }
 

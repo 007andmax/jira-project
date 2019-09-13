@@ -11,6 +11,7 @@ import { ModalQuoteComponent } from "../../../../services/modal/modal-quote/moda
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { FormGroup } from '@angular/forms';
 import { ISubscription } from 'rxjs/Subscription';
+import { AlertStateService } from '../../../shared/alert/services/alert-state.service';
 
 /**
  * Quote preview component
@@ -48,7 +49,8 @@ export class QuotePreviewComponent implements OnInit {
     private companiesService: CompaniesService,
     private dateService: DateService,
     private quoteService: QuoteService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private alertState: AlertStateService
   ) { }
 
   /**
@@ -219,6 +221,17 @@ export class QuotePreviewComponent implements OnInit {
     }
   }
 
+  onlySend() {
+    const modalRef = this.modalService.open(ModalQuoteComponent, null);
+    modalRef.componentInstance.data = this.quoteForCreate;
+    modalRef.componentInstance.onlySendMpde = true;
+  }
+  onlyDownloadPdf () {
+    
+    this.quoteService.downloadPdf(this.quoteForCreate.id).subscribe((res) => this.quoteService.downLoadFile(res, this.quoteForCreate.id,this.quote.client.name,this.quoteForCreate.quoteNumber));
+    
+  }
+
   /**
    * Create quote and approve
    */
@@ -235,7 +248,11 @@ export class QuotePreviewComponent implements OnInit {
         .pipe(takeUntil(this.unsubscribe))
         .subscribe((res) => {
           const id = res['id'];
-          this.quoteService.downloadPdf(res['id']).subscribe((res) => this.quoteService.downLoadFile(res, id,this.quote.client.name,this.quoteForCreate.quoteNumber));
+          this.quoteService.downloadPdf(res['id']).subscribe((res) => {
+            this.quoteService.downLoadFile(res, id,this.quote.client.name,this.quoteForCreate.quoteNumber);
+            this.alertState.oninitShowAlert('Quote has been saved');
+            this.quoteService.backToQuoteList();
+          });
         });
     } else if (isFormReady && this.editMode) {
       const currentQuote = this.quoteStateService.getQuoteCreate();
@@ -243,7 +260,11 @@ export class QuotePreviewComponent implements OnInit {
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((res) => {
         const id = res['id'];
-        this.quoteService.downloadPdf(res['id']).subscribe((res) => this.quoteService.downLoadFile(res, id,this.quote.client.name,this.quoteForCreate.quoteNumber));
+        this.quoteService.downloadPdf(res['id']).subscribe((res) => {
+          this.quoteService.downLoadFile(res, id,this.quote.client.name,this.quoteForCreate.quoteNumber)
+          this.alertState.oninitShowAlert('Quote has been saved');
+          this.quoteService.backToQuoteList();
+        })
       })
     } else {
       this.quoteStateService.emitValidation();

@@ -44,6 +44,10 @@
   padding-right: 0 !important;
 }
 
+.w-150 .dropdown-menu{
+  width: 150%;
+}
+
 .with-dollar, .with-percent {
   position: relative;
   input {
@@ -165,10 +169,12 @@
   display: flex !important;
   padding: 0 !important;
   > button {
+    min-width: 130px;
     background: transparent;
     border: none;
     padding: 0 20px;
     height: 100%;
+    text-align: left;
   }
   > div {
     display: flex;
@@ -176,7 +182,7 @@
     .dropdown-menu {
       right: 0 !important;
       left: auto !important;
-      width: 197px !important;
+      width: 172px !important;
       .dropdown-item {
         height: 40px;
         font-size: 13px;
@@ -452,6 +458,85 @@ ngb-typeahead-window {
       background: #fff;
       border-radius: 5px;
       border: solid 1px #edf2f6;
+    }
+    &--bottom {
+      .fixed-width {
+        .col-md-1 {
+          width: 19%;
+        }
+        .col-md-2 {
+          width: 36%;
+        }
+        .col-md-3 {
+          width: 55%;
+        }
+        .col-md-4 {
+          width: 115px;
+        }
+        .col-md-5 {
+          width: 100px;
+        }
+        @media (min-width: 2048px) {
+          .col-md-1 {
+            width: 23%;
+          }
+          .col-md-3 {
+            width: 59%;
+          }
+        }
+        @media (min-width: 2560px) {
+          .col-md-1 {
+            width: 32%;
+          }
+          .col-md-3 {
+            width: 68%;
+          }
+        }
+        @media (max-width: 1600px) {
+          .col-md-2 {
+            width: 34%;
+          }
+          .col-md-3 {
+            width: 53%;
+          }
+          .col-md-4 {
+            width: 94px;
+          }
+          .col-md-5 {
+            width: 84px;
+          }
+          [class*="col-md-"] {
+            padding-left: 5px !important;
+            padding-right: 5px !important;
+          }
+          .with-dollar:before,
+          .with-percent:before {
+            left: 14px;
+          }
+        }
+        @media (max-width: 1366px) {
+          .col-md-2 {
+            width: 27%;
+          }
+          .col-md-3 {
+            width: 46%;
+          }
+          .col-md-4 {
+            width: 87px;
+          }
+          .col-md-5 {
+            width: 77px;
+          }
+        }
+        @media (max-width: 1280px) {
+          .col-md-2 {
+            width: 22%;
+          }
+          .col-md-3 {
+            width: 41%;
+          }
+        }
+      }
     }
     .col-md-1 {
       width: 7%;
@@ -829,7 +914,7 @@ ngb-typeahead-window {
         height: 1px;
         bottom: 0;
       }
-      .ticket-tabs-product {
+      .ticket-tabs-service {
         margin-right: 24px;
       }
       .ticket-tabs-product,

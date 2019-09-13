@@ -29,7 +29,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   public servicesList = [];
   public products: Array<ForCreateProduct> = [];
   public services: Array<ForCreateService> = [];
-  public type: string = "products";
+  public type: string = "services";
   public selectedClient: any;
   public tehUsers = [];
   public validate: Validate = new Validate();
@@ -372,7 +372,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
    */
   public close() {
     this.opened = false;
-    this.type = "products";
+    this.type = "services";
     this.selectedClient = null;
     this.tehUsers = [];
     this.companiesState.onInitClear();
@@ -406,7 +406,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.createService.getDevicesState().onInitClear();
     this.selectedClient = null;
     this.services = [new ForCreateService()];
-    this.type = "products";
+    this.type = "services";
     this.validate = new Validate();
     // this.devicesList = [];
   }

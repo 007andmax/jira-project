@@ -1,8 +1,7 @@
-<div class="row"
+<div class="row fixed-width"
      *ngFor="let item of itemsListArray;  let i = index">
   <!-- IF SERVICE -->
   <div class="col-md-1"
-       style="width: 23%;"
        *ngIf="!getMarkup(item)">
     <div class="light-dropdown">
       <app-services-list [editItem]="item" [itemList]="servicesList"
@@ -24,7 +23,7 @@
        *ngIf="!getMarkup(item)">
     <div class="editable-description">
        <textarea
-       [minHeight]="38"
+         [minHeight]="38"
          [(ngModel)]="item && item.description"
          appTextArea
          [limit]="250"></textarea>
@@ -33,7 +32,6 @@
 
   <!-- IF PRODUCT -->
   <div class="col-md-3"
-       style="width: 59%;"
        *ngIf="getMarkup(item)">
     <div class="product-dropdown-new-ng light-dropdown">
       <app-product-list [editItem]="item" [itemList]="productList"
@@ -53,7 +51,7 @@
     </div>
   </div>
 
-  <div class="col-md-1 with-dollar">
+  <div class="col-md-4 with-dollar">
     <input type="text"
            number
            [money]="true"
@@ -62,7 +60,7 @@
            (ngModelChange)="changeCost($event, i)"
            placeholder="">
   </div>
-  <div class="col-md-1 with-percent">
+  <div class="col-md-4 with-percent">
     <input type="text"
     number
     [money]="true"
@@ -71,7 +69,7 @@
            (ngModelChange)="changeMarkup($event, i)"
            placeholder="">
   </div>
-  <div class="col-md-1 with-dollar">
+  <div class="col-md-4 with-dollar">
     <input type="text"
            number
            [money]="true"
@@ -80,7 +78,7 @@
            (ngModelChange)="changeSales($event, i)"
            placeholder="">
   </div>
-  <div class="col-md-1">
+  <div class="col-md-4">
     <input type="text"
            number
 
@@ -88,12 +86,12 @@
            (ngModelChange)="changedQuantity($event, i)"
            placeholder="">
   </div>
-  <div class="col-md-1 text-right"
-       style="width: 6%;padding: 8px 15px;">
+  <div class="col-md-5 text-right"
+       style="padding: 8px 15px;">
     {{getTaxPrice((item.sale || item.rate), item.quantity, item.taxes) | currency}}
   </div>
-  <div class="col-md-1 text-right"
-       style="width: 6%;padding: 8px 15px;">
+  <div class="col-md-5 text-right"
+       style="padding: 8px 15px;">
     {{getPrice((item.sale || item.rate), item.quantity, item.taxes) | currency}}
   </div>
   <i class="icn-delete" (click)="deleteItem(i)"></i>
