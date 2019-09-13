@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ConfirmStateService } from './services/confirm-state.service';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-confirm',
@@ -6,12 +8,38 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./confirm.component.scss']
 })
 export class ConfirmComponent implements OnInit {
-  message:string = '';
-  btnCancel:string= '';
-  buttonConfirm:string = '';
-  constructor() { }
+  @Input() public message = '';
+  btnCancel: string = 'no';
+  buttonConfirm: string = 'yes';
+
+  constructor(private confirmStateService: ConfirmStateService,
+    public activeModal: NgbActiveModal,) { }
 
   ngOnInit() {
+    
   }
+  closeModal() {
+    this.activeModal.close();
+    this.confirmStateService.setConfirm(false);
+  
+    /*  if (closeFn) closeFn();
+      $uibModalInstance.dismiss();*/
+  }
+
+  cancelConfirm() {
+    this.activeModal.close();
+    this.confirmStateService.setConfirm(false);
+  
+    /*  rejectFn();
+      $uibModalInstance.dismiss();*/
+  };
+
+  approveConfirm() {
+    this.activeModal.close();
+    this.confirmStateService.setConfirm(true);
+  
+    /*    approveFn()
+        $uibModalInstance.close(result);*/
+  };
 
 }

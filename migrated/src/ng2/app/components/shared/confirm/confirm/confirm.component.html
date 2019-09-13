@@ -1,17 +1,16 @@
-<div class="modal-content">
+
 <div>
-  <div class="close-btn btn pull-right" ng-click="closeModal()" tabindex="1" style="z-index: 1000">
+  <div class="close-btn btn pull-right" (click)="closeModal()" tabindex="1" style="z-index: 1000">
     <i class="icn-sm icn-remove-old" uib-tooltip="Close"></i>
   </div>
   <div class="modal-body">
-    <p>{{ messageConfirm }}</p>
+    <p [textContent]="message"></p>
   </div>
   <div class="modal-footer">
-    <div class="btn btn-lg btn-primary" ng-class="{'hide': hideCancel}"
-         data-dismiss='modal' ng-click=cancelConfirm()>
-      {{ btnCancel }}
+    <div class="btn btn-lg btn-primary" [ngClass]="{'hide': hideCancel}"
+         data-dismiss='modal' (click)=cancelConfirm() [textContent]="btnCancel">
+     
     </div>
-    <div class="btn btn-lg btn-primary" ng-click=approveConfirm()>{{ buttonConfirm }}</div>
+    <div class="btn btn-lg btn-primary" (click)=approveConfirm() [textContent]="buttonConfirm"></div>
   </div>
-</div>
 </div>

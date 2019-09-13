@@ -9,9 +9,7 @@ export class ClickOtsideDirective {
   @HostListener('document:click', ['$event'])
   clickout(event) {
     if(!this.eRef.nativeElement.contains(event.target)) {
-      this.text = "clicked inside";
-    } else {
-      this.text = "clicked outside";
-    }
+     // this.text = "clicked inside";
+    } 
   }
 }

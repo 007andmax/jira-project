@@ -244,6 +244,7 @@ angular.module('quicktech')
   entryComponents: [
     LeftPanelComponent,
     ModalQuoteComponent,
+    ConfirmComponent,
     QuotesComponent,
     QuoteCreateComponent,
     QuotePreviewComponent,
