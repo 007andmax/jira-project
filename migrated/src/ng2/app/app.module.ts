@@ -73,6 +73,8 @@ import { CompanyPasswordManagerComponent } from './components/company-password-m
 import { CompanyPasswoordManagerHeaderComponent } from './components/company-password-manager/passwoord-manager-header/passwoord-manager-header.component';
 import { CompanyPasswordManagerEditAsideComponent } from './components/company-password-manager/password-manager-edit-aside/password-manager-edit-aside.component';
 import { CompanyPasswordManagerTableComponent } from './components/company-password-manager/password-manager-table/password-manager-table.component';
+import { ConfirmComponent } from './components/shared/confirm/confirm/confirm.component';
+import { ClickOtsideDirective } from './directives/click-otside.directive';
 
 
 /**
@@ -172,7 +174,9 @@ angular.module('quicktech')
     CompanyPasswordManagerComponent,
     CompanyPasswoordManagerHeaderComponent,
     CompanyPasswordManagerEditAsideComponent,
-    CompanyPasswordManagerTableComponent
+    CompanyPasswordManagerTableComponent,
+    ConfirmComponent,
+    ClickOtsideDirective
   ],
   imports: [
     BrowserModule,
