@@ -5,6 +5,7 @@ import { setUpLocationSync } from '@angular/router/upgrade';
 
 import { UsersService } from "./services/users/users.service";
 import { WebsocketService } from "./services/websocket/websocket.service";
+import { UsersStateService } from './states/users/users-state.service';
 
 /**
  * Root component
@@ -25,7 +26,9 @@ export class AppComponent implements OnInit {
   constructor(
     private upgrade: UpgradeModule,
     private userService: UsersService,
-    private websocketService: WebsocketService
+    private usersStateService: UsersStateService,
+    private websocketService: WebsocketService,
+    
   ){}
 
   /**
@@ -36,6 +39,7 @@ export class AppComponent implements OnInit {
     setUpLocationSync(this.upgrade);
     this.userService.getCurrentUser();
     this.websocketService.initializeWebSocketConnection();
+   this.usersStateService.onInit();
   }
 
 }

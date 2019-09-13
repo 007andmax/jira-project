@@ -12,6 +12,7 @@ export class UsersService {
 
   private apiUrl = environment.apiUrl;
   public currentUser: any;
+  allUsers = [];
 
   /**
    * Users api service constructor
