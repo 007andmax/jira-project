@@ -17,6 +17,10 @@
         white-space: nowrap;
         @media (max-width: 1366px) {
           margin-right: 12px;
+          width: 35%;
+        }
+        @media (max-width: 1280px) {
+          width: 40%;
         }
       }
       .date-picker {
@@ -27,6 +31,15 @@
       input,
       .date-picker {
         width: 75%;
+        @media (max-width: 1600px) {
+          width: 70%;
+        }
+        @media (max-width: 1366px) {
+          width: 60%;
+        }
+        @media (max-width: 1280px) {
+          width: 58%;
+        }
       }
       i {
         position: absolute;
@@ -45,9 +58,24 @@
         &:first-child {
           width: 25%;
           margin-right: 16px;
+          @media (max-width: 1366px) {
+            width: 35%;
+          }
+          @media (max-width: 1280px) {
+            width: 40%;
+          }
         }
         &:last-child {
           width: 75%;
+          @media (max-width: 1600px) {
+            width: 70%;
+          }
+          @media (max-width: 1366px) {
+            width: 60%;
+          }
+          @media (max-width: 1280px) {
+            width: 58%;
+          }
           p {
             font-size: 13px;
           }
