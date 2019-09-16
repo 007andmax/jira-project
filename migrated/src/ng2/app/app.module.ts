@@ -176,7 +176,7 @@ angular.module('quicktech')
     CompanyPasswoordManagerHeaderComponent,
     CompanyPasswordManagerEditAsideComponent,
     CompanyPasswordManagerTableComponent,
-    FilterPipe
+    FilterPipe,
     ConfirmComponent,
     ClickOtsideDirective
   ],
