@@ -44,8 +44,37 @@
   padding-right: 0 !important;
 }
 
-.w-150 .dropdown-menu{
+.w-150 .dropdown-menu {
   width: 150%;
+}
+
+.modal-dialog {
+  &.xs-modal {
+    width: 440px;
+    transform: translate(20%, 20%) !important;
+    left: 50%;
+    top: 50%;
+    position: fixed;
+  }
+}
+
+.confirm-modal {
+  padding: 30px;
+  .close-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+  .modal-body {
+    margin-bottom: 20px;
+  }
+  .modal-footer {
+    padding: 0;
+    border: none;
+    .btn {
+      text-transform: capitalize;
+    }
+  }
 }
 
 .with-dollar, .with-percent {
