@@ -55,8 +55,8 @@
     </div>
   </div>
   <div class="quote--footer">
-      <button class="btn btn-primary" (click)="save()" *ngIf="onlySendMpde">Send</button>
-    <button class="btn btn-primary" (click)="save()" *ngIf="!onlySendMpde">Save and send</button>
+      <button class="btn btn-primary" (click)="save()" *ngIf="onlySendMode">Send</button>
+    <button class="btn btn-primary" (click)="save()" *ngIf="!onlySendMode">Save and send</button>
     <button class="btn btn-default" (click)="onCheckForClose()">Cancel</button>
   </div>
 </div>
