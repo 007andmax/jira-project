@@ -85,16 +85,13 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
     this.userInput.nativeElement.onblur = (e) => {
       
       if (this.matAutocomplete.isOpen) {
-        this.showConfirm = true;
         let modal = this.matAutocomplete.panel.nativeElement;
         modal.parentNode.style.width = 'max-content';
       }
     }
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) this.close();
-     setTimeout(() => {
-        this.showConfirm = false;
-      }, 1000);
+      this.showConfirm = false;
     
 
     })
@@ -103,7 +100,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
 
   @HostListener('document:click', ['$event'])
   clickout(event) {
-    if (!this.eRef.nativeElement.contains(event.target) && this.initialized && !this.showConfirm) this.onCheckChange();
+    if (event.target.tagName === 'NGB-MODAL-WINDOW' && this.initialized && !this.showConfirm) this.onCheckChange();
   }
 
   private onCheckChange() {
@@ -119,7 +116,6 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
       if (this.subject.length > 0 || this.message.length > 0 || this.selectedUsers.length > 0) change = true;
     }
     if (change) {
-      console.log('show')
       this.showConfirm = true;
       const modalRef = this.modalService.open(ConfirmComponent, null);
       modalRef.componentInstance.message = 'Do you want to close this window? All entered information will be lost.';
