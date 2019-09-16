@@ -8,7 +8,7 @@ import { takeUntil } from "rxjs/operators";
 import { Subject } from "rxjs";
 import { environment } from "../../../../../environments/environment";
 import { ModalQuoteComponent } from "../../../../services/modal/modal-quote/modal-quote.component";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { NgbModal, NgbModalConfig } from "@ng-bootstrap/ng-bootstrap";
 import { FormGroup } from '@angular/forms';
 import { ISubscription } from 'rxjs/Subscription';
 import { AlertStateService } from '../../../shared/alert/services/alert-state.service';
@@ -19,7 +19,8 @@ import { AlertStateService } from '../../../shared/alert/services/alert-state.se
 @Component({
   selector: 'app-quote-preview',
   templateUrl: './quote-preview.component.html',
-  styleUrls: ['./quote-preview.component.scss']
+  styleUrls: ['./quote-preview.component.scss'],
+  providers: [NgbModalConfig, NgbModal]
 })
 export class QuotePreviewComponent implements OnInit {
 
@@ -50,8 +51,12 @@ export class QuotePreviewComponent implements OnInit {
     private dateService: DateService,
     private quoteService: QuoteService,
     private modalService: NgbModal,
-    private alertState: AlertStateService
-  ) { }
+    private alertState: AlertStateService,
+    config: NgbModalConfig,
+  ) { 
+    config.backdrop = 'static';
+    config.keyboard = false;
+  }
 
   /**
    * Initializes quotes preview. See [ngOnInit]{@see OnInit#ngOnInit}
@@ -224,7 +229,7 @@ export class QuotePreviewComponent implements OnInit {
   onlySend() {
     const modalRef = this.modalService.open(ModalQuoteComponent, null);
     modalRef.componentInstance.data = this.quoteForCreate;
-    modalRef.componentInstance.onlySendMpde = true;
+    modalRef.componentInstance.onlySendMode = true;
   }
   onlyDownloadPdf () {
     
