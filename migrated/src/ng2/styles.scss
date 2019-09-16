@@ -48,8 +48,8 @@
   width: 150%;
 }
 
-.modal-dialog {
-  &.xs-modal {
+.xs-modal {
+  .modal-dialog {
     width: 440px;
     transform: translate(20%, 20%) !important;
     left: 50%;

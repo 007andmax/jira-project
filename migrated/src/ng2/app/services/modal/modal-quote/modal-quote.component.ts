@@ -46,6 +46,8 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
   initialized: boolean = false;
   showConfirm: boolean = false;
   sub: Subscription = new Subscription();
+  isChange:boolean = false;
+
 
   private unsubscribe: Subject<void> = new Subject();
   @Input() public data;
@@ -73,6 +75,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
   ) {
     config.backdrop = 'static';
     config.keyboard = false;
+    
   }
 
   /**
@@ -104,20 +107,21 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
   }
 
   private onCheckChange() {
-    let change = false;
+    this.isChange = false;
     if (this.data) {
       this.selectedUsers.forEach((current) => {
         let index: number = this.data.recipients.findIndex(old => old === current);
-        if (index === -1) change = true;
+        if (index === -1) this.isChange = true;
       })
-      if (this.subject !== this.data.subject || this.message !== this.data.message || this.selectedUsers.length !== this.data.recipients.length) change = true;
+      if (this.subject !== this.data.subject || this.message !== this.data.message || this.selectedUsers.length !== this.data.recipients.length) this.isChange = true;
 
     } else {
-      if (this.subject.length > 0 || this.message.length > 0 || this.selectedUsers.length > 0) change = true;
+      if (this.subject.length > 0 || this.message.length > 0 || this.selectedUsers.length > 0) this.isChange = true;
     }
-    if (change) {
+    if (this.isChange) {
       this.showConfirm = true;
-      const modalRef = this.modalService.open(ConfirmComponent, null);
+      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+      console.log('modalRef.componentInstance',modalRef.componentInstance);
       modalRef.componentInstance.message = 'Do you want to close this window? All entered information will be lost.';
     }
   }
@@ -171,7 +175,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
    */
   private getAllUsers() {
     this.showErrorClient = false;
-    const company = (this.data && this.data.company.id) || this.quoteStateService.getClient();
+    const company = (this.data && this.data.company && this.data.company.id) || this.quoteStateService.getClient();
     if (company || company.id) {
       this.userService.getAllusers().subscribe((res: any) => {
         this.initialized = true;
@@ -218,7 +222,10 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
     this.quoteStateService.setMessage(this.message);
   }
 
-
+public onCheckForClose() {
+  this.onCheckChange();
+  if (!this.isChange) this.close();
+}
 
   /**
    * Save quote

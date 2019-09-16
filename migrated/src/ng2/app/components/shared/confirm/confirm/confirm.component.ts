@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef } from '@angular/core';
 import { ConfirmStateService } from './services/confirm-state.service';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-confirm',
@@ -13,10 +13,12 @@ export class ConfirmComponent implements OnInit {
   buttonConfirm: string = 'yes';
 
   constructor(private confirmStateService: ConfirmStateService,
-    public activeModal: NgbActiveModal,) { }
+    public activeModal: NgbActiveModal,       private eRef: ElementRef, ) { 
+    
+    }
 
   ngOnInit() {
-    
+  console.log('eRef', this.eRef.nativeElement);
   }
   closeModal() {
     this.activeModal.close();
