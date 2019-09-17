@@ -30,7 +30,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   public servicesList = [];
   public products: Array<ForCreateProduct> = [];
   public services: Array<ForCreateService> = [];
-  public type: string = "products";
+  public type: string = "services";
   public selectedClient: any;
   public devicesList = [];
   public tehUsers = [];
@@ -95,6 +95,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   private onEditEditMode(data: RecurringTicket) {
     this.createService.setDescription(data.description);
     this.ticketForEdit = data;
+    this.tehUsers = data.assignedUsers;
     this.selectClient({ item: data.company });
     this.companiesState.setCompanyFromtEdit(data.company);
     this.devicesService.onInitHangle(data.company.id);
@@ -386,7 +387,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
  */
   public close() {
     this.opened = false;
-    this.type = "products";
+    this.type = "services";
     this.selectedClient = null;
     this.devicesList = [];
     this.tehUsers = [];

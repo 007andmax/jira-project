@@ -25,6 +25,8 @@ export class CompanyPasswordManagerTableComponent implements OnInit {
   private subGetRecords: ISubscription;
   private subAddNewRecords: ISubscription;
   public recordsData: any;
+  public sort: string = 'companyName';
+  public direction: string = null;
 
   /**
    * Creates an instance of the PasswordManagerTableComponent with the injected services
@@ -48,6 +50,17 @@ export class CompanyPasswordManagerTableComponent implements OnInit {
       this.apiPasswordManagerService.getRecords();
     });
     this.watchDeleteRecord();
+    this.onSort();
+  }
+
+  private onSort() {
+    this.passwordManagerService.getOnSort().subscribe((data) => {
+      console.log('data',data);
+    this.sort = data.sort;
+    this.direction = data.direction;
+   
+    //  this.cd.detectChanges();
+    })
   }
 
   /**

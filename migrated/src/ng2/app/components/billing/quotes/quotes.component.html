@@ -146,7 +146,7 @@
             <button
               class="dropdown-item"
               ngbDropdownItem
-              *ngIf="checkStatus(item, ['UNREAD','SAVED', 'EXPIRED', 'INVOICED', 'TICKETED'])"
+              *ngIf="checkStatus(item, ['UNREAD','SAVED', 'EXPIRED', 'INVOICED', 'TICKETED','REFUSED'])"
               (click)="archiveQuote(item)">
               Archive a quote
             </button>

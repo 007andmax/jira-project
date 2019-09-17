@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { QuoteStateService } from "../quote-state.service";
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ModalQuoteComponent } from "../../../../../services/modal/modal-quote/modal-quote.component";
 
 /**
@@ -9,7 +9,8 @@ import { ModalQuoteComponent } from "../../../../../services/modal/modal-quote/m
 @Component({
   selector: 'app-quote-create-header',
   templateUrl: './quote-create-header.component.html',
-  styleUrls: ['./quote-create-header.component.scss']
+  styleUrls: ['./quote-create-header.component.scss'],
+  providers: [NgbModalConfig, NgbModal]
 })
 export class QuoteCreateHeaderComponent {
 
@@ -30,8 +31,12 @@ export class QuoteCreateHeaderComponent {
    */
   constructor(
     private modalService: NgbModal,
-    private quoteStateService: QuoteStateService
-  ) { }
+    private quoteStateService: QuoteStateService,
+    config: NgbModalConfig,
+  ) { 
+    config.backdrop = 'static';
+    config.keyboard = false;
+  }
 
   /**
    * Emit save quotes to QuoteCreate component

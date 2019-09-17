@@ -74,6 +74,10 @@ import { CompanyPasswoordManagerHeaderComponent } from './components/company-pas
 import { CompanyPasswordManagerEditAsideComponent } from './components/company-password-manager/password-manager-edit-aside/password-manager-edit-aside.component';
 import { CompanyPasswordManagerTableComponent } from './components/company-password-manager/password-manager-table/password-manager-table.component';
 import { FilterPipe } from './pipe/filter.pipe';
+import { ConfirmComponent } from './components/shared/confirm/confirm/confirm.component';
+import { ClickOtsideDirective } from './directives/click-otside.directive';
+import { SortByPipe } from './pipe/sort-by.pipe';
+
 
 /**
  * declare angular
@@ -173,7 +177,10 @@ angular.module('quicktech')
     CompanyPasswoordManagerHeaderComponent,
     CompanyPasswordManagerEditAsideComponent,
     CompanyPasswordManagerTableComponent,
-    FilterPipe
+    FilterPipe,
+    ConfirmComponent,
+    ClickOtsideDirective,
+    SortByPipe
   ],
   imports: [
     BrowserModule,
@@ -241,6 +248,7 @@ angular.module('quicktech')
   entryComponents: [
     LeftPanelComponent,
     ModalQuoteComponent,
+    ConfirmComponent,
     QuotesComponent,
     QuoteCreateComponent,
     QuotePreviewComponent,

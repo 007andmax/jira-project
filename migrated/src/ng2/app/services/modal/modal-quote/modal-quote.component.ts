@@ -1,16 +1,19 @@
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
-import {MatChipInputEvent} from '@angular/material/chips';
-import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { Component, ElementRef, Input, OnInit, ViewChild, HostListener, OnDestroy } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { NgbActiveModal, NgbModalConfig, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
-import {USER} from "../../../const/users";
-import {UsersService} from "../../users/users.service";
-import {QuoteStateService} from "../../../components/billing/quotes/quote-create/quote-state.service";
-import {QuoteService} from "../../quote/quote.service";
-import {takeUntil} from "rxjs/operators";
-import {Subject} from "rxjs";
+import { USER } from "../../../const/users";
+import { UsersService } from "../../users/users.service";
+import { QuoteStateService } from "../../../components/billing/quotes/quote-create/quote-state.service";
+import { QuoteService } from "../../quote/quote.service";
+import { takeUntil } from "rxjs/operators";
+import { Subject, Subscription } from "rxjs";
+import { AlertStateService } from 'src/ng2/app/components/shared/alert/services/alert-state.service';
+import { ConfirmStateService } from 'src/ng2/app/components/shared/confirm/confirm/services/confirm-state.service';
+import { ConfirmComponent } from 'src/ng2/app/components/shared/confirm/confirm/confirm.component';
 
 /**
  * Modal quote component
@@ -18,9 +21,12 @@ import {Subject} from "rxjs";
 @Component({
   selector: 'app-modal-quote',
   templateUrl: './modal-quote.component.html',
-  styleUrls: ['./modal-quote.component.scss']
+  styleUrls: ['./modal-quote.component.scss'],
+  providers: [NgbModalConfig, NgbModal]
+
 })
-export class ModalQuoteComponent implements OnInit {
+export class ModalQuoteComponent implements OnInit, OnDestroy {
+
 
   visible = true;
   selectable = true;
@@ -37,10 +43,15 @@ export class ModalQuoteComponent implements OnInit {
   showErrorClient = false;
   usersEmails = [];
   users = [];
+  initialized: boolean = false;
+  showConfirm: boolean = false;
+  sub: Subscription = new Subscription();
+  isChange:boolean = false;
 
 
   private unsubscribe: Subject<void> = new Subject();
   @Input() public data;
+  @Input() public onlySendMode = false;
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
@@ -55,21 +66,63 @@ export class ModalQuoteComponent implements OnInit {
     public activeModal: NgbActiveModal,
     private userService: UsersService,
     private quoteStateService: QuoteStateService,
-    private quoteService: QuoteService
-  ) { }
+    private quoteService: QuoteService,
+    private alertState: AlertStateService,
+    private eRef: ElementRef,
+    private confirmStateService: ConfirmStateService,
+    private modalService: NgbModal,
+    config: NgbModalConfig,
+  ) {
+    config.backdrop = 'static';
+    config.keyboard = false;
+    
+  }
 
   /**
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-    console.log('ngOnInit', this.data);
+    console.log('this.data', this.data);
     (this.data) && this.initResendMode();
     this.getAllUsers();
     this.userInput.nativeElement.onblur = (e) => {
+      
       if (this.matAutocomplete.isOpen) {
         let modal = this.matAutocomplete.panel.nativeElement;
         modal.parentNode.style.width = 'max-content';
       }
+    }
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) this.close();
+      this.showConfirm = false;
+    
+
+    })
+    this.sub.add(getConfirm);
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickout(event) {
+    if (event.target.tagName === 'NGB-MODAL-WINDOW' && this.initialized && !this.showConfirm) this.onCheckChange();
+  }
+
+  private onCheckChange() {
+    this.isChange = false;
+    if (this.data) {
+      this.selectedUsers.forEach((current) => {
+        let index: number = this.data.recipients.findIndex(old => old === current);
+        if (index === -1) this.isChange = true;
+      })
+      if (this.subject !== this.data.subject || this.message !== this.data.message || this.selectedUsers.length !== this.data.recipients.length) this.isChange = true;
+
+    } else {
+      if (this.subject.length > 0 || this.message.length > 0 || this.selectedUsers.length > 0) this.isChange = true;
+    }
+    if (this.isChange) {
+      this.showConfirm = true;
+      const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+      console.log('modalRef.componentInstance',modalRef.componentInstance);
+      modalRef.componentInstance.message = 'Do you want to close this window? All entered information will be lost.';
     }
   }
 
@@ -122,9 +175,10 @@ export class ModalQuoteComponent implements OnInit {
    */
   private getAllUsers() {
     this.showErrorClient = false;
-    const company = (this.data && this.data.company.id) || this.quoteStateService.getClient();
+    const company = (this.data && this.data.company && this.data.company.id) || this.quoteStateService.getClient();
     if (company || company.id) {
       this.userService.getAllusers().subscribe((res: any) => {
+        this.initialized = true;
         const techUser = res.filter((item) => item.accountType === USER.TYPE.TECH && !item.deletedAt);
         let clientUser = [];
         if (typeof company === 'string' || company instanceof String) {
@@ -168,6 +222,11 @@ export class ModalQuoteComponent implements OnInit {
     this.quoteStateService.setMessage(this.message);
   }
 
+public onCheckForClose() {
+  this.onCheckChange();
+  if (!this.isChange) this.close();
+}
+
   /**
    * Save quote
    */
@@ -184,17 +243,21 @@ export class ModalQuoteComponent implements OnInit {
         } else {
           this.data.message = this.message;
           this.data.subject = this.subject;
+
           this.quoteService.resend(this.data, this.selectedUsers)
             .pipe(takeUntil(this.unsubscribe))
             .subscribe((res) => {
               if (res) {
                 this.quoteService.repeatSend(res['id']).subscribe((res) => { })
-                this.quoteStateService.goToQuote();
+                if (!this.onlySendMode) this.quoteStateService.goToQuote();
+
               }
               this.unsubscribe.next();
               this.unsubscribe.complete();
             })
         }
+
+
       }
       this.activeModal.close();
     } else {
@@ -220,6 +283,7 @@ export class ModalQuoteComponent implements OnInit {
       this.message = this.data.message && this.data.message !== "null" ? JSON.parse(JSON.stringify(this.data.message)) : '';
       this.subject = this.data.subject && this.data.subject !== "null" ? JSON.parse(JSON.stringify(this.data.subject)) : '';
     }
+
   }
 
   /**
@@ -245,5 +309,7 @@ export class ModalQuoteComponent implements OnInit {
       }
     }
   }
-
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }

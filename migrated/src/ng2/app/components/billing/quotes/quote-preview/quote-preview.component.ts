@@ -8,9 +8,10 @@ import { takeUntil } from "rxjs/operators";
 import { Subject } from "rxjs";
 import { environment } from "../../../../../environments/environment";
 import { ModalQuoteComponent } from "../../../../services/modal/modal-quote/modal-quote.component";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { NgbModal, NgbModalConfig } from "@ng-bootstrap/ng-bootstrap";
 import { FormGroup } from '@angular/forms';
 import { ISubscription } from 'rxjs/Subscription';
+import { AlertStateService } from '../../../shared/alert/services/alert-state.service';
 
 /**
  * Quote preview component
@@ -18,7 +19,8 @@ import { ISubscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-quote-preview',
   templateUrl: './quote-preview.component.html',
-  styleUrls: ['./quote-preview.component.scss']
+  styleUrls: ['./quote-preview.component.scss'],
+  providers: [NgbModalConfig, NgbModal]
 })
 export class QuotePreviewComponent implements OnInit {
 
@@ -48,8 +50,13 @@ export class QuotePreviewComponent implements OnInit {
     private companiesService: CompaniesService,
     private dateService: DateService,
     private quoteService: QuoteService,
-    private modalService: NgbModal
-  ) { }
+    private modalService: NgbModal,
+    private alertState: AlertStateService,
+    config: NgbModalConfig,
+  ) { 
+    config.backdrop = 'static';
+    config.keyboard = false;
+  }
 
   /**
    * Initializes quotes preview. See [ngOnInit]{@see OnInit#ngOnInit}
@@ -219,6 +226,17 @@ export class QuotePreviewComponent implements OnInit {
     }
   }
 
+  onlySend() {
+    const modalRef = this.modalService.open(ModalQuoteComponent, null);
+    modalRef.componentInstance.data = this.quoteForCreate;
+    modalRef.componentInstance.onlySendMode = true;
+  }
+  onlyDownloadPdf () {
+    
+    this.quoteService.downloadPdf(this.quoteForCreate.id).subscribe((res) => this.quoteService.downLoadFile(res, this.quoteForCreate.id,this.quote.client.name,this.quoteForCreate.quoteNumber));
+    
+  }
+
   /**
    * Create quote and approve
    */
@@ -235,7 +253,11 @@ export class QuotePreviewComponent implements OnInit {
         .pipe(takeUntil(this.unsubscribe))
         .subscribe((res) => {
           const id = res['id'];
-          this.quoteService.downloadPdf(res['id']).subscribe((res) => this.quoteService.downLoadFile(res, id,this.quote.client.name,this.quoteForCreate.quoteNumber));
+          this.quoteService.downloadPdf(res['id']).subscribe((res) => {
+            this.quoteService.downLoadFile(res, id,this.quote.client.name,this.quoteForCreate.quoteNumber);
+            this.alertState.oninitShowAlert('Quote has been saved');
+            this.quoteService.backToQuoteList();
+          });
         });
     } else if (isFormReady && this.editMode) {
       const currentQuote = this.quoteStateService.getQuoteCreate();
@@ -243,7 +265,11 @@ export class QuotePreviewComponent implements OnInit {
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((res) => {
         const id = res['id'];
-        this.quoteService.downloadPdf(res['id']).subscribe((res) => this.quoteService.downLoadFile(res, id,this.quote.client.name,this.quoteForCreate.quoteNumber));
+        this.quoteService.downloadPdf(res['id']).subscribe((res) => {
+          this.quoteService.downLoadFile(res, id,this.quote.client.name,this.quoteForCreate.quoteNumber)
+          this.alertState.oninitShowAlert('Quote has been saved');
+          this.quoteService.backToQuoteList();
+        })
       })
     } else {
       this.quoteStateService.emitValidation();
