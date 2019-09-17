@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
-import {QuoteStateService} from "../../components/billing/quotes/quote-create/quote-state.service";
+import { QuoteStateService } from "../../components/billing/quotes/quote-create/quote-state.service";
 import { catchError, tap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { QuoteResult } from '../../components/billing/quotes/class/quote-result';
@@ -27,7 +27,7 @@ export class QuoteService {
   private amount = 'AMOUNT_DESC';
   private deposit = 'DEPOSIT_DESC';
   private sortType = null;
- 
+
 
   /**
    * Product api service constructor
@@ -38,7 +38,7 @@ export class QuoteService {
     private http: HttpClient,
     private quoteStateService: QuoteStateService,
     private alertState: AlertStateService
-  ) {}
+  ) { }
 
   /**
    * Create quote
@@ -48,32 +48,32 @@ export class QuoteService {
   public createQuote(value, notification) {
     this.itemsListArray = this.quoteStateService.getItemArray();
     this.productsArray = this.getProductItems(this.itemsListArray, 'product');
-    this.servicesArray = this.getProductItems(this.itemsListArray, 'service',true);
-    return this.http.post(`${this.apiUrl}saleQuotes` ,{
+    this.servicesArray = this.getProductItems(this.itemsListArray, 'service', true);
+    return this.http.post(`${this.apiUrl}saleQuotes`, {
       "companyId": (value.client && value.client.item) ? value.client.item.id : value.client.id,
       "number": this.quoteStateService.getQuoteNumber(),
-      "quoteItems":{
-        "type":"MIXED",
-        "shares":[],
-        "ticket":null,
+      "quoteItems": {
+        "type": "MIXED",
+        "shares": [],
+        "ticket": null,
         "products": this.productsArray,
         "services": this.servicesArray
       },
       "description" : this.quoteStateService.getDescription(),
-      "requestPayment": this.quoteStateService.getRequestPayment()? this.quoteStateService.getRequestPayment() : false,
-      "draft":false,
+      "requestPayment": this.quoteStateService.getRequestPayment() ? this.quoteStateService.getRequestPayment() : false,
+      "draft": false,
       "purchaseOrder": this.quoteStateService.getPurchaseOrder() || null,
       "partialDeposit": this.quoteStateService.getPartialDeposit() || null,
       "validUntil": this.getMsDate(value.endDate),
       "date": this.getMsDate(value.startDate),
       "recipients": this.quoteStateService.getUsersEmail() ? this.quoteStateService.getUsersEmail() : [],
-      "message": notification? this.quoteStateService.getQuoteCreate()['message'] : null,
-      "subject": notification? this.quoteStateService.getQuoteCreate()['subject'] : null,
+      "message": notification ? this.quoteStateService.getQuoteCreate()['message'] : null,
+      "subject": notification ? this.quoteStateService.getQuoteCreate()['subject'] : null,
       "globalNote": value.globalNote ? value.globalNote : this.quoteStateService.getGlobalNote(),
       "regularNote": value.regularNote ? value.regularNote : this.quoteStateService.getSelectedNote(),
-      "sendNotification":notification
+      "sendNotification": notification
     }).pipe(
-      tap(data => this.handleQuoteSent(data,(notification) ? 'Quote has been sent' : 'Quote has been saved')),  
+      tap(data => this.handleQuoteSent(data, (notification) ? 'Quote has been sent' : 'Quote has been saved')),
       catchError(this.handleError));
   }
 
@@ -86,33 +86,33 @@ export class QuoteService {
   public editQuote(value, quoteId, notification) {
     this.itemsListArray = this.quoteStateService.getItemArray();
     this.productsArray = this.getProductItems(this.itemsListArray, 'product');
-    this.servicesArray = this.getProductItems(this.itemsListArray, 'service',true);
-    return this.http.put(`${this.apiUrl}saleQuotes/${quoteId}` ,{
+    this.servicesArray = this.getProductItems(this.itemsListArray, 'service', true);
+    return this.http.put(`${this.apiUrl}saleQuotes/${quoteId}`, {
       "companyId": (value.client && value.client.item) ? value.client.item.id : value.client.id,
       "number": this.quoteStateService.getQuoteNumber(),
       "id": quoteId,
-      "quoteItems":{
-        "type":"MIXED",
-        "shares":[],
-        "ticket":null,
+      "quoteItems": {
+        "type": "MIXED",
+        "shares": [],
+        "ticket": null,
         "products": this.productsArray,
         "services": this.servicesArray
       },
       "description" : this.quoteStateService.getDescription(),
-      "requestPayment": this.quoteStateService.getRequestPayment()? this.quoteStateService.getRequestPayment() : false,
-      "draft":false,
+      "requestPayment": this.quoteStateService.getRequestPayment() ? this.quoteStateService.getRequestPayment() : false,
+      "draft": false,
       "purchaseOrder": this.quoteStateService.getPurchaseOrder() || null,
       "partialDeposit": this.quoteStateService.getPartialDeposit() || null,
       "validUntil": this.getMsDate(value.endDate),
       "date": this.getMsDate(value.startDate),
       "recipients": this.quoteStateService.getUsersEmail() ? this.quoteStateService.getUsersEmail() : [],
-      "message": notification? this.quoteStateService.getQuoteCreate()['message'] : null,
-      "subject": notification? this.quoteStateService.getQuoteCreate()['subject'] : null,
+      "message": notification ? this.quoteStateService.getQuoteCreate()['message'] : null,
+      "subject": notification ? this.quoteStateService.getQuoteCreate()['subject'] : null,
       "globalNote": value.globalNote ? value.globalNote : this.quoteStateService.getGlobalNote(),
       "regularNote": value.regularNote ? value.regularNote : this.quoteStateService.getSelectedNote(),
       "sendNotification": notification
     }).pipe(
-      tap(data => this.handleQuoteSent(data,'Quote has been saved')),  
+      tap(data => this.handleQuoteSent(data, 'Quote has been saved')),
       catchError(this.handleError));
   }
 
@@ -121,17 +121,17 @@ export class QuoteService {
    * @param item - item list
    * @param recipients - users list
    */
-  public resend(item,recipients) {
+  public resend(item, recipients) {
     this.productsArray = this.getProductItems([...item.products], 'product');
     this.servicesArray = this.getProductItems([...item.services], 'service');
     return this.http.put(`${this.apiUrl}saleQuotes/${item.id}`, {
       "companyId": item.company.id,
       "number": item.number,
       "id": item.id,
-      "quoteItems":{
-        "type":"MIXED",
-        "shares":[],
-        "ticket":null,
+      "quoteItems": {
+        "type": "MIXED",
+        "shares": [],
+        "ticket": null,
         "products": this.productsArray,
         "services": this.servicesArray,
       },
@@ -148,7 +148,7 @@ export class QuoteService {
       "regularNote": item.regularNote,
       "sendNotification": true
     }).pipe(
-      tap(data => this.handleQuoteSent(data,'Quote has been sent')),  
+      tap(data => this.handleQuoteSent(data, 'Quote has been sent')),
       catchError(this.handleError));
   }
 
@@ -158,7 +158,7 @@ export class QuoteService {
    */
   public repeatSend(quoteId) {
     return this.http.post(`${this.apiUrl}saleQuotes/${quoteId}/send`, {}).pipe(
-      tap(data => data), 
+      tap(data => data),
       catchError(this.handleError));
   }
 
@@ -167,7 +167,7 @@ export class QuoteService {
    */
   public getQuoteNumber() {
     return this.http.get(this.apiUrl + `data/actualNumber?type=SALE_QUOTE`).pipe(
-      tap(data => data), 
+      tap(data => data),
       catchError(this.handleError));
   }
 
@@ -176,7 +176,7 @@ export class QuoteService {
    */
   public getQuoteNote() {
     return this.http.get(this.apiUrl + `invoice/invoiceNote/getAll`).pipe(
-      tap(data => data), 
+      tap(data => data),
       catchError(this.handleError));
   }
 
@@ -184,7 +184,7 @@ export class QuoteService {
    * Get time in ms
    */
   public getMsDate(value) {
-    const date = new Date(`${value.year}/${value.month}/${value.day}` );
+    const date = new Date(`${value.year}/${value.month}/${value.day}`);
     return date.getTime()
   }
 
@@ -194,7 +194,7 @@ export class QuoteService {
    */
   public getServiceList(clientCompanyId) {
     return this.http.get(this.apiUrl + `services/${clientCompanyId}`).pipe(
-      tap(data => data), 
+      tap(data => data),
       catchError(this.handleError));
   }
 
@@ -213,26 +213,27 @@ export class QuoteService {
         try {
           description = JSON.parse(JSON.stringify(item.description));
         } catch (error) {
-          
+
         }
         if (onInitSaveOrCreate) {
           item.quantity = '1';
           delete item.description;
-        } 
+        }
         return {
-        item: item,
-        "itemOrder": index,
-        "quantity": quantity,
-        "discountType":"PERCENT",
-        "description" : description
-      }})
+          item: item,
+          "itemOrder": index,
+          "quantity": quantity,
+          "discountType": "PERCENT",
+          "description": description
+        }
+      })
     } else {
       itemsAray = itemsAray.filter((item) => !item.hasOwnProperty('rate'));
       return itemsAray.map((item, index) => ({
         item: item,
         "itemOrder": index,
         "quantity": item.quantity,
-        "discountType":"PERCENT"
+        "discountType": "PERCENT"
       }))
     }
   }
@@ -243,18 +244,18 @@ export class QuoteService {
    */
   public getQuotes(data) {
     //data.type && this.getSortType(data.type);
-    console.log('this.sortType',this.sortType);
+    console.log('this.sortType', this.sortType);
     return this.http.post(this.apiUrl + 'saleQuotes/search', {
       "companyName": data.company || null,
       "quoteNumber": data.number || null,
-      "status":  data.status || null,
+      "status": data.status || null,
       "date": data.startDate || '',
       "endDate": data.endDate || '',
       "sortBy": this.sortType || 'DATE_DESC',
       "offset": this.offset * data.page,
       "limit": this.offset
     }).pipe(
-      tap(data => data), 
+      tap(data => data),
       catchError(this.handleError));
   }
 
@@ -269,7 +270,7 @@ export class QuoteService {
       &billTo=${company.companyInfo.addresses[0].id}
       &shipTo=${company.companyInfo.addresses[0].id}`,
       [quote_id]).pipe(
-        tap(data => data), 
+        tap(data => data),
         catchError(this.handleError));
   }
 
@@ -282,7 +283,7 @@ export class QuoteService {
     return this.http.post(this.apiUrl +
       `saleQuotes/convertToTicket?companyId=${company.id}`,
       [quote_id]).pipe(
-        tap(data => data), 
+        tap(data => data),
         catchError(this.handleError));
   }
 
@@ -295,7 +296,7 @@ export class QuoteService {
     return this.http.post(this.apiUrl +
       `saleQuotes/approveQuote?companyId=${company.id}`, [quoteId]
     ).pipe(
-      tap(data => this.handleQuoteSent(data,'Quote has been approved')),  
+      tap(data => this.handleQuoteSent(data, 'Quote has been approved')),
       catchError(this.handleError));
   }
 
@@ -308,7 +309,7 @@ export class QuoteService {
     return this.http.post(this.apiUrl +
       `saleQuotes/refuseQuote?companyId=${company.id}`, [quote_id]
     ).pipe(
-      tap(data => data), 
+      tap(data => data),
       catchError(this.handleError));
   }
 
@@ -321,7 +322,7 @@ export class QuoteService {
     return this.http.post(this.apiUrl +
       `saleQuotes/archiveQuote?companyId=${company.id}`, [quote_id]
     ).pipe(
-      tap(data => data), 
+      tap(data => data),
       catchError(this.handleError));
   }
 
@@ -334,7 +335,7 @@ export class QuoteService {
     return this.http.post(this.apiUrl +
       `saleQuotes/${quote_id}/markAsRead?companyId=${company.id}`, {}
     ).pipe(
-      tap(data => data), 
+      tap(data => data),
       catchError(this.handleError));
   }
 
@@ -343,31 +344,44 @@ export class QuoteService {
    * @param quote_id - quote id
    */
   public downloadPdf(quote_id) {
-    return this.http.get(this.apiUrl + `saleQuotes/${quote_id}/pdf`,{ headers: new HttpHeaders({
+    return this.http.get(this.apiUrl + `saleQuotes/${quote_id}/pdf`, {
+      headers: new HttpHeaders({
         'Content-Type': 'application/pdf',
-      }), responseType: 'blob'}).pipe(
-        tap(data => data),  
-        catchError(this.handleError));
+      }), responseType: 'blob'
+    }).pipe(
+      tap(data => data),
+      catchError(this.handleError));
   }
 
-   /**
-   * Method is use to download file.
-   * @param res - Array Buffer data
-   * @param id - type of the document.
-   */
-  public downLoadFile(res: any, id,companyName,quoteNumber) {
+  /**
+  * Method is use to download file.
+  * @param res - Array Buffer data
+  * @param id - type of the document.
+  */
+  public downLoadFile(res: any, id, companyName, quoteNumber) {
+    console.log('res', res);
+    console.log('id',id);
+    var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+    
     const data = window.URL.createObjectURL(res);
     var link = document.createElement('a');
     link.href = data;
-    link.download=`${this.apiUrl}saleQuotes/${id}/pdf.pdf`;
-    link.download = `${companyName}_Quote-${quoteNumber}.pdf`;
-    link.click();
- //   this.quoteStateService.goToQuote();
+    //   link.download=`${this.apiUrl}saleQuotes/${id}/pdf.pdf`;
+    if (isFirefox) {
+      link.href = `${window.location.origin}/saleQuotes/${id}/pdf`;
+      link.target = "_blank";
+    } else {
+      link.download = `${companyName}_Quote-${quoteNumber}.pdf`;
+    }
+    var e = document.createEvent('MouseEvents');
+    e.initEvent('click', true, true);
+    link.dispatchEvent(e);
+    
   }
 
-  public backToQuoteList () {
+  public backToQuoteList() {
     this.quoteStateService.goToQuote();
-  } 
+  }
 
   /**
    * Get sort type
@@ -405,16 +419,16 @@ export class QuoteService {
    * check error
    * @param error - error
    */
-  private handleError =(error)=> {
+  private handleError = (error) => {
     let err = error.error;
     this.quoteStateService.setError((err.validationResults && err.validationResults.saleQuotePostDto) ? err.validationResults.saleQuotePostDto : err.message);
     return throwError(error);
   }
 
-  private handleQuoteSent = (data,message) => {
+  private handleQuoteSent = (data, message) => {
     this.alertState.oninitShowAlert(message);
-   // this.quoteStateService.setQuoteResult(message);
-   // this.quoteStateService.setHandleQuoteHasSent();
+    // this.quoteStateService.setQuoteResult(message);
+    // this.quoteStateService.setHandleQuoteHasSent();
     return data;
   }
 

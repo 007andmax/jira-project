@@ -76,6 +76,7 @@ import { CompanyPasswordManagerTableComponent } from './components/company-passw
 import { FilterPipe } from './pipe/filter.pipe';
 import { ConfirmComponent } from './components/shared/confirm/confirm/confirm.component';
 import { ClickOtsideDirective } from './directives/click-otside.directive';
+import { SortByPipe } from './pipe/sort-by.pipe';
 
 
 /**
@@ -178,7 +179,8 @@ angular.module('quicktech')
     CompanyPasswordManagerTableComponent,
     FilterPipe,
     ConfirmComponent,
-    ClickOtsideDirective
+    ClickOtsideDirective,
+    SortByPipe
   ],
   imports: [
     BrowserModule,

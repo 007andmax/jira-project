@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Subject } from "rxjs";
 import { ISubscription } from "rxjs/Subscription";
 
@@ -25,6 +25,8 @@ export class PasswordManagerTableComponent implements OnInit {
   private subGetRecords: ISubscription;
   private subAddNewRecords: ISubscription;
   public recordsData: any;
+  public sort: string = 'companyName';
+  public direction: string = 'ASC';
 
   /**
    * Creates an instance of the PasswordManagerTableComponent with the injected services
@@ -35,7 +37,8 @@ export class PasswordManagerTableComponent implements OnInit {
   constructor(
     private apiPasswordManagerService: ApiPasswordManagerService,
     private passwordManagerService: PasswordManagerService,
-    private permissionsService: PermissionsService
+    private permissionsService: PermissionsService,
+    public cd: ChangeDetectorRef,
   ) { }
 
   /**
@@ -48,6 +51,17 @@ export class PasswordManagerTableComponent implements OnInit {
       this.apiPasswordManagerService.getRecords();
     });
     this.watchDeleteRecord();
+    this.onSort();
+  }
+
+  private onSort() {
+    this.passwordManagerService.getOnSort().subscribe((data) => {
+      console.log('data',data);
+    this.sort = data.sort;
+    this.direction = data.direction;
+   
+    //  this.cd.detectChanges();
+    })
   }
 
   /**
@@ -64,7 +78,8 @@ export class PasswordManagerTableComponent implements OnInit {
    */
   public getRecords() {
     this.subGetRecords = this.apiPasswordManagerService.dataChange.subscribe((res) => {
-      return this.recordsData = res;
+       this.recordsData = res;
+       this.cd.detectChanges();
     });
   }
 
