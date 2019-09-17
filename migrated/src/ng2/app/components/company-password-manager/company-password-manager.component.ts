@@ -5,11 +5,14 @@ import { CompaniesService } from '../../services/company/companies.service';
 import { PasswordManagerService } from '../../services/password-manager/password-manager.service';
 import { UsersService } from '../../services/users/users.service';
 import { PermissionsService } from '../../services/permissions/permissions.service';
+import { PasswordManagerListService } from './services/password-manager-list.service';
+ 
 
 @Component({
   selector: 'company-password-manager',
   templateUrl: './company-password-manager.component.html',
-  styleUrls: ['./company-password-manager.component.scss']
+  styleUrls: ['./company-password-manager.component.scss'],
+  providers: [PasswordManagerListService]
 })
 export class CompanyPasswordManagerComponent implements OnInit {
 
@@ -24,6 +27,8 @@ export class CompanyPasswordManagerComponent implements OnInit {
   public showPreloader = true;
   sub:Subscription = new Subscription();
   subscription:any;
+  public sort: string = 'company_name';
+  public direction: string = 'DESC';
   /**
    * Creates an instance of the PasswordManagerComponent with the injected services
    * @param {ApiPasswordManagerService} apiPasswordManagerService Service to work with api
@@ -38,9 +43,22 @@ export class CompanyPasswordManagerComponent implements OnInit {
     private passwordManagerService: PasswordManagerService,
     private userService: UsersService,
     private permissionsService: PermissionsService,
+    private passwordManagerList: PasswordManagerListService
   ) {
     this.companiesService.getCompaniesList();
   }
+
+    /**
+ * Sort 
+ * @param sort - type sort
+ */
+public sortBy(sort) {
+  console.log('sortBy');
+  this.direction = this.passwordManagerList.getDirection(this.direction, this.sort, sort);
+  this.sort = sort;
+  this.passwordManagerService.onInitSort({direction:this.direction,sort:sort});
+ 
+}
 
   /**
    * Initializes Password manager. See [ngOnInit]{@see OnInit#ngOnInit}

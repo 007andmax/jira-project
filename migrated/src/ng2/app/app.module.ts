@@ -75,6 +75,7 @@ import { CompanyPasswordManagerEditAsideComponent } from './components/company-p
 import { CompanyPasswordManagerTableComponent } from './components/company-password-manager/password-manager-table/password-manager-table.component';
 import { ConfirmComponent } from './components/shared/confirm/confirm/confirm.component';
 import { ClickOtsideDirective } from './directives/click-otside.directive';
+import { SortByPipe } from './pipe/sort-by.pipe';
 
 
 /**
@@ -176,7 +177,8 @@ angular.module('quicktech')
     CompanyPasswordManagerEditAsideComponent,
     CompanyPasswordManagerTableComponent,
     ConfirmComponent,
-    ClickOtsideDirective
+    ClickOtsideDirective,
+    SortByPipe
   ],
   imports: [
     BrowserModule,

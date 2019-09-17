@@ -23,6 +23,7 @@ export class PasswordManagerService {
   public closeFilter: EventEmitter<any> = new EventEmitter();
   public mobileCategory: EventEmitter<any> = new EventEmitter();
   public newRecordsisAdd: EventEmitter<any> = new EventEmitter();
+  public onSort: EventEmitter<any> = new EventEmitter();
 
   /**
    * Password manager service constructor
@@ -31,6 +32,14 @@ export class PasswordManagerService {
   public constructor(
     private http: HttpClient
   ) { }
+
+  public getOnSort() {
+    return this.onSort;
+  }
+
+  public onInitSort (sort) {
+    this.onSort.emit(sort)
+  }
 
   /**
    * Set selected device or user
