@@ -29,7 +29,7 @@ export class PasswordManagerComponent implements OnInit {
   public isMobileFilterShowing = false;
   public currentUser: any;
   public sort: string = 'companyName';
-  public direction: string = 'DESC';
+  public direction: string = 'ASC';
   /**
    * Creates an instance of the PasswordManagerComponent with the injected services
    * @param {ApiPasswordManagerService} apiPasswordManagerService Service to work with api
