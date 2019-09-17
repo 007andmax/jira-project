@@ -385,6 +385,22 @@
   }
 }
 
+.recurring-tickets-content__modal--content-footer {
+  .assigned-users-list {
+    display: flex;
+    margin-left: -39px;
+    max-width: 148px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    .default-user-avatar,
+    .avatar-26 {
+      width: 32px;
+      height: 32px;
+      margin-right: 5px;
+    }
+  }
+}
+
 .mat-chip.mat-standard-chip {
   padding: 9px 15px 9px 5px;
   border-radius: 3px !important;
@@ -1019,7 +1035,8 @@ ngb-typeahead-window {
       margin: 60px 0 30px !important;
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
+      height: 80px;
       .btn-primary {
         margin-right: 16px;
       }
@@ -1033,6 +1050,7 @@ ngb-typeahead-window {
         font-size: 12px;
         color: #4f5f79;
         cursor: pointer;
+        margin: 12px 0 0 0;
         &:before {
           content: '';
           position: absolute;
