@@ -180,7 +180,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
 
       this.selectedClient = null;
       this.recurringState.setClient(selectClient);
-      this.services = [new ForCreateService()];
+    
     } else {
       this.recurringState.getCreateTicket().setCompany(selectClient.item.id);
       this.selectedClient = selectClient.item;
@@ -189,7 +189,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
       this.getCompanyDevices();
 
     }
-
+    this.services = [new ForCreateService()];
     this.cd.detectChanges();
 
   }
@@ -391,7 +391,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   }
 
   public trackById(index, item) {
-    return item.versionedId.id;
+    return (item.versionedId) ?  item.versionedId.id : index;
   }
 
   public trackByIndex(index, item) {

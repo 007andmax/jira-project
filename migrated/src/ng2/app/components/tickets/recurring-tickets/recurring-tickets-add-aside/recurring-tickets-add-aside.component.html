@@ -109,7 +109,7 @@
 
         <!--IF TAB IS 'SERVICE'------------------------------------------------->
         <div class="col-md-12 service-tab-content p-0" *ngIf="type === 'services'">
-          <ng-template ngFor let-service [ngForOf]="services" let-i="index" [ngForTrackBy]="trackByIndex">
+          <ng-template ngFor let-service [ngForOf]="services" let-i="index" [ngForTrackBy]="trackById">
             <div [ngClass]="{'separator-hr': services.length > 1}" class="row service-tab-content__item">
               <div class="col-md-12">
                 <div class="service-errors" *ngIf="service.noValid">
