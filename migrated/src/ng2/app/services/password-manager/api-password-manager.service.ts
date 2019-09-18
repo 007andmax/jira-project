@@ -24,6 +24,16 @@ export class ApiPasswordManagerService {
     private http: HttpClient
   ) {}
 
+   /**
+   * set action open record
+   */
+  public setOpenRecord(id) {
+    
+    this.subGetRecords = this.http.get(this.apiUrl + `passwordRecords/${id}/password`).subscribe((response)=> {
+   
+    })
+  }
+
   /**
    * Get records list
    */
