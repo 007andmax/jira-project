@@ -8,27 +8,31 @@
       $scope.getUserAvatarUrl = $rootScope.getUserAvatarUrl;
       $scope.search = "";
       var user = $rootScope.usersToNotify || $scope.usersCurrentCompany;
+      console.log('user',user);
+      console.log('assignedUser',$scope.assignedUser);
       $scope.users_list = JSON.parse(JSON.stringify(user));
       $scope.users_list.forEach(function (element) {
         element.selected = ($scope.assignedUser && $scope.assignedUser.id == element.id) ? true : false;
       });
       $scope.users = JSON.parse(JSON.stringify($scope.users_list));
+      console.log('$scope.users',$scope.users);
       $scope.$watch(function () {
         return $scope.assignedUser;
       }, function (val) {
         if (val) {
-        
+        console.log('change assignedUser ---------------',val);
           $scope.users.forEach(function (element) {
             element.selected = (val.id == element.id) ? true : false;
           });
+          console.log(' $scope.users', $scope.users);
         }
       });
 
       $scope.$watch(function () {
         return $scope.ticketDetails.multiAssignedUsers;
       }, function (val) {
-        if (val) {
-          
+        if (val && val.length) {
+          console.log('change multiAssignedUsers ---------------',val.length);
           $scope.users.forEach(function (element) {
             element.selected = false;
           });
@@ -37,7 +41,7 @@
             element.selected = (index > -1) ? true : false;
           });
         }
-
+        console.log(' $scope.users', $scope.users);
 
       });
      
