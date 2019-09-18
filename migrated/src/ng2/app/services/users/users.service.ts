@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment } from '../../../environments/environment';
+import { UsersStateService } from '../../states/users/users-state.service';
 
 /**
  * Users service to work with api
@@ -11,15 +12,16 @@ import { environment } from '../../../environments/environment';
 export class UsersService {
 
   private apiUrl = environment.apiUrl;
-  public currentUser: any;
-  allUsers = [];
+ 
+  //allUsers = [];
 
   /**
    * Users api service constructor
    * @param {HttpClient} http Service to work with request
    */
   public constructor(
-    private http: HttpClient
+    private http: HttpClient,
+   
   ) {}
 
   /**
@@ -33,18 +35,16 @@ export class UsersService {
    * Get current user
    */
   public getCurrentUser() {
+    return this.http.get(this.apiUrl + 'users/current');
+  }
+  /* public getCurrentUser() {
     return this.http.get(this.apiUrl + 'users/current').subscribe((res) => {
       this.currentUser = res;
+  //    this.userState.onInitCurrentUser(res);
     });
-  }
+  }*/
 
-  /**
-   * Change user permissionsss
-   * @permissions - permissions to change
-   */
-  public changeUserPermissions(permissions) {
-    return this.currentUser.permissions = permissions;
-  }
+
 
   /**
    * Get user info

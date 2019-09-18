@@ -6,6 +6,7 @@ import { CompaniesService } from "../../services/company/companies.service";
 import { PasswordManagerService } from "../../services/password-manager/password-manager.service";
 import { UsersService } from "../../services/users/users.service";
 import { PermissionsService } from "../../services/permissions/permissions.service";
+import { UsersStateService } from '../../states/users/users-state.service';
 
 /**
  * Password manager component
@@ -41,6 +42,7 @@ export class PasswordManagerComponent implements OnInit {
     private passwordManagerService: PasswordManagerService,
     private userService: UsersService,
     private permissionsService: PermissionsService,
+    private userState:UsersStateService
   ) {
     this.companiesService.getCompaniesList();
   }
@@ -132,7 +134,7 @@ export class PasswordManagerComponent implements OnInit {
    * getCurrentUser
    */
   private getCurrentUser() {
-    this.currentUser = this.userService.currentUser;
+    this.currentUser = this.userState.getCurrentUser();
   }
 
   /**

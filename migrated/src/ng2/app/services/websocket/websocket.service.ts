@@ -5,6 +5,7 @@ import { UsersService } from "../users/users.service";
 import { CompaniesService } from "../company/companies.service";
 import { QuoteRealTimeService } from "../../components/billing/quotes/quote-realtime/quote-realtime.service";
 import { RecurringTicketsRealTimeService } from '../../components/tickets/recurring-tickets/services/recurring-tickets-real-time.service';
+import { UsersStateService } from '../../states/users/users-state.service';
 
 /**
  * Websocket service to work with api
@@ -27,7 +28,8 @@ export class WebsocketService {
     private usersService: UsersService,
     private companiesService: CompaniesService,
     private quoteRealTimeService: QuoteRealTimeService,
-    private recurringTicketsRealTimeService: RecurringTicketsRealTimeService
+    private recurringTicketsRealTimeService: RecurringTicketsRealTimeService,
+    private usersState:UsersStateService
 
     
   ) {
@@ -51,7 +53,7 @@ export class WebsocketService {
     setTimeout(() => {
       this.stompClient.subscribe("/user/watch/permissions", (message) => {
         var newChange = JSON.parse(message.body);
-        this.usersService.changeUserPermissions(newChange.data.permissions);
+        this.usersState.changeUserPermissions(newChange.data.permissions);
         if (message.body) {}
       });
     }, 3000);

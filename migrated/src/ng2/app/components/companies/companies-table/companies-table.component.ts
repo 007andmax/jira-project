@@ -4,6 +4,7 @@ import { CompanyAndressContact } from 'src/ng2/app/interfaces/company/company-ad
 import { CompanyAndress } from 'src/ng2/app/interfaces/company/company-address';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { CompaniesStateService } from '../services/companies-state.service';
+import { DevicesSateService } from 'src/ng2/app/states/devices/devices-sate.service';
 
 @Component({
   selector: 'app-companies-table',
@@ -17,10 +18,13 @@ export class CompaniesTableComponent implements OnInit {
   public primaryPhone: any;
   public location: string = '';
   public countUsers: number = 0;
+  public countDevices: number = 0;
   public showArchivedCompanies: boolean = false;
-  constructor(private usersStateService: UsersStateService, private companiesStateService: CompaniesStateService) { }
+  constructor(private usersStateService: UsersStateService, private companiesStateService: CompaniesStateService,
+    private devicesState: DevicesSateService) { }
 
   ngOnInit() {
+    console.log('id', this.company.id);
     this.companiesStateService.getOnShowArchived().subscribe(data => {
       this.showArchivedCompanies = true;
     })
@@ -30,6 +34,14 @@ export class CompaniesTableComponent implements OnInit {
       this.usersStateService.getOnUsers().subscribe((data) => {
         this.showArchivedCompanies = false;
         this.onGetUsersCount(data);
+      })
+    }
+    if (this.devicesState.getAllDevices()) {
+      this.onGetDevicesCount(this.devicesState.getAllDevices());
+    } else {
+      this.devicesState.getOnDevices().subscribe((data) => {
+        this.showArchivedCompanies = false;
+        this.onGetDevicesCount(data);
       })
     }
     if (this.company) {
@@ -61,6 +73,11 @@ export class CompaniesTableComponent implements OnInit {
         this.location = '';
       }
     }
+  }
+  private onGetDevicesCount(data) {
+    console.log('onGetDevicesCount',data);
+    let devices = data;
+    this.countDevices = (devices[this.company.id]) ? devices[this.company.id].length : 0;
   }
   private onGetUsersCount(data) {
 

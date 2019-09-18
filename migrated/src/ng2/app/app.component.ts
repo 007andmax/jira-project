@@ -6,6 +6,7 @@ import { setUpLocationSync } from '@angular/router/upgrade';
 import { UsersService } from "./services/users/users.service";
 import { WebsocketService } from "./services/websocket/websocket.service";
 import { UsersStateService } from './states/users/users-state.service';
+import { DevicesSateService } from './states/devices/devices-sate.service';
 
 /**
  * Root component
@@ -28,6 +29,7 @@ export class AppComponent implements OnInit {
     private userService: UsersService,
     private usersStateService: UsersStateService,
     private websocketService: WebsocketService,
+    private devicesState:DevicesSateService
     
   ){}
 
@@ -37,9 +39,11 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.upgrade.bootstrap(document.body, ['quicktech']);
     setUpLocationSync(this.upgrade);
-    this.userService.getCurrentUser();
+    this.devicesState.onInit();
+    this.usersStateService.onInit();
+  //  this.userService.getCurrentUser();
     this.websocketService.initializeWebSocketConnection();
-   this.usersStateService.onInit();
+ 
   }
 
 }

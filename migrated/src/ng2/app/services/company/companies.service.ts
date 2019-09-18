@@ -13,7 +13,7 @@ export class CompaniesService {
 
   private apiUrl = environment.apiUrl;
   public filteredCompanyUpdate: EventEmitter<any> = new EventEmitter();
-  
+  /* Добавить глобальную переменную списка компаний и запрос должен быть глобальным и один, проверить страницы где уже так забираются компаний и исправить их */
   public filteredCompany: {
     name: '',
     id: ''
