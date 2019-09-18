@@ -101,6 +101,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.devicesService.onInitHangle(data.company.id);
     this.selectedClient = data.company;
     this.createService.getStateDatePicker().onInitEditMode(data.startDate);
+    console.log('this.services',JSON.parse(JSON.stringify(this.services)));
     this.products = (data.products.length > 0) ? this.createService.getProductsForEdit(data.products) : [new ForCreateProduct()];
     this.services = (data.services.length > 0) ? this.createService.getServicesForEdit(data.services, data.serviceErrors) : [new ForCreateService()];
     this.createService.setTagsForEdit(data.tags);
@@ -112,7 +113,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.onChangeCron(data.cronExpression)
     this.getListServices(data.company);
     this.cd.detectChanges();
-
+console.log('this.services',JSON.parse(JSON.stringify(this.services)));
   }
 
   /**
@@ -197,11 +198,13 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
 * @param selectClient - company
 */
   public selectClient(selectClient) {
+    console.log('selectClient');
     this.validate.resetCompany();
     if (selectClient === 'null') {
       this.recurringState.getCreateTicket().setCompany(null);
       this.selectedClient = null;
       this.recurringState.setClient(selectClient);
+     
       this.services = [new ForCreateService()];
     } else {
       this.recurringState.getCreateTicket().setCompany(selectClient.item.id);
@@ -407,7 +410,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   }
 
   public trackById(index, item) {
-    return item.versionedId.id;
+    return (item.versionedId) ?  item.versionedId.id : index;
   }
 
   public trackByIndex(index, item) {

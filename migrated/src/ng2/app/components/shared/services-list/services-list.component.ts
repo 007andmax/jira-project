@@ -28,7 +28,8 @@ export class ServicesListComponent implements OnInit {
    * Initializes service list. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-    if (this.editItem) this.elRef.nativeElement.querySelector('#dropdownServices').value = this.getNameOrDescription(this.editItem);
+    console.log('this.editItem',this.editItem);
+    if (this.editItem && this.editItem.duration) this.elRef.nativeElement.querySelector('#dropdownServices').value = this.getNameOrDescription(this.editItem);
   }
 
   /**

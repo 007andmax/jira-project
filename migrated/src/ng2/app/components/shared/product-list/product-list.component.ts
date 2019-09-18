@@ -31,6 +31,7 @@ export class ProductListComponent implements OnInit {
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
     this.itemList.forEach(item => item.products.sort((a, b) => (a.description.toLowerCase() > b.description.toLowerCase()) ?
       1 : ((b.description.toLowerCase() > a.description.toLowerCase()) ? -1 : 0)));
+      console.log('this.editItem',this.editItem);
       if (this.editItem) this.elRef.nativeElement.querySelector('#dropdownProducts').value = this.getNameOrDescription(this.editItem);
 
   }
