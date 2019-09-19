@@ -3,24 +3,12 @@
  */
 export const QUOTE_STATUS = [
   {
-    type: 'SAVED',
-    name: 'Saved'
-  },
-  {
-    type: 'READ',
-    name: 'Read'
-  },
-  {
     type: 'APPROVED',
     name: 'Approved'
   },
   {
-    type: 'NOT_APPROVED',
-    name: 'Not Approved'
-  },
-  {
-    type: 'REFUSED',
-    name: 'Refused'
+    type: 'ARCHIVED',
+    name: 'Archived'
   },
   {
     type: 'EXPIRED',
@@ -31,16 +19,27 @@ export const QUOTE_STATUS = [
     name: 'Invoiced'
   },
   {
-    type: 'UNREAD',
-    name: 'Unread'
+    type: 'NOT_APPROVED',
+    name: 'Not Approved'
+  },
+  {
+    type: 'READ',
+    name: 'Read'
+  },
+  {
+    type: 'REFUSED',
+    name: 'Refused'
+  },
+  {
+    type: 'SAVED',
+    name: 'Saved'
   },
   {
     type: 'TICKETED',
     name: 'Ticketed'
   },
   {
-    type: 'ARCHIVED',
-    name: 'Archived'
+    type: 'UNREAD',
+    name: 'Unread'
   },
-
 ];
