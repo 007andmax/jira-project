@@ -38,5 +38,9 @@ export const QUOTE_STATUS = [
     type: 'TICKETED',
     name: 'Ticketed'
   },
+  {
+    type: 'ARCHIVED',
+    name: 'Archived'
+  },
 
 ];
