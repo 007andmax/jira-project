@@ -213,11 +213,12 @@ export class PasswordManagerEditAsideComponent implements OnInit {
    this.addRecord.emit(true);
    // this.passwordManagerService.addRecord();
  //   this.initForm();
-    this.showSelect = false;
+ this._toggleSidebar();
+    /*this.showSelect = false;
     this.clearClient();
     this.submitted = false;
     this.type = 0;
-    this.opened = false;
+    this.opened = false;*/
   }
 
   /**

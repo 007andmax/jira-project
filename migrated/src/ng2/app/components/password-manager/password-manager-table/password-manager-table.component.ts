@@ -127,9 +127,9 @@ export class PasswordManagerTableComponent implements OnInit {
    * @param item - item for edit
    */
   public editRecord(item) {
-   // let index = this.recordsData.findIndex(record => record.id === item.id);
+   let index = this.recordsData.findIndex(record => record.id === item.id);
     if (this.permissionsService.isAllowed('VIEW_PASSWORD')) {
-      this.passwordManagerService.addRecord(item);
+      this.passwordManagerService.addRecord(this.recordsData[index]);
     }
   }
 
