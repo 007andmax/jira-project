@@ -10,6 +10,7 @@ import { UsersService } from "../../../services/users/users.service";
 import { ApiPasswordManagerService } from "../../../services/password-manager/api-password-manager.service";
 import { GadgetsService } from "../../../services/gadgets/gadgets.service";
 import { ISubscription } from "rxjs-compat/Subscription";
+import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 
 /**
  * Left panel password manager component
@@ -60,7 +61,8 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     private passwordManagerService: PasswordManagerService,
     private apiPasswordManagerService: ApiPasswordManagerService,
     private gadgetsService: GadgetsService,
-    private cdRef:ChangeDetectorRef
+    private cdRef:ChangeDetectorRef,
+    private usersStateService: UsersStateService
   ) {
     this.getCompaniesList();
   }
@@ -398,10 +400,10 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
    * @param companyId - id of company
    */
   private getAllUsers(companyId) {
-    this.userService.getAllusers().subscribe((res: any) => {
-      res = res.filter((item) =>  item.company.id == companyId);
-      this.devicesAndUsersList = [...(res.filter((item) => item.accountType === USER.TYPE.CLIENT)), ...this.devicesAndUsersList]
-    })
+   // this.usersStateService.getAllusers().subscribe((res: any) => {
+     let list_users = this.usersStateService.getAllUsers().filter((item) =>  item.company.id == companyId);
+      this.devicesAndUsersList = [...(list_users.filter((item) => item.accountType === USER.TYPE.CLIENT)), ...this.devicesAndUsersList]
+  //  })
   }
 
   /**

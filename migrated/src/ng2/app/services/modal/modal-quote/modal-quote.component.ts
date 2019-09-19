@@ -11,6 +11,7 @@ import {QuoteStateService} from "../../../components/billing/quotes/quote-create
 import {QuoteService} from "../../quote/quote.service";
 import {takeUntil} from "rxjs/operators";
 import {Subject} from "rxjs";
+import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 
 /**
  * Modal quote component
@@ -55,7 +56,8 @@ export class ModalQuoteComponent implements OnInit {
     public activeModal: NgbActiveModal,
     private userService: UsersService,
     private quoteStateService: QuoteStateService,
-    private quoteService: QuoteService
+    private quoteService: QuoteService,
+    private usersStateService: UsersStateService
   ) { }
 
   /**
@@ -124,20 +126,21 @@ export class ModalQuoteComponent implements OnInit {
     this.showErrorClient = false;
     const company = (this.data && this.data.company.id) || this.quoteStateService.getClient();
     if (company || company.id) {
-      this.userService.getAllusers().subscribe((res: any) => {
-        const techUser = res.filter((item) => item.accountType === USER.TYPE.TECH && !item.deletedAt);
+     // this.userService.getAllusers().subscribe((res: any) => {
+       let users_list = this.usersStateService.getAllUsers();
+        const techUser = users_list.filter((item) => item.accountType === USER.TYPE.TECH && !item.deletedAt);
         let clientUser = [];
         if (typeof company === 'string' || company instanceof String) {
-          clientUser = res.filter((item) => {
+          clientUser = users_list.filter((item) => {
             return item.accountType === USER.TYPE.CLIENT && item.company.id == company && !item.deletedAt
           });
         } else {
-          clientUser = res.filter((item) => {
+          clientUser = users_list.filter((item) => {
             return item.accountType === USER.TYPE.CLIENT && item.company.id == company.id && !item.deletedAt
           });
         }
         this.users = [...techUser, ...clientUser];
-      })
+    //  })
     } else {
       this.showErrorClient = true;
     }

@@ -24,7 +24,7 @@ export class CompaniesTableComponent implements OnInit {
     private devicesState: DevicesSateService) { }
 
   ngOnInit() {
-    console.log('id', this.company.id);
+   
     this.companiesStateService.getOnShowArchived().subscribe(data => {
       this.showArchivedCompanies = true;
     })

@@ -15,6 +15,7 @@ import { UsersService } from "../../../services/users/users.service";
 import { GadgetsService } from "../../../services/gadgets/gadgets.service";
 import { PermissionsService } from "../../../services/permissions/permissions.service";
 import { ApiPasswordManagerService } from "../../../services/password-manager/api-password-manager.service";
+import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 
 /**
  * Password manager edit aside component
@@ -61,7 +62,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public subShowAddForm: Subscription;
   public subHideAddForm: Subscription;
   public subGetGadgets: ISubscription;
-  public subGetAllUsers: ISubscription;
+ // public subGetAllUsers: ISubscription;
   public subSaveEditRecord: ISubscription;
   public subSaveRecord: ISubscription;
   public subGetDevices: ISubscription;
@@ -87,7 +88,8 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     private userService: UsersService,
     private gadgetsService: GadgetsService,
     private permissionsService: PermissionsService,
-    private apiPasswordManagerService: ApiPasswordManagerService
+    private apiPasswordManagerService: ApiPasswordManagerService,
+    private usersStateService: UsersStateService
   ) { }
 
   /**
@@ -443,9 +445,9 @@ export class PasswordManagerEditAsideComponent implements OnInit {
    * get all users
    */
   private getAllUsers(companyId) {
-    this.subGetAllUsers = this.userService.getAllusers().subscribe((res: any) => {
-      res = res.filter((item) =>  item.company.id == companyId && !item.deletedAt);
-      this.usersList = [...(res.filter((item) => item.accountType === USER.TYPE.CLIENT))];
+   // this.subGetAllUsers = this.userService.getAllusers().subscribe((res: any) => {
+      let list_users = this.usersStateService.getAllUsers().filter((item) =>  item.company.id == companyId && !item.deletedAt);
+      this.usersList = [...(list_users.filter((item) => item.accountType === USER.TYPE.CLIENT))];
       this.usersCheckbox = new Array(this.usersList.length);
       for (var i = 0; i < this.usersCheckbox.length; ++i) { this.usersCheckbox[i] = false; }
       if (this.isEditmode && this.editItem) {
@@ -458,7 +460,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
           }
         });
       }
-    })
+ //   })
   }
 
   /**
@@ -598,7 +600,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.subShowAddForm && this.subShowAddForm.unsubscribe();
     this.subHideAddForm && this.subHideAddForm.unsubscribe();
     this.subGetGadgets && this.subGetGadgets.unsubscribe();
-    this.subGetAllUsers && this.subGetAllUsers.unsubscribe();
+   // this.subGetAllUsers && this.subGetAllUsers.unsubscribe();
     this.subSaveEditRecord && this.subSaveEditRecord.unsubscribe();
     this.subSaveRecord && this.subSaveRecord.unsubscribe();
     this.subGetDevices && this.subGetDevices.unsubscribe();
