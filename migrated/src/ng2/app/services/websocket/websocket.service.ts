@@ -43,6 +43,7 @@ export class WebsocketService {
       that.subsribeToPermissions();
       that.subsribeToQuote();
       that.subsribeToRecurringTickets();
+      that.subsribeToPasswordRecods();
     });
   }
 
