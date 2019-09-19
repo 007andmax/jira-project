@@ -210,9 +210,9 @@ export class PasswordManagerEditAsideComponent implements OnInit {
    * run methods after record is saved
    */
   public afterSaveRecord() {
-    this.addRecord.emit(true);
-    this.passwordManagerService.addRecord();
-    this.initForm();
+   this.addRecord.emit(true);
+   // this.passwordManagerService.addRecord();
+ //   this.initForm();
     this.showSelect = false;
     this.clearClient();
     this.submitted = false;

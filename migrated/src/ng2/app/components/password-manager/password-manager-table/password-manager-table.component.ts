@@ -57,11 +57,13 @@ export class PasswordManagerTableComponent implements OnInit {
 
   private onChangeRealtTime() {
     this.passwordManagerService.onChangeRealTime.subscribe(newChange => {
+      console.log('newChange',newChange);
       if (newChange.action === 'PASSWORD_RECORD_CREATED') {
         this.recordsData.push(newChange.data);
       } else if(newChange.action === 'PASSWORD_RECORD_UPDATED') {
         let index = this.recordsData.findIndex(item => item.id === newChange.data.id);
         if (index > -1) this.recordsData[index] = newChange.data;
+        console.log('this.recordsData[index]',this.recordsData[index]);
       } else if(newChange.action === 'PASSWORD_RECORD_DELETED') {
         let index = this.recordsData.findIndex(item => item.id === newChange.data.id);
         if (index > -1) this.recordsData.splice(index,1);
@@ -124,9 +126,10 @@ export class PasswordManagerTableComponent implements OnInit {
    * edit record
    * @param item - item for edit
    */
-  public editRecord(item) {
+  public editRecord(i) {
+   // let index = this.recordsData.findIndex(record => record.id === item.id);
     if (this.permissionsService.isAllowed('VIEW_PASSWORD')) {
-      this.passwordManagerService.addRecord(item);
+      this.passwordManagerService.addRecord(this.recordsData[i]);
     }
   }
 
@@ -144,6 +147,10 @@ export class PasswordManagerTableComponent implements OnInit {
    */
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
+  }
+
+  public trackById(index, item) {
+    return item.id;
   }
 
   /**
