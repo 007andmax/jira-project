@@ -110,7 +110,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.submitted = false;
     this.showSelect = false;
     this.userDevice = [];
-    this.initForm();
+  //  this.initForm();
     this.clearClient();
     this.type = 0;
     this.currentTypeChoosen = PASSWORD_RECORD_TYPES[this.type];
