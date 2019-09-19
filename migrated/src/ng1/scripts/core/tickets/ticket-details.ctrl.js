@@ -1180,8 +1180,17 @@ console.log('find');
           $scope.filterByType = function(arr, type) {
             return arr.filter(function(el) {
               if (type === 'TECH') {
-                return ((el.user.accountType === type && $scope.ticketDetails.assignedUser.id == el.user.id)
+                if ($scope.ticketDetails.assignedUser){
+                  return ((el.user.accountType === type && $scope.ticketDetails.assignedUser.id == el.user.id)
                   || el.user.accountType === type && el.show === true);
+                } else if ($scope.ticketDetails.multiAssignedUsers.length > 0) {
+                  var index = $scope.ticketDetails.multiAssignedUsers.findIndex(user => user.id == el.user.id);
+                  return ((el.user.accountType === type && index > -1)
+                  || el.user.accountType === type && el.show === true);
+                } else {
+                  return (el.user.accountType === type && el.show === true)
+                }
+              
               } else {
                 return el.user.accountType === type;
               }
@@ -1318,7 +1327,8 @@ console.log('find');
               if (
                 processedShares.indexOf(sharedUser.id) > -1 ||
                 sharedUser.id === $scope.ticketDetails.createdUser.id ||
-                sharedUser.id === $scope.ticketDetails.assignedUser.id
+                $scope.ticketDetails.assignedUser && sharedUser.id === $scope.ticketDetails.assignedUser.id ||
+                $scope.ticketDetails.multiAssignedUsers.length > 0 && $scope.ticketDetails.multiAssignedUsers.findIndex(user_s => user_s.id === sharedUser.id) > -1
               ) {
                 continue;
               }

@@ -65,39 +65,41 @@
         },
         'USER_TIP': function (ticket, type) {
 
-          if (!ticket.assignedUser) {
+          if (!ticket.assignedUser && ticket.multiAssignedUsers && ticket.multiAssignedUsers.length == 0) {
             return false
           }
+        
+         
 
-          if (ticket && ticket.assignPerformer && ticket.assignPerformer.id && ticket.assignedUser && ticket.assignedUser.id) {
+          if (ticket && ticket.assignPerformer && ticket.assignPerformer.id && ticket.assignedUser && ticket.assignedUser.id || ticket && ticket.assignPerformer && ticket.assignPerformer.id && ticket.multiAssignedUsers.length > 0) {
 
             var user = $rootScope.currentUser,
-              otherAPerformerAndAUser = ticket.assignPerformer.id !== ticket.assignedUser.id;
-
+              otherAPerformerAndAUser = ticket.assignedUser && ticket.assignPerformer.id !== ticket.assignedUser.id;
+              var indexUser = ticket.multiAssignedUsers.findIndex(user_s => user_s.id === user.id);
             switch (type) {
               case 'ASSIGNED_TO_ME':
-                return (ticket.assignPerformer.id !== user.id) && (ticket.assignedUser.id === user.id) && !ticket.isReassigned;
+                return (ticket.assignPerformer.id !== user.id) && (ticket.assignedUser && ticket.assignedUser.id === user.id) && !ticket.isReassigned;
 
               case 'RE-ASSIGNED_TO_ME':
-                return (ticket.assignPerformer.id !== user.id) && (ticket.assignedUser.id === user.id) && ticket.isReassigned;
+                return (ticket.assignPerformer.id !== user.id) && (ticket.assignedUser && ticket.assignedUser.id === user.id) && ticket.isReassigned;
 
               case 'I_ASSIGNED_TO_USER':
-                return (ticket.assignPerformer.id === user.id) && (ticket.assignedUser.id !== user.id) && !ticket.isReassigned;
+                return (ticket.assignPerformer.id === user.id) && (ticket.assignedUser && ticket.assignedUser.id !== user.id) && !ticket.isReassigned;
 
               case 'I_RE-ASSIGNED_TO_USER':
-                return (ticket.assignPerformer.id === user.id) && (ticket.assignedUser.id !== user.id) && ticket.isReassigned;
+                return (ticket.assignPerformer.id === user.id) && (ticket.assignedUser && ticket.assignedUser.id !== user.id) && ticket.isReassigned;
 
               case 'USER_CLAIMED':
-                return (ticket.assignPerformer.id !== user.id) && (ticket.assignedUser.id === ticket.assignPerformer.id);
+                return (ticket.assignPerformer.id !== user.id) && (ticket.assignedUser && ticket.assignedUser.id === ticket.assignPerformer.id);
 
               case 'USER_RE-ASSIGNED_USER':
-                return ticket.assignPerformer.id !== user.id && ticket.assignedUser.id !== user.id && otherAPerformerAndAUser && ticket.isReassigned;
+                return ticket.assignPerformer.id !== user.id && ticket.assignedUser && ticket.assignedUser.id !== user.id && otherAPerformerAndAUser && ticket.isReassigned;
 
               case 'USER_ASSIGNED_USER':
-                return ticket.assignPerformer.id !== user.id && ticket.assignedUser.id !== user.id && otherAPerformerAndAUser && !ticket.isReassigned;
+                return ticket.assignPerformer.id !== user.id && ticket.assignedUser && ticket.assignedUser.id !== user.id && otherAPerformerAndAUser && !ticket.isReassigned;
 
               case 'MY_TICKET':
-                return (ticket.assignPerformer.id === user.id) && (ticket.assignedUser.id === user.id);
+                return (ticket.assignPerformer.id === user.id) && (ticket.assignedUser && ticket.assignedUser.id === user.id) || (ticket.assignPerformer.id === user.id) && indexUser > -1;
             }
           }
         },
