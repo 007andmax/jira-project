@@ -52,6 +52,21 @@ export class PasswordManagerTableComponent implements OnInit {
     });
     this.watchDeleteRecord();
     this.onSort();
+ 
+  }
+
+  private onChangeRealtTime() {
+    this.passwordManagerService.onChangeRealTime.subscribe(newChange => {
+      if (newChange.action === 'PASSWORD_RECORD_CREATED') {
+        this.recordsData.push(newChange.data);
+      } else if(newChange.action === 'PASSWORD_RECORD_UPDATED') {
+        let index = this.recordsData.findIndex(item => item.id === newChange.data.id);
+        if (index > -1) this.recordsData[index] = newChange.data;
+      } else if(newChange.action === 'PASSWORD_RECORD_DELETED') {
+        let index = this.recordsData.findIndex(item => item.id === newChange.data.id);
+        if (index > -1) this.recordsData.splice(index,1);
+      }
+    })
   }
 
   private onSort() {
@@ -79,6 +94,7 @@ export class PasswordManagerTableComponent implements OnInit {
   public getRecords() {
     this.subGetRecords = this.apiPasswordManagerService.dataChange.subscribe((res) => {
        this.recordsData = res;
+       this.onChangeRealtTime();
        this.cd.detectChanges();
     });
   }

@@ -24,6 +24,7 @@ export class PasswordManagerService {
   public mobileCategory: EventEmitter<any> = new EventEmitter();
   public newRecordsisAdd: EventEmitter<any> = new EventEmitter();
   public onSort: EventEmitter<any> = new EventEmitter();
+  public onChangeRealTime: EventEmitter<any> = new EventEmitter();
 
   /**
    * Password manager service constructor
@@ -33,11 +34,15 @@ export class PasswordManagerService {
     private http: HttpClient
   ) { }
 
+  public handleRealTimeChanges(data) {
+    this.onChangeRealTime.emit(data)
+  }
+
   public getOnSort() {
     return this.onSort;
   }
 
-  public onInitSort (sort) {
+  public onInitSort(sort) {
     this.onSort.emit(sort)
   }
 
@@ -117,7 +122,7 @@ export class PasswordManagerService {
    */
   public editRecord(recordInfo, recordId) {
     const date = recordInfo.expiredDate;
-    return this.http.put(this.apiUrl + 'passwordRecords', Object.assign({id:recordId},this.getData(recordInfo)));
+    return this.http.put(this.apiUrl + 'passwordRecords', Object.assign({ id: recordId }, this.getData(recordInfo)));
   }
 
   /**
