@@ -103,7 +103,7 @@ export class PasswordManagerService {
    */
   public deleteRecordFromEditForm(recordId) {
     this.deleteItemEditForm.emit(recordId);
-    this.hideAddForm.emit();
+  //  this.hideAddForm.emit();
   }
 
   /**

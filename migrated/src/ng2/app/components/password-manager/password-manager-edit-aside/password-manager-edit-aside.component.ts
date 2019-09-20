@@ -594,7 +594,8 @@ export class PasswordManagerEditAsideComponent implements OnInit {
    */
   public deleteRecord(recordId) {
     this.passwordManagerService.deleteRecordFromEditForm(recordId);
-    this.hideAddForm();
+   // this.hideAddForm();
+   this._toggleSidebar();
   }
 
   /**
