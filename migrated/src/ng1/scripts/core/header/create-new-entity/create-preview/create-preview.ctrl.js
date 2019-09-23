@@ -10,12 +10,12 @@
         img.onload = function () {
          
           if (620 < this.width) {
-            document.body.querySelector('#preview-file').classList.add('big-preview-photo');
-            document.body.querySelector('#preview-file').classList.remove('small-preview-photo');
+            document.body.querySelector('.modal-dialog').classList.add('big-preview-photo');
+            document.body.querySelector('.modal-dialog').classList.remove('small-preview-photo');
          
           } else {
-            document.body.querySelector('#preview-file').classList.add('small-preview-photo');
-            document.body.querySelector('#preview-file').classList.remove('big-preview-photo');
+            document.body.querySelector('.modal-dialog').classList.add('small-preview-photo');
+            document.body.querySelector('.modal-dialog').classList.remove('big-preview-photo');
           }
         }
         img.src = '/file/' + $rootScope.fileId;
