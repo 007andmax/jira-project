@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable, Subject, merge, Subscription } from 'rxjs';
 import { ISubscription } from "rxjs/Subscription";
@@ -87,7 +87,8 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
     private userService: UsersService,
     private gadgetsService: GadgetsService,
     private permissionsService: PermissionsService,
-    private apiPasswordManagerService: ApiPasswordManagerService
+    private apiPasswordManagerService: ApiPasswordManagerService,
+    public cd: ChangeDetectorRef,
   ) { }
 
   /**
@@ -420,6 +421,7 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
   public showSelectWrapper($event) {
     this.showSelect = !this.showSelect;
     this.stopEvent($event);
+    this.cd.detectChanges();
   }
 
   /**
