@@ -8,4 +8,7 @@ export class FilterPasswordManager {
     constructor () {
         
     }
+    public resetDirection() {
+        this.direction = null;
+    }
 }

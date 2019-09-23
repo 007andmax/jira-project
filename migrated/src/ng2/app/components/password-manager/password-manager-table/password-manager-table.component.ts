@@ -28,7 +28,9 @@ export class PasswordManagerTableComponent implements OnInit {
   private subAddNewRecords: ISubscription;
   public recordsData: any = [];
   public list_records = [];
-  public filter: FilterPasswordManager = new FilterPasswordManager();
+  public sort: string = 'companyName';
+  public direction: string = null;
+ // public filter: FilterPasswordManager = new FilterPasswordManager();
 
 
   /**
@@ -56,14 +58,14 @@ export class PasswordManagerTableComponent implements OnInit {
     this.watchDeleteRecord();
     this.onSort();
 
-    this.filter.company = (this.selectedCompany) ? JSON.parse(JSON.stringify(this.selectedCompany)) : null;;
+ //   this.filter.company = (this.selectedCompany) ? JSON.parse(JSON.stringify(this.selectedCompany)) : null;;
     //    this.filter.user = this.selectedUserOrDevice;
     //   this.filter.dateFormat = this.selectedDate;
     //  this.filter.passwordCategory = JSON.parse(JSON.stringify(this.selectedCategory));
   }
   ngDoCheck() {
 
-    this.filter.company = (this.selectedCompany) ? JSON.parse(JSON.stringify(this.selectedCompany)) : null;
+   // this.filter.company = (this.selectedCompany) ? JSON.parse(JSON.stringify(this.selectedCompany)) : null;
    
     /*  this.filter.user = this.selectedUserOrDevice;
       this.filter.dateFormat = this.selectedDate;
@@ -110,8 +112,8 @@ export class PasswordManagerTableComponent implements OnInit {
   private onSort() {
     this.passwordManagerService.getOnSort().subscribe((data) => {
       console.log('data', data);
-      this.filter.sort = data.sort;
-      this.filter.direction = data.direction;
+      this.sort = data.sort;
+      this.direction = data.direction;
 
       //  this.cd.detectChanges();
     })
@@ -125,7 +127,7 @@ export class PasswordManagerTableComponent implements OnInit {
       console.log('category', category);
       this.selectedCategory = category;
 
-      this.filter.passwordCategory = JSON.parse(JSON.stringify(category));
+     // this.filter.passwordCategory = JSON.parse(JSON.stringify(category));
       this.cd.detectChanges();
     });
   }

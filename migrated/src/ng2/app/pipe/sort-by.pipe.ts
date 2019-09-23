@@ -6,10 +6,10 @@ import { FilterPasswordManager } from '../components/password-manager/class/filt
 })
 export class SortByPipe implements PipeTransform {
 
-  transform(args: any[], filter: FilterPasswordManager,selectedCompany , selectedUserOrDevice , selectedDate , selectedCategory): any {
-    console.log('filter',filter);
+  transform(args: any[], sort: string,direction: string): any {
+   
     if (!args) return args;
-    let new_args = args.filter(item => {
+    let new_args = args;/*.filter(item => {
       let find = true;
       if (selectedCompany && selectedCompany.companyId.length > 0) {
         if (item.companyId === selectedCompany.companyId) {
@@ -40,22 +40,22 @@ export class SortByPipe implements PipeTransform {
 
       return true;
 
-    });
+    });*/
 
-    console.log('new_args', new_args);
-    if (filter.direction) {
+    
+    if (direction) {
       let out_args = new_args.sort((a, b) => {
-        if (a[filter.sort] && b[filter.sort]) {
-          return ((a[filter.sort].toLowerCase() > b[filter.sort].toLowerCase()) ?
-            1 : ((b[filter.sort].toLowerCase() > a[filter.sort].toLowerCase()) ? -1 : 0));
-        } else if (a[filter.sort]) {
+        if (a[sort] && b[sort]) {
+          return ((a[sort].toLowerCase() > b[sort].toLowerCase()) ?
+            1 : ((b[sort].toLowerCase() > a[sort].toLowerCase()) ? -1 : 0));
+        } else if (a[sort]) {
           return 1
-        } else if (b[filter.sort]) {
+        } else if (b[sort]) {
           return -1
         }
         return 0;
       });
-      return (filter.direction === 'ASC') ? out_args : out_args.reverse();
+      return (direction === 'ASC') ? out_args : out_args.reverse();
     }
     return new_args;
   }
