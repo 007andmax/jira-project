@@ -54,6 +54,36 @@
   margin: 0;
 }
 
+.create-popup .modal-dialog.preview-photo {
+  width: 100vw;
+  left: 0 !important;
+  top: 0 !important;
+  height: 100vh;
+  transform: translate(0, 0) !important;
+}
+
+.create-popup .modal-dialog.preview-photo #preview-file {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.create-popup .modal-dialog.preview-photo #preview-file div:last-child {
+  position: relative;
+  height: calc(100vh - 94px);
+  background: rgba(0, 0, 0, .5);
+}
+
+.create-popup .modal-dialog.preview-photo #preview-file img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  max-height: calc(100vh - 94px);
+}
+
 .create-popup .modal-content {
   border-radius: 10px;
 }
@@ -1027,7 +1057,7 @@ _::-webkit-:not(:root:root),
 .company--header button,
 .product--header button,
 .recurring-tickets-content__modal button,
-.password-content__modal button{
+.password-content__modal button {
   border: none;
   outline: none;
   background-color: transparent;
@@ -1058,6 +1088,7 @@ _::-webkit-:not(:root:root),
 .product--content {
   margin: 0 -15px;
 }
+
 .preview-file-body img {
   width: 100%;
   display: block;
