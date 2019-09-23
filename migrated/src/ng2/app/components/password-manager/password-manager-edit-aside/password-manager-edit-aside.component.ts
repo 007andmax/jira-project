@@ -464,6 +464,9 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.subGetAllUsers = this.userService.getAllusers().subscribe((res: any) => {
       res = res.filter((item) => item.company.id == companyId && !item.deletedAt);
       this.usersList = [...(res.filter((item) => item.accountType === USER.TYPE.CLIENT))];
+     
+      this.usersList.sort((a, b) => (!a.firstName && !a.lastName || !b.firstName && !b.lastName) ? -1 : (a.firstName.toLowerCase() > b.firstName.toLowerCase()) ?
+      1 : ((b.firstName.toLowerCase() > a.firstName.toLowerCase()) ? -1 : 0));
       this.usersCheckbox = new Array(this.usersList.length);
       for (var i = 0; i < this.usersCheckbox.length; ++i) { this.usersCheckbox[i] = false; }
       if (this.isEditmode && this.editItem) {
