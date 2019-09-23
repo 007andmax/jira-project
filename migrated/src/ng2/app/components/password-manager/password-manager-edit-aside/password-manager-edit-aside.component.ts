@@ -447,6 +447,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.stopEvent($event);
     this.currentTab = item;
     this.showGadgetsForm = false;
+    this.cd.detectChanges();
   }
 
   public togglePassword() {
