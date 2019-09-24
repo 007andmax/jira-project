@@ -52,7 +52,7 @@
                 on-finish-render="buildPdf()">
               <div class="col-md-1 w-22" ng-if="hardwareSummaryWithDeviceItem">{{device.label || device.hostName}}</div>
               <div class="col-md-3" ng-if="hardwareSummaryWithOperationSystemItem">
-                {{device.report.system && (device.report.system.type + ' ' + device.report.system.version)}}
+                {{device.report.system && (device.report.system.caption + ' ' + device.report.system.release_id)}}
               </div>
               <div class="col-md-2" ng-if="hardwareSummaryWithCpuItem">{{device.report.processors && device.report.processors[0].name}}</div>
               <div class="col-md-1 w-6" ng-if="hardwareSummaryWithRamItem">{{device.report.ram && getRamSize(device.report.ram.slots)}}</div>
