@@ -12,6 +12,7 @@
           document.body.querySelector('.modal-dialog').classList.add('preview-photo');
           $scope.showModal = true;
           $("#privew-container").html($scope.img);
+          $scope.$apply();
           // if (620 < this.width) {
           //   document.body.querySelector('.modal-dialog').classList.add('big-preview-photo');
           //   document.body.querySelector('.modal-dialog').classList.remove('small-preview-photo');
