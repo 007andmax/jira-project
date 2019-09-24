@@ -325,7 +325,12 @@ export class QuotesComponent implements OnInit,OnDestroy {
         return this.quotesList.push(newChange.data);
       } else {
         const elemIndex = this.quotesList.findIndex((item) => item.id === newChange.data.id);
-        return this.quotesList[elemIndex] = newChange.data;
+        if (newChange.data.status !== 'ARCHIVED') {
+          return this.quotesList[elemIndex] = newChange.data;
+        } else {
+           this.quotesList.splice(elemIndex,1);
+        }
+       
       }
     })
   }
@@ -343,6 +348,10 @@ export class QuotesComponent implements OnInit,OnDestroy {
       modalRef.componentInstance.data = item;
     }
 
+  }
+
+  public trackById(index, item) {
+    return item.id;
   }
 
 }

@@ -64,15 +64,17 @@
       <div class="col-md-1 pointer df">Status</div>
     </div>
   </div>
+ 
   <div class="quotes__content"
        *ngIf="quotesList.length"
        infiniteScroll
        [infiniteScrollDistance]="2"
        [infiniteScrollThrottle]="50"
        [infiniteScrollDisabled]="infiniteScrollDisabled"
-       (scrolled)="onScroll()">
+       (scrolled)="onScroll()" >
+       <ng-template ngFor let-item [ngForOf]="quotesList" [ngForTrackBy]="trackById" >
     <div class="quotes__content--item row"
-         *ngFor="let item of quotesList">
+    >
       <div class="col-md-1 w-1-5">
         <label class="control checkbox">
           <input type="checkbox">
@@ -161,6 +163,8 @@
         </div>
       </div>
     </div>
+  </ng-template>
   </div>
+
   <div class="loading" *ngIf="showPreloader"></div>
 </div>
