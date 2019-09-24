@@ -1,12 +1,17 @@
-<div id="preview-file" class="service-form-wrapper edit-form-checkbox create-new preview-file"
-     ng-controller="quicktech.editPreviewCtrl" ng-show="showModal">
+
+
+<div id="preview-file"   ng-controller="quicktech.editPreviewCtrl">
+    <loading-indicator loading-trigger="!showModal"></loading-indicator>
+  <div class="service-form-wrapper edit-form-checkbox create-new preview-file"
+  ng-show="showModal">
   <div class="service--header">
     <h2>Preview</h2>
     <button class="close-modal" ng-click="closeWindowWithConfirm()"></button>
   </div>
-  <div>
-    <img ng-src="{{img_url}}" />
+ 
+  <div id="privew-container"  >
   </div>
+</div>
 </div>
 
 
