@@ -47,7 +47,6 @@ export class QuotesComponent implements OnInit,OnDestroy {
   /**
    * Creates an instance of the QuoteCreateContentComponent with the injected services
    * @param {QuoteService} quoteServices to work with api
-   * @param {CompaniesService} companiesService Service to work with companies api
    * @param {DateService} dateService Service to work with date
    * @param {ChangeDetectorRef} cdRef Service to work with change detecto
    * @param {QuoteStateService} quoteStateService to work quote state
@@ -56,7 +55,6 @@ export class QuotesComponent implements OnInit,OnDestroy {
    */
   constructor(
     private quoteServices: QuoteService,
-    private companiesService: CompaniesService,
     private dateService: DateService,
     private cdRef:ChangeDetectorRef,
     private quoteStateService: QuoteStateService,
@@ -70,7 +68,7 @@ export class QuotesComponent implements OnInit,OnDestroy {
    */
   ngOnInit() {
     this.getQuotes();
-    this.companiesService.getCompaniesList();
+  
     this.changeQuotesListItem();
     this.onInitCheackQuoteSent();
   }

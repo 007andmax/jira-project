@@ -7,6 +7,7 @@ import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
 import { FormGroup } from "@angular/forms";
 import { SelectClientCompanyStateService } from './services/select-client-company-state.service';
 import { RecurringTicketsStateService } from 'src/ng2/app/components/tickets/recurring-tickets/services/recurring-tickets-state.service';
+import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 
 /**
  *  Select client component
@@ -41,14 +42,22 @@ export class SelectClientCompanyComponent implements OnInit, OnDestroy {
    */
   constructor(
     private companiesService: CompaniesService,
-    private companiesState: SelectClientCompanyStateService,
+    private companiesSelectState: SelectClientCompanyStateService,
+    private companiesState:CompaniesStateService
   ) { }
 
   /**
    * Initializes select client. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-    this.getCLientsList();
+    if (this.companiesState.getCompanies().length > 0) {
+      this.getCLientsList(this.companiesState.getCompanies());
+    } else {
+      this.subGetCompaniesList =  this.companiesState.getOnCompanies().subscribe((data) => {
+        this.getCLientsList(data);
+      })
+    }
+   
     this.onInitClearState();
     this.onCheckEditItem();
 
@@ -59,7 +68,7 @@ export class SelectClientCompanyComponent implements OnInit, OnDestroy {
   * Subscribe for edit mode
   */
   private onCheckEditItem() {
-    let getCompanyFromEdit = this.companiesState.getCompanyFromEdit().subscribe((data) => {
+    let getCompanyFromEdit = this.companiesSelectState.getCompanyFromEdit().subscribe((data) => {
       this.editItem = data;
       let index: number = this.clientsList.findIndex(item => item.id === this.editItem.id);
       if (index > (-1)) {
@@ -74,16 +83,16 @@ export class SelectClientCompanyComponent implements OnInit, OnDestroy {
   * Subscribe for clear data
   */
   private onInitClearState() {
-    let getClearState = this.companiesState.getClearState().subscribe(() => this.clearClient());
+    let getClearState = this.companiesSelectState.getClearState().subscribe(() => this.clearClient());
     this.sub.add(getClearState);
   }
 
   /**
    * Get client list
    */
-  private getCLientsList() {
-    this.subGetCompaniesList = this.companiesService.clientsCompany.subscribe((res: any) => {
-      this.clientsList = res
+  private getCLientsList(data) {
+  
+      this.clientsList = data
         .sort((a, b) => a.name.localeCompare(b.name))
         .filter((item) => !item.deletedAt)
       this.getAllItems.emit(this.clientsList);
@@ -97,7 +106,7 @@ export class SelectClientCompanyComponent implements OnInit, OnDestroy {
           this.selectedClient = this.clientsList[index];
         }
       }
-    })
+    
   }
 
   /**
@@ -143,6 +152,7 @@ export class SelectClientCompanyComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.sub.unsubscribe();
+    this.subGetCompaniesList.unsubscribe();
   }
 
 }

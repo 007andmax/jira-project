@@ -8,7 +8,7 @@ export class CommonService {
     return value.replace(/[^0-9\.]/g, '')
 
   }
-  private staticCopy(inst) {
+/*  private staticCopy(inst) {
 
     var instCopy,
       copyProps = inst;
@@ -86,5 +86,5 @@ export class CommonService {
         configurable: true
       })
     }
-  }
+  }*/
 }

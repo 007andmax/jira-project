@@ -65,7 +65,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.showTicketRecurring();
     this.getItemListProducts();
-    this.recurringState.onInitClientList();
+     
 
   }
 

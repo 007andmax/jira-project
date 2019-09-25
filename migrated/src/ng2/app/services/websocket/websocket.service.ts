@@ -49,7 +49,7 @@ export class WebsocketService {
 
   private subsribeToUsers () {
     console.log('subsribeToUsers');
-    setTimeout(() => {
+   /* setTimeout(() => {
       this.stompClient.subscribe("/user/watch/user", (message) => {
         var newChange = JSON.parse(message.body);
         console.log('newChange',newChange);
@@ -119,7 +119,7 @@ export class WebsocketService {
         newChange.data.forEach(addOrUpdateClientUser);
       }
       });
-    }, 3000);
+    }, 3000);*/
   }
   /**
    * subscribe to quote permissions realtime

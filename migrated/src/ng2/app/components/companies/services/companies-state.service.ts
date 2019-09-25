@@ -8,9 +8,9 @@ export class CompaniesStateService {
   showAsideForAdd: EventEmitter<any> = new EventEmitter();
   onShowArchived:EventEmitter<any> = new EventEmitter();
    
-  constructor(private companiesService: CompaniesService) {
+  constructor() {
   
-    this.companiesService.getCompaniesList();
+   
   }
   
   public getOnShowArchived () {

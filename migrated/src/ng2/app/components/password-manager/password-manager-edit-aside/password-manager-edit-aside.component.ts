@@ -16,6 +16,7 @@ import { GadgetsService } from "../../../services/gadgets/gadgets.service";
 import { PermissionsService } from "../../../services/permissions/permissions.service";
 import { ApiPasswordManagerService } from "../../../services/password-manager/api-password-manager.service";
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
+import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 
 /**
  * Password manager edit aside component
@@ -89,7 +90,8 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     private gadgetsService: GadgetsService,
     private permissionsService: PermissionsService,
     private apiPasswordManagerService: ApiPasswordManagerService,
-    private usersStateService: UsersStateService
+    private usersStateService: UsersStateService,
+    private companiesState:CompaniesStateService
   ) { }
 
   /**
@@ -409,11 +411,17 @@ export class PasswordManagerEditAsideComponent implements OnInit {
    * get client list
    */
   public getCLientsList() {
-    this.subGetCompaniesList = this.companiesService.clientsCompany.subscribe((res: any) => {
-      this.clientsList = res
+    if (this.companiesState.getCompanies().length > 0) {
+      this.clientsList = this.companiesState.getCompanies()
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .filter((item) => !item.deletedAt)
+    } else {
+      this.subGetCompaniesList =  this.companiesState.getOnCompanies().subscribe((data) => {
+        this.clientsList = data
         .sort((a, b) => a.name.localeCompare(b.name))
         .filter((item) => !item.deletedAt)
-    })
+      })
+    }
   }
 
   /**

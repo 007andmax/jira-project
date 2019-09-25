@@ -36,13 +36,7 @@ export class RecurringTicketsStateService {
   public getTehCompany() {
     return this.tehCompany;
   }
-
-  /**
-* Get company list
-*/
-  public onInitClientList() {
-    this.companiesService.getCompaniesList();
-  }
+ 
 
   /**
 * Set company

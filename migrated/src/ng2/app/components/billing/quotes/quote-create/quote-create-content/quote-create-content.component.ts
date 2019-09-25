@@ -29,14 +29,14 @@ export class QuoteCreateContentComponent implements OnInit {
 
   /**
    * Creates an instance of the QuoteCreateContentComponent with the injected services
-   * @param {CompaniesService} companiesService Service to work with api
+   
    * @param {FormBuilder} fb Service to work with forms
    * @param {DateService} dateService Service to work with date
    * @param {QuoteService} quoteService to work with api
    * @param {QuoteStateService} quoteStateService to work quote state
    */
   constructor(
-    private companiesService: CompaniesService,
+    
     private fb: FormBuilder,
     private dateService: DateService,
     private quoteService: QuoteService,
@@ -47,7 +47,7 @@ export class QuoteCreateContentComponent implements OnInit {
    * Initializes quotes content. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-    this.companiesService.getCompaniesList();
+    
     if (this.editMode) {
       this.onInitEditMode();
     } else {

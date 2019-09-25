@@ -32,9 +32,9 @@ export class CompaniesService {
    * Get all companies list
    */
   public getCompaniesList() {
-    return this.http.get(this.apiUrl + 'company/clients').subscribe((response)=> {
+    return this.http.get(this.apiUrl + 'company/clients');/*.subscribe((response)=> {
       this.clientsCompany.next(response);
-    })
+    })*/
   }
 
   /**

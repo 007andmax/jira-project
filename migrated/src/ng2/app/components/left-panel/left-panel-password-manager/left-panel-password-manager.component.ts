@@ -11,6 +11,7 @@ import { ApiPasswordManagerService } from "../../../services/password-manager/ap
 import { GadgetsService } from "../../../services/gadgets/gadgets.service";
 import { ISubscription } from "rxjs-compat/Subscription";
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
+import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 
 /**
  * Left panel password manager component
@@ -62,7 +63,8 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     private apiPasswordManagerService: ApiPasswordManagerService,
     private gadgetsService: GadgetsService,
     private cdRef:ChangeDetectorRef,
-    private usersStateService: UsersStateService
+    private usersStateService: UsersStateService,
+    private companiesState:CompaniesStateService
   ) {
     this.getCompaniesList();
   }
@@ -82,14 +84,21 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
    */
   public getCompaniesList() {
     this.ngOnInit();
-     return this.subscription = this.companiesService.clientsCompany
-       .subscribe((company) => {
-         if (!this.cdRef['destroyed']) {
-           this.cdRef.detectChanges();
-         }
-         this.companiesList = this.getCompaniesNames(company);
-       }
-     );
+    if (this.companiesState.getCompanies().length > 0) {
+      if (!this.cdRef['destroyed']) {
+        this.cdRef.detectChanges();
+      }
+      this.companiesList = this.getCompaniesNames(this.companiesState.getCompanies());
+    } else {
+      this.subscriptions.add(this.companiesState.getOnCompanies().subscribe((data) => {
+        if (!this.cdRef['destroyed']) {
+          this.cdRef.detectChanges();
+        }
+        this.companiesList = this.getCompaniesNames(data);
+      }))
+      
+    }
+   
   }
 
   /**

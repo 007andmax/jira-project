@@ -5,6 +5,7 @@ import { FormGroup } from '@angular/forms';
 import { ISubscription } from 'rxjs/Subscription';
 import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
 import { QuoteResult } from '../class/quote-result';
+import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,7 @@ export class QuoteStateService {
   public selectedNoteFull: any;
   public usersEmail: any;
   public quoteForCreate: any = this.getDefaultquoteForCreate();
-  public subGetCompaniesList: ISubscription;
+ // public subGetCompaniesList: ISubscription;
   public quoteForm: FormGroup;
   public clientsList:any;
   private quoteResult: QuoteResult;
@@ -40,9 +41,10 @@ export class QuoteStateService {
     @Inject('$state') $state: any,
     private dateService: DateService,
     private companiesService: CompaniesService,
+    private companiesState:CompaniesStateService
   ) {
     this.state = $state;
-    this.onInitCLientsList();
+   this.onInitCLientsList();
   }
 
   /**
@@ -77,11 +79,17 @@ export class QuoteStateService {
    * Initializes subscribe on clients 
    */
   private onInitCLientsList() {
-    this.subGetCompaniesList = this.companiesService.clientsCompany.subscribe((res: any) => {
-      this.clientsList = res
+    if (this.companiesState.getCompanies().length > 0) {
+      this.clientsList = this.companiesState.getCompanies()
         .sort((a, b) => a.name.localeCompare(b.name))
         .filter((item) => !item.deletedAt)
-    })
+    } else {
+      this.companiesState.getOnCompanies().subscribe((data) => {
+        this.clientsList = data
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .filter((item) => !item.deletedAt)
+      })
+    }
   }
 
   /**

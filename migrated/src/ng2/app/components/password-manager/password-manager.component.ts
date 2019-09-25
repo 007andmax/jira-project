@@ -44,7 +44,7 @@ export class PasswordManagerComponent implements OnInit {
     private permissionsService: PermissionsService,
     private userState:UsersStateService
   ) {
-    this.companiesService.getCompaniesList();
+  
   }
 
   /**
