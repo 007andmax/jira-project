@@ -7,7 +7,9 @@
 
       var ACTIONS = {
         'CLAIM_TICKET': function (ticket) {
-          return isTicketOpen(ticket) && !ticket.assignedUser;
+
+          if (!ticket.multiAssignedUsers) return false;
+          return isTicketOpen(ticket) && !ticket.assignedUser && ticket.multiAssignedUsers.length === 0;
         },
         'CHANGE_STATUS': isUpdateAllowed,
         'CHANGE_PRIORITY': isTicketOpen,
@@ -68,14 +70,14 @@
           if (!ticket.assignedUser && ticket.multiAssignedUsers && ticket.multiAssignedUsers.length == 0) {
             return false
           }
-        
-         
+
+
 
           if (ticket && ticket.assignPerformer && ticket.assignPerformer.id && ticket.assignedUser && ticket.assignedUser.id || ticket && ticket.assignPerformer && ticket.assignPerformer.id && ticket.multiAssignedUsers.length > 0) {
 
             var user = $rootScope.currentUser,
               otherAPerformerAndAUser = ticket.assignedUser && ticket.assignPerformer.id !== ticket.assignedUser.id;
-              var indexUser = ticket.multiAssignedUsers.findIndex(user_s => user_s.id === user.id);
+            var indexUser = ticket.multiAssignedUsers.findIndex(user_s => user_s.id === user.id);
             switch (type) {
               case 'ASSIGNED_TO_ME':
                 return (ticket.assignPerformer.id !== user.id) && (ticket.assignedUser && ticket.assignedUser.id === user.id) && !ticket.isReassigned;
@@ -137,20 +139,23 @@
       }
 
       function isUpdateAllowed(ticket) {
-        if ($rootScope.currentUser && $rootScope.currentUser.isOwner && ticket.assignedUser && ticket.assignedUser.id && isTicketOpen(ticket)) {
+        if ($rootScope.currentUser && $rootScope.currentUser.isOwner && ticket.assignedUser && ticket.assignedUser.id && isTicketOpen(ticket) || $rootScope.currentUser && $rootScope.currentUser.isOwner && ticket.multiAssignedUsers && ticket.multiAssignedUsers.length > 0 && isTicketOpen(ticket)) {
           return true;
         }
 
-        if (PermissionsService.isAllowed('EDIT_ANOTHER_USERS_TICKET') && ticket.assignedUser && ticket.assignedUser.id && isTicketOpen(ticket)) {
+        if (PermissionsService.isAllowed('EDIT_ANOTHER_USERS_TICKET') && ticket.assignedUser && ticket.assignedUser.id && isTicketOpen(ticket) || PermissionsService.isAllowed('EDIT_ANOTHER_USERS_TICKET') && ticket.multiAssignedUsers && ticket.multiAssignedUsers.length > 0 && isTicketOpen(ticket)) {
 
           // console.log('ACTION IS ALLOWEDDDD')
           return true;
         }
-
+        let indexUser = -1;
+        if ($rootScope.currentUser && ticket.multiAssignedUsers && ticket.multiAssignedUsers.length) {
+          indexUser = ticket.multiAssignedUsers.findIndex(item => itemid == $rootScope.currentUser.id);
+        }
         return isTicketOpen(ticket) &&
           (($rootScope.currentUser && (ticket.assignedUser && ticket.assignedUser.id === $rootScope.currentUser.id)) ||
-          (ticket.assignedUser && ticket.assignedUser.id === $rootScope.currentUser.id) ||
-          isSharedToCurrentUser(ticket));
+            (ticket.assignedUser && ticket.assignedUser.id === $rootScope.currentUser.id) || indexUser > -1 ||
+            isSharedToCurrentUser(ticket));
       }
 
       function editTicketUpdate(ticket, updateCreator) {
@@ -168,8 +173,8 @@
 
       function isSharedToCurrentUser(ticket) {
         return ticket.shares && ticket.shares.some(function (share) {
-            return share.user && share.user.id === $rootScope.currentUser.id;
-          });
+          return share.user && share.user.id === $rootScope.currentUser.id;
+        });
       }
 
       return {

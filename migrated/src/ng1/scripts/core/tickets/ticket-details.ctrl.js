@@ -1315,6 +1315,7 @@ console.log('find');
             }
             var processedShares = [];
             $scope.ticketSharedUsersList = getDefaultSharedList();
+            console.log('$scope.ticketSharedUsersList',JSON.parse(JSON.stringify($scope.ticketSharedUsersList)));
             for (var i = 0; i < shares.length; i++) {
               var share = shares[i],
                 sharedUser = share.user,
