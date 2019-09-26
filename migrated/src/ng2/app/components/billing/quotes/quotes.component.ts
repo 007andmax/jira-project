@@ -228,7 +228,7 @@ export class QuotesComponent implements OnInit,OnDestroy {
    * add status class for quotes
    */
   public getClass(className) {
-    return className === 'EXPIRED' || className === 'REFUSED' ? 'error-status' :
+    return className === 'EXPIRED' || className === 'CANCELED' ? 'error-status' :
       className === 'READ' ? 'status-in-progress' :
         className === 'SAVED' ? 'changing-status' :
           className === 'UNREAD' ? 'status-warning' :
@@ -284,10 +284,10 @@ export class QuotesComponent implements OnInit,OnDestroy {
   }
 
   /**
-   * refuse quote
+   * cancel quote
    */
-  refuseQuote(item) {
-    this.quoteServices.refuseQuote(item.company, item.id).subscribe((res) => {
+  cancelQuote(item) {
+    this.quoteServices.cancelQuote(item.company, item.id).subscribe((res) => {
       console.log(res, 'RES');
     });
   }

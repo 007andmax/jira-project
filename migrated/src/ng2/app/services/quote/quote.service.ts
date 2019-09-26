@@ -301,13 +301,13 @@ export class QuoteService {
   }
 
   /**
-   * Refuse quote
+   * cancel quote
    * @param company - company info
    * @param quote_id - quote id
    */
-  public refuseQuote(company, quote_id) {
+  public cancelQuote(company, quote_id) {
     return this.http.post(this.apiUrl +
-      `saleQuotes/refuseQuote?companyId=${company.id}`, [quote_id]
+      `saleQuotes/cancelQuote?companyId=${company.id}`, [quote_id]
     ).pipe(
       tap(data => data),
       catchError(this.handleError));
