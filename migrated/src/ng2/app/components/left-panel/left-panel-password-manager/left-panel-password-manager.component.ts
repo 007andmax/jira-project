@@ -12,6 +12,7 @@ import { GadgetsService } from "../../../services/gadgets/gadgets.service";
 import { ISubscription } from "rxjs-compat/Subscription";
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
+import { DevicesSateService } from 'src/ng2/app/states/devices/devices-sate.service';
 
 /**
  * Left panel password manager component
@@ -64,15 +65,17 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     private gadgetsService: GadgetsService,
     private cdRef:ChangeDetectorRef,
     private usersStateService: UsersStateService,
-    private companiesState:CompaniesStateService
+    private companiesState:CompaniesStateService,
+    private devicesSateService:DevicesSateService
   ) {
-    this.getCompaniesList();
+    
   }
 
   /**
    * Initializes left panel password manager. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
+    this.getCompaniesList();
     this.getPasswordRecords();
     this.addNewRecord();
     this.deleteRecord();
@@ -83,7 +86,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
    * Get companies list
    */
   public getCompaniesList() {
-    this.ngOnInit();
+   
     if (this.companiesState.getCompanies().length > 0) {
       if (!this.cdRef['destroyed']) {
         this.cdRef.detectChanges();
@@ -110,7 +113,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.passwordManagerService.setSelectedDeviceOrUser({});
     this.filterPasswordRecords(item.item);
     if (item.item.companyId) {
-      this.getCompanyDevices(item.item.companyId);
+      this.getCompanyDevices();
       this.getAllUsers(item.item.companyId);
       this.getGadgets(item.item.companyId);
     }
@@ -123,7 +126,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.selectedCompany = item.item;
     this.passwordManagerService.setSelectedDeviceOrUser({});
     if (item.item.companyId) {
-      this.getCompanyDevices(item.item.companyId);
+      this.getCompanyDevices();
       this.getAllUsers(item.item.companyId);
       this.getGadgets(item.item.companyId);
     }
@@ -197,12 +200,12 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
    * Get device from company
    * @param companyId - id of company
    */
-  public getCompanyDevices(companyId) {
-    this.devicesService.getCompanyDevices(companyId).subscribe((res) => {
-      if (res[this.selectedCompany.companyId]) {
-        return this.devicesAndUsersList = [...this.devicesAndUsersList, ...res[this.selectedCompany.companyId]];
+  public getCompanyDevices() {
+    
+      if (this.devicesSateService.getAllDevices()[this.selectedCompany.companyId]) {
+        return this.devicesAndUsersList = [...this.devicesAndUsersList, ...this.devicesSateService.getAllDevices()[this.selectedCompany.companyId]];
       }
-    })
+    
   }
 
   /**
@@ -320,6 +323,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
    * @param list
    */
   private getCompaniesNames(list) {
+    
     const filteredArray = [];
     list.map((item) => {
       filteredArray.push({
