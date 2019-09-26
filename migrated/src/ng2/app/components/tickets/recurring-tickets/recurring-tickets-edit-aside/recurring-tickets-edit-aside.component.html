@@ -32,7 +32,7 @@
           <p>Device Name</p>
           <app-devices-recurring-tickets style="width: 75%;" class="light-dropdown"
                                          [editItem]="(ticketForEdit) ? ticketForEdit.agent : null"
-                                         [companyId]="(selectedClient) ? selectedClient.id : ''"
+                                         [companyId]="(selectedClient) ? selectedClient.id : null"
                                          (selectedItem)="selectDevice($event)">
           </app-devices-recurring-tickets>
         </div>

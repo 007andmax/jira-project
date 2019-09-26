@@ -4,7 +4,6 @@ import { ISubscription } from "rxjs/Subscription";
 import { debounceTime, distinctUntilChanged, filter, map } from "rxjs/operators";
 import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
 import { FormGroup } from "@angular/forms";
-import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
 import { HOURS, MINUTES } from 'src/ng2/app/const/duration';
 import { Duration } from './class/duration';
 import { DurationStateService } from './services/duration-state.service';
