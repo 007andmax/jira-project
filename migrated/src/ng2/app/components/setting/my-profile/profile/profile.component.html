@@ -1,0 +1,136 @@
+<div class="cmn-area profile">
+  <div class="dp-area">
+    <span class="dp" *ngIf="imageSrc">
+      <img [src]="imageSrc" alt="user" />
+    </span>
+    <div class="dp-info">
+      <input type="file" id="profile-dp" (change)="onSelectFile(template,$event)" style="display: none;" />
+      <label for="profile-dp" class="static-link">Change Photo</label>
+      <span>Photos help your teammates recognize you in Quicktech</span>
+    </div>
+  </div>
+  <div *ngIf="isCroppedImg">
+    <image-cropper [imageBase64]="imageBase64" [imageChangedEvent]="imageChangedEvent"
+      [maintainAspectRatio]="false" [aspectRatio]="4 / 3" [resizeToWidth]="128" format="png"
+      (imageCropped)="imageCropped($event)"
+      ></image-cropper>
+
+    <img [src]="croppedImage?.base64" />
+    <button type="button" class="close pull-right" (click)="cropIt()">Crop</button>
+  </div>
+  <label for="profile-dp" class="static-link" (click)="deleteAvatar()">
+    <a href="javascript:void(0)" restore-default-button="">Remove Photo</a>
+  </label> <br />
+  <input type="file" (change)="onFileChange($event)" accept="image/*" #fileSelector style="display: none" />
+  <label for="profile-dp" class="static-link" (click)="rePositionAvatar()">
+    <a href="javascript:void(0)" restore-default-button="">Reposition Photo</a>
+  </label>
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <div class="f-row">
+      <div class="f-col col-50">
+        <!-- <label>Your Full name</label>  -->
+
+        <label *ngIf="!submitted || !f.userName.errors">Your Full name</label>
+        <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+          <div *ngIf="f.userName.errors.required">Full Name is required</div>
+          <div *ngIf="f.userName.errors.minlength"> Full name is too short.
+          </div>
+          <div *ngIf="f.userName.errors.maxlength"> Full name is too large.
+          </div>
+        </div>
+        <div class="form-row">
+          <input type="text" class="form-input" placeholder="Enter Your Full name" formControlName="userName" />
+        </div>
+      </div>
+      <div class="f-col col-50">
+        <label *ngIf="(!submitted || !f.primaryEmail.errors) && !uniqueEmail">Email Address</label>
+        <div *ngIf="submitted && f.primaryEmail.errors" class="invalid-feedback">
+          <div *ngIf="f.primaryEmail.errors.required">Email is required</div>
+          <div *ngIf="f.primaryEmail.errors.email">Email must be a valid email address</div>
+        </div>
+        <label *ngIf="uniqueEmail" class="invalid-feedback">This email already occupied.</label>
+        <div class="form-row">
+          <input type="email" class="form-input" placeholder="Enter Your Email Address" (blur)="isEmailUnique()"
+            formControlName="primaryEmail" />
+        </div>
+      </div>
+      <div class="f-col col-50">
+        <label>Role</label>
+        <div *ngIf="submitted && f.designation.errors" class="invalid-feedback">
+          <div *ngIf="f.designation.errors.minlength"> Role is too short.
+          </div>
+          <div *ngIf="f.designation.errors.maxlength"> Role is too large.
+          </div>
+        </div>
+        <div class="form-row">
+          <input type="text" class="form-input" placeholder="Enter Your Role" formControlName="designation" />
+        </div>
+      </div>
+      <div class="f-col col-50">
+        <label (click)="onAddPhone()"> Primary Phone Number <a *ngIf="!isAddPhone" href="javascript:;"
+            class="static-link">+ Add Phone</a></label>
+        <div class="form-row primary-phone">
+          <input type="text" class="form-input" placeholder="Primary Phone Number"
+            formControlName="primaryPhone" />
+          <select class="cmn-select form-input" formControlName="primaryPhoneType">
+            <option value="MOBILE">mobile</option>
+            <option value="OFFICE">office</option>
+            <option value="FAX">fax</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="f-col col-50" *ngIf="isAddPhone">
+        <label>
+          Secondary Phone Number
+          <a href="javascript:;" class="static-link" (click)="onAddPhone()">Remove</a>
+          <!-- <div *ngIf="submitted && f.secondaryPhone.errors" class="invalid-feedback">
+                        <div *ngIf="f.secondary.errors.required">
+                          Primary Phone Number is required
+                        </div>
+                      </div> -->
+        </label>
+
+        <div class="form-row primary-phone">
+          <input type="text" class="form-input" formControlName="secondaryPhone"
+            placeholder="Secondary Phone Number" formControlName="secondaryPhone" />
+          <select class="cmn-select form-input" formControlName="secondaryPhoneType">
+            <option value="MOBILE">mobile</option>
+            <option value="OFFICE">office</option>
+            <option value="FAX">fax</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="mail-row">
+        <div class="f-col col-20">
+          <label>Suite Number</label>
+          <div class="form-row">
+            <input type="text" placeholder="Enter Suite Number" class="form-input"
+              formControlName="suiteNumber" />
+          </div>
+        </div>
+        <div class="f-col col-60">
+          <label>Mailing Address</label>
+          <div class="form-row">
+            <input type="text" placeholder="Enter Mailing Address" class="form-input"
+              formControlName="mailingAddress" />
+          </div>
+        </div>
+        <div class="f-col col-20">
+          <label>Zip</label>
+          <div class="form-row">
+            <input type="text" placeholder="Enter Zip Code" class="form-input" formControlName="postalCode" />
+          </div>
+        </div>
+      </div>
+      <div class="f-col col-100">
+        <label>About Me</label>
+        <div class="form-row">
+          <textarea placeholder="Write About Your Self" class="form-input" formControlName="aboutMe"></textarea>
+        </div>
+      </div>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Save Changes" />
+  </form>
+</div>

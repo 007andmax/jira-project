@@ -1,0 +1,170 @@
+/*** All css files include ***/
+
+@import '../../../../assets/scss/variable';
+@import '../../../../assets/scss/mixin';
+@import '../../../../assets/scss/custom';
+
+
+.page-container{
+    &.manage-tech{
+        width: 936px;
+        .cmn-area{
+            padding-top: 0;
+        }
+    }
+}
+.mteh-data{
+    table {
+        th,td{
+            -ms-box-sizing: border-box;
+            -o-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        .tech-user{
+            width: 227px;
+        }
+        .email{
+            width: 228px;
+            a {
+                color: #4f5f79;
+            }
+            span{
+                font-size: 12px;
+                font-weight: normal;
+                line-height: 1.33;
+                letter-spacing: normal;
+                color: #9ca5b6;
+                display: block;
+            }
+        }
+        .e-note{width: 205px;position: relative;}
+        .action{
+            width: 190px;
+        }
+    }
+}
+
+
+.t-user {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .user-dp {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: visible;
+        position: relative;
+        &::after{
+            width: 10px;
+            height: 10px;
+            border: solid 2px #ffffff;
+            background-color: transparent;
+            content: "";
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            @include border-radius(50%);
+        }
+        &.online{
+            &::after{
+                background-color: #2ec866;
+            }
+
+        }
+        &.away{
+            &::after{
+                background-color: #ffb937;
+            }
+
+        }
+        &.offline{
+            &::after{
+                background-color: #9ca5b6;
+            }
+        }
+    }
+}
+
+
+
+.t-info {
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: middle;
+    h5 {
+        margin-bottom: 0;
+        line-height: initial;
+    }
+    span {
+        font-size: 11px;
+        line-height: 1.45;
+        letter-spacing: normal;
+        color: #9ca5b6;
+    }
+}
+
+    .eml-ntl-list {
+        position: absolute;
+        width: 400px;
+        @include border-radius(4px);
+        -ms-box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
+        -o-box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
+        -webkit-box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
+        -moz-box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+        z-index: 1;
+        left: 0;
+        top: auto;
+        padding: 24px;
+        @include transition(0.4s);
+        overflow-y: hidden;
+        display: none;
+        &.opened{
+            display: block;
+        }
+        .email-note-wrape {
+            ul {
+                margin-bottom: 0;
+                li {
+                    margin-bottom: 15px;
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+
+                }
+            }
+        }
+        h5{
+            margin-bottom: 15px;
+            color:#4f5f79;
+
+        }
+    }
+.email-note-wrape {
+    float: left;
+    width: 100%;
+}
+.email-dropdown {
+    border-radius: 3px;
+    border: solid 1px #edf2f6;
+    background: url('/assets/images/filter-dropdown.svg') no-repeat right 7px center #f8f9fa;
+    background-size: 14px auto;
+    width: auto;
+    max-width: 200px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 9px 25px 9px 10px;
+    font-size: 12px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    color: #4f5f79 !important;
+    display: inline-block;
+    overflow: hidden;
+}

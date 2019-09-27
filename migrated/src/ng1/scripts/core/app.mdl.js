@@ -141,6 +141,62 @@
                                                                 url: '/ng2/quotes',
                                                                 template: '<quotes-component></quotes-component>'
                                                               }))
+                    .state('setting', waitForServices({
+                                                                url: '/ng2/setting',
+                                                                template: '<setting-component></setting-component>'
+                      }))
+                    .state('myprofile-component', waitForServices({
+                                                              url: '/ng2/setting/myprofile',
+                                                              template: '<myprofile-component></myprofile-component>'
+                    }))
+                    .state('manage-tags-component', waitForServices({
+                                                             url: '/ng2/setting/tags',
+                                                              template: '<manage-tags-component></manage-tags-component>'
+                     }))
+                    .state('company-profile-component', waitForServices({
+                                                                url: '/ng2/setting/companyprofile',
+                                                                 template: '<company-profile-component></company-profile-component>'
+                    }))
+                    .state('tech-component', waitForServices({
+                                                                 url: '/ng2/setting/techUsers',
+                                                                template: '<tech-component></tech-component>'
+                    }))
+                    .state('email-setting-component', waitForServices({
+                                                                url: '/ng2/setting/emailSetting',
+                                                                template: '<email-setting-component></email-setting-component>'
+                    }))
+                    .state('taxes-component', waitForServices({
+                      url: '/ng2/setting/taxes',
+                      template: '<taxes-component></taxes-component>'
+                    }))
+                    .state('permission-manage-component', waitForServices({
+                      url: '/ng2/setting/permission',
+                      template: '<permission-manage-component></permission-manage-component>'
+                    }))
+                    .state('email-templete-component', waitForServices({
+                      url: '/ng2/setting/emailTemplete',
+                      template: '<email-templete-component></email-templete-component>'
+                    }))
+                    .state('integrations-component', waitForServices({
+                      url: '/ng2/setting/integration',
+                      template: '<integrations-component></integrations-component>'
+                    }))
+                    .state('invoice-ticket-component', waitForServices({
+                      url: '/ng2/setting/invoiceTickets',
+                      template: '<invoice-ticket-component></invoice-ticket-component>'
+                    }))
+                    .state('commission-component', waitForServices({
+                      url: '/ng2/setting/commission',
+                      template: '<commission-component></commission-component>'
+                    }))
+                    .state('setting-commission-component', waitForServices({
+                      url: '/ng2/setting/commission',
+                      template: '<commission-component></commission-component>'
+                    }))
+                    .state('subscription-component', waitForServices({
+                      url: '/ng2/setting/subscription',
+                      template: '<subscription-component></subscription-component>'
+                    }))
                    .state('accounting', waitForServices({
                                                           url: '/accounting',
                                                           template: '<div ui-view></div>',

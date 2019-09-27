@@ -1,0 +1,27 @@
+/*** All css files include ***/
+@import '../../../../assets/scss/fonts';
+@import '../../../../assets/scss/variable';
+@import '../../../../assets/scss/mixin';
+@import '../../../../assets/scss/custom';
+
+
+    .action{
+        position: relative;
+        .modal-content.toggle-area{
+            right: 16px;
+            top:42px;
+        }
+        .m-btn-col{
+            .btn{
+                margin-left: 0;
+                &.btn-primary{
+                    margin-right: 12px;
+                }
+                &.btn.btn-secondary {
+                    min-width: 108px;
+                }
+            }
+        }
+        
+
+    }

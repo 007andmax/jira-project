@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 // @ts-ignore
 import { UpgradeModule, downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SelectModule } from 'ng2-select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSelectModule } from 'ngx-select-ex';
@@ -22,7 +22,7 @@ import { PasswordRecordsTypesComponent } from './components/left-panel/left-pane
 import { PasswordManagerTableComponent } from './components/password-manager/password-manager-table/password-manager-table.component';
 import { PasswoordManagerHeaderComponent } from './components/password-manager/passwoord-manager-header/passwoord-manager-header.component';
 
-import { ApiPasswordManagerService } from "./services/password-manager/api-password-manager.service";
+import { ApiPasswordManagerService } from './services/password-manager/api-password-manager.service';
 
 import { UserPipe } from './pipe/user.pipe';
 import { DateFormatPipe } from './pipe/date-format.pipe';
@@ -31,31 +31,72 @@ import { PasswordManagerEditAsideComponent } from './components/password-manager
 import { DeviceUserPipe } from './pipe/device-user.pipe';
 import { PasswordCategoryPipe } from './pipe/password-category.pipe';
 import { QuotesComponent } from './components/billing/quotes/quotes.component';
+import { MyProfileComponent } from './components/setting/my-profile/my-profile.component';
+import { SettingComponent } from './components/setting/setting.component';
+import { ManageTagsComponent } from './components/setting/manage-tags/manage-tags.component';
+import { CompanyProfileComponent } from './components/setting/company-profile/company-profile.component';
 
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { LeftPanelSettingComponent } from './components/left-panel/left-panel-setting/left-panel-setting.component';
+
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { ModalModule } from 'ngx-bootstrap';
+import { TechUsersComponent } from './components/setting/tech-users/tech-users.component';
+import { EmailSettingComponent } from './components/setting/email-setting/email-setting.component';
+import { TaxesComponent } from './components/setting/taxes/taxes.component';
+import { PermissionManageComponent } from './components/setting/permission-manage/permission-manage.component';
+import { EmailTempleteComponent } from './components/setting/email-templete/email-templete.component';
+import { IntegrationsComponent } from './components/setting/integrations/integrations.component';
+import { InvoiceTicketsComponent } from './components/setting/invoice-tickets/invoice-tickets.component';
+import { CommissionComponent } from './components/setting/commission/commission.component';
+import { SubscriptionComponent } from './components/setting/subscription/subscription.component';
+
+import { DataTablesModule } from 'angular-datatables';
+import { AccountComponent } from './components/setting/my-profile/account/account.component';
+import { EmailNotificationsComponent } from './components/setting/my-profile/email-notifications/email-notifications.component';
+import { ActivityHistoryComponent } from './components/setting/my-profile/activity-history/activity-history.component';
+
+import { AgmCoreModule } from '@agm/core';
+import { ProfileComponent } from './components/setting/my-profile/profile/profile.component';
+import { TagPipe } from './pipe/tag.pipe';
 
 declare var angular: any;
 
 export class CustomHandlingStrategy implements UrlHandlingStrategy {
   shouldProcessUrl(url) {
-    return url.toString().startsWith("/ng2") || url.toString() == "/"
+    return url.toString().startsWith('/ng2') || url.toString() == '/';
   }
 
-  extract(url) { return url }
-  merge(url, whole) { return url }
+  extract(url) {
+    return url;
+  }
+  merge(url, whole) {
+    return url;
+  }
 }
 
-angular.module('quicktech')
+angular
+  .module('quicktech')
+  .directive('passwordManager', downgradeComponent({ component: PasswordManagerComponent }))
+  .directive('leftPanelComponent', downgradeComponent({ component: LeftPanelComponent }))
+  .directive('quotesComponent', downgradeComponent({ component: QuotesComponent }))
+  .directive('settingComponent', downgradeComponent({ component: SettingComponent }))
+  .directive('myprofileComponent', downgradeComponent({ component: MyProfileComponent }))
+  .directive('manageTagsComponent', downgradeComponent({ component: ManageTagsComponent }))
+  .directive('companyProfileComponent', downgradeComponent({ component: CompanyProfileComponent }))
+  .directive('techComponent', downgradeComponent({ component: TechUsersComponent }))
+  .directive('emailSettingComponent', downgradeComponent({ component: EmailSettingComponent }))
+  .directive('taxesComponent', downgradeComponent({ component: TaxesComponent }))
   .directive(
-    'passwordManager',
-    downgradeComponent({component: PasswordManagerComponent})  )
-  .directive(
-  'leftPanelComponent',
-  downgradeComponent({component: LeftPanelComponent}))
-  .directive(
-    'quotesComponent',
-    downgradeComponent({component: QuotesComponent}))
+    'permissionManageComponent',
+    downgradeComponent({ component: PermissionManageComponent }),
+  )
+  .directive('emailTempleteComponent', downgradeComponent({ component: EmailTempleteComponent }))
+  .directive('integrationsComponent', downgradeComponent({ component: IntegrationsComponent }))
+  .directive('invoiceTicketComponent', downgradeComponent({ component: InvoiceTicketsComponent }))
+  .directive('commissionComponent', downgradeComponent({ component: CommissionComponent }))
+  .directive('subscriptionComponent', downgradeComponent({ component: SubscriptionComponent }))
   .factory('ngZone', downgradeInjectable(NgZone));
-
 
 @NgModule({
   declarations: [
@@ -73,7 +114,26 @@ angular.module('quicktech')
     PasswordManagerEditAsideComponent,
     DeviceUserPipe,
     PasswordCategoryPipe,
-    QuotesComponent
+    QuotesComponent,
+    MyProfileComponent,
+    SettingComponent,
+    CompanyProfileComponent,
+    LeftPanelSettingComponent,
+    ManageTagsComponent,
+    TechUsersComponent,
+    EmailSettingComponent,
+    TaxesComponent,
+    PermissionManageComponent,
+    EmailTempleteComponent,
+    IntegrationsComponent,
+    InvoiceTicketsComponent,
+    CommissionComponent,
+    SubscriptionComponent,
+    AccountComponent,
+    EmailNotificationsComponent,
+    ActivityHistoryComponent,
+    ProfileComponent,
+    TagPipe,
   ],
   imports: [
     BrowserModule,
@@ -85,34 +145,20 @@ angular.module('quicktech')
     NgbModule,
     ClickOutsideModule,
     ShowHidePasswordModule,
+    AppRoutingModule,
     NgxSelectModule,
-    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
+    ImageCropperModule,
+    DataTablesModule,
+    ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
+    TabsModule.forRoot(),
     SidebarModule.forRoot(),
-    RouterModule.forRoot([
-        {
-          path: '',
-          component: AppComponent,
-          pathMatch: 'full'
-        },
-        {
-          path: 'ng2/password-manager',
-          component: PasswordManagerComponent,
-          pathMatch: 'full'
-        },
-        {
-          path: 'ng2/quotes',
-          component: QuotesComponent,
-          pathMatch: 'full'
-        }
-      ],
-      {
-        useHash: true,
-        enableTracing: false
-      })
+    ModalModule.forRoot(),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAbP4DFpz4f9YcXMWUjdkOdyArX2peNt8s'
+    })
+    
   ],
-  entryComponents: [
-    LeftPanelComponent
-  ],
+  entryComponents: [LeftPanelComponent],
   providers: [
     { provide: UrlHandlingStrategy, useClass: CustomHandlingStrategy },
     // {
@@ -120,8 +166,8 @@ angular.module('quicktech')
     //   useClass: ApiInterceptor,
     //   multi: true
     // },
-    ApiPasswordManagerService
+    ApiPasswordManagerService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

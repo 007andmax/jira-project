@@ -1,0 +1,40 @@
+<!-- map area -->
+<div class="map-area">
+  <agm-map [latitude]="selectedDevice.latitude" [longitude]="selectedDevice.longitude" [fullscreenControl]='true'
+    [mapTypeControl]='true' [title]="(selectedDevice.city ? selectedDevice.city + ', ' : '') + selectedDevice.country ">
+    <agm-marker [latitude]="selectedDevice.latitude" [longitude]="selectedDevice.longitude"></agm-marker>
+  </agm-map>
+  <!-- <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14680.19568247228!2d72.5559743!3d23.09530495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x53a01f27a9ccc8c5%3A0x88350b6b08718301!2sCalgary%20Trail%20NW%2C%20Edmonton%2C%20AB%2C%20Canada!5e0!3m2!1sen!2sin!4v1566740627587!5m2!1sen!2sin"
+      frameborder="0" style="border:0;" allowfullscreen="">
+    </iframe> -->
+
+</div>
+<div class="cmn-area hs-area">
+  <div class="data-table-wrap history-data">
+    <table class="display dataTable" style="width:100%">
+      <thead>
+        <tr>
+          <th class="ac-detail">Access Detail</th>
+          <th class="last-seen">Last Seen</th>
+          <th class="action">&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let device of activityHistory" (click)="selectDevice(device)"
+          class="{'selected': selectedDevice.id === device.id}">
+
+          <td class="ac-detail">{{device.browserName}}, {{device.osName}} ({{device.city ? device.city + ',' : ''}}
+            {{device.country}} {{device.ipAddress}})</td>
+          <td class="last-seen">{{device.current ? 'now' : (device.lastAccessDate | date) }}</td>
+          <td class="action">
+            <a href="javascript:;" class="block" data-tooltip="Block"><img src="/ng2/assets/img/block.svg"
+                alt="block" /></a>
+            <a href="javascript:;" class="remove" data-tooltip="Remove" (click)="closeSession(device)"><img
+                src="/ng2/assets/img/remove.svg" alt="Remove" /></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

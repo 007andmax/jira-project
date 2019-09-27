@@ -1,0 +1,360 @@
+<!-- Middle Wrapper  -->
+<div class="page-container">
+  <div class="page-insider manage-tags">
+    <div class="heading">
+      <h1>Manage Tags</h1>
+      <div class="heading-serach">
+        <form method="GET">
+          <input type="search" class="form-input" [(ngModel)]="searchTag" name='searchTag' placeholder="Search Tags…" />
+        </form>
+        <a href="javascript:;" class="btn-outline" (click)="create = !create"
+          >Create Tag</a
+        >
+        <!-- Modal create Tags -->
+        <div class="modal-content toggle-area" [class.opened]="create">
+          <div class="toggle-header">
+            <h2 class="h1">Create Tag</h2>
+          </div>
+          <div class="modal-body">
+            <form method="POST">
+              <div class="f-row">
+                <div class="f-col col-100">
+                  <label>Tag Name</label>
+                  <div class="form-row">
+                    <input
+                      type="text"
+                      class="form-input"
+                      placeholder="Enter Tag Name"
+                    />
+                  </div>
+                </div>
+                <div class="f-col col-100">
+                  <label>Category</label>
+                  <div class="form-row">
+                    <select class="cmn-select form-input">
+                      <option>Select Category</option>
+                      <option>Category1</option>
+                      <option>Category2</option>
+                      <option>Category3</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="m-btn-row">
+                  <div class="m-btn-col">
+                    <input
+                      type="submit"
+                      value="Save"
+                      class="btn btn-primary"
+                      disabled
+                    />
+                    <a
+                      href="javascript:;"
+                      class="btn btn-secondary"
+                      aria-label="Close"
+                      (click)="create = !create"
+                      >Cancel</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <tabset (click)="setTab()">
+      <!-- Companies -->
+      <tab heading="Companies" id="tab1" >
+        <div class="cmn-area" >
+          <div class="data-table-wrap" >
+            <table #dataTable class="display dataTable" style="width:100%" >
+              <thead>
+                <tr>
+                  <th class="c-tag"><span>Custom Tags</span></th>
+                  <th class="count"><span>Count</span></th>
+                  <th class="action">&nbsp;</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let company of companyTags | tag:searchTag">
+                  <td>{{company.word | titlecase}}</td>
+                  <td>{{company.usedCounter}}</td>
+                  <td class="action">
+                    <a
+                      href="javascript:;"
+                      data-tooltip="Edit"
+                      class="edit"
+                      (click)="edit = !edit"
+                      ><img src="/ng2/assets/img/edit.svg" alt="Edit"
+                    /></a>
+                    <a href="javascript:;" data-tooltip="Remove" class="remove"
+                      ><img src="/ng2/assets/img/remove.svg" alt="Remove"
+                    /></a>
+                    <!-- Edit create Tags -->
+                    <div
+                      class="modal-content toggle-area"
+                      [class.opened]="edit"
+                    >
+                      <div class="toggle-header">
+                        <h2 class="h1">Edit Tag</h2>
+                      </div>
+                      <div class="modal-body">
+                        <form method="POST">
+                          <div class="f-row">
+                            <div class="f-col col-100">
+                              <label>Tag Name</label>
+                              <div class="form-row">
+                                <input
+                                  type="text"
+                                  class="form-input"
+                                  value="Breakfix"
+                                  placeholder="Enter Tag Name"
+                                />
+                              </div>
+                            </div>
+                            <div class="f-col col-100">
+                              <label>Category</label>
+                              <div class="form-row">
+                                <select class="cmn-select form-input">
+                                  <option>Select Category</option>
+                                  <option selected>Companies</option>
+                                  <option>Category1</option>
+                                  <option>Category2</option>
+                                  <option>Category3</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="m-btn-row">
+                              <div class="m-btn-col">
+                                <input
+                                  type="submit"
+                                  value="Save"
+                                  class="btn btn-primary"
+                                />
+                                <a
+                                  href="javascript:;"
+                                  class="btn btn-secondary"
+                                  aria-label="Close"
+                                  (click)="edit = !edit"
+                                  >Cancel</a
+                                >
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </tab>
+      <!-- Tickets -->
+      <tab heading="Tickets" >
+        <div class="cmn-area">
+          <div class="data-table-wrap">
+            <table #dataTable class="display dataTable" style="width:100%">
+              <thead>
+                <tr>
+                  <th class="c-tag"><span>Custom Tags</span></th>
+                  <th class="count"><span>Count</span></th>
+                  <th class="action">&nbsp;</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let ticket of ticketTags | tag:searchTag">
+                  <td>{{ ticket.word | titlecase }}</td>
+                  <td>{{ ticket.usedCounter }}</td>
+                  <td class="action">
+                    <a href="javascript:;" class="edit" data-tooltip="Edit"
+                      ><img src="/ng2/assets/img/edit.svg" alt="Edit"
+                    /></a>
+                    <a href="javascript:;" data-tooltip="Remove" class="remove"
+                      ><img src="/ng2/assets/img/remove.svg" alt="Remove"
+                    /></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </tab>
+      <!-- Devices  -->
+      <tab heading="Devices" >
+        <div class="cmn-area">
+          <div class="data-table-wrap">
+            <table #dataTable class="display dataTable" style="width:100%">
+              <thead>
+                <tr>
+                  <th class="c-tag"><span>Custom Tags</span></th>
+                  <th class="count"><span>Count</span></th>
+                  <th class="action">&nbsp;</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Breakfix</td>
+                  <td>1560</td>
+                  <td class="action">
+                    <a href="javascript:;" class="edit" data-tooltip="Edit"
+                      ><img src="/ng2/assets/img/edit.svg" alt="Edit"
+                    /></a>
+                    <a href="javascript:;" data-tooltip="Remove" class="remove"
+                      ><img src="/ng2/assets/img/remove.svg" alt="Remove"
+                    /></a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Dentix</td>
+                  <td>99</td>
+                  <td class="action">
+                    <a href="javascript:;" class="edit" data-tooltip="Edit"
+                      ><img src="/ng2/assets/img/edit.svg" alt="Edit"
+                    /></a>
+                    <a href="javascript:;" data-tooltip="Remove" class="remove"
+                      ><img src="/ng2/assets/img/remove.svg" alt="Remove"
+                    /></a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Management</td>
+                  <td>9</td>
+                  <td class="action">
+                    <a href="javascript:;" class="edit" data-tooltip="Edit"
+                      ><img src="/ng2/assets/img/edit.svg" alt="Edit"
+                    /></a>
+                    <a href="javascript:;" data-tooltip="Remove" class="remove"
+                      ><img src="/ng2/assets/img/remove.svg" alt="Remove"
+                    /></a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Chirosuite</td>
+                  <td>13</td>
+                  <td class="action">
+                    <a href="javascript:;" class="edit" data-tooltip="Edit"
+                      ><img src="/ng2/assets/img/edit.svg" alt="Edit"
+                    /></a>
+                    <a href="javascript:;" data-tooltip="Remove" class="remove"
+                      ><img src="/ng2/assets/img/remove.svg" alt="Remove"
+                    /></a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Dentix</td>
+                  <td>15</td>
+                  <td class="action">
+                    <a href="javascript:;" class="edit" data-tooltip="Edit"
+                      ><img src="/ng2/assets/img/edit.svg" alt="Edit"
+                    /></a>
+                    <a href="javascript:;" data-tooltip="Remove" class="remove"
+                      ><img src="/ng2/assets/img/remove.svg" alt="Remove"
+                    /></a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Breakfix</td>
+                  <td>349</td>
+                  <td class="action">
+                    <a href="javascript:;" class="edit" data-tooltip="Edit"
+                      ><img src="/ng2/assets/img/edit.svg" alt="Edit"
+                    /></a>
+                    <a href="javascript:;" data-tooltip="Remove" class="remove"
+                      ><img src="/ng2/assets/img/remove.svg" alt="Remove"
+                    /></a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Management</td>
+                  <td>89</td>
+                  <td class="action">
+                    <a href="javascript:;" class="edit" data-tooltip="Edit"
+                      ><img src="/ng2/assets/img/edit.svg" alt="Edit"
+                    /></a>
+                    <a href="javascript:;" data-tooltip="Remove" class="remove"
+                      ><img src="/ng2/assets/img/remove.svg" alt="Remove"
+                    /></a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Chirosuite</td>
+                  <td>163</td>
+                  <td class="action">
+                    <a href="javascript:;" class="edit" data-tooltip="Edit"
+                      ><img src="/ng2/assets/img/edit.svg" alt="Edit"
+                    /></a>
+                    <a href="javascript:;" data-tooltip="Remove" class="remove"
+                      ><img src="/ng2/assets/img/remove.svg" alt="Remove"
+                    /></a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Dentix</td>
+                  <td>705</td>
+                  <td class="action">
+                    <a href="javascript:;" class="edit" data-tooltip="Edit"
+                      ><img src="/ng2/assets/img/edit.svg" alt="Edit"
+                    /></a>
+                    <a href="javascript:;" data-tooltip="Remove" class="remove"
+                      ><img src="/ng2/assets/img/remove.svg" alt="Remove"
+                    /></a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Breakfix</td>
+                  <td>349</td>
+                  <td class="action">
+                    <a href="javascript:;" class="edit" data-tooltip="Edit"
+                      ><img src="/ng2/assets/img/edit.svg" alt="Edit"
+                    /></a>
+                    <a href="javascript:;" data-tooltip="Remove" class="remove"
+                      ><img src="/ng2/assets/img/remove.svg" alt="Remove"
+                    /></a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Management</td>
+                  <td>335</td>
+                  <td class="action">
+                    <a href="javascript:;" class="edit" data-tooltip="Edit"
+                      ><img src="/ng2/assets/img/edit.svg" alt="Edit"
+                    /></a>
+                    <a href="javascript:;" data-tooltip="Remove" class="remove"
+                      ><img src="/ng2/assets/img/remove.svg" alt="Remove"
+                    /></a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Server</td>
+                  <td>642</td>
+                  <td class="action">
+                    <a href="javascript:;" class="edit" data-tooltip="Edit"
+                      ><img src="/ng2/assets/img/edit.svg" alt="Edit"
+                    /></a>
+                    <a href="javascript:;" data-tooltip="Remove" class="remove"
+                      ><img src="/ng2/assets/img/remove.svg" alt="Remove"
+                    /></a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Chirosuite</td>
+                  <td>547</td>
+                  <td class="action">
+                    <a href="javascript:;" class="edit" data-tooltip="Edit"
+                      ><img src="/ng2/assets/img/edit.svg" alt="Edit"
+                    /></a>
+                    <a href="javascript:;" data-tooltip="Remove" class="remove"
+                      ><img src="/ng2/assets/img/remove.svg" alt="Remove"
+                    /></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </tab>
+    </tabset>
+  </div>
+</div>

@@ -1,0 +1,79 @@
+<!-- Middle Wrapper  -->
+<div class="page-container integration">
+  <div class="page-insider">
+    <div class="heading">
+      <h1>Integrations</h1>
+    </div>
+    <div class="cmn-area int-area">
+        <div class="insructions">
+            <span class="switch">
+                <input type="checkbox" id="switch" (change)="show = !show" ng-model="show" />
+                <label for="switch"></label>
+            </span>
+            <div class="right-info">
+                <h5>Turn On credit card payments</h5>
+                <p>Enable your customers to pay using a variety of Online and Offline Payment modes.</p>
+            </div>
+        </div>
+        <!-- first open -->
+         <div class="int-list" *ngIf="!show">
+           <ul class="list-unstyled">
+              <li>Invoices and reports automatically updated</li>
+              <li>No setup fees, no monthly fees, no hidden fees</li>
+              <li>Get set up in seconds</li>
+              <li>Simple pricing: 2.9% + 30¢</li>
+           </ul>
+           <div class="we-accept">
+             <h6>We are accepting</h6>
+             <div class="logos">
+                <a href="javascript:;"><img src="/ng2/assets/img/visa-light.svg" alt="visa"/></a>
+                <a href="javascript:;"><img src="/ng2/assets/img/visa-light.svg" alt="visa"/></a>
+                <a href="javascript:;"><img src="/ng2/assets/img/master-card-light.svg" alt="master card"/></a>
+                <a href="javascript:;"><img src="/ng2/assets/img/american-express-light.svg" alt="American express"/></a>
+             </div>
+           </div>
+         </div>
+         <!-- second close -->
+         <div class="payments-int" *ngIf="show">
+              <div class="head-area">
+                  <h4>Payments Integrations</h4>
+                  <p>you can Integrate with various payment method mentioned below</p>
+              </div>
+              <form method="post">
+                <div class="f-row">
+                  <div class="logo-area"><img src="/ng2/assets/img/paypal.svg" alt="paypal"/></div>
+                   <div class="f-col col-50">
+                     <label>Paypal Client ID</label>
+                     <div class="form-row">
+                        <input type="text" class="form-input" placeholder="Enter Paypal Client ID" />
+                     </div>
+                   </div>
+                   <div class="f-col col-50">
+                      <label>Paypal Secret ID</label>
+                      <div class="form-row">
+                         <input type="text" class="form-input" placeholder="Enter Paypal Secret ID" />
+                      </div>
+                    </div>
+                    <div class="logo-area"><img src="/ng2/assets/img/stripe.svg" alt="stripe"/></div>
+                    <div class="f-col col-50">
+                        <label>Stripe Public Key</label>
+                        <div class="form-row">
+                           <input type="text" class="form-input" placeholder="Enter Stripe Public Key" />
+                        </div>
+                      </div>
+                      <div class="f-col col-50">
+                         <label>Stripe Secret Key</label>
+                         <div class="form-row">
+                            <input type="text" class="form-input" placeholder="Enter Stripe Secret Key" />
+                         </div>
+                       </div>
+                       <div class="f-col col-100 btn-row">
+                         <input type="submit" class="btn btn-primary" value="Save Changes" />
+                       </div>
+                </div>
+              </form>
+         </div>
+    </div>
+  </div>
+</div>
+

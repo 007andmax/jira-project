@@ -1,0 +1,303 @@
+<!-- Middle Wrapper  -->
+<div class="page-container">
+  <div class="page-insider manage-taxes">
+    <div class="heading">
+      <h1>Taxes</h1>
+      <div class="heading-serach">
+        <a href="javascript:;" class="btn-outline" (click)="create = !create">Add Tax</a>
+        <!-- Modal create Tags -->
+        <div class="modal-content toggle-area" [class.opened]="create">
+          <div class="toggle-header">
+            <h2 class="h1">Add Tax</h2>
+          </div>
+          <div class="modal-body">
+            <form method="POST">
+              <div class="f-row">
+                <div class="f-col col-100">
+                  <label>Tax Name</label>
+                  <div class="form-row">
+                    <input type="text" class="form-input" placeholder="Enter Tax Name" />
+                  </div>
+                </div>
+                <div class="f-col col-100">
+                  <label>Tax Rate (%)</label>
+                  <div class="form-row">
+                    <input type="text" class="form-input" placeholder="Set Tax Rate" />
+                  </div>
+                </div>
+                <div class="f-col col-100 check-area">
+                  <span class="cmn-checkbox">
+                    <input type="checkbox" id="set-as" />
+                    <label for="set-as">Set as Default</label>
+                  </span>
+                </div>
+                <div class="m-btn-row">
+                  <div class="m-btn-col">
+                    <input type="submit" value="Save" class="btn btn-primary" disabled />
+                    <a
+                      href="javascript:;"
+                      class="btn btn-secondary"
+                      aria-label="Close"
+                      (click)="create = !create"
+                      >Cancel</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cmn-area">
+      <div class="data-table-wrap">
+        <table class="display dataTable" style="width:100%">
+          <thead>
+            <tr>
+              <th class="tax-name">Tax Name</th>
+              <th class="rate">Rate (%)</th>
+              <th class="default">Set as Default</th>
+              <th class="action">&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="tax-name">GMI</td>
+              <td class="rate">5%</td>
+              <td class="default">
+                <span class="cmn-checkbox">
+                  <input type="checkbox" id="gmi" />
+                  <label for="gmi"></label>
+                </span>
+              </td>
+              <td class="action">
+                <a href="javascript:;" data-tooltip="Edit" class="edit"
+                  ><img src="/ng2/assets/img/edit.svg" alt="Edit"
+                /></a>
+                <a href="javascript:;" data-tooltip="Remove" class="remove"
+                  ><img src="/ng2/assets/img/remove.svg" alt="Remove"
+                /></a>
+              </td>
+            </tr>
+            <tr>
+              <td class="tax-name">GST</td>
+              <td class="rate">10%</td>
+              <td class="default">
+                <span class="cmn-checkbox">
+                  <input type="checkbox" id="GST" />
+                  <label for="GST"></label>
+                </span>
+              </td>
+              <td class="action">
+                <a href="javascript:;" data-tooltip="Edit" class="edit"
+                  ><img src="/ng2/assets/img/edit.svg" alt="Edit"
+                /></a>
+                <a href="javascript:;" data-tooltip="Remove" class="remove"
+                  ><img src="/ng2/assets/img/remove.svg" alt="Remove"
+                /></a>
+              </td>
+            </tr>
+            <tr>
+              <td class="tax-name">Other</td>
+              <td class="rate">10%</td>
+              <td class="default">
+                <span class="cmn-checkbox">
+                  <input type="checkbox" id="Other" />
+                  <label for="Other"></label>
+                </span>
+              </td>
+              <td class="action">
+                <a href="javascript:;" data-tooltip="Edit" class="edit"
+                  ><img src="/ng2/assets/img/edit.svg" alt="Edit"
+                /></a>
+                <a href="javascript:;" data-tooltip="Remove" class="remove"
+                  ><img src="/ng2/assets/img/remove.svg" alt="Remove"
+                /></a>
+              </td>
+            </tr>
+            <tr>
+              <td class="tax-name">Payroll tax</td>
+              <td class="rate">5%</td>
+              <td class="default">
+                <span class="cmn-checkbox">
+                  <input type="checkbox" id="Payroll" />
+                  <label for="Payroll"></label>
+                </span>
+              </td>
+              <td class="action">
+                <a href="javascript:;" data-tooltip="Edit" class="edit"
+                  ><img src="/ng2/assets/img/edit.svg" alt="Edit"
+                /></a>
+                <a href="javascript:;" data-tooltip="Remove" class="remove"
+                  ><img src="/ng2/assets/img/remove.svg" alt="Remove"
+                /></a>
+              </td>
+            </tr>
+            <tr>
+              <td class="tax-name">Consumption tax</td>
+              <td class="rate">5%</td>
+              <td class="default">
+                <span class="cmn-checkbox">
+                  <input type="checkbox" id="Consumptio" />
+                  <label for="Consumptio"></label>
+                </span>
+              </td>
+              <td class="action">
+                <a href="javascript:;" data-tooltip="Edit" class="edit"
+                  ><img src="/ng2/assets/img/edit.svg" alt="Edit"
+                /></a>
+                <a href="javascript:;" data-tooltip="Remove" class="remove"
+                  ><img src="/ng2/assets/img/remove.svg" alt="Remove"
+                /></a>
+              </td>
+            </tr>
+            <tr>
+              <td class="tax-name">Tariff</td>
+              <td class="rate">10%</td>
+              <td class="default">
+                <span class="cmn-checkbox">
+                  <input type="checkbox" id="Tariff" />
+                  <label for="Tariff"></label>
+                </span>
+              </td>
+              <td class="action">
+                <a href="javascript:;" data-tooltip="Edit" class="edit"
+                  ><img src="/ng2/assets/img/edit.svg" alt="Edit"
+                /></a>
+                <a href="javascript:;" data-tooltip="Remove" class="remove"
+                  ><img src="/ng2/assets/img/remove.svg" alt="Remove"
+                /></a>
+              </td>
+            </tr>
+            <tr>
+              <td class="tax-name">Fees and tolls</td>
+              <td class="rate">10%</td>
+              <td class="default">
+                <span class="cmn-checkbox">
+                  <input type="checkbox" id="Fees" />
+                  <label for="Fees"></label>
+                </span>
+              </td>
+              <td class="action">
+                <a href="javascript:;" data-tooltip="Edit" class="edit"
+                  ><img src="/ng2/assets/img/edit.svg" alt="Edit"
+                /></a>
+                <a href="javascript:;" data-tooltip="Remove" class="remove"
+                  ><img src="/ng2/assets/img/remove.svg" alt="Remove"
+                /></a>
+              </td>
+            </tr>
+            <tr>
+              <td class="tax-name">Effective taxes</td>
+              <td class="rate">10%</td>
+              <td class="default">
+                <span class="cmn-checkbox">
+                  <input type="checkbox" id="Effective" />
+                  <label for="Effective"></label>
+                </span>
+              </td>
+              <td class="action">
+                <a href="javascript:;" data-tooltip="Edit" class="edit"
+                  ><img src="/ng2/assets/img/edit.svg" alt="Edit"
+                /></a>
+                <a href="javascript:;" data-tooltip="Remove" class="remove"
+                  ><img src="/ng2/assets/img/remove.svg" alt="Remove"
+                /></a>
+              </td>
+            </tr>
+            <tr>
+              <td class="tax-name">Other taxes</td>
+              <td class="rate">10%</td>
+              <td class="default">
+                <span class="cmn-checkbox">
+                  <input type="checkbox" id="Othe" />
+                  <label for="Othe"></label>
+                </span>
+              </td>
+              <td class="action">
+                <a href="javascript:;" data-tooltip="Edit" class="edit"
+                  ><img src="/ng2/assets/img/edit.svg" alt="Edit"
+                /></a>
+                <a href="javascript:;" data-tooltip="Remove" class="remove"
+                  ><img src="/ng2/assets/img/remove.svg" alt="Remove"
+                /></a>
+              </td>
+            </tr>
+            <tr>
+              <td class="tax-name">Capital gains tax</td>
+              <td class="rate">10%</td>
+              <td class="default">
+                <span class="cmn-checkbox">
+                  <input type="checkbox" id="gains" />
+                  <label for="gains"></label>
+                </span>
+              </td>
+              <td class="action">
+                <a href="javascript:;" data-tooltip="Edit" class="edit"
+                  ><img src="/ng2/assets/img/edit.svg" alt="Edit"
+                /></a>
+                <a href="javascript:;" data-tooltip="Remove" class="remove"
+                  ><img src="/ng2/assets/img/remove.svg" alt="Remove"
+                /></a>
+              </td>
+            </tr>
+            <tr>
+              <td class="tax-name">Flat tax</td>
+              <td class="rate">10%</td>
+              <td class="default">
+                <span class="cmn-checkbox">
+                  <input type="checkbox" id="Flat-tax" />
+                  <label for="Flat-tax"></label>
+                </span>
+              </td>
+              <td class="action">
+                <a href="javascript:;" data-tooltip="Edit" class="edit"
+                  ><img src="/ng2/assets/img/edit.svg" alt="Edit"
+                /></a>
+                <a href="javascript:;" data-tooltip="Remove" class="remove"
+                  ><img src="/ng2/assets/img/remove.svg" alt="Remove"
+                /></a>
+              </td>
+            </tr>
+            <tr>
+              <td class="tax-name">Inheritance tax</td>
+              <td class="rate">10%</td>
+              <td class="default">
+                <span class="cmn-checkbox">
+                  <input type="checkbox" id="Inheritance-tax" />
+                  <label for="Inheritance-tax"></label>
+                </span>
+              </td>
+              <td class="action">
+                <a href="javascript:;" data-tooltip="Edit" class="edit"
+                  ><img src="/ng2/assets/img/edit.svg" alt="Edit"
+                /></a>
+                <a href="javascript:;" data-tooltip="Remove" class="remove"
+                  ><img src="/ng2/assets/img/remove.svg" alt="Remove"
+                /></a>
+              </td>
+            </tr>
+            <tr>
+              <td class="tax-name">Corporate tax</td>
+              <td class="rate">10%</td>
+              <td class="default">
+                <span class="cmn-checkbox">
+                  <input type="checkbox" id="Corporate-tax" />
+                  <label for="Corporate-tax"></label>
+                </span>
+              </td>
+              <td class="action">
+                <a href="javascript:;" data-tooltip="Edit" class="edit"
+                  ><img src="/ng2/assets/img/edit.svg" alt="Edit"
+                /></a>
+                <a href="javascript:;" data-tooltip="Remove" class="remove"
+                  ><img src="/ng2/assets/img/remove.svg" alt="Remove"
+                /></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

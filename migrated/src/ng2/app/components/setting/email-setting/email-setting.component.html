@@ -1,0 +1,106 @@
+<!-- Middle Wrapper  -->
+<div class="page-container">
+  <div class="page-insider email-insider">
+    <div class="heading">
+      <h1>Email Settings</h1>
+    </div>
+    <tabset>
+      <!-- Profile -->
+        <tab heading="Incoming Email" id="tab1">
+          <div class="cmn-area incming-email">
+             <p>Incoming emails sent to your default address will automaticly create a new ticket. If you have a support email already setup with your existing domain then you should forward it to the email address below</p>
+             <form method="POST">
+                <div class="f-row">
+                    <div class="f-col">
+                        <label>Email Domain</label>
+                        <div class="form-row">
+                            <input class="form-input" type="text" value="nicholsontech123@inbox.quicktech.com" disabled />
+                        </div>
+                    </div>
+                </div>
+                <div class="f-row">
+                  <div class="f-col">
+                      <span class="cmn-checkbox">
+                        <input type="checkbox" checked id="incomming-email" />
+                        <label for="incomming-email">When disabled, it creates drafts from email, you could <br> proceed drafts to tickets.</label>
+                      </span>
+                  </div>
+                </div>
+                <div class="f-row">
+                   <div class="f-col">
+                    <input type="button" class="btn btn-primary" value="Save Changes" />
+                   </div>
+                </div>
+
+             </form>
+          </div>
+        </tab>
+        <!-- Account  -->
+        <tab heading="Outgoing Email">
+              <div class="cmn-area outgoing-email">
+                <p>You can specify a custom outgoing email service if you prefer to use your own, or you can use our quicktech email servers. If you select customer mails servers this is only for outgoing, you still need to forward your email to the above incoming email address.</p>
+                <form method="POST" action="">
+                  <div class="f-row">
+                      <div class="f-col col-50">
+                          <label>Alias Name</label>
+                          <div class="form-row">
+                             <input type="text" class="form-input" placeholder="Enter Alias Name" value="Active Helpdesk"/>
+                          </div>
+                      </div>
+                      <div class="f-col col-50">
+                          <label>Outgoing mail server</label>
+                          <div class="form-row">
+                            <select class="cmn-select form-input">
+                              <option>Select Server</option>
+                              <option>Outgoing mail server</option>
+                              <option>Outgoing mail server</option>
+                            </select>
+                          </div>
+                      </div>
+                      <div class="f-col col-50">
+                          <label>Domain</label>
+                          <div class="form-row">
+                             <input type="text" class="form-input" placeholder="Enter Domain" value="smtp.gmail.com" disabled/>
+                          </div>
+                      </div>
+                      <div class="f-col col-25">
+                        <label>Port</label>
+                        <div class="form-row">
+                           <input type="text" class="form-input" placeholder="Enter Port" value="587" disabled/>
+                        </div>
+                      </div>
+                      <div class="f-col col-25">
+                        <label>Encryption</label>
+                        <div class="form-row">
+                          <select class="cmn-select form-input" disabled>
+                            <option>TLS</option>
+                            <option>TLS 1</option>
+                            <option>TLS 2</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="f-col col-50">
+                        <label>Login</label>
+                        <div class="form-row">
+                           <input type="text" class="form-input" placeholder="Enter Login Details" value="qt.testmail.com" disabled/>
+                        </div>
+                      </div>
+                      <div class="f-col col-50">
+                        <label>Password</label>
+                        <div class="form-row password">
+                           <input type="password" class="form-input" placeholder="Enter password" value="…………." disabled/>
+                           <a href="javascript:;" class="password-co"><img src="/ng2/assets/img/password-show.svg" alt="password"></a>
+                        </div>
+                      </div>
+                      <div class="f-col col-100 test-server">
+                          <a href="javascript:;" class="btn-outline">Test Server</a>
+                      </div>
+
+                  </div>
+                  <input type="submit" class="btn btn-primary" value="Save Changes" />
+              </form>
+               </div>
+        </tab>
+      </tabset>
+  </div>
+</div>
