@@ -10,7 +10,7 @@
           $scope.areTicketsTerminated = false;
           $scope.areTickets = false;
           $scope.showAddUser = false;
-          $scope.selectedAssignUsers = [];
+         
           $scope.checkForOpenDropdown = checkForOpenDropdown;
 
 
@@ -100,8 +100,11 @@
             $scope.selectedAssignUsers.splice(index,1);
           }
           $scope.selecAssigntUser = function (user) {
-            var index = $scope.selectedAssignUsers.findIndex(item => item.id === user.id);
-            if (index === -1) $scope.selectedAssignUsers.push(user);
+            var index = $scope.selectedAssignUsers.findIndex(item => item.user.id === user.user.id);
+            if (index === -1)  {
+            
+              $scope.selectedAssignUsers.push(user);
+            }
           }
 
           AgreementsService.getAllServiceAgreements($scope, function (data) {

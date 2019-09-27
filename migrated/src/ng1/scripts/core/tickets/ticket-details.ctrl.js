@@ -34,6 +34,7 @@
           $scope.minute = Math.floor(today.getMinutes() / 5) * 5;
           $scope.isLoaded = false;
           $scope.editType = '';
+          $scope.selectedAssignUsers = [];
           var updateService = false;
           var updateProduct = false;
           $timeout(function() {
@@ -1169,12 +1170,12 @@ console.log('find');
               return typeof el.user === 'object';
             });
           }, true);
-          let  ticketSharedUsersListLengthWatch = $scope.$watch('ticketSharedUsersList.length', function(val) {
+         /* let  ticketSharedUsersListLengthWatch = $scope.$watch('ticketSharedUsersList.length', function(val) {
             if (val > 8) {
               $scope.ticketSharedUsersList = $scope.ticketSharedUsersList.slice(0, 8);
             }
             $rootScope.ticketSharedList = $scope.ticketSharedUsersList.slice();
-          })
+          })*/
           // ticket notify end
           // Attachments
           $scope.filterByType = function(arr, type) {
@@ -1182,17 +1183,34 @@ console.log('find');
               if (type === 'TECH') {
                 if ($scope.ticketDetails.assignedUser){
                   return ((el.user.accountType === type && $scope.ticketDetails.assignedUser.id == el.user.id)
-                  || el.user.accountType === type && el.show === true);
+                  || el.user.accountType === type);
                 } else if ($scope.ticketDetails.multiAssignedUsers.length > 0) {
                   var index = $scope.ticketDetails.multiAssignedUsers.findIndex(user => user.id == el.user.id);
                   return ((el.user.accountType === type && index > -1)
-                  || el.user.accountType === type && el.show === true);
+                  || el.user.accountType === type);
                 } else {
-                  return (el.user.accountType === type && el.show === true)
+                  return (el.user.accountType === type)
                 }
               
               } else {
                 return el.user.accountType === type;
+              }
+            })
+          };
+          $scope.filterUsersByType = function(arr, type) {
+            return arr.filter(function(el) {
+              if (type === 'TECH') {
+                if ($scope.ticketDetails.assignedUser){
+                  return (el.user.accountType === type && $scope.ticketDetails.assignedUser.id == el.user.id);
+                } else if ($scope.ticketDetails.multiAssignedUsers.length > 0) {
+                  var index = $scope.ticketDetails.multiAssignedUsers.findIndex(user => user.id == el.user.id);
+                  return (el.user.accountType === type && index > -1);
+                } else {
+                  return false;
+                }
+              
+              } else {
+                return false;
               }
             })
           };
@@ -1315,7 +1333,11 @@ console.log('find');
             }
             var processedShares = [];
             $scope.ticketSharedUsersList = getDefaultSharedList();
+            console.log('$scope.ticketSharedUsersList',$scope.ticketSharedUsersList);
             console.log('$scope.ticketSharedUsersList',JSON.parse(JSON.stringify($scope.ticketSharedUsersList)));
+            $scope.selectedAssignUsers = $scope.filterUsersByType($scope.ticketSharedUsersList, 'TECH');
+            $scope.selectedAssignUsers.push({notify: false, user: $scope.ticketDetails.createdUser });
+            console.log(' $scope.selectedAssignUsers', $scope.selectedAssignUsers);
             for (var i = 0; i < shares.length; i++) {
               var share = shares[i],
                 sharedUser = share.user,
@@ -1340,6 +1362,7 @@ console.log('find');
                 avatarUrl: $scope.getUserAvatarUrl($scope.getUserById(share.user.id))
               })
             }
+            $scope.$apply();
           }, true);
           $scope.filterCurrentUser = function (item) {
             if (!item.user) {
@@ -1521,15 +1544,16 @@ console.log('find');
             if ($scope.user) {
               addUserToResult($scope.user);
             }
-            // ad assigned user
+            // add assigned user
             if ($scope.assignedUser) {
               addUserToResult($scope.assignedUser);
             }
             // add ticket managers
             var usersFromTicketCompany = UsersService.getAllByCompanyId($scope.ticketDetails.company.id);
+            console.log('usersFromTicketCompany',usersFromTicketCompany)
             for (var i = 0; i < usersFromTicketCompany.length; i++) {
               var user = usersFromTicketCompany[i];
-              if (!user.deletedAt && user.subscription && user.subscription.ticketManager) {
+              if (!user.deletedAt) {
                 addUserToResult(user);
               }
             }
