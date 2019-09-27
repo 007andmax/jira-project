@@ -1179,6 +1179,8 @@ console.log('find');
           // ticket notify end
           // Attachments
           $scope.filterByType = function(arr, type) {
+           if (!arr) return [];
+         
             return arr.filter(function(el) {
               if (type === 'TECH') {
                 if ($scope.ticketDetails.assignedUser){
@@ -1336,7 +1338,7 @@ console.log('find');
             console.log('$scope.ticketSharedUsersList',$scope.ticketSharedUsersList);
             console.log('$scope.ticketSharedUsersList',JSON.parse(JSON.stringify($scope.ticketSharedUsersList)));
             $scope.selectedAssignUsers = $scope.filterUsersByType($scope.ticketSharedUsersList, 'TECH');
-            $scope.selectedAssignUsers.push({notify: false, user: $scope.ticketDetails.createdUser });
+          if ($scope.ticketDetails.createdUser)  $scope.selectedAssignUsers.push({notify: false, user: $scope.ticketDetails.createdUser });
             console.log(' $scope.selectedAssignUsers', $scope.selectedAssignUsers);
             for (var i = 0; i < shares.length; i++) {
               var share = shares[i],
