@@ -77,7 +77,7 @@
 
             var user = $rootScope.currentUser,
               otherAPerformerAndAUser = ticket.assignedUser && ticket.assignPerformer.id !== ticket.assignedUser.id;
-            var indexUser = ticket.multiAssignedUsers.findIndex(user_s => user_s.id === user.id);
+            var indexUser = (ticket.multiAssignedUsers) ? ticket.multiAssignedUsers.findIndex(user_s => user_s.id === user.id) : -1;
             switch (type) {
               case 'ASSIGNED_TO_ME':
                 return (ticket.assignPerformer.id !== user.id) && (ticket.assignedUser && ticket.assignedUser.id === user.id) && !ticket.isReassigned;

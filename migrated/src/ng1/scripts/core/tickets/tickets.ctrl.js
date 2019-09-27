@@ -67,10 +67,10 @@
         //   $scope.techUsersFilterHistoryTicketsPage = resp;
         // });
         $scope.getLastNameUser = function (user) {
-          return user.lastName;
+          return (user) ? user.lastName : "";
         }
         $scope.getFirstNameUser = function (user) {
-          return user.firstName;
+          return (user) ?  user.firstName : "";
         }
         $scope.stateMobileGo = function () {
           $scope.lastSavedStatus = arguments;
