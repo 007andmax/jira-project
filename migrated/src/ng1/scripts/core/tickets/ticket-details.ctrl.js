@@ -42,7 +42,7 @@
           }, 3000);
           $scope.getTicketStatus = function(ticket, arg) {
             var status;
-            if(ticket.assignedUserId === null) {
+            if(ticket.assignedUserId === null && ticket.multiAssignedUsers === null) {
               status = 'unassigned';
             } else if(ticket.status === 'COMPLETED') {
               status = 'completed';
