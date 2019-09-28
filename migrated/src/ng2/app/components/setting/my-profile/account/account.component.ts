@@ -1,64 +1,77 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit } from "@angular/core";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
-import { MustMatch } from 'src/ng2/app/helpers/must-match.validator';
-import { SettingService } from 'src/ng2/app/services/setting/setting.service';
+import { MustMatch } from "src/ng2/app/helpers/must-match.validator";
+import { SettingService } from "src/ng2/app/services/setting/setting.service";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
-  selector: 'app-account',
-  templateUrl: './account.component.html',
-  styleUrls: ['./account.component.scss']
+  selector: "app-account",
+  templateUrl: "./account.component.html",
+  styleUrls: ["./account.component.scss"]
 })
 export class AccountComponent implements OnInit {
-
   submitted = false;
-  authenticationTypesType = 'BASIC';
+  authenticationTypesType = "BASIC";
   oldPwdCorrect = true;
   public passwordForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private settingService: SettingService, ) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private settingService: SettingService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit() {
     /**
      * init form validation and declaration
      */
-    this.passwordForm = this.formBuilder.group({
-      oldpass: ['', [Validators.required, Validators.minLength(6)]],
-      newpass: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPass: ['', Validators.required]
-    }, {
-      validator: MustMatch('newpass', 'confirmPass')
-    });
+    this.passwordForm = this.formBuilder.group(
+      {
+        oldpass: ["", [Validators.required, Validators.minLength(6)]],
+        newpass: ["", [Validators.required, Validators.minLength(6)]],
+        confirmPass: ["", Validators.required]
+      },
+      {
+        validator: MustMatch("newpass", "confirmPass")
+      }
+    );
 
     this.get2FA();
   }
 
   // convenience getter for easy access to form fields
-  get f() { return this.passwordForm.controls; }
-
+  get f() {
+    return this.passwordForm.controls;
+  }
 
   get2FA() {
     this.settingService.get2FA().subscribe((res: any) => {
       if (res) {
-        this.authenticationTypesType = res.value
+        this.authenticationTypesType = res.value;
       }
     });
   }
 
   // selected auth type
   onAuthTypeChange(type: string) {
-    this.settingService.twoFactorAuth(type).subscribe(res => { });
+    this.settingService.twoFactorAuth(type).subscribe(res => {
+      this.toastr.success('Auth Type changed Successfully');
+    },error => {
+      this.toastr.success('Error occured, Auth type changed');
+    });
   }
-  
+
   //
   logOutSessions() {
     if (confirm("Are you sure to log out other sessions ")) {
       this.settingService.getActivityHistory().subscribe((res: any) => {
         if (res) {
+          this.toastr.success('Log out other sessions successfully.')
           const activityHistory = res;
           const currentDevice = res.find(device => {
             return device.current;
-          })
+          });
 
           const idsForDelete = [];
           for (var i = 0; i < activityHistory.length; i++) {
@@ -69,14 +82,15 @@ export class AccountComponent implements OnInit {
           }
 
           if (idsForDelete) {
-            this.settingService.closeSessions(idsForDelete).subscribe(res => {
-
-            })
+            this.settingService
+              .closeSessions(idsForDelete)
+              .subscribe(res => {});
           }
         }
+      },error => {
+        this.toastr.error('Error Occured, on log out other session');
       });
     }
-
   }
 
   onSubmit() {
@@ -87,19 +101,29 @@ export class AccountComponent implements OnInit {
       return;
     }
 
-    this.settingService.resetPassword(this.passwordForm.value.oldpass, this.passwordForm.value.newpass)
-      .subscribe(res => {
-        this.oldPwdCorrect = true;
-        console.log(res)
-      }, (error:any) => {
-        if(error){
-          const errStatus = error.status;
-          if(errStatus === 409){
-            this.oldPwdCorrect = false;
+    this.settingService
+      .resetPassword(
+        this.passwordForm.value.oldpass,
+        this.passwordForm.value.newpass
+      )
+      .subscribe(
+        res => {
+          this.oldPwdCorrect = true;
+          this.toastr.success('Password changed successfully.')
+        },
+        (error: any) => {
+          if (error) {
+            const errStatus = error.status;
+            if (errStatus === 409) {
+              this.oldPwdCorrect = false;
+              this.toastr.info('Old Password is not correct.')
+            } else {
+              this.toastr.error(error);
+            }
           }
+          
         }
-        console.log(error)
-      })
+      );
 
     // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.passwordForm.value))
   }

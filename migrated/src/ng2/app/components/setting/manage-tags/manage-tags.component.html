@@ -5,7 +5,13 @@
       <h1>Manage Tags</h1>
       <div class="heading-serach">
         <form method="GET">
-          <input type="search" class="form-input" [(ngModel)]="searchTag" name='searchTag' placeholder="Search Tags…" />
+          <input
+            type="search"
+            class="form-input"
+            [(ngModel)]="searchTag"
+            name="searchTag"
+            placeholder="Search Tags…"
+          />
         </form>
         <a href="javascript:;" class="btn-outline" (click)="create = !create"
           >Create Tag</a
@@ -16,19 +22,29 @@
             <h2 class="h1">Create Tag</h2>
           </div>
           <div class="modal-body">
-            <form method="POST">
+            <form [formGroup]="compnayForm" (ngSubmit)="onSubmit()">
               <div class="f-row">
                 <div class="f-col col-100">
-                  <label>Tag Name</label>
+                  <label *ngIf="!submitted && !f.word.errors">Tag Name</label>
+                  <div
+                    *ngIf="submitted && f.word.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.word.errors.required">
+                      Tag Name is required
+                    </div>
+                  </div>
                   <div class="form-row">
                     <input
                       type="text"
+                      formControlName="word"
                       class="form-input"
                       placeholder="Enter Tag Name"
+                      [ngClass]="{ 'is-invalid': submitted && f.word.errors }"
                     />
                   </div>
                 </div>
-                <div class="f-col col-100">
+                <!-- <div class="f-col col-100">
                   <label>Category</label>
                   <div class="form-row">
                     <select class="cmn-select form-input">
@@ -38,15 +54,10 @@
                       <option>Category3</option>
                     </select>
                   </div>
-                </div>
+                </div> -->
                 <div class="m-btn-row">
                   <div class="m-btn-col">
-                    <input
-                      type="submit"
-                      value="Save"
-                      class="btn btn-primary"
-                      disabled
-                    />
+                    <input type="submit" value="Save" class="btn btn-primary" />
                     <a
                       href="javascript:;"
                       class="btn btn-secondary"
@@ -62,12 +73,22 @@
         </div>
       </div>
     </div>
+
     <tabset (click)="setTab()">
+      <ngx-loading
+        [show]="loading"
+        [config]="{
+          primaryColour: primaryColour,
+          secondaryColour: secondaryColour,
+          tertiaryColour: primaryColour,
+          backdropBorderRadius: '3px'
+        }"
+      ></ngx-loading>
       <!-- Companies -->
-      <tab heading="Companies" id="tab1" >
-        <div class="cmn-area" >
-          <div class="data-table-wrap" >
-            <table #dataTable class="display dataTable" style="width:100%" >
+      <tab heading="Companies" id="tab1">
+        <div class="cmn-area">
+          <div class="data-table-wrap">
+            <table #dataTable class="display dataTable" style="width:100%">
               <thead>
                 <tr>
                   <th class="c-tag"><span>Custom Tags</span></th>
@@ -76,43 +97,58 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let company of companyTags | tag:searchTag">
-                  <td>{{company.word | titlecase}}</td>
-                  <td>{{company.usedCounter}}</td>
+                <tr
+                  *ngFor="
+                    let company of companyTags | tag: searchTag;
+                    let i = index
+                  "
+                >
+                  <td>{{ company.word | titlecase }}</td>
+                  <td>{{ company.usedCounter }}</td>
                   <td class="action">
                     <a
                       href="javascript:;"
                       data-tooltip="Edit"
                       class="edit"
-                      (click)="edit = !edit"
+                      (click)="editCompany(company, i)"
                       ><img src="/ng2/assets/img/edit.svg" alt="Edit"
                     /></a>
-                    <a href="javascript:;" data-tooltip="Remove" class="remove"
+                    <a
+                      href="javascript:;"
+                      data-tooltip="Remove"
+                      class="remove"
+                      (click)="removeCompanyTag(company.id)"
                       ><img src="/ng2/assets/img/remove.svg" alt="Remove"
                     /></a>
                     <!-- Edit create Tags -->
                     <div
                       class="modal-content toggle-area"
-                      [class.opened]="edit"
+                      [ngClass]="{ opened: selectedIdx === i }"
                     >
                       <div class="toggle-header">
                         <h2 class="h1">Edit Tag</h2>
                       </div>
                       <div class="modal-body">
-                        <form method="POST">
+                        <form [formGroup]="compnayForm" (ngSubmit)="onSubmit()">
                           <div class="f-row">
                             <div class="f-col col-100">
                               <label>Tag Name</label>
                               <div class="form-row">
                                 <input
                                   type="text"
+                                  formControlName="word"
                                   class="form-input"
-                                  value="Breakfix"
                                   placeholder="Enter Tag Name"
                                 />
                               </div>
+                              <input
+                                type="text"
+                                hidden
+                                formControlName="id"
+                                class="form-input"
+                              />
                             </div>
-                            <div class="f-col col-100">
+                            <!-- <div class="f-col col-100">
                               <label>Category</label>
                               <div class="form-row">
                                 <select class="cmn-select form-input">
@@ -123,7 +159,7 @@
                                   <option>Category3</option>
                                 </select>
                               </div>
-                            </div>
+                            </div> -->
                             <div class="m-btn-row">
                               <div class="m-btn-col">
                                 <input
@@ -135,7 +171,7 @@
                                   href="javascript:;"
                                   class="btn btn-secondary"
                                   aria-label="Close"
-                                  (click)="edit = !edit"
+                                  (click)="selectedIdx = -1"
                                   >Cancel</a
                                 >
                               </div>
@@ -152,7 +188,7 @@
         </div>
       </tab>
       <!-- Tickets -->
-      <tab heading="Tickets" >
+      <tab #tickets heading="Tickets">
         <div class="cmn-area">
           <div class="data-table-wrap">
             <table #dataTable class="display dataTable" style="width:100%">
@@ -164,7 +200,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let ticket of ticketTags | tag:searchTag">
+                <tr *ngFor="let ticket of ticketTags | tag: searchTag">
                   <td>{{ ticket.word | titlecase }}</td>
                   <td>{{ ticket.usedCounter }}</td>
                   <td class="action">
@@ -354,7 +390,7 @@
             </table>
           </div>
         </div>
-      </tab>
+      </tab> 
     </tabset>
   </div>
 </div>

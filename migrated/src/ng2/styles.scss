@@ -71,6 +71,14 @@ ngb-typeahead-window {
   border-top-color: #9CA5B6;
 }
 
+.toast-container .toast-success  {
+  width: 235px;
+  height: 40px;
+  border-radius: 6px;
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1);
+  background-color: #16a4fa;
+}
+
 @import './assets/styles/mobile.scss';
 
 
