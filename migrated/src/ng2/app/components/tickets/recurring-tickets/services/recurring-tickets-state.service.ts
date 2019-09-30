@@ -14,6 +14,7 @@ export class RecurringTicketsStateService {
   public client: any;
   public tecketForCreate: Ticket = new Ticket();
   public onEditMode: EventEmitter<any> = new EventEmitter();
+  public onCopyCreate: EventEmitter<any> = new EventEmitter();
   public showTicketAddRecurringAside: EventEmitter<any> = new EventEmitter();
   editProducts: Array<EditProduct> = [];
   tehCompany: any = null;
@@ -28,6 +29,14 @@ export class RecurringTicketsStateService {
     this.companiesService.getTechCompany().subscribe((res) => {
       this.tehCompany = res;
     });
+  }
+
+  public onInitCopyCreate(data) {
+    this.onCopyCreate.emit(data);
+  }
+
+  public getOnCopyCreate () {
+    return this.onCopyCreate;
   }
 
   /**

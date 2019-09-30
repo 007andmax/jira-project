@@ -418,6 +418,13 @@ console.log('this.services',JSON.parse(JSON.stringify(this.services)));
     this.createService.resetEditAdditionalOptions();
   }
 
+  public copyAndCreate () {
+    let data = JSON.parse(JSON.stringify(this.ticketForEdit));
+    this.close();
+    this.recurringState.onInitCopyCreate(data);
+   
+  }
+
   public trackById(index, item) {
     return (item.versionedId) ?  item.versionedId.id : index;
   }

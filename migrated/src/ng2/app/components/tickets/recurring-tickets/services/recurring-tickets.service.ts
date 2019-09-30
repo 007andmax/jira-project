@@ -170,6 +170,14 @@ export class RecurringTicketsService {
     this.elRef.nativeElement.querySelector('#requireUpdate-edit').checked = requireUpdate;
   }
 
+   /**
+ * Set require update for add
+ * @param requireUpdate - require update
+ */
+public setRequireUpdateAdd(requireUpdate) {
+  this.elRef.nativeElement.querySelector('#requireUpdate-add').checked = requireUpdate;
+}
+
   /**
  * Set quick close for edit
  * @param quickClose - quick close
@@ -179,12 +187,29 @@ export class RecurringTicketsService {
   }
 
   /**
+ * Set quick close for add
+ * @param quickClose - quick close
+ */
+public setQuickCloseAdd(quickClose) {
+  this.elRef.nativeElement.querySelector('#quickClose-add').checked = quickClose;
+}
+
+  /**
  * Set create task for edit
  * @param createTask - create task
  */
   public setCreateTask(createTask) {
     this.elRef.nativeElement.querySelector('#createTask-edit').checked = createTask;
   }
+
+   /**
+ * Set create task for add
+ * @param createTask - create task
+ */
+public setCreateTaskAdd(createTask) {
+  this.elRef.nativeElement.querySelector('#createTask-add').checked = createTask;
+}
+
 
   /**
  * Get products for edit

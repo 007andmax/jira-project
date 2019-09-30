@@ -66,7 +66,38 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.showTicketRecurring();
     this.getItemListProducts();
     this.recurringState.onInitClientList();
+    this.onCopyCreate();
 
+  }
+
+  public onCopyCreate() {
+    this.recurringState.getOnCopyCreate().subscribe(data => {
+      console.log('onCopyCreate');
+      this.opened = true;
+      this.onInitCreateMod();
+      this.onInitCopyCreate(data);
+    })
+  }
+
+  private onInitCopyCreate (data) {
+    this.createService.setDescription(data.description);
+    this.tehUsers = data.assignedUsers;
+ 
+    this.devicesService.onInitHangle(data.company.id);
+    this.selectedClient = data.company;
+    this.createService.getStateDatePicker().onInitEditMode(data.startDate);
+    console.log('this.services',JSON.parse(JSON.stringify(this.services)));
+    this.products = (data.products.length > 0) ? this.createService.getProductsForEdit(data.products) : [new ForCreateProduct()];
+     this.createService.setTagsForEdit(data.tags);
+    this.createService.setCreateTaskAdd(data.createTask);
+    this.createService.setRequireUpdateAdd(data.requireUpdate);
+    this.createService.setQuickCloseAdd(data.quickClose);
+    this.createService.getTehState().setUsersFromtEdit(data.assignedUsers);
+    this.createService.setCronForEdit(data.cronExpression);
+    this.onChangeCron(data.cronExpression)
+    this.getListServices(data.company);
+    this.cd.detectChanges();
+    console.log('createService',this.createService);
   }
 
   /**
