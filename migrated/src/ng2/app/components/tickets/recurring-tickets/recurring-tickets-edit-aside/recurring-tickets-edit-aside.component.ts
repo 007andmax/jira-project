@@ -235,8 +235,17 @@ console.log('this.services',JSON.parse(JSON.stringify(this.services)));
  * @param index - index
  */
   public setService(item, index) {
-    item = { ...item, ...{ description: '', duration: (this.services[index].duration) ? this.services[index].duration : 1 } };
-    this.services[index] = new ForCreateService(item);
+   
+    if (this.services[index] instanceof ForCreateService) {
+      console.log('this.services[index]0', item);
+      this.services[index].setName(item.name);
+      this.services[index].setVersionedId(item.setVersionedId);
+    } else {
+      item = { ...item, ...{ description: '', duration: (this.services[index].duration) ? this.services[index].duration : 1 } };
+      this.services[index] = new ForCreateService(item);
+    }
+    
+   
   }
 
   /**

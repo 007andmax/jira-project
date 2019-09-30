@@ -41,7 +41,12 @@ export class ForCreateService implements Service  {
         this.duration = data.duration;
       
     }
-
+public setName(name) {
+this.name = name;
+}
+public setVersionedId (versionedId) {
+    this.versionedId = versionedId;
+}
     public setDataFromEdit (data:ServiceRecurringTicket,errors:Array<String>) {
         this.duration = data.duration;
         this.description = data.serviceDescription;
