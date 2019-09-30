@@ -13705,7 +13705,7 @@ button.close {
   }
 }
 
-.add-users,.add-users-container {
+.add-users{
   display: block;
   width: 400px;
   background-color: #fff;

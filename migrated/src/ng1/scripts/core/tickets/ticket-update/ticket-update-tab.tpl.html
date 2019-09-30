@@ -84,43 +84,47 @@
           <div class="ticket--footer">
             <div class="notify-user-dropdown">
               <div class="dropdown-user-parent"
-              ng-click="showAddUser = !showAddUser"
-                   >
-                <div >
-                  <img src="ng1/images/new-icons/add-user.png" class="pointer" style="margin: 0 20px 0 0;"
-                       uib-tooltip="add user" tooltip-placement="top" tooltip-append-to-body="true" />
+                   ng-click="showAddUser = !showAddUser">
+                <i class="assign-icn pointer"
+                   uib-tooltip="add user"
+                   style="margin: 6px 10px 0 0;"
+                   tooltip-placement="top"
+                   tooltip-append-to-body="true"></i>
+              </div>
+              <div class="add-users" ng-if="showAddUser" uib-dropdown>
+                <div class="add-users-container" uib-dropdown-toggle
+                     smart-dropdown-menu-position
+                     no-restricted="true">
+
+                  <div class="selected-assign-user" ng-repeat="user in selectedAssignUsers track by $index">
+                    <div ng-if="user.user.avatar">
+                      <img src="{{getUserAvatarUrl(user.user)}}" />
+                      <span class="user-full-name">{{user.user.firstName}}{{user.user.lastName}}</span>
+                    </div>
+                    <div ng-if="!(user.user.avatar)">
+                      <span class="default-user-avatar"
+                            ng-class-odd="'avatar-background-color-odd'"
+                            ng-class-even="'avatar-background-color-even'">{{user.user.firstName[0].toUpperCase()}}{{user.user.lastName[0].toUpperCase()}}</span>
+                      <span class="user-full-name">{{user.user.firstName}}{{user.user.lastName}}</span>
+                    </div>
+                    <i class="icn-sm remove-tag" ng-click="removeAssignUser($index)"></i>
+                  </div>
                 </div>
-            
-                
-              </div>
-              <div class="add-users" ng-if="showAddUser"  uib-dropdown>
-                <div class="add-users-container"  uib-dropdown-toggle
-                smart-dropdown-menu-position
-                no-restricted="true">
-                
-              <div class="selected-assign-user"  ng-repeat="user in selectedAssignUsers track by $index">
-                <img ng-if="user.user.avatar" src="{{getUserAvatarUrl(user.user)}}" />
-                <div class="default-user-avatar" ng-if="!(user.user.avatar)" ng-class-odd="'avatar-background-color-odd'"
-                  ng-class-even="'avatar-background-color-even'">
-                  <span>{{user.user.firstName[0].toUpperCase()}}</span>
-                  <span>{{user.user.lastName[0].toUpperCase()}}</span>
-                </div>
-                <div class="selected-assign-user-closed" ng-click="removeAssignUser($index)">closed</div>
-              </div>
-              </div>
                 <div class="list-users" uib-dropdown-menu>
-                  <div class="item-user" ng-repeat="sharedUser in ticketSharedUsersList" ng-click="selecAssigntUser(sharedUser)">
+                  <div class="item-user" ng-repeat="sharedUser in ticketSharedUsersList"
+                       ng-click="selecAssigntUser(sharedUser)">
                     <img ng-if="sharedUser.user.avatar" src="{{getUserAvatarUrl(sharedUser.user)}}" />
-                    <div class="default-user-avatar" ng-if="!(sharedUser.user.avatar)" ng-class-odd="'avatar-background-color-odd'"
-                      ng-class-even="'avatar-background-color-even'">
+                    <div class="default-user-avatar" ng-if="!(sharedUser.user.avatar)"
+                         ng-class-odd="'avatar-background-color-odd'"
+                         ng-class-even="'avatar-background-color-even'">
                       <span>{{sharedUser.user.firstName[0].toUpperCase()}}</span>
                       <span>{{sharedUser.user.lastName[0].toUpperCase()}}</span>
                     </div>
                     <p>{{sharedUser.user.firstName + ' ' + sharedUser.user.lastName}}</p>
                     <p>{{sharedUser.user.primaryEmail}}</p>
                   </div>
-                 
-              
+
+
                 </div>
 
               </div>
@@ -174,8 +178,10 @@
                    ng-click="updateAndCloseTicket(ticketUpdateForm)">
                 Update &amp; Close
               </div>
-              <div class="tooltip-update-close" ng-if="disabledWhenNoCompleted" uib-tooltip="You cannot close the ticket. It contains incomplete products / services." tooltip-placement="top"></div>
-             
+              <div class="tooltip-update-close" ng-if="disabledWhenNoCompleted"
+                   uib-tooltip="You cannot close the ticket. It contains incomplete products / services."
+                   tooltip-placement="top"></div>
+
             </div>
           </div>
           <!--<div ng-include="'/html/scripts/core/tickets/ticket-update/update-submit.tpl.html'"></div>-->
@@ -281,8 +287,10 @@
                      ng-click="updateAndCloseTicket(ticketUpdateForm)">
                   Update &amp; Close
                 </div>
-                <div class="tooltip-update-close" ng-if="disabledWhenNoCompleted" uib-tooltip="You cannot close the ticket. It contains incomplete products / services." tooltip-placement="top"></div>
-               
+                <div class="tooltip-update-close" ng-if="disabledWhenNoCompleted"
+                     uib-tooltip="You cannot close the ticket. It contains incomplete products / services."
+                     tooltip-placement="top"></div>
+
               </div>
             </div>
 
@@ -394,12 +402,16 @@
               <div ng-show="TicketsPermissionsService.isActionVisible('update_and_close', ticketDetails)"
                    class="btn btn-primary btn-new btn-update"
                    custom-disabled="{{ disabledWhenNoCompleted || disabledFutureDatePicker || ticketDetails.status === 'COMPLETED' || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
-                   ng-click="updateAndCloseTicket(ticketUpdateForm)"  >
+                   ng-click="updateAndCloseTicket(ticketUpdateForm)">
                 Update &amp; Close
-              </div> 
-              <div class="tooltip-update-close" ng-if="disabledWhenNoCompleted" uib-tooltip="You cannot close the ticket. It contains incomplete products / services." tooltip-placement="top"></div>
-              <div class="tooltip-update-close" ng-if="disabledFutureDatePicker" uib-tooltip="You cannot Update & Close ticket with future date service." tooltip-placement="top"></div>
-         
+              </div>
+              <div class="tooltip-update-close" ng-if="disabledWhenNoCompleted"
+                   uib-tooltip="You cannot close the ticket. It contains incomplete products / services."
+                   tooltip-placement="top"></div>
+              <div class="tooltip-update-close" ng-if="disabledFutureDatePicker"
+                   uib-tooltip="You cannot Update & Close ticket with future date service."
+                   tooltip-placement="top"></div>
+
             </div>
           </div>
           <!--<div ng-include="'/html/scripts/core/tickets/ticket-update/update-submit.tpl.html'"></div>-->
@@ -496,7 +508,8 @@
                    step="0.01"
                    ng-readonly="!PermissionsService.isAllowed('MANAGE_PRODUCTS')" />
           </div>
-          <div class="col-xs-6 mob-qty-input pr-10" ng-class="{'has-error': isShowingErrors(addProductForm, 'productQty')}">
+          <div class="col-xs-6 mob-qty-input pr-10"
+               ng-class="{'has-error': isShowingErrors(addProductForm, 'productQty')}">
 
             <input uib-tooltip="Qty"
                    tooltip-placement="top"
@@ -553,7 +566,8 @@
           <span ng-show="!areTicketsPresented">You are using default services.</span>
         </div>
 
-        <div ng-if="serviceList.length && !areTicketsTerminated" ng-controller="quicktech.core.tickets.ticketAddUpdateServiceCtrl">
+        <div ng-if="serviceList.length && !areTicketsTerminated"
+             ng-controller="quicktech.core.tickets.ticketAddUpdateServiceCtrl">
           <div ng-form="addServiceForm" class="clearfix">
             <div class="col-xs-12">
               <div uib-dropdown>
@@ -578,7 +592,8 @@
                 >
               </div>
             </div>
-            <div ng-if="!hideInputs" class="col-xs-6 mob-timer pr-10" service-quantity-picker="serviceToEdit[0].quantity"
+            <div ng-if="!hideInputs" class="col-xs-6 mob-timer pr-10"
+                 service-quantity-picker="serviceToEdit[0].quantity"
                  sqp-is-show-format="false"
                  ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceTime')}">
               <input uib-tooltip="Hr(s) : Min(s)" tooltip-placement="top"
@@ -588,9 +603,10 @@
               <input type="hidden" ng-model="serviceToEdit[0].quantity" name="serviceTime"
                      ng-required="serviceToEdit[0].item ? true : false" />
             </div>
-            <div ng-if="!hideInputs" class="col-xs-6" data-date-picker ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceData')}">
+            <div ng-if="!hideInputs" class="col-xs-6" data-date-picker
+                 ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceData')}">
               <input type="text" class="has-dropdown" placeholder="Date" readonly
-                     qt-data-time-picker   ng-model="serviceToEdit[0].date"
+                     qt-data-time-picker ng-model="serviceToEdit[0].date"
                      name="serviceData" ng-required="true" uib-tooltip="select date">
               <i class="new-calendar"></i>
             </div>

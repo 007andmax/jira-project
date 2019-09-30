@@ -807,7 +807,7 @@ _::-webkit-:not(:root:root),
   height: 16px;
   position: absolute;
   bottom: 0;
-  left: 0;
+  left: -3px;
   transform: translate(50%, 50%);
   
   display: flex;
@@ -823,6 +823,7 @@ _::-webkit-:not(:root:root),
   overflow-y: hidden;
   overflow-x: scroll;
   padding-bottom: 5px;
+  margin-top: 4px;
 }
 
 .ticket--footer .shared-avatars .check-area.checked {
@@ -842,8 +843,8 @@ _::-webkit-:not(:root:root),
 }
 
 .ticket--footer .shared-avatars .shared-avatar {
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   margin-right: 2px;
 }
 
@@ -857,8 +858,8 @@ _::-webkit-:not(:root:root),
 }
 
 .ticket--footer .shared-avatars .shared-avatar > img, .user-panel-avatar {
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
 }
 

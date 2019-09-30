@@ -94,6 +94,150 @@
   background-color: #e2f1fd;
 }
 
+.ticket-fixed-header .assign-list .default-user-avatar,
+.ticket-fixed-header .assign-list .shared-avatar img {
+  margin-left: -10px;
+}
+
+.ticket-header-assign {
+  position: absolute;
+  right: 150px;
+  top: 37px;
+}
+
+.assign-list {
+  display: flex;
+  margin-top: -3px;
+}
+
+.ticket-meta .assign-list {
+  max-width: 122px;
+  overflow: scroll;
+}
+
+.ticket--footer .selected-assign-user {
+  position: relative;
+}
+
+.ticket--footer .selected-assign-user > div {
+  display: flex;
+  align-items: center;
+  padding: 2px 23px 2px 2px;
+  border-radius: 16px;
+  background: #f8f9fa;
+  border: 1px solid #edf2f6;
+  margin-right: 3px;
+  transition: all .3s;
+  margin-bottom: 4px;
+}
+
+.ticket--footer .selected-assign-user > div:hover {
+  background: #e7f5fe;
+  border-color: #16a4fa;
+}
+
+.ticket--footer .selected-assign-user > div span {
+  transition: all .3s;
+}
+
+.ticket--footer .selected-assign-user > div:hover span:last-child {
+  color: #16a4fa;
+}
+
+.ticket--footer .selected-assign-user .remove-tag {
+  right: 9px;
+  top: 10px;
+}
+
+.ticket--footer .selected-assign-user > div img {
+  border-radius: 50%;
+}
+
+.ticket--footer .add-users {
+  background: #fff;
+  border: 1px solid #c4cbd5;
+  border-radius: 4px;
+  height: auto;
+  min-height: 40px;
+  padding: 4px 8px 0;
+}
+
+.ticket--footer .add-users > .list-users.dropdown-menu {
+  left: 0;
+  max-height: 200px;
+}
+
+.add-users-container {
+  flex-flow: row wrap;
+}
+
+.ticket--footer .add-users > .list-users.dropdown-menu .item-user {
+  padding: 0 8px;
+  cursor: pointer;
+}
+
+.ticket--footer .add-users > .list-users.dropdown-menu .item-user p,
+.ticket--footer .add-users > .list-users.dropdown-menu .item-user {
+  transition: all .3s;
+}
+
+.ticket--footer .add-users > .list-users.dropdown-menu .item-user:not(:last-child) {
+  border-bottom: 1px solid #dde4f0;
+}
+
+.ticket--footer .add-users > .list-users.dropdown-menu .item-user p:nth-child(2) {
+  margin: 0 10px;
+  font-size: 13px;
+  font-family: "Graphik Medium", sans-serif;
+}
+
+.ticket--footer .add-users > .list-users.dropdown-menu .item-user p:last-child {
+  font-size: 12px;
+  font-family: "Graphik Regular", sans-serif;
+}
+
+.ticket--footer .add-users > .list-users.dropdown-menu .item-user .default-user-avatar,
+.ticket--footer .add-users > .list-users.dropdown-menu .item-user img {
+  width: 24px;
+  height: 24px;
+  margin-right: 0;
+}
+
+.ticket--footer .add-users > .list-users.dropdown-menu .item-user:hover {
+  background: #f6f8fa;
+}
+
+.ticket--footer .selected-assign-user img,
+.ticket--footer .default-user-avatar {
+  width: 24px;
+  height: 24px;
+  margin-right: 5px;
+}
+
+.ticket--footer .default-user-avatar span,
+.ticket--footer .default-company-logo span {
+  font-size: 12px;
+  font-family: "Graphik Regular", sans-serif;
+}
+
+.ticket--footer .selected-assign-user > div span {
+  font-size: 12px;
+  font-family: "Graphik Regular", sans-serif;
+}
+
+.assign-list .default-user-avatar,
+.assign-list .shared-avatar img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+}
+
+.assign-list .default-user-avatar span {
+  margin: 0 !important;
+  font-size: 10px;
+}
+
 .ticket .ticket-meta .ticket-list-header p.ellipsis {
   width: calc(100% - 90px);
   overflow: hidden;
@@ -233,10 +377,11 @@
 }
 
 .icn-ticket-attachment {
+  transform: rotate(90deg);
   margin: 0;
   position: absolute;
   right: 32px;
-  top: 45px;
+  top: 39px;
 }
 
 .ticket .ticket-meta .ticket-labels .label-primary {

@@ -106,35 +106,32 @@
           </div>
           <div class="ticket-header-assign">
             <div class="text-muted ellipsis"
-            ng-if="ticketDetails.assignedUser"
-            style="width: 36%;vertical-align: top;">
-            <div class="shared-avatar pointer"
-            uib-tooltip="{{ ticketDetails.assignedUser.firstName + ' ' + ticketDetails.assignedUser.lastName }}"
-          >
-         <img ng-if="ticketDetails.assignedUser.avatar" src="{{getUserAvatarUrl(ticketDetails.assignedUser)}}" />
-         <div class="default-user-avatar" ng-if="!ticketDetails.assignedUser.avatar"
-              ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
-           <span>{{ticketDetails.assignedUser.firstName[0].toUpperCase()}}</span>
-           <span>{{ticketDetails.assignedUser.lastName[0].toUpperCase()}}</span>
-         </div>
-     </div>
-       </div>
-       <div class="text-muted ellipsis"
-       ng-if="ticketDetails.multiAssignedUsers && ticketDetails.multiAssignedUsers.length > 0"
-        >
-      
-        <div class="shared-avatar pointer"
-        uib-tooltip="{{ sharedUser.firstName + ' ' + sharedUser.lastName }}"
-        ng-repeat="sharedUser in ticketDetails.multiAssignedUsers"
-      >
-     <img ng-if="sharedUser.avatar" src="{{getUserAvatarUrl(sharedUser)}}" />
-     <div class="default-user-avatar" ng-if="!sharedUser.avatar"
-          ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
-       <span>{{sharedUser.firstName[0].toUpperCase()}}</span>
-       <span>{{sharedUser.lastName[0].toUpperCase()}}</span>
-     </div>
- </div>
-  </div>
+                 ng-if="ticketDetails.assignedUser"
+                 style="width: 36%;vertical-align: top;">
+              <div class="shared-avatar pointer"
+                   uib-tooltip="{{ ticketDetails.assignedUser.firstName + ' ' + ticketDetails.assignedUser.lastName }}"
+              >
+                <img ng-if="ticketDetails.assignedUser.avatar" src="{{getUserAvatarUrl(ticketDetails.assignedUser)}}" />
+                <div class="default-user-avatar" ng-if="!ticketDetails.assignedUser.avatar"
+                     ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
+                  <span>{{ticketDetails.assignedUser.firstName[0].toUpperCase()}}</span>
+                  <span>{{ticketDetails.assignedUser.lastName[0].toUpperCase()}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="assign-list"
+                 ng-if="ticketDetails.multiAssignedUsers && ticketDetails.multiAssignedUsers.length > 0">
+              <div class="shared-avatar pointer"
+                   uib-tooltip="{{ sharedUser.firstName + ' ' + sharedUser.lastName }}"
+                   ng-repeat="sharedUser in ticketDetails.multiAssignedUsers">
+                <img ng-if="sharedUser.avatar" src="{{getUserAvatarUrl(sharedUser)}}" />
+                <div class="default-user-avatar" ng-if="!sharedUser.avatar"
+                     ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
+                  <span>{{sharedUser.firstName[0].toUpperCase()}}</span>
+                  <span>{{sharedUser.lastName[0].toUpperCase()}}</span>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="ticket-header-actions" ng-show="listType !== 'preview'">
             <div class="ticket-edit-actions"
