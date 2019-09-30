@@ -5,26 +5,48 @@
     </span>
     <div class="dp-info">
       <input type="file" id="profile-dp" (change)="onSelectFile(template,$event)" style="display: none;" />
-      <label for="profile-dp" class="static-link">Change Photo</label>
+      <div class="static-link">
+        <label class="innert-links" for="profile-dp">Change Photo</label>
+        <label  for="profile-dp" (click)="deleteAvatar()">
+            <a href="javascript:void(0)" restore-default-button="">Remove Photo</a>
+          </label>
+          <label for="profile-dp" (click)="rePositionAvatar()">
+              <a href="javascript:void(0)" restore-default-button="">Reposition Photo</a>
+            </label>
+        
+      </div>
       <span>Photos help your teammates recognize you in Quicktech</span>
     </div>
   </div>
-  <div *ngIf="isCroppedImg">
-    <image-cropper [imageBase64]="imageBase64" [imageChangedEvent]="imageChangedEvent"
-      [maintainAspectRatio]="false" [aspectRatio]="4 / 3" [resizeToWidth]="128" format="png"
-      (imageCropped)="imageCropped($event)"
-      ></image-cropper>
+  <div class="img-croparea" *ngIf="isCroppedImg">
+    <div class="crop-inner">
+      <div class="heading-area">
+      <h2>Crop Photo</h2>
+      <a href="javascript:;" class="close-btn">remove</a>
+    </div>
+      <div class="cropping">
+        <div class="img-crop"> 
 
-    <img [src]="croppedImage?.base64" />
-    <button type="button" class="close pull-right" (click)="cropIt()">Crop</button>
+            <image-cropper [imageBase64]="imageBase64" [imageChangedEvent]="imageChangedEvent"
+            [maintainAspectRatio]="false" [aspectRatio]="4 / 3" [resizeToWidth]="128" format="png"
+            (imageCropped)="imageCropped($event)"
+            ></image-cropper>
+        </div>
+        
+          <div class="preview">
+                <h6>Profile Preview</h6>
+              <img [src]="croppedImage?.base64" />
+          </div>
+        <div class="btn-crops">
+          <button type="button" class="btn btn-primary" (click)="cropIt()">Crop Photo</button>
+          <button type="button" class="btn btn-secondary">Cancel</button>
+        </div>
+      </div>
   </div>
-  <label for="profile-dp" class="static-link" (click)="deleteAvatar()">
-    <a href="javascript:void(0)" restore-default-button="">Remove Photo</a>
-  </label> <br />
+</div>
+   
   <input type="file" (change)="onFileChange($event)" accept="image/*" #fileSelector style="display: none" />
-  <label for="profile-dp" class="static-link" (click)="rePositionAvatar()">
-    <a href="javascript:void(0)" restore-default-button="">Reposition Photo</a>
-  </label>
+  
   <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
     <div class="f-row">
       <div class="f-col col-50">

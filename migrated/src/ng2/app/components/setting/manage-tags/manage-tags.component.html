@@ -110,7 +110,7 @@
                       href="javascript:;"
                       data-tooltip="Edit"
                       class="edit"
-                      (click)="editCompany(company, i)"
+                      (click)="editTag(company, i)"
                       ><img src="/ng2/assets/img/edit.svg" alt="Edit"
                     /></a>
                     <a
@@ -129,7 +129,10 @@
                         <h2 class="h1">Edit Tag</h2>
                       </div>
                       <div class="modal-body">
-                        <form [formGroup]="compnayForm" (ngSubmit)="onSubmit()">
+                        <form
+                          [formGroup]="compnayForm"
+                          (ngSubmit)="onSubmit()"
+                        >
                           <div class="f-row">
                             <div class="f-col col-100">
                               <label>Tag Name</label>
@@ -200,16 +203,82 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let ticket of ticketTags | tag: searchTag">
+                <tr
+                  *ngFor="
+                    let ticket of ticketTags | tag: searchTag;
+                    let i = index
+                  "
+                >
                   <td>{{ ticket.word | titlecase }}</td>
                   <td>{{ ticket.usedCounter }}</td>
                   <td class="action">
-                    <a href="javascript:;" class="edit" data-tooltip="Edit"
+                    <a
+                      href="javascript:;"
+                      class="edit"
+                      data-tooltip="Edit"
+                      (click)="editTag(ticket, i)"
                       ><img src="/ng2/assets/img/edit.svg" alt="Edit"
                     /></a>
-                    <a href="javascript:;" data-tooltip="Remove" class="remove"
+                    <a
+                      href="javascript:;"
+                      data-tooltip="Remove"
+                      class="remove"
+                      (click)="removeCompanyTag(ticket.id)"
                       ><img src="/ng2/assets/img/remove.svg" alt="Remove"
                     /></a>
+
+                    <!-- Edit create Tags -->
+                    <div
+                      class="modal-content toggle-area"
+                      [ngClass]="{ opened: selectedIdx === i }"
+                    >
+                      <div class="toggle-header">
+                        <h2 class="h1">Edit Tag</h2>
+                      </div>
+                      <div class="modal-body">
+                        <form
+                          [formGroup]="compnayForm"
+                          (ngSubmit)="onSubmit()"
+                        >
+                          <div class="f-row">
+                            <div class="f-col col-100">
+                              <label>Tag Name</label>
+                              <div class="form-row">
+                                <input
+                                  type="text"
+                                  formControlName="word"
+                                  class="form-input"
+                                  placeholder="Enter Tag Name"
+                                />
+                              </div>
+                              <input
+                                type="text"
+                                hidden
+                                formControlName="id"
+                                class="form-input"
+                              />
+                            </div>
+
+                            <div class="m-btn-row">
+                              <div class="m-btn-col">
+                                <input
+                                  type="submit"
+                                  value="Save"
+                                  class="btn btn-primary"
+                                />
+                                <a
+                                  href="javascript:;"
+                                  class="btn btn-secondary"
+                                  aria-label="Close"
+                                  (click)="selectedIdx = -1"
+                                  >Cancel</a
+                                >
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
                   </td>
                 </tr>
               </tbody>
@@ -218,10 +287,10 @@
         </div>
       </tab>
       <!-- Devices  -->
-      <tab heading="Devices" >
+      <tab heading="Devices">
         <div class="cmn-area">
           <div class="data-table-wrap">
-            <table #dataTable class="display dataTable" style="width:100%">
+            <!-- <table #dataTable class="display dataTable" style="width:100%">
               <thead>
                 <tr>
                   <th class="c-tag"><span>Custom Tags</span></th>
@@ -387,10 +456,10 @@
                   </td>
                 </tr>
               </tbody>
-            </table>
+            </table> -->
           </div>
         </div>
-      </tab> 
+      </tab>
     </tabset>
   </div>
 </div>

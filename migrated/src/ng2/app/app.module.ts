@@ -1,5 +1,5 @@
 import { BrowserModule } from "@angular/platform-browser";
-import { NgModule, InjectionToken, NgZone } from "@angular/core";
+import { NgModule, InjectionToken, NgZone} from "@angular/core";
 import { RouterModule, UrlHandlingStrategy } from "@angular/router";
 import { AppRoutingModule } from "./app-routing.module";
 // @ts-ignore
@@ -69,9 +69,18 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgxLoadingModule,ngxLoadingAnimationTypes  } from 'ngx-loading';
 
 declare var angular: any;
-
+declare var $: any;
 export class CustomHandlingStrategy implements UrlHandlingStrategy {
+
+  constructor(){  }
   shouldProcessUrl(url) {
+      const appType = url.toString().startsWith('/ng2') ? 'ng2' : 'ng1';
+      if (appType === 'ng2') {
+        console.log('ng7' + appType)
+        $('body').addClass('ng7');
+      } else {
+        $('body').removeClass('ng7');
+      }
     return url.toString().startsWith("/ng2") || url.toString() == "/";
   }
 

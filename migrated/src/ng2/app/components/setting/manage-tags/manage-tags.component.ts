@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { TagsService } from "src/ng2/app/services/setting/tags.service";
 import { forkJoin, Observable } from "rxjs";
 import { map } from "rxjs/operators";
@@ -22,8 +22,10 @@ export class ManageTagsComponent implements OnInit {
   edit = false;
   create = false;
   selectedIdx = -1;
-
+  setActiveTab = "company";
   public loading = false;
+
+  @ViewChild("tickets") tickets: ElementRef;
 
   constructor(
     private tagsService: TagsService,
@@ -40,14 +42,6 @@ export class ManageTagsComponent implements OnInit {
     this.serviceAllTickets = this.tagsService.getAllTickets();
     this.serviceAllCompany = this.tagsService.getAllCompany();
     this.getAllTags();
-  }
-
-  editCompany(company, index) {
-    this.edit = true;
-    this.selectedIdx = index;
-    if (company) {
-      this.compnayForm.patchValue({ word: company.word, id: company.id });
-    }
   }
 
   getAllTags() {
@@ -68,10 +62,41 @@ export class ManageTagsComponent implements OnInit {
       );
   }
 
+  getAllCompany() {
+    this.serviceAllCompany.subscribe(
+      res => {
+        this.companyTags = res;
+        this.loading = false;
+      },
+      error => {
+        this.loading = false;
+        console.log(error);
+      }
+    );
+  }
+
+  getAllTickets() {
+    this.serviceAllTickets.subscribe(
+      res => {
+        this.loading = false;
+        this.ticketTags = res;
+      },
+      error => {
+        this.loading = false;
+        console.log(error);
+      }
+    );
+  }
+
   // TODO
   getAllDevice() {}
 
   setTab() {
+    if (this.tickets.nativeElement.className.indexOf("active") > -1) {
+      this.setActiveTab = "ticket";
+    } else {
+      this.setActiveTab = "company";
+    }
     this.searchTag = "";
   }
 
@@ -80,12 +105,24 @@ export class ManageTagsComponent implements OnInit {
     return this.compnayForm.controls;
   }
 
+  editTag(tag, index) {
+    this.edit = true;
+    this.selectedIdx = index;
+    if (tag) {
+      this.compnayForm.patchValue({ word: tag.word, id: tag.id });
+    }
+  }
+
   removeCompanyTag(tagId: string) {
     this.loading = true;
-    this.tagsService.removeCompanyTag(tagId).subscribe(
+    this.tagsService.removeCompanyTag(tagId, this.setActiveTab).subscribe(
       res => {
         this.toaster.success("Tag removed successfully");
-        this.getAllTags();
+        if (this.setActiveTab === "ticket") {
+          this.getAllTickets();
+        } else {
+          this.getAllCompany();
+        }
       },
       error => {
         this.loading = false;
@@ -103,19 +140,25 @@ export class ManageTagsComponent implements OnInit {
 
     this.selectedIdx = -1;
     this.create = false;
+    this.loading = true;
+
     if (!this.edit) {
       const tags = {
         colorCode: 0,
         usedCounter: 0,
         word: this.compnayForm.value.word
       };
-      this.loading = true;
-      this.tagsService.tags(tags).subscribe(
+      this.tagsService.tags(tags, this.setActiveTab).subscribe(
         res => {
           this.toaster.success("Tag saved successfully");
-          this.getAllTags();
+          if (this.setActiveTab === "ticket") {
+            this.getAllTickets();
+          } else {
+            this.getAllCompany();
+          }
+
           this.submitted = false;
-          this.compnayForm.patchValue({word : ''})
+          this.compnayForm.patchValue({ word: "" });
         },
         error => {
           this.loading = false;
@@ -124,13 +167,21 @@ export class ManageTagsComponent implements OnInit {
       );
     } else {
       this.tagsService
-        .setWordForTag(this.compnayForm.value.id, this.compnayForm.value.word)
+        .setWordForTag(
+          this.compnayForm.value.id,
+          this.compnayForm.value.word,
+          this.setActiveTab
+        )
         .subscribe(
           res => {
-            this.toaster.success("Tag saved successfully");
-            this.getAllTags();
+            this.toaster.success("Tag updated successfully");
+            if (this.setActiveTab === "ticket") {
+              this.getAllTickets();
+            } else {
+              this.getAllCompany();
+            }
             this.submitted = false;
-            this.compnayForm.patchValue({word : ''})
+            this.compnayForm.patchValue({ word: "" });
           },
           error => {
             this.loading = false;
@@ -138,5 +189,6 @@ export class ManageTagsComponent implements OnInit {
           }
         );
     }
+    this.edit = false;
   }
 }

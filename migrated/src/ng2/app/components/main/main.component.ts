@@ -18,15 +18,11 @@ export class MainComponent implements OnInit {
     this.router.events.subscribe(event => {
       const appType = this.router.url.startsWith('/ng2') ? 'ng2' : 'ng1';
       this.setAppType(appType);
-      if (appType === 'ng2') {
-        this.renderer.addClass(this.document.body, 'ng7');
-      } else {
-        this.renderer.removeClass(document.body, 'ng7');
-      }
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   setAppType(appType) {
     this.appType = appType;
