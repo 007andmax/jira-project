@@ -41,6 +41,10 @@ export class ForCreateService implements Service  {
         this.duration = data.duration;
       
     }
+    public onInitCopyCrete (data) {
+        this.description = data.serviceDescription;
+     //   this.duration = data.duration;
+    }
 public setName(name) {
 this.name = name;
 }

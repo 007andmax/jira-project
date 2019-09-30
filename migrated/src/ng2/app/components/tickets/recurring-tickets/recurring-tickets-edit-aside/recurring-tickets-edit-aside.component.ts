@@ -236,7 +236,7 @@ console.log('this.services',JSON.parse(JSON.stringify(this.services)));
  */
   public setService(item, index) {
    
-    if (this.services[index] instanceof ForCreateService) {
+    if (this.services[index] instanceof ForCreateService && this.services[index].versionedId) {
       console.log('this.services[index]0', item);
       this.services[index].setName(item.name);
       this.services[index].setVersionedId(item.setVersionedId);
@@ -244,7 +244,7 @@ console.log('this.services',JSON.parse(JSON.stringify(this.services)));
       item = { ...item, ...{ description: '', duration: (this.services[index].duration) ? this.services[index].duration : 1 } };
       this.services[index] = new ForCreateService(item);
     }
-    
+    console.log('this.services',this.services);
    
   }
 
@@ -374,6 +374,7 @@ console.log('this.services',JSON.parse(JSON.stringify(this.services)));
       }
     }
     if (this.ticketForEdit && this.ticketForEdit.id) {
+      console.log('this.recurringState.getCreateTicket()',this.recurringState.getCreateTicket());
       this.recurringState.getCreateTicket().checkForEdit(this.ticketForEdit);
       this.recurringService.editTicket(this.ticketForEdit, this.recurringState.getCreateTicket()).subscribe((res) => {
         this.close();
@@ -420,6 +421,7 @@ console.log('this.services',JSON.parse(JSON.stringify(this.services)));
 
   public copyAndCreate () {
     let data = JSON.parse(JSON.stringify(this.ticketForEdit));
+    console.log('data',data);
     this.close();
     this.recurringState.onInitCopyCreate(data);
    

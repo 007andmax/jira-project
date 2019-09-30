@@ -347,6 +347,7 @@ public setCreateTaskAdd(createTask) {
         if (index >= services.length || service.duration !== services[index].duration || service.serviceDescription !== services[index].description || service.service.versionedId.id !== services[index].versionedId.id) change = true;
       })
       if (!ticketForEdit.services[0] && services[0].versionedId) change = true;
+      if (ticketForEdit.services.length !== services.length) change = true;
     } else {
       if (services[0].versionedId) change = true;
     }

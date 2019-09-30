@@ -79,16 +79,25 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     })
   }
 
-  private onInitCopyCreate (data) {
+  private onInitCopyCreate(data) {
     this.createService.setDescription(data.description);
     this.tehUsers = data.assignedUsers;
- 
+    console.log('data', data);
     this.devicesService.onInitHangle(data.company.id);
     this.selectedClient = data.company;
     this.createService.getStateDatePicker().onInitEditMode(data.startDate);
-    console.log('this.services',JSON.parse(JSON.stringify(this.services)));
+    this.services = (data.services.length > 0) ? [] : [new ForCreateService()];
+    let services = [];
+    data.services.forEach((service, index) => {
+      let new_service = new ForCreateService();
+      new_service.onInitCopyCrete(service);
+      services.push(new_service);
+
+    });
+    this.services = services;
+    console.log('this.services', this.services);
     this.products = (data.products.length > 0) ? this.createService.getProductsForEdit(data.products) : [new ForCreateProduct()];
-     this.createService.setTagsForEdit(data.tags);
+    this.createService.setTagsForEdit(data.tags);
     this.createService.setCreateTaskAdd(data.createTask);
     this.createService.setRequireUpdateAdd(data.requireUpdate);
     this.createService.setQuickCloseAdd(data.quickClose);
@@ -97,7 +106,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.onChangeCron(data.cronExpression)
     this.getListServices(data.company);
     this.cd.detectChanges();
-    console.log('createService',this.createService);
+    console.log('createService', this.createService);
   }
 
   /**
@@ -211,7 +220,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
 
       this.selectedClient = null;
       this.recurringState.setClient(selectClient);
-    
+
     } else {
       this.recurringState.getCreateTicket().setCompany(selectClient.item.id);
       this.selectedClient = selectClient.item;
@@ -254,7 +263,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   * @param index - index
   */
   public setService(item, index) {
-    if (this.services[index] instanceof ForCreateService) {
+    if (this.services[index] instanceof ForCreateService && this.services[index].versionedId) {
       console.log('this.services[index]0', item);
       this.services[index].setName(item.name);
       this.services[index].setVersionedId(item.setVersionedId);
@@ -428,7 +437,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   }
 
   public trackById(index, item) {
-    return (item.versionedId) ?  item.versionedId.id : index;
+    return (item.versionedId) ? item.versionedId.id : index;
   }
 
   public trackByIndex(index, item) {
