@@ -121,9 +121,10 @@
             </div>
             <div class="assign-list"
                  ng-if="ticketDetails.multiAssignedUsers && ticketDetails.multiAssignedUsers.length > 0">
+                 <span class="show-more-assigned-users" ng-click="moreAssignedUsers()" ng-if="countShowAssignedUsers < ticketDetails.multiAssignedUsers.length">+{{ticketDetails.multiAssignedUsers.length - 3}} more</span>
               <div class="shared-avatar pointer"
                    uib-tooltip="{{ sharedUser.firstName + ' ' + sharedUser.lastName }}"
-                   ng-repeat="sharedUser in ticketDetails.multiAssignedUsers">
+                   ng-repeat="sharedUser in ticketDetails.multiAssignedUsers" ng-if="($index +1) <= countShowAssignedUsers">
                 <img ng-if="sharedUser.avatar" src="{{getUserAvatarUrl(sharedUser)}}" />
                 <div class="default-user-avatar" ng-if="!sharedUser.avatar"
                      ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
@@ -131,6 +132,7 @@
                   <span>{{sharedUser.lastName[0].toUpperCase()}}</span>
                 </div>
               </div>
+             
             </div>
           </div>
           <div class="ticket-header-actions" ng-show="listType !== 'preview'">

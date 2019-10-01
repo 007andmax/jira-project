@@ -24,6 +24,7 @@
           $scope.selectUpdateSharedUser = {};
           $scope.ticketSharedUsersList = [];
           $scope.disabledWhenLoadAttachment = false;
+          $scope.countShowAssignedUsers = 3;
          $scope.disabledFutureDatePicker = false;
          $scope.disabledWhenNoCompleted = false;
           $scope.autocompleteData = ProductsService.getFullListForAutocomplete($scope);
@@ -71,6 +72,9 @@
               $scope.setEditExpenseId();
               $scope.disabledWhenNoCompleted = (!$scope.checkCompleted()) ? true : false;
           });
+          }
+          $scope.moreAssignedUsers = function () {
+$scope.countShowAssignedUsers = $scope.ticketDetails.multiAssignedUsers.length;
           }
         /*  $scope.modalEditDate = function (item,editType) {
             $scope.editType = editType;
