@@ -216,66 +216,91 @@
             </div>
 
             <div class="ticket--footer">
-              <div class="notify-user-dropdown">
-                <div class="dropdown-user-parent"
-                     ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAssignTo')}"
-                     uib-dropdown auto-close="outsideClick">
-                  <div uib-dropdown-toggle smart-dropdown-menu-position no-restricted="true">
-                    <img src="ng1/images/new-icons/add-user.png" class="pointer" style="margin: 0 20px 0 0;"
-                         uib-tooltip="add user" tooltip-placement="top" tooltip-append-to-body="true" />
-                  </div>
-                  <div uib-dropdown-menu
-                       class="dropdown-assign-ticket fixed-assign dropdown-menu without-max-height"
-                       stop-propagation="click"
-                       assign-user-button
-                       onUserAssign="'true'"
-                       aub-create-ticket="true"
-                       aub-is-bulk-operation="true"
-                       style="max-height: auto !important"
-                       aub-ticket-number="ticket.number"
-                       users="usersToWatch"
-                       aub-current-user="currentUser"></div>
-                  <div typeahead-input-icon-sm="ticketAssignTo"></div>
-                </div>
-                <div class="shared-avatars">
-                  <div class="client-users avatars" ng-if="filterByType(ticketSharedUsersList, 'CLIENT').length">
-                    <div class="shared-avatar pointer"
-                         uib-tooltip="{{ sharedUser.user.firstName + ' ' + sharedUser.user.lastName }}"
-                         ng-click="sharedUser.notify = !sharedUser.notify"
-                         ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'CLIENT')">
-                      <img ng-if="sharedUser.user.avatar" src="{{getUserAvatarUrl(sharedUser.user)}}" />
-                      <div class="default-user-avatar" ng-if="!(sharedUser.user.avatar)"
-                           ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
-                        <span>{{sharedUser.user.firstName[0].toUpperCase()}}</span>
-                        <span>{{sharedUser.user.lastName[0].toUpperCase()}}</span>
+                <div class="notify-user-dropdown">
+                    <div class="dropdown-user-parent"
+                         ng-click="showAddUser = !showAddUser">
+                      <i class="assign-icn pointer"
+                         uib-tooltip="add user"
+                         style="margin: 6px 10px 0 0;"
+                         tooltip-placement="top"
+                         tooltip-append-to-body="true"></i>
+                    </div>
+                    <div class="add-users" ng-if="showAddUser" uib-dropdown>
+                      <div class="add-users-container" uib-dropdown-toggle
+                           smart-dropdown-menu-position
+                           no-restricted="true">
+      
+                        <div class="selected-assign-user" ng-repeat="user in selectedAssignUsers track by $index">
+                          <div ng-if="user.user.avatar">
+                            <img src="{{getUserAvatarUrl(user.user)}}" />
+                            <span class="user-full-name">{{user.user.firstName}}{{user.user.lastName}}</span>
+                          </div>
+                          <div ng-if="!(user.user.avatar)">
+                            <span class="default-user-avatar"
+                                  ng-class-odd="'avatar-background-color-odd'"
+                                  ng-class-even="'avatar-background-color-even'">{{user.user.firstName[0].toUpperCase()}}{{user.user.lastName[0].toUpperCase()}}</span>
+                            <span class="user-full-name">{{user.user.firstName}}{{user.user.lastName}}</span>
+                          </div>
+                          <i class="icn-sm remove-tag" ng-click="removeAssignUser($index)"></i>
+                        </div>
                       </div>
-                      <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
-                        <img src="ng1/images/input-icons/checkbox-checked.png" />
+                      <div class="list-users" uib-dropdown-menu>
+                        <div class="item-user" ng-repeat="sharedUser in ticketSharedUsersList"
+                             ng-click="selecAssigntUser(sharedUser)">
+                          <img ng-if="sharedUser.user.avatar" src="{{getUserAvatarUrl(sharedUser.user)}}" />
+                          <div class="default-user-avatar" ng-if="!(sharedUser.user.avatar)"
+                               ng-class-odd="'avatar-background-color-odd'"
+                               ng-class-even="'avatar-background-color-even'">
+                            <span>{{sharedUser.user.firstName[0].toUpperCase()}}</span>
+                            <span>{{sharedUser.user.lastName[0].toUpperCase()}}</span>
+                          </div>
+                          <p>{{sharedUser.user.firstName + ' ' + sharedUser.user.lastName}}</p>
+                          <p>{{sharedUser.user.primaryEmail}}</p>
+                        </div>
+      
+      
                       </div>
+      
+                    </div>
+                    <div class="shared-avatars" ng-if="!showAddUser">
+                      <div class="client-users avatars" ng-if="filterByType(selectedAssignUsers, 'CLIENT').length">
+                        <div class="shared-avatar pointer"
+                             uib-tooltip="{{ sharedUser.user.firstName + ' ' + sharedUser.user.lastName }}"
+                             ng-click="sharedUser.notify = !sharedUser.notify"
+                             ng-repeat="sharedUser in filterByType(selectedAssignUsers, 'CLIENT')">
+                          <img ng-if="sharedUser.user.avatar" src="{{getUserAvatarUrl(sharedUser.user)}}" />
+                          <div class="default-user-avatar" ng-if="!(sharedUser.user.avatar)"
+                               ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
+                            <span>{{sharedUser.user.firstName[0].toUpperCase()}}</span>
+                            <span>{{sharedUser.user.lastName[0].toUpperCase()}}</span>
+                          </div>
+                          <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
+                            <img src="ng1/images/input-icons/checkbox-checked.png" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="tech-users avatars">
+                        <div class="shared-avatar pointer"
+                             uib-tooltip="{{ sharedUser.user.firstName + ' ' + sharedUser.user.lastName }}"
+                             ng-click="sharedUser.notify = !sharedUser.notify"
+                             ng-repeat="sharedUser in filterByType(selectedAssignUsers, 'TECH')">
+                          <img ng-if="sharedUser.user.avatar" src="{{getUserAvatarUrl(sharedUser.user)}}" />
+      
+                          <div class="default-user-avatar" ng-if="!(sharedUser.user.avatar)"
+                               ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
+                            <span>{{sharedUser.user.firstName[0].toUpperCase()}}</span>
+                            <span>{{sharedUser.user.lastName[0].toUpperCase()}}</span>
+                          </div>
+      
+                          <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
+                            <img src="ng1/images/input-icons/checkbox-checked.png" />
+                          </div>
+                        </div>
+                      </div>
+      
                     </div>
                   </div>
-                  <div class="tech-users avatars">
-                    <div class="shared-avatar pointer"
-                         uib-tooltip="{{ sharedUser.user.firstName + ' ' + sharedUser.user.lastName }}"
-                         ng-click="sharedUser.notify = !sharedUser.notify"
-                         ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'TECH')">
-                      <img ng-if="sharedUser.user.avatar" src="{{getUserAvatarUrl(sharedUser.user)}}" />
-
-                      <div class="default-user-avatar" ng-if="!(sharedUser.user.avatar)"
-                           ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
-                        <span>{{sharedUser.user.firstName[0].toUpperCase()}}</span>
-                        <span>{{sharedUser.user.lastName[0].toUpperCase()}}</span>
-                      </div>
-
-                      <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
-                        <img src="ng1/images/input-icons/checkbox-checked.png" />
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-              <div class="df btn-add-container">
+              <div class="df btn-add-container" ng-if="!showAddUser">
                 <div class="btn btn-success btn-new"
                      custom-disabled="{{ (!haveNote() && !haveAttachments() && isCurrentTab('NOTE')) || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
                      ng-click="saveTicketUpdate(ticketUpdateForm)">
@@ -334,66 +359,91 @@
           </div>
 
           <div class="ticket--footer">
-            <div class="notify-user-dropdown">
-              <div class="dropdown-user-parent"
-                   ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAssignTo')}"
-                   uib-dropdown auto-close="outsideClick">
-                <div uib-dropdown-toggle smart-dropdown-menu-position no-restricted="true">
-                  <img src="ng1/images/new-icons/add-user.png" class="pointer" style="margin: 0 20px 0 0;"
-                       uib-tooltip="add user" tooltip-placement="top" tooltip-append-to-body="true" />
-                </div>
-                <div uib-dropdown-menu
-                     class="dropdown-assign-ticket fixed-assign dropdown-menu without-max-height"
-                     stop-propagation="click"
-                     assign-user-button
-                     onUserAssign="'true'"
-                     aub-create-ticket="true"
-                     aub-is-bulk-operation="true"
-                     style="max-height: auto !important"
-                     aub-ticket-number="ticket.number"
-                     users="usersToWatch"
-                     aub-current-user="currentUser"></div>
-                <div typeahead-input-icon-sm="ticketAssignTo"></div>
-              </div>
-              <div class="shared-avatars">
-                <div class="client-users avatars" ng-if="filterByType(ticketSharedUsersList, 'CLIENT').length">
-                  <div class="shared-avatar pointer"
-                       uib-tooltip="{{ sharedUser.user.firstName + ' ' + sharedUser.user.lastName }}"
-                       ng-click="sharedUser.notify = !sharedUser.notify"
-                       ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'CLIENT')">
-                    <img ng-if="sharedUser.user.avatar" src="{{getUserAvatarUrl(sharedUser.user)}}" />
-                    <div class="default-user-avatar" ng-if="!(sharedUser.user.avatar)"
-                         ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
-                      <span>{{sharedUser.user.firstName[0].toUpperCase()}}</span>
-                      <span>{{sharedUser.user.lastName[0].toUpperCase()}}</span>
+              <div class="notify-user-dropdown">
+                  <div class="dropdown-user-parent"
+                       ng-click="showAddUser = !showAddUser">
+                    <i class="assign-icn pointer"
+                       uib-tooltip="add user"
+                       style="margin: 6px 10px 0 0;"
+                       tooltip-placement="top"
+                       tooltip-append-to-body="true"></i>
+                  </div>
+                  <div class="add-users" ng-if="showAddUser" uib-dropdown>
+                    <div class="add-users-container" uib-dropdown-toggle
+                         smart-dropdown-menu-position
+                         no-restricted="true">
+    
+                      <div class="selected-assign-user" ng-repeat="user in selectedAssignUsers track by $index">
+                        <div ng-if="user.user.avatar">
+                          <img src="{{getUserAvatarUrl(user.user)}}" />
+                          <span class="user-full-name">{{user.user.firstName}}{{user.user.lastName}}</span>
+                        </div>
+                        <div ng-if="!(user.user.avatar)">
+                          <span class="default-user-avatar"
+                                ng-class-odd="'avatar-background-color-odd'"
+                                ng-class-even="'avatar-background-color-even'">{{user.user.firstName[0].toUpperCase()}}{{user.user.lastName[0].toUpperCase()}}</span>
+                          <span class="user-full-name">{{user.user.firstName}}{{user.user.lastName}}</span>
+                        </div>
+                        <i class="icn-sm remove-tag" ng-click="removeAssignUser($index)"></i>
+                      </div>
                     </div>
-                    <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
-                      <img src="ng1/images/input-icons/checkbox-checked.png" />
+                    <div class="list-users" uib-dropdown-menu>
+                      <div class="item-user" ng-repeat="sharedUser in ticketSharedUsersList"
+                           ng-click="selecAssigntUser(sharedUser)">
+                        <img ng-if="sharedUser.user.avatar" src="{{getUserAvatarUrl(sharedUser.user)}}" />
+                        <div class="default-user-avatar" ng-if="!(sharedUser.user.avatar)"
+                             ng-class-odd="'avatar-background-color-odd'"
+                             ng-class-even="'avatar-background-color-even'">
+                          <span>{{sharedUser.user.firstName[0].toUpperCase()}}</span>
+                          <span>{{sharedUser.user.lastName[0].toUpperCase()}}</span>
+                        </div>
+                        <p>{{sharedUser.user.firstName + ' ' + sharedUser.user.lastName}}</p>
+                        <p>{{sharedUser.user.primaryEmail}}</p>
+                      </div>
+    
+    
                     </div>
+    
+                  </div>
+                  <div class="shared-avatars" ng-if="!showAddUser">
+                    <div class="client-users avatars" ng-if="filterByType(selectedAssignUsers, 'CLIENT').length">
+                      <div class="shared-avatar pointer"
+                           uib-tooltip="{{ sharedUser.user.firstName + ' ' + sharedUser.user.lastName }}"
+                           ng-click="sharedUser.notify = !sharedUser.notify"
+                           ng-repeat="sharedUser in filterByType(selectedAssignUsers, 'CLIENT')">
+                        <img ng-if="sharedUser.user.avatar" src="{{getUserAvatarUrl(sharedUser.user)}}" />
+                        <div class="default-user-avatar" ng-if="!(sharedUser.user.avatar)"
+                             ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
+                          <span>{{sharedUser.user.firstName[0].toUpperCase()}}</span>
+                          <span>{{sharedUser.user.lastName[0].toUpperCase()}}</span>
+                        </div>
+                        <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
+                          <img src="ng1/images/input-icons/checkbox-checked.png" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="tech-users avatars">
+                      <div class="shared-avatar pointer"
+                           uib-tooltip="{{ sharedUser.user.firstName + ' ' + sharedUser.user.lastName }}"
+                           ng-click="sharedUser.notify = !sharedUser.notify"
+                           ng-repeat="sharedUser in filterByType(selectedAssignUsers, 'TECH')">
+                        <img ng-if="sharedUser.user.avatar" src="{{getUserAvatarUrl(sharedUser.user)}}" />
+    
+                        <div class="default-user-avatar" ng-if="!(sharedUser.user.avatar)"
+                             ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
+                          <span>{{sharedUser.user.firstName[0].toUpperCase()}}</span>
+                          <span>{{sharedUser.user.lastName[0].toUpperCase()}}</span>
+                        </div>
+    
+                        <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
+                          <img src="ng1/images/input-icons/checkbox-checked.png" />
+                        </div>
+                      </div>
+                    </div>
+    
                   </div>
                 </div>
-                <div class="tech-users avatars">
-                  <div class="shared-avatar pointer"
-                       uib-tooltip="{{ sharedUser.user.firstName + ' ' + sharedUser.user.lastName }}"
-                       ng-click="sharedUser.notify = !sharedUser.notify"
-                       ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'TECH')">
-                    <img ng-if="sharedUser.user.avatar" src="{{getUserAvatarUrl(sharedUser.user)}}" />
-
-                    <div class="default-user-avatar" ng-if="!(sharedUser.user.avatar)"
-                         ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
-                      <span>{{sharedUser.user.firstName[0].toUpperCase()}}</span>
-                      <span>{{sharedUser.user.lastName[0].toUpperCase()}}</span>
-                    </div>
-
-                    <div class="check-area" ng-class="{ 'checked': sharedUser.notify }">
-                      <img src="ng1/images/input-icons/checkbox-checked.png" />
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-            <div class="df btn-add-container">
+            <div class="df btn-add-container" ng-if="!showAddUser">
               <div class="btn btn-success btn-new"
                    custom-disabled="{{ (!haveNote() && !haveAttachments() && isCurrentTab('NOTE')) || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
                    ng-click="saveTicketUpdate(ticketUpdateForm)">
