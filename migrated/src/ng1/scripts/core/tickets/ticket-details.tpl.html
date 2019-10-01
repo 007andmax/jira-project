@@ -97,8 +97,8 @@
                     </li>
                   </ul>
                 </div>
-                {{ userReadable(ticketDetails.ticketSource) }},  Agent - {{ticketDetails.agent.label}}
-               
+                {{ userReadable(ticketDetails.ticketSource) }}, Agent - {{ticketDetails.agent.label}}
+
                 <span ng-if="ticketDetails.sourceName && ticketDetails.ticketSource.toLowerCase() === 'from_agent'">
                   &nbsp;({{ ticketDetails.sourceName }})
                 </span>
@@ -132,13 +132,13 @@
               </div>
             </div>
 
-            <div uib-dropdown auto-close="outsideClick" class="ticket-assign-actions dropdown-to-left" >
-            
-                 <div uib-tooltip="Assign"
-                 tooltip-placement="top" uib-dropdown-toggle smart-dropdown-menu-position
-                 no-restricted="true">
-              <button class="ticket-assign"></button>
-            </div>
+            <div uib-dropdown auto-close="outsideClick" class="ticket-assign-actions dropdown-to-left">
+
+              <div uib-tooltip="Assign"
+                   tooltip-placement="top" uib-dropdown-toggle smart-dropdown-menu-position
+                   no-restricted="true">
+                <button class="ticket-assign"></button>
+              </div>
               <div uib-dropdown-menu
                    class="dropdown-assign-ticket fixed-assign dropdown-menu without-max-height"
                    stop-propagation="click" onUserAssign="'true'"
@@ -150,24 +150,24 @@
             </div>
 
 
-          <!--  <div class="ticket-assign-actions dropdown-to-left" uib-dropdown auto-close="outsideClick"
-                 smart-dropdown-menu-position>
-              <div uib-tooltip="Assign"
-                   tooltip-placement="top" uib-dropdown-toggle no-restricted="true">
-                <button class="ticket-assign"></button>
-              </div>
-              <div style="right: 0;"
-                   class="dropdown-assign-ticket dropdown-menu fixed-assign"
-                   stop-propagation="click"
-                   dropdown-menu
-                   assign-user-button aub-ticket-id="ticketDetails.id"
-                   ticket-assigned-user-id="ticketDetails.assignedUser.id"
-                   aub-ticket-number="ticketDetails.number"
-                   users="usersCurrentCompany"
-                   aub-current-user="currentUser">
-              </div>
-              <div typeahead-input-icon-sm="ticketAssignTo"></div>
-            </div>-->
+            <!--  <div class="ticket-assign-actions dropdown-to-left" uib-dropdown auto-close="outsideClick"
+				   smart-dropdown-menu-position>
+				<div uib-tooltip="Assign"
+					 tooltip-placement="top" uib-dropdown-toggle no-restricted="true">
+				  <button class="ticket-assign"></button>
+				</div>
+				<div style="right: 0;"
+					 class="dropdown-assign-ticket dropdown-menu fixed-assign"
+					 stop-propagation="click"
+					 dropdown-menu
+					 assign-user-button aub-ticket-id="ticketDetails.id"
+					 ticket-assigned-user-id="ticketDetails.assignedUser.id"
+					 aub-ticket-number="ticketDetails.number"
+					 users="usersCurrentCompany"
+					 aub-current-user="currentUser">
+				</div>
+				<div typeahead-input-icon-sm="ticketAssignTo"></div>
+			  </div>-->
             <div class="ticket-settings-actions" uib-dropdown>
               <div uib-tooltip="Settings"
                    tooltip-placement="top" aria-expanded="false"
@@ -278,17 +278,19 @@
             <div class="file-icon-name attach-type-{{ type }}"></div>
             <div class="file-name" ng-bind="attachment.file.name"></div>
             <div class="onhover">
-              <div   create-new-entity="preview" ng-if="attachment.file.contentType == 'image/png' || attachment.file.contentType == 'image/jpg'"
-              file-id="{{attachment.file.id}}">
+              <div create-new-entity="preview"
+                   class="clickable-preview"
+                   ng-if="attachment.file.contentType == 'image/png' || attachment.file.contentType == 'image/jpg'"
+                   file-id="{{attachment.file.id}}">
+              </div>
               <span class="file-name" style="text-align: left;line-height: 18px;font-weight: 700;color: #4f5f79;"
                     ng-bind="attachment.file.name"></span>
               <span class="file-size">{{ attachment.file.size | fileSizeFilter }}</span>
-            </div>
-            <div ng-if="attachment.file.contentType != 'image/png' && attachment.file.contentType != 'image/jpg'">
-                <span class="file-name" style="text-align: left;line-height: 18px;font-weight: 700;color: #4f5f79;"
-                    ng-bind="attachment.file.name"></span>
-              <span class="file-size">{{ attachment.file.size | fileSizeFilter }}</span>
-            </div>
+<!--              <div ng-if="attachment.file.contentType != 'image/png' && attachment.file.contentType != 'image/jpg'">-->
+<!--                <span class="file-name" style="text-align: left;line-height: 18px;font-weight: 700;color: #4f5f79;"-->
+<!--                      ng-bind="attachment.file.name"></span>-->
+<!--                <span class="file-size">{{ attachment.file.size | fileSizeFilter }}</span>-->
+<!--              </div>-->
               <a href="javascript:void(0)" class="tp-hide file-download has-tooltip combined-shape"
                  uib-tooltip="Download" tooltip-placement="top"
                  ng-click="downloadAttachment(attachment.file.id, attachment.file.name)">
@@ -389,7 +391,7 @@
                          tooltip-append-to-body="true"
                          uib-tooltip="edit update"
                          ng-click="toggleNoteUpdate(ticketUpdate)"
-                        
+
                          custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">
                         <i class="icon-sm edit-icon-final"></i>
                       </a>
@@ -447,9 +449,9 @@
                           <div class="file-icon-name attach-type-{{ type }}"></div>
                           <div class="file-name" ng-bind="attachment.file.name"></div>
                           <div class="onhover">
-                    <span class="file-name"
-                          style="text-align: left;line-height: 18px;font-weight: 700;color: #4f5f79;"
-                          ng-bind="attachment.file.name"></span>
+                            <span class="file-name"
+                                  style="text-align: left;line-height: 18px;font-weight: 700;color: #4f5f79;"
+                                  ng-bind="attachment.file.name"></span>
                             <span class="file-size">{{ attachment.file.size | fileSizeFilter }}</span>
                             <a href="javascript:void(0)" class="tp-hide file-download has-tooltip combined-shape"
                                data-placement="top" uib-tooltip="Download"
