@@ -278,9 +278,17 @@
             <div class="file-icon-name attach-type-{{ type }}"></div>
             <div class="file-name" ng-bind="attachment.file.name"></div>
             <div class="onhover">
+              <div   create-new-entity="preview" ng-if="attachment.file.contentType == 'image/png' || attachment.file.contentType == 'image/jpg'"
+              file-id="{{attachment.file.id}}">
               <span class="file-name" style="text-align: left;line-height: 18px;font-weight: 700;color: #4f5f79;"
                     ng-bind="attachment.file.name"></span>
               <span class="file-size">{{ attachment.file.size | fileSizeFilter }}</span>
+            </div>
+            <div ng-if="attachment.file.contentType != 'image/png' && attachment.file.contentType != 'image/jpg'">
+                <span class="file-name" style="text-align: left;line-height: 18px;font-weight: 700;color: #4f5f79;"
+                    ng-bind="attachment.file.name"></span>
+              <span class="file-size">{{ attachment.file.size | fileSizeFilter }}</span>
+            </div>
               <a href="javascript:void(0)" class="tp-hide file-download has-tooltip combined-shape"
                  uib-tooltip="Download" tooltip-placement="top"
                  ng-click="downloadAttachment(attachment.file.id, attachment.file.name)">
