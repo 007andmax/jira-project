@@ -12,7 +12,7 @@
 
         <div class="col-md-12 google-plus">
           <p>Company Name</p>
-          <input type="text"
+          <input type="text" [(ngModel)]="company.name"
                  placeholder="Write Company or Search Company">
         </div>
         <div class="col-md-6">
@@ -20,19 +20,26 @@
           <input type="text"
                  placeholder="Select Company Type">
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6" ngbDropdown  >
           <p>Primary Contact</p>
-          <input type="text"
+          <input type="text"  id="dropdownCompanyType" ngbDropdownToggle
                  placeholder="Enter Primary Phone">
+                <div class="dropdown-menu show" ngbDropdownMenu aria-labelledby="dropdownCompanyType">
+                  <button class="dropdown-item" *ngFor="let item of companyTypes" (click)="company.clientType = item">
+                    {{item}}
+                  </button>
+                </div>
         </div>
         <div class="col-md-12">
           <p>Domain Name</p>
           <input type="text"
+          [(ngModel)]="company.domain"
                  placeholder="http://www.example.com">
         </div>
         <div class="col-md-6">
           <p>First Name</p>
           <input type="text"
+          [(ngModel)]="company.domain"
                  placeholder="Enter First Name">
         </div>
         <div class="col-md-6">

@@ -443,7 +443,7 @@
             //   editCompany.techLeadIds = techIds;
             //
             // }
-
+console.log('editCompany',editCompany);
 
 
 
