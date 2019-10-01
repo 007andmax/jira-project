@@ -38,6 +38,7 @@
           $scope.selectedAssignUsers = [];
           var updateService = false;
           var updateProduct = false;
+          var claimTicket = false;
           $timeout(function() {
             ticketMobileSettings.data = $scope;
           }, 3000);
@@ -61,7 +62,12 @@
 
               $scope.setEditExpenseId();
               $scope.disabledWhenNoCompleted = (!$scope.checkCompleted()) ? true : false;
-
+              console.log('claimTicket',claimTicket);
+              if (claimTicket)
+              {
+                claimTicket = false;
+                $scope.claimTicket();
+              }
           });
           }
           $scope.updateService = function (data) {
@@ -71,6 +77,12 @@
 
               $scope.setEditExpenseId();
               $scope.disabledWhenNoCompleted = (!$scope.checkCompleted()) ? true : false;
+              console.log('claimTicket',claimTicket);
+              if (claimTicket)
+              {
+                claimTicket = false;
+                $scope.claimTicket();
+              }
           });
           }
           $scope.moreAssignedUsers = function () {
@@ -280,7 +292,7 @@ console.log('find');
             $scope.updateService(data);
           });
           $scope.onCompletedChange = function (item,type,id) {
-
+        if (!$scope.ticketDetails.status && !$scope.ticketDetails.assignedUser && $scope.ticketDetails.multiAssignedUsers.length === 0) claimTicket = true;
          
             var id_update = null;
             $scope.ticketDetails.updates.forEach(function (update) {
