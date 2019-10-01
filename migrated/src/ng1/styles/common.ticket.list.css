@@ -30,7 +30,7 @@
 
 .ticket {
   list-style: none;
-  background-color: #fff;
+  background-color: #ffffff;
   padding: 15px 30px 0 0;
   position: relative;
   cursor: pointer;
@@ -99,10 +99,22 @@
   margin-left: -10px;
 }
 
+.show-more-assigned-users {
+  margin-right: 13px;
+  margin-top: 2px;
+  color: #16a4fa;
+  font-size: 12px;
+  cursor: pointer;
+}
+
 .ticket-header-assign {
   position: absolute;
   right: 150px;
   top: 37px;
+}
+
+.is-edit .ticket-header-assign {
+  right: 190px;
 }
 
 .assign-list {
@@ -154,7 +166,7 @@
 }
 
 .ticket--footer .add-users {
-  background: #fff;
+  background: #ffffff;
   border: 1px solid #c4cbd5;
   border-radius: 4px;
   height: auto;
@@ -230,7 +242,7 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  border: 3px solid #fff;
+  border: 3px solid #ffffff;
 }
 
 .assign-list .default-user-avatar span {
@@ -493,11 +505,11 @@
   body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
     width: 408px;
   }
-  
+
   .opened-ticket-list.opened-ticket .content-wrapper .container-ticket-content {
     width: calc(100% - 801px);
   }
-  
+
   /*.opened-ticket-list .ticket-post-update-wrapper {*/
   /*right: calc(100vw - 1477px);*/
   /*}*/
@@ -505,7 +517,7 @@
     top: 10px;
     right: 10px;
   }
-  
+
   /*.opened-ticket-list .ticket-post-update-wrapper {*/
   /*right: 123px;*/
   /*}*/
@@ -515,23 +527,23 @@
   .ticket-post-update-wrapper {
     padding: 20px;
   }
-  
+
   .ticket-detail input {
     margin-top: 45px;
   }
-  
+
   .opened-ticket-list .ticket-post-update-wrapper {
     /*width: 540px;*/
     right: calc(100vw - 1266px);
   }
-  
+
   /*.opened-ticket-list .container-ticket-content .nano-content {*/
   /*width: 540px !important;*/
   /*}*/
   .left-panel-closed.opened-ticket-list .ticket-header.ticket-fixed-header {
     width: calc(100% - 717px);
   }
-  
+
   .ticket-detail h2 {
     padding-top: 17px;
   }
@@ -541,7 +553,7 @@
   .container-ticket-content .nano-content {
     width: 100% !important;
   }
-  
+
   .ticket-detail h2 {
     padding-top: 5px;
   }
