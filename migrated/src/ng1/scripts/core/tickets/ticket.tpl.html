@@ -83,7 +83,7 @@
              uib-tooltip="{{ getFirstNameUser(getUserById(ticket.assignedUserId)) + ' ' + getLastNameUser(getUserById(ticket.assignedUserId)) }}"
         >
           <img ng-if="getUserById(ticket.assignedUserId).avatar"
-               src="{{getUserAvatarUrl(getUserById(ticket.assignedUserId))}}" />
+          ng-attr-src="{{getUserAvatarUrl(getUserById(ticket.assignedUserId))}}" />
           <div class="default-user-avatar" ng-if="!getUserById(ticket.assignedUserId).avatar"
                ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
             <span>{{getFirstNameUser(getUserById(ticket.assignedUserId))[0].toUpperCase()}}</span>
@@ -96,7 +96,7 @@
         <div class="shared-avatar pointer"
              uib-tooltip="{{ getFirstNameUser(getUserById(sharedUser)) + ' ' + getLastNameUser(getUserById(sharedUser)) }}"
              ng-repeat="sharedUser in ticket.multiAssignedUsers">
-          <img ng-if="getUserById(sharedUser).avatar" src="{{getUserAvatarUrl(getUserById(sharedUser))}}" />
+          <img ng-if="getUserById(sharedUser).avatar" ng-attr-src="{{getUserAvatarUrl(getUserById(sharedUser))}}" />
           <div class="default-user-avatar" ng-if="!getUserById(sharedUser).avatar"
                ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
             <span>{{getFirstNameUser(getUserById(sharedUser))[0].toUpperCase()}}</span>
