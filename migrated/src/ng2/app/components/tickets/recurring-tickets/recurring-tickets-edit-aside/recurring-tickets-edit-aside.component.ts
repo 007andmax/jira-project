@@ -205,14 +205,31 @@ console.log('this.services',JSON.parse(JSON.stringify(this.services)));
       this.selectedClient = null;
       this.recurringState.setClient(selectClient);
      
-      this.services = [new ForCreateService()];
+    //  this.services = [new ForCreateService()];
     } else {
       this.recurringState.getCreateTicket().setCompany(selectClient.item.id);
       this.selectedClient = selectClient.item;
       this.recurringState.setClient(selectClient);
-      if (this.ticketForEdit !== null && this.ticketForEdit.company.name !== this.recurringState.getCreateTicket().getCompany()) this.services = [new ForCreateService()];
+     // if (this.ticketForEdit !== null && this.ticketForEdit.company.name !== this.recurringState.getCreateTicket().getCompany()) this.services = [new ForCreateService()];
       this.onCheckListServices();
       this.getCompanyDevices();
+    }
+    if (this.services[0] instanceof ForCreateService)
+    {
+      console.log('ffff',this.ticketForEdit.services);
+      console.log('JSON.parse(JSON.stringify(this.services))',JSON.parse(JSON.stringify(this.services)));
+      let servicesOld = JSON.parse(JSON.stringify(this.services));
+      this.services = [];
+      let services = [];
+    //  this.cd.detectChanges();
+      servicesOld.forEach((service, index) => {
+        let newService = {description:service.description, duration:(service.duration) ? service.duration : 1, name: ''}
+        let new_service = new ForCreateService(newService);
+       
+        services.push(new_service);
+      });
+      console.log('services',services);
+      this.services = services;
     }
     this.cd.detectChanges();
 
@@ -234,19 +251,23 @@ console.log('this.services',JSON.parse(JSON.stringify(this.services)));
 * @param item - service
  * @param index - index
  */
-  public setService(item, index) {
-   
-    if (this.services[index] instanceof ForCreateService && this.services[index].versionedId) {
-      console.log('this.services[index]0', item);
-      this.services[index].setName(item.name);
-      this.services[index].setVersionedId(item.setVersionedId);
-    } else {
-      item = { ...item, ...{ description: '', duration: (this.services[index].duration) ? this.services[index].duration : 1 } };
-      this.services[index] = new ForCreateService(item);
-    }
-    console.log('this.services',this.services);
-   
-  }
+public setService(item, index) {
+  let newItem = { ...item, ...{ description: this.services[index].description, duration:(this.services[index].duration) ? this.services[index].duration : 1  } };
+ // let  service = new ForCreateService(newItem);
+  this.services[index] =  new ForCreateService(newItem);
+/*  this.services[index].setName(item.name);
+  this.services[index].setVersionedId(item.setVersionedId);
+  this.services[index].setDuration( (this.services[index].duration) ? this.services[index].duration : 1);*/
+  this.cd.detectChanges();
+/*  if (this.services[index] instanceof ForCreateService && this.services[index].versionedId) {
+    console.log('this.services[index]0', item);
+    this.services[index].setName(item.name);
+    this.services[index].setVersionedId(item.setVersionedId);
+  } else {
+    item = { ...item, ...{ description: '', duration: (this.services[index].duration) ? this.services[index].duration : 1 } };
+    this.services[index] = new ForCreateService(item);
+  }*/
+}
 
   /**
  * Subscribe to change device
