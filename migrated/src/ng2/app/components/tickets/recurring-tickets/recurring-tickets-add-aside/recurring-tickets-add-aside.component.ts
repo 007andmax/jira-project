@@ -81,6 +81,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
 
   private onInitCopyCreate(data) {
     this.createService.setDescription(data.description);
+    this.recurringState.getCreateTicket().setDescription(data.description);
     this.tehUsers = data.assignedUsers;
     console.log('data', data);
     this.devicesService.onInitHangle(data.company.id);
