@@ -2263,8 +2263,7 @@ span.sort-span {
   background-color: #16a4fa;
 }
 
-.dropdown-assign-ticket.fixed-assign .users-list .user-item.active,
-.dropdown-assign-ticket.fixed-assign .users-list .user-item:hover {
+.dropdown-assign-ticket.fixed-assign .users-list .user-item.active {
   background-color: #16a4fa;
 }
 
