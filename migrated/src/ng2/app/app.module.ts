@@ -41,10 +41,11 @@ import { ManageTagsComponent } from "./components/setting/manage-tags/manage-tag
 import { CompanyProfileComponent } from "./components/setting/company-profile/company-profile.component";
 
 import { TabsModule } from "ngx-bootstrap/tabs";
+import { ModalModule ,TypeaheadModule } from "ngx-bootstrap";
+
 import { LeftPanelSettingComponent } from "./components/left-panel/left-panel-setting/left-panel-setting.component";
 
 import { ImageCropperModule } from "ngx-image-cropper";
-import { ModalModule } from "ngx-bootstrap";
 import { TechUsersComponent } from "./components/setting/tech-users/tech-users.component";
 import { EmailSettingComponent } from "./components/setting/email-setting/email-setting.component";
 import { TaxesComponent } from "./components/setting/taxes/taxes.component";
@@ -215,6 +216,7 @@ angular
     TabsModule.forRoot(),
     SidebarModule.forRoot(),
     ModalModule.forRoot(),
+    TypeaheadModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: "AIzaSyAbP4DFpz4f9YcXMWUjdkOdyArX2peNt8s"
     }),
@@ -224,6 +226,7 @@ angular
       preventDuplicates: true,
     }),
     NgxLoadingModule.forRoot({
+      animationType: ngxLoadingAnimationTypes.circleSwish,
       backdropBackgroundColour: 'rgba(0,0,0,0.1)', 
       backdropBorderRadius: '4px',
       primaryColour: '#16a4fa', 

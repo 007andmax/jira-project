@@ -1,65 +1,248 @@
 <!-- Middle Wrapper  -->
 <div class="page-container">
-    <div class="page-insider company-profile">
-      <div class="heading">
-        <h1>Company Profile</h1>
-      </div>
-      <tabset>
-        <!-- Profile -->
-          <tab heading="Profile" id="tab1">
-            <div class="cmn-area profile">
-                <div class="dp-area">
-                    <span class="dp">
-                      <img src="ng2/assets/img/company-logo.svg" alt="Company" />
-                    </span>
-                    <div class="dp-info">
-                      <input type="file" id="profile-dp" style="display: none;" />
-                      <label for="profile-dp" class="static-link">Change Logo</label>
-                      <span>Maximum size of 2MB. JPG, GIF, PNG</span>
-                    </div>
-                </div>
-                <form method="POST" action="">
-                    <div class="f-row">
-                        <div class="f-col col-50">
-                            <label>Company Name</label>
-                            <div class="form-row">
-                               <input type="text" class="form-input" placeholder="Enter Company Name" value="Acer Electronics company"/>
-                            </div>
-                        </div>
-                        <div class="f-col col-50">
-                            <label>Company URL</label>
-                            <div class="form-row">
-                               <input type="text" class="form-input link" placeholder="Enter Your Company URL" value="activeis.quicktech.com" disabled/>
-                            </div>
-                        </div>
-                        <div class="f-col col-50">
-                            <label>Time Zone</label>
-                            <div class="form-row">
-                              <select class="cmn-select form-input">
-                                <option>Canada/Atlantic</option>
-                                <option>Pacific Time zone</option>
-                                <option>Mountain Time zone</option>
-                              </select>
-                            </div>
-                        </div>
-                        <div class="f-col col-50">
-                            <label>Primary Phone Number <a href="javascript:;" class="static-link">+ Add Phone</a></label>
-                            <div class="form-row primary-phone">
-                               <input type="text" class="form-input" placeholder="Primary Phone Number" value="774-792-4426"/>
-                               <select class="cmn-select form-input">
-                                 <option>mobile</option>
-                                 <option>office</option>
-                                 <option>fax</option>
-                               </select>
-                            </div>
-                        </div>
-                    </div>
-                    <input type="submit" class="btn btn-primary" value="Save Changes" />
-                </form>
+  <div class="page-insider company-profile">
+    <div class="heading">
+      <h1>Company Profile</h1>
+    </div>
+    <ngx-loading
+      [show]="loading"
+      [config]="{
+        primaryColour: primaryColour,
+        secondaryColour: secondaryColour,
+        tertiaryColour: primaryColour,
+        backdropBorderRadius: '3px'
+      }"
+    ></ngx-loading>
+    <tabset>
+      <!-- Profile -->
+      <tab heading="Profile" id="tab1">
+        <div class="cmn-area profile">
+          <div class="dp-area">
+            <span class="dp" *ngIf="imageSrc">
+              <img [src]="imageSrc" alt="Company" />
+            </span>
+            <div class="dp-info">
+              <input
+                type="file"
+                id="profile-dp"
+                accept="image/gif, image/jpeg, image/png, image/jpg"
+                (change)="onSelectFile($event)"
+                style="display: none;"
+              />
+              <!-- <label for="profile-dp" class="static-link">Change Logo</label> -->
+              <span>Maximum size of 2MB. JPG, GIF, PNG</span>
+              <div class="static-link">
+                <label class="innert-links" for="profile-dp"
+                  >Change Photo</label
+                >
+                <label for="profile-dp" (click)="deleteAvatar()">
+                  <a href="javascript:void(0)" restore-default-button=""
+                    >Remove Photo</a
+                  >
+                </label>
+                <label for="profile-dp" (click)="rePositionAvatar()">
+                  <a href="javascript:void(0)" restore-default-button=""
+                    >Reposition Photo</a
+                  >
+                </label>
+              </div>
             </div>
-          </tab>
-          <!-- Contact Details -->
-          <tab heading="Contact Details">
+
+            <div class="img-croparea" *ngIf="isCroppedImg">
+              <div class="crop-inner">
+                <div class="heading-area">
+                  <h2>Crop Photo</h2>
+                  <a href="javascript:;" class="close-btn">remove</a>
+                </div>
+                <div class="cropping">
+                  <div class="img-crop">
+                    <image-cropper
+                      [imageBase64]="imageBase64"
+                      [imageChangedEvent]="imageChangedEvent"
+                      [maintainAspectRatio]="false"
+                      [aspectRatio]="4 / 3"
+                      [resizeToWidth]="128"
+                      format="png"
+                      (imageCropped)="imageCropped($event)"
+                    ></image-cropper>
+                  </div>
+
+                  <div class="preview">
+                    <h6>Profile Preview</h6>
+                    <img [src]="croppedImage?.base64" />
+                  </div>
+                  <div class="btn-crops">
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      (click)="cropIt()"
+                    >
+                      Crop Photo
+                    </button>
+                    <button type="button" class="btn btn-secondary" (click)="closeModel()">
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <form [formGroup]="cProfileForm" (ngSubmit)="onSubmit()">
+            <div class="f-row">
+              <div class="f-col col-50">
+                <label
+                  *ngIf="(!submitted || !f.name.errors) && isCompanyNameUnique"
+                  >Company Name</label
+                >
+                <div
+                  *ngIf="submitted && f.name.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f.name.errors.required">
+                    Company Name is required
+                  </div>
+                  <div *ngIf="f.name.errors.minlength">
+                    Company name is too short.
+                  </div>
+                  <div *ngIf="f.name.errors.maxlength">
+                    Company name is too large.
+                  </div>
+                </div>
+                <label *ngIf="!isCompanyNameUnique" class="invalid-feedback"
+                  >This company name already occupied.</label
+                >
+                <div class="form-row">
+                  <input
+                    type="text"
+                    class="form-input"
+                    placeholder="Enter Company Name"
+                    formControlName="name"
+                  />
+                </div>
+              </div>
+              <div class="f-col col-50">
+                <label>Company URL</label>
+                <div class="form-row">
+                  <input
+                    type="text"
+                    class="form-input link"
+                    placeholder="Enter Your Company URL"
+                    formControlName="url"
+                  />
+                </div>
+              </div>
+
+              <div class="f-col col-20">
+                <label>Suite Number</label>
+                <div class="form-row">
+                  <input
+                    type="text"
+                    placeholder="Enter Suite Number"
+                    class="form-input"
+                    formControlName="suiteNumber"
+                  />
+                </div>
+              </div>
+              <div class="f-col col-60">
+                <label>Mailing Address</label>
+                <div class="form-row">
+                  <input
+                    type="text"
+                    placeholder="Enter Mailing Address"
+                    class="form-input"
+                    formControlName="address"
+                  />
+                </div>
+              </div>
+              <div class="f-col col-20">
+                <label>Zip</label>
+                <div class="form-row">
+                  <input
+                    type="text"
+                    placeholder="Enter Zip Code"
+                    class="form-input"
+                    formControlName="postalCode"
+                  />
+                </div>
+              </div>
+
+              <div class="f-col col-50">
+                <label>Time Zone</label>
+                <div class="form-row">
+                  <select
+                    class="cmn-select form-input"
+                    formControlName="timeZone"
+                  >
+                    <option>Canada/Atlantic</option>
+                    <option value="Asia/Calcutta">India Standard Time</option>
+                    <option>Mountain Time zone</option>
+                  </select>
+                </div>
+              </div>
+              <div class="f-col col-50">
+                <label
+                  >Primary Phone Number
+                  <a
+                    href="javascript:;"
+                    (click)="onAddPhone()"
+                    class="static-link"
+                    >+ Add Phone</a
+                  ></label
+                >
+                <div class="form-row primary-phone">
+                  <input
+                    type="text"
+                    class="form-input"
+                    placeholder="Primary Phone Number"
+                    formControlName="primaryPhone"
+                  />
+                  <select
+                    class="cmn-select form-input"
+                    formControlName="primaryPhoneType"
+                  >
+                    <option value="MOBILE">mobile</option>
+                    <option value="OFFICE">office</option>
+                    <option value="FAX">fax</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="f-col col-50" *ngIf="isAddPhone">
+                <label>
+                  Secondary Phone Number
+                  <a
+                    href="javascript:;"
+                    class="static-link"
+                    (click)="onAddPhone()"
+                    >Remove</a
+                  >
+                </label>
+
+                <div class="form-row primary-phone">
+                  <input
+                    type="text"
+                    class="form-input"
+                    formControlName="secondaryPhone"
+                    placeholder="Secondary Phone Number"
+                    formControlName="secondaryPhone"
+                  />
+                  <select
+                    class="cmn-select form-input"
+                    formControlName="secondaryPhoneType"
+                  >
+                    <option value="MOBILE">mobile</option>
+                    <option value="OFFICE">office</option>
+                    <option value="FAX">fax</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <input type="submit" class="btn btn-primary" value="Save Changes" />
+          </form>
+        </div>
+      </tab>
+      <!-- Contact Details -->
+      <!-- <tab heading="Contact Details">
               <div class="cmn-area contact">
                   <form method="POST">
                       <div class="f-row">
@@ -90,100 +273,75 @@
                       <input type="submit" class="btn btn-primary" value="Save Changes" />
                   </form>
               </div>
-          </tab>
-          <!-- Ticket Response Time Setting  -->
-          <tab heading="Ticket Response Time Setting">
-              <div class="cmn-area ticket-response">
-                  <form method="POST">
-                      <div class="outlair">
-                          <h5>Outliers Time</h5>
-                          <div class="input-number"> 
-                            {{ log }} <span>Hours</span> 
-                            <div class="inc-btns">
-                              <a href="javascript:;" class="plus" (click)="increaseValue()">+</a>
-                              <a href="javascript:;" class="minus" (click)="decreaseValue()">-</a>
-                            </div>
-                          </div>
-                      </div>
-                      <div class="c-hours">
-                          <h5>Select days with correct hours</h5>
-                          <ul class="list-unstyled">
-                              <li>
-                                <div class="cmn-checkbox">
-                                    <input type="checkbox" id="Monday" checked />
-                                    <label for="Monday">Monday</label>
-                                </div>
-                                <div class="time-zone">
-                                    <div class="tl-col"><input type="text" class="form-input" placeholder="Enter Time" value="08:30 AM"  ng-model="checked"/></div>
-                                    <div class="tl-col"><input type="text" class="form-input" placeholder="Enter Time" value="05:30 PM" /></div>
-                                </div>
-                              </li>
-                              <li>
-                                <div class="cmn-checkbox">
-                                    <input type="checkbox" id="Tuesday" />
-                                    <label for="Tuesday">Tuesday</label>
-                                </div>
-                                <div class="time-zone">
-                                    <div class="tl-col"><input type="text" class="form-input" placeholder="Enter Time" value="08:30 AM" disabled /></div>
-                                    <div class="tl-col"><input type="text" class="form-input" placeholder="Enter Time" value="05:30 PM" disabled /></div>
-                                </div>
-                              </li>
-                              <li>
-                                <div class="cmn-checkbox">
-                                    <input type="checkbox" id="Wednesday" />
-                                    <label for="Wednesday">Wednesday</label>
-                                </div>
-                                <div class="time-zone">
-                                    <div class="tl-col"><input type="text" class="form-input" placeholder="Enter Time" value="08:30 AM" disabled /></div>
-                                    <div class="tl-col"><input type="text" class="form-input" placeholder="Enter Time" value="05:30 PM" disabled /></div>
-                                </div>
-                              </li>
-                              <li>
-                                <div class="cmn-checkbox">
-                                    <input type="checkbox" id="Thursday" />
-                                    <label for="Thursday">Thursday</label>
-                                </div>
-                                <div class="time-zone">
-                                    <div class="tl-col"><input type="text" class="form-input" placeholder="Enter Time" value="08:30 AM" disabled /></div>
-                                    <div class="tl-col"><input type="text" class="form-input" placeholder="Enter Time" value="05:30 PM" disabled /></div>
-                                </div>
-                              </li>
-                              <li>
-                                <div class="cmn-checkbox">
-                                    <input type="checkbox" id="Friday" />
-                                    <label for="Friday">Friday</label>
-                                </div>
-                                <div class="time-zone">
-                                    <div class="tl-col"><input type="text" class="form-input" placeholder="Enter Time" value="08:30 AM" disabled /></div>
-                                    <div class="tl-col"><input type="text" class="form-input" placeholder="Enter Time" value="05:30 PM" disabled /></div>
-                                </div>
-                              </li>
-                              <li>
-                                <div class="cmn-checkbox">
-                                    <input type="checkbox" id="Saturday" />
-                                    <label for="Saturday">Saturday</label>
-                                </div>
-                                <div class="time-zone">
-                                    <div class="tl-col"><input type="text" class="form-input" placeholder="Enter Time" value="08:30 AM" disabled /></div>
-                                    <div class="tl-col"><input type="text" class="form-input" placeholder="Enter Time" value="05:30 PM" disabled /></div>
-                                </div>
-                              </li>
-                              <li>
-                                <div class="cmn-checkbox">
-                                    <input type="checkbox" id="Sunday" checked />
-                                    <label for="Sunday">Sunday</label>
-                                </div>
-                                <div class="time-zone">
-                                    <div class="tl-col"><input type="text" class="form-input" placeholder="Enter Time" value="08:30 AM"  /></div>
-                                    <div class="tl-col"><input type="text" class="form-input" placeholder="Enter Time" value="05:30 PM"  /></div>
-                                </div>
-                              </li>
-                          </ul>
-                      </div>
-                      <input type="submit" class="btn btn-primary" value="Save Changes" />
-                  </form>
-              </div>
-          </tab>
-        </tabset>
-    </div>
+          </tab> -->
+      <!-- Ticket Response Time Setting  -->
+      <tab heading="Operational Hours">
+        <div class="cmn-area ticket-response">
+          <form #workingHoursForm="ngForm" (ngSubmit)="onWorkSubmit()">
+            <div>
+              <div
+                *ngFor="
+                  let workingDay of this.cProfile.timeSettings.workingDays;
+                  let i = index
+                "
+              ></div>
+            </div>
+            <div class="c-hours">
+              <h5>Select days with correct hours</h5>
+              <!-- <div formArrayName="workingHoursGrpArray">
+                  
+                  <div *ngFor="let workHr of workingHoursFrm.controls; let i=index">
+                    <input formControlName="{{workHr.dayOfWeek}}">
+                  </div>
+              </div> -->
+              <ul class="list-unstyled">
+                <li
+                  *ngFor="
+                    let workingDay of this.cProfile.timeSettings.workingDays;
+                    let i = index
+                  "
+                >
+                  <div class="cmn-checkbox">
+                    <input
+                      type="checkbox"
+                      id="{{ workingDay.dayOfWeek }}"
+                      [(ngModel)]="workingDay.isSelected"
+                      name="{{ workingDay.dayOfWeek }}"
+                      [ngModelOptions]="{ standalone: true }"
+                    />
+                    <label for="{{ workingDay.dayOfWeek }}">{{
+                      workingDay.dayOfWeek
+                    }}</label>
+                  </div>
+                  <div class="time-zone">
+                    <div class="tl-col">
+                      <input
+                        type="text"
+                        class="form-input"
+                        [readonly]="!workingDay.isSelected"
+                        placeholder="Enter Time"
+                        value="{{ fromTime_convert(workingDay.startTime) }}"
+                        #startTime
+                        (blur)="startTimeChange(workingDay, startTime.value)"
+                      />
+                    </div>
+                    <div class="tl-col">
+                      <input
+                        type="text"
+                        class="form-input"
+                        [readonly]="!workingDay.isSelected"
+                        placeholder="Enter Time"
+                        value="{{ toTime_convert(workingDay.endTime) }}"
+                      />
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <input type="submit" class="btn btn-primary" value="Save Changes" />
+          </form>
+        </div>
+      </tab>
+    </tabset>
   </div>
+</div>

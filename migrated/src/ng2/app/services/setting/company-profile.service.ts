@@ -14,7 +14,7 @@ export class CompanyProfileService {
     return this.http.get(`${this.apiUrl}addresses/getGroupedLocales`);
   }
 
-  companyProfile() {
+  getCompanyProfile() {
     return this.http.get(`${this.apiUrl}settings/companyProfile/`);
   }
 
@@ -23,8 +23,10 @@ export class CompanyProfileService {
   }
 
   basic(compBasic: any) {
-    // {"logo":{"id":"19e70f93-be53-4066-9592-799dda1446a4","origin":{"id":"2289c989-0097-4b19-ab76-a7ec31eacd84","createdAt":1534351128607,"updatedAt":1534351128607,"deletedAt":null,"isOpened":false,"linkId":null,"linkType":null},"cropped":{"id":"b4e460bc-a8d1-4ec1-8e34-ec2a83d0b67f","createdAt":1534351131728,"updatedAt":1534351131728,"deletedAt":null,"isOpened":false,"linkId":null,"linkType":null},"x":0,"y":103,"w":322,"h":143,"updatedAt":1534351131738,"base64":null},"name":"Active Information Systems","description":null}
-    return this.http.put(`${this.apiUrl}company/current`, compBasic);
+    return this.http.put(
+      `${this.apiUrl}settings/companyProfile/basic`,
+      compBasic
+    );
   }
 
   isCompanyNameUnique(id: string, name: string) {
@@ -63,4 +65,24 @@ export class CompanyProfileService {
       workTime
     );
   }
+
+  getConstants() {
+    //http://localhost:4200/data/getConstants
+    // company url
+    return this.http.get(`${this.apiUrl}data/getConstants`);
+  }
+
+  removeAvatar(comapnyId: string, isDeleted: boolean) {
+    // https://dev.quicktech.com/company/73221c72-f87c-4519-8235-c4b57ad1cc19/true
+    return this.http.delete(
+      `${this.apiUrl}company/${comapnyId}/${isDeleted}`,
+      {}
+    );
+  }
+
+  logo(companyId, cropImage: any) {
+    // https://dev.quicktech.com/company/73221c72-f87c-4519-8235-c4b57ad1cc19/logo
+    return this.http.post(`${this.apiUrl}company/${companyId}/logo`, cropImage);
+  }
+
 }
