@@ -112,10 +112,10 @@
                 <img ng-if="ticketDetails.assignedUser.avatar"
                      ng-attr-src="{{getUserAvatarUrl(ticketDetails.assignedUser)}}"
                      uib-tooltip="{{ ticketDetails.assignedUser.firstName + ' ' + ticketDetails.assignedUser.lastName }}"/>
-                <div class="default-user-avatar"
+                <div class="default-user-avatar avatar-background-color-odd"
                      ng-if="!ticketDetails.assignedUser.avatar"
-                     ng-class-odd="'avatar-background-color-odd'"
                      uib-tooltip="{{ ticketDetails.assignedUser.firstName + ' ' + ticketDetails.assignedUser.lastName }}"
+                     ng-class-odd="'avatar-background-color-odd'"
                      ng-class-even="'avatar-background-color-even'">
                   <span>{{ticketDetails.assignedUser.firstName[0].toUpperCase()}}</span>
                   <span>{{ticketDetails.assignedUser.lastName[0].toUpperCase()}}</span>
