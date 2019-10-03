@@ -1058,8 +1058,9 @@ console.log('find');
                   ticketUpdateToSend.attachments.push({ file: { id: $scope.ticketUpdate.attachments[i].id } })
                 }
               }
-              for (var i = 0, len = $scope.ticketSharedUsersList.length; i < len; i++) {
-                var ticketSharedUser = $scope.ticketSharedUsersList[i];
+              console.log('$scope.ticketSharedUsersList',$scope.ticketSharedUsersList);
+              for (var i = 0, len = $scope.selectedAssignUsers.length; i < len; i++) {
+                var ticketSharedUser = $scope.selectedAssignUsers[i];
                 if (!ticketSharedUser.notify) {
                   continue;
                 }
