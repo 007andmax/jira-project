@@ -94,13 +94,13 @@
       <div class="pull-left assign-list"
            ng-if="ticket.multiAssignedUsers && ticket.multiAssignedUsers.length > 0">
         <div class="shared-avatar pointer"
-             uib-tooltip="{{ getFirstNameUser(getUserById(sharedUser)) + ' ' + getLastNameUser(getUserById(sharedUser)) }}"
+             uib-tooltip="{{ sharedUser.firstName + ' ' + sharedUser.lastName }}"
              ng-repeat="sharedUser in ticket.multiAssignedUsers">
-          <img ng-if="getUserById(sharedUser).avatar" ng-attr-src="{{getUserAvatarUrl(getUserById(sharedUser))}}" />
-          <div class="default-user-avatar" ng-if="!getUserById(sharedUser).avatar"
+          <img ng-if="sharedUser.avatar" ng-attr-src="{{getUserAvatarUrl(sharedUser)}}" />
+          <div class="default-user-avatar" ng-if="!sharedUser.avatar"
                ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
-            <span>{{getFirstNameUser(getUserById(sharedUser))[0].toUpperCase()}}</span>
-            <span>{{getLastNameUser(getUserById(sharedUser))[0].toUpperCase()}}</span>
+            <span>{{sharedUser.firstName[0].toUpperCase()}}</span>
+            <span>{{sharedUser.lastName[0].toUpperCase()}}</span>
           </div>
         </div>
       </div>
