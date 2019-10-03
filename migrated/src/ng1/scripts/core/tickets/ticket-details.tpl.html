@@ -660,13 +660,8 @@
                           </ul>
                         </div>
                       </div>
-                      <p class="is-completed col-md-12" ng-if="product.completed">Completed
-                                                                                  on {{ product.completedAt | date: 'd
-                                                                                  MMM yyyy, h:mm a'}}</p>
-                      <p class="is-completed col-md-12" ng-if="!product.completed && product.date">Due date
-                                                                                                   - {{ product.date |
-                                                                                                   date: 'd MMM yyyy,
-                                                                                                   h:mm a'}}</p>
+                      <p class="is-completed col-md-12" ng-if="product.completed">Completed on {{ product.completedAt | date: 'd MMM yyyy, h:mm a'}}</p>
+                      <p class="is-completed col-md-12" ng-if="!product.completed && product.date">Due date - {{ product.date | date: 'd MMM yyyy, h:mm a'}}</p>
                     </div>
                     <div class="ticket-update-edit"
                          ng-class="{'hide': product.id !== editExpenseId}"
@@ -1125,13 +1120,8 @@
                       </ul>
                     </div>
                   </div>
-                  <p class="is-completed col-md-12" ng-if="product.completed">Completed
-                                                                              on {{ product.completedAt | date: 'd MMM
-                                                                              yyyy, h:mm a'}}</p>
-                  <p class="is-completed col-md-12" ng-if="!product.completed && product.date">Due date
-                                                                                               - {{ product.date | date:
-                                                                                               'd MMM yyyy, h:mm
-                                                                                               a'}}</p>
+                  <p class="is-completed col-md-12" ng-if="product.completed">Completed on {{ product.completedAt | date: 'd MMM yyyy, h:mm a'}}</p>
+                  <p class="is-completed col-md-12" ng-if="!product.completed && product.date">Due date - {{ product.date | date: 'd MMM yyyy, h:mm a'}}</p>
                 </div>
               </div>
 
@@ -1271,13 +1261,8 @@
                       <p class="gm">{{ service.quantity | durationFilter }}</p>
                     </div>
                   </div>
-                  <p class="is-completed col-md-12" ng-if="service.completed">Completed
-                                                                              on {{ service.completedAt | date: 'd MMM
-                                                                              yyyy, h:mm a'}}</p>
-                  <p class="is-completed col-md-12" ng-if="!service.completed && service.date">Due date
-                                                                                               - {{ service.date | date:
-                                                                                               'd MMM yyyy, h:mm
-                                                                                               a'}}</p>
+                  <p class="is-completed col-md-12" ng-if="service.completed">Completed on {{ service.completedAt | date: 'd MMM yyyy, h:mm a'}}</p>
+                  <p class="is-completed col-md-12" ng-if="!service.completed && service.date">Due date - {{ service.date | date: 'd MMM yyyy, h:mm a'}}</p>
                 </div>
               </div>
 
