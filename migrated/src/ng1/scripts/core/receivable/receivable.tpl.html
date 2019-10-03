@@ -95,7 +95,7 @@
          ng-include="'/ng1/scripts/core/receivable/invoices-'+ mode +'.tpl.html'"
          ng-style="{'margin-top': isInvoiceShown ? '0' : mode === 'list' ? '87px' : '50px'}"></div>
     <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
-    <div class="no-exist-receivable" ng-if="invocesList.length == 0"><p>No invoice found</p></div>
+    <div class="no-exist-receivable" ng-if="!loadingInProgress && invocesList.length == 0"><p>No invoice found</p></div>
 
   </div>
 
