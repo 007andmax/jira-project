@@ -78,7 +78,7 @@
         </ul>
       </div>
       <div class="pull-left assign-list"
-           ng-if="ticket.assignedUserId && ticket.multiAssignedUsers && ticket.multiAssignedUsers.length == 0">
+           ng-if="ticket.assignedUserId && ticket.multiAssignedUsers && ticket.multiAssignedUsers.length == 0 || ticket.assignedUserId && ticket.multiAssignedUsers == null">
         <div class="shared-avatar pointer"
              uib-tooltip="{{ getFirstNameUser(getUserById(ticket.assignedUserId)) + ' ' + getLastNameUser(getUserById(ticket.assignedUserId)) }}"
         >
