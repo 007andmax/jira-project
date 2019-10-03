@@ -398,15 +398,16 @@
         }
 
         $scope.savePaymentDue = function(due) {
+          console.log('savePaymentDue');
           // console.log('payment due', due)
 
           $scope.paymentDue = moment(due).format("YYYY-MM-DD")
 
           // console.log(moment(due).format("YYYY-MM-DD"), 'moment')
 
-          if (!$scope.firstUpdatedDate) {
+       /*   if (!$scope.firstUpdatedDate) {
             $scope.firstUpdatedDate = true;
-          } else {
+          } else {*/
             var request = {
               "invoiceNumber": $scope.invoiceNumber || null, // null is allowed
               "dueDate": $scope.paymentDue, // null is allowed
@@ -414,7 +415,7 @@
             }
 
             BillableService.updateInvoiceData(request, $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId)
-          }
+       //   }
         }
 
         $scope.savePaymentDate = function(due) {
