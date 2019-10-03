@@ -15,10 +15,16 @@
           <input type="text" [(ngModel)]="company.name"
                  placeholder="Write Company or Search Company">
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6" ngbDropdown >
           <p>Company Type</p>
-          <input type="text"
-                 placeholder="Select Company Type">
+          <input type="text" [value]="company.clientType"
+          autocomplete="new-password"
+                 placeholder="Select Company Type" id="dropdownTypeCompany" ngbDropdownToggle/>
+                 <div ngbDropdownMenu aria-labelledby="dropdownTypeCompany">
+                    <ng-template ngFor let-item [ngForOf]="companyTypes"  >
+                        <button ngbDropdownItem [textContent]="item" (click)="company.clientType = item"></button>
+                    </ng-template>
+                </div>
         </div>
         <div class="col-md-6" ngbDropdown  >
           <p>Primary Contact</p>
@@ -39,7 +45,7 @@
         <div class="col-md-6">
           <p>First Name</p>
           <input type="text"
-          [(ngModel)]="company.domain"
+          
                  placeholder="Enter First Name">
         </div>
         <div class="col-md-6">
