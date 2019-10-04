@@ -132,7 +132,7 @@
                 <div class="client-users avatars" ng-if="filterByType(selectedAssignUsers, 'CLIENT').length">
                   <div class="shared-avatar pointer"
                        uib-tooltip="{{ sharedUser.user.firstName + ' ' + sharedUser.user.lastName }}"
-                       ng-click="sharedUser.notify = !sharedUser.notify"
+                       ng-click="selectAssignUsers(sharedUser)"
                        ng-repeat="sharedUser in filterByType(selectedAssignUsers, 'CLIENT')">
                     <img ng-if="sharedUser.user.avatar" ng-attr-src="{{getUserAvatarUrl(sharedUser.user)}}" />
                     <div class="default-user-avatar" ng-if="!(sharedUser.user.avatar)"
@@ -148,7 +148,7 @@
                 <div class="tech-users avatars">
                   <div class="shared-avatar pointer"
                        uib-tooltip="{{ sharedUser.user.firstName + ' ' + sharedUser.user.lastName }}"
-                       ng-click="sharedUser.notify = !sharedUser.notify"
+                       ng-click="selectAssignUsers(sharedUser)"
                        ng-repeat="sharedUser in filterByType(selectedAssignUsers, 'TECH')">
                     <img ng-if="sharedUser.user.avatar" ng-attr-src="{{getUserAvatarUrl(sharedUser.user)}}" />
 
@@ -266,7 +266,7 @@
                       <div class="client-users avatars" ng-if="filterByType(selectedAssignUsers, 'CLIENT').length">
                         <div class="shared-avatar pointer"
                              uib-tooltip="{{ sharedUser.user.firstName + ' ' + sharedUser.user.lastName }}"
-                             ng-click="sharedUser.notify = !sharedUser.notify"
+                             ng-click="selectAssignUsers(sharedUser)"
                              ng-repeat="sharedUser in filterByType(selectedAssignUsers, 'CLIENT')">
                           <img ng-if="sharedUser.user.avatar" ng-attr-src="{{getUserAvatarUrl(sharedUser.user)}}" />
                           <div class="default-user-avatar" ng-if="!(sharedUser.user.avatar)"
@@ -282,7 +282,7 @@
                       <div class="tech-users avatars">
                         <div class="shared-avatar pointer"
                              uib-tooltip="{{ sharedUser.user.firstName + ' ' + sharedUser.user.lastName }}"
-                             ng-click="sharedUser.notify = !sharedUser.notify"
+                             ng-click="selectAssignUsers(sharedUser)"
                              ng-repeat="sharedUser in filterByType(selectedAssignUsers, 'TECH')">
                           <img ng-if="sharedUser.user.avatar" ng-attr-src="{{getUserAvatarUrl(sharedUser.user)}}" />
       
@@ -409,7 +409,7 @@
                     <div class="client-users avatars" ng-if="filterByType(selectedAssignUsers, 'CLIENT').length">
                       <div class="shared-avatar pointer"
                            uib-tooltip="{{ sharedUser.user.firstName + ' ' + sharedUser.user.lastName }}"
-                           ng-click="sharedUser.notify = !sharedUser.notify"
+                           ng-click="selectAssignUsers(sharedUser)"
                            ng-repeat="sharedUser in filterByType(selectedAssignUsers, 'CLIENT')">
                         <img ng-if="sharedUser.user.avatar" ng-attr-src="{{getUserAvatarUrl(sharedUser.user)}}" />
                         <div class="default-user-avatar" ng-if="!(sharedUser.user.avatar)"
@@ -425,7 +425,7 @@
                     <div class="tech-users avatars">
                       <div class="shared-avatar pointer"
                            uib-tooltip="{{ sharedUser.user.firstName + ' ' + sharedUser.user.lastName }}"
-                           ng-click="sharedUser.notify = !sharedUser.notify"
+                           ng-click="selectAssignUsers(sharedUser)"
                            ng-repeat="sharedUser in filterByType(selectedAssignUsers, 'TECH')">
                         <img ng-if="sharedUser.user.avatar" ng-attr-src="{{getUserAvatarUrl(sharedUser.user)}}" />
     
@@ -749,7 +749,7 @@
             <div class="client-users avatars" ng-if="filterByType(ticketSharedUsersList, 'CLIENT').length">
               <div class="shared-avatar pointer"
                    uib-tooltip="{{ sharedUser.user.firstName + ' ' + sharedUser.user.lastName }}"
-                   ng-click="sharedUser.notify = !sharedUser.notify"
+                   ng-click="selectAssignUsers(sharedUser)"
                    ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'CLIENT')">
                 <img ng-if="sharedUser.user.avatar" ng-attr-src="{{getUserAvatarUrl(sharedUser.user)}}" />
                 <div class="default-user-avatar" ng-if="!(sharedUser.user.avatar)"
@@ -765,7 +765,7 @@
             <div class="tech-users avatars">
               <div class="shared-avatar pointer"
                    uib-tooltip="{{ sharedUser.user.firstName + ' ' + sharedUser.user.lastName }}"
-                   ng-click="sharedUser.notify = !sharedUser.notify"
+                   ng-click="selectAssignUsers(sharedUser)"
                    ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'TECH')">
                 <img ng-if="sharedUser.user.avatar" ng-attr-src="{{getUserAvatarUrl(sharedUser.user)}}" />
 

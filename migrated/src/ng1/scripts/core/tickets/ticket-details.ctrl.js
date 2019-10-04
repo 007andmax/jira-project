@@ -1306,6 +1306,17 @@ console.log('find');
               width: progress + '%'
             };
           };
+          $scope.selectAssignUsers = function (user) {
+            if (user.user.subscription.ticket === false && !user.notify) {
+              var confirmMesage = 'Selected user does not have ticket update subscription. Do you still want to notify him?',
+                confirmButton = 'Yes';
+              UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
+                user.notify = !user.notify;
+              });
+            } else {
+              user.notify = !user.notify;
+            }
+          }
           $scope.removeAttachment = function (index, isErrorFile) {
             if (isErrorFile) {
               $scope.fileInfo.quantityErrorFiles--;
