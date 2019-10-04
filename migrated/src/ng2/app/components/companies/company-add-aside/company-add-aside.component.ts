@@ -15,10 +15,12 @@ export class CompanyAddAsideComponent implements OnInit {
   constructor(private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
-
+    
     this.onShowAside();
   }
-  
+  onAddShort () {
+    console.log('company',this.company);
+  }
   public onShowAside() {
     this.companiesStateService.getShowAsideForAdd().subscribe(() => {
       this.opened = true;

@@ -1,6 +1,10 @@
 export class WorkDay {
-    dayOfWeek: String;
+    dayOfWeek: string;
     endTime: number;
     startTime: number;
-    constructor () {}
+    constructor (dayOfWeek,startTime,endTime) {
+        this.dayOfWeek = dayOfWeek;
+        this.endTime = startTime;
+        this.startTime = endTime;
+    }
 }

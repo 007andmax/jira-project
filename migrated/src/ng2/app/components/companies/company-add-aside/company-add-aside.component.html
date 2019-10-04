@@ -26,15 +26,11 @@
                     </ng-template>
                 </div>
         </div>
-        <div class="col-md-6" ngbDropdown  >
+        <div class="col-md-6"   >
           <p>Primary Contact</p>
-          <input type="text"  id="dropdownCompanyType" ngbDropdownToggle
+          <input type="text" 
                  placeholder="Enter Primary Phone">
-                <div class="dropdown-menu show" ngbDropdownMenu aria-labelledby="dropdownCompanyType">
-                  <button class="dropdown-item" *ngFor="let item of companyTypes" (click)="company.clientType = item">
-                    {{item}}
-                  </button>
-                </div>
+               
         </div>
         <div class="col-md-12">
           <p>Domain Name</p>
@@ -45,22 +41,25 @@
         <div class="col-md-6">
           <p>First Name</p>
           <input type="text"
-          
+          [(ngModel)]="company.contacts[0].firstName"
                  placeholder="Enter First Name">
         </div>
         <div class="col-md-6">
           <p>Last Name</p>
           <input type="text"
+          [(ngModel)]="company.contacts[0].lastName"
                  placeholder="Enter Last Name">
         </div>
         <div class="col-md-6">
           <p>Phone Number</p>
           <input type="text"
+          [(ngModel)]="company.contacts[0].phoneNumbers[0].number"
                  placeholder="Enter Phone Number">
         </div>
         <div class="col-md-6">
           <p>Primary Contact Email</p>
           <input type="text"
+          [(ngModel)]="company.contacts[0].primaryEmail"
                  placeholder="Primary Email Address">
         </div>
 
@@ -72,7 +71,7 @@
 
         <div class="col-md-12 new-companies-content__modal--content-footer">
           <div class="d-f">
-            <button class="btn-new btn-primary">Create Company</button>
+            <button class="btn-new btn-primary" (click)="onAddShort()">Create Company</button>
             <button class="btn-new disabled">Cancel</button>
           </div>
         </div>
@@ -228,7 +227,7 @@
 
         <div class="col-md-12 new-companies-content__modal--content-footer">
           <div class="d-f">
-            <button class="btn-new btn-primary">Create Company</button>
+            <button class="btn-new btn-primary" (click)="onAddFull()">Create Company</button>
             <button class="btn-new disabled">Cancel</button>
           </div>
           <div class="create-contract">

@@ -8,6 +8,8 @@ export const Days = {
     'SAT': "Saturday"
 };
 
+export const Weeks = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
+
 export const MonthWeeks = {
     '#1': "First",
     '#2': "Second",

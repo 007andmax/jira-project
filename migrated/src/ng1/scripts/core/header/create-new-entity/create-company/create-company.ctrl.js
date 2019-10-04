@@ -358,6 +358,7 @@
               }
             });
           }
+          console.log('$scope.editCompany.services',$scope.editCompany.services);
         });
 
         AddressesService.getLocales(true, function (response) {
@@ -444,6 +445,7 @@
             //
             // }
 console.log('editCompany',editCompany);
+return;
 
 
 
