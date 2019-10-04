@@ -8,8 +8,8 @@
       var ACTIONS = {
         'CLAIM_TICKET': function (ticket) {
 
-          if (!ticket.multiAssignedUsers) return false;
-          return isTicketOpen(ticket) && !ticket.assignedUser && ticket.multiAssignedUsers.length === 0;
+         // if (!ticket.multiAssignedUsers) return false;
+          return ticket.status === null && !isSpamOrTrash(ticket);
         },
         'CHANGE_STATUS': isUpdateAllowed,
         'CHANGE_PRIORITY': isTicketOpen,
