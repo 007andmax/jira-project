@@ -805,7 +805,7 @@
               </span>
                   <div class="added-users-wrapper pull-left">
                     <div class="pull-left avatar userinfo-tooltip" ng-hide="showAllSharedUsers"
-                         ng-repeat="share in ticketUpdate.shares | filter: filterCurrentUser | orderBy: 'itemOrder' | limitTo: 5"
+                         ng-repeat="share in ticketUpdate.shares | orderBy: 'itemOrder' | limitTo: 5"
                          tooltip-class="avatar-tooltip" tooltip-placement="top"
                          uib-tooltip-template="'/ng1/scripts/core/tickets/popup-templates/update-shared-user-popup.tpl.html'">
                       <img ng-if="(share.user.avatar)" alt="..." class="avatar-26 img-circle"
@@ -1306,7 +1306,7 @@
                   </span>
                 <div class="added-users-wrapper pull-left">
                   <div class="pull-left avatar userinfo-tooltip" ng-hide="showAllSharedUsers"
-                       ng-repeat="share in ticketUpdate.shares | filter: filterCurrentUser | orderBy: 'itemOrder' | limitTo: 5"
+                       ng-repeat="share in ticketUpdate.shares | orderBy: 'itemOrder' | limitTo: 5"
                        tooltip-class="avatar-tooltip" tooltip-placement="top"
                        uib-tooltip-template="'/ng1/scripts/core/tickets/popup-templates/update-shared-user-popup.tpl.html'">
                     <img alt="..." class="avatar-26 img-circle"
