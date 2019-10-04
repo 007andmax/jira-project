@@ -79,7 +79,11 @@
                     >
                       Crop Photo
                     </button>
-                    <button type="button" class="btn btn-secondary" (click)="closeModel()">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      (click)="closeModel()"
+                    >
                       Cancel
                     </button>
                   </div>
@@ -167,19 +171,6 @@
               </div>
 
               <div class="f-col col-50">
-                <label>Time Zone</label>
-                <div class="form-row">
-                  <select
-                    class="cmn-select form-input"
-                    formControlName="timeZone"
-                  >
-                    <option>Canada/Atlantic</option>
-                    <option value="Asia/Calcutta">India Standard Time</option>
-                    <option>Mountain Time zone</option>
-                  </select>
-                </div>
-              </div>
-              <div class="f-col col-50">
                 <label
                   >Primary Phone Number
                   <a
@@ -204,6 +195,25 @@
                     <option value="OFFICE">office</option>
                     <option value="FAX">fax</option>
                   </select>
+                </div>
+              </div>
+              <div class="f-col col-50">
+                <label>Time Zone</label>
+                <div class="form-row">
+                  <ngx-select-dropdown
+                    [config]="config"
+                    [options]="timezones"
+                    formControlName="timeZone"
+                    [multiple]="true"
+                  ></ngx-select-dropdown>
+                  <!-- <select
+                    class="cmn-select form-input"
+                    formControlName="timeZone"
+                  >
+                    <option>Canada/Atlantic</option>
+                    <option value="Asia/Calcutta">India Standard Time</option>
+                    <option>Mountain Time zone</option>
+                  </select> -->
                 </div>
               </div>
 

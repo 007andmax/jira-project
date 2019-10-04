@@ -61,6 +61,15 @@ export class CompanyProfileComponent implements OnInit {
     endTime: 61200,
     isSelected: false
   };
+  config = {
+    displayKey: "city",
+    search: true,
+    height: "auto",
+    limitTo: 3,
+    moreText: "more",
+    searchPlaceholder: "Search",
+    searchOnKey: "city"
+  };
 
   constructor(
     private companyProfileService: CompanyProfileService,
@@ -70,7 +79,7 @@ export class CompanyProfileComponent implements OnInit {
   ) {}
 
   /**
-   * init 
+   * init
    */
   ngOnInit() {
     this.cProfile = {
@@ -89,7 +98,7 @@ export class CompanyProfileComponent implements OnInit {
     this.getGroupedLocales();
   }
 
-  /** 
+  /**
    * create company profile from group
    */
   createCProfileForm() {
@@ -126,6 +135,14 @@ export class CompanyProfileComponent implements OnInit {
             this.imageSrc = `/file/${this.currentCompany.logo.cropped.id}.jpg?t=${this.currentCompany.logo.updatedAt}`;
           } else {
             this.imageSrc = "ng2/assets/img/company-logo.svg";
+          }
+          if(this.currentCompany.addresses.length > 0){
+            const timeZone = this.currentCompany.addresses[0].timeZone;
+            if(timeZone){
+              this.cProfileForm.patchValue({
+                timeZone: timeZone.name
+              });
+            }
           }
         }
       },
@@ -226,8 +243,6 @@ export class CompanyProfileComponent implements OnInit {
     this.companyProfileService.getGroupedLocales().subscribe(
       (res: any) => {
         if (res) {
-
-          console.log(res);
           //this.timezones = res;
           const timeZonesMapped = [];
 
@@ -239,13 +254,12 @@ export class CompanyProfileComponent implements OnInit {
                 timeZonesMapped.push({
                   offset: parseInt(timeZone),
                   country: prop,
-                  city: city
+                  city: prop + "/" + city
                 });
               }
             }
           }
           this.timezones = timeZonesMapped;
-          // console.log(this.timezones);
         }
       },
       error => {}
@@ -292,14 +306,13 @@ export class CompanyProfileComponent implements OnInit {
    * image croped event
    */
   imageCropped(event: ImageCroppedEvent) {
-    console.log(event);
     this.croppedImage = event;
   }
 
   /**
    * close model on close button
    */
-  closeModel(){
+  closeModel() {
     this.isCroppedImg = false;
   }
 
@@ -309,16 +322,16 @@ export class CompanyProfileComponent implements OnInit {
   onSelectFile(event) {
     if (event.target.files && event.target.files[0]) {
       const size = event.target.files[0].size;
-      if(size > 200000) {
-        this.toaster.info('Maximum size of 2MB');
+      if (size > 200000) {
+        this.toaster.info("Maximum size of 2MB");
         return;
-    };
-    this.isCroppedImg = true;
-    this.imageChangedEvent = event;
+      }
+      this.isCroppedImg = true;
+      this.imageChangedEvent = event;
       const fromData = new FormData();
       fromData.append("file", event.target.files[0]);
       this.loading = true;
-      console.log(event.target.files);
+
       this.settingService.fileAvatar(fromData).subscribe(
         result => {
           this.loading = false;
@@ -362,7 +375,7 @@ export class CompanyProfileComponent implements OnInit {
   }
 
   /**
-   * reposition avatar 
+   * reposition avatar
    */
   rePositionAvatar() {
     if (this.cProfile && this.currentCompany.logo.base64 === null) {
@@ -450,7 +463,7 @@ export class CompanyProfileComponent implements OnInit {
         avatar => {
           if (avatar) {
             this.cProfile.logo = avatar;
-            this.toaster.success('Image cropped successfully')
+            this.toaster.success("Image cropped successfully");
             this.companyProfileService.basic(this.cProfile).subscribe(
               res => {
                 if (res) {
@@ -458,7 +471,9 @@ export class CompanyProfileComponent implements OnInit {
                   this.getCurrentCompany();
                 }
               },
-              error => {this.loading = false;}
+              error => {
+                this.loading = false;
+              }
             );
           }
         },
@@ -570,8 +585,8 @@ export class CompanyProfileComponent implements OnInit {
 
   startTimeChange(workingday: any, startTime: any) {
     const splitTime = startTime.split(":");
-    if(!Number(splitTime[0])){
-      return ;
+    if (!Number(splitTime[0])) {
+      return;
     }
     let hours = parseInt(splitTime[0]) || 0;
     let minutes =
@@ -586,8 +601,11 @@ export class CompanyProfileComponent implements OnInit {
     if (hours > 23) {
       hours = 23;
     }
-    let itemIndex = this.cProfile.timeSettings.workingDays.findIndex(item => item.id == workingday.id);
-    this.cProfile.timeSettings.workingDays[itemIndex].startTime = hours * 3600 + minutes * 60;;
+    let itemIndex = this.cProfile.timeSettings.workingDays.findIndex(
+      item => item.id == workingday.id
+    );
+    this.cProfile.timeSettings.workingDays[itemIndex].startTime =
+      hours * 3600 + minutes * 60;
     // this.cProfile.timeSettings.workingDays[workingday.id].startTime =
     //   hours * 3600 + minutes * 60;
   }

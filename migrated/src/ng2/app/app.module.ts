@@ -68,6 +68,7 @@ import { TagPipe } from "./pipe/tag.pipe";
 import { ToastrModule } from "ngx-toastr";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgxLoadingModule,ngxLoadingAnimationTypes  } from 'ngx-loading';
+import { SelectDropDownModule } from 'ngx-select-dropdown'
 
 declare var angular: any;
 declare var $: any;
@@ -77,7 +78,6 @@ export class CustomHandlingStrategy implements UrlHandlingStrategy {
   shouldProcessUrl(url) {
       const appType = url.toString().startsWith('/ng2') ? 'ng2' : 'ng1';
       if (appType === 'ng2') {
-        console.log('ng7' + appType)
         $('body').addClass('ng7');
       } else {
         $('body').removeClass('ng7');
@@ -212,6 +212,7 @@ angular
     NgxSelectModule,
     ImageCropperModule,
     DataTablesModule,
+    SelectDropDownModule,
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: "never" }),
     TabsModule.forRoot(),
     SidebarModule.forRoot(),

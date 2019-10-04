@@ -4,697 +4,162 @@
     <div class="heading">
       <h1>Manage Tech Users</h1>
       <div class="heading-serach">
-        <a href="javascript:;" (click)="create=!create" class="btn-outline">Create Tech User</a>
+        <a href="javascript:;" (click)="create = !create" class="btn-outline"
+          >Create Tech User</a
+        >
       </div>
     </div>
     <div class="cmn-area hs-area">
       <div class="data-table-wrap mteh-data">
         <table class="display dataTable" style="width:100%">
-              <thead>
-                <tr>
-                  <th class="tech-user">Tech User</th>
-                  <th class="email">Email</th>
-                  <th class="e-note">Email Notification</th>
-                  <th class="action">&nbsp;</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="tech-user">
-                    <div class="t-user">
-                      <span class="user-dp online">
-                          <img src="/ng2/assets/img/user.jpg" alt="user" />
-                      </span>
-                      <div class="t-info">
-                          <h5>Norman Maxwell</h5>
-                          <span>10:30 AM, 14 Jun</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td class="email"><a href="mailto:jarett@activeis.ca">jarett@activeis.ca</a><span>Administrator</span></td>
-                  <td class="e-note">
-                      <a href="javascript:;" class="email-dropdown" (click)="show=!show">New Device, New Ticket...</a>
-                      <div class="eml-ntl-list" [class.opened]="show">
-                          <div class="email-note-wrape">
-                            <h5>Set Email Notification for Tech User</h5>
-                              <ul class="list-unstyled">
-                                  <li class="cmn-checkbox">
-                                      <input type="checkbox" id="when" checked />
-                                      <label for="when"> When my account is logged in from a new device </label>
-                                    </li>
-                                  <li class="cmn-checkbox">
-                                      <input type="checkbox" id="closed" />
-                                      <label for="closed"> When any ticket is closed </label>
-                                  </li>
-                                    <li class="cmn-checkbox">
-                                        <input id="my" type="checkbox" />
-                                        <label for="my"> When my account is logged in from a new device </label>
-                                      </li>
-                                    <li class="cmn-checkbox">
-                                        <input id="ticket" type="checkbox"  />
-                                        <label for="ticket"> When any ticket is closed </label>
-                                    </li>
-                              </ul>
-                            </div>
-                      </div>
-                  </td>
-                  <td class="action">
-                     <a href="javascript:;" class="static-link">Resend Email</a>
-                      <a href="javascript:;" data-tooltip="Edit" class="edit"><img src="/ng2/assets/img/edit.svg" alt="Edit" (click)="edit=!edit" /></a>
-                     <a href="javascript:;" data-tooltip="Remove" class="remove"><img src="/ng2/assets/img/remove.svg" alt="Remove" /></a>
-                  </td>
-                </tr>
-                <tr>
-                    <td class="tech-user">
-                      <div class="t-user">
-                        <span class="user-dp away">
-                            <img src="/ng2/assets/img/user.jpg" alt="user" />
-                        </span>
-                        <div class="t-info">
-                            <h5>Herman Brock</h5>
-                            <span>9:30 AM, 15 Jun</span>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="email"><a href="mailto:effie.denesik@wilton.biz">effie.denesik@wilton.biz</a><span>Tech User</span></td>
-                    <td class="e-note">
-                        <a href="javascript:;" class="email-dropdown" (click)="show1=!show1">New Device, New Ticket...</a>
-                        <div class="eml-ntl-list" [class.opened]="show1">
-                            <div class="email-note-wrape">
-                              <h5>Set Email Notification for Tech User</h5>
-                                <ul class="list-unstyled">
-                                    <li class="cmn-checkbox">
-                                        <input type="checkbox" id="when" checked />
-                                        <label for="when"> When my account is logged in from a new device </label>
-                                      </li>
-                                    <li class="cmn-checkbox">
-                                        <input type="checkbox" id="closed" />
-                                        <label for="closed"> When any ticket is closed </label>
-                                    </li>
-                                      <li class="cmn-checkbox">
-                                          <input id="my" type="checkbox" />
-                                          <label for="my"> When my account is logged in from a new device </label>
-                                        </li>
-                                      <li class="cmn-checkbox">
-                                          <input id="ticket" type="checkbox"  />
-                                          <label for="ticket"> When any ticket is closed </label>
-                                      </li>
-                                </ul>
-                              </div>
-                        </div>
-                    </td>
-                    <td class="action">
-                       <a href="javascript:;" class="static-link">Reset Password</a>
-                        <a href="javascript:;" data-tooltip="Edit" class="edit"><img src="/ng2/assets/img/edit.svg" alt="Edit" (click)="edit=!edit" /></a>
-                       <a href="javascript:;" data-tooltip="Remove" class="remove"><img src="/ng2/assets/img/remove.svg" alt="Remove" /></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="tech-user">
-                      <div class="t-user">
-                        <span class="user-dp away">
-                            <img src="/ng2/assets/img/user.jpg" alt="user" />
-                        </span>
-                        <div class="t-info">
-                            <h5>Tommy Day</h5>
-                            <span>9:30 AM, 15 Jun</span>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="email"><a href="mailto:aurelia_zieme@emilie.com">aurelia_zieme@emilie.com</a><span>Tech User</span></td>
-                    <td class="e-note">
-                        <a href="javascript:;" class="email-dropdown" (click)="show1=!show1">Ticket Closed</a>
-                        <div class="eml-ntl-list" [class.opened]="show1">
-                            <div class="email-note-wrape">
-                              <h5>Set Email Notification for Tech User</h5>
-                                <ul class="list-unstyled">
-                                    <li class="cmn-checkbox">
-                                        <input type="checkbox" id="when" checked />
-                                        <label for="when"> When my account is logged in from a new device </label>
-                                      </li>
-                                    <li class="cmn-checkbox">
-                                        <input type="checkbox" id="closed" />
-                                        <label for="closed"> When any ticket is closed </label>
-                                    </li>
-                                      <li class="cmn-checkbox">
-                                          <input id="my" type="checkbox" />
-                                          <label for="my"> When my account is logged in from a new device </label>
-                                        </li>
-                                      <li class="cmn-checkbox">
-                                          <input id="ticket" type="checkbox"  />
-                                          <label for="ticket"> When any ticket is closed </label>
-                                      </li>
-                                </ul>
-                              </div>
-                        </div>
-                    </td>
-                    <td class="action">
-                       <a href="javascript:;" class="static-link">Resend Email</a>
-                        <a href="javascript:;" data-tooltip="Edit" class="edit"><img src="/ng2/assets/img/edit.svg" alt="Edit" (click)="edit=!edit" /></a>
-                       <a href="javascript:;" data-tooltip="Remove" class="remove"><img src="/ng2/assets/img/remove.svg" alt="Remove" /></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="tech-user">
-                      <div class="t-user">
-                        <span class="user-dp offline">
-                            <img src="/ng2/assets/img/user.jpg" alt="user" />
-                        </span>
-                        <div class="t-info">
-                            <h5>Gregory Romero</h5>
-                            <span>9:30 AM, 15 Jun</span>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="email"><a href="mailto:gorczany_grover@reichert.name">gorczany_grover@reichert.name</a><span>Tech User</span></td>
-                    <td class="e-note">
-                        <a href="javascript:;" class="email-dropdown" (click)="show1=!show1">New Device, Ticket Closed</a>
-                        <div class="eml-ntl-list" [class.opened]="show1">
-                            <div class="email-note-wrape">
-                              <h5>Set Email Notification for Tech User</h5>
-                                <ul class="list-unstyled">
-                                    <li class="cmn-checkbox">
-                                        <input type="checkbox" id="when" checked />
-                                        <label for="when"> When my account is logged in from a new device </label>
-                                      </li>
-                                    <li class="cmn-checkbox">
-                                        <input type="checkbox" id="closed" />
-                                        <label for="closed"> When any ticket is closed </label>
-                                    </li>
-                                      <li class="cmn-checkbox">
-                                          <input id="my" type="checkbox" />
-                                          <label for="my"> When my account is logged in from a new device </label>
-                                        </li>
-                                      <li class="cmn-checkbox">
-                                          <input id="ticket" type="checkbox"  />
-                                          <label for="ticket"> When any ticket is closed </label>
-                                      </li>
-                                </ul>
-                              </div>
-                        </div>
-                    </td>
-                    <td class="action">
-                       <a href="javascript:;" class="static-link">Reset Password</a>
-                        <a href="javascript:;" data-tooltip="Edit" class="edit"><img src="/ng2/assets/img/edit.svg" alt="Edit" (click)="edit=!edit" /></a>
-                       <a href="javascript:;" data-tooltip="Remove" class="remove"><img src="/ng2/assets/img/remove.svg" alt="Remove" /></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="tech-user">
-                      <div class="t-user">
-                        <span class="user-dp online">
-                            <img src="/ng2/assets/img/user.jpg" alt="user" />
-                        </span>
-                        <div class="t-info">
-                            <h5>Mitchell Watts</h5>
-                            <span>9:30 AM, 15 Jun</span>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="email"><a href="mailto:tremaine.franecki@lesch.info">tremaine.franecki@lesch.info</a><span>Tech User</span></td>
-                    <td class="e-note">
-                        <a href="javascript:;" class="email-dropdown" (click)="show1=!show1">New Device, Ticket Closed</a>
-                        <div class="eml-ntl-list" [class.opened]="show1">
-                            <div class="email-note-wrape">
-                              <h5>Set Email Notification for Tech User</h5>
-                                <ul class="list-unstyled">
-                                    <li class="cmn-checkbox">
-                                        <input type="checkbox" id="when" checked />
-                                        <label for="when"> When my account is logged in from a new device </label>
-                                      </li>
-                                    <li class="cmn-checkbox">
-                                        <input type="checkbox" id="closed" />
-                                        <label for="closed"> When any ticket is closed </label>
-                                    </li>
-                                      <li class="cmn-checkbox">
-                                          <input id="my" type="checkbox" />
-                                          <label for="my"> When my account is logged in from a new device </label>
-                                        </li>
-                                      <li class="cmn-checkbox">
-                                          <input id="ticket" type="checkbox"  />
-                                          <label for="ticket"> When any ticket is closed </label>
-                                      </li>
-                                </ul>
-                              </div>
-                        </div>
-                    </td>
-                    <td class="action">
-                       <a href="javascript:;" class="static-link">Send Welcome Email</a>
-                        <a href="javascript:;" data-tooltip="Edit" class="edit"><img src="/ng2/assets/img/edit.svg" alt="Edit" (click)="edit=!edit" /></a>
-                       <a href="javascript:;" data-tooltip="Remove" class="remove"><img src="/ng2/assets/img/remove.svg" alt="Remove" /></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="tech-user">
-                      <div class="t-user">
-                        <span class="user-dp online">
-                            <img src="/ng2/assets/img/user.jpg" alt="user" />
-                        </span>
-                        <div class="t-info">
-                            <h5>Norman Maxwell</h5>
-                            <span>10:30 AM, 14 Jun</span>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="email"><a href="mailto:jarett@activeis.ca">jarett@activeis.ca</a><span>Administrator</span></td>
-                    <td class="e-note">
-                        <a href="javascript:;" class="email-dropdown" (click)="show=!show">New Device, New Ticket...</a>
-                        <div class="eml-ntl-list" [class.opened]="show">
-                            <div class="email-note-wrape">
-                              <h5>Set Email Notification for Tech User</h5>
-                                <ul class="list-unstyled">
-                                    <li class="cmn-checkbox">
-                                        <input type="checkbox" id="when" checked />
-                                        <label for="when"> When my account is logged in from a new device </label>
-                                      </li>
-                                    <li class="cmn-checkbox">
-                                        <input type="checkbox" id="closed" />
-                                        <label for="closed"> When any ticket is closed </label>
-                                    </li>
-                                      <li class="cmn-checkbox">
-                                          <input id="my" type="checkbox" />
-                                          <label for="my"> When my account is logged in from a new device </label>
-                                        </li>
-                                      <li class="cmn-checkbox">
-                                          <input id="ticket" type="checkbox"  />
-                                          <label for="ticket"> When any ticket is closed </label>
-                                      </li>
-                                </ul>
-                              </div>
-                        </div>
-                    </td>
-                    <td class="action">
-                       <a href="javascript:;" class="static-link">Resend Email</a>
-                        <a href="javascript:;" data-tooltip="Edit" class="edit"><img src="/ng2/assets/img/edit.svg" alt="Edit" (click)="edit=!edit" /></a>
-                       <a href="javascript:;" data-tooltip="Remove" class="remove"><img src="/ng2/assets/img/remove.svg" alt="Remove" /></a>
-                    </td>
-                  </tr>
-                  <tr>
-                      <td class="tech-user">
-                        <div class="t-user">
-                          <span class="user-dp away">
-                              <img src="/ng2/assets/img/user.jpg" alt="user" />
-                          </span>
-                          <div class="t-info">
-                              <h5>Herman Brock</h5>
-                              <span>9:30 AM, 15 Jun</span>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="email"><a href="mailto:effie.denesik@wilton.biz">effie.denesik@wilton.biz</a><span>Tech User</span></td>
-                      <td class="e-note">
-                          <a href="javascript:;" class="email-dropdown" (click)="show1=!show1">New Device, New Ticket...</a>
-                          <div class="eml-ntl-list" [class.opened]="show1">
-                              <div class="email-note-wrape">
-                                <h5>Set Email Notification for Tech User</h5>
-                                  <ul class="list-unstyled">
-                                      <li class="cmn-checkbox">
-                                          <input type="checkbox" id="when" checked />
-                                          <label for="when"> When my account is logged in from a new device </label>
-                                        </li>
-                                      <li class="cmn-checkbox">
-                                          <input type="checkbox" id="closed" />
-                                          <label for="closed"> When any ticket is closed </label>
-                                      </li>
-                                        <li class="cmn-checkbox">
-                                            <input id="my" type="checkbox" />
-                                            <label for="my"> When my account is logged in from a new device </label>
-                                          </li>
-                                        <li class="cmn-checkbox">
-                                            <input id="ticket" type="checkbox"  />
-                                            <label for="ticket"> When any ticket is closed </label>
-                                        </li>
-                                  </ul>
-                                </div>
-                          </div>
-                      </td>
-                      <td class="action">
-                         <a href="javascript:;" class="static-link">Reset Password</a>
-                          <a href="javascript:;" data-tooltip="Edit" class="edit"><img src="/ng2/assets/img/edit.svg" alt="Edit" (click)="edit=!edit" /></a>
-                         <a href="javascript:;" data-tooltip="Remove" class="remove"><img src="/ng2/assets/img/remove.svg" alt="Remove" /></a>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td class="tech-user">
-                        <div class="t-user">
-                          <span class="user-dp offline">
-                              <img src="/ng2/assets/img/user.jpg" alt="user" />
-                          </span>
-                          <div class="t-info">
-                              <h5>Tommy Day</h5>
-                              <span>9:30 AM, 15 Jun</span>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="email"><a href="mailto:aurelia_zieme@emilie.com">aurelia_zieme@emilie.com</a><span>Tech User</span></td>
-                      <td class="e-note">
-                          <a href="javascript:;" class="email-dropdown" (click)="show1=!show1">Ticket Closed</a>
-                          <div class="eml-ntl-list" [class.opened]="show1">
-                              <div class="email-note-wrape">
-                                <h5>Set Email Notification for Tech User</h5>
-                                  <ul class="list-unstyled">
-                                      <li class="cmn-checkbox">
-                                          <input type="checkbox" id="when" checked />
-                                          <label for="when"> When my account is logged in from a new device </label>
-                                        </li>
-                                      <li class="cmn-checkbox">
-                                          <input type="checkbox" id="closed" />
-                                          <label for="closed"> When any ticket is closed </label>
-                                      </li>
-                                        <li class="cmn-checkbox">
-                                            <input id="my" type="checkbox" />
-                                            <label for="my"> When my account is logged in from a new device </label>
-                                          </li>
-                                        <li class="cmn-checkbox">
-                                            <input id="ticket" type="checkbox"  />
-                                            <label for="ticket"> When any ticket is closed </label>
-                                        </li>
-                                  </ul>
-                                </div>
-                          </div>
-                      </td>
-                      <td class="action">
-                         <a href="javascript:;" class="static-link">Resend Email</a>
-                          <a href="javascript:;" data-tooltip="Edit" class="edit"><img src="/ng2/assets/img/edit.svg" alt="Edit" (click)="edit=!edit" /></a>
-                         <a href="javascript:;" data-tooltip="Remove" class="remove"><img src="/ng2/assets/img/remove.svg" alt="Remove" /></a>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td class="tech-user">
-                        <div class="t-user">
-                          <span class="user-dp away">
-                              <img src="/ng2/assets/img/user.jpg" alt="user" />
-                          </span>
-                          <div class="t-info">
-                              <h5>Gregory Romero</h5>
-                              <span>9:30 AM, 15 Jun</span>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="email"><a href="mailto:gorczany_grover@reichert.name">gorczany_grover@reichert.name</a><span>Tech User</span></td>
-                      <td class="e-note">
-                          <a href="javascript:;" class="email-dropdown" (click)="show1=!show1">New Device, Ticket Closed</a>
-                          <div class="eml-ntl-list" [class.opened]="show1">
-                              <div class="email-note-wrape">
-                                <h5>Set Email Notification for Tech User</h5>
-                                  <ul class="list-unstyled">
-                                      <li class="cmn-checkbox">
-                                          <input type="checkbox" id="when" checked />
-                                          <label for="when"> When my account is logged in from a new device </label>
-                                        </li>
-                                      <li class="cmn-checkbox">
-                                          <input type="checkbox" id="closed" />
-                                          <label for="closed"> When any ticket is closed </label>
-                                      </li>
-                                        <li class="cmn-checkbox">
-                                            <input id="my" type="checkbox" />
-                                            <label for="my"> When my account is logged in from a new device </label>
-                                          </li>
-                                        <li class="cmn-checkbox">
-                                            <input id="ticket" type="checkbox"  />
-                                            <label for="ticket"> When any ticket is closed </label>
-                                        </li>
-                                  </ul>
-                                </div>
-                          </div>
-                      </td>
-                      <td class="action">
-                         <a href="javascript:;" class="static-link">Reset Password</a>
-                          <a href="javascript:;" data-tooltip="Edit" class="edit"><img src="/ng2/assets/img/edit.svg" alt="Edit" (click)="edit=!edit" /></a>
-                         <a href="javascript:;" data-tooltip="Remove" class="remove"><img src="/ng2/assets/img/remove.svg" alt="Remove" /></a>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td class="tech-user">
-                        <div class="t-user">
-                          <span class="user-dp offline">
-                              <img src="/ng2/assets/img/user.jpg" alt="user" />
-                          </span>
-                          <div class="t-info">
-                              <h5>Mitchell Watts</h5>
-                              <span>9:30 AM, 15 Jun</span>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="email"><a href="mailto:tremaine.franecki@lesch.info">tremaine.franecki@lesch.info</a><span>Tech User</span></td>
-                      <td class="e-note">
-                          <a href="javascript:;" class="email-dropdown" (click)="show1=!show1">New Device, Ticket Closed</a>
-                          <div class="eml-ntl-list" [class.opened]="show1">
-                              <div class="email-note-wrape">
-                                <h5>Set Email Notification for Tech User</h5>
-                                  <ul class="list-unstyled">
-                                      <li class="cmn-checkbox">
-                                          <input type="checkbox" id="when" checked />
-                                          <label for="when"> When my account is logged in from a new device </label>
-                                        </li>
-                                      <li class="cmn-checkbox">
-                                          <input type="checkbox" id="closed" />
-                                          <label for="closed"> When any ticket is closed </label>
-                                      </li>
-                                        <li class="cmn-checkbox">
-                                            <input id="my" type="checkbox" />
-                                            <label for="my"> When my account is logged in from a new device </label>
-                                          </li>
-                                        <li class="cmn-checkbox">
-                                            <input id="ticket" type="checkbox"  />
-                                            <label for="ticket"> When any ticket is closed </label>
-                                        </li>
-                                  </ul>
-                                </div>
-                          </div>
-                      </td>
-                      <td class="action">
-                         <a href="javascript:;" class="static-link">Send Welcome Email</a>
-                          <a href="javascript:;" data-tooltip="Edit" class="edit"><img src="/ng2/assets/img/edit.svg" alt="Edit" (click)="edit=!edit" /></a>
-                         <a href="javascript:;" data-tooltip="Remove" class="remove"><img src="/ng2/assets/img/remove.svg" alt="Remove" /></a>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td class="tech-user">
-                        <div class="t-user">
-                          <span class="user-dp online">
-                              <img src="/ng2/assets/img/user.jpg" alt="user" />
-                          </span>
-                          <div class="t-info">
-                              <h5>Norman Maxwell</h5>
-                              <span>10:30 AM, 14 Jun</span>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="email"><a href="mailto:jarett@activeis.ca">jarett@activeis.ca</a><span>Administrator</span></td>
-                      <td class="e-note">
-                          <a href="javascript:;" class="email-dropdown" (click)="show=!show">New Device, New Ticket...</a>
-                          <div class="eml-ntl-list" [class.opened]="show">
-                              <div class="email-note-wrape">
-                                <h5>Set Email Notification for Tech User</h5>
-                                  <ul class="list-unstyled">
-                                      <li class="cmn-checkbox">
-                                          <input type="checkbox" id="when" checked />
-                                          <label for="when"> When my account is logged in from a new device </label>
-                                        </li>
-                                      <li class="cmn-checkbox">
-                                          <input type="checkbox" id="closed" />
-                                          <label for="closed"> When any ticket is closed </label>
-                                      </li>
-                                        <li class="cmn-checkbox">
-                                            <input id="my" type="checkbox" />
-                                            <label for="my"> When my account is logged in from a new device </label>
-                                          </li>
-                                        <li class="cmn-checkbox">
-                                            <input id="ticket" type="checkbox"  />
-                                            <label for="ticket"> When any ticket is closed </label>
-                                        </li>
-                                  </ul>
-                                </div>
-                          </div>
-                      </td>
-                      <td class="action">
-                         <a href="javascript:;" class="static-link">Resend Email</a>
-                          <a href="javascript:;" data-tooltip="Edit" class="edit"><img src="/ng2/assets/img/edit.svg" alt="Edit" (click)="edit=!edit" /></a>
-                         <a href="javascript:;" data-tooltip="Remove" class="remove"><img src="/ng2/assets/img/remove.svg" alt="Remove" /></a>
-                      </td>
-                    </tr>
-                    <tr>
-                        <td class="tech-user">
-                          <div class="t-user">
-                            <span class="user-dp online">
-                                <img src="/ng2/assets/img/user.jpg" alt="user" />
-                            </span>
-                            <div class="t-info">
-                                <h5>Herman Brock</h5>
-                                <span>9:30 AM, 15 Jun</span>
-                            </div>
-                          </div>
-                        </td>
-                        <td class="email"><a href="mailto:effie.denesik@wilton.biz">effie.denesik@wilton.biz</a><span>Tech User</span></td>
-                        <td class="e-note">
-                            <a href="javascript:;" class="email-dropdown" (click)="show1=!show1">New Device, New Ticket...</a>
-                            <div class="eml-ntl-list" [class.opened]="show1">
-                                <div class="email-note-wrape">
-                                  <h5>Set Email Notification for Tech User</h5>
-                                    <ul class="list-unstyled">
-                                        <li class="cmn-checkbox">
-                                            <input type="checkbox" id="when" checked />
-                                            <label for="when"> When my account is logged in from a new device </label>
-                                          </li>
-                                        <li class="cmn-checkbox">
-                                            <input type="checkbox" id="closed" />
-                                            <label for="closed"> When any ticket is closed </label>
-                                        </li>
-                                          <li class="cmn-checkbox">
-                                              <input id="my" type="checkbox" />
-                                              <label for="my"> When my account is logged in from a new device </label>
-                                            </li>
-                                          <li class="cmn-checkbox">
-                                              <input id="ticket" type="checkbox"  />
-                                              <label for="ticket"> When any ticket is closed </label>
-                                          </li>
-                                    </ul>
-                                  </div>
-                            </div>
-                        </td>
-                        <td class="action">
-                           <a href="javascript:;" class="static-link">Reset Password</a>
-                            <a href="javascript:;" data-tooltip="Edit" class="edit"><img src="/ng2/assets/img/edit.svg" alt="Edit" (click)="edit=!edit" /></a>
-                           <a href="javascript:;" data-tooltip="Remove" class="remove"><img src="/ng2/assets/img/remove.svg" alt="Remove" /></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="tech-user">
-                          <div class="t-user">
-                            <span class="user-dp online">
-                                <img src="/ng2/assets/img/user.jpg" alt="user" />
-                            </span>
-                            <div class="t-info">
-                                <h5>Tommy Day</h5>
-                                <span>9:30 AM, 15 Jun</span>
-                            </div>
-                          </div>
-                        </td>
-                        <td class="email"><a href="mailto:aurelia_zieme@emilie.com">aurelia_zieme@emilie.com</a><span>Tech User</span></td>
-                        <td class="e-note">
-                            <a href="javascript:;" class="email-dropdown" (click)="show1=!show1">Ticket Closed</a>
-                            <div class="eml-ntl-list" [class.opened]="show1">
-                                <div class="email-note-wrape">
-                                  <h5>Set Email Notification for Tech User</h5>
-                                    <ul class="list-unstyled">
-                                        <li class="cmn-checkbox">
-                                            <input type="checkbox" id="when" checked />
-                                            <label for="when"> When my account is logged in from a new device </label>
-                                          </li>
-                                        <li class="cmn-checkbox">
-                                            <input type="checkbox" id="closed" />
-                                            <label for="closed"> When any ticket is closed </label>
-                                        </li>
-                                          <li class="cmn-checkbox">
-                                              <input id="my" type="checkbox" />
-                                              <label for="my"> When my account is logged in from a new device </label>
-                                            </li>
-                                          <li class="cmn-checkbox">
-                                              <input id="ticket" type="checkbox"  />
-                                              <label for="ticket"> When any ticket is closed </label>
-                                          </li>
-                                    </ul>
-                                  </div>
-                            </div>
-                        </td>
-                        <td class="action">
-                           <a href="javascript:;" class="static-link">Resend Email</a>
-                            <a href="javascript:;" data-tooltip="Edit" class="edit"><img src="/ng2/assets/img/edit.svg" alt="Edit" (click)="edit=!edit" /></a>
-                           <a href="javascript:;" data-tooltip="Remove" class="remove"><img src="/ng2/assets/img/remove.svg" alt="Remove" /></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="tech-user">
-                          <div class="t-user">
-                            <span class="user-dp online">
-                                <img src="/ng2/assets/img/user.jpg" alt="user" />
-                            </span>
-                            <div class="t-info">
-                                <h5>Gregory Romero</h5>
-                                <span>9:30 AM, 15 Jun</span>
-                            </div>
-                          </div>
-                        </td>
-                        <td class="email"><a href="mailto:gorczany_grover@reichert.name">gorczany_grover@reichert.name</a><span>Tech User</span></td>
-                        <td class="e-note">
-                            <a href="javascript:;" class="email-dropdown" (click)="show1=!show1">New Device, Ticket Closed</a>
-                            <div class="eml-ntl-list" [class.opened]="show1">
-                                <div class="email-note-wrape">
-                                  <h5>Set Email Notification for Tech User</h5>
-                                    <ul class="list-unstyled">
-                                        <li class="cmn-checkbox">
-                                            <input type="checkbox" id="when" checked />
-                                            <label for="when"> When my account is logged in from a new device </label>
-                                          </li>
-                                        <li class="cmn-checkbox">
-                                            <input type="checkbox" id="closed" />
-                                            <label for="closed"> When any ticket is closed </label>
-                                        </li>
-                                          <li class="cmn-checkbox">
-                                              <input id="my" type="checkbox" />
-                                              <label for="my"> When my account is logged in from a new device </label>
-                                            </li>
-                                          <li class="cmn-checkbox">
-                                              <input id="ticket" type="checkbox"  />
-                                              <label for="ticket"> When any ticket is closed </label>
-                                          </li>
-                                    </ul>
-                                  </div>
-                            </div>
-                        </td>
-                        <td class="action">
-                           <a href="javascript:;" class="static-link">Reset Password</a>
-                            <a href="javascript:;" data-tooltip="Edit" class="edit"><img src="/ng2/assets/img/edit.svg" alt="Edit" (click)="edit=!edit" /></a>
-                           <a href="javascript:;" data-tooltip="Remove" class="remove"><img src="/ng2/assets/img/remove.svg" alt="Remove" /></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="tech-user">
-                          <div class="t-user">
-                            <span class="user-dp online">
-                                <img src="/ng2/assets/img/user.jpg" alt="user" />
-                            </span>
-                            <div class="t-info">
-                                <h5>Mitchell Watts</h5>
-                                <span>9:30 AM, 15 Jun</span>
-                            </div>
-                          </div>
-                        </td>
-                        <td class="email"><a href="mailto:tremaine.franecki@lesch.info">tremaine.franecki@lesch.info</a><span>Help Desk User</span></td>
-                        <td class="e-note">
-                            <a href="javascript:;" class="email-dropdown" (click)="show1=!show1">New Device, Ticket Closed</a>
-                            <div class="eml-ntl-list" [class.opened]="show1">
-                                <div class="email-note-wrape">
-                                  <h5>Set Email Notification for Tech User</h5>
-                                    <ul class="list-unstyled">
-                                        <li class="cmn-checkbox">
-                                            <input type="checkbox" id="when" checked />
-                                            <label for="when"> When my account is logged in from a new device </label>
-                                          </li>
-                                        <li class="cmn-checkbox">
-                                            <input type="checkbox" id="closed" />
-                                            <label for="closed"> When any ticket is closed </label>
-                                        </li>
-                                          <li class="cmn-checkbox">
-                                              <input id="my" type="checkbox" />
-                                              <label for="my"> When my account is logged in from a new device </label>
-                                            </li>
-                                          <li class="cmn-checkbox">
-                                              <input id="ticket" type="checkbox"  />
-                                              <label for="ticket"> When any ticket is closed </label>
-                                          </li>
-                                    </ul>
-                                  </div>
-                            </div>
-                        </td>
-                        <td class="action">
-                           <a href="javascript:;" class="static-link">Send Welcome Email</a>
-                            <a href="javascript:;" data-tooltip="Edit" class="edit"><img src="/ng2/assets/img/edit.svg" alt="Edit" (click)="edit=!edit" /></a>
-                           <a href="javascript:;" data-tooltip="Remove" class="remove"><img src="/ng2/assets/img/remove.svg" alt="Remove" /></a>
-                        </td>
-                    </tr>
-               </tbody>
+          <thead>
+            <tr>
+              <th class="tech-user">Tech User</th>
+              <th class="email">Email</th>
+              <th class="e-note">Email Notification</th>
+              <th class="action">&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="techUsers">
+            <tr *ngFor="let techUser of techUsers; let i = index">
+              <td class="tech-user">
+                <div class="t-user">
+                  <span class="user-dp online" *ngIf="techUser.avatar">
+                    <img src="/users/{{techUser.id}}/image.jpg?t={{techUser.avatar.updatedAt}}" alt="user" />
+                  </span>
+                  <span class="user-dp online" *ngIf="techUser.avatar === null">
+                      <img src="/ng2/assets/img/user.jpg" alt="user" />
+                    </span>
+                  <div class="t-info">
+                    <h5>{{ techUser.firstName }} {{ techUser.lastName }}</h5>
+                    <span>10:30 AM, 14 Jun</span>
+                  </div>
+                </div>
+              </td>
+              <td class="email">
+                <a href="mailto:{{ techUser.primaryEmail }}">{{
+                  techUser.primaryEmail
+                }}</a
+                ><span>{{ techUser.techRole }}</span>
+              </td>
+              <td class="e-note">
+                <a
+                  href="javascript:;"
+                  class="email-dropdown"
+                  (click)="emailNotificationModel(i)"
+                >
+                  <!-- <p *ngIf="techUseremailNotificationList[techUser.id].newDevice">
+                      new device
+                  </p>
+                  <p *ngIf="techUseremailNotificationList[techUser.id].ticketCreated">
+                      New Ticket
+                  </p>
+                  <p *ngIf="techUseremailNotificationList[techUser.id].myTicketUpdated">
+                      Ticket is updated
+                  </p>
+                  <p *ngIf="techUseremailNotificationList[techUser.id].ticketCloseNotifications">
+                      Ticket is closed
+                  </p> -->
+                  New Device, New Ticket...</a
+                >
+                <div
+                  class="eml-ntl-list"
+                  [ngClass]="{ opened: selectedIdx === i }"
+                >
+                  <div
+                    class="email-note-wrape"
+                    *ngIf="techUseremailNotificationList"
+                  >
+                    <h5>Set Email Notification for Tech User</h5>
+                    <ul class="list-unstyled">
+                      <li class="cmn-checkbox">
+                        <input
+                          type="checkbox"
+                          [(ngModel)]="
+                            techUseremailNotificationList[techUser.id].newDevice
+                          "
+                          id="newDevice"
+                          checked
+                        />
+                        <label for="newDevice">
+                          When my account is logged in from a new device
+                        </label>
+                      </li>
+                      <li class="cmn-checkbox">
+                        <input
+                          type="checkbox"
+                          id="ticketCreated"
+                          [(ngModel)]="
+                            techUseremailNotificationList[techUser.id]
+                              .ticketCreated
+                          "
+                        />
+                        <label for="ticketCreated">
+                          When a New Ticket created
+                        </label>
+                      </li>
+                      <li class="cmn-checkbox">
+                        <input
+                          id="myTicketUpdated"
+                          type="checkbox"
+                          [(ngModel)]="
+                            techUseremailNotificationList[techUser.id]
+                              .myTicketUpdated
+                          "
+                        />
+                        <label for="myTicketUpdated">
+                          When a ticket that is assigned to me is updated
+                        </label>
+                      </li>
+                      <li class="cmn-checkbox">
+                        <input
+                          id="ticketCloseNotifications"
+                          type="checkbox"
+                          [(ngModel)]="
+                            techUseremailNotificationList[techUser.id]
+                              .ticketCloseNotifications
+                          "
+                        />
+                        <label for="ticketCloseNotifications">
+                          When any ticket is closed
+                        </label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </td>
+              <td class="action">
+                <a
+                  href="javascript:;"
+                  class="static-link"
+                  *ngIf="techUser.isEmailVerified"
+                  (click)="changePasswordRequest(techUser.id)"
+                  ><p>Send a request to change password</p></a
+                >
+                <a
+                  href="javascript:;"
+                  class="static-link"
+                  *ngIf="!(techUser.isEmailVerified && techUser.userEnabled)"
+                  ><p (click)="resendWelcomeEmail(techUser.primaryEmail)">
+                    Resend welcome email
+                  </p></a
+                >
+                <a
+                  href="javascript:;"
+                  data-tooltip="Edit"
+                  class="edit"
+                  (click)="editTechUser(techUser)"
+                  ><img
+                    src="/ng2/assets/img/edit.svg"
+                    alt="Edit"
+                    (click)="edit = !edit"
+                /></a>
+                <a href="javascript:;" data-tooltip="Remove" class="remove"
+                  ><img src="/ng2/assets/img/remove.svg" alt="Remove"
+                /></a>
+              </td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>
@@ -706,8 +171,10 @@
   <!-- header -->
   <div class="sidebar-header">
     <div class="h1">Create Tech User</div>
-     <a class="close" href="javascript:;" (click)="create=!create"><img src="/ng2/assets/img/close.svg" alt="close"/></a>
-    </div>
+    <a class="close" href="javascript:;" (click)="create = !create"
+      ><img src="/ng2/assets/img/close.svg" alt="close"
+    /></a>
+  </div>
   <div class="middle-content">
     <div class="dp-area">
       <span class="dp">
@@ -720,64 +187,85 @@
       </div>
     </div>
     <form method="POST">
-        <div class="f-row">
-            <div class="f-col col-50">
-                <label>First Name</label>
-                <div class="form-row">
-                  <input type="text" class="form-input" placeholder="Enter First Name" />
-                </div>
-            </div>
-            <div class="f-col col-50">
-              <label>Last Name</label>
-              <div class="form-row">
-                <input type="text" class="form-input" placeholder="Enter Last Name" />
-              </div>
-            </div>
-            <div class="f-col col-50">
-              <label>Email</label>
-              <div class="form-row">
-                <input type="text" class="form-input" placeholder="Enter Email Address" />
-              </div>
-            </div>
-            <div class="f-col col-50">
-              <label>Set Tech User Role</label>
-              <div class="form-row">
-                <select class="cmn-select form-input">
-                   <option>Select Tech User Role</option>
-                   <option>Select Tech User Role1</option>
-                   <option>Select Tech User Role2</option>
-                   <option>Select Tech User Role3</option>
-                </select>
-              </div>
-            </div>
-            <div class="eml-ntl-list">
-                <div class="email-note-wrape">
-                    <h5>Set Email Notification for Tech User</h5>
-                    <ul class="list-unstyled">
-                      <li class="cmn-checkbox">
-                          <input type="checkbox" id="account" checked />
-                          <label for="account"> When my account is logged in from a new device </label>
-                        </li>
-                      <li class="cmn-checkbox">
-                          <input type="checkbox" id="any" />
-                          <label for="any"> When any ticket is closed </label>
-                      </li>
-                        <li class="cmn-checkbox">
-                            <input id="logged" type="checkbox" />
-                            <label for="logged"> When my account is logged in from a new device </label>
-                          </li>
-                        <li class="cmn-checkbox">
-                            <input id="is" type="checkbox"  />
-                            <label for="is"> When any ticket is closed </label>
-                        </li>
-                  </ul>
-                </div>
-            </div>
+      <div class="f-row">
+        <div class="f-col col-50">
+          <label>First Name</label>
+          <div class="form-row">
+            <input
+              type="text"
+              class="form-input"
+              placeholder="Enter First Name"
+            />
+          </div>
         </div>
-        <div class="btn-row">
-          <input type="submit" value="Save" class="btn btn-primary" />
-          <a href="javascrip:;" class="btn btn-secondary" (click)="create=!create">Cancel</a>
+        <div class="f-col col-50">
+          <label>Last Name</label>
+          <div class="form-row">
+            <input
+              type="text"
+              class="form-input"
+              placeholder="Enter Last Name"
+            />
+          </div>
         </div>
+        <div class="f-col col-50">
+          <label>Email</label>
+          <div class="form-row">
+            <input
+              type="text"
+              class="form-input"
+              placeholder="Enter Email Address"
+            />
+          </div>
+        </div>
+        <div class="f-col col-50">
+          <label>Set Tech User Role</label>
+          <div class="form-row">
+            <select class="cmn-select form-input">
+              <option>Select Tech User Role</option>
+              <option>Select Tech User Role1</option>
+              <option>Select Tech User Role2</option>
+              <option>Select Tech User Role3</option>
+            </select>
+          </div>
+        </div>
+        <div class="eml-ntl-list">
+          <div class="email-note-wrape">
+            <h5>Set Email Notification for Tech User</h5>
+            <ul class="list-unstyled">
+              <li class="cmn-checkbox">
+                <input type="checkbox" id="account" checked />
+                <label for="account">
+                  When my account is logged in from a new device
+                </label>
+              </li>
+              <li class="cmn-checkbox">
+                <input type="checkbox" id="any" />
+                <label for="any"> When any ticket is closed </label>
+              </li>
+              <li class="cmn-checkbox">
+                <input id="logged" type="checkbox" />
+                <label for="logged">
+                  When my account is logged in from a new device
+                </label>
+              </li>
+              <li class="cmn-checkbox">
+                <input id="is" type="checkbox" />
+                <label for="is"> When any ticket is closed </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <input type="submit" value="Save" class="btn btn-primary" />
+        <a
+          href="javascrip:;"
+          class="btn btn-secondary"
+          (click)="create = !create"
+          >Cancel</a
+        >
+      </div>
     </form>
   </div>
 </div>
@@ -787,78 +275,110 @@
   <!-- header -->
   <div class="sidebar-header">
     <div class="h1">Edit Tech User</div>
-     <a class="close" href="javascript:;" (click)="edit=!edit"><img src="/ng2/assets/img/close.svg" alt="close"/></a>
-    </div>
+    <a class="close" href="javascript:;" (click)="edit = !edit">
+      <img src="/ng2/assets/img/close.svg" alt="close"
+    /></a>
+  </div>
   <div class="middle-content">
     <div class="dp-area">
-      <span class="dp">
-        <img src="/ng2/assets/img/upload-photo.svg" alt="user" />
+      <span class="dp" *ngIf="selectedTechUser && selectedTechUser.avatar">
+          <img src="/users/{{selectedTechUser.id}}/image.jpg?t={{selectedTechUser.avatar.updatedAt}}" alt="user" />
       </span>
+      <span class="dp" *ngIf="!selectedTechUser  || selectedTechUser.avatar === null">
+          <img src="/ng2/assets/img/upload-photo.svg" alt="user" />
+        </span>
       <div class="dp-info">
         <input type="file" id="profile-dp" style="display: none;" />
         <label for="profile-dp" class="static-link">Upload Avtar</label>
         <span>Maximum size of 2MB. JPG, GIF, PNG</span>
       </div>
     </div>
-    <form method="POST">
-        <div class="f-row">
-            <div class="f-col col-50">
-                <label>First Name</label>
-                <div class="form-row">
-                  <input type="text" class="form-input" value="Herman" />
-                </div>
-            </div>
-            <div class="f-col col-50">
-              <label>Last Name</label>
-              <div class="form-row">
-                <input type="text" class="form-input" value="Brock" />
-              </div>
-            </div>
-            <div class="f-col col-50">
-              <label>Email</label>
-              <div class="form-row">
-                <input type="text" class="form-input" value="effie.denesik@wilton.biz" />
-              </div>
-            </div>
-            <div class="f-col col-50">
-              <label>Set Tech User Role</label>
-              <div class="form-row">
-                <select class="cmn-select form-input">
-                   <option>Tech User</option>
-                   <option>Select Tech User Role1</option>
-                   <option>Select Tech User Role2</option>
-                   <option>Select Tech User Role3</option>
-                </select>
-              </div>
-            </div>
-            <div class="eml-ntl-list">
-                <div class="email-note-wrape">
-                    <h5>Set Email Notification for Tech User</h5>
-                    <ul class="list-unstyled">
-                      <li class="cmn-checkbox">
-                          <input type="checkbox" id="account" checked />
-                          <label for="account"> When my account is logged in from a new device </label>
-                        </li>
-                      <li class="cmn-checkbox">
-                          <input type="checkbox" id="any" />
-                          <label for="any"> When any ticket is closed </label>
-                      </li>
-                        <li class="cmn-checkbox">
-                            <input id="logged" type="checkbox" />
-                            <label for="logged"> When my account is logged in from a new device </label>
-                          </li>
-                        <li class="cmn-checkbox">
-                            <input id="is" type="checkbox"  />
-                            <label for="is"> When any ticket is closed </label>
-                        </li>
-                  </ul>
-                </div>
-            </div>
+    <form [formGroup]="techUserForm" (ngSubmit)="onSubmit()">
+      <div class="f-row">
+        <div class="f-col col-50">
+          <label>First Name</label>
+          <div class="form-row">
+            <input type="text" formControlName="firstName" class="form-input" />
+          </div>
         </div>
-        <div class="btn-row">
-          <input type="submit" value="Save" class="btn btn-primary" />
-          <a href="javascrip:;" class="btn btn-secondary" (click)="edit=!edit">Cancel</a>
+        <div class="f-col col-50">
+          <label>Last Name</label>
+          <div class="form-row">
+            <input type="text" class="form-input" formControlName="lastName" />
+          </div>
         </div>
+        <div class="f-col col-50">
+          <label>Email</label>
+          <div class="form-row">
+            <input
+              type="text"
+              class="form-input"
+              formControlName="primaryEmail"
+            />
+          </div>
+        </div>
+        <div class="f-col col-50">
+          <label>Set Tech User Role</label>
+          <div class="form-row">
+            <select class="cmn-select form-input" formControlName="techRole">
+              <option *ngFor="let role of techRoles" value="{{ role }}">{{
+                role
+              }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="eml-ntl-list">
+          <div class="email-note-wrape">
+            <h5>Set Email Notification for Tech User</h5>
+            <ul class="list-unstyled">
+              <li class="cmn-checkbox">
+                <input
+                  type="checkbox"
+                  id="nDevice"
+                  formControlName="newDevice"
+                />
+                <label for="nDevice">
+                  When my account is logged in from a new device
+                </label>
+              </li>
+              <li class="cmn-checkbox">
+                <input
+                  type="checkbox"
+                  id="tCreated"
+                  formControlName="ticketCreated"
+                />
+                <label for="tCreated"> When a New Ticket created </label>
+              </li>
+              <li class="cmn-checkbox">
+                <input
+                  id="mTicketUpdated"
+                  type="checkbox"
+                  formControlName="myTicketUpdated"
+                />
+                <label for="mTicketUpdated">
+                  When a ticket that is assigned to me is updated
+                </label>
+              </li>
+              <li class="cmn-checkbox">
+                <input
+                  id="tCloseNotifications"
+                  type="checkbox"
+                  formControlName="ticketCloseNotifications"
+                />
+                <label for="tCloseNotifications">
+                  When any ticket is closed
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <input type="submit" value="Save" class="btn btn-primary" />
+        <a href="javascrip:;" class="btn btn-secondary" (click)="edit = !edit"
+          >Cancel</a
+        >
+      </div>
     </form>
   </div>
 </div>
