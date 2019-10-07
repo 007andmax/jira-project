@@ -27,6 +27,7 @@ export class SelectClientCompanyComponent implements OnInit, OnDestroy {
   @Input() formGroup: FormGroup;
   @Input() editItem: any;
   @Input() filter: boolean = false;
+  @Input() blockEditMode: boolean = false;
   public selectedClient;
   public subGetCompaniesList: ISubscription;
   public clientsList: any;
@@ -50,7 +51,7 @@ export class SelectClientCompanyComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getCLientsList();
     this.onInitClearState();
-    this.onCheckEditItem();
+  this.onCheckEditItem();
 
 
   }
@@ -60,6 +61,7 @@ export class SelectClientCompanyComponent implements OnInit, OnDestroy {
   */
   private onCheckEditItem() {
     let getCompanyFromEdit = this.companiesState.getCompanyFromEdit().subscribe((data) => {
+      if (this.blockEditMode) return;
       this.editItem = data;
       let index: number = this.clientsList.findIndex(item => item.id === this.editItem.id);
       if (index > (-1)) {

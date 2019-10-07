@@ -93,6 +93,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   * Initializes edit mod
   */
   private onEditEditMode(data: RecurringTicket) {
+    console.log('data',data);
     this.createService.setDescription(data.description);
     this.ticketForEdit = data;
     this.tehUsers = data.assignedUsers;

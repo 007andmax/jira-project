@@ -83,10 +83,14 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.createService.setDescription(data.description);
     this.recurringState.getCreateTicket().setDescription(data.description);
     this.tehUsers = data.assignedUsers;
+    
     console.log('data', data);
     this.devicesService.onInitHangle(data.company.id);
     this.selectedClient = data.company;
-    this.createService.getStateDatePicker().onInitEditMode(data.startDate);
+    this.createService.getStateDatePicker().onInitEditMode(new Date().getTime());
+    let currentDate = new Date();
+    this.onChangeDatePicker(new ChangeDatePicker(currentDate.getDate(),currentDate.getMonth() + 1,currentDate.getFullYear()))
+    
     this.services = (data.services.length > 0) ? [] : [new ForCreateService()];
     let services = [];
     data.services.forEach((service, index) => {
@@ -95,19 +99,23 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
       services.push(new_service);
 
     });
-    this.services = services;
+    this.services = (data.services.length > 0) ? services : [new ForCreateService()];;
     console.log('this.services', this.services);
+    
     this.products = (data.products.length > 0) ? this.createService.getProductsForEdit(data.products) : [new ForCreateProduct()];
     this.createService.setTagsForEdit(data.tags);
+    data.tags.forEach(item => this.recurringState.getCreateTicket().addTag(item.id)); 
     this.createService.setCreateTaskAdd(data.createTask);
     this.createService.setRequireUpdateAdd(data.requireUpdate);
     this.createService.setQuickCloseAdd(data.quickClose);
     this.createService.getTehState().setUsersFromtEdit(data.assignedUsers);
+    data.assignedUsers.forEach(item => this.recurringState.getCreateTicket().addAssignedUsers(item.id)); 
     this.createService.setCronForEdit(data.cronExpression);
     this.onChangeCron(data.cronExpression)
     this.getListServices(data.company);
+    
     this.cd.detectChanges();
-    console.log('createService', this.createService);
+    console.log('createService', this.recurringState.getCreateTicket());
   }
 
   /**
@@ -115,6 +123,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   * @param data - date picker data
   */
   public onChangeDatePicker(data: ChangeDatePicker) {
+   console.log('data',data);
     this.recurringState.getCreateTicket().setStartDate(data.day, data.month, data.year, this.recurringState.getTehCompany().addresses[0].timeZone.timeOffset);
   }
 

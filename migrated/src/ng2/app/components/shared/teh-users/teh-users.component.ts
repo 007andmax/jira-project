@@ -54,11 +54,14 @@ export class TehUsersComponent implements OnInit, OnDestroy {
   */
   private checUsersForEdit () {
    let getUsersFromEdit = this.tehState.getUsersFromEdit().subscribe((data:Array<RecurringTicketUser>) => {
-    this.usersList.forEach((item) => {
-      let index = data.findIndex(user => user.id === item.id);
+     console.log('data',data);
+     data.forEach((item) => {
+      let index = this.usersList.findIndex(user => user.id === item.id);
       if (index > (-1)) this.usersList[index].selected = true;
+     
     })
     })
+  
     this.sub.add(getUsersFromEdit);
   }
 
