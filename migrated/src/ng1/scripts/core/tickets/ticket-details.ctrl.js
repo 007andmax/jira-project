@@ -293,14 +293,16 @@ console.log('find');
           });
           $scope.onCompletedChange = function (item,type,id) {
         if (!$scope.ticketDetails.status && !$scope.ticketDetails.assignedUser && $scope.ticketDetails.multiAssignedUsers.length === 0) claimTicket = true;
-         
+         if(TicketsPermissionsService.isActionVisible('claim_ticket', $scope.ticketDetails)) claimTicket = true;
             var id_update = null;
             $scope.ticketDetails.updates.forEach(function (update) {
               if (update.type == type && type == "SERVICE") {
 
                 update.services.forEach(function (service_item) {
+                  if (service_item.completed)  claimTicket = false;
                   if (service_item.id == item.id) {
                     id_update = update.id;
+
                     console.log('id_update', id_update);
                   }
                 })
@@ -308,6 +310,7 @@ console.log('find');
               if (update.type == type && type == "PRODUCT") {
 
                 update.products.forEach(function (product_item) {
+                  if (product_item.completed)  claimTicket = false;
                   if (product_item.id == item.id) {
                     id_update = update.id;
                     console.log('id_update', id_update);
@@ -707,7 +710,24 @@ console.log('find');
             $scope.$broadcast('toggleTicketsList');
           };
           $scope.claimTicket = function () {
-            TicketsService.assignTo($scope.ticketDetails.id, $scope.currentUser.id);
+            var indexUser = $scope.ticketDetails.multiAssignedUsers.findIndex(user => user.id === $scope.currentUser.id);
+            var value = [];
+            $scope.ticketDetails.multiAssignedUsers.forEach(user => {
+              value.push(user.id);
+            })
+           
+            if ($scope.ticketDetails.assignedUser && $scope.ticketDetails.assignedUser.id !==  $scope.currentUser.id && indexUser === -1) {
+              value.push($scope.ticketDetails.assignedUser.id);
+              value.push($scope.currentUser.id);
+            } else if ($scope.ticketDetails.assignedUser && $scope.ticketDetails.assignedUser.id !==  $scope.currentUser.id && indexUser > -1) {
+              value.push($scope.ticketDetails.assignedUser.id);
+            } else if ($scope.ticketDetails.assignedUser && $scope.ticketDetails.assignedUser.id ===  $scope.currentUser.id && indexUser === -1) {
+              value.push($scope.ticketDetails.assignedUser.id);
+            } else if (!$scope.ticketDetails.assignedUser && indexUser === -1) {
+              value.push($scope.currentUser.id);
+            }
+
+            TicketsService.assignTo($scope.ticketDetails.id, value.join(","));
             $scope.ticketSharedUsersList.push({ user: $scope.currentUser, notify: false });
           };
           $scope.openSetting = function () {
