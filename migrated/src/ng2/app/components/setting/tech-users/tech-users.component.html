@@ -4,14 +4,29 @@
     <div class="heading">
       <h1>Manage Tech Users</h1>
       <div class="heading-serach">
-        <a href="javascript:;" (click)="create = !create" class="btn-outline"
+        <a href="javascript:;" (click)="creatTechUsr()" class="btn-outline"
           >Create Tech User</a
         >
       </div>
     </div>
+    <ngx-loading
+      [show]="loading"
+      [config]="{
+        primaryColour: primaryColour,
+        secondaryColour: secondaryColour,
+        tertiaryColour: primaryColour,
+        backdropBorderRadius: '3px'
+      }"
+    ></ngx-loading>
     <div class="cmn-area hs-area">
       <div class="data-table-wrap mteh-data">
-        <table class="display dataTable" style="width:100%">
+        <table
+          datatable
+          [dtOptions]="dtOptions"
+          [dtTrigger]="dtTrigger"
+          class="display dataTable"
+          style="width:100%"
+        >
           <thead>
             <tr>
               <th class="tech-user">Tech User</th>
@@ -25,11 +40,16 @@
               <td class="tech-user">
                 <div class="t-user">
                   <span class="user-dp online" *ngIf="techUser.avatar">
-                    <img src="/users/{{techUser.id}}/image.jpg?t={{techUser.avatar.updatedAt}}" alt="user" />
+                    <img
+                      src="/users/{{ techUser.id }}/image.jpg?t={{
+                        techUser.avatar.updatedAt
+                      }}"
+                      alt="user"
+                    />
                   </span>
                   <span class="user-dp online" *ngIf="techUser.avatar === null">
-                      <img src="/ng2/assets/img/user.jpg" alt="user" />
-                    </span>
+                    <img src="/ng2/assets/img/user.jpg" alt="user" />
+                  </span>
                   <div class="t-info">
                     <h5>{{ techUser.firstName }} {{ techUser.lastName }}</h5>
                     <span>10:30 AM, 14 Jun</span>
@@ -46,7 +66,7 @@
                 <a
                   href="javascript:;"
                   class="email-dropdown"
-                  (click)="emailNotificationModel(i)"
+                  (click)="emailNotificationDropDown(i)"
                 >
                   <!-- <p *ngIf="techUseremailNotificationList[techUser.id].newDevice">
                       new device
@@ -75,13 +95,13 @@
                       <li class="cmn-checkbox">
                         <input
                           type="checkbox"
+                          readonly
                           [(ngModel)]="
                             techUseremailNotificationList[techUser.id].newDevice
                           "
-                          id="newDevice"
-                          checked
+                          id="newDevice1"
                         />
-                        <label for="newDevice">
+                        <label for="newDevice1">
                           When my account is logged in from a new device
                         </label>
                       </li>
@@ -89,6 +109,7 @@
                         <input
                           type="checkbox"
                           id="ticketCreated"
+                          readonly
                           [(ngModel)]="
                             techUseremailNotificationList[techUser.id]
                               .ticketCreated
@@ -102,6 +123,7 @@
                         <input
                           id="myTicketUpdated"
                           type="checkbox"
+                          readonly
                           [(ngModel)]="
                             techUseremailNotificationList[techUser.id]
                               .myTicketUpdated
@@ -115,6 +137,7 @@
                         <input
                           id="ticketCloseNotifications"
                           type="checkbox"
+                          readonly
                           [(ngModel)]="
                             techUseremailNotificationList[techUser.id]
                               .ticketCloseNotifications
@@ -149,12 +172,13 @@
                   data-tooltip="Edit"
                   class="edit"
                   (click)="editTechUser(techUser)"
-                  ><img
-                    src="/ng2/assets/img/edit.svg"
-                    alt="Edit"
-                    (click)="edit = !edit"
+                  ><img src="/ng2/assets/img/edit.svg" alt="Edit"
                 /></a>
-                <a href="javascript:;" data-tooltip="Remove" class="remove"
+                <a
+                  href="javascript:;"
+                  data-tooltip="remove"
+                  class="remove"
+                  (click)="removeTechUser(techUser)"
                   ><img src="/ng2/assets/img/remove.svg" alt="Remove"
                 /></a>
               </td>
@@ -181,39 +205,105 @@
         <img src="/ng2/assets/img/upload-photo.svg" alt="user" />
       </span>
       <div class="dp-info">
-        <input type="file" id="profile-dp" style="display: none;" />
+        <input
+          type="file"
+          id="profile-dp"
+          accept="image/gif, image/jpeg, image/png, image/jpg"
+          (change)="onSelectFile($event)"
+          style="display: none;"
+        />
         <label for="profile-dp" class="static-link">Upload Avtar</label>
         <span>Maximum size of 2MB. JPG, GIF, PNG</span>
+        <div class="static-link">
+          <label class="innert-links" for="profile-dp">Change Photo</label>
+          <label for="profile-dp">
+            <a href="javascript:void(0)" restore-default-button=""
+              >Remove Photo</a
+            >
+          </label>
+          <label for="profile-dp">
+            <a href="javascript:void(0)" restore-default-button=""
+              >Reposition Photo</a
+            >
+          </label>
+        </div>
       </div>
     </div>
-    <form method="POST">
+    <form [formGroup]="techUserForm" (ngSubmit)="onCreateSubmit()">
       <div class="f-row">
         <div class="f-col col-50">
-          <label>First Name</label>
+          <label *ngIf="!submitted || !f.firstName.errors">First Name</label>
+
+          <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+            <div *ngIf="f.firstName.errors.required">
+              First Name is required
+            </div>
+            <div *ngIf="f.firstName.errors.minlength">
+              First name is too short.
+            </div>
+            <div *ngIf="f.firstName.errors.maxlength">
+              First name is too large.
+            </div>
+          </div>
+
           <div class="form-row">
             <input
               type="text"
               class="form-input"
+              [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"
+              formControlName="firstName"
               placeholder="Enter First Name"
             />
           </div>
         </div>
         <div class="f-col col-50">
-          <label>Last Name</label>
+          <label *ngIf="!submitted || !f.lastName.errors">Last Name</label>
+
+          <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+            <div *ngIf="f.lastName.errors.required">
+              Last Name is required
+            </div>
+            <div *ngIf="f.lastName.errors.minlength">
+              Last name is too short.
+            </div>
+            <div *ngIf="f.lastName.errors.maxlength">
+              Last name is too large.
+            </div>
+          </div>
+
           <div class="form-row">
             <input
               type="text"
               class="form-input"
+              formControlName="lastName"
+              [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"
               placeholder="Enter Last Name"
             />
           </div>
         </div>
         <div class="f-col col-50">
-          <label>Email</label>
+          <label
+            *ngIf="(!submitted || !f.primaryEmail.errors) && !isEmailIdUnique"
+            >Email</label
+          >
+          <div
+            *ngIf="submitted && f.primaryEmail.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f.primaryEmail.errors.required">Email is required</div>
+            <div *ngIf="f.primaryEmail.errors.email">
+              Email must be a valid email address
+            </div>
+            <label *ngIf="isEmailIdUnique" class="invalid-feedback"
+              >This email already occupied.</label
+            >
+          </div>
           <div class="form-row">
             <input
               type="text"
               class="form-input"
+              [ngClass]="{ 'is-invalid': submitted && f.primaryEmail.errors }"
+              formControlName="primaryEmail"
               placeholder="Enter Email Address"
             />
           </div>
@@ -221,11 +311,10 @@
         <div class="f-col col-50">
           <label>Set Tech User Role</label>
           <div class="form-row">
-            <select class="cmn-select form-input">
-              <option>Select Tech User Role</option>
-              <option>Select Tech User Role1</option>
-              <option>Select Tech User Role2</option>
-              <option>Select Tech User Role3</option>
+            <select class="cmn-select form-input" formControlName="techRole">
+              <option *ngFor="let role of techRoles" value="{{ role }}">{{
+                role
+              }}</option>
             </select>
           </div>
         </div>
@@ -234,23 +323,39 @@
             <h5>Set Email Notification for Tech User</h5>
             <ul class="list-unstyled">
               <li class="cmn-checkbox">
-                <input type="checkbox" id="account" checked />
+                <input
+                  type="checkbox"
+                  id="account"
+                  formControlName="newDevice"
+                />
                 <label for="account">
                   When my account is logged in from a new device
                 </label>
               </li>
               <li class="cmn-checkbox">
-                <input type="checkbox" id="any" />
-                <label for="any"> When any ticket is closed </label>
+                <input
+                  type="checkbox"
+                  id="any"
+                  formControlName="ticketCreated"
+                />
+                <label for="any"> When a New Ticket created </label>
               </li>
               <li class="cmn-checkbox">
-                <input id="logged" type="checkbox" />
+                <input
+                  id="logged"
+                  type="checkbox"
+                  formControlName="myTicketUpdated"
+                />
                 <label for="logged">
-                  When my account is logged in from a new device
+                  When a ticket that is assigned to me is updated
                 </label>
               </li>
               <li class="cmn-checkbox">
-                <input id="is" type="checkbox" />
+                <input
+                  id="is"
+                  type="checkbox"
+                  formControlName="ticketCloseNotifications"
+                />
                 <label for="is"> When any ticket is closed </label>
               </li>
             </ul>
@@ -282,15 +387,82 @@
   <div class="middle-content">
     <div class="dp-area">
       <span class="dp" *ngIf="selectedTechUser && selectedTechUser.avatar">
-          <img src="/users/{{selectedTechUser.id}}/image.jpg?t={{selectedTechUser.avatar.updatedAt}}" alt="user" />
+        <img
+          src="/users/{{ selectedTechUser.id }}/image.jpg?t={{
+            selectedTechUser.avatar.updatedAt
+          }}"
+          alt="user"
+        />
       </span>
-      <span class="dp" *ngIf="!selectedTechUser  || selectedTechUser.avatar === null">
-          <img src="/ng2/assets/img/upload-photo.svg" alt="user" />
-        </span>
+      <span
+        class="dp"
+        *ngIf="!selectedTechUser || selectedTechUser.avatar === null"
+      >
+        <img src="/ng2/assets/img/upload-photo.svg" alt="user" />
+      </span>
       <div class="dp-info">
-        <input type="file" id="profile-dp" style="display: none;" />
-        <label for="profile-dp" class="static-link">Upload Avtar</label>
+        <input
+          type="file"
+          id="profile-dp"
+          style="display: none;"
+          (change)="onSelectFile($event)"
+        />
+        <!-- <label for="profile-dp" class="static-link">Upload Avtar</label> -->
         <span>Maximum size of 2MB. JPG, GIF, PNG</span>
+        <div class="static-link">
+          <label class="innert-links" for="profile-dp">Change Photo</label>
+          <label for="profile-dp">
+            <a href="javascript:void(0)" restore-default-button=""
+            (click)="deleteAvatar()"
+              >Remove Photo</a
+            >
+          </label>
+          <label for="profile-dp">
+            <a href="javascript:void(0)" restore-default-button=""
+            (click)="rePositionAvatar()"
+              >Reposition Photo</a
+            >
+          </label>
+        </div>
+      </div>
+
+      <div class="img-croparea" *ngIf="isCroppedImg">
+        <div class="crop-inner">
+          <div class="heading-area">
+            <h2>Crop Photo</h2>
+            <a href="javascript:;" class="close-btn">remove</a>
+          </div>
+          <div class="cropping">
+            <div class="img-crop">
+              <image-cropper
+                [imageBase64]="imageBase64"
+                [imageChangedEvent]="imageChangedEvent"
+                [maintainAspectRatio]="false"
+                [aspectRatio]="4 / 3"
+                [resizeToWidth]="128"
+                format="png"
+                (imageCropped)="imageCropped($event)"
+              ></image-cropper>
+            </div>
+
+            <div class="preview">
+              <h6>Profile Preview</h6>
+              <img [src]="croppedImage?.base64" />
+            </div>
+            <div class="btn-crops">
+              <button type="button" class="btn btn-primary" (click)="cropIt()">
+                Crop Photo
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                (click)="closeModel()"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <form [formGroup]="techUserForm" (ngSubmit)="onSubmit()">

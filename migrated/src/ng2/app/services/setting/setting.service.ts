@@ -1,20 +1,18 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 
-import { environment } from '../../../environments/environment';
+import { environment } from "../../../environments/environment";
 
-declare const hex_md5 : any;
+declare const hex_md5: any;
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root"
 })
 export class SettingService {
-
   private apiUrl = environment.apiUrl;
   public currentUser: any;
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   /**
    * Profile Tab
@@ -22,7 +20,7 @@ export class SettingService {
 
   isEmailUnique(email: string, id: string, isTechUser: boolean) {
     return this.http.get(
-      `${this.apiUrl}users/isEmailUnique?email=${email}&id=${id}&isTechUser=${isTechUser}`,
+      `${this.apiUrl}users/isEmailUnique?email=${email}&id=${id}&isTechUser=${isTechUser}`
     );
   }
 
@@ -30,31 +28,20 @@ export class SettingService {
     return this.http.get(`${this.apiUrl}settings/userProfile/`);
   }
 
-  public updateAvatar(image: any) {
-    return this.http.post(
-      `${this.apiUrl}users/00dc909d-56ae-4dd7-a81f-4c22bf8f5ee6/avatar`,
-      image,
-    );
+  public updateAvatar(id: string, image: any) {
+    return this.http.post(`${this.apiUrl}users/${id}/avatar`, image);
   }
 
   public updateProfile(profile: any) {
-    return this.http.put(
-      `${this.apiUrl}settings/userProfile/basic`,
-      profile
-    );
+    return this.http.put(`${this.apiUrl}settings/userProfile/basic`, profile);
   }
 
   public deleteAvatar(id: string) {
-    return this.http.delete(
-      `${this.apiUrl}users/${id}/avatar`,
-    );
+    return this.http.delete(`${this.apiUrl}users/${id}/avatar`);
   }
 
   public fileAvatar(fromData: any) {
-    return this.http.post(
-      `${this.apiUrl}file?isAvatar=true&ratio=1`,
-      fromData
-    );
+    return this.http.post(`${this.apiUrl}file?isAvatar=true&ratio=1`, fromData);
   }
 
   /**
@@ -62,10 +49,10 @@ export class SettingService {
    */
 
   public resetPassword(oldPass: string, newPass: string) {
-    return this.http.post(
-      `${this.apiUrl}resetPassword`,
-      { oldPass: hex_md5(oldPass), newPass: hex_md5(newPass) }
-    );
+    return this.http.post(`${this.apiUrl}resetPassword`, {
+      oldPass: hex_md5(oldPass),
+      newPass: hex_md5(newPass)
+    });
   }
 
   public deactivateAccount(note) {
@@ -97,11 +84,22 @@ export class SettingService {
   }
 
   emailNotifications() {
-    return this.http.get(`${this.apiUrl}settings/userProfile/emailNotifications`);
+    return this.http.get(
+      `${this.apiUrl}settings/userProfile/emailNotifications`
+    );
   }
 
   removeDevice(id: string) {
     return this.http.post(`${this.apiUrl}settings/userProfile/device`, id);
   }
- 
+
+  /**
+   * cropped image
+   * @param companyId
+   * @param cropImage
+   */
+
+  logo(companyId, cropImage: any) {
+    return this.http.post(`${this.apiUrl}company/${companyId}/logo`, cropImage);
+  }
 }

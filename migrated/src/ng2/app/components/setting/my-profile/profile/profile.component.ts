@@ -232,7 +232,7 @@ export class ProfileComponent implements OnInit {
       };
     }
 
-    this.settingService.updateAvatar(cropImage).subscribe(
+    this.settingService.updateAvatar(this.currentUser.id,cropImage).subscribe(
       (updateAvatar: any) => {
         this.imageAvatar = updateAvatar;
 
