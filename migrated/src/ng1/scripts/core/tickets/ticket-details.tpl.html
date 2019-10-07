@@ -3,7 +3,8 @@
     <loading-indicator loading-trigger="!isLoaded"></loading-indicator>
     <div class="ticket-content" ng-show="isLoaded">
       <div ng-form="editTicketForm">
-        <div class="ticket-header clearfix ticket-fixed-header">
+        <div class="ticket-header clearfix ticket-fixed-header"
+             ng-class="{'is-edit': editingTicket}">
           <div id="ticket-header-content">
             <div class="expand-ticket-btn" ng-click="toggleTicketsList()"
                  ng-class="{'active': !ticketListOpened}">
@@ -11,7 +12,7 @@
                 <i class="icn-sm icn-back-arrow" style="position: absolute;top: 7px;left: 3px;"></i></div>
             </div>
             <div class="ticket-header-avatar">
-              <img ng-src="{{ getUserAvatarUrl(user) }}" class="avatar-40 img-circle" alt="...">
+              <img ng-attr-src="{{ getUserAvatarUrl(user) }}" class="avatar-40 img-circle" alt="...">
             </div>
             <div class="clearfix vladik">
               <div class="ticket-header-username">
@@ -105,6 +106,43 @@
               </div>
             </div>
           </div>
+          <div class="ticket-header-assign">
+            <div class="assign-list"
+                 ng-if="ticketDetails.assignedUser">
+              <div class="shared-avatar pointer">
+                <img ng-if="ticketDetails.assignedUser.avatar"
+                     ng-attr-src="{{getUserAvatarUrl(ticketDetails.assignedUser)}}"
+                     uib-tooltip="{{ ticketDetails.assignedUser.firstName + ' ' + ticketDetails.assignedUser.lastName }}"/>
+                <div class="default-user-avatar avatar-background-color-odd"
+                     ng-if="!ticketDetails.assignedUser.avatar"
+                     uib-tooltip="{{ ticketDetails.assignedUser.firstName + ' ' + ticketDetails.assignedUser.lastName }}"
+                     ng-class-odd="'avatar-background-color-odd'"
+                     ng-class-even="'avatar-background-color-even'">
+                  <span>{{ticketDetails.assignedUser.firstName[0].toUpperCase()}}</span>
+                  <span>{{ticketDetails.assignedUser.lastName[0].toUpperCase()}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="assign-list"
+                 ng-if="ticketDetails.multiAssignedUsers && ticketDetails.multiAssignedUsers.length > 0">
+                 <span class="show-more-assigned-users" ng-click="moreAssignedUsers()" ng-if="countShowAssignedUsers < ticketDetails.multiAssignedUsers.length">+{{ticketDetails.multiAssignedUsers.length - 3}} more</span>
+              <div class="shared-avatar pointer"
+                   ng-repeat="sharedUser in ticketDetails.multiAssignedUsers" ng-if="($index +1) <= countShowAssignedUsers">
+                <img ng-if="sharedUser.avatar"
+                     uib-tooltip="{{ sharedUser.firstName + ' ' + sharedUser.lastName }}"
+                     ng-attr-src="{{getUserAvatarUrl(sharedUser)}}" />
+                <div class="default-user-avatar"
+                     ng-if="!sharedUser.avatar"
+                     uib-tooltip="{{ sharedUser.firstName + ' ' + sharedUser.lastName }}"
+                     ng-class-odd="'avatar-background-color-odd'"
+                     ng-class-even="'avatar-background-color-even'">
+                  <span>{{sharedUser.firstName[0].toUpperCase()}}</span>
+                  <span>{{sharedUser.lastName[0].toUpperCase()}}</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
           <div class="ticket-header-actions" ng-show="listType !== 'preview'">
             <div class="ticket-edit-actions"
                  ng-if="TicketsPermissionsService.isActionVisible('edit_ticket', ticketDetails)">
@@ -132,17 +170,23 @@
               </div>
             </div>
 
-            <div uib-dropdown auto-close="outsideClick" class="ticket-assign-actions dropdown-to-left">
+            <div class="ticket-assign-actions dropdown-to-left"
+                 uib-dropdown
+                 auto-close="outsideClick">
 
               <div uib-tooltip="Assign"
-                   tooltip-placement="top" uib-dropdown-toggle smart-dropdown-menu-position
-                   no-restricted="true">
-                <button class="ticket-assign"></button>
+                   tooltip-placement="top">
+                <button class="ticket-assign"
+                        uib-dropdown-toggle
+                        smart-dropdown-menu-position
+                        no-restricted="true"></button>
               </div>
               <div uib-dropdown-menu
                    class="dropdown-assign-ticket fixed-assign dropdown-menu without-max-height"
-                   stop-propagation="click" onUserAssign="'true'"
-                   aub-is-bulk-operation="true" style="right: 0;"
+                   stop-propagation="click"
+                   onUserAssign="'true'"
+                   aub-is-bulk-operation="true"
+                   style="right: 0;"
                    users="usersToWatch">
                 <div ng-include="'/ng1/scripts/core/assign-user-list/assign-user-list.tpl.html'"></div>
               </div>
@@ -151,23 +195,23 @@
 
 
             <!--  <div class="ticket-assign-actions dropdown-to-left" uib-dropdown auto-close="outsideClick"
-				   smart-dropdown-menu-position>
-				<div uib-tooltip="Assign"
-					 tooltip-placement="top" uib-dropdown-toggle no-restricted="true">
-				  <button class="ticket-assign"></button>
-				</div>
-				<div style="right: 0;"
-					 class="dropdown-assign-ticket dropdown-menu fixed-assign"
-					 stop-propagation="click"
-					 dropdown-menu
-					 assign-user-button aub-ticket-id="ticketDetails.id"
-					 ticket-assigned-user-id="ticketDetails.assignedUser.id"
-					 aub-ticket-number="ticketDetails.number"
-					 users="usersCurrentCompany"
-					 aub-current-user="currentUser">
-				</div>
-				<div typeahead-input-icon-sm="ticketAssignTo"></div>
-			  </div>-->
+                   smart-dropdown-menu-position>
+                <div uib-tooltip="Assign"
+                     tooltip-placement="top" uib-dropdown-toggle no-restricted="true">
+                  <button class="ticket-assign"></button>
+                </div>
+                <div style="right: 0;"
+                     class="dropdown-assign-ticket dropdown-menu fixed-assign"
+                     stop-propagation="click"
+                     dropdown-menu
+                     assign-user-button aub-ticket-id="ticketDetails.id"
+                     ticket-assigned-user-id="ticketDetails.assignedUser.id"
+                     aub-ticket-number="ticketDetails.number"
+                     users="usersCurrentCompany"
+                     aub-current-user="currentUser">
+                </div>
+                <div typeahead-input-icon-sm="ticketAssignTo"></div>
+              </div>-->
             <div class="ticket-settings-actions" uib-dropdown>
               <div uib-tooltip="Settings"
                    tooltip-placement="top" aria-expanded="false"
@@ -352,7 +396,7 @@
               <div class="indicator-new-update animation-hide angular-animate" ng-show="ticketUpdate.unread"
                    std-update="{{ ticketUpdate.id }}"></div>
               <div class="avatar m-r">
-                <img ng-src="{{ getUserAvatarUrl(user) }}"
+                <img ng-attr-src="{{ getUserAvatarUrl(user) }}"
                      alt="..."
                      class="avatar-40 img-circle">
               </div>
@@ -571,7 +615,8 @@
                       <div class="col-md-1">{{product.item.sale | currency:'$':2}}</div>
                       <div class="col-md-1">{{ product.quantity }}</div>
                       <div
-                        class="col-md-1 text-right gm">{{ product.item.sale * product.quantity || ''| currency :'$':2 }}</div>
+                        class="col-md-1 text-right gm">{{ product.item.sale * product.quantity || ''| currency :'$':2 }}
+                      </div>
                       <div class="col-md-2 action-update pr-0">
                         <div uib-dropdown>
                           <i class="new-calendar-icn pointer"></i>
@@ -599,7 +644,7 @@
                                    uib-tooltip="{{ product.user.firstName + ' ' + product.user.lastName }}"
 
                               >
-                                <img ng-if="product.user.avatar" src="{{getUserAvatarUrl(product.user)}}" />
+                                <img ng-if="product.user.avatar" ng-attr-src="{{getUserAvatarUrl(product.user)}}" />
 
                                 <div class="default-user-avatar" ng-if="!(product.user.avatar)"
                                      ng-class-odd="'avatar-background-color-odd'"
@@ -633,10 +678,8 @@
                           </ul>
                         </div>
                       </div>
-                      <p class="is-completed col-md-12" ng-if="product.completed">Completed
-                                                                                  on {{ product.completedAt | date: 'd MMM yyyy, h:mm a'}}</p>
-                      <p class="is-completed col-md-12" ng-if="!product.completed && product.date">Due date
-                                                                                                   - {{ product.date | date: 'd MMM yyyy, h:mm a'}}</p>
+                      <p class="is-completed col-md-12" ng-if="product.completed">Completed on {{ product.date | date: 'd MMM yyyy, h:mm a'}}</p>
+                      <p class="is-completed col-md-12" ng-if="!product.completed && product.date">Due date - {{ product.date | date: 'd MMM yyyy, h:mm a'}}</p>
                     </div>
                     <div class="ticket-update-edit"
                          ng-class="{'hide': product.id !== editExpenseId}"
@@ -714,7 +757,7 @@
                                    uib-tooltip="{{ service.user.firstName + ' ' + service.user.lastName }}"
 
                               >
-                                <img ng-if="service.user.avatar" src="{{getUserAvatarUrl(service.user)}}" />
+                                <img ng-if="service.user.avatar" ng-attr-src="{{getUserAvatarUrl(service.user)}}" />
 
                                 <div class="default-user-avatar" ng-if="!(service.user.avatar)"
                                      ng-class-odd="'avatar-background-color-odd'"
@@ -762,10 +805,8 @@
                           </ul>
                         </div>
                       </div>
-                      <p class="is-completed col-md-12" ng-if="service.completed">Completed
-                                                                                  on {{ service.completedAt | date: 'd MMM yyyy, h:mm a'}}</p>
-                      <p class="is-completed col-md-12" ng-if="!service.completed && service.date">Due date
-                                                                                                   - {{ service.date | date: 'd MMM yyyy, h:mm a'}}</p>
+                      <p class="is-completed col-md-12" ng-if="service.completed">Completed on {{ service.date | date: 'd MMM yyyy, h:mm a'}}</p>
+                      <p class="is-completed col-md-12" ng-if="!service.completed && service.date">Due date - {{ service.date | date: 'd MMM yyyy, h:mm a'}}</p>
                     </div>
                     <div ng-class="{'hide': service.id !== editExpenseId}"
                          ng-if="service.id === editExpenseId"
@@ -782,11 +823,11 @@
               </span>
                   <div class="added-users-wrapper pull-left">
                     <div class="pull-left avatar userinfo-tooltip" ng-hide="showAllSharedUsers"
-                         ng-repeat="share in ticketUpdate.shares | filter: filterCurrentUser | orderBy: 'itemOrder' | limitTo: 5"
+                         ng-repeat="share in ticketUpdate.shares | orderBy: 'itemOrder' | limitTo: 5"
                          tooltip-class="avatar-tooltip" tooltip-placement="top"
                          uib-tooltip-template="'/ng1/scripts/core/tickets/popup-templates/update-shared-user-popup.tpl.html'">
                       <img ng-if="(share.user.avatar)" alt="..." class="avatar-26 img-circle"
-                           ng-src="{{ share.user ? getUserAvatarUrl(getUserById(share.user.id)) : getContactAvatarUrl(share.contact) }}">
+                      ng-attr-src="{{ share.user ? getUserAvatarUrl(getUserById(share.user.id)) : getContactAvatarUrl(share.contact) }}">
                       <div class="default-user-avatar" ng-if="!(share.user.avatar)"
                            ng-class-odd="'avatar-background-color-odd'"
                            ng-class-even="'avatar-background-color-even'">
@@ -805,7 +846,7 @@
                            tooltip-class="avatar-tooltip" style="margin-left: 10px;" tooltip-placement="top"
                            uib-tooltip-template="'/ng1/scripts/core/tickets/popup-templates/update-shared-user-popup.tpl.html'">
                         <img ng-if="(share.user.avatar)" alt="..." class="avatar-26 img-circle"
-                             ng-src="{{ share.user ? getUserAvatarUrl(getUserById(share.user.id)) : getContactAvatarUrl(share.contact) }}">
+                        ng-attr-src="{{ share.user ? getUserAvatarUrl(getUserById(share.user.id)) : getContactAvatarUrl(share.contact) }}">
                         <div class="default-user-avatar" ng-if="!(share.user.avatar)"
                              ng-class-odd="'avatar-background-color-odd'"
                              ng-class-even="'avatar-background-color-even'">
@@ -839,7 +880,7 @@
     <div class="mob-ticket-content desktop-hidden">
       <div class="mob-ticket-header">
         <div class="mob-ticket-header-info">
-          <img ng-src="{{ getUserAvatarUrl(user) }}" class="avatar-40 img-circle" alt="...">
+          <img ng-attr-src="{{ getUserAvatarUrl(user) }}" class="avatar-40 img-circle" alt="...">
           <div class="mob-valera">
             <div class="mob-valera-name">
               {{ getUserName(user) }}
@@ -1065,7 +1106,7 @@
                            uib-tooltip="{{ product.user.firstName + ' ' + product.user.lastName }}"
 
                       >
-                        <img ng-if="product.user.avatar" src="{{getUserAvatarUrl(product.user)}}" />
+                        <img ng-if="product.user.avatar" ng-attr-src="{{getUserAvatarUrl(product.user)}}" />
 
                         <div class="default-user-avatar" ng-if="!(product.user.avatar)"
                              ng-class-odd="'avatar-background-color-odd'"
@@ -1098,10 +1139,8 @@
                       </ul>
                     </div>
                   </div>
-                  <p class="is-completed col-md-12" ng-if="product.completed">Completed
-                                                                              on {{ product.completedAt | date: 'd MMM yyyy, h:mm a'}}</p>
-                  <p class="is-completed col-md-12" ng-if="!product.completed && product.date">Due date
-                                                                                               - {{ product.date | date: 'd MMM yyyy, h:mm a'}}</p>
+                  <p class="is-completed col-md-12" ng-if="product.completed">Completed on {{ product.date | date: 'd MMM yyyy, h:mm a'}}</p>
+                  <p class="is-completed col-md-12" ng-if="!product.completed && product.date">Due date - {{ product.date | date: 'd MMM yyyy, h:mm a'}}</p>
                 </div>
               </div>
 
@@ -1191,7 +1230,7 @@
                     <div class="tech-users avatars" ng-click="showModelEditUser()" ng-if="service.user">
                       <div class="shared-avatar pointer"
                            uib-tooltip="{{ service.user.firstName + ' ' + service.user.lastName }}">
-                        <img ng-if="service.user.avatar" src="{{getUserAvatarUrl(service.user)}}" />
+                        <img ng-if="service.user.avatar" ng-attr-src="{{getUserAvatarUrl(service.user)}}" />
 
                         <div class="default-user-avatar" ng-if="!(service.user.avatar)"
                              ng-class-odd="'avatar-background-color-odd'"
@@ -1241,10 +1280,8 @@
                       <p class="gm">{{ service.quantity | durationFilter }}</p>
                     </div>
                   </div>
-                  <p class="is-completed col-md-12" ng-if="service.completed">Completed
-                                                                              on {{ service.completedAt | date: 'd MMM yyyy, h:mm a'}}</p>
-                  <p class="is-completed col-md-12" ng-if="!service.completed && service.date">Due date
-                                                                                               - {{ service.date | date: 'd MMM yyyy, h:mm a'}}</p>
+                  <p class="is-completed col-md-12" ng-if="service.completed">Completed on {{ service.date | date: 'd MMM yyyy, h:mm a'}}</p>
+                  <p class="is-completed col-md-12" ng-if="!service.completed && service.date">Due date - {{ service.date | date: 'd MMM yyyy, h:mm a'}}</p>
                 </div>
               </div>
 
@@ -1288,11 +1325,11 @@
                   </span>
                 <div class="added-users-wrapper pull-left">
                   <div class="pull-left avatar userinfo-tooltip" ng-hide="showAllSharedUsers"
-                       ng-repeat="share in ticketUpdate.shares | filter: filterCurrentUser | orderBy: 'itemOrder' | limitTo: 5"
+                       ng-repeat="share in ticketUpdate.shares | orderBy: 'itemOrder' | limitTo: 5"
                        tooltip-class="avatar-tooltip" tooltip-placement="top"
                        uib-tooltip-template="'/ng1/scripts/core/tickets/popup-templates/update-shared-user-popup.tpl.html'">
                     <img alt="..." class="avatar-26 img-circle"
-                         ng-src="{{ share.user ? getUserAvatarUrl(getUserById(share.user.id)) : getContactAvatarUrl(share.contact) }}">
+                    ng-attr-src="{{ share.user ? getUserAvatarUrl(getUserById(share.user.id)) : getContactAvatarUrl(share.contact) }}">
                   </div>
                   <span class="pull-left label label-light btn-more-users" ng-click="showAllSharedUsers = true"
                         ng-class="{'hide': (getLengthSharedUsers(ticketUpdate.shares) < 6) || showAllSharedUsers}">
@@ -1305,7 +1342,7 @@
                          tooltip-class="avatar-tooltip" style="margin-left: 10px;" tooltip-placement="top"
                          uib-tooltip-template="'/ng1/scripts/core/tickets/popup-templates/update-shared-user-popup.tpl.html'">
                       <img alt="..." class="avatar-26 img-circle"
-                           ng-src="{{ share.user ? getUserAvatarUrl(getUserById(share.user.id)) : getContactAvatarUrl(share.contact) }}">
+                      ng-attr-src="{{ share.user ? getUserAvatarUrl(getUserById(share.user.id)) : getContactAvatarUrl(share.contact) }}">
                     </div>
                     <div class="btn btn-icn pull-left btn-primary has-tooltip" ng-click="showAllSharedUsers = false"
                          uib-tooltip="Show Fewer" data-placement="top">
@@ -1355,9 +1392,9 @@
 
 </div>
 <script>
-  (function (i, s, o, g, r, a, m) {
+  (function(i, s, o, g, r, a, m) {
     i['GoogleAnalyticsObject'] = r;
-    i[r] = i[r] || function () {
+    i[r] = i[r] || function() {
       (i[r].q = i[r].q || []).push(arguments);
     }, i[r].l = 1 * new Date();
     a = s.createElement(o),

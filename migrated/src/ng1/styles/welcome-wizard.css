@@ -1336,14 +1336,6 @@
     border: none;
   }
 
-  .priority-big-size.label-priority-high {
-    background: url(../images/new-icons/high-priority-mobile.png) no-repeat;
-  }
-
-  .priority-big-size.label-priority-medium {
-    background: url(../images/new-icons/medium-priority-mobile.png) no-repeat;
-  }
-
   .dropdown-priority {
     top: 20px;
     width: 114px !important;

@@ -78,12 +78,34 @@
           ALL: { excludeTrashSpam: true },
           UNASSIGNED: {
             excludeTrashSpam: true,
-            groupFieldFilters: [{
-              fieldFilterDtos: [{
-                path: 'assignedUser',
-                operator: 'NULL'
-              }]
-            }]
+            groupFieldFilters: [
+              {
+                "fieldFilterDtos": [
+                  {
+                    "path":"status",
+                    "operator":"NULL"
+                  }
+                ]
+              },
+              {
+                "fieldFilterDtos": [
+                  {
+                    "path": "reportedAsSpamAt",
+                    "operator": "NULL"
+                  },
+                  {
+                    "path": "markedAsSpamAt",
+                    "operator": "NULL"
+                  },
+                  {
+                    "path": "trash",
+                    "operator": "EQ",
+                    "values": [false]
+                  }
+                ],
+                "predicateRule":"OR"
+              }
+            ]
           },
           USER: {
             "excludeTrashSpam": true,
