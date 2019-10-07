@@ -28,7 +28,7 @@
 
         $scope.getTicketStatus = function(ticket, arg) {
           var status;
-          if(ticket.status === null && ticket.assignedUserId === null && ticket.multiAssignedUsers === null || ticket.status === null && ticket.assignedUserId === null && ticket.multiAssignedUsers !== null && ticket.multiAssignedUsers.length === 0 || ticket.status === null && ticket.assignedUserId === null && ticket.multiAssignedUsers !== null && ticket.multiAssignedUsers.length > 0) {
+          if(ticket.status === null && ticket.assignedUserId === null && ticket.multiAssignedUsers !== null && ticket.multiAssignedUsers.length === 0 || ticket.status === null && ticket.assignedUserId === null && ticket.multiAssignedUsers !== null && ticket.multiAssignedUsers.length > 0) {
             status = 'unassigned';
           } else if(ticket.status === 'COMPLETED') {
             status = 'completed';
