@@ -299,7 +299,8 @@ console.log('find');
               if (update.type == type && type == "SERVICE") {
 
                 update.services.forEach(function (service_item) {
-                  if (service_item.completed)  claimTicket = false;
+                  if (service_item.id != item.id && service_item.completed)  claimTicket = false;
+                  
                   if (service_item.id == item.id) {
                     id_update = update.id;
 
@@ -310,7 +311,7 @@ console.log('find');
               if (update.type == type && type == "PRODUCT") {
 
                 update.products.forEach(function (product_item) {
-                  if (product_item.completed)  claimTicket = false;
+                  if (product_item.id != item.id && product_item.completed)  claimTicket = false;
                   if (product_item.id == item.id) {
                     id_update = update.id;
                     console.log('id_update', id_update);
@@ -319,6 +320,7 @@ console.log('find');
               }
 
             })
+            console.log('fffffffffff',JSON.parse(JSON.stringify($scope.ticketDetails.updates)));
             if (type == "PRODUCT") {
               var product = item.item;
               var editVersionedId = product.versionedId;
