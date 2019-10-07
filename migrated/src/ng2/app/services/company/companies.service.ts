@@ -54,6 +54,11 @@ export class CompaniesService {
   }
 
 
+  public getIndustries () {
+    return this.http.get(this.apiUrl + '/company/getIndustries');
+  }
+
+
   
 
 }
