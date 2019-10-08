@@ -57,6 +57,14 @@ export class ForCreateService implements Service {
     public setDuration (data) {
         this.duration = data;
     }
+    public checkService() {
+        if (!this.versionedId) {
+            this.errors = ['Service is required'];
+            this.noValid = true;
+        } else {
+            this.noValid = false;
+        }
+    }
     public setDataFromEdit(data: ServiceRecurringTicket, errors: Array<String>) {
         this.duration = data.duration;
         this.description = data.serviceDescription;

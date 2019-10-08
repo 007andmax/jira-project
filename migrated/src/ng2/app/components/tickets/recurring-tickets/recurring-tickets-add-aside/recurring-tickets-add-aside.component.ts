@@ -34,6 +34,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   public tehUsers = [];
   public validate: Validate = new Validate();
   copy: boolean = false;
+  
 
   /**
    * Creates an instance of the RecurringTicketsAddAsideComponent with the injected services
@@ -75,11 +76,12 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
       console.log('onCopyCreate');
       this.opened = true;
       this.onInitCreateMod();
-      this.onInitCopyCreate(data);
+      this.onInitCloneCreate(data);
     })
   }
 
-  private onInitCopyCreate(data) {
+  private onInitCloneCreate(data) {
+    this.createService.onInitClone();
     this.createService.setDescription(data.description);
     this.recurringState.getCreateTicket().setDescription(data.description);
     this.tehUsers = data.assignedUsers;
@@ -443,8 +445,16 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     */
   public onInitAdd() {
     this.validate.checkValidat(this.recurringState.getCreateTicket());
-    if (!this.validate.getCompany() || !this.validate.getInterval()) return;
+  //  if (this.createService.getCloneMode() && this.checkServices()) return; 
+    if (!this.validate.getCompany() || !this.validate.getInterval() || this.createService.getCloneMode() && this.checkServices()) return;
     this.onInitCheckProduct();
+  }
+
+  private checkServices() {
+    this.services.forEach(item => item.checkService());
+    console.log('this.services',this.services);
+    let noValid = (this.services.findIndex(item => item.noValid) > -1) ? true :  false;
+    return noValid;
   }
 
   /**
@@ -468,6 +478,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.validate = new Validate();
     this.copy = false;
     this.createService.resetAddAdditionalOptions();
+    this.createService.resetCloneMode();
   }
 
   public trackById(index, item) {

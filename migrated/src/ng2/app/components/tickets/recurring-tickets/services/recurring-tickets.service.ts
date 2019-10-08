@@ -17,13 +17,24 @@ import { DatePickerStateService } from 'src/ng2/app/components/shared/date-picke
 @Injectable()
 export class RecurringTicketsService {
   sub: Subscription = new Subscription();
-
+  clone:boolean = false;
   constructor(private elRef: ElementRef, private tagsState: TagsStateService,
     private stateInterval: IntervalStateService,
     private tehState: TehUsersSateService,
     private devicesState: DevicesStateService,
     private stateDatePicker: DatePickerStateService
   ) { }
+
+  public onInitClone() {
+    this.clone = true;
+  }
+
+  public getCloneMode() {
+    return this.clone;
+  }
+  public resetCloneMode() {
+    this.clone = false;
+  }
 
   /**
 * Set rules for add ticket 
