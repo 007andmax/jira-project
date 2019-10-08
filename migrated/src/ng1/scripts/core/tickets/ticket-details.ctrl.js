@@ -39,6 +39,35 @@
           var updateService = false;
           var updateProduct = false;
           var claimTicket = false;
+          $scope.$watch(function () {
+            return $scope.ticketDetails.multiAssignedUsers;
+          }, function (val) {
+            if (val && val.length) {
+              $scope.selectedAssignUsers = [];
+              $scope.selectedAssignUsers = val.map((item) => {
+                return { notify: false, user: item }
+              })
+              if (val.length > 0 && $scope.ticketDetails.createdUser) $scope.selectedAssignUsers.push({ notify: false, user: $scope.ticketDetails.createdUser });
+            }
+          });
+          $scope.$watch(function () {
+            return $scope.ticketDetails.assignedUser;
+          }, function (val) {
+            if (val) {
+              let index = $scope.selectedAssignUsers.findIndex((item) => item.user.id === val.id);
+              if (index === -1) {
+                $scope.selectedAssignUsers = [];
+                $scope.selectedAssignUsers.push({ notify: false, user: val });
+                if ($scope.ticketDetails.createdUser) $scope.selectedAssignUsers.push({ notify: false, user: $scope.ticketDetails.createdUser });
+              } else {
+                $scope.selectedAssignUsers = [{ notify: false, user: val }];
+                if ($scope.ticketDetails.createdUser) $scope.selectedAssignUsers.push({ notify: false, user: $scope.ticketDetails.createdUser });
+              }
+
+
+            }
+          });
+         
           $timeout(function() {
             ticketMobileSettings.data = $scope;
           }, 3000);
@@ -55,6 +84,7 @@
             }
             return status;
           };
+
           $scope.updateProduct = function (data) {
             TicketsService.updateExpenseInTicketUpdate(data, function () {
               updateProduct = false;
@@ -1208,6 +1238,7 @@ console.log('find');
           $scope.$on('userToAssignToTicket', function(evt, val) {
           
             if (val.type) return;
+            console.log('userToAssignToTicket');
             var data = val.data;
             var id = data.id;
             var index = $scope.ticketSharedUsersList.findIndex(function(el) {
@@ -1408,8 +1439,12 @@ console.log('find');
             $scope.ticketSharedUsersList = getDefaultSharedList();
             console.log('$scope.ticketSharedUsersList',$scope.ticketSharedUsersList);
             console.log('$scope.ticketSharedUsersList',JSON.parse(JSON.stringify($scope.ticketSharedUsersList)));
-            $scope.selectedAssignUsers = $scope.filterUsersByType($scope.ticketSharedUsersList, 'TECH');
-          if ($scope.ticketDetails.createdUser)  $scope.selectedAssignUsers.push({notify: false, user: $scope.ticketDetails.createdUser });
+           // $scope.selectedAssignUsers = $scope.filterUsersByType($scope.ticketSharedUsersList, 'TECH');
+         /*  $scope.selectedAssignUsers = ($scope.ticketDetails.assignedUser) ? [{notify: false, user:$scope.ticketDetails.assignedUser}] : $scope.ticketDetails.multiAssignedUsers.map((item) => {
+             return {notify: false, user:item}
+           });
+
+          if ($scope.ticketDetails.createdUser)  $scope.selectedAssignUsers.push({notify: false, user: $scope.ticketDetails.createdUser });*/
             console.log(' $scope.selectedAssignUsers', $scope.selectedAssignUsers);
             for (var i = 0; i < shares.length; i++) {
               var share = shares[i],
@@ -1615,10 +1650,12 @@ console.log('find');
             var result = [];
             // add reporter user
             if ($scope.user) {
+              console.log('$scope.user',$scope.user);
               addUserToResult($scope.user);
             }
             // add assigned user
             if ($scope.assignedUser) {
+              console.log('$scope.assignedUser',$scope.assignedUser);
               addUserToResult($scope.assignedUser);
             }
             // add ticket managers
@@ -1630,7 +1667,10 @@ console.log('find');
                 addUserToResult(user);
               }
             }
+            console.log('user',user);
+            console.log('$scope.allUsers',$scope.allUsers);
             $scope.allUsers.map(function(item) {
+            
               if (!user.deletedAt) {
                 addUserToResult(item, 'addUserFromAll');
               }
