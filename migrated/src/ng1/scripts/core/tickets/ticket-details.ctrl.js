@@ -464,6 +464,7 @@ console.log('find');
               $rootScope.isRightPanelHidden = true;
             }
             console.log('$scope.ticketDetails',$scope.ticketDetails);
+            console.log('$rootScope.currentUser',$rootScope.currentUser);
             rightPanelSharedState.companyId = $scope.ticketDetails.company.id;
             if ($scope.ticketDetails.ticketSource == "FROM_RECURRING_TICKET") {
             //  rightPanelSharedState.companyId = $scope.ticketDetails.company;
