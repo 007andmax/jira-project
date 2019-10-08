@@ -341,7 +341,7 @@ console.log('find');
               if (update.type == type && type == "PRODUCT") {
 
                 update.products.forEach(function (product_item) {
-                  if (item.completed && service_item.id != item.id && service_item.completed)  claimTicket = false;
+                  if (item.completed && product_item.id != item.id && product_item.completed)  claimTicket = false;
                   if (product_item.id == item.id) {
                     id_update = update.id;
                     console.log('id_update', id_update);
