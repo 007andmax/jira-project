@@ -722,8 +722,8 @@
         });
       }
 
-      function changeTimePickerType(type) {
-        $http.put('/settings/companyProfile/serviceExpenseDurationPresentation', { presentation: type  }).then(function (resp) {
+      function changeTimePickerType(type,interval) {
+        $http.put('/settings/companyProfile/serviceExpenseDurationPresentation', { presentation: type ,interval:interval }).then(function (resp) {
           if (status === 200) {
             $rootScope.currentUser.serviceExpenseDurationPresentation = type;
           }
