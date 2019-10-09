@@ -15,32 +15,50 @@ export class CompanyProfile {
     clientType: string = '';
     contacts: Array<CompanyProfileContact>;
     defaultPaymentMethod: any = null;
-    description:string;
+    description: string;
     domain: string;
     login: string = "";
     maxAgents: number = 0;
     name: string;
     password: string = "";
-    paymentMethods:string;
-    paymentTerms:number;
-    serviceType:string;
+    paymentMethods: string;
+    paymentTerms: number;
+    serviceType: string;
     removeOfflineTime: number = 30;
     services: Array<CompanyService>;
     workingDays: Array<WorkDay>;
-    techLeadId:string;
+    techLeadId: string;
     constructor() {
-    
+
         let contact: CompanyProfileContact = new CompanyProfileContact();
         let address: CompanyProfileAddress = new CompanyProfileAddress();
         address.shortVersion(contact);
         this.addresses = [address];
         this.contacts = [contact];
-        this.workingDays = Weeks.map((item) => new WorkDay(item.toUpperCase(),0,0))
+        this.workingDays = Weeks.map((item) => new WorkDay(item.toUpperCase(), 0, 0))
     }
     public fullVersion() {
-        this.clientIndustry ={
-            name:""
-        }
+        let contact: CompanyProfileContact = new CompanyProfileContact();
+        contact.fullVersion();
+        let address: CompanyProfileAddress = new CompanyProfileAddress();
+        address.fullVersion();
+        this.agentLinkToEmail = null;
+        this.clientIndustry = {
+            name: ""
+        };
+        this.clientType = '';
+        this.description = '';
+        this.domain = '';
+        this.login = '';
+        this.name = '';
+        this.paymentMethods = '';
+        this.paymentTerms = 0;
+        this.serviceType = '';
+        this.techLeadId = '';
+        this.addresses = [address];
+        this.contacts = [contact];
+        this.workingDays = Weeks.map((item) => new WorkDay(item.toUpperCase(), 0, 0))
+
     }
 
 }

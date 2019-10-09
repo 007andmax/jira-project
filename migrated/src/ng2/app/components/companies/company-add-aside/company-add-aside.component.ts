@@ -13,8 +13,10 @@ export class CompanyAddAsideComponent implements OnInit {
   public opened = false;
   public company: CompanyProfile = new CompanyProfile();
   public industries: Array<string> = [];
-  public version:string = "short";
-  companyTypes = ['Client', 'Lead', 'Vendor']
+  public version:string = 'short';
+  companyTypes = ['Client', 'Lead', 'Vendor'];
+  phoneTypes = ['Office', 'Mobile', 'Fax'];
+  paymentTerms = ['COD', '7 days', '15 days', '30 days'];
   constructor(private companiesStateService: CompaniesStateService, private companiesService: CompaniesService) { }
 
   ngOnInit() {
@@ -35,6 +37,10 @@ export class CompanyAddAsideComponent implements OnInit {
     this.companiesStateService.getShowAsideForAdd().subscribe(() => {
       this.opened = true;
     })
+  }
+  public oninitFullVersion () {
+    this.version = 'full';
+    this.company.fullVersion();
   }
   public addFullVersion() {
 

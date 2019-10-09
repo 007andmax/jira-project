@@ -4,18 +4,22 @@ export class CompanyProfileContact {
     lastName:string;
     primaryEmail:string;
     subscription:any;
+    designation:string;
     constructor () {
-        this.firstName = "";
+        this.firstName = '';
         this.phoneNumbers = [{
-            number: "",
-            typeNumber: "OFFICE"
+            number: '',
+            typeNumber: 'OFFICE'
         }];
-        this.lastName = "",
-        this.primaryEmail = "",
+        this.lastName = '',
+        this.primaryEmail = '',
         this.subscription = {
             invoice: true,
             ticket: true
         }
+    }
+    public fullVersion() {
+        this.designation = '';
     }
    
 }

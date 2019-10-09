@@ -63,7 +63,7 @@
                  placeholder="Primary Email Address">
         </div>
 
-        <div class="new-link" (click)="version = 'full'">Would you like to Create Company in Advance mode?</div>
+        <div class="new-link" (click)="oninitFullVersion()">Would you like to Create Company in Advance mode?</div>
         <div class="info-block">
           Advance Company mode will provide user to add more detail like Settings, Primary
           Contact detail etc…
@@ -123,26 +123,31 @@
         <div class="col-md-12">
           <p>Domain Name</p>
           <input type="text"
+          [(ngModel)]="company.domain"
                  placeholder="http://www.example.com">
         </div>
         <div class="col-md-12">
           <p>Location</p>
           <input type="text"
+          [(ngModel)]="company.addresses[0].address"
                  placeholder="Enter Location">
         </div>
         <div class="col-md-4">
           <p>Suite No.</p>
           <input type="text"
+          [(ngModel)]="company.addresses[0].suiteNumber"
                  placeholder="Enter Suite Number">
         </div>
         <div class="col-md-3">
           <p>Zip</p>
           <input type="text"
+          [(ngModel)]="company.addresses[0].postalCode"
                  placeholder="Enter Zip">
         </div>
         <div class="col-md-5">
           <p>Phone Number</p>
           <input type="text"
+          [(ngModel)]="company.addresses[0].phoneNumbers[0].number"
                  placeholder="Enter Phone Number">
         </div>
 
@@ -153,16 +158,19 @@
         <div class="col-md-6">
           <p>First Name</p>
           <input type="text"
+          [(ngModel)]="company.contacts[0].firstName"
                  placeholder="Enter First Name">
         </div>
         <div class="col-md-6">
           <p>Last Name</p>
           <input type="text"
+          [(ngModel)]="company.contacts[0].lastName"
                  placeholder="Enter Last Name">
         </div>
         <div class="col-md-6">
           <p>Designation</p>
           <input type="text"
+          [(ngModel)]="company.contacts[0].designation"
                  placeholder="Write Description">
         </div>
         <div class="col-md-6">
@@ -177,18 +185,21 @@
                 <i class="icn-sm report-caret-icon"></i>
               </button>
               <div ngbDropdownMenu aria-labelledby="dropdownBasic">
-                <button ngbDropdownItem>Office</button>
-                <button ngbDropdownItem>Mobile</button>
-                <button ngbDropdownItem>Fax</button>
+                  <ng-template ngFor let-item [ngForOf]="phoneTypes"  >
+                      <button ngbDropdownItem [textContent]="item" (click)="company.contacts[0].phoneNumbers[0].typeNumber = item"></button>
+                  </ng-template>
+                
               </div>
             </div>
             <input type="text"
+            [(ngModel)]="company.contacts[0].phoneNumbers[0].number"
                    placeholder="Enter Phone Number">
           </div>
         </div>
         <div class="col-md-6">
           <p>Primary Contact Email</p>
           <input type="text"
+          [(ngModel)]="company.contacts[0].primaryEmail"
                  placeholder="Primary Email Address">
         </div>
         <div class="col-md-6">
