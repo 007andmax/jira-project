@@ -3,8 +3,8 @@
 (function () {
 
     angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketEditUpdateServiceCtrl',
-      ['$scope', 'TicketsService', 'ServicesService', 'quicktech.common.services.UserNotificationService', '$filter', '$rootScope',
-        function ($scope, TicketsService, ServicesService, UserNotificationService, $filter, $rootScope) {
+      ['$scope', 'TicketsService', 'ServicesService', 'quicktech.common.services.UserNotificationService', '$filter', '$rootScope','CompaniesService',
+        function ($scope, TicketsService, ServicesService, UserNotificationService, $filter, $rootScope,CompaniesService) {
 
           $scope.maxServiceDate = new Date();
 
@@ -56,17 +56,51 @@
           $scope.bindHtml = 'true';
           $scope.saveDateIsSet = false;
           $scope.disableQuantityWatcher = false;
-
-          $scope.serviceExpenseDurationPresentation = $rootScope.currentUser.serviceExpenseDurationPresentation ?
-            $rootScope.currentUser.serviceExpenseDurationPresentation
+          $scope.intervalsVariant = [
+            {
+              name: 'Every 1 min',
+              value: 1,
+              valueForBack: 'ONE_MINUTE'
+            },
+            {
+              name: 'Every 5 mins',
+              value: 5,
+              valueForBack: 'FIVE_MINUTES'
+            },
+            {
+              name: 'Every 10 mins',
+              value: 10,
+              valueForBack: 'TEN_MINUTES'
+            },
+            {
+              name: 'Every 15 mins',
+              value: 15,
+              valueForBack: 'FIFTEEN_MINUTES'
+            }
+          ];
+          $scope.serviceExpenseDurationPresentation = CompaniesService.getCurrentCompany().serviceExpenseDurationPresentation ?
+          CompaniesService.getCurrentCompany().serviceExpenseDurationPresentation
             : 'DURATION_PICKER';
-
+            $scope.timePickerInterval = setTimePickerInterval();
+            function setTimePickerInterval(){
+              var interval = CompaniesService.getCurrentCompany().serviceExpenseDurationPickerInterval ?
+              CompaniesService.getCurrentCompany().serviceExpenseDurationPickerInterval : 'ONE_MINUTE';
+              return $scope.intervalsVariant.find(function(item) {
+                return item.valueForBack === interval;
+              });
+            }
+            $scope.intervalsArray = [];
+            console.log($scope.timePickerInterval, '$scope.timePickerInterval');
+            for (var step = 0; step < (60/$scope.timePickerInterval.value); step++) {
+              $scope.intervalsArray.push(step*$scope.timePickerInterval.value);
+            }
+            console.log($scope.intervalsArray, '$scope.intervalsArray');
           $scope.getMinutes = function () {
-            var result = {};
+         /*   var result = {};
             for (var i = 0; i < 60; i ++) {
               result[i] = i < 10 ? ('0' + i) : i;
-            }
-            return result;
+            }*/
+            return $scope.intervalsArray;
           };
 
           $scope.$watch('startDate.hour', function (newValue, oldValue) {
