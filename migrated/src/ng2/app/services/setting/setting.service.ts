@@ -14,6 +14,10 @@ export class SettingService {
 
   constructor(private http: HttpClient) {}
 
+  currentCompany() {
+    return this.http.get(`${this.apiUrl}company/current`);
+  }
+
   /**
    * Profile Tab
    */

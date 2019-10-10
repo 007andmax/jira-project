@@ -73,6 +73,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       searching: false,
       lengthChange: false
     };
+    const emailPattern = '[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,63}';
 
     this.techUserForm = this.formBuilder.group({
       firstName: [
@@ -83,7 +84,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
         "",
         [Validators.required, Validators.minLength(3), Validators.maxLength(15)]
       ],
-      primaryEmail: ["", [Validators.required, Validators.email]],
+      primaryEmail: ["", Validators.compose( [Validators.required,Validators.pattern(emailPattern)])],
       techRole: [""],
       newDevice: [""],
       ticketCreated: [""],
@@ -366,7 +367,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
         y: this.croppedImage.cropperPosition.y1,
         w: this.croppedImage.width,
         h: this.croppedImage.height,
-        updatedAt: this.selectedTechUser.logo.updatedAt,
+        updatedAt: this.selectedTechUser.avatar.updatedAt,
         base64: this.croppedImage.base64
       };
     }
@@ -407,6 +408,21 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       );
   }
 
+  isEmailUnique(email) {
+    if (!email) {
+      return;
+    }
+
+    this.techUsersService.isEmailUnique(email, null, true).subscribe(
+      (unique: any) => {
+        this.isEmailIdUnique = unique.value;
+      },
+      error => {
+        this.isEmailIdUnique = false;
+      }
+    );
+  }
+
   /**
    * saved om create new tech users
    */
@@ -423,44 +439,43 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       return;
     }
 
-    this.loading = true;
-    this.techUsersService
-      .isEmailUnique(this.techUserForm.value.primaryEmail, null, true)
-      .subscribe(
-        (unique: any) => {
-          this.isEmailIdUnique = unique.value;
-          if (this.isEmailIdUnique) {
-            const objTechUser = {
-              techRole: this.techUserForm.value.techRole
-                ? this.techUserForm.value.techRole
-                : this.techRoles[0],
-              firstName: this.techUserForm.value.firstName,
-              lastName: this.techUserForm.value.lastName,
-              primaryEmail: this.techUserForm.value.primaryEmail,
-              companyId: this.currentCompanyId,
-              subscription: {}
-            };
-
-            this.techUsersService.createUser(objTechUser).subscribe(
-              (savedTechUsre: any) => {
-                this.loading = false;
-                if (savedTechUsre && savedTechUsre.id) {
-                  this.saveUsersEmailNotifications(savedTechUsre.id);
-                }
-              },
-              error => {
-                this.loading = false;
-              }
-            );
-          } else {
-            this.loading = false;
+    // this.techUsersService
+    //   .isEmailUnique(this.techUserForm.value.primaryEmail, null, true)
+    //   .subscribe(
+    //     (unique: any) => {
+    // this.isEmailIdUnique = unique.value;
+    if (this.isEmailIdUnique) {
+      const objTechUser = {
+        techRole: this.techUserForm.value.techRole
+          ? this.techUserForm.value.techRole
+          : this.techRoles[0],
+        firstName: this.techUserForm.value.firstName,
+        lastName: this.techUserForm.value.lastName,
+        primaryEmail: this.techUserForm.value.primaryEmail,
+        companyId: this.currentCompanyId,
+        subscription: {}
+      };
+      this.loading = true;
+      this.techUsersService.createUser(objTechUser).subscribe(
+        (savedTechUsre: any) => {
+          this.loading = false;
+          if (savedTechUsre && savedTechUsre.id) {
+            this.saveUsersEmailNotifications(savedTechUsre.id);
           }
         },
         error => {
-          this.isEmailIdUnique = false;
           this.loading = false;
         }
       );
+    } else {
+      // this.loading = false;
+    }
+    // },
+    // error => {
+    //   this.isEmailIdUnique = false;
+    //   this.loading = false;
+    // }
+    // );
   }
 
   deleteAvatar() {

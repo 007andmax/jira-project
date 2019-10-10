@@ -209,12 +209,12 @@
           type="file"
           id="profile-dp"
           accept="image/gif, image/jpeg, image/png, image/jpg"
-          (change)="onSelectFile($event)"
+          disabled
           style="display: none;"
         />
         <label for="profile-dp" class="static-link">Upload Avtar</label>
         <span>Maximum size of 2MB. JPG, GIF, PNG</span>
-        <div class="static-link">
+        <!-- <div class="static-link">
           <label class="innert-links" for="profile-dp">Change Photo</label>
           <label for="profile-dp">
             <a href="javascript:void(0)" restore-default-button=""
@@ -226,7 +226,7 @@
               >Reposition Photo</a
             >
           </label>
-        </div>
+        </div> -->
       </div>
     </div>
     <form [formGroup]="techUserForm" (ngSubmit)="onCreateSubmit()">
@@ -291,7 +291,10 @@
             class="invalid-feedback"
           >
             <div *ngIf="f.primaryEmail.errors.required">Email is required</div>
-            <div *ngIf="f.primaryEmail.errors.email">
+            <!-- <div *ngIf="f.primaryEmail.errors.email">
+              Email must be a valid email address
+            </div> -->
+            <div *ngIf="f.primaryEmail.errors.pattern">
               Email must be a valid email address
             </div>
             <label *ngIf="isEmailIdUnique" class="invalid-feedback"
@@ -405,11 +408,11 @@
           type="file"
           id="profile-dp"
           style="display: none;"
-          (change)="onSelectFile($event)"
+          disabled
         />
-        <!-- <label for="profile-dp" class="static-link">Upload Avtar</label> -->
+        <label for="profile-dp" class="static-link">Upload Avtar</label>
         <span>Maximum size of 2MB. JPG, GIF, PNG</span>
-        <div class="static-link">
+        <!-- <div class="static-link">
           <label class="innert-links" for="profile-dp">Change Photo</label>
           <label for="profile-dp">
             <a href="javascript:void(0)" restore-default-button=""
@@ -423,7 +426,7 @@
               >Reposition Photo</a
             >
           </label>
-        </div>
+        </div> -->
       </div>
 
       <div class="img-croparea" *ngIf="isCroppedImg">
@@ -485,6 +488,8 @@
             <input
               type="text"
               class="form-input"
+              #primaryEmail
+              (blur)="isEmailUnique(primaryEmail.value)"
               formControlName="primaryEmail"
             />
           </div>
