@@ -1,0 +1,32 @@
+<div class="duration" ng-controller="quicktech.core.duration.userListCtrl" uib-dropdown auto-close="outsideClick">
+    <div class="duration-preview" uib-dropdown-toggle>
+            <input type="text" ng-model="hourText" ng-change="onChangeHours()"  />
+            :
+            <input type="text" ng-model="minuteText" ng-change="onChangeMinutes()"   />
+
+    </div>
+  
+
+    <div uib-dropdown-menu class="dropdown-assign-ticket fixed-assign dropdown-menu without-max-height"
+        stop-propagation="click" onUserAssign="'true'" aub-is-bulk-operation="true" style="top: calc(100% + -400px);">
+        <div class="duration-container">
+            <div class="duration-container-item">
+                <div class="duration-container-header">
+                    <span>HH</span>
+                </div>
+                <ul class="duration-container-values">
+                    <li ng-repeat="hour in hours track by $index" ng-click="selectHour(hour)">{{hour}}</li>
+                </ul>
+            </div>
+            <div class="duration-container-item">
+                <div class="duration-container-header">
+                    <span>MM</span>
+                </div>
+                <ul class="duration-container-values">
+                    <li ng-repeat="min in minutes track by $index" ng-click="selectMinute(min)">{{min}}</li>
+                </ul>
+            </div>
+            <button ng-click="setDuration()">Soit it!</button>
+        </div>
+    </div>
+</div>
