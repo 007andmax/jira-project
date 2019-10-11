@@ -4,7 +4,7 @@
 
     angular.module('quicktech.core.tickets').controller('quicktech.core.duration.userListCtrl',
         ['$scope', '$rootScope', 'CompaniesService', function ($scope, $rootScope, CompaniesService) {
-            $scope.hours = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+            $scope.hours = [];
             $scope.selectedHour = 0;
 
             $scope.hourText = "00";
@@ -34,6 +34,12 @@
                 }
             ];
             $scope.timePickerInterval = setTimePickerInterval();
+            function setHous () {
+                for (let i=1;i<=24;i++) {
+                    $scope.hours.push(i);
+                }
+            }
+            setHous();
             function setTimePickerInterval() {
                 var interval = CompaniesService.getCurrentCompany().serviceExpenseDurationPickerInterval ?
                     CompaniesService.getCurrentCompany().serviceExpenseDurationPickerInterval : 'ONE_MINUTE';

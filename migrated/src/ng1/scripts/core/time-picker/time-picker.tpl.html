@@ -1,0 +1,31 @@
+<div class="time-picker" ng-controller="quicktech.core.time-picker.userListCtrl">
+    <div class="time-picker-container">
+        <div class="time-picker-in" uib-dropdown >
+            <input type="text"  value="{{inDate.hour}}:{{inDate.minute}} {{inDate.type}}" uib-dropdown-toggle />
+
+            <div uib-dropdown-menu class="dropdown-assign-ticket fixed-assign dropdown-menu without-max-height"
+                stop-propagation="click" onUserAssign="'true'" aub-is-bulk-operation="true"
+                style="top: calc(100% + -400px);">
+                <div class="time-picker-item" ng-repeat="hour in hours track by $index">
+                    <spna ng-repeat="minute in minutes track by $index" ng-click="selectTimeIn(hour,minute)">{{hour.text}}:{{minute.text}} {{hour.type}}</spna>
+                </div>
+            </div>
+        </div>
+
+        <div class="time-picker-out"  uib-dropdown >
+                <input type="text"  value="{{outDate.hour}}:{{outDate.minute}} {{outDate.type}}" uib-dropdown-toggle />
+
+                <div uib-dropdown-menu class="dropdown-assign-ticket fixed-assign dropdown-menu without-max-height"
+                    stop-propagation="click" onUserAssign="'true'" aub-is-bulk-operation="true"
+                    style="top: calc(100% + -400px);">
+                    <div class="time-picker-item" ng-repeat="hour in hours"> 
+                        <spna ng-repeat="minute in minutes" ng-click="selectTimeOut(hour,minute)" >{{hour.text}}:{{minute.text}} {{hour.type}} {{durations[minute.u + minutes.length * hour.i].hour}}h {{durations[minute.u + minutes.length * hour.i].minute}}m</spna>
+                    </div>
+                </div>
+        </div>
+         
+
+    </div>
+
+
+</div>

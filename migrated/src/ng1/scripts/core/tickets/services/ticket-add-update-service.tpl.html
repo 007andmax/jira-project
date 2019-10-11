@@ -83,7 +83,9 @@
     </div>
 
     <div class="col-2 new-quantity-picker" ng-if="serviceExpenseDurationPresentation==='TIME_PICKER'">
-      <input type="text" class="pointer new-input"
+        <div  
+        ng-include="'/ng1/scripts/core/time-picker/time-picker.tpl.html'"></div>
+     <!-- <input type="text" class="pointer new-input"
              id="time-picker-input"
              placeholder="Start date | End date"
              value="{{saveStartDate.hour}}:{{saveStartDate.minute}} {{saveStartDate.time}} | {{saveEndDate.hour}}:{{saveEndDate.minute}} {{saveEndDate.time}}"
@@ -165,7 +167,7 @@
       </div>
 
       <input type="hidden" ng-model="serviceExpense.quantity" name="serviceTime"
-      ng-required="serviceExpense.item ? true : false" smart-dropdown-menu-position/>
+      ng-required="serviceExpense.item ? true : false" smart-dropdown-menu-position/>-->
     </div>
     <div class="col-2 new-date-picker" style="position: relative"
          ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceData')}">
