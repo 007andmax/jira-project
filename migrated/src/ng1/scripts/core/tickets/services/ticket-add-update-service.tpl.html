@@ -55,8 +55,8 @@
                ng-required="serviceExpense.item ? true : false"/>
       </div>
     </div>
-    <div  ng-if="serviceExpenseDurationPresentation==='DURATION_PICKER' && !isMobileUpdateShown ">
-        <div  
+    <div class="col-2" ng-if="serviceExpenseDurationPresentation==='DURATION_PICKER' && !isMobileUpdateShown ">
+        <div
         ng-include="'/ng1/scripts/core/duration/duration.tpl.html'"></div>
      <!-- <div class="col-4 new-quantity-picker"
            service-quantity-picker="serviceExpense.quantity"
