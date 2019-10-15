@@ -5,9 +5,9 @@
   <div class="duration-preview"
   ng-click="toggleDropdown($event)">
   <input type="text" class="pointer new-input"
-   ng-change="onChangeText()"  ng-model="dateText"
+   ng-blur="onChangeText()"  ng-model="dateText"
              autocomplete="off" />
-    <span >{{hourText}}</span> : <span>{{minuteText}}</span>
+  
   </div>
   <div uib-dropdown-menu
        class="dropdown-menu"
@@ -23,8 +23,8 @@
         <div class="duration-container-values has-arrows">
           <div class="arrow-top"></div>
           <div class="duration-container-values-hours">
-            <div ng-repeat="hour in hours track by $index"
-                 ng-click="selectHour(hour)">{{hour}}
+            <div ng-repeat="hour in hours track by $index"ng-class="(hour.selected) ? 'active' : ''"
+                 ng-click="selectHour(hour,$index)">{{hour.value}}
             </div>
           </div>
           <div class="arrow-bottom"></div>

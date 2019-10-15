@@ -112,7 +112,9 @@
     </div>
     <div class="col-md-1"
          ng-if="serviceExpenseDurationPresentation ==='DURATION_PICKER'">
-      <div class="col-md-1 new-quantity-picker"
+         <div
+         ng-include="'/ng1/scripts/core/duration/duration.tpl.html'"></div>
+     <!-- <div class="col-md-1 new-quantity-picker"
            service-quantity-picker="editService.quantity"
            time="editService.quantity"
            type="hours"
@@ -152,7 +154,7 @@
                name="serviceTime"
                ng-required="serviceExpense.item ? true : false"
                smart-dropdown-menu-position />
-      </div>
+      </div>-->
     </div>
     <div class="col-md-2 action-update pr-0"
          style="height: 46px;">
