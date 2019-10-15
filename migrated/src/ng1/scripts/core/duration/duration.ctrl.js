@@ -7,7 +7,7 @@
          
            
             $scope.hours = [];
-           
+            $scope.minutes = [];
             $scope.interval = "";
             $scope.dateText = "00 : 00";
             //   $scope.hourText = "00";
@@ -65,7 +65,7 @@
                 });
 
             }
-            $scope.minutes = [];
+          
             console.log($scope.timePickerInterval, '$$scope.timePickerInterval');
             for (var step = 0; step < (60 / $scope.timePickerInterval.value); step++) {
                 $scope.minutes.push({ value: step * $scope.timePickerInterval.value, selected: false });
