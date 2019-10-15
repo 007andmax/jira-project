@@ -1,10 +1,13 @@
 <div class="duration"
      ng-controller="quicktech.core.duration.userListCtrl"
      uib-dropdown
-     auto-close="outsideClick">
+     auto-close="outsideClick" is-open="status.isopen">
   <div class="duration-preview"
-       uib-dropdown-toggle>
-    <span>{{hourText}}</span> : <span>{{minuteText}}</span>
+  ng-click="toggleDropdown($event)">
+  <input type="text" class="pointer new-input"
+   ng-change="onChangeText()"  ng-model="dateText"
+             autocomplete="off" />
+    <span >{{hourText}}</span> : <span>{{minuteText}}</span>
   </div>
   <div uib-dropdown-menu
        class="dropdown-menu"
@@ -26,11 +29,11 @@
           </div>
           <div class="arrow-bottom"></div>
         </div>
-        <div class="duration-container-values has-arrows">
+        <div class="duration-container-values" ng-class="(interval != 'TEN_MINUTES') ? 'has-arrows' : ''">
           <div class="arrow-top"></div>
           <div class="duration-container-values-minutes">
-            <div ng-repeat="min in minutes track by $index"
-                 ng-click="selectMinute(min)">{{min}}
+            <div ng-repeat="min in minutes track by $index" ng-class="(min.selected) ? 'active' : ''"
+                 ng-click="selectMinute(min,$index)">{{min.value}}
             </div>
           </div>
           <div class="arrow-bottom"></div>
@@ -38,7 +41,7 @@
       </div>
       <button class="duration-container-button"
               type="button"
-              ng-click="setDuration()">
+              ng-click="onInitSetDuration($event)"  >
         Set it
       </button>
     </div>
