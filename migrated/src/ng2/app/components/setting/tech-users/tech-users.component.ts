@@ -1,19 +1,13 @@
-import {
-  Component,
-  ViewChild,
-  OnInit,
-  OnDestroy,
-  AfterViewInit
-} from "@angular/core";
+import { Component, OnInit, OnDestroy, AfterViewInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { Subject, Observable, Observer } from "rxjs";
+import { Observable, Observer } from "rxjs";
 
-import { DataTableDirective } from "angular-datatables";
 import { ImageCroppedEvent } from "ngx-image-cropper";
 import { ToastrService } from "ngx-toastr";
 
 import { TechUsersService } from "src/ng2/app/services/setting/tech-users.service";
 import { SettingService } from "src/ng2/app/services/setting/setting.service";
+import { map } from "rxjs/operators";
 
 declare var $;
 
@@ -32,17 +26,11 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
   isEmailIdUnique = false;
 
   techUsers: [];
-
   techUserIdList: [];
   techRoles: any;
   selectedTechUser: any;
   techUseremailNotificationList: any;
-  dtOptions = {};
-  dtTrigger = new Subject();
   techUserForm: FormGroup;
-
-  @ViewChild(DataTableDirective)
-  dtElement: DataTableDirective;
 
   imageBase64 = "";
   imageChangedEvent: any;
@@ -67,13 +55,8 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
   ngOnInit() {
     this.techUsers = [];
 
-    this.dtOptions = {
-      pagingType: "full_numbers",
-
-      searching: false,
-      lengthChange: false
-    };
-    const emailPattern = '[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,63}';
+    const emailPattern =
+      "[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,63}";
 
     this.techUserForm = this.formBuilder.group({
       firstName: [
@@ -84,7 +67,13 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
         "",
         [Validators.required, Validators.minLength(3), Validators.maxLength(15)]
       ],
-      primaryEmail: ["", Validators.compose( [Validators.required,Validators.pattern(emailPattern)])],
+      primaryEmail: [
+        "",
+        Validators.compose([
+          Validators.required,
+          Validators.pattern(emailPattern)
+        ])
+      ],
       techRole: [""],
       newDevice: [""],
       ticketCreated: [""],
@@ -108,14 +97,16 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
    * get role names
    */
   getRoleNames() {
-    this.techUsersService.getRoleNames().subscribe(
-      roles => {
-        if (roles) {
-          this.techRoles = roles;
-        }
-      },
-      error => {}
-    );
+    this.techUsersService
+      .getRoleNames()
+      .pipe(
+        map(roles => {
+          if (roles) {
+            this.techRoles = roles;
+          }
+        })
+      )
+      .subscribe();
   }
 
   /**
@@ -136,7 +127,6 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
           this.loading = false;
           if (techUsers) {
             this.techUsers = techUsers;
-            this.dtTrigger.next();
             this.techUserIdList = techUsers.map(({ id }) => id);
             if (this.techUserIdList) {
               this.emailNotification(this.techUserIdList);
@@ -154,16 +144,16 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
    * @param techUserIdList
    */
   emailNotification(techUserIdList) {
-    this.techUsersService.getUsersEmailNotifications(techUserIdList).subscribe(
-      eNotifications => {
-        if (eNotifications) {
-          this.techUseremailNotificationList = eNotifications;
-        }
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    this.techUsersService
+      .getUsersEmailNotifications(techUserIdList)
+      .pipe(
+        map(eNotifications => {
+          if (eNotifications) {
+            this.techUseremailNotificationList = eNotifications;
+          }
+        })
+      )
+      .subscribe();
   }
 
   /**
@@ -184,15 +174,14 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
    * @param id
    */
   changePasswordRequest(id: string) {
-    this.techUsersService.changePasswordRequest(id).subscribe(
-      res => {
-        console.log(res);
-        this.toastr.success("Change password request sent successfully.");
-      },
-      error => {
-        this.toastr.error(`Error occurred , ${error}`);
-      }
-    );
+    this.techUsersService
+      .changePasswordRequest(id)
+      .pipe(
+        map(res => {
+          this.toastr.success("Change password request sent successfully.");
+        })
+      )
+      .subscribe();
   }
 
   /**
@@ -200,14 +189,14 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
    * @param userEmail
    */
   resendWelcomeEmail(userEmail: string) {
-    this.techUsersService.verifyUserEmail(userEmail).subscribe(
-      res => {
-        this.toastr.success(`Resend Welcome Email sent successfully`);
-      },
-      error => {
-        this.toastr.error(`Error occurred , ${error}`);
-      }
-    );
+    this.techUsersService
+      .verifyUserEmail(userEmail)
+      .pipe(
+        map(res => {
+          this.toastr.success(`Resend Welcome Email sent successfully`);
+        })
+      )
+      .subscribe();
   }
 
   /**
@@ -261,28 +250,21 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
         )
       ) {
         this.loading = true;
-        this.techUsersService.archiveUser([techUser.id]).subscribe(
-          archiveUser => {
-            this.loading = false;
-            // deleted techuser.
-            if (this.techUsers.find((x: any) => x.id === techUser.id)) {
-              this.techUsers.splice(
-                this.techUsers.findIndex((x: any) => x.id === techUser.id),
-                1
-              );
-            }
-
-            this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-              // Destroy the table first
-              dtInstance.destroy();
-              // Call the dtTrigger to rerender again
-              this.dtTrigger.next();
-            });
-          },
-          error => {
-            this.loading = false;
-          }
-        );
+        this.techUsersService
+          .archiveUser([techUser.id])
+          .pipe(
+            map(archiveUser => {
+              this.loading = false;
+              // deleted techuser.
+              if (this.techUsers.find((x: any) => x.id === techUser.id)) {
+                this.techUsers.splice(
+                  this.techUsers.findIndex((x: any) => x.id === techUser.id),
+                  1
+                );
+              }
+            })
+          )
+          .subscribe();
       }
     }
   }
@@ -291,15 +273,17 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
    * current comapny
    */
   currentCompany() {
-    this.techUsersService.currentComapny().subscribe(
-      (currentCompany: any) => {
-        if (currentCompany) {
-          localStorage.setItem("currentComapnyId", currentCompany.id);
-          this.currentCompanyId = currentCompany.id;
-        }
-      },
-      error => {}
-    );
+    this.techUsersService
+      .currentComapny()
+      .pipe(
+        map((currentCompany: any) => {
+          if (currentCompany) {
+            localStorage.setItem("currentComapnyId", currentCompany.id);
+            this.currentCompanyId = currentCompany.id;
+          }
+        })
+      )
+      .subscribe();
   }
 
   /**
@@ -413,14 +397,14 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       return;
     }
 
-    this.techUsersService.isEmailUnique(email, null, true).subscribe(
-      (unique: any) => {
-        this.isEmailIdUnique = unique.value;
-      },
-      error => {
-        this.isEmailIdUnique = false;
-      }
-    );
+    this.techUsersService
+      .isEmailUnique(email, null, true)
+      .pipe(
+        map((unique: any) => {
+          this.isEmailIdUnique = unique.value;
+        })
+      )
+      .subscribe();
   }
 
   /**
@@ -639,13 +623,13 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       };
       this.techUsersService
         .saveUsersEmailNotifications(techUserId, notificationSetting)
-        .subscribe(res => {}, error => {});
+        .pipe(map(() => {}))
+        .subscribe();
     }
   }
 
   ngOnDestroy(): void {
     // Do not forget to unsubscribe the event
-    this.dtTrigger.unsubscribe();
   }
 
   // openModal(template) {

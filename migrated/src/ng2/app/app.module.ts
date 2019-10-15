@@ -70,7 +70,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgxLoadingModule,ngxLoadingAnimationTypes  } from 'ngx-loading';
 import { SelectDropDownModule } from 'ngx-select-dropdown';
 import { IncomingEmailComponent } from './components/setting/email-setting/incoming-email/incoming-email.component';
-import { OutgoingEmailComponent } from './components/setting/email-setting/outgoing-email/outgoing-email.component'
+import { OutgoingEmailComponent } from './components/setting/email-setting/outgoing-email/outgoing-email.component';
 
 declare var angular: any;
 declare var $: any;
@@ -200,7 +200,7 @@ angular
     ProfileComponent,
     TagPipe,
     IncomingEmailComponent,
-    OutgoingEmailComponent
+    OutgoingEmailComponent,
   ],
   imports: [
     BrowserModule,

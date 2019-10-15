@@ -1,3 +1,4 @@
+<ngx-loading [show]="loading"></ngx-loading>
 <div class="cmn-area profile">
   <div class="dp-area">
     <span class="dp" *ngIf="imageSrc">
@@ -10,14 +11,14 @@
         (change)="onSelectFile(template, $event)"
         style="display: none;"
       />
-      <div class="static-link">
+      <div class="static-link" >
         <label class="innert-links" for="profile-dp">Change Photo</label>
-        <label for="profile-dp" (click)="deleteAvatar()">
+        <label for="profile-dp" *ngIf="imageAvatar" (click)="deleteAvatar()">
           <a href="javascript:void(0)" restore-default-button=""
             >Remove Photo</a
           >
         </label>
-        <label for="profile-dp" (click)="rePositionAvatar()">
+        <label for="profile-dp"  (click)="rePositionAvatar()">
           <a href="javascript:void(0)" restore-default-button=""
             >Reposition Photo</a
           >

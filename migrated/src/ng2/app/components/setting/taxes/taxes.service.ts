@@ -19,7 +19,7 @@ export class TaxesService {
     return this.http.post(`${this.apiUrl}taxes`, tax);
   }
 
-  taxes(tax: any) {
+  editTaxes(tax: any) {
     // {"id":"cbf9630a-e7a8-49e7-9129-680e729960d7","name":"test","rate":1,"isDefault":true,"companyId":null,"productExpenseId":null,"serviceExpenseId":null}
     return this.http.put(`${this.apiUrl}taxes`, tax);
   }

@@ -1,30 +1,48 @@
+<ngx-loading [show]="loading"></ngx-loading>
 <!-- Middle Wrapper  -->
 <div class="page-container permissin-manage">
   <div class="page-insider">
     <div class="heading">
       <h1>Permission Management</h1>
-      <div class="heading-serach">
-        <a href="javascript:;" class="btn-outline">Create New Role</a>
+      <div class="heading-serach" *ngIf="roles && roles.length < 5">
+        <a href="javascript:;" class="btn-outline" (click)="addNewRole()"
+          >Create New Role</a
+        >
+        <!-- [disabled]="isNewRoleCreating" -->
       </div>
     </div>
     <div class="cmn-area pr-area">
       <div class="data-table-wrap pr-data">
         <table class="display dataTable" style="width:100%">
-          <thead>
+          <thead *ngIf="roles">
             <tr>
               <th class="permissions">Permissions</th>
-              <th class="help">
-                Help Desk User
+              <th class="help" *ngFor="let role of roles; let i = index">
+                {{ role.name }}
                 <div class="action-icons">
-                  <a href="javascript:;" data-tooltip="Edit" class="edit-ico" (click)="editArea = !editArea">
+                  <a
+                    href="javascript:;"
+                    data-tooltip="Edit"
+                    class="edit-ico"
+                    (click)="editRoleName(role, i)"
+                  >
                     <img src="/ng2/assets/img/edit-12.svg" alt="edit" />
                   </a>
-                  <a href="javascript:;" data-tooltip="Remove" class="delete-ico" (click)="delete = !delete">
+                  <a
+                    href="javascript:;"
+                    data-tooltip="Remove"
+                    class="delete-ico"
+                    
+                    (click)="deleteRole(role.id, true) ; delete = !delete"
+                  >
                     <img src="/ng2/assets/img/remove-12.svg" alt="remove" />
                   </a>
                 </div>
                 <!-- Modal create Tags -->
-                <div class="modal-content toggle-area" [class.opened]="editArea">
+                <div
+                  class="modal-content toggle-area"
+                  [ngClass]="{ opened: selectedRoleIndex === i }"
+                >
                   <div class="toggle-header">
                     <h2 class="h1">Edit Role</h2>
                   </div>
@@ -37,19 +55,25 @@
                             <input
                               type="text"
                               class="form-input"
+                              [(ngModel)]="editData.name"
+                              [ngModelOptions]="{standalone: true}"
                               placeholder="Enter Role Name"
-                              value="Help Desk User"
                             />
                           </div>
                         </div>
                         <div class="m-btn-row">
                           <div class="m-btn-col">
-                            <input type="submit" value="Save" class="btn btn-primary" />
+                            <input
+                              type="button"
+                              value="Save"
+                              (click)="changeRoleName()"
+                              class="btn btn-primary"
+                            />
                             <a
                               href="javascript:;"
                               class="btn btn-secondary"
                               aria-label="Close"
-                              (click)="editArea = !editArea"
+                              (click)="editRoleName(role,index)"
                               >Cancel</a
                             >
                           </div>
@@ -59,554 +83,32 @@
                   </div>
                 </div>
               </th>
-              <th class="t-user">
-                Tech User
-
-                <div class="action-icons">
-                  <a href="javascript:;" data-tooltip="Edit"  class="edit-ico">
-                    <img src="/ng2/assets/img/edit-12.svg" alt="edit" />
-                  </a>
-                  <a href="javascript:;" data-tooltip="Remove" class="delete-ico">
-                    <img src="/ng2/assets/img/remove-12.svg" alt="remove" />
-                  </a>
-                </div>
-              </th>
-              <th class="admini">
-                Administrator
-                <div class="action-icons">
-                  <a href="javascript:;" data-tooltip="Edit" class="edit-ico">
-                    <img src="/ng2/assets/img/edit-12.svg" alt="edit" />
-                  </a>
-                  <a href="javascript:;" data-tooltip="Remove" class="delete-ico">
-                    <img src="/ng2/assets/img/remove-12.svg" alt="remove" />
-                  </a>
-                </div>
-              </th>
-              <th class="supprt">
-                Support Tech
-                <div class="action-icons">
-                  <a href="javascript:;" data-tooltip="Edit" class="edit-ico">
-                    <img src="/ng2/assets/img/edit-12.svg" alt="edit" />
-                  </a>
-                  <a href="javascript:;" data-tooltip="Remove" class="delete-ico">
-                    <img src="/ng2/assets/img/remove-12.svg" alt="remove" />
-                  </a>
-                </div>
-              </th>
             </tr>
           </thead>
+
           <tbody class="no-border">
-            <tr>
-              <td class="t-tile" colspan="5">
-                <h5>Tickets Area</h5>
-              </td>
-            </tr>
-            <tr>
-              <td class="permissions">Edit Tickets</td>
-              <td class="help">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="et" />
-                  <label for="et"></label>
-                </span>
-              </td>
-              <td class="t-user">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="tu" checked />
-                  <label for="tu"></label>
-                </span>
-              </td>
-              <td class="admini">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="ad" />
-                  <label for="ad"></label>
-                </span>
-              </td>
-              <td class="supprt">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="st" checked />
-                  <label for="st"></label>
-                </span>
-              </td> 
-            </tr> 
-            <tr>
-              <td class="permissions">Delete Tickets</td>
-              <td class="help">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="det" />
-                  <label for="det"></label>
-                </span>
-              </td>
-              <td class="t-user">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="tdu" />
-                  <label for="tdu"></label>
-                </span>
-              </td>
-              <td class="admini">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="dad" />
-                  <label for="dad"></label>
-                </span>
-              </td>
-              <td class="supprt">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="dst" />
-                  <label for="dst"></label>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td class="permissions">Reopen Closed</td>
-              <td class="help">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="ret" />
-                  <label for="ret"></label>
-                </span>
-              </td>
-              <td class="t-user">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="tru" />
-                  <label for="tru"></label>
-                </span>
-              </td>
-              <td class="admini">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="dad" />
-                  <label for="dad"></label>
-                </span>
-              </td>
-              <td class="supprt">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="rst" />
-                  <label for="rst"></label>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td class="permissions">Edit Another Users Ticket</td>
-              <td class="help">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="ret" />
-                  <label for="ret"></label>
-                </span>
-              </td>
-              <td class="t-user">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="rdu" disabled />
-                  <label for="rdu"></label>
-                </span>
-              </td>
-              <td class="admini">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="rad" />
-                  <label for="rad"></label>
-                </span>
-              </td>
-              <td class="supprt">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="rst" />
-                  <label for="rst"></label>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="5">
-                <hr />
-              </td>
-            </tr>
-            <tr>
-              <td class="t-tile" colspan="5">
-                <h5>Company Area</h5>
-              </td>
-            </tr>
-            <tr>
-              <td class="permissions">View Companies</td>
-              <td class="help">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="et" disabled />
-                  <label for="et"></label>
-                </span>
-              </td>
-              <td class="t-user">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="tu" />
-                  <label for="tu"></label>
-                </span>
-              </td>
-              <td class="admini">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="ad" />
-                  <label for="ad"></label>
-                </span>
-              </td>
-              <td class="supprt">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="st" />
-                  <label for="st"></label>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td class="permissions">Create Companies</td>
-              <td class="help">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="det" checked />
-                  <label for="det"></label>
-                </span>
-              </td>
-              <td class="t-user">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="tdu" disabled />
-                  <label for="tdu"></label>
-                </span>
-              </td>
-              <td class="admini">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="dad" />
-                  <label for="dad"></label>
-                </span>
-              </td>
-              <td class="supprt">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="dst" />
-                  <label for="dst"></label>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td class="permissions">Edit Companies</td>
-              <td class="help">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="ret" checked />
-                  <label for="ret"></label>
-                </span>
-              </td>
-              <td class="t-user">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="tru" />
-                  <label for="tru"></label>
-                </span>
-              </td>
-              <td class="admini">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="dad" disabled />
-                  <label for="dad"></label>
-                </span>
-              </td>
-              <td class="supprt">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="rst" />
-                  <label for="rst"></label>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td class="permissions">Archive Companies</td>
-              <td class="help">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="ret" />
-                  <label for="ret"></label>
-                </span>
-              </td>
-              <td class="t-user">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="rdu" />
-                  <label for="rdu"></label>
-                </span>
-              </td>
-              <td class="admini">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="rad" />
-                  <label for="rad"></label>
-                </span>
-              </td>
-              <td class="supprt">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="rst" />
-                  <label for="rst"></label>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td class="permissions">Archive Companies</td>
-              <td class="help">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="ret" />
-                  <label for="ret"></label>
-                </span>
-              </td>
-              <td class="t-user">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="rdu" checked />
-                  <label for="rdu"></label>
-                </span>
-              </td>
-              <td class="admini">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="rad" />
-                  <label for="rad"></label>
-                </span>
-              </td>
-              <td class="supprt">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="rst" disabled />
-                  <label for="rst"></label>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td class="permissions">View Users</td>
-              <td class="help">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="ret" />
-                  <label for="ret"></label>
-                </span>
-              </td>
-              <td class="t-user">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="rdu" checked />
-                  <label for="rdu"></label>
-                </span>
-              </td>
-              <td class="admini">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="rad" />
-                  <label for="rad"></label>
-                </span>
-              </td>
-              <td class="supprt">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="rst" />
-                  <label for="rst"></label>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td class="permissions">Create Users</td>
-              <td class="help">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="ret" />
-                  <label for="ret"></label>
-                </span>
-              </td>
-              <td class="t-user">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="rdu" />
-                  <label for="rdu"></label>
-                </span>
-              </td>
-              <td class="admini">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" checked id="rad" />
-                  <label for="rad"></label>
-                </span>
-              </td>
-              <td class="supprt">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="rst" />
-                  <label for="rst"></label>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td class="permissions">Edit Users</td>
-              <td class="help">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" checked id="ret" />
-                  <label for="ret"></label>
-                </span>
-              </td>
-              <td class="t-user">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="rdu" />
-                  <label for="rdu"></label>
-                </span>
-              </td>
-              <td class="admini">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="rad" />
-                  <label for="rad"></label>
-                </span>
-              </td>
-              <td class="supprt">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="rst" />
-                  <label for="rst"></label>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td class="permissions">Archive Users</td>
-              <td class="help">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="ret" />
-                  <label for="ret"></label>
-                </span>
-              </td>
-              <td class="t-user">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="rdu" />
-                  <label for="rdu"></label>
-                </span>
-              </td>
-              <td class="admini">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="rad" />
-                  <label for="rad"></label>
-                </span>
-              </td>
-              <td class="supprt">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="rst" />
-                  <label for="rst"></label>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="5">
-                <hr />
-              </td>
-            </tr>
-            <tr>
-              <td class="t-tile" colspan="5">
-                <h5>Accounting</h5>
-              </td>
-            </tr>
-            <tr>
-              <td class="permissions">View Accounting</td>
-              <td class="help">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="et" />
-                  <label for="et"></label>
-                </span>
-              </td>
-              <td class="t-user">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="tu" checked />
-                  <label for="tu"></label>
-                </span>
-              </td>
-              <td class="admini">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="ad" />
-                  <label for="ad"></label>
-                </span>
-              </td>
-              <td class="supprt">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="st" />
-                  <label for="st"></label>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td class="permissions">Create Invoice</td>
-              <td class="help">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="det" checked />
-                  <label for="det"></label>
-                </span>
-              </td>
-              <td class="t-user">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="tdu" />
-                  <label for="tdu"></label>
-                </span>
-              </td>
-              <td class="admini">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="dad" />
-                  <label for="dad"></label>
-                </span>
-              </td>
-              <td class="supprt">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="dst" />
-                  <label for="dst"></label>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td class="permissions">Manage Products</td>
-              <td class="help">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="ret" />
-                  <label for="ret"></label>
-                </span>
-              </td>
-              <td class="t-user">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="tru" />
-                  <label for="tru"></label>
-                </span>
-              </td>
-              <td class="admini">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="dad" checked />
-                  <label for="dad"></label>
-                </span>
-              </td>
-              <td class="supprt">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="rst" />
-                  <label for="rst"></label>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td class="permissions">View Product Cost</td>
-              <td class="help">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="ret" />
-                  <label for="ret"></label>
-                </span>
-              </td>
-              <td class="t-user">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="rdu" checked />
-                  <label for="rdu"></label>
-                </span>
-              </td>
-              <td class="admini">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="rad" />
-                  <label for="rad"></label>
-                </span>
-              </td>
-              <td class="supprt">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="rst" checked />
-                  <label for="rst"></label>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td class="permissions">Manage Services</td>
-              <td class="help">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="ret" disabled />
-                  <label for="ret"></label>
-                </span>
-              </td>
-              <td class="t-user">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="rdu" />
-                  <label for="rdu"></label>
-                </span>
-              </td>
-              <td class="admini">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="rad" checked />
-                  <label for="rad"></label>
-                </span>
-              </td>
-              <td class="supprt">
-                <span class="cmn-checkbox">
-                  <input type="checkbox" id="rst" />
-                  <label for="rst"></label>
-                </span>
-              </td>
-            </tr>
+            <ng-container  *ngFor="let section of sections | keyvalue">
+              <tr>
+                <td class="t-tile" colspan="4">
+                  <h5>{{ section.key }}</h5>
+                </td>
+              </tr>
+              <tr *ngFor="let permission of section.value">
+                <td class="permissions">{{ userReadable(permission) }}</td>
+                <td class="help" *ngFor="let role of roles;let i= index">
+                  <span class="cmn-checkbox">
+                    <input
+                      type="checkbox"
+                      id="{{permission}}_{{role.id}}"
+                      [checked]="role.permissions.indexOf(permission) > -1 ? true : false"
+                      (click)="togglePermission(role, permission)"
+                      [disabled]="isPermissionDisabled(permission, role)"
+                    />
+                    <label for="{{permission}}_{{role.id}}"></label>
+                  </span>
+                </td>
+              </tr>
+            </ng-container>
           </tbody>
         </table>
       </div>
@@ -614,7 +116,7 @@
   </div>
 </div>
 <!-- sidebar popup edit -->
-<div class="sidebar-popup role-dlt" [class.opened]="delete">
+<div class="sidebar-popup role-dlt" [class.opened]="delete" *ngIf="usersToShift">
   <!-- header -->
   <div class="sidebar-header">
     <div class="h1">Delete Role?</div>
@@ -625,95 +127,57 @@
   <div class="warn-msg">
     <img src="/ng2/assets/img/warning.svg" alt="warning" />
     <p>
-      5 tech users belong to this group, you must assign a <br />
+      {{usersToShift.length}} tech users belong to this group, you must assign a <br />
       different group to existing users to delete the group.
     </p>
   </div>
   <div class="middle-content">
-    <form method="POST">
+    <form #editForm="ngForm">
       <div class="tech-list">
         <h6>Tech Users</h6>
         <ul class="list-unstyled">
-          <li>
+          <li *ngFor="let user of usersToShift">
             <div class="t-user">
               <span class="user-dp away">
-                <img src="/ng2/assets/img/user.jpg" alt="user" />
+                <img   *ngIf = "user && !user.avatar || !user.avatar.updatedAt"
+                src="/ng2/assets/img/user.jpg" alt="user" />
+                <img *ngIf = "user.avatar && user.avatar.updatedAt"
+                  src="/user/{{user.id}}/image.jpg?t={{user.avatar.updatedAt}}"
+                  alt="user"
+                />
               </span>
               <div class="t-info">
-                <h5>Tony Dawson</h5>
-                <a href="mailto:bode.rigoberto@kemmer.com">bode.rigoberto@kemmer.com</a>
+                <h5>{{ user.firstName + ' ' + user.lastName }}</h5>
+                <a href="mailto:{{user.primaryEmail}}"
+                  >{{user.primaryEmail}}</a
+                >
               </div>
             </div>
-            <select class="cmn-select form-input">
-              <option>Administrator</option>
-              <option>Administrator 1</option>
-            </select>
-          </li>
-          <li>
-            <div class="t-user">
-              <span class="user-dp away">
-                <img src="/ng2/assets/img/user.jpg" alt="user" />
-              </span>
-              <div class="t-info">
-                <h5>Hunter Hardy</h5>
-                <a href="mailto:gleason.beulah@rigoberto.biz">gleason.beulah@rigoberto.biz</a>
-              </div>
-            </div>
-            <select class="cmn-select form-input">
-              <option>Administrator</option>
-              <option>Administrator 1</option>
-            </select>
-          </li>
-          <li>
-            <div class="t-user">
-              <span class="user-dp away">
-                <img src="/ng2/assets/img/user.jpg" alt="user" />
-              </span>
-              <div class="t-info">
-                <h5>Sophia Howell</h5>
-                <a href="mailto:cummings_fay@nella.org">cummings_fay@nella.org</a>
-              </div>
-            </div>
-            <select class="cmn-select form-input">
-              <option>Administrator</option>
-              <option>Administrator 1</option>
-            </select>
-          </li>
-          <li>
-            <div class="t-user">
-              <span class="user-dp away">
-                <img src="/ng2/assets/img/user.jpg" alt="user" />
-              </span>
-              <div class="t-info">
-                <h5>Myrtie Carroll</h5>
-                <a href="mailto:wolff_clarissa@gmail.com">wolff_clarissa@gmail.com</a>
-              </div>
-            </div>
-            <select class="cmn-select form-input">
-              <option>Help Desk User</option>
-              <option>Administrator</option>
-            </select>
-          </li>
-          <li>
-            <div class="t-user">
-              <span class="user-dp away">
-                <img src="/ng2/assets/img/user.jpg" alt="user" />
-              </span>
-              <div class="t-info">
-                <h5>Joe Gonzales</h5>
-                <a href="mailto:ritchie_vincent@yahoo.com">ritchie_vincent@yahoo.com</a>
-              </div>
-            </div>
-            <select class="cmn-select form-input">
-              <option>Administrator</option>
-              <option>Administrator 1</option>
+            <!-- <li ng-repeat="role in allTechRoles" ng-click="user.techRole = role; changeUsersRole(user)">
+              <a tabindex="-1" href="javascript:void(0)"> {{ role }} </a>
+            </li> -->
+            <select class="cmn-select form-input" [(ngModel)]="user.techRole" 
+            (change)="changeUsersRole(user,$event)"
+            [ngModelOptions]="{standalone: true}" name="techRole">
+              <option value="{{role}}" 
+                *ngFor="let role of allTechRoles" 
+                >{{role}}</option>
+              <!-- <option>Administrator 1</option> -->
             </select>
           </li>
         </ul>
       </div>
       <div class="btn-row">
-        <input type="submit" value="Delete Role" class="btn btn-primary" />
-        <a href="javascrip:;" class="btn btn-secondary" (click)="delete = !delete">Cancel</a>
+        <input type="submit" value="Delete Role"
+        [disabled]="allRolesAreChanged(roleToDelete)"
+        (click)="deleteRole(roleToDelete, true); "
+         class="btn btn-primary" />
+        <a
+          href="javascrip:;"
+          class="btn btn-secondary"
+          (click)="delete = !delete"
+          >Cancel</a
+        >
       </div>
     </form>
   </div>

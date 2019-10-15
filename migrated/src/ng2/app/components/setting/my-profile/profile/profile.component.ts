@@ -6,6 +6,7 @@ import { BsModalService, BsModalRef } from "ngx-bootstrap";
 import { ImageCroppedEvent } from "ngx-image-cropper";
 import { Observable, Observer } from "rxjs";
 import { ToastrService } from "ngx-toastr";
+import { map } from "rxjs/operators";
 // import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -25,8 +26,8 @@ export class ProfileComponent implements OnInit {
   userProfile: any;
   userProfileAddr: any;
   modalRef: BsModalRef;
-  imageSrc = "/ng2/assets/img/user.jpg";
   imageBase64 = "";
+  imageSrc = "/ng2/assets/img/user.jpg";
 
   public currentUser: any;
   public profileForm: FormGroup;
@@ -38,6 +39,7 @@ export class ProfileComponent implements OnInit {
     private modalService: BsModalService,
     private toastr: ToastrService
   ) {
+    
     this.getCurrentUser();
     this.getUserProfile();
   }
@@ -74,8 +76,6 @@ export class ProfileComponent implements OnInit {
       image: [""]
     });
 
-    // this.getCurrentUser();
-    // this.getUserProfile();
   }
 
   /**
@@ -103,51 +103,56 @@ export class ProfileComponent implements OnInit {
    * get user profile details
    */
   private getUserProfile() {
-    this.settingService.getUserProfile().subscribe((userProfile: any) => {
-      if (userProfile) {
-        this.userProfile = userProfile;
-        this.userProfileAddr = userProfile.address;
+    this.settingService
+      .getUserProfile()
+      .pipe(
+        map((userProfile: any) => {
+          if (userProfile) {
+            this.userProfile = userProfile;
+            this.userProfileAddr = userProfile.address;
 
-        this.profileForm.patchValue({
-          suiteNumber: this.userProfileAddr
-            ? this.userProfileAddr.suiteNumber
-            : "",
-          mailingAddress: this.userProfileAddr
-            ? this.userProfileAddr.address
-            : "",
-          postalCode: this.userProfileAddr
-            ? this.userProfileAddr.postalCode
-            : "",
-          aboutMe:
-            userProfile.signature && userProfile.signature.content
-              ? userProfile.signature.content
-              : ""
-        });
-
-        this.userProfileAddr.phoneNumbers.forEach(phone => {
-          if (phone && phone.priority === 0) {
             this.profileForm.patchValue({
-              primaryId: phone.id,
-              primaryPhone: phone.number,
-              primaryPhoneType: phone.typeNumber
-                ? phone.typeNumber.toUpperCase()
-                : ""
+              suiteNumber: this.userProfileAddr
+                ? this.userProfileAddr.suiteNumber
+                : "",
+              mailingAddress: this.userProfileAddr
+                ? this.userProfileAddr.address
+                : "",
+              postalCode: this.userProfileAddr
+                ? this.userProfileAddr.postalCode
+                : "",
+              aboutMe:
+                userProfile.signature && userProfile.signature.content
+                  ? userProfile.signature.content
+                  : ""
+            });
+
+            this.userProfileAddr.phoneNumbers.forEach(phone => {
+              if (phone && phone.priority === 0) {
+                this.profileForm.patchValue({
+                  primaryId: phone.id,
+                  primaryPhone: phone.number,
+                  primaryPhoneType: phone.typeNumber
+                    ? phone.typeNumber.toUpperCase()
+                    : ""
+                });
+              }
+
+              if (phone && phone.priority === 1) {
+                this.isAddPhone = true;
+                this.profileForm.patchValue({
+                  secondaryId: phone.id,
+                  secondaryPhone: phone.number,
+                  secondaryPhoneType: phone.typeNumber
+                    ? phone.typeNumber.toUpperCase()
+                    : ""
+                });
+              }
             });
           }
-
-          if (phone && phone.priority === 1) {
-            this.isAddPhone = true;
-            this.profileForm.patchValue({
-              secondaryId: phone.id,
-              secondaryPhone: phone.number,
-              secondaryPhoneType: phone.typeNumber
-                ? phone.typeNumber.toUpperCase()
-                : ""
-            });
-          }
-        });
-      }
-    });
+        })
+      )
+      .subscribe();
   }
 
   /**
@@ -193,7 +198,6 @@ export class ProfileComponent implements OnInit {
           console.log(error);
         }
       );
-      // this.modalRef = this.modalService.show(template);
     }
   }
 
@@ -232,39 +236,38 @@ export class ProfileComponent implements OnInit {
       };
     }
 
-    this.settingService.updateAvatar(this.currentUser.id,cropImage).subscribe(
-      (updateAvatar: any) => {
-        this.imageAvatar = updateAvatar;
+    this.settingService
+      .updateAvatar(this.currentUser.id, cropImage)
+      .pipe(
+        map(updateAvatar => {
+          this.imageAvatar = updateAvatar;
 
-        if (updateAvatar) {
-          const profileUser = {
-            basic: {
-              avatar: updateAvatar,
-              firstName: this.profileForm.value.userName,
-              lastName: this.currentUser.lastName,
-              designation: this.profileForm.value.designation,
-              primaryEmail: this.profileForm.value.primaryEmail,
-              secondaryEmail: null,
-              signature: this.userProfile.signature
-            }
-          };
-          this.settingService.updateProfile(profileUser).subscribe(
-            (res: any) => {
-              if (res) {
-                this.imageSrc = `/users/${res.id}/image.jpg?t=${this.imageAvatar.updatedAt}`;
+          if (updateAvatar) {
+            const profileUser = {
+              basic: {
+                avatar: updateAvatar,
+                firstName: this.profileForm.value.userName,
+                lastName: this.currentUser.lastName,
+                designation: this.profileForm.value.designation,
+                primaryEmail: this.profileForm.value.primaryEmail,
+                secondaryEmail: null,
+                signature: this.userProfile.signature
               }
-            },
-            error => {
-              console.log(error);
-            }
-          );
-        }
-      },
-      error => {
-        console.log(error);
-      }
-    );
-    // this.modalRef.hide();
+            };
+            this.settingService.updateProfile(profileUser).subscribe(
+              (res: any) => {
+                if (res) {
+                  this.imageSrc = `/users/${res.id}/image.jpg?t=${this.imageAvatar.updatedAt}`;
+                }
+              },
+              error => {
+                console.log(error);
+              }
+            );
+          }
+        })
+      )
+      .subscribe();
   }
 
   onAddPhone() {
@@ -297,39 +300,37 @@ export class ProfileComponent implements OnInit {
   }
 
   deleteAvatar() {
-    this.settingService.deleteAvatar(this.currentUser.id).subscribe(
-      res => {
-        this.toastr.success("Avatar deleted successfully");
-
-        const profileUser = {
-          basic: {
-            avatar: null,
-            firstName: this.profileForm.value.userName,
-            lastName: this.currentUser.lastName,
-            designation: this.profileForm.value.designation,
-            primaryEmail: this.profileForm.value.primaryEmail,
-            secondaryEmail: null,
-            signature: this.userProfile.signature
-          }
-        };
-        this.settingService.updateProfile(profileUser).subscribe(
-          res => {
-            if (res) {
-              if (res) {
-                // this.toastr.success("Profile updated successfully");
-                this.imageSrc = "/ng2/assets/img/user.jpg";
-              }
+    this.settingService
+      .deleteAvatar(this.currentUser.id)
+      .pipe(
+        map(res => {
+          this.toastr.success("Avatar deleted successfully");
+          const profileUser = {
+            basic: {
+              avatar: null,
+              firstName: this.profileForm.value.userName,
+              lastName: this.currentUser.lastName,
+              designation: this.profileForm.value.designation,
+              primaryEmail: this.profileForm.value.primaryEmail,
+              secondaryEmail: null,
+              signature: this.userProfile.signature
             }
-          },
-          error => {
-            this.toastr.error(error);
-          }
-        );
-      },
-      error => {
-        this.toastr.error(error);
-      }
-    );
+          };
+          this.settingService.updateProfile(profileUser).subscribe(
+            res => {
+              if (res) {
+                if (res) {
+                  this.imageSrc = "/ng2/assets/img/user.jpg";
+                }
+              }
+            },
+            error => {
+              this.toastr.error(error);
+            }
+          );
+        })
+      )
+      .subscribe();
   }
 
   getBase64ImageFromURL(url: string) {
@@ -421,15 +422,15 @@ export class ProfileComponent implements OnInit {
       }
     };
 
-    this.settingService.updateProfile(profileUser).subscribe(
-      res => {
-        if (res) {
-          this.toastr.success("Profile updated successfully");
-        }
-      },
-      error => {
-        this.toastr.error(error);
-      }
-    );
+    this.settingService
+      .updateProfile(profileUser)
+      .pipe(
+        map(res => {
+          if (res) {
+            this.toastr.success("Profile updated successfully");
+          }
+        })
+      )
+      .subscribe();
   }
 }

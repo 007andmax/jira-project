@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { MustMatch } from "src/ng2/app/helpers/must-match.validator";
 import { SettingService } from "src/ng2/app/services/setting/setting.service";
 import { ToastrService } from "ngx-toastr";
+import { map } from "rxjs/operators";
 
 @Component({
   selector: "app-account",
@@ -46,50 +47,61 @@ export class AccountComponent implements OnInit {
   }
 
   get2FA() {
-    this.settingService.get2FA().subscribe((res: any) => {
-      if (res) {
-        this.authenticationTypesType = res.value;
-      }
-    });
+    this.settingService
+      .get2FA()
+      .pipe(
+        map((res: any) => {
+          if (res) {
+            this.authenticationTypesType = res.value;
+          }
+        })
+      )
+      .subscribe();
   }
 
   // selected auth type
   onAuthTypeChange(type: string) {
-    this.settingService.twoFactorAuth(type).subscribe(res => {
-      this.toastr.success('Auth Type changed Successfully');
-    },error => {
-      this.toastr.success('Error occured, Auth type changed');
-    });
+    this.settingService
+      .twoFactorAuth(type)
+      .pipe(
+        map(res => {
+          this.toastr.success("Auth Type changed Successfully");
+        })
+      )
+      .subscribe();
   }
 
   //
   logOutSessions() {
     if (confirm("Are you sure to log out other sessions ")) {
-      this.settingService.getActivityHistory().subscribe((res: any) => {
-        if (res) {
-          this.toastr.success('Log out other sessions successfully.')
-          const activityHistory = res;
-          const currentDevice = res.find(device => {
-            return device.current;
-          });
+      this.settingService
+        .getActivityHistory()
+        .pipe(
+          map((res: any) => {
+            if (res) {
+              this.toastr.success("Log out other sessions successfully.");
+              const activityHistory = res;
+              const currentDevice = res.find(device => {
+                return device.current;
+              });
 
-          const idsForDelete = [];
-          for (var i = 0; i < activityHistory.length; i++) {
-            var deviceId = activityHistory[i].id;
-            if (deviceId !== currentDevice.id) {
-              idsForDelete.push(deviceId);
+              const idsForDelete = [];
+              for (var i = 0; i < activityHistory.length; i++) {
+                var deviceId = activityHistory[i].id;
+                if (deviceId !== currentDevice.id) {
+                  idsForDelete.push(deviceId);
+                }
+              }
+
+              if (idsForDelete) {
+                this.settingService
+                  .closeSessions(idsForDelete)
+                  .subscribe(res => {});
+              }
             }
-          }
-
-          if (idsForDelete) {
-            this.settingService
-              .closeSessions(idsForDelete)
-              .subscribe(res => {});
-          }
-        }
-      },error => {
-        this.toastr.error('Error Occured, on log out other session');
-      });
+          })
+        )
+        .subscribe();
     }
   }
 
@@ -106,25 +118,25 @@ export class AccountComponent implements OnInit {
         this.passwordForm.value.oldpass,
         this.passwordForm.value.newpass
       )
-      .subscribe(
-        res => {
+      .pipe(
+        map(res => {
           this.oldPwdCorrect = true;
-          this.toastr.success('Password changed successfully.')
-        },
+          this.toastr.success("Password changed successfully.");
+        })
+      )
+      .subscribe(
+        () => {},
         (error: any) => {
           if (error) {
             const errStatus = error.status;
             if (errStatus === 409) {
               this.oldPwdCorrect = false;
-              this.toastr.info('Old Password is not correct.')
+              this.toastr.info("Old Password is not correct.");
             } else {
               this.toastr.error(error);
             }
           }
-          
         }
       );
-
-    // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.passwordForm.value))
   }
 }

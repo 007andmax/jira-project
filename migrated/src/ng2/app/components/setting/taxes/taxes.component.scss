@@ -1,45 +1,49 @@
 /*** All css files include ***/
-@import '../../../../assets/scss/variable';
-@import '../../../../assets/scss/mixin';
-@import '../../../../assets/scss/custom';
+@import "../../../../assets/scss/variable";
+@import "../../../../assets/scss/mixin";
+@import "../../../../assets/scss/custom";
 
-.manage-taxes{
-    .cmn-area{
-        padding-top: 0;
-        .tax-name{
-            width: 260px;
-        }
-        .rate{
-            width: 170px;
-        }
-        .default{
-            width: 100px;
-            text-align: center;
-            text-transform: none; 
-            .cmn-checkbox{
-                display: inline-block;
-            }
-        }
-        .action{
-            width: 118px;
-        }
+.manage-taxes {
+  .cmn-area {
+    padding-top: 0;
+    .tax-name {
+      width: 260px;
     }
-    .check-area {
-        margin-top: -10px;
-        margin-bottom: 18px;
-        .cmn-checkbox{
-            label{
-                text-transform: none;
-            }
-        }
+    .rate {
+      width: 170px;
     }
-    .modal-body{
-        .f-row{
-            margin-bottom: 0;
-        }
+    .default {
+      width: 100px;
+      text-align: center;
+      text-transform: none;
+      .cmn-checkbox {
+        display: inline-block;
+      }
     }
+    .action {
+      width: 118px;
+    }
+  }
+  .check-area {
+    margin-top: -10px;
+    margin-bottom: 18px;
+    .cmn-checkbox {
+      label {
+        text-transform: none;
+      }
+    }
+  }
+  .modal-body {
+    .f-row {
+      margin-bottom: 0;
+    }
+  }
 }
 
-.remove{
+.remove {
   margin-top: 0px !important;
+}
+
+.error-text-align {
+  text-align: left !important;
 }

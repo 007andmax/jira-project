@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { SettingService } from "src/ng2/app/services/setting/setting.service";
 import { ToastrService } from "ngx-toastr";
+import { map } from "rxjs/operators";
 
 @Component({
   selector: "app-email-notifications",
@@ -16,9 +17,14 @@ export class EmailNotificationsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.settingService.emailNotifications().subscribe(res => {
-      this.emailNotifications = res;
-    });
+    this.settingService
+      .emailNotifications()
+      .pipe(
+        map(res => {
+          this.emailNotifications = res;
+        })
+      )
+      .subscribe();
   }
 
   onSubmit(emailForm) {
@@ -30,17 +36,13 @@ export class EmailNotificationsComponent implements OnInit {
         emailForm.value.ticketCloseNotifications || false
     };
 
-    this.settingService.email(emailObjToSend).subscribe(
-      (res: any) => {
-        
-        this.toastr.success("Email notification changed successfully",'',{
-          timeOut: 7000
-        });
-
-      },
-      error => {
-        this.toastr.error(error);
-      }
-    );
+    this.settingService
+      .email(emailObjToSend)
+      .pipe(
+        map(res => {
+          this.toastr.success("Email notification changed successfully");
+        })
+      )
+      .subscribe();
   }
 }

@@ -68,34 +68,44 @@ ngb-typeahead-window {
   width: 20px;
   height: 20px;
   border: 0.1rem solid #4f5f79;
-  border-top-color: #9CA5B6;
+  border-top-color: #9ca5b6;
 }
 
-.toast-container .toast-success  {
+.toast-container .toast-success {
   top: 105px;
-    width: auto;
-    border-radius: 6px;
-    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1);
-    background: url('/ng2/assets/img/success-tick.png')  #2ec866 no-repeat left 16px center;
-    background-color: #2ec866;
-    padding: 8px 15px 8px 44px;
-    font-size: 12px;
-    font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: 1.33;
-    letter-spacing: normal;
-    color: #ffffff;
-    margin: 0 auto;
-    left: 265px;
-    right: 0;
-    max-width: 236px;
-    position: fixed;
-    z-index: 99999999999;
+  width: auto;
+  border-radius: 6px;
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1);
+  background: url('/ng2/assets/img/success-tick.png') #2ec866 no-repeat left
+    16px center;
+  background-color: #2ec866;
+  padding: 8px 15px 8px 44px;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #ffffff;
+  margin: 0 auto;
+  left: 265px;
+  right: 0;
+  max-width: 236px;
+  position: fixed;
+  z-index: 99999999999;
+}
+
+.invalid-feedback {
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;
+}
+
+input.ng-invalid.is-invalid {
+  border: 1px solid red;
 }
 
 @import './assets/styles/mobile.scss';
-
 
 /*** All css files include ***/
 @import '/assets/scss/fonts';
