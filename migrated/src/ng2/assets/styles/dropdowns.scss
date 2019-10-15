@@ -344,7 +344,7 @@
       .duration-container-values {
         position: relative;
         width: 50%;
-        &.has-arrows{
+        &.has-arrows {
           .arrow-top,
           .arrow-bottom {
             display: block;
@@ -395,6 +395,41 @@
       .duration-container-values:first-child {
         border-right: 1px solid #edf2f6;
       }
+    }
+  }
+}
+
+.start-end-picker {
+  .time-picker-in,
+  .time-picker-out {
+    width: 97px;
+    display: inline-block;
+    .start-end-picker-item {
+      font-size: 13px;
+      > div {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        height: 30px;
+        padding: 0 14px;
+        cursor: pointer;
+        transition: all .3s;
+        &:hover {
+          background: #16a4fa;
+          color: #fff;
+        }
+      }
+    }
+  }
+  .time-picker-in {
+    margin-right: 11px;
+    .dropdown-menu {
+      min-width: 100%;
+    }
+  }
+  .time-picker-out {
+    .dropdown-menu {
+      min-width: 165px;
     }
   }
 }
