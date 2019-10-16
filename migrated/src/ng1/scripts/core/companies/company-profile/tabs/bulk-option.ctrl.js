@@ -64,8 +64,8 @@
 
           });
         }
-        console.log('DevicesService.onInitCompleted', DevicesService.onInitCompleted);
-        if (DevicesService.onInitCompleted) getCompanyDevices();
+        console.log('DevicesService.onInitCompleted', $rootScope.onInitDevciesCompleted);
+        if ($rootScope.onInitDevciesCompleted) getCompanyDevices();
         $rootScope.$on('onDevicesComplated', function (evt, val) {
           console.log('onDevicesComplated');
           getCompanyDevices();

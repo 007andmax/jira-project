@@ -14,7 +14,7 @@
         callbacksForRemoteInstall = {},
         callbacksForRemoteUninstall = {},
         callbackForRemoteConnection = {};
-        var onInitCompleted = false;
+        $rootScope.onInitDevciesCompleted = false;
 
       var initListeners = [],
         initialized = false;
@@ -125,7 +125,7 @@
         },
 
       }
-
+      
       Utils.customizeObj(storage);
 
       CompaniesService._addInitListener(init);
@@ -134,7 +134,7 @@
        
         $http.get("/devices?companyId=" + CompaniesService.getCurrentCompany().id).then(function (resp) {
           var devices = storage.devices;
-          onInitCompleted = true;
+          $rootScope.onInitDevciesCompleted = true;
           var listOfCompaniesWithAgents = {};
           Object.keys(resp.data).forEach(function(key,index) {
             if(resp.data[key] !== null) {
@@ -144,7 +144,8 @@
 
           Utils.customizeObj(listOfCompaniesWithAgents, devices);
           calculateDevicesCountersAndCallCallbacks();
-          $rootScope.$broadcast('onDevicesComplated', onInitCompleted);
+          console.log('onInitCompleted',true);
+          $rootScope.$broadcast('onDevicesComplated', true);
           RealTimeService.subscribe('/device', serviceScope, function (newChange) {
             // console.log(newChange, '****s*********************************8')
             // console.log(newChange, '/device change')
@@ -1314,7 +1315,7 @@
         getDevicesCredentials: getDevicesCredentials,
         markDeviceAsMaster: markDeviceAsMaster,
         getUpdatedDevices: getUpdatedDevices,
-        onInitCompleted: onInitCompleted
+      
       }
     }
   ]);
