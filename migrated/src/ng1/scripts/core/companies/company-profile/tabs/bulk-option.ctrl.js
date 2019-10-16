@@ -5,10 +5,10 @@
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.bulkOptionCtrl',
     ['$scope', 'UsersService', 'SubscriptionsService', 'DevicesService', 'quicktech.common.services.UserConfirmationsService', '$uibModal', '$rootScope',
       function ($scope, UsersService, SubscriptionsService, DevicesService, UserConfirmationsService, $uibModal, $rootScope) {
-console.log('$scope.company.id',$scope.company.id);
-var onGetDevicesComplated = false;
+        console.log('$scope.company.id', $scope.company.id);
+        var onGetDevicesComplated = false;
         $scope.$watch('companyProfileHeader', function (val) {
- 
+
           if (val.selectUsersIds.length > 0) {
 
             $scope.bulkOptionMode = 'users';
@@ -21,10 +21,10 @@ var onGetDevicesComplated = false;
             $scope.bulkOptionMode = 'devices';
             $scope.selectDevicesIds = val.selectDevicesIds;
             $scope.selectDevicesAgentsId = [];
-              $scope.selectDevicesIds.forEach(function(val) {
-                var agent = DevicesService.getOneById(val, $scope.company.id);
-                $scope.selectDevicesAgentsId.push(agent.agentId);
-              })
+            $scope.selectDevicesIds.forEach(function (val) {
+              var agent = DevicesService.getOneById(val, $scope.company.id);
+              $scope.selectDevicesAgentsId.push(agent.agentId);
+            })
 
           } else {
             $scope.bulkOptionMode = false;
@@ -34,12 +34,12 @@ var onGetDevicesComplated = false;
           }
 
         }, true);
-       
+
 
         function getCompanyDevices() {
           console.log('getCompanyDevices');
           if (onGetDevicesComplated) return;
-          onGetDevicesComplated  = true;
+          onGetDevicesComplated = true;
           DevicesService.getAgentsAndReportsDataByCompanyId($scope, $scope.company.id, function (resp) {
             if (resp && resp.length) {
               //var agentsList = resp;
@@ -47,41 +47,39 @@ var onGetDevicesComplated = false;
               //   return a.hostName > b.hostName
               // });
               $scope.agents = resp;
-  
-  
+
+
               var devicesIds = [];
               $scope.agents.forEach(function (device) {
                 devicesIds.push(device.id);
               });
               $rootScope.deviceCredentialsRecived = false;
-              DevicesService.getDevicesCredentials(devicesIds, $scope, function(resp){
-                if(resp) {
+              DevicesService.getDevicesCredentials(devicesIds, $scope, function (resp) {
+                if (resp) {
                   $scope.devicesCredentials = resp;
                   $rootScope.deviceCredentialsRecived = true;
                 }
               })
             }
-  
+
           });
         }
-        console.log('DevicesService.onInitCompleted',DevicesService.onInitCompleted);
-        $scope.$watch('DevicesService.onInitCompleted', function (val) {
-          console.log('DevicesService.onInitCompleted',val);
-          if (DevicesService.onInitCompleted) getCompanyDevices();
-
-        });
+        console.log('DevicesService.onInitCompleted', DevicesService.onInitCompleted);
         if (DevicesService.onInitCompleted) getCompanyDevices();
-
+        $rootScope.$on('onDevicesComplated', function (evt, val) {
+          console.log('onDevicesComplated');
+          getCompanyDevices();
+        });
         $scope.changeUserRole = function (role) {
           UsersService.changeUsersRoles($scope.selectUsersIds, role);
         };
 
-        $scope.$watch(function() {
+        $scope.$watch(function () {
           return $rootScope.isAgentsRequestSending;
-        }, function(val) {
+        }, function (val) {
 
           $scope.isAgentsRequestSending = val;
-          console.log('agents',$scope.agents);
+          console.log('agents', $scope.agents);
         })
 
         $scope.changeUserSubscription = function (subsc) {
@@ -126,7 +124,7 @@ var onGetDevicesComplated = false;
             $scope.companyProfileHeader.removeDeviceFromPage($scope.selectDevicesIds);
           }
 
-          UserConfirmationsService.show(confirmMessage, confirmButton).then(function(){
+          UserConfirmationsService.show(confirmMessage, confirmButton).then(function () {
             DevicesService.sendUninstallAgentRequest($scope.company.id, $scope.selectDevicesAgentsId, UncheckAllAndRemoveFromList());
           });
         };
@@ -139,7 +137,7 @@ var onGetDevicesComplated = false;
           DevicesService.sendPowerAction($scope.company.id, $scope.selectDevicesAgentsId, 'reboot');
         };
 
-        $scope.turnOff = function(action) {
+        $scope.turnOff = function (action) {
           // console.log(action)
           var method;
 
@@ -154,13 +152,13 @@ var onGetDevicesComplated = false;
             size: 'sm',
             controller: 'quicktech.core.companies.confirmModalCtrl',
             resolve: {
-              action: function() {
+              action: function () {
                 return action;
               },
-              devices: function() {
+              devices: function () {
                 return $scope.selectDevicesAgentsId
               },
-              companyId: function() {
+              companyId: function () {
                 return $scope.company.id;
               }
             }
@@ -191,11 +189,11 @@ var onGetDevicesComplated = false;
 
         $scope.isInvoiceSubscriptionForbidden = function () {
           return $scope.users.filter(function (user) {
-              return user.subscription && user.subscription.invoice;
-            }).length === $scope.selectUsersIds.filter(function (id) {
-              var user = UsersService.getOneById(id);
-              return user.subscription && user.subscription.invoice;
-            }).length;
+            return user.subscription && user.subscription.invoice;
+          }).length === $scope.selectUsersIds.filter(function (id) {
+            var user = UsersService.getOneById(id);
+            return user.subscription && user.subscription.invoice;
+          }).length;
         };
 
         function groupSingleFields(report) {

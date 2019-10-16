@@ -131,6 +131,7 @@
       CompaniesService._addInitListener(init);
 
       function init() {
+       
         $http.get("/devices?companyId=" + CompaniesService.getCurrentCompany().id).then(function (resp) {
           var devices = storage.devices;
           onInitCompleted = true;
@@ -143,7 +144,7 @@
 
           Utils.customizeObj(listOfCompaniesWithAgents, devices);
           calculateDevicesCountersAndCallCallbacks();
-
+          $rootScope.$broadcast('onDevicesComplated', onInitCompleted);
           RealTimeService.subscribe('/device', serviceScope, function (newChange) {
             // console.log(newChange, '****s*********************************8')
             // console.log(newChange, '/device change')
