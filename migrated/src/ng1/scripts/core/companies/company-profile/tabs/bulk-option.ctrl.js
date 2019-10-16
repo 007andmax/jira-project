@@ -6,6 +6,7 @@
     ['$scope', 'UsersService', 'SubscriptionsService', 'DevicesService', 'quicktech.common.services.UserConfirmationsService', '$uibModal', '$rootScope',
       function ($scope, UsersService, SubscriptionsService, DevicesService, UserConfirmationsService, $uibModal, $rootScope) {
 console.log('$scope.company.id',$scope.company.id);
+var onGetDevicesComplated = false;
         $scope.$watch('companyProfileHeader', function (val) {
  
           if (val.selectUsersIds.length > 0) {
@@ -33,30 +34,41 @@ console.log('$scope.company.id',$scope.company.id);
           }
 
         }, true);
-
-        DevicesService.getAgentsAndReportsDataByCompanyId($scope, $scope.company.id, function (resp) {
-          if (resp && resp.length) {
-            //var agentsList = resp;
-            // $scope.agents = agentsList.sort(function (a, b) {
-            //   return a.hostName > b.hostName
-            // });
-            $scope.agents = resp;
-
-
-            var devicesIds = [];
-            $scope.agents.forEach(function (device) {
-              devicesIds.push(device.id);
-            });
-            $rootScope.deviceCredentialsRecived = false;
-            DevicesService.getDevicesCredentials(devicesIds, $scope, function(resp){
-              if(resp) {
-                $scope.devicesCredentials = resp;
-                $rootScope.deviceCredentialsRecived = true;
-              }
-            })
-          }
+        $scope.$watch('DevicesService.onInitCompleted', function (val) {
+          if (DevicesService.onInitCompleted) getCompanyDevices();
 
         });
+        if (DevicesService.onInitCompleted) getCompanyDevices();
+
+        function getCompanyDevices() {
+          console.log('getCompanyDevices',getCompanyDevices);
+          if (onGetDevicesComplated) return;
+          onGetDevicesComplated  = true;
+          DevicesService.getAgentsAndReportsDataByCompanyId($scope, $scope.company.id, function (resp) {
+            if (resp && resp.length) {
+              //var agentsList = resp;
+              // $scope.agents = agentsList.sort(function (a, b) {
+              //   return a.hostName > b.hostName
+              // });
+              $scope.agents = resp;
+  
+  
+              var devicesIds = [];
+              $scope.agents.forEach(function (device) {
+                devicesIds.push(device.id);
+              });
+              $rootScope.deviceCredentialsRecived = false;
+              DevicesService.getDevicesCredentials(devicesIds, $scope, function(resp){
+                if(resp) {
+                  $scope.devicesCredentials = resp;
+                  $rootScope.deviceCredentialsRecived = true;
+                }
+              })
+            }
+  
+          });
+        }
+     
 
         $scope.changeUserRole = function (role) {
           UsersService.changeUsersRoles($scope.selectUsersIds, role);

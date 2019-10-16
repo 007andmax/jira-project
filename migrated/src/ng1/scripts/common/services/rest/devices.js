@@ -14,6 +14,7 @@
         callbacksForRemoteInstall = {},
         callbacksForRemoteUninstall = {},
         callbackForRemoteConnection = {};
+        var onInitCompleted = false;
 
       var initListeners = [],
         initialized = false;
@@ -132,7 +133,7 @@
       function init() {
         $http.get("/devices?companyId=" + CompaniesService.getCurrentCompany().id).then(function (resp) {
           var devices = storage.devices;
-
+          onInitCompleted = true;
           var listOfCompaniesWithAgents = {};
           Object.keys(resp.data).forEach(function(key,index) {
             if(resp.data[key] !== null) {
@@ -1311,7 +1312,8 @@
         sendDeviceStatusRequest: sendDeviceStatusRequest,
         getDevicesCredentials: getDevicesCredentials,
         markDeviceAsMaster: markDeviceAsMaster,
-        getUpdatedDevices: getUpdatedDevices
+        getUpdatedDevices: getUpdatedDevices,
+        onInitCompleted: onInitCompleted
       }
     }
   ]);
