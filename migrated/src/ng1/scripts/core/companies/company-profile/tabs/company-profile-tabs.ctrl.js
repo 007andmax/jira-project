@@ -92,7 +92,7 @@
 
         };
 
-        DevicesService.getAgentsAndReportsDataByCompanyId($scope, $stateParams.companyId, function (resp) {
+     /*   DevicesService.getAgentsAndReportsDataByCompanyId($scope, $stateParams.companyId, function (resp) {
           if (resp && resp.length) {
             //var agentsList = resp;
             // $scope.agents = agentsList.sort(function (a, b) {
@@ -114,7 +114,7 @@
             })
           }
 
-        });
+        });*/
 
         $scope.$watch('agents.length', function (val) {
           if (val && (val > 0)) {

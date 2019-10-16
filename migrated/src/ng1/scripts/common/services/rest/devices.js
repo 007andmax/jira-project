@@ -1112,6 +1112,7 @@
       }
 
       function getAgentsAndReportsDataByCompanyId(scope, companyId, callback) {
+        console.log('getAgentsAndReportsDataByCompanyId');
         var checking = 0;
         $rootScope.isAgentsRequestSending = true;
         var extendedRespInterval = setInterval(function(){
