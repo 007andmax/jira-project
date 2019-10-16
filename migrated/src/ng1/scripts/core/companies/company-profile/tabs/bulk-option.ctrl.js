@@ -34,14 +34,10 @@ var onGetDevicesComplated = false;
           }
 
         }, true);
-        $scope.$watch('DevicesService.onInitCompleted', function (val) {
-          if (DevicesService.onInitCompleted) getCompanyDevices();
-
-        });
-        if (DevicesService.onInitCompleted) getCompanyDevices();
+       
 
         function getCompanyDevices() {
-          console.log('getCompanyDevices',getCompanyDevices);
+          console.log('getCompanyDevices');
           if (onGetDevicesComplated) return;
           onGetDevicesComplated  = true;
           DevicesService.getAgentsAndReportsDataByCompanyId($scope, $scope.company.id, function (resp) {
@@ -68,7 +64,13 @@ var onGetDevicesComplated = false;
   
           });
         }
-     
+        console.log('DevicesService.onInitCompleted',DevicesService.onInitCompleted);
+        $scope.$watch('DevicesService.onInitCompleted', function (val) {
+          console.log('DevicesService.onInitCompleted',val);
+          if (DevicesService.onInitCompleted) getCompanyDevices();
+
+        });
+        if (DevicesService.onInitCompleted) getCompanyDevices();
 
         $scope.changeUserRole = function (role) {
           UsersService.changeUsersRoles($scope.selectUsersIds, role);
