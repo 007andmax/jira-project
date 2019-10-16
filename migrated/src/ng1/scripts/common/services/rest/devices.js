@@ -1116,6 +1116,8 @@
         var checking = 0;
         $rootScope.isAgentsRequestSending = true;
         var extendedRespInterval = setInterval(function(){
+          console.log('storage.devices',storage.devices);
+          console.log('storage.devices[companyId]',storage.devices[companyId]);
           if(storage.devices[companyId] && storage.devices[companyId].length) {
             $http.get('/devices/extended?companyId='+ companyId).then(function (resp) {
               $rootScope.isAgentsRequestSending = false;
