@@ -46,7 +46,7 @@
                 }
             }
             function parseEditQuantity () {
-                console.log('editService.quantity',$scope.editService.quantity);
+              
                 var timeInMinutes = $scope.editService.quantity * 60,
                 hours = Math.floor(timeInMinutes / 60),
                 minutes = Math.round(timeInMinutes - (hours * 60));
@@ -59,18 +59,18 @@
             function setTimePickerInterval() {
                 $scope.interval = CompaniesService.getCurrentCompany().serviceExpenseDurationPickerInterval ?
                     CompaniesService.getCurrentCompany().serviceExpenseDurationPickerInterval : 'ONE_MINUTE';
-                console.log('$scope.interval', $scope.interval);
+               
                 return $scope.intervalsVariant.find(function (item) {
                     return item.valueForBack === $scope.interval;
                 });
 
             }
           
-            console.log($scope.timePickerInterval, '$$scope.timePickerInterval');
+         
             for (var step = 0; step < (60 / $scope.timePickerInterval.value); step++) {
                 $scope.minutes.push({ value: step * $scope.timePickerInterval.value, selected: false });
             }
-            console.log($scope.minutes, '$$scope.minutes');
+           
             $scope.selectHour = function (hour,index) {
                 $scope.hours.forEach((element, i) => {
                     if (i == index) {
@@ -99,34 +99,10 @@
                 $scope.dateText = hourText + ":" + minuteText;
                 //  $scope.preview = (($scope.selectedHour < 10) ? "0" + $scope.selectedHour : $scope.selectedHour) + ":" + (($scope.selectedMinute < 10) ? "0" + $scope.selectedMinute : $scope.selectedMinute);
                 $scope.quantity = $scope.selectedHour + (($scope.selectedMinute) ? ($scope.selectedMinute / 60) : 0);
-                console.log('$$scope.quantity', $scope.quantity);
+               
                 if ($scope.editService && $scope.editService.quantity) $scope.editService.quantity = $scope.quantity;
               //  console.log('editService.quantity',$scope.editService.quantity);
             }
-            /*   $scope.onChangeHours = function () {
-                   var hour = Number($scope.hourText);
-                   console.log('hour instanceof', typeof hour);
-                   console.log('hour', hour);
-                   if (typeof hour == "number" && hour === NaN) {
-                       hour = 0;
-                       console.log('rgrgrgrgrg');
-                   }
-                   console.log('hour', hour);
-                   $scope.selectedHour = angular.copy(hour);
-                   $scope.setDuration();
-               }*/
-            /*   $scope.onChangeMinutes = function () {
-                   var minute = Number($scope.minuteText);
-                   console.log('minute instanceof', typeof minute);
-                   console.log('minute', minute);
-                   if (typeof hour == "number" && minute === NaN) {
-                       minute = 0;
-                       console.log('rgrgrgrgrg');
-                   }
-                   console.log('minute', minute);
-                   $scope.selectedMinute = angular.copy(minute);
-                   $scope.setDuration();
-               }*/
             $scope.toggleDropdown = function ($event) {
                 $event.preventDefault();
                 $event.stopPropagation();
@@ -146,13 +122,12 @@
                 var minute = parseInt($scope.dateText.substring($scope.dateText.indexOf(":") + 1, $scope.dateText.length));
                 if (isNaN(hour))  hour = 0;
                 if (isNaN(minute)) minute = 0;
-                console.log('$hour', hour);
-                console.log('$minute', minute);
+              
                 $scope.selectedHour = hour;
                 $scope.selectedMinute = minute;
                 //   $scope.quantity = $scope.selectedHour + (($scope.selectedMinute) ? ($scope.selectedMinute / 60) : 0);
                 $scope.setDuration();
-                console.log('$$scope.quantity', $scope.quantity);
+              
             }
             $scope.setDuration();
 

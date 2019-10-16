@@ -1,16 +1,17 @@
 <div class="start-end-picker row"
      ng-controller="quicktech.core.time-picker.userListCtrl">
   <div class="time-picker-in"
-       uib-dropdown>
+       uib-dropdown is-open="openInDate">
     <input type="text"
-           value="{{inDate.hour}}:{{inDate.minute}} {{inDate.type}}"
            class="new-input"
-           uib-dropdown-toggle />
+           ng-blur="onChangeInDateText()"  ng-model="inDateText"
+           ng-click="toggleInDateDropdown($event)" />
 
     <div uib-dropdown-menu
          stop-propagation="click"
-         onUserAssign="'true'"
+      
          aub-is-bulk-operation="true"
+          
          style="top: calc(100% + -405px);">
       <div class="start-end-picker-item"
            ng-repeat="hour in hours track by $index">
@@ -23,15 +24,16 @@
   </div>
 
   <div class="time-picker-out"
-       uib-dropdown>
+       uib-dropdown is-open="openOutDate">
     <input type="text"
-           value="{{outDate.hour}}:{{outDate.minute}} {{outDate.type}}"
+    ng-blur="onChangeOutDateText()"  ng-model="outDateText"
            class="new-input"
-           uib-dropdown-toggle />
+           ng-click="toggleOutDateDropdown($event)" />
 
     <div uib-dropdown-menu
          stop-propagation="click"
-         onUserAssign="'true'"
+       
+         aria-labelledby="time-out-dropdown"
          aub-is-bulk-operation="true"
          style="top: calc(100% + -405px);">
       <div class="start-end-picker-item"

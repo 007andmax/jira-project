@@ -17,6 +17,9 @@
        tabindex="1"></textarea>
     </div>
     <div class="col-md-2 new-quantity-picker">
+        <div  
+        ng-include="'/ng1/scripts/core/time-picker/time-picker.tpl.html'"></div>
+      <!--
       <input type="text"
              class="pointer new-input form-control"
              placeholder="Start date | End date"
@@ -109,6 +112,7 @@
 
       <input type="hidden" ng-model="serviceExpense.quantity" name="serviceTime"
              ng-required="serviceExpense.item ? true : false" smart-dropdown-menu-position />
+    -->
     </div>
     <div class="col-md-1"
          ng-if="serviceExpenseDurationPresentation ==='DURATION_PICKER'">

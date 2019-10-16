@@ -4,10 +4,14 @@
 
     angular.module('quicktech.core.tickets').controller('quicktech.core.time-picker.userListCtrl',
         ['$scope', '$rootScope', 'CompaniesService', function ($scope, $rootScope, CompaniesService) {
+            $scope.openInDate = false;
+            $scope.openOutDate = false;
             $scope.hours = [];
             $scope.minutes = [];
-            $scope.inDate = { hour: "12", minute: "00", type: "am" };
-            $scope.outDate = { hour: "12", minute: "00", type: "am" };
+            $scope.inDate = { hour: 12, minute: 00, type: "am" };
+            $scope.outDate = { hour: 12, minute: 00, type: "am" };
+            $scope.inDateText = "12:00 am";
+            $scope.outDateText = "12:00 am";
             $scope.durations = [];
             $scope.intervalsVariant = [
                 {
@@ -31,7 +35,74 @@
                     valueForBack: 'FIFTEEN_MINUTES'
                 }
             ];
+            $scope.toggleOutDateDropdown = function ($event) {
+                $event.preventDefault();
+                $event.stopPropagation();
+                $scope.openOutDate = !$scope.openOutDate;
+            }
+            $scope.toggleInDateDropdown = function ($event) {
+                $event.preventDefault();
+                $event.stopPropagation();
+                $scope.openInDate = !$scope.openInDate;
+            }
+            function parseEditQuantity () {
+              console.log('editService',$scope.editService);
+           /*     var timeInMinutes = $scope.editService.quantity * 60,
+                hours = Math.floor(timeInMinutes / 60),
+                minutes = Math.round(timeInMinutes - (hours * 60));
+                $scope.selectedHour = hours;
+                $scope.selectedMinute = minutes;*/
+                var durationStart = $scope.editService.durationStart;
+                var durationEnd = $scope.editService.durationEnd;
+                $scope.inDate = { hour: durationStart.hour, minute: durationStart.minute, type: durationStart.time.toLowerCase() };
+                $scope.outDate = { hour: durationEnd.hour, minute: durationEnd.minute, type: durationEnd.time.toLowerCase() };
+                resetTextInDate();
+                resetTextOutDate();
+               
+            }
+            if ($scope.editService) parseEditQuantity();
             $scope.timePickerInterval = setTimePickerInterval();
+            function setQuantity() {
+                var newHours = Number($scope.inDate.hour);
+                if ($scope.inDate.type === 'pm' && Number($scope.inDate.hour) != 12) {
+                    newHours = +Number($scope.inDate.hour) + 12
+                } else {
+                    newHours = +Number($scope.inDate.hour);
+                }
+                if ($scope.inDate.type === 'am' && Number($scope.inDate.hour) == 12) {
+                    newHours = 0;
+                }
+                var newMinutes = Number($scope.inDate.minute);
+                var newHoursEnd = $scope.outDate.type === 'pm' && $scope.outDate.hour !== 12 ?
+                    +$scope.outDate.hour + 12 : $scope.outDate.hour;
+                if ($scope.outDate.type === 'am' && $scope.outDate.hour == 12) {
+                    newHoursEnd = 0;
+                }
+                var newMinutesEnd = $scope.outDate.minute;
+
+                var outHour = newHoursEnd - newHours;
+                outHour = (outHour < 0) ? outHour + 24 : outHour;
+                var outMinute = newMinutesEnd - newMinutes;
+                outMinute = (outMinute < 0) ? outMinute + 60 : outMinute;
+
+                $scope.quantity = outHour + ((outMinute) ? (outMinute / 60) : 0);
+                if ($scope.editService && $scope.editService.quantity) $scope.editService.quantity = $scope.quantity;
+                if ($scope.editService)  {
+                    var newTimeStart = new Date();
+                    newHours = newHours > 24 ? newHours - 24 : newHours;
+                    newTimeStart.setHours(newHours);
+                    newTimeStart.setMinutes(newMinutes);
+
+                    var newTimeEnd = new Date();
+                    newTimeEnd.setHours(newHoursEnd);
+                    newTimeEnd.setMinutes(newMinutesEnd);
+                    $rootScope.saveStartDate = new Date(newTimeStart.getTime());
+                    $rootScope.saveEndDate = new Date(newTimeEnd.getTime());
+                    console.log(' $rootScope.saveStartDate', $rootScope.saveStartDate);
+                    console.log(' $rootScope.saveEndDate', $rootScope.saveEndDate);
+                } 
+                console.log('$scope.quantity',$scope.quantity)
+              }
             function oninitHous() {
                 $scope.hours.push({ value: 12, type: "am", text: "12", i: 0 });
 
@@ -65,17 +136,22 @@
             console.log('scope.durations', $scope.durations);
 
             $scope.selectTimeIn = function (hour, minute) {
-                $scope.inDate = { hour: hour.text, minute: minute.text, type: hour.type };
+                $scope.inDate = { hour: hour.value, minute: minute.value, type: hour.type };
                 //   $scope.outDate.duration.hour =  ($scope.inDate.hour -  $scope.outDate.hour);
                 //   $scope.outDate.duration.minute =  ($scope.inDate.minute -  $scope.outDate.minute);
                 console.log(' $scope.inDate', $scope.inDate);
                 calculateDurations();
                 console.log('scope.durations', $scope.durations);
-                $scope.$apply();
+                $scope.openInDate = !$scope.openInDate;
+                resetTextInDate();
+                setQuantity();
+                
             }
             $scope.selectTimeOut = function (hour, minute) {
-                 $scope.outDate = { hour: hour.text, minute: minute.text, type: hour.type };
-               
+                $scope.outDate = { hour: hour.text, minute: minute.text, type: hour.type };
+                $scope.openOutDate = !$scope.openOutDate;
+                resetTextOutDate();
+                setQuantity();
             }
             function calculateDurations() {
                 $scope.durations = [];
@@ -106,47 +182,85 @@
                         $scope.durations.push({ hour: outHour, minute: outMinute });
                     }
                 }
+               
             }
-            $scope.selectHour = function (hour) {
-                $scope.selectedHour = hour;
+            /*  $scope.selectHour = function (hour) {
+                  $scope.selectedHour = hour;
+              }
+              $scope.selectMinute = function (minute) {
+                  $scope.selectedMinute = minute;
+              }*/
+            /*   $scope.setDuration = function () {
+                   var hourText = (($scope.inDate.hour < 10) ? "0" + $scope.inDate.hour : $scope.inDate.hour);
+                   var minuteText = (($scope.inDate.minute < 10) ? "0" + $scope.inDate.minute : $scope.inDate.minute);
+                   $scope.dateText = hourText + ":" + minuteText;
+   
+                   $scope.quantity = $scope.inDate.hour + (($scope.inDate.minute) ? ($scope.inDate.minute / 60) : 0);
+                   console.log('$$scope.quantity', $scope.quantity);
+               }*/
+            /*  $scope.onChangeHours = function () {
+                  var hour = Number($scope.hourText);
+                  console.log('hour instanceof', typeof hour);
+                  console.log('hour', hour);
+                  if (typeof hour == "number" && hour === NaN) {
+                      hour = 0;
+                      console.log('rgrgrgrgrg');
+                  }
+                  console.log('hour', hour);
+                  $scope.selectedHour = angular.copy(hour);
+                  $scope.setDuration();
+              }
+              $scope.onChangeMinutes = function () {
+                  var minute = Number($scope.minuteText);
+                  console.log('minute instanceof', typeof minute);
+                  console.log('minute', minute);
+                  if (typeof hour == "number" && minute === NaN) {
+                      minute = 0;
+                      console.log('rgrgrgrgrg');
+                  }
+                  console.log('minute', minute);
+                  $scope.selectedMinute = angular.copy(minute);
+                  $scope.setDuration();
+              }*/
+            function resetTextInDate() {
+                var hourText = (($scope.inDate.hour < 10) ? "0" + $scope.inDate.hour : $scope.inDate.hour);
+                var minuteText = (($scope.inDate.minute < 10) ? "0" + $scope.inDate.minute : $scope.inDate.minute);
+                $scope.inDateText = hourText + ":" + minuteText + " " + $scope.inDate.type;
             }
-            $scope.selectMinute = function (minute) {
-                $scope.selectedMinute = minute;
-            }
-            $scope.setDuration = function () {
-                $scope.hourText = (($scope.selectedHour < 10) ? "0" + $scope.selectedHour : $scope.selectedHour);
-                $scope.minuteText = (($scope.selectedMinute < 10) ? "0" + $scope.selectedMinute : $scope.selectedMinute);
-                //  $scope.preview = (($scope.selectedHour < 10) ? "0" + $scope.selectedHour : $scope.selectedHour) + ":" + (($scope.selectedMinute < 10) ? "0" + $scope.selectedMinute : $scope.selectedMinute);
-                $scope.quantity = $scope.selectedHour + (($scope.selectedMinute) ? ($scope.selectedMinute / 60) : 0);
-                console.log('$$scope.quantity', $scope.quantity);
-            }
-            $scope.onChangeHours = function () {
-                var hour = Number($scope.hourText);
-                console.log('hour instanceof', typeof hour);
-                console.log('hour', hour);
-                if (typeof hour == "number" && hour === NaN) {
-                    hour = 0;
-                    console.log('rgrgrgrgrg');
+            $scope.onChangeInDateText = function () {
+                if ($scope.inDateText.indexOf(":") === -1) {
+                    resetTextInDate();
+                    return;
                 }
-                console.log('hour', hour);
-                $scope.selectedHour = angular.copy(hour);
-                $scope.setDuration();
+                var hour = parseInt($scope.inDateText.substring(0, $scope.inDateText.indexOf(":")));
+                var minute = parseInt($scope.inDateText.substring($scope.inDateText.indexOf(":") + 1, $scope.inDateText.indexOf(":") + 3));
+                if (isNaN(hour)) hour = 0;
+                if (isNaN(minute)) minute = 0;
+                $scope.inDate.hour = hour;
+                $scope.inDate.minute = minute;
+                calculateDurations();
+                setQuantity();
             }
-            $scope.onChangeMinutes = function () {
-                var minute = Number($scope.minuteText);
-                console.log('minute instanceof', typeof minute);
-                console.log('minute', minute);
-                if (typeof hour == "number" && minute === NaN) {
-                    minute = 0;
-                    console.log('rgrgrgrgrg');
+            function resetTextOutDate() {
+                var hourText = (($scope.outDate.hour < 10) ? "0" + $scope.outDate.hour : $scope.outDate.hour);
+                var minuteText = (($scope.outDate.minute < 10) ? "0" + $scope.outDate.minute : $scope.outDate.minute);
+                $scope.outDateText = hourText + ":" + minuteText + " " + $scope.inDate.type;
+            }
+            $scope.onChangeOutDateText = function () {
+                if ($scope.outDateText.indexOf(":") === -1) {
+                    resetTextOutDate();
+                    return;
                 }
-                console.log('minute', minute);
-                $scope.selectedMinute = angular.copy(minute);
-                $scope.setDuration();
+                var hour = parseInt($scope.outDateText.substring(0, $scope.outDateText.indexOf(":")));
+                var minute = parseInt($scope.outDateText.substring($scope.outDateText.indexOf(":") + 1, $scope.outDateText.indexOf(":") + 3));
+                if (isNaN(hour)) hour = 0;
+                if (isNaN(minute)) minute = 0;
+                $scope.outDate.hour = hour;
+                $scope.outDate.minute = minute;
+                setQuantity();
             }
-            $scope.setDuration();
            
-
+              
         }]);
 
 

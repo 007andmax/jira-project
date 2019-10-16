@@ -1199,6 +1199,7 @@ console.log('find');
             }
           };
           function getQuantity(start, end) {
+            console.log('getQuantity');
             console.log(start, end);
             start = new Date(start);
             end = new Date(end);
