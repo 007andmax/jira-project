@@ -1175,7 +1175,8 @@
                 src="/ng2/assets/img/taxes.svg" alt="Taxes" /></span>Taxes</a>
         </li>
 
-        <li ng-class="{active: $state.includes('permission-manage-component')}">
+        <li ng-class="{active: $state.includes('permission-manage-component')}" 
+        ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_PERMISSIONS_SETTINGS')">
           <a  ng-click="stateGo($event, 'permission-manage-component')"><span class="nav-ico"><img
                 src="/ng2/assets/img/permission-management.svg" alt="Permission" /></span>Permission Management</a>
         </li>

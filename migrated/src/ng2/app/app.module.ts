@@ -71,6 +71,9 @@ import { NgxLoadingModule,ngxLoadingAnimationTypes  } from 'ngx-loading';
 import { SelectDropDownModule } from 'ngx-select-dropdown';
 import { IncomingEmailComponent } from './components/setting/email-setting/incoming-email/incoming-email.component';
 import { OutgoingEmailComponent } from './components/setting/email-setting/outgoing-email/outgoing-email.component';
+import { TicketSettingsComponent } from './components/setting/invoice-tickets/ticket-settings/ticket-settings.component';
+import { InvoiceSettingsComponent } from './components/setting/invoice-tickets/invoice-settings/invoice-settings.component';
+import { QuotesSettingsComponent } from './components/setting/invoice-tickets/quotes-settings/quotes-settings.component';
 
 declare var angular: any;
 declare var $: any;
@@ -201,6 +204,9 @@ angular
     TagPipe,
     IncomingEmailComponent,
     OutgoingEmailComponent,
+    TicketSettingsComponent,
+    InvoiceSettingsComponent,
+    QuotesSettingsComponent,
   ],
   imports: [
     BrowserModule,

@@ -6,158 +6,17 @@
     </div>
     <tabset>
       <!-- Ticket Settings -->
-        <tab heading="Ticket Settings" id="tab1">
-          <div class="cmn-area in-ticks">
-              <form method="POST" action="">
-                  <div class="f-row">
-                      <div class="f-col col-33">
-                          <label>Starting ticket number</label>
-                          <div class="form-row">
-                             <input type="text" class="form-input" placeholder="Enter Starting ticket number" value="Starting ticket number"/>
-                          </div>
-                      </div>
-                      <div class="f-col col-50">
-                          <label>Outliers Time</label>
-                          <div class="form-row">
-                          <div class="input-number">
-                              {{ log }} <span>Hours</span>
-                              <div class="inc-btns">
-                                <a href="javascript:;" class="plus" (click)="increaseValue()">+</a>
-                                <a href="javascript:;" class="minus" (click)="decreaseValue()">-</a>
-                              </div>
-                            </div>
-                          </div>
-                      </div>
-                      <div class="f-col col-33">
-                          <label>Timepicker type</label>
-                          <div class="form-row">
-                            <select class="cmn-select form-input">
-                              <option>Start-End time picker</option>
-                              <option>Start-End time picker</option>
-                              <option>Start-End time picker</option>
-                            </select>
-                          </div>
-                      </div>
-                      <div class="f-col col-33">
-                          <label> Tax ID</label>
-                          <div class="form-row">
-                             <input type="text" class="form-input" placeholder="Enter Tax Id" value="1344450"/>
-                          </div>
-                      </div>
-                      <div class="f-col col-33">
-                          <label> Tax ID description</label>
-                          <div class="form-row">
-                             <input type="text" class="form-input" placeholder="Enter Tax ID description" value="#8890902"/>
-                          </div>
-                      </div>
-                      <div class="f-col col-100">
-                          <label> Memo of invoice</label>
-                          <div class="form-row">
-                             <textarea class="form-input" placeholder="Enter memo of invoice">Glad to work with you !</textarea>
-                          </div>
-                      </div>
-                  </div>
-                  <input type="submit" class="btn btn-primary" value="Save Changes" />
-              </form>
-          </div>
-        </tab>
-        <!-- Invoice Settings -->
-        <tab heading="Invoice Settings">
-            <div class="cmn-area invoice">
-                <form method="POST" action="">
-                    <div class="f-row">
-                        <div class="f-col col-33">
-                            <label>Starting ticket number</label>
-                            <div class="form-row">
-                               <input type="text" class="form-input" placeholder="Enter Starting ticket number" value="1001"/>
-                            </div>
-                        </div>
-                        <div class="f-col col-50">
-                            <label>Outliers Time</label>
-                            <div class="form-row">
-                              <div class="input-select">
-                                  <select class="cmn-select form-input">
-                                      <option>15 days</option>
-                                      <option>16 days</option>
-                                      <option>17 days</option>
-                                    </select>
-                              </div>
-                            </div>
-                        </div>
-                        <div class="f-col col-100">
-                            <span class="cmn-checkbox">
-                                <input type="checkbox" id="enable" />
-                                <label for="enable">Enables to set primary invoice contacts</label>
-                            </span>
-                        </div>
-                        <div class="f-col col-50">
-                            <label>Your Full name</label>
-                            <div class="form-row">
-                               <input type="text" class="form-input" placeholder="Enter Your Full name" value="Miguel Burgess"/>
-                            </div>
-                        </div>
-                        <div class="f-col col-50">
-                            <label>Email Address</label>
-                            <div class="form-row">
-                               <input type="email" class="form-input" placeholder="Enter Your Email Address" value="Miguelburgess@activetek.net"/>
-                            </div>
-                        </div>
-                        <div class="f-col col-50">
-                            <label>Role</label>
-                            <div class="form-row">
-                               <input type="text" class="form-input" placeholder="Enter Your Role" value="Software Engineer"/>
-                            </div>
-                        </div>
-                        <div class="f-col col-50">
-                            <label>Primary Phone Number <a href="javascript:;" class="static-link">+ Add Phone</a></label>
-                            <div class="form-row primary-phone">
-                               <input type="text" class="form-input" placeholder="Primary Phone Number" value="774-792-4426"/>
-                               <select class="cmn-select form-input">
-                                 <option>mobile</option>
-                                 <option>office</option>
-                                 <option>fax</option>
-                               </select>
-                            </div>
-                        </div>
-                    </div>
-                    <input type="submit" class="btn btn-primary" value="Save Changes" />
-                </form>
-            </div>
-        </tab>
-        <!-- Quotes Settings  -->
-        <tab heading="Quotes settings">
-            <div class="cmn-area invoice">
-                <form method="POST" action="">
-                    <div class="f-row">
-                        <div class="f-col col-33">
-                            <label>Starting ticket number</label>
-                            <div class="form-row">
-                               <input type="text" class="form-input" placeholder="Enter Starting ticket number" value="1001"/>
-                            </div>
-                        </div>
-                        <div class="f-col col-50">
-                            <label>Default Quotes terms</label>
-                            <div class="form-row">
-                              <div class="input-select">
-                                  <select class="cmn-select form-input">
-                                      <option>15 days</option>
-                                      <option>16 days</option>
-                                      <option>17 days</option>
-                                    </select>
-                              </div>
-                            </div>
-                        </div>
-                        <div class="f-col col-100">
-                            <label>Memo of Quote</label>
-                            <div class="form-row">
-                                <textarea class="form-input" placeholder="Enter memo of quote" >Glad to work with you !</textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <input type="submit" class="btn btn-primary" value="Save Changes" />
-                </form>
-            </div>
-        </tab>
-      </tabset>
+      <tab heading="Ticket Settings" id="tab1">
+        <app-ticket-settings></app-ticket-settings>
+      </tab>
+      <!-- Invoice Settings -->
+      <tab heading="Invoice Settings">
+        <app-invoice-settings></app-invoice-settings>
+      </tab>
+      <!-- Quotes Settings  -->
+      <tab heading="Quotes settings">
+        <app-quotes-settings></app-quotes-settings>
+      </tab>
+    </tabset>
   </div>
 </div>

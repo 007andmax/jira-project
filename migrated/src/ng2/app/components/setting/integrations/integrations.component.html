@@ -1,3 +1,4 @@
+<ngx-loading [show]="loading"></ngx-loading>
 <!-- Middle Wrapper  -->
 <div class="page-container integration">
   <div class="page-insider">
@@ -7,7 +8,7 @@
     <div class="cmn-area int-area">
         <div class="insructions">
             <span class="switch">
-                <input type="checkbox" id="switch" (change)="show = !show" ng-model="show" />
+                <input type="checkbox" id="switch" (change)="turnOnCCPayment($event)" [(ngModel)]="show" />
                 <label for="switch"></label>
             </span>
             <div class="right-info">
@@ -45,30 +46,30 @@
                    <div class="f-col col-50">
                      <label>Paypal Client ID</label>
                      <div class="form-row">
-                        <input type="text" class="form-input" placeholder="Enter Paypal Client ID" />
+                        <input type="text" [(ngModel)]="paymentInfo.paypalClientId" name="paypalClientId" class="form-input" placeholder="Enter Paypal Client ID" />
                      </div>
                    </div>
                    <div class="f-col col-50">
                       <label>Paypal Secret ID</label>
                       <div class="form-row">
-                         <input type="text" class="form-input" placeholder="Enter Paypal Secret ID" />
+                         <input type="text" class="form-input" [(ngModel)]="paymentInfo.paypalSecretId" name="paypalSecretId" placeholder="Enter Paypal Secret ID" />
                       </div>
                     </div>
                     <div class="logo-area"><img src="/ng2/assets/img/stripe.svg" alt="stripe"/></div>
                     <div class="f-col col-50">
                         <label>Stripe Public Key</label>
                         <div class="form-row">
-                           <input type="text" class="form-input" placeholder="Enter Stripe Public Key" />
+                           <input type="text" class="form-input" [(ngModel)]="paymentInfo.stripePublicKey" name="stripePublicKey" placeholder="Enter Stripe Public Key" />
                         </div>
                       </div>
                       <div class="f-col col-50">
                          <label>Stripe Secret Key</label>
                          <div class="form-row">
-                            <input type="text" class="form-input" placeholder="Enter Stripe Secret Key" />
+                            <input type="text" class="form-input" [(ngModel)]="paymentInfo.stripeSecretKey" name="stripeSecretKey" placeholder="Enter Stripe Secret Key" />
                          </div>
                        </div>
                        <div class="f-col col-100 btn-row">
-                         <input type="submit" class="btn btn-primary" value="Save Changes" />
+                         <input type="submit" class="btn btn-primary" (click)="changePaymentInfo()" value="Save Changes" />
                        </div>
                 </div>
               </form>

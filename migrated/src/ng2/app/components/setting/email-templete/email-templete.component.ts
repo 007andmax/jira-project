@@ -1,37 +1,39 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
-import { BsModalRef, BsModalService } from "ngx-bootstrap";
-import { EmailTempleteService } from "./email-templete.service";
-import { map } from "rxjs/operators";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { EmailTempleteService } from './email-templete.service';
+import { map, catchError } from 'rxjs/operators';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { of } from 'rxjs';
 
 @Component({
-  selector: "app-email-templete",
-  templateUrl: "./email-templete.component.html",
-  styleUrls: ["./email-templete.component.scss"]
+  selector: 'app-email-templete',
+  templateUrl: './email-templete.component.html',
+  styleUrls: ['./email-templete.component.scss']
 })
 export class EmailTempleteComponent implements OnInit {
+  loading = false;
+  submitted = false;
+  edit = false;
+
   ticketTemplates: any;
   agentTemplates: any;
   invoiceTemplates: any;
-  currentOpenTemplate = "";
+  currentOpenTemplate = '';
 
-  templatesData = { subject: {}, body: {} };
   keywords: any[];
-  loading = false;
   templeteInfo: any;
   emailPreviewHtml: any;
   gettingEmailTemplatePreview: boolean;
 
   emailPages: any;
   templeteForm: FormGroup;
-  submitted = false;
-  edit = false;
+  templatesData = { subject: {}, body: {} };
   openEmailTemplate: string;
   modalRef: BsModalRef;
-  @ViewChild("subject") subject: ElementRef;
-  @ViewChild("body") body: ElementRef;
+  @ViewChild('subject') subject: ElementRef;
+  @ViewChild('body') body: ElementRef;
   public show = false;
-  public buttonName: any = "Show Keyword Description + ";
+  public buttonName: any = 'Show Keyword Description + ';
 
   constructor(
     private modalService: BsModalService,
@@ -46,15 +48,15 @@ export class EmailTempleteComponent implements OnInit {
   openModal(template) {
     this.modalRef = this.modalService.show(
       template,
-      Object.assign({}, { class: "manage-tags modal-dialog-centered" })
+      Object.assign({}, { class: 'manage-tags modal-dialog-centered' })
     );
   }
 
   ngOnInit() {
     this.keywords = [];
     this.templeteForm = this.formBuilder.group({
-      subject: ["", Validators.required],
-      body: ["", Validators.required]
+      subject: ['', Validators.required],
+      body: ['', Validators.required]
     });
     this.getEmailPages();
   }
@@ -65,11 +67,17 @@ export class EmailTempleteComponent implements OnInit {
   }
 
   getEmailPages() {
+    this.loading = true;
     this.emailService
       .getEmailPages()
       .pipe(
         map(res => {
+          this.loading = false;
           this.emailPages = res;
+        }),
+        catchError(err => {
+          this.loading = false;
+          return of('');
         })
       )
       .subscribe();
@@ -92,19 +100,18 @@ export class EmailTempleteComponent implements OnInit {
             this.templatesData.body = res.body;
             this.templatesData.subject = res.subject;
             this.keywords = res.keywords;
-            
-            this.templeteForm.controls["subject"].clearValidators();
+
+            this.templeteForm.controls['subject'].clearValidators();
 
             if (this.templeteInfo.requiredKeywordsRegExp) {
               const pattern = this.templeteInfo.requiredKeywordsRegExp;
-              this.templeteForm.controls["subject"].setValidators([
+              this.templeteForm.controls['subject'].setValidators([
                 Validators.required,
                 Validators.pattern(pattern)
               ]);
-              this.templeteForm.controls["subject"].updateValueAndValidity();
+              this.templeteForm.controls['subject'].updateValueAndValidity();
             } else {
-              
-              this.templeteForm.controls["subject"].setValidators([
+              this.templeteForm.controls['subject'].setValidators([
                 Validators.required
               ]);
             }
@@ -131,7 +138,7 @@ export class EmailTempleteComponent implements OnInit {
   }
 
   insertDataVarables(myField, myValue) {
-    if (myField.selectionStart || myField.selectionStart == "0") {
+    if (myField.selectionStart || myField.selectionStart == '0') {
       var startPos = myField.selectionStart;
       var endPos = myField.selectionEnd;
       myField.value =
@@ -144,11 +151,11 @@ export class EmailTempleteComponent implements OnInit {
     } else {
       myField.value += myValue;
     }
-    if (myField.name === "subject") {
+    if (myField.name === 'subject') {
       this.templeteForm.patchValue({
         subject: myField.value
       });
-    } else if (myField.name === "body") {
+    } else if (myField.name === 'body') {
       this.templeteForm.patchValue({
         body: myField.value
       });
@@ -206,7 +213,7 @@ export class EmailTempleteComponent implements OnInit {
           this.templeteForm.reset();
         })
       )
-      .subscribe(()=>{
+      .subscribe(() => {
         this.getEmailPages();
       });
   }
@@ -230,7 +237,7 @@ export class EmailTempleteComponent implements OnInit {
           }
         })
       )
-      .subscribe(()=>{
+      .subscribe(() => {
         this.getEmailPages();
       });
   }
@@ -239,9 +246,9 @@ export class EmailTempleteComponent implements OnInit {
     this.show = !this.show;
 
     if (this.show) {
-      this.buttonName = "Hide Keyword Description - ";
+      this.buttonName = 'Hide Keyword Description - ';
     } else {
-      this.buttonName = "Show Keyword Description + ";
+      this.buttonName = 'Show Keyword Description + ';
     }
   }
 }

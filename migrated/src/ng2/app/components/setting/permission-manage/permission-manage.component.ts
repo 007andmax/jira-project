@@ -94,9 +94,10 @@ export class PermissionManageComponent implements OnInit {
           this.loading = false;
           this.roles = res;
         })
-        // catchError(err => {
-        //   throw err.message;
-        // })
+        ,catchError(err => {
+          this.loading = false;
+          throw err.message;
+        })
       )
       .subscribe();
   }
