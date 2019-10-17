@@ -74,6 +74,11 @@ import { OutgoingEmailComponent } from './components/setting/email-setting/outgo
 import { TicketSettingsComponent } from './components/setting/invoice-tickets/ticket-settings/ticket-settings.component';
 import { InvoiceSettingsComponent } from './components/setting/invoice-tickets/invoice-settings/invoice-settings.component';
 import { QuotesSettingsComponent } from './components/setting/invoice-tickets/quotes-settings/quotes-settings.component';
+import { Onlynumber } from './helpers/Onlynumber';
+import { CompanyComponent } from './components/setting/commission/company/company.component';
+import { ProductComponent } from './components/setting/commission/product/product.component';
+import { ContractComponent } from './components/setting/commission/contract/contract.component';
+import { ServiceComponent } from './components/setting/commission/service/service.component';
 
 declare var angular: any;
 declare var $: any;
@@ -207,6 +212,11 @@ angular
     TicketSettingsComponent,
     InvoiceSettingsComponent,
     QuotesSettingsComponent,
+    Onlynumber,
+    CompanyComponent,
+    ProductComponent,
+    ContractComponent,
+    ServiceComponent
   ],
   imports: [
     BrowserModule,
@@ -223,11 +233,11 @@ angular
     ImageCropperModule,
     DataTablesModule,
     SelectDropDownModule,
-    ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: "never" }),
     TabsModule.forRoot(),
     SidebarModule.forRoot(),
     ModalModule.forRoot(),
     TypeaheadModule.forRoot(),
+    ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: "never" }),
     AgmCoreModule.forRoot({
       apiKey: "AIzaSyAbP4DFpz4f9YcXMWUjdkOdyArX2peNt8s"
     }),

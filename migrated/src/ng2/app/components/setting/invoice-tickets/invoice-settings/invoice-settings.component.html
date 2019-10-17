@@ -1,62 +1,197 @@
 <div class="page-insider invoice-ticket">
-<div class="cmn-area invoice">
-    <form method="POST" action="">
-        <div class="f-row">
-            <div class="f-col col-33">
-                <label>Starting ticket number</label>
-                <div class="form-row">
-                   <input type="text" class="form-input" placeholder="Enter Starting ticket number" value="1001"/>
-                </div>
+  <div class="cmn-area invoice">
+    <form [formGroup]="invoiceForm" (ngSubmit)="onSubmit()">
+      <div class="f-row">
+        <div class="f-col col-33">
+          <label *ngIf="!submitted || !f.invoiceCount.errors"
+            >Starting ticket number</label
+          >
+          <div
+            *ngIf="submitted && f.invoiceCount.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f.invoiceCount.errors.required">
+              Ticket Number is required
             </div>
-            <div class="f-col col-50">
-                <label>Outliers Time</label>
-                <div class="form-row">
-                  <div class="input-select">
-                      <select class="cmn-select form-input">
-                          <option>15 days</option>
-                          <option>16 days</option>
-                          <option>17 days</option>
-                        </select>
-                  </div>
-                </div>
-            </div>
-            <div class="f-col col-100">
-                <span class="cmn-checkbox">
-                    <input type="checkbox" id="enable" />
-                    <label for="enable">Enables to set primary invoice contacts</label>
-                </span>
-            </div>
-            <div class="f-col col-50">
-                <label>Your Full name</label>
-                <div class="form-row">
-                   <input type="text" class="form-input" placeholder="Enter Your Full name" value="Miguel Burgess"/>
-                </div>
-            </div>
-            <div class="f-col col-50">
-                <label>Email Address</label>
-                <div class="form-row">
-                   <input type="email" class="form-input" placeholder="Enter Your Email Address" value="Miguelburgess@activetek.net"/>
-                </div>
-            </div>
-            <div class="f-col col-50">
-                <label>Role</label>
-                <div class="form-row">
-                   <input type="text" class="form-input" placeholder="Enter Your Role" value="Software Engineer"/>
-                </div>
-            </div>
-            <div class="f-col col-50">
-                <label>Primary Phone Number <a href="javascript:;" class="static-link">+ Add Phone</a></label>
-                <div class="form-row primary-phone">
-                   <input type="text" class="form-input" placeholder="Primary Phone Number" value="774-792-4426"/>
-                   <select class="cmn-select form-input">
-                     <option>mobile</option>
-                     <option>office</option>
-                     <option>fax</option>
-                   </select>
-                </div>
-            </div>
+          </div>
+          <div class="form-row">
+            <input
+              type="text"
+              class="form-input"
+              numbersOnly
+              formControlName="invoiceCount"
+              [ngClass]="{ 'is-invalid': submitted && f.invoiceCount.errors }"
+              placeholder="Enter Starting ticket number"
+            />
+          </div>
         </div>
-        <input type="submit" class="btn btn-primary" value="Save Changes" />
+        <div class="f-col col-50">
+          <label>Default invoice terms</label>
+          <div class="form-row">
+            <div class="input-select">
+              <select
+                class="cmn-select form-input"
+                formControlName="invoiceTerms"
+              >
+                <option>15 days</option>
+                <option>16 days</option>
+                <option>17 days</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="f-col col-100">
+          <span class="cmn-checkbox">
+            <input type="checkbox" id="enable" formControlName="enabled" />
+            <label for="enable">Enables to set primary invoice contacts</label>
+          </span>
+        </div>
+        <div class="f-col col-50">
+          <label *ngIf="!submitted || !f.firstName.errors">First name</label>
+          <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+            <div *ngIf="f.firstName.errors.required">
+              First name is required
+            </div>
+            <div *ngIf="f.firstName.errors.minLength">
+              First name is too small.
+            </div>
+            <div *ngIf="f.firstName.errors.maxLength">
+              First name is too large.
+            </div>
+          </div>
+          <div class="form-row">
+            <input
+              type="text"
+              class="form-input"
+              formControlName="firstName"
+              placeholder="Enter Your Full name"
+              value="Miguel Burgess"
+            />
+          </div>
+        </div>
+        <div class="f-col col-50">
+          <label *ngIf="!submitted || !f.lastName.errors">Last name</label>
+          <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+            <div *ngIf="f.lastName.errors.required">
+              Last name is required
+            </div>
+            <div *ngIf="f.lastName.errors.minLength">
+              Last name is too small.
+            </div>
+            <div *ngIf="f.lastName.errors.maxLength">
+              Last name is too large.
+            </div>
+          </div>
+          <div class="form-row">
+            <input
+              type="text"
+              class="form-input"
+              formControlName="lastName"
+              placeholder="Enter Your Full name"
+              value="Miguel Burgess"
+            />
+          </div>
+        </div>
+        <div class="f-col col-50">
+          <label *ngIf="!submitted || !f.email.errors">Email Address</label>
+          <div
+          *ngIf="submitted && f.email.errors"
+          class="invalid-feedback"
+        >
+          <div *ngIf="f.email.errors.required">Email is required</div>
+          <div *ngIf="f.email.errors.pattern">
+            Email must be a valid email address
+          </div>
+        </div>
+          <div class="form-row">
+            <input
+              type="email"
+              class="form-input"
+              formControlName="email"
+              placeholder="Enter Your Email Address"
+              value="Miguelburgess@activetek.net"
+            />
+          </div>
+        </div>
+        <div class="f-col col-50">
+          <label>Role</label>
+          <div class="form-row">
+            <input
+              type="text"
+              class="form-input"
+              formControlName="designation"
+              placeholder="Enter Your Role"
+              value="Software Engineer"
+            />
+          </div>
+        </div>
+        <div class="f-col col-50">
+          <label
+          *ngIf="!submitted || !f.primaryPhone.errors"
+            >Primary Phone Number
+            <a
+              href="javascript:;"
+              *ngIf="!isAddPhone"
+              class="static-link"
+              (click)="onAddPhone()"
+              >+ Add Phone</a
+            >
+          </label>
+          <div
+          *ngIf="submitted && f.primaryPhone.errors"
+          class="invalid-feedback"
+        >
+          <div *ngIf="f.primaryPhone.errors.required">primaryPhone is required</div>
+          <div *ngIf="f.primaryPhone.errors.pattern">
+                primaryPhone must be a valid number
+          </div>
+        </div>
+          <div class="form-row primary-phone">
+            <input
+              type="text"
+              class="form-input"
+              formControlName="primaryPhone"
+              placeholder="Primary Phone Number"
+            />
+            <select
+              class="cmn-select form-input"
+              formControlName="primaryPhoneType"
+            >
+              <option value="MOBILE">mobile</option>
+              <option value="OFFICE">office</option>
+              <option value="FAX">fax</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="f-col col-50" *ngIf="isAddPhone">
+          <label>
+            Secondary Phone Number
+            <a href="javascript:;" class="static-link" (click)="onAddPhone()"
+              >Remove</a
+            >
+          </label>
+
+          <div class="form-row primary-phone">
+            <input
+              type="text"
+              class="form-input"
+              formControlName="secondaryPhone"
+              placeholder="Secondary Phone Number"
+              formControlName="secondaryPhone"
+            />
+            <select
+              class="cmn-select form-input"
+              formControlName="secondaryPhoneType"
+            >
+              <option value="MOBILE">mobile</option>
+              <option value="OFFICE">office</option>
+              <option value="FAX">fax</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <input type="submit" class="btn btn-primary" value="Save Changes" />
     </form>
-</div>
+  </div>
 </div>

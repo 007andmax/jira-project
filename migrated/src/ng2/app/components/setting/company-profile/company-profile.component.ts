@@ -110,7 +110,6 @@ export class CompanyProfileComponent implements OnInit {
       primaryPhone: new FormControl(""),
       primaryPhoneType: new FormControl(""),
       secondaryPhone: new FormControl(""),
-      secondryPhone: new FormControl(""),
       secondaryPhoneType: new FormControl(""),
       suiteNumber: new FormControl(""),
       address: new FormControl(""),

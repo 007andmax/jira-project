@@ -1,55 +1,132 @@
+<ngx-loading [show]="loading"></ngx-loading>
 <div class="page-insider invoice-ticket">
-<div class="cmn-area in-ticks">
-    <form method="POST" action="">
-        <div class="f-row">
-            <div class="f-col col-33">
-                <label>Starting ticket number</label>
-                <div class="form-row">
-                   <input type="text" class="form-input" placeholder="Enter Starting ticket number" value="Starting ticket number"/>
-                </div>
+  <div class="cmn-area in-ticks">
+    <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
+      <div class="f-row">
+        <div class="f-col col-33">
+          <label *ngIf="!submitted || !f.ticketCount.errors"
+            >Starting ticket number</label
+          >
+          <div
+            *ngIf="submitted && f.ticketCount.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f.ticketCount.errors.required">
+              Starting ticket number is required
             </div>
-            <div class="f-col col-50">
-                <label>Outliers Time</label>
-                <div class="form-row">
-                <div class="input-number">
-                    {{ log }} <span>Hours</span>
-                    <div class="inc-btns">
-                      <a href="javascript:;" class="plus" (click)="increaseValue()">+</a>
-                      <a href="javascript:;" class="minus" (click)="decreaseValue()">-</a>
-                    </div>
-                  </div>
-                </div>
-            </div>
-            <div class="f-col col-33">
-                <label>Timepicker type</label>
-                <div class="form-row">
-                  <select class="cmn-select form-input">
-                    <option>Start-End time picker</option>
-                    <option>Start-End time picker</option>
-                    <option>Start-End time picker</option>
-                  </select>
-                </div>
-            </div>
-            <div class="f-col col-33">
-                <label> Tax ID</label>
-                <div class="form-row">
-                   <input type="text" class="form-input" placeholder="Enter Tax Id" value="1344450"/>
-                </div>
-            </div>
-            <div class="f-col col-33">
-                <label> Tax ID description</label>
-                <div class="form-row">
-                   <input type="text" class="form-input" placeholder="Enter Tax ID description" value="#8890902"/>
-                </div>
-            </div>
-            <div class="f-col col-100">
-                <label> Memo of invoice</label>
-                <div class="form-row">
-                   <textarea class="form-input" placeholder="Enter memo of invoice">Glad to work with you !</textarea>
-                </div>
-            </div>
+          </div>
+          <label class="control-label" *ngIf="used">
+                Already used. Next free is
+                <span class="free-number-link">
+                  {{ ticketConfig.nextValid }}</span>.
+              </label>
+          <div class="form-row">
+            <input
+              type="text"
+              numbersOnly
+              formControlName="ticketCount"
+              class="form-input"
+              placeholder="Enter Starting ticket number"
+              value="Starting ticket number"
+            />
+          </div>
         </div>
-        <input type="submit" class="btn btn-primary" value="Save Changes" />
+        <div class="f-col col-50">
+          <label *ngIf="!submitted || !f.outliersTime.errors"
+            >Outliers Time</label
+          >
+          <div
+            *ngIf="submitted && f.outliersTime.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f.outliersTime.errors.required">
+              Starting ticket number is required
+            </div>
+          </div>
+          <div class="form-row">
+            <input
+              type="number"
+              formControlName="outliersTime"
+              class="input-number"
+              min="1"
+            />
+          </div>
+        </div>
+        <div class="f-col col-33">
+          <label>Timepicker type</label>
+          <div class="form-row">
+            <select
+              class="cmn-select form-input"
+              formControlName="timepickerType"
+            >
+              <!-- <li ng-click="setTimePickerValue('TIME_PICKER')">
+                Start-End time picker
+              </li>
+              <li ng-click="setTimePickerValue('DURATION_PICKER')">
+                Duration picker
+              </li> -->
+              <option value="TIME_PICKER">Start-End time picker</option>
+              <option value="DURATION_PICKER">Duration picker</option>
+            </select>
+          </div>
+        </div>
+        <div class="f-col col-33">
+          <label *ngIf="!submitted || !f.taxId.errors"> Tax ID</label>
+          <div *ngIf="submitted && f.taxId.errors" class="invalid-feedback">
+            <div *ngIf="f.taxId.errors.required">
+              TaxId is required
+            </div>
+            <div *ngIf="f.taxId.errors.pattern">
+              Taxid is not valid
+            </div>
+          </div>
+          <div class="form-row">
+            <input
+              type="text"
+              class="form-input"
+              formControlName="taxId"
+              placeholder="Enter Tax Id"
+            />
+          </div>
+        </div>
+        <div class="f-col col-33">
+          <label *ngIf="!submitted || !f.taxIdDescription.errors">
+            Tax ID description</label
+          >
+          <div
+            *ngIf="submitted && f.taxIdDescription.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f.taxIdDescription.errors.required">
+              Tax ID description is required
+            </div>
+            <div *ngIf="f.taxIdDescription.errors.pattern">
+              Tax ID description is not valid
+            </div>
+          </div>
+          <div class="form-row">
+            <input
+              type="text"
+              class="form-input"
+              formControlName="taxIdDescription"
+              placeholder="Enter Tax ID description"
+            />
+          </div>
+        </div>
+        <div class="f-col col-100">
+          <label> Memo of invoice</label>
+          <div class="form-row">
+            <textarea
+              class="form-input"
+              formControlName="conditions"
+              placeholder="Enter memo of invoice"
+            >
+Glad to work with you !</textarea
+            >
+          </div>
+        </div>
+      </div>
+      <input type="submit" class="btn btn-primary" value="Save Changes" />
     </form>
-</div>
+  </div>
 </div>

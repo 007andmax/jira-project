@@ -4,7 +4,6 @@ import { map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 
-
 @Component({
   selector: 'app-integrations',
   templateUrl: './integrations.component.html',
@@ -39,40 +38,31 @@ export class IntegrationsComponent implements OnInit {
 
   getSetting() {
     this.loading = true;
-    this.integrationsService
-      .settings()
-      .pipe(
-        map(res => {
-          this.loading = false;
-          this.paymentInfo = res;
-          console.log(this.paymentInfo);
-        }),
-        catchError(err => {
-          this.loading = false;
-          return of(`Bad Request, ${err}`);
-        })
-      )
-      .subscribe();
+    this.integrationsService.settings().subscribe(
+      (res: any) => {
+        this.loading = false;
+        this.paymentInfo = res;
+      },
+      error => {
+        this.loading = false;
+      }
+    );
   }
 
   savePaymentInfo() {
     this.loading = true;
 
-    this.integrationsService
-      .savePaymentInfo(this.paymentInfo)
-      .pipe(
-        map(res => {
-          this.loading = false;
-          this.paymentInfo = res;
-          this.toastrService.success('Payment Info changed successfully.');
-        }),
-        catchError(err => {
-          this.loading = false;
-          this.toastrService.error(`Error occured,  ${err}`);
-          return of(`Bad Request, ${err}`);
-        })
-      )
-      .subscribe();
+    this.integrationsService.savePaymentInfo(this.paymentInfo).subscribe(
+      (res: any) => {
+        this.loading = false;
+        this.paymentInfo = res;
+        this.toastrService.success('Payment Info changed successfully.');
+      },
+      error => {
+        this.loading = false;
+        this.toastrService.error(`Error occured,  ${error}`);
+      }
+    );
   }
 
   changePaymentInfo() {

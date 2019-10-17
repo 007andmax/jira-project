@@ -1,18 +1,11 @@
+<ngx-loading [show]="loading"></ngx-loading>
 <!-- Middle Wrapper  -->
 <div class="page-container">
   <div class="page-insider company-profile">
     <div class="heading">
       <h1>Company Profile</h1>
     </div>
-    <ngx-loading
-      [show]="loading"
-      [config]="{
-        primaryColour: primaryColour,
-        secondaryColour: secondaryColour,
-        tertiaryColour: primaryColour,
-        backdropBorderRadius: '3px'
-      }"
-    ></ngx-loading>
+    
     <tabset>
       <!-- Profile -->
       <tab heading="Profile" id="tab1">
@@ -175,6 +168,7 @@
                   >Primary Phone Number
                   <a
                     href="javascript:;"
+                    *ngIf="!isAddPhone"
                     (click)="onAddPhone()"
                     class="static-link"
                     >+ Add Phone</a
