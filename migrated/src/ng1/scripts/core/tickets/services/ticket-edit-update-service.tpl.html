@@ -115,6 +115,10 @@
     -->
     </div>
     <div class="col-md-1"
+    ng-if="serviceExpenseDurationPresentation !=='DURATION_PICKER'">
+<p>{{durationText}}</p>
+    </div>
+    <div class="col-md-1"
          ng-if="serviceExpenseDurationPresentation ==='DURATION_PICKER'">
          <div
          ng-include="'/ng1/scripts/core/duration/duration.tpl.html'"></div>

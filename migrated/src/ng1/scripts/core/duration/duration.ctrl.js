@@ -107,6 +107,7 @@
                     $rootScope.saveStartDate = new Date();
                     $rootScope.saveEndDate = new Date($rootScope.saveStartDate.getTime() + $scope.quantity*3600000)
                 } 
+               
               //  console.log('editService.quantity',$scope.editService.quantity);
             }
             $scope.toggleDropdown = function ($event) {

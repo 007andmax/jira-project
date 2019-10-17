@@ -10,7 +10,7 @@
 
           $scope.editService = $scope.service.staticCopy();
           $scope.companyServices = ServicesService.getAllByCompany($scope, $scope.company.id);
-
+          $scope.durationText = "";
           $scope.editService.date = $filter('date')($scope.editService.date, 'd MMM yyyy');
           var editDateStart = new Date($scope.service.durationStart);
           var editDateEnd = new Date($scope.service.durationEnd );
@@ -124,6 +124,7 @@
           }
 
           $scope.$on('changeQuantity', function (event, newValue) {
+            console.log('changeQuantity');
             $rootScope.saveForStartDate = new Date($rootScope.saveForEndDate.getTime() - newValue*3600000);
 
             $rootScope.quantityEditTime = {};
@@ -254,6 +255,17 @@
             }
           }
 
+          $scope.resetDurationWhenTimePicker = function () {
+            var timeInMinutes = $scope.editService.quantity * 60,
+            hours = Math.floor(timeInMinutes / 60),
+            minutes = Math.round(timeInMinutes - (hours * 60));
+           
+
+            var hourText = ((hours < 10) ? "0" + hours : hours);
+            var minuteText = ((minutes < 10) ? "0" + minutes : minutes);
+            $scope.durationText = hourText + ":" + minuteText;
+          }
+          $scope.resetDurationWhenTimePicker();
           //TimePicker end
 
           $scope.saveUpdateService = function (form) {
@@ -303,7 +315,7 @@
                 endDate.setHours($rootScope.saveEndDate.hour)
               }
               endDate.setMinutes($rootScope.saveEndDate.minute);
-              console.log('service.description',$scope.service.description);
+              console.log('$rootScope.saveForStartDate',$rootScope.saveForStartDate);
               console.log('$scope.editService',$scope.editService);
               TicketsService.updateExpenseInTicketUpdate({
 

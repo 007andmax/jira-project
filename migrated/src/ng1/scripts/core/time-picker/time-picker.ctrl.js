@@ -35,6 +35,16 @@
                     valueForBack: 'FIFTEEN_MINUTES'
                 }
             ];
+            function onInitTimeIn() {
+                var date = new Date();
+                var hour = date.getHours();
+                $scope.inDate.hour = (hour > 13) ? hour - 12 : hour;
+                $scope.inDate.minute = date.getMinutes();
+                $scope.inDate.type = (hour > 13) ? "am" : "pm";
+                resetTextInDate();
+
+            }
+            onInitTimeIn();
             $scope.toggleOutDateDropdown = function ($event) {
                 $event.preventDefault();
                 $event.stopPropagation();
@@ -87,7 +97,8 @@
 
                 $scope.quantity = outHour + ((outMinute) ? (outMinute / 60) : 0);
                 if ($scope.editService && $scope.editService.quantity) $scope.editService.quantity = $scope.quantity;
-                if ($scope.editService)  {
+                console.log('$scope.editService.quantity',$scope.editService.quantity);
+                if ($scope.editService || $scope.serviceExpense)  {
                     var newTimeStart = new Date();
                     newHours = newHours > 24 ? newHours - 24 : newHours;
                     newTimeStart.setHours(newHours);
@@ -96,11 +107,25 @@
                     var newTimeEnd = new Date();
                     newTimeEnd.setHours(newHoursEnd);
                     newTimeEnd.setMinutes(newMinutesEnd);
-                    $rootScope.saveStartDate = new Date(newTimeStart.getTime());
-                    $rootScope.saveEndDate = new Date(newTimeEnd.getTime());
+                    if ($scope.serviceExpense) {
+                        $rootScope.saveStartDate = new Date(newTimeStart.getTime());
+                        $rootScope.saveEndDate = new Date(newTimeEnd.getTime());
+                    }
+                    if ($scope.editService)
+                    {
+                        $rootScope.saveForStartDate = new Date(newTimeStart.getTime());
+                        $rootScope.saveForEndDate = new Date(newTimeEnd.getTime());
+                        $scope.resetDurationWhenTimePicker();
+                    }
+                    
                     console.log(' $rootScope.saveStartDate', $rootScope.saveStartDate);
                     console.log(' $rootScope.saveEndDate', $rootScope.saveEndDate);
                 } 
+               /* if ($scope.serviceExpense) {
+                    $scope.serviceExpense.quantity = $scope.quantity;
+                    $rootScope.saveStartDate = new Date();
+                    $rootScope.saveEndDate = new Date($rootScope.saveStartDate.getTime() + $scope.quantity*3600000)
+                } */
                 console.log('$scope.quantity',$scope.quantity)
               }
             function oninitHous() {
@@ -148,7 +173,7 @@
                 
             }
             $scope.selectTimeOut = function (hour, minute) {
-                $scope.outDate = { hour: hour.text, minute: minute.text, type: hour.type };
+                $scope.outDate = { hour: hour.value, minute: minute.value, type: hour.type };
                 $scope.openOutDate = !$scope.openOutDate;
                 resetTextOutDate();
                 setQuantity();
