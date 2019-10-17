@@ -4,7 +4,7 @@
 
     angular.module('quicktech.core.tickets').controller('quicktech.core.duration.userListCtrl',
         ['$scope', '$rootScope', 'CompaniesService', function ($scope, $rootScope, CompaniesService) {
-         
+         console.log('serviceExpense',$scope.serviceExpense);
            
             $scope.hours = [];
             $scope.minutes = [];
@@ -101,6 +101,12 @@
                 $scope.quantity = $scope.selectedHour + (($scope.selectedMinute) ? ($scope.selectedMinute / 60) : 0);
                
                 if ($scope.editService && $scope.editService.quantity) $scope.editService.quantity = $scope.quantity;
+              
+                if ($scope.serviceExpense) {
+                    $scope.serviceExpense.quantity = $scope.quantity;
+                    $rootScope.saveStartDate = new Date();
+                    $rootScope.saveEndDate = new Date($rootScope.saveStartDate.getTime() + $scope.quantity*3600000)
+                } 
               //  console.log('editService.quantity',$scope.editService.quantity);
             }
             $scope.toggleDropdown = function ($event) {

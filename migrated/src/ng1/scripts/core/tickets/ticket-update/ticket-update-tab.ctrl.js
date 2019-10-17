@@ -135,7 +135,7 @@
             $rootScope.saveEndDate = new Date($rootScope.saveStartDate.getTime() + newValue*3600000)
             $scope.quantity = newValue;
             $rootScope.quantityForSave = newValue;
-            console.log()
+            console.log('changeQuantity')
           });
 
        

@@ -1090,12 +1090,14 @@ console.log('find');
                   console.log('currentDate',currentDate);
                   var endDate = new Date();
                   if ($rootScope.serviceExpenseDurationPresentation === 'TIME_PICKER' || $rootScope.isMobileUpdateShown) {
+                    console.log('111111111111111111111');
                     $rootScope.saveStartDate = new Date($rootScope.saveStartDate);
                     $rootScope.saveEndDate = new Date($rootScope.saveEndDate);
                     ticketUpdateToSend.services[i].quantity = getQuantity($rootScope.saveStartDate, $rootScope.saveEndDate);
                     ticketUpdateToSend.services[i].durationStart = $rootScope.saveStartDate.getTime();
                     ticketUpdateToSend.services[i].durationEnd = $rootScope.saveEndDate.getTime();
                   }else {
+                    console.log('22222222222222222222222222222',$scope.ticketUpdate.services[i].quantity);
                     ticketUpdateToSend.services[i].quantity = $scope.ticketUpdate.services[i].quantity;
                     ticketUpdateToSend.services[i].durationStart = $rootScope.saveStartDate.getTime();
                     ticketUpdateToSend.services[i].durationEnd = $rootScope.saveEndDate.getTime() ;
