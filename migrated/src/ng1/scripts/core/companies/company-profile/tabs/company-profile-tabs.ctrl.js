@@ -60,7 +60,40 @@
             return $scope.company.clientType.toLowerCase() === type
           }
         };
+        function getCompanyDevices() {
+          console.log('getCompanyDevices');
+         // if (onGetDevicesComplated) return;
+      //    onGetDevicesComplated = true;
+          DevicesService.getAgentsAndReportsDataByCompanyId($scope, $scope.company.id, function (resp) {
+            if (resp && resp.length) {
+              //var agentsList = resp;
+              // $scope.agents = agentsList.sort(function (a, b) {
+              //   return a.hostName > b.hostName
+              // });
+              $scope.agents = resp;
 
+
+              var devicesIds = [];
+              $scope.agents.forEach(function (device) {
+                devicesIds.push(device.id);
+              });
+              $rootScope.deviceCredentialsRecived = false;
+              DevicesService.getDevicesCredentials(devicesIds, $scope, function (resp) {
+                if (resp) {
+                  $scope.devicesCredentials = resp;
+                  $rootScope.deviceCredentialsRecived = true;
+                }
+              })
+            }
+
+          });
+        }
+        console.log('DevicesService.onInitCompleted', $rootScope.onInitDevciesCompleted);
+        if ($rootScope.onInitDevciesCompleted) getCompanyDevices();
+        $rootScope.$on('onDevicesComplated', function (evt, val) {
+          console.log('onDevicesComplated');
+          getCompanyDevices();
+        });
         $scope.getUsersNumber = function () {
           var usersInfo = {
             number: '',

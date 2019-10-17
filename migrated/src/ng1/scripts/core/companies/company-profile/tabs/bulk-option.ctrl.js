@@ -7,7 +7,7 @@
       function ($scope, UsersService, SubscriptionsService, DevicesService, UserConfirmationsService, $uibModal, $rootScope) {
         console.log('$scope.company.id', $scope.company.id);
         var onGetDevicesComplated = false;
-        $rootScope.isAgentsRequestSending = true;
+       // $rootScope.isAgentsRequestSending = true;
         $scope.$watch('companyProfileHeader', function (val) {
 
           if (val.selectUsersIds.length > 0) {
@@ -37,7 +37,7 @@
         }, true);
 
 
-        function getCompanyDevices() {
+     /*   function getCompanyDevices() {
           console.log('getCompanyDevices');
           if (onGetDevicesComplated) return;
           onGetDevicesComplated = true;
@@ -70,7 +70,7 @@
         $rootScope.$on('onDevicesComplated', function (evt, val) {
           console.log('onDevicesComplated');
           getCompanyDevices();
-        });
+        });*/
         $scope.changeUserRole = function (role) {
           UsersService.changeUsersRoles($scope.selectUsersIds, role);
         };
