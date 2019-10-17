@@ -7,7 +7,7 @@
       function ($scope, UsersService, SubscriptionsService, DevicesService, UserConfirmationsService, $uibModal, $rootScope) {
         console.log('$scope.company.id', $scope.company.id);
         var onGetDevicesComplated = false;
-       // $rootScope.isAgentsRequestSending = true;
+      
         $scope.$watch('companyProfileHeader', function (val) {
 
           if (val.selectUsersIds.length > 0) {
