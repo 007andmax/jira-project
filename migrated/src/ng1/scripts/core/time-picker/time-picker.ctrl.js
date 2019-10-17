@@ -12,6 +12,9 @@
             $scope.outDate = { hour: 12, minute: 00, type: "am" };
             $scope.inDateText = "12:00 am";
             $scope.outDateText = "12:00 am";
+            $scope.serviceExpenseDurationPresentation = CompaniesService.getCurrentCompany().serviceExpenseDurationPresentation ?
+            CompaniesService.getCurrentCompany().serviceExpenseDurationPresentation
+              : 'DURATION_PICKER';
             $scope.durations = [];
             $scope.intervalsVariant = [
                 {
@@ -73,6 +76,18 @@
             if ($scope.editService) parseEditQuantity();
             $scope.timePickerInterval = setTimePickerInterval();
             function setQuantity() {
+                if ($scope.editService && $scope.editService.quantity && $scope.serviceExpenseDurationPresentation === 'DURATION_PICKER') {
+                    // $scope.editService.quantity = $scope.quantity;
+                    var quantityInTime = $scope.inDate.hour + (($scope.inDate.minute) ? ($scope.inDate.minute / 60) : 0);
+                    quantityInTime += $scope.editService.quantity;
+ 
+                    var timeInMinutes = quantityInTime * 60,
+                    hours = Math.floor(timeInMinutes / 60),
+                    minutes = Math.round(timeInMinutes - (hours * 60));
+                    $scope.outDate = { hour: (hours > 13) ? hours - 12 : hours , minute:minutes, type: (hours > 13) ? "am" : "pm" };
+                    
+                    resetTextOutDate();
+                 }
                 var newHours = Number($scope.inDate.hour);
                 if ($scope.inDate.type === 'pm' && Number($scope.inDate.hour) != 12) {
                     newHours = +Number($scope.inDate.hour) + 12
@@ -96,7 +111,9 @@
                 outMinute = (outMinute < 0) ? outMinute + 60 : outMinute;
 
                 $scope.quantity = outHour + ((outMinute) ? (outMinute / 60) : 0);
-                if ($scope.editService && $scope.editService.quantity) $scope.editService.quantity = $scope.quantity;
+                if ($scope.editService && $scope.editService.quantity && $scope.serviceExpenseDurationPresentation !== 'DURATION_PICKER') $scope.editService.quantity = $scope.quantity;
+                
+             
                 console.log('$scope.editService.quantity',$scope.editService.quantity);
                 if ($scope.editService || $scope.serviceExpense)  {
                     var newTimeStart = new Date();
@@ -116,7 +133,17 @@
                         $rootScope.saveForStartDate = new Date(newTimeStart.getTime());
                         $rootScope.saveForEndDate = new Date(newTimeEnd.getTime());
                         $scope.resetDurationWhenTimePicker();
+                       
                     }
+                  /*  if ($scope.editService && $scope.serviceExpenseDurationPresentation === 'DURATION_PICKER')
+                    {
+                        newTimeEnd.setHours(newHoursEnd);
+                        newTimeEnd.setMinutes(newMinutesEnd);
+                        $rootScope.saveForStartDate = new Date(newTimeStart.getTime());
+                        $rootScope.saveForEndDate = new Date(newTimeEnd.getTime());
+                      //  $scope.resetDurationWhenTimePicker();
+                       
+                    }*/
                     
                     console.log(' $rootScope.saveStartDate', $rootScope.saveStartDate);
                     console.log(' $rootScope.saveEndDate', $rootScope.saveEndDate);

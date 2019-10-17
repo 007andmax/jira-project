@@ -27,9 +27,9 @@
        uib-dropdown is-open="openOutDate">
     <input type="text"
     ng-blur="onChangeOutDateText()"  ng-model="outDateText"
-           class="new-input"
+           class="new-input" ng-if="serviceExpenseDurationPresentation !== 'DURATION_PICKER'"
            ng-click="toggleOutDateDropdown($event)" />
-
+<p ng-if="serviceExpenseDurationPresentation === 'DURATION_PICKER'">{{outDateText}}</p>
     <div uib-dropdown-menu
          stop-propagation="click"
        

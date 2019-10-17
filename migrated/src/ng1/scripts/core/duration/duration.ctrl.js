@@ -93,6 +93,7 @@
                 });
                 $scope.selectedMinute = minute.value;
             }
+          
             $scope.setDuration = function () {
                 var hourText = (($scope.selectedHour < 10) ? "0" + $scope.selectedHour : $scope.selectedHour);
                 var minuteText = (($scope.selectedMinute < 10) ? "0" + $scope.selectedMinute : $scope.selectedMinute);
