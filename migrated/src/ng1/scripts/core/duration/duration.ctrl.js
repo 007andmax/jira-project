@@ -4,7 +4,7 @@
 
     angular.module('quicktech.core.tickets').controller('quicktech.core.duration.userListCtrl',
         ['$scope', '$rootScope', 'CompaniesService', function ($scope, $rootScope, CompaniesService) {
-         console.log('serviceExpense',$scope.serviceExpense);
+         console.log('serviceExpense',$scope.editService);
          $scope.serviceExpenseDurationPresentation = CompaniesService.getCurrentCompany().serviceExpenseDurationPresentation ?
          CompaniesService.getCurrentCompany().serviceExpenseDurationPresentation
            : 'DURATION_PICKER';
@@ -41,6 +41,11 @@
                     valueForBack: 'FIFTEEN_MINUTES'
                 }
             ];
+            $rootScope.$on('onResetDuration', function () {
+                console.log('onResetDuration');
+
+                parseEditQuantity();
+            });
             function onInitDefaultValues() {
 
                 $rootScope.saveStartDate = new Date().getTime();
@@ -61,7 +66,7 @@
                 minutes = Math.round(timeInMinutes - (hours * 60));
                 $scope.selectedHour = hours;
                 $scope.selectedMinute = minutes;
-               
+                setDateText();
             }
             if ($scope.editService && $scope.editService.quantity) parseEditQuantity();
             setHous();
@@ -102,11 +107,14 @@
                 });
                 $scope.selectedMinute = minute.value;
             }
-          
+          function setDateText () {
+            var hourText = (($scope.selectedHour < 10) ? "0" + $scope.selectedHour : $scope.selectedHour);
+            var minuteText = (($scope.selectedMinute < 10) ? "0" + $scope.selectedMinute : $scope.selectedMinute);
+            $scope.dateText = hourText + ":" + minuteText;
+            console.log('$scope.dateText',$scope.dateText);
+          }
             $scope.setDuration = function () {
-                var hourText = (($scope.selectedHour < 10) ? "0" + $scope.selectedHour : $scope.selectedHour);
-                var minuteText = (($scope.selectedMinute < 10) ? "0" + $scope.selectedMinute : $scope.selectedMinute);
-                $scope.dateText = hourText + ":" + minuteText;
+                setDateText();
                 //  $scope.preview = (($scope.selectedHour < 10) ? "0" + $scope.selectedHour : $scope.selectedHour) + ":" + (($scope.selectedMinute < 10) ? "0" + $scope.selectedMinute : $scope.selectedMinute);
                 $scope.quantity = $scope.selectedHour + (($scope.selectedMinute) ? ($scope.selectedMinute / 60) : 0);
                
