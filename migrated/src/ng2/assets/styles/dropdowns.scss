@@ -393,6 +393,15 @@
             color: #fff;
             background: #16a4fa;
           }
+          @media (min-width: 2048px) {
+            width: 105px;
+          }
+          @media (min-width: 2560px) {
+            width: 175px;
+          }
+          @media (max-width: 1280px) {
+            width: 93px;
+          }
         }
       }
       .duration-container-values:first-child {
@@ -405,8 +414,17 @@
 .start-end-picker {
   .time-picker-in,
   .time-picker-out {
-    width: 97px;
+    width: 46.4%;
     display: inline-block;
+    @media (min-width: 2048px) {
+      width: 47%;
+    }
+    @media (min-width: 2560px) {
+      width: 48%;
+    }
+    @media (max-width: 1280px) {
+      width: 48.6%;
+    }
     .start-end-picker-item {
       font-size: 13px;
       > div {
@@ -426,8 +444,12 @@
   }
   .time-picker-in {
     margin-right: 11px;
+    @media (max-width: 1600px) {
+      margin-right: 4px;
+    }
     .dropdown-menu {
-      min-width: 100%;
+      min-width: 100px;
+      width: 100%;
     }
   }
   .time-picker-out {

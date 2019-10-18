@@ -663,7 +663,28 @@
 
 .ticket-update-service-edit .start-end-picker .time-picker-in,
 .ticket-update-service-edit .start-end-picker .time-picker-out {
-  width: 91px;
+  width: 46.3%;
+}
+
+@media (min-width: 2560px) {
+  .ticket-update-service-edit .start-end-picker .time-picker-in,
+  .ticket-update-service-edit .start-end-picker .time-picker-out {
+    width: 47.8%;
+  }
+}
+
+@media (min-width: 2048px) {
+  .ticket-update-service-edit .duration .dropdown-menu .duration-container-content .duration-container-values-hours > div,
+  .ticket-update-service-edit .duration .dropdown-menu .duration-container-content .duration-container-values-minutes > div {
+    width: 86px;
+  }
+}
+
+@media (max-width: 1280px) {
+  .ticket-update-service-edit .duration .dropdown-menu .duration-container-content .duration-container-values-hours > div,
+  .ticket-update-service-edit .duration .dropdown-menu .duration-container-content .duration-container-values-minutes > div {
+    width: 86px;
+  }
 }
 
 .flex-text-right {
@@ -1126,6 +1147,19 @@
   /*.opened-ticket-list .product-upd .table-content-top .col-md-1 {*/
   /*  width: 33.33333%;*/
   /*}*/
+  .ticket-update-service-edit .start-end-picker .time-picker-in input,
+  .ticket-update-service-edit .start-end-picker .time-picker-out input {
+    font-size: 11px;
+  }
+
+  .ticket-add-content .ticket-add-service .col-2.new-date-picker {
+    width: 20%;
+  }
+
+  .time-picker-width {
+    width: 36% !important;
+  }
+
   .opened-ticket-list .ticket-update {
     margin: 0 20px 30px;
   }
@@ -1154,17 +1188,21 @@
     width: 45%;
   }
 
+  .opened-ticket-list .service-table .col-md-6.service-name {
+    width: 42%;
+  }
+
   .opened-ticket-list .table-wrapper .service-table .col-md-2.new-quantity-picker {
-    width: 26%;
+    width: 28%;
   }
 
   .opened-ticket-list .table-wrapper .service-table .col-md-1 {
-    width: 12.7%;
+    width: 13.7%;
     font-size: 12px;
   }
 
   .opened-ticket-list .table-wrapper .ticket-update-service-edit .col-md-1 {
-    width: 15%;
+    width: 13%;
   }
 
   .opened-ticket-list .product-upd .table-content-top .col-md-9,
@@ -1237,6 +1275,15 @@
 @media screen and (max-width: 1280px) {
   .inventory-details .table-wrapper .service-table .col-3 {
     width: calc(100% - 210px);
+  }
+
+  .table-content input {
+    font-size: 13px;
+  }
+
+  .ticket-update-service-edit .start-end-picker .time-picker-in input,
+  .ticket-update-service-edit .start-end-picker .time-picker-out input {
+    font-size: 13px;
   }
 
   .table-content.service-table .col-3 {
