@@ -4,21 +4,21 @@
        uib-dropdown is-open="openInDate">
     <input type="text"
            class="new-input"
-           ng-blur="onChangeInDateText()"  ng-model="inDateText"
+           ng-blur="onChangeInDateText()" ng-model="inDateText"
            ng-click="toggleInDateDropdown($event)" />
 
     <div uib-dropdown-menu
          stop-propagation="click"
-      
+
          aub-is-bulk-operation="true"
-          
+
          style="top: calc(100% + -405px);">
       <div class="start-end-picker-item"
            ng-repeat="hour in hours track by $index">
-          <div ng-repeat="minute in minutes track by $index"
-                ng-click="selectTimeIn(hour,minute)">
-            {{hour.text}}:{{minute.text}} {{hour.type}}
-          </div>
+        <div ng-repeat="minute in minutes track by $index"
+             ng-click="selectTimeIn(hour,minute)">
+          {{hour.text}}:{{minute.text}} {{hour.type}}
+        </div>
       </div>
     </div>
   </div>
@@ -26,23 +26,23 @@
   <div class="time-picker-out"
        uib-dropdown is-open="openOutDate">
     <input type="text"
-    ng-blur="onChangeOutDateText()"  ng-model="outDateText"
+           ng-blur="onChangeOutDateText()" ng-model="outDateText"
            class="new-input" ng-if="serviceExpenseDurationPresentation !== 'DURATION_PICKER'"
            ng-click="toggleOutDateDropdown($event)" />
-<p ng-if="serviceExpenseDurationPresentation === 'DURATION_PICKER'">{{outDateText}}</p>
+    <p ng-if="serviceExpenseDurationPresentation === 'DURATION_PICKER'">{{outDateText}}</p>
     <div uib-dropdown-menu
          stop-propagation="click"
-       
+
          aria-labelledby="time-out-dropdown"
          aub-is-bulk-operation="true"
          style="top: calc(100% + -405px);">
       <div class="start-end-picker-item"
            ng-repeat="hour in hours">
-          <div ng-repeat="minute in minutes"
-                ng-click="selectTimeOut(hour,minute)">
-            {{hour.text}}:{{minute.text}} {{hour.type}} ({{durations[minute.u + minutes.length * hour.i].hour}}
-            h {{durations[minute.u + minutes.length * hour.i].minute}}m)
-          </div>
+        <div ng-repeat="minute in minutes"
+             ng-click="selectTimeOut(hour,minute)">
+          {{hour.text}}:{{minute.text}} {{hour.type}} ({{durations[minute.u + minutes.length * hour.i].hour}}
+                       h {{durations[minute.u + minutes.length * hour.i].minute}}m)
+        </div>
       </div>
     </div>
   </div>

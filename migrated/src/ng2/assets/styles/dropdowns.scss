@@ -323,6 +323,9 @@
     cursor: default;
     overflow: hidden;
     top: calc(100% + -372px);
+    min-width: 206px;
+    left: auto;
+    right: 0;
     .duration-container-header {
       border-bottom: 1px solid #edf2f6;
       display: flex;

@@ -1,14 +1,15 @@
 <div class="duration"
      ng-controller="quicktech.core.duration.userListCtrl"
      uib-dropdown
-     auto-close="outsideClick" is-open="status.isopen">
-  <div class="duration-preview"
-  ng-click="toggleDropdown($event)">
-  <input type="text" class="pointer new-input"
-   ng-blur="onChangeText()"  ng-model="dateText"
-             autocomplete="off" />
-  
-  </div>
+     auto-close="outsideClick"
+     is-open="status.isopen">
+  <input type="text"
+         class="pointer new-input"
+         ng-blur="onChangeText()"
+         ng-click="toggleDropdown($event)"
+         ng-model="dateText"
+         autocomplete="off" />
+
   <div uib-dropdown-menu
        class="dropdown-menu"
        stop-propagation="click"
@@ -23,7 +24,7 @@
         <div class="duration-container-values has-arrows">
           <div class="arrow-top"></div>
           <div class="duration-container-values-hours">
-            <div ng-repeat="hour in hours track by $index"ng-class="(hour.selected) ? 'active' : ''"
+            <div ng-repeat="hour in hours track by $index" ng-class="(hour.selected) ? 'active' : ''"
                  ng-click="selectHour(hour,$index)">{{hour.value}}
             </div>
           </div>
@@ -41,7 +42,7 @@
       </div>
       <button class="duration-container-button"
               type="button"
-              ng-click="onInitSetDuration($event)"  >
+              ng-click="onInitSetDuration($event)">
         Set it
       </button>
     </div>
