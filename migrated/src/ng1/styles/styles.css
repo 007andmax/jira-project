@@ -12497,6 +12497,10 @@ button.close {
     font-size: 12px;
   }
 
+  .ticket-add-content .ticket-add-service .col-5 {
+    width: 52%;
+  }
+
   .products-content__list--header div,
   .password-content__list--header div {
     font-size: 9px;
@@ -13679,6 +13683,15 @@ button.close {
     width: 7%;
   }
 
+  .ticket-add-content .new-input {
+    padding: 7px 5px;
+  }
+
+  .ticket-add-content .ticket-add-service [class*='col-'],
+  .ticket-add-content .ticket-add-product [class*='col-'] {
+    padding: 0 4px;
+  }
+
   .password-content__list .col-md-2.alternative-width {
     width: 14%;
   }
@@ -13700,11 +13713,12 @@ button.close {
   }
 }
 
-.add-users{
+.add-users {
   display: block;
   width: 400px;
-  background-color: #fff;
+  background-color: #ffffff;
 }
+
 .add-users-container {
   display: flex;
   align-items: center;
@@ -13719,6 +13733,7 @@ button.close {
   width: 100%;
   height: 40px;
 }
+
 .list-users .item-user img, .selected-assign-user img {
   width: 40px;
   height: 40px;

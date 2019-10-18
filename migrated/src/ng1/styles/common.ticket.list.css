@@ -502,6 +502,11 @@
 }
 
 @media screen and (max-width: 1600px) {
+  .ticket-header-assign {
+    right: 135px;
+    top: 17px;
+  }
+
   body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
     width: 408px;
   }
