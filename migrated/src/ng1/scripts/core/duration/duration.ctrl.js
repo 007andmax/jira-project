@@ -5,7 +5,9 @@
     angular.module('quicktech.core.tickets').controller('quicktech.core.duration.userListCtrl',
         ['$scope', '$rootScope', 'CompaniesService', function ($scope, $rootScope, CompaniesService) {
          console.log('serviceExpense',$scope.serviceExpense);
-           
+         $scope.serviceExpenseDurationPresentation = CompaniesService.getCurrentCompany().serviceExpenseDurationPresentation ?
+         CompaniesService.getCurrentCompany().serviceExpenseDurationPresentation
+           : 'DURATION_PICKER';
             $scope.hours = [];
             $scope.minutes = [];
             $scope.interval = "";
@@ -101,13 +103,17 @@
                 //  $scope.preview = (($scope.selectedHour < 10) ? "0" + $scope.selectedHour : $scope.selectedHour) + ":" + (($scope.selectedMinute < 10) ? "0" + $scope.selectedMinute : $scope.selectedMinute);
                 $scope.quantity = $scope.selectedHour + (($scope.selectedMinute) ? ($scope.selectedMinute / 60) : 0);
                
-                if ($scope.editService && $scope.editService.quantity) $scope.editService.quantity = $scope.quantity;
+                if ($scope.editService && $scope.editService.quantity) {
+                    $scope.editService.quantity = $scope.quantity;
+                    if ($scope.serviceExpenseDurationPresentation === 'DURATION_PICKER') $rootScope.$broadcast('onChangeDuration', null);
+                }
               
                 if ($scope.serviceExpense) {
                     $scope.serviceExpense.quantity = $scope.quantity;
                     $rootScope.saveStartDate = new Date();
                     $rootScope.saveEndDate = new Date($rootScope.saveStartDate.getTime() + $scope.quantity*3600000)
                 } 
+                
                
               //  console.log('editService.quantity',$scope.editService.quantity);
             }

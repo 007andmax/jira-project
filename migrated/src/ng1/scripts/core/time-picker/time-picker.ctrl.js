@@ -38,6 +38,17 @@
                     valueForBack: 'FIFTEEN_MINUTES'
                 }
             ];
+            $rootScope.$on('onChangeDuration', function(){
+                console.log('onChangeDuration');
+                var quantityInTime = $scope.inDate.hour + (($scope.inDate.minute) ? ($scope.inDate.minute / 60) : 0);
+                quantityInTime += $scope.editService.quantity;
+
+                var timeInMinutes = quantityInTime * 60,
+                hours = Math.floor(timeInMinutes / 60),
+                minutes = Math.round(timeInMinutes - (hours * 60));
+                $scope.outDate = { hour: (hours > 13) ? hours - 12 : hours , minute:minutes, type: (hours > 13) ? "am" : "pm" };
+                resetTextOutDate();
+            });
             function onInitTimeIn() {
                 var date = new Date();
                 var hour = date.getHours();
