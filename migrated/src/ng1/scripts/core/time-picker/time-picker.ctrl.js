@@ -46,7 +46,7 @@
                 var timeInMinutes = quantityInTime * 60,
                 hours = Math.floor(timeInMinutes / 60),
                 minutes = Math.round(timeInMinutes - (hours * 60));
-                $scope.outDate = { hour: (hours > 13) ? hours - 12 : hours , minute:minutes, type: (hours > 13) ? "am" : "pm" };
+                $scope.outDate = { hour: (hours > 13) ? hours - 12 : hours , minute:minutes, type: (hours > 13) ? "pm" : "am" };
                 resetTextOutDate();
             });
             function onInitTimeIn() {
@@ -54,7 +54,7 @@
                 var hour = date.getHours();
                 $scope.inDate.hour = (hour > 13) ? hour - 12 : hour;
                 $scope.inDate.minute = date.getMinutes();
-                $scope.inDate.type = (hour > 13) ? "am" : "pm";
+                $scope.inDate.type = (hour > 13) ? "pm" : "am";
                 resetTextInDate();
 
             }
@@ -95,7 +95,7 @@
                     var timeInMinutes = quantityInTime * 60,
                     hours = Math.floor(timeInMinutes / 60),
                     minutes = Math.round(timeInMinutes - (hours * 60));
-                    $scope.outDate = { hour: (hours > 13) ? hours - 12 : hours , minute:minutes, type: (hours > 13) ? "am" : "pm" };
+                    $scope.outDate = { hour: (hours > 13) ? hours - 12 : hours , minute:minutes, type: (hours > 13) ? "pm" : "am" };
                     
                     resetTextOutDate();
                  }
