@@ -10,8 +10,8 @@
             $scope.minutes = [];
             $scope.inDate = { hour: 12, minute: 00, type: "am" };
             $scope.outDate = { hour: 12, minute: 00, type: "am" };
-            $scope.inDateText = "12:00 am";
-            $scope.outDateText = "12:00 am";
+            $scope.inDateText = "12:00am";
+            $scope.outDateText = "12:00am";
             $scope.selectedIndexInDate = null;
             $scope.selectedIndexOutDate = null;
             $scope.serviceExpenseDurationPresentation = CompaniesService.getCurrentCompany().serviceExpenseDurationPresentation ?
@@ -42,9 +42,16 @@
             ];
             $rootScope.$on('onChangeDuration', function () {
                 console.log('onChangeDuration');
-            
+
                 setQuantity();
             });
+            function onInitDefaultValues() {
+
+                $rootScope.saveStartDate = new Date().getTime();
+                $rootScope.saveEndDate = new Date().getTime();
+
+            }
+            if ($scope.serviceExpense) onInitDefaultValues();
             function onInitTimeIn() {
                 var date = new Date();
                 var hour = date.getHours();
@@ -280,48 +287,11 @@
                 }
 
             }
-            /*  $scope.selectHour = function (hour) {
-                  $scope.selectedHour = hour;
-              }
-              $scope.selectMinute = function (minute) {
-                  $scope.selectedMinute = minute;
-              }*/
-            /*   $scope.setDuration = function () {
-                   var hourText = (($scope.inDate.hour < 10) ? "0" + $scope.inDate.hour : $scope.inDate.hour);
-                   var minuteText = (($scope.inDate.minute < 10) ? "0" + $scope.inDate.minute : $scope.inDate.minute);
-                   $scope.dateText = hourText + ":" + minuteText;
-   
-                   $scope.quantity = $scope.inDate.hour + (($scope.inDate.minute) ? ($scope.inDate.minute / 60) : 0);
-                   console.log('$$scope.quantity', $scope.quantity);
-               }*/
-            /*  $scope.onChangeHours = function () {
-                  var hour = Number($scope.hourText);
-                  console.log('hour instanceof', typeof hour);
-                  console.log('hour', hour);
-                  if (typeof hour == "number" && hour === NaN) {
-                      hour = 0;
-                      console.log('rgrgrgrgrg');
-                  }
-                  console.log('hour', hour);
-                  $scope.selectedHour = angular.copy(hour);
-                  $scope.setDuration();
-              }
-              $scope.onChangeMinutes = function () {
-                  var minute = Number($scope.minuteText);
-                  console.log('minute instanceof', typeof minute);
-                  console.log('minute', minute);
-                  if (typeof hour == "number" && minute === NaN) {
-                      minute = 0;
-                      console.log('rgrgrgrgrg');
-                  }
-                  console.log('minute', minute);
-                  $scope.selectedMinute = angular.copy(minute);
-                  $scope.setDuration();
-              }*/
+            
             function resetTextInDate() {
                 var hourText = (($scope.inDate.hour < 10) ? "0" + $scope.inDate.hour : $scope.inDate.hour);
                 var minuteText = (($scope.inDate.minute < 10) ? "0" + $scope.inDate.minute : $scope.inDate.minute);
-                $scope.inDateText = hourText + ":" + minuteText + " " + $scope.inDate.type;
+                $scope.inDateText = hourText + ":" + minuteText + "" + $scope.inDate.type;
             }
             $scope.onChangeInDateText = function () {
                 if ($scope.inDateText.indexOf(":") === -1) {
@@ -340,7 +310,7 @@
             function resetTextOutDate() {
                 var hourText = (($scope.outDate.hour < 10) ? "0" + $scope.outDate.hour : $scope.outDate.hour);
                 var minuteText = (($scope.outDate.minute < 10) ? "0" + $scope.outDate.minute : $scope.outDate.minute);
-                $scope.outDateText = hourText + ":" + minuteText + " " + $scope.inDate.type;
+                $scope.outDateText = hourText + ":" + minuteText + "" + $scope.inDate.type;
             }
             $scope.onChangeOutDateText = function () {
                 if ($scope.outDateText.indexOf(":") === -1) {

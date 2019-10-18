@@ -41,6 +41,13 @@
                     valueForBack: 'FIFTEEN_MINUTES'
                 }
             ];
+            function onInitDefaultValues() {
+
+                $rootScope.saveStartDate = new Date().getTime();
+                $rootScope.saveEndDate = new Date().getTime();
+
+            }
+            if ($scope.serviceExpense) onInitDefaultValues();
             $scope.timePickerInterval = setTimePickerInterval();
             function setHous() {
                 for (let i = 1; i <= 24; i++) {
