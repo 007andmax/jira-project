@@ -921,7 +921,7 @@ console.log('find');
               minute: date.getMinutes() <= 9 ? '0'+date.getMinutes() : date.getMinutes(),
               time: date.getHours() >= 12 && date.getHours() <= 24 ? 'PM' : 'AM'
             };
-            return currentTime.hour + ':' + currentTime.minute + ' ' + currentTime.time
+            return currentTime.hour + ':' + currentTime.minute + '' + currentTime.time
           };
           function getHourFormated(date) {
             if (date.getHours() < 10 && date.getHours() >= 1) {
