@@ -137,7 +137,7 @@
                 outMinute = (outMinute < 0) ? outMinute + 60 : outMinute;
 
                 $scope.quantity = outHour + ((outMinute) ? (outMinute / 60) : 0);
-                if ($scope.editService && $scope.editService.quantity && $scope.serviceExpenseDurationPresentation !== 'DURATION_PICKER') $scope.editService.quantity = $scope.quantity;
+                if ($scope.editService && $scope.serviceExpenseDurationPresentation !== 'DURATION_PICKER') $scope.editService.quantity = $scope.quantity;
 
 
                 //   console.log('$scope.editService.quantity',$scope.editService.quantity);
