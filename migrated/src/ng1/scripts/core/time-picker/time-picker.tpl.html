@@ -14,9 +14,9 @@
 
          style="top: calc(100% + -405px);">
       <div class="start-end-picker-item"
-           ng-repeat="hour in hours track by $index">
-        <div ng-repeat="minute in minutes track by $index"
-             ng-click="selectTimeIn(hour,minute)">
+           ng-repeat="hour in hours track by $index" >
+        <div ng-repeat="minute in minutes"
+             ng-click="selectTimeIn(hour,minute)" ng-class="(selectedIndexInDate === (minute.u + minutes.length * hour.i)) ? 'active' : ''">
           {{hour.text}}:{{minute.text}} {{hour.type}}
         </div>
       </div>
@@ -39,9 +39,8 @@
       <div class="start-end-picker-item"
            ng-repeat="hour in hours">
         <div ng-repeat="minute in minutes"
-             ng-click="selectTimeOut(hour,minute)">
-          {{hour.text}}:{{minute.text}} {{hour.type}} ({{durations[minute.u + minutes.length * hour.i].hour}}
-                       h {{durations[minute.u + minutes.length * hour.i].minute}}m)
+             ng-click="selectTimeOut(hour,minute)" ng-class="(selectedIndexOutDate === (minute.u + minutes.length * hour.i)) ? 'active' : ''">
+          {{hour.text}}:{{minute.text}} {{hour.type}} ({{durations[minute.u + minutes.length * hour.i].hour}}h {{durations[minute.u + minutes.length * hour.i].minute}}m)
         </div>
       </div>
     </div>

@@ -458,3 +458,8 @@
     align-items: center;
   width: 100%;
 }
+
+.start-end-picker-item .active {
+  background: #16a4fa;
+    color: #fff;
+}
