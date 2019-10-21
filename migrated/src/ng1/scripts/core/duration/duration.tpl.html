@@ -3,11 +3,13 @@
      uib-dropdown
      auto-close="outsideClick"
      on-toggle="onToggleDropdown($event)"
+    
      is-open="status.isopen">
   <input type="text"
          class="pointer new-input"
          ng-blur="onChangeText()"
          ng-click="toggleDropdown($event)"
+         smart-dropdown-menu-position
          ng-model="dateText"
          autocomplete="off" />
 
@@ -15,6 +17,7 @@
        class="dropdown-menu"
        stop-propagation="click"
        onUserAssign="'true'"
+      
        aub-is-bulk-operation="true">
     <div class="duration-container">
       <div class="duration-container-header">
