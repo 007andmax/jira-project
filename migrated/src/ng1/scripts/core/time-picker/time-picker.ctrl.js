@@ -83,22 +83,27 @@
                 $scope.openInDate = !$scope.openInDate;
             }
             function parseEditQuantity() {
+                console.log(' $scope.editService', $scope.editService);
                 var durationStart = $scope.editService.durationStart;
                 var durationEnd = $scope.editService.durationEnd;
                 $scope.inDate = { hour: durationStart.hour, minute: durationStart.minute, type: durationStart.time.toLowerCase() };
                 $scope.outDate = { hour: durationEnd.hour, minute: durationEnd.minute, type: durationEnd.time.toLowerCase() };
                 resetTextInDate();
                 resetTextOutDate();
+               
             }
             if ($scope.editService) parseEditQuantity();
             $scope.timePickerInterval = setTimePickerInterval();
             function setQuantity() {
-                if ($scope.editService && $scope.editService.quantity && $scope.serviceExpenseDurationPresentation === 'DURATION_PICKER') {
+                if ($scope.editService && $scope.serviceExpenseDurationPresentation === 'DURATION_PICKER') {
                     var newTimeStart = new Date();
-                    newTimeStart.setHours($scope.inDate.hour);
+                    newTimeStart.setHours(($scope.inDate.type === 'pm' && $scope.inDate.hour != 12) ? $scope.inDate.hour + 12 : $scope.inDate.hour);
                     newTimeStart.setMinutes($scope.inDate.minute);
+                   
                     var newTimeEnd = new Date(newTimeStart.getTime() + $scope.editService.quantity * 3600000);
+                   
                     $scope.outDate = { hour: (newTimeEnd.getHours() >= 13) ? newTimeEnd.getHours() - 12 : newTimeEnd.getHours(), minute: newTimeEnd.getMinutes(), type: (newTimeEnd.getHours() >= 12) ? "pm" : "am" };
+                 
                     resetTextOutDate();
                 }
                 var newHours = Number($scope.inDate.hour);
