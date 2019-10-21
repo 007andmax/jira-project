@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommissionService, ICategory } from '../commission.service';
 import { ToastrService } from 'ngx-toastr';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product',
@@ -27,15 +26,40 @@ export class ProductComponent implements OnInit {
     this.loading = true;
     this.commissionService.getCategories().subscribe(
       res => {
-        if (res) {
-        }
         this.loading = false;
-        this.categories = res;
+        if (res && res.length > 0) {
+          this.categories = res;
+          for (const cat of this.categories) {
+            if (cat && cat.commissionRate !== null) {
+              cat.commissionRate = cat.commissionRate.toFixed(2);
+            }
+          }
+        }
       },
       error => {
         this.loading = false;
       }
     );
+  }
+
+  removeProduct(category: any) {
+    if (category && category.commissionRate) {
+      if (confirm(`Do you want ${category.name} commission rate to zero?`)) {
+        this.loading = true;
+        this.commissionService
+          .setCategoryRate(category.id, '0', false)
+          .subscribe(
+            res => {
+              this.selectedIdx = -1;
+              this.loading = false;
+              category.commissionRate = null;
+            },
+            error => {
+              this.loading = false;
+            }
+          );
+      }
+    }
   }
 
   editProduct(i: number) {
@@ -57,46 +81,76 @@ export class ProductComponent implements OnInit {
       if (category.commissionRate === null) {
         if (confirm('Do you want this commission to fact old items?')) {
           data.setForOldExpenses = true;
+          this.loading = true;
           this.commissionService
             .setCategoryRate(id, data.rate, data.setForOldExpenses)
             .subscribe(
-              res => {
+              (res: any) => {
+                this.toastrService.success(
+                  'Commission Rate changed successfully'
+                );
+                this.loading = false;
                 this.selectedIdx = -1;
-                this.categories.forEach(cat  => {
-                    if(cat.id === id){
-                      cat.commissionRate = rate;
-                    }
-                });
+                category.commissionRate = res.commissionRate.toFixed(2);
+                // this.categories.forEach(cat => {
+                //   if (cat.id === id) {
+                //     cat.commissionRate = rate.toFixed(2);
+                //   }
+                // });
               },
-              error => {}
+              error => {
+                this.loading = false;
+                this.toastrService.error(`Error Occured, ` + error);
+              }
             );
         } else {
+          this.loading = true;
           this.commissionService
             .setCategoryRate(id, data.rate, data.setForOldExpenses)
             .subscribe(
-              res => {
+              (res: any) => {
+                this.toastrService.success(
+                  `Commission Rate changed successfully`
+                );
+                this.loading = false;
                 this.selectedIdx = -1;
-                category.commissionRate = rate;
-                this.categories.forEach(cat  => {
-                  if(cat.id === id){
-                    cat.commissionRate = rate;
-                  }
-              });
+                category.commissionRate = res.commissionRate.toFixed(2);
+                // this.categories.forEach(cat => {
+                //   if (cat.id === id) {
+                //     cat.commissionRate = rate.toFixed(2);
+                //   }
+                // });
               },
-              error => {}
+              error => {
+                this.loading = false;
+                this.toastrService.error(`Error Occured, ` + error);
+              }
             );
         }
       } else {
+        this.loading = true;
         this.commissionService
           .setCategoryRate(id, data.rate, data.setForOldExpenses)
-          .subscribe(res => {
-            this.categories.forEach(cat  => {
-              if(cat.id === id){
-                cat.commissionRate = rate;
-              }
-          });
-            this.selectedIdx = -1;
-          }, error => {});
+          .subscribe(
+            (res: any) => {
+              this.toastrService.success(
+                `Commission Rate changed successfully`
+              );
+              this.loading = false;
+              // this.categories.forEach(cat => {
+              //   if (cat.id === id) {
+              //     cat.commissionRate = res.commissionRate.toFixed(2);
+              //   }
+              // });
+              category.commissionRate = res.commissionRate.toFixed(2);
+              this.selectedIdx = -1;
+            },
+            error => {
+              this.selectedIdx = -1;
+              this.loading = false;
+              this.toastrService.error(`Error Occured, ` + error);
+            }
+          );
       }
     } else {
       this.selectedIdx = -1;

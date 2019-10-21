@@ -10,7 +10,7 @@
         </tr>
       </thead>
       <tbody *ngIf="categories">
-        <tr *ngFor="let category of categories; let i = index">
+        <tr *ngFor="let category of categories;trackBy:category?.name; let i = index">
           <td>{{ category.name }}</td>
           <td>{{ category.commissionRate }}</td>
           <td class="action">
@@ -22,6 +22,7 @@
               ><img src="/ng2/assets/img/edit.svg" alt="Edit"
             /></a>
             <a href="javascript:;" data-tooltip="Remove" class="remove"
+            (click)="removeProduct(category)"
               ><img src="/ng2/assets/img/remove.svg" alt="Remove"
             /></a>
             <!-- Edit create Tags -->
@@ -39,8 +40,10 @@
                           type="text"
                           class="form-input"
                           name="commissionRate"
+                          autocomplete="off"
                           #commissionRate
                           value="{{category.commissionRate}}"
+                          step="0.01"
                           placeholder="Enter Commission Rate"
                         />
                       </div>

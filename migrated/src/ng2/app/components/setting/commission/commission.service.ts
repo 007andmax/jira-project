@@ -12,7 +12,7 @@ const API_URL = environment.apiUrl;
 export class CommissionService {
   private CATEGORIES_API = `${API_URL}products/categories`;
   private DEFAULT_SERVICES_API = `${API_URL}services/getDefaultServices`;
-  private SERVICES_API = `${API_URL}serviceAgreements/services`;
+  private SPECIAL_SERVICES_API = `${API_URL}serviceAgreements/services`;
   private AGREEMENTRATES_API = `${API_URL}settings/companyProfile/agreementRates`;
   private CURRENT_COMAPNY_API = `${API_URL}company/current`;
 
@@ -52,8 +52,8 @@ export class CommissionService {
     return this.http.get(this.DEFAULT_SERVICES_API).pipe(map(data => data));
   }
 
-  getServices(): Observable<any> {
-    return this.http.get(this.SERVICES_API).pipe(map(data => data));
+  getSpecialServices(): Observable<any> {
+    return this.http.get(this.SPECIAL_SERVICES_API).pipe(map((data:any[]) => data));
   }
 
   agreementRates(): Observable<any> {

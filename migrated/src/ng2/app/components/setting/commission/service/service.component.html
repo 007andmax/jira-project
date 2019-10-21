@@ -1,3 +1,4 @@
+<ngx-loading [show]="loading"></ngx-loading>
 <div class="cmn-area products">
   <div class="data-table-wrap">
     <table dataTable class="display dataTable" style="width:100%">
@@ -10,7 +11,11 @@
       </thead>
       <tbody *ngIf="services">
         <tr
-          *ngFor="let service of services; let i = index"
+          *ngFor="
+            let service of services;
+            trackBy: service?.name;
+            let i = index
+          "
         >
           <td>{{ service.name }}</td>
           <td>{{ service.commissionRate }}</td>
@@ -22,12 +27,19 @@
               (click)="editService(i)"
               ><img src="/ng2/assets/img//edit.svg" alt="Edit"
             /></a>
-            <a href="javascript:;" data-tooltip="Remove" class="remove"
+            <a
+              href="javascript:;"
+              data-tooltip="Remove"
+              class="remove"
+              (click)="removeServiceRate(i, service, false)"
               ><img src="/ng2/assets/img//remove.svg" alt="Remove"
             /></a>
 
             <!-- Edit create Tags -->
-            <div class="modal-content toggle-area" [ngClass]="{'opened': selectedIdx === i}" >
+            <div
+              class="modal-content toggle-area"
+              [ngClass]="{ opened: selectedIdx === i }"
+            >
               <div class="toggle-header">
                 <h2 class="h1">Edit Rate</h2>
               </div>
@@ -41,8 +53,9 @@
                           type="text"
                           class="form-input"
                           name="commissionRate"
+                          autocomplete="off"
                           #commissionRate
-                          value="{{service.commissionRate}}"
+                          value="{{ service.commissionRate }}"
                           placeholder="Enter Commission Rate"
                         />
                       </div>
@@ -51,7 +64,14 @@
                       <div class="m-btn-col">
                         <input
                           type="submit"
-                          (click)="setServiceRate(commissionRate.value,service.versionedId.id,service)"
+                          (click)="
+                            setServiceRate(
+                              commissionRate.value,
+                              service.versionedId.id,
+                              service,
+                              false
+                            )
+                          "
                           value="Save"
                           class="btn btn-primary"
                         />
@@ -68,7 +88,101 @@
                 </form>
               </div>
             </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
+    <br />
+    <br />
+
+    <table dataTable class="display dataTable" style="width:100%">
+      <thead>
+        <tr>
+          <th class="p-name">Special Services</th>
+          <th class="rate">Rate (%)</th>
+          <th class="action">&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="specialService">
+        <tr
+          *ngFor="
+            let service of specialService;
+            trackBy: service?.name;
+            let i = index
+          "
+        >
+          <td>{{ service.name }}</td>
+          <td>{{ service.commissionRate }}</td>
+          <td class="action">
+            <a
+              href="javascript:;"
+              data-tooltip="Edit"
+              class="edit"
+              (click)="editSpecService(i)"
+              ><img src="/ng2/assets/img//edit.svg" alt="Edit"
+            /></a>
+            <a
+              href="javascript:;"
+              data-tooltip="Remove"
+              class="remove"
+              (click)="removeServiceRate(i, service, true)"
+              ><img src="/ng2/assets/img//remove.svg" alt="Remove"
+            /></a>
+
+            <!-- Edit create Tags -->
+            <div
+              class="modal-content toggle-area"
+              [ngClass]="{ opened: selectedSpecIdx === i }"
+            >
+              <div class="toggle-header">
+                <h2 class="h1">Edit Rate</h2>
+              </div>
+              <div class="modal-body">
+                <form method="POST">
+                  <div class="f-row">
+                    <div class="f-col col-100">
+                      <label>Commission Rate (%)</label>
+                      <div class="form-row">
+                        <input
+                          type="text"
+                          class="form-input"
+                          name="commissionRate"
+                          autocomplete="off"
+                          #commissionRate
+                          value="{{ service.commissionRate }}"
+                          placeholder="Enter Commission Rate"
+                        />
+                      </div>
+                    </div>
+                    <div class="m-btn-row">
+                      <div class="m-btn-col">
+                        <input
+                          type="submit"
+                          (click)="
+                            setServiceRate(
+                              commissionRate.value,
+                              service.id,
+                              service,
+                              true
+                            )
+                          "
+                          value="Save"
+                          class="btn btn-primary"
+                        />
+                        <a
+                          href="javascript:;"
+                          class="btn btn-secondary"
+                          aria-label="Close"
+                          (click)="selectedSpecIdx = -1"
+                          >Cancel</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
           </td>
         </tr>
       </tbody>
