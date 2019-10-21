@@ -2,6 +2,7 @@
      ng-controller="quicktech.core.duration.userListCtrl"
      uib-dropdown
      auto-close="outsideClick"
+     on-toggle="onToggleDropdown($event)"
      is-open="status.isopen">
   <input type="text"
          class="pointer new-input"
@@ -22,22 +23,22 @@
       </div>
       <div class="duration-container-content">
         <div class="duration-container-values has-arrows">
-          <div class="arrow-top"></div>
+          <div class="arrow-top" ng-click="onScrollHours($event,true)"></div>
           <div class="duration-container-values-hours">
             <div ng-repeat="hour in hours track by $index" ng-class="(hour.selected) ? 'active' : ''"
                  ng-click="selectHour(hour,$index)">{{hour.value}}
             </div>
           </div>
-          <div class="arrow-bottom"></div>
+          <div class="arrow-bottom" ng-click="onScrollHours($event,false)"></div>
         </div>
         <div class="duration-container-values" ng-class="(interval != 'TEN_MINUTES') ? 'has-arrows' : ''">
-          <div class="arrow-top"></div>
+          <div class="arrow-top" ng-click="onScrollMinutes($event,true)"></div>
           <div class="duration-container-values-minutes">
             <div ng-repeat="min in minutes track by $index" ng-class="(min.selected) ? 'active' : ''"
                  ng-click="selectMinute(min,$index)">{{min.value}}
             </div>
           </div>
-          <div class="arrow-bottom"></div>
+          <div class="arrow-bottom" ng-click="onScrollMinutes($event,false)"></div>
         </div>
       </div>
       <button class="duration-container-button"

@@ -89,7 +89,7 @@
                     }
 
                 });
-                $scope.selectedHour = hour.value;
+              
             }
             $scope.selectMinute = function (minute, index) {
                 $scope.minutes.forEach((element, i) => {
@@ -100,7 +100,7 @@
                     }
 
                 });
-                $scope.selectedMinute = minute.value;
+            
             }
             function setDateText() {
                 var hourText = (($scope.selectedHour < 10) ? "0" + $scope.selectedHour : $scope.selectedHour);
@@ -121,12 +121,48 @@
                     $rootScope.saveEndDate = new Date($rootScope.saveStartDate.getTime() + $scope.quantity * 3600000)
                 }
             }
+            function resetSelectedTime () {
+                $scope.minutes.forEach(element =>  element.selected = false);
+                $scope.hours.forEach(element =>  element.selected = false);
+            }
+            $scope.onToggleDropdown = function (open) {
+                console.log('onToggleDropdown',open);
+                if (!$scope.status.isopen && $scope.selectedHour === 0 && $scope.selectedMinute === 0) resetSelectedTime();
+            }
             $scope.toggleDropdown = function ($event) {
+               
                 $event.preventDefault();
                 $event.stopPropagation();
                 $scope.status.isopen = !$scope.status.isopen;
             };
+            $scope.onScrollHours = function ($event,top) {
+                var container  = $($event.target).parent('.duration-container-values').find('.duration-container-values-hours');
+               var scrollTop = container.scrollTop();
+              if (top) {
+                scrollTop -= 15;
+              } else {
+                scrollTop += 15;
+              }
+                container.scrollTop(scrollTop);
+            }
+            $scope.onScrollMinutes = function ($event,top) {
+                var container  = $($event.target).parent('.duration-container-values').find('.duration-container-values-minutes');
+               var scrollTop = container.scrollTop();
+              if (top) {
+                scrollTop -= 15;
+              } else {
+                scrollTop += 15;
+              }
+                container.scrollTop(scrollTop);
+            }
             $scope.onInitSetDuration = function ($event) {
+              var indexHour =   $scope.hours.findIndex(element => element.selected === true);
+              $scope.selectedHour = 0;
+              if (indexHour > -1) $scope.selectedHour = $scope.hours[indexHour].value;
+              var indexMinute =   $scope.minutes.findIndex(element => element.selected === true);
+              $scope.selectedMinute = 0;
+              if (indexMinute > -1) $scope.selectedMinute = $scope.minutes[indexMinute].value;
+                 
                 $scope.toggleDropdown($event);
                 $scope.setDuration();
 
