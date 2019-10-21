@@ -41,10 +41,13 @@
                     valueForBack: 'FIFTEEN_MINUTES'
                 }
             ];
-            $rootScope.$on('onResetDuration', function () {
-                console.log('onResetDuration');
+            $rootScope.$on('onResetDuration', function (event, quantity) {
+             
 
+              if ($scope.selectedHour === 0 && $scope.selectedMinute === 0 && $scope.editService) {
+                $scope.editService.quantity = quantity;
                 parseEditQuantity();
+              }
             });
             function onInitDefaultValues() {
 
@@ -60,7 +63,7 @@
                 }
             }
             function parseEditQuantity () {
-              
+                console.log('onResetDuration',$scope.editService.quantity);
                 var timeInMinutes = $scope.editService.quantity * 60,
                 hours = Math.floor(timeInMinutes / 60),
                 minutes = Math.round(timeInMinutes - (hours * 60));
