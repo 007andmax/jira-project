@@ -1,3 +1,4 @@
+<ngx-loading [show]="loading"></ngx-loading>
 <div class="cmn-area products-area">
   <div class="data-table-wrap">
     <table dataTable class="display dataTable" style="width:100%">
@@ -8,23 +9,23 @@
           <th class="action">&nbsp;</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td>Computers, Laptops & Servers</td>
-          <td>5%</td>
+      <tbody *ngIf="categories">
+        <tr *ngFor="let category of categories; let i = index">
+          <td>{{ category.name }}</td>
+          <td>{{ category.commissionRate }}</td>
           <td class="action">
             <a
               href="javascript:;"
               data-tooltip="Edit"
               class="edit"
-              (click)="edit = !edit"
+              (click)="editProduct(i)"
               ><img src="/ng2/assets/img/edit.svg" alt="Edit"
             /></a>
             <a href="javascript:;" data-tooltip="Remove" class="remove"
               ><img src="/ng2/assets/img/remove.svg" alt="Remove"
             /></a>
             <!-- Edit create Tags -->
-            <div class="modal-content toggle-area" [class.opened]="edit">
+            <div class="modal-content toggle-area" [ngClass]="{'opened': selectedIdx === i}" >
               <div class="toggle-header">
                 <h2 class="h1">Edit Rate</h2>
               </div>
@@ -37,7 +38,9 @@
                         <input
                           type="text"
                           class="form-input"
-                          value="5%"
+                          name="commissionRate"
+                          #commissionRate
+                          value="{{category.commissionRate}}"
                           placeholder="Enter Commission Rate"
                         />
                       </div>
@@ -46,6 +49,7 @@
                       <div class="m-btn-col">
                         <input
                           type="submit"
+                          (click)="setCategoryRate(commissionRate.value,category.id,category)"
                           value="Save"
                           class="btn btn-primary"
                         />
@@ -53,7 +57,7 @@
                           href="javascript:;"
                           class="btn btn-secondary"
                           aria-label="Close"
-                          (click)="edit = !edit"
+                          (click)="selectedIdx = -1"
                           >Cancel</a
                         >
                       </div>
@@ -62,162 +66,6 @@
                 </form>
               </div>
             </div>
-          </td>
-        </tr>
-        <tr>
-          <td>Cables & Adapters</td>
-          <td>10%</td>
-          <td class="action">
-            <a href="javascript:;" data-tooltip="Edit" class="edit"
-              ><img src="/ng2/assets/img/edit.svg" alt="Edit"
-            /></a>
-            <a href="javascript:;" data-tooltip="Remove" class="remove"
-              ><img src="/ng2/assets/img/remove.svg" alt="Remove"
-            /></a>
-          </td>
-        </tr>
-        <tr>
-          <td>Networking (Switches, Routers, Gateways, APs)</td>
-          <td>10%</td>
-          <td class="action">
-            <a href="javascript:;" data-tooltip="Edit" class="edit"
-              ><img src="/ng2/assets/img/edit.svg" alt="Edit"
-            /></a>
-            <a href="javascript:;" data-tooltip="Remove" class="remove"
-              ><img src="/ng2/assets/img/remove.svg" alt="Remove"
-            /></a>
-          </td>
-        </tr>
-        <tr>
-          <td>Shipping & Handling</td>
-          <td>5%</td>
-          <td class="action">
-            <a href="javascript:;" data-tooltip="Edit" class="edit"
-              ><img src="/ng2/assets/img/edit.svg" alt="Edit"
-            /></a>
-            <a href="javascript:;" data-tooltip="Remove" class="remove"
-              ><img src="/ng2/assets/img/remove.svg" alt="Remove"
-            /></a>
-          </td>
-        </tr>
-        <tr>
-          <td>USB Hubs & Devices</td>
-          <td>5%</td>
-          <td class="action">
-            <a href="javascript:;" data-tooltip="Edit" class="edit"
-              ><img src="/ng2/assets/img/edit.svg" alt="Edit"
-            /></a>
-            <a href="javascript:;" data-tooltip="Remove" class="remove"
-              ><img src="/ng2/assets/img/remove.svg" alt="Remove"
-            /></a>
-          </td>
-        </tr>
-        <tr>
-          <td>Software</td>
-          <td>10%</td>
-          <td class="action">
-            <a href="javascript:;" data-tooltip="Edit" class="edit"
-              ><img src="/ng2/assets/img/edit.svg" alt="Edit"
-            /></a>
-            <a href="javascript:;" data-tooltip="Remove" class="remove"
-              ><img src="/ng2/assets/img/remove.svg" alt="Remove"
-            /></a>
-          </td>
-        </tr>
-        <tr>
-          <td>Keyboards & Mice</td>
-          <td>10%</td>
-          <td class="action">
-            <a href="javascript:;" data-tooltip="Edit" class="edit"
-              ><img src="/ng2/assets/img/edit.svg" alt="Edit"
-            /></a>
-            <a href="javascript:;" data-tooltip="Remove" class="remove"
-              ><img src="/ng2/assets/img/remove.svg" alt="Remove"
-            /></a>
-          </td>
-        </tr>
-        <tr>
-          <td>Chirosuite</td>
-          <td>163</td>
-          <td class="action">
-            <a href="javascript:;" data-tooltip="Edit" class="edit"
-              ><img src="/ng2/assets/img/edit.svg" alt="Edit"
-            /></a>
-            <a href="javascript:;" data-tooltip="Remove" class="remove"
-              ><img src="/ng2/assets/img/remove.svg" alt="Remove"
-            /></a>
-          </td>
-        </tr>
-        <tr>
-          <td>Security Systems & Cameras</td>
-          <td>5%</td>
-          <td class="action">
-            <a href="javascript:;" data-tooltip="Edit" class="edit"
-              ><img src="/ng2/assets/img/edit.svg" alt="Edit"
-            /></a>
-            <a href="javascript:;" data-tooltip="Remove" class="remove"
-              ><img src="/ng2/assets/img/remove.svg" alt="Remove"
-            /></a>
-          </td>
-        </tr>
-        <tr>
-          <td>Mounting Equipment</td>
-          <td>10%</td>
-          <td class="action">
-            <a href="javascript:;" data-tooltip="Edit" class="edit"
-              ><img src="/ng2/assets/img/edit.svg" alt="Edit"
-            /></a>
-            <a href="javascript:;" data-tooltip="Remove" class="remove"
-              ><img src="/ng2/assets/img/remove.svg" alt="Remove"
-            /></a>
-          </td>
-        </tr>
-        <tr>
-          <td>Toner & Ink Cartridges</td>
-          <td>10%</td>
-          <td class="action">
-            <a href="javascript:;" data-tooltip="Edit" class="edit"
-              ><img src="/ng2/assets/img//edit.svg" alt="Edit"
-            /></a>
-            <a href="javascript:;" data-tooltip="Remove" class="remove"
-              ><img src="/ng2/assets/img//remove.svg" alt="Remove"
-            /></a>
-          </td>
-        </tr>
-        <tr>
-          <td>Shipping & Handling</td>
-          <td>5%</td>
-          <td class="action">
-            <a href="javascript:;" data-tooltip="Edit" class="edit"
-              ><img src="/ng2/assets/img//edit.svg" alt="Edit"
-            /></a>
-            <a href="javascript:;" data-tooltip="Remove" class="remove"
-              ><img src="/ng2/assets/img//remove.svg" alt="Remove"
-            /></a>
-          </td>
-        </tr>
-        <tr>
-          <td>USB Hubs & Devices</td>
-          <td>10%</td>
-          <td class="action">
-            <a href="javascript:;" data-tooltip="Edit" class="edit"
-              ><img src="/ng2/assets/img//edit.svg" alt="Edit"
-            /></a>
-            <a href="javascript:;" data-tooltip="Remove" class="remove"
-              ><img src="/ng2/assets/img//remove.svg" alt="Remove"
-            /></a>
-          </td>
-        </tr>
-        <tr>
-          <td>Cables & Adapters</td>
-          <td>10%</td>
-          <td class="action">
-            <a href="javascript:;" data-tooltip="Edit" class="edit"
-              ><img src="/ng2/assets/img//edit.svg" alt="Edit"
-            /></a>
-            <a href="javascript:;" data-tooltip="Remove" class="remove"
-              ><img src="/ng2/assets/img//remove.svg" alt="Remove"
-            /></a>
           </td>
         </tr>
       </tbody>

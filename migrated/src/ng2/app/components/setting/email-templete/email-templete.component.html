@@ -166,7 +166,7 @@
     <a
       href="javascript:;"
       class="templates-view"
-      ng-click="emailPreview(template)"
+      (click)="emailPreview(template)"
       *ngIf="templeteInfo.showPreview"
       >Show Template Preview</a
     >

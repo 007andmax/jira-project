@@ -162,19 +162,21 @@ export class EmailTempleteComponent implements OnInit {
     }
   }
 
-  emailPreview(templateKey) {
+  emailPreview(templateKey: any) {
     this.emailPreviewHtml = undefined;
     this.gettingEmailTemplatePreview = true;
 
-    this.emailService
-      .getHtmlForPreview(templateKey, this.templatesData)
-      .pipe(
-        map(resp => {
-          this.emailPreviewHtml = resp;
-          this.gettingEmailTemplatePreview = false;
-        })
-      )
-      .subscribe();
+    alert('Api is remaining for our new design template');
+
+    // this.emailService
+    //   .getHtmlForPreview(templateKey, this.templatesData)
+    //   .pipe(
+    //     map(resp => {
+    //       this.emailPreviewHtml = resp;
+    //       this.gettingEmailTemplatePreview = false;
+    //     })
+    //   )
+    //   .subscribe();
   }
 
   closeTemplete() {

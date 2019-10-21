@@ -168,3 +168,9 @@
     display: inline-block;
     overflow: hidden;
 }
+
+img {
+    object-fit: cover !important;
+    border-radius: 50% !important;
+  }
+  

@@ -18,7 +18,7 @@
               Hourly Contracts will use the service default commission rate.
             </p>
           </td>
-          <td class="rate">5%</td>
+          <!-- <td class="rate">5%</td>
           <td class="action">
             <a href="javascript:;" data-tooltip="Edit" class="edit"
               ><img src="/ng2/assets/img//edit.svg" alt="Edit"
@@ -26,7 +26,7 @@
             <a href="javascript:;" data-tooltip="Remove" class="remove"
               ><img src="/ng2/assets/img//remove.svg" alt="Remove"
             /></a>
-          </td>
+          </td> -->
         </tr>
       </tbody>
     </table>
@@ -52,9 +52,16 @@
           <td class="p-name">
             <h5>Block time Included Hours commission Rate</h5>
           </td>
-          <td class="rate">5%</td>
+          <td class="rate">
+             {{agreementsCommissions?.blockTimeContractCommission}}
+            
+          </td>
           <td class="action">
-            <a href="javascript:;" data-tooltip="Edit" class="edit"
+            <a
+              href="javascript:;"
+              data-tooltip="Edit"
+              class="edit"
+              (click)="editContract('commissionRateSetOldSalesBlockTime', 'blockTimeContractCommission')"
               ><img src="/ng2/assets/img//edit.svg" alt="Edit"
             /></a>
             <a href="javascript:;" data-tooltip="Remove" class="remove"
@@ -167,5 +174,47 @@
         </tr>
       </tbody>
     </table>
+  </div>
+</div>
+
+
+<div class="modal-content toggle-area" [ngClass]="{'opened': isModelDisplay === true}" >
+  <div class="toggle-header">
+    <h2 class="h1">Edit Rate</h2>
+  </div>
+  <div class="modal-body">
+    <form method="POST">
+      <div class="f-row">
+        <div class="f-col col-100">
+          <label>Commission Rate (%)</label>
+          <div class="form-row">
+            <input
+              type="text"
+              class="form-input"
+              name="commissionRate"
+              #commissionRate
+              placeholder="Enter Commission Rate"
+            />
+          </div>
+        </div>
+        <div class="m-btn-row">
+          <div class="m-btn-col">
+            <input
+              type="submit"
+              (click)="setAgreementRate()"
+              value="Save"
+              class="btn btn-primary"
+            />
+            <a
+              href="javascript:;"
+              class="btn btn-secondary"
+              aria-label="Close"
+              (click)="isModelDisplay = false"
+              >Cancel</a
+            >
+          </div>
+        </div>
+      </div>
+    </form>
   </div>
 </div>

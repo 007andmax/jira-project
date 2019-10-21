@@ -1,3 +1,4 @@
+<ngx-loading [show]="loading"></ngx-loading>
 <!-- Middle Wrapper  -->
 <div class="page-container">
   <div class="page-insider manage-tags">
@@ -75,15 +76,6 @@
     </div>
 
     <tabset (click)="setTab()">
-      <ngx-loading
-        [show]="loading"
-        [config]="{
-          primaryColour: primaryColour,
-          secondaryColour: secondaryColour,
-          tertiaryColour: primaryColour,
-          backdropBorderRadius: '3px'
-        }"
-      ></ngx-loading>
       <!-- Companies -->
       <tab heading="Companies" id="tab1">
         <div class="cmn-area">
@@ -129,10 +121,7 @@
                         <h2 class="h1">Edit Tag</h2>
                       </div>
                       <div class="modal-body">
-                        <form
-                          [formGroup]="compnayForm"
-                          (ngSubmit)="onSubmit()"
-                        >
+                        <form [formGroup]="compnayForm" (ngSubmit)="onSubmit()">
                           <div class="f-row">
                             <div class="f-col col-100">
                               <label>Tag Name</label>
@@ -236,10 +225,7 @@
                         <h2 class="h1">Edit Tag</h2>
                       </div>
                       <div class="modal-body">
-                        <form
-                          [formGroup]="compnayForm"
-                          (ngSubmit)="onSubmit()"
-                        >
+                        <form [formGroup]="compnayForm" (ngSubmit)="onSubmit()">
                           <div class="f-row">
                             <div class="f-col col-100">
                               <label>Tag Name</label>
