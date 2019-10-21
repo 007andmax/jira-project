@@ -4,16 +4,14 @@
 
     angular.module('quicktech.core.tickets').controller('quicktech.core.duration.userListCtrl',
         ['$scope', '$rootScope', 'CompaniesService', function ($scope, $rootScope, CompaniesService) {
-         console.log('serviceExpense',$scope.editService);
-         $scope.serviceExpenseDurationPresentation = CompaniesService.getCurrentCompany().serviceExpenseDurationPresentation ?
-         CompaniesService.getCurrentCompany().serviceExpenseDurationPresentation
-           : 'DURATION_PICKER';
+
+            $scope.serviceExpenseDurationPresentation = CompaniesService.getCurrentCompany().serviceExpenseDurationPresentation ?
+                CompaniesService.getCurrentCompany().serviceExpenseDurationPresentation
+                : 'DURATION_PICKER';
             $scope.hours = [];
             $scope.minutes = [];
             $scope.interval = "";
             $scope.dateText = "00 : 00";
-            //   $scope.hourText = "00";
-            //   $scope.minuteText = "00";
             $scope.selectedHour = 0;
             $scope.selectedMinute = 0;
             $scope.status = {
@@ -42,31 +40,27 @@
                 }
             ];
             $rootScope.$on('onResetDuration', function (event, quantity) {
-             
 
-              if ($scope.selectedHour === 0 && $scope.selectedMinute === 0 && $scope.editService) {
-                $scope.editService.quantity = quantity;
-                parseEditQuantity();
-              }
+                if ($scope.selectedHour === 0 && $scope.selectedMinute === 0 && $scope.editService) {
+                    $scope.editService.quantity = quantity;
+                    parseEditQuantity();
+                }
             });
             function onInitDefaultValues() {
-
                 $rootScope.saveStartDate = new Date().getTime();
                 $rootScope.saveEndDate = new Date().getTime();
-
             }
             if ($scope.serviceExpense) onInitDefaultValues();
             $scope.timePickerInterval = setTimePickerInterval();
             function setHous() {
                 for (let i = 1; i <= 24; i++) {
-                    $scope.hours.push({value: i, selected: false});
+                    $scope.hours.push({ value: i, selected: false });
                 }
             }
-            function parseEditQuantity () {
-                console.log('onResetDuration',$scope.editService.quantity);
+            function parseEditQuantity() {
                 var timeInMinutes = $scope.editService.quantity * 60,
-                hours = Math.floor(timeInMinutes / 60),
-                minutes = Math.round(timeInMinutes - (hours * 60));
+                    hours = Math.floor(timeInMinutes / 60),
+                    minutes = Math.round(timeInMinutes - (hours * 60));
                 $scope.selectedHour = hours;
                 $scope.selectedMinute = minutes;
                 setDateText();
@@ -76,19 +70,17 @@
             function setTimePickerInterval() {
                 $scope.interval = CompaniesService.getCurrentCompany().serviceExpenseDurationPickerInterval ?
                     CompaniesService.getCurrentCompany().serviceExpenseDurationPickerInterval : 'ONE_MINUTE';
-               
+
                 return $scope.intervalsVariant.find(function (item) {
                     return item.valueForBack === $scope.interval;
                 });
 
             }
-          
-         
+
             for (var step = 0; step < (60 / $scope.timePickerInterval.value); step++) {
                 $scope.minutes.push({ value: step * $scope.timePickerInterval.value, selected: false });
             }
-           
-            $scope.selectHour = function (hour,index) {
+            $scope.selectHour = function (hour, index) {
                 $scope.hours.forEach((element, i) => {
                     if (i == index) {
                         element.selected = true;
@@ -110,32 +102,24 @@
                 });
                 $scope.selectedMinute = minute.value;
             }
-          function setDateText () {
-            var hourText = (($scope.selectedHour < 10) ? "0" + $scope.selectedHour : $scope.selectedHour);
-            var minuteText = (($scope.selectedMinute < 10) ? "0" + $scope.selectedMinute : $scope.selectedMinute);
-            $scope.dateText = hourText + ":" + minuteText;
-            console.log('$scope.dateText',$scope.dateText);
-          }
+            function setDateText() {
+                var hourText = (($scope.selectedHour < 10) ? "0" + $scope.selectedHour : $scope.selectedHour);
+                var minuteText = (($scope.selectedMinute < 10) ? "0" + $scope.selectedMinute : $scope.selectedMinute);
+                $scope.dateText = hourText + ":" + minuteText;
+
+            }
             $scope.setDuration = function () {
                 setDateText();
-                //  $scope.preview = (($scope.selectedHour < 10) ? "0" + $scope.selectedHour : $scope.selectedHour) + ":" + (($scope.selectedMinute < 10) ? "0" + $scope.selectedMinute : $scope.selectedMinute);
                 $scope.quantity = $scope.selectedHour + (($scope.selectedMinute) ? ($scope.selectedMinute / 60) : 0);
-              
                 if ($scope.editService) {
-                
                     $scope.editService.quantity = $scope.quantity;
-                    console.log('$scope.editService.quantity',$scope.editService.quantity);
                     if ($scope.serviceExpenseDurationPresentation === 'DURATION_PICKER') $rootScope.$broadcast('onChangeDuration', null);
                 }
-              
                 if ($scope.serviceExpense) {
                     $scope.serviceExpense.quantity = $scope.quantity;
                     $rootScope.saveStartDate = new Date();
-                    $rootScope.saveEndDate = new Date($rootScope.saveStartDate.getTime() + $scope.quantity*3600000)
-                } 
-                
-               
-              //  console.log('editService.quantity',$scope.editService.quantity);
+                    $rootScope.saveEndDate = new Date($rootScope.saveStartDate.getTime() + $scope.quantity * 3600000)
+                }
             }
             $scope.toggleDropdown = function ($event) {
                 $event.preventDefault();
@@ -145,7 +129,7 @@
             $scope.onInitSetDuration = function ($event) {
                 $scope.toggleDropdown($event);
                 $scope.setDuration();
-              
+
             };
             $scope.onChangeText = function () {
                 if ($scope.dateText.indexOf(":") === -1) {
@@ -154,20 +138,12 @@
                 }
                 var hour = parseInt($scope.dateText.substring(0, $scope.dateText.indexOf(":")));
                 var minute = parseInt($scope.dateText.substring($scope.dateText.indexOf(":") + 1, $scope.dateText.length));
-                if (isNaN(hour))  hour = 0;
+                if (isNaN(hour)) hour = 0;
                 if (isNaN(minute)) minute = 0;
-              
                 $scope.selectedHour = hour;
                 $scope.selectedMinute = minute;
-                //   $scope.quantity = $scope.selectedHour + (($scope.selectedMinute) ? ($scope.selectedMinute / 60) : 0);
                 $scope.setDuration();
-              
             }
             $scope.setDuration();
-
-
         }]);
-
-
-
 }());
