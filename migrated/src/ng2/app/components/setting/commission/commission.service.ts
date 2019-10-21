@@ -42,10 +42,31 @@ export class CommissionService {
   }
 
   setAgreementRates(data: any, setForOldExpenses: boolean) {
-    return this.http.post(
-      `${this.SET_AGREEMENT_RATES_API}?setForOldExpenses=${setForOldExpenses}`,
-      data
-    );
+    return this.http
+      .post(
+        `${this.SET_AGREEMENT_RATES_API}?setForOldExpenses=${setForOldExpenses}`,
+        data
+      )
+      .pipe(
+        map(data => {
+          const agreementsCommissions = data || {};
+          Object.keys(agreementsCommissions).forEach(key => {
+            if (
+              key === 'blockTimeContractCommission' ||
+              key === 'blockTimeContractCommissionExceeding' ||
+              key === 'userOrDeviceContractCommission' ||
+              key === 'userOrDeviceContractCommissionExceeding'
+            ) {
+              agreementsCommissions[key] = +agreementsCommissions[key]
+                ? agreementsCommissions[key].toFixed(2)
+                : agreementsCommissions[key];
+            } else {
+              agreementsCommissions[key] = agreementsCommissions[key];
+            }
+          });
+          return agreementsCommissions;
+        })
+      );
   }
 
   getDefaultServices(): Observable<any> {
@@ -53,11 +74,32 @@ export class CommissionService {
   }
 
   getSpecialServices(): Observable<any> {
-    return this.http.get(this.SPECIAL_SERVICES_API).pipe(map((data:any[]) => data));
+    return this.http
+      .get(this.SPECIAL_SERVICES_API)
+      .pipe(map((data: any[]) => data));
   }
 
   agreementRates(): Observable<any> {
-    return this.http.get(this.AGREEMENTRATES_API).pipe(map(data => data));
+    return this.http.get(this.AGREEMENTRATES_API).pipe(
+      map(data => {
+        const agreementsCommissions = data || {};
+        Object.keys(agreementsCommissions).forEach(key => {
+          if (
+            key === 'blockTimeContractCommission' ||
+            key === 'blockTimeContractCommissionExceeding' ||
+            key === 'userOrDeviceContractCommission' ||
+            key === 'userOrDeviceContractCommissionExceeding'
+          ) {
+            agreementsCommissions[key] = +agreementsCommissions[key]
+              ? agreementsCommissions[key].toFixed(2)
+              : agreementsCommissions[key];
+          } else {
+            agreementsCommissions[key] = agreementsCommissions[key];
+          }
+        });
+        return agreementsCommissions;
+      })
+    );
   }
 
   setServiceRate(

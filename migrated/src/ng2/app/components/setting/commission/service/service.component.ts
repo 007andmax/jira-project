@@ -119,22 +119,6 @@ export class ServiceComponent implements OnInit {
                   ? (this.selectedSpecIdx = -1)
                   : (this.selectedIdx = -1);
 
-                // if (isSpecialService && this.specialService.length > 0) {
-                //   // this.specialService.forEach(ss => {
-                //   //   if (service.id === ss.id) {
-                //   //     service.commissionRate = data.rate;
-                //   //   }
-                //   // });
-
-                //   this.selectedSpecIdx = -1;
-                // } else {
-                //   // this.services.forEach(cat => {
-                //   //   if (cat.versionedId.id === id) {
-                //   //     cat.commissionRate = rate;
-                //   //   }
-                //   // });
-                //   this.selectedIdx = -1;
-                // }
               },
               error => {
                 this.toastrService.error(`Error occurred, ${error}`);
@@ -157,23 +141,6 @@ export class ServiceComponent implements OnInit {
                   ? (this.selectedSpecIdx = -1)
                   : (this.selectedIdx = -1);
 
-                // if (isSpecialService && this.specialService.length > 0) {
-                //   // this.specialService.forEach(ss => {
-                //   //   if (service.id === ss.id) {
-                //   //     service.commissionRate = data.rate;
-                //   //   }
-                //   // });
-                //   service.commissionRate = res.commissionRate.toFixed(2);
-                //   this.selectedSpecIdx = -1;
-                // } else {
-                //   service.commissionRate = res.commissionRate.toFixed(2);
-                //   // this.services.forEach(cat => {
-                //   //   if (cat.versionedId.id === id) {
-                //   //     cat.commissionRate = rate;
-                //   //   }
-                //   // });
-                //   this.selectedIdx = -1;
-                // }
               },
               error => {
                 this.toastrService.error(`Error occurred, ${error}`);
@@ -197,23 +164,6 @@ export class ServiceComponent implements OnInit {
                 ? (this.selectedSpecIdx = -1)
                 : (this.selectedIdx = -1);
 
-              // if (isSpecialService && this.specialService.length > 0) {
-              //   service.commissionRate = res.commissionRate.toFixed(2);
-              //   // this.specialService.forEach(ss => {
-              //   //   if (service.id === ss.id) {
-              //   //     service.commissionRate = data.rate;
-              //   //   }
-              //   // });
-              //   this.selectedSpecIdx = -1;
-              // } else {
-              //   // this.services.forEach(cat => {
-              //   //   if (cat.versionedId.id === id) {
-              //   //     cat.commissionRate = rate;
-              //   //   }
-              //   // });
-              //   service.commissionRate = res.commissionRate.toFixed(2);
-              //   this.selectedIdx = -1;
-              // }
             },
             error => {
               this.toastrService.error(`Error occurred, ${error}`);
@@ -240,24 +190,7 @@ export class ServiceComponent implements OnInit {
             isSpecialService
               ? (this.selectedSpecIdx = -1)
               : (this.selectedIdx = -1);
-
-            // if (isSpecialService && this.specialService.length > 0) {
-
-            //   // this.specialService.forEach(ss => {
-            //   //   if (service.id === ss.id) {
-            //   //     service.commissionRate = null;
-            //   //   }
-            //   // });
-            //   this.selectedSpecIdx = -1;
-            // } else {
-            //   // this.services.forEach(cat => {
-            //   //   if (cat.versionedId.id === id) {
-            //   //     cat.commissionRate = null;
-            //   //   }
-            //   // });
-            //   service.commissionRate = null;
-            //   this.selectedIdx = -1;
-            // }
+           
           },
           error => {
             this.toastrService.error(`Error occurred, ${error}`);

@@ -1,3 +1,4 @@
+<ngx-loading [show]="loading"></ngx-loading>
 <div class="cmn-area contract">
   <div class="data-table-wrap">
     <table class="display dataTable" style="width:100%">
@@ -53,18 +54,31 @@
             <h5>Block time Included Hours commission Rate</h5>
           </td>
           <td class="rate">
-             {{agreementsCommissions?.blockTimeContractCommission}}
-            
+            {{ agreementsCommissions?.blockTimeContractCommission }}
           </td>
           <td class="action">
             <a
               href="javascript:;"
               data-tooltip="Edit"
               class="edit"
-              (click)="editContract('commissionRateSetOldSalesBlockTime', 'blockTimeContractCommission')"
+              (click)="
+                editContract(
+                  'commissionRateSetOldSalesBlockTime',
+                  'blockTimeContractCommission'
+                )
+              "
               ><img src="/ng2/assets/img//edit.svg" alt="Edit"
             /></a>
-            <a href="javascript:;" data-tooltip="Remove" class="remove"
+            <a
+              href="javascript:;"
+              data-tooltip="Remove"
+              class="remove"
+              (click)="
+                removeContract(
+                  'commissionRateSetOldSalesBlockTime',
+                  'blockTimeContractCommission'
+                )
+              "
               ><img src="/ng2/assets/img//remove.svg" alt="Remove"
             /></a>
           </td>
@@ -75,12 +89,32 @@
               Rate for hours Exceeding Included hours on Black Time Contracts
             </h5>
           </td>
-          <td class="rate">5%</td>
+          <td class="rate">
+            {{ agreementsCommissions?.blockTimeContractCommissionExceeding }}
+          </td>
           <td class="action">
-            <a href="javascript:;" data-tooltip="Edit" class="edit"
+            <a
+              href="javascript:;"
+              data-tooltip="Edit"
+              class="edit"
+              (click)="
+                editContract(
+                  'commissionRateSetOldSalesBlockTimeExceeding',
+                  'blockTimeContractCommissionExceeding'
+                )
+              "
               ><img src="/ng2/assets/img//edit.svg" alt="Edit"
             /></a>
-            <a href="javascript:;" data-tooltip="Remove" class="remove"
+            <a
+              href="javascript:;"
+              data-tooltip="Remove"
+              class="remove"
+              (click)="
+                removeContract(
+                  'commissionRateSetOldSalesBlockTimeExceeding',
+                  'blockTimeContractCommissionExceeding'
+                )
+              "
               ><img src="/ng2/assets/img//remove.svg" alt="Remove"
             /></a>
           </td>
@@ -112,12 +146,32 @@
           <td class="p-name">
             <h5>Per User and Per Device Contracts</h5>
           </td>
-          <td class="rate">5%</td>
+          <td class="rate">
+            {{ agreementsCommissions?.userOrDeviceContractCommission }}
+          </td>
           <td class="action">
-            <a href="javascript:;" data-tooltip="Edit" class="edit"
+            <a
+              href="javascript:;"
+              data-tooltip="Edit"
+              class="edit"
+              (click)="
+                editContract(
+                  'commissionRateSetOldSalesUserOrDeviceContract',
+                  'userOrDeviceContractCommission'
+                )
+              "
               ><img src="/ng2/assets/img//edit.svg" alt="Edit"
             /></a>
-            <a href="javascript:;" data-tooltip="Remove" class="remove"
+            <a
+              href="javascript:;"
+              data-tooltip="Remove"
+              class="remove"
+              (click)="
+                removeContract(
+                  'commissionRateSetOldSalesUserOrDeviceContract',
+                  'userOrDeviceContractCommission'
+                )
+              "
               ><img src="/ng2/assets/img//remove.svg" alt="Remove"
             /></a>
           </td>
@@ -128,12 +182,32 @@
               Rate for hours Exceeding Included hours on Block Time contracts
             </h5>
           </td>
-          <td class="rate">5%</td>
+          <td class="rate">
+            {{ agreementsCommissions?.userOrDeviceContractCommissionExceeding }}
+          </td>
           <td class="action">
-            <a href="javascript:;" data-tooltip="Edit" class="edit"
+            <a
+              href="javascript:;"
+              data-tooltip="Edit"
+              class="edit"
+              (click)="
+                editContract(
+                  'commissionRateSetOldSalesUserOrDeviceContractExceeding',
+                  'userOrDeviceContractCommissionExceeding'
+                )
+              "
               ><img src="/ng2/assets/img//edit.svg" alt="Edit"
             /></a>
-            <a href="javascript:;" data-tooltip="Remove" class="remove"
+            <a
+              href="javascript:;"
+              data-tooltip="Remove"
+              class="remove"
+              (click)="
+                removeContract(
+                  'commissionRateSetOldSalesUserOrDeviceContractExceeding',
+                  'userOrDeviceContractCommissionExceeding'
+                )
+              "
               ><img src="/ng2/assets/img//remove.svg" alt="Remove"
             /></a>
           </td>
@@ -158,7 +232,7 @@
             &nbsp;
           </td>
         </tr>
-        <tr>
+        <!-- <tr>
           <td class="p-name">
             <h5>Block time Included Hours commission Rate</h5>
           </td>
@@ -171,14 +245,16 @@
               ><img src="/ng2/assets/img//remove.svg" alt="Remove"
             /></a>
           </td>
-        </tr>
+        </tr> -->
       </tbody>
     </table>
   </div>
 </div>
 
-
-<div class="modal-content toggle-area" [ngClass]="{'opened': isModelDisplay === true}" >
+<div
+  class="modal-content toggle-area"
+  [ngClass]="{ opened: isModelDisplay === true }"
+>
   <div class="toggle-header">
     <h2 class="h1">Edit Rate</h2>
   </div>
@@ -191,6 +267,7 @@
             <input
               type="text"
               class="form-input"
+              autocomplete="off"
               name="commissionRate"
               #commissionRate
               placeholder="Enter Commission Rate"

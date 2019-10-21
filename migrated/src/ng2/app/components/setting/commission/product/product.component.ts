@@ -92,11 +92,6 @@ export class ProductComponent implements OnInit {
                 this.loading = false;
                 this.selectedIdx = -1;
                 category.commissionRate = res.commissionRate.toFixed(2);
-                // this.categories.forEach(cat => {
-                //   if (cat.id === id) {
-                //     cat.commissionRate = rate.toFixed(2);
-                //   }
-                // });
               },
               error => {
                 this.loading = false;
@@ -115,11 +110,6 @@ export class ProductComponent implements OnInit {
                 this.loading = false;
                 this.selectedIdx = -1;
                 category.commissionRate = res.commissionRate.toFixed(2);
-                // this.categories.forEach(cat => {
-                //   if (cat.id === id) {
-                //     cat.commissionRate = rate.toFixed(2);
-                //   }
-                // });
               },
               error => {
                 this.loading = false;
@@ -137,11 +127,6 @@ export class ProductComponent implements OnInit {
                 `Commission Rate changed successfully`
               );
               this.loading = false;
-              // this.categories.forEach(cat => {
-              //   if (cat.id === id) {
-              //     cat.commissionRate = res.commissionRate.toFixed(2);
-              //   }
-              // });
               category.commissionRate = res.commissionRate.toFixed(2);
               this.selectedIdx = -1;
             },
