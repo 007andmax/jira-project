@@ -120,9 +120,11 @@
                 setDateText();
                 //  $scope.preview = (($scope.selectedHour < 10) ? "0" + $scope.selectedHour : $scope.selectedHour) + ":" + (($scope.selectedMinute < 10) ? "0" + $scope.selectedMinute : $scope.selectedMinute);
                 $scope.quantity = $scope.selectedHour + (($scope.selectedMinute) ? ($scope.selectedMinute / 60) : 0);
-               
-                if ($scope.editService && $scope.editService.quantity) {
+              
+                if ($scope.editService) {
+                
                     $scope.editService.quantity = $scope.quantity;
+                    console.log('$scope.editService.quantity',$scope.editService.quantity);
                     if ($scope.serviceExpenseDurationPresentation === 'DURATION_PICKER') $rootScope.$broadcast('onChangeDuration', null);
                 }
               
