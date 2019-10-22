@@ -4,7 +4,7 @@
        uib-dropdown is-open="openInDate">
     <input type="text"
            class="new-input"
-           smart-dropdown-menu-position
+           smart-dropdown-menu-position="time-picker"
            ng-blur="onChangeInDateText()" ng-model="inDateText"
            ng-click="toggleInDateDropdown($event)" />
 
@@ -28,6 +28,7 @@
        uib-dropdown is-open="openOutDate">
     <input type="text"
            ng-blur="onChangeOutDateText()" ng-model="outDateText"
+           smart-dropdown-menu-position="time-picker"
            class="new-input" ng-if="serviceExpenseDurationPresentation !== 'DURATION_PICKER'"
            ng-click="toggleOutDateDropdown($event)" />
     <p ng-if="serviceExpenseDurationPresentation === 'DURATION_PICKER'">{{outDateText}}</p>
