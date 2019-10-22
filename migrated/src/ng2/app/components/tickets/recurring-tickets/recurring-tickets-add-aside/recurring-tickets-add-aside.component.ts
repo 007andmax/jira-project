@@ -425,7 +425,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.recurringState.getCreateTicket().resetServices();
     this.createService.setRulesCreateTicket(this.recurringState.getCreateTicket());
     this.products.forEach((item: ForCreateProduct) => (item.name || item.description) && this.recurringState.getCreateTicket().addProdct(new CreateRecurringTicketsProduct(item.versionedId.id, item.quantity, item.discount)));
-    this.services.forEach((item: ForCreateService) => (item.name || item.description) && this.recurringState.getCreateTicket().addService(new CreateRecurringTicketsService(item.versionedId.id, item.description, item.duration)));
+    this.services.forEach((item: ForCreateService) => (item.name) && this.recurringState.getCreateTicket().addService(new CreateRecurringTicketsService(item.versionedId.id, item.description, item.duration)));
     console.log('this.recurringState.getCreateTicket()', this.recurringState.getCreateTicket());
     this.recurringService.createTicket(this.recurringState.getCreateTicket()).subscribe((res) => {
       this.alertState.oninitShowAlert("Recurring ticket has been created");

@@ -58,7 +58,7 @@ export class ForCreateService implements Service {
         this.duration = data;
     }
     public checkService() {
-        if (!this.versionedId) {
+        if (!this.versionedId && this.name !== '') {
             this.errors = ['Service is required'];
             this.noValid = true;
         } else {
