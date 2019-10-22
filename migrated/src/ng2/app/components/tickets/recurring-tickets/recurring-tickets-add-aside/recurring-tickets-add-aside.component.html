@@ -20,7 +20,7 @@
             Company name is required
           </mat-error>
           <p>Assign to Company</p>
-          <app-select-client-company [valid]="validate.getCompany()" style="width: 75%;" class="light-dropdown"
+          <app-select-client-company [blockEditMode]="true" [valid]="validate.getCompany()" style="width: 75%;" class="light-dropdown"
                                      [filter]="true" (selectedItem)="selectClient($event)"></app-select-client-company>
         </div>
 

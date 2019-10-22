@@ -3,6 +3,7 @@ import { CreateRecurringTickets } from './create-recurring-tickets';
 export class Validate  {
     company: boolean = true;
     interval: boolean = true;
+    
     constructor () {}
     public getCompany () {
     return this.company;

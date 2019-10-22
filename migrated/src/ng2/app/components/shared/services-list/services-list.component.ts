@@ -32,13 +32,15 @@ export class ServicesListComponent implements OnInit {
     if (this.editItem && this.editItem.duration) this.elRef.nativeElement.querySelector('#dropdownServices').value = this.getNameOrDescription(this.editItem);
   }
 
+
+
   /**
   * Get name serivce / produuct
   *  @param item - serivce / produuct
   */
    getNameOrDescription(item) {
+    
     if (item && item.name) return item.name;
-    if (item && item.description) return item.description;
     return '';
   }
 

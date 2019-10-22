@@ -142,20 +142,20 @@
               class="dropdown-item"
               ngbDropdownItem
               *ngIf="checkStatus(item, ['READ','UNREAD'])"
-              (click)="refuseQuote(item)">
-              Refuse a quote
+              (click)="cancelQuote(item)">
+              Cancel quote
             </button>
             <button
               class="dropdown-item"
               ngbDropdownItem
-              *ngIf="checkStatus(item, ['UNREAD','SAVED', 'EXPIRED', 'INVOICED', 'TICKETED','REFUSED'])"
+              *ngIf="checkStatus(item, ['UNREAD','SAVED', 'EXPIRED', 'INVOICED', 'TICKETED','CANCELED'])"
               (click)="archiveQuote(item)">
               Archive a quote
             </button>
             <button
               class="dropdown-item"
               ngbDropdownItem
-              *ngIf="checkStatus(item, ['READ','UNREAD','SAVED', 'APPROVED', 'REFUSED', 'EXPIRED'])"
+              *ngIf="checkStatus(item, ['READ','UNREAD','SAVED', 'APPROVED', 'CANCELED', 'EXPIRED'])"
               (click)="goToQuoteEdit(item)">
               Edit a quote
             </button>

@@ -77,10 +77,32 @@
           </li>
         </ul>
       </div>
-      <div class="text-muted ellipsis"
-           ng-if="(ticket.assignedUser && ticket.assignedUser.id) || ticket.assignedUserId"
-           style="width: 36%;vertical-align: top;">
-        {{ getUserName(getUserById(getAssignedUserIDFromTicket(ticket))) }}
+      <div class="pull-left assign-list"
+           ng-if="ticket.assignedUserId && ticket.multiAssignedUsers && ticket.multiAssignedUsers.length == 0 || ticket.assignedUserId && ticket.multiAssignedUsers == null">
+        <div class="shared-avatar pointer"
+             uib-tooltip="{{ getFirstNameUser(getUserById(ticket.assignedUserId)) + ' ' + getLastNameUser(getUserById(ticket.assignedUserId)) }}"
+        >
+          <img ng-if="getUserById(ticket.assignedUserId).avatar"
+          ng-attr-src="{{getUserAvatarUrl(getUserById(ticket.assignedUserId))}}" />
+          <div class="default-user-avatar" ng-if="!getUserById(ticket.assignedUserId).avatar"
+               ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
+            <span>{{getFirstNameUser(getUserById(ticket.assignedUserId))[0].toUpperCase()}}</span>
+            <span>{{getLastNameUser(getUserById(ticket.assignedUserId))[0].toUpperCase()}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="pull-left assign-list"
+           ng-if="ticket.multiAssignedUsers && ticket.multiAssignedUsers.length > 0">
+        <div class="shared-avatar pointer"
+             uib-tooltip="{{ sharedUser.firstName + ' ' + sharedUser.lastName }}"
+             ng-repeat="sharedUser in ticket.multiAssignedUsers">
+          <img ng-if="sharedUser.avatar" ng-attr-src="{{getUserAvatarUrl(sharedUser)}}" />
+          <div class="default-user-avatar" ng-if="!sharedUser.avatar"
+               ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
+            <span>{{sharedUser.firstName[0].toUpperCase()}}</span>
+            <span>{{sharedUser.lastName[0].toUpperCase()}}</span>
+          </div>
+        </div>
       </div>
       <span class="text-muted ellipsis hidden-from"
             style="float: right; margin-right: 0;width: 40%; text-align: right;vertical-align: top; ">

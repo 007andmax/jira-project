@@ -27,8 +27,8 @@ export const QUOTE_STATUS = [
     name: 'Read'
   },
   {
-    type: 'REFUSED',
-    name: 'Refused'
+    type: 'CANCELED',
+    name: 'Canceled'
   },
   {
     type: 'SAVED',

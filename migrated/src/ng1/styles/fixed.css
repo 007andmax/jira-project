@@ -328,17 +328,6 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 @media screen and (max-width: 1366px) {
-  .run-report-content .btn {
-    width: 155px !important;
-  }
-  
-  .custom-width {
-    max-width: 350px !important;
-  }
-  
-  .remote-access-summary .custom-width {
-    max-width: 300px !important;
-  }
   
   .tax-recurring .select-taxes-drv .checkbox-dropdown label {
     padding: 13px 40px 13px 15px;
@@ -566,6 +555,16 @@ body.non-body-scroll::-webkit-scrollbar {
 .notify-user-dropdown {
   display: flex;
   max-width: 48%;
+}
+
+.ticket--footer .notify-user-dropdown,
+.ticket--footer .add-users {
+  max-width: 100%;
+  width: 100%;
+}
+
+.user-full-name {
+  white-space: nowrap;
 }
 
 .create-ticket-form .notify-user-dropdown {
@@ -2264,8 +2263,7 @@ span.sort-span {
   background-color: #16a4fa;
 }
 
-.dropdown-assign-ticket.fixed-assign .users-list .user-item.active,
-.dropdown-assign-ticket.fixed-assign .users-list .user-item:hover {
+.dropdown-assign-ticket.fixed-assign .users-list .user-item.active {
   background-color: #16a4fa;
 }
 

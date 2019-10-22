@@ -2,7 +2,7 @@ import { VersionedId } from '../../../../interfaces/versioned-id';
 import { Service } from 'src/ng2/app/interfaces/service/service';
 import { ServiceRecurringTicket } from '../interfaces/service-recurring-ticket';
 
-export class ForCreateService implements Service  {
+export class ForCreateService implements Service {
     blockTimeServiceAgreement: any;
     canUseInTicket: boolean;
     commissionRate: number;
@@ -16,12 +16,12 @@ export class ForCreateService implements Service  {
     taxes: any;
     updatedAt: any;
     versionedId: VersionedId;
-    description:string = '';
-    quantity:number;
-    duration:number;
-    noValid:boolean = false;
-    errors:Array<String>;
-    constructor (data = null) {
+    description: string = '';
+    quantity: number;
+    duration: number;
+    noValid: boolean = false;
+    errors: Array<String>;
+    constructor(data = null) {
         if (!data) return;
         this.blockTimeServiceAgreement = data.blockTimeServiceAgreement;
         this.canUseInTicket = data.canUseInTicket;
@@ -39,10 +39,33 @@ export class ForCreateService implements Service  {
         this.description = data.description;
         this.quantity = data.quantity;
         this.duration = data.duration;
-      
-    }
 
-    public setDataFromEdit (data:ServiceRecurringTicket,errors:Array<String>) {
+    }
+    public setDescription (description) {
+        this.description = description;
+    }
+    public onInitCopyCrete(data) {
+        this.description = data.serviceDescription;
+        //   this.duration = data.duration;
+    }
+    public setName(name) {
+        this.name = name;
+    }
+    public setVersionedId(versionedId) {
+        this.versionedId = versionedId;
+    }
+    public setDuration (data) {
+        this.duration = data;
+    }
+    public checkService() {
+        if (!this.versionedId && this.name !== '') {
+            this.errors = ['Service is required'];
+            this.noValid = true;
+        } else {
+            this.noValid = false;
+        }
+    }
+    public setDataFromEdit(data: ServiceRecurringTicket, errors: Array<String>) {
         this.duration = data.duration;
         this.description = data.serviceDescription;
         this.blockTimeServiceAgreement = data.service.blockTimeServiceAgreement;

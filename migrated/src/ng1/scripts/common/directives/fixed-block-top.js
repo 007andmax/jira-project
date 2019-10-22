@@ -39,7 +39,7 @@
             //todo: allow to adjust styles
             if (top > 0) {
               element.css({
-                'z-index': 999
+                'z-index': 99
               });
             } else {
               element.css({

@@ -8,6 +8,7 @@
       var scope = $rootScope.$new();
       var ticketChangedActions = ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH', 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_SHARE', 'MARKED_AS_SPAM', 'EDITED_TICKET'];
       var queries, loadingInProcess, lastListType, queriesForCompanyProfilePage;
+      var MY_TICKETS = false;
       var operators = {
         NULL: function (value) {
           return value === null || value === undefined;
@@ -78,12 +79,34 @@
           ALL: { excludeTrashSpam: true },
           UNASSIGNED: {
             excludeTrashSpam: true,
-            groupFieldFilters: [{
-              fieldFilterDtos: [{
-                path: 'assignedUser',
-                operator: 'NULL'
-              }]
-            }]
+            groupFieldFilters: [
+              {
+                "fieldFilterDtos": [
+                  {
+                    "path":"status",
+                    "operator":"NULL"
+                  }
+                ]
+              },
+              {
+                "fieldFilterDtos": [
+                  {
+                    "path": "reportedAsSpamAt",
+                    "operator": "NULL"
+                  },
+                  {
+                    "path": "markedAsSpamAt",
+                    "operator": "NULL"
+                  },
+                  {
+                    "path": "trash",
+                    "operator": "EQ",
+                    "values": [false]
+                  }
+                ],
+                "predicateRule":"OR"
+              }
+            ]
           },
           USER: {
             "excludeTrashSpam": true,
@@ -249,9 +272,12 @@
         };
       }
       function fetchTickets(listType, userId, companyId, callback) {
+
+        console.log('ffffffffffffffffffffffffffffffffffff');
         var query = queries[listType.toUpperCase()]
         // console.log(ticketsSharedState.filter, 'FILTER')
         console.log('ticketsSharedState',ticketsSharedState);
+        MY_TICKETS = false;
         if(ticketsSharedState.filter.companyId || ticketsSharedState.filter.clientUserId || ticketsSharedState.filter.techUserId || (ticketsSharedState.filter.tags && ticketsSharedState.filter.tags.length)) {
           var groupedQuery = {
             excludeTrashSpam: true,
@@ -312,9 +338,16 @@
           storage.lastParams = angular.copy(groupedQuery);
           getCompanyTicketCount(storage.lastParams);
         } else {
+          MY_TICKETS  = true;
+          
           storage.lastParams = angular.copy(query);
         }
         storage.tickets = [];
+        if (MY_TICKETS && listType === 'USER')  {
+          storage.lastParams.groupFieldFilters = [];
+          loadMore(listType, callback);
+          return;
+        }
         if (userId) {
           storage.lastParams.groupFieldFilters = storage.lastParams.groupFieldFilters || [];
           storage.lastParams.groupFieldFilters.push({
@@ -347,7 +380,11 @@
           storage.lastParams.offset = storage.tickets.length;
         }
         console.log('storage.lastParams',storage.lastParams);
+        console.log('listType',listType);
         // storage.lastParams.offset = 14;
+       
+       if (listType === 'USER') storage.lastParams.myTicketsPage = true;
+       
         loadingInProcess = true;
         $http.post('/v2/tickets/getTickets', storage.lastParams, { params: { listType: listType } }).then(function (resp) {
           if (resp && resp.config.params.listType === lastListType) {
