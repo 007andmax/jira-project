@@ -257,6 +257,7 @@
 
           $scope.resetDurationWhenTimePicker = function () {
             console.log('resetDurationWhenTimePicker');
+            console.log('$scope.editService.quantity',$scope.editService.quantity);
             var timeInMinutes = $scope.editService.quantity * 60,
             hours = Math.floor(timeInMinutes / 60),
             minutes = Math.round(timeInMinutes - (hours * 60));

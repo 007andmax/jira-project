@@ -122,21 +122,22 @@
                     newHoursEnd = 0;
                 }
                 var newMinutesEnd = $scope.outDate.minute;
-                var outHour = newHoursEnd - newHours;
-                outHour = (outHour < 0) ? outHour + 24 : outHour;
-                var outMinute = newMinutesEnd - newMinutes;
-                outMinute = (outMinute < 0) ? outMinute + 60 : outMinute;
-                $scope.quantity = outHour + ((outMinute) ? (outMinute / 60) : 0);
+                var newTimeStart = new Date();
+                newHours = newHours > 24 ? newHours - 24 : newHours;
+                newTimeStart.setHours(newHours);
+                newTimeStart.setMinutes(newMinutes);
+
+                var newTimeEnd = new Date();
+                newTimeEnd.setHours(newHoursEnd);
+                newTimeEnd.setMinutes(newMinutesEnd);
+                var startMs = newTimeStart.getTime();
+                var endMs = newTimeEnd.getTime();
+                if (startMs - endMs > 0) endMs = endMs + 24 * 3600000;
+                $scope.quantity = (endMs - startMs) / 3600000 > 0 ? (endMs - startMs) / 3600000 : 0;
+               
                 if ($scope.editService && $scope.serviceExpenseDurationPresentation !== 'DURATION_PICKER') $scope.editService.quantity = $scope.quantity;
                 if ($scope.editService || $scope.serviceExpense) {
-                    var newTimeStart = new Date();
-                    newHours = newHours > 24 ? newHours - 24 : newHours;
-                    newTimeStart.setHours(newHours);
-                    newTimeStart.setMinutes(newMinutes);
-
-                    var newTimeEnd = new Date();
-                    newTimeEnd.setHours(newHoursEnd);
-                    newTimeEnd.setMinutes(newMinutesEnd);
+                   
                     if ($scope.serviceExpense) {
                         $rootScope.saveStartDate = new Date(newTimeStart.getTime());
                         $rootScope.saveEndDate = new Date(newTimeEnd.getTime());
