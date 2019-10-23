@@ -6,7 +6,8 @@
         ['$scope', '$rootScope', 'CompaniesService', function ($scope, $rootScope, CompaniesService) {
             $scope.openInDate = false;
             $scope.openOutDate = false;
-            $scope.hours = [];
+            $scope.hoursInDate = [];
+            $scope.hoursOutDate = [];
             $scope.minutes = [];
             $scope.inDate = { hour: 12, minute: 00, type: "am" };
             $scope.outDate = { hour: 12, minute: 00, type: "am" };
@@ -151,40 +152,65 @@
                 }
             }
             function setSelectedIndexInDate() {
-                var indexHour = $scope.hours.findIndex(hour => hour.value === $scope.inDate.hour && hour.type === $scope.inDate.type);
+                var indexHour = $scope.hoursInDate.findIndex(hour => hour.value === $scope.inDate.hour && hour.type === $scope.inDate.type);
                 var indexMinute = $scope.minutes.findIndex(minute => minute.value === $scope.inDate.minute);
                 $scope.selectedIndexInDate = (indexHour > -1 && indexMinute > -1) ? (indexMinute + $scope.minutes.length * indexHour) : null;
             }
             function setSelectedIndexOutDate() {
-                var indexHour = $scope.hours.findIndex(hour => hour.value === $scope.outDate.hour && hour.type === $scope.outDate.type);
+                var indexHour = $scope.hoursOutDate.findIndex(hour => hour.value === $scope.outDate.hour && hour.type === $scope.outDate.type);
                 var indexMinute = $scope.minutes.findIndex(minute => minute.value === $scope.outDate.minute);
                 $scope.selectedIndexOutDate = (indexHour > -1 && indexMinute > -1) ? (indexMinute + $scope.minutes.length * indexHour) : null;
             }
-            function oninitHous() {
+            function oninitHousInDate() {
                 if ($scope.inDate.hour === 12) {
-                    $scope.hours.push({ value:12, type: $scope.inDate.type, text: "12", i: ($scope.inDate.type === "am") ? 0 : 12});
-                    setHous($scope.inDate.type, ($scope.inDate.type === "am") ? 0 : 12, 1, 11);
-                    $scope.hours.push({ value: 12, type: ($scope.inDate.type === "pm") ? "am" : "pm", text: "12", i: ($scope.inDate.type !== "am") ? 0 : 12 })
-                    setHous(($scope.inDate.type === "pm") ? "am" : "pm", ($scope.inDate.type === "am") ? 0 : 12, 1, 11);
+                    $scope.hoursInDate.push({ value:12, type: $scope.inDate.type, text: "12", i: ($scope.inDate.type === "am") ? 0 : 12});
+                    setHousInDate($scope.inDate.type, ($scope.inDate.type === "am") ? 0 : 12, 1, 11);
+                    $scope.hoursInDate.push({ value: 12, type: ($scope.inDate.type === "pm") ? "am" : "pm", text: "12", i: ($scope.inDate.type !== "am") ? 0 : 12 })
+                    setHousInDate(($scope.inDate.type === "pm") ? "am" : "pm", ($scope.inDate.type === "am") ? 0 : 12, 1, 11);
                 } else {
-                    setHous($scope.inDate.type, 0, $scope.inDate.hour, 11);
+                    setHousInDate($scope.inDate.type, 0, $scope.inDate.hour, 11);
                     var type = ($scope.inDate.type === "pm") ? "am" : "pm";
-                    $scope.hours.push({ value: 12, type: type, text: "12", i: 12 -  $scope.inDate.hour});
-                    setHous(type, (type === "am") ? 0 : 12, 1, 11);
-                    $scope.hours.push({ value: 12, type: $scope.inDate.type, text: "12", i: ($scope.inDate.type === "am") ? 0 : 12 })
-                    setHous( $scope.inDate.type, ($scope.inDate.type === "am") ? 0 : 12, 1, $scope.inDate.hour);
+                    $scope.hoursInDate.push({ value: 12, type: type, text: "12", i: 12 -  $scope.inDate.hour});
+                    setHousInDate(type, (type === "am") ? 0 : 12, 1, 11);
+                    $scope.hoursInDate.push({ value: 12, type: $scope.inDate.type, text: "12", i: ($scope.inDate.type === "am") ? 0 : 12 })
+                    setHousInDate( $scope.inDate.type, ($scope.inDate.type === "am") ? 0 : 12, 1, $scope.inDate.hour);
                 }
                
             }
-            function setHous(type, index, start, end) {
+            function setHousInDate(type, index, start, end) {
                 let indexDuration = index;
                 for (let i = start; i <= end; i++) {
-                    $scope.hours.push({ value: i, type: type, text: (i < 10) ? "0" + i : i, i: indexDuration })
+                    $scope.hoursInDate.push({ value: i, type: type, text: (i < 10) ? "0" + i : i, i: indexDuration })
                     indexDuration ++;
 
                 }
             }
-            oninitHous();
+            function oninitHousOutDate() {
+                if ($scope.outDate.hour === 12) {
+                    $scope.hoursOutDate.push({ value:12, type: $scope.outDate.type, text: "12", i: ($scope.outDate.type === "am") ? 0 : 12});
+                    setHousOutDate($scope.outDate.type, ($scope.outDate.type === "am") ? 0 : 12, 1, 11);
+                    $scope.hoursOutDate.push({ value: 12, type: ($scope.outDate.type === "pm") ? "am" : "pm", text: "12", i: ($scope.outDate.type !== "am") ? 0 : 12 })
+                    setHousOutDate(($scope.outDate.type === "pm") ? "am" : "pm", ($scope.outDate.type === "am") ? 0 : 12, 1, 11);
+                } else {
+                    setHousOutDate($scope.outDate.type, 0, $scope.outDate.hour, 11);
+                    var type = ($scope.outDate.type === "pm") ? "am" : "pm";
+                    $scope.hoursOutDate.push({ value: 12, type: type, text: "12", i: 12 -  $scope.outDate.hour});
+                    setHousOutDate(type, (type === "am") ? 0 : 12, 1, 11);
+                    $scope.hoursOutDate.push({ value: 12, type: $scope.outDate.type, text: "12", i: ($scope.outDate.type === "am") ? 0 : 12 })
+                    setHousOutDate( $scope.outDate.type, ($scope.outDate.type === "am") ? 0 : 12, 1, $scope.outDate.hour);
+                }
+               
+            }
+            function setHousOutDate(type, index, start, end) {
+                let indexDuration = index;
+                for (let i = start; i <= end; i++) {
+                    $scope.hoursOutDate.push({ value: i, type: type, text: (i < 10) ? "0" + i : i, i: indexDuration })
+                    indexDuration ++;
+
+                }
+            }
+            oninitHousOutDate();
+            oninitHousInDate();
             function setTimePickerInterval() {
                 var interval = CompaniesService.getCurrentCompany().serviceExpenseDurationPickerInterval ?
                     CompaniesService.getCurrentCompany().serviceExpenseDurationPickerInterval : 'ONE_MINUTE';
@@ -207,8 +233,8 @@
                 $scope.inDate = { hour: hour.value, minute: minute.value, type: hour.type };
                 
                 $scope.openInDate = !$scope.openInDate;
-                $scope.hours = [];
-                oninitHous();
+                $scope.hoursInDate = [];
+                oninitHousInDate();
                 resetTextInDate();
                 setQuantity();
                 setSelectedIndexInDate();
@@ -216,6 +242,8 @@
             $scope.selectTimeOut = function (hour, minute) {
                 $scope.outDate = { hour: hour.value, minute: minute.value, type: hour.type };
                 $scope.openOutDate = !$scope.openOutDate;
+                $scope.hoursOutDate = [];
+                oninitHousOutDate();
                 resetTextOutDate();
                 setQuantity();
                 setSelectedIndexOutDate();

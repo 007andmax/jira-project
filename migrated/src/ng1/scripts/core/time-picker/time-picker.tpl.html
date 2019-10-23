@@ -15,7 +15,7 @@
 
          style="top: calc(100% + -405px);">
       <div class="start-end-picker-item"
-           ng-repeat="hour in hours track by $index" ng-init="i=$index;" >
+           ng-repeat="hour in hoursInDate track by $index" ng-init="i=$index;" >
         <div ng-repeat="minute in minutes"
              ng-click="selectTimeIn(hour,minute)" ng-class="(selectedIndexInDate === (minute.u + minutes.length * hour.i)) ? 'active' : ''" 
              ng-if="minute.value >= inDate.minute && hour.type === inDate.type && hour.value === inDate.hour && i === 0 || 
@@ -43,13 +43,13 @@
          aub-is-bulk-operation="true"
          style="top: calc(100% + -405px);">
       <div class="start-end-picker-item"
-           ng-repeat="hour in hours" ng-init="i=$index;">
+           ng-repeat="hour in hoursOutDate track by $index" ng-init="i=$index;">
         <div ng-repeat="minute in minutes"
              ng-click="selectTimeOut(hour,minute)" ng-class="(selectedIndexOutDate === (minute.u + minutes.length * hour.i)) ? 'active' : ''"  
-             ng-if="minute.value >= inDate.minute && hour.type === inDate.type && hour.value === inDate.hour && i === 0 || 
-             minute.value < inDate.minute && hour.type === inDate.type && hour.value === inDate.hour && i > 0 ||
-              hour.type === inDate.type && hour.value !== inDate.hour 
-              ||  hour.type !== inDate.type">
+             ng-if="minute.value >= outDate.minute && hour.type === outDate.type && hour.value === outDate.hour && i === 0 || 
+             minute.value < outDate.minute && hour.type === outDate.type && hour.value === outDate.hour && i > 0 ||
+              hour.type === outDate.type && hour.value !== outDate.hour 
+              ||  hour.type !== outDate.type">
           {{hour.text}}:{{minute.text}}{{hour.type}} ({{calculateDuration(hour.value,minute.value,hour.type)}})
         </div>
       </div>
