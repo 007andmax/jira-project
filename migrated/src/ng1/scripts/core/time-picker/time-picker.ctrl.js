@@ -17,7 +17,7 @@
             $scope.serviceExpenseDurationPresentation = CompaniesService.getCurrentCompany().serviceExpenseDurationPresentation ?
                 CompaniesService.getCurrentCompany().serviceExpenseDurationPresentation
                 : 'DURATION_PICKER';
-            $scope.durations = [];
+           
             $scope.intervalsVariant = [
                 {
                     name: 'Every 1 min',
@@ -160,28 +160,26 @@
                 $scope.selectedIndexOutDate = (indexHour > -1 && indexMinute > -1) ? (indexMinute + $scope.minutes.length * indexHour) : null;
             }
             function oninitHous() {
-              //  $scope.hours.push({ value: $scope.inDate.hour, type: $scope.inDate.type, text: $scope.inDate.hour.toString(), i: ($scope.inDate.type === "am") ? 0 : 12});
                 if ($scope.inDate.hour === 12) {
                     $scope.hours.push({ value:12, type: $scope.inDate.type, text: "12", i: ($scope.inDate.type === "am") ? 0 : 12});
                     setHous($scope.inDate.type, ($scope.inDate.type === "am") ? 0 : 12, 1, 11);
                     $scope.hours.push({ value: 12, type: ($scope.inDate.type === "pm") ? "am" : "pm", text: "12", i: ($scope.inDate.type !== "am") ? 0 : 12 })
                     setHous(($scope.inDate.type === "pm") ? "am" : "pm", ($scope.inDate.type === "am") ? 0 : 12, 1, 11);
                 } else {
-                    setHous($scope.inDate.type, ($scope.inDate.type === "am") ? 0 : 12, $scope.inDate.hour, 11);
+                    setHous($scope.inDate.type, 0, $scope.inDate.hour, 11);
                     var type = ($scope.inDate.type === "pm") ? "am" : "pm";
-                    $scope.hours.push({ value: 12, type: type, text: "12", i: (type === "am") ? 0 : 12 });
+                    $scope.hours.push({ value: 12, type: type, text: "12", i: 12 -  $scope.inDate.hour});
                     setHous(type, (type === "am") ? 0 : 12, 1, 11);
                     $scope.hours.push({ value: 12, type: $scope.inDate.type, text: "12", i: ($scope.inDate.type === "am") ? 0 : 12 })
                     setHous( $scope.inDate.type, ($scope.inDate.type === "am") ? 0 : 12, 1, $scope.inDate.hour);
                 }
-               /* if ($scope.inDate.hour !== 12) 
-                $scope.hours.push({ value: 12, type: ($scope.inDate.type === "pm") ? "am" : "pm", text: "12", i: ($scope.inDate.type === "am") ? 0 : 12 })
-                setHous(($scope.inDate.type === "pm") ? "am" : "pm", ($scope.inDate.type === "am") ? 0 : 12, 1, $scope.inDate.hour);*/
-                console.log('$scope.hours', $scope.hours);
+               
             }
             function setHous(type, index, start, end) {
+                let indexDuration = index;
                 for (let i = start; i <= end; i++) {
-                    $scope.hours.push({ value: i, type: type, text: (i < 10) ? "0" + i : i, i: index + i })
+                    $scope.hours.push({ value: i, type: type, text: (i < 10) ? "0" + i : i, i: indexDuration })
+                    indexDuration ++;
 
                 }
             }
@@ -199,14 +197,17 @@
                 var minute = step * $scope.timePickerInterval.value;
                 $scope.minutes.push({ value: minute, text: (minute < 10) ? "0" + minute : minute, u: step });
             }
-            calculateDurations();
+            console.log('$scope.minutes',$scope.minutes);
+           
             setSelectedIndexInDate();
             setSelectedIndexOutDate();
 
             $scope.selectTimeIn = function (hour, minute) {
                 $scope.inDate = { hour: hour.value, minute: minute.value, type: hour.type };
-                calculateDurations();
+                
                 $scope.openInDate = !$scope.openInDate;
+                $scope.hours = [];
+                oninitHous();
                 resetTextInDate();
                 setQuantity();
                 setSelectedIndexInDate();
@@ -217,47 +218,48 @@
                 resetTextOutDate();
                 setQuantity();
                 setSelectedIndexOutDate();
+                console.log('$scope.outDate',$scope.outDate);
             }
-            function calculateDurations() {
-                $scope.durations = [];
-                for (var i = 0; i < $scope.hours.length; i++) {
-                    for (var u = 0; u < $scope.minutes.length; u++) {
-                        var newTimeStart = new Date();
-                        var newHours = Number($scope.inDate.hour);
-                        if ($scope.inDate.type === 'pm' && Number($scope.inDate.hour) != 12) {
-                            newHours = +Number($scope.inDate.hour) + 12
-                        } else {
-                            newHours = +Number($scope.inDate.hour);
-                        }
-                        if ($scope.inDate.type === 'am' && Number($scope.inDate.hour) == 12) {
-                            newHours = 0;
-                        }
-                        var newMinutes = Number($scope.inDate.minute);
-                        newHours = newHours > 24 ? newHours - 24 : newHours;
-                        newTimeStart.setHours(newHours);
-                        newTimeStart.setMinutes(newMinutes);
-
-                        var newTimeEnd = new Date();
-                        var newHoursEnd = $scope.hours[i].type === 'pm' && $scope.hours[i].value !== 12 ?
-                            +$scope.hours[i].value + 12 : $scope.hours[i].value;
-                        if ($scope.hours[i].type === 'am' && $scope.hours[i].value == 12) {
-                            newHoursEnd = 0;
-                        }
-                        var newMinutesEnd = $scope.minutes[u].value;
-                        newTimeEnd.setHours(newHoursEnd);
-                        newTimeEnd.setMinutes(newMinutesEnd);
-                        var startMs = newTimeStart.getTime();
-                        var endMs = newTimeEnd.getTime();
-                        if (startMs - endMs > 0) endMs = endMs + 24 * 3600000;
-                        var duration = (endMs - startMs) / 3600000 > 0 ? (endMs - startMs) / 3600000 : 0;
-                        var timeInMinutes = duration * 60,
-                            hours = Math.floor(timeInMinutes / 60),
-                            minutes = Math.round(timeInMinutes - (hours * 60));
-                        $scope.durations.push({ hour: hours, minute: minutes });
-                    }
+            $scope.calculateDuration = function (hour,minute,type) {
+                var newTimeStart = new Date();
+                var newHours = Number($scope.inDate.hour);
+                if ($scope.inDate.type === 'pm' && Number($scope.inDate.hour) != 12) {
+                    newHours = +Number($scope.inDate.hour) + 12
+                } else {
+                    newHours = +Number($scope.inDate.hour);
                 }
-                console.log('$scope.durations',$scope.durations);
+                if ($scope.inDate.type === 'am' && Number($scope.inDate.hour) == 12) {
+                    newHours = 0;
+                }
+                var newMinutes = Number($scope.inDate.minute);
+                newHours = newHours > 24 ? newHours - 24 : newHours;
+                newTimeStart.setHours(newHours);
+                newTimeStart.setMinutes(newMinutes);
+
+                var newTimeEnd = new Date();
+                var newHoursEnd = type === 'pm' && hour !== 12 ?
+                    +hour + 12 : hour;
+                if (type === 'am' && hour == 12) {
+                    newHoursEnd = 0;
+                }
+               
+                var newMinutesEnd = minute;
+              
+                newTimeEnd.setHours(newHoursEnd);
+                newTimeEnd.setMinutes(newMinutesEnd);
+               
+             
+                var startMs = newTimeStart.getTime();
+                var endMs = newTimeEnd.getTime();
+                if (startMs - endMs > 0) endMs = endMs + 24 * 3600000;
+                var duration = (endMs - startMs) / 3600000 > 0 ? (endMs - startMs) / 3600000 : 0;
+              
+                var timeInMinutes = duration * 60,
+                    hours = Math.floor(timeInMinutes / 60),
+                    minutes = Math.round(timeInMinutes - (hours * 60));
+                return `${(hours < 10) ? "0" + hours : hours}h ${(minutes < 10) ? "0" + minutes : minutes}m`;
             }
+           
 
             function resetTextInDate() {
                 var hourText = (($scope.inDate.hour < 10) ? "0" + $scope.inDate.hour : $scope.inDate.hour);
@@ -275,7 +277,7 @@
                 if (isNaN(minute)) minute = 0;
                 $scope.inDate.hour = hour;
                 $scope.inDate.minute = minute;
-                calculateDurations();
+               
                 setQuantity();
             }
             function resetTextOutDate() {
