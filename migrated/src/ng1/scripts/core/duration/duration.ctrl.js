@@ -139,9 +139,9 @@
                 var container  = $($event.target).parent('.duration-container-values').find('.duration-container-values-hours');
                var scrollTop = container.scrollTop();
               if (top) {
-                scrollTop -= 15;
+                scrollTop -= 30;
               } else {
-                scrollTop += 15;
+                scrollTop += 30;
               }
                 container.scrollTop(scrollTop);
             }
@@ -149,9 +149,9 @@
                 var container  = $($event.target).parent('.duration-container-values').find('.duration-container-values-minutes');
                var scrollTop = container.scrollTop();
               if (top) {
-                scrollTop -= 15;
+                scrollTop -= 30;
               } else {
-                scrollTop += 15;
+                scrollTop += 30;
               }
                 container.scrollTop(scrollTop);
             }
