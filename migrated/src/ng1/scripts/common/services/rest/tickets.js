@@ -570,9 +570,16 @@
         });
       }
       function getAllCounts(callback) {
+       
         allCountsCallback = callback;
         if (queries) {
-          $http.post('/v2/tickets/counts', queries).then(function (resp) {
+          var queries_start = JSON.parse(JSON.stringify(queries));
+          queries_start.USER = {"excludeTrashSpam": true,
+          "groupFieldFilters": [],
+          "offset": 0,
+          "myTicketsPage": true};
+          console.log('getAllCounts --------------------------',queries_start);
+          $http.post('/v2/tickets/counts', queries_start).then(function (resp) {
             storage.ticketsQuantityMap = resp.data;
             if (callback) {
               callback(storage.ticketsQuantityMap);
