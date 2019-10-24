@@ -435,7 +435,7 @@
             if (!isCalled) {
               isCalled = true;
               fn.apply(this, args);
-              console.log('call debounced fn');
+            
               interval = setTimeout(function () {
                 isCalled = false;
 
@@ -837,7 +837,7 @@
 
   function getUserDefaultPage() {
 
-    console.log('is it default??');
+  
     var defaultTicketsPage,
       startPageMap = {
         ALL: 'all',

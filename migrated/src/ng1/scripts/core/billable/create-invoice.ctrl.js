@@ -59,8 +59,8 @@
 
         BillableService.getInvoiceData(function(res) {
           var data = res.data;
-          // console.log(data, 'data')
-          // if (false && (!data || data.length === 0)) {
+           
+         
           if (false) {
             var requests = 0;
 

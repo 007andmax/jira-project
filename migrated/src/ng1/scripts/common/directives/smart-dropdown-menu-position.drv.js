@@ -136,12 +136,7 @@
             }
 
           }else if(parentElement ) {
-            // if(!d.hasClass('ng-hide')) {
-            //   parentElement.css({'overflow': 'visible'});
-            //   //console.log('open')
-            // } else {
-            //   parentElement.css({'overflow': 'hidden'});
-            // }
+          
 
             if(attrs.smartDropdownMenuPosition === 'user-list') {
               if((winHeight - position) < 250) {

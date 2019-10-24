@@ -592,7 +592,7 @@
               }
             }
           } else if (location === '/reports/ticket-report') {
-            console.log(reportSettings.techUser, 'reportSettings.techUser');
+           
             if (reportSettings.company) {
               var dataToSend = {
                 company: reportSettings.company,
@@ -613,7 +613,7 @@
               $scope.$emit("requestReportData", dataToSend, location, techType);
 
             } else if (reportSettings.techUser) {
-              console.log($scope.currentCompany.createdAt, '$scope.currentCompany.createdAt');
+             
               var dataToSend = {
                 company: '',
                 companyId: '',
@@ -835,7 +835,7 @@
             ReportsService.exportCsvByTechSummary(lastSentData);
             break;
           default:
-            console.log("wrong location")
+           
         }
       }
     }

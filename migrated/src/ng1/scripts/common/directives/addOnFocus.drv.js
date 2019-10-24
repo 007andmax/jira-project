@@ -16,13 +16,13 @@
             var input = element.find($scope.isTextarea ? 'textarea' : 'input:not([no-select])');
 
 
-            // console.log('input', input, 'ENDLESS INTERVAL')
+         
 
             if (!input.length) {
               return;
             }
 
-            // console.log(input, 'INPUT INPUT INPUT')
+           
 
             $scope.$watch(function() {
               return $rootScope.taxPlaceholderIsUp;
@@ -31,7 +31,7 @@
                 $rootScope.taxPlaceholderIsUp = false;
 
                 if (input.hasClass('tax-input')) {
-                  // console.log('tax input');
+                  
 
                   element.addClass('active-field');
                 }
@@ -64,7 +64,7 @@
             })
 
             if (input.length && input.length !== 0) {
-              // console.log(input, "CLEAR INTERVAL")
+             
               clearInterval(interval);
 
               setTimeout(function() {

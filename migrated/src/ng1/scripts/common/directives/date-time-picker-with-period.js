@@ -77,7 +77,7 @@
               element.bind('dp.update', function (e) {
                 var data = dp.data("DateTimePicker"),
                   minDate = new Date(scope.minDate);
-                //console.log(pickedDate);
+               
 
                 if (e.viewDate._d.getMonth() === minDate.getMonth() &&
                   e.viewDate._d.getFullYear() === minDate.getFullYear()) {

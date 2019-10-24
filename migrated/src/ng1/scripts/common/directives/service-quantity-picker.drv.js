@@ -15,7 +15,7 @@
           time: '<'
         },
         link: function (scope, element, attrs) {
-        console.log('quantity',scope.quantity);
+        
           if (scope.sqpDay) {
             scope.sqpInput = 'sqp-cond-input=' + '"' + scope.sqpDay + ' ' + scope.sqpPeriod + '"';
           } else {
@@ -45,7 +45,7 @@
           element.addClass('timer-quantity');
 
           scope.$on('changeEditService', function(event, data) {
-            console.log('changeEditService');
+           
             scope.quantity = data;
             minutesElement.val(Math.round(+((scope.quantity - Math.floor(scope.quantity))*60)));
             hourElement.val(Math.floor(scope.quantity));
@@ -180,7 +180,7 @@
               } else {
                 savedValue = splited.join('');
               }
-console.log('scope.quantity',scope.quantity);
+ 
               input.val(savedValue);
               scope.$emit('changeQuantity', scope.quantity);
               return;
@@ -202,7 +202,7 @@ console.log('scope.quantity',scope.quantity);
               } else {
                 savedValue = value;
               }
-              console.log('scope.quantity',scope.quantity);
+           
               scope.$emit('changeQuantity', scope.quantity);
               input.val(savedValue);
             }
@@ -243,7 +243,7 @@ console.log('scope.quantity',scope.quantity);
                   if (minutes < 10) {
                     minutes = '0' + minutes;
                   }
-                  console.log('setStartingValue',hours + " " + minutes);
+                 
                   input.val(hours + ' : ' + minutes);
              
               } else {
@@ -315,7 +315,7 @@ console.log('scope.quantity',scope.quantity);
           };
 
           function chooseQuantity(event) {
-            console.log('chooseQuantity');
+           
             var startHours = Math.floor(scope.quantity) ? Math.floor(scope.quantity) : 0,
               startMinutes = (scope.quantity%Math.floor(scope.quantity)> 0) ? ( scope.quantity - Math.floor(scope.quantity))*60 : 0;
 
@@ -363,11 +363,11 @@ console.log('scope.quantity',scope.quantity);
           }
 
           function setStartingValue(value, hourDropdown, minuteDropdown, formatDropdown) {
-         console.log('setStartingValue',value);
+        
           
             
             if (scope.sqpDay) {
-              console.log('scope.sqpDay',scope.sqpDay);
+            
               var time = value.split(':');
               var hour = time[0];
               var minute = time[1];
@@ -397,7 +397,7 @@ console.log('scope.quantity',scope.quantity);
               if (minutes < 10) {
                 minutes = '0' + minutes;
               }
-              console.log('setStartingValue',hours + " " + minutes);
+           
               setValue(hour, minute);
             } else {
               setValue('00', value < 10 ? '0' + value : value);
@@ -405,7 +405,7 @@ console.log('scope.quantity',scope.quantity);
           }
 
             function setValue(hours, minute) {
-            console.log('setValue', `${hours} ${minute}`);
+          
               if (scope.quantity) {
                 var timeInMinutes = scope.quantity * 60,
                 hours = Math.floor(timeInMinutes / 60),

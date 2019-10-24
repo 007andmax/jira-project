@@ -273,10 +273,10 @@
       }
       function fetchTickets(listType, userId, companyId, callback) {
 
-        console.log('ffffffffffffffffffffffffffffffffffff');
+       
         var query = queries[listType.toUpperCase()]
-        // console.log(ticketsSharedState.filter, 'FILTER')
-        console.log('ticketsSharedState',ticketsSharedState);
+        
+       
         MY_TICKETS = false;
         if(ticketsSharedState.filter.companyId || ticketsSharedState.filter.clientUserId || ticketsSharedState.filter.techUserId || (ticketsSharedState.filter.tags && ticketsSharedState.filter.tags.length)) {
           var groupedQuery = {
@@ -368,7 +368,7 @@
             }]
           });
         }
-        console.log('listType',listType);
+     
         loadMore(listType, callback);
       }
       function loadMore(listType, callback) {
@@ -379,8 +379,7 @@
         if (storage.lastParams) {
           storage.lastParams.offset = storage.tickets.length;
         }
-        console.log('storage.lastParams',storage.lastParams);
-        console.log('listType',listType);
+       
         // storage.lastParams.offset = 14;
        
        if (listType === 'USER') storage.lastParams.myTicketsPage = true;
@@ -422,7 +421,7 @@
         var filter = url.slice(-1)[0].toUpperCase();
         var filters = storage.lastParams.groupFieldFilters && storage.lastParams.groupFieldFilters[0].fieldFilterDtos;
         var userId, companyId, techId;
-        // console.log(storage.lastParams.groupFieldFilters[0].fieldFilterDtos, "PARAMS", filter);
+       
         if (filters && Array.isArray(filters)) {
           companyId = filters.find(function(el) {
             return el.path === 'companyId';
@@ -482,7 +481,7 @@
         });
         RealTimeService.subscribe('/ticketUpdates/' + ticket.id, targetScope, function (newChange) {
           if (newChange.action == 'UPDATE_SAVED' || newChange.action == 'UPDATE_CREATED') {
-            // console.log(newChange, 'NEWWWWCHANGeEE')
+           
             var update = Utils.findById(ticket.updates, newChange.data.id),
               attachments = newChange.data.attachments;
             if (update) {
@@ -578,7 +577,7 @@
           "groupFieldFilters": [],
           "offset": 0,
           "myTicketsPage": true};
-          console.log('getAllCounts --------------------------',queries_start);
+         
           $http.post('/v2/tickets/counts', queries_start).then(function (resp) {
             storage.ticketsQuantityMap = resp.data;
             if (callback) {
@@ -754,7 +753,7 @@
         });
       }
       function createTicketUpdate(ticketUpdate, close, callback, type) {
-        console.log(ticketUpdate, 'ticketUpdate');
+       
         if (!ticketUpdate) {
           throw 'ticketUpdate is required arguments!';
         }
@@ -854,9 +853,9 @@
         var ticketIndex = Utils.indexOfId(storage.tickets, newChange.data.id),
           ticketById = storage.tickets[ticketIndex];
         if (newChange.action === 'CREATED_TICKET') {
-          // console.log(storage, "CREATED")
+         
           // storage.ticketsQuantityMap.ALL = 1000000000;
-          // console.log(storage.ticketsQuantityMap, globalSearch, "TICKETS")
+        
           if (isTicketMatchesFilters(newChange.data, storage.lastParams)) {
             if (ticketById) {
               Utils.customizeObj(newChange.data, ticketById);
@@ -869,7 +868,7 @@
           }
           storage.ticketsQuantityCallback && storage.ticketsQuantityCallback(storage.ticketsQuantity);
         } else if (ticketChangedActions.indexOf(newChange.action) > -1) {
-          console.log('newChange',newChange.data);
+         
           var isUpdate = newChange.action === 'EDITED_TICKET';
           /*newChange.data.products.forEach(function (product) {
             product.date = $filter('date')(product.date, 'd MMM yyyy');

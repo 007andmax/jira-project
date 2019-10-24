@@ -162,8 +162,7 @@ angular.module('gc.fastRepeat', []).directive('fastRepeat', ['$compile', '$parse
             updateList(rowTpl, scope);
             if (showProfilingInfo) {
               t = getTime() - t;
-              console.log("Total time: ", t, "ms");
-              console.log("time per row: ", t/list.length);
+             
             }
             busy=false;
           });

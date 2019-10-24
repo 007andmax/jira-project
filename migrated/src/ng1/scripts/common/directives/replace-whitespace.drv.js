@@ -7,7 +7,7 @@
       return {
         restrict: 'A',
         link: function (scope, element) {
-          console.log('123512351235123513');
+      
 
           element.on({
             keydown: function(e) {

@@ -140,13 +140,13 @@
       function isUpdateModeAllowed(ticket) {
        if (!ticket.status)return false;
         if ($rootScope.currentUser && $rootScope.currentUser.isOwner && ticket.assignedUser && ticket.assignedUser.id && isTicketOpen(ticket) || $rootScope.currentUser && $rootScope.currentUser.isOwner && ticket.multiAssignedUsers && ticket.multiAssignedUsers.length > 0 && isTicketOpen(ticket)) {
-        //  console.log('111111111111111111111111111111111');
+       
           return true;
         }
 
         if (PermissionsService.isAllowed('EDIT_ANOTHER_USERS_TICKET') && ticket.assignedUser && ticket.assignedUser.id && isTicketOpen(ticket) || PermissionsService.isAllowed('EDIT_ANOTHER_USERS_TICKET') && ticket.multiAssignedUsers && ticket.multiAssignedUsers.length > 0 && isTicketOpen(ticket)) {
 
-       //  console.log('22222222222222222222222222222');
+       
           return true;
         }
         let indexUser = -1;
@@ -162,13 +162,13 @@
       function isUpdateAllowed(ticket) {
        
         if ($rootScope.currentUser && $rootScope.currentUser.isOwner && ticket.assignedUser && ticket.assignedUser.id && isTicketOpen(ticket) || $rootScope.currentUser && $rootScope.currentUser.isOwner && ticket.multiAssignedUsers && ticket.multiAssignedUsers.length > 0 && isTicketOpen(ticket)) {
-        //  console.log('111111111111111111111111111111111');
+       
           return true;
         }
 
         if (PermissionsService.isAllowed('EDIT_ANOTHER_USERS_TICKET') && ticket.assignedUser && ticket.assignedUser.id && isTicketOpen(ticket) || PermissionsService.isAllowed('EDIT_ANOTHER_USERS_TICKET') && ticket.multiAssignedUsers && ticket.multiAssignedUsers.length > 0 && isTicketOpen(ticket)) {
 
-       //  console.log('22222222222222222222222222222');
+      
           return true;
         }
         let indexUser = -1;
@@ -187,7 +187,7 @@
         }
 
         if (PermissionsService.isAllowed('EDIT_ANOTHER_USERS_TICKET') && ticket.assignedUser && isTicketOpen(ticket)) {
-          // console.log('ACTION IS ALLOWEDDDD')
+           
           return true;
         }
 
