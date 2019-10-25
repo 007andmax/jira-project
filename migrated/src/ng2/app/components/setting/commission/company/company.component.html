@@ -1,852 +1,115 @@
+<ngx-loading [show]="loading"></ngx-loading>
 <div class="cmn-area companies">
-    <div class="data-table-wrap">
-
-      <table class="display dataTable" style="width:100%">
-            <thead>
-              <tr>
-                <th class="c-name">Company </th>
-                <th class="address">Address</th>
-                <th class="sp">Sales Person</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let company of clientsCompanies;let i = index;">
-                  <td class="c-name" >
-                    <div class="c-info">
-                       <span class="c-logo">{{ company.name[0].toUpperCase() }}</span>
-                       <h5>{{ company.name }}</h5>
+  <div class="data-table-wrap">
+    <table class="display dataTable" style="width:100%">
+      <thead>
+        <tr>
+          <th class="c-name">Company</th>
+          <th class="address">Address</th>
+          <th class="sp">Sales Person</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let company of clientsCompanies; let i = index">
+          <td class="c-name">
+            <div class="c-info">
+              <span class="c-logo">{{ company.name[0].toUpperCase() }}</span>
+              <h5>{{ company.name }}</h5>
+            </div>
+          </td>
+          <td class="address">
+            {{
+              company.companyInfo.addresses[0]
+                .addressWithSuitNumberAndPostalCode
+            }}
+          </td>
+          <td class="sp">
+            <div class="">
+              <ng-select
+              class="disable-arrow disable-dropdown disable-clear-all"
+                [items]="activeTechUsers"
+                bindLabel="firstName"
+                bindValue="firstName"
+                (change)="setTechLead($event, company)"
+                placeholder="Select Tech Users"
+                ngModel="{{ selectedActiveTechUsers(company, i) }}"
+              >
+                <ng-template ng-label-tmp let-item="item">
+                  <img height="15" width="15" [src]="getClinetUrl(item)" />
+                  <b>{{ getFullName(item)}}</b>
+                </ng-template>
+                <ng-template ng-option-tmp let-item="item" let-index="index">
+                  <img
+                    height="15"
+                    width="15"
+                    *ngIf="item.avatar"
+                    src="/users/{{ item.id }}/image.jpg?t={{
+                      item.avatar.updatedAt
+                    }}"
+                  />
+                  <b>{{ item.firstName }} {{ item.lastName }}</b>
+                </ng-template>
+              </ng-select>
+            </div>
+          </td>
+        </tr>
+        <!-- <tr>
+          <td class="c-name">
+            <div class="c-info">
+              <span class="c-logo">SH</span>
+              <h5>Sherlon Hens</h5>
+            </div>
+          </td>
+          <td class="address">
+            49 Branch St. <br />
+            Plainview, NY 11803
+          </td>
+          <td class="sp">
+            <div class="cmn-dropdown">
+              <div class="drop-down-select" (click)="show = !show">
+                <span class="selcted-dp">
+                  <img src="/ng2/assets/img/user.jpg" alt="user" />
+                </span>
+                <span class="selected-opt">Kenneth Powers</span>
+              </div>
+              <div class="cmn-dropdon-list" style="display: none">
+                <form method="POST">
+                  <input type="text" placeholder="Search Tech Person" />
+                </form>
+                <ul class="list-unstyled">
+                  <li>
+                    <span class="pic"
+                      ><img src="/ng2/assets/img/user.jpg" alt="user"
+                    /></span>
+                    <div class="info">
+                      <h5>Tony Dawson</h5>
+                      <span class="email">bode.rigoberto@kemmer.com</span>
                     </div>
-                  </td>
-                  <td class="address" >
-                      {{
-                        company.companyInfo.addresses[0]
-                          .addressWithSuitNumberAndPostalCode
-                      }}
-                  </td>
-                  <td class="sp"  >
-                    <div class="" >
-
-                        <ng-select 
-                        [items]="activeTechUsers"
-                        bindLabel="firstName"
-                        bindValue="firstName"
-                        (change)="setTechLead($event,company)"
-                        placeholder="Select Tech Users"
-                        ngModel="{{selectedActiveTechUsers(company,i)}}">
-                 <ng-template ng-label-tmp let-item="item">
-                     <img height="15" width="15" [src]="getClinetUrl(item)"/>
-                     <b>{{item.firstName}}</b> 
-                 </ng-template>
-                 <ng-template ng-option-tmp let-item="item" let-index="index" >
-                     <img height="15" width="15" *ngIf="item.avatar" src="/users/{{item.id}}/image.jpg?t={{item.avatar.updatedAt}}"/>
-                     <b>{{item.firstName}}</b>
-                 </ng-template>
-                 <!-- <ng-template ng-footer-tmp>
-                   Custom footer
-                 </ng-template> -->
-             </ng-select>
-
-                        <!-- <div class="drop-down-select" (click)="show = !show">
-                          <span class="selcted-dp">
-                             <img src="/ng2/assets/img/user.jpg" alt="user" />
-                          </span>
-                           <span class="selected-opt">Tony Dawson</span>
-                        </div> -->
-                        <!-- {{selectedActiveTechUsers(company)}} -->
-                        <!-- <ngx-select-dropdown
-                        [config]="config"
-                        [options]="activeTechUsers"
-                        [(ngModel)]="selectName"
-                        [multiple]="true"
-                      >
-                      <ng-template ng-label-tmp let-option="option">
-                           <img height="15" width="15" [src]="option.avatar"/>
-                           <b>{{option.lastName}}</b> is cool
-                       </ng-template>
-                     </ngx-select-dropdown> -->
-                        <div class=""  *ngIf="true">
-                           <form method="POST">
-                         
-                              <!-- <input type="text"  placeholder="Search Tech Person"/> -->
-                           </form>
-                          
-                           <!-- <ul class="list-unstyled">
-                              <li *ngFor="let client of activeTechUsers">
-                                <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                 <div class="info">
-                                   <h5>Tony Dawson</h5>
-                                   <span class="email">bode.rigoberto@kemmer.com</span>
-                                 </div>
-                              </li>
-                              <li>
-                                  <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                   <div class="info">
-                                     <h5>Tony Dawson</h5>
-                                     <span class="email">bode.rigoberto@kemmer.com</span>
-                                   </div>
-                                </li>
-                                <li>
-                                    <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                     <div class="info">
-                                       <h5>Tony Dawson</h5>
-                                       <span class="email">bode.rigoberto@kemmer.com</span>
-                                     </div>
-                                  </li>
-                           </ul> -->
-                        </div>
+                  </li>
+                  <li>
+                    <span class="pic"
+                      ><img src="/ng2/assets/img/user.jpg" alt="user"
+                    /></span>
+                    <div class="info">
+                      <h5>Tony Dawson</h5>
+                      <span class="email">bode.rigoberto@kemmer.com</span>
                     </div>
-                  </td>
-               </tr>
-               <tr>
-                  <td class="c-name">
-                    <div class="c-info">
-                       <span class="c-logo">SH</span>
-                       <h5>Sherlon Hens</h5>
+                  </li>
+                  <li>
+                    <span class="pic"
+                      ><img src="/ng2/assets/img/user.jpg" alt="user"
+                    /></span>
+                    <div class="info">
+                      <h5>Tony Dawson</h5>
+                      <span class="email">bode.rigoberto@kemmer.com</span>
                     </div>
-                  </td>
-                  <td class="address">
-                      49 Branch St. <br>
-                      Plainview, NY 11803
-                  </td>
-                  <td class="sp">
-                    <div class="cmn-dropdown">
-                        <div class="drop-down-select" (click)="show = !show">
-                          <span class="selcted-dp">
-                             <img src="/ng2/assets/img/user.jpg" alt="user" />
-                          </span>
-                           <span class="selected-opt">Kenneth Powers</span>
-                        </div>
-                        <div class="cmn-dropdon-list" style="display: none">
-                           <form method="POST">
-                              <input type="text" placeholder="Search Tech Person"/>
-                           </form>
-                           <ul class="list-unstyled">
-                              <li>
-                                <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                 <div class="info">
-                                   <h5>Tony Dawson</h5>
-                                   <span class="email">bode.rigoberto@kemmer.com</span>
-                                 </div>
-                              </li>
-                              <li>
-                                  <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                   <div class="info">
-                                     <h5>Tony Dawson</h5>
-                                     <span class="email">bode.rigoberto@kemmer.com</span>
-                                   </div>
-                                </li>
-                                <li>
-                                    <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                     <div class="info">
-                                       <h5>Tony Dawson</h5>
-                                       <span class="email">bode.rigoberto@kemmer.com</span>
-                                     </div>
-                                  </li>
-                           </ul>
-                        </div>
-                    </div>
-                  </td>
-               </tr>
-               <tr>
-                  <td class="c-name">
-                    <div class="c-info">
-                       <span class="c-logo">LG</span>
-                       <h5>Life’s Good</h5>
-                    </div>
-                  </td>
-                  <td class="address">
-                      824 16th Avenue Southwest <br>
-                      Calgary, AB T2R 0S9
-                  </td>
-                  <td class="sp">
-                    <div class="cmn-dropdown">
-                        <div class="drop-down-select" (click)="show = !show">
-                          <span class="selcted-dp">
-                             <img src="/ng2/assets/img/user.jpg" alt="user" />
-                          </span>
-                           <span class="selected-opt">Oscar Brock</span>
-                        </div>
-                        <div class="cmn-dropdon-list" style="display: none">
-                           <form method="POST">
-                              <input type="text" placeholder="Search Tech Person"/>
-                           </form>
-                           <ul class="list-unstyled">
-                              <li>
-                                <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                 <div class="info">
-                                   <h5>Tony Dawson</h5>
-                                   <span class="email">bode.rigoberto@kemmer.com</span>
-                                 </div>
-                              </li>
-                              <li>
-                                  <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                   <div class="info">
-                                     <h5>Tony Dawson</h5>
-                                     <span class="email">bode.rigoberto@kemmer.com</span>
-                                   </div>
-                                </li>
-                                <li>
-                                    <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                     <div class="info">
-                                       <h5>Tony Dawson</h5>
-                                       <span class="email">bode.rigoberto@kemmer.com</span>
-                                     </div>
-                                  </li>
-                           </ul>
-                        </div>
-                    </div>
-                  </td>
-               </tr>
-               <tr>
-                  <td class="c-name">
-                    <div class="c-info">
-                       <span class="c-logo">AP</span>
-                       <h5>Asain Paints</h5>
-                    </div>
-                  </td>
-                  <td class="address">
-                      68 Theatre Ave. <br> Fort Washington, MD 20744
-                  </td>
-                  <td class="sp">
-                    <div class="cmn-dropdown">
-                        <div class="drop-down-select" (click)="show = !show">
-                          <span class="selcted-dp">
-                             <img src="/ng2/assets/img/user.jpg" alt="user" />
-                          </span>
-                           <span class="selected-opt">Cole Price</span>
-                        </div>
-                        <div class="cmn-dropdon-list" style="display: none">
-                           <form method="POST">
-                              <input type="text" placeholder="Search Tech Person"/>
-                           </form>
-                           <ul class="list-unstyled">
-                              <li>
-                                <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                 <div class="info">
-                                   <h5>Tony Dawson</h5>
-                                   <span class="email">bode.rigoberto@kemmer.com</span>
-                                 </div>
-                              </li>
-                              <li>
-                                  <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                   <div class="info">
-                                     <h5>Tony Dawson</h5>
-                                     <span class="email">bode.rigoberto@kemmer.com</span>
-                                   </div>
-                                </li>
-                                <li>
-                                    <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                     <div class="info">
-                                       <h5>Tony Dawson</h5>
-                                       <span class="email">bode.rigoberto@kemmer.com</span>
-                                     </div>
-                                  </li>
-                           </ul>
-                        </div>
-                    </div>
-                  </td>
-               </tr>
-               <tr>
-                  <td class="c-name">
-                    <div class="c-info">
-                       <span class="c-logo">IB</span>
-                       <h5>IBM</h5>
-                    </div>
-                  </td>
-                  <td class="address">
-                      824 16th Avenue Southwest <br>
-                      Calgary, AB T2R 0S9
-                  </td>
-                  <td class="sp">
-                    <div class="cmn-dropdown">
-                        <div class="drop-down-select" (click)="show = !show">
-                          <span class="selcted-dp">
-                             <img src="/ng2/assets/img/user.jpg" alt="user" />
-                          </span>
-                           <span class="selected-opt">Tony Dawson</span>
-                        </div>
-                        <div class="cmn-dropdon-list" style="display: none">
-                           <form method="POST">
-                              <input type="text" placeholder="Search Tech Person"/>
-                           </form>
-                           <ul class="list-unstyled">
-                              <li>
-                                <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                 <div class="info">
-                                   <h5>Tony Dawson</h5>
-                                   <span class="email">bode.rigoberto@kemmer.com</span>
-                                 </div>
-                              </li>
-                              <li>
-                                  <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                   <div class="info">
-                                     <h5>Tony Dawson</h5>
-                                     <span class="email">bode.rigoberto@kemmer.com</span>
-                                   </div>
-                                </li>
-                                <li>
-                                    <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                     <div class="info">
-                                       <h5>Tony Dawson</h5>
-                                       <span class="email">bode.rigoberto@kemmer.com</span>
-                                     </div>
-                                  </li>
-                           </ul>
-                        </div>
-                    </div>
-                  </td>
-               </tr>
-               <tr>
-                  <td class="c-name">
-                    <div class="c-info">
-                       <span class="c-logo">GE</span>
-                       <h5>General Electronics</h5>
-                    </div>
-                  </td>
-                  <td class="address">
-                      824 16th Avenue Southwest <br>
-                      Calgary, AB T2R 0S9
-                  </td>
-                  <td class="sp">
-                    <div class="cmn-dropdown">
-                        <div class="drop-down-select" (click)="show = !show">
-                          <span class="selcted-dp">
-                             <img src="/ng2/assets/img/user.jpg" alt="user" />
-                          </span>
-                           <span class="selected-opt">Dustin Vargas</span>
-                        </div>
-                        <div class="cmn-dropdon-list" style="display: none">
-                           <form method="POST">
-                              <input type="text" placeholder="Search Tech Person"/>
-                           </form>
-                           <ul class="list-unstyled">
-                              <li>
-                                <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                 <div class="info">
-                                   <h5>Tony Dawson</h5>
-                                   <span class="email">bode.rigoberto@kemmer.com</span>
-                                 </div>
-                              </li>
-                              <li>
-                                  <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                   <div class="info">
-                                     <h5>Tony Dawson</h5>
-                                     <span class="email">bode.rigoberto@kemmer.com</span>
-                                   </div>
-                                </li>
-                                <li>
-                                    <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                     <div class="info">
-                                       <h5>Tony Dawson</h5>
-                                       <span class="email">bode.rigoberto@kemmer.com</span>
-                                     </div>
-                                  </li>
-                           </ul>
-                        </div>
-                    </div>
-                  </td>
-               </tr>
-               <tr>
-                  <td class="c-name">
-                    <div class="c-info">
-                       <span class="c-logo">CO</span>
-                       <h5>Canada Oils</h5>
-                    </div>
-                  </td>
-                  <td class="address">
-                      824 16th Avenue Southwest <br>
-                      Calgary, AB T2R 0S9
-                  </td>
-                  <td class="sp">
-                    <div class="cmn-dropdown">
-                        <div class="drop-down-select" (click)="show = !show">
-                          <span class="selcted-dp">
-                             <img src="/ng2/assets/img/user.jpg" alt="user" />
-                          </span>
-                           <span class="selected-opt">Dustin Vargas</span>
-                        </div>
-                        <div class="cmn-dropdon-list" style="display: none">
-                           <form method="POST">
-                              <input type="text" placeholder="Search Tech Person"/>
-                           </form>
-                           <ul class="list-unstyled">
-                              <li>
-                                <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                 <div class="info">
-                                   <h5>Tony Dawson</h5>
-                                   <span class="email">bode.rigoberto@kemmer.com</span>
-                                 </div>
-                              </li>
-                              <li>
-                                  <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                   <div class="info">
-                                     <h5>Tony Dawson</h5>
-                                     <span class="email">bode.rigoberto@kemmer.com</span>
-                                   </div>
-                                </li>
-                                <li>
-                                    <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                     <div class="info">
-                                       <h5>Tony Dawson</h5>
-                                       <span class="email">bode.rigoberto@kemmer.com</span>
-                                     </div>
-                                  </li>
-                           </ul>
-                        </div>
-                    </div>
-                  </td>
-               </tr>
-               <tr>
-                  <td class="c-name">
-                    <div class="c-info">
-                       <span class="c-logo">SH</span>
-                       <h5>Sherlon Hens</h5>
-                    </div>
-                  </td>
-                  <td class="address">
-                      824 16th Avenue Southwest <br>
-                      Calgary, AB T2R 0S9
-                  </td>
-                  <td class="sp">
-                    <div class="cmn-dropdown">
-                        <div class="drop-down-select" (click)="show = !show">
-                          <span class="selcted-dp">
-                             <img src="/ng2/assets/img/user.jpg" alt="user" />
-                          </span>
-                           <span class="selected-opt">Dustin Vargas</span>
-                        </div>
-                        <div class="cmn-dropdon-list" style="display: none">
-                           <form method="POST">
-                              <input type="text" placeholder="Search Tech Person"/>
-                           </form>
-                           <ul class="list-unstyled">
-                              <li>
-                                <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                 <div class="info">
-                                   <h5>Tony Dawson</h5>
-                                   <span class="email">bode.rigoberto@kemmer.com</span>
-                                 </div>
-                              </li>
-                              <li>
-                                  <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                   <div class="info">
-                                     <h5>Tony Dawson</h5>
-                                     <span class="email">bode.rigoberto@kemmer.com</span>
-                                   </div>
-                                </li>
-                                <li>
-                                    <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                     <div class="info">
-                                       <h5>Tony Dawson</h5>
-                                       <span class="email">bode.rigoberto@kemmer.com</span>
-                                     </div>
-                                  </li>
-                           </ul>
-                        </div>
-                    </div>
-                  </td>
-               </tr>
-               <tr>
-                  <td class="c-name">
-                    <div class="c-info">
-                       <span class="c-logo">DE</span>
-                       <h5>Dell</h5>
-                    </div>
-                  </td>
-                  <td class="address">
-                      824 16th Avenue Southwest <br>
-                      Calgary, AB T2R 0S9
-                  </td>
-                  <td class="sp">
-                    <div class="cmn-dropdown">
-                        <div class="drop-down-select" (click)="show = !show">
-                          <span class="selcted-dp">
-                             <img src="/ng2/assets/img/user.jpg" alt="user" />
-                          </span>
-                           <span class="selected-opt">Tony Dawson</span>
-                        </div>
-                        <div class="cmn-dropdon-list"  *ngIf="show">
-                           <form method="POST">
-                              <input type="text" placeholder="Search Tech Person"/>
-                           </form>
-                           <ul class="list-unstyled">
-                              <li>
-                                <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                 <div class="info">
-                                   <h5>Tony Dawson</h5>
-                                   <span class="email">bode.rigoberto@kemmer.com</span>
-                                 </div>
-                              </li>
-                              <li>
-                                  <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                   <div class="info">
-                                     <h5>Tony Dawson</h5>
-                                     <span class="email">bode.rigoberto@kemmer.com</span>
-                                   </div>
-                                </li>
-                                <li>
-                                    <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                     <div class="info">
-                                       <h5>Tony Dawson</h5>
-                                       <span class="email">bode.rigoberto@kemmer.com</span>
-                                     </div>
-                                  </li>
-                           </ul>
-                        </div>
-                    </div>
-                  </td>
-               </tr>
-               <tr>
-                  <td class="c-name">
-                    <div class="c-info">
-                       <span class="c-logo">SH</span>
-                       <h5>Sherlon Hens</h5>
-                    </div>
-                  </td>
-                  <td class="address">
-                      49 Branch St. <br>
-                      Plainview, NY 11803
-                  </td>
-                  <td class="sp">
-                    <div class="cmn-dropdown">
-                        <div class="drop-down-select" (click)="show = !show">
-                          <span class="selcted-dp">
-                             <img src="/ng2/assets/img/user.jpg" alt="user" />
-                          </span>
-                           <span class="selected-opt">Kenneth Powers</span>
-                        </div>
-                        <div class="cmn-dropdon-list" style="display: none">
-                           <form method="POST">
-                              <input type="text" placeholder="Search Tech Person"/>
-                           </form>
-                           <ul class="list-unstyled">
-                              <li>
-                                <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                 <div class="info">
-                                   <h5>Tony Dawson</h5>
-                                   <span class="email">bode.rigoberto@kemmer.com</span>
-                                 </div>
-                              </li>
-                              <li>
-                                  <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                   <div class="info">
-                                     <h5>Tony Dawson</h5>
-                                     <span class="email">bode.rigoberto@kemmer.com</span>
-                                   </div>
-                                </li>
-                                <li>
-                                    <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                     <div class="info">
-                                       <h5>Tony Dawson</h5>
-                                       <span class="email">bode.rigoberto@kemmer.com</span>
-                                     </div>
-                                  </li>
-                           </ul>
-                        </div>
-                    </div>
-                  </td>
-               </tr>
-               <tr>
-                  <td class="c-name">
-                    <div class="c-info">
-                       <span class="c-logo">LG</span>
-                       <h5>Life’s Good</h5>
-                    </div>
-                  </td>
-                  <td class="address">
-                      824 16th Avenue Southwest <br>
-                      Calgary, AB T2R 0S9
-                  </td>
-                  <td class="sp">
-                    <div class="cmn-dropdown">
-                        <div class="drop-down-select" (click)="show = !show">
-                          <span class="selcted-dp">
-                             <img src="/ng2/assets/img/user.jpg" alt="user" />
-                          </span>
-                           <span class="selected-opt">Oscar Brock</span>
-                        </div>
-                        <div class="cmn-dropdon-list" style="display: none">
-                           <form method="POST">
-                              <input type="text" placeholder="Search Tech Person"/>
-                           </form>
-                           <ul class="list-unstyled">
-                              <li>
-                                <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                 <div class="info">
-                                   <h5>Tony Dawson</h5>
-                                   <span class="email">bode.rigoberto@kemmer.com</span>
-                                 </div>
-                              </li>
-                              <li>
-                                  <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                   <div class="info">
-                                     <h5>Tony Dawson</h5>
-                                     <span class="email">bode.rigoberto@kemmer.com</span>
-                                   </div>
-                                </li>
-                                <li>
-                                    <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                     <div class="info">
-                                       <h5>Tony Dawson</h5>
-                                       <span class="email">bode.rigoberto@kemmer.com</span>
-                                     </div>
-                                  </li>
-                           </ul>
-                        </div>
-                    </div>
-                  </td>
-               </tr>
-               <tr>
-                  <td class="c-name">
-                    <div class="c-info">
-                       <span class="c-logo">AP</span>
-                       <h5>Asain Paints</h5>
-                    </div>
-                  </td>
-                  <td class="address">
-                      68 Theatre Ave. <br> Fort Washington, MD 20744
-                  </td>
-                  <td class="sp">
-                    <div class="cmn-dropdown">
-                        <div class="drop-down-select" (click)="show = !show">
-                          <span class="selcted-dp">
-                             <img src="/ng2/assets/img/user.jpg" alt="user" />
-                          </span>
-                           <span class="selected-opt">Cole Price</span>
-                        </div>
-                        <div class="cmn-dropdon-list" style="display: none">
-                           <form method="POST">
-                              <input type="text" placeholder="Search Tech Person"/>
-                           </form>
-                           <ul class="list-unstyled">
-                              <li>
-                                <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                 <div class="info">
-                                   <h5>Tony Dawson</h5>
-                                   <span class="email">bode.rigoberto@kemmer.com</span>
-                                 </div>
-                              </li>
-                              <li>
-                                  <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                   <div class="info">
-                                     <h5>Tony Dawson</h5>
-                                     <span class="email">bode.rigoberto@kemmer.com</span>
-                                   </div>
-                                </li>
-                                <li>
-                                    <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                     <div class="info">
-                                       <h5>Tony Dawson</h5>
-                                       <span class="email">bode.rigoberto@kemmer.com</span>
-                                     </div>
-                                  </li>
-                           </ul>
-                        </div>
-                    </div>
-                  </td>
-               </tr>
-               <tr>
-                  <td class="c-name">
-                    <div class="c-info">
-                       <span class="c-logo">IB</span>
-                       <h5>IBM</h5>
-                    </div>
-                  </td>
-                  <td class="address">
-                      824 16th Avenue Southwest <br>
-                      Calgary, AB T2R 0S9
-                  </td>
-                  <td class="sp">
-                    <div class="cmn-dropdown">
-                        <div class="drop-down-select" (click)="show = !show">
-                          <span class="selcted-dp">
-                             <img src="/ng2/assets/img/user.jpg" alt="user" />
-                          </span>
-                           <span class="selected-opt">Tony Dawson</span>
-                        </div>
-                        <div class="cmn-dropdon-list" style="display: none">
-                           <form method="POST">
-                              <input type="text" placeholder="Search Tech Person"/>
-                           </form>
-                           <ul class="list-unstyled">
-                              <li>
-                                <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                 <div class="info">
-                                   <h5>Tony Dawson</h5>
-                                   <span class="email">bode.rigoberto@kemmer.com</span>
-                                 </div>
-                              </li>
-                              <li>
-                                  <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                   <div class="info">
-                                     <h5>Tony Dawson</h5>
-                                     <span class="email">bode.rigoberto@kemmer.com</span>
-                                   </div>
-                                </li>
-                                <li>
-                                    <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                     <div class="info">
-                                       <h5>Tony Dawson</h5>
-                                       <span class="email">bode.rigoberto@kemmer.com</span>
-                                     </div>
-                                  </li>
-                           </ul>
-                        </div>
-                    </div>
-                  </td>
-               </tr>
-               <tr>
-                  <td class="c-name">
-                    <div class="c-info">
-                       <span class="c-logo">GE</span>
-                       <h5>General Electronics</h5>
-                    </div>
-                  </td>
-                  <td class="address">
-                      824 16th Avenue Southwest <br>
-                      Calgary, AB T2R 0S9
-                  </td>
-                  <td class="sp">
-                    <div class="cmn-dropdown">
-                        <div class="drop-down-select" (click)="show = !show">
-                          <span class="selcted-dp">
-                             <img src="/ng2/assets/img/user.jpg" alt="user" />
-                          </span>
-                           <span class="selected-opt">Dustin Vargas</span>
-                        </div>
-                        <div class="cmn-dropdon-list" style="display: none">
-                           <form method="POST">
-                              <input type="text" placeholder="Search Tech Person"/>
-                           </form>
-                           <ul class="list-unstyled">
-                              <li>
-                                <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                 <div class="info">
-                                   <h5>Tony Dawson</h5>
-                                   <span class="email">bode.rigoberto@kemmer.com</span>
-                                 </div>
-                              </li>
-                              <li>
-                                  <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                   <div class="info">
-                                     <h5>Tony Dawson</h5>
-                                     <span class="email">bode.rigoberto@kemmer.com</span>
-                                   </div>
-                                </li>
-                                <li>
-                                    <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                     <div class="info">
-                                       <h5>Tony Dawson</h5>
-                                       <span class="email">bode.rigoberto@kemmer.com</span>
-                                     </div>
-                                  </li>
-                           </ul>
-                        </div>
-                    </div>
-                  </td>
-               </tr>
-               <tr>
-                  <td class="c-name">
-                    <div class="c-info">
-                       <span class="c-logo">CO</span>
-                       <h5>Canada Oils</h5>
-                    </div>
-                  </td>
-                  <td class="address">
-                      824 16th Avenue Southwest <br>
-                      Calgary, AB T2R 0S9
-                  </td>
-                  <td class="sp">
-                    <div class="cmn-dropdown">
-                        <div class="drop-down-select" (click)="show = !show">
-                          <span class="selcted-dp">
-                             <img src="/ng2/assets/img/user.jpg" alt="user" />
-                          </span>
-                           <span class="selected-opt">Dustin Vargas</span>
-                        </div>
-                        <div class="cmn-dropdon-list" style="display: none">
-                           <form method="POST">
-                              <input type="text" placeholder="Search Tech Person"/>
-                           </form>
-                           <ul class="list-unstyled">
-                              <li>
-                                <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                 <div class="info">
-                                   <h5>Tony Dawson</h5>
-                                   <span class="email">bode.rigoberto@kemmer.com</span>
-                                 </div>
-                              </li>
-                              <li>
-                                  <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                   <div class="info">
-                                     <h5>Tony Dawson</h5>
-                                     <span class="email">bode.rigoberto@kemmer.com</span>
-                                   </div>
-                                </li>
-                                <li>
-                                    <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                     <div class="info">
-                                       <h5>Tony Dawson</h5>
-                                       <span class="email">bode.rigoberto@kemmer.com</span>
-                                     </div>
-                                  </li>
-                           </ul>
-                        </div>
-                    </div>
-                  </td>
-               </tr>
-               <tr>
-                  <td class="c-name">
-                    <div class="c-info">
-                       <span class="c-logo">SH</span>
-                       <h5>Sherlon Hens</h5>
-                    </div>
-                  </td>
-                  <td class="address">
-                      824 16th Avenue Southwest <br>
-                      Calgary, AB T2R 0S9
-                  </td>
-                  <td class="sp">
-                    <div class="cmn-dropdown">
-                        <div class="drop-down-select" (click)="show = !show">
-                          <span class="selcted-dp">
-                             <img src="/ng2/assets/img/user.jpg" alt="user" />
-                          </span>
-                           <span class="selected-opt">Dustin Vargas</span>
-                        </div>
-                        <div class="cmn-dropdon-list" style="display: none">
-                           <form method="POST">
-                              <input type="text" placeholder="Search Tech Person"/>
-                           </form>
-                           <ul class="list-unstyled">
-                              <li>
-                                <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                 <div class="info">
-                                   <h5>Tony Dawson</h5>
-                                   <span class="email">bode.rigoberto@kemmer.com</span>
-                                 </div>
-                              </li>
-                              <li>
-                                  <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                   <div class="info">
-                                     <h5>Tony Dawson</h5>
-                                     <span class="email">bode.rigoberto@kemmer.com</span>
-                                   </div>
-                                </li>
-                                <li>
-                                    <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
-                                     <div class="info">
-                                       <h5>Tony Dawson</h5>
-                                       <span class="email">bode.rigoberto@kemmer.com</span>
-                                     </div>
-                                  </li>
-                           </ul>
-                        </div>
-                    </div>
-                  </td>
-               </tr>
-            </tbody>
-
-      </table>
-    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </td>
+        </tr> -->
+      </tbody>
+    </table>
   </div>
+</div>

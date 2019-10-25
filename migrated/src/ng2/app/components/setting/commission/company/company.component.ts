@@ -6,6 +6,7 @@ import { takeUntil, catchError } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 import { CommissionService } from '../commission.service';
 import { UsersService } from 'src/ng2/app/services/users/users.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-company-commission',
@@ -34,7 +35,8 @@ export class CompanyComponent implements OnInit {
 
   constructor(
     private commissionService: CommissionService,
-    private userService: UsersService
+    private userService: UsersService,
+    private toastrService: ToastrService
   ) {
     // this.getCurrentCompany();
   }
@@ -47,6 +49,7 @@ export class CompanyComponent implements OnInit {
   }
 
   getUsers() {
+    this.loading = true;
     this.commissionService
       .getUsers()
       .pipe(
@@ -59,14 +62,19 @@ export class CompanyComponent implements OnInit {
           );
         })
       )
-      .subscribe((techUsers: any) => {
-        this.activeTechUsers = techUsers;
-        console.log(this.activeTechUsers);
-        // this.activeTechUsers = techUsers.map(({ id, firstName}) => ({
-        //   id,
-        //   firstName,
-        // }));
-      });
+      .subscribe(
+        (techUsers: any) => {
+          this.loading = false;
+          this.activeTechUsers = techUsers;
+          // this.activeTechUsers = techUsers.map(({ id, firstName}) => ({
+          //   id,
+          //   firstName,
+          // }));
+        },
+        error => {
+          this.loading = false;
+        }
+      );
   }
 
   getFullName(client) {
@@ -85,9 +93,17 @@ export class CompanyComponent implements OnInit {
       return;
     }
     const techLeadId = event.id;
-    this.commissionService
-      .setTechLead(company.id, techLeadId)
-      .subscribe(res => {}, error => {});
+    this.loading = true;
+    this.commissionService.setTechLead(company.id, techLeadId).subscribe(
+      res => {
+        this.loading = false;
+        this.toastrService.success('TechLead changed successfully');
+      },
+      error => {
+        this.loading = false;
+        this.toastrService.error(`Error occured, ${error}`);
+      }
+    );
   }
 
   getClinetUrl(client) {
@@ -101,13 +117,14 @@ export class CompanyComponent implements OnInit {
       return;
     }
 
-    const aa = this.activeTechUsers.filter(client => {
+    const techUser = this.activeTechUsers.filter(client => {
       if (client.id === company.techLeadId) {
-        return client.firstName;
+        //client.firstName = client.firstName + ' ' + client.lastName;
+        return client;
       }
     });
 
-    return aa[0].firstName;
+    return techUser[0].firstName;
   }
 
   getCompanies() {
@@ -185,14 +202,5 @@ export class CompanyComponent implements OnInit {
       '.jpg?t=' +
       (company.logo.updatedAt ? company.logo.updatedAt : '')
     );
-  }
-
-
-
-  
-
-  ngOnDestroy() {
-    // this._onDestroy.next();
-    // this._onDestroy.complete();
   }
 }
