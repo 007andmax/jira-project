@@ -82,12 +82,12 @@
                 $scope.openOutDate = !$scope.openOutDate;
             }
             $scope.onToggleDropdownInDate = function ($event) {
-                console.log('$event',parentNode);
+               
                 if ($scope.openInDate && parentNode.find(".time-picker-hours .active")) {
                     var curent_offset = parentNode.find(".time-picker-hours").scrollTop();
                     var active = parentNode.find(".time-picker-hours .active");
                     console.log('if (active.position().top >= 240)',active.position().top);
-                    if (active.position().top >= 240) parentNode.find(".time-picker-hours").scrollTop(curent_offset + active.position().top);
+                    if (active.position().top >= 240 || active.position().top < 0) parentNode.find(".time-picker-hours").scrollTop(curent_offset + active.position().top);
                 }
 
             }
