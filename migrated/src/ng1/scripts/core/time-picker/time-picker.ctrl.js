@@ -3,7 +3,7 @@
 (function () {
 
     angular.module('quicktech.core.tickets').controller('quicktech.core.time-picker.userListCtrl',
-        ['$scope', '$rootScope', 'CompaniesService', function ($scope, $rootScope, CompaniesService) {
+        ['$scope', '$rootScope', 'CompaniesService','$document', function ($scope, $rootScope, CompaniesService,$document) {
             $scope.openInDate = false;
             $scope.openOutDate = false;
             $scope.hoursInDate = [];
@@ -15,6 +15,7 @@
             $scope.outDateText = "12:00am";
             $scope.selectedIndexInDate = null;
             $scope.selectedIndexOutDate = null;
+          
             $scope.serviceExpenseDurationPresentation = CompaniesService.getCurrentCompany().serviceExpenseDurationPresentation ?
                 CompaniesService.getCurrentCompany().serviceExpenseDurationPresentation
                 : 'DURATION_PICKER';
@@ -41,6 +42,7 @@
                     valueForBack: 'FIFTEEN_MINUTES'
                 }
             ];
+            var parentNode = null;
             $rootScope.$on('onChangeDuration', function () {
                 setQuantity();
             });
@@ -74,19 +76,23 @@
             onInitTimeIn();
             onInitTimeOut();
             $scope.toggleOutDateDropdown = function ($event) {
+                parentNode = $($event.target).parents('.start-end-picker');
                 $event.preventDefault();
                 $event.stopPropagation();
                 $scope.openOutDate = !$scope.openOutDate;
             }
             $scope.onToggleDropdownInDate = function ($event) {
-                if ($scope.openInDate && $(".time-picker-hours .active")) {
-                    var curent_offset = $(".time-picker-hours").scrollTop();
-                    var active = $(".time-picker-hours .active");
-                    $(".time-picker-hours").scrollTop(curent_offset + active.position().top);
+                console.log('$event',parentNode);
+                if ($scope.openInDate && parentNode.find(".time-picker-hours .active")) {
+                    var curent_offset = parentNode.find(".time-picker-hours").scrollTop();
+                    var active = parentNode.find(".time-picker-hours .active");
+                    parentNode.find(".time-picker-hours").scrollTop(curent_offset + active.position().top);
                 }
 
             }
             $scope.toggleInDateDropdown = function ($event) {
+                 
+                parentNode = $($event.target).parents('.start-end-picker');
                 $event.preventDefault();
                 $event.stopPropagation();
                 $scope.openInDate = !$scope.openInDate;
