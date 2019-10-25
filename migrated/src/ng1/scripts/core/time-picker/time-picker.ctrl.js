@@ -110,8 +110,8 @@
             }
             if ($scope.editService) parseEditQuantity();
             $scope.timePickerInterval = setTimePickerInterval();
-            function setQuantity() {
-                if ($scope.editService && $scope.serviceExpenseDurationPresentation === 'DURATION_PICKER') {
+            function setQuantity(type = null) {
+                if ($scope.editService && $scope.serviceExpenseDurationPresentation === 'DURATION_PICKER' ||$scope.editService &&  type === 'CHANGE_TIME_IN') {
                     var newTimeStart = new Date();
                     newTimeStart.setHours(($scope.inDate.type === 'pm' && $scope.inDate.hour != 12) ? $scope.inDate.hour + 12 : $scope.inDate.hour);
                     newTimeStart.setMinutes($scope.inDate.minute);
@@ -255,7 +255,7 @@
                 $scope.hoursOutDate = [];
                 oninitHousOutDate();
                 resetTextInDate();
-                setQuantity();
+                setQuantity('CHANGE_TIME_IN');
                 setSelectedIndexInDate();
             }
             $scope.selectTimeOut = function (hour, minute) {
@@ -325,7 +325,7 @@
                 $scope.inDate.hour = hour;
                 $scope.inDate.minute = minute;
 
-                setQuantity();
+                setQuantity('CHANGE_TIME_IN');
             }
             function resetTextOutDate() {
                 var hourText = (($scope.outDate.hour < 10) ? "0" + $scope.outDate.hour : $scope.outDate.hour);
