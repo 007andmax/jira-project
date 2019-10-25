@@ -1,3 +1,4 @@
+<ngx-loading [show]="loading"></ngx-loading>
 <!-- Middle Wrapper  -->
 <div class="page-container manage-tech">
   <div class="page-insider">
@@ -9,15 +10,10 @@
         >
       </div>
     </div>
-    <ngx-loading
-      [show]="loading"
-    ></ngx-loading>
+
     <div class="cmn-area hs-area">
       <div class="data-table-wrap mteh-data">
-        <table
-          class="display dataTable"
-          style="width:100%"
-        >
+        <table class="display dataTable" style="width:100%">
           <thead>
             <tr>
               <th class="tech-user">Tech User</th>
@@ -30,17 +26,53 @@
             <tr *ngFor="let techUser of techUsers; let i = index">
               <td class="tech-user">
                 <div class="t-user">
-                  <span class="user-dp online" *ngIf="techUser.avatar">
+                  <!-- <span class="user-dp online" *ngIf="techUser.avatar"> -->
+                  <span
+                    class="user-dp online"
+                    *ngIf="
+                      !techUser.requestToChangePassword &&
+                      techUser.isEmailVerified
+                    "
+                  >
                     <img
+                    *ngIf="techUser.avatar !== null"
                       src="/users/{{ techUser.id }}/image.jpg?t={{
                         techUser.avatar.updatedAt
                       }}"
                       alt="user"
                     />
+                    <img
+                      src="/ng2/assets/img/user.jpg"
+                      alt="user"
+                      *ngIf="techUser.avatar === null"
+                    />
                   </span>
-                  <span class="user-dp online" *ngIf="techUser.avatar === null">
-                    <img src="/ng2/assets/img/user.jpg" alt="user" />
+                  <span
+                    class="user-dp online"
+                    *ngIf="
+                      techUser.requestToChangePassword ||
+                      !techUser.isEmailVerified
+                    "
+                  >
+                    <img
+                      src="/ng2/assets/img/user.jpg"
+                      alt="user"
+                      data-tooltip="Tech-user hasn't confirmed his account yet."
+                    />
                   </span>
+
+                  <!-- <div class="avatar" ng-if="!user.requestToChangePassword && user.isEmailVerified">
+                      <img ng-if="user.avatar" ng-src="{{ getUserAvatarUrl(user) }}"
+                           alt="..." class="img-circle">
+                      <img ng-if="!user.avatar" src="ng1/images/settings-icon/tech-user.png" alt="..." class="img-circle">
+                    </div>
+      
+                    <div class="avatar" ng-if="user.requestToChangePassword || !user.isEmailVerified" style="position: relative">
+                      <img src="ng1/images/settings-icon/unverified-user.png" alt="" class="img-circle">
+                      <img src="ng1/images/settings-icon/unverified-user-mark.png" alt="" class="unverified-user-mark"
+                           uib-tooltip="Tech-user hasn't confirmed his account yet." tooltip-placement="bottom">
+                    </div> -->
+
                   <div class="t-info">
                     <h5>{{ techUser.firstName }} {{ techUser.lastName }}</h5>
                     <span>10:30 AM, 14 Jun</span>
@@ -87,9 +119,7 @@
                         <input
                           type="checkbox"
                           readonly
-                          [(ngModel)]="
-                            techUseremailNotificationList[techUser.id].newDevice
-                          "
+                          [(ngModel)]="techUseremailNotificationList[techUser.id].newDevice"
                           id="newDevice1"
                         />
                         <label for="newDevice1">
@@ -193,31 +223,40 @@
   <div class="middle-content">
     <div class="dp-area">
       <span class="dp">
-        <img src="/ng2/assets/img/upload-photo.svg" alt="user" />
+        <img
+          src="/ng2/assets/img/upload-photo.svg"
+          alt="user"
+          *ngIf="!fileAvatar"
+        />
+        <img
+          src="/file/{{ fileAvatar.id }}.jpg"
+          alt="user"
+          *ngIf="fileAvatar"
+        />
       </span>
       <div class="dp-info">
         <input
           type="file"
           id="profile-dp"
+          (change)="onSelectFile($event)"
           accept="image/gif, image/jpeg, image/png, image/jpg"
-          disabled
           style="display: none;"
         />
-        <label for="profile-dp" class="static-link">Upload Avtar</label>
+        <!-- <label for="profile-dp" class="static-link" (click)="onSelectFile($event)">Upload Avtar</label> -->
         <span>Maximum size of 2MB. JPG, GIF, PNG</span>
-        <!-- <div class="static-link">
+        <div class="static-link">
           <label class="innert-links" for="profile-dp">Change Photo</label>
-          <label for="profile-dp">
+          <label for="profile-dp" (click)="deleteAvatar()">
             <a href="javascript:void(0)" restore-default-button=""
               >Remove Photo</a
             >
           </label>
-          <label for="profile-dp">
+          <label for="profile-dp" (click)="rePositionAvatar()">
             <a href="javascript:void(0)" restore-default-button=""
               >Reposition Photo</a
             >
           </label>
-        </div> -->
+        </div>
       </div>
     </div>
     <form [formGroup]="techUserForm" (ngSubmit)="onCreateSubmit()">
@@ -272,9 +311,10 @@
             />
           </div>
         </div>
+        <!-- {{submitted}} {{f.primaryEmail.errors | json}} {{isEmailIdUnique}} -->
         <div class="f-col col-50">
           <label
-            *ngIf="(!submitted || !f.primaryEmail.errors) && !isEmailIdUnique"
+            *ngIf="(!submitted || !f.primaryEmail.errors) && isEmailIdUnique"
             >Email</label
           >
           <div
@@ -288,16 +328,19 @@
             <div *ngIf="f.primaryEmail.errors.pattern">
               Email must be a valid email address
             </div>
-            <label *ngIf="isEmailIdUnique" class="invalid-feedback"
+          </div>
+          <label *ngIf="!isEmailIdUnique" class="invalid-feedback"
               >This email already occupied.</label
             >
-          </div>
+
           <div class="form-row">
             <input
               type="text"
               class="form-input"
               [ngClass]="{ 'is-invalid': submitted && f.primaryEmail.errors }"
               formControlName="primaryEmail"
+              #primaryEmail
+              (blur)="isEmailUnique(primaryEmail.value)"
               placeholder="Enter Email Address"
             />
           </div>
@@ -370,7 +413,7 @@
 </div>
 
 <!-- sidebar popup edit -->
-<div class="sidebar-popup" [class.opened]="edit">
+<div class="sidebar-popup" [class.opened]="edit" >
   <!-- header -->
   <div class="sidebar-header">
     <div class="h1">Edit Tech User</div>
@@ -380,44 +423,66 @@
   </div>
   <div class="middle-content">
     <div class="dp-area">
-      <span class="dp" *ngIf="selectedTechUser && selectedTechUser.avatar">
+
+      <span
+        class="dp"
+        *ngIf="
+          selectedTechUser &&
+          (!selectedTechUser.requestToChangePassword &&
+          selectedTechUser.isEmailVerified)
+        "
+      >
         <img
+        *ngIf="selectedTechUser.avatar !== null"
           src="/users/{{ selectedTechUser.id }}/image.jpg?t={{
             selectedTechUser.avatar.updatedAt
           }}"
           alt="user"
         />
+        <img
+          src="/ng2/assets/img/user.jpg"
+          alt="user"
+          *ngIf="selectedTechUser.avatar === null"
+        />
       </span>
       <span
         class="dp"
-        *ngIf="!selectedTechUser || selectedTechUser.avatar === null"
+        *ngIf="
+        selectedTechUser &&
+          (selectedTechUser.requestToChangePassword ||
+          !selectedTechUser.isEmailVerified)
+        "
       >
-        <img src="/ng2/assets/img/upload-photo.svg" alt="user" />
-      </span>
-      <div class="dp-info">
-        <input
-          type="file"
-          id="profile-dp"
-          style="display: none;"
-          disabled
+        <img
+          src="/ng2/assets/img/user.jpg"
+          alt="user"
+          data-tooltip="Tech-user hasn't confirmed his account yet."
         />
-        <label for="profile-dp" class="static-link">Upload Avtar</label>
+      </span>
+
+      <div class="dp-info">
+        <input type="file" id="profile-dp" style="display: none;" />
+        <!-- <label for="profile-dp" class="static-link">Upload Avtar</label> -->
         <span>Maximum size of 2MB. JPG, GIF, PNG</span>
-        <!-- <div class="static-link">
+        <div class="static-link">
           <label class="innert-links" for="profile-dp">Change Photo</label>
           <label for="profile-dp">
-            <a href="javascript:void(0)" restore-default-button=""
-            (click)="deleteAvatar()"
+            <a
+              href="javascript:void(0)"
+              restore-default-button=""
+              (click)="deleteAvatar()"
               >Remove Photo</a
             >
           </label>
           <label for="profile-dp">
-            <a href="javascript:void(0)" restore-default-button=""
-            (click)="rePositionAvatar()"
+            <a
+              href="javascript:void(0)"
+              restore-default-button=""
+              (click)="rePositionAvatar()"
               >Reposition Photo</a
             >
           </label>
-        </div> -->
+        </div>
       </div>
 
       <div class="img-croparea" *ngIf="isCroppedImg">
@@ -462,23 +527,74 @@
     <form [formGroup]="techUserForm" (ngSubmit)="onSubmit()">
       <div class="f-row">
         <div class="f-col col-50">
-          <label>First Name</label>
+          <label *ngIf="!submitted || !f.firstName.errors">First Name</label>
+          <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+            <div *ngIf="f.firstName.errors.required">
+              First Name is required
+            </div>
+            <div *ngIf="f.firstName.errors.minlength">
+              First name is too short.
+            </div>
+            <div *ngIf="f.firstName.errors.maxlength">
+              First name is too large.
+            </div>
+          </div>
           <div class="form-row">
-            <input type="text" formControlName="firstName" class="form-input" />
+            <input
+              type="text"
+              formControlName="firstName"
+              [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"
+              class="form-input"
+            />
           </div>
         </div>
         <div class="f-col col-50">
-          <label>Last Name</label>
-          <div class="form-row">
-            <input type="text" class="form-input" formControlName="lastName" />
+          <label *ngIf="!submitted || !f.lastName.errors">Last Name</label>
+
+          <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+            <div *ngIf="f.lastName.errors.required">
+              Last Name is required
+            </div>
+            <div *ngIf="f.lastName.errors.minlength">
+              Last name is too short.
+            </div>
+            <div *ngIf="f.lastName.errors.maxlength">
+              Last name is too large.
+            </div>
           </div>
-        </div>
-        <div class="f-col col-50">
-          <label>Email</label>
           <div class="form-row">
             <input
               type="text"
               class="form-input"
+              [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"
+              formControlName="lastName"
+            />
+          </div>
+        </div>
+        <div class="f-col col-50">
+          <label
+            *ngIf="(!submitted || !f.primaryEmail.errors) && isEmailIdUnique"
+            >Email</label
+          >
+          <div
+            *ngIf="submitted && f.primaryEmail.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f.primaryEmail.errors.required">Email is required</div>
+            <div *ngIf="f.primaryEmail.errors.pattern">
+              Email must be a valid email address
+            </div>
+          </div>
+          <label *ngIf="!isEmailIdUnique" class="invalid-feedback"
+            >This email already occupied.</label
+          >
+
+          <div class="form-row">
+            <input
+              type="text"
+              class="form-input"
+              [ngClass]="{ 'is-invalid': submitted && f.primaryEmail.errors }"
+              formControlName="primaryEmail"
               #primaryEmail
               (blur)="isEmailUnique(primaryEmail.value)"
               formControlName="primaryEmail"

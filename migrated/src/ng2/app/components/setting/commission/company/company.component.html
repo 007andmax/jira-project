@@ -10,31 +10,68 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                  <td class="c-name">
+              <tr *ngFor="let company of clientsCompanies;let i = index;">
+                  <td class="c-name" >
                     <div class="c-info">
-                       <span class="c-logo">DE</span>
-                       <h5>Dell</h5>
+                       <span class="c-logo">{{ company.name[0].toUpperCase() }}</span>
+                       <h5>{{ company.name }}</h5>
                     </div>
                   </td>
-                  <td class="address">
-                      824 16th Avenue Southwest <br>
-                      Calgary, AB T2R 0S9
+                  <td class="address" >
+                      {{
+                        company.companyInfo.addresses[0]
+                          .addressWithSuitNumberAndPostalCode
+                      }}
                   </td>
-                  <td class="sp">
-                    <div class="cmn-dropdown">
-                        <div class="drop-down-select" (click)="show = !show">
+                  <td class="sp"  >
+                    <div class="" >
+
+                        <ng-select 
+                        [items]="activeTechUsers"
+                        bindLabel="firstName"
+                        bindValue="firstName"
+                        (change)="setTechLead($event,company)"
+                        placeholder="Select Tech Users"
+                        ngModel="{{selectedActiveTechUsers(company,i)}}">
+                 <ng-template ng-label-tmp let-item="item">
+                     <img height="15" width="15" [src]="getClinetUrl(item)"/>
+                     <b>{{item.firstName}}</b> 
+                 </ng-template>
+                 <ng-template ng-option-tmp let-item="item" let-index="index" >
+                     <img height="15" width="15" *ngIf="item.avatar" src="/users/{{item.id}}/image.jpg?t={{item.avatar.updatedAt}}"/>
+                     <b>{{item.firstName}}</b>
+                 </ng-template>
+                 <!-- <ng-template ng-footer-tmp>
+                   Custom footer
+                 </ng-template> -->
+             </ng-select>
+
+                        <!-- <div class="drop-down-select" (click)="show = !show">
                           <span class="selcted-dp">
                              <img src="/ng2/assets/img/user.jpg" alt="user" />
                           </span>
                            <span class="selected-opt">Tony Dawson</span>
-                        </div>
-                        <div class="cmn-dropdon-list"  *ngIf="show">
+                        </div> -->
+                        <!-- {{selectedActiveTechUsers(company)}} -->
+                        <!-- <ngx-select-dropdown
+                        [config]="config"
+                        [options]="activeTechUsers"
+                        [(ngModel)]="selectName"
+                        [multiple]="true"
+                      >
+                      <ng-template ng-label-tmp let-option="option">
+                           <img height="15" width="15" [src]="option.avatar"/>
+                           <b>{{option.lastName}}</b> is cool
+                       </ng-template>
+                     </ngx-select-dropdown> -->
+                        <div class=""  *ngIf="true">
                            <form method="POST">
-                              <input type="text" placeholder="Search Tech Person"/>
+                         
+                              <!-- <input type="text"  placeholder="Search Tech Person"/> -->
                            </form>
-                           <ul class="list-unstyled">
-                              <li>
+                          
+                           <!-- <ul class="list-unstyled">
+                              <li *ngFor="let client of activeTechUsers">
                                 <span class="pic"><img src="/ng2/assets/img/user.jpg" alt="user" /></span>
                                  <div class="info">
                                    <h5>Tony Dawson</h5>
@@ -55,7 +92,7 @@
                                        <span class="email">bode.rigoberto@kemmer.com</span>
                                      </div>
                                   </li>
-                           </ul>
+                           </ul> -->
                         </div>
                     </div>
                   </td>

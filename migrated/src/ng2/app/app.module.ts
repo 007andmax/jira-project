@@ -10,9 +10,9 @@ import {
 } from '@angular/upgrade/static';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SelectModule } from 'ng2-select';
+// import { SelectModule } from 'ng2-select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgxSelectModule } from 'ngx-select-ex';
+
 import { SidebarModule } from 'ng-sidebar';
 import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 import { ClickOutsideModule } from 'ng4-click-outside';
@@ -79,7 +79,7 @@ import { CompanyComponent } from './components/setting/commission/company/compan
 import { ProductComponent } from './components/setting/commission/product/product.component';
 import { ContractComponent } from './components/setting/commission/contract/contract.component';
 import { ServiceComponent } from './components/setting/commission/service/service.component';
-
+import { NgSelectModule } from '@ng-select/ng-select';
 
 declare var angular: any;
 declare var $: any;
@@ -223,14 +223,14 @@ angular
     UpgradeModule,
     HttpClientModule,
     FormsModule,
-    SelectModule,
+    
     NgbModule,
     ClickOutsideModule,
     ShowHidePasswordModule,
     AppRoutingModule,
-    NgxSelectModule,
     ImageCropperModule,
     DataTablesModule,
+    NgSelectModule ,
     SelectDropDownModule,
     TabsModule.forRoot(),
     SidebarModule.forRoot(),

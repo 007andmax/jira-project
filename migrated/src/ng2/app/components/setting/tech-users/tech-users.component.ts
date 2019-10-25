@@ -1,20 +1,20 @@
-import { Component, OnInit, OnDestroy, AfterViewInit } from "@angular/core";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { Observable, Observer } from "rxjs";
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Observable, Observer } from 'rxjs';
 
-import { ImageCroppedEvent } from "ngx-image-cropper";
-import { ToastrService } from "ngx-toastr";
+import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { ToastrService } from 'ngx-toastr';
 
-import { TechUsersService } from "src/ng2/app/services/setting/tech-users.service";
-import { SettingService } from "src/ng2/app/services/setting/setting.service";
-import { map } from "rxjs/operators";
+import { TechUsersService } from 'src/ng2/app/services/setting/tech-users.service';
+import { SettingService } from 'src/ng2/app/services/setting/setting.service';
+import { map } from 'rxjs/operators';
 
 declare var $;
 
 @Component({
-  selector: "app-tech-users",
-  templateUrl: "./tech-users.component.html",
-  styleUrls: ["./tech-users.component.scss"]
+  selector: 'app-tech-users',
+  templateUrl: './tech-users.component.html',
+  styleUrls: ['./tech-users.component.scss']
 })
 export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
   selectedIdx = -1;
@@ -23,7 +23,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
   create = false;
   edit = false;
   currentCompanyId = null;
-  isEmailIdUnique = false;
+  isEmailIdUnique = true;
 
   techUsers: [];
   techUserIdList: [];
@@ -32,11 +32,12 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
   techUseremailNotificationList: any;
   techUserForm: FormGroup;
 
-  imageBase64 = "";
+  imageBase64 = '';
   imageChangedEvent: any;
   croppedImage: any;
   isCroppedImg = false;
-  fileAvatar: any;
+  cropAvatar: any;
+  fileAvatar: any = null; // return result when first time image upload
 
   constructor(
     private techUsersService: TechUsersService,
@@ -44,7 +45,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     private toastr: ToastrService,
     private settingService: SettingService
   ) {
-    const currentComapnyId = localStorage.getItem("currentComapnyId");
+    const currentComapnyId = localStorage.getItem('currentComapnyId');
     if (currentComapnyId) {
       this.currentCompanyId = currentComapnyId;
     } else {
@@ -56,30 +57,30 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     this.techUsers = [];
 
     const emailPattern =
-      "[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,63}";
+      '[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,63}';
 
     this.techUserForm = this.formBuilder.group({
       firstName: [
-        "",
+        '',
         [Validators.required, Validators.minLength(3), Validators.maxLength(15)]
       ],
       lastName: [
-        "",
+        '',
         [Validators.required, Validators.minLength(3), Validators.maxLength(15)]
       ],
       primaryEmail: [
-        "",
+        '',
         Validators.compose([
           Validators.required,
           Validators.pattern(emailPattern)
         ])
       ],
-      techRole: [""],
-      newDevice: [""],
-      ticketCreated: [""],
-      myTicketUpdated: [""],
-      ticketCloseNotifications: [""],
-      id: [""]
+      techRole: [''],
+      newDevice: [''],
+      ticketCreated: [''],
+      myTicketUpdated: [''],
+      ticketCloseNotifications: [''],
+      id: ['']
     });
 
     this.getUsers();
@@ -116,12 +117,12 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     this.loading = true;
     this.techUsersService
       .getUsers()
-      .map((users: any) => {
+      .pipe(map((users:any)=>{
         return users.filter(
           (user: any) =>
-            user.accountType.toLowerCase() === "tech" && user.deletedAt === null
+            user.accountType.toLowerCase() === 'tech' && user.deletedAt === null
         );
-      })
+      }))
       .subscribe(
         (techUsers: any) => {
           this.loading = false;
@@ -178,7 +179,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       .changePasswordRequest(id)
       .pipe(
         map(res => {
-          this.toastr.success("Change password request sent successfully.");
+          this.toastr.success('Change password request sent successfully.');
         })
       )
       .subscribe();
@@ -203,6 +204,8 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
    * opened creat tech user Model
    */
   creatTechUsr() {
+    this.fileAvatar = null;
+    this.selectedTechUser = null;
     this.create = !this.create;
     this.submitted = false;
     this.techUserForm.reset();
@@ -278,7 +281,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       .pipe(
         map((currentCompany: any) => {
           if (currentCompany) {
-            localStorage.setItem("currentComapnyId", currentCompany.id);
+            localStorage.setItem('currentComapnyId', currentCompany.id);
             this.currentCompanyId = currentCompany.id;
           }
         })
@@ -301,7 +304,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
 
       this.imageChangedEvent = event;
       const fromData = new FormData();
-      fromData.append("file", event.target.files[0]);
+      fromData.append('file', event.target.files[0]);
       this.loading = true;
 
       this.settingService.fileAvatar(fromData).subscribe(
@@ -310,10 +313,12 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
           if (result) {
             this.isCroppedImg = true;
             this.fileAvatar = result;
+            this.isCroppedImg = true;
           }
         },
         error => {
           this.loading = false;
+          this.isCroppedImg = false;
           this.isCroppedImg = false;
         }
       );
@@ -331,15 +336,15 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     this.isCroppedImg = false;
     let cropImage = {};
 
-    if (this.fileAvatar !== undefined) {
+    if (this.fileAvatar !== null && this.fileAvatar !== undefined) {
       this.fileAvatar.base64 = undefined;
       cropImage = {
         h: this.croppedImage.height,
-        id: this.currentCompanyId,
+        // id: this.currentCompanyId,
         origin: this.fileAvatar,
         w: this.croppedImage.width,
-        x: this.croppedImage.cropperPosition.x1,
-        y: this.croppedImage.cropperPosition.y1,
+        x: 178, //this.croppedImage.cropperPosition.x1,
+        y: 44, //this.croppedImage.cropperPosition.y1,
         base64: this.croppedImage.base64
       };
     } else {
@@ -356,34 +361,54 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       };
     }
 
+    if (this.create) {
+      this.cropAvatar = cropImage;
+    } else {
+      this.cropAvatar = null;
+    }
+
+    if (!this.selectedTechUser) {
+      return;
+    }
+
     this.loading = true;
     this.settingService
       .updateAvatar(this.selectedTechUser.id, cropImage)
       .subscribe(
         avatar => {
           if (avatar) {
-            const profileUser = {
-              basic: {
-                avatar: avatar,
-                firstName: this.techUserForm.value.firstName,
-                lastName: this.techUserForm.value.lastName,
-                primaryEmail: this.techUserForm.value.primaryEmail
-              }
-            };
+            this.selectedTechUser
+              ? (this.selectedTechUser.avatar = avatar)
+              : null;
+            this.loading = false;
+            // this.edit = false;
+            // this.getUsers();
 
-            // this.selectedTechUser.avatar = avatar;
-            this.toastr.success("Image cropped successfully");
-            this.settingService.updateProfile(profileUser).subscribe(
-              res => {
-                if (res) {
-                  // this.getCompanyProfile();
-                  // this.getCurrentCompany();
-                }
-              },
-              error => {
-                this.loading = false;
-              }
-            );
+            this.toastr.success('Image cropped successfully');
+            // const profileUser = {
+            //   basic: {
+            //     avatar: avatar,
+            //     firstName: this.techUserForm.value.firstName,
+            //     lastName: this.techUserForm.value.lastName,
+            //     primaryEmail: this.techUserForm.value.primaryEmail,
+            //     designation: this.techUserForm.value.techRole,
+            //     secondaryEmail: null,
+            //     signature: {}
+            //   }
+            // };
+            // // // this.selectedTechUser.avatar = avatar;
+
+            // // this.settingService.updateProfile(profileUser).subscribe(
+            // //   res => {
+            // //     if (res) {
+            // //       // this.getCompanyProfile();
+            // //       // this.getCurrentCompany();
+            // //     }
+            // //   },
+            // //   error => {
+            // //     this.loading = false;
+            // //   }
+            // // );
           }
         },
         error => {
@@ -392,8 +417,19 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       );
   }
 
-  isEmailUnique(email) {
-    if (!email) {
+  isEmailUnique(email: string) {
+    if (!this.techUserForm.value.primaryEmail) {
+      this.isEmailIdUnique = true;
+      this.submitted = false;
+      return;
+    }
+
+    if (
+      this.selectedTechUser !== null &&
+      this.techUserForm.value.primaryEmail ===
+        this.selectedTechUser.primaryEmail
+    ) {
+      this.isEmailIdUnique = true;
       return;
     }
 
@@ -418,18 +454,14 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       return;
     }
 
-    if (!this.techUserForm.get("primaryEmail").value) {
+    if (!this.techUserForm.get('primaryEmail').value) {
       this.isEmailIdUnique = false;
       return;
     }
 
-    // this.techUsersService
-    //   .isEmailUnique(this.techUserForm.value.primaryEmail, null, true)
-    //   .subscribe(
-    //     (unique: any) => {
-    // this.isEmailIdUnique = unique.value;
     if (this.isEmailIdUnique) {
       const objTechUser = {
+        avatar: this.cropAvatar || {},
         techRole: this.techUserForm.value.techRole
           ? this.techUserForm.value.techRole
           : this.techRoles[0],
@@ -443,32 +475,36 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       this.techUsersService.createUser(objTechUser).subscribe(
         (savedTechUsre: any) => {
           this.loading = false;
+          this.create = false;
+          this.getUsers();
           if (savedTechUsre && savedTechUsre.id) {
             this.saveUsersEmailNotifications(savedTechUsre.id);
           }
         },
         error => {
+          this.create = false;
           this.loading = false;
         }
       );
     } else {
-      // this.loading = false;
     }
-    // },
-    // error => {
-    //   this.isEmailIdUnique = false;
-    //   this.loading = false;
-    // }
-    // );
   }
 
   deleteAvatar() {
+    let id = '';
     if (!this.selectedTechUser || !this.selectedTechUser.avatar) {
+      id = this.fileAvatar ? this.fileAvatar.id : '';
+    } else {
+      id = this.selectedTechUser.id;
+    }
+
+    if (!id) {
       return;
     }
-    this.settingService.deleteAvatar(this.selectedTechUser.id).subscribe(
+
+    this.settingService.deleteAvatar(id).subscribe(
       res => {
-        this.toastr.success("Avatar deleted successfully");
+        this.toastr.success('Avatar deleted successfully');
 
         const profileUser = {
           basic: {
@@ -478,20 +514,21 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
             primaryEmail: this.techUserForm.value.primaryEmail
           }
         };
-        this.settingService.updateProfile(profileUser).subscribe(
-          res => {
-            if (res) {
-              if (res) {
-                this.selectedTechUser.avatar = null;
-                // this.toastr.success("Profile updated successfully");
-                // this.imageSrc = "/ng2/assets/img/user.jpg";
-              }
-            }
-          },
-          error => {
-            this.toastr.error(error);
-          }
-        );
+        this.selectedTechUser.avatar = null;
+        // // this.settingService.updateProfile(profileUser).subscribe(
+        // //   res => {
+        // //     if (res) {
+        // //       if (res) {
+        // //         this.selectedTechUser.avatar = null;
+        // //         // this.toastr.success("Profile updated successfully");
+        // //         // this.imageSrc = "/ng2/assets/img/user.jpg";
+        // //       }
+        // //     }
+        // //   },
+        // //   error => {
+        // //     this.toastr.error(error);
+        // //   }
+        // // );
       },
       error => {
         this.toastr.error(error);
@@ -500,6 +537,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   closeModel() {
+    this.fileAvatar = null;
     this.isCroppedImg = false;
   }
 
@@ -512,6 +550,14 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
         this.croppedImage.base64 = base64data;
         this.imageBase64 = base64data;
       });
+    } else if(this.create && this.cropAvatar) {
+      let imageUrl = `/file/${this.cropAvatar.origin.id}.jpg`;
+      this.getBase64ImageFromURL(imageUrl).subscribe(base64data => {
+        this.isCroppedImg = true;
+        // this.croppedImage = this.cropAvatar.avatar.cropped;
+        this.croppedImage.base64 = base64data;
+        this.imageBase64 = base64data;
+      });
     }
   }
 
@@ -519,7 +565,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     return Observable.create((observer: Observer<string>) => {
       // create an image object
       let img = new Image();
-      img.crossOrigin = "Anonymous";
+      img.crossOrigin = 'Anonymous';
       img.src = url;
       if (!img.complete) {
         // This will call another method that will create image from url
@@ -539,14 +585,14 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
 
   getBase64Image(img: HTMLImageElement) {
     // We create a HTML canvas object that will create a 2d image
-    const canvas = document.createElement("canvas");
+    const canvas = document.createElement('canvas');
     canvas.width = img.width;
     canvas.height = img.height;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
     // This will draw image
     ctx.drawImage(img, 0, 0);
     // Convert the drawn image to Data URL
-    const dataURL = canvas.toDataURL("image/png");
+    const dataURL = canvas.toDataURL('image/png');
     return dataURL;
     // return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
   }
@@ -574,7 +620,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       .map(function(s) {
         return s.charAt(0).toUpperCase();
       })
-      .join("");
+      .join('');
 
     this.selectedTechUser.companyId = this.selectedTechUser.company
       ? this.selectedTechUser.company.id
@@ -591,6 +637,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
             this.emailNotification(this.techUserIdList);
           }
           this.submitted = false;
+          this.selectedTechUser = null;
           this.loading = false;
           this.edit = false;
         },

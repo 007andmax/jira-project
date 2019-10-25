@@ -28,6 +28,10 @@ export class TechUsersService {
     );
   }
 
+  public fileAvatar(fromData: any) {
+    return this.http.post(`${this.apiUrl}file?isAvatar=true&ratio=1`, fromData);
+  }
+
   isEmailUnique(email: string, id: string, isTechUser: boolean) {
     return this.http.get(
       `${this.apiUrl}users/isEmailUnique?email=${email}&id=${id}&isTechUser=${isTechUser}`

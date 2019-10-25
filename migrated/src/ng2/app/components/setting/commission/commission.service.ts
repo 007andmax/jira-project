@@ -20,6 +20,11 @@ export class CommissionService {
   private SET_SERVICE_RATE_API = `${API_URL}settings/companyProfile/serviceRate`;
   private SET_AGREEMENT_RATES_API = `${API_URL}settings/companyProfile/agreementRates`;
 
+  private SET_CLIENT_COMPANIES_INFO_API = `${API_URL}company/clients/info`;
+  private GET_COMPANY_API = `${API_URL}company/clients`;
+  private GET_USER_API = `${API_URL}users`;
+  private SET_TECHLEAD_API = `${API_URL}`;
+
   constructor(private http: HttpClient) {}
 
   getCategories(): Observable<ICategory[]> {
@@ -117,6 +122,30 @@ export class CommissionService {
 
   getCurrentCompany() {
     return this.http.get(`${this.CURRENT_COMAPNY_API}`);
+  }
+
+  getClientCompaniesInfo() {
+    return this.http.get(`${this.SET_CLIENT_COMPANIES_INFO_API}`);
+  }
+
+  // get client company
+  getCompanies() {
+    return this.http.get(`${this.GET_COMPANY_API}`);
+  }
+
+  // get client company
+  getUsers() {
+    return this.http.get(`${this.GET_USER_API}`);
+  }
+
+  setTechLead(cmpId, techLeadId) {
+    if (!cmpId || !techLeadId) {
+      return;
+    }
+    return this.http.put(
+      `${this.SET_TECHLEAD_API}company/${cmpId}/setTechLead/${techLeadId}`,
+      ''
+    );
   }
 }
 

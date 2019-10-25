@@ -1,6 +1,8 @@
 @import './assets/styles/dropdowns.scss';
 @import './assets/styles/icons.scss';
 
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
 .main-container:nth-child(2) {
   display: none;
 }
