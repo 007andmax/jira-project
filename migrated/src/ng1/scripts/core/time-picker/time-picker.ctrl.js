@@ -13,8 +13,8 @@
             $scope.outDate = { hour: 12, minute: 00, type: "am" };
             $scope.inDateText = "12:00am";
             $scope.outDateText = "12:00am";
-            $scope.selectedIndexInDate = null;
-            $scope.selectedIndexOutDate = null;
+            $scope.selectedIndexInDate = {hour: null, minute: null};
+            $scope.selectedIndexOutDate = {hour: null, minute: null};
           
             $scope.serviceExpenseDurationPresentation = CompaniesService.getCurrentCompany().serviceExpenseDurationPresentation ?
                 CompaniesService.getCurrentCompany().serviceExpenseDurationPresentation
@@ -169,8 +169,11 @@
             function setSelectedIndexInDate() {
                 var indexHour = $scope.hoursInDate.findIndex(hour => hour.value === $scope.inDate.hour && hour.type === $scope.inDate.type);
                 var indexMinute = $scope.minutes.findIndex(minute => minute.value === $scope.inDate.minute);
-                $scope.selectedIndexInDate = (indexHour > -1 && indexMinute > -1) ? (indexMinute + $scope.minutes.length * indexHour) : null;
+                if (indexMinute === -1) indexMinute = getClosest($scope.minutes,$scope.inDate.minute).u;
+                console.log('indexMinute',indexMinute);
+                $scope.selectedIndexInDate = {hour: (indexHour > -1) ? $scope.hoursInDate[indexHour].value : null, minute: $scope.minutes[indexMinute].value};
             }
+           
             function setSelectedIndexOutDate() {
                 var indexHour = $scope.hoursOutDate.findIndex(hour => hour.value === $scope.outDate.hour && hour.type === $scope.outDate.type);
                 var indexMinute = $scope.minutes.findIndex(minute => minute.value === $scope.outDate.minute);
@@ -181,20 +184,14 @@
                 setHousInDate("am", 0, 1, 11);
                 $scope.hoursInDate.push({ value: 12, type: "pm", text: "12", i: 12 })
                 setHousInDate("pm", 12, 1, 11);
-                /* if ($scope.inDate.hour === 12) {
-                     $scope.hoursInDate.push({ value: 12, type: $scope.inDate.type, text: "12", i: ($scope.inDate.type === "am") ? 0 : 12 });
-                     setHousInDate($scope.inDate.type, ($scope.inDate.type === "am") ? 0 : 12, 1, 11);
-                     $scope.hoursInDate.push({ value: 12, type: ($scope.inDate.type === "pm") ? "am" : "pm", text: "12", i: ($scope.inDate.type !== "am") ? 0 : 12 })
-                     setHousInDate(($scope.inDate.type === "pm") ? "am" : "pm", ($scope.inDate.type === "am") ? 0 : 12, 1, 11);
-                 } else {
-                     setHousInDate($scope.inDate.type, 0, $scope.inDate.hour, 11);
-                     var type = ($scope.inDate.type === "pm") ? "am" : "pm";
-                     $scope.hoursInDate.push({ value: 12, type: type, text: "12", i: 12 - $scope.inDate.hour });
-                     setHousInDate(type, (type === "am") ? 0 : 12, 1, 11);
-                     $scope.hoursInDate.push({ value: 12, type: $scope.inDate.type, text: "12", i: ($scope.inDate.type === "am") ? 0 : 12 })
-                     setHousInDate($scope.inDate.type, ($scope.inDate.type === "am") ? 0 : 12, 1, $scope.inDate.hour);
-                 }*/
+              
 
+            }
+            function getClosest(counts,goal) {
+               return counts.reduce(function(prev, curr) {
+                 
+                    return (Math.abs(curr.value - goal) < Math.abs(prev.value - goal) ? curr : prev);
+                  });
             }
             function setHousInDate(type, index, start, end) {
                 let indexDuration = index;

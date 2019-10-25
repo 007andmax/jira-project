@@ -17,7 +17,7 @@
       <div class="start-end-picker-item "
            ng-repeat="hour in hoursInDate track by $index" ng-init="i=$index;" >
         <div ng-repeat="minute in minutes"
-             ng-click="selectTimeIn(hour,minute)" ng-class="(hour.value === inDate.hour && minute.value === inDate.minute && hour.type === inDate.type) ? 'active' : ''" 
+             ng-click="selectTimeIn(hour,minute)" ng-class="(hour.value === selectedIndexInDate.hour && minute.value === selectedIndexInDate.minute && hour.type === inDate.type) ? 'active' : ''" 
             >
           {{hour.text}}:{{minute.text}}{{hour.type}}
         </div>
