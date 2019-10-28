@@ -292,6 +292,10 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.cd.detectChanges();
   }
 
+  public onPastDescriptionService(value,i) {
+    this.services[i].description = value;
+   }
+
   /**
   * Set service item
  * @param item - service

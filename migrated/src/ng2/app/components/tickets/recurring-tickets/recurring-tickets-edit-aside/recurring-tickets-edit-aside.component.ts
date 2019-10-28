@@ -138,6 +138,10 @@ console.log('this.services',JSON.parse(JSON.stringify(this.services)));
     this.recurringState.getCreateTicket().setCronExpression(data);
   }
 
+  public onPastDescriptionService(value,i) {
+   this.services[i].description = value;
+  }
+
   public onPastDescription(value) {
     console.log('onPastDescription',value);
     this.recurringState.getCreateTicket().setDescription(value);
