@@ -118,7 +118,7 @@
                 if ($scope.serviceExpense) {
                     $scope.serviceExpense.quantity = $scope.quantity;
                     $rootScope.saveStartDate = new Date();
-                    $rootScope.saveEndDate = new Date($rootScope.saveStartDate.getTime() + $scope.quantity * 3600000)
+                    $rootScope.saveEndDate = new Date(new Date().getTime() + $scope.quantity * 3600000)
                 }
             }
             function resetSelectedTime () {

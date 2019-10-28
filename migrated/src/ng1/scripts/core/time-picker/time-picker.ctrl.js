@@ -157,11 +157,11 @@
 
                     if ($scope.serviceExpense) {
                         $rootScope.saveStartDate = new Date(newTimeStart.getTime());
-                        $rootScope.saveEndDate = new Date(newTimeEnd.getTime());
+                        $rootScope.saveEndDate = new Date(endMs);
                     }
                     if ($scope.editService) {
                         $rootScope.saveForStartDate = new Date(newTimeStart.getTime());
-                        $rootScope.saveForEndDate = new Date(newTimeEnd.getTime());
+                        $rootScope.saveForEndDate = new Date(endMs);
                         $scope.resetDurationWhenTimePicker();
                         $rootScope.$broadcast('onResetDuration', $scope.quantity)
                     }
