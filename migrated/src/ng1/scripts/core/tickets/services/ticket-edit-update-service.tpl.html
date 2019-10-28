@@ -10,12 +10,12 @@
         <div class="edit-col1" ng-class="{'has-error': !editService.item.versionedId.id}">
             <div uib-dropdown>
   
-              <input type="text" value="Onsite" class="form-control has-dropdown" placeholder="Service"
+              <input type="text" value="Onsite" class="form-control has-dropdown new-input" placeholder="Service"
                      name="serviceName" placeholder="Service" uib-dropdown-toggle aria-expanded="false"
                      ng-model="editService.item.name" required>
               <i class="icn-sm icn-caret-gray"></i>
   
-              <ul class="dropdown-menu dropdown-menu-services">
+              <ul class="dropdown-menu dropdown-menu-services" style="top: 46px;margin: 0;">
   
                 <li role="presentation"
                     ng-repeat="companyService in companyServices | orderBy: 'name'">
@@ -37,7 +37,7 @@
     <!--  <p class="pre-line" ng-bind-html="service.description"></p>-->
       <textarea auto-expand limit="250"
       value="editService.description"
-      type="text" style="width: 100%; border: none" type="text" class="form-validation modal-textarea"
+      type="text" style="border: none" type="text" class="form-validation modal-textarea"
       ng-model="editService.description"  rows="1"
        tabindex="1"></textarea>
     </div>
