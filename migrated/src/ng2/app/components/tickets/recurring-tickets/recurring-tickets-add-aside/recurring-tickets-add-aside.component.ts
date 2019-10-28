@@ -149,12 +149,18 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.recurringState.getCreateTicket().setCronExpression(data);
   }
 
+  public onPastDescription(value) {
+    console.log('onPastDescription',value);
+    this.recurringState.getCreateTicket().setDescription(value);
+  }
+
   /**
   * Subscribe to change description
   * @param event - description event
   */
   public onChangeDescription(event) {
     this.recurringState.getCreateTicket().setDescription(event.target.value);
+   
   }
 
   /**

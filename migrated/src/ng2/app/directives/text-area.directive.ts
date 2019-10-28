@@ -1,4 +1,4 @@
-import { Directive, OnInit, ElementRef, Injectable, Input, ChangeDetectorRef, OnChanges, SimpleChanges, AfterContentChecked } from '@angular/core';
+import { Directive, OnInit, ElementRef, Injectable, Input, ChangeDetectorRef, OnChanges, SimpleChanges, AfterContentChecked, Output, EventEmitter } from '@angular/core';
 
 @Directive({
   selector: '[appTextArea]'
@@ -11,6 +11,7 @@ export class TextAreaDirective implements OnInit  {
   height:number = 0;
   @Input() limit;
   @Input() minHeight;
+  @Output() onPast = new EventEmitter<any>();
   block: boolean = false;
   constructor(private element: ElementRef, public cd: ChangeDetectorRef) {
 
@@ -131,7 +132,7 @@ export class TextAreaDirective implements OnInit  {
     this.lines = this.getNumberOfLines(this.element.nativeElement.value);
   };
   private limitPaste = (e) => {
-   
+  
     let clipboardData, pastedData, newValue, isOverflowed;
     // Stop data actually being pasted into div
     e.stopPropagation();
@@ -151,6 +152,8 @@ export class TextAreaDirective implements OnInit  {
     this.element.nativeElement.focus();
     this.element.nativeElement.click();
     this.cd.detectChanges();
+    console.log('this.element.nativeElement.value',this.element.nativeElement.value);
+    this.onPast.emit(this.element.nativeElement.value);
     //scope.$digest()
   };
 

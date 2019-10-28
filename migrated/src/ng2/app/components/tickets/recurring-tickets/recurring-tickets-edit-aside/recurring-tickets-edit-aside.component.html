@@ -11,7 +11,7 @@
           <p>Service Description</p>
           <div class="editable-description">
             <textarea appTextArea [limit]="250" id="service-description" placeholder="Write Description"
-                      (input)="onChangeDescription($event)"></textarea>
+                      (input)="onChangeDescription($event)" (onPast)="onPastDescription($event)"></textarea>
           </div>
         </div>
 
