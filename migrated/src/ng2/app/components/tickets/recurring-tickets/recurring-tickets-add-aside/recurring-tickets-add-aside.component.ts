@@ -506,7 +506,18 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.companiesState.onInitClear();
     this.createService.getDevicesState().onInitClear();
     this.selectedClient = null;
-    this.services = [new ForCreateService()];
+   // this.services = [new ForCreateService()];
+   let dataService = JSON.parse(JSON.stringify(this.services));
+    this.services = (this.services.length > 0) ? [] : [new ForCreateService()];
+    let services = [];
+    dataService.forEach((service, index) => {
+      let new_service = new ForCreateService();
+      new_service.setDescription(service.description);
+      services.push(new_service);
+
+    });
+    this.services = (dataService.length > 0) ? services : [new ForCreateService()];
+    console.log('this.services',this.services);
     this.type = "services";
     this.validate = new Validate();
     // this.devicesList = [];
