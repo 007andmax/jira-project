@@ -3,7 +3,7 @@
 (function () {
 
   angular.module("quicktech.common.directives").directive('serviceQuantityPicker',
-    ['$templateRequest', '$compile', '$timeout', '$rootScope', function ($templateRequest, $compile, $timeout, $rootScope) {
+    ['$templateRequest', '$compile', '$timeout', '$rootScope','CompaniesService', function ($templateRequest, $compile, $timeout, $rootScope,CompaniesService) {
       return {
         restrict: 'A',
         scope: {
@@ -16,6 +16,43 @@
         },
         link: function (scope, element, attrs) {
         
+          scope.intervalsVariant = [
+            {
+              name: 'Every 1 min',
+              value: 1,
+              valueForBack: 'ONE_MINUTE'
+            },
+            {
+              name: 'Every 5 mins',
+              value: 5,
+              valueForBack: 'FIVE_MINUTES'
+            },
+            {
+              name: 'Every 10 mins',
+              value: 10,
+              valueForBack: 'TEN_MINUTES'
+            },
+            {
+              name: 'Every 15 mins',
+              value: 15,
+              valueForBack: 'FIFTEEN_MINUTES'
+            }
+          ];
+          scope.timePickerInterval = setTimePickerInterval();
+          function setTimePickerInterval(){
+            var interval = CompaniesService.getCurrentCompany().serviceExpenseDurationPickerInterval ?
+            CompaniesService.getCurrentCompany().serviceExpenseDurationPickerInterval : 'ONE_MINUTE';
+            return scope.intervalsVariant.find(function(item) {
+              return item.valueForBack === interval;
+            });
+          }
+          scope.intervalsArray = [];
+          console.log(scope.timePickerInterval, '$scope.timePickerInterval');
+          for (var step = 0; step < (60/scope.timePickerInterval.value); step++) {
+            scope.intervalsArray.push(step*scope.timePickerInterval.value);
+          }
+          console.log(scope.intervalsArray, '$scope.intervalsArray');
+        console.log('quantity',scope.quantity);
           if (scope.sqpDay) {
             scope.sqpInput = 'sqp-cond-input=' + '"' + scope.sqpDay + ' ' + scope.sqpPeriod + '"';
           } else {

@@ -470,7 +470,9 @@
               "src/ng1/scripts/js/vendors/date-range-picker/datepicker.en.js",
               "src/ng1/scripts/js/handlebars-v3.0.3.js",
               "src/ng1/scripts/core/user-list/user-list.ctrl.js",
-              "src/ng1/scripts/core/assign-user-list/assign-user-list.ctrl.js"
+              "src/ng1/scripts/core/assign-user-list/assign-user-list.ctrl.js",
+              "src/ng1/scripts/core/duration/duration.ctrl.js",
+              "src/ng1/scripts/core/time-picker/time-picker.ctrl.js"
             ],
             "es5BrowserSupport": true
           },

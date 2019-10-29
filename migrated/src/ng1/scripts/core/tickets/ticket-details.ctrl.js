@@ -921,7 +921,7 @@ console.log('find');
               minute: date.getMinutes() <= 9 ? '0'+date.getMinutes() : date.getMinutes(),
               time: date.getHours() >= 12 && date.getHours() <= 24 ? 'PM' : 'AM'
             };
-            return currentTime.hour + ':' + currentTime.minute + ' ' + currentTime.time
+            return currentTime.hour + ':' + currentTime.minute + '' + currentTime.time
           };
           function getHourFormated(date) {
             if (date.getHours() < 10 && date.getHours() >= 1) {
@@ -1090,12 +1090,14 @@ console.log('find');
                   console.log('currentDate',currentDate);
                   var endDate = new Date();
                   if ($rootScope.serviceExpenseDurationPresentation === 'TIME_PICKER' || $rootScope.isMobileUpdateShown) {
+                    console.log('111111111111111111111');
                     $rootScope.saveStartDate = new Date($rootScope.saveStartDate);
                     $rootScope.saveEndDate = new Date($rootScope.saveEndDate);
                     ticketUpdateToSend.services[i].quantity = getQuantity($rootScope.saveStartDate, $rootScope.saveEndDate);
                     ticketUpdateToSend.services[i].durationStart = $rootScope.saveStartDate.getTime();
                     ticketUpdateToSend.services[i].durationEnd = $rootScope.saveEndDate.getTime();
                   }else {
+                    console.log('22222222222222222222222222222',$scope.ticketUpdate.services[i].quantity);
                     ticketUpdateToSend.services[i].quantity = $scope.ticketUpdate.services[i].quantity;
                     ticketUpdateToSend.services[i].durationStart = $rootScope.saveStartDate.getTime();
                     ticketUpdateToSend.services[i].durationEnd = $rootScope.saveEndDate.getTime() ;
@@ -1199,6 +1201,7 @@ console.log('find');
             }
           };
           function getQuantity(start, end) {
+            console.log('getQuantity');
             console.log(start, end);
             start = new Date(start);
             end = new Date(end);

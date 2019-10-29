@@ -1,0 +1,54 @@
+<div class="duration"
+     ng-controller="quicktech.core.duration.userListCtrl"
+     uib-dropdown
+     auto-close="outsideClick"
+     on-toggle="onToggleDropdown($event)"
+    
+     is-open="status.isopen">
+  <input type="text"
+         class="pointer new-input"
+         ng-blur="onChangeText()"
+         ng-click="toggleDropdown($event)"
+         smart-dropdown-menu-position="duration"
+         ng-model="dateText"
+         autocomplete="off" />
+
+  <div uib-dropdown-menu
+       class="dropdown-menu"
+       stop-propagation="click"
+       onUserAssign="'true'"
+      
+       aub-is-bulk-operation="true">
+    <div class="duration-container">
+      <div class="duration-container-header">
+        <div>HH</div>
+        <div>MM</div>
+      </div>
+      <div class="duration-container-content">
+        <div class="duration-container-values has-arrows">
+          <div class="arrow-top" ng-click="onScrollHours($event,true)"></div>
+          <div class="duration-container-values-hours">
+            <div ng-repeat="hour in hours track by $index" ng-class="(hour.selected) ? 'active' : ''"
+                 ng-click="selectHour(hour,$index)">{{hour.value}}
+            </div>
+          </div>
+          <div class="arrow-bottom" ng-click="onScrollHours($event,false)"></div>
+        </div>
+        <div class="duration-container-values" ng-class="(interval != 'TEN_MINUTES') ? 'has-arrows' : ''">
+          <div class="arrow-top" ng-click="onScrollMinutes($event,true)"></div>
+          <div class="duration-container-values-minutes">
+            <div ng-repeat="min in minutes track by $index" ng-class="(min.selected) ? 'active' : ''"
+                 ng-click="selectMinute(min,$index)">{{min.value}}
+            </div>
+          </div>
+          <div class="arrow-bottom" ng-click="onScrollMinutes($event,false)"></div>
+        </div>
+      </div>
+      <button class="duration-container-button"
+              type="button"
+              ng-click="onInitSetDuration($event)">
+        Set it
+      </button>
+    </div>
+  </div>
+</div>

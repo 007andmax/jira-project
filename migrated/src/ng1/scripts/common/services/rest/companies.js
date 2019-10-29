@@ -7,7 +7,7 @@
   var services = angular.module('main.services');
 
   services.factory('CompaniesService', ['$http', '$rootScope', 'RealTimeService', 'Utils', function ($http, $rootScope, RealTimeService, Utils) {
-
+console.log('CompaniesService');
     var serviceScope = $rootScope.$new(),
       initialized = false,
       initListeners = [],
@@ -109,6 +109,7 @@
 
     $http.get('/company/current').then(function (resp) {
       Utils.customizeObj(resp.data, storage.currentCompany);
+      setRealTimeCurrentCompany();
       checkInit();
     },
       function (resp) {
@@ -220,7 +221,19 @@
         }
       }
     });
+    function setRealTimeCurrentCompany() {
+      console.log('storage.currentCompany.id', storage.currentCompany.id);
+      RealTimeService.subscribe('/company/' + storage.currentCompany.id, serviceScope, function (newChange) {
+        console.log('newChange', newChange);
+        if (newChange.action === "SERVICE_EXPENSE_DATA_PICKER_CHANGED") {
+          storage.currentCompany.serviceExpenseDurationPresentation = newChange.data.presentation;
+          storage.currentCompany.serviceExpenseDurationPickerInterval = newChange.data.interval;
+        }
 
+
+      })
+    }
+    
     RealTimeService.subscribe('/companySettings', serviceScope, function (newChange) {
 
       if (newChange.action === 'SMTP_SETTINGS_UPDATED') {
