@@ -88,6 +88,7 @@ export class PasswordManagerTableComponent implements OnInit {
       if (this.selectedCategory && item.template !== this.selectedCategory.UPPERCASE) return false;
       return true;
     })
+    
   }
   private onChangeRealtTime() {
     this.passwordManagerService.onChangeRealTime.subscribe(newChange => {
@@ -105,7 +106,9 @@ export class PasswordManagerTableComponent implements OnInit {
        
       }
       this.filterList();
-      this.cd.detectChanges();
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+    }
     })
   }
 
@@ -128,7 +131,9 @@ export class PasswordManagerTableComponent implements OnInit {
       this.selectedCategory = category;
 
      // this.filter.passwordCategory = JSON.parse(JSON.stringify(category));
+     if (!this.cd['destroyed']) {
       this.cd.detectChanges();
+  }
     });
   }
 

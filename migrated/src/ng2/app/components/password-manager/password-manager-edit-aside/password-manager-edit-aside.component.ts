@@ -219,6 +219,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.submitted = false;
     this.type = 0;
     this.opened = false;*/
+    this.cd.detectChanges();
   }
 
   /**
