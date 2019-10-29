@@ -55,7 +55,7 @@ export class CompanyPasswordManagerTableComponent implements OnInit {
 
   private onSort() {
     this.passwordManagerService.getOnSort().subscribe((data) => {
-      console.log('data',data);
+     
     this.sort = data.sort;
     this.direction = data.direction;
    
@@ -77,7 +77,7 @@ export class CompanyPasswordManagerTableComponent implements OnInit {
    */
   public getRecords() {
     this.subGetRecords = this.apiPasswordManagerService.dataChange.subscribe((res) => {
-   console.log('res',res);
+ 
        this.recordsData = res.filter(item => item.companyId === this.selectedCompany.id);
     });
   }

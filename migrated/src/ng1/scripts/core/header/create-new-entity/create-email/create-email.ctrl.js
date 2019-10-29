@@ -112,7 +112,7 @@
             emails: $scope.emails,
             note: plainText
           }, $scope.close);
-          console.log('im heree')
+         
           return;
         }
 

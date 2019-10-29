@@ -244,7 +244,7 @@ export class QuoteService {
    */
   public getQuotes(data) {
     //data.type && this.getSortType(data.type);
-    console.log('this.sortType', this.sortType);
+    
     return this.http.post(this.apiUrl + 'saleQuotes/search', {
       "companyName": data.company || null,
       "quoteNumber": data.number || null,
@@ -359,8 +359,7 @@ export class QuoteService {
   * @param id - type of the document.
   */
   public downLoadFile(res: any, id, companyName, quoteNumber) {
-    console.log('res', res);
-    console.log('id',id);
+    
     var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
     
     const data = window.URL.createObjectURL(res);

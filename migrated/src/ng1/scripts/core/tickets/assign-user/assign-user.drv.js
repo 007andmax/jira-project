@@ -20,8 +20,7 @@
             var mainDropdown = element.parents('div.dropdown');
 
             // var
-
-console.log('$scope',$scope);
+ 
 
             $scope.usersToAssign = [];
 
@@ -263,7 +262,7 @@ console.log('$scope',$scope);
 
             $scope.$watch('usersCurrentCompany.length', function () {
               users = $rootScope.usersToNotify || $scope.usersCurrentCompany;
-console.log('users',users);
+ 
               $scope.autoComplete();
             })
           }

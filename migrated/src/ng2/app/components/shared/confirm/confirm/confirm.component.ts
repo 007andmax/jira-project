@@ -18,7 +18,7 @@ export class ConfirmComponent implements OnInit {
     }
 
   ngOnInit() {
-  console.log('eRef', this.eRef.nativeElement);
+  
   }
   closeModal() {
     this.activeModal.close();

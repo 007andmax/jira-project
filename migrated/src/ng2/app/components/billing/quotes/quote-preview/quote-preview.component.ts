@@ -78,7 +78,7 @@ export class QuotePreviewComponent implements OnInit {
   public getQuoteInfo() {
     this.quote = this.quoteStateService.getQuote();
     this.quoteForCreate = this.quoteStateService.getQuoteCreate();
-    console.log('this.quoteForCreate',this.quoteForCreate);
+   
   }
 
   /**

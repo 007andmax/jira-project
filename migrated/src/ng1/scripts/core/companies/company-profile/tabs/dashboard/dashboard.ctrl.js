@@ -199,13 +199,13 @@
 
             $scope.companyInfo.workingDays.push(day);
           }
-        console.log('$scope.companyInfo.workingDays',$scope.companyInfo.workingDays);
+        
           $scope.showWorkingDaysEditFields = false;
           $scope.save();
         };
         function gotSecondFromTimeAndFormatObject(objectTime, objectTimeFormat) {
           if (objectTime && objectTimeFormat) {
-            // console.log(objectTime, objectTimeFormat, '*******________**********  ');
+            
             var hours, minutes, separateTime;
 
             if (typeof objectTime === 'string') {
@@ -225,9 +225,9 @@
           }
         }
      /*   function gotSecondFromTimeAndFormatObject(objectTime, objectTimeFormat) {
-          //  console.log('objectTime',)
+       
           if (objectTime && objectTimeFormat) {
-            // console.log(objectTime, objectTimeFormat, '*******________**********  ');
+           
             var hours, minutes, separateTime;
 
             if (typeof objectTime === 'string') {
@@ -241,8 +241,7 @@
               var timeInMinutes = objectTime * 60,
                 hours = Math.floor(timeInMinutes / 60),
                 minutes = Math.round(timeInMinutes - (hours * 60));
-              console.log('hours', hours);
-              console.log('minutes', minutes);
+              
             }
 
             return (objectTimeFormat === 'AM' ? timeInMinutes : timeInMinutes + 12 * 60);
@@ -332,7 +331,7 @@
         $scope.changePrimaryContact = function (user) {
           CompaniesService.changePrimaryContact(user.id, function (resp) {
             if (resp) {
-              //console.log(resp);
+             
             }
           })
         };

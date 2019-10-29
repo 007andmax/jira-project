@@ -367,7 +367,7 @@
 
 
         // $scope.$watch('companyProfileSharedState.tabName', function(data) {
-        //   console.log(data);
+         
         //   $state.go('companyProfile', { companyId: $scope.company.id, tabName: data });
         // })
 

@@ -27,11 +27,11 @@
         });
 
         $scope.changeAuthenticationTypesType = function (type) {
-          console.log(type);
+        
           if (type) {
             $scope.authenticationTypesType.value = type;
             UsersService.toggle2FA(type, function (resp) {
-              console.log(resp);
+            
             })
           }
         };

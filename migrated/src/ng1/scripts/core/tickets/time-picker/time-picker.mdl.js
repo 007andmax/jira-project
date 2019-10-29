@@ -231,7 +231,7 @@
               while (pivot < 5) {
                 var copy = angular.copy(list.array[cursor]);
                 if (!copy) {
-                  console.log(cursor);
+                
                 }
                 copy.index = cursor;
                 list.view.splice(0, 0, copy);

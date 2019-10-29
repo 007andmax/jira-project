@@ -93,7 +93,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   * Initializes edit mod
   */
   private onEditEditMode(data: RecurringTicket) {
-    console.log('data',data);
+     
     this.createService.setDescription(data.description);
     this.ticketForEdit = data;
     this.tehUsers = data.assignedUsers;
@@ -102,7 +102,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.devicesService.onInitHangle(data.company.id);
     this.selectedClient = data.company;
     this.createService.getStateDatePicker().onInitEditMode(data.startDate);
-    console.log('this.services',JSON.parse(JSON.stringify(this.services)));
+    
     this.products = (data.products.length > 0) ? this.createService.getProductsForEdit(data.products) : [new ForCreateProduct()];
     this.services = (data.services.length > 0) ? this.createService.getServicesForEdit(data.services, data.serviceErrors) : [new ForCreateService()];
     this.createService.setTagsForEdit(data.tags);
@@ -114,7 +114,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.onChangeCron(data.cronExpression)
     this.getListServices(data.company);
     this.cd.detectChanges();
-console.log('this.services',JSON.parse(JSON.stringify(this.services)));
+ 
   }
 
   /**
@@ -143,7 +143,7 @@ console.log('this.services',JSON.parse(JSON.stringify(this.services)));
   }
 
   public onPastDescription(value) {
-    console.log('onPastDescription',value);
+     
     this.recurringState.getCreateTicket().setDescription(value);
   }
 
@@ -152,9 +152,9 @@ console.log('this.services',JSON.parse(JSON.stringify(this.services)));
   * @param event - description event
   */
   public onChangeDescription(event) {
-    console.log('onChangeDescription',event.target.value);
+   
     this.recurringState.getCreateTicket().setDescription(event.target.value);
-    console.log('this.recurringState.getCreateTicket()',this.recurringState.getCreateTicket());
+    
   }
 
   /**
@@ -210,7 +210,7 @@ console.log('this.services',JSON.parse(JSON.stringify(this.services)));
 * @param selectClient - company
 */
   public selectClient(selectClient) {
-    console.log('selectClient');
+     
     this.validate.resetCompany();
     if (selectClient === 'null') {
       this.recurringState.getCreateTicket().setCompany(null);
@@ -228,8 +228,7 @@ console.log('this.services',JSON.parse(JSON.stringify(this.services)));
     }
     if (this.services[0] instanceof ForCreateService)
     {
-      console.log('ffff',this.ticketForEdit.services);
-      console.log('JSON.parse(JSON.stringify(this.services))',JSON.parse(JSON.stringify(this.services)));
+    
       let servicesOld = JSON.parse(JSON.stringify(this.services));
       this.services = [];
       let services = [];
@@ -240,7 +239,7 @@ console.log('this.services',JSON.parse(JSON.stringify(this.services)));
        
         services.push(new_service);
       });
-      console.log('services',services);
+      
       this.services = services;
     }
     this.cd.detectChanges();
@@ -272,7 +271,7 @@ public setService(item, index) {
   this.services[index].setDuration( (this.services[index].duration) ? this.services[index].duration : 1);*/
   this.cd.detectChanges();
 /*  if (this.services[index] instanceof ForCreateService && this.services[index].versionedId) {
-    console.log('this.services[index]0', item);
+   
     this.services[index].setName(item.name);
     this.services[index].setVersionedId(item.setVersionedId);
   } else {
@@ -407,7 +406,7 @@ public setService(item, index) {
       }
     }
     if (this.ticketForEdit && this.ticketForEdit.id) {
-      console.log('this.recurringState.getCreateTicket()',this.recurringState.getCreateTicket());
+     
       this.recurringState.getCreateTicket().checkForEdit(this.ticketForEdit);
       this.recurringService.editTicket(this.ticketForEdit, this.recurringState.getCreateTicket()).subscribe((res) => {
         this.close();
@@ -454,7 +453,7 @@ public setService(item, index) {
 
   public copyAndCreate () {
     let data = JSON.parse(JSON.stringify(this.ticketForEdit));
-    console.log('data',data);
+     
     this.close();
     this.recurringState.onInitCopyCreate(data);
    

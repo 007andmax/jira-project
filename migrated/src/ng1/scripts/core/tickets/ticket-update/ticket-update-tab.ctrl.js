@@ -135,7 +135,7 @@
             $rootScope.saveEndDate = new Date($rootScope.saveStartDate.getTime() + newValue*3600000)
             $scope.quantity = newValue;
             $rootScope.quantityForSave = newValue;
-            console.log('changeQuantity')
+           
           });
 
        
@@ -204,9 +204,9 @@
             $scope.$watch(function() {
               return $scope.ticketUpdate && $scope.ticketUpdate.services
             }, function(val) {
-              console.log('val',val);
+            
               if (val) {
-                console.log('$scope.newEditExpense',$scope.newEditExpense);
+               
                 if ($scope.newEditExpense && $scope.newEditExpense.service) {
                   $scope.openedTab('SERVICE');
                   $scope.serviceToEdit = [$scope.newEditExpense.service];
@@ -226,7 +226,7 @@
 
                   }
 
-                  console.log('$scope.serviceToEdit',$scope.serviceToEdit[0].quantity);
+                  
 
                 }*/
 

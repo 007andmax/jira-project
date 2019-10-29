@@ -46,7 +46,7 @@
 
 
         AgreementsService.getAllServiceAgreements($scope, function (data) {
-          console.log(1, '111');
+       
           $scope.agreementsList = data;
 
           for (var i = 0; i < $scope.agreementsList.length; i++) {
@@ -98,7 +98,7 @@
               AgreementsService.deleteAgreement(agreement.id, function (resp) {
                 if (resp) {
                   UserNotificationService.show('Agreement deleted', true);
-                  console.log('Agreement delete', resp);
+                 
                 }
               })
             });
@@ -110,7 +110,7 @@
           if (agreement && agreement.id) {
             AgreementsService.forceCreate(agreement.id, function(resp) {
               UserNotificationService.show('Billable item created', true);
-              console.log('Billable item created', resp);
+            
 
             })
           }
@@ -120,7 +120,7 @@
           var companyForReadOnlyMode = {};
           if (agreementId) {
             AgreementsService.getAgreement(agreementId, function (resp) {
-              // console.log(resp, 'rsp');
+             
 
               if (resp.code !== 500) {
                 companyForReadOnlyMode = resp;
@@ -149,7 +149,7 @@
                   template = '/ng1/scripts/core/service-agreements/modal/service-contract-modal.tpl.html';
                   break;
                 default:
-                  console.log('no contract type selected');
+                  
               }
               $scope.allowToOpenAgreementModal = false;
               var modalInstance = $uibModal.open({
@@ -238,7 +238,7 @@
         $scope.editContract.services = [];
 
         ServicesService.getServicesData($scope, function (data) {
-          // console.log(data, 'SERVICES');
+         
           var listOfServices = [];
           for (var i = 0; i < data.length; i++) {
             var serv = {
@@ -264,14 +264,13 @@
 
             $scope.defaultServicesList = listOfServices.slice();
             $scope.editContract.services = listOfServices.filter(function(el) {
-              console.log(el)
-              console.log(el.canUseInTicket, "CANUSEINTICKETs")
+             
               return el.canUseInTicket;
             });
           }
         });
 
-        // console.log($scope.today, 'SOSDOSDOSOs')
+       
         setMiNDateForEndDate($scope.today);
         setDefaultTime($scope.today);
 
@@ -292,7 +291,7 @@
         };
 
       } else {
-        //console.log(companyData);
+        
         $scope.editContract = companyData.companyForReadOnlyMode;
         $scope.editContract.startDate = $filter('date')($scope.editContract.startDate, 'dd MMM yyyy');
         $scope.editContract.endDate = $filter('date')($scope.editContract.endDate, 'dd MMM yyyy');
@@ -316,7 +315,7 @@
 
       if (!companyData.editMode) {
         ServicesService.getServicesData($scope, function (data) {
-          // console.log(data, 'SERVICES');
+          
           var listOfServices = [];
           for (var i = 0; i < data.length; i++) {
             var serv = {
@@ -537,7 +536,7 @@
 
       $scope.getUniqueServicesForDropdown = function() {
 
-        console.log($scope.editContract.services, $scope.defaultServicesList, "HERERER")
+       
 
         return $scope.defaultServicesList && $scope.defaultServicesList.filter(function(el) {
           return !~$scope.editContract.services.findIndex(function(service) {
@@ -731,10 +730,10 @@
         }
         ServicesService.searchDuplicatedServiceNames($scope.editContract.startDate, $scope.editContract.endDate, companyId, serviceNamesList, function (resp) {
           if (Object.keys(resp).length === 0) {
-            console.log(' searchDuplicatedServiceNames true');
+            
             deferred.resolve(resp);
           } else {
-            console.log(' searchDuplicatedServiceNames false');
+           
             showErrorValidationDuplicatesHourlyTimeout();
             deferred.reject();
 
@@ -954,7 +953,7 @@
 
 
       $scope.terminateContract = function (id) {
-        // console.log('i herereere')
+       
         AgreementsService.terminate(id || $scope.editContract.id, function (resp) {
           if ($scope.closeModal) $scope.closeModal();
         })

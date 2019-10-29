@@ -270,7 +270,7 @@ export class QuotesComponent implements OnInit,OnDestroy {
    */
   convertToInvoice(item) {
     this.quoteServices.convertToInvoice({companyInfo: item.company}, item.id).subscribe((res) => {
-      console.log(res, 'RES');
+      
     });
   }
 
@@ -279,7 +279,7 @@ export class QuotesComponent implements OnInit,OnDestroy {
    */
   convertToTicket(item) {
     this.quoteServices.convertToTicket(item.company, item.id).subscribe((res) => {
-      console.log(res, 'RES');
+     
     });
   }
 
@@ -288,7 +288,7 @@ export class QuotesComponent implements OnInit,OnDestroy {
    */
   cancelQuote(item) {
     this.quoteServices.cancelQuote(item.company, item.id).subscribe((res) => {
-      console.log(res, 'RES');
+     
     });
   }
 
@@ -297,13 +297,13 @@ export class QuotesComponent implements OnInit,OnDestroy {
    */
   archiveQuote(item) {
     this.quoteServices.archiveQuote(item.company, item.id).subscribe((res) => {
-      console.log(res, 'RES');
+     
     });
   }
 
   markAsRead(item) {
     this.quoteServices.markAsRead(item.company, item.id).subscribe((res) => {
-      console.log(res, 'RES');
+      
     });
   }
 
@@ -312,7 +312,7 @@ export class QuotesComponent implements OnInit,OnDestroy {
    */
   approveQuote(item) {
     this.quoteServices.approveQuote(item.company, item.id).subscribe((res) => {
-      console.log(res, 'RES');
+      
     });
   }
 

@@ -6,11 +6,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class FilterPipe implements PipeTransform {
 
   transform(args: any[], reset: boolean, value: string): any {
-    console.log('args', args);
-    console.log('reset', reset);
-    console.log('value', value);
+    
     if (reset)  {
-      console.log('reset ---------------');
+    
       return args;
     }
     if (args) {

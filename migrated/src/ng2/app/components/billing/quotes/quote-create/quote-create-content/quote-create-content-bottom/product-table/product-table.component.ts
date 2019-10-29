@@ -130,7 +130,7 @@ export class ProductTableComponent implements OnInit {
   public selectProduct (item, index) {
     item = {...item, ...{quantity: 1, markup: this.quoteStateService.setMarkups(item)}};
   
-  console.log('item',item);
+  
   this.itemsListArray[index] = item;
   this.changedProductItemsArray.next(this.itemsListArray);
   this.hideDropDown(index);
@@ -143,13 +143,13 @@ export class ProductTableComponent implements OnInit {
    * @param type - new item type
    */
   public setItem(item, index, type) {
-    console.log('setItem');
+    
     if (type === 'service') {
       item = {...item, ...{description: '', quantity: 1}};
     } else {
       item = {...item, ...{quantity: 1, markup: this.quoteStateService.setMarkups(item)}};
     }
-    console.log('item',item);
+     
     this.itemsListArray[index] = item;
     this.changedProductItemsArray.next(this.itemsListArray);
     this.hideDropDown(index);
@@ -174,7 +174,7 @@ export class ProductTableComponent implements OnInit {
     this.itemsListArray[index].sale =  this.quoteStateService.roundToTwo((value * item.cost / 100 + item.cost));
     this.itemsListArray[index].markup = value;
     this.itemsListArray[index].markup = this.roundingMarkup(this.itemsListArray[index].markup);
-    console.log('this.itemsListArray[index]',this.itemsListArray[index]);
+    
     this.updateItemsArray();
   }
 

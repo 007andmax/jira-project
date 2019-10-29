@@ -405,9 +405,9 @@
 
       function findWithCompany(data) {
         var reportTransformedSoftwareSummaryDataInside = [];
-        console.log($scope.softwareSummarySelectedCompany, '$scope.softwareSummarySelectedCompany');
+       
         if (data.device) {
-          console.log( $scope.softwareSummarySelectedCompany, data);
+          
           $scope.reportSoftwareSummaryData = $scope.softwareSummarySelectedCompany && $scope.softwareSummarySelectedCompany.data[data.companyId].filter(function(item){
             return item.id === data.device;
           });
@@ -638,7 +638,7 @@
 
 
 
-        console.log(data, 'DATA');
+       
 
         StatisticsService.getCustomerTicketReport(data, function (resp){
           if(resp) {
@@ -886,7 +886,7 @@
               $rootScope.reportName = 'software-summary';
               break;
             default:
-              console.log("wrong location")
+             
           }
         }
         if($state.includes('companyProfile')) {

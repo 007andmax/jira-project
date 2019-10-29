@@ -69,7 +69,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
    * Initializes left panel password manager. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-    console.log('ngOnInit');
+    
     this.getPasswordRecords();
     this.addNewRecord();
     this.deleteRecord();
@@ -151,7 +151,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     const selectedDate = `${date.year}/${this.formatDayAndMonth(date.month)}/${this.formatDayAndMonth(date.day)}`;
     this.selectedDateItem = date;
     this.selectedDateForFilter = date;
-    console.log('selectedDate');
+ 
     (this.selectedCompany && this.selectedCompany.companyId) && this.filterPasswordRecords(this.selectedCompany);
     return this.passwordRecords = this.passwordRecords.filter((item) => {
       return item.expiredDate === selectedDate;
@@ -419,14 +419,14 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
    * Add new record
    */
   public addNewRecord() {
-    console.log('addNewRecord');
+  
     this.subNewRecordAdd = this.passwordManagerService.newRecordsisAdd.subscribe(() => {
-      console.log('newRecordsisAdd');
+     
       if (this.innerWidth <= 414) {
         this.passwordManagerService.setMobileCategory();
       }
       this.subscriptions.add(this.apiPasswordManagerService.getRecordsNew().subscribe((res: any) => {
-        console.log('getRecordsNew');
+       
         this.passwordRecordsStart = res;
         this.passwordRecords = res;
         this.selectedCompany && this.selectCompany({item: this.selectedCompany});

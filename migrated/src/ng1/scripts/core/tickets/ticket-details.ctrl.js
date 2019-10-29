@@ -92,7 +92,7 @@
 
               $scope.setEditExpenseId();
               $scope.disabledWhenNoCompleted = (!$scope.checkCompleted()) ? true : false;
-              console.log('claimTicket',claimTicket);
+             
               if (claimTicket)
               {
                 claimTicket = false;
@@ -107,7 +107,7 @@
 
               $scope.setEditExpenseId();
               $scope.disabledWhenNoCompleted = (!$scope.checkCompleted()) ? true : false;
-              console.log('claimTicket',claimTicket);
+            
               if (claimTicket)
               {
                 claimTicket = false;
@@ -278,7 +278,7 @@ $scope.countShowAssignedUsers = $scope.ticketDetails.multiAssignedUsers.length;
             $scope.updateProduct(data);
         });
           $rootScope.$on('onChangeService', function (evt, val) {
-            console.log('onChangeService');
+           
             if (updateService) return;
             updateService = true;
             var service_gl = null;
@@ -291,15 +291,14 @@ $scope.countShowAssignedUsers = $scope.ticketDetails.multiAssignedUsers.length;
                     id = item.id;
                     service_gl = service_item;
                     service_item.user = val.item;
-console.log('find');
+ 
 
                   }
                 })
               }
 
             })
-            console.log('val', val);
-         console.log('service_gl',service_gl);
+          
             var editVersionedId = service_gl.item.versionedId;
             var serviceDate = new Date(service_gl.date);
 
@@ -334,7 +333,7 @@ console.log('find');
                   if (service_item.id == item.id) {
                     id_update = update.id;
 
-                    console.log('id_update', id_update);
+                    
                   }
                 })
               }
@@ -344,13 +343,13 @@ console.log('find');
                   if (item.completed && product_item.id != item.id && product_item.completed)  claimTicket = false;
                   if (product_item.id == item.id) {
                     id_update = update.id;
-                    console.log('id_update', id_update);
+                   
                   }
                 })
               }
 
             })
-            console.log('fffffffffff',JSON.parse(JSON.stringify($scope.ticketDetails.updates)));
+            
             if (type == "PRODUCT") {
               var product = item.item;
               var editVersionedId = product.versionedId;
@@ -436,7 +435,7 @@ console.log('find');
             return !user.deletedAt;
           });
           $scope.usersToWatch = $scope.agents.slice();
-          console.log('$scope.usersToWatch',$scope.agents.slice());
+          
           $scope.editForms = {};
           $scope.setEditForm = function(form, name) {
             $scope.editForms[name] = form;
@@ -459,7 +458,7 @@ console.log('find');
           }
           //$scope.ticketDetails = { id: $stateParams.ticketId };
           TicketsService.getOne($scope.ticketDetails, $scope, function (details) {
-            console.log('TicketsService.getOne');
+          
             details.updates.forEach(function(item) {
               if (item.type == "PRODUCT") {
                 item.products.forEach(function (product) {
@@ -476,7 +475,7 @@ console.log('find');
 
             });
             $scope.ticketDetails = details;
-     console.log('$scope.ticketDetails',$scope.ticketDetails);
+     
           $scope.disabledWhenNoCompleted = (!$scope.checkCompleted()) ? true : false;
        
             if (isFromRemote) {
@@ -493,8 +492,7 @@ console.log('find');
             if (CompaniesService.getOneById($scope.ticketDetails.company.id).isDefault) {
               $rootScope.isRightPanelHidden = true;
             }
-            console.log('$scope.ticketDetails',$scope.ticketDetails);
-            console.log('$rootScope.currentUser',$rootScope.currentUser);
+            
             rightPanelSharedState.companyId = $scope.ticketDetails.company.id;
             if ($scope.ticketDetails.ticketSource == "FROM_RECURRING_TICKET") {
             //  rightPanelSharedState.companyId = $scope.ticketDetails.company;
@@ -713,7 +711,7 @@ console.log('find');
               }
             
             });
-            console.log(' $scope.usersToWatch',JSON.parse(JSON.stringify( $scope.usersToWatch)));
+          
           }
           $scope.setTicketUpdate = function (value) {
             $scope.ticketUpdate = value;
@@ -944,7 +942,7 @@ console.log('find');
             $scope.triedToSaveUpdate = value;
           };
           $scope.saveUpdateProduct = function (form, item, callback) {
-            console.log('saveUpdateProduct');
+            
             if (form.$valid) {
             
             /*  let id = null;
@@ -955,7 +953,7 @@ console.log('find');
                     if (product_item.id == val.id) {
                       id = item.id;
             
-                      console.log('find');
+                      
   
                     }
                   })
@@ -996,7 +994,7 @@ console.log('find');
             }
           };
           $scope.saveUpdateService = function (form, item, callback) {
-            console.log('saveUpdateService');
+          
             if (form.$valid) {
               var editVersionedId;
               if (typeof item.item.name === 'object') {
@@ -1085,19 +1083,19 @@ console.log('find');
                 }
                 for (var i = 0; i < ticketUpdateToSend.services.length; i++) {
                   var date = new Date(ticketUpdateToSend.services[i].date);
-               console.log('date',date);
+             
                   var currentDate = new Date();
-                  console.log('currentDate',currentDate);
+                 
                   var endDate = new Date();
                   if ($rootScope.serviceExpenseDurationPresentation === 'TIME_PICKER' || $rootScope.isMobileUpdateShown) {
-                    console.log('111111111111111111111');
+                   
                     $rootScope.saveStartDate = new Date($rootScope.saveStartDate);
                     $rootScope.saveEndDate = new Date($rootScope.saveEndDate);
                     ticketUpdateToSend.services[i].quantity = getQuantity($rootScope.saveStartDate, $rootScope.saveEndDate);
                     ticketUpdateToSend.services[i].durationStart = $rootScope.saveStartDate.getTime();
                     ticketUpdateToSend.services[i].durationEnd = $rootScope.saveEndDate.getTime();
                   }else {
-                    console.log('22222222222222222222222222222',$scope.ticketUpdate.services[i].quantity);
+                   
                     ticketUpdateToSend.services[i].quantity = $scope.ticketUpdate.services[i].quantity;
                     ticketUpdateToSend.services[i].durationStart = $rootScope.saveStartDate.getTime();
                     ticketUpdateToSend.services[i].durationEnd = $rootScope.saveEndDate.getTime() ;
@@ -1133,7 +1131,7 @@ console.log('find');
                   ticketUpdateToSend.attachments.push({ file: { id: $scope.ticketUpdate.attachments[i].id } })
                 }
               }
-              console.log('$scope.ticketSharedUsersList',$scope.ticketSharedUsersList);
+             
               for (var i = 0, len = $scope.selectedAssignUsers.length; i < len; i++) {
                 var ticketSharedUser = $scope.selectedAssignUsers[i];
                 if (!ticketSharedUser.notify) {
@@ -1201,8 +1199,7 @@ console.log('find');
             }
           };
           function getQuantity(start, end) {
-            console.log('getQuantity');
-            console.log(start, end);
+           
             start = new Date(start);
             end = new Date(end);
             var startMs = start.getTime();
@@ -1241,7 +1238,7 @@ console.log('find');
           $scope.$on('userToAssignToTicket', function(evt, val) {
           
             if (val.type) return;
-            console.log('userToAssignToTicket');
+          
             var data = val.data;
             var id = data.id;
             var index = $scope.ticketSharedUsersList.findIndex(function(el) {
@@ -1441,15 +1438,14 @@ console.log('find');
             }
             var processedShares = [];
             $scope.ticketSharedUsersList = getDefaultSharedList();
-            console.log('$scope.ticketSharedUsersList',$scope.ticketSharedUsersList);
-            console.log('$scope.ticketSharedUsersList',JSON.parse(JSON.stringify($scope.ticketSharedUsersList)));
+           
            // $scope.selectedAssignUsers = $scope.filterUsersByType($scope.ticketSharedUsersList, 'TECH');
          /*  $scope.selectedAssignUsers = ($scope.ticketDetails.assignedUser) ? [{notify: false, user:$scope.ticketDetails.assignedUser}] : $scope.ticketDetails.multiAssignedUsers.map((item) => {
              return {notify: false, user:item}
            });
 
           if ($scope.ticketDetails.createdUser)  $scope.selectedAssignUsers.push({notify: false, user: $scope.ticketDetails.createdUser });*/
-            console.log(' $scope.selectedAssignUsers', $scope.selectedAssignUsers);
+            
             for (var i = 0; i < shares.length; i++) {
               var share = shares[i],
                 sharedUser = share.user,
@@ -1654,25 +1650,24 @@ console.log('find');
             var result = [];
             // add reporter user
             if ($scope.user) {
-              console.log('$scope.user',$scope.user);
+            
               addUserToResult($scope.user);
             }
             // add assigned user
             if ($scope.assignedUser) {
-              console.log('$scope.assignedUser',$scope.assignedUser);
+             
               addUserToResult($scope.assignedUser);
             }
             // add ticket managers
             var usersFromTicketCompany = UsersService.getAllByCompanyId($scope.ticketDetails.company.id);
-            console.log('usersFromTicketCompany',usersFromTicketCompany)
+            
             for (var i = 0; i < usersFromTicketCompany.length; i++) {
               var user = usersFromTicketCompany[i];
               if (!user.deletedAt) {
                 addUserToResult(user);
               }
             }
-            console.log('user',user);
-            console.log('$scope.allUsers',$scope.allUsers);
+           
             $scope.allUsers.map(function(item) {
             
               if (!user.deletedAt) {

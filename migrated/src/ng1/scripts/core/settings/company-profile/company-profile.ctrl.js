@@ -35,7 +35,7 @@
           return $rootScope.techCompanyChanged;
         }, function(val) {
 
-          // console.log($rootScope.updatedInCurrentWindow, "UPDATED HEREEEEEEEE")
+         
           if (val && !$rootScope.updatedInCurrentWindow) {
             $scope.companyForSettingPage = CompaniesService.getCompanyForSettingPage(function () {
 

@@ -34,7 +34,7 @@
         }
 
         // $scope.$watch('editUser', function(val) {
-        //   console.log(val)
+       
         // }, true)
 
         $scope.allUsers = UsersService.getAllUsers();

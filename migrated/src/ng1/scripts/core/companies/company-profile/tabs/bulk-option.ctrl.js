@@ -5,7 +5,7 @@
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.bulkOptionCtrl',
     ['$scope', 'UsersService', 'SubscriptionsService', 'DevicesService', 'quicktech.common.services.UserConfirmationsService', '$uibModal', '$rootScope',
       function ($scope, UsersService, SubscriptionsService, DevicesService, UserConfirmationsService, $uibModal, $rootScope) {
-        console.log('$scope.company.id', $scope.company.id);
+        
         var onGetDevicesComplated = false;
       
         $scope.$watch('companyProfileHeader', function (val) {
@@ -38,7 +38,7 @@
 
 
      /*   function getCompanyDevices() {
-          console.log('getCompanyDevices');
+       
           if (onGetDevicesComplated) return;
           onGetDevicesComplated = true;
           DevicesService.getAgentsAndReportsDataByCompanyId($scope, $scope.company.id, function (resp) {
@@ -65,10 +65,10 @@
 
           });
         }
-        console.log('DevicesService.onInitCompleted', $rootScope.onInitDevciesCompleted);
+     
         if ($rootScope.onInitDevciesCompleted) getCompanyDevices();
         $rootScope.$on('onDevicesComplated', function (evt, val) {
-          console.log('onDevicesComplated');
+        
           getCompanyDevices();
         });*/
         $scope.changeUserRole = function (role) {
@@ -80,7 +80,7 @@
         }, function (val) {
 
           $scope.isAgentsRequestSending = val;
-          console.log('agents', $scope.agents);
+          
         })
 
         $scope.changeUserSubscription = function (subsc) {
@@ -139,7 +139,7 @@
         };
 
         $scope.turnOff = function (action) {
-          // console.log(action)
+         
           var method;
 
           // if (action === 'restart') {

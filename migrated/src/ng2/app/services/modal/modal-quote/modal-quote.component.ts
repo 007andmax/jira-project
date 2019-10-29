@@ -82,7 +82,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-    console.log('this.data', this.data);
+   
     (this.data) && this.initResendMode();
     this.getAllUsers();
     this.userInput.nativeElement.onblur = (e) => {
@@ -121,7 +121,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
     if (this.isChange) {
       this.showConfirm = true;
       const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
-      console.log('modalRef.componentInstance',modalRef.componentInstance);
+      
       modalRef.componentInstance.message = 'Do you want to close this window? All entered information will be lost.';
     }
   }

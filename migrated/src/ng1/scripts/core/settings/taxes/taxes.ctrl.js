@@ -14,8 +14,7 @@
           isDefault: false
         };
 
-        // console.log('hope itsright')
-
+        
         $scope.isShowingErrors = function (form, fieldName) {
           return form && form[fieldName] && form[fieldName].$dirty && form[fieldName].$invalid;
         };
@@ -28,7 +27,7 @@
         };
 
         $scope.saveNewTax = function (form, dropdown) {
-          // console.log(form, 'SAVING', $scope.newTax)
+        
           if (form.$valid) {
             TaxesService.save($scope.newTax, function (resp) {
               if (dropdown) {

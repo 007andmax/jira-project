@@ -52,7 +52,7 @@ export class QuoteCreateContentComponent implements OnInit {
       this.onInitEditMode();
     } else {
       this.getQuoteNumber();
-      console.log('quote',this.quoteStateService.getQuoteCreate())
+     
     }
     this.initForm(this.editMode);
     this.handleSendMode();
@@ -151,7 +151,7 @@ export class QuoteCreateContentComponent implements OnInit {
           this.quoteService.createQuote(this.quoteForm.value, true)
             .pipe(takeUntil(this.unsubscribe))
             .subscribe((res) => {
-              console.log('0000012315');
+          
               this.quoteStateService.goToQuote();
             })
         } else {
@@ -235,7 +235,7 @@ export class QuoteCreateContentComponent implements OnInit {
   public setClient(value) {
     this.quoteForm.controls['client'].setValue(value);
     this.selectedClient = value.item;
-    console.log('this.quoteForm',this.quoteForm);
+    
 
   }
 

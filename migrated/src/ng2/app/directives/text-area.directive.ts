@@ -133,7 +133,7 @@ export class TextAreaDirective implements OnInit {
   };
   private setNumberOfLines = (e) => {
     let keynum = this.getKeyNum(e);
-    console.log('keynum', keynum);
+     
     if (this.keyCode === 17) this.ctrlDown = false;
     this.lines = this.getNumberOfLines(this.element.nativeElement.value);
   };

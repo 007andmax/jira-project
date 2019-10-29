@@ -126,7 +126,7 @@
                 $scope.hours.forEach(element =>  element.selected = false);
             }
             $scope.onToggleDropdown = function (open) {
-                console.log('onToggleDropdown',open);
+                
                 if (!$scope.status.isopen && $scope.selectedHour === 0 && $scope.selectedMinute === 0) resetSelectedTime();
             }
             $scope.toggleDropdown = function ($event) {

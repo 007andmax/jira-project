@@ -58,7 +58,7 @@ export class CreateRecurringTickets {
         this.agent = '';
     }
     public setAgents(agent) {
-        console.log('agent', agent);
+        
         this.agent = agent;
     }
     public setCronExpression(cronExpression) {
@@ -81,7 +81,7 @@ export class CreateRecurringTickets {
             let dt = + new Date(d.getFullYear(), d.getMonth(), d.getDate());
             let dt2 = new Date(dt - (d.getTimezoneOffset() * 60000) - timeOffset).getTime();
             this.startDate = dt2;
-            console.log('this.startDate', this.startDate);
+          
 
         }
 

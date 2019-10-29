@@ -195,24 +195,24 @@
         }, function(val) {
           if (val) {
             $scope.attachDraggedAvatar = val;
-            // console.log(val, "VAL")
+          
           }
         })
         $scope.$watch('ticketNote', function(val) {
-          // console.log(val, 'ticketNote a sa  as saas sas sa as a as ')
+           
         })
 
         $scope.saveNote = function(note) {
 
           $scope.ticketNote = note;
           var chosen = $scope.chosenNote;
-          // console.log(note, "NOTE", $scope.chosenNote);
+        
 
           if (chosen.id) {
 
           }
 
-          // console.log($scope.regularNotes, "REGULAR")
+          
 
           chosen.title = note;
 
@@ -298,8 +298,7 @@
             BillableService.updateNote(data, note.id)
 
             if (!note) {
-              // console.log('ASSIGN')
-              // $scope.ticketNote = Object.assign({}, $scope.chosenNote);
+             
             }
 
 
@@ -329,7 +328,7 @@
 
 
             // while (area.clientHeight < area.scrollHeight) {
-            //   console.log('more than 4 lines!!');
+            
             //
             //   counter++;
             //
@@ -385,7 +384,7 @@
           $scope.hideRegularNoteButton(false);
           $scope.chosenNote = Object.assign({}, note);
 
-          // console.log(note, 'note')
+          
           $scope.ticketNote = note.title;
           // $scope.chosenNote = note;
           $scope.chosenNote.line = note.line1 + (note.line2 || '');
@@ -394,16 +393,15 @@
           note.suggestedNote = true;
 
           $scope.addNoteToInvoice(note);
-          // console.log($scope.chosenNote, 'CJOSEN')
+          
         }
 
         $scope.savePaymentDue = function(due) {
-          console.log('savePaymentDue');
-          // console.log('payment due', due)
+          
 
           $scope.paymentDue = moment(due).format("YYYY-MM-DD")
 
-          // console.log(moment(due).format("YYYY-MM-DD"), 'moment')
+          
 
        /*   if (!$scope.firstUpdatedDate) {
             $scope.firstUpdatedDate = true;
@@ -449,15 +447,15 @@
         $scope.$watch(function() {
           return $rootScope.isSenderAddress;
         }, function(val) {
-          // console.log('iSSENDER ADDRESS')
+          
           $scope.isInvoiceHeaderShown = !($scope.editCompany && $scope.editCompany.logo && $scope.editCompany.logo.cropped && $scope.editCompany.logo.cropped.id) || !val;
         })
 
         $scope.$watch('ticketNote', function(val) {
-          // console.log(val, "TICKET NOTE")
+        
         }, true)
 
-        // console.log($scope.ticketsSelection, 'tickets tickets')
+         
 
         for (var companyId in $scope.ticketsSelection) {
 
@@ -589,7 +587,7 @@
 
         $scope.$watch('invoiceNum', function(val) {
           if ($scope.receivedInvoiceNumber && $scope.invoiceLocks[$scope.showInvoiceLockIndex] && $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId) {
-            // console.log(val, $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId, 'updated update')
+           
             var request = {
               "invoiceNumber": val, // null is allowed
               "dueDate": $scope.paymentDue || null, // null is allowed
@@ -611,7 +609,7 @@
 
         function changeInvoiceNumber(value) {
 
-          console.log(value, 'VALEEEEEEEE')
+        
           $scope.invoiceNum = value;
         }
 
@@ -623,7 +621,7 @@
 
           locksCount++;
 
-          // console.log('IM HERE', selectedTickets)
+          
 
           if (selectedTickets) {
 
@@ -654,7 +652,7 @@
           }
 
           locksCount--;
-          // console.log('$scope.invoiceLocks', $scope.invoiceLocks)
+          
 
           if (locksCount === 0) {
             $scope.locksInitialized = true;

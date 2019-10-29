@@ -66,7 +66,7 @@ export class AddItemComponent implements OnInit {
    */
   public getServicesList() {
     this.productService.getCategories().subscribe((res) => {
-      console.log('res',res);
+      
      return this.itemListProducts = res
     });
     const value = this.quoteStateService.getClient();
@@ -85,7 +85,7 @@ export class AddItemComponent implements OnInit {
     } else {
       item = {...item, ...{quantity: 1, markup: this.setMarkups(item)}};
     }
-    console.log('item',item);
+    
     this.selectedServiceItem.emit(item);
     this.isDropDownShow = false;
     this.type = undefined;

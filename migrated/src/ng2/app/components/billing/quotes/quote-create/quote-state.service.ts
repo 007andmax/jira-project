@@ -457,7 +457,7 @@ export class QuoteStateService {
     this.quoteNumber = quote.number;
     this.setClient(quote.company);
     quote.client = this.getClent();
-    console.log(quote, 'QUOTE');
+ 
     if (quote.products) quote.products.forEach(element => element.markup = this.setMarkups(element));
     const itemsArray = [...quote.products, ...quote.services];
     this.setItemArray(itemsArray);

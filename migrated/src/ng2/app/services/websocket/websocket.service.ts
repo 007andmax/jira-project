@@ -70,7 +70,7 @@ export class WebsocketService {
           var newChange = JSON.parse(message.body);
           this.quoteRealTimeService.handleRealTimeChanges(newChange);
           if (message.body) {
-            console.log('test')
+         
           }
         });
       });
@@ -81,14 +81,14 @@ export class WebsocketService {
    * subscribe to recurring tickets realtime
    */
   public subsribeToRecurringTickets() {
-    console.log('subsribeToRecurringTickets');
+   
     setTimeout(() => {
       this.companiesService.getTechCompany().subscribe((res) => {
         this.stompClient.subscribe(`/user/watch/recurringTickets/${res['id']}`, (message) => {
           var newChange = JSON.parse(message.body);
           this.recurringTicketsRealTimeService.handleRealTimeChanges(newChange);
           if (message.body) {
-            console.log('test')
+         
           }
         });
       });
@@ -99,7 +99,7 @@ export class WebsocketService {
    * subscribe to recurring tickets realtime
    */
   public subsribeToPasswordRecods() {
-    console.log('subsribeToPasswordRecods');
+   
     setTimeout(() => {
      
         this.stompClient.subscribe(`/user/watch/passwordRecords`, (message) => {

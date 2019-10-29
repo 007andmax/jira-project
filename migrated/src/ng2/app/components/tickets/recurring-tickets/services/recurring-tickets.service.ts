@@ -243,7 +243,7 @@ public setCreateTaskAdd(createTask) {
 */
   public getServicesForEdit(list: Array<ServiceRecurringTicket>, serviceErrors: Array<ServiceErrors>) {
     let services: Array<ForCreateService> = [];
-    console.log('serviceErrors', serviceErrors);
+     
     list.forEach((item) => {
       let service = new ForCreateService();
       let errors = [];
@@ -335,7 +335,7 @@ public setCreateTaskAdd(createTask) {
         if (index >= products.length || product.product.manufacture !== products[index].manufacture || product.product.cost !== Number(products[index].cost) || products[index].quantity !== Number(product.quantity) || products[index].sale !== Number(product.product.sale) || products[index].discount !== Number(product.discount) || product.product.versionedId.id !== products[index].versionedId.id) change = true;
 
       })
-      console.log("ticketForEdit.products[0]", ticketForEdit.products[0]);
+     
       if (!ticketForEdit.products[0] && products[0].versionedId) change = true;
     } else {
       if (products[0].versionedId) change = true;

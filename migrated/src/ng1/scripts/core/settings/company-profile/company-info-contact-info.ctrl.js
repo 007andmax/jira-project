@@ -94,7 +94,7 @@
               UsersService.updateWelcomeWizard('companyProfile');
             }
 
-            // console.log('SET UPDATE HERE TO TRUE')
+            
             $rootScope.updatedInCurrentWindow = true;
             CompaniesService.saveForCompanyProfile(copyAddress, 'addresses', function () {
               if (form) {

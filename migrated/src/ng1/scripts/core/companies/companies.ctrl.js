@@ -68,7 +68,7 @@
 
         $scope.stopPropagation = function(evt) {
           evt.originalEvent.stopPropagation();
-          console.log(evt, 'evt')
+         
         }
 
         $scope.selectedCompanies = {
@@ -125,7 +125,7 @@
             CLIENT: 0
           }
 
-          // console.log($scope.companies.filter(function() {}), "FILTEREEEEEEEd")
+        
 
           $scope.companies.filter(function(el) {
             return $scope.filterCompanies(el, true);
@@ -165,7 +165,7 @@
             //         } else {
             //           window.open("https://maps.google.com/maps?daddr=" + lat +   "," + lon + "&amp;ll=");
             //
-            //           console.log('WE ARE HERE', "https://maps.google.com/maps?daddr=" + lat +   "," + lon + "&amp;ll=")
+            
             //         }
             //
             //
@@ -322,7 +322,7 @@
 
         $scope.openCompany = function (company, tabName) {
           if (!company.deletedAt) {
-            console.log('openCompany');
+           
             $state.go('companyProfile', {companyId: company.id, tabName: 'dashboard'});
             companyProfileSharedState.tabName = 'dashboard';
           }
@@ -379,7 +379,7 @@
             }
           }
 
-          // console.log(result, "RSUT")
+        
           return result;
 
         };

@@ -38,7 +38,7 @@ export class ApiPasswordManagerService {
    * Get records list
    */
   public getRecords() {
-    console.log('getRecords');
+ 
     this.subGetRecords = this.http.get(this.apiUrl + 'passwordRecords').subscribe((response)=> {
       this.dataChange.next(response);
     })
@@ -48,7 +48,7 @@ export class ApiPasswordManagerService {
    * Get records list
    */
   public getRecordsNew() {
-    console.log('getRecordsNew');
+    
     return this.http.get(this.apiUrl + 'passwordRecords');
   }
 

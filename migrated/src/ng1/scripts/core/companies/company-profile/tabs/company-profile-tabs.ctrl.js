@@ -15,9 +15,9 @@
 
         $scope.PermissionsService = PermissionsService;
         $scope.selectDevices = {};
-        console.log('($stateParams.tabName',$stateParams.tabName);
+       
         if (tabs.indexOf($stateParams.tabName) === -1) {
-          console.log('goooo');
+         
           $state.go('companyProfile', {tabName: 'devices-all'});
         }
         $scope.orderDevicesBy = 'hostName';
@@ -42,7 +42,7 @@
               if ($scope.isHasDevices) {
                 $state.go('companyProfile', {tabName: 'devices'});
               } else {
-                console.log('dashboard');
+              
                 $state.go('companyProfile', {tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'dashboard' : 'network-scan'});
               }
             });
@@ -54,7 +54,7 @@
           $scope.users = UsersService.getAllByCompanyId($scope.company.id);
           $scope.userSubscriptionsByCompanyId = SubscriptionsService.getUserSubscriptionsByCompanyId($scope.company.id, $scope);
           function getCompanyDevices() {
-            console.log('getCompanyDevices');
+           
           
            // if (onGetDevicesComplated) return;
         //    onGetDevicesComplated = true;
@@ -82,10 +82,10 @@
   
             });
           }
-          console.log('DevicesService.onInitCompleted', $rootScope.onInitDevciesCompleted);
+         
           if ($rootScope.onInitDevciesCompleted) getCompanyDevices();
           $rootScope.$on('onDevicesComplated', function (evt, val) {
-            console.log('onDevicesComplated');
+           
             getCompanyDevices();
           });
         }
@@ -158,7 +158,7 @@
           } else {
             $scope.isHasDevices = false;
             if ($scope.currentOpenProfileTab === 'devices') {
-              console.log('dashboard');
+             
               if ($stateParams.tabName == 'dashboard') {
                 $state.go('companyProfile', {
                   tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'dashboard' : 'network-scan'

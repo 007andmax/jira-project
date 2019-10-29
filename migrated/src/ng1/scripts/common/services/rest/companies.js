@@ -7,7 +7,7 @@
   var services = angular.module('main.services');
 
   services.factory('CompaniesService', ['$http', '$rootScope', 'RealTimeService', 'Utils', function ($http, $rootScope, RealTimeService, Utils) {
-console.log('CompaniesService');
+ 
     var serviceScope = $rootScope.$new(),
       initialized = false,
       initListeners = [],
@@ -222,9 +222,9 @@ console.log('CompaniesService');
       }
     });
     function setRealTimeCurrentCompany() {
-      console.log('storage.currentCompany.id', storage.currentCompany.id);
+    
       RealTimeService.subscribe('/company/' + storage.currentCompany.id, serviceScope, function (newChange) {
-        console.log('newChange', newChange);
+        
         if (newChange.action === "SERVICE_EXPENSE_DATA_PICKER_CHANGED") {
           storage.currentCompany.serviceExpenseDurationPresentation = newChange.data.presentation;
           storage.currentCompany.serviceExpenseDurationPickerInterval = newChange.data.interval;

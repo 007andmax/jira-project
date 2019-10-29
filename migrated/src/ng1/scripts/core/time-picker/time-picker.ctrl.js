@@ -86,7 +86,7 @@
                 if ($scope.openInDate && parentNode.find(".time-picker-hours .active")) {
                     var curent_offset = parentNode.find(".time-picker-hours").scrollTop();
                     var active = parentNode.find(".time-picker-hours .active");
-                    console.log('if (active.position().top >= 240)',active.position().top);
+                    
                     if (active.position().top >= 240 || active.position().top < 0) parentNode.find(".time-picker-hours").scrollTop(curent_offset + active.position().top);
                 }
 
@@ -100,7 +100,7 @@
 
             }
             function parseEditQuantity() {
-                console.log(' $scope.editService', $scope.editService);
+               
                 var durationStart = $scope.editService.durationStart;
                 var durationEnd = $scope.editService.durationEnd;
                 $scope.inDate = { hour: durationStart.hour, minute: durationStart.minute, type: durationStart.time.toLowerCase() };
@@ -171,7 +171,7 @@
                 var indexHour = $scope.hoursInDate.findIndex(hour => hour.value === $scope.inDate.hour && hour.type === $scope.inDate.type);
                 var indexMinute = $scope.minutes.findIndex(minute => minute.value === $scope.inDate.minute);
                 if (indexMinute === -1) indexMinute = getClosest($scope.minutes,$scope.inDate.minute).u;
-                console.log('indexMinute',indexMinute);
+                
                 $scope.selectedIndexInDate = {hour: (indexHour > -1) ? $scope.hoursInDate[indexHour].value : null, minute: $scope.minutes[indexMinute].value};
             }
            
@@ -241,7 +241,7 @@
                 var minute = step * $scope.timePickerInterval.value;
                 $scope.minutes.push({ value: minute, text: (minute < 10) ? "0" + minute : minute, u: step });
             }
-            console.log('$scope.minutes', $scope.minutes);
+           
 
             setSelectedIndexInDate();
             setSelectedIndexOutDate();
@@ -263,7 +263,7 @@
                 resetTextOutDate();
                 setQuantity();
                 setSelectedIndexOutDate();
-                console.log('$scope.outDate', $scope.outDate);
+             
             }
             $scope.calculateDuration = function (hour, minute, type) {
                 var newTimeStart = new Date();

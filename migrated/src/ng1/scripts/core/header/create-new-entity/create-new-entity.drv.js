@@ -39,7 +39,7 @@
             $rootScope.$broadcast('createNewEntity', attrs.createNewEntity);
 
             if (!angular.element(document).find('.create-popup.modal-create-ticket').length) {
-              console.log('modalInstance');
+              
               var modalInstance = $uibModal.open({
                 templateUrl: '/ng1/scripts/core/header/create-new-entity/create-new-entity.tpl.html',
                 controller: 'createNewEntityCtrl',

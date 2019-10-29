@@ -67,7 +67,7 @@ export class PasswordManagerComponent implements OnInit {
  * @param sort - type sort
  */
 public sortBy(sort) {
-  console.log('sortBy');
+ 
   this.direction = this.passwordManagerList.getDirection(this.direction, this.sort, sort);
   this.sort = sort;
   this.passwordManagerService.onInitSort({direction:this.direction,sort:sort});

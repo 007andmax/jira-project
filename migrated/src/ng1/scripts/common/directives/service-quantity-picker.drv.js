@@ -47,12 +47,11 @@
             });
           }
           scope.intervalsArray = [];
-          console.log(scope.timePickerInterval, '$scope.timePickerInterval');
+          
           for (var step = 0; step < (60/scope.timePickerInterval.value); step++) {
             scope.intervalsArray.push(step*scope.timePickerInterval.value);
           }
-          console.log(scope.intervalsArray, '$scope.intervalsArray');
-        console.log('quantity',scope.quantity);
+         
           if (scope.sqpDay) {
             scope.sqpInput = 'sqp-cond-input=' + '"' + scope.sqpDay + ' ' + scope.sqpPeriod + '"';
           } else {

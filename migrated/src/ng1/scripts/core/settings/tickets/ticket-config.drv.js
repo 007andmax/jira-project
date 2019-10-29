@@ -13,7 +13,7 @@
               numberInput = element.find('[tc-number-input]'),
               prefixInput = element.find('[tc-prefix-input]');
             QuotesService.getActualNumber(scope, function (number) {
-              console.log('QuotesService', number);
+             
               quoteParams = {
                 count: (number) ? number : 1,
                 prefix: ''

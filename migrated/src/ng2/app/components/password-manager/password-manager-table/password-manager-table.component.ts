@@ -70,7 +70,7 @@ export class PasswordManagerTableComponent implements OnInit {
     /*  this.filter.user = this.selectedUserOrDevice;
       this.filter.dateFormat = this.selectedDate;
       this.filter.passwordCategory = this.selectedCategory;*/
-    //  console.log('ngDoCheck',this.filter);
+   
     this.filterList();
   }
   private filterList() {
@@ -91,18 +91,18 @@ export class PasswordManagerTableComponent implements OnInit {
   }
   private onChangeRealtTime() {
     this.passwordManagerService.onChangeRealTime.subscribe(newChange => {
-      console.log('newChange', newChange);
+     
       if (newChange.action === 'PASSWORD_RECORD_CREATED') {
         this.recordsData.push(newChange.data);
       } else if (newChange.action === 'PASSWORD_RECORD_UPDATED') {
         let index = this.recordsData.findIndex(item => item.id === newChange.data.id);
         if (index > -1) this.recordsData[index] = newChange.data;
-        console.log('this.recordsData[index]', this.recordsData[index]);
+        
       } else if (newChange.action === 'PASSWORD_RECORD_DELETED') {
         let index = this.recordsData.findIndex(item => item.id === newChange.data.id);
-        console.log('index', index);
+       
         if (index > -1) this.recordsData.splice(index, 1);
-        console.log('this.recordsData', this.recordsData);
+       
       }
       this.filterList();
       this.cd.detectChanges();
@@ -111,7 +111,7 @@ export class PasswordManagerTableComponent implements OnInit {
 
   private onSort() {
     this.passwordManagerService.getOnSort().subscribe((data) => {
-      console.log('data', data);
+     
       this.sort = data.sort;
       this.direction = data.direction;
 
@@ -124,7 +124,7 @@ export class PasswordManagerTableComponent implements OnInit {
    */
   public getSelectedCategory() {
     this.passwordManagerService.emitSelectedCategory.subscribe((category) => {
-      console.log('category', category);
+     
       this.selectedCategory = category;
 
      // this.filter.passwordCategory = JSON.parse(JSON.stringify(category));

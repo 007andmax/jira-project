@@ -786,13 +786,13 @@
           }, 4000);
         }
         $scope.addNewService = function (form, service) {
-          // console.log(form, service, 'ADDING NEW')
+          
           $scope.notAddedAdditionalServiceError = false;
           $scope.showAddButtonNewService = false;
           $scope.showNewServiceError = false;
           if (form.$valid) {
             if( !service.name ) {
-              // console.log('too short', service)
+              
               showErrorNewServiceNameTimeOut();
               $scope.showAddButtonNewService = true;
             } else {
@@ -1030,10 +1030,10 @@
               var endDate = $filter('date')($scope.serviceContract.endDate, 'yyyy/MM/dd');
               ServicesService.searchDuplicatedServiceNames(startDate, endDate, companyId, name, function (resp) {
                 if (Object.keys(resp).length === 0) {
-                  console.log('service name ' + serviceName + ' is valid');
+                  
                   deferred.resolve(resp);
                 } else {
-                  console.log('service name ' + serviceName + ' is NOT valid');
+                 
                   deferred.reject();
                 }
               });
@@ -1048,7 +1048,7 @@
           var startDate = $filter('date')($scope.serviceContract.startDate, 'yyyy/MM/dd');
           var endDate = $filter('date')($scope.serviceContract.endDate, 'yyyy/MM/dd');
           ServicesService.searchDuplicatedServiceNames(startDate, endDate, companyId, listOFNames, function (resp) {
-            // console.log(listOFNames, resp, 'validation')
+            
             if (Object.keys(resp).length === 0) {
 
               deferred.resolve(resp);
@@ -1167,7 +1167,7 @@
               $scope.notAddedProductExpenseError = false;
               break;
             default:
-              console.log('wrong case of service number')
+             
           }
         };
 
@@ -1239,15 +1239,13 @@
         $scope.$watch(function() {
           return $scope.serviceContract.services[0]
         }, function(val) {
-          // console.log(val, "VAL")
-          // console.log($scope.serviceContract.services)
+         
         });
 
         $scope.$watch(function() {
           return $scope.serviceContract.services
         }, function(val) {
-          // console.log('collection', val)
-          // console.log($scope.defaultServicesAdditionalForDropDown);
+          
 
           for (var i = 0; i < val.length; i++) {
             var serv = val[i];
@@ -1258,7 +1256,7 @@
               // var defaultServ = serv;
               // defaultServ.nameValue = defaultServ.name;
               //
-              // console.log(serv.name, serv.nameValue, 'NEED TO CHANGE')
+             
               // var newServ = $scope.defaultServicesAdditionalForDropDown.find(function(value) {
               //   return value.name === serv.nameValue;
               // });
@@ -1271,16 +1269,16 @@
                 nameValue: serv.nameValue
               };
 
-              // console.log(serv, 'NEWSERV');
+             
 
               (function() {
                 var id = i;
-                // console.log(ns, id, 'SERV')
+               
                 var serv = ns;
 
                 validateNewServiceName(serv.nameValue).then(function (resp) {
                   if (resp) {
-                    // console.log(ns, "NEW")
+                   
                     $scope.serviceContract.services.splice(id, 1, ns);
                   }
                 }, function() {

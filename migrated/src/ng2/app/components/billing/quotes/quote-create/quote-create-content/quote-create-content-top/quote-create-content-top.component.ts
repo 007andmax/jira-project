@@ -120,7 +120,7 @@ export class QuoteCreateContentTopComponent implements OnInit {
       this.partialDeposit = this.quoteStateService.getPartialDeposit();
       this.purchaseOrder = this.quoteStateService.getPurchaseOrder();
       this.requestPayment = this.quoteStateService.getRequestPayment();
-      console.log('this.editMode',this.editMode);
+     
       this.description = this.quoteStateService.getDescription();
     }
   }

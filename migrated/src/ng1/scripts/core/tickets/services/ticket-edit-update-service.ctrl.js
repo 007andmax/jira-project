@@ -90,11 +90,11 @@
               });
             }
             $scope.intervalsArray = [];
-            console.log($scope.timePickerInterval, '$scope.timePickerInterval');
+            
             for (var step = 0; step < (60/$scope.timePickerInterval.value); step++) {
               $scope.intervalsArray.push(step*$scope.timePickerInterval.value);
             }
-            console.log($scope.intervalsArray, '$scope.intervalsArray');
+           
           $scope.getMinutes = function () {
          /*   var result = {};
             for (var i = 0; i < 60; i ++) {
@@ -124,7 +124,7 @@
           }
 
           $scope.$on('changeQuantity', function (event, newValue) {
-            console.log('changeQuantity');
+         
             $rootScope.saveForStartDate = new Date($rootScope.saveForEndDate.getTime() - newValue*3600000);
 
             $rootScope.quantityEditTime = {};
@@ -256,8 +256,7 @@
           }
 
           $scope.resetDurationWhenTimePicker = function () {
-            console.log('resetDurationWhenTimePicker');
-            console.log('$scope.editService.quantity',$scope.editService.quantity);
+          
             var timeInMinutes = $scope.editService.quantity * 60,
             hours = Math.floor(timeInMinutes / 60),
             minutes = Math.round(timeInMinutes - (hours * 60));
@@ -266,19 +265,17 @@
             var hourText = ((hours < 10) ? "0" + hours : hours);
             var minuteText = ((minutes < 10) ? "0" + minutes : minutes);
             $scope.durationText = hourText + ":" + minuteText;
-            console.log('$scope.durationText',$scope.durationText);
+           
           }
           $scope.resetDurationWhenTimePicker();
           //TimePicker end
 
           $scope.saveUpdateService = function (form) {
-            console.log('saveUpdateService',form);
-            console.log('$scope.service.quantity',$scope.service.quantity);
-            console.log('$scope.service.quantity',$scope.editService);
+           
             
             $scope.disableQuantityWatcher = true;
             if (form.$valid) {
-            console.log('valid');
+            
               var editVersionedId = $scope.editService.item.versionedId;
               var isServiceItemChange = $scope.service.item.versionedId.id != editVersionedId.id;
               var isDescriptionChange = $scope.service.description != $scope.editService.description;
@@ -318,8 +315,7 @@
                 endDate.setHours($rootScope.saveEndDate.hour)
               }
               endDate.setMinutes($rootScope.saveEndDate.minute);
-              console.log('$rootScope.saveForStartDate',$rootScope.saveForStartDate);
-              console.log('$scope.editService',$scope.editService);
+             
               TicketsService.updateExpenseInTicketUpdate({
 
                 ticketUpdateId: $scope.ticketUpdate.id,

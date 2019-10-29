@@ -49,11 +49,11 @@
               });
             }
             $scope.intervalsArray = [];
-            console.log($scope.timePickerInterval, '$scope.timePickerInterval');
+           
             for (var step = 0; step < (60/$scope.timePickerInterval.value); step++) {
               $scope.intervalsArray.push(step*$scope.timePickerInterval.value);
             }
-            console.log($scope.intervalsArray, '$scope.intervalsArray');
+            
           $scope.$on('hideTimepicker', function(event, data) {
             if (data) { $scope.showTimePicker = false };
           });

@@ -7,13 +7,11 @@
       function ($scope, ReceivableService, $rootScope, CompaniesService, UserConfirmationsService, UserNotificationService) {
         var disableInvoiceButtons = false;
         var t0 = performance.now();
-        console.log('$scope.invoice.company.id',$scope.invoice.company.id);
+       
 
         $scope.company = CompaniesService.getOneById($scope.invoice.company.id);
         $scope.invoice.companyName = CompaniesService.getOneById($scope.invoice.company.id).name;
-console.log('$scope.company',$scope.company);
-console.log(' $scope.invoice.companyName', $scope.invoice.companyName);
-console.log(' $scope', $scope);
+ 
         $rootScope.$on('receivableInvoice', function(event, newInvoice){
         /*  if (newInvoice.action === 'INVOICE_DELETED') {
             $scope.invocesList = $scope.invocesList.filter((item) => item.id !==  newInvoice.data.id );
@@ -24,16 +22,15 @@ console.log(' $scope', $scope);
             const index = $scope.invocesList.findIndex((item) => item.id === newInvoice.data.id);
             $scope.invocesList[index] = newInvoice.data;
           }
-          console.log('$scope.invocesList',$scope.invocesList);
-          console.log('newInvoice.data',newInvoice);*/
-          console.log('receivableInvoice');
+        */
+         
           if (newInvoice.action === 'INVOICE_DELETED') {
             if ($scope.invoice.id === newInvoice.data.id)
             {
-console.log('find ---------------------');
+ 
             }
           } 
-          console.log(' $scope', $scope.invoice.id);
+         
           $scope.$apply();
         });
         if ($scope.invoice.dueDate <= Date.now()) {

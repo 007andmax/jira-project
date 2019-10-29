@@ -53,7 +53,7 @@ export class CompanyPasswordManagerComponent implements OnInit {
  * @param sort - type sort
  */
 public sortBy(sort) {
-  console.log('sortBy');
+ 
   this.direction = this.passwordManagerList.getDirection(this.direction, this.sort, sort);
   this.sort = sort;
   this.passwordManagerService.onInitSort({direction:this.direction,sort:sort});
@@ -73,7 +73,7 @@ public sortBy(sort) {
     this.checkCloseFilters();
 
     let subGetRecords = this.apiPasswordManagerService.dataChange.subscribe((res) => {
-      console.log('CompanyPasswordManagerComponent');
+      
       this.showPreloader = false;
        });
        this.sub.add(subGetRecords);
@@ -83,16 +83,16 @@ public sortBy(sort) {
    * Get selected company from filter
    */
   public getSelectCompany() {
-    console.log('getSelectCompany');
+   
     if (localStorage.getItem('company_id')) {
       let company_id = localStorage.getItem('company_id');
-      console.log('company_id',company_id);
+      
       let subscription = this.companiesService.clientsCompany
        .subscribe((company) => {
         this.refreshFilter();
          this.selectedCompany = company.find(item => item.id === company_id);
          this.apiPasswordManagerService.getRecords();
-         console.log('this.selectedCompany',this.selectedCompany);
+       
        }
      );
      this.sub.add(subscription);

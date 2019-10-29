@@ -20,20 +20,20 @@
         $scope.timePickerModel = CompaniesService.getCurrentCompany().serviceExpenseDurationPresentation ?
         CompaniesService.getCurrentCompany().serviceExpenseDurationPresentation
           : 'DURATION_PICKER';
-          console.log('$rootScope.currentUser',CompaniesService.getCurrentCompany());
+         
         $scope.timePickerInterval = CompaniesService.getCurrentCompany().serviceExpenseDurationPickerInterval ?
         CompaniesService.getCurrentCompany().serviceExpenseDurationPickerInterval
           : 'FIVE_MINUTES';
         $scope.setTimePickerInterval = function (type) {
           $scope.timePickerInterval = type;
-          console.log('test');
+         
          
           UsersService.changeTimePickerType($scope.timePickerModel,type);
         };
         $scope.setTimePickerValue = function (type) {
           $scope.timePickerModel = type;
           $scope.timePickerInterval = ($scope.timePickerModel == 'DURATION_PICKER') ? 'FIVE_MINUTES'  : 'ONE_MINUTE';
-          console.log('test');
+         
           $rootScope.currentUser.serviceExpenseDurationPresentation = type;
           UsersService.changeTimePickerType(type,$scope.timePickerInterval);
         };

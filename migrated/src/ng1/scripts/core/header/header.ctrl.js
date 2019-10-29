@@ -30,7 +30,7 @@
 
 
         // $scope.$watch('ticketMobileSettings', function(val) {
-        //   console.log(val, "DATATATATATATATATATATATATAT")
+      
         // }, true)
 
 

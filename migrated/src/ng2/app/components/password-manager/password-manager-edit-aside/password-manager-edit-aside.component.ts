@@ -162,8 +162,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
    * init new form
    */
   public initForm() {
-    console.log('initForm');
-    console.log('this.editItem', this.editItem);
+   
     this.expiryDate = this.editItem && this.editItem.expiredDate ? this.getStartDate(this.editItem.expiredDate) : null;
     this.createPasswordRecord = this.fb.group({
       description: [this.editItem ? this.editItem.description : '', Validators.maxLength(5000)],
@@ -426,7 +425,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
    * show selecct wrapper
    */
   public showSelectWrapper($event) {
-    console.log('showSelectWrapper');
+    
     this.showSelect = !this.showSelect;
     this.stopEvent($event);
     this.cd.detectChanges();

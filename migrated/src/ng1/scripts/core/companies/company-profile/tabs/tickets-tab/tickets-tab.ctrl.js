@@ -20,7 +20,7 @@
             'tickets-onHold' : 'on_hold',
             'tickets-completed': 'completed'
           };
-console.log('tickets',$scope.tickets);
+ 
         $scope.selectedTickets = {};
         $scope.TicketsPermissionsService = TicketsPermissionsService;
         $scope.PermissionsService = PermissionsService;

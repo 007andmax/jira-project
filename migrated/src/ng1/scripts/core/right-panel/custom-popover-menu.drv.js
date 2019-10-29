@@ -91,7 +91,7 @@
                     usersIds.push(userId)
                   }
                 }
-                console.log('send email users ' + usersIds);
+               
                 hideThisPopover();
                 return;
               }
@@ -100,7 +100,7 @@
             };
 
             scope.startChat = function () {
-              console.log('start chat ' + scope.user.id);
+             
               hideThisPopover();
             };
 

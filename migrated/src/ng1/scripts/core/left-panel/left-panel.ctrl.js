@@ -24,7 +24,7 @@
         var $win = $(window);
 
         $scope.newAngular = $location.url().startsWith('/ng2') ? true :  false;
-console.log('$scope',$scope);
+ 
         $scope.globalSearch = SharedStateService.getSharedState('globalSearch');
         $scope.usersSharedState = usersSharedState;
         $scope.companiesSharedState = companiesSharedState;
@@ -63,7 +63,7 @@ console.log('$scope',$scope);
 
         $scope.checkDublicateCategory = function() {
           var duplicateCategory = $scope.inventoryCategoryList.filter(function(item){
-            console.log(item.name, $scope.newCategory, '11');
+           
             return item.name.toLowerCase() === $scope.newCategory.toLowerCase();
           });
           if (duplicateCategory && duplicateCategory[0]) {
@@ -278,7 +278,7 @@ console.log('$scope',$scope);
           return $rootScope.exampleCompanyDeleted;
         }, function(val) {
           if (val) {
-            console.log(val, '1235123');
+           
             TicketsService.getAllCounts(function (resp) {
               $scope.ticketsCounter = resp;
             });
@@ -310,7 +310,7 @@ console.log('$scope',$scope);
           if (tab === false) {
             $scope[tabToActivate] = true;
           }
-          console.log('activateCompanyProfileTab',tabToActivate);
+         
          
         };
 
@@ -701,14 +701,14 @@ console.log('$scope',$scope);
         });
 
         $scope.$watch('ticketFilterTags', function (value) {
-          // console.log(value)
+         
 
           // var data = value.map(function(el) {
           //   return el.id;
           // })
           //
           // TicketsService.ticketSearch(data, function(resp) {
-          //   console.log(resp, "RESP")
+          
           // })
           // if (value !== "" && value !== " " && value.length > 0) {
           //   ticketsSharedState.filter.completed = false;
@@ -996,7 +996,7 @@ console.log('$scope',$scope);
             value: jsonObj
           };
           CustomStorageService.saveUserCustomStorageItem(itemToSend, function (resp) {
-            //console.log(resp);
+            
           })
         };
 
@@ -1006,7 +1006,7 @@ console.log('$scope',$scope);
             colorCode: colorCode
           };
           ColorsService.putCompaniesColors(dataToSend, function (resp) {
-            //console.log(resp);
+          
           })
         };
 
@@ -1015,14 +1015,13 @@ console.log('$scope',$scope);
         });
 
         $scope.changeUserColor = function (type, colorCode) {
-          //console.log("colorCode: ", colorCode);
-          //console.log("type: ", type);
+         
           var dataToSend = {
             type: type,
             colorCode: colorCode
           };
           ColorsService.putUsersColors(dataToSend, function (resp) {
-            //console.log(resp);
+            
           })
         };
 
