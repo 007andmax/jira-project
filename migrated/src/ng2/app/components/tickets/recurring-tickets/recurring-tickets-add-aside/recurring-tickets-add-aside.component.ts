@@ -149,12 +149,18 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.recurringState.getCreateTicket().setCronExpression(data);
   }
 
+  public onPastDescription(value) {
+    console.log('onPastDescription',value);
+    this.recurringState.getCreateTicket().setDescription(value);
+  }
+
   /**
   * Subscribe to change description
   * @param event - description event
   */
   public onChangeDescription(event) {
     this.recurringState.getCreateTicket().setDescription(event.target.value);
+   
   }
 
   /**
@@ -285,6 +291,10 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.products[index] = new ForCreateProduct(item);
     this.cd.detectChanges();
   }
+
+  public onPastDescriptionService(value,i) {
+    this.services[i].description = value;
+   }
 
   /**
   * Set service item
@@ -496,7 +506,18 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.companiesState.onInitClear();
     this.createService.getDevicesState().onInitClear();
     this.selectedClient = null;
-    this.services = [new ForCreateService()];
+   // this.services = [new ForCreateService()];
+   let dataService = JSON.parse(JSON.stringify(this.services));
+    this.services = (this.services.length > 0) ? [] : [new ForCreateService()];
+    let services = [];
+    dataService.forEach((service, index) => {
+      let new_service = new ForCreateService();
+      new_service.setDescription(service.description);
+      services.push(new_service);
+
+    });
+    this.services = (dataService.length > 0) ? services : [new ForCreateService()];
+    console.log('this.services',this.services);
     this.type = "services";
     this.validate = new Validate();
     // this.devicesList = [];

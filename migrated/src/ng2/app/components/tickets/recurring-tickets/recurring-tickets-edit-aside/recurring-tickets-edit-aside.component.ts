@@ -138,12 +138,23 @@ console.log('this.services',JSON.parse(JSON.stringify(this.services)));
     this.recurringState.getCreateTicket().setCronExpression(data);
   }
 
+  public onPastDescriptionService(value,i) {
+   this.services[i].description = value;
+  }
+
+  public onPastDescription(value) {
+    console.log('onPastDescription',value);
+    this.recurringState.getCreateTicket().setDescription(value);
+  }
+
   /**
   * Subscribe to change description
   * @param event - description event
   */
   public onChangeDescription(event) {
+    console.log('onChangeDescription',event.target.value);
     this.recurringState.getCreateTicket().setDescription(event.target.value);
+    console.log('this.recurringState.getCreateTicket()',this.recurringState.getCreateTicket());
   }
 
   /**

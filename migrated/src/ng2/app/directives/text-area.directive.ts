@@ -1,22 +1,25 @@
-import { Directive, OnInit, ElementRef, Injectable, Input, ChangeDetectorRef, OnChanges, SimpleChanges, AfterContentChecked } from '@angular/core';
+import { Directive, OnInit, ElementRef, Injectable, Input, ChangeDetectorRef, OnChanges, SimpleChanges, AfterContentChecked, Output, EventEmitter } from '@angular/core';
 
 @Directive({
   selector: '[appTextArea]'
 })
 @Injectable()
-export class TextAreaDirective implements OnInit  {
-  
+export class TextAreaDirective implements OnInit {
+
   cloned: HTMLTextAreaElement;
   lines: number = 1;
-  height:number = 0;
+  height: number = 0;
   @Input() limit;
   @Input() minHeight;
+  @Output() onPast = new EventEmitter<any>();
   block: boolean = false;
+  ctrlDown: boolean = false;
+  keyCode = null;
   constructor(private element: ElementRef, public cd: ChangeDetectorRef) {
 
-   }
+  }
   ngOnInit() {
-  
+
     this.onInitCLine();
     this.element.nativeElement.parentNode.style.position = 'relative';
     this.element.nativeElement.addEventListener('keydown', this.limitLines);
@@ -24,20 +27,20 @@ export class TextAreaDirective implements OnInit  {
     this.element.nativeElement.addEventListener('cut', this.setNumberOfLines);
     this.element.nativeElement.addEventListener('paste', this.limitPaste);
     this.element.nativeElement.addEventListener('input', this.onUpdate);
-  
- 
-    if (this.limit) this.onInitLimit();
-  
- //   this.onCheckReset();
-  
    
+
+    if (this.limit) this.onInitLimit();
+
+    //   this.onCheckReset();
+
+
   }
-  ngDoCheck(){
-  if (this.block) return;
-  if (this.element.nativeElement.value.length > 0) this.block = true;
-   this.onUpdate();// remove
+  ngDoCheck() {
+    if (this.block) return;
+    if (this.element.nativeElement.value.length > 0) this.block = true;
+    this.onUpdate();// remove
   }
-  
+
   private onInitLimit() {
     this.element.nativeElement.style.overflow = 'hidden';
     this.cloned.style.overflow = 'hidden';
@@ -45,7 +48,7 @@ export class TextAreaDirective implements OnInit  {
     this.cloned.style.width = this.element.nativeElement.clientWidth + 'px';
   }
   private update() {
-   
+
     this.element.nativeElement.style.height = "auto";
     this.height = this.element.nativeElement.scrollHeight;
     if (this.height > 0) {
@@ -53,13 +56,13 @@ export class TextAreaDirective implements OnInit  {
       if (this.limit && this.height >= this.limit) {
         this.element.nativeElement.style.height = this.limit + 'px';
       } else {
-  
+
         if (this.element.nativeElement.value.length === 0 && this.minHeight) {
           this.element.nativeElement.style.height = this.minHeight + "px";
         } else {
           this.element.nativeElement.style.height = this.height + "px";
         }
-   
+
       }
 
     }
@@ -70,13 +73,13 @@ export class TextAreaDirective implements OnInit  {
     this.cloned.style.zIndex = '1000';
     this.cloned.style.height = '0px';
     this.element.nativeElement.parentNode.appendChild(this.cloned);
-    
+
   }
-  private onUpdate =()=> {
-   
+  private onUpdate = () => {
+
     this.update();
 
-   // this.cloned.innerHTML = this.element.nativeElement.value;
+    // this.cloned.innerHTML = this.element.nativeElement.value;
   }
   private getKeyNum(e) {
     let keynum;
@@ -92,7 +95,9 @@ export class TextAreaDirective implements OnInit  {
   }
   private limitLines = (e) => {
     let keynum = this.getKeyNum(e);
-
+    this.keyCode = keynum;
+    if (this.keyCode === 86 && this.ctrlDown) return;
+    if (this.keyCode === 17) this.ctrlDown = true;
     let evtobj = window.event ? event : e
     if (evtobj.keyCode == 90 && evtobj.ctrlKey) {
       this.element.nativeElement.value = this.checkForOverflow(this.element.nativeElement.value);
@@ -127,30 +132,43 @@ export class TextAreaDirective implements OnInit  {
 
   };
   private setNumberOfLines = (e) => {
-    
+    let keynum = this.getKeyNum(e);
+    console.log('keynum', keynum);
+    if (this.keyCode === 17) this.ctrlDown = false;
     this.lines = this.getNumberOfLines(this.element.nativeElement.value);
   };
   private limitPaste = (e) => {
-   
+    
     let clipboardData, pastedData, newValue, isOverflowed;
     // Stop data actually being pasted into div
+    
     e.stopPropagation();
     e.preventDefault();
 
     // Get pasted data via clipboard API
-   clipboardData = e.clipboardData || (<any>window).clipboardData;
+    clipboardData = e.clipboardData || (<any>window).clipboardData;
     pastedData = clipboardData.getData('Text');
-
+ 
 
     newValue = (this.element.nativeElement.value || '').slice(0, e.srcElement.selectionStart) + pastedData + (this.element.nativeElement.value || '').slice(e.srcElement.selectionStart);
     this.cloned.innerHTML = newValue
     isOverflowed = this.cloned.scrollHeight > +this.limit
     let copiedValue = newValue;
+   
+  if (this.keyCode !== 86 && this.ctrlDown !== false || e.srcElement.selectionStart === e.srcElement.selectionEnd) {
+  
     this.element.nativeElement.value = this.checkForOverflow(copiedValue);
+  } else {
+    this.cloned.innerHTML = pastedData
+    this.element.nativeElement.value = pastedData;
+    
+  }
     this.element.nativeElement.blur();
     this.element.nativeElement.focus();
     this.element.nativeElement.click();
     this.cd.detectChanges();
+   
+    this.onPast.emit(this.element.nativeElement.value);
     //scope.$digest()
   };
 
