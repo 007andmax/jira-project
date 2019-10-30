@@ -50,7 +50,7 @@
                 $rootScope.saveStartDate = new Date().getTime();
                 $rootScope.saveEndDate = new Date().getTime();
             }
-            if ($scope.serviceExpense) onInitDefaultValues();
+            if ($scope.serviceExpense || $scope.isMobileUpdateShown) onInitDefaultValues();
             $scope.timePickerInterval = setTimePickerInterval();
             function setHous() {
                 for (let i = 1; i <= 24; i++) {
@@ -115,8 +115,8 @@
                     $scope.editService.quantity = $scope.quantity;
                     if ($scope.serviceExpenseDurationPresentation === 'DURATION_PICKER') $rootScope.$broadcast('onChangeDuration', null);
                 }
-                if ($scope.serviceExpense) {
-                    $scope.serviceExpense.quantity = $scope.quantity;
+                if ($scope.serviceExpense || $scope.isMobileUpdateShown) {
+                 if (!$rootScope.isMobileUpdateShown)   $scope.serviceExpense.quantity = $scope.quantity;
                     $rootScope.saveStartDate = new Date();
                     $rootScope.saveEndDate = new Date(new Date().getTime() + $scope.quantity * 3600000)
                 }

@@ -52,7 +52,7 @@
                 $rootScope.saveEndDate = new Date().getTime();
 
             }
-            if ($scope.serviceExpense) onInitDefaultValues();
+            if ($scope.serviceExpense || $scope.isMobileUpdateShown) onInitDefaultValues();
             function onInitTimeIn() {
                 var date = new Date();
                 var hour = date.getHours();
@@ -153,11 +153,12 @@
                 $scope.quantity = (endMs - startMs) / 3600000 > 0 ? (endMs - startMs) / 3600000 : 0;
 
                 if ($scope.editService && $scope.serviceExpenseDurationPresentation !== 'DURATION_PICKER') $scope.editService.quantity = $scope.quantity;
-                if ($scope.editService || $scope.serviceExpense) {
+                if ($scope.editService || $scope.serviceExpense || $scope.isMobileUpdateShown) {
 
-                    if ($scope.serviceExpense) {
+                    if ($scope.serviceExpense || $scope.isMobileUpdateShown) {
                         $rootScope.saveStartDate = new Date(newTimeStart.getTime());
                         $rootScope.saveEndDate = new Date(endMs);
+                        console.log('$rootScope.saveEndDate',$rootScope.saveEndDate);
                     }
                     if ($scope.editService) {
                         $rootScope.saveForStartDate = new Date(newTimeStart.getTime());
