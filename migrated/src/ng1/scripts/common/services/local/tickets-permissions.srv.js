@@ -151,7 +151,7 @@
         }
         let indexUser = -1;
         if ($rootScope.currentUser && ticket.multiAssignedUsers && ticket.multiAssignedUsers.length) {
-          indexUser = ticket.multiAssignedUsers.findIndex(item => itemid == $rootScope.currentUser.id);
+          indexUser = ticket.multiAssignedUsers.findIndex(item => item.id == $rootScope.currentUser.id);
         }
         return isTicketOpen(ticket) &&
           (($rootScope.currentUser && (ticket.assignedUser && ticket.assignedUser.id === $rootScope.currentUser.id)) ||
@@ -173,7 +173,7 @@
         }
         let indexUser = -1;
         if ($rootScope.currentUser && ticket.multiAssignedUsers && ticket.multiAssignedUsers.length) {
-          indexUser = ticket.multiAssignedUsers.findIndex(item => itemid == $rootScope.currentUser.id);
+          indexUser = ticket.multiAssignedUsers.findIndex(item => item.id == $rootScope.currentUser.id);
         }
         return isTicketOpen(ticket) &&
           (($rootScope.currentUser && (ticket.assignedUser && ticket.assignedUser.id === $rootScope.currentUser.id)) ||
