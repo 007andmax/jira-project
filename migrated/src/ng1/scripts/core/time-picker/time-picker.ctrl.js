@@ -52,6 +52,9 @@
                 $rootScope.saveEndDate = new Date().getTime();
 
             }
+            console.log('$scope.isMobileUpdateShown',$scope.isMobileUpdateShown);
+          
+           
             if ($scope.serviceExpense || $scope.isMobileUpdateShown) onInitDefaultValues();
             function onInitTimeIn() {
                 var date = new Date();
@@ -163,6 +166,7 @@
                     if ($scope.editService) {
                         $rootScope.saveForStartDate = new Date(newTimeStart.getTime());
                         $rootScope.saveForEndDate = new Date(endMs);
+                        console.log('$saveForEndDate',$rootScope.saveForEndDate);
                         $scope.resetDurationWhenTimePicker();
                         $rootScope.$broadcast('onResetDuration', $scope.quantity)
                     }
@@ -331,6 +335,7 @@
                 var minuteText = (($scope.outDate.minute < 10) ? "0" + $scope.outDate.minute : $scope.outDate.minute);
                 $scope.outDateText = hourText + ":" + minuteText + "" + $scope.outDate.type;
             }
+         
             $scope.onChangeOutDateText = function () {
                 if ($scope.outDateText.indexOf(":") === -1) {
                     resetTextOutDate();
