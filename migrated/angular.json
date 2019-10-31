@@ -85,7 +85,7 @@
               "src/ng1/styles/new-style.css",
               "src/ng1/styles/nv.d3.css",
               "src/ng1/styles/daterangepicker.css",
-              "src/ng1/styles/proton.multi-list-picker.css"
+              
             ],
             "scripts": [
               "src/ng1/bower_components/jquery/dist/jquery.js",
@@ -138,7 +138,6 @@
               "src/ng1/scripts/core/services/services.mdl.js",
               "src/ng1/scripts/core/settings/settings.mdl.js",
               "src/ng1/scripts/core/tickets/tickets.mdl.js",
-              "src/ng1/scripts/core/tickets/time-picker/time-picker.mdl.js",
               "src/ng1/scripts/core/users/users.mdl.js",
               "src/ng1/scripts/admin/admin-services/customer-list.js",
               "src/ng1/scripts/admin/customer-list/customer-list.drv.js",
