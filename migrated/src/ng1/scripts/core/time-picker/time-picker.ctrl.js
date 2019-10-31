@@ -44,6 +44,7 @@
             ];
             var parentNode = null;
             $rootScope.$on('onChangeDuration', function () {
+                console.log('onChangeDuration');
                 setQuantity();
             });
             function onInitDefaultValues() {
