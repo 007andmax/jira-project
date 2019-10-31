@@ -174,6 +174,7 @@
                 }
             }
             function setSelectedIndexInDate() {
+                
                 var indexHour = $scope.hoursInDate.findIndex(hour => hour.value === $scope.inDate.hour && hour.type === $scope.inDate.type);
                 var indexMinute = $scope.minutes.findIndex(minute => minute.value === $scope.inDate.minute);
                 if (indexMinute === -1) indexMinute = getClosest($scope.minutes,$scope.inDate.minute).u;
@@ -251,7 +252,15 @@
 
             setSelectedIndexInDate();
             setSelectedIndexOutDate();
+            if ($scope.serviceExpense || $scope.isMobileUpdateShown)   onSetInitialValue();
 
+            function onSetInitialValue () {
+                $scope.inDate.minute = $scope.selectedIndexInDate.minute;
+                
+                var hourText = (($scope.inDate.hour < 10) ? "0" + $scope.inDate.hour : $scope.inDate.hour);
+                var minuteText = (($scope.inDate.minute < 10) ? "0" + $scope.inDate.minute : $scope.inDate.minute);
+                $scope.inDateText = hourText + ":" + minuteText + "" + $scope.inDate.type;
+            }
             $scope.selectTimeIn = function (hour, minute) {
                 $scope.inDate = { hour: hour.value, minute: minute.value, type: hour.type };
 
