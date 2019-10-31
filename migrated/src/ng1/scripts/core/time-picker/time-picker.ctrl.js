@@ -185,8 +185,10 @@
             function setSelectedIndexOutDate() {
                 var indexHour = $scope.hoursOutDate.findIndex(hour => hour.value === $scope.outDate.hour && hour.type === $scope.outDate.type);
                 var indexMinute = $scope.minutes.findIndex(minute => minute.value === $scope.outDate.minute);
-                $scope.selectedIndexOutDate = (indexHour > -1 && indexMinute > -1) ? (indexMinute + $scope.minutes.length * indexHour) : null;
-            }
+                if (indexMinute === -1) indexMinute = getClosest($scope.minutes,$scope.outDate.minute).u;
+                console.log('indexMinute',indexMinute);
+                $scope.selectedIndexOutDate = {hour: (indexHour > -1) ? $scope.hoursOutDate[indexHour].value : null, minute: $scope.minutes[indexMinute].value};
+         }
             function oninitHousInDate() {
                 $scope.hoursInDate.push({ value: 12, type: "am", text: "12", i: 0 });
                 setHousInDate("am", 0, 1, 11);
@@ -256,10 +258,10 @@
 
             function onSetInitialValue () {
                 $scope.inDate.minute = $scope.selectedIndexInDate.minute;
+                $scope.outDate.minute = $scope.selectedIndexOutDate.minute;
+                resetTextInDate();
+                resetTextOutDate();
                 
-                var hourText = (($scope.inDate.hour < 10) ? "0" + $scope.inDate.hour : $scope.inDate.hour);
-                var minuteText = (($scope.inDate.minute < 10) ? "0" + $scope.inDate.minute : $scope.inDate.minute);
-                $scope.inDateText = hourText + ":" + minuteText + "" + $scope.inDate.type;
             }
             $scope.selectTimeIn = function (hour, minute) {
                 $scope.inDate = { hour: hour.value, minute: minute.value, type: hour.type };
