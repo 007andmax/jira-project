@@ -74,6 +74,8 @@ import { LeftPanelCompaniesComponent } from './components/left-panel/left-panel-
 import { CompaniesHeaderComponent } from './components/companies/companies-header/companies-header.component';
 import { CompaniesTableComponent } from './components/companies/companies-table/companies-table.component';
 import { CompanyAddAsideComponent } from './components/companies/company-add-aside/company-add-aside.component';
+import { ConfirmComponent } from './components/shared/confirm/confirm.component';
+import { DownloadAgentComponent } from './components/companies/download-agent/download-agent.component';
 
 
 /**
@@ -174,7 +176,10 @@ angular.module('quicktech')
     LeftPanelCompaniesComponent,
     CompaniesHeaderComponent,
     CompaniesTableComponent,
-    CompanyAddAsideComponent
+    CompanyAddAsideComponent,
+    ConfirmComponent,
+    DownloadAgentComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -247,6 +252,8 @@ angular.module('quicktech')
     QuotePreviewComponent,
     PasswordManagerComponent,
     CompaniesComponent,
+    ConfirmComponent,
+    DownloadAgentComponent
     // RecurringTicketsComponent
   ],
   providers: [

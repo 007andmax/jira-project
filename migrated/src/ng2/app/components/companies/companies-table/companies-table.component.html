@@ -27,7 +27,7 @@
   <div class="col-md-1 mob-hidden" [textContent]="countDevices"></div>
   <div class="col-md-1 mob-hidden" [textContent]="countUsers"></div>
   <div class="col-md-2 mob-hidden">
-    <button><i class="icn-16 import-ng2"></i></button>
+    <button (click)="downloadAgent()"><i class="icn-16 import-ng2"></i></button>
     <div class="grey-dropdown right with-icons"
          ngbDropdown>
       <i class="icn-16 more-vertical-ng2 pointer"
@@ -35,7 +35,7 @@
          ngbDropdownToggle></i>
       <div ngbDropdownMenu aria-labelledby="dropdownBasic">
         <button ngbDropdownItem><i class="icn-16 edit-grey-ng2"></i>Edit</button>
-        <button ngbDropdownItem><i class="icn-16 archive-grey-ng2"></i>Delete</button>
+        <button ngbDropdownItem (click)="remove()"><i class="icn-16 archive-grey-ng2"></i>Delete</button>
       </div>
     </div>
   </div>

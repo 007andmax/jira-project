@@ -37,6 +37,11 @@ export class CompaniesService {
     })*/
   }
 
+
+  public  archiveCompany (id) {
+    return this.http.get(this.apiUrl + 'company/archive/' + id);
+  }
+
   /**
    * Set filtered company
    * @param company - company to set

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CompaniesStateService } from '../services/companies-state.service';
+ 
 import { CompanyProfile } from '../class/company-profile';
 import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
+import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 
 @Component({
   selector: 'app-company-add-aside',

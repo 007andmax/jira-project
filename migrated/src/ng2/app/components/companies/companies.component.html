@@ -29,7 +29,7 @@
         <ng-template ngFor let-company
                    [ngForOf]="CompaniesList"
                    [ngForTrackBy]="trackById">
-      <app-companies-table [company]="company"></app-companies-table>
+      <app-companies-table [company]="company"  ></app-companies-table>
       </ng-template>
       <div class="loading" *ngIf="showPreloader"></div>
     </div>

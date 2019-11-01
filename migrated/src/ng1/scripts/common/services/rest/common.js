@@ -229,7 +229,7 @@
 
           // alert(link.download)
         }
-
+console.log('link',link);
         //Dispatching click event.
         if (document.createEvent) {
           var e = document.createEvent('MouseEvents');

@@ -1,0 +1,15 @@
+<div class="confirm-modal">
+  <div class="close-btn btn pull-right" (click)="closeModal()" tabindex="1" style="z-index: 1000">
+    <i class="icn-sm icn-remove-old" uib-tooltip="Close"></i>
+  </div>
+  <div class="modal-body">
+     
+    <h3>Download the installer</h3>
+    <button class="btn btn-primary" (click)="downloadAgent(downloadAgentForm)"><i class="windows-icn"></i><span>Download for Windows</span></button>
+    <button class="btn btn-primary not-active"><i class="apple-icn"></i><span>Download for Mac</span></button>
+    <button class="btn btn-primary not-active"><i class="linux-icn"></i><span>Download for Linux</span></button>
+    <p>OR</p>
+    <button class="btn primary-default ng-isolate-scope" copy-key="downloadLink" custom-disabled="false" ng-disabled="false">Copy a installer link to clipboard</button>
+  </div>
+  
+</div>

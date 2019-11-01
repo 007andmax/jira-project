@@ -1,18 +1,27 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Company } from 'src/ng2/app/interfaces/company/company';
 import { CompanyAndressContact } from 'src/ng2/app/interfaces/company/company-address-contact';
 import { CompanyAndress } from 'src/ng2/app/interfaces/company/company-address';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
-import { CompaniesStateService } from '../services/companies-state.service';
 import { DevicesSateService } from 'src/ng2/app/states/devices/devices-sate.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmComponent } from '../../shared/confirm/confirm.component';
+import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
+import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
+import { Subscription } from 'rxjs';
+import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
+import { DownloadAgentStateService } from 'src/ng2/app/states/download-agent/download-agent-state.service';
+import { DownloadAgentComponent } from '../download-agent/download-agent.component';
 
 @Component({
   selector: 'app-companies-table',
   templateUrl: './companies-table.component.html',
   styleUrls: ['./companies-table.component.scss']
 })
-export class CompaniesTableComponent implements OnInit {
+export class CompaniesTableComponent implements OnInit, OnDestroy {
+
   @Input() company: Company;
+
   public primaryContact: CompanyAndressContact;
   public primaryAddress: CompanyAndress;
   public primaryPhone: any;
@@ -20,11 +29,15 @@ export class CompaniesTableComponent implements OnInit {
   public countUsers: number = 0;
   public countDevices: number = 0;
   public showArchivedCompanies: boolean = false;
+  sub: Subscription = new Subscription();
   constructor(private usersStateService: UsersStateService, private companiesStateService: CompaniesStateService,
-    private devicesState: DevicesSateService) { }
+    private devicesState: DevicesSateService, private modalService: NgbModal,
+    private confirmStateService: ConfirmStateService,
+    private companiesService: CompaniesService,
+    private downloadAgentStateService:DownloadAgentStateService) { }
 
   ngOnInit() {
-   
+
     this.companiesStateService.getOnShowArchived().subscribe(data => {
       this.showArchivedCompanies = true;
     })
@@ -73,9 +86,21 @@ export class CompaniesTableComponent implements OnInit {
         this.location = '';
       }
     }
+
+  }
+  downloadAgent() {
+    this.downloadAgentStateService.setCompnay(this.company);
+    const modalRef = this.modalService.open(DownloadAgentComponent, { windowClass: 'xs-modal' });
+    
+  }
+  remove() {
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+
+    modalRef.componentInstance.message = `Do you want to archive ${this.company.name}? All related users and service agreements will be archived and all agents will be uninstalled.`;
+    this.companiesStateService.setCompnayForArchive(this.company);
   }
   private onGetDevicesCount(data) {
-    console.log('onGetDevicesCount',data);
+    
     let devices = data;
     this.countDevices = (devices[this.company.id]) ? devices[this.company.id].length : 0;
   }
@@ -87,12 +112,7 @@ export class CompaniesTableComponent implements OnInit {
       return !isArchived && !this.showArchivedCompanies && user.company.id === this.company.id || this.showArchivedCompanies && isArchived && user.company.id === this.company.id;
     }).length;
   }
-  /*$scope.filterArchived = function (users, company) {
-    return users.filter(function (user) {
-      var isArchived = user.deletedAt || company.deletedAt;
-      return !isArchived && !$rootScope.showArchivedCompanies || $rootScope.showArchivedCompanies && isArchived;
-    })
-  };*/
+   
   getUserName() {
     return `${this.primaryContact.firstName} ${this.primaryContact.lastName}`;
   };
@@ -105,4 +125,8 @@ export class CompaniesTableComponent implements OnInit {
     return `/file/${this.company.logo.cropped.id}.jpg?t=${(this.company.logo.updatedAt ? this.company.logo.updatedAt :
       '')}`;
   };
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
 }

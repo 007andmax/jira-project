@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CompaniesStateService } from '../services/companies-state.service';
+import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
+ 
 
 @Component({
   selector: 'app-companies-header',
