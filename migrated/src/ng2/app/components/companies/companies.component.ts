@@ -3,6 +3,7 @@ import { CompaniesService } from '../../services/company/companies.service';
 import { Company } from '../../interfaces/company/company';
 import { CompaniesListService } from './services/companies-list.service';
 import { UsersService } from '../../services/users/users.service';
+import { CompaniesStateService } from '../../states/company/companies-state.service';
 
 @Component({
   selector: 'app-companies',
@@ -17,20 +18,29 @@ export class CompaniesComponent implements OnInit {
   public infiniteScrollDisabled = false;
   public page_number: number = 1;
 
-  constructor(private companiesService: CompaniesService, private companiesList: CompaniesListService,   private userService: UsersService,) { }
+  constructor(private companiesService: CompaniesService, private companiesList: CompaniesListService,
+     private companiesStateService:CompaniesStateService,  private userService: UsersService,) { }
 
   ngOnInit() {
-    this.getCLientsList();
+    if (this.companiesStateService.getCompanies().length > 0) {
+      this.getCLientsList(this.companiesStateService.getCompanies());
+    } else {
+      this.companiesStateService.getOnCompanies().subscribe((data) => {
+      
+        this.getCLientsList(data);
+      })
+    }
   }
  
-  private getCLientsList() {
-    this.companiesService.clientsCompany.subscribe((res: Array<Company>) => {
-      this.reqCompaniesList = res.filter(item => item.clientType === 'CLIENT');
+  private getCLientsList(data) {
+   
+   
+      this.reqCompaniesList = data.filter(item => item.clientType === 'CLIENT');
       this.CompaniesList = this.reqCompaniesList.splice(0, 30);
       this.page_number += 1;
       console.log('clientsCompaniesList', this.CompaniesList);
       this.showPreloader = false;
-    });
+   
   }
   private getCompanies() {
     if (this.companiesList.getBlockList()) {
