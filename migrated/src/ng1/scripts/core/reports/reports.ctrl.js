@@ -387,6 +387,8 @@
         $scope.softwareSummaryWithPublisherItem = $scope.softwareSummaryWithPublisher;
         $scope.softwareSummaryWithVersionItem = $scope.softwareSummaryWithVersion;
         $scope.softwareSummaryWithInstallDateItem = $scope.softwareSummaryWithInstallDate;
+
+        console.log('$scope.softwareSummaryWithSoftwareTitleItem',$scope.softwareSummaryWithSoftwareTitleItem);
       }
 
       function getSoftwareSummaryData(dataToSend) {
@@ -423,7 +425,7 @@
                   softwareTitle: soft.softName,
                   installationKey: '',
                   publisher: soft.softPublisher,
-                  version: soft.softVersion,
+                  version: (soft.softName === "Windows") ? `${item.report.system.caption} ${item.report.system.release_id} ${item.report.system.architecture} ${item.report.system.service_pack}` : soft.softVersion,
                   installDate: soft.softInstalledOn
                 });
               });
@@ -445,6 +447,7 @@
           reportTransformedSoftwareSummaryDataInside = $scope.reportSoftwareSummaryData;
         }
         $scope.loadingInProgress = false;
+        console.log('$scope.softwareSummaryWithSoftwareTitleItem',reportTransformedSoftwareSummaryDataInside);
         return ($scope.reportTransformedSoftwareSummaryData = reportTransformedSoftwareSummaryDataInside);
       }
 
