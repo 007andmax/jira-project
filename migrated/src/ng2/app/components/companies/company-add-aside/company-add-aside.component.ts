@@ -52,6 +52,12 @@ export class CompanyAddAsideComponent implements OnInit {
     this.version = 'full';
     this.company.fullVersion();
   }
+  public onChangeSubscribe (data) {
+    data.forEach(item => this.company.contacts[0].subscription[item.field] = item.selected);
+  
+
+  }
+
   public addFullVersion() {
 
   }

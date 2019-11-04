@@ -204,45 +204,7 @@
         </div>
         <div class="col-md-6">
           <p>Get Subscribe</p>
-          <div class="device-user pointer"
-          
-          (click)="showSelectWrapper($event)">
-       <div *ngFor="let item of subscriptions" class="selected-user">
-         <i class="icn-16 icn-user"></i>
-         {{item.title}}
-         <i class="icn-sm icn-remove-old" (click)="toggleItem(item.item, item.type, item.index)"></i>
-       </div>
-     </div>
-     <div class="select-wrapper" *ngIf="showSelect">
-      <div class="tab-wrapper">
-        <div class="tab"
-             (click)="setCurrentTab($event, item)"
-             *ngFor="let item of tabs"
-             [ngClass]="{'active' : (currentTab === item)}"
-        >{{item}}
-        </div>
-      </div>
-      <div class="content" (click)="$event.preventDefault()">
-        <div  >
-          <div *ngFor="let item of subscriptions; let i = index"
-               (click)="toggleItem(item, 'device', i)">
-            <label class="control">
-              <input type="checkbox"
-                     [checked]="deviceCheckbox[i]">
-              <span class="control-indicator"></span>
-              {{item.title}}
-            </label>
-
-          </div>
-        </div>
-       
-
-      
-
-      </div>
-    </div>
-       <!--   <input type="text"
-                 placeholder="Select Subscribe Type">-->
+          <app-company-subscription (subscribeChange)="onChangeSubscribe($event)"></app-company-subscription>
         </div>
 
         <div class="col-md-12 details-divider">
@@ -251,8 +213,7 @@
 
         <div class="col-md-6">
           <p>Time Zone</p>
-          <input type="text"
-                 placeholder="Select Time Zone">
+         <app-company-time-zone></app-company-time-zone>
         </div>
         <div class="col-md-6">
           <p>Payment Terms</p>

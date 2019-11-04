@@ -76,6 +76,8 @@ import { CompaniesTableComponent } from './components/companies/companies-table/
 import { CompanyAddAsideComponent } from './components/companies/company-add-aside/company-add-aside.component';
 import { ConfirmComponent } from './components/shared/confirm/confirm.component';
 import { DownloadAgentComponent } from './components/companies/download-agent/download-agent.component';
+import { CompanySubscriptionComponent } from './components/companies/company-subscription/company-subscription.component';
+import { CompanyTimeZoneComponent } from './components/companies/company-time-zone/company-time-zone.component';
 
 
 /**
@@ -179,6 +181,8 @@ angular.module('quicktech')
     CompanyAddAsideComponent,
     ConfirmComponent,
     DownloadAgentComponent,
+    CompanySubscriptionComponent,
+    CompanyTimeZoneComponent,
     
   ],
   imports: [

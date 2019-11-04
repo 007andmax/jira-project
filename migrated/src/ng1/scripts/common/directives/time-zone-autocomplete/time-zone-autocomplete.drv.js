@@ -195,6 +195,7 @@
         };
 
         $scope.$watch('address.locale', function (locale) {
+          console.log('locale',locale);
           if (locale && locale.length) {
             var matches = offsetPattern.exec(locale);
             matches ? filterTimeZones(null, parseOffset(matches)) : filterTimeZones(locale.split('/').pop());
