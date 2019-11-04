@@ -22,7 +22,7 @@
                  placeholder="Select Company Type" id="dropdownTypeCompany" ngbDropdownToggle/>
                  <div ngbDropdownMenu aria-labelledby="dropdownTypeCompany">
                     <ng-template ngFor let-item [ngForOf]="companyTypes"  >
-                        <button ngbDropdownItem [textContent]="item" (click)="company.clientType = item"></button>
+                        <button ngbDropdownItem [textContent]="item" (click)="company.clientType = item.toUpperCase()"></button>
                     </ng-template>
                 </div>
         </div>
@@ -116,7 +116,7 @@
                  placeholder="Select Client Type" id="dropdownClientIndustry" ngbDropdownToggle/>
                  <div ngbDropdownMenu aria-labelledby="dropdownClientIndustry">
                   <ng-template ngFor let-item [ngForOf]="industries"  >
-                      <button ngbDropdownItem [textContent]="item" (click)="company.clientIndustry.name = item"></button>
+                      <button ngbDropdownItem [textContent]="item" (click)="company.clientIndustry.name = item.toUpperCase()"></button>
                   </ng-template>
               </div>
         </div>
@@ -180,13 +180,13 @@
                  ngbDropdown>
               <button class="types-btn"
                       id="dropdownBasic"
-                      ngbDropdownToggle>
-                Mobile
+                      ngbDropdownToggle [textContent]="company.contacts[0].phoneNumbers[0].typeNumber">
+            
                 <i class="icn-sm report-caret-icon"></i>
               </button>
               <div ngbDropdownMenu aria-labelledby="dropdownBasic">
                   <ng-template ngFor let-item [ngForOf]="phoneTypes"  >
-                      <button ngbDropdownItem [textContent]="item" (click)="company.contacts[0].phoneNumbers[0].typeNumber = item"></button>
+                      <button ngbDropdownItem [textContent]="item" (click)="company.contacts[0].phoneNumbers[0].typeNumber = item.toUpperCase()"></button>
                   </ng-template>
                 
               </div>
@@ -204,8 +204,45 @@
         </div>
         <div class="col-md-6">
           <p>Get Subscribe</p>
-          <input type="text"
-                 placeholder="Select Subscribe Type">
+          <div class="device-user pointer"
+          
+          (click)="showSelectWrapper($event)">
+       <div *ngFor="let item of subscriptions" class="selected-user">
+         <i class="icn-16 icn-user"></i>
+         {{item.title}}
+         <i class="icn-sm icn-remove-old" (click)="toggleItem(item.item, item.type, item.index)"></i>
+       </div>
+     </div>
+     <div class="select-wrapper" *ngIf="showSelect">
+      <div class="tab-wrapper">
+        <div class="tab"
+             (click)="setCurrentTab($event, item)"
+             *ngFor="let item of tabs"
+             [ngClass]="{'active' : (currentTab === item)}"
+        >{{item}}
+        </div>
+      </div>
+      <div class="content" (click)="$event.preventDefault()">
+        <div  >
+          <div *ngFor="let item of subscriptions; let i = index"
+               (click)="toggleItem(item, 'device', i)">
+            <label class="control">
+              <input type="checkbox"
+                     [checked]="deviceCheckbox[i]">
+              <span class="control-indicator"></span>
+              {{item.title}}
+            </label>
+
+          </div>
+        </div>
+       
+
+      
+
+      </div>
+    </div>
+       <!--   <input type="text"
+                 placeholder="Select Subscribe Type">-->
         </div>
 
         <div class="col-md-12 details-divider">

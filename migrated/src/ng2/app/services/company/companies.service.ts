@@ -42,6 +42,10 @@ export class CompaniesService {
     return this.http.get(this.apiUrl + 'company/archive/' + id);
   }
 
+  public  createCompany (data) {
+    return this.http.post(this.apiUrl + 'company',data);
+  }
+
   /**
    * Set filtered company
    * @param company - company to set

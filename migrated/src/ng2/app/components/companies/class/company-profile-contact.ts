@@ -15,7 +15,8 @@ export class CompanyProfileContact {
         this.primaryEmail = '',
         this.subscription = {
             invoice: true,
-            ticket: true
+            ticket: true,
+            ticketManager:  false
         }
     }
     public fullVersion() {
