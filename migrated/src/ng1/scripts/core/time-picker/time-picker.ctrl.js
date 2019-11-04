@@ -44,6 +44,7 @@
             ];
             var parentNode = null;
             $rootScope.$on('onChangeDuration', function () {
+                console.log('onChangeDuration');
                 setQuantity();
             });
             function onInitDefaultValues() {
@@ -52,7 +53,10 @@
                 $rootScope.saveEndDate = new Date().getTime();
 
             }
-            if ($scope.serviceExpense) onInitDefaultValues();
+            console.log('$scope.isMobileUpdateShown',$scope.isMobileUpdateShown);
+          
+           
+            if ($scope.serviceExpense || $scope.isMobileUpdateShown) onInitDefaultValues();
             function onInitTimeIn() {
                 var date = new Date();
                 var hour = date.getHours();
@@ -153,21 +157,24 @@
                 $scope.quantity = (endMs - startMs) / 3600000 > 0 ? (endMs - startMs) / 3600000 : 0;
 
                 if ($scope.editService && $scope.serviceExpenseDurationPresentation !== 'DURATION_PICKER') $scope.editService.quantity = $scope.quantity;
-                if ($scope.editService || $scope.serviceExpense) {
+                if ($scope.editService || $scope.serviceExpense || $scope.isMobileUpdateShown) {
 
-                    if ($scope.serviceExpense) {
+                    if ($scope.serviceExpense || $scope.isMobileUpdateShown) {
                         $rootScope.saveStartDate = new Date(newTimeStart.getTime());
                         $rootScope.saveEndDate = new Date(endMs);
+                        console.log('$rootScope.saveEndDate',$rootScope.saveEndDate);
                     }
                     if ($scope.editService) {
                         $rootScope.saveForStartDate = new Date(newTimeStart.getTime());
                         $rootScope.saveForEndDate = new Date(endMs);
+                        console.log('$saveForEndDate',$rootScope.saveForEndDate);
                         $scope.resetDurationWhenTimePicker();
                         $rootScope.$broadcast('onResetDuration', $scope.quantity)
                     }
                 }
             }
             function setSelectedIndexInDate() {
+                
                 var indexHour = $scope.hoursInDate.findIndex(hour => hour.value === $scope.inDate.hour && hour.type === $scope.inDate.type);
                 var indexMinute = $scope.minutes.findIndex(minute => minute.value === $scope.inDate.minute);
                 if (indexMinute === -1) indexMinute = getClosest($scope.minutes,$scope.inDate.minute).u;
@@ -178,8 +185,10 @@
             function setSelectedIndexOutDate() {
                 var indexHour = $scope.hoursOutDate.findIndex(hour => hour.value === $scope.outDate.hour && hour.type === $scope.outDate.type);
                 var indexMinute = $scope.minutes.findIndex(minute => minute.value === $scope.outDate.minute);
-                $scope.selectedIndexOutDate = (indexHour > -1 && indexMinute > -1) ? (indexMinute + $scope.minutes.length * indexHour) : null;
-            }
+                if (indexMinute === -1) indexMinute = getClosest($scope.minutes,$scope.outDate.minute).u;
+                console.log('indexMinute',indexMinute);
+                $scope.selectedIndexOutDate = {hour: (indexHour > -1) ? $scope.hoursOutDate[indexHour].value : null, minute: $scope.minutes[indexMinute].value};
+         }
             function oninitHousInDate() {
                 $scope.hoursInDate.push({ value: 12, type: "am", text: "12", i: 0 });
                 setHousInDate("am", 0, 1, 11);
@@ -245,7 +254,15 @@
 
             setSelectedIndexInDate();
             setSelectedIndexOutDate();
+            if ($scope.serviceExpense || $scope.isMobileUpdateShown)   onSetInitialValue();
 
+            function onSetInitialValue () {
+                $scope.inDate.minute = $scope.selectedIndexInDate.minute;
+                $scope.outDate.minute = $scope.selectedIndexOutDate.minute;
+                resetTextInDate();
+                resetTextOutDate();
+                
+            }
             $scope.selectTimeIn = function (hour, minute) {
                 $scope.inDate = { hour: hour.value, minute: minute.value, type: hour.type };
 
@@ -330,6 +347,7 @@
                 var minuteText = (($scope.outDate.minute < 10) ? "0" + $scope.outDate.minute : $scope.outDate.minute);
                 $scope.outDateText = hourText + ":" + minuteText + "" + $scope.outDate.type;
             }
+         
             $scope.onChangeOutDateText = function () {
                 if ($scope.outDateText.indexOf(":") === -1) {
                     resetTextOutDate();

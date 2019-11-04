@@ -23,7 +23,7 @@
       'quicktech.core.quickSupport',
       'quicktech.core.reports',
       'quicktech.core.serviceAgreements',
-      'proton.multi-list-picker',
+      
       'ui.router',
       'ui.select',
       'ui.bootstrap',

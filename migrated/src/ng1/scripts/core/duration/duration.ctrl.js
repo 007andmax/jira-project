@@ -50,7 +50,7 @@
                 $rootScope.saveStartDate = new Date().getTime();
                 $rootScope.saveEndDate = new Date().getTime();
             }
-            if ($scope.serviceExpense) onInitDefaultValues();
+            if ($scope.serviceExpense || $scope.isMobileUpdateShown && !$scope.editService) onInitDefaultValues();
             $scope.timePickerInterval = setTimePickerInterval();
             function setHous() {
                 for (let i = 1; i <= 24; i++) {
@@ -58,6 +58,7 @@
                 }
             }
             function parseEditQuantity() {
+                console.log('$scope.editService',$scope.editService);
                 var timeInMinutes = $scope.editService.quantity * 60,
                     hours = Math.floor(timeInMinutes / 60),
                     minutes = Math.round(timeInMinutes - (hours * 60));
@@ -65,6 +66,7 @@
                 $scope.selectedMinute = minutes;
                 setDateText();
             }
+
             if ($scope.editService && $scope.editService.quantity) parseEditQuantity();
             setHous();
             function setTimePickerInterval() {
@@ -113,10 +115,11 @@
                 $scope.quantity = $scope.selectedHour + (($scope.selectedMinute) ? ($scope.selectedMinute / 60) : 0);
                 if ($scope.editService) {
                     $scope.editService.quantity = $scope.quantity;
+                    console.log('$scope.editService.quantity',$scope.editService.quantity);
                     if ($scope.serviceExpenseDurationPresentation === 'DURATION_PICKER') $rootScope.$broadcast('onChangeDuration', null);
                 }
-                if ($scope.serviceExpense) {
-                    $scope.serviceExpense.quantity = $scope.quantity;
+                if ($scope.serviceExpense || $scope.isMobileUpdateShown) {
+                 if (!$rootScope.isMobileUpdateShown)   $scope.serviceExpense.quantity = $scope.quantity;
                     $rootScope.saveStartDate = new Date();
                     $rootScope.saveEndDate = new Date(new Date().getTime() + $scope.quantity * 3600000)
                 }

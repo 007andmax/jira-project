@@ -1012,6 +1012,8 @@ $scope.countShowAssignedUsers = $scope.ticketDetails.multiAssignedUsers.length;
                   description: item.description,
                   quantity: item.quantity,
                   completed: item.completed,
+                  durationStart: $rootScope.saveForStartDate.getTime(),
+                  durationEnd: $rootScope.saveForEndDate.getTime(),
                   user: (item.user) ? { id: item.user.id } : { id: "" },
                   date: new Date(serviceDate.getFullYear(), serviceDate.getMonth(), serviceDate.getDate()),
                   discountAmount: item.discountAmount,

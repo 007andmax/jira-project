@@ -9,6 +9,7 @@
           $scope.maxServiceDate = new Date();
 
           $scope.editService = $scope.service.staticCopy();
+          console.log('$scope.editService',$scope.editService);
           $scope.companyServices = ServicesService.getAllByCompany($scope, $scope.company.id);
           $scope.durationText = "";
           $scope.editService.date = $filter('date')($scope.editService.date, 'd MMM yyyy');
@@ -297,7 +298,7 @@
 
               var serviceDate = new Date($scope.editService.date);
 
-              var startDate = new Date();
+             /* var startDate = new Date();
               var endDate = new Date();
               if ($scope.saveStartDate.time === 'PM' && $scope.saveStartDate.hour < 12)  {
                 startDate.setHours(+($rootScope.saveStartDate.hour) +12)
@@ -315,6 +316,8 @@
                 endDate.setHours($rootScope.saveEndDate.hour)
               }
               endDate.setMinutes($rootScope.saveEndDate.minute);
+             
+              endDate.setMinutes($rootScope.saveEndDate.minute);*/
              
               TicketsService.updateExpenseInTicketUpdate({
 
