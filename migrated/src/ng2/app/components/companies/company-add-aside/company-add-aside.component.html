@@ -217,8 +217,15 @@
         </div>
         <div class="col-md-6">
           <p>Payment Terms</p>
-          <input type="text"
-                 placeholder="Select Payment Terms">
+          <input type="text" [value]="company.clientType"
+          autocomplete="new-password"
+                 placeholder="Select Payment Terms" id="dropdownPaymentTerms" ngbDropdownToggle/>
+                 <div ngbDropdownMenu aria-labelledby="dropdownPaymentTerms">
+                    <ng-template ngFor let-item [ngForOf]="paymentTerms"  >
+                        <button ngbDropdownItem [textContent]="item" (click)="company.clientType = item.toUpperCase()"></button>
+                    </ng-template>
+                </div>
+          
         </div>
         <div class="col-md-6">
           <p>Payment Method</p>
