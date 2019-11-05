@@ -47,7 +47,9 @@ export class CompanyPasswordManagerTableComponent implements OnInit {
     this.getRecords();
     this.getSelectedCategory();
     this.subAddNewRecords = this.addNewRecords.subscribe(v => {
-      this.apiPasswordManagerService.getRecords();
+      console.log('this.selectedCompany.id',this.selectedCompany);
+      this.apiPasswordManagerService.getCompanyRecords(this.selectedCompany.id);
+
     });
     this.watchDeleteRecord();
     this.onSort();
@@ -55,11 +57,11 @@ export class CompanyPasswordManagerTableComponent implements OnInit {
 
   private onSort() {
     this.passwordManagerService.getOnSort().subscribe((data) => {
-     
-    this.sort = data.sort;
-    this.direction = data.direction;
-   
-    //  this.cd.detectChanges();
+
+      this.sort = data.sort;
+      this.direction = data.direction;
+
+      //  this.cd.detectChanges();
     })
   }
 
@@ -68,7 +70,7 @@ export class CompanyPasswordManagerTableComponent implements OnInit {
    */
   public getSelectedCategory() {
     this.passwordManagerService.emitSelectedCategory.subscribe((category) => {
-       this.selectedCategory = category;
+      this.selectedCategory = category;
     });
   }
 
@@ -76,9 +78,9 @@ export class CompanyPasswordManagerTableComponent implements OnInit {
    * Get records list
    */
   public getRecords() {
-    this.subGetRecords = this.apiPasswordManagerService.dataChange.subscribe((res) => {
- 
-       this.recordsData = res.filter(item => item.companyId === this.selectedCompany.id);
+    this.subGetRecords = this.apiPasswordManagerService.companyRecords.subscribe((res) => {
+      this.recordsData = res;
+      //  this.recordsData = res.filter(item => item.companyId === this.selectedCompany.id);
     });
   }
 
@@ -133,7 +135,7 @@ export class CompanyPasswordManagerTableComponent implements OnInit {
    * destroy password manager data table component
    */
   ngOnDestroy() {
-    this.subGetRecords.unsubscribe();
+    //   this.subGetRecords.unsubscribe();
     this.subAddNewRecords.unsubscribe();
     this.apiPasswordManagerService.deleteSubscription();
   }

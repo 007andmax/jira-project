@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { ApiPasswordManagerService } from '../../services/password-manager/api-password-manager.service';
 import { CompaniesService } from '../../services/company/companies.service';
@@ -6,7 +6,7 @@ import { PasswordManagerService } from '../../services/password-manager/password
 import { UsersService } from '../../services/users/users.service';
 import { PermissionsService } from '../../services/permissions/permissions.service';
 import { PasswordManagerListService } from './services/password-manager-list.service';
- 
+
 
 @Component({
   selector: 'company-password-manager',
@@ -14,7 +14,7 @@ import { PasswordManagerListService } from './services/password-manager-list.ser
   styleUrls: ['./company-password-manager.component.scss'],
   providers: [PasswordManagerListService]
 })
-export class CompanyPasswordManagerComponent implements OnInit {
+export class CompanyPasswordManagerComponent implements OnInit, OnDestroy {
 
   public companiesList: any;
   public selectedCompany: any;
@@ -25,8 +25,7 @@ export class CompanyPasswordManagerComponent implements OnInit {
   public isMobileFilterShowing = false;
   public currentUser: any;
   public showPreloader = true;
-  sub:Subscription = new Subscription();
-  subscription:any;
+  sub: Subscription = new Subscription();
   public sort: string = 'company_name';
   public direction: string = 'DESC';
   /**
@@ -48,17 +47,17 @@ export class CompanyPasswordManagerComponent implements OnInit {
     this.companiesService.getCompaniesList();
   }
 
-    /**
- * Sort 
- * @param sort - type sort
- */
-public sortBy(sort) {
- 
-  this.direction = this.passwordManagerList.getDirection(this.direction, this.sort, sort);
-  this.sort = sort;
-  this.passwordManagerService.onInitSort({direction:this.direction,sort:sort});
- 
-}
+  /**
+* Sort 
+* @param sort - type sort
+*/
+  public sortBy(sort) {
+
+    this.direction = this.passwordManagerList.getDirection(this.direction, this.sort, sort);
+    this.sort = sort;
+    this.passwordManagerService.onInitSort({ direction: this.direction, sort: sort });
+
+  }
 
   /**
    * Initializes Password manager. See [ngOnInit]{@see OnInit#ngOnInit}
@@ -69,38 +68,44 @@ public sortBy(sort) {
     this.getSelectedDeviceOrUser();
     this.getSelectedDate();
     this.getCurrentUser();
-  
+
     this.checkCloseFilters();
 
     let subGetRecords = this.apiPasswordManagerService.dataChange.subscribe((res) => {
-      
+
       this.showPreloader = false;
-       });
-       this.sub.add(subGetRecords);
+    });
+
+    let companyRecords = this.apiPasswordManagerService.companyRecords.subscribe((res) => {
+
+      this.showPreloader = false;
+    });
+    this.sub.add(subGetRecords);
+    this.sub.add(companyRecords);
   };
 
   /**
    * Get selected company from filter
    */
   public getSelectCompany() {
-   
+    console.log('getSelectCompany');
     if (localStorage.getItem('company_id')) {
       let company_id = localStorage.getItem('company_id');
-      
+
       let subscription = this.companiesService.clientsCompany
-       .subscribe((company) => {
-        this.refreshFilter();
-         this.selectedCompany = company.find(item => item.id === company_id);
-         this.apiPasswordManagerService.getRecords();
-       
-       }
-     );
-     this.sub.add(subscription);
+        .subscribe((company) => {
+          this.refreshFilter();
+          this.selectedCompany = company.find(item => item.id === company_id);
+          if (window.location.hash.includes('company-password-manager')) this.apiPasswordManagerService.getCompanyRecords(company_id);
+
+        }
+        );
+      this.sub.add(subscription);
     }
-   /* this.companiesService.filteredCompanyUpdate.subscribe((company) => {
-      this.refreshFilter();
-      return this.selectedCompany = company;
-    });*/
+    /* this.companiesService.filteredCompanyUpdate.subscribe((company) => {
+       this.refreshFilter();
+       return this.selectedCompany = company;
+     });*/
   }
 
   /**
@@ -183,16 +188,17 @@ public sortBy(sort) {
   public checkCloseFilters() {
     this.passwordManagerService.closeFilter.subscribe(() => {
       this.isMobileFilterShowing = false
-    } )
+    })
   }
 
   /**
    * destroy password manager component
    */
   ngOnDestroy() {
+    console.log('ngOnDestroy');
     this.apiPasswordManagerService.deleteSubscription();
     this.sub.unsubscribe();
-    
+
   }
 
 
