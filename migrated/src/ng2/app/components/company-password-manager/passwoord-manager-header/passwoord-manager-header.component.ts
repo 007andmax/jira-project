@@ -35,7 +35,7 @@ export class CompanyPasswoordManagerHeaderComponent implements OnInit {
    * add new record event
    */
   public addRecord() {
-    this.passwordManagerService.addRecord();
+    this.passwordManagerService.onAddRecord();
   }
 
   /**

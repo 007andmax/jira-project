@@ -131,7 +131,7 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
       this.editItem = res;
       if (this.editItem) this.isEditmode = true;
       this.opened = true;
-      return this.initForm();
+       this.initForm();
     });
   }
 

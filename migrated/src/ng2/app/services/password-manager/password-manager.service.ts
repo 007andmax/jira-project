@@ -78,10 +78,15 @@ export class PasswordManagerService {
     this.selectedDate.emit(item)
   }
 
+  public onAddRecord(item?) {
+    this.showAddForm.emit(item);
+  }
+
   /**
    * Add new record
    * @param item - record data
    */
+
   public addRecord(item?) {
    
     this.showAddForm.emit(item);
