@@ -29,9 +29,7 @@ export class ApiPasswordManagerService {
    */
   public setOpenRecord(id) {
     
-    this.subGetRecords = this.http.get(this.apiUrl + `passwordRecords/${id}/password`).subscribe((response)=> {
-   
-    })
+   return this.http.get(this.apiUrl + `passwordRecords/${id}/password`);
   }
 
   /**

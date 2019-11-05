@@ -15,6 +15,7 @@ import { UsersService } from "../../../services/users/users.service";
 import { GadgetsService } from "../../../services/gadgets/gadgets.service";
 import { PermissionsService } from "../../../services/permissions/permissions.service";
 import { ApiPasswordManagerService } from "../../../services/password-manager/api-password-manager.service";
+import { ShowHideService } from 'ngx-show-hide-password';
 
 /**
  * Password manager edit aside component
@@ -22,7 +23,8 @@ import { ApiPasswordManagerService } from "../../../services/password-manager/ap
 @Component({
   selector: 'app-password-manager-edit-aside',
   templateUrl: './password-manager-edit-aside.component.html',
-  styleUrls: ['./password-manager-edit-aside.component.scss']
+  styleUrls: ['./password-manager-edit-aside.component.scss'],
+  providers: [ShowHideService]
 })
 export class PasswordManagerEditAsideComponent implements OnInit {
 
@@ -90,6 +92,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     private permissionsService: PermissionsService,
     private apiPasswordManagerService: ApiPasswordManagerService,
     public cd: ChangeDetectorRef,
+    private showHideService:ShowHideService
   ) { }
 
   /**
@@ -116,6 +119,10 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.type = 0;
     this.currentTypeChoosen = PASSWORD_RECORD_TYPES[this.type];
     this.opened = !this.opened;
+    if (!this.opened) {
+      this.showPassword = false;
+      this.showHideService.setShow('password',false);
+    }
   }
 
   /**
@@ -214,6 +221,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
    // this.passwordManagerService.addRecord();
  //   this.initForm();
  this._toggleSidebar();
+
     /*this.showSelect = false;
     this.clearClient();
     this.submitted = false;
@@ -451,9 +459,16 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public togglePassword() {
-    this.showPassword = !this.showPassword;
-    if (this.showPassword) {
-      this.apiPasswordManagerService.setOpenRecord(this.editItem.id);
+    if (!this.showPassword) {
+      this.apiPasswordManagerService.setOpenRecord(this.editItem.id).subscribe((data:any) => {
+        console.log('data',data);
+        this.createPasswordRecord.controls['password'].setValue(data.password);
+        this.showPassword = !this.showPassword;
+        this.showHideService.setShow('password',true);
+      })
+    } else {
+      this.showPassword = !this.showPassword;
+      this.showHideService.setShow('password',false);
     }
   }
 
