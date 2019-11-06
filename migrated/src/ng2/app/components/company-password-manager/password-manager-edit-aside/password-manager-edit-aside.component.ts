@@ -120,6 +120,7 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
     if (!this.opened) {
       this.showPassword = false;
       this.showHideService.setShow('password',false);
+      this.passwordManagerService.setPassword(null);
     }
   }
 
@@ -457,6 +458,7 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
     if (!this.showPassword) {
       this.apiPasswordManagerService.setOpenRecord(this.editItem.id).subscribe((data:any) => {
         console.log('data',data);
+        this.passwordManagerService.setPassword(data.password);
         this.createPasswordRecord.controls['password'].setValue(data.password);
         this.showPassword = !this.showPassword;
         this.showHideService.setShow('password',true);

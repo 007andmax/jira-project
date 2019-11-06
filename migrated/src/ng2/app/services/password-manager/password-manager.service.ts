@@ -25,7 +25,7 @@ export class PasswordManagerService {
   public newRecordsisAdd: EventEmitter<any> = new EventEmitter();
   public onSort: EventEmitter<any> = new EventEmitter();
   public onChangeRealTime: EventEmitter<any> = new EventEmitter();
-
+  password:string = null;
   /**
    * Password manager service constructor
    * @param {HttpClient} http Service to work with request
@@ -33,7 +33,12 @@ export class PasswordManagerService {
   public constructor(
     private http: HttpClient
   ) { }
-
+public getPassword () {
+  return this.password;
+}
+  public setPassword (password) {
+    this.password = password;
+  }
   public handleRealTimeChanges(data) {
     this.onChangeRealTime.emit(data)
   }
@@ -117,7 +122,7 @@ export class PasswordManagerService {
    */
   public saveRecord(recordInfo) {
     const date = recordInfo.expiredDate;
-    return this.http.post(this.apiUrl + 'passwordRecords', this.getData(recordInfo));
+    return this.http.post(this.apiUrl + 'passwordRecords', this.getData(recordInfo,false));
   }
 
   /**
@@ -127,7 +132,8 @@ export class PasswordManagerService {
    */
   public editRecord(recordInfo, recordId) {
     const date = recordInfo.expiredDate;
-    return this.http.put(this.apiUrl + 'passwordRecords', Object.assign({ id: recordId }, this.getData(recordInfo)));
+    console.log('this.getData(recordInfo,true)',this.getData(recordInfo,true));
+    return this.http.put(this.apiUrl + 'passwordRecords', Object.assign({ id: recordId }, this.getData(recordInfo,true)));
   }
 
   /**
@@ -150,7 +156,7 @@ export class PasswordManagerService {
    * Get data info
    * @param recordInfo - record information
    */
-  public getData(recordInfo) {
+  public getData(recordInfo,edit) {
     if (recordInfo.type.UPPERCASE === 'OFFICE_365_ACCOUNT') {
       return ({
         companyId: recordInfo.client && recordInfo.client.id,
@@ -159,7 +165,7 @@ export class PasswordManagerService {
         key: recordInfo.key,
         links: recordInfo.userOrDevice,
         note: recordInfo.note,
-        password: recordInfo.password,
+        password: (edit && recordInfo.password === this.password) ? null : recordInfo.password,
         template: recordInfo.type.UPPERCASE,
         url: recordInfo.url,
         username: recordInfo.userName
@@ -169,7 +175,7 @@ export class PasswordManagerService {
         companyId: recordInfo.client && recordInfo.client.id,
         description: recordInfo.description,
         expiredDate: this.getFormatedDate(recordInfo.expiryDate),
-        password: recordInfo.password,
+        password: (edit && recordInfo.password === this.password) ? null : recordInfo.password,
         links: recordInfo.userOrDevice,
         url: recordInfo.url,
         template: recordInfo.type.UPPERCASE,
@@ -182,7 +188,7 @@ export class PasswordManagerService {
         companyId: recordInfo.client && recordInfo.client.id,
         description: recordInfo.description,
         expiredDate: this.getFormatedDate(recordInfo.expiryDate),
-        password: recordInfo.password,
+        password: (edit && recordInfo.password === this.password) ? null : recordInfo.password,
         links: recordInfo.userOrDevice,
         template: recordInfo.type.UPPERCASE,
         username: recordInfo.userName,
@@ -193,7 +199,7 @@ export class PasswordManagerService {
         companyId: recordInfo.client && recordInfo.client.id,
         description: recordInfo.description,
         expiredDate: this.getFormatedDate(recordInfo.expiryDate),
-        password: recordInfo.password,
+        password: (edit && recordInfo.password === this.password) ? null : recordInfo.password,
         template: recordInfo.type.UPPERCASE,
         username: recordInfo.userName,
         note: recordInfo.note,
@@ -204,7 +210,7 @@ export class PasswordManagerService {
         companyId: recordInfo.client && recordInfo.client.id,
         description: recordInfo.description,
         expiredDate: this.getFormatedDate(recordInfo.expiryDate),
-        password: recordInfo.password,
+        password: (edit && recordInfo.password === this.password) ? null : recordInfo.password,
         links: recordInfo.userOrDevice,
         template: recordInfo.type.UPPERCASE,
         username: recordInfo.userName,
@@ -220,7 +226,7 @@ export class PasswordManagerService {
         companyId: recordInfo.client && recordInfo.client.id,
         description: recordInfo.description,
         expiredDate: this.getFormatedDate(recordInfo.expiryDate),
-        password: recordInfo.password,
+        password: (edit && recordInfo.password === this.password) ? null : recordInfo.password,
         template: recordInfo.type.UPPERCASE,
         username: recordInfo.userName,
         note: recordInfo.note,
@@ -231,7 +237,7 @@ export class PasswordManagerService {
       return ({
         companyId: recordInfo.client && recordInfo.client.id,
         expiredDate: this.getFormatedDate(recordInfo.expiryDate),
-        password: recordInfo.password,
+        password: (edit && recordInfo.password === this.password) ? null : recordInfo.password,
         template: recordInfo.type.UPPERCASE,
         username: recordInfo.userName,
         description: recordInfo.description
@@ -241,7 +247,7 @@ export class PasswordManagerService {
         companyId: recordInfo.client && recordInfo.client.id,
         expiredDate: this.getFormatedDate(recordInfo.expiryDate),
         links: recordInfo.userOrDevice,
-        password: recordInfo.password,
+        password: (edit && recordInfo.password === this.password) ? null : recordInfo.password,
         template: recordInfo.type.UPPERCASE,
         ssid: recordInfo.ssid,
         description: recordInfo.description,
@@ -252,7 +258,7 @@ export class PasswordManagerService {
 
         companyId: recordInfo.client && recordInfo.client.id,
         expiredDate: this.getFormatedDate(recordInfo.expiryDate),
-        password: recordInfo.password,
+        password: (edit && recordInfo.password === this.password) ? null : recordInfo.password,
         template: recordInfo.type.UPPERCASE,
         username: recordInfo.userName,
         links: recordInfo.userOrDevice,

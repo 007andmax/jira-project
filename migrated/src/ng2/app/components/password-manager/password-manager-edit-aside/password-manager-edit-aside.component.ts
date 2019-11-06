@@ -70,7 +70,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public subGetCompaniesList: ISubscription;
   public opened: boolean = false;
   showPassword: boolean = false;
-
+   
   /**
    * Creates an instance of the PasswordManagerEditAsideComponent with the injected services
    * @param {ApiPasswordManagerService} apiPasswordManagerService Service to work with api
@@ -122,6 +122,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     if (!this.opened) {
       this.showPassword = false;
       this.showHideService.setShow('password',false);
+      this.passwordManagerService.setPassword(null);
     }
   }
 
@@ -210,7 +211,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     console.log('gggggggggggggggg');
     this.createPasswordRecord.controls['userOrDevice'].setValue(this.userDevice);
     if (this.isEditmode && this.editItem) {
-      this.subSaveEditRecord = this.passwordManagerService.editRecord(this.createPasswordRecord.value, this.editItem.id)
+      this.subSaveEditRecord = this.passwordManagerService.editRecord(this.createPasswordRecord.value,this.editItem.id)
         .subscribe((res) => this.afterSaveRecord());
     } else {
       this.subSaveRecord = this.passwordManagerService.saveRecord(this.createPasswordRecord.value)
@@ -469,6 +470,8 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     if (!this.showPassword) {
       this.apiPasswordManagerService.setOpenRecord(this.editItem.id).subscribe((data:any) => {
         console.log('data',data);
+        this.passwordManagerService.setPassword(data.password);
+       
         this.createPasswordRecord.controls['password'].setValue(data.password);
         this.showPassword = !this.showPassword;
         this.showHideService.setShow('password',true);
