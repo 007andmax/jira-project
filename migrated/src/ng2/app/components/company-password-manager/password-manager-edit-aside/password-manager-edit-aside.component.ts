@@ -335,7 +335,7 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
   public getCompanyDevices(companyId) {
     this.selectedClient = companyId.item;
     this.clearClient();
-    companyId.item && this.getAllUsers(companyId.item.id);
+   
     this.getGadgets();
     this.subGetDevices = this.devicesService.getCompanyDevices(companyId.item.id).subscribe((res) => {
       if (res[companyId.item.id]) {
@@ -352,6 +352,7 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
               this.toggleItem(this.devicesList[index], 'device', index);
             }
           });
+          companyId.item && this.getAllUsers(companyId.item.id);
         }
       }
     });
@@ -471,19 +472,19 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
    */
   private getAllUsers(companyId) {
     this.subGetAllUsers = this.userService.getAllusers().subscribe((res: any) => {
-      res = res.filter((item) =>  item.company.id == companyId && !item.deletedAt);
-      this.usersList = [...(res.filter((item) => item.accountType === USER.TYPE.CLIENT))];
+      let data = res.filter((item) =>  item.company.id == companyId && !item.deletedAt);
+      this.usersList = [...(data.filter((item) => item.accountType === USER.TYPE.CLIENT))];
       this.usersList.sort((a, b) => (!a.firstName && !a.lastName || !b.firstName && !b.lastName || a.firstName.length === 0 && a.lastName.length === 0 || b.firstName.length === 0 && b.lastName.length === 0) ? -1 : (a.firstName.toLowerCase() > b.firstName.toLowerCase()) ?
       1 : ((b.firstName.toLowerCase() > a.firstName.toLowerCase()) ? -1 : 0));
       this.usersCheckbox = new Array(this.usersList.length);
       for (var i = 0; i < this.usersCheckbox.length; ++i) { this.usersCheckbox[i] = false; }
       if (this.isEditmode && this.editItem) {
         this.editItem.links.map((item) => {
-          const index = this.usersList.findIndex((userListItem) => {
+          const index = res.findIndex((userListItem) => {
             return userListItem.id === item.userId
           });
           if (index > -1) {
-            this.toggleItem( this.usersList[index], 'user', index);
+            this.toggleItem( res[index], 'user', index);
           }
         });
       }
@@ -632,6 +633,10 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
     this.subSaveRecord && this.subSaveRecord.unsubscribe();
     this.subGetDevices && this.subGetDevices.unsubscribe();
     this.subGetCompaniesList && this.subGetCompaniesList.unsubscribe();
+  }
+
+  public trackByIndex(index, item) {
+    return index;
   }
 
   /**
