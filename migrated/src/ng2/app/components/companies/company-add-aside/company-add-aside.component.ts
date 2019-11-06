@@ -19,6 +19,8 @@ export class CompanyAddAsideComponent implements OnInit {
   companyTypes = ['Client', 'Lead', 'Vendor'];
   phoneTypes = ['Office', 'Mobile', 'Fax'];
   paymentTerms = ['COD', '7 days', '15 days', '30 days'];
+  paymentMethods = ['Cash', 'Cheque', 'Debit Card', 'Credit Card', 'Wire Transfer'];
+  paymentTypes = ['HOURLY', 'BLOCK_TIME', 'SEMI_MANAGED', 'FULLY_MANAGED'];
   subscriptions:Array<CompanySubscription> = [new CompanySubscription('Ticket Updates','ticket'),
   new CompanySubscription('Ticket Manager','ticketManager'),
   new CompanySubscription('Invoice Updates','invoice')];

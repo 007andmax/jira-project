@@ -215,27 +215,38 @@
           <p>Time Zone</p>
          <app-company-time-zone></app-company-time-zone>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6" ngbDropdown>
           <p>Payment Terms</p>
-          <input type="text" [value]="company.clientType"
+          <input type="text" [value]="company.paymentTerms"
           autocomplete="new-password"
                  placeholder="Select Payment Terms" id="dropdownPaymentTerms" ngbDropdownToggle/>
                  <div ngbDropdownMenu aria-labelledby="dropdownPaymentTerms">
                     <ng-template ngFor let-item [ngForOf]="paymentTerms"  >
-                        <button ngbDropdownItem [textContent]="item" (click)="company.clientType = item.toUpperCase()"></button>
+                        <button ngbDropdownItem [textContent]="item" (click)="company.paymentTerms = item.toUpperCase()"></button>
                     </ng-template>
                 </div>
           
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6" ngbDropdown>
           <p>Payment Method</p>
-          <input type="text"
-                 placeholder="Select Payment Method">
+                <input type="text" [value]="company.paymentMethods" autocomplete="new-password" placeholder="Select Payment Method"
+                  id="dropdownPaymentMethods" ngbDropdownToggle />
+                <div ngbDropdownMenu aria-labelledby="dropdownPaymentMethods">
+                  <ng-template ngFor let-item [ngForOf]="paymentMethods">
+                    <button ngbDropdownItem [textContent]="item" (click)="company.paymentMethods = item.toUpperCase()"></button>
+                  </ng-template>
+                </div>
         </div>
         <div class="col-md-6">
           <p>Service Type</p>
-          <input type="text"
-                 placeholder="Select Service Type">
+          <input type="text" [value]="company.paymentMethods" autocomplete="new-password" placeholder="Select Service Type"
+                  id="dropdownPaymentType" ngbDropdownToggle />
+                <div ngbDropdownMenu aria-labelledby="dropdownPaymentType">
+                  <ng-template ngFor let-item [ngForOf]="paymentMethods">
+                    <button ngbDropdownItem [textContent]="item" (click)="company.paymentMethods = item.toUpperCase()"></button>
+                  </ng-template>
+                </div>
+          
         </div>
         <div class="col-md-6">
           <p>Sales Person</p>
