@@ -480,6 +480,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
           this.showPassword = !this.showPassword;
           this.showHideService.setShow('password',true);
           this.isLoadPassword = false;
+          this.cd.detectChanges();
         })
       } else {
         this.showPassword = !this.showPassword;

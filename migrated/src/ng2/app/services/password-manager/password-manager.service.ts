@@ -87,6 +87,10 @@ public getPassword () {
     this.showAddForm.emit(item);
   }
 
+  public onEditRecord(item?) {
+    this.showAddForm.emit(item);
+  }
+
   /**
    * Add new record
    * @param item - record data
