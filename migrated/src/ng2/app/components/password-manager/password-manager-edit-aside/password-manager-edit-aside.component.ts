@@ -169,7 +169,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
    * init new form
    */
   public initForm() {
-   
+   console.log('initForm');
     this.expiryDate = this.editItem && this.editItem.expiredDate ? this.getStartDate(this.editItem.expiredDate) : null;
     this.createPasswordRecord = this.fb.group({
       description: [this.editItem ? this.editItem.description : '', Validators.maxLength(5000)],
@@ -197,12 +197,17 @@ export class PasswordManagerEditAsideComponent implements OnInit {
    * save new record
    */
   public save() {
+    console.log('save');
     this.submitted = true;
     const isUserRequired = this.checkLinks();
     const isSsidRequired = this.checkSsid();
     if (this.type === 8) this.createPasswordRecord.controls['userName'].setValue('block');
     if (this.type !== 4) this.createPasswordRecord.controls['ipAdres'].setValue('');
-    if (this.createPasswordRecord.invalid || isUserRequired || isSsidRequired) return this.submitted;
+    if (this.createPasswordRecord.invalid || isUserRequired || isSsidRequired) {
+      this.cd.detectChanges();
+      return;
+    }
+    console.log('gggggggggggggggg');
     this.createPasswordRecord.controls['userOrDevice'].setValue(this.userDevice);
     if (this.isEditmode && this.editItem) {
       this.subSaveEditRecord = this.passwordManagerService.editRecord(this.createPasswordRecord.value, this.editItem.id)

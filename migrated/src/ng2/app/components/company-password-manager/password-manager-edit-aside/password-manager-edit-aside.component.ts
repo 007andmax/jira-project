@@ -199,7 +199,10 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
     const isSsidRequired = this.checkSsid();
     if (this.type === 8) this.createPasswordRecord.controls['userName'].setValue('block');
     if (this.type !== 4) this.createPasswordRecord.controls['ipAdres'].setValue('');
-    if (this.createPasswordRecord.invalid || isUserRequired || isSsidRequired) return this.submitted;
+    if (this.createPasswordRecord.invalid || isUserRequired || isSsidRequired) {
+      this.cd.detectChanges();
+      return;
+    }
     this.createPasswordRecord.controls['userOrDevice'].setValue(this.userDevice);
     if (this.isEditmode && this.editItem) {
       this.subSaveEditRecord = this.passwordManagerService.editRecord(this.createPasswordRecord.value, this.editItem.id)
