@@ -70,6 +70,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public subGetCompaniesList: ISubscription;
   public opened: boolean = false;
   showPassword: boolean = false;
+  isLoadPassword: boolean = false;
    
   /**
    * Creates an instance of the PasswordManagerEditAsideComponent with the injected services
@@ -468,14 +469,23 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
   public togglePassword() {
     if (!this.showPassword) {
-      this.apiPasswordManagerService.setOpenRecord(this.editItem.id).subscribe((data:any) => {
-        console.log('data',data);
-        this.passwordManagerService.setPassword(data.password);
-       
-        this.createPasswordRecord.controls['password'].setValue(data.password);
+      if (this.editItem)
+      {
+        this.isLoadPassword = true;
+        this.apiPasswordManagerService.setOpenRecord(this.editItem.id).subscribe((data:any) => {
+          console.log('data',data);
+          this.passwordManagerService.setPassword(data.password);
+         
+          this.createPasswordRecord.controls['password'].setValue(data.password);
+          this.showPassword = !this.showPassword;
+          this.showHideService.setShow('password',true);
+          this.isLoadPassword = false;
+        })
+      } else {
         this.showPassword = !this.showPassword;
         this.showHideService.setShow('password',true);
-      })
+      }
+     
     } else {
       this.showPassword = !this.showPassword;
       this.showHideService.setShow('password',false);
