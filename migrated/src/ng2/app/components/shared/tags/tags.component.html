@@ -21,11 +21,7 @@
         [matChipInputAddOnBlur]="addOnBlur"
         (matChipInputTokenEnd)="add($event)">
     </mat-chip-list>
-    <!--<mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-      <mat-option *ngFor="let tag of tags" [value]="tag">
-        {{tag.word}}
-      </mat-option>
-    </mat-autocomplete>-->
+    
   </mat-form-field>
   <div class="dropdown-menu"
        ngbDropdownMenu aria-labelledby="dropdownServices">

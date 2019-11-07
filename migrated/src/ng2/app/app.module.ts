@@ -18,7 +18,7 @@ import { MatSelectModule} from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule, MatIconModule } from "@angular/material";
 import { CronEditorModule } from "cron-editor";
-
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 import { AppComponent } from './app.component';
 import { PasswordManagerComponent } from './components/password-manager/password-manager.component';
@@ -78,6 +78,7 @@ import { ConfirmComponent } from './components/shared/confirm/confirm.component'
 import { DownloadAgentComponent } from './components/companies/download-agent/download-agent.component';
 import { CompanySubscriptionComponent } from './components/companies/company-subscription/company-subscription.component';
 import { CompanyTimeZoneComponent } from './components/companies/company-time-zone/company-time-zone.component';
+import { ImageCropperComponent } from './components/shared/image-cropper/image-cropper.component';
 
 
 /**
@@ -183,6 +184,7 @@ angular.module('quicktech')
     DownloadAgentComponent,
     CompanySubscriptionComponent,
     CompanyTimeZoneComponent,
+    ImageCropperComponent,
     
   ],
   imports: [
@@ -246,7 +248,7 @@ angular.module('quicktech')
         enableTracing: false
       }),
       CronEditorModule,
-      
+      ImageCropperModule
   ],
   entryComponents: [
     LeftPanelComponent,
@@ -257,7 +259,8 @@ angular.module('quicktech')
     PasswordManagerComponent,
     CompaniesComponent,
     ConfirmComponent,
-    DownloadAgentComponent
+    DownloadAgentComponent,
+    ImageCropperComponent
     // RecurringTicketsComponent
   ],
   providers: [

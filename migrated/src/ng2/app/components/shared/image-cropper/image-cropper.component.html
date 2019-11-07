@@ -1,0 +1,32 @@
+
+
+<div class="confirm-modal">
+    <div class="close-btn btn pull-right" (click)="closeModal()" tabindex="1" style="z-index: 1000">
+      <i class="icn-sm icn-remove-old" uib-tooltip="Close"></i>
+    </div>
+    <div class="modal-body">
+     
+        <input type="file" (change)="fileChangeEvent($event)" />
+
+        <image-cropper
+           
+            [maintainAspectRatio]="true"
+            [aspectRatio]="4 / 3"
+            [resizeToWidth]="128"
+            [imageBase64]="imageBase64"
+            format="png"
+            (imageCropped)="imageCropped($event)"
+         
+        ></image-cropper>
+        
+        <img [src]="croppedImage" />
+    </div>
+    <div class="modal-footer">
+      <div class="btn btn-lg btn-primary"
+           data-dismiss='modal' (click)=cancelConfirm()  >
+           Cancel
+      </div>
+      <div class="btn btn-lg btn-primary" (click)=approveConfirm() >Crop</div>
+    </div>
+  </div>
+  

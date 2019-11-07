@@ -5,8 +5,6 @@
         <h3>Add New Company</h3>
         <button class="close-modal" (click)="close()"></button>
       </div>
-
-
       <!--      BASIC-->
       <div class="new-companies-content__modal--content" *ngIf="version === 'short'">
 
@@ -89,6 +87,7 @@
               <div class="new-link">Upload Company logo</div>
               <p>Maximum size of 2MB. JPG, GIF, PNG</p>
             </div>
+            <input type="file" (change)="uploadFile($event)"/>
           </div>
         </div>
 
@@ -237,31 +236,37 @@
                   </ng-template>
                 </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6" ngbDropdown>
           <p>Service Type</p>
           <input type="text" [value]="company.paymentMethods" autocomplete="new-password" placeholder="Select Service Type"
                   id="dropdownPaymentType" ngbDropdownToggle />
                 <div ngbDropdownMenu aria-labelledby="dropdownPaymentType">
-                  <ng-template ngFor let-item [ngForOf]="paymentMethods">
+                  <ng-template ngFor let-item [ngForOf]="serviceTypes">
                     <button ngbDropdownItem [textContent]="item" (click)="company.paymentMethods = item.toUpperCase()"></button>
                   </ng-template>
                 </div>
           
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6" ngbDropdown>
           <p>Sales Person</p>
-          <input type="text"
-                 placeholder="Select Sales Person">
+          
+                 <input type="text" [value]="company.paymentMethods" autocomplete="new-password" placeholder="Select Sales Person"
+                 id="dropdownPersons" ngbDropdownToggle />
+               <div ngbDropdownMenu aria-labelledby="dropdownPersons">
+                 <ng-template ngFor let-item [ngForOf]="listPersons">
+                   <button ngbDropdownItem [textContent]="item.firstName + ' ' + item.lastName" (click)="company.paymentMethods = item.toUpperCase()"></button>
+                 </ng-template>
+               </div>
         </div>
-        <div class="col-md-12">
-          <p>Tags</p>
-          <input type="text"
-                 placeholder="eg. Window update, Monthly maintainace">
-        </div>
+        <app-tags (tagsChange)="onChangeTags($event)"></app-tags>
         <div class="col-md-12 editable-field">
           <p>Note for Company</p>
           <div class="editable-description">
-            <textarea placeholder="Write note for company"></textarea>
+            <textarea appTextArea
+                      [limit]="250"
+                      id="company-description"
+                      placeholder="Write Description"
+                      (input)="onChangeDescription($event)"></textarea>
           </div>
         </div>
 
