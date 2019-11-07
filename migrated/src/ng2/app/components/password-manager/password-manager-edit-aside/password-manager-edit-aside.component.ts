@@ -507,11 +507,12 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       for (var i = 0; i < this.usersCheckbox.length; ++i) { this.usersCheckbox[i] = false; }
       if (this.isEditmode && this.editItem) {
         this.editItem.links.map((item) => {
-          const index = res.findIndex((userListItem) => {
-            return userListItem.id === item.userId
-          });
-          if (index > -1) {
-            this.toggleItem(res[index], 'user', index);
+          const index_res = res.findIndex(userListItem =>userListItem.id === item.userId);
+          const index = this.usersList.findIndex(userListItem =>userListItem.id === item.userId);
+          if (index > -1 && index_res > -1) {
+            this.toggleItem(this.usersList[index], 'user', index);
+          } else  if (index === -1 && index_res > -1) {
+            this.toggleItem(res[index_res], 'user', index);
           }
         });
       }

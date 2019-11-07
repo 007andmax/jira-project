@@ -485,19 +485,21 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
    */
   private getAllUsers(companyId) {
     this.subGetAllUsers = this.userService.getAllusers().subscribe((res: any) => {
-      let data = res.filter((item) =>  item.company.id == companyId && !item.deletedAt);
+     let data = res.filter((item) => item.company.id == companyId && !item.deletedAt);
       this.usersList = [...(data.filter((item) => item.accountType === USER.TYPE.CLIENT))];
+     
       this.usersList.sort((a, b) => (!a.firstName && !a.lastName || !b.firstName && !b.lastName || a.firstName.length === 0 && a.lastName.length === 0 || b.firstName.length === 0 && b.lastName.length === 0) ? -1 : (a.firstName.toLowerCase() > b.firstName.toLowerCase()) ?
       1 : ((b.firstName.toLowerCase() > a.firstName.toLowerCase()) ? -1 : 0));
       this.usersCheckbox = new Array(this.usersList.length);
       for (var i = 0; i < this.usersCheckbox.length; ++i) { this.usersCheckbox[i] = false; }
       if (this.isEditmode && this.editItem) {
         this.editItem.links.map((item) => {
-          const index = res.findIndex((userListItem) => {
-            return userListItem.id === item.userId
-          });
-          if (index > -1) {
-            this.toggleItem( res[index], 'user', index);
+          const index_res = res.findIndex(userListItem =>userListItem.id === item.userId);
+          const index = this.usersList.findIndex(userListItem =>userListItem.id === item.userId);
+          if (index > -1 && index_res > -1) {
+            this.toggleItem(this.usersList[index], 'user', index);
+          } else  if (index === -1 && index_res > -1) {
+            this.toggleItem(res[index_res], 'user', index);
           }
         });
       }
