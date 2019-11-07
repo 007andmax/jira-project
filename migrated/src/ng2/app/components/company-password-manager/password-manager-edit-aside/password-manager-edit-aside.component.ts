@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, ValidationErrors } from '@angular/forms';
 import { Observable, Subject, merge, Subscription } from 'rxjs';
 import { ISubscription } from "rxjs/Subscription";
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
@@ -176,7 +176,7 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
       type: [this.editItem ? this.getEditTemplate(this.editItem.template) : PASSWORD_RECORD_TYPES[0], [Validators.required]],
       ssid: [this.editItem ? this.editItem.ssid : ''],
       userName: [this.editItem ? this.editItem.username : '', [Validators.required, Validators.maxLength(100)]],
-      password: [this.editItem ? this.editItem.password : '', [Validators.required, Validators.maxLength(100)]],
+      password: (this.editItem) ? [this.editItem.password] : ['', [Validators.required, Validators.maxLength(100)]],
       key: [this.editItem ? this.editItem.key : '', [Validators.maxLength(100)]],
       link: [''],
       url: [this.editItem ? this.editItem.url : '', [Validators.maxLength(255)]],
@@ -197,6 +197,13 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
    */
   public save() {
     this.submitted = true;
+    if (this.editItem && (!this.createPasswordRecord.value.password || this.createPasswordRecord.value.password.length === 0)  && this.passwordManagerService.getPassword() !== null)
+    {
+      const errors:ValidationErrors = {required: 'Field is required'};
+      this.createPasswordRecord.controls['password'].setErrors(errors);
+      this.cd.detectChanges();
+      return;
+    }
     const isUserRequired = this.checkLinks();
     const isSsidRequired = this.checkSsid();
     if (this.type === 8) this.createPasswordRecord.controls['userName'].setValue('block');
