@@ -28,6 +28,9 @@ export class ServiceComponent implements OnInit {
     this.getSpecialService();
   }
 
+  /**
+   * get current company
+   */
   getCurrentCompany(): any {
     this.commissionService
       .getCurrentCompany()
@@ -37,6 +40,9 @@ export class ServiceComponent implements OnInit {
       });
   }
 
+  /**
+   * get services
+   */
   getServices() {
     this.loading = true;
     this.commissionService.getDefaultServices().subscribe(
@@ -62,6 +68,9 @@ export class ServiceComponent implements OnInit {
     );
   }
 
+  /**
+   * special services
+   */
   getSpecialService() {
     this.loading = true;
     this.commissionService.getSpecialServices().subscribe(
@@ -94,6 +103,13 @@ export class ServiceComponent implements OnInit {
     this.selectedSpecIdx = i;
   }
 
+  /**
+   * set service rate based on params
+   * @param rate
+   * @param id
+   * @param service
+   * @param isSpecialService
+   */
   setServiceRate(rate, id: string, service: any, isSpecialService: boolean) {
     if (rate || rate === 0) {
       var data = {
@@ -104,78 +120,39 @@ export class ServiceComponent implements OnInit {
       if (service.commissionRate === null) {
         if (confirm('Do you want this commission to fact old items?')) {
           data.setForOldExpenses = true;
-          this.loading = true;
-          this.commissionService
-            .setServiceRate(id, data.rate, data.setForOldExpenses)
-            .subscribe(
-              (res: any) => {
-                this.loading = false;
-                this.toastrService.success('Rate changed successfully.');
-                service.commissionRate =
-                  res && res.commissionRate
-                    ? res.commissionRate.toFixed(2)
-                    : res.commissionRate;
-                isSpecialService
-                  ? (this.selectedSpecIdx = -1)
-                  : (this.selectedIdx = -1);
-
-              },
-              error => {
-                this.toastrService.error(`Error occurred, ${error}`);
-                this.loading = false;
-              }
-            );
-        } else {
-          this.loading = true;
-          this.commissionService
-            .setServiceRate(id, data.rate, data.setForOldExpenses)
-            .subscribe(
-              (res: any) => {
-                this.loading = false;
-                this.toastrService.success('Rate changed successfully.');
-                service.commissionRate =
-                  res && res.commissionRate
-                    ? res.commissionRate.toFixed(2)
-                    : res.commissionRate;
-                isSpecialService
-                  ? (this.selectedSpecIdx = -1)
-                  : (this.selectedIdx = -1);
-
-              },
-              error => {
-                this.toastrService.error(`Error occurred, ${error}`);
-                this.loading = false;
-              }
-            );
         }
-      } else {
-        this.loading = true;
-        this.commissionService
-          .setServiceRate(id, data.rate, data.setForOldExpenses)
-          .subscribe(
-            (res: any) => {
-              this.loading = false;
-              this.toastrService.success('Rate changed successfully.');
-              service.commissionRate =
-                res && res.commissionRate
-                  ? res.commissionRate.toFixed(2)
-                  : res.commissionRate;
-              isSpecialService
-                ? (this.selectedSpecIdx = -1)
-                : (this.selectedIdx = -1);
-
-            },
-            error => {
-              this.toastrService.error(`Error occurred, ${error}`);
-              this.loading = false;
-            }
-          );
       }
+      this.loading = true;
+      this.commissionService
+        .setServiceRate(id, data.rate, data.setForOldExpenses)
+        .subscribe(
+          (res: any) => {
+            this.loading = false;
+            this.toastrService.success('Rate changed successfully.');
+            service.commissionRate =
+              res && res.commissionRate
+                ? res.commissionRate.toFixed(2)
+                : res.commissionRate;
+            isSpecialService
+              ? (this.selectedSpecIdx = -1)
+              : (this.selectedIdx = -1);
+          },
+          error => {
+            this.toastrService.error(`Error occurred, ${error}`);
+            this.loading = false;
+          }
+        );
     } else {
       this.selectedIdx = -1;
     }
   }
 
+  /**
+   * set service rate based on params
+   * @param i 
+   * @param service 
+   * @param isSpecialService 
+   */
   removeServiceRate(i, service: any, isSpecialService: boolean) {
     if (service && service.commissionRate) {
       if (confirm(`Do you want ${service.name} commission rate to zero?`)) {
@@ -190,7 +167,6 @@ export class ServiceComponent implements OnInit {
             isSpecialService
               ? (this.selectedSpecIdx = -1)
               : (this.selectedIdx = -1);
-           
           },
           error => {
             this.toastrService.error(`Error occurred, ${error}`);

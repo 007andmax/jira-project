@@ -27,12 +27,21 @@ export class CommissionService {
 
   constructor(private http: HttpClient) {}
 
+  /**
+   * get categories api
+   */
   getCategories(): Observable<ICategory[]> {
     return this.http
       .get<ICategory[]>(this.CATEGORIES_API)
       .pipe(map(data => data));
   }
 
+  /**
+   * set category rate based on params
+   * @param id
+   * @param commissionRate 
+   * @param setForOldExpenses 
+   */
   setCategoryRate(
     id: string,
     commissionRate: string,
@@ -46,6 +55,11 @@ export class CommissionService {
     );
   }
 
+  /**
+   * set agreement rate based on params
+   * @param data 
+   * @param setForOldExpenses 
+   */
   setAgreementRates(data: any, setForOldExpenses: boolean) {
     return this.http
       .post(
@@ -74,16 +88,25 @@ export class CommissionService {
       );
   }
 
+  /**
+   * get defaultservice
+   */
   getDefaultServices(): Observable<any> {
     return this.http.get(this.DEFAULT_SERVICES_API).pipe(map(data => data));
   }
 
+  /**
+   * special services
+   */
   getSpecialServices(): Observable<any> {
     return this.http
       .get(this.SPECIAL_SERVICES_API)
       .pipe(map((data: any[]) => data));
   }
 
+  /**
+   * agreement commisssions
+   */
   agreementRates(): Observable<any> {
     return this.http.get(this.AGREEMENTRATES_API).pipe(
       map(data => {
@@ -107,6 +130,12 @@ export class CommissionService {
     );
   }
 
+  /**
+   * set service rate based on params
+   * @param id 
+   * @param commissionRate 
+   * @param setForOldExpenses 
+   */
   setServiceRate(
     id: string,
     commissionRate: string,
@@ -120,24 +149,39 @@ export class CommissionService {
     );
   }
 
+  /**
+   * get current company
+   */
   getCurrentCompany() {
     return this.http.get(`${this.CURRENT_COMAPNY_API}`);
   }
 
+  /**
+   * get client companies info
+   */
   getClientCompaniesInfo() {
     return this.http.get(`${this.SET_CLIENT_COMPANIES_INFO_API}`);
   }
 
-  // get client company
+  /**
+   * get companies list
+   */
   getCompanies() {
     return this.http.get(`${this.GET_COMPANY_API}`);
   }
 
-  // get client company
+  /**
+   * get client company
+   */
   getUsers() {
     return this.http.get(`${this.GET_USER_API}`);
   }
 
+  /**
+   * set Tech lead
+   * @param cmpId
+   * @param techLeadId 
+   */
   setTechLead(cmpId, techLeadId) {
     if (!cmpId || !techLeadId) {
       return;
@@ -149,6 +193,9 @@ export class CommissionService {
   }
 }
 
+/**
+ * inteface ICategory
+ */
 export interface ICategory {
   commissionRate: number;
   default: boolean;
