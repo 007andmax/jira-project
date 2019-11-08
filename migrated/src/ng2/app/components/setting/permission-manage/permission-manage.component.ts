@@ -55,6 +55,9 @@ export class PermissionManageComponent implements OnInit {
     this.sections = this.permissionManageService.getsections();
   }
 
+  /**
+   * init
+   */
   ngOnInit() {
     this.allUsers = [];
     this.getPermissionManage();
@@ -63,6 +66,9 @@ export class PermissionManageComponent implements OnInit {
     this.getAllUsers();
   }
 
+  /**
+   * get all users
+   */
   getAllUsers() {
     this.usersService
       .getAllusers()
@@ -74,6 +80,9 @@ export class PermissionManageComponent implements OnInit {
       .subscribe();
   }
 
+  /**
+   * current comapny
+   */
   currentCompany() {
     this.settingService
       .currentCompany()
@@ -85,6 +94,9 @@ export class PermissionManageComponent implements OnInit {
       .subscribe();
   }
 
+  /**
+   * permission manage
+   */
   getPermissionManage() {
     this.loading = true;
     this.permissionManageService
@@ -102,6 +114,9 @@ export class PermissionManageComponent implements OnInit {
       .subscribe();
   }
 
+  /**
+   * get role names
+   */
   getRoleNames() {
     this.permissionManageService
       .getRoleNames()
@@ -118,6 +133,9 @@ export class PermissionManageComponent implements OnInit {
     this.selectedRole = role;
   }
 
+  /**
+   * add new role
+   */
   addNewRole() {
     this.isNewRoleCreating = true;
 
@@ -159,6 +177,9 @@ export class PermissionManageComponent implements OnInit {
       .subscribe();
   }
 
+  /**
+   * changed role name
+   */
   changeRoleName() {
     this.loading = true;
     this.permissionManageService
@@ -179,6 +200,11 @@ export class PermissionManageComponent implements OnInit {
       .subscribe();
   }
 
+  /**
+   * edit role name based on params
+   * @param role 
+   * @param index 
+   */
   editRoleName(role: any, index: number) {
     this.selectedRoleIndex = index;
     this.selectedRole = role;
@@ -199,6 +225,11 @@ export class PermissionManageComponent implements OnInit {
     };
   }
 
+  /**
+   * delete role based on params
+   * @param id 
+   * @param isModal 
+   */
   deleteRole(id, isModal) {
     if (!id) {
       return;
@@ -263,6 +294,10 @@ export class PermissionManageComponent implements OnInit {
     );
   }
 
+  /**
+   * all roles 
+   * @param id 
+   */
   allRolesAreChanged(id: string) {
     const roles = this.roles;
 
@@ -283,6 +318,10 @@ export class PermissionManageComponent implements OnInit {
     return false;
   }
 
+  /**
+   * 
+   * @param str 
+   */
   userReadable(str: string) {
     return str
       .split("_")
@@ -292,6 +331,11 @@ export class PermissionManageComponent implements OnInit {
       .join(" ");
   }
 
+  /**
+   * 
+   * @param role 
+   * @param permission 
+   */
   togglePermission(role, permission) {
     this.addOrRemovePermission(role.permissions, permission);
 
@@ -309,6 +353,11 @@ export class PermissionManageComponent implements OnInit {
     }, 500);
   }
 
+  /**
+   * add or remove permission
+   * @param permissions 
+   * @param permission 
+   */
   addOrRemovePermission(permissions, permission) {
     const index = permissions.indexOf(permission);
     let relatedPermissions: any;
@@ -355,6 +404,11 @@ export class PermissionManageComponent implements OnInit {
     }
   }
 
+  /**
+   * is permission disbaled
+   * @param permission 
+   * @param role 
+   */
   isPermissionDisabled(permission, role) {
     if (
       role.permissions.indexOf("VIEW_COMPANIES") === -1 &&
@@ -391,6 +445,11 @@ export class PermissionManageComponent implements OnInit {
     }
   }
 
+  /**
+   * changed user role
+   * @param user 
+   * @param event 
+   */
   changeUsersRole(user, event) {
     user.techRole = event.target.value;
     this.loading = true;

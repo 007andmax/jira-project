@@ -71,7 +71,9 @@ export class AccountComponent implements OnInit {
       .subscribe();
   }
 
-  //
+  /**
+   * logout sessions
+   */
   logOutSessions() {
     if (confirm("Are you sure to log out other sessions ")) {
       this.settingService
@@ -105,6 +107,9 @@ export class AccountComponent implements OnInit {
     }
   }
 
+  /**
+   * saved form
+   */
   onSubmit() {
     this.submitted = true;
 

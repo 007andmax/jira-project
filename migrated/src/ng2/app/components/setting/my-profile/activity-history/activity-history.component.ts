@@ -18,10 +18,16 @@ export class ActivityHistoryComponent implements OnInit {
     private toastr: ToastrService
   ) {}
 
+  /**
+   * init
+   */
   ngOnInit() {
     this.getActivityHistory();
   }
 
+  /**
+   * get activity history
+   */
   getActivityHistory() {
     this.settingService
       .getActivityHistory()
@@ -42,6 +48,10 @@ export class ActivityHistoryComponent implements OnInit {
     this.selectedDevice = device;
   }
 
+  /**
+   * close sessing based on device
+   * @param device 
+   */
   closeSession(device: any) {
     const idsForDelete = [];
     if (device) {

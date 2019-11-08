@@ -53,6 +53,9 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     }
   }
 
+  /**
+   * init
+   */
   ngOnInit() {
     this.techUsers = [];
 
@@ -244,6 +247,10 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     }
   }
 
+  /**
+   * removed tech user
+   * @param techUser 
+   */
   removeTechUser(techUser: any) {
     const id = techUser.id;
     if (techUser) {
@@ -385,30 +392,6 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
             // this.getUsers();
 
             this.toastr.success('Image cropped successfully');
-            // const profileUser = {
-            //   basic: {
-            //     avatar: avatar,
-            //     firstName: this.techUserForm.value.firstName,
-            //     lastName: this.techUserForm.value.lastName,
-            //     primaryEmail: this.techUserForm.value.primaryEmail,
-            //     designation: this.techUserForm.value.techRole,
-            //     secondaryEmail: null,
-            //     signature: {}
-            //   }
-            // };
-            // // // this.selectedTechUser.avatar = avatar;
-
-            // // this.settingService.updateProfile(profileUser).subscribe(
-            // //   res => {
-            // //     if (res) {
-            // //       // this.getCompanyProfile();
-            // //       // this.getCurrentCompany();
-            // //     }
-            // //   },
-            // //   error => {
-            // //     this.loading = false;
-            // //   }
-            // // );
           }
         },
         error => {
@@ -417,6 +400,10 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       );
   }
 
+  /**
+   * checked email uqunie or not
+   * @param email 
+   */
   isEmailUnique(email: string) {
     if (!this.techUserForm.value.primaryEmail) {
       this.isEmailIdUnique = true;
@@ -490,6 +477,9 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     }
   }
 
+  /**
+   * delete avatar
+   */
   deleteAvatar() {
     let id = '';
     if (!this.selectedTechUser || !this.selectedTechUser.avatar) {
@@ -541,6 +531,9 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     this.isCroppedImg = false;
   }
 
+  /**
+   * open image and reposition it
+   */
   rePositionAvatar() {
     if (this.selectedTechUser && this.selectedTechUser.avatar) {
       let imageUrl = `/file/${this.selectedTechUser.avatar.origin.id}.jpg`;
@@ -561,6 +554,10 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     }
   }
 
+  /**
+   * get based64 image from url
+   * @param url 
+   */
   getBase64ImageFromURL(url: string) {
     return Observable.create((observer: Observer<string>) => {
       // create an image object
@@ -583,6 +580,10 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     });
   }
 
+  /**
+   * get based64 image
+   * @param img 
+   */
   getBase64Image(img: HTMLImageElement) {
     // We create a HTML canvas object that will create a 2d image
     const canvas = document.createElement('canvas');

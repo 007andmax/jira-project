@@ -102,26 +102,44 @@ export class PermissionManageService {
   //     .subscribe();
   // }
 
+  /**
+   * permission on companies
+   */
   getCompaniesRelatedPermissions() {
     return this.companiesRelatedPermissions.slice();
   }
 
+  /**
+   * permission on users
+   */
   getUserRelatedPermissions() {
     return this.userRelatedPermissions.slice();
   }
 
+  /**
+   * permission on accouting
+   */
   getAccountingRelatedPermissions() {
     return this.accountingRelatedPermissions.slice();
   }
 
+  /**
+   * permission on products
+   */
   getProductsRelatedPermissions() {
     return this.productsRelatedPermissions.slice();
   }
 
+  /**
+   * permission on passwords
+   */
   getPasswordsRelatedPermissions() {
     return this.passwordsRelatedPermissions.slice();
   }
 
+  /**
+   * permission on view passwords
+   */
   getViewPasswordsRelatedPermissions() {
     return this.viewPasswordsRelatedPermissions.slice();
   }
@@ -130,13 +148,17 @@ export class PermissionManageService {
     return this.sections;
   }
 
+  /**
+   * get permissions
+   */
   getPermissions() {
-    // return this.http
-    //   .get<any>(`${this.apiUrl}settings/companyProfile/permissions1`)
-    //   .pipe(catchError(this.handleError<string>(`getPermissions`)));
     return this.http.get(`${this.apiUrl}settings/companyProfile/permissions`);
   }
 
+  /**
+   * saved role
+   * @param role 
+   */
   permissions(role) {
     return this.http.post(
       `${this.apiUrl}settings/companyProfile/permissions`,
@@ -144,10 +166,17 @@ export class PermissionManageService {
     );
   }
 
+  /**
+   * get role names
+   */
   getRoleNames() {
     return this.http.get(`${this.apiUrl}settings/companyProfile/getRoleNames`);
   }
 
+  /**
+   * created tech role
+   * @param newRole 
+   */
   createTechRole(newRole: any) {
     return this.http.post(
       `${this.apiUrl}settings/companyProfile/createTechRole`,
@@ -155,24 +184,34 @@ export class PermissionManageService {
     );
   }
 
+  /**
+   * delete tech role based on params
+   * @param roleId 
+   */
   deleteTechRole(roleId: string) {
     return this.http.delete(
       `${this.apiUrl}settings/companyProfile/deleteTechRole/${roleId}`
     );
   }
 
+  /**
+   * updated tech role based on params
+   * @param roleId 
+   * @param newTechRoleName 
+   */
   updateTechRole(roleId: string, newTechRoleName: string) {
-    // https://dev.quicktech.com/settings/companyProfile/updateTechRoleName/5d6d68c0-80cf-4bdf-87c3-9c88645ce0ad
-    // {"newTechRoleName":"New1 role #3"}
     return this.http.put(
       `${this.apiUrl}settings/companyProfile/updateTechRoleName/${roleId}`,
       { newTechRoleName }
     );
   }
 
+  /**
+   * saved 
+   * @param user 
+   */
   save(user) {
-    //dev.quicktech.com/users/d3937811-0f88-4d0c-a0d2-dc1494affb7d
-    https: return this.http.put(`${this.apiUrl}users/${user.id}`,  user );
+    return this.http.put(`${this.apiUrl}users/${user.id}`,  user );
   }
 
   // private log(message: string) {

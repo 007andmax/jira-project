@@ -25,6 +25,9 @@ export class TaxesComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {}
 
+  /**
+   * init
+   */
   ngOnInit() {
     this.taxes = [];
     this.taxForm = this.formBuilder.group({
@@ -48,6 +51,9 @@ export class TaxesComponent implements OnInit {
     return this.taxForm.controls;
   }
 
+  /**
+   * get taxes
+   */
   getTaxes() {
     this.loading = true;
     this.taxesService
@@ -63,6 +69,10 @@ export class TaxesComponent implements OnInit {
       .subscribe();
   }
 
+  /**
+   * checked unique name based on name
+   * @param name 
+   */
   isUniqueName(name) {
     if (!this.taxForm.controls["name"].errors) {
       this.taxesService
@@ -82,6 +92,10 @@ export class TaxesComponent implements OnInit {
 
   defaultTax(tax: any) {}
 
+  /**
+   * remove tax
+   * @param tax 
+   */
   removeTax(tax: any) {
     if (confirm(`Are you sure you want to delete ${tax.name} ?`)) {
       this.loading = true;
@@ -98,6 +112,12 @@ export class TaxesComponent implements OnInit {
     }
   }
 
+  /**
+   * open model
+   * @param isCreated 
+   * @param index 
+   * @param tax 
+   */
   openModel(isCreated: boolean, index: number, tax: any) {
     this.unique = true;
     this.taxForm.reset();
@@ -117,6 +137,9 @@ export class TaxesComponent implements OnInit {
     }
   }
 
+  /**
+   * saved form
+   */
   onSubmit() {
     this.submitted = true;
 

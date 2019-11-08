@@ -180,6 +180,11 @@ export class ProfileComponent implements OnInit {
       );
   }
 
+  /**
+   * select file
+   * @param template 
+   * @param event 
+   */
   onSelectFile(template: TemplateRef<any>, event) {
     this.imageChangedEvent = event;
     this.isCroppedImg = true;
@@ -201,11 +206,18 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  /**
+   * image cropped
+   * @param event 
+   */
   imageCropped(event: ImageCroppedEvent) {
     console.log(event);
     this.croppedImage = event;
   }
 
+  /**
+   * cropped it
+   */
   cropIt() {
     this.isCroppedImg = false;
     // let cropImage = { id: '', origin: null, cropped: null, x: '', y: '', w: '', h: '', base64: '', updatedAt: '' };
@@ -270,6 +282,9 @@ export class ProfileComponent implements OnInit {
       .subscribe();
   }
 
+  /**
+   * add secondary phone
+   */
   onAddPhone() {
     this.isAddPhone = !this.isAddPhone;
     if (this.isAddPhone) {
@@ -285,6 +300,9 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  /**
+   * re position avatar
+   */
   rePositionAvatar() {
     if (this.imageAvatar && this.imageAvatar.origin.base64 === undefined) {
       let imageUrl = `/file/${this.imageAvatar.origin.id}.jpg`;
@@ -299,6 +317,9 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  /**
+   * delete avatar
+   */
   deleteAvatar() {
     this.settingService
       .deleteAvatar(this.currentUser.id)
@@ -333,6 +354,10 @@ export class ProfileComponent implements OnInit {
       .subscribe();
   }
 
+  /**
+   * get base64 image from url
+   * @param url 
+   */
   getBase64ImageFromURL(url: string) {
     return Observable.create((observer: Observer<string>) => {
       // create an image object
@@ -355,6 +380,10 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  /**
+   * get base64 image
+   * @param img 
+   */
   getBase64Image(img: HTMLImageElement) {
     // We create a HTML canvas object that will create a 2d image
     var canvas = document.createElement("canvas");

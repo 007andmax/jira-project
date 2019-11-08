@@ -22,8 +22,13 @@ export class TicketSettingsComponent implements OnInit {
     private userService: UsersService
   ) {}
 
+  /**
+   * init
+   */
   ngOnInit() {
+    // get current user
     this.currentUser = this.userService.currentUser;
+
     this.ticketForm = this.formBuilder.group({
       ticketCount: [
         '',
@@ -64,6 +69,9 @@ export class TicketSettingsComponent implements OnInit {
     return this.ticketForm.controls;
   }
 
+  /**
+   * current comapny
+   */
   getCurrentCompany() {
     this.invoiceTicketsService.currentCompany().subscribe(
       (res: any) => {
@@ -83,6 +91,9 @@ export class TicketSettingsComponent implements OnInit {
     );
   }
 
+  /**
+   * get actual number
+   */
   getActualNumber() {
     this.loading = true;
     this.invoiceTicketsService.actualNumber('TICKET').subscribe(
@@ -98,6 +109,9 @@ export class TicketSettingsComponent implements OnInit {
     );
   }
 
+  /**
+   * get tax number
+   */
   getTaxNumber() {
     this.loading = true;
     this.invoiceTicketsService.getTaxNumber().subscribe(
@@ -116,6 +130,9 @@ export class TicketSettingsComponent implements OnInit {
     );
   }
 
+  /**
+   * get terms and conditions
+   */
   getTermsAndConditions() {
     this.loading = true;
     this.invoiceTicketsService.termsAndConditions().subscribe(
@@ -131,6 +148,9 @@ export class TicketSettingsComponent implements OnInit {
     );
   }
 
+  /**
+   * saved 
+   */
   onSubmit() {
     this.submitted = true;
     // stop here if form is invalid

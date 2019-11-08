@@ -33,6 +33,9 @@ export class ManageTagsComponent implements OnInit {
     private toaster: ToastrService
   ) {}
 
+  /**
+   * init
+   */
   ngOnInit() {
     this.compnayForm = this.formBuilder.group({
       word: ["", Validators.required],
@@ -41,9 +44,13 @@ export class ManageTagsComponent implements OnInit {
 
     this.serviceAllTickets = this.tagsService.getAllTickets();
     this.serviceAllCompany = this.tagsService.getAllCompany();
+
     this.getAllTags();
   }
 
+  /**
+   * load all services
+   */
   getAllTags() {
     this.loading = true;
     forkJoin([this.serviceAllTickets, this.serviceAllCompany])
@@ -62,6 +69,9 @@ export class ManageTagsComponent implements OnInit {
       );
   }
 
+  /**
+   * get all companies
+   */
   getAllCompany() {
     this.serviceAllCompany.subscribe(
       res => {
@@ -75,6 +85,9 @@ export class ManageTagsComponent implements OnInit {
     );
   }
 
+  /**
+   * get all tickets
+   */
   getAllTickets() {
     this.serviceAllTickets.subscribe(
       res => {
@@ -113,6 +126,10 @@ export class ManageTagsComponent implements OnInit {
     }
   }
 
+  /**
+   * removed company tag based on tagId
+   * @param tagId 
+   */
   removeCompanyTag(tagId: string) {
     this.loading = true;
     this.tagsService.removeCompanyTag(tagId, this.setActiveTab).subscribe(
@@ -130,6 +147,9 @@ export class ManageTagsComponent implements OnInit {
     );
   }
 
+  /**
+   * saved
+   */
   onSubmit() {
     this.submitted = true;
 

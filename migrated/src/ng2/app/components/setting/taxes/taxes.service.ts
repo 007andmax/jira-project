@@ -10,35 +10,42 @@ export class TaxesService {
 
   constructor(private http: HttpClient) {}
 
+  /**
+   * checked unique name
+   * @param name 
+   */
   isUniqueName(name: string) {
     return this.http.get(`${this.apiUrl}taxes/isUniqueName?name=${name}`);
   }
 
+  /**
+   * saved taxes
+   * @param tax 
+   */
   saveTaxes(tax: any) {
-    // {"name":"test","rate":1,"isDefault":false}
     return this.http.post(`${this.apiUrl}taxes`, tax);
   }
 
+  /**
+   * edit taxes
+   * @param tax 
+   */
   editTaxes(tax: any) {
-    // {"id":"cbf9630a-e7a8-49e7-9129-680e729960d7","name":"test","rate":1,"isDefault":true,"companyId":null,"productExpenseId":null,"serviceExpenseId":null}
-    return this.http.put(`${this.apiUrl}taxes`, tax);
+   return this.http.put(`${this.apiUrl}taxes`, tax);
   }
 
+  /**
+   * delete 
+   * @param id 
+   */
   delete(id: string) {
-    // https://dev.quicktech.com/taxes/cbf9630a-e7a8-49e7-9129-680e729960d7
     return this.http.delete(`${this.apiUrl}taxes/${id}`);
   }
 
+  /**
+   * get taxes
+   */
   getTaxes(){
-    // https://dev.quicktech.com/taxes
     return this.http.get(`${this.apiUrl}taxes`);
-    // Response
-    // companyId: null
-    // id: "e1d02cbd-f1d6-4dd5-b158-30acc9a03889"
-    // isDefault: true
-    // name: "GST"
-    // productExpenseId: null
-    // rate: 5
-    // serviceExpenseId: null
   }
 }

@@ -16,6 +16,9 @@ export class EmailNotificationsComponent implements OnInit {
     private toastr: ToastrService
   ) {}
 
+  /**
+   * init
+   */
   ngOnInit() {
     this.settingService
       .emailNotifications()
@@ -27,6 +30,10 @@ export class EmailNotificationsComponent implements OnInit {
       .subscribe();
   }
 
+  /**
+   * saved form
+   * @param emailForm 
+   */
   onSubmit(emailForm) {
     var emailObjToSend = {
       newDevice: emailForm.value.newDevice,
