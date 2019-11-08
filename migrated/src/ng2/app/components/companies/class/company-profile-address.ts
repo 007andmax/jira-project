@@ -7,6 +7,8 @@ export class CompanyProfileAddress {
     postalCode: string;
     suiteNumber: string;
     phoneNumbers: any;
+    locale: string;
+    timeZone: any;
     constructor() {
 
     }
@@ -20,6 +22,11 @@ export class CompanyProfileAddress {
         }];
         this.postalCode = '';
         this.suiteNumber = '';
+        this.locale = '';
+        this.timeZone = {
+            name: '',
+            timeOffset: ''
+        }
     }
     public shortVersion(contact: CompanyProfileContact) {
         this.isPrimary = true;

@@ -36,6 +36,7 @@ export class CompaniesService {
       this.clientsCompany.next(response);
     })*/
   }
+   
 
 
   public  archiveCompany (id) {
@@ -67,7 +68,8 @@ export class CompaniesService {
     return this.http.get(this.apiUrl + '/company/getIndustries');
   }
 
-
-  
+public uploadAvatar (file) {
+  return this.http.post(this.apiUrl + 'file?isAvatar=true&ratio=1',{file:file});
+}
 
 }

@@ -1,8 +1,8 @@
 export class TimeZoneOffset {
     offset: number;
-    cities: Array<String>;
-    constructor(offset, cities) {
+    city: string;
+    constructor(offset, city) {
         this.offset = offset;
-        this.cities = cities;
+        this.city = city;
     }
 }

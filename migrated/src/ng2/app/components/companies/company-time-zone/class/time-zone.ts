@@ -6,8 +6,10 @@ export class TimeZone {
     constructor(zone, offsets) {
         this.zone = zone;
         for (var prop in offsets) {
-             
-            this.offsets.push(new TimeZoneOffset(prop, offsets[prop]));
+            offsets[prop].forEach(element => {
+                this.offsets.push(new TimeZoneOffset(prop, element));
+            });
+           
         }
     }
 }

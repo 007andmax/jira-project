@@ -540,7 +540,7 @@
           return '/company/' + (company.id || 'default') + '/cover.jpg?t=' + (company.cover ? company.cover.updatedAt :
             '');
         };
-
+        
         $rootScope.getCompanyLogoUrl = function (company) {
           if (company && company.logo && company.logo && company.logo.base64 && !company.logo.cropped) {
             return company.logo.base64;

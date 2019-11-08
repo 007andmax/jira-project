@@ -1,4 +1,4 @@
-<div class="product-dropdown-new-ng light-dropdown" ngbDropdown [autoClose]="'outside'" #products="ngbDropdown">
+<div class="product-dropdown-new-ng light-dropdown" ngbDropdown [autoClose]="'outside'" #zones_dropDown="ngbDropdown">
   <input class="pointer" type="text" [ngClass]="{'no-valid': isFormValid}" placeholder="Select Time Zone"
     id="dropdownTimeZone" ngbDropdownToggle>
   <i class="icn-sm report-caret-icon"></i>
@@ -11,14 +11,12 @@
             <span class="icn-sm report-caret-icon"></span>
           </button>
         </ng-template>
-        <ng-template ngbPanelContent>
-          <ng-template ngFor let-offset [ngForOf]="item.offsets">
-            <div class="category-product" *ngFor="let city of offset.cities"  >
-              <div class="clearfix">
-                <div class="title col-md-12" [textContent]="offset.offset + ' ' + city"  ></div>
+        <ng-template ngbPanelContent  >
+            <div class="category-product" *ngFor="let offset of item.offsets" (click)="setOffset(offset)">
+              <div class="clearfix" >
+                <div class="title col-md-12" [textContent]="offset.offset + ' ' + offset.city"  ></div>
               </div>
             </div>
-          </ng-template>
         </ng-template>
       </ngb-panel>
     </ngb-accordion>
