@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { InvoiceTicketsService } from '../invoice-tickets.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-quotes-settings',
@@ -14,7 +15,8 @@ export class QuotesSettingsComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private invoiceTicketsService: InvoiceTicketsService
+    private invoiceTicketsService: InvoiceTicketsService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
@@ -72,9 +74,15 @@ export class QuotesSettingsComponent implements OnInit {
         type: 'SALE_QUOTE'
       }
     };
-
+    this.loading = true;
     this.invoiceTicketsService
       .updateQuotesSettings(objQuotes)
-      .subscribe(res => {}, error => {});
+      .subscribe(res => {
+        this.loading = false;
+        this.toastr.success('Saved successfully');
+      }, error => {
+        this.loading = false;
+        this.toastr.error(`Error occured ${error}`);
+      });
   }
 }

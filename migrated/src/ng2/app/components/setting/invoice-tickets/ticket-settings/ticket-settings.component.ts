@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { InvoiceTicketsService } from '../invoice-tickets.service';
 import { UsersService } from 'src/ng2/app/services/users/users.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-ticket-settings',
@@ -19,7 +20,8 @@ export class TicketSettingsComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private invoiceTicketsService: InvoiceTicketsService,
-    private userService: UsersService
+    private userService: UsersService,
+    private toastr: ToastrService
   ) {}
 
   /**
@@ -80,8 +82,7 @@ export class TicketSettingsComponent implements OnInit {
             outliersTime: res.outliersSeconds
               ? res.outliersSeconds / 3600
               : null,
-            timepickerType: res
-              .serviceExpenseDurationPresentation
+            timepickerType: res.serviceExpenseDurationPresentation
               ? res.serviceExpenseDurationPresentation
               : 'DURATION_PICKER'
           });
@@ -149,7 +150,7 @@ export class TicketSettingsComponent implements OnInit {
   }
 
   /**
-   * saved 
+   * saved
    */
   onSubmit() {
     this.submitted = true;
@@ -184,6 +185,7 @@ export class TicketSettingsComponent implements OnInit {
     this.invoiceTicketsService.updateTicketsetting(objTicket).subscribe(
       (res: any) => {
         this.loading = false;
+        this.toastr.success('Saved successfully');
         if (res && res.code === 409) {
           this.nextValid = res.message;
           this.ticketForm.patchValue({
@@ -193,6 +195,7 @@ export class TicketSettingsComponent implements OnInit {
       },
       error => {
         this.loading = false;
+        this.toastr.error(`Error occured ${error}`);
       }
     );
   }

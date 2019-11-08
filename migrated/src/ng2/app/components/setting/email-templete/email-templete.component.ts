@@ -4,6 +4,7 @@ import { EmailTempleteService } from './email-templete.service';
 import { map, catchError } from 'rxjs/operators';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { of } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-email-templete',
@@ -38,7 +39,8 @@ export class EmailTempleteComponent implements OnInit {
   constructor(
     private modalService: BsModalService,
     private emailService: EmailTempleteService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private toastr: ToastrService
   ) {
     this.ticketTemplates = this.emailService.getTicketTemplates();
     this.agentTemplates = this.emailService.getAgentTemplates();
@@ -89,7 +91,7 @@ export class EmailTempleteComponent implements OnInit {
   /**
    * get templates
    * @param templete
-   * @param index 
+   * @param index
    */
   getTemplate(templete, index) {
     if (!templete) {
@@ -141,7 +143,7 @@ export class EmailTempleteComponent implements OnInit {
 
   /**
    * inset caret based on text
-   * @param text 
+   * @param text
    */
   insertAtCaret(text) {
     var el = document.activeElement;
@@ -151,8 +153,8 @@ export class EmailTempleteComponent implements OnInit {
 
   /**
    * insert data varables based on params
-   * @param myField 
-   * @param myValue 
+   * @param myField
+   * @param myValue
    */
   insertDataVarables(myField, myValue) {
     if (myField.selectionStart || myField.selectionStart == '0') {
@@ -219,30 +221,37 @@ export class EmailTempleteComponent implements OnInit {
       // return matches && matches.length ? { invalid_characters: matches } : null;
     }
 
-    this.loading = true;
     this.templeteForm.patchValue({
       body: this.body.nativeElement.value,
       subject: this.subject.nativeElement.value
     });
 
+    this.loading = true;
     this.emailService
       .saveEmailTemplate(this.templeteForm.value, this.openEmailTemplate)
       .pipe(
         map(res => {
-          this.loading = false;
           this.submitted = false;
           this.edit = false;
           this.templeteForm.reset();
         })
       )
-      .subscribe(() => {
-        this.getEmailPages();
-      });
+      .subscribe(
+        () => {
+          this.loading = false;
+          this.toastr.success('Saved successfully');
+          this.getEmailPages();
+        },
+        error => {
+          this.loading = false;
+          this.toastr.error(`Error occured  ${error}`);
+        }
+      );
   }
 
   /**
    * retore default templated
-   * @param templeteKey 
+   * @param templeteKey
    */
   restoreDefault(templeteKey) {
     if (!templeteKey) {
@@ -264,7 +273,10 @@ export class EmailTempleteComponent implements OnInit {
         })
       )
       .subscribe(() => {
+        this.toastr.success('Restored successfully');
         this.getEmailPages();
+      },error =>{
+        this.toastr.error(`Error occured ${error}`);
       });
   }
 
