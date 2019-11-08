@@ -23,12 +23,18 @@ export class IncomingEmailComponent implements OnInit {
     private toastr: ToastrService
   ) {}
 
+  /**
+   * ng onInit
+   */
   ngOnInit() {
     this.currentCompany();
     this.getConstants();
     this.SMTPSettings();
   }
 
+  /**
+   * get current company
+   */
   currentCompany() {
     this.settingService.currentCompany().subscribe(res => {
       this.currentComapny = res;
@@ -36,6 +42,9 @@ export class IncomingEmailComponent implements OnInit {
     });
   }
 
+  /**
+   * get constants
+   */
   getConstants() {
     this.emailSettingService.getConstants().subscribe(
       res => {
@@ -48,6 +57,10 @@ export class IncomingEmailComponent implements OnInit {
     );
   }
 
+  /**
+   * get constant based on name
+   * @param constantName 
+   */
   getConstant(constantName) {
     if (!constantName) {
       return this.constants;
@@ -60,12 +73,18 @@ export class IncomingEmailComponent implements OnInit {
     }
   }
 
+  /**
+   * saved inbox enabled
+   */
   saveInboxEnabled() {
     this.emailSettingService
       .saveInboxEnabled(this.inboxEnabled)
       .subscribe(res => {});
   }
 
+  /**
+   * smtp settings
+   */
   SMTPSettings() {
     this.loading = true;
     this.emailSettingService.getSMTPSettings().subscribe(

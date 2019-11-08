@@ -17,22 +17,20 @@ import {
 export class OutgoingEmailComponent implements OnInit {
   smtp: any;
   supportMailBox: any;
-  loading = false;
-  submitted = false;
   targetEmail = '';
   smtpForm: FormGroup;
   testEmailForm: FormGroup;
-
+  submitted = false;
+  loading = false;
   isSMTPLoginUnique = true;
-
-  emailAlias: "";
   disableFields = false;
+  portIsEmpty = false;
+  initialized = false;
+  emailAlias: "";
   smtpPromise;
   inboxEnabledPromise;
   savedSMTPSettings;
   usedEmailVia: any;
-  initialized = false;
-  portIsEmpty = false;
   portToTypes = {
     NONE: 25,
     TLS: 587,
@@ -83,6 +81,9 @@ export class OutgoingEmailComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {}
 
+  /**
+   * init
+   */
   ngOnInit() {
     this.smtpForm = this.formBuilder.group({
       emailAlias: [
@@ -115,8 +116,6 @@ export class OutgoingEmailComponent implements OnInit {
       id: [""]
     });
 
-
-
     this.SMTPSettings();
     this.getEmailAlias();
   }
@@ -130,6 +129,9 @@ export class OutgoingEmailComponent implements OnInit {
     return this.testEmailForm.controls;
   }
 
+  /**
+   * email alias
+   */
   getEmailAlias() {
     this.emailSettingService.getEmailAlias().subscribe(
       (res: any) => {
@@ -144,6 +146,10 @@ export class OutgoingEmailComponent implements OnInit {
     );
   }
 
+  /**
+   * number only
+   * @param event 
+   */
   numberOnly(event: any): boolean {
     const charCode = event.which ? event.which : event.keyCode;
     if (charCode > 31 && (charCode < 48 || charCode > 57)) {
@@ -152,6 +158,9 @@ export class OutgoingEmailComponent implements OnInit {
     return true;
   }
 
+  /**
+   * smtp settings
+   */
   SMTPSettings() {
     this.loading = true;
     this.emailSettingService.getSMTPSettings().subscribe(
@@ -199,6 +208,10 @@ export class OutgoingEmailComponent implements OnInit {
     );
   }
 
+  /**
+   * get email by domain
+   * @param domain 
+   */
   getEmailViaByDomain(domain) {
     var counter = 0;
     for (var prop in this.preinitializedDomains) {
@@ -210,6 +223,9 @@ export class OutgoingEmailComponent implements OnInit {
     }
   }
 
+  /**
+   * check smtp login unique
+   */
   checkSMTPLoginUnique() {
     this.submitted = true;
     if(this.smtpForm.controls['login'].errors){
@@ -229,6 +245,9 @@ export class OutgoingEmailComponent implements OnInit {
       );
   }
 
+  /**
+   * 
+   */
   changeEmailVia() {
     if (!this.smtpForm.value.usedEmailVia) {
       return;
@@ -255,6 +274,10 @@ export class OutgoingEmailComponent implements OnInit {
     this.saveSMTP(this.smtpForm,undefined);
   }
 
+  /**
+   * 
+   * @param value 
+   */
   changeEncryption(value) {
     if (value) {
       if (this.initialized || this.portIsEmpty) {
@@ -271,6 +294,10 @@ export class OutgoingEmailComponent implements OnInit {
     }
   }
 
+  /**
+   * set domain based on params
+   * @param value 
+   */
   setDomain(value) {
     if (!this.disableFields) {
       var domain = this.preinitializedDomains[value],
@@ -308,6 +335,12 @@ export class OutgoingEmailComponent implements OnInit {
     }
   }
 
+  /**
+   * saved smtp
+   * @param formForSave 
+   * @param formForTest 
+   * @param isTest 
+   */
   sendTestEmail(formForSave, formForTest, isTest) {
     // $scope.showError = formForTest.$invalid;
     if (formForTest.valid && isTest) {
@@ -315,21 +348,13 @@ export class OutgoingEmailComponent implements OnInit {
     }
   }
 
+  /**
+   * saved smtp
+   * @param form 
+   * @param isTest 
+   */
   saveSMTP(form,isTest) {
     this.submitted = true;
-    // const obj = {
-    //   id: "b656e0ce-5c68-4afb-aca4-547a5754d0f9",
-    //   login: "helpdesk@activeis.ca",
-    //   password: "alltheitme1!",
-    //   domain: "smtp.gmail.com",
-    //   port: 25,
-    //   useSMTP: true,
-    //   isValid: true,
-    //   errorMessage: "",
-    //   encryptionType: "NONE",
-    //   sendTestEmail: false,
-    //   exeption: false
-    // };
     if (this.isSMTPLoginUnique) {
       if (this.smtpForm.valid && this.smtp.useSMTP) {
         this.smtp.login = this.smtpForm.value.login;
@@ -379,6 +404,9 @@ export class OutgoingEmailComponent implements OnInit {
     }
   }
 
+  /**
+   * saved email alias
+   */
   saveEmailAlias() {
     if (!this.smtpForm.controls["emailAlias"].errors) {
       this.emailSettingService

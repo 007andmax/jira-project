@@ -5,14 +5,12 @@ import {
   FormBuilder,
   Validators,
   FormControl,
-  FormArray
 } from "@angular/forms";
 
 import { CompanyProfileService } from "src/ng2/app/services/setting/company-profile.service";
 import { ToastrService } from "ngx-toastr";
 import { ImageCroppedEvent } from "ngx-image-cropper";
 import { SettingService } from "src/ng2/app/services/setting/setting.service";
-import { weekdays } from "moment";
 
 @Component({
   selector: "app-company-profile",
@@ -55,12 +53,14 @@ export class CompanyProfileComponent implements OnInit {
     "SATURDAY",
     "SUNDAY"
   ];
+
   defaultWorkingDay = {
     dayOfWeek: "MONDAY",
     startTime: 28800,
     endTime: 61200,
     isSelected: false
   };
+
   config = {
     displayKey: "city",
     search: true,
@@ -89,6 +89,7 @@ export class CompanyProfileComponent implements OnInit {
       timeSettings: { workingDays: [], outliersSeconds: 0 },
       supportMailBox: ""
     };
+
     this.createCProfileForm();
 
     this.getCurrentCompany();
@@ -102,6 +103,7 @@ export class CompanyProfileComponent implements OnInit {
    * create company profile from group
    */
   createCProfileForm() {
+
     this.cProfileForm = new FormGroup({
       name: new FormControl("", Validators.required),
       url: new FormControl({ value: "", disabled: true }, Validators.required),
@@ -356,6 +358,9 @@ export class CompanyProfileComponent implements OnInit {
       .subscribe(res => {}, error => {});
   }
 
+  /**
+   * delete avatar
+   */
   deleteAvatar() {
     this.loading = true;
     this.companyProfileService
@@ -390,6 +395,11 @@ export class CompanyProfileComponent implements OnInit {
     }
   }
 
+  /**
+   * get base64Image from url based on params url
+   * @param url 
+   */
+
   getBase64ImageFromURL(url: string) {
     return Observable.create((observer: Observer<string>) => {
       // create an image object
@@ -412,6 +422,10 @@ export class CompanyProfileComponent implements OnInit {
     });
   }
 
+  /**
+   * get base64image based on img
+   * @param img 
+   */
   getBase64Image(img: HTMLImageElement) {
     // We create a HTML canvas object that will create a 2d image
     var canvas = document.createElement("canvas");
@@ -426,6 +440,9 @@ export class CompanyProfileComponent implements OnInit {
     // return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
   }
 
+  /**
+   * crop it image
+   */
   cropIt() {
     this.isCroppedImg = false;
     let cropImage = {};
@@ -503,6 +520,9 @@ export class CompanyProfileComponent implements OnInit {
     }
   }
 
+  /**
+   * saved records
+   */
   onSubmit() {
     this.submitted = true;
 
@@ -578,10 +598,13 @@ export class CompanyProfileComponent implements OnInit {
         error => {}
       );
     }
-
-    // alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.cProfileForm.value));
   }
 
+  /**
+   * start time changed based on params
+   * @param workingday 
+   * @param startTime 
+   */
   startTimeChange(workingday: any, startTime: any) {
     const splitTime = startTime.split(":");
     if (!Number(splitTime[0])) {
@@ -609,6 +632,10 @@ export class CompanyProfileComponent implements OnInit {
     //   hours * 3600 + minutes * 60;
   }
 
+  /**
+   * display from time
+   * @param from 
+   */
   fromTime_convert(from) {
     const startWith = "from ",
       splitWith = " to ";
@@ -633,6 +660,10 @@ export class CompanyProfileComponent implements OnInit {
     return value;
   }
 
+  /**
+   * display to time 
+   * @param to 
+   */
   toTime_convert(to) {
     let toHours = Math.floor(to / 3600);
     let toMinutes = Math.round(to / 60 - toHours * 60);
@@ -654,6 +685,7 @@ export class CompanyProfileComponent implements OnInit {
 
     return value;
   }
+
 
   formatOnInput(workingDay, event) {
     const startTime =
@@ -681,6 +713,10 @@ export class CompanyProfileComponent implements OnInit {
     }
   }
 
+  /**
+   * checked number only
+   * @param event 
+   */
   numberOnly(event): boolean {
     const charCode = event.which ? event.which : event.keyCode;
     if (charCode > 31 && (charCode < 48 || charCode > 57)) {
@@ -688,94 +724,4 @@ export class CompanyProfileComponent implements OnInit {
     }
     return true;
   }
-
-  // checkPattern(value) {
-
-  //   if (value) {
-  //     var matches = this.pattern.exec(value);
-
-  //     if (matches && matches.length) {
-  //       var fromHours = matches[1],
-  //         fromMinutes = matches[2],
-  //         toHours = matches[3],
-  //         toMinutes = matches[4];
-  //     }
-
-  //     var isValid = fromHours && fromMinutes && toHours && toMinutes;
-  //     if (isValid) {
-  //       var invalidTimeRange = parseInt(fromHours) + parseInt(fromMinutes) < parseInt(toHours) + parseInt(toMinutes);
-  //     }
-  //     // ctrl.$setValidity('invalidWorkingHours', !!isValid);
-  //     // ctrl.$setValidity('invalidTimeRange', !!invalidTimeRange);
-  //   }
-  // }
-
-  // formatOnInput(inputValue) {
-  //   let value = inputValue;
-
-  //   if (!value) {
-  //     // element.val(defaultValue);
-  //     // ctrl.$setViewValue(defaultValue);
-  //     // this.from = defaultFrom;
-  //     // this.to = defaultTo;
-  //     return;
-  //   }
-
-  //   var from = '', to = '',
-  //     isFromParsing = true;
-  //   for (var i = 0; i < value.length; i++) {
-  //     var char = value[i],
-  //       nextChar = value[i + 1];
-
-  //     if (this.isDigit(char) || char === ':') {
-  //       if (isFromParsing) {
-  //         if (!this.isDigit(nextChar) && nextChar !== ':') {
-  //           isFromParsing = false;
-  //         }
-  //         from += char;
-  //       } else {
-  //         to += char;
-  //       }
-  //     }
-  //   }
-
-  //   from = this.getValid24HoursTime(from, $scope, 'from');
-  //   to = this.getValid24HoursTime(to, $scope, 'to');
-
-  //   // value = this.startWith + from + splitWith + to;
-  //   value = from ;
-  //   // element.val(value);
-  //   // ctrl.$setViewValue(value);
-
-  //   this.checkPattern(value);
-  // }
-
-  // getValid24HoursTime(time, model, field) {
-  //   var splitTime = time.split(":"),
-  //     hours = parseInt(splitTime[0]) || 0,
-  //     minutes =
-  //       (!splitTime[1] || splitTime[1].length > 1
-  //         ? parseInt(splitTime[1])
-  //         : parseInt(splitTime[1] + "0")) || 0;
-
-  //   if (minutes > 59) {
-  //     minutes = 0;
-  //   }
-
-  //   if (hours > 23) {
-  //     hours = 23;
-  //   }
-
-  //   model[field] = hours * 3600 + minutes * 60;
-
-  //   return (
-  //     (hours > 9 ? hours : "0" + hours) +
-  //     ":" +
-  //     (minutes > 9 ? minutes : "0" + minutes)
-  //   );
-  // }
-
-  // isDigit(char) {
-  //   return "0123456789".indexOf(char) > -1;
-  // }
 }
