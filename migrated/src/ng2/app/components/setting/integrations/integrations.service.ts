@@ -12,10 +12,17 @@ export class IntegrationsService {
 
   constructor(private http: HttpClient) {}
 
+  /**
+   * settings
+   */
   settings(): Observable<any> {
     return this.http.get(`${this.apiUrl}ps/settings`).pipe(map(data => data));
   }
 
+  /**
+   * saved payment info
+   * @param data 
+   */
   savePaymentInfo(data: any): Observable<any> {
     return this.http
       .put(`${this.apiUrl}ps/settings`, data)

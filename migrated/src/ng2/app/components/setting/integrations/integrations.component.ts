@@ -26,16 +26,26 @@ export class IntegrationsComponent implements OnInit {
     private toastrService: ToastrService
   ) {}
 
+  /**
+   * init
+   */
   ngOnInit() {
     this.getSetting();
   }
 
+  /**
+   * saved cc payment
+   * @param event 
+   */
   turnOnCCPayment(event: any) {
     this.show = event.target.checked;
     this.paymentInfo.paymentsEnabled = event.target.checked;
     this.savePaymentInfo();
   }
 
+  /**
+   * get settings
+   */
   getSetting() {
     this.loading = true;
     this.integrationsService.settings().subscribe(
@@ -49,6 +59,9 @@ export class IntegrationsComponent implements OnInit {
     );
   }
 
+  /**
+   * saved payment info
+   */
   savePaymentInfo() {
     this.loading = true;
 
@@ -65,6 +78,9 @@ export class IntegrationsComponent implements OnInit {
     );
   }
 
+  /**
+   * changed payment info
+   */
   changePaymentInfo() {
     if (
       !this.paymentInfo.paypalClientId &&

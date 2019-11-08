@@ -150,32 +150,58 @@ export class EmailTempleteService {
 
   constructor(private http: HttpClient) {}
 
+  /**
+   * ticket templates
+   */
   getTicketTemplates() {
     return this.ticketTemplates;
   }
 
+  /**
+   * get agent templates
+   */
   getAgentTemplates() {
     return this.agentTemplates;
   }
 
+  /**
+   * get invoice templates
+   */
   getInvoiceTemplates() {
     return this.invoiceTemplates;
   }
 
+  /**
+   * email pages
+   */
   getEmailPages() {
       return this.http.get(`${this.apiUrl}settings/emailPages/`);
   }
 
+  /**
+   * template based params
+   * @param type 
+   */
   getTemplate(type: string) {
     return this.http.get(`${this.apiUrl}settings/emailPages/byType/${type}`);
   }
 
+  /**
+   * 
+   * @param type 
+   * @param data 
+   */
   getHtmlForPreview(type: string, data) {
     return this.http.post(`${this.apiUrl}settings/emailPages/byType/${type}`, {
       data
     });
   }
 
+  /**
+   * saved email template
+   * @param data 
+   * @param type 
+   */
   saveEmailTemplate(data, type: string) {
     return this.http.put(
       `${this.apiUrl}settings/emailPages/updateTemplate/${type}`,
@@ -183,6 +209,10 @@ export class EmailTempleteService {
     );
   }
 
+  /**
+   * set default template
+   * @param type 
+   */
   setToDefaultTemplete(type){
     return this.http.post(
       `${this.apiUrl}settings/emailPages/toDefaultTemplate/${type}`,

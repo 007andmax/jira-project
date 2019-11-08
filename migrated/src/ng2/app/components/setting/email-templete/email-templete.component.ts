@@ -27,13 +27,13 @@ export class EmailTempleteComponent implements OnInit {
 
   emailPages: any;
   templeteForm: FormGroup;
-  templatesData = { subject: {}, body: {} };
   openEmailTemplate: string;
-  modalRef: BsModalRef;
-  @ViewChild('subject') subject: ElementRef;
-  @ViewChild('body') body: ElementRef;
   public show = false;
   public buttonName: any = 'Show Keyword Description + ';
+  templatesData = { subject: {}, body: {} };
+  modalRef: BsModalRef;
+  @ViewChild('body') body: ElementRef;
+  @ViewChild('subject') subject: ElementRef;
 
   constructor(
     private modalService: BsModalService,
@@ -66,6 +66,9 @@ export class EmailTempleteComponent implements OnInit {
     return this.templeteForm.controls;
   }
 
+  /**
+   * email pages
+   */
   getEmailPages() {
     this.loading = true;
     this.emailService
@@ -83,6 +86,11 @@ export class EmailTempleteComponent implements OnInit {
       .subscribe();
   }
 
+  /**
+   * get templates
+   * @param templete
+   * @param index 
+   */
   getTemplate(templete, index) {
     if (!templete) {
       return;
@@ -131,12 +139,21 @@ export class EmailTempleteComponent implements OnInit {
     return item.value.title;
   }
 
+  /**
+   * inset caret based on text
+   * @param text 
+   */
   insertAtCaret(text) {
     var el = document.activeElement;
     console.log(el);
     this.insertDataVarables(el, text);
   }
 
+  /**
+   * insert data varables based on params
+   * @param myField 
+   * @param myValue 
+   */
   insertDataVarables(myField, myValue) {
     if (myField.selectionStart || myField.selectionStart == '0') {
       var startPos = myField.selectionStart;
@@ -183,6 +200,9 @@ export class EmailTempleteComponent implements OnInit {
     this.edit = false;
   }
 
+  /**
+   * saved email template
+   */
   saveEmailTemplate() {
     this.edit = true;
     this.submitted = true;
@@ -220,6 +240,10 @@ export class EmailTempleteComponent implements OnInit {
       });
   }
 
+  /**
+   * retore default templated
+   * @param templeteKey 
+   */
   restoreDefault(templeteKey) {
     if (!templeteKey) {
       return;
