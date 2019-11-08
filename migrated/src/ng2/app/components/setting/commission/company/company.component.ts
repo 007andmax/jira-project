@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { CommissionService } from '../commission.service';
 import { UsersService } from 'src/ng2/app/services/users/users.service';
 import { ToastrService } from 'ngx-toastr';
+import { NgSelectComponent } from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-company-commission',
@@ -28,7 +29,6 @@ export class CompanyComponent implements OnInit {
     search: true,
     height: 'auto',
     limitTo: 3,
-    moreText: 'more',
     searchPlaceholder: 'Search',
     searchOnKey: 'firstName'
   };
@@ -38,7 +38,7 @@ export class CompanyComponent implements OnInit {
     private userService: UsersService,
     private toastrService: ToastrService
   ) {
-    // this.getCurrentCompany();
+
   }
 
   ngOnInit() {
@@ -48,6 +48,9 @@ export class CompanyComponent implements OnInit {
     this.getUsers();
   }
 
+  /**
+   * get users list
+   */
   getUsers() {
     this.loading = true;
     this.commissionService
@@ -66,10 +69,6 @@ export class CompanyComponent implements OnInit {
         (techUsers: any) => {
           this.loading = false;
           this.activeTechUsers = techUsers;
-          // this.activeTechUsers = techUsers.map(({ id, firstName}) => ({
-          //   id,
-          //   firstName,
-          // }));
         },
         error => {
           this.loading = false;
@@ -77,6 +76,10 @@ export class CompanyComponent implements OnInit {
       );
   }
 
+  /**
+   * get full name based on first name and last name
+   * @param client
+   */
   getFullName(client) {
     if (client) {
       const isAllSpaces = client.lastName === '    ';
@@ -88,6 +91,11 @@ export class CompanyComponent implements OnInit {
     }
   }
 
+  /**
+   * set tech lead 
+   * @param event 
+   * @param company 
+   */
   setTechLead(event: any, company: any) {
     if (!event || !company) {
       return;
@@ -106,15 +114,24 @@ export class CompanyComponent implements OnInit {
     );
   }
 
+  /**
+   * get client url
+   * @param client 
+   */
   getClinetUrl(client) {
     if (client && client.avatar) {
       return `/users/${client.id}/image.jpg?t=${client.avatar.updatedAt}`;
     }
   }
 
-  selectedActiveTechUsers(company, i) {
+  /**
+   * selected active tech usres
+   * @param company 
+   * @param i 
+   */
+  selectedActiveTechUsers(company, i) : any {
     if (company.techLeadId === null) {
-      return;
+      return ;
     }
 
     const techUser = this.activeTechUsers.filter(client => {
@@ -124,9 +141,12 @@ export class CompanyComponent implements OnInit {
       }
     });
 
-    return techUser[0].firstName;
+    return techUser[0] ? techUser[0].firstName : null;
   }
 
+  /**
+   * companies data
+   */
   getCompanies() {
     this.loading = true;
     this.commissionService
@@ -146,7 +166,6 @@ export class CompanyComponent implements OnInit {
           this.loading = false;
           if (custCompany) {
             this.clientsCompanies = custCompany;
-            console.log(this.clientsCompanies);
           }
         },
         error => {
@@ -155,6 +174,9 @@ export class CompanyComponent implements OnInit {
       );
   }
 
+  /**
+   * get current company records - not used
+   */
   getCurrentCompany() {
     this.commissionService.getCurrentCompany().subscribe(
       res => {
@@ -164,6 +186,9 @@ export class CompanyComponent implements OnInit {
     );
   }
 
+  /**
+   * get client company info - not used
+   */
   getClientCompaniesInfo() {
     this.commissionService
       .getClientCompaniesInfo()
@@ -177,6 +202,10 @@ export class CompanyComponent implements OnInit {
       .subscribe();
   }
 
+  /**
+   * get company logo url by company - not used
+   * @param company 
+   */
   getCompanyLogoUrl(company: any) {
     if (
       company &&

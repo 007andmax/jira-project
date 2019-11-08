@@ -14,12 +14,15 @@
             <div *ngIf="f.ticketCount.errors.required">
               Starting ticket number is required
             </div>
+            <div *ngIf="f.ticketCount.errors.pattern">
+              Only Number is allowed
+            </div>
           </div>
           <label class="control-label" *ngIf="used">
-                Already used. Next free is
-                <span class="free-number-link">
-                  {{ ticketConfig.nextValid }}</span>.
-              </label>
+            Already used. Next free is
+            <span class="free-number-link"> {{ ticketConfig.nextValid }}</span
+            >.
+          </label>
           <div class="form-row">
             <input
               type="text"
@@ -31,6 +34,7 @@
             />
           </div>
         </div>
+
         <div class="f-col col-50">
           <label *ngIf="!submitted || !f.outliersTime.errors"
             >Outliers Time</label
@@ -40,15 +44,20 @@
             class="invalid-feedback"
           >
             <div *ngIf="f.outliersTime.errors.required">
-              Starting ticket number is required
+              OutliersTime is required
             </div>
+            <!-- <div *ngIf="f.outliersTime.errors.pattern">
+              Outliers Time must not be less than 1 hour.
+            </div> -->
           </div>
+
           <div class="form-row">
             <input
               type="number"
+              min="1"
+              onkeypress="return event.charCode != 45"
               formControlName="outliersTime"
               class="input-number"
-              min="1"
             />
           </div>
         </div>
@@ -59,12 +68,6 @@
               class="cmn-select form-input"
               formControlName="timepickerType"
             >
-              <!-- <li ng-click="setTimePickerValue('TIME_PICKER')">
-                Start-End time picker
-              </li>
-              <li ng-click="setTimePickerValue('DURATION_PICKER')">
-                Duration picker
-              </li> -->
               <option value="TIME_PICKER">Start-End time picker</option>
               <option value="DURATION_PICKER">Duration picker</option>
             </select>
@@ -77,7 +80,7 @@
               TaxId is required
             </div>
             <div *ngIf="f.taxId.errors.pattern">
-              Taxid is not valid
+              TaxId is not valid
             </div>
           </div>
           <div class="form-row">
@@ -120,9 +123,7 @@
               class="form-input"
               formControlName="conditions"
               placeholder="Enter memo of invoice"
-            >
-Glad to work with you !</textarea
-            >
+            ></textarea>
           </div>
         </div>
       </div>

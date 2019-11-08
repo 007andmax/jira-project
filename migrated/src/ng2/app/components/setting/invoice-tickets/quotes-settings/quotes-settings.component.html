@@ -1,33 +1,56 @@
 <div class="page-insider invoice-ticket">
-<div class="cmn-area invoice">
-    <form method="POST" action="">
-        <div class="f-row">
-            <div class="f-col col-33">
-                <label>Starting ticket number</label>
-                <div class="form-row">
-                   <input type="text" numbersOnly class="form-input" placeholder="Enter Starting ticket number" value="1001"/>
-                </div>
+  <div class="cmn-area invoice">
+    <form [formGroup]="quotesForm" (ngSubmit)="onSubmit()">
+      <div class="f-row">
+        <div class="f-col col-33">
+          <label *ngIf="!submitted || !f.count.errors"
+            >Starting ticket number</label
+          >
+          <div *ngIf="submitted && f.count.errors" class="invalid-feedback">
+            <div *ngIf="f.count.errors.required">
+              Ticket Number is required
             </div>
-            <div class="f-col col-50">
-                <label>Default Quotes terms</label>
-                <div class="form-row">
-                  <div class="input-select">
-                      <select class="cmn-select form-input">
-                          <option>15 days</option>
-                          <option>16 days</option>
-                          <option>17 days</option>
-                        </select>
-                  </div>
-                </div>
+            <div *ngIf="f.count.errors.pattern">
+              Only Number is allowed
             </div>
-            <div class="f-col col-100">
-                <label>Memo of Quote</label>
-                <div class="form-row">
-                    <textarea class="form-input" placeholder="Enter memo of quote" >Glad to work with you !</textarea>
-                </div>
-            </div>
+          </div>
+          <div class="form-row">
+            <input
+              type="text"
+              formControlName="count"
+              class="form-input"
+              [ngClass]="{ 'is-invalid': submitted && f.count.errors }"
+              placeholder="Enter Starting ticket number"
+            />
+          </div>
         </div>
-        <input type="submit" class="btn btn-primary" value="Save Changes" />
+        <div class="f-col col-50">
+          <label>Default Quotes terms</label>
+          <div class="form-row">
+            <div class="input-select">
+              <select
+                class="cmn-select form-input"
+                formControlName="defaultTerms"
+              >
+                <option>15 days</option>
+                <option>16 days</option>
+                <option>17 days</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="f-col col-100">
+          <label>Memo of Quote</label>
+          <div class="form-row">
+            <textarea
+              class="form-input"
+              formControlName="memoQuote"
+              placeholder="Enter memo of quote"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+      <input type="submit" class="btn btn-primary" value="Save Changes" />
     </form>
-</div>
+  </div>
 </div>

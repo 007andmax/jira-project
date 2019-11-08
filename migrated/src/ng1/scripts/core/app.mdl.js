@@ -189,10 +189,6 @@
                       url: '/ng2/setting/commission',
                       template: '<commission-component></commission-component>'
                     }))
-                    .state('setting-commission-component', waitForServices({
-                      url: '/ng2/setting/commission',
-                      template: '<commission-component></commission-component>'
-                    }))
                     .state('subscription-component', waitForServices({
                       url: '/ng2/setting/subscription',
                       template: '<subscription-component></subscription-component>'

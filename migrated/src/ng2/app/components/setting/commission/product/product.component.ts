@@ -22,6 +22,9 @@ export class ProductComponent implements OnInit {
     this.getCategories();
   }
 
+  /**
+   * get categories
+   */
   getCategories() {
     this.loading = true;
     this.commissionService.getCategories().subscribe(
@@ -42,6 +45,10 @@ export class ProductComponent implements OnInit {
     );
   }
 
+  /**
+   * set product rate zero
+   * @param category
+   */
   removeProduct(category: any) {
     if (category && category.commissionRate) {
       if (confirm(`Do you want ${category.name} commission rate to zero?`)) {
@@ -66,6 +73,12 @@ export class ProductComponent implements OnInit {
     this.selectedIdx = i;
   }
 
+  /**
+   * set category rate
+   * @param rate
+   * @param id
+   * @param category
+   */
   setCategoryRate(rate, id: string, category: any) {
     let data = {
       rate: '',
@@ -81,42 +94,24 @@ export class ProductComponent implements OnInit {
       if (category.commissionRate === null) {
         if (confirm('Do you want this commission to fact old items?')) {
           data.setForOldExpenses = true;
-          this.loading = true;
-          this.commissionService
-            .setCategoryRate(id, data.rate, data.setForOldExpenses)
-            .subscribe(
-              (res: any) => {
-                this.toastrService.success(
-                  'Commission Rate changed successfully'
-                );
-                this.loading = false;
-                this.selectedIdx = -1;
-                category.commissionRate = res.commissionRate.toFixed(2);
-              },
-              error => {
-                this.loading = false;
-                this.toastrService.error(`Error Occured, ` + error);
-              }
-            );
-        } else {
-          this.loading = true;
-          this.commissionService
-            .setCategoryRate(id, data.rate, data.setForOldExpenses)
-            .subscribe(
-              (res: any) => {
-                this.toastrService.success(
-                  `Commission Rate changed successfully`
-                );
-                this.loading = false;
-                this.selectedIdx = -1;
-                category.commissionRate = res.commissionRate.toFixed(2);
-              },
-              error => {
-                this.loading = false;
-                this.toastrService.error(`Error Occured, ` + error);
-              }
-            );
         }
+        this.loading = true;
+        this.commissionService
+          .setCategoryRate(id, data.rate, data.setForOldExpenses)
+          .subscribe(
+            (res: any) => {
+              this.toastrService.success(
+                'Commission Rate changed successfully'
+              );
+              this.loading = false;
+              this.selectedIdx = -1;
+              category.commissionRate = res.commissionRate.toFixed(2);
+            },
+            error => {
+              this.loading = false;
+              this.toastrService.error(`Error Occured, ` + error);
+            }
+          );
       } else {
         this.loading = true;
         this.commissionService

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { InvoiceTicketsService } from '../invoice-tickets.service';
-import { forkJoin } from 'rxjs';
+import { UsersService } from 'src/ng2/app/services/users/users.service';
 
 @Component({
   selector: 'app-ticket-settings',
@@ -13,32 +13,31 @@ export class TicketSettingsComponent implements OnInit {
   submitted = false;
   ticketForm: FormGroup;
   nextValid: '';
-
-  taxIdData = {
-    taxIdDescription: '',
-    taxId: ''
-  };
-
-  updateTicketForm = {
-    count: '',
-    prefix: '',
-    type: '',
-    nextValid: ''
-  };
+  public currentUser: any;
+  currentCompany: any;
 
   constructor(
     private formBuilder: FormBuilder,
-    private invoiceTicketsService: InvoiceTicketsService
+    private invoiceTicketsService: InvoiceTicketsService,
+    private userService: UsersService
   ) {}
 
   ngOnInit() {
+    this.currentUser = this.userService.currentUser;
     this.ticketForm = this.formBuilder.group({
-      ticketCount: ['', Validators.required],
-      outliersTime: ['', Validators.required],
-      timepickerType: ['TIME_PICKER', Validators.required],
+      ticketCount: [
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.pattern(/^-?([0-9]\d*)?$/)
+        ])
+      ],
+      outliersTime: ['', Validators.compose([Validators.required])],
+      timepickerType: ['DURATION_PICKER'],
       taxId: [
         '',
         [
+          Validators.required,
           Validators.maxLength(15),
           Validators.pattern(/^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,15}$/)
         ]
@@ -46,6 +45,7 @@ export class TicketSettingsComponent implements OnInit {
       taxIdDescription: [
         '',
         [
+          Validators.required,
           Validators.maxLength(15),
           Validators.pattern(/^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,15}$/)
         ]
@@ -53,6 +53,7 @@ export class TicketSettingsComponent implements OnInit {
       conditions: ['']
     });
 
+    this.getCurrentCompany();
     this.getActualNumber();
     this.getTaxNumber();
     this.getTermsAndConditions();
@@ -63,24 +64,18 @@ export class TicketSettingsComponent implements OnInit {
     return this.ticketForm.controls;
   }
 
-  getActualNumber() {
-    this.invoiceTicketsService.actualNumber('TICKET').subscribe(
-      (res: any) => {
-        this.ticketForm.patchValue({
-          ticketCount: res.number
-        });
-      },
-      error => {}
-    );
-  }
-
-  getTaxNumber() {
-    this.invoiceTicketsService.getTaxNumber().subscribe(
+  getCurrentCompany() {
+    this.invoiceTicketsService.currentCompany().subscribe(
       (res: any) => {
         if (res) {
           this.ticketForm.patchValue({
-            taxId: res.taxId,
-            taxIdDescription: res.taxIdDescription
+            outliersTime: res.outliersSeconds
+              ? res.outliersSeconds / 3600
+              : null,
+            timepickerType: res
+              .serviceExpenseDurationPresentation
+              ? res.serviceExpenseDurationPresentation
+              : 'DURATION_PICKER'
           });
         }
       },
@@ -88,59 +83,97 @@ export class TicketSettingsComponent implements OnInit {
     );
   }
 
-  getTermsAndConditions() {
-    this.invoiceTicketsService.termsAndConditions().subscribe(
+  getActualNumber() {
+    this.loading = true;
+    this.invoiceTicketsService.actualNumber('TICKET').subscribe(
       (res: any) => {
-        this.ticketForm.patchValue({
-          conditions: res.conditions
-        });
+        this.loading = false;
+        if (res) {
+          this.ticketForm.patchValue({
+            ticketCount: res.number
+          });
+        }
       },
       error => {}
     );
   }
 
-  onSubmit() {
-    this.submitted = true;
-
-    // stop here if form is invalid
-    if (this.ticketForm.invalid) {
-      return;
-    }
-
-    this.taxIdData.taxId = this.ticketForm.value.taxId;
-    this.taxIdData.taxIdDescription = this.ticketForm.value.taxIdDescription;
-
+  getTaxNumber() {
     this.loading = true;
-
-    this.invoiceTicketsService.TaxNumber(this.taxIdData).subscribe(
-      res => {
+    this.invoiceTicketsService.getTaxNumber().subscribe(
+      (res: any) => {
         this.loading = false;
+        if (res) {
+          this.ticketForm.patchValue({
+            taxId: res.taxId,
+            taxIdDescription: res.taxIdDescription
+          });
+        }
       },
       error => {
         this.loading = false;
       }
     );
+  }
 
-    this.updateTicketForm.count = this.ticketForm.value.ticketCount;
-    this.updateTicketForm.prefix = '';
-    (this.updateTicketForm.type = this.ticketForm.value.timepickerType),
-      (this.updateTicketForm.nextValid = this.nextValid);
+  getTermsAndConditions() {
+    this.loading = true;
+    this.invoiceTicketsService.termsAndConditions().subscribe(
+      (res: any) => {
+        this.loading = false;
+        this.ticketForm.patchValue({
+          conditions: res.conditions
+        });
+      },
+      error => {
+        this.loading = false;
+      }
+    );
+  }
 
-    this.invoiceTicketsService
-      .updateTicketForm(this.updateTicketForm)
-      .subscribe(
-        (res: any) => {
-          this.loading = false;
-          if (res && res.code === 409) {
-            this.nextValid = res.message;
-            this.ticketForm.patchValue({
-              count: this.ticketForm.value.ticketCount
-            });
-          }
-        },
-        error => {
-          this.loading = false;
+  onSubmit() {
+    this.submitted = true;
+    // stop here if form is invalid
+    if (this.ticketForm.invalid) {
+      return;
+    }
+
+    const objTicket = {
+      emailSettingPageNumberFormDto: {
+        count: this.ticketForm.value.ticketCount,
+        prefix: '',
+        type: 'TICKET',
+        termsAndConditions: this.ticketForm.value.conditions
+      },
+      taxNumber: {
+        taxIdDescription: this.ticketForm.value.taxIdDescription,
+        taxId: this.ticketForm.value.taxId
+      },
+      serviceExpenseDurationDto: {
+        presentation: this.ticketForm.value.timepickerType,
+        interval: null
+      },
+      companyWorkingTimeDto: {
+        workingDays: null,
+        outliersSeconds: this.ticketForm.value.outliersTime
+          ? this.ticketForm.value.outliersTime * 3600
+          : null
+      }
+    };
+    this.loading = true;
+    this.invoiceTicketsService.updateTicketsetting(objTicket).subscribe(
+      (res: any) => {
+        this.loading = false;
+        if (res && res.code === 409) {
+          this.nextValid = res.message;
+          this.ticketForm.patchValue({
+            count: this.ticketForm.value.ticketCount
+          });
         }
-      );
+      },
+      error => {
+        this.loading = false;
+      }
+    );
   }
 }

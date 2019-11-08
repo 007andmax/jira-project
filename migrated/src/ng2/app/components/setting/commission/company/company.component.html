@@ -32,9 +32,9 @@
                 bindValue="firstName"
                 (change)="setTechLead($event, company)"
                 placeholder="Select Tech Users"
-                ngModel="{{ selectedActiveTechUsers(company, i) }}"
+                [ngModel]="selectedActiveTechUsers(company, i)"
               >
-                <ng-template ng-label-tmp let-item="item">
+                <ng-template ng-label-tmp let-item="item" let-clear="clear">
                   <img height="15" width="15" [src]="getClinetUrl(item)" />
                   <b>{{ getFullName(item)}}</b>
                 </ng-template>

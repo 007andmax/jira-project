@@ -16,6 +16,10 @@ export class InvoiceTicketsService {
     return this.http.get(`${this.apiUrl}settings/companyProfile/`);
   }
 
+  currentCompany(){
+    return this.http.get(`${this.apiUrl}company/current`);
+  }
+
   actualNumber(type: string) {
     // https://dev.quicktech.com/data/actualNumber?type=SALE_QUOTE
     // https://dev.quicktech.com/data/actualNumber?type=TICKET
@@ -52,19 +56,26 @@ export class InvoiceTicketsService {
       .pipe(map(data => data));
   }
 
-  updateTicketForm(ticketForm: any) {
-    // {"count":"8501","prefix":"","type":"TICKET"}
+  updateTicketsetting(ticketForm: any) {
     return this.http.put(
-      `${this.apiUrl}settings/emailPages/updateNumberForm`,
+      `${this.apiUrl}settings/companyProfile/ticketSettings`,
       ticketForm
     );
   }
 
-  invoiceContact(invoiceForm) {
+  updateInvoiceContact(invoice) {
     // https://dev.quicktech.com/settings/emailPages/invoiceContact
-    // {"enabled":true,"firstName":"aadddd","lastName":"aa","email":"jigspatel.04@gmail.com","designation":"aaaa","phoneNumbers":[{"number":"+1 (403) 266-1041","typeNumber":"OFFICE"}]}
-    return this.http.put(`${this.apiUrl}settings/emailPages/invoiceContact`, {
-      invoiceForm
-    });
+
+    return this.http.put(
+      `${this.apiUrl}settings/companyProfile/invoiceSettings`,
+      invoice
+    );
+  }
+
+  updateQuotesSettings(quote: any) {
+    return this.http.put(
+      `${this.apiUrl}settings/companyProfile/saleQuoteSettings`,
+      quote
+    );
   }
 }
