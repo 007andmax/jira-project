@@ -6,13 +6,13 @@ export class CompanyProfileContact {
     subscription:any;
     designation:string;
     constructor () {
-        this.firstName = '';
+        this.firstName = null;
         this.phoneNumbers = [{
             number: '',
             typeNumber: 'OFFICE'
         }];
-        this.lastName = '',
-        this.primaryEmail = '',
+        this.lastName = null,
+        this.primaryEmail = null,
         this.subscription = {
             invoice: true,
             ticket: true,
@@ -20,7 +20,7 @@ export class CompanyProfileContact {
         }
     }
     public fullVersion() {
-        this.designation = '';
+        this.designation = null;
     }
    
 }

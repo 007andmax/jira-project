@@ -10,7 +10,7 @@ export class CompanyProfileAddress {
     locale: string;
     timeZone: any;
     constructor() {
-
+       
     }
     public fullVersion() {
         this.address = '';

@@ -47,7 +47,6 @@ export class CompanyAddAsideComponent implements OnInit {
       this.getTehusers(this.usersStateService.getAllUsers());
     } else {
       this.usersStateService.getOnUsers().subscribe((data) => {
-
         this.getTehusers(data);
       })
     }
@@ -67,12 +66,19 @@ export class CompanyAddAsideComponent implements OnInit {
       console.log('industries', this.industries);
     })
   }
+  getSelectedDropDown(value) {
+    if (!value) return "";
+    let editValue = value.substring(1, value.length);
+    editValue = editValue.toLowerCase();
+    editValue = `${value[0]}${editValue}`;
+    return editValue;
+  }
   onAddShort() {
-    this.validate.isValidate(this.company);
+    if (!this.validate.isValidate(this.company)) return;
     console.log('company', this.company);
-   /* this.companiesService.createCompany(this.company).subscribe(data => {
-      console.log(' data', data);
-    })*/
+     this.companiesService.createCompany(this.company).subscribe(data => {
+       console.log(' data', data);
+     })
   }
   public onShowAside() {
     this.companiesStateService.getShowAsideForAdd().subscribe(() => {
@@ -84,11 +90,24 @@ export class CompanyAddAsideComponent implements OnInit {
     this.company.fullVersion();
 
   }
+  public onSelectType(item) {
+    this.company.clientType = item.toUpperCase();
+    this.validate.resetType();
+  }
+  public onChangePrimaryEmail() {
+    this.validate.checkValidPrimaryEmail(this.company.contacts[0].primaryEmail);
+  }
   public onChangeSubscribe(data) {
-
     data.forEach(item => this.company.contacts[0].subscription[item.field] = item.selected);
-
-
+  }
+  public onChangeName() {
+    this.validate.checkValidName(this.company.name);
+  }
+  public onChangePhoneNumber() {
+    this.validate.checkValidPhoneNumber(this.company.addresses[0].phoneNumbers[0].number);
+  }
+  public onChangeType() {
+    this.validate.checkValidType(this.company.clientType);
   }
   public onChangeTimeZone(data) {
     this.company.addresses[0].timeZone = data;
@@ -103,28 +122,57 @@ export class CompanyAddAsideComponent implements OnInit {
     //  this.recurringState.getCreateTicket().setDescription(event.target.value);
   }
   public onAddFull() {
-    this.validate.isValidate(this.company);
+    if (!this.validate.isValidate(this.company)) return;
+   
+    this.companiesService.createCompany(this.company).subscribe(data => {
+      console.log(' data', data);
+    })
   }
   public onCroppImage() {
     this.imageCropperStateService.getConfirm().subscribe(data => {
       console.log('data', data);
+      this.company.setLogo(data);
     })
   }
-  public uploadFile(event) {
+  public uploadFileOnBrower(event) {
     console.log('event', event);
     if (event.target.value) {
       const file = event.target.files[0];
-      console.log('file',file);
-    
-      this.changeFile(file).then((base64: string): any => {
+      console.log('file', file);
+      this.uploadFile(file).then((data: any) => {
+        let res = JSON.parse(data.response);
+        // this.changeFile(file).then((base64: string): any => {
         const modalRef = this.modalService.open(ImageCropperComponent);
-        modalRef.componentInstance.imageBase64 = base64;
+        modalRef.componentInstance.imageBase64 = res.base64;
+        modalRef.componentInstance.id = res.id;
         event.target.value = null;
-        this.companiesService.uploadAvatar(btoa(base64)).subscribe((data) => {
-          console.log('data',data);
-              })
+
+        // });
+
       });
+
     } else alert('Nothing')
+  }
+  uploadFile(file) {
+    return new Promise((resolve, reject) => {
+      //  var file = this.dataURLtoFile(this.img, this.fileName);
+      console.log(file);
+      var fd = new FormData();
+      fd.append("file", file);
+      var xhr = new XMLHttpRequest();
+      xhr.addEventListener("load", (event) => {
+
+        resolve(xhr);
+
+      }, false);
+      xhr.addEventListener("error", (error) => {
+        reject(error);
+      }, false);
+
+
+      xhr.open("POST", "/file?isAvatar=true&ratio=1");
+      xhr.send(fd);
+    });
   }
   changeFile(file) {
     return new Promise((resolve, reject) => {

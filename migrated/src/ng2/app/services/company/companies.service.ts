@@ -44,7 +44,9 @@ export class CompaniesService {
   }
 
   public  createCompany (data) {
-    return this.http.post(this.apiUrl + 'company',data);
+    let company = data;
+    company.onCheckFullVersion();
+    return this.http.post(this.apiUrl + 'company',company);
   }
 
   /**

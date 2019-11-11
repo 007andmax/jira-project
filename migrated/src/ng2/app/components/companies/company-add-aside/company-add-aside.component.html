@@ -14,7 +14,7 @@
               </mat-error>
           <p>Company Name</p>
           <input type="text" [(ngModel)]="company.name"
-                 placeholder="Write Company or Search Company">
+                 placeholder="Write Company or Search Company" (input)="onChangeName($event)">
         </div>
         <div class="col-md-6" ngbDropdown [ngClass]="{'error-field':!validate.getType() }">
             <mat-error *ngIf="!validate.getType()">
@@ -22,11 +22,11 @@
               </mat-error>
           <p>Company Type</p>
           <input type="text" [value]="company.clientType"
-          autocomplete="new-password"
+          autocomplete="new-password" (input)="onChangeType($event)"
                  placeholder="Select Company Type" id="dropdownTypeCompany" ngbDropdownToggle/>
                  <div ngbDropdownMenu aria-labelledby="dropdownTypeCompany">
                     <ng-template ngFor let-item [ngForOf]="companyTypes"  >
-                        <button ngbDropdownItem [textContent]="item" (click)="company.clientType = item.toUpperCase()"></button>
+                        <button ngbDropdownItem [textContent]="item" (click)="onSelectType(item)"></button>
                     </ng-template>
                 </div>
         </div>
@@ -64,7 +64,7 @@
           <p>Phone Number</p>
           <input type="text"
           [(ngModel)]="company.addresses[0].phoneNumbers[0].number"
-                 placeholder="Enter Phone Number">
+                 placeholder="Enter Phone Number" (input)="onChangePhoneNumber($event)">
         </div>
         <div class="col-md-6" [ngClass]="{'error-field':!validate.getPrimaryContactEmail() }">
             <mat-error *ngIf="!validate.getPrimaryContactEmail()">
@@ -72,7 +72,7 @@
               </mat-error>
           <p>Primary Contact Email</p>
           <input type="text"
-          [(ngModel)]="company.contacts[0].primaryEmail"
+          [(ngModel)]="company.contacts[0].primaryEmail" (change)="onChangePrimaryEmail($event)"
                  placeholder="Primary Email Address">
         </div>
 
@@ -97,12 +97,13 @@
 
         <div class="col-md-12">
           <div class="logo-upload d-f">
-            <i class="icn-64 upload-logo"></i>
+              <img *ngIf="company.logo" [src]="company.logo.base64" />
+            <i class="icn-64 upload-logo" *ngIf="!company.logo"></i>
             <div>
               <div class="new-link">Upload Company logo</div>
               <p>Maximum size of 2MB. JPG, GIF, PNG</p>
             </div>
-            <input id="upload-file" type="file" (input)="uploadFile($event)"/>
+            <input id="upload-file" type="file" (input)="uploadFileOnBrower($event)"/>
           </div>
         </div>
 
@@ -125,7 +126,7 @@
                  placeholder="Select Company Type" id="dropdownTypeCompany" ngbDropdownToggle/>
                  <div ngbDropdownMenu aria-labelledby="dropdownTypeCompany">
                     <ng-template ngFor let-item [ngForOf]="companyTypes"  >
-                        <button ngbDropdownItem [textContent]="item" (click)="company.clientType = item"></button>
+                        <button ngbDropdownItem [textContent]="item" (click)="company.clientType = item.toUpperCase()"></button>
                     </ng-template>
                 </div>
         </div>
