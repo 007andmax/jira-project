@@ -34,7 +34,7 @@
          id="dropdownBasic"
          ngbDropdownToggle></i>
       <div ngbDropdownMenu aria-labelledby="dropdownBasic">
-        <button ngbDropdownItem><i class="icn-16 edit-grey-ng2"></i>Edit</button>
+        <button ngbDropdownItem (click)="edit()"><i class="icn-16 edit-grey-ng2"></i>Edit</button>
         <button ngbDropdownItem (click)="remove()"><i class="icn-16 archive-grey-ng2"></i>Delete</button>
       </div>
     </div>

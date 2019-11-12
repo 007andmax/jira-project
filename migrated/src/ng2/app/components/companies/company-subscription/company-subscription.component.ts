@@ -7,6 +7,7 @@ import { TagsService } from 'src/ng2/app/services/tags/tags.service';
 import { TagsStateService } from '../../shared/tags/services/tags-state.service';
 import { MatChipInputEvent } from '@angular/material';
 import { CompanySubscription } from '../class/company-subscription';
+import { CompanySubscriptionStateService } from './class/company-subscription-state.service';
 
 @Component({
   selector: 'app-company-subscription',
@@ -38,7 +39,8 @@ export class CompanySubscriptionComponent implements OnInit, OnDestroy {
    */
   public constructor(
   
-    private tagsState: TagsStateService
+    private tagsState: TagsStateService,
+    private companySubscriptionState:CompanySubscriptionStateService
   ) { }
 
   /**
@@ -54,6 +56,10 @@ export class CompanySubscriptionComponent implements OnInit, OnDestroy {
   * Subscribe for edit mode
   */
   private onCheckEditItem () {
+    let getEditMode = this.companySubscriptionState.getOnEditMode().subscribe((data) =>{
+      this.subscriptions.forEach(item => item.selected = data[item.field]);
+    })
+    this.sub.add(getEditMode);
   /*  let getTagsFromEdit = this.tagsState.getTagsFromEdit().subscribe((data) => {
       this.selectedTag = data;
     });

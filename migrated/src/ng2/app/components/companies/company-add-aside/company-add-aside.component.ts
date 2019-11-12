@@ -18,23 +18,21 @@ import { CompanyValdiate } from '../class/company-validate';
 })
 export class CompanyAddAsideComponent implements OnInit {
 
-  public opened = false;
-  public company: CompanyProfile = new CompanyProfile();
-  public industries: Array<string> = [];
-  public version: string = 'short';
+  opened = false;
+  company: CompanyProfile = new CompanyProfile();
+  industries: Array<string> = [];
+  version: string = 'short';
   companyTypes = ['Client', 'Lead', 'Vendor'];
   phoneTypes = ['Office', 'Mobile', 'Fax'];
   paymentTerms = [new CompanySetting('COD', 0), new CompanySetting('7 days', 0), new CompanySetting('15 days', 0), new CompanySetting('30 days', 0)];
   serviceTypes = [new CompanySetting('Hourly', 'HOURLY'), new CompanySetting('Block time', 'BLOCK_TIME'), new CompanySetting('Semi managed', 'SEMI_MANAGED'), new CompanySetting('Fully managed', 'FULLY_MANAGED')];
   paymentMethods = ['Cash', 'Cheque', 'Debit Card', 'Credit Card', 'Wire Transfer'];
   listPersons = [];
-
   subscriptions: Array<CompanySubscription> = [new CompanySubscription('Ticket Updates', 'ticket'),
   new CompanySubscription('Ticket Manager', 'ticketManager'),
   new CompanySubscription('Invoice Updates', 'invoice')];
-  //['Ticket Updates', 'Ticket Manager', 'Invoice Updates'];
-  public showSelect = false;
-  public validate: CompanyValdiate = new CompanyValdiate();
+  showSelect = false;
+  validate: CompanyValdiate = new CompanyValdiate();
   constructor(private companiesStateService: CompaniesStateService, private companiesService: CompaniesService,
     private usersStateService: UsersStateService, private modalService: NgbModal, private imageCropperStateService: ImageCropperStateService,
     private elRef: ElementRef) { }
@@ -53,26 +51,7 @@ export class CompanyAddAsideComponent implements OnInit {
 
     this.onCroppImage();
   }
-  private getTehusers(list) {
 
-    list.forEach((item) => {
-      if (item.accountType === "TECH") this.listPersons.push(item);
-    })
-    console.log('this.listPersons', this.listPersons);
-  }
-  private getIndustries() {
-    this.companiesService.getIndustries().subscribe((data: Array<string>) => {
-      this.industries = data;
-      console.log('industries', this.industries);
-    })
-  }
-  getSelectedDropDown(value) {
-    if (!value) return "";
-    let editValue = value.substring(1, value.length);
-    editValue = editValue.toLowerCase();
-    editValue = `${value[0]}${editValue}`;
-    return editValue;
-  }
   onAddShort() {
     if (!this.validate.isValidate(this.company)) return;
     console.log('company', this.company);
@@ -146,6 +125,26 @@ export class CompanyAddAsideComponent implements OnInit {
       console.log('data', data);
       this.company.setLogo(data);
     })
+  }
+  private getTehusers(list) {
+
+    list.forEach((item) => {
+      if (item.accountType === "TECH") this.listPersons.push(item);
+    })
+    console.log('this.listPersons', this.listPersons);
+  }
+  private getIndustries() {
+    this.companiesService.getIndustries().subscribe((data: Array<string>) => {
+      this.industries = data;
+      console.log('industries', this.industries);
+    })
+  }
+  getSelectedDropDown(value) {
+    if (!value) return "";
+    let editValue = value.substring(1, value.length);
+    editValue = editValue.toLowerCase();
+    editValue = `${value[0]}${editValue}`;
+    return editValue;
   }
   public uploadFileOnBrower(event) {
     console.log('event', event);

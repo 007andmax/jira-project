@@ -36,6 +36,9 @@ export class CompaniesService {
       this.clientsCompany.next(response);
     })*/
   }
+  public getCompany(id) {
+    return this.http.get(this.apiUrl + `company/${id}/data`);
+  }
    
   public checkCompanyName(id,name) {
     return this.http.get(this.apiUrl + `company/isCompanyNameUnique?id=${id}&name=${name}`); 

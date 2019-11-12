@@ -8,6 +8,7 @@ import { CompanyProfileAddress } from './company-profile-address';
 import { Weeks } from '../../shared/interval/config/enums';
 import { CompanyLogo } from './company-logo';
 import { ImageCropper } from '../../shared/image-cropper/class/image-cropper';
+import { Company } from 'src/ng2/app/interfaces/company/company';
 
 export class CompanyProfile {
     accountNumber: any;
@@ -39,6 +40,49 @@ export class CompanyProfile {
         this.addresses = [address];
         this.contacts = [contact];
         this.workingDays = Weeks.map((item) => new WorkDay(item.toUpperCase(), 0, 0))
+    }
+    public onEditMode(company: CompanyProfile) {
+        this.accountNumber = company.accountNumber;
+        this.addresses = company.addresses;
+        this.agentLinkToEmail = company.agentLinkToEmail;
+        this.clientIndustry = company.clientIndustry;
+        this.clientType = company.clientType;
+        this.contacts = company.contacts;
+        this.defaultPaymentMethod = company.defaultPaymentMethod;
+        this.description = company.description;
+        this.logo = company.logo;
+        this.domain = company.domain;
+        this.login = company.login;
+        this.maxAgents = company.maxAgents;
+        this.name = company.name;
+        this.password = company.password;
+        this.paymentMethods = company.paymentMethods;
+        this.paymentTerms = company.paymentTerms;
+        this.serviceType = company.serviceType;
+        this.removeOfflineTime = company.removeOfflineTime;
+        this.services = company.services;
+        this.workingDays = company.workingDays;
+        this.techLeadId = company.techLeadId;
+        if (this.addresses[0].phoneNumbers.length === 0)
+        {
+            this.addresses[0].phoneNumbers = [{
+                number: '',
+                typeNumber: 'OFFICE'
+            }];
+        }
+        if (this.contacts[0].phoneNumbers.length === 0)
+        {
+            this.contacts[0].phoneNumbers = [{
+                number: '',
+                typeNumber: 'OFFICE'
+            }];
+        }
+        if (!company.clientIndustry) {
+            this.clientIndustry = {
+                name: null
+            }
+        }
+
     }
     public setLogo(data: ImageCropper) {
         this.logo = new CompanyLogo();

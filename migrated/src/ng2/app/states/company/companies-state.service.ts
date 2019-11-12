@@ -1,6 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { CompaniesService } from '../../services/company/companies.service';
 import { Company } from '../../interfaces/company/company';
+import { CompanyProfile } from '../../components/companies/class/company-profile';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ allCompanies = [];
 onGetCompanies: EventEmitter<any> = new EventEmitter();
 showAsideForAdd: EventEmitter<any> = new EventEmitter();
 onShowArchived:EventEmitter<any> = new EventEmitter();
+onEditCompany:EventEmitter<CompanyProfile> = new EventEmitter();
  companyForArchive:Company = null;
   constructor(private companiesService: CompaniesService) { }
   public onInit() {
@@ -18,6 +20,13 @@ onShowArchived:EventEmitter<any> = new EventEmitter();
     this.onInitGetCompanies(data);
   })
   
+}
+public getOnEditCompany() {
+  return this.onEditCompany;
+}
+public setEditCompany(data){
+ 
+  this.onEditCompany.emit(data);
 }
 public setAllCompanies(data) {
   this.allCompanies = data;

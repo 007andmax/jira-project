@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { DownloadAgentStateService } from 'src/ng2/app/states/download-agent/download-agent-state.service';
 import { DownloadAgentComponent } from '../download-agent/download-agent.component';
+import { CompanyProfile } from '../class/company-profile';
 
 @Component({
   selector: 'app-companies-table',
@@ -92,6 +93,12 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     this.downloadAgentStateService.setCompnay(this.company);
     const modalRef = this.modalService.open(DownloadAgentComponent, { windowClass: 'xs-modal' });
     
+  }
+  edit() {
+    this.companiesService.getCompany(this.company.id).subscribe((data:CompanyProfile) =>{
+      this.companiesStateService.setEditCompany(data);
+    })
+   
   }
   remove() {
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });

@@ -79,6 +79,7 @@ import { DownloadAgentComponent } from './components/companies/download-agent/do
 import { CompanySubscriptionComponent } from './components/companies/company-subscription/company-subscription.component';
 import { CompanyTimeZoneComponent } from './components/companies/company-time-zone/company-time-zone.component';
 import { ImageCropperComponent } from './components/shared/image-cropper/image-cropper.component';
+import { CompanyEditAsideComponent } from './components/companies/company-edit-aside/company-edit-aside.component';
 
 
 /**
@@ -185,6 +186,7 @@ angular.module('quicktech')
     CompanySubscriptionComponent,
     CompanyTimeZoneComponent,
     ImageCropperComponent,
+    CompanyEditAsideComponent,
     
   ],
   imports: [
