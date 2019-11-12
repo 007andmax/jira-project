@@ -9,10 +9,17 @@ export class CompanyValdiate {
     primaryContactEmail: boolean = true;
     phoneNumber: boolean = true;
     reEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+    rePhoneNumber = /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/;
     constructor() { }
-public resetType() {
-    this.type = true;
-}
+    public setNoValidName () {
+        this.name = false;
+    }
+    public resetName() {
+        this.name = true;
+    }
+    public resetType() {
+        this.type = true;
+    }
     public getName() {
         return this.name;
     }
@@ -42,15 +49,15 @@ public resetType() {
         } else {
             this.type = true;
         }
-        console.log('this.type',this.type);
+       
     }
     public checkValidPhoneNumber(number) {
-        if (!this.getPhoneNumberError(number)) {
+        if (!number || !number.match(this.rePhoneNumber)) {
             this.phoneNumber = false;
         } else {
             this.phoneNumber = true;
         }
-             console.log('this.phoneNumber',this.phoneNumber);
+        
     }
     public checkValidPrimaryEmail(primaryEmail) {
         if (!primaryEmail || !primaryEmail.match(this.reEmail)) {
@@ -58,55 +65,28 @@ public resetType() {
         } else {
             this.primaryContactEmail = true;
         }
-      
-             
+
+
+    }
+
+    public checkValidFirstname(firstName) {
+        if (!firstName || firstName.length === 0) {
+            this.firstName = false;
+        } else {
+            this.firstName = true;
+        }
+
+
     }
     public isValidate(company: CompanyProfile) {
+        if (!company.contacts[0].firstName || company.contacts[0].firstName.length === 0) this.firstName = false;
         if (!company.name || company.name.length === 0) this.name = false;
         if (company.clientType === "") this.type = false;
         if (!company.contacts[0].primaryEmail || !company.contacts[0].primaryEmail.match(this.reEmail)) this.primaryContactEmail = false;
-        if (!this.getPhoneNumberError(company.addresses[0].phoneNumbers[0].number)) this.phoneNumber = false;
-        return this.name && this.type && this.primaryContactEmail && this.phoneNumber;
+        if (!company.addresses[0].phoneNumbers[0].number  || !company.addresses[0].phoneNumbers[0].number.match(this.rePhoneNumber)) this.phoneNumber = false;
+        return this.name && this.type && this.primaryContactEmail && this.phoneNumber && this.firstName;
 
     }
-    private getPhoneNumberError (number) {
-        let required = false, invalid = false, minlength = false, maxlength = false;
-        let error;
-      
-            let prefixValid = true || this.isPrefixValid(number);
-            let isPrefixOnly = false && number.split(' ').length <= 1
-      
-console.log('prefixValid',prefixValid);
-
-
-        if ((number && !prefixValid)) {
-            invalid = true;
-        } else if (!isPrefixOnly && number && number.length < 5) {
-            minlength = true;
-            error = 'Phone number is too short';
-        } else if (number.length > 20) {
-            maxlength = true;
-            error = 'Phone number is too long';
-        }
-
-        return invalid;
-    };
-    private isPrefixValid(phone) {
-        if (!phone || phone[0] !== '+') {
-            return false;
-        } else {
-            let prefix = phone.split(' ')[0];
-
-            for (let code in FORMATS) {
-                let formatPrefix = FORMATS[code].prefix;
-
-                if (formatPrefix === prefix) {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-    }
+  
 
 }

@@ -37,7 +37,9 @@ export class CompaniesService {
     })*/
   }
    
-
+  public checkCompanyName(id,name) {
+    return this.http.get(this.apiUrl + `company/isCompanyNameUnique?id=${id}&name=${name}`); 
+  }
 
   public  archiveCompany (id) {
     return this.http.get(this.apiUrl + 'company/archive/' + id);

@@ -76,9 +76,9 @@ export class CompanyAddAsideComponent implements OnInit {
   onAddShort() {
     if (!this.validate.isValidate(this.company)) return;
     console.log('company', this.company);
-     this.companiesService.createCompany(this.company).subscribe(data => {
-       console.log(' data', data);
-     })
+    this.companiesService.createCompany(this.company).subscribe(data => {
+      console.log(' data', data);
+    })
   }
   public onShowAside() {
     this.companiesStateService.getShowAsideForAdd().subscribe(() => {
@@ -101,10 +101,23 @@ export class CompanyAddAsideComponent implements OnInit {
     data.forEach(item => this.company.contacts[0].subscription[item.field] = item.selected);
   }
   public onChangeName() {
-    this.validate.checkValidName(this.company.name);
+    if (this.company.name && this.company.name.length > 0) {
+      this.companiesService.checkCompanyName("", this.company.name).subscribe((data: any) => {
+        if (data.value) {
+          this.validate.resetName();
+        } else {
+          this.validate.setNoValidName();
+        }
+      })
+    } else {
+      this.validate.checkValidName(this.company.name);
+    }
   }
   public onChangePhoneNumber() {
     this.validate.checkValidPhoneNumber(this.company.addresses[0].phoneNumbers[0].number);
+  }
+  public onChangeFirstName() {
+    this.validate.checkValidFirstname(this.company.contacts[0].firstName);
   }
   public onChangeType() {
     this.validate.checkValidType(this.company.clientType);
@@ -123,7 +136,7 @@ export class CompanyAddAsideComponent implements OnInit {
   }
   public onAddFull() {
     if (!this.validate.isValidate(this.company)) return;
-   
+
     this.companiesService.createCompany(this.company).subscribe(data => {
       console.log(' data', data);
     })
