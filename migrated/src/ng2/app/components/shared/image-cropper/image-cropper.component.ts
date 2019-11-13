@@ -14,6 +14,7 @@ export class ImageCropperComponent implements OnInit {
   imageChangedEvent: any = '';
   croppedImage: any = '';
   img: any = '';
+  @Input() public edit:boolean = false;
   @Input() public id = null;
   @Input() public imageBase64 = null;
   constructor(public activeModal: NgbActiveModal, private imageCropperStateService: ImageCropperStateService, private companiesService: CompaniesService) { }
@@ -44,7 +45,7 @@ export class ImageCropperComponent implements OnInit {
 
   approveConfirm() {
     this.activeModal.close();
-     this.imageCropperStateService.setConfirm(new ImageCropper(this.croppedImage,this.id));
+     this.imageCropperStateService.setConfirm(new ImageCropper(this.croppedImage,this.id,this.edit));
 
   };
 

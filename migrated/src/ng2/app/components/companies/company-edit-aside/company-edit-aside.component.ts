@@ -8,10 +8,12 @@ import { CompaniesService } from 'src/ng2/app/services/company/companies.service
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ImageCropperStateService } from 'src/ng2/app/states/image-cropper/image-cropper-state.service';
-import { ImageCropperComponent } from 'ngx-image-cropper';
+
 import { Company } from 'src/ng2/app/interfaces/company/company';
 import { CompanySubscriptionStateService } from '../company-subscription/class/company-subscription-state.service';
 import { CompanyTimeZoneStateService } from '../company-time-zone/services/company-time-zone-state.service';
+import { isNgTemplate } from '@angular/compiler';
+import { ImageCropperComponent } from '../../shared/image-cropper/image-cropper.component';
 
 @Component({
   selector: 'app-company-edit-aside',
@@ -23,10 +25,10 @@ export class CompanyEditAsideComponent implements OnInit {
   opened = false;
   company: CompanyProfile = new CompanyProfile();
   industries: Array<string> = [];
-  
-  companyTypes = ['Client', 'Lead', 'Vendor'];
+
+  companyTypes = [new CompanySetting('Client', 'CLIENT'), new CompanySetting('Lead', 'LEAD'), new CompanySetting('Vendor', 'VENDOR')];
   phoneTypes = ['Office', 'Mobile', 'Fax'];
-  paymentTerms = [new CompanySetting('COD', 0), new CompanySetting('7 days', 0), new CompanySetting('15 days', 0), new CompanySetting('30 days', 0)];
+  paymentTerms = [new CompanySetting('COD', 0), new CompanySetting('7 days', 7), new CompanySetting('15 days', 15), new CompanySetting('30 days', 30)];
   serviceTypes = [new CompanySetting('Hourly', 'HOURLY'), new CompanySetting('Block time', 'BLOCK_TIME'), new CompanySetting('Semi managed', 'SEMI_MANAGED'), new CompanySetting('Fully managed', 'FULLY_MANAGED')];
   paymentMethods = ['Cash', 'Cheque', 'Debit Card', 'Credit Card', 'Wire Transfer'];
   listPersons = [];
@@ -38,12 +40,12 @@ export class CompanyEditAsideComponent implements OnInit {
   constructor(private companiesStateService: CompaniesStateService, private companiesService: CompaniesService,
     private usersStateService: UsersStateService, private modalService: NgbModal, private imageCropperStateService: ImageCropperStateService,
     private elRef: ElementRef,
-    private companySubscriptionState:CompanySubscriptionStateService,
+    private companySubscriptionState: CompanySubscriptionStateService,
     private companyTimeZoneState: CompanyTimeZoneStateService) { }
 
   ngOnInit() {
 
-   
+
     this.getIndustries();
     if (this.usersStateService.getAllUsers().length > 0) {
       this.getTehusers(this.usersStateService.getAllUsers());
@@ -59,10 +61,24 @@ export class CompanyEditAsideComponent implements OnInit {
   onEditCompany() {
     this.companiesStateService.getOnEditCompany().subscribe((data: CompanyProfile) => {
       this.company = new CompanyProfile();
-     
       this.company.onEditMode(data);
       this.companySubscriptionState.onEditMode(this.company.contacts[0].subscription);
-      this.companyTimeZoneState.onEditMode(this.company.addresses[0].timeZone);
+      if (this.company.addresses[0].timeZone) this.companyTimeZoneState.onEditMode(this.company.addresses[0].timeZone);
+      let indexTerms = this.paymentTerms.findIndex(item => item.value === this.company.paymentTerms);
+      if (indexTerms > -1) this.onSelectPaymentTerms(indexTerms);
+
+      let indexServiceType = this.serviceTypes.findIndex(item => item.value === this.company.serviceType);
+      if (indexServiceType > -1) this.onSelectServiceTypes(indexServiceType);
+
+      let indexPersone = this.listPersons.findIndex(item => item.id === this.company.techLeadId);
+      if (indexPersone > -1) this.onSelectTechLead(indexPersone);
+
+      let indexType = this.companyTypes.findIndex(item => item.value === this.company.clientType);
+      if (indexType > -1) this.onSelectCompanyTypes(indexType);
+
+
+
+      this.elRef.nativeElement.querySelector("#company-description").value = this.company.description;
       console.log('company', this.company);
       this.opened = true;
       //this.company.
@@ -76,12 +92,29 @@ export class CompanyEditAsideComponent implements OnInit {
 
     })
   }
- 
- 
-  public onSelectType(item) {
-    this.company.clientType = item.toUpperCase();
+  public onSelectCompanyTypes(index) {
+    this.companyTypes.forEach(item => item.selected = false);
+    this.companyTypes[index].selected = true;
+    this.company.clientType = this.companyTypes[index].value;
     this.validate.resetType();
   }
+
+  public onSelectTechLead(index) {
+    this.listPersons.forEach(item => item.selected = false);
+    this.listPersons[index].selected = true;
+    this.company.techLeadId = this.listPersons[index].id;
+  }
+  public onSelectPaymentTerms(index) {
+    this.paymentTerms.forEach(item => item.selected = false);
+    this.paymentTerms[index].selected = true;
+    this.company.paymentTerms = this.paymentTerms[index].value;
+  }
+  public onSelectServiceTypes(index) {
+    this.serviceTypes.forEach(item => item.selected = false);
+    this.serviceTypes[index].selected = true;
+    this.company.serviceType = this.serviceTypes[index].value;
+  }
+
   public onChangePrimaryEmail() {
     this.validate.checkValidPrimaryEmail(this.company.contacts[0].primaryEmail);
   }
@@ -90,7 +123,7 @@ export class CompanyEditAsideComponent implements OnInit {
   }
   public onChangeName() {
     if (this.company.name && this.company.name.length > 0) {
-      this.companiesService.checkCompanyName("", this.company.name).subscribe((data: any) => {
+      this.companiesService.checkCompanyName(this.company.id, this.company.name).subscribe((data: any) => {
         if (data.value) {
           this.validate.resetName();
         } else {
@@ -122,23 +155,39 @@ export class CompanyEditAsideComponent implements OnInit {
     this.company.description = event.target.value;
     //  this.recurringState.getCreateTicket().setDescription(event.target.value);
   }
-  public onAddFull() {
+  public onUpdateFull() {
     if (!this.validate.isValidate(this.company)) return;
-
-    this.companiesService.createCompany(this.company).subscribe(data => {
+    
+    this.companiesService.updateCompany(this.company).subscribe(data => {
       console.log(' data', data);
     })
   }
   public onCroppImage() {
     this.imageCropperStateService.getConfirm().subscribe(data => {
       console.log('data', data);
-      this.company.setLogo(data);
+      if (data.edit) {
+        this.company.editLogo(data);
+      } else {
+        this.company.setLogo(data);
+      }
+
+    })
+  }
+  public onChangeAvatar() {
+    this.downloadCompanyLogo().then(data => {
+      const modalRef = this.modalService.open(ImageCropperComponent);
+      modalRef.componentInstance.imageBase64 = data;
+      modalRef.componentInstance.id = this.company.logo.origin.id;
     })
   }
   private getTehusers(list) {
 
     list.forEach((item) => {
-      if (item.accountType === "TECH") this.listPersons.push(item);
+      if (item.accountType === "TECH") {
+        item.selected = false;
+        this.listPersons.push(item);
+      }
+
     })
     console.log('this.listPersons', this.listPersons);
   }
@@ -148,6 +197,26 @@ export class CompanyEditAsideComponent implements OnInit {
       console.log('industries', this.industries);
     })
   }
+  getSelectedCompanyTypes() {
+    let index = this.companyTypes.findIndex(item => item.selected === true);
+    if (index > -1) return this.companyTypes[index].title;
+    return "";
+  }
+  getSelectedTechLead() {
+    let index = this.listPersons.findIndex(item => item.selected === true);
+    if (index > -1) return this.listPersons[index].firstName + ' ' + this.listPersons[index].lastName;
+    return "";
+  }
+  getSelectedServiceType() {
+    let index = this.serviceTypes.findIndex(item => item.selected === true);
+    if (index > -1) return this.serviceTypes[index].title;
+    return "";
+  }
+  getSelectedPaymentTerms() {
+    let index = this.paymentTerms.findIndex(item => item.selected === true);
+    if (index > -1) return this.paymentTerms[index].title;
+    return "";
+  }
   getSelectedDropDown(value) {
     if (!value) return "";
     let editValue = value.substring(1, value.length);
@@ -155,6 +224,38 @@ export class CompanyEditAsideComponent implements OnInit {
     editValue = `${value[0]}${editValue}`;
     return editValue;
   }
+  getCompanyLogoUrl() {
+    if (this.company && this.company.logo && this.company.logo && this.company.logo.base64 && !this.company.logo.cropped) {
+      return this.company.logo.base64;
+    } else if (!(this.company && this.company.logo && this.company.logo.cropped && this.company.logo.cropped.id)) {
+      return '/company/default/logo' + '.jpg';
+    }
+    return `/file/${this.company.logo.cropped.id}.jpg?t=${(this.company.logo.updatedAt ? this.company.logo.updatedAt :
+      '')}`;
+  };
+  downloadCompanyLogo() {
+    return new Promise((resolve, reject) => {
+      if (this.company.logo && this.company.logo && this.company.logo.base64 && !this.company.logo.cropped) {
+        resolve(this.company.logo.base64);
+      } else if (this.company.logo && this.company.logo.cropped) {
+        var req = new XMLHttpRequest();
+        req.responseType = "arraybuffer";
+        req.open('GET', `/file/${this.company.logo.origin.id}.jpg?t=${(this.company.logo.updatedAt ? this.company.logo.updatedAt : '')}`, true); /* Третий аргумент true означает асинхронность */
+        req.onload = (oEvent) => {
+
+          var blob = new Blob([req.response], { type: "image/jpg" });
+
+          this.changeFile(blob).then((base64: string): any => {
+
+            resolve(base64);
+
+          });
+
+        };
+        req.send(null);
+      }
+    });
+  };
   public uploadFileOnBrower(event) {
     console.log('event', event);
     if (event.target.value) {

@@ -53,6 +53,11 @@ export class CompaniesService {
     company.onCheckFullVersion();
     return this.http.post(this.apiUrl + 'company',company);
   }
+  public  updateCompany (data) {
+    let company = data;
+    company.onCheckFullVersion();
+    return this.http.put(this.apiUrl + 'company',company);
+  }
 
   /**
    * Set filtered company

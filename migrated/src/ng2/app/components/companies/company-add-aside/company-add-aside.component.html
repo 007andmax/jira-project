@@ -17,19 +17,19 @@
                  placeholder="Write Company or Search Company" (blur)="onChangeName($event)">
         </div>
         <div class="col-md-6" ngbDropdown [ngClass]="{'error-field':!validate.getType() }">
-            <mat-error *ngIf="!validate.getType()">
-                Client Type is required
-              </mat-error>
-          <p>Company Type</p>
-          <input type="text" [value]="company.clientType"
-          autocomplete="new-password" (input)="onChangeType($event)"
-                 placeholder="Select Company Type" id="dropdownTypeCompany" ngbDropdownToggle/>
-                 <div ngbDropdownMenu aria-labelledby="dropdownTypeCompany">
-                    <ng-template ngFor let-item [ngForOf]="companyTypes"  >
-                        <button ngbDropdownItem [textContent]="item" (click)="onSelectType(item)"></button>
-                    </ng-template>
-                </div>
-        </div>
+          <mat-error *ngIf="!validate.getType()">
+              Client Type is required
+            </mat-error>
+        <p>Company Type</p>
+        <input type="text" [value]="getSelectedCompanyTypes()"
+        autocomplete="new-password" (input)="onChangeType($event)"
+               placeholder="Select Company Type" id="dropdownTypeCompany" ngbDropdownToggle/>
+               <div ngbDropdownMenu aria-labelledby="dropdownTypeCompany">
+                  <ng-template ngFor let-item [ngForOf]="companyTypes" let-i="index" >
+                      <button ngbDropdownItem [textContent]="item.title" (click)="onSelectCompanyTypes(i)"></button>
+                  </ng-template>
+              </div>
+      </div>
         <div class="col-md-6"   >
           <p>Primary Contact</p>
           <input type="text" 
@@ -117,19 +117,19 @@
                  placeholder="Write Company or Search Company">
         </div>
         <div class="col-md-6" ngbDropdown [ngClass]="{'error-field':!validate.getType() }">
-            <mat-error *ngIf="!validate.getType()">
-                Client Type is required
-              </mat-error>
-          <p>Company Type</p>
-          <input type="text" [value]="company.clientType"
-          autocomplete="new-password" (input)="onChangeType($event)"
-                 placeholder="Select Company Type" id="dropdownTypeCompany" ngbDropdownToggle/>
-                 <div ngbDropdownMenu aria-labelledby="dropdownTypeCompany">
-                    <ng-template ngFor let-item [ngForOf]="companyTypes"  >
-                        <button ngbDropdownItem [textContent]="item" (click)="onSelectType(item)"></button>
-                    </ng-template>
-                </div>
-        </div>
+          <mat-error *ngIf="!validate.getType()">
+              Client Type is required
+            </mat-error>
+        <p>Company Type</p>
+        <input type="text" [value]="getSelectedCompanyTypes()"
+        autocomplete="new-password" (input)="onChangeType($event)"
+               placeholder="Select Company Type" id="dropdownTypeCompany" ngbDropdownToggle/>
+               <div ngbDropdownMenu aria-labelledby="dropdownTypeCompany">
+                  <ng-template ngFor let-item [ngForOf]="companyTypes" let-i="index" >
+                      <button ngbDropdownItem [textContent]="item.title" (click)="onSelectCompanyTypes(i)"></button>
+                  </ng-template>
+              </div>
+      </div>
         <div class="col-md-6" ngbDropdown>
           <p>Client Type</p>
           <input type="text"
@@ -248,12 +248,12 @@
         </div>
         <div class="col-md-6" ngbDropdown>
           <p>Payment Terms</p>
-          <input type="text" [value]="company.paymentTerms"
+          <input type="text" [value]="getSelectedPaymentTerms()"
           autocomplete="new-password"
                  placeholder="Select Payment Terms" id="dropdownPaymentTerms" ngbDropdownToggle/>
                  <div ngbDropdownMenu aria-labelledby="dropdownPaymentTerms">
-                    <ng-template ngFor let-item [ngForOf]="paymentTerms"  >
-                        <button ngbDropdownItem [textContent]="item.title" (click)="company.paymentTerms = item.value"></button>
+                    <ng-template ngFor let-item [ngForOf]="paymentTerms" let-i="index" >
+                        <button ngbDropdownItem [textContent]="item.title" (click)="onSelectPaymentTerms(i)"></button>
                     </ng-template>
                 </div>
           
@@ -270,11 +270,11 @@
         </div>
         <div class="col-md-6" ngbDropdown>
           <p>Service Type</p>
-          <input type="text" [value]="company.paymentMethods" autocomplete="new-password" placeholder="Select Service Type"
+          <input type="text" [value]="getSelectedServiceType()" autocomplete="new-password" placeholder="Select Service Type"
                   id="dropdownPaymentType" ngbDropdownToggle />
                 <div ngbDropdownMenu aria-labelledby="dropdownPaymentType">
-                  <ng-template ngFor let-item [ngForOf]="serviceTypes">
-                    <button ngbDropdownItem [textContent]="item.title" (click)="company.paymentMethods = item.value"></button>
+                  <ng-template ngFor let-item [ngForOf]="serviceTypes" let-i="index">
+                    <button ngbDropdownItem [textContent]="item.title" (click)="onSelectServiceTypes(i)"></button>
                   </ng-template>
                 </div>
           
@@ -282,11 +282,11 @@
         <div class="col-md-6" ngbDropdown>
           <p>Sales Person</p>
           
-                 <input type="text" [value]="company.paymentMethods" autocomplete="new-password" placeholder="Select Sales Person"
+                 <input type="text" [value]="getSelectedTechLead()" autocomplete="new-password" placeholder="Select Sales Person"
                  id="dropdownPersons" ngbDropdownToggle />
                <div ngbDropdownMenu aria-labelledby="dropdownPersons">
-                 <ng-template ngFor let-item [ngForOf]="listPersons">
-                   <button ngbDropdownItem [textContent]="item.firstName + ' ' + item.lastName" (click)="company.techLeadId = item.id"></button>
+                 <ng-template ngFor let-item [ngForOf]="listPersons" let-i="index">
+                   <button ngbDropdownItem [textContent]="item.firstName + ' ' + item.lastName" (click)="onSelectTechLead(i)"></button>
                  </ng-template>
                </div>
         </div>

@@ -22,7 +22,7 @@ export class CompanyAddAsideComponent implements OnInit {
   company: CompanyProfile = new CompanyProfile();
   industries: Array<string> = [];
   version: string = 'short';
-  companyTypes = ['Client', 'Lead', 'Vendor'];
+  companyTypes = [new CompanySetting('Client', 'CLIENT'),new CompanySetting('Lead', 'LEAD'),new CompanySetting('Vendor', 'VENDOR')];
   phoneTypes = ['Office', 'Mobile', 'Fax'];
   paymentTerms = [new CompanySetting('COD', 0), new CompanySetting('7 days', 0), new CompanySetting('15 days', 0), new CompanySetting('30 days', 0)];
   serviceTypes = [new CompanySetting('Hourly', 'HOURLY'), new CompanySetting('Block time', 'BLOCK_TIME'), new CompanySetting('Semi managed', 'SEMI_MANAGED'), new CompanySetting('Fully managed', 'FULLY_MANAGED')];
@@ -51,7 +51,21 @@ export class CompanyAddAsideComponent implements OnInit {
 
     this.onCroppImage();
   }
-
+  public onSelectTechLead(index) {
+    this.listPersons.forEach(item => item.selected = false);
+    this.listPersons[index].selected = true;
+    this.company.techLeadId = this.listPersons[index].id;
+  }
+  public onSelectPaymentTerms(index) {
+    this.paymentTerms.forEach(item => item.selected = false);
+    this.paymentTerms[index].selected = true;
+    this.company.paymentTerms = this.paymentTerms[index].value;
+  }
+  public onSelectServiceTypes(index) {
+    this.serviceTypes.forEach(item => item.selected = false);
+    this.serviceTypes[index].selected = true;
+    this.company.serviceType = this.serviceTypes[index].value;
+  }
   onAddShort() {
     if (!this.validate.isValidate(this.company)) return;
     console.log('company', this.company);
@@ -69,8 +83,10 @@ export class CompanyAddAsideComponent implements OnInit {
     this.company.fullVersion();
 
   }
-  public onSelectType(item) {
-    this.company.clientType = item.toUpperCase();
+  public onSelectCompanyTypes(index) {
+    this.companyTypes.forEach(item => item.selected = false);
+    this.companyTypes[index].selected = true;
+    this.company.clientType = this.companyTypes[index].value;
     this.validate.resetType();
   }
   public onChangePrimaryEmail() {
@@ -138,6 +154,26 @@ export class CompanyAddAsideComponent implements OnInit {
       this.industries = data;
       console.log('industries', this.industries);
     })
+  }
+  getSelectedCompanyTypes() {
+    let index = this.companyTypes.findIndex(item => item.selected === true);
+    if (index > -1) return this.companyTypes[index].title;
+    return "";
+  }
+  getSelectedTechLead() {
+    let index = this.listPersons.findIndex(item => item.selected === true);
+    if (index > -1) return this.listPersons[index].firstName + ' ' + this.listPersons[index].lastName;
+    return "";
+  }
+  getSelectedServiceType() {
+    let index = this.serviceTypes.findIndex(item => item.selected === true);
+    if (index > -1) return this.serviceTypes[index].title;
+    return "";
+  }
+  getSelectedPaymentTerms() {
+    let index = this.paymentTerms.findIndex(item => item.selected === true);
+    if (index > -1) return this.paymentTerms[index].title;
+    return "";
   }
   getSelectedDropDown(value) {
     if (!value) return "";

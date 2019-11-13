@@ -32,6 +32,7 @@ export class CompanyProfile {
     services: Array<CompanyService>;
     workingDays: Array<WorkDay>;
     techLeadId: string;
+    id:string;
     constructor() {
         this.logo = null;
         let contact: CompanyProfileContact = new CompanyProfileContact();
@@ -42,6 +43,7 @@ export class CompanyProfile {
         this.workingDays = Weeks.map((item) => new WorkDay(item.toUpperCase(), 0, 0))
     }
     public onEditMode(company: CompanyProfile) {
+        this.id = company.id;
         this.accountNumber = company.accountNumber;
         this.addresses = company.addresses;
         this.agentLinkToEmail = company.agentLinkToEmail;
@@ -56,7 +58,7 @@ export class CompanyProfile {
         this.maxAgents = company.maxAgents;
         this.name = company.name;
         this.password = company.password;
-        this.paymentMethods = company.paymentMethods;
+        this.paymentMethods = (company.paymentMethods) ? company.paymentMethods : null;
         this.paymentTerms = company.paymentTerms;
         this.serviceType = company.serviceType;
         this.removeOfflineTime = company.removeOfflineTime;
@@ -83,6 +85,13 @@ export class CompanyProfile {
             }
         }
 
+    }
+    public editLogo (data: ImageCropper) {
+        this.logo.base64 = data.croppedImage.base64;
+        this.logo.w = data.croppedImage.width;
+        this.logo.h = data.croppedImage.width;
+        this.logo.x = data.croppedImage.imagePosition.x1;
+        this.logo.y = data.croppedImage.imagePosition.y1;
     }
     public setLogo(data: ImageCropper) {
         this.logo = new CompanyLogo();
@@ -120,6 +129,7 @@ export class CompanyProfile {
 
     public onCheckFullVersion() {
         if (!this.clientIndustry.name || this.clientIndustry.name.length === 0) this.clientIndustry = {};
+        console.log('this.contacts[0].phoneNumbers[0].number.length === 0',this.contacts[0].phoneNumbers[0].number.length);
         if (!this.contacts[0].phoneNumbers[0].number || this.contacts[0].phoneNumbers[0].number.length === 0) this.contacts[0].phoneNumbers = [];
 
     }
