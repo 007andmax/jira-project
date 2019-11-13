@@ -12,6 +12,10 @@
   justify-content: flex-start;
 }
 
+.jc-c {
+  justify-content: center;
+}
+
 .ai-c {
   align-items: center;
 }
@@ -288,11 +292,13 @@
 }
 
 .recurring-tickets-content__modal,
+.new-users-content__modal,
 .password-content__modal {
   top: 0 !important;
   position: absolute !important;
 }
 
+.new-users-content__modal--content,
 .recurring-tickets-content__modal--content {
   app-tags {
     > .col-md-12 {
@@ -385,7 +391,8 @@
   }
 }
 
-.recurring-tickets-content__modal--content-footer {
+.recurring-tickets-content__modal--content-footer,
+.new-users-content__modal--content-footer {
   .assigned-users-list {
     display: flex;
     margin-left: -39px;
@@ -666,6 +673,7 @@ ngb-typeahead-window {
 
 // GLOBAL STYLES FOR product, password, recurring tickets
 .products-content,
+.new-users-content,
 .recurring-tickets-content,
 .password-content {
   padding: 21px 24px;
@@ -675,6 +683,7 @@ ngb-typeahead-window {
 }
 
 .products-content__header,
+.new-users-content__header,
 .recurring-tickets-content__header,
 .password-content__header {
   display: flex;
@@ -685,6 +694,7 @@ ngb-typeahead-window {
 }
 
 .products-content__header h3,
+.new-users-content__header h3,
 .recurring-tickets-content__header h3,
 .password-content__header h3 {
   font-family: "Graphik Regular", sans-serif;
@@ -692,12 +702,14 @@ ngb-typeahead-window {
   margin: 0;
 }
 
-.products-content__header--search {
+.products-content__header--search,
+.new-users-content__header--search {
   display: flex;
   position: relative;
 }
 
-.products-content__header--search:before {
+.products-content__header--search:before,
+.new-users-content__header--search:before {
   position: absolute;
   content: '';
   width: 20px;
@@ -707,7 +719,8 @@ ngb-typeahead-window {
   top: calc(50% - 10px);
 }
 
-.products-content__header--search input {
+.products-content__header--search input,
+.new-users-content__header--search input {
   width: 300px;
   margin-right: 16px;
   border: none;
@@ -718,7 +731,8 @@ ngb-typeahead-window {
   outline: none;
 }
 
-.products-content__header--search input::placeholder {
+.products-content__header--search input::placeholder,
+.new-users-content__header--search input::placeholder {
   color: #9ca5b6;
   opacity: 1;
 }
@@ -743,18 +757,21 @@ ngb-typeahead-window {
 }
 
 .products-content__list .products-content__list--item [class*='col-md-'],
+.new-users-content__list .new-users-content__list--item [class*='col-md-'],
 .recurring-tickets-content__list .recurring-tickets-content__list--item [class*='col-md-'],
 .password-content__list .password-content__list--item [class*='col-md-'] {
   word-break: break-all;
 }
 
 .products-content__list .products-content__list--header [class*='col-md-'],
+.new-users-content__list .new-users-content__list--header [class*='col-md-'],
 .recurring-tickets-content__list .recurring-tickets-content__list--header [class*='col-md-'],
 .password-content__list .password-content__list--header [class*='col-md-'] {
   white-space: nowrap;
 }
 
 .products-content__list--header div,
+.new-users-content__list--header div,
 .recurring-tickets-content__list--header div,
 .password-content__list--header div {
   text-transform: uppercase;
@@ -764,12 +781,14 @@ ngb-typeahead-window {
 }
 
 .products-content__list--header,
+.new-users-content__list--header,
 .recurring-tickets-content__list--header,
 .password-content__list--header {
   padding: 15px 0;
 }
 
 .products-content__list--item,
+.new-users-content__list--item,
 .recurring-tickets-content__list--item,
 .password-content__list--item {
   border-radius: 4px;
@@ -783,6 +802,30 @@ ngb-typeahead-window {
   padding: 16px 0;
 }
 
+.new-users-content__list--item {
+  padding: 12px 0;
+  display: flex;
+  .col-md-3.w-100 {
+    .fz12 {
+      color: #9ca5b6;
+    }
+  }
+  .subs {
+    .subs-list {
+      cursor: pointer;
+      font-size: 12px;
+      padding: 3px 30px 3px 10px;
+      background: #f8f9fa;
+      border: 1px solid #edf2f6;
+      border-radius: 3px;
+    }
+    .grey-dropdown .report-caret-icon {
+      right: 10px;
+      top: 13px !important;
+    }
+  }
+}
+
 .password-content__list--item .col-md-3:before {
   position: absolute;
   content: '';
@@ -793,6 +836,7 @@ ngb-typeahead-window {
 }
 
 .recurring-tickets-content__list--item .btn-actions,
+.new-users-content__list--item .btn-actions,
 .password-content__list--item .btn-actions {
   width: 4%;
   display: flex;
@@ -800,6 +844,7 @@ ngb-typeahead-window {
 }
 
 .password-selected .new-link,
+.new-users-selected .new-link,
 .recurring-tickets-selected .new-link {
   cursor: default;
   font-size: 13px;
@@ -807,6 +852,7 @@ ngb-typeahead-window {
 }
 
 .password-selected,
+.new-users-selected,
 .recurring-tickets-selected {
   box-shadow: 0 3px 6px 0 rgba(186, 186, 186, 0.05);
   display: none;
@@ -824,11 +870,13 @@ ngb-typeahead-window {
 }
 
 .recurring-tickets-content__header--search,
+.new-users-content__header--search,
 .password-content__header--search {
   display: flex;
 }
 
 .password-selected-actions,
+.new-users-selected-actions,
 .recurring-tickets-selected-actions,
 .password-modal-actions {
   display: flex;
@@ -836,6 +884,7 @@ ngb-typeahead-window {
 }
 
 .password-selected-actions i,
+.new-users-selected-actions i,
 .recurring-tickets-selected-actions i,
 .password-modal-actions i {
   margin-left: 20px;
@@ -843,6 +892,7 @@ ngb-typeahead-window {
 }
 
 .products-content__list--item [class*='col-md-'],
+.new-users-content__list--item [class*='col-md-'],
 .recurring-tickets-content__list--item [class*='col-md-'],
 .password-content__list--item [class*='col-md-'] {
   font-size: 13px;
@@ -850,8 +900,37 @@ ngb-typeahead-window {
 }
 
 // Global styles for RECURRING TICKETS
-.recurring-tickets-content {
-  .recurring-tickets__list {
+.new-users__list {
+  .col-md-3 {
+    width: 21%;
+  }
+  .col-md-2 {
+    width: 7%;
+  }
+  .col-md-4 {
+    width: 22%;
+  }
+  .col-md-1 {
+    width: 7%;
+  }
+  .contact {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start !important;
+    p:last-child {
+      color: #9ca5b6;
+    }
+  }
+}
+
+.new-users-content .new-users__list--header {
+  display: flex;
+}
+
+.recurring-tickets-content,
+.new-users-content {
+  .recurring-tickets__list,
+  .new-users__list {
     &--header {
       margin-bottom: 15px;
       .with-checkbox {
@@ -1205,11 +1284,52 @@ ngb-datepicker {
   border: none !important;
 }
 
-.recurring-tickets-content__modal {
+.recurring-tickets-content__modal,
+.new-users-content__modal {
   .mat-error {
     position: absolute;
     top: -17px;
     font-size: 12px;
+  }
+}
+
+// LEFT PANEL
+.left-panel-ng2 {
+  [class*="left-panel-ng2__content"] {
+    margin-bottom: 20px;
+  }
+  &__content {
+    color: #fff;
+    .list-item,
+    .types-item {
+      font-family: "Graphik Regular", sans-serif;
+      padding: 4px 24px;
+      font-size: 12px;
+      border-left: 2px solid transparent;
+      transition: all .3s;
+      cursor: pointer;
+      &:hover,
+      &.active {
+        //font-family: "Graphik-Medium", sans-serif;
+        //font-weight: 500;
+        background: #3e4b61;
+        border-left: 2px solid #16a4fa;
+      }
+    }
+    &--lists {
+    }
+    &--types {
+    }
+    .types-header,
+    .tags-header,
+    .filter-item__header {
+      padding: 8px 24px;
+      opacity: .5;
+      font-family: "Graphik Semibold", sans-serif;
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
   }
 }
 

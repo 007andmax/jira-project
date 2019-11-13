@@ -77,6 +77,11 @@ import { FilterPipe } from './pipe/filter.pipe';
 import { ConfirmComponent } from './components/shared/confirm/confirm/confirm.component';
 import { ClickOtsideDirective } from './directives/click-otside.directive';
 import { SortByPipe } from './pipe/sort-by.pipe';
+import { UsersComponent } from './components/users/users.component';
+import { UsersHeaderComponent } from './components/users/users-header/users-header.component';
+import { UsersTableComponent } from './components/users/users-table/users-table.component';
+import { UsersAsideComponent } from './components/users/users-aside/users-aside.component';
+import { LeftPanelUsersComponent } from './components/left-panel/left-panel-users/left-panel-users.component';
 
 
 /**
@@ -120,6 +125,9 @@ angular.module('quicktech')
   .directive(
     'recurringTicketsComponent',
     downgradeComponent({component: RecurringTicketsComponent}))
+  .directive(
+    'usersComponent',
+    downgradeComponent({component: UsersComponent}))
   .factory('ngZone', downgradeInjectable(NgZone));
 
 /**
@@ -180,7 +188,12 @@ angular.module('quicktech')
     FilterPipe,
     ConfirmComponent,
     ClickOtsideDirective,
-    SortByPipe
+    SortByPipe,
+    UsersComponent,
+    UsersHeaderComponent,
+    UsersTableComponent,
+    UsersAsideComponent,
+    LeftPanelUsersComponent
   ],
   imports: [
     BrowserModule,
@@ -236,6 +249,11 @@ angular.module('quicktech')
           path: 'ng2/recurring-tickets',
           component: RecurringTicketsComponent,
           pathMatch: 'full'
+        },
+        {
+          path: 'ng2/new-users',
+          component: UsersComponent,
+          pathMatch: 'full'
         }
       ],
       {
@@ -243,7 +261,7 @@ angular.module('quicktech')
         enableTracing: false
       }),
       CronEditorModule,
-      
+
   ],
   entryComponents: [
     LeftPanelComponent,
@@ -254,6 +272,7 @@ angular.module('quicktech')
     QuotePreviewComponent,
     PasswordManagerComponent,
     CompanyPasswordManagerComponent,
+    UsersComponent
     // RecurringTicketsComponent
   ],
   providers: [
