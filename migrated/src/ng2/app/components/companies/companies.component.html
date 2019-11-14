@@ -5,19 +5,19 @@
   <app-companies-header></app-companies-header>
   <div class="new-companies__list">
     <div class="new-companies__list--header clearfix mob-hidden">
-      <div class="col-md-3 with-checkbox">
+      <div class="col-md-3 with-checkbox" >
         <label class="checkbox-container">
           <input type="checkbox">
           <span class="checkbox-mark"></span>
         </label>
-        <p>Name</p>
+        <p (click)="onFilter('name')">Name</p>
       </div>
-      <div class="col-md-3">Address</div>
-      <div class="col-md-4">Primary Contact</div>
-      <div class="col-md-4">Email Address</div>
-      <div class="col-md-1">Tickets</div>
-      <div class="col-md-1">Devices</div>
-      <div class="col-md-1">Users</div>
+      <div class="col-md-3" (click)="onFilter('address')">Address</div>
+      <div class="col-md-4" (click)="onFilter('primary_contact')">Primary Contact</div>
+      <div class="col-md-4" (click)="onFilter('email')">Email Address</div>
+      <div class="col-md-1" (click)="onFilter('tickets')">Tickets</div>
+      <div class="col-md-1" (click)="onFilter('devices')">Devices</div>
+      <div class="col-md-1" (click)="onFilter('users')">Users</div>
       <div class="col-md-2"></div>
     </div>
     <div class="company-content"
