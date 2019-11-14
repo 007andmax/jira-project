@@ -1,0 +1,121 @@
+<ng-sidebar-container>
+  <ng-sidebar [(opened)]="opened" [position]="'right'">
+    <div class="new-users-content__modal open">
+      <div class="new-users-content__modal--header">
+        <h3>Create New User</h3>
+        <button class="close-modal" (click)="close()"></button>
+      </div>
+
+      <div class="new-users-content__modal--content clearfix">
+        <div class="col-md-12">
+          <div class="logo-upload d-f">
+            <i class="icn-64 upload-logo"></i>
+            <div>
+              <div class="new-link">Add a Profile Photo</div>
+              <p>Maximum size of 2MB. JPG, GIF, PNG</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <p>First Name</p>
+          <input type="text"
+                 placeholder="Enter First Name">
+        </div>
+        <div class="col-md-6">
+          <p>Last Name</p>
+          <input type="text"
+                 placeholder="Enter Last Name">
+        </div>
+        <div class="col-md-6 with-new-link">
+          <p>
+            Email
+            <span class="new-link">+ Add Email</span>
+          </p>
+          <input type="text"
+                 placeholder="Enter Email">
+        </div>
+        <div class="col-md-6">
+          <p>Role</p>
+          <div class="grey-dropdown" ngbDropdown>
+            <input type="text"
+                   placeholder="Select User Role"
+                   id="dropdownBasic3"
+                   ngbDropdownToggle>
+            <i class="icn-sm report-caret-icon"></i>
+            <div ngbDropdownMenu
+                 aria-labelledby="dropdownBasic3">
+              <button ngbDropdownItem>Role 1</button>
+              <button ngbDropdownItem>Role 2</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <p>Company</p>
+          <div class="grey-dropdown" ngbDropdown>
+            <input type="text"
+                   placeholder="Select Company"
+                   id="dropdownBasic4"
+                   ngbDropdownToggle>
+            <i class="icn-sm report-caret-icon"></i>
+            <div ngbDropdownMenu
+                 aria-labelledby="dropdownBasic4">
+              <button ngbDropdownItem>Company 1</button>
+              <button ngbDropdownItem>Company 2</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <p>User Type</p>
+          <div class="grey-dropdown" ngbDropdown>
+            <input type="text"
+                   placeholder="Select User Type"
+                   id="dropdownBasic1"
+                   ngbDropdownToggle>
+            <i class="icn-sm report-caret-icon"></i>
+            <div ngbDropdownMenu
+                 aria-labelledby="dropdownBasic1">
+              <button ngbDropdownItem>Standard User</button>
+              <button ngbDropdownItem>Standard User 2</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 with-new-link">
+          <p>
+            Primary Phone
+            <span class="new-link">+ Add Email</span>
+          </p>
+          <input type="text"
+                 placeholder="Enter Primary Phone">
+        </div>
+        <div class="col-md-12">
+          <p>Subscription</p>
+          <div class="grey-dropdown" ngbDropdown>
+            <i class="icn-sm report-caret-icon"></i>
+            <div class="user-subscription"
+                 id="dropdownBasic2"
+                 ngbDropdownToggle>
+              <div>Invoice Updates</div>
+              <div>Ticket Updates</div>
+              <div>Ticket Manager</div>
+            </div>
+            <div ngbDropdownMenu
+                 aria-labelledby="dropdownBasic2">
+              <button ngbDropdownItem>Invoice Updates</button>
+              <button ngbDropdownItem>Ticket Updates</button>
+              <button ngbDropdownItem>Ticket Manager</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12 new-users-content__modal--content-footer">
+          <div class="d-f">
+            <button class="btn-new btn-primary">Add User</button>
+            <button class="btn-new disabled">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </ng-sidebar>
+</ng-sidebar-container>

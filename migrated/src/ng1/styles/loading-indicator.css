@@ -29,6 +29,7 @@
   border-top-color: #9ca5b6;
 }
 
+.new-users-content__modal--content .loading.xs,
 .recurring-tickets-content__modal--content .loading.xs,
 .quotes__header--top .loading.xs {
   top: -3px;

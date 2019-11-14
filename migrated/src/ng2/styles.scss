@@ -389,6 +389,37 @@
       cursor: pointer;
     }
   }
+  .with-new-link {
+    > p {
+      position: relative;
+      span {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: auto;
+      }
+    }
+  }
+}
+
+.user-subscription {
+  display: flex;
+  height: 40px;
+  padding: 0 3px;
+  font-size: 13px;
+  border: 1px solid #c4cbd5;
+  border-radius: 4px;
+  align-items: center;
+  cursor: pointer;
+  > div {
+    font-size: 12px;
+    padding: 3px 8px;
+    background: #F8F9FA;
+    border: 1px solid #EDF2F6;
+    border-radius: 3px;
+    margin-right: 4px;
+  }
 }
 
 .recurring-tickets-content__modal--content-footer,
@@ -1286,10 +1317,29 @@ ngb-datepicker {
 
 .recurring-tickets-content__modal,
 .new-users-content__modal {
+  .logo-upload {
+    margin-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #edf2f6;
+    align-items: center;
+    p {
+      font-size: 11px !important;
+      font-family: Graphik-Regular, sans-serif !important;
+    }
+  }
+  .new-link {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
   .mat-error {
     position: absolute;
     top: -17px;
     font-size: 12px;
+  }
+  .upload-logo {
+    position: static;
+    margin-right: 20px;
+    cursor: pointer;
   }
 }
 
