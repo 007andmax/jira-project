@@ -48,6 +48,11 @@ export class CompaniesService {
     return this.http.get(this.apiUrl + 'company/archive/' + id);
   }
 
+  public getClientsByTags (tags) {
+   
+    return this.http.post(this.apiUrl + 'company/clientsByTags',tags);
+    
+  }
   public  createCompany (data) {
     let company = data;
     company.onCheckFullVersion();
@@ -82,6 +87,13 @@ export class CompaniesService {
 
 public uploadAvatar (file) {
   return this.http.post(this.apiUrl + 'file?isAvatar=true&ratio=1',{file:file});
+}
+
+public setSalesHistory (value) {
+  return this.http.post(this.apiUrl + 'customStorage/user',{
+    customKey: "companiesPageFilterBySalesHistory",
+    value: JSON.stringify(value)
+  });
 }
 
 }

@@ -50,8 +50,8 @@ public getCompanytForArchive () {
 public getOnShowArchived () {
   return this.onShowArchived;
 }
-public setOnShowArchived () {
-this.onShowArchived.emit();
+public setOnShowArchived (data) {
+this.onShowArchived.emit(data);
 }
 public toggleAsideForAdd() {
   this.showAsideForAdd.emit();

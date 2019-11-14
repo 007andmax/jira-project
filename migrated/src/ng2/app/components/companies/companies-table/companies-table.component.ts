@@ -40,7 +40,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     this.companiesStateService.getOnShowArchived().subscribe(data => {
-      this.showArchivedCompanies = true;
+      this.showArchivedCompanies = data;
     })
     if (this.usersStateService.getAllUsers().length > 0) {
       this.onGetUsersCount(this.usersStateService.getAllUsers());
