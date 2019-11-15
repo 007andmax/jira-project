@@ -5,7 +5,7 @@
   <app-companies-header></app-companies-header>
   <div class="new-companies__list">
     <div class="new-companies__list--header clearfix mob-hidden">
-      <div class="col-md-3 with-checkbox" >
+      <div class="col-md-3 with-checkbox">
         <label class="checkbox-container">
           <input type="checkbox">
           <span class="checkbox-mark"></span>
@@ -21,15 +21,15 @@
       <div class="col-md-2"></div>
     </div>
     <div class="company-content"
-    infiniteScroll
-    [infiniteScrollDistance]="2"
-    [infiniteScrollThrottle]="50"
-    [infiniteScrollDisabled]="infiniteScrollDisabled"
-    (scrolled)="onScroll()">
-        <ng-template ngFor let-company
+         infiniteScroll
+         [infiniteScrollDistance]="2"
+         [infiniteScrollThrottle]="50"
+         [infiniteScrollDisabled]="infiniteScrollDisabled"
+         (scrolled)="onScroll()">
+      <ng-template ngFor let-company
                    [ngForOf]="CompaniesList"
                    [ngForTrackBy]="trackById">
-      <app-companies-table [company]="company"  ></app-companies-table>
+        <app-companies-table [company]="company"></app-companies-table>
       </ng-template>
       <div class="loading" *ngIf="showPreloader"></div>
     </div>

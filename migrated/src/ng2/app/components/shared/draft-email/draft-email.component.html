@@ -2,27 +2,41 @@
   <ng-sidebar [(opened)]="opened" [position]="'right'">
     <div class="new-companies-content__modal open">
       <div class="new-companies-content__modal--header">
-        <h3>Add New Company</h3>
+        <h3>Write Draft for Companies</h3>
         <button class="close-modal" (click)="close()"></button>
       </div>
-      <!--      BASIC-->
-      <div class="new-companies-content__modal--content" >
+      <div class="new-companies-content__modal--content">
+        <div class="col-md-12">
+          <p>Subject</p>
+          <input type="text" placeholder="Write Subject line">
+        </div>
+        <div class="col-md-12">
+          <p>Add Recipient</p>
+          <input type="text"
+                 placeholder="Mention a email address to companies">
+        </div>
 
-       
+        <div class="col-md-12 tab-btns">
+          <div ng-class="{active: tab == 'plain'}">
+            Plain Text
+          </div>
+          <div ng-class="{active: tab == 'html'}"
+          >Paste Html
+          </div>
+        </div>
+        <div class="col-md-12">
+          <!--EDITOR-->
+        </div>
 
         <div class="col-md-12 new-companies-content__modal--content-footer">
           <div class="d-f">
-            <button class="btn-new btn-primary" (click)="onAddShort()">Create Company</button>
+            <button class="btn-new btn-primary"
+                    (click)="onAddShort()">Send Email
+            </button>
             <button class="btn-new disabled">Cancel</button>
           </div>
         </div>
-
       </div>
-
-
-     
-
-
     </div>
   </ng-sidebar>
 </ng-sidebar-container>

@@ -231,6 +231,22 @@
 
 .new-companies-content__modal--content,
 .recurring-tickets-content__modal--content {
+  .tab-btns {
+    display: flex;
+    margin: 0 9px;
+    font-size: 12px;
+    > div {
+      font-family: "Graphik Semibold", sans-serif;
+      padding: 9px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all .3s;
+      &:hover,
+      &.active {
+        border-color: #16a4fa;
+      }
+    }
+  }
   app-tags {
     > .col-md-12 {
       margin-top: 40px;

@@ -2,6 +2,31 @@
 .light-dropdown,
 .grey-dropdown {
   position: relative;
+  &.with-placeholder {
+    height: 40px;
+    border-radius: 3px;
+    border: 1px solid #c4cbd5;
+    .placeholder {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #9ca5b6;
+      font-size: 13px;
+      font-family: "Graphik Regular", sans-serif;
+    }
+    .selected {
+      background: transparent;
+      cursor: pointer;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      padding: 0 3px;
+      >div{
+        margin-right: 4px;
+      }
+    }
+  }
   &.to-left {
     .dropdown-menu {
       left: auto !important;
