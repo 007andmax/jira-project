@@ -1,0 +1,28 @@
+<ng-sidebar-container>
+  <ng-sidebar [(opened)]="opened" [position]="'right'">
+    <div class="new-companies-content__modal open">
+      <div class="new-companies-content__modal--header">
+        <h3>Add New Company</h3>
+        <button class="close-modal" (click)="close()"></button>
+      </div>
+      <!--      BASIC-->
+      <div class="new-companies-content__modal--content" >
+
+       
+
+        <div class="col-md-12 new-companies-content__modal--content-footer">
+          <div class="d-f">
+            <button class="btn-new btn-primary" (click)="onAddShort()">Create Company</button>
+            <button class="btn-new disabled">Cancel</button>
+          </div>
+        </div>
+
+      </div>
+
+
+     
+
+
+    </div>
+  </ng-sidebar>
+</ng-sidebar-container>

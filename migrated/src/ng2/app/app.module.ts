@@ -81,6 +81,7 @@ import { CompanyTimeZoneComponent } from './components/companies/company-time-zo
 import { ImageCropperComponent } from './components/shared/image-cropper/image-cropper.component';
 import { CompanyEditAsideComponent } from './components/companies/company-edit-aside/company-edit-aside.component';
 import { CompanyTagsComponent } from './components/companies/company-tags/company-tags.component';
+import { DraftEmailComponent } from './components/shared/draft-email/draft-email.component';
 
 
 /**
@@ -189,6 +190,7 @@ angular.module('quicktech')
     ImageCropperComponent,
     CompanyEditAsideComponent,
     CompanyTagsComponent,
+    DraftEmailComponent,
     
   ],
   imports: [
