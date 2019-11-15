@@ -81,7 +81,7 @@
             <div class="resent-block__header">Recent</div>
             <div class="resent-block__content">
                 <ng-template ngFor let-item [ngForOf]="industryHistory" let-i="index" [ngForTrackBy]="trackByIndex"  >
-                    <p [textContent]="item" (click)="onSelectClientIndustry(item)"></p>
+                    <p [textContent]="item" (click)="selectClientIndustry(item)"></p>
                   </ng-template>
              
              

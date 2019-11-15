@@ -113,7 +113,11 @@ export class LeftPanelCompaniesComponent implements OnInit {
       console.log('this.salesHistory', this.salesHistory);
     })
   }
-
+public selectClientIndustry (item) {
+  this.clientIndustry = item;
+  this.filter.setClientIndustry(this.clientIndustry);
+  this.leftPanelStateService.onInitFilter(this.filter);
+}
   public onSelectClientIndustry(item) {
     this.clientIndustry = item;
     this.filter.setClientIndustry(this.clientIndustry);
