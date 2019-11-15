@@ -10,16 +10,16 @@ export class CompanyProfileAddress {
     locale: string;
     timeZone: any;
     constructor() {
-       
+        this.phoneNumbers = [{
+            number: '',
+            typeNumber: 'OFFICE'
+        }];
     }
     public fullVersion() {
         this.address = '';
         this.fromGoogle = false;
         this.isPrimary = true;
-        this.phoneNumbers = [{
-            number: '',
-            typeNumber: 'OFFICE'
-        }];
+       
         this.postalCode = '';
         this.suiteNumber = '';
         this.locale = '';
@@ -30,6 +30,6 @@ export class CompanyProfileAddress {
     }
     public shortVersion(contact: CompanyProfileContact) {
         this.isPrimary = true;
-        this.phoneNumbers = contact.phoneNumbers;
+       // this.phoneNumbers = contact.phoneNumbers;
     }
 }

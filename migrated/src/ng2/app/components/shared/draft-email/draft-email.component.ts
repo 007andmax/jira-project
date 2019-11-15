@@ -18,4 +18,7 @@ export class DraftEmailComponent implements OnInit {
       this.opened = true;
     })
   }
+  close() {
+    this.opened = false;
+  }
 }

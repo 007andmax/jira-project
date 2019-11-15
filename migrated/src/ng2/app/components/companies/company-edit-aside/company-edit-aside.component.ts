@@ -14,6 +14,7 @@ import { CompanySubscriptionStateService } from '../company-subscription/class/c
 import { CompanyTimeZoneStateService } from '../company-time-zone/services/company-time-zone-state.service';
 import { isNgTemplate } from '@angular/compiler';
 import { ImageCropperComponent } from '../../shared/image-cropper/image-cropper.component';
+import { CompanyTagsStateService } from '../company-tags/states/company-tags-state.service';
 
 @Component({
   selector: 'app-company-edit-aside',
@@ -41,7 +42,8 @@ export class CompanyEditAsideComponent implements OnInit {
     private usersStateService: UsersStateService, private modalService: NgbModal, private imageCropperStateService: ImageCropperStateService,
     private elRef: ElementRef,
     private companySubscriptionState: CompanySubscriptionStateService,
-    private companyTimeZoneState: CompanyTimeZoneStateService) { }
+    private companyTimeZoneState: CompanyTimeZoneStateService,
+    private companyTagsStateService:CompanyTagsStateService) { }
 
   ngOnInit() {
 
@@ -57,6 +59,19 @@ export class CompanyEditAsideComponent implements OnInit {
 
     this.onCroppImage();
     this.onEditCompany();
+  }
+  close() {
+    this.opened = false;
+    this.companySubscriptionState.onInitClear();
+    this.companyTagsStateService.onInitClear();
+    this.company = new CompanyProfile();
+    this.companyTypes.forEach(item => item.selected = false);
+    this.paymentTerms.forEach(item => item.selected = false);
+    this.serviceTypes.forEach(item => item.selected = false);
+    this.subscriptions.forEach(item => item.selected = false);
+    this.listPersons.forEach(item => item.selected = false);
+    this.validate = new CompanyValdiate();
+
   }
   onEditCompany() {
     this.companiesStateService.getOnEditCompany().subscribe((data: CompanyProfile) => {

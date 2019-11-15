@@ -39,7 +39,7 @@ export class CompanySubscriptionComponent implements OnInit, OnDestroy {
    */
   public constructor(
   
-    private tagsState: TagsStateService,
+   
     private companySubscriptionState:CompanySubscriptionStateService
   ) { }
 
@@ -70,7 +70,7 @@ export class CompanySubscriptionComponent implements OnInit, OnDestroy {
   * Subscribe for clear data
   */
   private onInitClearState() {
-    let getClearState = this.tagsState.getClearState().subscribe(() => this.close());
+    let getClearState = this.companySubscriptionState.getClearState().subscribe(() => this.close());
     this.sub.add(getClearState);
   }
 

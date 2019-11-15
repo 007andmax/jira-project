@@ -51,6 +51,18 @@ export class CompanyAddAsideComponent implements OnInit {
 
     this.onCroppImage();
   }
+  close() {
+    this.opened = false;
+    this.version = 'short';
+    this.company = new CompanyProfile();
+    this.companyTypes.forEach(item => item.selected = false);
+    this.paymentTerms.forEach(item => item.selected = false);
+    this.serviceTypes.forEach(item => item.selected = false);
+    this.subscriptions.forEach(item => item.selected = false);
+    this.listPersons.forEach(item => item.selected = false);
+    this.validate = new CompanyValdiate();
+
+  }
   public onSelectTechLead(index) {
     this.listPersons.forEach(item => item.selected = false);
     this.listPersons[index].selected = true;
