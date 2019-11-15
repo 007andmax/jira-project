@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { CompaniesService } from '../../services/company/companies.service';
 import { Company } from '../../interfaces/company/company';
 import { CompanyProfile } from '../../components/companies/class/company-profile';
+import { CompanyCalculateCount } from '../../components/companies/class/company-calculate-count';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,8 @@ showAsideForAdd: EventEmitter<any> = new EventEmitter();
 onShowArchived:EventEmitter<any> = new EventEmitter();
 onEditCompany:EventEmitter<CompanyProfile> = new EventEmitter();
  companyForArchive:Company = null;
+ onCalculateCount: EventEmitter<CompanyCalculateCount> = new EventEmitter();
+ calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
   constructor(private companiesService: CompaniesService) { }
   public onInit() {
   this.companiesService.getCompaniesList().subscribe((data) => {
@@ -21,6 +24,17 @@ onEditCompany:EventEmitter<CompanyProfile> = new EventEmitter();
   })
   
 }
+public getCalculateCount () {
+  return this.calculateCount;
+}
+public getOnCalculateCount() {
+  return this.onCalculateCount;
+}
+public setCalculateCount(data){
+ this.calculateCount = data;
+  this.onCalculateCount.emit(data);
+}
+
 public getOnEditCompany() {
   return this.onEditCompany;
 }

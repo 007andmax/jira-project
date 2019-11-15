@@ -11,6 +11,7 @@ import { DevicesSateService } from '../../states/devices/devices-sate.service';
 import { UsersStateService } from '../../states/users/users-state.service';
 import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
 import { LeftPanelCompaniesFilter } from '../left-panel/left-panel-companies/class/left-panel-companies-filter';
+import { CompanyCalculateCount } from './class/company-calculate-count';
 
 @Component({
   selector: 'app-companies',
@@ -37,6 +38,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   users = [];
   sub: Subscription = new Subscription();
   left_filter: LeftPanelCompaniesFilter = new LeftPanelCompaniesFilter();
+calculateCount:CompanyCalculateCount = new CompanyCalculateCount();
   constructor(private companiesService: CompaniesService, private companiesList: CompaniesListService,
     private companiesStateService: CompaniesStateService, private userService: UsersService,
     private confirmStateService: ConfirmStateService, private devicesState: DevicesSateService, private usersStateService: UsersStateService,
@@ -46,6 +48,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.companiesStateService.getOnShowArchived().subscribe(data => {
       this.showArchivedCompanies = data;
       console.log('data', data);
+      this.left_filter.setClientType(null);
       this.clearFilter();
       this.setDefaultScoll();
       this.getClientsList(this.companiesStateService.getCompanies());
@@ -86,6 +89,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       this.left_filter = data;
       this.setDefaultScoll();
       this.onScroll();
+      this.onInirCalculate();
 
     })
     this.sub.add(geLefttFilter);
@@ -98,18 +102,17 @@ export class CompaniesComponent implements OnInit, OnDestroy {
 
     })
   }
+  private onInirCalculate() {
+    this.calculateCount.onCalculate(this.reqCompaniesList,this.left_filter);
+    this.companiesStateService.setCalculateCount(this.calculateCount);
+  }
   private getClientsList(data) {
-
-
     this.reqCompaniesList = data.filter(item => item.accountType === 'CLIENT' && ((!this.showArchivedCompanies) ? !item.deletedAt : item.deletedAt));
+  this.onInirCalculate();
     this.reqCompaniesList.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-    console.log('this.reqCompaniesList', this.reqCompaniesList.length);
-
-    console.log('clientsCompaniesList', this.CompaniesList);
     this.onScroll();
     this.showPreloader = false;
-
   }
   private getCompanies() {
     if (this.companiesList.getBlockList()) {
@@ -121,7 +124,6 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     let start = (this.page_number - 1) * 30;
     let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;
     let CompaniesList = [];
-
     for (let i = start; i < end; i++) {
       CompaniesList.push(listFilter[i]);
     }

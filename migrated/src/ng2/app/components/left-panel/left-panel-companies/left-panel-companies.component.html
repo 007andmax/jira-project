@@ -12,9 +12,9 @@
     </div>
     <div class="left-panel-ng2__content--types mob-hidden">
       <div class="types-header">By Types</div>
-      <div class="types-item" [ngClass]="{'active': filter.getClientType() === 'CLIENT'}" (click)="onSetFilterClientType('CLIENT')">Clients (56)</div>
-      <div class="types-item" [ngClass]="{'active': filter.getClientType() === 'LEAD'}" (click)="onSetFilterClientType('LEAD')">Leads (46)</div>
-      <div class="types-item" [ngClass]="{'active': filter.getClientType() === 'VENDOR'}" (click)="onSetFilterClientType('VENDOR')">Vendor (96)</div>
+      <div class="types-item" [ngClass]="{'active': filter.getClientType() === 'CLIENT'}" (click)="onSetFilterClientType('CLIENT')">Clients ({{calculateCount.getClients()}})</div>
+      <div class="types-item" [ngClass]="{'active': filter.getClientType() === 'LEAD'}" (click)="onSetFilterClientType('LEAD')">Leads ({{calculateCount.getLeads()}})</div>
+      <div class="types-item" [ngClass]="{'active': filter.getClientType() === 'VENDOR'}" (click)="onSetFilterClientType('VENDOR')">Vendor ({{calculateCount.getVndors()}})</div>
     </div>
     <div class="left-panel-ng2__content--tags">
       <div class="tags-header">
@@ -36,6 +36,8 @@
             [value]="getSelectedTechLead()"
                    placeholder="Select Sales Person"
                    ngbDropdownToggle>
+                   <i class="icn-sm icn-remove-old" (click)="clearSalesPerson()" tooltip="clear"
+                   tooltip-placement="top"></i>
             <i class="icn-sm report-caret-icon"></i>
             <div ngbDropdownMenu aria-labelledby="dropdownPersons">
                  <ng-template ngFor let-item [ngForOf]="listPersons" let-i="index">
@@ -46,8 +48,8 @@
           <div class="resent-block">
             <div class="resent-block__header">Recent</div>
             <div class="resent-block__content">
-                <ng-template ngFor let-item [ngForOf]="salesHistory"  >
-                    <p [textContent]="item"></p>
+                <ng-template ngFor let-item [ngForOf]="salesHistory" let-i="index" [ngForTrackBy]="trackByIndex" >
+                    <p [textContent]="item" (click)="selectTechLead(item)"></p>
                   </ng-template>
             </div>
           </div>
@@ -66,6 +68,8 @@
                    placeholder="Select Industry"
                    [value]="clientIndustry"
                    ngbDropdownToggle>
+                   <i class="icn-sm icn-remove-old" (click)="clearClientIndustry()" tooltip="clear"
+                   tooltip-placement="top"></i>
             <i class="icn-sm report-caret-icon"></i>
             <div ngbDropdownMenu aria-labelledby="dropdownClientIndustry">
               <ng-template ngFor let-item [ngForOf]="industries"  >
@@ -76,8 +80,8 @@
           <div class="resent-block">
             <div class="resent-block__header">Recent</div>
             <div class="resent-block__content">
-                <ng-template ngFor let-item [ngForOf]="industryHistory"  >
-                    <p [textContent]="item"></p>
+                <ng-template ngFor let-item [ngForOf]="industryHistory" let-i="index" [ngForTrackBy]="trackByIndex"  >
+                    <p [textContent]="item" (click)="onSelectClientIndustry(item)"></p>
                   </ng-template>
              
              
