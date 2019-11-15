@@ -80,6 +80,7 @@ import { CompanySubscriptionComponent } from './components/companies/company-sub
 import { CompanyTimeZoneComponent } from './components/companies/company-time-zone/company-time-zone.component';
 import { ImageCropperComponent } from './components/shared/image-cropper/image-cropper.component';
 import { CompanyEditAsideComponent } from './components/companies/company-edit-aside/company-edit-aside.component';
+import { CompanyTagsComponent } from './components/companies/company-tags/company-tags.component';
 
 
 /**
@@ -187,6 +188,7 @@ angular.module('quicktech')
     CompanyTimeZoneComponent,
     ImageCropperComponent,
     CompanyEditAsideComponent,
+    CompanyTagsComponent,
     
   ],
   imports: [

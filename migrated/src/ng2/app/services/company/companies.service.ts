@@ -89,9 +89,9 @@ public uploadAvatar (file) {
   return this.http.post(this.apiUrl + 'file?isAvatar=true&ratio=1',{file:file});
 }
 
-public setSalesHistory (value) {
+public setСustomStorage (customKey,value) {
   return this.http.post(this.apiUrl + 'customStorage/user',{
-    customKey: "companiesPageFilterBySalesHistory",
+    customKey: customKey,
     value: JSON.stringify(value)
   });
 }

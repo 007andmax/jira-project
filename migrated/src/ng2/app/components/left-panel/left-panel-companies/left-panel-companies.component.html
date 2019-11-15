@@ -20,7 +20,7 @@
       <div class="tags-header">
         By tags
       </div>
-      <app-tags (tagsChange)="onChangeTags($event)"></app-tags>
+      <app-company-tags [blockCreateTag]="true" (tagsChange)="onChangeTags($event)"></app-company-tags>
     </div>
     <div class="left-panel-ng2__content--filters">
       <!--      for show "filter-item__content" click on "filter-item__header" and add class "show-filter" for "filter-item"-->

@@ -147,6 +147,7 @@ export class CompanyEditAsideComponent implements OnInit {
     this.company.addresses[0].timeZone = data;
   }
   public onChangeTags(tags) {
+    console.log('tags',tags);
     /* tags.forEach((item) => {
        this.recurringState.getCreateTicket().addTag(item.id);
      })*/

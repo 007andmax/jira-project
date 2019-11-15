@@ -80,7 +80,7 @@ export class LeftPanelCompaniesComponent implements OnInit {
     this.salesHistory.pop();
     this.salesHistory.unshift(`${this.listPersons[index].firstName} ${this.listPersons[index].lastName}`);
     //this.company.techLeadId = this.listPersons[index].id;
-    this.companiesService.setSalesHistory(this.salesHistory).subscribe(data => {
+    this.companiesService.setСustomStorage("companiesPageFilterBySalesHistory",this.salesHistory).subscribe(data => {
       console.log('data',data);
     console.log('this.salesHistory',this.salesHistory);
     })
@@ -90,6 +90,13 @@ export class LeftPanelCompaniesComponent implements OnInit {
     this.clientIndustry = item;
     this.filter.setClientIndustry(this.clientIndustry);
     this.leftPanelStateService.onInitFilter(this.filter);
+    this.industryHistory.pop();
+    this.industryHistory.unshift(item);
+    //this.company.techLeadId = this.listPersons[index].id;
+    this.companiesService.setСustomStorage("companiesPageFilterByIndustryHistory",this.industryHistory).subscribe(data => {
+      console.log('data',data);
+    console.log('this.salesHistory',this.industryHistory);
+    })
   }
   private getTehusers(list) {
 
