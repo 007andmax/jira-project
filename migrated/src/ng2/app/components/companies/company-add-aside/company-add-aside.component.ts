@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, Input, Output, EventEmitter, ViewChild, ChangeDetectorRef } from '@angular/core';
 
 import { CompanyProfile } from '../class/company-profile';
 import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
@@ -10,7 +10,7 @@ import { ImageCropperComponent } from '../../shared/image-cropper/image-cropper.
 import { ImageCropperStateService } from 'src/ng2/app/states/image-cropper/image-cropper-state.service';
 import { CompanySetting } from '../class/company-setting';
 import { CompanyValdiate } from '../class/company-validate';
-
+import {} from 'google-maps';
 @Component({
   selector: 'app-company-add-aside',
   templateUrl: './company-add-aside.component.html',
@@ -33,9 +33,13 @@ export class CompanyAddAsideComponent implements OnInit {
   new CompanySubscription('Invoice Updates', 'invoice')];
   showSelect = false;
   validate: CompanyValdiate = new CompanyValdiate();
+
+  locationIsinit:boolean = false;
+  @ViewChild('addresstext') addresstext: any;
   constructor(private companiesStateService: CompaniesStateService, private companiesService: CompaniesService,
     private usersStateService: UsersStateService, private modalService: NgbModal, private imageCropperStateService: ImageCropperStateService,
-    private elRef: ElementRef) { }
+    private elRef: ElementRef,
+    public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
 
@@ -51,9 +55,34 @@ export class CompanyAddAsideComponent implements OnInit {
 
     this.onCroppImage();
   }
+ 
+
+  private getPlaceAutocomplete() {
+    this.locationIsinit = true;
+    const autocomplete = new google.maps.places.Autocomplete(this.addresstext.nativeElement,
+      {
+        componentRestrictions: null,
+        types: ['address']  // 'establishment' / 'address' / 'geocode'
+      });
+    google.maps.event.addListener(autocomplete, 'place_changed', () => {
+      const place = autocomplete.getPlace();
+      this.invokeEvent(place);
+    });
+  }
+
+  invokeEvent(place: any) {
+    place.address_components.forEach(item => {
+      if (item.types.indexOf('postal_code') !== -1) {
+        this.company.addresses[0].postalCode = item.short_name;
+        this.cd.detectChanges();
+      }
+    })
+
+}
   close() {
     this.opened = false;
     this.version = 'short';
+    this.locationIsinit = false;
     this.company = new CompanyProfile();
     this.companyTypes.forEach(item => item.selected = false);
     this.paymentTerms.forEach(item => item.selected = false);
@@ -93,7 +122,10 @@ export class CompanyAddAsideComponent implements OnInit {
   public oninitFullVersion() {
     this.version = 'full';
     this.company.fullVersion();
-
+    
+  }
+  public onCheckGoogleAutoComplete () {
+   if (!this.locationIsinit) this.getPlaceAutocomplete();
   }
   public onSelectCompanyTypes(index) {
     this.companyTypes.forEach(item => item.selected = false);
@@ -157,7 +189,10 @@ export class CompanyAddAsideComponent implements OnInit {
   private getTehusers(list) {
 
     list.forEach((item) => {
-      if (item.accountType === "TECH") this.listPersons.push(item);
+      if (item.accountType === "TECH" && !item.deletedAt) {
+        item.selected = false;
+        this.listPersons.push(item);
+      }
     })
     console.log('this.listPersons', this.listPersons);
   }

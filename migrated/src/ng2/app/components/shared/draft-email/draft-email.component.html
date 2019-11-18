@@ -26,6 +26,8 @@
         </div>
         <div class="col-md-12">
           <!--EDITOR-->
+          <app-ngx-editor [config]="editorConfig" [spellcheck]="true" [(ngModel)]="htmlContent"></app-ngx-editor>
+          <input id="upload-file" type="file" (input)="uploadFileOnBrower($event)"/>
         </div>
 
         <div class="col-md-12 new-companies-content__modal--content-footer">

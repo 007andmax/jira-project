@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { CompanyProfile } from '../class/company-profile';
 import { CompanySetting } from '../class/company-setting';
 import { CompanySubscription } from '../class/company-subscription';
@@ -38,12 +38,16 @@ export class CompanyEditAsideComponent implements OnInit {
   new CompanySubscription('Invoice Updates', 'invoice')];
   showSelect = false;
   validate: CompanyValdiate = new CompanyValdiate();
+
+  locationIsinit:boolean = false;
+  @ViewChild('addresstext') addresstext: any;
   constructor(private companiesStateService: CompaniesStateService, private companiesService: CompaniesService,
     private usersStateService: UsersStateService, private modalService: NgbModal, private imageCropperStateService: ImageCropperStateService,
     private elRef: ElementRef,
     private companySubscriptionState: CompanySubscriptionStateService,
     private companyTimeZoneState: CompanyTimeZoneStateService,
-    private companyTagsStateService:CompanyTagsStateService) { }
+    private companyTagsStateService:CompanyTagsStateService,
+    public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
 
@@ -60,8 +64,34 @@ export class CompanyEditAsideComponent implements OnInit {
     this.onCroppImage();
     this.onEditCompany();
   }
+  private getPlaceAutocomplete() {
+    this.locationIsinit = true;
+    const autocomplete = new google.maps.places.Autocomplete(this.addresstext.nativeElement,
+      {
+        componentRestrictions: null,
+        types: ['address']  // 'establishment' / 'address' / 'geocode'
+      });
+    google.maps.event.addListener(autocomplete, 'place_changed', () => {
+      const place = autocomplete.getPlace();
+      this.invokeEvent(place);
+    });
+  }
+
+  invokeEvent(place: any) {
+    place.address_components.forEach(item => {
+      if (item.types.indexOf('postal_code') !== -1) {
+        this.company.addresses[0].postalCode = item.short_name;
+        this.cd.detectChanges();
+      }
+    })
+
+}
+public onCheckGoogleAutoComplete () {
+  if (!this.locationIsinit) this.getPlaceAutocomplete();
+ }
   close() {
     this.opened = false;
+    this.locationIsinit = false;
     this.companySubscriptionState.onInitClear();
     this.companyTagsStateService.onInitClear();
     this.company = new CompanyProfile();
@@ -199,7 +229,7 @@ export class CompanyEditAsideComponent implements OnInit {
   private getTehusers(list) {
 
     list.forEach((item) => {
-      if (item.accountType === "TECH") {
+      if (item.accountType === "TECH" && !item.deletedAt) {
         item.selected = false;
         this.listPersons.push(item);
       }

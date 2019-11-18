@@ -41,6 +41,10 @@ export class LeftPanelCompaniesComponent implements OnInit {
       this.salesHistory = data;
     })
     this.getIndustries();
+      this.companiesState.getOnCalculateCount().subscribe((data) => {
+      this.calculateCount = data;
+      console.log('data', data);
+    })
   }
   public onChangeTags(tags) {
     let outTags = [];
@@ -50,10 +54,7 @@ export class LeftPanelCompaniesComponent implements OnInit {
 
     this.onFilterTags.emit(outTags);
 
-    this.companiesState.getOnCalculateCount().subscribe((data) => {
-      this.calculateCount = data;
-      console.log('data',data);
-    })
+  
 
   }
   clearSalesPerson() {
@@ -90,7 +91,7 @@ export class LeftPanelCompaniesComponent implements OnInit {
     if (index > -1) return this.listPersons[index].firstName + ' ' + this.listPersons[index].lastName;
     return "";
   }
-  public selectTechLead (name) {
+  public selectTechLead(name) {
     this.listPersons.forEach(item => item.selected = false);
     let index = this.listPersons.findIndex(item => `${item.firstName} ${item.lastName}` === name);
     if (index > -1) {
@@ -113,11 +114,11 @@ export class LeftPanelCompaniesComponent implements OnInit {
       console.log('this.salesHistory', this.salesHistory);
     })
   }
-public selectClientIndustry (item) {
-  this.clientIndustry = item;
-  this.filter.setClientIndustry(this.clientIndustry);
-  this.leftPanelStateService.onInitFilter(this.filter);
-}
+  public selectClientIndustry(item) {
+    this.clientIndustry = item;
+    this.filter.setClientIndustry(this.clientIndustry);
+    this.leftPanelStateService.onInitFilter(this.filter);
+  }
   public onSelectClientIndustry(item) {
     this.clientIndustry = item;
     this.filter.setClientIndustry(this.clientIndustry);
@@ -133,7 +134,7 @@ public selectClientIndustry (item) {
   private getTehusers(list) {
 
     list.forEach((item) => {
-      if (item.accountType === "TECH") {
+      if (item.accountType === "TECH" && !item.deletedAt) {
         item.selected = false;
         this.listPersons.push(item);
       }

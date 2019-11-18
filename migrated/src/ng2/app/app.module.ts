@@ -19,6 +19,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule, MatIconModule } from "@angular/material";
 import { CronEditorModule } from "cron-editor";
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { NgxEditorModule } from 'ngx-editor';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppComponent } from './app.component';
 import { PasswordManagerComponent } from './components/password-manager/password-manager.component';
@@ -254,7 +256,9 @@ angular.module('quicktech')
         enableTracing: false
       }),
       CronEditorModule,
-      ImageCropperModule
+      ImageCropperModule,
+      NgxEditorModule ,
+      FontAwesomeModule
   ],
   entryComponents: [
     LeftPanelComponent,

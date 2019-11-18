@@ -65,7 +65,9 @@
         <div class="col-md-12">
           <p>Location</p>
           <input type="text"
+          #addresstext
           [(ngModel)]="company.addresses[0].address"
+          (focus)="onCheckGoogleAutoComplete()"
                  placeholder="Enter Location">
         </div>
         <div class="col-md-4">

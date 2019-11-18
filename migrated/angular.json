@@ -85,7 +85,8 @@
               "src/ng1/styles/new-style.css",
               "src/ng1/styles/nv.d3.css",
               "src/ng1/styles/daterangepicker.css",
-              "src/ng1/styles/proton.multi-list-picker.css"
+              "src/ng1/styles/proton.multi-list-picker.css",
+            
             ],
             "scripts": [
               "src/ng1/bower_components/jquery/dist/jquery.js",
