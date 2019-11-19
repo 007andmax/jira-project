@@ -1,12 +1,13 @@
 :host {
   display: block;
-  height: 100vh;
+  height: 101vh;
   position: fixed;
   width: 240px;
   left: 76px;
   top: 0;
   z-index: 992;
   background: #354053;
+  overflow-x: scroll;
   @media (max-width: 414px) {
     width: 100vw;
     left: 0;
