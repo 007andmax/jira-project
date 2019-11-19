@@ -84,6 +84,7 @@ import { ImageCropperComponent } from './components/shared/image-cropper/image-c
 import { CompanyEditAsideComponent } from './components/companies/company-edit-aside/company-edit-aside.component';
 import { CompanyTagsComponent } from './components/companies/company-tags/company-tags.component';
 import { DraftEmailComponent } from './components/shared/draft-email/draft-email.component';
+import { DraftEmailRecipientsComponent } from './components/shared/draft-email/draft-email-recipients/draft-email-recipients.component';
 
 
 /**
@@ -193,6 +194,7 @@ angular.module('quicktech')
     CompanyEditAsideComponent,
     CompanyTagsComponent,
     DraftEmailComponent,
+    DraftEmailRecipientsComponent,
     
   ],
   imports: [

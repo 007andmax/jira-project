@@ -1,0 +1,33 @@
+<div class="col-md-12">
+    <p>Add Recipient</p>
+  <mat-form-field>
+    <mat-chip-list #chipList aria-label="Fruit selection">
+      <mat-chip
+        *ngFor="let user of selectedCompanies; let i = index"
+        [selectable]="selectable"
+        [removable]="removable"
+        (removed)="remove(i)">
+        {{user}}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
+      <input
+        placeholder="Add receipt email address"
+        #userInput
+        class="pointer"
+        [formControl]="companyCtrl"
+        [matAutocomplete]="auto"
+        [matChipInputFor]="chipList"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        [matChipInputAddOnBlur]="addOnBlur"
+      
+        (matChipInputTokenEnd)="add($event)">
+    </mat-chip-list>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+      <mat-option *ngFor="let company of companyList" [value]="company.companyInfo.contacts[0]">
+        {{company.companyInfo.contacts[0].primaryEmail}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <p *ngIf="showError">at least 1 user</p>
+  <p *ngIf="showErrorClient">please choose Client</p>
+</div>

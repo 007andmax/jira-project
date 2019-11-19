@@ -1,8 +1,10 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { DraftEmailStateService } from 'src/ng2/app/states/draft-email/draft-email-state.service';
 import { DraftEmail } from './class/draft-email';
 import { FilesInfo } from './class/files-Info';
 import { FilesInfoItem } from './class/files-Info-item';
+
+import { DraftEmailService } from 'src/ng2/app/services/draft-email/draft-email.service';
 
 @Component({
   selector: 'app-draft-email',
@@ -10,36 +12,54 @@ import { FilesInfoItem } from './class/files-Info-item';
   styleUrls: ['./draft-email.component.scss']
 })
 export class DraftEmailComponent implements OnInit {
+  messageContent: string = '';
+  messageHTML: string = '';
   opened = false;
-  htmlContent: string = '';
-  title = 'ngx-editor';
-
   editorConfig = {
     editable: true,
     spellcheck: false,
     height: '10rem',
     minHeight: '5rem',
-    placeholder: 'Type something. Test the Editor... ヽ(^。^)丿',
+    placeholder: 'Click here to respond to the Ticket',
     translate: 'no'
   };
+  tab: string = 'plain';
   draftEmail: DraftEmail = new DraftEmail();
   uploadFiles: Array<File> = [];
   filesInfo: FilesInfo = new FilesInfo();
 
-  constructor(private draftEmailStateService: DraftEmailStateService, private elRef: ElementRef, ) { }
+
+  constructor(private draftEmailStateService: DraftEmailStateService, private elRef: ElementRef,
+    private draftEmailService: DraftEmailService) { }
 
   ngOnInit() {
     this.onShowAside();
+
   }
+
   public onShowAside() {
     this.draftEmailStateService.getShowAsideForAdd().subscribe(() => {
       this.opened = true;
       this.draftEmail = new DraftEmail();
     })
   }
+
   close() {
     this.opened = false;
+    this.draftEmail = new DraftEmail();
+    this.tab = 'plain';
+    this.messageContent = '';
+    this.messageHTML = '';
+    this.draftEmailStateService.onClear();
+    this.uploadFiles = [];
+    this.filesInfo = new FilesInfo();
+
   }
+
+  onChangeCompanyEmails(data) {
+    this.draftEmail.setRecipients(data);
+  }
+
   public uploadFileOnBrower(event) {
     console.log('event', event);
     if (event.target.value) {
@@ -94,6 +114,24 @@ export class DraftEmailComponent implements OnInit {
       }
     })
 
+  }
+  onSend() {
+    if (this.tab === 'html') {
+      this.draftEmail.setCustomHtml(true);
+      this.draftEmail.setContent(this.messageHTML.replace(/(\r\n|\n|\r)/gm, ""));
+    } else {
+      this.draftEmail.setCustomHtml(false);
+      this.draftEmail.setContent(this.messageContent);
+    }
+
+    this.filesInfo.files.forEach(item => {
+      if (!item.error) this.draftEmail.setAttachment(item.id)
+    });
+    this.draftEmailService.sendMessage(this.draftEmail).subscribe((data) => {
+      console.log('daata', data);
+      this.close();
+
+    })
   }
 
   removeAttachment(index) {

@@ -8,26 +8,24 @@
       <div class="new-companies-content__modal--content">
         <div class="col-md-12">
           <p>Subject</p>
-          <input type="text" placeholder="Write Subject line">
+          <input [(ngModel)]="draftEmail.subject" type="text" placeholder="Write Subject line">
         </div>
-        <div class="col-md-12">
-          <p>Add Recipient</p>
-          <input type="text"
-                 placeholder="Mention a email address to companies">
-        </div>
+       <app-draft-email-recipients (onCompanyEmails)="onChangeCompanyEmails($event)"></app-draft-email-recipients>
 
         <div class="col-md-12 tab-btns">
-          <div ng-class="{active: tab == 'plain'}">
+          <div ng-class="{active: tab == 'plain'}" (click)="tab = 'plain'">
             Plain Text
           </div>
-          <div ng-class="{active: tab == 'html'}"
+          <div ng-class="{active: tab == 'html'}" (click)="tab = 'html'"
           >Paste Html
           </div>
         </div>
         <div class="col-md-12">
           <!--EDITOR-->
-          <app-ngx-editor [config]="editorConfig" [spellcheck]="true" [(ngModel)]="htmlContent"></app-ngx-editor>
-         
+          <app-ngx-editor *ngIf="tab == 'plain'" [config]="editorConfig" [spellcheck]="true" [(ngModel)]="messageContent"></app-ngx-editor>
+          <textarea *ngIf="tab == 'html'" [(ngModel)]="messageHTML" class="email-text-block textarea"
+                placeholder="Put here your HTML"></textarea>
+
           <div class="form-group"  >
             <ul class="upload-attachments">
               <ng-template ngFor let-file [ngForOf]="uploadFiles" let-i="index" [ngForTrackBy]="trackByIndex">
@@ -73,9 +71,9 @@
         <div class="col-md-12 new-companies-content__modal--content-footer">
           <div class="d-f">
             <button class="btn-new btn-primary"
-                    (click)="onAddShort()">Send Email
+                    (click)="onSend()">Send Email
             </button>
-            <button class="btn-new disabled">Cancel</button>
+            <button class="btn-new disabled" (click)="close()">Cancel</button>
           </div>
         </div>
       </div>

@@ -14,7 +14,6 @@ export class TagsService {
  /**
    * Product api service constructor
    * @param {HttpClient} http Service to work with request
-   * @param {QuoteStateService} quoteStateService  Service to work with quote state
    */
   constructor(
     private http: HttpClient
