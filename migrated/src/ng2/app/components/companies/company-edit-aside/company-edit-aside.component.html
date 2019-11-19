@@ -47,8 +47,8 @@
         </div>
         <div class="col-md-6" ngbDropdown>
           <p>Client Type</p>
-          <input type="text"
-          [value]="company.clientIndustry.name"
+          <input type="text" 
+          [value]="company.clientIndustry.name" *ngIf="company.clientIndustry.name"
                  placeholder="Select Client Type" id="dropdownClientIndustry" ngbDropdownToggle/>
                  <div ngbDropdownMenu aria-labelledby="dropdownClientIndustry">
                   <ng-template ngFor let-item [ngForOf]="industries"  >
@@ -87,7 +87,7 @@
                 Phone number is required
               </mat-error>
           <p>Phone Number</p>
-          <input type="text"  (input)="onChangePhoneNumber($event)"
+          <input type="text" *ngIf="company.addresses[0].phoneNumbers.length > 0" (input)="onChangePhoneNumber($event)"
           [(ngModel)]="company.addresses[0].phoneNumbers[0].number"
                  placeholder="Enter Phone Number">
         </div>
@@ -125,6 +125,7 @@
                  ngbDropdown>
               <button class="types-btn"
                       id="dropdownBasic"
+                      *ngIf="company.contacts[0].phoneNumbers.length > 0"
                       ngbDropdownToggle [textContent]="company.contacts[0].phoneNumbers[0].typeNumber">
             
                 <i class="icn-sm report-caret-icon"></i>
@@ -136,7 +137,7 @@
                 
               </div>
             </div>
-            <input type="text"
+            <input type="text" *ngIf="company.contacts[0].phoneNumbers.length > 0"
             [(ngModel)]="company.contacts[0].phoneNumbers[0].number"
                    placeholder="Enter Phone Number">
           </div>

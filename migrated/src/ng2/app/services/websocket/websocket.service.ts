@@ -6,6 +6,7 @@ import { CompaniesService } from "../company/companies.service";
 import { QuoteRealTimeService } from "../../components/billing/quotes/quote-realtime/quote-realtime.service";
 import { RecurringTicketsRealTimeService } from '../../components/tickets/recurring-tickets/services/recurring-tickets-real-time.service';
 import { UsersStateService } from '../../states/users/users-state.service';
+import { CompaniesRealTimeService } from '../../states/company/companies-real-time.service';
 
 /**
  * Websocket service to work with api
@@ -29,7 +30,8 @@ export class WebsocketService {
     private companiesService: CompaniesService,
     private quoteRealTimeService: QuoteRealTimeService,
     private recurringTicketsRealTimeService: RecurringTicketsRealTimeService,
-    private usersState:UsersStateService
+    private usersState:UsersStateService,
+    private companiesRealTimeService:CompaniesRealTimeService
 
     
   ) {
@@ -44,6 +46,7 @@ export class WebsocketService {
       that.subsribeToQuote();
       that.subsribeToRecurringTickets();
       that.subsribeToUsers();
+      that.subsribeToCompany();
     });
   }
 
@@ -147,6 +150,23 @@ export class WebsocketService {
             console.log('test')
           }
         });
+      });
+    }, 3000);
+  }
+
+  /**
+   * subscribe to company realtime
+   */
+  public subsribeToCompany() {
+    setTimeout(() => {
+     
+        this.stompClient.subscribe(`/user/watch/company`, (message) => {
+          var newChange = JSON.parse(message.body);
+          this.companiesRealTimeService.handleRealTimeChanges(newChange);
+          if (message.body) {
+            console.log('test')
+          }
+       
       });
     }, 3000);
   }

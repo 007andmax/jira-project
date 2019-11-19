@@ -51,7 +51,7 @@ export class CompanyEditAsideComponent implements OnInit {
 
   ngOnInit() {
 
-
+this.company.fullVersion();
     this.getIndustries();
     if (this.usersStateService.getAllUsers().length > 0) {
       this.getTehusers(this.usersStateService.getAllUsers());
@@ -95,6 +95,7 @@ public onCheckGoogleAutoComplete () {
     this.companySubscriptionState.onInitClear();
     this.companyTagsStateService.onInitClear();
     this.company = new CompanyProfile();
+  //  this.company.fullVersion();
     this.companyTypes.forEach(item => item.selected = false);
     this.paymentTerms.forEach(item => item.selected = false);
     this.serviceTypes.forEach(item => item.selected = false);
@@ -129,14 +130,7 @@ public onCheckGoogleAutoComplete () {
       //this.company.
     })
   }
-  onAddShort() {
-    if (!this.validate.isValidate(this.company)) return;
-    console.log('company', this.company);
-    this.companiesService.createCompany(this.company).subscribe(data => {
-      console.log(' data', data);
-
-    })
-  }
+  
   public onSelectCompanyTypes(index) {
     this.companyTypes.forEach(item => item.selected = false);
     this.companyTypes[index].selected = true;
@@ -202,10 +196,12 @@ public onCheckGoogleAutoComplete () {
     //  this.recurringState.getCreateTicket().setDescription(event.target.value);
   }
   public onUpdateFull() {
+    console.log('onUpdateFull');
     if (!this.validate.isValidate(this.company)) return;
     
     this.companiesService.updateCompany(this.company).subscribe(data => {
       console.log(' data', data);
+      this.close();
     })
   }
   public onCroppImage() {

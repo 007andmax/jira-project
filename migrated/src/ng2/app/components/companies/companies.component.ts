@@ -12,6 +12,7 @@ import { UsersStateService } from '../../states/users/users-state.service';
 import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
 import { LeftPanelCompaniesFilter } from '../left-panel/left-panel-companies/class/left-panel-companies-filter';
 import { CompanyCalculateCount } from './class/company-calculate-count';
+import { CompaniesRealTimeService } from '../../states/company/companies-real-time.service';
 
 @Component({
   selector: 'app-companies',
@@ -42,7 +43,8 @@ calculateCount:CompanyCalculateCount = new CompanyCalculateCount();
   constructor(private companiesService: CompaniesService, private companiesList: CompaniesListService,
     private companiesStateService: CompaniesStateService, private userService: UsersService,
     private confirmStateService: ConfirmStateService, private devicesState: DevicesSateService, private usersStateService: UsersStateService,
-    private leftPanelStateService: LeftPanelStateService) { }
+    private leftPanelStateService: LeftPanelStateService,
+    private companiesRealTimeService:CompaniesRealTimeService) { }
 
   ngOnInit() {
     this.companiesStateService.getOnShowArchived().subscribe(data => {
@@ -93,6 +95,15 @@ calculateCount:CompanyCalculateCount = new CompanyCalculateCount();
 
     })
     this.sub.add(geLefttFilter);
+    this.companiesRealTimeService.changeCompanyArray.subscribe(newChange => {
+      console.log('newChange',newChange);
+      /*if (newChange.action === 'SALE_QUOTE_CREATED') {
+        return this.quotesList.push(newChange.data);
+      } else {
+        const elemIndex = this.quotesList.findIndex((item) => item.id === newChange.data.id);
+        return this.quotesList[elemIndex] = newChange.data;
+      }*/
+    })
   }
   public onFilterTags(tags) {
     this.companiesService.getClientsByTags(tags).subscribe(data => {
