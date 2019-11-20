@@ -1707,6 +1707,7 @@ _::-webkit-:not(:root:root),
 }
 
 .download-agent-modal .close-modal {
+  outline: none;
   position: absolute;
   right: 28px;
   top: 36px;

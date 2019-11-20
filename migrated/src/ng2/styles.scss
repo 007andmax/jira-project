@@ -590,6 +590,14 @@ ngb-typeahead-window {
   justify-content: space-between;
   margin-bottom: 15px;
   position: relative;
+  &--search {
+    display: flex;
+    align-items: center;
+    .email-ng2 {
+      margin-right: 40px;
+      cursor: pointer;
+    }
+  }
 }
 
 .products-content__header h3,
@@ -1357,14 +1365,21 @@ ngb-datepicker {
       .filter-item {
         position: relative;
         &.show-filter {
+          z-index: 1;
+          &:first-child {
+            z-index: 2;
+          }
           .filter-item__content {
             height: 156px;
             transform: scaleY(1);
-            overflow: hidden;
             opacity: 1;
+            overflow: visible;
           }
           .report-caret-icon {
             transform: rotate(0);
+          }
+          .dropdown {
+            z-index: 10;
           }
         }
         .report-caret-icon {
@@ -1376,10 +1391,12 @@ ngb-datepicker {
         }
         &__content {
           height: 0;
+          z-index: 0;
           transform: scaleY(0);
           opacity: 0;
           transform-origin: center top;
           transition: all .3s;
+          overflow: hidden;
           padding: 0 24px;
           .report-caret-icon {
             transform: rotate(0);
