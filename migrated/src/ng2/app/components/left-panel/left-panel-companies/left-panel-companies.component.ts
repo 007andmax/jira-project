@@ -50,7 +50,8 @@ export class LeftPanelCompaniesComponent implements OnInit {
   }
   private getIndustries() {
     this.companiesService.getIndustries().subscribe((data: Array<string>) => {
-      this.industries = data;
+      this.industries = data.sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
+      1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
       console.log('industries', this.industries);
     })
   }
