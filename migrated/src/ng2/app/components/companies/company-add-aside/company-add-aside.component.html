@@ -16,18 +16,31 @@
           <input type="text" [(ngModel)]="company.name"
                  placeholder="Write Company or Search Company" (blur)="onChangeName($event)">
         </div>
-        <div class="col-md-6" ngbDropdown>
+        <div class="col-md-6">
           <mat-error *ngIf="!validate.getType()">
             Client Type is required
           </mat-error>
           <p>Company Type</p>
-          <input type="text" [value]="getSelectedCompanyTypes()"
-                 autocomplete="new-password" (input)="onChangeType($event)"
-                 placeholder="Select Company Type" id="dropdownTypeCompany1" ngbDropdownToggle />
-          <div ngbDropdownMenu aria-labelledby="dropdownTypeCompany1">
-            <ng-template ngFor let-item [ngForOf]="companyTypes" let-i="index">
-              <button ngbDropdownItem [textContent]="item.title" (click)="onSelectCompanyTypes(i)"></button>
-            </ng-template>
+          <div class="light-dropdown" ngbDropdown>
+            <i class="icn-sm report-caret-icon"></i>
+            <input type="text"
+                   [value]="getSelectedCompanyTypes()"
+                   autocomplete="new-password"
+                   (input)="onChangeType($event)"
+                   placeholder="Select Company Type"
+                   id="dropdownTypeCompany1"
+                   ngbDropdownToggle />
+            <div ngbDropdownMenu
+                 aria-labelledby="dropdownTypeCompany1">
+              <ng-template ngFor
+                           let-item
+                           [ngForOf]="companyTypes"
+                           let-i="index">
+                <button ngbDropdownItem
+                        [textContent]="item.title"
+                        (click)="onSelectCompanyTypes(i)"></button>
+              </ng-template>
+            </div>
           </div>
         </div>
         <div class="col-md-6">
@@ -117,38 +130,44 @@
                  [(ngModel)]="company.name" (blur)="onChangeName($event)"
                  placeholder="Write Company or Search Company">
         </div>
-        <div class="col-md-6" ngbDropdown>
+        <div class="col-md-6">
           <mat-error *ngIf="!validate.getType()">
             Client Type is required
           </mat-error>
           <p>Company Type</p>
-          <input type="text" [value]="getSelectedCompanyTypes()"
-                 autocomplete="new-password"
-                 (input)="onChangeType($event)"
-                 placeholder="Select Company Type"
-                 id="dropdownTypeCompany"
-                 ngbDropdownToggle />
-          <div ngbDropdownMenu
-               aria-labelledby="dropdownTypeCompany">
-            <ng-template ngFor
-                         let-item
-                         [ngForOf]="companyTypes"
-                         let-i="index">
-              <button ngbDropdownItem
-                      [textContent]="item.title"
-                      (click)="onSelectCompanyTypes(i)"></button>
-            </ng-template>
+          <div class="light-dropdown" ngbDropdown>
+            <i class="icn-sm report-caret-icon"></i>
+            <input type="text" [value]="getSelectedCompanyTypes()"
+                   autocomplete="new-password"
+                   (input)="onChangeType($event)"
+                   placeholder="Select Company Type"
+                   id="dropdownTypeCompany"
+                   ngbDropdownToggle />
+            <div ngbDropdownMenu
+                 aria-labelledby="dropdownTypeCompany">
+              <ng-template ngFor
+                           let-item
+                           [ngForOf]="companyTypes"
+                           let-i="index">
+                <button ngbDropdownItem
+                        [textContent]="item.title"
+                        (click)="onSelectCompanyTypes(i)"></button>
+              </ng-template>
+            </div>
           </div>
         </div>
-        <div class="col-md-6" ngbDropdown>
+        <div class="col-md-6">
           <p>Client Type</p>
-          <input type="text"
-                 [value]="company.clientIndustry.name"
-                 placeholder="Select Client Type" id="dropdownClientIndustry" ngbDropdownToggle />
-          <div ngbDropdownMenu aria-labelledby="dropdownClientIndustry">
-            <ng-template ngFor let-item [ngForOf]="industries">
-              <button ngbDropdownItem [textContent]="item" (click)="company.clientIndustry.name = item"></button>
-            </ng-template>
+          <div class="light-dropdown" ngbDropdown>
+            <i class="icn-sm report-caret-icon"></i>
+            <input type="text"
+                   [value]="company.clientIndustry.name"
+                   placeholder="Select Client Type" id="dropdownClientIndustry" ngbDropdownToggle />
+            <div ngbDropdownMenu aria-labelledby="dropdownClientIndustry">
+              <ng-template ngFor let-item [ngForOf]="industries">
+                <button ngbDropdownItem [textContent]="item" (click)="company.clientIndustry.name = item"></button>
+              </ng-template>
+            </div>
           </div>
         </div>
         <div class="col-md-12">
@@ -259,56 +278,66 @@
           <p>Time Zone</p>
           <app-company-time-zone (selectedOffsetItem)="onChangeTimeZone($event)"></app-company-time-zone>
         </div>
-        <div class="col-md-6" ngbDropdown>
+        <div class="col-md-6">
           <p>Payment Terms</p>
-          <input type="text" [value]="getSelectedPaymentTerms()"
-                 autocomplete="new-password"
-                 placeholder="Select Payment Terms" id="dropdownPaymentTerms" ngbDropdownToggle />
-          <div ngbDropdownMenu aria-labelledby="dropdownPaymentTerms">
-            <ng-template ngFor let-item [ngForOf]="paymentTerms" let-i="index">
-              <button ngbDropdownItem [textContent]="item.title" (click)="onSelectPaymentTerms(i)"></button>
-            </ng-template>
+          <div class="light-dropdown" ngbDropdown>
+            <i class="icn-sm report-caret-icon"></i>
+            <input type="text" [value]="getSelectedPaymentTerms()"
+                   autocomplete="new-password"
+                   placeholder="Select Payment Terms" id="dropdownPaymentTerms" ngbDropdownToggle />
+            <div ngbDropdownMenu aria-labelledby="dropdownPaymentTerms">
+              <ng-template ngFor let-item [ngForOf]="paymentTerms" let-i="index">
+                <button ngbDropdownItem [textContent]="item.title" (click)="onSelectPaymentTerms(i)"></button>
+              </ng-template>
+            </div>
           </div>
-
         </div>
-        <div class="col-md-6" ngbDropdown>
+        <div class="col-md-6">
           <p>Payment Method</p>
-          <input type="text" [value]="company.paymentMethods" autocomplete="new-password"
-                 placeholder="Select Payment Method"
-                 id="dropdownPaymentMethods" ngbDropdownToggle />
-          <div ngbDropdownMenu aria-labelledby="dropdownPaymentMethods">
-            <ng-template ngFor let-item [ngForOf]="paymentMethods">
-              <button ngbDropdownItem [textContent]="item" (click)="company.paymentMethods = item"></button>
-            </ng-template>
+          <div class="light-dropdown" ngbDropdown>
+            <i class="icn-sm report-caret-icon"></i>
+            <input type="text" [value]="company.paymentMethods" autocomplete="new-password"
+                   placeholder="Select Payment Method"
+                   id="dropdownPaymentMethods" ngbDropdownToggle />
+            <div ngbDropdownMenu aria-labelledby="dropdownPaymentMethods">
+              <ng-template ngFor let-item [ngForOf]="paymentMethods">
+                <button ngbDropdownItem [textContent]="item" (click)="company.paymentMethods = item"></button>
+              </ng-template>
+            </div>
           </div>
         </div>
-        <div class="col-md-6" ngbDropdown>
+        <div class="col-md-6">
           <p>Service Type</p>
-          <input type="text" [value]="getSelectedServiceType()" autocomplete="new-password"
-                 placeholder="Select Service Type"
-                 id="dropdownPaymentType" ngbDropdownToggle />
-          <div ngbDropdownMenu aria-labelledby="dropdownPaymentType">
-            <ng-template ngFor let-item [ngForOf]="serviceTypes" let-i="index">
-              <button ngbDropdownItem [textContent]="item.title" (click)="onSelectServiceTypes(i)"></button>
-            </ng-template>
+          <div class="light-dropdown" ngbDropdown>
+            <i class="icn-sm report-caret-icon"></i>
+            <input type="text" [value]="getSelectedServiceType()" autocomplete="new-password"
+                   placeholder="Select Service Type"
+                   id="dropdownPaymentType" ngbDropdownToggle />
+            <div ngbDropdownMenu aria-labelledby="dropdownPaymentType">
+              <ng-template ngFor let-item [ngForOf]="serviceTypes" let-i="index">
+                <button ngbDropdownItem [textContent]="item.title" (click)="onSelectServiceTypes(i)"></button>
+              </ng-template>
+            </div>
           </div>
 
         </div>
-        <div class="col-md-6" ngbDropdown>
+        <div class="col-md-6">
           <p>Sales Person</p>
-
-          <input type="text" [value]="getSelectedTechLead()" autocomplete="new-password"
-                 placeholder="Select Sales Person"
-                 id="dropdownPersons" ngbDropdownToggle />
-          <div ngbDropdownMenu aria-labelledby="dropdownPersons">
-            <ng-template ngFor let-item [ngForOf]="listPersons" let-i="index">
-              <button ngbDropdownItem [textContent]="item.firstName + ' ' + item.lastName"
-                      (click)="onSelectTechLead(i)"></button>
-            </ng-template>
+          <div class="light-dropdown" ngbDropdown>
+            <i class="icn-sm report-caret-icon"></i>
+            <input type="text" [value]="getSelectedTechLead()" autocomplete="new-password"
+                   placeholder="Select Sales Person"
+                   id="dropdownPersons" ngbDropdownToggle />
+            <div ngbDropdownMenu aria-labelledby="dropdownPersons">
+              <ng-template ngFor let-item [ngForOf]="listPersons" let-i="index">
+                <button ngbDropdownItem [textContent]="item.firstName + ' ' + item.lastName"
+                        (click)="onSelectTechLead(i)"></button>
+              </ng-template>
+            </div>
           </div>
         </div>
         <app-company-tags (tagsChange)="onChangeTags($event)"></app-company-tags>
-        <div class="col-md-12 editable-field">
+        <div class="col-md-12 editable-field">d
           <p>Note for Company</p>
           <div class="editable-description">
             <textarea appTextArea

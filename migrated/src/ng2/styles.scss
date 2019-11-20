@@ -234,7 +234,7 @@ app-left-panel-tags-companies {
   > .col-md-12 {
     padding: 0 24px;
     .dropdown-menu {
-      width: 184px;
+      width: 192px;
       left: 24px !important;
     }
     .mat-form-field {
@@ -1356,13 +1356,40 @@ ngb-datepicker {
     &--filters {
       .filter-item {
         position: relative;
+        &.show-filter {
+          .filter-item__content {
+            height: 156px;
+            transform: scaleY(1);
+            overflow: hidden;
+            opacity: 1;
+          }
+          .report-caret-icon {
+            transform: rotate(0);
+          }
+        }
         .report-caret-icon {
+          transition: all .3s;
           position: absolute;
           top: 15px;
           right: 24px;
+          transform: rotate(-90deg);
         }
         &__content {
+          height: 0;
+          transform: scaleY(0);
+          opacity: 0;
+          transform-origin: center top;
+          transition: all .3s;
           padding: 0 24px;
+          .report-caret-icon {
+            transform: rotate(0);
+            right: 10px;
+            top: 16px !important;
+          }
+          .icn-remove-old {
+            top: 14px !important;
+            right: 8px;
+          }
           input {
             height: 40px;
             margin: 0;
