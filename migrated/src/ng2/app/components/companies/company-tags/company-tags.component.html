@@ -1,4 +1,4 @@
-<div class="col-md-12 light-dropdown"
+<div class="col-md-12 dark-dropdown"
      ngbDropdown #products="ngbDropdown">
   <mat-form-field>
     <mat-chip-list #chipList aria-label="Fruit selection">
@@ -21,7 +21,7 @@
         [matChipInputAddOnBlur]="addOnBlur"
         (matChipInputTokenEnd)="add($event)">
     </mat-chip-list>
-    
+
   </mat-form-field>
   <div class="dropdown-menu"
        ngbDropdownMenu aria-labelledby="dropdownServices">
