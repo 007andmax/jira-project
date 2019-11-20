@@ -95,7 +95,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.sub.add(geLefttFilter);
   
     this.companiesStateService.getChangeCompanies().subscribe((data:CompanyUpdate) => {
-     // console.log('newChange', newChange);
+      console.log('newChange', data);
      if (data.action === 'COMPANY_SAVED' || data.action === 'COMPANY_ARCHIVED') {
         console.log('++++++++++++++++++');
         const reqIndex = this.reqCompaniesList.findIndex((item) => item.id === data.data.id);

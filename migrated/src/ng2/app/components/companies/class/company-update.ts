@@ -4,7 +4,7 @@ export class CompanyUpdate {
     action:string;
     list:Array<Company> = [];
     data:Company;
-    constructor(action,list,data) {
+    constructor(action,data,list) {
         this.action = action;
         this.list = list;
         this.data = data;
