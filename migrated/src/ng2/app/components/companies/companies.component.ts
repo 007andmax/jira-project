@@ -54,9 +54,6 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       this.clearFilter();
       this.setDefaultScoll();
       this.getClientsList(this.companiesStateService.getCompanies());
-
-
-
     })
     if (this.companiesStateService.getCompanies().length > 0) {
       this.getClientsList(this.companiesStateService.getCompanies());
@@ -97,12 +94,13 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.sub.add(geLefttFilter);
     this.companiesRealTimeService.changeCompanyArray.subscribe(newChange => {
       console.log('newChange', newChange);
-      /*if (newChange.action === 'SALE_QUOTE_CREATED') {
-        return this.quotesList.push(newChange.data);
-      } else {
-        const elemIndex = this.quotesList.findIndex((item) => item.id === newChange.data.id);
-        return this.quotesList[elemIndex] = newChange.data;
-      }*/
+      if (newChange.action === 'COMPANY_SAVED') {
+        console.log('++++++++++++++++++');
+        const reqIndex = this.reqCompaniesList.findIndex((item) => item.id === newChange.data.id);
+        if (reqIndex > -1) this.reqCompaniesList[reqIndex] = newChange.data;
+        const companyIndex = this.CompaniesList.findIndex((item) => item.id === newChange.data.id);
+        if (companyIndex > -1) this.CompaniesList[companyIndex] = newChange.data;
+      }
     })
   }
   public onFilterTags(tags) {
@@ -127,7 +125,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   }
   private getClientsList(data) {
     this.reqCompaniesList = data.filter(item => item.accountType === 'CLIENT' && ((!this.showArchivedCompanies) ? !item.deletedAt : item.deletedAt));
-   console.log('this.reqCompaniesList',this.reqCompaniesList);
+    console.log('this.reqCompaniesList', this.reqCompaniesList);
     this.onInirCalculate();
     this.reqCompaniesList.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
@@ -150,7 +148,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.CompaniesList = [...this.CompaniesList, ...CompaniesList];
     this.infiniteScrollDisabled = false;
     if ((this.page_number * 30) > listFilter.length) this.companiesList.setBlockList(true);
-    console.log('CompaniesList',this.CompaniesList);
+    console.log('CompaniesList', this.CompaniesList);
 
   }
   onFilter(field) {
