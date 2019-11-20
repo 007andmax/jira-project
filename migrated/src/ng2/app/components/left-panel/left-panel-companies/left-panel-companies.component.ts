@@ -19,6 +19,8 @@ export class LeftPanelCompaniesComponent implements OnInit {
   salesHistory = [];
   industries = [];
   showArchivedCompanies: boolean = false;
+  showClearSalesPerson: boolean = false;
+  showClearIndustry: boolean = false;
   calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
   @Output() onFilterTags = new EventEmitter();
   filter: LeftPanelCompaniesFilter = new LeftPanelCompaniesFilter();
@@ -41,30 +43,68 @@ export class LeftPanelCompaniesComponent implements OnInit {
       this.salesHistory = data;
     })
     this.getIndustries();
-      this.companiesState.getOnCalculateCount().subscribe((data) => {
+    this.companiesState.getOnCalculateCount().subscribe((data) => {
       this.calculateCount = data;
-      console.log('data', data);
+
     })
+  }
+  private getIndustries() {
+    this.companiesService.getIndustries().subscribe((data: Array<string>) => {
+      this.industries = data;
+      console.log('industries', this.industries);
+    })
+  }
+  getSelectedTechLead() {
+    let index = this.listPersons.findIndex(item => item.selected === true);
+    if (index > -1) return this.listPersons[index].firstName + ' ' + this.listPersons[index].lastName;
+    return "";
+  }
+  private getTehusers(list) {
+    list.forEach((item) => {
+      if (item.accountType === "TECH" && !item.deletedAt) {
+        item.selected = false;
+        this.listPersons.push(item);
+      }
+    })
+  }
+  public selectTechLead(name) {
+    this.listPersons.forEach(item => item.selected = false);
+    let index = this.listPersons.findIndex(item => `${item.firstName} ${item.lastName}` === name);
+    if (index > -1) {
+      this.listPersons[index].selected = true;
+      this.filter.setTehUser(this.listPersons[index].id);
+      this.leftPanelStateService.onInitFilter(this.filter);
+    }
+  }
+  public selectClientIndustry(item) {
+    this.clientIndustry = item;
+    this.filter.setClientIndustry(this.clientIndustry);
+    this.leftPanelStateService.onInitFilter(this.filter);
+  }
+  toggleFilter(event) {
+    event.target.parentNode.classList.toggle('show-filter');
+  }
+  clearSalesPerson() {
+    this.showClearSalesPerson = false;
+    this.listPersons.forEach(item => item.selected = false);
+    this.filter.setTehUser(null);
+    this.leftPanelStateService.onInitFilter(this.filter);
+  }
+
+  clearClientIndustry() {
+    this.showClearIndustry = false;
+    this.clientIndustry = '';
+    this.filter.setClientIndustry(null);
+    this.leftPanelStateService.onInitFilter(this.filter);
   }
   public onChangeTags(tags) {
     let outTags = [];
     tags.forEach(item => {
       outTags.push(item.id);
     })
-
     this.onFilterTags.emit(outTags);
+  }
 
-  
-
-  }
-  clearSalesPerson() {
-    this.filter.setTehUser(null);
-    this.leftPanelStateService.onInitFilter(this.filter);
-  }
-  clearClientIndustry() {
-    this.filter.setClientIndustry(null);
-    this.leftPanelStateService.onInitFilter(this.filter);
-  }
   onShowAll() {
     this.filter.setClientType(null);
     this.companiesState.setOnShowArchived(false);
@@ -80,28 +120,9 @@ export class LeftPanelCompaniesComponent implements OnInit {
     this.filter.setClientType(data);
     this.leftPanelStateService.onInitFilter(this.filter);
   }
-  private getIndustries() {
-    this.companiesService.getIndustries().subscribe((data: Array<string>) => {
-      this.industries = data;
-      console.log('industries', this.industries);
-    })
-  }
-  getSelectedTechLead() {
-    let index = this.listPersons.findIndex(item => item.selected === true);
-    if (index > -1) return this.listPersons[index].firstName + ' ' + this.listPersons[index].lastName;
-    return "";
-  }
-  public selectTechLead(name) {
-    this.listPersons.forEach(item => item.selected = false);
-    let index = this.listPersons.findIndex(item => `${item.firstName} ${item.lastName}` === name);
-    if (index > -1) {
-      this.listPersons[index].selected = true;
-      this.filter.setTehUser(this.listPersons[index].id);
-      this.leftPanelStateService.onInitFilter(this.filter);
-    }
-  }
-  public onSelectTechLead(index) {
 
+  public onSelectTechLead(index) {
+    this.showClearSalesPerson = true;
     this.listPersons.forEach(item => item.selected = false);
     this.listPersons[index].selected = true;
     this.filter.setTehUser(this.listPersons[index].id);
@@ -114,34 +135,22 @@ export class LeftPanelCompaniesComponent implements OnInit {
       console.log('this.salesHistory', this.salesHistory);
     })
   }
-  public selectClientIndustry(item) {
-    this.clientIndustry = item;
-    this.filter.setClientIndustry(this.clientIndustry);
-    this.leftPanelStateService.onInitFilter(this.filter);
-  }
+
   public onSelectClientIndustry(item) {
+    this.showClearIndustry = true;
     this.clientIndustry = item;
     this.filter.setClientIndustry(this.clientIndustry);
     this.leftPanelStateService.onInitFilter(this.filter);
     this.industryHistory.pop();
     this.industryHistory.unshift(item);
     //this.company.techLeadId = this.listPersons[index].id;
+    
     this.companiesService.setСustomStorage("companiesPageFilterByIndustryHistory", this.industryHistory).subscribe(data => {
       console.log('data', data);
       console.log('this.salesHistory', this.industryHistory);
     })
   }
-  private getTehusers(list) {
 
-    list.forEach((item) => {
-      if (item.accountType === "TECH" && !item.deletedAt) {
-        item.selected = false;
-        this.listPersons.push(item);
-      }
-
-    })
-    console.log('this.listPersons', this.listPersons);
-  }
   public trackByIndex(index, item) {
     return index;
   }

@@ -32,7 +32,7 @@
       <!--      for show "filter-item__content" click on "filter-item__header" and add class "show-filter" for "filter-item"-->
       <div class="filter-item">
         <i class="icn-sm report-caret-icon"></i>
-        <div class="filter-item__header">
+        <div class="filter-item__header" (click)="toggleFilter($event)">
           By sales person
         </div>
         <div class="filter-item__content">
@@ -42,9 +42,9 @@
                    [value]="getSelectedTechLead()"
                    placeholder="Select Sales Person"
                    ngbDropdownToggle>
-            <i class="icn-sm icn-remove-old" (click)="clearSalesPerson()" tooltip="clear"
+            <i class="icn-sm icn-remove-old" *ngIf="showClearSalesPerson" (click)="clearSalesPerson()" tooltip="clear"
                tooltip-placement="top"></i>
-            <i class="icn-sm report-caret-icon"></i>
+            <i class="icn-sm report-caret-icon" *ngIf="!showClearSalesPerson"></i>
             <div ngbDropdownMenu aria-labelledby="dropdownPersons">
               <ng-template ngFor let-item [ngForOf]="listPersons" let-i="index">
                 <button ngbDropdownItem [textContent]="item.firstName + ' ' + item.lastName"
@@ -65,7 +65,7 @@
       <!--      for show "filter-item__content" click on "filter-item__header" and add class "show-filter" for "filter-item"-->
       <div class="filter-item">
         <i class="icn-sm report-caret-icon"></i>
-        <div class="filter-item__header">
+        <div class="filter-item__header" (click)="toggleFilter($event)">
           By industry
         </div>
         <div class="filter-item__content">
@@ -75,9 +75,9 @@
                    placeholder="Select Industry"
                    [value]="clientIndustry"
                    ngbDropdownToggle>
-            <i class="icn-sm icn-remove-old" (click)="clearClientIndustry()" tooltip="clear"
+            <i class="icn-sm icn-remove-old"  *ngIf="showClearIndustry" (click)="clearClientIndustry()" tooltip="clear"
                tooltip-placement="top"></i>
-            <i class="icn-sm report-caret-icon"></i>
+            <i class="icn-sm report-caret-icon" *ngIf="!showClearIndustry"></i>
             <div ngbDropdownMenu aria-labelledby="dropdownClientIndustry">
               <ng-template ngFor let-item [ngForOf]="industries">
                 <button ngbDropdownItem [textContent]="item" (click)="onSelectClientIndustry(item)"></button>
