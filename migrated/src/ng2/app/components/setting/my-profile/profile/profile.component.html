@@ -89,19 +89,19 @@
         </div>
       </div>
       <div class="f-col col-50">
-        <label *ngIf="(!submitted || !f.primaryEmail.errors) && !uniqueEmail"
+        <label *ngIf="(!submitted || !f.primaryEmail.errors) && uniqueEmail"
           >Email Address</label
         >
         <div
           *ngIf="submitted && f.primaryEmail.errors"
           class="invalid-feedback"
         >
-          <div *ngIf="f.primaryEmail.errors.required">Email is required</div>
-          <div *ngIf="f.primaryEmail.errors.email">
+          <div *ngIf="f.primaryEmail.errors.required && uniqueEmail">Email is required</div>
+          <div *ngIf="f.primaryEmail.errors.pattern && uniqueEmail">
             Email must be a valid email address
           </div>
         </div>
-        <label *ngIf="uniqueEmail" class="invalid-feedback"
+        <label *ngIf="!uniqueEmail" class="invalid-feedback"
           >This email already occupied.</label
         >
         <div class="form-row">
@@ -201,12 +201,22 @@
         <div class="f-col col-60">
           <label>Mailing Address</label>
           <div class="form-row">
-            <input
+              <input
+              placeholder="search for location"
+              autocorrect="off"
+              autocapitalize="off"
+              class="form-input"
+              spellcheck="off"
+              type="text"
+              #search
+              formControlName="mailingAddress"
+            />
+            <!-- <input
               type="text"
               placeholder="Enter Mailing Address"
               class="form-input"
               formControlName="mailingAddress"
-            />
+            /> -->
           </div>
         </div>
         <div class="f-col col-20">

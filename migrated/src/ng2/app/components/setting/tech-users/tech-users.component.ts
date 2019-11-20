@@ -421,7 +421,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     }
 
     this.techUsersService
-      .isEmailUnique(email, null, true)
+      .isEmailUnique(this.techUserForm.value.primaryEmail, null, true)
       .pipe(
         map((unique: any) => {
           this.isEmailIdUnique = unique.value;

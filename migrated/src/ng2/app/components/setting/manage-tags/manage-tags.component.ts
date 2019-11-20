@@ -37,6 +37,7 @@ export class ManageTagsComponent implements OnInit {
    * init
    */
   ngOnInit() {
+    this.searchTag = '';
     this.compnayForm = this.formBuilder.group({
       word: ["", Validators.required],
       id: [""]
@@ -107,12 +108,13 @@ export class ManageTagsComponent implements OnInit {
   getAllDevice() {}
 
   setTab() {
+    this.searchTag = "";
+    this.compnayForm.patchValue({ word: "" });
     if (this.tickets.nativeElement.className.indexOf("active") > -1) {
       this.setActiveTab = "ticket";
     } else {
       this.setActiveTab = "company";
     }
-    this.searchTag = "";
   }
 
   // convenience getter for easy access to form fields

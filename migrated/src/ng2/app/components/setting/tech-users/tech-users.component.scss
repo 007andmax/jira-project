@@ -10,11 +10,18 @@
         width: 936px;
         .cmn-area{
             padding-top: 0;
+            @media only screen and (max-width:768px){
+                padding: 25px;
+            }
+            
         }
     }
 }
 .mteh-data{
     table {
+        @media only screen and (max-width:768px){
+            margin-bottom: 25px;
+        }
         th,td{
             -ms-box-sizing: border-box;
             -o-box-sizing: border-box;
@@ -24,9 +31,15 @@
         }
         .tech-user{
             width: 227px;
+            @media only screen and (max-width:768px){
+                width: 200px;
+            }
         }
         .email{
             width: 228px;
+            @media only screen and (max-width:576px){
+                display: none;
+            }
             a {
                 color: #4f5f79;
             }
@@ -39,9 +52,17 @@
                 display: block;
             }
         }
-        .e-note{width: 205px;position: relative;}
+        .e-note{width: 205px;position: relative;
+            @media only screen and (max-width:576px){
+                display: none;
+            }
+        }
         .action{
             width: 190px;
+            @media only screen and (max-width:768px){
+                p{display: none;}
+                width: 70px;
+            }
         }
     }
 }
@@ -55,7 +76,7 @@
         width: 40px;
         height: 40px;
         border-radius: 50%;
-        overflow: visible;
+        overflow: hidden;
         position: relative;
         &::after{
             width: 10px;
@@ -123,6 +144,10 @@
         @include transition(0.4s);
         overflow-y: hidden;
         display: none;
+        @media only screen and (max-width:1024px){
+            left: auto;
+            right:20px;
+        }
         &.opened{
             display: block;
         }
@@ -169,14 +194,18 @@
     overflow: hidden;
 }
 
-img {
-    object-fit: cover !important;
-    border-radius: 50% !important;
-  }
+// img {
+//     object-fit: cover !important;
+//     border-radius: 50% !important;
+//   }
   
-  .invalid-feedback {
-    margin-top: 0.25rem;
+.invalid-feedback {
+    // width: 100%;
+    margin-top: .25rem;
     font-size: 80%;
     color: #dc3545;
-    margin-bottom: 10px;
- }
+  }
+  
+  input.ng-invalid.is-invalid {
+    border: 1px solid red;
+  }

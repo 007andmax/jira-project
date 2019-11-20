@@ -3,7 +3,7 @@
 <div class="page-container manage-tech">
   <div class="page-insider">
     <div class="heading">
-      <h1>Manage Tech Users</h1>
+      <h1><a href="javascript:;" class="back-menu" style="display: none;">backmneu</a>Manage Tech Users</h1>
       <div class="heading-serach">
         <a href="javascript:;" (click)="creatTechUsr()" class="btn-outline"
           >Create Tech User</a
@@ -175,19 +175,23 @@
               <td class="action">
                 <a
                   href="javascript:;"
-                  class="static-link"
+                  data-tooltip="Reset Password"
+                  class="reset"
                   *ngIf="techUser.isEmailVerified"
                   (click)="changePasswordRequest(techUser.id)"
-                  ><p>Send a request to change password</p></a
-                >
+                  ><img src="/ng2/assets/img/reset-password.svg" alt="Edit"/></a>
                 <a
                   href="javascript:;"
-                  class="static-link"
+                  data-tooltip="Resend Email"
+                  class="reset"
                   *ngIf="!(techUser.isEmailVerified && techUser.userEnabled)"
-                  ><p (click)="resendWelcomeEmail(techUser.primaryEmail)">
-                    Resend welcome email
-                  </p></a
-                >
+                  (click)="resendWelcomeEmail(techUser.primaryEmail)"
+                  >
+                  <img src="/ng2/assets/img/reset-password.svg" alt="Edit" />
+                </a>
+                  <!--<p (click)="resendWelcomeEmail(techUser.primaryEmail)">
+                    <img src="/ng2/assets/img/reset-password.svg" alt="Edit" />
+                  </p>-->
                 <a
                   href="javascript:;"
                   data-tooltip="Edit"
@@ -580,8 +584,8 @@
             *ngIf="submitted && f.primaryEmail.errors"
             class="invalid-feedback"
           >
-            <div *ngIf="f.primaryEmail.errors.required">Email is required</div>
-            <div *ngIf="f.primaryEmail.errors.pattern">
+            <div *ngIf="f.primaryEmail.errors.required && isEmailIdUnique">Email is required</div>
+            <div *ngIf="f.primaryEmail.errors.pattern && isEmailIdUnique">
               Email must be a valid email address
             </div>
           </div>

@@ -10,6 +10,9 @@
 .cmn-area{
     &.int-area{
         padding-top: 0;
+        @media only screen and (max-width: 768px){
+            padding: 25px;
+        }
     }
    
 }
@@ -20,6 +23,12 @@
     border-bottom: 1px solid #edf2f6;padding: 16px 0;
     display: flex;align-items: center;
     margin-bottom: 28px;
+    @media only screen and (max-width: 768px){
+        padding-top: 0;
+        border-top: 0;
+        margin-bottom: 20px;
+
+    }
     .right-info {
         margin-left: 10px;
         h5 {
@@ -39,6 +48,7 @@
             line-height: 1.54;
             letter-spacing: normal;
             color: #4f5f79;
+            
         }
     }
 
@@ -175,6 +185,9 @@
             line-height: 1.54;
             letter-spacing: normal;
             color: #4f5f79;
+            @media only screen and (max-width: 768px){
+                margin-bottom: 15px;
+            }
         }
     }
     .logo-area {
@@ -182,14 +195,31 @@
         width: 100%;
         margin-bottom: 20px;
         padding: 0 8px;
+        @media only screen and (max-width: 768px){
+            margin-top: 5px;
+        }
     }
     .f-row {
         margin-bottom: 0;
         .form-row {
             margin-bottom: 30px;
+            @media only screen and (max-width: 768px){
+                margin-bottom: 12px;
+            }
         }
     }
     .btn-row {
         margin-top: 8px;
+        @media only screen and (max-width: 768px){
+            margin-top: 50px;
+            .btn.btn-primary{
+                position: fixed;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 1;
+                width: 100%;
+            }
+        }
     }
 }

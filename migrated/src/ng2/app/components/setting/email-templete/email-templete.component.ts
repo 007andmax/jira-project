@@ -1,17 +1,19 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap';
-import { EmailTempleteService } from './email-templete.service';
-import { map, catchError } from 'rxjs/operators';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { of } from 'rxjs';
-import { ToastrService } from 'ngx-toastr';
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import { BsModalRef, BsModalService } from "ngx-bootstrap";
+import { EmailTempleteService } from "./email-templete.service";
+import { map, catchError } from "rxjs/operators";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { of } from "rxjs";
+import { ToastrService } from "ngx-toastr";
 
-import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { AngularEditorConfig } from "@kolkov/angular-editor";
+
+declare var $: any;
 
 @Component({
-  selector: 'app-email-templete',
-  templateUrl: './email-templete.component.html',
-  styleUrls: ['./email-templete.component.scss']
+  selector: "app-email-templete",
+  templateUrl: "./email-templete.component.html",
+  styleUrls: ["./email-templete.component.scss"]
 })
 export class EmailTempleteComponent implements OnInit {
   loading = false;
@@ -21,7 +23,7 @@ export class EmailTempleteComponent implements OnInit {
   ticketTemplates: any;
   agentTemplates: any;
   invoiceTemplates: any;
-  currentOpenTemplate = '';
+  currentOpenTemplate = "";
 
   keywords: any[];
   templeteInfo: any;
@@ -32,21 +34,21 @@ export class EmailTempleteComponent implements OnInit {
   templeteForm: FormGroup;
   openEmailTemplate: string;
   public show = false;
-  public buttonName: any = 'Show Keyword Description + ';
+  public buttonName: any = "Show Keyword Description + ";
   templatesData = { subject: {}, body: {} };
   modalRef: BsModalRef;
-  @ViewChild('body') body: ElementRef;
-  @ViewChild('subject') subject: ElementRef;
-  
+  @ViewChild("body") body: ElementRef;
+  @ViewChild("subject") subject: ElementRef;
+
   config: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
-    height: '15rem',
-    minHeight: '5rem',
-    placeholder: 'Enter text here...',
-    translate: 'no',
-    defaultParagraphSeparator: 'p',
-    defaultFontName: 'Arial',
+    height: "15rem",
+    minHeight: "5rem",
+    placeholder: "Enter text here...",
+    translate: "no",
+    defaultParagraphSeparator: "p",
+    defaultFontName: "Arial"
   };
 
   constructor(
@@ -63,15 +65,15 @@ export class EmailTempleteComponent implements OnInit {
   openModal(template) {
     this.modalRef = this.modalService.show(
       template,
-      Object.assign({}, { class: 'manage-tags modal-dialog-centered' })
+      Object.assign({}, { class: "manage-tags modal-dialog-centered" })
     );
   }
 
   ngOnInit() {
     this.keywords = [];
     this.templeteForm = this.formBuilder.group({
-      subject: ['', Validators.required],
-      body: ['', Validators.required]
+      subject: ["", Validators.required],
+      body: ["", Validators.required]
     });
     this.getEmailPages();
   }
@@ -83,7 +85,7 @@ export class EmailTempleteComponent implements OnInit {
 
   onReady(eventData) {
     console.log(eventData);
-    eventData.plugins.get('FileRepository').createUploadAdapter = function(
+    eventData.plugins.get("FileRepository").createUploadAdapter = function(
       loader
     ) {
       console.log(btoa(loader.file));
@@ -105,7 +107,7 @@ export class EmailTempleteComponent implements OnInit {
         }),
         catchError(err => {
           this.loading = false;
-          return of('');
+          return of("");
         })
       )
       .subscribe();
@@ -120,6 +122,7 @@ export class EmailTempleteComponent implements OnInit {
     if (!templete) {
       return;
     }
+
     this.getEmailPages();
     this.templeteInfo = templete.value;
     this.loading = true;
@@ -129,22 +132,24 @@ export class EmailTempleteComponent implements OnInit {
       .pipe(
         map((res: any) => {
           this.loading = false;
+          this.hideButtonTextEditor();
+
           if (res) {
             this.templatesData.body = res.body;
             this.templatesData.subject = res.subject;
             this.keywords = res.keywords;
 
-            this.templeteForm.controls['subject'].clearValidators();
+            this.templeteForm.controls["subject"].clearValidators();
 
             if (this.templeteInfo.requiredKeywordsRegExp) {
               const pattern = this.templeteInfo.requiredKeywordsRegExp;
-              this.templeteForm.controls['subject'].setValidators([
+              this.templeteForm.controls["subject"].setValidators([
                 Validators.required,
                 Validators.pattern(pattern)
               ]);
-              this.templeteForm.controls['subject'].updateValueAndValidity();
+              this.templeteForm.controls["subject"].updateValueAndValidity();
             } else {
-              this.templeteForm.controls['subject'].setValidators([
+              this.templeteForm.controls["subject"].setValidators([
                 Validators.required
               ]);
             }
@@ -180,7 +185,7 @@ export class EmailTempleteComponent implements OnInit {
    * @param myValue
    */
   insertDataVarables(myField, myValue) {
-    if (myField.selectionStart || myField.selectionStart == '0') {
+    if (myField.selectionStart || myField.selectionStart == "0") {
       var startPos = myField.selectionStart;
       var endPos = myField.selectionEnd;
       myField.value =
@@ -193,11 +198,11 @@ export class EmailTempleteComponent implements OnInit {
     } else {
       myField.value += myValue;
     }
-    if (myField.name === 'subject') {
+    if (myField.name === "subject") {
       this.templeteForm.patchValue({
         subject: myField.value
       });
-    } else if (myField.name === 'body') {
+    } else if (myField.name === "body") {
       this.templeteForm.patchValue({
         body: myField.value
       });
@@ -208,7 +213,7 @@ export class EmailTempleteComponent implements OnInit {
     this.emailPreviewHtml = undefined;
     this.gettingEmailTemplatePreview = true;
 
-    alert('Api is remaining for our new design template');
+    alert("Api is remaining for our new design template");
 
     // this.emailService
     //   .getHtmlForPreview(templateKey, this.templatesData)
@@ -267,7 +272,7 @@ export class EmailTempleteComponent implements OnInit {
       .subscribe(
         () => {
           this.loading = false;
-          this.toastr.success('Saved successfully');
+          this.toastr.success("Saved successfully");
           this.getEmailPages();
         },
         error => {
@@ -302,7 +307,7 @@ export class EmailTempleteComponent implements OnInit {
       )
       .subscribe(
         () => {
-          this.toastr.success('Restored successfully');
+          this.toastr.success("Restored successfully");
           this.getEmailPages();
         },
         error => {
@@ -315,10 +320,37 @@ export class EmailTempleteComponent implements OnInit {
     this.show = !this.show;
 
     if (this.show) {
-      this.buttonName = 'Hide Keyword Description - ';
+      this.buttonName = "Hide Keyword Description - ";
     } else {
-      this.buttonName = 'Show Keyword Description + ';
+      this.buttonName = "Show Keyword Description + ";
     }
+  }
+
+  hideButtonTextEditor() {
+    $("#toggleEditorMode-myEditor")
+      .parent()
+      .hide();
+    $("#superscript-myEditor").hide();
+    $("#subscript-myEditor").hide();
+    $("#strikeThrough-myEditor").hide();
+    $("#indent-myEditor")
+      .parent()
+      .hide();
+    $("#insertUnorderedList-myEditor")
+      .parent()
+      .hide();
+    $("#heading-myEditor")
+      .parent()
+      .hide();
+    $("#fontSizeSelector-myEditor")
+      .parent()
+      .hide();
+    $("#foregroundColorPicker-myEditor")
+      .parent()
+      .hide();
+    $("#link-myEditor")
+      .parent()
+      .hide();
   }
 }
 

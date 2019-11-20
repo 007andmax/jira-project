@@ -6,9 +6,15 @@
 .subscription{
     .heading{
         padding: 34px 48px 45px 48px;
+        @media only screen and (max-width:768px){
+            padding: 15.5px 16px;
+        }
     }
     .cmn-area{
         padding: 0 48px 56px;
+        @media only screen and (max-width:768px){
+            padding: 25px;
+        }
     }
 
     .current-plan {
@@ -61,9 +67,19 @@
             padding: 15px 24px;
             margin-bottom: 40px;
             flex-direction: row;
+            @media only screen and (max-width: 576px){
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
         .plan-info {
             max-width: 200px;
+            @media only screen and (max-width: 576px){
+                max-width: 100%;
+                width: 100%;
+                margin-bottom: 25px;
+
+            }
             h2 {
                 font-size: 18px;
                 font-family: $graphicSemibold;
@@ -82,6 +98,10 @@
 
         }
         .upgrade-info {
+            @media only screen and (max-width: 576px){
+                width: 100%;
+                text-align: right;
+            }
             a {
                 font-size: 12px;
                 font-weight: 500;
@@ -89,12 +109,20 @@
                 line-height: 1.33;
                 letter-spacing: -0.3px;
                 color: #16a4fa;
+                @media only screen and (max-width: 576px){
+                    @include border-radius(4px);
+                    display: inline-block;
+                }
             }
             .btn {
                 padding: 13px 24px;
                 margin-left: 24px;
                 color:$white-color;
                 letter-spacing: normal;
+                @media only screen and (max-width: 576px){
+                    padding: 11px 15px;
+                    margin-left: 15px;
+                }
             }
         }
 
@@ -163,10 +191,21 @@
 .price-wrapper {
     margin: 0 auto;
     width: 945px;
+    @media only screen and (max-width:1280px){
+        width: 100%;
+    }
+    @media only screen and (max-width:768px){
+        background-color: #f3f7f9;
+    }
     .price-content {
         float: left;
         width: 100%;
         margin-bottom: 100px;
+        @media only screen and (max-width:768px){
+            background-color: #f3f7f9;
+            padding-bottom: 20px;
+            margin: 0;
+        }
     }
     .price-heading {
         float: left;
@@ -174,6 +213,11 @@
         text-align: center;
         margin-top: 35px;
         margin-bottom: 73px;
+        @media only screen and (max-width:768px){
+            padding: 0 30px;
+            margin-bottom: 20px;
+            margin-top: 81px;
+        }
         h1 {
             margin-bottom: 0;
         }
@@ -186,10 +230,14 @@
         float: left;
         width: 100%;
         position: relative;
+        @media only screen and (max-width:1280px){
+            width: 950px;
+        }
     }
     .pr-wrapper{
         float: left;
         width: 100%;overflow: hidden;
+        
     }
     table.price-table {
         width: 100%;
@@ -339,12 +387,43 @@
   font-size: 0;
   top: 0;
   background-color: #fff;
+
+  @media only screen and (max-width:768px){
+    width: 100%;
+    height: 56px;
+    border-radius: 0;
+    background: url(/ng2/assets/img/close-light.svg) left 20px center no-repeat;
+    background-size: 20px auto;
+    position: fixed;
+    right: 0;
+    font-size: 0;
+    top: 0;
+    background-color: #fff;
+    left: 0;
+    background-color: #27303f;
+    color: #fff;
+    display: flex; 
+    flex-direction: row;
+    font-size: 16px;
+    padding-left: 56px;
+    z-index: 999; 
+    align-items: center;
+  }
+
 }
 /** Switch box **/
 .reporting{
     position: relative;
     float: left;
     width: 100%;
+    @media only screen and (max-width:1280px){
+        overflow-x: auto;
+        padding-bottom: 15px;
+    }
+    @media only screen and (max-width:768px){
+        padding-left: 15px;
+    }
+  
 .switchbox {
     display: inline-block;
     position: absolute;
@@ -352,6 +431,22 @@
     left: 90px;
     top: 22px;
     z-index: 1;
+    @media only screen and (max-width: 768px){
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        position: relative;
+        height: 20px;
+        left: auto;
+        top: auto;
+        z-index: 1;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 35px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
     input {
         height: 0;
         width: 0;
@@ -393,6 +488,10 @@
             @include transition(0.4s);
             cursor: pointer;
         }
+        @media only screen and (max-width: 768px){
+            order: 2;
+            margin: 0 10px;
+        }
     }
     span {
         position: absolute;
@@ -407,12 +506,23 @@
         letter-spacing: normal;
         color: #364656;
         text-transform: uppercase;
+        @media only screen and (max-width: 768px){
+            position: static;
+            margin: 0;
+        }
         &.monthly {
             left: -64px;
+            @media only screen and (max-width: 768px){
+                left: 0;
+                order: 1;
+            }
         }
         &.Annual {
             right: -64px;
             color: #9ca5b6;
+            @media only screen and (max-width: 768px){
+                order: 3;
+            }
 
         }
     }

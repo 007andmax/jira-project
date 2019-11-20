@@ -3,7 +3,11 @@
 <div class="page-container permissin-manage">
   <div class="page-insider">
     <div class="heading">
-      <h1>Permission Management</h1>
+      <h1>
+        <a href="javascript:;" class="back-menu" style="display: none;"
+          >backmneu</a
+        >Permission Management
+      </h1>
       <div class="heading-serach" *ngIf="roles && roles.length < 5">
         <a href="javascript:;" class="btn-outline" (click)="addNewRole()"
           >Create New Role</a
@@ -32,8 +36,7 @@
                     href="javascript:;"
                     data-tooltip="Remove"
                     class="delete-ico"
-                    
-                    (click)="deleteRole(role.id, true) ; delete = !delete"
+                    (click)="deleteRole(role.id, true); delete = !delete"
                   >
                     <img src="/ng2/assets/img/remove-12.svg" alt="remove" />
                   </a>
@@ -43,43 +46,45 @@
                   class="modal-content toggle-area"
                   [ngClass]="{ opened: selectedRoleIndex === i }"
                 >
-                  <div class="toggle-header">
-                    <h2 class="h1">Edit Role</h2>
-                  </div>
-                  <div class="modal-body">
-                    <form method="POST">
-                      <div class="f-row">
-                        <div class="f-col col-100">
-                          <label>Role Name</label>
-                          <div class="form-row">
-                            <input
-                              type="text"
-                              class="form-input"
-                              [(ngModel)]="editData.name"
-                              [ngModelOptions]="{standalone: true}"
-                              placeholder="Enter Role Name"
-                            />
+                  <div class="modal-wrapper">
+                    <div class="toggle-header">
+                      <h2 class="h1">Edit Role</h2>
+                    </div>
+                    <div class="modal-body">
+                      <form method="POST">
+                        <div class="f-row">
+                          <div class="f-col col-100">
+                            <label>Role Name</label>
+                            <div class="form-row">
+                              <input
+                                type="text"
+                                class="form-input"
+                                [(ngModel)]="editData.name"
+                                [ngModelOptions]="{ standalone: true }"
+                                placeholder="Enter Role Name"
+                              />
+                            </div>
+                          </div>
+                          <div class="m-btn-row">
+                            <div class="m-btn-col">
+                              <input
+                                type="button"
+                                value="Save"
+                                (click)="changeRoleName()"
+                                class="btn btn-primary"
+                              />
+                              <a
+                                href="javascript:;"
+                                class="btn btn-secondary"
+                                aria-label="Close"
+                                (click)="editRoleName(role, index)"
+                                >Cancel</a
+                              >
+                            </div>
                           </div>
                         </div>
-                        <div class="m-btn-row">
-                          <div class="m-btn-col">
-                            <input
-                              type="button"
-                              value="Save"
-                              (click)="changeRoleName()"
-                              class="btn btn-primary"
-                            />
-                            <a
-                              href="javascript:;"
-                              class="btn btn-secondary"
-                              aria-label="Close"
-                              (click)="editRoleName(role,index)"
-                              >Cancel</a
-                            >
-                          </div>
-                        </div>
-                      </div>
-                    </form>
+                      </form>
+                    </div>
                   </div>
                 </div>
               </th>
@@ -87,7 +92,7 @@
           </thead>
 
           <tbody class="no-border">
-            <ng-container  *ngFor="let section of sections | keyvalue">
+            <ng-container *ngFor="let section of sections | keyvalue">
               <tr>
                 <td class="t-tile" colspan="4">
                   <h5>{{ section.key }}</h5>
@@ -95,16 +100,18 @@
               </tr>
               <tr *ngFor="let permission of section.value">
                 <td class="permissions">{{ userReadable(permission) }}</td>
-                <td class="help" *ngFor="let role of roles;let i= index">
+                <td class="help" *ngFor="let role of roles; let i = index">
                   <span class="cmn-checkbox">
                     <input
                       type="checkbox"
-                      id="{{permission}}_{{role.id}}"
-                      [checked]="role.permissions.indexOf(permission) > -1 ? true : false"
+                      id="{{ permission }}_{{ role.id }}"
+                      [checked]="
+                        role.permissions.indexOf(permission) > -1 ? true : false
+                      "
                       (click)="togglePermission(role, permission)"
                       [disabled]="isPermissionDisabled(permission, role)"
                     />
-                    <label for="{{permission}}_{{role.id}}"></label>
+                    <label for="{{ permission }}_{{ role.id }}"></label>
                   </span>
                 </td>
               </tr>
@@ -116,7 +123,11 @@
   </div>
 </div>
 <!-- sidebar popup edit -->
-<div class="sidebar-popup role-dlt" [class.opened]="delete" *ngIf="usersToShift">
+<div
+  class="sidebar-popup role-dlt"
+  [class.opened]="delete"
+  *ngIf="usersToShift"
+>
   <!-- header -->
   <div class="sidebar-header">
     <div class="h1">Delete Role?</div>
@@ -127,7 +138,8 @@
   <div class="warn-msg">
     <img src="/ng2/assets/img/warning.svg" alt="warning" />
     <p>
-      {{usersToShift.length}} tech users belong to this group, you must assign a <br />
+      {{ usersToShift.length }} tech users belong to this group, you must assign
+      a <br />
       different group to existing users to delete the group.
     </p>
   </div>
@@ -139,45 +151,60 @@
           <li *ngFor="let user of usersToShift">
             <div class="t-user">
               <span class="user-dp away">
-                <img   *ngIf = "user && !user.avatar || !user.avatar.updatedAt"
-                src="/ng2/assets/img/user.jpg" alt="user" />
-                <img *ngIf = "user.avatar && user.avatar.updatedAt"
-                  src="/user/{{user.id}}/image.jpg?t={{user.avatar.updatedAt}}"
+                <img
+                  *ngIf="(user && !user.avatar) || !user.avatar.updatedAt"
+                  src="/ng2/assets/img/user.jpg"
+                  alt="user"
+                />
+                <img
+                  *ngIf="user.avatar && user.avatar.updatedAt"
+                  src="/user/{{ user.id }}/image.jpg?t={{
+                    user.avatar.updatedAt
+                  }}"
                   alt="user"
                 />
               </span>
               <div class="t-info">
-                <h5>{{ user.firstName + ' ' + user.lastName }}</h5>
-                <a href="mailto:{{user.primaryEmail}}"
-                  >{{user.primaryEmail}}</a
-                >
+                <h5>{{ user.firstName + " " + user.lastName }}</h5>
+                <a href="mailto:{{ user.primaryEmail }}">{{
+                  user.primaryEmail
+                }}</a>
               </div>
             </div>
             <!-- <li ng-repeat="role in allTechRoles" ng-click="user.techRole = role; changeUsersRole(user)">
               <a tabindex="-1" href="javascript:void(0)"> {{ role }} </a>
             </li> -->
-            <select class="cmn-select form-input" [(ngModel)]="user.techRole" 
-            (change)="changeUsersRole(user,$event)"
-            [ngModelOptions]="{standalone: true}" name="techRole">
-              <option value="{{role}}" 
-                *ngFor="let role of allTechRoles" 
-                >{{role}}</option>
+            <select
+              class="cmn-select form-input"
+              [(ngModel)]="user.techRole"
+              (change)="changeUsersRole(user, $event)"
+              [ngModelOptions]="{ standalone: true }"
+              name="techRole"
+            >
+              <option value="{{ role }}" *ngFor="let role of allTechRoles">{{
+                role
+              }}</option>
               <!-- <option>Administrator 1</option> -->
             </select>
           </li>
         </ul>
       </div>
       <div class="btn-row">
-        <input type="submit" value="Delete Role"
-        [disabled]="allRolesAreChanged(roleToDelete)"
-        (click)="deleteRole(roleToDelete, true); "
-         class="btn btn-primary" />
-        <a
-          href="javascrip:;"
-          class="btn btn-secondary"
-          (click)="delete = !delete"
-          >Cancel</a
-        >
+        <input
+          type="submit"
+          value="Delete Role"
+          [disabled]="allRolesAreChanged(roleToDelete)"
+          (click)="deleteRole(roleToDelete, true)"
+          class="btn btn-primary"
+        />
+        <div>
+          <a
+            href="javascrip:;"
+            class="btn btn-secondary"
+            (click)="delete = !delete"
+            >Cancel</a
+          >
+        </div>
       </div>
     </form>
   </div>

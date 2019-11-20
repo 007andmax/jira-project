@@ -4,7 +4,7 @@ import { map, catchError } from "rxjs/operators";
 import { SettingService } from "src/ng2/app/services/setting/setting.service";
 import { of } from "rxjs";
 import { UsersService } from "src/ng2/app/services/users/users.service";
-import { ToastrService } from 'ngx-toastr';
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: "app-permission-manage",
@@ -105,8 +105,8 @@ export class PermissionManageComponent implements OnInit {
         map(res => {
           this.loading = false;
           this.roles = res;
-        })
-        ,catchError(err => {
+        }),
+        catchError(err => {
           this.loading = false;
           throw err.message;
         })
@@ -166,7 +166,7 @@ export class PermissionManageComponent implements OnInit {
       .createTechRole(newRole)
       .pipe(
         map(res => {
-          this.toastrService.success('Role added successfully');
+          this.toastrService.success("Role added successfully");
           this.loading = false;
           this.isNewRoleCreating = false;
           if (res) {
@@ -174,7 +174,9 @@ export class PermissionManageComponent implements OnInit {
           }
         })
       )
-      .subscribe();
+      .subscribe(()=>{
+        this.getRoleNames();
+      });
   }
 
   /**
@@ -186,7 +188,7 @@ export class PermissionManageComponent implements OnInit {
       .updateTechRole(this.editData.id, this.editData.name)
       .pipe(
         map(res => {
-          this.toastrService.success('Role changed successfully');
+          this.toastrService.success("Role changed successfully");
           this.loading = false;
           var role = this.roles.find(el => {
             return el.id === this.editData.id;
@@ -202,8 +204,8 @@ export class PermissionManageComponent implements OnInit {
 
   /**
    * edit role name based on params
-   * @param role 
-   * @param index 
+   * @param role
+   * @param index
    */
   editRoleName(role: any, index: number) {
     this.selectedRoleIndex = index;
@@ -227,14 +229,14 @@ export class PermissionManageComponent implements OnInit {
 
   /**
    * delete role based on params
-   * @param id 
-   * @param isModal 
+   * @param id
+   * @param isModal
    */
   deleteRole(id, isModal) {
     if (!id) {
       return;
     }
-    this.loading = true;
+    // this.loading = true;
     this.permissionManageService.deleteTechRole(id).subscribe(
       (res: any) => {
         this.loading = false;
@@ -254,6 +256,7 @@ export class PermissionManageComponent implements OnInit {
           });
 
           this.roleToDelete = id;
+          console.log(this.usersToShift);
         } else {
           this.delete = false;
           this.loading = false;
@@ -286,17 +289,17 @@ export class PermissionManageComponent implements OnInit {
           this.roleToDelete = id;
         } else {
           this.delete = false;
-          this.roles = this.roles.filter(function(el) {
+          this.roles = this.roles.filter(el => {
             return el.id !== id;
-          });
+          })
         }
       }
     );
   }
 
   /**
-   * all roles 
-   * @param id 
+   * all roles
+   * @param id
    */
   allRolesAreChanged(id: string) {
     const roles = this.roles;
@@ -319,8 +322,8 @@ export class PermissionManageComponent implements OnInit {
   }
 
   /**
-   * 
-   * @param str 
+   *
+   * @param str
    */
   userReadable(str: string) {
     return str
@@ -332,9 +335,9 @@ export class PermissionManageComponent implements OnInit {
   }
 
   /**
-   * 
-   * @param role 
-   * @param permission 
+   *
+   * @param role
+   * @param permission
    */
   togglePermission(role, permission) {
     this.addOrRemovePermission(role.permissions, permission);
@@ -355,8 +358,8 @@ export class PermissionManageComponent implements OnInit {
 
   /**
    * add or remove permission
-   * @param permissions 
-   * @param permission 
+   * @param permissions
+   * @param permission
    */
   addOrRemovePermission(permissions, permission) {
     const index = permissions.indexOf(permission);
@@ -406,8 +409,8 @@ export class PermissionManageComponent implements OnInit {
 
   /**
    * is permission disbaled
-   * @param permission 
-   * @param role 
+   * @param permission
+   * @param role
    */
   isPermissionDisabled(permission, role) {
     if (
@@ -447,15 +450,16 @@ export class PermissionManageComponent implements OnInit {
 
   /**
    * changed user role
-   * @param user 
-   * @param event 
+   * @param user
+   * @param event
    */
   changeUsersRole(user, event) {
     user.techRole = event.target.value;
     this.loading = true;
+    user.avatar.cropped = null;
     this.permissionManageService.save(user).subscribe(res => {
       this.loading = false;
-      this.toastrService.success('Role changed successfully');
+      this.toastrService.success("Role changed successfully");
       var userIndex = this.usersToShift.findIndex(el => el.id === user.id);
 
       if (userIndex !== -1) {

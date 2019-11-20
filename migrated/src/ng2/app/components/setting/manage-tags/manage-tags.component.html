@@ -3,7 +3,7 @@
 <div class="page-container">
   <div class="page-insider manage-tags">
     <div class="heading">
-      <h1>Manage Tags</h1>
+      <h1><a href="javascript:;" class="back-menu" style="display: none;">backmneu</a>Manage Tags</h1>
       <div class="heading-serach">
         <form method="GET">
           <input
@@ -19,46 +19,48 @@
         >
         <!-- Modal create Tags -->
         <div class="modal-content toggle-area" [class.opened]="create">
-          <div class="toggle-header">
-            <h2 class="h1">Create Tag</h2>
-          </div>
-          <div class="modal-body">
-            <form [formGroup]="compnayForm" (ngSubmit)="onSubmit()">
-              <div class="f-row">
-                <div class="f-col col-100">
-                  <label *ngIf="!submitted || !f.word.errors">Tag Name</label>
-                  <div
-                    *ngIf="submitted && f.word.errors"
-                    class="invalid-feedback"
-                  >
-                    <div *ngIf="f.word.errors.required">
-                      Tag Name is required
+            <div class="modal-wrapper">
+              <div class="toggle-header">
+                <h2 class="h1">Create Tag</h2>
+              </div>
+              <div class="modal-body">
+                <form [formGroup]="compnayForm" (ngSubmit)="onSubmit()">
+                  <div class="f-row">
+                    <div class="f-col col-100">
+                      <label *ngIf="!submitted || !f.word.errors">Tag Name</label>
+                      <div
+                        *ngIf="submitted && f.word.errors"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="f.word.errors.required">
+                          Tag Name is required
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <input
+                          type="text"
+                          formControlName="word"
+                          class="form-input"
+                          placeholder="Enter Tag Name"
+                          [ngClass]="{ 'is-invalid': submitted && f.word.errors }"
+                        />
+                      </div>
+                    </div>
+                    <div class="m-btn-row">
+                      <div class="m-btn-col">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                        <a
+                          href="javascript:;"
+                          class="btn btn-secondary"
+                          aria-label="Close"
+                          (click)="create = !create"
+                          >Cancel</a
+                        >
+                      </div>
                     </div>
                   </div>
-                  <div class="form-row">
-                    <input
-                      type="text"
-                      formControlName="word"
-                      class="form-input"
-                      placeholder="Enter Tag Name"
-                      [ngClass]="{ 'is-invalid': submitted && f.word.errors }"
-                    />
-                  </div>
-                </div>
-                <div class="m-btn-row">
-                  <div class="m-btn-col">
-                    <input type="submit" value="Save" class="btn btn-primary" />
-                    <a
-                      href="javascript:;"
-                      class="btn btn-secondary"
-                      aria-label="Close"
-                      (click)="create = !create"
-                      >Cancel</a
-                    >
-                  </div>
-                </div>
+                </form>
               </div>
-            </form>
           </div>
         </div>
       </div>
@@ -106,6 +108,7 @@
                       class="modal-content toggle-area"
                       [ngClass]="{ opened: selectedIdx === i }"
                     >
+                    <div class="modal-wrapper">
                       <div class="toggle-header">
                         <h2 class="h1">Edit Tag</h2>
                       </div>
@@ -162,6 +165,7 @@
                         </form>
                       </div>
                     </div>
+                  </div>
                   </td>
                 </tr>
               </tbody>
@@ -211,6 +215,7 @@
                       class="modal-content toggle-area"
                       [ngClass]="{ opened: selectedIdx === i }"
                     >
+                    <div class="modal-wrapper">
                       <div class="toggle-header">
                         <h2 class="h1">Edit Tag</h2>
                       </div>
@@ -267,6 +272,7 @@
                           </div>
                         </form>
                       </div>
+                    </div>
                     </div>
                   </td>
                 </tr>

@@ -1,5 +1,17 @@
-import { Component, OnInit, TemplateRef } from "@angular/core";
-import { FormGroup, Validators, FormBuilder } from "@angular/forms";
+import {
+  Component,
+  OnInit,
+  TemplateRef,
+  ElementRef,
+  ViewChild,
+  NgZone
+} from "@angular/core";
+import {
+  FormGroup,
+  Validators,
+  FormBuilder,
+  FormControl
+} from "@angular/forms";
 import { SettingService } from "src/ng2/app/services/setting/setting.service";
 import { UsersService } from "src/ng2/app/services/users/users.service";
 import { BsModalService, BsModalRef } from "ngx-bootstrap";
@@ -7,8 +19,10 @@ import { ImageCroppedEvent } from "ngx-image-cropper";
 import { Observable, Observer } from "rxjs";
 import { ToastrService } from "ngx-toastr";
 import { map } from "rxjs/operators";
+import { MapsAPILoader } from "@agm/core";
 // import { ToastrService } from 'ngx-toastr';
 
+declare var google: any;
 @Component({
   selector: "app-profile",
   templateUrl: "./profile.component.html",
@@ -17,7 +31,7 @@ import { map } from "rxjs/operators";
 export class ProfileComponent implements OnInit {
   loading = false;
   submitted = false;
-  uniqueEmail = false;
+  uniqueEmail = true;
   isAddPhone = false;
   isCroppedImg = false;
   croppedImage: any = "";
@@ -33,12 +47,23 @@ export class ProfileComponent implements OnInit {
   public currentUser: any;
   public profileForm: FormGroup;
 
+  // addres google map
+  public latitude: number;
+  public longitude: number;
+  public searchControl: FormControl;
+  public zoom: number;
+
+  @ViewChild("search")
+  public searchElementRef: ElementRef;
+
   constructor(
     private formBuilder: FormBuilder,
     private settingService: SettingService,
     private userService: UsersService,
     private modalService: BsModalService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private mapsAPILoader: MapsAPILoader,
+    private ngZone: NgZone
   ) {}
 
   ngOnInit() {
@@ -48,6 +73,8 @@ export class ProfileComponent implements OnInit {
     /**
      * init form validation and declaration
      */
+    const emailPattern =
+      "[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,63}";
     this.profileForm = this.formBuilder.group({
       userName: [
         this.currentUser.firstName,
@@ -56,7 +83,7 @@ export class ProfileComponent implements OnInit {
       firstName: [this.currentUser.firstName],
       primaryEmail: [
         this.currentUser.primaryEmail,
-        [Validators.required, Validators.email]
+        [Validators.required, Validators.pattern(emailPattern)]
       ],
       secondaryEmail: [this.currentUser.secondaryEmail],
       designation: [
@@ -75,6 +102,8 @@ export class ProfileComponent implements OnInit {
       aboutMe: [""],
       image: [""]
     });
+
+    this.getAddressAutocomplete();
   }
 
   /**
@@ -82,6 +111,37 @@ export class ProfileComponent implements OnInit {
    */
   get f() {
     return this.profileForm.controls;
+  }
+
+  /**
+   * auto complete address
+   */
+  getAddressAutocomplete() {
+    //load address Autocomplete
+    this.mapsAPILoader.load().then(() => {
+      let autocomplete = new google.maps.places.Autocomplete(
+        this.searchElementRef.nativeElement,
+        {
+          types: ["address"]
+        }
+      );
+      autocomplete.addListener("place_changed", () => {
+        this.ngZone.run(() => {
+          //get the place result
+          let place = (google.maps.places.PlaceResult = autocomplete.getPlace());
+
+          //verify result
+          if (place.geometry === undefined || place.geometry === null) {
+            return;
+          }
+
+          //set latitude, longitude and zoom
+          this.latitude = place.geometry.location.lat();
+          this.longitude = place.geometry.location.lng();
+          this.zoom = 12;
+        });
+      });
+    });
   }
 
   /**
@@ -167,7 +227,7 @@ export class ProfileComponent implements OnInit {
    */
   isEmailUnique() {
     if (!this.profileForm.get("primaryEmail").value) {
-      this.uniqueEmail = false;
+      this.uniqueEmail = true;
       return;
     }
 
@@ -443,21 +503,28 @@ export class ProfileComponent implements OnInit {
 
     if (this.userProfile && this.userProfile.address) {
       (this.userProfile.address.suiteNumber = this.profileForm.value.suiteNumber),
-        (this.userProfile.address.address = this.profileForm.value.mailingAddress),
+        (this.userProfile.address.address = this.searchElementRef.nativeElement
+          .value
+          ? this.searchElementRef.nativeElement.value
+          : this.profileForm.value.mailingAddress),
         (this.userProfile.address.aboutMe = this.profileForm.value.aboutMe),
         (this.userProfile.address.postalCode = this.profileForm.value.postalCode);
 
       const phoneNumbers = [];
-      const phone = { number: "", typeNumber: "", priority: 0, id: "" };
+
       if (this.profileForm.value.primaryPhone) {
+        const phone = { number: "", typeNumber: "", priority: 0, id: "" };
         phone.number = this.profileForm.value.primaryPhone;
         phone.typeNumber = this.profileForm.value.primaryPhoneType;
+        phone.id = this.profileForm.value.primaryId;
         (phone.priority = 0), phoneNumbers.push(phone);
       }
 
       if (this.profileForm.value.secondaryPhone) {
+        const phone = { number: "", typeNumber: "", priority: 0, id: "" };
         phone.number = this.profileForm.value.secondaryPhone;
         phone.typeNumber = this.profileForm.value.secondaryPhoneType;
+        phone.id = this.profileForm.value.secondaryId || "";
         phoneNumbers.push(phone);
       }
       this.userProfile.address.phoneNumbers = phoneNumbers;

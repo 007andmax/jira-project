@@ -3,95 +3,97 @@
 <div class="page-container">
   <div class="page-insider manage-taxes">
     <div class="heading">
-      <h1>Taxes</h1>
+      <h1><a href="javascript:;" class="back-menu" style="display: none;">backmneu</a>Taxes</h1>
       <div class="heading-serach">
         <a href="javascript:;" class="btn-outline" (click)="openModel(true)"
           >Add Tax</a
         >
         <!-- Modal create Tags -->
         <div class="modal-content toggle-area" [class.opened]="create">
-          <div class="toggle-header">
-            <h2 class="h1">Add Tax</h2>
-          </div>
-          <div class="modal-body">
-            <form [formGroup]="taxForm" (ngSubmit)="onSubmit()">
-              <div class="f-row">
-                <div class="f-col col-100">
-                  <label *ngIf="(!submitted || !f.name.errors) && unique"
-                    >Tax Name</label
-                  >
-                  <div
-                    *ngIf="submitted && f.name.errors"
-                    class="invalid-feedback"
-                  >
-                    <div *ngIf="f.name.errors.required">Name is required</div>
-                    <div *ngIf="f.name.errors.minlength">
-                      Name is too short.
-                    </div>
-                    <div *ngIf="f.name.errors.maxlength">Name is too long.</div>
-                  </div>
-                  <div *ngIf="!unique" class="invalid-feedback">
-                    Name is already taken.
-                  </div>
-                  <div class="form-row">
-                    <input
-                      type="text"
-                      class="form-input"
-                      formControlName="name"
-                      placeholder="Enter Tax Name"
-                      #name
-                      (blur)="isUniqueName(name.value)"
-                      [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
-                    />
-                  </div>
-                </div>
-                <div class="f-col col-100">
-                  <label *ngIf="!submitted || !f.rate.errors"
-                    >Tax Rate (%)</label
-                  >
-                  <div
-                    *ngIf="submitted && f.rate.errors"
-                    class="invalid-feedback"
-                  >
-                    <div *ngIf="f.rate.errors.required">Rate is required</div>
-                    <div *ngIf="f.rate.errors.min">To small.</div>
-                    <div *ngIf="f.rate.errors.max">To large.</div>
-                  </div>
-                  <div class="form-row">
-                    <input
-                      type="number"
-                      formControlName="rate"
-                      class="form-input"
-                      placeholder="Set Tax Rate"
-                      [ngClass]="{ 'is-invalid': submitted && f.rate.errors }"
-                    />
-                  </div>
-                </div>
-                <div class="f-col col-100 check-area">
-                  <span class="cmn-checkbox">
-                    <input
-                      type="checkbox"
-                      id="set-as"
-                      formControlName="isDefault"
-                    />
-                    <label for="set-as">Set as Default</label>
-                  </span>
-                </div>
-                <div class="m-btn-row">
-                  <div class="m-btn-col">
-                    <input type="submit" value="Save" class="btn btn-primary" />
-                    <a
-                      href="javascript:;"
-                      class="btn btn-secondary"
-                      aria-label="Close"
-                      (click)="create = !create"
-                      >Cancel</a
-                    >
-                  </div>
-                </div>
+            <div class="modal-wrapper">
+              <div class="toggle-header">
+                <h2 class="h1">Add Tax</h2>
               </div>
-            </form>
-          </div>
+              <div class="modal-body">
+                <form [formGroup]="taxForm" (ngSubmit)="onSubmit()">
+                  <div class="f-row">
+                    <div class="f-col col-100">
+                      <label *ngIf="(!submitted || !f.name.errors) && unique"
+                        >Tax Name</label
+                      >
+                      <div
+                        *ngIf="submitted && f.name.errors"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="f.name.errors.required">Name is required</div>
+                        <div *ngIf="f.name.errors.minlength">
+                          Name is too short.
+                        </div>
+                        <div *ngIf="f.name.errors.maxlength">Name is too long.</div>
+                      </div>
+                      <div *ngIf="!unique" class="invalid-feedback">
+                        Name is already taken.
+                      </div>
+                      <div class="form-row">
+                        <input
+                          type="text"
+                          class="form-input"
+                          formControlName="name"
+                          placeholder="Enter Tax Name"
+                          #name
+                          (blur)="isUniqueName(name.value)"
+                          [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
+                        />
+                      </div>
+                    </div>
+                    <div class="f-col col-100">
+                      <label *ngIf="!submitted || !f.rate.errors"
+                        >Tax Rate (%)</label
+                      >
+                      <div
+                        *ngIf="submitted && f.rate.errors"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="f.rate.errors.required">Rate is required</div>
+                        <div *ngIf="f.rate.errors.min">To small.</div>
+                        <div *ngIf="f.rate.errors.max">To large.</div>
+                      </div>
+                      <div class="form-row">
+                        <input
+                          type="number"
+                          formControlName="rate"
+                          class="form-input"
+                          placeholder="Set Tax Rate"
+                          [ngClass]="{ 'is-invalid': submitted && f.rate.errors }"
+                        />
+                      </div>
+                    </div>
+                    <div class="f-col col-100 check-area">
+                      <span class="cmn-checkbox">
+                        <input
+                          type="checkbox"
+                          id="set-as"
+                          formControlName="isDefault"
+                        />
+                        <label for="set-as">Set as Default</label>
+                      </span>
+                    </div>
+                    <div class="m-btn-row">
+                      <div class="m-btn-col">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                        <a
+                          href="javascript:;"
+                          class="btn btn-secondary"
+                          aria-label="Close"
+                          (click)="create = !create"
+                          >Cancel</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+             </div> 
         </div>
       </div>
     </div>
@@ -142,6 +144,7 @@
                   class="modal-content toggle-area"
                   [ngClass]="{ opened: selectedIdx === i }"
                 >
+                <div class="modal-wrapper">
                   <div class="toggle-header">
                     <h2 class="h1">Edit Tax</h2>
                   </div>
@@ -238,6 +241,7 @@
                         </div>
                       </div>
                     </form>
+                  </div>
                   </div>
                 </div>
               </td>

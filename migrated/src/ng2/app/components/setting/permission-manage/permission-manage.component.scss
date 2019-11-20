@@ -8,6 +8,9 @@
     }
     .pr-area{
         padding-top: 9px;
+        @media only screen and (max-width:768px){
+            padding: 25px;
+        }
     }
     .pr-data{
         h5{
@@ -56,10 +59,16 @@
         }
         .permissions{
             width: 224px;
+            @media only screen and (max-width:768px){
+                width: 160px;
+            }
         }
         .help{
             width: 178px;
             position: relative;
+            @media only screen and (max-width:768px){
+                width: 100px;
+            }
         }
         .t-user{
             width: 178px;
@@ -128,9 +137,19 @@
         right: auto;
         left: 80px;
         top: 28px;
+        @media only screen and (max-width: 1280px){
+            right: 0;
+            left: 0;
+            top: 0;
+            bottom: 0;
+        }
         &::before,&::after{
             left: 32px;
             right: auto;
+            @media only screen and (max-width: 1280px){
+                right: 0;
+                left: 0;
+            }
         }
         .modal-body{
             .f-row{
@@ -172,6 +191,12 @@
         display: inline-block;
         margin-left: 10px;
         vertical-align: middle;
+        @media only screen and (max-width: 576px){
+            max-width: 66%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
         h5 {
             margin-bottom: 0;
             font-size: 13px;
@@ -205,6 +230,9 @@
         align-items: center;
         background-color: #fff8eb;
         padding: 8px 24px 8px 40px;
+        @media only screen and (max-width: 768px){
+            padding: 8px 24px 8px 24px;
+        }
         p{
             font-size: 13px;
             font-weight: normal;
@@ -213,6 +241,9 @@
             color: #7f5c1b;
             margin-bottom: 0;
             margin-left: 10px;
+            @media only screen and (max-width: 768px){
+                br{display: none;}
+            }
         }
     }
     .btn-primary{
@@ -255,6 +286,10 @@
             margin-bottom: 20px !important;
             .t-user {
                 max-width: 60%;
+                @media only screen and (max-width: 768px){
+                    max-width: initial;
+                    width: calc(100% - 150px);
+                }
             }
             select.cmn-select.form-input {
                 width: 128px;
@@ -264,6 +299,9 @@
                 font-style: normal;
                 background-size: 14px auto;
                 background-position: right 8px center;
+                @media only screen and (max-width: 768px){
+                    width: 113px;
+                }
             }
         }
     }
@@ -274,6 +312,25 @@
 }
 
 
+.page-container .pr-area th:nth-last-child(1) .modal-content.toggle-area {
+    left: auto;
+    right: 0;
+}
+
+.page-container .pr-area th:nth-last-child(1) .modal-content.toggle-area::before,.page-container .pr-area th:nth-last-child(1) .modal-content.toggle-area::after {
+    left: auto;
+    right: 32px;
+}
+
+.page-container .pr-area th:nth-last-child(2) .modal-content.toggle-area {
+    left: auto;
+    right: 0;
+}
+
+.page-container .pr-area th:nth-last-child(2) .modal-content.toggle-area::before,.page-container .pr-area th:nth-last-child(2) .modal-content.toggle-area::after {
+    left: auto;
+    right: 32px;
+}
 
 
 

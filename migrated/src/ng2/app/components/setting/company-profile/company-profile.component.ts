@@ -1,17 +1,23 @@
-import { Component, OnInit, ViewChild, ElementRef, NgZone } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  NgZone
+} from "@angular/core";
 import { Observable, Observer } from "rxjs";
 import {
   FormGroup,
   FormBuilder,
   Validators,
-  FormControl,
+  FormControl
 } from "@angular/forms";
 
 import { CompanyProfileService } from "src/ng2/app/services/setting/company-profile.service";
 import { ToastrService } from "ngx-toastr";
 import { ImageCroppedEvent } from "ngx-image-cropper";
 import { SettingService } from "src/ng2/app/services/setting/setting.service";
-import { MapsAPILoader } from '@agm/core';
+import { MapsAPILoader } from "@agm/core";
 
 declare var google: any;
 
@@ -66,11 +72,8 @@ export class CompanyProfileComponent implements OnInit {
 
   config = {
     displayKey: "city",
-    search: true,
-    height: "auto",
     limitTo: 3,
-    moreText: "more",
-    searchPlaceholder: "Search",
+    search: true,
     searchOnKey: "city"
   };
   // addres google map
@@ -81,7 +84,6 @@ export class CompanyProfileComponent implements OnInit {
 
   @ViewChild("search")
   public searchElementRef: ElementRef;
-  
 
   phone: string;
   constructor(
@@ -93,7 +95,6 @@ export class CompanyProfileComponent implements OnInit {
     private ngZone: NgZone
   ) {}
 
-  
   /**
    * init
    */
@@ -117,42 +118,42 @@ export class CompanyProfileComponent implements OnInit {
     this.zoom = 4;
     this.latitude = 39.8282;
     this.longitude = -98.5795;
-    
+
     //create search FormControl
     this.searchControl = new FormControl();
-    
+
     //set current position
     // this.setCurrentPosition();
 
     // load address autocomplete
     this.getAddressAutocomplete();
-    
-    
   }
 
   getAddress(place: object) {
     // this.address = place['formatted_address'];
-    
     // this.formattedAddress = place['formatted_address'];
     // this.ngZone.run(() => this.formattedAddress = place['formatted_address']);
   }
 
-  getAddressAutocomplete(){
+  getAddressAutocomplete() {
     //load address Autocomplete
     this.mapsAPILoader.load().then(() => {
-      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
-        types: ["address"]
-      });
+      let autocomplete = new google.maps.places.Autocomplete(
+        this.searchElementRef.nativeElement,
+        {
+          types: ["address"]
+        }
+      );
       autocomplete.addListener("place_changed", () => {
         this.ngZone.run(() => {
           //get the place result
-          let place = google.maps.places.PlaceResult = autocomplete.getPlace();
-  
+          let place = (google.maps.places.PlaceResult = autocomplete.getPlace());
+
           //verify result
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }
-          
+
           //set latitude, longitude and zoom
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
@@ -165,7 +166,7 @@ export class CompanyProfileComponent implements OnInit {
   // get current position
   private setCurrentPosition() {
     if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
+      navigator.geolocation.getCurrentPosition(position => {
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
         this.zoom = 12;
@@ -177,7 +178,6 @@ export class CompanyProfileComponent implements OnInit {
    * create company profile from group
    */
   createCProfileForm() {
-
     this.cProfileForm = new FormGroup({
       name: new FormControl("", Validators.required),
       url: new FormControl({ value: "", disabled: true }, Validators.required),
@@ -211,9 +211,9 @@ export class CompanyProfileComponent implements OnInit {
           } else {
             this.imageSrc = "ng2/assets/img/company-logo.svg";
           }
-          if(this.currentCompany.addresses.length > 0){
+          if (this.currentCompany.addresses.length > 0) {
             const timeZone = this.currentCompany.addresses[0].timeZone;
-            if(timeZone){
+            if (timeZone) {
               this.cProfileForm.patchValue({
                 timeZone: timeZone.name
               });
@@ -429,7 +429,10 @@ export class CompanyProfileComponent implements OnInit {
         logo: null,
         name: this.cProfile.name
       })
-      .subscribe(res => {}, error => {});
+      .subscribe(
+        res => {},
+        error => {}
+      );
   }
 
   /**
@@ -471,7 +474,7 @@ export class CompanyProfileComponent implements OnInit {
 
   /**
    * get base64Image from url based on params url
-   * @param url 
+   * @param url
    */
 
   getBase64ImageFromURL(url: string) {
@@ -498,7 +501,7 @@ export class CompanyProfileComponent implements OnInit {
 
   /**
    * get base64image based on img
-   * @param img 
+   * @param img
    */
   getBase64Image(img: HTMLImageElement) {
     // We create a HTML canvas object that will create a 2d image
@@ -583,11 +586,14 @@ export class CompanyProfileComponent implements OnInit {
         f => f.isSelected
       );
       const workingTime = { workingDays: selectedWorkingHours };
+      this.loading = true;
       this.companyProfileService.workingTime(workingTime).subscribe(
         res => {
+          this.loading = false;
           this.toaster.success("Records saved successfully");
         },
         error => {
+          this.loading = false;
           this.toaster.error(`Error occured, ${error}`);
         }
       );
@@ -605,9 +611,16 @@ export class CompanyProfileComponent implements OnInit {
       return;
     }
 
+    if (!this.cProfile.address[0]) {
+      return;
+    }
+
     this.cProfile.address[0].suiteNumber = this.cProfileForm.get(
       "suiteNumber"
     ).value;
+    this.cProfile.address[0].timeZone.name = this.cProfileForm.value.timeZone
+      ? this.cProfileForm.value.timeZone.city
+      : "";
     this.cProfile.address[0].address = this.searchElementRef.nativeElement.value; //this.cProfileForm.get("address").value;
     this.cProfile.address[0].postalCode = this.cProfileForm.get(
       "postalCode"
@@ -627,7 +640,7 @@ export class CompanyProfileComponent implements OnInit {
       phones.push({
         number: this.cProfileForm.value.secondaryPhone,
         typeNumber: this.cProfileForm.value.secondaryPhoneType,
-        id: this.cProfileForm.value.secondaryId
+        id: this.cProfileForm.value.secondaryId || ""
       });
     }
 
@@ -685,8 +698,8 @@ export class CompanyProfileComponent implements OnInit {
 
   /**
    * start time changed based on params
-   * @param workingday 
-   * @param startTime 
+   * @param workingday
+   * @param startTime
    */
   startTimeChange(workingday: any, startTime: any) {
     const splitTime = startTime.split(":");
@@ -717,7 +730,7 @@ export class CompanyProfileComponent implements OnInit {
 
   /**
    * display from time
-   * @param from 
+   * @param from
    */
   fromTime_convert(from) {
     const startWith = "from ",
@@ -744,8 +757,8 @@ export class CompanyProfileComponent implements OnInit {
   }
 
   /**
-   * display to time 
-   * @param to 
+   * display to time
+   * @param to
    */
   toTime_convert(to) {
     let toHours = Math.floor(to / 3600);
@@ -768,7 +781,6 @@ export class CompanyProfileComponent implements OnInit {
 
     return value;
   }
-
 
   formatOnInput(workingDay, event) {
     const startTime =
@@ -798,7 +810,7 @@ export class CompanyProfileComponent implements OnInit {
 
   /**
    * checked number only
-   * @param event 
+   * @param event
    */
   numberOnly(event): boolean {
     const charCode = event.which ? event.which : event.keyCode;

@@ -7,7 +7,6 @@
 
 
 .cmn-area.incming-email{
-            
     margin-top: 3px; 
     p{
         margin-bottom: 24px;
@@ -21,8 +20,14 @@
     } 
     .f-row{
         margin-bottom: 0;
-        .f-col{
+        @media only screen and (max-width: 768px){
+            margin:0;
+        }
+        .f-col{ 
             width: 416px;
+            @media only screen and (max-width: 768px){
+                width: 100%;
+            }
         }
         .cmn-checkbox{
             margin-bottom: 33px;

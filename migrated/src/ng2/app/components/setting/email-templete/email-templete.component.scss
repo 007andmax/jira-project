@@ -1,7 +1,7 @@
 /*** All css files include ***/
-@import '../../../../assets/scss/variable';
-@import '../../../../assets/scss/mixin';
-@import '../../../../assets/scss/custom';
+@import "../../../../assets/scss/variable";
+@import "../../../../assets/scss/mixin";
+@import "../../../../assets/scss/custom";
 
 .tmp-edit {
   @media only screen and (max-width: 1400px) {
@@ -16,6 +16,9 @@
     flex-direction: row;
     padding: 14px 40px;
     border-bottom: 1px solid #edf2f6;
+    @media only screen and (max-width: 1280px) {
+      padding: 14px 25px;
+    }
     a.templates-view {
       font-size: 12px;
       font-weight: 500;
@@ -33,6 +36,9 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 18px;
+    @media only screen and (max-width: 1280px) {
+      margin-top: 10px;
+    }
     label {
       margin: 0 !important;
       font-size: 11px;
@@ -74,6 +80,15 @@
     position: static;
     height: auto;
     width: auto;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    @media only screen and (max-width: 1280px) {
+      // float: left;
+      margin-bottom: 19px;
+      padding: 0;
+    }
   }
   .msg {
     display: flex;
@@ -90,6 +105,10 @@
     letter-spacing: normal;
     text-align: center;
     color: #4f5f79;
+    @media only screen and (max-width: 1280px) {
+      padding: 9px 25px;
+      text-align: left;
+    }
   }
   .form-row.tgs-list {
     float: left;
@@ -336,124 +355,134 @@
   cursor: not-allowed;
 }
 
-   
+/*** Email Templates Editors ***/
 
-:host
-  /deep/
-  angular-editor#myEditor
-  .select-font-size[title='Font Size'] {
-  display: none;
+#editor {
+  @include border-radius(0);
+}
+.angular-editor .angular-toolbar {
+  background-color: transparent;
+  padding: 15px;
+  border: none;
+  border-radius: 4px 4px 0 0;
+}
+.angular-editor {
+  position: relative;
+  border: solid 1px #c4cbd5;
+}
+.angular-editor .angular-editor-wrapper .angular-editor-textarea {
+  padding: 0 15px;
+  border: none;
+}
+.angular-editor-wrapper p {
+  font-size: 13px;
+}
+div#editor.angular-editor-textarea {
+  margin-top: 0;
+  border-top: 0;
+  resize: none;
+  border-radius: 0 0 4px 4px;
 }
 
-
-:host
-  /deep/
-  angular-editor#myEditor
-  .select-heading[title='Formatting'] {
-  display: none;
+.angular-toolbar .angular-toolbar-set {
+  border-radius: 0;
+  border: none;
 }
 
-:host
-  /deep/
-  angular-editor#myEditor
-  .angular-editor-button[title='Strikethrough'] {
-  display: none;
-}
+// :host /deep/ angular-editor#myEditor .select-font-size[title="Font Size"] {
+//   display: none;
+// }
 
-:host
-  /deep/
-  angular-editor#myEditor
-  .angular-editor-button[title='Strikethrough'] {
-  display: none;
-}
+// :host /deep/ angular-editor#myEditor .select-heading[title="Formatting"] {
+//   display: none;
+// }
 
-:host
-  /deep/
-  angular-editor#myEditor
-  .angular-editor-button[title='Subscript'] {
-  display: none;
-}
+// :host
+//   /deep/
+//   angular-editor#myEditor
+//   .angular-editor-button[title="Strikethrough"] {
+//   display: none;
+// }
 
-:host
-  /deep/
-  angular-editor#myEditor
-  .angular-editor-button[title='Superscript'] {
-  display: none;
-}
+// :host
+//   /deep/
+//   angular-editor#myEditor
+//   .angular-editor-button[title="Strikethrough"] {
+//   display: none;
+// }
 
-:host
-  /deep/
-  angular-editor#myEditor
-  .angular-editor-button[title='Unordered List'] {
-  display: none;
-}
+// :host /deep/ angular-editor#myEditor .angular-editor-button[title="Subscript"] {
+//   display: none;
+// }
 
-:host
-  /deep/
-  angular-editor#myEditor
-  .angular-editor-button[title='Ordered List'] {
-  display: none;
-}
+// :host
+//   /deep/
+//   angular-editor#myEditor
+//   .angular-editor-button[title="Superscript"] {
+//   display: none;
+// }
 
-:host
-  /deep/
-  angular-editor#myEditor
-  .angular-editor-button[title='Indent'] {
-  display: none;
-}
+// :host
+//   /deep/
+//   angular-editor#myEditor
+//   .angular-editor-button[title="Unordered List"] {
+//   display: none;
+// }
 
-:host
-  /deep/
-  angular-editor#myEditor
-  .angular-editor-button[title='Outdent'] {
-  display: none;
-}
+// :host
+//   /deep/
+//   angular-editor#myEditor
+//   .angular-editor-button[title="Ordered List"] {
+//   display: none;
+// }
 
-:host
-  /deep/
-  angular-editor#myEditor
-  .angular-editor-button[title='HTML Code'] {
-  display: none;
-}
+// :host /deep/ angular-editor#myEditor .angular-editor-button[title="Indent"] {
+//   display: none;
+// }
 
-:host
-  /deep/
-  angular-editor#myEditor
-  .angular-editor-button[title='Insert Link'] {
-  display: none;
-}
+// :host /deep/ angular-editor#myEditor .angular-editor-button[title="Outdent"] {
+//   display: none;
+// }
 
-:host
-  /deep/
-  angular-editor#myEditor
-  .angular-editor-button[title='Unlink'] {
-  display: none;
-}
+// :host /deep/ angular-editor#myEditor .angular-editor-button[title="HTML Code"] {
+//   display: none;
+// }
 
-:host
-  /deep/
-  angular-editor#myEditor
-  .angular-editor-button[title='Insert Image'] {
-  display: none;
-}
+// :host
+//   /deep/
+//   angular-editor#myEditor
+//   .angular-editor-button[title="Insert Link"] {
+//   display: none;
+// }
 
-:host
-  /deep/
-  angular-editor#myEditor
-  .angular-editor-button[title='Horizontal Line'] {
-  display: none;
-}
+// :host /deep/ angular-editor#myEditor .angular-editor-button[title="Unlink"] {
+//   display: none;
+// }
 
-:host
-  /deep/
-  angular-editor#myEditor
-  .angular-editor-button[title='Text Color'] {
-  display: none;
-}
+// :host
+//   /deep/
+//   angular-editor#myEditor
+//   .angular-editor-button[title="Insert Image"] {
+//   display: none;
+// }
 
-:host
-  /deep/
-  angular-editor#myEditor
-  .angular-editor-button[title='Background Color'] {
-  display: none;
-}
+// :host
+//   /deep/
+//   angular-editor#myEditor
+//   .angular-editor-button[title="Horizontal Line"] {
+//   display: none;
+// }
+
+// :host
+//   /deep/
+//   angular-editor#myEditor
+//   .angular-editor-button[title="Text Color"] {
+//   display: none;
+// }
+
+// :host
+//   /deep/
+//   angular-editor#myEditor
+//   .angular-editor-button[title="Background Color"] {
+//   display: none;
+// }

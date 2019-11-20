@@ -20,6 +20,9 @@
     margin-bottom: 0;
     .f-col {
       width: 416px;
+      @media only screen and (max-width: 768px){
+        width: 100%;
+      }
     }
     .cmn-checkbox {
       margin-bottom: 33px;
@@ -28,6 +31,19 @@
 }
 
 .cmn-area.outgoing-email {
+  form{
+    @media only screen and (max-width: 576px){
+      padding-bottom: 40px;
+      .btn{
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+            width: 100%;
+          }
+        }    
+  }
   margin-top: 3px;
   p {
     margin-bottom: 28px;
@@ -42,6 +58,9 @@
   .f-col {
     &.col-25 {
       width: 25%;
+      @media only screen and (max-width: 576px){
+        width: 50%;
+      }
     }
   }
   .f-row {
@@ -68,8 +87,15 @@
 .test-server {
   text-align: right;
   margin-top: -15px;
+  @media only screen and (max-width: 768px){
+    text-align: left;
+  }
   .btn-outline {
     display: inline-block;
+    @media only screen and (max-width: 768px){
+      margin-left: 0;
+      margin-top: 15px;
+    }
   }
 }
 

@@ -6,7 +6,6 @@ import { setUpLocationSync } from '@angular/router/upgrade';
 import { UsersService } from "./services/users/users.service";
 import { WebsocketService } from "./services/websocket/websocket.service";
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

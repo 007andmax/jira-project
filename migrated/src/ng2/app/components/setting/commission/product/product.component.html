@@ -27,47 +27,49 @@
             /></a>
             <!-- Edit create Tags -->
             <div class="modal-content toggle-area" [ngClass]="{'opened': selectedIdx === i}" >
-              <div class="toggle-header">
-                <h2 class="h1">Edit Rate</h2>
-              </div>
-              <div class="modal-body">
-                <form method="POST">
-                  <div class="f-row">
-                    <div class="f-col col-100">
-                      <label>Commission Rate (%)</label>
-                      <div class="form-row">
-                        <input
-                          type="text"
-                          class="form-input"
-                          name="commissionRate"
-                          autocomplete="off"
-                          #commissionRate
-                          value="{{category.commissionRate}}"
-                          step="0.01"
-                          placeholder="Enter Commission Rate"
-                        />
-                      </div>
-                    </div>
-                    <div class="m-btn-row">
-                      <div class="m-btn-col">
-                        <input
-                          type="submit"
-                          (click)="setCategoryRate(commissionRate.value,category.id,category)"
-                          value="Save"
-                          class="btn btn-primary"
-                        />
-                        <a
-                          href="javascript:;"
-                          class="btn btn-secondary"
-                          aria-label="Close"
-                          (click)="selectedIdx = -1"
-                          >Cancel</a
-                        >
-                      </div>
-                    </div>
+                <div class="modal-wrapper">
+                  <div class="toggle-header">
+                    <h2 class="h1">Edit Rate</h2>
                   </div>
-                </form>
-              </div>
+                  <div class="modal-body">
+                    <form method="POST">
+                      <div class="f-row">
+                        <div class="f-col col-100">
+                          <label>Commission Rate (%)</label>
+                          <div class="form-row">
+                            <input
+                              type="text"
+                              class="form-input"
+                              name="commissionRate"
+                              autocomplete="off"
+                              #commissionRate
+                              value="{{category.commissionRate}}"
+                              step="0.01"
+                              placeholder="Enter Commission Rate"
+                            />
+                          </div>
+                        </div>
+                        <div class="m-btn-row">
+                          <div class="m-btn-col">
+                            <input
+                              type="submit"
+                              (click)="setCategoryRate(commissionRate.value,category.id,category)"
+                              value="Save"
+                              class="btn btn-primary"
+                            />
+                            <a
+                              href="javascript:;"
+                              class="btn btn-secondary"
+                              aria-label="Close"
+                              (click)="selectedIdx = -1"
+                              >Cancel</a
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>  
             </div>
           </td>
         </tr>

@@ -91,6 +91,7 @@ export class CustomHandlingStrategy implements UrlHandlingStrategy {
     const appType = url.toString().startsWith('/ng2') ? 'ng2' : 'ng1';
     if (appType === 'ng2') {
       $('body').addClass('ng7');
+      $('body').removeClass('backMenu');
     } else {
       $('body').removeClass('ng7');
     }

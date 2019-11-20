@@ -3,9 +3,9 @@
 <div class="page-container">
   <div class="page-insider company-profile">
     <div class="heading">
-      <h1>Company Profile</h1>
+      <h1><a href="javascript:;" class="back-menu" style="display: none;">backmneu</a>Company Profile</h1>
     </div>
-
+    
     <tabset>
       <!-- Profile -->
       <tab heading="Profile" id="tab1">
@@ -211,7 +211,7 @@
                     [config]="config"
                     [options]="timezones"
                     formControlName="timeZone"
-                    [multiple]="true"
+                    [multiple]="false"
                   ></ngx-select-dropdown>
                   <!-- <select
                     class="cmn-select form-input"
