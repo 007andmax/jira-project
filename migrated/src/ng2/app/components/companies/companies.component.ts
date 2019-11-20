@@ -39,12 +39,12 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   users = [];
   sub: Subscription = new Subscription();
   left_filter: LeftPanelCompaniesFilter = new LeftPanelCompaniesFilter();
-calculateCount:CompanyCalculateCount = new CompanyCalculateCount();
+  calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
   constructor(private companiesService: CompaniesService, private companiesList: CompaniesListService,
     private companiesStateService: CompaniesStateService, private userService: UsersService,
     private confirmStateService: ConfirmStateService, private devicesState: DevicesSateService, private usersStateService: UsersStateService,
     private leftPanelStateService: LeftPanelStateService,
-    private companiesRealTimeService:CompaniesRealTimeService) { }
+    private companiesRealTimeService: CompaniesRealTimeService) { }
 
   ngOnInit() {
     this.companiesStateService.getOnShowArchived().subscribe(data => {
@@ -96,7 +96,7 @@ calculateCount:CompanyCalculateCount = new CompanyCalculateCount();
     })
     this.sub.add(geLefttFilter);
     this.companiesRealTimeService.changeCompanyArray.subscribe(newChange => {
-      console.log('newChange',newChange);
+      console.log('newChange', newChange);
       /*if (newChange.action === 'SALE_QUOTE_CREATED') {
         return this.quotesList.push(newChange.data);
       } else {
@@ -106,20 +106,29 @@ calculateCount:CompanyCalculateCount = new CompanyCalculateCount();
     })
   }
   public onFilterTags(tags) {
-    this.companiesService.getClientsByTags(tags).subscribe(data => {
-      this.showPreloader = true;
-      this.setDefaultScoll();
-      this.getClientsList(data);
+    console.log('onFilterTags');
+    if (tags.length > 0) {
+      this.companiesService.getClientsByTags(tags).subscribe(data => {
+        this.showPreloader = true;
+        this.setDefaultScoll();
+        this.getClientsList(data);
 
-    })
+      })
+    } else {
+      this.setDefaultScoll();
+      this.getClientsList(this.companiesStateService.getCompanies());
+
+    }
+
   }
   private onInirCalculate() {
-    this.calculateCount.onCalculate(this.reqCompaniesList,this.left_filter);
+    this.calculateCount.onCalculate(this.reqCompaniesList, this.left_filter);
     this.companiesStateService.setCalculateCount(this.calculateCount);
   }
   private getClientsList(data) {
     this.reqCompaniesList = data.filter(item => item.accountType === 'CLIENT' && ((!this.showArchivedCompanies) ? !item.deletedAt : item.deletedAt));
-  this.onInirCalculate();
+   console.log('this.reqCompaniesList',this.reqCompaniesList);
+    this.onInirCalculate();
     this.reqCompaniesList.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
     this.onScroll();
@@ -141,6 +150,7 @@ calculateCount:CompanyCalculateCount = new CompanyCalculateCount();
     this.CompaniesList = [...this.CompaniesList, ...CompaniesList];
     this.infiniteScrollDisabled = false;
     if ((this.page_number * 30) > listFilter.length) this.companiesList.setBlockList(true);
+    console.log('CompaniesList',this.CompaniesList);
 
   }
   onFilter(field) {
@@ -157,10 +167,7 @@ calculateCount:CompanyCalculateCount = new CompanyCalculateCount();
           this.filter[index].filter = 'DESC';
           this.reqCompaniesList.reverse();
         }
-        this.page_number = 0;
-        this.companiesList.setBlockList(false);
-        this.CompaniesList = [];
-        this.onScroll();
+
       }
       if (field === 'address') {
         this.clearFilter();
@@ -175,10 +182,7 @@ calculateCount:CompanyCalculateCount = new CompanyCalculateCount();
           this.reqCompaniesList.reverse();
         }
 
-        this.page_number = 0;
-        this.companiesList.setBlockList(false);
-        this.CompaniesList = [];
-        this.onScroll();
+
       }
       if (field === 'primary_contact') {
         this.clearFilter();
@@ -190,10 +194,7 @@ calculateCount:CompanyCalculateCount = new CompanyCalculateCount();
           this.reqCompaniesList.reverse();
         }
 
-        this.page_number = 0;
-        this.companiesList.setBlockList(false);
-        this.CompaniesList = [];
-        this.onScroll();
+
       }
 
       if (field === 'email') {
@@ -206,10 +207,7 @@ calculateCount:CompanyCalculateCount = new CompanyCalculateCount();
           this.reqCompaniesList.reverse();
         }
 
-        this.page_number = 0;
-        this.companiesList.setBlockList(false);
-        this.CompaniesList = [];
-        this.onScroll();
+
       }
       if (field === 'tickets') {
         this.clearFilter();
@@ -221,10 +219,7 @@ calculateCount:CompanyCalculateCount = new CompanyCalculateCount();
           this.reqCompaniesList.reverse();
         }
 
-        this.page_number = 0;
-        this.companiesList.setBlockList(false);
-        this.CompaniesList = [];
-        this.onScroll();
+
       }
       if (field === 'devices') {
         this.clearFilter();
@@ -237,10 +232,7 @@ calculateCount:CompanyCalculateCount = new CompanyCalculateCount();
           this.reqCompaniesList.reverse();
         }
 
-        this.page_number = 0;
-        this.companiesList.setBlockList(false);
-        this.CompaniesList = [];
-        this.onScroll();
+
       }
       if (field === 'users') {
         this.clearFilter();
@@ -252,13 +244,13 @@ calculateCount:CompanyCalculateCount = new CompanyCalculateCount();
           this.reqCompaniesList.reverse();
         }
 
-        this.page_number = 0;
-        this.companiesList.setBlockList(false);
-        this.CompaniesList = [];
-        this.onScroll();
+
       }
 
-
+      this.page_number = 0;
+      this.companiesList.setBlockList(false);
+      this.CompaniesList = [];
+      this.onScroll();
     }
   }
   private onFilterUsers() {

@@ -3,7 +3,6 @@ import { Company } from 'src/ng2/app/interfaces/company/company';
 
 export class LeftPanelCompaniesFilter {
     clientType: string;
-    tags: Array<Tag>;
     tehUser: string;
     clientIndustry: string;
     constructor() {

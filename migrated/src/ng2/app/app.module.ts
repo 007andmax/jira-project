@@ -85,6 +85,7 @@ import { CompanyEditAsideComponent } from './components/companies/company-edit-a
 import { CompanyTagsComponent } from './components/companies/company-tags/company-tags.component';
 import { DraftEmailComponent } from './components/shared/draft-email/draft-email.component';
 import { DraftEmailRecipientsComponent } from './components/shared/draft-email/draft-email-recipients/draft-email-recipients.component';
+import { LeftPanelTagsCompaniesComponent } from './components/left-panel/left-panel-companies/left-panel-tags-companies/left-panel-tags-companies.component';
 
 
 /**
@@ -195,6 +196,7 @@ angular.module('quicktech')
     CompanyTagsComponent,
     DraftEmailComponent,
     DraftEmailRecipientsComponent,
+    LeftPanelTagsCompaniesComponent,
     
   ],
   imports: [
