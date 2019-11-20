@@ -159,7 +159,7 @@ export class WebsocketService {
    */
   public subsribeToCompany() {
     setTimeout(() => {
-     
+     console.log('subsribeToCompany');
         this.stompClient.subscribe(`/user/watch/company`, (message) => {
           var newChange = JSON.parse(message.body);
           this.companiesRealTimeService.handleRealTimeChanges(newChange);

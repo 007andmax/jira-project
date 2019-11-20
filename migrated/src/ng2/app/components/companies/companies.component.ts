@@ -94,13 +94,19 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.sub.add(geLefttFilter);
     this.companiesRealTimeService.changeCompanyArray.subscribe(newChange => {
       console.log('newChange', newChange);
-      if (newChange.action === 'COMPANY_SAVED') {
+      
+    })
+    this.companiesStateService.getChangeCompanies().subscribe(data => {
+     // console.log('newChange', newChange);
+     // if (newChange.action === 'COMPANY_SAVED') {
         console.log('++++++++++++++++++');
-        const reqIndex = this.reqCompaniesList.findIndex((item) => item.id === newChange.data.id);
+        this.reqCompaniesList = data.filter(item => item.accountType === 'CLIENT' && ((!this.showArchivedCompanies) ? !item.deletedAt : item.deletedAt));
+      
+        /*const reqIndex = this.reqCompaniesList.findIndex((item) => item.id === newChange.data.id);
         if (reqIndex > -1) this.reqCompaniesList[reqIndex] = newChange.data;
         const companyIndex = this.CompaniesList.findIndex((item) => item.id === newChange.data.id);
-        if (companyIndex > -1) this.CompaniesList[companyIndex] = newChange.data;
-      }
+        if (companyIndex > -1) this.CompaniesList[companyIndex] = newChange.data;*/
+    //  }
     })
   }
   public onFilterTags(tags) {
