@@ -4,6 +4,7 @@ import { Company } from '../../interfaces/company/company';
 import { CompanyProfile } from '../../components/companies/class/company-profile';
 import { CompanyCalculateCount } from '../../components/companies/class/company-calculate-count';
 import { CompaniesRealTimeService } from './companies-real-time.service';
+import { CompanyUpdate } from '../../components/companies/class/company-update';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ import { CompaniesRealTimeService } from './companies-real-time.service';
 export class CompaniesStateService {
   allCompanies = [];
   onGetCompanies: EventEmitter<any> = new EventEmitter();
-  onChangeCompanies: EventEmitter<any> = new EventEmitter();
+  onChangeCompanies: EventEmitter<CompanyUpdate> = new EventEmitter();
   showAsideForAdd: EventEmitter<any> = new EventEmitter();
   onShowArchived: EventEmitter<any> = new EventEmitter();
   onEditCompany: EventEmitter<CompanyProfile> = new EventEmitter();
@@ -33,7 +34,7 @@ export class CompaniesStateService {
         if (Index > -1) this.allCompanies[Index] = newChange.data;
 
       }
-      this.onChangeCompanies.emit(this.allCompanies);
+      this.onChangeCompanies.emit(new CompanyUpdate(newChange.action,newChange.data,this.allCompanies));
     })
   }
   public getChangeCompanies() {

@@ -13,6 +13,7 @@ import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.
 import { LeftPanelCompaniesFilter } from '../left-panel/left-panel-companies/class/left-panel-companies-filter';
 import { CompanyCalculateCount } from './class/company-calculate-count';
 import { CompaniesRealTimeService } from '../../states/company/companies-real-time.service';
+import { CompanyUpdate } from './class/company-update';
 
 @Component({
   selector: 'app-companies',
@@ -92,21 +93,16 @@ export class CompaniesComponent implements OnInit, OnDestroy {
 
     })
     this.sub.add(geLefttFilter);
-    this.companiesRealTimeService.changeCompanyArray.subscribe(newChange => {
-      console.log('newChange', newChange);
-      
-    })
-    this.companiesStateService.getChangeCompanies().subscribe(data => {
+  
+    this.companiesStateService.getChangeCompanies().subscribe((data:CompanyUpdate) => {
      // console.log('newChange', newChange);
-     // if (newChange.action === 'COMPANY_SAVED') {
+     if (data.action === 'COMPANY_SAVED' || data.action === 'COMPANY_ARCHIVED') {
         console.log('++++++++++++++++++');
-        this.reqCompaniesList = data.filter(item => item.accountType === 'CLIENT' && ((!this.showArchivedCompanies) ? !item.deletedAt : item.deletedAt));
-      
-        /*const reqIndex = this.reqCompaniesList.findIndex((item) => item.id === newChange.data.id);
-        if (reqIndex > -1) this.reqCompaniesList[reqIndex] = newChange.data;
-        const companyIndex = this.CompaniesList.findIndex((item) => item.id === newChange.data.id);
-        if (companyIndex > -1) this.CompaniesList[companyIndex] = newChange.data;*/
-    //  }
+        const reqIndex = this.reqCompaniesList.findIndex((item) => item.id === data.data.id);
+        if (reqIndex > -1) this.reqCompaniesList[reqIndex] = data.data;
+        const companyIndex = this.CompaniesList.findIndex((item) => item.id === data.data.id);
+        if (companyIndex > -1) this.CompaniesList[companyIndex] = data.data;
+     }
     })
   }
   public onFilterTags(tags) {
