@@ -46,7 +46,8 @@ export class LeftPanelTagsCompaniesComponent implements OnInit, OnDestroy {
    */
   public ngOnInit() {
     this.tagsService.getTags().subscribe((data) => {
-      this.tags = data;
+      this.tags = data.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
+      1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
     })
     
      
