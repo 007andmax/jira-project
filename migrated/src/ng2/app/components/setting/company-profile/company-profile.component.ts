@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef, NgZone } from "@angular/core";
 import { Observable, Observer } from "rxjs";
 import {
   FormGroup,
@@ -11,6 +11,9 @@ import { CompanyProfileService } from "src/ng2/app/services/setting/company-prof
 import { ToastrService } from "ngx-toastr";
 import { ImageCroppedEvent } from "ngx-image-cropper";
 import { SettingService } from "src/ng2/app/services/setting/setting.service";
+import { MapsAPILoader } from '@agm/core';
+
+declare var google: any;
 
 @Component({
   selector: "app-company-profile",
@@ -70,14 +73,27 @@ export class CompanyProfileComponent implements OnInit {
     searchPlaceholder: "Search",
     searchOnKey: "city"
   };
+  // addres google map
+  public latitude: number;
+  public longitude: number;
+  public searchControl: FormControl;
+  public zoom: number;
 
+  @ViewChild("search")
+  public searchElementRef: ElementRef;
+  
+
+  phone: string;
   constructor(
     private companyProfileService: CompanyProfileService,
     private toaster: ToastrService,
     private settingService: SettingService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private mapsAPILoader: MapsAPILoader,
+    private ngZone: NgZone
   ) {}
 
+  
   /**
    * init
    */
@@ -97,6 +113,64 @@ export class CompanyProfileComponent implements OnInit {
     this.getConstants();
 
     this.getGroupedLocales();
+
+    this.zoom = 4;
+    this.latitude = 39.8282;
+    this.longitude = -98.5795;
+    
+    //create search FormControl
+    this.searchControl = new FormControl();
+    
+    //set current position
+    // this.setCurrentPosition();
+
+    // load address autocomplete
+    this.getAddressAutocomplete();
+    
+    
+  }
+
+  getAddress(place: object) {
+    // this.address = place['formatted_address'];
+    
+    // this.formattedAddress = place['formatted_address'];
+    // this.ngZone.run(() => this.formattedAddress = place['formatted_address']);
+  }
+
+  getAddressAutocomplete(){
+    //load address Autocomplete
+    this.mapsAPILoader.load().then(() => {
+      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
+        types: ["address"]
+      });
+      autocomplete.addListener("place_changed", () => {
+        this.ngZone.run(() => {
+          //get the place result
+          let place = google.maps.places.PlaceResult = autocomplete.getPlace();
+  
+          //verify result
+          if (place.geometry === undefined || place.geometry === null) {
+            return;
+          }
+          
+          //set latitude, longitude and zoom
+          this.latitude = place.geometry.location.lat();
+          this.longitude = place.geometry.location.lng();
+          this.zoom = 12;
+        });
+      });
+    });
+  }
+
+  // get current position
+  private setCurrentPosition() {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.latitude = position.coords.latitude;
+        this.longitude = position.coords.longitude;
+        this.zoom = 12;
+      });
+    }
   }
 
   /**
@@ -534,7 +608,7 @@ export class CompanyProfileComponent implements OnInit {
     this.cProfile.address[0].suiteNumber = this.cProfileForm.get(
       "suiteNumber"
     ).value;
-    this.cProfile.address[0].address = this.cProfileForm.get("address").value;
+    this.cProfile.address[0].address = this.searchElementRef.nativeElement.value; //this.cProfileForm.get("address").value;
     this.cProfile.address[0].postalCode = this.cProfileForm.get(
       "postalCode"
     ).value;
@@ -560,6 +634,7 @@ export class CompanyProfileComponent implements OnInit {
     this.cProfile.address[0].phoneNumbers = phones;
 
     if (this.cProfile.name !== this.cProfileForm.get("name").value) {
+      this.loading = true;
       this.companyProfileService
         .isCompanyNameUnique(
           this.cProfile.address[0].id,
@@ -567,6 +642,7 @@ export class CompanyProfileComponent implements OnInit {
         )
         .subscribe(
           (res: any) => {
+            this.loading = false;
             this.isCompanyNameUnique = res.value;
             // true, unique companyname
             if (res && res.value) {
@@ -580,22 +656,29 @@ export class CompanyProfileComponent implements OnInit {
                   this.toaster.success("Records saved successfully");
                 },
                 error => {
+                  this.loading = false;
                   this.toaster.error(`Error Occurred, ${error}`);
                 }
               );
             } else {
             }
           },
-          error => {}
+          error => {
+            this.loading = false;
+          }
         );
     } else {
       const address = { addresses: this.cProfile.address };
+      this.loading = true;
       this.companyProfileService.addresses(address).subscribe(
         res => {
+          this.loading = false;
           if (res) {
           }
         },
-        error => {}
+        error => {
+          this.loading = false;
+        }
       );
     }
   }

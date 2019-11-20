@@ -3,360 +3,457 @@
 @import '../../../../assets/scss/mixin';
 @import '../../../../assets/scss/custom';
 
-.tmp-edit{
-    @media only screen and (max-width:1400px){
-        overflow-y: auto;
-        overflow-x: hidden;
-    }
-    .reciept {
-        display: flex;
-        width: 100%;
-        justify-content: space-between;
-        align-items: center;
-        flex-direction: row;
-        padding: 14px 40px;
-        border-bottom: 1px solid #edf2f6;
-        a.templates-view {
-            font-size: 12px;
-            font-weight: 500;
-            font-style: normal;
-            font-stretch: normal;
-            line-height: 1.33;
-            letter-spacing: -0.3px;
-        }
-
-    }
-    textarea{
-        height: 128px;
-        resize: none;
-    }
-    .keywords {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 18px;
-        label {
-            margin: 0 !important;
-            font-size: 11px;
-            color: #4f5f79;
-        }
-        a{
-            font-size: 12px;
-            font-weight: normal;
-            font-style: normal;
-            font-stretch: normal;
-            line-height: 1.33;
-            letter-spacing: -0.3px;
-            color: #16a4fa;
-        }
-    }
-    .middle-content{
-
-        height: calc(100% - 130px);
-        @media only screen and (max-width:1400px){
-            height: 100%;
-        }
-        form{
-            height: 100%;
-        }
-        .f-row{
-
-            @media only screen and (max-width:1400px){
-                overflow: visible;
-            }
-        }
-    }
-    .restore{
-        float: right;
-        margin-top: 19px;
-        font-size: 12px;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: 1.33;
-        letter-spacing: -0.3px;
-        color: #16a4fa;
-        position: static;
-        height: auto;
-        width: auto;
-    }
-    .msg {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #fff8eb;
-        width: 100%;
-        padding: 9px 40px;
-        font-size: 12px;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: 1.33;
-        letter-spacing: normal;
-        text-align: center;
-        color: #4f5f79;
-    }
-    .form-row.tgs-list {
-        float: left;
-        width: 100%;
-        .tags {
-            border-radius: 3px;
-            border: solid 1px #edf2f6;
-            padding: 8px;
-            background-color: #f8f9fa;
-            font-size: 12px;
-            font-weight: normal;
-            font-style: normal;
-            font-stretch: normal;
-            line-height: 1.33;
-            letter-spacing: normal;
-            color: #4f5f79;
-            display: inline-block;
-            margin-right: 8px;
-            margin-bottom: 8px;
-        }
-    }
-
-}
-
-
-.key-area {
-    float: left;
-    width: 100%;
-    span {
-        display: block;
-        margin-bottom: 10px;
-        font-size: 13px;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: 1.54;
-        letter-spacing: normal;
-        color: #4f5f79;
-    }
-}
-
-
-
-/*** Popup design ***/
-
-
-.modal-logo {
-    float: left;
-    max-width: 180px;
-    margin-bottom: 30px;
-}
-
-.templat-area {
-    float: left;
-    width: 100%;
-    border-radius: 4px;
-    border: solid 1px #edf2f6;
-    background-color: #ffffff;
-    margin-bottom: 20px;
-    overflow: hidden;
-    h3 {
-        margin: 0;
-        font-size: 18px;
-        font-weight: 500;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: 1.44;
-        letter-spacing: normal;
-        color: #ffffff;
-        background-color: #4f5f79;
-        padding: 11px 24px;
-    }
-}
-
-
-
-.t-view {
-    float: left;
-    width: 100%;
-    padding: 21px 24px 0 24px;
-    h6{
-        font-size: 13px;
-        font-weight: 500;
-        font-style: normal;
-        line-height: 1.54;
-        letter-spacing: normal;
-        color: #4f5f79;
-        margin-bottom: 12px;
-    }
-    p{
-        margin-bottom: 40px;
-        font-size: 13px;
-        font-weight: normal;
-        font-style: normal;
-        line-height: 1.54;
-        letter-spacing: normal;
-        color: #4f5f79;
-    }
-}
-
-.t-footer {
-    border-top: solid 1px #edf2f6;
-    margin-left: -24px;
-    margin-right: -24px;
-    padding: 16px 24px;
+.tmp-edit {
+  @media only screen and (max-width: 1400px) {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .reciept {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    .t-f-left {
-        span {
-            font-size: 12px;
-            font-weight: normal;
-            font-style: normal;
-            font-stretch: normal;
-            line-height: normal;
-            letter-spacing: normal;
-            color: #364656;
-            display: block;
-        }
-        h5 {
-            margin-bottom: 5px;
-            font-size: 13px;
-            font-weight: 500;
-            font-family: $graphicMedBold;
-            font-style: normal;
-            font-stretch: normal;
-            line-height: normal;
-            letter-spacing: normal;
-            color: #364656;
-        }
-    }
-
-
-
-    .t-f-right {
-        text-align: right;
-        font-size: 12px;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        color: #364656;
-        a {
-            font-size: 12px;
-            font-weight: normal;
-            font-style: normal;
-            font-stretch: normal;
-            line-height: normal;
-            letter-spacing: normal;
-            color: #364656;
-            display: block;
-            margin-bottom: 5px;
-        }
-    }
-
-}
-
-.tab-wrap {
-    float: left;
     width: 100%;
-    margin-bottom: 10px;
-    th {
-        font-size: 12px;
-        font-weight: 500;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        color: #364656;
-        border-bottom: solid 1px #4f5f79;
-        vertical-align: middle;
-        padding: 0 10px 13px 0;
-        font-family: $graphicMedBold;
-        &:last-child {
-            padding-right: 0;
-            text-align: right;
-        }
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    padding: 14px 40px;
+    border-bottom: 1px solid #edf2f6;
+    a.templates-view {
+      font-size: 12px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.33;
+      letter-spacing: -0.3px;
     }
-    td {
-        font-size: 13px;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: 1.54;
-        letter-spacing: normal;
-        color: #364656;
-        border-bottom: solid 1px #4f5f79;
-        padding: 13px 10px 13px 0;
-        vertical-align: middle;
-        &:last-child {
-            padding-right: 0;
-            text-align: right;
-        }
-
+  }
+  textarea {
+    height: 128px;
+    resize: none;
+  }
+  .keywords {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    label {
+      margin: 0 !important;
+      font-size: 11px;
+      color: #4f5f79;
     }
-    tr{
-        &:nth-last-child(2){
-            td{
-                border:none;
-            }
-        }
-        &:last-child {
-            td {
-                border: none;
-                span {
-                    font-size: 13px;
-                    font-weight: normal;
-                    font-style: normal;
-                    font-stretch: normal;
-                    line-height: 1.54;
-                    letter-spacing: normal;
-                    color: #364656;
-                    strong {
-                        margin-left: 10px;
-                        font-size: 13px;
-                        font-weight: 600;
-                        font-style: normal;
-                        font-stretch: normal;
-                        line-height: 1.54;
-                        letter-spacing: normal;
-                        text-align: right;
-                        color: #364656;
-                    }
-                }
-            }
-        }
+    a {
+      font-size: 12px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.33;
+      letter-spacing: -0.3px;
+      color: #16a4fa;
     }
-}
-
-.t-power {
-    display: block;
+  }
+  .middle-content {
+    height: calc(100% - 130px);
+    @media only screen and (max-width: 1400px) {
+      height: 100%;
+    }
+    form {
+      height: 100%;
+    }
+    .f-row {
+      @media only screen and (max-width: 1400px) {
+        overflow: visible;
+      }
+    }
+  }
+  .restore {
+    float: right;
+    margin-top: 19px;
     font-size: 12px;
-    font-family: $font-body;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.33;
+    letter-spacing: -0.3px;
+    color: #16a4fa;
+    position: static;
+    height: auto;
+    width: auto;
+  }
+  .msg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff8eb;
+    width: 100%;
+    padding: 9px 40px;
+    font-size: 12px;
     font-weight: normal;
     font-style: normal;
     font-stretch: normal;
     line-height: 1.33;
     letter-spacing: normal;
     text-align: center;
-    color: #9ca5b6;
-    margin-bottom: 4px;
+    color: #4f5f79;
+  }
+  .form-row.tgs-list {
     float: left;
     width: 100%;
-    &:last-child{
-        margin-bottom: 0;
+    .tags {
+      border-radius: 3px;
+      border: solid 1px #edf2f6;
+      padding: 8px;
+      background-color: #f8f9fa;
+      font-size: 12px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.33;
+      letter-spacing: normal;
+      color: #4f5f79;
+      display: inline-block;
+      margin-right: 8px;
+      margin-bottom: 8px;
     }
-    a {
-        color: #9ca5b6;
-    }
+  }
+}
 
+.key-area {
+  float: left;
+  width: 100%;
+  span {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.54;
+    letter-spacing: normal;
+    color: #4f5f79;
+  }
+}
+
+/*** Popup design ***/
+
+.modal-logo {
+  float: left;
+  max-width: 180px;
+  margin-bottom: 30px;
+}
+
+.templat-area {
+  float: left;
+  width: 100%;
+  border-radius: 4px;
+  border: solid 1px #edf2f6;
+  background-color: #ffffff;
+  margin-bottom: 20px;
+  overflow: hidden;
+  h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.44;
+    letter-spacing: normal;
+    color: #ffffff;
+    background-color: #4f5f79;
+    padding: 11px 24px;
+  }
+}
+
+.t-view {
+  float: left;
+  width: 100%;
+  padding: 21px 24px 0 24px;
+  h6 {
+    font-size: 13px;
+    font-weight: 500;
+    font-style: normal;
+    line-height: 1.54;
+    letter-spacing: normal;
+    color: #4f5f79;
+    margin-bottom: 12px;
+  }
+  p {
+    margin-bottom: 40px;
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    line-height: 1.54;
+    letter-spacing: normal;
+    color: #4f5f79;
+  }
+}
+
+.t-footer {
+  border-top: solid 1px #edf2f6;
+  margin-left: -24px;
+  margin-right: -24px;
+  padding: 16px 24px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  .t-f-left {
+    span {
+      font-size: 12px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      color: #364656;
+      display: block;
+    }
+    h5 {
+      margin-bottom: 5px;
+      font-size: 13px;
+      font-weight: 500;
+      font-family: $graphicMedBold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      color: #364656;
+    }
+  }
+
+  .t-f-right {
+    text-align: right;
+    font-size: 12px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #364656;
+    a {
+      font-size: 12px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      color: #364656;
+      display: block;
+      margin-bottom: 5px;
+    }
+  }
+}
+
+.tab-wrap {
+  float: left;
+  width: 100%;
+  margin-bottom: 10px;
+  th {
+    font-size: 12px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #364656;
+    border-bottom: solid 1px #4f5f79;
+    vertical-align: middle;
+    padding: 0 10px 13px 0;
+    font-family: $graphicMedBold;
+    &:last-child {
+      padding-right: 0;
+      text-align: right;
+    }
+  }
+  td {
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.54;
+    letter-spacing: normal;
+    color: #364656;
+    border-bottom: solid 1px #4f5f79;
+    padding: 13px 10px 13px 0;
+    vertical-align: middle;
+    &:last-child {
+      padding-right: 0;
+      text-align: right;
+    }
+  }
+  tr {
+    &:nth-last-child(2) {
+      td {
+        border: none;
+      }
+    }
+    &:last-child {
+      td {
+        border: none;
+        span {
+          font-size: 13px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: 1.54;
+          letter-spacing: normal;
+          color: #364656;
+          strong {
+            margin-left: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.54;
+            letter-spacing: normal;
+            text-align: right;
+            color: #364656;
+          }
+        }
+      }
+    }
+  }
+}
+
+.t-power {
+  display: block;
+  font-size: 12px;
+  font-family: $font-body;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  text-align: center;
+  color: #9ca5b6;
+  margin-bottom: 4px;
+  float: left;
+  width: 100%;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  a {
+    color: #9ca5b6;
+  }
 }
 
 .disabled {
-    cursor: not-allowed;
-  }
+  cursor: not-allowed;
+}
+
+   
+
+:host
+  /deep/
+  angular-editor#myEditor
+  .select-font-size[title='Font Size'] {
+  display: none;
+}
 
 
+:host
+  /deep/
+  angular-editor#myEditor
+  .select-heading[title='Formatting'] {
+  display: none;
+}
 
+:host
+  /deep/
+  angular-editor#myEditor
+  .angular-editor-button[title='Strikethrough'] {
+  display: none;
+}
 
+:host
+  /deep/
+  angular-editor#myEditor
+  .angular-editor-button[title='Strikethrough'] {
+  display: none;
+}
 
+:host
+  /deep/
+  angular-editor#myEditor
+  .angular-editor-button[title='Subscript'] {
+  display: none;
+}
 
+:host
+  /deep/
+  angular-editor#myEditor
+  .angular-editor-button[title='Superscript'] {
+  display: none;
+}
 
+:host
+  /deep/
+  angular-editor#myEditor
+  .angular-editor-button[title='Unordered List'] {
+  display: none;
+}
 
+:host
+  /deep/
+  angular-editor#myEditor
+  .angular-editor-button[title='Ordered List'] {
+  display: none;
+}
 
+:host
+  /deep/
+  angular-editor#myEditor
+  .angular-editor-button[title='Indent'] {
+  display: none;
+}
 
+:host
+  /deep/
+  angular-editor#myEditor
+  .angular-editor-button[title='Outdent'] {
+  display: none;
+}
+
+:host
+  /deep/
+  angular-editor#myEditor
+  .angular-editor-button[title='HTML Code'] {
+  display: none;
+}
+
+:host
+  /deep/
+  angular-editor#myEditor
+  .angular-editor-button[title='Insert Link'] {
+  display: none;
+}
+
+:host
+  /deep/
+  angular-editor#myEditor
+  .angular-editor-button[title='Unlink'] {
+  display: none;
+}
+
+:host
+  /deep/
+  angular-editor#myEditor
+  .angular-editor-button[title='Insert Image'] {
+  display: none;
+}
+
+:host
+  /deep/
+  angular-editor#myEditor
+  .angular-editor-button[title='Horizontal Line'] {
+  display: none;
+}
+
+:host
+  /deep/
+  angular-editor#myEditor
+  .angular-editor-button[title='Text Color'] {
+  display: none;
+}
+
+:host
+  /deep/
+  angular-editor#myEditor
+  .angular-editor-button[title='Background Color'] {
+  display: none;
+}

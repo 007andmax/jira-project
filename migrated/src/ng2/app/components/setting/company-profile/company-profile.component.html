@@ -5,7 +5,7 @@
     <div class="heading">
       <h1>Company Profile</h1>
     </div>
-    
+
     <tabset>
       <!-- Profile -->
       <tab heading="Profile" id="tab1">
@@ -143,12 +143,25 @@
               <div class="f-col col-60">
                 <label>Mailing Address</label>
                 <div class="form-row">
+                  <!-- <app-autocomplete (setAddress)="getAddress($event)" adressType="geocode" 
+                  ></app-autocomplete> -->
+
                   <input
+                    placeholder="search for location"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    class="form-input"
+                    spellcheck="off"
+                    type="text"
+                    #search
+                    formControlName="address"
+                  />
+                  <!-- <input
                     type="text"
                     placeholder="Enter Mailing Address"
                     class="form-input"
                     formControlName="address"
-                  />
+                  /> -->
                 </div>
               </div>
               <div class="f-col col-20">

@@ -26,7 +26,7 @@
             <form [formGroup]="compnayForm" (ngSubmit)="onSubmit()">
               <div class="f-row">
                 <div class="f-col col-100">
-                  <label *ngIf="!submitted && !f.word.errors">Tag Name</label>
+                  <label *ngIf="!submitted || !f.word.errors">Tag Name</label>
                   <div
                     *ngIf="submitted && f.word.errors"
                     class="invalid-feedback"
@@ -45,17 +45,6 @@
                     />
                   </div>
                 </div>
-                <!-- <div class="f-col col-100">
-                  <label>Category</label>
-                  <div class="form-row">
-                    <select class="cmn-select form-input">
-                      <option>Select Category</option>
-                      <option>Category1</option>
-                      <option>Category2</option>
-                      <option>Category3</option>
-                    </select>
-                  </div>
-                </div> -->
                 <div class="m-btn-row">
                   <div class="m-btn-col">
                     <input type="submit" value="Save" class="btn btn-primary" />
@@ -124,13 +113,26 @@
                         <form [formGroup]="compnayForm" (ngSubmit)="onSubmit()">
                           <div class="f-row">
                             <div class="f-col col-100">
-                              <label>Tag Name</label>
+                              <label *ngIf="!submitted || !f.word.errors"
+                                >Tag Name</label
+                              >
+                              <div
+                                *ngIf="submitted && f.word.errors"
+                                class="invalid-feedback"
+                              >
+                                <div *ngIf="f.word.errors.required">
+                                  Tag Name is required
+                                </div>
+                              </div>
                               <div class="form-row">
                                 <input
                                   type="text"
                                   formControlName="word"
                                   class="form-input"
                                   placeholder="Enter Tag Name"
+                                  [ngClass]="{
+                                    'is-invalid': submitted && f.word.errors
+                                  }"
                                 />
                               </div>
                               <input
@@ -140,18 +142,6 @@
                                 class="form-input"
                               />
                             </div>
-                            <!-- <div class="f-col col-100">
-                              <label>Category</label>
-                              <div class="form-row">
-                                <select class="cmn-select form-input">
-                                  <option>Select Category</option>
-                                  <option selected>Companies</option>
-                                  <option>Category1</option>
-                                  <option>Category2</option>
-                                  <option>Category3</option>
-                                </select>
-                              </div>
-                            </div> -->
                             <div class="m-btn-row">
                               <div class="m-btn-col">
                                 <input
@@ -228,12 +218,25 @@
                         <form [formGroup]="compnayForm" (ngSubmit)="onSubmit()">
                           <div class="f-row">
                             <div class="f-col col-100">
-                              <label>Tag Name</label>
+                              <label *ngIf="!submitted || !f.word.errors"
+                                >Tag Name</label
+                              >
+                              <div
+                                *ngIf="submitted && f.word.errors"
+                                class="invalid-feedback"
+                              >
+                                <div *ngIf="f.word.errors.required">
+                                  Tag Name is required
+                                </div>
+                              </div>
                               <div class="form-row">
                                 <input
                                   type="text"
                                   formControlName="word"
                                   class="form-input"
+                                  [ngClass]="{
+                                    'is-invalid': submitted && f.word.errors
+                                  }"
                                   placeholder="Enter Tag Name"
                                 />
                               </div>

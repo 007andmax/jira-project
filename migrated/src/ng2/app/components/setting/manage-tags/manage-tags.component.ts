@@ -73,6 +73,7 @@ export class ManageTagsComponent implements OnInit {
    * get all companies
    */
   getAllCompany() {
+    this.loading = true;
     this.serviceAllCompany.subscribe(
       res => {
         this.companyTags = res;
@@ -89,6 +90,7 @@ export class ManageTagsComponent implements OnInit {
    * get all tickets
    */
   getAllTickets() {
+    this.loading = true;
     this.serviceAllTickets.subscribe(
       res => {
         this.loading = false;
@@ -128,23 +130,25 @@ export class ManageTagsComponent implements OnInit {
 
   /**
    * removed company tag based on tagId
-   * @param tagId 
+   * @param tagId
    */
   removeCompanyTag(tagId: string) {
-    this.loading = true;
-    this.tagsService.removeCompanyTag(tagId, this.setActiveTab).subscribe(
-      res => {
-        this.toaster.success("Tag removed successfully");
-        if (this.setActiveTab === "ticket") {
-          this.getAllTickets();
-        } else {
-          this.getAllCompany();
+    if (confirm("Are you sure you want to delete?")) {
+      this.loading = true;
+      this.tagsService.removeCompanyTag(tagId, this.setActiveTab).subscribe(
+        res => {
+          this.toaster.success("Tag removed successfully");
+          if (this.setActiveTab === "ticket") {
+            this.getAllTickets();
+          } else {
+            this.getAllCompany();
+          }
+        },
+        error => {
+          this.loading = false;
         }
-      },
-      error => {
-        this.loading = false;
-      }
-    );
+      );
+    }
   }
 
   /**
@@ -170,6 +174,7 @@ export class ManageTagsComponent implements OnInit {
       };
       this.tagsService.tags(tags, this.setActiveTab).subscribe(
         res => {
+          this.loading = false;
           this.toaster.success("Tag saved successfully");
           if (this.setActiveTab === "ticket") {
             this.getAllTickets();
@@ -194,6 +199,7 @@ export class ManageTagsComponent implements OnInit {
         )
         .subscribe(
           res => {
+            this.loading = false;
             this.toaster.success("Tag updated successfully");
             if (this.setActiveTab === "ticket") {
               this.getAllTickets();

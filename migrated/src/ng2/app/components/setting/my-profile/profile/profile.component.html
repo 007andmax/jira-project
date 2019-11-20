@@ -31,7 +31,7 @@
     <div class="crop-inner">
       <div class="heading-area">
         <h2>Crop Photo</h2>
-        <a href="javascript:void(0)" class="close-btn">remove</a>
+        <a href="javascript:void(0)" class="close-btn" (click)="isCroppedImg = false">remove</a>
       </div>
       <div class="cropping">
         <div class="img-crop">
@@ -54,7 +54,7 @@
           <button type="button" class="btn btn-primary" (click)="cropIt()">
             Crop Photo
           </button>
-          <button type="button" class="btn btn-secondary">Cancel</button>
+          <button type="button" class="btn btn-secondary" (click)="isCroppedImg = false">Cancel</button>
         </div>
       </div>
     </div>

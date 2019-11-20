@@ -15,6 +15,7 @@ import { map } from "rxjs/operators";
   styleUrls: ["./profile.component.scss"]
 })
 export class ProfileComponent implements OnInit {
+  loading = false;
   submitted = false;
   uniqueEmail = false;
   isAddPhone = false;
@@ -38,13 +39,12 @@ export class ProfileComponent implements OnInit {
     private userService: UsersService,
     private modalService: BsModalService,
     private toastr: ToastrService
-  ) {
-    
-    this.getCurrentUser();
-    this.getUserProfile();
-  }
+  ) {}
 
   ngOnInit() {
+    this.getCurrentUser();
+    this.getUserProfile();
+
     /**
      * init form validation and declaration
      */
@@ -75,7 +75,6 @@ export class ProfileComponent implements OnInit {
       aboutMe: [""],
       image: [""]
     });
-
   }
 
   /**
@@ -103,6 +102,7 @@ export class ProfileComponent implements OnInit {
    * get user profile details
    */
   private getUserProfile() {
+    this.loading = true;
     this.settingService
       .getUserProfile()
       .pipe(
@@ -152,7 +152,14 @@ export class ProfileComponent implements OnInit {
           }
         })
       )
-      .subscribe();
+      .subscribe(
+        res => {
+          this.loading = false;
+        },
+        error => {
+          this.loading = false;
+        }
+      );
   }
 
   /**
@@ -182,8 +189,8 @@ export class ProfileComponent implements OnInit {
 
   /**
    * select file
-   * @param template 
-   * @param event 
+   * @param template
+   * @param event
    */
   onSelectFile(template: TemplateRef<any>, event) {
     this.imageChangedEvent = event;
@@ -208,7 +215,7 @@ export class ProfileComponent implements OnInit {
 
   /**
    * image cropped
-   * @param event 
+   * @param event
    */
   imageCropped(event: ImageCroppedEvent) {
     console.log(event);
@@ -247,7 +254,7 @@ export class ProfileComponent implements OnInit {
         base64: this.croppedImage.base64
       };
     }
-
+    this.loading = true;
     this.settingService
       .updateAvatar(this.currentUser.id, cropImage)
       .pipe(
@@ -268,18 +275,27 @@ export class ProfileComponent implements OnInit {
             };
             this.settingService.updateProfile(profileUser).subscribe(
               (res: any) => {
+                this.loading = false;
                 if (res) {
                   this.imageSrc = `/users/${res.id}/image.jpg?t=${this.imageAvatar.updatedAt}`;
                 }
               },
               error => {
+                this.loading = false;
                 console.log(error);
               }
             );
           }
         })
       )
-      .subscribe();
+      .subscribe(
+        res => {
+          this.loading = false;
+        },
+        error => {
+          this.loading = false;
+        }
+      );
   }
 
   /**
@@ -306,7 +322,9 @@ export class ProfileComponent implements OnInit {
   rePositionAvatar() {
     if (this.imageAvatar && this.imageAvatar.origin.base64 === undefined) {
       let imageUrl = `/file/${this.imageAvatar.origin.id}.jpg`;
+      this.loading = true;
       this.getBase64ImageFromURL(imageUrl).subscribe(base64data => {
+        this.loading = false;
         this.isCroppedImg = true;
         this.croppedImage = this.imageAvatar;
         this.croppedImage.base64 = base64data;
@@ -321,10 +339,12 @@ export class ProfileComponent implements OnInit {
    * delete avatar
    */
   deleteAvatar() {
+    this.loading = true;
     this.settingService
       .deleteAvatar(this.currentUser.id)
       .pipe(
         map(res => {
+          this.loading = false;
           this.toastr.success("Avatar deleted successfully");
           const profileUser = {
             basic: {
@@ -337,26 +357,34 @@ export class ProfileComponent implements OnInit {
               signature: this.userProfile.signature
             }
           };
+          this.loading = true;
           this.settingService.updateProfile(profileUser).subscribe(
             res => {
+              this.loading = false;
               if (res) {
-                if (res) {
-                  this.imageSrc = "/ng2/assets/img/user.jpg";
-                }
+                this.imageSrc = "/ng2/assets/img/user.jpg";
               }
             },
             error => {
+              this.loading = false;
               this.toastr.error(error);
             }
           );
         })
       )
-      .subscribe();
+      .subscribe(
+        res => {
+          this.loading = false;
+        },
+        error => {
+          this.loading = false;
+        }
+      );
   }
 
   /**
    * get base64 image from url
-   * @param url 
+   * @param url
    */
   getBase64ImageFromURL(url: string) {
     return Observable.create((observer: Observer<string>) => {
@@ -382,7 +410,7 @@ export class ProfileComponent implements OnInit {
 
   /**
    * get base64 image
-   * @param img 
+   * @param img
    */
   getBase64Image(img: HTMLImageElement) {
     // We create a HTML canvas object that will create a 2d image
@@ -451,15 +479,24 @@ export class ProfileComponent implements OnInit {
       }
     };
 
+    this.loading = true;
     this.settingService
       .updateProfile(profileUser)
       .pipe(
         map(res => {
+          this.loading = false;
           if (res) {
             this.toastr.success("Profile updated successfully");
           }
         })
       )
-      .subscribe();
+      .subscribe(
+        res => {
+          this.loading = false;
+        },
+        error => {
+          this.loading = false;
+        }
+      );
   }
 }

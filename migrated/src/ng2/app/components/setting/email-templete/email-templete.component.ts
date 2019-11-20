@@ -6,6 +6,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { of } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 
+import { AngularEditorConfig } from '@kolkov/angular-editor';
+
 @Component({
   selector: 'app-email-templete',
   templateUrl: './email-templete.component.html',
@@ -35,6 +37,17 @@ export class EmailTempleteComponent implements OnInit {
   modalRef: BsModalRef;
   @ViewChild('body') body: ElementRef;
   @ViewChild('subject') subject: ElementRef;
+  
+  config: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '15rem',
+    minHeight: '5rem',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+  };
 
   constructor(
     private modalService: BsModalService,
@@ -66,6 +79,16 @@ export class EmailTempleteComponent implements OnInit {
   // convenience getter for easy access to form fields
   get f() {
     return this.templeteForm.controls;
+  }
+
+  onReady(eventData) {
+    console.log(eventData);
+    eventData.plugins.get('FileRepository').createUploadAdapter = function(
+      loader
+    ) {
+      console.log(btoa(loader.file));
+      return new UploadAdapter(loader);
+    };
   }
 
   /**
@@ -221,9 +244,14 @@ export class EmailTempleteComponent implements OnInit {
       // return matches && matches.length ? { invalid_characters: matches } : null;
     }
 
+    // this.templeteForm.patchValue({
+    //   body: this.body.nativeElement.value,
+    //   subject: this.subject.nativeElement.value
+    // });
+
     this.templeteForm.patchValue({
-      body: this.body.nativeElement.value,
-      subject: this.subject.nativeElement.value
+      body: this.templeteForm.value.body,
+      subject: this.templeteForm.value.subject
     });
 
     this.loading = true;
@@ -272,12 +300,15 @@ export class EmailTempleteComponent implements OnInit {
           }
         })
       )
-      .subscribe(() => {
-        this.toastr.success('Restored successfully');
-        this.getEmailPages();
-      },error =>{
-        this.toastr.error(`Error occured ${error}`);
-      });
+      .subscribe(
+        () => {
+          this.toastr.success('Restored successfully');
+          this.getEmailPages();
+        },
+        error => {
+          this.toastr.error(`Error occured ${error}`);
+        }
+      );
   }
 
   toggle() {
@@ -288,5 +319,41 @@ export class EmailTempleteComponent implements OnInit {
     } else {
       this.buttonName = 'Show Keyword Description + ';
     }
+  }
+}
+
+export class UploadAdapter {
+  private loader;
+  constructor(loader: any) {
+    this.loader = loader;
+    console.log(this.readThis(loader.file));
+  }
+
+  // upload() {
+  //   return this.loader.file.then(
+  //     file =>
+  //       new Promise((resolve, reject) => {
+  //         var myReader = new FileReader();
+  //         myReader.onloadend = e => {
+  //           resolve({ default: myReader.result });
+  //         };
+
+  //         myReader.readAsDataURL(file);
+  //       })
+  //   );
+  // }
+
+  readThis(file: File): Promise<any> {
+    return this.loader.file.then(
+      file =>
+        new Promise((resolve, reject) => {
+          var myReader = new FileReader();
+          myReader.onloadend = e => {
+            resolve({ default: myReader.result });
+          };
+
+          myReader.readAsDataURL(file);
+        })
+    );
   }
 }

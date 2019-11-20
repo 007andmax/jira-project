@@ -80,6 +80,8 @@ import { ProductComponent } from './components/setting/commission/product/produc
 import { ContractComponent } from './components/setting/commission/contract/contract.component';
 import { ServiceComponent } from './components/setting/commission/service/service.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { AutocompleteComponent } from './shared/autocomplete/autocomplete.component';
 
 declare var angular: any;
 declare var $: any;
@@ -216,14 +218,15 @@ angular
     CompanyComponent,
     ProductComponent,
     ContractComponent,
-    ServiceComponent
+    ServiceComponent,
+    AutocompleteComponent
   ],
   imports: [
     BrowserModule,
     UpgradeModule,
     HttpClientModule,
     FormsModule,
-    
+    AngularEditorModule ,
     NgbModule,
     ClickOutsideModule,
     ShowHidePasswordModule,
