@@ -118,7 +118,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     })
   }
   private onRelaodList() {
-  
+  console.log('onRelaodList',this.reqCompaniesList);
     let listFilter = this.left_filter.getFilterList(this.reqCompaniesList);
     let start = 0;
     let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;

@@ -254,6 +254,7 @@
                  ngbDropdown>
               <button class="types-btn"
                       id="dropdownBasic"
+                      *ngIf="company.contacts[0].phoneNumbers.length > 0"
                       ngbDropdownToggle [textContent]="company.contacts[0].phoneNumbers[0].typeNumber">
 
                 <i class="icn-sm report-caret-icon"></i>
