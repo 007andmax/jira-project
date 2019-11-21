@@ -1,5 +1,4 @@
 import { CompanyProfile } from './company-profile';
-import { FORMATS } from './../../../const/phone-numbers';
 
 
 export class CompanyValdiate {

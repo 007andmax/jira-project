@@ -21,7 +21,11 @@ export class DraftEmailComponent implements OnInit {
     height: '10rem',
     minHeight: '5rem',
     placeholder: 'Click here to respond to the Ticket',
-    translate: 'no'
+    translate: 'no',
+    toolbar: ["bold", "italic", "underline","fontName",
+       "fontSize","justifyLeft", "justifyCenter",
+        "justifyRight","removeFormat","orderedList", 
+        "unorderedList"]
   };
   tab: string = 'plain';
   draftEmail: DraftEmail = new DraftEmail();
