@@ -9,6 +9,10 @@
       <div class="new-companies-content__modal--content" *ngIf="version === 'short'">
 
         <div class="col-md-12 google-plus">
+            
+            <mat-error *ngIf="validate.getNameIsExist()">
+                This company name already occupied
+              </mat-error>
           <mat-error *ngIf="!validate.getName()">
             Company name is required
           </mat-error>
@@ -45,14 +49,18 @@
         </div>
         <div class="col-md-6">
           <p>Primary Contact</p>
-          <input type="text"
+          <input type="text" *ngIf="company.contacts[0].phoneNumbers.length > 0"
                  [(ngModel)]="company.contacts[0].phoneNumbers[0].number"
                  placeholder="Enter Primary Phone">
 
         </div>
         <div class="col-md-12">
+            <mat-error *ngIf="!validate.getDomain()">
+                Please enter a valid domain
+              </mat-error>
           <p>Domain Name</p>
           <input type="text"
+          (blur)="onChangeDomain()"
                  [(ngModel)]="company.domain"
                  placeholder="http://www.example.com">
         </div>
@@ -76,13 +84,13 @@
             Phone number is required
           </mat-error>
           <p>Phone Number</p>
-          <input type="text"
+          <input type="text" *ngIf="company.addresses[0].phoneNumbers.length > 0"
                  [(ngModel)]="company.addresses[0].phoneNumbers[0].number"
                  placeholder="Enter Phone Number" (input)="onChangePhoneNumber($event)">
         </div>
         <div class="col-md-6">
           <mat-error *ngIf="!validate.getPrimaryContactEmail()">
-            Email address is required
+              Please enter a valid email address
           </mat-error>
           <p>Primary Contact Email</p>
           <input type="text"
@@ -122,6 +130,9 @@
         </div>
 
         <div class="col-md-12 google-plus">
+            <mat-error *ngIf="validate.getNameIsExist()">
+                This company name already occupied
+              </mat-error>
           <mat-error *ngIf="!validate.getName()">
             Company name is required
           </mat-error>
@@ -171,9 +182,13 @@
           </div>
         </div>
         <div class="col-md-12">
+            <mat-error *ngIf="!validate.getDomain()">
+                Please enter a valid domain
+              </mat-error>
           <p>Domain Name</p>
           <input type="text"
                  [(ngModel)]="company.domain"
+                 (blur)="onChangeDomain()"
                  placeholder="http://www.example.com">
         </div>
         <div class="col-md-12">
@@ -201,7 +216,7 @@
             Phone number is required
           </mat-error>
           <p>Phone Number</p>
-          <input type="text" (input)="onChangePhoneNumber($event)"
+          <input type="text" (input)="onChangePhoneNumber($event)" *ngIf="company.addresses[0].phoneNumbers.length > 0"
                  [(ngModel)]="company.addresses[0].phoneNumbers[0].number"
                  placeholder="Enter Phone Number">
         </div>
@@ -251,14 +266,14 @@
 
               </div>
             </div>
-            <input type="text"
+            <input type="text" *ngIf="company.contacts[0].phoneNumbers.length > 0"
                    [(ngModel)]="company.contacts[0].phoneNumbers[0].number"
                    placeholder="Enter Phone Number">
           </div>
         </div>
         <div class="col-md-6">
           <mat-error *ngIf="!validate.getPrimaryContactEmail()">
-            Email address is required
+              Please enter a valid email address
           </mat-error>
           <p>Primary Contact Email</p>
           <input type="text" (input)="onChangePrimaryEmail($event)"

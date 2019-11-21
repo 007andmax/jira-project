@@ -34,6 +34,7 @@ export class CompaniesStateService {
         console.log('++++++++++++++++++');
         const Index = this.allCompanies.findIndex((item) => item.id === newChange.data.id);
         if (Index > -1) this.allCompanies[Index] = newChange.data;
+        if (Index === -1) this.allCompanies.push(newChange.data);
 
       }
       this.onChangeCompanies.emit(new CompanyUpdate(newChange.action,newChange.data,this.allCompanies));

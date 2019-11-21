@@ -112,6 +112,7 @@ export class CompanyAddAsideComponent implements OnInit {
     console.log('company', this.company);
     this.companiesService.createCompany(this.company).subscribe(data => {
       console.log(' data', data);
+      this.close();
     })
   }
   public onShowAside() {
@@ -144,13 +145,17 @@ export class CompanyAddAsideComponent implements OnInit {
       this.companiesService.checkCompanyName("", this.company.name).subscribe((data: any) => {
         if (data.value) {
           this.validate.resetName();
+          this.validate.resetNameIsExist();
         } else {
-          this.validate.setNoValidName();
+          this.validate.setNameIsExist();
         }
       })
     } else {
       this.validate.checkValidName(this.company.name);
     }
+  }
+  public onChangeDomain() {
+   this.validate.checkValidDomain(this.company.domain); 
   }
   public onChangePhoneNumber() {
     this.validate.checkValidPhoneNumber(this.company.addresses[0].phoneNumbers[0].number);
@@ -178,6 +183,7 @@ export class CompanyAddAsideComponent implements OnInit {
 
     this.companiesService.createCompany(this.company).subscribe(data => {
       console.log(' data', data);
+      this.close();
     })
   }
   public onCroppImage() {

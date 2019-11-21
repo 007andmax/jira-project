@@ -108,10 +108,28 @@ export class CompaniesComponent implements OnInit, OnDestroy {
         console.log('++++++++++++++++++');
         const reqIndex = this.reqCompaniesList.findIndex((item) => item.id === data.data.id);
         if (reqIndex > -1) this.reqCompaniesList[reqIndex] = data.data;
+        if (reqIndex === -1){
+          this.reqCompaniesList.push(data.data);
+          this.onRelaodList();
+        } 
         const companyIndex = this.CompaniesList.findIndex((item) => item.id === data.data.id);
         if (companyIndex > -1) this.CompaniesList[companyIndex] = data.data;
       }
     })
+  }
+  private onRelaodList() {
+  
+    let listFilter = this.left_filter.getFilterList(this.reqCompaniesList);
+    let start = 0;
+    let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;
+    let CompaniesList = [];
+    for (let i = start; i < end; i++) {
+      CompaniesList.push(listFilter[i]);
+    }
+    this.CompaniesList = CompaniesList;
+    this.infiniteScrollDisabled = false;
+    if ((this.page_number * 30) > listFilter.length) this.companiesList.setBlockList(true);
+    console.log('CompaniesList', this.CompaniesList);
   }
   public onFilterTags(tags) {
     console.log('onFilterTags');

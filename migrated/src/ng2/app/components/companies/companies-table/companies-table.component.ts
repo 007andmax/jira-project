@@ -90,9 +90,21 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     }
 
   }
+  getCompanyLogoUrl() {
+    if (this.company && this.company.logo && this.company.logo && this.company.logo.base64 && !this.company.logo.cropped) {
+      return this.company.logo.base64;
+    } else if (!(this.company && this.company.logo && this.company.logo.cropped && this.company.logo.cropped.id)) {
+      return '/company/default/logo.jpg';
+    }
+    return `/file/${this.company.logo.cropped.id}.jpg?t=${(this.company.logo.updatedAt ? this.company.logo.updatedAt :
+      '')}`;
+  };
+  getUserName() {
+    return `${this.primaryContact.firstName} ${this.primaryContact.lastName}`;
+  };
   downloadAgent() {
     this.downloadAgentStateService.setCompnay(this.company);
-    const modalRef = this.modalService.open(DownloadAgentComponent, { windowClass: 'xs-modal' });
+    const modalRef = this.modalService.open(DownloadAgentComponent, { windowClass: 'download-modal' });
     
   }
   edit() {
@@ -122,24 +134,14 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     }).length;
   }
    
-  getUserName() {
-    return `${this.primaryContact.firstName} ${this.primaryContact.lastName}`;
-  };
+ 
   onRestore() {
     this.confirmStateService.setConfirmAction(DEARCHIVE_COMPANY);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
     modalRef.componentInstance.message = `Do you want to restore ${this.company.name}?`;
     this.companiesStateService.setCompnayForDeArchive(this.company);
   }
-  getCompanyLogoUrl() {
-    if (this.company && this.company.logo && this.company.logo && this.company.logo.base64 && !this.company.logo.cropped) {
-      return this.company.logo.base64;
-    } else if (!(this.company && this.company.logo && this.company.logo.cropped && this.company.logo.cropped.id)) {
-      return '/company/default/logo.jpg';
-    }
-    return `/file/${this.company.logo.cropped.id}.jpg?t=${(this.company.logo.updatedAt ? this.company.logo.updatedAt :
-      '')}`;
-  };
+
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

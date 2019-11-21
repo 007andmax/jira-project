@@ -160,13 +160,17 @@ public onCheckGoogleAutoComplete () {
   public onChangeSubscribe(data) {
     data.forEach(item => this.company.contacts[0].subscription[item.field] = item.selected);
   }
+  public onChangeDomain() {
+    this.validate.checkValidDomain(this.company.domain); 
+   }
   public onChangeName() {
     if (this.company.name && this.company.name.length > 0) {
       this.companiesService.checkCompanyName(this.company.id, this.company.name).subscribe((data: any) => {
         if (data.value) {
           this.validate.resetName();
+          this.validate.resetNameIsExist();
         } else {
-          this.validate.setNoValidName();
+          this.validate.setNameIsExist();
         }
       })
     } else {

@@ -22,7 +22,10 @@
           </div>
         </div>
 
-        <div class="col-md-12 google-plus" [ngClass]="{'error-field':!validate.getName() }">
+        <div class="col-md-12 google-plus" [ngClass]="{'error-field':!validate.getName() || validate.getNameIsExist() }">
+            <mat-error *ngIf="validate.getNameIsExist()">
+                This company name already occupied
+              </mat-error>
             <mat-error *ngIf="!validate.getName()">
                 Company name is required
               </mat-error>
@@ -56,9 +59,13 @@
                   </ng-template>
               </div>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-12"  [ngClass]="{'error-field':!validate.getDomain() }">
+            <mat-error *ngIf="!validate.getDomain()">
+                Please enter a valid domain
+              </mat-error>
           <p>Domain Name</p>
           <input type="text"
+          (blur)="onChangeDomain()"
           [(ngModel)]="company.domain"
                  placeholder="http://www.example.com">
         </div>
@@ -144,7 +151,7 @@
         </div>
         <div class="col-md-6" [ngClass]="{'error-field':!validate.getPrimaryContactEmail() }">
             <mat-error *ngIf="!validate.getPrimaryContactEmail()">
-                Email address is required
+                Please enter a valid email address
               </mat-error>
           <p>Primary Contact Email</p>
           <input type="text" (input)="onChangePrimaryEmail($event)"
