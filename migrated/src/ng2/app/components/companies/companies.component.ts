@@ -35,7 +35,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   new CompanyFilterTop('email', ''),
   new CompanyFilterTop('tickets', ''),
   new CompanyFilterTop('devices', ''),
-  new CompanyFilterTop('users', '')]
+  new CompanyFilterTop('users', '')];
   public showArchivedCompanies: boolean = false;
   devices = [];
   users = [];
@@ -109,15 +109,16 @@ export class CompaniesComponent implements OnInit, OnDestroy {
         const reqIndex = this.reqCompaniesList.findIndex((item) => item.id === data.data.id);
         if (reqIndex > -1) this.reqCompaniesList[reqIndex] = data.data;
         if (reqIndex === -1){
-          this.reqCompaniesList.push(data.data);
-          this.onRelaodList();
+          this.reqCompaniesList.unshift(data.data);
+          this.CompaniesList.unshift(data.data);
+         // this.onRelaodList();
         } 
         const companyIndex = this.CompaniesList.findIndex((item) => item.id === data.data.id);
         if (companyIndex > -1) this.CompaniesList[companyIndex] = data.data;
       }
     })
   }
-  private onRelaodList() {
+ /* private onRelaodList() {
   console.log('onRelaodList',this.reqCompaniesList);
     let listFilter = this.left_filter.getFilterList(this.reqCompaniesList);
     let start = 0;
@@ -130,7 +131,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.infiniteScrollDisabled = false;
     if ((this.page_number * 30) > listFilter.length) this.companiesList.setBlockList(true);
     console.log('CompaniesList', this.CompaniesList);
-  }
+  }*/
   public onFilterTags(tags) {
     console.log('onFilterTags');
     if (tags.length > 0) {
@@ -179,6 +180,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     console.log('CompaniesList', this.CompaniesList);
 
   }
+
   onFilter(field) {
 
     let index = this.filter.findIndex(item => item.field === field);
