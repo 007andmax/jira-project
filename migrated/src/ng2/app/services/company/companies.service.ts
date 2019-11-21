@@ -28,6 +28,10 @@ export class CompaniesService {
     private http: HttpClient
   ) {}
 
+  public deArchive(id) {
+    return this.http.get(this.apiUrl + 'company/dearchive/' + id); 
+  }
+
   /**
    * Get all companies list
    */

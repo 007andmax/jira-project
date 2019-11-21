@@ -11,12 +11,14 @@ import { CompanyUpdate } from '../../components/companies/class/company-update';
 })
 export class CompaniesStateService {
   allCompanies = [];
+  
   onGetCompanies: EventEmitter<any> = new EventEmitter();
   onChangeCompanies: EventEmitter<CompanyUpdate> = new EventEmitter();
   showAsideForAdd: EventEmitter<any> = new EventEmitter();
   onShowArchived: EventEmitter<any> = new EventEmitter();
   onEditCompany: EventEmitter<CompanyProfile> = new EventEmitter();
   companyForArchive: Company = null;
+  companyForDeArchive: Company = null;
   onCalculateCount: EventEmitter<CompanyCalculateCount> = new EventEmitter();
   calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
   constructor(private companiesService: CompaniesService, private companiesRealTimeService: CompaniesRealTimeService) {
@@ -71,11 +73,17 @@ export class CompaniesStateService {
   public getCompanies() {
     return this.allCompanies;
   }
+  public setCompnayForDeArchive(data) {
+    this.companyForDeArchive = data;
+  }
   public setCompnayForArchive(data) {
     this.companyForArchive = data;
   }
   public getCompanytForArchive() {
     return this.companyForArchive;
+  }
+  public getCompanyFortDeArchive() {
+    return this.companyForDeArchive;
   }
   public getOnShowArchived() {
     return this.onShowArchived;

@@ -13,6 +13,7 @@ import { CompaniesStateService } from 'src/ng2/app/states/company/companies-stat
 import { DownloadAgentStateService } from 'src/ng2/app/states/download-agent/download-agent-state.service';
 import { DownloadAgentComponent } from '../download-agent/download-agent.component';
 import { CompanyProfile } from '../class/company-profile';
+import { DEARCHIVE_COMPANY, ARCHIVE_COMPANY } from 'src/ng2/app/const/confirm';
 
 @Component({
   selector: 'app-companies-table',
@@ -22,14 +23,14 @@ import { CompanyProfile } from '../class/company-profile';
 export class CompaniesTableComponent implements OnInit, OnDestroy {
 
   @Input() company: Company;
-
+  @Input() public showArchivedCompanies: boolean = false;
   public primaryContact: CompanyAndressContact;
   public primaryAddress: CompanyAndress;
   public primaryPhone: any;
   public location: string = '';
   public countUsers: number = 0;
   public countDevices: number = 0;
-  public showArchivedCompanies: boolean = false;
+ 
   sub: Subscription = new Subscription();
   constructor(private usersStateService: UsersStateService, private companiesStateService: CompaniesStateService,
     private devicesState: DevicesSateService, private modalService: NgbModal,
@@ -39,9 +40,9 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.companiesStateService.getOnShowArchived().subscribe(data => {
+  /*  this.companiesStateService.getOnShowArchived().subscribe(data => {
       this.showArchivedCompanies = data;
-    })
+    })*/
     if (this.usersStateService.getAllUsers().length > 0) {
       this.onGetUsersCount(this.usersStateService.getAllUsers());
     } else {
@@ -101,6 +102,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
    
   }
   remove() {
+    this.confirmStateService.setConfirmAction(ARCHIVE_COMPANY);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
 
     modalRef.componentInstance.message = `Do you want to archive ${this.company.name}? All related users and service agreements will be archived and all agents will be uninstalled.`;
@@ -123,6 +125,12 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
   getUserName() {
     return `${this.primaryContact.firstName} ${this.primaryContact.lastName}`;
   };
+  onRestore() {
+    this.confirmStateService.setConfirmAction(DEARCHIVE_COMPANY);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    modalRef.componentInstance.message = `Do you want to restore ${this.company.name}?`;
+    this.companiesStateService.setCompnayForDeArchive(this.company);
+  }
   getCompanyLogoUrl() {
     if (this.company && this.company.logo && this.company.logo && this.company.logo.base64 && !this.company.logo.cropped) {
       return this.company.logo.base64;

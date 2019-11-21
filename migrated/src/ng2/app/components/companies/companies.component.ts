@@ -14,6 +14,7 @@ import { LeftPanelCompaniesFilter } from '../left-panel/left-panel-companies/cla
 import { CompanyCalculateCount } from './class/company-calculate-count';
 import { CompaniesRealTimeService } from '../../states/company/companies-real-time.service';
 import { CompanyUpdate } from './class/company-update';
+import { ARCHIVE_COMPANY, DEARCHIVE_COMPANY } from '../../const/confirm';
 
 @Component({
   selector: 'app-companies',
@@ -65,7 +66,14 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       })
     }
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
-      if (data) this.onArchiveCompany(this.companiesStateService.getCompanytForArchive().id);
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === ARCHIVE_COMPANY) {
+          this.onArchiveCompany(this.companiesStateService.getCompanytForArchive().id);
+        }
+        if (this.confirmStateService.getConfirmAction() === DEARCHIVE_COMPANY) {
+          this.onDeArchiveCompany(this.companiesStateService.getCompanyFortDeArchive().id);
+        }
+      }
     })
     this.sub.add(getConfirm);
 
@@ -93,16 +101,16 @@ export class CompaniesComponent implements OnInit, OnDestroy {
 
     })
     this.sub.add(geLefttFilter);
-  
-    this.companiesStateService.getChangeCompanies().subscribe((data:CompanyUpdate) => {
+
+    this.companiesStateService.getChangeCompanies().subscribe((data: CompanyUpdate) => {
       console.log('newChange', data);
-     if (data.action === 'COMPANY_SAVED' || data.action === 'COMPANY_ARCHIVED') {
+      if (data.action === 'COMPANY_SAVED' || data.action === 'COMPANY_ARCHIVED') {
         console.log('++++++++++++++++++');
         const reqIndex = this.reqCompaniesList.findIndex((item) => item.id === data.data.id);
         if (reqIndex > -1) this.reqCompaniesList[reqIndex] = data.data;
         const companyIndex = this.CompaniesList.findIndex((item) => item.id === data.data.id);
         if (companyIndex > -1) this.CompaniesList[companyIndex] = data.data;
-     }
+      }
     })
   }
   public onFilterTags(tags) {
@@ -339,6 +347,12 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.page_number = 0;
     this.companiesList.setBlockList(false);
     this.CompaniesList = [];
+  }
+  public onDeArchiveCompany(id) {
+    this.companiesService.deArchive(id).subscribe(data => {
+      let index = this.CompaniesList.findIndex(item => item.id === id);
+      if (index > -1) this.CompaniesList.splice(index, 1);
+    })
   }
   public onArchiveCompany(id) {
     console.log('onArchiveCompany', id);
