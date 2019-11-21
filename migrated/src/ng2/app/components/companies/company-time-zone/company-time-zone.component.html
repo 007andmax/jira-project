@@ -14,7 +14,7 @@
         <ng-template ngbPanelContent  >
             <div class="category-product" *ngFor="let offset of item.offsets" (click)="setOffset(offset)">
               <div class="clearfix" >
-                <div class="title col-md-12" [textContent]="offset.offset + ' ' + offset.city"  ></div>
+                <div class="title col-md-12" [textContent]="offset.timeOffset + ' ' + offset.name"  ></div>
               </div>
             </div>
         </ng-template>

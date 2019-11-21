@@ -35,14 +35,19 @@ export class CompanyTimeZoneComponent implements OnInit, OnDestroy {
 
   private onEditMode() {
     let getEditMode = this.companyTimeZoneState.getOnEditMode().subscribe((data) => {
-      
-      if (data.name.indexOf('/') > -1) {
-        let city = data.name.substring(data.name.indexOf('/') + 1,data.name.length);
-      
-        this.elRef.nativeElement.querySelector('#dropdownTimeZone').value = city;
+      if (data)
+      {
+        if (data.name.indexOf('/') > -1) {
+          let city = data.name.substring(data.name.indexOf('/') + 1,data.name.length);
+        
+          this.elRef.nativeElement.querySelector('#dropdownTimeZone').value = city;
+        } else {
+          this.elRef.nativeElement.querySelector('#dropdownTimeZone').value = data.name;
+        }
       } else {
-        this.elRef.nativeElement.querySelector('#dropdownTimeZone').value = data.name;
+        this.elRef.nativeElement.querySelector('#dropdownTimeZone').value= '';
       }
+     
     })
     this.sub.add(getEditMode);
   }
@@ -52,7 +57,7 @@ export class CompanyTimeZoneComponent implements OnInit, OnDestroy {
     */
   public setOffset(offset: TimeZoneOffset) {
 
-    this.elRef.nativeElement.querySelector('#dropdownTimeZone').value = offset.city;
+    this.elRef.nativeElement.querySelector('#dropdownTimeZone').value = offset.name;
     this.zones_dropDown.close();
     this.selectedOffsetItem.next(offset);
   }

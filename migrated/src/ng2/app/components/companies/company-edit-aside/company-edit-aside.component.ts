@@ -109,7 +109,7 @@ public onCheckGoogleAutoComplete () {
       this.company = new CompanyProfile();
       this.company.onEditMode(data);
       this.companySubscriptionState.onEditMode(this.company.contacts[0].subscription);
-      if (this.company.addresses[0].timeZone) this.companyTimeZoneState.onEditMode(this.company.addresses[0].timeZone);
+      this.companyTimeZoneState.onEditMode(this.company.addresses[0].timeZone);
       let indexTerms = this.paymentTerms.findIndex(item => item.value === this.company.paymentTerms);
       if (indexTerms > -1) this.onSelectPaymentTerms(indexTerms);
 
@@ -210,13 +210,15 @@ public onCheckGoogleAutoComplete () {
   }
   public onCroppImage() {
     this.imageCropperStateService.getConfirm().subscribe(data => {
+      if (!this.opened || !data) return;
       console.log('data', data);
-      if (data.edit) {
-        this.company.editLogo(data);
-      } else {
-        this.company.setLogo(data);
-      }
-
+     
+        if (data.edit) {
+          this.company.editLogo(data);
+        } else {
+          this.company.setLogo(data);
+        }
+   
     })
   }
   public onChangeAvatar() {

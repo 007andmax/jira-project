@@ -24,7 +24,7 @@ export class CompanyAddAsideComponent implements OnInit {
   version: string = 'short';
   companyTypes = [new CompanySetting('Client', 'CLIENT'),new CompanySetting('Lead', 'LEAD'),new CompanySetting('Vendor', 'VENDOR')];
   phoneTypes = ['Office', 'Mobile', 'Fax'];
-  paymentTerms = [new CompanySetting('COD', 0), new CompanySetting('7 days', 0), new CompanySetting('15 days', 0), new CompanySetting('30 days', 0)];
+  paymentTerms = [new CompanySetting('COD', 0), new CompanySetting('7 days', 7), new CompanySetting('15 days', 15), new CompanySetting('30 days', 30)];
   serviceTypes = [new CompanySetting('Hourly', 'HOURLY'), new CompanySetting('Block time', 'BLOCK_TIME'), new CompanySetting('Semi managed', 'SEMI_MANAGED'), new CompanySetting('Fully managed', 'FULLY_MANAGED')];
   paymentMethods = ['Cash', 'Cheque', 'Debit Card', 'Credit Card', 'Wire Transfer'];
   listPersons = [];
@@ -188,8 +188,10 @@ export class CompanyAddAsideComponent implements OnInit {
   }
   public onCroppImage() {
     this.imageCropperStateService.getConfirm().subscribe(data => {
+      if (!this.opened) return;
       console.log('data', data);
-      this.company.setLogo(data);
+      if (data)  this.company.setLogo(data);
+     
     })
   }
   private getTehusers(list) {
