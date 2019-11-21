@@ -20,11 +20,11 @@ export class DraftEmailComponent implements OnInit {
     spellcheck: false,
     height: '10rem',
     minHeight: '5rem',
-    placeholder: 'Click here to respond to the Ticket',
+    placeholder: 'Write your draft for companies',
     translate: 'no',
     toolbar: ["bold", "italic", "underline","fontName",
        "fontSize","justifyLeft", "justifyCenter",
-        "justifyRight","removeFormat","orderedList", 
+        "justifyRight","removeFormat","orderedList",
         "unorderedList"]
   };
   tab: string = 'plain';

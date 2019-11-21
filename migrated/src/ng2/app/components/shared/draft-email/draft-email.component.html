@@ -10,7 +10,7 @@
           <p>Subject</p>
           <input [(ngModel)]="draftEmail.subject" type="text" placeholder="Write Subject line">
         </div>
-       <app-draft-email-recipients (onCompanyEmails)="onChangeCompanyEmails($event)"></app-draft-email-recipients>
+        <app-draft-email-recipients (onCompanyEmails)="onChangeCompanyEmails($event)"></app-draft-email-recipients>
 
         <div class="col-md-12 tab-btns">
           <div ng-class="{active: tab == 'plain'}" (click)="tab = 'plain'">
@@ -20,52 +20,54 @@
           >Paste Html
           </div>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-12" style="margin-top: 0;">
           <!--EDITOR-->
-          <app-ngx-editor *ngIf="tab == 'plain'" [config]="editorConfig" [spellcheck]="true" [(ngModel)]="messageContent"></app-ngx-editor>
+          <app-ngx-editor *ngIf="tab == 'plain'" [config]="editorConfig" [spellcheck]="true"
+                          [(ngModel)]="messageContent"></app-ngx-editor>
           <textarea *ngIf="tab == 'html'" [(ngModel)]="messageHTML" class="email-text-block textarea"
-                placeholder="Put here your HTML"></textarea>
+                    placeholder="Put here your HTML"></textarea>
 
-          <div class="form-group"  >
+          <div class="form-group">
             <ul class="upload-attachments">
               <ng-template ngFor let-file [ngForOf]="uploadFiles" let-i="index" [ngForTrackBy]="trackByIndex">
-              <li  
+                <li
                   [ngStyle]="filesInfo.files[i].error && {'background-color': '#fff2f2'}">
-  
-                <span class="file-name">{{ file.name }}</span>
-                <span class="file-size">{{ file.size }}</span>
-  
-                <a href="javascript:void(0)" class="hit-area pull-right"
-                   uib-tooltip="Remove file" tooltip-placement="top"
-                   (click)="removeAttachment(i)">
-                  <i class="icn-sm icn-remove-old"></i>
-                </a>
-  
-                <span class="pull-right" *ngIf="filesInfo.files[i].error"
-                      style="color: rgb(229, 57, 53);white-space: nowrap;overflow: hidden;max-width: 300px;">
+
+                  <span class="file-name">{{ file.name }}</span>
+                  <span class="file-size">{{ file.size }}</span>
+
+                  <a href="javascript:void(0)" class="hit-area pull-right"
+                     uib-tooltip="Remove file" tooltip-placement="top"
+                     (click)="removeAttachment(i)">
+                    <i class="icn-sm icn-remove-old"></i>
+                  </a>
+
+                  <span class="pull-right" *ngIf="filesInfo.files[i].error"
+                        style="color: rgb(229, 57, 53);white-space: nowrap;overflow: hidden;max-width: 300px;">
                   {{ filesInfo.files[i].message }}
                 </span>
-  
-                <a href="" class="hit-area pull-right" data-toggle="tooltip" data-placement="top" title="Re-Upload"
-                   *ngIf="filesInfo.files[i].progress !== 100 && (filesInfo.files[i].code !== 500)"
-                   uib-tooltip="Re-Upload" tooltip-placement="top" (click)="reloadAttachment(file)">
-                  <i class="icn-sm icn-reupload"></i>
-                </a>
-  
-                <div class="progress progress-attachment pull-right" *ngIf="filesInfo.files[i].progress !== 100 || filesInfo.files[i].error">
-                  <div class="progress-bar" role="progressbar"
-                        aria-valuemin="0" aria-valuemax="100"
-                       [ngStyle]="styleProgressBar(filesInfo.files[i].progress)">
-                    <span class="sr-only">{{ file.progress }}% Complete</span>
+
+                  <a href="" class="hit-area pull-right" data-toggle="tooltip" data-placement="top" title="Re-Upload"
+                     *ngIf="filesInfo.files[i].progress !== 100 && (filesInfo.files[i].code !== 500)"
+                     uib-tooltip="Re-Upload" tooltip-placement="top" (click)="reloadAttachment(file)">
+                    <i class="icn-sm icn-reupload"></i>
+                  </a>
+
+                  <div class="progress progress-attachment pull-right"
+                       *ngIf="filesInfo.files[i].progress !== 100 || filesInfo.files[i].error">
+                    <div class="progress-bar" role="progressbar"
+                         aria-valuemin="0" aria-valuemax="100"
+                         [ngStyle]="styleProgressBar(filesInfo.files[i].progress)">
+                      <span class="sr-only">{{ file.progress }}% Complete</span>
+                    </div>
                   </div>
-                </div>
-  
-              </li>
-            </ng-template>
+
+                </li>
+              </ng-template>
             </ul>
           </div>
-       
-          <input id="upload-file" type="file" (input)="uploadFileOnBrower($event)"  />
+
+          <input id="upload-file2" type="file" (input)="uploadFileOnBrower($event)" />
         </div>
 
         <div class="col-md-12 new-companies-content__modal--content-footer">
