@@ -116,6 +116,16 @@ export class CompaniesComponent implements OnInit, OnDestroy {
         const companyIndex = this.CompaniesList.findIndex((item) => item.id === data.data.id);
         if (companyIndex > -1) this.CompaniesList[companyIndex] = data.data;
       }
+      if (data.action === 'COMPANY_DEARCHIVED') {
+        const reqIndex = this.reqCompaniesList.findIndex((item) => item.id === data.data.id);
+        if (reqIndex > -1) this.reqCompaniesList[reqIndex] = data.data;
+        if (this.showArchivedCompanies)
+        {
+          const companyIndex = this.CompaniesList.findIndex((item) => item.id === data.data.id);
+          if (companyIndex > -1) this.CompaniesList.slice(companyIndex,1);
+        }
+      }
+      
     })
   }
  /* private onRelaodList() {

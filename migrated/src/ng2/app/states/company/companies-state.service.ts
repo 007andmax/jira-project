@@ -37,6 +37,11 @@ export class CompaniesStateService {
         if (Index === -1) this.allCompanies.unshift(newChange.data);
 
       }
+      if (newChange.action === 'COMPANY_DEARCHIVED') {
+        const Index = this.allCompanies.findIndex((item) => item.id === newChange.data.id);
+        if (Index > -1) this.allCompanies[Index] = newChange.data;
+        
+      }
       this.onChangeCompanies.emit(new CompanyUpdate(newChange.action,newChange.data,this.allCompanies));
     })
   }
