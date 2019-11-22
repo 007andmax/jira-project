@@ -78,6 +78,8 @@ this.company.fullVersion();
   }
 
   invokeEvent(place: any) {
+    this.company.addresses[0].address = this.addresstext.nativeElement.value;
+   
     place.address_components.forEach(item => {
       if (item.types.indexOf('postal_code') !== -1) {
         this.company.addresses[0].postalCode = item.short_name;
@@ -86,6 +88,7 @@ this.company.fullVersion();
     })
 
 }
+ 
 public onCheckGoogleAutoComplete () {
   if (!this.locationIsinit) this.getPlaceAutocomplete();
  }

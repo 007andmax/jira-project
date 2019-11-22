@@ -59,6 +59,10 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
         this.onGetDevicesCount(data);
       })
     }
+  
+
+  }
+  ngDoCheck(){
     if (this.company) {
       let primaryContact,
         primaryAddress,
@@ -88,8 +92,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
         this.location = '';
       }
     }
-
-  }
+    }
   getCompanyLogoUrl() {
     if (this.company && this.company.logo && this.company.logo && this.company.logo.base64 && !this.company.logo.cropped) {
       return this.company.logo.base64;

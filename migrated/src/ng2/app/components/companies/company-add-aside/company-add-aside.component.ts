@@ -66,11 +66,14 @@ export class CompanyAddAsideComponent implements OnInit {
       });
     google.maps.event.addListener(autocomplete, 'place_changed', () => {
       const place = autocomplete.getPlace();
+      
       this.invokeEvent(place);
     });
   }
 
   invokeEvent(place: any) {
+    this.company.addresses[0].address = this.addresstext.nativeElement.value;
+    console.log('place',place);
     place.address_components.forEach(item => {
       if (item.types.indexOf('postal_code') !== -1) {
         this.company.addresses[0].postalCode = item.short_name;
