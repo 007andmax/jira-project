@@ -6,19 +6,20 @@
          id="dropdownServices"
          ngbDropdownToggle>
          <ng-template ngFor let-item [ngForOf]="subscriptions" let-i="index"  >
-            <div *ngIf="item.selected" [textContent]="item.title"  (click)="remove(i)"></div>
+            <div *ngIf="item.selected" [textContent]="item.title">
+                 <!--(click)="remove(i)"-->
+            </div>
           </ng-template>
-     
     </div>
     <div ngbDropdownMenu
          aria-labelledby="dropdownServices">
          <ng-template ngFor let-tag [ngForOf]="subscriptions" let-i="index" [ngForTrackBy]="trackById">
-            <button ngbDropdownItem  
+            <button ngbDropdownItem
                     (click)="selected(i)"
                     [textContent]="tag.title">
             </button>
           </ng-template>
-     
+
     </div>
   </div>
 </div>
