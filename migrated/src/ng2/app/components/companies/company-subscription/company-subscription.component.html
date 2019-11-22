@@ -1,42 +1,24 @@
-<div class="col-md-12 light-dropdown"
-     ngbDropdown #products="ngbDropdown">
-  <mat-form-field>
-    <mat-chip-list #chipList aria-label="Fruit selection">
-        <ng-template ngFor let-item [ngForOf]="subscriptions" let-i="index"  >
-      <mat-chip
-      *ngIf="item.selected"
-        [selectable]="selectable"
-        [removable]="removable"
-        (removed)="remove(i)">
-        {{item.title}}
-        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-      </mat-chip>
-      </ng-template>
-      <input
-        id="dropdownServices" ngbDropdownToggle
-        placeholder="Select Subscribe Type"
-        #userInput
-        class="pointer"
-        [formControl]="subCtrl"
-        [matChipInputFor]="chipList"
-        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-        [matChipInputAddOnBlur]="addOnBlur"
-        >
-    </mat-chip-list>
-    <!--<mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-      <mat-option *ngFor="let tag of tags" [value]="tag">
-        {{tag.word}}
-      </mat-option>
-    </mat-autocomplete>-->
-  </mat-form-field>
-  <div class="dropdown-menu"
-       ngbDropdownMenu aria-labelledby="dropdownServices">
-    <ng-template ngFor let-tag [ngForOf]="subscriptions" let-i="index" [ngForTrackBy]="trackById">
-      <button ngbDropdownItem class="dropdown-item"
-              (click)="selected(i)"
-              [textContent]="tag.title">
-      </button>
-    </ng-template>
+ <div class="col-md-12">
+  <p>Subscription</p>
+  <div class="grey-dropdown" ngbDropdown>
+    <i class="icn-sm report-caret-icon"></i>
+    <div class="user-subscription"
+         id="dropdownServices"
+         ngbDropdownToggle>
+         <ng-template ngFor let-item [ngForOf]="subscriptions" let-i="index"  >
+            <div *ngIf="item.selected" [textContent]="item.title"  (click)="remove(i)"></div>
+          </ng-template>
+     
+    </div>
+    <div ngbDropdownMenu
+         aria-labelledby="dropdownServices">
+         <ng-template ngFor let-tag [ngForOf]="subscriptions" let-i="index" [ngForTrackBy]="trackById">
+            <button ngbDropdownItem  
+                    (click)="selected(i)"
+                    [textContent]="tag.title">
+            </button>
+          </ng-template>
+     
+    </div>
   </div>
 </div>
-

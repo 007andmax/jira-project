@@ -15,19 +15,10 @@ import { CompanySubscriptionStateService } from './class/company-subscription-st
   styleUrls: ['./company-subscription.component.scss']
 })
 export class CompanySubscriptionComponent implements OnInit, OnDestroy {
-
-  visible = true;
-  selectable = true;
-  removable = true;
-  addOnBlur = true;
-  focus = false;
-  isResend = false;
-  separatorKeysCodes: number[] = [ENTER, COMMA];
-  subCtrl = new FormControl();
+ 
    
   sub = new Subscription();
   editItem:any;
-  @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @Output() subscribeChange = new EventEmitter();
   subscriptions:Array<CompanySubscription> = [new CompanySubscription('Ticket Updates','ticket'),
   new CompanySubscription('Ticket Manager','ticketManager'),
@@ -96,7 +87,7 @@ export class CompanySubscriptionComponent implements OnInit, OnDestroy {
    
     this.subscribeChange.emit(this.subscriptions);
   //  this.userInput.nativeElement.blur();
-    this.subCtrl.setValue(null);
+ //   this.subCtrl.setValue(null);
   }
 
   /**
