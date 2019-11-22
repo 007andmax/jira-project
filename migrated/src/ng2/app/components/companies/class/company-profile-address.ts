@@ -3,6 +3,10 @@ import { CompanyProfileContact } from './company-profile-contact';
 export class CompanyProfileAddress {
     isPrimary: boolean;
     address: string;
+    addressWithSuitNumberAndPostalCode:string;
+    countryCode:string;
+    locationLat:number;
+    locationLng:number;
     fromGoogle: boolean;
     postalCode: string;
     suiteNumber: string;

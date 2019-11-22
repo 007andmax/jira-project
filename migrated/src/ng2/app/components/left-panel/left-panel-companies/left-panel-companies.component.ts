@@ -71,6 +71,7 @@ export class LeftPanelCompaniesComponent implements OnInit {
     1 : (((b.firstName + ' ' + b.lastName).toLowerCase() > (a.firstName + ' ' + a.lastName).toLowerCase()) ? -1 : 0));
   }
   public selectTechLead(name) {
+    this.showClearSalesPerson = true;
     this.listPersons.forEach(item => item.selected = false);
     let index = this.listPersons.findIndex(item => `${item.firstName} ${item.lastName}` === name);
     if (index > -1) {
@@ -80,6 +81,7 @@ export class LeftPanelCompaniesComponent implements OnInit {
     }
   }
   public selectClientIndustry(item) {
+    this.showClearIndustry = true;
     this.clientIndustry = item;
     this.filter.setClientIndustry(this.clientIndustry);
     this.leftPanelStateService.onInitFilter(this.filter);
@@ -125,6 +127,7 @@ export class LeftPanelCompaniesComponent implements OnInit {
   }
 
   public onSelectTechLead(index) {
+
     this.showClearSalesPerson = true;
     this.listPersons.forEach(item => item.selected = false);
     this.listPersons[index].selected = true;

@@ -9,6 +9,7 @@ import { Weeks } from '../../shared/interval/config/enums';
 import { CompanyLogo } from './company-logo';
 import { ImageCropper } from '../../shared/image-cropper/class/image-cropper';
 import { Company } from 'src/ng2/app/interfaces/company/company';
+import { Tag } from 'src/ng2/app/interfaces/tag/tag';
 
 export class CompanyProfile {
     accountNumber: any;
@@ -33,6 +34,7 @@ export class CompanyProfile {
     workingDays: Array<WorkDay>;
     techLeadId: string;
     id:string;
+    tags:Array<Tag>;
     constructor() {
         this.logo = null;
         let contact: CompanyProfileContact = new CompanyProfileContact();
@@ -41,6 +43,9 @@ export class CompanyProfile {
         this.addresses = [address];
         this.contacts = [contact];
         this.workingDays = Weeks.map((item) => new WorkDay(item.toUpperCase(), 0, 0))
+    }
+    public setTags (data) {
+        this.tags = data;
     }
     public onEditMode(company: CompanyProfile) {
         this.id = company.id;

@@ -78,15 +78,21 @@ this.company.fullVersion();
   }
 
   invokeEvent(place: any) {
+    console.log('place',place);
+    this.company.addresses[0].locationLat = place.geometry.location.lat();
+    this.company.addresses[0].locationLng = place.geometry.location.lng();
     this.company.addresses[0].address = this.addresstext.nativeElement.value;
-   
+    this.company.addresses[0].addressWithSuitNumberAndPostalCode = place.formatted_address;
     place.address_components.forEach(item => {
       if (item.types.indexOf('postal_code') !== -1) {
         this.company.addresses[0].postalCode = item.short_name;
-        this.cd.detectChanges();
       }
+      if (item.types.indexOf('country') !== -1) {
+       this.company.addresses[0].countryCode = item.short_name;
+      }
+      this.cd.detectChanges();
     })
-
+console.log('this.company.addresses[0]',this.company.addresses[0]);
 }
  
 public onCheckGoogleAutoComplete () {
@@ -190,10 +196,12 @@ public onCheckGoogleAutoComplete () {
     this.validate.checkValidType(this.company.clientType);
   }
   public onChangeTimeZone(data) {
+    this.company.addresses[0].locale = data.name;
     this.company.addresses[0].timeZone = data;
   }
   public onChangeTags(tags) {
     console.log('tags',tags);
+    this.company.setTags(tags);
     /* tags.forEach((item) => {
        this.recurringState.getCreateTicket().addTag(item.id);
      })*/
