@@ -78,7 +78,7 @@
           <input type="text"
                  #addresstext
                  [(ngModel)]="company.addresses[0].address"
-                 
+
                  (focus)="onCheckGoogleAutoComplete()"
                  placeholder="Enter Location">
         </div>
@@ -164,7 +164,7 @@
                  [(ngModel)]="company.contacts[0].primaryEmail"
                  placeholder="Primary Email Address">
         </div>
-        <div class="col-md-6">
+        <div class="col-md-12">
           <p>Get Subscribe</p>
           <app-company-subscription (subscribeChange)="onChangeSubscribe($event)"></app-company-subscription>
         </div>

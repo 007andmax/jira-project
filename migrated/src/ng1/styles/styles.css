@@ -13464,6 +13464,7 @@ button.close {
   margin: 0;
 }
 
+.archive-modal .close-modal,
 .recurring-tickets-content__modal .close-modal,
 .new-companies-content__modal .close-modal,
 .password-content__modal .close-modal {

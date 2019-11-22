@@ -9,7 +9,7 @@
       <div class="new-companies-content__modal--content" *ngIf="version === 'short'">
 
         <div class="col-md-12 google-plus">
-            
+
             <mat-error *ngIf="validate.getNameIsExist()">
                 This company name already occupied
               </mat-error>
@@ -281,7 +281,7 @@
                  [(ngModel)]="company.contacts[0].primaryEmail"
                  placeholder="Primary Email Address">
         </div>
-        <div class="col-md-6">
+        <div class="col-md-12">
           <p>Get Subscribe</p>
           <app-company-subscription (subscribeChange)="onChangeSubscribe($event)"></app-company-subscription>
         </div>

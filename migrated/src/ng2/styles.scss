@@ -335,6 +335,25 @@ app-left-panel-tags-companies {
   }
 }
 
+.user-subscription {
+  display: flex;
+  height: 40px;
+  padding: 0 3px;
+  font-size: 13px;
+  border: 1px solid #c4cbd5;
+  border-radius: 4px;
+  align-items: center;
+  cursor: pointer;
+  > div {
+    font-size: 12px;
+    padding: 3px 8px;
+    background: #f8f9fa;
+    border: 1px solid #edf2f6;
+    border-radius: 3px;
+    margin-right: 4px;
+  }
+}
+
 .new-companies-content__modal--content,
 .recurring-tickets-content__modal--content {
   .tab-btns {
@@ -355,11 +374,14 @@ app-left-panel-tags-companies {
       }
     }
   }
-  app-tags {
+  app-tags,
+  app-company-tags,
+  app-draft-email-recipients {
     > .col-md-12 {
       margin-top: 40px;
       .mat-form-field {
         width: 100%;
+        margin-top: 15px;
       }
       .mat-form-field-infix {
         border: none;
@@ -408,6 +430,15 @@ app-left-panel-tags-companies {
       }
     }
   }
+  app-draft-email-recipients {
+    > .col-md-12 {
+      .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+        &:before {
+          content: 'Add Recipient';
+        }
+      }
+    }
+  }
   .service-tab-content,
   .product-tab-content {
     &__item {
@@ -442,6 +473,65 @@ app-left-panel-tags-companies {
       top: 43px;
       right: -18px;
       cursor: pointer;
+    }
+  }
+}
+
+.archive-modal {
+  padding: 40px;
+  position: relative;
+  .close-modal {
+    background: transparent;
+    border: none;
+  }
+  &__body {
+    margin-bottom: 50px;
+    padding-left: 70px;
+    h3 {
+      font-family: "Graphik Semibold", sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1.4;
+      color: #364656;
+      position: relative;
+      margin: 0;
+      &:before,
+      &:after {
+        content: '';
+        position: absolute;
+      }
+      &:before {
+        left: -70px;
+        top: 0;
+        width: 48px;
+        height: 48px;
+        background: #ffeceb;
+        border-radius: 50%;
+      }
+      &:after {
+        left: -58px;
+        top: 10px;
+        width: 24px;
+        height: 24px;
+        background: url("assets/img/icons/archive-red-ng2.png") no-repeat;;
+      }
+    }
+    p {
+      font-family: "Graphik Regular", sans-serif;
+      font-size: 13px;
+      line-height: 1.54;
+    }
+  }
+  &__footer {
+    .btn-new {
+      border: none;
+      height: 48px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-family: "Graphik-Medium", sans-serif;
+    }
+    .btn-primary {
+      margin-right: 16px;
     }
   }
 }

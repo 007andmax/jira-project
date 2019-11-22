@@ -1018,6 +1018,7 @@ _::-webkit-:not(:root:root),
   border-radius: 3px;
 }
 
+.archive-modal button,
 .invoice--header button,
 .quote--header button,
 .email--header button,
@@ -1694,6 +1695,7 @@ _::-webkit-:not(:root:root),
   padding: 70px 40px 60px 140px;
 }
 
+.archive-modal .close-modal,
 .create-new .close-modal,
 .download-agent-modal .close-modal,
 .recurring-tickets-content__modal .close-modal,
