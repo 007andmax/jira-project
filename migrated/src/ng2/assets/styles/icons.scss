@@ -4,6 +4,12 @@
   height: 64px;
 }
 
+.icn-24 {
+  width: 26px;
+  height: 26px;
+  display: block;
+}
+
 .icn-user {
   background: url("assets/img/user-icn.png");
 }
@@ -65,4 +71,9 @@
 
 .archive-grey-ng2 {
   background: url("assets/img/icons/archive-grey-ng2.png");
+}
+
+.history-ng2 {
+  background: url("assets/img/icons/history.svg") no-repeat;
+  background-size: cover;
 }

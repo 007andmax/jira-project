@@ -27,7 +27,7 @@
   <div class="col-md-1 mob-hidden" [textContent]="countDevices"></div>
   <div class="col-md-1 mob-hidden" [textContent]="countUsers"></div>
   <div class="col-md-2 mob-hidden">
-    <button (click)="onRestore()" *ngIf="showArchivedCompanies">De archive</button>
+    <i class="history-ng2 icn-24 pointer" (click)="onRestore()" *ngIf="showArchivedCompanies"></i>
     <button (click)="downloadAgent()" *ngIf="!showArchivedCompanies"><i class="icn-16 import-ng2"></i></button>
     <div class="grey-dropdown right with-icons" *ngIf="!showArchivedCompanies"
          ngbDropdown>
