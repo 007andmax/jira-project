@@ -21,10 +21,10 @@ export class CompanyProfile {
     defaultPaymentMethod: any = null;
     description: string;
     logo: CompanyLogo;
-    domain: string;
+    domain: string = null;
     login: string = "";
     maxAgents: number = 0;
-    name: string;
+    name: string = "";
     password: string = "";
     paymentMethods: string;
     paymentTerms: number;
@@ -109,25 +109,25 @@ export class CompanyProfile {
 
     }
     public fullVersion() {
-        let contact: CompanyProfileContact = new CompanyProfileContact();
-        contact.fullVersion();
-        let address: CompanyProfileAddress = new CompanyProfileAddress();
-        address.fullVersion();
+       // let contact: CompanyProfileContact = new CompanyProfileContact();
+        this.contacts[0].fullVersion();
+     //   let address: CompanyProfileAddress = new CompanyProfileAddress();
+        this.addresses[0].fullVersion();
         this.agentLinkToEmail = null;
         this.clientIndustry = {
             name: null
         };
-        this.clientType = '';
+      //  this.clientType = '';
         this.description = null;
-        this.domain = null;
+      //  this.domain = null;
         this.login = '';
-        this.name = "";
+      
         this.paymentMethods = null;
         this.paymentTerms = null;
         this.serviceType = null;
         this.techLeadId = null;
-        this.addresses = [address];
-        this.contacts = [contact];
+      //  this.addresses = [address];
+      //  this.contacts = [contact];
         this.workingDays = Weeks.map((item) => new WorkDay(item.toUpperCase(), 0, 0))
 
     }
