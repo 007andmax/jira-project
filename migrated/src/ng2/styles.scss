@@ -278,60 +278,92 @@ app-left-panel-tags-companies {
   }
 }
 
-.ngx-editor {
-  border-radius: 4px !important;
-  border: solid 1px #c4cbd5 !important;
-  .ngx-editor-grippie {
-    display: none;
-  }
-  .ngx-toolbar {
-    border: none !important;
-    border-bottom: solid 1px #c4cbd5 !important;
-    padding: 0 !important;
-    height: 64px !important;
-    background: transparent !important;
-    position: relative;
-    .ngx-toolbar-set {
+.editor-container {
+  .editor-container-attachments {
+    position: absolute;
+    top: 24px;
+    left: 218px;
+    cursor: pointer;
+    #upload-file-email {
+      width: 16px;
+      height: 16px;
+      padding: 0;
+      opacity: 0;
+    }
+    .icn-text-attachment {
       position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      margin: 0 !important;
-      &:nth-child(5) {
-        right: 10px;
-      }
-      &:nth-child(4) {
-        right: 65px;
-      }
-      &:nth-child(3) {
-        right: 98px;
-      }
-      &:nth-child(2) {
-        right: 180px;
-      }
-      &:nth-child(1) {
-        right: 236px;
-      }
+      top: 0;
+      left: 0;
+      cursor: pointer;
     }
   }
-  .ngx-editor-button {
-    padding: 0 !important;
-    border: none !important;
-    background: transparent;
-    min-width: auto !important;
-    margin-right: 15px;
-    &:hover {
+  .ngx-editor {
+    border-radius: 4px !important;
+    border: solid 1px #c4cbd5 !important;
+    .ngx-editor-grippie {
+      display: none;
+    }
+    .ngx-toolbar {
+      border: none !important;
+      border-bottom: solid 1px #c4cbd5 !important;
+      padding: 0 !important;
+      height: 64px !important;
       background: transparent !important;
+      position: relative;
+      .ngx-toolbar-set {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        margin: 0 !important;
+        &:nth-child(5) {
+          right: 10px;
+        }
+        &:nth-child(4) {
+          right: 65px;
+        }
+        &:nth-child(3) {
+          right: 98px;
+        }
+        &:nth-child(2) {
+          right: 180px;
+        }
+        &:nth-child(1) {
+          right: 236px;
+        }
+      }
     }
-    i {
-      position: static !important;
-      color: #4f5f79;
+    .ngx-editor-button {
+      padding: 0 !important;
+      border: none !important;
+      background: transparent;
+      min-width: auto !important;
+      margin-right: 15px;
+      &:hover {
+        background: transparent !important;
+      }
+      i {
+        position: static !important;
+        color: #4f5f79;
+      }
     }
-  }
-  .ngx-editor-textarea {
-    border: none !important;
-  }
-  .ngx-toolbar-set {
-    background-color: transparent !important;
+    .ngx-editor-textarea {
+      border: none !important;
+      padding: 24px !important;
+      height: 207px !important;
+      i {
+        position: static !important;
+      }
+    }
+    .ngx-editor-placeholder {
+      font-family: "Graphik Regular", sans-serif !important;
+      font-size: 13px !important;
+      padding: 24px !important;
+      line-height: 1.54;
+      color: #9ca5b6 !important;
+    }
+    .ngx-toolbar-set {
+      background-color: transparent !important;
+    }
   }
 }
 

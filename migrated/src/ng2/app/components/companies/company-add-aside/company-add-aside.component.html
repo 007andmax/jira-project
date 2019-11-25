@@ -10,9 +10,9 @@
 
         <div class="col-md-12 google-plus">
 
-            <mat-error *ngIf="validate.getNameIsExist()">
-                This company name already occupied
-              </mat-error>
+          <mat-error *ngIf="validate.getNameIsExist()">
+            This company name already occupied
+          </mat-error>
           <mat-error *ngIf="!validate.getName()">
             Company name is required
           </mat-error>
@@ -55,12 +55,12 @@
 
         </div>
         <div class="col-md-12">
-            <mat-error *ngIf="!validate.getDomain()">
-                Please enter a valid domain
-              </mat-error>
+          <mat-error *ngIf="!validate.getDomain()">
+            Please enter a valid domain
+          </mat-error>
           <p>Domain Name</p>
           <input type="text"
-          (blur)="onChangeDomain()"
+                 (blur)="onChangeDomain()"
                  [(ngModel)]="company.domain"
                  placeholder="http://www.example.com">
         </div>
@@ -90,7 +90,7 @@
         </div>
         <div class="col-md-6">
           <mat-error *ngIf="!validate.getPrimaryContactEmail()">
-              Please enter a valid email address
+            Please enter a valid email address
           </mat-error>
           <p>Primary Contact Email</p>
           <input type="text"
@@ -130,9 +130,9 @@
         </div>
 
         <div class="col-md-12 google-plus">
-            <mat-error *ngIf="validate.getNameIsExist()">
-                This company name already occupied
-              </mat-error>
+          <mat-error *ngIf="validate.getNameIsExist()">
+            This company name already occupied
+          </mat-error>
           <mat-error *ngIf="!validate.getName()">
             Company name is required
           </mat-error>
@@ -169,24 +169,26 @@
         </div>
         <div class="col-md-6">
           <p>Client Type</p>
-          <app-select-search    [list]="industries" (onSelectedItem)="onSelectClientIndustry($event)"></app-select-search>
-     
-        <!--  <div class="light-dropdown" ngbDropdown>
-            <i class="icn-sm report-caret-icon"></i>
-            <input type="text"
-                   [value]="company.clientIndustry.name"
-                   placeholder="Select Client Type" id="dropdownClientIndustry" ngbDropdownToggle />
-            <div ngbDropdownMenu aria-labelledby="dropdownClientIndustry">
-              <ng-template ngFor let-item [ngForOf]="industries">
-                <button ngbDropdownItem [textContent]="item" (click)="company.clientIndustry.name = item"></button>
-              </ng-template>
-            </div>
-          </div>-->
+          <div class="light-dropdown">
+            <app-select-search [list]="industries"
+                               (onSelectedItem)="onSelectClientIndustry($event)"></app-select-search>
+          </div>
+          <!--  <div class="light-dropdown" ngbDropdown>
+              <i class="icn-sm report-caret-icon"></i>
+              <input type="text"
+                     [value]="company.clientIndustry.name"
+                     placeholder="Select Client Type" id="dropdownClientIndustry" ngbDropdownToggle />
+              <div ngbDropdownMenu aria-labelledby="dropdownClientIndustry">
+                <ng-template ngFor let-item [ngForOf]="industries">
+                  <button ngbDropdownItem [textContent]="item" (click)="company.clientIndustry.name = item"></button>
+                </ng-template>
+              </div>
+            </div>-->
         </div>
         <div class="col-md-12">
-            <mat-error *ngIf="!validate.getDomain()">
-                Please enter a valid domain
-              </mat-error>
+          <mat-error *ngIf="!validate.getDomain()">
+            Please enter a valid domain
+          </mat-error>
           <p>Domain Name</p>
           <input type="text"
                  [(ngModel)]="company.domain"
@@ -276,7 +278,7 @@
         </div>
         <div class="col-md-6">
           <mat-error *ngIf="!validate.getPrimaryContactEmail()">
-              Please enter a valid email address
+            Please enter a valid email address
           </mat-error>
           <p>Primary Contact Email</p>
           <input type="text" (input)="onChangePrimaryEmail($event)"
@@ -341,7 +343,10 @@
         </div>
         <div class="col-md-6">
           <p>Sales Person</p>
-          <app-select-search  [field]="'name'"  [list]="listPersons" (onSelectedItem)="onSelectTechLead($event)"></app-select-search>
+          <div class="light-dropdown">
+            <app-select-search [field]="'name'" [list]="listPersons"
+                               (onSelectedItem)="onSelectTechLead($event)"></app-select-search>
+          </div>
           <!--<div class="light-dropdown" ngbDropdown>
             <i class="icn-sm report-caret-icon"></i>
             <input type="text" [value]="getSelectedTechLead()" autocomplete="new-password"

@@ -20,8 +20,9 @@
           >Paste Html
           </div>
         </div>
-        <div class="col-md-12" style="margin-top: 0;">
+        <div class="col-md-12 editor-container" style="margin-top: 0;">
           <!--EDITOR-->
+
           <app-ngx-editor *ngIf="tab == 'plain'" [config]="editorConfig" [spellcheck]="true"
                           [(ngModel)]="messageContent"></app-ngx-editor>
           <textarea *ngIf="tab == 'html'" [(ngModel)]="messageHTML" class="email-text-block textarea"
@@ -66,8 +67,10 @@
               </ng-template>
             </ul>
           </div>
-
-          <input id="upload-file-email" type="file" (input)="uploadFileOnBrower($event)" />
+          <div *ngIf="tab == 'plain'" class="editor-container-attachments">
+            <i class="icn-16 icn-text-attachment"></i>
+            <input id="upload-file-email" type="file" (input)="uploadFileOnBrower($event)" />
+          </div>
         </div>
 
         <div class="col-md-12 new-companies-content__modal--content-footer">

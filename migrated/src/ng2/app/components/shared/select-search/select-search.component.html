@@ -1,24 +1,24 @@
-<input
-  id="typeahead-focus1"
-  placeholder="Select Company"
-  type="text"
-  [(ngModel)]="selectedItem"
-  class="pointer"
-  [ngClass]="(!valid) ? 'no-valid' : ''"
-  [inputFormatter]="formatter"
-  [resultFormatter]="formatter"
-  [ngbTypeahead]="search"
-  (selectItem)="selectItem($event)"
-  (focus)="focus$.next('')"
-  (click)="click$.next('')"
-  #instance="ngbTypeahead"
-  autocomplete="new-password"
-/>
-<span *ngIf="list">
+  <input
+    id="typeahead-focus1"
+    placeholder="Select Company"
+    type="text"
+    [(ngModel)]="selectedItem"
+    class="pointer"
+    [ngClass]="(!valid) ? 'no-valid' : ''"
+    [inputFormatter]="formatter"
+    [resultFormatter]="formatter"
+    [ngbTypeahead]="search"
+    (selectItem)="selectItem($event)"
+    (focus)="focus$.next('')"
+    (click)="click$.next('')"
+    #instance="ngbTypeahead"
+    autocomplete="new-password"
+  />
+  <span *ngIf="list">
 <i *ngIf="selectedItem"
    class="icn-sm icn-remove-old"
    (click)="clearClient($event)"></i>
 <i *ngIf="!selectedItem"
    class="icn-sm report-caret-icon"></i>
 </span>
-<i class="loading xs" *ngIf="!list"></i>
+  <i class="loading xs" *ngIf="!list"></i>

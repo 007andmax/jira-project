@@ -59,7 +59,7 @@
 }
 
 .create-window {
-  background: #ffffff;
+  background: #fff;
   border-radius: 3px;
 }
 
@@ -117,7 +117,7 @@
 }
 
 .create-window .checked {
-  color: #000000 !important;
+  color: #000 !important;
 }
 
 .pass-man-popup .close-btn,
@@ -153,7 +153,7 @@
 }
 
 .create-window .navigation__list--category a:hover {
-  color: #000000;
+  color: #000;
 }
 
 .create-window .general {
@@ -307,7 +307,7 @@ _:-ms-lang(x), .create-window .general .company-window .company-steps__list:befo
 }
 
 .create-window .general .company-window .company-steps__list--point:hover {
-  color: #000000;
+  color: #000;
 }
 
 .create-window .general .company-window .company-steps__list--point:before {
@@ -785,11 +785,11 @@ _::-webkit-:not(:root:root),
 }
 
 .ticket--footer .btn.btn-new.disabled, .ticket--footer .btn-new.disabled {
-  background: #ffffff;
+  background: #fff;
 }
 
 .ticket--footer .tech-users {
-  border-left: 1px solid #cccccc;
+  border-left: 1px solid #ccc;
 }
 
 .ticket--footer .dropdown-user-parent div[uib-dropdown-toggle] {
@@ -809,7 +809,7 @@ _::-webkit-:not(:root:root),
   bottom: 0;
   left: 0;
   transform: translate(50%, 50%);
-
+  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -833,12 +833,12 @@ _::-webkit-:not(:root:root),
 .ticket--footer .shared-avatars .avatars {
   padding: 2px 7px;
   display: flex;
-
+  
 }
 
 .ticket--footer .shared-avatars .client-users {
   border-right: 1px solid #edf2f6;
-
+  
 }
 
 .ticket--footer .shared-avatars .shared-avatar {
@@ -871,13 +871,13 @@ _::-webkit-:not(:root:root),
   width: 32px;
   height: 32px;
   margin-right: 10px;
-
+  
 }
 
 .dropdown-menu .default-user-avatar {
   width: 32px;
   height: 32px;
-
+  
 }
 
 /* .avatar-background-color-even {
@@ -905,13 +905,13 @@ _::-webkit-:not(:root:root),
   width: 32px;
   height: 32px;
   margin-right: 10px;
-
+  
 }
 
 .dropdown-menu .default-user-avatar {
   width: 32px;
   height: 32px;
-
+  
 }
 
 /* .avatar-background-color-even {
@@ -941,7 +941,7 @@ _::-webkit-:not(:root:root),
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 15px;
   position: relative;
-  background: #ffffff;
+  background: #fff;
   margin: 0;
 }
 
@@ -951,7 +951,7 @@ _::-webkit-:not(:root:root),
   width: 0;
   height: 0;
   border: 9px solid transparent;
-  border-bottom-color: #ffffff;
+  border-bottom-color: #fff;
   border-top: 0;
   position: absolute;
   top: -8px;
@@ -1033,7 +1033,7 @@ _::-webkit-:not(:root:root),
   border: none;
   outline: none;
   background-color: transparent;
-  color: #cccccc
+  color: #ccc
 }
 
 .invoice--header h2,
@@ -1186,7 +1186,7 @@ _::-webkit-:not(:root:root),
   border-bottom: 1px solid #e5e7eb;
   outline: none;
   padding: 10px 0;
-  background-color: #ffffff;
+  background-color: #fff;
 }
 
 .invoice--content [class*='col-md-'],
@@ -1317,7 +1317,7 @@ _::-webkit-:not(:root:root),
 .invoice-create--header__btn li:hover,
 .quote-create--header__btn li:hover {
   background-color: #16a4fa;
-  color: #ffffff;
+  color: #fff;
   font-weight: normal;
 }
 
@@ -1365,7 +1365,7 @@ _::-webkit-:not(:root:root),
 }
 
 .tab-btns .btn {
-  background-color: #ffffff;
+  background-color: #fff;
   font-size: 13px;
   font-weight: 500;
   color: #4f5f79;
@@ -1401,11 +1401,13 @@ _::-webkit-:not(:root:root),
 
 .textarea.email-text-block,
 .textarea.quote-text-block {
+  border: 1px solid #c4cbd5 !important;
   width: 100%;
   min-height: 273px;
   outline: none;
   margin-bottom: -8px;
   padding: 22px 20px;
+  font-size: 13px;
 }
 
 .textarea.email-text-block::placeholder,
@@ -1513,7 +1515,7 @@ _::-webkit-:not(:root:root),
 .add-category-lp-dropdown-btns .btn-success {
   background-color: #2ec866 !important;
   border: 1px solid #189947;
-  color: #ffffff;
+  color: #fff;
 }
 
 .add-category-lp-dropdown-btns {
@@ -1638,7 +1640,7 @@ _::-webkit-:not(:root:root),
   border-radius: 50%;
   background-color: #4f5f79;
   text-align: center;
-  color: #ffffff;
+  color: #fff;
 }
 
 .location {
@@ -1868,7 +1870,7 @@ _::-webkit-:not(:root:root),
 
 .ticket--header .ticket-priority .dropdown-priority li a:hover {
   background-color: #16a4fa;
-  color: #ffffff;
+  color: #fff;
 }
 
 .ticket--header .ticket-priority .dropdown-priority a {
@@ -1986,7 +1988,7 @@ _::-webkit-:not(:root:root),
 .create-new .dropdown-menu li a:hover,
 .create-new .dropdown-menu li label:hover {
   background-color: #16a4fa;
-  color: #ffffff;
+  color: #fff;
 }
 
 .create-new .dropdown-menu > .active > a {
@@ -2005,7 +2007,7 @@ _::-webkit-:not(:root:root),
 }
 
 .create-new .ticket-priority.dropdown > input {
-  background-color: #ffffff;
+  background-color: #fff;
 }
 
 .create-new .subscribe-tokens {
@@ -2056,7 +2058,7 @@ _::-webkit-:not(:root:root),
 }
 
 .create-new .dropdown-assign-ticket .users-list {
-  background-color: #ffffff;
+  background-color: #fff;
   max-height: 175px;
 }
 
@@ -2090,7 +2092,7 @@ _::-webkit-:not(:root:root),
 }
 
 .create-new .dropdown-assign-ticket .users-list .user-item:hover p {
-  color: #ffffff !important;
+  color: #fff !important;
 }
 
 .create-new .avatar-26 {
@@ -2108,7 +2110,7 @@ _::-webkit-:not(:root:root),
 }
 
 .create-new .checkbox-dd-item:hover label {
-  color: #ffffff;
+  color: #fff;
 }
 
 .create-updates-footer .user-item a,
@@ -2247,12 +2249,12 @@ _::-webkit-:not(:root:root),
 }
 
 .create-new .dropdown-content li a {
-  color: #000000;
+  color: #000;
 }
 
 .create-new .dropdown-content li:hover a,
 .create-new .dropdown-content li:hover span {
-  color: #ffffff;
+  color: #fff;
 }
 
 .create-new .barcode-icon {
