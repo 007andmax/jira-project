@@ -314,12 +314,12 @@
           <p>Payment Method</p>
           <div class="light-dropdown" ngbDropdown>
             <i class="icn-sm report-caret-icon"></i>
-            <input type="text" [value]="company.paymentMethods" autocomplete="new-password"
+            <input type="text" [value]="company.defaultPaymentMethod" autocomplete="new-password"
                    placeholder="Select Payment Method"
                    id="dropdownPaymentMethods" ngbDropdownToggle />
             <div ngbDropdownMenu aria-labelledby="dropdownPaymentMethods">
               <ng-template ngFor let-item [ngForOf]="paymentMethods">
-                <button ngbDropdownItem [textContent]="item" (click)="company.paymentMethods = item"></button>
+                <button ngbDropdownItem [textContent]="item" (click)="company.defaultPaymentMethod = item"></button>
               </ng-template>
             </div>
           </div>

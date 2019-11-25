@@ -33,7 +33,7 @@ export class DraftEmailRecipientsComponent implements OnInit {
   showErrorClient = false;
   companyEmails = [];
   companyList = [];
-
+  reqCompanyList = [];
   @Input() public data;
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
@@ -59,12 +59,12 @@ export class DraftEmailRecipientsComponent implements OnInit {
     console.log('ngOnInit', this.data);
 
     this.getCompanyList();
-    this.userInput.nativeElement.onblur = (e) => {
+    /*this.userInput.nativeElement.onblur = (e) => {
       if (this.matAutocomplete.isOpen) {
         let modal = this.matAutocomplete.panel.nativeElement;
         modal.parentNode.style.width = 'max-content';
       }
-    }
+    }*/
     this.draftEmailStateService.getOnClear().subscribe(data => {
       this.selectedCompanies = [];
       this.companyEmails = [];
@@ -74,6 +74,7 @@ export class DraftEmailRecipientsComponent implements OnInit {
     })
   }
   private getCompanyList() {
+    console.log('getCompanyList');
     if (this.companiesState.getCompanies().length > 0) {
       this.setCompanyList(this.companiesState.getCompanies());
 
@@ -84,32 +85,18 @@ export class DraftEmailRecipientsComponent implements OnInit {
     }
   }
   private setCompanyList(data) {
+    console.log('setCompanyList');
+    this.reqCompanyList = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt);
     this.companyList = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt);
 
   }
-  /**
-   * Add selected user
-   * @param event - selected user
-   */
-  public add(event: MatChipInputEvent): void {
-    if (!this.matAutocomplete.isOpen) {
-      const input = event.input;
-      const value = event.value;
-      if ((value || '').trim()) {
-        this.selectedCompanies.push(value.trim());
-      }
-      if (input) {
-        input.value = '';
-      }
-      this.companyCtrl.setValue(null);
-    }
-  }
-
+  
   /**
    * Remove user from selected
    * @param index - user index
    */
   public remove(index): void {
+    console.log('remove');
     if (index >= 0) {
       this.selectedCompanies.splice(index, 1);
       this.companyEmails.splice(index, 1);
@@ -122,18 +109,48 @@ export class DraftEmailRecipientsComponent implements OnInit {
    * Add user to selected
    * @param event - selected user
    */
-  public selected(event: MatAutocompleteSelectedEvent): void {
+  public selected(company): void {
+    console.log('selected');
     this.showError = false;
-    this.selectedCompanies.push(event.option.viewValue);
-    this.companyEmails.push(event.option.value.primaryEmail);
-
+    this.selectedCompanies.push(company.companyInfo.contacts[0].primaryEmail);
+    this.companyEmails.push(company.companyInfo.contacts[0].primaryEmail);
     this.onCompanyEmails.emit(this.companyEmails);
-    this.userInput.nativeElement.blur();
+  //  this.userInput.nativeElement.blur();
+    this.userInput.nativeElement.value = '';
     this.companyCtrl.setValue(null);
+    this.companyList = this.reqCompanyList;
+    console.log('this.companyList',this.companyList);
+ /*   this.userInput.nativeElement.value = '';
+    this.companyList = this.reqCompanyList;*/
   }
 
-
-
-
-
+  onSearch(event) {
+    console.log('onSearch');
+    
+    this.companyList = this.reqCompanyList.filter(item => item.companyInfo.contacts[0].primaryEmail.includes(event.target.value));
+  }
+  onKeyUp (event) {
+    console.log('onKeyUp');
+   
+    if (event.keyCode === 13) {
+      const input = event.target.input;
+      const value = event.target.value;
+  
+      if ((value || '').trim()) {
+        this.selectedCompanies.push(value.trim());
+        this.companyList = this.reqCompanyList;
+      }
+      if (input) {
+        input.value = '';
+      }
+      this.companyCtrl.setValue(null);
+  
+      }
+     
+    }
+    public trackByIndex(index, item) {
+      return index;
+    }
+  
+ 
 }

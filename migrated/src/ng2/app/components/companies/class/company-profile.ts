@@ -26,7 +26,7 @@ export class CompanyProfile {
     maxAgents: number = 0;
     name: string = "";
     password: string = "";
-    paymentMethods: string;
+   
     paymentTerms: number;
     serviceType: string;
     removeOfflineTime: number = 30;
@@ -63,7 +63,7 @@ export class CompanyProfile {
         this.maxAgents = company.maxAgents;
         this.name = company.name;
         this.password = company.password;
-        this.paymentMethods = (company.paymentMethods) ? company.paymentMethods : null;
+        this.defaultPaymentMethod = (company.defaultPaymentMethod) ? company.defaultPaymentMethod : null;
         this.paymentTerms = company.paymentTerms;
         this.serviceType = company.serviceType;
         this.removeOfflineTime = company.removeOfflineTime;
@@ -122,7 +122,7 @@ export class CompanyProfile {
       //  this.domain = null;
         this.login = '';
       
-        this.paymentMethods = null;
+        this.defaultPaymentMethod = null;
         this.paymentTerms = null;
         this.serviceType = null;
         this.techLeadId = null;

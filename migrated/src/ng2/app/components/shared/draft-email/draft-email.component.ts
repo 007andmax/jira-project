@@ -144,7 +144,7 @@ export class DraftEmailComponent implements OnInit {
     this.filesInfo.files.splice(index);
   };
   setDisableUplaodFile(value) {
-    this.elRef.nativeElement.querySelector('#upload-file').disabled = value;
+    this.elRef.nativeElement.querySelector('#upload-file-email').disabled = value;
   }
   uploadFile(file, fileInfo) {
     return new Promise((resolve, reject) => {
