@@ -37,7 +37,7 @@
           By sales person
         </div>
         <div class="filter-item__content">
-            <app-select-search [field]="'name'"  [list]="listPersons" (onSelectedItem)="onSelectTechLead($event)"></app-select-search>
+            <app-select-search [editItem]="selectedTechLead" [field]="'name'"  [list]="listPersons" (onSelectedItem)="onSelectTechLead($event)"></app-select-search>
          <!-- <div class="dark-dropdown"
                ngbDropdown>
             <input id="dropdownPersons"
@@ -71,7 +71,8 @@
           By industry
         </div>
         <div class="filter-item__content">
-            <app-select-search   [list]="industries" (onSelectedItem)="onSelectClientIndustry($event)"></app-select-search>
+            
+            <app-select-search  [editItem]="selectedClientIndustry" [list]="industries" (onSelectedItem)="onSelectClientIndustry($event)"></app-select-search>
          <!-- <div class="dark-dropdown"
                ngbDropdown>
             <input id="dropdownClientIndustry"

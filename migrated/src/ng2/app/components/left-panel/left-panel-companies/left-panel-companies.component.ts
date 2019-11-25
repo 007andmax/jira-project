@@ -20,9 +20,11 @@ export class LeftPanelCompaniesComponent implements OnInit {
   salesHistory = [];
   industries = [];
   showArchivedCompanies: boolean = false;
-  showClearSalesPerson: boolean = false;
-  showClearIndustry: boolean = false;
+  //showClearSalesPerson: boolean = false;
+  //showClearIndustry: boolean = false;
   calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
+  selectedTechLead:ItemFilterPerson = null;
+  selectedClientIndustry:string = null;
   @Output() onFilterTags = new EventEmitter();
   filter: LeftPanelCompaniesFilter = new LeftPanelCompaniesFilter();
   constructor(private usersStateService: UsersStateService, private leftPanelService: LeftPanelService, private companiesService: CompaniesService,
@@ -75,18 +77,21 @@ export class LeftPanelCompaniesComponent implements OnInit {
     1 : (((b.name).toLowerCase() > (a.name).toLowerCase()) ? -1 : 0));
     console.log('this.listPersons',this.listPersons);
   }
- /* public selectTechLead(name) {
-    this.showClearSalesPerson = true;
-    this.listPersons.forEach(item => item.selected = false);
-    let index = this.listPersons.findIndex(item => `${item.firstName} ${item.lastName}` === name);
+  public selectTechLead(name) {
+   
+  //  this.showClearSalesPerson = true;
+   // this.listPersons.forEach(item => item.selected = false);
+    let index = this.listPersons.findIndex(item => item.name === name);
     if (index > -1) {
-      this.listPersons[index].selected = true;
+      this.selectedTechLead = this.listPersons[index];
+    //  this.listPersons[index].selected = true;
       this.filter.setTehUser(this.listPersons[index].id);
       this.leftPanelStateService.onInitFilter(this.filter);
     }
-  }*/
+  }
   public selectClientIndustry(item) {
-    this.showClearIndustry = true;
+    this.selectedClientIndustry = item;
+  //  this.showClearIndustry = true;
     this.clientIndustry = item;
     this.filter.setClientIndustry(this.clientIndustry);
     this.leftPanelStateService.onInitFilter(this.filter);
@@ -94,15 +99,15 @@ export class LeftPanelCompaniesComponent implements OnInit {
   toggleFilter(event) {
     event.target.parentNode.classList.toggle('show-filter');
   }
-  /*clearSalesPerson() {
-    this.showClearSalesPerson = false;
-    this.listPersons.forEach(item => item.selected = false);
+  clearSalesPerson() {
+//    this.showClearSalesPerson = false;
+  //  this.listPersons.forEach(item => item.selected = false);
     this.filter.setTehUser(null);
     this.leftPanelStateService.onInitFilter(this.filter);
-  }*/
+  }
 
   clearClientIndustry() {
-    this.showClearIndustry = false;
+  //  this.showClearIndustry = false;
     this.clientIndustry = '';
     this.filter.setClientIndustry(null);
     this.leftPanelStateService.onInitFilter(this.filter);
@@ -132,8 +137,12 @@ export class LeftPanelCompaniesComponent implements OnInit {
   }
 
   public onSelectTechLead(item) {
-
-    this.showClearSalesPerson = true;
+    if (!item) {
+      this.clearSalesPerson();
+      return;
+    }
+this.selectedTechLead = null;
+  //  this.showClearSalesPerson = true;
   //  this.listPersons.forEach(item => item.selected = false);
   //  this.listPersons[index].selected = true;
     this.filter.setTehUser(item.id);
@@ -148,8 +157,13 @@ export class LeftPanelCompaniesComponent implements OnInit {
   }
 
   public onSelectClientIndustry(item) {
+    if (!item) {
+      this.clearClientIndustry();
+      return;
+    }
+    this.selectedClientIndustry = null;
     console.log('item',item);
-    this.showClearIndustry = true;
+ //   this.showClearIndustry = true;
     this.clientIndustry = item;
     this.filter.setClientIndustry(this.clientIndustry);
     this.leftPanelStateService.onInitFilter(this.filter);

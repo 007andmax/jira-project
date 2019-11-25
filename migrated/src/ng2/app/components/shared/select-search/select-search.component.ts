@@ -1,16 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild, OnDestroy, OnChanges, ElementRef } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, OnDestroy } from '@angular/core';
 import { merge, Observable, Subject, Subscription } from "rxjs";
-import { CompaniesService } from "../../../services/company/companies.service";
-import { ISubscription } from "rxjs/Subscription";
+
 import { debounceTime, distinctUntilChanged, filter, map } from "rxjs/operators";
 import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
-import { FormGroup } from "@angular/forms";
  
-import { RecurringTicketsStateService } from 'src/ng2/app/components/tickets/recurring-tickets/services/recurring-tickets-state.service';
-import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
-import { SelectClientCompanyStateService } from '../select-client-company/services/select-client-company-state.service';
-
-
 @Component({
   selector: 'app-select-search',
   templateUrl: './select-search.component.html',
@@ -19,6 +12,7 @@ import { SelectClientCompanyStateService } from '../select-client-company/servic
 export class SelectSearchComponent implements OnInit, OnDestroy {
 
   @Input() field: string = null;
+  @Input() editItem: any = null;
   @Input() list = [];
   @ViewChild('instance') instance: NgbTypeahead;
   @Output() onSelectedItem = new EventEmitter<any>();
@@ -37,9 +31,7 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
    * @param {SelectClientCompanyStateService} companiesState to work with companiies state
    */
   constructor(
-    private companiesService: CompaniesService,
-    private companiesSelectState: SelectClientCompanyStateService,
-    private companiesState:CompaniesStateService
+   
   ) { }
 
   /**
@@ -48,7 +40,9 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
   ngOnInit() {
   
   }
- 
+  ngDoCheck(){
+    if (this.editItem)  this.selectedItem =  (this.field) ? this.editItem : this.editItem;
+  }
  
 
   
@@ -81,7 +75,7 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
    * @param result
    */
   formatter = (result: string) => {
-    
+  
     return (this.field) ? result[this.field] : result;
   };
 
@@ -90,6 +84,7 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
    */
   public clearClient() {
     this.onSelectedItem.emit(null);
+    this.editItem = null;
     this.selectedItem = null;
   }
 
