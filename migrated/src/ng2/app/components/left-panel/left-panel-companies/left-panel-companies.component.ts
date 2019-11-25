@@ -6,6 +6,7 @@ import { CompaniesStateService } from 'src/ng2/app/states/company/companies-stat
 import { LeftPanelCompaniesFilter } from './class/left-panel-companies-filter';
 import { LeftPanelStateService } from 'src/ng2/app/states/left-panel/left-panel-state.service';
 import { CompanyCalculateCount } from '../../companies/class/company-calculate-count';
+import { ItemFilterPerson } from './class/item-filter-person';
 
 @Component({
   selector: 'app-left-panel-companies',
@@ -13,7 +14,7 @@ import { CompanyCalculateCount } from '../../companies/class/company-calculate-c
   styleUrls: ['./left-panel-companies.component.scss']
 })
 export class LeftPanelCompaniesComponent implements OnInit {
-  listPersons = [];
+  listPersons:Array<ItemFilterPerson> = [];
   clientIndustry: string = '';
   industryHistory = [];
   salesHistory = [];
@@ -55,22 +56,26 @@ export class LeftPanelCompaniesComponent implements OnInit {
       console.log('industries', this.industries);
     })
   }
-  getSelectedTechLead() {
+ /* getSelectedTechLead() {
     let index = this.listPersons.findIndex(item => item.selected === true);
     if (index > -1) return this.listPersons[index].firstName + ' ' + this.listPersons[index].lastName;
     return "";
-  }
+  }*/
   private getTehusers(list) {
     list.forEach((item) => {
       if (item.accountType === "TECH" && !item.deletedAt) {
-        item.selected = false;
-        this.listPersons.push(item);
+       // item.selected = false;
+        this.listPersons.push(new ItemFilterPerson(item.id,`${item.firstName} ${item.lastName}`));
       }
     })
-    this.listPersons.sort((a, b) => ((a.firstName + ' ' + a.lastName).toLowerCase() > (b.firstName + ' ' + b.lastName).toLowerCase()) ?
-    1 : (((b.firstName + ' ' + b.lastName).toLowerCase() > (a.firstName + ' ' + a.lastName).toLowerCase()) ? -1 : 0));
+   /* this.listPersons.sort((a, b) => ((a.firstName + ' ' + a.lastName).toLowerCase() > (b.firstName + ' ' + b.lastName).toLowerCase()) ?
+    1 : (((b.firstName + ' ' + b.lastName).toLowerCase() > (a.firstName + ' ' + a.lastName).toLowerCase()) ? -1 : 0));*/
+
+    this.listPersons.sort((a, b) => ((a.name).toLowerCase() > (b.name).toLowerCase()) ?
+    1 : (((b.name).toLowerCase() > (a.name).toLowerCase()) ? -1 : 0));
+    console.log('this.listPersons',this.listPersons);
   }
-  public selectTechLead(name) {
+ /* public selectTechLead(name) {
     this.showClearSalesPerson = true;
     this.listPersons.forEach(item => item.selected = false);
     let index = this.listPersons.findIndex(item => `${item.firstName} ${item.lastName}` === name);
@@ -79,7 +84,7 @@ export class LeftPanelCompaniesComponent implements OnInit {
       this.filter.setTehUser(this.listPersons[index].id);
       this.leftPanelStateService.onInitFilter(this.filter);
     }
-  }
+  }*/
   public selectClientIndustry(item) {
     this.showClearIndustry = true;
     this.clientIndustry = item;
@@ -89,12 +94,12 @@ export class LeftPanelCompaniesComponent implements OnInit {
   toggleFilter(event) {
     event.target.parentNode.classList.toggle('show-filter');
   }
-  clearSalesPerson() {
+  /*clearSalesPerson() {
     this.showClearSalesPerson = false;
     this.listPersons.forEach(item => item.selected = false);
     this.filter.setTehUser(null);
     this.leftPanelStateService.onInitFilter(this.filter);
-  }
+  }*/
 
   clearClientIndustry() {
     this.showClearIndustry = false;
@@ -126,16 +131,16 @@ export class LeftPanelCompaniesComponent implements OnInit {
     this.leftPanelStateService.onInitFilter(this.filter);
   }
 
-  public onSelectTechLead(index) {
+  public onSelectTechLead(item) {
 
     this.showClearSalesPerson = true;
-    this.listPersons.forEach(item => item.selected = false);
-    this.listPersons[index].selected = true;
-    this.filter.setTehUser(this.listPersons[index].id);
+  //  this.listPersons.forEach(item => item.selected = false);
+  //  this.listPersons[index].selected = true;
+    this.filter.setTehUser(item.id);
     this.leftPanelStateService.onInitFilter(this.filter);
     this.salesHistory.pop();
-    this.salesHistory.unshift(`${this.listPersons[index].firstName} ${this.listPersons[index].lastName}`);
-    //this.company.techLeadId = this.listPersons[index].id;
+    this.salesHistory.unshift(item.name);
+    
     this.companiesService.setСustomStorage("companiesPageFilterBySalesHistory", this.salesHistory).subscribe(data => {
       console.log('data', data);
       console.log('this.salesHistory', this.salesHistory);
@@ -143,6 +148,7 @@ export class LeftPanelCompaniesComponent implements OnInit {
   }
 
   public onSelectClientIndustry(item) {
+    console.log('item',item);
     this.showClearIndustry = true;
     this.clientIndustry = item;
     this.filter.setClientIndustry(this.clientIndustry);

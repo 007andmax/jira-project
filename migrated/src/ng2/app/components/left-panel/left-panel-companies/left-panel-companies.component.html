@@ -26,6 +26,7 @@
       <div class="tags-header">
         By tags
       </div>
+    
       <app-left-panel-tags-companies [blockCreateTag]="true" (tagsChange)="onChangeTags($event)"></app-left-panel-tags-companies>
     </div>
     <div class="left-panel-ng2__content--filters">
@@ -36,7 +37,8 @@
           By sales person
         </div>
         <div class="filter-item__content">
-          <div class="dark-dropdown"
+            <app-select-search [field]="'name'"  [list]="listPersons" (onSelectedItem)="onSelectTechLead($event)"></app-select-search>
+         <!-- <div class="dark-dropdown"
                ngbDropdown>
             <input id="dropdownPersons"
                    [value]="getSelectedTechLead()"
@@ -51,7 +53,7 @@
                         (click)="onSelectTechLead(i)"></button>
               </ng-template>
             </div>
-          </div>
+          </div> -->
           <div class="resent-block">
             <div class="resent-block__header">Recent</div>
             <div class="resent-block__content">
@@ -69,7 +71,8 @@
           By industry
         </div>
         <div class="filter-item__content">
-          <div class="dark-dropdown"
+            <app-select-search   [list]="industries" (onSelectedItem)="onSelectClientIndustry($event)"></app-select-search>
+         <!-- <div class="dark-dropdown"
                ngbDropdown>
             <input id="dropdownClientIndustry"
                    placeholder="Select Industry"
@@ -83,7 +86,7 @@
                 <button ngbDropdownItem [textContent]="item" (click)="onSelectClientIndustry(item)"></button>
               </ng-template>
             </div>
-          </div>
+          </div>-->
           <div class="resent-block">
             <div class="resent-block__header">Recent</div>
             <div class="resent-block__content">
