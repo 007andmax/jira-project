@@ -11,6 +11,7 @@ import { ImageCropperStateService } from 'src/ng2/app/states/image-cropper/image
 import { CompanySetting } from '../class/company-setting';
 import { CompanyValdiate } from '../class/company-validate';
 import {} from 'google-maps';
+import { ItemFilterPerson } from '../../left-panel/left-panel-companies/class/item-filter-person';
 @Component({
   selector: 'app-company-add-aside',
   templateUrl: './company-add-aside.component.html',
@@ -27,7 +28,7 @@ export class CompanyAddAsideComponent implements OnInit {
   paymentTerms = [new CompanySetting('COD', 0), new CompanySetting('7 days', 7), new CompanySetting('15 days', 15), new CompanySetting('30 days', 30)];
   serviceTypes = [new CompanySetting('Hourly', 'HOURLY'), new CompanySetting('Block time', 'BLOCK_TIME'), new CompanySetting('Semi managed', 'SEMI_MANAGED'), new CompanySetting('Fully managed', 'FULLY_MANAGED')];
   paymentMethods = ['Cash', 'Cheque', 'Debit Card', 'Credit Card', 'Wire Transfer'];
-  listPersons = [];
+  listPersons:Array<ItemFilterPerson> = [];
   subscriptions: Array<CompanySubscription> = [new CompanySubscription('Ticket Updates', 'ticket'),
   new CompanySubscription('Ticket Manager', 'ticketManager'),
   new CompanySubscription('Invoice Updates', 'invoice')];
@@ -97,14 +98,19 @@ console.log('this.company.addresses[0]',this.company.addresses[0]);
     this.paymentTerms.forEach(item => item.selected = false);
     this.serviceTypes.forEach(item => item.selected = false);
     this.subscriptions.forEach(item => item.selected = false);
-    this.listPersons.forEach(item => item.selected = false);
+  //  this.listPersons.forEach(item => item.selected = false);
     this.validate = new CompanyValdiate();
 
   }
-  public onSelectTechLead(index) {
-    this.listPersons.forEach(item => item.selected = false);
-    this.listPersons[index].selected = true;
-    this.company.techLeadId = this.listPersons[index].id;
+  public onSelectTechLead(event) {
+    if (event) {
+      this.company.techLeadId = event.id;
+    } else {
+      this.company.techLeadId = null;
+    }
+    //this.listPersons.forEach(item => item.selected = false);
+  //  this.listPersons[index].selected = true;
+  
   }
   public onSelectPaymentTerms(index) {
     this.paymentTerms.forEach(item => item.selected = false);
@@ -133,6 +139,9 @@ console.log('this.company.addresses[0]',this.company.addresses[0]);
     this.version = 'full';
     this.company.fullVersion();
     
+  }
+  onSelectClientIndustry (item) {
+    this.company.clientIndustry.name = item
   }
   public onCheckGoogleAutoComplete () {
    if (!this.locationIsinit) this.getPlaceAutocomplete();
@@ -209,8 +218,9 @@ console.log('this.company.addresses[0]',this.company.addresses[0]);
 
     list.forEach((item) => {
       if (item.accountType === "TECH" && !item.deletedAt) {
-        item.selected = false;
-        this.listPersons.push(item);
+      //  item.selected = false;
+       // this.listPersons.push(item);
+       this.listPersons.push(new ItemFilterPerson(item.id,`${item.firstName} ${item.lastName}`));
       }
     })
     console.log('this.listPersons', this.listPersons);
@@ -226,11 +236,11 @@ console.log('this.company.addresses[0]',this.company.addresses[0]);
     if (index > -1) return this.companyTypes[index].title;
     return "";
   }
-  getSelectedTechLead() {
+ /* getSelectedTechLead() {
     let index = this.listPersons.findIndex(item => item.selected === true);
     if (index > -1) return this.listPersons[index].firstName + ' ' + this.listPersons[index].lastName;
     return "";
-  }
+  }*/
   getSelectedServiceType() {
     let index = this.serviceTypes.findIndex(item => item.selected === true);
     if (index > -1) return this.serviceTypes[index].title;

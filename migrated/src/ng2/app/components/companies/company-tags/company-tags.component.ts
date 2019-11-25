@@ -3,7 +3,7 @@ import { CompanyTagsService } from './services/company-tags.service';
 import { CompanyTagsStateService } from './states/company-tags-state.service';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { FormControl } from '@angular/forms';
- 
+
 import { Subscription } from 'rxjs';
 import { MatChipInputEvent } from '@angular/material';
 import { Tag } from 'src/ng2/app/interfaces/tag/tag';
@@ -25,12 +25,13 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   tagCtrl = new FormControl();
   selectedTag = [];
   tags: Array<Tag> = [];
+  reqTags: Array<Tag> = [];
   sub = new Subscription();
-  editItem:any;
+  editItem: any;
   @Input() blockCreateTag: boolean = false;
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @Output() tagsChange = new EventEmitter();
-  
+
   /**
    * Creates an instance of the TagsComponent with the injected services
    * @param {TagsService} tagsService Service to work with tags
@@ -47,15 +48,23 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   public ngOnInit() {
     this.tagsService.getTags().subscribe((data) => {
       this.tags = data;
+      this.reqTags = data;
     })
     this.onInitClearState();
     this.onCheckEditItem();
   }
 
+
+  onSearch(event) {
+    console.log('eve', event.target.value);
+    this.tags = this.reqTags.filter(item => item.word.includes(event.target.value));
+  }
+
+
   /**
   * Subscribe for edit mode
   */
-  private onCheckEditItem () {
+  private onCheckEditItem() {
     let getTagsFromEdit = this.tagsState.getTagsFromEdit().subscribe((data) => {
       this.selectedTag = data;
     });
@@ -70,28 +79,58 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
     this.sub.add(getClearState);
   }
 
+  onKeyUp (event) {
+    console.log('event',event.keyCode);
+    if (event.keyCode === 13) {
+      const input = event.target.input;
+      const value = event.target.value;
+  
+      if ((value || '').trim()) {
+        let tag: Tag = {
+          colorCode: 0, usedCounter: 0, word: value.trim(), id: ''
+        }
+  
+        this.tagsService.setTags(tag.word).subscribe((res) => {
+          tag.id = res.id;
+          this.reqTags.push(tag);
+          this.tags = this.reqTags;
+          this.selectedTag.push(tag);
+          this.tagsChange.emit(this.selectedTag);
+          if (input) {
+            input.value = '';
+          }
+          this.tagCtrl.setValue(null);
+        });
+  
+      }
+     
+    }
+
+  }
+
   /**
    * Add selected tag
    * @param event - selected tag
    */
   public add(event: MatChipInputEvent): void {
-if (this.blockCreateTag) return;
+    if (this.blockCreateTag) return;
     // if (!this.matAutocomplete.isOpen) {
     const input = event.input;
     const value = event.value;
 
     if ((value || '').trim()) {
       let tag: Tag = {
-        colorCode: 0, usedCounter: 0, word: value.trim(), id :''
+        colorCode: 0, usedCounter: 0, word: value.trim(), id: ''
       }
 
       this.tagsService.setTags(tag.word).subscribe((res) => {
         tag.id = res.id;
-        this.tags.push(tag);
+        this.reqTags.push(tag);
+        this.tags = this.reqTags;
         this.selectedTag.push(tag);
-       this.tagsChange.emit(this.selectedTag);
+        this.tagsChange.emit(this.selectedTag);
       });
-    
+
     }
     if (input) {
       input.value = '';
@@ -118,8 +157,9 @@ if (this.blockCreateTag) return;
   public selected(tag): void {
     this.selectedTag.push(tag);
     this.tagsChange.emit(this.selectedTag);
-  //  this.userInput.nativeElement.blur();
+    this.userInput.nativeElement.value = '';
     this.tagCtrl.setValue(null);
+    this.tags = this.reqTags;
   }
 
   /**
@@ -127,7 +167,9 @@ if (this.blockCreateTag) return;
    */
   public close() {
     this.selectedTag = [];
+    this.tags = this.reqTags;
     this.tagsChange.emit(this.selectedTag);
+    
   }
 
   public trackById(index, item) {

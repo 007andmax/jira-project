@@ -15,6 +15,7 @@ import { CompanyTimeZoneStateService } from '../company-time-zone/services/compa
 import { isNgTemplate } from '@angular/compiler';
 import { ImageCropperComponent } from '../../shared/image-cropper/image-cropper.component';
 import { CompanyTagsStateService } from '../company-tags/states/company-tags-state.service';
+import { ItemFilterPerson } from '../../left-panel/left-panel-companies/class/item-filter-person';
 
 @Component({
   selector: 'app-company-edit-aside',
@@ -26,13 +27,13 @@ export class CompanyEditAsideComponent implements OnInit {
   opened = false;
   company: CompanyProfile = new CompanyProfile();
   industries: Array<string> = [];
-
+  selectedTechLead:string = null;
   companyTypes = [new CompanySetting('Client', 'CLIENT'), new CompanySetting('Lead', 'LEAD'), new CompanySetting('Vendor', 'VENDOR')];
   phoneTypes = ['Office', 'Mobile', 'Fax'];
   paymentTerms = [new CompanySetting('COD', 0), new CompanySetting('7 days', 7), new CompanySetting('15 days', 15), new CompanySetting('30 days', 30)];
   serviceTypes = [new CompanySetting('Hourly', 'HOURLY'), new CompanySetting('Block time', 'BLOCK_TIME'), new CompanySetting('Semi managed', 'SEMI_MANAGED'), new CompanySetting('Fully managed', 'FULLY_MANAGED')];
   paymentMethods = ['Cash', 'Cheque', 'Debit Card', 'Credit Card', 'Wire Transfer'];
-  listPersons = [];
+  listPersons:Array<ItemFilterPerson> = [];
   subscriptions: Array<CompanySubscription> = [new CompanySubscription('Ticket Updates', 'ticket'),
   new CompanySubscription('Ticket Manager', 'ticketManager'),
   new CompanySubscription('Invoice Updates', 'invoice')];
@@ -109,7 +110,8 @@ public onCheckGoogleAutoComplete () {
     this.paymentTerms.forEach(item => item.selected = false);
     this.serviceTypes.forEach(item => item.selected = false);
     this.subscriptions.forEach(item => item.selected = false);
-    this.listPersons.forEach(item => item.selected = false);
+    this.selectedTechLead = null;
+   // this.listPersons.forEach(item => item.selected = false);
     this.validate = new CompanyValdiate();
 
   }
@@ -126,7 +128,8 @@ public onCheckGoogleAutoComplete () {
       if (indexServiceType > -1) this.onSelectServiceTypes(indexServiceType);
 
       let indexPersone = this.listPersons.findIndex(item => item.id === this.company.techLeadId);
-      if (indexPersone > -1) this.onSelectTechLead(indexPersone);
+      if (indexPersone > -1)  this.selectedTechLead = this.listPersons[indexPersone].name;
+    //  if (indexPersone > -1) this.onSelectTechLead(indexPersone);
 
       let indexType = this.companyTypes.findIndex(item => item.value === this.company.clientType);
       if (indexType > -1) this.onSelectCompanyTypes(indexType);
@@ -146,12 +149,23 @@ public onCheckGoogleAutoComplete () {
     this.company.clientType = this.companyTypes[index].value;
     this.validate.resetType();
   }
-
-  public onSelectTechLead(index) {
+  public onSelectTechLead(event) {
+    if (event) {
+      this.company.techLeadId = event.id;
+      this.selectedTechLead = null;
+    } else {
+      this.company.techLeadId = null;
+    
+    }
+    //this.listPersons.forEach(item => item.selected = false);
+  //  this.listPersons[index].selected = true;
+  
+  }
+ /* public onSelectTechLead(index) {
     this.listPersons.forEach(item => item.selected = false);
     this.listPersons[index].selected = true;
     this.company.techLeadId = this.listPersons[index].id;
-  }
+  }*/
   public onSelectPaymentTerms(index) {
     this.paymentTerms.forEach(item => item.selected = false);
     this.paymentTerms[index].selected = true;
@@ -199,6 +213,9 @@ public onCheckGoogleAutoComplete () {
     this.company.addresses[0].locale = data.name;
     this.company.addresses[0].timeZone = data;
   }
+  onSelectClientIndustry (item) {
+    this.company.clientIndustry.name = item
+  }
   public onChangeTags(tags) {
     console.log('tags',tags);
     this.company.setTags(tags);
@@ -243,8 +260,9 @@ public onCheckGoogleAutoComplete () {
 
     list.forEach((item) => {
       if (item.accountType === "TECH" && !item.deletedAt) {
-        item.selected = false;
-        this.listPersons.push(item);
+       // item.selected = false;
+     //   this.listPersons.push(item);
+     this.listPersons.push(new ItemFilterPerson(item.id,`${item.firstName} ${item.lastName}`));
       }
 
     })
@@ -261,11 +279,11 @@ public onCheckGoogleAutoComplete () {
     if (index > -1) return this.companyTypes[index].title;
     return "";
   }
-  getSelectedTechLead() {
+ /* getSelectedTechLead() {
     let index = this.listPersons.findIndex(item => item.selected === true);
     if (index > -1) return this.listPersons[index].firstName + ' ' + this.listPersons[index].lastName;
     return "";
-  }
+  }*/
   getSelectedServiceType() {
     let index = this.serviceTypes.findIndex(item => item.selected === true);
     if (index > -1) return this.serviceTypes[index].title;

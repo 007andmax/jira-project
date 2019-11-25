@@ -19,6 +19,7 @@
         [matChipInputFor]="chipList"
         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
         [matChipInputAddOnBlur]="addOnBlur"
+        (input)="onSearch($event)"
         (matChipInputTokenEnd)="add($event)">
     </mat-chip-list>
 

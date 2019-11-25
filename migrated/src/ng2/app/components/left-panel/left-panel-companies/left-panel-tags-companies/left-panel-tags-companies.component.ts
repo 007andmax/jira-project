@@ -24,6 +24,7 @@ export class LeftPanelTagsCompaniesComponent implements OnInit, OnDestroy {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   tagCtrl = new FormControl();
   selectedTag = [];
+  reqTags: Array<Tag> = [];
   tags: Array<Tag> = [];
   sub = new Subscription();
   editItem:any;
@@ -48,12 +49,16 @@ export class LeftPanelTagsCompaniesComponent implements OnInit, OnDestroy {
     this.tagsService.getTags().subscribe((data) => {
       this.tags = data.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
       1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
+      this.reqTags = data;
     })
     
      
   }
 
- 
+  onSearch(event) {
+    console.log('eve', event.target.value);
+    this.tags = this.reqTags.filter(item => item.word.includes(event.target.value));
+  }
    
 
   /**
@@ -73,7 +78,9 @@ if (this.blockCreateTag) return;
 
       this.tagsService.setTags(tag.word).subscribe((res) => {
         tag.id = res.id;
-        this.tags.push(tag);
+        
+        this.reqTags.push(tag);
+        this.tags = this.reqTags;
         this.selectedTag.push(tag);
        this.tagsChange.emit(this.selectedTag);
       });
@@ -103,9 +110,11 @@ if (this.blockCreateTag) return;
    */
   public selected(tag): void {
     this.selectedTag.push(tag);
+  
     this.tagsChange.emit(this.selectedTag);
   //  this.userInput.nativeElement.blur();
     this.tagCtrl.setValue(null);
+    this.tags = this.reqTags;
   }
 
   /**
@@ -113,6 +122,7 @@ if (this.blockCreateTag) return;
    */
   public close() {
     this.selectedTag = [];
+    this.tags = this.reqTags;
     this.tagsChange.emit(this.selectedTag);
   }
 

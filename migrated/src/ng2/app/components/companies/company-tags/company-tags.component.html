@@ -19,7 +19,9 @@
         [matChipInputFor]="chipList"
         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
         [matChipInputAddOnBlur]="addOnBlur"
-        (matChipInputTokenEnd)="add($event)">
+        (input)="onSearch($event)"
+        (keyup)="onKeyUp($event)"
+        >
     </mat-chip-list>
 
   </mat-form-field>

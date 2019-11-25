@@ -51,7 +51,9 @@
         </div>
         <div class="col-md-6">
           <p>Client Type</p>
-          <div class="light-dropdown" ngbDropdown>
+          <app-select-search [editItem]="(company.clientIndustry.name) ? company.clientIndustry.name : null"  [list]="industries" (onSelectedItem)="onSelectClientIndustry($event)"></app-select-search>
+     
+        <!--  <div class="light-dropdown" ngbDropdown>
             <i class="icn-sm report-caret-icon"></i>
             <input type="text"
                    [value]="(company.clientIndustry.name) ? company.clientIndustry.name : ''"
@@ -61,7 +63,7 @@
                 <button ngbDropdownItem [textContent]="item" (click)="company.clientIndustry.name = item"></button>
               </ng-template>
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="col-md-12" [ngClass]="{'error-field':!validate.getDomain() }">
           <mat-error *ngIf="!validate.getDomain()">
@@ -222,7 +224,9 @@
         </div>
         <div class="col-md-6">
           <p>Sales Person</p>
-          <div class="light-dropdown" ngbDropdown>
+          <app-select-search [editItem]="selectedTechLead"  [field]="'name'"  [list]="listPersons" (onSelectedItem)="onSelectTechLead($event)"></app-select-search>
+        
+         <!--<div class="light-dropdown" ngbDropdown>
             <i class="icn-sm report-caret-icon"></i>
             <input type="text" [value]="getSelectedTechLead()" autocomplete="new-password"
                    placeholder="Select Sales Person"
@@ -233,7 +237,7 @@
                         (click)="onSelectTechLead(i)"></button>
               </ng-template>
             </div>
-          </div>
+          </div> -->
         </div>
         <app-company-tags (tagsChange)="onChangeTags($event)"></app-company-tags>
         <div class="col-md-12 editable-field">
