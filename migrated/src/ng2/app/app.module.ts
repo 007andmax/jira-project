@@ -87,6 +87,13 @@ import { DraftEmailComponent } from './components/shared/draft-email/draft-email
 import { DraftEmailRecipientsComponent } from './components/shared/draft-email/draft-email-recipients/draft-email-recipients.component';
 import { LeftPanelTagsCompaniesComponent } from './components/left-panel/left-panel-companies/left-panel-tags-companies/left-panel-tags-companies.component';
 import { SelectSearchComponent } from './components/shared/select-search/select-search.component';
+import { CompanyPasswordManagerComponent } from './components/company-password-manager/company-password-manager.component';
+import { CompanyPasswoordManagerHeaderComponent } from './components/company-password-manager/passwoord-manager-header/passwoord-manager-header.component';
+import { CompanyPasswordManagerEditAsideComponent } from './components/company-password-manager/password-manager-edit-aside/password-manager-edit-aside.component';
+import { CompanyPasswordManagerTableComponent } from './components/company-password-manager/password-manager-table/password-manager-table.component';
+import { FilterPipe } from './pipe/filter.pipe';
+import { ClickOtsideDirective } from './directives/click-otside.directive';
+import { SortByPipe } from './pipe/sort-by.pipe';
 
 
 /**
@@ -112,6 +119,9 @@ angular.module('quicktech')
   .directive(
     'passwordManager',
     downgradeComponent({component: PasswordManagerComponent}))
+  .directive(
+      'companyPasswordManager',
+      downgradeComponent({component: CompanyPasswordManagerComponent}))
   .directive(
     'leftPanelComponent',
     downgradeComponent({component: LeftPanelComponent}))
@@ -199,7 +209,13 @@ angular.module('quicktech')
     DraftEmailRecipientsComponent,
     LeftPanelTagsCompaniesComponent,
     SelectSearchComponent,
-    
+    CompanyPasswordManagerComponent,
+    CompanyPasswoordManagerHeaderComponent,
+    CompanyPasswordManagerEditAsideComponent,
+    CompanyPasswordManagerTableComponent,
+    FilterPipe,
+    ClickOtsideDirective,
+    SortByPipe
   ],
   imports: [
     BrowserModule,
@@ -229,6 +245,11 @@ angular.module('quicktech')
         {
           path: 'ng2/password-manager',
           component: PasswordManagerComponent,
+          pathMatch: 'full'
+        },
+        {
+          path: 'ng2/company-password-manager',
+          component: CompanyPasswordManagerComponent,
           pathMatch: 'full'
         },
         {
@@ -269,14 +290,15 @@ angular.module('quicktech')
   entryComponents: [
     LeftPanelComponent,
     ModalQuoteComponent,
+    ConfirmComponent,
     QuotesComponent,
     QuoteCreateComponent,
     QuotePreviewComponent,
     PasswordManagerComponent,
     CompaniesComponent,
-    ConfirmComponent,
     DownloadAgentComponent,
-    ImageCropperComponent
+    ImageCropperComponent,
+    CompanyPasswordManagerComponent
     // RecurringTicketsComponent
   ],
   providers: [

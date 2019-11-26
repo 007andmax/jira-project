@@ -24,6 +24,7 @@ export class QuoteCreateContentTopComponent implements OnInit {
   public editMode: any;
   public currentClient = null;
   public errorMessage:string = null;
+  public description:string = '';
 
   /**
   *Creates an instance of the QuoteCreateContentTopComponent with the injected services
@@ -55,6 +56,11 @@ export class QuoteCreateContentTopComponent implements OnInit {
     this.quoteStateService.getErrorHandle().subscribe((data) => {
       this.errorMessage = data;
     })
+  }
+
+  onChangeDescription (event) {
+    
+    this.quoteStateService.setDescription(event.target.value);
   }
 
   /**
@@ -114,6 +120,8 @@ export class QuoteCreateContentTopComponent implements OnInit {
       this.partialDeposit = this.quoteStateService.getPartialDeposit();
       this.purchaseOrder = this.quoteStateService.getPurchaseOrder();
       this.requestPayment = this.quoteStateService.getRequestPayment();
+     
+      this.description = this.quoteStateService.getDescription();
     }
   }
 

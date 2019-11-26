@@ -1,5 +1,5 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, EventEmitter, OnInit, Output, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, ValidationErrors } from '@angular/forms';
 import { Observable, Subject, merge, Subscription } from 'rxjs';
 import { ISubscription } from "rxjs/Subscription";
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
@@ -15,7 +15,7 @@ import { UsersService } from "../../../services/users/users.service";
 import { GadgetsService } from "../../../services/gadgets/gadgets.service";
 import { PermissionsService } from "../../../services/permissions/permissions.service";
 import { ApiPasswordManagerService } from "../../../services/password-manager/api-password-manager.service";
-import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
+import { ShowHideService } from 'ngx-show-hide-password';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { DevicesSateService } from 'src/ng2/app/states/devices/devices-sate.service';
 
@@ -25,7 +25,8 @@ import { DevicesSateService } from 'src/ng2/app/states/devices/devices-sate.serv
 @Component({
   selector: 'app-password-manager-edit-aside',
   templateUrl: './password-manager-edit-aside.component.html',
-  styleUrls: ['./password-manager-edit-aside.component.scss']
+  styleUrls: ['./password-manager-edit-aside.component.scss'],
+  providers: [ShowHideService]
 })
 export class PasswordManagerEditAsideComponent implements OnInit {
 
@@ -70,7 +71,9 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public subGetDevices: ISubscription;
   public subGetCompaniesList: ISubscription;
   public opened: boolean = false;
-
+  showPassword: boolean = false;
+  isLoadPassword: boolean = false;
+   
   /**
    * Creates an instance of the PasswordManagerEditAsideComponent with the injected services
    * @param {ApiPasswordManagerService} apiPasswordManagerService Service to work with api
@@ -91,8 +94,9 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     private gadgetsService: GadgetsService,
     private permissionsService: PermissionsService,
     private apiPasswordManagerService: ApiPasswordManagerService,
-    private usersStateService: UsersStateService,
-    private companiesState:CompaniesStateService,
+    public cd: ChangeDetectorRef,
+    private showHideService:ShowHideService,
+    private companiesState: CompaniesStateService,
     private devicesSateService:DevicesSateService
   ) { }
 
@@ -105,6 +109,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.type = 0;
     this.currentType = PASSWORD_RECORD_TYPES[0];
     this.hideAddForm();
+    this.initForm();
   }
 
   /**
@@ -114,11 +119,16 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.submitted = false;
     this.showSelect = false;
     this.userDevice = [];
-    this.initForm();
+  //  this.initForm();
     this.clearClient();
     this.type = 0;
     this.currentTypeChoosen = PASSWORD_RECORD_TYPES[this.type];
     this.opened = !this.opened;
+    if (!this.opened) {
+      this.showPassword = false;
+      this.showHideService.setShow('password',false);
+      this.passwordManagerService.setPassword(null);
+    }
   }
 
   /**
@@ -129,7 +139,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       this.editItem = res;
       if (this.editItem) this.isEditmode = true;
       this.opened = true;
-      return this.initForm();
+      this.initForm();
     });
   }
 
@@ -164,20 +174,21 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   /**
    * init new form
    */
-  public initForm(){
+  public initForm() {
+   console.log('initForm');
     this.expiryDate = this.editItem && this.editItem.expiredDate ? this.getStartDate(this.editItem.expiredDate) : null;
     this.createPasswordRecord = this.fb.group({
       description: [this.editItem ? this.editItem.description : '', Validators.maxLength(5000)],
-      client: [this.editItem? this.getEditCompany(this.editItem.companyId) : this.selectedClient, [Validators.required]],
+      client: [this.editItem ? this.getEditCompany(this.editItem.companyId) : this.selectedClient, [Validators.required]],
       type: [this.editItem ? this.getEditTemplate(this.editItem.template) : PASSWORD_RECORD_TYPES[0], [Validators.required]],
       ssid: [this.editItem ? this.editItem.ssid : ''],
       userName: [this.editItem ? this.editItem.username : '', [Validators.required, Validators.maxLength(100)]],
-      password: [this.editItem ? this.editItem.password : '', [Validators.required, Validators.maxLength(100)]],
+      password: (this.editItem) ? [this.editItem.password] : ['', [Validators.required, Validators.maxLength(100)]],
       key: [this.editItem ? this.editItem.key : '', [Validators.maxLength(100)]],
       link: [''],
       url: [this.editItem ? this.editItem.url : '', [Validators.maxLength(255)]],
       code: [this.editItem ? this.editItem.code : ''],
-      userOrDevice: [this.editItem ? this.editItem.links :''],
+      userOrDevice: [this.editItem ? this.editItem.links : ''],
       ipAdres: [this.editItem ? this.editItem.ip : '', [Validators.pattern('^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$')]],
       port: [this.editItem ? this.editItem.port : ''],
       expiryDate: [this.editItem ? this.expiryDate : null, []],
@@ -192,15 +203,31 @@ export class PasswordManagerEditAsideComponent implements OnInit {
    * save new record
    */
   public save() {
+    
+    console.log('save',this.createPasswordRecord.value);
     this.submitted = true;
+    if (this.editItem && (!this.createPasswordRecord.value.password || this.createPasswordRecord.value.password.length === 0)  && this.passwordManagerService.getPassword() !== null)
+    {
+      const errors:ValidationErrors = {required: 'Field is required'};
+      this.createPasswordRecord.controls['password'].setErrors(errors);
+      this.cd.detectChanges();
+      return;
+    }
+   
     const isUserRequired = this.checkLinks();
     const isSsidRequired = this.checkSsid();
     if (this.type === 8) this.createPasswordRecord.controls['userName'].setValue('block');
     if (this.type !== 4) this.createPasswordRecord.controls['ipAdres'].setValue('');
-    if (this.createPasswordRecord.invalid || isUserRequired || isSsidRequired) return this.submitted;
+    if (this.createPasswordRecord.invalid || isUserRequired || isSsidRequired) {
+      this.cd.detectChanges();
+      return;
+    }
+  
+  
+    console.log('gggggggggggggggg');
     this.createPasswordRecord.controls['userOrDevice'].setValue(this.userDevice);
     if (this.isEditmode && this.editItem) {
-      this.subSaveEditRecord = this.passwordManagerService.editRecord(this.createPasswordRecord.value, this.editItem.id)
+      this.subSaveEditRecord = this.passwordManagerService.editRecord(this.createPasswordRecord.value,this.editItem.id)
         .subscribe((res) => this.afterSaveRecord());
     } else {
       this.subSaveRecord = this.passwordManagerService.saveRecord(this.createPasswordRecord.value)
@@ -212,14 +239,17 @@ export class PasswordManagerEditAsideComponent implements OnInit {
    * run methods after record is saved
    */
   public afterSaveRecord() {
-    this.addRecord.emit(true);
-    this.passwordManagerService.addRecord();
-    this.initForm();
-    this.showSelect = false;
+   this.addRecord.emit(true);
+   // this.passwordManagerService.addRecord();
+ //   this.initForm();
+ this._toggleSidebar();
+
+    /*this.showSelect = false;
     this.clearClient();
     this.submitted = false;
     this.type = 0;
-    this.opened = false;
+    this.opened = false;*/
+    this.cd.detectChanges();
   }
 
   /**
@@ -264,18 +294,19 @@ export class PasswordManagerEditAsideComponent implements OnInit {
    * change selected user and device
    */
   public changeSelectedUserAndDevices(newItem, index?, type?) {
-    const items =  this.selectedUserAndDevices.filter((item) => {
+    const items = this.selectedUserAndDevices.filter((item) => {
       return (item.item.id !== newItem.id)
     });
-    if (items.length <  this.selectedUserAndDevices.length) {
-      return this.selectedUserAndDevices = items;
+    if (items.length < this.selectedUserAndDevices.length) {
+        this.selectedUserAndDevices = items;
     } else {
-      return this.selectedUserAndDevices.push({
+        this.selectedUserAndDevices.push({
         item: newItem,
         index: index,
         type: type
       });
     }
+    console.log('this.selectedUserAndDevices',this.selectedUserAndDevices);
   }
 
   /**
@@ -283,13 +314,13 @@ export class PasswordManagerEditAsideComponent implements OnInit {
    * @param newItem - new item
    * @param type - type of new item
    */
-  private pushItemToUserDevice( newItem, type) {
+  private pushItemToUserDevice(newItem, type) {
     if (type === 'device') {
-      this.userDevice.push({deviceId: newItem.id})
-    } else if (type === 'user'){
-      this.userDevice.push({userId: newItem.id})
+      this.userDevice.push({ deviceId: newItem.id })
+    } else if (type === 'user') {
+      this.userDevice.push({ userId: newItem.id })
     } else {
-      this.userDevice.push({gadgetId: newItem.id})
+      this.userDevice.push({ gadgetId: newItem.id })
     }
   }
 
@@ -301,7 +332,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   private filterUserDevice(newItem, type) {
     if (type === 'device') {
       return this.userDevice.filter((item) => item.deviceId !== newItem.id);
-    } else if (type === 'user'){
+    } else if (type === 'user') {
       return this.userDevice.filter((item) => item.userId !== newItem.id);
     } else {
       return this.userDevice.filter((item) => item.gadgetId !== newItem.id);
@@ -313,10 +344,10 @@ export class PasswordManagerEditAsideComponent implements OnInit {
    * @param newItem - item
    * @param type - type of item
    */
-   private findItemInUserDevice(newItem, type) {
+  private findItemInUserDevice(newItem, type) {
     if (type === 'device') {
       return this.userDevice.filter((item) => item.deviceId === newItem.id);
-    } else if (type === 'user'){
+    } else if (type === 'user') {
       return this.userDevice.filter((item) => item.userId === newItem.id);
     } else {
       return this.userDevice.filter((item) => item.gadgetId === newItem.id);
@@ -330,14 +361,16 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public getCompanyDevices(companyId) {
     this.selectedClient = companyId.item;
     this.clearClient();
-    companyId.item && this.getAllUsers(companyId.item.id);
+   
     this.getGadgets();
-  //  this.subGetDevices = this.devicesService.getCompanyDevices(companyId.item.id).subscribe((res) => {
+    this.subGetDevices = this.devicesService.getCompanyDevices(companyId.item.id).subscribe((res) => {
       if (this.devicesSateService.getAllDevices()[companyId.item.id]) {
         this.deviceCheckbox = new Array([...this.devicesSateService.getAllDevices()[companyId.item.id]].length);
         this.showGadgetsForm = false;
         for (var i = 0; i < this.deviceCheckbox.length; ++i) { this.deviceCheckbox[i] = false; }
-        this.devicesList = [...this.devicesSateService.getAllDevices()[companyId.item.id]];
+        this.devicesList = [...res[companyId.item.id]];
+        this.devicesList.sort((a, b) => (a.hostName.toLowerCase() > b.hostName.toLowerCase()) ?
+          1 : ((b.hostName.toLowerCase() > a.hostName.toLowerCase()) ? -1 : 0));
         if (this.isEditmode && this.editItem) {
           this.editItem.links.map((item) => {
             const index = this.devicesList.findIndex((deviceListItem) => {
@@ -348,8 +381,9 @@ export class PasswordManagerEditAsideComponent implements OnInit {
             }
           });
         }
+        companyId.item && this.getAllUsers(companyId.item.id);
       }
-   // });
+    });
     return this.selectedClient;
   }
 
@@ -361,7 +395,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     const clicksWithClosedPopup$ = this.click$.pipe(filter(() => !this.instance.isPopupOpen()));
     const inputFocus$ = this.focus$;
     return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
-      map(term => PASSWORD_RECORD_TYPES.sort().slice(0,9))
+      map(term => PASSWORD_RECORD_TYPES.sort().slice(0, 9))
     );
   };
 
@@ -391,7 +425,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
       map(term => (term === '' ? this.clientsList
         : this.clientsList && this.clientsList
-        .filter(v => v['name'].toLowerCase().indexOf(term.toLowerCase()) > -1)))
+          .filter(v => v['name'].toLowerCase().indexOf(term.toLowerCase()) > -1)))
     );
   };
 
@@ -430,8 +464,10 @@ export class PasswordManagerEditAsideComponent implements OnInit {
    * show selecct wrapper
    */
   public showSelectWrapper($event) {
+    
     this.showSelect = !this.showSelect;
     this.stopEvent($event);
+    this.cd.detectChanges();
   }
 
   /**
@@ -449,28 +485,59 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.stopEvent($event);
     this.currentTab = item;
     this.showGadgetsForm = false;
+    this.cd.detectChanges();
+  }
+
+  public togglePassword() {
+    if (!this.showPassword) {
+      if (this.editItem)
+      {
+        this.isLoadPassword = true;
+        this.apiPasswordManagerService.setOpenRecord(this.editItem.id).subscribe((data:any) => {
+          console.log('data',data);
+          this.passwordManagerService.setPassword(data.password);
+         
+          this.createPasswordRecord.controls['password'].setValue(data.password);
+          this.showPassword = !this.showPassword;
+          this.showHideService.setShow('password',true);
+          this.isLoadPassword = false;
+          this.cd.detectChanges();
+        })
+      } else {
+        this.showPassword = !this.showPassword;
+        this.showHideService.setShow('password',true);
+      }
+     
+    } else {
+      this.showPassword = !this.showPassword;
+      this.showHideService.setShow('password',false);
+    }
   }
 
   /**
    * get all users
    */
   private getAllUsers(companyId) {
-   // this.subGetAllUsers = this.userService.getAllusers().subscribe((res: any) => {
-      let list_users = this.usersStateService.getAllUsers().filter((item) =>  item.company.id == companyId && !item.deletedAt);
-      this.usersList = [...(list_users.filter((item) => item.accountType === USER.TYPE.CLIENT))];
+   this.userService.getAllusers().subscribe((res: any) => {
+     let data = res.filter((item) => item.company.id == companyId && !item.deletedAt);
+      this.usersList = [...(data.filter((item) => item.accountType === USER.TYPE.CLIENT))];
+     
+      this.usersList.sort((a, b) => (!a.firstName && !a.lastName || !b.firstName && !b.lastName || a.firstName.length === 0 && a.lastName.length === 0 || b.firstName.length === 0 && b.lastName.length === 0) ? -1 : (a.firstName.toLowerCase() > b.firstName.toLowerCase()) ?
+      1 : ((b.firstName.toLowerCase() > a.firstName.toLowerCase()) ? -1 : 0));
       this.usersCheckbox = new Array(this.usersList.length);
       for (var i = 0; i < this.usersCheckbox.length; ++i) { this.usersCheckbox[i] = false; }
       if (this.isEditmode && this.editItem) {
         this.editItem.links.map((item) => {
-          const index = this.usersList.findIndex((userListItem) => {
-            return userListItem.id === item.userId
-          });
-          if (index > -1) {
-            this.toggleItem( this.usersList[index], 'user', index);
+          const index_res = res.findIndex(userListItem =>userListItem.id === item.userId);
+          const index = this.usersList.findIndex(userListItem =>userListItem.id === item.userId);
+          if (index > -1 && index_res > -1) {
+            this.toggleItem(this.usersList[index], 'user', index);
+          } else  if (index === -1 && index_res > -1) {
+            this.toggleItem(res[index_res], 'user', index);
           }
         });
       }
- //   })
+    })
   }
 
   /**
@@ -558,7 +625,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
    * get edit template
    */
   public getEditTemplate(template) {
-    const index  = PASSWORD_RECORD_TYPES.findIndex((item) => item.UPPERCASE === template);
+    const index = PASSWORD_RECORD_TYPES.findIndex((item) => item.UPPERCASE === template);
     this.currentType = PASSWORD_RECORD_TYPES[index];
     this.changeType(this.currentType);
     return PASSWORD_RECORD_TYPES[index];
@@ -570,7 +637,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   public getEditCompany(id) {
     if (this.clientsList) {
       const company = this.clientsList.filter((item) => item.id === id);
-      this.getCompanyDevices({item: company[0]});
+      this.getCompanyDevices({ item: company[0] });
       return this.selectedClient = company[0];
     }
   }
@@ -590,9 +657,10 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   /**
    * delete record
    */
-  public deleteRecord(recordId){
+  public deleteRecord(recordId) {
     this.passwordManagerService.deleteRecordFromEditForm(recordId);
-    this.hideAddForm();
+   // this.hideAddForm();
+   this._toggleSidebar();
   }
 
   /**
@@ -615,6 +683,10 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.subSaveRecord && this.subSaveRecord.unsubscribe();
     this.subGetDevices && this.subGetDevices.unsubscribe();
     this.subGetCompaniesList && this.subGetCompaniesList.unsubscribe();
+  }
+
+  public trackByIndex(index, item) {
+    return index;
   }
 
   /**

@@ -5,6 +5,7 @@ import { UsersService } from "../users/users.service";
 import { CompaniesService } from "../company/companies.service";
 import { QuoteRealTimeService } from "../../components/billing/quotes/quote-realtime/quote-realtime.service";
 import { RecurringTicketsRealTimeService } from '../../components/tickets/recurring-tickets/services/recurring-tickets-real-time.service';
+import { PasswordManagerService } from '../password-manager/password-manager.service';
 import { UsersStateService } from '../../states/users/users-state.service';
 import { CompaniesRealTimeService } from '../../states/company/companies-real-time.service';
 
@@ -31,7 +32,8 @@ export class WebsocketService {
     private quoteRealTimeService: QuoteRealTimeService,
     private recurringTicketsRealTimeService: RecurringTicketsRealTimeService,
     private usersState:UsersStateService,
-    private companiesRealTimeService:CompaniesRealTimeService
+    private companiesRealTimeService:CompaniesRealTimeService,
+    private passwordManagerService: PasswordManagerService,
 
     
   ) {
@@ -47,6 +49,7 @@ export class WebsocketService {
       that.subsribeToRecurringTickets();
       that.subsribeToUsers();
       that.subsribeToCompany();
+      that.subsribeToPasswordRecods();
     });
   }
 
@@ -147,7 +150,7 @@ export class WebsocketService {
           var newChange = JSON.parse(message.body);
           this.quoteRealTimeService.handleRealTimeChanges(newChange);
           if (message.body) {
-            console.log('test')
+         
           }
         });
       });
@@ -175,17 +178,33 @@ export class WebsocketService {
    * subscribe to recurring tickets realtime
    */
   public subsribeToRecurringTickets() {
-    console.log('subsribeToRecurringTickets');
+   
     setTimeout(() => {
       this.companiesService.getTechCompany().subscribe((res) => {
         this.stompClient.subscribe(`/user/watch/recurringTickets/${res['id']}`, (message) => {
           var newChange = JSON.parse(message.body);
           this.recurringTicketsRealTimeService.handleRealTimeChanges(newChange);
           if (message.body) {
-            console.log('test')
+         
           }
         });
       });
+    }, 3000);
+  }
+
+   /**
+   * subscribe to recurring tickets realtime
+   */
+  public subsribeToPasswordRecods() {
+   
+    setTimeout(() => {
+     
+        this.stompClient.subscribe(`/user/watch/passwordRecords`, (message) => {
+          var newChange = JSON.parse(message.body);
+          this.passwordManagerService.handleRealTimeChanges(newChange);
+        
+        });
+     
     }, 3000);
   }
 

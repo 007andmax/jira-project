@@ -7,7 +7,9 @@
 
       var ACTIONS = {
         'CLAIM_TICKET': function (ticket) {
-          return isTicketOpen(ticket) && !ticket.assignedUser;
+
+         // if (!ticket.multiAssignedUsers) return false;
+          return ticket.status === null && !isSpamOrTrash(ticket);
         },
         'CHANGE_STATUS': isUpdateAllowed,
         'CHANGE_PRIORITY': isTicketOpen,
@@ -65,46 +67,48 @@
         },
         'USER_TIP': function (ticket, type) {
 
-          if (!ticket.assignedUser) {
+          if (!ticket.assignedUser && ticket.multiAssignedUsers && ticket.multiAssignedUsers.length == 0) {
             return false
           }
 
-          if (ticket && ticket.assignPerformer && ticket.assignPerformer.id && ticket.assignedUser && ticket.assignedUser.id) {
+
+
+          if (ticket && ticket.assignPerformer && ticket.assignPerformer.id && ticket.assignedUser && ticket.assignedUser.id || ticket && ticket.assignPerformer && ticket.assignPerformer.id && ticket.multiAssignedUsers.length > 0) {
 
             var user = $rootScope.currentUser,
-              otherAPerformerAndAUser = ticket.assignPerformer.id !== ticket.assignedUser.id;
-
+              otherAPerformerAndAUser = ticket.assignedUser && ticket.assignPerformer.id !== ticket.assignedUser.id;
+            var indexUser = (ticket.multiAssignedUsers) ? ticket.multiAssignedUsers.findIndex(user_s => user_s.id === user.id) : -1;
             switch (type) {
               case 'ASSIGNED_TO_ME':
-                return (ticket.assignPerformer.id !== user.id) && (ticket.assignedUser.id === user.id) && !ticket.isReassigned;
+                return (ticket.assignPerformer.id !== user.id) && (ticket.assignedUser && ticket.assignedUser.id === user.id) && !ticket.isReassigned;
 
               case 'RE-ASSIGNED_TO_ME':
-                return (ticket.assignPerformer.id !== user.id) && (ticket.assignedUser.id === user.id) && ticket.isReassigned;
+                return (ticket.assignPerformer.id !== user.id) && (ticket.assignedUser && ticket.assignedUser.id === user.id) && ticket.isReassigned;
 
               case 'I_ASSIGNED_TO_USER':
-                return (ticket.assignPerformer.id === user.id) && (ticket.assignedUser.id !== user.id) && !ticket.isReassigned;
+                return (ticket.assignPerformer.id === user.id) && (ticket.assignedUser && ticket.assignedUser.id !== user.id) && !ticket.isReassigned;
 
               case 'I_RE-ASSIGNED_TO_USER':
-                return (ticket.assignPerformer.id === user.id) && (ticket.assignedUser.id !== user.id) && ticket.isReassigned;
+                return (ticket.assignPerformer.id === user.id) && (ticket.assignedUser && ticket.assignedUser.id !== user.id) && ticket.isReassigned;
 
               case 'USER_CLAIMED':
-                return (ticket.assignPerformer.id !== user.id) && (ticket.assignedUser.id === ticket.assignPerformer.id);
+                return (ticket.assignPerformer.id !== user.id) && (ticket.assignedUser && ticket.assignedUser.id === ticket.assignPerformer.id);
 
               case 'USER_RE-ASSIGNED_USER':
-                return ticket.assignPerformer.id !== user.id && ticket.assignedUser.id !== user.id && otherAPerformerAndAUser && ticket.isReassigned;
+                return ticket.assignPerformer.id !== user.id && ticket.assignedUser && ticket.assignedUser.id !== user.id && otherAPerformerAndAUser && ticket.isReassigned;
 
               case 'USER_ASSIGNED_USER':
-                return ticket.assignPerformer.id !== user.id && ticket.assignedUser.id !== user.id && otherAPerformerAndAUser && !ticket.isReassigned;
+                return ticket.assignPerformer.id !== user.id && ticket.assignedUser && ticket.assignedUser.id !== user.id && otherAPerformerAndAUser && !ticket.isReassigned;
 
               case 'MY_TICKET':
-                return (ticket.assignPerformer.id === user.id) && (ticket.assignedUser.id === user.id);
+                return (ticket.assignPerformer.id === user.id) && (ticket.assignedUser && ticket.assignedUser.id === user.id) || (ticket.assignPerformer.id === user.id) && indexUser > -1;
             }
           }
         },
         'STATUS_VISIBLE': function (ticket) {
           return !isSpamOrTrash(ticket);
         },
-        'UPDATE': isUpdateAllowed,
+        'UPDATE': isUpdateModeAllowed,
         'UPDATE_AND_CLOSE': isUpdateAllowed,
         'DELETE_UPDATE': editTicketUpdate,
         'EDIT_UPDATE': editTicketUpdate,
@@ -133,22 +137,48 @@
 
         return ticket.closedAt >= (now - thirtyDaysInMs);
       }
-
-      function isUpdateAllowed(ticket) {
-        if ($rootScope.currentUser && $rootScope.currentUser.isOwner && ticket.assignedUser && ticket.assignedUser.id && isTicketOpen(ticket)) {
+      function isUpdateModeAllowed(ticket) {
+       if (!ticket.status)return false;
+        if ($rootScope.currentUser && $rootScope.currentUser.isOwner && ticket.assignedUser && ticket.assignedUser.id && isTicketOpen(ticket) || $rootScope.currentUser && $rootScope.currentUser.isOwner && ticket.multiAssignedUsers && ticket.multiAssignedUsers.length > 0 && isTicketOpen(ticket)) {
+       
           return true;
         }
 
-        if (PermissionsService.isAllowed('EDIT_ANOTHER_USERS_TICKET') && ticket.assignedUser && ticket.assignedUser.id && isTicketOpen(ticket)) {
+        if (PermissionsService.isAllowed('EDIT_ANOTHER_USERS_TICKET') && ticket.assignedUser && ticket.assignedUser.id && isTicketOpen(ticket) || PermissionsService.isAllowed('EDIT_ANOTHER_USERS_TICKET') && ticket.multiAssignedUsers && ticket.multiAssignedUsers.length > 0 && isTicketOpen(ticket)) {
 
-          // console.log('ACTION IS ALLOWEDDDD')
+       
           return true;
         }
-
+        let indexUser = -1;
+        if ($rootScope.currentUser && ticket.multiAssignedUsers && ticket.multiAssignedUsers.length) {
+          indexUser = ticket.multiAssignedUsers.findIndex(item => item.id == $rootScope.currentUser.id);
+        }
         return isTicketOpen(ticket) &&
           (($rootScope.currentUser && (ticket.assignedUser && ticket.assignedUser.id === $rootScope.currentUser.id)) ||
-          (ticket.assignedUser && ticket.assignedUser.id === $rootScope.currentUser.id) ||
-          isSharedToCurrentUser(ticket));
+            (ticket.assignedUser && ticket.assignedUser.id === $rootScope.currentUser.id) || indexUser > -1 ||
+            isSharedToCurrentUser(ticket));
+      }
+
+      function isUpdateAllowed(ticket) {
+       
+        if ($rootScope.currentUser && $rootScope.currentUser.isOwner && ticket.assignedUser && ticket.assignedUser.id && isTicketOpen(ticket) || $rootScope.currentUser && $rootScope.currentUser.isOwner && ticket.multiAssignedUsers && ticket.multiAssignedUsers.length > 0 && isTicketOpen(ticket)) {
+       
+          return true;
+        }
+
+        if (PermissionsService.isAllowed('EDIT_ANOTHER_USERS_TICKET') && ticket.assignedUser && ticket.assignedUser.id && isTicketOpen(ticket) || PermissionsService.isAllowed('EDIT_ANOTHER_USERS_TICKET') && ticket.multiAssignedUsers && ticket.multiAssignedUsers.length > 0 && isTicketOpen(ticket)) {
+
+      
+          return true;
+        }
+        let indexUser = -1;
+        if ($rootScope.currentUser && ticket.multiAssignedUsers && ticket.multiAssignedUsers.length) {
+          indexUser = ticket.multiAssignedUsers.findIndex(item => item.id == $rootScope.currentUser.id);
+        }
+        return isTicketOpen(ticket) &&
+          (($rootScope.currentUser && (ticket.assignedUser && ticket.assignedUser.id === $rootScope.currentUser.id)) ||
+            (ticket.assignedUser && ticket.assignedUser.id === $rootScope.currentUser.id) || indexUser > -1 ||
+            isSharedToCurrentUser(ticket));
       }
 
       function editTicketUpdate(ticket, updateCreator) {
@@ -157,7 +187,7 @@
         }
 
         if (PermissionsService.isAllowed('EDIT_ANOTHER_USERS_TICKET') && ticket.assignedUser && isTicketOpen(ticket)) {
-          // console.log('ACTION IS ALLOWEDDDD')
+           
           return true;
         }
 
@@ -166,8 +196,8 @@
 
       function isSharedToCurrentUser(ticket) {
         return ticket.shares && ticket.shares.some(function (share) {
-            return share.user && share.user.id === $rootScope.currentUser.id;
-          });
+          return share.user && share.user.id === $rootScope.currentUser.id;
+        });
       }
 
       return {

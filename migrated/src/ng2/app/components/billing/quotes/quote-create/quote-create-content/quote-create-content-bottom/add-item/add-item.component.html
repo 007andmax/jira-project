@@ -1,7 +1,6 @@
-<div class="row" *ngIf="type && (itemListServices || itemListProducts)">
+<div class="row fixed-width" *ngIf="type && (itemListServices || itemListProducts)">
   <!-- IF SERVICE -->
   <div class="col-md-1"
-       style="width: 23%;"
        *ngIf="type === 'service'"
        (clickOutside)="hideDropDown($event)">
     <div class="light-dropdown">
@@ -22,16 +21,15 @@
   </div>
   <div class="col-md-2"
        *ngIf="type === 'service'">
-       <input type="text"
-       [disabled]="true"
-       placeholder="">
-    
-       
+    <input type="text"
+           [disabled]="true"
+           placeholder="">
+
+
   </div>
 
   <!-- IF PRODUCT -->
   <div class="col-md-3"
-       style="width: 59%;"
        *ngIf="type === 'product'">
     <div class="product-dropdown-new-ng light-dropdown">
       <app-product-list [itemList]="itemListProducts"
@@ -49,24 +47,24 @@
     </div>
   </div>
 
-  <div class="col-md-1 with-dollar">
+  <div class="col-md-4 with-dollar">
     <input type="text"
            [ngClass]="{'no-valid': isFormValid}"
            [disabled]="type === 'service'"
            placeholder="">
   </div>
-  <div class="col-md-1 with-percent">
+  <div class="col-md-4 with-percent">
     <input type="text"
            [ngClass]="{'no-valid': isFormValid}"
            [disabled]="type === 'service'"
            placeholder="">
   </div>
-  <div class="col-md-1 with-dollar">
+  <div class="col-md-4 with-dollar">
     <input type="text"
            [ngClass]="{'no-valid': isFormValid}"
            placeholder="">
   </div>
-  <div class="col-md-1">
+  <div class="col-md-4">
     <input type="text"
            [ngClass]="{'no-valid': isFormValid}"
            placeholder="">

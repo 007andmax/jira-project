@@ -15,7 +15,7 @@ export class ApiPasswordManagerService {
   public apiUrl = environment.apiUrl;
   public dataChange = new Subject<any>();
   private subGetRecords: ISubscription;
-
+  public companyRecords = new Subject<any>();
   /**
    * Password manager api service constructor
    * @param {HttpClient} http Service to work with request
@@ -24,12 +24,31 @@ export class ApiPasswordManagerService {
     private http: HttpClient
   ) {}
 
+   /**
+   * set action open record
+   */
+  public setOpenRecord(id) {
+    
+   return this.http.get(this.apiUrl + `passwordRecords/${id}/password`);
+  }
+
   /**
    * Get records list
    */
   public getRecords() {
+ 
     this.subGetRecords = this.http.get(this.apiUrl + 'passwordRecords').subscribe((response)=> {
       this.dataChange.next(response);
+    })
+  }
+
+   /**
+   * Get records list
+   */
+  public getCompanyRecords(id) {
+   
+    this.http.get(this.apiUrl + `passwordRecords/company/${id}`).subscribe((response)=> {
+      this.companyRecords.next(response);
     })
   }
 
@@ -37,6 +56,7 @@ export class ApiPasswordManagerService {
    * Get records list
    */
   public getRecordsNew() {
+    
     return this.http.get(this.apiUrl + 'passwordRecords');
   }
 
@@ -52,6 +72,6 @@ export class ApiPasswordManagerService {
    * Delete subscription
    */
   public deleteSubscription() {
-    this.subGetRecords.unsubscribe();
+  if (this.subGetRecords)  this.subGetRecords.unsubscribe();
   }
 }

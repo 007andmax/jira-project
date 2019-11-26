@@ -77,13 +77,7 @@
                   }
                 });
 
-                // var tags = ['first', 'second', 'third', 'fourth'];
-
-                // for (var i = 0; i < tags.length; i++) {
-                //   TagsService.saveForCompany({ word: tags[i] }, function(res) {
-                //     console.log(res);
-                //   })
-                // }
+              
               } else {
                 TagsService.getAll($scope, function (resp) {
                   $scope.result = resp;
@@ -126,7 +120,7 @@
                     $rootScope.shouldDownloadNewTags = true;
                   }
 
-                  // console.log(scrollTop, isNeedToLoadMoreTickets, menu[0], menu[0].scrollHeight, 'truee')
+                  
 
                   // if (isNeedToLoadMoreTickets && (!scope.tickets || scope.tickets.length < scope.globalSearch.count)) {
                   //   $scope.loadingOrRendering = true;
@@ -273,7 +267,7 @@
               };
               $scope.setDropdownOpened = function (open) {
 
-                // console.log('DSADADASDAS')
+                
                 if (!open) {
                   $scope.dropdownOpened = false;
                 }
@@ -296,7 +290,7 @@
             }
 
             // function searchTag(query, forceLoad, offset) {
-            //   // console.log(query, "QUEYR")
+            
             //   if (forceLoad || (query !== undefined && (lastQuery !== query || (query === '' && lastQuery === '')))) {
             //     areNewTagsDownloading = true;
             //
@@ -318,7 +312,7 @@
             //       lastQuery = query;
             //       areNewTagsDownloading = false;
             //
-            //       console.log($scope.result, 'result')
+            
             //     });
             //   }
             // }

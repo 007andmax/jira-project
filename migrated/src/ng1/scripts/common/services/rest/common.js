@@ -121,7 +121,7 @@
   services.factory('$exceptionHandler', ['$log', function($log) {
     return function myExceptionHandler(exception, cause) {
       //todo: send errors to the backend (need endpoint)
-      console.log('teste');
+     
       $log.warn(exception, cause);
     };
   }]);
@@ -162,10 +162,12 @@
           return redownload(url, true) && redownload(shortUrl);
         } else {
 
-          return redownload(url);
+       //   return redownload(url);
           if (fileFormat === '.pdf' || fileFormat === '.html') {
+          
             return redownload((url + fileFormat), true);
           } else {
+          
             return redownload((url + fileFormat));
           }
         }
@@ -193,7 +195,7 @@
         //   e.initEvent('click', true, true);
         //   link.dispatchEvent(e);
         //
-        //   console.log(link)
+      
         //   return true;
         // }
       } else if (isSafari) {

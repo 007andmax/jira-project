@@ -40,11 +40,11 @@
             $scope.invoiceBillTo = CompaniesService.getCompanyByAddressId(val.id);
 
             var companyData = CompaniesService.getCompanyData($scope, $scope.invoiceBillTo.id, function() {
-              // console.log(companyData, 'DATA DATA DATA')
+            
               $scope.invoiceBillTo.contacts = companyData.contacts;
             })
 
-            // console.log($scope.invoiceBillTo, 'billtotot')
+           
           }
 
         })
@@ -55,7 +55,7 @@
           TicketsService.deleteForever(ticket.id, function(res) {
 
           })
-          // console.log(ticket)
+         
         }
 
         $scope.$watch(function() {
@@ -88,7 +88,7 @@
 
           if (val) {
 
-            // console.log(val, 'val')
+            
             var companyName = val.companyName.$modelValue;
             var firstName = val.firstName.$modelValue;
             var lastName = val.lastName.$modelValue;
@@ -132,7 +132,7 @@
             company = CompaniesService.getCompanyByAddressId(company.id);
           }
 
-          // console.log(company, 'COMPANY')
+          
 
           $rootScope.savedCompanyId = company.id;
           $uibModal.open({
@@ -159,7 +159,7 @@
         $scope.sorted = function(arr) {
           var newArr = arr.slice();
           newArr.sort(function(a, b) {
-            // console.log(a, b)
+          
             return a.title.localeCompare(b.title);
           });
 
@@ -180,7 +180,7 @@
         };
 
         $scope.$on('$destroy', function() {
-          // console.log('billable ctrl has been destroyed')
+         
         })
 
         $scope.$watch(function() {
@@ -338,7 +338,7 @@
               discountType: 'PERCENT'
             };
             BillableService.saveBillableDiscount(data, function (resp) {
-              console.log("saveBillableDiscount: ", resp)
+              
             })
           }
           else {
@@ -348,7 +348,7 @@
               discountType: null
             };
             BillableService.saveBillableDiscount(data, function (resp) {
-              console.log(resp)
+           
             })
           }
 

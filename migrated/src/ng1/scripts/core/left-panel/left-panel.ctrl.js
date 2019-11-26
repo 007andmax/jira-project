@@ -24,7 +24,7 @@
         var $win = $(window);
 
         $scope.newAngular = $location.url().startsWith('/ng2') ? true :  false;
-
+ 
         $scope.globalSearch = SharedStateService.getSharedState('globalSearch');
         $scope.usersSharedState = usersSharedState;
         $scope.companiesSharedState = companiesSharedState;
@@ -63,7 +63,7 @@
 
         $scope.checkDublicateCategory = function() {
           var duplicateCategory = $scope.inventoryCategoryList.filter(function(item){
-            console.log(item.name, $scope.newCategory, '11');
+           
             return item.name.toLowerCase() === $scope.newCategory.toLowerCase();
           });
           if (duplicateCategory && duplicateCategory[0]) {
@@ -278,7 +278,7 @@
           return $rootScope.exampleCompanyDeleted;
         }, function(val) {
           if (val) {
-            console.log(val, '1235123');
+           
             TicketsService.getAllCounts(function (resp) {
               $scope.ticketsCounter = resp;
             });
@@ -299,11 +299,19 @@
         }
 
         $scope.activateCompanyProfileTab = function (tabToActivate) {
+          if (tabToActivate == 'CompanyProfilePasswordManagerPage') {
+
+            window.location.href = '#/ng2/company-password-manager';
+            return;
+          }
+         
           var tab = $scope[tabToActivate];
           deactivateAllCompanyProfileTabs();
           if (tab === false) {
             $scope[tabToActivate] = true;
           }
+         
+         
         };
 
         $scope.companyIconClick = function () {
@@ -693,14 +701,14 @@
         });
 
         $scope.$watch('ticketFilterTags', function (value) {
-          // console.log(value)
+         
 
           // var data = value.map(function(el) {
           //   return el.id;
           // })
           //
           // TicketsService.ticketSearch(data, function(resp) {
-          //   console.log(resp, "RESP")
+          
           // })
           // if (value !== "" && value !== " " && value.length > 0) {
           //   ticketsSharedState.filter.completed = false;
@@ -988,7 +996,7 @@
             value: jsonObj
           };
           CustomStorageService.saveUserCustomStorageItem(itemToSend, function (resp) {
-            //console.log(resp);
+            
           })
         };
 
@@ -998,7 +1006,7 @@
             colorCode: colorCode
           };
           ColorsService.putCompaniesColors(dataToSend, function (resp) {
-            //console.log(resp);
+          
           })
         };
 
@@ -1007,14 +1015,13 @@
         });
 
         $scope.changeUserColor = function (type, colorCode) {
-          //console.log("colorCode: ", colorCode);
-          //console.log("type: ", type);
+         
           var dataToSend = {
             type: type,
             colorCode: colorCode
           };
           ColorsService.putUsersColors(dataToSend, function (resp) {
-            //console.log(resp);
+            
           })
         };
 
@@ -1548,7 +1555,7 @@
             return 'inbox';
           } else if (url.indexOf('companies') > -1) {
             return 'companies';
-          } else if (url.indexOf('companyProfile') > -1) {
+          } else if (url.indexOf('companyProfile') > -1 || url.indexOf('company-password-manager') > -1) {
             return 'companyProfile';
           } else if (url.indexOf('users') > -1) {
             return 'users';

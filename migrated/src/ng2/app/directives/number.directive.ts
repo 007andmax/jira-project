@@ -17,8 +17,7 @@ export class numberDirective {
     ngOnInit() {
 
         this.element.nativeElement.addEventListener("input", (event) => {
-           // this.ValidateMoney(event);
-         //  console.log('-----------------------');
+         
            event.target.value = this.commonService.validateNumber(event.target.value);
         });
         if (this.money) {
@@ -28,10 +27,7 @@ export class numberDirective {
         }
       
     }
-  /*  ngAfterViewChecked () {
-     //   console.log('value',this.element.nativeElement.value);
-        this.ValidateMoney(this.element.nativeElement.value);
-    }*/
+  
     ValidateMoney(event: any) {
         let value = Number(event.target.value);
         if (!value && event.target.value !== "") {

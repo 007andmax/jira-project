@@ -77,7 +77,7 @@
   <div class="support-session-graph-content pull-right">
 
     <div class="avatar avatar-width pull-left">
-      <img ng-src="{{ getUserAvatarUrl(remoteSession.performer) }}"
+      <img ng-attr-src="{{getUserAvatarUrl(remoteSession.performer)}}"
            alt="..." class="img-circle avatar-120">
 
       <p class="ellipsis">{{ getUserName(remoteSession.performer) }}</p>
@@ -96,7 +96,7 @@
           ng-class="{'connected-success': isUserOnline(remoteSession)}"></span>
 
     <div class="avatar pull-right text-right">
-      <img ng-src="{{ getUserAvatarUrl() }}"
+      <img ng-attr-src="{{getUserAvatarUrl()}}"
            alt="..." class="img-circle avatar-120">
 
       <p>{{ remoteSession.userName }}</p>

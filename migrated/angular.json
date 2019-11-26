@@ -84,9 +84,7 @@
               "src/ng1/styles/customer-report.css",
               "src/ng1/styles/new-style.css",
               "src/ng1/styles/nv.d3.css",
-              "src/ng1/styles/daterangepicker.css",
-              "src/ng1/styles/proton.multi-list-picker.css",
-            
+              "src/ng1/styles/daterangepicker.css"
             ],
             "scripts": [
               "src/ng1/bower_components/jquery/dist/jquery.js",
@@ -139,7 +137,6 @@
               "src/ng1/scripts/core/services/services.mdl.js",
               "src/ng1/scripts/core/settings/settings.mdl.js",
               "src/ng1/scripts/core/tickets/tickets.mdl.js",
-              "src/ng1/scripts/core/tickets/time-picker/time-picker.mdl.js",
               "src/ng1/scripts/core/users/users.mdl.js",
               "src/ng1/scripts/admin/admin-services/customer-list.js",
               "src/ng1/scripts/admin/customer-list/customer-list.drv.js",
@@ -342,6 +339,7 @@
               "src/ng1/scripts/core/header/create-new-entity/create-new-entity.drv.js",
               "src/ng1/scripts/core/header/create-new-entity/create-product/create-product.ctrl.js",
               "src/ng1/scripts/core/header/create-new-entity/create-service/create-service.crtl.js",
+              "src/ng1/scripts/core/header/create-new-entity/create-preview/create-preview.ctrl.js",
               "src/ng1/scripts/core/header/create-new-entity/create-ticket/create-ticket.ctrl.js",
               "src/ng1/scripts/core/header/create-new-entity/create-user/create-user.ctrl.js",
               "src/ng1/scripts/core/header/global-search/adjust-height.drv.js",
@@ -469,7 +467,10 @@
               "src/ng1/scripts/js/vendors/date-range-picker/datepicker.js",
               "src/ng1/scripts/js/vendors/date-range-picker/datepicker.en.js",
               "src/ng1/scripts/js/handlebars-v3.0.3.js",
-              "src/ng1/scripts/core/user-list/user-list.ctrl.js"
+              "src/ng1/scripts/core/user-list/user-list.ctrl.js",
+              "src/ng1/scripts/core/assign-user-list/assign-user-list.ctrl.js",
+              "src/ng1/scripts/core/duration/duration.ctrl.js",
+              "src/ng1/scripts/core/time-picker/time-picker.ctrl.js"
             ],
             "es5BrowserSupport": true
           },

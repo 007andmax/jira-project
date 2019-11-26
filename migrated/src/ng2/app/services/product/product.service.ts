@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 
 import { environment } from "../../../environments/environment";
+import {  map } from 'rxjs/operators';
+import { CategoryProductitem } from 'src/ng2/class/category-product-item';
 
 /**
  * Product service to work with api
@@ -25,7 +27,8 @@ export class ProductService {
    * Get products categories
    */
   public getCategories() {
-    return this.http.get(`${this.apiUrl}products/autocompleteList`);
+    return this.http.get(`${this.apiUrl}products/autocompleteList`).pipe( map((data:any) =>  data.map(item => new CategoryProductitem(item))));
   }
+
 
 }

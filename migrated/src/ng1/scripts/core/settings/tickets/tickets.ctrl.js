@@ -17,15 +17,25 @@
           $scope.referenceDate = null;
         };
 
-        $scope.timePickerModel = $rootScope.currentUser.serviceExpenseDurationPresentation ?
-          $rootScope.currentUser.serviceExpenseDurationPresentation
+        $scope.timePickerModel = CompaniesService.getCurrentCompany().serviceExpenseDurationPresentation ?
+        CompaniesService.getCurrentCompany().serviceExpenseDurationPresentation
           : 'DURATION_PICKER';
-
+         
+        $scope.timePickerInterval = CompaniesService.getCurrentCompany().serviceExpenseDurationPickerInterval ?
+        CompaniesService.getCurrentCompany().serviceExpenseDurationPickerInterval
+          : 'FIVE_MINUTES';
+        $scope.setTimePickerInterval = function (type) {
+          $scope.timePickerInterval = type;
+         
+         
+          UsersService.changeTimePickerType($scope.timePickerModel,type);
+        };
         $scope.setTimePickerValue = function (type) {
           $scope.timePickerModel = type;
-          console.log('test');
+          $scope.timePickerInterval = ($scope.timePickerModel == 'DURATION_PICKER') ? 'FIVE_MINUTES'  : 'ONE_MINUTE';
+         
           $rootScope.currentUser.serviceExpenseDurationPresentation = type;
-          UsersService.changeTimePickerType(type);
+          UsersService.changeTimePickerType(type,$scope.timePickerInterval);
         };
 
         $scope.companyForSettingPage = CompaniesService.getCompanyForSettingPage(function () {

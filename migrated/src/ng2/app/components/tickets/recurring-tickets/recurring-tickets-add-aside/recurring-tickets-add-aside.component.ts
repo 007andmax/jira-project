@@ -29,11 +29,12 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   public servicesList = [];
   public products: Array<ForCreateProduct> = [];
   public services: Array<ForCreateService> = [];
-  public type: string = "products";
+  public type: string = "services";
   public selectedClient: any;
   public tehUsers = [];
   public validate: Validate = new Validate();
   copy: boolean = false;
+  
 
   /**
    * Creates an instance of the RecurringTicketsAddAsideComponent with the injected services
@@ -65,8 +66,58 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.showTicketRecurring();
     this.getItemListProducts();
-     
+    //this.recurringState.onInitClientList();
+    this.onCopyCreate();
 
+  }
+
+  public onCopyCreate() {
+    this.recurringState.getOnCopyCreate().subscribe(data => {
+     
+      this.opened = true;
+      this.onInitCreateMod();
+      this.onInitCloneCreate(data);
+    })
+  }
+
+  private onInitCloneCreate(data) {
+    this.createService.onInitClone();
+    this.createService.setDescription(data.description);
+    this.recurringState.getCreateTicket().setDescription(data.description);
+    this.tehUsers = data.assignedUsers;
+    
+    
+    this.devicesService.onInitHangle(data.company.id);
+    this.selectedClient = data.company;
+    this.createService.getStateDatePicker().onInitEditMode(new Date().getTime());
+    let currentDate = new Date();
+    this.onChangeDatePicker(new ChangeDatePicker(currentDate.getDate(),currentDate.getMonth() + 1,currentDate.getFullYear()))
+    
+    this.services = (data.services.length > 0) ? [] : [new ForCreateService()];
+    let services = [];
+    data.services.forEach((service, index) => {
+      let new_service = new ForCreateService();
+      new_service.onInitCopyCrete(service);
+      services.push(new_service);
+
+    });
+    this.services = (data.services.length > 0) ? services : [new ForCreateService()];;
+     
+    
+    this.products = (data.products.length > 0) ? this.createService.getProductsForEdit(data.products) : [new ForCreateProduct()];
+    this.createService.setTagsForEdit(data.tags);
+    data.tags.forEach(item => this.recurringState.getCreateTicket().addTag(item.id)); 
+    this.createService.setCreateTaskAdd(data.createTask);
+    this.createService.setRequireUpdateAdd(data.requireUpdate);
+    this.createService.setQuickCloseAdd(data.quickClose);
+    this.createService.getTehState().setUsersFromtEdit(data.assignedUsers);
+    data.assignedUsers.forEach(item => this.recurringState.getCreateTicket().addAssignedUsers(item.id)); 
+    this.createService.setCronForEdit(data.cronExpression);
+    this.onChangeCron(data.cronExpression)
+    this.getListServices(data.company);
+    
+    this.cd.detectChanges();
+    
   }
 
   /**
@@ -74,6 +125,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
   * @param data - date picker data
   */
   public onChangeDatePicker(data: ChangeDatePicker) {
+    
     this.recurringState.getCreateTicket().setStartDate(data.day, data.month, data.year, this.recurringState.getTehCompany().addresses[0].timeZone.timeOffset);
   }
 
@@ -97,12 +149,18 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.recurringState.getCreateTicket().setCronExpression(data);
   }
 
+  public onPastDescription(value) {
+    
+    this.recurringState.getCreateTicket().setDescription(value);
+  }
+
   /**
   * Subscribe to change description
   * @param event - description event
   */
   public onChangeDescription(event) {
     this.recurringState.getCreateTicket().setDescription(event.target.value);
+   
   }
 
   /**
@@ -180,7 +238,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
 
       this.selectedClient = null;
       this.recurringState.setClient(selectClient);
-      this.services = [new ForCreateService()];
+
     } else {
       this.recurringState.getCreateTicket().setCompany(selectClient.item.id);
       this.selectedClient = selectClient.item;
@@ -189,7 +247,24 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
       this.getCompanyDevices();
 
     }
-
+    if (this.services[0] instanceof ForCreateService)
+    {
+      
+      let servicesOld = JSON.parse(JSON.stringify(this.services));
+      this.services = [];
+      let services = [];
+    //  this.cd.detectChanges();
+      servicesOld.forEach((service, index) => {
+        let newService = {description:service.description, duration:(service.duration) ? service.duration : 1, name: ''}
+        let new_service = new ForCreateService(newService);
+        services.push(new_service);
+      });
+     
+      this.services = services;
+    }
+  
+   
+  //  this.services = [new ForCreateService()];
     this.cd.detectChanges();
 
   }
@@ -217,14 +292,31 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.cd.detectChanges();
   }
 
+  public onPastDescriptionService(value,i) {
+    this.services[i].description = value;
+   }
+
   /**
   * Set service item
  * @param item - service
   * @param index - index
   */
   public setService(item, index) {
-    item = { ...item, ...{ description: '', duration: (this.services[index].duration) ? this.services[index].duration : 1 } };
-    this.services[index] = new ForCreateService(item);
+    let newItem = { ...item, ...{ description: this.services[index].description, duration:(this.services[index].duration) ? this.services[index].duration : 1  } };
+   // let  service = new ForCreateService(newItem);
+    this.services[index] =  new ForCreateService(newItem);
+  /*  this.services[index].setName(item.name);
+    this.services[index].setVersionedId(item.setVersionedId);
+    this.services[index].setDuration( (this.services[index].duration) ? this.services[index].duration : 1);*/
+    this.cd.detectChanges();
+  /*  if (this.services[index] instanceof ForCreateService && this.services[index].versionedId) {
+    
+      this.services[index].setName(item.name);
+      this.services[index].setVersionedId(item.setVersionedId);
+    } else {
+      item = { ...item, ...{ description: '', duration: (this.services[index].duration) ? this.services[index].duration : 1 } };
+      this.services[index] = new ForCreateService(item);
+    }*/
   }
 
   /**
@@ -343,8 +435,8 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.recurringState.getCreateTicket().resetServices();
     this.createService.setRulesCreateTicket(this.recurringState.getCreateTicket());
     this.products.forEach((item: ForCreateProduct) => (item.name || item.description) && this.recurringState.getCreateTicket().addProdct(new CreateRecurringTicketsProduct(item.versionedId.id, item.quantity, item.discount)));
-    this.services.forEach((item: ForCreateService) => (item.name || item.description) && this.recurringState.getCreateTicket().addService(new CreateRecurringTicketsService(item.versionedId.id, item.description, item.duration)));
-    console.log('this.recurringState.getCreateTicket()', this.recurringState.getCreateTicket());
+    this.services.forEach((item: ForCreateService) => (item.name) && this.recurringState.getCreateTicket().addService(new CreateRecurringTicketsService(item.versionedId.id, item.description, item.duration)));
+     
     this.recurringService.createTicket(this.recurringState.getCreateTicket()).subscribe((res) => {
       this.alertState.oninitShowAlert("Recurring ticket has been created");
       if (!this.copy) {
@@ -363,8 +455,16 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     */
   public onInitAdd() {
     this.validate.checkValidat(this.recurringState.getCreateTicket());
-    if (!this.validate.getCompany() || !this.validate.getInterval()) return;
+  //  if (this.createService.getCloneMode() && this.checkServices()) return; 
+    if (!this.validate.getCompany() || !this.validate.getInterval() || this.createService.getCloneMode() && this.checkServices()) return;
     this.onInitCheckProduct();
+  }
+
+  private checkServices() {
+    this.services.forEach(item => item.checkService());
+     
+    let noValid = (this.services.findIndex(item => item.noValid) > -1) ? true :  false;
+    return noValid;
   }
 
   /**
@@ -372,7 +472,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
    */
   public close() {
     this.opened = false;
-    this.type = "products";
+    this.type = "services";
     this.selectedClient = null;
     this.tehUsers = [];
     this.companiesState.onInitClear();
@@ -388,10 +488,11 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.validate = new Validate();
     this.copy = false;
     this.createService.resetAddAdditionalOptions();
+    this.createService.resetCloneMode();
   }
 
   public trackById(index, item) {
-    return item.versionedId.id;
+    return (item.versionedId) ? item.versionedId.id : index;
   }
 
   public trackByIndex(index, item) {
@@ -405,8 +506,19 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.companiesState.onInitClear();
     this.createService.getDevicesState().onInitClear();
     this.selectedClient = null;
-    this.services = [new ForCreateService()];
-    this.type = "products";
+   // this.services = [new ForCreateService()];
+   let dataService = JSON.parse(JSON.stringify(this.services));
+    this.services = (this.services.length > 0) ? [] : [new ForCreateService()];
+    let services = [];
+    dataService.forEach((service, index) => {
+      let new_service = new ForCreateService();
+      new_service.setDescription(service.description);
+      services.push(new_service);
+
+    });
+    this.services = (dataService.length > 0) ? services : [new ForCreateService()];
+     
+    this.type = "services";
     this.validate = new Validate();
     // this.devicesList = [];
   }

@@ -253,7 +253,8 @@
 
       function generateInitials(user) {
         var initials = [user.firstName, user.lastName].map(function (s) {
-          return s && s.charAt(0).toUpperCase();
+          if (s == null) return  '';
+          return s.charAt(0).toUpperCase();
         }).join('');
         Utils.defineReadOnlyProperty(user, 'initials', initials);
       }
@@ -721,8 +722,8 @@
         });
       }
 
-      function changeTimePickerType(type) {
-        $http.put('/settings/companyProfile/serviceExpenseDurationPresentation', { presentation: type  }).then(function (resp) {
+      function changeTimePickerType(type,interval) {
+        $http.put('/settings/companyProfile/serviceExpenseDurationPresentation', { presentation: type ,interval:interval }).then(function (resp) {
           if (status === 200) {
             $rootScope.currentUser.serviceExpenseDurationPresentation = type;
           }

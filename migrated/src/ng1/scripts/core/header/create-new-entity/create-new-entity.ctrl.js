@@ -77,7 +77,7 @@
           alreadyPushCloseButton = false;
         }
 
-
+      
         $scope.closeWindowWithConfirm = function () {
           alreadyPushCloseButton = true;
           $scope.$broadcast('createNewWindowClosing');
@@ -139,6 +139,7 @@
         $scope.PermissionsService = PermissionsService;
 
         $scope.$on('createNewEntity', function (event, type) {
+        
           var unsubscribe = $scope.$on('new' + type.charAt(0).toUpperCase() + type.slice(1) + 'HasBeenCreated',
             function (e, id) {
               var savedState = $scope.savedState;

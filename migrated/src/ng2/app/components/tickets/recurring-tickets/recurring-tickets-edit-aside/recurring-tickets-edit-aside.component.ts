@@ -30,7 +30,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   public servicesList = [];
   public products: Array<ForCreateProduct> = [];
   public services: Array<ForCreateService> = [];
-  public type: string = "products";
+  public type: string = "services";
   public selectedClient: any;
   public devicesList = [];
   public tehUsers = [];
@@ -93,13 +93,16 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   * Initializes edit mod
   */
   private onEditEditMode(data: RecurringTicket) {
+     
     this.createService.setDescription(data.description);
     this.ticketForEdit = data;
+    this.tehUsers = data.assignedUsers;
     this.selectClient({ item: data.company });
     this.companiesState.setCompanyFromtEdit(data.company);
     this.devicesService.onInitHangle(data.company.id);
     this.selectedClient = data.company;
     this.createService.getStateDatePicker().onInitEditMode(data.startDate);
+    
     this.products = (data.products.length > 0) ? this.createService.getProductsForEdit(data.products) : [new ForCreateProduct()];
     this.services = (data.services.length > 0) ? this.createService.getServicesForEdit(data.services, data.serviceErrors) : [new ForCreateService()];
     this.createService.setTagsForEdit(data.tags);
@@ -111,7 +114,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.onChangeCron(data.cronExpression)
     this.getListServices(data.company);
     this.cd.detectChanges();
-
+ 
   }
 
   /**
@@ -135,12 +138,23 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.recurringState.getCreateTicket().setCronExpression(data);
   }
 
+  public onPastDescriptionService(value,i) {
+   this.services[i].description = value;
+  }
+
+  public onPastDescription(value) {
+     
+    this.recurringState.getCreateTicket().setDescription(value);
+  }
+
   /**
   * Subscribe to change description
   * @param event - description event
   */
   public onChangeDescription(event) {
+   
     this.recurringState.getCreateTicket().setDescription(event.target.value);
+    
   }
 
   /**
@@ -196,19 +210,37 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
 * @param selectClient - company
 */
   public selectClient(selectClient) {
+     
     this.validate.resetCompany();
     if (selectClient === 'null') {
       this.recurringState.getCreateTicket().setCompany(null);
       this.selectedClient = null;
       this.recurringState.setClient(selectClient);
-      this.services = [new ForCreateService()];
+     
+    //  this.services = [new ForCreateService()];
     } else {
       this.recurringState.getCreateTicket().setCompany(selectClient.item.id);
       this.selectedClient = selectClient.item;
       this.recurringState.setClient(selectClient);
-      if (this.ticketForEdit !== null && this.ticketForEdit.company.name !== this.recurringState.getCreateTicket().getCompany()) this.services = [new ForCreateService()];
+     // if (this.ticketForEdit !== null && this.ticketForEdit.company.name !== this.recurringState.getCreateTicket().getCompany()) this.services = [new ForCreateService()];
       this.onCheckListServices();
       this.getCompanyDevices();
+    }
+    if (this.services[0] instanceof ForCreateService)
+    {
+    
+      let servicesOld = JSON.parse(JSON.stringify(this.services));
+      this.services = [];
+      let services = [];
+    //  this.cd.detectChanges();
+      servicesOld.forEach((service, index) => {
+        let newService = {description:service.description, duration:(service.duration) ? service.duration : 1, name: ''}
+        let new_service = new ForCreateService(newService);
+       
+        services.push(new_service);
+      });
+      
+      this.services = services;
     }
     this.cd.detectChanges();
 
@@ -230,10 +262,23 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
 * @param item - service
  * @param index - index
  */
-  public setService(item, index) {
+public setService(item, index) {
+  let newItem = { ...item, ...{ description: this.services[index].description, duration:(this.services[index].duration) ? this.services[index].duration : 1  } };
+ // let  service = new ForCreateService(newItem);
+  this.services[index] =  new ForCreateService(newItem);
+/*  this.services[index].setName(item.name);
+  this.services[index].setVersionedId(item.setVersionedId);
+  this.services[index].setDuration( (this.services[index].duration) ? this.services[index].duration : 1);*/
+  this.cd.detectChanges();
+/*  if (this.services[index] instanceof ForCreateService && this.services[index].versionedId) {
+   
+    this.services[index].setName(item.name);
+    this.services[index].setVersionedId(item.setVersionedId);
+  } else {
     item = { ...item, ...{ description: '', duration: (this.services[index].duration) ? this.services[index].duration : 1 } };
     this.services[index] = new ForCreateService(item);
-  }
+  }*/
+}
 
   /**
  * Subscribe to change device
@@ -361,6 +406,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
       }
     }
     if (this.ticketForEdit && this.ticketForEdit.id) {
+     
       this.recurringState.getCreateTicket().checkForEdit(this.ticketForEdit);
       this.recurringService.editTicket(this.ticketForEdit, this.recurringState.getCreateTicket()).subscribe((res) => {
         this.close();
@@ -386,7 +432,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
  */
   public close() {
     this.opened = false;
-    this.type = "products";
+    this.type = "services";
     this.selectedClient = null;
     this.devicesList = [];
     this.tehUsers = [];
@@ -405,8 +451,16 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.createService.resetEditAdditionalOptions();
   }
 
+  public copyAndCreate () {
+    let data = JSON.parse(JSON.stringify(this.ticketForEdit));
+     
+    this.close();
+    this.recurringState.onInitCopyCreate(data);
+   
+  }
+
   public trackById(index, item) {
-    return item.versionedId.id;
+    return (item.versionedId) ?  item.versionedId.id : index;
   }
 
   public trackByIndex(index, item) {

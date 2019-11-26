@@ -226,7 +226,7 @@
 }
 
 .ticket-add .ticket--footer .shared-avatars .shared-avatar:not(:last-child) {
-  margin-right: 2px;
+  margin-right: 5px;
 }
 
 .ticket-add-content input::-webkit-outer-spin-button,
@@ -452,3 +452,15 @@
 .btn-add-container {
   position: relative;
 }
+.time-picker-item {
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+  width: 100%;
+}
+
+.start-end-picker-item .active {
+  background: #16a4fa;
+    color: #fff;
+}
+ 

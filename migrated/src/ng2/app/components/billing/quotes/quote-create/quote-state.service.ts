@@ -47,6 +47,12 @@ export class QuoteStateService {
    this.onInitCLientsList();
   }
 
+  public setDescription (description) {
+    this.quoteForCreate.description = description;
+  }
+  public getDescription() {
+    return this.quoteForCreate.description;
+  }
   /**
    * Set result after request for alert
    */
@@ -459,12 +465,12 @@ export class QuoteStateService {
     this.quoteNumber = quote.number;
     this.setClient(quote.company);
     quote.client = this.getClent();
-    console.log(quote, 'QUOTE');
+ 
     if (quote.products) quote.products.forEach(element => element.markup = this.setMarkups(element));
     const itemsArray = [...quote.products, ...quote.services];
     this.setItemArray(itemsArray);
     this.setType(true);
-    
+    this.setDescription(quote.description);
     this.setNumber(quote.number);
     this.setStartQuoteNumber(quote.number);
     this.setEndDate(this.dateService.getStartDate(quote.validUntil));
@@ -639,8 +645,9 @@ export class QuoteStateService {
    * @param item markup
    */
   public setMarkups(item) {
-    if (item.sale > 0 && item.cost > 0)
-      return this.roundToOne((item.sale - item.cost) / item.cost * 100);
+    if (item.sale > 0 && item.cost > 0)  return this.roundToOne((item.sale - item.cost) / item.cost * 100);
+    return 0;
+     
   }
 
   /**
@@ -675,6 +682,7 @@ export class QuoteStateService {
       endDate: '',
       quoteNumber: '',
       itemsArray: '',
+      description: '',
       client: '',
       subTotalProducts: '',
       subTotalServices: '',

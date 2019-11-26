@@ -39,7 +39,7 @@
         // $scope.$watch(function() {
         //   return $rootScope.userToAssignToTicket;
         // }, function(val) {
-        //   console.log("I GOT EVENT")
+        
         //   $scope.ticket.ticketAssignTo = val;
         //   $scope.ticket.assignedTo = val ? val.firstName + ' ' + val.lastName : ''
         // })
@@ -53,7 +53,7 @@
 
         $scope.getUserAvatarUrl = function(user) {
           var data = user.user ? user.user : user;
-          // console.log(data, user, 'usedata')
+         
 
           return $rootScope.getUserAvatarUrl(data);
         };
@@ -249,7 +249,7 @@
         }
 
         $scope.$on('userToAssignToTicket', function(evt, val) {
-          // console.log(evt, val, "SADNESS")
+          
           var data = val.data;
           var id = data.id;
 
@@ -258,7 +258,7 @@
             return userId === id;
           })
 
-          // console.log(index, 'indez')
+         
 
           if (index !== -1) {
             $scope.ticketSharedUsersList.splice(index, 1);
@@ -269,7 +269,7 @@
             });
           }
 
-          // console.log($scope.ticketSharedUsersList);
+        
 
           $scope.$apply();
         })
@@ -316,7 +316,7 @@
 
         $scope.$watch('ticketCompany', function (val, prevVal) {
 
-          // console.log(val, prevVal, "VAL")
+       
           if (!val && typeof prevVal === 'object' && !$rootScope.clearButtonPressed) {
             $scope.ticketCompany = prevVal;
             return;
@@ -338,7 +338,7 @@
               return !user.deletedAt;
             });
 
-            // console.log($scope.clients, 'CLIENTS')
+          
 
             for (var i = 0; i < $scope.clients.length; i++) {
               $scope.usersToWatch.push($scope.clients[i]);
@@ -346,7 +346,7 @@
 
           }
 
-          // console.log($scope.usersToWatch, $scope.usersToWatch.length, 'USERS TO WaTCH')
+          
 
           $scope.filteredAgentList = $scope.agentsList;
           if (val && typeof val === 'object') {
@@ -395,7 +395,7 @@
               resetSharedUsers(selectedCompany);
             }
           } else {
-            // console.log("NO COMPANY")
+           
 
             $scope.lastValidCompany = null;
             if ($scope.ticket.serviceExpenses && $scope.ticket.serviceExpenses.length) {
@@ -410,7 +410,7 @@
             $scope.ticketSharedUsersList = $scope.ticketSharedUsersList.filter(function(el) {
               var user = el.user;
 
-              // console.log(user, 'USER', $scope.lastCompany)
+             
 
               return !(user.company.id === $scope.lastCompany && user.subscription && user.subscription.ticketManager && !user.deletedAt)
             })
@@ -669,7 +669,7 @@
 
               // if ($scope.ticketSharedUsersList.length > 1) {
               //
-              //   console.log($scope.ticketSharedUsersList, 'FUR FUR FUR')
+              
               //   var data = $scope.ticketSharedUsersList.map(function(el) {
               //     if (el.id) {
               //       return el.id;
@@ -686,12 +686,12 @@
               //     return el;
               //   })
               //
-              //   console.log(data, 'DATATAAATATAT')
+              
               //
               //   var status = ($scope.ticket.assignedTo || $scope.ticket.ticketAssignTo) ? 'IN_PROGRESS' : "UNASSIGNED";
               //
               //   TicketsService.changeStatus(resp.id, status, function() {
-              //     console.log('request has been sent')
+              
               //   }, data);
               //
               //
@@ -817,7 +817,7 @@
         });
 
         $scope.$watch('ticket.ticketAssignTo', function(val, oldVal) {
-          // console.log(val, oldVal, 'ASSIGN TO')
+          
           var oldId = oldVal && oldVal.id;
           var newId = val && val.id;
 
@@ -986,7 +986,7 @@
           for (var i = 0; i < $scope.ticketSharedUsersList.length; i++) {
             var shares = $scope.ticketSharedUsersList[i];
 
-            // console.log(shares, 'SHARES')
+          
 
             if (UsersService.getOneById(shares.user.id).accountType === 'TECH') {
               continue;

@@ -17,13 +17,24 @@ import { DatePickerStateService } from 'src/ng2/app/components/shared/date-picke
 @Injectable()
 export class RecurringTicketsService {
   sub: Subscription = new Subscription();
-
+  clone:boolean = false;
   constructor(private elRef: ElementRef, private tagsState: TagsStateService,
     private stateInterval: IntervalStateService,
     private tehState: TehUsersSateService,
     private devicesState: DevicesStateService,
     private stateDatePicker: DatePickerStateService
   ) { }
+
+  public onInitClone() {
+    this.clone = true;
+  }
+
+  public getCloneMode() {
+    return this.clone;
+  }
+  public resetCloneMode() {
+    this.clone = false;
+  }
 
   /**
 * Set rules for add ticket 
@@ -170,6 +181,14 @@ export class RecurringTicketsService {
     this.elRef.nativeElement.querySelector('#requireUpdate-edit').checked = requireUpdate;
   }
 
+   /**
+ * Set require update for add
+ * @param requireUpdate - require update
+ */
+public setRequireUpdateAdd(requireUpdate) {
+  this.elRef.nativeElement.querySelector('#requireUpdate-add').checked = requireUpdate;
+}
+
   /**
  * Set quick close for edit
  * @param quickClose - quick close
@@ -179,12 +198,29 @@ export class RecurringTicketsService {
   }
 
   /**
+ * Set quick close for add
+ * @param quickClose - quick close
+ */
+public setQuickCloseAdd(quickClose) {
+  this.elRef.nativeElement.querySelector('#quickClose-add').checked = quickClose;
+}
+
+  /**
  * Set create task for edit
  * @param createTask - create task
  */
   public setCreateTask(createTask) {
     this.elRef.nativeElement.querySelector('#createTask-edit').checked = createTask;
   }
+
+   /**
+ * Set create task for add
+ * @param createTask - create task
+ */
+public setCreateTaskAdd(createTask) {
+  this.elRef.nativeElement.querySelector('#createTask-add').checked = createTask;
+}
+
 
   /**
  * Get products for edit
@@ -207,7 +243,7 @@ export class RecurringTicketsService {
 */
   public getServicesForEdit(list: Array<ServiceRecurringTicket>, serviceErrors: Array<ServiceErrors>) {
     let services: Array<ForCreateService> = [];
-    console.log('serviceErrors', serviceErrors);
+     
     list.forEach((item) => {
       let service = new ForCreateService();
       let errors = [];
@@ -299,7 +335,7 @@ export class RecurringTicketsService {
         if (index >= products.length || product.product.manufacture !== products[index].manufacture || product.product.cost !== Number(products[index].cost) || products[index].quantity !== Number(product.quantity) || products[index].sale !== Number(product.product.sale) || products[index].discount !== Number(product.discount) || product.product.versionedId.id !== products[index].versionedId.id) change = true;
 
       })
-      console.log("ticketForEdit.products[0]", ticketForEdit.products[0]);
+     
       if (!ticketForEdit.products[0] && products[0].versionedId) change = true;
     } else {
       if (products[0].versionedId) change = true;
@@ -322,6 +358,7 @@ export class RecurringTicketsService {
         if (index >= services.length || service.duration !== services[index].duration || service.serviceDescription !== services[index].description || service.service.versionedId.id !== services[index].versionedId.id) change = true;
       })
       if (!ticketForEdit.services[0] && services[0].versionedId) change = true;
+      if (ticketForEdit.services.length !== services.length) change = true;
     } else {
       if (services[0].versionedId) change = true;
     }

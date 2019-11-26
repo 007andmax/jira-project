@@ -95,7 +95,7 @@
   color: #1586e4;
   line-height: 0.8;
   padding: 2px 5px;
-  background-color: #fff;
+  background-color: #ffffff;
   border: 1px solid #1586e4;
 }
 
@@ -121,6 +121,13 @@
   width: 100%;
   top: 0;
   background-color: #e7ecf2;
+}
+
+.clickable-preview {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 70px;
 }
 
 .attachments li:hover .onhover {
@@ -150,6 +157,14 @@
   position: absolute;
   display: block;
   height: 14px;
+}
+
+.attachments li > .onhover .file-preview {
+  left: 11px;
+  bottom: 13px;
+  position: absolute;
+  display: block;
+  background: url("../images/new-icons/preview-icn.png");
 }
 
 .attachments li > .onhover .image-preview {

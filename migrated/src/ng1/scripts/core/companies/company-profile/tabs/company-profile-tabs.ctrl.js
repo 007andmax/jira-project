@@ -15,8 +15,10 @@
 
         $scope.PermissionsService = PermissionsService;
         $scope.selectDevices = {};
+       
         if (tabs.indexOf($stateParams.tabName) === -1) {
-          $state.go('companyProfile', {tabName: 'devices'});
+         
+          $state.go('companyProfile', {tabName: 'devices-all'});
         }
         $scope.orderDevicesBy = 'hostName';
         $scope.uptimeOrder = '';
@@ -32,6 +34,7 @@
           isOfflineDeviceSelected: false
         };
         if($scope.company) {
+          $rootScope.isAgentsRequestSending = true;
           if ($scope.company.clientType.toLowerCase() === 'vendor') {
             CompaniesService.isVendorHasProducts($scope.company.id, function (resp) {
               $scope.company.hasProducts = resp.isProductExist;
@@ -39,6 +42,7 @@
               if ($scope.isHasDevices) {
                 $state.go('companyProfile', {tabName: 'devices'});
               } else {
+              
                 $state.go('companyProfile', {tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'dashboard' : 'network-scan'});
               }
             });
@@ -49,6 +53,41 @@
           }
           $scope.users = UsersService.getAllByCompanyId($scope.company.id);
           $scope.userSubscriptionsByCompanyId = SubscriptionsService.getUserSubscriptionsByCompanyId($scope.company.id, $scope);
+          function getCompanyDevices() {
+           
+          
+           // if (onGetDevicesComplated) return;
+        //    onGetDevicesComplated = true;
+            DevicesService.getAgentsAndReportsDataByCompanyId($scope, $scope.company.id, function (resp) {
+              if (resp && resp.length) {
+                //var agentsList = resp;
+                // $scope.agents = agentsList.sort(function (a, b) {
+                //   return a.hostName > b.hostName
+                // });
+                $scope.agents = resp;
+  
+  
+                var devicesIds = [];
+                $scope.agents.forEach(function (device) {
+                  devicesIds.push(device.id);
+                });
+                $rootScope.deviceCredentialsRecived = false;
+                DevicesService.getDevicesCredentials(devicesIds, $scope, function (resp) {
+                  if (resp) {
+                    $scope.devicesCredentials = resp;
+                    $rootScope.deviceCredentialsRecived = true;
+                  }
+                })
+              }
+  
+            });
+          }
+         
+          if ($rootScope.onInitDevciesCompleted) getCompanyDevices();
+          $rootScope.$on('onDevicesComplated', function (evt, val) {
+           
+            getCompanyDevices();
+          });
         }
 
 
@@ -57,7 +96,7 @@
             return $scope.company.clientType.toLowerCase() === type
           }
         };
-
+       
         $scope.getUsersNumber = function () {
           var usersInfo = {
             number: '',
@@ -89,7 +128,7 @@
 
         };
 
-        DevicesService.getAgentsAndReportsDataByCompanyId($scope, $stateParams.companyId, function (resp) {
+     /*   DevicesService.getAgentsAndReportsDataByCompanyId($scope, $stateParams.companyId, function (resp) {
           if (resp && resp.length) {
             //var agentsList = resp;
             // $scope.agents = agentsList.sort(function (a, b) {
@@ -111,7 +150,7 @@
             })
           }
 
-        });
+        });*/
 
         $scope.$watch('agents.length', function (val) {
           if (val && (val > 0)) {
@@ -119,9 +158,13 @@
           } else {
             $scope.isHasDevices = false;
             if ($scope.currentOpenProfileTab === 'devices') {
-              $state.go('companyProfile', {
-                tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'dashboard' : 'network-scan'
-              });
+             
+              if ($stateParams.tabName == 'dashboard') {
+                $state.go('companyProfile', {
+                  tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'dashboard' : 'network-scan'
+                });
+              }
+            
             }
 
           }

@@ -9,6 +9,8 @@
           $scope.areTicketsPresented = false;
           $scope.areTicketsTerminated = false;
           $scope.areTickets = false;
+          $scope.showAddUser = false;
+         
           $scope.checkForOpenDropdown = checkForOpenDropdown;
 
 
@@ -93,7 +95,17 @@
             })
 
           }
+          $scope.removeAssignUser = function (index) {
 
+            $scope.selectedAssignUsers.splice(index,1);
+          }
+          $scope.selecAssigntUser = function (user) {
+            var index = $scope.selectedAssignUsers.findIndex(item => item.user.id === user.user.id);
+            if (index === -1)  {
+            
+              $scope.selectedAssignUsers.push(user);
+            }
+          }
 
           AgreementsService.getAllServiceAgreements($scope, function (data) {
             $scope.areTickets = data.length;
@@ -123,7 +135,7 @@
             $rootScope.saveEndDate = new Date($rootScope.saveStartDate.getTime() + newValue*3600000)
             $scope.quantity = newValue;
             $rootScope.quantityForSave = newValue;
-            console.log()
+           
           });
 
        
@@ -192,9 +204,9 @@
             $scope.$watch(function() {
               return $scope.ticketUpdate && $scope.ticketUpdate.services
             }, function(val) {
-              console.log('val',val);
+            
               if (val) {
-                console.log('$scope.newEditExpense',$scope.newEditExpense);
+               
                 if ($scope.newEditExpense && $scope.newEditExpense.service) {
                   $scope.openedTab('SERVICE');
                   $scope.serviceToEdit = [$scope.newEditExpense.service];
@@ -214,7 +226,7 @@
 
                   }
 
-                  console.log('$scope.serviceToEdit',$scope.serviceToEdit[0].quantity);
+                  
 
                 }*/
 

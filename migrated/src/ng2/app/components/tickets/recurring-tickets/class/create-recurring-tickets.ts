@@ -58,7 +58,7 @@ export class CreateRecurringTickets {
         this.agent = '';
     }
     public setAgents(agent) {
-        console.log('agent', agent);
+        
         this.agent = agent;
     }
     public setCronExpression(cronExpression) {
@@ -69,26 +69,20 @@ export class CreateRecurringTickets {
     }
     public setStartDate(day, month, year, timeOffset) {
         let current = new Date();
-    
 
-       if (day !== current.getDate() || current.getMonth() !== (month - 1)) {
-        let date = new Date(year, month - 1, day);
-        console.log('date.getTime()',date.getTime());
-        console.log('date.getTimezoneOffset()',date.getTimezoneOffset());
-        this.startDate = date.getTime() + (date.getTimezoneOffset() * 60 * 1000) + timeOffset;
-        console.log('this.startDate',this.startDate);
-       /* let date = new Date(year, month - 1, day, current.getHours(), current.getMinutes());
-        let startDateTime = date.getTime() + (date.getTimezoneOffset() * 60 * 1000) + timeOffset;
-       let startDate = new Date(date.getTime() + (date.getTimezoneOffset() * 60 * 1000) + timeOffset);
-       startDateTime= (startDateTime - (startDate.getHours() * 3600000));
-        this.startDate = startDate.getTime();
-        console.log('this.startDate',this.startDate);*/
+
+        if (day !== current.getDate() || current.getMonth() !== (month - 1)) {
+            let d = new Date();
+            let dt = + new Date(year, month - 1, day); // timestamp from calendar
+            let dt2 = new Date(dt - (d.getTimezoneOffset() * 60000/* dont touch*/) - timeOffset /* timezone.timeOffset */).getTime();
+            this.startDate = dt2;
         } else {
-            let date = new Date(year, month - 1, day, current.getHours(), current.getMinutes());
+            let d = new Date();
+            let dt = + new Date(d.getFullYear(), d.getMonth(), d.getDate());
+            let dt2 = new Date(dt - (d.getTimezoneOffset() * 60000) - timeOffset).getTime();
+            this.startDate = dt2;
           
-            this.startDate = date.getTime() + (date.getTimezoneOffset() * 60 * 1000) + timeOffset;
-            console.log('this.startDate',this.startDate);
-          
+
         }
 
     }

@@ -33,7 +33,7 @@
                 }
               } catch (err) {
                 UserNotificationService.show('The support url has not been copy', true);
-                console.log('Oops, unable to copy');
+                
               }
 
               document.body.removeChild(textArea);

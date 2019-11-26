@@ -244,11 +244,11 @@
           return role.id === id;
         });
 
-        // console.log(id, roleToDelete, roles, 'IM HERE SDADASDAS')
+      
 
         for (var i = 0; i < $scope.usersToShift.length; i++) {
           var user = $scope.usersToShift[i];
-          // console.log(user.techRole, roleToDelete.name, user.techRole === roleToDelete.name, 'userROle')
+          
           if (user.techRole === roleToDelete.name) {
             return true;
           }

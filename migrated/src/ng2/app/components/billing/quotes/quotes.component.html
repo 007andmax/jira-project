@@ -55,23 +55,26 @@
         </label>
       </div>
       <div class="col-md-1 pointer" (click)="sortBy('number')">Quote No.</div>
-      <div class="col-md-3 pointer" (click)="sortBy('customerName')">Company name</div>
-      <div class="col-md-2 pointer" (click)="sortBy('date')">Date</div>
+      <div class="col-md-2 pointer" (click)="sortBy('customerName')">Company name</div>
+      <div class="col-md-2 pointer" >Description</div>
+      <div class="col-md-1 pointer" (click)="sortBy('date')">Date</div>
       <div class="col-md-1 pointer" (click)="sortBy('validUntil')">Valid Until</div>
       <div class="col-md-1 pointer" (click)="sortBy('amount')">Amount</div>
       <div class="col-md-1 pointer" (click)="sortBy('deposit')">Deposit</div>
-      <div class="col-md-1 pointer">Status</div>
+      <div class="col-md-1 pointer df">Status</div>
     </div>
   </div>
+ 
   <div class="quotes__content"
        *ngIf="quotesList.length"
        infiniteScroll
        [infiniteScrollDistance]="2"
        [infiniteScrollThrottle]="50"
        [infiniteScrollDisabled]="infiniteScrollDisabled"
-       (scrolled)="onScroll()">
+       (scrolled)="onScroll()" >
+       <ng-template ngFor let-item [ngForOf]="quotesList" [ngForTrackBy]="trackById" >
     <div class="quotes__content--item row"
-         *ngFor="let item of quotesList">
+    >
       <div class="col-md-1 w-1-5">
         <label class="control checkbox">
           <input type="checkbox">
@@ -84,8 +87,9 @@
            (click)="goToPreview(item)"
       >#{{item.number}}
       </div>
-      <div class="col-md-3 g-m">{{item.company.name}}</div>
-      <div class="col-md-2">{{getDate(item.date)}}</div>
+      <div class="col-md-2 g-m">{{item.company.name}}</div>
+      <div class="col-md-2 g-m">{{item.description}}</div>
+      <div class="col-md-1">{{getDate(item.date)}}</div>
       <div class="col-md-1">{{getDate(item.validUntil)}}</div>
       <div class="col-md-1">{{item.totalAmount | currency}}</div>
       <div class="col-md-1">{{item.partialDeposit}}</div>
@@ -138,20 +142,20 @@
               class="dropdown-item"
               ngbDropdownItem
               *ngIf="checkStatus(item, ['READ','UNREAD'])"
-              (click)="refuseQuote(item)">
-              Refuse a quote
+              (click)="cancelQuote(item)">
+              Cancel quote
             </button>
             <button
               class="dropdown-item"
               ngbDropdownItem
-              *ngIf="checkStatus(item, ['UNREAD','SAVED', 'EXPIRED', 'INVOICED', 'TICKETED'])"
+              *ngIf="checkStatus(item, ['UNREAD','SAVED', 'EXPIRED', 'INVOICED', 'TICKETED','CANCELED'])"
               (click)="archiveQuote(item)">
               Archive a quote
             </button>
             <button
               class="dropdown-item"
               ngbDropdownItem
-              *ngIf="checkStatus(item, ['READ','UNREAD','SAVED', 'APPROVED', 'REFUSED', 'EXPIRED'])"
+              *ngIf="checkStatus(item, ['READ','UNREAD','SAVED', 'APPROVED', 'CANCELED', 'EXPIRED'])"
               (click)="goToQuoteEdit(item)">
               Edit a quote
             </button>
@@ -159,6 +163,8 @@
         </div>
       </div>
     </div>
+  </ng-template>
   </div>
+
   <div class="loading" *ngIf="showPreloader"></div>
 </div>

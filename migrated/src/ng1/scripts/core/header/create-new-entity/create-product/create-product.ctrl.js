@@ -44,7 +44,7 @@
       $scope.$watch(function() {
         return $scope.editProduct.category;
       }, function(val) {
-        // console.log($scope.editProduct.category && !$scope.editProduct.category.id, "IS TRUE")
+        
       })
 
       var origin = savedState.item;
@@ -117,7 +117,7 @@
       };
 
       $scope.$watch('editProduct.company', function (value) {
-        // console.log($scope.editProductForm, 'editproduct')
+        
         if ($scope.editProductForm.editProductVendor && $scope.editProductForm.editProductVendor.$dirty) {
           $scope.editProductForm.editProductVendor.$setValidity('vendorNotExist', !value || typeof value !== 'string');
         }
@@ -160,7 +160,7 @@
 
           $scope.disabledSaveChangeButton = true;
 
-          console.log($scope.editProduct, '$scope.editProduct');
+          
           var changedProduct = {
             versionedId: $scope.editProduct.versionedId,
             cost: $scope.editProduct.cost,
@@ -292,7 +292,7 @@
       function createNewWindowClosing() {
         var product = $scope.editProduct;
         var isProductChanged;
-        // console.log(origin, product, savedState.type, 'PRODUCT')
+       
         if (savedState.type === 'product') {
           if (origin) {
             isProductChanged = product.description !== origin.description

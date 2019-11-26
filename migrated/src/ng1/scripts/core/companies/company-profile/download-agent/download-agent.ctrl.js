@@ -37,7 +37,7 @@
         //  $scope.keywords = data.keywords;
         //});
 
-        // console.log($scope.company.id, 'COMPANYID ID ID')
+        
 
         $scope.$watch(function () {
           return $scope.downloadAgentUser.agentName + ' ' + $scope.downloadAgentUser.agentPassword;

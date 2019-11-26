@@ -66,6 +66,7 @@ export class AddItemComponent implements OnInit {
    */
   public getServicesList() {
     this.productService.getCategories().subscribe((res) => {
+      
      return this.itemListProducts = res
     });
     const value = this.quoteStateService.getClient();
@@ -78,11 +79,13 @@ export class AddItemComponent implements OnInit {
    * set new item
    */
   public setItem(item) {
+   
     if (this.type === 'service') {
       item = {...item, ...{description: '', quantity: 1}};
     } else {
       item = {...item, ...{quantity: 1, markup: this.setMarkups(item)}};
     }
+    
     this.selectedServiceItem.emit(item);
     this.isDropDownShow = false;
     this.type = undefined;
@@ -114,8 +117,9 @@ export class AddItemComponent implements OnInit {
    * set murkups
    */
   public setMarkups(item) {
-    if (item.sale > 0 && item.cost > 0 )
-      return Math.round((item.sale - item.cost)/item.cost* 100);
+    if (item.sale > 0 && item.cost > 0 )  return Math.round((item.sale - item.cost)/item.cost* 100);
+    return 0;
+     
   }
 
 }

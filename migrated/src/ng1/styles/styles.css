@@ -10798,17 +10798,12 @@ button.close {
   transform: translate3d(-50%, -50%, 0) !important;
 }
 
-.modal-remote-agent {
-  width: 450px;
-  min-height: 500px;
-  top: 50%;
-  left: 50%;
-  margin: 0;
-  transform: translate3d(-50%, -50%, 0) !important;
-}
-
 .modal-remote-agent .modal-dialog {
-  width: 100% !important;
+  width: 450px !important;
+  top: 50%;
+  position: fixed !important;
+  left: 50%;
+  transform: translate(-50%, -50%) !important;
 }
 
 .modal-custom-size-confirmation-pop {
@@ -12511,6 +12506,10 @@ button.close {
     font-size: 12px;
   }
 
+  .ticket-add-content .ticket-add-service .col-5 {
+    width: 46%;
+  }
+
   .products-content__list--header div,
   .password-content__list--header div {
     font-size: 9px;
@@ -13719,6 +13718,15 @@ button.close {
     width: 7%;
   }
 
+  .ticket-add-content .new-input {
+    padding: 7px 5px;
+  }
+
+  .ticket-add-content .ticket-add-service [class*='col-'],
+  .ticket-add-content .ticket-add-product [class*='col-'] {
+    padding: 0 4px;
+  }
+
   .password-content__list .col-md-2.alternative-width {
     width: 14%;
   }
@@ -13740,4 +13748,28 @@ button.close {
   }
 }
 
+.add-users {
+  display: block;
+  width: 400px;
+  background-color: #ffffff;
+}
 
+.add-users-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+}
+
+.list-users .item-user {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 40px;
+}
+
+.list-users .item-user img, .selected-assign-user img {
+  width: 40px;
+  height: 40px;
+}

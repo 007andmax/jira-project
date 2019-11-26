@@ -66,7 +66,7 @@
 //
 //        RealTimeService.subscribe('/tags', serviceScope, function (newChange) {
 //
-//          console.log(newChange);
+//          
 //
 //          if (!storage.tags) return;
 //
@@ -100,7 +100,7 @@
 //
 //      }, function (resp) {
 //
-//        console.log("ERROR!!!!!", resp);
+//       
 //
 //        if (callback) {
 //          callback(resp.data);
@@ -240,7 +240,7 @@
 //
 //      RealTimeService.subscribe('/tagCounts', scope, function (newChange) {
 //
-//        console.log(newChange);
+//      
 //
 //        if (newChange.action == 'TAG_COUNTS') {
 //          Utils.customizeObj(newChange.data, counts);

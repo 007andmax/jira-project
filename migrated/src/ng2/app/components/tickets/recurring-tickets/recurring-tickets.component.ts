@@ -51,7 +51,7 @@ export class RecurringTicketsComponent implements OnInit {
       return;
     }
     this.recurringService.getTicketsList(this.page_number, this.items_per_page, this.sort, this.direction).subscribe((res: Array<RecurringTicket>) => {
-      console.log('res',res); 
+       
       if (res.length === 0) this.listSerivce.setBlockList(true);
       this.ticketList = [...this.ticketList, ...res];
       this.page_number += 1;

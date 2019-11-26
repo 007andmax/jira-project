@@ -14,7 +14,7 @@
         <div class="control-label" ng-message="minlength">First name is too short.</div>
       </div>
       <div class="placeholder">First Name</div>
-      <input class="form-validation" type="text" aria-expanded="true" ng-minlength="2" ng-maxlength="15"
+      <input class="form-validation" type="text" aria-expanded="true" ng-minlength="2" ng-maxlength="30"
              name="firstName" ng-model="editUser.firstName" ng-required="true"
              make-dirty-on-blur tabindex="1" hard-reset-pattern="namePattern">
     </div>
@@ -24,7 +24,7 @@
         <div class="control-label" ng-message="required">Last name is required</div>
       </div>
       <div class="placeholder">Last name</div>
-      <input class="form-validation" type="text" aria-expanded="true" ng-maxlength="15"
+      <input class="form-validation" type="text" aria-expanded="true" ng-maxlength="30"
              name="lastName" ng-model="editUser.lastName"
              make-dirty-on-blur tabindex="2" hard-reset-pattern="namePattern">
     </div>

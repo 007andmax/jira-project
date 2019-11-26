@@ -54,11 +54,14 @@ export class TehUsersComponent implements OnInit, OnDestroy {
   */
   private checUsersForEdit () {
    let getUsersFromEdit = this.tehState.getUsersFromEdit().subscribe((data:Array<RecurringTicketUser>) => {
-    this.usersList.forEach((item) => {
-      let index = data.findIndex(user => user.id === item.id);
+     
+     data.forEach((item) => {
+      let index = this.usersList.findIndex(user => user.id === item.id);
       if (index > (-1)) this.usersList[index].selected = true;
+     
     })
     })
+  
     this.sub.add(getUsersFromEdit);
   }
 
@@ -93,8 +96,8 @@ export class TehUsersComponent implements OnInit, OnDestroy {
    * @param index index
    */
   public selectUser(index) {
-    this.usersList[index].selected = true;
-    this.selectedUsers.push(this.usersList[index]);
+    this.usersList[index].selected = !this.usersList[index].selected;
+    this.selectedUsers = this.usersList.filter(item => item.selected);
     this.usersChange.emit(this.selectedUsers);
   }
 

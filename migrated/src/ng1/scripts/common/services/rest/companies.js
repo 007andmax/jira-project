@@ -7,7 +7,7 @@
   var services = angular.module('main.services');
 
   services.factory('CompaniesService', ['$http', '$rootScope', 'RealTimeService', 'Utils', function ($http, $rootScope, RealTimeService, Utils) {
-
+ 
     var serviceScope = $rootScope.$new(),
       initialized = false,
       initListeners = [],
@@ -109,6 +109,7 @@
 
     $http.get('/company/current').then(function (resp) {
       Utils.customizeObj(resp.data, storage.currentCompany);
+      setRealTimeCurrentCompany();
       checkInit();
     },
       function (resp) {
@@ -140,16 +141,16 @@
     }
 
     RealTimeService.subscribe('/company', serviceScope, function (newChange) {
-      console.log(newChange, 'NEWCHANNGE');
+     
       if (!initialized) {
         return;
       }
-      console.log('1111111NEWCHANNGE');
+      
 
 
       var companyId = newChange.data.id;
       if (newChange.action == 'COMPANY_SAVED') {
-        console.log('aaaaa');
+       
         var company = getOneById(companyId);
 
         if (companyId === getCurrentCompany().id) {
@@ -176,7 +177,7 @@
           }
 
           if (callbackForSavedCompanies[companyId]) {
-            console.log('bbbbbb');
+           
             callbackForSavedCompanies[companyId](companyId);
           }
         }
@@ -220,7 +221,19 @@
         }
       }
     });
+    function setRealTimeCurrentCompany() {
+    
+      RealTimeService.subscribe('/company/' + storage.currentCompany.id, serviceScope, function (newChange) {
+        
+        if (newChange.action === "SERVICE_EXPENSE_DATA_PICKER_CHANGED") {
+          storage.currentCompany.serviceExpenseDurationPresentation = newChange.data.presentation;
+          storage.currentCompany.serviceExpenseDurationPickerInterval = newChange.data.interval;
+        }
 
+
+      })
+    }
+    
     RealTimeService.subscribe('/companySettings', serviceScope, function (newChange) {
 
       if (newChange.action === 'SMTP_SETTINGS_UPDATED') {
@@ -367,7 +380,7 @@
     }
 
     function archive(companyId, callback) {
-      var future = $http.get('https://dev.quicktech.com/company/archive/' + companyId);
+      var future = $http.get('/company/archive/' + companyId);
       Utils.handleCallback(future, callback);
     }
 

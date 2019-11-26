@@ -374,7 +374,7 @@
         $scope.save = function (form, isCreateContract, isInvoice) {
           $scope.isSaveFailed = false;
 
-          // console.log(form, form.$valid);
+        
 
 
           if (isInvoice) {
@@ -525,7 +525,7 @@
               template = '/ng1/scripts/core/service-agreements/modal/service-contract-modal.tpl.html';
               break;
             default:
-              console.log('no contract type selected');
+              
           }
 
           companyInfo.companyId = companyId;

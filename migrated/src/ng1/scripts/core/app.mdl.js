@@ -23,7 +23,7 @@
       'quicktech.core.quickSupport',
       'quicktech.core.reports',
       'quicktech.core.serviceAgreements',
-      'proton.multi-list-picker',
+      
       'ui.router',
       'ui.select',
       'ui.bootstrap',
@@ -137,6 +137,10 @@
         .state('password-manager', waitForServices({
           url: '/ng2/password-manager',
           template: '<password-manager></password-manager>'
+        }))
+        .state('company-password-manager', waitForServices({
+          url: '/ng2/company-password-manager',
+          template: '<company-password-manager></company-password-manager>'
         }))
         .state('quotes-component', {
           url: '/ng2/quotes',
@@ -435,7 +439,7 @@
             if (!isCalled) {
               isCalled = true;
               fn.apply(this, args);
-              console.log('call debounced fn');
+            
               interval = setTimeout(function () {
                 isCalled = false;
 
@@ -837,7 +841,7 @@
 
   function getUserDefaultPage() {
 
-    console.log('is it default??');
+  
     var defaultTicketsPage,
       startPageMap = {
         ALL: 'all',

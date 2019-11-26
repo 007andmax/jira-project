@@ -14,7 +14,7 @@
           commissionRateSetOldSalesUserOrDeviceContract: false,
           commissionRateSetOldSalesUserOrDeviceContractExceeding: false
         }
-console.log('$scope',$scope);
+ 
         $scope.filterTechUsers = '';
 
 

@@ -127,6 +127,15 @@ export class ProductTableComponent implements OnInit {
     });
   }
 
+  public selectProduct (item, index) {
+    item = {...item, ...{quantity: 1, markup: this.quoteStateService.setMarkups(item)}};
+  
+  
+  this.itemsListArray[index] = item;
+  this.changedProductItemsArray.next(this.itemsListArray);
+  this.hideDropDown(index);
+  }
+
   /**
    * set new item
    * @param item - new item
@@ -134,11 +143,13 @@ export class ProductTableComponent implements OnInit {
    * @param type - new item type
    */
   public setItem(item, index, type) {
+    
     if (type === 'service') {
       item = {...item, ...{description: '', quantity: 1}};
     } else {
       item = {...item, ...{quantity: 1, markup: this.quoteStateService.setMarkups(item)}};
     }
+     
     this.itemsListArray[index] = item;
     this.changedProductItemsArray.next(this.itemsListArray);
     this.hideDropDown(index);
@@ -157,11 +168,13 @@ export class ProductTableComponent implements OnInit {
    * @param value - item value
    * @param index - item index
    */
-  public changeMarkup(value, index) {
+  public changeMarkup(val, index) {
+    let value = Number(val);
     const item = this.itemsListArray[index];
     this.itemsListArray[index].sale =  this.quoteStateService.roundToTwo((value * item.cost / 100 + item.cost));
     this.itemsListArray[index].markup = value;
     this.itemsListArray[index].markup = this.roundingMarkup(this.itemsListArray[index].markup);
+    
     this.updateItemsArray();
   }
 
@@ -170,15 +183,16 @@ export class ProductTableComponent implements OnInit {
    * @param value - item value
    * @param index - item index
    */
-  public changeSales(value, index) {
+  public changeSales(val, index) {
+    let value = Number(val);
     const item = this.itemsListArray[index];
     if (this.getMarkup(this.itemsListArray[index])) {
       this.itemsListArray[index].markup = (value - item.cost) / item.cost * 100;
       this.itemsListArray[index].markup = this.roundingMarkup(this.itemsListArray[index].markup);
-      this.itemsListArray[index].sale = this.commonService.validateNumber(value);;
+      this.itemsListArray[index].sale = this.commonService.validateNumber(val,'number');
       this.updateItemsArray();
     } else {
-      this.itemsListArray[index].rate = this.commonService.validateNumber(value);;
+      this.itemsListArray[index].rate = this.commonService.validateNumber(val,'number');
     }
   }
 
@@ -187,15 +201,17 @@ export class ProductTableComponent implements OnInit {
    * @param value - item value
    * @param index - item index
    */
-  public changeCost(value, index) {
+  public changeCost(val, index) {
+    let value = Number(val);
     const item = this.itemsListArray[index];
     if (this.getMarkup(this.itemsListArray[index])) {
       this.itemsListArray[index].markup =  this.quoteStateService.roundToOne((item.sale - value)/value * 100);
-      this.itemsListArray[index].cost = this.commonService.validateNumber(value);
+      this.itemsListArray[index].cost = this.commonService.validateNumber(val,'number');
     } else {
-      this.itemsListArray[index].rate = (this.isInteger(Number(value))) ? value :  this.quoteStateService.roundToTwo(value);
+      this.itemsListArray[index].rate = (this.isInteger(value)) ? value :  this.quoteStateService.roundToTwo(value);
     }
     this.updateItemsArray();
+   
   }
 
 

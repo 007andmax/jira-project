@@ -28,7 +28,7 @@ body.non-body-scroll::-webkit-scrollbar {
   position: absolute;
   z-index: 1000;
   box-shadow: 0 4px 20px 0 rgba(10, 45, 89, 0.1);
-  background-color: #ffffff;
+  background-color: #fff;
   width: 100%;
   top: 40px;
   border-radius: 4px;
@@ -39,13 +39,13 @@ body.non-body-scroll::-webkit-scrollbar {
   padding-left: 0;
   max-height: 190px;
   overflow-y: auto;
-
+  
 }
 
 #qtDropdown ul li {
   padding: 7px 20px;
   cursor: pointer;
-
+  
 }
 
 #qtDropdown ul li:hover {
@@ -121,12 +121,12 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 .invoices .qt-list > li + li {
-  border-top: 1px solid #eeeeee;
+  border-top: 1px solid #eee;
 }
 
 .invoices .qt-invoices > li {
   margin-bottom: 0;
-
+  
 }
 
 .qt-product-list.qt-list > li > .intermediate-parent-elem > .col-2 {
@@ -192,7 +192,7 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 .qt-product-list .new-intermediate-parent-elem {
-  border-top: 1px solid #eeeeee;
+  border-top: 1px solid #eee;
   float: left;
 }
 
@@ -232,39 +232,39 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 @media only screen and (min-width: 2000px) {
-
+  
   .qt-user-product-list > li > .intermediate-parent-elem > .col-1 {
     width: 225px;
   }
-
+  
   .slide-category-content .qt-user-product-list > li > .intermediate-parent-elem > .col-4 label.control.checkbox {
     left: 95px;
   }
-
+  
   .qt-user-product-list > li > .intermediate-parent-elem > .col-4 {
     width: 225px;
   }
-
+  
   .qt-billable-clients .tax-recurring input {
     width: 130%;
   }
-
+  
 }
 
 @media screen and (max-width: 1700px) {
-
+  
   .qt-user-product-list > li > .intermediate-parent-elem > .col-1 {
     width: 145px;
   }
-
+  
   .right-list > li > .intermediate-parent-elem > .col-2, .right-list > li > .col-2 {
     width: calc(100% - 764px);
   }
-
+  
   .qt-user-product-list > li > .intermediate-parent-elem > .col-4 {
     width: 110px;
   }
-
+  
 }
 
 @media screen and (max-width: 1600px) {
@@ -272,47 +272,47 @@ body.non-body-scroll::-webkit-scrollbar {
   .vendor-products-width > li > [class*='col-']:first-child {
     width: calc(100% - 644px);
   }
-
+  
   .qt-billable-clients .tax-recurring input {
     width: 100%;
   }
-
+  
   .tax-recurring .select-taxes-drv .checkbox-dropdown {
     min-width: 235px;
   }
-
+  
   .discount-recurring input, .discount-recurring div {
     display: block;
   }
-
+  
   .discount-recurring .form-group div {
     width: 70px;
   }
-
+  
   .product-list-btn a {
     margin-right: 5px;
   }
-
+  
   .qt-product-list.left-list .new-intermediate-parent-elem .col-md-1,
   .qt-product-list.left-list .new-list-heading .col-md-1 {
     width: 11.1%;
   }
-
+  
   .qt-product-list.left-list .new-intermediate-parent-elem .col-md-5,
   .qt-product-list.left-list .new-list-heading .col-md-5 {
     width: 25.7%;
   }
-
+  
   .qt-product-list.right-list .new-intermediate-parent-elem .col-md-1,
   .qt-product-list.right-list .new-list-heading .col-md-1 {
     width: 9.5%;
   }
-
+  
   .qt-product-list.right-list .new-intermediate-parent-elem .col-md-5,
   .qt-product-list.right-list .new-list-heading .col-md-5 {
     width: 25.8%;
   }
-
+  
   .qt-product-list .new-intermediate-parent-elem .col-md-1.product-list-btn,
   .qt-product-list .new-list-heading .col-md-1.product-list-btn {
     width: 7.7%;
@@ -328,19 +328,19 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 @media screen and (max-width: 1366px) {
-
+  
   .tax-recurring .select-taxes-drv .checkbox-dropdown label {
     padding: 13px 40px 13px 15px;
   }
-
+  
   .tax-recurring .select-taxes-drv .checkbox-dropdown .icn-label-save {
     right: 20px;
   }
-
+  
   .tax-recurring .select-taxes-drv .checkbox-dropdown {
     min-width: 198px;
   }
-
+  
   .qt-product-list,
   .qt-product-list p {
     font-size: 12px;
@@ -348,27 +348,27 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 @media screen and (max-width: 1280px) {
-
+  
   .tax-recurring .select-taxes-drv .checkbox-dropdown {
     min-width: 185px;
   }
-
+  
   .tax-recurring .select-taxes-drv .checkbox-dropdown .icn-label-save {
     right: 30px;
   }
-
+  
   .tax-recurring .select-taxes-drv .checkbox-dropdown label {
     padding: 13px 45px 13px 15px;
   }
-
+  
   .qt-list > li > .intermediate-parent-elem > .col-4, .qt-list > li > .col-4 {
     width: 90px;
   }
-
+  
   .qt-default-services li .intermediate-parent-elem .is-billable label {
     left: 0;
   }
-
+  
   .qt-product-list,
   .qt-product-list p {
     font-size: 11px;
@@ -557,6 +557,16 @@ body.non-body-scroll::-webkit-scrollbar {
   max-width: 48%;
 }
 
+.ticket--footer .notify-user-dropdown,
+.ticket--footer .add-users {
+  max-width: 100%;
+  width: 100%;
+}
+
+.user-full-name {
+  white-space: nowrap;
+}
+
 .create-ticket-form .notify-user-dropdown {
   max-width: 100%;
 }
@@ -578,7 +588,7 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 .dropdown-user-parent > .dropdown-menu > li:hover a .user-name > p {
-  color: #ffffff;
+  color: #fff;
 }
 
 /*description popover on companies page*/
@@ -1028,7 +1038,7 @@ aside#left div.nav-title {
   /*border: solid #ffffff;*/
   text-decoration: none;
   padding: 5px 10px;
-  background: #ffffff;
+  background: #fff;
   display: block;
   color: #4c5c6f;
   margin: 0;
@@ -1038,7 +1048,7 @@ aside#left div.nav-title {
   text-decoration: none;
   border: none;
   padding: 0 5px;
-  background: #ffffff;
+  background: #fff;
   display: block;
   color: #4c5c6f;
   margin: 0;
@@ -1202,7 +1212,7 @@ aside#left div.nav-title {
 .tech-request p {
   width: 70%;
   margin: auto;
-  border-top: 1px solid #eeeeee;
+  border-top: 1px solid #eee;
   padding: 5px 0;
   color: #3c92ca;
   cursor: pointer;
@@ -1241,7 +1251,7 @@ aside#left div.nav-title {
 }
 
 .tech-user-templates-wrapper .tech-user-item:hover {
-  border: 1px solid #ffffff;
+  border: 1px solid #fff;
   box-shadow: 0 4px 25px 0 rgba(10, 45, 89, .1);
 }
 
@@ -1320,7 +1330,7 @@ aside#left div.nav-title {
 
 .ticket-update-service-edit .table-content,
 .ticket-update-product-edit .table-content {
-  background: #ffffff;
+  background: #fff;
 }
 
 .custom-product-list .clear-product:hover {
@@ -1389,7 +1399,7 @@ aside#left div.nav-title {
 
 .custom-product-list .category-conteiner .category-info {
   display: block;
-  background-color: #ffffff;
+  background-color: #fff;
   padding: 10px 16px;
   cursor: pointer;
   transition: all .3s;
@@ -1402,7 +1412,7 @@ aside#left div.nav-title {
 
 .custom-product-list .category-conteiner .category-info.active span,
 .custom-product-list .category-conteiner .category-info:hover span {
-  color: #ffffff;
+  color: #fff;
 }
 
 .custom-product-list .category-conteiner .category-info.active .report-caret-icon,
@@ -1454,7 +1464,7 @@ aside#left div.nav-title {
 .devices-content .agent-username .tooltip-inner {
   padding: 18px 20px;
   height: auto;
-  color: #ffffff;
+  color: #fff;
   font-weight: normal;
   text-transform: none;
   text-align: left;
@@ -1720,7 +1730,7 @@ span.sort-span {
 .device-settings-tab .deployment-settings label input[type="password"]:focus {
   outline: 0;
   border-color: #2c9fdd;
-  background-color: #ffffff;
+  background-color: #fff;
 }
 
 .device-settings-tab .deployment-settings label select {
@@ -1897,7 +1907,7 @@ span.sort-span {
   .with-category .qt-product-list .qt-product-form .product-form-wrapper .col-desc {
     width: calc(100% - 1150px);
   }
-
+  
   .with-category .qt-product-list .qt-product-form .product-form-wrapper .col-2 {
     width: 270px;
   }
@@ -1907,15 +1917,15 @@ span.sort-span {
   .with-category .qt-product-list .qt-product-form .product-form-wrapper .col-1 {
     width: 100px;
   }
-
+  
   .with-category .qt-product-list .qt-product-form .product-form-wrapper .col-2 {
     width: 140px;
   }
-
+  
   .with-category .qt-product-list .qt-product-form .product-form-wrapper .col-3 {
     width: 135px;
   }
-
+  
   .with-category .qt-product-list .qt-product-form .product-form-wrapper .col-desc {
     width: calc(100% - 670px);
   }
@@ -1952,19 +1962,19 @@ span.sort-span {
   .with-category .qt-user-product-list li .col-1 {
     width: 170px;
   }
-
+  
   .with-category .qt-user-product-list li .col-4 {
     width: 165px;
   }
-
+  
   .with-category .qt-user-product-list > li > .intermediate-parent-elem > .col-1 {
     width: 170px;
   }
-
+  
   .with-category .qt-user-product-list > li > .intermediate-parent-elem > .col-4 {
     width: 165px;
   }
-
+  
   .qt-user-product-list > li > .intermediate-parent-elem > .col-4 label.control.checkbox {
     left: 75px;
   }
@@ -2043,7 +2053,7 @@ span.sort-span {
 .archived {
   margin-top: 40px;
   padding-top: 40px;
-  border-top: 1px solid #eeeeee;
+  border-top: 1px solid #eee;
 }
 
 .unverified-user-mark {
@@ -2141,7 +2151,7 @@ span.sort-span {
   .custom-product-list .category-conteiner .category-info .icn-caret-gray.rotated {
     margin: 5px 10px 0 0;
   }
-
+  
   .custom-product-list .category-conteiner .category-info .icn-caret-gray {
     margin-right: 10px;
   }
@@ -2166,7 +2176,7 @@ span.sort-span {
 
 .btn.btn-new.btn-primary,
 .btn-new.btn-primary {
-  color: #ffffff;
+  color: #fff;
   background: #16a4fa;
 }
 
@@ -2174,13 +2184,13 @@ span.sort-span {
 .btn-new.btn-primary:hover,
 .btn.btn-new.btn-primary:active,
 .btn-new.btn-primary:active {
-  color: #ffffff;
+  color: #fff;
   background: #117ebf;
 }
 
 .btn.btn-new.btn-success,
 .btn-new.btn-success {
-  color: #ffffff;
+  color: #fff;
   background: #2ec866;
   border: 1px solid #189947;
 }
@@ -2189,7 +2199,7 @@ span.sort-span {
 .btn-new.btn-success:hover,
 .btn.btn-new.btn-success:active,
 .btn-new.btn-success:active {
-  color: #ffffff;
+  color: #fff;
   background: #189947;
 }
 
@@ -2217,7 +2227,7 @@ span.sort-span {
 .btn-new.default:hover,
 .btn.btn-new.default:hover,
 .btn-new.default:hover {
-  color: #ffffff;
+  color: #fff;
   background: #c4cbd5;
 }
 
@@ -2231,7 +2241,7 @@ span.sort-span {
 }
 
 .dropdown-assign-ticket.fixed-assign .scroll-pane {
-  background-color: #ffffff;
+  background-color: #fff;
   margin-top: 77px;
 }
 
@@ -2253,8 +2263,7 @@ span.sort-span {
   background-color: #16a4fa;
 }
 
-.dropdown-assign-ticket.fixed-assign .users-list .user-item.active,
-.dropdown-assign-ticket.fixed-assign .users-list .user-item:hover {
+.dropdown-assign-ticket.fixed-assign .users-list .user-item.active {
   background-color: #16a4fa;
 }
 
@@ -2262,7 +2271,7 @@ span.sort-span {
 .dropdown-assign-ticket.fixed-assign .users-list .user-item.active p:last-child,
 .dropdown-assign-ticket.fixed-assign .users-list .user-item:hover p,
 .dropdown-assign-ticket.fixed-assign .users-list .user-item:hover p:last-child {
-  color: #ffffff;
+  color: #fff;
 }
 
 .dropdown-assign-ticket.fixed-assign .users-list .user-item a {
@@ -2335,7 +2344,7 @@ span.sort-span {
   padding: 7px 12px;
   outline: none;
   position: relative;
-  background: #ffffff !important;
+  background: #fff !important;
 }
 
 .ticket-settings-actions .dropdown-menu {
@@ -2345,11 +2354,11 @@ span.sort-span {
 .ticket-settings-actions .dropdown-menu li:hover,
 .table-content-bottom .action-update .more-dropdown .dropdown-menu li:hover {
   background-color: #16a4fa;
-  color: #ffffff;
+  color: #fff;
 }
 
 .ticket-settings-actions .dropdown-menu li:hover a {
-  color: #ffffff;
+  color: #fff;
 }
 
 .ticket-update-service-edit .col-md-1 > .col-md-1:first-child {
@@ -2450,7 +2459,7 @@ span.sort-span {
 }
 
 .ticket-settings-actions .dropdown-menu li .dropdown-submenu-wrapper li:hover {
-  color: #ffffff;
+  color: #fff;
 }
 
 .no-ticket-updates {
@@ -2472,7 +2481,7 @@ span.sort-span {
   margin: 0 auto;
 }
 
-.ticket-update .shared-avatars{
+.ticket-update .shared-avatars {
   height: 24px;
   margin: 0 16px 0 8px
 }
@@ -2480,7 +2489,7 @@ span.sort-span {
 .ticket-update .shared-avatars img,
 .ticket-update .shared-avatars .default-user-avatar,
 .mob-ticket-content .shared-avatar img,
-.mob-ticket-content .shared-avatar .default-user-avatar{
+.mob-ticket-content .shared-avatar .default-user-avatar {
   width: 24px;
   height: 24px;
   border-radius: 50%;
@@ -2501,4 +2510,13 @@ span.sort-span {
 
 .ticket-update .action-update .dropdown-assign-ticket.fixed-assign .users-list {
   max-height: 220px;
+}
+
+.custom-width {
+  max-width: 400px !important;
+  width: 100% !important;
+}
+
+.dropdown-height .dropdown-menu {
+  max-height: 304px !important;
 }
