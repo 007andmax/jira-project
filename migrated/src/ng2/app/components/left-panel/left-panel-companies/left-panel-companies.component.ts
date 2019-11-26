@@ -96,6 +96,9 @@ export class LeftPanelCompaniesComponent implements OnInit {
     this.filter.setClientIndustry(this.clientIndustry);
     this.leftPanelStateService.onInitFilter(this.filter);
   }
+  closeMobileFilter() {
+    document.body.querySelector('app-left-panel-companies').classList.remove('show');
+  }
   toggleFilter(event) {
     event.target.parentNode.classList.toggle('show-filter');
   }

@@ -10,6 +10,7 @@ import { ConfrmData } from './class/confirm-data';
 })
 export class ConfirmComponent implements OnInit {
   @Input() public message = '';
+  action:string = null;
   btnCancel: string = 'no';
   buttonConfirm: string = 'yes';
   constructor(private confirmStateService: ConfirmStateService,
@@ -18,6 +19,7 @@ export class ConfirmComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.action = this.confirmStateService.getConfirmAction();
 
   }
   closeModal() {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, Output, EventEmitter, ElementRef } from '@angular/core';
 import { Company } from 'src/ng2/app/interfaces/company/company';
 import { CompanyAndressContact } from 'src/ng2/app/interfaces/company/company-address-contact';
 import { CompanyAndress } from 'src/ng2/app/interfaces/company/company-address';
@@ -14,6 +14,7 @@ import { DownloadAgentStateService } from 'src/ng2/app/states/download-agent/dow
 import { DownloadAgentComponent } from '../download-agent/download-agent.component';
 import { CompanyProfile } from '../class/company-profile';
 import { DEARCHIVE_COMPANY, ARCHIVE_COMPANY } from 'src/ng2/app/const/confirm';
+import { AppService } from 'src/ng2/app/states/app/app.service';
 
 @Component({
   selector: 'app-companies-table',
@@ -30,19 +31,22 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
   public location: string = '';
   public countUsers: number = 0;
   public countDevices: number = 0;
- 
+  IS_MOBILE: boolean = false;
+
   sub: Subscription = new Subscription();
   constructor(private usersStateService: UsersStateService, private companiesStateService: CompaniesStateService,
     private devicesState: DevicesSateService, private modalService: NgbModal,
     private confirmStateService: ConfirmStateService,
     private companiesService: CompaniesService,
-    private downloadAgentStateService:DownloadAgentStateService) { }
+    private downloadAgentStateService: DownloadAgentStateService,
+    private appService: AppService,
+    private elRef: ElementRef) { }
 
   ngOnInit() {
 
-  /*  this.companiesStateService.getOnShowArchived().subscribe(data => {
-      this.showArchivedCompanies = data;
-    })*/
+    /*  this.companiesStateService.getOnShowArchived().subscribe(data => {
+        this.showArchivedCompanies = data;
+      })*/
     if (this.usersStateService.getAllUsers().length > 0) {
       this.onGetUsersCount(this.usersStateService.getAllUsers());
     } else {
@@ -59,10 +63,13 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
         this.onGetDevicesCount(data);
       })
     }
-  
+    this.IS_MOBILE = this.appService.checkMobile();
+    this.appService.getOnMobile().subscribe(data => {
+      this.IS_MOBILE = data;
+    })
 
   }
-  ngDoCheck(){
+  ngDoCheck() {
     if (this.company) {
       let primaryContact,
         primaryAddress,
@@ -92,7 +99,12 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
         this.location = '';
       }
     }
+  }
+  showInfo() {
+    if (this.IS_MOBILE) {
+      this.elRef.nativeElement.querySelector('.new-companies-content__list--item').classList.toggle('show-details');
     }
+  }
   getCompanyLogoUrl() {
     if (this.company && this.company.logo && this.company.logo && this.company.logo.base64 && !this.company.logo.cropped) {
       return this.company.logo.base64;
@@ -108,13 +120,13 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
   downloadAgent() {
     this.downloadAgentStateService.setCompnay(this.company);
     const modalRef = this.modalService.open(DownloadAgentComponent, { windowClass: 'download-modal' });
-    
+
   }
   edit() {
-    this.companiesService.getCompany(this.company.id).subscribe((data:CompanyProfile) =>{
+    this.companiesService.getCompany(this.company.id).subscribe((data: CompanyProfile) => {
       this.companiesStateService.setEditCompany(data);
     })
-   
+
   }
   remove() {
     this.confirmStateService.setConfirmAction(ARCHIVE_COMPANY);
@@ -124,7 +136,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     this.companiesStateService.setCompnayForArchive(this.company);
   }
   private onGetDevicesCount(data) {
-    
+
     let devices = data;
     this.countDevices = (devices[this.company.id]) ? devices[this.company.id].length : 0;
   }
@@ -136,8 +148,8 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
       return !isArchived && !this.showArchivedCompanies && user.company.id === this.company.id || this.showArchivedCompanies && isArchived && user.company.id === this.company.id;
     }).length;
   }
-   
- 
+
+
   onRestore() {
     this.confirmStateService.setConfirmAction(DEARCHIVE_COMPANY);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });

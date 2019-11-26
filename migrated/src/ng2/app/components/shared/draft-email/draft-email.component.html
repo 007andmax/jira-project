@@ -13,10 +13,10 @@
         <app-draft-email-recipients (onCompanyEmails)="onChangeCompanyEmails($event)"></app-draft-email-recipients>
 
         <div class="col-md-12 tab-btns">
-          <div ng-class="{active: tab == 'plain'}" (click)="tab = 'plain'">
+          <div [ngClass]="{active: tab == 'plain'}" (click)="tab = 'plain'">
             Plain Text
           </div>
-          <div ng-class="{active: tab == 'html'}" (click)="tab = 'html'"
+          <div [ngClass]="{active: tab == 'html'}" (click)="tab = 'html'"
           >Paste Html
           </div>
         </div>

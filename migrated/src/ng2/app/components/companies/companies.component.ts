@@ -15,6 +15,7 @@ import { CompanyCalculateCount } from './class/company-calculate-count';
 import { CompaniesRealTimeService } from '../../states/company/companies-real-time.service';
 import { CompanyUpdate } from './class/company-update';
 import { ARCHIVE_COMPANY, DEARCHIVE_COMPANY } from '../../const/confirm';
+import { AppService } from '../../states/app/app.service';
 
 @Component({
   selector: 'app-companies',
@@ -23,7 +24,7 @@ import { ARCHIVE_COMPANY, DEARCHIVE_COMPANY } from '../../const/confirm';
   providers: [CompaniesListService]
 })
 export class CompaniesComponent implements OnInit, OnDestroy {
-
+ 
   CompaniesList: Array<Company> = [];
   reqCompaniesList: Array<Company> = [];
   showPreloader: boolean = true;
@@ -46,7 +47,8 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     private companiesStateService: CompaniesStateService, private userService: UsersService,
     private confirmStateService: ConfirmStateService, private devicesState: DevicesSateService, private usersStateService: UsersStateService,
     private leftPanelStateService: LeftPanelStateService,
-    private companiesRealTimeService: CompaniesRealTimeService) { }
+    private companiesRealTimeService: CompaniesRealTimeService,
+   ) { }
 
   ngOnInit() {
     this.companiesStateService.getOnShowArchived().subscribe(data => {
@@ -127,6 +129,10 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       }
       
     })
+   
+  }
+  showMobileFilter() {
+    document.body.querySelector('app-left-panel-companies').classList.add('show');
   }
  /* private onRelaodList() {
   console.log('onRelaodList',this.reqCompaniesList);
