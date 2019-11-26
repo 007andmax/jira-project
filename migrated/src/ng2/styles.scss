@@ -289,6 +289,7 @@
   }
 }
 
+.new-companies-content__modal,
 .recurring-tickets-content__modal,
 .password-content__modal {
   top: 0 !important;
@@ -569,22 +570,6 @@ app-left-panel-tags-companies {
       top: 43px;
       right: -18px;
       cursor: pointer;
-    }
-  }
-}
-
-.recurring-tickets-content__modal--content-footer {
-  .assigned-users-list {
-    display: flex;
-    margin-left: -39px;
-    max-width: 148px;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    .default-user-avatar,
-    .avatar-26 {
-      width: 32px;
-      height: 32px;
-      margin-right: 5px;
     }
   }
 }
