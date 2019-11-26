@@ -19,7 +19,7 @@ export class AppService {
     this.onMobile.emit(data);
   }
 
-  public onCheckMobile() {
+  public onCheckMobile =()=> {
     if (document.documentElement.clientWidth <= 414 && !this.checkMobile()) {
       this.setMobile(true);
     } else if (document.documentElement.clientWidth > 414 && this.checkMobile()) {

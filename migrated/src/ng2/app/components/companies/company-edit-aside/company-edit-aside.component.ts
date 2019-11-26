@@ -116,7 +116,7 @@ public onCheckGoogleAutoComplete () {
 
   }
   onEditCompany() {
-    this.companiesStateService.getOnEditCompany().subscribe((data: CompanyProfile) => {
+    this.companiesStateService.getCompanyFromEdit().subscribe((data: CompanyProfile) => {
       this.company = new CompanyProfile();
       this.company.onEditMode(data);
       this.companySubscriptionState.onEditMode(this.company.contacts[0].subscription);

@@ -59,7 +59,7 @@ export class CompaniesStateService {
     this.onCalculateCount.emit(data);
   }
 
-  public getOnEditCompany() {
+  public getCompanyFromEdit() {
     return this.onEditCompany;
   }
   public setEditCompany(data) {
