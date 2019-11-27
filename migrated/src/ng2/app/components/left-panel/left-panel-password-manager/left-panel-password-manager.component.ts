@@ -79,6 +79,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.getPasswordRecords();
     this.addNewRecord();
     this.deleteRecord();
+    this.getCompaniesList();
     this.innerWidth = window.innerWidth;
   }
 
@@ -87,14 +88,28 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
    */
   public getCompaniesList() {
   //  this.ngOnInit();
-     return this.subscription = this.companiesService.clientsCompany
+  if (this.companiesState.getCompanies().length > 0) {
+    if (!this.cdRef['destroyed']) {
+      this.cdRef.detectChanges();
+    }
+    this.companiesList = this.getCompaniesNames(this.companiesState.getCompanies());
+    
+  } else {
+    this.companiesState.getOnCompanies().subscribe((data) => {
+      if (!this.cdRef['destroyed']) {
+        this.cdRef.detectChanges();
+      }
+      this.companiesList = this.getCompaniesNames(data);
+    })
+  }
+    /* return this.subscription = this.companiesService.clientsCompany
        .subscribe((company) => {
          if (!this.cdRef['destroyed']) {
            this.cdRef.detectChanges();
          }
          this.companiesList = this.getCompaniesNames(company);
        }
-     );
+     );*/
   }
 
   /**
@@ -236,6 +251,7 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
       if (this.innerWidth <= 414) {
         this.closeMobileFilters();
       }
+      this.cdRef.detectChanges();
     });
   }
 
@@ -335,7 +351,8 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     this.devicesAndUsersList = [];
     this.refreshCompany();
     this.refreshDeviceOrUser();
-    this.getPasswordRecords();
+//    this.getPasswordRecords();
+this.passwordRecords = this.passwordRecordsStart;
   }
 
   /**

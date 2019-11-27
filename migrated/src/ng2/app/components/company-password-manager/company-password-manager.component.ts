@@ -7,6 +7,7 @@ import { UsersService } from '../../services/users/users.service';
 import { PermissionsService } from '../../services/permissions/permissions.service';
 import { PasswordManagerListService } from './services/password-manager-list.service';
 import { UsersStateService } from '../../states/users/users-state.service';
+import { CompaniesStateService } from '../../states/company/companies-state.service';
 
 
 @Component({
@@ -45,6 +46,7 @@ export class CompanyPasswordManagerComponent implements OnInit, OnDestroy {
     private permissionsService: PermissionsService,
     private passwordManagerList: PasswordManagerListService,
     private userStateService: UsersStateService,
+    private companiesState: CompaniesStateService,
   ) {
     this.companiesService.getCompaniesList();
   }
@@ -65,7 +67,16 @@ export class CompanyPasswordManagerComponent implements OnInit, OnDestroy {
    * Initializes Password manager. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-    this.getSelectCompany();
+    if (this.companiesState.getCompanies().length > 0) {
+      this.getSelectCompany(this.companiesState.getCompanies());
+
+
+    } else {
+      this.companiesState.getOnCompanies().subscribe((data) => {
+        this.getSelectCompany(data);
+      })
+    }
+
     this.getSelectedCategory();
     this.getSelectedDeviceOrUser();
     this.getSelectedDate();
@@ -89,20 +100,14 @@ export class CompanyPasswordManagerComponent implements OnInit, OnDestroy {
   /**
    * Get selected company from filter
    */
-  public getSelectCompany() {
+  public getSelectCompany(clientsCompany) {
     console.log('getSelectCompany');
     if (localStorage.getItem('company_id')) {
       let company_id = localStorage.getItem('company_id');
-
-      let subscription = this.companiesService.clientsCompany
-        .subscribe((company) => {
-          this.refreshFilter();
-          this.selectedCompany = company.find(item => item.id === company_id);
-          if (window.location.hash.includes('company-password-manager')) this.apiPasswordManagerService.getCompanyRecords(company_id);
-
-        }
-        );
-      this.sub.add(subscription);
+      console.log('getSelectCompany', company_id);
+      this.refreshFilter();
+      this.selectedCompany = clientsCompany.find(item => item.id === company_id);
+      if (window.location.hash.includes('company-password-manager')) this.apiPasswordManagerService.getCompanyRecords(company_id);
     }
     /* this.companiesService.filteredCompanyUpdate.subscribe((company) => {
        this.refreshFilter();
