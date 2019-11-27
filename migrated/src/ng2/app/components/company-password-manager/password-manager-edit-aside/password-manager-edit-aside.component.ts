@@ -16,6 +16,7 @@ import { GadgetsService } from "../../../services/gadgets/gadgets.service";
 import { PermissionsService } from "../../../services/permissions/permissions.service";
 import { ApiPasswordManagerService } from "../../../services/password-manager/api-password-manager.service";
 import { ShowHideService } from 'ngx-show-hide-password';
+import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 
 /**
  * Password manager edit aside component
@@ -92,7 +93,8 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
     private permissionsService: PermissionsService,
     private apiPasswordManagerService: ApiPasswordManagerService,
     public cd: ChangeDetectorRef,
-    private showHideService:ShowHideService
+    private showHideService:ShowHideService,
+    private companiesState: CompaniesStateService,
   ) { }
 
   /**
@@ -100,7 +102,16 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
    */
   ngOnInit() {
     this.showAddForm();
-    this.getCLientsList();
+    if (this.companiesState.getCompanies().length > 0) {
+      this.getCLientsList(this.companiesState.getCompanies());
+
+
+    } else {
+      this.companiesState.getOnCompanies().subscribe((data) => {
+        this.getCLientsList(data);
+      })
+    }
+   
     this.type = 0;
     this.currentType = PASSWORD_RECORD_TYPES[0];
     this.hideAddForm();
@@ -427,12 +438,12 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
   /**
    * get client list
    */
-  public getCLientsList() {
-    this.subGetCompaniesList = this.companiesService.clientsCompany.subscribe((res: any) => {
+  public getCLientsList(res) {
+    
       this.clientsList = res
         .sort((a, b) => a.name.localeCompare(b.name))
         .filter((item) => !item.deletedAt)
-    })
+    
   }
 
   /**
