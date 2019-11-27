@@ -106,6 +106,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   ngOnInit() {
     this.showAddForm();
     this.getCLientsList();
+    this.oGetDevices();
     this.type = 0;
     this.currentType = PASSWORD_RECORD_TYPES[0];
     this.hideAddForm();
@@ -362,13 +363,13 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.selectedClient = companyId.item;
     this.clearClient();
    
-    this.getGadgets();
-    this.subGetDevices = this.devicesService.getCompanyDevices(companyId.item.id).subscribe((res) => {
+   // this.getGadgets();
+  //  this.subGetDevices = this.devicesService.getCompanyDevices(companyId.item.id).subscribe((res) => {
       if (this.devicesSateService.getAllDevices()[companyId.item.id]) {
         this.deviceCheckbox = new Array([...this.devicesSateService.getAllDevices()[companyId.item.id]].length);
         this.showGadgetsForm = false;
         for (var i = 0; i < this.deviceCheckbox.length; ++i) { this.deviceCheckbox[i] = false; }
-        this.devicesList = [...res[companyId.item.id]];
+        this.devicesList = [...this.devicesSateService.getAllDevices()[companyId.item.id]];
         this.devicesList.sort((a, b) => (a.hostName.toLowerCase() > b.hostName.toLowerCase()) ?
           1 : ((b.hostName.toLowerCase() > a.hostName.toLowerCase()) ? -1 : 0));
         if (this.isEditmode && this.editItem) {
@@ -383,7 +384,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
         }
         companyId.item && this.getAllUsers(companyId.item.id);
       }
-    });
+  //  });
     return this.selectedClient;
   }
 
@@ -560,11 +561,24 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.showGadgetsForm = !this.showGadgetsForm;
   }
 
+  public oGetDevices() {
+    if (this.devicesSateService.getAllDevices()) {
+      this.getGadgets(this.devicesSateService.getAllDevices());
+    } else {
+      this.devicesSateService.getOnDevices().subscribe((data) => {
+      
+        this.getGadgets(data);
+      })
+    }
+  }
+
   /**
    * get gadgets
    */
-  public getGadgets() {
-    this.subGetGadgets = this.gadgetsService.getCompanyDevices().subscribe((res: any) => {
+  public getGadgets(res) {
+    
+  
+   // this.subGetGadgets = this.gadgetsService.getCompanyDevices().subscribe((res: any) => {
       this.gadgets = [...res];
       this.gadgetCheckbox = new Array(this.gadgets.length);
       for (var i = 0; i < this.gadgetCheckbox.length; ++i) {
@@ -581,7 +595,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
           }
         });
       }
-    });
+  //  });
   }
 
   /**

@@ -17,6 +17,7 @@ import { PermissionsService } from "../../../services/permissions/permissions.se
 import { ApiPasswordManagerService } from "../../../services/password-manager/api-password-manager.service";
 import { ShowHideService } from 'ngx-show-hide-password';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
+import { DevicesSateService } from 'src/ng2/app/states/devices/devices-sate.service';
 
 /**
  * Password manager edit aside component
@@ -95,6 +96,7 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
     public cd: ChangeDetectorRef,
     private showHideService:ShowHideService,
     private companiesState: CompaniesStateService,
+    private devicesSateService:DevicesSateService
   ) { }
 
   /**
@@ -115,6 +117,7 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
     this.type = 0;
     this.currentType = PASSWORD_RECORD_TYPES[0];
     this.hideAddForm();
+    this.oGetDevices();
   }
 
   /**
@@ -356,13 +359,13 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
     this.selectedClient = companyId.item;
     this.clearClient();
    
-    this.getGadgets();
-    this.subGetDevices = this.devicesService.getCompanyDevices(companyId.item.id).subscribe((res) => {
-      if (res[companyId.item.id]) {
-        this.deviceCheckbox = new Array([...res[companyId.item.id]].length);
+   // this.getGadgets();
+   // this.subGetDevices = this.devicesService.getCompanyDevices(companyId.item.id).subscribe((res) => {
+      if (this.devicesSateService.getAllDevices()[companyId.item.id]) {
+        this.deviceCheckbox = new Array([...this.devicesSateService.getAllDevices()[companyId.item.id]].length);
         this.showGadgetsForm = false;
         for (var i = 0; i < this.deviceCheckbox.length; ++i) { this.deviceCheckbox[i] = false; }
-        this.devicesList = [...res[companyId.item.id]];
+        this.devicesList = [...this.devicesSateService.getAllDevices()[companyId.item.id]];
         if (this.isEditmode && this.editItem) {
           this.editItem.links.map((item) => {
             const index = this.devicesList.findIndex((deviceListItem) => {
@@ -375,7 +378,7 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
           companyId.item && this.getAllUsers(companyId.item.id);
         }
       }
-    });
+   // });
     return this.selectedClient;
   }
 
@@ -544,11 +547,22 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
     this.showGadgetsForm = !this.showGadgetsForm;
   }
 
+  public oGetDevices() {
+    if (this.devicesSateService.getAllDevices()) {
+      this.getGadgets(this.devicesSateService.getAllDevices());
+    } else {
+      this.devicesSateService.getOnDevices().subscribe((data) => {
+      
+        this.getGadgets(data);
+      })
+    }
+  }
+
   /**
    * get gadgets
    */
-  public getGadgets() {
-    this.subGetGadgets = this.gadgetsService.getCompanyDevices().subscribe((res: any) => {
+  public getGadgets(res) {
+   // this.subGetGadgets = this.gadgetsService.getCompanyDevices().subscribe((res: any) => {
       this.gadgets = [...res];
       this.gadgetCheckbox = new Array(this.gadgets.length);
       for (var i = 0; i < this.gadgetCheckbox.length; ++i) {
@@ -565,7 +579,7 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
           }
         });
       }
-    });
+   // });
   }
 
   /**
