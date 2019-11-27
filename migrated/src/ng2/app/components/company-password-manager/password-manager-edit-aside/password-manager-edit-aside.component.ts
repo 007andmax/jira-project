@@ -120,8 +120,8 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
     this.type = 0;
     this.currentType = PASSWORD_RECORD_TYPES[0];
     this.hideAddForm();
-    this.oGetUsers();
-    this.oGetDevices();
+    this.onGetUsers();
+   // this.oGetDevices();
   }
 
   /**
@@ -363,7 +363,7 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
     this.selectedClient = companyId.item;
     this.clearClient();
    
-   // this.getGadgets();
+    this.getGadgets();
    // this.subGetDevices = this.devicesService.getCompanyDevices(companyId.item.id).subscribe((res) => {
       if (this.devicesSateService.getAllDevices()[companyId.item.id]) {
         this.deviceCheckbox = new Array([...this.devicesSateService.getAllDevices()[companyId.item.id]].length);
@@ -379,11 +379,12 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
               this.toggleItem(this.devicesList[index], 'device', index);
             }
           });
-          companyId.item && this.getUsersCompany(companyId.item.id);
+         
         }
       }
+      companyId.item && this.getUsersCompany(companyId.item.id);
    // });
-    return this.selectedClient;
+   // return this.selectedClient;
   }
 
   /**
@@ -557,7 +558,7 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
     this.showGadgetsForm = !this.showGadgetsForm;
   }
 
-  public oGetDevices() {
+  /*public oGetDevices() {
     if (this.devicesSateService.getAllDevices()) {
       this.getGadgets(this.devicesSateService.getAllDevices());
     } else {
@@ -566,8 +567,8 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
         this.getGadgets(data);
       })
     }
-  }
-  public oGetUsers() {
+  }*/
+  public onGetUsers() {
     if (this.usersStateService.getAllUsers().length > 0) {
       this.getAllUsers(this.usersStateService.getAllUsers());
     } else {
@@ -580,8 +581,8 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
   /**
    * get gadgets
    */
-  public getGadgets(res) {
-   // this.subGetGadgets = this.gadgetsService.getCompanyDevices().subscribe((res: any) => {
+  public getGadgets() {
+    this.subGetGadgets = this.gadgetsService.getCompanyDevices().subscribe((res: any) => {
       this.gadgets = [...res];
       this.gadgetCheckbox = new Array(this.gadgets.length);
       for (var i = 0; i < this.gadgetCheckbox.length; ++i) {
@@ -598,7 +599,7 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
           }
         });
       }
-   // });
+    });
   }
 
   /**

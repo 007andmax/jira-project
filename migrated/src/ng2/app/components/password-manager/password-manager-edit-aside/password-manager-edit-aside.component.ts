@@ -110,7 +110,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.showAddForm();
     this.getCLientsList();
     this.oGetUsers();
-    this.oGetDevices();
+ //   this.oGetDevices();
     this.type = 0;
     this.currentType = PASSWORD_RECORD_TYPES[0];
     this.hideAddForm();
@@ -366,7 +366,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.selectedClient = companyId.item;
     this.clearClient();
 
-    // this.getGadgets();
+     this.getGadgets();
     //  this.subGetDevices = this.devicesService.getCompanyDevices(companyId.item.id).subscribe((res) => {
     if (this.devicesSateService.getAllDevices()[companyId.item.id]) {
       this.deviceCheckbox = new Array([...this.devicesSateService.getAllDevices()[companyId.item.id]].length);
@@ -385,10 +385,11 @@ export class PasswordManagerEditAsideComponent implements OnInit {
           }
         });
       }
-      companyId.item && this.getUsersCompany(companyId.item.id);
+     
     }
+    companyId.item && this.getUsersCompany(companyId.item.id);
     //  });
-    return this.selectedClient;
+ //   return this.selectedClient;
   }
 
   /**
@@ -530,6 +531,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   private getUsersCompany(companyId) {
 
     let data = this.reqUsersList.filter((item) => item.company.id == companyId && !item.deletedAt);
+    console.log('data',data);
     this.usersList = [...data];
 
     this.usersCheckbox = new Array(this.usersList.length);
@@ -568,16 +570,16 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.showGadgetsForm = !this.showGadgetsForm;
   }
 
-  public oGetDevices() {
+ /* public oGetDevices() {
     if (this.devicesSateService.getAllDevices()) {
-      this.getGadgets(this.devicesSateService.getAllDevices());
+      this.getDevices(this.devicesSateService.getAllDevices());
     } else {
       this.devicesSateService.getOnDevices().subscribe((data) => {
 
-        this.getGadgets(data);
+        this.getDevices(data);
       })
     }
-  }
+  }*/
   public oGetUsers() {
     if (this.usersStateService.getAllUsers().length > 0) {
       this.getAllUsers(this.usersStateService.getAllUsers());
@@ -592,10 +594,10 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   /**
    * get gadgets
    */
-  public getGadgets(res) {
+  public getGadgets() {
 
 
-    // this.subGetGadgets = this.gadgetsService.getCompanyDevices().subscribe((res: any) => {
+     this.subGetGadgets = this.gadgetsService.getCompanyDevices().subscribe((res: any) => {
     this.gadgets = [...res];
     this.gadgetCheckbox = new Array(this.gadgets.length);
     for (var i = 0; i < this.gadgetCheckbox.length; ++i) {
@@ -612,7 +614,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
         }
       });
     }
-    //  });
+      });
   }
 
   /**
