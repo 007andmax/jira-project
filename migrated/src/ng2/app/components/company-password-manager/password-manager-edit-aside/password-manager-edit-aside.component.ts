@@ -18,6 +18,7 @@ import { ApiPasswordManagerService } from "../../../services/password-manager/ap
 import { ShowHideService } from 'ngx-show-hide-password';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { DevicesSateService } from 'src/ng2/app/states/devices/devices-sate.service';
+import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 
 /**
  * Password manager edit aside component
@@ -52,6 +53,7 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
   public showGadgetsForm: any;
   public newGadgets: any;
   public gadgets: any;
+  public reqUsersList = [];
   public userDevice = [];
   public usersCheckbox = [];
   public deviceCheckbox = [];
@@ -96,7 +98,8 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
     public cd: ChangeDetectorRef,
     private showHideService:ShowHideService,
     private companiesState: CompaniesStateService,
-    private devicesSateService:DevicesSateService
+    private devicesSateService:DevicesSateService,
+    private usersStateService: UsersStateService,
   ) { }
 
   /**
@@ -117,6 +120,7 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
     this.type = 0;
     this.currentType = PASSWORD_RECORD_TYPES[0];
     this.hideAddForm();
+    this.oGetUsers();
     this.oGetDevices();
   }
 
@@ -375,7 +379,7 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
               this.toggleItem(this.devicesList[index], 'device', index);
             }
           });
-          companyId.item && this.getAllUsers(companyId.item.id);
+          companyId.item && this.getUsersCompany(companyId.item.id);
         }
       }
    // });
@@ -504,28 +508,34 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
   /**
    * get all users
    */
-  private getAllUsers(companyId) {
-    this.subGetAllUsers = this.userService.getAllusers().subscribe((res: any) => {
-     let data = res.filter((item) => item.company.id == companyId && !item.deletedAt);
-      this.usersList = [...(data.filter((item) => item.accountType === USER.TYPE.CLIENT))];
-     
-      this.usersList.sort((a, b) => (!a.firstName && !a.lastName || !b.firstName && !b.lastName || a.firstName.length === 0 && a.lastName.length === 0 || b.firstName.length === 0 && b.lastName.length === 0) ? -1 : (a.firstName.toLowerCase() > b.firstName.toLowerCase()) ?
+  private getAllUsers(res) {
+
+    this.reqUsersList = [...(res.filter((item) => item.accountType === USER.TYPE.CLIENT))];
+    this.reqUsersList.sort((a, b) => (!a.firstName && !a.lastName || !b.firstName && !b.lastName || a.firstName.length === 0 && a.lastName.length === 0 || b.firstName.length === 0 && b.lastName.length === 0) ? -1 : (a.firstName.toLowerCase() > b.firstName.toLowerCase()) ?
       1 : ((b.firstName.toLowerCase() > a.firstName.toLowerCase()) ? -1 : 0));
-      this.usersCheckbox = new Array(this.usersList.length);
-      for (var i = 0; i < this.usersCheckbox.length; ++i) { this.usersCheckbox[i] = false; }
-      if (this.isEditmode && this.editItem) {
-        this.editItem.links.map((item) => {
-          const index_res = res.findIndex(userListItem =>userListItem.id === item.userId);
-          const index = this.usersList.findIndex(userListItem =>userListItem.id === item.userId);
-          if (index > -1 && index_res > -1) {
-            this.toggleItem(this.usersList[index], 'user', index);
-          } else  if (index === -1 && index_res > -1) {
-            this.toggleItem(res[index_res], 'user', index);
-          }
-        });
-      }
-    })
   }
+
+  private getUsersCompany(companyId) {
+
+    let data = this.reqUsersList.filter((item) => item.company.id == companyId && !item.deletedAt);
+    this.usersList = [...data];
+
+    this.usersCheckbox = new Array(this.usersList.length);
+    for (var i = 0; i < this.usersCheckbox.length; ++i) { this.usersCheckbox[i] = false; }
+    if (this.isEditmode && this.editItem) {
+      this.editItem.links.map((item) => {
+        const index_res = this.reqUsersList.findIndex(userListItem => userListItem.id === item.userId);
+        const index = this.usersList.findIndex(userListItem => userListItem.id === item.userId);
+        if (index > -1 && index_res > -1) {
+          this.toggleItem(this.usersList[index], 'user', index);
+        } else if (index === -1 && index_res > -1) {
+          this.toggleItem(this.reqUsersList[index_res], 'user', index);
+        }
+      });
+    }
+
+  }
+
 
   /**
    * add gadgets form
@@ -557,7 +567,16 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
       })
     }
   }
+  public oGetUsers() {
+    if (this.usersStateService.getAllUsers().length > 0) {
+      this.getAllUsers(this.usersStateService.getAllUsers());
+    } else {
+      this.usersStateService.getOnUsers().subscribe((data) => {
 
+        this.getAllUsers(data);
+      })
+    }
+  }
   /**
    * get gadgets
    */
