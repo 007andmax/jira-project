@@ -6,11 +6,11 @@
       <div>Filters</div>
     </div>
 
-    <div class="left-panel-ng2__content--lists mob-hidden">
+    <div class="left-panel-ng2__content--lists">
       <div class="list-item" [ngClass]="{'active': !showArchivedCompanies}" (click)="onShowAll()">All Companies</div>
       <div class="list-item" [ngClass]="{'active': showArchivedCompanies}" (click)="onShowArchived()">Archive</div>
     </div>
-    <div class="left-panel-ng2__content--types mob-hidden">
+    <div class="left-panel-ng2__content--types">
       <div class="types-header">By Types</div>
       <div class="types-item" [ngClass]="{'active': filter.getClientType() === 'CLIENT'}"
            (click)="onSetFilterClientType('CLIENT')">Clients ({{calculateCount.getClients()}})
@@ -43,21 +43,21 @@
                                (onSelectedItem)="onSelectTechLead($event)"></app-select-search>
           </div>
           <!-- <div class="dark-dropdown"
-                ngbDropdown>
-             <input id="dropdownPersons"
-                    [value]="getSelectedTechLead()"
-                    placeholder="Select Sales Person"
-                    ngbDropdownToggle>
-             <i class="icn-sm icn-remove-old" *ngIf="showClearSalesPerson" (click)="clearSalesPerson()" tooltip="clear"
-                tooltip-placement="top"></i>
-             <i class="icn-sm report-caret-icon" *ngIf="!showClearSalesPerson"></i>
-             <div ngbDropdownMenu aria-labelledby="dropdownPersons">
-               <ng-template ngFor let-item [ngForOf]="listPersons" let-i="index">
-                 <button ngbDropdownItem [textContent]="item.firstName + ' ' + item.lastName"
-                         (click)="onSelectTechLead(i)"></button>
-               </ng-template>
-             </div>
-           </div> -->
+				ngbDropdown>
+			 <input id="dropdownPersons"
+					[value]="getSelectedTechLead()"
+					placeholder="Select Sales Person"
+					ngbDropdownToggle>
+			 <i class="icn-sm icn-remove-old" *ngIf="showClearSalesPerson" (click)="clearSalesPerson()" tooltip="clear"
+				tooltip-placement="top"></i>
+			 <i class="icn-sm report-caret-icon" *ngIf="!showClearSalesPerson"></i>
+			 <div ngbDropdownMenu aria-labelledby="dropdownPersons">
+			   <ng-template ngFor let-item [ngForOf]="listPersons" let-i="index">
+				 <button ngbDropdownItem [textContent]="item.firstName + ' ' + item.lastName"
+						 (click)="onSelectTechLead(i)"></button>
+			   </ng-template>
+			 </div>
+		   </div> -->
           <div class="resent-block">
             <div class="resent-block__header">Recent</div>
             <div class="resent-block__content">
@@ -80,20 +80,20 @@
                                (onSelectedItem)="onSelectClientIndustry($event)"></app-select-search>
           </div>
           <!-- <div class="dark-dropdown"
-                ngbDropdown>
-             <input id="dropdownClientIndustry"
-                    placeholder="Select Industry"
-                    [value]="clientIndustry"
-                    ngbDropdownToggle>
-             <i class="icn-sm icn-remove-old"  *ngIf="showClearIndustry" (click)="clearClientIndustry()" tooltip="clear"
-                tooltip-placement="top"></i>
-             <i class="icn-sm report-caret-icon" *ngIf="!showClearIndustry"></i>
-             <div ngbDropdownMenu aria-labelledby="dropdownClientIndustry">
-               <ng-template ngFor let-item [ngForOf]="industries">
-                 <button ngbDropdownItem [textContent]="item" (click)="onSelectClientIndustry(item)"></button>
-               </ng-template>
-             </div>
-           </div>-->
+				ngbDropdown>
+			 <input id="dropdownClientIndustry"
+					placeholder="Select Industry"
+					[value]="clientIndustry"
+					ngbDropdownToggle>
+			 <i class="icn-sm icn-remove-old"  *ngIf="showClearIndustry" (click)="clearClientIndustry()" tooltip="clear"
+				tooltip-placement="top"></i>
+			 <i class="icn-sm report-caret-icon" *ngIf="!showClearIndustry"></i>
+			 <div ngbDropdownMenu aria-labelledby="dropdownClientIndustry">
+			   <ng-template ngFor let-item [ngForOf]="industries">
+				 <button ngbDropdownItem [textContent]="item" (click)="onSelectClientIndustry(item)"></button>
+			   </ng-template>
+			 </div>
+		   </div>-->
           <div class="resent-block">
             <div class="resent-block__header">Recent</div>
             <div class="resent-block__content">

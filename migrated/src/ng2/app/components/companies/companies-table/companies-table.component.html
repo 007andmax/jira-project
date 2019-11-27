@@ -1,58 +1,62 @@
-<div class="new-companies-content__list--item clearfix" (click)="showInfo()">
-  <div class="col-md-3 w-100">
-    <label class="checkbox-container">
-      <input type="checkbox">
-      <span class="checkbox-mark"></span>
-    </label>
-    <div class="circle-avatar">
-      <img [src]="getCompanyLogoUrl()" class="qwe" alt=""
-      *ngIf="(company && company.logo && company.logo.cropped && company.logo.cropped.id)">
-   <span *ngIf="!(company && company.logo && company.logo.cropped && company.logo.cropped.id)" [textContent]="company.name[0].toUpperCase()"></span>
+<div style="position: relative;">
+  <div class="new-companies-content__list--item clearfix" (click)="showInfo()">
+    <div class="col-md-3 w-100">
+      <label class="checkbox-container">
+        <input type="checkbox">
+        <span class="checkbox-mark"></span>
+      </label>
+      <div class="circle-avatar">
+        <img [src]="getCompanyLogoUrl()" class="qwe" alt=""
+             *ngIf="(company && company.logo && company.logo.cropped && company.logo.cropped.id)">
+        <span *ngIf="!(company && company.logo && company.logo.cropped && company.logo.cropped.id)"
+              [textContent]="company.name[0].toUpperCase()"></span>
+      </div>
+      <div class="mob-styles">
+        <p class="ff-g-m fw-600" [textContent]="company.name"></p>
+        <p class="desktop-hidden company-phone">979-431-8937</p>
+      </div>
     </div>
-    <div class="mob-styles">
-      <p class="ff-g-m fw-600" [textContent]="company.name"></p>
-      <p class="desktop-hidden company-phone">979-431-8937</p>
+    <div class="col-md-3 company-location w-100">
+      {{location}}
+      <a class="company-link desktop-hidden">Show Map</a>
     </div>
-  </div>
-  <div class="col-md-3 company-location w-100">
-    {{location}}
-    <a class="company-link desktop-hidden">Show Map</a>
-  </div>
-  <div class="col-md-4 contact w-100">
-    <p [textContent]="getUserName()"></p>
-    <p class="mob-hidden" [textContent]="(primaryPhone && primaryPhone.number) ? primaryPhone.number : ''"></p>
-  </div>
-  <div class="col-md-4 mob-hidden" [textContent]="primaryContact.primaryEmail"></div>
-  <div class="col-md-1 mob-hidden" [textContent]="company.companyStatistic.ticketsSubmitted || '0'"></div>
-  <div class="col-md-1 mob-hidden" [textContent]="countDevices"></div>
-  <div class="col-md-1 mob-hidden" [textContent]="countUsers"></div>
-  <div class="col-md-2 mob-hidden">
-    <i class="history-ng2 icn-24 pointer" (click)="onRestore()" *ngIf="showArchivedCompanies"></i>
-    <button (click)="downloadAgent()" *ngIf="!showArchivedCompanies"><i class="icn-16 import-ng2"></i></button>
-    <div class="grey-dropdown right with-icons" *ngIf="!showArchivedCompanies"
-         ngbDropdown>
-      <i class="icn-16 more-vertical-ng2 pointer"
-         id="dropdownBasic"
-         ngbDropdownToggle></i>
-      <div ngbDropdownMenu aria-labelledby="dropdownBasic">
-        <button ngbDropdownItem (click)="edit()"><i class="icn-16 edit-grey-ng2"></i>Edit</button>
-        <button ngbDropdownItem (click)="remove()"><i class="icn-16 archive-grey-ng2"></i>Delete</button>
+    <div class="col-md-4 contact w-100">
+      <p [textContent]="getUserName()"></p>
+      <p class="mob-hidden" [textContent]="(primaryPhone && primaryPhone.number) ? primaryPhone.number : ''"></p>
+    </div>
+    <div class="col-md-4 mob-hidden" [textContent]="primaryContact.primaryEmail"></div>
+    <div class="col-md-1 mob-hidden" [textContent]="company.companyStatistic.ticketsSubmitted || '0'"></div>
+    <div class="col-md-1 mob-hidden" [textContent]="countDevices"></div>
+    <div class="col-md-1 mob-hidden" [textContent]="countUsers"></div>
+    <div class="col-md-2 mob-hidden">
+      <i class="history-ng2 icn-24 pointer" (click)="onRestore()" *ngIf="showArchivedCompanies"></i>
+      <button (click)="downloadAgent()" *ngIf="!showArchivedCompanies"><i class="icn-16 import-ng2"></i></button>
+      <div class="grey-dropdown right with-icons" *ngIf="!showArchivedCompanies"
+           ngbDropdown>
+        <i class="icn-16 more-vertical-ng2 pointer"
+           id="dropdownBasic"
+           ngbDropdownToggle></i>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic">
+          <button ngbDropdownItem (click)="edit()"><i class="icn-16 edit-grey-ng2"></i>Edit</button>
+          <button ngbDropdownItem (click)="remove()"><i class="icn-16 archive-grey-ng2"></i>Delete</button>
+        </div>
+      </div>
+    </div>
+    <div class="mob-company-footer desktop-hidden">
+      <div>
+        <p>TICKETS</p>
+        <p>178</p>
+      </div>
+      <div>
+        <p>DEVICES</p>
+        <p>344</p>
+      </div>
+      <div>
+        <p>USERS</p>
+        <p>655</p>
       </div>
     </div>
   </div>
-
-  <div class="mob-company-footer desktop-hidden">
-    <div>
-      <p>TICKETS</p>
-      <p>178</p>
-    </div>
-    <div>
-      <p>DEVICES</p>
-      <p>344</p>
-    </div>
-    <div>
-      <p>USERS</p>
-      <p>655</p>
-    </div>
-  </div>
+  <button class="company-edit-icn company-edit-icn-sm desktop-hidden"
+          (click)="edit()"></button>
 </div>

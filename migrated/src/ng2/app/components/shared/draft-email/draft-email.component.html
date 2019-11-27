@@ -23,12 +23,15 @@
         <div class="col-md-12 editor-container" style="margin-top: 0;">
           <!--EDITOR-->
 
-          <app-ngx-editor *ngIf="tab == 'plain'" [config]="editorConfig" [spellcheck]="true"
-                          [(ngModel)]="messageContent"></app-ngx-editor>
-          <textarea *ngIf="tab == 'html'" [(ngModel)]="messageHTML" class="email-text-block textarea"
-                    placeholder="Put here your HTML"></textarea>
-
-          <div class="form-group">
+          <div style="position:relative;">
+            <app-ngx-editor *ngIf="tab == 'plain'" [config]="editorConfig" [spellcheck]="true"
+                            [(ngModel)]="messageContent"></app-ngx-editor>
+            <div *ngIf="tab == 'plain'" class="editor-container-attachments">
+              <i class="icn-16 icn-text-attachment"></i>
+              <input id="upload-file-email" type="file" (input)="uploadFileOnBrower($event)" />
+            </div>
+          </div>
+          <div *ngIf="tab == 'plain'" class="form-group">
             <ul class="upload-attachments">
               <ng-template ngFor let-file [ngForOf]="uploadFiles" let-i="index" [ngForTrackBy]="trackByIndex">
                 <li
@@ -67,10 +70,10 @@
               </ng-template>
             </ul>
           </div>
-          <div *ngIf="tab == 'plain'" class="editor-container-attachments">
-            <i class="icn-16 icn-text-attachment"></i>
-            <input id="upload-file-email" type="file" (input)="uploadFileOnBrower($event)" />
-          </div>
+          <textarea *ngIf="tab == 'html'" [(ngModel)]="messageHTML" class="email-text-block textarea"
+                    placeholder="Put here your HTML"></textarea>
+
+
         </div>
 
         <div class="col-md-12 new-companies-content__modal--content-footer">

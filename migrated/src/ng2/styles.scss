@@ -45,39 +45,6 @@
   padding-right: 0 !important;
 }
 
-.w-150 .dropdown-menu {
-  width: 150%;
-}
-
-.xs-modal {
-  .modal-dialog {
-    width: 440px;
-    transform: translate(20%, 20%) !important;
-    left: 50%;
-    top: 50%;
-    position: fixed;
-  }
-}
-
-.confirm-modal {
-  padding: 30px;
-  .close-btn {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-  }
-  .modal-body {
-    margin-bottom: 20px;
-  }
-  .modal-footer {
-    padding: 0;
-    border: none;
-    .btn {
-      text-transform: capitalize;
-    }
-  }
-}
-
 .with-dollar, .with-percent {
   position: relative;
   input {
@@ -100,6 +67,8 @@
 .circle-avatar {
   width: 40px;
   height: 40px;
+  min-width: 40px;
+  min-height: 40px;
   border: 1px solid rgba(22, 164, 250, 0.2);
   border-radius: 50%;
   text-transform: uppercase;
@@ -199,12 +168,10 @@
   display: flex !important;
   padding: 0 !important;
   > button {
-    min-width: 130px;
     background: transparent;
     border: none;
     padding: 0 20px;
     height: 100%;
-    text-align: left;
   }
   > div {
     display: flex;
@@ -212,7 +179,7 @@
     .dropdown-menu {
       right: 0 !important;
       left: auto !important;
-      width: 172px !important;
+      width: 197px !important;
       .dropdown-item {
         height: 40px;
         font-size: 13px;
@@ -257,36 +224,6 @@
   top: 78px !important;
   box-shadow: 0 0 60px 0 rgba(0, 0, 0, 0.1);
   overflow-x: hidden !important;
-}
-
-.editable-description {
-  position: relative;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  max-height: 150px;
-  width: 100%;
-  border: 1px solid #c4cbd5;
-  border-radius: 4px;
-  display: flex;
-  textarea {
-    width: 100%;
-    border: none;
-    padding: 12px;
-    font-size: 13px;
-    outline: none;
-    &:last-child {
-      visibility: hidden;
-    }
-  }
-}
-
-.quote-create__content--top {
-  .editable-description {
-    max-height: 134px;
-    textarea {
-      padding: 6px 12px;
-    }
-  }
 }
 
 .new-companies-content__modal,
@@ -344,10 +281,13 @@ app-left-panel-tags-companies {
 }
 
 .editor-container {
+  .ngx-wrapper {
+    margin-bottom: 64px;
+  }
   .editor-container-attachments {
     position: absolute;
-    top: 24px;
-    left: 218px;
+    bottom: 25px;
+    right: 325px;
     cursor: pointer;
     #upload-file-email {
       width: 16px;
@@ -370,11 +310,14 @@ app-left-panel-tags-companies {
     }
     .ngx-toolbar {
       border: none !important;
-      border-bottom: solid 1px #c4cbd5 !important;
+      border-top: solid 1px #c4cbd5 !important;
       padding: 0 !important;
       height: 64px !important;
       background: transparent !important;
-      position: relative;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 100%;
       .ngx-toolbar-set {
         position: absolute;
         top: 50%;
@@ -574,6 +517,65 @@ app-left-panel-tags-companies {
   }
 }
 
+.archive-modal {
+  padding: 40px;
+  position: relative;
+  .close-modal {
+    background: transparent;
+    border: none;
+  }
+  &__body {
+    margin-bottom: 50px;
+    padding-left: 70px;
+    h3 {
+      font-family: "Graphik Semibold", sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1.4;
+      color: #364656;
+      position: relative;
+      margin: 0;
+      &:before,
+      &:after {
+        content: '';
+        position: absolute;
+      }
+      &:before {
+        left: -70px;
+        top: 0;
+        width: 48px;
+        height: 48px;
+        background: #ffeceb;
+        border-radius: 50%;
+      }
+      &:after {
+        left: -58px;
+        top: 10px;
+        width: 24px;
+        height: 24px;
+        background: url("assets/img/icons/archive-red-ng2.png") no-repeat;;
+      }
+    }
+    p {
+      font-family: "Graphik Regular", sans-serif;
+      font-size: 13px;
+      line-height: 1.54;
+    }
+  }
+  &__footer {
+    .btn-new {
+      border: none;
+      height: 48px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-family: "Graphik-Medium", sans-serif;
+    }
+    .btn-primary {
+      margin-right: 16px;
+    }
+  }
+}
+
 .mat-chip.mat-standard-chip {
   padding: 9px 15px 9px 5px;
   border-radius: 3px !important;
@@ -676,85 +678,6 @@ ngb-typeahead-window {
       background: #fff;
       border-radius: 5px;
       border: solid 1px #edf2f6;
-    }
-    &--bottom {
-      .fixed-width {
-        .col-md-1 {
-          width: 19%;
-        }
-        .col-md-2 {
-          width: 36%;
-        }
-        .col-md-3 {
-          width: 55%;
-        }
-        .col-md-4 {
-          width: 115px;
-        }
-        .col-md-5 {
-          width: 100px;
-        }
-        @media (min-width: 2048px) {
-          .col-md-1 {
-            width: 23%;
-          }
-          .col-md-3 {
-            width: 59%;
-          }
-        }
-        @media (min-width: 2560px) {
-          .col-md-1 {
-            width: 32%;
-          }
-          .col-md-3 {
-            width: 68%;
-          }
-        }
-        @media (max-width: 1600px) {
-          .col-md-2 {
-            width: 34%;
-          }
-          .col-md-3 {
-            width: 53%;
-          }
-          .col-md-4 {
-            width: 94px;
-          }
-          .col-md-5 {
-            width: 84px;
-          }
-          [class*="col-md-"] {
-            padding-left: 5px !important;
-            padding-right: 5px !important;
-          }
-          .with-dollar:before,
-          .with-percent:before {
-            left: 14px;
-          }
-        }
-        @media (max-width: 1366px) {
-          .col-md-2 {
-            width: 27%;
-          }
-          .col-md-3 {
-            width: 46%;
-          }
-          .col-md-4 {
-            width: 87px;
-          }
-          .col-md-5 {
-            width: 77px;
-          }
-        }
-        @media (max-width: 1280px) {
-          .col-md-2 {
-            width: 22%;
-          }
-          .col-md-3 {
-            width: 41%;
-          }
-        }
-      }
     }
     .col-md-1 {
       width: 7%;
@@ -1119,6 +1042,13 @@ ngb-typeahead-window {
 
 .recurring-tickets-content,
 .new-companies-content {
+  .company-edit-icn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+  }
   .recurring-tickets__list,
   .new-companies__list {
     &--header {
@@ -1228,7 +1158,7 @@ ngb-typeahead-window {
         height: 1px;
         bottom: 0;
       }
-      .ticket-tabs-service {
+      .ticket-tabs-product {
         margin-right: 24px;
       }
       .ticket-tabs-product,
@@ -1304,8 +1234,7 @@ ngb-typeahead-window {
       margin: 60px 0 30px !important;
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
-      height: 80px;
+      align-items: center;
       .btn-primary {
         margin-right: 16px;
       }
@@ -1319,7 +1248,6 @@ ngb-typeahead-window {
         font-size: 12px;
         color: #4f5f79;
         cursor: pointer;
-        margin: 12px 0 0 0;
         &:before {
           content: '';
           position: absolute;
@@ -1606,7 +1534,14 @@ ngb-datepicker {
 }
 
 // LEFT PANEL
+.mob-filters-btn {
+  z-index: 2;
+}
+
 .left-panel-ng2 {
+  @media(max-width: 414px) {
+    margin-bottom: 110px;
+  }
   [class*="left-panel-ng2__content"] {
     margin-bottom: 20px;
   }
@@ -1629,6 +1564,9 @@ ngb-datepicker {
   &__content {
     color: #fff;
     margin-top: 78px;
+    @media(max-width: 414px) {
+      margin-top: 0;
+    }
     .list-item,
     .types-item {
       font-family: "Graphik Regular", sans-serif;
