@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { UsersService } from "../users/users.service";
+import { UsersStateService } from '../../states/users/users-state.service';
 
 /**
  * Permissions service
@@ -15,15 +16,15 @@ export class PermissionsService {
    * @param {UsersService} userService Service to work user
    */
   public constructor(
-    private userService: UsersService
+    private usersStateService: UsersStateService
   ) { }
 
   /**
    * check is allowed
    * @param action - permission
    */
-  public isAllowed = function (action) {
-    const currentUser = this.userService.currentUser;
+  public isAllowed (action) {
+    const currentUser = this.usersStateService.getCurrentUser();
     return !!(currentUser && (currentUser.isOwner || currentUser.permissions.indexOf(action) > -1));
   };
 }
