@@ -44,7 +44,7 @@ export class SelectClientCompanyComponent implements OnInit, OnDestroy {
   constructor(
     private companiesService: CompaniesService,
     private companiesSelectState: SelectClientCompanyStateService,
-    private companiesState:CompaniesStateService
+    private companiesState: CompaniesStateService
   ) { }
 
   /**
@@ -54,29 +54,34 @@ export class SelectClientCompanyComponent implements OnInit, OnDestroy {
     if (this.companiesState.getCompanies().length > 0) {
       this.getCLientsList(this.companiesState.getCompanies());
     } else {
-      this.subGetCompaniesList =  this.companiesState.getOnCompanies().subscribe((data) => {
+      this.subGetCompaniesList = this.companiesState.getOnCompanies().subscribe((data) => {
         this.getCLientsList(data);
       })
     }
-   
+
     this.onInitClearState();
-  this.onCheckEditItem();
+    this.onCheckEditItem();
 
 
   }
- 
-/**
-  * Subscribe for edit mode
-  */
+
+  /**
+    * Subscribe for edit mode
+    */
   private onCheckEditItem() {
-    let getCompanyFromEdit = this.companiesState.getCompanyFromEdit().subscribe((data) => {
+    let getCompanyFromEdit = this.companiesSelectState.getCompanyFromEdit().subscribe((data) => {
+     
       if (this.blockEditMode) return;
+      console.log('data', data);
       this.editItem = data;
+      console.log('this.clientsList',this.clientsList);
       let index: number = this.clientsList.findIndex(item => item.id === this.editItem.id);
       if (index > (-1)) {
 
         this.selectedClient = this.clientsList[index];
       }
+      console.log('selectedClient', this.selectedClient);
+      
     });
     this.sub.add(getCompanyFromEdit);
   }
@@ -93,22 +98,23 @@ export class SelectClientCompanyComponent implements OnInit, OnDestroy {
    * Get client list
    */
   private getCLientsList(data) {
-  
-      this.clientsList = data
-        .sort((a, b) => a.name.localeCompare(b.name))
-        .filter((item) => !item.deletedAt)
-      this.getAllItems.emit(this.clientsList);
-      if (this.filter) {
-        this.clientsList = this.clientsList
-          .filter((item) => item.clientType !== 'VENDOR')
+
+    this.clientsList = data
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .filter((item) => !item.deletedAt)
+    this.getAllItems.emit(this.clientsList);
+    if (this.filter) {
+      this.clientsList = this.clientsList
+        .filter((item) => item.clientType !== 'VENDOR')
+    }
+    if (this.editItem) {
+      let index: number = this.clientsList.findIndex(item => item.id === this.editItem.id);
+      if (index > (-1)) {
+        this.selectedClient = this.clientsList[index];
       }
-      if (this.editItem) {
-        let index: number = this.clientsList.findIndex(item => item.id === this.editItem.id);
-        if (index > (-1)) {
-          this.selectedClient = this.clientsList[index];
-        }
-      }
-    
+      console.log('this.selectedClient',this.selectedClient);
+    }
+
   }
 
   /**

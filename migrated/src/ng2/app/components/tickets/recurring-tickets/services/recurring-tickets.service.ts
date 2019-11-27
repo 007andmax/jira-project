@@ -8,11 +8,12 @@ import { ServiceRecurringTicket } from '../interfaces/service-recurring-ticket';
 import { TagsStateService } from 'src/ng2/app/components/shared/tags/services/tags-state.service';
 import { IntervalStateService } from 'src/ng2/app/components/shared/interval/services/interval-state.service';
 import { TehUsersSateService } from 'src/ng2/app/components/shared/teh-users/services/teh-users-sate.service';
-import { DevicesStateService } from '../devices-recurring-tickets/services/devices-state.service';
+ 
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { ServiceErrors } from '../class/service-errors';
 import { RecurringTicket } from '../class/recurring-ticket';
 import { DatePickerStateService } from 'src/ng2/app/components/shared/date-picker/services/date-picker-state.service';
+import { DevicesRecurringTicketsStateService } from '../devices-recurring-tickets/services/devices-recurring-tickets-state.service';
 
 @Injectable()
 export class RecurringTicketsService {
@@ -21,7 +22,7 @@ export class RecurringTicketsService {
   constructor(private elRef: ElementRef, private tagsState: TagsStateService,
     private stateInterval: IntervalStateService,
     private tehState: TehUsersSateService,
-    private devicesState: DevicesStateService,
+    private devicesState: DevicesRecurringTicketsStateService,
     private stateDatePicker: DatePickerStateService
   ) { }
 

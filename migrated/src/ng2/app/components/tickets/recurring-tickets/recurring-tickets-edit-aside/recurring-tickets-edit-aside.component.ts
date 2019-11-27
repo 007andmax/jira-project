@@ -15,6 +15,7 @@ import { RecurringTicketsService } from '../services/recurring-tickets.service';
 import { RecurringTicket } from '../class/recurring-ticket';
 import { Validate } from '../class/validate';
 import { ChangeDatePicker } from '../../../shared/date-picker/class/change-date-picker';
+import { DevicesRecurringTicketsStateService } from '../devices-recurring-tickets/services/devices-recurring-tickets-state.service';
 
 @Component({
   selector: 'app-recurring-tickets-edit-aside',
@@ -52,7 +53,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     private productService: ProductService,
     private recurringService: RecurringService,
     public cd: ChangeDetectorRef,
-    private devicesService: DevicesService,
+    private devicesService: DevicesRecurringTicketsStateService,
     private companiesState: SelectClientCompanyStateService,
     private recurringState: RecurringTicketsStateService,
     public createService: RecurringTicketsService,
@@ -112,7 +113,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.createService.getTehState().setUsersFromtEdit(data.assignedUsers);
     this.createService.setCronForEdit(data.cronExpression);
     this.onChangeCron(data.cronExpression)
-    this.getListServices(data.company);
+   // this.getListServices(data.company);
     this.cd.detectChanges();
  
   }
@@ -210,7 +211,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
 * @param selectClient - company
 */
   public selectClient(selectClient) {
-     
+     console.log('selectClient',selectClient);
     this.validate.resetCompany();
     if (selectClient === 'null') {
       this.recurringState.getCreateTicket().setCompany(null);

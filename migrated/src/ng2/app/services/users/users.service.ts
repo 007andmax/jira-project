@@ -28,6 +28,7 @@ export class UsersService {
    * Get all users
    */
   public getAllusers() {
+   
     return this.http.get(this.apiUrl + 'users');
   }
 

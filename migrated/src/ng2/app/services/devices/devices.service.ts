@@ -13,7 +13,7 @@ import { Subject } from 'rxjs';
 export class DevicesService {
 
   private apiUrl = environment.apiUrl;
-  public devicesCompany = new Subject<any>();
+ 
   /**
    * Device api service constructor
    * @param {HttpClient} http Service to work with request
@@ -33,10 +33,5 @@ export class DevicesService {
   }
 
   
-  public onInitHangle(companyId){
-    this.getCompanyDevices(companyId).subscribe((response)=> {
-      let devices = response[companyId];
-        this.devicesCompany.next((devices) ? [...devices] : []);
-      })
-  }
+  
 }

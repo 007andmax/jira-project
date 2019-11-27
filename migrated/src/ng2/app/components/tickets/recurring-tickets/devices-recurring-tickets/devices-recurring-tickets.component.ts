@@ -5,7 +5,8 @@ import { debounceTime, distinctUntilChanged, filter, map } from "rxjs/operators"
 import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
 import { FormGroup } from "@angular/forms";
 import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
-import { DevicesStateService } from './services/devices-state.service';
+import {  DevicesRecurringTicketsStateService } from './services/devices-recurring-tickets-state.service';
+import { DevicesSateService } from 'src/ng2/app/states/devices/devices-sate.service';
 
 
 @Component({
@@ -35,7 +36,8 @@ export class DevicesRecurringTicketsComponent implements OnInit,OnDestroy {
    */
   constructor(
     private devicesService: DevicesService,
-    private devicesState: DevicesStateService,
+    private devicesRecurringTicketsStateService: DevicesRecurringTicketsStateService,
+    private devicesStateService:DevicesSateService,
     public cd: ChangeDetectorRef,
   ) { }
 
@@ -52,7 +54,7 @@ export class DevicesRecurringTicketsComponent implements OnInit,OnDestroy {
    * Initializes subscribe to clear state.
    */
   private onInitClearState() {
-    let getClearState = this.devicesState.getClearState().subscribe(() => {
+    let getClearState = this.devicesRecurringTicketsStateService.getClearState().subscribe(() => {
       this.clearDevices();
       this.devicesList = null;
     });
@@ -63,8 +65,8 @@ export class DevicesRecurringTicketsComponent implements OnInit,OnDestroy {
    * Get devices list
    */
   private getCLientsList() {
-    this.subGetDevicesList = this.devicesService.devicesCompany.subscribe((res: any) => {
-      this.devicesList = res.map((item) => {
+    this.subGetDevicesList = this.devicesRecurringTicketsStateService.devicesCompany.subscribe((res: any) => {
+      this.devicesList = this.devicesStateService.getAllDevices()[res].map((item) => {
         item.name = item.hostName;
         return item;
       });

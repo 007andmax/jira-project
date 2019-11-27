@@ -14,6 +14,7 @@ import { Validate } from '../class/validate';
 import { CreateRecurringTicketsProduct } from '../class/create-recurring-tickets-product';
 import { CreateRecurringTicketsService } from '../class/create-recurring-tickets-service';
 import { AlertStateService } from '../../../shared/alert/services/alert-state.service';
+import { DevicesRecurringTicketsStateService } from '../devices-recurring-tickets/services/devices-recurring-tickets-state.service';
 
 @Component({
   selector: 'app-recurring-tickets-add-aside',
@@ -56,7 +57,8 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     private companiesState: SelectClientCompanyStateService,
     private recurringState: RecurringTicketsStateService,
     public createService: RecurringTicketsService,
-    private alertState: AlertStateService
+    private alertState: AlertStateService,
+    private devicesRecurringTicketsStateService: DevicesRecurringTicketsStateService,
   ) {
   }
 
@@ -87,7 +89,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.tehUsers = data.assignedUsers;
     
     
-    this.devicesService.onInitHangle(data.company.id);
+    this.devicesRecurringTicketsStateService.onInitHangle(data.company.id);
     this.selectedClient = data.company;
     this.createService.getStateDatePicker().onInitEditMode(new Date().getTime());
     let currentDate = new Date();
@@ -196,7 +198,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     */
   private getCompanyDevices() {
     let company = this.recurringState.getClient();
-    company && this.devicesService.onInitHangle(company.id);
+    company && this.devicesRecurringTicketsStateService.onInitHangle(company.id);
   }
 
   /**
