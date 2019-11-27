@@ -132,7 +132,9 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
    */
   public selectCompanyMob(item){
     this.selectedCompany = item.item;
+    this.companiesService.setFilteredCompnay(item.item);
     this.passwordManagerService.setSelectedDeviceOrUser({});
+    this.filterPasswordRecords(item.item);
     if (item.item.companyId) {
       this.getCompanyDevices();
       this.getAllUsers(item.item.companyId);
@@ -209,6 +211,8 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
    */
   public selectDeviceOrUserMob(item){
     this.selectedDeviceOrUser = item.item;
+    this.passwordManagerService.setSelectedDeviceOrUser(item.item);
+    this.filterPasswordRecordsByDeviceOrUser(item.item);
   }
 
   /**
@@ -238,6 +242,8 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
    */
   public selectDateMob(date) {
     this.selectedDateItem = date;
+    this.passwordManagerService.setDate(date);
+    this.filterPasswordRecordsByDate(date);
   }
 
   /**
@@ -366,9 +372,10 @@ this.passwordRecords = this.passwordRecordsStart;
    */
   clearCompanyMob() {
     this.devicesAndUsersList = [];
-    this.company = null;
-    this.selectedCompany = this.clearCompanyItem;
-    this.clearDeviceMob();
+    this.refreshCompany();
+    this.refreshDeviceOrUser();
+//    this.getPasswordRecords();
+this.passwordRecords = this.passwordRecordsStart;
   }
 
   /**
@@ -382,9 +389,15 @@ this.passwordRecords = this.passwordRecordsStart;
   /**
    * Clear date mobile version
    */
-  clearDateMob() {
+  clearDateMob($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    this.passwordManagerService.setDate('');
     this.selectedDate = null;
     this.selectedDateItem = null;
+    
+    (this.selectedCompany && this.selectedCompany.companyId) ? this.filterPasswordRecords(this.selectedCompany) : this.passwordRecords = this.passwordRecordsStart;
+ 
   }
 
   /**
