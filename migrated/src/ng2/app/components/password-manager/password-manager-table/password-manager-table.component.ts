@@ -74,9 +74,11 @@ export class PasswordManagerTableComponent implements OnInit {
     this.filterList();
   }
   private filterList() {
+  //  console.log('this.recordsData',this.recordsData);
     this.list_records = this.recordsData.filter((item) => {
+     // if (item.dateFormat) console.log('item.dateFormat',item.dateFormat);
       if (this.selectedCompany && this.selectedCompany.companyId.length > 0 && item.companyId !== this.selectedCompany.companyId) return false;
-      if (this.selectedDate && item.dateFormat !== this.selectedDate) return false;
+      if (this.selectedDate && item.expiredDate !== this.selectedDate) return false;
       if (this.selectedUserOrDevice && this.selectedUserOrDevice.id) {
         let find = false;
         item.links.forEach(link => {
