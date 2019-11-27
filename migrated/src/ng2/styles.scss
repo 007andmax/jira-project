@@ -80,7 +80,7 @@
 }
 
 .btn-new.btn-primary-white {
-  background: #fff;
+  background: #ffffff;
   color: #16a4fa;
   border: 1px solid #16a4fa;
   font-size: 12px;
@@ -88,7 +88,7 @@
   font-weight: 600;
   &:hover {
     background: #16a4fa;
-    color: #fff;
+    color: #ffffff;
   }
 }
 
@@ -107,7 +107,7 @@
     left: 0;
     height: 16px;
     width: 16px;
-    background-color: #fff;
+    background-color: #ffffff;
     border-radius: 50%;
     border: 1px solid #c7cdd7;
     transition: all .3s;
@@ -198,7 +198,7 @@
         left: -1px;
         width: 1px;
         height: 36px;
-        background: #fff;
+        background: #ffffff;
       }
       .report-caret-icon-white {
         position: absolute;
@@ -215,7 +215,7 @@
 
 .ng-sidebar {
   position: fixed !important;
-  background: #fff;
+  background: #ffffff;
   height: 100vh;
   width: 650px;
 }
@@ -254,7 +254,7 @@ app-left-panel-tags-companies {
       padding: 2px 8px;
       border-radius: 3px;
       border: solid 1px rgba(255, 255, 255, 0.3);
-      color: #fff;
+      color: #ffffff;
       background: transparent;
     }
     .mat-form-field-appearance-legacy .mat-form-field-underline,
@@ -518,7 +518,7 @@ app-left-panel-tags-companies {
 }
 
 .archive-modal {
-  padding: 40px;
+  padding: 40px 70px 40px 40px;
   position: relative;
   .close-modal {
     background: transparent;
@@ -572,6 +572,20 @@ app-left-panel-tags-companies {
     }
     .btn-primary {
       margin-right: 16px;
+    }
+  }
+  &.de-archive {
+    h3 {
+      &:after {
+        background: url("assets/img/icons/restore-company.png") no-repeat;
+        left: -53px;
+        top: 14px;
+        width: 16px;
+        height: 19px;
+      }
+      &:before {
+        background: #e1f2fd;
+      }
     }
   }
 }
@@ -675,7 +689,7 @@ ngb-typeahead-window {
     &--top,
     &--bottom,
     &--notes {
-      background: #fff;
+      background: #ffffff;
       border-radius: 5px;
       border: solid 1px #edf2f6;
     }
@@ -717,7 +731,7 @@ ngb-typeahead-window {
     padding: 0 12px;
     height: 40px;
     width: 100%;
-    background: #fff;
+    background: #ffffff;
     &:focus {
       outline: none;
     }
@@ -826,7 +840,7 @@ ngb-typeahead-window {
   border: none;
   padding: 8px 8px 8px 40px;
   border-radius: 4px;
-  background: #fff;
+  background: #ffffff;
   font-size: 13px;
   outline: none;
 }
@@ -845,7 +859,7 @@ ngb-typeahead-window {
   border-radius: 4px;
   width: 40px;
   height: 40px;
-  color: #fff;
+  color: #ffffff;
   font-size: 24px;
   outline: none;
   transition: all .3s;
@@ -892,7 +906,7 @@ ngb-typeahead-window {
 .password-content__list--item {
   border-radius: 4px;
   margin-bottom: 2px;
-  background: #fff;
+  background: #ffffff;
   padding: 24px 0;
   position: relative;
   display: flex;
@@ -934,7 +948,7 @@ ngb-typeahead-window {
   box-shadow: 0 3px 6px 0 rgba(186, 186, 186, 0.05);
   display: none;
   padding: 8px 15px;
-  background: #fff;
+  background: #ffffff;
   border-radius: 6px;
   margin-right: 16px;
   &.show {
@@ -1083,7 +1097,7 @@ ngb-typeahead-window {
       > .default-user-avatar .qwe {
         width: 36px;
         height: 36px;
-        border: 2px solid #fff;
+        border: 2px solid #ffffff;
       }
       > .default-user-avatar {
         &:not(:last-child) {
@@ -1350,7 +1364,7 @@ ngb-typeahead-window {
         position: absolute;
         width: 113%;
         left: -35px;
-        border-top: 1px solid #eee;
+        border-top: 1px solid #eeeeee;
         padding: 16px 0 0 50px;
         color: #9ca5b6;
         font-size: 12px;
@@ -1457,7 +1471,7 @@ ngb-typeahead-window {
       transition: all .3s;
       &:hover {
         background-color: #16a4fa;
-        color: #fff;
+        color: #ffffff;
       }
     }
   }
@@ -1562,7 +1576,7 @@ ngb-datepicker {
     z-index: 2;
   }
   &__content {
-    color: #fff;
+    color: #ffffff;
     margin-top: 78px;
     @media(max-width: 414px) {
       margin-top: 0;
@@ -1663,7 +1677,7 @@ ngb-datepicker {
                 transition: all .3s;
                 color: #16a4fa;
                 &:hover {
-                  color: #fff;
+                  color: #ffffff;
                 }
               }
             }
