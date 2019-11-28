@@ -16,9 +16,6 @@
         (click)="click$.next('')"
         #instance="ngbTypeahead"
       />
-      <i *ngIf="selectedNoteNew"
-         class="icn-sm icn-remove-old"
-         (click)="clearClient($event)"></i>
       <i *ngIf="!selectedNoteNew"
          class="icn-sm report-caret-icon"></i>
 
