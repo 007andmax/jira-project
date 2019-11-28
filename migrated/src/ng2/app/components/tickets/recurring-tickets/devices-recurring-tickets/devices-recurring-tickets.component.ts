@@ -66,10 +66,17 @@ export class DevicesRecurringTicketsComponent implements OnInit,OnDestroy {
    */
   private getCLientsList() {
     this.subGetDevicesList = this.devicesRecurringTicketsStateService.devicesCompany.subscribe((res: any) => {
-      this.devicesList = this.devicesStateService.getAllDevices()[res].map((item) => {
-        item.name = item.hostName;
-        return item;
-      });
+      console.log('res',res);
+      if (this.devicesStateService.getAllDevices()[res])
+      {
+        this.devicesList = this.devicesStateService.getAllDevices()[res].map((item) => {
+          item.name = item.hostName;
+          return item;
+        });
+      } else {
+        this.devicesList = [];
+      }
+    
     
       this.devicesList = (this.devicesList.length === 0) ? null : this.devicesList;
       if (!this.devicesList) this.clearDevices();
@@ -77,7 +84,7 @@ export class DevicesRecurringTicketsComponent implements OnInit,OnDestroy {
         .sort((a, b) => a.name.localeCompare(b.name))
         .filter((item) => !item.deletedAt)*/
       
-        if (this.editItem)
+        if (this.editItem && this.devicesList)
         {
           let index: number = this.devicesList.findIndex(item => item.id === this.editItem.deviceId);
         

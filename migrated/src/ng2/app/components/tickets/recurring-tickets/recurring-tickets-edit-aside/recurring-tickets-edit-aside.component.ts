@@ -38,6 +38,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   public ticketForEdit: RecurringTicket = null;
   public validate: Validate = new Validate();
 
+
   /**
    * Creates an instance of the RecurringTicketsAddAsideComponent with the injected services
    * @param {ProductService} productService Service to work with products
@@ -201,9 +202,10 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
  * Get list service
  */
   private getListServices(value) {
-    this.recurringService.getServiceList(value.id).subscribe((res: any) => {
+   let getListServices =  this.recurringService.getServiceList(value.id).subscribe((res: any) => {
       this.servicesList = res;
     })
+    this.createService.addSubscription(getListServices);
   }
 
   /**
