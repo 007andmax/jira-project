@@ -2878,6 +2878,9 @@
   .new-companies-content__list--item.show-details .mob-company-footer {
     display: flex;
   }
+  .password-content__list--item{
+    display: block;
+  }
 }
 
 /*# sourceMappingURL=welcome-wizard.css.map */
