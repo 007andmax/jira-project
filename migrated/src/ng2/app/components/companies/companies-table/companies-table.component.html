@@ -12,7 +12,7 @@
               [textContent]="company.name[0].toUpperCase()"></span>
       </div>
       <div class="mob-styles">
-        <p class="ff-g-m fw-600" [textContent]="company.name" (click)="goToDashboard()"></p>
+        <p class="ff-g-m fw-600" [textContent]="company.name"></p>
         <p class="desktop-hidden company-phone">979-431-8937</p>
       </div>
     </div>
@@ -59,6 +59,7 @@
         <p>655</p>
       </div>
     </div>
+    <div class="click-area" (click)="goToDashboard()"></div>
   </div>
   <button class="company-edit-icn company-edit-icn-sm desktop-hidden"
           (click)="edit()"></button>
