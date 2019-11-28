@@ -12,7 +12,7 @@
               [textContent]="company.name[0].toUpperCase()"></span>
       </div>
       <div class="mob-styles">
-        <p class="ff-g-m fw-600" [textContent]="company.name"></p>
+        <p class="ff-g-m fw-600" [textContent]="company.name" (click)="goToDashboard()"></p>
         <p class="desktop-hidden company-phone">979-431-8937</p>
       </div>
     </div>
@@ -28,6 +28,7 @@
     <div class="col-md-1 mob-hidden" [textContent]="company.companyStatistic.ticketsSubmitted || '0'"></div>
     <div class="col-md-1 mob-hidden" [textContent]="countDevices"></div>
     <div class="col-md-1 mob-hidden" [textContent]="countUsers"></div>
+
     <div class="col-md-2 mob-hidden">
       <button (click)="onRestore()" *ngIf="showArchivedCompanies">
         <i style="height: 19px;" class="icn-16 restore-ng2"></i>

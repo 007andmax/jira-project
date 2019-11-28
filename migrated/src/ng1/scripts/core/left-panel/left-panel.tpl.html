@@ -211,7 +211,7 @@
       </div>
       <div class="left-panel__category"
            ng-class="{'active': openedCategory === 'companies' || openedCategory === 'companyProfile' }"
-           ui-sref="companies" ng-click="clearCompaniesFilters(); toggleLeftPanel('companies', true)"
+           ui-sref="new-companies" ng-click="toggleLeftPanel('companies', true)"
            ng-if="PermissionsService.isAllowed('VIEW_COMPANIES')">
         <div class="left-panel-icn left-panel-icons-companies"
              uib-tooltip="companies"

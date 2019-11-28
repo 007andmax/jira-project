@@ -273,7 +273,7 @@ angular.module('quicktech')
           pathMatch: 'full'
         },
         {
-          path: 'ng2/new-companies',
+          path: 'ng2/companies',
           component: CompaniesComponent,
           pathMatch: 'full'
         }

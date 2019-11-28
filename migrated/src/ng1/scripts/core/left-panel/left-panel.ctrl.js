@@ -299,6 +299,7 @@
         }
 
         $scope.activateCompanyProfileTab = function (tabToActivate) {
+          console.log('tabToActivate',tabToActivate);
           if (tabToActivate == 'CompanyProfilePasswordManagerPage') {
 
             window.location.href = '#/ng2/company-password-manager';
@@ -1210,7 +1211,7 @@
         $scope.clearTicketsFilters = function () {
           clearFilter(ticketsSharedState.filter);
         };
-
+ 
         $scope.clearCompaniesFilters = function () {
           clearFilter(companiesSharedState.filter);
           $rootScope.showArchivedCompanies = false;

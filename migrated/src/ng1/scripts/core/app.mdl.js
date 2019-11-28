@@ -166,7 +166,7 @@
           template: '<recurring-tickets-component></recurring-tickets-component>'
         }))
         .state('new-companies', waitForServices({
-          url: '/ng2/new-companies',
+          url: '/ng2/companies',
           template: '<companies-component></companies-component>'
         }))
         .state('accounting', waitForServices({

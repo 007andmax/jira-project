@@ -20,7 +20,7 @@
           SATURDAY: 'Saturday',
           SUNDAY: 'Sunday'
         };
-
+console.log('quicktech.core.companies.companyProfileDashboardCtrl');
         $scope.serviceTypes = ['HOURLY', 'BLOCK_TIME', 'SEMI_MANAGED', 'FULLY_MANAGED'];
         $scope.serviceTypesMap = {
           HOURLY: 'Hourly',

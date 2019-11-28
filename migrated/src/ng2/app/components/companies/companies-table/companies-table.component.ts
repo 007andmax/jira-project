@@ -100,6 +100,14 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
       }
     }
   }
+  goToDashboard() {
+    window.location.href = `#/clients/companyProfile/${this.company.id}?tabName=dashboard`;
+    var link = document.createElement('a');
+    link.href = `#/clients/companyProfile/${this.company.id}?tabName=dashboard`;
+    var e = document.createEvent('MouseEvents');
+    e.initEvent('click', true, true);
+    link.dispatchEvent(e);
+  }
   showInfo() {
     if (this.IS_MOBILE) {
       this.elRef.nativeElement.querySelector('.new-companies-content__list--item').classList.toggle('show-details');
