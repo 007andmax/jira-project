@@ -1083,6 +1083,11 @@
         });
 
         $scope.toggleLeftPanel = function (section, ifIconPart) {
+          if (section === 'companies')
+          {
+            window.location.href = '#/ng2/companies';
+            return;
+          }
           $scope.clearAllFilters()
 
           if (section === 'billing') {
