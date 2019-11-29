@@ -23,7 +23,7 @@
       'quicktech.core.quickSupport',
       'quicktech.core.reports',
       'quicktech.core.serviceAgreements',
-      
+
       'ui.router',
       'ui.select',
       'ui.bootstrap',
@@ -36,7 +36,7 @@
       'vs-repeat',
       'daterangepicker',
       'infinite-scroll',
-     
+
     ]);
 
 
@@ -193,6 +193,10 @@
         .state('new-companies', waitForServices({
           url: '/ng2/companies',
           template: '<companies-component></companies-component>'
+        }))
+        .state('new-users', waitForServices({
+          url: '/ng2/new-users',
+          template: '<users-component></users-component>'
         }))
         .state('accounting', waitForServices({
           url: '/accounting',
@@ -464,7 +468,7 @@
             if (!isCalled) {
               isCalled = true;
               fn.apply(this, args);
-            
+
               interval = setTimeout(function () {
                 isCalled = false;
 
@@ -867,6 +871,8 @@
 
   function getUserDefaultPage() {
   
+
+
     var defaultTicketsPage,
       startPageMap = {
         ALL: 'all',

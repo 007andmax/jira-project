@@ -94,6 +94,11 @@ import { CompanyPasswordManagerTableComponent } from './components/company-passw
 import { FilterPipe } from './pipe/filter.pipe';
 import { ClickOtsideDirective } from './directives/click-otside.directive';
 import { SortByPipe } from './pipe/sort-by.pipe';
+import { UsersComponent } from './components/users/users.component';
+import { UsersHeaderComponent } from './components/users/users-header/users-header.component';
+import { UsersTableComponent } from './components/users/users-table/users-table.component';
+import { UsersAsideComponent } from './components/users/users-aside/users-aside.component';
+import { LeftPanelUsersComponent } from './components/left-panel/left-panel-users/left-panel-users.component';
 
 
 /**
@@ -140,6 +145,9 @@ angular.module('quicktech')
   .directive(
     'companiesComponent',
     downgradeComponent({component: CompaniesComponent}))
+    .directive(
+    'usersComponent',
+    downgradeComponent({component: UsersComponent}))
   .factory('ngZone', downgradeInjectable(NgZone));
 
 /**
@@ -215,7 +223,12 @@ angular.module('quicktech')
     CompanyPasswordManagerTableComponent,
     FilterPipe,
     ClickOtsideDirective,
-    SortByPipe
+    SortByPipe,
+    UsersComponent,
+    UsersHeaderComponent,
+    UsersTableComponent,
+    UsersAsideComponent,
+    LeftPanelUsersComponent
   ],
   imports: [
     BrowserModule,
@@ -275,6 +288,9 @@ angular.module('quicktech')
         {
           path: 'ng2/companies',
           component: CompaniesComponent,
+        },{
+          path: 'ng2/new-users',
+          component: UsersComponent,
           pathMatch: 'full'
         }
       ],
@@ -286,6 +302,7 @@ angular.module('quicktech')
       ImageCropperModule,
       NgxEditorModule ,
       FontAwesomeModule
+
   ],
   entryComponents: [
     LeftPanelComponent,
@@ -298,7 +315,8 @@ angular.module('quicktech')
     CompaniesComponent,
     DownloadAgentComponent,
     ImageCropperComponent,
-    CompanyPasswordManagerComponent
+    CompanyPasswordManagerComponent,
+    UsersComponent
     // RecurringTicketsComponent
   ],
   providers: [

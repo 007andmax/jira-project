@@ -1059,6 +1059,7 @@ _::-webkit-:not(:root:root),
 .company--header button,
 .product--header button,
 .new-companies-content__modal button,
+.new-users-content__modal button,
 .recurring-tickets-content__modal button,
 .password-content__modal button {
   border: none;
@@ -1737,6 +1738,7 @@ _::-webkit-:not(:root:root),
 .archive-modal .close-modal,
 .create-new .close-modal,
 .download-agent-modal .close-modal,
+.new-users-content__modal .close-modal,
 .recurring-tickets-content__modal .close-modal,
 .new-companies-content__modal .close-modal,
 .password-content__modal .close-modal {

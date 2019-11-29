@@ -1,0 +1,30 @@
+<!--for show filters add class "show" for app-left-panel-->
+<app-left-panel-users class=""></app-left-panel-users>
+
+<div class="new-users-content">
+  <app-users-header></app-users-header>
+  <div class="new-users__list">
+    <div class="new-users__list--header clearfix mob-hidden">
+      <div class="col-md-3 with-checkbox">
+        <label class="checkbox-container">
+          <input type="checkbox">
+          <span class="checkbox-mark"></span>
+        </label>
+        <p>Name</p>
+      </div>
+      <div class="col-md-4">Company</div>
+      <div class="col-md-4">Contact No.</div>
+      <div class="col-md-4">Subscription</div>
+      <div class="col-md-1 text-center">Tickets</div>
+      <div class="col-md-2"></div>
+    </div>
+    <div class="user-content">
+      <app-users-table></app-users-table>
+    </div>
+    <button class="mob-filters-btn mobile-btn primary">
+      Filters
+    </button>
+    <div class="loading" style="display: none;"></div>
+  </div>
+</div>
+<app-users-aside></app-users-aside>
