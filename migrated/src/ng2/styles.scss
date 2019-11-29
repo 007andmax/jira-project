@@ -232,11 +232,11 @@
 
 .new-companies-content__modal,
 .recurring-tickets-content__modal,
+.new-users-content__modal,
 .password-content__modal {
   top: 0 !important;
   position: absolute !important;
 }
-
 app-left-panel-tags-companies {
   > .col-md-12 {
     padding: 0 24px;
@@ -399,15 +399,7 @@ app-left-panel-tags-companies {
 }
 
 .new-companies-content__modal--content,
-.recurring-tickets-content__modal,
-.new-users-content__modal,
-.password-content__modal {
-  top: 0 !important;
-  position: absolute !important;
-}
-
 .new-users-content__modal--content,
-.new-companies-content__modal--content,
 .recurring-tickets-content__modal--content {
   .tab-btns {
     display: flex;
@@ -560,7 +552,6 @@ app-left-panel-tags-companies {
     margin-right: 4px;
   }
 }
-
 .archive-modal {
   padding: 40px 70px 40px 40px;
   position: relative;
@@ -1213,9 +1204,8 @@ ngb-typeahead-window {
   }
 }
 
-// Global styles for RECURRING TICKETS and COMPANIES
-.new-companies__list,
-.new-users__list{
+// Global styles for RECURRING TICKETS
+.new-users__list {
   .col-md-3 {
     width: 21%;
   }
@@ -1223,7 +1213,7 @@ ngb-typeahead-window {
     width: 7%;
   }
   .col-md-4 {
-    width: 17%;
+    width: 22%;
   }
   .col-md-1 {
     width: 7%;
@@ -1238,12 +1228,13 @@ ngb-typeahead-window {
   }
 }
 
-.new-users__list{
+.new-companies__list {
   .col-md-4 {
-    width: 22%;
+    width: 17%;
   }
 }
-.new-companies-content .new-companies__list--header {
+
+.new-users-content .new-users__list--header {
   display: flex;
 }
 
@@ -1276,9 +1267,10 @@ ngb-typeahead-window {
     }
   }
 }
-.new-users-content,
+
 .recurring-tickets-content,
-.new-companies-content {
+.new-companies-content,
+.new-users-content {
   .company-edit-icn {
     position: absolute;
     right: 15px;
@@ -1286,14 +1278,9 @@ ngb-typeahead-window {
     transform: translateY(-50%);
     z-index: 1;
   }
-  .new-users__list {
-    &--header {
-      display: flex;
-    }
-  }
-  .new-users__list,
   .recurring-tickets__list,
-  .new-companies__list {
+  .new-companies__list
+  .new-users__list {
     &--header {
       margin-bottom: 15px;
       .with-checkbox {
@@ -1558,6 +1545,7 @@ ngb-typeahead-window {
     }
   }
 }
+
 .new-companies-content__modal {
   .advanced {
     .editable-field {
@@ -1783,9 +1771,9 @@ ngb-datepicker {
   border: none !important;
 }
 
-.new-users-content__modal,
 .new-companies-content__modal,
-.recurring-tickets-content__modal {
+.recurring-tickets-content__modal,
+.new-users-content__modal {
   .logo-upload {
     margin-top: 20px;
     padding-bottom: 20px;

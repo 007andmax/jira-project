@@ -13391,9 +13391,9 @@ button.close {
   bottom: 8px;
 }
 
+.new-users-content__modal--content .if input,
 .recurring-tickets-content__modal--content .if input,
 .new-companies-content__modal--content .if input,
-.new-users-content__modal--content .if input,
 .password-content__modal--content .if input {
   padding-right: 65px;
 }
