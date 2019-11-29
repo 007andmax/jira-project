@@ -12,8 +12,10 @@ import { QuoteService } from "../../quote/quote.service";
 import { takeUntil } from "rxjs/operators";
 import { Subject, Subscription } from "rxjs";
 import { AlertStateService } from 'src/ng2/app/components/shared/alert/services/alert-state.service';
-import { ConfirmStateService } from 'src/ng2/app/components/shared/confirm/confirm/services/confirm-state.service';
-import { ConfirmComponent } from 'src/ng2/app/components/shared/confirm/confirm/confirm.component';
+import { ConfirmStateService } from 'src/ng2/app/components/shared/confirm/services/confirm-state.service';
+import { ConfirmComponent } from 'src/ng2/app/components/shared/confirm/confirm.component';
+ 
+ 
 
 /**
  * Modal quote component
