@@ -80,20 +80,13 @@ export class DevicesRecurringTicketsComponent implements OnInit,OnDestroy {
     
       this.devicesList = (this.devicesList.length === 0) ? null : this.devicesList;
       if (!this.devicesList) this.clearDevices();
-      /*res
-        .sort((a, b) => a.name.localeCompare(b.name))
-        .filter((item) => !item.deletedAt)*/
-      
         if (this.editItem && this.devicesList)
         {
           let index: number = this.devicesList.findIndex(item => item.id === this.editItem.deviceId);
-        
           if (index > (-1))  {
             this.selectedDevice = this.devicesList[index];
-          //  this.selectItem({item:this.devicesList[index]});
           }
         }
-        
         this.getAllItems.emit(this.devicesList);
     })
   }
