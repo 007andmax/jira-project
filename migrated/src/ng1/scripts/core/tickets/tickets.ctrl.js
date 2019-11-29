@@ -55,6 +55,11 @@
           'archive/zip': 'zip',
           'image/bmp': 'not-viewable'
         };
+
+      /*  if (window.localStorage.getItem('company_dashboard')) {
+          window.location.href = `#/clients/companyProfile/${window.localStorage.getItem('company_dashboard')}?tabName=dashboard`;
+          return;
+        }*/
         // CustomStorageService.getUserCustomStorageValue('ticketPageFilterByCompanyHistory', function (resp) {
         //   $scope.companiesFilterHistoryTicketsPage = resp;
         // });

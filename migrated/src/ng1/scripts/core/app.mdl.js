@@ -50,6 +50,21 @@
       //    console.log('decorator ------------------');
           proto.$digest = function (tt) {
           //  console.log('digest',tt);
+        /*    if ($delegate.$$phase === '$digest' || $delegate.$$phase === '$apply') {
+              try {
+                this.$eval(tt);
+              } catch (e) {
+                $exceptionHandler(e);
+              }
+            } else {
+              try {
+            
+                originalDigest.call(this,tt);
+              } catch (error) {
+              
+                $exceptionHandler(error);
+              }
+            }*/
             if ($delegate.$$phase === '$digest' || $delegate.$$phase === '$apply') return;
             try {
               originalDigest.call(this);
@@ -57,6 +72,8 @@
             
               $exceptionHandler(error);
             }
+
+           
            
           };
           proto.$apply = function (fn) {
@@ -849,7 +866,6 @@
       }]);
 
   function getUserDefaultPage() {
-
   
     var defaultTicketsPage,
       startPageMap = {

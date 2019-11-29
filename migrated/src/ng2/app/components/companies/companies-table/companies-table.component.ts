@@ -50,7 +50,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     if (this.usersStateService.getAllUsers().length > 0) {
       this.onGetUsersCount(this.usersStateService.getAllUsers());
     } else {
-     let getOnUsers =  this.usersStateService.getOnUsers().subscribe((data) => {
+      let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
         this.showArchivedCompanies = false;
         this.onGetUsersCount(data);
       })
@@ -59,14 +59,14 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     if (this.devicesState.getAllDevices()) {
       this.onGetDevicesCount(this.devicesState.getAllDevices());
     } else {
-     let getOnDevices =  this.devicesState.getOnDevices().subscribe((data) => {
+      let getOnDevices = this.devicesState.getOnDevices().subscribe((data) => {
         this.showArchivedCompanies = false;
         this.onGetDevicesCount(data);
       })
       this.sub.add(getOnDevices);
     }
     this.IS_MOBILE = this.appService.checkMobile();
-  let getOnMobile =  this.appService.getOnMobile().subscribe(data => {
+    let getOnMobile = this.appService.getOnMobile().subscribe(data => {
       this.IS_MOBILE = data;
     })
     this.sub.add(getOnMobile);
@@ -104,8 +104,12 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     }
   }
   goToDashboard() {
-    window.location.href = `#/clients/companyProfile/${this.company.id}?tabName=dashboard`;
+    
+
+    //  window.location.href = `#/tickets/user`;
+    let body = document.querySelector('.left-panel__category-wrap');
     var link = document.createElement('a');
+    body.appendChild(link);
     link.href = `#/clients/companyProfile/${this.company.id}?tabName=dashboard`;
     var e = document.createEvent('MouseEvents');
     e.initEvent('click', true, true);
@@ -134,7 +138,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
 
   }
   edit() {
-   let getCompany =  this.companiesService.getCompany(this.company.id).subscribe((data: CompanyProfile) => {
+    let getCompany = this.companiesService.getCompany(this.company.id).subscribe((data: CompanyProfile) => {
       this.companiesStateService.setEditCompany(data);
     })
     this.sub.add(getCompany);
