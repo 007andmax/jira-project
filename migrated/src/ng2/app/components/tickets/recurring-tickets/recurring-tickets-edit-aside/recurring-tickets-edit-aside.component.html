@@ -1,6 +1,6 @@
 <ng-sidebar-container>
   <ng-sidebar [(opened)]="opened" [position]="'right'">
-    <div class="recurring-tickets-content__modal open">
+    <div class="recurring-tickets-content__modal">
       <div class="recurring-tickets-content__modal--header">
         <h3>Edit Recurring Service</h3>
         <button class="close-modal" (click)="close()"></button>
@@ -122,7 +122,7 @@
               <div class="col-md-8" [ngClass]="(service.noValid) ? 'no-valid-service' : ''">
                 <p>Service</p>
                 <app-services-list [editItem]="service" [itemList]="servicesList"
-                
+
                                    (selectedServicesItem)="setService($event,i)"></app-services-list>
               </div>
               <div class="col-md-4">
