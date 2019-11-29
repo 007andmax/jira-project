@@ -13403,10 +13403,6 @@ button.close {
 .recurring-tickets-content__modal,
 .new-companies-content__modal,
 .password-content__modal {
-  position: fixed;
-  top: 78px;
-  right: -650px;
-  width: 650px;
   background-color: #ffffff;
   transition: all .5s ease-in-out;
   overflow-y: auto;
@@ -13416,8 +13412,13 @@ button.close {
   flex-direction: column;
 }
 
+.recurring-tickets-content__modal,
+.password-content__modal {
+  right: -650px;
+  width: 650px;
+}
+
 .recurring-tickets-content__modal.open,
-.new-companies-content.open,
 .password-content__modal.open {
   right: 0;
 }
