@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { CompanyProfile } from '../class/company-profile';
 import { CompanySetting } from '../class/company-setting';
 import { CompanySubscription } from '../class/company-subscription';
@@ -16,13 +16,15 @@ import { isNgTemplate } from '@angular/compiler';
 import { ImageCropperComponent } from '../../shared/image-cropper/image-cropper.component';
 import { CompanyTagsStateService } from '../company-tags/states/company-tags-state.service';
 import { ItemFilterPerson } from '../../left-panel/left-panel-companies/class/item-filter-person';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-company-edit-aside',
   templateUrl: './company-edit-aside.component.html',
   styleUrls: ['./company-edit-aside.component.scss']
 })
-export class CompanyEditAsideComponent implements OnInit {
+export class CompanyEditAsideComponent implements OnInit,OnDestroy {
+ 
 
   opened = false;
   company: CompanyProfile = new CompanyProfile();
@@ -39,7 +41,7 @@ export class CompanyEditAsideComponent implements OnInit {
   new CompanySubscription('Invoice Updates', 'invoice')];
   showSelect = false;
   validate: CompanyValdiate = new CompanyValdiate();
-
+  sub: Subscription = new Subscription();
   locationIsinit:boolean = false;
   @ViewChild('addresstext') addresstext: any;
   constructor(private companiesStateService: CompaniesStateService, private companiesService: CompaniesService,
@@ -57,9 +59,10 @@ this.company.fullVersion();
     if (this.usersStateService.getAllUsers().length > 0) {
       this.getTehusers(this.usersStateService.getAllUsers());
     } else {
-      this.usersStateService.getOnUsers().subscribe((data) => {
+    let getOnUsers =   this.usersStateService.getOnUsers().subscribe((data) => {
         this.getTehusers(data);
       })
+      this.sub.add(getOnUsers);
     }
 
     this.onCroppImage();
@@ -116,7 +119,7 @@ public onCheckGoogleAutoComplete () {
 
   }
   onEditCompany() {
-    this.companiesStateService.getCompanyFromEdit().subscribe((data: CompanyProfile) => {
+  let getCompanyFromEdit =  this.companiesStateService.getCompanyFromEdit().subscribe((data: CompanyProfile) => {
       this.company = new CompanyProfile();
       this.company.onEditMode(data);
       this.companySubscriptionState.onEditMode(this.company.contacts[0].subscription);
@@ -141,6 +144,7 @@ public onCheckGoogleAutoComplete () {
       this.opened = true;
       //this.company.
     })
+    this.sub.add(getCompanyFromEdit);
   }
   
   public onSelectCompanyTypes(index) {
@@ -188,7 +192,7 @@ public onCheckGoogleAutoComplete () {
    }
   public onChangeName() {
     if (this.company.name && this.company.name.length > 0) {
-      this.companiesService.checkCompanyName(this.company.id, this.company.name).subscribe((data: any) => {
+     let checkCompanyName =  this.companiesService.checkCompanyName(this.company.id, this.company.name).subscribe((data: any) => {
         if (data.value) {
           this.validate.resetName();
           this.validate.resetNameIsExist();
@@ -196,6 +200,7 @@ public onCheckGoogleAutoComplete () {
           this.validate.setNameIsExist();
         }
       })
+      this.sub.add(checkCompanyName);
     } else {
       this.validate.checkValidName(this.company.name);
     }
@@ -231,13 +236,14 @@ public onCheckGoogleAutoComplete () {
     console.log('onUpdateFull');
     if (!this.validate.isValidate(this.company)) return;
     
-    this.companiesService.updateCompany(this.company).subscribe(data => {
+   let updateCompany =  this.companiesService.updateCompany(this.company).subscribe(data => {
       console.log(' data', data);
       this.close();
     })
+    this.sub.add(updateCompany);
   }
   public onCroppImage() {
-    this.imageCropperStateService.getConfirm().subscribe(data => {
+   let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
       if (!this.opened || !data) return;
       console.log('data', data);
      
@@ -248,6 +254,7 @@ public onCheckGoogleAutoComplete () {
         }
    
     })
+    this.sub.add(getConfirm);
   }
   public onChangeAvatar() {
     this.downloadCompanyLogo().then(data => {
@@ -269,10 +276,11 @@ public onCheckGoogleAutoComplete () {
     console.log('this.listPersons', this.listPersons);
   }
   private getIndustries() {
-    this.companiesService.getIndustries().subscribe((data: Array<string>) => {
+    let getIndustries = this.companiesService.getIndustries().subscribe((data: Array<string>) => {
       this.industries = data;
       console.log('industries', this.industries);
     })
+    this.sub.add(getIndustries);
   }
   getSelectedCompanyTypes() {
     let index = this.companyTypes.findIndex(item => item.selected === true);
@@ -396,5 +404,7 @@ public onCheckGoogleAutoComplete () {
     $event.preventDefault();
     $event.stopPropagation();
   }
-
+  ngOnDestroy(): void {
+   this.sub.unsubscribe();
+  }
 }

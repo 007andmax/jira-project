@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { DraftEmailStateService } from 'src/ng2/app/states/draft-email/draft-email-state.service';
 import { CompanyCalculateCount } from '../class/company-calculate-count';
+import { Subscription } from 'rxjs';
  
 
 @Component({
@@ -9,18 +10,21 @@ import { CompanyCalculateCount } from '../class/company-calculate-count';
   templateUrl: './companies-header.component.html',
   styleUrls: ['./companies-header.component.scss']
 })
-export class CompaniesHeaderComponent implements OnInit {
+export class CompaniesHeaderComponent implements OnInit,OnDestroy {
+ 
   calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
+  sub:Subscription = new Subscription();
   constructor(   private companiesStateService: CompaniesStateService,private draftEmailStateService:DraftEmailStateService,
     private companiesState: CompaniesStateService) { }
 
   ngOnInit() {
     this.calculateCount = this.companiesState.getCalculateCount();
-    this.companiesState.getOnCalculateCount().subscribe((data) => {
+  let getOnCalculateCount =   this.companiesState.getOnCalculateCount().subscribe((data) => {
       this.calculateCount = data;
       console.log('data',data);
     
     })
+    this.sub.add(getOnCalculateCount);
 
   }
   public showAsideForDraftEmail() {
@@ -28,5 +32,8 @@ export class CompaniesHeaderComponent implements OnInit {
   }
   public showAsideForAdd() {
     this.companiesStateService.toggleAsideForAdd();
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

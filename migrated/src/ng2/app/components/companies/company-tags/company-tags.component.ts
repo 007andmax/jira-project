@@ -46,10 +46,11 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-    this.tagsService.getTags().subscribe((data) => {
+   let getTags =  this.tagsService.getTags().subscribe((data) => {
       this.tags = data;
       this.reqTags = data;
     })
+    this.sub.add(getTags);
     this.onInitClearState();
     this.onCheckEditItem();
   }
@@ -90,7 +91,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
           colorCode: 0, usedCounter: 0, word: value.trim(), id: ''
         }
   
-        this.tagsService.setTags(tag.word).subscribe((res) => {
+        let setTags =  this.tagsService.setTags(tag.word).subscribe((res) => {
           tag.id = res.id;
           this.reqTags.push(tag);
           this.tags = this.reqTags;
@@ -101,42 +102,11 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
           }
           this.tagCtrl.setValue(null);
         });
-  
+        this.sub.add(setTags);
       }
      
     }
 
-  }
-
-  /**
-   * Add selected tag
-   * @param event - selected tag
-   */
-  public add(event: MatChipInputEvent): void {
-    if (this.blockCreateTag) return;
-    // if (!this.matAutocomplete.isOpen) {
-    const input = event.input;
-    const value = event.value;
-
-    if ((value || '').trim()) {
-      let tag: Tag = {
-        colorCode: 0, usedCounter: 0, word: value.trim(), id: ''
-      }
-
-      this.tagsService.setTags(tag.word).subscribe((res) => {
-        tag.id = res.id;
-        this.reqTags.push(tag);
-        this.tags = this.reqTags;
-        this.selectedTag.push(tag);
-        this.tagsChange.emit(this.selectedTag);
-      });
-
-    }
-    if (input) {
-      input.value = '';
-    }
-    this.tagCtrl.setValue(null);
-    // }
   }
 
   /**

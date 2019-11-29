@@ -18,39 +18,39 @@ export class CompanyTimeZoneComponent implements OnInit, OnDestroy {
   public isFormValid = false;
   public list: Array<TimeZone> = [];
   sub: Subscription = new Subscription();
-  displayName:string = null;
+  displayName: string = null;
   constructor(private timeZoneService: TimeZoneService, private elRef: ElementRef,
     private companyTimeZoneState: CompanyTimeZoneStateService) { }
 
   ngOnInit() {
-    this.timeZoneService.getTimeZones().subscribe(data => {
-console.log('data',data);
+    let getTimeZones = this.timeZoneService.getTimeZones().subscribe(data => {
+      console.log('data', data);
       for (var prop in data) {
         this.list.push(new TimeZone(prop, data[prop]));
 
       }
       console.log('list', this.list);
     })
+    this.sub.add(getTimeZones);
     this.onEditMode();
   }
 
   private onEditMode() {
     let getEditMode = this.companyTimeZoneState.getOnEditMode().subscribe((data) => {
-      if (data)
-      {
+      if (data) {
         this.displayName = (data.displayName) ? data.displayName : null;
         if (data.name.indexOf('/') > -1) {
-          let city = data.name.substring(data.name.indexOf('/') + 1,data.name.length);
-        
+          let city = data.name.substring(data.name.indexOf('/') + 1, data.name.length);
+
           this.elRef.nativeElement.querySelector('#dropdownTimeZone').value = city;
         } else {
           this.elRef.nativeElement.querySelector('#dropdownTimeZone').value = data.name;
         }
       } else {
         this.displayName = null;
-        this.elRef.nativeElement.querySelector('#dropdownTimeZone').value= '';
+        this.elRef.nativeElement.querySelector('#dropdownTimeZone').value = '';
       }
-     
+
     })
     this.sub.add(getEditMode);
   }
@@ -70,7 +70,7 @@ console.log('data',data);
     return index;
   }
   ngOnDestroy(): void {
-  this.sub.unsubscribe();
+    this.sub.unsubscribe();
   }
 
 }

@@ -64,6 +64,7 @@ angular.module('gc.fastRepeat', []).directive('fastRepeat', ['$compile', '$parse
         var updateList = function(rowTpl, scope, forceUpdate) {
           function render(item) {
             scope[repeatVarName] = item;
+            console.log('updateList ------------------');
             scope.$digest();
             rowTpl.attr('fast-repeat-id', item.$$fastRepeatId);
             return rowTpl.clone();
@@ -157,6 +158,7 @@ angular.module('gc.fastRepeat', []).directive('fastRepeat', ['$compile', '$parse
           // This allows us to digest the individual row scope repeatedly without major hackery.
           listScope.$$postDigest(function() {
             tplContainer.width(elParent.width());
+            console.log('postDigest ------------------');
             scope.$digest();
 
             updateList(rowTpl, scope);
@@ -171,6 +173,7 @@ angular.module('gc.fastRepeat', []).directive('fastRepeat', ['$compile', '$parse
         function renderRows() {
           listScope.$$postDigest(function() {
             tplContainer.width(elParent.width());
+            console.log('renderRows ------------------');
             scope.$digest();
             updateList(rowTpl, scope, true);
           });
@@ -192,7 +195,7 @@ angular.module('gc.fastRepeat', []).directive('fastRepeat', ['$compile', '$parse
           newScope.$$postDigest(function() {
             cb(clone);
           });
-
+          console.log('renderUnoptimized ------------------');
           newScope.$digest();
 
           return newScope;
@@ -229,7 +232,7 @@ angular.module('gc.fastRepeat', []).directive('fastRepeat', ['$compile', '$parse
               }
             }, 0);
           });
-
+          console.log('parentClickHandler ------------------');
           newScope.$digest();
         };
 

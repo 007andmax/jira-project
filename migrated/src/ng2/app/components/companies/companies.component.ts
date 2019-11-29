@@ -43,6 +43,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   left_filter: LeftPanelCompaniesFilter = new LeftPanelCompaniesFilter();
   calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
+  
   constructor(private companiesService: CompaniesService, private companiesList: CompaniesListService,
     private companiesStateService: CompaniesStateService, private userService: UsersService,
     private confirmStateService: ConfirmStateService, private devicesState: DevicesSateService, private usersStateService: UsersStateService,
@@ -51,7 +52,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
    ) { }
 
   ngOnInit() {
-    this.companiesStateService.getOnShowArchived().subscribe(data => {
+   let getOnShowArchived = this.companiesStateService.getOnShowArchived().subscribe(data => {
       this.showArchivedCompanies = data;
       console.log('data', data);
       this.left_filter.setClientType(null);
@@ -59,13 +60,15 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       this.setDefaultScoll();
       this.getClientsList(this.companiesStateService.getCompanies());
     })
+    this.sub.add(getOnShowArchived);
     if (this.companiesStateService.getCompanies().length > 0) {
       this.getClientsList(this.companiesStateService.getCompanies());
     } else {
-      this.companiesStateService.getOnCompanies().subscribe((data) => {
+    let getOnCompanies =  this.companiesStateService.getOnCompanies().subscribe((data) => {
 
         this.getClientsList(data);
       })
+      this.sub.add(getOnCompanies);
     }
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
@@ -83,17 +86,19 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       this.devices = this.devicesState.getAllDevices();
 
     } else {
-      this.devicesState.getOnDevices().subscribe((data) => {
+     let getOnDevices = this.devicesState.getOnDevices().subscribe((data) => {
 
         this.devices = data;
       })
+      this.sub.add(getOnDevices);
     }
     if (this.usersStateService.getAllUsers().length > 0) {
       this.users = this.usersStateService.getAllUsers();
     } else {
-      this.usersStateService.getOnUsers().subscribe((data) => {
+    let getOnUsers =  this.usersStateService.getOnUsers().subscribe((data) => {
         this.users = data;
       })
+      this.sub.add(getOnUsers);
     }
     let geLefttFilter = this.leftPanelStateService.getOnFilter().subscribe((data) => {
       this.left_filter = data;
@@ -104,7 +109,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     })
     this.sub.add(geLefttFilter);
 
-    this.companiesStateService.getChangeCompanies().subscribe((data: CompanyUpdate) => {
+   let getChangeCompanies = this.companiesStateService.getChangeCompanies().subscribe((data: CompanyUpdate) => {
       console.log('newChange', data);
       if (data.action === 'COMPANY_SAVED' || data.action === 'COMPANY_ARCHIVED') {
         console.log('++++++++++++++++++');
@@ -129,7 +134,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       }
       
     })
-   
+    this.sub.add(getChangeCompanies);
   }
   showMobileFilter() {
     document.body.querySelector('app-left-panel-companies').classList.add('show');
@@ -151,12 +156,13 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   public onFilterTags(tags) {
     console.log('onFilterTags');
     if (tags.length > 0) {
-      this.companiesService.getClientsByTags(tags).subscribe(data => {
+    let getClientsByTags =   this.companiesService.getClientsByTags(tags).subscribe(data => {
         this.showPreloader = true;
         this.setDefaultScoll();
         this.getClientsList(data);
 
       })
+      this.sub.add(getClientsByTags);
     } else {
       this.setDefaultScoll();
       this.getClientsList(this.companiesStateService.getCompanies());
@@ -385,19 +391,20 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.CompaniesList = [];
   }
   public onDeArchiveCompany(id) {
-    this.companiesService.deArchive(id).subscribe(data => {
+   let deArchive =  this.companiesService.deArchive(id).subscribe(data => {
       let index = this.CompaniesList.findIndex(item => item.id === id);
       if (index > -1) this.CompaniesList.splice(index, 1);
     })
+    this.sub.add(deArchive);
   }
   public onArchiveCompany(id) {
-    console.log('onArchiveCompany', id);
-    this.companiesService.archiveCompany(id).subscribe(data => {
-      console.log('data', data);
+    
+   let archiveCompany =  this.companiesService.archiveCompany(id).subscribe(data => {
+      
       let index = this.CompaniesList.findIndex(item => item.id === id);
       if (index > -1) this.CompaniesList.splice(index, 1);
     })
-
+    this.sub.add(archiveCompany);
   }
   public onScroll() {
     this.infiniteScrollDisabled = true;

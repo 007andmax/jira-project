@@ -35,7 +35,7 @@
         if (evt.keyCode === 13) {
           $scope.addEmail($scope.newEmail);
           $scope.newEmail = null;
-
+          console.log('keypressHandle ------------------');
           $scope.$digest();
         }
       }

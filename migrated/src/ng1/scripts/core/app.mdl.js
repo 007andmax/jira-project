@@ -47,9 +47,17 @@
         function ($delegate, $exceptionHandler) {
           var proto = Object.getPrototypeOf($delegate);
           var originalDigest = proto.$digest, originalApply = proto.$apply;
-          proto.$digest = function () {
+      //    console.log('decorator ------------------');
+          proto.$digest = function (tt) {
+          //  console.log('digest',tt);
             if ($delegate.$$phase === '$digest' || $delegate.$$phase === '$apply') return;
-            originalDigest.call(this);
+            try {
+              originalDigest.call(this);
+            } catch (error) {
+            
+              $exceptionHandler(error);
+            }
+           
           };
           proto.$apply = function (fn) {
             if ($delegate.$$phase === '$digest' || $delegate.$$phase === '$apply') {
@@ -805,6 +813,7 @@
 
         $rootScope.safeDigest = function () {
           if ($rootScope.$$phase !== '$apply' && $rootScope.$$phase !== '$digest') {
+            console.log('safeDigest ------------------');
             $rootScope.$digest();
           }
         };

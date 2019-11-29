@@ -50,23 +50,26 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     if (this.usersStateService.getAllUsers().length > 0) {
       this.onGetUsersCount(this.usersStateService.getAllUsers());
     } else {
-      this.usersStateService.getOnUsers().subscribe((data) => {
+     let getOnUsers =  this.usersStateService.getOnUsers().subscribe((data) => {
         this.showArchivedCompanies = false;
         this.onGetUsersCount(data);
       })
+      this.sub.add(getOnUsers);
     }
     if (this.devicesState.getAllDevices()) {
       this.onGetDevicesCount(this.devicesState.getAllDevices());
     } else {
-      this.devicesState.getOnDevices().subscribe((data) => {
+     let getOnDevices =  this.devicesState.getOnDevices().subscribe((data) => {
         this.showArchivedCompanies = false;
         this.onGetDevicesCount(data);
       })
+      this.sub.add(getOnDevices);
     }
     this.IS_MOBILE = this.appService.checkMobile();
-    this.appService.getOnMobile().subscribe(data => {
+  let getOnMobile =  this.appService.getOnMobile().subscribe(data => {
       this.IS_MOBILE = data;
     })
+    this.sub.add(getOnMobile);
 
   }
   ngDoCheck() {
@@ -131,9 +134,10 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
 
   }
   edit() {
-    this.companiesService.getCompany(this.company.id).subscribe((data: CompanyProfile) => {
+   let getCompany =  this.companiesService.getCompany(this.company.id).subscribe((data: CompanyProfile) => {
       this.companiesStateService.setEditCompany(data);
     })
+    this.sub.add(getCompany);
 
   }
   remove() {
