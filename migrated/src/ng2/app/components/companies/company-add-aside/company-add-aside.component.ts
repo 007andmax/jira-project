@@ -47,7 +47,8 @@ export class CompanyAddAsideComponent implements OnInit,OnDestroy {
   ngOnInit() {
 
     this.onShowAside();
-    this.getIndustries();
+    //this.getIndustries();
+    this.industries = this.companiesStateService.getIndustries();
     if (this.usersStateService.getAllUsers().length > 0) {
       this.getTehusers(this.usersStateService.getAllUsers());
     } else {
@@ -233,13 +234,13 @@ console.log('this.company.addresses[0]',this.company.addresses[0]);
     })
     console.log('this.listPersons', this.listPersons);
   }
-  private getIndustries() {
+/*  private getIndustries() {
     let getIndustries = this.companiesService.getIndustries().subscribe((data: Array<string>) => {
       this.industries = data;
       console.log('industries', this.industries);
     })
     this.sub.add(getIndustries);
-  }
+  }*/
   getSelectedCompanyTypes() {
     let index = this.companyTypes.findIndex(item => item.selected === true);
     if (index > -1) return this.companyTypes[index].title;

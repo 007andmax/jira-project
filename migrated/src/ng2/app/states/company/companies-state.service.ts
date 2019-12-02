@@ -11,7 +11,8 @@ import { CompanyUpdate } from '../../components/companies/class/company-update';
 })
 export class CompaniesStateService {
   allCompanies = [];
-  
+  industries = [];
+ 
   onGetCompanies: EventEmitter<any> = new EventEmitter();
   onChangeCompanies: EventEmitter<CompanyUpdate> = new EventEmitter();
   showAsideForAdd: EventEmitter<any> = new EventEmitter();
@@ -44,6 +45,15 @@ export class CompaniesStateService {
       }
       this.onChangeCompanies.emit(new CompanyUpdate(newChange.action,newChange.data,this.allCompanies));
     })
+    this.companiesService.getIndustries().subscribe((data: Array<string>) => {
+      this.industries = data.sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
+      1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
+      console.log('industries', this.industries);
+    })
+  }
+  
+  public getIndustries () {
+    return this.industries;
   }
   public getChangeCompanies() {
     return this.onChangeCompanies;

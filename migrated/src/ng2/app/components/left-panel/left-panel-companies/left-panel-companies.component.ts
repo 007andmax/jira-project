@@ -45,19 +45,20 @@ export class LeftPanelCompaniesComponent implements OnInit {
     this.leftPanelService.getSalesHistory().subscribe((data: Array<string>) => {
       this.salesHistory = data;
     })
-    this.getIndustries();
+    //this.getIndustries();
+    this.industries = this.companiesState.getIndustries();
     this.companiesState.getOnCalculateCount().subscribe((data) => {
       this.calculateCount = data;
 
     })
   }
-  private getIndustries() {
+ /* private getIndustries() {
     this.companiesService.getIndustries().subscribe((data: Array<string>) => {
       this.industries = data.sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
       1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
       console.log('industries', this.industries);
     })
-  }
+  }*/
  /* getSelectedTechLead() {
     let index = this.listPersons.findIndex(item => item.selected === true);
     if (index > -1) return this.listPersons[index].firstName + ' ' + this.listPersons[index].lastName;

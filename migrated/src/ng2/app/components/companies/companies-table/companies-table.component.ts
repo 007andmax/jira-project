@@ -130,9 +130,9 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     return `${this.primaryContact.firstName} ${this.primaryContact.lastName}`;
   };
   downloadAgent() {
-    this.devicesState.onInitGetDevices(this.devicesState.getAllDevices());
-    /* this.downloadAgentStateService.setCompnay(this.company);
-     const modalRef = this.modalService.open(DownloadAgentComponent, { windowClass: 'download-modal' });*/
+  
+     this.downloadAgentStateService.setCompnay(this.company);
+     const modalRef = this.modalService.open(DownloadAgentComponent, { windowClass: 'download-modal' });
 
   }
   edit() {
