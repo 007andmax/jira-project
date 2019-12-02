@@ -47,7 +47,11 @@ export class DevicesSateService {
         } else {
           let deviceIndex = this.allDevices[newChange.data.clientCompanyId].findIndex(item => item.id ===  parsedData.device.id);
           parsedData.device.uninstalledAt = '';
-          if (deviceIndex > -1)  this.allDevices[newChange.data.clientCompanyId][deviceIndex] = parsedData.device;
+          if (deviceIndex > -1) {
+            this.allDevices[newChange.data.clientCompanyId][deviceIndex] = parsedData.device;
+          } else {
+            this.allDevices[newChange.data.clientCompanyId].push(parsedData.device);
+          }
         //  Utils.defineReadOnlyProperty(parsedData.device, 'uninstalledAt', '');
       //    Utils.customizeObj(parsedData.device, deviceById);
         }
