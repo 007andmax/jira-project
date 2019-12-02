@@ -47,25 +47,21 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     /*  this.companiesStateService.getOnShowArchived().subscribe(data => {
         this.showArchivedCompanies = data;
       })*/
-    if (this.usersStateService.getAllUsers().length > 0) {
-      this.onGetUsersCount(this.usersStateService.getAllUsers());
-    } else {
-      let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
-        this.showArchivedCompanies = false;
-        this.onGetUsersCount(data);
-      })
-      this.sub.add(getOnUsers);
-    }
-    if (this.devicesState.getAllDevices()) {
-      this.onGetDevicesCount(this.devicesState.getAllDevices());
-    } else {
-      let getOnDevices = this.devicesState.getOnDevices().subscribe((data) => {
-        this.showArchivedCompanies = false;
-        console.log('data',data);
-        this.onGetDevicesCount(data);
-      })
-      this.sub.add(getOnDevices);
-    }
+    if (this.usersStateService.getAllUsers().length > 0) this.onGetUsersCount(this.usersStateService.getAllUsers());
+    let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
+      this.showArchivedCompanies = false;
+      this.onGetUsersCount(data);
+    })
+    this.sub.add(getOnUsers);
+
+    if (this.devicesState.getAllDevices()) this.onGetDevicesCount(this.devicesState.getAllDevices());
+    let getOnDevices = this.devicesState.getOnDevices().subscribe((data) => {
+      this.showArchivedCompanies = false;
+      
+      this.onGetDevicesCount(data);
+    })
+    this.sub.add(getOnDevices);
+
     this.IS_MOBILE = this.appService.checkMobile();
     let getOnMobile = this.appService.getOnMobile().subscribe(data => {
       this.IS_MOBILE = data;
@@ -134,8 +130,9 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     return `${this.primaryContact.firstName} ${this.primaryContact.lastName}`;
   };
   downloadAgent() {
-    this.downloadAgentStateService.setCompnay(this.company);
-    const modalRef = this.modalService.open(DownloadAgentComponent, { windowClass: 'download-modal' });
+    this.devicesState.onInitGetDevices(this.devicesState.getAllDevices());
+    /* this.downloadAgentStateService.setCompnay(this.company);
+     const modalRef = this.modalService.open(DownloadAgentComponent, { windowClass: 'download-modal' });*/
 
   }
   edit() {
@@ -155,8 +152,9 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
   private onGetDevicesCount(data) {
 
     let devices = data;
-  console.log('devices',devices);
+    
     this.countDevices = (devices[this.company.id]) ? devices[this.company.id].length : 0;
+    console.log('this.countDevices', this.countDevices);
   }
   private onGetUsersCount(data) {
 

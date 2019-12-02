@@ -64,6 +64,7 @@ export class DevicesSateService {
     this.allDevices = data;
   }
   public onInitGetDevices(data) {
+    console.log('eeeee');
     this.onGetDevices.emit(data);
   }
   public getOnDevices() {

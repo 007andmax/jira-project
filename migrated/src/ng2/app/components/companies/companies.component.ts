@@ -62,15 +62,13 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       this.getClientsList(this.companiesStateService.getCompanies());
     })
     this.sub.add(getOnShowArchived);
-    if (this.companiesStateService.getCompanies().length > 0) {
-      this.getClientsList(this.companiesStateService.getCompanies());
-    } else {
+    if (this.companiesStateService.getCompanies().length > 0)  this.getClientsList(this.companiesStateService.getCompanies());
     let getOnCompanies =  this.companiesStateService.getOnCompanies().subscribe((data) => {
 
         this.getClientsList(data);
       })
       this.sub.add(getOnCompanies);
-    }
+    
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === ARCHIVE_COMPANY) {
@@ -83,24 +81,19 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getConfirm);
 
-    if (this.devicesState.getAllDevices()) {
-      this.devices = this.devicesState.getAllDevices();
-
-    } else {
+    if (this.devicesState.getAllDevices())   this.devices = this.devicesState.getAllDevices();
      let getOnDevices = this.devicesState.getOnDevices().subscribe((data) => {
-
+      console.log('data',data);
         this.devices = data;
       })
       this.sub.add(getOnDevices);
-    }
-    if (this.usersStateService.getAllUsers().length > 0) {
-      this.users = this.usersStateService.getAllUsers();
-    } else {
+    
+    if (this.usersStateService.getAllUsers().length > 0)    this.users = this.usersStateService.getAllUsers();
     let getOnUsers =  this.usersStateService.getOnUsers().subscribe((data) => {
         this.users = data;
       })
       this.sub.add(getOnUsers);
-    }
+    
     let geLefttFilter = this.leftPanelStateService.getOnFilter().subscribe((data) => {
       this.left_filter = data;
       this.setDefaultScoll();
