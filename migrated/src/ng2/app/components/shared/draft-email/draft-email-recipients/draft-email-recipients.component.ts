@@ -56,7 +56,7 @@ export class DraftEmailRecipientsComponent implements OnInit {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-    console.log('ngOnInit', this.data);
+     
 
     this.getCompanyList();
     /*this.userInput.nativeElement.onblur = (e) => {
@@ -74,7 +74,7 @@ export class DraftEmailRecipientsComponent implements OnInit {
     })
   }
   private getCompanyList() {
-    console.log('getCompanyList');
+     
     if (this.companiesState.getCompanies().length > 0)  this.setCompanyList(this.companiesState.getCompanies());
       this.companiesState.getOnCompanies().subscribe((data) => {
         this.setCompanyList(data);
@@ -82,7 +82,7 @@ export class DraftEmailRecipientsComponent implements OnInit {
     
   }
   private setCompanyList(data) {
-    console.log('setCompanyList');
+     
     this.reqCompanyList = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt);
     this.companyList = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt);
 
@@ -93,7 +93,7 @@ export class DraftEmailRecipientsComponent implements OnInit {
    * @param index - user index
    */
   public remove(index): void {
-    console.log('remove');
+     
     if (index >= 0) {
       this.selectedCompanies.splice(index, 1);
       this.companyEmails.splice(index, 1);
@@ -107,7 +107,7 @@ export class DraftEmailRecipientsComponent implements OnInit {
    * @param event - selected user
    */
   public selected(company): void {
-    console.log('selected');
+     
     this.showError = false;
     this.selectedCompanies.push(company.companyInfo.contacts[0].primaryEmail);
     this.companyEmails.push(company.companyInfo.contacts[0].primaryEmail);
@@ -116,18 +116,18 @@ export class DraftEmailRecipientsComponent implements OnInit {
     this.userInput.nativeElement.value = '';
     this.companyCtrl.setValue(null);
     this.companyList = this.reqCompanyList;
-    console.log('this.companyList',this.companyList);
+     
  /*   this.userInput.nativeElement.value = '';
     this.companyList = this.reqCompanyList;*/
   }
 
   onSearch(event) {
-    console.log('onSearch');
+     
     
     this.companyList = this.reqCompanyList.filter(item => item.companyInfo.contacts[0].primaryEmail.includes(event.target.value));
   }
   onKeyUp (event) {
-    console.log('onKeyUp');
+     
    
     if (event.keyCode === 13) {
       const input = event.target.input;

@@ -47,7 +47,7 @@ export class CompanyPasswordManagerTableComponent implements OnInit {
     this.getRecords();
     this.getSelectedCategory();
     this.subAddNewRecords = this.addNewRecords.subscribe(v => {
-      console.log('this.selectedCompany.id',this.selectedCompany);
+       
       this.apiPasswordManagerService.getCompanyRecords(this.selectedCompany.id);
 
     });

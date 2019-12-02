@@ -97,10 +97,10 @@ export class CompanyPasswordManagerComponent implements OnInit, OnDestroy {
    * Get selected company from filter
    */
   public getSelectCompany(clientsCompany) {
-    console.log('getSelectCompany');
+     
     if (localStorage.getItem('company_id')) {
       let company_id = localStorage.getItem('company_id');
-      console.log('getSelectCompany', company_id);
+       
       this.refreshFilter();
       this.selectedCompany = clientsCompany.find(item => item.id === company_id);
       if (window.location.hash.includes('company-password-manager')) this.apiPasswordManagerService.getCompanyRecords(company_id);
@@ -198,7 +198,7 @@ export class CompanyPasswordManagerComponent implements OnInit, OnDestroy {
    * destroy password manager component
    */
   ngOnDestroy() {
-    console.log('ngOnDestroy');
+     
     this.apiPasswordManagerService.deleteSubscription();
     this.sub.unsubscribe();
 

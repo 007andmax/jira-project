@@ -109,7 +109,7 @@ public sortBy(sort) {
    */
   public getSelectedDate() {
     this.passwordManagerService.selectedDate.subscribe((date) => {
-      console.log('date',date);
+       
       if (date) {
         this.selectedDate = `${date.year}/${this.formatDayAndMonth(date.month)}/${this.formatDayAndMonth(date.day)}`
       } else {

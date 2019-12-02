@@ -26,7 +26,7 @@ export class DownloadAgentComponent implements OnInit {
 
   downloadAgent() {
     this.downloadAgentService.archiveCompany(this.downloadAgentStateService.getCompany().id, "", "", false).subscribe((data: any) => {
-      console.log('data', data);
+       
       var link = document.createElement('a');
       link.target = "_blank";
       link.href = data.link;

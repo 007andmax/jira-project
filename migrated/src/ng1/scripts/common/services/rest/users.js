@@ -26,7 +26,7 @@
 
 
       function reinitUsers(callback) {
-        console.log('reinitUsers -------------------------');
+      
         $http.get('/users').then(function (resp) {
             Utils.customizeArray(resp.data, storage.users);
             for (var i = 0; i < storage.users.length; i++) {
@@ -67,7 +67,7 @@
         }
 
         initializingStarted = true;
-        console.log('init -------------------------');
+       
         $http.get('/users').then(function (resp) {
             Utils.customizeArray(resp.data, storage.users);
             for (var i = 0; i < storage.users.length; i++) {

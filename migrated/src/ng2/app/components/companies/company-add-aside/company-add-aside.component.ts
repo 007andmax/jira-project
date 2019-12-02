@@ -75,7 +75,7 @@ export class CompanyAddAsideComponent implements OnInit,OnDestroy {
   }
 
   invokeEvent(place: any) {
-    console.log('place',place);
+   
     this.company.addresses[0].locationLat = place.geometry.location.lat();
     this.company.addresses[0].locationLng = place.geometry.location.lng();
     this.company.addresses[0].address = this.addresstext.nativeElement.value;
@@ -89,7 +89,7 @@ export class CompanyAddAsideComponent implements OnInit,OnDestroy {
       }
       this.cd.detectChanges();
     })
-console.log('this.company.addresses[0]',this.company.addresses[0]);
+ 
 }
   close() {
     this.opened = false;
@@ -126,9 +126,9 @@ console.log('this.company.addresses[0]',this.company.addresses[0]);
   }
   onAddShort() {
     if (!this.validate.isValidate(this.company)) return;
-    console.log('company', this.company);
+     
   let createCompany =   this.companiesService.createCompany(this.company).subscribe(data => {
-      console.log(' data', data);
+       
       this.close();
     })
     this.sub.add(createCompany);
@@ -207,7 +207,7 @@ console.log('this.company.addresses[0]',this.company.addresses[0]);
     if (!this.validate.isValidate(this.company)) return;
 
   let createCompany =   this.companiesService.createCompany(this.company).subscribe(data => {
-      console.log(' data', data);
+       
       this.close();
     })
     this.sub.add(createCompany);
@@ -215,7 +215,7 @@ console.log('this.company.addresses[0]',this.company.addresses[0]);
   public onCroppImage() {
    let getConfirm =  this.imageCropperStateService.getConfirm().subscribe(data => {
       if (!this.opened) return;
-      console.log('data', data);
+       
       if (data)  this.company.setLogo(data);
      
     })
@@ -230,12 +230,12 @@ console.log('this.company.addresses[0]',this.company.addresses[0]);
        this.listPersons.push(new ItemFilterPerson(item.id,`${item.firstName} ${item.lastName}`));
       }
     })
-    console.log('this.listPersons', this.listPersons);
+     
   }
 /*  private getIndustries() {
     let getIndustries = this.companiesService.getIndustries().subscribe((data: Array<string>) => {
       this.industries = data;
-      console.log('industries', this.industries);
+     
     })
     this.sub.add(getIndustries);
   }*/
@@ -267,10 +267,10 @@ console.log('this.company.addresses[0]',this.company.addresses[0]);
     return editValue;
   }
   public uploadFileOnBrower(event) {
-    console.log('event', event);
+     
     if (event.target.value) {
       const file = event.target.files[0];
-      console.log('file', file);
+       
       this.uploadFile(file).then((data: any) => {
         let res = JSON.parse(data.response);
         // this.changeFile(file).then((base64: string): any => {
@@ -288,7 +288,7 @@ console.log('this.company.addresses[0]',this.company.addresses[0]);
   uploadFile(file) {
     return new Promise((resolve, reject) => {
       //  var file = this.dataURLtoFile(this.img, this.fileName);
-      console.log(file);
+       
       var fd = new FormData();
       fd.append("file", file);
       var xhr = new XMLHttpRequest();

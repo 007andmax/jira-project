@@ -81,7 +81,7 @@ this.company.fullVersion();
   }
 
   invokeEvent(place: any) {
-    console.log('place',place);
+     
     this.company.addresses[0].locationLat = place.geometry.location.lat();
     this.company.addresses[0].locationLng = place.geometry.location.lng();
     this.company.addresses[0].address = this.addresstext.nativeElement.value;
@@ -95,7 +95,7 @@ this.company.fullVersion();
       }
       this.cd.detectChanges();
     })
-console.log('this.company.addresses[0]',this.company.addresses[0]);
+ 
 }
  
 public onCheckGoogleAutoComplete () {
@@ -139,7 +139,7 @@ public onCheckGoogleAutoComplete () {
 
 
       this.elRef.nativeElement.querySelector("#company-description").value = this.company.description;
-      console.log('company', this.company);
+       
       this.opened = true;
       //this.company.
     })
@@ -221,7 +221,7 @@ public onCheckGoogleAutoComplete () {
     this.company.clientIndustry.name = item
   }
   public onChangeTags(tags) {
-    console.log('tags',tags);
+     
     this.company.setTags(tags);
     /* tags.forEach((item) => {
        this.recurringState.getCreateTicket().addTag(item.id);
@@ -232,11 +232,11 @@ public onCheckGoogleAutoComplete () {
     //  this.recurringState.getCreateTicket().setDescription(event.target.value);
   }
   public onUpdateFull() {
-    console.log('onUpdateFull');
+     
     if (!this.validate.isValidate(this.company)) return;
     
    let updateCompany =  this.companiesService.updateCompany(this.company).subscribe(data => {
-      console.log(' data', data);
+       
       this.close();
     })
     this.sub.add(updateCompany);
@@ -244,7 +244,7 @@ public onCheckGoogleAutoComplete () {
   public onCroppImage() {
    let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
       if (!this.opened || !data) return;
-      console.log('data', data);
+       
      
         if (data.edit) {
           this.company.editLogo(data);
@@ -272,12 +272,12 @@ public onCheckGoogleAutoComplete () {
       }
 
     })
-    console.log('this.listPersons', this.listPersons);
+     
   }
  /* private getIndustries() {
     let getIndustries = this.companiesService.getIndustries().subscribe((data: Array<string>) => {
       this.industries = data;
-      console.log('industries', this.industries);
+       
     })
     this.sub.add(getIndustries);
   }*/
@@ -341,10 +341,10 @@ public onCheckGoogleAutoComplete () {
     });
   };
   public uploadFileOnBrower(event) {
-    console.log('event', event);
+     
     if (event.target.value) {
       const file = event.target.files[0];
-      console.log('file', file);
+       
       this.uploadFile(file).then((data: any) => {
         let res = JSON.parse(data.response);
         // this.changeFile(file).then((base64: string): any => {
@@ -362,7 +362,7 @@ public onCheckGoogleAutoComplete () {
   uploadFile(file) {
     return new Promise((resolve, reject) => {
       //  var file = this.dataURLtoFile(this.img, this.fileName);
-      console.log(file);
+       
       var fd = new FormData();
       fd.append("file", file);
       var xhr = new XMLHttpRequest();

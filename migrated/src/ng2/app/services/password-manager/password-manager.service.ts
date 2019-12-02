@@ -136,7 +136,6 @@ public getPassword () {
    */
   public editRecord(recordInfo, recordId) {
     const date = recordInfo.expiredDate;
-    console.log('this.getData(recordInfo,true)',this.getData(recordInfo,true));
     return this.http.put(this.apiUrl + 'passwordRecords', Object.assign({ id: recordId }, this.getData(recordInfo,true)));
   }
 

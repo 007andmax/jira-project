@@ -70,16 +70,11 @@ export class SelectClientCompanyComponent implements OnInit, OnDestroy {
     let getCompanyFromEdit = this.companiesSelectState.getCompanyFromEdit().subscribe((data) => {
      
       if (this.blockEditMode) return;
-      console.log('data', data);
       this.editItem = data;
-      console.log('this.clientsList',this.clientsList);
       let index: number = this.clientsList.findIndex(item => item.id === this.editItem.id);
       if (index > (-1)) {
-
         this.selectedClient = this.clientsList[index];
-      }
-      console.log('selectedClient', this.selectedClient);
-      
+      }  
     });
     this.sub.add(getCompanyFromEdit);
   }
@@ -110,7 +105,6 @@ export class SelectClientCompanyComponent implements OnInit, OnDestroy {
       if (index > (-1)) {
         this.selectedClient = this.clientsList[index];
       }
-      console.log('this.selectedClient',this.selectedClient);
     }
 
   }

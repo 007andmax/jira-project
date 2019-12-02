@@ -56,7 +56,7 @@ export class LeftPanelTagsCompaniesComponent implements OnInit, OnDestroy {
   }
 
   onSearch(event) {
-    console.log('eve', event.target.value);
+     
     this.tags = this.reqTags.filter(item => item.word.includes(event.target.value));
   }
    

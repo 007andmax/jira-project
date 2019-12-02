@@ -174,16 +174,16 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     const selectedDate = `${date.year}/${this.formatDayAndMonth(date.month)}/${this.formatDayAndMonth(date.day)}`;
     this.selectedDateItem = date;
     this.selectedDateForFilter = date;
-    console.log('selectedDate',selectedDate);
+     
    
  
     (this.selectedCompany && this.selectedCompany.companyId) && this.filterPasswordRecords(this.selectedCompany);
      this.passwordRecords = this.passwordRecords.filter((item) => {
-       if (item.expiredDate) console.log('item.expiredDate',item.expiredDate);
+       
       return item.expiredDate === selectedDate;
     })
     //this.selectDate(date);
-    console.log('this.passwordRecords',this.passwordRecords);
+     
     this.cdRef.detectChanges();
   }
 

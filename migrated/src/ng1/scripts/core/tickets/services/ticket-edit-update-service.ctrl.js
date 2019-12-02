@@ -9,7 +9,7 @@
           $scope.maxServiceDate = new Date();
 
           $scope.editService = $scope.service.staticCopy();
-          console.log('$scope.editService',$scope.editService);
+         
           $scope.companyServices = ServicesService.getAllByCompany($scope, $scope.company.id);
           $scope.durationText = "";
           $scope.editService.date = $filter('date')($scope.editService.date, 'd MMM yyyy');

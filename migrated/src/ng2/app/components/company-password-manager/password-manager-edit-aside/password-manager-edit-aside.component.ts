@@ -483,7 +483,7 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
       {
         this.isLoadPassword = true;
         this.apiPasswordManagerService.setOpenRecord(this.editItem.id).subscribe((data:any) => {
-          console.log('data',data);
+         
           this.passwordManagerService.setPassword(data.password);
          
           this.createPasswordRecord.controls['password'].setValue(data.password);

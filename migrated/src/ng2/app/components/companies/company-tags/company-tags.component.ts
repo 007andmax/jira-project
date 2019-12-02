@@ -57,7 +57,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
 
 
   onSearch(event) {
-    console.log('eve', event.target.value);
+     
     this.tags = this.reqTags.filter(item => item.word.includes(event.target.value));
   }
 
@@ -81,7 +81,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   }
 
   onKeyUp (event) {
-    console.log('event',event.keyCode);
+     
     if (event.keyCode === 13) {
       const input = event.target.input;
       const value = event.target.value;

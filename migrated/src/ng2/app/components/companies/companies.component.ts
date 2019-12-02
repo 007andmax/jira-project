@@ -55,7 +55,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   ngOnInit() {
    let getOnShowArchived = this.companiesStateService.getOnShowArchived().subscribe(data => {
       this.showArchivedCompanies = data;
-      console.log('data', data);
+     
       this.left_filter.setClientType(null);
       this.clearFilter();
       this.setDefaultScoll();
@@ -83,7 +83,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
 
     if (this.devicesState.getAllDevices())   this.devices = this.devicesState.getAllDevices();
      let getOnDevices = this.devicesState.getOnDevices().subscribe((data) => {
-      console.log('data',data);
+    
         this.devices = data;
       })
       this.sub.add(getOnDevices);
@@ -104,9 +104,9 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.sub.add(geLefttFilter);
 
    let getChangeCompanies = this.companiesStateService.getChangeCompanies().subscribe((data: CompanyUpdate) => {
-      console.log('newChange', data);
+      
       if (data.action === 'COMPANY_SAVED' || data.action === 'COMPANY_ARCHIVED') {
-        console.log('++++++++++++++++++');
+       
         const reqIndex = this.reqCompaniesList.findIndex((item) => item.id === data.data.id);
         if (reqIndex > -1) this.reqCompaniesList[reqIndex] = data.data;
         if (reqIndex === -1){
@@ -132,7 +132,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
 
   /*  let getChangeDevices = this.devicesState.getChangeDevices().subscribe((data: DeviceUpdate) => {
       if (data.action === 'DEVICE_UNINSTALLED' || data.action === 'DEVICE_INSTALLED') {
-        console.log('++++++++++++++++++');
+      
         const reqIndex = this.reqCompaniesList.findIndex((item) => item.id === data.data.id);
         if (reqIndex > -1) this.reqCompaniesList[reqIndex] = data.data;
         
@@ -144,7 +144,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     document.body.querySelector('app-left-panel-companies').classList.add('show');
   }
  /* private onRelaodList() {
-  console.log('onRelaodList',this.reqCompaniesList);
+  
     let listFilter = this.left_filter.getFilterList(this.reqCompaniesList);
     let start = 0;
     let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;
@@ -155,10 +155,10 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.CompaniesList = CompaniesList;
     this.infiniteScrollDisabled = false;
     if ((this.page_number * 30) > listFilter.length) this.companiesList.setBlockList(true);
-    console.log('CompaniesList', this.CompaniesList);
+  
   }*/
   public onFilterTags(tags) {
-    console.log('onFilterTags');
+    
     if (tags.length > 0) {
     let getClientsByTags =   this.companiesService.getClientsByTags(tags).subscribe(data => {
         this.showPreloader = true;
@@ -180,7 +180,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   }
   private getClientsList(data) {
     this.reqCompaniesList = data.filter(item => item.accountType === 'CLIENT' && ((!this.showArchivedCompanies) ? !item.deletedAt : item.deletedAt));
-    console.log('this.reqCompaniesList', this.reqCompaniesList);
+     
     this.onInirCalculate();
     this.reqCompaniesList.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
@@ -203,7 +203,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.CompaniesList = [...this.CompaniesList, ...CompaniesList];
     this.infiniteScrollDisabled = false;
     if ((this.page_number * 30) > listFilter.length) this.companiesList.setBlockList(true);
-    console.log('CompaniesList', this.CompaniesList);
+    
 
   }
 
@@ -231,7 +231,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
           this.onFilterAdress();
 
         } else {
-          console.log('333333333');
+          
           this.filter[index].filter = 'DESC';
           this.reqCompaniesList.reverse();
         }
@@ -280,7 +280,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
         if (sort === '' || sort === 'DESC') {
           this.filter[index].filter = 'ASC';
           this.onFilterDevices();
-          console.log(this.reqCompaniesList);
+          
         } else {
           this.filter[index].filter = 'DESC';
           this.reqCompaniesList.reverse();

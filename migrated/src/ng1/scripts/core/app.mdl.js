@@ -47,9 +47,9 @@
         function ($delegate, $exceptionHandler) {
           var proto = Object.getPrototypeOf($delegate);
           var originalDigest = proto.$digest, originalApply = proto.$apply;
-      //    console.log('decorator ------------------');
+     
           proto.$digest = function (tt) {
-          //  console.log('digest',tt);
+     
         /*    if ($delegate.$$phase === '$digest' || $delegate.$$phase === '$apply') {
               try {
                 this.$eval(tt);
@@ -830,7 +830,7 @@
 
         $rootScope.safeDigest = function () {
           if ($rootScope.$$phase !== '$apply' && $rootScope.$$phase !== '$digest') {
-            console.log('safeDigest ------------------');
+          
             $rootScope.$digest();
           }
         };

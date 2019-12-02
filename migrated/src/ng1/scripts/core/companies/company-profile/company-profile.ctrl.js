@@ -11,10 +11,10 @@
                 SharedStateService, $timeout, UserNotificationService, UserConfirmationsService,
                 PermissionsService, UsersService, $location, PasswordManagerService, $rootScope) {
 
-                  console.log('quicktech.core.companies.companyProfileCtrl');
+                 
         if (!PermissionsService.isAllowed('VIEW_COMPANIES')) {
           $state.go('tickets');
-          console.log('+++++++++++++++++++')
+        
         }
 
         UserNotificationService.show('Loading...');

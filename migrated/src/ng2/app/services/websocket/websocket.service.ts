@@ -175,12 +175,10 @@ private subsribeToDevices () {
    */
   public subsribeToCompany() {
     setTimeout(() => {
-     console.log('subsribeToCompany');
         this.stompClient.subscribe(`/user/watch/company`, (message) => {
           var newChange = JSON.parse(message.body);
           this.companiesRealTimeService.handleRealTimeChanges(newChange);
           if (message.body) {
-            console.log('test')
           }
        
       });

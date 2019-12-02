@@ -9,7 +9,7 @@
       function ($scope, DevicesService, $state, $stateParams, SharedStateService,
                 UserConfirmationsService, CompaniesService, UsersService, SubscriptionsService,
                 Utils, PermissionsService, ProductsService, $rootScope) {
-console.log('quicktech.core.companies.companyProfileTabsCtrl');
+ 
         var tabs = ['dashboard', 'users', 'devices', 'network-scan', 'products'/*, 'agents', 'settings'*/],
           devicesHeaderState = SharedStateService.getSharedState('devicesHeader');
 
