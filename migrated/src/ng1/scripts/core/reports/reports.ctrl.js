@@ -388,7 +388,7 @@
         $scope.softwareSummaryWithVersionItem = $scope.softwareSummaryWithVersion;
         $scope.softwareSummaryWithInstallDateItem = $scope.softwareSummaryWithInstallDate;
 
-        console.log('$scope.softwareSummaryWithSoftwareTitleItem',$scope.softwareSummaryWithSoftwareTitleItem);
+      
       }
 
       function getSoftwareSummaryData(dataToSend) {
@@ -447,7 +447,7 @@
           reportTransformedSoftwareSummaryDataInside = $scope.reportSoftwareSummaryData;
         }
         $scope.loadingInProgress = false;
-        console.log('$scope.softwareSummaryWithSoftwareTitleItem',reportTransformedSoftwareSummaryDataInside);
+       
         return ($scope.reportTransformedSoftwareSummaryData = reportTransformedSoftwareSummaryDataInside);
       }
 

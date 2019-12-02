@@ -11,7 +11,8 @@ import { CompanyUpdate } from '../../components/companies/class/company-update';
 })
 export class CompaniesStateService {
   allCompanies = [];
-  
+  industries = [];
+ 
   onGetCompanies: EventEmitter<any> = new EventEmitter();
   onChangeCompanies: EventEmitter<CompanyUpdate> = new EventEmitter();
   showAsideForAdd: EventEmitter<any> = new EventEmitter();
@@ -29,9 +30,7 @@ export class CompaniesStateService {
       this.onInitGetCompanies(data);
     })
     this.companiesRealTimeService.changeCompanyArray.subscribe(newChange => {
-      console.log('newChange', newChange);
       if (newChange.action === 'COMPANY_SAVED' || newChange.action === 'COMPANY_ARCHIVED') {
-        console.log('++++++++++++++++++');
         const Index = this.allCompanies.findIndex((item) => item.id === newChange.data.id);
         if (Index > -1) this.allCompanies[Index] = newChange.data;
         if (Index === -1) this.allCompanies.unshift(newChange.data);
@@ -44,6 +43,14 @@ export class CompaniesStateService {
       }
       this.onChangeCompanies.emit(new CompanyUpdate(newChange.action,newChange.data,this.allCompanies));
     })
+    this.companiesService.getIndustries().subscribe((data: Array<string>) => {
+      this.industries = data.sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
+      1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
+    })
+  }
+  
+  public getIndustries () {
+    return this.industries;
   }
   public getChangeCompanies() {
     return this.onChangeCompanies;

@@ -66,7 +66,6 @@ export class DevicesRecurringTicketsComponent implements OnInit,OnDestroy {
    */
   private getCLientsList() {
     this.subGetDevicesList = this.devicesRecurringTicketsStateService.devicesCompany.subscribe((res: any) => {
-      console.log('res',res);
       if (this.devicesStateService.getAllDevices()[res])
       {
         this.devicesList = this.devicesStateService.getAllDevices()[res].map((item) => {

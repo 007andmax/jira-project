@@ -78,7 +78,7 @@
                     element[0].blur();
                     element[0].focus();
                     element[0].click();
-                    console.log('limitLines ------------------');
+                    
                     scope.$digest()
                   }
 
@@ -134,7 +134,7 @@
                   element[0].blur();
                   element[0].focus();
                   element[0].click();
-                  console.log('limitPaste ------------------');
+                
                   scope.$digest()
 
 

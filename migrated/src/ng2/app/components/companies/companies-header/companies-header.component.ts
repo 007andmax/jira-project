@@ -21,7 +21,7 @@ export class CompaniesHeaderComponent implements OnInit,OnDestroy {
     this.calculateCount = this.companiesState.getCalculateCount();
   let getOnCalculateCount =   this.companiesState.getOnCalculateCount().subscribe((data) => {
       this.calculateCount = data;
-      console.log('data',data);
+      
     
     })
     this.sub.add(getOnCalculateCount);

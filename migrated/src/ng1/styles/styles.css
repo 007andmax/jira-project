@@ -13403,31 +13403,6 @@ button.close {
   right: 10px;
 }
 
-.recurring-tickets-content__modal,
-.new-companies-content__modal,
-.new-users-content__modal,
-.password-content__modal {
-  background-color: #ffffff;
-  transition: all .5s ease-in-out;
-  overflow-y: auto;
-  overflow-x: hidden;
-  height: calc(100vh - 78px);
-  display: flex;
-  flex-direction: column;
-}
-
-.recurring-tickets-content__modal,
-.password-content__modal {
-  right: -650px;
-  width: 650px;
-}
-
-.new-users-content__modal.open,
-.recurring-tickets-content__modal.open,
-.password-content__modal.open {
-  right: 0;
-}
-
 .new-users-content__modal h3,
 .recurring-tickets-content__modal h3,
 .new-companies-content__modal h3,

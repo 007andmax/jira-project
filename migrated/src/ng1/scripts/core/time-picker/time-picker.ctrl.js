@@ -44,7 +44,7 @@
             ];
             var parentNode = null;
             $rootScope.$on('onChangeDuration', function () {
-                console.log('onChangeDuration');
+             
                 setQuantity();
             });
             function onInitDefaultValues() {
@@ -53,7 +53,7 @@
                 $rootScope.saveEndDate = new Date().getTime();
 
             }
-            console.log('$scope.isMobileUpdateShown',$scope.isMobileUpdateShown);
+          
           
            
             if ($scope.serviceExpense || $scope.isMobileUpdateShown) onInitDefaultValues();
@@ -162,12 +162,12 @@
                     if ($scope.serviceExpense || $scope.isMobileUpdateShown) {
                         $rootScope.saveStartDate = new Date(newTimeStart.getTime());
                         $rootScope.saveEndDate = new Date(endMs);
-                        console.log('$rootScope.saveEndDate',$rootScope.saveEndDate);
+                     
                     }
                     if ($scope.editService) {
                         $rootScope.saveForStartDate = new Date(newTimeStart.getTime());
                         $rootScope.saveForEndDate = new Date(endMs);
-                        console.log('$saveForEndDate',$rootScope.saveForEndDate);
+                     
                         $scope.resetDurationWhenTimePicker();
                         $rootScope.$broadcast('onResetDuration', $scope.quantity)
                     }
@@ -186,7 +186,7 @@
                 var indexHour = $scope.hoursOutDate.findIndex(hour => hour.value === $scope.outDate.hour && hour.type === $scope.outDate.type);
                 var indexMinute = $scope.minutes.findIndex(minute => minute.value === $scope.outDate.minute);
                 if (indexMinute === -1) indexMinute = getClosest($scope.minutes,$scope.outDate.minute).u;
-                console.log('indexMinute',indexMinute);
+               
                 $scope.selectedIndexOutDate = {hour: (indexHour > -1) ? $scope.hoursOutDate[indexHour].value : null, minute: $scope.minutes[indexMinute].value};
          }
             function oninitHousInDate() {

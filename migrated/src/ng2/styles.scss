@@ -222,6 +222,14 @@
   background: #ffffff;
   height: 100vh;
   width: 650px;
+  transition: transform .3s !important;
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.ng-sidebar.ng-sidebar--opened {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .ng-sidebar--right {
@@ -230,13 +238,6 @@
   overflow-x: hidden !important;
 }
 
-.new-companies-content__modal,
-.recurring-tickets-content__modal,
-.new-users-content__modal,
-.password-content__modal {
-  top: 0 !important;
-  position: absolute !important;
-}
 app-left-panel-tags-companies {
   > .col-md-12 {
     padding: 0 24px;

@@ -180,7 +180,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
    * init new form
    */
   public initForm() {
-    console.log('initForm');
+     
     this.expiryDate = this.editItem && this.editItem.expiredDate ? this.getStartDate(this.editItem.expiredDate) : null;
     this.createPasswordRecord = this.fb.group({
       description: [this.editItem ? this.editItem.description : '', Validators.maxLength(5000)],
@@ -209,7 +209,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
    */
   public save() {
 
-    console.log('save', this.createPasswordRecord.value);
+     
     this.submitted = true;
     if (this.editItem && (!this.createPasswordRecord.value.password || this.createPasswordRecord.value.password.length === 0) && this.passwordManagerService.getPassword() !== null) {
       const errors: ValidationErrors = { required: 'Field is required' };
@@ -228,7 +228,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     }
 
 
-    console.log('gggggggggggggggg');
+     
     this.createPasswordRecord.controls['userOrDevice'].setValue(this.userDevice);
     if (this.isEditmode && this.editItem) {
       this.subSaveEditRecord = this.passwordManagerService.editRecord(this.createPasswordRecord.value, this.editItem.id)
@@ -310,7 +310,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
         type: type
       });
     }
-    console.log('this.selectedUserAndDevices', this.selectedUserAndDevices);
+     
   }
 
   /**
@@ -452,17 +452,15 @@ export class PasswordManagerEditAsideComponent implements OnInit {
    * get client list
    */
   public getCLientsList() {
-    if (this.companiesState.getCompanies().length > 0) {
-      this.clientsList = this.companiesState.getCompanies()
-        .sort((a, b) => a.name.localeCompare(b.name))
-        .filter((item) => !item.deletedAt)
-    } else {
+    if (this.companiesState.getCompanies().length > 0)  this.clientsList = this.companiesState.getCompanies()
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .filter((item) => !item.deletedAt)
       this.subGetCompaniesList = this.companiesState.getOnCompanies().subscribe((data) => {
         this.clientsList = data
           .sort((a, b) => a.name.localeCompare(b.name))
           .filter((item) => !item.deletedAt)
       })
-    }
+    
   }
 
   /**
@@ -498,7 +496,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
       if (this.editItem) {
         this.isLoadPassword = true;
         this.apiPasswordManagerService.setOpenRecord(this.editItem.id).subscribe((data: any) => {
-          console.log('data', data);
+           
           this.passwordManagerService.setPassword(data.password);
 
           this.createPasswordRecord.controls['password'].setValue(data.password);
@@ -531,7 +529,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   private getUsersCompany(companyId) {
 
     let data = this.reqUsersList.filter((item) => item.company.id == companyId && !item.deletedAt);
-    console.log('data',data);
+     
     this.usersList = [...data];
 
     this.usersCheckbox = new Array(this.usersList.length);
@@ -581,14 +579,12 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     }
   }*/
   public oGetUsers() {
-    if (this.usersStateService.getAllUsers().length > 0) {
-      this.getAllUsers(this.usersStateService.getAllUsers());
-    } else {
+    if (this.usersStateService.getAllUsers().length > 0)  this.getAllUsers(this.usersStateService.getAllUsers());
       this.usersStateService.getOnUsers().subscribe((data) => {
 
         this.getAllUsers(data);
       })
-    }
+    
   }
 
   /**

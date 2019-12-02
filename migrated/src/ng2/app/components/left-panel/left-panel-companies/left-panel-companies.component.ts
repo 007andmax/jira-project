@@ -32,32 +32,31 @@ export class LeftPanelCompaniesComponent implements OnInit {
 
   ngOnInit() {
     this.calculateCount = this.companiesState.getCalculateCount();
-    if (this.usersStateService.getAllUsers().length > 0) {
-      this.getTehusers(this.usersStateService.getAllUsers());
-    } else {
+    if (this.usersStateService.getAllUsers().length > 0)  this.getTehusers(this.usersStateService.getAllUsers());
       this.usersStateService.getOnUsers().subscribe((data) => {
         this.getTehusers(data);
       })
-    }
+    
     this.leftPanelService.getIndustryHistory().subscribe((data: Array<string>) => {
       this.industryHistory = data;
     })
     this.leftPanelService.getSalesHistory().subscribe((data: Array<string>) => {
       this.salesHistory = data;
     })
-    this.getIndustries();
+    //this.getIndustries();
+    this.industries = this.companiesState.getIndustries();
     this.companiesState.getOnCalculateCount().subscribe((data) => {
       this.calculateCount = data;
 
     })
   }
-  private getIndustries() {
+ /* private getIndustries() {
     this.companiesService.getIndustries().subscribe((data: Array<string>) => {
       this.industries = data.sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
       1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
-      console.log('industries', this.industries);
+       
     })
-  }
+  }*/
  /* getSelectedTechLead() {
     let index = this.listPersons.findIndex(item => item.selected === true);
     if (index > -1) return this.listPersons[index].firstName + ' ' + this.listPersons[index].lastName;
@@ -75,7 +74,7 @@ export class LeftPanelCompaniesComponent implements OnInit {
 
     this.listPersons.sort((a, b) => ((a.name).toLowerCase() > (b.name).toLowerCase()) ?
     1 : (((b.name).toLowerCase() > (a.name).toLowerCase()) ? -1 : 0));
-    console.log('this.listPersons',this.listPersons);
+     
   }
   public selectTechLead(name) {
    
@@ -154,8 +153,7 @@ this.selectedTechLead = null;
     this.salesHistory.unshift(item.name);
     
     this.companiesService.setСustomStorage("companiesPageFilterBySalesHistory", this.salesHistory).subscribe(data => {
-      console.log('data', data);
-      console.log('this.salesHistory', this.salesHistory);
+      
     })
   }
 
@@ -165,7 +163,7 @@ this.selectedTechLead = null;
       return;
     }
     this.selectedClientIndustry = null;
-    console.log('item',item);
+     
  //   this.showClearIndustry = true;
     this.clientIndustry = item;
     this.filter.setClientIndustry(this.clientIndustry);
@@ -175,8 +173,7 @@ this.selectedTechLead = null;
     //this.company.techLeadId = this.listPersons[index].id;
     
     this.companiesService.setСustomStorage("companiesPageFilterByIndustryHistory", this.industryHistory).subscribe(data => {
-      console.log('data', data);
-      console.log('this.salesHistory', this.industryHistory);
+      
     })
   }
 

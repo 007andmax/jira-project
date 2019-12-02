@@ -107,15 +107,11 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
    */
   ngOnInit() {
     this.showAddForm();
-    if (this.companiesState.getCompanies().length > 0) {
-      this.getCLientsList(this.companiesState.getCompanies());
-
-
-    } else {
+    if (this.companiesState.getCompanies().length > 0)   this.getCLientsList(this.companiesState.getCompanies());
       this.companiesState.getOnCompanies().subscribe((data) => {
         this.getCLientsList(data);
       })
-    }
+    
    
     this.type = 0;
     this.currentType = PASSWORD_RECORD_TYPES[0];
@@ -487,7 +483,7 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
       {
         this.isLoadPassword = true;
         this.apiPasswordManagerService.setOpenRecord(this.editItem.id).subscribe((data:any) => {
-          console.log('data',data);
+         
           this.passwordManagerService.setPassword(data.password);
          
           this.createPasswordRecord.controls['password'].setValue(data.password);
@@ -569,14 +565,12 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
     }
   }*/
   public onGetUsers() {
-    if (this.usersStateService.getAllUsers().length > 0) {
-      this.getAllUsers(this.usersStateService.getAllUsers());
-    } else {
+    if (this.usersStateService.getAllUsers().length > 0)  this.getAllUsers(this.usersStateService.getAllUsers());
       this.usersStateService.getOnUsers().subscribe((data) => {
 
         this.getAllUsers(data);
       })
-    }
+    
   }
   /**
    * get gadgets

@@ -34,7 +34,7 @@
           }
 
           function setTicketUpdateToDefault() {
-console.log('setTicketUpdateToDefault');
+ 
             $scope.setTicketUpdate({
               services: [{item:{}}]
             });
@@ -44,8 +44,7 @@ console.log('setTicketUpdateToDefault');
 
           $scope.resetDurationWhenTimePicker = function () {
             if (!$scope.editService) return;
-            console.log('resetDurationWhenTimePicker');
-            console.log('$scope.editService.quantity',$scope.editService.quantity);
+           
             var timeInMinutes = $scope.editService.quantity * 60,
             hours = Math.floor(timeInMinutes / 60),
             minutes = Math.round(timeInMinutes - (hours * 60));
@@ -54,7 +53,7 @@ console.log('setTicketUpdateToDefault');
             var hourText = ((hours < 10) ? "0" + hours : hours);
             var minuteText = ((minutes < 10) ? "0" + minutes : minutes);
             $scope.durationText = hourText + ":" + minuteText;
-            console.log('$scope.durationText',$scope.durationText);
+          
           }
           $scope.resetDurationWhenTimePicker();
           $scope.isShowingErrors = function (form, fieldName) {

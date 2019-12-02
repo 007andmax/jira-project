@@ -114,7 +114,6 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.createService.getTehState().setUsersFromtEdit(data.assignedUsers);
     this.createService.setCronForEdit(data.cronExpression);
     this.onChangeCron(data.cronExpression)
-   // this.getListServices(data.company);
     this.cd.detectChanges();
  
   }
@@ -213,19 +212,15 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
 * @param selectClient - company
 */
   public selectClient(selectClient) {
-     console.log('selectClient',selectClient);
     this.validate.resetCompany();
     if (selectClient === 'null') {
       this.recurringState.getCreateTicket().setCompany(null);
       this.selectedClient = null;
       this.recurringState.setClient(selectClient);
-     
-    //  this.services = [new ForCreateService()];
     } else {
       this.recurringState.getCreateTicket().setCompany(selectClient.item.id);
       this.selectedClient = selectClient.item;
       this.recurringState.setClient(selectClient);
-     // if (this.ticketForEdit !== null && this.ticketForEdit.company.name !== this.recurringState.getCreateTicket().getCompany()) this.services = [new ForCreateService()];
       this.onCheckListServices();
       this.getCompanyDevices();
     }
@@ -235,7 +230,6 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
       let servicesOld = JSON.parse(JSON.stringify(this.services));
       this.services = [];
       let services = [];
-    //  this.cd.detectChanges();
       servicesOld.forEach((service, index) => {
         let newService = {description:service.description, duration:(service.duration) ? service.duration : 1, name: ''}
         let new_service = new ForCreateService(newService);
@@ -267,20 +261,8 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
  */
 public setService(item, index) {
   let newItem = { ...item, ...{ description: this.services[index].description, duration:(this.services[index].duration) ? this.services[index].duration : 1  } };
- // let  service = new ForCreateService(newItem);
   this.services[index] =  new ForCreateService(newItem);
-/*  this.services[index].setName(item.name);
-  this.services[index].setVersionedId(item.setVersionedId);
-  this.services[index].setDuration( (this.services[index].duration) ? this.services[index].duration : 1);*/
   this.cd.detectChanges();
-/*  if (this.services[index] instanceof ForCreateService && this.services[index].versionedId) {
-   
-    this.services[index].setName(item.name);
-    this.services[index].setVersionedId(item.setVersionedId);
-  } else {
-    item = { ...item, ...{ description: '', duration: (this.services[index].duration) ? this.services[index].duration : 1 } };
-    this.services[index] = new ForCreateService(item);
-  }*/
 }
 
   /**

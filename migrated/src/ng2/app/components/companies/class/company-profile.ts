@@ -134,7 +134,7 @@ export class CompanyProfile {
 
     public onCheckFullVersion() {
         if (!this.clientIndustry.name || this.clientIndustry.name.length === 0) this.clientIndustry = {};
-        console.log('this.contacts[0].phoneNumbers[0].number.length === 0',this.contacts[0].phoneNumbers[0].number.length);
+       
         if (!this.contacts[0].phoneNumbers[0].number || this.contacts[0].phoneNumbers[0].number.length === 0) this.contacts[0].phoneNumbers = [];
 
     }

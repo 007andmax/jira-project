@@ -58,7 +58,7 @@
                 }
             }
             function parseEditQuantity() {
-                console.log('$scope.editService',$scope.editService);
+              
                 var timeInMinutes = $scope.editService.quantity * 60,
                     hours = Math.floor(timeInMinutes / 60),
                     minutes = Math.round(timeInMinutes - (hours * 60));
@@ -115,7 +115,7 @@
                 $scope.quantity = $scope.selectedHour + (($scope.selectedMinute) ? ($scope.selectedMinute / 60) : 0);
                 if ($scope.editService) {
                     $scope.editService.quantity = $scope.quantity;
-                    console.log('$scope.editService.quantity',$scope.editService.quantity);
+                   
                     if ($scope.serviceExpenseDurationPresentation === 'DURATION_PICKER') $rootScope.$broadcast('onChangeDuration', null);
                 }
                 if ($scope.serviceExpense || $scope.isMobileUpdateShown) {

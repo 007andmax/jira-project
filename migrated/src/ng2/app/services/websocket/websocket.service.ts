@@ -8,6 +8,7 @@ import { RecurringTicketsRealTimeService } from '../../components/tickets/recurr
 import { PasswordManagerService } from '../password-manager/password-manager.service';
 import { UsersStateService } from '../../states/users/users-state.service';
 import { CompaniesRealTimeService } from '../../states/company/companies-real-time.service';
+import { DevicesRealTimeService } from '../../states/devices/devices-real-time.service';
 
 /**
  * Websocket service to work with api
@@ -28,6 +29,7 @@ export class WebsocketService {
    */
   constructor(
     private usersService: UsersService,
+    private devicesRealTimeService: DevicesRealTimeService,
     private companiesService: CompaniesService,
     private quoteRealTimeService: QuoteRealTimeService,
     private recurringTicketsRealTimeService: RecurringTicketsRealTimeService,
@@ -48,11 +50,22 @@ export class WebsocketService {
       that.subsribeToQuote();
       that.subsribeToRecurringTickets();
       that.subsribeToUsers();
+      that.subsribeToDevices();
       that.subsribeToCompany();
       that.subsribeToPasswordRecods();
     });
   }
-
+private subsribeToDevices () {
+  setTimeout(() => {
+      this.stompClient.subscribe(`/user/watch/device`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.devicesRealTimeService.handleRealTimeChanges(newChange);
+        if (message.body) {
+       
+        }
+      });
+  }, 3000);
+}
   private subsribeToUsers () {
     console.log('subsribeToUsers');
    /* setTimeout(() => {
@@ -162,12 +175,10 @@ export class WebsocketService {
    */
   public subsribeToCompany() {
     setTimeout(() => {
-     console.log('subsribeToCompany');
         this.stompClient.subscribe(`/user/watch/company`, (message) => {
           var newChange = JSON.parse(message.body);
           this.companiesRealTimeService.handleRealTimeChanges(newChange);
           if (message.body) {
-            console.log('test')
           }
        
       });

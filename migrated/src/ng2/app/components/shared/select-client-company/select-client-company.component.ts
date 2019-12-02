@@ -51,13 +51,11 @@ export class SelectClientCompanyComponent implements OnInit, OnDestroy {
    * Initializes select client. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-    if (this.companiesState.getCompanies().length > 0) {
-      this.getCLientsList(this.companiesState.getCompanies());
-    } else {
+    if (this.companiesState.getCompanies().length > 0) this.getCLientsList(this.companiesState.getCompanies());
       this.subGetCompaniesList = this.companiesState.getOnCompanies().subscribe((data) => {
         this.getCLientsList(data);
       })
-    }
+    
 
     this.onInitClearState();
     this.onCheckEditItem();
@@ -72,16 +70,11 @@ export class SelectClientCompanyComponent implements OnInit, OnDestroy {
     let getCompanyFromEdit = this.companiesSelectState.getCompanyFromEdit().subscribe((data) => {
      
       if (this.blockEditMode) return;
-      console.log('data', data);
       this.editItem = data;
-      console.log('this.clientsList',this.clientsList);
       let index: number = this.clientsList.findIndex(item => item.id === this.editItem.id);
       if (index > (-1)) {
-
         this.selectedClient = this.clientsList[index];
-      }
-      console.log('selectedClient', this.selectedClient);
-      
+      }  
     });
     this.sub.add(getCompanyFromEdit);
   }
@@ -112,7 +105,6 @@ export class SelectClientCompanyComponent implements OnInit, OnDestroy {
       if (index > (-1)) {
         this.selectedClient = this.clientsList[index];
       }
-      console.log('this.selectedClient',this.selectedClient);
     }
 
   }

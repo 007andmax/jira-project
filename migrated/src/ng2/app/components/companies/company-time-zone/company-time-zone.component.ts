@@ -24,12 +24,12 @@ export class CompanyTimeZoneComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     let getTimeZones = this.timeZoneService.getTimeZones().subscribe(data => {
-      console.log('data', data);
+       
       for (var prop in data) {
         this.list.push(new TimeZone(prop, data[prop]));
 
       }
-      console.log('list', this.list);
+       
     })
     this.sub.add(getTimeZones);
     this.onEditMode();

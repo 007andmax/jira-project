@@ -65,25 +65,20 @@ export class DraftEmailComponent implements OnInit {
   }
 
   public uploadFileOnBrower(event) {
-    console.log('event', event);
+     
     if (event.target.value) {
       const file = event.target.files[0];
-      console.log('file', file);
+       
       this.uploadFiles.push(file);
       this.filesInfo.files.push(new FilesInfoItem());
       let indexUploadFile = this.uploadFiles.length - 1;
       let indexFileInfo = this.filesInfo.files.length - 1;
       this.uploadFile(this.uploadFiles[indexUploadFile], this.filesInfo.files[indexFileInfo]).then((data: any) => {
-
         let res = JSON.parse(data.response);
-        // this.changeFile(file).then((base64: string): any => {
-        //  this.draftEmail.addAttachment(res.id);
         this.filesInfo.files[indexFileInfo].setFileId(res.id);
         event.target.value = null;
         this.setDisableUplaodFile(false);
-        console.log('this.filesInfo.files[indexFileInfo]', this.filesInfo.files[indexFileInfo]);
-        // });
-
+        
       }).catch(err => {
         this.setDisableUplaodFile(false);
         if (err.code === 400 || err.code === 500) {
@@ -99,16 +94,9 @@ export class DraftEmailComponent implements OnInit {
     if (fileInfo.error) return;
     this.setDisableUplaodFile(true);
     this.uploadFile(file, fileInfo).then((data: any) => {
-
       let res = JSON.parse(data.response);
-      // this.changeFile(file).then((base64: string): any => {
-      //  this.draftEmail.addAttachment(res.id);
       fileInfo.setFileId(res.id);
-      //  event.target.value = null;
       this.setDisableUplaodFile(false);
-      console.log('this.filesInfo.files[indexFileInfo]', fileInfo);
-      // });
-
     }).catch(err => {
       this.setDisableUplaodFile(false);
       if (err.code === 400 || err.code === 500) {
@@ -132,7 +120,7 @@ export class DraftEmailComponent implements OnInit {
       if (!item.error) this.draftEmail.setAttachment(item.id)
     });
     this.draftEmailService.sendMessage(this.draftEmail).subscribe((data) => {
-      console.log('daata', data);
+       
       this.close();
 
     })
@@ -154,14 +142,12 @@ export class DraftEmailComponent implements OnInit {
         reject({ code: 500 });
         return;
       }
-      console.log(file);
+       
       var fd = new FormData();
       fd.append("file", file);
       var xhr = new XMLHttpRequest();
       xhr.upload.addEventListener("progress", (progress) => {
-        console.log('progress', progress);
         fileInfo.progress = 100 * (progress.loaded / progress.total);
-        console.log('fileInfo.progress', fileInfo.progress);
       }, false);
       xhr.addEventListener("load", (event) => {
 
