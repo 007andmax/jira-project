@@ -45,6 +45,8 @@ export class DevicesSateService {
           this.allDevices[companyId].push(parsedData.device);
         } else {
           let deviceIndex = this.allDevices[newChange.data.clientCompanyId].findIndex(item => item.id ===  parsedData.device.id);
+          parsedData.device.uninstalledAt = '';
+          if (deviceIndex > -1)  this.allDevices[newChange.data.clientCompanyId][deviceIndex] = parsedData.device;
         //  Utils.defineReadOnlyProperty(parsedData.device, 'uninstalledAt', '');
       //    Utils.customizeObj(parsedData.device, deviceById);
         }
