@@ -61,6 +61,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     } else {
       let getOnDevices = this.devicesState.getOnDevices().subscribe((data) => {
         this.showArchivedCompanies = false;
+        console.log('data',data);
         this.onGetDevicesCount(data);
       })
       this.sub.add(getOnDevices);

@@ -11,7 +11,7 @@ import { DeviceUpdate } from './class/device-update';
 export class DevicesSateService {
   allDevices = null;
   onGetDevices: EventEmitter<any> = new EventEmitter();
-  onChangeDevices: EventEmitter<DeviceUpdate> = new EventEmitter();
+ // onChangeDevices: EventEmitter<DeviceUpdate> = new EventEmitter();
   constructor(private userStateService: UsersStateService, private devicesService: DevicesService,
     private devicesRealTimeService: DevicesRealTimeService) { }
 
@@ -29,7 +29,7 @@ export class DevicesSateService {
       if (newChange.action === 'DEVICE_UNINSTALLED')
       {
         let deviceIndex = this.allDevices[newChange.data.clientCompanyId].findIndex(item => item.id ===  newChange.data.value);
-        if (newChange.data.uninstalledAt) {
+        if (newChange.data.uninstalledAt !== "") {
         if (deviceIndex > -1)  this.allDevices[newChange.data.clientCompanyId][deviceIndex].uninstalledAt = newChange.data.uninstalledAt;
          
         } else {
@@ -57,9 +57,9 @@ export class DevicesSateService {
     //  this.onChangeDevices.emit(new DeviceUpdate(newChange.action, newChange.data, this.allDevices));
     })
   }
-  public getChangeDevices() {
+ /* public getChangeDevices() {
     return this.onChangeDevices;
-  }
+  }*/
   public setAllDevices(data) {
     this.allDevices = data;
   }
