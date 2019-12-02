@@ -1,0 +1,291 @@
+<div ng-if="companyGroupedData" class="sidebar-general" role="tabpanel">
+
+  <ul class="nav-sb-tabs" role="tablist" open-right-panel
+      ng-init="currentTicketInfoTab = 'COMPANY'">
+
+    <li ng-class="{'active': currentTicketInfoTab === 'COMPANY'}">
+      <a href="javascript:void(0)" orp-navigation class="has-tooltip"
+         tooltip-append-to-body="true" tooltip-popup-delay="200"
+         tooltip-placement="{{ getTooltipPlacemant() }}" uib-tooltip="Company Info"
+         ng-click="currentTicketInfoTab = 'COMPANY'">
+        <i class="icon-lg icon-tab-company-info"></i>
+      </a>
+    </li>
+
+    <li ng-class="{'active': currentTicketInfoTab === 'DEVICE'}">
+      <a href="javascript:void(0)" orp-navigation class="has-tooltip"
+         tooltip-append-to-body="true" tooltip-popup-delay="200"
+         ng-click="currentTicketInfoTab = 'DEVICE'"
+         tooltip-placement="{{ getTooltipPlacemant() }}" uib-tooltip="Devices">
+        <i class="icon-lg icon-tab-devices"></i>
+      </a>
+    </li>
+
+    <li ng-class="{'active': currentTicketInfoTab === 'USER'}" ng-show="PermissionsService.isAllowed('VIEW_USERS')">
+      <a href="javascript:void(0)" orp-navigation class="has-tooltip"
+         tooltip-append-to-body="true" tooltip-popup-delay="200"
+         tooltip-placement="{{ getTooltipPlacemant() }}" uib-tooltip="Users"
+         ng-click="currentTicketInfoTab = 'USER'">
+        <i class="icon-lg icon-tab-users"></i>
+      </a>
+    </li>
+
+  </ul>
+
+  <div class="tab-content">
+
+    <div role="tabpanel" class="tab-pane tab-company-info"
+         ng-class="{'active': currentTicketInfoTab === 'COMPANY'}"
+         ng-controller="quicktech.core.rightPanel.rightPanelCompanyInfoTabCtrl">
+
+      <div class="company-detail" ng-hide="companyGroupedData.company.isDefault">
+
+        <h4>{{ companyGroupedData.company.name }}</h4>
+
+        <!--<ul class="rating rating-5">-->
+        <!--<li class="icn-sm icn-star-full star-1"></li>-->
+        <!--<li class="icn-sm icn-star-full star-2"></li>-->
+        <!--<li class="icn-sm icn-star-full star-3"></li>-->
+        <!--<li class="icn-sm icn-star-half star-4"></li>-->
+        <!--<li class="icn-sm icn-star-empty star-5"></li>-->
+        <!--</ul>-->
+
+      </div>
+
+      <div class="download-agent-form" ng-form="downloadAgentForm">
+
+        <div class="sb-heading billing-heading" ng-hide="isDomainPresent">Agent Settings</div>
+
+        <div ng-hide="isDomainPresent">
+
+          <div class="form-group" ng-class="{'has-error': showDownloadError}">
+
+            <input class="form-control" type="search" aria-expanded="true" placeholder="Enter user name"
+                   name="Fill" ng-model="downloadAgentUser.name" ng-required="false">
+
+          </div>
+
+          <div class="form-group" ng-class="{'has-error': showDownloadError}">
+
+            <input ng-class="{'hide': showPassword}" class="form-control show-password" type="password"
+                   ng-model="downloadAgentUser.password" name="roll"
+                   placeholder="Enter user password" ng-required="false" autocomplete="new-password">
+
+            <input ng-class="{'hide': !showPassword}" class="form-control show-password" type="text"
+                   ng-model="downloadAgentUser.password" placeholder="Enter user password"
+                   ng-required="false" autocomplete="new-password">
+
+            <a ng-class="{'hide': showPassword}" href="javascript:void(0)"
+               class="hide-password-hit hit-area ha-18 has-tooltip load-agent-password"
+               ng-click="showPassword = true" tooltip-placement="top"
+               uib-tooltip="Show Password">
+              <i class="icn-sm icn-hide-password"></i>
+            </a>
+
+            <a ng-class="{'hide': !showPassword}" href="javascript:void(0)"
+               class="hide-password-hit hit-area ha-18 has-tooltip load-agent-password"
+               ng-click="showPassword = false" tooltip-placement="top" uib-tooltip="Hide Password"
+               style="position: absolute;right: 12px;">
+              <i class="icn-sm icn-show-password"></i>
+            </a>
+
+          </div>
+
+        </div>
+
+        <div tooltip-placement="top" tooltip-append-to-body="true"
+             uib-tooltip="{{ !allowAgentInstall ? 'Maximum installed agent amount reached' : '' }}">
+          <div class="btn btn-lg btn-primary download-agent-btn"
+               ng-click="downloadAgent()" custom-disabled="{{ !allowAgentInstall }}">
+            Download Agent
+          </div>
+        </div>
+
+      </div>
+
+      <div class="sb-heading billing-heading">Billing Address</div>
+
+      <div class="billing-address">
+
+        <p class="post-address company-address-formatting">{{ clientCompanyInfo.billingAddress.addressWithSuitNumberAndPostalCode }}</p>
+
+        <!--<div class="site-ref">-->
+          <!--<div class="btn-location" data-container="body" data-toggle="popover-location" data-placement="bottom">-->
+          <!--<i class="icn-sm icn-sb-location pull-left"></i> Site Ref. “TCL 01”-->
+          <!--</div>-->
+        <!--</div>-->
+
+        <div class="about-company">
+
+          <div class="company-timezone" ng-show="clientCompanyInfo.billingAddress.timeZone">
+            {{ formatOffset(clientCompanyInfo.billingAddress.timeZone.timeOffset) }}
+            {{ clientCompanyInfo.billingAddress.timeZone.name }}
+          </div>
+
+          <div class="company-open-tickets">Open Tickets {{ clientCompanyInfo.openTickets }}</div>
+
+          <div class="company-response-time">Avg. Response Time {{ clientCompanyInfo.averageResponseTime }} mins</div>
+
+          <div class="company-phone-number"
+               ng-repeat="phoneNumber in clientCompanyInfo.billingAddress.phoneNumbers">
+            {{ phoneNumber.number }}
+          </div>
+        </div>
+
+      </div>
+      <div ng-if="PermissionsService.isAllowed('VIEW_USERS')">
+        <div class="sb-heading primary-contact-heading" ng-hide="companyGroupedData.company.isDefault">Primary Contact(s)</div>
+
+        <ul class="primary-contacts" ng-hide="companyGroupedData.company.isDefault">
+
+          <li class="list-users" style="padding: 0 30px 0 0"
+              ng-repeat="companyContact in companyContacts | orderBy: getUserName">
+
+            <div style="padding: 9px 0 10px 30px"
+                 contact-user-popover user-info="companyContact"
+                 send-email-in-popover="sendEmailInPopover">
+
+              <a href="javascript:void(0)" class="pull-left avatar">
+                <img ng-attr-src="{{ getUserAvatarUrl(companyContact) }}" alt="..."
+                     class="img-circle avatar-40">
+                <i class="bottom" ng-class="{'on': companyContact.online, 'off': !companyContact.online}"></i>
+              </a>
+
+              <div class="clearfix">
+                <div class="user-name">
+                  <a href="javascript:void(0)">{{ getUserName(companyContact) }}</a>
+                </div>
+              </div>
+
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div ng-if="createTicketUser">
+        <div class="sb-heading created-by-heading">Ticket Created By</div>
+        <ul class="primary-contacts" style="margin-bottom: 10px;">
+          <li class="list-users">
+            <a href="javascript:void(0)" class="pull-left avatar">
+              <img ng-attr-src="{{getUserAvatarUrl(createTicketUser)}}" alt="..." class="img-circle avatar-40">
+              <i class="bottom" ng-class="{'on': createTicketUser.online, 'off': !createTicketUser.online}"></i>
+            </a>
+
+            <div class="clearfix">
+              <div class="user-name">
+                <a href="javascript:void(0)">{{ getUserName(createTicketUser) }}</a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div role="tabpanel" class="tab-pane tab-devices"
+         ng-class="{'active': currentTicketInfoTab === 'DEVICE'}">
+
+      <div class="form-search clearfix">
+        <form class="navbar-form navbar-form-search" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control-search" placeholder="Search device..." ng-model="searchDevices">
+            <i class="icn-sm icn-search-input" tabindex="-1"></i>
+          </div>
+        </form>
+      </div>
+
+      <div class="sb-heading devices-heading">
+        Devices <span class="total">{{ agents.length }}</span>
+      </div>
+
+      <ul class="general-devices">
+
+        <li class="list-devices" device-context-menu
+            ng-repeat="agent in companyGroupedData.devices | filter: {'hostName': searchDevices} | orderBy: 'hostName'">
+
+          <a href="javascript:void(0)" class="pull-left avatar">
+
+            <span ng-show="agent.type === 'tablet'" class="icon-lg icn-tablet"></span>
+            <span ng-show="agent.type === 'workstation'" class="icon-lg icn-computer has-tooltip"></span>
+            <span ng-show="agent.type === 'mobile'" class="icon-lg icn-mobile has-tooltip"></span>
+            <span ng-show="agent.type === 'printer'" class="icon-lg icn-printer has-tooltip"></span>
+            <span ng-show="agent.type === 'server'" class="icon-lg icn-server has-tooltip"></span>
+
+            <i class="right" ng-class="{'on': agent.online, 'off': !agent.online}"></i>
+          </a>
+
+          <div class="clearfix">
+            <!--<label class="control checkbox pull-right">-->
+            <!--<input type="checkbox">-->
+            <!--<span class="control-indicator"></span>-->
+            <!--</label>-->
+
+            <div class="user-name" ng-class="{'not-user-name': !(agent.userName | unknownFilter)}">
+              <a href="javascript:void(0)">{{ (agent.hostName | unknownFilter) || 'Name is not defined' }}</a>
+            </div>
+
+            <small class="user-title text-muted">{{ (agent.userName | unknownFilter) }}</small>
+          </div>
+
+        </li>
+
+      </ul>
+    </div>
+
+    <div role="tabpanel" class="tab-pane tab-users"
+         ng-class="{'active': currentTicketInfoTab === 'USER'}"
+         ng-controller="quicktech.core.rightPanel.rightPanelUsersTabCtrl">
+
+      <div class="form-search clearfix">
+        <form class="navbar-form navbar-form-search" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control-search"
+                   ng-model="searchUserKeyword" placeholder="Search user...">
+            <i class="icn-sm icn-search-input" tabindex="-1"></i>
+          </div>
+        </form>
+      </div>
+
+      <div class="sb-heading users-heading">Users
+        <span class="total">
+          {{ companyGroupedData.users.length - (companyGroupedData.company.isDefault ? 1 : 0) }}</span>
+      </div>
+
+      <ul class="general-users" custom-selection>
+        <li class="list-users" ng-class="{'checked': selectedUsers[user.id]}" custom-popover-menu
+            custom-popover-menu-margin-top="-32px"
+            custom-popover-template="/ng1/scripts/core/right-panel/custom-popover.tpl.html"
+            ng-repeat="user in companyGroupedData.users | filter: usersFilter | orderBy: getUserName" ng-hide="user.isDefault">
+
+          <a href="javascript:void(0)" class="pull-left avatar">
+            <img ng-attr-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-40">
+            <i class="bottom" ng-class="{'on': user.online, 'off': !user.online}"></i>
+          </a>
+
+          <div class="clearfix">
+            <label class="control checkbox pull-right">
+              <input type="checkbox" ng-model="selectedUsers[user.id]">
+              <span class="control-indicator"></span>
+            </label>
+
+            <div class="user-name">
+              <a href="javascript:void(0)">{{ getUserName(user) }}</a>
+            </div>
+          </div>
+
+        </li>
+
+      </ul>
+    </div>
+
+  </div>
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-93441341-1', 'auto');
+  ga('send', 'pageview');
+
+</script>

@@ -1,0 +1,34 @@
+
+
+<div id="preview-file"   ng-controller="quicktech.editPreviewCtrl">
+    <loading-indicator loading-trigger="!showModal"></loading-indicator>
+  <div class="service-form-wrapper edit-form-checkbox create-new preview-file"
+  ng-show="showModal">
+  <div class="service--header">
+    <h2>Preview</h2>
+    <button class="close-modal" ng-click="closeWindowWithConfirm()"></button>
+  </div>
+ 
+  <div id="privew-container"  >
+  </div>
+</div>
+</div>
+
+
+<script>
+  (function(i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function() {
+      (i[r].q = i[r].q || []).push(arguments);
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+  ga('create', 'UA-93441341-1', 'auto');
+  ga('send', 'pageview');
+
+</script>

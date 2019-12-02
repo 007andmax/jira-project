@@ -32,7 +32,7 @@
           </mat-error>
           <p>Company Name</p>
           <input type="text"
-                 [(ngModel)]="company.name" (blur)="onChangeName($event)"
+                 [(ngModel)]="company.name" (blur)="onChangeName()"
                  placeholder="Write Company or Search Company">
         </div>
         <div class="col-md-6" ngbDropdown [ngClass]="{'error-field':!validate.getType() }">
@@ -41,7 +41,7 @@
           </mat-error>
           <p>Company Type</p>
           <input type="text" [value]="getSelectedCompanyTypes()"
-                 autocomplete="new-password" (input)="onChangeType($event)"
+                 autocomplete="new-password" (input)="onChangeType()"
                  placeholder="Select Company Type" id="dropdownTypeCompany" ngbDropdownToggle />
           <div ngbDropdownMenu aria-labelledby="dropdownTypeCompany">
             <ng-template ngFor let-item [ngForOf]="companyTypes" let-i="index">
@@ -118,7 +118,7 @@
             First name is required
           </mat-error>
           <p>First Name</p>
-          <input type="text" (input)="onChangeFirstName($event)"
+          <input type="text" (input)="onChangeFirstName()"
                  [(ngModel)]="company.contacts[0].firstName"
                  placeholder="Enter First Name">
         </div>
@@ -165,7 +165,7 @@
             Please enter a valid email address
           </mat-error>
           <p>Primary Contact Email</p>
-          <input type="text" (input)="onChangePrimaryEmail($event)"
+          <input type="text" (input)="onChangePrimaryEmail()"
                  [(ngModel)]="company.contacts[0].primaryEmail"
                  placeholder="Primary Email Address">
         </div>

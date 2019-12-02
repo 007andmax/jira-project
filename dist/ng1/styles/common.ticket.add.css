@@ -1,0 +1,466 @@
+.ticket-post-update-wrapper {
+  /*border-bottom: 1px solid #e7ecf2;*/
+  /*position: relative;*/
+  position: fixed;
+  bottom: 0;
+  z-index: 999;
+  /*box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.08);*/
+  width: calc(100% - 395px);
+  right: 77px;
+  transition: all .285s;
+  padding: 20px 96px;
+  background: #f2f5f8;
+  border-top: 1px solid #dee3e7;
+}
+
+.opened-ticket-list .ticket-post-update-wrapper {
+  width: calc(100% - 917px);
+  min-height: 255px;
+  right: 100px;
+}
+
+/*.opened-ticket-list.left-panel-closed .ticket-post-update-wrapper {*/
+/*right: calc(100vw - 1820px);*/
+/*}*/
+
+.ticket-post-update-wrapper > .btn {
+  position: absolute;
+  top: 30px;
+  right: 0;
+}
+
+.ticket-add-product-content,
+.ticket-add-service-content {
+  width: 100%;
+  position: relative;
+}
+
+.ticket-add-product-content input,
+.ticket-add-service-content input {
+  font-size: 13px;
+}
+
+.ticket-add-product-content input::placeholder,
+.ticket-add-service-content input::placeholder {
+  font-size: 13px;
+  color: #9ca5b6;
+}
+
+.ticket-add-service-content .report-caret-icon {
+  margin: 0 2px 2px 0;
+}
+
+.ticket-add-product-actions,
+.ticket-add-service-actions {
+  position: absolute;
+  right: -30px;
+  top: 16px;
+}
+
+.ticket-add-service-actions {
+  top: 6px;
+}
+
+.ticket-post-update-wrapper .petrovich {
+  position: relative;
+}
+
+.ticket-post-update-wrapper .petrovich a {
+  position: absolute;
+  bottom: 7px;
+  left: 50px;
+}
+
+.ticket-add .ticket-update-note .editor,
+.ticket-update-service-description .editor {
+  border: none;
+  padding: 16px 16px 0 16px;
+  color: #626b7f;
+  font-size: 13px;
+}
+
+.ticket-post-update-wrapper > .btn.connected, .ticket-post-update-wrapper > .btn.connected:hover, .ticket-post-update-wrapper > .btn.connected:active:hover, .ticket-post-update-wrapper > .btn.connected:focus:hover, .ticket-post-update-wrapper > .btn.connected:focus, .ticket-post-update-wrapper > .btn.connected:active {
+  border-radius: 19px !important;
+  background-color: #e7ecf2;
+  border-color: #e7ecf2;
+  cursor: default;
+  pointer-events: none;
+}
+
+.mobile-btn {
+  padding: 0;
+  margin: 0;
+  border-radius: 4px;
+  outline: none;
+  transition: all .3s;
+  border: none;
+}
+
+.mobile-btn.primary {
+  background: #16a4fa;
+}
+
+.mobile-btn.primary:hover {
+  background: #1481c4;
+}
+
+.create-updates-header {
+  display: flex;
+  padding: 0 0 15px 0;
+  align-items: center;
+  border-bottom: 1px solid #edf2f6;
+}
+
+.mob-note, .mob-product, .mob-service {
+  height: 24px;
+  margin-right: 20px;
+  position: relative;
+  padding-left: 24px;
+  font-size: 13px;
+  font-family: "Graphik Medium", sans-serif;
+}
+
+.mob-note {
+  width: 60px;
+}
+
+.mob-product, .mob-service {
+  width: 90px;
+}
+
+.mob-note:after,
+.mob-product:after,
+.mob-service:after {
+  position: absolute;
+  content: '';
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: transparent;
+  pointer-events: none;
+}
+
+.mob-note:hover:after,
+.mob-product:hover:after,
+.mob-service:hover:after,
+.mob-note.active:after,
+.mob-product.active:after,
+.mob-service.active:after {
+  background-color: #16a4fa;
+}
+
+.mob-note {
+  background: url("../images/new-icons/mob-note.png") no-repeat;
+}
+
+.mob-product {
+  background: url("../images/new-icons/mob-product.png") no-repeat;
+}
+
+.mob-service {
+  background: url("../images/new-icons/mob-service.png") no-repeat;
+}
+
+.mob-note.active,
+.mob-note:hover {
+  background: url("../images/new-icons/mob-note-hover.png") no-repeat;
+  color: #16a4fa;
+}
+
+.mob-product.active,
+.mob-product:hover {
+  background: url("../images/new-icons/mob-product-hover.png") no-repeat;
+  color: #16a4fa;
+}
+
+.mob-service.active,
+.mob-service:hover {
+  background: url("../images/new-icons/mob-service-hover.png") no-repeat;
+  color: #16a4fa;
+}
+
+.create-updates-header img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.ticket-add-container {
+  margin: 0 30px;
+}
+
+.ticket-add {
+  width: 100%;
+}
+
+.nav-ticket-add {
+  /*margin-top: 22px;*/
+}
+
+.ticket-add .qt-table {
+  margin: 20px;
+}
+
+.ticket-add .avator {
+  margin-right: 10px;
+}
+
+.ticket-add-content textarea.form-control {
+  background-color: #fff;
+  resize: none;
+  border: none;
+  min-height: 64px;
+  padding: 15px 20px;
+}
+
+.ticket-add .ticket--footer {
+  padding: 20px 0 0 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ticket-add-content input[type='number'].form-control {
+  -moz-appearance: textfield;
+}
+
+.ticket-add .ticket--footer .shared-avatars .shared-avatar:not(:last-child) {
+  margin-right: 5px;
+}
+
+.ticket-add-content input::-webkit-outer-spin-button,
+.ticket-add-content input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.without-input-arrows input::-webkit-outer-spin-button,
+.without-input-arrows input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.ticket-add-content-actions {
+  height: 55px;
+  background-color: #f2f2f2;
+  border-top: 1px solid;
+  border-color: #cbcbcb;
+  padding: 8px 7px;
+  width: 100%;
+}
+
+.ticket-add-content-actions .hit-area + .tooltip.top {
+  margin-top: -6px;
+  padding: 0;
+}
+
+.ticket-add-content-actions-attachment {
+  width: 38px;
+  height: 38px;
+  display: inline-block;
+  padding-top: 6px;
+  padding-left: 11px;
+}
+
+.ticket-add-content-actions-dropdown {
+  margin-right: 7px;
+}
+
+.ticket-add-content-actions-dropdown > div {
+  margin: 6px 11px 0;
+}
+
+.ticket-add-content-actions-users {
+  padding-top: 6px;
+}
+
+.ticket-add-content-actions-users .tooltip-inner {
+  height: 60px;
+}
+
+.ticket-add-content-actions-users a {
+  float: left;
+  display: inline-block;
+  position: relative;
+  margin-right: 10px;
+}
+
+.ticket-add-content-actions-users a:after {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: none;
+  background-color: rgba(21, 30, 41, .6);
+}
+
+.ticket-add-content-actions-users a:hover:after {
+  display: block;
+}
+
+.ticket-add-content-actions-users a i {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: none;
+  z-index: 2;
+}
+
+.ticket-add-content-actions-users a:hover i {
+  display: block;
+}
+
+/*.add-users-plus {
+    color: white;
+    background-color: transparent;
+    border-color: transparent;
+    border-radius: 3px;
+}
+.add-users-plus:hover {
+    color: #4c5c6f;
+    background-color: #b2becd;
+    border-color: #b2becd;
+}
+.add-users-plus:active, .open .add-users-plus {
+    color: #4c5c6f;
+    background-color: #94a4b8;
+    border-color: #94a4b8;
+}*/
+.ticket-add-amount {
+  margin-right: 20px;
+  margin-top: 9px;
+}
+
+@-moz-document url-prefix() {
+  .ticket-add-amount {
+    line-height: 19px;
+  }
+}
+
+.ticket-add-content-actions-users .tooltip-inner {
+  padding: 18px 20px;
+  text-align: left;
+}
+
+.ticket-add-content-actions-users .tooltip-name {
+  color: #f1f5fa;
+  line-height: 12px;
+}
+
+.ticket-add-content-actions-users .tooltip-designation {
+  color: #94a4b8;
+  font-weight: normal;
+  text-transform: none;
+  line-height: 12px;
+}
+
+.ticket-add-footer {
+  margin: 20px;
+}
+
+.ticket-add-footer .checkbox {
+  margin-top: 11px;
+  line-height: 16px;
+  color: #4c5c6f;
+  padding-left: 26px;
+  margin-left: 10px;
+}
+
+@-moz-document url-prefix() {
+  .ticket-add-footer .checkbox {
+    line-height: 15px;
+  }
+}
+
+.ticket-add-footer .btn {
+  width: 92px;
+}
+
+/*.ticket-add-footer .btn-primary.disabled {*/
+/*background-color: #e7ecf2;*/
+/*border-color: #e7ecf2;*/
+/*}*/
+
+.btn-update {
+  width: auto !important;
+  margin-left: 10px;
+}
+
+/* Add Product tab */
+
+#Product .col-4 .discount-input, #Service .col-4 .discount-input {
+  position: relative;
+}
+
+#Product .icn-delete,
+#Service .icn-delete {
+  cursor: pointer;
+  width: 17px;
+  height: 14px;
+}
+
+#Product .col-4 .discount-input:after,
+#Service .col-4 .discount-input:after,
+.ticket-update-service-edit .col-4 .discount-input:after,
+.ticket-update-product-edit .col-4 .discount-input:after {
+  content: "%";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+#Service .service-not-yet {
+  text-align: center;
+}
+
+#Service .service-not-yet p {
+  text-align: left;
+}
+
+#Service .service-not-yet img,
+#Service .service-not-yet p,
+#Service .service-not-yet .btn {
+  display: inline-block;
+  margin: 15.5px 40px;
+  vertical-align: middle;
+  font-size: 13px;
+}
+
+/* Add Service tab */
+
+.shared-user-add {
+  width: 90%;
+}
+
+.shared-user-add .checkbox {
+  margin-left: 10px;
+}
+.tooltip-update-close {
+  position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 135px;
+    height: 40px;
+    cursor: pointer;
+    z-index: 999;
+}
+.btn-add-container {
+  position: relative;
+}
+.time-picker-item {
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+  width: 100%;
+}
+
+.start-end-picker-item .active {
+  background: #16a4fa;
+    color: #fff;
+}
+ 

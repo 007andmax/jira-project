@@ -1,0 +1,109 @@
+<div class="product-list-report ticket-report"
+     convert-to-pdf="/customerReport/pdf"
+     disable-selector=".open-pdf-btn"
+     email-endpoint="/reports/email"
+     selector=".customer-ticket"
+     file-name="{{ reportName }}"
+     id="{{ ticketReport.id }}">
+  <p class="report-title">Detailed Commissions Report</p>
+  <i class="back-page" ui-sref="reports"></i>
+  <div>
+    <report-menu class-name="run-report-content-device"
+                 open-in-pdf="openInPdf"
+                 is-report-available="isReportAvailable"
+                 get-user-name="getUserName"
+                 download-as-pdf="downloadAsPdf"
+                 send-to-mail="sendToMail"
+                 email-pattern="emailPattern"
+                 detailed-commissions="true"
+                 is-radio-button-hidden="true"
+                 is-device-hidden="true">
+
+    </report-menu>
+  </div>
+  <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
+  <div class="product-list-ticket"
+       style="padding: 0;width: 980px;"
+       ng-controller="quicktech.core.leftPanel.customerTicketReportCtrl"
+       ng-show="!loadingInProgress">
+    <div class="customer-ticket" ng-if="commissionsReport && isReportAvailable">
+      <div class="customer-ticket__report commission-report">
+        <div class="report-header">
+          <h1>Commissions Report</h1>
+          <div class="company-info">
+            <h3>{{ commissionsReport.techCompanyName || 'All companies' }}</h3>
+            <p><span>{{commissionsReport.startDate}}</span> - <span>{{ commissionsReport.endDate }}</span></p>
+          </div>
+        </div>
+
+        <div class="customer-ticket__report--details commission-customer"
+             ng-if="!detailsByProducts">
+          <div class="details-header row">
+            <div class="col-md-4">Client</div>
+            <div class="col-md-2">Product Price</div>
+            <div class="col-md-2">Total Sales</div>
+            <div class="col-md-2">Commission Rate</div>
+            <div class="col-md-2">Commission</div>
+          </div>
+          <div class="details-content" ng-repeat="company in reducedCompanies" on-finish-render="build()">
+            <h3>{{ company }}</h3>
+            <div class="row" ng-repeat="line in reducedData[company].list">
+              <div class="col-md-4" style="padding-left: 0;">{{ line.firstLine }}</div>
+              <div class="col-md-2">{{ (line.productPrice || 0) | toFixed : 2 }}</div>
+              <div class="col-md-2">{{ line.totalSum | toFixed : 2 }}</div>
+              <div class="col-md-2">{{ line.commissionRate || 0 }}%</div>
+              <div class="col-md-2" style="padding-right: 0;">{{ line.commissionSum | toFixed : 2 }}</div>
+            </div>
+            <div class="row">
+              <div class="col-md-4" style="padding-left: 0;"></div>
+              <div class="col-md-2"><b>{{ reducedData[company].priceSum | toFixed : 2 }}</b></div>
+              <div class="col-md-2"><b>{{ reducedData[company].totalSum | toFixed : 2 }}</b></div>
+              <div class="col-md-2"><b></b></div>
+              <div class="col-md-2" style="padding-right: 0;"><b>{{ reducedData[company].commissionSum | toFixed : 2 }}</b></div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="customer-ticket__report--details commission-product" ng-if="detailsByProducts">
+          <div class="details-header row">
+            <div class="col-md-4" style="width: 21.1%;">Product</div>
+            <div class="col-md-2">Product Groups</div>
+            <div class="col-md-2">Client</div>
+            <div class="col-md-1">Product Price</div>
+            <div class="col-md-1" style="width: 9.5%;">Total Sales</div>
+            <div class="col-md-1" style="width: 13.2%;">Commission Rate</div>
+            <div class="col-md-1">Commission</div>
+          </div>
+
+          <div class="details-content row" ng-repeat="line in commissionsReport.lines" on-finish-render="build()">
+            <div class="col-md-4" style="width: 21.1%;">{{ line.expenseName }}</div>
+            <div class="col-md-2">{{ line.itemGroup }}</div>
+            <div class="col-md-2">{{ line.companyName }}</div>
+            <div class="col-md-1">
+              <span ng-if="line.productPrice !== null">{{ (line.productPrice || 0) | toFixed : 2 }}</span>
+            </div>
+            <div class="col-md-1" style="width: 9.5%;">{{ line.totalSum | toFixed : 2 }}</div>
+            <div class="col-md-1" style="width: 13.2%;">{{ line.commissionRate || 0 }}%</div>
+            <div class="col-md-1">{{ line.commissionSum | toFixed : 2 }}</div>
+          </div>
+          <div class="details-content row" style="font-weight: bold">
+            <div class="col-md-4" style="width: 21.1%;">Total</div>
+            <div class="col-md-2"></div>
+            <div class="col-md-2"></div>
+            <div class="col-md-1">{{ commissionsReport.priceSum | toFixed : 2 }}</div>
+            <div class="col-md-1" style="width: 9.5%;">{{ commissionsReport.totalSum | toFixed : 2 }}</div>
+            <div class="col-md-1" style="width: 13.2%;"></div>
+            <div class="col-md-1">{{ (commissionsReport.totalCommissionSum ) | toFixed : 2 }}</div>
+          </div>
+
+        </div>
+        <div class="report-footer">
+          <p>Prepare by : <span>{{ username }}</span></p>
+          <p>{{ currentCompany.name }}</p>
+          <p>Quicktech <span>2019</span> ©. All rights reserved</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<div class="company-info-subtitle" ng-if="companyId">
+  <span>Tags: </span>
+</div>
+<div class="{{readonlyTags ? 'readonly-tags-wrap' : 'tags-wrap'}}" ng-click="setFocus($event)" ng-style="tagFilter ? { 'max-width': '190px', 'width': '190px' } : ''">
+  <div class="{{readonlyTags ? 'readonly-tags' : 'tags'}}">
+    <span class="tags-title tag-span" ng-hide="readonlyTags || tagFilter || isCompany">Tags: </span>
+    <span class="tag-label tag-span"
+          ng-repeat="tag in ticketTags track by $index">
+      <span class="tag-span">{{ tag.word }}</span>
+      <i ng-show="!readonlyTags" class="icn-sm remove-tag" ng-click="removeTag($index)"
+         uib-tooltip="remove" tooltip-placement="top" stop-propagation="click"></i>
+    </span>
+    <div ng-show="!readonlyTags" class="{{ tagFilter ? 'tags-action x-mark-wrapper' : 'tags-action' }}"
+         uib-dropdown is-open="dropdownOpened && result.length" on-toggle="setDropdownOpened(open)"
+         ng-style="tagFilter ? { 'width': '100%' } : ''"
+         dropdown-arrow-navigation on-enter="addTag" dropdown-data-item-name="tag">
+      <div ng-if="newDesign && !ticketTags.length && !companyId" class="placeholder">Tags</div>
+      <input type="text" class="{{ tagFilter ? 'form-control tags-input' : 'tags-input' }}" ng-model="newTag" placeholder="" set-focus-on-var-change="focusInput">
+      <ul ng-show="newDesign" class="tag-autocomplete dropdown-menu" uib-dropdown-menu>
+        <li ng-repeat="tag in result | orderBy:'word'"
+            ng-click="addTag(tag)">
+          <a style="padding: 5px 20px" class="autocomplete-item"><span class="tag-name tag-span">{{tag.word}}</span></a>
+        </li>
+      </ul>
+      <ul ng-show="!newDesign" class="tag-autocomplete dropdown-menu" uib-dropdown-menu>
+        <li class="autocomplete-item" ng-repeat="tag in result | orderBy:'word'"
+            ng-click="addTag(tag)">
+          <span class="tag-name tag-span">{{tag.word}}</span>
+          <span ng-if="!tagFilter" class="pull-right tag-span">{{tag.usedCounter}}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="loading-wrap" ng-if="saving && !readonlyTags">
+    <div class="sk-fading-circle">
+      <div class="sk-circle1 sk-circle"></div>
+      <div class="sk-circle2 sk-circle"></div>
+      <div class="sk-circle3 sk-circle"></div>
+      <div class="sk-circle4 sk-circle"></div>
+      <div class="sk-circle5 sk-circle"></div>
+      <div class="sk-circle6 sk-circle"></div>
+      <div class="sk-circle7 sk-circle"></div>
+      <div class="sk-circle8 sk-circle"></div>
+      <div class="sk-circle9 sk-circle"></div>
+      <div class="sk-circle10 sk-circle"></div>
+      <div class="sk-circle11 sk-circle"></div>
+      <div class="sk-circle12 sk-circle"></div>
+    </div>
+  </div>
+</div>
