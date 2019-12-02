@@ -35,6 +35,7 @@ export class DevicesSateService {
         } else {
           if (deviceIndex > -1)  this.allDevices[newChange.data.clientCompanyId].splice(deviceIndex,1);
         }
+        console.log('this.allDevices[newChange.data.clientCompanyId]',this.allDevices[newChange.data.clientCompanyId]);
       }
       if (newChange.action === 'DEVICE_INSTALLED') {
         let parsedData = JSON.parse(newChange.data.value);
@@ -50,6 +51,7 @@ export class DevicesSateService {
         //  Utils.defineReadOnlyProperty(parsedData.device, 'uninstalledAt', '');
       //    Utils.customizeObj(parsedData.device, deviceById);
         }
+        console.log('this.allDevices[newChange.data.clientCompanyId]',this.allDevices[newChange.data.clientCompanyId]);
       }
       this.onInitGetDevices(this.allDevices);
     //  this.onChangeDevices.emit(new DeviceUpdate(newChange.action, newChange.data, this.allDevices));

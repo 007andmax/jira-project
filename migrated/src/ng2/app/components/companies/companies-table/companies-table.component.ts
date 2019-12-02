@@ -104,7 +104,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     }
   }
   goToDashboard() {
-    
+
 
     //  window.location.href = `#/tickets/user`;
     let body = document.querySelector('.left-panel__category-wrap');
@@ -154,6 +154,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
   private onGetDevicesCount(data) {
 
     let devices = data;
+  console.log('devices',devices);
     this.countDevices = (devices[this.company.id]) ? devices[this.company.id].length : 0;
   }
   private onGetUsersCount(data) {
