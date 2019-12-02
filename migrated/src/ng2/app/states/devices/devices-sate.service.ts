@@ -26,9 +26,28 @@ export class DevicesSateService {
     })
     this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {
       console.log('newChange', newChange);
-      if (newChange.action === 'DEVICE_UNINSTALLED' || newChange.action === 'DEVICE_INSTALLED') {
-        const Index = this.allDevices.findIndex((item) => item.id === newChange.data.id);
-        if (Index > -1) this.allDevices[Index] = newChange.data;
+      if (newChange.action === 'DEVICE_UNINSTALLED')
+      {
+        let deviceIndex = this.allDevices[newChange.data.clientCompanyId].findIndex(item => item.id ===  newChange.data.value);
+        if (newChange.data.uninstalledAt) {
+        if (deviceIndex > -1)  this.allDevices[newChange.data.clientCompanyId][deviceIndex].uninstalledAt = newChange.data.uninstalledAt;
+         
+        } else {
+          if (deviceIndex > -1)  this.allDevices[newChange.data.clientCompanyId].splice(deviceIndex,1);
+        }
+      }
+      if (newChange.action === 'DEVICE_INSTALLED') {
+        let parsedData = JSON.parse(newChange.data.value);
+        parsedData.device.userName = newChange.data.userName;
+        if (!this.allDevices[newChange.data.clientCompanyId]) {
+          let companyId = newChange.data.clientCompanyId;
+          this.allDevices[companyId] = [];
+          this.allDevices[companyId].push(parsedData.device);
+        } else {
+          let deviceIndex = this.allDevices[newChange.data.clientCompanyId].findIndex(item => item.id ===  parsedData.device.id);
+        //  Utils.defineReadOnlyProperty(parsedData.device, 'uninstalledAt', '');
+      //    Utils.customizeObj(parsedData.device, deviceById);
+        }
       }
       this.onInitGetDevices(this.allDevices);
     //  this.onChangeDevices.emit(new DeviceUpdate(newChange.action, newChange.data, this.allDevices));
