@@ -2,7 +2,7 @@
 <div class="page-container" *ngIf="!show">
    <div class="page-insider subscription">
      <div class="heading">
-       <h1><a href="javascript:;" class="back-menu" style="display: none;">backmneu</a>Subscription</h1>
+       <h1><a href="javascript:;" (click)="onBackMenu()" class="back-menu" style="display: none;">backmneu</a>Subscription</h1>
      </div>
      <!-- Subscription content -->
      <div class="cmn-area subs-info">

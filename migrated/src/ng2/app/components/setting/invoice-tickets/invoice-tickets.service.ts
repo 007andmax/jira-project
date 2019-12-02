@@ -105,4 +105,9 @@ export class InvoiceTicketsService {
       quote
     );
   }
+  onBackMenu() {
+    let body = document.getElementsByTagName("body")[0];
+    body.classList.remove("backMenu"); //remove the class
+    body.classList.add("backMenu");
+  }
 }

@@ -239,9 +239,11 @@ export class PermissionManageComponent implements OnInit {
     // this.loading = true;
     this.permissionManageService.deleteTechRole(id).subscribe(
       (res: any) => {
+        this.toastrService.success('Deleted role successfully')
         this.loading = false;
         if (res.length > 0) {
           this.usersToShift = res.map((user: any) => {
+            
             const newUser = user.id; // this.permissionManageService.getOnebyId(user.id);
             newUser.companyId = newUser.company.id;
             if (!newUser.subscription) {
@@ -477,4 +479,10 @@ export class PermissionManageComponent implements OnInit {
       }
     });
   }
+  onBackMenu() {
+    let body = document.getElementsByTagName("body")[0];
+    body.classList.remove("backMenu"); //remove the class
+    body.classList.add("backMenu");
+  }
+
 }

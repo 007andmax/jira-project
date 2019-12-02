@@ -4,7 +4,7 @@
   <div class="page-insider">
     <div class="heading">
       <h1>
-        <a href="javascript:;" class="back-menu" style="display: none;"
+        <a href="javascript:;" (click)="onBackMenu()" class="back-menu" style="display: none;"
           >backmneu</a
         >Permission Management
       </h1>
@@ -197,14 +197,14 @@
           (click)="deleteRole(roleToDelete, true)"
           class="btn btn-primary"
         />
-        <div>
+       
           <a
             href="javascrip:;"
             class="btn btn-secondary"
             (click)="delete = !delete"
             >Cancel</a
           >
-        </div>
+       
       </div>
     </form>
   </div>

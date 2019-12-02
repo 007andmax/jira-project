@@ -9,4 +9,9 @@ export class InvoiceTicketsComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+  onBackMenu() {
+    let body = document.getElementsByTagName("body")[0];
+    body.classList.remove("backMenu"); //remove the class
+    body.classList.add("backMenu");
+  }
 }

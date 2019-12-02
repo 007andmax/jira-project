@@ -262,7 +262,7 @@ export class InvoiceSettingsComponent implements OnInit {
       },
       error => {
         this.loading = false;
-        this.toaster.error(`Error occurred, ${error}`);
+        this.toaster.error('Bad Request');
       }
     );
   }

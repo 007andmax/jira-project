@@ -37,7 +37,7 @@ export class ManageTagsComponent implements OnInit {
    * init
    */
   ngOnInit() {
-    this.searchTag = '';
+    this.searchTag = "";
     this.compnayForm = this.formBuilder.group({
       word: ["", Validators.required],
       id: [""]
@@ -108,6 +108,9 @@ export class ManageTagsComponent implements OnInit {
   getAllDevice() {}
 
   setTab() {
+    if (this.edit) {
+      return;
+    }
     this.searchTag = "";
     this.compnayForm.patchValue({ word: "" });
     if (this.tickets.nativeElement.className.indexOf("active") > -1) {
@@ -123,11 +126,30 @@ export class ManageTagsComponent implements OnInit {
   }
 
   editTag(tag, index) {
+    this.searchTag = "";
     this.edit = true;
+    this.submitted = false;
     this.selectedIdx = index;
     if (tag) {
       this.compnayForm.patchValue({ word: tag.word, id: tag.id });
     }
+  }
+
+  onCreate() {
+    this.compnayForm.patchValue({ word: "" });
+
+    this.edit = false
+    this.searchTag = "";
+    this.create = true;
+  }
+
+  onCancel() {
+    this.submitted = false;
+    this.selectedIdx = -1;
+    this.searchTag = "";
+    this.create = false;
+    this.compnayForm.patchValue({ word: "" });
+  
   }
 
   /**
@@ -139,6 +161,7 @@ export class ManageTagsComponent implements OnInit {
       this.loading = true;
       this.tagsService.removeCompanyTag(tagId, this.setActiveTab).subscribe(
         res => {
+          this.loading = false;
           this.toaster.success("Tag removed successfully");
           if (this.setActiveTab === "ticket") {
             this.getAllTickets();
@@ -201,13 +224,18 @@ export class ManageTagsComponent implements OnInit {
         )
         .subscribe(
           res => {
-            this.loading = false;
-            this.toaster.success("Tag updated successfully");
+            console.log(res);
+            if (res) {
+              this.toaster.success("Tag updated successfully", null, {
+                timeOut: 3000
+              });
+            }
             if (this.setActiveTab === "ticket") {
               this.getAllTickets();
             } else {
               this.getAllCompany();
             }
+            this.loading = false;
             this.submitted = false;
             this.compnayForm.patchValue({ word: "" });
           },
@@ -218,5 +246,10 @@ export class ManageTagsComponent implements OnInit {
         );
     }
     this.edit = false;
+  }
+  onBackMenu() {
+    let body = document.getElementsByTagName("body")[0];
+    body.classList.remove("backMenu"); //remove the class
+    body.classList.add("backMenu");
   }
 }

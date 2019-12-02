@@ -17,7 +17,7 @@ import {
 export class OutgoingEmailComponent implements OnInit {
   smtp: any;
   supportMailBox: any;
-  targetEmail = '';
+  targetEmail = "";
   smtpForm: FormGroup;
   testEmailForm: FormGroup;
   submitted = false;
@@ -85,6 +85,7 @@ export class OutgoingEmailComponent implements OnInit {
    * init
    */
   ngOnInit() {
+    
     this.smtpForm = this.formBuilder.group({
       emailAlias: [
         this.emailAlias,
@@ -148,7 +149,7 @@ export class OutgoingEmailComponent implements OnInit {
 
   /**
    * number only
-   * @param event 
+   * @param event
    */
   numberOnly(event: any): boolean {
     const charCode = event.which ? event.which : event.keyCode;
@@ -177,18 +178,18 @@ export class OutgoingEmailComponent implements OnInit {
             ? this.getEmailViaByDomain(this.smtp.domain)
             : this.emailVia[0];
 
-          if(!this.smtp.useSMTP || this.disableFields){
-            this.smtpForm.get('login').disable();
-            this.smtpForm.get('domain').disable();
-            this.smtpForm.get('port').disable();
-            this.smtpForm.get('encryptionType').disable();
-            this.smtpForm.get('password').disable();
+          if (!this.smtp.useSMTP || this.disableFields) {
+            this.smtpForm.get("login").disable();
+            this.smtpForm.get("domain").disable();
+            this.smtpForm.get("port").disable();
+            this.smtpForm.get("encryptionType").disable();
+            this.smtpForm.get("password").disable();
           } else {
-            this.smtpForm.get('login').enable();
-            this.smtpForm.get('domain').enable();
-            this.smtpForm.get('port').enable();
-            this.smtpForm.get('encryptionType').enable();
-            this.smtpForm.get('password').enable();
+            this.smtpForm.get("login").enable();
+            this.smtpForm.get("domain").enable();
+            this.smtpForm.get("port").enable();
+            this.smtpForm.get("encryptionType").enable();
+            this.smtpForm.get("password").enable();
           }
 
           this.smtpForm.patchValue({
@@ -210,7 +211,7 @@ export class OutgoingEmailComponent implements OnInit {
 
   /**
    * get email by domain
-   * @param domain 
+   * @param domain
    */
   getEmailViaByDomain(domain) {
     var counter = 0;
@@ -228,10 +229,10 @@ export class OutgoingEmailComponent implements OnInit {
    */
   checkSMTPLoginUnique() {
     this.submitted = true;
-    if(this.smtpForm.controls['login'].errors){
+    if (this.smtpForm.controls["login"].errors) {
       return;
     }
-    
+
     this.emailSettingService
       .checkSMTPLoginUnique(this.smtpForm.value.login)
       .subscribe(
@@ -246,7 +247,7 @@ export class OutgoingEmailComponent implements OnInit {
   }
 
   /**
-   * 
+   *
    */
   changeEmailVia() {
     if (!this.smtpForm.value.usedEmailVia) {
@@ -257,26 +258,26 @@ export class OutgoingEmailComponent implements OnInit {
       email => email.label === this.smtpForm.value.usedEmailVia
     );
     this.smtp.useSMTP = selectedEmailVia[0].value;
-    if(!this.smtp.useSMTP || this.disableFields){
-      this.smtpForm.get('login').disable();
-      this.smtpForm.get('domain').disable();
-      this.smtpForm.get('port').disable();
-      this.smtpForm.get('encryptionType').disable();
-      this.smtpForm.get('password').disable();
+    if (!this.smtp.useSMTP || this.disableFields) {
+      this.smtpForm.get("login").disable();
+      this.smtpForm.get("domain").disable();
+      this.smtpForm.get("port").disable();
+      this.smtpForm.get("encryptionType").disable();
+      this.smtpForm.get("password").disable();
     } else {
-      this.smtpForm.get('login').enable();
-      this.smtpForm.get('domain').enable();
-      this.smtpForm.get('port').enable();
-      this.smtpForm.get('encryptionType').enable();
-      this.smtpForm.get('password').enable();
+      this.smtpForm.get("login").enable();
+      this.smtpForm.get("domain").enable();
+      this.smtpForm.get("port").enable();
+      this.smtpForm.get("encryptionType").enable();
+      this.smtpForm.get("password").enable();
     }
     this.setDomain(selectedEmailVia[0].label.toUpperCase());
-    this.saveSMTP(this.smtpForm,undefined);
+    this.saveSMTP(this.smtpForm, undefined);
   }
 
   /**
-   * 
-   * @param value 
+   *
+   * @param value
    */
   changeEncryption(value) {
     if (value) {
@@ -296,7 +297,7 @@ export class OutgoingEmailComponent implements OnInit {
 
   /**
    * set domain based on params
-   * @param value 
+   * @param value
    */
   setDomain(value) {
     if (!this.disableFields) {
@@ -337,9 +338,9 @@ export class OutgoingEmailComponent implements OnInit {
 
   /**
    * saved smtp
-   * @param formForSave 
-   * @param formForTest 
-   * @param isTest 
+   * @param formForSave
+   * @param formForTest
+   * @param isTest
    */
   sendTestEmail(formForSave, formForTest, isTest) {
     // $scope.showError = formForTest.$invalid;
@@ -350,13 +351,16 @@ export class OutgoingEmailComponent implements OnInit {
 
   /**
    * saved smtp
-   * @param form 
-   * @param isTest 
+   * @param form
+   * @param isTest
    */
-  saveSMTP(form,isTest) {
+  saveSMTP(form, isTest) {
     this.submitted = true;
+    this.loading = true;
     if (this.isSMTPLoginUnique) {
+      
       if (this.smtpForm.valid && this.smtp.useSMTP) {
+        
         this.smtp.login = this.smtpForm.value.login;
         this.smtp.password = this.smtpForm.value.password;
         // this.smtp.domain = this.smtpForm.value.domain;
@@ -366,12 +370,15 @@ export class OutgoingEmailComponent implements OnInit {
         this.disableFields = !!isTest;
 
         this.smtp.sendTestEmail = !!isTest;
-
+        
         this.emailSettingService.SMTPSettings(this.smtp).subscribe(
           (res: any) => {
+            this.loading = false;
             this.savedSMTPSettings = this.smtp;
             this.smtp.testEmail = this.savedSMTPSettings.login;
-            if (res && !res.valid) {
+            
+           // this.toastr.success("Saved Successfully");
+            if (res.errorMessage && !res.valid) {
               this.toastr.info(`${res.errorMessage}`);
             } else {
               this.toastr.success("Saved Successfully");
@@ -380,10 +387,12 @@ export class OutgoingEmailComponent implements OnInit {
             this.submitted = false;
           },
           error => {
+            this.loading = false;
             this.toastr.error(`Error occured, ${error}`);
           }
         );
-      } else if(!this.smtp.useSMTP){
+      } else if (!this.smtp.useSMTP) {
+        this.toastr.info('useSMTP else if');
         this.smtp.login = "";
         this.smtp.password = "";
         this.smtpForm.patchValue({
@@ -392,14 +401,16 @@ export class OutgoingEmailComponent implements OnInit {
         });
         this.emailSettingService.SMTPSettings(this.smtp).subscribe(
           (res: any) => {
-            
+            this.loading = false;
           },
           (error: any) => {
+            this.loading = false;
             this.toastr.error(`Error occured, ${error}`);
           }
         );
       }
     } else {
+      this.loading = false;
       this.isSMTPLoginUnique = false;
     }
   }
@@ -411,9 +422,10 @@ export class OutgoingEmailComponent implements OnInit {
     if (!this.smtpForm.controls["emailAlias"].errors) {
       this.emailSettingService
         .saveEmailAlias(this.smtpForm.value.emailAlias)
-        .subscribe(res => {
-          console.log(res);
-        });
+        .subscribe(
+          res => {},
+          error => {}
+        );
     }
   }
 }

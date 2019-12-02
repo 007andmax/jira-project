@@ -104,6 +104,7 @@ export class ProfileComponent implements OnInit {
     });
 
     this.getAddressAutocomplete();
+    // this.toastr.error("everything is broken", "Major Error");
   }
 
   /**
@@ -278,7 +279,6 @@ export class ProfileComponent implements OnInit {
    * @param event
    */
   imageCropped(event: ImageCroppedEvent) {
-    console.log(event);
     this.croppedImage = event;
   }
 
@@ -427,7 +427,7 @@ export class ProfileComponent implements OnInit {
             },
             error => {
               this.loading = false;
-              this.toastr.error(error);
+              this.toastr.error('Error ');
             }
           );
         })
@@ -437,6 +437,7 @@ export class ProfileComponent implements OnInit {
           this.loading = false;
         },
         error => {
+          this.toastr.error(error);
           this.loading = false;
         }
       );
@@ -551,7 +552,6 @@ export class ProfileComponent implements OnInit {
       .updateProfile(profileUser)
       .pipe(
         map(res => {
-          this.loading = false;
           if (res) {
             this.toastr.success("Profile updated successfully");
           }
@@ -562,6 +562,7 @@ export class ProfileComponent implements OnInit {
           this.loading = false;
         },
         error => {
+          this.toastr.error("Bad Request");
           this.loading = false;
         }
       );

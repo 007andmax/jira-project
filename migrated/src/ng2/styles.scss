@@ -73,29 +73,29 @@ ngb-typeahead-window {
   border-top-color: #9ca5b6;
 }
 
-.toast-container .toast-success {
-  top: 105px;
-  width: auto;
-  border-radius: 6px;
-  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1);
-  background: url('/ng2/assets/img/success-tick.png') #2ec866 no-repeat left
-    16px center;
-  background-color: #2ec866;
-  padding: 8px 15px 8px 44px;
-  font-size: 12px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.33;
-  letter-spacing: normal;
-  color: #ffffff;
-  margin: 0 auto;
-  left: 265px;
-  right: 0;
-  max-width: 236px;
-  position: fixed;
-  z-index: 99999999999;
-}
+// .toast-container .toast-success {
+//   top: 105px;
+//   width: auto;
+//   border-radius: 6px;
+//   box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1);
+//   background: url('/ng2/assets/img/success-tick.png') #2ec866 no-repeat left
+//     16px center;
+//   background-color: #2ec866;
+//   padding: 8px 15px 8px 44px;
+//   font-size: 12px;
+//   font-weight: normal;
+//   font-style: normal;
+//   font-stretch: normal;
+//   line-height: 1.33;
+//   letter-spacing: normal;
+//   color: #ffffff;
+//   margin: 0 auto;
+//   left: 265px;
+//   right: 0;
+//   max-width: 236px;
+//   position: fixed;
+//   z-index: 99999999999;
+// }
 
 .invalid-feedback {
   margin-top: 0.25rem;
@@ -115,3 +115,8 @@ input.ng-invalid.is-invalid {
 @import '/assets/scss/mixin';
 @import '/assets/scss/custom';
 @import '/assets/scss/layout';
+
+/* Add application styles & imports to this file! */
+#toast-container > div {
+  opacity:1;
+}

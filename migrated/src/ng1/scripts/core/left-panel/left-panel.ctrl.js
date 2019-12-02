@@ -770,6 +770,10 @@
             }
           }
         });
+        // $scope.stateBack(null, 'tickets', {
+        //   listType: getTicketsListType()
+        // });
+        
 
         $scope.$watch('ticketsSharedState.filter.techUserId', function (value) {
 

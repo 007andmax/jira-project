@@ -195,7 +195,7 @@ export class TicketSettingsComponent implements OnInit {
       },
       error => {
         this.loading = false;
-        this.toastr.error(`Error occured ${error}`);
+        this.toastr.error('Bad Request');
       }
     );
   }

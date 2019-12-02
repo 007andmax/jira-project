@@ -106,6 +106,7 @@ export class CompanyProfileComponent implements OnInit {
       timeSettings: { workingDays: [], outliersSeconds: 0 },
       supportMailBox: ""
     };
+   
 
     this.createCProfileForm();
 
@@ -127,6 +128,8 @@ export class CompanyProfileComponent implements OnInit {
 
     // load address autocomplete
     this.getAddressAutocomplete();
+
+   
   }
 
   getAddress(place: object) {
@@ -594,7 +597,7 @@ export class CompanyProfileComponent implements OnInit {
         },
         error => {
           this.loading = false;
-          this.toaster.error(`Error occured, ${error}`);
+          this.toaster.error('Bad Request');
         }
       );
     }
@@ -670,7 +673,7 @@ export class CompanyProfileComponent implements OnInit {
                 },
                 error => {
                   this.loading = false;
-                  this.toaster.error(`Error Occurred, ${error}`);
+                  this.toaster.error('Bad Request');
                 }
               );
             } else {
@@ -818,5 +821,10 @@ export class CompanyProfileComponent implements OnInit {
       return false;
     }
     return true;
+  }
+  onBackMenu() {
+    let body = document.getElementsByTagName("body")[0];
+    body.classList.remove("backMenu"); //remove the class
+    body.classList.add("backMenu");
   }
 }

@@ -99,4 +99,9 @@ export class IntegrationsComponent implements OnInit {
       this.savePaymentInfo();
     }
   }
+  onBackMenu() {
+    let body = document.getElementsByTagName("body")[0];
+    body.classList.remove("backMenu"); //remove the class
+    body.classList.add("backMenu");
+  }
 }

@@ -71,7 +71,7 @@ export class TaxesComponent implements OnInit {
 
   /**
    * checked unique name based on name
-   * @param name 
+   * @param name
    */
   isUniqueName(name) {
     if (!this.taxForm.controls["name"].errors) {
@@ -94,7 +94,7 @@ export class TaxesComponent implements OnInit {
 
   /**
    * remove tax
-   * @param tax 
+   * @param tax
    */
   removeTax(tax: any) {
     if (confirm(`Are you sure you want to delete ${tax.name} ?`)) {
@@ -114,9 +114,9 @@ export class TaxesComponent implements OnInit {
 
   /**
    * open model
-   * @param isCreated 
-   * @param index 
-   * @param tax 
+   * @param isCreated
+   * @param index
+   * @param tax
    */
   openModel(isCreated: boolean, index: number, tax: any) {
     this.unique = true;
@@ -163,7 +163,9 @@ export class TaxesComponent implements OnInit {
             }
           })
         )
-        .subscribe();
+        .subscribe(() => {
+          this.toastrService.success("Tax saved successfully");
+        });
     } else {
       // add
       this.loading = true;
@@ -178,5 +180,10 @@ export class TaxesComponent implements OnInit {
         )
         .subscribe();
     }
+  }
+  onBackMenu() {
+    let body = document.getElementsByTagName("body")[0];
+    body.classList.remove("backMenu"); //remove the class
+    body.classList.add("backMenu");
   }
 }

@@ -78,6 +78,11 @@ export class EmailTempleteComponent implements OnInit {
     this.getEmailPages();
   }
 
+  onBackMenu() {
+    let body = document.getElementsByTagName("body")[0];
+    body.classList.remove("backMenu"); //remove the class
+    body.classList.add("backMenu");
+  }
   // convenience getter for easy access to form fields
   get f() {
     return this.templeteForm.controls;
@@ -388,4 +393,8 @@ export class UploadAdapter {
         })
     );
   }
+
+  
+
+
 }

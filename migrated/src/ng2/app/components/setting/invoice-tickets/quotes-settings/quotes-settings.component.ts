@@ -82,7 +82,7 @@ export class QuotesSettingsComponent implements OnInit {
         this.toastr.success('Saved successfully');
       }, error => {
         this.loading = false;
-        this.toastr.error(`Error occured ${error}`);
+        this.toastr.error('Bad Request');
       });
   }
 }

@@ -32,7 +32,7 @@
 
 .cmn-area.outgoing-email {
   form{
-    @media only screen and (max-width: 576px){
+    @media only screen and (max-width: 768px){
       padding-bottom: 40px;
       .btn{
             position: fixed;
@@ -108,3 +108,16 @@
 input.ng-invalid.is-invalid {
   border: 1px solid red;
 }
+
+// #toast-container > div {
+//   opacity:1;
+//   }
+
+// .toast-info {
+//   display: inline-block !important;
+//   opacity: 1 !important;
+// }
+// .toast-success .toast .ng-trigger .ng-trigger-flyInOut{
+//   display: inline-block !important;
+//   opacity: 1 !important;
+// }

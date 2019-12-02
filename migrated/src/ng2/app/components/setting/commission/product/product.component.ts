@@ -57,11 +57,13 @@ export class ProductComponent implements OnInit {
           .setCategoryRate(category.id, '0', false)
           .subscribe(
             res => {
+              this.toastrService.success('Removed successfully')
               this.selectedIdx = -1;
               this.loading = false;
               category.commissionRate = null;
             },
             error => {
+              this.toastrService.error('Bad Request')
               this.loading = false;
             }
           );
@@ -109,7 +111,7 @@ export class ProductComponent implements OnInit {
           error => {
             this.selectedIdx = -1;
             this.loading = false;
-            this.toastrService.error(`Error Occured, ` + error);
+            this.toastrService.error('Bad Request');
           }
         );
     } else {

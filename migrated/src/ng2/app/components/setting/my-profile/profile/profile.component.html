@@ -69,10 +69,8 @@
   />
 
   <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-    <div class="f-row">
-      <div class="f-col col-50">
-        <!-- <label>Your Full name</label>  -->
-
+    <div class="f-row"><!-- Commented code for full name -->
+      <!-- <div class="f-col col-50">
         <label *ngIf="!submitted || !f.userName.errors">Your Full name</label>
         <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
           <div *ngIf="f.userName.errors.required">Full Name is required</div>
@@ -87,7 +85,43 @@
             formControlName="userName"
           />
         </div>
-      </div>
+      </div> -->
+      <div class="f-col col-50">
+          <!-- <label>Your Full name</label>  -->
+  
+          <label *ngIf="!submitted || !f.userName.errors">First Name</label>
+          <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+            <div *ngIf="f.userName.errors.required">Full Name is required</div>
+            <div *ngIf="f.userName.errors.minlength">Full name is too short.</div>
+            <div *ngIf="f.userName.errors.maxlength">Full name is too large.</div>
+          </div>
+          <div class="form-row">
+            <input
+              type="text"
+              class="form-input"
+              placeholder="Enter Your First Name"
+              formControlName="userName"
+            />
+          </div>
+        </div>
+        <div class="f-col col-50">
+          <!-- <label>Your Full name</label>  -->
+  
+          <label *ngIf="!submitted || !f.userName.errors">Last Name</label>
+          <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+            <div *ngIf="f.userName.errors.required">Full Name is required</div>
+            <div *ngIf="f.userName.errors.minlength">Full name is too short.</div>
+            <div *ngIf="f.userName.errors.maxlength">Full name is too large.</div>
+          </div>
+          <div class="form-row">
+            <input
+              type="text"
+              class="form-input"
+              placeholder="Enter Your Last Name"
+              formControlName="userName"
+            />
+          </div>
+        </div>
       <div class="f-col col-50">
         <label *ngIf="(!submitted || !f.primaryEmail.errors) && uniqueEmail"
           >Email Address</label

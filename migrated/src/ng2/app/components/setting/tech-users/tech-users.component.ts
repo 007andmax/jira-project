@@ -461,6 +461,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       this.loading = true;
       this.techUsersService.createUser(objTechUser).subscribe(
         (savedTechUsre: any) => {
+          this.toastr.success('Saved successfully')
           this.loading = false;
           this.create = false;
           this.getUsers();
@@ -471,6 +472,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
         error => {
           this.create = false;
           this.loading = false;
+          this.toastr.error('Bad Request');
         }
       );
     } else {
@@ -633,6 +635,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       .subscribe(
         res => {
           // this.getUsers();
+          this.toastr.success('Updated successfully')
           this.techUserForm.reset();
           if (this.techUserIdList) {
             this.emailNotification(this.techUserIdList);
@@ -645,12 +648,11 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
         error => {
           this.loading = false;
           this.edit = false;
+          this.toastr.error('Bad Request')
         }
       );
 
     this.saveUsersEmailNotifications(this.selectedTechUser.id);
-
-    // alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.techUserForm.value));
   }
 
   /**
@@ -693,4 +695,9 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
   //     Object.assign({}, { class: 'manage-tags modal-dialog-centered' })
   //   );
   // }
+  onBackMenu() {
+    let body = document.getElementsByTagName("body")[0];
+    body.classList.remove("backMenu"); //remove the class
+    body.classList.add("backMenu");
+  }
 }

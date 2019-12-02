@@ -103,22 +103,26 @@ export class ContractComponent implements OnInit {
         data[this.flag] = true;
         this.commissionService.setAgreementRates(data, true).subscribe(
           res => {
+            this.toastrService.success('successfully changed')
             this.oldAgreementsCommissions[this.rate] = data[this.rate];
             this.isModelDisplay = false;
             this.loading = false;
           },
           error => {
+            this.toastrService.error('Bad Request')
             this.loading = false;
           }
         );
       } else {
         this.commissionService.setAgreementRates(data, false).subscribe(
           res => {
+            this.toastrService.success('changed successfully')
             this.oldAgreementsCommissions[this.rate] = data[this.rate];
             this.isModelDisplay = false;
             this.loading = false;
           },
           error => {
+            this.toastrService.error('Bad Request')
             this.loading = false;
           }
         );
@@ -127,6 +131,7 @@ export class ContractComponent implements OnInit {
       this.loading = true;
       this.commissionService.setAgreementRates(data, false).subscribe(
         res => {
+          this.toastrService.success('saved successfully')
           this.isModelDisplay = false;
           this.loading = false;
           this.agreementsCommissions = res || {};
@@ -136,6 +141,7 @@ export class ContractComponent implements OnInit {
           );
         },
         error => {
+          this.toastrService.error('Bad Request')
           this.loading = false;
         }
       );
@@ -179,6 +185,7 @@ export class ContractComponent implements OnInit {
       this.loading = true;
       this.commissionService.setAgreementRates(data, false).subscribe(
         res => {
+          this.toastrService.success('changed successfully')
           this.isModelDisplay = false;
           this.loading = false;
 
@@ -189,6 +196,7 @@ export class ContractComponent implements OnInit {
           );
         },
         error => {
+          this.toastrService.error('Bad Request')
           this.loading = false;
         }
       );

@@ -229,8 +229,8 @@
         <div class="left-panel-icn left-panel-icons-reports" uib-tooltip="reports" tooltip-placement="right"
           tooltip-append-to-body="true"></div>
       </div>
-      <div ui-sref="settings" ng-click="onClickSettings()"
-        ng-class="{'active': openedCategory === 'settings' || (openedCategory === undefined && $state.is('settings'))}"
+      <div ui-sref="ng2/setting" ng-click="stateGo($event, 'myprofile-component')"
+        ng-class="{'active': openedCategory === '/ng2/setting' || (openedCategory === undefined && $state.is('/ng2/setting'))}"
         style="width: calc(100% + 10px)">
         <div class="settings-left-bar"></div>
       </div>
@@ -1144,19 +1144,23 @@
         <span>Settings</span>
       </a>
       </div>
-      <div class="back"><a href="javascript:;"><span class="nav-ico"><img src="/ng2/assets/img/prev.svg"
+      <div class="back"><a href="javascript:;" ng-click="stateGo($event, 'quickSupport');"><span class="nav-ico" 
+        ><img src="/ng2/assets/img/prev.svg"
               alt="back" /></span>back</a></div>
       <nav>
       <ul class="list-unstyled">
         <li ng-class="{active: $state.includes('myprofile-component')}"><a
             ng-click="stateGo($event, 'myprofile-component')"><span class="nav-ico"><img
                 src="/ng2/assets/img/my-profile.svg" alt="My Profile" /></span>My Profile Settings</a></li>
-        <li ng-class="{active: $state.includes('manage-tags-component')}"><a
+        <li ng-class="{active: $state.includes('manage-tags-component')}"
+        ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_TAGS_SETTINGS')"
+        ><a
             ng-click="stateGo($event, 'manage-tags-component')"><span class="nav-ico"><img
                 src="/ng2/assets/img/manage-tags.svg" alt="Tags" /></span>Manage Tags</a></li>
 
         <li ng-class="{active: $state.includes('company-profile-component')}">
-          <a ng-click="stateGo($event, 'company-profile-component')"><span class="nav-ico"><img
+          <a ng-click="stateGo($event, 'company-profile-component')" 
+          ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_COMPANY_PROFILE_SETTINGS')"><span class="nav-ico"><img
                 src="/ng2/assets/img/company-profile.svg" alt="Company" /></span>Company Profile</a>
         </li>
 

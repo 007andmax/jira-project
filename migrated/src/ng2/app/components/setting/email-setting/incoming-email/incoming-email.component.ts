@@ -79,7 +79,9 @@ export class IncomingEmailComponent implements OnInit {
   saveInboxEnabled() {
     this.emailSettingService
       .saveInboxEnabled(this.inboxEnabled)
-      .subscribe(res => {});
+      .subscribe(res => {
+        this.toastr.success("Saved successfully");
+      });
   }
 
   /**

@@ -224,6 +224,7 @@ angular
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     UpgradeModule,
     HttpClientModule,
     FormsModule,
@@ -244,7 +245,7 @@ angular
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAbP4DFpz4f9YcXMWUjdkOdyArX2peNt8s'
     }),
-    BrowserAnimationsModule,
+    
     ToastrModule.forRoot({
       closeButton: true,
       preventDuplicates: true
