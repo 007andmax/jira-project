@@ -94,14 +94,14 @@ export class LeftPanelPasswordManagerComponent implements OnInit {
     }
     this.companiesList = this.getCompaniesNames(this.companiesState.getCompanies());
     
-  } else {
+  }
     this.companiesState.getOnCompanies().subscribe((data) => {
       if (!this.cdRef['destroyed']) {
         this.cdRef.detectChanges();
       }
       this.companiesList = this.getCompaniesNames(data);
     })
-  }
+  
     /* return this.subscription = this.companiesService.clientsCompany
        .subscribe((company) => {
          if (!this.cdRef['destroyed']) {

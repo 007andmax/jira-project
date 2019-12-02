@@ -75,14 +75,11 @@ export class DraftEmailRecipientsComponent implements OnInit {
   }
   private getCompanyList() {
     console.log('getCompanyList');
-    if (this.companiesState.getCompanies().length > 0) {
-      this.setCompanyList(this.companiesState.getCompanies());
-
-    } else {
+    if (this.companiesState.getCompanies().length > 0)  this.setCompanyList(this.companiesState.getCompanies());
       this.companiesState.getOnCompanies().subscribe((data) => {
         this.setCompanyList(data);
       })
-    }
+    
   }
   private setCompanyList(data) {
     console.log('setCompanyList');

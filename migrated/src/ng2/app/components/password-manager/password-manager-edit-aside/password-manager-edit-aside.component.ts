@@ -452,17 +452,15 @@ export class PasswordManagerEditAsideComponent implements OnInit {
    * get client list
    */
   public getCLientsList() {
-    if (this.companiesState.getCompanies().length > 0) {
-      this.clientsList = this.companiesState.getCompanies()
-        .sort((a, b) => a.name.localeCompare(b.name))
-        .filter((item) => !item.deletedAt)
-    } else {
+    if (this.companiesState.getCompanies().length > 0)  this.clientsList = this.companiesState.getCompanies()
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .filter((item) => !item.deletedAt)
       this.subGetCompaniesList = this.companiesState.getOnCompanies().subscribe((data) => {
         this.clientsList = data
           .sort((a, b) => a.name.localeCompare(b.name))
           .filter((item) => !item.deletedAt)
       })
-    }
+    
   }
 
   /**
@@ -581,14 +579,12 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     }
   }*/
   public oGetUsers() {
-    if (this.usersStateService.getAllUsers().length > 0) {
-      this.getAllUsers(this.usersStateService.getAllUsers());
-    } else {
+    if (this.usersStateService.getAllUsers().length > 0)  this.getAllUsers(this.usersStateService.getAllUsers());
       this.usersStateService.getOnUsers().subscribe((data) => {
 
         this.getAllUsers(data);
       })
-    }
+    
   }
 
   /**

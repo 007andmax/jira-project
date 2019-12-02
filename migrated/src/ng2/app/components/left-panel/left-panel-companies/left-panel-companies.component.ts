@@ -32,13 +32,11 @@ export class LeftPanelCompaniesComponent implements OnInit {
 
   ngOnInit() {
     this.calculateCount = this.companiesState.getCalculateCount();
-    if (this.usersStateService.getAllUsers().length > 0) {
-      this.getTehusers(this.usersStateService.getAllUsers());
-    } else {
+    if (this.usersStateService.getAllUsers().length > 0)  this.getTehusers(this.usersStateService.getAllUsers());
       this.usersStateService.getOnUsers().subscribe((data) => {
         this.getTehusers(data);
       })
-    }
+    
     this.leftPanelService.getIndustryHistory().subscribe((data: Array<string>) => {
       this.industryHistory = data;
     })

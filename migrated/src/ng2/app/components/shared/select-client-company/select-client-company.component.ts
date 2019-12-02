@@ -51,13 +51,11 @@ export class SelectClientCompanyComponent implements OnInit, OnDestroy {
    * Initializes select client. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-    if (this.companiesState.getCompanies().length > 0) {
-      this.getCLientsList(this.companiesState.getCompanies());
-    } else {
+    if (this.companiesState.getCompanies().length > 0) this.getCLientsList(this.companiesState.getCompanies());
       this.subGetCompaniesList = this.companiesState.getOnCompanies().subscribe((data) => {
         this.getCLientsList(data);
       })
-    }
+    
 
     this.onInitClearState();
     this.onCheckEditItem();

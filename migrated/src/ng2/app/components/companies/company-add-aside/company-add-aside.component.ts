@@ -49,14 +49,12 @@ export class CompanyAddAsideComponent implements OnInit,OnDestroy {
     this.onShowAside();
     //this.getIndustries();
     this.industries = this.companiesStateService.getIndustries();
-    if (this.usersStateService.getAllUsers().length > 0) {
-      this.getTehusers(this.usersStateService.getAllUsers());
-    } else {
+    if (this.usersStateService.getAllUsers().length > 0) this.getTehusers(this.usersStateService.getAllUsers());
      let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
         this.getTehusers(data);
       })
       this.sub.add(getOnUsers);
-    }
+    
 
     this.onCroppImage();
   }

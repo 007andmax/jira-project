@@ -67,15 +67,11 @@ export class CompanyPasswordManagerComponent implements OnInit, OnDestroy {
    * Initializes Password manager. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-    if (this.companiesState.getCompanies().length > 0) {
-      this.getSelectCompany(this.companiesState.getCompanies());
-
-
-    } else {
+    if (this.companiesState.getCompanies().length > 0)  this.getSelectCompany(this.companiesState.getCompanies());
       this.companiesState.getOnCompanies().subscribe((data) => {
         this.getSelectCompany(data);
       })
-    }
+    
 
     this.getSelectedCategory();
     this.getSelectedDeviceOrUser();

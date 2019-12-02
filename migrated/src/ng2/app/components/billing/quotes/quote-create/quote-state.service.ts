@@ -85,17 +85,15 @@ export class QuoteStateService {
    * Initializes subscribe on clients 
    */
   private onInitCLientsList() {
-    if (this.companiesState.getCompanies().length > 0) {
-      this.clientsList = this.companiesState.getCompanies()
-        .sort((a, b) => a.name.localeCompare(b.name))
-        .filter((item) => !item.deletedAt)
-    } else {
+    if (this.companiesState.getCompanies().length > 0)   this.clientsList = this.companiesState.getCompanies()
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .filter((item) => !item.deletedAt)
       this.companiesState.getOnCompanies().subscribe((data) => {
         this.clientsList = data
         .sort((a, b) => a.name.localeCompare(b.name))
         .filter((item) => !item.deletedAt)
       })
-    }
+    
   }
 
   /**

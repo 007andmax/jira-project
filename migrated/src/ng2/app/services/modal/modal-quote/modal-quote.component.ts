@@ -14,6 +14,7 @@ import { Subject, Subscription } from "rxjs";
 import { AlertStateService } from 'src/ng2/app/components/shared/alert/services/alert-state.service';
 import { ConfirmStateService } from 'src/ng2/app/components/shared/confirm/services/confirm-state.service';
 import { ConfirmComponent } from 'src/ng2/app/components/shared/confirm/confirm.component';
+import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
  
  
 
@@ -74,6 +75,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     config: NgbModalConfig,
+    private usersStateService:UsersStateService
   ) {
     config.backdrop = 'static';
     config.keyboard = false;
@@ -179,21 +181,21 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
     this.showErrorClient = false;
     const company = (this.data && this.data.company && this.data.company.id) || this.quoteStateService.getClient();
     if (company || company.id) {
-      this.userService.getAllusers().subscribe((res: any) => {
+     let userList =  this.usersStateService.getAllUsers();
         this.initialized = true;
-        const techUser = res.filter((item) => item.accountType === USER.TYPE.TECH && !item.deletedAt);
+        const techUser = userList.filter((item) => item.accountType === USER.TYPE.TECH && !item.deletedAt);
         let clientUser = [];
         if (typeof company === 'string' || company instanceof String) {
-          clientUser = res.filter((item) => {
+          clientUser = userList.filter((item) => {
             return item.accountType === USER.TYPE.CLIENT && item.company.id == company && !item.deletedAt
           });
         } else {
-          clientUser = res.filter((item) => {
+          clientUser = userList.filter((item) => {
             return item.accountType === USER.TYPE.CLIENT && item.company.id == company.id && !item.deletedAt
           });
         }
         this.users = [...techUser, ...clientUser];
-      })
+   //   })
     } else {
       this.showErrorClient = true;
     }
