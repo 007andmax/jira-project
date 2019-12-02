@@ -16,6 +16,7 @@ import { CompaniesRealTimeService } from '../../states/company/companies-real-ti
 import { CompanyUpdate } from './class/company-update';
 import { ARCHIVE_COMPANY, DEARCHIVE_COMPANY } from '../../const/confirm';
 import { AppService } from '../../states/app/app.service';
+import { DeviceUpdate } from '../../states/devices/class/device-update';
 
 @Component({
   selector: 'app-companies',
@@ -135,6 +136,16 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       
     })
     this.sub.add(getChangeCompanies);
+
+  /*  let getChangeDevices = this.devicesState.getChangeDevices().subscribe((data: DeviceUpdate) => {
+      if (data.action === 'DEVICE_UNINSTALLED' || data.action === 'DEVICE_INSTALLED') {
+        console.log('++++++++++++++++++');
+        const reqIndex = this.reqCompaniesList.findIndex((item) => item.id === data.data.id);
+        if (reqIndex > -1) this.reqCompaniesList[reqIndex] = data.data;
+        
+      }
+
+    });*/
   }
   showMobileFilter() {
     document.body.querySelector('app-left-panel-companies').classList.add('show');
