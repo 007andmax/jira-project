@@ -18,8 +18,19 @@
       <div class="col-md-1 text-center">Tickets</div>
       <div class="col-md-2"></div>
     </div>
-    <div class="user-content">
-      <app-users-table></app-users-table>
+    <div class="user-content"
+    infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="50"
+    [infiniteScrollDisabled]="infiniteScrollDisabled"
+    (scrolled)="onScroll()">
+    <ng-template ngFor let-user
+                   [ngForOf]="users"
+                   [ngForTrackBy]="trackById">
+        <app-users-table [user]="user"></app-users-table>
+      </ng-template>
+      <div class="loading" *ngIf="showPreloader"></div>
+    
     </div>
     <button class="mob-filters-btn mobile-btn primary">
       Filters
@@ -27,4 +38,4 @@
     <div class="loading" style="display: none;"></div>
   </div>
 </div>
-<app-users-aside></app-users-aside>
+<!--<app-users-aside></app-users-aside> -->
