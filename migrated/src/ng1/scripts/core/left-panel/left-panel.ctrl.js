@@ -1103,8 +1103,7 @@
               $rootScope.isLeftPanelHidden = false;
             }
           }
-         // if (section === 'companies')  $rootScope.isLeftPanelHidden = true;
-          console.log('$rootScope.isLeftPanelHidden',$rootScope.isLeftPanelHidden);
+         
         };
 
 

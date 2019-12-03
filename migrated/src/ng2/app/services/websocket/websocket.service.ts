@@ -67,7 +67,7 @@ private subsribeToDevices () {
   }, 3000);
 }
   private subsribeToUsers () {
-    console.log('subsribeToUsers');
+   
    /* setTimeout(() => {
       this.stompClient.subscribe("/user/watch/user", (message) => {
         var newChange = JSON.parse(message.body);
