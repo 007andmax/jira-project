@@ -66,54 +66,9 @@
   </div>
   <div class="mobile-companies" ng-class="{ opened: areCompaniesOpened }">
 
-    <div class="mobile-sub-header" ng-class="{ active: openedCategory === 'companies' }" ui-sref="companies" ng-click="toggleMobileMenu('areCompaniesOpened'); clearCompaniesFilters(); toggleLeftPanel('companies', true);">Companies</div>
-    <div class="mobile-sub-content">
-      <div class="center-category collapsed-nav nano-content">
-        <div class="center-category__category sked" ng-click="filterCompanies(); toggleMobileLeftPanel(false)"
-             ng-class="{'active': !isArchivedCompaniesToShow()}">
-          All Companies
-          <i class="icn-sm icn-label-save-left-panel"
-             ng-show="!isArchivedCompaniesToShow()"></i>
-        </div>
-        <div class="center-category__category sked" ng-click="filterCompanies('archived'); toggleMobileLeftPanel(false)"
-             ng-class="{'active': isArchivedCompaniesToShow()}">
-          Archived
-          <i class="icn-sm icn-label-save-left-panel" ng-show="isArchivedCompaniesToShow()"></i>
-        </div>
-
-
-        <div class="left-panel-title font-medium">
-          types
-        </div>
-        <div class="center-category__category sked" ng-click="filterCompanies('clients'); toggleMobileLeftPanel(false)"
-             ng-class="{'active': companiesSharedState.filter.isClient}">
-          Clients
-
-          <div class="col-2 user-company-circle">
-            <span>{{ companyCounters.CLIENT }}</span>
-          </div>
-
-        </div>
-        <div class="center-category__category sked" ng-click="filterCompanies('leads'); toggleMobileLeftPanel(false)"
-             ng-class="{'active': companiesSharedState.filter.isLead}">
-          Leads
-
-          <div class="col-2 user-company-circle">
-            <span>{{ companyCounters.LEAD }}</span>
-          </div>
-
-        </div>
-        <div class="center-category__category sked" ng-click="filterCompanies('vendors'); toggleMobileLeftPanel(false)"
-             ng-class="{'active': companiesSharedState.filter.isVendor}">
-          Vendor
-
-          <div class="col-2 user-company-circle">
-            <span>{{ companyCounters.VENDOR }}</span>
-          </div>
-
-        </div>
-      </div>
-    </div>
+    <div class="mobile-sub-header" ng-class="{ active: openedCategory === 'companies' }" 
+    ui-sref="new-companies" >Companies</div>
+    
   </div>
   
   <div class="mobile-password"

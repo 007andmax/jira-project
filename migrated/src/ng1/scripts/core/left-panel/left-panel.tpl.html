@@ -211,6 +211,7 @@
       </div>
       <div class="left-panel__category"
            ng-class="{'active': openedCategory === 'companies' || openedCategory === 'companyProfile' }"
+           ng-click="toggleLeftPanel('companies', true)"
            ui-sref="new-companies" 
            ng-if="PermissionsService.isAllowed('VIEW_COMPANIES')">
         <div class="left-panel-icn left-panel-icons-companies"
@@ -646,7 +647,8 @@
         </div>
         <span class="left-panel-full__head--header">Companies</span>
       </div>
-      <div class="center-category collapsed-nav nano-content">
+      <div class="center-category collapsed-nav nano-content"></div>
+    <!--  <div class="center-category collapsed-nav nano-content">
         <div class="center-category__category sked" ng-click="filterCompanies()"
              ng-class="{'active': !isArchivedCompaniesToShow()}">
           All Companies
@@ -667,22 +669,7 @@
           <div class="col-2 user-company-circle">
             <span>{{ companyCounters.CLIENT }}</span>
           </div>
-          <!-- <div class="col-2 user-company-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
-            <div uib-dropdown-toggle>
-              <span class="colored-circle"
-                    ng-style="{'background-color': tagColors[companiesColors['CLIENT']].backgroundColor,
-                              'border-color': tagColors[companiesColors['CLIENT']].borderColor}"></span>
-            </div>
-            <ul class="dropdown-tag-colors" uib-dropdown-menu style="max-width: 232px; z-index: 100000000;">
-              <li ng-repeat="tagColor in tagColors"
-                  ng-class="{'active': companiesColors['CLIENT'] === $index}"
-                  ng-click="changeCompanyColor('CLIENT', $index)">
-                <i class="tag-color tag-color-md"
-                   ng-style="{'background-color': tagColor.backgroundColor,
-                              'border-color': tagColor.borderColor}"></i>
-              </li>
-            </ul>
-          </div> -->
+        
         </div>
         <div class="center-category__category sked" ng-click="filterCompanies('leads')"
              ng-class="{'active': companiesSharedState.filter.isLead}">
@@ -690,22 +677,7 @@
           <div class="col-2 user-company-circle">
             <span>{{ companyCounters.LEAD }}</span>
           </div>
-          <!-- <div class="col-2 user-company-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
-            <div uib-dropdown-toggle>
-              <span class="colored-circle"
-                    ng-style="{'background-color': tagColors[companiesColors['LEAD']].backgroundColor,
-                              'border-color': tagColors[companiesColors['LEAD']].borderColor}"></span>
-            </div>
-            <ul class="dropdown-tag-colors" uib-dropdown-menu style="max-width: 232px; z-index: 100000000;">
-              <li ng-repeat="tagColor in tagColors"
-                  ng-class="{'active': companiesColors['LEAD'] === $index}"
-                  ng-click="changeCompanyColor('LEAD', $index)">
-                <i class="tag-color tag-color-md"
-                   ng-style="{'background-color': tagColor.backgroundColor,
-                              'border-color': tagColor.borderColor}"></i>
-              </li>
-            </ul>
-          </div> -->
+         
         </div>
         <div class="center-category__category sked" ng-click="filterCompanies('vendors')"
              ng-class="{'active': companiesSharedState.filter.isVendor}">
@@ -713,22 +685,7 @@
           <div class="col-2 user-company-circle">
             <span>{{ companyCounters.VENDOR }}</span>
           </div>
-          <!-- <div class="col-2 user-company-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
-            <div uib-dropdown-toggle>
-              <span class="colored-circle"
-                    ng-style="{'background-color': tagColors[companiesColors['VENDOR']].backgroundColor,
-                              'border-color': tagColors[companiesColors['VENDOR']].borderColor}"></span>
-            </div>
-            <ul class="dropdown-tag-colors" uib-dropdown-menu style="max-width: 232px; z-index: 100000000;">
-              <li ng-repeat="tagColor in tagColors"
-                  ng-class="{'active': companiesColors['VENDOR'] === $index}"
-                  ng-click="changeCompanyColor('VENDOR', $index)">
-                <i class="tag-color tag-color-md"
-                   ng-style="{'background-color': tagColor.backgroundColor,
-                              'border-color': tagColor.borderColor}"></i>
-              </li>
-            </ul>
-          </div> -->
+          
         </div>
         <div class="left-panel-title font-medium">
           by tags
@@ -770,13 +727,7 @@
           </div>
           <div class="filter-left-panel category-expanded angular-animate" ng-show="dropdownByIndustryCompanyPage">
             <div class="x-mark-wrapper">
-              <!--<input type="text" class="form-control has-dropdown pointer"-->
-              <!--placeholder="Select Industry"-->
-              <!--autocomplete="off" ng-model="companiesSharedState.filter.industry" typeahead-editable="false"-->
-              <!--uib-typeahead="industry for industry in industries | filter: $viewValue:stateComparator | orderBy:'toString()'"-->
-              <!--qt-typeahead-show-on-focus-->
-              <!--custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">-->
-              <!--<div typeahead-input-icon="companiesSharedState.filter.industry"></div>-->
+             
               <qt-dropdown-typehead list-for-dropdown="industries"
                                     selected-item="companiesSharedState.filter.industry"
                                     no-overflow="true"
@@ -792,7 +743,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
     <div class="left-panel-full-wrapper nano" ng-if="openedCategory === 'companyProfile' && !isLeftPanelHidden">
       <div class="left-panel-full__head">
@@ -1414,7 +1365,7 @@
         </div>
         <span class="left-panel-full__head--header">Password</span>
       </div>
-
+      <div class="center-category collapsed-nav nano-content"></div>
 
     </div>
 
