@@ -10,12 +10,12 @@
           <input type="checkbox">
           <span class="checkbox-mark"></span>
         </label>
-        <p>Name</p>
+        <p  (click)="onFilter('name')">Name</p>
       </div>
-      <div class="col-md-4">Company</div>
-      <div class="col-md-4">Contact No.</div>
+      <div class="col-md-4"  (click)="onFilter('company')">Company</div>
+      <div class="col-md-4"  (click)="onFilter('contact')">Contact No.</div>
       <div class="col-md-4">Subscription</div>
-      <div class="col-md-1 text-center">Tickets</div>
+      <div class="col-md-1 text-center"  (click)="onFilter('tickets')">Tickets</div>
       <div class="col-md-2"></div>
     </div>
     <div class="user-content"

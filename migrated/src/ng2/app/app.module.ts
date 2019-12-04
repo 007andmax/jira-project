@@ -99,6 +99,7 @@ import { UsersHeaderComponent } from './components/users/users-header/users-head
 import { UsersTableComponent } from './components/users/users-table/users-table.component';
 import { UsersAsideComponent } from './components/users/users-aside/users-aside.component';
 import { LeftPanelUsersComponent } from './components/left-panel/left-panel-users/left-panel-users.component';
+import { UserTableSubscriptionComponent } from './components/users/users-table/user-table-subscription/user-table-subscription.component';
 
 
 /**
@@ -228,7 +229,8 @@ angular.module('quicktech')
     UsersHeaderComponent,
     UsersTableComponent,
     UsersAsideComponent,
-    LeftPanelUsersComponent
+    LeftPanelUsersComponent,
+    UserTableSubscriptionComponent
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,8 @@ import { User } from './class/user';
 import { UsersStateService } from '../../states/users/users-state.service';
 import { UserListService } from './services/user-list.service';
 import { UserFilter } from './class/user-filter';
+import { CompaniesStateService } from '../../states/company/companies-state.service';
+import { Company } from '../../interfaces/company/company';
 
 @Component({
   selector: 'app-users',
@@ -12,14 +14,22 @@ import { UserFilter } from './class/user-filter';
 })
 export class UsersComponent implements OnInit {
 users:Array<User> = [];
+companies:Array<Company> = [];
 reqUsers:Array<User> = [];
 showPreloader:boolean = true;
 filter:UserFilter = new UserFilter();
 public infiniteScrollDisabled = false;
   public page_number: number = 0;
-  constructor(private usersStateService:UsersStateService, private userListService:UserListService) { }
+  constructor(private usersStateService:UsersStateService, private userListService:UserListService, 
+    private companiesStateService:CompaniesStateService) { }
 
   ngOnInit() {
+    if (this.companiesStateService.getCompanies().length > 0)  this.companies = this.companiesStateService.getCompanies();
+    let getOnCompanies =  this.companiesStateService.getOnCompanies().subscribe((data) => {
+
+        this.companies = data;
+      })
+      this.userListService.addSubscription(getOnCompanies);
     if (this.usersStateService.getAllUsers().length > 0)    this.getUsersList(this.usersStateService.getAllUsers());
     let getOnUsers =  this.usersStateService.getOnUsers().subscribe((data) => {
         this.getUsersList(data);
@@ -39,6 +49,13 @@ public infiniteScrollDisabled = false;
     this.infiniteScrollDisabled = true;
     this.getCompanies();
 
+  }
+  public onFilter (field) {
+this.filter.onFilter(field, this.reqUsers,this.companies)
+    this.page_number = 0;
+    this.userListService.setBlockList(false);
+    this.users = [];
+    this.onScroll();
   }
   private getCompanies() {
     if (this.userListService.getBlockList()) {

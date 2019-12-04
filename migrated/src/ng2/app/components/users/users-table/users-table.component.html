@@ -15,9 +15,9 @@
    {{getUserCompanyName()}}
     <a class="company-link desktop-hidden">Show Map</a>
   </div>
-  <div class="col-md-4 w-100 fz-13"  [textContent]="getContact()"></div>
+  <div class="col-md-4 w-100 fz-13"  [innerHtml]="getContact()"></div>
   <div class="col-md-4 subs">
-   
+   <app-user-table-subscription [subscription]="user.subscription"></app-user-table-subscription>
   </div>
   <div class="col-md-1 fz-13 jc-c" [textContent]="user.userStatistic.ticketsSubmitted || 0"></div>
   <div class="col-md-2">

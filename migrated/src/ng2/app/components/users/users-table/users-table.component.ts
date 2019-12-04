@@ -13,8 +13,8 @@ export class UsersTableComponent implements OnInit {
   companies:Array<Company> = []; 
   constructor( private companiesStateService:CompaniesStateService) { }
   getNameForAvatar () {
-    return `${this.user.firstName[0].toUpperCase()}${this.user.lastName[0].toUpperCase()}`;
-
+    if (!this.user.avatar)  return `${(this.user.firstName) ? this.user.firstName[0].toUpperCase() : ''}${(this.user.lastName) ? this.user.lastName[0].toUpperCase() : ''}`;
+    return '';
   }
   getUserName () {
     return `${this.user.firstName} ${this.user.lastName}`;
@@ -22,7 +22,7 @@ export class UsersTableComponent implements OnInit {
   getContact() {
     let str = '';
     if (this.user.phoneNumbers && this.user.phoneNumbers.length && this.user.phoneNumbers[0] && this.user.phoneNumbers[0].number) str += this.user.phoneNumbers[0].number;
-    if (this.user.phoneNumbers && this.user.phoneNumbers.length && this.user.phoneNumbers[1] && this.user.phoneNumbers[1].number) str += '<br/>' + this.user.phoneNumbers[0].number;
+    if (this.user.phoneNumbers && this.user.phoneNumbers.length && this.user.phoneNumbers[1] && this.user.phoneNumbers[1].number) str += '<br/>' + this.user.phoneNumbers[1].number;
    return str;
   }
   getUserCompanyName () {
@@ -31,21 +31,14 @@ export class UsersTableComponent implements OnInit {
     return (index > -1) ? this.companies[index].name : '';
   }
   getUserAvatarUrl () {
-    if (!(this.user && this.user.avatar)) {
-      return '/users/default/image' + '.jpg';
-    }
-
-    if (this.user.id) {
-      return '/users/' + (this.user.id || 'default') + '/image' + (this.user.avatar ? '.jpg?t=' + this.user.avatar.updatedAt :
-        '');
-    } else if (this.user.avatar && this.user.avatar.origin && this.user.avatar.origin.id) {
+    if (this.user.avatar && this.user.avatar.origin && this.user.avatar.origin.id) {
       return '/file/' + (this.user.avatar.origin.id) + '.jpg';
-    } else {
-      return '/users/default/image' + '.jpg';
-    }
+    } 
+    return '';
   };
 
   ngOnInit() {
+   if (!this.user.firstName) console.log('user',this.user);
     if (this.companiesStateService.getCompanies().length > 0) this.companies= this.companiesStateService.getCompanies();
     let getOnCompanies =  this.companiesStateService.getOnCompanies().subscribe((data) => {
 this.companies = data;
