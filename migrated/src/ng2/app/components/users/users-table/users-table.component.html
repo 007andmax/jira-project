@@ -4,7 +4,7 @@
       <input type="checkbox">
       <span class="checkbox-mark"></span>
     </label>
-    <div class="circle-avatar" [ngStyle]="{'background': 'url(' + getUserAvatarUrl(user) + ') no-repeat'}">AD</div>
+    <div class="circle-avatar" [ngStyle]="{'background': 'url(' + getUserAvatarUrl(user) + ') no-repeat'}" [textContent]="getNameForAvatar()"></div>
     <div class="mob-styles">
       <p class="ff-g-m fz-13 fw-600" [textContent]="getUserName()"></p>
       <p class="fz-12" [textContent]="user.designation"></p>
@@ -17,19 +17,7 @@
   </div>
   <div class="col-md-4 w-100 fz-13"  [textContent]="getContact()"></div>
   <div class="col-md-4 subs">
-    <div class="grey-dropdown" ngbDropdown>
-      <div class="pointer subs-list"
-           id="dropdownBasic"
-           ngbDropdownToggle>
-        <div>Updates, Invoice, Manager</div>
-        <i class="icn-sm report-caret-icon"></i>
-      </div>
-      <div ngbDropdownMenu aria-labelledby="dropdownBasic">
-        <button ngbDropdownItem>Updates</button>
-        <button ngbDropdownItem>Invoice</button>
-        <button ngbDropdownItem>Manager</button>
-      </div>
-    </div>
+   
   </div>
   <div class="col-md-1 fz-13 jc-c" [textContent]="user.userStatistic.ticketsSubmitted || 0"></div>
   <div class="col-md-2">

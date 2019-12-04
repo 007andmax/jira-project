@@ -12,6 +12,10 @@ export class UsersTableComponent implements OnInit {
   @Input() user: User;
   companies:Array<Company> = []; 
   constructor( private companiesStateService:CompaniesStateService) { }
+  getNameForAvatar () {
+    return `${this.user.firstName[0].toUpperCase()}${this.user.lastName[0].toUpperCase()}`;
+
+  }
   getUserName () {
     return `${this.user.firstName} ${this.user.lastName}`;
   }
