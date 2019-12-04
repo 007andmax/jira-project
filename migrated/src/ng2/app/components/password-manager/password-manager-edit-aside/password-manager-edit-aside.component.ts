@@ -15,7 +15,7 @@ import { UsersService } from "../../../services/users/users.service";
 import { GadgetsService } from "../../../services/gadgets/gadgets.service";
 import { PermissionsService } from "../../../services/permissions/permissions.service";
 import { ApiPasswordManagerService } from "../../../services/password-manager/api-password-manager.service";
-import { ShowHideService } from 'ngx-show-hide-password';
+//import { ShowHideService } from 'ngx-show-hide-password';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { DevicesSateService } from 'src/ng2/app/states/devices/devices-sate.service';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
@@ -27,7 +27,7 @@ import { UsersStateService } from 'src/ng2/app/states/users/users-state.service'
   selector: 'app-password-manager-edit-aside',
   templateUrl: './password-manager-edit-aside.component.html',
   styleUrls: ['./password-manager-edit-aside.component.scss'],
-  providers: [ShowHideService]
+ // providers: [ShowHideService]
 })
 export class PasswordManagerEditAsideComponent implements OnInit {
 
@@ -97,7 +97,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     private permissionsService: PermissionsService,
     private apiPasswordManagerService: ApiPasswordManagerService,
     public cd: ChangeDetectorRef,
-    private showHideService: ShowHideService,
+   // private showHideService: ShowHideService,
     private companiesState: CompaniesStateService,
     private devicesSateService: DevicesSateService,
     private usersStateService: UsersStateService,
@@ -131,7 +131,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
     this.opened = !this.opened;
     if (!this.opened) {
       this.showPassword = false;
-      this.showHideService.setShow('password', false);
+    //  this.showHideService.setShow('password', false);
       this.passwordManagerService.setPassword(null);
     }
   }
@@ -501,18 +501,18 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
           this.createPasswordRecord.controls['password'].setValue(data.password);
           this.showPassword = !this.showPassword;
-          this.showHideService.setShow('password', true);
+        //  this.showHideService.setShow('password', true);
           this.isLoadPassword = false;
           this.cd.detectChanges();
         })
       } else {
         this.showPassword = !this.showPassword;
-        this.showHideService.setShow('password', true);
+      //  this.showHideService.setShow('password', true);
       }
 
     } else {
       this.showPassword = !this.showPassword;
-      this.showHideService.setShow('password', false);
+    //  this.showHideService.setShow('password', false);
     }
   }
 
