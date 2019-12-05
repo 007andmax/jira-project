@@ -137,6 +137,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
   }
   edit() {
     let getCompany = this.companiesService.getCompany(this.company.id).subscribe((data: CompanyProfile) => {
+      console.log('data',data);
       this.companiesStateService.setEditCompany(data);
     })
     this.sub.add(getCompany);

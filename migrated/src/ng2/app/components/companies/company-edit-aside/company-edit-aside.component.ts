@@ -17,6 +17,8 @@ import { ImageCropperComponent } from '../../shared/image-cropper/image-cropper.
 import { CompanyTagsStateService } from '../company-tags/states/company-tags-state.service';
 import { ItemFilterPerson } from '../../left-panel/left-panel-companies/class/item-filter-person';
 import { Subscription } from 'rxjs';
+import { ModalImageCropperStateService } from 'src/ng2/app/services/modal/modal-image-cropper/services/modal-image-cropper-state.service';
+import { ImageCroper } from 'src/ng2/app/services/modal/modal-image-cropper/class/image-croper';
 
 @Component({
   selector: 'app-company-edit-aside',
@@ -50,6 +52,7 @@ export class CompanyEditAsideComponent implements OnInit,OnDestroy {
     private companySubscriptionState: CompanySubscriptionStateService,
     private companyTimeZoneState: CompanyTimeZoneStateService,
     private companyTagsStateService:CompanyTagsStateService,
+    private modalImageCropperStateService:ModalImageCropperStateService,
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -142,6 +145,7 @@ public onCheckGoogleAutoComplete () {
        
       this.opened = true;
       //this.company.
+      this.cd.detectChanges();
     })
     this.sub.add(getCompanyFromEdit);
   }
@@ -257,9 +261,13 @@ public onCheckGoogleAutoComplete () {
   }
   public onChangeAvatar() {
     this.downloadCompanyLogo().then(data => {
-      const modalRef = this.modalService.open(ImageCropperComponent);
-      modalRef.componentInstance.imageBase64 = data;
-      modalRef.componentInstance.id = this.company.logo.origin.id;
+   //   const modalRef = this.modalService.open(ImageCropperComponent);
+      console.log('data',data);
+    //  modalRef.componentInstance.imageBase64 = data;
+    //  modalRef.componentInstance.id = this.company.logo.origin.id;
+    this.modalImageCropperStateService.onInitOpen(new ImageCroper(data,this.company.logo.origin.id));
+    this.cd.detectChanges();
+      
     })
   }
   private getTehusers(list) {
@@ -348,10 +356,13 @@ public onCheckGoogleAutoComplete () {
       this.uploadFile(file).then((data: any) => {
         let res = JSON.parse(data.response);
         // this.changeFile(file).then((base64: string): any => {
-        const modalRef = this.modalService.open(ImageCropperComponent);
-        modalRef.componentInstance.imageBase64 = res.base64;
-        modalRef.componentInstance.id = res.id;
+      //  const modalRef = this.modalService.open(ImageCropperComponent,res.base64);
+        console.log('res.base64',res.base64);
+      //  modalRef.componentInstance.imageBase64 = res.base64;
+     //   modalRef.componentInstance.id = res.id;
         event.target.value = null;
+        this.modalImageCropperStateService.onInitOpen(new ImageCroper(res.base64,res.id));
+      this.cd.detectChanges();
 
         // });
 

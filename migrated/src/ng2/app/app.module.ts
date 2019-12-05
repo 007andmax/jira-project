@@ -11,7 +11,7 @@ import { SelectModule } from 'ng2-select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSelectModule } from 'ngx-select-ex';
 import { SidebarModule } from 'ng-sidebar';
-import { ShowHidePasswordModule } from 'ngx-show-hide-password';
+//import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 import { ClickOutsideModule } from 'ng4-click-outside';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MatSelectModule} from '@angular/material/select';
@@ -94,6 +94,7 @@ import { CompanyPasswordManagerTableComponent } from './components/company-passw
 import { FilterPipe } from './pipe/filter.pipe';
 import { ClickOtsideDirective } from './directives/click-otside.directive';
 import { SortByPipe } from './pipe/sort-by.pipe';
+import { ModalImageCropperComponent } from './services/modal/modal-image-cropper/modal-image-cropper.component';
 
 
 /**
@@ -215,7 +216,8 @@ angular.module('quicktech')
     CompanyPasswordManagerTableComponent,
     FilterPipe,
     ClickOtsideDirective,
-    SortByPipe
+    SortByPipe,
+    ModalImageCropperComponent
   ],
   imports: [
     BrowserModule,
@@ -227,7 +229,7 @@ angular.module('quicktech')
     NgbModule,
     InfiniteScrollModule,
     ClickOutsideModule,
-    ShowHidePasswordModule,
+   // ShowHidePasswordModule,
     NgxSelectModule,
     MatSelectModule,
     MatChipsModule,

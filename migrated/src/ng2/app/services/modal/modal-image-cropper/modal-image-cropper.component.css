@@ -1,0 +1,7 @@
+.modal-image-confirm {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    display: none;
+    z-index: 999;
+}
