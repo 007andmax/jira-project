@@ -18,12 +18,32 @@ companies:Array<Company> = [];
 reqUsers:Array<User> = [];
 showPreloader:boolean = true;
 filter:UserFilter = new UserFilter();
+showArchivedCompanies:boolean = false;
 public infiniteScrollDisabled = false;
   public page_number: number = 0;
   constructor(private usersStateService:UsersStateService, private userListService:UserListService, 
     private companiesStateService:CompaniesStateService) { }
 
   ngOnInit() {
+    let getOnShowArchived = this.usersStateService.getOnShowArchived().subscribe(data => {
+      this.showArchivedCompanies = data;
+     
+      this.filter.setClientType(null);
+      this.filter.clearFilter();
+      this.setDefaultScoll();
+      this.getUsersList(this.usersStateService.getAllUsers());
+    })
+    this.userListService.addSubscription(getOnShowArchived);
+
+    let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
+      this.filter.setLeftFilters(data.clientType,data.tehUser,data.clientIndustry);
+      this.setDefaultScoll();
+      this.onScroll();
+   //   this.onInirCalculate();
+
+    })
+    this.userListService.addSubscription(geLefttFilter);
+
     if (this.companiesStateService.getCompanies().length > 0)  this.companies = this.companiesStateService.getCompanies();
     let getOnCompanies =  this.companiesStateService.getOnCompanies().subscribe((data) => {
 
@@ -37,7 +57,7 @@ public infiniteScrollDisabled = false;
       this.userListService.addSubscription(getOnUsers);
   }
   private getUsersList(data) {
-    this.reqUsers = data.filter(item => !item.deletedAt);
+    this.reqUsers = data.filter(item => ((!this.showArchivedCompanies) ? !item.deletedAt : item.deletedAt));
      
    // this.onInirCalculate();
     this.reqUsers.sort((a, b) => ((a.firstName + a.lastName).toLowerCase() > (b.firstName + b.lastName).toLowerCase()) ?
@@ -63,7 +83,7 @@ this.filter.onFilter(field, this.reqUsers,this.companies)
       return;
     }
     this.page_number += 1;
-    let listFilter = this.reqUsers;//this.left_filter.getFilterList(this.reqUsers);
+    let listFilter = this.filter.getFilterList(this.reqUsers,this.companies);
     let start = (this.page_number - 1) * 30;
     let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;
     let usersList = [];
@@ -76,7 +96,11 @@ this.filter.onFilter(field, this.reqUsers,this.companies)
     
 
   }
-
+  public setDefaultScoll() {
+    this.page_number = 0;
+    this.userListService.setBlockList(false);
+    this.users = [];
+  }
   public trackById(index, item) {
     return item.id;
   }

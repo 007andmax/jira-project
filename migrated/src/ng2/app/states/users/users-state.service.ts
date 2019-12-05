@@ -9,6 +9,11 @@ export class UsersStateService {
   currentUser: any;
   onGetUsers: EventEmitter<any> = new EventEmitter();
   onGetCurrentUser: EventEmitter<any> = new EventEmitter();
+  onShowArchived: EventEmitter<any> = new EventEmitter();
+  onFilter: EventEmitter<any> = new EventEmitter();
+   
+
+  
   constructor(private userService: UsersService, ) {
 
   }
@@ -22,6 +27,15 @@ export class UsersStateService {
       this.currentUser = data;
       this.onInitCurrentUser(data);
     })
+  }
+  public onInitFilter(data) {
+    this.onFilter.emit(data);
+  }
+  public getOnFilter() {
+    return this.onFilter;
+  }
+  public getOnShowArchived() {
+    return this.onShowArchived;
   }
   public getCurrentUser() {
     return this.currentUser;
@@ -46,7 +60,9 @@ export class UsersStateService {
   public getAllUsers() {
     return this.allUsers;
   }
-
+public setOnShowArchived(data) {
+  this.onShowArchived.emit(data);
+}
     /**
    * Change user permissionsss
    * @permissions - permissions to change

@@ -7,10 +7,10 @@
     </div>
 
     <div class="left-panel-ng2__content--lists mob-hidden">
-      <div class="list-item active">All Users</div>
-      <div class="list-item">Customer Users</div>
-      <div class="list-item">Lead Users</div>
-      <div class="list-item">Archived Users</div>
+      <div class="list-item active"  (click)="onShowAll()">All Users</div>
+      <div class="list-item" (click)="onSetFilterClientType('CLIENT')">Customer Users</div>
+      <div class="list-item" (click)="onSetFilterClientType('LEAD')">Lead Users</div>
+      <div class="list-item"  (click)="onShowArchived()">Archived Users</div>
     </div>
     <div class="left-panel-ng2__content--tags">
       <div class="tags-header">

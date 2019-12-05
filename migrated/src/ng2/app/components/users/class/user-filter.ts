@@ -1,12 +1,52 @@
 import { FilterListTop } from 'src/ng2/class/list/filter-list-top';
+import { User } from './user';
+import { Company } from 'src/ng2/app/interfaces/company/company';
 
 export class UserFilter {
     filterTop: Array<FilterListTop> = [new FilterListTop('name', 'ASC'),
     new FilterListTop('company', ''),
     new FilterListTop('contact', ''),
     new FilterListTop('tickets', '')];
+    clientType: string;
+    tehUser: string;
+    clientIndustry: string;
     constructor() { }
-    private clearFilter() {
+
+    public setLeftFilters(clientType,tehUser,clientIndustry) {
+        this.clientType = clientType;
+        this.tehUser= tehUser;
+        this.clientIndustry = clientIndustry;
+    }
+    public setClientType(data) {
+        this.clientType = data;
+    }
+    public getClientType() {
+        return this.clientType;
+    }
+    public getFilterList(reqCompaniesList: Array<User>,companies:Array<Company>) {
+        let list = reqCompaniesList.filter(item => {
+            let indexCompny = companies.findIndex( company => company.id === item.company.id && company.clientType === this.clientType);
+            let clientType = null;
+            if (indexCompny > -1) clientType =  companies[indexCompny].clientType;
+            if (this.clientType && clientType) {
+                return true;
+            } else if (this.clientType && !clientType) {
+                return false;
+            }
+            return true;
+        })
+        return list;
+
+    }
+    public setTehUser(data) {
+        this.tehUser = data;
+    }
+    public setClientIndustry(data) {
+        this.clientIndustry = data;
+    }
+
+
+    public clearFilter() {
         this.filterTop.forEach(item => item.filter = '');
     }
 
