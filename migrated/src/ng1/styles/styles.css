@@ -13442,6 +13442,7 @@ button.close {
 }
 
 .archive-modal .close-modal,
+.image-confirm-modal .close-modal,
 .recurring-tickets-content__modal .close-modal,
 .new-companies-content__modal .close-modal,
 .password-content__modal .close-modal {

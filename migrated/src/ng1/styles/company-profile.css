@@ -1,5 +1,5 @@
 .company-info-wrapper {
-  background-color: #fff;
+  background-color: #ffffff;
   border-radius: 3px;
   padding: 15px 0 10px;
   max-width: 1234px;
@@ -13,7 +13,7 @@
   font-size: 12px;
   padding: 0;
   text-align: center;
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc;
   border-radius: 4px;
 }
 
@@ -55,6 +55,13 @@
   position: relative;
 }
 
+.company-logo img {
+  border-radius: 50%;
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+}
+
 .company-info-content .form-group .icn-remove-old,
 .company-info-content .form-group .report-caret-icon {
 
@@ -93,10 +100,6 @@
   top: 10px;
 }
 
-.company-logo img {
-  width: 100%;
-}
-
 .company-profile-content .close-btn {
   float: right;
 }
@@ -120,7 +123,7 @@
 
 .star-icn.active {
   background-position: 0 0;
-  
+
 }
 
 .download-agent-modal {
@@ -187,7 +190,7 @@
 
 .primary-default.btn:hover {
   background-color: #16a4fa;
-  color: #fff;
+  color: #ffffff;
 }
 
 .download-agent-company {
@@ -196,11 +199,11 @@
   border-radius: 4px;
   background-color: #2ec866;
   border: solid 1px #189947;
-  
+
   display: flex;
   justify-content: center;
   align-items: center;
-  
+
   /* font-family: Graphik; */
   font-size: 14px;
   font-weight: 500;
@@ -208,7 +211,7 @@
   font-stretch: normal;
   line-height: normal;
   letter-spacing: normal;
-  color: #fff;
+  color: #ffffff;
 }
 
 .dropdown-wo-max-height .dropdown-menu {
@@ -218,9 +221,9 @@
 .download-agent-company img {
   width: 15px;
   height: 27px;
-  
+
   color: white;
-  
+
   margin-left: 12px;
 }
 
@@ -427,7 +430,7 @@
 .company-info-content .company-schedule:after {
   background-image: url(../images/new-icons/company-schedule.svg);
   top: 3px;
-  
+
 }
 
 .company-schedule-list {
@@ -519,7 +522,7 @@
   padding: 10px;
   opacity: 1;
   transition: height linear 0.5s, opacity linear 0.7s;
-  background-color: #fff;
+  background-color: #ffffff;
   border-radius: 3px;
 }
 
@@ -570,7 +573,7 @@
   padding: 5px;
   white-space: pre-line;
   max-height: 154px;
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc;
   border-radius: 4px;
   width: 100%;
   font-size: 13px;
@@ -618,17 +621,17 @@
   .company-new-cover-wrapper .company-info-type {
     padding: 5px 0;
   }
-  
+
   .company-edit-button {
     max-width: 75%;
   }
-  
+
   .company-download-icn,
   .company-edit-icn,
   .company-remove-icn {
     margin-left: 5px;
   }
-  
+
   .company-name-content {
     width: 73%;
   }
@@ -638,7 +641,7 @@
   .company-edit-button {
     max-width: 72%;
   }
-  
+
   .company-name-content {
     width: 70%;
   }
@@ -678,7 +681,7 @@
 }
 
 .first-of-type {
-  border-top: 1px solid #eee;
+  border-top: 1px solid #eeeeee;
 }
 
 .company-new-cover-wrapper .company-service-type strong,
@@ -787,7 +790,7 @@
   height: 300px;
   float: left;
   position: relative;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #eeeeee;
 }
 
 .company-profile-header .company-work-info {
@@ -815,26 +818,26 @@
 
 .company-work-info table tbody:hover td.bd-left-disabled,
 .company-work-info table tbody.selected-chart td.bd-left-disabled {
-  border-left-color: #eee;
+  border-left-color: #eeeeee;
 }
 
 .company-work-info table tbody:hover td.bd-top-disabled,
 .company-work-info table tbody.selected-chart td.bd-top-disabled {
-  border-top-color: #eee;
+  border-top-color: #eeeeee;
 }
 
 .company-work-info table tbody:hover td.bd-right-disabled,
 .company-work-info table tbody.selected-chart td.bd-right-disabled {
-  border-right-color: #eee;
+  border-right-color: #eeeeee;
 }
 
 .company-work-info table tbody:hover td.bd-bottom-disabled,
 .company-work-info table tbody.selected-chart td.bd-bottom-disabled {
-  border-bottom-color: #eee;
+  border-bottom-color: #eeeeee;
 }
 
 .company-work-info table td {
-  border: 1px solid #eee;
+  border: 1px solid #eeeeee;
   cursor: pointer;
 }
 
@@ -883,7 +886,7 @@
   font-size: 14px;
   list-style-type: none;
   line-height: 1.4em;
-  color: #fff;
+  color: #ffffff;
   padding-left: 10px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -960,7 +963,7 @@
 .company-profile-content .bulk-option.fixed-bulk {
   z-index: 10;
   position: fixed;
-  background-color: #fff;
+  background-color: #ffffff;
   box-shadow: 2px 2px 6px 0 rgba(10, 45, 89, 0.15);
   top: 78px;
   right: 311px;
@@ -1032,7 +1035,7 @@
   bottom: 5px;
   left: 42px;
   font-size: 13px;
-  
+
   color: #94a4b8;
   content: 'hours';
 }
@@ -1068,7 +1071,7 @@
 /*padding: 11px 0 11px 15px!important;*/
 /*}*/
 .company-dashboard-left-panel .left-panel-title:hover {
-  color: #fff;
+  color: #ffffff;
 }
 
 .company-dashboard-left-panel .left-panel-hide-filter .left-panel-title {

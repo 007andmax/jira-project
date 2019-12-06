@@ -41,7 +41,7 @@ export class ModalImageCropperComponent implements OnInit, OnDestroy {
       this.edit = data.edit;
     
       //  this.imageCroper.imageBase64 = data;
-      this.elRef.nativeElement.querySelector('.modal-image-confirm').style.display = 'block';
+      this.elRef.nativeElement.querySelector('.image-confirm-modal').style.display = 'block';
       this.show = true;
       this.cd.detectChanges();
     })
@@ -55,18 +55,18 @@ export class ModalImageCropperComponent implements OnInit, OnDestroy {
     this.croppedImage = event;
     this.img = event.base64;
   }
-  
+
   cropperReady() {
-   
+
     if (!this.cd['destroyed']) {
       this.cd.detectChanges();
     }
   }
   closeModal() {
-    
+
     this.show = false;
-    this.elRef.nativeElement.querySelector('.modal-image-confirm').style.display = 'none';
-  
+    this.elRef.nativeElement.querySelector('.image-confirm-modal').style.display = 'none';
+
   }
 
   cancelConfirm() {
@@ -78,7 +78,7 @@ export class ModalImageCropperComponent implements OnInit, OnDestroy {
     //  this.activeModal.close();
   this.closeModal();
     this.imageCropperStateService.setConfirm(new ImageCropper(this.croppedImage, this.id, this.edit));
-    
+
 
   };
 

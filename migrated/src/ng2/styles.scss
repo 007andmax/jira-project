@@ -13,6 +13,10 @@
   justify-content: flex-start;
 }
 
+.jc-fe {
+  justify-content: flex-end;
+}
+
 .ai-c {
   align-items: center;
 }
@@ -77,6 +81,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  &.with-logo {
+    border: none;
+    img {
+      border: 1px solid rgba(22, 164, 250, 0.2);
+      border-radius: 50%;
+      height: 40px;
+      width: 40px;
+      object-fit: cover;
+    }
+  }
 }
 
 .btn-new.btn-primary-white {
@@ -518,7 +532,9 @@ app-left-panel-tags-companies {
   }
 }
 
-.archive-modal {
+
+.archive-modal,
+.image-confirm-modal {
   padding: 40px 70px 40px 40px;
   position: relative;
   .close-modal {

@@ -839,7 +839,7 @@ _::-webkit-:not(:root:root),
   bottom: 0;
   left: -3px;
   transform: translate(50%, 50%);
-  
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -864,12 +864,12 @@ _::-webkit-:not(:root:root),
 .ticket--footer .shared-avatars .avatars {
   padding: 2px 7px;
   display: flex;
-  
+
 }
 
 .ticket--footer .shared-avatars .client-users {
   border-right: 1px solid #edf2f6;
-  
+
 }
 
 .ticket--footer .shared-avatars .shared-avatar {
@@ -902,13 +902,13 @@ _::-webkit-:not(:root:root),
   width: 32px;
   height: 32px;
   margin-right: 10px;
-  
+
 }
 
 .dropdown-menu .default-user-avatar {
   width: 32px;
   height: 32px;
-  
+
 }
 
 /* .avatar-background-color-even {
@@ -936,13 +936,13 @@ _::-webkit-:not(:root:root),
   width: 32px;
   height: 32px;
   margin-right: 10px;
-  
+
 }
 
 .dropdown-menu .default-user-avatar {
   width: 32px;
   height: 32px;
-  
+
 }
 
 /* .avatar-background-color-even {
@@ -1050,6 +1050,7 @@ _::-webkit-:not(:root:root),
 }
 
 .archive-modal button,
+.image-confirm-modal button,
 .invoice--header button,
 .quote--header button,
 .email--header button,
@@ -1735,6 +1736,7 @@ _::-webkit-:not(:root:root),
 }
 
 .archive-modal .close-modal,
+.image-confirm-modal .close-modal,
 .create-new .close-modal,
 .download-agent-modal .close-modal,
 .recurring-tickets-content__modal .close-modal,

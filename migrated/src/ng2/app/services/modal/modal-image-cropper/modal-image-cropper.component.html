@@ -1,31 +1,27 @@
-
-
-<div class="confirm-modal modal-image-confirm">
-  <div class="close-btn btn pull-right" (click)="closeModal()" tabindex="1" style="z-index: 1000">
-    <i class="icn-sm icn-remove-old" uib-tooltip="Close"></i>
-  </div>
-  <div class="modal-body" *ngIf="show">
-    
+<div class="confirm-modal image-confirm-modal">
+  <div class="close-modal" (click)="closeModal()" tabindex="1"></div>
+  <div class="image-confirm-modal__body" *ngIf="show">
     <image-cropper
-         #imageCroper
-         [imageBase64]="imageBase64"
-          [maintainAspectRatio]="true"
-          [aspectRatio]="4 / 3"
-          [resizeToWidth]="128"
-      
-       (cropperReady)="cropperReady()"
-          format="png"
-          (imageCropped)="imageCropped($event)"
-       
-      ></image-cropper>
-     
-      <img [src]="img" />
-  </div> 
-  <div class="modal-footer">
-    <div class="btn btn-lg btn-primary"
-         data-dismiss='modal' (click)="cancelConfirm()"  >
-         Cancel
+			#imageCroper
+      [imageBase64]="imageBase64"
+      [maintainAspectRatio]="true"
+      [aspectRatio]="4 / 3"
+      [resizeToWidth]="128"
+
+      (cropperReady)="cropperReady()"
+      format="png"
+      (imageCropped)="imageCropped($event)"
+    ></image-cropper>
+
+    <img [src]="img" />
+  </div>
+  <div class="image-confirm-modal__footer">
+    <div class="d-f jc-fe">
+      <div class="btn-new btn-primary" (click)="approveConfirm()">Crop</div>
+      <div class="btn-new disabled"
+           data-dismiss='modal' (click)="cancelConfirm()">
+        Cancel
+      </div>
     </div>
-    <div class="btn btn-lg btn-primary" (click)="approveConfirm()">Crop</div>
   </div>
 </div>
