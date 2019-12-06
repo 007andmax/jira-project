@@ -11,7 +11,7 @@ import { SelectModule } from 'ng2-select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSelectModule } from 'ngx-select-ex';
 import { SidebarModule } from 'ng-sidebar';
-//import { ShowHidePasswordModule } from 'ngx-show-hide-password';
+import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 import { ClickOutsideModule } from 'ng4-click-outside';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MatSelectModule} from '@angular/material/select';
@@ -229,7 +229,7 @@ angular.module('quicktech')
     NgbModule,
     InfiniteScrollModule,
     ClickOutsideModule,
-   // ShowHidePasswordModule,
+    ShowHidePasswordModule,
     NgxSelectModule,
     MatSelectModule,
     MatChipsModule,
