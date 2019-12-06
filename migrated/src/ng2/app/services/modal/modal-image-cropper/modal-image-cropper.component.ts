@@ -37,6 +37,7 @@ export class ModalImageCropperComponent implements OnInit, OnDestroy {
     this.modalImageCropperStateService.getOnOpen().subscribe((data:ImageCroper) => {
       this.imageBase64 = data.imageBase64;
       this.id = data.id;
+      this.edit = data.edit;
       //  this.imageCroper.imageBase64 = data;
       this.elRef.nativeElement.querySelector('.modal-image-confirm').style.display = 'block';
       this.show = true;

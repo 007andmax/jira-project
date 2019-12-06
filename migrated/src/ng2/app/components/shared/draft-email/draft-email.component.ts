@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { DraftEmailStateService } from 'src/ng2/app/states/draft-email/draft-email-state.service';
 import { DraftEmail } from './class/draft-email';
 import { FilesInfo } from './class/files-Info';
@@ -34,7 +34,8 @@ export class DraftEmailComponent implements OnInit {
 
 
   constructor(private draftEmailStateService: DraftEmailStateService, private elRef: ElementRef,
-    private draftEmailService: DraftEmailService) { }
+    private draftEmailService: DraftEmailService, public cd: ChangeDetectorRef
+    ) { }
 
   ngOnInit() {
     this.onShowAside();
@@ -123,6 +124,9 @@ export class DraftEmailComponent implements OnInit {
        
       this.close();
 
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+      }
     })
   }
 

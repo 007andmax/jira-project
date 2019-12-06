@@ -7,8 +7,8 @@
       </label>
       <div class="circle-avatar">
         <img [src]="getCompanyLogoUrl()" class="qwe" alt=""
-             *ngIf="company && company.logo && company.logo.cropped && company.logo.cropped.id || company && company.logo && company.logo.origin && company.logo.origin.id">
-        <span *ngIf="!(company && company.logo && company.logo.cropped && company.logo.cropped.id)"
+             *ngIf="company && company.logo && company.logo.cropped && company.logo.cropped.id || company && company.logo && company.logo.origin && company.logo.origin.id"/>
+        <span *ngIf="!(company && company.logo && company.logo.cropped && company.logo.cropped.id || company && company.logo && company.logo.origin && company.logo.origin.id)"
               [textContent]="company.name[0].toUpperCase()"></span>
       </div>
       <div class="mob-styles">

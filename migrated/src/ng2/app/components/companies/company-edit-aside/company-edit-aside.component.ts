@@ -19,6 +19,8 @@ import { ItemFilterPerson } from '../../left-panel/left-panel-companies/class/it
 import { Subscription } from 'rxjs';
 import { ModalImageCropperStateService } from 'src/ng2/app/services/modal/modal-image-cropper/services/modal-image-cropper-state.service';
 import { ImageCroper } from 'src/ng2/app/services/modal/modal-image-cropper/class/image-croper';
+import { CompanyEditLogo } from '../class/company-edit-logo';
+import { ImageCropper } from '../../shared/image-cropper/class/image-cropper';
 
 @Component({
   selector: 'app-company-edit-aside',
@@ -242,16 +244,21 @@ public onCheckGoogleAutoComplete () {
    let updateCompany =  this.companiesService.updateCompany(this.company).subscribe(data => {
        
       this.close();
+      this.cd.detectChanges();
     })
     this.sub.add(updateCompany);
   }
   public onCroppImage() {
-   let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
+   let getConfirm = this.imageCropperStateService.getConfirm().subscribe((data:ImageCropper) => {
       if (!this.opened || !data) return;
        
      
         if (data.edit) {
-          this.company.editLogo(data);
+          this.companiesService.editCompanyAvatar(this.company.id,new CompanyEditLogo(data.croppedImage.base64,data.croppedImage.height,
+            this.company.id,this.company.logo.origin.id,data.croppedImage.width,data.croppedImage.imagePosition.x1,data.croppedImage.imagePosition.y1)).subscribe(res => {
+              this.company.editLogo(res);
+            })
+         
         } else {
           this.company.setLogo(data);
         }
@@ -260,12 +267,13 @@ public onCheckGoogleAutoComplete () {
     this.sub.add(getConfirm);
   }
   public onChangeAvatar() {
+    console.log('onChangeAvatar');
     this.downloadCompanyLogo().then(data => {
    //   const modalRef = this.modalService.open(ImageCropperComponent);
       console.log('data',data);
     //  modalRef.componentInstance.imageBase64 = data;
     //  modalRef.componentInstance.id = this.company.logo.origin.id;
-    this.modalImageCropperStateService.onInitOpen(new ImageCroper(data,this.company.logo.origin.id));
+    this.modalImageCropperStateService.onInitOpen(new ImageCroper(data,this.company.logo.origin.id,true));
     this.cd.detectChanges();
       
     })
@@ -317,22 +325,19 @@ public onCheckGoogleAutoComplete () {
     return editValue;
   }
   getCompanyLogoUrl() {
-    if (this.company && this.company.logo && this.company.logo && this.company.logo.base64 && !this.company.logo.cropped) {
-      return this.company.logo.base64;
-    } else if (!(this.company && this.company.logo && this.company.logo.cropped && this.company.logo.cropped.id)) {
-      return '/company/default/logo' + '.jpg';
-    }
-    return `/file/${this.company.logo.cropped.id}.jpg?t=${(this.company.logo.updatedAt ? this.company.logo.updatedAt :
-      '')}`;
-  };
+    if (this.company && this.company.logo && this.company.logo && this.company.logo.base64 && !this.company.logo.cropped) return this.company.logo.base64;
+    if (this.company && this.company.logo && this.company.logo.cropped && this.company.logo.cropped.id) return `/file/${this.company.logo.cropped.id}`;
+    if (this.company && this.company.logo && this.company.logo.origin && this.company.logo.origin.id ) return `/file/${this.company.logo.origin.id}`;
+    return '/company/default/logo.jpg';
+  }
   downloadCompanyLogo() {
     return new Promise((resolve, reject) => {
       if (this.company.logo && this.company.logo && this.company.logo.base64 && !this.company.logo.cropped) {
         resolve(this.company.logo.base64);
-      } else if (this.company.logo && this.company.logo.cropped) {
+      } else  {
         var req = new XMLHttpRequest();
         req.responseType = "arraybuffer";
-        req.open('GET', `/file/${this.company.logo.origin.id}.jpg?t=${(this.company.logo.updatedAt ? this.company.logo.updatedAt : '')}`, true); /* Третий аргумент true означает асинхронность */
+        req.open('GET',`/file/${this.company.logo.origin.id}` , true); /* Третий аргумент true означает асинхронность */
         req.onload = (oEvent) => {
 
           var blob = new Blob([req.response], { type: "image/jpg" });
