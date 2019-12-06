@@ -100,6 +100,10 @@ console.log('this',this.company);
       }
     }
   }
+checkLogo() {
+  return (this.company && this.company.logo && this.company.logo.cropped && this.company.logo.cropped.id || this.company && this.company.logo && this.company.logo.origin && this.company.logo.origin.id)
+}
+
   goToDashboard() {
 
 

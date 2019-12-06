@@ -5,10 +5,10 @@
         <input type="checkbox">
         <span class="checkbox-mark"></span>
       </label>
-      <div class="circle-avatar">
+      <div class="circle-avatar" [ngClass]="{'with-logo': checkLogo()}">
         <img [src]="getCompanyLogoUrl()" class="qwe" alt=""
-             *ngIf="company && company.logo && company.logo.cropped && company.logo.cropped.id || company && company.logo && company.logo.origin && company.logo.origin.id"/>
-        <span *ngIf="!(company && company.logo && company.logo.cropped && company.logo.cropped.id || company && company.logo && company.logo.origin && company.logo.origin.id)"
+             *ngIf="checkLogo()"/>
+        <span *ngIf="!checkLogo()"
               [textContent]="company.name[0].toUpperCase()"></span>
       </div>
       <div class="mob-styles">
