@@ -252,16 +252,23 @@ public onCheckGoogleAutoComplete () {
    let getConfirm = this.imageCropperStateService.getConfirm().subscribe((data:ImageCropper) => {
       if (!this.opened || !data) return;
        
-     
-        if (data.edit) {
+      this.companiesService.editCompanyAvatar(this.company.id,new CompanyEditLogo(data.croppedImage.base64,data.croppedImage.height,
+        this.company.id,(data.edit) ? this.company.logo.origin.id : data.id,data.croppedImage.width,data.croppedImage.imagePosition.x1,data.croppedImage.imagePosition.y1)).subscribe(res => {
+          this.company.editLogo(res);
+        })
+      /*  if (data.edit) {
           this.companiesService.editCompanyAvatar(this.company.id,new CompanyEditLogo(data.croppedImage.base64,data.croppedImage.height,
             this.company.id,this.company.logo.origin.id,data.croppedImage.width,data.croppedImage.imagePosition.x1,data.croppedImage.imagePosition.y1)).subscribe(res => {
               this.company.editLogo(res);
             })
          
         } else {
+          this.companiesService.editCompanyAvatar(this.company.id,new CompanyEditLogo(data.croppedImage.base64,data.croppedImage.height,
+            this.company.id,data.id,data.croppedImage.width,data.croppedImage.imagePosition.x1,data.croppedImage.imagePosition.y1)).subscribe(res => {
+              this.company.editLogo(res);
+            })
           this.company.setLogo(data);
-        }
+        }*/
    
     })
     this.sub.add(getConfirm);
