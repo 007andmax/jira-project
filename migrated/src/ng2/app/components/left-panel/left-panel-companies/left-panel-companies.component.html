@@ -79,21 +79,7 @@
             <app-select-search [editItem]="selectedClientIndustry" [list]="industries"
                                (onSelectedItem)="onSelectClientIndustry($event)"></app-select-search>
           </div>
-          <!-- <div class="dark-dropdown"
-				ngbDropdown>
-			 <input id="dropdownClientIndustry"
-					placeholder="Select Industry"
-					[value]="clientIndustry"
-					ngbDropdownToggle>
-			 <i class="icn-sm icn-remove-old"  *ngIf="showClearIndustry" (click)="clearClientIndustry()" tooltip="clear"
-				tooltip-placement="top"></i>
-			 <i class="icn-sm report-caret-icon" *ngIf="!showClearIndustry"></i>
-			 <div ngbDropdownMenu aria-labelledby="dropdownClientIndustry">
-			   <ng-template ngFor let-item [ngForOf]="industries">
-				 <button ngbDropdownItem [textContent]="item" (click)="onSelectClientIndustry(item)"></button>
-			   </ng-template>
-			 </div>
-		   </div>-->
+         
           <div class="resent-block">
             <div class="resent-block__header">Recent</div>
             <div class="resent-block__content">

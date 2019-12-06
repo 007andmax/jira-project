@@ -12,10 +12,13 @@
       <div class="list-item" (click)="onSetFilterClientType('LEAD')">Lead Users</div>
       <div class="list-item"  (click)="onShowArchived()">Archived Users</div>
     </div>
-    <div class="left-panel-ng2__content--tags">
+    <div class="left-panel-ng2__content--tags"  >
+    
       <div class="tags-header">
         By tittle
       </div>
+      <app-select-search   [list]="allTitles"
+      (onSelectedItem)="onSelectTitle($event)"></app-select-search>
       <div class="tags-item"></div>
     </div>
     <div class="left-panel-ng2__content--filters">
@@ -25,9 +28,26 @@
         </div>
       </div>
       <div class="filter-item">
-        <div class="filter-item__header">
-          By Industry
-        </div>
+          <div class="filter-item__header" (click)="toggleFilter($event)">
+              By industry
+            </div>
+            <div class="filter-item__content">
+              <div class="dark-dropdown">
+                <app-select-search   [list]="industries"
+                                   (onSelectedItem)="onSelectClientIndustry($event)"></app-select-search>
+              </div>
+             
+              <div class="resent-block">
+                <div class="resent-block__header">Recent</div>
+                <div class="resent-block__content">
+                  <ng-template ngFor let-item [ngForOf]="industryHistory" let-i="index" [ngForTrackBy]="trackByIndex">
+                    <p [textContent]="item" (click)="selectClientIndustry(item)"></p>
+                  </ng-template>
+    
+    
+                </div>
+              </div>
+            </div>
       </div>
     </div>
 

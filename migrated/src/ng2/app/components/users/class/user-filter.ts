@@ -10,12 +10,17 @@ export class UserFilter {
     clientType: string;
     tehUser: string;
     clientIndustry: string;
+    title:string;
     constructor() { }
 
-    public setLeftFilters(clientType,tehUser,clientIndustry) {
+    public setLeftFilters(clientType,tehUser,clientIndustry,title) {
         this.clientType = clientType;
         this.tehUser= tehUser;
         this.clientIndustry = clientIndustry;
+        this.title = title;
+    }
+    public setTitle(data) {
+        this.title = data;
     }
     public setClientType(data) {
         this.clientType = data;
@@ -28,9 +33,9 @@ export class UserFilter {
             let indexCompny = companies.findIndex( company => company.id === item.company.id && company.clientType === this.clientType);
             let clientType = null;
             if (indexCompny > -1) clientType =  companies[indexCompny].clientType;
-            if (this.clientType && clientType) {
+            if (this.clientType && clientType || this.title &&  item.designation === this.title) {
                 return true;
-            } else if (this.clientType && !clientType) {
+            } else if (this.clientType && !clientType || this.title &&  item.designation !== this.title) {
                 return false;
             }
             return true;
