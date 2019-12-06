@@ -344,7 +344,7 @@ public onCheckGoogleAutoComplete () {
       } else  {
         var req = new XMLHttpRequest();
         req.responseType = "arraybuffer";
-        req.open('GET',`/file/${this.company.logo.origin.id}` , true); /* Третий аргумент true означает асинхронность */
+        req.open('GET',`/file/${this.company.logo.origin.id}.jpg` , true); /* Третий аргумент true означает асинхронность */
         req.onload = (oEvent) => {
 
           var blob = new Blob([req.response], { type: "image/jpg" });

@@ -5,7 +5,7 @@ import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { ImageCropper } from 'src/ng2/app/components/shared/image-cropper/class/image-cropper';
 import { ModalImageCropperStateService } from './services/modal-image-cropper-state.service';
 import { ImageCroper } from './class/image-croper';
-
+ 
 @Component({
   selector: 'modal-image-cropper',
   templateUrl: './modal-image-cropper.component.html',
@@ -36,8 +36,10 @@ export class ModalImageCropperComponent implements OnInit, OnDestroy {
     console.log('3333333333333333');
     this.modalImageCropperStateService.getOnOpen().subscribe((data:ImageCroper) => {
       this.imageBase64 = data.imageBase64;
+      
       this.id = data.id;
       this.edit = data.edit;
+    
       //  this.imageCroper.imageBase64 = data;
       this.elRef.nativeElement.querySelector('.modal-image-confirm').style.display = 'block';
       this.show = true;
