@@ -13583,14 +13583,12 @@ button.close {
   color: #9ca5b6;
 }
 
-.new-companies-content__modal--footer,
-.recurring-tickets-content__modal--footer,
 .password-content__modal--footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
   /*padding: 0 50px;*/
-  margin: 20px 0 0;
+  margin: 20px 0 120px 0;
 }
 
 .password-modal-footer-actions {
