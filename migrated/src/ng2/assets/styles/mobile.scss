@@ -91,6 +91,7 @@
         .dark-dropdown {
           .report-caret-icon {
             right: 15px;
+            top: 15px !important;
           }
           input {
             height: 36px;
@@ -101,9 +102,6 @@
             &::placeholder {
               color: #9faaba;
             }
-          }
-          .report-caret-icon {
-            top: 15px !important;
           }
         }
         .resent-block {

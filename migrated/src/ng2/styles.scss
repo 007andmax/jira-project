@@ -84,7 +84,7 @@
 }
 
 .btn-new.btn-primary-white {
-  background: #ffffff;
+  background: #fff;
   color: #16a4fa;
   border: 1px solid #16a4fa;
   font-size: 12px;
@@ -92,7 +92,7 @@
   font-weight: 600;
   &:hover {
     background: #16a4fa;
-    color: #ffffff;
+    color: #fff;
   }
 }
 
@@ -111,7 +111,7 @@
     left: 0;
     height: 16px;
     width: 16px;
-    background-color: #ffffff;
+    background-color: #fff;
     border-radius: 50%;
     border: 1px solid #c7cdd7;
     transition: all .3s;
@@ -202,7 +202,7 @@
         left: -1px;
         width: 1px;
         height: 36px;
-        background: #ffffff;
+        background: #fff;
       }
       .report-caret-icon-white {
         position: absolute;
@@ -219,7 +219,7 @@
 
 .ng-sidebar {
   position: fixed !important;
-  background: #ffffff;
+  background: #fff;
   height: 100vh;
   width: 650px;
   transition: transform .3s !important;
@@ -236,6 +236,43 @@
   top: 78px !important;
   box-shadow: 0 0 60px 0 rgba(0, 0, 0, 0.1);
   overflow-x: hidden !important;
+}
+
+.left-panel-ng2__content--tags {
+  app-select-search {
+    .dark-dropdown {
+      input {
+        height: 40px;
+        margin: 0;
+        width: 100%;
+        border: 0;
+        background-color: #313a4d;
+        color: #9ca5b6;
+        border: none;
+        border-radius: 3px;
+        &::placeholder {
+          opacity: 1;
+          color: #9ca5b6;
+        }
+      }
+      .report-caret-icon {
+        top: 16px !important;
+        right: 10px;
+      }
+      .icn-remove-old {
+        top: 14px !important;
+        right: 8px;
+      }
+    }
+  }
+}
+
+.filter-item__content {
+  app-select-search {
+    > div {
+      padding: 0 !important;
+    }
+  }
 }
 
 app-left-panel-tags-companies {
@@ -259,7 +296,7 @@ app-left-panel-tags-companies {
       padding: 2px 8px;
       border-radius: 3px;
       border: solid 1px rgba(255, 255, 255, 0.3);
-      color: #ffffff;
+      color: #fff;
       background: transparent;
     }
     .mat-form-field-appearance-legacy .mat-form-field-underline,
@@ -547,12 +584,13 @@ app-left-panel-tags-companies {
   > div {
     font-size: 12px;
     padding: 3px 8px;
-    background: #F8F9FA;
-    border: 1px solid #EDF2F6;
+    background: #f8f9fa;
+    border: 1px solid #edf2f6;
     border-radius: 3px;
     margin-right: 4px;
   }
 }
+
 .archive-modal {
   padding: 40px 70px 40px 40px;
   position: relative;
@@ -625,6 +663,7 @@ app-left-panel-tags-companies {
     }
   }
 }
+
 .recurring-tickets-content__modal--content-footer,
 .new-users-content__modal--content-footer {
   .assigned-users-list {
@@ -741,7 +780,7 @@ ngb-typeahead-window {
     &--top,
     &--bottom,
     &--notes {
-      background: #ffffff;
+      background: #fff;
       border-radius: 5px;
       border: solid 1px #edf2f6;
     }
@@ -867,7 +906,7 @@ ngb-typeahead-window {
     padding: 0 12px;
     height: 40px;
     width: 100%;
-    background: #ffffff;
+    background: #fff;
     &:focus {
       outline: none;
     }
@@ -982,7 +1021,7 @@ ngb-typeahead-window {
   border: none;
   padding: 8px 8px 8px 40px;
   border-radius: 4px;
-  background: #ffffff;
+  background: #fff;
   font-size: 13px;
   outline: none;
 }
@@ -1002,7 +1041,7 @@ ngb-typeahead-window {
   border-radius: 4px;
   width: 40px;
   height: 40px;
-  color: #ffffff;
+  color: #fff;
   font-size: 24px;
   outline: none;
   transition: all .3s;
@@ -1054,7 +1093,7 @@ ngb-typeahead-window {
 .password-content__list--item {
   border-radius: 4px;
   margin-bottom: 2px;
-  background: #ffffff;
+  background: #fff;
   padding: 24px 0;
   position: relative;
   display: flex;
@@ -1123,7 +1162,7 @@ ngb-typeahead-window {
   box-shadow: 0 3px 6px 0 rgba(186, 186, 186, 0.05);
   display: none;
   padding: 8px 15px;
-  background: #ffffff;
+  background: #fff;
   border-radius: 6px;
   margin-right: 16px;
   &.show {
@@ -1314,7 +1353,7 @@ ngb-typeahead-window {
       > .default-user-avatar .qwe {
         width: 36px;
         height: 36px;
-        border: 2px solid #ffffff;
+        border: 2px solid #fff;
       }
       > .default-user-avatar {
         &:not(:last-child) {
@@ -1581,7 +1620,7 @@ ngb-typeahead-window {
         position: absolute;
         width: 113%;
         left: -35px;
-        border-top: 1px solid #eeeeee;
+        border-top: 1px solid #eee;
         padding: 16px 0 0 50px;
         color: #9ca5b6;
         font-size: 12px;
@@ -1705,7 +1744,7 @@ ngb-typeahead-window {
       transition: all .3s;
       &:hover {
         background-color: #16a4fa;
-        color: #ffffff;
+        color: #fff;
       }
     }
   }
@@ -1870,7 +1909,7 @@ ngb-datepicker {
     z-index: 2;
   }
   &__content {
-    color: #ffffff;
+    color: #fff;
     margin-top: 78px;
     @media(max-width: 414px) {
       margin-top: 0;
@@ -1971,7 +2010,7 @@ ngb-datepicker {
                 transition: all .3s;
                 color: #16a4fa;
                 &:hover {
-                  color: #ffffff;
+                  color: #fff;
                 }
               }
             }

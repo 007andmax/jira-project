@@ -1,5 +1,5 @@
 <div class="left-panel-ng2 new-users">
-  <div class="left-panel-ng2__header mob-hidden">Companies</div>
+  <div class="left-panel-ng2__header mob-hidden">Users</div>
   <div class="left-panel-ng2__content">
     <div class="mob-filters-header desktop-hidden">
       <button class="x-mark mobile-btn"></button>
@@ -7,60 +7,74 @@
     </div>
 
     <div class="left-panel-ng2__content--lists mob-hidden">
-      <div class="list-item" [ngClass]="{'active': !showArchivedCompanies && !filter.getClientType()}" (click)="onShowAll()">All Users</div>
-      <div class="list-item" [ngClass]="{'active': filter.getClientType() === 'CLIENT'}" (click)="onSetFilterClientType('CLIENT')">Customer Users</div>
-      <div class="list-item" [ngClass]="{'active': filter.getClientType() === 'LEAD'}" (click)="onSetFilterClientType('LEAD')">Lead Users</div>
-      <div class="list-item" [ngClass]="{'active': showArchivedCompanies && !filter.getClientType()}" (click)="onShowArchived()">Archived Users</div>
+      <div class="list-item" [ngClass]="{'active': !showArchivedCompanies && !filter.getClientType()}"
+           (click)="onShowAll()">All Users
+      </div>
+      <div class="list-item" [ngClass]="{'active': filter.getClientType() === 'CLIENT'}"
+           (click)="onSetFilterClientType('CLIENT')">Customer Users
+      </div>
+      <div class="list-item" [ngClass]="{'active': filter.getClientType() === 'LEAD'}"
+           (click)="onSetFilterClientType('LEAD')">Lead Users
+      </div>
+      <div class="list-item" [ngClass]="{'active': showArchivedCompanies && !filter.getClientType()}"
+           (click)="onShowArchived()">Archived Users
+      </div>
     </div>
-    <div class="left-panel-ng2__content--tags"  >
-    
+    <div class="left-panel-ng2__content--tags clearfix">
       <div class="tags-header">
         By tittle
       </div>
-      <app-select-search   [list]="allTitles"
-      (onSelectedItem)="onSelectTitle($event)"></app-select-search>
+
+      <app-select-search [list]="allTitles"
+                         (onSelectedItem)="onSelectTitle($event)"></app-select-search>
       <div class="tags-item"></div>
     </div>
     <div class="left-panel-ng2__content--filters">
       <div class="filter-item">
-        <div class="filter-item__header">
+        <i class="icn-sm report-caret-icon"></i>
+        <div class="filter-item__header" (click)="toggleFilter($event)">
           By Company
         </div>
-        <app-select-search [field]="'name'" [editItem]="selectedCompany"   [list]="companies"
-                                   (onSelectedItem)="onSelectCompany($event)"></app-select-search>
-        
-         <div class="resent-block">
-          <div class="resent-block__header">Recent</div>
-          <div class="resent-block__content">
-            <ng-template ngFor let-item [ngForOf]="companiesHistory" let-i="index" [ngForTrackBy]="trackByIndex">
-              <p [textContent]="item" (click)="selectClientCompany(item)"></p>
-            </ng-template>
+        <div class="filter-item__content">
+          <div class="dark-dropdown">
+            <app-select-search
+              [field]="'name'" [editItem]="selectedCompany" [list]="companies"
+              (onSelectedItem)="onSelectCompany($event)"></app-select-search>
+          </div>
+          <div class="resent-block">
+            <div class="resent-block__header">Recent</div>
+            <div class="resent-block__content">
+              <ng-template ngFor let-item [ngForOf]="companiesHistory" let-i="index" [ngForTrackBy]="trackByIndex">
+                <p [textContent]="item" (click)="selectClientCompany(item)"></p>
+              </ng-template>
 
 
+            </div>
           </div>
         </div>
       </div>
       <div class="filter-item">
-          <div class="filter-item__header" (click)="toggleFilter($event)">
-              By industry
+        <i class="icn-sm report-caret-icon"></i>
+        <div class="filter-item__header" (click)="toggleFilter($event)">
+          By industry
+        </div>
+        <div class="filter-item__content">
+          <div class="dark-dropdown">
+            <app-select-search
+              [editItem]="selectedClientIndustry" [list]="industries"
+              (onSelectedItem)="onSelectClientIndustry($event)"></app-select-search>
+          </div>
+          <div class="resent-block">
+            <div class="resent-block__header">Recent</div>
+            <div class="resent-block__content">
+              <ng-template ngFor let-item [ngForOf]="industryHistory" let-i="index" [ngForTrackBy]="trackByIndex">
+                <p [textContent]="item" (click)="selectClientIndustry(item)"></p>
+              </ng-template>
+
+
             </div>
-            <div class="filter-item__content">
-              <div class="dark-dropdown">
-                <app-select-search  [editItem]="selectedClientIndustry" [list]="industries"
-                                   (onSelectedItem)="onSelectClientIndustry($event)"></app-select-search>
-              </div>
-             
-              <div class="resent-block">
-                <div class="resent-block__header">Recent</div>
-                <div class="resent-block__content">
-                  <ng-template ngFor let-item [ngForOf]="industryHistory" let-i="index" [ngForTrackBy]="trackByIndex">
-                    <p [textContent]="item" (click)="selectClientIndustry(item)"></p>
-                  </ng-template>
-    
-    
-                </div>
-              </div>
-            </div>
+          </div>
+        </div>
       </div>
     </div>
 
