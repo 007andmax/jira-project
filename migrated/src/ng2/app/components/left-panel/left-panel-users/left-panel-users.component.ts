@@ -94,7 +94,7 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
   }
   public onSelectClientIndustry(item) {
     if (!item) {
-      this.clearSelectedCompany();
+      this.clearClientIndustry();
       return;
     }
     this.selectedClientIndustry = null;
