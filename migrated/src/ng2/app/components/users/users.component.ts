@@ -84,6 +84,7 @@ this.filter.onFilter(field, this.reqUsers,this.companies)
     }
     this.page_number += 1;
     let listFilter = this.filter.getFilterList(this.reqUsers,this.companies);
+    this.usersStateService.setCount(listFilter.length);
     let start = (this.page_number - 1) * 30;
     let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;
     let usersList = [];

@@ -42,6 +42,7 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
   }
   ngDoCheck(){
     if (this.editItem)  this.selectedItem =  (this.field) ? this.editItem : this.editItem;
+     
   }
  
 
@@ -84,7 +85,7 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
    */
   public clearClient() {
     this.onSelectedItem.emit(null);
-    this.editItem = null;
+ //   this.editItem = null;
     this.selectedItem = null;
   }
 

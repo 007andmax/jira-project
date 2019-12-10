@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { FilterListTop } from 'src/ng2/class/list/filter-list-top';
 import { UserFilter } from '../../users/class/user-filter';
@@ -23,9 +23,10 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
   companiesHistory = [];
   selectedClientIndustry: string = null;
   selectedCompany: string = null;
-  clientIndustry: string = '';
+//  clientIndustry: string = '';
   companies = [];
   constructor(private usersStateService: UsersStateService, private leftPanelUsersService: LeftPanelUsersService,
+    public cd: ChangeDetectorRef,
     private companiesState: CompaniesStateService, private leftPanelService: LeftPanelService, private companiesService: CompaniesService) { }
 
   ngOnInit() {
@@ -100,8 +101,8 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
     this.selectedClientIndustry = null;
 
     //   this.showClearIndustry = true;
-    this.clientIndustry = item;
-    this.filter.setClientIndustry(this.clientIndustry);
+   // this.clientIndustry = item;
+    this.filter.setClientIndustry(item);
     this.usersStateService.onInitFilter(this.filter);
     this.industryHistory.pop();
     this.industryHistory.unshift(item);
@@ -112,11 +113,14 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
     })
   }
   public selectClientIndustry(item) {
+   
     this.selectedClientIndustry = item;
+    console.log('item',this.selectedClientIndustry);
     //  this.showClearIndustry = true;
-    this.clientIndustry = item;
-    this.filter.setClientIndustry(this.clientIndustry);
+  //  this.clientIndustry = item;
+    this.filter.setClientIndustry(item);
     this.usersStateService.onInitFilter(this.filter);
+    this.cd.detectChanges();
   }
   selectClientCompany(item) {
     console.log('item',item);
@@ -131,13 +135,15 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
   }
   clearClientIndustry() {
     //  this.showClearIndustry = false;
-    this.clientIndustry = '';
+    this.selectedClientIndustry = null;
+  //  this.clientIndustry = '';
     this.filter.setClientIndustry(null);
     this.usersStateService.onInitFilter(this.filter);
   }
   clearSelectedCompany() {
     //  this.showClearIndustry = false;
     //this.selectedCompany = '';
+    this.selectedCompany = null;
     this.filter.setCompany(null);
     this.usersStateService.onInitFilter(this.filter);
   }
@@ -158,8 +164,10 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
     this.showArchivedCompanies = false;
   }
   onShowArchived() {
+    this.filter.setClientType(null);
     this.usersStateService.setOnShowArchived(true);
     this.showArchivedCompanies = true;
+
   }
   ngOnDestroy(): void {
     this.leftPanelUsersService.onUnsubscribe();

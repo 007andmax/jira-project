@@ -11,6 +11,7 @@ export class UsersStateService {
   onGetCurrentUser: EventEmitter<any> = new EventEmitter();
   onShowArchived: EventEmitter<any> = new EventEmitter();
   onFilter: EventEmitter<any> = new EventEmitter();
+  onCount: EventEmitter<any> = new EventEmitter();
    
 
   
@@ -27,6 +28,12 @@ export class UsersStateService {
       this.currentUser = data;
       this.onInitCurrentUser(data);
     })
+  }
+  public setCount(data) {
+    this.onCount.emit(data);
+  }
+  public getOnCount() {
+    return this.onCount;
   }
   public onInitFilter(data) {
     this.onFilter.emit(data);
