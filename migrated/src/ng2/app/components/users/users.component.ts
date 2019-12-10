@@ -36,7 +36,7 @@ public infiniteScrollDisabled = false;
     this.userListService.addSubscription(getOnShowArchived);
 
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
-      this.filter.setLeftFilters(data.clientType,data.tehUser,data.clientIndustry,data.title);
+      this.filter.setLeftFilters(data.clientType,data.company,data.clientIndustry,data.title);
       this.setDefaultScoll();
       this.onScroll();
    //   this.onInirCalculate();

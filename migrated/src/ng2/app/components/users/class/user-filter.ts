@@ -8,16 +8,19 @@ export class UserFilter {
     new FilterListTop('contact', ''),
     new FilterListTop('tickets', '')];
     clientType: string;
-    tehUser: string;
+    company: string;
     clientIndustry: string;
     title:string;
     constructor() { }
 
-    public setLeftFilters(clientType,tehUser,clientIndustry,title) {
+    public setLeftFilters(clientType,company,clientIndustry,title) {
         this.clientType = clientType;
-        this.tehUser= tehUser;
+        this.company= company;
         this.clientIndustry = clientIndustry;
         this.title = title;
+    }
+    public setCompany (data) {
+        this.company= data;
     }
     public setTitle(data) {
         this.title = data;
@@ -29,23 +32,26 @@ export class UserFilter {
         return this.clientType;
     }
     public getFilterList(reqCompaniesList: Array<User>,companies:Array<Company>) {
+        console.log('this.company',this.company);
+      //  console.log('clientIndustry',clientIndustry);
         let list = reqCompaniesList.filter(item => {
-            let indexCompny = companies.findIndex( company => company.id === item.company.id && company.clientType === this.clientType);
-            let clientType = null;
-            if (indexCompny > -1) clientType =  companies[indexCompny].clientType;
-            if (this.clientType && clientType || this.title &&  item.designation === this.title) {
+            let indexCompany = companies.findIndex( company => company.id === item.company.id);
+            let clientType:boolean = false;
+            let clientIndustry:boolean = false;
+            if (indexCompany > -1 && this.clientType === companies[indexCompany].clientType) clientType = true;
+            if (indexCompany > -1 && this.clientIndustry === ((companies[indexCompany].clientIndustry) ? companies[indexCompany].clientIndustry.name : '')) clientIndustry = true;
+         
+            if (((this.clientType) ?  clientType === true : true) && ((this.title) ? item.designation === this.title : true) && ((this.company) ? this.company === item.company.id : true) && ((this.clientIndustry) ? clientIndustry === true : true)) {
                 return true;
-            } else if (this.clientType && !clientType || this.title &&  item.designation !== this.title) {
+            } else  {
                 return false;
             }
-            return true;
+         
         })
         return list;
 
     }
-    public setTehUser(data) {
-        this.tehUser = data;
-    }
+    
     public setClientIndustry(data) {
         this.clientIndustry = data;
     }

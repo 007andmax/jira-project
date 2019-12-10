@@ -26,6 +26,19 @@
         <div class="filter-item__header">
           By Company
         </div>
+        <app-select-search [field]="'name'" [editItem]="selectedCompany" [list]="companies"
+                                   (onSelectedItem)="onSelectCompany($event)"></app-select-search>
+        
+         <div class="resent-block">
+          <div class="resent-block__header">Recent</div>
+          <div class="resent-block__content">
+            <ng-template ngFor let-item [ngForOf]="companiesHistory" let-i="index" [ngForTrackBy]="trackByIndex">
+              <p [textContent]="item" (click)="selectClientCompany(item)"></p>
+            </ng-template>
+
+
+          </div>
+        </div>
       </div>
       <div class="filter-item">
           <div class="filter-item__header" (click)="toggleFilter($event)">
@@ -33,7 +46,7 @@
             </div>
             <div class="filter-item__content">
               <div class="dark-dropdown">
-                <app-select-search   [list]="industries"
+                <app-select-search  [editItem]="selectedClientIndustry" [list]="industries"
                                    (onSelectedItem)="onSelectClientIndustry($event)"></app-select-search>
               </div>
              
