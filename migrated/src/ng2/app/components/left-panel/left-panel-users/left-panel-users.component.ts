@@ -120,11 +120,12 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
   }
   selectClientCompany(item) {
     console.log('item',item);
-    this.selectedCompany = item;
+   
     let indexCompany = this.companiesState.getCompanies().findIndex(company => company.name === item);
     //  this.showClearIndustry = true;
     // this.clientIndustry = item;
     console.log('this.companiesState.getCompanies()[indexCompany].id',this.companiesState.getCompanies()[indexCompany].id);
+    this.selectedCompany = this.companiesState.getCompanies()[indexCompany];
     this.filter.setCompany(this.companiesState.getCompanies()[indexCompany].id);
     this.usersStateService.onInitFilter(this.filter);
   }
