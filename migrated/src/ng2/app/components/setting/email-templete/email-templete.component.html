@@ -3,7 +3,15 @@
 <div class="page-container">
   <div class="page-insider manage-tags">
     <div class="heading">
-      <h1><a href="javascript:;" (click)="onBackMenu()" class="back-menu" style="display: none;">backmneu</a>Email Templetes</h1>
+      <h1>
+        <a
+          href="javascript:;"
+          (click)="onBackMenu()"
+          class="back-menu"
+          style="display: none;"
+          >backmneu</a
+        >Email Templetes
+      </h1>
     </div>
     <tabset>
       <!-- Ticket Templates -->
@@ -31,7 +39,9 @@
                       data-tooltip="Edit"
                       class="edit"
                       (click)="getTemplate(template, i)"
-                      ><img src="assets/img/edit.svg" alt="Edit"
+                      ><img
+                        src="../../../../../ng1/images/setting-module/edit.svg"
+                        alt="Edit"
                     /></a>
                     <a
                       *ngIf="
@@ -43,7 +53,7 @@
                       data-tooltip="Reset Default"
                       (click)="restoreDefault(template.key)"
                       class="view"
-                      ><img src="assets/img/view-icon.svg" alt="view-icon"
+                      ><img src="../../../../../ng1/images/setting-module/view-icon.svg" alt="view-icon"
                     /></a>
                   </td>
                 </tr>
@@ -77,7 +87,7 @@
                       data-tooltip="Edit"
                       (click)="getTemplate(template, i)"
                       class="edit"
-                      ><img src="assets/img/edit.svg" alt="Edit"
+                      ><img src="../../../../../ng1/images/setting-module/edit.svg" alt="Edit"
                     /></a>
                     <a
                       *ngIf="
@@ -89,7 +99,7 @@
                       href="javascript:;"
                       data-tooltip="Reset Default"
                       class="view"
-                      ><img src="assets/img/view-icon.svg" alt="view-icon"
+                      ><img src="../../../../../ng1/images/setting-module/view-icon.svg" alt="view-icon"
                     /></a>
                   </td>
                 </tr>
@@ -123,7 +133,7 @@
                       data-tooltip="Edit"
                       class="edit"
                       (click)="getTemplate(template, i)"
-                      ><img src="assets/img/edit.svg" alt="Edit"
+                      ><img src="../../../../../ng1/images/setting-module/edit.svg" alt="Edit"
                     /></a>
                     <a
                       *ngIf="
@@ -135,7 +145,7 @@
                       href="javascript:;"
                       data-tooltip="Reset Default"
                       class="view"
-                      ><img src="assets/img/view-icon.svg" alt="view-icon"
+                      ><img src="../../../../../ng1/images/setting-module/view-icon.svg" alt="view-icon"
                     /></a>
                   </td>
                 </tr>
@@ -158,7 +168,7 @@
   <div class="sidebar-header">
     <div class="h1">{{ templeteInfo.title }}</div>
     <a class="close" href="javascript:;" (click)="closeTemplete()"
-      ><img src="/ng2/assets/img/close.svg" alt="close"
+      ><img src="../../../../../ng1/images/setting-module/close.svg" alt="close"
     /></a>
   </div>
   <div class="reciept">
@@ -197,7 +207,11 @@
         <div class="f-col col-100">
           <label>Email</label>
           <div class="form-row">
-            <angular-editor id="myEditor" formControlName="body" [config]="config"></angular-editor>
+            <angular-editor
+              id="myEditor"
+              formControlName="body"
+              [config]="config"
+            ></angular-editor>
           </div>
         </div>
         <div class="f-col col-100">
@@ -258,7 +272,7 @@
 <ng-template #template>
   <div class="modal-header">
     <div class="modal-logo">
-      <img src="/ng2/assets/img/company-logo.svg" alt="accer" />
+      <img src="../../../../../ng1/images/setting-module/company-logo.svg" alt="accer" />
     </div>
     <button
       type="button"

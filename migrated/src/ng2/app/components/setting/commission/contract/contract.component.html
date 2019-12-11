@@ -67,7 +67,9 @@
                   'blockTimeContractCommission'
                 )
               "
-              ><img src="assets/img/edit.svg" alt="Edit"
+              ><img
+                src="../../../../../../ng1/images/setting-module/edit.svg"
+                alt="Edit"
             /></a>
             <a
               href="javascript:;"
@@ -79,7 +81,9 @@
                   'blockTimeContractCommission'
                 )
               "
-              ><img src="assets/img/remove.svg" alt="Remove"
+              ><img
+                src="../../../../../../ng1/images/setting-module/remove.svg"
+                alt="Remove"
             /></a>
           </td>
         </tr>
@@ -103,7 +107,9 @@
                   'blockTimeContractCommissionExceeding'
                 )
               "
-              ><img src="assets/img/edit.svg" alt="Edit"
+              ><img
+                src="../../../../../../ng1/images/setting-module/edit.svg"
+                alt="Edit"
             /></a>
             <a
               href="javascript:;"
@@ -115,7 +121,9 @@
                   'blockTimeContractCommissionExceeding'
                 )
               "
-              ><img src="assets/img/remove.svg" alt="Remove"
+              ><img
+                src="../../../../../../ng1/images/setting-module/remove.svg"
+                alt="Remove"
             /></a>
           </td>
         </tr>
@@ -160,7 +168,9 @@
                   'userOrDeviceContractCommission'
                 )
               "
-              ><img src="assets/img/edit.svg" alt="Edit"
+              ><img
+                src="../../../../../../ng1/images/setting-module/edit.svg"
+                alt="Edit"
             /></a>
             <a
               href="javascript:;"
@@ -172,7 +182,9 @@
                   'userOrDeviceContractCommission'
                 )
               "
-              ><img src="assets/img/remove.svg" alt="Remove"
+              ><img
+                src="../../../../../../ng1/images/setting-module/remove.svg"
+                alt="Remove"
             /></a>
           </td>
         </tr>
@@ -196,7 +208,9 @@
                   'userOrDeviceContractCommissionExceeding'
                 )
               "
-              ><img src="assets/img/edit.svg" alt="Edit"
+              ><img
+                src="../../../../../../ng1/images/setting-module/edit.svg"
+                alt="Edit"
             /></a>
             <a
               href="javascript:;"
@@ -208,7 +222,9 @@
                   'userOrDeviceContractCommissionExceeding'
                 )
               "
-              ><img src="assets/img/remove.svg" alt="Remove"
+              ><img
+                src="../../../../../../ng1/images/setting-module/remove.svg"
+                alt="Remove"
             /></a>
           </td>
         </tr>
@@ -255,45 +271,45 @@
   class="modal-content toggle-area"
   [ngClass]="{ opened: isModelDisplay === true }"
 >
-<div class="modal-wrapper">
-  <div class="toggle-header">
-    <h2 class="h1">Edit Rate</h2>
-  </div>
-  <div class="modal-body">
-    <form method="POST">
-      <div class="f-row">
-        <div class="f-col col-100">
-          <label>Commission Rate (%)</label>
-          <div class="form-row">
-            <input
-              type="text"
-              class="form-input"
-              autocomplete="off"
-              name="commissionRate"
-              #commissionRate
-              placeholder="Enter Commission Rate"
-            />
+  <div class="modal-wrapper">
+    <div class="toggle-header">
+      <h2 class="h1">Edit Rate</h2>
+    </div>
+    <div class="modal-body">
+      <form method="POST">
+        <div class="f-row">
+          <div class="f-col col-100">
+            <label>Commission Rate (%)</label>
+            <div class="form-row">
+              <input
+                type="text"
+                class="form-input"
+                autocomplete="off"
+                name="commissionRate"
+                #commissionRate
+                placeholder="Enter Commission Rate"
+              />
+            </div>
+          </div>
+          <div class="m-btn-row">
+            <div class="m-btn-col">
+              <input
+                type="submit"
+                (click)="setAgreementRate()"
+                value="Save"
+                class="btn btn-primary"
+              />
+              <a
+                href="javascript:;"
+                class="btn btn-secondary"
+                aria-label="Close"
+                (click)="isModelDisplay = false"
+                >Cancel</a
+              >
+            </div>
           </div>
         </div>
-        <div class="m-btn-row">
-          <div class="m-btn-col">
-            <input
-              type="submit"
-              (click)="setAgreementRate()"
-              value="Save"
-              class="btn btn-primary"
-            />
-            <a
-              href="javascript:;"
-              class="btn btn-secondary"
-              aria-label="Close"
-              (click)="isModelDisplay = false"
-              >Cancel</a
-            >
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
+      </form>
+    </div>
   </div>
 </div>

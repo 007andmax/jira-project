@@ -32,8 +32,8 @@
             [disabled]="!smtp.useSMTP || disableFields"
           />
         </div>
-      </div> 
-      
+      </div>
+
       <div class="f-col col-50">
         <label>Outgoing mail server</label>
         <div class="form-row">
@@ -41,7 +41,6 @@
             class="cmn-select form-input"
             formControlName="usedEmailVia"
             (change)="changeEmailVia()"
-            
           >
             <option *ngFor="let email of emailVia" value="{{ email.label }}">{{
               email.label
@@ -167,18 +166,24 @@
             class="password-co"
             (click)="showPassword = !showPassword"
             [hidden]="!smtp.password"
-            ><img src="assets/img/password-show.svg" alt="password"
+            ><img
+              src="../../../../../../ng1/images/setting-module/password-show.svg"
+              alt="password"
           /></a>
         </div>
       </div>
-      <div class="f-col col-100 test-server" >
+      <div class="f-col col-100 test-server">
         <!-- <a href="javascript:;" class="btn-outline" >Test Server</a> -->
-        <input type="button"  class="btn-outline" value="Test Server" 
-        disabled="{{ !smtp.useSMTP || smtpForm.invalid || !smtp.isValid }}"
-        (click)="create = !create"  />    
+        <input
+          type="button"
+          class="btn-outline"
+          value="Test Server"
+          disabled="{{ !smtp.useSMTP || smtpForm.invalid || !smtp.isValid }}"
+          (click)="create = !create"
+        />
       </div>
     </div>
-    <input type="submit"  class="btn btn-primary" value="Save Changes" />
+    <input type="submit" class="btn btn-primary" value="Save Changes" />
   </form>
 </div>
 
@@ -186,26 +191,39 @@
   <!-- header -->
   <div class="sidebar-header">
     <a class="close" href="javascript:;" (click)="create = !create"
-      ><img src="assets/img/close.svg" alt="close"
+      ><img src="../../../../../../ng1/images/setting-module/close.svg" alt="close"
     /></a>
   </div>
   <div class="middle-content">
-      
-    <form (ngSubmit)="f.form.valid && sendTestEmail(smtpForm, testEmailForm, true)" #f="ngForm" novalidate>
+    <form
+      (ngSubmit)="f.form.valid && sendTestEmail(smtpForm, testEmailForm, true)"
+      #f="ngForm"
+      novalidate
+    >
       <div class="f-row">
         <div class="f-col col-50">
-          <label >Target Email</label>
+          <label>Target Email</label>
           <a class="close" href="javascript:;" (click)="create = !create"
-      ><img src="assets/img/close.svg" alt="close"
-    /></a>
+            ><img src="../../../../../../ng1/images/setting-module/close.svg" alt="close"
+          /></a>
           <div class="form-row" *ngIf="smtp">
-
-
-              <input type="text" class="form-control" name="testEmail" [(ngModel)]="smtp.testEmail" 
-              #targetEmail="ngModel" [ngClass]="{ 'is-invalid': f.submitted && testEmail.invalid }" required />
-              <div *ngIf="f.submitted && testEmail.invalid" class="invalid-feedback">
-                  <div *ngIf="testEmail.errors.required">Test Email is required</div>
+            <input
+              type="text"
+              class="form-control"
+              name="testEmail"
+              [(ngModel)]="smtp.testEmail"
+              #targetEmail="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && testEmail.invalid }"
+              required
+            />
+            <div
+              *ngIf="f.submitted && testEmail.invalid"
+              class="invalid-feedback"
+            >
+              <div *ngIf="testEmail.errors.required">
+                Test Email is required
               </div>
+            </div>
 
             <!-- <input
               type="text"

@@ -3,7 +3,15 @@
 <div class="page-container manage-tech">
   <div class="page-insider">
     <div class="heading">
-      <h1><a href="javascript:;" (click)="onBackMenu()" class="back-menu" style="display: none;">backmneu</a>Manage Tech Users</h1>
+      <h1>
+        <a
+          href="javascript:;"
+          (click)="onBackMenu()"
+          class="back-menu"
+          style="display: none;"
+          >backmneu</a
+        >Manage Tech Users
+      </h1>
       <div class="heading-serach">
         <a href="javascript:;" (click)="creatTechUsr()" class="btn-outline"
           >Create Tech User</a
@@ -35,14 +43,14 @@
                     "
                   >
                     <img
-                    *ngIf="techUser.avatar !== null"
+                      *ngIf="techUser.avatar !== null"
                       src="/users/{{ techUser.id }}/image.jpg?t={{
                         techUser.avatar.updatedAt
                       }}"
                       alt="user"
                     />
                     <img
-                      src="../../../../../ng2/assets/img/user.jpg"
+                      src="../../../../../ng1/images/setting-module/user.jpg"
                       alt="user"
                       *ngIf="techUser.avatar === null"
                     />
@@ -55,7 +63,7 @@
                     "
                   >
                     <img
-                      src="../../../../../ng2/assets/img/user.jpg"
+                      src="../../../../../ng1/images/setting-module/user.jpg"
                       alt="user"
                       data-tooltip="Tech-user hasn't confirmed his account yet."
                     />
@@ -119,7 +127,9 @@
                         <input
                           type="checkbox"
                           readonly
-                          [(ngModel)]="techUseremailNotificationList[techUser.id].newDevice"
+                          [(ngModel)]="
+                            techUseremailNotificationList[techUser.id].newDevice
+                          "
                           id="newDevice1"
                         />
                         <label for="newDevice1">
@@ -179,17 +189,23 @@
                   class="reset"
                   *ngIf="techUser.isEmailVerified"
                   (click)="changePasswordRequest(techUser.id)"
-                  ><img src="../../../../../ng2/assets/img/reset-password.svg" alt="Edit"/></a>
+                  ><img
+                    src="../../../../../ng1/images/setting-module/reset-password.svg"
+                    alt="Edit"
+                /></a>
                 <a
                   href="javascript:;"
                   data-tooltip="Resend Email"
                   class="reset"
                   *ngIf="!(techUser.isEmailVerified && techUser.userEnabled)"
                   (click)="resendWelcomeEmail(techUser.primaryEmail)"
-                  >
-                  <img src="../../../../../ng2/assets/img/reset-password.svg" alt="Edit" />
+                >
+                  <img
+                    src="../../../../../ng1/images/setting-module/reset-password.svg"
+                    alt="Edit"
+                  />
                 </a>
-                  <!--<p (click)="resendWelcomeEmail(techUser.primaryEmail)">
+                <!--<p (click)="resendWelcomeEmail(techUser.primaryEmail)">
                     <img src="/ng2/assets/img/reset-password.svg" alt="Edit" />
                   </p>-->
                 <a
@@ -197,14 +213,18 @@
                   data-tooltip="Edit"
                   class="edit"
                   (click)="editTechUser(techUser)"
-                  ><img src="../../../../../ng2/assets/img/edit.svg" alt="Edit"
+                  ><img
+                    src="../../../../../ng1/images/setting-module/edit.svg"
+                    alt="Edit"
                 /></a>
                 <a
                   href="javascript:;"
                   data-tooltip="remove"
                   class="remove"
                   (click)="removeTechUser(techUser)"
-                  ><img src="../../../../../ng2/assets/img/remove.svg" alt="Remove"
+                  ><img
+                    src="../../../../../ng1/images/setting-module/remove.svg"
+                    alt="Remove"
                 /></a>
               </td>
             </tr>
@@ -221,14 +241,14 @@
   <div class="sidebar-header">
     <div class="h1">Create Tech User</div>
     <a class="close" href="javascript:;" (click)="create = !create"
-      ><img src="../../../../../ng2/assets/img/close.svg" alt="close"
+      ><img src="../../../../../ng1/images/setting-module/close.svg" alt="close"
     /></a>
   </div>
   <div class="middle-content">
     <div class="dp-area">
       <span class="dp">
         <img
-          src="../../../../../ng2/assets/img/upload-photo.svg"
+          src="../../../../../ng1/images/setting-module/upload-photo.svg"
           alt="user"
           *ngIf="!fileAvatar"
         />
@@ -334,8 +354,8 @@
             </div>
           </div>
           <label *ngIf="!isEmailIdUnique" class="invalid-feedback"
-              >This email already occupied.</label
-            >
+            >This email already occupied.</label
+          >
 
           <div class="form-row">
             <input
@@ -417,34 +437,33 @@
 </div>
 
 <!-- sidebar popup edit -->
-<div class="sidebar-popup" [class.opened]="edit" >
+<div class="sidebar-popup" [class.opened]="edit">
   <!-- header -->
   <div class="sidebar-header">
     <div class="h1">Edit Tech User</div>
     <a class="close" href="javascript:;" (click)="edit = !edit">
-      <img src="assets/img/close.svg" alt="close"
+      <img src="../../../../../ng1/images/setting-module/close.svg" alt="close"
     /></a>
   </div>
   <div class="middle-content">
     <div class="dp-area">
-
       <span
         class="dp"
         *ngIf="
           selectedTechUser &&
-          (!selectedTechUser.requestToChangePassword &&
-          selectedTechUser.isEmailVerified)
+          !selectedTechUser.requestToChangePassword &&
+            selectedTechUser.isEmailVerified
         "
       >
         <img
-        *ngIf="selectedTechUser.avatar !== null"
+          *ngIf="selectedTechUser.avatar !== null"
           src="/users/{{ selectedTechUser.id }}/image.jpg?t={{
             selectedTechUser.avatar.updatedAt
           }}"
           alt="user"
         />
         <img
-          src="assets/img/user.jpg"
+          src="../../../../../ng1/images/setting-module/user.jpg"
           alt="user"
           *ngIf="selectedTechUser.avatar === null"
         />
@@ -452,13 +471,13 @@
       <span
         class="dp"
         *ngIf="
-        selectedTechUser &&
+          selectedTechUser &&
           (selectedTechUser.requestToChangePassword ||
-          !selectedTechUser.isEmailVerified)
+            !selectedTechUser.isEmailVerified)
         "
       >
         <img
-          src="assets/img/user.jpg"
+          src="../../../../../ng1/images/setting-module/user.jpg"
           alt="user"
           data-tooltip="Tech-user hasn't confirmed his account yet."
         />
@@ -584,7 +603,9 @@
             *ngIf="submitted && f.primaryEmail.errors"
             class="invalid-feedback"
           >
-            <div *ngIf="f.primaryEmail.errors.required && isEmailIdUnique">Email is required</div>
+            <div *ngIf="f.primaryEmail.errors.required && isEmailIdUnique">
+              Email is required
+            </div>
             <div *ngIf="f.primaryEmail.errors.pattern && isEmailIdUnique">
               Email must be a valid email address
             </div>
