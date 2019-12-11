@@ -6,8 +6,8 @@
       <i class="icn-sm report-caret-icon"></i>
     </div>
     <div ngbDropdownMenu aria-labelledby="dropdownBasic">
-      <button ngbDropdownItem>Updates</button>
-      <button ngbDropdownItem>Invoice</button>
-      <button ngbDropdownItem>Manager</button>
+      <button ngbDropdownItem (click)="update('ticket')">Updates</button>
+      <button ngbDropdownItem (click)="update('invoice')">Invoice</button>
+      <button ngbDropdownItem (click)="update('ticketManager')">Manager</button>
     </div>
   </div>

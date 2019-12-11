@@ -5,6 +5,9 @@ import { UserListService } from './services/user-list.service';
 import { UserFilter } from './class/user-filter';
 import { CompaniesStateService } from '../../states/company/companies-state.service';
 import { Company } from '../../interfaces/company/company';
+import { ConfirmStateService } from '../shared/confirm/services/confirm-state.service';
+import { ARCHIVE_USER } from '../../const/confirm';
+import { UsersService } from '../../services/users/users.service';
 
 @Component({
   selector: 'app-users',
@@ -22,7 +25,9 @@ showArchivedCompanies:boolean = false;
 public infiniteScrollDisabled = false;
   public page_number: number = 0;
   constructor(private usersStateService:UsersStateService, private userListService:UserListService, 
-    private companiesStateService:CompaniesStateService) { }
+    private companiesStateService:CompaniesStateService,
+    private confirmStateService:ConfirmStateService,
+    private usersService:UsersService) { }
 
   ngOnInit() {
     let getOnShowArchived = this.usersStateService.getOnShowArchived().subscribe(data => {
@@ -55,6 +60,26 @@ public infiniteScrollDisabled = false;
         this.getUsersList(data);
       })
       this.userListService.addSubscription(getOnUsers);
+
+      let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+        if (data) {
+          if (this.confirmStateService.getConfirmAction() === ARCHIVE_USER) {
+            this.onArchiveUser(this.usersStateService.getUserForArchive().id);
+          }
+        
+        }
+      })
+      this.userListService.addSubscription(getConfirm);
+  }
+  private onArchiveUser (id) {
+    let ids = [];
+    ids.push(id);
+    let archiveCompany =  this.usersService.onArchiveUsers(ids).subscribe(data => {
+      
+      let index = this.users.findIndex(item => item.id === id);
+      if (index > -1) this.users.splice(index, 1);
+    })
+    this.userListService.addSubscription(archiveCompany);
   }
   private getUsersList(data) {
     this.reqUsers = data.filter(item => ((!this.showArchivedCompanies) ? !item.deletedAt : item.deletedAt));

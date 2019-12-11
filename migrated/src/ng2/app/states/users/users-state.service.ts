@@ -1,18 +1,20 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { UsersService } from '../../services/users/users.service';
+import { CurrentUser } from 'src/ng2/class/current-user/current-user';
+import { User } from '../../components/users/class/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersStateService {
   allUsers = [];
-  currentUser: any;
+  currentUser: CurrentUser;
   onGetUsers: EventEmitter<any> = new EventEmitter();
   onGetCurrentUser: EventEmitter<any> = new EventEmitter();
   onShowArchived: EventEmitter<any> = new EventEmitter();
   onFilter: EventEmitter<any> = new EventEmitter();
   onCount: EventEmitter<any> = new EventEmitter();
-   
+  userForArchive:User = null;
 
   
   constructor(private userService: UsersService, ) {
@@ -24,10 +26,16 @@ export class UsersStateService {
       this.setAllUsers(data);
       this.onInitGetUsers(data);
     })
-    this.userService.getCurrentUser().subscribe((data) => {
-      this.currentUser = data;
+    this.userService.getCurrentUser().subscribe((data:any) => {
+      this.currentUser = new CurrentUser(data);
       this.onInitCurrentUser(data);
     })
+  }
+  public  setUserForArchive(data) {
+    this.userForArchive = data;
+  }
+  public getUserForArchive() {
+    return this.userForArchive;
   }
   public setCount(data) {
     this.onCount.emit(data);

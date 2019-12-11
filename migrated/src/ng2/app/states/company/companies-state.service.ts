@@ -5,6 +5,7 @@ import { CompanyProfile } from '../../components/companies/class/company-profile
 import { CompanyCalculateCount } from '../../components/companies/class/company-calculate-count';
 import { CompaniesRealTimeService } from './companies-real-time.service';
 import { CompanyUpdate } from '../../components/companies/class/company-update';
+import { User } from '../../components/users/class/user';
 
 @Injectable({
   providedIn: 'root'

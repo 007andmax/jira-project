@@ -17,7 +17,7 @@
   </div>
   <div class="col-md-4 w-100 fz-13"  [innerHtml]="getContact()"></div>
   <div class="col-md-4 subs">
-   <app-user-table-subscription [subscription]="user.subscription"></app-user-table-subscription>
+   <app-user-table-subscription (onChange)="onChangeSubscriptions($event)" [subscription]="user.subscription"></app-user-table-subscription>
   </div>
   <div class="col-md-1 fz-13 jc-c" [textContent]="user.userStatistic.ticketsSubmitted || 0"></div>
   <div class="col-md-2">
@@ -28,7 +28,7 @@
       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
         <button ngbDropdownItem><i class="icn-16 edit-grey-ng2"></i>Edit</button>
         <button ngbDropdownItem><i class="icn-16 send-grey-ng2"></i>Send</button>
-        <button ngbDropdownItem><i class="icn-16 archive-grey-ng2"></i>Delete</button>
+        <button ngbDropdownItem *ngIf="currentUser.checkPermission('ARCHIVE_USERS')" (click)="delete()"><i class="icn-16 archive-grey-ng2"></i>Delete</button>
       </div>
     </div>
   </div>
