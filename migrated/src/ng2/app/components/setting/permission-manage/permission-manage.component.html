@@ -30,7 +30,7 @@
                     class="edit-ico"
                     (click)="editRoleName(role, i)"
                   >
-                    <img src="/ng2/assets/img/edit-12.svg" alt="edit" />
+                    <img src="assets/img/edit-12.svg" alt="edit" />
                   </a>
                   <a
                     href="javascript:;"
@@ -38,7 +38,7 @@
                     class="delete-ico"
                     (click)="deleteRole(role.id, true); delete = !delete"
                   >
-                    <img src="/ng2/assets/img/remove-12.svg" alt="remove" />
+                    <img src="assets/img/remove-12.svg" alt="remove" />
                   </a>
                 </div>
                 <!-- Modal create Tags -->
@@ -132,11 +132,11 @@
   <div class="sidebar-header">
     <div class="h1">Delete Role?</div>
     <a class="close" href="javascript:;" (click)="delete = !delete"
-      ><img src="/ng2/assets/img/close.svg" alt="close"
+      ><img src="assets/img/close.svg" alt="close"
     /></a>
   </div>
   <div class="warn-msg">
-    <img src="/ng2/assets/img/warning.svg" alt="warning" />
+    <img src="assets/img/warning.svg" alt="warning" />
     <p>
       {{ usersToShift.length }} tech users belong to this group, you must assign
       a <br />
@@ -153,7 +153,7 @@
               <span class="user-dp away">
                 <img
                   *ngIf="(user && !user.avatar) || !user.avatar.updatedAt"
-                  src="/ng2/assets/img/user.jpg"
+                  src="assets/img/user.jpg"
                   alt="user"
                 />
                 <img

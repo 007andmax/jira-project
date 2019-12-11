@@ -106,7 +106,6 @@ export class CompanyProfileComponent implements OnInit {
       timeSettings: { workingDays: [], outliersSeconds: 0 },
       supportMailBox: ""
     };
-   
 
     this.createCProfileForm();
 
@@ -128,8 +127,6 @@ export class CompanyProfileComponent implements OnInit {
 
     // load address autocomplete
     this.getAddressAutocomplete();
-
-   
   }
 
   getAddress(place: object) {
@@ -209,7 +206,11 @@ export class CompanyProfileComponent implements OnInit {
       res => {
         if (res) {
           this.currentCompany = res;
-          if (this.currentCompany && this.currentCompany.logo) {
+          if (
+            this.currentCompany &&
+            this.currentCompany.logo &&
+            this.currentCompany.logo.cropped
+          ) {
             this.imageSrc = `/file/${this.currentCompany.logo.cropped.id}.jpg?t=${this.currentCompany.logo.updatedAt}`;
           } else {
             this.imageSrc = "ng2/assets/img/company-logo.svg";
@@ -597,7 +598,7 @@ export class CompanyProfileComponent implements OnInit {
         },
         error => {
           this.loading = false;
-          this.toaster.error('Bad Request');
+          this.toaster.error("Bad Request");
         }
       );
     }
@@ -673,7 +674,7 @@ export class CompanyProfileComponent implements OnInit {
                 },
                 error => {
                   this.loading = false;
-                  this.toaster.error('Bad Request');
+                  this.toaster.error("Bad Request");
                 }
               );
             } else {
