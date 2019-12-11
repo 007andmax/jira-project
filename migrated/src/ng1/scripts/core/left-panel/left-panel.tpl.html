@@ -1145,67 +1145,67 @@
       </a>
       </div>
       <div class="back"><a href="javascript:;" ng-click="stateGo($event, 'quickSupport');"><span class="nav-ico" 
-        ><img src="../../../../ng2/assets/img/prev.svg"
+        ><img src="../../../../assets/img/prev.svg"
               alt="back" /></span>back</a></div>
       <nav>
       <ul class="list-unstyled">
         <li ng-class="{active: $state.includes('myprofile-component')}"><a
             ng-click="stateGo($event, 'myprofile-component')"><span class="nav-ico"><img
-                src="../../../../ng2/assets/img/my-profile.svg" alt="My Profile" /></span>My Profile Settings</a></li>
+                src="../../../../assets/img/my-profile.svg" alt="My Profile" /></span>My Profile Settings</a></li>
         <li ng-class="{active: $state.includes('manage-tags-component')}"
         ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_TAGS_SETTINGS')"
         ><a
             ng-click="stateGo($event, 'manage-tags-component')"><span class="nav-ico"><img
-                src="../../../../ng2/assets/img/manage-tags.svg" alt="Tags" /></span>Manage Tags</a></li>
+                src="../../../../assets/img/manage-tags.svg" alt="Tags" /></span>Manage Tags</a></li>
         <li ng-class="{active: $state.includes('company-profile-component')}">
           <a ng-click="stateGo($event, 'company-profile-component')" 
           ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_COMPANY_PROFILE_SETTINGS')"><span class="nav-ico"><img
-                src="../../../../ng2/assets/img/company-profile.svg" alt="Company" /></span>Company Profile</a>
+                src="../../../../assets/img/company-profile.svg" alt="Company" /></span>Company Profile</a>
         </li>
 
         <li ng-class="{active: $state.includes('tech-component')}">
           <a ng-click="stateGo($event, 'tech-component')"><span class="nav-ico"><img
-                src="../../../../ng2/assets/img/manage-users.svg" alt="Tech" /></span>Manage Tech Users</a>
+                src="../../../../assets/img/manage-users.svg" alt="Tech" /></span>Manage Tech Users</a>
         </li>
 
         <li ng-class="{active: $state.includes('email-setting-component')}">
             <a ng-click="stateGo($event, 'email-setting-component')"><span class="nav-ico"><img
-                src="../../../../ng2/assets/img/email-settings.svg" alt="Email" /></span>Email Settings</a>
+                src="../../../../assets/img/email-settings.svg" alt="Email" /></span>Email Settings</a>
         </li>
 
         <li ng-class="{active: $state.includes('taxes-component')}">
           <a ng-click="stateGo($event, 'taxes-component')"><span class="nav-ico"><img
-                src="../../../../ng2/assets/img/taxes.svg" alt="Taxes" /></span>Taxes</a>
+                src="../../../../assets/img/taxes.svg" alt="Taxes" /></span>Taxes</a>
         </li>
 
         <li ng-class="{active: $state.includes('permission-manage-component')}" 
         ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_PERMISSIONS_SETTINGS')">
           <a  ng-click="stateGo($event, 'permission-manage-component')"><span class="nav-ico"><img
-                src="../../../../ng2/assets/img/permission-management.svg" alt="Permission" /></span>Permission Management</a>
+                src="../../../../assets/img/permission-management.svg" alt="Permission" /></span>Permission Management</a>
         </li>
 
         <li ng-class="{active: $state.includes('email-templete-component')}">
             <a ng-click="stateGo($event, 'email-templete-component')"><span class="nav-ico"><img
-                src="../../../../ng2/assets/img/email-templates.svg" alt="Templetes" /></span>Email Templetes</a>
+                src="../../../../assets/img/email-templates.svg" alt="Templetes" /></span>Email Templetes</a>
         </li>
 
         <li ng-class="{active: $state.includes('integrations-component')}">
             <a ng-click="stateGo($event, 'integrations-component')"><span class="nav-ico"><img
-                src="../../../../ng2/assets/img/integrations.svg" alt="Integrations" /></span>Integrations</a>
+                src="../../../../assets/img/integrations.svg" alt="Integrations" /></span>Integrations</a>
         </li>
 
         <li ng-class="{active: $state.includes('invoice-ticket-component')}">
             <a ng-click="stateGo($event, 'invoice-ticket-component')"><span class="nav-ico"><img
-                src="../../../../ng2/assets/img/invoice.svg" alt="Commissions" /></span>Invoice and Ticket</a>
+                src="../../../../assets/img/invoice.svg" alt="Commissions" /></span>Invoice and Ticket</a>
         </li>
         <li ng-class="{active: $state.includes('commission-component')}">
           <a ng-click="stateGo($event, 'commission-component')"><span class="nav-ico"><img
-                src="../../../../ng2/assets/img/commissions.svg" alt="Commissions" /></span>Commissions</a>
+                src="../../../../assets/img/commissions.svg" alt="Commissions" /></span>Commissions</a>
         </li>
 
         <li ng-class="{active: $state.includes('subscription-component')}">
             <a ng-click="stateGo($event, 'subscription-component')"><span class="nav-ico"><img
-                src="../../../../ng2/assets/img/subscription.svg" alt="Subscription" /></span>Subscription</a>
+                src="../../../../assets/img/subscription.svg" alt="Subscription" /></span>Subscription</a>
         </li>
       </ul>
       </nav>
