@@ -253,7 +253,7 @@
 
       function generateInitials(user) {
         var initials = [user.firstName, user.lastName].map(function (s) {
-          return s.charAt(0).toUpperCase();
+          return (s) ? s.charAt(0).toUpperCase() : '';
         }).join('');
         Utils.defineReadOnlyProperty(user, 'initials', initials);
       }
