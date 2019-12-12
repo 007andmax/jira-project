@@ -213,7 +213,7 @@ export class CompanyProfileComponent implements OnInit {
           ) {
             this.imageSrc = `/file/${this.currentCompany.logo.cropped.id}.jpg?t=${this.currentCompany.logo.updatedAt}`;
           } else {
-            this.imageSrc = "ng2/assets/img/company-logo.svg";
+            this.imageSrc = "../../../../../ng1/images/setting-module/company-logo.svg";
           }
           if (this.currentCompany.addresses.length > 0) {
             const timeZone = this.currentCompany.addresses[0].timeZone;

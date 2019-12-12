@@ -42,7 +42,7 @@ export class ProfileComponent implements OnInit {
   userProfileAddr: any;
   modalRef: BsModalRef;
   imageBase64 = "";
-  imageSrc = "/ng2/assets/img/user.jpg";
+  imageSrc = "../../../../../../ng1/images/setting-module/user.jpg";
 
   public currentUser: any;
   public profileForm: FormGroup;
@@ -422,7 +422,7 @@ export class ProfileComponent implements OnInit {
             res => {
               this.loading = false;
               if (res) {
-                this.imageSrc = "/ng2/assets/img/user.jpg";
+                this.imageSrc = "../../../../../../ng1/images/setting-module/user.jpg";
               }
             },
             error => {
