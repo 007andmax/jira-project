@@ -2,6 +2,7 @@ import { UserCompany } from './user-company';
 import { UserAvatar } from './user-avatar';
 import { UserSubscription } from './user-subscription';
 import { UserStatistic } from './user-statistic';
+import { ImageCropper } from '../../shared/image-cropper/class/image-cropper';
 
 export class User {
     accountType: string;
@@ -35,4 +36,5 @@ export class User {
     userEnabled: boolean;
     userStatistic: UserStatistic;
     constructor() { }
+    
 }

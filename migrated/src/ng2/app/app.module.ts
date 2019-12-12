@@ -100,6 +100,7 @@ import { UsersTableComponent } from './components/users/users-table/users-table.
 import { UsersAsideComponent } from './components/users/users-aside/users-aside.component';
 import { LeftPanelUsersComponent } from './components/left-panel/left-panel-users/left-panel-users.component';
 import { UserTableSubscriptionComponent } from './components/users/users-table/user-table-subscription/user-table-subscription.component';
+import { NotificationComponent } from './components/shared/notification/notification.component';
 
 
 /**
@@ -230,7 +231,8 @@ angular.module('quicktech')
     UsersTableComponent,
     UsersAsideComponent,
     LeftPanelUsersComponent,
-    UserTableSubscriptionComponent
+    UserTableSubscriptionComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,
@@ -318,7 +320,8 @@ angular.module('quicktech')
     DownloadAgentComponent,
     ImageCropperComponent,
     CompanyPasswordManagerComponent,
-    UsersComponent
+    UsersComponent,
+    AlertComponent
     // RecurringTicketsComponent
   ],
   providers: [

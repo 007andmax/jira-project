@@ -1,9 +1,9 @@
 import { Injectable, EventEmitter } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class AlertStateService {
+export class NotificationStateService {
   showAlert: EventEmitter<string> = new EventEmitter();
   constructor() { }
 
@@ -11,7 +11,7 @@ export class AlertStateService {
   * Initializes to subscribe for show alert
   * @param message message
   */
-  public oninitShowAlert(message: string) {
+  public oninitShowNotification(message: string) {
     this.showAlert.emit(message);
 
   }
@@ -19,7 +19,7 @@ export class AlertStateService {
   /**
   * Get to subscribe for show alert
   */
-  public getShowAlert() {
+  public getShowNotification() {
     return this.showAlert;
   }
 }

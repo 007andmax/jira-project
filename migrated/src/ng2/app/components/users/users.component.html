@@ -27,7 +27,7 @@
     <ng-template ngFor let-user
                    [ngForOf]="users"
                    [ngForTrackBy]="trackById">
-        <app-users-table [user]="user"></app-users-table>
+        <app-users-table [showArchivedUsers]="showArchivedUsers" [user]="user"></app-users-table>
       </ng-template>
       <div class="loading" *ngIf="showPreloader"></div>
     
@@ -38,4 +38,4 @@
     <div class="loading" style="display: none;"></div>
   </div>
 </div>
-<!--<app-users-aside></app-users-aside> -->
+<app-users-aside></app-users-aside>

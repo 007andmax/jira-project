@@ -21,7 +21,7 @@ companies:Array<Company> = [];
 reqUsers:Array<User> = [];
 showPreloader:boolean = true;
 filter:UserFilter = new UserFilter();
-showArchivedCompanies:boolean = false;
+showArchivedUsers:boolean = false;
 public infiniteScrollDisabled = false;
   public page_number: number = 0;
   constructor(private usersStateService:UsersStateService, private userListService:UserListService, 
@@ -31,7 +31,7 @@ public infiniteScrollDisabled = false;
 
   ngOnInit() {
     let getOnShowArchived = this.usersStateService.getOnShowArchived().subscribe(data => {
-      this.showArchivedCompanies = data;
+      this.showArchivedUsers = data;
      
       this.filter.setClientType(null);
       this.filter.clearFilter();
@@ -82,7 +82,7 @@ public infiniteScrollDisabled = false;
     this.userListService.addSubscription(archiveCompany);
   }
   private getUsersList(data) {
-    this.reqUsers = data.filter(item => ((!this.showArchivedCompanies) ? !item.deletedAt : item.deletedAt));
+    this.reqUsers = data.filter(item => ((!this.showArchivedUsers) ? !item.deletedAt : item.deletedAt));
      
    // this.onInirCalculate();
     this.reqUsers.sort((a, b) => ((a.firstName + a.lastName).toLowerCase() > (b.firstName + b.lastName).toLowerCase()) ?

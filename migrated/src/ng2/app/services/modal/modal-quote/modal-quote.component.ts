@@ -11,10 +11,11 @@ import { QuoteStateService } from "../../../components/billing/quotes/quote-crea
 import { QuoteService } from "../../quote/quote.service";
 import { takeUntil } from "rxjs/operators";
 import { Subject, Subscription } from "rxjs";
-import { AlertStateService } from 'src/ng2/app/components/shared/alert/services/alert-state.service';
+ 
 import { ConfirmStateService } from 'src/ng2/app/components/shared/confirm/services/confirm-state.service';
 import { ConfirmComponent } from 'src/ng2/app/components/shared/confirm/confirm.component';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
+import { NotificationStateService } from 'src/ng2/app/components/shared/notification/services/notification-state.service';
  
  
 
@@ -70,7 +71,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
     private userService: UsersService,
     private quoteStateService: QuoteStateService,
     private quoteService: QuoteService,
-    private alertState: AlertStateService,
+    private notificationStateService: NotificationStateService,
     private eRef: ElementRef,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,

@@ -5,7 +5,8 @@ import { QuoteStateService } from "../../components/billing/quotes/quote-create/
 import { catchError, tap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { QuoteResult } from '../../components/billing/quotes/class/quote-result';
-import { AlertStateService } from '../../components/shared/alert/services/alert-state.service';
+import { NotificationStateService } from '../../components/shared/notification/services/notification-state.service';
+ 
 
 /**
  * Quote service to work with api
@@ -37,7 +38,8 @@ export class QuoteService {
   constructor(
     private http: HttpClient,
     private quoteStateService: QuoteStateService,
-    private alertState: AlertStateService
+    private notificationStateService:NotificationStateService
+    
   ) { }
 
   /**
@@ -425,7 +427,7 @@ export class QuoteService {
   }
 
   private handleQuoteSent = (data, message) => {
-    this.alertState.oninitShowAlert(message);
+    this.notificationStateService.oninitShowNotification(message);
     // this.quoteStateService.setQuoteResult(message);
     // this.quoteStateService.setHandleQuoteHasSent();
     return data;

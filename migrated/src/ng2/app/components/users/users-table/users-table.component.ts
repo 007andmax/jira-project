@@ -5,25 +5,30 @@ import { Company } from 'src/ng2/app/interfaces/company/company';
 import { UsersService } from 'src/ng2/app/services/users/users.service';
 import { CurrentUser } from 'src/ng2/class/current-user/current-user';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
-import { AlertStateService } from '../../shared/alert/services/alert-state.service';
+ 
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { ARCHIVE_USER } from 'src/ng2/app/const/confirm';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AlertComponent } from '../../shared/alert/alert.component';
+import { UsersTableService } from './services/users-table.service';
 
 @Component({
   selector: 'app-users-table',
   templateUrl: './users-table.component.html',
-  styleUrls: ['./users-table.component.scss']
+  styleUrls: ['./users-table.component.scss'],
+  providers: [UsersTableService]
 })
 export class UsersTableComponent implements OnInit {
   @Input() user: User;
+  @Input() showArchivedUsers:boolean;
   companies: Array<Company> = [];
   currentUser: CurrentUser = new CurrentUser();
   constructor(private companiesStateService: CompaniesStateService, private usersService: UsersService,
-    private usersStateService: UsersStateService, private alertStateService: AlertStateService,
+    private usersStateService: UsersStateService,  
     private confirmStateService: ConfirmStateService,
-    private modalService: NgbModal, ) { }
+    private modalService: NgbModal, 
+    private usersTableService:UsersTableService) { }
 
   onChangeSubscriptions(data) {
     this.usersService.setSubscriptions(data).subscribe(res => {
@@ -64,12 +69,19 @@ export class UsersTableComponent implements OnInit {
 
     })
     this.currentUser = this.usersStateService.getCurrentUser();
-    console.log('this.currentUser', this.currentUser);
+    
     //this.sub.add(getOnCompanies);
   }
   delete() {
     if (this.user.isContact) {
-      this.alertStateService.oninitShowAlert('You cannot archive primary contact user');
+      const modalRef = this.modalService.open(AlertComponent, { windowClass: 'xs-modal' });
+      modalRef.componentInstance.message = `You cannot archive primary contact user`;
+      return;
+    }
+     if (this.usersTableService.getUsersCount(this.usersStateService.getAllUsers(),this.user.company.id,this.showArchivedUsers) === 1)
+    {
+      const modalRef = this.modalService.open(AlertComponent, { windowClass: 'xs-modal' });
+      modalRef.componentInstance.message = ` U can't archive all users. At least one must remain.`;
       return;
     }
     this.confirmStateService.setConfirmAction(ARCHIVE_USER);

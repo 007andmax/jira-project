@@ -11,7 +11,8 @@ import { ModalQuoteComponent } from "../../../../services/modal/modal-quote/moda
 import { NgbModal, NgbModalConfig } from "@ng-bootstrap/ng-bootstrap";
 import { FormGroup } from '@angular/forms';
 import { ISubscription } from 'rxjs/Subscription';
-import { AlertStateService } from '../../../shared/alert/services/alert-state.service';
+ 
+import { NotificationStateService } from '../../../shared/notification/services/notification-state.service';
 
 /**
  * Quote preview component
@@ -51,7 +52,8 @@ export class QuotePreviewComponent implements OnInit {
     private dateService: DateService,
     private quoteService: QuoteService,
     private modalService: NgbModal,
-    private alertState: AlertStateService,
+   
+    private notificationStateService:NotificationStateService,
     config: NgbModalConfig,
   ) { 
     config.backdrop = 'static';
@@ -255,7 +257,7 @@ export class QuotePreviewComponent implements OnInit {
           const id = res['id'];
           this.quoteService.downloadPdf(res['id']).subscribe((res) => {
             this.quoteService.downLoadFile(res, id,this.quote.client.name,this.quoteForCreate.quoteNumber);
-            this.alertState.oninitShowAlert('Quote has been saved');
+            this.notificationStateService.oninitShowNotification('Quote has been saved');
             this.quoteService.backToQuoteList();
           });
         });
@@ -267,7 +269,7 @@ export class QuotePreviewComponent implements OnInit {
         const id = res['id'];
         this.quoteService.downloadPdf(res['id']).subscribe((res) => {
           this.quoteService.downLoadFile(res, id,this.quote.client.name,this.quoteForCreate.quoteNumber)
-          this.alertState.oninitShowAlert('Quote has been saved');
+          this.notificationStateService.oninitShowNotification('Quote has been saved');
           this.quoteService.backToQuoteList();
         })
       })

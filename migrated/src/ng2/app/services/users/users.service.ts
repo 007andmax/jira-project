@@ -58,6 +58,10 @@ export class UsersService {
     return this.http.put(this.apiUrl + `subscription/${data.id}`,data);
   }
 
+  public addUser (data) {
+    
+    return this.http.post(this.apiUrl + `users`,data);
+  }
   public onArchiveUsers(ids) {
     return this.http.post(this.apiUrl + `users/archive`,{ ids: ids });
   }

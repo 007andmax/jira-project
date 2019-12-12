@@ -3,13 +3,15 @@ import { UserAvatarOrigin } from './user-avatar-origin';
 
 export class UserAvatar {
     base64: string;
-    cropped: UserAvatarCropped;
+    cropped: UserAvatarCropped = new UserAvatarCropped();
     h: number;
     id: string;
-    origin: UserAvatarOrigin;
+    origin: UserAvatarOrigin = new UserAvatarOrigin();
     updatedAt: number;
     w: number;
     x: number;
     y: number;
-    constructor() { }
+    constructor() { 
+     
+    }
 }

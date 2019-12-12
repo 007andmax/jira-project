@@ -17,6 +17,7 @@ import { ImageCropperComponent } from '../../shared/image-cropper/image-cropper.
 import { CompanyTagsStateService } from '../company-tags/states/company-tags-state.service';
 import { ItemFilterPerson } from '../../left-panel/left-panel-companies/class/item-filter-person';
 import { Subscription } from 'rxjs';
+import { CROPP_AVATAR_COMPANY } from 'src/ng2/app/const/image-cropp';
 
 @Component({
   selector: 'app-company-edit-aside',
@@ -243,7 +244,7 @@ public onCheckGoogleAutoComplete () {
   }
   public onCroppImage() {
    let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
-      if (!this.opened || !data) return;
+      if (!this.opened || !data || this.imageCropperStateService.getAction() !== CROPP_AVATAR_COMPANY) return;
        
      
         if (data.edit) {
@@ -341,8 +342,9 @@ public onCheckGoogleAutoComplete () {
     });
   };
   public uploadFileOnBrower(event) {
-     
-    if (event.target.value) {
+    this.imageCropperStateService.setAction(CROPP_AVATAR_COMPANY);
+     this.imageCropperStateService.uploadFileOnBrower(event);
+   /* if (event.target.value) {
       const file = event.target.files[0];
        
       this.uploadFile(file).then((data: any) => {
@@ -357,9 +359,9 @@ public onCheckGoogleAutoComplete () {
 
       });
 
-    } else alert('Nothing')
+    } else alert('Nothing')*/
   }
-  uploadFile(file) {
+  /*uploadFile(file) {
     return new Promise((resolve, reject) => {
       //  var file = this.dataURLtoFile(this.img, this.fileName);
        
@@ -379,7 +381,7 @@ public onCheckGoogleAutoComplete () {
       xhr.open("POST", "/file?isAvatar=true&ratio=1");
       xhr.send(fd);
     });
-  }
+  }*/
   changeFile(file) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();

@@ -11,7 +11,8 @@ import {ModalQuoteComponent} from "../../../services/modal/modal-quote/modal-quo
 import {NgbModal, NgbModalConfig} from "@ng-bootstrap/ng-bootstrap";
 import { Subscription } from 'rxjs';
 import { QuoteResult } from './class/quote-result';
-import { AlertStateService } from '../../shared/alert/services/alert-state.service';
+ 
+import { NotificationStateService } from '../../shared/notification/services/notification-state.service';
 
 /**
  * Password quotes component
@@ -60,7 +61,8 @@ export class QuotesComponent implements OnInit,OnDestroy {
     private quoteStateService: QuoteStateService,
     private quoteRealTimeService: QuoteRealTimeService,
     private modalService: NgbModal,
-    private alertState:AlertStateService,
+  
+    private notificationStateService:NotificationStateService,
     config: NgbModalConfig,
   ) {
     config.backdrop = 'static';

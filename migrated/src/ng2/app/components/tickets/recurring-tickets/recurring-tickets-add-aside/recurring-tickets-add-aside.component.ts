@@ -13,8 +13,9 @@ import { RecurringTicketsService } from '../services/recurring-tickets.service';
 import { Validate } from '../class/validate';
 import { CreateRecurringTicketsProduct } from '../class/create-recurring-tickets-product';
 import { CreateRecurringTicketsService } from '../class/create-recurring-tickets-service';
-import { AlertStateService } from '../../../shared/alert/services/alert-state.service';
+ 
 import { DevicesRecurringTicketsStateService } from '../devices-recurring-tickets/services/devices-recurring-tickets-state.service';
+import { NotificationStateService } from '../../../shared/notification/services/notification-state.service';
 
 @Component({
   selector: 'app-recurring-tickets-add-aside',
@@ -46,7 +47,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
    * @param {SelectClientCompanyStateService} companiesState to work companies state
    * @param {RecurringTicketsStateService} recurringState to work recurring state
    * @param {RecurringTicketsService} createService Service to work with create recurring ticket
-   * @param {AlertStateService} alertState to work alert state
+  
    * 
    */
   constructor(
@@ -57,7 +58,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     private companiesState: SelectClientCompanyStateService,
     private recurringState: RecurringTicketsStateService,
     public createService: RecurringTicketsService,
-    private alertState: AlertStateService,
+    private notificationStateService: NotificationStateService,
     private devicesRecurringTicketsStateService: DevicesRecurringTicketsStateService,
   ) {
   }
@@ -440,7 +441,7 @@ export class RecurringTicketsAddAsideComponent implements OnInit, OnDestroy {
     this.services.forEach((item: ForCreateService) => (item.name) && this.recurringState.getCreateTicket().addService(new CreateRecurringTicketsService(item.versionedId.id, item.description, item.duration)));
      
     this.recurringService.createTicket(this.recurringState.getCreateTicket()).subscribe((res) => {
-      this.alertState.oninitShowAlert("Recurring ticket has been created");
+      this.notificationStateService.oninitShowNotification("Recurring ticket has been created");
       if (!this.copy) {
         this.close();
       } else {
