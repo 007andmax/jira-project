@@ -6,6 +6,7 @@ import { UsersStateService } from 'src/ng2/app/states/users/users-state.service'
 import { UsersAsideService } from './services/users-aside.service';
 import { UserValidate } from '../class/user-validate';
 import { UsersService } from 'src/ng2/app/services/users/users.service';
+import { SelectClientCompanyStateService } from '../../shared/select-client-company/services/select-client-company-state.service';
 
 @Component({
   selector: 'app-users-aside',
@@ -14,12 +15,13 @@ import { UsersService } from 'src/ng2/app/services/users/users.service';
   providers: [UsersAsideService]
 })
 export class UsersAsideComponent implements OnInit {
-  public opened = true;
+  public opened = false;
   user: UserProfile = new UserProfile();
   allTitles: Array<string> = [];
-  validate:UserValidate = new UserValidate();
+  validate: UserValidate = new UserValidate();
   constructor(private imageCropperStateService: ImageCropperStateService, private usersStateService: UsersStateService,
-    private usersAsideService: UsersAsideService, private usersService:UsersService) { }
+    private usersAsideService: UsersAsideService, private usersService: UsersService,
+    private companiesState: SelectClientCompanyStateService,) { }
 
   ngOnInit() {
     if (this.usersStateService.getAllUsers().length > 0) this.getUsersTitle(this.usersStateService.getAllUsers());
@@ -28,6 +30,9 @@ export class UsersAsideComponent implements OnInit {
     })
     this.usersAsideService.addSubscription(getOnUsers);
     this.onCroppImage();
+    this.usersStateService.getOpenAside().subscribe(data => {
+      this.opened = true;
+    })
   }
   public onCroppImage() {
     let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
@@ -66,15 +71,15 @@ export class UsersAsideComponent implements OnInit {
     this.validate.addPhoneNumber();
   }
   onChangeSubscriptions(data) {
-console.log('data',data);
-this.user.setSubscriptions(data);
+    console.log('data', data);
+    this.user.setSubscriptions(data);
   }
   onCheckEmail() {
     this.validate.checkValidPrimaryEmail(this.user.primaryEmail);
   }
   onCheckPhoneNumber(i) {
-    this.validate.checkValidPhoneNumber(i,this.user.phoneNumbers[i].number);
-    console.log('this.validate',this.validate.getPhoneNumber(i));
+    this.validate.checkValidPhoneNumber(i, this.user.phoneNumbers[i].number);
+    console.log('this.validate', this.validate.getPhoneNumber(i));
   }
   onSelectDesignation(data) {
     this.user.setDesignation(data);
@@ -92,17 +97,27 @@ this.user.setSubscriptions(data);
   public onSelectCompany(selectClient) {
 
     this.user.serCompanyId((selectClient === 'null') ? null : selectClient.item.id);
-   if (selectClient !== 'null') this.validate.setCompanyValid();
+    if (selectClient !== 'null') this.validate.setCompanyValid();
 
+  }
+  getUserType() {
+    if (this.user.role === 'USER') return 'Standar User';
+    if (this.user.role === 'ADMIN') return 'Manager';
   }
   onAdd() {
     if (!this.validate.isValidate(this.user)) return;
-    
 
+    console.log('33333333333');
     this.usersService.addUser(this.user).subscribe(data => {
 
     })
 
+  }
+  close() {
+    this.opened = false;
+    this.user = new UserProfile();
+    this.validate = new UserValidate();
+    this.companiesState.onInitClear();
   }
   public trackByIndex(index, item) {
     return index;

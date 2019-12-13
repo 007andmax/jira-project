@@ -16,5 +16,7 @@ count:number = 0;
       this.count = data;
     })
   }
-
+  addUser () {
+    this.usersStateService.onOpenAsige();
+  }
 }

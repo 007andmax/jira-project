@@ -64,7 +64,7 @@
           <div class="grey-dropdown" ngbDropdown>
             <input type="text"
                    placeholder="Select User Type"
-                   [value]="user.role"
+                   [value]="getUserType()"
                    id="dropdownBasic1"
                    ngbDropdownToggle>
             <i class="icn-sm report-caret-icon"></i>
@@ -74,23 +74,37 @@
               <button ngbDropdownItem (click)="onSelectRole('ADMIN')">Manager</button>
             </div>
           </div>
+          <ng-template ngFor let-phone *ngIf="user.phoneNumbers.length > 1"
+          [ngForOf]="user.phoneNumbers"
+          [ngForTrackBy]="trackById" let-i="index" [ngForTrackBy]="trackByIndex">
+          <div *ngIf="i > 0">
+          <mat-error *ngIf="!validate.getPhoneNumber(i)"  >
+              Phone number is required
+            </mat-error>
+            <p>
+              Additional phone
+              </p>
+          <input type="text"
+          [(ngModel)]="phone.number"
+          (input)="onCheckPhoneNumber(i)"
+          placeholder="Enter Primary Phone">
+        </div>
+</ng-template>
         </div>
         <div class="col-md-6 with-new-link">
           <p>
             Primary Phone
             <span class="new-link" (click)="addPhoneNumber()">+ Add Phone</span>
           </p>
-          <ng-template ngFor let-phone
-          [ngForOf]="user.phoneNumbers"
-          [ngForTrackBy]="trackById" let-i="index" [ngForTrackBy]="trackByIndex">
-          <mat-error *ngIf="!validate.getPhoneNumber(i)">
+          
+          <mat-error *ngIf="!validate.getPhoneNumber(0)">
               Phone number is required
             </mat-error>
           <input type="text"
-          [(ngModel)]="phone.number"
-          (input)="onCheckPhoneNumber(i)"
+          [(ngModel)]="user.phoneNumbers[0].number"
+          (input)="onCheckPhoneNumber(0)"
           placeholder="Enter Primary Phone">
-</ng-template>
+ 
       
         </div>
         <div class="col-md-12">
@@ -101,7 +115,7 @@
         <div class="col-md-12 new-users-content__modal--content-footer">
           <div class="d-f">
             <button class="btn-new btn-primary" (click)="onAdd()">Add User</button>
-            <button class="btn-new disabled">Cancel</button>
+            <button class="btn-new disabled" (click)="close()">Cancel</button>
           </div>
         </div>
       </div>

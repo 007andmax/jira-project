@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { UsersService } from '../../services/users/users.service';
 import { CurrentUser } from 'src/ng2/class/current-user/current-user';
 import { User } from '../../components/users/class/user';
+import { retry } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +15,10 @@ export class UsersStateService {
   onShowArchived: EventEmitter<any> = new EventEmitter();
   onFilter: EventEmitter<any> = new EventEmitter();
   onCount: EventEmitter<any> = new EventEmitter();
-  userForArchive:User = null;
+  openAside: EventEmitter<any> = new EventEmitter();
+  userForArchive: User = null;
 
-  
+
   constructor(private userService: UsersService, ) {
 
   }
@@ -26,12 +28,19 @@ export class UsersStateService {
       this.setAllUsers(data);
       this.onInitGetUsers(data);
     })
-    this.userService.getCurrentUser().subscribe((data:any) => {
+    this.userService.getCurrentUser().subscribe((data: any) => {
       this.currentUser = new CurrentUser(data);
       this.onInitCurrentUser(data);
     })
   }
-  public  setUserForArchive(data) {
+  public onOpenAsige() {
+    this.openAside.emit(null);
+  }
+  public getOpenAside() {
+    return this.openAside;
+  }
+
+  public setUserForArchive(data) {
     this.userForArchive = data;
   }
   public getUserForArchive() {
@@ -75,13 +84,13 @@ export class UsersStateService {
   public getAllUsers() {
     return this.allUsers;
   }
-public setOnShowArchived(data) {
-  this.onShowArchived.emit(data);
-}
-    /**
-   * Change user permissionsss
-   * @permissions - permissions to change
-   */
+  public setOnShowArchived(data) {
+    this.onShowArchived.emit(data);
+  }
+  /**
+ * Change user permissionsss
+ * @permissions - permissions to change
+ */
   public changeUserPermissions(permissions) {
     return this.currentUser.permissions = permissions;
   }

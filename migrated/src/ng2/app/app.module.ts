@@ -101,6 +101,7 @@ import { UsersAsideComponent } from './components/users/users-aside/users-aside.
 import { LeftPanelUsersComponent } from './components/left-panel/left-panel-users/left-panel-users.component';
 import { UserTableSubscriptionComponent } from './components/users/users-table/user-table-subscription/user-table-subscription.component';
 import { NotificationComponent } from './components/shared/notification/notification.component';
+import { UsersAsideEditComponent } from './components/users/users-aside-edit/users-aside-edit.component';
 
 
 /**
@@ -232,7 +233,8 @@ angular.module('quicktech')
     UsersAsideComponent,
     LeftPanelUsersComponent,
     UserTableSubscriptionComponent,
-    NotificationComponent
+    NotificationComponent,
+    UsersAsideEditComponent
   ],
   imports: [
     BrowserModule,
