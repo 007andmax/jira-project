@@ -3,6 +3,8 @@ import { UsersService } from '../../services/users/users.service';
 import { CurrentUser } from 'src/ng2/class/current-user/current-user';
 import { User } from '../../components/users/class/user';
 import { retry } from 'rxjs/operators';
+import { UserPipe } from '../../pipe/user.pipe';
+import { UserProfile } from '../../components/users/class/user-profile';
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +12,14 @@ import { retry } from 'rxjs/operators';
 export class UsersStateService {
   allUsers = [];
   currentUser: CurrentUser;
+  userForEdit:UserProfile = null;
   onGetUsers: EventEmitter<any> = new EventEmitter();
   onGetCurrentUser: EventEmitter<any> = new EventEmitter();
   onShowArchived: EventEmitter<any> = new EventEmitter();
   onFilter: EventEmitter<any> = new EventEmitter();
   onCount: EventEmitter<any> = new EventEmitter();
   openAside: EventEmitter<any> = new EventEmitter();
+  openEditAside: EventEmitter<any> = new EventEmitter();
   userForArchive: User = null;
 
 
@@ -33,12 +37,25 @@ export class UsersStateService {
       this.onInitCurrentUser(data);
     })
   }
+  public setUserForEdit(data) {
+    this.userForArchive = data;
+  }
+  public getuserForEdit() {
+    return this.userForArchive;
+  }
   public onOpenAsige() {
     this.openAside.emit(null);
   }
   public getOpenAside() {
     return this.openAside;
   }
+  public onOpenEditAsige() {
+    this.openEditAside.emit(null);
+  }
+  public getOpenEditAside() {
+    return this.openEditAside;
+  }
+
 
   public setUserForArchive(data) {
     this.userForArchive = data;

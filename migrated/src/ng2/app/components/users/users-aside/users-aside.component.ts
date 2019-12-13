@@ -7,6 +7,8 @@ import { UsersAsideService } from './services/users-aside.service';
 import { UserValidate } from '../class/user-validate';
 import { UsersService } from 'src/ng2/app/services/users/users.service';
 import { SelectClientCompanyStateService } from '../../shared/select-client-company/services/select-client-company-state.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ImageCropperComponent } from '../../shared/image-cropper/image-cropper.component';
 
 @Component({
   selector: 'app-users-aside',
@@ -21,7 +23,8 @@ export class UsersAsideComponent implements OnInit {
   validate: UserValidate = new UserValidate();
   constructor(private imageCropperStateService: ImageCropperStateService, private usersStateService: UsersStateService,
     private usersAsideService: UsersAsideService, private usersService: UsersService,
-    private companiesState: SelectClientCompanyStateService,) { }
+    private companiesState: SelectClientCompanyStateService,
+    private modalService: NgbModal,) { }
 
   ngOnInit() {
     if (this.usersStateService.getAllUsers().length > 0) this.getUsersTitle(this.usersStateService.getAllUsers());
@@ -32,6 +35,7 @@ export class UsersAsideComponent implements OnInit {
     this.onCroppImage();
     this.usersStateService.getOpenAside().subscribe(data => {
       this.opened = true;
+      
     })
   }
   public onCroppImage() {
@@ -109,7 +113,7 @@ export class UsersAsideComponent implements OnInit {
 
     console.log('33333333333');
     this.usersService.addUser(this.user).subscribe(data => {
-
+      this.close();
     })
 
   }

@@ -10,6 +10,11 @@ export class UserValidate {
     rePhoneNumber = /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/;
 
     constructor() { }
+    public addPhoneNumbers (phoneNumbers) {
+        phoneNumbers.forEach((element,index) => {
+            if (index > 0) this.addPhoneNumber();
+        });
+    }
     public addPhoneNumber() {
         this.phoneNumber.push(true);
     }

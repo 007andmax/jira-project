@@ -48,7 +48,7 @@
         </div>
         <div class="col-md-6">
           <p>Role</p>
-          <app-select-search [list]="allTitles"
+          <app-select-search [editItem]="(user.designation) ? user.designation : null" [list]="allTitles"
                          (onSelectedItem)="onSelectDesignation($event)"></app-select-search>
         
         </div>
@@ -57,8 +57,8 @@
                 Please enter first name
               </mat-error>
           <p>Company</p>
-          <app-select-client-company [valid]="validate.getCompany()" [blockEditMode]="true"  style="width: 75%;" class="light-dropdown"
-          [filter]="true" (selectedItem)="onSelectCompany($event)"></app-select-client-company>
+          <app-select-client-company [valid]="validate.getCompany()" style="width: 75%;" class="light-dropdown"
+            (selectedItem)="onSelectCompany($event)"></app-select-client-company>
         </div>
         <div class="col-md-6">
           <p>User Type</p>
@@ -115,7 +115,7 @@
 
         <div class="col-md-12 new-users-content__modal--content-footer">
           <div class="d-f">
-            <button class="btn-new btn-primary" (click)="onAdd()">Add User</button>
+            <button class="btn-new btn-primary" (click)="onSave()">Add User</button>
             <button class="btn-new disabled" (click)="close()">Cancel</button>
           </div>
         </div>

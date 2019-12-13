@@ -57,7 +57,7 @@
               </mat-error>
           <p>Company</p>
           <app-select-client-company [valid]="validate.getCompany()" [blockEditMode]="true"  style="width: 75%;" class="light-dropdown"
-          [filter]="true" (selectedItem)="onSelectCompany($event)"></app-select-client-company>
+           (selectedItem)="onSelectCompany($event)"></app-select-client-company>
         </div>
         <div class="col-md-6">
           <p>User Type</p>

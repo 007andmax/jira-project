@@ -60,7 +60,11 @@ export class UsersTableComponent implements OnInit {
     }
     return '';
   };
-
+  edit() {
+    console.log('egegegege');
+    this.usersStateService.setUserForArchive(this.user);
+    this.usersStateService.onOpenEditAsige();
+  }
   ngOnInit() {
     if (!this.user.firstName) console.log('user', this.user);
     if (this.companiesStateService.getCompanies().length > 0) this.companies = this.companiesStateService.getCompanies();

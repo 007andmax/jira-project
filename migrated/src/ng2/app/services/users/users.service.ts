@@ -12,7 +12,7 @@ import { UsersStateService } from '../../states/users/users-state.service';
 export class UsersService {
 
   private apiUrl = environment.apiUrl;
- 
+
   //allUsers = [];
 
   /**
@@ -21,14 +21,14 @@ export class UsersService {
    */
   public constructor(
     private http: HttpClient,
-   
-  ) {}
+
+  ) { }
 
   /**
    * Get all users
    */
   public getAllusers() {
-   
+
     return this.http.get(this.apiUrl + 'users');
   }
 
@@ -55,15 +55,23 @@ export class UsersService {
   }
 
   public setSubscriptions(data) {
-    return this.http.put(this.apiUrl + `subscription/${data.id}`,data);
+    return this.http.put(this.apiUrl + `subscription/${data.id}`, data);
   }
 
-  public addUser (data) {
-    
-    return this.http.post(this.apiUrl + `users`,data);
+  public addUser(data) {
+
+    return this.http.post(this.apiUrl + `users`, data);
+  }
+  public changeAvatar(id, data) {
+
+    return this.http.post(this.apiUrl + `users/${id}/avatar`, data);
+  }
+  public updateUser(data) {
+
+    return this.http.put(this.apiUrl + `users/${data.id}`, data);
   }
   public onArchiveUsers(ids) {
-    return this.http.post(this.apiUrl + `users/archive`,{ ids: ids });
+    return this.http.post(this.apiUrl + `users/archive`, { ids: ids });
   }
 
 }

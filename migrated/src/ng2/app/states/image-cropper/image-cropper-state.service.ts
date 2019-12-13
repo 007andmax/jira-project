@@ -1,6 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ImageCropperComponent } from '../../components/shared/image-cropper/image-cropper.component';
+import { ModalImageCropperStateService } from '../../services/modal/modal-image-cropper/services/modal-image-cropper-state.service';
+import { ImageCroper } from '../../services/modal/modal-image-cropper/class/image-croper';
+ 
  
 
 @Injectable({
@@ -9,7 +10,7 @@ import { ImageCropperComponent } from '../../components/shared/image-cropper/ima
 export class ImageCropperStateService {
   onConfirm: EventEmitter<any> = new EventEmitter();
   action:string = null;
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalImageCropperStateService:ModalImageCropperStateService) { }
   public setConfirm(data) {
     this.onConfirm.emit(data);
   }
@@ -30,7 +31,9 @@ export class ImageCropperStateService {
       this.uploadFile(file).then((data: any) => {
         let res = JSON.parse(data.response);
         // this.changeFile(file).then((base64: string): any => {
-       /* const modalRef = this.modalService.open(ImageCropperComponent);
+          console.log('res',res);
+          this.modalImageCropperStateService.onInitOpen(new ImageCroper(res.base64,res.id));
+       /* const modalRef = modalService.open(ImageCropperComponent);
         modalRef.componentInstance.imageBase64 = res.base64;
         modalRef.componentInstance.id = res.id;
         event.target.value = null;*/
