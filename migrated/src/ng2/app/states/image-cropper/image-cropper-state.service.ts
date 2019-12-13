@@ -30,10 +30,10 @@ export class ImageCropperStateService {
       this.uploadFile(file).then((data: any) => {
         let res = JSON.parse(data.response);
         // this.changeFile(file).then((base64: string): any => {
-        const modalRef = this.modalService.open(ImageCropperComponent);
+       /* const modalRef = this.modalService.open(ImageCropperComponent);
         modalRef.componentInstance.imageBase64 = res.base64;
         modalRef.componentInstance.id = res.id;
-        event.target.value = null;
+        event.target.value = null;*/
 
         // });
 
