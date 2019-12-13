@@ -93,6 +93,10 @@ public uploadAvatar (file) {
   return this.http.post(this.apiUrl + 'file?isAvatar=true&ratio=1',{file:file});
 }
 
+public editCompanyAvatar (id,data) {
+  return this.http.post(this.apiUrl + `/company/${id}/logo`,data);
+}
+
 public setСustomStorage (customKey,value) {
   return this.http.post(this.apiUrl + 'customStorage/user',{
     customKey: customKey,

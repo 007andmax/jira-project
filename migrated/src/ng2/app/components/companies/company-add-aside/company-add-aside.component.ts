@@ -13,6 +13,8 @@ import { CompanyValdiate } from '../class/company-validate';
 import {} from 'google-maps';
 import { ItemFilterPerson } from '../../left-panel/left-panel-companies/class/item-filter-person';
 import { Subscription } from 'rxjs';
+import { ModalImageCropperStateService } from 'src/ng2/app/services/modal/modal-image-cropper/services/modal-image-cropper-state.service';
+import { ImageCroper } from 'src/ng2/app/services/modal/modal-image-cropper/class/image-croper';
 @Component({
   selector: 'app-company-add-aside',
   templateUrl: './company-add-aside.component.html',
@@ -42,7 +44,8 @@ export class CompanyAddAsideComponent implements OnInit,OnDestroy {
   constructor(private companiesStateService: CompaniesStateService, private companiesService: CompaniesService,
     private usersStateService: UsersStateService, private modalService: NgbModal, private imageCropperStateService: ImageCropperStateService,
     private elRef: ElementRef,
-    public cd: ChangeDetectorRef,) { }
+    public cd: ChangeDetectorRef,
+    private modalImageCropperStateService:ModalImageCropperStateService) { }
 
   ngOnInit() {
 
@@ -274,11 +277,13 @@ export class CompanyAddAsideComponent implements OnInit,OnDestroy {
       this.uploadFile(file).then((data: any) => {
         let res = JSON.parse(data.response);
         // this.changeFile(file).then((base64: string): any => {
-        const modalRef = this.modalService.open(ImageCropperComponent);
-        modalRef.componentInstance.imageBase64 = res.base64;
-        modalRef.componentInstance.id = res.id;
+          this.modalImageCropperStateService.onInitOpen(new ImageCroper(res.base64,res.id));
+        
+     //   const modalRef = this.modalService.open(ImageCropperComponent);
+     //   modalRef.componentInstance.imageBase64 = res.base64;
+     //   modalRef.componentInstance.id = res.id;
         event.target.value = null;
-
+        this.cd.detectChanges();
         // });
 
       });

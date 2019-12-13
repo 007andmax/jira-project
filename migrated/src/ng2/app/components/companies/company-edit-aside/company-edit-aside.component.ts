@@ -18,6 +18,10 @@ import { CompanyTagsStateService } from '../company-tags/states/company-tags-sta
 import { ItemFilterPerson } from '../../left-panel/left-panel-companies/class/item-filter-person';
 import { Subscription } from 'rxjs';
 import { CROPP_AVATAR_COMPANY } from 'src/ng2/app/const/image-cropp';
+import { ModalImageCropperStateService } from 'src/ng2/app/services/modal/modal-image-cropper/services/modal-image-cropper-state.service';
+import { ImageCroper } from 'src/ng2/app/services/modal/modal-image-cropper/class/image-croper';
+import { CompanyEditLogo } from '../class/company-edit-logo';
+import { ImageCropper } from '../../shared/image-cropper/class/image-cropper';
 
 @Component({
   selector: 'app-company-edit-aside',
@@ -51,6 +55,7 @@ export class CompanyEditAsideComponent implements OnInit,OnDestroy {
     private companySubscriptionState: CompanySubscriptionStateService,
     private companyTimeZoneState: CompanyTimeZoneStateService,
     private companyTagsStateService:CompanyTagsStateService,
+    private modalImageCropperStateService:ModalImageCropperStateService,
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -143,6 +148,7 @@ public onCheckGoogleAutoComplete () {
        
       this.opened = true;
       //this.company.
+      this.cd.detectChanges();
     })
     this.sub.add(getCompanyFromEdit);
   }
@@ -239,6 +245,7 @@ public onCheckGoogleAutoComplete () {
    let updateCompany =  this.companiesService.updateCompany(this.company).subscribe(data => {
        
       this.close();
+      this.cd.detectChanges();
     })
     this.sub.add(updateCompany);
   }
@@ -246,21 +253,37 @@ public onCheckGoogleAutoComplete () {
    let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
       if (!this.opened || !data || this.imageCropperStateService.getAction() !== CROPP_AVATAR_COMPANY) return;
        
-     
-        if (data.edit) {
-          this.company.editLogo(data);
+      this.companiesService.editCompanyAvatar(this.company.id,new CompanyEditLogo(data.croppedImage.base64,data.croppedImage.height,
+        this.company.id,(data.edit) ? this.company.logo.origin.id : data.id,data.croppedImage.width,data.croppedImage.imagePosition.x1,data.croppedImage.imagePosition.y1)).subscribe(res => {
+          this.company.editLogo(res);
+        })
+      /*  if (data.edit) {
+          this.companiesService.editCompanyAvatar(this.company.id,new CompanyEditLogo(data.croppedImage.base64,data.croppedImage.height,
+            this.company.id,this.company.logo.origin.id,data.croppedImage.width,data.croppedImage.imagePosition.x1,data.croppedImage.imagePosition.y1)).subscribe(res => {
+              this.company.editLogo(res);
+            })
+         
         } else {
+          this.companiesService.editCompanyAvatar(this.company.id,new CompanyEditLogo(data.croppedImage.base64,data.croppedImage.height,
+            this.company.id,data.id,data.croppedImage.width,data.croppedImage.imagePosition.x1,data.croppedImage.imagePosition.y1)).subscribe(res => {
+              this.company.editLogo(res);
+            })
           this.company.setLogo(data);
-        }
+        }*/
    
     })
     this.sub.add(getConfirm);
   }
   public onChangeAvatar() {
+    console.log('onChangeAvatar');
     this.downloadCompanyLogo().then(data => {
-      const modalRef = this.modalService.open(ImageCropperComponent);
-      modalRef.componentInstance.imageBase64 = data;
-      modalRef.componentInstance.id = this.company.logo.origin.id;
+   //   const modalRef = this.modalService.open(ImageCropperComponent);
+      console.log('data',data);
+    //  modalRef.componentInstance.imageBase64 = data;
+    //  modalRef.componentInstance.id = this.company.logo.origin.id;
+    this.modalImageCropperStateService.onInitOpen(new ImageCroper(data,this.company.logo.origin.id,true));
+    this.cd.detectChanges();
+      
     })
   }
   private getTehusers(list) {
@@ -310,22 +333,19 @@ public onCheckGoogleAutoComplete () {
     return editValue;
   }
   getCompanyLogoUrl() {
-    if (this.company && this.company.logo && this.company.logo && this.company.logo.base64 && !this.company.logo.cropped) {
-      return this.company.logo.base64;
-    } else if (!(this.company && this.company.logo && this.company.logo.cropped && this.company.logo.cropped.id)) {
-      return '/company/default/logo' + '.jpg';
-    }
-    return `/file/${this.company.logo.cropped.id}.jpg?t=${(this.company.logo.updatedAt ? this.company.logo.updatedAt :
-      '')}`;
-  };
+    if (this.company && this.company.logo && this.company.logo && this.company.logo.base64 && !this.company.logo.cropped) return this.company.logo.base64;
+    if (this.company && this.company.logo && this.company.logo.cropped && this.company.logo.cropped.id) return `/file/${this.company.logo.cropped.id}`;
+    if (this.company && this.company.logo && this.company.logo.origin && this.company.logo.origin.id ) return `/file/${this.company.logo.origin.id}`;
+    return '/company/default/logo.jpg';
+  }
   downloadCompanyLogo() {
     return new Promise((resolve, reject) => {
       if (this.company.logo && this.company.logo && this.company.logo.base64 && !this.company.logo.cropped) {
         resolve(this.company.logo.base64);
-      } else if (this.company.logo && this.company.logo.cropped) {
+      } else  {
         var req = new XMLHttpRequest();
         req.responseType = "arraybuffer";
-        req.open('GET', `/file/${this.company.logo.origin.id}.jpg?t=${(this.company.logo.updatedAt ? this.company.logo.updatedAt : '')}`, true); /* Третий аргумент true означает асинхронность */
+        req.open('GET',`/file/${this.company.logo.origin.id}.jpg` , true); /* Третий аргумент true означает асинхронность */
         req.onload = (oEvent) => {
 
           var blob = new Blob([req.response], { type: "image/jpg" });
@@ -350,10 +370,13 @@ public onCheckGoogleAutoComplete () {
       this.uploadFile(file).then((data: any) => {
         let res = JSON.parse(data.response);
         // this.changeFile(file).then((base64: string): any => {
-        const modalRef = this.modalService.open(ImageCropperComponent);
-        modalRef.componentInstance.imageBase64 = res.base64;
-        modalRef.componentInstance.id = res.id;
+      //  const modalRef = this.modalService.open(ImageCropperComponent,res.base64);
+        console.log('res.base64',res.base64);
+      //  modalRef.componentInstance.imageBase64 = res.base64;
+     //   modalRef.componentInstance.id = res.id;
         event.target.value = null;
+        this.modalImageCropperStateService.onInitOpen(new ImageCroper(res.base64,res.id));
+      this.cd.detectChanges();
 
         // });
 

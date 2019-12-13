@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { CompaniesService } from '../../services/company/companies.service';
 import { Company } from '../../interfaces/company/company';
 import { CompaniesListService } from './services/companies-list.service';
@@ -50,6 +50,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService, private devicesState: DevicesSateService, private usersStateService: UsersStateService,
     private leftPanelStateService: LeftPanelStateService,
     private companiesRealTimeService: CompaniesRealTimeService,
+    public cd: ChangeDetectorRef
    ) { }
 
   ngOnInit() {
@@ -172,7 +173,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       this.getClientsList(this.companiesStateService.getCompanies());
 
     }
-
+this.cd.detectChanges();
   }
   private onInirCalculate() {
     this.calculateCount.onCalculate(this.reqCompaniesList, this.left_filter);

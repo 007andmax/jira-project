@@ -43,7 +43,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     private elRef: ElementRef) { }
 
   ngOnInit() {
-
+console.log('this',this.company);
     /*  this.companiesStateService.getOnShowArchived().subscribe(data => {
         this.showArchivedCompanies = data;
       })*/
@@ -100,6 +100,10 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
       }
     }
   }
+checkLogo() {
+  return (this.company && this.company.logo && this.company.logo.cropped && this.company.logo.cropped.id || this.company && this.company.logo && this.company.logo.origin && this.company.logo.origin.id)
+}
+
   goToDashboard() {
 
 
@@ -118,14 +122,11 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     }
   }
   getCompanyLogoUrl() {
-    if (this.company && this.company.logo && this.company.logo && this.company.logo.base64 && !this.company.logo.cropped) {
-      return this.company.logo.base64;
-    } else if (!(this.company && this.company.logo && this.company.logo.cropped && this.company.logo.cropped.id)) {
-      return '/company/default/logo.jpg';
-    }
-    return `/file/${this.company.logo.cropped.id}.jpg?t=${(this.company.logo.updatedAt ? this.company.logo.updatedAt :
-      '')}`;
-  };
+    if (this.company && this.company.logo && this.company.logo && this.company.logo.base64 && !this.company.logo.cropped) return this.company.logo.base64;
+    if (this.company && this.company.logo && this.company.logo.cropped && this.company.logo.cropped.id) return `/file/${this.company.logo.cropped.id}`;
+    if (this.company && this.company.logo && this.company.logo.origin && this.company.logo.origin.id ) return `/file/${this.company.logo.origin.id}`;
+    return '/company/default/logo.jpg';
+  }
   getUserName() {
     return `${this.primaryContact.firstName} ${this.primaryContact.lastName}`;
   };
@@ -137,6 +138,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
   }
   edit() {
     let getCompany = this.companiesService.getCompany(this.company.id).subscribe((data: CompanyProfile) => {
+      console.log('data',data);
       this.companiesStateService.setEditCompany(data);
     })
     this.sub.add(getCompany);

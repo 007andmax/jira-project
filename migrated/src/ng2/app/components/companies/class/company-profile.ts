@@ -10,6 +10,7 @@ import { CompanyLogo } from './company-logo';
 import { ImageCropper } from '../../shared/image-cropper/class/image-cropper';
 import { Company } from 'src/ng2/app/interfaces/company/company';
 import { Tag } from 'src/ng2/app/interfaces/tag/tag';
+import { CompanyLogoCropped } from './company-logo-cropped';
 
 export class CompanyProfile {
     accountNumber: any;
@@ -91,12 +92,15 @@ export class CompanyProfile {
         }
 
     }
-    public editLogo (data: ImageCropper) {
+    public editLogo (data) {
+        this.logo = data;
+    /*    this.logo.cropped = new CompanyLogoCropped();
+        
         this.logo.base64 = data.croppedImage.base64;
         this.logo.w = data.croppedImage.width;
         this.logo.h = data.croppedImage.width;
         this.logo.x = data.croppedImage.imagePosition.x1;
-        this.logo.y = data.croppedImage.imagePosition.y1;
+        this.logo.y = data.croppedImage.imagePosition.y1;*/
     }
     public setLogo(data: ImageCropper) {
         this.logo = new CompanyLogo();

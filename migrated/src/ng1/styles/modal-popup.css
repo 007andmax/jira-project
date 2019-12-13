@@ -1050,6 +1050,7 @@ _::-webkit-:not(:root:root),
 }
 
 .archive-modal button,
+.image-confirm-modal button,
 .invoice--header button,
 .quote--header button,
 .email--header button,
@@ -1736,6 +1737,7 @@ _::-webkit-:not(:root:root),
 }
 
 .archive-modal .close-modal,
+.image-confirm-modal .close-modal,
 .create-new .close-modal,
 .download-agent-modal .close-modal,
 .new-users-content__modal .close-modal,

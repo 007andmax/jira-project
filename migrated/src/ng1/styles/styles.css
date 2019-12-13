@@ -13448,6 +13448,7 @@ button.close {
 
 .archive-modal .close-modal,
 .new-users-content__modal .close-modal,
+.image-confirm-modal .close-modal,
 .recurring-tickets-content__modal .close-modal,
 .new-companies-content__modal .close-modal,
 .password-content__modal .close-modal {
@@ -13608,15 +13609,12 @@ button.close {
   color: #9ca5b6;
 }
 
-.new-companies-content__modal--footer,
 .new-users-content__modal--footer,
 .recurring-tickets-content__modal--footer,
 .password-content__modal--footer {
-  display: flex;
-  align-items: center;
   justify-content: space-between;
   /*padding: 0 50px;*/
-  margin: 20px 0 0;
+  margin: 20px 0 120px 0;
 }
 
 .password-modal-footer-actions {
