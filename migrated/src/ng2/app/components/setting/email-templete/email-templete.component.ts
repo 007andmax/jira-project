@@ -393,8 +393,4 @@ export class UploadAdapter {
         })
     );
   }
-
-  
-
-
 }
