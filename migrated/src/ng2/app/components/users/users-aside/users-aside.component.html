@@ -3,7 +3,7 @@
     <div class="new-users-content__modal open">
       <div class="new-users-content__modal--header">
         <h3>Create New User</h3>
-        <button class="close-modal"  (click)="close()"></button>
+        <button class="close-modal" (click)="close()"></button>
       </div>
 
       <div class="new-users-content__modal--content clearfix">
@@ -19,45 +19,76 @@
           </div>
         </div>
         <div class="col-md-6">
-            <mat-error *ngIf="!validate.getFirstName()">
-                Please enter first name
-              </mat-error>
+          <mat-error *ngIf="!validate.getFirstName()">
+            Please enter first name
+          </mat-error>
           <p>First Name</p>
-          <input type="text"  (blur)="onChangeFistname()"  [(ngModel)]="user.firstName"
+          <input type="text" (blur)="onChangeFistname()" [(ngModel)]="user.firstName"
                  placeholder="Enter First Name">
         </div>
         <div class="col-md-6">
           <p>Last Name</p>
           <input type="text"
-          [(ngModel)]="user.lastName"
+                 [(ngModel)]="user.lastName"
                  placeholder="Enter Last Name">
         </div>
         <div class="col-md-6 with-new-link">
-            <mat-error *ngIf="!validate.getPrimaryContactEmail()">
-                Please enter a valid email address
-              </mat-error>
+          <mat-error *ngIf="!validate.getPrimaryContactEmail()">
+            Please enter a valid email address
+          </mat-error>
           <p>
             Email
-            <span class="new-link">+ Add Email</span>
           </p>
           <input type="text"
-          [(ngModel)]="user.primaryEmail"
-          (blur)="onCheckEmail()"
+                 [(ngModel)]="user.primaryEmail"
+                 (blur)="onCheckEmail()"
                  placeholder="Enter Email">
         </div>
         <div class="col-md-6">
           <p>Role</p>
           <app-select-search [list]="allTitles"
-                         (onSelectedItem)="onSelectDesignation($event)"></app-select-search>
-        
+                             (onSelectedItem)="onSelectDesignation($event)"></app-select-search>
+
         </div>
         <div class="col-md-12">
-            <mat-error *ngIf="!validate.getCompany()">
-                Please enter first name
-              </mat-error>
+          <mat-error *ngIf="!validate.getCompany()">
+            Please enter first name
+          </mat-error>
           <p>Company</p>
-          <app-select-client-company [valid]="validate.getCompany()" [blockEditMode]="true"  style="width: 75%;" class="light-dropdown"
-           (selectedItem)="onSelectCompany($event)"></app-select-client-company>
+          <app-select-client-company [valid]="validate.getCompany()" [blockEditMode]="true" style="width: 75%;"
+                                     class="light-dropdown"
+                                     (selectedItem)="onSelectCompany($event)"></app-select-client-company>
+        </div>
+        <div class="col-md-6 with-new-link">
+          <p>
+            Primary Phone
+            <span class="new-link" (click)="addPhoneNumber()">+ Add Phone</span>
+          </p>
+
+          <mat-error *ngIf="!validate.getPhoneNumber(0)">
+            Phone number is required
+          </mat-error>
+          <input type="text"
+                 [(ngModel)]="user.phoneNumbers[0].number"
+                 (input)="onCheckPhoneNumber(0)"
+                 placeholder="Enter Primary Phone">
+
+          <ng-template ngFor let-phone *ngIf="user.phoneNumbers.length > 1"
+                       [ngForOf]="user.phoneNumbers"
+                       [ngForTrackBy]="trackById" let-i="index" [ngForTrackBy]="trackByIndex">
+            <div *ngIf="i > 0" style="margin-top: 20px;">
+              <mat-error *ngIf="!validate.getPhoneNumber(i)">
+                Phone number is required
+              </mat-error>
+              <p>
+                Additional phone
+              </p>
+              <input type="text"
+                     [(ngModel)]="phone.number"
+                     (input)="onCheckPhoneNumber(i)"
+                     placeholder="Enter Primary Phone">
+            </div>
+          </ng-template>
         </div>
         <div class="col-md-6">
           <p>User Type</p>
@@ -74,42 +105,12 @@
               <button ngbDropdownItem (click)="onSelectRole('ADMIN')">Manager</button>
             </div>
           </div>
-          <ng-template ngFor let-phone *ngIf="user.phoneNumbers.length > 1"
-          [ngForOf]="user.phoneNumbers"
-          [ngForTrackBy]="trackById" let-i="index" [ngForTrackBy]="trackByIndex">
-          <div *ngIf="i > 0">
-          <mat-error *ngIf="!validate.getPhoneNumber(i)"  >
-              Phone number is required
-            </mat-error>
-            <p>
-              Additional phone
-              </p>
-          <input type="text"
-          [(ngModel)]="phone.number"
-          (input)="onCheckPhoneNumber(i)"
-          placeholder="Enter Primary Phone">
-        </div>
-</ng-template>
-        </div>
-        <div class="col-md-6 with-new-link">
-          <p>
-            Primary Phone
-            <span class="new-link" (click)="addPhoneNumber()">+ Add Phone</span>
-          </p>
-          
-          <mat-error *ngIf="!validate.getPhoneNumber(0)">
-              Phone number is required
-            </mat-error>
-          <input type="text"
-          [(ngModel)]="user.phoneNumbers[0].number"
-          (input)="onCheckPhoneNumber(0)"
-          placeholder="Enter Primary Phone">
- 
-      
+
         </div>
         <div class="col-md-12">
           <p>Subscription</p>
-          <app-user-table-subscription (onChange)="onChangeSubscriptions($event)" [subscription]="user.subscription"></app-user-table-subscription>
+          <app-user-table-subscription (onChange)="onChangeSubscriptions($event)"
+                                       [subscription]="user.subscription"></app-user-table-subscription>
         </div>
 
         <div class="col-md-12 new-users-content__modal--content-footer">

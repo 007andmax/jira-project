@@ -1,19 +1,13 @@
+<div class="archive-modal">
+  <button class="close-modal" (click)=cancelConfirm()></button>
+  <div class="archive-modal__body">
 
- 
-  
-  <div class="archive-modal">
-    <button class="close-modal" (click)=cancelConfirm()></button>
-    <div class="archive-modal__body">
-     
-      <p [textContent]="message"> </p>
-    </div>
-    <div class="archive-modal__footer">
-      <div class="d-f">
-       
-        <button class="btn-new disabled" (click)=cancelConfirm()>Cancel</button>
-      </div>
+    <p [textContent]="message"></p>
+  </div>
+  <div class="archive-modal__footer">
+    <div class="d-f">
+
+      <button class="btn-new disabled" (click)=cancelConfirm()>Cancel</button>
     </div>
   </div>
-  
- 
- 
+</div>
