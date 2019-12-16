@@ -45,6 +45,7 @@
                   <!-- <span *ngIf="techUser.avatar !== null">
                     NN
                   </span> -->
+                  <span class="user-tech-dp">
                     <img
                       *ngIf="techUser.avatar !== null"
                       src="/users/{{ techUser.id }}/image.jpg?t={{
@@ -52,10 +53,12 @@
                       }}"
                       alt="user"
                     />
-                    
-                    <span *ngIf="techUser.avatar === null">
+                    <span class="simple-dp" *ngIf="techUser.avatar === null">
                       {{displayFrstLstChar(techUser)}}
                     </span>
+                  </span>
+                    
+                    
                     <!-- <img
                       src="../../../../../ng1/images/setting-module/avtar-56@2x.png"
                       alt="user"
@@ -74,7 +77,7 @@
                       alt="user"
                       data-tooltip="Tech-user hasn't confirmed his account yet."
                     /> -->
-                    <span>
+                    <span class="simple-dp">
                       {{displayFrstLstChar(techUser)}}
                     </span>
                     
@@ -212,7 +215,7 @@
                   (click)="resendWelcomeEmail(techUser.primaryEmail)"
                 >
                   <img
-                    src="../../../../../ng1/images/setting-module/reset-password.svg"
+                    src="../../../../../ng1/images/setting-module/email-resend.svg"
                     alt="Edit"
                   />
                 </a>
@@ -278,11 +281,12 @@
           style="display: none;"
         />
         <!-- <label for="profile-dp" class="static-link" (click)="onSelectFile($event)">Upload Avtar</label> -->
-        <span>Maximum size of 2MB. JPG, GIF, PNG</span>
+        
         <div class="static-link">
           <label class="innert-links" for="profile-dp">{{
             techUser && techUser.avatar ? "Change Photo" : "Upload Avatar"
           }}</label>
+          <span>Maximum size of 2MB. JPG, GIF, PNG</span>
           <label
             for="profile-dp"
             (click)="deleteAvatar()"

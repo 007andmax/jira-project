@@ -277,12 +277,12 @@ export class EmailTempleteComponent implements OnInit {
       .subscribe(
         () => {
           this.loading = false;
-          this.toastr.success("Saved successfully");
+          this.toastr.success("Saved Successfully");
           this.getEmailPages();
         },
         error => {
           this.loading = false;
-          this.toastr.error(`Error occured  ${error}`);
+          this.toastr.error(`Error Occured  ${error}`);
         }
       );
   }
@@ -312,11 +312,11 @@ export class EmailTempleteComponent implements OnInit {
       )
       .subscribe(
         () => {
-          this.toastr.success("Restored successfully");
+          this.toastr.success("Restored Successfully");
           this.getEmailPages();
         },
         error => {
-          this.toastr.error(`Error occured ${error}`);
+          this.toastr.error(`Error Occured ${error}`);
         }
       );
   }

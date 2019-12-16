@@ -85,7 +85,6 @@ export class OutgoingEmailComponent implements OnInit {
    * init
    */
   ngOnInit() {
-    
     this.smtpForm = this.formBuilder.group({
       emailAlias: [
         this.emailAlias,
@@ -247,9 +246,9 @@ export class OutgoingEmailComponent implements OnInit {
   }
 
   /**
-   *
+   *isChangedEvent - notification display or not based on param 
    */
-  changeEmailVia() {
+  changeEmailVia(isChangedEvent: boolean) {
     if (!this.smtpForm.value.usedEmailVia) {
       return;
     }
@@ -272,7 +271,7 @@ export class OutgoingEmailComponent implements OnInit {
       this.smtpForm.get("password").enable();
     }
     this.setDomain(selectedEmailVia[0].label.toUpperCase());
-    this.saveSMTP(this.smtpForm, undefined);
+    this.saveSMTP(this.smtpForm, undefined, isChangedEvent);
   }
 
   /**
@@ -345,7 +344,7 @@ export class OutgoingEmailComponent implements OnInit {
   sendTestEmail(formForSave, formForTest, isTest) {
     // $scope.showError = formForTest.$invalid;
     if (formForTest.valid && isTest) {
-      this.saveSMTP(formForSave, isTest);
+      this.saveSMTP(formForSave, isTest, false);
     }
   }
 
@@ -354,13 +353,11 @@ export class OutgoingEmailComponent implements OnInit {
    * @param form
    * @param isTest
    */
-  saveSMTP(form, isTest) {
+  saveSMTP(form, isTest, isChangedEvent) {
     this.submitted = true;
     this.loading = true;
     if (this.isSMTPLoginUnique) {
-      
       if (this.smtpForm.valid && this.smtp.useSMTP) {
-        
         this.smtp.login = this.smtpForm.value.login;
         this.smtp.password = this.smtpForm.value.password;
         // this.smtp.domain = this.smtpForm.value.domain;
@@ -370,29 +367,34 @@ export class OutgoingEmailComponent implements OnInit {
         this.disableFields = !!isTest;
 
         this.smtp.sendTestEmail = !!isTest;
-        
+
         this.emailSettingService.SMTPSettings(this.smtp).subscribe(
           (res: any) => {
             this.loading = false;
             this.savedSMTPSettings = this.smtp;
             this.smtp.testEmail = this.savedSMTPSettings.login;
-            
-           // this.toastr.success("Saved Successfully");
-            if (res.errorMessage && !res.valid) {
-              this.toastr.info(`${res.errorMessage}`);
-            } else {
+            if (!isChangedEvent) {
               this.toastr.success("Saved Successfully");
+              if (res.errorMessage && !res.valid) {
+                this.toastr.info(`${res.errorMessage}`);
+              } else {
+                this.toastr.success("Saved Successfully");
+              }
             }
             this.disableFields = false;
             this.submitted = false;
           },
           error => {
             this.loading = false;
-            this.toastr.error(`Error occured, ${error}`);
+            if (!isChangedEvent) {
+              this.toastr.error(`Error occured, ${error}`);
+            }
           }
         );
       } else if (!this.smtp.useSMTP) {
-        this.toastr.info('useSMTP else if');
+        if (!isChangedEvent) {
+          this.toastr.info("useSMTP else if");
+        }
         this.smtp.login = "";
         this.smtp.password = "";
         this.smtpForm.patchValue({
@@ -405,7 +407,9 @@ export class OutgoingEmailComponent implements OnInit {
           },
           (error: any) => {
             this.loading = false;
-            this.toastr.error(`Error occured, ${error}`);
+            if (!isChangedEvent) {
+              this.toastr.error(`Error occured, ${error}`);
+            }
           }
         );
       }

@@ -40,7 +40,7 @@
           <select
             class="cmn-select form-input"
             formControlName="usedEmailVia"
-            (change)="changeEmailVia()"
+            (change)="changeEmailVia(true)"
           >
             <option *ngFor="let email of emailVia" value="{{ email.label }}">{{
               email.label

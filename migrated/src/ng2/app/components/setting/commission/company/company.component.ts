@@ -1,18 +1,18 @@
-import { Component, OnInit, ViewChild, Pipe } from '@angular/core';
+import { Component, OnInit, ViewChild, Pipe } from "@angular/core";
 
-import { ReplaySubject, forkJoin, of, throwError } from 'rxjs';
-import { takeUntil, catchError } from 'rxjs/operators';
+import { ReplaySubject, forkJoin, of, throwError } from "rxjs";
+import { takeUntil, catchError } from "rxjs/operators";
 
-import { map } from 'rxjs/operators';
-import { CommissionService } from '../commission.service';
-import { UsersService } from 'src/ng2/app/services/users/users.service';
-import { ToastrService } from 'ngx-toastr';
-import { NgSelectComponent } from '@ng-select/ng-select';
+import { map } from "rxjs/operators";
+import { CommissionService } from "../commission.service";
+import { UsersService } from "src/ng2/app/services/users/users.service";
+import { ToastrService } from "ngx-toastr";
+import { NgSelectComponent } from "@ng-select/ng-select";
 
 @Component({
-  selector: 'app-company-commission',
-  templateUrl: './company.component.html',
-  styleUrls: ['./company.component.scss']
+  selector: "app-company-commission",
+  templateUrl: "./company.component.html",
+  styleUrls: ["./company.component.scss"]
 })
 export class CompanyComponent implements OnInit {
   clientsCompanies: any;
@@ -25,21 +25,19 @@ export class CompanyComponent implements OnInit {
   filterTechUsers: any;
 
   config = {
-    displayKey: 'firstName',
+    displayKey: "firstName",
     search: true,
-    height: 'auto',
+    height: "auto",
     limitTo: 3,
-    searchPlaceholder: 'Search',
-    searchOnKey: 'firstName'
+    searchPlaceholder: "Search",
+    searchOnKey: "firstName"
   };
 
   constructor(
     private commissionService: CommissionService,
     private userService: UsersService,
     private toastrService: ToastrService
-  ) {
-
-  }
+  ) {}
 
   ngOnInit() {
     this.currentUser = this.userService.currentUser;
@@ -59,7 +57,7 @@ export class CompanyComponent implements OnInit {
         map((users: any) => {
           return users.filter(
             (user: any) =>
-              user.accountType.toLowerCase() === 'tech' &&
+              user.accountType.toLowerCase() === "tech" &&
               user.deletedAt === null &&
               user.userEnabled
           );
@@ -82,9 +80,9 @@ export class CompanyComponent implements OnInit {
    */
   getFullName(client) {
     if (client) {
-      const isAllSpaces = client.lastName === '    ';
+      const isAllSpaces = client.lastName === "    ";
       if (client.lastName && !isAllSpaces) {
-        return client.firstName + ' ' + client.lastName;
+        return client.firstName + " " + client.lastName;
       } else {
         return client.firstName;
       }
@@ -92,9 +90,9 @@ export class CompanyComponent implements OnInit {
   }
 
   /**
-   * set tech lead 
-   * @param event 
-   * @param company 
+   * set tech lead
+   * @param event
+   * @param company
    */
   setTechLead(event: any, company: any) {
     if (!event || !company) {
@@ -105,33 +103,36 @@ export class CompanyComponent implements OnInit {
     this.commissionService.setTechLead(company.id, techLeadId).subscribe(
       res => {
         this.loading = false;
-        this.toastrService.success('TechLead changed successfully');
+        this.toastrService.success("TechLead Changed Successfully");
       },
       error => {
         this.loading = false;
-        this.toastrService.error(`Error occured, ${error}`);
+        this.toastrService.error(`Error Occured, ${error}`);
       }
     );
   }
 
   /**
    * get client url
-   * @param client 
+   * @param client
    */
   getClinetUrl(client) {
+    if(client.firstName === 'Brittni'){
+      console.log(client)
+    }
     if (client && client.avatar) {
       return `/users/${client.id}/image.jpg?t=${client.avatar.updatedAt}`;
-    }
+    } 
   }
 
   /**
    * selected active tech usres
-   * @param company 
-   * @param i 
+   * @param company
+   * @param i
    */
-  selectedActiveTechUsers(company, i) : any {
+  selectedActiveTechUsers(company, i): any {
     if (company.techLeadId === null) {
-      return ;
+      return;
     }
 
     const techUser = this.activeTechUsers.filter(client => {
@@ -155,7 +156,7 @@ export class CompanyComponent implements OnInit {
         map((companys: any) => {
           return companys.filter(
             (company: any) =>
-              company.clientType.toLowerCase() !== 'vendor' &&
+              company.clientType.toLowerCase() !== "vendor" &&
               company.deletedAt === null &&
               !company.isDefault
           );
@@ -195,16 +196,15 @@ export class CompanyComponent implements OnInit {
       .pipe(
         map(res => {
           this.clientsCompanies = res;
-          console.log(this.clientsCompanies);
         }),
-        catchError(err => throwError(new Error('get client companies')))
+        catchError(err => throwError(new Error("Get Client Companies")))
       )
       .subscribe();
   }
 
   /**
    * get company logo url by company - not used
-   * @param company 
+   * @param company
    */
   getCompanyLogoUrl(company: any) {
     if (
@@ -223,13 +223,37 @@ export class CompanyComponent implements OnInit {
         company.logo.cropped.id
       )
     ) {
-      return '/company/default/logo' + '.jpg';
+      return "/company/default/logo" + ".jpg";
     }
     return (
-      '/file/' +
+      "/file/" +
       company.logo.cropped.id +
-      '.jpg?t=' +
-      (company.logo.updatedAt ? company.logo.updatedAt : '')
+      ".jpg?t=" +
+      (company.logo.updatedAt ? company.logo.updatedAt : "")
     );
+  }
+
+  displayFrstLstChar(user: any) {
+    if (user) {
+      const splitUser = user.split(" ");
+      return [splitUser[0], splitUser[1]]
+        .map(function(s) {
+          if (s) {
+            return s.charAt(0).toUpperCase();
+          }
+        })
+        .join("");
+    }
+  }
+  dropFrstLstChar(user: any) {
+    if (user) {
+      return [user.firstName, user.lastName]
+        .map(function(s) {
+          if (s) {
+            return s.charAt(0).toUpperCase();
+          }
+        })
+        .join("");
+    }
   }
 }

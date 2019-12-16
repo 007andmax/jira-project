@@ -149,13 +149,17 @@
         <h6>Tech Users</h6>
         <ul class="list-unstyled">
           <li *ngFor="let user of usersToShift">
+            
             <div class="t-user">
               <span class="user-dp away">
-                <img
+                <!-- <img
                   *ngIf="(user && !user.avatar) || !user.avatar.updatedAt"
                   src="../../../../../ng1/images/setting-module/user.jpg"
                   alt="user"
-                />
+                /> -->
+                <span class="simple-dp" *ngIf="user.avatar === null">
+                  {{displayFrstLstChar(user)}}
+                </span>
                 <img
                   *ngIf="user.avatar && user.avatar.updatedAt"
                   src="/user/{{ user.id }}/image.jpg?t={{

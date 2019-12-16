@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { IntegrationsService } from './integrations.service';
-import { map, catchError } from 'rxjs/operators';
-import { of } from 'rxjs';
-import { ToastrService } from 'ngx-toastr';
+import { Component, OnInit } from "@angular/core";
+import { IntegrationsService } from "./integrations.service";
+import { map, catchError } from "rxjs/operators";
+import { of } from "rxjs";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
-  selector: 'app-integrations',
-  templateUrl: './integrations.component.html',
-  styleUrls: ['./integrations.component.scss']
+  selector: "app-integrations",
+  templateUrl: "./integrations.component.html",
+  styleUrls: ["./integrations.component.scss"]
 })
 export class IntegrationsComponent implements OnInit {
   loading = false;
@@ -35,12 +35,12 @@ export class IntegrationsComponent implements OnInit {
 
   /**
    * saved cc payment
-   * @param event 
+   * @param event
    */
   turnOnCCPayment(event: any) {
     this.show = event.target.checked;
     this.paymentInfo.paymentsEnabled = event.target.checked;
-    this.savePaymentInfo();
+    this.savePaymentInfo(false);
   }
 
   /**
@@ -62,18 +62,22 @@ export class IntegrationsComponent implements OnInit {
   /**
    * saved payment info
    */
-  savePaymentInfo() {
+  savePaymentInfo(isNotificationDis: boolean) {
     this.loading = true;
 
     this.integrationsService.savePaymentInfo(this.paymentInfo).subscribe(
       (res: any) => {
         this.loading = false;
         this.paymentInfo = res;
-        this.toastrService.success('Payment Info changed successfully.');
+        if (isNotificationDis) {
+          this.toastrService.success("Payment Info changed successfully.");
+        }
       },
       error => {
         this.loading = false;
-        this.toastrService.error(`Error occured,  ${error}`);
+        if (isNotificationDis) {
+          this.toastrService.error(`Error occured,  ${error}`);
+        }
       }
     );
   }
@@ -89,14 +93,14 @@ export class IntegrationsComponent implements OnInit {
       !this.paymentInfo.stripeSecretKey
     ) {
       const confirmMesage =
-        'Changes would be cancelled and credit card accepting switched off';
+        "Changes would be cancelled and credit card accepting switched off";
 
       if (confirm(confirmMesage)) {
         this.paymentInfo.paymentsEnabled = false;
-        this.savePaymentInfo();
+        this.savePaymentInfo(true);
       }
     } else {
-      this.savePaymentInfo();
+      this.savePaymentInfo(true);
     }
   }
   onBackMenu() {

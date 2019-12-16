@@ -128,7 +128,7 @@ export class ServiceComponent implements OnInit {
         .subscribe(
           (res: any) => {
             this.loading = false;
-            this.toastrService.success('Rate changed successfully.');
+            this.toastrService.success('Rate Changed Successfully.');
             service.commissionRate =
               res && res.commissionRate
                 ? res.commissionRate.toFixed(2)
@@ -138,7 +138,7 @@ export class ServiceComponent implements OnInit {
               : (this.selectedIdx = -1);
           },
           error => {
-            this.toastrService.error(`Error occurred, ${error}`);
+            this.toastrService.error(`Error Occurred, ${error}`);
             this.loading = false;
           }
         );
@@ -161,7 +161,7 @@ export class ServiceComponent implements OnInit {
         this.commissionService.setServiceRate(id, '0', false).subscribe(
           res => {
             this.loading = false;
-            this.toastrService.success('Rate changed successfully.');
+            this.toastrService.success('Rate Changed Successfully.');
             service.commissionRate = null;
 
             isSpecialService
@@ -169,7 +169,7 @@ export class ServiceComponent implements OnInit {
               : (this.selectedIdx = -1);
           },
           error => {
-            this.toastrService.error(`Error occurred, ${error}`);
+            this.toastrService.error(`Error Occurred, ${error}`);
             this.loading = false;
           }
         );

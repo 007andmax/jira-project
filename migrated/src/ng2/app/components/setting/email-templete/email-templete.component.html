@@ -53,7 +53,9 @@
                       data-tooltip="Reset Default"
                       (click)="restoreDefault(template.key)"
                       class="view"
-                      ><img src="../../../../../ng1/images/setting-module/view-icon.svg" alt="view-icon"
+                      ><img
+                        src="../../../../../ng1/images/setting-module/view-icon.svg"
+                        alt="view-icon"
                     /></a>
                   </td>
                 </tr>
@@ -87,7 +89,9 @@
                       data-tooltip="Edit"
                       (click)="getTemplate(template, i)"
                       class="edit"
-                      ><img src="../../../../../ng1/images/setting-module/edit.svg" alt="Edit"
+                      ><img
+                        src="../../../../../ng1/images/setting-module/edit.svg"
+                        alt="Edit"
                     /></a>
                     <a
                       *ngIf="
@@ -99,7 +103,9 @@
                       href="javascript:;"
                       data-tooltip="Reset Default"
                       class="view"
-                      ><img src="../../../../../ng1/images/setting-module/view-icon.svg" alt="view-icon"
+                      ><img
+                        src="../../../../../ng1/images/setting-module/view-icon.svg"
+                        alt="view-icon"
                     /></a>
                   </td>
                 </tr>
@@ -133,7 +139,9 @@
                       data-tooltip="Edit"
                       class="edit"
                       (click)="getTemplate(template, i)"
-                      ><img src="../../../../../ng1/images/setting-module/edit.svg" alt="Edit"
+                      ><img
+                        src="../../../../../ng1/images/setting-module/edit.svg"
+                        alt="Edit"
                     /></a>
                     <a
                       *ngIf="
@@ -145,7 +153,9 @@
                       href="javascript:;"
                       data-tooltip="Reset Default"
                       class="view"
-                      ><img src="../../../../../ng1/images/setting-module/view-icon.svg" alt="view-icon"
+                      ><img
+                        src="../../../../../ng1/images/setting-module/view-icon.svg"
+                        alt="view-icon"
                     /></a>
                   </td>
                 </tr>
@@ -209,9 +219,20 @@
           <div class="form-row">
             <angular-editor
               id="myEditor"
+              name="body"
+              #body
               formControlName="body"
               [config]="config"
             ></angular-editor>
+            <!-- <textarea
+              
+              class="form-input insert-field"
+              formControlName="body"
+              name="body"
+              #body
+              placeholder="Enter templete body"
+              >{{ templatesData.body }}</textarea
+            > -->
           </div>
         </div>
         <div class="f-col col-100">
@@ -272,7 +293,10 @@
 <ng-template #template>
   <div class="modal-header">
     <div class="modal-logo">
-      <img src="../../../../../ng1/images/setting-module/company-logo.svg" alt="accer" />
+      <img
+        src="../../../../../ng1/images/setting-module/company-logo.svg"
+        alt="accer"
+      />
     </div>
     <button
       type="button"

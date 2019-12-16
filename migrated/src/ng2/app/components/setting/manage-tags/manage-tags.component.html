@@ -4,7 +4,15 @@
 <div class="page-container">
   <div class="page-insider manage-tags">
     <div class="heading">
-      <h1><a href="javascript:;" (click)="onBackMenu()" class="back-menu" style="display: none;">backmneu</a>Manage Tags</h1>
+      <h1>
+        <a
+          href="javascript:;"
+          (click)="onBackMenu()"
+          class="back-menu"
+          style="display: none;"
+          >backmneu</a
+        >Manage Tags
+      </h1>
       <div class="heading-serach">
         <form method="GET">
           <input
@@ -20,48 +28,63 @@
         >
         <!-- Modal create Tags -->
         <div class="modal-content toggle-area" [class.opened]="create">
-            <div class="modal-wrapper">
-              <div class="toggle-header">
-                <h2 class="h1">Create Tag</h2>
-              </div>
-              <div class="modal-body">
-                <form [formGroup]="compnayForm" (ngSubmit)="onSubmit()">
-                  <div class="f-row">
-                    <div class="f-col col-100">
-                      <label *ngIf="!submitted || !f.word.errors">Tag Name</label>
-                      <div
-                        *ngIf="submitted && f.word.errors"
-                        class="invalid-feedback"
-                      >
-                        <div *ngIf="f.word.errors.required">
-                          Tag Name is required
-                        </div>
-                      </div>
-                      <div class="form-row">
-                        <input
-                          type="text"
-                          formControlName="word"
-                          class="form-input"
-                          placeholder="Enter Tag Name"
-                          [ngClass]="{ 'is-invalid': submitted && f.word.errors }"
-                        />
+          <div class="modal-wrapper">
+            <div class="toggle-header">
+              <h2 class="h1">Create Tag</h2>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="compnayForm" (ngSubmit)="onSubmit()">
+                <div class="f-row">
+                  <div class="f-col col-100">
+                    <label *ngIf="!submitted || !f.word.errors">Tag Name</label>
+                    <div
+                      *ngIf="submitted && f.word.errors"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="f.word.errors.required">
+                        Tag Name is required
                       </div>
                     </div>
-                    <div class="m-btn-row">
-                      <div class="m-btn-col">
-                        <input type="submit" value="Save" class="btn btn-primary" />
-                        <a
-                          href="javascript:;"
-                          class="btn btn-secondary"
-                          aria-label="Close"
-                          (click)="onCancel()"
-                          >Cancel</a
-                        >
-                      </div>
+                    <div class="form-row">
+                      <input
+                        type="text"
+                        formControlName="word"
+                        class="form-input"
+                        placeholder="Enter Tag Name"
+                        [ngClass]="{ 'is-invalid': submitted && f.word.errors }"
+                      />
                     </div>
                   </div>
-                </form>
-              </div>
+                  <div class="f-col col-100">
+                    <label>Category</label>
+                    <div class="form-row">
+                      <select class="cmn-select form-input">
+                        <option value="0">Select Category</option>
+                        <option value="companies">Companies</option>
+                        <option value="tickets">Tickets</option>
+                        <option value="devices">Devices</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="m-btn-row">
+                    <div class="m-btn-col">
+                      <input
+                        type="submit"
+                        value="Save"
+                        class="btn btn-primary"
+                      />
+                      <a
+                        href="javascript:;"
+                        class="btn btn-secondary"
+                        aria-label="Close"
+                        (click)="onCancel()"
+                        >Cancel</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
@@ -95,78 +118,96 @@
                       data-tooltip="Edit"
                       class="edit"
                       (click)="editTag(company, i)"
-                      ><img src="../../../../../ng1/images/setting-module/edit.svg" alt="Edit"
+                      ><img
+                        src="../../../../../ng1/images/setting-module/edit.svg"
+                        alt="Edit"
                     /></a>
                     <a
                       href="javascript:;"
                       data-tooltip="Remove"
                       class="remove"
                       (click)="removeCompanyTag(company.id)"
-                      ><img src="../../../../../ng1/images/setting-module/remove.svg" alt="Remove"
+                      ><img
+                        src="../../../../../ng1/images/setting-module/remove.svg"
+                        alt="Remove"
                     /></a>
                     <!-- Edit create Tags -->
                     <div
                       class="modal-content toggle-area"
                       [ngClass]="{ opened: selectedIdx === i }"
                     >
-                    <div class="modal-wrapper">
-                      <div class="toggle-header">
-                        <h2 class="h1">Edit Tag</h2>
-                      </div>
-                      <div class="modal-body">
-                        <form [formGroup]="compnayForm" (ngSubmit)="onSubmit()">
-                          <div class="f-row">
-                            <div class="f-col col-100">
-                              <label *ngIf="!submitted || !f.word.errors"
-                                >Tag Name</label
-                              >
-                              <div
-                                *ngIf="submitted && f.word.errors"
-                                class="invalid-feedback"
-                              >
-                                <div *ngIf="f.word.errors.required">
-                                  Tag Name is required
+                      <div class="modal-wrapper">
+                        <div class="toggle-header">
+                          <h2 class="h1">Edit Tag</h2>
+                        </div>
+                        <div class="modal-body">
+                          <form
+                            [formGroup]="compnayForm"
+                            (ngSubmit)="onSubmit()"
+                          >
+                            <div class="f-row">
+                              <div class="f-col col-100">
+                                <label *ngIf="!submitted || !f.word.errors"
+                                  >Tag Name</label
+                                >
+                                <div
+                                  *ngIf="submitted && f.word.errors"
+                                  class="invalid-feedback"
+                                >
+                                  <div *ngIf="f.word.errors.required">
+                                    Tag Name is required
+                                  </div>
                                 </div>
-                              </div>
-                              <div class="form-row">
+                                <div class="form-row">
+                                  <input
+                                    type="text"
+                                    formControlName="word"
+                                    class="form-input"
+                                    placeholder="Enter Tag Name"
+                                    [ngClass]="{
+                                      'is-invalid': submitted && f.word.errors
+                                    }"
+                                  />
+                                </div>
+                                <div class="f-col col-100">
+                                  <label>Category</label>
+                                  <div class="form-row">
+                                    <select class="cmn-select form-input">
+                                      <option value="0">Select Category</option>
+                                      <option value="companies">Companies</option>
+                                      <option value="tickets">Tickets</option>
+                                      <option value="devices">Devices</option>
+                                    </select>
+                                  </div>
+                                </div>
                                 <input
                                   type="text"
-                                  formControlName="word"
+                                  hidden
+                                  formControlName="id"
                                   class="form-input"
-                                  placeholder="Enter Tag Name"
-                                  [ngClass]="{
-                                    'is-invalid': submitted && f.word.errors
-                                  }"
                                 />
                               </div>
-                              <input
-                                type="text"
-                                hidden
-                                formControlName="id"
-                                class="form-input"
-                              />
-                            </div>
-                            <div class="m-btn-row">
-                              <div class="m-btn-col">
-                                <input
-                                  type="submit"
-                                  value="Save"
-                                  class="btn btn-primary"
-                                />
-                                <a
-                                  href="javascript:;"
-                                  class="btn btn-secondary"
-                                  aria-label="Close"
-                                  (click)="selectedIdx = -1"
-                                  >Cancel</a
-                                >
+                              <div class="m-btn-row">
+                                <div class="m-btn-col">
+                                  <input
+                                    type="submit"
+                                    value="Save"
+                                    class="btn btn-primary"
+                                  />
+                                  <a
+                                    href="javascript:;"
+                                    class="btn btn-secondary"
+                                    aria-label="Close"
+                                    (click)="selectedIdx = -1"
+                                    >Cancel</a
+                                  >
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </form>
+                          </form>
+                        </div>
                       </div>
                     </div>
-                  </div>
                   </td>
                 </tr>
               </tbody>
@@ -201,14 +242,18 @@
                       class="edit"
                       data-tooltip="Edit"
                       (click)="editTag(ticket, i)"
-                      ><img src="../../../../../ng1/images/setting-module/edit.svg" alt="Edit"
+                      ><img
+                        src="../../../../../ng1/images/setting-module/edit.svg"
+                        alt="Edit"
                     /></a>
                     <a
                       href="javascript:;"
                       data-tooltip="Remove"
                       class="remove"
                       (click)="removeCompanyTag(ticket.id)"
-                      ><img src="../../../../../ng1/images/setting-module/remove.svg" alt="Remove"
+                      ><img
+                        src="../../../../../ng1/images/setting-module/remove.svg"
+                        alt="Remove"
                     /></a>
 
                     <!-- Edit create Tags -->
@@ -216,64 +261,79 @@
                       class="modal-content toggle-area"
                       [ngClass]="{ opened: selectedIdx === i }"
                     >
-                    <div class="modal-wrapper">
-                      <div class="toggle-header">
-                        <h2 class="h1">Edit Tag</h2>
-                      </div>
-                      <div class="modal-body">
-                        <form [formGroup]="compnayForm" (ngSubmit)="onSubmit()">
-                          <div class="f-row">
-                            <div class="f-col col-100">
-                              <label *ngIf="!submitted || !f.word.errors"
-                                >Tag Name</label
-                              >
-                              <div
-                                *ngIf="submitted && f.word.errors"
-                                class="invalid-feedback"
-                              >
-                                <div *ngIf="f.word.errors.required">
-                                  Tag Name is required
+                      <div class="modal-wrapper">
+                        <div class="toggle-header">
+                          <h2 class="h1">Edit Tag</h2>
+                        </div>
+                        <div class="modal-body">
+                          <form
+                            [formGroup]="compnayForm"
+                            (ngSubmit)="onSubmit()"
+                          >
+                            <div class="f-row">
+                              <div class="f-col col-100">
+                                <label *ngIf="!submitted || !f.word.errors"
+                                  >Tag Name</label
+                                >
+                                <div
+                                  *ngIf="submitted && f.word.errors"
+                                  class="invalid-feedback"
+                                >
+                                  <div *ngIf="f.word.errors.required">
+                                    Tag Name is required
+                                  </div>
                                 </div>
-                              </div>
-                              <div class="form-row">
+                                <div class="form-row">
+                                  <input
+                                    type="text"
+                                    formControlName="word"
+                                    class="form-input"
+                                    [ngClass]="{
+                                      'is-invalid': submitted && f.word.errors
+                                    }"
+                                    placeholder="Enter Tag Name"
+                                  />
+                                </div>
                                 <input
                                   type="text"
-                                  formControlName="word"
+                                  hidden
+                                  formControlName="id"
                                   class="form-input"
-                                  [ngClass]="{
-                                    'is-invalid': submitted && f.word.errors
-                                  }"
-                                  placeholder="Enter Tag Name"
                                 />
                               </div>
-                              <input
-                                type="text"
-                                hidden
-                                formControlName="id"
-                                class="form-input"
-                              />
-                            </div>
 
-                            <div class="m-btn-row">
-                              <div class="m-btn-col">
-                                <input
-                                  type="submit"
-                                  value="Save"
-                                  class="btn btn-primary"
-                                />
-                                <a
-                                  href="javascript:;"
-                                  class="btn btn-secondary"
-                                  aria-label="Close"
-                                  (click)="onCancel()"
-                                  >Cancel</a
-                                >
+                              <div class="f-col col-100">
+                                <label>Category</label>
+                                <div class="form-row">
+                                  <select class="cmn-select form-input">
+                                    <option value="0">Select Category</option>
+                                    <option value="companies">Companies</option>
+                                    <option value="tickets">Tickets</option>
+                                    <option value="devices">Devices</option>
+                                  </select>
+                                </div>
+                              </div>
+
+                              <div class="m-btn-row">
+                                <div class="m-btn-col">
+                                  <input
+                                    type="submit"
+                                    value="Save"
+                                    class="btn btn-primary"
+                                  />
+                                  <a
+                                    href="javascript:;"
+                                    class="btn btn-secondary"
+                                    aria-label="Close"
+                                    (click)="onCancel()"
+                                    >Cancel</a
+                                  >
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </form>
+                          </form>
+                        </div>
                       </div>
-                    </div>
                     </div>
                   </td>
                 </tr>

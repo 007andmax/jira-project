@@ -103,7 +103,7 @@ export class ContractComponent implements OnInit {
         data[this.flag] = true;
         this.commissionService.setAgreementRates(data, true).subscribe(
           res => {
-            this.toastrService.success('successfully changed')
+            this.toastrService.success('Successfully Changed')
             this.oldAgreementsCommissions[this.rate] = data[this.rate];
             this.isModelDisplay = false;
             this.loading = false;
@@ -116,7 +116,7 @@ export class ContractComponent implements OnInit {
       } else {
         this.commissionService.setAgreementRates(data, false).subscribe(
           res => {
-            this.toastrService.success('changed successfully')
+            this.toastrService.success('Changed Successfully')
             this.oldAgreementsCommissions[this.rate] = data[this.rate];
             this.isModelDisplay = false;
             this.loading = false;
@@ -131,7 +131,7 @@ export class ContractComponent implements OnInit {
       this.loading = true;
       this.commissionService.setAgreementRates(data, false).subscribe(
         res => {
-          this.toastrService.success('saved successfully')
+          this.toastrService.success('Saved Successfully')
           this.isModelDisplay = false;
           this.loading = false;
           this.agreementsCommissions = res || {};
@@ -185,7 +185,7 @@ export class ContractComponent implements OnInit {
       this.loading = true;
       this.commissionService.setAgreementRates(data, false).subscribe(
         res => {
-          this.toastrService.success('changed successfully')
+          this.toastrService.success('Changed Successfully')
           this.isModelDisplay = false;
           this.loading = false;
 

@@ -57,7 +57,7 @@ export class ProductComponent implements OnInit {
           .setCategoryRate(category.id, '0', false)
           .subscribe(
             res => {
-              this.toastrService.success('Removed successfully')
+              this.toastrService.success('Removed Successfully')
               this.selectedIdx = -1;
               this.loading = false;
               category.commissionRate = null;
@@ -103,7 +103,7 @@ export class ProductComponent implements OnInit {
         .setCategoryRate(id, data.rate, data.setForOldExpenses)
         .subscribe(
           (res: any) => {
-            this.toastrService.success(`Commission Rate changed successfully`);
+            this.toastrService.success(`Commission Rate Changed Successfully`);
             this.loading = false;
             category.commissionRate = res.commissionRate.toFixed(2);
             this.selectedIdx = -1;
