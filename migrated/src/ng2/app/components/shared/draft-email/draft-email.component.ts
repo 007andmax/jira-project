@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, ChangeDetectorRef, Input } from '@angular/core';
 import { DraftEmailStateService } from 'src/ng2/app/states/draft-email/draft-email-state.service';
 import { DraftEmail } from './class/draft-email';
 import { FilesInfo } from './class/files-Info';
@@ -27,6 +27,7 @@ export class DraftEmailComponent implements OnInit {
         "justifyRight","removeFormat","orderedList",
         "unorderedList"]
   };
+  action:string = null;
   tab: string = 'plain';
   draftEmail: DraftEmail = new DraftEmail();
   uploadFiles: Array<File> = [];
@@ -44,6 +45,7 @@ export class DraftEmailComponent implements OnInit {
 
   public onShowAside() {
     this.draftEmailStateService.getShowAsideForAdd().subscribe(() => {
+      this.action = this.draftEmailStateService.getAction();
       this.opened = true;
       this.draftEmail = new DraftEmail();
     })

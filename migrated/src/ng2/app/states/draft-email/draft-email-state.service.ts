@@ -6,8 +6,15 @@ import { Injectable, EventEmitter } from '@angular/core';
 export class DraftEmailStateService {
   showAsideForAdd: EventEmitter<any> = new EventEmitter();
   clear: EventEmitter<any> = new EventEmitter();
+  action:string = null;
   constructor() { }
 
+  public setAction(data) {
+    this.action = data;
+  }
+  public getAction() {
+    return this.action;
+  }
   public onClear() {
     this.clear.emit(null);
   }

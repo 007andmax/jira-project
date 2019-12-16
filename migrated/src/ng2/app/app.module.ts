@@ -103,6 +103,7 @@ import { UserTableSubscriptionComponent } from './components/users/users-table/u
 import { NotificationComponent } from './components/shared/notification/notification.component';
 import { UsersAsideEditComponent } from './components/users/users-aside-edit/users-aside-edit.component';
 import { ModalImageCropperComponent } from './services/modal/modal-image-cropper/modal-image-cropper.component';
+import { DraftEmailUserRecipientsComponent } from './components/shared/draft-email/draft-email-user-recipients/draft-email-user-recipients.component';
 
 
 /**
@@ -236,7 +237,8 @@ angular.module('quicktech')
     UserTableSubscriptionComponent,
     NotificationComponent,
     UsersAsideEditComponent,
-    ModalImageCropperComponent
+    ModalImageCropperComponent,
+    DraftEmailUserRecipientsComponent
   ],
   imports: [
     BrowserModule,

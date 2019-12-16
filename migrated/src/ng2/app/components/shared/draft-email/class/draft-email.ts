@@ -5,9 +5,9 @@ export class DraftEmail {
     recipients: Array<string> = [];
     subject: string = "";
     constructor() { }
-public setCustomHtml (value) {
-    this.customHtml = value;
-}
+    public setCustomHtml(value) {
+        this.customHtml = value;
+    }
 
     public addAttachment(id) {
         this.attachments.push(id);

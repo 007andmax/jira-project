@@ -3,6 +3,7 @@ import { CompaniesStateService } from 'src/ng2/app/states/company/companies-stat
 import { DraftEmailStateService } from 'src/ng2/app/states/draft-email/draft-email-state.service';
 import { CompanyCalculateCount } from '../class/company-calculate-count';
 import { Subscription } from 'rxjs';
+import { COMPANIES } from 'src/ng2/app/const/emails';
  
 
 @Component({
@@ -28,6 +29,7 @@ export class CompaniesHeaderComponent implements OnInit,OnDestroy {
 
   }
   public showAsideForDraftEmail() {
+    this.draftEmailStateService.setAction(COMPANIES);
     this.draftEmailStateService.toggleAsideForAdd();
   }
   public showAsideForAdd() {
