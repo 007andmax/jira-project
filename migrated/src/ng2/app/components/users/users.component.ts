@@ -8,6 +8,7 @@ import { Company } from '../../interfaces/company/company';
 import { ConfirmStateService } from '../shared/confirm/services/confirm-state.service';
 import { ARCHIVE_USER } from '../../const/confirm';
 import { UsersService } from '../../services/users/users.service';
+import { UserChange } from './class/user-change';
 
 @Component({
   selector: 'app-users',
@@ -70,6 +71,33 @@ public infiniteScrollDisabled = false;
         }
       })
       this.userListService.addSubscription(getConfirm);
+
+      let getChangeCompanies = this.usersStateService.getChangeUsers().subscribe((data: UserChange) => {
+      
+        if (data.action === 'USER_SAVED' || data.action === 'USER_ARCHIVED') {
+         
+          const reqIndex = this.reqUsers.findIndex((item) => item.id === data.data.id);
+          if (reqIndex > -1) this.reqUsers[reqIndex] = data.data;
+          if (reqIndex === -1){
+            this.reqUsers.unshift(data.data);
+            this.users.unshift(data.data);
+           // this.onRelaodList();
+          } 
+          const userIndex = this.users.findIndex((item) => item.id === data.data.id);
+          if (userIndex > -1) this.users[userIndex] = data.data;
+        }
+       /* if (data.action === 'COMPANY_DEARCHIVED') {
+          const reqIndex = this.reqCompaniesList.findIndex((item) => item.id === data.data.id);
+          if (reqIndex > -1) this.reqCompaniesList[reqIndex] = data.data;
+          if (this.showArchivedCompanies)
+          {
+            const companyIndex = this.CompaniesList.findIndex((item) => item.id === data.data.id);
+            if (companyIndex > -1) this.CompaniesList.slice(companyIndex,1);
+          }
+        }*/
+        
+      })
+      this.userListService.addSubscription(getChangeCompanies);
   }
   private onArchiveUser (id) {
     let ids = [];

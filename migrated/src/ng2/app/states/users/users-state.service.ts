@@ -6,6 +6,7 @@ import { retry } from 'rxjs/operators';
 import { UserPipe } from '../../pipe/user.pipe';
 import { UserProfile } from '../../components/users/class/user-profile';
 import { UsersRealTimeService } from './users-real-time.service';
+import { UserChange } from '../../components/users/class/user-change';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class UsersStateService {
   openAside: EventEmitter<any> = new EventEmitter();
   openEditAside: EventEmitter<any> = new EventEmitter();
   userForArchive: User = null;
-  onChangeUsers: EventEmitter<CompanyUpdate> = new EventEmitter();
+  onChangeUsers: EventEmitter<UserChange> = new EventEmitter();
 
   constructor(private userService: UsersService, private usersRealTimeService:UsersRealTimeService) {
 
@@ -38,7 +39,7 @@ export class UsersStateService {
       this.onInitCurrentUser(data);
     })
     this.usersRealTimeService.changeUsersArray.subscribe(newChange => {
-      if (newChange.action === 'COMPANY_SAVED' || newChange.action === 'COMPANY_ARCHIVED') {
+      if (newChange.action === 'USER_SAVED' || newChange.action === 'USER_ARCHIVED') {
         const Index = this.allUsers.findIndex((item) => item.id === newChange.data.id);
         if (Index > -1) this.allUsers[Index] = newChange.data;
         if (Index === -1) this.allUsers.unshift(newChange.data);
@@ -49,8 +50,11 @@ export class UsersStateService {
         if (Index > -1) this.allUsers[Index] = newChange.data;
         
       }
-      this.onChangeCompanies.emit(new CompanyUpdate(newChange.action,newChange.data,this.allCompanies));
+      this.onChangeUsers.emit(new UserChange(newChange.action,newChange.data,this.allUsers));
     })
+  }
+  public getChangeUsers() {
+    return this.onChangeUsers;
   }
   public setUserForEdit(data) {
     this.userForArchive = data;
