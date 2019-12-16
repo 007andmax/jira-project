@@ -39,7 +39,7 @@
         </div>
         <div class="filter-item__content">
           <div class="dark-dropdown">
-            <app-select-search [editItem]="selectedTechLead" [field]="'name'" [list]="listPersons"
+            <app-select-search  [class]="['dark-dropdown']" [editItem]="selectedTechLead" [field]="'name'" [list]="listPersons"
                                (onSelectedItem)="onSelectTechLead($event)"></app-select-search>
           </div>
           <!-- <div class="dark-dropdown"
@@ -76,7 +76,7 @@
         </div>
         <div class="filter-item__content">
           <div class="dark-dropdown">
-            <app-select-search [editItem]="selectedClientIndustry" [list]="industries"
+            <app-select-search [class]="['dark-dropdown']" [editItem]="selectedClientIndustry" [list]="industries"
                                (onSelectedItem)="onSelectClientIndustry($event)"></app-select-search>
           </div>
          

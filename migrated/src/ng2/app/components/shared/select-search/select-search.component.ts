@@ -12,6 +12,7 @@ import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
 export class SelectSearchComponent implements OnInit, OnDestroy {
 
   @Input() field: string = null;
+  @Input() class: string = null;
   @Input() editItem: any = null;
   @Input() list = [];
   @ViewChild('instance') instance: NgbTypeahead;

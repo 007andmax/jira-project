@@ -53,7 +53,7 @@
         <div class="col-md-6">
           <p>Client Type</p>
           <div class="light-dropdown">
-            <app-select-search [editItem]="(company.clientIndustry.name) ? company.clientIndustry.name : null"
+            <app-select-search [class]="['dark-dropdown']" [editItem]="(company.clientIndustry.name) ? company.clientIndustry.name : null"
                                [list]="industries"
                                (onSelectedItem)="onSelectClientIndustry($event)"></app-select-search>
           </div>
@@ -229,7 +229,7 @@
         <div class="col-md-6">
           <p>Sales Person</p>
           <div class="light-dropdown">
-            <app-select-search [editItem]="selectedTechLead" [field]="'name'" [list]="listPersons"
+            <app-select-search [class]="['dark-dropdown']" [editItem]="selectedTechLead" [field]="'name'" [list]="listPersons"
                                (onSelectedItem)="onSelectTechLead($event)"></app-select-search>
           </div>
           <!--<div class="light-dropdown" ngbDropdown>

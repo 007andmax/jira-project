@@ -85,7 +85,7 @@ export class UsersTableComponent implements OnInit {
      if (this.usersTableService.getUsersCount(this.usersStateService.getAllUsers(),this.user.company.id,this.showArchivedUsers) === 1)
     {
       const modalRef = this.modalService.open(AlertComponent, { windowClass: 'xs-modal' });
-      modalRef.componentInstance.message = ` U can't archive all users. At least one must remain.`;
+      modalRef.componentInstance.message = `You cannot archive all users. At least one must remain.`;
       return;
     }
     this.confirmStateService.setConfirmAction(ARCHIVE_USER);
