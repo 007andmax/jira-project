@@ -11,18 +11,20 @@
         (change)="onSelectFile(template, $event)"
         style="display: none;"
       />
-      <div class="static-link" >
-        <label class="innert-links" for="profile-dp">Change Photo</label>
+      <div class="static-link">
+        <label class="innert-links" for="profile-dp">
+          {{ imageAvatar ? "Change Photo" : "Upload your photo" }}</label
+        >
         <label for="profile-dp" *ngIf="imageAvatar" (click)="deleteAvatar()">
           <a href="javascript:void(0)" restore-default-button=""
             >Remove Photo</a
           >
         </label>
-        <label for="profile-dp"  (click)="rePositionAvatar()">
+        <!-- <label for="profile-dp"  (click)="rePositionAvatar()">
           <a href="javascript:void(0)" restore-default-button=""
             >Reposition Photo</a
           >
-        </label>
+        </label> -->
       </div>
       <span>Photos help your teammates recognize you in Quicktech</span>
     </div>
@@ -31,7 +33,12 @@
     <div class="crop-inner">
       <div class="heading-area">
         <h2>Crop Photo</h2>
-        <a href="javascript:void(0)" class="close-btn" (click)="isCroppedImg = false">remove</a>
+        <a
+          href="javascript:void(0)"
+          class="close-btn"
+          (click)="isCroppedImg = false"
+          >remove</a
+        >
       </div>
       <div class="cropping">
         <div class="img-crop">
@@ -54,7 +61,13 @@
           <button type="button" class="btn btn-primary" (click)="cropIt()">
             Crop Photo
           </button>
-          <button type="button" class="btn btn-secondary" (click)="isCroppedImg = false">Cancel</button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="isCroppedImg = false"
+          >
+            Cancel
+          </button>
         </div>
       </div>
     </div>
@@ -69,7 +82,8 @@
   />
 
   <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-    <div class="f-row"><!-- Commented code for full name -->
+    <div class="f-row">
+      <!-- Commented code for full name -->
       <!-- <div class="f-col col-50">
         <label *ngIf="!submitted || !f.userName.errors">Your Full name</label>
         <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
@@ -87,41 +101,41 @@
         </div>
       </div> -->
       <div class="f-col col-50">
-          <!-- <label>Your Full name</label>  -->
-  
-          <label *ngIf="!submitted || !f.userName.errors">First Name</label>
-          <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
-            <div *ngIf="f.userName.errors.required">Full Name is required</div>
-            <div *ngIf="f.userName.errors.minlength">Full name is too short.</div>
-            <div *ngIf="f.userName.errors.maxlength">Full name is too large.</div>
-          </div>
-          <div class="form-row">
-            <input
-              type="text"
-              class="form-input"
-              placeholder="Enter Your First Name"
-              formControlName="userName"
-            />
-          </div>
+        <!-- <label>Your Full name</label>  -->
+
+        <label *ngIf="!submitted || !f.userName.errors">First Name</label>
+        <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+          <div *ngIf="f.userName.errors.required">Full Name is required</div>
+          <div *ngIf="f.userName.errors.minlength">Full name is too short.</div>
+          <div *ngIf="f.userName.errors.maxlength">Full name is too large.</div>
         </div>
-        <div class="f-col col-50">
-          <!-- <label>Your Full name</label>  -->
-  
-          <label *ngIf="!submitted || !f.userName.errors">Last Name</label>
-          <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
-            <div *ngIf="f.userName.errors.required">Full Name is required</div>
-            <div *ngIf="f.userName.errors.minlength">Full name is too short.</div>
-            <div *ngIf="f.userName.errors.maxlength">Full name is too large.</div>
-          </div>
-          <div class="form-row">
-            <input
-              type="text"
-              class="form-input"
-              placeholder="Enter Your Last Name"
-              formControlName="userName"
-            />
-          </div>
+        <div class="form-row">
+          <input
+            type="text"
+            class="form-input"
+            placeholder="Enter Your First Name"
+            formControlName="userName"
+          />
         </div>
+      </div>
+      <div class="f-col col-50">
+        <!-- <label>Your Full name</label>  -->
+
+        <label *ngIf="!submitted || !f.userName.errors">Last Name</label>
+        <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+          <div *ngIf="f.userName.errors.required">Full Name is required</div>
+          <div *ngIf="f.userName.errors.minlength">Full name is too short.</div>
+          <div *ngIf="f.userName.errors.maxlength">Full name is too large.</div>
+        </div>
+        <div class="form-row">
+          <input
+            type="text"
+            class="form-input"
+            placeholder="Enter Your Last Name"
+            formControlName="userName"
+          />
+        </div>
+      </div>
       <div class="f-col col-50">
         <label *ngIf="(!submitted || !f.primaryEmail.errors) && uniqueEmail"
           >Email Address</label
@@ -130,7 +144,9 @@
           *ngIf="submitted && f.primaryEmail.errors"
           class="invalid-feedback"
         >
-          <div *ngIf="f.primaryEmail.errors.required && uniqueEmail">Email is required</div>
+          <div *ngIf="f.primaryEmail.errors.required && uniqueEmail">
+            Email is required
+          </div>
           <div *ngIf="f.primaryEmail.errors.pattern && uniqueEmail">
             Email must be a valid email address
           </div>
@@ -226,7 +242,7 @@
           <div class="form-row">
             <input
               type="text"
-              placeholder="Enter Suite Number"
+              placeholder="123456"
               class="form-input"
               formControlName="suiteNumber"
             />
@@ -235,7 +251,7 @@
         <div class="f-col col-60">
           <label>Mailing Address</label>
           <div class="form-row">
-              <input
+            <input
               placeholder="search for location"
               autocorrect="off"
               autocapitalize="off"
@@ -258,7 +274,7 @@
           <div class="form-row">
             <input
               type="text"
-              placeholder="Enter Zip Code"
+              placeholder="123456"
               class="form-input"
               formControlName="postalCode"
             />

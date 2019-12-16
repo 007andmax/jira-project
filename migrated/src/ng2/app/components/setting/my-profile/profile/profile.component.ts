@@ -42,7 +42,7 @@ export class ProfileComponent implements OnInit {
   userProfileAddr: any;
   modalRef: BsModalRef;
   imageBase64 = "";
-  imageSrc = "../../../../../../ng1/images/setting-module/user.jpg";
+  imageSrc = "";
 
   public currentUser: any;
   public profileForm: FormGroup;
@@ -64,9 +64,14 @@ export class ProfileComponent implements OnInit {
     private toastr: ToastrService,
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone
-  ) {}
+  ) {
+    this.getCurrentUser();
+    this.getUserProfile();
+  }
 
   ngOnInit() {
+    this.imageSrc =
+      "../../../../../../ng1/images/setting-module/avtar-56@2x.png";
     this.getCurrentUser();
     this.getUserProfile();
 
@@ -91,7 +96,7 @@ export class ProfileComponent implements OnInit {
         [Validators.minLength(3), Validators.maxLength(15)]
       ],
       primaryPhone: [""],
-      primaryPhoneType: [],
+      primaryPhoneType: ["MOBILE"],
       primaryId: [],
       secondaryPhone: [""],
       secondaryPhoneType: [],
@@ -104,7 +109,6 @@ export class ProfileComponent implements OnInit {
     });
 
     this.getAddressAutocomplete();
-    // this.toastr.error("everything is broken", "Major Error");
   }
 
   /**
@@ -152,11 +156,10 @@ export class ProfileComponent implements OnInit {
     this.currentUser = this.userService.currentUser;
     if (this.currentUser && this.currentUser.avatar) {
       this.imageSrc = `/users/${this.currentUser.id}/image.jpg?t=${this.currentUser.avatar.updatedAt}`;
+      this.imageAvatar = this.currentUser.avatar;
+    } else {
+      this.imageAvatar = null;
     }
-    this.imageAvatar =
-      this.currentUser && this.currentUser.avatar
-        ? this.currentUser.avatar
-        : null;
   }
 
   /**
@@ -304,13 +307,13 @@ export class ProfileComponent implements OnInit {
     } else {
       cropImage = {
         id: this.currentUser.id,
-        origin: this.imageAvatar.origin,
-        cropped: this.imageAvatar.cropped,
+        origin: this.imageAvatar ? this.imageAvatar.origin : null,
+        cropped: this.imageAvatar ? this.imageAvatar.cropped : null,
         x: this.croppedImage.cropperPosition.x1,
         y: this.croppedImage.cropperPosition.y1,
         w: this.croppedImage.width,
         h: this.croppedImage.height,
-        updatedAt: this.imageAvatar.updatedAt,
+        updatedAt: this.imageAvatar ? this.imageAvatar.updatedAt : null,
         base64: this.croppedImage.base64
       };
     }
@@ -422,12 +425,14 @@ export class ProfileComponent implements OnInit {
             res => {
               this.loading = false;
               if (res) {
-                this.imageSrc = "../../../../../../ng1/images/setting-module/user.jpg";
+                this.getCurrentUser();
+                this.imageSrc =
+                  "../../../../../../ng1/images/setting-module/avtar-56@2x.png";
               }
             },
             error => {
               this.loading = false;
-              this.toastr.error('Error ');
+              this.toastr.error("Error ");
             }
           );
         })

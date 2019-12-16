@@ -141,10 +141,6 @@
                                                                 url: '/ng2/quotes',
                                                                 template: '<quotes-component></quotes-component>'
                                                               }))
-                    .state('setting', waitForServices({
-                                                                url: '/ng2/setting',
-                                                                template: '<setting-component></setting-component>'
-                      }))
                     .state('myprofile-component', waitForServices({
                                                               url: '/ng2/setting/myprofile',
                                                               template: '<myprofile-component></myprofile-component>'

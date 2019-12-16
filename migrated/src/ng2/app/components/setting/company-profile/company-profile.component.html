@@ -3,9 +3,17 @@
 <div class="page-container">
   <div class="page-insider company-profile">
     <div class="heading">
-      <h1><a href="javascript:;" (click)="onBackMenu()" class="back-menu" style="display: none;">backmneu</a>Company Profile</h1>
+      <h1>
+        <a
+          href="javascript:;"
+          (click)="onBackMenu()"
+          class="back-menu"
+          style="display: none;"
+          >backmneu</a
+        >Company Profile
+      </h1>
     </div>
-    
+
     <tabset>
       <!-- Profile -->
       <tab heading="Profile" id="tab1">
@@ -13,6 +21,12 @@
           <div class="dp-area">
             <span class="dp" *ngIf="imageSrc">
               <img [src]="imageSrc" alt="Company" />
+            </span>
+            <span class="dp" *ngIf="imageSrc === ''">
+              <img
+                src="../../../../../ng1/images/setting-module/upload-company-logo.svg"
+                alt="Company"
+              />
             </span>
             <div class="dp-info">
               <input
@@ -25,19 +39,23 @@
               <!-- <label for="profile-dp" class="static-link">Change Logo</label> -->
               <span>Maximum size of 2MB. JPG, GIF, PNG</span>
               <div class="static-link">
-                <label class="innert-links" for="profile-dp"
-                  >Change Photo</label
+                <label class="innert-links" for="profile-dp">{{
+                  imageSrc ? "Change Photo" : "Upload Photo"
+                }}</label>
+                <label
+                  for="profile-dp"
+                  (click)="deleteAvatar()"
+                  *ngIf="imageSrc"
                 >
-                <label for="profile-dp" (click)="deleteAvatar()">
                   <a href="javascript:void(0)" restore-default-button=""
                     >Remove Photo</a
                   >
                 </label>
-                <label for="profile-dp" (click)="rePositionAvatar()">
+                <!-- <label for="profile-dp" (click)="rePositionAvatar()">
                   <a href="javascript:void(0)" restore-default-button=""
                     >Reposition Photo</a
                   >
-                </label>
+                </label> -->
               </div>
             </div>
 
@@ -323,11 +341,11 @@
                       type="checkbox"
                       id="{{ workingDay.dayOfWeek }}"
                       [(ngModel)]="workingDay.isSelected"
-                      name="{{ workingDay.dayOfWeek }}"
+                      name="{{ workingDay.dayOfWeek | titlecase}}"
                       [ngModelOptions]="{ standalone: true }"
                     />
                     <label for="{{ workingDay.dayOfWeek }}">{{
-                      workingDay.dayOfWeek
+                      workingDay.dayOfWeek | titlecase
                     }}</label>
                   </div>
                   <div class="time-zone">
@@ -335,7 +353,8 @@
                       <input
                         type="text"
                         class="form-input"
-                        [readonly]="!workingDay.isSelected"
+                        
+                        [disabled]="!workingDay.isSelected"
                         placeholder="Enter Time"
                         value="{{ fromTime_convert(workingDay.startTime) }}"
                         #startTime
@@ -346,7 +365,8 @@
                       <input
                         type="text"
                         class="form-input"
-                        [readonly]="!workingDay.isSelected"
+                        
+                        [disabled]="!workingDay.isSelected"
                         placeholder="Enter Time"
                         value="{{ toTime_convert(workingDay.endTime) }}"
                       />

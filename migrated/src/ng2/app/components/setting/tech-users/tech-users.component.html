@@ -42,6 +42,9 @@
                       techUser.isEmailVerified
                     "
                   >
+                  <!-- <span *ngIf="techUser.avatar !== null">
+                    NN
+                  </span> -->
                     <img
                       *ngIf="techUser.avatar !== null"
                       src="/users/{{ techUser.id }}/image.jpg?t={{
@@ -49,11 +52,15 @@
                       }}"
                       alt="user"
                     />
-                    <img
-                      src="../../../../../ng1/images/setting-module/user.jpg"
+                    
+                    <span *ngIf="techUser.avatar === null">
+                      {{displayFrstLstChar(techUser)}}
+                    </span>
+                    <!-- <img
+                      src="../../../../../ng1/images/setting-module/avtar-56@2x.png"
                       alt="user"
                       *ngIf="techUser.avatar === null"
-                    />
+                    /> -->
                   </span>
                   <span
                     class="user-dp online"
@@ -62,11 +69,15 @@
                       !techUser.isEmailVerified
                     "
                   >
-                    <img
-                      src="../../../../../ng1/images/setting-module/user.jpg"
+                    <!-- <img
+                      
                       alt="user"
                       data-tooltip="Tech-user hasn't confirmed his account yet."
-                    />
+                    /> -->
+                    <span>
+                      {{displayFrstLstChar(techUser)}}
+                    </span>
+                    
                   </span>
 
                   <!-- <div class="avatar" ng-if="!user.requestToChangePassword && user.isEmailVerified">
@@ -269,17 +280,23 @@
         <!-- <label for="profile-dp" class="static-link" (click)="onSelectFile($event)">Upload Avtar</label> -->
         <span>Maximum size of 2MB. JPG, GIF, PNG</span>
         <div class="static-link">
-          <label class="innert-links" for="profile-dp">Change Photo</label>
-          <label for="profile-dp" (click)="deleteAvatar()">
+          <label class="innert-links" for="profile-dp">{{
+            techUser && techUser.avatar ? "Change Photo" : "Upload Avatar"
+          }}</label>
+          <label
+            for="profile-dp"
+            (click)="deleteAvatar()"
+            *ngIf="selectedTechUser?.avatar?.updatedAt"
+          >
             <a href="javascript:void(0)" restore-default-button=""
               >Remove Photo</a
             >
           </label>
-          <label for="profile-dp" (click)="rePositionAvatar()">
+          <!-- <label for="profile-dp" (click)="rePositionAvatar()">
             <a href="javascript:void(0)" restore-default-button=""
               >Reposition Photo</a
             >
-          </label>
+          </label> -->
         </div>
       </div>
     </div>
@@ -445,6 +462,7 @@
       <img src="../../../../../ng1/images/setting-module/close.svg" alt="close"
     /></a>
   </div>
+  
   <div class="middle-content">
     <div class="dp-area">
       <span
@@ -452,7 +470,7 @@
         *ngIf="
           selectedTechUser &&
           !selectedTechUser.requestToChangePassword &&
-            selectedTechUser.isEmailVerified
+          selectedTechUser.isEmailVerified
         "
       >
         <img
@@ -462,11 +480,14 @@
           }}"
           alt="user"
         />
-        <img
-          src="../../../../../ng1/images/setting-module/user.jpg"
+        <!-- <img
+          src="../../../../../ng1/images/setting-module/avtar-56@2x.png"
           alt="user"
           *ngIf="selectedTechUser.avatar === null"
-        />
+        /> -->
+        <span *ngIf="selectedTechUser.avatar === null">
+          {{displayFrstLstChar(selectedTechUser)}}
+        </span>
       </span>
       <span
         class="dp"
@@ -476,11 +497,14 @@
             !selectedTechUser.isEmailVerified)
         "
       >
-        <img
-          src="../../../../../ng1/images/setting-module/user.jpg"
+        <!-- <img
+          src="../../../../../ng1/images/setting-module/avtar-56@2x.png"
           alt="user"
           data-tooltip="Tech-user hasn't confirmed his account yet."
-        />
+        /> -->
+        <span *ngIf="selectedTechUser?.avatar?.updatedAt">
+          {{displayFrstLstChar(selectedTechUser)}}
+        </span>
       </span>
 
       <div class="dp-info">
@@ -488,8 +512,8 @@
         <!-- <label for="profile-dp" class="static-link">Upload Avtar</label> -->
         <span>Maximum size of 2MB. JPG, GIF, PNG</span>
         <div class="static-link">
-          <label class="innert-links" for="profile-dp">Change Photo</label>
-          <label for="profile-dp">
+          <label class="innert-links" for="profile-dp"> {{ selectedTechUser && selectedTechUser.avatar ? 'Change Photo' : 'Upload Avtar'}}</label>
+          <label for="profile-dp" *ngIf="selectedTechUser?.avatar?.updatedAt">
             <a
               href="javascript:void(0)"
               restore-default-button=""
@@ -497,14 +521,14 @@
               >Remove Photo</a
             >
           </label>
-          <label for="profile-dp">
+          <!-- <label for="profile-dp">
             <a
               href="javascript:void(0)"
               restore-default-button=""
               (click)="rePositionAvatar()"
               >Reposition Photo</a
             >
-          </label>
+          </label> -->
         </div>
       </div>
 

@@ -35,11 +35,6 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'ng2/setting',
-    component: SettingComponent,
-    pathMatch: 'full',
-  },
-  {
     path: 'ng2/setting/myprofile',
     component: MyProfileComponent,
     pathMatch: 'full'
