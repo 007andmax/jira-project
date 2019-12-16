@@ -31,7 +31,11 @@ export class CompanyAddAsideComponent implements OnInit,OnDestroy {
   phoneTypes = ['Office', 'Mobile', 'Fax'];
   paymentTerms = [new CompanySetting('COD', 0), new CompanySetting('7 days', 7), new CompanySetting('15 days', 15), new CompanySetting('30 days', 30)];
   serviceTypes = [new CompanySetting('Hourly', 'HOURLY'), new CompanySetting('Block time', 'BLOCK_TIME'), new CompanySetting('Semi managed', 'SEMI_MANAGED'), new CompanySetting('Fully managed', 'FULLY_MANAGED')];
-  paymentMethods = ['Cash', 'Cheque', 'Debit Card', 'Credit Card', 'Wire Transfer'];
+  paymentMethods = [new CompanySetting('Cash', 'CASH'),
+  new CompanySetting('Cheque', 'CHEQUE'),
+  new CompanySetting('Debit Card', 'DEBIT_CARD'),
+  new CompanySetting('Credit Card', 'CREDIT_CARD'),
+  new CompanySetting('Wire Transfer', 'WIRE_TRANSFER')];
   listPersons:Array<ItemFilterPerson> = [];
   subscriptions: Array<CompanySubscription> = [new CompanySubscription('Ticket Updates', 'ticket'),
   new CompanySubscription('Ticket Manager', 'ticketManager'),
@@ -121,6 +125,11 @@ export class CompanyAddAsideComponent implements OnInit,OnDestroy {
     this.paymentTerms.forEach(item => item.selected = false);
     this.paymentTerms[index].selected = true;
     this.company.paymentTerms = this.paymentTerms[index].value;
+  }
+  public onSelectPaymentMethod(index) {
+    this.paymentMethods.forEach(item => item.selected = false);
+    this.paymentMethods[index].selected = true;
+    this.company.defaultPaymentMethod = this.paymentMethods[index].value;
   }
   public onSelectServiceTypes(index) {
     this.serviceTypes.forEach(item => item.selected = false);
@@ -260,6 +269,11 @@ export class CompanyAddAsideComponent implements OnInit,OnDestroy {
   getSelectedPaymentTerms() {
     let index = this.paymentTerms.findIndex(item => item.selected === true);
     if (index > -1) return this.paymentTerms[index].title;
+    return "";
+  }
+  getSelectedPaymentMethod() {
+    let index = this.paymentMethods.findIndex(item => item.selected === true);
+    if (index > -1) return this.paymentMethods[index].title;
     return "";
   }
   getSelectedDropDown(value) {
