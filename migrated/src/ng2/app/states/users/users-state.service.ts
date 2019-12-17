@@ -50,7 +50,7 @@ export class UsersStateService {
         if (Index > -1) this.allUsers[Index].changeSubscriptions(newChange.data);
         
       }
-      if (newChange.action === 'COMPANY_DEARCHIVED') {
+      if (newChange.action === 'USER_ARCHIVED') {
         const Index = this.allUsers.findIndex((item) => item.id === newChange.data.id);
         if (Index > -1) this.allUsers[Index] = newChange.data;
         
