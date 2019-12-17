@@ -508,7 +508,7 @@
       <div class="dp-info">
         <input type="file" id="profile-dp" style="display: none;" />
         <!-- <label for="profile-dp" class="static-link">Upload Avtar</label> -->
-        <span>Maximum size of 2MB. JPG, GIF, PNG</span>
+        
         <div class="static-link">
           <label class="innert-links" for="profile-dp"> {{ selectedTechUser && selectedTechUser.avatar ? 'Change Photo' : 'Upload Avtar'}}</label>
           <label for="profile-dp" *ngIf="selectedTechUser?.avatar?.updatedAt">
@@ -519,6 +519,7 @@
               >Remove Photo</a
             >
           </label>
+          <span>Maximum size of 2MB. JPG, GIF, PNG</span>
           <!-- <label for="profile-dp">
             <a
               href="javascript:void(0)"
