@@ -17,23 +17,23 @@ import { UserChange } from './class/user-change';
   providers: [UserListService]
 })
 export class UsersComponent implements OnInit {
-users:Array<User> = [];
-companies:Array<Company> = [];
-reqUsers:Array<User> = [];
-showPreloader:boolean = true;
-filter:UserFilter = new UserFilter();
-showArchivedUsers:boolean = false;
-public infiniteScrollDisabled = false;
+  users: Array<User> = [];
+  companies: Array<Company> = [];
+  reqUsers: Array<User> = [];
+  showPreloader: boolean = true;
+  filter: UserFilter = new UserFilter();
+  showArchivedUsers: boolean = false;
+  public infiniteScrollDisabled = false;
   public page_number: number = 0;
-  constructor(private usersStateService:UsersStateService, private userListService:UserListService, 
-    private companiesStateService:CompaniesStateService,
-    private confirmStateService:ConfirmStateService,
-    private usersService:UsersService) { }
+  constructor(private usersStateService: UsersStateService, private userListService: UserListService,
+    private companiesStateService: CompaniesStateService,
+    private confirmStateService: ConfirmStateService,
+    private usersService: UsersService) { }
 
   ngOnInit() {
     let getOnShowArchived = this.usersStateService.getOnShowArchived().subscribe(data => {
       this.showArchivedUsers = data;
-     
+
       this.filter.setClientType(null);
       this.filter.clearFilter();
       this.setDefaultScoll();
@@ -42,83 +42,85 @@ public infiniteScrollDisabled = false;
     this.userListService.addSubscription(getOnShowArchived);
 
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
-      this.filter.setLeftFilters(data.clientType,data.company,data.clientIndustry,data.title);
+      this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title);
       this.setDefaultScoll();
       this.onScroll();
-   //   this.onInirCalculate();
+      //   this.onInirCalculate();
 
     })
     this.userListService.addSubscription(geLefttFilter);
 
-    if (this.companiesStateService.getCompanies().length > 0)  this.companies = this.companiesStateService.getCompanies();
-    let getOnCompanies =  this.companiesStateService.getOnCompanies().subscribe((data) => {
+    if (this.companiesStateService.getCompanies().length > 0) this.companies = this.companiesStateService.getCompanies();
+    let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
 
-        this.companies = data;
-      })
-      this.userListService.addSubscription(getOnCompanies);
-    if (this.usersStateService.getAllUsers().length > 0)    this.getUsersList(this.usersStateService.getAllUsers());
-    let getOnUsers =  this.usersStateService.getOnUsers().subscribe((data) => {
-        this.getUsersList(data);
-      })
-      this.userListService.addSubscription(getOnUsers);
+      this.companies = data;
+    })
+    this.userListService.addSubscription(getOnCompanies);
+    if (this.usersStateService.getAllUsers().length > 0) this.getUsersList(this.usersStateService.getAllUsers());
+    let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
+      this.getUsersList(data);
+    })
+    this.userListService.addSubscription(getOnUsers);
 
-      let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
-        if (data) {
-          if (this.confirmStateService.getConfirmAction() === ARCHIVE_USER) {
-            this.onArchiveUser(this.usersStateService.getUserForArchive().id);
-          }
-        
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === ARCHIVE_USER) {
+          this.onArchiveUser(this.usersStateService.getUserForArchive().id);
         }
-      })
-      this.userListService.addSubscription(getConfirm);
 
-      let getChangeCompanies = this.usersStateService.getChangeUsers().subscribe((data: UserChange) => {
-      
-        if (data.action === 'USER_SAVED' || data.action === 'USER_ARCHIVED') {
-         
-          const reqIndex = this.reqUsers.findIndex((item) => item.id === data.data.id);
-          if (reqIndex > -1) this.reqUsers[reqIndex] = data.data;
-          if (reqIndex === -1){
-            this.reqUsers.unshift(data.data);
-            this.users.unshift(data.data);
-           // this.onRelaodList();
-          } 
-          const userIndex = this.users.findIndex((item) => item.id === data.data.id);
-          if (userIndex > -1) this.users[userIndex] = data.data;
+      }
+    })
+    this.userListService.addSubscription(getConfirm);
+
+    let getChangeCompanies = this.usersStateService.getChangeUsers().subscribe((data: UserChange) => {
+
+      if (data.action === 'USER_SAVED' || data.action === 'USER_ARCHIVED') {
+
+        const reqIndex = this.reqUsers.findIndex((item) => item.id === data.data.id);
+        if (reqIndex > -1) this.reqUsers[reqIndex] = data.data;
+        if (reqIndex === -1) {
+          this.reqUsers.unshift(data.data);
+          this.users.unshift(data.data);
+          // this.onRelaodList();
         }
-        if (data.action === 'SUBSCRIPTION_SAVED') {
-          const reqIndex = this.reqUsers.findIndex((item) => item.id === data.data.id);
-          if (reqIndex > -1) this.reqUsers[reqIndex] = data.data;
-          const userIndex = this.users.findIndex((item) => item.id === data.data.id);
-          if (userIndex > -1) this.users[userIndex] = data.data;
-        }
-       /* if (data.action === 'COMPANY_DEARCHIVED') {
-          const reqIndex = this.reqCompaniesList.findIndex((item) => item.id === data.data.id);
-          if (reqIndex > -1) this.reqCompaniesList[reqIndex] = data.data;
-          if (this.showArchivedCompanies)
-          {
-            const companyIndex = this.CompaniesList.findIndex((item) => item.id === data.data.id);
-            if (companyIndex > -1) this.CompaniesList.slice(companyIndex,1);
-          }
-        }*/
-        
-      })
-      this.userListService.addSubscription(getChangeCompanies);
+        const userIndex = this.users.findIndex((item) => item.id === data.data.id);
+        if (userIndex > -1) this.users[userIndex] = data.data;
+      }
+      if (data.action === 'SUBSCRIPTION_SAVED') {
+        const reqIndex = this.reqUsers.findIndex((item) => item.id === data.data.id);
+        if (reqIndex > -1) this.reqUsers[reqIndex] = data.data;
+        const userIndex = this.users.findIndex((item) => item.id === data.data.id);
+        if (userIndex > -1) this.users[userIndex] = data.data;
+      }
+      /* if (data.action === 'COMPANY_DEARCHIVED') {
+         const reqIndex = this.reqCompaniesList.findIndex((item) => item.id === data.data.id);
+         if (reqIndex > -1) this.reqCompaniesList[reqIndex] = data.data;
+         if (this.showArchivedCompanies)
+         {
+           const companyIndex = this.CompaniesList.findIndex((item) => item.id === data.data.id);
+           if (companyIndex > -1) this.CompaniesList.slice(companyIndex,1);
+         }
+       }*/
+
+    })
+    this.userListService.addSubscription(getChangeCompanies);
   }
-  private onArchiveUser (id) {
+  private onArchiveUser(id) {
     let ids = [];
     ids.push(id);
-    let archiveCompany =  this.usersService.onArchiveUsers(ids).subscribe(data => {
-      
-      let index = this.users.findIndex(item => item.id === id);
-      if (index > -1) this.users.splice(index, 1);
+    let archiveCompany = this.usersService.onArchiveUsers(ids).subscribe(data => {
+      if (!this.showArchivedUsers && this.filter.getClientType()) {
+        let index = this.users.findIndex(item => item.id === id);
+        if (index > -1) this.users.splice(index, 1);
+      }
+
     })
     this.userListService.addSubscription(archiveCompany);
   }
   private getUsersList(data) {
     this.reqUsers = data.filter(item => ((!this.showArchivedUsers) ? !item.deletedAt : item.deletedAt));
-     
-   // this.onInirCalculate();
+
+    // this.onInirCalculate();
     this.reqUsers.sort((a, b) => ((a.firstName + a.lastName).toLowerCase() > (b.firstName + b.lastName).toLowerCase()) ?
       1 : (((b.firstName + b.lastName).toLowerCase() > (a.firstName + a.lastName).toLowerCase()) ? -1 : 0));
     this.onScroll();
@@ -129,8 +131,8 @@ public infiniteScrollDisabled = false;
     this.getCompanies();
 
   }
-  public onFilter (field) {
-this.filter.onFilter(field, this.reqUsers,this.companies)
+  public onFilter(field) {
+    this.filter.onFilter(field, this.reqUsers, this.companies)
     this.page_number = 0;
     this.userListService.setBlockList(false);
     this.users = [];
@@ -142,7 +144,7 @@ this.filter.onFilter(field, this.reqUsers,this.companies)
       return;
     }
     this.page_number += 1;
-    let listFilter = this.filter.getFilterList(this.reqUsers,this.companies);
+    let listFilter = this.filter.getFilterList(this.reqUsers, this.companies);
     this.usersStateService.setCount(listFilter.length);
     let start = (this.page_number - 1) * 30;
     let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;
@@ -153,7 +155,7 @@ this.filter.onFilter(field, this.reqUsers,this.companies)
     this.users = [...this.users, ...usersList];
     this.infiniteScrollDisabled = false;
     if ((this.page_number * 30) > listFilter.length) this.userListService.setBlockList(true);
-    
+
 
   }
   public setDefaultScoll() {
