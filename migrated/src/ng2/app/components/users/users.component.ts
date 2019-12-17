@@ -120,10 +120,10 @@ export class UsersComponent implements OnInit {
         var newChange = JSON.parse(message.body);
         console.log('newChange',newChange);
         if (newChange.action === 'SUBSCRIPTION_SAVED') {
-          const reqIndex = this.reqUsers.findIndex((item) => item.id === newChange.data.id);
-          if (reqIndex > -1) this.reqUsers[reqIndex] = newChange.data;
-          const userIndex = this.users.findIndex((item) => item.id === newChange.data.id);
-          if (userIndex > -1) this.users[userIndex] = newChange.data;
+          const reqIndex = this.reqUsers.findIndex((item) => item.id === newChange.data.user.id);
+          if (reqIndex > -1) this.reqUsers[reqIndex].changeSubscriptions(newChange.data);
+          const userIndex = this.users.findIndex((item) => item.id === newChange.data.user.id);
+          if (userIndex > -1) this.users[userIndex].changeSubscriptions(newChange.data);
         }
       });
       this.userListService.addSubscription(stompClient);
