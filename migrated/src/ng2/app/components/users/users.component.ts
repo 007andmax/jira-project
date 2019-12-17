@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { User } from './class/user';
 import { UsersStateService } from '../../states/users/users-state.service';
 import { UserListService } from './services/user-list.service';
@@ -31,6 +31,7 @@ export class UsersComponent implements OnInit {
     private companiesStateService: CompaniesStateService,
     private confirmStateService: ConfirmStateService,
     private usersService: UsersService,
+    public cd: ChangeDetectorRef,
     private websocketService:WebsocketService) { }
 
   ngOnInit() {
@@ -123,7 +124,10 @@ export class UsersComponent implements OnInit {
           const reqIndex = this.reqUsers.findIndex((item) => item.id === newChange.data.user.id);
           if (reqIndex > -1) this.reqUsers[reqIndex].changeSubscriptions(newChange.data);
           const userIndex = this.users.findIndex((item) => item.id === newChange.data.user.id);
+          console.log('userIndex',userIndex);
           if (userIndex > -1) this.users[userIndex].changeSubscriptions(newChange.data);
+          if (userIndex > -1) console.log(this.users[userIndex]);
+          this.cd.detectChanges();
         }
       });
       this.userListService.addSubscription(stompClient);

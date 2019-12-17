@@ -29,7 +29,7 @@ export class UsersTableComponent implements OnInit {
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal, 
     private usersTableService:UsersTableService) { }
-
+   
   onChangeSubscriptions(data) {
     this.usersService.setSubscriptions(data).subscribe(res => {
       console.log('res', res);

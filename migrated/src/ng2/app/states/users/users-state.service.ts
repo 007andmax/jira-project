@@ -46,11 +46,7 @@ export class UsersStateService {
         if (Index === -1) this.allUsers.unshift(newChange.data);
 
       }
-      if (newChange.action === 'SUBSCRIPTION_SAVED') {
-        const Index = this.allUsers.findIndex((item) => item.id === newChange.data.user.id);
-        if (Index > -1) this.allUsers[Index].changeSubscriptions(newChange.data);
-        
-      }
+     
       if (newChange.action === 'USERS_DEARCHIVED') {
         newChange.data.forEach(data => {
           const Index = this.allUsers.findIndex((item) => item.id === data.id);
