@@ -98,7 +98,7 @@ export class UsersComponent implements OnInit {
       console.log('showArchivedUsers',this.showArchivedUsers);
       if (data.action === 'USERS_DEARCHIVED') {
         console.log('data',data);
-        data.data.forEarch((user) => {
+        data.data.forEach(user => {
           const reqIndex = this.reqUsers.findIndex((item) => item.id === user.id);
           if (reqIndex > -1) this.reqUsers[reqIndex] = user;
           if (this.showArchivedUsers)
