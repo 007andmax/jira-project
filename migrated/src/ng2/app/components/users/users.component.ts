@@ -105,7 +105,7 @@ export class UsersComponent implements OnInit {
           {
             const userIndex = this.users.findIndex((item) => item.id === user.id);
             console.log('userIndex',userIndex);
-            if (userIndex > -1) this.users.slice(userIndex,1);
+            if (userIndex > -1) this.users.splice(userIndex,1);
           }
         })
        

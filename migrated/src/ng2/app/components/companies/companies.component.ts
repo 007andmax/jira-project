@@ -124,7 +124,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
         if (this.showArchivedCompanies)
         {
           const companyIndex = this.CompaniesList.findIndex((item) => item.id === data.data.id);
-          if (companyIndex > -1) this.CompaniesList.slice(companyIndex,1);
+          if (companyIndex > -1) this.CompaniesList.splice(companyIndex,1);
         }
       }
       
