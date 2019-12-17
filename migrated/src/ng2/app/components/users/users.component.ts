@@ -95,14 +95,19 @@ export class UsersComponent implements OnInit {
         const userIndex = this.users.findIndex((item) => item.id === data.data.id);
         if (userIndex > -1) this.users[userIndex] = data.data;
       }
+      console.log('showArchivedUsers',this.showArchivedUsers);
       if (data.action === 'USERS_DEARCHIVED') {
-        const reqIndex = this.reqUsers.findIndex((item) => item.id === data.data.id);
-        if (reqIndex > -1) this.reqUsers[reqIndex] = data.data;
-        if (this.showArchivedUsers)
-        {
-          const userIndex = this.users.findIndex((item) => item.id === data.data.id);
-          if (userIndex > -1) this.users.slice(userIndex,1);
-        }
+        data.data.forEarch((data) => {
+          const reqIndex = this.reqUsers.findIndex((item) => item.id === data.id);
+          if (reqIndex > -1) this.reqUsers[reqIndex] = data;
+          if (this.showArchivedUsers)
+          {
+            const userIndex = this.users.findIndex((item) => item.id === data.id);
+            console.log('userIndex',userIndex);
+            if (userIndex > -1) this.users.slice(userIndex,1);
+          }
+        })
+       
       }
 
     })

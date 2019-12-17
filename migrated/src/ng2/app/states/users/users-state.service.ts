@@ -52,8 +52,11 @@ export class UsersStateService {
         
       }
       if (newChange.action === 'USERS_DEARCHIVED') {
-        const Index = this.allUsers.findIndex((item) => item.id === newChange.data.id);
-        if (Index > -1) this.allUsers[Index] = newChange.data;
+        newChange.data.forEach(data => {
+          const Index = this.allUsers.findIndex((item) => item.id === data.id);
+          if (Index > -1) this.allUsers[Index] = data;
+        });
+       
         
       }
       this.onChangeUsers.emit(new UserChange(newChange.action,newChange.data,this.allUsers));
