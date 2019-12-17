@@ -78,7 +78,7 @@ export class UsersComponent implements OnInit {
     let getChangeCompanies = this.usersStateService.getChangeUsers().subscribe((data: UserChange) => {
 
       if (data.action === 'USER_SAVED' || data.action === 'USER_ARCHIVED') {
-
+ 
         const reqIndex = this.reqUsers.findIndex((item) => item.id === data.data.id);
         if (reqIndex > -1) this.reqUsers[reqIndex] = data.data;
         if (reqIndex === -1) {
@@ -97,12 +97,13 @@ export class UsersComponent implements OnInit {
       }
       console.log('showArchivedUsers',this.showArchivedUsers);
       if (data.action === 'USERS_DEARCHIVED') {
-        data.data.forEarch((data) => {
-          const reqIndex = this.reqUsers.findIndex((item) => item.id === data.id);
-          if (reqIndex > -1) this.reqUsers[reqIndex] = data;
+        console.log('data',data);
+        data.data.forEarch((user) => {
+          const reqIndex = this.reqUsers.findIndex((item) => item.id === user.id);
+          if (reqIndex > -1) this.reqUsers[reqIndex] = user;
           if (this.showArchivedUsers)
           {
-            const userIndex = this.users.findIndex((item) => item.id === data.id);
+            const userIndex = this.users.findIndex((item) => item.id === user.id);
             console.log('userIndex',userIndex);
             if (userIndex > -1) this.users.slice(userIndex,1);
           }
