@@ -36,5 +36,9 @@ export class User {
     userEnabled: boolean;
     userStatistic: UserStatistic;
     constructor() { }
+
+    public changeSubscriptions (data) {
+        this.subscription = new UserSubscription(data.id,data.invoice,data.ticket,data.ticketManager);
+    }
     
 }

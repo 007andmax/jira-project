@@ -86,6 +86,12 @@ public infiniteScrollDisabled = false;
           const userIndex = this.users.findIndex((item) => item.id === data.data.id);
           if (userIndex > -1) this.users[userIndex] = data.data;
         }
+        if (data.action === 'SUBSCRIPTION_SAVED') {
+          const reqIndex = this.reqUsers.findIndex((item) => item.id === data.data.id);
+          if (reqIndex > -1) this.reqUsers[reqIndex] = data.data;
+          const userIndex = this.users.findIndex((item) => item.id === data.data.id);
+          if (userIndex > -1) this.users[userIndex] = data.data;
+        }
        /* if (data.action === 'COMPANY_DEARCHIVED') {
           const reqIndex = this.reqCompaniesList.findIndex((item) => item.id === data.data.id);
           if (reqIndex > -1) this.reqCompaniesList[reqIndex] = data.data;

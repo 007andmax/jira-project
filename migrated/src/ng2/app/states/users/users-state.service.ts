@@ -12,7 +12,7 @@ import { UserChange } from '../../components/users/class/user-change';
   providedIn: 'root'
 })
 export class UsersStateService {
-  allUsers = [];
+  allUsers:Array<User> = [];
   currentUser: CurrentUser;
   userForEdit:UserProfile = null;
   onGetUsers: EventEmitter<any> = new EventEmitter();
@@ -44,6 +44,11 @@ export class UsersStateService {
         if (Index > -1) this.allUsers[Index] = newChange.data;
         if (Index === -1) this.allUsers.unshift(newChange.data);
 
+      }
+      if (newChange.action === 'SUBSCRIPTION_SAVED') {
+        const Index = this.allUsers.findIndex((item) => item.id === newChange.data.user.id);
+        if (Index > -1) this.allUsers[Index].changeSubscriptions(newChange.data);
+        
       }
       if (newChange.action === 'COMPANY_DEARCHIVED') {
         const Index = this.allUsers.findIndex((item) => item.id === newChange.data.id);
