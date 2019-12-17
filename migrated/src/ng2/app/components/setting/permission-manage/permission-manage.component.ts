@@ -166,7 +166,7 @@ export class PermissionManageComponent implements OnInit {
       .createTechRole(newRole)
       .pipe(
         map(res => {
-          this.toastrService.success("Role added successfully");
+          this.toastrService.success("Role Added Successfully");
           this.loading = false;
           this.isNewRoleCreating = false;
           if (res) {
@@ -239,7 +239,7 @@ export class PermissionManageComponent implements OnInit {
     // this.loading = true;
     this.permissionManageService.deleteTechRole(id).subscribe(
       (res: any) => {
-        this.toastrService.success("Deleted role successfully");
+        this.toastrService.success("Deleted Role Successfully");
         this.loading = false;
         if (res.length > 0) {
           this.usersToShift = res.map((user: any) => {
@@ -273,6 +273,9 @@ export class PermissionManageComponent implements OnInit {
           this.usersToShift = errorData.map((user: any) => {
             const newUser = this.allUsers.find(x => x.id == user.id);
             if (newUser) {
+              if (newUser.firstName === "Joana") {
+                console.log(newUser);
+              }
               newUser.companyId = newUser.company.id;
               if (!newUser.subscription) {
                 newUser.subscription = {
@@ -460,7 +463,7 @@ export class PermissionManageComponent implements OnInit {
     user.avatar.cropped = null;
     this.permissionManageService.save(user).subscribe(res => {
       this.loading = false;
-      this.toastrService.success("Role changed successfully");
+      this.toastrService.success("Role Changed Successfully");
       var userIndex = this.usersToShift.findIndex(el => el.id === user.id);
 
       if (userIndex !== -1) {

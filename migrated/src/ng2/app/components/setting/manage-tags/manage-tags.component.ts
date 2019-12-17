@@ -162,7 +162,7 @@ export class ManageTagsComponent implements OnInit {
       this.tagsService.removeCompanyTag(tagId, this.setActiveTab).subscribe(
         res => {
           this.loading = false;
-          this.toaster.success("Tag removed successfully");
+          this.toaster.success("Tag Removed Successfully");
           if (this.setActiveTab === "ticket") {
             this.getAllTickets();
           } else {
@@ -200,7 +200,7 @@ export class ManageTagsComponent implements OnInit {
       this.tagsService.tags(tags, this.setActiveTab).subscribe(
         res => {
           this.loading = false;
-          this.toaster.success("Tag saved successfully");
+          this.toaster.success("Tag Saved Successfully");
           if (this.setActiveTab === "ticket") {
             this.getAllTickets();
           } else {
@@ -226,7 +226,7 @@ export class ManageTagsComponent implements OnInit {
           res => {
             console.log(res);
             if (res) {
-              this.toaster.success("Tag updated successfully", null, {
+              this.toaster.success("Tag Updated Successfully", null, {
                 timeOut: 3000
               });
             }

@@ -65,7 +65,7 @@ export class AccountComponent implements OnInit {
       .twoFactorAuth(type)
       .pipe(
         map(res => {
-          this.toastr.success("Auth Type changed Successfully");
+          this.toastr.success("Auth Type Changed Successfully");
         })
       )
       .subscribe();
@@ -126,7 +126,7 @@ export class AccountComponent implements OnInit {
       .pipe(
         map(res => {
           this.oldPwdCorrect = true;
-          this.toastr.success("Password changed successfully.");
+          this.toastr.success("Password Changed Successfully.");
         })
       )
       .subscribe(

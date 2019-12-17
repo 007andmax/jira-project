@@ -4,7 +4,11 @@
   <div class="page-insider">
     <div class="heading">
       <h1>
-        <a href="javascript:;" (click)="onBackMenu()" class="back-menu" style="display: none;"
+        <a
+          href="javascript:;"
+          (click)="onBackMenu()"
+          class="back-menu"
+          style="display: none;"
           >backmneu</a
         >Permission Management
       </h1>
@@ -30,7 +34,10 @@
                     class="edit-ico"
                     (click)="editRoleName(role, i)"
                   >
-                    <img src="../../../../../ng1/images/setting-module/edit-12.svg" alt="edit" />
+                    <img
+                      src="../../../../../ng1/images/setting-module/edit-12.svg"
+                      alt="edit"
+                    />
                   </a>
                   <a
                     href="javascript:;"
@@ -38,7 +45,10 @@
                     class="delete-ico"
                     (click)="deleteRole(role.id, true); delete = !delete"
                   >
-                    <img src="../../../../../ng1/images/setting-module/remove-12.svg" alt="remove" />
+                    <img
+                      src="../../../../../ng1/images/setting-module/remove-12.svg"
+                      alt="remove"
+                    />
                   </a>
                 </div>
                 <!-- Modal create Tags -->
@@ -136,7 +146,10 @@
     /></a>
   </div>
   <div class="warn-msg">
-    <img src="../../../../../ng1/images/setting-module/warning.svg" alt="warning" />
+    <img
+      src="../../../../../ng1/images/setting-module/warning.svg"
+      alt="warning"
+    />
     <p>
       {{ usersToShift.length }} tech users belong to this group, you must assign
       a <br />
@@ -149,25 +162,39 @@
         <h6>Tech Users</h6>
         <ul class="list-unstyled">
           <li *ngFor="let user of usersToShift">
-            
             <div class="t-user">
-              <span class="user-dp away">
-                <!-- <img
-                  *ngIf="(user && !user.avatar) || !user.avatar.updatedAt"
-                  src="../../../../../ng1/images/setting-module/user.jpg"
-                  alt="user"
-                /> -->
-                <span class="simple-dp" *ngIf="user.avatar === null">
-                  {{displayFrstLstChar(user)}}
-                </span>
-                <img
-                  *ngIf="user.avatar && user.avatar.updatedAt"
-                  src="/user/{{ user.id }}/image.jpg?t={{
-                    user.avatar.updatedAt
-                  }}"
-                  alt="user"
-                />
+              <span
+                class="user-dp away"
+                *ngIf="
+                  !user.requestToChangePassword && user.isEmailVerified
+                "
+              >
+                <!-- <span *ngIf="techUser.avatar !== null">
+              NN
+            </span> -->
+                
+                  <img
+                    *ngIf="user.avatar !== null"
+                    src="/users/{{ user.id }}/image.jpg?t={{
+                      user.avatar.updatedAt
+                    }}"
+                    alt="user"
+                  />
+                  <span class="simple-dp" *ngIf="user.avatar === null">
+                    {{ displayFrstLstChar(user) }}
+                  </span>
+                
               </span>
+              <span
+                *ngIf="
+                user.requestToChangePassword || !user.isEmailVerified
+                "
+              >
+                <span class="simple-dp">
+                  {{ displayFrstLstChar(user) }}
+                </span>
+              </span>
+
               <div class="t-info">
                 <h5>{{ user.firstName + " " + user.lastName }}</h5>
                 <a href="mailto:{{ user.primaryEmail }}">{{
@@ -201,14 +228,13 @@
           (click)="deleteRole(roleToDelete, true)"
           class="btn btn-primary"
         />
-       
-          <a
-            href="javascrip:;"
-            class="btn btn-secondary"
-            (click)="delete = !delete"
-            >Cancel</a
-          >
-       
+
+        <a
+          href="javascrip:;"
+          class="btn btn-secondary"
+          (click)="delete = !delete"
+          >Cancel</a
+        >
       </div>
     </form>
   </div>

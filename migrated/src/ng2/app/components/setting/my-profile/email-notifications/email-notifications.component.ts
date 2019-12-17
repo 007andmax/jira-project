@@ -47,7 +47,7 @@ export class EmailNotificationsComponent implements OnInit {
       .email(emailObjToSend)
       .pipe(
         map(res => {
-          this.toastr.success("Email notification changed successfully");
+          this.toastr.success("Email Notification Changed Successfully");
         })
       )
       .subscribe();

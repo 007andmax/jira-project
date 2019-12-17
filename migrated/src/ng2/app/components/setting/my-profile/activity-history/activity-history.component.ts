@@ -60,7 +60,7 @@ export class ActivityHistoryComponent implements OnInit {
         .closeSessions(idsForDelete)
         .pipe(
           map(res => {
-            this.toastr.success("Activity history removed successfully");
+            this.toastr.success("Activity History Removed Successfully");
           })
         )
         .subscribe();

@@ -185,7 +185,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       .changePasswordRequest(id)
       .pipe(
         map(res => {
-          this.toastr.success("Change password request sent successfully.");
+          this.toastr.success("Change Password Request Sent Successfully.");
         })
       )
       .subscribe();
@@ -200,7 +200,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       .verifyUserEmail(userEmail)
       .pipe(
         map(res => {
-          this.toastr.success(`Resend Welcome Email sent successfully`);
+          this.toastr.success(`Resend Welcome Email Sent Successfully`);
         })
       )
       .subscribe();
@@ -394,7 +394,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
             // this.edit = false;
             // this.getUsers();
 
-            this.toastr.success("Image cropped successfully");
+            this.toastr.success("Image Cropped Successfully");
           }
         },
         error => {
@@ -464,7 +464,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       this.loading = true;
       this.techUsersService.createUser(objTechUser).subscribe(
         (savedTechUsre: any) => {
-          this.toastr.success("Saved successfully");
+          this.toastr.success("Saved Successfully");
           this.loading = false;
           this.create = false;
           this.getUsers();
@@ -499,7 +499,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
 
     this.settingService.deleteAvatar(id).subscribe(
       res => {
-        this.toastr.success("Avatar deleted successfully");
+        this.toastr.success("Avatar Deleted Successfully");
 
         const profileUser = {
           basic: {
@@ -638,7 +638,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       .subscribe(
         res => {
           // this.getUsers();
-          this.toastr.success("Updated successfully");
+          this.toastr.success("Updated Successfully");
           this.techUserForm.reset();
           if (this.techUserIdList) {
             this.emailNotification(this.techUserIdList);

@@ -23,7 +23,8 @@ export class CompanyComponent implements OnInit {
   usersByCompanies = [];
   activeTechUsers: any;
   filterTechUsers: any;
-
+  selectedIdx = -1;
+ 
   config = {
     displayKey: "firstName",
     search: true,
@@ -103,7 +104,7 @@ export class CompanyComponent implements OnInit {
     this.commissionService.setTechLead(company.id, techLeadId).subscribe(
       res => {
         this.loading = false;
-        this.toastrService.success("TechLead Changed Successfully");
+        this.toastrService.success("Techlead Changed Successfully");
       },
       error => {
         this.loading = false;
@@ -117,9 +118,6 @@ export class CompanyComponent implements OnInit {
    * @param client
    */
   getClinetUrl(client) {
-    if(client.firstName === 'Brittni'){
-      console.log(client)
-    }
     if (client && client.avatar) {
       return `/users/${client.id}/image.jpg?t=${client.avatar.updatedAt}`;
     } 
@@ -173,6 +171,10 @@ export class CompanyComponent implements OnInit {
           this.loading = false;
         }
       );
+  }
+
+  selectedDropdown(i){
+    this.selectedIdx = i;
   }
 
   /**

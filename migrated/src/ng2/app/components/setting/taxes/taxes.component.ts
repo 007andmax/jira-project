@@ -105,7 +105,7 @@ export class TaxesComponent implements OnInit {
           map(res => {
             this.loading = false;
             this.taxes = this.taxes.filter(t => t.id !== tax.id);
-            this.toastrService.success(`${tax.name} is deleted successfully.`);
+            this.toastrService.success(`${tax.name} is Deleted Successfully.`);
           })
         )
         .subscribe();
@@ -164,7 +164,7 @@ export class TaxesComponent implements OnInit {
           })
         )
         .subscribe(() => {
-          this.toastrService.success("Tax saved successfully");
+          this.toastrService.success("Tax Saved Successfully");
         });
     } else {
       // add

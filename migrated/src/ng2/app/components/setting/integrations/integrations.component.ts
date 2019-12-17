@@ -70,13 +70,13 @@ export class IntegrationsComponent implements OnInit {
         this.loading = false;
         this.paymentInfo = res;
         if (isNotificationDis) {
-          this.toastrService.success("Payment Info changed successfully.");
+          this.toastrService.success("Payment Info Changed Successfully.");
         }
       },
       error => {
         this.loading = false;
         if (isNotificationDis) {
-          this.toastrService.error(`Error occured,  ${error}`);
+          this.toastrService.error(`Error Occured,  ${error}`);
         }
       }
     );

@@ -213,7 +213,7 @@ export class CompanyProfileComponent implements OnInit {
           ) {
             this.imageSrc = `/file/${this.currentCompany.logo.cropped.id}.jpg?t=${this.currentCompany.logo.updatedAt}`;
           } else {
-            this.imageSrc = '';
+            this.imageSrc = "";
             // this.imageSrc = "../../../../../ng1/images/setting-module/upload-company-logo.svg";
           }
           if (this.currentCompany.addresses.length > 0) {
@@ -449,7 +449,9 @@ export class CompanyProfileComponent implements OnInit {
       .removeAvatar(this.currentCompany.id, true)
       .subscribe(
         res => {
-          this.toaster.success("Avatar deleted successfully");
+          this.toaster.success("Avatar Deleted Successfully", null, {
+            timeOut: 3000
+          });
           this.getCompanyProfile();
           this.getCurrentCompany();
           this.basic();
@@ -561,7 +563,7 @@ export class CompanyProfileComponent implements OnInit {
         avatar => {
           if (avatar) {
             this.cProfile.logo = avatar;
-            this.toaster.success("Image cropped successfully");
+            this.toaster.success("Image Cropped Successfully");
             this.companyProfileService.basic(this.cProfile).subscribe(
               res => {
                 if (res) {
@@ -595,7 +597,7 @@ export class CompanyProfileComponent implements OnInit {
       this.companyProfileService.workingTime(workingTime).subscribe(
         res => {
           this.loading = false;
-          this.toaster.success("Records saved successfully");
+          this.toaster.success("Records Saved Successfully");
         },
         error => {
           this.loading = false;

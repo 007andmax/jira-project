@@ -248,7 +248,8 @@ angular
     
     ToastrModule.forRoot({
       closeButton: true,
-      preventDuplicates: true
+      preventDuplicates: true,
+      timeOut: 3000
     }),
     NgxLoadingModule.forRoot({
       animationType: ngxLoadingAnimationTypes.circleSwish,

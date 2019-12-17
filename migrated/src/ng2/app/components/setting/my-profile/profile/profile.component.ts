@@ -70,8 +70,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.imageSrc =
-      "../../../../../../ng1/images/setting-module/avtar-56@2x.png";
+    this.imageSrc = '';
     this.getCurrentUser();
     this.getUserProfile();
 
@@ -426,8 +425,7 @@ export class ProfileComponent implements OnInit {
               this.loading = false;
               if (res) {
                 this.getCurrentUser();
-                this.imageSrc =
-                  "../../../../../../ng1/images/setting-module/avtar-56@2x.png";
+                this.imageSrc = "";
               }
             },
             error => {
@@ -558,7 +556,7 @@ export class ProfileComponent implements OnInit {
       .pipe(
         map(res => {
           if (res) {
-            this.toastr.success("Profile updated successfully");
+            this.toastr.success("Profile Updated Successfully");
           }
         })
       )

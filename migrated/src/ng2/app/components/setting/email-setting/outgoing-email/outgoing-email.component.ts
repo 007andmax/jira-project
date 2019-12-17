@@ -203,7 +203,7 @@ export class OutgoingEmailComponent implements OnInit {
       },
       (error: any) => {
         this.loading = false;
-        this.toastr.error(`Error occured, ${error.errorMessage}`);
+        this.toastr.error(`Error Occured, ${error.errorMessage}`);
       }
     );
   }
@@ -387,7 +387,7 @@ export class OutgoingEmailComponent implements OnInit {
           error => {
             this.loading = false;
             if (!isChangedEvent) {
-              this.toastr.error(`Error occured, ${error}`);
+              this.toastr.error(`Error Occured, ${error}`);
             }
           }
         );
@@ -408,7 +408,7 @@ export class OutgoingEmailComponent implements OnInit {
           (error: any) => {
             this.loading = false;
             if (!isChangedEvent) {
-              this.toastr.error(`Error occured, ${error}`);
+              this.toastr.error(`Error Occured, ${error}`);
             }
           }
         );

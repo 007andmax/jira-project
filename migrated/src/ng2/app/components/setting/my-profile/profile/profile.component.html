@@ -4,6 +4,11 @@
     <span class="dp" *ngIf="imageSrc">
       <img [src]="imageSrc" alt="user" />
     </span>
+
+    <span class="dp" *ngIf="!imageSrc">
+      <img src="../../../../../../ng1/images/setting-module/avtar-56@2x.png" alt="user" />
+    </span>
+
     <div class="dp-info">
       <input
         type="file"

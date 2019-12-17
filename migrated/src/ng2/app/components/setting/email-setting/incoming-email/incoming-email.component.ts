@@ -80,7 +80,7 @@ export class IncomingEmailComponent implements OnInit {
     this.emailSettingService
       .saveInboxEnabled(this.inboxEnabled)
       .subscribe(res => {
-        this.toastr.success("Saved successfully");
+        this.toastr.success("Saved Successfully");
       });
   }
 
@@ -99,7 +99,7 @@ export class IncomingEmailComponent implements OnInit {
       },
       error => {
         this.loading = false;
-        this.toastr.error(`Error occured, ${error}`);
+        this.toastr.error(`Error Occured, ${error}`);
       }
     );
   }

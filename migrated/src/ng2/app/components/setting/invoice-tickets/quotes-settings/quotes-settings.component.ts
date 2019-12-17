@@ -30,7 +30,7 @@ export class QuotesSettingsComponent implements OnInit {
           Validators.pattern(/^-?([0-9]\d*)?$/)
         ])
       ],
-      defaultTerms: [''],
+      defaultTerms: ['15days'],
       memoQuote: ['']
     });
   }
@@ -79,7 +79,7 @@ export class QuotesSettingsComponent implements OnInit {
       .updateQuotesSettings(objQuotes)
       .subscribe(res => {
         this.loading = false;
-        this.toastr.success('Saved successfully');
+        this.toastr.success('Saved Successfully');
       }, error => {
         this.loading = false;
         this.toastr.error('Bad Request');

@@ -258,7 +258,7 @@ export class InvoiceSettingsComponent implements OnInit {
     this.invoiceTicketsService.updateInvoiceContact(objInvoice).subscribe(
       res => {
         this.loading = false;
-        this.toaster.success('Saved successfully.');
+        this.toaster.success('Saved Successfully.');
       },
       error => {
         this.loading = false;

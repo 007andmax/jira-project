@@ -37,12 +37,12 @@
                 style="display: none;"
               />
               <!-- <label for="profile-dp" class="static-link">Change Logo</label> -->
-              <span>Maximum size of 2MB. JPG, GIF, PNG</span>
+              
               <div class="static-link">
                 <label class="innert-links" for="profile-dp">{{
-                  imageSrc ? "Change Photo" : "Upload Photo"
+                  imageSrc ? "Change Logo" : "Upload Photo"
                 }}</label>
-                <label
+                <!-- <label
                   for="profile-dp"
                   (click)="deleteAvatar()"
                   *ngIf="imageSrc"
@@ -50,7 +50,9 @@
                   <a href="javascript:void(0)" restore-default-button=""
                     >Remove Photo</a
                   >
-                </label>
+                </label> -->
+                <span>Maximum size of 2MB. JPG, GIF, PNG</span>
+                
                 <!-- <label for="profile-dp" (click)="rePositionAvatar()">
                   <a href="javascript:void(0)" restore-default-button=""
                     >Reposition Photo</a
