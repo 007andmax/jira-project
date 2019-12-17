@@ -112,7 +112,7 @@ export class UsersAsideComponent implements OnInit {
     if (!this.validate.isValidate(this.user)) return;
 
     console.log('33333333333');
-    this.usersService.addUser(this.user).subscribe(data => {
+    this.usersService.addUser(this.user.getUserForAdd()).subscribe(data => {
       this.close();
     })
 
