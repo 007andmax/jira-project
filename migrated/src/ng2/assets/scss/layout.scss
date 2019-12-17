@@ -1032,6 +1032,11 @@ tabset {
                 vertical-align: middle;
                 margin: 0 10px;
             }
+            &:last-child{
+                &::after{
+                    display: none;
+                }
+            }
         }
         a{
             margin-right: 0;
@@ -1682,14 +1687,21 @@ tabset {
 
 /*** Sucess Messages **/
 
-.sucess-messages,.toast-container .toast-success {
+.sucess-messages,#toast-container .toast-success,.toast-container .toast-success {
     // top: 105px;
     width: auto;
+    -o-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
     border-radius: 6px;
+    -o-box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1);
     box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1);
-    background: url('/ng2/assets/img/success-tick.png')  #2ec866 no-repeat left 16px center;
+    background-image: none !important;
+    background: url('/ng2/assets/img/success-tick.png')  #2ec866 no-repeat left 16px center !important;
     background-color: #2ec866;
-    padding: 8px 15px 8px 44px;
+    padding:12px 15px 12px 44px;
     font-size: 12px;
     font-weight: normal;
     font-style: normal;
@@ -1701,7 +1713,7 @@ tabset {
     // left: 265px;
     // right: 0;
     // min-width: 236px;
-    min-height: 42px;
+    min-height: 40px;
     display: block !important;opacity: 1 !important;
     
   
@@ -1715,6 +1727,12 @@ tabset {
 }
 
 }
+.overlay-container #toast-container .toast-success,.overlay-container .toast-container .toast-success {
+    background-image: none !important;
+    background: url(/ng2/assets/img/success-tick.png) #2ec866 no-repeat left 16px center !important;
+ 
+}
+
 /*** Loader ****/
 
 ngx-loading > div {
@@ -1996,12 +2014,49 @@ body.ng7.backMenu .left-sidebar{left: 0;}
 }
 .angular-editor {
     position: relative;
-    border: solid 1px #c4cbd5;
+    border: none;
     overflow: hidden;
     border-radius: 4px;
 }
-.angular-editor .angular-editor-wrapper .angular-editor-textarea{    padding: 0 15px;
-    border: none;}
+.angular-editor-toolbar {
+    background-color: transparent !important;
+    border: solid 1px #c4cbd5 !important;
+    padding: 10px 15px !important;
+    border-bottom: 0 !important;
+}
+.angular-editor-toolbar .angular-editor-toolbar-set{
+    background-color: #fff !important;
+    border: 1px solid transparent !important;
+    margin-bottom: 0 !important;
+}.angular-editor-toolbar-set label.block-label {
+    display: none !important;
+}
+.angular-editor-toolbar .angular-editor-toolbar-set .select-font {
+    width: 92px !important;
+    height: 32px !important;
+    border-radius: 4px !important;
+    border: solid 1px rgba(196, 203, 213, 0.4) !important;
+    background-color: #f8f9fa !important;
+    font-family: $font-body;
+    font-size: 11px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.45;
+    letter-spacing: normal;
+    color: #4f5f79;
+}
+.angular-editor .angular-editor-wrapper .angular-editor-textarea{
+    background-color: transparent !important;
+    padding: 10px 15px !important;
+    height: 155px !important;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+}
+.angular-editor-toolbar .angular-editor-toolbar-set .angular-editor-button{border-radius: 4px !important;}
+.angular-editor-toolbar .angular-editor-toolbar-set .angular-editor-button.active,.angular-editor-toolbar .angular-editor-toolbar-set .angular-editor-button:hover{background-color: #f8f9fa !important;
+    border-radius: 4px !important;}
 .angular-editor-wrapper p{font-size: 13px;}   
 div#editor.angular-editor-textarea {
   margin-top: 0;

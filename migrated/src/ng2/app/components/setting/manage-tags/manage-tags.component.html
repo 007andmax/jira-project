@@ -169,24 +169,25 @@
                                     }"
                                   />
                                 </div>
-                                <div class="f-col col-100">
-                                  <label>Category</label>
-                                  <div class="form-row">
-                                    <select class="cmn-select form-input">
-                                      <option value="0">Select Category</option>
-                                      <option value="companies">Companies</option>
-                                      <option value="tickets">Tickets</option>
-                                      <option value="devices">Devices</option>
-                                    </select>
-                                  </div>
-                                </div>
-                                <input
-                                  type="text"
-                                  hidden
-                                  formControlName="id"
-                                  class="form-input"
-                                />
+                                
                               </div>
+                              <div class="f-col col-100">
+                                <label>Category</label>
+                                <div class="form-row">
+                                  <select class="cmn-select form-input">
+                                    <option value="0">Select Category</option>
+                                    <option value="companies">Companies</option>
+                                    <option value="tickets">Tickets</option>
+                                    <option value="devices">Devices</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <input
+                                type="text"
+                                hidden
+                                formControlName="id"
+                                class="form-input"
+                              />
                               <div class="m-btn-row">
                                 <div class="m-btn-col">
                                   <input
@@ -273,15 +274,13 @@
                             <div class="f-row">
                               <div class="f-col col-100">
                                 <label *ngIf="!submitted || !f.word.errors"
-                                  >Tag Name</label
-                                >
+                                  >Tag Name</label>
                                 <div
                                   *ngIf="submitted && f.word.errors"
-                                  class="invalid-feedback"
-                                >
+                                  class="invalid-feedback">
                                   <div *ngIf="f.word.errors.required">
                                     Tag Name is required
-                                  </div>
+                                </div>
                                 </div>
                                 <div class="form-row">
                                   <input
@@ -301,7 +300,6 @@
                                   class="form-input"
                                 />
                               </div>
-
                               <div class="f-col col-100">
                                 <label>Category</label>
                                 <div class="form-row">

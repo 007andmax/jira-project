@@ -99,17 +99,46 @@
     .input-number {
         float: left;
         width: 128px;
-        border-radius: 4px;
-        border: solid 1px #c4cbd5;
-        background-color: #ffffff;
-        padding: 9px 14px;
-        font-size: 13px;
-        font-weight: normal;
-        font-family: "Graphik-Regular";
-        line-height: 1.54;
-        letter-spacing: normal;
         position: relative;
-        margin-bottom: 5px;
+        padding: 0;
+        border: none;
+        margin: 0;
+        @media only screen and (max-width:768px){
+            width: 50%;
+        }
+        @media only screen and (max-width:576px){
+            width: 100%;
+        }
+        &::after{
+            content: "Hours";
+            position: absolute;
+            top: 10px;
+            bottom: 0;
+            margin: auto;
+            left: 45px;
+            font-size: 13px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.54;
+            letter-spacing: normal;
+            color: #9ca5b6;
+        }
+       
+        .number{
+            border-radius: 4px;
+            border: solid 1px #c4cbd5;
+            background-color: #ffffff;
+            padding: 9px 14px;
+            font-size: 13px;
+            font-weight: normal;
+            font-family: "Graphik-Regular";
+            line-height: 1.54;
+            letter-spacing: normal;
+            position: relative;
+            margin-bottom: 5px;
+            width: 100%;
+        }
         .inc-btns {
             position: absolute;
             right: 5px;
