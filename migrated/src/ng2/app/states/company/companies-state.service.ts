@@ -13,7 +13,6 @@ import { User } from '../../components/users/class/user';
 export class CompaniesStateService {
   allCompanies = [];
   industries = [];
- 
   onGetCompanies: EventEmitter<any> = new EventEmitter();
   onChangeCompanies: EventEmitter<CompanyUpdate> = new EventEmitter();
   showAsideForAdd: EventEmitter<any> = new EventEmitter();
@@ -23,9 +22,13 @@ export class CompaniesStateService {
   companyForDeArchive: Company = null;
   onCalculateCount: EventEmitter<CompanyCalculateCount> = new EventEmitter();
   calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
+  currentCompany:any = null;
   constructor(private companiesService: CompaniesService, private companiesRealTimeService: CompaniesRealTimeService) {
    }
   public onInit() {
+    this.companiesService.getTechCompany().subscribe(data => {
+      this.currentCompany= data;
+    })
     this.companiesService.getCompaniesList().subscribe((data) => {
       this.setAllCompanies(data);
       this.onInitGetCompanies(data);
@@ -49,7 +52,9 @@ export class CompaniesStateService {
       1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
     })
   }
-  
+  public getCurrentCompany() {
+    return this.currentCompany;
+  }
   public getIndustries () {
     return this.industries;
   }

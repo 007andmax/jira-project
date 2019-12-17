@@ -157,5 +157,7 @@ private subsribeToDevices () {
      
     }, 3000);
   }
-
+  public getClient() {
+    return this.stompClient;
+  }
 }

@@ -9,6 +9,7 @@ import { ConfirmStateService } from '../shared/confirm/services/confirm-state.se
 import { ARCHIVE_USER, DEARCHIVE_USER } from '../../const/confirm';
 import { UsersService } from '../../services/users/users.service';
 import { UserChange } from './class/user-change';
+import { WebsocketService } from '../../services/websocket/websocket.service';
 
 @Component({
   selector: 'app-users',
@@ -25,10 +26,12 @@ export class UsersComponent implements OnInit {
   showArchivedUsers: boolean = false;
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
-  constructor(private usersStateService: UsersStateService, private userListService: UserListService,
+  constructor(private usersStateService: UsersStateService, 
+    private userListService: UserListService,
     private companiesStateService: CompaniesStateService,
     private confirmStateService: ConfirmStateService,
-    private usersService: UsersService) { }
+    private usersService: UsersService,
+    private websocketService:WebsocketService) { }
 
   ngOnInit() {
     let getOnShowArchived = this.usersStateService.getOnShowArchived().subscribe(data => {
@@ -89,12 +92,7 @@ export class UsersComponent implements OnInit {
         const userIndex = this.users.findIndex((item) => item.id === data.data.id);
         if (userIndex > -1) this.users[userIndex] = data.data;
       }
-      if (data.action === 'SUBSCRIPTION_SAVED') {
-        const reqIndex = this.reqUsers.findIndex((item) => item.id === data.data.id);
-        if (reqIndex > -1) this.reqUsers[reqIndex] = data.data;
-        const userIndex = this.users.findIndex((item) => item.id === data.data.id);
-        if (userIndex > -1) this.users[userIndex] = data.data;
-      }
+     
       console.log('showArchivedUsers',this.showArchivedUsers);
       if (data.action === 'USERS_DEARCHIVED') {
         console.log('data',data);
@@ -113,6 +111,24 @@ export class UsersComponent implements OnInit {
 
     })
     this.userListService.addSubscription(getChangeCompanies);
+    this.onInitSubscribe();
+  }
+  private onInitSubscribe () {
+    setTimeout(() => {
+     console.log('onInitSubscribe');
+     let stompClient = this.websocketService.getClient().subscribe(`/user/watch/subscription/${this.companiesStateService.getCurrentCompany().id}`, (message) => {
+        var newChange = JSON.parse(message.body);
+        console.log('newChange',newChange);
+        if (newChange.action === 'SUBSCRIPTION_SAVED') {
+          const reqIndex = this.reqUsers.findIndex((item) => item.id === newChange.data.id);
+          if (reqIndex > -1) this.reqUsers[reqIndex] = newChange.data;
+          const userIndex = this.users.findIndex((item) => item.id === newChange.data.id);
+          if (userIndex > -1) this.users[userIndex] = newChange.data;
+        }
+      });
+      this.userListService.addSubscription(stompClient);
+   
+  }, 3000);
   }
   private onDeArchiveUser(id) {
     let ids = [];
