@@ -73,5 +73,8 @@ export class UsersService {
   public onArchiveUsers(ids) {
     return this.http.post(this.apiUrl + `users/archive`, { ids: ids });
   }
+  public onDeArchiveUsers(ids) {
+    return this.http.post(this.apiUrl + `users/dearchive`, { ids: ids });
+  }
 
 }

@@ -7,7 +7,7 @@ import { CurrentUser } from 'src/ng2/class/current-user/current-user';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
  
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
-import { ARCHIVE_USER } from 'src/ng2/app/const/confirm';
+import { ARCHIVE_USER, DEARCHIVE_USER } from 'src/ng2/app/const/confirm';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertComponent } from '../../shared/alert/alert.component';
@@ -93,6 +93,13 @@ export class UsersTableComponent implements OnInit {
 
     modalRef.componentInstance.message = `Do you want to archive ${this.user.firstName + ' ' + this.user.lastName}`;
     this.usersStateService.setUserForArchive(this.user);
+  }
+  restore() {
+    this.confirmStateService.setConfirmAction(DEARCHIVE_USER);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+
+    modalRef.componentInstance.message = `Do you want to restore ${this.user.firstName + ' ' + this.user.lastName}`;
+    this.usersStateService.setUserForDeArchive(this.user);
   }
 
 }

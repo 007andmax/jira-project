@@ -6,7 +6,7 @@ import { UserFilter } from './class/user-filter';
 import { CompaniesStateService } from '../../states/company/companies-state.service';
 import { Company } from '../../interfaces/company/company';
 import { ConfirmStateService } from '../shared/confirm/services/confirm-state.service';
-import { ARCHIVE_USER } from '../../const/confirm';
+import { ARCHIVE_USER, DEARCHIVE_USER } from '../../const/confirm';
 import { UsersService } from '../../services/users/users.service';
 import { UserChange } from './class/user-change';
 
@@ -67,6 +67,9 @@ export class UsersComponent implements OnInit {
         if (this.confirmStateService.getConfirmAction() === ARCHIVE_USER) {
           this.onArchiveUser(this.usersStateService.getUserForArchive().id);
         }
+        if (this.confirmStateService.getConfirmAction() === DEARCHIVE_USER) {
+          this.onDeArchiveUser(this.usersStateService.getUserForDeArchive().id);
+        }
 
       }
     })
@@ -92,30 +95,42 @@ export class UsersComponent implements OnInit {
         const userIndex = this.users.findIndex((item) => item.id === data.data.id);
         if (userIndex > -1) this.users[userIndex] = data.data;
       }
-      /* if (data.action === 'COMPANY_DEARCHIVED') {
-         const reqIndex = this.reqCompaniesList.findIndex((item) => item.id === data.data.id);
-         if (reqIndex > -1) this.reqCompaniesList[reqIndex] = data.data;
-         if (this.showArchivedCompanies)
-         {
-           const companyIndex = this.CompaniesList.findIndex((item) => item.id === data.data.id);
-           if (companyIndex > -1) this.CompaniesList.slice(companyIndex,1);
-         }
-       }*/
+      if (data.action === 'USERS_DEARCHIVED') {
+        const reqIndex = this.reqUsers.findIndex((item) => item.id === data.data.id);
+        if (reqIndex > -1) this.reqUsers[reqIndex] = data.data;
+        if (this.showArchivedUsers)
+        {
+          const userIndex = this.users.findIndex((item) => item.id === data.data.id);
+          if (userIndex > -1) this.users.slice(userIndex,1);
+        }
+      }
 
     })
     this.userListService.addSubscription(getChangeCompanies);
   }
+  private onDeArchiveUser(id) {
+    let ids = [];
+    ids.push(id);
+    let Dearchiveusers = this.usersService.onDeArchiveUsers(ids).subscribe(data => {
+      if (this.showArchivedUsers) {
+        let index = this.users.findIndex(item => item.id === id);
+        if (index > -1) this.users.splice(index, 1);
+      }
+
+    })
+    this.userListService.addSubscription(Dearchiveusers);
+  }
   private onArchiveUser(id) {
     let ids = [];
     ids.push(id);
-    let archiveCompany = this.usersService.onArchiveUsers(ids).subscribe(data => {
+    let archiveUser = this.usersService.onArchiveUsers(ids).subscribe(data => {
       if (!this.showArchivedUsers && this.filter.getClientType()) {
         let index = this.users.findIndex(item => item.id === id);
         if (index > -1) this.users.splice(index, 1);
       }
 
     })
-    this.userListService.addSubscription(archiveCompany);
+    this.userListService.addSubscription(archiveUser);
   }
   private getUsersList(data) {
     this.reqUsers = data.filter(item => ((!this.showArchivedUsers) ? !item.deletedAt : item.deletedAt));

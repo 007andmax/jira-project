@@ -26,9 +26,10 @@
          id="dropdownBasic1"
          ngbDropdownToggle></i>
       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-        <button ngbDropdownItem (click)="edit()"><i class="icn-16 edit-grey-ng2" ></i>Edit</button>
-        <button ngbDropdownItem><i class="icn-16 send-grey-ng2"></i>Send</button>
-        <button ngbDropdownItem *ngIf="currentUser.checkPermission('ARCHIVE_USERS')" (click)="delete()"><i class="icn-16 archive-grey-ng2"></i>Delete</button>
+        <button ngbDropdownItem *ngIf="!showArchivedUsers" (click)="edit()"><i class="icn-16 edit-grey-ng2" ></i>Edit</button>
+        <button ngbDropdownItem *ngIf="!showArchivedUsers"><i class="icn-16 send-grey-ng2"></i>Send</button>
+        <button ngbDropdownItem *ngIf="currentUser.checkPermission('ARCHIVE_USERS') && !showArchivedUsers" (click)="delete()"><i class="icn-16 archive-grey-ng2"></i>Delete</button>
+        <button ngbDropdownItem *ngIf="currentUser.checkPermission('ARCHIVE_USERS') && showArchivedUsers" (click)="restore()"><i class="icn-16 archive-grey-ng2"></i>Restore</button>
       </div>
     </div>
   </div>

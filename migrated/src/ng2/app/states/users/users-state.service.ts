@@ -23,6 +23,7 @@ export class UsersStateService {
   openAside: EventEmitter<any> = new EventEmitter();
   openEditAside: EventEmitter<any> = new EventEmitter();
   userForArchive: User = null;
+  userForDeArchive: User = null;
   onChangeUsers: EventEmitter<UserChange> = new EventEmitter();
 
   constructor(private userService: UsersService, private usersRealTimeService:UsersRealTimeService) {
@@ -50,7 +51,11 @@ export class UsersStateService {
         if (Index > -1) this.allUsers[Index].changeSubscriptions(newChange.data);
         
       }
-    
+      if (newChange.action === 'USERS_DEARCHIVED') {
+        const Index = this.allUsers.findIndex((item) => item.id === newChange.data.id);
+        if (Index > -1) this.allUsers[Index] = newChange.data;
+        
+      }
       this.onChangeUsers.emit(new UserChange(newChange.action,newChange.data,this.allUsers));
     })
   }
@@ -76,12 +81,17 @@ export class UsersStateService {
     return this.openEditAside;
   }
 
-
+  public setUserForDeArchive(data) {
+    this.userForDeArchive = data;
+  }
   public setUserForArchive(data) {
     this.userForArchive = data;
   }
   public getUserForArchive() {
     return this.userForArchive;
+  }
+  public getUserForDeArchive() {
+    return this.userForDeArchive;
   }
   public setCount(data) {
     this.onCount.emit(data);
