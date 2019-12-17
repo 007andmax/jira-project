@@ -84,14 +84,14 @@ export class UsersComponent implements OnInit {
       if (data.action === 'USER_SAVED' || data.action === 'USER_ARCHIVED') {
  
         const reqIndex = this.reqUsers.findIndex((item) => item.id === data.data.id);
-        if (reqIndex > -1) this.reqUsers[reqIndex] = data.data;
+        if (reqIndex > -1) this.reqUsers[reqIndex] = new User(data.data);
         if (reqIndex === -1) {
-          this.reqUsers.unshift(data.data);
-          this.users.unshift(data.data);
+          this.reqUsers.unshift(new User(data.data));
+          this.users.unshift(new User(data.data));
           // this.onRelaodList();
         }
         const userIndex = this.users.findIndex((item) => item.id === data.data.id);
-        if (userIndex > -1) this.users[userIndex] = data.data;
+        if (userIndex > -1) this.users[userIndex] = new User(data.data);
       }
      
       console.log('showArchivedUsers',this.showArchivedUsers);
@@ -99,7 +99,7 @@ export class UsersComponent implements OnInit {
         console.log('data',data);
         data.data.forEach(user => {
           const reqIndex = this.reqUsers.findIndex((item) => item.id === user.id);
-          if (reqIndex > -1) this.reqUsers[reqIndex] = user;
+          if (reqIndex > -1) this.reqUsers[reqIndex] = new User(user);
           if (this.showArchivedUsers)
           {
             const userIndex = this.users.findIndex((item) => item.id === user.id);
@@ -159,6 +159,7 @@ export class UsersComponent implements OnInit {
     this.userListService.addSubscription(archiveUser);
   }
   private getUsersList(data) {
+    console.log('data',data);
     this.reqUsers = data.filter(item => ((!this.showArchivedUsers) ? !item.deletedAt : item.deletedAt));
 
     // this.onInirCalculate();

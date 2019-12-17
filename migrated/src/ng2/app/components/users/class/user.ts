@@ -35,7 +35,15 @@ export class User {
     twoFactorAuthType: string;
     userEnabled: boolean;
     userStatistic: UserStatistic;
-    constructor() { }
+    constructor(data = null) {
+        if (data)
+        {
+            for (const key in data) {
+                this[key] =  data[key];
+            }
+        }
+       
+     }
 
     public changeSubscriptions (data) {
         this.subscription = new UserSubscription(data.id,data.invoice,data.ticket,data.ticketManager);

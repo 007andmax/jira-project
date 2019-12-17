@@ -32,6 +32,10 @@ export class UsersStateService {
   public onInit() {
 
     this.userService.getAllusers().subscribe((data) => {
+   /*   let users = data.map((item) => {
+        return new User(item);
+      })*/
+      console.log('data',data);
       this.setAllUsers(data);
       this.onInitGetUsers(data);
     })
@@ -42,15 +46,15 @@ export class UsersStateService {
     this.usersRealTimeService.changeUsersArray.subscribe(newChange => {
       if (newChange.action === 'USER_SAVED' || newChange.action === 'USER_ARCHIVED') {
         const Index = this.allUsers.findIndex((item) => item.id === newChange.data.id);
-        if (Index > -1) this.allUsers[Index] = newChange.data;
-        if (Index === -1) this.allUsers.unshift(newChange.data);
+        if (Index > -1) this.allUsers[Index] = new User(newChange.data);
+        if (Index === -1) this.allUsers.unshift(new User(newChange.data));
 
       }
      
       if (newChange.action === 'USERS_DEARCHIVED') {
         newChange.data.forEach(data => {
           const Index = this.allUsers.findIndex((item) => item.id === data.id);
-          if (Index > -1) this.allUsers[Index] = data;
+          if (Index > -1) this.allUsers[Index] = new User(data);
         });
        
         

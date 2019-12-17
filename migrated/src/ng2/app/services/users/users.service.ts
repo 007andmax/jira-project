@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment } from '../../../environments/environment';
 import { UsersStateService } from '../../states/users/users-state.service';
+import { tap, map } from 'rxjs/operators';
+import { User } from '../../components/users/class/user';
 
 /**
  * Users service to work with api
@@ -29,7 +31,8 @@ export class UsersService {
    */
   public getAllusers() {
 
-    return this.http.get(this.apiUrl + 'users');
+    return this.http.get(this.apiUrl + 'users').pipe(
+      map((data:any) => data.map((item) =>  new User(item))));
   }
 
   /**
