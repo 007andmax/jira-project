@@ -207,6 +207,10 @@ export class UsersAsideEditComponent implements OnInit {
       reader.onerror = error => reject(error);
     });
   }
+  removePhoneNumber (i) {
+    this.user.phoneNumbers.splice(i);
+    this.validate.removePhoneNumber(i);
+  }
   close() {
     this.opened = false;
     this.user = new UserProfile();

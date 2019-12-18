@@ -62,7 +62,7 @@
         <div class="col-md-6 with-new-link">
           <p>
             Primary Phone
-            <span class="new-link" (click)="addPhoneNumber()">+ Add Phone</span>
+            <span class="new-link" (click)="addPhoneNumber()" *ngIf="user.phoneNumbers.length < 3">+ Add Phone</span>
           </p>
 
           <mat-error *ngIf="!validate.getPhoneNumber(0)">
@@ -113,6 +113,7 @@
                      [(ngModel)]="phone.number"
                      (input)="onCheckPhoneNumber(i)"
                      placeholder="Enter Primary Phone">
+                     <span class="new-link" (click)="removePhoneNumber(i)">- Remove Phone</span>
             </div>
           </ng-template>
         </div>

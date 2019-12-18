@@ -15,6 +15,9 @@ export class UserValidate {
             if (index > 0) this.addPhoneNumber();
         });
     }
+    public removePhoneNumber(i) {
+        this.phoneNumber.splice(i);
+    }
     public addPhoneNumber() {
         this.phoneNumber.push(true);
     }

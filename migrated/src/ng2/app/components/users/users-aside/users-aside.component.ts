@@ -126,6 +126,10 @@ export class UsersAsideComponent implements OnInit {
     this.validate = new UserValidate();
     this.companiesState.onInitClear();
   }
+  removePhoneNumber (i) {
+    this.user.phoneNumbers.splice(i);
+    this.validate.removePhoneNumber(i);
+  }
   public trackByIndex(index, item) {
     return index;
   }
