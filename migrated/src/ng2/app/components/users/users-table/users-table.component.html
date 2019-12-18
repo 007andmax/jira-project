@@ -5,10 +5,7 @@
       <span class="checkbox-mark"></span>
     </label>
    <!--[ngStyle]="{'background': 'url(' + getUserAvatarUrl(user) + ') no-repeat','background-size': 'contain'}"-->
-    <div class="circle-avatar"   >
-      <img [src]="getUserAvatarUrl()" class="qwe" alt=""
-      *ngIf="(this.user && this.user.avatar)"/>
-      <span *ngIf="!(this.user && this.user.avatar)" [textContent]="getNameForAvatar()"></span>
+    <div class="circle-avatar"  [ngStyle]="{'background': 'url(' + getUserAvatarUrl() + ') no-repeat','background-size': 'contain'}"  [textContent]="getNameForAvatar()">
     </div>
     <div class="mob-styles" >
       <p class="ff-g-m fz-13 fw-600" [textContent]="getUserName()"></p>
