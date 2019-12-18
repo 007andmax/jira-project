@@ -65,10 +65,6 @@ export class UsersTableComponent implements OnInit {
     } else {
       return '/users/default/image.jpg';
     }
- /*   if (this.user.avatar && this.user.avatar.origin && this.user.avatar.origin.id) {
-      return '/file/' + (this.user.avatar.origin.id);
-    }*/
-    return '';
   };
   edit() {
     console.log('egegegege');

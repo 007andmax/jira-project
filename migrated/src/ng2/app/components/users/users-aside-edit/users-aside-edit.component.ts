@@ -28,13 +28,14 @@ export class UsersAsideEditComponent implements OnInit {
   user: UserProfile = new UserProfile();
   allTitles: Array<string> = [];
   validate: UserValidate = new UserValidate();
+  phoneTypes = ['Office', 'Mobile', 'Fax'];
   constructor(private imageCropperStateService: ImageCropperStateService, private usersStateService: UsersStateService,
     private usersAsideService: UsersAsideService, private usersService: UsersService,
     private companiesState: SelectClientCompanyStateService,
-    private companiesStateService:CompaniesStateService,
-    private modalImageCropperStateService:ModalImageCropperStateService,
-    private companiesService:CompaniesService,
-    private companySubscriptionState:CompanySubscriptionStateService,
+    private companiesStateService: CompaniesStateService,
+    private modalImageCropperStateService: ModalImageCropperStateService,
+    private companiesService: CompaniesService,
+    private companySubscriptionState: CompanySubscriptionStateService,
     private modalService: NgbModal,
     public cd: ChangeDetectorRef) { }
 
@@ -46,43 +47,43 @@ export class UsersAsideEditComponent implements OnInit {
     this.usersAsideService.addSubscription(getOnUsers);
     this.onCroppImage();
     this.usersStateService.getOpenEditAside().subscribe(data => {
-      console.log('fefefefe',this.usersStateService.getuserForEdit());
+      console.log('fefefefe', this.usersStateService.getuserForEdit());
       this.opened = true;
       this.user.onEdit(this.usersStateService.getuserForEdit());
       this.validate.addPhoneNumbers(this.user.phoneNumbers);
       let company = this.companiesStateService.getCompanies().find(item => item.id === this.user.companyId);
-      console.log('company',company);
+      console.log('company', company);
       this.companiesState.setCompanyFromtEdit(company);
       this.companySubscriptionState.onEditMode(this.user.subscription);
-      console.log('this.user',this.user);
+      console.log('this.user', this.user);
     })
   }
   public onCroppImage() {
     let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
       if (!this.opened || !data || this.imageCropperStateService.getAction() !== CROPP_AVATAR_USER) return;
-       
-      this.usersService.changeAvatar(this.usersStateService.getuserForEdit().id,new CompanyEditLogo(data.croppedImage.base64,data.croppedImage.height,
-        this.usersStateService.getuserForEdit().id,(data.edit) ? this.user.avatar.origin.id : data.id,data.croppedImage.width,data.croppedImage.imagePosition.x1,data.croppedImage.imagePosition.y1)).subscribe(res => {
+
+      this.usersService.changeAvatar(this.usersStateService.getuserForEdit().id, new CompanyEditLogo(data.croppedImage.base64, data.croppedImage.height,
+        this.usersStateService.getuserForEdit().id, (data.edit) ? this.user.avatar.origin.id : data.id, data.croppedImage.width, data.croppedImage.imagePosition.x1, data.croppedImage.imagePosition.y1)).subscribe(res => {
           this.user.editLogo(res);
         })
-      
-   
+
+
     })
     this.usersAsideService.addSubscription(getConfirm);
-   /* let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
-      if (!this.opened || !data || this.imageCropperStateService.getAction() !== CROPP_AVATAR_USER) return;
-
-
-      if (data.edit) {
-        //  this.company.editLogo(data);
-      } else {
-        this.user.setLogo(data);
-      }
-
-    })
-    this.usersAsideService.addSubscription(getConfirm);*/
-  }
+    /* let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
+       if (!this.opened || !data || this.imageCropperStateService.getAction() !== CROPP_AVATAR_USER) return;
  
+ 
+       if (data.edit) {
+         //  this.company.editLogo(data);
+       } else {
+         this.user.setLogo(data);
+       }
+ 
+     })
+     this.usersAsideService.addSubscription(getConfirm);*/
+  }
+
   getUsersTitle(allUsers) {
     this.allTitles = allUsers
       .map((user) => {
@@ -99,13 +100,13 @@ export class UsersAsideEditComponent implements OnInit {
 
         return acc;
       }, []).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
-      1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
+        1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
 
   }
   getLogoUrl() {
     if (this.user && this.user.avatar && this.user.avatar && this.user.avatar.base64 && !this.user.avatar.cropped) return this.user.avatar.base64;
     if (this.user && this.user.avatar && this.user.avatar.cropped && this.user.avatar.cropped.id) return `/file/${this.user.avatar.cropped.id}`;
-    if (this.user && this.user.avatar && this.user.avatar.origin && this.user.avatar.origin.id ) return `/file/${this.user.avatar.origin.id}`;
+    if (this.user && this.user.avatar && this.user.avatar.origin && this.user.avatar.origin.id) return `/file/${this.user.avatar.origin.id}`;
     return '/company/default/logo.jpg';
   }
   getUserType() {
@@ -120,7 +121,7 @@ export class UsersAsideEditComponent implements OnInit {
   onChangeSubscriptions(data) {
     console.log('data', data);
     data.forEach(item => this.user.subscription[item.field] = item.selected);
-   // this.user.setSubscriptions(data);
+    // this.user.setSubscriptions(data);
   }
   onCheckEmail() {
     this.validate.checkValidPrimaryEmail(this.user.primaryEmail);
@@ -148,13 +149,13 @@ export class UsersAsideEditComponent implements OnInit {
     if (selectClient !== 'null') this.validate.setCompanyValid();
 
   }
- 
+
   onSave() {
     if (!this.validate.isValidate(this.user)) return;
 
     console.log('33333333333');
     this.usersService.updateUser(this.user.getUserForUpdate(this.usersStateService.getuserForEdit())).subscribe(data => {
-this.close();
+      this.close();
     })
 
   }
@@ -162,23 +163,23 @@ this.close();
     this.imageCropperStateService.setAction(CROPP_AVATAR_USER);
     console.log('onChangeAvatar');
     this.downloadCompanyLogo().then(data => {
-   //   const modalRef = this.modalService.open(ImageCropperComponent);
-      console.log('data',data);
-    //  modalRef.componentInstance.imageBase64 = data;
-    //  modalRef.componentInstance.id = this.user.avatar.origin.id;
-    this.modalImageCropperStateService.onInitOpen(new ImageCroper(data,this.user.avatar.origin.id,true));
-    this.cd.detectChanges();
-      
+      //   const modalRef = this.modalService.open(ImageCropperComponent);
+      console.log('data', data);
+      //  modalRef.componentInstance.imageBase64 = data;
+      //  modalRef.componentInstance.id = this.user.avatar.origin.id;
+      this.modalImageCropperStateService.onInitOpen(new ImageCroper(data, this.user.avatar.origin.id, true));
+      this.cd.detectChanges();
+
     })
   }
   downloadCompanyLogo() {
     return new Promise((resolve, reject) => {
       if (this.user.avatar && this.user.avatar && this.user.avatar.base64 && !this.user.avatar.cropped) {
         resolve(this.user.avatar.base64);
-      } else  {
+      } else {
         var req = new XMLHttpRequest();
         req.responseType = "arraybuffer";
-        req.open('GET',`/file/${this.user.avatar.origin.id}.jpg` , true); /* Третий аргумент true означает асинхронность */
+        req.open('GET', `/file/${this.user.avatar.origin.id}.jpg`, true); /* Третий аргумент true означает асинхронность */
         req.onload = (oEvent) => {
 
           var blob = new Blob([req.response], { type: "image/jpg" });

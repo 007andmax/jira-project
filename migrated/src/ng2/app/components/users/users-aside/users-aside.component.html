@@ -59,7 +59,7 @@
                                      class="light-dropdown"
                                      (selectedItem)="onSelectCompany($event)"></app-select-client-company>
         </div>
-        <div class="col-md-6 with-new-link">
+        <div class="col-md-6 with-new-link" >
           <p>
             Primary Phone
             <span class="new-link" (click)="addPhoneNumber()">+ Add Phone</span>
@@ -68,6 +68,20 @@
           <mat-error *ngIf="!validate.getPhoneNumber(0)">
             Phone number is required
           </mat-error>
+          <div ngbDropdown>
+          <button class="types-btn" id="dropdownBasic0"   ngbDropdownToggle
+          [textContent]="user.phoneNumbers[0].typeNumber">
+        
+          <i class="icn-sm report-caret-icon"></i>
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic0">
+          <ng-template ngFor let-item [ngForOf]="phoneTypes">
+            <button ngbDropdownItem [textContent]="item"
+              (click)="user.phoneNumbers[0].typeNumber = item.toUpperCase()"></button>
+          </ng-template>
+        
+        </div>
+      </div>
           <input type="text"
                  [(ngModel)]="user.phoneNumbers[0].number"
                  (input)="onCheckPhoneNumber(0)"
@@ -76,13 +90,25 @@
           <ng-template ngFor let-phone *ngIf="user.phoneNumbers.length > 1"
                        [ngForOf]="user.phoneNumbers"
                        [ngForTrackBy]="trackById" let-i="index" [ngForTrackBy]="trackByIndex">
-            <div *ngIf="i > 0" style="margin-top: 20px;">
+            <div *ngIf="i > 0" style="margin-top: 20px;" ngbDropdown>
               <mat-error *ngIf="!validate.getPhoneNumber(i)">
                 Phone number is required
               </mat-error>
               <p>
                 Additional phone
               </p>
+              <button class="types-btn" [id]="'dropdownBasic' + i"   ngbDropdownToggle
+                [textContent]="phone.typeNumber">
+              
+                <i class="icn-sm report-caret-icon"></i>
+              </button>
+              <div ngbDropdownMenu [attr.aria-labelledby]="'dropdownBasic' + i">
+                <ng-template ngFor let-item [ngForOf]="phoneTypes">
+                  <button ngbDropdownItem [textContent]="item"
+                    (click)="phone.typeNumber = item.toUpperCase()"></button>
+                </ng-template>
+              
+              </div>
               <input type="text"
                      [(ngModel)]="phone.number"
                      (input)="onCheckPhoneNumber(i)"

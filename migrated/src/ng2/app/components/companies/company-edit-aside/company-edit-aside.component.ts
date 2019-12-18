@@ -382,7 +382,7 @@ public onCheckGoogleAutoComplete () {
 
       });
 
-    } else alert('Nothing')*/
+    }  */
   }
   /*uploadFile(file) {
     return new Promise((resolve, reject) => {

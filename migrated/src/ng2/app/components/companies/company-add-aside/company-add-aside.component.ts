@@ -302,7 +302,7 @@ export class CompanyAddAsideComponent implements OnInit,OnDestroy {
 
       });
 
-    } else alert('Nothing')
+    }  
   }
   uploadFile(file) {
     return new Promise((resolve, reject) => {

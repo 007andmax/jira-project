@@ -21,6 +21,7 @@ export class UsersAsideComponent implements OnInit {
   user: UserProfile = new UserProfile();
   allTitles: Array<string> = [];
   validate: UserValidate = new UserValidate();
+  phoneTypes = ['Office', 'Mobile', 'Fax'];
   constructor(private imageCropperStateService: ImageCropperStateService, private usersStateService: UsersStateService,
     private usersAsideService: UsersAsideService, private usersService: UsersService,
     private companiesState: SelectClientCompanyStateService,

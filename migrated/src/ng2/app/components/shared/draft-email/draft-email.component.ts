@@ -91,7 +91,7 @@ export class DraftEmailComponent implements OnInit {
         }
       })
 
-    } else alert('Nothing')
+    }  
   }
   reloadAttachment(fileInfo, file) {
     if (fileInfo.error) return;
