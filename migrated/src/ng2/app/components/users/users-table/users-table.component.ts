@@ -55,9 +55,19 @@ export class UsersTableComponent implements OnInit {
     return (index > -1) ? this.companies[index].name : '';
   }
   getUserAvatarUrl() {
-    if (this.user.avatar && this.user.avatar.origin && this.user.avatar.origin.id) {
+    if (!(this.user && this.user.avatar))  return '';
+
+    if (this.user.id) {
+      return '/users/' + (this.user.id || 'default') + '/image' + (this.user.avatar ? '.jpg?t=' + this.user.avatar.updatedAt :
+        '');
+    } else if (this.user.avatar && this.user.avatar.origin && this.user.avatar.origin.id) {
       return '/file/' + (this.user.avatar.origin.id) + '.jpg';
+    } else {
+      return '/users/default/image.jpg';
     }
+ /*   if (this.user.avatar && this.user.avatar.origin && this.user.avatar.origin.id) {
+      return '/file/' + (this.user.avatar.origin.id);
+    }*/
     return '';
   };
   edit() {
