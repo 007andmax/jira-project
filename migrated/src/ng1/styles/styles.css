@@ -10790,12 +10790,20 @@ button.close {
 }
 
 .modal-remote {
-  width: 620px;
+  width: 650px;
   min-height: 500px;
   top: 50%;
   left: 50%;
   margin: 0;
   transform: translate3d(-50%, -50%, 0) !important;
+}
+
+.modal-remote.fade {
+  background: none;
+}
+
+.modal-remote .modal-dialog {
+  margin: 0 auto !important;
 }
 
 .modal-remote-agent .modal-dialog {
