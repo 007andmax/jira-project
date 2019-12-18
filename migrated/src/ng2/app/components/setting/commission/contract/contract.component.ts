@@ -18,9 +18,17 @@ export class ContractComponent implements OnInit {
   };
   flag: string;
   rate: string;
-  isModelDisplay = false;
+  
+  isModelDisplayModel = false;
+  isBlockTimeModel = false;
+  isRateHoursModel = false;
+  perUserDeviceModel = false;
+
   loading = false;
   @ViewChild('commissionRate') commissionRate: ElementRef;
+  @ViewChild('commissionRateHourInput') commissionRateHourInput: ElementRef;
+  @ViewChild('commissionUserDeviceRateInput') commissionUserDeviceRateInput: ElementRef;
+  @ViewChild('commissionRateContractsInput') commissionRateContractsInput: ElementRef;
 
   constructor(
     private commissionService: CommissionService,
@@ -53,31 +61,40 @@ export class ContractComponent implements OnInit {
   editContract(flag: string, rate: string) {
     this.flag = flag;
     this.rate = rate;
-    this.isModelDisplay = true;
+    this.isBlockTimeModel = false;
+    this.isRateHoursModel = false;
+    this.isModelDisplayModel = false; 
+    this.perUserDeviceModel = false;
     if (rate === 'blockTimeContractCommission') {
+      this.isBlockTimeModel = true;
       this.commissionRate.nativeElement.value = this.agreementsCommissions.blockTimeContractCommission;
       this.agreementsCommissions.blockTimeContractCommission = this.commissionRate.nativeElement.value;
     } else if (rate === 'blockTimeContractCommissionExceeding') {
-      this.commissionRate.nativeElement.value = this.agreementsCommissions.blockTimeContractCommissionExceeding;
-      this.agreementsCommissions.blockTimeContractCommissionExceeding = this.commissionRate.nativeElement.value;
+      this.isRateHoursModel = true;
+      this.commissionRateHourInput.nativeElement.value = this.agreementsCommissions.blockTimeContractCommissionExceeding;
+      this.agreementsCommissions.blockTimeContractCommissionExceeding = this.commissionRateHourInput.nativeElement.value;
+      
     } else if (rate === 'userOrDeviceContractCommission') {
-      this.commissionRate.nativeElement.value = this.agreementsCommissions.userOrDeviceContractCommission;
-      this.agreementsCommissions.userOrDeviceContractCommission = this.commissionRate.nativeElement.value;
+      this.perUserDeviceModel = true;
+      this.commissionUserDeviceRateInput.nativeElement.value = this.agreementsCommissions.userOrDeviceContractCommission;
+      this.agreementsCommissions.userOrDeviceContractCommission = this.commissionUserDeviceRateInput.nativeElement.value;
     } else if (this.rate === 'userOrDeviceContractCommissionExceeding') {
-      this.commissionRate.nativeElement.value = this.agreementsCommissions.userOrDeviceContractCommissionExceeding;
-      this.agreementsCommissions.userOrDeviceContractCommissionExceeding = this.commissionRate.nativeElement.value;
+      this.isModelDisplayModel = true;
+      this.commissionRateContractsInput.nativeElement.value = this.agreementsCommissions.userOrDeviceContractCommissionExceeding;
+      this.agreementsCommissions.userOrDeviceContractCommissionExceeding = this.commissionRateContractsInput.nativeElement.value;
     }
   }
 
   setAgreementRate() {
     if (this.rate === 'blockTimeContractCommission') {
       this.agreementsCommissions.blockTimeContractCommission = this.commissionRate.nativeElement.value;
+      // this.isBlockTime = false;
     } else if (this.rate === 'blockTimeContractCommissionExceeding') {
-      this.agreementsCommissions.blockTimeContractCommissionExceeding = this.commissionRate.nativeElement.value;
+      this.agreementsCommissions.blockTimeContractCommissionExceeding = this.commissionRateHourInput.nativeElement.value;
     } else if (this.rate === 'userOrDeviceContractCommission') {
-      this.agreementsCommissions.userOrDeviceContractCommission = this.commissionRate.nativeElement.value;
+      this.agreementsCommissions.userOrDeviceContractCommission = this.commissionUserDeviceRateInput.nativeElement.value;
     } else if (this.rate === 'userOrDeviceContractCommissionExceeding') {
-      this.agreementsCommissions.userOrDeviceContractCommissionExceeding = this.commissionRate.nativeElement.value;
+      this.agreementsCommissions.userOrDeviceContractCommissionExceeding = this.commissionRateContractsInput.nativeElement.value;
     }
 
     Object.keys(this.agreementsCommissions).forEach(key => {
@@ -105,7 +122,7 @@ export class ContractComponent implements OnInit {
           res => {
             this.toastrService.success('Successfully Changed')
             this.oldAgreementsCommissions[this.rate] = data[this.rate];
-            this.isModelDisplay = false;
+            this.isModelDisplayModel = false;
             this.loading = false;
           },
           error => {
@@ -118,7 +135,7 @@ export class ContractComponent implements OnInit {
           res => {
             this.toastrService.success('Changed Successfully')
             this.oldAgreementsCommissions[this.rate] = data[this.rate];
-            this.isModelDisplay = false;
+            this.isModelDisplayModel = false;
             this.loading = false;
           },
           error => {
@@ -132,7 +149,7 @@ export class ContractComponent implements OnInit {
       this.commissionService.setAgreementRates(data, false).subscribe(
         res => {
           this.toastrService.success('Saved Successfully')
-          this.isModelDisplay = false;
+          this.isModelDisplayModel = false;
           this.loading = false;
           this.agreementsCommissions = res || {};
           this.oldAgreementsCommissions = Object.assign(
@@ -157,8 +174,10 @@ export class ContractComponent implements OnInit {
       )
     ) {
       if (this.rate === 'blockTimeContractCommission') {
+        this.isBlockTimeModel = false;
         this.agreementsCommissions.blockTimeContractCommission = 0;
       } else if (this.rate === 'blockTimeContractCommissionExceeding') {
+        this.isRateHoursModel = false;
         this.agreementsCommissions.blockTimeContractCommissionExceeding = 0;
       } else if (this.rate === 'userOrDeviceContractCommission') {
         this.agreementsCommissions.userOrDeviceContractCommission = 0;
@@ -186,7 +205,7 @@ export class ContractComponent implements OnInit {
       this.commissionService.setAgreementRates(data, false).subscribe(
         res => {
           this.toastrService.success('Changed Successfully')
-          this.isModelDisplay = false;
+          this.isModelDisplayModel = false;
           this.loading = false;
 
           this.agreementsCommissions = res || {};

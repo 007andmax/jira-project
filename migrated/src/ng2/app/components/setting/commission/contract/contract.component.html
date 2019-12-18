@@ -19,7 +19,6 @@
               Hourly Contracts will use the service default commission rate.
             </p>
           </td>
-          
         </tr>
       </tbody>
     </table>
@@ -77,6 +76,54 @@
                 src="../../../../../../ng1/images/setting-module/remove.svg"
                 alt="Remove"
             /></a>
+            <div
+              class="modal-content toggle-area"
+              [ngClass]="{ opened: isBlockTimeModel === true }"
+            >
+              <div class="modal-wrapper">
+                <div class="toggle-header">
+                  <h2 class="h1">Edit Rate</h2>
+                </div>
+                <div class="modal-body">
+                  <form method="POST">
+                    <div class="f-row">
+                      <div class="f-col col-100">
+                        <label>Commission Rate (%)</label>
+                        <div class="form-row">
+                          <input
+                            type="text"
+                            class="form-input"
+                            autocomplete="off"
+                            name="commissionRate"
+                            #commissionRate
+                            placeholder="Enter Commission Rate"
+                          />
+                        </div>
+                      </div>
+                      <div class="m-btn-row">
+                        <div class="m-btn-col">
+                          <input
+                            type="submit"
+                            (click)="
+                              setAgreementRate(); this.isBlockTimeModel = false
+                            "
+                            value="Save"
+                            class="btn btn-primary"
+                          />
+                          <a
+                            href="javascript:;"
+                            class="btn btn-secondary"
+                            aria-label="Close"
+                            (click)="isBlockTimeModel = false"
+                            >Cancel</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
           </td>
         </tr>
         <tr>
@@ -117,6 +164,52 @@
                 src="../../../../../../ng1/images/setting-module/remove.svg"
                 alt="Remove"
             /></a>
+            <div
+              class="modal-content toggle-area"
+              [ngClass]="{ opened: isRateHoursModel === true }"
+            >
+              <div class="modal-wrapper">
+                <div class="toggle-header">
+                  <h2 class="h1">Edit Rate</h2>
+                </div>
+                <div class="modal-body">
+                  <form method="POST">
+                    <div class="f-row">
+                      <div class="f-col col-100">
+                        <label>Commission Rate (%)</label>
+                        <div class="form-row">
+                          <input
+                            type="text"
+                            class="form-input"
+                            autocomplete="off"
+                            name="commissionRateHourInput"
+                            #commissionRateHourInput
+                            placeholder="Enter Commission Rate"
+                          />
+                        </div>
+                      </div>
+                      <div class="m-btn-row">
+                        <div class="m-btn-col">
+                          <input
+                            type="submit"
+                            (click)="setAgreementRate(); isRateHoursModel = false"
+                            value="Save"
+                            class="btn btn-primary"
+                          />
+                          <a
+                            href="javascript:;"
+                            class="btn btn-secondary"
+                            aria-label="Close"
+                            (click)="isRateHoursModel = false"
+                            >Cancel</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
           </td>
         </tr>
       </tbody>
@@ -178,6 +271,52 @@
                 src="../../../../../../ng1/images/setting-module/remove.svg"
                 alt="Remove"
             /></a>
+            <div
+              class="modal-content toggle-area"
+              [ngClass]="{ opened: perUserDeviceModel === true }"
+            >
+              <div class="modal-wrapper">
+                <div class="toggle-header">
+                  <h2 class="h1">Edit Rate</h2>
+                </div>
+                <div class="modal-body">
+                  <form method="POST">
+                    <div class="f-row">
+                      <div class="f-col col-100">
+                        <label>Commission Rate (%)</label>
+                        <div class="form-row">
+                          <input
+                            type="text"
+                            class="form-input"
+                            autocomplete="off"
+                            name="commissionUserDeviceRateInput"
+                            #commissionUserDeviceRateInput
+                            placeholder="Enter Commission Rate"
+                          />
+                        </div>
+                      </div>
+                      <div class="m-btn-row">
+                        <div class="m-btn-col">
+                          <input
+                            type="submit"
+                            (click)="setAgreementRate() ; perUserDeviceModel = false;"
+                            value="Save"
+                            class="btn btn-primary"
+                          />
+                          <a
+                            href="javascript:;"
+                            class="btn btn-secondary"
+                            aria-label="Close"
+                            (click)="perUserDeviceModel = false"
+                            >Cancel</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
           </td>
         </tr>
         <tr>
@@ -218,53 +357,53 @@
                 src="../../../../../../ng1/images/setting-module/remove.svg"
                 alt="Remove"
             /></a>
-            
-<div
-  class="modal-content toggle-area"
-  [ngClass]="{ opened: isModelDisplay === true }"
->
-  <div class="modal-wrapper">
-    <div class="toggle-header">
-      <h2 class="h1">Edit Rate</h2>
-    </div>
-    <div class="modal-body">
-      <form method="POST">
-        <div class="f-row">
-          <div class="f-col col-100">
-            <label>Commission Rate (%)</label>
-            <div class="form-row">
-              <input
-                type="text"
-                class="form-input"
-                autocomplete="off"
-                name="commissionRate"
-                #commissionRate
-                placeholder="Enter Commission Rate"
-              />
+
+            <div
+              class="modal-content toggle-area"
+              [ngClass]="{ opened: isModelDisplayModel === true }"
+            >
+              <div class="modal-wrapper">
+                <div class="toggle-header">
+                  <h2 class="h1">Edit Rate</h2>
+                </div>
+                <div class="modal-body">
+                  <form method="POST">
+                    <div class="f-row">
+                      <div class="f-col col-100">
+                        <label>Commission Rate (%)</label>
+                        <div class="form-row">
+                          <input
+                            type="text"
+                            class="form-input"
+                            autocomplete="off"
+                            name="commissionRateContractsInput"
+                            #commissionRateContractsInput
+                            placeholder="Enter Commission Rate"
+                          />
+                        </div>
+                      </div>
+                      <div class="m-btn-row">
+                        <div class="m-btn-col">
+                          <input
+                            type="submit"
+                            (click)="setAgreementRate();isModelDisplayModel=false;"
+                            value="Save"
+                            class="btn btn-primary"
+                          />
+                          <a
+                            href="javascript:;"
+                            class="btn btn-secondary"
+                            aria-label="Close"
+                            (click)="isModelDisplayModel = false"
+                            >Cancel</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="m-btn-row">
-            <div class="m-btn-col">
-              <input
-                type="submit"
-                (click)="setAgreementRate()"
-                value="Save"
-                class="btn btn-primary"
-              />
-              <a
-                href="javascript:;"
-                class="btn btn-secondary"
-                aria-label="Close"
-                (click)="isModelDisplay = false"
-                >Cancel</a
-              >
-            </div>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
           </td>
         </tr>
       </tbody>
@@ -287,9 +426,7 @@
             &nbsp;
           </td>
         </tr>
-        
       </tbody>
     </table>
   </div>
 </div>
-

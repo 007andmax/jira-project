@@ -1,13 +1,14 @@
 import { Component, OnInit, ViewChild, Pipe } from "@angular/core";
 
 import { ReplaySubject, forkJoin, of, throwError } from "rxjs";
-import { takeUntil, catchError } from "rxjs/operators";
+import { takeUntil, catchError, debounceTime } from "rxjs/operators";
 
 import { map } from "rxjs/operators";
 import { CommissionService } from "../commission.service";
 import { UsersService } from "src/ng2/app/services/users/users.service";
 import { ToastrService } from "ngx-toastr";
 import { NgSelectComponent } from "@ng-select/ng-select";
+import { FormControl } from "@angular/forms";
 
 @Component({
   selector: "app-company-commission",
@@ -22,9 +23,11 @@ export class CompanyComponent implements OnInit {
   users: any[] = [];
   usersByCompanies = [];
   activeTechUsers: any;
-  filterTechUsers: any;
+  filterTechUsers = "";
   selectedIdx = -1;
- 
+
+  
+
   config = {
     displayKey: "firstName",
     search: true,
@@ -46,8 +49,8 @@ export class CompanyComponent implements OnInit {
     this.getCompanies();
     this.getUsers();
   }
-
-  /**
+ 
+    /**
    * get users list
    */
   getUsers() {
@@ -91,15 +94,16 @@ export class CompanyComponent implements OnInit {
   }
 
   /**
-   * set tech lead
-   * @param event
+   * updated tech user based on params
+   * @param techLead
    * @param company
    */
-  setTechLead(event: any, company: any) {
-    if (!event || !company) {
+  setTechLead(techLead: any, company: any) {
+    if (!techLead || !company) {
       return;
     }
-    const techLeadId = event.id;
+
+    const techLeadId = techLead.id;
     this.loading = true;
     this.commissionService.setTechLead(company.id, techLeadId).subscribe(
       res => {
@@ -120,7 +124,7 @@ export class CompanyComponent implements OnInit {
   getClinetUrl(client) {
     if (client && client.avatar) {
       return `/users/${client.id}/image.jpg?t=${client.avatar.updatedAt}`;
-    } 
+    }
   }
 
   /**
@@ -132,15 +136,38 @@ export class CompanyComponent implements OnInit {
     if (company.techLeadId === null) {
       return;
     }
+    let techUser: any = [];
+    if (this.activeTechUsers) {
+      techUser = this.activeTechUsers.filter(client => {
+        if (client.id === company.techLeadId) {
+          //client.firstName = client.firstName + ' ' + client.lastName;
+          return client;
+        }
+      });
+    }
 
-    const techUser = this.activeTechUsers.filter(client => {
-      if (client.id === company.techLeadId) {
-        //client.firstName = client.firstName + ' ' + client.lastName;
-        return client;
-      }
-    });
+    return techUser.length > 0 && techUser[0] ? techUser[0].firstName : null;
+  }
 
-    return techUser[0] ? techUser[0].firstName : null;
+  selectedActiveTechUserURL(company, i): any {
+    if (company.techLeadId === null) {
+      return;
+    }
+    let techUser: any = [];
+    if (this.activeTechUsers) {
+      techUser = this.activeTechUsers.filter(client => {
+        if (client.id === company.techLeadId) {
+          if (client.firstName === "Edge") {
+            console.log(client);
+          }
+          return client;
+        }
+      });
+    }
+
+    return techUser.length > 0 && techUser[0] && techUser[0].avatar
+      ? `/users/${techUser[0].id}/image.jpg?t=${techUser[0].avatar.updatedAt}`
+      : null;
   }
 
   /**
@@ -165,6 +192,7 @@ export class CompanyComponent implements OnInit {
           this.loading = false;
           if (custCompany) {
             this.clientsCompanies = custCompany;
+            console.log(custCompany[0]);
           }
         },
         error => {
@@ -173,7 +201,7 @@ export class CompanyComponent implements OnInit {
       );
   }
 
-  selectedDropdown(i){
+  selectedDropdown(i) {
     this.selectedIdx = i;
   }
 
@@ -247,15 +275,40 @@ export class CompanyComponent implements OnInit {
         .join("");
     }
   }
-  dropFrstLstChar(user: any) {
-    if (user) {
-      return [user.firstName, user.lastName]
-        .map(function(s) {
-          if (s) {
-            return s.charAt(0).toUpperCase();
-          }
-        })
-        .join("");
+  dropFrstLstChar(company: any) {
+    if (company === null) {
+      return;
     }
+
+    return [company.firstName, company.lastName]
+      .map(function(s) {
+        if (s) {
+          return s.charAt(0).toUpperCase();
+        }
+      })
+      .join("");
+
+    let techUser: any = [];
+    // if (this.activeTechUsers) {
+    //   techUser = this.activeTechUsers.filter(client => {
+    //     if (client.id === company.techLeadId) {
+    //       return client;
+    //     }
+    //   });
+
+    //   if(techUser.firstName === 'Lori'){
+    //     console.log(techUser)
+    //   }
+
+    //   return techUser.length > 0
+    //     ? [techUser[0].firstName, techUser[0].lastName]
+    //         .map(function(s) {
+    //           if (s) {
+    //             return s.charAt(0).toUpperCase();
+    //           }
+    //         })
+    //         .join("")
+    //     : null;
+    // }
   }
 }

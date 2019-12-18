@@ -202,6 +202,7 @@
               formControlName="subject"
               #subject
               name="subject"
+              id="subject"
               class="form-input insert-field"
               [ngClass]="{ 'is-invalid': submitted && f.subject.errors }"
               placeholder="Enter Subject"
@@ -219,6 +220,8 @@
           <div class="form-row">
             <angular-editor
               id="myEditor"
+              #body
+              name="body"
               formControlName="body"
               [config]="config"
             ></angular-editor>
@@ -261,7 +264,6 @@
         <button
           type="button"
           href="javascript:void(0)"
-          style="border: none;background: none;color: #4c5c6f;"
           *ngIf="emailPages && openEmailTemplate"
           class="restore"
           [disabled]="

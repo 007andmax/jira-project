@@ -181,7 +181,34 @@ export class EmailTempleteComponent implements OnInit {
   insertAtCaret(text) {
     var el = document.activeElement;
     console.log(el);
-    this.insertDataVarables(el, text);
+
+    if (el.id === "subject") {
+      console.log(this.subject);
+      var startPos = this.subject.nativeElement.selectionStart;
+      this.subject.nativeElement.focus();
+
+      this.subject.nativeElement.value =
+        this.subject.nativeElement.value.substr(
+          0,
+          this.subject.nativeElement.selectionStart
+        ) +
+        text +
+        this.subject.nativeElement.value.substr(
+          this.subject.nativeElement.selectionStart,
+          this.subject.nativeElement.value.length
+        );
+
+      this.templeteForm.patchValue({
+        subject: this.subject.nativeElement.value
+      });
+
+      this.subject.nativeElement.selectionStart = startPos;
+      this.subject.nativeElement.focus();
+    } else if (el.id === "editor") {
+      this.insertDataVarables(el, text);
+    }
+
+    // this.insertDataVarables(el, text);
   }
 
   /**
@@ -190,28 +217,40 @@ export class EmailTempleteComponent implements OnInit {
    * @param myValue
    */
   insertDataVarables(myField, myValue) {
-    if (myField.selectionStart || myField.selectionStart == "0") {
-      var startPos = myField.selectionStart;
-      var endPos = myField.selectionEnd;
-      myField.value =
-        myField.value.substring(0, startPos) +
-        myValue +
-        myField.value.substring(endPos, myField.value.length);
-      myField.selectionStart = startPos + myValue.length;
-      myField.selectionEnd = startPos + myValue.length;
-      myField.focus();
-    } else {
-      myField.value += myValue;
-    }
-    if (myField.name === "subject") {
+    var sel, range;
+    sel = window.getSelection();
+    if (sel.getRangeAt && sel.rangeCount) {
+      myField.rango = sel.getRangeAt(0);
+      myField.rango.insertNode(document.createTextNode(myValue));
+      myField.autofocus = true;
+      console.log(myField);
       this.templeteForm.patchValue({
-        subject: myField.value
+        body: myField.textContent
       });
-    } else if (myField.name === "body") {
-      this.templeteForm.patchValue({
-        body: myField.value
-      });
+      return;
     }
+    // if (myField.selectionStart || myField.selectionStart == "0") {
+    //   var startPos = myField.selectionStart;
+    //   var endPos = myField.selectionEnd;
+    //   myField.value =
+    //     myField.value.substring(0, startPos) +
+    //     myValue +
+    //     myField.value.substring(endPos, myField.value.length);
+    //   myField.selectionStart = startPos + myValue.length;
+    //   myField.selectionEnd = startPos + myValue.length;
+    //   myField.focus();
+    // } else {
+    //   myField.value += myValue;
+    // }
+    // if (myField.name === "subject") {
+    //   this.templeteForm.patchValue({
+    //     subject: myField.value
+    //   });
+    // } else if (myField.name === "body") {
+    //   this.templeteForm.patchValue({
+    //     body: myField.value
+    //   });
+    // }
   }
 
   emailPreview(templateKey: any) {
