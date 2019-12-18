@@ -47,7 +47,7 @@
         </div>
         <div class="col-md-6">
           <p>Role</p>
-          <app-select-search [class]="['light-dropdown']" [editItem]="(user.designation) ? user.designation : null" [list]="allTitles"
+          <app-select-search  #role [class]="['light-dropdown']" [editItem]="(user.designation) ? user.designation : null" [list]="allTitles"
                              (onSelectedItem)="onSelectDesignation($event)"></app-select-search>
 
         </div>

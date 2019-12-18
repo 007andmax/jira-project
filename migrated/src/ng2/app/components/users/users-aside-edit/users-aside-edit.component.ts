@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { UserProfile } from '../class/user-profile';
 import { UserValidate } from '../class/user-validate';
 import { ImageCropperStateService } from 'src/ng2/app/states/image-cropper/image-cropper-state.service';
@@ -23,7 +23,8 @@ import { CompanySubscriptionStateService } from '../../companies/company-subscri
   providers: [UsersAsideService]
 })
 export class UsersAsideEditComponent implements OnInit {
-
+  
+  @ViewChild('role') role: any;
   public opened = false;
   user: UserProfile = new UserProfile();
   allTitles: Array<string> = [];
@@ -47,6 +48,7 @@ export class UsersAsideEditComponent implements OnInit {
     this.usersAsideService.addSubscription(getOnUsers);
     this.onCroppImage();
     this.usersStateService.getOpenEditAside().subscribe(data => {
+      this.role.clearClient()
       console.log('fefefefe', this.usersStateService.getuserForEdit());
       this.opened = true;
       this.user.onEdit(this.usersStateService.getuserForEdit());
@@ -56,7 +58,9 @@ export class UsersAsideEditComponent implements OnInit {
       this.companiesState.setCompanyFromtEdit(company);
       this.companySubscriptionState.onEditMode(this.user.subscription);
       console.log('this.user', this.user);
+      
     })
+    
   }
   public onCroppImage() {
     let getConfirm = this.imageCropperStateService.getConfirm().subscribe(data => {
