@@ -220,7 +220,8 @@
              tooltip-append-to-body="true"></div>
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'users'}"
-           ui-sref="users" ng-click="clearUsersFilters(); toggleLeftPanel('users', true)"
+           ui-sref="new-users" 
+           ng-click="toggleLeftPanel('users', true)"
            ng-if="PermissionsService.isAllowed('VIEW_USERS')">
         <div class="left-panel-icn left-panel-icons-users"
              uib-tooltip="users"
@@ -1066,7 +1067,8 @@
         </div>
         <span class="left-panel-full__head--header">Users</span>
       </div>
-      <div class="center-category collapsed-nav nano-content">
+      <div class="center-category collapsed-nav nano-content"></div>
+      <!--<div class="center-category collapsed-nav nano-content">
         <div class="center-category__category" ng-click="filterUsers()"
              ng-class="{'active': !( usersSharedState.filter.isLead || usersSharedState.filter.isClient || usersSharedState.filter.userId || isArchivedUsersToShow())}">
           All Users
@@ -1091,48 +1093,7 @@
         <div class="left-panel-title font-medium">
           By title
         </div>
-        <!-- <div class="center-category__category" ng-click="filterUsers('title', 'User from email')"
-             ng-class="{'active': usersSharedState.filter.isContact}">
-          Managers
-          <div class="col-2 user-company-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
-            <div uib-dropdown-toggle>
-              <span class="colored-circle"
-                    ng-style="{'background-color': tagColors[usersColors['MANAGER']].backgroundColor,
-                              'border-color': tagColors[usersColors['MANAGER']].borderColor}"></span>
-              <div class="green-circle company-circle"></div>
-            </div>
-            <ul class="dropdown-tag-colors" uib-dropdown-menu style="max-width: 232px; z-index: 100000000;">
-              <li ng-repeat="tagColor in tagColors"
-                  ng-class="{'active': usersColors['MANAGER'] === $index}"
-                  ng-click="changeUserColor('MANAGER', $index)">
-                <i class="tag-color tag-color-md"
-                   ng-style="{'background-color': tagColor.backgroundColor,
-                              'border-color': tagColor.borderColor}"></i>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="center-category__category" ng-click="filterUsers('standard')"
-             ng-class="{'active': usersSharedState.filter.isStandard}">
-          Standard Users
-          <div class="col-2 user-company-circle" uib-dropdown dropdown-append-to-body="true" stop-propagation="click">
-            <div uib-dropdown-toggle>
-              <span class="colored-circle"
-                    ng-style="{'background-color': tagColors[usersColors['CLIENT']].backgroundColor,
-                              'border-color': tagColors[usersColors['CLIENT']].borderColor}"></span>
-              <div class="green-circle company-circle"></div>
-            </div>
-            <ul class="dropdown-tag-colors" uib-dropdown-menu style="max-width: 232px; z-index: 100000000;">
-              <li ng-repeat="tagColor in tagColors"
-                  ng-class="{'active': usersColors['CLIENT'] === $index}"
-                  ng-click="changeUserColor('CLIENT', $index)">
-                <i class="tag-color tag-color-md"
-                   ng-style="{'background-color': tagColor.backgroundColor,
-                              'border-color': tagColor.borderColor}"></i>
-              </li>
-            </ul>
-          </div>
-        </div> -->
+        
         <div class="filter-left-panel" style="height: auto !important">
           <div class="x-mark-wrapper" style="position: relative;">
             <input style="padding-right: 50px;" type="text" class="form-control has-dropdown pointer"
@@ -1158,9 +1119,7 @@
                 <i class="icn-sm icn-product-cancel"></i>
               </a>
             </div>
-            <!-- <span class="caret-mark ng-hide" style="position:relative" ng-hide="filterDesignation">
-              <i class="icn-sm report-caret-icon"></i>
-            </span> -->
+             
           </div>
         </div>
         <div class="left-panel-hide-filter">
@@ -1194,13 +1153,7 @@
           </div>
           <div class="filter-left-panel category-expanded angular-animate" ng-show="dropdownByIndustryUserPage">
             <div class="x-mark-wrapper select-to-click">
-              <!--<input type="text" class="form-control has-dropdown pointer"-->
-              <!--placeholder="Select Industry"-->
-              <!--autocomplete="off" ng-model="usersSharedState.filter.industry" typeahead-editable="false"-->
-              <!--uib-typeahead="industry for industry in industries | filter: $viewValue:stateComparator | orderBy:'toString()'"-->
-              <!--qt-typeahead-show-on-focus-->
-              <!--custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">-->
-              <!--<div typeahead-input-icon="usersSharedState.filter.industry"></div>-->
+              
               <qt-dropdown-typehead list-for-dropdown="industries"
                                     selected-item="usersSharedState.filter.industry"
                                     qt-class="'form-control has-dropdown pointer'"
@@ -1216,7 +1169,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div>-->
     </div>
     <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'billing' && !isLeftPanelHidden">
       <div class="left-panel-full__head">

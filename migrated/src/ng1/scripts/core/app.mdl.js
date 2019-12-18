@@ -195,7 +195,7 @@
           template: '<companies-component></companies-component>'
         }))
         .state('new-users', waitForServices({
-          url: '/ng2/new-users',
+          url: '/ng2/users',
           template: '<users-component></users-component>'
         }))
         .state('accounting', waitForServices({
