@@ -14,6 +14,7 @@
     (click)="click$.next('')"
 		#instance="ngbTypeahead"
     autocomplete="new-password"
+    [attr.maxlength]="maxlength"
     (blur)="onChange($event)"
   />
   <span *ngIf="list">
