@@ -89,6 +89,7 @@ export class UsersAsideComponent implements OnInit {
     console.log('this.validate', this.validate.getPhoneNumber(i));
   }
   onSelectDesignation(data) {
+    console.log('data',data);
     this.user.setDesignation(data);
   }
   onSelectRole(data) {
