@@ -67,7 +67,8 @@ export class UsersAsideComponent implements OnInit {
         }
 
         return acc;
-      }, []);
+      }, []).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
+      1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
 
   }
   addPhoneNumber() {
@@ -76,7 +77,8 @@ export class UsersAsideComponent implements OnInit {
   }
   onChangeSubscriptions(data) {
     console.log('data', data);
-    this.user.setSubscriptions(data);
+    data.forEach(item => this.user.subscription[item.field] = item.selected);
+  //  this.user.setSubscriptions(data);
   }
   onCheckEmail() {
     this.validate.checkValidPrimaryEmail(this.user.primaryEmail);

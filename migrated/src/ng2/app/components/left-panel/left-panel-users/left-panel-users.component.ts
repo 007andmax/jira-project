@@ -51,6 +51,9 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
     })
     this.leftPanelUsersService.addSubscription(getOnCompanies);
   }
+  closeMobileFilter() {
+    document.body.querySelector('app-left-panel-users').classList.remove('show');
+  }
   public onSelectCompany(item) {
     if (!item) {
       this.clearSelectedCompany();
@@ -90,7 +93,8 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
         }
 
         return acc;
-      }, []);
+      }, []).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
+      1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
 
   }
   public onSelectClientIndustry(item) {

@@ -14,6 +14,7 @@ import { CompanyEditLogo } from '../../companies/class/company-edit-logo';
 import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ImageCropperComponent } from '../../shared/image-cropper/image-cropper.component';
+import { CompanySubscriptionStateService } from '../../companies/company-subscription/class/company-subscription-state.service';
 
 @Component({
   selector: 'users-aside-edit',
@@ -33,6 +34,7 @@ export class UsersAsideEditComponent implements OnInit {
     private companiesStateService:CompaniesStateService,
     private modalImageCropperStateService:ModalImageCropperStateService,
     private companiesService:CompaniesService,
+    private companySubscriptionState:CompanySubscriptionStateService,
     private modalService: NgbModal,
     public cd: ChangeDetectorRef) { }
 
@@ -51,6 +53,7 @@ export class UsersAsideEditComponent implements OnInit {
       let company = this.companiesStateService.getCompanies().find(item => item.id === this.user.companyId);
       console.log('company',company);
       this.companiesState.setCompanyFromtEdit(company);
+      this.companySubscriptionState.onEditMode(this.user.subscription);
       console.log('this.user',this.user);
     })
   }
@@ -95,7 +98,8 @@ export class UsersAsideEditComponent implements OnInit {
         }
 
         return acc;
-      }, []);
+      }, []).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
+      1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
 
   }
   getLogoUrl() {
@@ -115,7 +119,8 @@ export class UsersAsideEditComponent implements OnInit {
   }
   onChangeSubscriptions(data) {
     console.log('data', data);
-    this.user.setSubscriptions(data);
+    data.forEach(item => this.user.subscription[item.field] = item.selected);
+   // this.user.setSubscriptions(data);
   }
   onCheckEmail() {
     this.validate.checkValidPrimaryEmail(this.user.primaryEmail);

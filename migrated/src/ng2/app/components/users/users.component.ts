@@ -26,6 +26,7 @@ export class UsersComponent implements OnInit {
   showArchivedUsers: boolean = false;
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
+  count:number = 0;
   constructor(private usersStateService: UsersStateService, 
     private userListService: UserListService,
     private companiesStateService: CompaniesStateService,
@@ -114,6 +115,9 @@ export class UsersComponent implements OnInit {
     this.userListService.addSubscription(getChangeCompanies);
     this.onInitSubscribe();
   }
+  showMobileFilter() {
+    document.body.querySelector('app-left-panel-users').classList.add('show');
+  }
   private onInitSubscribe () {
     setTimeout(() => {
      console.log('onInitSubscribe');
@@ -187,7 +191,9 @@ export class UsersComponent implements OnInit {
     }
     this.page_number += 1;
     let listFilter = this.filter.getFilterList(this.reqUsers, this.companies);
-    this.usersStateService.setCount(listFilter.length);
+    console.log('listFilter.length',listFilter.length);
+    this.count = listFilter.length;
+    
     let start = (this.page_number - 1) * 30;
     let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;
     let usersList = [];

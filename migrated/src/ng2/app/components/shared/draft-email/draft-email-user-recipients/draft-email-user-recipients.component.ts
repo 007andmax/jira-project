@@ -78,8 +78,10 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
 
   }
   private setUserList(data) {
-    this.reqUsersList = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt && item.primaryEmail !== '');
-    this.userList = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt && item.primaryEmail !== '');
+    this.reqUsersList = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt && item.primaryEmail !== '').sort((a, b) => (a.primaryEmail.toLowerCase() > b.primaryEmail.toLowerCase()) ?
+    1 : ((b.primaryEmail.toLowerCase() > a.primaryEmail.toLowerCase()) ? -1 : 0));
+    this.userList = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt && item.primaryEmail !== '').sort((a, b) => (a.primaryEmail.toLowerCase() > b.primaryEmail.toLowerCase()) ?
+    1 : ((b.primaryEmail.toLowerCase() > a.primaryEmail.toLowerCase()) ? -1 : 0));
   }
 
   /**

@@ -19,7 +19,7 @@ export class UsersStateService {
   onGetCurrentUser: EventEmitter<any> = new EventEmitter();
   onShowArchived: EventEmitter<any> = new EventEmitter();
   onFilter: EventEmitter<any> = new EventEmitter();
-  onCount: EventEmitter<any> = new EventEmitter();
+   
   openAside: EventEmitter<any> = new EventEmitter();
   openEditAside: EventEmitter<any> = new EventEmitter();
   userForArchive: User = null;
@@ -96,12 +96,7 @@ export class UsersStateService {
   public getUserForDeArchive() {
     return this.userForDeArchive;
   }
-  public setCount(data) {
-    this.onCount.emit(data);
-  }
-  public getOnCount() {
-    return this.onCount;
-  }
+  
   public onInitFilter(data) {
     this.onFilter.emit(data);
   }

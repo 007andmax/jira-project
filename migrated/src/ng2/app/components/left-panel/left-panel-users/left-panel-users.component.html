@@ -2,7 +2,7 @@
   <div class="left-panel-ng2__header mob-hidden">Users</div>
   <div class="left-panel-ng2__content">
     <div class="mob-filters-header desktop-hidden">
-      <button class="x-mark mobile-btn"></button>
+      <button class="x-mark mobile-btn" (click)="closeMobileFilter()"></button>
       <div>Filters</div>
     </div>
 
@@ -78,7 +78,7 @@
       </div>
     </div>
 
-    <button class="mob-filters-btn apply-filters mobile-btn primary">
+    <button class="mob-filters-btn apply-filters mobile-btn primary" (click)="closeMobileFilter()">
       Apply Filters
     </button>
 

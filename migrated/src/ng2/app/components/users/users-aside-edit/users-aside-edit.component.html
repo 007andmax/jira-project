@@ -108,8 +108,9 @@
         </div>
         <div class="col-md-12">
           <p>Subscription</p>
-          <app-user-table-subscription (onChange)="onChangeSubscriptions($event)"
-                                       [subscription]="user.subscription"></app-user-table-subscription>
+          <app-company-subscription (subscribeChange)="onChangeSubscriptions($event)"></app-company-subscription>
+      <!-- <app-user-table-subscription (onChange)="onChangeSubscriptions($event)"
+                                       [subscription]="user.subscription"></app-user-table-subscription>--> 
         </div>
 
         <div class="col-md-12 new-users-content__modal--content-footer">

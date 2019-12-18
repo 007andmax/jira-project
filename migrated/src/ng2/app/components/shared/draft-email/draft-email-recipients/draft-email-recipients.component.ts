@@ -83,8 +83,10 @@ export class DraftEmailRecipientsComponent implements OnInit {
   }
   private setCompanyList(data) {
      
-    this.reqCompanyList = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt);
-    this.companyList = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt);
+    this.reqCompanyList = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt && item.companyInfo.contacts[0].primaryEmail != '').sort((a, b) => (a.companyInfo.contacts[0].primaryEmail.toLowerCase() > b.companyInfo.contacts[0].primaryEmail.toLowerCase()) ?
+    1 : ((b.companyInfo.contacts[0].primaryEmail.toLowerCase() > a.companyInfo.contacts[0].primaryEmail.toLowerCase()) ? -1 : 0));
+    this.companyList = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt && item.companyInfo.contacts[0].primaryEmail != '').sort((a, b) => (a.companyInfo.contacts[0].primaryEmail.toLowerCase() > b.companyInfo.contacts[0].primaryEmail.toLowerCase()) ?
+    1 : ((b.companyInfo.contacts[0].primaryEmail.toLowerCase() > a.companyInfo.contacts[0].primaryEmail.toLowerCase()) ? -1 : 0));
 
   }
   
