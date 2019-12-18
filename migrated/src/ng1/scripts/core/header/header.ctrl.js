@@ -33,8 +33,8 @@
       
         // }, true)
 
-
-
+        $scope.currentCompany = CompaniesService.getCurrentCompany();
+console.log('grgrgr',$scope.currentCompany);
         $scope.addQuickSession = function () {
           sharedQuickSession.isCreateNew = true;
         };

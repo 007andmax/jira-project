@@ -233,10 +233,12 @@
       </div>
     </div>
     <div class=" topNavbarRight">
+      <span class="curret-user-company">{{ currentCompany.name }}</span>
       <div uib-dropdown>
         <div class="nickname-wrap" uib-dropdown-toggle>
           <!--<i ng-class="{'on': currentUser.online, 'busy': !currentUser.online}"-->
           <!--ng-click="currentUser.online = !currentUser.online"></i>-->
+        
           <div class="nickname">
             <i class="on"></i>
             <span style="color: #fff; margin: 0 5px;">{{ getUserName(currentUser) }}</span>

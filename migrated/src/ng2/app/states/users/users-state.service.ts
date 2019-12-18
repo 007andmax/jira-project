@@ -6,6 +6,7 @@ import { retry } from 'rxjs/operators';
 import { UserPipe } from '../../pipe/user.pipe';
 import { UserProfile } from '../../components/users/class/user-profile';
 import { UsersRealTimeService } from './users-real-time.service';
+import { CompanyUpdate } from '../../components/companies/class/company-update';
 
 @Injectable({
   providedIn: 'root'
@@ -49,7 +50,7 @@ export class UsersStateService {
         if (Index > -1) this.allUsers[Index] = newChange.data;
         
       }
-      this.onChangeCompanies.emit(new CompanyUpdate(newChange.action,newChange.data,this.allCompanies));
+     // this.onChangeCompanies.emit(new CompanyUpdate(newChange.action,newChange.data,this.allCompanies));
     })
   }
   public setUserForEdit(data) {
