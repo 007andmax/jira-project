@@ -10,6 +10,12 @@
   display: block;
 }
 
+.icn-16 {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
 .icn-user {
   background: url("assets/img/user-icn.png");
 }
@@ -89,4 +95,20 @@
 .archive-red-ng2 {
   background: url("assets/img/icons/archive-red-ng2.png") no-repeat;
   background-size: cover;
+}
+
+.home-phone-icn {
+  background: url("assets/img/icons/home-phone.png");
+}
+
+.fax-icn {
+  background: url("assets/img/icons/fax.png");
+}
+
+.mobile-phone-icn {
+  background: url("assets/img/icons/mobile-phone.png");
+}
+
+.office-phone-icn {
+  background: url("assets/img/icons/office-phone.png");
 }

@@ -19,7 +19,7 @@
               <p>Maximum size of 2MB. JPG, GIF, PNG</p>
               <input id="upload-file" type="file" (input)="uploadFileOnBrower($event)" />
             </div>
-           
+
           </div>
         </div>
 
@@ -53,11 +53,12 @@
         <div class="col-md-6">
           <p>Client Type</p>
           <div class="light-dropdown">
-            <app-select-search [class]="['dark-dropdown']" [editItem]="(company.clientIndustry.name) ? company.clientIndustry.name : null"
+            <app-select-search [class]="['dark-dropdown']"
+                               [editItem]="(company.clientIndustry.name) ? company.clientIndustry.name : null"
                                [list]="industries"
                                (onSelectedItem)="onSelectClientIndustry($event)"></app-select-search>
           </div>
-           
+
         </div>
         <div class="col-md-12" [ngClass]="{'error-field':!validate.getDomain() }">
           <mat-error *ngIf="!validate.getDomain()">
@@ -72,7 +73,7 @@
         <div class="col-md-12">
           <p>Location</p>
           <input type="text"
-                 #addresstext
+					       #addresstext
                  [(ngModel)]="company.addresses[0].address"
 
                  (focus)="onCheckGoogleAutoComplete()"
@@ -135,9 +136,8 @@
                       id="dropdownBasic"
                       *ngIf="company.contacts[0].phoneNumbers.length > 0"
                       ngbDropdownToggle [textContent]="company.contacts[0].phoneNumbers[0].typeNumber">
-
-                <i class="icn-sm report-caret-icon"></i>
               </button>
+              <i class="icn-sm report-caret-icon"></i>
               <div ngbDropdownMenu aria-labelledby="dropdownBasic">
                 <ng-template ngFor let-item [ngForOf]="phoneTypes">
                   <button ngbDropdownItem [textContent]="item"
@@ -219,10 +219,11 @@
         <div class="col-md-6">
           <p>Sales Person</p>
           <div class="light-dropdown">
-            <app-select-search [class]="['dark-dropdown']" [editItem]="selectedTechLead" [field]="'name'" [list]="listPersons"
+            <app-select-search [class]="['dark-dropdown']" [editItem]="selectedTechLead" [field]="'name'"
+                               [list]="listPersons"
                                (onSelectedItem)="onSelectTechLead($event)"></app-select-search>
           </div>
-        
+
         </div>
         <app-company-tags (tagsChange)="onChangeTags($event)"></app-company-tags>
         <div class="col-md-12 editable-field">

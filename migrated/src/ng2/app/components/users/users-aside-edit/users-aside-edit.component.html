@@ -30,7 +30,7 @@
         <div class="col-md-6">
           <p>Last Name</p>
           <input type="text"
-          maxlength="30"
+                 maxlength="30"
                  [(ngModel)]="user.lastName"
                  placeholder="Enter Last Name">
         </div>
@@ -42,14 +42,15 @@
             Email
           </p>
           <input type="text"
-          maxlength="30"
+                 maxlength="30"
                  [(ngModel)]="user.primaryEmail"
                  (blur)="onCheckEmail()"
                  placeholder="Enter Email">
         </div>
         <div class="col-md-6">
           <p>Role</p>
-          <app-select-search [maxlength]="30" [add]="true"  #role [class]="['light-dropdown']" [editItem]="(user.designation) ? user.designation : null" [list]="allTitles"
+          <app-select-search [maxlength]="30" [add]="true" #role [class]="['light-dropdown']"
+                             [editItem]="(user.designation) ? user.designation : null" [list]="allTitles"
                              (onSelectedItem)="onSelectDesignation($event)"></app-select-search>
 
         </div>
@@ -70,52 +71,57 @@
           <mat-error *ngIf="!validate.getPhoneNumber(0)">
             Phone number is required
           </mat-error>
-          <div ngbDropdown>
-            <button class="types-btn" id="dropdownBasic0"   ngbDropdownToggle
-            [textContent]="user.phoneNumbers[0].typeNumber">
-          
-            <i class="icn-sm report-caret-icon"></i>
-          </button>
-          <div ngbDropdownMenu aria-labelledby="dropdownBasic0">
-            <ng-template ngFor let-item [ngForOf]="phoneTypes">
-              <button ngbDropdownItem [textContent]="item"
-                (click)="user.phoneNumbers[0].typeNumber = item.toUpperCase()"></button>
-            </ng-template>
-          
+          <div class="with-number-types right">
+            <input type="text"
+                   [(ngModel)]="user.phoneNumbers[0].number"
+                   (input)="onCheckPhoneNumber(0)"
+                   placeholder="Enter Primary Phone">
+            <div class="grey-dropdown" ngbDropdown>
+              <button class="types-btn" id="dropdownBasic0" ngbDropdownToggle
+                      [textContent]="user.phoneNumbers[0].typeNumber">
+              </button>
+              <i class="icn-sm report-caret-icon"></i>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic0">
+                <ng-template ngFor let-item [ngForOf]="phoneTypes">
+                  <button ngbDropdownItem [textContent]="item"
+                          (click)="user.phoneNumbers[0].typeNumber = item.toUpperCase()"></button>
+                </ng-template>
+
+              </div>
+            </div>
           </div>
-        </div>
-          <input type="text"
-                 [(ngModel)]="user.phoneNumbers[0].number"
-                 (input)="onCheckPhoneNumber(0)"
-                 placeholder="Enter Primary Phone">
 
           <ng-template ngFor let-phone *ngIf="user.phoneNumbers.length > 1"
                        [ngForOf]="user.phoneNumbers"
                        [ngForTrackBy]="trackById" let-i="index" [ngForTrackBy]="trackByIndex">
-            <div *ngIf="i > 0" style="margin-top: 20px;" ngbDropdown>
+            <div *ngIf="i > 0" style="margin-top: 20px;" class="with-new-link" ngbDropdown>
               <mat-error *ngIf="!validate.getPhoneNumber(i)">
                 Phone number is required
               </mat-error>
               <p>
                 Additional phone
+                <span class="new-link" (click)="removePhoneNumber(i)">Remove Phone</span>
               </p>
-              <button class="types-btn" [id]="'dropdownBasic' + i"   ngbDropdownToggle
-              [textContent]="phone.typeNumber">
-            
-              <i class="icn-sm report-caret-icon"></i>
-            </button>
-            <div ngbDropdownMenu [attr.aria-labelledby]="'dropdownBasic' + i">
-              <ng-template ngFor let-item [ngForOf]="phoneTypes">
-                <button ngbDropdownItem [textContent]="item"
-                  (click)="phone.typeNumber = item.toUpperCase()"></button>
-              </ng-template>
-            
-            </div>
-              <input type="text"
-                     [(ngModel)]="phone.number"
-                     (input)="onCheckPhoneNumber(i)"
-                     placeholder="Enter Primary Phone">
-                     <span class="new-link" (click)="removePhoneNumber(i)">- Remove Phone</span>
+              <div class="with-number-types right">
+                <input type="text"
+                       [(ngModel)]="phone.number"
+                       (input)="onCheckPhoneNumber(i)"
+                       placeholder="Enter Primary Phone">
+                <div class="grey-dropdown" ngbDropdown>
+                  <button class="types-btn" [id]="'dropdownBasic' + i" ngbDropdownToggle
+                          [textContent]="phone.typeNumber">
+                  </button>
+                  <i class="icn-sm report-caret-icon"></i>
+                  <div ngbDropdownMenu [attr.aria-labelledby]="'dropdownBasic' + i">
+                    <ng-template ngFor let-item [ngForOf]="phoneTypes">
+                      <button ngbDropdownItem [textContent]="item"
+                              (click)="phone.typeNumber = item.toUpperCase()"></button>
+                    </ng-template>
+
+                  </div>
+
+                </div>
+              </div>
             </div>
           </ng-template>
         </div>
@@ -138,8 +144,8 @@
         <div class="col-md-12">
           <p>Subscription</p>
           <app-company-subscription (subscribeChange)="onChangeSubscriptions($event)"></app-company-subscription>
-      <!-- <app-user-table-subscription (onChange)="onChangeSubscriptions($event)"
-                                       [subscription]="user.subscription"></app-user-table-subscription>--> 
+          <!-- <app-user-table-subscription (onChange)="onChangeSubscriptions($event)"
+                                           [subscription]="user.subscription"></app-user-table-subscription>-->
         </div>
 
         <div class="col-md-12 new-users-content__modal--content-footer">

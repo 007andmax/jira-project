@@ -5,18 +5,18 @@
   <app-users-header [count]="count"></app-users-header>
   <div class="new-users__list">
     <div class="new-users__list--header clearfix mob-hidden">
-      <div class="col-md-3 with-checkbox">
+      <div class="col-md-3 pointer with-checkbox">
         <label class="checkbox-container">
           <input type="checkbox" (change)="onSelectAllUser($event)">
           <span class="checkbox-mark"></span>
         </label>
         <p  (click)="onFilter('name')">Name</p>
       </div>
-      <div class="col-md-4"  (click)="onFilter('company')">Company</div>
-      <div class="col-md-4"  (click)="onFilter('contact')">Contact No.</div>
-      <div class="col-md-4">Subscription</div>
-      <div class="col-md-1 text-center"  (click)="onFilter('tickets')">Tickets</div>
-      <div class="col-md-2"></div>
+      <div class="col-md-4 pointer"  (click)="onFilter('company')">Company</div>
+      <div class="col-md-4 pointer"  (click)="onFilter('contact')">Contact No.</div>
+      <div class="col-md-4 pointer">Subscription</div>
+      <div class="col-md-1 pointer text-center"  (click)="onFilter('tickets')">Tickets</div>
+      <div class="col-md-2 pointer"></div>
     </div>
     <div class="user-content"
     infiniteScroll
@@ -30,7 +30,7 @@
         <app-users-table [showArchivedUsers]="showArchivedUsers" [user]="user"></app-users-table>
       </ng-template>
       <div class="loading" *ngIf="showPreloader"></div>
-    
+
     </div>
     <button class="mob-filters-btn mobile-btn primary" (click)="showMobileFilter()">
       Filters
