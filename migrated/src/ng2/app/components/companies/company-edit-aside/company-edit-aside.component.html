@@ -57,17 +57,7 @@
                                [list]="industries"
                                (onSelectedItem)="onSelectClientIndustry($event)"></app-select-search>
           </div>
-          <!--  <div class="light-dropdown" ngbDropdown>
-              <i class="icn-sm report-caret-icon"></i>
-              <input type="text"
-                     [value]="(company.clientIndustry.name) ? company.clientIndustry.name : ''"
-                     placeholder="Select Client Type" id="dropdownClientIndustry" ngbDropdownToggle />
-              <div ngbDropdownMenu aria-labelledby="dropdownClientIndustry">
-                <ng-template ngFor let-item [ngForOf]="industries">
-                  <button ngbDropdownItem [textContent]="item" (click)="company.clientIndustry.name = item"></button>
-                </ng-template>
-              </div>
-            </div> -->
+           
         </div>
         <div class="col-md-12" [ngClass]="{'error-field':!validate.getDomain() }">
           <mat-error *ngIf="!validate.getDomain()">
@@ -232,18 +222,7 @@
             <app-select-search [class]="['dark-dropdown']" [editItem]="selectedTechLead" [field]="'name'" [list]="listPersons"
                                (onSelectedItem)="onSelectTechLead($event)"></app-select-search>
           </div>
-          <!--<div class="light-dropdown" ngbDropdown>
-             <i class="icn-sm report-caret-icon"></i>
-             <input type="text" [value]="getSelectedTechLead()" autocomplete="new-password"
-                    placeholder="Select Sales Person"
-                    id="dropdownPersons" ngbDropdownToggle />
-             <div ngbDropdownMenu aria-labelledby="dropdownPersons">
-               <ng-template ngFor let-item [ngForOf]="listPersons" let-i="index">
-                 <button ngbDropdownItem [textContent]="item.firstName + ' ' + item.lastName"
-                         (click)="onSelectTechLead(i)"></button>
-               </ng-template>
-             </div>
-           </div> -->
+        
         </div>
         <app-company-tags (tagsChange)="onChangeTags($event)"></app-company-tags>
         <div class="col-md-12 editable-field">

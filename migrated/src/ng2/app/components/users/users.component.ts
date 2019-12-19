@@ -10,6 +10,7 @@ import { ARCHIVE_USER, DEARCHIVE_USER } from '../../const/confirm';
 import { UsersService } from '../../services/users/users.service';
 import { UserChange } from './class/user-change';
 import { WebsocketService } from '../../services/websocket/websocket.service';
+import { DraftEmailStateService } from '../../states/draft-email/draft-email-state.service';
 
 @Component({
   selector: 'app-users',
@@ -33,6 +34,7 @@ export class UsersComponent implements OnInit {
     private confirmStateService: ConfirmStateService,
     private usersService: UsersService,
     public cd: ChangeDetectorRef,
+    private draftEmailStateService: DraftEmailStateService,
     private websocketService:WebsocketService) { }
 
   ngOnInit() {
@@ -142,6 +144,26 @@ export class UsersComponent implements OnInit {
       this.userListService.addSubscription(stompClient);
    
   }, 3000);
+  }
+  onSelectAllUser (event) {
+    if (event.target.checked) {
+     let list_user_table = document.body.querySelectorAll('app-users-table');
+     list_user_table.forEach(item => {
+      (<any>item.querySelector('input[type="checkbox"]')).checked = true;
+   
+     });
+      this.draftEmailStateService.resetSelectedUsers();
+      this.users.forEach(user => {
+        this.draftEmailStateService.addSelectedUser(user);
+      })
+    } else {
+      this.draftEmailStateService.resetSelectedUsers();
+      let list_user_table = document.body.querySelectorAll('app-users-table');
+      list_user_table.forEach(item => {
+        (<any>item.querySelector('input[type="checkbox"]')).checked = false;
+     
+       });
+    }
   }
   private onDeArchiveUser(id) {
     let ids = [];

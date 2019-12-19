@@ -1,4 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
+import { User } from '../../components/users/class/user';
 
 @Injectable({
   providedIn: 'root'
@@ -7,8 +8,21 @@ export class DraftEmailStateService {
   showAsideForAdd: EventEmitter<any> = new EventEmitter();
   clear: EventEmitter<any> = new EventEmitter();
   action:string = null;
+  selectedUsers:Array<User> = [];
   constructor() { }
 
+  public addSelectedUser(data) {
+    this.selectedUsers.push(data);
+  }
+  public getSelectedUsers(){
+    return this.selectedUsers;
+  }
+  public resetSelectedUsers () {
+    this.selectedUsers = [];
+  }
+  public removeSelectedUser(i) {
+    this.selectedUsers.splice(i);
+  }
   public setAction(data) {
     this.action = data;
   }

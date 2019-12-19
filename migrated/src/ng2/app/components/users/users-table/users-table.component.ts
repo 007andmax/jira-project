@@ -12,6 +12,7 @@ import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertComponent } from '../../shared/alert/alert.component';
 import { UsersTableService } from './services/users-table.service';
+import { DraftEmailStateService } from 'src/ng2/app/states/draft-email/draft-email-state.service';
 
 @Component({
   selector: 'app-users-table',
@@ -28,6 +29,7 @@ export class UsersTableComponent implements OnInit {
     private usersStateService: UsersStateService,  
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal, 
+    private draftEmailStateService: DraftEmailStateService,
     private usersTableService:UsersTableService) { }
    
   onChangeSubscriptions(data) {
@@ -107,5 +109,15 @@ export class UsersTableComponent implements OnInit {
     modalRef.componentInstance.message = `Do you want to restore ${this.user.firstName + ' ' + this.user.lastName}`;
     this.usersStateService.setUserForDeArchive(this.user);
   }
+  onSelectUser(event) {
+    console.log('event',event.target.checked);
+    if (event.target.checked) {
+      this.draftEmailStateService.addSelectedUser(this.user);
+    } else {
+      let list = this.draftEmailStateService.getSelectedUsers();
+      let index = list.findIndex(item => item.id === this.user.id);
+      if (index > -1) this.draftEmailStateService.removeSelectedUser(index);
+    }
 
+  }
 }

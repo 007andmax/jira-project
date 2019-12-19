@@ -1,7 +1,7 @@
 <div class="new-users-content__list--item clearfix">
   <div class="col-md-3 w-100">
     <label class="checkbox-container">
-      <input type="checkbox">
+      <input type="checkbox" (change)="onSelectUser($event)">
       <span class="checkbox-mark"></span>
     </label>
    <!--[ngStyle]="{'background': 'url(' + getUserAvatarUrl(user) + ') no-repeat','background-size': 'contain'}"-->

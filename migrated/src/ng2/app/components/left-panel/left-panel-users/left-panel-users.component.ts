@@ -73,7 +73,8 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
 
   }
   private getClientsList(data) {
-    this.companies = data.filter(item => item.accountType === 'CLIENT' && ((!this.showArchivedCompanies) ? !item.deletedAt : item.deletedAt));
+    this.companies = data.filter(item => item.accountType === 'CLIENT' && ((!this.showArchivedCompanies) ? !item.deletedAt : item.deletedAt)).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+    1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
   toggleFilter(event) {
     event.target.parentNode.classList.toggle('show-filter');

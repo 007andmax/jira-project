@@ -12,6 +12,7 @@ import { USER } from 'src/ng2/app/const/users';
 import { takeUntil } from 'rxjs/operators';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { DraftEmailStateService } from 'src/ng2/app/states/draft-email/draft-email-state.service';
+import { User } from '../../../users/class/user';
 
 @Component({
   selector: 'draft-email-user-recipients',
@@ -34,7 +35,7 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
   userEmails = [];
   userList = [];
   reqUsersList = [];
-  @Input() public data;
+  @Input() usersSelected:Array<User> = [];
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
   @Output() onCompanyEmails = new EventEmitter<any>();
@@ -47,7 +48,6 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
    */
   public constructor(
 
-    private companiesState: CompaniesStateService,
     private draftEmailStateService: DraftEmailStateService,
     private usersStateService: UsersStateService,
     public cd: ChangeDetectorRef
@@ -57,7 +57,6 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-
 
     this.getUsersList();
 
@@ -82,6 +81,17 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
     1 : ((b.primaryEmail.toLowerCase() > a.primaryEmail.toLowerCase()) ? -1 : 0));
     this.userList = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt && item.primaryEmail !== '').sort((a, b) => (a.primaryEmail.toLowerCase() > b.primaryEmail.toLowerCase()) ?
     1 : ((b.primaryEmail.toLowerCase() > a.primaryEmail.toLowerCase()) ? -1 : 0));
+
+    this.usersSelected.forEach(item => {
+      if (item.primaryEmail !== '')
+      {
+        this.selectedUsers.push(item.primaryEmail);
+        this.userEmails.push(item.primaryEmail);
+      }
+    
+    })
+    
+    this.onCompanyEmails.emit(this.userEmails);
   }
 
   /**

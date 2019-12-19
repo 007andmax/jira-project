@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ImageCropperStateService } from 'src/ng2/app/states/image-cropper/image-cropper-state.service';
 import { CROPP_AVATAR_USER } from 'src/ng2/app/const/image-cropp';
 import { UserProfile } from '../class/user-profile';
@@ -9,6 +9,7 @@ import { UsersService } from 'src/ng2/app/services/users/users.service';
 import { SelectClientCompanyStateService } from '../../shared/select-client-company/services/select-client-company-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ImageCropperComponent } from '../../shared/image-cropper/image-cropper.component';
+import { CompanySubscriptionStateService } from '../../companies/company-subscription/class/company-subscription-state.service';
 
 @Component({
   selector: 'app-users-aside',
@@ -17,6 +18,7 @@ import { ImageCropperComponent } from '../../shared/image-cropper/image-cropper.
   providers: [UsersAsideService]
 })
 export class UsersAsideComponent implements OnInit {
+  @ViewChild('role') role: any;
   public opened = false;
   user: UserProfile = new UserProfile();
   allTitles: Array<string> = [];
@@ -25,6 +27,7 @@ export class UsersAsideComponent implements OnInit {
   constructor(private imageCropperStateService: ImageCropperStateService, private usersStateService: UsersStateService,
     private usersAsideService: UsersAsideService, private usersService: UsersService,
     private companiesState: SelectClientCompanyStateService,
+    private companySubscriptionState:CompanySubscriptionStateService,
     private modalService: NgbModal,) { }
 
   ngOnInit() {
@@ -35,8 +38,9 @@ export class UsersAsideComponent implements OnInit {
     this.usersAsideService.addSubscription(getOnUsers);
     this.onCroppImage();
     this.usersStateService.getOpenAside().subscribe(data => {
+      this.role.clearClient()
       this.opened = true;
-      
+      this.companySubscriptionState.onEditMode(this.user.subscription);
     })
   }
   public onCroppImage() {
