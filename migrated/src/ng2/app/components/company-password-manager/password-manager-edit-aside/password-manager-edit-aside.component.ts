@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild, ChangeDetectorRef, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ValidationErrors } from '@angular/forms';
 import { Observable, Subject, merge, Subscription } from 'rxjs';
 import { ISubscription } from "rxjs/Subscription";
@@ -100,6 +100,7 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
     private companiesState: CompaniesStateService,
     private devicesSateService:DevicesSateService,
     private usersStateService: UsersStateService,
+    private elRef: ElementRef
   ) { }
 
   /**
@@ -134,6 +135,9 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
     this.opened = !this.opened;
     if (!this.opened) {
       this.showPassword = false;
+      this.elRef.nativeElement.querySelector('#toggle-password').classList.add('show-pass');
+      this.elRef.nativeElement.querySelector('#toggle-password').classList.remove('hide-pass');
+      this.elRef.nativeElement.querySelector('#password').setAttribute('type','password');
     //  this.showHideService.setShow('password',false);
       this.passwordManagerService.setPassword(null);
     }
@@ -478,6 +482,8 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
   }
 
   public togglePassword() {
+    console.log('this.showPassword',this.showPassword);
+    console.log('this.editItem',this.editItem);
     if (!this.showPassword) {
       if (this.editItem)
       {
@@ -488,16 +494,25 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
          
           this.createPasswordRecord.controls['password'].setValue(data.password);
           this.showPassword = !this.showPassword;
+          this.elRef.nativeElement.querySelector('#toggle-password').classList.add('hide-pass');
+          this.elRef.nativeElement.querySelector('#toggle-password').classList.remove('show-pass');
+          this.elRef.nativeElement.querySelector('#password').setAttribute('type','text');
        //   this.showHideService.setShow('password',true);
           this.isLoadPassword = false;
         })
       } else {
         this.showPassword = !this.showPassword;
+        this.elRef.nativeElement.querySelector('#toggle-password').classList.add('hide-pass');
+        this.elRef.nativeElement.querySelector('#toggle-password').classList.remove('show-pass');
+        this.elRef.nativeElement.querySelector('#password').setAttribute('type','text');
       //  this.showHideService.setShow('password',true);
       }
      
     } else {
       this.showPassword = !this.showPassword;
+      this.elRef.nativeElement.querySelector('#toggle-password').classList.add('show-pass');
+      this.elRef.nativeElement.querySelector('#toggle-password').classList.remove('hide-pass');
+      this.elRef.nativeElement.querySelector('#password').setAttribute('type','password');
      // this.showHideService.setShow('password',false);
     }
   }
