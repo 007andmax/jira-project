@@ -169,6 +169,9 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
     this.showArchivedCompanies = true;
 
   }
+  public trackByIndex(index, item) {
+    return index;
+  }
   ngOnDestroy(): void {
     this.leftPanelUsersService.onUnsubscribe();
   }
