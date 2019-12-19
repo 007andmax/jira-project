@@ -41,6 +41,7 @@
             Email
           </p>
           <input type="text"
+          maxlength="30"
                  [(ngModel)]="user.primaryEmail"
                  (blur)="onCheckEmail()"
                  placeholder="Enter Email">
