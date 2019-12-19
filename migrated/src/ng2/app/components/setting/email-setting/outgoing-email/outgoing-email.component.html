@@ -40,7 +40,7 @@
           <select
             class="cmn-select form-input"
             formControlName="usedEmailVia"
-            (change)="changeEmailVia(true)"
+            (change)="changeEmailVia()"
           >
             <option *ngFor="let email of emailVia" value="{{ email.label }}">{{
               email.label
@@ -166,10 +166,16 @@
             class="password-co"
             (click)="showPassword = !showPassword"
             [hidden]="!smtp.password"
-            ><img
-              src="../../../../../../ng1/images/setting-module/password-show.svg"
-              alt="password"
-          /></a>
+            >
+            <img
+            *ngIf="!showPassword"
+              src="../../../../../../ng1/images/setting-module/password-show-old.svg"
+              alt="password"/>
+              <img
+              *ngIf="showPassword"
+              src="../../../../../../ng1/images/setting-module/Password-Show.svg"
+              alt="password"/>
+            </a>
         </div>
       </div>
       <div class="f-col col-100 test-server">

@@ -100,8 +100,12 @@ $graphicMedBold:'Graphik-Medium';
     }
 }
 
+.margin-bottom{
+    margin: 0px 0px 10px 0px !important;
+}
 
 .contract .action .modal-content.toggle-area {
     top: 35px;
     right: 15px;
+    a.btn.btn-secondary{margin-left: 0;}
 }

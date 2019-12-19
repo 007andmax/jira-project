@@ -280,7 +280,7 @@
           <label class="innert-links" for="profile-dp">{{
             techUser && techUser.avatar ? "Change Photo" : "Upload Avatar"
           }}</label>
-          <span>Maximum size of 2MB. JPG, GIF, PNG</span>
+          
           <label
             for="profile-dp"
             (click)="deleteAvatar()"
@@ -296,6 +296,7 @@
             >
           </label> -->
         </div>
+        <span>Maximum size of 2MB. JPG, GIF, PNG</span>
       </div>
     </div>
     <form [formGroup]="techUserForm" (ngSubmit)="onCreateSubmit()">
@@ -483,7 +484,7 @@
           alt="user"
           *ngIf="selectedTechUser.avatar === null"
         /> -->
-        <span *ngIf="selectedTechUser.avatar === null">
+        <span class="simple-dp" *ngIf="selectedTechUser.avatar === null">
           {{displayFrstLstChar(selectedTechUser)}}
         </span>
       </span>
@@ -500,7 +501,7 @@
           alt="user"
           data-tooltip="Tech-user hasn't confirmed his account yet."
         /> -->
-        <span *ngIf="selectedTechUser?.avatar?.updatedAt">
+        <span class="simple-dp" *ngIf="selectedTechUser?.avatar?.updatedAt">
           {{displayFrstLstChar(selectedTechUser)}}
         </span>
       </span>
@@ -519,7 +520,7 @@
               >Remove Photo</a
             >
           </label>
-          <span>Maximum size of 2MB. JPG, GIF, PNG</span>
+          
           <!-- <label for="profile-dp">
             <a
               href="javascript:void(0)"
@@ -529,6 +530,7 @@
             >
           </label> -->
         </div>
+        <span>Maximum size of 2MB. JPG, GIF, PNG</span>
       </div>
 
       <div class="img-croparea" *ngIf="isCroppedImg">

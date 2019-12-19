@@ -1036,7 +1036,7 @@ tabset {
                 &::after{
                     display: none;
                 }
-            }
+            }    
         }
         a{
             margin-right: 0;
@@ -1448,8 +1448,27 @@ tabset {
                 border-bottom: 0;
             }
             .dp{
-                height: 63px;width: 63px;
-                
+                height: 64px;width: 64px;
+            }
+            .simple-dp{
+                width: 64px;
+                height: 64px;
+                border: solid 1px rgba(22, 164, 250, 0.2);
+                background-color: #ffffff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-weight: 500;
+                font-stretch: normal;
+                font-style: normal;
+                font-size: 11px;
+                line-height: normal;
+                letter-spacing: normal;
+                text-align: center;
+                color: #4f5f79;
+                overflow: hidden;
+                @include border-radius(50%);
+                font-family: $graphicSemibold;
             }
             .dp-info {
                 @media only screen and (max-width: 768px){
@@ -1662,27 +1681,43 @@ tabset {
         display: block;
     }
 }
+
 .toast-error,.toast-warning{
-    width: auto !important;
-    border-radius: 6px !important;
+    // top: 105px;
+    width: auto;
+    -o-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    -o-box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1);
     box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1);
-    padding: 8px 15px 8px 15px !important;
+    background-image: none !important;
+    
+    background: url(/../../../ng1/images/setting-module/Error.svg)  #FF6E61 no-repeat left 16px center !important;
+    background-color: #FF6E61;
+    padding:12px 15px 12px 44px;
     font-size: 12px;
     font-weight: normal;
     font-style: normal;
     font-stretch: normal;
-    line-height: 1.33 !important;
+    line-height: 1.33;
     letter-spacing: normal;
     color: #ffffff;
-    min-height: 42px;
-    background: none;
-    background-color: red;
-    .toast-message {
-        position: relative;
-        top: 5px;
-        display: block;
-    }
+    // margin: 0 auto;
+    // left: 265px;
+    // right: 0;
+    // min-width: 236px;
+    min-height: 40px;
+    display: block !important;opacity: 1 !important;
 }
+#toast-container .toast.toast-error {
+background-image: none !important;
+background: url(/../../../ng1/images/setting-module/Error.svg)  #FF6E61 no-repeat left 16px center !important;
+background-color: #FF6E61;
+}
+
 .toast-close-button{visibility: hidden;pointer-events: none;display: none;}
 
 /*** Sucess Messages **/
@@ -1699,7 +1734,8 @@ tabset {
     -moz-box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1);
     box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1);
     background-image: none !important;
-    background: url('/ng2/assets/img/success-tick.png')  #2ec866 no-repeat left 16px center !important;
+    
+    background: url(/../../../ng1/images/setting-module/success-tick.svg)  #2ec866 no-repeat left 16px center !important;
     background-color: #2ec866;
     padding:12px 15px 12px 44px;
     font-size: 12px;
@@ -1729,7 +1765,7 @@ tabset {
 }
 .overlay-container #toast-container .toast-success,.overlay-container .toast-container .toast-success {
     background-image: none !important;
-    background: url(/ng2/assets/img/success-tick.png) #2ec866 no-repeat left 16px center !important;
+    background: url(/../../../ng1/images/setting-module/success-tick.svg) #2ec866 no-repeat left 16px center !important;
  
 }
 
@@ -1752,6 +1788,14 @@ ngx-loading > div {
 }
 
 .left-panel.nano{display: none;}
+
+.ngx-dropdown-container button .nsdicon-angle-down{font-size: 0 !important;
+    background: url(/ng2/assets/img/selct-arrow.svg) no-repeat center !important;
+    height: 8px;
+    width: 10px;
+    display: inline-block;
+    top: 5px;
+    right: -2px;}
 
 }
 
@@ -1780,7 +1824,7 @@ ngx-loading > div {
 
 /*** user select Dropdwon ****/
 .ng7 .ng-select.ng-select-single .ng-select-container {height: 32px;min-height: 32px;width: auto;min-width: inherit;max-width: 100%;border-color: #c4cbd5;}
-.ng7 .ng-select .ng-select-container .ng-value-container .ng-placeholder {
+.ng7 .ng-select .ng-select-container .ng-value-container .ng-placeholder,.ng7 .ng-select .ng-select-container .ng-value-container .ng-value b {
     font-size: 12px;
     font-weight: normal;
     line-height: 1.33;
@@ -1789,13 +1833,14 @@ ngx-loading > div {
     color: #4f5f79;
     
 }
+.ng7 .ng-select .ng-select-container .ng-value-container .ng-value b{padding-left: 5px;}
 .ng7 .ng-select.ng-select-single .ng-select-container .ng-value-container .ng-input {padding-right:25px;}
 .ng7 .ng-select.ng-select-single .ng-select-container .ng-value-container img {
     width: 24px;
     height: 24px;
     @include border-radius(50%);
 }
-.ng7 .ng-select.ng-select-single .ng-select-container .ng-value-container b{padding-left: 5px;  font-size: 12px;
+.ng7 .ng-select.ng-select-single .ng-select-container .ng-value-container h5{padding-left: 5px;  font-size: 12px;
     font-weight: normal;
     line-height: 1.33;
     letter-spacing: normal;
@@ -1803,19 +1848,46 @@ ngx-loading > div {
     color: #4f5f79;}
 .ng7 .ng-select .ng-arrow-wrapper .ng-arrow{border: none;background: url('/ng2/assets/img/filter-dropdown-down.svg') no-repeat center;    width: 11px;
     height: 11px;
-    background-size: 11px auto;}    
+    background-size: 11px auto;top:2px;}    
 .ng7 .ng-select .ng-select-container .ng-value-container{padding-left: 5px;}
 .ng7 .ng-select .ng-clear-wrapper{display: none;}
 .ng7 .ng-select .ng-arrow-wrapper{right: 8px;padding-right: 0;width: auto;}
-.ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option{text-align: left;padding: 8px 16px;}
+.ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option{text-align: left;padding: 8px 16px;display: flex;justify-content: space-between;}
+.ng7 .ng-dropdown-panel .ng-dropdown-panel-items .info {width: calc(100% - 42px);}
 .ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option img{width: 32px;height: 32px;margin-right: 10px;@include border-radius(50%);}
-.ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option b{ font-size: 13px;
+.ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option h5{ font-size: 13px;
     font-weight: 500;
     letter-spacing: normal;
-    color: #4f5f79;}
-.ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected,.ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked,.ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option:hover,.ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked{background-color: #16a4fa;}    
-.ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option:hover b,.ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked b{color: #fff;} 
-.ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected b,.ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked b{color:#fff;}
+    color: #4f5f79;margin-bottom: 0;}
+    .ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option > span{
+        width: 32px;
+        height: 32px;
+        border: solid 1px rgba(22, 164, 250, 0.2);
+        background-color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 500;
+        font-stretch: normal;
+        font-style: normal;
+        font-size: 11px;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: center;
+        color: #4f5f79;
+        overflow: hidden;
+        @include border-radius(50%);
+        font-family: $graphicSemibold;
+        margin-right: 10px;
+    }    
+    .ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option .info > span{font-size: 12px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.33;
+        letter-spacing: normal;
+        color: #4f5f79 ;}
+
 .ng7 .ng-dropdown-panel.ng-select-bottom{width: 290px;
     right: 0;
     left: auto;
@@ -1838,11 +1910,23 @@ ngx-loading > div {
         border-radius: 0;
         height: 240px;
     }
-
+    .ng7 .ng-dropdown-panel .ng-value b{ font-size: 12px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.33;
+        letter-spacing: normal;
+        text-align: left;
+        color: #4f5f79;    padding-left: 5px;}
 
     
+        .ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked,.ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected,.ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked{background-color: #16a4fa;}
+        .ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected > span,.ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked > span{color: #fff;border-color: #fff;}
+        .ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected > .info span,.ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected > .info h5{color:#fff}
+        .ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked > .info h5,.ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked > .info span{color: #fff;border-color: #fff;}
+        .ng7 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked > span{color: #4f5f79;}
 
-/*** Common responsive ***/
+        /*** Common responsive ***/
 
 @media only screen and (max-width: 1280px){
 .ng7 .modal-content.toggle-area.opened {
@@ -2064,7 +2148,7 @@ div#editor.angular-editor-textarea {
   resize: none;
   border-radius: 0 0 4px 4px;
   height: 153px !important;
-  border:none;
+  border: 1px solid #ddd;
 }
 
 .invalid-feedback{margin-top: 5px;float: left;width: 100%;}

@@ -21,6 +21,9 @@
     .action{
         width: 70px;
         position: relative;
+        .modal-content{
+            top: 45px;
+        }
         @media only screen and (max-width: 768px){
             width: 50px;
         }
