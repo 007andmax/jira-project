@@ -1,6 +1,6 @@
 <ng-sidebar-container>
   <ng-sidebar [(opened)]="opened" [position]="'right'">
-    <div class="new-companies-content__modal">
+    <div class="new-companies-content__modal clearfix">
       <div class="new-companies-content__modal--header">
         <h3>Add New Company</h3>
         <button class="close-modal" (click)="close()"></button>
@@ -97,13 +97,14 @@
                  [(ngModel)]="company.contacts[0].primaryEmail" (input)="onChangePrimaryEmail($event)"
                  placeholder="Primary Email Address">
         </div>
+        <div class="col-md-12">
+          <div class="new-link" (click)="oninitFullVersion()">Would you like to Create Company in Advance mode?</div>
+        </div>
 
-        <div class="new-link" (click)="oninitFullVersion()">Would you like to Create Company in Advance mode?</div>
-        <div class="info-block">
+        <div class="info-block" style="float: left;margin-top: 15px;">
           Advance Company mode will provide user to add more detail like Settings, Primary
           Contact detail etc…
         </div>
-
         <div class="col-md-12 new-companies-content__modal--content-footer">
           <div class="d-f">
             <button class="btn-new btn-primary" (click)="onAddShort()">Create Company</button>
@@ -170,7 +171,7 @@
         <div class="col-md-6">
           <p>Client Type</p>
           <div class="light-dropdown">
-            <app-select-search [class]="['dark-dropdown']" [list]="industries"
+            <app-select-search [class]="['light-dropdown']" [list]="industries"
                                (onSelectedItem)="onSelectClientIndustry($event)"></app-select-search>
           </div>
           <!--  <div class="light-dropdown" ngbDropdown>
@@ -198,7 +199,7 @@
         <div class="col-md-12">
           <p>Location</p>
           <input type="text"
-                 #addresstext
+					       #addresstext
                  [(ngModel)]="company.addresses[0].address"
                  (focus)="onCheckGoogleAutoComplete()"
                  placeholder="Enter Location">
@@ -261,8 +262,8 @@
                       *ngIf="company.contacts[0].phoneNumbers.length > 0"
                       ngbDropdownToggle [textContent]="company.contacts[0].phoneNumbers[0].typeNumber">
 
-                <i class="icn-sm report-caret-icon"></i>
               </button>
+              <i class="icn-sm report-caret-icon"></i>
               <div ngbDropdownMenu aria-labelledby="dropdownBasic">
                 <ng-template ngFor let-item [ngForOf]="phoneTypes">
                   <button ngbDropdownItem [textContent]="item"
@@ -287,7 +288,7 @@
         </div>
         <div class="col-md-12">
           <p>Get Subscribe</p>
-          <app-company-subscription (subscribeChange)="onChangeSubscribe($event)"></app-company-subscription>
+          <app-company-subscription [editItem]="company.contacts[0].subscription" (subscribeChange)="onChangeSubscribe($event)"></app-company-subscription>
         </div>
 
         <div class="col-md-12 details-divider">
@@ -344,21 +345,10 @@
         <div class="col-md-6">
           <p>Sales Person</p>
           <div class="light-dropdown">
-            <app-select-search [class]="['dark-dropdown']" [field]="'name'" [list]="listPersons"
+            <app-select-search [class]="['light-dropdown']" [field]="'name'" [list]="listPersons"
                                (onSelectedItem)="onSelectTechLead($event)"></app-select-search>
           </div>
-          <!--<div class="light-dropdown" ngbDropdown>
-            <i class="icn-sm report-caret-icon"></i>
-            <input type="text" [value]="getSelectedTechLead()" autocomplete="new-password"
-                   placeholder="Select Sales Person"
-                   id="dropdownPersons" ngbDropdownToggle />
-            <div ngbDropdownMenu aria-labelledby="dropdownPersons">
-              <ng-template ngFor let-item [ngForOf]="listPersons" let-i="index">
-                <button ngbDropdownItem [textContent]="item.firstName + ' ' + item.lastName"
-                        (click)="onSelectTechLead(i)"></button>
-              </ng-template>
-            </div>
-          </div> -->
+
         </div>
         <app-company-tags (tagsChange)="onChangeTags($event)"></app-company-tags>
         <div class="col-md-12 editable-field">
@@ -386,5 +376,5 @@
 
 
     </div>
-  </ng-sidebar >
+  </ng-sidebar>
 </ng-sidebar-container>

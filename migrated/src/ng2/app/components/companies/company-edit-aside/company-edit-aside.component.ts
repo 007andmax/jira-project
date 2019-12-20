@@ -293,6 +293,8 @@ public onCheckGoogleAutoComplete () {
        // item.selected = false;
      //   this.listPersons.push(item);
      this.listPersons.push(new ItemFilterPerson(item.id,`${item.firstName} ${item.lastName}`));
+     this.listPersons.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
       }
 
     })
@@ -382,7 +384,7 @@ public onCheckGoogleAutoComplete () {
 
       });
 
-    } else alert('Nothing')*/
+    }  */
   }
   /*uploadFile(file) {
     return new Promise((resolve, reject) => {

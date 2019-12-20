@@ -15,6 +15,7 @@ import { DownloadAgentComponent } from '../download-agent/download-agent.compone
 import { CompanyProfile } from '../class/company-profile';
 import { DEARCHIVE_COMPANY, ARCHIVE_COMPANY } from 'src/ng2/app/const/confirm';
 import { AppService } from 'src/ng2/app/states/app/app.service';
+import { DraftEmailStateService } from 'src/ng2/app/states/draft-email/draft-email-state.service';
 
 @Component({
   selector: 'app-companies-table',
@@ -40,6 +41,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     private companiesService: CompaniesService,
     private downloadAgentStateService: DownloadAgentStateService,
     private appService: AppService,
+    private draftEmailStateService: DraftEmailStateService,
     private elRef: ElementRef) { }
 
   ngOnInit() {
@@ -167,7 +169,17 @@ checkLogo() {
     }).length;
   }
 
+  onSelectCompany(event) {
+    console.log('event',event.target.checked);
+    if (event.target.checked) {
+      this.draftEmailStateService.addSelectedCompany(this.company);
+    } else {
+      let list = this.draftEmailStateService.getSelectedCompanies();
+      let index = list.findIndex(item => item.id === this.company.id);
+      if (index > -1) this.draftEmailStateService.removeSelectedCompany(index);
+    }
 
+  }
   onRestore() {
     this.confirmStateService.setConfirmAction(DEARCHIVE_COMPANY);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });

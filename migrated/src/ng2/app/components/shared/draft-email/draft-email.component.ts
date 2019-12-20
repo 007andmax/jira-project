@@ -5,6 +5,8 @@ import { FilesInfo } from './class/files-Info';
 import { FilesInfoItem } from './class/files-Info-item';
 
 import { DraftEmailService } from 'src/ng2/app/services/draft-email/draft-email.service';
+import { User } from '../../users/class/user';
+import { Company } from 'src/ng2/app/interfaces/company/company';
 
 @Component({
   selector: 'app-draft-email',
@@ -22,21 +24,21 @@ export class DraftEmailComponent implements OnInit {
     minHeight: '5rem',
     placeholder: 'Write your draft for companies',
     translate: 'no',
-    toolbar: ["bold", "italic", "underline","fontName",
-       "fontSize","justifyLeft", "justifyCenter",
-        "justifyRight","removeFormat","orderedList",
-        "unorderedList"]
+    toolbar: ["bold", "italic", "underline", "fontName",
+      "fontSize", "justifyLeft", "justifyCenter",
+      "justifyRight", "removeFormat", "orderedList",
+      "unorderedList"]
   };
-  action:string = null;
+  action: string = null;
   tab: string = 'plain';
   draftEmail: DraftEmail = new DraftEmail();
   uploadFiles: Array<File> = [];
   filesInfo: FilesInfo = new FilesInfo();
-
-
+  usersSelected: Array<User> = [];
+  companiesSelected: Array<Company> = [];
   constructor(private draftEmailStateService: DraftEmailStateService, private elRef: ElementRef,
     private draftEmailService: DraftEmailService, public cd: ChangeDetectorRef
-    ) { }
+  ) { }
 
   ngOnInit() {
     this.onShowAside();
@@ -45,6 +47,8 @@ export class DraftEmailComponent implements OnInit {
 
   public onShowAside() {
     this.draftEmailStateService.getShowAsideForAdd().subscribe(() => {
+      this.usersSelected = this.draftEmailStateService.getSelectedUsers();
+      this.companiesSelected = this.draftEmailStateService.getSelectedCompanies();
       this.action = this.draftEmailStateService.getAction();
       this.opened = true;
       this.draftEmail = new DraftEmail();
@@ -60,6 +64,7 @@ export class DraftEmailComponent implements OnInit {
     this.draftEmailStateService.onClear();
     this.uploadFiles = [];
     this.filesInfo = new FilesInfo();
+    this.action = null;
 
   }
 
@@ -68,10 +73,10 @@ export class DraftEmailComponent implements OnInit {
   }
 
   public uploadFileOnBrower(event) {
-     
+
     if (event.target.value) {
       const file = event.target.files[0];
-       
+
       this.uploadFiles.push(file);
       this.filesInfo.files.push(new FilesInfoItem());
       let indexUploadFile = this.uploadFiles.length - 1;
@@ -81,7 +86,7 @@ export class DraftEmailComponent implements OnInit {
         this.filesInfo.files[indexFileInfo].setFileId(res.id);
         event.target.value = null;
         this.setDisableUplaodFile(false);
-        
+
       }).catch(err => {
         this.setDisableUplaodFile(false);
         if (err.code === 400 || err.code === 500) {
@@ -91,7 +96,7 @@ export class DraftEmailComponent implements OnInit {
         }
       })
 
-    } else alert('Nothing')
+    }
   }
   reloadAttachment(fileInfo, file) {
     if (fileInfo.error) return;
@@ -123,7 +128,7 @@ export class DraftEmailComponent implements OnInit {
       if (!item.error) this.draftEmail.setAttachment(item.id)
     });
     this.draftEmailService.sendMessage(this.draftEmail).subscribe((data) => {
-       
+
       this.close();
 
       if (!this.cd['destroyed']) {
@@ -148,7 +153,7 @@ export class DraftEmailComponent implements OnInit {
         reject({ code: 500 });
         return;
       }
-       
+
       var fd = new FormData();
       fd.append("file", file);
       var xhr = new XMLHttpRequest();

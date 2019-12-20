@@ -27,40 +27,23 @@ export class ImageCropperStateService {
      
     if (event.target.value) {
       const file = event.target.files[0];
-       
       this.uploadFile(file).then((data: any) => {
         let res = JSON.parse(data.response);
-        // this.changeFile(file).then((base64: string): any => {
-          console.log('res',res);
           this.modalImageCropperStateService.onInitOpen(new ImageCroper(res.base64,res.id));
-       /* const modalRef = modalService.open(ImageCropperComponent);
-        modalRef.componentInstance.imageBase64 = res.base64;
-        modalRef.componentInstance.id = res.id;
-        event.target.value = null;*/
-
-        // });
-
       });
-
-    } else alert('Nothing')
+    }  
   }
   uploadFile(file) {
     return new Promise((resolve, reject) => {
-      //  var file = this.dataURLtoFile(this.img, this.fileName);
-       
       var fd = new FormData();
       fd.append("file", file);
       var xhr = new XMLHttpRequest();
       xhr.addEventListener("load", (event) => {
-
         resolve(xhr);
-
       }, false);
       xhr.addEventListener("error", (error) => {
         reject(error);
       }, false);
-
-
       xhr.open("POST", "/file?isAvatar=true&ratio=1");
       xhr.send(fd);
     });

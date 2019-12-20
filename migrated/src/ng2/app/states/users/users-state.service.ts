@@ -6,24 +6,25 @@ import { retry } from 'rxjs/operators';
 import { UserPipe } from '../../pipe/user.pipe';
 import { UserProfile } from '../../components/users/class/user-profile';
 import { UsersRealTimeService } from './users-real-time.service';
-import { CompanyUpdate } from '../../components/companies/class/company-update';
+import { UserChange } from '../../components/users/class/user-change';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersStateService {
-  allUsers = [];
+  allUsers:Array<User> = [];
   currentUser: CurrentUser;
   userForEdit:UserProfile = null;
   onGetUsers: EventEmitter<any> = new EventEmitter();
   onGetCurrentUser: EventEmitter<any> = new EventEmitter();
   onShowArchived: EventEmitter<any> = new EventEmitter();
   onFilter: EventEmitter<any> = new EventEmitter();
-  onCount: EventEmitter<any> = new EventEmitter();
+   
   openAside: EventEmitter<any> = new EventEmitter();
   openEditAside: EventEmitter<any> = new EventEmitter();
   userForArchive: User = null;
-  onChangeUsers: EventEmitter<CompanyUpdate> = new EventEmitter();
+  userForDeArchive: User = null;
+  onChangeUsers: EventEmitter<UserChange> = new EventEmitter();
 
   constructor(private userService: UsersService, private usersRealTimeService:UsersRealTimeService) {
 
@@ -31,6 +32,10 @@ export class UsersStateService {
   public onInit() {
 
     this.userService.getAllusers().subscribe((data) => {
+   /*   let users = data.map((item) => {
+        return new User(item);
+      })*/
+      console.log('data',data);
       this.setAllUsers(data);
       this.onInitGetUsers(data);
     })
@@ -39,19 +44,26 @@ export class UsersStateService {
       this.onInitCurrentUser(data);
     })
     this.usersRealTimeService.changeUsersArray.subscribe(newChange => {
-      if (newChange.action === 'COMPANY_SAVED' || newChange.action === 'COMPANY_ARCHIVED') {
+      if (newChange.action === 'USER_SAVED' || newChange.action === 'USER_ARCHIVED') {
         const Index = this.allUsers.findIndex((item) => item.id === newChange.data.id);
-        if (Index > -1) this.allUsers[Index] = newChange.data;
-        if (Index === -1) this.allUsers.unshift(newChange.data);
+        if (Index > -1) this.allUsers[Index] = new User(newChange.data);
+        if (Index === -1) this.allUsers.unshift(new User(newChange.data));
 
       }
-      if (newChange.action === 'COMPANY_DEARCHIVED') {
-        const Index = this.allUsers.findIndex((item) => item.id === newChange.data.id);
-        if (Index > -1) this.allUsers[Index] = newChange.data;
+     
+      if (newChange.action === 'USERS_DEARCHIVED') {
+        newChange.data.forEach(data => {
+          const Index = this.allUsers.findIndex((item) => item.id === data.id);
+          if (Index > -1) this.allUsers[Index] = new User(data);
+        });
+       
         
       }
-     // this.onChangeCompanies.emit(new CompanyUpdate(newChange.action,newChange.data,this.allCompanies));
+      this.onChangeUsers.emit(new UserChange(newChange.action,newChange.data,this.allUsers));
     })
+  }
+  public getChangeUsers() {
+    return this.onChangeUsers;
   }
   public setUserForEdit(data) {
     this.userForArchive = data;
@@ -72,19 +84,19 @@ export class UsersStateService {
     return this.openEditAside;
   }
 
-
+  public setUserForDeArchive(data) {
+    this.userForDeArchive = data;
+  }
   public setUserForArchive(data) {
     this.userForArchive = data;
   }
   public getUserForArchive() {
     return this.userForArchive;
   }
-  public setCount(data) {
-    this.onCount.emit(data);
+  public getUserForDeArchive() {
+    return this.userForDeArchive;
   }
-  public getOnCount() {
-    return this.onCount;
-  }
+  
   public onInitFilter(data) {
     this.onFilter.emit(data);
   }

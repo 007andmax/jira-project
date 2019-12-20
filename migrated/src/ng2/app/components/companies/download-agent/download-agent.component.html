@@ -11,7 +11,7 @@
   <button class="btn btn-primary not-active"><i class="apple-icn"></i><span>Download for Mac</span></button>
   <button class="btn btn-primary not-active"><i class="linux-icn"></i><span>Download for Linux</span></button>
   <p>OR</p>
-  <button class="btn primary-default ng-isolate-scope"copy-key="downloadLink" custom-disabled="false"
+  <button class="btn primary-default ng-isolate-scope" (click)="getDonwloadLink()" custom-disabled="false"
           ng-disabled="false">Copy a installer link to clipboard
   </button>
 </div>

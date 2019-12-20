@@ -57,6 +57,11 @@ export class CompaniesService {
     return this.http.post(this.apiUrl + 'company/clientsByTags',tags);
     
   }
+  public getDownloadLink (data) {
+   
+    return this.http.post(this.apiUrl + 'data/getAgentDownloadLink',data);
+    
+  }
   public  createCompany (data) {
     let company =  data;
     company.onCheckFullVersion();

@@ -4,6 +4,7 @@ import { UserAvatar } from './user-avatar';
 import { ImageCropper } from '../../shared/image-cropper/class/image-cropper';
 import { User } from './user';
 import { UserUpdate } from './user-update';
+import { UserAdd } from './user-add';
 
 export class UserProfile {
     role: string = 'USER';
@@ -79,5 +80,9 @@ export class UserProfile {
     public getUserForUpdate(user: User) {
        
         return new UserUpdate(this, user);
+    }
+    public getUserForAdd() {
+       
+        return new UserAdd(this);
     }
 }

@@ -17,6 +17,7 @@ import { CompanyUpdate } from './class/company-update';
 import { ARCHIVE_COMPANY, DEARCHIVE_COMPANY } from '../../const/confirm';
 import { AppService } from '../../states/app/app.service';
 import { DeviceUpdate } from '../../states/devices/class/device-update';
+import { DraftEmailStateService } from '../../states/draft-email/draft-email-state.service';
 
 @Component({
   selector: 'app-companies',
@@ -50,6 +51,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService, private devicesState: DevicesSateService, private usersStateService: UsersStateService,
     private leftPanelStateService: LeftPanelStateService,
     private companiesRealTimeService: CompaniesRealTimeService,
+    private draftEmailStateService: DraftEmailStateService,
     public cd: ChangeDetectorRef
    ) { }
 
@@ -124,7 +126,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
         if (this.showArchivedCompanies)
         {
           const companyIndex = this.CompaniesList.findIndex((item) => item.id === data.data.id);
-          if (companyIndex > -1) this.CompaniesList.slice(companyIndex,1);
+          if (companyIndex > -1) this.CompaniesList.splice(companyIndex,1);
         }
       }
       
@@ -140,6 +142,26 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       }
 
     });*/
+  }
+  onSelectAllCompanies (event) {
+    if (event.target.checked) {
+     let list_company_table = document.body.querySelectorAll('app-companies-table');
+     list_company_table.forEach(item => {
+      (<any>item.querySelector('input[type="checkbox"]')).checked = true;
+   
+     });
+      this.draftEmailStateService.resetSelectedCompanies();
+      this.CompaniesList.forEach(user => {
+        this.draftEmailStateService.addSelectedCompany(user);
+      })
+    } else {
+      this.draftEmailStateService.resetSelectedCompanies();
+      let list_company_table = document.body.querySelectorAll('app-companies-table');
+      list_company_table.forEach(item => {
+        (<any>item.querySelector('input[type="checkbox"]')).checked = false;
+     
+       });
+    }
   }
   showMobileFilter() {
     document.body.querySelector('app-left-panel-companies').classList.add('show');

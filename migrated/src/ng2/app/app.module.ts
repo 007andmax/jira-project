@@ -299,7 +299,7 @@ angular.module('quicktech')
           path: 'ng2/companies',
           component: CompaniesComponent,
         },{
-          path: 'ng2/new-users',
+          path: 'ng2/users',
           component: UsersComponent,
           pathMatch: 'full'
         }

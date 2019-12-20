@@ -12,6 +12,7 @@ import { USER } from 'src/ng2/app/const/users';
 import { takeUntil } from 'rxjs/operators';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { DraftEmailStateService } from 'src/ng2/app/states/draft-email/draft-email-state.service';
+import { Company } from 'src/ng2/app/interfaces/company/company';
 
 @Component({
   selector: 'app-draft-email-recipients',
@@ -34,6 +35,7 @@ export class DraftEmailRecipientsComponent implements OnInit {
   companyEmails = [];
   companyList = [];
   reqCompanyList = [];
+  @Input() companiesSelected:Array<Company> = [];
   @Input() public data;
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
@@ -83,9 +85,20 @@ export class DraftEmailRecipientsComponent implements OnInit {
   }
   private setCompanyList(data) {
      
-    this.reqCompanyList = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt);
-    this.companyList = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt);
+    this.reqCompanyList = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt && item.companyInfo.contacts[0].primaryEmail != '').sort((a, b) => (a.companyInfo.contacts[0].primaryEmail.toLowerCase() > b.companyInfo.contacts[0].primaryEmail.toLowerCase()) ?
+    1 : ((b.companyInfo.contacts[0].primaryEmail.toLowerCase() > a.companyInfo.contacts[0].primaryEmail.toLowerCase()) ? -1 : 0));
+    this.companyList = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt && item.companyInfo.contacts[0].primaryEmail != '').sort((a, b) => (a.companyInfo.contacts[0].primaryEmail.toLowerCase() > b.companyInfo.contacts[0].primaryEmail.toLowerCase()) ?
+    1 : ((b.companyInfo.contacts[0].primaryEmail.toLowerCase() > a.companyInfo.contacts[0].primaryEmail.toLowerCase()) ? -1 : 0));
 
+    this.companiesSelected.forEach(item => {
+     /* if (item.primaryEmail !== '')
+      {*/
+        this.selectedCompanies.push(item.companyInfo.contacts[0].primaryEmail);
+        this.companyEmails.push(item.companyInfo.contacts[0].primaryEmail);
+    //  }
+    
+    })
+    this.onCompanyEmails.emit(this.companyEmails);
   }
   
   /**

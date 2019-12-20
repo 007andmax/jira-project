@@ -7,11 +7,12 @@ import { CurrentUser } from 'src/ng2/class/current-user/current-user';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
  
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
-import { ARCHIVE_USER } from 'src/ng2/app/const/confirm';
+import { ARCHIVE_USER, DEARCHIVE_USER } from 'src/ng2/app/const/confirm';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertComponent } from '../../shared/alert/alert.component';
 import { UsersTableService } from './services/users-table.service';
+import { DraftEmailStateService } from 'src/ng2/app/states/draft-email/draft-email-state.service';
 
 @Component({
   selector: 'app-users-table',
@@ -28,8 +29,9 @@ export class UsersTableComponent implements OnInit {
     private usersStateService: UsersStateService,  
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal, 
+    private draftEmailStateService: DraftEmailStateService,
     private usersTableService:UsersTableService) { }
-
+   
   onChangeSubscriptions(data) {
     this.usersService.setSubscriptions(data).subscribe(res => {
       console.log('res', res);
@@ -55,10 +57,16 @@ export class UsersTableComponent implements OnInit {
     return (index > -1) ? this.companies[index].name : '';
   }
   getUserAvatarUrl() {
-    if (this.user.avatar && this.user.avatar.origin && this.user.avatar.origin.id) {
+    if (!(this.user && this.user.avatar))  return '';
+
+    if (this.user.id) {
+      return '/users/' + (this.user.id || 'default') + '/image' + (this.user.avatar ? '.jpg?t=' + this.user.avatar.updatedAt :
+        '');
+    } else if (this.user.avatar && this.user.avatar.origin && this.user.avatar.origin.id) {
       return '/file/' + (this.user.avatar.origin.id) + '.jpg';
+    } else {
+      return '/users/default/image.jpg';
     }
-    return '';
   };
   edit() {
     console.log('egegegege');
@@ -78,21 +86,38 @@ export class UsersTableComponent implements OnInit {
   }
   delete() {
     if (this.user.isContact) {
-      const modalRef = this.modalService.open(AlertComponent, { windowClass: 'xs-modal' });
+      const modalRef = this.modalService.open(AlertComponent, { windowClass: 'xs-modal user-modal' });
       modalRef.componentInstance.message = `You cannot archive primary contact user`;
       return;
     }
      if (this.usersTableService.getUsersCount(this.usersStateService.getAllUsers(),this.user.company.id,this.showArchivedUsers) === 1)
     {
-      const modalRef = this.modalService.open(AlertComponent, { windowClass: 'xs-modal' });
+      const modalRef = this.modalService.open(AlertComponent, { windowClass: 'xs-modal user-modal' });
       modalRef.componentInstance.message = `You cannot archive all users. At least one must remain.`;
       return;
     }
     this.confirmStateService.setConfirmAction(ARCHIVE_USER);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
 
     modalRef.componentInstance.message = `Do you want to archive ${this.user.firstName + ' ' + this.user.lastName}`;
     this.usersStateService.setUserForArchive(this.user);
   }
+  restore() {
+    this.confirmStateService.setConfirmAction(DEARCHIVE_USER);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
 
+    modalRef.componentInstance.message = `Do you want to restore ${this.user.firstName + ' ' + this.user.lastName}`;
+    this.usersStateService.setUserForDeArchive(this.user);
+  }
+  onSelectUser(event) {
+    console.log('event',event.target.checked);
+    if (event.target.checked) {
+      this.draftEmailStateService.addSelectedUser(this.user);
+    } else {
+      let list = this.draftEmailStateService.getSelectedUsers();
+      let index = list.findIndex(item => item.id === this.user.id);
+      if (index > -1) this.draftEmailStateService.removeSelectedUser(index);
+    }
+
+  }
 }

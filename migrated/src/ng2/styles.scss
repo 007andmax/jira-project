@@ -236,14 +236,17 @@
   background: #fff;
   height: 100vh;
   width: 650px;
-  transition: transform .3s !important;
-  transform: translateX(100%);
+  //transition: transform .3s !important;
+  //transform: translateX(100%);
+  right: -650px;
   opacity: 0;
 }
 
 .ng-sidebar.ng-sidebar--opened {
   opacity: 1;
-  transform: translateX(0);
+  right: 0;
+  //transition: all .3s !important;
+  //transform: translateX(0);
 }
 
 .ng-sidebar--right {
@@ -273,8 +276,8 @@
         top: 16px !important;
       }
       .icn-remove-old {
-        top: 14px !important;
-        right: 8px;
+        top: 15px !important;
+        right: 34px;
       }
     }
   }
@@ -488,7 +491,8 @@ app-left-panel-tags-companies {
   }
   app-tags,
   app-company-tags,
-  app-draft-email-recipients {
+  app-draft-email-recipients,
+  draft-email-user-recipients {
     > .col-md-12 {
       margin-top: 40px;
       .mat-form-field {
@@ -547,6 +551,15 @@ app-left-panel-tags-companies {
       .mat-form-field-appearance-legacy .mat-form-field-wrapper {
         &:before {
           content: 'Add Recipient';
+        }
+      }
+    }
+  }
+  draft-email-user-recipients {
+    > .col-md-12 {
+      .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+        &:before {
+          content: 'Add Recipient Email Address';
         }
       }
     }
@@ -625,6 +638,20 @@ app-left-panel-tags-companies {
 .image-confirm-modal {
   padding: 40px 70px 40px 40px;
   position: relative;
+  &.confirm-user-modal {
+    h3 {
+      font-family: 'Graphik Regular', sans-serif !important;
+      font-size: 13px !important;
+      margin: 15px 0 !important;
+      font-weight: 500 !important;
+      &:before {
+        top: -17px !important;
+      }
+      &:after {
+        top: -6px !important;
+      }
+    }
+  }
   .close-modal {
     background: transparent;
     border: none;
@@ -1245,6 +1272,24 @@ ngb-typeahead-window {
 
 .with-number-types {
   display: flex;
+  &.right {
+    .dropdown {
+      .types-btn {
+        border: 1px solid #c4cbd5;
+        border-left: none;
+        border-bottom-right-radius: 4px;
+        border-top-right-radius: 4px;
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+      }
+    }
+    input {
+      border-bottom-left-radius: 4px !important;
+      border-top-left-radius: 4px !important;
+      border-top-right-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+    }
+  }
   .dropdown {
     width: 48%;
     .types-btn {
@@ -1258,11 +1303,12 @@ ngb-typeahead-window {
       padding: 0 12px;
       font-size: 12px;
       text-align: left;
-      .report-caret-icon {
-        width: 8px;
-        height: 5px;
-        background-size: cover;
-      }
+    }
+    .report-caret-icon {
+      width: 8px;
+      height: 5px;
+      background-size: cover;
+      right: 8px;
     }
     .dropdown-menu {
       min-width: 80px;
@@ -1279,7 +1325,8 @@ ngb-typeahead-window {
   }
 }
 
-// Global styles for RECURRING TICKETS
+// Global styles for RECURRING TICKETS and COMPANIES
+.new-companies__list,
 .new-users__list {
   .col-md-3 {
     width: 21%;
@@ -1291,7 +1338,7 @@ ngb-typeahead-window {
     }
   }
   .col-md-4 {
-    width: 22%;
+    width: 17%;
   }
   .col-md-1 {
     width: 7%;
@@ -1303,19 +1350,23 @@ ngb-typeahead-window {
     display: flex;
     flex-direction: column;
     align-items: flex-start !important;
-    p:last-child {
+    p:nth-child(2) {
       color: #9ca5b6;
     }
   }
 }
 
-.new-companies__list {
+.new-users__list {
+  .col-md-3 {
+    width: 25%;
+  }
   .col-md-4 {
-    width: 17%;
+    width: 21%;
   }
 }
 
-.new-users-content .new-users__list--header {
+.new-users-content .new-users__list--header,
+.new-companies-content .new-companies__list--header {
   display: flex;
 }
 
@@ -1360,7 +1411,7 @@ ngb-typeahead-window {
     z-index: 1;
   }
   .recurring-tickets__list,
-  .new-companies__list
+  .new-companies__list,
   .new-users__list {
     &--header {
       margin-bottom: 15px;
@@ -1381,6 +1432,12 @@ ngb-typeahead-window {
     }
   }
   &__list--item {
+    .home-phone-icn,
+    .fax-icn,
+    .mobile-phone-icn,
+    .office-phone-icn {
+      margin-right: 5px;
+    }
     [class*='col-md-'] {
       min-height: 40px;
       display: flex;
@@ -1647,6 +1704,12 @@ ngb-typeahead-window {
   }
 }
 
+.user-modal {
+  .modal-dialog {
+    width: 490px;
+  }
+}
+
 .new-users-content__modal,
 .new-companies-content__modal {
   .advanced {
@@ -1711,7 +1774,6 @@ ngb-typeahead-window {
   .upload-logo {
     position: static;
     margin-right: 20px;
-    cursor: pointer;
   }
   .logo-upload {
     img {
@@ -1720,6 +1782,8 @@ ngb-typeahead-window {
       width: 65px;
       height: 65px;
       margin-right: 20px;
+      cursor: pointer;
+      object-fit: cover;
     }
   }
   .new-link {
@@ -1729,9 +1793,9 @@ ngb-typeahead-window {
     opacity: 0;
     position: absolute;
     top: 20px;
-    width: 65px;
-    height: 65px;
-    cursor: pointer;
+    width: 110px;
+    height: 30px;
+    left: 100px;
   }
   .info-block {
     background: #fff8eb;
@@ -1798,6 +1862,7 @@ ngb-typeahead-window {
   bottom: -195px;
   top: auto !important;
   transform: none !important;
+  min-height: 190px;
 }
 
 .modal.fade {
@@ -1911,7 +1976,6 @@ ngb-datepicker {
   .upload-logo {
     position: static;
     margin-right: 20px;
-    cursor: pointer;
   }
 }
 

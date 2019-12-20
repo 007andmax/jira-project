@@ -15,6 +15,9 @@ export class UserValidate {
             if (index > 0) this.addPhoneNumber();
         });
     }
+    public removePhoneNumber(i) {
+        this.phoneNumber.splice(i);
+    }
     public addPhoneNumber() {
         this.phoneNumber.push(true);
     }
@@ -35,7 +38,7 @@ export class UserValidate {
     }
 
     public checkValidFirstName(firstname) {
-        if (firstname.length === 0) {
+        if (firstname.length < 2) {
             this.firstName = false;
         } else {
             this.firstName = true;
@@ -72,7 +75,7 @@ export class UserValidate {
 
     public isValidate(user: UserProfile) {
         let phoneNumbers = true;
-        if (!user.firstName || user.firstName.length === 0) this.firstName = false;
+        if (!user.firstName || user.firstName.length < 2) this.firstName = false;
         if (!user.companyId) this.company = false;
 
         if (user.primaryEmail && user.primaryEmail.length > 0 && !user.primaryEmail.match(this.reEmail)) this.primaryContactEmail = false;
