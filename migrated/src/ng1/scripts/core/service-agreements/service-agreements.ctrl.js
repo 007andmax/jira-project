@@ -190,7 +190,7 @@
               UserConfirmationsService, UserNotificationService, Utils) {
 
       $scope.taxes = TaxesService.getAll();
-
+console.log('companyData',companyData);
       $scope.companyId = companyData.companyId;
       $scope.companyInfo = companyData.companyInfo;
       $scope.preSetupCompany = companyData.preSetupCompany;
@@ -827,7 +827,8 @@
           services: servicesWithTaxIds,
           type: 'HOURLY'
         };
-
+console.log('companyContractInfo',companyContractInfo);
+console.log('$scope.editContract',$scope.editContract);
         var sd = new Date($scope.editContract.startDate);
         sd.setHours(0, 0, 0, 0);
         sd.setSeconds(0);

@@ -72,6 +72,9 @@
               <li>
                 <a tabindex="-1" href="javascript:void(0)" ng-click="terminateContract(agreement.id)" ng-show="agreement.status !== 'TERMINATED'">Terminate</a>
               </li>
+              <li>
+                <a tabindex="-1" href="javascript:void(0)" ng-click="openAgreementsModal(agreement.type, true, agreement.id)" ng-show="agreement.status != 'TERMINATED' && agreement.status != 'EXPIRED'">Edit</a>
+              </li>
             </ul>
           </div>
 
