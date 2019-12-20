@@ -731,12 +731,61 @@
     top: 3px;
   }
 
+  .company-item-actions {
+    position: absolute;
+    right: 15px;
+    top: 25px;
+  }
+
+  .click-area {
+    display: none;
+  }
+
+  .company-item-actions .more-vertical-ng2 {
+    transform: rotate(90deg);
+  }
+
   .list-company-row.opened .company-primary-contact,
   .new-companies-content__list--item .contact {
     max-width: 100% !important;
     width: 100%;
     position: relative;
     padding-left: 50px !important;
+  }
+
+  .modal-dialog {
+    width: 100vw;
+    left: 0;
+    transform: translate(0, -50px);
+    margin-left: 0;
+  }
+
+  .user-modal .modal-dialog {
+    width: 100vw;
+  }
+
+  .editor-container .editor-container-attachments {
+    right: 310px;
+  }
+
+  .editor-container .ngx-editor .ngx-toolbar .ngx-toolbar-set:nth-child(5) {
+    right: 0;
+  }
+
+  .editor-container .ngx-editor .ngx-toolbar .ngx-toolbar-set:nth-child(4) {
+    right: 55px;
+  }
+
+  .editor-container .ngx-editor .ngx-toolbar .ngx-toolbar-set:nth-child(3) {
+    right: 88px;
+  }
+
+  .editor-container .ngx-editor .ngx-toolbar .ngx-toolbar-set:nth-child(2) {
+    right: 170px;
+  }
+
+  .editor-container .ngx-editor .ngx-toolbar .ngx-toolbar-set:nth-child(1) {
+    right: 226px;
   }
 
   .list-company-row.opened .company-primary-contact:before,

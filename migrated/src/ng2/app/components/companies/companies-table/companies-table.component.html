@@ -7,7 +7,7 @@
       </label>
       <div class="circle-avatar" [ngClass]="{'with-logo': checkLogo()}">
         <img [src]="getCompanyLogoUrl()" class="qwe" alt=""
-             *ngIf="checkLogo()"/>
+             *ngIf="checkLogo()" />
         <span *ngIf="!checkLogo()"
               [textContent]="company.name[0].toUpperCase()"></span>
       </div>
@@ -33,7 +33,8 @@
       <button (click)="onRestore()" *ngIf="showArchivedCompanies">
         <i style="height: 19px;" class="icn-16 restore-ng2"></i>
       </button>
-      <button (click)="downloadAgent()" *ngIf="!showArchivedCompanies"><i class="icn-16 import-ng2"></i></button>
+      <button class="mob-hidden" (click)="downloadAgent()" *ngIf="!showArchivedCompanies"><i
+        class="icn-16 import-ng2"></i></button>
       <div class="grey-dropdown right with-icons" *ngIf="!showArchivedCompanies"
            ngbDropdown>
         <i class="icn-16 more-vertical-ng2 pointer"
@@ -61,6 +62,21 @@
     </div>
     <div class="click-area" (click)="goToDashboard()"></div>
   </div>
-  <button class="company-edit-icn company-edit-icn-sm desktop-hidden"
-          (click)="edit()"></button>
+  <div class="company-item-actions desktop-hidden">
+    <button (click)="onRestore()" *ngIf="showArchivedCompanies">
+      <i style="height: 19px;" class="icn-16 restore-ng2"></i>
+    </button>
+    <button class="mob-hidden" (click)="downloadAgent()" *ngIf="!showArchivedCompanies"><i
+      class="icn-16 import-ng2"></i></button>
+    <div class="grey-dropdown right with-icons" *ngIf="!showArchivedCompanies"
+         ngbDropdown>
+      <i class="icn-16 more-vertical-ng2 pointer"
+         id="dropdownBasic1"
+         ngbDropdownToggle></i>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <button ngbDropdownItem (click)="edit()"><i class="icn-16 edit-grey-ng2"></i>Edit</button>
+        <button ngbDropdownItem (click)="remove()"><i class="icn-16 archive-grey-ng2"></i>Delete</button>
+      </div>
+    </div>
+  </div>
 </div>
