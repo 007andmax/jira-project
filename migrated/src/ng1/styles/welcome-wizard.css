@@ -4,6 +4,10 @@
   font-family: 'Graphik Regular', sans-serif;
 }
 
+.new-users-content__list--item .desktop-hidden.position {
+  display: none;
+}
+
 .welcome-wrapper.container-fluid {
   padding-left: 10px;
   padding-right: 10px;
@@ -49,7 +53,7 @@
   padding: 22px 10px 0;
   vertical-align: bottom;
   border: 1px solid;
-  border-color: #eee;
+  border-color: #eeeeee;
   box-shadow: 2px 4px 20px 0px rgba(0, 0, 0, 0);
   cursor: pointer;
   transition: border-color .3s, box-shadow .3s;
@@ -324,7 +328,7 @@
 
   #mobile-left .left-menu-content .mobile-sub-header {
     padding: 16px 12px 16px 52px;
-    color: #fff;
+    color: #ffffff;
     transition: all .3s;
     border-radius: 4px;
     position: relative;
@@ -379,7 +383,7 @@
   }
 
   #mobile-left .left-menu-content .mobile-sub-header:hover {
-    color: #fff;
+    color: #ffffff;
   }
 
   #mobile-left .left-menu-content .mobile-tickets .mobile-sub-header:before {
@@ -389,7 +393,7 @@
 
   .center-category__category {
     padding-left: 50px;
-    color: #fff;
+    color: #ffffff;
   }
 
   #mobile-left .left-menu-content .mobile-companies .mobile-sub-header:before {
@@ -539,7 +543,8 @@
   }
 
   .list-company-row .col-md-3 .company-phone,
-  .new-companies-content__list--item .col-md-3 .company-phone {
+  .new-companies-content__list--item .col-md-3 .company-phone,
+  .new-users-content__list--item .col-md-3 .company-phone {
     display: block !important;
     position: relative;
     padding-left: 20px;
@@ -547,6 +552,7 @@
   }
 
   .new-companies-content__list--item .col-md-3 .company-phone:before,
+  .new-users-content__list--item .col-md-3 .company-phone:before,
   .list-company-row .col-md-3 .company-phone:before {
     position: absolute;
     content: '';
@@ -588,13 +594,15 @@
   }
 
   .list-company-row.opened .company-location,
-  .new-companies-content__list--item .company-location {
+  .new-companies-content__list--item .company-location,
+  .new-users-content__list--item .company-location {
     width: 100%;
     position: relative;
     padding-left: 50px !important;
     margin: 20px 0;
   }
 
+  .new-users-content__list--item .company-location:before,
   .new-companies-content__list--item .company-location:before,
   .list-company-row.opened .company-location:before {
     position: absolute;
@@ -612,10 +620,115 @@
   }
 
   .list-company-row.opened .company-location .company-link,
+  .new-users-content__list--item .company-location .company-link,
   .new-companies-content__list--item .company-location .company-link {
     color: #16a4fa;
     text-decoration: underline;
     transition: all .3s;
+  }
+
+  .new-users-content__list--item .col-md-2 {
+    position: absolute;
+    right: 5px;
+  }
+
+  .new-users-content__list--item .subs {
+    width: 100%;
+    margin-left: 15px;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 10px;
+  }
+
+  .new-users-content__list--item .subs > div {
+    font-family: Graphik-Medium, sans-serif;
+    color: #9ca5b6;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .new-users-content__list--item .subs .subs-list {
+    background: #e8f6fe;
+    border: 1px solid #ffffff;
+    padding: 3px 27px 3px 3px;
+  }
+
+  .new-users-content__list--item .subs .subs-list div {
+    background: #ffffff;
+    padding: 0 5px;
+  }
+
+  .phones-numbers {
+    flex-direction: row !important;
+  }
+
+  .phones-numbers .item-phone {
+    margin-right: 19px;
+  }
+
+  .new-users-content__list--item .info,
+  .new-users-content__list--item .position,
+  .new-users-content__list--item .subs {
+    display: none !important;
+  }
+
+  .new-users-content__list--item.show-details .info,
+  .new-users-content__list--item.show-details .subs {
+    display: flex !important;
+  }
+
+  .new-users-content__list--item.show-details .position {
+    display: block !important;
+  }
+
+  .phones-numbers .fz-13 {
+    position: relative;
+    margin-left: 21px;
+  }
+
+  .phones-numbers .fz-13:before {
+    position: absolute;
+    content: '';
+    background: url('../images/new-icons/mob-tickets.png');
+    left: -22px;
+    top: 4px;
+    width: 16px;
+    height: 14px;
+  }
+
+  .new-users-content__list--item .w-100.fz-13 {
+    margin-left: 30px;
+  }
+
+  .user-subscription > div {
+    padding: 4px;
+  }
+
+  .new-users-content__list--item .position {
+    margin-left: 35px;
+  }
+
+  .new-users__list .contact p:nth-child(3) {
+    color: #9ca5b6;
+  }
+
+  .new-users-content__list--item .col-md-2 .more-vertical-ng2 {
+    transform: rotate(90deg);
+  }
+
+  .new-users-content__list--item .position {
+    position: relative;
+  }
+
+  .new-users-content__list--item .position:before {
+    position: absolute;
+    content: '';
+    left: -5px;
+    width: 16px;
+    height: 16px;
+    background: url(../images/new-icons/mob-company.png);
+    top: 3px;
   }
 
   .list-company-row.opened .company-primary-contact,
@@ -638,6 +751,7 @@
   }
 
   .list-company-row.opened .mob-company-footer,
+  .new-users-content__list--item .mob-company-footer,
   .new-companies-content__list--item .mob-company-footer {
     border-top: 1px solid #edf2f6;
     padding: 16px 20px 0;
@@ -646,6 +760,7 @@
     justify-content: space-between;
   }
 
+  .new-users-content__list--item .mob-company-footer,
   .new-companies-content__list--item .mob-company-footer {
     margin-left: -15px;
   }
@@ -654,6 +769,7 @@
   /*  width: 100%;*/
   /*}*/
   .list-company-row.opened .mob-company-footer div p,
+  .new-users-content__list--item .mob-company-footer div p,
   .new-companies-content__list--item .mob-company-footer div p {
     font-size: 10px !important;
     letter-spacing: 0.5px !important;
@@ -663,6 +779,7 @@
   }
 
   .list-company-row.opened .mob-company-footer div p:first-child,
+  .new-users-content__list--item .mob-company-footer div p:first-child,
   .new-companies-content__list--item .mob-company-footer div p:first-child {
     text-transform: uppercase;
     color: #9ca5b6;
@@ -670,6 +787,7 @@
   }
 
   .list-company-row.opened .mob-company-footer div p:last-child,
+  .new-users-content__list--item .mob-company-footer div p:last-child,
   .new-companies-content__list--item .mob-company-footer div p:last-child {
     font-family: 'Graphik Medium', sans-serif !important;
     font-weight: 500 !important;
@@ -682,7 +800,7 @@
     width: 100%;
     height: 48px;
     border: none;
-    color: #fff;
+    color: #ffffff;
     border-radius: 0;
     display: block;
     max-width: 414px;
@@ -737,7 +855,7 @@
     justify-content: flex-start;
     align-items: center;
     padding: 20px;
-    color: #fff;
+    color: #ffffff;
   }
 
   .mob-filters-header .x-mark {
@@ -771,7 +889,7 @@
   }
 
   .mob-filters .dropdown-menu > li:hover a {
-    color: #fff !important;
+    color: #ffffff !important;
     background-color: transparent !important;
   }
 
@@ -838,7 +956,7 @@
 
   .company--header h2,
   .user--header h2 {
-    color: #fff !important;
+    color: #ffffff !important;
     font-size: 16px !important;
     font-weight: 500 !important;
     font-family: 'Graphik Medium', sans-serif !important;
@@ -1271,17 +1389,17 @@
   .mobile-top-bar.ticket-detail-header h3,
   .mobile-top-bar.ticket-create-update h3 {
     font-size: 16px;
-    color: #fff;
+    color: #ffffff;
     font-weight: 500;
     margin: 0;
   }
 
   .dropdown-assign-ticket .scroll-pane {
-    background-color: #fff;
+    background-color: #ffffff;
   }
 
   .mobile-top-bar.ticket-detail-header .more-ticket-details button {
-    background: url(../images/sprites-s76c759f188.png) no-repeat -1657px 14px, #fff;
+    background: url(../images/sprites-s76c759f188.png) no-repeat -1657px 14px, #ffffff;
     width: 32px;
     height: 32px;
     border-radius: 50%;
@@ -1497,7 +1615,7 @@
   }
 
   .attachments li > .onhover {
-    background: #fff;
+    background: #ffffff;
     height: 45px;
   }
 
@@ -1631,7 +1749,7 @@
   }
 
   .vasya .datepicker-days {
-    background: #fff;
+    background: #ffffff;
     border-radius: 3px;
   }
 
@@ -1654,7 +1772,7 @@
   }
 
   .mob-ticket-content .modal-ticket-edit-user .user-item.active a span p {
-    color: #fff;
+    color: #ffffff;
   }
 
   .mob-ticket-content .modal-ticket-edit-user .user-item a span p {
@@ -1801,7 +1919,7 @@
     bottom: 0;
     transform: translate(-50%, -50%);
     left: 50%;
-    background: #fff;
+    background: #ffffff;
     padding: 20px;
     transition: all .4s;
   }
@@ -1890,16 +2008,16 @@
 
   .mob-close-ticket-btn {
     color: #16a4fa;
-    background-color: #fff;
+    background-color: #ffffff;
   }
 
   .mob-close-ticket-btn:hover {
     background-color: #16a4fa;
-    color: #fff;
+    color: #ffffff;
   }
 
   .mob-add-ticket-btn {
-    color: #fff;
+    color: #ffffff;
   }
 
   .mob-filters .tags-wrap {
@@ -2018,7 +2136,7 @@
     top: 100%;
     left: 0;
     transition: all .3s;
-    background-color: #fff;
+    background-color: #ffffff;
     width: 100%;
     z-index: 99999;
     overflow: scroll;
@@ -2030,7 +2148,7 @@
   }
 
   .timer-quantity input[readonly] {
-    background-color: #fff;
+    background-color: #ffffff;
   }
 
   .create-updates-footer {
@@ -2044,7 +2162,7 @@
     padding: 9px 15px;
     display: flex;
     flex-direction: column;
-    background: #fff;
+    background: #ffffff;
   }
 
   ::-webkit-scrollbar {
@@ -2090,7 +2208,7 @@
   }
 
   .create-updates-footer .dropdown-user-parent > .dropdown-menu .user-item.active a span p {
-    color: #fff;
+    color: #ffffff;
   }
 
   .create-updates-footer .assign-ticket-header .form-control {
@@ -2219,12 +2337,12 @@
 
   .create-updates-content-service .dropdown-menu > li:hover a,
   .create-updates-content-service .dropdown-menu > li.active > a {
-    color: #fff;
+    color: #ffffff;
     background-color: #16a4fa;
   }
 
   .create-updates-content-service .dropdown > input {
-    background-color: #fff !important;
+    background-color: #ffffff !important;
   }
 
   .create-updates-content textarea,
@@ -2315,7 +2433,7 @@
     top: 20px;
     padding: 0;
     margin: 0;
-    color: #fff;
+    color: #ffffff;
     line-height: 0px;
     border: none;
     font-weight: 900;
@@ -2494,11 +2612,11 @@
   .mob-ticket-detail-tags .tag-autocomplete .autocomplete-item:hover span,
   .mob-ticket-detail-tags .dropdown-menu-child-focused {
     background-color: #16a4fa !important;
-    color: #fff !important;
+    color: #ffffff !important;
   }
 
   .mob-ticket-detail-tags .dropdown-menu-child-focused span {
-    color: #fff !important;
+    color: #ffffff !important;
   }
 
   .user--content .avatar img {
@@ -2525,7 +2643,7 @@
   }
 
   .user-item:hover, .user-item.hovered span p {
-    color: #fff;
+    color: #ffffff;
   }
 
   .no-ticket-updates {
@@ -2576,25 +2694,26 @@
 
 /*MOBILE VERSION COMPANIES PAGE*/
 @media (max-width: 414px) {
-  .new-companies-content {
+  .new-companies-content,
+  .new-users-content {
     margin-top: 40px;
   }
 
-  .new-companies-content__list--item {
+  .new-companies-content__list--item,
+  .new-users-content__list--item {
     padding: 13px 30px 13px 15px;
     position: relative;
-  }
-
-  .new-companies-content__list--item {
     flex-direction: column;
   }
 
-  .new-companies-content__list--item .w-100 {
+  .new-companies-content__list--item .w-100,
+  .new-users-content__list--item .w-100 {
     width: 100%;
     padding: 0;
   }
 
-  .new-companies-content__list--item .circle-avatar {
+  .new-companies-content__list--item .circle-avatar,
+  .new-users-content__list--item .circle-avatar {
     margin: 0 8px 0 4px;
   }
 }
@@ -2602,6 +2721,7 @@
 /*MOBILE VERSION PASSWORD PAGE*/
 @media (max-width: 414px) {
   .new-companies-content__header h3,
+  .new-users-content__header h3,
   .password-content__header h3 {
     font-family: "Graphik Medium", sans-serif;
     font-size: 13px;
@@ -2613,13 +2733,14 @@
   }
 
   .new-companies-content__header,
+  .new-users-content__header,
   .password-content__header {
     position: fixed;
     width: 100vw;
     left: 0;
     top: 56px;
     padding: 8px 20px;
-    background: #fff;
+    background: #ffffff;
     z-index: 2;
   }
 
@@ -2629,8 +2750,9 @@
   }
 
   .new-companies-selected,
+  .new-users-selected,
   .password-selected {
-    background: #fff;
+    background: #ffffff;
     border-radius: 6px;
     margin-right: 10px;
     position: fixed;
@@ -2667,20 +2789,23 @@
   }
 
   .password-content__modal,
-  .new-companies-content__modal {
+  .new-companies-content__modal,
+  .new-users-content__modal {
     width: 100vw;
     right: -100%;
     top: 0;
     z-index: 9999;
-    height: 100vh;
+    height: auto;
   }
 
   .password-content__modal.open,
-  .new-companies-content__modal.open {
+  .new-companies-content__modal.open,
+  .new-users-content__modal.open {
     right: 0;
     left: auto;
   }
 
+  .new-users-content__modal--header,
   .new-companies-content__modal--header {
     display: none;
   }
@@ -2702,7 +2827,7 @@
   .password-content__modal h3 {
     font-family: "Graphik Medium", sans-serif;
     font-size: 16px;
-    color: #fff;
+    color: #ffffff;
     font-weight: 500;
   }
 
@@ -2720,6 +2845,7 @@
   }
 
   .password-content__modal--content .col-md-6,
+  .new-users-content__modal--content > [class*="col-md-"],
   .new-companies-content__modal--content > [class*="col-md-"] {
     width: 100%;
   }
@@ -2729,20 +2855,24 @@
   }
 
   .password-content__modal--content,
+  .new-users-content__modal--content,
   .new-companies-content__modal--content {
     padding: 0 5px 100px;
     margin-top: 56px;
   }
 
-  .new-companies-content__modal--content {
+  .new-companies-content__modal--content,
+  .new-users-content__modal--content {
     padding: 0 5px 20px;
   }
 
-  .new-companies-content__modal .advanced .create-contract {
+  .new-companies-content__modal .advanced .create-contract,
+  .new-users-content__modal .advanced .create-contract {
     margin-bottom: 10px;
   }
 
-  .new-companies-content__modal .advanced .create-contract {
+  .new-companies-content__modal .advanced .create-contract,
+  .new-users-content__modal .advanced .create-contract {
     z-index: 1;
   }
 
@@ -2763,7 +2893,8 @@
     font-weight: 500;
   }
 
-  .new-companies-content__modal--content .new-companies-content__modal--content-footer .d-f {
+  .new-companies-content__modal--content .new-companies-content__modal--content-footer .d-f,
+  .new-users-content__modal--content .new-users-content__modal--content-footer .d-f {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -2771,6 +2902,7 @@
     z-index: 2;
   }
 
+  .new-users-content__modal--content .new-users-content__modal--content-footer .d-f .btn-new,
   .new-companies-content__modal--content .new-companies-content__modal--content-footer .d-f .btn-new {
     margin: 0;
     width: 50%;
@@ -2781,7 +2913,7 @@
     font-size: 14px;
   }
 
-  .new-companies-content__modal .advanced .logo-upload {
+  .new-users-content__modal .advanced .logo-upload {
     margin-top: 0;
   }
 
@@ -2866,6 +2998,7 @@
 
   .new-companies-content__list--item .contact,
   .new-companies-content__list--item .company-location,
+  .new-users-content__list--item .company-location,
   .new-companies-content__list--item .mob-company-footer {
     display: none;
   }
@@ -2878,7 +3011,8 @@
   .new-companies-content__list--item.show-details .mob-company-footer {
     display: flex;
   }
-  .password-content__list--item{
+
+  .password-content__list--item {
     display: block;
   }
 }

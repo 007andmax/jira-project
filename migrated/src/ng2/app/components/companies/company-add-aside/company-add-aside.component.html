@@ -1,6 +1,6 @@
 <ng-sidebar-container>
   <ng-sidebar [(opened)]="opened" [position]="'right'">
-    <div class="new-companies-content__modal">
+    <div class="new-companies-content__modal clearfix">
       <div class="new-companies-content__modal--header">
         <h3>Add New Company</h3>
         <button class="close-modal" (click)="close()"></button>
@@ -348,7 +348,7 @@
             <app-select-search [class]="['light-dropdown']" [field]="'name'" [list]="listPersons"
                                (onSelectedItem)="onSelectTechLead($event)"></app-select-search>
           </div>
-          
+
         </div>
         <app-company-tags (tagsChange)="onChangeTags($event)"></app-company-tags>
         <div class="col-md-12 editable-field">

@@ -236,14 +236,17 @@
   background: #fff;
   height: 100vh;
   width: 650px;
-  transition: transform .3s !important;
-  transform: translateX(100%);
+  //transition: transform .3s !important;
+  //transform: translateX(100%);
+  right: -650px;
   opacity: 0;
 }
 
 .ng-sidebar.ng-sidebar--opened {
   opacity: 1;
-  transform: translateX(0);
+  right: 0;
+  //transition: all .3s !important;
+  //transform: translateX(0);
 }
 
 .ng-sidebar--right {

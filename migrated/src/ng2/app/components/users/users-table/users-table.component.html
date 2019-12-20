@@ -11,38 +11,38 @@
     </div>
     <div class="mob-styles contact">
       <p class="ff-g-m fz-13 fw-600" [textContent]="getUserName()"></p>
-      <p class="fz-12" [textContent]="user.designation"></p>
-      <p class="desktop-hidden company-phone">979-431-8937</p>
+      <p class="fz-12 mob-hidden" [textContent]="user.designation"></p>
+      <p class="fz-12 desktop-hidden">{{getUserCompanyName()}}</p>
     </div>
   </div>
   <div class="col-md-4 company-location w-100 fz-13">
     {{getUserCompanyName()}}
-    <a class="company-link desktop-hidden">Show Map</a>
   </div>
-  <div class="col-md-4 w-100 fz-13">
+  <div class="col-md-4 w-100 fz-13 info">
     <div class="phones-numbers">
-    <ng-template ngFor let-phone
-    [ngForOf]="user.phoneNumbers"
-    [ngForTrackBy]="trackById">
-   
-    <div class="item-phone"> 
-    <i *ngIf="phone.typeNumber === 'FAX'" class="icn-16 fax-icn"></i>
-    <i *ngIf="phone.typeNumber === 'MOBILE'" class="icn-16 mobile-phone-icn"></i>
-    <i *ngIf="phone.typeNumber === 'OFFICE'" class="icn-16 office-phone-icn"></i>
-    {{phone.number}}</div>
-    </ng-template>
-   <!-- <i class="icn-16 home-phone-icn"></i>
-    <i class="icn-16 fax-icn"></i>
-    <i class="icn-16 mobile-phone-icn"></i>
-    <i class="icn-16 office-phone-icn"></i>
-    {{getContact()}}-->
+      <ng-template ngFor let-phone
+                   [ngForOf]="user.phoneNumbers"
+                   [ngForTrackBy]="trackById">
+
+        <div class="item-phone">
+          <i *ngIf="phone.typeNumber === 'FAX'" class="icn-16 fax-icn"></i>
+          <i *ngIf="phone.typeNumber === 'MOBILE'" class="icn-16 mobile-phone-icn"></i>
+          <i *ngIf="phone.typeNumber === 'OFFICE'" class="icn-16 office-phone-icn"></i>
+          {{phone.number}}
+        </div>
+      </ng-template>
+      <div class="fz-13 desktop-hidden" [textContent]="user.userStatistic.ticketsSubmitted || 0"></div>
+    </div>
   </div>
-</div>
+  <div class="col-md-12 position desktop-hidden">
+    <p class="fz-12" [textContent]="user.designation"></p>
+  </div>
   <div class="col-md-4 subs">
+    <div class="desktop-hidden">Subscription</div>
     <app-user-table-subscription (onChange)="onChangeSubscriptions($event)"
                                  [subscription]="user.subscription"></app-user-table-subscription>
   </div>
-  <div class="col-md-1 fz-13 jc-c" [textContent]="user.userStatistic.ticketsSubmitted || 0"></div>
+  <div class="col-md-1 fz-13 jc-c mob-hidden" [textContent]="user.userStatistic.ticketsSubmitted || 0"></div>
   <div class="col-md-2">
     <div class="grey-dropdown right with-icons" ngbDropdown>
       <i class="icn-16 more-vertical-ng2 pointer"
