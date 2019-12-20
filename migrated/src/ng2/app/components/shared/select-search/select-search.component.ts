@@ -23,8 +23,6 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
   @Input() valid: boolean = true;
   @Input() filter: boolean = false;
   public selectedItem;
-
-
   focus$ = new Subject<string>();
   click$ = new Subject<string>();
   sub = new Subscription();

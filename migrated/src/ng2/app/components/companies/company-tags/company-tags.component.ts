@@ -47,8 +47,10 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
    */
   public ngOnInit() {
    let getTags =  this.tagsService.getTags().subscribe((data) => {
-      this.tags = data;
-      this.reqTags = data;
+      this.tags = data.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
+      1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
+      this.reqTags = data.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
+      1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
     })
     this.sub.add(getTags);
     this.onInitClearState();
