@@ -15,6 +15,7 @@ import { ItemFilterPerson } from '../../left-panel/left-panel-companies/class/it
 import { Subscription } from 'rxjs';
 import { ModalImageCropperStateService } from 'src/ng2/app/services/modal/modal-image-cropper/services/modal-image-cropper-state.service';
 import { ImageCroper } from 'src/ng2/app/services/modal/modal-image-cropper/class/image-croper';
+import { CompanySubscriptionStateService } from '../company-subscription/class/company-subscription-state.service';
 @Component({
   selector: 'app-company-add-aside',
   templateUrl: './company-add-aside.component.html',
@@ -49,6 +50,7 @@ export class CompanyAddAsideComponent implements OnInit,OnDestroy {
     private usersStateService: UsersStateService, private modalService: NgbModal, private imageCropperStateService: ImageCropperStateService,
     private elRef: ElementRef,
     public cd: ChangeDetectorRef,
+    private companySubscriptionState: CompanySubscriptionStateService,
     private modalImageCropperStateService:ModalImageCropperStateService) { }
 
   ngOnInit() {
@@ -148,6 +150,7 @@ export class CompanyAddAsideComponent implements OnInit,OnDestroy {
   public onShowAside() {
   let getShowAsideForAdd =   this.companiesStateService.getShowAsideForAdd().subscribe(() => {
       this.opened = true;
+     
     })
     this.sub.add(getShowAsideForAdd);
   }
@@ -155,8 +158,10 @@ export class CompanyAddAsideComponent implements OnInit,OnDestroy {
     this.version = 'full';
     this.company.fullVersion();
     
+   
   }
   onSelectClientIndustry (item) {
+    
     this.company.clientIndustry.name = item
   }
   public onCheckGoogleAutoComplete () {

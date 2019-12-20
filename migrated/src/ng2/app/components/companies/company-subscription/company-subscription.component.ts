@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, Input } from '@angular/core';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { FormControl } from '@angular/forms';
 import { Tag } from 'src/ng2/app/interfaces/tag/tag';
@@ -18,7 +18,7 @@ export class CompanySubscriptionComponent implements OnInit, OnDestroy {
  
    
   sub = new Subscription();
-  editItem:any;
+  @Input() editItem:any;
   @Output() subscribeChange = new EventEmitter();
   subscriptions:Array<CompanySubscription> = [new CompanySubscription('Ticket Updates','ticket'),
   new CompanySubscription('Ticket Manager','ticketManager'),
@@ -38,7 +38,7 @@ export class CompanySubscriptionComponent implements OnInit, OnDestroy {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-    
+    if (this.editItem)  this.subscriptions.forEach(item => item.selected = this.editItem[item.field]);
     this.onInitClearState();
     this.onCheckEditItem();
   }

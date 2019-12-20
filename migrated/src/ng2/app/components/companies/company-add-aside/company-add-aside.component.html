@@ -288,7 +288,7 @@
         </div>
         <div class="col-md-12">
           <p>Get Subscribe</p>
-          <app-company-subscription (subscribeChange)="onChangeSubscribe($event)"></app-company-subscription>
+          <app-company-subscription [editItem]="company.contacts[0].subscription" (subscribeChange)="onChangeSubscribe($event)"></app-company-subscription>
         </div>
 
         <div class="col-md-12 details-divider">
@@ -345,21 +345,10 @@
         <div class="col-md-6">
           <p>Sales Person</p>
           <div class="light-dropdown">
-            <app-select-search [class]="['dark-dropdown']" [field]="'name'" [list]="listPersons"
+            <app-select-search [class]="['light-dropdown']" [field]="'name'" [list]="listPersons"
                                (onSelectedItem)="onSelectTechLead($event)"></app-select-search>
           </div>
-          <!--<div class="light-dropdown" ngbDropdown>
-            <i class="icn-sm report-caret-icon"></i>
-            <input type="text" [value]="getSelectedTechLead()" autocomplete="new-password"
-                   placeholder="Select Sales Person"
-                   id="dropdownPersons" ngbDropdownToggle />
-            <div ngbDropdownMenu aria-labelledby="dropdownPersons">
-              <ng-template ngFor let-item [ngForOf]="listPersons" let-i="index">
-                <button ngbDropdownItem [textContent]="item.firstName + ' ' + item.lastName"
-                        (click)="onSelectTechLead(i)"></button>
-              </ng-template>
-            </div>
-          </div> -->
+          
         </div>
         <app-company-tags (tagsChange)="onChangeTags($event)"></app-company-tags>
         <div class="col-md-12 editable-field">
