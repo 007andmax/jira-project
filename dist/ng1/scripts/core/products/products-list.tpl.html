@@ -1,0 +1,39 @@
+<div class="with-category" ng-controller="quicktech.core.products.productsListCtrl">
+  <div class="qt-product-list qt-list right-list">
+
+
+    <div ng-include="'/ng1/scripts/core/products/products-table-header.tpl.html'"></div>
+
+
+    <div vs-repeat="55" class="product-list-scroll">
+      <div
+        ng-repeat="product in productsData.list | filter : filterByCategory | orderBy : orderByForProducts : orderProducts.reverse track by product.versionedId.id"
+        ng-controller="quicktech.core.products.productCtrl"
+        show-model-element="{{ 'show-' + product.versionedId.id}}"
+        on-finish-render="loadingFinished()"
+        ng-init="setHighlightCreatedProductId(product.versionedId.id)"
+        style="height: 55px">
+
+        <div ng-include="'/ng1/scripts/core/products/products-table-row.tpl.html'"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script>
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+  ga('create', 'UA-93441341-1', 'auto');
+  ga('send', 'pageview');
+
+</script>

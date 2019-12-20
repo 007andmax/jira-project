@@ -120,4 +120,7 @@ export class UsersTableComponent implements OnInit {
     }
 
   }
+  public trackById(index, item) {
+    return item.id;
+  }
 }

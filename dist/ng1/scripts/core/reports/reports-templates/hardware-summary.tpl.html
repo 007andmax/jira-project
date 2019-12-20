@@ -1,0 +1,77 @@
+<div class="product-list-report ticket-report"
+     convert-to-pdf="/reports/pdf"
+     disable-selector=".open-pdf-btn"
+     email-endpoint="/reports/email"
+     selector=".hardware-summary"
+     orientation="{{'LANDSCAPE'}}"
+     file-name="{{ reportName }}"
+     id="{{ ticketReport.id }}">
+  <p class="report-title">Hardware Summary Report</p>
+  <i class="back-page" ui-sref="reports"></i>
+  <div class="new-reports">
+    <report-menu class-name="run-report-content-device"
+                 open-in-pdf="openInPdf"
+                 is-report-available="!!isReportAvailable"
+                 get-user-name="getUserName"
+                 download-as-pdf="downloadAsPdf"
+                 send-to-mail="sendToMail"
+                 email-pattern="emailPattern"
+                 is-radio-button-hidden="true"
+                 is-hardware-summary-options="true"
+                 is-date-range-hidden="true">
+
+    </report-menu>
+  </div>
+  <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
+  <div class="product-list___ticket hardware-summary" ng-show="!loadingInProgress">
+    <div class="product-list-ticket hardware-report"
+         style="width: 1180px;">
+      <div class="report-header">
+        <h1>Hardware Summary Report</h1>
+        <div class="company-info">
+          <h3>{{company.name || 'All companies'}}</h3>
+          <p>{{date | date:'yyyy-MM-dd'}}</p>
+        </div>
+      </div>
+      <div class="header-product-list-ticket" ng-if="reportTransformedSoftwareSummaryData">
+        <!--<h3>{{reportRemoteAccess.techCompanyName}}</h3>-->
+      </div>
+      <div ng-if="reportTransformedSoftwareSummaryData">
+        <div ng-if="reportTransformedSoftwareSummaryData">
+          <ul class="con-col">
+            <li class="top-product-list-ticket clearfix">
+              <div class="col-md-1 w-22" ng-if="hardwareSummaryWithDeviceItem"><strong>Device</strong></div>
+              <div class="col-md-3" ng-if="hardwareSummaryWithOperationSystemItem"><strong>Operating System</strong></div>
+              <div class="col-md-2" ng-if="hardwareSummaryWithCpuItem"><strong>CPU</strong></div>
+              <div class="col-md-1 w-6" ng-if="hardwareSummaryWithRamItem"><strong>RAM</strong></div>
+              <div class="col-md-1 w-6" ng-if="hardwareSummaryWithDiskItem"><strong>DISK</strong></div>
+              <div class="col-md-2" ng-if="hardwareSummaryWithWarrentyItem"><strong>WARRANTY</strong></div>
+              <div class="col-md-2" ng-if="hardwareSummaryWithSerialNumberItem"><strong>Serial Number</strong></div>
+            </li>
+            <li class="content-product-list-ticket clearfix" ng-repeat="device in reportTransformedSoftwareSummaryData | orderBy: 'label'"
+                on-finish-render="buildPdf()">
+              <div class="col-md-1 w-22" ng-if="hardwareSummaryWithDeviceItem">{{device.label || device.hostName}}</div>
+              <div class="col-md-3" ng-if="hardwareSummaryWithOperationSystemItem">
+                {{device.report.system && (device.report.system.caption + ' ' + device.report.system.release_id)}}
+              </div>
+              <div class="col-md-2" ng-if="hardwareSummaryWithCpuItem">{{device.report.processors && device.report.processors[0].name}}</div>
+              <div class="col-md-1 w-6" ng-if="hardwareSummaryWithRamItem">{{device.report.ram && getRamSize(device.report.ram.slots)}}</div>
+              <div class="col-md-1 w-6" ng-if="hardwareSummaryWithDiskItem">{{getDiskSize(device.report.logicalDisks)}}</div>
+              <div class="col-md-2" ng-if="hardwareSummaryWithWarrentyItem">{{device.report.variant && device.report.variant.warrantyDate}}</div>
+              <div class="col-md-2" ng-if="hardwareSummaryWithSerialNumberItem">{{device.report.system && device.report.system.serial_number}}</div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+      <div class="product-report-total-sales clearfix" ng-if="reportRemoteAccess.lines">
+        <p>Total Duration: <br> <strong><span>{{reportRemoteAccess.totalDuration}} min</span></strong></p>
+      </div>
+      <div class="report-footer">
+        <p>Prepare by : <span>{{ username }}</span></p>
+        <p>{{ currentCompany.name }}</p>
+        <p>Quicktech <span>2019</span> ©. All rights reserved</p>
+      </div>
+    </div>
+  </div>
+</div>

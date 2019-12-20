@@ -1,0 +1,76 @@
+<div class="settings-main-wrapper permission-settings row">
+  <div class="permission-wrapper">
+    <div class="col-md-2 ">
+      <p class="permission-headline">
+        Permissions
+      </p>
+    </div>
+    <div class="col-md-1 wrap-category"
+         ng-repeat="role in roles"
+         ng-mouseover="showEditBtn = role.id"
+         ng-mouseleave="showEditBtn = false">
+      <p ng-show="!isRoleNameEdited || editData.id !== role.id" class="permission-headline">{{ role.name }}</p>
+      <input ng-show="isRoleNameEdited && role.id === editData.id" type="text" class="form-control"
+             ng-model="editData.name"/>
+      <i class="icn-sm icn-remove-old pointer pull-right"
+         style="margin: 5px; position: absolute;top: -20px;right: 0;"
+         ng-show="isRoleNameEdited && role.id === editData.id" ng-click="editRoleName()"
+         uib-tooltip="Cancel" tooltip-popup-delay="2000"></i>
+      <i class=" icn-sm icn-label-save pointer"
+         style="margin: 5px;position: absolute;right: 15px;top: -20px;"
+         ng-show="isRoleNameEdited && role.id === editData.id" ng-click="changeRoleName()"
+         uib-tooltip="Save" tooltip-popup-delay="2000"></i>
+      <button ng-show="showEditBtn === role.id && (!isRoleNameEdited || editData.id !== role.id)"
+              style="right: 25px;"
+              class="company-edit-icn company-edit-icn-sm"
+              ng-click="editRoleName(role.name, role.id)"></button>
+      <button class="company-remove-icn" ng-show="showEditBtn === role.id && (!isRoleNameEdited || editData.id !== role.id)"
+              ng-click="deleteRole(role.id)"></button>
+    </div>
+    <div class=" col-md-1 wrap-category text-center" ng-if="roles && roles.length < 5">
+      <div class="btn btn-primary has-tooltip" ng-click="addNewRole()" custom-disabled="{{ isNewRoleCreating }}">
+        <div class="create-new-wrap">
+          <span class="create-new-label">Create New</span>
+          <i class="icn-sm icn-plus"></i>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12" ng-repeat="(sectionName, permissions) in sections">
+      <div class="col-md-12">
+        <p class="category-head">{{ sectionName }}</p>
+      </div>
+      <div class="permission-line col-md-12" ng-repeat="permission in permissions">
+        <div class="col-md-2">
+          <p class="permission-item">{{ userReadable(permission) }}</p>
+        </div>
+        <div class="col-md-1 text-center" ng-repeat="role in roles">
+          <label class="control checkbox permission-box">
+            <input type="checkbox" ng-checked="role.permissions.indexOf(permission) > -1"
+                   ng-click="togglePermission(role, permission)"
+                   ng-disabled="isPermissionDisabled(permission, role)">
+            <span class="control-indicator permission-box" tooltip-placement="top"
+                  tooltip-enable="isPermissionDisabled(permission, role)" tooltip-append-to-body="true"
+                  uib-tooltip="You should enable {{ getRelatedPermission(permission) }} firstly"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+  ga('create', 'UA-93441341-1', 'auto');
+  ga('send', 'pageview');
+
+</script>

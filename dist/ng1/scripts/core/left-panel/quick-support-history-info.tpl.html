@@ -1,0 +1,9 @@
+<div>
+  <div>User name: <span>{{ qs.userName }}</span></div>
+  <div>Performer: <span>{{ getUserName(qs.performer) }}</span></div>
+  <div ng-if="qs.hostName">Device name: <span>{{ qs.hostName }}</span></div>
+  <div>Started at: <span>{{ qs.startedAt | date: 'dd/MM/yyyy hh:mm' }}</span></div>
+  <div ng-if="qs.endedAt">Ended at: <span>{{ qs.endedAt | date: 'dd/MM/yyyy hh:mm' }}</span></div>
+  <div>Duration: <span>{{ qs.duration }} minutes</span></div>
+</div>
+

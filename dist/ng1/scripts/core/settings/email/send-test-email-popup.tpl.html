@@ -1,0 +1,24 @@
+<div class="test-email-wrap" style="display: flex;">
+  <div class="form-row clearfix" ng-form="testEmailForm" isolate-form>
+    <div class="form-group" style="max-width: 100%" ng-class="{'has-error': showError && testEmailForm.$invalid}">
+
+      <label class="control-label" ng-class="{'hide': showError && testEmailForm.$invalid}">
+        Target Email
+      </label>
+
+      <div ng-messages="testEmailForm.testEmail.$error"
+           ng-class="{'hide': !showError || !testEmailForm.$invalid}">
+        <label class="control-label" ng-message="required">Enter the target email address please.</label>
+        <label class="control-label" ng-message="pattern">Please enter a valid email address.</label>
+        <div class="control-label" ng-message="maxlength">Email mustn't be greater then 128 chars.</div>
+      </div>
+
+      <input type="text" class="form-control" name="testEmail" ng-model="smtp.testEmail" ng-pattern="emailPattern"
+             required ng-maxlength="128">
+
+    </div>
+  </div>
+  <div class="btn-icn btn input-btn-cr btn-success" ng-click="sendTestEmail(smtpForm, testEmailForm, true, hidePopover)">
+    <i class="icn-sm small-icn-tick"></i>
+  </div>
+</div>

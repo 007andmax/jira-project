@@ -1,0 +1,55 @@
+<div class="start-end-picker row"
+     ng-controller="quicktech.core.time-picker.userListCtrl" >
+  <div class="time-picker-in"
+  on-toggle="onToggleDropdownInDate($event)"
+       uib-dropdown is-open="openInDate">
+    <input type="text"
+           class="new-input"
+           smart-dropdown-menu-position="time-picker"
+           ng-blur="onChangeInDateText()" ng-model="inDateText"
+           ng-click="toggleInDateDropdown($event)" />
+
+    <div uib-dropdown-menu
+         stop-propagation="click"
+         aub-is-bulk-operation="true"
+         class="time-picker-hours"
+         style="top: calc(100% + -405px);">
+      <div class="start-end-picker-item "
+           ng-repeat="hour in hoursInDate track by $index" ng-init="i=$index;" >
+        <div ng-repeat="minute in minutes"
+             ng-click="selectTimeIn(hour,minute)" ng-class="(hour.value === selectedIndexInDate.hour && minute.value === selectedIndexInDate.minute && hour.type === inDate.type) ? 'active' : ''" 
+            >
+          {{hour.text}}:{{minute.text}}{{hour.type}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="time-picker-out"
+       uib-dropdown is-open="openOutDate">
+    <input type="text"
+           ng-blur="onChangeOutDateText()" ng-model="outDateText"
+           smart-dropdown-menu-position="time-picker"
+           class="new-input" ng-if="serviceExpenseDurationPresentation !== 'DURATION_PICKER'"
+           ng-click="toggleOutDateDropdown($event)" />
+    <p ng-if="serviceExpenseDurationPresentation === 'DURATION_PICKER'">{{outDateText}}</p>
+    <div uib-dropdown-menu
+         stop-propagation="click"
+
+         aria-labelledby="time-out-dropdown"
+         aub-is-bulk-operation="true"
+         style="top: calc(100% + -405px);">
+      <div class="start-end-picker-item"
+           ng-repeat="hour in hoursOutDate track by $index" ng-init="i=$index;">
+        <div ng-repeat="minute in minutes"
+             ng-click="selectTimeOut(hour,minute)" ng-class="(hour.value === selectedIndexOutDate.hour && minute.value === selectedIndexOutDate.minute && hour.type === inDate.type) ? 'active' : ''" 
+             ng-if="minute.value >= inDate.minute && hour.type === inDate.type && hour.value === inDate.hour && i === 0 || 
+             minute.value < inDate.minute && hour.type === inDate.type && hour.value === inDate.hour && i > 0 ||
+              hour.type === inDate.type && hour.value !== inDate.hour 
+              ||  hour.type !== inDate.type">
+          {{hour.text}}:{{minute.text}}{{hour.type}} ({{calculateDuration(hour.value,minute.value,hour.type)}})
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
