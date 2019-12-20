@@ -1,0 +1,9 @@
+.phones-numbers {
+    display: flex;
+    flex-direction: column;
+    .item-phone {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+}

@@ -7,7 +7,7 @@
     <div class="new-companies__list--header clearfix mob-hidden">
       <div class="col-md-3 with-checkbox">
         <label class="checkbox-container">
-          <input type="checkbox">
+          <input type="checkbox" (change)="onSelectAllCompanies($event)">
           <span class="checkbox-mark"></span>
         </label>
         <p class="pointer" (click)="onFilter('name')">Name</p>

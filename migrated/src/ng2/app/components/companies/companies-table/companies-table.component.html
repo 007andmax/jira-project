@@ -2,7 +2,7 @@
   <div class="new-companies-content__list--item clearfix" (click)="showInfo()">
     <div class="col-md-3 w-100">
       <label class="checkbox-container">
-        <input type="checkbox">
+        <input type="checkbox" (change)="onSelectCompany($event)">
         <span class="checkbox-mark"></span>
       </label>
       <div class="circle-avatar" [ngClass]="{'with-logo': checkLogo()}">

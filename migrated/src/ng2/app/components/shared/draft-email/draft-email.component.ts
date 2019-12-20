@@ -6,6 +6,7 @@ import { FilesInfoItem } from './class/files-Info-item';
 
 import { DraftEmailService } from 'src/ng2/app/services/draft-email/draft-email.service';
 import { User } from '../../users/class/user';
+import { Company } from 'src/ng2/app/interfaces/company/company';
 
 @Component({
   selector: 'app-draft-email',
@@ -34,7 +35,7 @@ export class DraftEmailComponent implements OnInit {
   uploadFiles: Array<File> = [];
   filesInfo: FilesInfo = new FilesInfo();
   usersSelected: Array<User> = [];
-
+  companiesSelected: Array<Company> = [];
   constructor(private draftEmailStateService: DraftEmailStateService, private elRef: ElementRef,
     private draftEmailService: DraftEmailService, public cd: ChangeDetectorRef
   ) { }
@@ -47,6 +48,7 @@ export class DraftEmailComponent implements OnInit {
   public onShowAside() {
     this.draftEmailStateService.getShowAsideForAdd().subscribe(() => {
       this.usersSelected = this.draftEmailStateService.getSelectedUsers();
+      this.companiesSelected = this.draftEmailStateService.getSelectedCompanies();
       this.action = this.draftEmailStateService.getAction();
       this.opened = true;
       this.draftEmail = new DraftEmail();

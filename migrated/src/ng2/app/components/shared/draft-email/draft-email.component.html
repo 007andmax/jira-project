@@ -10,7 +10,7 @@
           <p>Subject</p>
           <input [(ngModel)]="draftEmail.subject" type="text" placeholder="Write Subject line">
         </div>
-        <app-draft-email-recipients *ngIf="action === 'COMPANIES'" (onCompanyEmails)="onChangeCompanyEmails($event)"></app-draft-email-recipients>
+        <app-draft-email-recipients [companiesSelected]="companiesSelected" *ngIf="action === 'COMPANIES'" (onCompanyEmails)="onChangeCompanyEmails($event)"></app-draft-email-recipients>
         <draft-email-user-recipients [usersSelected]="usersSelected" *ngIf="action === 'USERS'" (onCompanyEmails)="onChangeCompanyEmails($event)"></draft-email-user-recipients>
         <div class="col-md-12 tab-btns">
           <div [ngClass]="{active: tab == 'plain'}" (click)="tab = 'plain'">

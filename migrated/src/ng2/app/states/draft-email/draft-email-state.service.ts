@@ -1,5 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { User } from '../../components/users/class/user';
+import { Company } from '../../interfaces/company/company';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,22 @@ export class DraftEmailStateService {
   clear: EventEmitter<any> = new EventEmitter();
   action:string = null;
   selectedUsers:Array<User> = [];
+  selectedCompanies:Array<Company> = [];
   constructor() { }
+
+  public addSelectedCompany(data) {
+    this.selectedCompanies.push(data);
+  }
+  public getSelectedCompanies(){
+    return this.selectedCompanies;
+  }
+  public resetSelectedCompanies () {
+    this.selectedCompanies = [];
+  }
+  public removeSelectedCompany(i) {
+    this.selectedCompanies.splice(i);
+  }
+
 
   public addSelectedUser(data) {
     this.selectedUsers.push(data);

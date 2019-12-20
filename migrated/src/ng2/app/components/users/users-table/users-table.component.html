@@ -20,12 +20,24 @@
     <a class="company-link desktop-hidden">Show Map</a>
   </div>
   <div class="col-md-4 w-100 fz-13">
-    <i class="icn-16 home-phone-icn"></i>
+    <div class="phones-numbers">
+    <ng-template ngFor let-phone
+    [ngForOf]="user.phoneNumbers"
+    [ngForTrackBy]="trackById">
+   
+    <div class="item-phone"> 
+    <i *ngIf="phone.typeNumber === 'FAX'" class="icn-16 fax-icn"></i>
+    <i *ngIf="phone.typeNumber === 'MOBILE'" class="icn-16 mobile-phone-icn"></i>
+    <i *ngIf="phone.typeNumber === 'OFFICE'" class="icn-16 office-phone-icn"></i>
+    {{phone.number}}</div>
+    </ng-template>
+   <!-- <i class="icn-16 home-phone-icn"></i>
     <i class="icn-16 fax-icn"></i>
     <i class="icn-16 mobile-phone-icn"></i>
     <i class="icn-16 office-phone-icn"></i>
-    {{getContact()}}
+    {{getContact()}}-->
   </div>
+</div>
   <div class="col-md-4 subs">
     <app-user-table-subscription (onChange)="onChangeSubscriptions($event)"
                                  [subscription]="user.subscription"></app-user-table-subscription>
