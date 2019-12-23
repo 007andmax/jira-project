@@ -1,6 +1,6 @@
 <div class="deposit-create service-agreements clearfix">
   <div class="fixed-block-top" fixed-block-top style="background-color: white">
-    <div class="btn btn-primary" ng-click="openAgreementsModal('CREATE_NEW', true, null)">New Contract</div >
+    <div class="btn btn-primary" ng-click="setInitEditAgreement(false); openAgreementsModal('CREATE_NEW', true, null)">New Contract</div >
   </div>
   <div class="service-agreements-lists">
     <ul>
@@ -46,13 +46,13 @@
       <div style="margin-top: 110px;">
       <li ng-repeat="agreement in agreementsList | orderBy: filterType"
           class="content-product-list-ticket pointer clearfix">
-        <div class="col-md-2" ng-click="openAgreementsModal(agreement.type, false, agreement.id)">{{agreement.company.name}}</div>
-        <div class="col-md-3 col-width-3" ng-click="openAgreementsModal(agreement.type, false, agreement.id)">{{agreement.description}}</div>
-        <div class="col-md-1 col-width-4" ng-click="openAgreementsModal(agreement.type, false, agreement.id)" style="white-space: nowrap">{{contractTypeDictionary[agreement.type]}}{{billTypeDictionary[agreement.billType]}}</div>
-        <div class="col-md-1" ng-click="openAgreementsModal(agreement.type, false, agreement.id)" style="padding-left: 10px;" ng-style="agreement.status === 'TERMINATED' && {'color':'red'}">{{contractStatusDictionary[agreement.status]}}</div>
-        <div class="col-md-1" ng-click="openAgreementsModal(agreement.type, false, agreement.id)">{{getDateInCorrectFormat(agreement.startDate)}}</div>
-        <div class="col-md-1" ng-click="openAgreementsModal(agreement.type, false, agreement.id)">{{getDateInCorrectFormat(agreement.endDate)}}</div>
-        <div class="col-md-1 col-width-1" ng-click="openAgreementsModal(agreement.type, false, agreement.id)">
+        <div class="col-md-2" ng-click="setInitEditAgreement(false); openAgreementsModal(agreement.type, false, agreement.id)">{{agreement.company.name}}</div>
+        <div class="col-md-3 col-width-3" ng-click="setInitEditAgreement(false); openAgreementsModal(agreement.type, false, agreement.id)">{{agreement.description}}</div>
+        <div class="col-md-1 col-width-4" ng-click="setInitEditAgreement(false); openAgreementsModal(agreement.type, false, agreement.id)" style="white-space: nowrap">{{contractTypeDictionary[agreement.type]}}{{billTypeDictionary[agreement.billType]}}</div>
+        <div class="col-md-1" ng-click="setInitEditAgreement(false); openAgreementsModal(agreement.type, false, agreement.id)" style="padding-left: 10px;" ng-style="agreement.status === 'TERMINATED' && {'color':'red'}">{{contractStatusDictionary[agreement.status]}}</div>
+        <div class="col-md-1" ng-click="setInitEditAgreement(false); openAgreementsModal(agreement.type, false, agreement.id)">{{getDateInCorrectFormat(agreement.startDate)}}</div>
+        <div class="col-md-1" ng-click="setInitEditAgreement(false); openAgreementsModal(agreement.type, false, agreement.id)">{{getDateInCorrectFormat(agreement.endDate)}}</div>
+        <div class="col-md-1 col-width-1" ng-click="setInitEditAgreement(false); openAgreementsModal(agreement.type, false, agreement.id)">
           <div ng-hide="agreement.status === 'TERMINATED'">{{getDateInCorrectFormat(agreement.reviewDate)}}</div>
         </div>
         <div class="col-md-1 text-center">{{agreement.amount | number : 2}}</div>
@@ -73,7 +73,7 @@
                 <a tabindex="-1" href="javascript:void(0)" ng-click="terminateContract(agreement.id)" ng-show="agreement.status !== 'TERMINATED'">Terminate</a>
               </li>
               <li>
-                <a tabindex="-1" href="javascript:void(0)" ng-click="openAgreementsModal(agreement.type, true, agreement.id)" ng-show="agreement.status != 'TERMINATED' && agreement.status != 'EXPIRED'">Edit</a>
+                <a tabindex="-1" href="javascript:void(0)" ng-click="setInitEditAgreement(true); openAgreementsModal(agreement.type, true, agreement.id)" ng-show="agreement.status != 'TERMINATED' && agreement.status != 'EXPIRED'">Edit</a>
               </li>
             </ul>
           </div>

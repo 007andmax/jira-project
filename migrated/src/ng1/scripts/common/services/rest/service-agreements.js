@@ -50,6 +50,14 @@
         Utils.handleCallback(future, callback);
       }
 
+      function updateContract(data, callback) {
+        var future = $http({
+          url: '/serviceAgreements',
+          method: 'PUT',
+          data: data
+        });
+        Utils.handleCallback(future, callback);
+      }
 
       function createContract(data, createBillableItem, callback) {
         var future = $http({
@@ -118,7 +126,8 @@
         terminate: terminate,
         deleteAgreement: deleteAgreement,
         forceCreate: forceCreate,
-        validateCrossingDatesHourly: validateCrossingDatesHourly
+        validateCrossingDatesHourly: validateCrossingDatesHourly,
+        updateContract:updateContract
       }
 
 
