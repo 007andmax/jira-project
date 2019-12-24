@@ -108,10 +108,11 @@
         Utils.handleCallback(future, callback)
       }
 
-      function validateCrossingDatesHourly(startDate, endDate, companyId, callback) {
+      function validateCrossingDatesHourly(startDate, endDate, companyId,agreementId, callback) {
+        console.log('agreementId',agreementId);
         var future = $http({
           method: 'GET',
-          url: '/serviceAgreements/validateCrossingDates?' + 'companyId=' + companyId + '&startDate=' + startDate + '&endDate=' + endDate
+          url: '/serviceAgreements/validateCrossingDates?' + 'companyId=' + companyId + ((agreementId) ? '&agreementId=' + agreementId : '') + '&startDate=' + startDate + '&endDate=' + endDate
         });
         Utils.handleCallback(future, callback)
       }

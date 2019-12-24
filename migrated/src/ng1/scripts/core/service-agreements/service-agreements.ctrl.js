@@ -309,7 +309,6 @@
               $scope.editContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
               $scope.isEditContract = true;
               $scope.editContract.services = companyData.companyForReadOnlyMode.services;
-
             }
             if ($scope.isEditContract && companyData.contractType === 'BLOCK_TIME') {
               $scope.editContract = companyData.companyForReadOnlyMode;
@@ -686,7 +685,9 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
             var deferred = $q.defer();
 
             var companyId = returnCompanyId();
-            AgreementsService.validateCrossingDatesHourly($scope.editContract.startDate, $scope.editContract.endDate, companyId, function (resp) {
+            console.log('$scope.isEditContract',$scope.isEditContract);
+            console.log('$scope.editContract',companyData.companyForReadOnlyMode);
+            AgreementsService.validateCrossingDatesHourly($scope.editContract.startDate, $scope.editContract.endDate, companyId,($scope.isEditContract) ? companyData.companyForReadOnlyMode.id : null, function (resp) {
               if (resp.valid == true) {
                 deferred.resolve(resp)
               } else {
