@@ -300,7 +300,7 @@
               billable: true,
               taxes: addDefaultTaxes()
             };
-            if ($scope.isEditContract) {
+            if ($scope.isEditContract && companyData.contractType === 'HOURLY') {
               $scope.editContract.description = companyData.companyForReadOnlyMode.description;
               $scope.editContract.companyId = companyData.companyForReadOnlyMode.companyId;
               var startDate = new Date(companyData.companyForReadOnlyMode.startDate);
@@ -311,9 +311,13 @@
               $scope.editContract.services = companyData.companyForReadOnlyMode.services;
 
             }
+            if ($scope.isEditContract && companyData.contractType === 'BLOCK_TIME') {
+              $scope.editContract = companyData.companyForReadOnlyMode;
+
+            }
            
           } else {
-
+console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyMode);
             $scope.editContract = companyData.companyForReadOnlyMode;
             $scope.editContract.startDate = $filter('date')($scope.editContract.startDate, 'dd MMM yyyy');
             $scope.editContract.endDate = $filter('date')($scope.editContract.endDate, 'dd MMM yyyy');
