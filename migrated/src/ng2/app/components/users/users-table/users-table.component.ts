@@ -1,11 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef } from '@angular/core';
 import { User } from '../class/user';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { Company } from 'src/ng2/app/interfaces/company/company';
 import { UsersService } from 'src/ng2/app/services/users/users.service';
 import { CurrentUser } from 'src/ng2/class/current-user/current-user';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
- 
+
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { ARCHIVE_USER, DEARCHIVE_USER } from 'src/ng2/app/const/confirm';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
@@ -22,16 +22,17 @@ import { DraftEmailStateService } from 'src/ng2/app/states/draft-email/draft-ema
 })
 export class UsersTableComponent implements OnInit {
   @Input() user: User;
-  @Input() showArchivedUsers:boolean;
+  @Input() showArchivedUsers: boolean;
   companies: Array<Company> = [];
   currentUser: CurrentUser = new CurrentUser();
   constructor(private companiesStateService: CompaniesStateService, private usersService: UsersService,
-    private usersStateService: UsersStateService,  
+    private usersStateService: UsersStateService,
     private confirmStateService: ConfirmStateService,
-    private modalService: NgbModal, 
+    private modalService: NgbModal,
     private draftEmailStateService: DraftEmailStateService,
-    private usersTableService:UsersTableService) { }
-   
+    private usersTableService: UsersTableService,
+    private elRef: ElementRef) { }
+
   onChangeSubscriptions(data) {
     this.usersService.setSubscriptions(data).subscribe(res => {
       console.log('res', res);
@@ -57,7 +58,7 @@ export class UsersTableComponent implements OnInit {
     return (index > -1) ? this.companies[index].name : '';
   }
   getUserAvatarUrl() {
-    if (!(this.user && this.user.avatar))  return '';
+    if (!(this.user && this.user.avatar)) return '';
 
     if (this.user.id) {
       return '/users/' + (this.user.id || 'default') + '/image' + (this.user.avatar ? '.jpg?t=' + this.user.avatar.updatedAt :
@@ -81,7 +82,7 @@ export class UsersTableComponent implements OnInit {
 
     })
     this.currentUser = this.usersStateService.getCurrentUser();
-    
+
     //this.sub.add(getOnCompanies);
   }
   delete() {
@@ -90,8 +91,7 @@ export class UsersTableComponent implements OnInit {
       modalRef.componentInstance.message = `You cannot archive primary contact user`;
       return;
     }
-     if (this.usersTableService.getUsersCount(this.usersStateService.getAllUsers(),this.user.company.id,this.showArchivedUsers) === 1)
-    {
+    if (this.usersTableService.getUsersCount(this.usersStateService.getAllUsers(), this.user.company.id, this.showArchivedUsers) === 1) {
       const modalRef = this.modalService.open(AlertComponent, { windowClass: 'xs-modal user-modal' });
       modalRef.componentInstance.message = `You cannot archive all users. At least one must remain.`;
       return;
@@ -102,6 +102,10 @@ export class UsersTableComponent implements OnInit {
     modalRef.componentInstance.message = `Do you want to archive ${this.user.firstName + ' ' + this.user.lastName}`;
     this.usersStateService.setUserForArchive(this.user);
   }
+  showUserDetails() {
+    //console.log('gg',this.elRef.nativeElement.querySelector('new-users-content__list--item'));
+    this.elRef.nativeElement.querySelector('.new-users-content__list--item').classList.toggle('show-details');
+  }
   restore() {
     this.confirmStateService.setConfirmAction(DEARCHIVE_USER);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
@@ -110,7 +114,7 @@ export class UsersTableComponent implements OnInit {
     this.usersStateService.setUserForDeArchive(this.user);
   }
   onSelectUser(event) {
-    console.log('event',event.target.checked);
+    console.log('event', event.target.checked);
     if (event.target.checked) {
       this.draftEmailStateService.addSelectedUser(this.user);
     } else {

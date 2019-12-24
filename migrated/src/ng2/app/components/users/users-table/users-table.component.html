@@ -5,6 +5,7 @@
       <span class="checkbox-mark"></span>
     </label>
     <!--[ngStyle]="{'background': 'url(' + getUserAvatarUrl(user) + ') no-repeat','background-size': 'contain'}"-->
+    <div (click)="showUserDetails()">
     <div class="circle-avatar"
          [ngStyle]="{'background': 'url(' + getUserAvatarUrl() + ') no-repeat','background-size': 'cover'}"
          [textContent]="getNameForAvatar()">
@@ -14,6 +15,7 @@
       <p class="fz-12 mob-hidden" [textContent]="user.designation"></p>
       <p class="fz-12 desktop-hidden">{{getUserCompanyName()}}</p>
     </div>
+  </div>
   </div>
   <div class="col-md-4 company-location w-100 fz-13">
     {{getUserCompanyName()}}
