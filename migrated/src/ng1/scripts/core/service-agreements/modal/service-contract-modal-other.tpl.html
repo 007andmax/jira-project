@@ -1,0 +1,359 @@
+<div class="contracts create-window clearfix" ng-show="editMode" ng-controller="serviceContractOtherCtrl"
+     ng-form="serviceContractForm">
+  <div class="close-btn btn" ng-click="closeModal()" tabindex="1">
+    <i class="icn-sm icn-remove-old"></i>
+  </div>
+
+  <div class="service-header">
+    <h4 class="title-services">Service Contracts</h4>
+    <p>Manage service based contract are when you will your customers a monthly fee based on the
+      amount of users or device the customer has, you can still bill customers extra if needed.</p>
+  </div>
+
+  <div class="service-contract-details clearfix">
+    <div class="col-md-8">
+      <div class="form-group"
+      ng-class="{'has-error': isShowingErrorsServiceContract(serviceContractForm, 'description')}">
+        Description*
+
+        <input placeholder="Description"
+               type="text"
+               name="description"
+               class="form-control"
+               ng-model="serviceContract.description"
+               hard-reset-pattern="descriptionPattern" required>
+      </div>
+    </div>
+    <div class="col-md-12"></div>
+
+
+    <div class="interval-agreement">
+      <div class="form-group">
+        Interval*
+        <input custom-style="{'width':'100%'}" type="text" class="form-control"
+               ng-model="serviceContract.interval"
+               uib-typeahead="interval for interval in intervals"
+               qt-typeahead-async-show-on-focus readonly required>
+        <div>
+          <i class="icn-sm icn-caret-gray" ng-show="!serviceContract.interval"></i>
+          <i class="icn-sm icn-remove-old"
+             ng-show="serviceContract.interval"
+             uib-tooltip="clear" tooltip-placement="top" ng-click="serviceContract.interval = ''"></i>
+        </div>
+      </div>
+    </div>
+    <div class="interval-agreement">
+      <div class="form-group">
+        Start Date*
+        <div style="position: absolute;right: -285px;top: 30px;" ng-class="{'hide': !isShowingErrorsServiceContract(serviceContractForm, 'startDate')}">
+          <label class="control-label" style="color: red; text-align: left">Dates are required</label>
+        </div>
+        <input class="form-control" type="text" ng-if="reInitStartDate" ng-model="serviceContract.startDate" placeholder="Select"
+               readonly ng-change="changeStartDate()" name="startDate"
+               qt-data-time-picker min-date="serviceContract.minStartDate" required>
+        <i class="report-calendar"></i>
+      </div>
+    </div>
+    <div class="form-group interval-agreement" >
+      <p>Num.of Intervals</p>
+
+      <input class="form-control" type="text"
+             ng-model="numOfIntervals"
+             placeholder="&infin;"
+             custom-disabled="{{ disabledEndAndNum }}"
+             name="numToGenerate"
+             hard-reset-required="true"
+             ng-change="changeEndDateByNumToGenerate()"
+             hard-reset-pattern="decimalNumberPattern">
+    </div>
+    <div class="interval-agreement">
+      <div class="form-group">
+        End Date*
+
+        <input type="text" placeholder="../../.." readonly ng-if="reInitEndDate"
+               ng-model="serviceContract.endDate"
+               class="form-control" date-time-picker-with-period name="endDate"
+               default-date="serviceContract.endDate" min-date="serviceContract.minEndDate"
+               period="serviceContract.period" start-date="serviceContract.startDate">
+
+        <i class="report-calendar"></i>
+      </div>
+    </div>
+
+
+    <div class="col-md-12"></div>
+    <!--<div class="col-md-1">-->
+    <!--<label class="control checkbox">-->
+    <!--<input ng-model="serviceContracts.isAutoRenew" type="checkbox">-->
+    <!--<span class="control-indicator"></span>-->
+    <!--Auto Renew-->
+    <!--</label>-->
+    <!--</div>-->
+    <div class="col-md-12">
+      <p class="info-block">Contact time can be based on the amount of users or devices, these number generated
+        automaticaly</p>
+    </div>
+  </div>
+
+  <div class="service-bill clearfix">
+    <h4>Select how you bill your customer. Managed Services will be added to Service time</h4>
+    
+    <div class="col-md-12"></div>
+
+
+    <div class="bill-hide-content-item clearfix col-md-12" ng-if="serviceContract.billType === 'OTHER'">
+      <div class="invoice-update">
+
+        <ul class="nav nav-ticket-add invoice-ticket-add">
+
+          <li class="invoice-update-btns" ng-click="setOpenedTab('product')"
+              ng-class="{'active': isTabOpened('product')}">
+            <a href="javascript:void(0)">
+              <i class="icon-lg icon-add-product"></i>Product
+            </a>
+          </li>
+
+          <li class="invoice-update-btns" ng-click="setOpenedTab('service')"
+              ng-class="{'active': isTabOpened('service')}">
+            <a href="javascript:void(0)">
+              <i class="icon-lg icon-add-service"></i>Service
+            </a>
+          </li>
+
+        </ul>
+
+        <div class="update-content">
+          <div class="tab-pane in active" ng-show="isTabOpened('product')">
+            <div class="col-sm-7">New Product</div>
+            <div class="col-sm-2">Quantity</div>
+            <div class="col-sm-2">Price</div>
+            <div class="col-sm-1 text-center" style="padding: 0;">Action</div>
+
+            <ul class="qt-table">
+              <li
+                ng-repeat="productExpense in serviceContract.productExpenses track by (product.item ? product.item.versionedId.id + $index : $index)">
+                <div ng-controller="quicktech.core.serviceAgreements.productExpenseListCtrl"
+                     ng-include="'/ng1/scripts/core/service-agreements/modal/service-contract-modal/product-expense-list.tpl.html'">
+                </div>
+              </li>
+              <li>
+                <div ng-controller="quicktech.core.serviceAgreements.newProductExpenseCtrl"
+                     ng-include="'/ng1/scripts/core/service-agreements/modal/service-contract-modal/new-product-expense.tpl.html'">
+                </div>
+              </li>
+            </ul>
+
+
+          </div>
+
+          <div class="tab-pane in active" ng-show="isTabOpened('service')">
+            <div class="col-sm-3">Service Expense</div>
+            <div class="col-sm-2">Duration</div>
+            <div class="col-sm-3" style="width: 197px;">Description</div>
+            <div class="interval-agreement">Date</div>
+            <div class="col-sm-1 text-center" style="padding: 0;">Action</div>
+            <ul class="qt-table">
+
+              <li
+                ng-repeat="serviceExpense in serviceContract.serviceExpenses track by (service.item ? service.item.versionedId.id + $index : $index)">
+
+                <div>
+
+                  <div class="col-sm-3">
+                    <div uib-dropdown>
+                      <input type="text"
+                             name="serviceName"
+                             ng-model="serviceExpense.name"
+                             ng-minlength="1"
+                             autocomplete="off"
+                             tabindex="5"
+                             required
+                             placeholder="Service Expense"
+                             class="form-control form-control-dropdown dropdown-toggle"
+                             uib-typeahead="service as service.name for service in defaultServices | filter:{'picked': false} | orderBy:'name'"
+                             qt-typeahead-async-show-on-focus
+                             custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
+                             value="service.name" hard-reset-pattern="serviceNamePattern">
+
+                      <div class="input-top-4" typeahead-input-icon="newBlockTimeService.name"></div>
+
+                    </div>
+                  </div>
+
+                  <div class="col-sm-2" service-quantity-picker="serviceExpense.quantity" sqp-is-show-format="false">
+                    <input id="serviceExpense-quantity-picker" type="text" class="form-control"
+                           placeholder="Hr(s) : Min(s)" sqp-input
+                           autocomplete="off" aria-expanded="true" required>
+
+                    <input type="hidden" name="serviceTime" ng-model="service.quantity" ng-required="true"/>
+                  </div>
+
+                  <div class="col-sm-3" style="width: 197px;">
+                    <input type="text" class="form-control service-description" placeholder="Description"
+                           ng-model="serviceExpense.description" max-length-word="100"
+                           name="serviceDescription" ng-maxlength="2000"
+                           hard-reset-pattern="descriptionPattern" required>
+                  </div>
+
+                  <div class="interval-agreement">
+                    <div class="dropdown">
+                      <i class="icn-sm icn-caret-gray" style="position: absolute;top: 13px;right: 13px;z-index: 1;"></i>
+                      <input type="text" qt-data-time-picker min-date="serviceContract.startDate"
+                             ng-if="reInitEndDate"
+                             max-date="serviceContract.endDate" default-date="serviceExpense.date"
+                             class="form-control has-dropdown" data-toggle="dropdown" aria-expanded="false"
+                             placeholder="Date" ng-model="serviceExpense.date"
+                             name="serviceDate" ng-required="true">
+
+                    </div>
+                  </div>
+
+                  <div class="col-md-1 fourm-group">
+                    <div class="add-remove-service">
+                      <div ng-click="deleteServiceExpense(serviceExpense)">
+                        <i class="icon-sm icn-delete"></i>
+                      </div>
+                    </div>
+                  </div>
+
+
+                </div>
+              </li>
+
+              <li>
+
+                <div ng-form="newServiceExpenseForm" ng-if="reInitNewServiceExpenseForm">
+                  <div ng-show="showServiceExpenseError">
+                    <p style="color: red;padding-left: 15px; margin-bottom: 0;">{{validationServiceError}}</p>
+                  </div>
+                  <div class="col-sm-3">
+                    <div uib-dropdown
+                         ng-class="{'has-error': ((newServiceExpense.name == null && showRequiredFieldErrorServiceExpense) || showNotAddedServiceExpenseError(newServiceExpense)) }">
+                      <input type="text"
+                             style="cursor: pointer;"
+                             name="newServiceExpenseName"
+                             ng-model="newServiceExpense.name"
+                             ng-minlength="1"
+                             autocomplete="off"
+                             ng-click="refreshNotAddedError('serviceExpense')"
+                             tabindex="5"
+                             required
+                             placeholder="Service Expense"
+                             class="form-control form-control-dropdown dropdown-toggle"
+                             uib-typeahead="service as service.name for service in defaultServices | filter:{'picked': false} | orderBy:'name'"
+                             qt-typeahead-async-show-on-focus
+                             custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
+                             value="service.name" hard-reset-pattern="serviceNamePattern">
+
+                      <div class="input-top-4" typeahead-input-icon="newServiceExpenseName"></div>
+
+                    </div>
+                  </div>
+
+                  <div class="col-sm-2" service-quantity-picker="newServiceExpense.quantity" sqp-is-show-format="false"
+                       ng-class="{'has-error': !newServiceExpense.quantity &&  showRequiredFieldErrorServiceExpense}">
+                    <input style="cursor: pointer;" id="service-quantity-picker" type="text" class="form-control"
+                           placeholder="Hr(s) : Min(s)" sqp-input name="newServiceExpenseDuration"
+                           autocomplete="off" aria-expanded="true" required>
+
+                    <input type="hidden" name="serviceTime" ng-model="newServiceExpense.quantity" ng-required="true"/>
+                  </div>
+
+                  <div class="col-sm-3" style="width: 197px;"
+                       ng-class="{'has-error': isShowingErrorsNewServicExpenseeField(newServiceExpenseForm, 'newServiceExpenseDescription') }">
+                    <input type="text" class="form-control service-description" placeholder="Description"
+                           ng-model="newServiceExpense.description" max-length-word="100"
+                            ng-maxlength="2000" name="newServiceExpenseDescription"
+                           hard-reset-pattern="descriptionPattern" required>
+                  </div>
+
+                  <div class="interval-agreement">
+                    <div class="dropdown">
+                      <i class="icn-sm icn-caret-gray" style="position: absolute;top: 13px;right: 13px;z-index: 1;"></i>
+                      <input style="cursor: pointer;"
+                             type="text" qt-data-time-picker min-date="serviceContract.startDate"
+                             ng-if="reInitEndDate" default-date="defaultDareForServiceExpense"
+                             max-date="serviceContract.endDate"
+                             class="form-control has-dropdown" data-toggle="dropdown" aria-expanded="false"
+                             placeholder="Date" ng-model="newServiceExpense.date"
+                             name="serviceDate" ng-required="true">
+
+                    </div>
+                  </div>
+
+                  <div class="col-md-1 fourm-group">
+                    <div class="add-remove-service">
+                      <div ng-click="addServiceExpense(newServiceExpenseForm, newServiceExpense)">
+                        <i class="icon-sm icn-add-action"></i>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </li>
+
+
+            </ul>
+          </div>
+
+          <div class="clearfix">
+            <div class="ticket-add-amount has-error" style="position: absolute;">
+              <span class="control-label">{{ getErrorMessage(editInvoiceForm) }}</span>
+            </div>
+
+          </div>
+
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+
+
+  
+
+     
+  </div>
+  <div class="contacts-details">
+    <h5>Details</h5>
+
+    <div ng-show="showServiceLengthCheckError">
+      <p style="color: red;padding-left: 15px; margin-bottom: 0;">You haven't chose any service item to your agreement</p>
+    </div>
+    <div ng-show="showValidationFailMessage">
+      <p style="color: red;padding-left: 15px; margin-bottom: 0;">Something wrong. Please check if there any duplicated service names</p>
+    </div>
+    <div class="contacts-details-content clearfix">
+      <div class="col-md-8">
+        <!--<p class="col-md-12">Vereburn - Monthly Block Time</p>-->
+        <div class="col-md-6">
+          <!--<p>Rollover: <span>Yes</span></p>-->
+          <!--<p>Included After Hours: <span>No</span></p>-->
+          <!--<p>Renewal Notice: <span>Yes</span></p>-->
+          <p>Start Date: <span>{{dateFilter(serviceContract.startDate)}}</span></p>
+        </div>
+        <div class="col-md-6">
+          <p>Expire Date: <span>{{dateFilter(serviceContract.endDate)}}</span></p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="contacts-details-content-price">
+          Total: {{ (total | currency: '$': 2) || '$0.00' }}
+        </div>
+      </div>
+      <div class="btn btn-lg btn-success btn-create pull-right" ng-if="!isEditContract"
+           ng-click="validateAndCreateServiceContract( serviceContract)" ng-disabled="dissableCreateButton">Create
+      </div>
+      <div class="btn btn-lg btn-success btn-create pull-right" ng-if="isEditContract"
+      ng-click="validateAndUpdateServiceContract( serviceContract)" ng-disabled="dissableCreateButton">Edit
+ </div>
+    </div>
+  </div>
+
+
+</div>
+
+<div class="service-agreement-modal" ng-show="!editMode">
+  <div ng-include="'/ng1/scripts/core/service-agreements/modal/service-contract-preview-modal.tpl.html'"></div>
+</div>

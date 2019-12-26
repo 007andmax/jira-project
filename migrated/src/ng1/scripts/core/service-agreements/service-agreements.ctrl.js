@@ -138,6 +138,7 @@
           function openModal(contractType, editMode, companyForReadOnlyMode) {
             if ($scope.allowToOpenAgreementModal) {
               var template;
+              console.log('contractType',contractType);
               switch (contractType) {
                 case ('CREATE_NEW'):
                   template = '/ng1/scripts/core/service-agreements/modal/create-new-modal.tpl.html';
@@ -149,7 +150,7 @@
                   template = '/ng1/scripts/core/service-agreements/modal/block-time-billing-modal.tpl.html';
                   break;
                 case ('SERVICE_CONTRACT'):
-                  template = '/ng1/scripts/core/service-agreements/modal/service-contract-modal.tpl.html';
+                  template = (companyForReadOnlyMode.billType) ? '/ng1/scripts/core/service-agreements/modal/service-contract-modal-other.tpl.html' :  '/ng1/scripts/core/service-agreements/modal/service-contract-modal.tpl.html';
                   break;
                 default:
 
@@ -310,7 +311,7 @@
               $scope.isEditContract = true;
               $scope.editContract.services = companyData.companyForReadOnlyMode.services;
             }
-            if ($scope.isEditContract && companyData.contractType === 'BLOCK_TIME') {
+            if ($scope.isEditContract && companyData.contractType === 'BLOCK_TIME' || $scope.isEditContract && companyData.contractType === 'SERVICE_CONTRACT') {
               $scope.editContract = companyData.companyForReadOnlyMode;
 
             }
@@ -757,7 +758,8 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
             for (var i = 0; i < $scope.editContract.services.length; i++) {
               serviceNamesList.push(checkNameForObject($scope.editContract.services[i].name));
             }
-            ServicesService.searchDuplicatedServiceNames($scope.editContract.startDate, $scope.editContract.endDate, companyId, serviceNamesList, function (resp) {
+            console.log('checkForDuplicateServiceNames',$scope.editContract);
+            ServicesService.searchDuplicatedServiceNames($scope.editContract.startDate, $scope.editContract.endDate, companyId, serviceNamesList, ($scope.isEditContract) ? companyData.companyForReadOnlyMode.id : null, function (resp) {
               if (Object.keys(resp).length === 0) {
 
                 deferred.resolve(resp);
@@ -787,7 +789,7 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
               var companyId = returnCompanyId();
               var name = [];
               name.push(editService.name.name || editService.name);
-              ServicesService.searchDuplicatedServiceNames($scope.editContract.startDate, $scope.editContract.endDate, companyId, name, function (resp) {
+              ServicesService.searchDuplicatedServiceNames($scope.editContract.startDate, $scope.editContract.endDate, companyId, name,($scope.isEditContract) ?  companyData.companyForReadOnlyMode.id : null, function (resp) {
                 if (Object.keys(resp).length === 0) {
                   deferred.resolve(resp);
                 } else {

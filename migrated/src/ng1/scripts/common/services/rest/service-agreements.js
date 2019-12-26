@@ -112,7 +112,7 @@
         console.log('agreementId',agreementId);
         var future = $http({
           method: 'GET',
-          url: '/serviceAgreements/validateCrossingDates?' + 'companyId=' + companyId + ((agreementId) ? '&agreementId=' + agreementId : '') + '&startDate=' + startDate + '&endDate=' + endDate
+          url: '/serviceAgreements/validateCrossingDates?' + 'companyId=' + companyId  + '&startDate=' + startDate + '&endDate=' + endDate + ((agreementId) ? '&agreementId=' + agreementId : '')
         });
         Utils.handleCallback(future, callback)
       }

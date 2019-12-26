@@ -48,6 +48,11 @@
         <h5>Per user / device Billing</h5>
         <p>Per user or Device billing, Track time with custom services or create services for projects</p>
       </div>
+      <div class="col-xs-12" ng-click="selectContractType('OTHER')"
+      ng-class="{'active': selectedContractType === 'OTHER'}">
+   <h5>By Other</h5>
+   <p>Per user or Device billing, Track time with custom services or create services for projects</p>
+ </div>
     </div>
     <div class="btn btn-success btn-create pull-right" custom-disabled="{{selectedContractType === 'CREATE_NEW' || disabledCreateButtonInCreateNewModal()}}"
          ng-click="changeModalToShow()">Create
@@ -63,4 +68,7 @@
 </div>
 <div ng-if="modlToShow === 'PER_USER/DEVICE_BILLING'">
   <div ng-include="'/ng1/scripts/core/service-agreements/modal/service-contract-modal.tpl.html'"></div>
+</div>
+<div ng-if="modlToShow === 'OTHER'">
+  <div ng-include="'/ng1/scripts/core/service-agreements/modal/service-contract-modal-other.tpl.html'"></div>
 </div>

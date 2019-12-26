@@ -884,7 +884,7 @@ console.log('$scope.editContract',$scope.editContract);
             serviceNamesList.push(getNameAsObject(serviceList[i].name));
           }
 
-          ServicesService.searchDuplicatedServiceNames(startDate, endDate, companyId, serviceNamesList, function (resp) {
+          ServicesService.searchDuplicatedServiceNames(startDate, endDate, companyId, serviceNamesList,($scope.isEditContract) ?  $scope.blockTimeContract.id : null, function (resp) {
             if (Object.keys(resp).length === 0) {
               deferred.resolve(resp);
             } else {
@@ -908,7 +908,7 @@ console.log('$scope.editContract',$scope.editContract);
 
             var startDate = $filter('date')($scope.blockTimeContract.startDate, 'yyyy/MM/dd');
             var endDate = $filter('date')($scope.blockTimeContract.endDate, 'yyyy/MM/dd');
-            ServicesService.searchDuplicatedServiceNames(startDate, endDate, companyId, name, function (resp) {
+            ServicesService.searchDuplicatedServiceNames(startDate, endDate, companyId, name,($scope.isEditContract) ?  $scope.blockTimeContract.id : null, function (resp) {
               if (Object.keys(resp).length === 0) {
                 deferred.resolve(resp);
               } else {
@@ -980,7 +980,7 @@ console.log('$scope.editContract',$scope.editContract);
               services: [],
               blockTimeServices: [],
               enableTimeRollover: contractData.enableTimeRollover || false,
-              maxRolloverHours: contractData.maxRolloverHours,
+              maxRolloverHours: !(contractData.enableTimeRollover || false) ? null : contractData.maxRolloverHours,
               shares: contractData.shares.map(shar => {
                 return {
                   date: shar.date,

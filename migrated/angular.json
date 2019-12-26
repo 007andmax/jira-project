@@ -387,6 +387,7 @@
               "src/ng1/scripts/core/right-panel/right-panel.drv.js",
               "src/ng1/scripts/core/service-agreements/modal/block-time-billing-modal.ctrl.js",
               "src/ng1/scripts/core/service-agreements/modal/service-contract-modal.ctrl.js",
+              "src/ng1/scripts/core/service-agreements/modal/service-contract-modal-other.ctrl.js",
               "src/ng1/scripts/core/service-agreements/modal/service-contract-modal/new-product-expense.ctrl.js",
               "src/ng1/scripts/core/service-agreements/modal/service-contract-modal/product-expense-list.ctrl.js",
               "src/ng1/scripts/core/service-agreements/service-agreements.ctrl.js",

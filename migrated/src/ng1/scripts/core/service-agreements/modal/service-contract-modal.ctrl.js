@@ -1028,7 +1028,7 @@
 
               var startDate = $filter('date')($scope.serviceContract.startDate, 'yyyy/MM/dd');
               var endDate = $filter('date')($scope.serviceContract.endDate, 'yyyy/MM/dd');
-              ServicesService.searchDuplicatedServiceNames(startDate, endDate, companyId, name, function (resp) {
+              ServicesService.searchDuplicatedServiceNames(startDate, endDate, companyId, name,($scope.isEditContract) ?  $scope.serviceContract.id : null, function (resp) {
                 if (Object.keys(resp).length === 0) {
                   
                   deferred.resolve(resp);
@@ -1047,7 +1047,7 @@
           var companyId = returnCompanyId();
           var startDate = $filter('date')($scope.serviceContract.startDate, 'yyyy/MM/dd');
           var endDate = $filter('date')($scope.serviceContract.endDate, 'yyyy/MM/dd');
-          ServicesService.searchDuplicatedServiceNames(startDate, endDate, companyId, listOFNames, function (resp) {
+          ServicesService.searchDuplicatedServiceNames(startDate, endDate, companyId, listOFNames,($scope.isEditContract) ?  $scope.serviceContract.id : null, function (resp) {
             
             if (Object.keys(resp).length === 0) {
 

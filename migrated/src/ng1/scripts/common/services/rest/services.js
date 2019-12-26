@@ -257,10 +257,11 @@
         Utils.handleCallback(future, callback);
       }
 
-      function searchDuplicatedServiceNames(startDate, endDate, companyId, serviceNamesList, callback) {
+      function searchDuplicatedServiceNames(startDate, endDate, companyId, serviceNamesList,agreementId, callback) {
+        console.log('agreementId',agreementId);
         var future = $http({
           method: 'POST',
-          url: '/services/searchDuplicatedServiceNames?' + 'startDate=' + startDate + '&endDate=' + endDate + '&companyId=' + companyId,
+          url: '/services/searchDuplicatedServiceNames?' + 'startDate=' + startDate + '&endDate=' + endDate + '&companyId=' + companyId + ((agreementId) ? '&agreementId=' + agreementId : ''),
           data: serviceNamesList
         });
         Utils.handleCallback(future, callback);
