@@ -13,7 +13,7 @@
         $scope.serviceContractType = {
           DEVICE: 'By Device',
           USER: 'By Users',
-          OTHER: 'Other'
+        //  OTHER: 'Other'
         };
         $scope.defaultServicesAdditional = [];
         $scope.defaultServicesAdditionalForDropDown = [];

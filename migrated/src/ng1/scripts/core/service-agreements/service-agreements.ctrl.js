@@ -150,7 +150,7 @@
                   template = '/ng1/scripts/core/service-agreements/modal/block-time-billing-modal.tpl.html';
                   break;
                 case ('SERVICE_CONTRACT'):
-                  template = (companyForReadOnlyMode.billType) ? '/ng1/scripts/core/service-agreements/modal/service-contract-modal-other.tpl.html' :  '/ng1/scripts/core/service-agreements/modal/service-contract-modal.tpl.html';
+                  template = (companyForReadOnlyMode.billType === 'OTHER') ? '/ng1/scripts/core/service-agreements/modal/service-contract-modal-other.tpl.html' :  '/ng1/scripts/core/service-agreements/modal/service-contract-modal.tpl.html';
                   break;
                 default:
 

@@ -101,7 +101,7 @@
       <div class="form-group">
         Service Bill Type*
 
-        <div class="form-group" ng-class="{'has-error': showRequiredFieldError && !serviceContract.billType}">
+        <div class="form-group"   ng-if="!isEditContract" ng-class="{'has-error': showRequiredFieldError && !serviceContract.billType}">
 
           <div uib-dropdown keyboard-nav="true">
             <button class="form-control form-control-dropdown account-type no-cursor has-dropdown"
@@ -116,6 +116,12 @@
             </ul>
           </div>
         </div>
+
+        <input placeholder="Select type"
+        ng-if="isEditContract"
+        type="text"
+        class="form-control"
+        ng-model="serviceContractType[serviceContract.billType]" readonly>
       </div>
     </div>
     <div class="col-md-12"></div>
