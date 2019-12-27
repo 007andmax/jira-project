@@ -288,6 +288,10 @@ console.log('$scope.editContract',$scope.editContract);
 
         };
 
+        $scope.changeEnableTimeRollover = function () {
+          if (!$scope.blockTimeContract.enableTimeRollover)  $scope.blockTimeContract.maxRolloverHours = null;
+        }
+
         $scope.showAdditionalServiceColumn = function() {
           var show = false;
           for(var i=0; i<$scope.blockTimeContract.services.length; i++) {
@@ -1215,7 +1219,9 @@ console.log('$scope.editContract',$scope.editContract);
           }
         }
         $scope.validateAndUpdateBlockTimeContract = function (blockTimeContract, newBlockTimeService, newService) {
+          console.log('validateAndUpdateBlockTimeContract');
           if(!checkForInvalidFields()) {
+            console.log('validateAndUpdateBlockTimeContract');
             var emptyServices = true;
             if ((newBlockTimeService && newBlockTimeService.name && newBlockTimeService.name.length) || (newService && newService.name && newService.name.name.length)) {
               activateNotAddedServiceErrors();
