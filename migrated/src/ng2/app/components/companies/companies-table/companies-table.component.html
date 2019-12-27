@@ -24,7 +24,7 @@
       <p [textContent]="getUserName()"></p>
       <p class="mob-hidden" [textContent]="(primaryPhone && primaryPhone.number) ? primaryPhone.number : ''"></p>
     </div>
-    <div class="col-md-4 mob-hidden" [textContent]="primaryContact.primaryEmail"></div>
+    <div class="col-md-4 mob-hidden company-email" [textContent]="primaryContact.primaryEmail"></div>
     <div class="col-md-1 mob-hidden" [textContent]="company.companyStatistic.ticketsSubmitted || '0'"></div>
     <div class="col-md-1 mob-hidden" [textContent]="countDevices"></div>
     <div class="col-md-1 mob-hidden" [textContent]="countUsers"></div>
