@@ -981,15 +981,16 @@ console.log('$scope.editContract',$scope.editContract);
               blockTimeServices: [],
               enableTimeRollover: contractData.enableTimeRollover || false,
               maxRolloverHours: !(contractData.enableTimeRollover || false) ? null : contractData.maxRolloverHours,
-              shares: contractData.shares.map(shar => {
+              shares: [],
+              taxIds: []
+            };
+            /*contractData.shares.map(shar => {
                 return {
                   date: shar.date,
                   itemOrder: shar.itemOrder,
                   userId: shar.userId
                 }
-              }),
-              taxIds: []
-            };
+              })*/
             if($scope.blockTimeContract.interval === 'MONTHLY' || $scope.blockTimeContract.interval === 'YEARLY') {
               blockContract.interval = contractData.interval;
             } else {
@@ -1053,6 +1054,7 @@ console.log('$scope.editContract',$scope.editContract);
                   itemOrder: 0,
                 
                 };
+              
                 blockContract.shares.push(user)
               }
             }
