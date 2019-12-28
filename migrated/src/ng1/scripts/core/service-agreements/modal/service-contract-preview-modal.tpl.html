@@ -73,7 +73,7 @@
     <h4>
       <!--Select how you bill your customer. Managed Services will be added to Service time-->
     </h4>
-    <div class="col-md-3">
+    <div class="col-md-3" ng-if="editContract.billType !== 'OTHER'">
       <div class="form-group">
         Service Bill Type:
         <div class="form-group">

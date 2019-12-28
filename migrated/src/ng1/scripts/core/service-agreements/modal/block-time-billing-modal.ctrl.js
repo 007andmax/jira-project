@@ -1029,28 +1029,31 @@ console.log('data',data);
               blockContract.blockTimeServices.push(bs);
             }
 
-            for (var m = 0; m < $scope.blockTimeContract.services.length; m++) {
-              var cs = {
-                name: $scope.blockTimeContract.services[m].name.name || $scope.blockTimeContract.services[m].nameValue || $scope.blockTimeContract.services[m].name,
-                billable: $scope.blockTimeContract.services[m].billable,
-                taxIds: [],
-                rate: 0,
-                basedOnDefault: true,
-                id: (typeof $scope.blockTimeContract.services[m].id === 'string') ? $scope.blockTimeContract.services[m].id : $scope.blockTimeContract.services[m].id.id,
-                commissionRate: $scope.blockTimeContract.services[m].commissionRate
-              };
-
-              if($scope.blockTimeContract.services[m].billable) {
-                cs.rate = +$scope.blockTimeContract.services[m].name.rate || +$scope.blockTimeContract.services[m].rate
-                if ($scope.blockTimeContract.services[m].taxes.length) {
-                  for (var n = 0; n < $scope.blockTimeContract.services[m].taxes.length; n++) {
-                    cs.taxIds.push($scope.blockTimeContract.services[m].taxes[n].id)
+            if ($scope.blockTimeContract.billForAdditionalService) {
+              for (var m = 0; m < $scope.blockTimeContract.services.length; m++) {
+                var cs = {
+                  name: $scope.blockTimeContract.services[m].name.name || $scope.blockTimeContract.services[m].nameValue || $scope.blockTimeContract.services[m].name,
+                  billable: $scope.blockTimeContract.services[m].billable,
+                  taxIds: [],
+                  rate: 0,
+                  basedOnDefault: true,
+                  id: (typeof $scope.blockTimeContract.services[m].id === 'string') ? $scope.blockTimeContract.services[m].id : $scope.blockTimeContract.services[m].id.id,
+                  commissionRate: $scope.blockTimeContract.services[m].commissionRate
+                };
+  
+                if($scope.blockTimeContract.services[m].billable) {
+                  cs.rate = +$scope.blockTimeContract.services[m].name.rate || +$scope.blockTimeContract.services[m].rate
+                  if ($scope.blockTimeContract.services[m].taxes.length) {
+                    for (var n = 0; n < $scope.blockTimeContract.services[m].taxes.length; n++) {
+                      cs.taxIds.push($scope.blockTimeContract.services[m].taxes[n].id)
+                    }
                   }
                 }
+  
+                blockContract.services.push(cs);
               }
-
-              blockContract.services.push(cs);
             }
+          
 
             for (var u = 0; u < $scope.ticketSharedUsersList.length; u++) {
               if ($scope.ticketSharedUsersList[u].notify) {

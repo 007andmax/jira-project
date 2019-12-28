@@ -90,6 +90,7 @@
           preCreateFirstServicesEntities();
           createDefaultServices();
           createDefaultServiceContractServicesToTrack();
+         console.log('editContract',$scope.editContract);
           if ($scope.isEditContract) {
             
           $scope.serviceContract = angular.copy($scope.editContract);
@@ -1475,7 +1476,7 @@
 
                 }
               }
-              if (serviceContract.services && serviceContract.services.length) {
+              if (serviceContract.isAdditionalServices && serviceContract.services && serviceContract.services.length) {
                 for (var i = 0; i < serviceContract.services.length; i++) {
                   var serv = {
                     name: serviceContract.services[i].nameValue || serviceContract.services[i].name,
