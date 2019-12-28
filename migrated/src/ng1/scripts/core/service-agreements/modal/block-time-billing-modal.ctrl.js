@@ -418,7 +418,9 @@ console.log('$scope.editContract',$scope.editContract);
             }
           }
         }
-
+$scope.onChangeService = function (data) {
+console.log('data',data);
+}
         $scope.changeEndDateByNumToGenerate = function() {
           var intervals = parseInt($scope.numOfIntervals);
           changeEndDate($scope.blockTimeContract.period, intervals);

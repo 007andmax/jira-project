@@ -281,25 +281,54 @@
                 <div class="service-name-agreement form-group">
                   <div uib-dropdown
                        ng-class="{'has-error': checkBlockTimeServiceErrorForm(contractService)}">
-                    <!--<input type="text"-->
-                           <!--style="cursor: pointer;"-->
-                           <!--name="newContractServiceName"-->
-                           <!--ng-model="contractService.name"-->
-                           <!--ng-minlength="1"-->
-                           <!--autocomplete="off"-->
-                           <!--tabindex="5"-->
-                           <!--required-->
-                           <!--placeholder="Service Expense"-->
-                           <!--class="form-control form-control-dropdown dropdown-toggle"-->
-                           <!--uib-typeahead="service.name for service in defaultServices | filter:{'picked': false} | orderBy:'name'"-->
-                           <!--qt-typeahead-show-on-focus-->
-                           <!--custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"-->
-                           <!--value="newContractService.name" hard-reset-pattern="serviceNamePattern"-->
-                           <!--invalid-when="!isNameUnique(newContractService)">-->
 
-                    <!--<div class="input-top-4" typeahead-input-icon="newContractServiceName"></div>-->
 
-                    <input tooltip-placement="top"
+                   <!--    <input type="text"
+                       name="serviceName"
+                       ng-model="contractService.nameValue"
+                       ng-minlength="1"
+                       autocomplete="off"
+                       tabindex="5"
+                       required
+                       placeholder="Service Expense"
+                       class="form-control form-control-dropdown dropdown-toggle"
+                       uib-typeahead="service as service.name for service in defaultServicesForDropdown | filter:{'picked': false} | orderBy:'name'"
+                       qt-typeahead-async-show-on-focus
+                       custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
+                     
+                       value="service.name" hard-reset-pattern="serviceNamePattern">
+
+                <div class="input-top-4" typeahead-input-icon="newBlockTimeService.name"></div>-->
+
+
+                <input placeholder="Service Expense"
+                ng-if="isEditContract"
+                type="text"
+                class="form-control"
+                ng-model="contractService.nameValue" readonly>
+            <!--   <input type="text"
+               ng-if="!isEditContract"
+                           style="cursor: pointer;"
+                           name="contractService"
+                           ng-model="contractService.nameValue"
+                           ng-minlength="1"
+                           autocomplete="off"
+                           tabindex="5"
+                           required
+                           placeholder="Service Expense"
+                           class="form-control form-control-dropdown dropdown-toggle"
+                           uib-typeahead="service.name for service in defaultServicesForDropdown | filter:{'picked': false} | orderBy:'name'"
+                           qt-typeahead-show-on-focus
+                           custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
+                            hard-reset-pattern="serviceNamePattern"
+                            value="service.name"
+                        
+                           >
+
+                    <div class="input-top-4"  ng-if="!isEditContract" typeahead-input-icon="newBlockTimeService.name"></div>-->
+
+                <input tooltip-placement="top"
+                ng-if="!isEditContract"
                            type="text" class="form-control has-dropdown"
                            name="contractService" autocomplete="off"
                            autocomplete-service-item="contractService.name"
@@ -307,9 +336,9 @@
                            autocomplete-service-list uib-dropdown-toggle
                            entity="contractService.nameValue" hard-reset-pattern="descriptionPattern"
                            invalid-when="!isNameUnique(contractService.nameValue)"/>
-                           <!-- smart-dropdown-menu-position="service-list" -->
+                           
                     <i class="icn-sm icn-caret-gray"></i>
-                    <div class="service-list-container"></div>
+                    <div class="service-list-container"></div> 
 
                   </div>
                 </div>

@@ -322,7 +322,16 @@
                    type="text"
                    class="form-control"
                    ng-model="serviceContract.includedHours"
+                   ng-if="!isEditContract"
                    hard-reset-pattern="decimalNumberPattern" >
+
+                   <input placeholder="Hours"
+                   name="includedHours"
+                   type="text"
+                   class="form-control"
+                   ng-model="serviceContract.includedHours"
+                   ng-if="isEditContract"
+                   hard-reset-pattern="decimalNumberPattern" readonly>
           </div>
         </div>
         <div class="interval-agreement col-md-4">
@@ -410,7 +419,11 @@
 
                   <div class="col-sm-3">
                     <div uib-dropdown>
-                      <input type="text"
+
+                   
+
+
+                    <input type="text"
                              name="serviceName"
                              ng-model="serviceExpense.name"
                              ng-minlength="1"
@@ -679,8 +692,17 @@
 
                 <!--<div class="input-top-4" typeahead-input-icon="newContractServiceName"></div>-->
 
-                <input tooltip-placement="top"
+                <input placeholder="Service Expense"
+                ng-if="isEditContract"
+                type="text"
+                class="form-control"
+                ng-model="service.nameValue" readonly>
+             
+                    
+
+              <input tooltip-placement="top"
                        type="text"
+                       ng-if="!isEditContract"
                        class="form-control has-dropdown"
                        name="serviceName"
                        autocomplete="off"
@@ -691,7 +713,7 @@
                        uib-dropdown-toggle
                        entity="service.nameValue"
                        hard-reset-pattern="descriptionPattern"
-                       invalid-when="!isAdditionalServiceNameUnique(service.nameValue)" required/>
+                       invalid-when="!isAdditionalServiceNameUnique(service.nameValue)" required/> 
                 <i class="icn-sm icn-caret-gray"></i>
                 <div class="service-list-container"></div>
 
