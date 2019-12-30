@@ -66,4 +66,8 @@ export class ActivityHistoryComponent implements OnInit {
         .subscribe();
     }
   }
+
+  trackByDeviceFun(index, device){
+    return index; 
+  }
 }

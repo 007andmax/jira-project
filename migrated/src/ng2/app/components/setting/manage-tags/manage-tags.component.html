@@ -95,10 +95,10 @@
       <tab heading="Companies" id="tab1">
         <div class="cmn-area">
           <div class="data-table-wrap">
-            <table #dataTable class="display dataTable" style="width:100%">
+            <table #dataTable datatable [dtTrigger]="dtTrigger"  [dtOptions]="dtOptions" class="display dataTable" style="width:100%">
               <thead>
                 <tr>
-                  <th class="c-tag"><span>Custom Tags</span></th>
+                  <th class="c-tag" ><span>Custom Tags</span></th>
                   <th class="count"><span>Count</span></th>
                   <th class="action">&nbsp;</th>
                 </tr>
@@ -217,10 +217,10 @@
         </div>
       </tab>
       <!-- Tickets -->
-      <tab #tickets heading="Tickets">
+      <tab #tickets  heading="Tickets">
         <div class="cmn-area">
           <div class="data-table-wrap">
-            <table #dataTable class="display dataTable" style="width:100%">
+            <table #dataTable datatable [dtTrigger]="dtTrigger"  [dtOptions]="dtOptions" class="display dataTable" style="width:100%">
               <thead>
                 <tr>
                   <th class="c-tag"><span>Custom Tags</span></th>
@@ -232,7 +232,7 @@
                 <tr
                   *ngFor="
                     let ticket of ticketTags | tag: searchTag;
-                    let i = index
+                    let i = index;trackBy:ticket?.id
                   "
                 >
                   <td>{{ ticket.word | titlecase }}</td>

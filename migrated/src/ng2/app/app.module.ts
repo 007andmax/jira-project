@@ -82,6 +82,8 @@ import { ServiceComponent } from './components/setting/commission/service/servic
 import { NgSelectModule } from '@ng-select/ng-select';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { AutocompleteComponent } from './shared/autocomplete/autocomplete.component';
+import { PhonePipe } from './pipe/phone.pipe';
+import { OrderByPipe } from './pipe/order-by.pipe';
 
 declare var angular: any;
 declare var $: any;
@@ -220,7 +222,9 @@ angular
     ProductComponent,
     ContractComponent,
     ServiceComponent,
-    AutocompleteComponent
+    AutocompleteComponent,
+    PhonePipe,
+    OrderByPipe
   ],
   imports: [
     BrowserModule,
@@ -259,6 +263,10 @@ angular
       secondaryColour: '#16a4fa',
       tertiaryColour: '#16a4fa'
     })
+  ],
+  exports:[
+    PhonePipe,
+    OrderByPipe
   ],
   entryComponents: [LeftPanelComponent],
   providers: [

@@ -20,6 +20,7 @@ import { Observable, Observer } from "rxjs";
 import { ToastrService } from "ngx-toastr";
 import { map } from "rxjs/operators";
 import { MapsAPILoader } from "@agm/core";
+
 // import { ToastrService } from 'ngx-toastr';
 
 declare var google: any;
@@ -70,7 +71,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.imageSrc = '';
+    this.imageSrc = "";
     this.getCurrentUser();
     this.getUserProfile();
 
@@ -142,6 +143,21 @@ export class ProfileComponent implements OnInit {
           //set latitude, longitude and zoom
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
+
+          this.profileForm.patchValue({
+            postalCode: ""
+          });
+
+          for (var i = 0, len = place.address_components.length; i < len; i++) {
+            if (
+              place.address_components[i].types.indexOf("postal_code") !== -1
+            ) {
+              this.profileForm.patchValue({
+                postalCode: place.address_components[i].short_name
+              });
+            }
+          }
+
           this.zoom = 12;
         });
       });

@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from "@angular/core";
 import { TagsService } from "src/ng2/app/services/setting/tags.service";
-import { forkJoin, Observable } from "rxjs";
+import { forkJoin, Observable, Subject } from "rxjs";
 import { map } from "rxjs/operators";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
@@ -10,7 +10,7 @@ import { ToastrService } from "ngx-toastr";
   templateUrl: "./manage-tags.component.html",
   styleUrls: ["./manage-tags.component.scss"]
 })
-export class ManageTagsComponent implements OnInit {
+export class ManageTagsComponent implements OnDestroy,OnInit {
   searchTag = "";
   ticketTags: any[] = [];
   companyTags: any[] = [];
@@ -24,9 +24,9 @@ export class ManageTagsComponent implements OnInit {
   selectedIdx = -1;
   setActiveTab = "company";
   public loading = false;
-
+  dtOptions: DataTables.Settings = {searching: false, paging: false, info: false};
   @ViewChild("tickets") tickets: ElementRef;
-
+  dtTrigger = new Subject();
   constructor(
     private tagsService: TagsService,
     private formBuilder: FormBuilder,
@@ -63,7 +63,9 @@ export class ManageTagsComponent implements OnInit {
         })
       )
       .subscribe(
-        () => {},
+        () => {
+          this.dtTrigger.next();
+        },
         error => {
           this.loading = false;
         }
@@ -128,6 +130,7 @@ export class ManageTagsComponent implements OnInit {
   editTag(tag, index) {
     this.searchTag = "";
     this.edit = true;
+    this.create = false;
     this.submitted = false;
     this.selectedIdx = index;
     if (tag) {
@@ -138,9 +141,10 @@ export class ManageTagsComponent implements OnInit {
   onCreate() {
     this.compnayForm.patchValue({ word: "" });
 
-    this.edit = false
+    this.edit = false;
     this.searchTag = "";
     this.create = true;
+    this.selectedIdx = -1;
   }
 
   onCancel() {
@@ -251,5 +255,10 @@ export class ManageTagsComponent implements OnInit {
     let body = document.getElementsByTagName("body")[0];
     body.classList.remove("backMenu"); //remove the class
     body.classList.add("backMenu");
+  }
+
+  ngOnDestroy(): void {
+    // Do not forget to unsubscribe the event
+    this.dtTrigger.unsubscribe();
   }
 }
