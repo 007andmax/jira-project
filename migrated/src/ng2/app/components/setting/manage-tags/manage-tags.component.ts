@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  OnDestroy
+} from "@angular/core";
 import { TagsService } from "src/ng2/app/services/setting/tags.service";
 import { forkJoin, Observable, Subject } from "rxjs";
 import { map } from "rxjs/operators";
@@ -10,7 +16,7 @@ import { ToastrService } from "ngx-toastr";
   templateUrl: "./manage-tags.component.html",
   styleUrls: ["./manage-tags.component.scss"]
 })
-export class ManageTagsComponent implements OnDestroy,OnInit {
+export class ManageTagsComponent implements OnDestroy, OnInit {
   searchTag = "";
   ticketTags: any[] = [];
   companyTags: any[] = [];
@@ -24,9 +30,14 @@ export class ManageTagsComponent implements OnDestroy,OnInit {
   selectedIdx = -1;
   setActiveTab = "company";
   public loading = false;
-  dtOptions: DataTables.Settings = {searching: false, paging: false, info: false};
+  dtOptions: DataTables.Settings = {
+    searching: false,
+    paging: false,
+    info: false
+  };
   @ViewChild("tickets") tickets: ElementRef;
   dtTrigger = new Subject();
+
   constructor(
     private tagsService: TagsService,
     private formBuilder: FormBuilder,
@@ -153,7 +164,6 @@ export class ManageTagsComponent implements OnDestroy,OnInit {
     this.searchTag = "";
     this.create = false;
     this.compnayForm.patchValue({ word: "" });
-  
   }
 
   /**
@@ -227,20 +237,33 @@ export class ManageTagsComponent implements OnDestroy,OnInit {
           this.setActiveTab
         )
         .subscribe(
-          res => {
-            console.log(res);
+          (res: any) => {
+            this.loading = false;
+            this.submitted = false;
             if (res) {
               this.toaster.success("Tag Updated Successfully", null, {
                 timeOut: 3000
               });
+
+              if (this.setActiveTab === "ticket") {
+                this.ticketTags.filter(ticket => {
+                  if (ticket.id === res.id) {
+                    ticket.word = this.compnayForm.value.word;
+                    return;
+                  }
+                });
+                // this.getAllTickets();
+              } else {
+                this.companyTags.filter(company => {
+                  if (company.id === res.id) {
+                    company.word = this.compnayForm.value.word;
+                    return;
+                  }
+                });
+                // this.getAllCompany();
+              }
             }
-            if (this.setActiveTab === "ticket") {
-              this.getAllTickets();
-            } else {
-              this.getAllCompany();
-            }
-            this.loading = false;
-            this.submitted = false;
+            
             this.compnayForm.patchValue({ word: "" });
           },
           error => {
