@@ -90,7 +90,38 @@ export class TaxesComponent implements OnInit {
     }
   }
 
-  defaultTax(tax: any) {}
+  defaultTax(tax: any) {
+    console.log(tax);
+    
+    this.taxForm.patchValue({
+      name: tax.name,
+      rate: tax.rate,
+      id: tax.id,
+      isDefault: !tax.isDefault
+    });
+    console.log(this.taxForm.value);
+    this.loading = true;
+    this.taxesService
+      .editTaxes(this.taxForm.value)
+      .pipe(
+        map((res: any) => {
+          this.loading = false;
+          if (res) {
+            let itemIndex = this.taxes.findIndex(item => item.id == res.id);
+            this.taxes[itemIndex] = res;
+            this.selectedIdx = -1;
+          }
+        })
+      )
+      .subscribe(
+        () => {
+          this.toastrService.success("Tax Saved Successfully");
+        },
+        error => {
+          this.loading = false;
+        }
+      );
+  }
 
   /**
    * remove tax
@@ -163,9 +194,14 @@ export class TaxesComponent implements OnInit {
             }
           })
         )
-        .subscribe(() => {
-          this.toastrService.success("Tax Saved Successfully");
-        });
+        .subscribe(
+          () => {
+            this.toastrService.success("Tax Saved Successfully");
+          },
+          error => {
+            this.loading = false;
+          }
+        );
     } else {
       // add
       this.loading = true;
@@ -181,6 +217,7 @@ export class TaxesComponent implements OnInit {
         .subscribe();
     }
   }
+
   onBackMenu() {
     let body = document.getElementsByTagName("body")[0];
     body.classList.remove("backMenu"); //remove the class

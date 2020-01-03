@@ -65,11 +65,11 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     this.techUserForm = this.formBuilder.group({
       firstName: [
         "",
-        [Validators.required, Validators.minLength(3), Validators.maxLength(15)]
+        [Validators.required, Validators.minLength(2), Validators.maxLength(15)]
       ],
       lastName: [
         "",
-        [Validators.required, Validators.minLength(3), Validators.maxLength(15)]
+        [Validators.required, Validators.maxLength(15)]
       ],
       primaryEmail: [
         "",
@@ -323,17 +323,19 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
           if (result) {
             this.isCroppedImg = true;
             this.fileAvatar = result;
-            this.isCroppedImg = true;
           }
         },
         error => {
           this.loading = false;
           this.isCroppedImg = false;
-          this.isCroppedImg = false;
         }
       );
     }
   }
+
+  onInputClick(event:any)  {
+    event.target.value = ''
+}
 
   /**
    * image croped event

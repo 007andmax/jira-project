@@ -45,7 +45,7 @@ export class EmailTempleteComponent implements OnInit {
     spellcheck: true,
     height: "15rem",
     minHeight: "5rem",
-    placeholder: "Enter text here...",
+    placeholder: "",
     translate: "no",
     defaultParagraphSeparator: "p",
     defaultFontName: "Arial"
@@ -185,7 +185,6 @@ export class EmailTempleteComponent implements OnInit {
     if (el.id === "subject") {
       console.log(this.subject);
       var startPos = this.subject.nativeElement.selectionStart;
-      this.subject.nativeElement.focus();
 
       this.subject.nativeElement.value =
         this.subject.nativeElement.value.substr(
@@ -204,8 +203,11 @@ export class EmailTempleteComponent implements OnInit {
 
       this.subject.nativeElement.selectionStart = startPos;
       this.subject.nativeElement.focus();
-    } else if (el.id === "editor") {
+      $('#elem').selectRange(3);
+      // this.subject.nativeElement.blur();
+    } else if(el.parentElement.parentElement.parentElement.id === 'myEditor') {
       this.insertDataVarables(el, text);
+      el.parentElement.parentElement.parentElement.blur();
     }
 
     // this.insertDataVarables(el, text);
@@ -223,11 +225,12 @@ export class EmailTempleteComponent implements OnInit {
       myField.rango = sel.getRangeAt(0);
       myField.rango.insertNode(document.createTextNode(myValue));
       myField.autofocus = true;
-      console.log(myField);
+      
       this.templeteForm.patchValue({
         body: myField.textContent
       });
-      return;
+      
+      return false;
     }
     // if (myField.selectionStart || myField.selectionStart == "0") {
     //   var startPos = myField.selectionStart;

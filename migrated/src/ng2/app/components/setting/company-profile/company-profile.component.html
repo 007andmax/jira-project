@@ -37,7 +37,7 @@
                 style="display: none;"
               />
               <!-- <label for="profile-dp" class="static-link">Change Logo</label> -->
-              
+
               <div class="static-link">
                 <label class="innert-links" for="profile-dp">{{
                   imageSrc ? "Change Logo" : "Upload Photo"
@@ -51,8 +51,7 @@
                     >Remove Photo</a
                   >
                 </label> -->
-               
-                
+
                 <!-- <label for="profile-dp" (click)="rePositionAvatar()">
                   <a href="javascript:void(0)" restore-default-button=""
                     >Reposition Photo</a
@@ -344,35 +343,63 @@
                       type="checkbox"
                       id="{{ workingDay.dayOfWeek }}"
                       [(ngModel)]="workingDay.isSelected"
-                      name="{{ workingDay.dayOfWeek | titlecase}}"
+                      name="{{ workingDay.dayOfWeek | titlecase }}"
                       [ngModelOptions]="{ standalone: true }"
                     />
                     <label for="{{ workingDay.dayOfWeek }}">{{
                       workingDay.dayOfWeek | titlecase
                     }}</label>
                   </div>
+
                   <div class="time-zone">
                     <div class="tl-col">
-                      <input
+                      <select #startTime class="cmn-select form-input" 
+                      (change)="startTimeChange(workingDay, startTime.value)"
+                      name="{{workingDay.dayOfWeek}}" [attr.disabled]="!workingDay.isSelected ? 'disabled' : null" [ngModel]="fromTime_convert(workingDay.startTime)" > 
+                        <option value="06:00">6:00 AM</option>
+                        <option value="06:30">6:30 AM</option>
+                        <option value="07:00">07:00 AM</option>
+                        <option value="07:30">7:30 AM</option>
+                        <option value="08:00">08:00 AM</option>
+                        <option value="08:30">8:30 AM</option>
+                        <option value="09:00">9:00 AM</option>
+                        <option value="09:30">9:30 AM</option>
+                        <option value="10:00">10:00 AM</option>
+                        <option value="10:30">10:30 AM</option>
+                        <option value="11:00">11:00 AM</option>
+                        <option value="11:30">11:30 AM</option>
+                        <option value="12:00">12:00 PM</option>
+                      </select>
+
+                      <!-- <input
                         type="text"
                         class="form-input"
-                        
                         [disabled]="!workingDay.isSelected"
                         placeholder="Enter Time"
                         value="{{ fromTime_convert(workingDay.startTime) }}"
                         #startTime
                         (blur)="startTimeChange(workingDay, startTime.value)"
-                      />
+                      /> -->
                     </div>
                     <div class="tl-col">
-                      <input
+                      <!-- <input
                         type="text"
                         class="form-input"
-                        
                         [disabled]="!workingDay.isSelected"
                         placeholder="Enter Time"
                         value="{{ toTime_convert(workingDay.endTime) }}"
-                      />
+                      /> -->
+                      <select #endTime class="cmn-select form-input" 
+                      (change)="endTimeChange(workingDay,endTime.value)"
+                      name="{{workingDay.dayOfWeek+i}}" [attr.disabled]="!workingDay.isSelected ? 'disabled' : null" [ngModel]="toTime_convert(workingDay.endTime)" > 
+                        <option value="17:00">17:00 PM</option>
+                        <option value="17:30">17:30 PM</option>
+                        <option value="18:00">18:00 PM</option>
+                        <option value="18:30">18:30 PM</option>
+                        <option value="19:00">19:00 PM</option>
+                        <option value="19:30">19:30 PM</option>
+                        <option value="20:00">20:00 PM</option>
+                      </select>
                     </div>
                   </div>
                 </li>

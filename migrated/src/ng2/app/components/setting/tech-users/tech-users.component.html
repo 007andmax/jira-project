@@ -30,21 +30,33 @@
               <th class="action">&nbsp;</th>
             </tr>
           </thead>
-          <tbody *ngIf="techUsers">
+          <tbody *ngIf="techUsers.length > 0">
             <tr *ngFor="let techUser of techUsers; let i = index">
               <td class="tech-user">
                 <div class="t-user">
-                  <!-- <span class="user-dp online" *ngIf="techUser.avatar"> -->
-                  <span
+                  <span class="user-dp online" *ngIf="techUser.avatar !== null">
+                    <span class="user-tech-dp">
+                      <img
+                        *ngIf="techUser.isEmailVerified"
+                        src="/users/{{ techUser.id }}/image.jpg?t={{
+                          techUser.avatar.updatedAt
+                        }}"
+                        alt="user"
+                      />
+                      <span class="simple-dp" *ngIf="!techUser.isEmailVerified">
+                        {{ displayFrstLstChar(techUser) }}
+                      </span>
+                    </span>
+                    
+                  </span>
+
+                  <!-- <span
                     class="user-dp online"
                     *ngIf="
                       !techUser.requestToChangePassword &&
                       techUser.isEmailVerified
                     "
                   >
-                  <!-- <span *ngIf="techUser.avatar !== null">
-                    NN
-                  </span> -->
                   <span class="user-tech-dp">
                     <img
                       *ngIf="techUser.avatar !== null"
@@ -58,36 +70,13 @@
                     </span>
                   </span>
                     
-                  </span>
-                  <span
-                    class="user-dp online"
-                    *ngIf="
-                      techUser.requestToChangePassword ||
-                      !techUser.isEmailVerified
-                    "
-                  >
-                    <!-- <img
-                      
+                  </span> -->
+                  <span class="user-dp online" *ngIf="techUser.avatar === null">
+                    <img
+                      src="../../../../../../ng1/images/setting-module/avtar-56@2x.png"
                       alt="user"
-                      data-tooltip="Tech-user hasn't confirmed his account yet."
-                    /> -->
-                    <span class="simple-dp">
-                      {{displayFrstLstChar(techUser)}}
-                    </span>
-                    
+                    />
                   </span>
-
-                  <!-- <div class="avatar" ng-if="!user.requestToChangePassword && user.isEmailVerified">
-                      <img ng-if="user.avatar" ng-src="{{ getUserAvatarUrl(user) }}"
-                           alt="..." class="img-circle">
-                      <img ng-if="!user.avatar" src="ng1/images/settings-icon/tech-user.png" alt="..." class="img-circle">
-                    </div>
-      
-                    <div class="avatar" ng-if="user.requestToChangePassword || !user.isEmailVerified" style="position: relative">
-                      <img src="ng1/images/settings-icon/unverified-user.png" alt="" class="img-circle">
-                      <img src="ng1/images/settings-icon/unverified-user-mark.png" alt="" class="unverified-user-mark"
-                           uib-tooltip="Tech-user hasn't confirmed his account yet." tooltip-placement="bottom">
-                    </div> -->
 
                   <div class="t-info">
                     <h5>{{ techUser.firstName }} {{ techUser.lastName }}</h5>
@@ -107,18 +96,6 @@
                   class="email-dropdown"
                   (click)="emailNotificationDropDown(i)"
                 >
-                  <!-- <p *ngIf="techUseremailNotificationList[techUser.id].newDevice">
-                      new device
-                  </p>
-                  <p *ngIf="techUseremailNotificationList[techUser.id].ticketCreated">
-                      New Ticket
-                  </p>
-                  <p *ngIf="techUseremailNotificationList[techUser.id].myTicketUpdated">
-                      Ticket is updated
-                  </p>
-                  <p *ngIf="techUseremailNotificationList[techUser.id].ticketCloseNotifications">
-                      Ticket is closed
-                  </p> -->
                   New Device, New Ticket...</a
                 >
                 <div
@@ -130,11 +107,11 @@
                     *ngIf="techUseremailNotificationList"
                   >
                     <h5>Set Email Notification for Tech User</h5>
-                    <ul class="list-unstyled">
+                    <ul class="list-unstyled" >
                       <li class="cmn-checkbox">
                         <input
                           type="checkbox"
-                          readonly
+                          disabled
                           [(ngModel)]="
                             techUseremailNotificationList[techUser.id].newDevice
                           "
@@ -148,7 +125,7 @@
                         <input
                           type="checkbox"
                           id="ticketCreated"
-                          readonly
+                          disabled
                           [(ngModel)]="
                             techUseremailNotificationList[techUser.id]
                               .ticketCreated
@@ -162,7 +139,7 @@
                         <input
                           id="myTicketUpdated"
                           type="checkbox"
-                          readonly
+                          disabled
                           [(ngModel)]="
                             techUseremailNotificationList[techUser.id]
                               .myTicketUpdated
@@ -176,7 +153,7 @@
                         <input
                           id="ticketCloseNotifications"
                           type="checkbox"
-                          readonly
+                          disabled
                           [(ngModel)]="
                             techUseremailNotificationList[techUser.id]
                               .ticketCloseNotifications
@@ -260,27 +237,25 @@
           alt="user"
           *ngIf="!fileAvatar"
         />
-        <img
-          src="/file/{{ fileAvatar.id }}.jpg"
-          alt="user"
-          *ngIf="fileAvatar"
-        />
+        <img [src]="croppedImage?.base64" alt="user" *ngIf="fileAvatar" />
       </span>
       <div class="dp-info">
         <input
           type="file"
           id="profile-dp"
           (change)="onSelectFile($event)"
+          (click)="onInputClick($event)"
           accept="image/gif, image/jpeg, image/png, image/jpg"
           style="display: none;"
+          multiple
         />
         <!-- <label for="profile-dp" class="static-link" (click)="onSelectFile($event)">Upload Avtar</label> -->
-        
+
         <div class="static-link">
           <label class="innert-links" for="profile-dp">{{
             techUser && techUser.avatar ? "Change Photo" : "Upload Avatar"
           }}</label>
-          
+
           <label
             for="profile-dp"
             (click)="deleteAvatar()"
@@ -333,9 +308,9 @@
             <div *ngIf="f.lastName.errors.required">
               Last Name is required
             </div>
-            <div *ngIf="f.lastName.errors.minlength">
+            <!-- <div *ngIf="f.lastName.errors.minlength">
               Last name is too short.
-            </div>
+            </div> -->
             <div *ngIf="f.lastName.errors.maxlength">
               Last name is too large.
             </div>
@@ -461,57 +436,45 @@
       <img src="../../../../../ng1/images/setting-module/close.svg" alt="close"
     /></a>
   </div>
-  
+
   <div class="middle-content">
     <div class="dp-area">
       <span
         class="dp"
-        *ngIf="
-          selectedTechUser &&
-          !selectedTechUser.requestToChangePassword &&
-          selectedTechUser.isEmailVerified
-        "
+        *ngIf="selectedTechUser && selectedTechUser.avatar !== null"
       >
         <img
-          *ngIf="selectedTechUser.avatar !== null"
+          *ngIf="selectedTechUser.isEmailVerified"
           src="/users/{{ selectedTechUser.id }}/image.jpg?t={{
             selectedTechUser.avatar.updatedAt
           }}"
           alt="user"
         />
-        <!-- <img
-          src="../../../../../ng1/images/setting-module/avtar-56@2x.png"
-          alt="user"
-          *ngIf="selectedTechUser.avatar === null"
-        /> -->
-        <span class="simple-dp" *ngIf="selectedTechUser.avatar === null">
-          {{displayFrstLstChar(selectedTechUser)}}
+        <span class="simple-dp" *ngIf="!selectedTechUser.isEmailVerified">
+          {{ displayFrstLstChar(selectedTechUser) }}
         </span>
       </span>
       <span
         class="dp"
-        *ngIf="
-          selectedTechUser &&
-          (selectedTechUser.requestToChangePassword ||
-            !selectedTechUser.isEmailVerified)
-        "
+        *ngIf="selectedTechUser && selectedTechUser.avatar === null"
       >
-        <!-- <img
-          src="../../../../../ng1/images/setting-module/avtar-56@2x.png"
-          alt="user"
-          data-tooltip="Tech-user hasn't confirmed his account yet."
-        /> -->
-        <span class="simple-dp" *ngIf="selectedTechUser?.avatar?.updatedAt">
-          {{displayFrstLstChar(selectedTechUser)}}
+        <span class="simple-dp" *ngIf="selectedTechUser.avatar === null">
+          <img src="../../../../../../ng1/images/setting-module/avtar-56@2x.png" alt="user" />
         </span>
       </span>
 
       <div class="dp-info">
         <input type="file" id="profile-dp" style="display: none;" />
         <!-- <label for="profile-dp" class="static-link">Upload Avtar</label> -->
-        
+
         <div class="static-link">
-          <label class="innert-links" for="profile-dp"> {{ selectedTechUser && selectedTechUser.avatar ? 'Change Photo' : 'Upload Avtar'}}</label>
+          <label class="innert-links" for="profile-dp">
+            {{
+              selectedTechUser && selectedTechUser.avatar
+                ? "Change Photo"
+                : "Upload Avtar"
+            }}</label
+          >
           <label for="profile-dp" *ngIf="selectedTechUser?.avatar?.updatedAt">
             <a
               href="javascript:void(0)"
@@ -520,7 +483,7 @@
               >Remove Photo</a
             >
           </label>
-          
+
           <!-- <label for="profile-dp">
             <a
               href="javascript:void(0)"

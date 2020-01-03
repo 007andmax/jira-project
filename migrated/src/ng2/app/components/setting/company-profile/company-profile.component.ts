@@ -157,6 +157,21 @@ export class CompanyProfileComponent implements OnInit {
           //set latitude, longitude and zoom
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
+
+          this.cProfileForm.patchValue({
+            postalCode: ""
+          });
+
+          for (var i = 0, len = place.address_components.length; i < len; i++) {
+            if (
+              place.address_components[i].types.indexOf("postal_code") !== -1
+            ) {
+              this.cProfileForm.patchValue({
+                postalCode: place.address_components[i].short_name
+              });
+            }
+          }
+
           this.zoom = 12;
         });
       });
@@ -735,6 +750,31 @@ export class CompanyProfileComponent implements OnInit {
     //   hours * 3600 + minutes * 60;
   }
 
+  endTimeChange(workingday: any, endTime: any) {
+    const splitTime = endTime.split(":");
+    if (!Number(splitTime[0])) {
+      return;
+    }
+    let hours = parseInt(splitTime[0]) || 0;
+    let minutes =
+      (!splitTime[1] || splitTime[1].length > 1
+        ? parseInt(splitTime[1])
+        : parseInt(splitTime[1] + "0")) || 0;
+
+    if (minutes > 59) {
+      minutes = 0;
+    }
+
+    if (hours > 23) {
+      hours = 23;
+    }
+    let itemIndex = this.cProfile.timeSettings.workingDays.findIndex(
+      item => item.id == workingday.id
+    );
+    this.cProfile.timeSettings.workingDays[itemIndex].endTime =
+      hours * 3600 + minutes * 60;
+  }
+
   /**
    * display from time
    * @param from
@@ -826,6 +866,7 @@ export class CompanyProfileComponent implements OnInit {
     }
     return true;
   }
+  
   onBackMenu() {
     let body = document.getElementsByTagName("body")[0];
     body.classList.remove("backMenu"); //remove the class
