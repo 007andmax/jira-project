@@ -51,21 +51,21 @@ export class TechUsersService {
     );
   }
 
-  createUser(techUser : any) {
+  createUser(techUser: any) {
     // {"techRole":"Help desk user","firstName":"Today Test","lastName":"Test","primaryEmail":"today@test.com","companyId":"73221c72-f87c-4519-8235-c4b57ad1cc19","subscription":{}}
     // {"techRole":"Tech user","firstName":"Test","lastName":"Test New","primaryEmail":"test@newtest.com","companyId":"73221c72-f87c-4519-8235-c4b57ad1cc19","subscription":{}}
     return this.http.post(`${this.apiUrl}users`, techUser);
   }
 
-  archiveUser(ids : any[]) {
+  archiveUser(ids: any[]) {
     // Do you want to archive Test Test New?
     // {"ids":["d3937811-0f88-4d0c-a0d2-dc1494affb7d"]}
-    return this.http.post(`${this.apiUrl}users/archive`, {ids});
+    return this.http.post(`${this.apiUrl}users/archive`, { ids });
   }
 
-  restoreUser() {
+  restoreUser(userId) {
     // {"userId":"d3937811-0f88-4d0c-a0d2-dc1494affb7d"}
-    return this.http.post(`${this.apiUrl}users/restore`, {});
+    return this.http.post(`${this.apiUrl}users/restore`, {userId});
   }
 
   changePasswordRequest(userId: string) {

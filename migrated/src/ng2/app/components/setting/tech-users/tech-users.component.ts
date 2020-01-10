@@ -1,20 +1,20 @@
-import { Component, OnInit, OnDestroy, AfterViewInit } from "@angular/core";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { Observable, Observer } from "rxjs";
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Observable, Observer } from 'rxjs';
 
-import { ImageCroppedEvent } from "ngx-image-cropper";
-import { ToastrService } from "ngx-toastr";
+import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { ToastrService } from 'ngx-toastr';
 
-import { TechUsersService } from "src/ng2/app/services/setting/tech-users.service";
-import { SettingService } from "src/ng2/app/services/setting/setting.service";
-import { map } from "rxjs/operators";
+import { TechUsersService } from 'src/ng2/app/services/setting/tech-users.service';
+import { SettingService } from 'src/ng2/app/services/setting/setting.service';
+import { map } from 'rxjs/operators';
 
 declare var $;
 
 @Component({
-  selector: "app-tech-users",
-  templateUrl: "./tech-users.component.html",
-  styleUrls: ["./tech-users.component.scss"]
+  selector: 'app-tech-users',
+  templateUrl: './tech-users.component.html',
+  styleUrls: ['./tech-users.component.scss']
 })
 export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
   selectedIdx = -1;
@@ -24,28 +24,32 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
   edit = false;
   currentCompanyId = null;
   isEmailIdUnique = true;
-
+  isArchived: boolean;
+  userlist: any[];
   techUsers: [];
   techUserIdList: [];
   techRoles: any;
   selectedTechUser: any;
   techUseremailNotificationList: any;
+  archivedtechUseremailNotificationList: any;
   techUserForm: FormGroup;
 
-  imageBase64 = "";
+  imageBase64 = '';
   imageChangedEvent: any;
   croppedImage: any;
   isCroppedImg = false;
   cropAvatar: any;
   fileAvatar: any = null; // return result when first time image upload
-
+  popup: boolean;
+  deletepopup: boolean;
+  userId: any;
   constructor(
     private techUsersService: TechUsersService,
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
     private settingService: SettingService
   ) {
-    const currentComapnyId = localStorage.getItem("currentComapnyId");
+    const currentComapnyId = localStorage.getItem('currentComapnyId');
     if (currentComapnyId) {
       this.currentCompanyId = currentComapnyId;
     } else {
@@ -60,30 +64,27 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     this.techUsers = [];
 
     const emailPattern =
-      "[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,63}";
+      '[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,63}';
 
     this.techUserForm = this.formBuilder.group({
       firstName: [
-        "",
+        '',
         [Validators.required, Validators.minLength(2), Validators.maxLength(15)]
       ],
-      lastName: [
-        "",
-        [Validators.required, Validators.maxLength(15)]
-      ],
+      lastName: ['', [Validators.required, Validators.maxLength(15)]],
       primaryEmail: [
-        "",
+        '',
         Validators.compose([
           Validators.required,
           Validators.pattern(emailPattern)
         ])
       ],
-      techRole: [""],
-      newDevice: [""],
-      ticketCreated: [""],
-      myTicketUpdated: [""],
-      ticketCloseNotifications: [""],
-      id: [""]
+      techRole: [''],
+      newDevice: [''],
+      ticketCreated: [''],
+      myTicketUpdated: [''],
+      ticketCloseNotifications: [''],
+      id: ['']
     });
 
     this.getUsers();
@@ -113,6 +114,32 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       .subscribe();
   }
 
+  restoreConfirm(id) {
+    this.userId = id;
+    this.popup = true;
+  }
+
+  restoreUser() {
+    this.loading = true;
+    this.techUsersService
+      .restoreUser(this.userId)
+      .pipe()
+      .subscribe(
+        response => {
+          this.loading = false;
+          this.popup = false;
+          this.getUsers();
+          this.toastr.success('User has been restore successfully.');
+        },
+        error => {
+          this.loading = false;
+          this.popup = false;
+          this.toastr.error('Something wen to wrong. Please try again later');
+          this.getUsers();
+        }
+      );
+  }
+
   /**
    * get tech users from usres.
    */
@@ -122,9 +149,10 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       .getUsers()
       .pipe(
         map((users: any) => {
+          this.userlist = users.filter((u: any) => u.deletedAt !== null);
           return users.filter(
             (user: any) =>
-              user.accountType.toLowerCase() === "tech" &&
+              user.accountType.toLowerCase() === 'tech' &&
               user.deletedAt === null
           );
         })
@@ -132,6 +160,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       .subscribe(
         (techUsers: any) => {
           this.loading = false;
+          this.archivedemailNotification(this.userlist);
           if (techUsers) {
             this.techUsers = techUsers;
             this.techUserIdList = techUsers.map(({ id }) => id);
@@ -163,6 +192,20 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       .subscribe();
   }
 
+  archivedemailNotification(techUserIdList) {
+    const IdList = techUserIdList.map(({ id }) => id);
+    this.techUsersService
+      .getUsersEmailNotifications(IdList)
+      .pipe(
+        map(eNotifications => {
+          if (eNotifications) {
+            this.archivedtechUseremailNotificationList = eNotifications;
+          }
+        })
+      )
+      .subscribe();
+  }
+
   /**
    * opened model, when click on dropdown emil notification
    * @param index
@@ -185,7 +228,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       .changePasswordRequest(id)
       .pipe(
         map(res => {
-          this.toastr.success("Change Password Request Sent Successfully.");
+          this.toastr.success('Change Password Request Sent Successfully.');
         })
       )
       .subscribe();
@@ -250,35 +293,36 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     }
   }
 
+  removeUserConfirm(techuser: any) {
+    this.userId = techuser;
+    this.deletepopup = true;
+  }
+
   /**
    * removed tech user
    * @param techUser
    */
-  removeTechUser(techUser: any) {
-    const id = techUser.id;
-    if (techUser) {
-      if (
-        confirm(
-          `Do you want to remove ${techUser.firstName} ${techUser.lastName}  ?`
+  removeTechUser() {
+    const id = this.userId.id;
+    if (this.userId) {
+      this.loading = true;
+      this.techUsersService
+        .archiveUser([this.userId.id])
+        .pipe(
+          map(archiveUser => {
+            this.loading = false;
+            this.deletepopup = false;
+            // deleted techuser.
+            // if (this.techUsers.find((x: any) => x.id === this.userId.id)) {
+            //   this.techUsers.splice(
+            //     this.techUsers.findIndex((x: any) => x.id === this.userId.id),
+            //     1
+            //   );
+            // }
+            this.getUsers();
+          })
         )
-      ) {
-        this.loading = true;
-        this.techUsersService
-          .archiveUser([techUser.id])
-          .pipe(
-            map(archiveUser => {
-              this.loading = false;
-              // deleted techuser.
-              if (this.techUsers.find((x: any) => x.id === techUser.id)) {
-                this.techUsers.splice(
-                  this.techUsers.findIndex((x: any) => x.id === techUser.id),
-                  1
-                );
-              }
-            })
-          )
-          .subscribe();
-      }
+        .subscribe();
     }
   }
 
@@ -291,7 +335,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       .pipe(
         map((currentCompany: any) => {
           if (currentCompany) {
-            localStorage.setItem("currentComapnyId", currentCompany.id);
+            localStorage.setItem('currentComapnyId', currentCompany.id);
             this.currentCompanyId = currentCompany.id;
           }
         })
@@ -314,7 +358,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
 
       this.imageChangedEvent = event;
       const fromData = new FormData();
-      fromData.append("file", event.target.files[0]);
+      fromData.append('file', event.target.files[0]);
       this.loading = true;
 
       this.settingService.fileAvatar(fromData).subscribe(
@@ -333,9 +377,9 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
     }
   }
 
-  onInputClick(event:any)  {
-    event.target.value = ''
-}
+  onInputClick(event: any) {
+    event.target.value = '';
+  }
 
   /**
    * image croped event
@@ -355,8 +399,8 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
         // id: this.currentCompanyId,
         origin: this.fileAvatar,
         w: this.croppedImage.width,
-        x: 178, //this.croppedImage.cropperPosition.x1,
-        y: 44, //this.croppedImage.cropperPosition.y1,
+        x: 178, // this.croppedImage.cropperPosition.x1,
+        y: 44, // this.croppedImage.cropperPosition.y1,
         base64: this.croppedImage.base64
       };
     } else {
@@ -396,7 +440,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
             // this.edit = false;
             // this.getUsers();
 
-            this.toastr.success("Image Cropped Successfully");
+            this.toastr.success('Image Cropped Successfully');
           }
         },
         error => {
@@ -440,13 +484,13 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
    */
   onCreateSubmit() {
     this.submitted = true;
-
+    this.isEmailIdUnique = true;
     // stop here if form is invalid
     if (this.techUserForm.invalid) {
       return;
     }
 
-    if (!this.techUserForm.get("primaryEmail").value) {
+    if (!this.techUserForm.get('primaryEmail').value) {
       this.isEmailIdUnique = false;
       return;
     }
@@ -466,7 +510,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       this.loading = true;
       this.techUsersService.createUser(objTechUser).subscribe(
         (savedTechUsre: any) => {
-          this.toastr.success("Saved Successfully");
+          this.toastr.success('Saved Successfully');
           this.loading = false;
           this.create = false;
           this.getUsers();
@@ -477,7 +521,8 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
         error => {
           this.create = false;
           this.loading = false;
-          this.toastr.error("Bad Request");
+          const er = error.error.validationResults;
+          this.toastr.error(er.techRole || 'Bad Request');
         }
       );
     } else {
@@ -488,9 +533,9 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
    * delete avatar
    */
   deleteAvatar() {
-    let id = "";
+    let id = '';
     if (!this.selectedTechUser || !this.selectedTechUser.avatar) {
-      id = this.fileAvatar ? this.fileAvatar.id : "";
+      id = this.fileAvatar ? this.fileAvatar.id : '';
     } else {
       id = this.selectedTechUser.id;
     }
@@ -501,7 +546,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
 
     this.settingService.deleteAvatar(id).subscribe(
       res => {
-        this.toastr.success("Avatar Deleted Successfully");
+        this.toastr.success('Avatar Deleted Successfully');
 
         const profileUser = {
           basic: {
@@ -543,7 +588,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
    */
   rePositionAvatar() {
     if (this.selectedTechUser && this.selectedTechUser.avatar) {
-      let imageUrl = `/file/${this.selectedTechUser.avatar.origin.id}.jpg`;
+      const imageUrl = `/file/${this.selectedTechUser.avatar.origin.id}.jpg`;
       this.getBase64ImageFromURL(imageUrl).subscribe(base64data => {
         this.isCroppedImg = true;
         this.croppedImage = this.selectedTechUser.avatar.cropped;
@@ -551,7 +596,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
         this.imageBase64 = base64data;
       });
     } else if (this.create && this.cropAvatar) {
-      let imageUrl = `/file/${this.cropAvatar.origin.id}.jpg`;
+      const imageUrl = `/file/${this.cropAvatar.origin.id}.jpg`;
       this.getBase64ImageFromURL(imageUrl).subscribe(base64data => {
         this.isCroppedImg = true;
         // this.croppedImage = this.cropAvatar.avatar.cropped;
@@ -568,8 +613,8 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
   getBase64ImageFromURL(url: string) {
     return Observable.create((observer: Observer<string>) => {
       // create an image object
-      let img = new Image();
-      img.crossOrigin = "Anonymous";
+      const img = new Image();
+      img.crossOrigin = 'Anonymous';
       img.src = url;
       if (!img.complete) {
         // This will call another method that will create image from url
@@ -593,14 +638,14 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
    */
   getBase64Image(img: HTMLImageElement) {
     // We create a HTML canvas object that will create a 2d image
-    const canvas = document.createElement("canvas");
+    const canvas = document.createElement('canvas');
     canvas.width = img.width;
     canvas.height = img.height;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
     // This will draw image
     ctx.drawImage(img, 0, 0);
     // Convert the drawn image to Data URL
-    const dataURL = canvas.toDataURL("image/png");
+    const dataURL = canvas.toDataURL('image/png');
     return dataURL;
     // return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
   }
@@ -628,7 +673,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       .map(function(s) {
         return s.charAt(0).toUpperCase();
       })
-      .join("");
+      .join('');
 
     this.selectedTechUser.companyId = this.selectedTechUser.company
       ? this.selectedTechUser.company.id
@@ -640,7 +685,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       .subscribe(
         res => {
           // this.getUsers();
-          this.toastr.success("Updated Successfully");
+          this.toastr.success('Updated Successfully');
           this.techUserForm.reset();
           if (this.techUserIdList) {
             this.emailNotification(this.techUserIdList);
@@ -653,7 +698,8 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
         error => {
           this.loading = false;
           this.edit = false;
-          this.toastr.error("Bad Request");
+          const er = error.error.validationResults;
+          this.toastr.error(er.techRole || 'Bad Request');
         }
       );
 
@@ -667,7 +713,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
 
   saveUsersEmailNotifications(techUserId: string) {
     if (techUserId) {
-      var notificationSetting = {
+      const notificationSetting = {
         newDevice: this.techUserForm.value.newDevice,
         // scheduleChanged: this.techUseremailNotificationList[techUserId]
         //   .scheduleChanged,
@@ -701,21 +747,18 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
   //   );
   // }
   onBackMenu() {
-    let body = document.getElementsByTagName("body")[0];
-    body.classList.remove("backMenu"); //remove the class
-    body.classList.add("backMenu");
+    const body = document.getElementsByTagName('body')[0];
+    body.classList.remove('backMenu'); // remove the class
+    body.classList.add('backMenu');
   }
 
   displayFrstLstChar(techUser: any) {
     if (techUser) {
-      return [
-        techUser.firstName,
-        techUser.lastName
-      ]
+      return [techUser.firstName, techUser.lastName]
         .map(function(s) {
           return s.charAt(0).toUpperCase();
         })
-        .join("");
+        .join('');
     }
   }
 }

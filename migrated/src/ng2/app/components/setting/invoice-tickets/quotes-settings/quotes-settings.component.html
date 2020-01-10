@@ -3,17 +3,9 @@
     <form [formGroup]="quotesForm" (ngSubmit)="onSubmit()">
       <div class="f-row">
         <div class="f-col col-33">
-          <label *ngIf="!submitted || !f.count.errors"
-            >Starting ticket number</label
+          <label
+            >Starting Quote Number</label
           >
-          <div *ngIf="submitted && f.count.errors" class="invalid-feedback">
-            <div *ngIf="f.count.errors.required">
-              Ticket Number is required
-            </div>
-            <div *ngIf="f.count.errors.pattern">
-              Only Number is allowed
-            </div>
-          </div>
           <div class="form-row">
             <input
               type="text"
@@ -22,6 +14,14 @@
               [ngClass]="{ 'is-invalid': submitted && f.count.errors }"
               placeholder="Enter Starting ticket number"
             />
+              <div *ngIf="submitted && f.count.errors" class="invalid-feedback">
+            <div *ngIf="f.count.errors.required">
+              Ticket Number is required
+            </div>
+            <div *ngIf="f.count.errors.pattern">
+              Only Number is allowed
+            </div>
+          </div>
           </div>
         </div>
         <div class="f-col col-50">

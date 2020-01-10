@@ -8,6 +8,19 @@
 .page-container{
     &.manage-tech{
         width: 936px;
+        .heading{
+            .heading-serach{
+                .stati-link{
+                    font-family: $graphicSemibold;
+                    font-weight: 500;
+                    font-size: 12px;
+                    font-style: normal;
+                    line-height: 1.33;
+                    letter-spacing: normal;
+                    color: #16a4fa;
+                }
+            }
+        }
         .cmn-area{
             padding-top: 0;
             @media only screen and (max-width:768px){
@@ -30,7 +43,7 @@
             box-sizing: border-box;
         }
         .tech-user{
-            width: 227px;
+            width: 252px;
             @media only screen and (max-width:768px){
                 width: 200px;
             }
@@ -52,13 +65,13 @@
                 display: block;
             }
         }
-        .e-note{width: 205px;position: relative;
+        .e-note{width: 280px;position: relative;
             @media only screen and (max-width:576px){
                 display: none;
             }
         }
         .action{
-            width: 190px;
+            width: 90px;
             @media only screen and (max-width:768px){
                 p{display: none;}
                 width: 70px;
@@ -245,3 +258,9 @@
     border: 1px solid red;
   }
   
+
+  .email-note-wrape{
+      .cmn-checkbox{
+        input[type="checkbox"][readonly] + label{cursor: not-allowed;pointer-events: none;}
+      }
+  }

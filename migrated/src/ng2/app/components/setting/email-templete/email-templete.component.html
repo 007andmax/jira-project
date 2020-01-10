@@ -218,14 +218,20 @@
         <div class="f-col col-100">
           <label>Email</label>
           <div class="form-row">
-            <angular-editor
+            <!-- <angular-editor
               id="myEditor"
               #body
               name="body"
               formControlName="body"
               [config]="config"
-            ></angular-editor>
-          
+            ></angular-editor> -->
+              <textarea   
+              id="myEditor"
+              #body
+              class="form-input insert-field"
+              row="8"
+              name="body"
+              formControlName="body"></textarea>
           </div>
         </div>
         <div class="f-col col-100">

@@ -18,7 +18,8 @@ export class TaxesComponent implements OnInit {
   eTax: any;
   submitted = false;
   taxForm: FormGroup;
-
+  tax: any;
+  popup: boolean;
   constructor(
     private taxesService: TaxesService,
     private toastrService: ToastrService,
@@ -92,7 +93,7 @@ export class TaxesComponent implements OnInit {
 
   defaultTax(tax: any) {
     console.log(tax);
-    
+
     this.taxForm.patchValue({
       name: tax.name,
       rate: tax.rate,
@@ -123,24 +124,28 @@ export class TaxesComponent implements OnInit {
       );
   }
 
+  removeConfirm(tax: any) {
+    this.tax = tax;
+    this.popup = true;
+  }
+
   /**
    * remove tax
    * @param tax
    */
-  removeTax(tax: any) {
-    if (confirm(`Are you sure you want to delete ${tax.name} ?`)) {
+  removeTax() {
       this.loading = true;
       this.taxesService
-        .delete(tax.id)
+        .delete(this.tax.id)
         .pipe(
           map(res => {
             this.loading = false;
-            this.taxes = this.taxes.filter(t => t.id !== tax.id);
-            this.toastrService.success(`${tax.name} is Deleted Successfully.`);
+            this.popup = false;
+            this.taxes = this.taxes.filter(t => t.id !== this.tax.id);
+            this.toastrService.success(`${this.tax.name} is Deleted Successfully.`);
           })
         )
         .subscribe();
-    }
   }
 
   /**

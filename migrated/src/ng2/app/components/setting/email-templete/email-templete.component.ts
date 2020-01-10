@@ -31,6 +31,7 @@ export class EmailTempleteComponent implements OnInit {
   gettingEmailTemplatePreview: boolean;
 
   emailPages: any;
+  elEditor: any = "";
   templeteForm: FormGroup;
   openEmailTemplate: string;
   public show = false;
@@ -48,7 +49,9 @@ export class EmailTempleteComponent implements OnInit {
     placeholder: "",
     translate: "no",
     defaultParagraphSeparator: "p",
-    defaultFontName: "Arial"
+    defaultFontName: "Arial",
+    toolbarPosition: "bottom"
+    // showToolbar:false
   };
 
   constructor(
@@ -127,7 +130,6 @@ export class EmailTempleteComponent implements OnInit {
     if (!templete) {
       return;
     }
-
     this.getEmailPages();
     this.templeteInfo = templete.value;
     this.loading = true;
@@ -137,9 +139,8 @@ export class EmailTempleteComponent implements OnInit {
       .pipe(
         map((res: any) => {
           this.loading = false;
-          this.hideButtonTextEditor();
-
           if (res) {
+            this.hideButtonTextEditor();
             this.templatesData.body = res.body;
             this.templatesData.subject = res.subject;
             this.keywords = res.keywords;
@@ -203,13 +204,13 @@ export class EmailTempleteComponent implements OnInit {
 
       this.subject.nativeElement.selectionStart = startPos;
       this.subject.nativeElement.focus();
-      $('#elem').selectRange(3);
+      $("#elem").selectRange(3);
       // this.subject.nativeElement.blur();
-    } else if(el.parentElement.parentElement.parentElement.id === 'myEditor') {
-      this.insertDataVarables(el, text);
-      el.parentElement.parentElement.parentElement.blur();
+    } else {
+      // this.insertDataVarables(el, text);
+      // el.parentElement.parentElement.parentElement.blur();
+      this.insertAt(document.getElementById("myEditor"),text);
     }
-
     // this.insertDataVarables(el, text);
   }
 
@@ -225,11 +226,11 @@ export class EmailTempleteComponent implements OnInit {
       myField.rango = sel.getRangeAt(0);
       myField.rango.insertNode(document.createTextNode(myValue));
       myField.autofocus = true;
-      
+
       this.templeteForm.patchValue({
         body: myField.textContent
       });
-      
+
       return false;
     }
     // if (myField.selectionStart || myField.selectionStart == "0") {
@@ -254,6 +255,28 @@ export class EmailTempleteComponent implements OnInit {
     //     body: myField.value
     //   });
     // }
+  }
+
+  insertAt(element, text) {
+    if (document['selection']) {
+      element.focus();
+      var sel = document['selection'].createRange();
+      sel.text = text;
+      element.focus();
+    } else if (element.selectionStart || element.selectionStart === 0) {
+      var startPos = element.selectionStart;
+      var endPos = element.selectionEnd;
+      var scrollTop = element.scrollTop;
+      element.value = element.value.substring(0, startPos) +
+        text + element.value.substring(endPos, element.value.length);
+      element.focus();
+      element.selectionStart = startPos + text.length;
+      element.selectionEnd = startPos + text.length;
+      element.scrollTop = scrollTop;
+    } else {
+      element.value += text;
+      element.focus();
+    }
   }
 
   emailPreview(templateKey: any) {
@@ -299,12 +322,14 @@ export class EmailTempleteComponent implements OnInit {
     // this.templeteForm.patchValue({
     //   body: this.body.nativeElement.value,
     //   subject: this.subject.nativeElement.value
-    // });
-
+    // });    
     this.templeteForm.patchValue({
-      body: this.templeteForm.value.body,
+      // body: this.templeteForm.value.body,
+      body: document.getElementById("myEditor")['value'],
       subject: this.templeteForm.value.subject
     });
+
+    
 
     this.loading = true;
     this.emailService

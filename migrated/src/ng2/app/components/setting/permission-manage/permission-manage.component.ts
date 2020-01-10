@@ -1,15 +1,15 @@
-import { Component, OnInit } from "@angular/core";
-import { PermissionManageService } from "./permission-manage.service";
-import { map, catchError } from "rxjs/operators";
-import { SettingService } from "src/ng2/app/services/setting/setting.service";
-import { of } from "rxjs";
-import { UsersService } from "src/ng2/app/services/users/users.service";
-import { ToastrService } from "ngx-toastr";
+import { Component, OnInit } from '@angular/core';
+import { PermissionManageService } from './permission-manage.service';
+import { map, catchError } from 'rxjs/operators';
+import { SettingService } from 'src/ng2/app/services/setting/setting.service';
+import { of } from 'rxjs';
+import { UsersService } from 'src/ng2/app/services/users/users.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: "app-permission-manage",
-  templateUrl: "./permission-manage.component.html",
-  styleUrls: ["./permission-manage.component.scss"]
+  selector: 'app-permission-manage',
+  templateUrl: './permission-manage.component.html',
+  styleUrls: ['./permission-manage.component.scss']
 })
 export class PermissionManageComponent implements OnInit {
   selectedRoleIndex = -1;
@@ -22,8 +22,8 @@ export class PermissionManageComponent implements OnInit {
   currentUser: any;
   promise;
   editData = {
-    name: "",
-    id: ""
+    name: '',
+    id: ''
   };
   isRoleNameEdited = false;
   usersToShift: any;
@@ -143,7 +143,7 @@ export class PermissionManageComponent implements OnInit {
 
     this.roles.forEach(roleEle => {
       const role = roleEle;
-      const secondPart = roleEle.name.split("#")[1];
+      const secondPart = roleEle.name.split('#')[1];
 
       if (secondPart) {
         if (+secondPart == secondPart) {
@@ -152,11 +152,13 @@ export class PermissionManageComponent implements OnInit {
       }
     });
 
-    if (maxNum) maxNum++;
+    if (maxNum) {
+      maxNum++;
+    }
 
     const newRole = {
       company: this.techCompany,
-      name: "New role #" + (maxNum || this.roles.length),
+      name: 'New role #' + (maxNum || this.roles.length),
       order: this.roles.length,
       permissions: []
     };
@@ -166,7 +168,7 @@ export class PermissionManageComponent implements OnInit {
       .createTechRole(newRole)
       .pipe(
         map(res => {
-          this.toastrService.success("Role Added Successfully");
+          this.toastrService.success('Role Added Successfully');
           this.loading = false;
           this.isNewRoleCreating = false;
           if (res) {
@@ -188,9 +190,9 @@ export class PermissionManageComponent implements OnInit {
       .updateTechRole(this.editData.id, this.editData.name)
       .pipe(
         map(res => {
-          this.toastrService.success("Role changed successfully");
+          this.toastrService.success('Role changed successfully');
           this.loading = false;
-          var role = this.roles.find(el => {
+          const role = this.roles.find(el => {
             return el.id === this.editData.id;
           });
 
@@ -214,8 +216,8 @@ export class PermissionManageComponent implements OnInit {
       this.selectedRoleIndex = -1;
       this.isRoleNameEdited = false;
       this.editData = {
-        name: "",
-        id: ""
+        name: '',
+        id: ''
       };
       return;
     }
@@ -239,7 +241,7 @@ export class PermissionManageComponent implements OnInit {
     // this.loading = true;
     this.permissionManageService.deleteTechRole(id).subscribe(
       (res: any) => {
-        this.toastrService.success("Deleted Role Successfully");
+        this.toastrService.success('Deleted Role Successfully');
         this.loading = false;
         if (res.length > 0) {
           this.usersToShift = res.map((user: any) => {
@@ -273,7 +275,7 @@ export class PermissionManageComponent implements OnInit {
           this.usersToShift = errorData.map((user: any) => {
             const newUser = this.allUsers.find(x => x.id == user.id);
             if (newUser) {
-              if (newUser.firstName === "Joana") {
+              if (newUser.firstName === 'Joana') {
                 console.log(newUser);
               }
               newUser.companyId = newUser.company.id;
@@ -331,11 +333,11 @@ export class PermissionManageComponent implements OnInit {
    */
   userReadable(str: string) {
     return str
-      .split("_")
+      .split('_')
       .map(function(word) {
         return word[0] + word.slice(1).toLowerCase();
       })
-      .join(" ");
+      .join(' ');
   }
 
   /**
@@ -373,24 +375,24 @@ export class PermissionManageComponent implements OnInit {
       permissions.splice(index, 1);
 
       switch (permission) {
-        case "VIEW_COMPANIES":
+        case 'VIEW_COMPANIES':
           relatedPermissions = this.companiesRelatedPermissions.concat([
-            "VIEW_PASSWORD"
+            'VIEW_PASSWORD'
           ]);
           break;
-        case "VIEW_USERS":
+        case 'VIEW_USERS':
           relatedPermissions = this.userRelatedPermissions;
           break;
-        case "VIEW_ACCOUNTING":
+        case 'VIEW_ACCOUNTING':
           relatedPermissions = this.accountingRelatedPermissions;
           break;
-        case "VIEW_PRODUCT_COST":
+        case 'VIEW_PRODUCT_COST':
           relatedPermissions = this.productsRelatedPermissions;
           break;
-        case "VIEW_PASSWORD_SECTION":
+        case 'VIEW_PASSWORD_SECTION':
           relatedPermissions = this.passwordsRelatedPermissions;
           break;
-        case "VIEW_PASSWORD":
+        case 'VIEW_PASSWORD':
           relatedPermissions = this.passwordsRelatedPermissions;
           break;
         default:
@@ -418,32 +420,32 @@ export class PermissionManageComponent implements OnInit {
    */
   isPermissionDisabled(permission, role) {
     if (
-      role.permissions.indexOf("VIEW_COMPANIES") === -1 &&
+      role.permissions.indexOf('VIEW_COMPANIES') === -1 &&
       this.companiesRelatedPermissions.indexOf(permission) > -1
     ) {
       return true;
     } else if (
-      role.permissions.indexOf("VIEW_USERS") === -1 &&
+      role.permissions.indexOf('VIEW_USERS') === -1 &&
       this.userRelatedPermissions.indexOf(permission) > -1
     ) {
       return true;
     } else if (
-      role.permissions.indexOf("VIEW_ACCOUNTING") === -1 &&
+      role.permissions.indexOf('VIEW_ACCOUNTING') === -1 &&
       this.accountingRelatedPermissions.indexOf(permission) > -1
     ) {
       return true;
     } else if (
-      role.permissions.indexOf("VIEW_PRODUCT_COST") === -1 &&
+      role.permissions.indexOf('VIEW_PRODUCT_COST') === -1 &&
       this.productsRelatedPermissions.indexOf(permission) > -1
     ) {
       return true;
     } else if (
-      role.permissions.indexOf("VIEW_PASSWORD_SECTION") === -1 &&
+      role.permissions.indexOf('VIEW_PASSWORD_SECTION') === -1 &&
       this.passwordsRelatedPermissions.indexOf(permission) > -1
     ) {
       return true;
     } else if (
-      role.permissions.indexOf("VIEW_PASSWORD") === -1 &&
+      role.permissions.indexOf('VIEW_PASSWORD') === -1 &&
       this.viewPasswordsRelatedPermissions.indexOf(permission) > -1
     ) {
       return true;
@@ -459,12 +461,14 @@ export class PermissionManageComponent implements OnInit {
    */
   changeUsersRole(user, event) {
     user.techRole = event.target.value;
+    console.log("--------------",user);
+
     this.loading = true;
     user.avatar.cropped = null;
     this.permissionManageService.save(user).subscribe(res => {
       this.loading = false;
-      this.toastrService.success("Role Changed Successfully");
-      var userIndex = this.usersToShift.findIndex(el => el.id === user.id);
+      this.toastrService.success('Role Changed Successfully');
+      const userIndex = this.usersToShift.findIndex(el => el.id === user.id);
 
       if (userIndex !== -1) {
         const newUser = this.allUsers.find(x => x.id == user.id);
@@ -483,9 +487,9 @@ export class PermissionManageComponent implements OnInit {
   }
 
   onBackMenu() {
-    let body = document.getElementsByTagName("body")[0];
-    body.classList.remove("backMenu"); //remove the class
-    body.classList.add("backMenu");
+    const body = document.getElementsByTagName('body')[0];
+    body.classList.remove('backMenu'); // remove the class
+    body.classList.add('backMenu');
   }
 
   displayFrstLstChar(techUser: any) {
@@ -494,7 +498,7 @@ export class PermissionManageComponent implements OnInit {
         .map(function(s) {
           return s.charAt(0).toUpperCase();
         })
-        .join("");
+        .join('');
     }
   }
 }

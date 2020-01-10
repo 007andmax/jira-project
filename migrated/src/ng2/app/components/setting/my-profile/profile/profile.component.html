@@ -6,7 +6,10 @@
     </span>
 
     <span class="dp" *ngIf="!imageSrc">
-      <img src="../../../../../../ng1/images/setting-module/avtar-56@2x.png" alt="user" />
+      <img
+        src="../../../../../../ng1/images/setting-module/avtar-56@2x.png"
+        alt="user"
+      />
     </span>
 
     <div class="dp-info">
@@ -108,12 +111,7 @@
       <div class="f-col col-50">
         <!-- <label>Your Full name</label>  -->
 
-        <label *ngIf="!submitted || !f.userName.errors">First Name</label>
-        <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
-          <div *ngIf="f.userName.errors.required">Full Name is required</div>
-          <div *ngIf="f.userName.errors.minlength">Full name is too short.</div>
-          <div *ngIf="f.userName.errors.maxlength">Full name is too large.</div>
-        </div>
+        <label>First Name</label>
         <div class="form-row">
           <input
             type="text"
@@ -121,17 +119,21 @@
             placeholder="Enter Your First Name"
             formControlName="userName"
           />
+          <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+            <div *ngIf="f.userName.errors.required">Full Name is required</div>
+            <div *ngIf="f.userName.errors.minlength">
+              Full name is too short.
+            </div>
+            <div *ngIf="f.userName.errors.maxlength">
+              Full name is too large.
+            </div>
+          </div>
         </div>
       </div>
       <div class="f-col col-50">
         <!-- <label>Your Full name</label>  -->
 
-        <label *ngIf="!submitted || !f.userName.errors">Last Name</label>
-        <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
-          <div *ngIf="f.userName.errors.required">Full Name is required</div>
-          <div *ngIf="f.userName.errors.minlength">Full name is too short.</div>
-          <div *ngIf="f.userName.errors.maxlength">Full name is too large.</div>
-        </div>
+        <label >Last Name</label>
         <div class="form-row">
           <input
             type="text"
@@ -139,13 +141,26 @@
             placeholder="Enter Your Last Name"
             formControlName="userName"
           />
+          <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+            <div *ngIf="f.userName.errors.required">Full Name is required</div>
+            <div *ngIf="f.userName.errors.minlength">Full name is too short.</div>
+            <div *ngIf="f.userName.errors.maxlength">Full name is too large.</div>
+          </div>
         </div>
       </div>
       <div class="f-col col-50">
-        <label *ngIf="(!submitted || !f.primaryEmail.errors) && uniqueEmail"
+        <label
           >Email Address</label
         >
-        <div
+        <div class="form-row">
+          <input
+            type="email"
+            class="form-input"
+            placeholder="Enter Your Email Address"
+            (blur)="isEmailUnique()"
+            formControlName="primaryEmail"
+          />
+          <div
           *ngIf="submitted && f.primaryEmail.errors"
           class="invalid-feedback"
         >
@@ -159,22 +174,10 @@
         <label *ngIf="!uniqueEmail" class="invalid-feedback"
           >This email already occupied.</label
         >
-        <div class="form-row">
-          <input
-            type="email"
-            class="form-input"
-            placeholder="Enter Your Email Address"
-            (blur)="isEmailUnique()"
-            formControlName="primaryEmail"
-          />
         </div>
       </div>
       <div class="f-col col-50">
         <label>Role</label>
-        <div *ngIf="submitted && f.designation.errors" class="invalid-feedback">
-          <div *ngIf="f.designation.errors.minlength">Role is too short.</div>
-          <div *ngIf="f.designation.errors.maxlength">Role is too large.</div>
-        </div>
         <div class="form-row">
           <input
             type="text"
@@ -182,6 +185,10 @@
             placeholder="Enter Your Role"
             formControlName="designation"
           />
+          <div *ngIf="submitted && f.designation.errors" class="invalid-feedback">
+            <div *ngIf="f.designation.errors.minlength">Role is too short.</div>
+            <div *ngIf="f.designation.errors.maxlength">Role is too large.</div>
+          </div>
         </div>
       </div>
       <div class="f-col col-50">
@@ -197,6 +204,10 @@
             class="form-input"
             placeholder="Primary Phone Number"
             formControlName="primaryPhone"
+            [validation]="true"
+            [suffix]="suffix"
+            mask="(000) 000-0000"
+            (keyup)="phonehandle($event)"
           />
           <select
             class="cmn-select form-input"

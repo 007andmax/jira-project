@@ -1,9 +1,9 @@
-import { Injectable } from "@angular/core";
-import { environment } from "src/ng2/environments/environment";
-import { HttpClient } from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { environment } from 'src/ng2/environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class CompanyProfileService {
   private apiUrl = environment.apiUrl;
@@ -61,13 +61,13 @@ export class CompanyProfileService {
   workingTime(workTime: any) {
     // {"workingDays":[{"id":"a6321f59-e5aa-49fc-8ad8-978d56a45739","dayOfWeek":"TUESDAY","startTime":28800,"endTime":64800,"workingHours":"from 08:00 to 18:00"},{"id":"c5c72f5b-b388-4010-a42d-c1b5b8a994a0","dayOfWeek":"WEDNESDAY","startTime":28800,"endTime":64800,"workingHours":"from 08:00 to 18:00"},{"id":"88f08bc5-4172-49df-bf09-9eb39cd561aa","dayOfWeek":"THURSDAY","startTime":28800,"endTime":64800,"workingHours":"from 08:00 to 18:00"},{"id":"ce2af960-56d5-4945-8e52-13733e7cdcb7","dayOfWeek":"FRIDAY","startTime":28800,"endTime":64800,"workingHours":"from 08:00 to 18:00"}],"outliersSeconds":28800}
     return this.http.put(
-      `${this.apiUrl}settings/companyProfile/workingTime`,
+      `${this.apiUrl}settings/companyProfile/ticketSettings`,
       workTime
     );
   }
 
   getConstants() {
-    //http://localhost:4200/data/getConstants
+    // http://localhost:4200/data/getConstants
     // company url
     return this.http.get(`${this.apiUrl}data/getConstants`);
   }

@@ -36,23 +36,22 @@
               <form [formGroup]="compnayForm" (ngSubmit)="onSubmit()">
                 <div class="f-row">
                   <div class="f-col col-100">
-                    <label *ngIf="!submitted || !f.word.errors">Tag Name</label>
-                    <div
-                      *ngIf="submitted && f.word.errors"
-                      class="invalid-feedback"
-                    >
-                      <div *ngIf="f.word.errors.required">
-                        Tag Name is required
-                      </div>
-                    </div>
+                    <label>Tag Name</label>
                     <div class="form-row">
                       <input
                         type="text"
                         formControlName="word"
                         class="form-input"
                         placeholder="Enter Tag Name"
-                        [ngClass]="{ 'is-invalid': submitted && f.word.errors }"
                       />
+                      <div
+                        *ngIf="submitted && f.word.errors"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="f.word.errors.required">
+                          Tag Name is required
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div class="m-btn-row">
@@ -84,10 +83,17 @@
       <tab heading="Companies" id="tab1">
         <div class="cmn-area">
           <div class="data-table-wrap">
-            <table #dataTable datatable [dtTrigger]="dtTrigger"  [dtOptions]="dtOptions" class="display dataTable" style="width:100%">
+            <table
+              #dataTable
+              datatable
+              [dtTrigger]="dtTrigger"
+              [dtOptions]="dtOptions"
+              class="display dataTable"
+              style="width:100%"
+            >
               <thead>
                 <tr>
-                  <th class="c-tag" ><span>Custom Tags</span></th>
+                  <th class="c-tag"><span>Custom Tags</span></th>
                   <th class="count"><span>Count</span></th>
                   <th class="action">&nbsp;</th>
                 </tr>
@@ -115,7 +121,7 @@
                       href="javascript:;"
                       data-tooltip="Remove"
                       class="remove"
-                      (click)="removeCompanyTag(company.id)"
+                      (click)="ConfirmDelete(company.id)"
                       ><img
                         src="../../../../../ng1/images/setting-module/remove.svg"
                         alt="Remove"
@@ -136,29 +142,23 @@
                           >
                             <div class="f-row">
                               <div class="f-col col-100">
-                                <label *ngIf="!submitted || !f.word.errors"
-                                  >Tag Name</label
-                                >
-                                <div
-                                  *ngIf="submitted && f.word.errors"
-                                  class="invalid-feedback"
-                                >
-                                  <div *ngIf="f.word.errors.required">
-                                    Tag Name is required
-                                  </div>
-                                </div>
+                                <label>Tag Name</label>
                                 <div class="form-row">
                                   <input
                                     type="text"
                                     formControlName="word"
                                     class="form-input"
                                     placeholder="Enter Tag Name"
-                                    [ngClass]="{
-                                      'is-invalid': submitted && f.word.errors
-                                    }"
                                   />
+                                  <div
+                                    *ngIf="submitted && f.word.errors"
+                                    class="invalid-feedback"
+                                  >
+                                    <div *ngIf="f.word.errors.required">
+                                      Tag Name is required
+                                    </div>
+                                  </div>
                                 </div>
-                                
                               </div>
                               <input
                                 type="text"
@@ -195,10 +195,17 @@
         </div>
       </tab>
       <!-- Tickets -->
-      <tab #tickets  heading="Tickets">
+      <tab #tickets heading="Tickets">
         <div class="cmn-area">
           <div class="data-table-wrap">
-            <table #dataTable datatable [dtTrigger]="dtTrigger"  [dtOptions]="dtOptions" class="display dataTable" style="width:100%">
+            <table
+              #dataTable
+              datatable
+              [dtTrigger]="dtTrigger"
+              [dtOptions]="dtOptions"
+              class="display dataTable"
+              style="width:100%"
+            >
               <thead>
                 <tr>
                   <th class="c-tag"><span>Custom Tags</span></th>
@@ -210,7 +217,8 @@
                 <tr
                   *ngFor="
                     let ticket of ticketTags | tag: searchTag;
-                    let i = index;trackBy:ticket?.id
+                    let i = index;
+                    trackBy: ticket?.id
                   "
                 >
                   <td>{{ ticket.word | titlecase }}</td>
@@ -229,7 +237,7 @@
                       href="javascript:;"
                       data-tooltip="Remove"
                       class="remove"
-                      (click)="removeCompanyTag(ticket.id)"
+                      (click)="ConfirmDelete(ticket.id)"
                       ><img
                         src="../../../../../ng1/images/setting-module/remove.svg"
                         alt="Remove"
@@ -252,22 +260,21 @@
                             <div class="f-row">
                               <div class="f-col col-100">
                                 <label *ngIf="!submitted || !f.word.errors"
-                                  >Tag Name</label>
+                                  >Tag Name</label
+                                >
                                 <div
                                   *ngIf="submitted && f.word.errors"
-                                  class="invalid-feedback">
+                                  class="invalid-feedback"
+                                >
                                   <div *ngIf="f.word.errors.required">
                                     Tag Name is required
-                                </div>
+                                  </div>
                                 </div>
                                 <div class="form-row">
                                   <input
                                     type="text"
                                     formControlName="word"
                                     class="form-input"
-                                    [ngClass]="{
-                                      'is-invalid': submitted && f.word.errors
-                                    }"
                                     placeholder="Enter Tag Name"
                                   />
                                 </div>
@@ -310,10 +317,50 @@
       <!-- Devices  -->
       <tab heading="Devices">
         <div class="cmn-area">
-          <div class="data-table-wrap">
-          </div>
+          <div class="data-table-wrap"></div>
         </div>
       </tab>
     </tabset>
+  </div>
+</div>
+
+<!-- tag delete popup -->
+<div class="img-croparea deletePopup" *ngIf="deletePopup">
+  <div class="crop-inner">
+    <div class="cropping">
+      <div class="popup-message">
+        <span class="icon-part">
+          <img
+            src="../../../../../ng1/images/setting-module/delete-red.svg"
+            alt="delete"
+          />
+        </span>
+        <div class="message-right">
+          <h1>Delete Tag</h1>
+          <p>Are you sure you want to delete?</p>
+        </div>
+        <a class="close-ico" href="javascript:;" (click)="deletePopup = false"
+          ><img
+            src="../../../../../ng1/images/setting-module/close.svg"
+            alt="close"
+        /></a>
+      </div>
+      <div class="btn-crops">
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="removeCompanyTag()"
+        >
+          Yes, I am sure
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="deletePopup = false"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
   </div>
 </div>

@@ -4,27 +4,27 @@ import {
   ViewChild,
   ElementRef,
   NgZone
-} from "@angular/core";
-import { Observable, Observer } from "rxjs";
+} from '@angular/core';
+import { Observable, Observer } from 'rxjs';
 import {
   FormGroup,
   FormBuilder,
   Validators,
   FormControl
-} from "@angular/forms";
+} from '@angular/forms';
 
-import { CompanyProfileService } from "src/ng2/app/services/setting/company-profile.service";
-import { ToastrService } from "ngx-toastr";
-import { ImageCroppedEvent } from "ngx-image-cropper";
-import { SettingService } from "src/ng2/app/services/setting/setting.service";
-import { MapsAPILoader } from "@agm/core";
+import { CompanyProfileService } from 'src/ng2/app/services/setting/company-profile.service';
+import { ToastrService } from 'ngx-toastr';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { SettingService } from 'src/ng2/app/services/setting/setting.service';
+import { MapsAPILoader } from '@agm/core';
 
 declare var google: any;
 
 @Component({
-  selector: "app-company-profile",
-  templateUrl: "./company-profile.component.html",
-  styleUrls: ["./company-profile.component.scss"]
+  selector: 'app-company-profile',
+  templateUrl: './company-profile.component.html',
+  styleUrls: ['./company-profile.component.scss']
 })
 export class CompanyProfileComponent implements OnInit {
   cProfileForm: FormGroup;
@@ -34,47 +34,47 @@ export class CompanyProfileComponent implements OnInit {
   isAddPhone = false;
   isCompanyNameUnique = true;
 
-  url: "";
-  imageSrc = "";
+  url: '';
+  imageSrc = '';
   constants: any;
   timezones: any;
   croppedImage: any;
   imageChangedEvent: any;
   isCroppedImg = false;
   fileAvatar: any;
-  imageBase64 = "";
+  imageBase64 = '';
   public loading = false;
   public currentCompany: any;
 
   cProfile = {
     address: [],
     logo: {},
-    name: "",
+    name: '',
     timeSettings: { workingDays: [], outliersSeconds: 0 },
-    supportMailBox: ""
+    supportMailBox: ''
   };
   weekDays = [
-    "MONDAY",
-    "TUESDAY",
-    "WEDNESDAY",
-    "THURSDAY",
-    "FRIDAY",
-    "SATURDAY",
-    "SUNDAY"
+    'MONDAY',
+    'TUESDAY',
+    'WEDNESDAY',
+    'THURSDAY',
+    'FRIDAY',
+    'SATURDAY',
+    'SUNDAY'
   ];
 
   defaultWorkingDay = {
-    dayOfWeek: "MONDAY",
+    dayOfWeek: 'MONDAY',
     startTime: 28800,
     endTime: 61200,
     isSelected: false
   };
 
   config = {
-    displayKey: "city",
+    displayKey: 'city',
     limitTo: 3,
     search: true,
-    searchOnKey: "city"
+    searchOnKey: 'city'
   };
   // addres google map
   public latitude: number;
@@ -82,7 +82,7 @@ export class CompanyProfileComponent implements OnInit {
   public searchControl: FormControl;
   public zoom: number;
 
-  @ViewChild("search")
+  @ViewChild('search')
   public searchElementRef: ElementRef;
 
   phone: string;
@@ -102,9 +102,9 @@ export class CompanyProfileComponent implements OnInit {
     this.cProfile = {
       address: [],
       logo: {},
-      name: "",
+      name: '',
       timeSettings: { workingDays: [], outliersSeconds: 0 },
-      supportMailBox: ""
+      supportMailBox: ''
     };
 
     this.createCProfileForm();
@@ -119,10 +119,10 @@ export class CompanyProfileComponent implements OnInit {
     this.latitude = 39.8282;
     this.longitude = -98.5795;
 
-    //create search FormControl
+    // create search FormControl
     this.searchControl = new FormControl();
 
-    //set current position
+    // set current position
     // this.setCurrentPosition();
 
     // load address autocomplete
@@ -136,35 +136,35 @@ export class CompanyProfileComponent implements OnInit {
   }
 
   getAddressAutocomplete() {
-    //load address Autocomplete
+    // load address Autocomplete
     this.mapsAPILoader.load().then(() => {
-      let autocomplete = new google.maps.places.Autocomplete(
+      const autocomplete = new google.maps.places.Autocomplete(
         this.searchElementRef.nativeElement,
         {
-          types: ["address"]
+          types: ['address']
         }
       );
-      autocomplete.addListener("place_changed", () => {
+      autocomplete.addListener('place_changed', () => {
         this.ngZone.run(() => {
-          //get the place result
-          let place = (google.maps.places.PlaceResult = autocomplete.getPlace());
+          // get the place result
+          const place = (google.maps.places.PlaceResult = autocomplete.getPlace());
 
-          //verify result
+          // verify result
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }
 
-          //set latitude, longitude and zoom
+          // set latitude, longitude and zoom
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
 
           this.cProfileForm.patchValue({
-            postalCode: ""
+            postalCode: ''
           });
 
-          for (var i = 0, len = place.address_components.length; i < len; i++) {
+          for (let i = 0, len = place.address_components.length; i < len; i++) {
             if (
-              place.address_components[i].types.indexOf("postal_code") !== -1
+              place.address_components[i].types.indexOf('postal_code') !== -1
             ) {
               this.cProfileForm.patchValue({
                 postalCode: place.address_components[i].short_name
@@ -180,7 +180,7 @@ export class CompanyProfileComponent implements OnInit {
 
   // get current position
   private setCurrentPosition() {
-    if ("geolocation" in navigator) {
+    if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(position => {
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
@@ -194,17 +194,17 @@ export class CompanyProfileComponent implements OnInit {
    */
   createCProfileForm() {
     this.cProfileForm = new FormGroup({
-      name: new FormControl("", Validators.required),
-      url: new FormControl({ value: "", disabled: true }, Validators.required),
-      timeZone: new FormControl(""),
-      primaryId: new FormControl(""),
-      primaryPhone: new FormControl(""),
-      primaryPhoneType: new FormControl(""),
-      secondaryPhone: new FormControl(""),
-      secondaryPhoneType: new FormControl(""),
-      suiteNumber: new FormControl(""),
-      address: new FormControl(""),
-      postalCode: new FormControl("")
+      name: new FormControl('', Validators.required),
+     // url: new FormControl({ value: '' }, Validators.required),
+      timeZone: new FormControl(''),
+      primaryId: new FormControl(''),
+      primaryPhone: new FormControl(''),
+      primaryPhoneType: new FormControl(''),
+      secondaryPhone: new FormControl(''),
+      secondaryPhoneType: new FormControl(''),
+      suiteNumber: new FormControl(''),
+      address: new FormControl(''),
+      postalCode: new FormControl('')
     });
   }
 
@@ -228,7 +228,7 @@ export class CompanyProfileComponent implements OnInit {
           ) {
             this.imageSrc = `/file/${this.currentCompany.logo.cropped.id}.jpg?t=${this.currentCompany.logo.updatedAt}`;
           } else {
-            this.imageSrc = "";
+            this.imageSrc = '';
             // this.imageSrc = "../../../../../ng1/images/setting-module/upload-company-logo.svg";
           }
           if (this.currentCompany.addresses.length > 0) {
@@ -263,7 +263,7 @@ export class CompanyProfileComponent implements OnInit {
             if (res.responseTimeSettings) {
               const workingDays = res.responseTimeSettings.workingDays;
               for (let i = 0; i < this.weekDays.length; i++) {
-                var day = workingDays[i],
+                const day = workingDays[i],
                   name = this.weekDays[i];
 
                 if (!day || day.dayOfWeek !== name) {
@@ -291,13 +291,13 @@ export class CompanyProfileComponent implements OnInit {
               postalCode: res.addresses[0].postalCode
             });
 
-            for (var i = 0; i < this.cProfile.address.length; i++) {
+            for (let i = 0; i < this.cProfile.address.length; i++) {
               const phoneNumbers = this.cProfile.address[i].phoneNumbers,
                 firstPhone = phoneNumbers[0],
                 lastPhone =
                   phoneNumbers.length > 1
                     ? phoneNumbers[phoneNumbers.length - 1]
-                    : "";
+                    : '';
 
               if (firstPhone) {
                 this.cProfileForm.patchValue({
@@ -305,7 +305,7 @@ export class CompanyProfileComponent implements OnInit {
                   primaryPhone: firstPhone.number,
                   primaryPhoneType: firstPhone.typeNumber
                     ? firstPhone.typeNumber.toUpperCase()
-                    : ""
+                    : ''
                 });
               }
               if (lastPhone) {
@@ -315,7 +315,7 @@ export class CompanyProfileComponent implements OnInit {
                   secondaryPhone: lastPhone.number,
                   secondaryPhoneType: lastPhone.typeNumber
                     ? lastPhone.typeNumber.toUpperCase()
-                    : ""
+                    : ''
                 });
               }
             }
@@ -338,18 +338,18 @@ export class CompanyProfileComponent implements OnInit {
     this.companyProfileService.getGroupedLocales().subscribe(
       (res: any) => {
         if (res) {
-          //this.timezones = res;
+          // this.timezones = res;
           const timeZonesMapped = [];
 
-          for (var prop in res) {
-            for (var timeZone in res[prop]) {
-              var group = res[prop][timeZone];
-              for (var index in group) {
-                var city = group[index];
+          for (const prop in res) {
+            for (const timeZone in res[prop]) {
+              const group = res[prop][timeZone];
+              for (const index in group) {
+                const city = group[index];
                 timeZonesMapped.push({
                   offset: parseInt(timeZone),
                   country: prop,
-                  city: prop + "/" + city
+                  city: prop + '/' + city
                 });
               }
             }
@@ -370,8 +370,8 @@ export class CompanyProfileComponent implements OnInit {
         if (res) {
           this.constants = res;
           this.url = this.url
-            ? this.url + "." + res["website.dns"]
-            : res["website.dns"];
+            ? this.url + '.' + res['website.dns']
+            : res['website.dns'];
           this.cProfileForm.patchValue({ url: this.url });
         }
       },
@@ -386,13 +386,13 @@ export class CompanyProfileComponent implements OnInit {
     this.isAddPhone = !this.isAddPhone;
     if (this.isAddPhone) {
       this.cProfileForm.patchValue({
-        secondaryPhoneType: "OFFICE"
+        secondaryPhoneType: 'OFFICE'
       });
     } else {
       this.cProfileForm.patchValue({
-        secondaryPhone: "",
-        secondaryPhoneType: "",
-        secondaryId: ""
+        secondaryPhone: '',
+        secondaryPhoneType: '',
+        secondaryId: ''
       });
     }
   }
@@ -418,13 +418,13 @@ export class CompanyProfileComponent implements OnInit {
     if (event.target.files && event.target.files[0]) {
       const size = event.target.files[0].size;
       if (size > 200000) {
-        this.toaster.info("Maximum size of 2MB");
+        this.toaster.info('Maximum size of 2MB');
         return;
       }
       this.isCroppedImg = true;
       this.imageChangedEvent = event;
       const fromData = new FormData();
-      fromData.append("file", event.target.files[0]);
+      fromData.append('file', event.target.files[0]);
       this.loading = true;
 
       this.settingService.fileAvatar(fromData).subscribe(
@@ -464,7 +464,7 @@ export class CompanyProfileComponent implements OnInit {
       .removeAvatar(this.currentCompany.id, true)
       .subscribe(
         res => {
-          this.toaster.success("Avatar Deleted Successfully", null, {
+          this.toaster.success('Avatar Deleted Successfully', null, {
             timeOut: 3000
           });
           this.getCompanyProfile();
@@ -482,7 +482,7 @@ export class CompanyProfileComponent implements OnInit {
    */
   rePositionAvatar() {
     if (this.cProfile && this.currentCompany.logo.base64 === null) {
-      let imageUrl = `/file/${this.currentCompany.logo.origin.id}.jpg`;
+      const imageUrl = `/file/${this.currentCompany.logo.origin.id}.jpg`;
       this.loading = true;
       this.getBase64ImageFromURL(imageUrl).subscribe(base64data => {
         this.loading = false;
@@ -502,8 +502,8 @@ export class CompanyProfileComponent implements OnInit {
   getBase64ImageFromURL(url: string) {
     return Observable.create((observer: Observer<string>) => {
       // create an image object
-      let img = new Image();
-      img.crossOrigin = "Anonymous";
+      const img = new Image();
+      img.crossOrigin = 'Anonymous';
       img.src = url;
       if (!img.complete) {
         // This will call another method that will create image from url
@@ -527,14 +527,14 @@ export class CompanyProfileComponent implements OnInit {
    */
   getBase64Image(img: HTMLImageElement) {
     // We create a HTML canvas object that will create a 2d image
-    var canvas = document.createElement("canvas");
+    const canvas = document.createElement('canvas');
     canvas.width = img.width;
     canvas.height = img.height;
-    var ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
     // This will draw image
     ctx.drawImage(img, 0, 0);
     // Convert the drawn image to Data URL
-    var dataURL = canvas.toDataURL("image/png");
+    const dataURL = canvas.toDataURL('image/png');
     return dataURL;
     // return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
   }
@@ -578,7 +578,7 @@ export class CompanyProfileComponent implements OnInit {
         avatar => {
           if (avatar) {
             this.cProfile.logo = avatar;
-            this.toaster.success("Image Cropped Successfully");
+            this.toaster.success('Image Cropped Successfully');
             this.companyProfileService.basic(this.cProfile).subscribe(
               res => {
                 if (res) {
@@ -607,16 +607,31 @@ export class CompanyProfileComponent implements OnInit {
       const selectedWorkingHours = this.cProfile.timeSettings.workingDays.filter(
         f => f.isSelected
       );
-      const workingTime = { workingDays: selectedWorkingHours };
+      const workingTime = {
+        outliersSeconds: 21600,
+        workingDays: selectedWorkingHours
+      };
+      const data = {
+        companyWorkingTimeDto: {
+          workingDays: selectedWorkingHours
+        }
+      };
       this.loading = true;
-      this.companyProfileService.workingTime(workingTime).subscribe(
+      // selectedWorkingHours.map((h: any, index: number) => {
+      //   // tslint:disable-next-line: no-string-literal
+      //   const from = document.getElementById('from-' + h.dayOfWeek)['value'];
+      //   // tslint:disable-next-line: no-string-literal
+      //   const to = document.getElementById('to-' + h.dayOfWeek)['value'];
+      //   h.workingHours = `from ${from} to ${to}`;
+      // });
+      this.companyProfileService.workingTime(data).subscribe(
         res => {
           this.loading = false;
-          this.toaster.success("Records Saved Successfully");
+          this.toaster.success('Records Saved Successfully');
         },
         error => {
           this.loading = false;
-          this.toaster.error("Bad Request");
+          this.toaster.error('Bad Request');
         }
       );
     }
@@ -638,14 +653,14 @@ export class CompanyProfileComponent implements OnInit {
     }
 
     this.cProfile.address[0].suiteNumber = this.cProfileForm.get(
-      "suiteNumber"
+      'suiteNumber'
     ).value;
     this.cProfile.address[0].timeZone.name = this.cProfileForm.value.timeZone
       ? this.cProfileForm.value.timeZone.city
-      : "";
-    this.cProfile.address[0].address = this.searchElementRef.nativeElement.value; //this.cProfileForm.get("address").value;
+      : '';
+    this.cProfile.address[0].address = this.searchElementRef.nativeElement.value; // this.cProfileForm.get("address").value;
     this.cProfile.address[0].postalCode = this.cProfileForm.get(
-      "postalCode"
+      'postalCode'
     ).value;
 
     const phones = [];
@@ -662,18 +677,18 @@ export class CompanyProfileComponent implements OnInit {
       phones.push({
         number: this.cProfileForm.value.secondaryPhone,
         typeNumber: this.cProfileForm.value.secondaryPhoneType,
-        id: this.cProfileForm.value.secondaryId || ""
+        id: this.cProfileForm.value.secondaryId || ''
       });
     }
 
     this.cProfile.address[0].phoneNumbers = phones;
 
-    if (this.cProfile.name !== this.cProfileForm.get("name").value) {
+    if (this.cProfile.name !== this.cProfileForm.get('name').value) {
       this.loading = true;
       this.companyProfileService
         .isCompanyNameUnique(
           this.cProfile.address[0].id,
-          this.cProfileForm.get("name").value
+          this.cProfileForm.get('name').value
         )
         .subscribe(
           (res: any) => {
@@ -684,15 +699,15 @@ export class CompanyProfileComponent implements OnInit {
               const basic = {
                 description: null,
                 logo: this.cProfile.logo,
-                name: this.cProfileForm.get("name").value
+                name: this.cProfileForm.get('name').value
               };
               this.companyProfileService.basic(basic).subscribe(
                 res => {
-                  this.toaster.success("Records saved successfully");
+                  this.toaster.success('Records saved successfully');
                 },
                 error => {
                   this.loading = false;
-                  this.toaster.error("Bad Request");
+                  this.toaster.error('Bad Request');
                 }
               );
             } else {
@@ -724,7 +739,7 @@ export class CompanyProfileComponent implements OnInit {
    * @param startTime
    */
   startTimeChange(workingday: any, startTime: any) {
-    const splitTime = startTime.split(":");
+    const splitTime = startTime.split(':');
     if (!Number(splitTime[0])) {
       return;
     }
@@ -732,7 +747,7 @@ export class CompanyProfileComponent implements OnInit {
     let minutes =
       (!splitTime[1] || splitTime[1].length > 1
         ? parseInt(splitTime[1])
-        : parseInt(splitTime[1] + "0")) || 0;
+        : parseInt(splitTime[1] + '0')) || 0;
 
     if (minutes > 59) {
       minutes = 0;
@@ -741,7 +756,7 @@ export class CompanyProfileComponent implements OnInit {
     if (hours > 23) {
       hours = 23;
     }
-    let itemIndex = this.cProfile.timeSettings.workingDays.findIndex(
+    const itemIndex = this.cProfile.timeSettings.workingDays.findIndex(
       item => item.id == workingday.id
     );
     this.cProfile.timeSettings.workingDays[itemIndex].startTime =
@@ -751,7 +766,7 @@ export class CompanyProfileComponent implements OnInit {
   }
 
   endTimeChange(workingday: any, endTime: any) {
-    const splitTime = endTime.split(":");
+    const splitTime = endTime.split(':');
     if (!Number(splitTime[0])) {
       return;
     }
@@ -759,7 +774,7 @@ export class CompanyProfileComponent implements OnInit {
     let minutes =
       (!splitTime[1] || splitTime[1].length > 1
         ? parseInt(splitTime[1])
-        : parseInt(splitTime[1] + "0")) || 0;
+        : parseInt(splitTime[1] + '0')) || 0;
 
     if (minutes > 59) {
       minutes = 0;
@@ -768,7 +783,7 @@ export class CompanyProfileComponent implements OnInit {
     if (hours > 23) {
       hours = 23;
     }
-    let itemIndex = this.cProfile.timeSettings.workingDays.findIndex(
+    const itemIndex = this.cProfile.timeSettings.workingDays.findIndex(
       item => item.id == workingday.id
     );
     this.cProfile.timeSettings.workingDays[itemIndex].endTime =
@@ -780,25 +795,25 @@ export class CompanyProfileComponent implements OnInit {
    * @param from
    */
   fromTime_convert(from) {
-    const startWith = "from ",
-      splitWith = " to ";
-    let fromHours = Math.floor(from / 3600);
-    let fromMinutes = Math.round(from / 60 - fromHours * 60);
+    const startWith = 'from ',
+      splitWith = ' to ';
+    const fromHours = Math.floor(from / 3600);
+    const fromMinutes = Math.round(from / 60 - fromHours * 60);
 
-    let fHours = "";
+    let fHours = '';
     if (fromHours < 10) {
-      fHours = "0" + fromHours;
+      fHours = '0' + fromHours;
     }
 
-    let fMinutes = "";
+    let fMinutes = '';
     if (fromMinutes < 10) {
-      fMinutes = "0" + fromMinutes;
+      fMinutes = '0' + fromMinutes;
     }
 
     const h = fHours ? fHours : Number(fromHours) ? fromHours : 0;
     const m = fMinutes ? fMinutes : Number(fromMinutes) ? fromMinutes : 0;
 
-    const value = h + ":" + m;
+    const value = h + ':' + m;
 
     return value;
   }
@@ -808,37 +823,36 @@ export class CompanyProfileComponent implements OnInit {
    * @param to
    */
   toTime_convert(to) {
-    let toHours = Math.floor(to / 3600);
-    let toMinutes = Math.round(to / 60 - toHours * 60);
+    const toHours = Math.floor(to / 3600);
+    const toMinutes = Math.round(to / 60 - toHours * 60);
 
-    let tHours = "";
+    let tHours = '';
     if (toHours < 10) {
-      tHours = "0" + toHours;
+      tHours = '0' + toHours;
     }
 
-    let tMinutes = "";
+    let tMinutes = '';
     if (toMinutes < 10) {
-      tMinutes = "0" + toMinutes;
+      tMinutes = '0' + toMinutes;
     }
 
-    const h = tHours !== "" ? tHours : toHours;
-    const m = tMinutes !== "" ? tMinutes : toMinutes;
+    const h = tHours !== '' ? tHours : toHours;
+    const m = tMinutes !== '' ? tMinutes : toMinutes;
 
-    const value = h + ":" + m;
-
+    const value = h + ':' + m;
     return value;
   }
 
   formatOnInput(workingDay, event) {
     const startTime =
-      workingDay && workingDay.startTime ? workingDay.startTime : "";
-    if (startTime !== "" && this.numberOnly(workingDay.startTime)) {
-      var splitTime = startTime.split(":"),
+      workingDay && workingDay.startTime ? workingDay.startTime : '';
+    if (startTime !== '' && this.numberOnly(workingDay.startTime)) {
+      let splitTime = startTime.split(':'),
         hours = parseInt(splitTime[0]) || 0,
         minutes =
           (!splitTime[1] || splitTime[1].length > 1
             ? parseInt(splitTime[1])
-            : parseInt(splitTime[1] + "0")) || 0;
+            : parseInt(splitTime[1] + '0')) || 0;
 
       if (minutes > 59) {
         minutes = 0;
@@ -866,10 +880,10 @@ export class CompanyProfileComponent implements OnInit {
     }
     return true;
   }
-  
+
   onBackMenu() {
-    let body = document.getElementsByTagName("body")[0];
-    body.classList.remove("backMenu"); //remove the class
-    body.classList.add("backMenu");
+    const body = document.getElementsByTagName('body')[0];
+    body.classList.remove('backMenu'); // remove the class
+    body.classList.add('backMenu');
   }
 }

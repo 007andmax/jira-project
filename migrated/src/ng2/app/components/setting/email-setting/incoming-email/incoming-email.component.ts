@@ -1,12 +1,12 @@
-import { Component, OnInit } from "@angular/core";
-import { EmailSettingService } from "../email-setting.service";
-import { ToastrService } from "ngx-toastr";
-import { SettingService } from "src/ng2/app/services/setting/setting.service";
+import { Component, OnInit } from '@angular/core';
+import { EmailSettingService } from '../email-setting.service';
+import { ToastrService } from 'ngx-toastr';
+import { SettingService } from 'src/ng2/app/services/setting/setting.service';
 
 @Component({
-  selector: "app-incoming-email",
-  templateUrl: "./incoming-email.component.html",
-  styleUrls: ["./incoming-email.component.scss"]
+  selector: 'app-incoming-email',
+  templateUrl: './incoming-email.component.html',
+  styleUrls: ['./incoming-email.component.scss']
 })
 export class IncomingEmailComponent implements OnInit {
   smtpSettings: {};
@@ -14,7 +14,7 @@ export class IncomingEmailComponent implements OnInit {
   loading = false;
   currentComapny: any;
   constants: any;
-  currentHost: "";
+  currentHost: '';
   inboxEnabled: boolean;
 
   constructor(
@@ -50,7 +50,7 @@ export class IncomingEmailComponent implements OnInit {
       res => {
         this.constants = res;
         if (this.constants) {
-          this.currentHost = this.getConstant("mandrill.domain.suffix");
+          this.currentHost = this.getConstant('mandrill.domain.suffix');
         }
       },
       error => {}
@@ -59,7 +59,7 @@ export class IncomingEmailComponent implements OnInit {
 
   /**
    * get constant based on name
-   * @param constantName 
+   * @param constantName
    */
   getConstant(constantName) {
     if (!constantName) {
@@ -80,7 +80,7 @@ export class IncomingEmailComponent implements OnInit {
     this.emailSettingService
       .saveInboxEnabled(this.inboxEnabled)
       .subscribe(res => {
-        this.toastr.success("Saved Successfully");
+        this.toastr.success('Saved Successfully');
       });
   }
 

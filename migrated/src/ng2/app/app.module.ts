@@ -84,6 +84,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { AutocompleteComponent } from './shared/autocomplete/autocomplete.component';
 import { PhonePipe } from './pipe/phone.pipe';
 import { OrderByPipe } from './pipe/order-by.pipe';
+import { NgxMaskModule } from 'ngx-mask' 
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 declare var angular: any;
 declare var $: any;
@@ -241,6 +243,7 @@ angular
     DataTablesModule,
     NgSelectModule ,
     SelectDropDownModule,
+    CKEditorModule,
     TabsModule.forRoot(),
     SidebarModule.forRoot(),
     ModalModule.forRoot(),
@@ -249,7 +252,7 @@ angular
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAbP4DFpz4f9YcXMWUjdkOdyArX2peNt8s'
     }),
-    
+    NgxMaskModule.forRoot(),
     ToastrModule.forRoot({
       closeButton: true,
       preventDuplicates: true,

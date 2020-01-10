@@ -22,7 +22,6 @@
       margin:0;
   }
   .f-col{ 
-      width: 416px;
       @media only screen and (max-width: 768px){
           width: 100%;
           .btn{
@@ -36,7 +35,8 @@
       }
   }
     .cmn-checkbox {
-      margin-bottom: 33px;
+      margin-bottom: 23px;
+      max-width: 376px;
     }
   }
 }
@@ -85,4 +85,51 @@
   .btn-outline {
     display: inline-block;
   }
+}
+
+
+
+/*** Work Place ***/
+
+.cmn-area.workspace {
+  margin-top: 10px;
+  p {
+      font-size: 13px;
+      line-height: 1.54;
+      letter-spacing: normal;
+      color: #4f5f79;
+      margin-bottom: 78px;
+      font-family: $font-body;
+  }
+  form {
+      width: 478px;
+      max-width: 100%;
+      .custm-url {
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+          input {
+              width: 376px;
+              text-align: right;
+              max-width: 100%;
+          }
+      }
+      .form-row {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 7px;
+      }
+  }
+}
+
+
+.cmn-area.incming-email.workspace > p {
+  margin-bottom: 24px !important;
+}
+.cmn-area.incming-email.workspace form .f-row .f-col p {
+  margin-bottom: 23px;
 }

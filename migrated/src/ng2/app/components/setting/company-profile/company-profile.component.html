@@ -106,12 +106,18 @@
           </div>
           <form [formGroup]="cProfileForm" (ngSubmit)="onSubmit()">
             <div class="f-row">
-              <div class="f-col col-50">
+              <div class="f-col col-100">
                 <label
-                  *ngIf="(!submitted || !f.name.errors) && isCompanyNameUnique"
                   >Company Name</label
                 >
-                <div
+                <div class="form-row">
+                  <input
+                    type="text"
+                    class="form-input"
+                    placeholder="Enter Company Name"
+                    formControlName="name"
+                  />
+                    <div
                   *ngIf="submitted && f.name.errors"
                   class="invalid-feedback"
                 >
@@ -128,16 +134,9 @@
                 <label *ngIf="!isCompanyNameUnique" class="invalid-feedback"
                   >This company name already occupied.</label
                 >
-                <div class="form-row">
-                  <input
-                    type="text"
-                    class="form-input"
-                    placeholder="Enter Company Name"
-                    formControlName="name"
-                  />
                 </div>
               </div>
-              <div class="f-col col-50">
+              <!-- <div class="f-col col-50">
                 <label>Company URL</label>
                 <div class="form-row">
                   <input
@@ -147,7 +146,7 @@
                     formControlName="url"
                   />
                 </div>
-              </div>
+              </div> -->
 
               <div class="f-col col-20">
                 <label>Suite Number</label>
@@ -163,7 +162,7 @@
               <div class="f-col col-60">
                 <label>Mailing Address</label>
                 <div class="form-row">
-                  <!-- <app-autocomplete (setAddress)="getAddress($event)" adressType="geocode" 
+                  <!-- <app-autocomplete (setAddress)="getAddress($event)" adressType="geocode"
                   ></app-autocomplete> -->
 
                   <input
@@ -278,6 +277,31 @@
           </form>
         </div>
       </tab>
+      <tab heading="Workspace" id="workspace">
+        <div class="cmn-area workspace">
+          <form [formGroup]="cProfileForm" (ngSubmit)="onSubmit()">
+            <div class="f-row">
+                <div class="f-col col-100">
+                    <label>Company URL</label>
+                    <div class="form-row">
+                      <div class="custm-url">
+                       <input
+                       type="text"
+                       class="form-input"
+                       placeholder="Enter Your Company URL"
+                       formControlName="url"
+                       />
+                       <span class="slug">.quicktech.com</span>
+                     </div>
+                   </div>
+                </div>
+
+            </div>
+            <p>Your workspace URL can only contain lowercase letters, numbers and dashes (and must start with a letter or number).</p>
+            <input type="submit" class="btn btn-primary" value="Save Changes" />
+          </form>
+        </div>
+      </tab>
       <!-- Contact Details -->
       <!-- <tab heading="Contact Details">
               <div class="cmn-area contact">
@@ -288,7 +312,7 @@
                               <div class="form-row">
                                  <input type="text" placeholder="Enter Suite Number" class="form-input" value="346"/>
                               </div>
-                          </div> 
+                          </div>
                           <div class="f-col col-60">
                               <label>Mailing Address</label>
                               <div class="form-row">
@@ -326,7 +350,7 @@
             <div class="c-hours">
               <h5>Select days with correct hours</h5>
               <!-- <div formArrayName="workingHoursGrpArray">
-                  
+
                   <div *ngFor="let workHr of workingHoursFrm.controls; let i=index">
                     <input formControlName="{{workHr.dayOfWeek}}">
                   </div>
@@ -353,9 +377,9 @@
 
                   <div class="time-zone">
                     <div class="tl-col">
-                      <select #startTime class="cmn-select form-input" 
+                      <select #startTime class="cmn-select form-input" [id]=" 'from-'+workingDay.dayOfWeek"
                       (change)="startTimeChange(workingDay, startTime.value)"
-                      name="{{workingDay.dayOfWeek}}" [attr.disabled]="!workingDay.isSelected ? 'disabled' : null" [ngModel]="fromTime_convert(workingDay.startTime)" > 
+                      name="{{workingDay.dayOfWeek}}" [attr.disabled]="!workingDay.isSelected ? 'disabled' : null" [ngModel]="fromTime_convert(workingDay.startTime)" >
                         <option value="06:00">6:00 AM</option>
                         <option value="06:30">6:30 AM</option>
                         <option value="07:00">07:00 AM</option>
@@ -389,9 +413,9 @@
                         placeholder="Enter Time"
                         value="{{ toTime_convert(workingDay.endTime) }}"
                       /> -->
-                      <select #endTime class="cmn-select form-input" 
-                      (change)="endTimeChange(workingDay,endTime.value)"
-                      name="{{workingDay.dayOfWeek+i}}" [attr.disabled]="!workingDay.isSelected ? 'disabled' : null" [ngModel]="toTime_convert(workingDay.endTime)" > 
+                      <select #endTime class="cmn-select form-input"
+                      (change)="endTimeChange(workingDay,endTime.value)" [id]="'to-'+workingDay.dayOfWeek"
+                      name="{{workingDay.dayOfWeek+i}}" [attr.disabled]="!workingDay.isSelected ? 'disabled' : null" [ngModel]="toTime_convert(workingDay.endTime)" >
                         <option value="17:00">17:00 PM</option>
                         <option value="17:30">17:30 PM</option>
                         <option value="18:00">18:00 PM</option>

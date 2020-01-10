@@ -43,6 +43,23 @@ export class InvoiceSettingsComponent implements OnInit {
         '',
         [Validators.required, Validators.minLength(2), Validators.maxLength(15)]
       ],
+      taxId: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(15),
+          Validators.pattern(/^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,15}$/)
+        ]
+      ],
+      taxIdDescription: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(15),
+          Validators.pattern(/^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,15}$/)
+        ]
+      ],
+      conditions: [''],
       designation: ['', [Validators.minLength(2), Validators.maxLength(15)]],
       email: [
         '',
@@ -91,10 +108,38 @@ export class InvoiceSettingsComponent implements OnInit {
     }
   }
 
+  getConditions() {
+    this.loading = true;
+    this.invoiceTicketsService.termsAndConditions().subscribe(
+      (res: any) => {
+        this.invoiceForm.patchValue({
+          conditions: res.conditions
+        });
+      }
+    );
+  }
+
+  getTaxNumber() {
+    this.loading = true;
+    this.invoiceTicketsService.getTaxNumber().subscribe(
+      (res: any) => {
+        if (res) {
+          this.invoiceForm.patchValue({
+            taxId: res.taxId,
+            taxIdDescription: res.taxIdDescription
+          });
+        }
+      },
+      error => {}
+    );
+  }
+
   /**
    * get invoice contact details
    */
   getInvoiceContact() {
+    this.getTaxNumber();
+    this.getConditions();
     this.loading = true;
     this.invoiceTicketsService.getInvoiceContact().subscribe(
       (res: any) => {
@@ -113,6 +158,7 @@ export class InvoiceSettingsComponent implements OnInit {
               }
             });
           }
+
           this.invoiceForm.patchValue({
             designation: res.designation,
             email: res.email,
@@ -223,7 +269,7 @@ export class InvoiceSettingsComponent implements OnInit {
       emailSettingPageNumberFormDto: {
         count: this.invoiceForm.value.invoiceCount,
         term: this.invoiceForm.value.invoiceTerms,
-        termsAndConditions: '',
+        termsAndConditions: this.invoiceForm.value.conditions,
         type: 'INVOICE'
       },
       enableInvoiceContact: this.invoiceForm.value.enableInvoiceContact,
@@ -234,6 +280,10 @@ export class InvoiceSettingsComponent implements OnInit {
         email: this.invoiceForm.value.email,
         designation: this.invoiceForm.value.designation,
         phoneNumbers: []
+      },
+      taxNumber: {
+        taxIdDescription: this.invoiceForm.value.taxIdDescription,
+        taxId: this.invoiceForm.value.taxId
       }
     };
 

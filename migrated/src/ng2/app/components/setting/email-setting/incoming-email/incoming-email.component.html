@@ -1,5 +1,5 @@
 <ngx-loading [show]="loading"></ngx-loading>
-<div class="cmn-area incming-email">
+<div class="cmn-area incming-email workspace">
   <p>
     Incoming emails sent to your default address will automaticly create a new
     ticket. If you have a support email already setup with your existing domain
@@ -7,16 +7,25 @@
   </p>
   <form method="POST">
     <div class="f-row">
-      <div class="f-col-20">
+      <div class="f-col col-100">
         <label>Email Domain</label>
         <div class="form-row">
+          <div class="custm-url">
           <input
             class="form-input"
-            *ngIf="supportMailBox && currentHost"
+            *ngIf="supportMailBox"
             type="text"
-            value="{{ supportMailBox + '@' + currentHost }}"
+            value="{{ supportMailBox }}"
             disabled
           />
+          </div>
+          <span class="slug">.quicktech.com</span>
+        </div>
+        <div class="form-row">
+          <p>
+            Your workspace URL can only contain lowercase letters, numbers and
+            dashes (and must start with a letter or number).
+          </p>
         </div>
       </div>
     </div>

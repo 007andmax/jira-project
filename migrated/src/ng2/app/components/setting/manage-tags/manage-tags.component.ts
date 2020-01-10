@@ -29,6 +29,8 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
   create = false;
   selectedIdx = -1;
   setActiveTab = "company";
+  private tagId: string;
+  public deletePopup = false;
   public loading = false;
   dtOptions: DataTables.Settings = {
     searching: false,
@@ -166,16 +168,23 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     this.compnayForm.patchValue({ word: "" });
   }
 
+
+  ConfirmDelete(tID: string){
+    this.tagId = tID;
+    this.deletePopup = true;
+  }
+
   /**
    * removed company tag based on tagId
    * @param tagId
    */
-  removeCompanyTag(tagId: string) {
-    if (confirm("Are you sure you want to delete?")) {
+  removeCompanyTag() {   
       this.loading = true;
-      this.tagsService.removeCompanyTag(tagId, this.setActiveTab).subscribe(
+      this.tagsService.removeCompanyTag(this.tagId, this.setActiveTab).subscribe(
         res => {
+          this.tagId = null;
           this.loading = false;
+          this.deletePopup = false;
           this.toaster.success("Tag Removed Successfully");
           if (this.setActiveTab === "ticket") {
             this.getAllTickets();
@@ -185,9 +194,9 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
         },
         error => {
           this.loading = false;
+          this.deletePopup = false;
         }
-      );
-    }
+      );    
   }
 
   /**

@@ -4,7 +4,10 @@
 
 .page-container {
   &.permissin-manage {
-    width: 936px;
+    width: 1100px;
+    @media only screen and (max-width: 1367px) {
+      width: 970px;
+    }
   }
   .pr-area {
     padding-top: 9px;

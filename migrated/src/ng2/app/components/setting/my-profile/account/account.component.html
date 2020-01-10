@@ -7,59 +7,100 @@
             <h5>Password</h5>
             <div class="ac-txt">
               <span>Change the password for your account</span>
-              <a (click)="show=!show" href="javascript:;" class="static-link">Change password</a>
+              <a (click)="show = !show" href="javascript:;" class="static-link"
+                >Change password</a
+              >
             </div>
           </div>
         </div>
       </div>
       <div class="chang-password" [class.opened]="show">
         <form [formGroup]="passwordForm" (ngSubmit)="onSubmit()">
-            <label *ngIf="!oldPwdCorrect" class="invalid-feedback">Old Password is not correct.</label>
           <div class="f-row">
             <div class="label-area">
-              <label *ngIf="(!submitted || !f.oldpass.errors)">Current Password</label>
-              <div *ngIf="submitted && f.oldpass.errors" class="invalid-feedback">
-                <div *ngIf="f.oldpass.errors.required">Current Password is required</div>
-                <div *ngIf="f.oldpass.errors.minlength">Current Password is too short.</div>
-              </div>
-
+              <label>Current Password</label>
             </div>
             <div class="input-area">
-              <input class="form-input" type="password" formControlName="oldpass"
-                [ngClass]="{ 'is-invalid': submitted && f.oldpass.errors }" />
+              <input
+                class="form-input"
+                type="password"
+                formControlName="oldpass"
+                (keypress)="oldPwdCorrect = true"
+              />
+              <label
+                *ngIf="!oldPwdCorrect && !f.oldpass.errors"
+                class="invalid-feedback"
+                >Old Password is not correct.</label
+              >
+              <div
+                *ngIf="submitted && f.oldpass.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.oldpass.errors.required">
+                  Current Password is required
+                </div>
+                <div *ngIf="f.oldpass.errors.minlength">
+                  Current Password is too short.
+                </div>
+              </div>
             </div>
-
           </div>
           <div class="f-row">
             <div class="label-area">
-              <label *ngIf="!submitted || !f.newpass.errors">New Password</label>
-              <div *ngIf="submitted && f.newpass.errors" class="invalid-feedback">
-                <div *ngIf="f.newpass.errors.required">New Password is required</div>
-                <div *ngIf="f.newpass.errors.minlength">New Password is too short.</div>
-              </div>
+              <label>New Password</label>
             </div>
             <div class="input-area">
-              <input class="form-input" type="password" formControlName="newpass"
-                [ngClass]="{ 'is-invalid': submitted && f.newpass.errors }" />
+              <input
+                class="form-input"
+                type="password"
+                formControlName="newpass"
+              />
+              <div
+                *ngIf="submitted && f.newpass.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.newpass.errors.required">
+                  New Password is required
+                </div>
+                <div *ngIf="f.newpass.errors.minlength">
+                  New Password is too short.
+                </div>
+              </div>
             </div>
-
           </div>
           <div class="f-row">
             <div class="label-area">
-              <label *ngIf="!submitted || !f.confirmPass.errors">Confirm <br> New Password</label>
-              <div *ngIf="submitted && f.confirmPass.errors" class="invalid-feedback">
-                <div *ngIf="f.confirmPass.errors.required">Confirm New Password is required</div>
-                <div *ngIf="f.confirmPass.errors.mustMatch">Passwords must match</div>
-              </div>
+              <label
+                >Confirm <br />
+                New Password</label
+              >
             </div>
             <div class="input-area">
-              <input class="form-input" type="password" formControlName="confirmPass"
-                [ngClass]="{ 'is-invalid': submitted && f.confirmPass.errors }" />
+              <input
+                class="form-input"
+                type="password"
+                formControlName="confirmPass"
+              />
+              <div
+                *ngIf="submitted && f.confirmPass.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.confirmPass.errors.required">
+                  Confirm New Password is required
+                </div>
+                <div *ngIf="f.confirmPass.errors.mustMatch">
+                  Passwords must match
+                </div>
+              </div>
             </div>
-
           </div>
           <div class="f-row">
-            <a (click)="show=!show" href="javscript:;" class="btn btn-secondary">Cancel</a>
+            <a
+              (click)="show = !show"
+              href="javscript:;"
+              class="btn btn-secondary"
+              >Cancel</a
+            >
             <input type="submit" class="btn btn-primary" value="Save" />
           </div>
         </form>
@@ -70,7 +111,12 @@
             <h5>Security</h5>
             <div class="ac-txt">
               <span>Log out of all sessions except this current browser</span>
-              <a href="javascript:;" class="static-link" (click)="logOutSessions()">Log out other sessions</a>
+              <a
+                href="javascript:;"
+                class="static-link"
+                (click)="logOutSessions()"
+                >Log out other sessions</a
+              >
             </div>
           </div>
         </div>
@@ -92,11 +138,19 @@
             <div class="ac-info">
               <label>Authentication Type</label>
               <div class="ac-txt">
-                <select class="cmn-select form-input" (change)="onAuthTypeChange($event.target.value)"
-                  [(ngModel)]="authenticationTypesType" [ngModelOptions]="{standalone: true}">
+                <select
+                  class="cmn-select form-input"
+                  (change)="onAuthTypeChange($event.target.value)"
+                  [(ngModel)]="authenticationTypesType"
+                  [ngModelOptions]="{ standalone: true }"
+                >
                   <option value="DISABLED"> No authentication </option>
-                  <option value="BASIC"> Basic two-factor authentication </option>
-                  <option value="SECURE"> Secure two-factor authentication </option>
+                  <option value="BASIC">
+                    Basic two-factor authentication
+                  </option>
+                  <option value="SECURE">
+                    Secure two-factor authentication
+                  </option>
                 </select>
               </div>
             </div>

@@ -4,10 +4,18 @@
     <form [formGroup]="invoiceForm" (ngSubmit)="onSubmit()">
       <div class="f-row">
         <div class="f-col col-33">
-          <label *ngIf="!submitted || !f.invoiceCount.errors"
+          <label
             >Starting ticket number</label
           >
-          <div
+          <div class="form-row">
+            <input
+              type="text"
+              class="form-input"
+              formControlName="invoiceCount"
+              [ngClass]="{ 'is-invalid': submitted && f.invoiceCount.errors }"
+              placeholder="Enter Starting ticket number"
+            />
+            <div
             *ngIf="submitted && f.invoiceCount.errors"
             class="invalid-feedback"
           >
@@ -18,23 +26,10 @@
               Only Number is allowed
             </div>
           </div>
-          <div class="form-row">
-            <input
-              type="text"
-              class="form-input"
-              formControlName="invoiceCount"
-              [ngClass]="{ 'is-invalid': submitted && f.invoiceCount.errors }"
-              placeholder="Enter Starting ticket number"
-            />
           </div>
         </div>
         <div class="f-col col-50">
-          <label *ngIf="!submitted || !f.invoiceTerms.errors">Default invoice terms</label>
-          <div *ngIf="submitted && f.invoiceTerms.errors" class="invalid-feedback">
-            <div *ngIf="f.invoiceTerms.errors.required">
-              Invoice Terms is required
-            </div>
-          </div>
+          <label >Default invoice terms</label>
           <div class="form-row">
             <div class="input-select">
               <select
@@ -47,6 +42,11 @@
                 <option value="60">60 days</option>
               </select>
             </div>
+            <div *ngIf="submitted && f.invoiceTerms.errors" class="invalid-feedback">
+            <div *ngIf="f.invoiceTerms.errors.required">
+              Invoice Terms is required
+            </div>
+          </div>
           </div>
         </div>
         <div class="f-col col-100">
@@ -60,9 +60,67 @@
             <label for="enable">Enables to set primary invoice contacts</label>
           </span>
         </div>
+<div class="f-col col-33">
+          <label> Tax ID</label>
+          <div class="form-row">
+            <input
+              type="text"
+              class="form-input"
+              formControlName="taxId"
+              placeholder="Enter Tax Id"
+            />
+            <div *ngIf="submitted && f.taxId.errors" class="invalid-feedback">
+              <div *ngIf="f.taxId.errors.required">
+                TaxId is required
+              </div>
+              <div *ngIf="f.taxId.errors.pattern">
+                TaxId is not valid
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="f-col col-33">
+          <label> Tax ID description</label>
+          <div class="form-row">
+            <input
+              type="text"
+              class="form-input"
+              formControlName="taxIdDescription"
+              placeholder="Enter Tax ID description"
+            />
+            <div
+              *ngIf="submitted && f.taxIdDescription.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.taxIdDescription.errors.required">
+                Tax ID description is required
+              </div>
+              <div *ngIf="f.taxIdDescription.errors.pattern">
+                Tax ID description is not valid
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="f-col col-100">
+          <label> Memo of invoice</label>
+          <div class="form-row">
+            <textarea
+              class="form-input"
+              formControlName="conditions"
+              placeholder="Enter memo of invoice"
+            ></textarea>
+          </div>
+        </div>
         <div class="f-col col-50">
-          <label *ngIf="!submitted || !f.firstName.errors">First name</label>
-          <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+          <label>First name</label>
+          <div class="form-row">
+            <input
+              type="text"
+              class="form-input"
+              formControlName="firstName"
+              placeholder="Enter Your Full name"
+            />
+            <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
             <div *ngIf="f.firstName.errors.required">
               First name is required
             </div>
@@ -73,18 +131,18 @@
               First name is too large.
             </div>
           </div>
+          </div>
+        </div>
+        <div class="f-col col-50">
+          <label >Last name</label>
           <div class="form-row">
             <input
               type="text"
               class="form-input"
-              formControlName="firstName"
+              formControlName="lastName"
               placeholder="Enter Your Full name"
             />
-          </div>
-        </div>
-        <div class="f-col col-50">
-          <label *ngIf="!submitted || !f.lastName.errors">Last name</label>
-          <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+             <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
             <div *ngIf="f.lastName.errors.required">
               Last name is required
             </div>
@@ -95,23 +153,10 @@
               Last name is too large.
             </div>
           </div>
-          <div class="form-row">
-            <input
-              type="text"
-              class="form-input"
-              formControlName="lastName"
-              placeholder="Enter Your Full name"
-            />
           </div>
         </div>
         <div class="f-col col-50">
-          <label *ngIf="!submitted || !f.email.errors">Email Address</label>
-          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-            <div *ngIf="f.email.errors.required">Email is required</div>
-            <div *ngIf="f.email.errors.pattern">
-              Email must be a valid email address
-            </div>
-          </div>
+          <label>Email Address</label>
           <div class="form-row">
             <input
               type="email"
@@ -119,11 +164,25 @@
               formControlName="email"
               placeholder="Enter Your Email Address"
             />
+             <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors.required">Email is required</div>
+            <div *ngIf="f.email.errors.pattern">
+              Email must be a valid email address
+            </div>
+          </div>
           </div>
         </div>
         <div class="f-col col-50">
-          <label *ngIf="!submitted || !f.designation.errors">Role</label>
-          <div
+          <label>Role</label>
+
+          <div class="form-row">
+            <input
+              type="text"
+              class="form-input"
+              formControlName="designation"
+              placeholder="Enter Your Role"
+            />
+              <div
             *ngIf="submitted && f.designation.errors"
             class="invalid-feedback"
           >
@@ -134,18 +193,10 @@
               Role is tool large
             </div>
           </div>
-
-          <div class="form-row">
-            <input
-              type="text"
-              class="form-input"
-              formControlName="designation"
-              placeholder="Enter Your Role"
-            />
           </div>
         </div>
         <div class="f-col col-50">
-          <label *ngIf="!submitted || !f.primaryPhone.errors"
+          <label
             >Primary Phone Number
             <a
               href="javascript:;"
@@ -155,17 +206,6 @@
               >+ Add Phone</a
             >
           </label>
-          <div
-            *ngIf="submitted && f.primaryPhone.errors"
-            class="invalid-feedback"
-          >
-            <div *ngIf="f.primaryPhone.errors.required">
-              primaryPhone is required
-            </div>
-            <div *ngIf="f.primaryPhone.errors.pattern">
-              primaryPhone must be a valid number
-            </div>
-          </div>
           <div class="form-row primary-phone">
             <input
               type="text"
@@ -181,6 +221,17 @@
               <option value="OFFICE">office</option>
               <option value="FAX">fax</option>
             </select>
+          </div>
+          <div
+            *ngIf="submitted && f.primaryPhone.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f.primaryPhone.errors.required">
+              primaryPhone is required
+            </div>
+            <div *ngIf="f.primaryPhone.errors.pattern">
+              primaryPhone must be a valid number
+            </div>
           </div>
         </div>
 

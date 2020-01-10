@@ -4,25 +4,7 @@
     <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
       <div class="f-row">
         <div class="f-col col-33">
-          <label *ngIf="!submitted || !f.ticketCount.errors"
-            >Starting ticket number</label
-          >
-          <div
-            *ngIf="submitted && f.ticketCount.errors"
-            class="invalid-feedback"
-          >
-            <div *ngIf="f.ticketCount.errors.required">
-              Starting ticket number is required
-            </div>
-            <div *ngIf="f.ticketCount.errors.pattern">
-              Only Number is allowed
-            </div>
-          </div>
-          <label class="control-label" *ngIf="used">
-            Already used. Next free is
-            <span class="free-number-link"> {{ ticketConfig.nextValid }}</span
-            >.
-          </label>
+          <label>Starting ticket number</label>
           <div class="form-row">
             <input
               type="text"
@@ -32,34 +14,48 @@
               placeholder="Enter Starting ticket number"
               value="Starting ticket number"
             />
+            <div
+              *ngIf="submitted && f.ticketCount.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.ticketCount.errors.required">
+                Starting ticket number is required
+              </div>
+              <div *ngIf="f.ticketCount.errors.pattern">
+                Only Number is allowed
+              </div>
+            </div>
+            <label class="control-label" *ngIf="used">
+              Already used. Next free is
+              <span class="free-number-link"> {{ ticketConfig.nextValid }}</span
+              >.
+            </label>
           </div>
         </div>
 
         <div class="f-col col-50">
-          <label *ngIf="!submitted || !f.outliersTime.errors"
-            >Outliers Time</label
-          >
-          <div
-            *ngIf="submitted && f.outliersTime.errors"
-            class="invalid-feedback"
-          >
-            <div *ngIf="f.outliersTime.errors.required">
-              OutliersTime is required
-            </div>
-            <!-- <div *ngIf="f.outliersTime.errors.pattern">
-              Outliers Time must not be less than 1 hour.
-            </div> -->
-          </div>
+          <label>Outliers Time</label>
 
           <div class="form-row outliersTime">
             <span class="input-number">
               <input
-              type="number"
-              min="1"
-              onkeypress="return event.charCode != 45"
-              formControlName="outliersTime"
-              class="number"
-            />
+                type="number"
+                min="1"
+                onkeypress="return event.charCode != 45"
+                formControlName="outliersTime"
+                class="number"
+              />
+              <div
+                *ngIf="submitted && f.outliersTime.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.outliersTime.errors.required">
+                  OutliersTime is required
+                </div>
+                <!-- <div *ngIf="f.outliersTime.errors.pattern">
+              Outliers Time must not be less than 1 hour.
+            </div> -->
+              </div>
             </span>
           </div>
         </div>
@@ -73,59 +69,6 @@
               <option value="TIME_PICKER">Start-End time picker</option>
               <option value="DURATION_PICKER">Duration picker</option>
             </select>
-          </div>
-        </div>
-        <div class="f-col col-33">
-          <label *ngIf="!submitted || !f.taxId.errors"> Tax ID</label>
-          <div *ngIf="submitted && f.taxId.errors" class="invalid-feedback">
-            <div *ngIf="f.taxId.errors.required">
-              TaxId is required
-            </div>
-            <div *ngIf="f.taxId.errors.pattern">
-              TaxId is not valid
-            </div>
-          </div>
-          <div class="form-row">
-            <input
-              type="text"
-              class="form-input"
-              formControlName="taxId"
-              placeholder="Enter Tax Id"
-            />
-          </div>
-        </div>
-        <div class="f-col col-33">
-          <label *ngIf="!submitted || !f.taxIdDescription.errors">
-            Tax ID description</label
-          >
-          <div
-            *ngIf="submitted && f.taxIdDescription.errors"
-            class="invalid-feedback"
-          >
-            <div *ngIf="f.taxIdDescription.errors.required">
-              Tax ID description is required
-            </div>
-            <div *ngIf="f.taxIdDescription.errors.pattern">
-              Tax ID description is not valid
-            </div>
-          </div>
-          <div class="form-row">
-            <input
-              type="text"
-              class="form-input"
-              formControlName="taxIdDescription"
-              placeholder="Enter Tax ID description"
-            />
-          </div>
-        </div>
-        <div class="f-col col-100">
-          <label> Memo of invoice</label>
-          <div class="form-row">
-            <textarea
-              class="form-input"
-              formControlName="conditions"
-              placeholder="Enter memo of invoice"
-            ></textarea>
           </div>
         </div>
       </div>

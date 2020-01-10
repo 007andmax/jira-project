@@ -41,23 +41,23 @@ export class TicketSettingsComponent implements OnInit {
       ],
       outliersTime: ['', Validators.compose([Validators.required])],
       timepickerType: ['DURATION_PICKER'],
-      taxId: [
-        '',
-        [
-          Validators.required,
-          Validators.maxLength(15),
-          Validators.pattern(/^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,15}$/)
-        ]
-      ],
-      taxIdDescription: [
-        '',
-        [
-          Validators.required,
-          Validators.maxLength(15),
-          Validators.pattern(/^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,15}$/)
-        ]
-      ],
-      conditions: ['']
+      // taxId: [
+      //   '',
+      //   [
+      //     Validators.required,
+      //     Validators.maxLength(15),
+      //     Validators.pattern(/^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,15}$/)
+      //   ]
+      // ],
+      // taxIdDescription: [
+      //   '',
+      //   [
+      //     Validators.required,
+      //     Validators.maxLength(15),
+      //     Validators.pattern(/^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,15}$/)
+      //   ]
+      // ],
+      // conditions: ['']
     });
 
     this.getCurrentCompany();
