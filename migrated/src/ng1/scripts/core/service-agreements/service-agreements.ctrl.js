@@ -6,8 +6,8 @@
     ['$scope', '$uibModal', 'AgreementsService', 'CompaniesService',
       'quicktech.common.services.UserConfirmationsService',
       'quicktech.common.services.UserNotificationService',
-      'quicktech.common.services.PermissionsService', 'ServicesService',
-      function ($scope, $uibModal, AgreementsService, CompaniesService, UserConfirmationsService, UserNotificationService, PermissionsService, ServicesService) {
+      'quicktech.common.services.PermissionsService', 'ServicesService','$rootScope',
+      function ($scope, $uibModal, AgreementsService, CompaniesService, UserConfirmationsService, UserNotificationService, PermissionsService, ServicesService,$rootScope) {
 
         $scope.parseDate = Date.parse.bind(Date);
         $scope.filterType = 'company.name';
@@ -44,7 +44,12 @@
           })
         };
 
+        $rootScope.$on('terminateAndEdit', function (evt, val) {
+          $scope.setInitEditAgreement(true); 
+          console.log('val',val);
+          $scope.openModal(val.type, true, val);
 
+        });
         AgreementsService.getAllServiceAgreements($scope, function (data) {
 
           $scope.agreementsList = data;
@@ -127,12 +132,12 @@
 
               if (resp.code !== 500) {
                 companyForReadOnlyMode = resp;
-                openModal(contractType, editMode, companyForReadOnlyMode)
+                $scope.openModal(contractType, editMode, companyForReadOnlyMode)
               }
 
             })
           } else {
-            openModal(contractType, editMode, companyForReadOnlyMode)
+            $scope.openModal(contractType, editMode, companyForReadOnlyMode)
           }
 
           function openModal(contractType, editMode, companyForReadOnlyMode) {
@@ -184,15 +189,61 @@
 
 
         };
+        $scope.openModal = function(contractType, editMode, companyForReadOnlyMode,preSetupCompany) {
+          if ($scope.allowToOpenAgreementModal) {
+            var template;
+            console.log('contractType',contractType);
+            switch (contractType) {
+              case ('CREATE_NEW'):
+                template = '/ng1/scripts/core/service-agreements/modal/create-new-modal.tpl.html';
+                break;
+              case ('HOURLY'):
+                template = '/ng1/scripts/core/service-agreements/modal/hourly-service-modal.tpl.html';
+                break;
+              case ('BLOCK_TIME'):
+                template = '/ng1/scripts/core/service-agreements/modal/block-time-billing-modal.tpl.html';
+                break;
+              case ('SERVICE_CONTRACT'):
+                template = (companyForReadOnlyMode.billType === 'OTHER') ? '/ng1/scripts/core/service-agreements/modal/service-contract-modal-other.tpl.html' :  '/ng1/scripts/core/service-agreements/modal/service-contract-modal.tpl.html';
+                break;
+              default:
+
+            }
+            $scope.allowToOpenAgreementModal = false;
+            var modalInstance = $uibModal.open({
+              templateUrl: template,
+              animation: true,
+              backdrop: false,
+              size: 'md',
+              controller: 'serviceAgreementsModalCtrl',
+              windowClass: 'create-popup margin-top-modal-dialog',
+              resolve: {
+                companyData: {
+                  editMode: editMode,
+                  isEditContract: $scope.isEditContract,
+                  companyForReadOnlyMode: companyForReadOnlyMode,
+                  contractType: contractType,
+                  preSetupCompany: preSetupCompany
+                }
+              }
+
+            });
+
+            modalInstance.opened.then(function () {
+              $scope.allowToOpenAgreementModal = true;
+            });
+          }
+
+        }
 
       }]).controller('serviceAgreementsModalCtrl', [
         '$scope', '$uibModalInstance', 'companyData', '$state',
         'ServicesService', 'CompaniesService', 'TaxesService',
         'AgreementsService', '$filter', '$q', '$timeout',
-        'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.UserNotificationService', 'Utils',
+        'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.UserNotificationService', 'Utils','$rootScope',
         function ($scope, $uibModalInstance, companyData, $state, ServicesService,
           CompaniesService, TaxesService, AgreementsService, $filter, $q, $timeout,
-          UserConfirmationsService, UserNotificationService, Utils) {
+          UserConfirmationsService, UserNotificationService, Utils,$rootScope) {
 
           $scope.taxes = TaxesService.getAll();
           console.log('companyData', companyData);
@@ -1114,11 +1165,20 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
 
               $scope.editService = { taxes: [] };
               var d = new Date($scope.editContract.startDate);
+              console.log('$scope.editContract',$scope.editContract);
+              $scope.editContract.startDate = $filter('date')(Date.now(), 'dd MMM yyyy');
               // if (d.getTime() < $scope.today) {
               //   $scope.editContract.startDate = '';
               //   $scope.editContract.endDate = '';
               // }
+              $scope.$apply();
             })
+          };
+
+          $scope.terminateAndEdit = function () {
+           
+            $scope.closeModal();
+            $rootScope.$broadcast('terminateAndEdit', $scope.editContract);
           };
 
 
