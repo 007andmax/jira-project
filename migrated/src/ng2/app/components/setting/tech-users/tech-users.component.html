@@ -234,7 +234,7 @@
             <tr *ngFor="let techUser of userlist; let i = index">
               <td class="tech-user">
                 <div class="t-user">
-                  <span class="user-dp online" *ngIf="techUser.avatar !== null">
+                  <span class="user-dp" *ngIf="techUser.avatar !== null">
                     <span class="user-tech-dp">
                       <img
                         *ngIf="techUser.isEmailVerified"
