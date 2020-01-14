@@ -196,13 +196,17 @@
                   </div>
 
                   <div class="interval-agreement">
+                   
                     <div class="dropdown">
                       <i class="icn-sm icn-caret-gray" style="position: absolute;top: 13px;right: 13px;z-index: 1;"></i>
-                      <input type="text" qt-data-time-picker min-date="serviceContract.startDate"
+                      <input type="text" qt-data-time-picker 
                              ng-if="reInitEndDate"
-                             max-date="serviceContract.endDate" default-date="serviceExpense.date"
+                          min-date="serviceContract.startDate"
+                          default-date="serviceExpense.date"
+                          ng-model="serviceExpense.date"
+                         
                              class="form-control has-dropdown" data-toggle="dropdown" aria-expanded="false"
-                             placeholder="Date" ng-model="serviceExpense.date"
+                             placeholder="Date" 
                              name="serviceDate" ng-required="true">
 
                     </div>
@@ -273,7 +277,7 @@
                       <input style="cursor: pointer;"
                              type="text" qt-data-time-picker min-date="serviceContract.startDate"
                              ng-if="reInitEndDate" default-date="defaultDareForServiceExpense"
-                             max-date="serviceContract.endDate"
+                             
                              class="form-control has-dropdown" data-toggle="dropdown" aria-expanded="false"
                              placeholder="Date" ng-model="newServiceExpense.date"
                              name="serviceDate" ng-required="true">

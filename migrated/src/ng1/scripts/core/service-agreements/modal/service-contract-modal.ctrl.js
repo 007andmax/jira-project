@@ -90,6 +90,7 @@
           preCreateFirstServicesEntities();
           createDefaultServices();
           createDefaultServiceContractServicesToTrack();
+          console.log('$scope.serviceContract.serviceExpenses',$scope.serviceContract.serviceExpenses);
          console.log('editContract',$scope.editContract);
           if ($scope.isEditContract) {
             

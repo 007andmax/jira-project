@@ -5,9 +5,9 @@
   angular.module('quicktech.core.serviceAgreements').controller('serviceContractOtherCtrl',
     ['$scope', 'AgreementsService', 'CompaniesService', 'ServicesService',
       'ProductsService', '$filter', '$timeout', 'TaxesService', '$q',
-      'quicktech.common.services.UserConfirmationsService', 'Utils',
+      'quicktech.common.services.UserConfirmationsService', 'Utils','$rootScope',
       function ($scope, AgreementsService, CompaniesService, ServicesService,
-                ProductsService, $filter, $timeout, TaxesService, $q, UserConfirmationsService, Utils) {
+                ProductsService, $filter, $timeout, TaxesService, $q, UserConfirmationsService, Utils,$rootScope) {
 
         $scope.intervals = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days'];
         $scope.serviceContractType = {
@@ -61,7 +61,14 @@
 
         $scope.openedTab = 'product';
 
+        $rootScope.$on('terminateAndCopy', function (evt, val) {
+          console.log('terminateAndCopy');
+          $scope.serviceContract.serviceExpenses.forEach((item) => {
+            item.date = $filter('date')(Date.now(), 'dd MMM yyyy');
+             item.startDate =  $scope.editContract.startDate;
+           })
 
+        });
 
         var day = 1000 * 60 * 60 * 24;
         var month = 30 * day;
@@ -87,6 +94,7 @@
             taxes: $scope.addDefaultTaxes(),
             taxIds: []
           };
+          
           $scope.reInitPrpductsExpenseNameField = true;
           preCreateFirstServicesEntities();
           createDefaultServices();
@@ -157,6 +165,11 @@
               }
             }
           }
+console.log('$scope.serviceContract.serviceExpenses',$scope.serviceContract.serviceExpenses);
+$scope.serviceContract.serviceExpenses.forEach((item) => {
+  item.date = $filter('date')(item.date, 'dd MMM yyyy');
+  item.startDate =  $scope.serviceContract.startDate;
+})
 
       /*    for(var g=0; g<$scope.serviceContract.serviceExpenses.length; g++) {
             $scope.serviceContract.serviceExpenses[g].quantity = $scope.serviceContract.serviceExpenses[g].quantity * 60;

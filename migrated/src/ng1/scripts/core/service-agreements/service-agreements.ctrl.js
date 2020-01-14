@@ -1201,13 +1201,20 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
 
               $scope.editService = { taxes: [] };
               var d = new Date($scope.editContract.startDate);
-              console.log('$scope.editContract',$scope.editContract);
+           
               $scope.editContract.startDate = $filter('date')(Date.now(), 'dd MMM yyyy');
+            /*  $scope.editContract.serviceExpenses.forEach((item) => {
+               item.date = $filter('date')(Date.now(), 'dd MMM yyyy');
+                item.startDate =  $scope.editContract.startDate;
+              })*/
+           
+              console.log('$scope.editContract',$scope.editContract);
               // if (d.getTime() < $scope.today) {
               //   $scope.editContract.startDate = '';
               //   $scope.editContract.endDate = '';
               // }
               $scope.$apply();
+              $rootScope.$broadcast('terminateAndCopy', null);
             })
           };
 
