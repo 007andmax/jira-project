@@ -1030,7 +1030,13 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
               current.setHours(0);
               console.log('current',current);
               console.log('startDate',startDate);
-              if (current.getTime() > startDate.getTime()) {
+
+              var now = new Date();
+              now.setMilliseconds(0);
+              now.setSeconds(0);
+              now.setMinutes(0);
+              now.setHours(0);
+              if (current.getTime() != startDate.getTime() && startDate.getTime() < now.getTime()) {
               
                  showErrorValidationCurrentDateTimeout();
                  return;
