@@ -202,6 +202,10 @@
       <div class="col-md-8" ng-show="showErrorValidationDuplicatesHourly">
         <p style="color: red; text-align: left">An agreement with current services already using for current company</p>
       </div>
+      <div class="col-md-8" ng-show="showErrorValidationCurrentDate">
+        <p style="color: red; text-align: left">Start date can be current day or future dates</p>
+      </div>
+      
       <div class="col-md-8" ng-show="showCreateHourlyContractValidationError">
         <p style="color: red; text-align: left">{{errorMessageCreateHourlyDuplicate}}</p>
       </div>

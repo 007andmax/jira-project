@@ -266,7 +266,7 @@
           $scope.notAddedHourlyServiceError = false;
 
           $scope.showErrorValidationDuplicatesHourly = false;
-
+$scope.showErrorValidationCurrentDate = false;
           $scope.showFieldsError = false;
           $scope.showAddServiceButton = true;
           $scope.showErrorInHourlyContract = false;
@@ -287,6 +287,7 @@
           $scope.reinitNewServiceForm = true;
           $scope.isEditContract = companyData.isEditContract;
           $scope.editMode = true;
+          $scope.startDate = 0;
 
           if (companyData.editMode) {
             console.log('companyData', companyData);
@@ -361,9 +362,11 @@
               $scope.editContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
               $scope.isEditContract = true;
               $scope.editContract.services = companyData.companyForReadOnlyMode.services;
+              $scope.startDate = new Date(angular.copy($scope.editContract.startDate));
             }
             if ($scope.isEditContract && companyData.contractType === 'BLOCK_TIME' || $scope.isEditContract && companyData.contractType === 'SERVICE_CONTRACT') {
               $scope.editContract = companyData.companyForReadOnlyMode;
+              $scope.startDate = new Date(angular.copy($scope.editContract.startDate));
 
             }
            
@@ -547,11 +550,12 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
 
             if (date && date.length > 0) {
               var startDate = new Date(date);
-
+             
               var startMonth = startDate.getMonth() + 1;
               //$scope.editContract.startDate = startDate.getFullYear() + "/" + addZeroIfNeed(startMonth) + "/" + addZeroIfNeed(startDate.getDate());
+            
               $scope.editContract.startDate = $filter('date')(startDate, 'dd MMM yyyy');
-              $scope.startDate = $scope.editContract.startDate;
+            
               var endDate = new Date(date);
               //endDate.setMonth(endDate.getMonth() + 1);
               var n = Utils.addNumberOfMonth(endDate, 1);
@@ -563,6 +567,7 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
               // setMiNDateForEndDate(f);
               // reInitEndDateHourly(newEndDate);
               $scope.endDatePicker(newEndDate, true);
+             
               // setDefaultTime(newEndDate)
 
             }
@@ -799,6 +804,13 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
             }, 4000);
           }
 
+          function showErrorValidationCurrentDateTimeout() {
+            $scope.showErrorValidationCurrentDate = true;
+            $timeout(function () {
+              $scope.showErrorValidationCurrentDate = false;
+            }, 4000);
+          }
+
 
           function checkForDuplicateServiceNames() {
 
@@ -1005,6 +1017,24 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
           $scope.validateAndUpdateHourlyContract = function (editService) {
 
             if (!checkForInvalidFields()) {
+              var startDate = new Date($scope.editContract.startDate);
+              startDate.setMilliseconds(0);
+              startDate.setSeconds(0);
+              startDate.setMinutes(0);
+              startDate.setHours(0);
+
+              var current = new Date($scope.startDate);
+              current.setMilliseconds(0);
+              current.setSeconds(0);
+              current.setMinutes(0);
+              current.setHours(0);
+              console.log('current',current);
+              console.log('startDate',startDate);
+              if (current.getTime() > startDate.getTime()) {
+              
+                 showErrorValidationCurrentDateTimeout();
+                 return;
+              }
               var emptyNewService = true;
 
               if (editService && editService.name && editService.name.length) {
