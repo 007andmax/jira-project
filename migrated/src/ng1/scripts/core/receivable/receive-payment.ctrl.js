@@ -296,7 +296,7 @@
           $scope.disableReceiveButton = true;
  
           ReceivableService.receivePayment(
-            $scope.invoiceToReceive.method, invoiceIdPayment, !!$scope.invoiceToReceive.isSendNotification, $scope.note.replaceAll('$','&#36;'),
+            $scope.invoiceToReceive.method, invoiceIdPayment, !!$scope.invoiceToReceive.isSendNotification,($scope.note) ? $scope.note.replaceAll('$','&#36;') : "",
             function () {
               $uibModalInstance.dismiss('cancel');
               $scope.disableReceiveButton = false;
