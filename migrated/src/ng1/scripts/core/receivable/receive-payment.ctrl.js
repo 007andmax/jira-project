@@ -244,6 +244,19 @@
           }
         };
 
+        String.prototype.replaceAll = function(searchStr, replaceStr) {
+          var str = this;
+        
+            // no match exists in string?
+            if(str.indexOf(searchStr) === -1) {
+                // return string
+                return str;
+            }
+        
+            // replace and remove first match, and do another recursirve search/replace
+            return (str.replace(searchStr, replaceStr)).replaceAll(searchStr, replaceStr);
+        }
+
         $scope.receivePayment = function (form) {
           if (checkNoteError()) {
             $scope.noteError = true;
@@ -281,9 +294,9 @@
             }
           }
           $scope.disableReceiveButton = true;
-
+ 
           ReceivableService.receivePayment(
-            $scope.invoiceToReceive.method, invoiceIdPayment, !!$scope.invoiceToReceive.isSendNotification, $scope.note,
+            $scope.invoiceToReceive.method, invoiceIdPayment, !!$scope.invoiceToReceive.isSendNotification, $scope.note.replaceAll('$','&#36;'),
             function () {
               $uibModalInstance.dismiss('cancel');
               $scope.disableReceiveButton = false;
