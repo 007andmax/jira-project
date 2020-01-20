@@ -246,6 +246,7 @@ export class QuoteCreateContentComponent implements OnInit {
    */
   public setRegularNote(value) {
     this.quoteForm.controls['regularNote'].setValue(value);
+    console.log('value',value);
   }
 
   /**

@@ -93,7 +93,8 @@ export class QuoteCreateContentNotesComponent implements OnInit {
     this.isEditMode = true;
     this.selectedNote = note.item;
     this.selectedRegularNoteItem.next(this.selectedNote);
-    this.quoteStateService.setSelectedNote(note.item.line1);
+   // this.quoteStateService.setSelectedNote(note.item.line1);
+   this.quoteStateService.setSelectedNote(note.item);
     this.quoteStateService.setSelectedNoteFull(note.item);
   }
 
