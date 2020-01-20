@@ -172,17 +172,9 @@ export class QuoteCreateContentComponent implements OnInit {
    */
   approveQuote() {
     const isFormReady = this.quoteStateService.getType();
-    if (isFormReady && !this.editMode) {
-      this.quoteService.createQuote(this.quoteForm.value, false)
-        .pipe(takeUntil(this.unsubscribe))
-        .subscribe((res) => {
-          this.quoteService.approveQuote(res['company'], res['id'])
-            .pipe(takeUntil(this.unsubscribe))
-            .subscribe((res) => {
-              this.quoteStateService.goToQuote();
-            });
-      })
-    } else if (isFormReady && this.editMode) {
+    console.log('this.editMode',this.editMode);
+    console.log('isFormReady',isFormReady);
+    if (isFormReady && this.editMode && this.quoteStateService.getQuoteCreate()['id']) {
       const currentQuote = this.quoteStateService.getQuoteCreate();
       this.quoteService.editQuote(this.quoteForm.value, currentQuote['id'], true)
       .pipe(takeUntil(this.unsubscribe))
@@ -193,7 +185,18 @@ export class QuoteCreateContentComponent implements OnInit {
               this.quoteStateService.goToQuote();
             });
       })
-    } else {
+    } else if (isFormReady) {
+
+      this.quoteService.createQuote(this.quoteForm.value, false)
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((res) => {
+        this.quoteService.approveQuote(res['company'], res['id'])
+          .pipe(takeUntil(this.unsubscribe))
+          .subscribe((res) => {
+            this.quoteStateService.goToQuote();
+          });
+    })
+  } else {
       this.quoteStateService.emitValidation();
     }
   }
@@ -203,16 +206,7 @@ export class QuoteCreateContentComponent implements OnInit {
    */
   public downloadPdf() {
     const isFormReady = this.quoteStateService.getType();
-    if (isFormReady && !this.editMode) {
-      this.quoteService.createQuote(this.quoteForm.value, false).pipe(takeUntil(this.unsubscribe))
-      .subscribe((res) => {
-        const id = res['id'];
-        this.quoteService.downloadPdf(res['id']).subscribe((res) => {
-          this.quoteService.downLoadFile(res, id,this.quoteStateService.getQuoteCreate().client.name,this.quoteNumber);
-          this.quoteService.backToQuoteList();
-        });
-      })
-    } else if (isFormReady && this.editMode) {
+    if (isFormReady && this.editMode && this.quoteStateService.getQuoteCreate().id) {
       const currentQuote = this.quoteStateService.getQuoteCreate();
       this.quoteService.editQuote(this.quoteForm.value, currentQuote['id'], true)
       .pipe(takeUntil(this.unsubscribe))
@@ -223,7 +217,16 @@ export class QuoteCreateContentComponent implements OnInit {
           this.quoteService.backToQuoteList();
         });
       })
-    } else {
+    } else if (isFormReady)  {
+      this.quoteService.createQuote(this.quoteForm.value, false).pipe(takeUntil(this.unsubscribe))
+      .subscribe((res) => {
+        const id = res['id'];
+        this.quoteService.downloadPdf(res['id']).subscribe((res) => {
+          this.quoteService.downLoadFile(res, id,this.quoteStateService.getQuoteCreate().client.name,this.quoteNumber);
+          this.quoteService.backToQuoteList();
+        });
+      })
+    }  else {
       this.quoteStateService.emitValidation();
     }
 

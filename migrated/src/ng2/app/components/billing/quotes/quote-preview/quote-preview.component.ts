@@ -69,6 +69,8 @@ export class QuotePreviewComponent implements OnInit {
     this.getItemsArray();
     this.editable = this.quoteStateService.getState().params.editable;
     this.editMode = this.quoteStateService.getState().params.editMode;
+    console.log('this.editable',this.editable);
+    console.log('this.editMode',this.editMode);
     this.handleSendMode();
     if (this.editMode) this.quoteForm = this.quoteStateService.getQuoteForm();
     this.quote.client = this.quoteStateService.getClent();

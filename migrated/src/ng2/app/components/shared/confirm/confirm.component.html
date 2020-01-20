@@ -14,7 +14,7 @@
   </div>
 </div> -->
 
-<div class="archive-modal" *ngIf="action !== 'ARCHIVE_COMPANY' && action !== 'DEARCHIVE_COMPANY'">
+<div class="archive-modal" *ngIf="action !== 'ARCHIVE_COMPANY' && action !== 'DEARCHIVE_COMPANY' && action !== 'SAVE_AND_SEND'">
   <button class="close-modal" (click)=cancelConfirm()></button>
   <div class="archive-modal__body">
     <h3>Archive this User ?</h3>
@@ -55,3 +55,17 @@
     </div>
   </div>
 </div>
+
+<div class="archive-modal" *ngIf="action === 'SAVE_AND_SEND'">
+  <button class="close-modal" (click)=cancelConfirm()></button>
+  <div class="archive-modal__body modal-body">
+    <p [textContent]="message"></p>
+  </div>
+  <div class="archive-modal__footer">
+    <div class="d-f">
+      <button class="btn-new btn-primary"  (click)=approveConfirm()>Yes, I am sure</button>
+      <button class="btn-new disabled" (click)=cancelConfirm()>Cancel</button>
+    </div>
+  </div>
+</div>
+

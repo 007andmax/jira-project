@@ -181,9 +181,9 @@ export class QuoteCreateContentNotesComponent implements OnInit {
    * @param value - new note value
    */
   public showCreateNew(value) {
-    this.selectedNote['line1'] = value;
+  if (this.selectedNote && this.selectedNote.line1) this.selectedNote['line1'] = value;
     this.selectedNoteText = value;
-    this.isShowCreateNew = true;
+   if (this.isEditMode) this.isShowCreateNew = true;
     this.quoteStateService.setSelectedNote(value);
   }
   

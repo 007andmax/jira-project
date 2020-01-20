@@ -16,6 +16,7 @@ import { ConfirmStateService } from 'src/ng2/app/components/shared/confirm/servi
 import { ConfirmComponent } from 'src/ng2/app/components/shared/confirm/confirm.component';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { NotificationStateService } from 'src/ng2/app/components/shared/notification/services/notification-state.service';
+import { SAVE_AND_SEND } from 'src/ng2/app/const/confirm';
  
  
 
@@ -125,6 +126,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
     }
     if (this.isChange) {
       this.showConfirm = true;
+      this.confirmStateService.setConfirmAction(SAVE_AND_SEND);
       const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
       
       modalRef.componentInstance.message = 'Do you want to close this window? All entered information will be lost.';
