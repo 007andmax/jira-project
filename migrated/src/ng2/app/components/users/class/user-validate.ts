@@ -89,11 +89,6 @@ export class UserValidate {
                 }
             })
         }
-
-
-
-        console.log('this.phoneNumber', this.phoneNumber);
-        console.log('this.phoneNumber', phoneNumbers);
         return this.firstName && this.company && this.primaryContactEmail && phoneNumbers;
 
     }

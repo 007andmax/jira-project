@@ -49,15 +49,15 @@ export class UsersAsideEditComponent implements OnInit {
     this.onCroppImage();
     this.usersStateService.getOpenEditAside().subscribe(data => {
       this.role.clearClient()
-      console.log('fefefefe', this.usersStateService.getuserForEdit());
+       
       this.opened = true;
       this.user.onEdit(this.usersStateService.getuserForEdit());
       this.validate.addPhoneNumbers(this.user.phoneNumbers);
       let company = this.companiesStateService.getCompanies().find(item => item.id === this.user.companyId);
-      console.log('company', company);
+       
       this.companiesState.setCompanyFromtEdit(company);
       this.companySubscriptionState.onEditMode(this.user.subscription);
-      console.log('this.user', this.user);
+       
       
     })
     
@@ -123,7 +123,7 @@ export class UsersAsideEditComponent implements OnInit {
     this.validate.addPhoneNumber();
   }
   onChangeSubscriptions(data) {
-    console.log('data', data);
+     
     data.forEach(item => this.user.subscription[item.field] = item.selected);
     // this.user.setSubscriptions(data);
   }
@@ -132,7 +132,7 @@ export class UsersAsideEditComponent implements OnInit {
   }
   onCheckPhoneNumber(i) {
     this.validate.checkValidPhoneNumber(i, this.user.phoneNumbers[i].number);
-    console.log('this.validate', this.validate.getPhoneNumber(i));
+     
   }
   onSelectDesignation(data) {
     this.user.setDesignation(data);
@@ -157,7 +157,7 @@ export class UsersAsideEditComponent implements OnInit {
   onSave() {
     if (!this.validate.isValidate(this.user)) return;
 
-    console.log('33333333333');
+     
     this.usersService.updateUser(this.user.getUserForUpdate(this.usersStateService.getuserForEdit())).subscribe(data => {
       this.close();
     })
@@ -165,10 +165,10 @@ export class UsersAsideEditComponent implements OnInit {
   }
   public onChangeAvatar() {
     this.imageCropperStateService.setAction(CROPP_AVATAR_USER);
-    console.log('onChangeAvatar');
+     
     this.downloadCompanyLogo().then(data => {
       //   const modalRef = this.modalService.open(ImageCropperComponent);
-      console.log('data', data);
+       
       //  modalRef.componentInstance.imageBase64 = data;
       //  modalRef.componentInstance.id = this.user.avatar.origin.id;
       this.modalImageCropperStateService.onInitOpen(new ImageCroper(data, this.user.avatar.origin.id, true));

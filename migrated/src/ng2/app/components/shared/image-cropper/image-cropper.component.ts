@@ -22,7 +22,7 @@ export class ImageCropperComponent implements OnInit {
   @Input() public data = '';
   constructor(public activeModal: NgbActiveModal,public cd: ChangeDetectorRef,
      private imageCropperStateService: ImageCropperStateService, private companiesService: CompaniesService,  config: NgbModalConfig,) { 
-      console.log('4444444444444444',this.imageBase64);
+       
       this.cd.detectChanges();
     config.backdrop = 'static';
     config.keyboard = false;
@@ -30,7 +30,7 @@ export class ImageCropperComponent implements OnInit {
 
   ngOnInit() {
 //this.cd.detectChanges();
-console.log('3333333333333333');
+ 
   }
 
 
@@ -42,7 +42,7 @@ console.log('3333333333333333');
     this.img = event.base64;
   }
   imageLoaded() {
-    console.log('4444444444444444',this.imageBase64);
+     
     this.cd.detectChanges();
   }
   closeModal() {
@@ -56,7 +56,7 @@ console.log('3333333333333333');
   };
 
   approveConfirm() {
-    console.log('approveConfirm');
+     
     this.activeModal.close();
      this.imageCropperStateService.setConfirm(new ImageCropper(this.croppedImage,this.id,this.edit));
 

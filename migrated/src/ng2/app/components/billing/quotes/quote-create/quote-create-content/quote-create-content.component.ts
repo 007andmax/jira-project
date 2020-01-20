@@ -172,8 +172,7 @@ export class QuoteCreateContentComponent implements OnInit {
    */
   approveQuote() {
     const isFormReady = this.quoteStateService.getType();
-    console.log('this.editMode',this.editMode);
-    console.log('isFormReady',isFormReady);
+    
     if (isFormReady && this.editMode && this.quoteStateService.getQuoteCreate()['id']) {
       const currentQuote = this.quoteStateService.getQuoteCreate();
       this.quoteService.editQuote(this.quoteForm.value, currentQuote['id'], true)

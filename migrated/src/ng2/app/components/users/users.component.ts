@@ -102,16 +102,16 @@ export class UsersComponent implements OnInit {
         } 
       }
      
-      console.log('showArchivedUsers',this.showArchivedUsers);
+       
       if (data.action === 'USERS_DEARCHIVED') {
-        console.log('data',data);
+         
         data.data.forEach(user => {
           const reqIndex = this.reqUsers.findIndex((item) => item.id === user.id);
           if (reqIndex > -1) this.reqUsers[reqIndex] = new User(user);
           if (this.showArchivedUsers)
           {
             const userIndex = this.users.findIndex((item) => item.id === user.id);
-            console.log('userIndex',userIndex);
+             
             if (userIndex > -1) this.users.splice(userIndex,1);
           }
         })
@@ -127,17 +127,15 @@ export class UsersComponent implements OnInit {
   }
   private onInitSubscribe () {
     setTimeout(() => {
-     console.log('onInitSubscribe');
+      
      let stompClient = this.websocketService.getClient().subscribe(`/user/watch/subscription/${this.companiesStateService.getCurrentCompany().id}`, (message) => {
         var newChange = JSON.parse(message.body);
-        console.log('newChange',newChange);
+         
         if (newChange.action === 'SUBSCRIPTION_SAVED') {
           const reqIndex = this.reqUsers.findIndex((item) => item.id === newChange.data.user.id);
           if (reqIndex > -1) this.reqUsers[reqIndex].changeSubscriptions(newChange.data);
           const userIndex = this.users.findIndex((item) => item.id === newChange.data.user.id);
-          console.log('userIndex',userIndex);
           if (userIndex > -1) this.users[userIndex].changeSubscriptions(newChange.data);
-          if (userIndex > -1) console.log(this.users[userIndex]);
           this.cd.detectChanges();
         }
       });
@@ -190,7 +188,7 @@ export class UsersComponent implements OnInit {
     this.userListService.addSubscription(archiveUser);
   }
   private getUsersList(data) {
-    console.log('data',data);
+     
     this.reqUsers = data.filter(item => ((!this.showArchivedUsers) ? !item.deletedAt : item.deletedAt) && item.accountType !== "TECH");
 
     // this.onInirCalculate();
@@ -218,7 +216,7 @@ export class UsersComponent implements OnInit {
     }
     this.page_number += 1;
     let listFilter = this.filter.getFilterList(this.reqUsers, this.companies);
-    console.log('listFilter.length',listFilter.length);
+     
     this.count = listFilter.length;
     
     let start = (this.page_number - 1) * 30;

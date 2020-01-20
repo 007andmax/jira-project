@@ -32,9 +32,7 @@ export class UserFilter {
         return this.clientType;
     }
     public getFilterList(reqCompaniesList: Array<User>,companies:Array<Company>) {
-        console.log('this.company',this.company);
-        console.log('this.clientIndustry',this.clientIndustry);
-      //  console.log('clientIndustry',clientIndustry);
+         
         let list = reqCompaniesList.filter(item => {
             let indexCompany = companies.findIndex( company => company.id === item.company.id);
             let clientType:boolean = false;

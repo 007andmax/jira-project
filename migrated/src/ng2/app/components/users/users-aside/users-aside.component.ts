@@ -81,7 +81,7 @@ export class UsersAsideComponent implements OnInit {
     this.validate.addPhoneNumber();
   }
   onChangeSubscriptions(data) {
-    console.log('data', data);
+     
     data.forEach(item => this.user.subscription[item.field] = item.selected);
   //  this.user.setSubscriptions(data);
   }
@@ -90,10 +90,10 @@ export class UsersAsideComponent implements OnInit {
   }
   onCheckPhoneNumber(i) {
     this.validate.checkValidPhoneNumber(i, this.user.phoneNumbers[i].number);
-    console.log('this.validate', this.validate.getPhoneNumber(i));
+     
   }
   onSelectDesignation(data) {
-    console.log('data',data);
+     
     this.user.setDesignation(data);
   }
   onSelectRole(data) {
@@ -118,8 +118,6 @@ export class UsersAsideComponent implements OnInit {
   }
   onAdd() {
     if (!this.validate.isValidate(this.user)) return;
-
-    console.log('33333333333');
     this.usersService.addUser(this.user.getUserForAdd()).subscribe(data => {
       this.close();
     })

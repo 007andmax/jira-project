@@ -37,11 +37,11 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
     this.leftPanelUsersService.addSubscription(getOnUsers);
     this.industries = this.companiesState.getIndustries();
     this.leftPanelService.getIndustryHistoryUsers().subscribe((data: Array<string>) => {
-      console.log('data', data);
+       
       this.industryHistory = data;
     })
     this.leftPanelService.getCompaniesHistory().subscribe((data: Array<string>) => {
-      console.log('data', data);
+       
       this.companiesHistory = data;
     })
     if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
@@ -60,7 +60,7 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
       return;
     }
     this.selectedCompany = null;
-    console.log('item',item);
+     
     this.filter.setCompany(item.id);
     this.usersStateService.onInitFilter(this.filter);
     this.companiesHistory.pop();
@@ -120,7 +120,7 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
   public selectClientIndustry(item) {
    
     this.selectedClientIndustry = item;
-    console.log('item',this.selectedClientIndustry);
+     
     //  this.showClearIndustry = true;
   //  this.clientIndustry = item;
     this.filter.setClientIndustry(item);
@@ -128,12 +128,12 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
     this.cd.detectChanges();
   }
   selectClientCompany(item) {
-    console.log('item',item);
+     
    
     let indexCompany = this.companiesState.getCompanies().findIndex(company => company.name === item);
     //  this.showClearIndustry = true;
     // this.clientIndustry = item;
-    console.log('this.companiesState.getCompanies()[indexCompany].id',this.companiesState.getCompanies()[indexCompany].id);
+     
     this.selectedCompany = this.companiesState.getCompanies()[indexCompany];
     this.filter.setCompany(this.companiesState.getCompanies()[indexCompany].id);
     this.usersStateService.onInitFilter(this.filter);
@@ -153,7 +153,7 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
     this.usersStateService.onInitFilter(this.filter);
   }
   onSelectTitle(data) {
-    console.log('onSelectTitle', data);
+     
     this.filter.setTitle(data);
     this.usersStateService.onInitFilter(this.filter);
   }

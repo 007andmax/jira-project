@@ -275,10 +275,10 @@ public onCheckGoogleAutoComplete () {
     this.sub.add(getConfirm);
   }
   public onChangeAvatar() {
-    console.log('onChangeAvatar');
+     
     this.downloadCompanyLogo().then(data => {
    //   const modalRef = this.modalService.open(ImageCropperComponent);
-      console.log('data',data);
+       
     //  modalRef.componentInstance.imageBase64 = data;
     //  modalRef.componentInstance.id = this.company.logo.origin.id;
     this.modalImageCropperStateService.onInitOpen(new ImageCroper(data,this.company.logo.origin.id,true));
@@ -373,7 +373,7 @@ public onCheckGoogleAutoComplete () {
         let res = JSON.parse(data.response);
         // this.changeFile(file).then((base64: string): any => {
       //  const modalRef = this.modalService.open(ImageCropperComponent,res.base64);
-        console.log('res.base64',res.base64);
+     
       //  modalRef.componentInstance.imageBase64 = res.base64;
      //   modalRef.componentInstance.id = res.id;
         event.target.value = null;

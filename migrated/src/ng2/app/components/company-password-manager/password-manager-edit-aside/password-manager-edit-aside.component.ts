@@ -119,7 +119,7 @@ export class CompanyPasswordManagerEditAsideComponent implements OnInit {
     this.hideAddForm();
     this.onGetUsers();
    // this.oGetDevices();
-console.log('ngOnInit');
+ 
 
   }
 
@@ -173,7 +173,7 @@ console.log('ngOnInit');
       this.selectedUserAndDevices = [];
       this.opened = false;
       this.subShowAddForm.unsubscribe();
-      console.log('ngOnInit');
+       
       
     });
   }
@@ -487,8 +487,7 @@ console.log('ngOnInit');
   }
 
   public togglePassword() {
-    console.log('this.showPassword',this.showPassword);
-    console.log('this.editItem',this.editItem);
+     
     if (!this.showPassword) {
       if (this.editItem)
       {

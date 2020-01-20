@@ -26,14 +26,13 @@ export class ModalImageCropperComponent implements OnInit, OnDestroy {
     private imageCropperStateService: ImageCropperStateService, private companiesService: CompaniesService,
     private modalImageCropperStateService: ModalImageCropperStateService,
     private elRef: ElementRef, ) {
-    console.log('4444444444444444', this.imageBase64);
+     
 
   }
 
   ngOnInit() {
     //this.cd.detectChanges();
-    console.log('imageCroper', this.imageCroper);
-    console.log('3333333333333333');
+     
     this.modalImageCropperStateService.getOnOpen().subscribe((data:ImageCroper) => {
       this.imageBase64 = data.imageBase64;
       
@@ -74,7 +73,7 @@ export class ModalImageCropperComponent implements OnInit, OnDestroy {
   };
 
   approveConfirm() {
-    console.log('approveConfirm');
+     
     //  this.activeModal.close();
   this.closeModal();
     this.imageCropperStateService.setConfirm(new ImageCropper(this.croppedImage, this.id, this.edit));

@@ -35,7 +35,7 @@ export class UsersStateService {
    /*   let users = data.map((item) => {
         return new User(item);
       })*/
-      console.log('data',data);
+       
       this.setAllUsers(data);
       this.onInitGetUsers(data);
     })

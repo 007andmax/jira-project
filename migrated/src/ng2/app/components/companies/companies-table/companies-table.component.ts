@@ -45,7 +45,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     private elRef: ElementRef) { }
 
   ngOnInit() {
-console.log('this',this.company);
+ 
     /*  this.companiesStateService.getOnShowArchived().subscribe(data => {
         this.showArchivedCompanies = data;
       })*/
@@ -140,7 +140,7 @@ checkLogo() {
   }
   edit() {
     let getCompany = this.companiesService.getCompany(this.company.id).subscribe((data: CompanyProfile) => {
-      console.log('data',data);
+       
       this.companiesStateService.setEditCompany(data);
     })
     this.sub.add(getCompany);
@@ -170,7 +170,7 @@ checkLogo() {
   }
 
   onSelectCompany(event) {
-    console.log('event',event.target.checked);
+     
     if (event.target.checked) {
       this.draftEmailStateService.addSelectedCompany(this.company);
     } else {

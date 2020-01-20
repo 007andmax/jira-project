@@ -496,8 +496,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
   }
 
   public togglePassword() {
-    console.log('this.showPassword',this.showPassword);
-    console.log('this.editItem',this.editItem);
+     
     if (!this.showPassword) {
       if (this.editItem) {
         this.isLoadPassword = true;

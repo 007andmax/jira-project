@@ -23,7 +23,7 @@ export class UserUpdate {
   userEnabled: boolean;
   constructor(data: UserProfile, user: User) {
     this.role = data.role;
-    console.log('user',user);
+     
     if (data.phoneNumbers.length === 1 && data.phoneNumbers[0].number === '' && user.phoneNumbers.length === 0){
       this.phoneNumbers = [];
     } else {
@@ -32,7 +32,7 @@ export class UserUpdate {
           return new UserPhoneNumber(null, item.number, item.typeNumber, null);
     
         } else {
-          console.log('user.phoneNumbers[index]',user.phoneNumbers[index]);
+           
           return new UserPhoneNumber(user.phoneNumbers[index].id, item.number, item.typeNumber, user.phoneNumbers[index].priority);
     
         }
