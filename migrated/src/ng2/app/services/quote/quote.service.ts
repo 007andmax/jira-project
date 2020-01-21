@@ -51,6 +51,7 @@ export class QuoteService {
     this.itemsListArray = this.quoteStateService.getItemArray();
     this.productsArray = this.getProductItems(this.itemsListArray, 'product');
     this.servicesArray = this.getProductItems(this.itemsListArray, 'service', true);
+    console.log('value',value);
     return this.http.post(`${this.apiUrl}saleQuotes`, {
       "companyId": (value.client && value.client.item) ? value.client.item.id : value.client.id,
       "number": this.quoteStateService.getQuoteNumber(),
@@ -72,7 +73,7 @@ export class QuoteService {
       "message": notification ? this.quoteStateService.getQuoteCreate()['message'] : null,
       "subject": notification ? this.quoteStateService.getQuoteCreate()['subject'] : null,
       "globalNote": value.globalNote ? value.globalNote : this.quoteStateService.getGlobalNote(),
-      "regularNote": value.regularNote ? value.regularNote : this.quoteStateService.getSelectedNote(),
+      "regularNote":  this.quoteStateService.getSelectedNote() ? this.quoteStateService.getSelectedNote() : this.quoteStateService.getRegularNote(value.selectedNote),
       "sendNotification": notification
     }).pipe(
       tap(data => this.handleQuoteSent(data, (notification) ? 'Quote has been sent' : 'Quote has been saved')),

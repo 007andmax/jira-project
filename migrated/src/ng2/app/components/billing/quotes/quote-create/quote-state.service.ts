@@ -623,6 +623,14 @@ export class QuoteStateService {
     this.handleSendMode.emit();
   }
 
+  public getRegularNote(value) {
+    return {
+      noteType: "REGULAR",
+      line1: value,
+      line2: ""
+    }
+  }
+
    /**
    * set emails recipients
    * @param value emails

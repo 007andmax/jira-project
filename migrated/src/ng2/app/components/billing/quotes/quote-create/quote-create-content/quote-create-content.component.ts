@@ -147,15 +147,16 @@ export class QuoteCreateContentComponent implements OnInit {
             })
         }
       } else {
+        console.log('currentQuote',currentQuote);
         if (notification) {
-          this.quoteService.createQuote(this.quoteForm.value, true)
+          this.quoteService.createQuote(currentQuote, true)
             .pipe(takeUntil(this.unsubscribe))
             .subscribe((res) => {
           
               this.quoteStateService.goToQuote();
             })
         } else {
-          this.quoteService.createQuote(this.quoteForm.value, false)
+          this.quoteService.createQuote(currentQuote, false)
             .pipe(takeUntil(this.unsubscribe))
             .subscribe((res) => {
               this.quoteStateService.goToQuote();
@@ -172,9 +173,9 @@ export class QuoteCreateContentComponent implements OnInit {
    */
   approveQuote() {
     const isFormReady = this.quoteStateService.getType();
-    
-    if (isFormReady && this.editMode && this.quoteStateService.getQuoteCreate()['id']) {
-      const currentQuote = this.quoteStateService.getQuoteCreate();
+    const currentQuote = this.quoteStateService.getQuoteCreate();
+    if (isFormReady && this.editMode && currentQuote['id']) {
+  
       this.quoteService.editQuote(this.quoteForm.value, currentQuote['id'], true)
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((res) => {
@@ -185,8 +186,8 @@ export class QuoteCreateContentComponent implements OnInit {
             });
       })
     } else if (isFormReady) {
-
-      this.quoteService.createQuote(this.quoteForm.value, false)
+     
+      this.quoteService.createQuote(currentQuote, false)
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((res) => {
         this.quoteService.approveQuote(res['company'], res['id'])
@@ -205,8 +206,10 @@ export class QuoteCreateContentComponent implements OnInit {
    */
   public downloadPdf() {
     const isFormReady = this.quoteStateService.getType();
-    if (isFormReady && this.editMode && this.quoteStateService.getQuoteCreate().id) {
-      const currentQuote = this.quoteStateService.getQuoteCreate();
+    console.log('isFormReady',isFormReady);
+    const currentQuote = this.quoteStateService.getQuoteCreate();
+    if (isFormReady && this.editMode && currentQuote.id) {
+    
       this.quoteService.editQuote(this.quoteForm.value, currentQuote['id'], true)
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((res) => {
@@ -217,7 +220,7 @@ export class QuoteCreateContentComponent implements OnInit {
         });
       })
     } else if (isFormReady)  {
-      this.quoteService.createQuote(this.quoteForm.value, false).pipe(takeUntil(this.unsubscribe))
+      this.quoteService.createQuote(currentQuote, false).pipe(takeUntil(this.unsubscribe))
       .subscribe((res) => {
         const id = res['id'];
         this.quoteService.downloadPdf(res['id']).subscribe((res) => {

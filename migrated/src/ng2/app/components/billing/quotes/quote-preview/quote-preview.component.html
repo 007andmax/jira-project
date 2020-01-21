@@ -14,9 +14,9 @@
             <i class="icn-sm pointer report-caret-icon-white"></i>
           </button>
           <div class="dropdown-menu" ngbDropdownMenu>
-            <button class="dropdown-item" ngbDropdownItem (click)="approveQuote()" *ngIf="editMode">Save and Approve
+            <button class="dropdown-item" ngbDropdownItem (click)="approveQuote()"  >Save and Approve
             </button>
-            <button class="dropdown-item" ngbDropdownItem (click)="save()" *ngIf="!editMode">Save and Continue</button>
+            <button class="dropdown-item" ngbDropdownItem (click)="save()"  >Save and Continue</button>
 
             <button class="dropdown-item" ngbDropdownItem (click)="downloadPdf()">Save and Download</button>
           <!--  <button class="dropdown-item" ngbDropdownItem (click)="saveAndSend()">Save and Send</button>-->
@@ -160,7 +160,7 @@
         </div>
         <div class="clearfix">
           <div class="col-md-8 pl-30 notes">
-            {{(quoteForCreate.selectedNote.line1) ? quoteForCreate.selectedNote.line1 : quoteForCreate.selectedNote}}
+            {{(quoteForCreate.selectedNote && quoteForCreate.selectedNote.line1) ? quoteForCreate.selectedNote.line1 :(quoteForCreate.selectedNote) ? quoteForCreate.selectedNote : ""}}
           </div>
           <div class="col-md-2 bold fz-11" style="padding: 8px 15px;">Tax</div>
           <div class="col-md-2 text-right pr-30" style="padding: 8px 15px;">{{quote.totalTaxes | currency}}</div>
