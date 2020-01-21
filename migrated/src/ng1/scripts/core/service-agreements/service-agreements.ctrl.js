@@ -43,8 +43,11 @@
             if ($scope.closeModal) $scope.closeModal();
           })
         };
-
-        $rootScope.$on('terminateAndEdit', function (evt, val) {
+        $scope.$on('$destroy', function() {
+         
+          terminateAndEdit();
+        });
+      var terminateAndEdit =  $rootScope.$on('terminateAndEdit', function (evt, val) {
           $scope.setInitEditAgreement(true); 
           console.log('val',val);
           $scope.openModal(val.type, true, val);
