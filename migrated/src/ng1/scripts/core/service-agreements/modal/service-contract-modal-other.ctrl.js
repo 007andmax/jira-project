@@ -15,6 +15,7 @@
           USER: 'By Users',
         //  OTHER: 'Other'
         };
+        $scope.currentCompany = CompaniesService.getCurrentCompany();
         $scope.defaultServicesAdditional = [];
         $scope.defaultServicesAdditionalForDropDown = [];
 
@@ -104,16 +105,23 @@
            
             $scope.serviceContract = angular.copy($scope.editContract);
           $scope.reInitPrpductsExpenseNameField = false;
+          $scope.serviceContract.endDate = new Date($scope.serviceContract.endDate - $scope.currentCompany.addresses[0].timeZone.timeOffset);//$filter('date')(new Date($scope.serviceContract.endDate), 'dd MMM yyyy');
           $scope.serviceContract.endDatePreview = $scope.serviceContract.endDate;
-          $scope.serviceContract.endDate = '';
+        
+          $scope.serviceContract.startDate = $filter('date')($scope.serviceContract.startDate, 'dd MMM yyyy');
           $scope.serviceContract.startDatePreview = $scope.serviceContract.startDate;
-          $scope.serviceContract.startDate = '';
+         
           $scope.serviceContract.numOfIntervalsPreview;
           $scope.serviceContract.isAdditionalServices = $scope.serviceContract.services.length > 0;
           $scope.serviceContract.minStartDate = Date.now();
+          console.log('$scope.serviceContract',$scope.serviceContract);
           $timeout(function () {
-            changeNumOfIntervals($scope.serviceContract.startDatePreview, $scope.serviceContract.endDatePreview, true);
+            console.log('$scope.serviceContract.startDatePreview',$scope.serviceContract.startDate);
+            console.log('$scope.serviceContract.endDatePreview',$scope.serviceContract.endDate);
+            changeNumOfIntervals($scope.serviceContract.startDate,$scope.serviceContract.startDate, false);
+            $scope.$apply();
           }, 500);
+          $scope.numOfIntervals = 6;
           if($scope.serviceContract.blockTimeServices.length > 0) {
             $scope.serviceContract.contractWithBlockTime = true;
             $scope.serviceContract.serviceContractServicesToTrack = $scope.serviceContract.blockTimeServices
@@ -468,6 +476,7 @@ $scope.serviceContract.serviceExpenses.forEach((item) => {
         };
 
         function changeStartDate() {
+           
           var intervals = parseInt($scope.numOfIntervals);
           changeMinEndDate($scope.serviceContract.period, intervals);
         }
@@ -531,6 +540,7 @@ $scope.serviceContract.serviceExpenses.forEach((item) => {
             }
             endDate = Utils.minusDays(endDate, 1);
             $scope.serviceContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
+            console.log('changeEndDate', $scope.serviceContract.endDate);
           }
 
         }
@@ -538,13 +548,29 @@ $scope.serviceContract.serviceExpenses.forEach((item) => {
         $scope.$watch(function() {
           return $scope.serviceContract.endDate;
         }, function(oldEndDate) {
-          changeNumOfIntervals($scope.serviceContract.startDate, oldEndDate)
+          
+          console.log('$scope.serviceContract.startDate',$scope.serviceContract.startDate);
+          console.log('$scope.serviceContract.oldEndDate',oldEndDate);
+       //   if (typeof oldEndDate === "string" && typeof $scope.serviceContract.startDate === "string") {
+            changeNumOfIntervals($scope.serviceContract.startDate, oldEndDate)
+      //    }
+         
         });
 
         function changeNumOfIntervals(startDatee, endDatee, ifForIntervals ) {
+          console.log('$scope.serviceContract.period',$scope.serviceContract.period);
           if(startDatee && endDatee) {
             var startDate = new Date(startDatee);
+            startDate.setHours(0);
+            startDate.setMinutes(0);
+            startDate.setSeconds(0);
             var endDate = new Date(endDatee);
+            endDate.setHours(0);
+            endDate.setMinutes(0);
+            endDate.setSeconds(0);
+
+            console.log('startDate',startDate);
+            console.log('endDate',endDate);
             var interval = 1 ;
             switch($scope.serviceContract.period) {
               case('Month'):
@@ -554,6 +580,7 @@ $scope.serviceContract.serviceExpenses.forEach((item) => {
                   s = Utils.minusDays(s, 1);
                   if(s.getTime() === endDate.getTime()) {
                     interval = i;
+                    console.log('interval',interval);
                     break;
                   }
                 }
@@ -570,6 +597,7 @@ $scope.serviceContract.serviceExpenses.forEach((item) => {
                 }
                 break;
               default:
+                console.log('default');
                 for(var d=1; d<10000; d++) {
                   startDate.setHours(0, 0, 0, 0);
                   startDate.setSeconds(0);
@@ -587,6 +615,7 @@ $scope.serviceContract.serviceExpenses.forEach((item) => {
                   }
                 }
             }
+            console.log('interval',interval);
             if(ifForIntervals) {
               $scope.serviceContract.numOfIntervalsPreview = interval
             } else {
@@ -596,6 +625,7 @@ $scope.serviceContract.serviceExpenses.forEach((item) => {
         }
 
         $scope.changeEndDateByNumToGenerate = function() {
+          console.log('changeEndDateByNumToGenerate --------------------');
           var intervals = parseInt($scope.numOfIntervals);
           changeEndDate($scope.serviceContract.period, intervals);
         };

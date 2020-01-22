@@ -304,6 +304,7 @@ console.log('$scope.editContract',$scope.editContract);
         };
 
         $scope.changeStartDate = function() {
+          console.log('changeStartDate');
           var intervals = parseInt($scope.numOfIntervals);
           changeMinEndDate($scope.blockTimeContract.period, intervals);
         };
