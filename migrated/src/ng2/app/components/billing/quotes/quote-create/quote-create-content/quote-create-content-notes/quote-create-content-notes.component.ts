@@ -28,6 +28,7 @@ export class QuoteCreateContentNotesComponent implements OnInit {
   public isEditMode = false;
   public editMode = false;
   public isShowCreateNew = false;
+  public createNewRegular = false;
   public noteGlobalId:string;
   @ViewChild('instance') instance: NgbTypeahead;
   @Output() selectedRegularNoteItem = new EventEmitter<any>();
@@ -119,12 +120,22 @@ export class QuoteCreateContentNotesComponent implements OnInit {
         title: this.getTitle(this.selectedNoteNew)
       }, this.selectedNote.id).subscribe()
     } else {
-      this.noteService.createNote({
-        line1: this.selectedNoteNew,
+      this.noteService.createNote([{
+        line1: this.selectedNoteText,
         line2: '',
         noteType: 'REGULAR',
         title: this.selectedNoteNew
-      }).subscribe();
+      }]).subscribe((res:any) => {
+        this.selectItem({item:{
+          id: res.ids[0],
+          line1: this.selectedNoteText,
+          line2: '',
+          noteType: 'REGULAR',
+          title: this.selectedNoteNew
+        }})
+        this.isEditMode = true;
+        this.createNewRegular = false;
+      });
     }
   }
 
@@ -185,6 +196,7 @@ export class QuoteCreateContentNotesComponent implements OnInit {
   if (this.selectedNote && this.selectedNote.line1) this.selectedNote['line1'] = value;
     this.selectedNoteText = value;
    if (this.isEditMode) this.isShowCreateNew = true;
+   if (!this.isEditMode &&  this.selectedNoteNew &&  this.selectedNoteNew.length > 0)  this.createNewRegular = true;
     this.quoteStateService.setSelectedNote(value);
   }
   
@@ -195,9 +207,12 @@ export class QuoteCreateContentNotesComponent implements OnInit {
   public getState() {
     this.editMode = this.quoteStateService.getState().params.editMode;
     if (this.editMode) {
-      this.isEditMode = true;
+    
       this.selectedNoteNew = this.quoteStateService.getSelectedNote();
       this.selectedNote = this.quoteStateService.getSelectedNote();
+     if (this.selectedNote) this.isEditMode = true;
+      console.log('this.selectedNoteNew',this.selectedNoteNew);
+      console.log('this.selectedNote',this.selectedNote);
     }
   }
 

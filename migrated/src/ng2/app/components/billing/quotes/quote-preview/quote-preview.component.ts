@@ -173,7 +173,7 @@ export class QuotePreviewComponent implements OnInit {
     const isFormReady = this.quoteStateService.getType();
     if (isFormReady) {
       if (this.editMode && this.quoteForCreate.id) {
-        this.quoteService.editQuote(this.quoteForm.value, this.quoteForCreate.id, false)
+        this.quoteService.editQuote(this.quoteForCreate, this.quoteForCreate.id, false)
         .pipe(takeUntil(this.unsubscribe))
         .subscribe((res) => {
           this.quoteStateService.goToQuote();
@@ -201,7 +201,7 @@ export class QuotePreviewComponent implements OnInit {
     const isFormReady = this.quoteStateService.getType();
     if (isFormReady && this.editMode && this.quoteStateService.getQuoteCreate()['id']) {
       const currentQuote = this.quoteStateService.getQuoteCreate();
-      this.quoteService.editQuote(this.quoteForm.value, currentQuote['id'], true)
+      this.quoteService.editQuote(currentQuote, currentQuote['id'], true)
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((res) => {
         this.quoteService.approveQuote(res['company'], res['id'])
@@ -251,7 +251,7 @@ export class QuotePreviewComponent implements OnInit {
     console.log('isFormReady',isFormReady);
     if (isFormReady && this.editMode && this.quoteStateService.getQuoteCreate().id) {
       const currentQuote = this.quoteStateService.getQuoteCreate();
-      this.quoteService.editQuote(this.quoteForm.value, currentQuote['id'], true)
+      this.quoteService.editQuote(currentQuote, currentQuote['id'], true)
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((res) => {
         const id = res['id'];

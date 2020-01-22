@@ -20,7 +20,7 @@
          class="icn-sm report-caret-icon"></i>
 
       <div class="new-link"
-           *ngIf="(selectedNoteNew && selectedNoteNew.length > 0) || isShowCreateNew"
+           *ngIf="isShowCreateNew || createNewRegular"
            (click)="createNewNote()">Save note
       </div>
     </div>

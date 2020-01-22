@@ -676,6 +676,7 @@ export class QuoteStateService {
    * Reset quote for create
    */
   public resetquoteForCreate() {
+    this.selectedNoteFull = null;
     this.quoteForCreate = this.getDefaultquoteForCreate();
   }
 

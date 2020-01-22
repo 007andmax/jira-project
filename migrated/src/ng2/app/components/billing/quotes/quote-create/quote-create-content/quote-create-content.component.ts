@@ -134,13 +134,13 @@ export class QuoteCreateContentComponent implements OnInit {
     if (isFormReady) {
       if (this.editMode && currentQuote && currentQuote['id']) {
         if (notification) {
-          this.quoteService.editQuote(this.quoteForm.value, currentQuote['id'], true)
+          this.quoteService.editQuote(currentQuote, currentQuote['id'], true)
             .pipe(takeUntil(this.unsubscribe))
             .subscribe((res) => {
               this.quoteStateService.goToQuote();
             })
         } else {
-          this.quoteService.editQuote(this.quoteForm.value, currentQuote['id'], false)
+          this.quoteService.editQuote(currentQuote, currentQuote['id'], false)
             .pipe(takeUntil(this.unsubscribe))
             .subscribe((res) => {
               this.quoteStateService.goToQuote();
@@ -176,7 +176,7 @@ export class QuoteCreateContentComponent implements OnInit {
     const currentQuote = this.quoteStateService.getQuoteCreate();
     if (isFormReady && this.editMode && currentQuote['id']) {
   
-      this.quoteService.editQuote(this.quoteForm.value, currentQuote['id'], true)
+      this.quoteService.editQuote(currentQuote, currentQuote['id'], true)
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((res) => {
         this.quoteService.approveQuote(res['company'], res['id'])
@@ -210,7 +210,7 @@ export class QuoteCreateContentComponent implements OnInit {
     const currentQuote = this.quoteStateService.getQuoteCreate();
     if (isFormReady && this.editMode && currentQuote.id) {
     
-      this.quoteService.editQuote(this.quoteForm.value, currentQuote['id'], true)
+      this.quoteService.editQuote(currentQuote, currentQuote['id'], true)
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((res) => {
         const id = res['id'];

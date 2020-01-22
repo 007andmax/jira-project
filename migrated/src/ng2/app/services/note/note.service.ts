@@ -25,7 +25,7 @@ export class NoteService {
    * @param data - new note data
    */
   public createNote(data) {
-    return this.http.post(`${this.apiUrl}invoice/createInvoiceNote?createRegular=${data.noteType === "REGULAR"}` ,data);
+    return this.http.post(`${this.apiUrl}invoice/createInvoiceNote?createRegular=${data[0].noteType === "REGULAR"}` ,data);
   }
 
   /**
