@@ -451,8 +451,8 @@ $scope.serviceContract.serviceExpenses.forEach((item) => {
           return d;
         };
 
-        $scope.serviceContract.minEndDate = $scope.serviceContract.minStartDate + month;
-        $scope.serviceContract.endDate = $scope.serviceContract.minStartDate + month;
+       /* $scope.serviceContract.minEndDate = $scope.serviceContract.minStartDate + month;
+        $scope.serviceContract.endDate = $scope.serviceContract.minStartDate + month;*/
         $scope.defaultDareForServiceExpense = Date.now() + day;
 
         presettupPeriod();
@@ -551,9 +551,9 @@ $scope.serviceContract.serviceExpenses.forEach((item) => {
           
           console.log('$scope.serviceContract.startDate',$scope.serviceContract.startDate);
           console.log('$scope.serviceContract.oldEndDate',oldEndDate);
-       //   if (typeof oldEndDate === "string" && typeof $scope.serviceContract.startDate === "string") {
+          if (typeof oldEndDate === "string" && typeof $scope.serviceContract.startDate === "string") {
             changeNumOfIntervals($scope.serviceContract.startDate, oldEndDate)
-      //    }
+          }
          
         });
 
@@ -574,6 +574,7 @@ $scope.serviceContract.serviceExpenses.forEach((item) => {
             var interval = 1 ;
             switch($scope.serviceContract.period) {
               case('Month'):
+              console.log("----------------");
                 for(var i=1; i<10000; i++) {
                   var s = startDate;
                   s = Utils.addNumberOfMonth(startDate, i);
