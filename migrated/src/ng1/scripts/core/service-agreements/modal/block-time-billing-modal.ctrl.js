@@ -183,7 +183,9 @@ console.log('$scope.editContract',$scope.editContract);
             return service;
           })
         }
-
+        $scope.$on("$destroy", function() {
+        console.log('destroy block time -----------------');
+      });
 
         ServicesService.getServicesData($scope, function(resp){
           if(resp) {
