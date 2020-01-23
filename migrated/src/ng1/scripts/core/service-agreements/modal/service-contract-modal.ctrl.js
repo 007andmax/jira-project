@@ -292,7 +292,7 @@ console.log('ffffffffffffffffffffff');
           })
         }
 
-        ServicesService.getServicesData($scope, function(resp){
+        ServicesService.getServicesDataWithoutRealTime($scope, function(resp){
           if(resp) {
             console.log('getServicesData 1');
             for(var i=0; i<resp.length; i++) {
