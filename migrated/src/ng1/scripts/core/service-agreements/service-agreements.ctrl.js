@@ -297,7 +297,7 @@ $scope.showErrorValidationCurrentDate = false;
             $scope.editContract = {};
          
         
-              ServicesService.getServicesData($scope, function (data) {
+              ServicesService.getServicesDataWithoutRealTime($scope, function (data) {
 
                 var listOfServices = [];
                 for (var i = 0; i < data.length; i++) {
@@ -397,7 +397,7 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
           }
           console.log('$scope.editContract.', $scope.editContract);
           if (!companyData.editMode) {
-            ServicesService.getServicesData($scope, function (data) {
+            ServicesService.getServicesDataWithoutRealTime($scope, function (data) {
 
               var listOfServices = [];
               for (var i = 0; i < data.length; i++) {

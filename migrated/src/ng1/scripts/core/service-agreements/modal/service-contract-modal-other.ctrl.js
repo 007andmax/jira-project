@@ -311,6 +311,7 @@ $scope.serviceContract.serviceExpenses.forEach((item) => {
         }
 
         ServicesService.getServicesData($scope, function(resp){
+          console.log('getServicesData 3');
           if(resp) {
             for(var i=0; i<resp.length; i++) {
               var s = {
@@ -707,6 +708,7 @@ $scope.serviceContract.serviceExpenses.forEach((item) => {
 
 
         ServicesService.getServicesData($scope, function (data) {
+          console.log('getServicesData 4');
           for (var i = 0; i < data.length; i++) {
             var serv = {
               serviceId: data[i].versionedId.id,
