@@ -88,10 +88,13 @@
         RealTimeService.subscribe('/service', scope, function (newChange) {
 
           if (newChange.action == 'SERVICE_SAVED') {
-            if (newChange.data.isDefault)
+            if (newChange.data.isDefault) {
               serviceSaved(newChange.data);
+              console.log('ggggggggggggggggggggggggggg');
+            }
           } else if (newChange.action == 'SERVICE_DELETED') {
             serviceDeleted(newChange.data.versionedId.id, data);
+            console.log('bbbbbbbbbbbbbbbbbbbbbbbb');
           }
 
         });
