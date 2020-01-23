@@ -29,7 +29,7 @@
                  ng-class="{'hide': !isShowingHourErrors(hourlyContractForm, 'StartDate')}">
               <label class="control-label" style="color: red; text-align: left">Dates are required</label>
             </div>
-            <input class="form-control has-dropdown pointer"
+            <input ng-if="!isEditContract" class="form-control has-dropdown pointer"
                    type="text"
                    ng-model="editContract.startDate"
                    placeholder="Select"
@@ -38,6 +38,17 @@
                    name="startDate"
                    qt-data-time-picker
                    min-date="today"
+                   required>
+
+                   <input ng-if="isEditContract" class="form-control has-dropdown pointer"
+                   type="text"
+                   ng-model="editContract.startDate"
+                   placeholder="Select"
+                   readonly
+                   ng-change="startDatePicker(editContract.startDate)"
+                   name="startDate"
+                   qt-data-time-picker
+                  
                    required>
             <i class="report-calendar"></i>
           </div>
@@ -191,11 +202,18 @@
       <div class="col-md-8" ng-show="showErrorValidationDuplicatesHourly">
         <p style="color: red; text-align: left">An agreement with current services already using for current company</p>
       </div>
+      <div class="col-md-8" ng-show="showErrorValidationCurrentDate">
+        <p style="color: red; text-align: left">Start date can be current day or future dates</p>
+      </div>
+      
       <div class="col-md-8" ng-show="showCreateHourlyContractValidationError">
         <p style="color: red; text-align: left">{{errorMessageCreateHourlyDuplicate}}</p>
       </div>
-      <div class="btn btn-success btn-create" ng-click="validateAndCreateHourlyContract(editService)">
+      <div class="btn btn-success btn-create" ng-if="!isEditContract" ng-click="validateAndCreateHourlyContract(editService)">
         Create
+      </div>
+      <div class="btn btn-success btn-create" ng-if="isEditContract" ng-click="validateAndUpdateHourlyContract(editService)">
+        Edit
       </div>
       <!--<div class="btn btn-primary btn-create">Terminate</div>-->
     </div>

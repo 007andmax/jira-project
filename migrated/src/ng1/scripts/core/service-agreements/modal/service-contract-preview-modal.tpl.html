@@ -73,7 +73,7 @@
     <h4>
       <!--Select how you bill your customer. Managed Services will be added to Service time-->
     </h4>
-    <div class="col-md-3">
+    <div class="col-md-3" ng-if="editContract.billType !== 'OTHER'">
       <div class="form-group">
         Service Bill Type:
         <div class="form-group">
@@ -403,6 +403,9 @@
         <div style="margin-right: 0;" class="pull-right btn btn-primary btn-create" ng-click="terminateAndCopy()">Terminate and copy</div>
         <div class="pull-right btn btn-primary btn-create" ng-click="terminateContract()">
           Terminate and close
+        </div>
+        <div class="pull-right btn btn-primary btn-create" ng-click="terminateAndEdit()">
+          Terminate and edit
         </div>
       </div>
     </div>

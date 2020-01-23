@@ -101,7 +101,7 @@
       <div class="form-group">
         Service Bill Type*
 
-        <div class="form-group" ng-class="{'has-error': showRequiredFieldError && !serviceContract.billType}">
+        <div class="form-group"   ng-if="!isEditContract" ng-class="{'has-error': showRequiredFieldError && !serviceContract.billType}">
 
           <div uib-dropdown keyboard-nav="true">
             <button class="form-control form-control-dropdown account-type no-cursor has-dropdown"
@@ -116,6 +116,12 @@
             </ul>
           </div>
         </div>
+
+        <input placeholder="Select type"
+        ng-if="isEditContract"
+        type="text"
+        class="form-control"
+        ng-model="serviceContractType[serviceContract.billType]" readonly>
       </div>
     </div>
     <div class="col-md-12"></div>
@@ -299,8 +305,9 @@
     </div>
 
     <div ng-if="serviceContract.billType === 'USER' || serviceContract.billType === 'DEVICE'">
-      <label class="control checkbox">
-        <input type="checkbox" ng-model="serviceContract.contractWithBlockTime">
+      <label class="control checkbox"  >
+        <input type="checkbox" ng-if="!isEditContract"  ng-model="serviceContract.contractWithBlockTime">
+        <input type="checkbox" ng-if="isEditContract"  ng-model="serviceContract.contractWithBlockTime" disabled>
         <span class="control-indicator"></span>
         Set maximum amount of hours
       </label>
@@ -315,7 +322,16 @@
                    type="text"
                    class="form-control"
                    ng-model="serviceContract.includedHours"
+                   ng-if="!isEditContract"
                    hard-reset-pattern="decimalNumberPattern" >
+
+                   <input placeholder="Hours"
+                   name="includedHours"
+                   type="text"
+                   class="form-control"
+                   ng-model="serviceContract.includedHours"
+                   ng-if="isEditContract"
+                   hard-reset-pattern="decimalNumberPattern" readonly>
           </div>
         </div>
         <div class="interval-agreement col-md-4">
@@ -403,7 +419,11 @@
 
                   <div class="col-sm-3">
                     <div uib-dropdown>
-                      <input type="text"
+
+                   
+
+
+                    <input type="text"
                              name="serviceName"
                              ng-model="serviceExpense.name"
                              ng-minlength="1"
@@ -442,7 +462,7 @@
                       <i class="icn-sm icn-caret-gray" style="position: absolute;top: 13px;right: 13px;z-index: 1;"></i>
                       <input type="text" qt-data-time-picker min-date="serviceContract.startDate"
                              ng-if="reInitEndDate"
-                             max-date="serviceContract.endDate" default-date="serviceExpense.date"
+                              default-date="serviceExpense.date"
                              class="form-control has-dropdown" data-toggle="dropdown" aria-expanded="false"
                              placeholder="Date" ng-model="serviceExpense.date"
                              name="serviceDate" ng-required="true">
@@ -515,7 +535,7 @@
                       <input style="cursor: pointer;"
                              type="text" qt-data-time-picker min-date="serviceContract.startDate"
                              ng-if="reInitEndDate" default-date="defaultDareForServiceExpense"
-                             max-date="serviceContract.endDate"
+                            
                              class="form-control has-dropdown" data-toggle="dropdown" aria-expanded="false"
                              placeholder="Date" ng-model="newServiceExpense.date"
                              name="serviceDate" ng-required="true">
@@ -672,8 +692,17 @@
 
                 <!--<div class="input-top-4" typeahead-input-icon="newContractServiceName"></div>-->
 
-                <input tooltip-placement="top"
+                <input placeholder="Service Expense"
+                ng-if="isEditContract"
+                type="text"
+                class="form-control"
+                ng-model="service.nameValue" readonly>
+             
+                    
+
+              <input tooltip-placement="top"
                        type="text"
+                       ng-if="!isEditContract"
                        class="form-control has-dropdown"
                        name="serviceName"
                        autocomplete="off"
@@ -684,9 +713,8 @@
                        uib-dropdown-toggle
                        entity="service.nameValue"
                        hard-reset-pattern="descriptionPattern"
-                       invalid-when="!isAdditionalServiceNameUnique(service.nameValue)" required/>
-                <i class="icn-sm icn-caret-gray"></i>
-                <div class="service-list-container"></div>
+                       invalid-when="!isAdditionalServiceNameUnique(service.nameValue)" required/> 
+            
 
               </div>
             </div>
@@ -868,8 +896,11 @@
           Total: {{ (total | currency: '$': 2) || '$0.00' }}
         </div>
       </div>
-      <div class="btn btn-lg btn-success btn-create pull-right"
+      <div class="btn btn-lg btn-success btn-create pull-right" ng-if="!isEditContract"
            ng-click="validateAndCreateServiceContract( serviceContract)" ng-disabled="dissableCreateButton">Create
+      </div>
+      <div class="btn btn-lg btn-success btn-create pull-right" ng-if="isEditContract"
+           ng-click="validateAndUpdateServiceContract( serviceContract)" ng-disabled="dissableCreateButton">Edit
       </div>
     </div>
   </div>
