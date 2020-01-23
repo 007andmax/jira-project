@@ -41,7 +41,32 @@
           });
         });
       }
+      function getServicesDataWithoutRealTime(scope, callback) {
 
+        if (!scope || !scope.$id) {
+          throw 'First argument must be Angularjs scope!'
+        }
+
+        var data = Utils.customizeObj({});
+
+        $http.get('/services/getDefaultServices').then(function (resp) {
+
+          for (var i = 0; i < resp.data.length; i++) {
+            addServiceData(data, resp.data[i])
+          }
+
+          if (callback) {
+            callback(resp.data);
+          }
+
+        }, function (resp) {
+          if (callback) {
+            callback(resp.data);
+          }
+        });
+
+        return data;
+      }
       function getServicesData(scope, callback) {
 
         if (!scope || !scope.$id) {
@@ -90,11 +115,11 @@
           if (newChange.action == 'SERVICE_SAVED') {
             if (newChange.data.isDefault) {
               serviceSaved(newChange.data);
-              console.log('ggggggggggggggggggggggggggg');
+             
             }
           } else if (newChange.action == 'SERVICE_DELETED') {
             serviceDeleted(newChange.data.versionedId.id, data);
-            console.log('bbbbbbbbbbbbbbbbbbbbbbbb');
+         
           }
 
         });
@@ -284,7 +309,8 @@
         getActualMapping: getActualMapping,
         changeBillableStatus: changeBillableStatus,
         isNameUnique: isNameUnique,
-        searchDuplicatedServiceNames: searchDuplicatedServiceNames
+        searchDuplicatedServiceNames: searchDuplicatedServiceNames,
+        getServicesDataWithoutRealTime: getServicesDataWithoutRealTime
       }
 
     }]);

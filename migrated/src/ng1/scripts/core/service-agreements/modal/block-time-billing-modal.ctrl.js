@@ -187,7 +187,7 @@ console.log('$scope.editContract',$scope.editContract);
         console.log('destroy block time -----------------');
       });
 
-        ServicesService.getServicesData($scope, function(resp){
+        ServicesService.getServicesDataWithoutRealTime($scope, function(resp){
           if(resp) {
             for(var i=0; i<resp.length; i++) {
               var s = {
