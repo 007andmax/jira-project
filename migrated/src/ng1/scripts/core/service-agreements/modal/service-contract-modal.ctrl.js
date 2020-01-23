@@ -8,7 +8,7 @@
       'quicktech.common.services.UserConfirmationsService', 'Utils',
       function ($scope, AgreementsService, CompaniesService, ServicesService,
                 ProductsService, $filter, $timeout, TaxesService, $q, UserConfirmationsService, Utils) {
-
+console.log('ffffffffffffffffffffff');
         $scope.intervals = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days'];
         $scope.serviceContractType = {
           DEVICE: 'By Device',
@@ -294,6 +294,7 @@
 
         ServicesService.getServicesData($scope, function(resp){
           if(resp) {
+            console.log('getServicesData 1');
             for(var i=0; i<resp.length; i++) {
               var s = {
                 name: resp[i].name,
@@ -307,6 +308,39 @@
               $scope.defaultServicesAdditionalForDropDown.push(s);
             }
             unpickExistingServices()
+
+var data = resp;
+            for (var i = 0; i < data.length; i++) {
+              var serv = {
+                serviceId: data[i].versionedId.id,
+                name: data[i].name,
+                rate: data[i].rate,
+                billable: data[i].billable,
+                taxes: data[i].taxes || [],
+                taxIds: data[i].taxIds || [],
+                picked: false
+              };
+              if (data[i].taxIds && data[i].taxIds.length) {
+                for (var m = 0; m < data[i].taxIds.length; m++) {
+                  serv.taxIds.push(data[i].taxes[m].id)
+                }
+              }
+              $scope.defaultServices.push(serv);
+            }
+  
+  
+  
+            if ($scope.serviceContract.serviceExpenses.length > 0) {
+              for (var i = 0; i < $scope.serviceContract.serviceExpenses.length; i++) {
+                for (var j = 0; j < $scope.defaultServices.length; j++) {
+                  if ($scope.serviceContract.serviceExpenses[i].serviceId === $scope.defaultServices[j].serviceId) {
+                    $scope.serviceContract.serviceExpenses[i].name = $scope.defaultServices[j];
+                    $scope.defaultServices[j].picked = true;
+                    break;
+                  }
+                }
+              }
+            }
           }
         });
 
@@ -665,7 +699,8 @@
 
 
 
-        ServicesService.getServicesData($scope, function (data) {
+     /*   ServicesService.getServicesData($scope, function (data) {
+          console.log('getServicesData 2');
           for (var i = 0; i < data.length; i++) {
             var serv = {
               serviceId: data[i].versionedId.id,
@@ -697,7 +732,7 @@
               }
             }
           }
-        });
+        });*/
 
 
         $scope.changeContractType = function (type) {

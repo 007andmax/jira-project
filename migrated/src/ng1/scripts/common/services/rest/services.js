@@ -114,10 +114,12 @@
 
           if (newChange.action == 'SERVICE_SAVED') {
             if (newChange.data.isDefault) {
+              console.log('----------------- SERVICE_SAVED');
               serviceSaved(newChange.data);
              
             }
           } else if (newChange.action == 'SERVICE_DELETED') {
+            console.log('----------------- SERVICE_DELETED');
             serviceDeleted(newChange.data.versionedId.id, data);
          
           }
