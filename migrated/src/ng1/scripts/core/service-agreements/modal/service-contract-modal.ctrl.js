@@ -67,7 +67,7 @@ console.log('ffffffffffffffffffffff');
         var month = 30 * day;
 
         $scope.totsl = 0;
-        $scope.autocompleteData = ProductsService.getFullListForAutocomplete($scope);
+    //    $scope.autocompleteData = ProductsService.getFullListForAutocomplete($scope);
 
 
         if ($scope.editMode) {
@@ -257,7 +257,7 @@ console.log('ffffffffffffffffffffff');
             $scope.serviceContract.serviceExpenses[g].quantity = $scope.serviceContract.serviceExpenses[g].quantity * 60;
           }
 */
-          ProductsService.getFullListForAutocomplete($scope, function(resp) {
+          ProductsService.getFullListForAutocompleteWithOutRealTime($scope, function(resp) {
             var productsData = resp;
             if($scope.serviceContract.productExpenses.length>0) {
               for(var p=0; p<$scope.serviceContract.productExpenses.length; p++) {

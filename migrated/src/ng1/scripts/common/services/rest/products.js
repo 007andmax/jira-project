@@ -20,6 +20,26 @@
         });
 
       }
+      function getFullListForAutocompleteWithOutRealTime(scope, callback) {
+
+        if (!scope || !scope.$id) {
+          throw 'First argument must be Angularjs scope!';
+        }
+
+        var categories = [];
+
+        $http.get("/products/autocompleteList").then(function (response) {
+          response.data.forEach(function (c) {
+            categories.push(c)
+          });
+
+          if (callback) {
+            callback(categories);
+          }
+        });
+
+        return categories;
+      }
 
       function getFullListForAutocomplete(scope, callback) {
 
@@ -427,7 +447,8 @@
         isMfgUnique: isMfgUnique,
         moveProducts: moveProducts,
         getAllProducts: getAllProducts,
-        getProductsByCompany: getProductsByCompany
+        getProductsByCompany: getProductsByCompany,
+        getFullListForAutocompleteWithOutRealTime:getFullListForAutocompleteWithOutRealTime
       }
 
     }]);

@@ -275,7 +275,7 @@ $scope.serviceContract.serviceExpenses.forEach((item) => {
             $scope.serviceContract.serviceExpenses[g].quantity = $scope.serviceContract.serviceExpenses[g].quantity * 60;
           }
 */
-          ProductsService.getFullListForAutocomplete($scope, function(resp) {
+          ProductsService.getFullListForAutocompleteWithOutRealTime($scope, function(resp) {
             var productsData = resp;
             if($scope.serviceContract.productExpenses.length>0) {
               for(var p=0; p<$scope.serviceContract.productExpenses.length; p++) {
