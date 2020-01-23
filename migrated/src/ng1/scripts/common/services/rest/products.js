@@ -63,6 +63,7 @@
               var product = Utils.findById(category.products, newChange.data.versionedId.id);
 
               if (product) {
+                console.log('PRODUCT_SAVED --------------------');
                 Utils.customizeObj(newChange.data, product);
               } else {
                 var categoryMoveFrom;
@@ -77,13 +78,16 @@
                   var checkProduct = Utils.findById(checkCategory, newChange.data.versionedId.id);
 
                   if (checkProduct) {
+                    console.log('PRODUCT_SAVED 1 --------------------');
                     categoryMoveFrom = checkCategory;
                   }
                 }
 
                 if (categoryMoveFrom) {
+                  console.log('PRODUCT_SAVED 2 --------------------');
                   Utils.deleteById(categoryMoveFrom.products, newChange.data.versionedId.id);
                 }
+                console.log('PRODUCT_SAVED 3 --------------------');
                 category.products.push(newChange.data);
               }
             } else if (newChange.action == 'PRODUCT_DELETED') {
