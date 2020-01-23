@@ -75,7 +75,7 @@ console.log('serviceContractOtherCtrl ---------------------');
         var month = 30 * day;
 
         $scope.totsl = 0;
-       /* $scope.autocompleteData = ProductsService.getFullListForAutocomplete($scope);*/
+        $scope.autocompleteData = ProductsService.getFullListForAutocomplete($scope);
 
         console.log('$scope.editContract',$scope.editContract);
         console.log('companyForReadOnlyMode',$scope.companyForReadOnlyMode)
@@ -184,6 +184,7 @@ $scope.serviceContract.serviceExpenses.forEach((item) => {
           }
 */
           ProductsService.getFullListForAutocomplete($scope, function(resp) {
+            console.log('222222222222222222222');
             var productsData = resp;
             if($scope.serviceContract.productExpenses.length>0) {
               for(var p=0; p<$scope.serviceContract.productExpenses.length; p++) {
@@ -276,6 +277,7 @@ $scope.serviceContract.serviceExpenses.forEach((item) => {
           }
 */
           ProductsService.getFullListForAutocompleteWithOutRealTime($scope, function(resp) {
+            console.log('getFullListForAutocompleteWithOutRealTime');
             var productsData = resp;
             if($scope.serviceContract.productExpenses.length>0) {
               for(var p=0; p<$scope.serviceContract.productExpenses.length; p++) {
