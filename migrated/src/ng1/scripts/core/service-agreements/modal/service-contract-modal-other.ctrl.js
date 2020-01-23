@@ -8,7 +8,7 @@
       'quicktech.common.services.UserConfirmationsService', 'Utils','$rootScope',
       function ($scope, AgreementsService, CompaniesService, ServicesService,
                 ProductsService, $filter, $timeout, TaxesService, $q, UserConfirmationsService, Utils,$rootScope) {
-
+console.log('serviceContractOtherCtrl ---------------------');
         $scope.intervals = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days'];
         $scope.serviceContractType = {
           DEVICE: 'By Device',
@@ -75,7 +75,7 @@
         var month = 30 * day;
 
         $scope.totsl = 0;
-        $scope.autocompleteData = ProductsService.getFullListForAutocomplete($scope);
+       /* $scope.autocompleteData = ProductsService.getFullListForAutocomplete($scope);*/
 
         console.log('$scope.editContract',$scope.editContract);
         console.log('companyForReadOnlyMode',$scope.companyForReadOnlyMode)
