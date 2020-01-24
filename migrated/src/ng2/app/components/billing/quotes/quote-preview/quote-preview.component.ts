@@ -213,8 +213,8 @@ export class QuotePreviewComponent implements OnInit {
     } else if (isFormReady) {
       this.quoteService.createQuote({
         client: this.quote.client,
-        startDate: this.quoteForCreate.endDate,
-        endDate: this.quoteForCreate.startDate,
+        startDate: this.quoteForCreate.startDate,
+        endDate: this.quoteForCreate.endDate,
         globalNote: this.quoteForCreate.globalNote,
         regularNote: this.quoteForCreate.selectedNote,
         selectedNote: this.quoteForCreate.selectedNote
@@ -264,8 +264,8 @@ export class QuotePreviewComponent implements OnInit {
     } else if (isFormReady) {
       this.quoteService.createQuote({
         client: this.quote.client,
-        startDate: this.quoteForCreate.endDate,
-        endDate: this.quoteForCreate.startDate,
+        startDate: this.quoteForCreate.startDate,
+        endDate: this.quoteForCreate.endDate,
         globalNote: this.quoteForCreate.globalNote,
         regularNote: this.quoteForCreate.selectedNote,
         selectedNote: this.quoteForCreate.selectedNote

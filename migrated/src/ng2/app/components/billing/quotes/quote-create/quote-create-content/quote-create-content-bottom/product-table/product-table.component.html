@@ -1,10 +1,10 @@
-<div class="row fixed-width"
-     *ngFor="let item of itemsListArray;  let i = index">
+<ng-template ngFor let-item [ngForOf]="itemsListArray" let-i="index" [ngForTrackBy]="trackById">
+<div class="row fixed-width">
   <!-- IF SERVICE -->
   <div class="col-md-1"
        *ngIf="!getMarkup(item)">
     <div class="light-dropdown">
-      <app-services-list [editItem]="item" [itemList]="servicesList"
+      <app-services-list [type]="TYPE_QUOTE" [editItem]="item" [itemList]="servicesList"
                          (selectedServicesItem)="setItem($event, i, 'service')"></app-services-list>
       <i class="icn-sm report-caret-icon"></i>
       <!--  <input type="text"
@@ -96,3 +96,4 @@
   </div>
   <i class="icn-delete" (click)="deleteItem(i)"></i>
 </div>
+</ng-template>

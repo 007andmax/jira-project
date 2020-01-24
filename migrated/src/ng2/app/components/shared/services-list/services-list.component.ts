@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ElementRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ElementRef, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+import { TYPE_QUOTE } from 'src/ng2/app/const/services';
 
 /**
  *  Service list component
@@ -16,20 +17,23 @@ export class ServicesListComponent implements OnInit {
   @Input() itemList: any;
   @Output() serviceList: any;
   @Output() selectedServicesItem = new EventEmitter<any>();
+  @Input() type:string;
   public client: any;
   public isFormValid = false;
   /**
    * Creates an instance of the ServicesListComponent with the injected services
    * @param {ElementRef} elRef Service to work with template
    */
-  constructor(private elRef: ElementRef) { }
+  constructor(private elRef: ElementRef,
+    public cd: ChangeDetectorRef,) { }
 
   /**
    * Initializes service list. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-     
+     console.log('ngOnInit');
     if (this.editItem && this.editItem.duration) this.elRef.nativeElement.querySelector('#dropdownServices').value = this.getNameOrDescription(this.editItem);
+  if (this.editItem && this.type === TYPE_QUOTE) this.elRef.nativeElement.querySelector('#dropdownServices').value = this.getNameOrDescription(this.editItem);
   }
 
 
@@ -49,9 +53,13 @@ export class ServicesListComponent implements OnInit {
    * @param item - selected services item
    */
   public selectServicesItem(item) {
+    console.log('item',item);
+    console.log('this.getNameOrDescription(item);',this.getNameOrDescription(item));
     this.elRef.nativeElement.querySelector('#dropdownServices').value = this.getNameOrDescription(item);
+   console.log(this.elRef.nativeElement);
     this.products_dropDown.close();
     this.selectedServicesItem.next(item)
+    this.cd.detectChanges();
   }
 
 

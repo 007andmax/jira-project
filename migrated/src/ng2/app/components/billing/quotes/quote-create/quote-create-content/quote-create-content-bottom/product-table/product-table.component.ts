@@ -3,6 +3,7 @@ import { QuoteStateService } from "../../../quote-state.service";
 import { ProductService } from "../../../../../../../services/product/product.service";
 import { QuoteService } from "../../../../../../../services/quote/quote.service";
 import { CommonService } from 'src/ng2/app/services/common/common.service';
+import { TYPE_QUOTE } from 'src/ng2/app/const/services';
 
 /**
  * Product table component
@@ -26,6 +27,7 @@ export class ProductTableComponent implements OnInit {
   public servicesList = [];
   public isDropDownShow = [];
   public markups = [];
+  TYPE_QUOTE = TYPE_QUOTE;
   unamePattern = "(?<=^| )\d+(\.\d+)?(?=$| )"; 
 
   /**
@@ -123,7 +125,8 @@ export class ProductTableComponent implements OnInit {
     });
     const value = this.quoteStateService.getClient();
     value && this.quoteService.getServiceList(value.id).subscribe((res: any) => {
-      return this.servicesList = res
+      
+      return this.servicesList = res;
     });
   }
 
@@ -143,14 +146,15 @@ export class ProductTableComponent implements OnInit {
    * @param type - new item type
    */
   public setItem(item, index, type) {
-    
+    let data = null;
     if (type === 'service') {
-      item = {...item, ...{description: '', quantity: 1}};
+      data = {...item, ...{description: '', quantity: 1}};
+      console.log('fffefe',data);
     } else {
-      item = {...item, ...{quantity: 1, markup: this.quoteStateService.setMarkups(item)}};
+      data = {...item, ...{quantity: 1, markup: this.quoteStateService.setMarkups(item)}};
     }
-     
-    this.itemsListArray[index] = item;
+     console.log('item',data);
+    this.itemsListArray[index] = data;
     this.changedProductItemsArray.next(this.itemsListArray);
     this.hideDropDown(index);
   }
@@ -237,4 +241,7 @@ export class ProductTableComponent implements OnInit {
     return (!this.isInteger(markup)) ?  Math.ceil(markup * 10) / 10 : markup;
   }
 
+  public trackById(index, item) {
+    return item.id;
+  }
 }
