@@ -74,9 +74,15 @@
         <div class="interval-agreement">
           <div class="form-group">
             End Date*
+            <input type="text" placeholder="../../.." readonly ng-if="reInitEndDate && isEditContract"
+            ng-model="blockTimeContract.endDate"
+            class="form-control" date-time-picker-with-period name="endDate"
+            ng-change="changeNumOfIntervals(blockTimeContract.endDate)"
+            default-date="blockTimeContract.endDate" min-date="blockTimeContract.endDate"
+            period="blockTimeContract.period"   >
 
             <input type="text" placeholder="Select"
-                   readonly ng-if="reInitEndDate"
+                   readonly ng-if="reInitEndDate && !isEditContract"
                    ng-model="blockTimeContract.endDate"
                    ng-change="changeNumOfIntervals(blockTimeContract.endDate)"
                    class="form-control"

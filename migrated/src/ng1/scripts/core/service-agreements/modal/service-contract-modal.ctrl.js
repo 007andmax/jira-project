@@ -15,6 +15,7 @@ console.log('ffffffffffffffffffffff');
           USER: 'By Users',
       //    OTHER: 'Other'
         };
+        $scope.currentCompany = CompaniesService.getCurrentCompany();
         $scope.defaultServicesAdditional = [];
         $scope.defaultServicesAdditionalForDropDown = [];
 
@@ -93,18 +94,20 @@ console.log('ffffffffffffffffffffff');
           console.log('$scope.serviceContract.serviceExpenses',$scope.serviceContract.serviceExpenses);
          console.log('editContract',$scope.editContract);
           if ($scope.isEditContract) {
-            
+            var end_date = angular.copy($scope.editContract.endDate);
           $scope.serviceContract = angular.copy($scope.editContract);
           $scope.reInitPrpductsExpenseNameField = false;
+        
+          $scope.serviceContract.endDate = $filter('date')(new Date(end_date - $scope.currentCompany.addresses[0].timeZone.timeOffset), 'dd MMM yyyy');//$filter('date')(new Date($scope.serviceContract.endDate), 'dd MMM yyyy');
           $scope.serviceContract.endDatePreview = $scope.serviceContract.endDate;
-          $scope.serviceContract.endDate = $filter('date')($scope.editContract.endDate, 'dd MMM yyyy');
+          console.log('$scope.serviceContract.endDate',$scope.serviceContract.endDate);
           $scope.serviceContract.startDatePreview = $scope.serviceContract.startDate;
           $scope.serviceContract.startDate = $filter('date')($scope.editContract.startDate, 'dd MMM yyyy');
           $scope.serviceContract.numOfIntervalsPreview;
           $scope.serviceContract.isAdditionalServices = $scope.serviceContract.services.length > 0;
           $scope.serviceContract.minStartDate = Date.now();
           $timeout(function () {
-            changeNumOfIntervals($scope.serviceContract.startDatePreview, $scope.serviceContract.endDatePreview, true);
+            changeNumOfIntervals($scope.serviceContract.startDate, $scope.serviceContract.endDate, false);
           }, 500);
           if($scope.serviceContract.blockTimeServices.length > 0) {
             $scope.serviceContract.contractWithBlockTime = true;
@@ -193,6 +196,7 @@ console.log('ffffffffffffffffffffff');
           $scope.serviceContract = angular.copy($scope.editContract);
           $scope.reInitPrpductsExpenseNameField = false;
           $scope.serviceContract.endDatePreview = $scope.serviceContract.endDate;
+          console.log('$scope.serviceContract.endDate',$scope.serviceContract.endDate);
           $scope.serviceContract.endDate = '';
           $scope.serviceContract.startDatePreview = $scope.serviceContract.startDate;
           $scope.serviceContract.startDate = '';
@@ -469,8 +473,13 @@ var data = resp;
           return d;
         };
 
-        $scope.serviceContract.minEndDate = $scope.serviceContract.minStartDate + month;
-        $scope.serviceContract.endDate = $scope.serviceContract.minStartDate + month;
+        if (!$scope.isEditContract) {
+          $scope.serviceContract.minEndDate = $scope.serviceContract.minStartDate + month;
+          $scope.serviceContract.endDate = $scope.serviceContract.minStartDate + month;
+        }
+      
+console.log('$scope.serviceContract.endDate',$scope.serviceContract.endDate);
+
         $scope.defaultDareForServiceExpense = Date.now() + day;
 
         presettupPeriod();
@@ -557,6 +566,7 @@ var data = resp;
             }
             endDate = Utils.minusDays(endDate, 1);
             $scope.serviceContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
+            console.log('$scope.serviceContract.endDate',$scope.serviceContract.endDate);
           }
 
         }
@@ -564,7 +574,11 @@ var data = resp;
         $scope.$watch(function() {
           return $scope.serviceContract.endDate;
         }, function(oldEndDate) {
+          console.log('gegegegegegege');
+          if (typeof oldEndDate === "string" && typeof $scope.serviceContract.startDate === "string") {
+     
           changeNumOfIntervals($scope.serviceContract.startDate, oldEndDate)
+          }
         });
 
         function changeNumOfIntervals(startDatee, endDatee, ifForIntervals ) {

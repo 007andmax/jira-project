@@ -70,11 +70,18 @@
       <div class="form-group">
         End Date*
 
-        <input type="text" placeholder="../../.." readonly ng-if="reInitEndDate"
+      <input type="text" placeholder="../../.." readonly ng-if="reInitEndDate && isEditContract"
+               ng-model="serviceContract.endDate"
+               class="form-control" date-time-picker-with-period name="endDate"
+               default-date="serviceContract.endDate" min-date="serviceContract.endDate"
+               period="serviceContract.period"   >
+
+               <input type="text" placeholder="../../.." readonly ng-if="reInitEndDate && !isEditContract"
                ng-model="serviceContract.endDate"
                class="form-control" date-time-picker-with-period name="endDate"
                default-date="serviceContract.endDate" min-date="serviceContract.minEndDate"
                period="serviceContract.period" start-date="serviceContract.startDate">
+
 
         <i class="report-calendar"></i>
       </div>

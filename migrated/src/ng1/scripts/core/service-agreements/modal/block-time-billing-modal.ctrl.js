@@ -11,7 +11,7 @@
                 UsersService, $filter, $timeout, $q, UserConfirmationsService, TaxesService, Utils) {
 
         $scope.intervals = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days'];
-
+        $scope.currentCompany = CompaniesService.getCurrentCompany();
         $scope.parseDate = Date.parse.bind(Date);
         $scope.allUsers = UsersService.getAllUsers();
 console.log('isEditContract',$scope.isEditContract);
@@ -82,10 +82,11 @@ console.log('$scope.editContract',$scope.editContract);
             taxes: $scope.addDefaultTaxes()
           };
           if ($scope.isEditContract) {
+            var end_date = angular.copy($scope.editContract.endDate);
             $scope.blockTimeContract = angular.copy($scope.editContract);
             console.log('$scope.blockTimeContract',$scope.blockTimeContract);
             //$scope.blockTimeContract.endDatePreview = $scope.blockTimeContract.endDate;
-            $scope.blockTimeContract.endDate = $filter('date')($scope.blockTimeContract.endDate, 'dd MMM yyyy');
+            $scope.blockTimeContract.endDate = $filter('date')(new Date(end_date - $scope.currentCompany.addresses[0].timeZone.timeOffset), 'dd MMM yyyy');//$filter('date')(new Date($scope.serviceContract.endDate), 'dd MMM yyyy');
            // $scope.blockTimeContract.startDatePreview = $scope.blockTimeContract.startDate;
             $scope.blockTimeContract.startDate =  $filter('date')($scope.blockTimeContract.startDate, 'dd MMM yyyy');
            // $scope.blockTimeContract.numOfIntervalsPreview;
