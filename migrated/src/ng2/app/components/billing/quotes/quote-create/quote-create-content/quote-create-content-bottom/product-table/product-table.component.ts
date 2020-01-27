@@ -13,10 +13,10 @@ import { Subscription } from 'rxjs';
   selector: 'app-product-table',
   templateUrl: './product-table.component.html',
   styleUrls: ['./product-table.component.scss'],
-  providers:[CommonService]
+  providers: [CommonService]
 })
-export class ProductTableComponent implements OnInit,OnDestroy {
- 
+export class ProductTableComponent implements OnInit, OnDestroy {
+
 
   @Input() set itemsArray(value) {
     this.itemsListArray = value;
@@ -30,8 +30,8 @@ export class ProductTableComponent implements OnInit,OnDestroy {
   public isDropDownShow = [];
   public markups = [];
   TYPE_QUOTE = TYPE_QUOTE;
-  unamePattern = "(?<=^| )\d+(\.\d+)?(?=$| )"; 
-  sub:Subscription = new Subscription();
+  unamePattern = "(?<=^| )\d+(\.\d+)?(?=$| )";
+  sub: Subscription = new Subscription();
 
   /**
    * Creates an instance of the QuoteCreateContentComponent with the injected services
@@ -43,7 +43,7 @@ export class ProductTableComponent implements OnInit,OnDestroy {
     private quoteStateService: QuoteStateService,
     private productService: ProductService,
     private quoteService: QuoteService,
-    private commonService:CommonService
+    private commonService: CommonService
   ) { }
 
   /**
@@ -61,7 +61,7 @@ export class ProductTableComponent implements OnInit,OnDestroy {
    * @param i - item index
    */
   hideDropDown(i) {
-    this.isDropDownShow[i] = false ;
+    this.isDropDownShow[i] = false;
   }
 
   /**
@@ -69,9 +69,9 @@ export class ProductTableComponent implements OnInit,OnDestroy {
    */
   setDropDownArray() {
     this.isDropDownShow = new Array(this.itemsListArray.length);
-    this.isDropDownShow.map((item) => item = false );
+    this.isDropDownShow.map((item) => item = false);
     this.markups = new Array(this.itemsListArray.length);
-    this.markups.map((item) => item = 0 );
+    this.markups.map((item) => item = 0);
   }
 
   /**
@@ -81,7 +81,7 @@ export class ProductTableComponent implements OnInit,OnDestroy {
    * @param tax - item tax
    */
   public getPrice(cost, count, tax) {
-    return this.quoteStateService.roundToTwo(this.quoteStateService.getPrice(cost, count, tax) + this.quoteStateService.getTaxPrice(cost, count, tax)) ;
+    return this.quoteStateService.roundToTwo(this.quoteStateService.getPrice(cost, count, tax) + this.quoteStateService.getTaxPrice(cost, count, tax));
   }
 
   /**
@@ -126,26 +126,26 @@ export class ProductTableComponent implements OnInit,OnDestroy {
    */
   public getItemListProducts() {
     this.productList = this.quoteStateService.getProductsList();
- let handleProducts =   this.quoteStateService.handleProducts.subscribe((res: any) => {
+    let handleProducts = this.quoteStateService.handleProducts.subscribe((res: any) => {
       this.productList = res;
     });
-  //  const value = this.quoteStateService.getClient();
+    //  const value = this.quoteStateService.getClient();
     this.servicesList = this.quoteStateService.getServices();
-  let handleServices =   this.quoteStateService.handleServices.subscribe((res: any) => {
-      
-       this.servicesList = res;
+    let handleServices = this.quoteStateService.handleServices.subscribe((res: any) => {
+
+      this.servicesList = res;
     });
     this.sub.add(handleServices);
     this.sub.add(handleProducts);
   }
 
-  public selectProduct (item, index) {
-    item = {...item, ...{quantity: 1, markup: this.quoteStateService.setMarkups(item)}};
-  
-  
-  this.itemsListArray[index] = item;
-  this.changedProductItemsArray.next(this.itemsListArray);
-  this.hideDropDown(index);
+  public selectProduct(item, index) {
+    item = { ...item, ...{ quantity: 1, markup: this.quoteStateService.setMarkups(item) } };
+
+
+    this.itemsListArray[index] = item;
+    this.changedProductItemsArray.next(this.itemsListArray);
+    this.hideDropDown(index);
   }
 
   /**
@@ -157,12 +157,12 @@ export class ProductTableComponent implements OnInit,OnDestroy {
   public setItem(item, index, type) {
     let data = null;
     if (type === 'service') {
-      data = {...item, ...{description: '', quantity: 1}};
-      console.log('fffefe',data);
+      data = { ...item, ...{ description: '', quantity: 1 } };
+      console.log('fffefe', data);
     } else {
-      data = {...item, ...{quantity: 1, markup: this.quoteStateService.setMarkups(item)}};
+      data = { ...item, ...{ quantity: 1, markup: this.quoteStateService.setMarkups(item) } };
     }
-     console.log('item',data);
+    console.log('item', data);
     this.itemsListArray[index] = data;
     this.changedProductItemsArray.next(this.itemsListArray);
     this.hideDropDown(index);
@@ -184,10 +184,10 @@ export class ProductTableComponent implements OnInit,OnDestroy {
   public changeMarkup(val, index) {
     let value = Number(val);
     const item = this.itemsListArray[index];
-    this.itemsListArray[index].sale =  this.quoteStateService.roundToTwo((value * item.cost / 100 + item.cost));
+    this.itemsListArray[index].sale = this.quoteStateService.roundToTwo((value * item.cost / 100 + item.cost));
     this.itemsListArray[index].markup = value;
     this.itemsListArray[index].markup = this.roundingMarkup(this.itemsListArray[index].markup);
-    
+
     this.updateItemsArray();
   }
 
@@ -202,10 +202,10 @@ export class ProductTableComponent implements OnInit,OnDestroy {
     if (this.getMarkup(this.itemsListArray[index])) {
       this.itemsListArray[index].markup = (value - item.cost) / item.cost * 100;
       this.itemsListArray[index].markup = this.roundingMarkup(this.itemsListArray[index].markup);
-      this.itemsListArray[index].sale = this.commonService.validateNumber(val,'number');
+      this.itemsListArray[index].sale = this.commonService.validateNumber(val, 'number');
       this.updateItemsArray();
     } else {
-      this.itemsListArray[index].rate = this.commonService.validateNumber(val,'number');
+      this.itemsListArray[index].rate = this.commonService.validateNumber(val, 'number');
     }
   }
 
@@ -218,13 +218,13 @@ export class ProductTableComponent implements OnInit,OnDestroy {
     let value = Number(val);
     const item = this.itemsListArray[index];
     if (this.getMarkup(this.itemsListArray[index])) {
-      this.itemsListArray[index].markup =  this.quoteStateService.roundToOne((item.sale - value)/value * 100);
-      this.itemsListArray[index].cost = this.commonService.validateNumber(val,'number');
+      this.itemsListArray[index].markup = this.quoteStateService.roundToOne((item.sale - value) / value * 100);
+      this.itemsListArray[index].cost = this.commonService.validateNumber(val, 'number');
     } else {
-      this.itemsListArray[index].rate = (this.isInteger(value)) ? value :  this.quoteStateService.roundToTwo(value);
+      this.itemsListArray[index].rate = (this.isInteger(value)) ? value : this.quoteStateService.roundToTwo(value);
     }
     this.updateItemsArray();
-   
+
   }
 
 
@@ -239,15 +239,15 @@ export class ProductTableComponent implements OnInit,OnDestroy {
   /**
    * Check val is integer
    */
-  private  isInteger(num):boolean {
+  private isInteger(num): boolean {
     return (num ^ 0) === num;
   }
 
   /**
    * Roundin value
    */
-  private roundingMarkup (markup) {
-    return (!this.isInteger(markup)) ?  Math.ceil(markup * 10) / 10 : markup;
+  private roundingMarkup(markup) {
+    return (!this.isInteger(markup)) ? Math.ceil(markup * 10) / 10 : markup;
   }
 
   public trackById(index, item) {
@@ -255,6 +255,6 @@ export class ProductTableComponent implements OnInit,OnDestroy {
   }
 
   ngOnDestroy(): void {
-   this.sub.unsubscribe();
+    this.sub.unsubscribe();
   }
 }

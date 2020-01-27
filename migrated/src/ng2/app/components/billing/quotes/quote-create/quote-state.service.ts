@@ -51,11 +51,11 @@ export class QuoteStateService {
   ) {
     this.state = $state;
    this.onInitCLientsList();
-   this.getProducts();
+  
   }
 
   
-  private getProducts() {
+  public getProducts() {
     this.productService.getCategories().subscribe((res: any) => {
        this.handleProducts.emit(res);
        this.productsList = res;
