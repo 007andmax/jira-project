@@ -39,7 +39,7 @@
                  class="form-control has-dropdown default-cursor"
                  name="EndDate"
                  readonly
-                 value="{{dateFilter(editContract.endDate)}}"
+                 value="{{editContract.endDate | date: 'yyyy/MM/dd'}}"
                  placeholder="End Date">
           <i class="report-calendar"></i>
         </div>

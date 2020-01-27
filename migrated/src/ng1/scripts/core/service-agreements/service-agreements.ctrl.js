@@ -362,7 +362,7 @@ $scope.showErrorValidationCurrentDate = false;
               var startDate = new Date(companyData.companyForReadOnlyMode.startDate);
               var endDate = new Date(companyData.companyForReadOnlyMode.endDate);
               $scope.editContract.startDate = $filter('date')(startDate, 'dd MMM yyyy');
-              $scope.editContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
+             // $scope.editContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
               $scope.isEditContract = true;
               $scope.editContract.services = companyData.companyForReadOnlyMode.services;
               $scope.startDate = new Date(angular.copy($scope.editContract.startDate));
@@ -377,7 +377,7 @@ $scope.showErrorValidationCurrentDate = false;
 console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyMode);
             $scope.editContract = companyData.companyForReadOnlyMode;
             $scope.editContract.startDate = $filter('date')($scope.editContract.startDate, 'dd MMM yyyy');
-            $scope.editContract.endDate = $filter('date')($scope.editContract.endDate, 'dd MMM yyyy');
+         //   $scope.editContract.endDate = $filter('date')($scope.editContract.endDate, 'dd MMM yyyy');
             AgreementsService.getServiceAgreementById($scope.editContract.id, function (data) {
               $scope.contractStatus = data.status;
             });
@@ -591,6 +591,7 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
               var endMonth = endDate.getMonth() + 1;
               $scope.editContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
               $scope.endDate = $scope.editContract.endDate;
+              console.log('$scope.endDate',$scope.endDate);
             }
 
           };
@@ -1224,6 +1225,7 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
           $scope.terminateAndEdit = function () {
            
             $scope.closeModal();
+            console.log('$scope.editContract',$scope.editContract);
             $rootScope.$broadcast('terminateAndEdit', $scope.editContract);
           };
 

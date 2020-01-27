@@ -173,6 +173,7 @@ console.log('$scope.editContract',$scope.editContract);
 
           }
           fillNotifyUsersList();
+          console.log('$scope.editContract',$scope.editContract);
         }
 
         if ($scope.blockTimeContract && $scope.blockTimeContract.services) {

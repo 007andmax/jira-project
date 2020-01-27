@@ -72,6 +72,7 @@ console.log('ffffffffffffffffffffff');
 
 
         if ($scope.editMode) {
+          console.log('-----------------');
           $scope.serviceContract = {
             billType: null,
             minStartDate: Date.now(),
@@ -193,9 +194,10 @@ console.log('ffffffffffffffffffffff');
           console.log('serviceContractType[serviceContract.billType],',$scope.serviceContractType[$scope.serviceContract.billType]);
           }
         } else {
+          console.log('+++++++++++++++++++++++++++++');
           $scope.serviceContract = angular.copy($scope.editContract);
           $scope.reInitPrpductsExpenseNameField = false;
-          $scope.serviceContract.endDatePreview = $scope.serviceContract.endDate;
+          $scope.serviceContract.endDatePreview = $filter('date')($scope.serviceContract.endDate, 'dd MMM yyyy');
           console.log('$scope.serviceContract.endDate',$scope.serviceContract.endDate);
           $scope.serviceContract.endDate = '';
           $scope.serviceContract.startDatePreview = $scope.serviceContract.startDate;
