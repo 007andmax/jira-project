@@ -6,6 +6,7 @@ import { ISubscription } from 'rxjs/Subscription';
 import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
 import { QuoteResult } from '../class/quote-result';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
+import { ProductService } from 'src/ng2/app/services/product/product.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,8 @@ export class QuoteStateService {
   public handleSendMode: EventEmitter<any> = new EventEmitter();
   public handleErrors: EventEmitter<any> = new EventEmitter();
   public handleQuoteHasSent: EventEmitter<any> = new EventEmitter();
+  public handleServices: EventEmitter<any> = new EventEmitter();
+  public handleProducts: EventEmitter<any> = new EventEmitter();
  // public quoteHasSent: boolean = false;
   public quoteNumber: number;
   public startQuoteNumber: number;
@@ -31,6 +34,8 @@ export class QuoteStateService {
   public servicesArray: any;
   public selectedNoteFull: any;
   public usersEmail: any;
+  servicesList = [];
+  productsList = [];
   public quoteForCreate: any = this.getDefaultquoteForCreate();
  // public subGetCompaniesList: ISubscription;
   public quoteForm: FormGroup;
@@ -41,10 +46,24 @@ export class QuoteStateService {
     @Inject('$state') $state: any,
     private dateService: DateService,
     private companiesService: CompaniesService,
-    private companiesState:CompaniesStateService
+    private companiesState:CompaniesStateService,
+    private productService: ProductService,
   ) {
     this.state = $state;
    this.onInitCLientsList();
+   this.getProducts();
+  }
+
+  
+  private getProducts() {
+    this.productService.getCategories().subscribe((res: any) => {
+       this.handleProducts.emit(res);
+       this.productsList = res;
+    });
+  }
+
+  public getProductsList() {
+    return this.productsList;
   }
 
   public setDescription (description) {
@@ -53,6 +72,18 @@ export class QuoteStateService {
   public getDescription() {
     return this.quoteForCreate.description;
   }
+
+public setServices(data) {
+  this.servicesList = data;
+}
+public getServices () {
+  return this.servicesList;
+}
+
+public onInitServices(data) {
+  this.handleServices.emit(data);
+}
+
   /**
    * Set result after request for alert
    */

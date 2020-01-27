@@ -23,8 +23,8 @@ export class QuoteCreateContentTopComponent implements OnInit {
   public editItem: any;
   public editMode: any;
   public currentClient = null;
-  public errorMessage:string = null;
-  public description:string = '';
+  public errorMessage: string = null;
+  public description: string = '';
 
   /**
   *Creates an instance of the QuoteCreateContentTopComponent with the injected services
@@ -47,19 +47,24 @@ export class QuoteCreateContentTopComponent implements OnInit {
     this.endDateChanges(this.quoteForm.value.endDate);
     this.getState();
     this.onInitErrorHandle();
+    if (this.editMode) {
+      this.currentClient = this.quoteStateService.getClient();
+      console.log('this.currentClient', this.currentClient);
+      this.getServices();
+    }
   }
 
-   /**
-   * Initialized error handle.
-   */
-  public onInitErrorHandle () {
+  /**
+  * Initialized error handle.
+  */
+  public onInitErrorHandle() {
     this.quoteStateService.getErrorHandle().subscribe((data) => {
       this.errorMessage = data;
     })
   }
 
-  onChangeDescription (event) {
-    
+  onChangeDescription(event) {
+
     this.quoteStateService.setDescription(event.target.value);
   }
 
@@ -72,7 +77,15 @@ export class QuoteCreateContentTopComponent implements OnInit {
     this.quoteStateService.setClient(selectClient);
     this.currentClient = selectClient.item;
     if (!this.editMode) this.quoteStateService.setCompany(selectClient);
+    this.getServices();
     this.cd.detectChanges();
+  }
+
+  public getServices() {
+    this.quoteService.getServiceList(this.currentClient.id).subscribe((res: any) => {
+      this.quoteStateService.onInitServices(res);
+      this.quoteStateService.setServices(res);
+    });
   }
 
   /**
@@ -81,7 +94,7 @@ export class QuoteCreateContentTopComponent implements OnInit {
   private getQuoteNumber() {
     this.quoteService.getQuoteNumber().subscribe((res) => {
       this.quoteNumber = this.editMode ? this.quoteStateService.getQuoteNumber() : (res['number']) ? res['number'] : 1;
-      this.startQuoteNumber = this.editMode ? this.quoteStateService.getQuoteNumber() :(res['number']) ? res['number'] : 1;
+      this.startQuoteNumber = this.editMode ? this.quoteStateService.getQuoteNumber() : (res['number']) ? res['number'] : 1;
     });
   }
 
@@ -120,7 +133,7 @@ export class QuoteCreateContentTopComponent implements OnInit {
       this.partialDeposit = this.quoteStateService.getPartialDeposit();
       this.purchaseOrder = this.quoteStateService.getPurchaseOrder();
       this.requestPayment = this.quoteStateService.getRequestPayment();
-     
+
       this.description = this.quoteStateService.getDescription();
     }
   }

@@ -1,9 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, OnDestroy } from '@angular/core';
 import { QuoteStateService } from "../../../quote-state.service";
 import { ProductService } from "../../../../../../../services/product/product.service";
 import { QuoteService } from "../../../../../../../services/quote/quote.service";
 import { CommonService } from 'src/ng2/app/services/common/common.service';
 import { TYPE_QUOTE } from 'src/ng2/app/const/services';
+import { Subscription } from 'rxjs';
 
 /**
  * Product table component
@@ -14,7 +15,8 @@ import { TYPE_QUOTE } from 'src/ng2/app/const/services';
   styleUrls: ['./product-table.component.scss'],
   providers:[CommonService]
 })
-export class ProductTableComponent implements OnInit {
+export class ProductTableComponent implements OnInit,OnDestroy {
+ 
 
   @Input() set itemsArray(value) {
     this.itemsListArray = value;
@@ -29,6 +31,7 @@ export class ProductTableComponent implements OnInit {
   public markups = [];
   TYPE_QUOTE = TYPE_QUOTE;
   unamePattern = "(?<=^| )\d+(\.\d+)?(?=$| )"; 
+  sub:Subscription = new Subscription();
 
   /**
    * Creates an instance of the QuoteCreateContentComponent with the injected services
@@ -50,6 +53,8 @@ export class ProductTableComponent implements OnInit {
     this.getItemListProducts();
     this.setDropDownArray();
   }
+
+
 
   /**
    * Hide dropdown for services and products
@@ -120,14 +125,18 @@ export class ProductTableComponent implements OnInit {
    * get products list item
    */
   public getItemListProducts() {
-    this.productService.getCategories().subscribe((res: any) => {
-      return this.productList = res
+    this.productList = this.quoteStateService.getProductsList();
+ let handleProducts =   this.quoteStateService.handleProducts.subscribe((res: any) => {
+      this.productList = res;
     });
-    const value = this.quoteStateService.getClient();
-    value && this.quoteService.getServiceList(value.id).subscribe((res: any) => {
+  //  const value = this.quoteStateService.getClient();
+    this.servicesList = this.quoteStateService.getServices();
+  let handleServices =   this.quoteStateService.handleServices.subscribe((res: any) => {
       
-      return this.servicesList = res;
+       this.servicesList = res;
     });
+    this.sub.add(handleServices);
+    this.sub.add(handleProducts);
   }
 
   public selectProduct (item, index) {
@@ -243,5 +252,9 @@ export class ProductTableComponent implements OnInit {
 
   public trackById(index, item) {
     return item.id;
+  }
+
+  ngOnDestroy(): void {
+   this.sub.unsubscribe();
   }
 }

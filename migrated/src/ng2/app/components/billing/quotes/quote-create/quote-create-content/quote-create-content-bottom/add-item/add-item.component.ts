@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, OnDestroy } from '@angular/core';
 
 import { QuoteStateService } from "../../../quote-state.service";
 import { QuoteService } from "../../../../../../../services/quote/quote.service";
 import { ProductService } from "../../../../../../../services/product/product.service";
+import { Subscription } from 'rxjs';
 
 /**
  * Add item component
@@ -12,7 +13,8 @@ import { ProductService } from "../../../../../../../services/product/product.se
   templateUrl: './add-item.component.html',
   styleUrls: ['./add-item.component.scss']
 })
-export class AddItemComponent implements OnInit {
+export class AddItemComponent implements OnInit,OnDestroy {
+ 
 
   @Input() set setType(value) {
     this.type = value;
@@ -25,6 +27,7 @@ export class AddItemComponent implements OnInit {
   public itemListProducts: any;
   public itemListServices: any;
   public isFormValid = false;
+  sub:Subscription = new Subscription();
   @Output() selectedServiceItem = new EventEmitter<any>();
   @Output() changeType = new EventEmitter<any>();
 
@@ -65,14 +68,18 @@ export class AddItemComponent implements OnInit {
    * get services list
    */
   public getServicesList() {
-    this.productService.getCategories().subscribe((res) => {
-      
-     return this.itemListProducts = res
-    });
-    const value = this.quoteStateService.getClient();
-    value && this.quoteService.getServiceList(value.id).subscribe((res) => {
-      return this.itemListServices = res
-    })
+    this.itemListProducts = this.quoteStateService.getProductsList();
+    let handleProducts =   this.quoteStateService.handleProducts.subscribe((res: any) => {
+         this.itemListProducts = res;
+       });
+  //  const value = this.quoteStateService.getClient();
+    this.itemListServices = this.quoteStateService.getServices();
+    let handleServices =   this.quoteStateService.handleServices.subscribe((res: any) => {
+        
+         this.itemListServices = res;
+      });
+      this.sub.add(handleServices);
+      this.sub.add(handleProducts);
   }
 
   /**
@@ -120,6 +127,10 @@ export class AddItemComponent implements OnInit {
     if (item.sale > 0 && item.cost > 0 )  return Math.round((item.sale - item.cost)/item.cost* 100);
     return 0;
      
+  }
+
+  ngOnDestroy(): void {
+   this.sub.unsubscribe();
   }
 
 }
