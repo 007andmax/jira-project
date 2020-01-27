@@ -201,7 +201,7 @@
                 template = '/ng1/scripts/core/service-agreements/modal/create-new-modal.tpl.html';
                 break;
               case ('HOURLY'):
-                template = '/ng1/scripts/core/service-agreements/modal/hourly-service-modal.tpl.html';
+                template =   '/ng1/scripts/core/service-agreements/modal/hourly-service-modal.tpl.html';
                 break;
               case ('BLOCK_TIME'):
                 template = '/ng1/scripts/core/service-agreements/modal/block-time-billing-modal.tpl.html';
@@ -252,6 +252,7 @@
           console.log('companyData', companyData);
           $scope.companyId = companyData.companyId;
           $scope.companyInfo = companyData.companyInfo;
+          $scope.endDatePreview = '';
           $scope.preSetupCompany = companyData.preSetupCompany;
           if ($scope.preSetupCompany) {
             $scope.contractCompany = $scope.preSetupCompany;
@@ -291,7 +292,7 @@ $scope.showErrorValidationCurrentDate = false;
           $scope.isEditContract = companyData.isEditContract;
           $scope.editMode = true;
           $scope.startDate = 0;
-
+          $scope.currentCompany = CompaniesService.getCurrentCompany();
           if (companyData.editMode) {
             console.log('companyData', companyData);
             $scope.editContract = {};
@@ -360,9 +361,9 @@ $scope.showErrorValidationCurrentDate = false;
               $scope.editContract.description = companyData.companyForReadOnlyMode.description;
               $scope.editContract.companyId = companyData.companyForReadOnlyMode.companyId;
               var startDate = new Date(companyData.companyForReadOnlyMode.startDate);
-              var endDate = new Date(companyData.companyForReadOnlyMode.endDate);
+              var endDate = new Date(companyData.companyForReadOnlyMode.endDate - $scope.currentCompany.addresses[0].timeZone.timeOffset);
               $scope.editContract.startDate = $filter('date')(startDate, 'dd MMM yyyy');
-             // $scope.editContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
+              $scope.editContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
               $scope.isEditContract = true;
               $scope.editContract.services = companyData.companyForReadOnlyMode.services;
               $scope.startDate = new Date(angular.copy($scope.editContract.startDate));
@@ -378,6 +379,7 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
             $scope.editContract = companyData.companyForReadOnlyMode;
             $scope.editContract.startDate = $filter('date')($scope.editContract.startDate, 'dd MMM yyyy');
          //   $scope.editContract.endDate = $filter('date')($scope.editContract.endDate, 'dd MMM yyyy');
+         $scope.endDatePreview = $filter('date')(angular.copy($scope.editContract.endDate), 'dd MMM yyyy');
             AgreementsService.getServiceAgreementById($scope.editContract.id, function (data) {
               $scope.contractStatus = data.status;
             });
@@ -1225,6 +1227,7 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
           $scope.terminateAndEdit = function () {
            
             $scope.closeModal();
+            
             console.log('$scope.editContract',$scope.editContract);
             $rootScope.$broadcast('terminateAndEdit', $scope.editContract);
           };

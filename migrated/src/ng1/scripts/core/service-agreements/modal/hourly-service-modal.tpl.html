@@ -1,4 +1,4 @@
-<div class="service-agreement-modal" ng-show="editMode">
+<div class="service-agreement-modal" ng-if="editMode && isEditContract">
   <div class="service-form-wrapper clearfix" ng-form="hourlyContractForm">
     <div class="hourly clearfix">
       <div class="close-btn btn" ng-click="closeModal()" tabindex="1">
@@ -224,7 +224,7 @@
 
 <!--READONLY MODE-->
 
-<div class="service-agreement-modal clearfix" ng-show="!editMode">
+<div class="service-agreement-modal clearfix" ng-if="!editMode">
   <div ng-include="'/ng1/scripts/core/service-agreements/modal/hourly-service-preview-modal.tpl.html'"></div>
 
 </div>

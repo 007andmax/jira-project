@@ -135,8 +135,9 @@ console.log('$scope.editContract',$scope.editContract);
           }
         } else {
           $scope.blockTimeContract = angular.copy($scope.editContract);
+          var end_date = angular.copy($scope.editContract.endDate);
           //$scope.blockTimeContract.description = $scope.blockTimeContract.description + ' COPY';
-          $scope.blockTimeContract.endDatePreview = $scope.blockTimeContract.endDate;
+          $scope.blockTimeContract.endDatePreview = $filter('date')(new Date(end_date - $scope.currentCompany.addresses[0].timeZone.timeOffset), 'dd MMM yyyy');
           $scope.blockTimeContract.endDate = '';
           $scope.blockTimeContract.startDatePreview = $scope.blockTimeContract.startDate;
           $scope.blockTimeContract.startDate = '';
@@ -374,6 +375,9 @@ console.log('$scope.editContract',$scope.editContract);
           if(startDatee && endDatee) {
             var startDate = new Date(startDatee);
             var endDate = new Date(endDatee);
+            console.log('startDate',startDate);
+            console.log('endDate',endDate);
+            console.log('$scope.blockTimeContract.period',$scope.blockTimeContract.period);
             var interval = 1 ;
             switch($scope.blockTimeContract.period) {
               case('Month'):
@@ -416,6 +420,7 @@ console.log('$scope.editContract',$scope.editContract);
                   }
                 }
             }
+            console.log('interval',interval);
             if(ifForIntervals) {
               $scope.blockTimeContract.numOfIntervalsPreview = interval
             } else {
