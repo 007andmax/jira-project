@@ -379,7 +379,7 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
             $scope.editContract = companyData.companyForReadOnlyMode;
             $scope.editContract.startDate = $filter('date')($scope.editContract.startDate, 'dd MMM yyyy');
          //   $scope.editContract.endDate = $filter('date')($scope.editContract.endDate, 'dd MMM yyyy');
-         $scope.endDatePreview = $filter('date')(angular.copy($scope.editContract.endDate), 'dd MMM yyyy');
+         $scope.endDatePreview = $filter('date')(angular.copy($scope.editContract.endDate - $scope.currentCompany.addresses[0].timeZone.timeOffset), 'dd MMM yyyy');
             AgreementsService.getServiceAgreementById($scope.editContract.id, function (data) {
               $scope.contractStatus = data.status;
             });
@@ -398,6 +398,7 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
 
           }
           console.log('$scope.editContract.', $scope.editContract);
+          console.log('$scope.editMode',$scope.editMode);
           if (!companyData.editMode) {
             ServicesService.getServicesDataWithoutRealTime($scope, function (data) {
 
