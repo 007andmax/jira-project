@@ -972,17 +972,7 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
 
               };
 
-              /*if (correctService.basedOnDefault) {
-                correctService.id = $scope.editContract.services[i].id.id
-              }*/
-              /*  if($scope.editContract.services[i].billable) {
-                  correctService.rate =  $scope.editContract.services[i].rate;
-                  if ($scope.editContract.services[i].taxes.length) {
-                    for (var n = 0; n < $scope.editContract.services[i].taxes.length; n++) {
-                      correctService.taxIds.push($scope.editContract.services[i].taxes[n].id)
-                    }
-                  }
-                }*/
+             
               servicesWithTaxIds.push(correctService);
             }
 
@@ -995,15 +985,15 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
             };
 
 
-            companyContractInfo.startDate = new Date($scope.editContract.startDate).getTime();
+            companyContractInfo.startDate = $filter('date')(new Date($scope.editContract.startDate), 'yyyy/MM/dd');
 
 
-            companyContractInfo.endDate = new Date($scope.editContract.endDate).getTime();
+            companyContractInfo.endDate = $filter('date')(new Date($scope.editContract.endDate), 'yyyy/MM/dd');
             console.log('companyContractInfo', companyContractInfo);
             console.log('$scope.editContract', $scope.editContract);
+ 
 
-
-
+            
 
             AgreementsService.updateContract(companyContractInfo, function (resp) {
               console.log('resp', resp);
