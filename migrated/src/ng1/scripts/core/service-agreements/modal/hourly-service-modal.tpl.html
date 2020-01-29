@@ -1,4 +1,4 @@
-<div class="service-agreement-modal" ng-if="editMode">
+<div class="service-agreement-modal" ng-show="editMode">
   <div class="service-form-wrapper clearfix" ng-form="hourlyContractForm">
     <div class="hourly clearfix">
       <div class="close-btn btn" ng-click="closeModal()" tabindex="1">
@@ -58,7 +58,7 @@
             End Date*:
 
             <input class="form-control has-dropdown pointer"
-                   ng-if="reInitEndDateHourly"
+                   ng-if="reInitEndDateHourly && !isEditContract && action === 'CREATE' || reInitEndDateHourly && isEditContract && action === 'EDIT'"
                    type="text"
                    ng-model="editContract.endDate"
                    placeholder="Select"
@@ -67,6 +67,19 @@
                    name="EndDate"
                    qt-data-time-picker
                    default-date="defaultDate"
+                   required>
+ 
+                 <input class="form-control has-dropdown pointer"
+                   ng-if="reInitEndDateHourly  && action === 'COPY'"
+                   type="text"
+                   ng-model="editContract.endDate"
+                   placeholder="Select"
+                   readonly
+                   ng-change="endDatePicker(editContract.endDate)"
+                   name="EndDate"
+                   qt-data-time-picker
+                   min-date="editContract.endDate"
+                   default-date="editContract.endDate"
                    required>
             <i class="report-calendar"></i>
           </div>
@@ -224,7 +237,7 @@
 
 <!--READONLY MODE-->
 
-<div class="service-agreement-modal clearfix" ng-if="!editMode">
+<div class="service-agreement-modal clearfix" ng-show="!editMode">
   <div ng-include="'/ng1/scripts/core/service-agreements/modal/hourly-service-preview-modal.tpl.html'"></div>
 
 </div>
