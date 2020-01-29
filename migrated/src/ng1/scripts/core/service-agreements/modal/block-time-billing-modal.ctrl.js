@@ -6,9 +6,9 @@
   angular.module('quicktech.core.serviceAgreements').controller('blockTimeBillingCtrl',
     ['$scope', 'AgreementsService', 'CompaniesService', 'ServicesService',
       'UsersService', '$filter', '$timeout', '$q',
-      'quicktech.common.services.UserConfirmationsService', 'TaxesService', 'Utils',
+      'quicktech.common.services.UserConfirmationsService', 'TaxesService', 'Utils','$rootScope',
       function ($scope, AgreementsService, CompaniesService, ServicesService,
-                UsersService, $filter, $timeout, $q, UserConfirmationsService, TaxesService, Utils) {
+                UsersService, $filter, $timeout, $q, UserConfirmationsService, TaxesService, Utils,$rootScope) {
 
         $scope.intervals = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days'];
         $scope.currentCompany = CompaniesService.getCurrentCompany();
@@ -68,7 +68,23 @@ console.log('isEditContract',$scope.isEditContract);
 
         var day = 1000 * 60 * 60 * 24;
         var month = 30 * day;
-console.log('$scope.editContract',$scope.editContract);
+        console.log('$scope.editContract', $scope.editContract);
+        $rootScope.$on('terminateAndCopy', function (evt, val) {
+          console.log('terminateAndCopy');
+          $scope.action = 'COPY';
+          console.log('$scope.terminateAndCopy', $scope.blockTimeContract);
+          var end_date = angular.copy($scope.editContract.endDate);
+          $scope.blockTimeContract.endDate = $filter('date')(new Date(end_date - $scope.currentCompany.addresses[0].timeZone.timeOffset), 'dd MMM yyyy');//$filter('date')(new Date($scope.serviceContract.endDate), 'dd MMM yyyy');
+          $scope.blockTimeContract.endDatePreview = $scope.blockTimeContract.endDate;
+          console.log('$scope.blockTimeContract.endDate', $scope.blockTimeContract.endDate);
+          $scope.blockTimeContract.startDatePreview = $scope.blockTimeContract.startDate;
+          $scope.blockTimeContract.startDate = $filter('date')($scope.editContract.startDate, 'dd MMM yyyy');
+
+          $scope.blockTimeContract.minStartDate = Date.now();
+          $timeout(function () {
+            chnageNumOFIntervals($scope.blockTimeContract.startDatePreview, $scope.blockTimeContract.endDatePreview, true);
+          }, 50);
+        });
 
         if ($scope.editMode) {
           $scope.blockTimeContract = {
