@@ -1,4 +1,4 @@
-<div class="contracts create-window clearfix" ng-if="editMode" ng-controller="serviceContractOtherCtrl"
+<div class="contracts create-window clearfix" ng-show="editMode" ng-controller="serviceContractOtherCtrl"
      ng-form="serviceContractForm">
   <div class="close-btn btn" ng-click="closeModal()" tabindex="1">
     <i class="icn-sm icn-remove-old"></i>
@@ -70,13 +70,13 @@
       <div class="form-group">
         End Date*
 
-      <input type="text" placeholder="../../.." readonly ng-if="reInitEndDate && isEditContract"
+      <input type="text" placeholder="../../.." readonly ng-if="reInitEndDate  && action === 'COPY' || reInitEndDate && isEditContract && action === 'EDIT'"
                ng-model="serviceContract.endDate"
                class="form-control" date-time-picker-with-period name="endDate"
                default-date="serviceContract.endDate" min-date="serviceContract.endDate"
                period="serviceContract.period"   >
 
-               <input type="text" placeholder="../../.." readonly ng-if="reInitEndDate && !isEditContract"
+               <input type="text" placeholder="../../.." readonly ng-if="reInitEndDate && !isEditContract && action === 'CREATE'"
                ng-model="serviceContract.endDate"
                class="form-control" date-time-picker-with-period name="endDate"
                default-date="serviceContract.endDate" min-date="serviceContract.minEndDate"

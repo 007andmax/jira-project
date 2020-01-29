@@ -14,7 +14,7 @@
         $scope.agreementsList = [];
         $scope.canDeleteAgreements = PermissionsService.isAllowed('DELETE_SERVICE_AGREEMENTS');
         $scope.allowToOpenAgreementModal = true;
-
+$scope.action = '';
         $scope.contractTypeDictionary = {
           HOURLY: 'Hourly',
           BLOCK_TIME: 'Block Time',
@@ -124,6 +124,7 @@
           }
         };
         $scope.setInitEditAgreement = function (data) {
+          $scope.action = (data) ? 'EDIT' : 'PREVIEW';
           $scope.isEditContract = data;
         }
 
@@ -143,7 +144,7 @@
             $scope.openModal(contractType, editMode, companyForReadOnlyMode)
           }
 
-          function openModal(contractType, editMode, companyForReadOnlyMode) {
+        /*  function openModal(contractType, editMode, companyForReadOnlyMode) {
             if ($scope.allowToOpenAgreementModal) {
               var template;
               console.log('contractType',contractType);
@@ -177,7 +178,8 @@
                     isEditContract: $scope.isEditContract,
                     companyForReadOnlyMode: companyForReadOnlyMode,
                     contractType: contractType,
-                    preSetupCompany: preSetupCompany
+                    preSetupCompany: preSetupCompany,
+                    action:$scope.action
                   }
                 }
 
@@ -188,7 +190,7 @@
               });
             }
 
-          }
+          }*/
 
 
         };
@@ -226,7 +228,8 @@
                   isEditContract: $scope.isEditContract,
                   companyForReadOnlyMode: companyForReadOnlyMode,
                   contractType: contractType,
-                  preSetupCompany: preSetupCompany
+                  preSetupCompany: preSetupCompany,
+                  action:$scope.action
                 }
               }
 
@@ -247,7 +250,7 @@
         function ($scope, $uibModalInstance, companyData, $state, ServicesService,
           CompaniesService, TaxesService, AgreementsService, $filter, $q, $timeout,
           UserConfirmationsService, UserNotificationService, Utils,$rootScope) {
-
+$scope.action = companyData.action;
           $scope.taxes = TaxesService.getAll();
           console.log('companyData', companyData);
           $scope.companyId = companyData.companyId;
@@ -605,6 +608,7 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
 
 
           $scope.changeModalToShow = function () {
+            $scope.action = 'CREATE';
             $scope.modlToShow = $scope.selectedContractType
           };
 
@@ -1192,14 +1196,16 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
 
           $scope.terminateAndCopy = function () {
             AgreementsService.terminate($scope.editContract.id, function (resp) {
+              $scope.action = 'COPY';
               $scope.editContract.description = $scope.editContract.description + ' COPY';
               $scope.modlToShow = $scope.editContract.type;
               $scope.editMode = true;
+              
 
               $scope.editService = { taxes: [] };
               var d = new Date($scope.editContract.startDate);
            
-              $scope.editContract.startDate = $filter('date')(Date.now(), 'dd MMM yyyy');
+           //   $scope.editContract.startDate = $filter('date')(Date.now(), 'dd MMM yyyy');
             /*  $scope.editContract.serviceExpenses.forEach((item) => {
                item.date = $filter('date')(Date.now(), 'dd MMM yyyy');
                 item.startDate =  $scope.editContract.startDate;

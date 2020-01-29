@@ -1,4 +1,4 @@
-<div class="contracts create-window clearfix" ng-if="editMode" ng-controller="serviceContractCtrl"
+<div class="contracts create-window clearfix" ng-show="editMode" ng-controller="serviceContractCtrl"
      ng-form="serviceContractForm">
   <div class="close-btn btn" ng-click="closeModal()" tabindex="1">
     <i class="icn-sm icn-remove-old"></i>
@@ -48,7 +48,7 @@
         <div style="position: absolute;right: -285px;top: 30px;" ng-class="{'hide': !isShowingErrorsServiceContract(serviceContractForm, 'startDate')}">
           <label class="control-label" style="color: red; text-align: left">Dates are required</label>
         </div>
-        <input class="form-control" type="text" ng-if="reInitStartDate" ng-model="serviceContract.startDate" placeholder="Select"
+        <input  class="form-control" type="text" ng-if="reInitStartDate && action !== 'PREVIEW'" ng-model="serviceContract.startDate" placeholder="Select"
                readonly ng-change="changeStartDate()" name="startDate"
                qt-data-time-picker min-date="serviceContract.minStartDate" required>
         <i class="report-calendar"></i>
@@ -58,6 +58,7 @@
       <p>Num.of Intervals</p>
 
       <input class="form-control" type="text"
+      ng-if="action !== 'PREVIEW'"
              ng-model="numOfIntervals"
              placeholder="&infin;"
              custom-disabled="{{ disabledEndAndNum }}"
@@ -69,13 +70,13 @@
     <div class="interval-agreement">
       <div class="form-group">
         End Date*
-        <input type="text" placeholder="../../.." readonly ng-if="reInitEndDate && isEditContract"
+        <input type="text" placeholder="../../.." readonly ng-if="reInitEndDate  && action === 'COPY' || reInitEndDate && isEditContract && action === 'EDIT'"
         ng-model="serviceContract.endDate"
         class="form-control" date-time-picker-with-period name="endDate"
         default-date="serviceContract.endDate" min-date="serviceContract.endDate"
         period="serviceContract.period"   >
 
-        <input type="text" placeholder="../../.." readonly ng-if="reInitEndDate && !isEditContract"
+        <input type="text" placeholder="../../.." readonly ng-if="reInitEndDate && !isEditContract && action === 'CREATE'"
                ng-model="serviceContract.endDate"
                class="form-control" date-time-picker-with-period name="endDate"
                default-date="serviceContract.endDate" min-date="serviceContract.minEndDate"
