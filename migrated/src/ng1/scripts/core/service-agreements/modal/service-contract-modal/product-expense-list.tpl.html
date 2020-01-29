@@ -16,14 +16,16 @@
 
       <!--<div class="input-top-4" typeahead-input-icon="productName"></div>-->
 
-      <div products-list="productExpense" id="product-list-cont-prev" ng-if="reInitPrpductsExpenseNameField"
-           click-outside="closeDropdown()" outside-if-not="product-list-cont">
+      <div products-list="productExpense" 
+      id="product-list-cont-prev" 
+      ng-if="reInitPrpductsExpenseNameField"
+           click-outside="closeDropdown()" outside-if-not="product-list-cont-prev">
         <div>
           <input ng-hide="isPLOpen" type="text" class="form-control has-dropdown" pl-product-input
                  placeholder="Product" autocomplete="off" ng-model="productExpense.name.description">
           <input ng-show="isPLOpen" type="text" class="form-control has-dropdown"
                  pl-search-product-input
-                 placeholder="Search or Add Product" autocomplete="off" smart-dropdown-menu-position="product-list">
+                 placeholder="Search or Add Product" autocomplete="off" >
           <i class="icn-sm icn-caret-gray"></i>
         </div>
         <input type="hidden" name="product" ng-required="true" >

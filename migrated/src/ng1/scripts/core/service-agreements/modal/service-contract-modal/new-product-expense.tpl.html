@@ -21,7 +21,8 @@
       <!--<div class="input-top-4" typeahead-input-icon="productName"></div>-->
 
       <div products-list id="product-list-cont"
-           click-outside="closeDropdown()" outside-if-not="product-list-cont"
+           click-outside="closeDropdown()"
+            outside-if-not="product-list-cont"
            ng-class="{'has-error': (isShowingErrorsNewProductExpenseeField(newProductExpenseForm, 'newProductExpenseName') || showNotAddedProductExpenseError(newProductExpense)) }">
 
         <div ng-click="refreshNotAddedError('productExpense')">
