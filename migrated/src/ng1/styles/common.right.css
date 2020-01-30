@@ -8,7 +8,7 @@ aside#right {
   transition: width 0.2s ease-in 0s;
   box-shadow: rgba(0, 0, 0, 0.14902) 0 3px 10px;
   background-color: #fff;
-  z-index: 1000;
+  z-index: 900;
 }
 
 aside#right.collapsed {
@@ -344,7 +344,7 @@ aside#right .recent-activities-by .time-ago {
   width: 330px;
   padding: 28px 30px 26px;
   margin-left: -7px;
-  margin-top: 0px;
+  margin-top: 0;
 }
 
 .popover-deviceinfo .popover-title {
