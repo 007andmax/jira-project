@@ -346,6 +346,7 @@ console.log('isEditContract',$scope.isEditContract);
           }
           minEndDate = Utils.minusDays(minEndDate, 1);
           $scope.blockTimeContract.minEndDate = $filter('date')(minEndDate, 'dd MMM yyyy');
+          console.log('$scope.blockTimeContract.minEndDate',$scope.blockTimeContract.minEndDate);
           reInitEndDate();
 
           $timeout(function () {
