@@ -155,7 +155,6 @@
   }
 }
 
-
 .products-content__header--search-result {
   position: fixed;
   width: 224px;
@@ -178,4 +177,8 @@
   height: 22px;
   left: 8px;
   top: 6px;
+}
+
+/deep/.date-picker {
+  overflow-x: visible;
 }
