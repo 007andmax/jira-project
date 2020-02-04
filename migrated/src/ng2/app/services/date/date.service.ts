@@ -31,6 +31,7 @@ export class DateService {
    */
   public getDateFromBootstrap(date) {
     const stringDate = `${date.month}/${date.day}/${date.year}`;
+    console.log("stringDate",stringDate);
     return moment(stringDate).valueOf();
   }
 

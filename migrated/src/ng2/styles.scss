@@ -1687,6 +1687,27 @@ ngb-typeahead-window {
   }
 }
 
+.date-picker {
+  .ngb-dp-month-name {
+    background: #3ba5fa;
+    color: white;
+    font-weight: 600;
+  }
+
+  .custom-day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+    &.faded {
+      background: #efefef;
+    }
+  }
+}
+
+
 .new-users-content__modal--content {
   app-user-table-subscription {
     .subs-list {

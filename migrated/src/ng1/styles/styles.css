@@ -13793,3 +13793,7 @@ button.close {
     min-width: max-content;
     right: 50px;
 }
+
+.ngb-dp-week .hidden {
+  display: block !important;
+}
