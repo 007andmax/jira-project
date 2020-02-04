@@ -5,11 +5,18 @@ export class GlNumber {
     startDate: string;
     endDate: string;
     clientCompanyId: string;
-    monthlyDetailed: boolean;
-
+    monthlyDetailed: boolean = false;
     dates: Array<string> = [];
     list: Array<GlNumberItem> = [];
     constructor() { }
+
+    public clearDates() {
+        this.dates = [];
+    }
+    public clearList() {
+        this.list = [];
+    }
+
 
     public getList() {
         return this.list;
@@ -32,6 +39,10 @@ export class GlNumber {
         }
         return data;
 
+    }
+
+    public  getMonthlyDetailed () {
+        return this.monthlyDetailed;
     }
 
     public setStartDate(startDate) {

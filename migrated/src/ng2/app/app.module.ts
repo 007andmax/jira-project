@@ -108,6 +108,7 @@ import { ReportsComponent } from './components/reports/reports.component';
 import { ItemReportComponent } from './components/reports/item-report/item-report.component';
 import { OverviewReportComponent } from './components/reports/overview-report/overview-report.component';
 import { ReportMenuComponent } from './components/reports/report-menu/report-menu.component';
+import { SelectComponent } from './components/shared/select/select.component';
 
 
 /**
@@ -254,7 +255,8 @@ angular.module('quicktech')
     ReportsComponent,
     ItemReportComponent,
     OverviewReportComponent,
-    ReportMenuComponent
+    ReportMenuComponent,
+    SelectComponent
   ],
   imports: [
     BrowserModule,

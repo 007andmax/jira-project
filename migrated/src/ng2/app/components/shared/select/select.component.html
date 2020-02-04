@@ -1,0 +1,20 @@
+<div class="light-dropdown" ngbDropdown>
+  <i class="icn-sm report-caret-icon"></i>
+  <input type="text"
+         [value]="selectedItem"
+         autocomplete="new-password"
+         [placeholder]="placeholder"
+         id="dropdown1"
+         ngbDropdownToggle />
+  <div ngbDropdownMenu
+       aria-labelledby="dropdown1">
+    <ng-template ngFor
+                 let-item
+                 [ngForOf]="list"
+                 let-i="index">
+      <button ngbDropdownItem
+              [textContent]="item"
+              (click)="onSelect(item)"></button>
+    </ng-template>
+  </div>
+</div>

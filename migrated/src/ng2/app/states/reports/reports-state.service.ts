@@ -7,7 +7,7 @@ export class ReportsStateService {
 glNumber:EventEmitter<any> = new EventEmitter();
   constructor() { }
 
-  public onGetGlNumber(data) {
+  public onChangeGlNumber(data) {
     this.glNumber.emit(data);
   } 
 }

@@ -33,7 +33,7 @@
            
             <div class="col-md-2"><strong>Total</strong></div>
           </li>
-          <ng-template ngFor let-item [ngForOf]="glNumber.getList()"   [ngForTrackBy]="trackByIndex">
+          <ng-template ngFor let-item [ngForOf]="glNumber.getList()" [ngIf]="glNumber.getMonthlyDetailed()"  [ngForTrackBy]="trackByIndex">
             <li class="content-product-list-ticket clearfix"
              >
           <div class="col-md-3">

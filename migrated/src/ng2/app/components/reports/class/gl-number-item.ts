@@ -6,11 +6,15 @@ export class GlNumberItem {
     constructor(glNumber, description,len) {
         this.glNumber = glNumber;
         this.description = description;
-        this.sum = new Array(len);
-        for(let i=0;i<this.sum.length;i++)
+        if (len)
         {
-            this.sum[i] = 0;
+            this.sum = new Array(len);
+            for(let i=0;i<this.sum.length;i++)
+            {
+                this.sum[i] = 0;
+            }
         }
+      
       
       
     }
