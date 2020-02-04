@@ -12,7 +12,7 @@
       });
 
       $scope.PermissionsService = PermissionsService;
-
+$scope.ticket_id = "1234567";
       $scope.reportByTaxes = {};
       $scope.reportByCustomers = {};
       $scope.reportByProducts = {};
@@ -107,7 +107,9 @@
           return el.type === "SERVICE";
         });
       };
-
+$scope.setReport = function (report) {
+localStorage.setItem('report',report);
+}
       $scope.getProducts = function(ticket) {
         return ticket.updates && ticket.updates.filter(function(el) {
           return el.type === "PRODUCT"

@@ -107,6 +107,7 @@ import { DraftEmailUserRecipientsComponent } from './components/shared/draft-ema
 import { ReportsComponent } from './components/reports/reports.component';
 import { ItemReportComponent } from './components/reports/item-report/item-report.component';
 import { OverviewReportComponent } from './components/reports/overview-report/overview-report.component';
+import { ReportMenuComponent } from './components/reports/report-menu/report-menu.component';
 
 
 /**
@@ -124,6 +125,7 @@ export class CustomHandlingStrategy implements UrlHandlingStrategy {
   extract(url) { return url }
   merge(url, whole) { return url }
 }
+
 
 /**
  * Component downgrade
@@ -160,13 +162,14 @@ angular.module('quicktech')
     'reportsComponent',
     downgradeComponent({ component: ReportsComponent }))
   .directive(
-    'itemReportsComponent',
+    'itemReportComponent',
     downgradeComponent({ component: ItemReportComponent }))
   .factory('ngZone', downgradeInjectable(NgZone));
 
 /**
  * This module represents the main application module
  */
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -250,7 +253,8 @@ angular.module('quicktech')
     DraftEmailUserRecipientsComponent,
     ReportsComponent,
     ItemReportComponent,
-    OverviewReportComponent
+    OverviewReportComponent,
+    ReportMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -321,10 +325,7 @@ angular.module('quicktech')
         pathMatch: 'full'
       },
       {
-        path: 'ng2/reports/:id', component: ItemReportComponent,
-        children: [
-          { path: '', component: OverviewReportComponent }
-        ]
+        path: 'ng2/report/:id', component: ItemReportComponent
       }],
       {
         useHash: true,

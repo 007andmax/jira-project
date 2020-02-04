@@ -90,7 +90,8 @@
         <p>Tickets</p>
         <img src="ng1/images/new-icons/report-tickets.svg" style="top: 28px;width: 26px;">
         <ul>
-          <li class="content-report" ui-sref="new-reports">Tickets report</li>
+          <li class="content-report" ng-click="setReport('TEST')"  ui-sref="new-item-report({ ticketId: ticket_id })">Tickets report</li>
+          <li class="content-report" ng-click="setReport('TEST 2')"  ui-sref="new-item-report({ ticketId: ticket_id })">Tickets report 2</li>
         </ul>
       </div>
     </div>
