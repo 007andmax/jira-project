@@ -12,6 +12,7 @@ import { GlNumberItem } from '../class/gl-number-item';
 export class ItemReportComponent implements OnInit {
   report: string;
   glNumber: GlNumber = new GlNumber();
+  loadingInProgress: boolean = false;
   constructor(private route: ActivatedRoute, private reportsStateService: ReportsStateService,
     public cd: ChangeDetectorRef,) { }
 
@@ -19,41 +20,16 @@ export class ItemReportComponent implements OnInit {
     if (localStorage.report) this.report = localStorage.report;
     this.reportsStateService.glNumber.subscribe((data:GlNumber) => {
       this.glNumber = data;
+      console.log("this.glNumber",this.glNumber);
+      console.log("this.glNumber.list",this.glNumber.list);
       this.cd.detectChanges();
     })
   }
+  public onRequest(data) {
+this.loadingInProgress = data;
+  }
   public getReport(data) {
- /*   this.glNumber.clearDates();
-    this.glNumber.clearList();
-    if (this.glNumber.getMonthlyDetailed()) {
-      let keys = Object.keys(data);
-      keys = keys.sort();
-      keys.forEach((key, indexKey) => {
-        const element = data[key];
-        this.glNumber.addDate(key);
-        element.forEach((item, indexItem) => {
-          let index = this.glNumber.getList().findIndex(itemList => itemList.glNumber === item.glNumber);
-          if (index > -1) {
-            this.glNumber.getList()[index].setSum(indexKey, item.sum);
-            this.glNumber.getList()[index].updateTotal(item.sum);
-          } else {
-            this.glNumber.addItem(new GlNumberItem(item.glNumber, item.description, keys.length));
-            let indexLast = this.glNumber.getList().length - 1;
-            this.glNumber.getList()[indexLast].setSum(indexKey, item.sum);
-            this.glNumber.getList()[indexLast].updateTotal(item.sum);
-          }
-        });
-
-      });
-    } else {
-      data.forEach((item, index) => {
-        this.glNumber.addItem(new GlNumberItem(item.glNumber, item.description, null));
-        let indexLast = this.glNumber.getList().length - 1;
-        this.glNumber.getList()[indexLast].updateTotal(item.sum);
-      });
-    }
-console.log("this.glNumber",this.glNumber);
-this.cd.detectChanges();*/
+ 
   }
 
 }

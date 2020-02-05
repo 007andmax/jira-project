@@ -21,6 +21,7 @@ export class ReportMenuComponent implements OnInit {
   listDetailed = ['Year to date', 'Monthly'];
   yearToDate = false;
   @Output() getReport = new EventEmitter<any>();
+  @Output() onRequest = new EventEmitter<any>();
   @ViewChild('dp') datePicker: any;
   constructor(private reportsService: ReportsService, private reportsStateService: ReportsStateService) { }
 
@@ -76,6 +77,7 @@ export class ReportMenuComponent implements OnInit {
 
   
   getReportByGlNumber() {
+    this.onRequest.emit(true);
     if (this.yearToDate) {
       this.reportsService.getAccountingStartDate().subscribe((res: any) => {
         console.log("res", res.accountingStartDate);
@@ -122,9 +124,10 @@ export class ReportMenuComponent implements OnInit {
       });
     }
     this.reportsStateService.onChangeGlNumber(this.glNumber);
-    this.getReport.emit(data);
+   // this.getReport.emit(data);
 
     this.loadingInProgress = false;
+    this.onRequest.emit(false);
   }
   public trackByIndex(index, item) {
     return index;
