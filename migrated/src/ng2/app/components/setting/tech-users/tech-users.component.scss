@@ -264,3 +264,35 @@
         input[type="checkbox"][readonly] + label{cursor: not-allowed;pointer-events: none;}
       }
   }
+
+  .sidebar-popup.role-dlt {
+    .warn-msg {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        background-color: #fff8eb;
+        padding: 8px 24px 8px 40px;
+        @media only screen and (max-width: 768px) {
+          padding: 8px 24px 8px 24px;
+        }
+        p {
+          font-size: 13px;
+          font-weight: normal;
+          line-height: 1.54;
+          letter-spacing: normal;
+          color: #7f5c1b;
+          margin-bottom: 0;
+          margin-left: 10px;
+          @media only screen and (max-width: 768px) {
+            br {
+              display: none;
+            }
+          }
+          a {
+              color: #7f5c1b;
+              text-decoration: underline !important;
+          }
+        }
+        
+      }
+}

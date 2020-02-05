@@ -26,8 +26,8 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
   isEmailIdUnique = true;
   isArchived: boolean;
   userlist: any[];
-  techUsers: [];
-  techUserIdList: [];
+  techUsers: any[] = [];
+  techUserIdList: any[] = [];
   techRoles: any;
   selectedTechUser: any;
   techUseremailNotificationList: any;
@@ -121,8 +121,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
 
   restoreUser() {
     this.loading = true;
-    this.techUsersService
-      .restoreUser(this.userId)
+    this.techUsersService.restoreUser(this.userId)
       .pipe()
       .subscribe(
         response => {

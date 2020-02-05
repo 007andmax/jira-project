@@ -565,13 +565,22 @@
 </div>
 
 <!-- sidebar popup edit -->
-<div class="sidebar-popup" [class.opened]="edit">
+<div class="sidebar-popup role-dlt" [class.opened]="edit">
   <!-- header -->
   <div class="sidebar-header">
     <div class="h1">Edit Tech User</div>
     <a class="close" href="javascript:;" (click)="edit = !edit">
       <img src="../../../../../ng1/images/setting-module/close.svg" alt="close"
     /></a>
+  </div>
+  <div class="warn-msg" *ngIf="selectedTechUser && !selectedTechUser.isEmailVerified">
+    <img
+      src="../../../../../ng1/images/setting-module/warning.svg"
+      alt="warning"
+    />
+    <p>
+      User email is not verified yet to verify email click on link here <a href="javascript:;" (click)="resendWelcomeEmail(selectedTechUser.primaryEmail);">Resend Email</a>
+    </p>
   </div>
 
   <div class="middle-content">
