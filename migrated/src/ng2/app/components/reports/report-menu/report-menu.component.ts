@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, ViewChild } from '@angular/core';
 import * as moment from "moment";
 import { Validate } from '../class/validate';
 import { GlNumber } from '../class/gl-number';
 import { ReportsService } from 'src/ng2/app/services/reports/reports.service';
 import { GlNumberItem } from '../class/gl-number-item';
 import { ReportsStateService } from 'src/ng2/app/states/reports/reports-state.service';
+import { MultiDatepickerComponent } from '../../shared/multi-datepicker/multi-datepicker.component';
 
 @Component({
   selector: 'app-report-menu',
@@ -19,7 +20,7 @@ export class ReportMenuComponent implements OnInit {
   loadingInProgress: boolean = true;
   listDetailed = ['Year to date', 'Montly'];
   @Output() getReport = new EventEmitter<any>();
-
+  @ViewChild('dp') datePicker: any;
   constructor(private reportsService: ReportsService, private reportsStateService: ReportsStateService) { }
 
   ngOnInit() {
@@ -30,7 +31,15 @@ export class ReportMenuComponent implements OnInit {
   public onSelectDetailed(data) {
     if (data === 'Montly') {
       this.glNumber.setMonthlyDetailed(true);
+      this.datePicker.setDisabled(false);
     } else {
+      if (data === 'Year to date') {
+        console.log("fffff");
+        this.datePicker.clearDate();
+        this.datePicker.setDisabled(true);
+      } else {
+        this.datePicker.setDisabled(false);
+      }
       this.glNumber.setMonthlyDetailed(false);
     }
 //this.reportsStateService.onChangeGlNumber(this.glNumber);
@@ -77,8 +86,12 @@ export class ReportMenuComponent implements OnInit {
   * filter data by date
   */
   public filterByDate(value) {
-    this.glNumber.setStartDate(moment(value.start).format('YYYY/MM/DD'));
-    this.glNumber.setEndDate(moment(value.end).format('YYYY/MM/DD'));
+    if (value.start !== '' && value.end !== '')
+    {
+      this.glNumber.setStartDate(moment(value.start).format('YYYY/MM/DD'));
+      this.glNumber.setEndDate(moment(value.end).format('YYYY/MM/DD'));
+    }
+  
   //  this.reportsStateService.onChangeGlNumber(this.glNumber);
   }
 }

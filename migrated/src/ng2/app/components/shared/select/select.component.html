@@ -1,11 +1,20 @@
 <div class="light-dropdown" ngbDropdown>
-  <i class="icn-sm report-caret-icon"></i>
+  
   <input type="text"
          [value]="selectedItem"
          autocomplete="new-password"
          [placeholder]="placeholder"
          id="dropdown1"
+         readonly
          ngbDropdownToggle />
+
+         <span *ngIf="list">
+          <i *ngIf="selected"
+             class="icn-sm icn-remove-old"
+             (click)="clearClient($event)"></i>
+          <i *ngIf="!selected"
+             class="icn-sm report-caret-icon"></i>
+          </span>
   <div ngbDropdownMenu
        aria-labelledby="dropdown1">
     <ng-template ngFor
