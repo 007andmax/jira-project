@@ -1,0 +1,95 @@
+<div class="settings-wrapper" ng-if="settingMode === '/settings'">
+  <div class="col-md-12 settings-wrapper__trow">
+    <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.myProfile">
+      <img class="svg-icn-full" src="ng1/images/settings-icon/user-profile.png">
+      <p>User Profile</p>
+    </div>
+    <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.emailNotifications">
+      <img class="svg-icn-full" src="ng1/images/settings-icon/email-notifications.png">
+      <p>Email Notifications</p>
+    </div>
+    <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.activityHistory">
+      <img class="svg-icn-full" src="ng1/images/settings-icon/activity-history.png">
+      <p>Activity History</p>
+    </div>
+  </div>
+  <div class="col-md-12 settings-wrapper__trow">
+    <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.companyProfile" ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_COMPANY_PROFILE_SETTINGS')">
+      <img class="svg-icn-full" src="ng1/images/settings-icon/company-profile.png">
+      <p>Company Profile</p>
+      <span class="confirm-arrow"
+            custom-disabled="{{ !currentUser.wizardTracker || !currentUser.wizardTracker.companySettings }}"></span>
+    </div>
+    <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.techUsers"
+         ng-click="updateWelcomeWizard('settings.techUsers')"
+         ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_TECH_USERS_SETTINGS')">
+      <img class="svg-icn-full" src="ng1/images/settings-icon/tech-user.png">
+      <p>Tech Users</p>
+      <span class="confirm-arrow"
+            custom-disabled="{{ !currentUser.wizardTracker || !currentUser.wizardTracker.addStaff }}"></span>
+    </div>
+    <div class="col-xs-1 settings-wrapper__trow--td"
+         ui-sref="settings.permissionsManagement" ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_PERMISSIONS_SETTINGS')">
+      <img class="svg-icn-full" src="ng1/images/settings-icon/permission-management.png">
+      <p>Permissions</p>
+    </div>
+
+    <div class="col-xs-1 settings-wrapper__trow--td"
+         ui-sref="settings.commissions">
+      <img class="svg-icn-full" src="ng1/images/settings-icon/permission-management.png">
+      <p>Commissions</p>
+    </div>
+
+    <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.email"
+         ng-click="updateWelcomeWizard('settings.email')"
+         ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_EMAIL_SETTINGS')">
+      <img class="svg-icn-full" src="ng1/images/settings-icon/email-settings.png">
+      <p>Email Settings</p>
+      <span class="confirm-arrow"
+            custom-disabled="{{ !currentUser.wizardTracker || !currentUser.wizardTracker.emailSettings }}"></span>
+    </div>
+    <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.taxes"
+         ng-click="updateWelcomeWizard('settings.taxes')"
+         ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_TAXES_SETTINGS')">
+      <img class="svg-icn-full" src="ng1/images/settings-icon/taxes.png">
+      <p>Taxes</p>
+      <span class="confirm-arrow"
+            custom-disabled="{{ !currentUser.wizardTracker || !currentUser.wizardTracker.rates }}"></span>
+    </div>
+
+  </div>
+  <div class="col-md-12 settings-wrapper__trow">
+
+    <div class="col-xs-1 settings-wrapper__trow--td"
+         ui-sref="settings.emailTemplates" ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_EMAIL_TEMPLATES_SETTINGS')">
+      <img class="svg-icn-full" src="ng1/images/settings-icon/email-templates.png">
+      <p>Email Templates</p>
+    </div>
+    <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.tickets" ng-if="PermissionsService.isAllowed('VIEW_TICKET_AND_INVOICE_SETTINGS')">
+      <img class="svg-icn-full" src="ng1/images/settings-icon/tickets-settings.png">
+      <p>Ticket and Invoice</p>
+    </div>
+    <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.tags.companies" ng-if="currentUser.isOwner || PermissionsService.isAllowed('VIEW_TAGS_SETTINGS')">
+      <img class="svg-icn-full" src="ng1/images/settings-icon/manage-tags.png">
+      <p>Tags</p>
+    </div>
+    </div>
+  <div class="col-md-12 settings-wrapper__trow">
+    <h3>Integrations</h3>
+    <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.credit-card" >
+      <img class="svg-icn-full" src="ng1/images/settings-icon/credit-card.png">
+      <p>Credit Card</p>
+    </div>
+  </div>
+</div>
+<div ui-view ng-if="settingMode !== '/settings'"></div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-93441341-1', 'auto');
+  ga('send', 'pageview');
+
+</script>

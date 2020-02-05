@@ -1,0 +1,172 @@
+.empty-page-helper {
+  text-align: center;
+  height: calc(100vh - 78px);
+  font-size: 2.6em;
+  line-height: 3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quick-support-list {
+  padding: 0;
+  margin: 0;
+}
+
+.quick-support-session {
+  margin: 20px auto;
+  width: 93%;
+  list-style: none;
+  background-color: #fff;
+  min-height: 135px;
+  padding: 0 30px 0 25px;
+  /*padding-right: ;*/
+  position: relative;
+  border: 1px #e7ecf2 solid;
+  /*cursor: pointer;*/
+  transition: 0.3s ease-out box-shadow;
+}
+
+.delete-remote-session {
+  position: absolute;
+  right: 10px;
+  top: 8px;
+}
+
+@media screen and (max-width: 950px) {
+  .quick-support-session {
+    height: 175px;
+  }
+}
+
+.quick-support-session:hover {
+  box-shadow: 0 4px 25px 0 rgba(10, 45, 89, .1);
+}
+
+.topNavbarLeft-Left .quick-support-header {
+  width: 100%
+}
+
+.topNavbarLeft-Left .quick-support-header .control-indicator {
+  top: -2px
+}
+
+.quick-support-list .quick-support-session .support-session-content h3 {
+  margin: 17px 0 12px 0;
+}
+
+.quick-support-list .quick-support-session .support-session-content .action-section-control {
+  bottom: 4px;
+  position: absolute;
+}
+
+.quick-support-list .quick-support-session .support-session-content .session-action.connect {
+  background-color: #4caf50;
+}
+
+.quick-support-list .quick-support-session .support-session-content .session-action {
+  margin: 9px;
+  height: 20px;
+  float: left;
+  font-size: 11px;
+  line-height: 12px;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 10px;
+  background-color: #1586e4;
+  cursor: pointer;
+  transition: border-radius 0.3s ease-out;
+}
+
+.quick-support-list .quick-support-session .support-session-content .session-action:hover {
+  border-radius: 1px;
+}
+
+.quick-support-list .quick-support-session .support-session-content .support-session-info {
+  width: 45%;
+}
+
+.quick-support-list .quick-support-session .support-session-content .avatar img {
+  width: 90px;
+}
+
+.quick-support-list .quick-support-session .support-session-content .avatar p {
+  text-align: center;
+}
+
+@media (max-width: 1600px) {
+  .quick-support-list .quick-support-session .support-session-content .avatar-width {
+    width: 200px;
+  }
+}
+
+@media (max-width: 1366px) {
+  .quick-support-list .quick-support-session .support-session-content .avatar-width {
+    width: 140px;
+  }
+}
+
+@media (max-width: 1280px) {
+  .quick-support-list .quick-support-session .support-session-content .avatar-width {
+    width: 120px;
+  }
+}
+
+.quick-support-list .quick-support-session .support-session-content .avatar p a {
+  font-weight: bold;
+}
+
+.quick-support-list .quick-support-session .support-session-graph-content {
+  position: relative;
+  padding-top: 6px;
+  width: 50%;
+}
+
+.quick-support-list .quick-support-session .support-session-graph-content span {
+  top: 61px;
+  display: block;
+  position: absolute;
+}
+
+.quick-support-list .quick-support-session .support-session-graph-content span.admin-to-comp {
+  left: 110px;
+  width: calc(50% - 140px)
+}
+
+.quick-support-list .quick-support-session .support-session-graph-content span.session-status {
+  top: 40px;
+  width: 190px;
+  left: -80px;
+  text-align: center;
+}
+
+.quick-support-list .quick-support-session .support-session-graph-content span.comp-to-user {
+  right: 110px;
+  width: calc(50% - 140px)
+}
+
+.quick-support-list .quick-support-session .support-session-graph-content span.connected-success {
+  background-color: #4caf50;
+}
+
+.quick-support-list .quick-support-session .support-session-graph-content .device-type-icons {
+  margin: 50px 0 0 -10px;
+  left: 50%;
+  position: absolute;
+}
+
+.center-category__category .add-session-button {
+  height: 28px;
+  min-width: 28px;
+  background: none;
+  border-color: #4c5c6b;
+}
+
+.center-category__category .add-session-button:hover,
+.center-category__category .add-session-button:focus,
+.center-category__category .add-session-button:active {
+  border-color: #1586e4;
+  background: none;
+}

@@ -1,0 +1,46 @@
+<div class="quote-create__content--notes">
+  <div class="notes-top ">
+    <div class="light-dropdown">
+      <p>Customer Note Type</p>
+      <input
+        id="typeahead-focus1"
+        placeholder="Select Note"
+        type="text"
+        [(ngModel)]="selectedNoteNew"
+        class="pointer"
+        [inputFormatter]="formatter"
+        [resultFormatter]="formatter"
+        [ngbTypeahead]="search"
+        (selectItem)="selectItem($event)"
+        (focus)="focus$.next($event.target.value)"
+        (click)="click$.next('')"
+        #instance="ngbTypeahead"
+      />
+      <i *ngIf="!selectedNoteNew"
+         class="icn-sm report-caret-icon"></i>
+
+      <div class="new-link"
+           *ngIf="isShowCreateNew || createNewRegular"
+           (click)="createNewNote()">Save note
+      </div>
+    </div>
+    <textarea placeholder="Enter notes that are visible to your customer" (ngModelChange)="showCreateNew($event)"
+              [(ngModel)]="(selectedNote && selectedNote.line1) || selectedNoteText "></textarea>
+  </div>
+  <div class="notes-bottom">
+    <p>Terms & Conditions</p>
+    <div class="new-link"
+         *ngIf="isShowEditNote"
+         (click)="onEditNote()">Save Terms & Conditions
+    </div>
+    <textarea
+      [(ngModel)]="noteGlovalLine"
+      (ngModelChange)="setGlobalNote($event,true)"
+      placeholder="Mention your company's Terms and Conditions"></textarea>
+    <!--<textarea
+      *ngIf="!(noteGlobal && noteGlobal.line1)"
+      [(ngModel)]="noteGlovalLine"
+      (ngModelChange)="setGlobalNote($event,true)"
+      placeholder="Mention your company's Terms and Conditions"></textarea>-->
+  </div>
+</div>

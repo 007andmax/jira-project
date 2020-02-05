@@ -1,0 +1,40 @@
+<div class="alert alert-yellow hide" user-notification style="z-index: 991;" ></div>
+
+<div class="top-bar" style="z-index: 991;"
+     ng-include="'/ng1/scripts/core/header/header.tpl.html'"></div>
+
+<div ng-controller="quicktech.core.header.headerCtrl"
+class="mobile-top-bar"
+ng-class="{ 'ticket-detail-header': isTicketOpened && !isTicketEditOpened, 'ticket-create-update': isTicketEditOpened }"
+style="z-index: 991;"
+ng-include="'/ng1/scripts/core/header/mobile-header.tpl.html'"></div>
+
+<aside id="left" style="z-index: 991;"
+       ng-include="'/ng1/scripts/core/left-panel/left-panel.tpl.html'"></aside>
+
+<aside ng-controller="quicktech.core.leftPanel.leftPanelCtrl"
+id="mobile-left" ng-class="{opened: isLeftPanelOpened}"
+qt-sidebar style="z-index: 991;"
+ng-include="'/ng1/scripts/core/left-panel/mobile-left-panel.tpl.html'"></aside>
+
+<aside id="right" class="nano collapsed" ng-if="!isRightPanelHidden && applicationLoaded" right-panel
+       ng-include="'/ng1/scripts/core/right-panel/right-panel.tpl.html'"></aside>
+
+
+<div class="main-container">
+  <div class="row">
+    <div class="content-container" ng-class="{'large': isRightPanelHidden}">
+      <div class="content-wrapper">
+        <div ng-include="'/ng1/scripts/common/templates/index-page-body.tpl.html'"></div>
+       <notification></notification>
+        <modal-image-cropper></modal-image-cropper>
+        <app-draft-email></app-draft-email>
+        <app-main></app-main>
+      </div>
+    </div>
+  </div>
+</div>
+<!--<div feedback-form ></div>-->
+<div welcome-wizard></div>
+
+

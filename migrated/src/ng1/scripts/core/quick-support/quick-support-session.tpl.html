@@ -1,0 +1,124 @@
+<div class="support-session-content">
+
+  <a class="delete-remote-session"
+     href="javascript:void(0)"
+     ng-click="deleteRemoteSession(remoteSession.id)">
+    <i class="icn-sm icn-remove-old"
+       uib-tooltip="Delete remote session" tooltip-append-to-body="true" tooltip-placement="left"></i>
+  </a>
+
+  <div class="support-session-info pull-left">
+    <h3>Invite Customer</h3>
+
+    <p ng-show="remoteSession.status === 'URL_GENERATED' || remoteSession.status === 'URL_OPENED'">
+      Direct your customer to
+      <a ng-href="{{ host }}remote" target="_blank"><b>{{ showHost }}remote</b></a>
+      and give them this support key to join your key: <b>{{ remoteSession.key }}</b></p>
+
+    <p ng-show="remoteSession.status === 'DOWNLOADED'">
+      User <b>{{ remoteSession.userName }}</b> download agent. Please, waiting for install.
+    </p>
+
+    <p ng-show="remoteSession.status === 'INSTALLED'">
+      User <b>{{ remoteSession.userName }}</b>
+      {{ remoteSession.hostName ? " with hostName - '" + remoteSession.hostName + "'" : ''}}
+      installed agent({{ remoteSession.version ? remoteSession.version : '' }}).
+      You can start remote connection
+    </p>
+
+    <p ng-show="remoteSession.status === 'CONNECTED'">
+      <b>{{ remoteSession.performer.id === currentUser.id ? 'You' : getUserName(remoteSession.performer) }}</b>
+      started remote connection at <b>{{ remoteSession.startedAt | date:'medium' }}</b>.
+    </p>
+
+    <div class="action-section-control"
+         ng-show="remoteSession.status === 'URL_GENERATED' || remoteSession.status === 'URL_OPENED'">
+
+      <div class="session-action" open-mail-manager="remoteSession.key">
+        <span>Email This Info</span>
+      </div>
+
+      <div class="session-action" copy-url="remoteSession.key">
+        <span>Copy support URL</span>
+      </div>
+
+
+      <div class="session-action" copy-key="remoteSession.key">
+        <span>Copy KEY</span>
+      </div>
+
+    </div>
+
+    <div class="action-section-control" uib-dropdown
+         ng-show="remoteSession.status === 'INSTALLED' && remoteSession.online">
+
+      <div class="btn btn-default pull-left has-tooltip"
+           tooltip-placement="top" uib-tooltip="Remote Access"
+           dropdown-toogle aria-haspopup="true" aria-expanded="false" uib-dropdown-toggle>
+        <i class="icon-sm icn-remote-access"></i>
+      </div>
+
+      <ul class="dropdown-menu dropdown-menu" role="menu" style="width: auto;">
+
+        <li ng-click="connectRemoteAccess(remoteSession.id, 'CSS')">
+          <a tabindex="-1" href="javascript:void(0)">CSS – Custom Share Screen</a>
+        </li>
+
+        <li ng-click="connectRemoteAccess(remoteSession.id, 'RDP')">
+          <a tabindex="-1" href="javascript:void(0)">RDP – Remote desktop protocol</a>
+        </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+  <div class="support-session-graph-content pull-right">
+
+    <div class="avatar avatar-width pull-left">
+      <img ng-attr-src="{{getUserAvatarUrl(remoteSession.performer)}}"
+           alt="..." class="img-circle avatar-120">
+
+      <p class="ellipsis">{{ getUserName(remoteSession.performer) }}</p>
+    </div>
+
+    <span class="label label-primary admin-to-comp"
+          ng-class="{'connected-success': remoteSession.status === 'CONNECTED'}"></span>
+
+    <div class="device-type-icons">
+      <i class="icon-lg icn-computer has-tooltip"
+         data-placement="top" uib-tooltip="Computer"></i>
+      <span class="session-status">{{ statusMap[remoteSession.status] }}</span>
+    </div>
+
+    <span class="label label-primary comp-to-user"
+          ng-class="{'connected-success': isUserOnline(remoteSession)}"></span>
+
+    <div class="avatar pull-right text-right">
+      <img ng-attr-src="{{getUserAvatarUrl()}}"
+           alt="..." class="img-circle avatar-120">
+
+      <p>{{ remoteSession.userName }}</p>
+    </div>
+
+  </div>
+
+</div>
+<script>
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+  ga('create', 'UA-93441341-1', 'auto');
+  ga('send', 'pageview');
+
+</script>

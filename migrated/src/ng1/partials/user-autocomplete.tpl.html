@@ -1,0 +1,17 @@
+<a href="javascript:void(0)">
+  <div href="javascript:void(0)" class="avatar">
+    <div class="default-user-avatar" ng-if="!(match.model.avatar)" ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
+      <span>{{match.model.firstName[0].toUpperCase()}}</span>
+      <span>{{match.model.lastName[0].toUpperCase()}}</span>
+    </div>
+    <img ng-if="match.model.avatar" class="img-circle avatar-26"
+         ng-src="{{ '/users/' + (match.model.id || 'default') + '/image' + (match.model.avatar ? '.jpg?t=' + match.model.avatar.updatedAt : '') }}"
+         alt="...">
+  </div>
+  <div class="user-name">
+    <p
+      ng-bind-html='(match.label | uibTypeaheadHighlight:query)'></p>
+    <p
+      ng-bind-html='(match.model.primaryEmail && match.model.primaryEmail.length > 0 ? " \"" + match.model.primaryEmail + "\"" : " ")'></p>
+  </div>
+</a>

@@ -1,0 +1,27 @@
+<div class="new-companies-content__header">
+  <h3>Companies ({{calculateCount.getCurrent()}})</h3>
+  <div class="new-companies-content__header--search">
+    <!--add class "show" to <div class="new-companies-selected">-->
+    <div class="new-companies-selected">
+      <div class="new-companies-selected-qty">
+        <span>2</span> Selected
+      </div>
+      <div class="new-companies-selected-actions">
+        <i class="icn-16 email-ng2"></i>
+        <!--<i class="icn-16 archive-blue-ng2"></i>-->
+        <!--<i class="icn-16 export-ng2"></i>-->
+      </div>
+    </div>
+    <i class="icn-16 email-ng2"
+       uib-tooltip="Draft email"
+       tooltip-placement="top"
+       (click)="showAsideForDraftEmail()"></i>
+    <button class="new-link desktop-hidden"
+            style="font-size: 13px;"
+            (click)="showAsideForAdd()">Add Company
+    </button>
+    <button class="btn-new btn-primary-white mob-hidden"
+            (click)="showAsideForAdd()">Add Company
+    </button>
+  </div>
+</div>

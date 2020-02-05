@@ -1,0 +1,28 @@
+.quote-create {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    top: 78px;
+    left: 316px;
+    background: #F9FBFC;
+    padding: 24px;
+    position: fixed;
+    width: calc(100vw - 324px);
+    transition: all .3s;
+    z-index: 1;
+    h1 {
+      font-size: 28px;
+      font-family: Graphik-Medium, sans-serif;
+      margin: 0;
+      font-weight: 500;
+    }
+    &--actions {
+      display: flex;
+      .btn-new.disabled {
+        width: 90px;
+        margin-right: 8px;
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+<div>
+  <div class="modal-body" style="width: 250px;">
+    {{ currentUser.isOwner
+    ? 'You can not use invoicing feature, because you have not entered the company\'s address.'
+    : 'The owner of the company has not filled the address of the company, therefore you can not use invoicing feature.'
+    }}
+  </div>
+  <div class="modal-footer" ng-if="currentUser.isOwner">
+    <div class="btn btn-lg btn-primary" ui-sref="settings.companyProfile({ isAddressFocused: true })">
+      Enter Address
+    </div>
+  </div>
+</div>

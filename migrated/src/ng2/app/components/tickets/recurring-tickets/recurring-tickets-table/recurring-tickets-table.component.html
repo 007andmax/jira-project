@@ -1,0 +1,97 @@
+<div class="recurring-tickets-content__list--item clearfix" [ngClass]="(ticket.noValid) ? 'no-valid' : ''">
+  <div class="col-md-3">
+    <label class="checkbox-container">
+      <input type="checkbox">
+      <span class="checkbox-mark"></span>
+    </label>
+    <div class="circle-avatar" [textContent]="getParseShortName(ticket.company.name)"></div>
+    <p class="ff-g-m fw-600" [textContent]="ticket.company.name"></p>
+  </div>
+  <div class="col-md-2" [textContent]="(ticket.agent) ? ticket.agent.label : ''"></div>
+  <div class="col-md-3" [textContent]="ticket.description"></div>
+  <div class="col-md-1" [textContent]="getPareDate(ticket.startDate)"></div>
+  <div class="col-md-1" *ngIf="!ticket.suspended" [textContent]="recurringState.getTypeCron(ticket.cronExpression)"></div>
+  <div class="col-md-1" *ngIf="ticket.suspended">Suspend</div>
+  <div class="col-md-2 assigned-container">
+
+    <ng-template ngFor let-user [ngForOf]="ticket.assignedUsers" let-i="index" [ngForTrackBy]="trackByIndex">
+      <div class="default-user-avatar avatar-background-color-odd ng-scope" *ngIf="!user.avatar && i < 3">
+        <span [textContent]="user.firstName[0].toUpperCase()"></span>
+        <span [textContent]="user.lastName[0].toUpperCase()"></span>
+      </div>
+      <div class="default-user-avatar avatar-background-color-odd ng-scope" *ngIf="user.avatar && i < 3">
+        <img class="img-circle qwe"
+             style="margin: 0;"
+             [src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')"
+             alt="...">
+      </div>
+
+    </ng-template>
+
+    <p class="new-link"
+       *ngIf="ticket.assignedUsers.length > 3"
+       [textContent]="'+' + (ticket.assignedUsers.length - 3) + ' more'"
+       (click)="showSelectWrapper($event)"></p>
+
+    <div class="dropdown-assign-ticket fixed-assign"
+         *ngIf="showSelect"
+         (click)="$event.preventDefault()">
+      <div class="assign-ticket" assign-user="">
+
+        <div class="assign-ticket-content">
+
+          <div class="scroll-pane">
+            <div class="users-list custom-scroll" tabindex="-1"
+                 style="position: absolute; z-index: 9999;padding: 0; max-height: 171px;">
+              <ng-template ngFor let-user [ngForOf]="ticket.assignedUsers" let-i="index"
+                           [ngForTrackBy]="trackByIndex">
+                <div class="user-item" data-index="1"><a href="javascript:void(0)"
+                                                         [id]="user.id" class="dropdown-link">
+                  <div class="default-user-avatar avatar-background-color-odd ng-scope" *ngIf="!user.avatar">
+                    <span [textContent]="user.firstName[0].toUpperCase()"></span>
+                    <span [textContent]="user.lastName[0].toUpperCase()"></span>
+                  </div>
+                  <div class="default-user-avatar avatar-background-color-odd ng-scope" *ngIf="user.avatar">
+                    <img ng-if="user.avatar" class="img-circle qwe"
+                         style="margin: 0;"
+                         [src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')"
+                         alt="...">
+                  </div>
+                  <span>
+                                <p [textContent]="user.firstName + ' ' + user.lastName"></p>
+                                <p [textContent]="user.primaryEmail" style="margin: 0;"></p>
+                              </span>
+                </a></div>
+              </ng-template>
+
+
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+    <div class="assigned-wrapper"></div>
+
+    <div class="grey-dropdown right with-icons"
+         ngbDropdown>
+      <i class="icn-16 more-vertical-ng2 pointer"
+         id="dropdownBasic"
+         ngbDropdownToggle></i>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic">
+        <button ngbDropdownItem (click)="editTicket()"><i class="icn-16 edit-grey-ng2"></i>Edit</button>
+
+        <button ngbDropdownItem (click)="suspendTicket()" *ngIf="!ticket.suspended"><i
+          class="icn-16 archive-grey-ng2"></i>Suspend
+        </button>
+        <button ngbDropdownItem (click)="resumeTicket()" *ngIf="ticket.suspended"><i
+          class="icn-16 archive-grey-ng2"></i>Resume
+        </button>
+        <button ngbDropdownItem (click)="removeTicket()"><i class="icn-16 archive-grey-ng2"></i>Delete</button>
+      </div>
+    </div>
+  </div>
+  <i class="no-valid-label" *ngIf="(ticket.noValid)"></i>
+</div>

@@ -1,0 +1,76 @@
+<div class="product-list-report ticket-report"
+     convert-to-pdf="/reports/pdf"
+     disable-selector=".open-pdf-btn"
+     email-endpoint="/reports/email"
+     orientation="{{'LANDSCAPE'}}"
+     selector=".hardware-summary"
+     file-name="{{ reportName }}"
+     id="{{ ticketReport.id }}">
+  <p class="report-title">Software Summary Report </p>
+  <i class="back-page" ui-sref="reports"></i>
+  <div class="new-reports">
+    <report-menu class-name="run-report-content-device"
+                 open-in-pdf="openInPdf"
+                 is-report-available="!!isReportAvailable"
+                 get-user-name="getUserName"
+                 download-as-pdf="downloadAsPdf"
+                 send-to-mail="sendToMail"
+                 email-pattern="emailPattern"
+                 is-soft-list-hidden="true"
+                 is-radio-button-hidden="true"
+                 is-software-summary-options="true"
+                 is-date-range-hidden="true">
+    </report-menu>
+  </div>
+  <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
+  <div class="product-list___ticket hardware-summary" ng-show="!loadingInProgress">
+    <div class="product-list-ticket software-report"
+         style="width: 1180px;">
+      <div class="report-header">
+        <h1>Software Summary Report</h1>
+        <div class="company-info">
+          <h3>{{softwareSummarySoft.name || company.name || 'All companies'}}</h3>
+          <p>{{date | date:'yyyy-MM-dd'}}</p>
+        </div>
+      </div>
+      <div class="header-product-list-ticket" ng-if="reportTransformedSoftwareSummaryData.length > 0">
+        <!--<h3>{{reportRemoteAccess.techCompanyName}}</h3>-->
+      </div>
+      <div ng-if="reportTransformedSoftwareSummaryData.length > 0 && !loadingInProgress">
+        <div>
+          <ul class="con-col">
+            <li class="top-product-list-ticket clearfix">
+              <div class="col-md-2" ng-if="softwareSummaryWithDeviceItem"><strong>Device</strong></div>
+              <div class="col-md-2" ng-if="softwareSummaryWithSoftwareTitleItem"><strong>Software Title</strong></div>
+              <div class="col-md-2" ng-if="softwareSummaryWithInstalationKeyItem"><strong>Installation Key</strong></div>
+              <div class="col-md-2" ng-if="softwareSummaryWithPublisherItem"><strong>Publisher</strong></div>
+              <div class="col-md-2" ng-if="softwareSummaryWithVersionItem"><strong>Version</strong></div>
+              <div class="col-md-2" ng-if="softwareSummaryWithInstallDateItem"><strong>Install Date</strong></div>
+            </li>
+            <div ng-if="reportTransformedSoftwareSummaryData && reportTransformedSoftwareSummaryData.length > 0">
+              <li class="content-product-list-ticket clearfix" ng-repeat="softItem in reportTransformedSoftwareSummaryData | orderBy:['device', 'softwareTitle']"
+                  on-finish-render="buildPdf()">
+                {{$scope.type}}
+                <div class="col-md-2" ng-if="softwareSummaryWithDeviceItem">{{softItem.device}}</div>
+                <div class="col-md-2" ng-if="softwareSummaryWithSoftwareTitleItem">{{softItem.softwareTitle}}</div>
+                <div class="col-md-2" ng-if="softwareSummaryWithInstalationKeyItem">{{softItem.installationKey}}</div>
+                <div class="col-md-2" ng-if="softwareSummaryWithPublisherItem">{{softItem.publisher}}</div>
+                <div class="col-md-2" ng-if="softwareSummaryWithVersionItem">{{softItem.version}}</div>
+                <div class="col-md-2" ng-if="softwareSummaryWithInstallDateItem">{{softItem.installDate | date:'yyyy-MM-dd'}}</div>
+              </li>
+            </div>
+          </ul>
+        </div>
+
+      </div>
+      <div class="product-report-total-sales clearfix" ng-if="reportRemoteAccess.lines">
+        <p>Total Duration: <br> <strong><span>{{reportRemoteAccess.totalDuration}} min</span></strong></p>
+      </div>
+      <div class="report-footer">
+        <p>Prepare by : <span>{{ username }}</span></p>
+        <p>{{ currentCompany.name }}</p>
+        <p>Quicktech <span>2019</span> ©. All rights reserved</p>
+      </div>
+    </div>
+  </div>
+</div>

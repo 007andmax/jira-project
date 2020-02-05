@@ -1,0 +1,22 @@
+<input
+  id="typeahead-focus2"
+  placeholder="Select Devices"
+  type="text"
+  [(ngModel)]="selectedDevice"
+  class="pointer"
+  [inputFormatter]="formatter"
+  [resultFormatter]="formatter"
+  [ngbTypeahead]="search"
+  (selectItem)="selectItem($event)"
+  (focus)="focus$.next('')"
+  (click)="click$.next('')"
+  #instance="ngbTypeahead"
+  [disabled]="!devicesList"
+/>
+<span >
+<i *ngIf="selectedDevice"
+   class="icn-sm icn-remove-old"
+   (click)="clearDevices($event)"></i>
+<i *ngIf="!selectedDevice"
+   class="icn-sm report-caret-icon"></i>
+</span>

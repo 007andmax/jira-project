@@ -1,0 +1,63 @@
+<div class="create-new create-quote-mail">
+  <div class="quote--header">
+    <h2>Write ...</h2>
+    <button class="close-modal" (click)="onCheckForClose()"></button>
+  </div>
+  <div class="quote--content">
+    <div class="col-md-12" [ngClass]="{'active-field': (focus===true || (subject && subject.length > 0))}">
+      <div class="placeholder">Write Subject</div>
+      <input
+        type="text"
+        placeholder=""
+        [(ngModel)]="subject"
+        (focus)="focus = true"
+        (blur)="focus = false"
+        (ngModelChange)="setSubject($event)">
+    </div>
+    <div class="col-md-12">
+      <mat-form-field>
+        <mat-chip-list #chipList aria-label="Fruit selection">
+          <mat-chip
+            *ngFor="let user of selectedUsers; let i = index"
+            [selectable]="selectable"
+            [removable]="removable"
+            (removed)="remove(i)">
+            {{user}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input
+            placeholder="Add receipt email address"
+            #userInput
+            class="pointer"
+            [formControl]="userCtrl"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur"
+            (keyup)="keyup($event)"
+            (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+          <mat-option *ngFor="let user of users" [value]="user">
+            {{user.primaryEmail}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <p *ngIf="showError">at least 1 user</p>
+      <p *ngIf="showErrorClient">please choose Client</p>
+    </div>
+    <div class="col-md-12">
+      <textarea
+        class="quote-text-block"
+        placeholder="Click here to write a message"
+        [(ngModel)]="message"
+        (ngModelChange)="setMessage($event)"></textarea>
+    </div>
+  </div>
+  <div class="quote--footer">
+      <button class="btn btn-primary" (click)="save()" *ngIf="onlySendMode">Send</button>
+    <button class="btn btn-primary" (click)="save()" *ngIf="!onlySendMode">Save and send</button>
+    <button class="btn btn-default" (click)="onCheckForClose()">Cancel</button>
+  </div>
+</div>
+

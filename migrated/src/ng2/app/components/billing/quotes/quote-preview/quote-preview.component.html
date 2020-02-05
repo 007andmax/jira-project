@@ -1,0 +1,180 @@
+<div class="quote-preview invoice-create">
+  <div class="quote-create--header">
+    <h3>Quote #<span>{{quoteForCreate && quoteForCreate.quoteNumber}}</span></h3>
+    <div class="quote-create--header__btn" *ngIf="!editable">
+      <button class="btn-new default" (click)="goToCreate()">Edit</button>
+
+
+      <div class="btn-new btn-success btn-with-dropdown">
+          <button type="button" (click)="saveAndSend()" >Save and Send</button>
+     <!--  <button type="button" (click)="save()" *ngIf="editMode">Save and Continue</button>
+        <button type="button" (click)="approveQuote()" *ngIf="!editMode">Save and Approve</button>--> 
+        <div class="light-dropdown" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+          <button class="dropdown-toggle-split" ngbDropdownToggle>
+            <i class="icn-sm pointer report-caret-icon-white"></i>
+          </button>
+          <div class="dropdown-menu" ngbDropdownMenu>
+            <button class="dropdown-item" ngbDropdownItem (click)="approveQuote()"  >Save and Approve
+            </button>
+            <button class="dropdown-item" ngbDropdownItem (click)="save()"  >Save and Continue</button>
+
+            <button class="dropdown-item" ngbDropdownItem (click)="downloadPdf()">Save and Download</button>
+          <!--  <button class="dropdown-item" ngbDropdownItem (click)="saveAndSend()">Save and Send</button>-->
+          </div>
+        </div>
+      </div>
+
+
+      <!--<button class="btn-new btn-success" (click)="save()">-->
+      <!--Save and Continue-->
+      <!--<i class="report-caret-icon-white"></i>-->
+      <!--</button>-->
+      <!--<button class="dropdown-item" ngbDropdownItem (click)="approveQuote()">Approve a quote</button>-->
+      <!--<button class="dropdown-item" ngbDropdownItem (click)="downloadPdf()">Save and Download</button>-->
+      <!--<button class="dropdown-item" ngbDropdownItem (click)="saveAndSend()">Save and Send</button>-->
+    </div>
+    <div class="quote-create--header__btn" *ngIf="editable">
+      <button class="btn-new default" (click)="goToQuotes()">Back</button>
+
+      <div class="btn-new btn-success btn-with-dropdown">
+ 
+          <button type="button" (click)="onlySend()">Resend Quote</button>
+          <div class="light-dropdown" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+            <button class="dropdown-toggle-split" ngbDropdownToggle>
+              <i class="icn-sm pointer report-caret-icon-white"></i>
+            </button>
+            <div class="dropdown-menu" ngbDropdownMenu>
+              <button class="dropdown-item" ngbDropdownItem (click)="onlyDownloadPdf()" *ngIf="editMode">Download Quote</button>
+             
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="info-block">
+    <p style="display: inline-block">
+      <span>This is a preview of your Quotation. Switch back to Edit if you need to make changes.</span>
+    </p>
+  </div>
+  <div class="quote-notes">
+    <ng-template ngFor let-item [ngForOf]="quoteForCreate.reviewNotes" [ngForTrackBy]="trackById">
+      <div class="quote-notes__item clearfix">
+        <div class="col-md-4 pl-0">
+          <p class="quote-notes__item--fullname"
+             [textContent]="getUserWhoSend(item.user.firstName,item.user.lastName)"></p>
+          <p class="quote-notes__item--email" [textContent]="item.user.primaryEmail"></p>
+          <p class="quote-notes__item--startdate"
+             [textContent]="getFormatDateWithTime(item.startDate,item.createdAt)"></p>
+        </div>
+        <div class="col-md-8 pr-0">
+          <p [textContent]="item.note"></p>
+        </div>
+      </div>
+
+    </ng-template>
+  </div>
+  <div class="quote-list">
+
+
+    <div class="quote-list--header">
+      <div class="quote-list--header__top clearfix">
+        <div class="col-md-5 pl-30">
+          <img src="/companyLogo/{{company.id}}?update={{stopCache}}" alt="logo" *ngIf="company && company.logo">
+          <img src="/company/default/logo.jpg" alt="logo" *ngIf="!(company && company.logo)">
+        </div>
+        <div class="col-md-7 text-right pr-30" *ngIf="company">
+          <h4 class="bold">Quote #<span>{{quoteForCreate && quoteForCreate.quoteNumber}}</span></h4>
+          <p class="bold">{{company.name}}</p>
+          <p>{{company.addresses[0].address}}</p>
+          <p *ngFor="let item of company.addresses[0].phoneNumbers">{{item.number}}</p>
+        </div>
+      </div>
+      <div class="quote-list--header__bottom clearfix">
+        <div class="col-md-7 pl-30">
+          <p style="font-size: 11px!important; margin-bottom: 10px;">Bill to</p>
+          <p class="bold">{{quote.client && quote.client.name }}</p>
+          <p>{{quote.client && getCLientUserName(quote.client.companyInfo)}}</p>
+          <p>{{quote.client && getCLientAddress(quote.client.companyInfo)}}</p>
+          <p>{{quote.client && quote.client.companyInfo.contacts[0].primaryEmail}}</p>
+        </div>
+        <div class="col-md-5 pr-30">
+          <p class="bold">
+            <span class="detail-sub">{{getFormatDate(quoteForCreate.startDate)}}</span>
+            Estimate Date
+          </p>
+          <p class="bold">
+            <span>{{getFormatDate(quoteForCreate.endDate)}}</span>
+            Expires On
+          </p>
+          <p class="bold">
+            <span style="font-weight: 700!important;">{{quote.total | currency}}</span>
+            Grand Total
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="quote-list--item">
+      <div class="quote-list--item__header row">
+        <div class="col-md-1" style="width: 16.7%;">Items</div>
+        <div class="col-md-1" style="width: 35.4%;">Description</div>
+        <div class="col-md-1" style="width: 13%;">Unit Cost</div>
+        <div class="col-md-1" style="width: 13%;">Quantity</div>
+        <div class="col-md-1">Tax</div>
+        <div class="col-md-1 text-right" style="width: 13%;">Line Total</div>
+      </div>
+      <div class="quote-list--item__content" *ngIf="itemsArray && itemsArray.length > 0">
+        <div class="row" *ngFor="let item of itemsArray">
+
+          <!----------------------------------------------------------------------------->
+          <!--IF TYPE IS 'SERVICE'-->
+          <div class="col-md-1" *ngIf="!item.sale" style="width: 16.7%;">{{item.name}}</div>
+          <div class="col-md-1" *ngIf="!item.sale"
+               style="width: 35.4%;white-space: pre-line;">{{item.description}}</div>
+
+          <!--IF TYPE IS 'PRODUCT-->
+          <div class="col-md-1" *ngIf="item.sale" style="width: 52.2%;white-space: pre-line;">{{item.description}}</div>
+          <!----------------------------------------------------------------------------->
+
+          <div class="col-md-1" style="width: 13%;">{{(item.sale || item.rate) | currency}}</div>
+          <div class="col-md-1" style="width: 13%;">{{item.quantity}}</div>
+          <div class="col-md-1">
+            {{getTaxPrice((item.sale || item.rate), item.quantity, item.taxes) | currency}}
+          </div>
+          <div class="col-md-1 text-right" style="width: 13%;">
+            {{getPrice((item.sale || item.rate), item.quantity, item.taxes) | currency}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="quote-list--footer">
+      <div class="quote-list--footer__top">
+        <div class="clearfix" style="margin-bottom: 5px;">
+          <div class="col-md-8 bold pl-30">Customer Note Type</div>
+          <div class="col-md-2 bold fz-11">Sub Total Services</div>
+          <div class="col-md-2 text-right pr-30">{{quote.subTotalServices | currency}}</div>
+        </div>
+        <div class="clearfix" style="margin-bottom: 5px;">
+          <div class="col-md-8 bold pl-30"></div>
+          <div class="col-md-2 bold fz-11">Sub Total Products</div>
+          <div class="col-md-2 text-right pr-30">{{quote.subTotalProducts | currency}}</div>
+        </div>
+        <div class="clearfix">
+          <div class="col-md-8 pl-30 notes">
+            {{(quoteForCreate.selectedNote && quoteForCreate.selectedNote.line1) ? quoteForCreate.selectedNote.line1 :(quoteForCreate.selectedNote) ? quoteForCreate.selectedNote : ""}}
+          </div>
+          <div class="col-md-2 bold fz-11" style="padding: 8px 15px;">Tax</div>
+          <div class="col-md-2 text-right pr-30" style="padding: 8px 15px;">{{quote.totalTaxes | currency}}</div>
+        </div>
+        <div class="clearfix">
+          <div class="col-md-8 pl-30"></div>
+          <div class="col-md-2 bold fz-11">Total</div>
+          <div class="col-md-2 bold fz-16 text-right pr-30">{{quote.total | currency}}</div>
+        </div>
+      </div>
+      <div class="quote-list--footer__bottom clearfix">
+        <div class="col-md-12 bold pl-30">Terms & Conditions</div>
+        <div class="col-md-12 pl-30 notes">{{getGlobalNote()}}</div>
+      </div>
+    </div>
+  </div>
+</div>
