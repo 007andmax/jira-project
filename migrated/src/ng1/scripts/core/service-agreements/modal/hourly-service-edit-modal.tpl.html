@@ -1,0 +1,213 @@
+<div class="service-agreement-modal" ng-if="editMode && isEditContract">
+    <div class="service-form-wrapper clearfix" ng-form="hourlyContractForm">
+      <div class="hourly clearfix">
+        <div class="close-btn btn" ng-click="closeModal()" tabindex="1">
+          <i class="icn-sm icn-remove-old"></i>
+        </div>
+  
+        <div class="service-header">
+          <h4 class="title-services">Hourly Service</h4>
+        </div>
+        <div class="service-contract-details clearfix">
+          <div class="col-md-7">
+            <div class="form-group" ng-class="{ 'has-error': isShowingHourErrors(hourlyContractForm, 'description')}">
+              Description*
+              <input placeholder="Description"
+                     name="description"
+                     type="text"
+                     class="form-control"
+                     ng-model="editContract.description"
+                     hard-reset-pattern="descriptionPattern" required>
+            </div>
+          </div>
+          <div class="col-md-12"></div>
+          <div class="col-md-3" style="margin-right: 26px;">
+            <div class="form-group">
+              Start Date*:
+  
+              <div style="position: absolute;top: 30px;right: -350px;"
+                   ng-class="{'hide': !isShowingHourErrors(hourlyContractForm, 'StartDate')}">
+                <label class="control-label" style="color: red; text-align: left">Dates are required</label>
+              </div>
+              <input class="form-control has-dropdown pointer"
+                     type="text"
+                     ng-model="editContract.startDate"
+                     placeholder="Select"
+                     readonly
+                     ng-change="startDatePicker(editContract.startDate)"
+                     name="startDate"
+                     qt-data-time-picker
+                     min-date="today"
+                     required>
+              <i class="report-calendar"></i>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              End Date*:
+  
+              <input class="form-control has-dropdown pointer"
+                     ng-if="reInitEndDateHourly"
+                     type="text"
+                     ng-model="editContract.endDate"
+                     placeholder="Select"
+                     readonly
+                     ng-change="endDatePicker(editContract.endDate)"
+                     name="EndDate"
+                     qt-data-time-picker
+                     default-date="defaultDate"
+                     required>
+              <i class="report-calendar"></i>
+            </div>
+          </div>
+        </div>
+  
+        <div class="service-bill-hide-content clearfix">
+          <div class="col-md-4 service-name-agreement">Service name</div>
+          <div class="col-md-1 text-center" style="padding: 0;">Billable</div>
+          <div class="price-agreement">Per hour</div>
+          <div class="tax-agreement text-center">Tax</div>
+          <div class="col-md-1 text-center" style="padding: 0;">Action</div>
+          <div class="bill-hide-content-item clearfix" ng-repeat="service in editContract.services | orderBy : 'name' ">
+            <div class="col-md-4 service-name-agreement form-group"
+                 ng-class="{'has-error': checkHourlyServiceErrorForm(service)}">
+              <input placeholder="Service Name" type="text" class="form-control" ng-model="service.name"
+                     hard-reset-pattern="serviceNamePattern" required>
+            </div>
+            <div class="col-md-1 fourm-group text-center">
+              <label class="control checkbox">
+                <input ng-model="service.billable" type="checkbox">
+                <span class="control-indicator"></span>
+              </label>
+            </div>
+            <div class="price-agreement form-group before-icon" ng-style="{'visibility': service.billable ? 'visible' : 'hidden'}">
+              <input placeholder="0.00" type="text" class="form-control"
+                     ng-model="service.rate"
+                     hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2">
+            </div>
+            <div class="tax-agreement form-group text-center" ng-style="{'visibility': service.billable ? 'visible' : 'hidden'}">
+              <div>
+                <div>
+                  <!--<i class="icn-sm icn-tax"> </i>-->
+                  <select-taxes taxes="taxes" entity="service"></select-taxes>
+                  <!--<p>{{service.taxes.length}}</p>-->
+                </div>
+              </div>
+            </div>
+            <div class="col-md-1 form-group text-center">
+              <div class="add-remove-service">
+                <div ng-click="deleteService(service)">
+                  <i class="icon-sm icn-delete"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <p style="padding-left: 15px;">Create new Service</p>
+  
+          <div class="bill-hide-content-item clearfix" ng-form="newServiceForm" ng-if="reinitNewServiceForm">
+            <div ng-show="newServiceNameIsError">
+              <p style="color: red;padding-left: 15px;">{{newServiceNameErrorMessage}}</p>
+            </div>
+            <div ng-show="!isNameUnique(editService.name) && editService.name">
+              <p style="color: red;padding-left: 15px;">Duplicate name</p>
+            </div>
+  
+            <div class="col-md-4 service-name-agreement form-group short-service-list">
+              <div uib-dropdown
+                   ng-class="{'has-error': (isShowingHourNewFieldError(newServiceForm, 'editServiceName') || showNotAddedHourlyServiceError(editService))}">
+  
+                <input type="text"
+                       name="editServiceName"
+                       ng-model="editService.name"
+                       ng-minlength="1"
+                       autocomplete="off"
+                       placeholder="Service"
+                       class="form-control form-control-dropdown dropdown-toggle"
+                       uib-typeahead="service as service.name for service in getUniqueServicesForDropdown() |  orderBy:'name'"
+                       qt-typeahead-async-show-on-focus
+                       ng-change="pullServiceRate(editService)"
+                       hard-reset-pattern="descriptionPattern"
+                       ng-click="refreshNotAddedServiceErrorHourly()"/>
+  
+                <div class="input-top-4" typeahead-input-icon="editService.name"></div>
+  
+                <div class="service-list-container"></div>
+                <!--<input type="hidden" name="service" ng-model="newContractService.name.versionedId.id" ng-required="true">-->
+  
+              </div>
+            </div>
+  
+  
+            <!-- <div class="col-md-4 service-name-agreement form-group"
+                 ng-class="{'has-error': (isShowingHourNewFieldError(newServiceForm, 'editServiceName') || showNotAddedHourlyServiceError(editService))}">
+  
+              <input placeholder="New Service Name"
+                     type="text"
+                     ng-click="refreshNotAddedServiceErrorHourly()"
+                     name="editServiceName"
+                     class="form-control"
+                     ng-model="editService.name"
+                     required hard-reset-pattern="serviceNamePattern"
+                     invalid-when="!isNameUnique(editService.name)">
+            </div> -->
+  
+  
+  
+            <div class="col-md-1 fourm-group text-center">
+              <label class="control checkbox">
+                <input type="checkbox" ng-model="editService.billable">
+                <span class="control-indicator"></span>
+              </label>
+            </div>
+            <div class="price-agreement fourm-group before-icon" ng-style="{'visibility': editService.billable ? 'visible' : 'hidden'}">
+              <input placeholder="0.00"
+                     type="text"
+                     class="form-control"
+                     ng-model="editService.rate"
+                     hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2">
+            </div>
+            <div class="tax-agreement fourm-group text-center" ng-style="{'visibility': editService.billable ? 'visible' : 'hidden'}">
+              <div class="">
+                <div>
+                  <select-taxes taxes="taxes" entity="editService" wrong="true"></select-taxes>
+                  <!--<p>{{editService.taxes.length}}</p>-->
+                </div>
+              </div>
+            </div>
+            <div class="col-md-1 fourm-group text-center">
+              <div class="add-remove-service" ng-hide="editContract.services.length > 19">
+                <div ng-if="showAddServiceButton" ng-click="addNewService(newServiceForm, editService)">
+                  <i class="icon-sm icn-add-action"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+        </div>
+  
+      </div>
+      <div class="col-md-12 agreement-fixed-button text-right">
+        <div class="col-md-8" ng-show="showErrorValidationDuplicatesHourly">
+          <p style="color: red; text-align: left">An agreement with current services already using for current company</p>
+        </div>
+        <div class="col-md-8" ng-show="showCreateHourlyContractValidationError">
+          <p style="color: red; text-align: left">{{errorMessageCreateHourlyDuplicate}}</p>
+        </div>
+        <div class="btn btn-success btn-create" ng-click="validateAndCreateHourlyContract(editService)">
+          Create
+        </div>
+        <!--<div class="btn btn-primary btn-create">Terminate</div>-->
+      </div>
+  
+    </div>
+  </div>
+  
+  
+  <!--READONLY MODE-->
+  
+  <div class="service-agreement-modal clearfix" ng-show="!editMode">
+    <div ng-include="'/ng1/scripts/core/service-agreements/modal/hourly-service-preview-modal.tpl.html'"></div>
+  
+  </div>
+  

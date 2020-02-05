@@ -50,6 +50,14 @@
         Utils.handleCallback(future, callback);
       }
 
+      function updateContract(data, callback) {
+        var future = $http({
+          url: '/serviceAgreements',
+          method: 'PUT',
+          data: data
+        });
+        Utils.handleCallback(future, callback);
+      }
 
       function createContract(data, createBillableItem, callback) {
         var future = $http({
@@ -100,10 +108,11 @@
         Utils.handleCallback(future, callback)
       }
 
-      function validateCrossingDatesHourly(startDate, endDate, companyId, callback) {
+      function validateCrossingDatesHourly(startDate, endDate, companyId,agreementId, callback) {
+        console.log('agreementId',agreementId);
         var future = $http({
           method: 'GET',
-          url: '/serviceAgreements/validateCrossingDates?' + 'companyId=' + companyId + '&startDate=' + startDate + '&endDate=' + endDate
+          url: '/serviceAgreements/validateCrossingDates?' + 'companyId=' + companyId  + '&startDate=' + startDate + '&endDate=' + endDate + ((agreementId) ? '&agreementId=' + agreementId : '')
         });
         Utils.handleCallback(future, callback)
       }
@@ -118,7 +127,8 @@
         terminate: terminate,
         deleteAgreement: deleteAgreement,
         forceCreate: forceCreate,
-        validateCrossingDatesHourly: validateCrossingDatesHourly
+        validateCrossingDatesHourly: validateCrossingDatesHourly,
+        updateContract:updateContract
       }
 
 

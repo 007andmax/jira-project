@@ -39,7 +39,7 @@
                  class="form-control has-dropdown default-cursor"
                  name="EndDate"
                  readonly
-                 value="{{dateFilter(editContract.endDate)}}"
+                 value="{{endDatePreview}}"
                  placeholder="End Date">
           <i class="report-calendar"></i>
         </div>
@@ -93,5 +93,6 @@
     <!--<div class="btn btn-success btn-create" ng-click="createContract()">Create</div>-->
     <div class="btn btn-primary btn-create" ng-click="terminateContract()" style="margin-right: 7px;">Terminate and close</div>
     <div class="btn btn-primary btn-create" ng-click="terminateAndCopy()">Terminate and copy</div>
+    <div class="btn btn-primary btn-create" ng-click="terminateAndEdit()">Edit</div>
   </div>
 </div>

@@ -5,16 +5,18 @@
   angular.module('quicktech.core.serviceAgreements').controller('serviceContractCtrl',
     ['$scope', 'AgreementsService', 'CompaniesService', 'ServicesService',
       'ProductsService', '$filter', '$timeout', 'TaxesService', '$q',
-      'quicktech.common.services.UserConfirmationsService', 'Utils',
+      'quicktech.common.services.UserConfirmationsService', 'Utils','$rootScope',
       function ($scope, AgreementsService, CompaniesService, ServicesService,
-                ProductsService, $filter, $timeout, TaxesService, $q, UserConfirmationsService, Utils) {
-
+                ProductsService, $filter, $timeout, TaxesService, $q, UserConfirmationsService, Utils,$rootScope) {
+console.log('ffffffffffffffffffffff');
+console.log('action',$scope.action);
         $scope.intervals = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days'];
         $scope.serviceContractType = {
           DEVICE: 'By Device',
           USER: 'By Users',
-          OTHER: 'Other'
+      //    OTHER: 'Other'
         };
+        $scope.currentCompany = CompaniesService.getCurrentCompany();
         $scope.defaultServicesAdditional = [];
         $scope.defaultServicesAdditionalForDropDown = [];
 
@@ -61,7 +63,22 @@
 
         $scope.openedTab = 'product';
 
-
+        $rootScope.$on('terminateAndCopy', function (evt, val) {
+          console.log('terminateAndCopy');
+          $scope.action = 'COPY';
+          console.log('$scope.terminateAndCopy', $scope.serviceContract);
+          var end_date = angular.copy($scope.editContract.endDate);
+          $scope.serviceContract.endDate = $filter('date')(new Date(end_date - $scope.currentCompany.addresses[0].timeZone.timeOffset), 'dd MMM yyyy');//$filter('date')(new Date($scope.serviceContract.endDate), 'dd MMM yyyy');
+          $scope.serviceContract.endDatePreview = $scope.serviceContract.endDate;
+          console.log('$scope.serviceContract.endDate',$scope.serviceContract.endDate);
+          $scope.serviceContract.startDatePreview = $scope.serviceContract.startDate;
+          $scope.serviceContract.startDate = $filter('date')($scope.editContract.startDate, 'dd MMM yyyy');
+         
+          $scope.serviceContract.minStartDate = Date.now();
+          $timeout(function () {
+            changeNumOfIntervals($scope.serviceContract.startDate, $scope.serviceContract.endDate, false);
+          }, 500);
+        });
 
         var day = 1000 * 60 * 60 * 24;
         var month = 30 * day;
@@ -71,6 +88,7 @@
 
 
         if ($scope.editMode) {
+          console.log('-----------------');
           $scope.serviceContract = {
             billType: null,
             minStartDate: Date.now(),
@@ -90,10 +108,114 @@
           preCreateFirstServicesEntities();
           createDefaultServices();
           createDefaultServiceContractServicesToTrack();
-        } else {
+          console.log('$scope.serviceContract.serviceExpenses',$scope.serviceContract.serviceExpenses);
+         console.log('editContract',$scope.editContract);
+          if ($scope.isEditContract) {
+            var end_date = angular.copy($scope.editContract.endDate);
           $scope.serviceContract = angular.copy($scope.editContract);
           $scope.reInitPrpductsExpenseNameField = false;
+        
+          $scope.serviceContract.endDate = $filter('date')(new Date(end_date - $scope.currentCompany.addresses[0].timeZone.timeOffset), 'dd MMM yyyy');//$filter('date')(new Date($scope.serviceContract.endDate), 'dd MMM yyyy');
           $scope.serviceContract.endDatePreview = $scope.serviceContract.endDate;
+          console.log('$scope.serviceContract.endDate',$scope.serviceContract.endDate);
+          $scope.serviceContract.startDatePreview = $scope.serviceContract.startDate;
+          $scope.serviceContract.startDate = $filter('date')($scope.editContract.startDate, 'dd MMM yyyy');
+          $scope.serviceContract.numOfIntervalsPreview;
+          $scope.serviceContract.isAdditionalServices = $scope.serviceContract.services.length > 0;
+          $scope.serviceContract.minStartDate = Date.now();
+          $timeout(function () {
+            changeNumOfIntervals($scope.serviceContract.startDate, $scope.serviceContract.endDate, false);
+          }, 500);
+          if($scope.serviceContract.blockTimeServices.length > 0) {
+            $scope.serviceContract.contractWithBlockTime = true;
+            $scope.serviceContract.serviceContractServicesToTrack = $scope.serviceContract.blockTimeServices
+          }
+
+          AgreementsService.getServiceAgreementById($scope.editContract.id, function(data){
+            $scope.contractStatus = data.status;
+          });
+
+          if($scope.serviceContract.interval === null) {
+            $scope.serviceContract.interval = $scope.serviceContract.customInterval + ' days';
+          }
+
+          if($scope.serviceContract.taxIds && $scope.serviceContract.taxIds.length > 0) {
+            $scope.serviceContract.taxes = [];
+            for (var i = 0; i < $scope.serviceContract.taxIds.length; i++) {
+              for (var j = 0; j < $scope.taxes.length; j++) {
+                if ($scope.serviceContract.taxIds[i] === $scope.taxes[j].id) {
+                  $scope.serviceContract.taxes.push($scope.taxes[j]);
+                }
+              }
+            }
+          }
+
+          for (var i = 0; i < $scope.serviceContract.serviceContractServices.length; i++) {
+            $scope.serviceContract.serviceContractServices[i].taxes = [];
+            if ($scope.serviceContract.serviceContractServices[i].taxIds.length > 0) {
+              for (var j = 0; j < $scope.serviceContract.serviceContractServices[i].taxIds.length; j++) {
+                for (var n = 0; n < $scope.taxes.length; n++) {
+                  if ($scope.serviceContract.serviceContractServices[i].taxIds[j] === $scope.taxes[n].id) {
+                    $scope.serviceContract.serviceContractServices[i].taxes.push($scope.taxes[n]);
+                    break;
+                  }
+                }
+              }
+            }
+          }
+
+          for (var i = 0; i < $scope.serviceContract.services.length; i++) {
+            $scope.serviceContract.services[i].taxes = [];
+            if ($scope.serviceContract.services[i].taxIds.length > 0) {
+              for (var j = 0; j < $scope.serviceContract.services[i].taxIds.length; j++) {
+                for (var n = 0; n < $scope.taxes.length; n++) {
+                  if ($scope.serviceContract.services[i].taxIds[j] === $scope.taxes[n].id) {
+                    $scope.serviceContract.services[i].taxes.push($scope.taxes[n]);
+                    break;
+                  }
+                }
+              }
+            }
+          }
+
+      /*    for(var g=0; g<$scope.serviceContract.serviceExpenses.length; g++) {
+            $scope.serviceContract.serviceExpenses[g].quantity = $scope.serviceContract.serviceExpenses[g].quantity * 60;
+          }
+*/
+          ProductsService.getFullListForAutocomplete($scope, function(resp) {
+            console.log('ggggggggggggggggggg');
+            var productsData = resp;
+            if($scope.serviceContract.productExpenses.length>0) {
+              for(var p=0; p<$scope.serviceContract.productExpenses.length; p++) {
+                for(var w=0; w<productsData.length; w++) {
+                  for(var v=0; v<productsData[w].products.length; v++) {
+                    if(productsData[w].products[v].versionedId.id ===  $scope.serviceContract.productExpenses[p].productId) {
+                      $scope.serviceContract.productExpenses[p].name = {};
+                      $scope.serviceContract.productExpenses[p].name.description = productsData[w].products[v].description;
+                      // $scope.serviceContract.productExpenses[p].name.name = productsData[w].products[v].description;
+                      $scope.serviceContract.productExpenses[p].name.sale = productsData[w].products[v].sale;
+                      break;
+                    }
+                  }
+                }
+              }
+            }
+            $scope.reInitPrpductsExpenseNameField = true;
+          });
+
+          $scope.total = $scope.serviceContract.amount;
+          preCreateFirstServicesEntities();
+          console.log(' $scope.serviceContract', $scope.serviceContract);
+          console.log('serviceContractType',$scope.serviceContractType);
+          console.log('serviceContractType[serviceContract.billType],',$scope.serviceContractType[$scope.serviceContract.billType]);
+          }
+        } else {
+          console.log('+++++++++++++++++++++++++++++');
+          var end_date = angular.copy($scope.editContract.endDate);
+          $scope.serviceContract = angular.copy($scope.editContract);
+          $scope.reInitPrpductsExpenseNameField = false;
+          $scope.serviceContract.endDatePreview = $filter('date')(end_date -$scope.currentCompany.addresses[0].timeZone.timeOffset , 'dd MMM yyyy');
+          console.log('$scope.serviceContract.endDate',$scope.serviceContract.endDate);
           $scope.serviceContract.endDate = '';
           $scope.serviceContract.startDatePreview = $scope.serviceContract.startDate;
           $scope.serviceContract.startDate = '';
@@ -159,7 +281,8 @@
             $scope.serviceContract.serviceExpenses[g].quantity = $scope.serviceContract.serviceExpenses[g].quantity * 60;
           }
 */
-          ProductsService.getFullListForAutocomplete($scope, function(resp) {
+          ProductsService.getFullListForAutocompleteWithOutRealTime($scope, function(resp) {
+            console.log('getFullListForAutocompleteWithOutRealTime');
             var productsData = resp;
             if($scope.serviceContract.productExpenses.length>0) {
               for(var p=0; p<$scope.serviceContract.productExpenses.length; p++) {
@@ -194,8 +317,9 @@
           })
         }
 
-        ServicesService.getServicesData($scope, function(resp){
+        ServicesService.getServicesDataWithoutRealTime($scope, function(resp){
           if(resp) {
+            console.log('getServicesData 1');
             for(var i=0; i<resp.length; i++) {
               var s = {
                 name: resp[i].name,
@@ -209,6 +333,39 @@
               $scope.defaultServicesAdditionalForDropDown.push(s);
             }
             unpickExistingServices()
+
+var data = resp;
+            for (var i = 0; i < data.length; i++) {
+              var serv = {
+                serviceId: data[i].versionedId.id,
+                name: data[i].name,
+                rate: data[i].rate,
+                billable: data[i].billable,
+                taxes: data[i].taxes || [],
+                taxIds: data[i].taxIds || [],
+                picked: false
+              };
+              if (data[i].taxIds && data[i].taxIds.length) {
+                for (var m = 0; m < data[i].taxIds.length; m++) {
+                  serv.taxIds.push(data[i].taxes[m].id)
+                }
+              }
+              $scope.defaultServices.push(serv);
+            }
+  
+  
+  
+            if ($scope.serviceContract.serviceExpenses.length > 0) {
+              for (var i = 0; i < $scope.serviceContract.serviceExpenses.length; i++) {
+                for (var j = 0; j < $scope.defaultServices.length; j++) {
+                  if ($scope.serviceContract.serviceExpenses[i].serviceId === $scope.defaultServices[j].serviceId) {
+                    $scope.serviceContract.serviceExpenses[i].name = $scope.defaultServices[j];
+                    $scope.defaultServices[j].picked = true;
+                    break;
+                  }
+                }
+              }
+            }
           }
         });
 
@@ -335,8 +492,13 @@
           return d;
         };
 
-        $scope.serviceContract.minEndDate = $scope.serviceContract.minStartDate + month;
-        $scope.serviceContract.endDate = $scope.serviceContract.minStartDate + month;
+        if (!$scope.isEditContract) {
+          $scope.serviceContract.minEndDate = $scope.serviceContract.minStartDate + month;
+          $scope.serviceContract.endDate = $scope.serviceContract.minStartDate + month;
+        }
+      
+console.log('$scope.serviceContract.endDate',$scope.serviceContract.endDate);
+
         $scope.defaultDareForServiceExpense = Date.now() + day;
 
         presettupPeriod();
@@ -423,6 +585,7 @@
             }
             endDate = Utils.minusDays(endDate, 1);
             $scope.serviceContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
+            console.log('$scope.serviceContract.endDate',$scope.serviceContract.endDate);
           }
 
         }
@@ -430,7 +593,12 @@
         $scope.$watch(function() {
           return $scope.serviceContract.endDate;
         }, function(oldEndDate) {
+          console.log('gegegegegegege',   oldEndDate);
+          console.log('gegegegegegege', typeof oldEndDate);
+          if (typeof oldEndDate === "string" && typeof $scope.serviceContract.startDate === "string" || typeof oldEndDate === "object" && typeof $scope.serviceContract.startDate === "string") {
+     
           changeNumOfIntervals($scope.serviceContract.startDate, oldEndDate)
+          }
         });
 
         function changeNumOfIntervals(startDatee, endDatee, ifForIntervals ) {
@@ -567,7 +735,8 @@
 
 
 
-        ServicesService.getServicesData($scope, function (data) {
+     /*   ServicesService.getServicesData($scope, function (data) {
+          console.log('getServicesData 2');
           for (var i = 0; i < data.length; i++) {
             var serv = {
               serviceId: data[i].versionedId.id,
@@ -599,7 +768,7 @@
               }
             }
           }
-        });
+        });*/
 
 
         $scope.changeContractType = function (type) {
@@ -1028,7 +1197,7 @@
 
               var startDate = $filter('date')($scope.serviceContract.startDate, 'yyyy/MM/dd');
               var endDate = $filter('date')($scope.serviceContract.endDate, 'yyyy/MM/dd');
-              ServicesService.searchDuplicatedServiceNames(startDate, endDate, companyId, name, function (resp) {
+              ServicesService.searchDuplicatedServiceNames(startDate, endDate, companyId, name,($scope.isEditContract) ?  $scope.serviceContract.id : null, function (resp) {
                 if (Object.keys(resp).length === 0) {
                   
                   deferred.resolve(resp);
@@ -1047,7 +1216,7 @@
           var companyId = returnCompanyId();
           var startDate = $filter('date')($scope.serviceContract.startDate, 'yyyy/MM/dd');
           var endDate = $filter('date')($scope.serviceContract.endDate, 'yyyy/MM/dd');
-          ServicesService.searchDuplicatedServiceNames(startDate, endDate, companyId, listOFNames, function (resp) {
+          ServicesService.searchDuplicatedServiceNames(startDate, endDate, companyId, listOFNames,($scope.isEditContract) ?  $scope.serviceContract.id : null, function (resp) {
             
             if (Object.keys(resp).length === 0) {
 
@@ -1292,7 +1461,227 @@
           }
         }, true)
 
+        function updateServiceContract(serviceContract) {
+          $scope.showValidationFailMessage = false;
+          if (serviceContract) {
+            var servContract = {
+              id: serviceContract.id,
+              description: serviceContract.description,
+              type: "SERVICE_CONTRACT",
+              startDate: $scope.startDate,
+              endDate: $scope.endDate,
+              customInterval: serviceContract.customInterval,
+              billType: serviceContract.billType,
+              companyId: returnCompanyId(),
+              services: [],
+              serviceContractServices: [],
+              serviceExpenses: null,
+              productExpenses: null,
+              serviceContractServicesToTrack: [],
+              contractWithBlockTime: false,
+              taxIds: null,
+              includedHours: null,
+              rateExceeding: null,
+              blockTimeServices: null
+            };
 
+            if(serviceContract.contractWithBlockTime && (servContract.billType === 'USER' || servContract.billType === 'DEVICE')) {
+              servContract.contractWithBlockTime = serviceContract.contractWithBlockTime;
+              servContract.includedHours = serviceContract.includedHours;
+              servContract.rateExceeding = serviceContract.rateExceeding;
+              servContract.blockRate = 0;
+              servContract.blockTimeServices = [];
+
+              if (serviceContract.taxes && serviceContract.taxes.length) {
+                servContract.taxIds = [];
+                for (var r = 0; r < serviceContract.taxes.length; r++) {
+                  servContract.taxIds.push(serviceContract.taxes[r].id);
+                }
+              }
+            }
+
+
+            if (servContract.billType === 'OTHER') {
+              servContract.serviceExpenses = [];
+              servContract.productExpenses = []
+            } else {
+              servContract.invoiceAsSingleItem = serviceContract.invoiceAsSingleItem;
+            }
+
+            if ($scope.serviceContract.interval === 'MONTHLY' || $scope.serviceContract.interval === 'YEARLY') {
+              servContract.interval = serviceContract.interval;
+            } else {
+              servContract.interval = null;
+            }
+
+            var sd = new Date($scope.serviceContract.startDate);
+            sd.setHours(0, 0, 0, 0);
+            sd.setSeconds(0);
+            sd.setMilliseconds(0);
+            servContract.startDate = $filter('date')(sd, 'yyyy/MM/dd');
+
+            var ed = new Date($scope.serviceContract.endDate);
+            ed.setHours(0, 0, 0, 0);
+            ed.setSeconds(0);
+            ed.setMilliseconds(0);
+            servContract.endDate = $filter('date')(ed, 'yyyy/MM/dd');
+
+            if(serviceContract.billType !== 'OTHER') {
+              if(serviceContract.serviceContractServicesToTrack && serviceContract.serviceContractServicesToTrack.length) {
+                for (var l=0; l<serviceContract.serviceContractServicesToTrack.length; l++) {
+                  var scstt = {
+                    
+                    id: (serviceContract.serviceContractServicesToTrack[l].id) ? serviceContract.serviceContractServicesToTrack[l].id : uuidv4(),
+                    name: serviceContract.serviceContractServicesToTrack[l].name,
+                    rate: (serviceContract.serviceContractServicesToTrack[l].rate) ? serviceContract.serviceContractServicesToTrack[l].rate : 0,
+                    count: (serviceContract.serviceContractServicesToTrack[l].count) ? serviceContract.serviceContractServicesToTrack[l].count : null,
+                    billable: (serviceContract.serviceContractServicesToTrack[l].billable) ? serviceContract.serviceContractServicesToTrack[l].billable : true,
+                    basedOnDefault: (serviceContract.serviceContractServicesToTrack[l].basedOnDefault) ? serviceContract.serviceContractServicesToTrack[l].basedOnDefault : false,
+                    commissionRate: (serviceContract.serviceContractServicesToTrack[l].commissionRate) ? serviceContract.serviceContractServicesToTrack[l].commissionRate : 0,
+                    taxIds: (serviceContract.serviceContractServicesToTrack[l].taxIds)  ? serviceContract.serviceContractServicesToTrack[l].taxIds : [],
+                  };
+                  if(serviceContract.contractWithBlockTime) {
+                    servContract.blockTimeServices.push(scstt);
+                  } else {
+                    servContract.serviceContractServicesToTrack.push(scstt);
+                  }
+
+                }
+              }
+              if (serviceContract.isAdditionalServices && serviceContract.services && serviceContract.services.length) {
+                for (var i = 0; i < serviceContract.services.length; i++) {
+                  var serv = {
+                    name: serviceContract.services[i].nameValue || serviceContract.services[i].name,
+                    rate: 0,
+                    billable: serviceContract.services[i].billable,
+                    taxIds: [],
+                    basedOnDefault: serviceContract.services[i].basedOnDefault,
+                    id: (typeof serviceContract.services[i].id === "string")? serviceContract.services[i].id : serviceContract.services[i].id.id,
+                    commissionRate: serviceContract.services[i].commissionRate,
+                    count : serviceContract.services[i].count
+                  };
+                  if(serviceContract.services[i].billable) {
+                    serv.rate = serviceContract.services[i].rate;
+                    if (serviceContract.services[i].taxes && serviceContract.services[i].taxes.length) {
+                      for (var n = 0; n < serviceContract.services[i].taxes.length; n++) {
+                        serv.taxIds.push(serviceContract.services[i].taxes[n].id);
+                      }
+                    }
+                  }
+                  servContract.services.push(serv);
+                }
+              }
+            }
+
+
+
+            if(serviceContract.billType === 'DEVICE' && $scope.presettupDeviceServices.length>0) {
+              for(var d=0; d<$scope.presettupDeviceServices.length; d++) {
+                var dServ = {
+                  name: $scope.presettupDeviceServices[d].name,
+                  rate: $scope.presettupDeviceServices[d].rate,
+                  count: $scope.presettupDeviceServices[d].count,
+                  taxIds: [],
+                  id: $scope.presettupDeviceServices[d].id,
+                  billable: $scope.presettupDeviceServices[d].billable,
+                  basedOnDefault: $scope.presettupDeviceServices[d].basedOnDefault,
+                  commissionRate: $scope.presettupDeviceServices[d].commissionRate,
+                };
+                if ($scope.presettupDeviceServices[d].taxes && $scope.presettupDeviceServices[d].taxes.length) {
+                  for (var j = 0; j < $scope.presettupDeviceServices[d].taxes.length; j++) {
+                    dServ.taxIds.push($scope.presettupDeviceServices[d].taxes[j].id);
+                  }
+                }
+                servContract.serviceContractServices.push(dServ);
+              }
+            }
+
+            if(serviceContract.billType === 'USER' && $scope.presettupUsersServices.length>0) {
+              for(var d=0; d<$scope.presettupUsersServices.length; d++) {
+                var uServ = {
+                  name: $scope.presettupUsersServices[d].name,
+                  rate: $scope.presettupUsersServices[d].rate,
+                  count: $scope.presettupUsersServices[d].count,
+                  taxIds: [],
+                  id: $scope.presettupUsersServices[d].id,
+                  billable: $scope.presettupUsersServices[d].billable,
+                  basedOnDefault: $scope.presettupUsersServices[d].basedOnDefault,
+                  commissionRate: $scope.presettupUsersServices[d].commissionRate,
+                };
+                if ($scope.presettupUsersServices[d].taxes && $scope.presettupUsersServices[d].taxes.length) {
+                  for (var j = 0; j < $scope.presettupUsersServices[d].taxes.length; j++) {
+                    uServ.taxIds.push($scope.presettupUsersServices[d].taxes[j].id);
+                  }
+                }
+                servContract.serviceContractServices.push(uServ);
+              }
+            }
+
+            if (serviceContract.serviceContractServices && serviceContract.serviceContractServices.length) {
+              for (var m = 0; m < serviceContract.serviceContractServices.length; m++) {
+                var scs = {
+                  name: serviceContract.serviceContractServices[m].name,
+                  rate: serviceContract.serviceContractServices[m].rate,
+                  count: serviceContract.serviceContractServices[m].count,
+                  taxIds: [],
+                  id: serviceContract.serviceContractServices[m].id,
+                  billable: serviceContract.serviceContractServices[m].billable,
+                  basedOnDefault: serviceContract.serviceContractServices[m].basedOnDefault,
+                  commissionRate: serviceContract.serviceContractServices[m].commissionRate,
+                };
+                if (serviceContract.serviceContractServices[m].taxes && serviceContract.serviceContractServices[m].taxes.length) {
+                  for (var j = 0; j < serviceContract.serviceContractServices[m].taxes.length; j++) {
+                    scs.taxIds.push(serviceContract.serviceContractServices[m].taxes[j].id);
+                  }
+                }
+                servContract.serviceContractServices.push(scs);
+              }
+            }
+
+            if (serviceContract.serviceExpenses && serviceContract.serviceExpenses.length) {
+              for (var u = 0; u < serviceContract.serviceExpenses.length; u++) {
+                if (serviceContract.serviceExpenses[u] && serviceContract.serviceExpenses[u].name) {
+                  var servExp = {
+                    serviceId: serviceContract.serviceExpenses[u].name.serviceId,
+                    quantity: serviceContract.serviceExpenses[u].quantity,// convertMinutesToHour(serviceContract.serviceExpenses[u].quantity),
+                    description: serviceContract.serviceExpenses[u].description,
+                    date: new Date(serviceContract.serviceExpenses[u].date).getTime(),
+                    serviceExpenseDurationStart: null,
+                    serviceExpenseDurationEnd: null,
+                  };
+                  servContract.serviceExpenses.push(servExp);
+                }
+              }
+            }
+
+            if (serviceContract.productExpenses && serviceContract.productExpenses.length) {
+              for (var t = 0; t < serviceContract.productExpenses.length; t++) {
+                if (serviceContract.productExpenses[t] && serviceContract.productExpenses[t].name) {
+                  var prodExp = {
+                    productId: returnProductId(serviceContract.productExpenses[t]),
+                    quantity: serviceContract.productExpenses[t].quantity,
+                    salePrice: serviceContract.productExpenses[t].name.sale
+                  };
+                  servContract.productExpenses.push(prodExp);
+                }
+              }
+            }
+
+            sendContractUpdateRequest(servContract)
+          }
+
+       
+
+          function sendContractUpdateRequest(servContract) {
+            AgreementsService.updateContract(servContract, function (resp) {
+              if (resp.message === 'Validation failed') {
+                showCreateErrorWithTimeout()
+              } else {
+                $scope.closeModal();
+              }
+            })
+          }
+        }
 
         function createServiceContract(serviceContract) {
           $scope.showValidationFailMessage = false;
@@ -1531,7 +1920,116 @@
             $scope.dissableCreateButton = false;
           }, 4000);
         }
+        function uuidv4() {
+          return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+          });
+        }
+        $scope.validateAndUpdateServiceContract = function (serviceContract) {
+       
+        
+          disableCreateButtonTimeout();
+          if(checkForInvalidFields()) {
+            $scope.notAddedServiceError = false;
+            var emptyServices = true;
+            var checkSCS = ($scope.NewServiceContractServices && $scope.NewServiceContractServices.name && $scope.NewServiceContractServices.name.length>0);
+            var checkPE = ($scope.newProductExpense && $scope.newProductExpense.name && $scope.newProductExpense.name.description.length>0);
+            var checkSE = ($scope.newServiceExpense && $scope.newServiceExpense.name && $scope.newServiceExpense.name.name.length>0);
+            var checkServices = ($scope.newService && $scope.newService.nameValue && $scope.newService.nameValue.length>0);
+            var checkSCSTT = ($scope.newServiceContractServicesToTrack && $scope.newServiceContractServicesToTrack.name && $scope.newServiceContractServicesToTrack.name.length)
+            if($scope.serviceContract.billType === 'OTHER') {
+              if(checkPE || checkSE) {
+                emptyServices = false;
+              }
+              // if($scope.serviceContract.isAdditionalServices) {
+              //   if(checkServices) {
+              //     emptyServices = false;
+              //   }
+              // }
+              // if(checkSCSTT) {
+              //   emptyServices = false;
+              // }
+            } else {
+              if(checkSCS) {
+                emptyServices = false;
+              }
+              if($scope.serviceContract.isAdditionalServices) {
+                if(checkServices) {
+                  emptyServices = false;
+                }
+              }
+              if(checkSCSTT) {
+                emptyServices = false;
+              }
+            }
 
+            validateServiceContractServices(serviceContract);
+          }
+
+          function validateServiceContractServices(serviceContract) {
+            var listOfNames = [];
+            var listOfAdditionalServicesNames = [];
+            if (serviceContract.billType === 'DEVICE' || serviceContract.billType === 'USER') {
+              for (var i = 0; i < serviceContract.serviceContractServices.length; i++) {
+                listOfNames.push(checkNameForObject(serviceContract.serviceContractServices[i].name));
+              }
+              if(serviceContract.billType === 'DEVICE') {
+                if($scope.presettupDeviceServices.length>0) {
+                  for(var d=0; d<$scope.presettupDeviceServices.length; d++) {
+                    listOfNames.push(checkNameForObject($scope.presettupDeviceServices[d].name));
+                  }
+                }
+
+              } else if(serviceContract.billType === 'USER') {
+                if($scope.presettupUsersServices.length>0) {
+                  for(var u=0; u<$scope.presettupUsersServices.length; u++) {
+                    listOfNames.push(checkNameForObject($scope.presettupUsersServices[u].name));
+                  }
+                }
+              }
+              if(serviceContract.serviceContractServicesToTrack.length>0) {
+                for (var l = 0; l < serviceContract.serviceContractServicesToTrack.length; l++) {
+                  listOfAdditionalServicesNames.push(checkNameForObject(serviceContract.serviceContractServicesToTrack[l].name));
+                }
+              }
+              if(serviceContract.services.length>0) {
+                for (var n = 0; n < serviceContract.services.length; n++) {
+                  listOfAdditionalServicesNames.push(checkNameForObject(serviceContract.services[n].name));
+                }
+              }
+            }
+
+
+            if(listOfNames.length > 0) {
+              validateListOfNames(listOfNames).then(function(resp) {
+                if(resp) {
+                  if (listOfAdditionalServicesNames.length>0) {
+                    validateListOfNames(listOfAdditionalServicesNames).then(function (resp) {
+                      if (resp) {
+                        updateServiceContract(serviceContract);
+                      }
+                    })
+                  } else {
+                    updateServiceContract(serviceContract);
+                  }
+                }
+              })
+            } else {
+              if(listOfAdditionalServicesNames.length>0) {
+                validateListOfNames(listOfAdditionalServicesNames).then(function (resp) {
+                  if (resp) {
+                    updateServiceContract(serviceContract);
+                  }
+                })
+              } else {
+                updateServiceContract(serviceContract);
+              }
+            }
+          }
+
+
+        }
 
         $scope.validateAndCreateServiceContract = function (serviceContract) {
        
@@ -1655,6 +2153,35 @@
             return name;
           }
         }
+
+        $scope.terminateAndCopyServiceContract = function () {
+          AgreementsService.terminate($scope.editContract.id, function (resp) {
+            $scope.action = 'COPY';
+            $scope.editContract.description = $scope.editContract.description + ' COPY';
+            $scope.modlToShow = $scope.editContract.type;
+            $scope.editMode = true;
+            
+
+            $scope.editService = { taxes: [] };
+            var d = new Date($scope.editContract.startDate);
+         
+         //   $scope.editContract.startDate = $filter('date')(Date.now(), 'dd MMM yyyy');
+          /*  $scope.editContract.serviceExpenses.forEach((item) => {
+             item.date = $filter('date')(Date.now(), 'dd MMM yyyy');
+              item.startDate =  $scope.editContract.startDate;
+            })*/
+         
+            console.log('$scope.editContract',$scope.editContract);
+            console.log('$scope.serviceContract',$scope.serviceContract);
+            // if (d.getTime() < $scope.today) {
+            //   $scope.editContract.startDate = '';
+            //   $scope.editContract.endDate = '';
+            // }
+            $scope.$apply();
+           // $rootScope.$broadcast('terminateAndCopy', null);
+          })
+        };
+
 
 
       }])

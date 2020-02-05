@@ -74,18 +74,25 @@
         <div class="interval-agreement">
           <div class="form-group">
             End Date*
+            <input type="text" placeholder="../../.." readonly ng-if="reInitEndDate  && action === 'COPY' || reInitEndDate && isEditContract && action === 'EDIT'"
+            ng-model="blockTimeContract.endDate"
+            class="form-control" date-time-picker-with-period name="endDate"
+            ng-change="changeNumOfIntervals(blockTimeContract.endDate)"
+            default-date="blockTimeContract.endDate" min-date="blockTimeContract.startDate"
+            period="blockTimeContract.period"   start-date="blockTimeContract.startDate" >
 
             <input type="text" placeholder="Select"
-                   readonly ng-if="reInitEndDate"
+                   readonly ng-if="reInitEndDate && !isEditContract && action === 'CREATE'"
                    ng-model="blockTimeContract.endDate"
                    ng-change="changeNumOfIntervals(blockTimeContract.endDate)"
                    class="form-control"
                    date-time-picker-with-period
                    name="endDate"
                    default-date="blockTimeContract.endDate"
-                   min-date="blockTimeContract.minEndDate"
+                   min-date="blockTimeContract.startDate"
                    period="blockTimeContract.period"
-                   start-date="blockTimeContract.startDate">
+                   start-date="blockTimeContract.startDate"
+                  ><!-- -->
             <i class="report-calendar"></i>
           </div>
         </div>
@@ -102,12 +109,18 @@
             <div class="form-group"
                  ng-class="{'has-error': isShowingErrorsBlock(blockTimeContractForm, 'includedHours')}">
               Included hours*
-              <input placeholder="Hours"
+              <input placeholder="Hours" ng-if="!isEditContract"
                      name="includedHours"
                      type="text"
                      class="form-control"
                      ng-model="blockTimeContract.includedHours"
                      hard-reset-pattern="decimalNumberPattern" required>
+                 
+                     <input placeholder="Hours"
+                     ng-if="isEditContract"
+                     type="number"
+                     class="form-control"
+                     ng-model="blockTimeContract.includedHours" readonly>
             </div>
           </div>
           <div class="interval-agreement">
@@ -126,10 +139,16 @@
             <div class="form-group before-icon">
               Total Amount:
               <input placeholder="Total"
+              ng-if="!isEditContract"
                      type="text"
                      class="form-control"
                      ng-model="calculateTotalAmount()" hard-reset-pattern="decimalNumberPattern" readonly
                      qt-to-fixed="2">
+                     <input placeholder="Total"
+                     ng-if="isEditContract"
+                     type="text"
+                     class="form-control"
+                     ng-model="calculateTotalAmount()" hard-reset-pattern="decimalNumberPattern" readonly qt-to-fixed="2">
             </div>
           </div>
         </div>
@@ -226,7 +245,7 @@
         <div class="service-bill-content">
           <div class="col-md-12">
             <label class="control checkbox">
-              <input type="checkbox" ng-model="blockTimeContract.enableTimeRollover">
+              <input type="checkbox" ng-model="blockTimeContract.enableTimeRollover" ng-change="changeEnableTimeRollover()">
               <span class="control-indicator"></span>
 
               Enable Time Rollover of unused hours
@@ -269,25 +288,54 @@
                 <div class="service-name-agreement form-group">
                   <div uib-dropdown
                        ng-class="{'has-error': checkBlockTimeServiceErrorForm(contractService)}">
-                    <!--<input type="text"-->
-                           <!--style="cursor: pointer;"-->
-                           <!--name="newContractServiceName"-->
-                           <!--ng-model="contractService.name"-->
-                           <!--ng-minlength="1"-->
-                           <!--autocomplete="off"-->
-                           <!--tabindex="5"-->
-                           <!--required-->
-                           <!--placeholder="Service Expense"-->
-                           <!--class="form-control form-control-dropdown dropdown-toggle"-->
-                           <!--uib-typeahead="service.name for service in defaultServices | filter:{'picked': false} | orderBy:'name'"-->
-                           <!--qt-typeahead-show-on-focus-->
-                           <!--custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"-->
-                           <!--value="newContractService.name" hard-reset-pattern="serviceNamePattern"-->
-                           <!--invalid-when="!isNameUnique(newContractService)">-->
 
-                    <!--<div class="input-top-4" typeahead-input-icon="newContractServiceName"></div>-->
 
-                    <input tooltip-placement="top"
+                   <!--    <input type="text"
+                       name="serviceName"
+                       ng-model="contractService.nameValue"
+                       ng-minlength="1"
+                       autocomplete="off"
+                       tabindex="5"
+                       required
+                       placeholder="Service Expense"
+                       class="form-control form-control-dropdown dropdown-toggle"
+                       uib-typeahead="service as service.name for service in defaultServicesForDropdown | filter:{'picked': false} | orderBy:'name'"
+                       qt-typeahead-async-show-on-focus
+                       custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
+                     
+                       value="service.name" hard-reset-pattern="serviceNamePattern">
+
+                <div class="input-top-4" typeahead-input-icon="newBlockTimeService.name"></div>-->
+
+
+                <input placeholder="Service Expense"
+                ng-if="isEditContract"
+                type="text"
+                class="form-control"
+                ng-model="contractService.nameValue" readonly>
+            <!--   <input type="text"
+               ng-if="!isEditContract"
+                           style="cursor: pointer;"
+                           name="contractService"
+                           ng-model="contractService.nameValue"
+                           ng-minlength="1"
+                           autocomplete="off"
+                           tabindex="5"
+                           required
+                           placeholder="Service Expense"
+                           class="form-control form-control-dropdown dropdown-toggle"
+                           uib-typeahead="service.name for service in defaultServicesForDropdown | filter:{'picked': false} | orderBy:'name'"
+                           qt-typeahead-show-on-focus
+                           custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
+                            hard-reset-pattern="serviceNamePattern"
+                            value="service.name"
+                        
+                           >
+
+                    <div class="input-top-4"  ng-if="!isEditContract" typeahead-input-icon="newBlockTimeService.name"></div>-->
+
+                <input tooltip-placement="top"
+                ng-if="!isEditContract"
                            type="text" class="form-control has-dropdown"
                            name="contractService" autocomplete="off"
                            autocomplete-service-item="contractService.name"
@@ -295,9 +343,9 @@
                            autocomplete-service-list uib-dropdown-toggle
                            entity="contractService.nameValue" hard-reset-pattern="descriptionPattern"
                            invalid-when="!isNameUnique(contractService.nameValue)"/>
-                           <!-- smart-dropdown-menu-position="service-list" -->
-                    <i class="icn-sm icn-caret-gray"></i>
-                    <div class="service-list-container"></div>
+                           
+                  <!--  <i class="icn-sm icn-caret-gray"></i>
+                    <div class="service-list-container"></div> -->
 
                   </div>
                 </div>
@@ -481,9 +529,13 @@
         </div>
       </div>
       <div class="contacts-details col-md-12">
+       
         <h5>Details</h5>
         <div ng-show="showBlockTimeContractCreateMessageError">
           <p style="color: red">{{BlockTimeContractCreateMessage}}</p>
+        </div>
+        <div   ng-show="showCreateHourlyContractValidationError">
+          <p style="color: red; text-align: left">{{errorMessageCreateHourlyDuplicate}}</p>
         </div>
         <div ng-show="showDuplicatesErrorMessage">
           <p style="color: red">An agreement with current services already using for current company</p>
@@ -506,9 +558,13 @@
             <div class="contacts-details-content-price">
               Total: {{(calculateTotalAmount() | currency: '$': 2) || '$ 0.00'}}
             </div>
-            <div class="btn btn-lg btn-success btn-create"
+            <div class="btn btn-lg btn-success btn-create" ng-if="!isEditContract"
                  ng-click="validateAndCreteBlockTimeContract(blockTimeContract, newBlockTimeService, newContractService)">
               Create
+            </div>
+            <div class="btn btn-lg btn-success btn-create" ng-if="isEditContract"
+                 ng-click="validateAndUpdateBlockTimeContract(blockTimeContract, newBlockTimeService, newContractService)">
+              Edit
             </div>
           </div>
         </div>

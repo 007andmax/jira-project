@@ -41,7 +41,32 @@
           });
         });
       }
+      function getServicesDataWithoutRealTime(scope, callback) {
 
+        if (!scope || !scope.$id) {
+          throw 'First argument must be Angularjs scope!'
+        }
+
+        var data = Utils.customizeObj({});
+
+        $http.get('/services/getDefaultServices').then(function (resp) {
+
+          for (var i = 0; i < resp.data.length; i++) {
+            addServiceData(data, resp.data[i])
+          }
+
+          if (callback) {
+            callback(resp.data);
+          }
+
+        }, function (resp) {
+          if (callback) {
+            callback(resp.data);
+          }
+        });
+
+        return data;
+      }
       function getServicesData(scope, callback) {
 
         if (!scope || !scope.$id) {
@@ -88,10 +113,15 @@
         RealTimeService.subscribe('/service', scope, function (newChange) {
 
           if (newChange.action == 'SERVICE_SAVED') {
-            if (newChange.data.isDefault)
+            if (newChange.data.isDefault) {
+              console.log('----------------- SERVICE_SAVED');
               serviceSaved(newChange.data);
+             
+            }
           } else if (newChange.action == 'SERVICE_DELETED') {
+            console.log('----------------- SERVICE_DELETED');
             serviceDeleted(newChange.data.versionedId.id, data);
+         
           }
 
         });
@@ -257,10 +287,11 @@
         Utils.handleCallback(future, callback);
       }
 
-      function searchDuplicatedServiceNames(startDate, endDate, companyId, serviceNamesList, callback) {
+      function searchDuplicatedServiceNames(startDate, endDate, companyId, serviceNamesList,agreementId, callback) {
+        console.log('agreementId',agreementId);
         var future = $http({
           method: 'POST',
-          url: '/services/searchDuplicatedServiceNames?' + 'startDate=' + startDate + '&endDate=' + endDate + '&companyId=' + companyId,
+          url: '/services/searchDuplicatedServiceNames?' + 'startDate=' + startDate + '&endDate=' + endDate + '&companyId=' + companyId + ((agreementId) ? '&agreementId=' + agreementId : ''),
           data: serviceNamesList
         });
         Utils.handleCallback(future, callback);
@@ -280,7 +311,8 @@
         getActualMapping: getActualMapping,
         changeBillableStatus: changeBillableStatus,
         isNameUnique: isNameUnique,
-        searchDuplicatedServiceNames: searchDuplicatedServiceNames
+        searchDuplicatedServiceNames: searchDuplicatedServiceNames,
+        getServicesDataWithoutRealTime: getServicesDataWithoutRealTime
       }
 
     }]);
