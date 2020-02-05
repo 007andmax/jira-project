@@ -6,7 +6,7 @@ export class GlNumberItem {
     constructor(glNumber, description,len) {
         this.glNumber = glNumber;
         this.description = description;
-        if (len)
+        if (len != null)
         {
             this.sum = new Array(len);
             for(let i=0;i<this.sum.length;i++)

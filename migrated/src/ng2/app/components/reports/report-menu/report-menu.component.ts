@@ -18,7 +18,8 @@ export class ReportMenuComponent implements OnInit {
   className = '';
   glNumber: GlNumber = new GlNumber();
   loadingInProgress: boolean = true;
-  listDetailed = ['Year to date', 'Montly'];
+  listDetailed = ['Year to date', 'Monthly'];
+  yearToDate = false;
   @Output() getReport = new EventEmitter<any>();
   @ViewChild('dp') datePicker: any;
   constructor(private reportsService: ReportsService, private reportsStateService: ReportsStateService) { }
@@ -29,7 +30,8 @@ export class ReportMenuComponent implements OnInit {
 
   }
   public onSelectDetailed(data) {
-    if (data === 'Montly') {
+    this.yearToDate = false;
+    if (data === 'Monthly') {
       this.glNumber.setMonthlyDetailed(true);
       this.datePicker.setDisabled(false);
     } else {
@@ -37,12 +39,13 @@ export class ReportMenuComponent implements OnInit {
         console.log("fffff");
         this.datePicker.clearDate();
         this.datePicker.setDisabled(true);
+        this.yearToDate = true;
       } else {
         this.datePicker.setDisabled(false);
       }
       this.glNumber.setMonthlyDetailed(false);
     }
-//this.reportsStateService.onChangeGlNumber(this.glNumber);
+    //this.reportsStateService.onChangeGlNumber(this.glNumber);
   }
   public selectClient(selectClient) {
     this.validate.resetCompany();
@@ -67,17 +70,61 @@ export class ReportMenuComponent implements OnInit {
 
     //  this.services = [new ForCreateService()];
     // this.cd.detectChanges();
-   // this.reportsStateService.onChangeGlNumber(this.glNumber);
+    // this.reportsStateService.onChangeGlNumber(this.glNumber);
 
   }
-  getReportByGlNumber() {
-    this.reportsService.getReportByGlNumber(this.glNumber.getForRequest()).subscribe(data => {
-      console.log("data", data);
-      this.reportsStateService.onChangeGlNumber(this.glNumber);
-      this.getReport.emit(data);
 
-      this.loadingInProgress = false;
-    })
+  
+  getReportByGlNumber() {
+    if (this.yearToDate) {
+      this.reportsService.getAccountingStartDate().subscribe((res: any) => {
+        console.log("res", res.accountingStartDate);
+
+        this.glNumber.setStartDate(moment(res.accountingStartDate).format('YYYY/MM/DD'));
+        this.glNumber.setEndDate(moment(new Date()).format('YYYY/MM/DD'));
+
+        this.reportsService.getReportByGlNumber(this.glNumber.getForRequest()).subscribe(data => this.setDatareport(data));
+      })
+    } else {
+      this.reportsService.getReportByGlNumber(this.glNumber.getForRequest()).subscribe(data => this.setDatareport(data));
+    }
+
+
+  }
+  private setDatareport(data) {
+    this.glNumber.clearDates();
+    this.glNumber.clearList();
+    if (this.glNumber.getMonthlyDetailed()) {
+      let keys = Object.keys(data);
+      keys = keys.sort();
+      keys.forEach((key, indexKey) => {
+        const element = data[key];
+        this.glNumber.addDate(key);
+        element.forEach((item, indexItem) => {
+          let index = this.glNumber.getList().findIndex(itemList => itemList.glNumber === item.glNumber);
+          if (index > -1) {
+            this.glNumber.getList()[index].setSum(indexKey, item.sum);
+            this.glNumber.getList()[index].updateTotal(item.sum);
+          } else {
+            this.glNumber.addItem(new GlNumberItem(item.glNumber, item.description, keys.length));
+            let indexLast = this.glNumber.getList().length - 1;
+            this.glNumber.getList()[indexLast].setSum(indexKey, item.sum);
+            this.glNumber.getList()[indexLast].updateTotal(item.sum);
+          }
+        });
+
+      });
+    } else {
+      data.forEach((item, index) => {
+        this.glNumber.addItem(new GlNumberItem(item.glNumber, item.description, null));
+        let indexLast = this.glNumber.getList().length - 1;
+        this.glNumber.getList()[indexLast].updateTotal(item.sum);
+      });
+    }
+    this.reportsStateService.onChangeGlNumber(this.glNumber);
+    this.getReport.emit(data);
+
+    this.loadingInProgress = false;
   }
   public trackByIndex(index, item) {
     return index;
@@ -86,12 +133,11 @@ export class ReportMenuComponent implements OnInit {
   * filter data by date
   */
   public filterByDate(value) {
-    if (value.start !== '' && value.end !== '')
-    {
+    if (value.start !== '' && value.end !== '') {
       this.glNumber.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.glNumber.setEndDate(moment(value.end).format('YYYY/MM/DD'));
     }
-  
-  //  this.reportsStateService.onChangeGlNumber(this.glNumber);
+
+    //  this.reportsStateService.onChangeGlNumber(this.glNumber);
   }
 }

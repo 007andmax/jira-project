@@ -9,6 +9,10 @@ export class ReportsService {
 
   private apiUrl = environment.apiUrl;
   constructor(private http: HttpClient ) { }
+
+  public getAccountingStartDate () {
+    return this.http.get(this.apiUrl + `settings/companyProfile/accountingStartDate`);
+  }
   public getReportByGlNumber(data) {
     return this.http.post(this.apiUrl + `reports/sales/byGlNumber`, data);
   }

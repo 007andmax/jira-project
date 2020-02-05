@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ReportsStateService } from 'src/ng2/app/states/reports/reports-state.service';
 import { GlNumber } from '../class/gl-number';
@@ -12,16 +12,18 @@ import { GlNumberItem } from '../class/gl-number-item';
 export class ItemReportComponent implements OnInit {
   report: string;
   glNumber: GlNumber = new GlNumber();
-  constructor(private route: ActivatedRoute, private reportsStateService: ReportsStateService) { }
+  constructor(private route: ActivatedRoute, private reportsStateService: ReportsStateService,
+    public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
     if (localStorage.report) this.report = localStorage.report;
-    this.reportsStateService.glNumber.subscribe(data => {
+    this.reportsStateService.glNumber.subscribe((data:GlNumber) => {
       this.glNumber = data;
+      this.cd.detectChanges();
     })
   }
   public getReport(data) {
-    this.glNumber.clearDates();
+ /*   this.glNumber.clearDates();
     this.glNumber.clearList();
     if (this.glNumber.getMonthlyDetailed()) {
       let keys = Object.keys(data);
@@ -50,8 +52,8 @@ export class ItemReportComponent implements OnInit {
         this.glNumber.getList()[indexLast].updateTotal(item.sum);
       });
     }
-
-
+console.log("this.glNumber",this.glNumber);
+this.cd.detectChanges();*/
   }
 
 }

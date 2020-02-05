@@ -33,7 +33,8 @@
            
             <div class="col-md-2"><strong>Total</strong></div>
           </li>
-          <ng-template ngFor let-item [ngForOf]="glNumber.getList()" [ngIf]="glNumber.getMonthlyDetailed()"  [ngForTrackBy]="trackByIndex">
+         
+          <ng-template ngFor let-item [ngForOf]="glNumber.getList()" [ngIf]="glNumber.getMonthlyDetailed() && glNumber.getList().length > 0"  [ngForTrackBy]="trackByIndex">
             <li class="content-product-list-ticket clearfix"
              >
           <div class="col-md-3">
@@ -42,7 +43,7 @@
           <div class="col-md-3">
             <div  [textContent]="item.description"></div>
           </div>
-          <ng-template ngFor let-itemSum [ngForOf]="item.getSumList()" [ngForTrackBy]="trackByIndex">
+          <ng-template ngFor let-itemSum [ngForOf]="item.sum" [ngForTrackBy]="trackByIndex">
             <div class="col-md-1">
               <div  [textContent]="'$ ' + itemSum"></div>
             </div>
@@ -50,7 +51,7 @@
          
           
           <div class="col-md-2">
-            <div  [textContent]="'$ ' + item.getTotal()"></div>
+            <div  [textContent]="'$ ' + item.total"></div>
           </div>
         </li>
             </ng-template>
