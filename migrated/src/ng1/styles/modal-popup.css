@@ -54,36 +54,6 @@
   margin: 0;
 }
 
-.create-popup .modal-dialog.preview-photo {
-  width: 100vw;
-  left: 0 !important;
-  top: 0 !important;
-  height: 100vh;
-  transform: translate(0, 0) !important;
-}
-
-.create-popup .modal-dialog.preview-photo #preview-file {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.create-popup .modal-dialog.preview-photo #preview-file div:last-child {
-  position: relative;
-  height: calc(100vh - 94px);
-  background: rgba(0, 0, 0, .5);
-}
-
-.create-popup .modal-dialog.preview-photo #preview-file img {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  max-height: calc(100vh - 94px);
-}
-
 .create-popup .modal-content {
   border-radius: 10px;
 }
@@ -783,7 +753,6 @@ _::-webkit-:not(:root:root),
 }
 
 .invoice--header, .invoice--content, .invoice--footer,
-.quote--header, .quote--content, .quote--footer,
 .email--header, .email--content, .email--footer,
 .service--header, .service--content, .service--footer,
 .user--header, .user--content, .user--footer,
@@ -793,19 +762,16 @@ _::-webkit-:not(:root:root),
   padding: 30px 40px;
 }
 
-.email--header,
-.quote--header {
+.email--header {
   padding: 28px 40px;
 }
 
-.email--content,
-.quote--content {
+.email--content {
   padding: 25px 40px;
 }
 
 .invoice--footer,
 .email--footer,
-.quote--footer,
 .company--footer,
 .product--footer,
 .ticket--footer,
@@ -837,9 +803,9 @@ _::-webkit-:not(:root:root),
   height: 16px;
   position: absolute;
   bottom: 0;
-  left: -3px;
+  left: 0;
   transform: translate(50%, 50%);
-
+  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -853,7 +819,6 @@ _::-webkit-:not(:root:root),
   overflow-y: hidden;
   overflow-x: scroll;
   padding-bottom: 5px;
-  margin-top: 4px;
 }
 
 .ticket--footer .shared-avatars .check-area.checked {
@@ -864,17 +829,17 @@ _::-webkit-:not(:root:root),
 .ticket--footer .shared-avatars .avatars {
   padding: 2px 7px;
   display: flex;
-
+  
 }
 
 .ticket--footer .shared-avatars .client-users {
   border-right: 1px solid #edf2f6;
-
+  
 }
 
 .ticket--footer .shared-avatars .shared-avatar {
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   margin-right: 2px;
 }
 
@@ -888,8 +853,8 @@ _::-webkit-:not(:root:root),
 }
 
 .ticket--footer .shared-avatars .shared-avatar > img, .user-panel-avatar {
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
 }
 
@@ -902,13 +867,13 @@ _::-webkit-:not(:root:root),
   width: 32px;
   height: 32px;
   margin-right: 10px;
-
+  
 }
 
 .dropdown-menu .default-user-avatar {
   width: 32px;
   height: 32px;
-
+  
 }
 
 /* .avatar-background-color-even {
@@ -936,13 +901,13 @@ _::-webkit-:not(:root:root),
   width: 32px;
   height: 32px;
   margin-right: 10px;
-
+  
 }
 
 .dropdown-menu .default-user-avatar {
   width: 32px;
   height: 32px;
-
+  
 }
 
 /* .avatar-background-color-even {
@@ -1035,7 +1000,6 @@ _::-webkit-:not(:root:root),
 }
 
 .invoice--header,
-.quote--header,
 .email--header,
 .service--header,
 .user--header,
@@ -1049,20 +1013,14 @@ _::-webkit-:not(:root:root),
   border-radius: 3px;
 }
 
-.archive-modal button,
-.image-confirm-modal button,
 .invoice--header button,
-.quote--header button,
 .email--header button,
 .service--header button,
 .user--header button,
 .ticket--header button,
 .company--header button,
 .product--header button,
-.new-users-content__modal button,
-.new-companies-content__modal button,
-.recurring-tickets-content__modal button,
-.password-content__modal button {
+.password-content__modal button{
   border: none;
   outline: none;
   background-color: transparent;
@@ -1071,7 +1029,6 @@ _::-webkit-:not(:root:root),
 
 .invoice--header h2,
 .email--header h2,
-.quote--header h2,
 .service--header h2,
 .user--header h2,
 .ticket--header h2,
@@ -1085,7 +1042,6 @@ _::-webkit-:not(:root:root),
 
 .invoice--content,
 .email--content,
-.quote--content,
 .service--content,
 .user--content,
 .ticket--content,
@@ -1094,70 +1050,53 @@ _::-webkit-:not(:root:root),
   margin: 0 -15px;
 }
 
-.preview-file-body img {
-  width: 100%;
-  display: block;
-  margin: auto 0px;
-}
-
-.email--content .tags,
-.quote--content .tags {
+.email--content .tags {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
 }
 
-.email--content .tags-action,
-.quote--content .tags-action {
+.email--content .tags-action {
   min-width: 100px;
   flex: 1;
   padding-bottom: 10px;
 }
 
-.email--content .tags-wrap,
-.quote--content .tags-wrap {
+.email--content .tags-wrap {
   margin: 0;
   border: none;
   border-bottom: 1px solid #e5e7eb;
 }
 
-.email--content .tags-wrap input,
-.quote--content .tags-wrap input {
+.email--content .tags-wrap input {
   border: none;
 }
 
-.email--content .tags-wrap.focused,
-.quote--content .tags-wrap.focused {
+.email--content .tags-wrap.focused {
   border-color: #16a4fa !important;
-  border-radius: 0;
 }
 
-.email--content .tags-wrap .tags,
-.quote--content .tags-wrap .tags {
+.email--content .tags-wrap .tags {
   padding: 0;
   width: 100%;
 }
 
-.email--content .tags-wrap .tags .tag-label,
-.quote--content .tags-wrap .tags .tag-label {
+.email--content .tags-wrap .tags .tag-label {
   padding: 9px 15px 9px 5px;
   border-radius: 3px !important;
   border: 1px solid #edf2f6;
 }
 
-.email--content .tags-wrap .tags .tag-label span,
-.quote--content .tags-wrap .tags .tag-label span {
+.email--content .tags-wrap .tags .tag-label span {
   font-size: 12px;
   color: #4f5f79;
 }
 
-.email--content .tags-wrap .tags .tag-label .remove-tag,
-.quote--content .tags-wrap .tags .tag-label .remove-tag {
+.email--content .tags-wrap .tags .tag-label .remove-tag {
   top: 10px;
 }
 
-.email--content .tags-wrap .tags input,
-.quote--content .tags-wrap .tags input {
+.email--content .tags-wrap .tags input {
   width: 100%;
 }
 
@@ -1203,7 +1142,6 @@ _::-webkit-:not(:root:root),
 
 .invoice--content input,
 .email--content input,
-.quote--content input,
 .service--content input,
 .user--content input,
 .ticket--content input,
@@ -1212,7 +1150,6 @@ _::-webkit-:not(:root:root),
 .product--content input,
 .product--content textarea,
 .email--content .form-control,
-.quote--content .form-control,
 .invoice--content .form-control,
 .service--content .form-control,
 .user--content .form-control,
@@ -1230,7 +1167,6 @@ _::-webkit-:not(:root:root),
 
 .invoice--content [class*='col-md-'],
 .email--content [class*='col-md-'],
-.quote--content [class*='col-md-'],
 .service--content [class*='col-md-'],
 .user--content [class*='col-md-'],
 .ticket--content [class*='col-md-'],
@@ -1240,13 +1176,11 @@ _::-webkit-:not(:root:root),
   margin-bottom: 20px;
 }
 
-.email--content [class*='col-md-'],
-.quote--content [class*='col-md-'] {
+.email--content [class*='col-md-'] {
   margin-bottom: 17px;
 }
 
 .email--content input::placeholder,
-.quote--content input::placeholder,
 .invoice--content input::placeholder,
 .service--content input::placeholder,
 .user--content input::placeholder,
@@ -1263,7 +1197,6 @@ _::-webkit-:not(:root:root),
 
 .invoice--content p,
 .email--content p,
-.quote--content p,
 .service--content p,
 .user--content p,
 .ticket--content p,
@@ -1276,7 +1209,6 @@ _::-webkit-:not(:root:root),
 
 .invoice--content label,
 .email--content label,
-.quote--content label,
 .service--content label,
 .add-tax-dropdown label {
   color: #4f5f79;
@@ -1336,14 +1268,12 @@ _::-webkit-:not(:root:root),
   padding-left: 12px;
 }
 
-.invoice-create--header__btn .btn,
-.quote-create--header__btn .btn {
+.invoice-create--header__btn .btn {
   font-size: 13px !important;
 }
 
 .save-invoice-button .dropdown-menu li,
-.invoice-create--header__btn li,
-.quote-create--header__btn li {
+.invoice-create--header__btn li {
   font-size: 13px;
   transition: all .3s;
   height: 40px;
@@ -1353,8 +1283,7 @@ _::-webkit-:not(:root:root),
 }
 
 .save-invoice-button .dropdown-menu li:hover,
-.invoice-create--header__btn li:hover,
-.quote-create--header__btn li:hover {
+.invoice-create--header__btn li:hover {
   background-color: #16a4fa;
   color: #fff;
   font-weight: normal;
@@ -1431,31 +1360,25 @@ _::-webkit-:not(:root:root),
   border-bottom-left-radius: 0 !important;
 }
 
-.email-text-block,
-.quote-text-block {
+.email-text-block {
   border: 1px solid #edf2f6;
   border-radius: 4px;
   padding: 14px 20px;
 }
 
-.textarea.email-text-block,
-.textarea.quote-text-block {
-  border: 1px solid #c4cbd5 !important;
+.textarea.email-text-block {
   width: 100%;
   min-height: 273px;
   outline: none;
   margin-bottom: -8px;
   padding: 22px 20px;
-  font-size: 13px;
 }
 
-.textarea.email-text-block::placeholder,
-.textarea.quote-text-block::placeholder {
+.textarea.email-text-block::placeholder {
   color: #c0bfcd;
 }
 
-.email-text-block textarea,
-.quote-text-block textarea {
+.email-text-block textarea {
   height: 170px;
   width: 100%;
   border: none;
@@ -1510,8 +1433,7 @@ _::-webkit-:not(:root:root),
   color: #4f5f79;
 }
 
-.create-email-form .create-new-link:before,
-.create-quote-form .create-new-link:before {
+.create-email-form .create-new-link:before {
   bottom: -1px;
   width: 100%;
 }
@@ -1521,18 +1443,15 @@ _::-webkit-:not(:root:root),
   bottom: 40px;
 }
 
-.create-email-form .email--content,
-.create-quote-form .quote--content {
+.create-email-form .email--content {
   padding-bottom: 0;
 }
 
-.create-new.create-email-form .email--footer .btn,
-.create-new.create-quote-form .quote--footer .btn {
+.create-new.create-email-form .email--footer .btn {
   width: 148px !important;
 }
 
-.create-new.create-email-form .email--footer .btn.btn-default,
-.create-new.create-quote-form .quote--footer .btn.btn-default {
+.create-new.create-email-form .email--footer .btn.btn-default {
   width: 111px !important;
 }
 
@@ -1544,8 +1463,7 @@ _::-webkit-:not(:root:root),
   padding-top: 8px;
 }
 
-.email-text-block textarea::placeholder,
-.quote-text-block textarea::placeholder {
+.email-text-block textarea::placeholder {
   color: #9ca5b6;
 }
 
@@ -1736,13 +1654,8 @@ _::-webkit-:not(:root:root),
   padding: 70px 40px 60px 140px;
 }
 
-.archive-modal .close-modal,
-.image-confirm-modal .close-modal,
 .create-new .close-modal,
 .download-agent-modal .close-modal,
-.new-users-content__modal .close-modal,
-.recurring-tickets-content__modal .close-modal,
-.new-companies-content__modal .close-modal,
 .password-content__modal .close-modal {
   width: 24px;
   height: 24px;
@@ -1752,7 +1665,6 @@ _::-webkit-:not(:root:root),
 }
 
 .download-agent-modal .close-modal {
-  outline: none;
   position: absolute;
   right: 28px;
   top: 36px;
@@ -1853,23 +1765,14 @@ _::-webkit-:not(:root:root),
   padding-right: 30px;
 }
 
-.new-companies-content__modal .google-plus:before,
 .create-new .google-plus:before {
   position: absolute;
   content: '';
   background-image: url(../images/new-icons/google-plus.png);
   width: 20px;
   height: 13px;
-}
-
-.create-new .google-plus:before {
   right: 20px;
   top: 20px;
-}
-
-.new-companies-content__modal .google-plus:before {
-  right: 25px;
-  top: 45px;
 }
 
 .ticket--header .ticket-priority {

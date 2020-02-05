@@ -48,16 +48,16 @@
         }
 
         if (isInitialized) {
-         
+          console.log("Lost connection!! Trying to reconnect", error);
           init();
 
         } else {
-         
+          console.error("Cannot establish web socket connection", error);
           setTimeout(init, reconnectDelay);
         }
 
         isInitialized = false;
-      
+        console.log('erease stompClient')
         stompClient = undefined;
       });
     }
@@ -73,7 +73,7 @@
           "/user/watch" + config.url,
           function (message) {
             var newChange = JSON.parse(message.body);
-            
+            // commit console.log before prod update
             config.callback(newChange);
             config.scope.$apply();
           });

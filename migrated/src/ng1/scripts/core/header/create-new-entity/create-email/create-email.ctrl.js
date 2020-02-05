@@ -35,7 +35,7 @@
         if (evt.keyCode === 13) {
           $scope.addEmail($scope.newEmail);
           $scope.newEmail = null;
-         
+
           $scope.$digest();
         }
       }
@@ -112,7 +112,7 @@
             emails: $scope.emails,
             note: plainText
           }, $scope.close);
-         
+          console.log('im heree')
           return;
         }
 

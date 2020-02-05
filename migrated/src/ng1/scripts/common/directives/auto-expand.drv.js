@@ -11,7 +11,6 @@
         },
 
         link: function(scope, element, attr){
-        
             var update = function(){
                 element.css("height", "auto");
                 var height = element[0].scrollHeight;
@@ -78,7 +77,6 @@
                     element[0].blur();
                     element[0].focus();
                     element[0].click();
-                    
                     scope.$digest()
                   }
 
@@ -134,7 +132,6 @@
                   element[0].blur();
                   element[0].focus();
                   element[0].click();
-                
                   scope.$digest()
 
 

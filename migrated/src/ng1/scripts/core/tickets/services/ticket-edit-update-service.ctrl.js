@@ -3,15 +3,14 @@
 (function () {
 
     angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketEditUpdateServiceCtrl',
-      ['$scope', 'TicketsService', 'ServicesService', 'quicktech.common.services.UserNotificationService', '$filter', '$rootScope','CompaniesService',
-        function ($scope, TicketsService, ServicesService, UserNotificationService, $filter, $rootScope,CompaniesService) {
+      ['$scope', 'TicketsService', 'ServicesService', 'quicktech.common.services.UserNotificationService', '$filter', '$rootScope',
+        function ($scope, TicketsService, ServicesService, UserNotificationService, $filter, $rootScope) {
 
           $scope.maxServiceDate = new Date();
 
           $scope.editService = $scope.service.staticCopy();
-         
           $scope.companyServices = ServicesService.getAllByCompany($scope, $scope.company.id);
-          $scope.durationText = "";
+
           $scope.editService.date = $filter('date')($scope.editService.date, 'd MMM yyyy');
           var editDateStart = new Date($scope.service.durationStart);
           var editDateEnd = new Date($scope.service.durationEnd );
@@ -57,51 +56,17 @@
           $scope.bindHtml = 'true';
           $scope.saveDateIsSet = false;
           $scope.disableQuantityWatcher = false;
-          $scope.intervalsVariant = [
-            {
-              name: 'Every 1 min',
-              value: 1,
-              valueForBack: 'ONE_MINUTE'
-            },
-            {
-              name: 'Every 5 mins',
-              value: 5,
-              valueForBack: 'FIVE_MINUTES'
-            },
-            {
-              name: 'Every 10 mins',
-              value: 10,
-              valueForBack: 'TEN_MINUTES'
-            },
-            {
-              name: 'Every 15 mins',
-              value: 15,
-              valueForBack: 'FIFTEEN_MINUTES'
-            }
-          ];
-          $scope.serviceExpenseDurationPresentation = CompaniesService.getCurrentCompany().serviceExpenseDurationPresentation ?
-          CompaniesService.getCurrentCompany().serviceExpenseDurationPresentation
+
+          $scope.serviceExpenseDurationPresentation = $rootScope.currentUser.serviceExpenseDurationPresentation ?
+            $rootScope.currentUser.serviceExpenseDurationPresentation
             : 'DURATION_PICKER';
-            $scope.timePickerInterval = setTimePickerInterval();
-            function setTimePickerInterval(){
-              var interval = CompaniesService.getCurrentCompany().serviceExpenseDurationPickerInterval ?
-              CompaniesService.getCurrentCompany().serviceExpenseDurationPickerInterval : 'ONE_MINUTE';
-              return $scope.intervalsVariant.find(function(item) {
-                return item.valueForBack === interval;
-              });
-            }
-            $scope.intervalsArray = [];
-            
-            for (var step = 0; step < (60/$scope.timePickerInterval.value); step++) {
-              $scope.intervalsArray.push(step*$scope.timePickerInterval.value);
-            }
-           
+
           $scope.getMinutes = function () {
-         /*   var result = {};
+            var result = {};
             for (var i = 0; i < 60; i ++) {
               result[i] = i < 10 ? ('0' + i) : i;
-            }*/
-            return $scope.intervalsArray;
+            }
+            return result;
           };
 
           $scope.$watch('startDate.hour', function (newValue, oldValue) {
@@ -125,7 +90,6 @@
           }
 
           $scope.$on('changeQuantity', function (event, newValue) {
-         
             $rootScope.saveForStartDate = new Date($rootScope.saveForEndDate.getTime() - newValue*3600000);
 
             $rootScope.quantityEditTime = {};
@@ -256,33 +220,15 @@
             }
           }
 
-          $scope.resetDurationWhenTimePicker = function () {
-          
-            var timeInMinutes = $scope.editService.quantity * 60,
-            hours = Math.floor(timeInMinutes / 60),
-            minutes = Math.round(timeInMinutes - (hours * 60));
-           
-
-            var hourText = ((hours < 10) ? "0" + hours : hours);
-            var minuteText = ((minutes < 10) ? "0" + minutes : minutes);
-            $scope.durationText = hourText + ":" + minuteText;
-           
-          }
-          $scope.resetDurationWhenTimePicker();
           //TimePicker end
 
           $scope.saveUpdateService = function (form) {
-           
-            
             $scope.disableQuantityWatcher = true;
             if (form.$valid) {
-            
               var editVersionedId = $scope.editService.item.versionedId;
               var isServiceItemChange = $scope.service.item.versionedId.id != editVersionedId.id;
               var isDescriptionChange = $scope.service.description != $scope.editService.description;
-              var isQuantityChange = $scope.service.quantity != $scope.editService.quantity;
-           //   var isQuantityChange = ($scope.service.quantity * 60) != $scope.editService.quantity;
-           if (isQuantityChange) $rootScope.quantityForSave = $scope.editService.quantity;
+              var isQuantityChange = ($scope.service.quantity * 60) != $scope.editService.quantity;
               var isDateChange = checkDateOnDifferent(new Date($scope.service.date), new Date($scope.editService.date));
               var isDescountAmountChange = $scope.service.discountAmount != $scope.editService.discountAmount;
               var isDiscountTypeChange = $scope.service.discountType != $scope.editService.discountType;
@@ -298,7 +244,7 @@
 
               var serviceDate = new Date($scope.editService.date);
 
-             /* var startDate = new Date();
+              var startDate = new Date();
               var endDate = new Date();
               if ($scope.saveStartDate.time === 'PM' && $scope.saveStartDate.hour < 12)  {
                 startDate.setHours(+($rootScope.saveStartDate.hour) +12)
@@ -316,9 +262,6 @@
                 endDate.setHours($rootScope.saveEndDate.hour)
               }
               endDate.setMinutes($rootScope.saveEndDate.minute);
-             
-              endDate.setMinutes($rootScope.saveEndDate.minute);*/
-             
               TicketsService.updateExpenseInTicketUpdate({
 
                 ticketUpdateId: $scope.ticketUpdate.id,
@@ -332,14 +275,11 @@
                   discountAmount: $scope.editService.discountAmount,
                   discountType: 'PERCENT',
                   durationStart: $rootScope.saveForStartDate.getTime(),
-                  durationEnd: $rootScope.saveForEndDate.getTime(),
-                  completed: $scope.editService.completed,
-                user: ($scope.editService.user) ? { id: $scope.editService.user.id } : { id: "" },
+                  durationEnd: $rootScope.saveForEndDate.getTime()
                 }
               }, function () {
                 UserNotificationService.show('The ticket update containing a service has been modified', true);
                 $scope.setEditExpenseId();
-                $scope.service.description = JSON.parse(JSON.stringify($scope.editService.description));
               });
             } else {
               $scope.triedToSaveService = true;

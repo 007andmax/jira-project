@@ -9,7 +9,7 @@ ng-class="{ 'ticket-detail-header': isTicketOpened && !isTicketEditOpened, 'tick
 style="z-index: 991;"
 ng-include="'/ng1/scripts/core/header/mobile-header.tpl.html'"></div>
 
-<aside id="left" style="z-index: 991;"
+<aside id="left" style="z-index: 991;" ng-if="applicationLoaded"
        ng-include="'/ng1/scripts/core/left-panel/left-panel.tpl.html'"></aside>
 
 <aside ng-controller="quicktech.core.leftPanel.leftPanelCtrl"
@@ -20,21 +20,4 @@ ng-include="'/ng1/scripts/core/left-panel/mobile-left-panel.tpl.html'"></aside>
 <aside id="right" class="nano collapsed" ng-if="!isRightPanelHidden && applicationLoaded" right-panel
        ng-include="'/ng1/scripts/core/right-panel/right-panel.tpl.html'"></aside>
 
-
-<div class="main-container">
-  <div class="row">
-    <div class="content-container" ng-class="{'large': isRightPanelHidden}">
-      <div class="content-wrapper">
-        <div ng-include="'/ng1/scripts/common/templates/index-page-body.tpl.html'"></div>
-       <notification></notification>
-        <modal-image-cropper></modal-image-cropper>
-        <app-draft-email></app-draft-email>
-        <app-main></app-main>
-      </div>
-    </div>
-  </div>
-</div>
-<!--<div feedback-form ></div>-->
-<div welcome-wizard></div>
-
-
+<app-main></app-main>

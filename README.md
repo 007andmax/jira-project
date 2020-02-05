@@ -1,27 +1,25 @@
-# Migrated
+# quicktech-ui
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.6.
+## Quick start
 
-## Development server
+1) install node (with npm)
+2) install bower
+3) install grunt
+4) move into project folder
+5) run command `bower install`
+6) run command `npm install`
+7) start server using `grunt serve` command
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Build & development
 
-## Code scaffolding
+Run `grunt serve` for preview.
+If you have started quicktech server on your local environment then run  `grunt serveLocal` for preview.
+If you need to test compiled code then run `grunt serveDist` for preview.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+NOTE: Do not commit node_modules, bower_components, .tmp, dist folders and app/index.html file!
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Testing
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Running `grunt test` will run the unit tests with karma.
+ 

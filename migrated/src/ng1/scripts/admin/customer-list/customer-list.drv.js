@@ -67,7 +67,7 @@
             minDate = new Date(todayDate).getTime() - (30 * 24 * 60 * 60 * 1000);
             break;
           default:
-           
+            console.log('smth wrong with date');
         }
         var itemDate = new Date(item.createDate);
         if(itemDate.getTime() <= todayDate && itemDate.getTime() >= minDate) {

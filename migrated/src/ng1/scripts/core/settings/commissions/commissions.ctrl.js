@@ -14,7 +14,7 @@
           commissionRateSetOldSalesUserOrDeviceContract: false,
           commissionRateSetOldSalesUserOrDeviceContractExceeding: false
         }
- 
+
         $scope.filterTechUsers = '';
 
 

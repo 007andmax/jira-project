@@ -190,8 +190,8 @@
             <span>{{ payment.reference }}</span>
           </div>
           <div class="col-xs-2 col-md-2 w-26 positive-relative full-text-wrapper">
-            <p  ng-click="showTooltip($event, $index)" ng-bind-html="payment.note">
-             <!-- {{ payment.note }}-->
+            <p  ng-click="showTooltip($event, $index)">
+              {{ payment.note }}
             </p>
             <div class="full-text" ng-if="showTooltipArray[$index]"  ng-click="showTooltip($event, $index, true)">
               <p class="full-text-title">Note</p>
@@ -283,8 +283,7 @@
                         ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
                         tooltip-append-to-body="true"
                         class="btn btn-success"
-                        tooltip-placement="bottom"
-                style="padding-left: 22px;">
+                        tooltip-placement="bottom">
 
 
                   Resend invoice

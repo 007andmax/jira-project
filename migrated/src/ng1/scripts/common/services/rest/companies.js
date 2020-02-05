@@ -7,7 +7,7 @@
   var services = angular.module('main.services');
 
   services.factory('CompaniesService', ['$http', '$rootScope', 'RealTimeService', 'Utils', function ($http, $rootScope, RealTimeService, Utils) {
- 
+
     var serviceScope = $rootScope.$new(),
       initialized = false,
       initListeners = [],
@@ -29,13 +29,54 @@
 
     function reinitCompanies(callback) {
       $http.get('/company/clients').then(function (resp) {
+          for (var i = 0; i < resp.data.length; i++) {
+            var custCompany = Utils.customizeObj(resp.data[i]);
+            if (custCompany.deletedAt) {
+              storage.deletedCompanies.push(custCompany);
+            } else {
+              if (!custCompany.isDefault && custCompany.clientType) {
+                if(custCompany.clientType === 'CLIENT') {
+                  storage.clientCompaniesWoVendorsAndLeads.push(custCompany);
+                }
+                if (custCompany.clientType.toLowerCase() !== 'vendor') {
+                  storage.clientCompanies.push(custCompany);
+                } else {
+                  storage.clientCompanies.push(custCompany);
+                  storage.vendors.push(custCompany);
+                }
+              }
+
+              storage.companies.push(custCompany);
+            }
+          }
+          checkInit();
+          $rootScope.companyListLoaded = true;
+
+          if (callback) {
+            callback(resp);
+          }
+        },
+        function (resp) {
+          console.error(resp);
+          throw 'Cannot initialize CompaniesService!';
+        });
+    }
+
+    function updateCompanyTags(newCompanyTags, companyId) {
+      const companyForChangeIndex = storage.companies.findIndex(function(item) {
+        return item.id === companyId;
+      });
+      return storage.companies[companyForChangeIndex].tags = newCompanyTags;
+    }
+
+    $http.get('/company/clients').then(function (resp) {
         for (var i = 0; i < resp.data.length; i++) {
           var custCompany = Utils.customizeObj(resp.data[i]);
           if (custCompany.deletedAt) {
             storage.deletedCompanies.push(custCompany);
           } else {
             if (!custCompany.isDefault && custCompany.clientType) {
-              if (custCompany.clientType === 'CLIENT') {
+              if(custCompany.clientType === 'CLIENT') {
                 storage.clientCompaniesWoVendorsAndLeads.push(custCompany);
               }
               if (custCompany.clientType.toLowerCase() !== 'vendor') {
@@ -51,67 +92,25 @@
         }
         checkInit();
         $rootScope.companyListLoaded = true;
-
-        if (callback) {
-          callback(resp);
-        }
       },
-        function (resp) {
-          console.error(resp);
-          throw 'Cannot initialize CompaniesService!';
-        });
-    }
-
-    function updateCompanyTags(newCompanyTags, companyId) {
-      const companyForChangeIndex = storage.companies.findIndex(function (item) {
-        return item.id === companyId;
-      });
-      return storage.companies[companyForChangeIndex].tags = newCompanyTags;
-    }
-
-    $http.get('/company/clients').then(function (resp) {
-      for (var i = 0; i < resp.data.length; i++) {
-        var custCompany = Utils.customizeObj(resp.data[i]);
-        if (custCompany.deletedAt) {
-          storage.deletedCompanies.push(custCompany);
-        } else {
-          if (!custCompany.isDefault && custCompany.clientType) {
-            if (custCompany.clientType === 'CLIENT') {
-              storage.clientCompaniesWoVendorsAndLeads.push(custCompany);
-            }
-            if (custCompany.clientType.toLowerCase() !== 'vendor') {
-              storage.clientCompanies.push(custCompany);
-            } else {
-              storage.clientCompanies.push(custCompany);
-              storage.vendors.push(custCompany);
-            }
-          }
-
-          storage.companies.push(custCompany);
-        }
-      }
-      checkInit();
-      $rootScope.companyListLoaded = true;
-    },
       function (resp) {
         console.error(resp);
         throw 'Cannot initialize CompaniesService!';
       });
 
-    $http.get('/ps/settings').then(function (resp) {
+    $http.get('/ps/settings').then(function(resp) {
       Utils.customizeObj(resp.data, companyPaymentInfo);
       checkInit();
     },
-      function (resp) {
+      function(resp) {
         console.error(resp);
         throw 'Cannot initialize CompanyPaymentInfo!';
       });
 
     $http.get('/company/current').then(function (resp) {
-      Utils.customizeObj(resp.data, storage.currentCompany);
-      setRealTimeCurrentCompany();
-      checkInit();
-    },
+        Utils.customizeObj(resp.data, storage.currentCompany);
+        checkInit();
+      },
       function (resp) {
         console.error(resp);
         throw 'Cannot initialize CompaniesService!';
@@ -119,12 +118,12 @@
 
     function reloadCurrentCompany(callback) {
       $http.get('/company/current').then(function (resp) {
-        if (callback) {
-          callback(resp.data);
-        } else {
-          Utils.customizeObj(resp.data, storage.currentCompany);
-        }
-      })
+          if (callback) {
+            callback(resp.data);
+          } else {
+            Utils.customizeObj(resp.data, storage.currentCompany);
+          }
+        })
     }
 
     var checkInitsCount = 0;
@@ -141,16 +140,16 @@
     }
 
     RealTimeService.subscribe('/company', serviceScope, function (newChange) {
-     
+      console.log(newChange, 'NEWCHANNGE');
       if (!initialized) {
         return;
       }
-      
+      console.log('1111111NEWCHANNGE');
 
 
       var companyId = newChange.data.id;
       if (newChange.action == 'COMPANY_SAVED') {
-       
+        console.log('aaaaa');
         var company = getOneById(companyId);
 
         if (companyId === getCurrentCompany().id) {
@@ -162,7 +161,7 @@
         } else if (newChange.data.accountType !== 'TECH') {
           var newClient = Utils.customizeObj(newChange.data);
           storage.companies.push(newClient);
-          if (newClient.clientType.toLowerCase() === 'client') {
+          if(newClient.clientType.toLowerCase() === 'client') {
             storage.clientCompaniesWoVendorsAndLeads.push(newClient);
           }
           if (newClient.clientType.toLowerCase() !== 'vendor') {
@@ -177,7 +176,7 @@
           }
 
           if (callbackForSavedCompanies[companyId]) {
-           
+            console.log('bbbbbb');
             callbackForSavedCompanies[companyId](companyId);
           }
         }
@@ -203,7 +202,7 @@
       } else if (newChange.action == 'COMPANY_DEARCHIVED') {
 
         var company = Utils.customizeObj(newChange.data);
-        if (company.clientType == ' CLIENT') {
+        if(company.clientType == ' CLIENT') {
           storage.clientCompaniesWoVendorsAndLeads.push(company);
         }
         if (company.clientType.toLowerCase() !== 'vendor') {
@@ -221,20 +220,8 @@
         }
       }
     });
-    function setRealTimeCurrentCompany() {
-    
-      RealTimeService.subscribe('/company/' + storage.currentCompany.id, serviceScope, function (newChange) {
-        
-        if (newChange.action === "SERVICE_EXPENSE_DATA_PICKER_CHANGED") {
-          storage.currentCompany.serviceExpenseDurationPresentation = newChange.data.presentation;
-          storage.currentCompany.serviceExpenseDurationPickerInterval = newChange.data.interval;
-        }
 
-
-      })
-    }
-    
-    RealTimeService.subscribe('/companySettings', serviceScope, function (newChange) {
+    RealTimeService.subscribe('/companySettings', serviceScope, function(newChange) {
 
       if (newChange.action === 'SMTP_SETTINGS_UPDATED') {
         $rootScope.SMTPChanged = newChange.data;
@@ -281,29 +268,29 @@
 
     function resetReferenceDate(callback) {
       $http.post('/settings/companyProfile/accountingStartDate/reset')
-        .then(function (res) {
+        .then(function(res) {
           if (callback) callback(res)
         })
     }
 
     function getReferenceDate(callback) {
       $http.get('/settings/companyProfile/accountingStartDate')
-        .then(function (res) {
+        .then(function(res) {
           if (callback) callback(res);
         })
     }
 
     function setReferenceDate(date, callback) {
       $http.post('/settings/companyProfile/accountingStartDate', date)
-        .then(function (res) {
+        .then(function(res) {
           if (callback) callback(res)
         })
     }
 
     function setTechLead(companyId, techLeadId, callback) {
       if (!companyId || !techLeadId) return;
-      $http.put('/company/' + companyId + '/setTechLead/' + techLeadId).
-        then(function (res) {
+      $http.put('/company/' + companyId +  '/setTechLead/' + techLeadId).
+        then(function(res) {
           if (callback) {
             callback()
           }
@@ -380,7 +367,7 @@
     }
 
     function archive(companyId, callback) {
-      var future = $http.get('/company/archive/' + companyId);
+      var future = $http.get('https://dev.quicktech.com/company/archive/' + companyId);
       Utils.handleCallback(future, callback);
     }
 
@@ -415,10 +402,10 @@
         if (newChange.action == 'CLIENT_COMPANY_INFO') {
 
           var data = JSON.parse(newChange.data);
-          for (var companyId in data) {
+          for (var companyId in  data) {
             Utils.defineReadOnlyProperty(info, companyId, Utils.customizeObj(data[companyId]));
-            for (var i = 0; i < storage.companies.length; i++) {
-              if (storage.companies[i].id === companyId) {
+            for(var i=0; i<storage.companies.length; i++) {
+              if(storage.companies[i].id === companyId) {
                 storage.companies[i].companyInfo = {
                   addresses: data[companyId].addresses,
                   contacts: data[companyId].contacts,
@@ -426,7 +413,7 @@
                 }
               }
             }
-            $rootScope.$broadcast('newCompanyInfo' + companyId);
+            $rootScope.$broadcast('newCompanyInfo'+companyId);
           }
         }
       });
@@ -436,7 +423,7 @@
     function setCategoryRate(id, data, callback) {
       $http.put('/settings/companyProfile/categoryRate/' + id + '?setForOldExpenses=' + data.setForOldExpenses, {
         commissionRate: data.rate
-      }).then(function (res) {
+      }).then(function(res) {
         if (callback) callback(res);
       })
     }
@@ -444,21 +431,21 @@
     function setServiceRate(id, data, callback) {
       $http.put('/settings/companyProfile/serviceRate/' + id + '?setForOldExpenses=' + data.setForOldExpenses, {
         commissionRate: data.rate
-      }).then(function (res) {
+      }).then(function(res) {
         if (callback) callback(res);
       })
     }
 
     function setAgreementsRate(rates, setForOldExpenses, callback) {
       $http.post('/settings/companyProfile/agreementRates' + "?setForOldExpenses=" + setForOldExpenses, rates)
-        .then(function (res) {
+        .then(function(res) {
           if (callback) callback(res);
         })
     }
 
     function getAgreementsRates(callback) {
       $http.get('/settings/companyProfile/agreementRates')
-        .then(function (res) {
+        .then(function(res) {
           if (callback) callback(res);
         })
     }
@@ -494,7 +481,7 @@
 
           var data = JSON.parse(newChange.data);
 
-          for (var key in data) {
+          for (var key in  data) {
             if (key === companyId) {
               Utils.customizeObj(data[companyId], info);
             }
@@ -622,7 +609,7 @@
       });
 
       if (company.id) {
-        storage.clientCompanies.find(function (val) {
+        storage.clientCompanies.find(function(val) {
           return val.id === company.id;
         }).techLeadId = company.techLeadId;
       }
@@ -644,12 +631,12 @@
     }
 
     function deleteExample(callback) {
-      var future = $http({
-        url: '/company/removeExampleCompany',
-        method: 'POST',
-      });
+       var future = $http({
+         url: '/company/removeExampleCompany',
+         method: 'POST',
+       });
 
-      Utils.handleCallback(future, callback);
+       Utils.handleCallback(future, callback);
     }
 
     function saveCompanySettingsDto(companyDto, callback) {
@@ -721,9 +708,7 @@
 
       var info = Utils.customizeObj({});
 
-      $http.get('/company/isCompanyNameUnique', {
-        params: { name: name, id: id }
-      }).then(function (resp) {
+      $http.get('/company/isCompanyNameUnique?name=' + name + '&id=' + id).then(function (resp) {
         Utils.customizeObj(resp.data, info);
 
         if (callback) {
@@ -856,7 +841,7 @@
         url: '/email/customEmail',
         method: "POST",
         data: data
-      }).then(function (res) {
+      }).then(function(res) {
         if (callback) callback(res);
       })
     }
@@ -1004,7 +989,7 @@
     function changePrimaryContact(id, callback) {
       var future = $http({
         method: 'GET',
-        url: '/company/resetPrimaryContact?userId=' + id
+        url: '/company/resetPrimaryContact?userId='+id
       });
       Utils.handleCallback(future, callback);
     }

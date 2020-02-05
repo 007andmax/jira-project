@@ -3,8 +3,8 @@
 (function () {
 
     angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketAddUpdateServiceCtrl',
-      ['$scope', 'ServicesService', '$rootScope','CompaniesService',
-        function ($scope, ServicesService, $rootScope,CompaniesService) {
+      ['$scope', 'ServicesService', '$rootScope',
+        function ($scope, ServicesService, $rootScope) {
 
           //TimePicker start
           $scope.showTimePicker = false;
@@ -15,74 +15,22 @@
           $scope.attachment = 'inline';
           $scope.bindHtml = 'true';
           $scope.saveDateIsSet = false;
-          $scope.intervalsVariant = [
-            {
-              name: 'Every 1 min',
-              value: 1,
-              valueForBack: 'ONE_MINUTE'
-            },
-            {
-              name: 'Every 5 mins',
-              value: 5,
-              valueForBack: 'FIVE_MINUTES'
-            },
-            {
-              name: 'Every 10 mins',
-              value: 10,
-              valueForBack: 'TEN_MINUTES'
-            },
-            {
-              name: 'Every 15 mins',
-              value: 15,
-              valueForBack: 'FIFTEEN_MINUTES'
-            }
-          ];
-          $scope.serviceExpenseDurationPresentation = CompaniesService.getCurrentCompany().serviceExpenseDurationPresentation ?
-          CompaniesService.getCurrentCompany().serviceExpenseDurationPresentation
-            : 'DURATION_PICKER';
-            $scope.timePickerInterval = setTimePickerInterval();
-            function setTimePickerInterval(){
-              var interval = CompaniesService.getCurrentCompany().serviceExpenseDurationPickerInterval ?
-              CompaniesService.getCurrentCompany().serviceExpenseDurationPickerInterval : 'ONE_MINUTE';
-              return $scope.intervalsVariant.find(function(item) {
-                return item.valueForBack === interval;
-              });
-            }
-            $scope.intervalsArray = [];
-           
-            for (var step = 0; step < (60/$scope.timePickerInterval.value); step++) {
-              $scope.intervalsArray.push(step*$scope.timePickerInterval.value);
-            }
-            
+
+          $scope.serviceExpenseDurationPresentation = $rootScope.currentUser.serviceExpenseDurationPresentation ?
+            $rootScope.currentUser.serviceExpenseDurationPresentation
+            :'DURATION_PICKER';
+
           $scope.$on('hideTimepicker', function(event, data) {
             if (data) { $scope.showTimePicker = false };
           });
-          $scope.$watch(function () {
-            if ($scope.serviceExpense && $scope.serviceExpense.date != undefined) return $scope.serviceExpense.date;
-          }, function (value) {
-            if ($scope.serviceExpense && $scope.serviceExpense.date) {
-         
-              var date = new Date(value);
-              var currentDate = new Date();
-              if (date.getFullYear() <= currentDate.getFullYear() && date.getMonth() <= currentDate.getMonth() && date.getDate() <= currentDate.getDate())  {
-           
-              $rootScope.$broadcast('setBlockUpdateAndClosed', false);
-              } else {
-           
-                $rootScope.$broadcast('setBlockUpdateAndClosed', true);
-           
-              }
-            }
-       
-          });
+
 
           $scope.getMinutes = function () {
-          /*  var result = {};
+            var result = {};
             for (var i = 0; i < 60; i ++) {
               result[i] = i < 10 ? ('0' + i) : i;
-            }*/
-           // return result;
-           return $scope.intervalsArray;
+            }
+            return result;
           };
 
           // $scope.$watch('startDate.hour', function (newValue, oldValue) {

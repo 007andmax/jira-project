@@ -49,7 +49,7 @@
         $scope.changePrimaryContact = function(user) {
           CompaniesService.changePrimaryContact(user.id, function(resp) {
             if(resp) {
-            
+              console.log(resp);
             }
           })
         };
@@ -74,7 +74,7 @@
         };
 
         $scope.startChat = function () {
-       
+          console.log('start chat ' + $scope.user.id);
         };
 
         $scope.isLastUserWithInvoiceSubscription = function (userId) {

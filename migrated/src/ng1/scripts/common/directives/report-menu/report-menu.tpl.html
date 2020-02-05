@@ -3,13 +3,13 @@
   <div ng-form="reportSettingForm">
     <div class="run-report-content clearfix {{ $ctrl.className || '' }}">
 
-      <div class="new-reports-reverse">
-        <button class="form-group btn btn-success" ng-click="$ctrl.sendReportRequest(reportSetting)"
-                ng-disabled="reportSettingForm.$invalid && !$ctrl.isCustomerHidden && !$ctrl.isRadioButtonHidden">Get
-                                                                                                                  Report
-        </button>
+      <button class="form-group btn btn-success" ng-click="$ctrl.sendReportRequest(reportSetting)"
+              ng-disabled="reportSettingForm.$invalid && !$ctrl.isCustomerHidden && !$ctrl.isRadioButtonHidden">Get
+                                                                                                                Report
+      </button>
 
-        <div class="form-group content custom-width dropdown-height" ng-show="$ctrl.isSoftListHidden">
+      <div class="new-reports-reverse">
+        <div class="form-group content" ng-show="$ctrl.isSoftListHidden">
           <div uib-dropdown>
             <input type="text"
                    name="reportCompany"
@@ -23,13 +23,13 @@
                    uib-typeahead="soft as soft.name for soft in softSelect | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
                    placeholder="{{'Search software / publisher'}}"
                    qt-typeahead-async-show-on-focus
-                   custom-style="{width: '100%', 'overflow-y': 'auto'}" />
+                   custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}" />
             <loading-indicator class="new-reports-reverse__loader loading-bg" loading-trigger="!loadingInProgressSoft"></loading-indicator>
             <div class="input-top-4" typeahead-input-icon="userCompany"></div>
           </div>
         </div>
 
-        <div class="device-report dropdown-remote-report-tech form-group custom-width" ng-show="$ctrl.isShowTechSelectField">
+        <div class="device-report dropdown-remote-report-tech form-group" ng-show="$ctrl.isShowTechSelectField">
           <input type="text"
                  class="form-control has-dropdown-with-label pointer"
                  autocomplete="off"
@@ -59,7 +59,7 @@
 
         </div>
 
-        <div class="form-group content custom-width" ng-hide="$ctrl.isDeviceHidden">
+        <div class="form-group content" ng-hide="$ctrl.isDeviceHidden">
           <div class="text-error text-left" style="position: absolute;bottom: -10px;right: 0;"
                ng-hide="errorMassageForSoftwareReportCompany">
             Please select device or soft
@@ -74,7 +74,7 @@
                  uib-typeahead="agent as (agent.hostName || agent.ip) for agent in filteredAgentList | filter:$viewValue:stateComparator | orderBy:'hostName'"
                  qt-typeahead-async-show-on-focus
                  placeholder="All devices"
-                 custom-style="{'max-height': '113px', 'overflow-y': 'auto', 'width': '100%'}" />
+                 custom-style="{'max-height': '113px', 'overflow-y': 'auto', 'width': '356px'}" />
           <div typeahead-input-icon-sm="reportAgent"></div>
           <div class="ng-scope" typeahead-input-icon="userCompany">
             <span class="x-mark" ng-click="clearInput($event)" ng-show="showClearIcon">
@@ -161,7 +161,7 @@
 
         </div>
 
-        <div class="form-group content custom-width" ng-hide="$ctrl.isCustomerHidden">
+        <div class="form-group content" ng-hide="$ctrl.isCustomerHidden">
 
           <div class="text-error" style="position: absolute;bottom: -10px;right: 0;" ng-hide="errorNassageForCompany">
             Please select
@@ -184,7 +184,7 @@
           </div>
         </div>
 
-        <div class="form-group content custom-width" ng-show="$ctrl.commonCommissions || $ctrl.detailedCommissions">
+        <div class="form-group content" ng-show="$ctrl.commonCommissions || $ctrl.detailedCommissions">
 
           <div>
 
@@ -213,7 +213,7 @@
 
         </div>
 
-        <div class="form-group content custom-width" ng-show="$ctrl.isProductOptions">
+        <div class="form-group content" ng-show="$ctrl.isProductOptions">
 
           <div style="float: left;width: 100%;">
             <div products-list id="product-list-cont"
@@ -241,7 +241,6 @@
             </div>
           </div>
         </div>
-
       </div>
 
       <div ng-show="$ctrl.isCustomerTicketOptions" class="col-md-11">
@@ -306,7 +305,7 @@
           <label class="control checkbox">
             <input type="checkbox" ng-model="hardwareSummaryWithWarrenty">
             <span class="control-indicator"></span>
-            Warranty
+            Warrenty
           </label>
           <label class="control checkbox">
             <input type="checkbox" ng-model="hardwareSummaryWithSerialNumber" />

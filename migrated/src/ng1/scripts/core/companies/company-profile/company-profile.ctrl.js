@@ -11,10 +11,8 @@
                 SharedStateService, $timeout, UserNotificationService, UserConfirmationsService,
                 PermissionsService, UsersService, $location, PasswordManagerService, $rootScope) {
 
-                 
         if (!PermissionsService.isAllowed('VIEW_COMPANIES')) {
           $state.go('tickets');
-        
         }
 
         UserNotificationService.show('Loading...');
@@ -369,7 +367,7 @@
 
 
         // $scope.$watch('companyProfileSharedState.tabName', function(data) {
-         
+        //   console.log(data);
         //   $state.go('companyProfile', { companyId: $scope.company.id, tabName: data });
         // })
 

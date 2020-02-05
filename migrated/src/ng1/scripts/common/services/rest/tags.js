@@ -114,7 +114,7 @@
           });
 
           RealTimeService.subscribe('/companyTags', scope, function (newChange) {
-          
+            // console.log(newChange.data, "NEW CHANGE TO COMPANY TAGS FROM /companytags")
 
             if (newChange.action === "TAG_COMPANY_SAVED") {
               if (newChange.data.tags) {

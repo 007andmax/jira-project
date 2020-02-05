@@ -26,7 +26,6 @@
 
 
       function reinitUsers(callback) {
-      
         $http.get('/users').then(function (resp) {
             Utils.customizeArray(resp.data, storage.users);
             for (var i = 0; i < storage.users.length; i++) {
@@ -67,7 +66,7 @@
         }
 
         initializingStarted = true;
-       
+
         $http.get('/users').then(function (resp) {
             Utils.customizeArray(resp.data, storage.users);
             for (var i = 0; i < storage.users.length; i++) {
@@ -254,8 +253,7 @@
 
       function generateInitials(user) {
         var initials = [user.firstName, user.lastName].map(function (s) {
-          if (s == null) return  '';
-          return s.charAt(0).toUpperCase();
+          return (s) ? s.charAt(0).toUpperCase() : '';
         }).join('');
         Utils.defineReadOnlyProperty(user, 'initials', initials);
       }
@@ -723,8 +721,8 @@
         });
       }
 
-      function changeTimePickerType(type,interval) {
-        $http.put('/settings/companyProfile/serviceExpenseDurationPresentation', { presentation: type ,interval:interval }).then(function (resp) {
+      function changeTimePickerType(type) {
+        $http.put('/settings/userProfile/serviceExpenseDurationPresentation', { presentation: type  }).then(function (resp) {
           if (status === 200) {
             $rootScope.currentUser.serviceExpenseDurationPresentation = type;
           }

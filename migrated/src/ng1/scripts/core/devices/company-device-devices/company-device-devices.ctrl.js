@@ -17,32 +17,32 @@
         };
 
         $scope.sendAlert = function () {
-         
+          console.log('sendAlert - ' + $scope.agent.agentId);
           //DevicesService
         };
 
         $scope.specReport = function () {
-          
+          console.log('specReport - ' + $scope.agent.agentId);
           //DevicesService
         };
 
         $scope.transferFile = function () {
-         
+          console.log('transferFile - ' + $scope.agent.agentId);
           //DevicesService
         };
 
         $scope.restart = function () {
-        
+          console.log('restart - ' + $scope.agent.agentId);
           DevicesService.sendPowerAction($scope.companyId, $scope.agent.agentId, 'reboot');
         };
 
         $scope.shutdown = function () {
-         
+          console.log('shutdown - ' + $scope.agent.agentId);
           DevicesService.sendPowerAction($scope.companyId, $scope.agent.agentId, 'shutdown');
         };
 
         $scope.remove = function () {
-           
+          console.log('remove - ' + $scope.agent.agentId);
           DevicesService.sendUninstallAgentRequest($scope.companyId, $scope.agent.id)
         }
 

@@ -25,7 +25,9 @@
 
 
 
-       
+        // console.log(users, 'tech users')
+        //
+        // $scope.console = console.log;
 
         $scope.resendWelcomeEmail = function(email) {
           UsersService.resendWelcomeEmail(email, function(res) {
@@ -53,7 +55,7 @@
              myTicketUpdated:  $scope.usersEmailNotificationList[userId].myTicketUpdated
            };
            UsersService.saveUsersEmailNotification(userId, notificationSetting, function(resp) {
-           
+             //console.log(resp);
            })
          }
        };

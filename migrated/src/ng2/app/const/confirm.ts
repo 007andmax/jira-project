@@ -1,5 +1,0 @@
-export const  ARCHIVE_COMPANY = 'ARCHIVE_COMPANY';
-export const  ARCHIVE_USER = 'ARCHIVE_USER';
-export const  DEARCHIVE_USER = 'DEARCHIVE_USER';
-export const  DEARCHIVE_COMPANY = 'DEARCHIVE_COMPANY';
-export const  SAVE_AND_SEND = 'SAVE_AND_SEND';

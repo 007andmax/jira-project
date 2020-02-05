@@ -5,12 +5,12 @@
       'quicktech.common.services.TicketsPermissionsService', 'quicktech.common.services.SharedStateService', 'Utils',
       'quicktech.common.services.PermissionsService', 'DevicesService', 'TagsService', '$rootScope', 'CustomStorageService', '$timeout',
       function ($scope, TicketsService, CompaniesService, UsersService, $state, $stateParams,
-        TicketsPermissionsService, SharedStateService, Utils, PermissionsService, DevicesService, TagsService, $rootScope, CustomStorageService, $timeout) {
+                TicketsPermissionsService, SharedStateService, Utils, PermissionsService, DevicesService, TagsService, $rootScope, CustomStorageService, $timeout) {
         var availableTypes = ['all', 'unassigned', 'user', 'shared', 'spam', 'open', 'closed', 'trash', 'on_hold', 'completed', 'in_progress'],
           ticketsHeaderState = SharedStateService.getSharedState('ticketsHeader'),
           globalSearch = SharedStateService.getSharedState('globalSearch');
         var ticketsSharedState = ticketsHeaderState;
-        $timeout(function () {
+        $timeout(function() {
           $scope.ticketsGroup = window.location.href.split('/').slice(-1)[0].split('_').join(' ');
           if ($scope.ticketsGroup === 'user') $scope.ticketsGroup = 'My';
         })
@@ -55,11 +55,6 @@
           'archive/zip': 'zip',
           'image/bmp': 'not-viewable'
         };
-
-      /*  if (window.localStorage.getItem('company_dashboard')) {
-          window.location.href = `#/clients/companyProfile/${window.localStorage.getItem('company_dashboard')}?tabName=dashboard`;
-          return;
-        }*/
         // CustomStorageService.getUserCustomStorageValue('ticketPageFilterByCompanyHistory', function (resp) {
         //   $scope.companiesFilterHistoryTicketsPage = resp;
         // });
@@ -71,13 +66,7 @@
         // CustomStorageService.getUserCustomStorageValue('ticketPageFilterByTechUsersHistory', function (resp) {
         //   $scope.techUsersFilterHistoryTicketsPage = resp;
         // });
-        $scope.getLastNameUser = function (user) {
-          return (user) ? user.lastName : "";
-        }
-        $scope.getFirstNameUser = function (user) {
-          return (user) ?  user.firstName : "";
-        }
-        $scope.stateMobileGo = function () {
+        $scope.stateMobileGo = function() {
           $scope.lastSavedStatus = arguments;
         }
         $scope.stateGo = function (event, state, stateParams, isTag) {
@@ -88,7 +77,7 @@
             $scope.isOnHoldTag = false;
           }
           if (event && event.button > 0) {
-            var url = $state.href(state, stateParams, { absolute: true });
+            var url = $state.href(state, stateParams, {absolute: true});
             window.open(url, '_blank');
           } else {
             $state.go(state, stateParams);
@@ -131,9 +120,9 @@
             $scope.currentOpeningTicket = stateParams.ticketId;
           }
         }, true);
-        let changeTicketCompany = $scope.$watch(function () {
+        let changeTicketCompany = $scope.$watch(function() {
           return $rootScope.changeTicketCompany;
-        }, function (val) {
+        }, function(val) {
           if (val) {
             // TicketsService.getCompanyTicketCount();
           }
@@ -153,9 +142,9 @@
         $scope.getUserById = function (userId) {
           return UsersService.getOneById(userId);
         };
-        $scope.getAssignedUserIDFromTicket = function (ticket) {
-          if (ticket) {
-            if (ticket.assignedUser && ticket.assignedUser.id) {
+        $scope.getAssignedUserIDFromTicket = function(ticket) {
+          if(ticket) {
+            if(ticket.assignedUser && ticket.assignedUser.id) {
               return ticket.assignedUser.id;
             } else {
               return ticket.assignedUserId;
@@ -241,9 +230,9 @@
             globalSearch.goBack.tooltip = 'reset selected items';
           }
         }
-        $scope.checkAgreementTypeToShowDiscount = function (serviceExpense) {
-          if (serviceExpense.item && serviceExpense.item.name && serviceExpense.item.name !== " ") {
-            if (serviceExpense.item.blockTimeServiceAgreement == null &&
+        $scope.checkAgreementTypeToShowDiscount = function(serviceExpense) {
+          if(serviceExpense.item && serviceExpense.item.name && serviceExpense.item.name !== " ") {
+            if(serviceExpense.item.blockTimeServiceAgreement == null &&
               serviceExpense.item.serviceContractServiceAgreement == null &&
               serviceExpense.item.serviceAgreement && serviceExpense.item.serviceAgreement.id) {
               return true

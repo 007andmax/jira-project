@@ -136,7 +136,12 @@
             }
 
           }else if(parentElement ) {
-          
+            // if(!d.hasClass('ng-hide')) {
+            //   parentElement.css({'overflow': 'visible'});
+            //   //console.log('open')
+            // } else {
+            //   parentElement.css({'overflow': 'hidden'});
+            // }
 
             if(attrs.smartDropdownMenuPosition === 'user-list') {
               if((winHeight - position) < 250) {
@@ -150,31 +155,7 @@
                 d.css({'max-height': '350px'});
                 if (!scope.noOverflow) parentElement.css({'overflow': 'hidden'});
               }
-            } else if(attrs.smartDropdownMenuPosition === 'duration') {
-              if((winHeight - position) < 350) {
-                d.css({'top': 'auto'});
-                d.css({'bottom': '100%'});
-                d.css({'max-height': '350px'});
-                if (!scope.noOverflow) parentElement.css({'overflow': 'visible'});
-              } else {
-                d.css({'top': 'auto'});
-                d.css({'bottom': ''});
-                d.css({'max-height': '350px'});
-                if (!scope.noOverflow) parentElement.css({'overflow': 'hidden'});
-              }
-            } else if(attrs.smartDropdownMenuPosition === 'time-picker') {
-                if((winHeight - position) < 240) {
-                  d.css({'top': 'auto'});
-                  d.css({'bottom': '100%'});
-                  d.css({'max-height': '240px'});
-                  if (!scope.noOverflow) parentElement.css({'overflow': 'visible'});
-                } else {
-                  d.css({'top': 'auto'});
-                  d.css({'bottom': ''});
-                  d.css({'max-height': '240px'});
-                  if (!scope.noOverflow) parentElement.css({'overflow': 'hidden'});
-                }
-              } else {
+            } else {
               if((winHeight - position) < 290) {
                 d.css({'top': 'auto'});
                 d.css({'bottom': '100%'});

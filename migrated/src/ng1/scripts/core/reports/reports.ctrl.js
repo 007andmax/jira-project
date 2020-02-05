@@ -387,8 +387,6 @@
         $scope.softwareSummaryWithPublisherItem = $scope.softwareSummaryWithPublisher;
         $scope.softwareSummaryWithVersionItem = $scope.softwareSummaryWithVersion;
         $scope.softwareSummaryWithInstallDateItem = $scope.softwareSummaryWithInstallDate;
-
-      
       }
 
       function getSoftwareSummaryData(dataToSend) {
@@ -407,9 +405,9 @@
 
       function findWithCompany(data) {
         var reportTransformedSoftwareSummaryDataInside = [];
-       
+        console.log($scope.softwareSummarySelectedCompany, '$scope.softwareSummarySelectedCompany');
         if (data.device) {
-          
+          console.log( $scope.softwareSummarySelectedCompany, data);
           $scope.reportSoftwareSummaryData = $scope.softwareSummarySelectedCompany && $scope.softwareSummarySelectedCompany.data[data.companyId].filter(function(item){
             return item.id === data.device;
           });
@@ -425,7 +423,7 @@
                   softwareTitle: soft.softName,
                   installationKey: '',
                   publisher: soft.softPublisher,
-                  version: (soft.softName === "Windows") ? `${item.report.system.caption} ${item.report.system.release_id} ${item.report.system.architecture} ${item.report.system.service_pack}` : soft.softVersion,
+                  version: soft.softVersion,
                   installDate: soft.softInstalledOn
                 });
               });
@@ -447,7 +445,6 @@
           reportTransformedSoftwareSummaryDataInside = $scope.reportSoftwareSummaryData;
         }
         $scope.loadingInProgress = false;
-       
         return ($scope.reportTransformedSoftwareSummaryData = reportTransformedSoftwareSummaryDataInside);
       }
 
@@ -616,6 +613,12 @@
             $scope.reducedCompanies = Object.keys(reducedData);
           }
         })
+
+
+
+
+
+
       }
 
       function normalizeString(str) {
@@ -633,15 +636,12 @@
         $scope.isReportAvailable = false;
 
         if (data.companyId) {
-          $scope.company = CompaniesService.getOneById(data.companyId);
+          $scope.company = CompaniesService.getOneById(data.companyId)
         }
 
         $scope.showProducts = $rootScope.customerTicketWithProducts;
         $scope.showServices = $rootScope.customerTicketWithServices;
 
-
-
-       
 
         StatisticsService.getCustomerTicketReport(data, function (resp){
           if(resp) {
@@ -674,14 +674,13 @@
             if ($rootScope.customerTicketShowTotalTicketAmount === false) {
               $scope.ticketReport.hideTotalTickets = true;
             }
-
-            $scope.showHeader = $rootScope.customerTicketWithTimeSpent;
+            $scope.showHeader = $rootScope.customerTicketWithTimeSpent
             $scope.ticketReport.startDate = moment(new Date(resp.startDate)).format('ll');
             $scope.ticketReport.endDate = moment(new Date(resp.endDate)).format('ll');
             $scope.loadingInProgress = false;
             $scope.isReportAvailable = true;
           }
-        });
+        })
       }
 
       $scope.formatResponseTime = function(time) {
@@ -713,13 +712,8 @@
         }
       };
 
-      $scope.getRamSize = function (slots) {
-        let ramSize = 0;
-        slots.forEach( function(item) {
-          ramSize = item.capacity;
-        })
-        return (ramSize > 0 && ramSize/1073741824 > 0)? (ramSize/1073741824) + 'GB' : 0 + 'GB';
-        //return (ramSize > 0 && ramSize/1073741824 > 0)? Math.ceil(ramSize/1073741824) + 'GB' : 0 + 'GB';
+      $scope.getRamSize = function (ramSize) {
+        return (ramSize > 0 && ramSize/1073741824 > 0)? Math.floor(ramSize/1073741824) + 'GB' : 0 + 'GB';
       };
 
       function calculateServicesTime(tickets) {
@@ -889,7 +883,7 @@
               $rootScope.reportName = 'software-summary';
               break;
             default:
-             
+              console.log("wrong location")
           }
         }
         if($state.includes('companyProfile')) {

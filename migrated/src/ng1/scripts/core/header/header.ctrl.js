@@ -30,11 +30,11 @@
 
 
         // $scope.$watch('ticketMobileSettings', function(val) {
-      
+        //   console.log(val, "DATATATATATATATATATATATATAT")
         // }, true)
 
-        $scope.currentCompany = CompaniesService.getCurrentCompany();
- 
+
+
         $scope.addQuickSession = function () {
           sharedQuickSession.isCreateNew = true;
         };

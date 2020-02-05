@@ -221,7 +221,7 @@
                  ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'CLIENT')">
 
 
-              <img ng-if="sharedUser.user.avatar" ng-attr-src="{{getUserAvatarUrl(sharedUser || sharedUser.user)}}" />
+              <img ng-if="sharedUser.user.avatar" src="{{getUserAvatarUrl(sharedUser || sharedUser.user)}}" />
 
               <div class="default-user-avatar" ng-if="!(sharedUser.user.avatar)"
                    ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
@@ -239,7 +239,7 @@
                  uib-tooltip="{{ sharedUser.user.firstName + ' ' + sharedUser.user.lastName }}"
                  ng-click="sharedUser.notify = !sharedUser.notify"
                  ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'TECH')">
-              <img ng-if="sharedUser.user.avatar" ng-attr-src="{{getUserAvatarUrl(sharedUser || sharedUser.user)}}" />
+              <img ng-if="sharedUser.user.avatar" src="{{getUserAvatarUrl(sharedUser || sharedUser.user)}}" />
 
               <div class="default-user-avatar" ng-if="!(sharedUser.user.avatar)"
                    ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
@@ -313,7 +313,7 @@
                  ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'CLIENT')">
 
 
-              <img ng-if="sharedUser.user.avatar" ng-attr-src="{{getUserAvatarUrl(sharedUser || sharedUser.user)}}" />
+              <img ng-if="sharedUser.user.avatar" src="{{getUserAvatarUrl(sharedUser || sharedUser.user)}}" />
 
               <div class="default-user-avatar" ng-if="!(sharedUser.user.avatar)"
                    ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">
@@ -332,7 +332,7 @@
                  uib-tooltip="{{ sharedUser.user.firstName + ' ' + sharedUser.user.lastName }}"
                  ng-click="sharedUser.notify = !sharedUser.notify"
                  ng-repeat="sharedUser in filterByType(ticketSharedUsersList, 'TECH')">
-              <img ng-if="sharedUser.user.avatar" ng-attr-src="{{getUserAvatarUrl(sharedUser || sharedUser.user)}}" />
+              <img ng-if="sharedUser.user.avatar" src="{{getUserAvatarUrl(sharedUser || sharedUser.user)}}" />
 
               <div class="default-user-avatar" ng-if="!(sharedUser.user.avatar)"
                    ng-class-odd="'avatar-background-color-odd'" ng-class-even="'avatar-background-color-even'">

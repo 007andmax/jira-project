@@ -64,7 +64,6 @@ angular.module('gc.fastRepeat', []).directive('fastRepeat', ['$compile', '$parse
         var updateList = function(rowTpl, scope, forceUpdate) {
           function render(item) {
             scope[repeatVarName] = item;
-           
             scope.$digest();
             rowTpl.attr('fast-repeat-id', item.$$fastRepeatId);
             return rowTpl.clone();
@@ -158,13 +157,13 @@ angular.module('gc.fastRepeat', []).directive('fastRepeat', ['$compile', '$parse
           // This allows us to digest the individual row scope repeatedly without major hackery.
           listScope.$$postDigest(function() {
             tplContainer.width(elParent.width());
-          
             scope.$digest();
 
             updateList(rowTpl, scope);
             if (showProfilingInfo) {
               t = getTime() - t;
-             
+              console.log("Total time: ", t, "ms");
+              console.log("time per row: ", t/list.length);
             }
             busy=false;
           });
@@ -173,7 +172,6 @@ angular.module('gc.fastRepeat', []).directive('fastRepeat', ['$compile', '$parse
         function renderRows() {
           listScope.$$postDigest(function() {
             tplContainer.width(elParent.width());
-          
             scope.$digest();
             updateList(rowTpl, scope, true);
           });
@@ -195,7 +193,7 @@ angular.module('gc.fastRepeat', []).directive('fastRepeat', ['$compile', '$parse
           newScope.$$postDigest(function() {
             cb(clone);
           });
-        
+
           newScope.$digest();
 
           return newScope;
@@ -232,7 +230,7 @@ angular.module('gc.fastRepeat', []).directive('fastRepeat', ['$compile', '$parse
               }
             }, 0);
           });
-       
+
           newScope.$digest();
         };
 

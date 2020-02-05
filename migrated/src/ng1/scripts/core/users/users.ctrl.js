@@ -264,12 +264,13 @@
           if (filter.designation) {
             logs.push('designation')
             // result = (filter.designation || '').toLowerCase() === (value.designation || '').toLowerCase();
-              results.push((filter.designation || '').toLowerCase() === (value.designation || '').toLowerCase());
+            // console.log((filter.designation || '').toLowerCase() === (value.designation || '').toLowerCase(), filter.designation, value.designation)
+            results.push((filter.designation || '').toLowerCase() === (value.designation || '').toLowerCase());
           }
 
           // if(filter.isArchived) {
           //   result = result && !value.userEnabled;
-         
+          //   console.log(result && !value.userEnabled);
           // }
 
           if (filter.industry) {
@@ -280,11 +281,11 @@
           }
 
           if (result && results.every(function(el) { return !!el })) {
-            
+            // console.log(results, 'results')
           }
 
           if (value.designation && value.designation.toLowerCase() === 'admin') {
-          
+            // console.log(results, value.designation, logs)
           }
 
 

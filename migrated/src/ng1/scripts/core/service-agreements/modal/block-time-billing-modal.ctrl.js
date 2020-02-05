@@ -141,7 +141,7 @@
               };
 
 
-             
+              // console.log(s, "SERVICE")
               $scope.defaultServices.push(s);
               $scope.defaultServicesForDropdown.push(s);
             }
@@ -515,7 +515,8 @@
         $scope.$watch(function() {
           return $scope.blockTimeContract.services
         }, function(val) {
-         
+          // console.log('collection', val)
+          // console.log($scope.defaultServicesAdditionalForDropDown);
 
 
           for (var i = 0; i < val.length; i++) {
@@ -527,7 +528,7 @@
               // var defaultServ = serv;
               // defaultServ.nameValue = defaultServ.name;
               //
-              
+              // console.log(serv.name, serv.nameValue, 'NEED TO CHANGE')
               // var newServ = $scope.defaultServicesAdditionalForDropDown.find(function(value) {
               //   return value.name === serv.nameValue;
               // });
@@ -541,16 +542,18 @@
                 basedOnDefault: true
               };
 
-             
+              console.log(serv, "SERV")
+
+              // console.log(serv, 'NEWSERV');
 
               (function() {
                 var id = i;
-                
+                // console.log(ns, id, 'SERV')
                 var serv = ns;
 
                 validateNewServiceName(serv.nameValue).then(function (resp) {
                   if (resp) {
-                    
+                    // console.log(ns, "NEW")
                     $scope.blockTimeContract.services.splice(id, 1, ns);
                   }
                 }, function() {
@@ -892,7 +895,7 @@
               $scope.notAddedBlockAdditionalServiceError = false;
               break;
             default:
-             
+              console.log('wrong case of service number')
           }
         };
         function activateNotAddedServiceErrors() {

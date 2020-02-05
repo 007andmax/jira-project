@@ -9,7 +9,7 @@
 
       function sendNewDataToSerever() {
         CompaniesService.saveCompanyPaymentInfo($scope.companyPaymentInfo, function(resp) {
-         
+          //console.log(resp);
         })
       }
 

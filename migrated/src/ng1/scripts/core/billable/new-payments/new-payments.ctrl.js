@@ -126,7 +126,7 @@
               $scope.getPaymentsList($scope.data);
               break;
             // case 'number': TODO: when back will be done
-            
+            //   console.log('number');
             //   $scope.resetAllFiltersForSort();
             //   $scope.sortByItem = $scope.sortByItem !== 'INVOICE_NUMBER_ASC' ? 'INVOICE_NUMBER_ASC' : 'INVOICE_NUMBER_DESC';
             //   $scope.data = $scope.returnData();

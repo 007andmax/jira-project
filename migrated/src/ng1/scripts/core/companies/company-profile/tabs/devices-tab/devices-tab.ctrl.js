@@ -40,7 +40,7 @@
 
         DevicesService.sendDeviceStatusRequest($scope.company.id, $scope.agent.agentId, function(resp){
           if(resp){
-           
+            //console.log(resp);
           }
         });
 
@@ -135,17 +135,17 @@
 
 
         $scope.sendAlert = function () {
-         
+          console.log('sendAlert - ' + $scope.agent.agentId);
           //DevicesService
         };
 
         $scope.specReport = function () {
-           
+          console.log('specReport - ' + $scope.agent.agentId);
           //DevicesService
         };
 
         $scope.transferFile = function () {
-         
+          console.log('transferFile - ' + $scope.agent.agentId);
           //DevicesService
         };
 
@@ -157,12 +157,12 @@
           DevicesService.sendPowerAction($scope.company.id, $scope.agent.agentId, 'shutdown');
         };
 
-        
+        // console.log()
 
         $scope.turnOffDevice = function(action) {
           var method;
 
-         
+          // console.log($scope.agent.agentId)
           $uibModal.open({
             templateUrl: '/ng1/scripts/core/companies/company-profile/tabs/confirmModal.html',
             animation: true,
@@ -286,7 +286,7 @@
         // $scope.$watch('agent.online', function(value) {
         //   if(value === true) {
         //     $scope.agent.timing.online = 0;
-       
+        //     console.log('VALUE', value)
         //     //$scope.agent.timing.uptimeForOrdering = $scope.agent.timing.online;
         //   }
         // });

@@ -1,4 +1,4 @@
-<ul class="users-bg company-devices qt-list fixed-col-2" ng-controller="quicktech.core.companies.bulkOptionCtrl">
+<ul class="users-bg company-devices qt-list" ng-controller="quicktech.core.companies.bulkOptionCtrl">
   <h3>All Devices (<span>{{countForDevicePage(agents)}}</span>)</h3>
   <div class="selected-users-edit" ng-if="bulkOptionMode === 'devices'">
     <p>
@@ -289,7 +289,7 @@
     <div class="devices-detail-block clearfix" ng-show="openDevicesDetails">
       <div class="col-md-4">
         <p class="label-light">OS</p>
-        <p>{{agent.report.system.caption}} {{agent.report.system.release_id}}</p>
+        <p>{{agent.report.system.type}} {{agent.report.system.version}}</p>
       </div>
       <div class="col-md-3">
         <p class="label-light">LAN IP</p>
@@ -306,5 +306,4 @@
       </div>
     </div>
   </li>
-  <div class="no-exist-devices" ng-if="!isAgentsRequestSending && !agents"><p>No devices installed</p></div>
 </ul>

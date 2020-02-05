@@ -14,7 +14,7 @@
             });
           }
           $scope.addAttachmentFiles = function (file) {
-            
+            // console.log(file, 'file to upload')
             $scope.ticketUpdate.attachments.push(file);
             $scope.disabledWhenLoadAttachment = true;
             uploadingAttachmentsCount++;

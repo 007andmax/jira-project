@@ -87,7 +87,7 @@
 
           scope.setCategoryExpanded = function(index, id) {
             if (false) {
-          
+              console.log('here')
               $scope.categoryExpanded[id] = true;
             }
           }

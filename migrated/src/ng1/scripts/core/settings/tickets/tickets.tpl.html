@@ -33,39 +33,6 @@
     </div>
 
 
-    <h3>Quote Settings</h3>
-
-    <div class="template-form-wrapper" ticket-config>
-      <div class="form-row clearfix">
-        <div class="form-group full-width"
-             ng-class="{'has-error': isShowingErrors(invoiceAndTicketForm, 'quoteCount')}">
-
-          <label class="control-label" ng-class="{ 'hide': isShowingErrors(invoiceAndTicketForm, 'quoteCount')}">
-            Starting quote number
-          </label>
-
-          <div ng-messages="invoiceAndTicketForm.quoteCount.$error"
-               ng-class="{ 'hide': !isShowingErrors(invoiceAndTicketForm, 'quoteCount')}">
-            <label class="control-label" ng-message="required" for="">cannot be left empty</label>
-            <label class="control-label" ng-message="maxlength" for="">too large</label>
-            <label class="control-label" ng-message="minlength" for="">too short</label>
-            <label class="control-label" ng-message="pattern" for="">Please enter a valid number starts.</label>
-            <label class="control-label" ng-message="used">
-              Already used. Next free is
-              <span class="free-number-link" ng-click="saveTicketNumber(ticketConfig)">
-                {{ quoteParams.nextValid }}</span>.
-            </label>
-          </div>
-
-          <input class="form-control" tc-number-input type="text" ng-model="quoteParams.count"
-                 name="quoteCount" aria-expanded="true" make-dirty-on-blur ng-pattern="numberPattern"
-                 hard-reset-required="true" ng-minlength="1" ng-maxlength="7" hard-reset-pattern="numberPattern"
-                 execute-when-outfocused="changeQuoteIdData()">
-        </div>
-      </div>
-    </div>
-
-
     <h3>Invoice Settings</h3>
 
     <div class="template-form-wrapper" invoice-config>
@@ -113,8 +80,7 @@
 
             <input class="form-control default-invoice-terms" type="text" ic-terms-input ng-model="invoiceConfig.term"
                    name="invoiceTerms" aria-expanded="true" make-dirty-on-blur ng-pattern="numberPattern"
-                   hard-reset-required="true" ng-minlength="1" ng-maxlength="3" hard-reset-pattern="numberPattern"
-            style="width: 58%;">
+                   hard-reset-required="true" ng-minlength="1" ng-maxlength="3" hard-reset-pattern="numberPattern">
 
             <span class="days">days</span>
           </div>
@@ -162,25 +128,6 @@
             <ul class="dropdown-account-type" uib-dropdown-menu style="width: 100%; z-index: 9999;">
               <li ng-click="setTimePickerValue('TIME_PICKER')">Start-End time picker</li>
               <li ng-click="setTimePickerValue('DURATION_PICKER')">Duration picker</li>
-            </ul>
-            <i class="icn-sm report-caret-icon"></i>
-
-          </div>
-
-          <div class="form-group" uib-dropdown keyboard-nav="true">
-
-            <button class="form-control form-control-number has-dropdown" style="min-width: 74px;" tabindex="21"
-                    uib-dropdown-toggle ng-disabled="$eval(disabled)">
-              <span ng-if="timePickerInterval === 'ONE_MINUTE'">Every 1 min</span>
-              <span ng-if="timePickerInterval === 'FIVE_MINUTES'">Every 5 mins</span>
-              <span ng-if="timePickerInterval === 'TEN_MINUTES'">Every 10 mins</span>
-              <span ng-if="timePickerInterval === 'FIFTEEN_MINUTES'">Every 15 mins</span>
-            </button>
-            <ul class="dropdown-account-type" uib-dropdown-menu style="width: 100%; z-index: 9999;">
-              <li ng-click="setTimePickerInterval('ONE_MINUTE')" ng-if="timePickerModel === 'TIME_PICKER'">Every 1 min</li>
-              <li ng-click="setTimePickerInterval('FIVE_MINUTES')">Every 5 mins</li>
-              <li ng-click="setTimePickerInterval('TEN_MINUTES')">Every 10 mins</li>
-              <li ng-click="setTimePickerInterval('FIFTEEN_MINUTES')">Every 15 mins</li>
             </ul>
             <i class="icn-sm report-caret-icon"></i>
 

@@ -5,10 +5,10 @@
         '$state', 'ProductsService', '$sce', '$timeout', 'quicktech.common.services.UserConfirmationsService',
         'quicktech.common.services.UserNotificationService', 'quicktech.common.services.SharedStateService',
         'quicktech.common.services.TicketsPermissionsService', 'DevicesService',
-        'quicktech.common.services.RemoteAccessService', 'ServicesService', 'quicktech.common.services.ticketMobileSettings', 'TagsService','$filter',
+        'quicktech.common.services.RemoteAccessService', 'ServicesService', 'quicktech.common.services.ticketMobileSettings', 'TagsService',
         function ($scope, TicketsService, $stateParams, UsersService, CompaniesService, Downloader, $rootScope, $state,
                   ProductsService, $sce, $timeout, UserConfirmationsService, UserNotificationService, SharedStateService,
-                  TicketsPermissionsService, DevicesService, RemoteAccessService, ServicesService, ticketMobileSettings, TagsService,$filter) {
+                  TicketsPermissionsService, DevicesService, RemoteAccessService, ServicesService, ticketMobileSettings, TagsService) {
           var rightPanelSharedState = SharedStateService.getSharedState('rightPanel'),
             ticketsSharedState = SharedStateService.getSharedState('ticketsHeader');
           rightPanelSharedState.companyId = '';
@@ -24,9 +24,6 @@
           $scope.selectUpdateSharedUser = {};
           $scope.ticketSharedUsersList = [];
           $scope.disabledWhenLoadAttachment = false;
-          $scope.countShowAssignedUsers = 3;
-         $scope.disabledFutureDatePicker = false;
-         $scope.disabledWhenNoCompleted = false;
           $scope.autocompleteData = ProductsService.getFullListForAutocomplete($scope);
           $scope.tagColors = TagsService.getColors();
           var today = new Date();
@@ -34,46 +31,12 @@
           $scope.hour = today.getHours();
           $scope.minute = Math.floor(today.getMinutes() / 5) * 5;
           $scope.isLoaded = false;
-          $scope.editType = '';
-          $scope.selectedAssignUsers = [];
-          var updateService = false;
-          var updateProduct = false;
-          var claimTicket = false;
-          $scope.$watch(function () {
-            return $scope.ticketDetails.multiAssignedUsers;
-          }, function (val) {
-            if (val && val.length) {
-              $scope.selectedAssignUsers = [];
-              $scope.selectedAssignUsers = val.map((item) => {
-                return { notify: false, user: item }
-              })
-              if (val.length > 0 && $scope.ticketDetails.createdUser) $scope.selectedAssignUsers.push({ notify: false, user: $scope.ticketDetails.createdUser });
-            }
-          });
-          $scope.$watch(function () {
-            return $scope.ticketDetails.assignedUser;
-          }, function (val) {
-            if (val) {
-              let index = $scope.selectedAssignUsers.findIndex((item) => item.user.id === val.id);
-              if (index === -1) {
-                $scope.selectedAssignUsers = [];
-                $scope.selectedAssignUsers.push({ notify: false, user: val });
-                if ($scope.ticketDetails.createdUser) $scope.selectedAssignUsers.push({ notify: false, user: $scope.ticketDetails.createdUser });
-              } else {
-                $scope.selectedAssignUsers = [{ notify: false, user: val }];
-                if ($scope.ticketDetails.createdUser) $scope.selectedAssignUsers.push({ notify: false, user: $scope.ticketDetails.createdUser });
-              }
-
-
-            }
-          });
-         
           $timeout(function() {
             ticketMobileSettings.data = $scope;
           }, 3000);
           $scope.getTicketStatus = function(ticket, arg) {
             var status;
-            if(ticket.status === null && ticket.assignedUserId === null && ticket.multiAssignedUsers !== null && ticket.multiAssignedUsers.length === 0 || ticket.status === null && ticket.assignedUserId === null && ticket.multiAssignedUsers !== null && ticket.multiAssignedUsers.length > 0) {
+            if(ticket.assignedUserId === null) {
               status = 'unassigned';
             } else if(ticket.status === 'COMPLETED') {
               status = 'completed';
@@ -84,321 +47,6 @@
             }
             return status;
           };
-
-          $scope.updateProduct = function (data) {
-            TicketsService.updateExpenseInTicketUpdate(data, function () {
-              updateProduct = false;
-              UserNotificationService.show('The ticket update containing a product has been modified', true);
-
-              $scope.setEditExpenseId();
-              $scope.disabledWhenNoCompleted = (!$scope.checkCompleted()) ? true : false;
-             
-              if (claimTicket)
-              {
-                claimTicket = false;
-                $scope.claimTicket();
-              }
-          });
-          }
-          $scope.updateService = function (data) {
-            TicketsService.updateExpenseInTicketUpdate(data, function () {
-              updateService = false;
-              UserNotificationService.show('The ticket update containing a product has been modified', true);
-
-              $scope.setEditExpenseId();
-              $scope.disabledWhenNoCompleted = (!$scope.checkCompleted()) ? true : false;
-            
-              if (claimTicket)
-              {
-                claimTicket = false;
-                $scope.claimTicket();
-              }
-          });
-          }
-          $scope.moreAssignedUsers = function () {
-$scope.countShowAssignedUsers = $scope.ticketDetails.multiAssignedUsers.length;
-          }
-        /*  $scope.modalEditDate = function (item,editType) {
-            $scope.editType = editType;
-            document.body.querySelector('.modal-ticket-edit-mask').style.display = 'block';
-           
-            if (editType == "datepicker") {
-              document.body.querySelector('.modal-ticket-edit').style.display = 'block';
-            }
-            if (editType == "user-list") {
-              document.body.querySelector('.modal-ticket-edit-user').style.display = 'block';
-            }
-          }*/
-       /*   $scope.closedEditModel = function () {
-            document.body.querySelector('.modal-ticket-edit-mask').style.display = 'none';
-            document.body.querySelector('.modal-ticket-edit').style.display = 'none';
-            document.body.querySelector('.modal-ticket-edit-user').style.display = 'none';
-          }*/
-          $rootScope.$on('onChangeServiceDate', function (evt, val) {
-          
-            if (updateService) return;
-            updateService = true;
-            var service_gl = null;
-            let id = null;
-            $scope.ticketDetails.updates.forEach(function (item) {
-              if (item.type == "SERVICE") {
-            
-                item.services.forEach(function (service_item) {
-                  if (service_item.id == val.id) {
-                    id = item.id;
-                    service_gl = service_item;
-                    service_item.date = val.date;
-                    service_item.date = $filter('date')(val.date, 'd MMM yyyy');
-
-                  }
-                })
-              }
-
-            })
-           
-            if (!service_gl) return;
-            var editVersionedId = service_gl.item.versionedId;
-            var serviceDate = new Date(val.date);
-
-            var data = {
-              ticketUpdateId: id,
-              serviceExpense: {
-                id: service_gl.id,
-                item: { versionedId: { id: editVersionedId.id, version: editVersionedId.version } },
-                description: service_gl.description,
-                quantity: service_gl.quantity,
-                date: new Date(serviceDate.getFullYear(), serviceDate.getMonth(), serviceDate.getDate()),
-                discountAmount: service_gl.discountAmount,
-                discountType: "PERCENT",
-                completed: service_gl.completed,
-                user: (service_gl.user) ? { id: service_gl.user.id } : { id: "" },
-                durationStart: service_gl.durationStart,
-                durationEnd: service_gl.durationEnd
-              }
-            };
-            $scope.updateService(data);
-          });
-          $rootScope.$on('setBlockUpdateAndClosed', function (evt, val) {
-            
-            $scope.disabledFutureDatePicker = val;
-            $scope.$apply();
-
-          });
-          $rootScope.$on('onChangeProductDate', function (evt, val) {
-         
-            if (updateProduct) return;
-            updateProduct = true;
-            var product_gl = null;
-            let id = null;
-            $scope.ticketDetails.updates.forEach(function (item) {
-              if (item.type == "PRODUCT") {
-
-                item.products.forEach(function (product_item) {
-                  if (product_item.id == val.id) {
-                    id = item.id;
-                    product_gl = product_item;
-                   
-                    product_gl.date = $filter('date')(val.date, 'd MMM yyyy');
-                  
-
-                  }
-                })
-              }
-
-            })
-            if (!product_gl) return;
-            var editVersionedId = product_gl.item.versionedId;
-            var productDate = new Date(val.date);
-            //  $scope.disabledSave = true;
-            let data = {
-              ticketUpdateId: id,
-              productExpense: {
-                id: product_gl.id,
-                item: {
-                  sale: product_gl.item.sale,
-                  versionedId: { id: editVersionedId.id, version: editVersionedId.version },
-                  cost: product_gl.item.cost
-                },
-                completed: product_gl.completed,
-                serialNumber: product_gl.serialNumber,
-                quantity: product_gl.quantity,
-                user: (product_gl.user) ? { id: product_gl.user.id } : { id: "" },
-               date:new Date(productDate.getFullYear(), productDate.getMonth(), productDate.getDate()),
-                discountAmount: product_gl.discountAmount,
-                discountType: 'PERCENT'
-              }
-            };
-            $scope.updateProduct(data);
-
-          });
-          $rootScope.$on('onChangeProduct', function (evt, val) {
-           
-            if (updateProduct) return;
-            updateProduct = true;
-         
-            var product_gl = null;
-            let id = null;
-            $scope.ticketDetails.updates.forEach(function (item) {
-              if (item.type == "PRODUCT") {
-
-                item.products.forEach(function (product_item) {
-                  if (product_item.id == val.id) {
-                    id = item.id;
-                    product_gl = product_item;
-                    product_item.user = val.item;
-                  
-
-                  }
-                })
-              }
-
-            })
-
-            var editVersionedId = product_gl.item.versionedId;
-            var productDate = new Date(product_gl.date);
-            //  $scope.disabledSave = true;
-            let data = {
-              ticketUpdateId: id,
-              productExpense: {
-                id: product_gl.id,
-                item: {
-                  sale: product_gl.item.sale,
-                  versionedId: { id: editVersionedId.id, version: editVersionedId.version },
-                  cost: product_gl.item.cost
-                },
-                completed: product_gl.completed,
-                serialNumber: product_gl.serialNumber,
-                quantity: product_gl.quantity,
-                user: (product_gl.user) ? { id: product_gl.user.id } : { id: "" },
-                date:new Date(productDate.getFullYear(), productDate.getMonth(), productDate.getDate()),
-                discountAmount: product_gl.discountAmount,
-                discountType: 'PERCENT'
-              }
-            };
-            $scope.updateProduct(data);
-        });
-          $rootScope.$on('onChangeService', function (evt, val) {
-           
-            if (updateService) return;
-            updateService = true;
-            var service_gl = null;
-            let id = null;
-            $scope.ticketDetails.updates.forEach(function (item) {
-              if (item.type == "SERVICE") {
-            
-                item.services.forEach(function (service_item) {
-                  if (service_item.id == val.id) {
-                    id = item.id;
-                    service_gl = service_item;
-                    service_item.user = val.item;
- 
-
-                  }
-                })
-              }
-
-            })
-          
-            var editVersionedId = service_gl.item.versionedId;
-            var serviceDate = new Date(service_gl.date);
-
-           var data = {
-              ticketUpdateId: id,
-              serviceExpense: {
-                id: service_gl.id,
-                item: { versionedId: { id: editVersionedId.id, version: editVersionedId.version } },
-                description: service_gl.description,
-                quantity: service_gl.quantity,
-                date: new Date(serviceDate.getFullYear(), serviceDate.getMonth(), serviceDate.getDate()),
-                discountAmount: service_gl.discountAmount,
-                discountType: "PERCENT",
-                completed: service_gl.completed,
-                user: (val.item) ? { id: val.item.id } : { id: "" },
-                durationStart: service_gl.durationStart,
-                durationEnd: service_gl.durationEnd
-              }
-            };
-            $scope.updateService(data);
-          });
-          $scope.onCompletedChange = function (item,type,id) {
-        if (!$scope.ticketDetails.status && !$scope.ticketDetails.assignedUser && $scope.ticketDetails.multiAssignedUsers.length === 0) claimTicket = true;
-         if(TicketsPermissionsService.isActionVisible('claim_ticket', $scope.ticketDetails)) claimTicket = true;
-            var id_update = null;
-            $scope.ticketDetails.updates.forEach(function (update) {
-              if (update.type == type && type == "SERVICE") {
-
-                update.services.forEach(function (service_item) {
-                  if (item.completed && service_item.id != item.id && service_item.completed)  claimTicket = false;
-                  
-                  if (service_item.id == item.id) {
-                    id_update = update.id;
-
-                    
-                  }
-                })
-              }
-              if (update.type == type && type == "PRODUCT") {
-
-                update.products.forEach(function (product_item) {
-                  if (item.completed && product_item.id != item.id && product_item.completed)  claimTicket = false;
-                  if (product_item.id == item.id) {
-                    id_update = update.id;
-                   
-                  }
-                })
-              }
-
-            })
-            
-            if (type == "PRODUCT") {
-              var product = item.item;
-              var editVersionedId = product.versionedId;
-              var productDate = new Date(item.date);
-              //  $scope.disabledSave = true;
-              var data = {
-                ticketUpdateId: id_update,
-                productExpense: {
-                  id: item.id,
-                  item: {
-                    sale: product.sale,
-                    versionedId: { id: editVersionedId.id, version: editVersionedId.version },
-                    cost: product.cost
-                  },
-                  completed: item.completed,
-                  serialNumber: item.serialNumber,
-                  quantity: item.quantity,
-                  date:new Date(productDate.getFullYear(), productDate.getMonth(), productDate.getDate()),
-                  user: (item.user) ? { id: item.user.id } : { id: "" },
-                  discountAmount: item.discountAmount,
-                  discountType: 'PERCENT'
-                }
-              };
-              $scope.updateProduct(data);
-            }
-            if (type == 'SERVICE') {
-              var editVersionedId = item.item.versionedId;
-              var serviceDate = new Date(item.date);
-              var data = {
-                ticketUpdateId: id_update,
-                serviceExpense: {
-                  id: item.id,
-                  item: { versionedId: { id: editVersionedId.id, version: editVersionedId.version } },
-                  description: item.description,
-                  quantity: item.quantity,
-                  date: new Date(serviceDate.getFullYear(), serviceDate.getMonth(), serviceDate.getDate()),
-                  discountAmount: item.discountAmount,
-                  discountType: "PERCENT",
-                  completed: item.completed,
-                  user: (item.user) ? { id: item.user.id } : { id: "" },
-                  durationStart: item.durationStart,
-                  durationEnd: item.durationEnd
-
-                }
-              };
-              $scope.updateService(data);
-            }
-
-          }
           $rootScope.toggleUpdateWindow = function(state) {
             $rootScope.isMobileUpdateShown = state;
             $rootScope.isTicketEditOpened = state;
@@ -411,31 +59,11 @@ $scope.countShowAssignedUsers = $scope.ticketDetails.multiAssignedUsers.length;
           $rootScope.closeTicket = function() {
             window.location.href = window.location.href.split('/').slice(0, -1).join('/');
           }
-          $scope.checkCompleted = function () {
-            var check = true;
-            $scope.ticketDetails.updates.forEach(function(item) {
-              if (item.type == "PRODUCT") {
-                item.products.forEach(function (product) {
-                  if (!product.completed) check = false;
-                })
-            
-              }
-              if (item.type =="SERVICE") {
-                item.services.forEach(function (service) {
-                  if (!service.completed) check = false;
-                })
-              }
-         
-
-            });
-            return check;
-          }
           $rootScope.isTicketOpened = true;
           $scope.agents = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id).filter(function(user) {
             return !user.deletedAt;
           });
           $scope.usersToWatch = $scope.agents.slice();
-          
           $scope.editForms = {};
           $scope.setEditForm = function(form, name) {
             $scope.editForms[name] = form;
@@ -458,26 +86,7 @@ $scope.countShowAssignedUsers = $scope.ticketDetails.multiAssignedUsers.length;
           }
           //$scope.ticketDetails = { id: $stateParams.ticketId };
           TicketsService.getOne($scope.ticketDetails, $scope, function (details) {
-          
-            details.updates.forEach(function(item) {
-              if (item.type == "PRODUCT") {
-                item.products.forEach(function (product) {
-                  product.date = $filter('date')(product.date, 'd MMM yyyy');
-                })
-            
-              }
-              if (item.type =="SERVICE") {
-                item.services.forEach(function (service) {
-                  service.date = $filter('date')(service.date, 'd MMM yyyy');
-                })
-              }
-         
-
-            });
             $scope.ticketDetails = details;
-     
-          $scope.disabledWhenNoCompleted = (!$scope.checkCompleted()) ? true : false;
-       
             if (isFromRemote) {
               ServicesService.getAllByCompany($scope, details.company.id, function (resp) {
                 $scope.ticketUpdate.services[0].item = resp.find(function (service) {
@@ -492,17 +101,8 @@ $scope.countShowAssignedUsers = $scope.ticketDetails.multiAssignedUsers.length;
             if (CompaniesService.getOneById($scope.ticketDetails.company.id).isDefault) {
               $rootScope.isRightPanelHidden = true;
             }
-            
             rightPanelSharedState.companyId = $scope.ticketDetails.company.id;
-            if ($scope.ticketDetails.ticketSource == "FROM_RECURRING_TICKET") {
-            //  rightPanelSharedState.companyId = $scope.ticketDetails.company;
-              rightPanelSharedState.createUserId = $scope.ticketDetails.createdUserId;
-            } else  {
-            //  rightPanelSharedState.companyId = $scope.ticketDetails.company.id;
-              rightPanelSharedState.createUserId = $scope.ticketDetails.createdUser.id;
-            }
-           
-       
+            rightPanelSharedState.createUserId = $scope.ticketDetails.createdUser.id;
             $timeout(function () {
               $scope.isLoaded = true;
               UserNotificationService.hide();
@@ -639,13 +239,7 @@ $scope.countShowAssignedUsers = $scope.ticketDetails.multiAssignedUsers.length;
               })
             }
             $scope.currentOpenTab = $scope.currentOpenTab || 'NOTE';
-            if ($scope.ticketDetails.ticketSource == "FROM_RECURRING_TICKET") {
-              $scope.user = UsersService.getOneById($scope.ticketDetails.createdUserId);
-              
-            } else {
-              $scope.user = UsersService.getOneById($scope.ticketDetails.createdUser.id);
-            }
-          
+            $scope.user = UsersService.getOneById($scope.ticketDetails.createdUser.id);
             CompaniesService.getCompanyData($scope, $scope.ticketDetails.company.id, companyDataRequestCallback);
             function companyDataRequestCallback(resp) {
               $scope.company = resp;
@@ -696,22 +290,13 @@ $scope.countShowAssignedUsers = $scope.ticketDetails.multiAssignedUsers.length;
             initUsers();
           });
           function initUsers() {
-         
             $scope.allUsers = UsersService.getAllUsers();
             $scope.allUsers = $scope.allUsers.filter(function(item){
               return (item.accountType === 'TECH' && !item.deletedAt)
             });
             $scope.allUsers.map(function(item) {
-              var index = $scope.usersToWatch.findIndex(function (user) {
-                if (user.id == item.id) return true;
-                return false;
-              })
-              if (index == -1)  {
-                $scope.usersToWatch.push(item);
-              }
-            
+              $scope.usersToWatch.push(item);
             });
-          
           }
           $scope.setTicketUpdate = function (value) {
             $scope.ticketUpdate = value;
@@ -741,24 +326,7 @@ $scope.countShowAssignedUsers = $scope.ticketDetails.multiAssignedUsers.length;
             $scope.$broadcast('toggleTicketsList');
           };
           $scope.claimTicket = function () {
-            var indexUser = $scope.ticketDetails.multiAssignedUsers.findIndex(user => user.id === $scope.currentUser.id);
-            var value = [];
-            $scope.ticketDetails.multiAssignedUsers.forEach(user => {
-              value.push(user.id);
-            })
-           
-            if ($scope.ticketDetails.assignedUser && $scope.ticketDetails.assignedUser.id !==  $scope.currentUser.id && indexUser === -1) {
-              value.push($scope.ticketDetails.assignedUser.id);
-              value.push($scope.currentUser.id);
-            } else if ($scope.ticketDetails.assignedUser && $scope.ticketDetails.assignedUser.id !==  $scope.currentUser.id && indexUser > -1) {
-              value.push($scope.ticketDetails.assignedUser.id);
-            } else if ($scope.ticketDetails.assignedUser && $scope.ticketDetails.assignedUser.id ===  $scope.currentUser.id && indexUser === -1) {
-              value.push($scope.ticketDetails.assignedUser.id);
-            } else if (!$scope.ticketDetails.assignedUser && indexUser === -1) {
-              value.push($scope.currentUser.id);
-            }
-
-            TicketsService.assignTo($scope.ticketDetails.id, value.join(","));
+            TicketsService.assignTo($scope.ticketDetails.id, $scope.currentUser.id);
             $scope.ticketSharedUsersList.push({ user: $scope.currentUser, notify: false });
           };
           $scope.openSetting = function () {
@@ -823,27 +391,8 @@ $scope.countShowAssignedUsers = $scope.ticketDetails.multiAssignedUsers.length;
           $scope.downloadAllAttachments = function () {
             Downloader.downloadTicketAttachments($scope.ticketDetails.id);
           };
-          function downloadURI(uri, name) {
-            var link = document.createElement("a");
-            link.download = name;
-            link.href = uri;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            delete link;
-          }
           $scope.downloadAttachment = function (attachmentId, fileName) {
-          //  window.location.assign('/file/' + attachmentId);
-           // window.open('/file/' + attachmentId, 'Download');  
-            
-         
-          const indexOfDot = fileName && fileName.lastIndexOf('.');
-          const fileFormat = fileName && fileName.substring(indexOfDot);
-          if (fileFormat === '.pdf') {
-            window.open('/file/' + attachmentId, '_blank');
-          } else {
-            Downloader.downloadFile(attachmentId, fileName);
-          }
+            Downloader.downloadFile(attachmentId, fileName)
           };
           $scope.loadMoreUpdates = function () {
             TicketsService.loadRemainingTicketUpdates($scope.ticketDetails, function () {
@@ -856,11 +405,9 @@ $scope.countShowAssignedUsers = $scope.ticketDetails.multiAssignedUsers.length;
             }
           };
           $scope.openedTab = function (tabName) {
-
             if ($scope.currentOpenTab === tabName) {
               return;
             }
-       //     $scope.disabledFutureDatePicker = false;
             var ticketUpdate = $scope.ticketUpdate;
             if (ticketUpdate.note
               || (ticketUpdate.attachments && ticketUpdate.attachments.length)
@@ -919,7 +466,7 @@ $scope.countShowAssignedUsers = $scope.ticketDetails.multiAssignedUsers.length;
               minute: date.getMinutes() <= 9 ? '0'+date.getMinutes() : date.getMinutes(),
               time: date.getHours() >= 12 && date.getHours() <= 24 ? 'PM' : 'AM'
             };
-            return currentTime.hour + ':' + currentTime.minute + '' + currentTime.time
+            return currentTime.hour + ':' + currentTime.minute + ' ' + currentTime.time
           };
           function getHourFormated(date) {
             if (date.getHours() < 10 && date.getHours() >= 1) {
@@ -942,28 +489,7 @@ $scope.countShowAssignedUsers = $scope.ticketDetails.multiAssignedUsers.length;
             $scope.triedToSaveUpdate = value;
           };
           $scope.saveUpdateProduct = function (form, item, callback) {
-            
             if (form.$valid) {
-            
-            /*  let id = null;
-              $scope.ticketDetails.updates.forEach(function (item) {
-                if (item.type == "PRODUCT") {
-  
-                  item.products.forEach(function (product_item) {
-                    if (product_item.id == val.id) {
-                      id = item.id;
-            
-                      
-  
-                    }
-                  })
-                }
-  
-              })*/
-           
-              //  $scope.disabledSave = true;
-            
-                var productDate = new Date(item.date);
               var product = item.item;
               var editVersionedId = product.versionedId;
               $scope.disabledSave = true;
@@ -976,11 +502,9 @@ $scope.countShowAssignedUsers = $scope.ticketDetails.multiAssignedUsers.length;
                     versionedId: { id: editVersionedId.id, version: editVersionedId.version },
                     cost: product.cost
                   },
-                  completed: item.completed,
                   serialNumber: item.serialNumber,
                   quantity: item.quantity,
-                  date:new Date(productDate.getFullYear(), productDate.getMonth(), productDate.getDate()),
-                  user: (item.user) ? { id: item.user.id } : { id: "" },
+                  date: item.date,
                   discountAmount: item.discountAmount,
                   discountType: 'PERCENT'
                 }
@@ -994,7 +518,6 @@ $scope.countShowAssignedUsers = $scope.ticketDetails.multiAssignedUsers.length;
             }
           };
           $scope.saveUpdateService = function (form, item, callback) {
-          
             if (form.$valid) {
               var editVersionedId;
               if (typeof item.item.name === 'object') {
@@ -1010,11 +533,7 @@ $scope.countShowAssignedUsers = $scope.ticketDetails.multiAssignedUsers.length;
                   id: item.id,
                   item: { versionedId: { id: editVersionedId.id, version: editVersionedId.version } },
                   description: item.description,
-                  quantity: item.quantity,
-                  completed: item.completed,
-                  durationStart: $rootScope.saveForStartDate.getTime(),
-                  durationEnd: $rootScope.saveForEndDate.getTime(),
-                  user: (item.user) ? { id: item.user.id } : { id: "" },
+                  quantity: item.quantity / 60,
                   date: new Date(serviceDate.getFullYear(), serviceDate.getMonth(), serviceDate.getDate()),
                   discountAmount: item.discountAmount,
                   discountType: "PERCENT"
@@ -1034,7 +553,7 @@ $scope.countShowAssignedUsers = $scope.ticketDetails.multiAssignedUsers.length;
           $scope.$on('serviceExpenseItem', function (event, data) {
             $scope.showServicesError = false;
           });
-          $scope.saveTicketUpdate = function (form, disableRestoringDefaults, callback, isExpenseEdit, value, close = false) {
+          $scope.saveTicketUpdate = function (form, disableRestoringDefaults, callback, isExpenseEdit, value, close) {
             if (isExpenseEdit) {
               if (isExpenseEdit.note) {
                 var note = isExpenseEdit.note;
@@ -1067,8 +586,6 @@ $scope.countShowAssignedUsers = $scope.ticketDetails.multiAssignedUsers.length;
               if ($scope.ticketUpdate && $scope.ticketUpdate.products && !isEmptyProductValid) {
                 for(var i=0; i<$scope.ticketUpdate.products.length; i++) {
                   $scope.ticketUpdate.products[i].discountType = 'PERCENT';
-                  $scope.ticketUpdate.products[i].completed = true;
-                
                 }
                 ticketUpdateToSend.products = $scope.ticketUpdate.products;
               } else if ($scope.ticketUpdate && $scope.ticketUpdate.services) {
@@ -1085,46 +602,20 @@ $scope.countShowAssignedUsers = $scope.ticketDetails.multiAssignedUsers.length;
                 }
                 for (var i = 0; i < ticketUpdateToSend.services.length; i++) {
                   var date = new Date(ticketUpdateToSend.services[i].date);
-             
-                  var currentDate = new Date();
-                 
+                  var startDate = new Date();
                   var endDate = new Date();
                   if ($rootScope.serviceExpenseDurationPresentation === 'TIME_PICKER' || $rootScope.isMobileUpdateShown) {
-                   
                     $rootScope.saveStartDate = new Date($rootScope.saveStartDate);
                     $rootScope.saveEndDate = new Date($rootScope.saveEndDate);
                     ticketUpdateToSend.services[i].quantity = getQuantity($rootScope.saveStartDate, $rootScope.saveEndDate);
                     ticketUpdateToSend.services[i].durationStart = $rootScope.saveStartDate.getTime();
                     ticketUpdateToSend.services[i].durationEnd = $rootScope.saveEndDate.getTime();
                   }else {
-                   
                     ticketUpdateToSend.services[i].quantity = $scope.ticketUpdate.services[i].quantity;
                     ticketUpdateToSend.services[i].durationStart = $rootScope.saveStartDate.getTime();
                     ticketUpdateToSend.services[i].durationEnd = $rootScope.saveEndDate.getTime() ;
                   }
                   ticketUpdateToSend.services[i].date = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-                  if (!close) {
-                   
-                    if (date.getFullYear() < currentDate.getFullYear() || date.getFullYear() && currentDate.getFullYear() &&  date.getMonth() < currentDate.getMonth() || date.getFullYear() == currentDate.getFullYear() && date.getMonth() == currentDate.getMonth() && date.getDate() <= currentDate.getDate())  {
-                      ticketUpdateToSend.services[i].completed = true;
-                    } else {
-                      ticketUpdateToSend.services[i].completed = false;
-                    }
-                
-                  } else {
-                    if (date.getFullYear() < currentDate.getFullYear() || date.getFullYear() && currentDate.getFullYear() &&  date.getMonth() < currentDate.getMonth() || date.getFullYear() == currentDate.getFullYear() && date.getMonth() == currentDate.getMonth() && date.getDate() <= currentDate.getDate())  {
-                
-                      ticketUpdateToSend.services[i].completed = true;
-                    } else {
-                      $scope.isSavingUpdate = false;
-                  
-                      $scope.disabledFutureDatePicker = true;
-                      $scope.$apply();
-                      return;
-                    // disabled
-                    }
-                  }
-                  
                 }
               } else if ($scope.haveAttachments() || $scope.haveNote()) {
                 ticketUpdateToSend.note = $scope.ticketUpdate.note;
@@ -1133,9 +624,8 @@ $scope.countShowAssignedUsers = $scope.ticketDetails.multiAssignedUsers.length;
                   ticketUpdateToSend.attachments.push({ file: { id: $scope.ticketUpdate.attachments[i].id } })
                 }
               }
-             
-              for (var i = 0, len = $scope.selectedAssignUsers.length; i < len; i++) {
-                var ticketSharedUser = $scope.selectedAssignUsers[i];
+              for (var i = 0, len = $scope.ticketSharedUsersList.length; i < len; i++) {
+                var ticketSharedUser = $scope.ticketSharedUsersList[i];
                 if (!ticketSharedUser.notify) {
                   continue;
                 }
@@ -1145,8 +635,7 @@ $scope.countShowAssignedUsers = $scope.ticketDetails.multiAssignedUsers.length;
               }
               TicketsService.createTicketUpdate(ticketUpdateToSend, close || false, function () {
                 $scope.isSavingUpdate = false;
-                if (callback) callback();
-                $scope.disabledWhenNoCompleted = (!$scope.checkCompleted()) ? true : false;
+                if (callback) callback()
                 if (!disableRestoringDefaults) {
                   switch (ticketUpdateToSend.type) {
                     case 'NOTE':
@@ -1201,7 +690,7 @@ $scope.countShowAssignedUsers = $scope.ticketDetails.multiAssignedUsers.length;
             }
           };
           function getQuantity(start, end) {
-           
+            console.log(start, end);
             start = new Date(start);
             end = new Date(end);
             var startMs = start.getTime();
@@ -1227,8 +716,6 @@ $scope.countShowAssignedUsers = $scope.ticketDetails.multiAssignedUsers.length;
                     product: item
                   }
                 }
-              
-              $scope.$apply();
               } else {
                 $scope.toggleUpdateWindow(false)
               }
@@ -1238,9 +725,6 @@ $scope.countShowAssignedUsers = $scope.ticketDetails.multiAssignedUsers.length;
           };
           // ticket notify
           $scope.$on('userToAssignToTicket', function(evt, val) {
-          
-            if (val.type) return;
-          
             var data = val.data;
             var id = data.id;
             var index = $scope.ticketSharedUsersList.findIndex(function(el) {
@@ -1263,49 +747,21 @@ $scope.countShowAssignedUsers = $scope.ticketDetails.multiAssignedUsers.length;
               return typeof el.user === 'object';
             });
           }, true);
-         /* let  ticketSharedUsersListLengthWatch = $scope.$watch('ticketSharedUsersList.length', function(val) {
+          let  ticketSharedUsersListLengthWatch = $scope.$watch('ticketSharedUsersList.length', function(val) {
             if (val > 8) {
               $scope.ticketSharedUsersList = $scope.ticketSharedUsersList.slice(0, 8);
             }
             $rootScope.ticketSharedList = $scope.ticketSharedUsersList.slice();
-          })*/
+          })
           // ticket notify end
           // Attachments
           $scope.filterByType = function(arr, type) {
-           if (!arr) return [];
-         
             return arr.filter(function(el) {
               if (type === 'TECH') {
-                if ($scope.ticketDetails.assignedUser){
-                  return ((el.user.accountType === type && $scope.ticketDetails.assignedUser.id == el.user.id)
-                  || el.user.accountType === type);
-                } else if ($scope.ticketDetails.multiAssignedUsers.length > 0) {
-                  var index = $scope.ticketDetails.multiAssignedUsers.findIndex(user => user.id == el.user.id);
-                  return ((el.user.accountType === type && index > -1)
-                  || el.user.accountType === type);
-                } else {
-                  return (el.user.accountType === type)
-                }
-              
+                return ((el.user.accountType === type && $scope.ticketDetails.assignedUser.id == el.user.id)
+                  || el.user.accountType === type && el.show === true);
               } else {
                 return el.user.accountType === type;
-              }
-            })
-          };
-          $scope.filterUsersByType = function(arr, type) {
-            return arr.filter(function(el) {
-              if (type === 'TECH') {
-                if ($scope.ticketDetails.assignedUser){
-                  return (el.user.accountType === type && $scope.ticketDetails.assignedUser.id == el.user.id);
-                } else if ($scope.ticketDetails.multiAssignedUsers.length > 0) {
-                  var index = $scope.ticketDetails.multiAssignedUsers.findIndex(user => user.id == el.user.id);
-                  return (el.user.accountType === type && index > -1);
-                } else {
-                  return false;
-                }
-              
-              } else {
-                return false;
               }
             })
           };
@@ -1382,18 +838,6 @@ $scope.countShowAssignedUsers = $scope.ticketDetails.multiAssignedUsers.length;
               width: progress + '%'
             };
           };
-          $scope.selectAssignUsers = function (user) {
-             
-            if (user.user.accountType === "CLIENT" && user.user.subscription.ticket === false && !user.notify) {
-              var confirmMesage = 'Selected user does not have ticket update subscription. Do you still want to notify him?',
-                confirmButton = 'Yes';
-              UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
-                user.notify = !user.notify;
-              });
-            } else {
-              user.notify = !user.notify;
-            }
-          }
           $scope.removeAttachment = function (index, isErrorFile) {
             if (isErrorFile) {
               $scope.fileInfo.quantityErrorFiles--;
@@ -1440,14 +884,6 @@ $scope.countShowAssignedUsers = $scope.ticketDetails.multiAssignedUsers.length;
             }
             var processedShares = [];
             $scope.ticketSharedUsersList = getDefaultSharedList();
-           
-           // $scope.selectedAssignUsers = $scope.filterUsersByType($scope.ticketSharedUsersList, 'TECH');
-         /*  $scope.selectedAssignUsers = ($scope.ticketDetails.assignedUser) ? [{notify: false, user:$scope.ticketDetails.assignedUser}] : $scope.ticketDetails.multiAssignedUsers.map((item) => {
-             return {notify: false, user:item}
-           });
-
-          if ($scope.ticketDetails.createdUser)  $scope.selectedAssignUsers.push({notify: false, user: $scope.ticketDetails.createdUser });*/
-            
             for (var i = 0; i < shares.length; i++) {
               var share = shares[i],
                 sharedUser = share.user,
@@ -1460,8 +896,7 @@ $scope.countShowAssignedUsers = $scope.ticketDetails.multiAssignedUsers.length;
               if (
                 processedShares.indexOf(sharedUser.id) > -1 ||
                 sharedUser.id === $scope.ticketDetails.createdUser.id ||
-                $scope.ticketDetails.assignedUser && sharedUser.id === $scope.ticketDetails.assignedUser.id ||
-                $scope.ticketDetails.multiAssignedUsers.length > 0 && $scope.ticketDetails.multiAssignedUsers.findIndex(user_s => user_s.id === sharedUser.id) > -1
+                sharedUser.id === $scope.ticketDetails.assignedUser.id
               ) {
                 continue;
               }
@@ -1472,7 +907,6 @@ $scope.countShowAssignedUsers = $scope.ticketDetails.multiAssignedUsers.length;
                 avatarUrl: $scope.getUserAvatarUrl($scope.getUserById(share.user.id))
               })
             }
-            $scope.$apply();
           }, true);
           $scope.filterCurrentUser = function (item) {
             if (!item.user) {
@@ -1652,26 +1086,21 @@ $scope.countShowAssignedUsers = $scope.ticketDetails.multiAssignedUsers.length;
             var result = [];
             // add reporter user
             if ($scope.user) {
-            
               addUserToResult($scope.user);
             }
-            // add assigned user
+            // ad assigned user
             if ($scope.assignedUser) {
-             
               addUserToResult($scope.assignedUser);
             }
             // add ticket managers
             var usersFromTicketCompany = UsersService.getAllByCompanyId($scope.ticketDetails.company.id);
-            
             for (var i = 0; i < usersFromTicketCompany.length; i++) {
               var user = usersFromTicketCompany[i];
-              if (!user.deletedAt) {
+              if (!user.deletedAt && user.subscription && user.subscription.ticketManager) {
                 addUserToResult(user);
               }
             }
-           
             $scope.allUsers.map(function(item) {
-            
               if (!user.deletedAt) {
                 addUserToResult(item, 'addUserFromAll');
               }

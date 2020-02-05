@@ -97,7 +97,6 @@
         RealTimeService.subscribe('/receivableInvoice', scope, function (newChange) {
 
           if (newChange.action == 'INVOICE_SAVED') {
-           
             $rootScope.$emit('receivableInvoice', newChange);
 
             var invoice = Utils.findById(data.list, newChange.data.id);
@@ -106,6 +105,7 @@
               // Utils.customizeObj(newChange.data, invoice);
             } else {
               // data.list.push(newChange.data);
+
               if (data.companies[newChange.data.company.id]) {
                 // data.companies[newChange.data.company.id].push(newChange.data);
               } else {
@@ -133,9 +133,7 @@
             }
 
           } else if (newChange.action === 'PAYMENT_RECEIVED') {
-         
             $rootScope.$emit('receivableInvoicePayment', newChange);
-          
 
 
           } else if (newChange.action === 'INVOICE_ROLLBACK') {
@@ -144,10 +142,12 @@
             Utils.customizeObj(newChange.data, invoice);
             invoice.status = newChange.data.status;
           }
+
           if (callback) {
             callback(data);
           }
         });
+
       }, function (err) {
         if (callback) {
           callback(err.code, err.message);

@@ -21,7 +21,7 @@
         $scope.strEnd = strEnd;
         $scope.method = function() {
           DevicesService.sendPowerAction(companyId, devices, action);
-         
+          // console.log(companyId, devices, action);
           $scope.closeWindow()
         }
       }]);

@@ -186,7 +186,8 @@
 
         isScrollableH = percentInViewH > 1;
 
-         if (!(isScrollableH || isScrollableV)) {
+        //console.log(paneWidth, paneHeight, contentWidth, contentHeight, percentInViewH, percentInViewV, isScrollableH, isScrollableV);
+        if (!(isScrollableH || isScrollableV)) {
           elem.removeClass('jspScrollable');
           pane.css({
             top: 0,

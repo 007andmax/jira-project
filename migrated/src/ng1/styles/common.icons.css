@@ -1840,24 +1840,3 @@ a:hover > .icon-tab-company-info, a:active > .icon-tab-company-info, li.active >
   background: url('../images/new-icons/rollback-new.png');
   background-size: cover;
 }
-
-.new-calendar-icn {
-  background: url("../images/new-icons/assign-date.png");
-  width: 24px;
-  height: 24px;
-  display: block;
-}
-
-.assign-icn {
-  background: url("../images/new-icons/assign-user.png");
-  width: 24px;
-  height: 24px;
-  display: block;
-}
-
-.more-vertical-icn {
-  background: url("../images/new-icons/more-vertical.png");
-  width: 8px;
-  height: 16px;
-  display: block;
-}

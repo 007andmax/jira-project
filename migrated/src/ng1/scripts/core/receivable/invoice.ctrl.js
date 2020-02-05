@@ -7,32 +7,9 @@
       function ($scope, ReceivableService, $rootScope, CompaniesService, UserConfirmationsService, UserNotificationService) {
         var disableInvoiceButtons = false;
         var t0 = performance.now();
-       
-
         $scope.company = CompaniesService.getOneById($scope.invoice.company.id);
         $scope.invoice.companyName = CompaniesService.getOneById($scope.invoice.company.id).name;
- 
-        $rootScope.$on('receivableInvoice', function(event, newInvoice){
-        /*  if (newInvoice.action === 'INVOICE_DELETED') {
-            $scope.invocesList = $scope.invocesList.filter((item) => item.id !==  newInvoice.data.id );
-          } else if(newInvoice.action === 'PAYMENT_CREATED') {
-            const index = $scope.invocesList.findIndex((item) => item.number === newInvoice.data.partialPaidInvoice);
-            $scope.invocesList[index].paidSum += newInvoice.data.partialPaidAmount;
-          } else {
-            const index = $scope.invocesList.findIndex((item) => item.id === newInvoice.data.id);
-            $scope.invocesList[index] = newInvoice.data;
-          }
-        */
-         
-          if (newInvoice.action === 'INVOICE_DELETED') {
-            if ($scope.invoice.id === newInvoice.data.id)
-            {
- 
-            }
-          } 
-         
-          $scope.$apply();
-        });
+
         if ($scope.invoice.dueDate <= Date.now()) {
           $scope.$emit('indicatorInvoice');
           $scope.dueDate = {

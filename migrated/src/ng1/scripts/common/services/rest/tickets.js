@@ -3,12 +3,11 @@
 (function (window, $, undefined) {
   var numberPrefix = 'Tkt# ';
   var services = angular.module('main.services');
-  services.factory('TicketsService', ['$http', '$rootScope', 'RealTimeService', 'Utils', 'quicktech.common.services.SharedStateService', '$timeout','$filter',
-    function ($http, $rootScope, RealTimeService, Utils, SharedStateService, $timeout,$filter) {
+  services.factory('TicketsService', ['$http', '$rootScope', 'RealTimeService', 'Utils', 'quicktech.common.services.SharedStateService', '$timeout',
+    function ($http, $rootScope, RealTimeService, Utils, SharedStateService, $timeout) {
       var scope = $rootScope.$new();
       var ticketChangedActions = ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH', 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_SHARE', 'MARKED_AS_SPAM', 'EDITED_TICKET'];
       var queries, loadingInProcess, lastListType, queriesForCompanyProfilePage;
-      var MY_TICKETS = false;
       var operators = {
         NULL: function (value) {
           return value === null || value === undefined;
@@ -74,39 +73,16 @@
       });
       var ticketsSharedState = SharedStateService.getSharedState('ticketsHeader');
       function getQueries(currentUserId) {
-   
         return {
           ALL: { excludeTrashSpam: true },
           UNASSIGNED: {
             excludeTrashSpam: true,
-            groupFieldFilters: [
-              {
-                "fieldFilterDtos": [
-                  {
-                    "path":"status",
-                    "operator":"NULL"
-                  }
-                ]
-              },
-              {
-                "fieldFilterDtos": [
-                  {
-                    "path": "reportedAsSpamAt",
-                    "operator": "NULL"
-                  },
-                  {
-                    "path": "markedAsSpamAt",
-                    "operator": "NULL"
-                  },
-                  {
-                    "path": "trash",
-                    "operator": "EQ",
-                    "values": [false]
-                  }
-                ],
-                "predicateRule":"OR"
-              }
-            ]
+            groupFieldFilters: [{
+              fieldFilterDtos: [{
+                path: 'assignedUser',
+                operator: 'NULL'
+              }]
+            }]
           },
           USER: {
             "excludeTrashSpam": true,
@@ -125,13 +101,6 @@
                     "path": "assignedUser.id",
                     "operator": "NULL",
                     "values": []
-                  },
-                  {  
-                    "path":"multiAssignedUsers.id",
-                    "operator":"IN",
-                    "values":[  
-                      currentUserId
-                    ]
                   }
                 ]
               },
@@ -272,12 +241,8 @@
         };
       }
       function fetchTickets(listType, userId, companyId, callback) {
-
-       
         var query = queries[listType.toUpperCase()]
-        
-       
-        MY_TICKETS = false;
+        // console.log(ticketsSharedState.filter, 'FILTER')
         if(ticketsSharedState.filter.companyId || ticketsSharedState.filter.clientUserId || ticketsSharedState.filter.techUserId || (ticketsSharedState.filter.tags && ticketsSharedState.filter.tags.length)) {
           var groupedQuery = {
             excludeTrashSpam: true,
@@ -304,7 +269,6 @@
             //   ]
             // })
           }
-        
           if (ticketsSharedState.filter.tags && ticketsSharedState.filter.tags.length > 0) {
             var tagsQuery = {
               "path": "tags.id",
@@ -319,11 +283,9 @@
               operator: 'EQ',
               values: [ticketsSharedState.filter.clientUserId]
             };
-           
             groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(userIdQuery);
           }
           if(ticketsSharedState.filter.techUserId) {
-          
             var techUserIdQuery = {
               path: 'assignedUser.id',
               operator: 'EQ',
@@ -338,16 +300,9 @@
           storage.lastParams = angular.copy(groupedQuery);
           getCompanyTicketCount(storage.lastParams);
         } else {
-          MY_TICKETS  = true;
-          
           storage.lastParams = angular.copy(query);
         }
         storage.tickets = [];
-        if (MY_TICKETS && listType === 'USER')  {
-          storage.lastParams.groupFieldFilters = [];
-          loadMore(listType, callback);
-          return;
-        }
         if (userId) {
           storage.lastParams.groupFieldFilters = storage.lastParams.groupFieldFilters || [];
           storage.lastParams.groupFieldFilters.push({
@@ -368,7 +323,6 @@
             }]
           });
         }
-     
         loadMore(listType, callback);
       }
       function loadMore(listType, callback) {
@@ -379,11 +333,7 @@
         if (storage.lastParams) {
           storage.lastParams.offset = storage.tickets.length;
         }
-       
         // storage.lastParams.offset = 14;
-       
-       if (listType === 'USER') storage.lastParams.myTicketsPage = true;
-       
         loadingInProcess = true;
         $http.post('/v2/tickets/getTickets', storage.lastParams, { params: { listType: listType } }).then(function (resp) {
           if (resp && resp.config.params.listType === lastListType) {
@@ -421,7 +371,7 @@
         var filter = url.slice(-1)[0].toUpperCase();
         var filters = storage.lastParams.groupFieldFilters && storage.lastParams.groupFieldFilters[0].fieldFilterDtos;
         var userId, companyId, techId;
-       
+        // console.log(storage.lastParams.groupFieldFilters[0].fieldFilterDtos, "PARAMS", filter);
         if (filters && Array.isArray(filters)) {
           companyId = filters.find(function(el) {
             return el.path === 'companyId';
@@ -481,31 +431,12 @@
         });
         RealTimeService.subscribe('/ticketUpdates/' + ticket.id, targetScope, function (newChange) {
           if (newChange.action == 'UPDATE_SAVED' || newChange.action == 'UPDATE_CREATED') {
-           
+            // console.log(newChange, 'NEWWWWCHANGeEE')
             var update = Utils.findById(ticket.updates, newChange.data.id),
               attachments = newChange.data.attachments;
             if (update) {
-            
-                  newChange.data.products.forEach(function (product) {
-                    product.date = $filter('date')(product.date, 'd MMM yyyy');
-                  })
-              
-              
-                  newChange.data.services.forEach(function (service) {
-                    service.date = $filter('date')(service.date, 'd MMM yyyy');
-                  })
-                
-          
               Utils.customizeObj(newChange.data, update);
             } else {
-              newChange.data.products.forEach(function (product) {
-                product.date = $filter('date')(product.date, 'd MMM yyyy');
-              })
-          
-          
-              newChange.data.services.forEach(function (service) {
-                service.date = $filter('date')(service.date, 'd MMM yyyy');
-              })
               update = Utils.customizeObj(newChange.data);
               ticket.updates.unshift(update);
             }
@@ -569,16 +500,9 @@
         });
       }
       function getAllCounts(callback) {
-       
         allCountsCallback = callback;
         if (queries) {
-          var queries_start = JSON.parse(JSON.stringify(queries));
-          queries_start.USER = {"excludeTrashSpam": true,
-          "groupFieldFilters": [],
-          "offset": 0,
-          "myTicketsPage": true};
-         
-          $http.post('/v2/tickets/counts', queries_start).then(function (resp) {
+          $http.post('/v2/tickets/counts', queries).then(function (resp) {
             storage.ticketsQuantityMap = resp.data;
             if (callback) {
               callback(storage.ticketsQuantityMap);
@@ -753,7 +677,7 @@
         });
       }
       function createTicketUpdate(ticketUpdate, close, callback, type) {
-       
+        console.log(ticketUpdate, 'ticketUpdate');
         if (!ticketUpdate) {
           throw 'ticketUpdate is required arguments!';
         }
@@ -853,9 +777,9 @@
         var ticketIndex = Utils.indexOfId(storage.tickets, newChange.data.id),
           ticketById = storage.tickets[ticketIndex];
         if (newChange.action === 'CREATED_TICKET') {
-         
+          // console.log(storage, "CREATED")
           // storage.ticketsQuantityMap.ALL = 1000000000;
-        
+          // console.log(storage.ticketsQuantityMap, globalSearch, "TICKETS")
           if (isTicketMatchesFilters(newChange.data, storage.lastParams)) {
             if (ticketById) {
               Utils.customizeObj(newChange.data, ticketById);
@@ -868,16 +792,7 @@
           }
           storage.ticketsQuantityCallback && storage.ticketsQuantityCallback(storage.ticketsQuantity);
         } else if (ticketChangedActions.indexOf(newChange.action) > -1) {
-         
           var isUpdate = newChange.action === 'EDITED_TICKET';
-          /*newChange.data.products.forEach(function (product) {
-            product.date = $filter('date')(product.date, 'd MMM yyyy');
-          })
-      
-      
-          newChange.data.services.forEach(function (service) {
-            service.date = $filter('date')(service.date, 'd MMM yyyy');
-          })*/
           var global = globalSearch.count;
           if (storage.openedTicket && newChange.data.id === storage.openedTicket.id) {
             Utils.customizeObj(newChange.data, storage.openedTicket);
@@ -1130,14 +1045,6 @@
         var future = $http.put('/v2/tickets/ticketUpdate/updateExpense', expense);
         Utils.handleCallback(future, callback);
       }
-      function updateAssignUsersTicket(users,ticket_id, callback) {
-        var ids = users.map(function (user) {
-          return user.id;
-        });
-       var value = ids.join(',');
-        var future = $http.put('/v2/tickets/' + ticket_id + '/assign', {value:value});
-        Utils.handleCallback(future, callback);
-      }
       function getCurrentlyWorkingWith(targetScope, callback) {
         if (!targetScope || !targetScope.$id) {
           throw 'First argument must be Angularjs scope!';
@@ -1181,7 +1088,6 @@
         loadRemainingTicketUpdates: loadRemainingTicketUpdates,
         markUpdateAsRead: markUpdateAsRead,
         updateExpenseInTicketUpdate: updateExpenseInTicketUpdate,
-        updateAssignUsersTicket: updateAssignUsersTicket,
         changeLinkedAgent: changeLinkedAgent,
         save: saveEditedTicket,
         updateDiscount: updateDiscount,

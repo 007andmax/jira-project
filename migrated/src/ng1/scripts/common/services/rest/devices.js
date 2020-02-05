@@ -14,7 +14,6 @@
         callbacksForRemoteInstall = {},
         callbacksForRemoteUninstall = {},
         callbackForRemoteConnection = {};
-        $rootScope.onInitDevciesCompleted = false;
 
       var initListeners = [],
         initialized = false;
@@ -125,16 +124,15 @@
         },
 
       }
-      
+
       Utils.customizeObj(storage);
 
       CompaniesService._addInitListener(init);
 
       function init() {
-       
         $http.get("/devices?companyId=" + CompaniesService.getCurrentCompany().id).then(function (resp) {
           var devices = storage.devices;
-          $rootScope.onInitDevciesCompleted = true;
+
           var listOfCompaniesWithAgents = {};
           Object.keys(resp.data).forEach(function(key,index) {
             if(resp.data[key] !== null) {
@@ -144,10 +142,10 @@
 
           Utils.customizeObj(listOfCompaniesWithAgents, devices);
           calculateDevicesCountersAndCallCallbacks();
-        
-          $rootScope.$broadcast('onDevicesComplated', true);
+
           RealTimeService.subscribe('/device', serviceScope, function (newChange) {
-           
+            // console.log(newChange, '****s*********************************8')
+            // console.log(newChange, '/device change')
             if (false && newChange.action === 'REMOTE_INSTALL_INFO') {
 
               var device = Utils.findById(scannedDevices[companyId], newChange.data.netScanId);
@@ -200,10 +198,10 @@
               }
 
               if (!deviceFound) {
-               
+                // console.log('request i did')
                 getUpdatedDevices();
                 // var username = newChange.data.username;
-               
+                // console.log(newChange, 'DEVICE INSTALLED')
                 // // var parsedData = JSON.parse(newChange.data.value);
                 // // parsedData.device.userName = newChange.data.userName;
                 // if (!devices[newChange.data.clientCompanyId]) {
@@ -230,7 +228,7 @@
               }
               calculateDevicesCountersAndCallCallbacks();
             } else if (newChange.action === 'DEVICE_INSTALLED') {
-             
+              // console.log(newChange, 'DEVICE INSTALLED')
               var parsedData = JSON.parse(newChange.data.value);
               parsedData.device.userName = newChange.data.userName;
               if (!devices[newChange.data.clientCompanyId]) {
@@ -261,13 +259,13 @@
                 if (device) {
                   device = _getNetScanByDeviceId(scannedDevices[newChange.data.companyId], device.id);
                   if (device && newChange.data.testResult.toUpperCase() === 'FAIL') {
-                   
+                    // console.log('Im here causing error(Test Credentials)', newChange)
                     $rootScope.$broadcast('masterAgentWrongCredentials-' + device.deviceId);
                   }
                 }
               }
             } else if(newChange.action === 'AGENT_ACTIVITY_STATUS') {
-             
+              //console.log(newChange);
               var companyId = getCompanyIdByAgentId(newChange.data.agentId);
               if(newChange.data && newChange.data.statuses && newChange.data.statuses.hasOwnProperty('Idle') ) {
                 if(companyId) {
@@ -285,7 +283,7 @@
                 }
 
               } else if (newChange.data && newChange.data.statuses && newChange.data.statuses.hasOwnProperty('NoRestart') && newChange.data.statuses.hasOwnProperty('Online')) {
-                
+                //console.log(newChange);
                 for (var i=0; i< devices[companyId].length; i++) {
                   if(companyId) {
                     if (devices[companyId][i].agentId === newChange.data.agentId) {
@@ -468,7 +466,7 @@
 
         $http.post('/devices/updateMasterAgent', request)
           .then(function(resp) {
-           
+            console.log('server resp', resp)
           })
       }
 
@@ -816,14 +814,16 @@
                 }
               }
 
-            
+              // console.log(console.log(newChange, '_____________________'))
+
+              // console.log(console.log(newChange, '_____________________'))
 
               if (device) {
-                
+                // console.log(newChange, 'NEwCHANGE ACTION')
                 var statusName = newChange.data.status;
                 var status = installationStatuses[statusName];
 
-               
+                // console.log(statusName, newChange.data.status, 'I FOUDD DEVICE')
 
                 if (statusName === 'MANAGED') {
                   Utils.defineReadOnlyProperty(device, "agentStatus", 'managed')
@@ -1112,11 +1112,9 @@
       }
 
       function getAgentsAndReportsDataByCompanyId(scope, companyId, callback) {
-       
         var checking = 0;
         $rootScope.isAgentsRequestSending = true;
         var extendedRespInterval = setInterval(function(){
-           
           if(storage.devices[companyId] && storage.devices[companyId].length) {
             $http.get('/devices/extended?companyId='+ companyId).then(function (resp) {
               $rootScope.isAgentsRequestSending = false;
@@ -1148,20 +1146,17 @@
               }
               getAgentsByCompany(scope, companyId, callback);
             });
-          } else {
-          
-            $rootScope.isAgentsRequestSending = false;
           }
           checking++;
           if(checking > 4) {
-          
+            console.log('SMTH wrong. No company in device for a long time');
             clearInterval(extendedRespInterval);
           }
           if(storage.devices[companyId]) {
-          
+            console.log('Success devices extended resp!');
             clearInterval(extendedRespInterval);
           }
-         
+          // console.log('extended devices resp trying, ', checking)
         }, 1000)
 
 
@@ -1254,7 +1249,7 @@
             }
 
             if (callback) {
-              
+              // console.log('devices credentials has been updated', credentials, newChange.action)
               callback(credentials);
             }
           });
@@ -1310,8 +1305,7 @@
         sendDeviceStatusRequest: sendDeviceStatusRequest,
         getDevicesCredentials: getDevicesCredentials,
         markDeviceAsMaster: markDeviceAsMaster,
-        getUpdatedDevices: getUpdatedDevices,
-      
+        getUpdatedDevices: getUpdatedDevices
       }
     }
   ]);

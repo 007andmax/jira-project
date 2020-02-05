@@ -3,9 +3,6 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { environment } from "../../../environments/environment";
 import { HttpClient } from "@angular/common/http";
 
-/**
- * Password manager service
- */
 @Injectable({
   providedIn: 'root'
 })
@@ -23,143 +20,64 @@ export class PasswordManagerService {
   public closeFilter: EventEmitter<any> = new EventEmitter();
   public mobileCategory: EventEmitter<any> = new EventEmitter();
   public newRecordsisAdd: EventEmitter<any> = new EventEmitter();
-  public onSort: EventEmitter<any> = new EventEmitter();
-  public onChangeRealTime: EventEmitter<any> = new EventEmitter();
-  password:string = null;
-  /**
-   * Password manager service constructor
-   * @param {HttpClient} http Service to work with request
-   */
-  public constructor(
+
+  constructor(
     private http: HttpClient
   ) { }
-public getPassword () {
-  return this.password;
-}
-  public setPassword (password) {
-    this.password = password;
-  }
-  public handleRealTimeChanges(data) {
-    this.onChangeRealTime.emit(data)
-  }
 
-  public getOnSort() {
-    return this.onSort;
-  }
-
-  public onInitSort(sort) {
-    this.onSort.emit(sort)
-  }
-
-  /**
-   * Set selected device or user
-   * @param item - item to set
-   */
-  public setSelectedDeviceOrUser(item) {
+  setSelectedDeviceOrUser(item) {
     this.selectedDeviceOrUser.emit(item)
   }
 
-  /**
-   * Set selected category
-   * @param item - item to set
-   */
-  public setSelectedCategory(item) {
+  setSelectedCategory(item) {
     this.getSelectedCategory(item)
   }
 
-  /**
-   * Get selected category
-   * @param item
-   */
-  public getSelectedCategory(item) {
+  getSelectedCategory(item) {
     this.emitSelectedCategory.emit(item)
   }
 
-  /**
-   * Set date
-   * @param item - date data
-   */
-  public setDate(item) {
+  setDate(item) {
     this.selectedDate.emit(item)
   }
 
-  public onAddRecord(item?) {
-    this.showAddForm.emit(item);
-  }
-
-  public onEditRecord(item?) {
-    this.showAddForm.emit(item);
-  }
-
-  /**
-   * Add new record
-   * @param item - record data
-   */
-
-  public addRecord(item?) {
-   
+  addRecord(item?) {
+    console.log('1231235');
     this.showAddForm.emit(item);
     this.newRecordsisAdd.emit();
   }
 
-  /**
-   * Delete record
-   * @param recordId - id of record
-   */
-  public deleteRecord(recordId) {
+  deleteRecord(recordId) {
     this.deleteItem.emit(recordId);
     this.hideAddForm.emit();
   }
 
-  /**
-   * Delete record from edit form
-   * @param recordId - id of record
-   */
-  public deleteRecordFromEditForm(recordId) {
+  deleteRecordFromEditForm(recordId) {
     this.deleteItemEditForm.emit(recordId);
-  //  this.hideAddForm.emit();
+    this.hideAddForm.emit();
   }
 
-  /**
-   * Save record
-   * @param recordInfo - record data
-   */
-  public saveRecord(recordInfo) {
+  saveRecord(recordInfo) {
     const date = recordInfo.expiredDate;
-    return this.http.post(this.apiUrl + 'passwordRecords', this.getData(recordInfo,false));
+    return this.http.post(this.apiUrl + 'passwordRecords', this.getData(recordInfo));
   }
 
-  /**
-   * Edit record
-   * @param recordId - id of record
-   * @param recordInfo - record data
-   */
-  public editRecord(recordInfo, recordId) {
+  editRecord(recordInfo, recordId) {
     const date = recordInfo.expiredDate;
-    return this.http.put(this.apiUrl + 'passwordRecords', Object.assign({ id: recordId }, this.getData(recordInfo,true)));
+    return this.http.put(this.apiUrl + 'passwordRecords', Object.assign({id:recordId},this.getData(recordInfo)));
   }
 
-  /**
-   * Format day and mouth
-   * @param item - date data
-   */
-  public formatDayAndMonth(item) {
+  formatDayAndMonth(item) {
     return item < 10 ? `0${item}` : item;
   }
 
-  /**
-   * Get formated date
-   * @param date - date data
-   */
   public getFormatedDate(date) {
     return date && `${date.year}/${this.formatDayAndMonth(date.month)}/${this.formatDayAndMonth(date.day)}`;
   }
 
-  /**
-   * Get data info
-   * @param recordInfo - record information
-   */
-  public getData(recordInfo,edit) {
+  public getData(recordInfo) {
+    console.log(recordInfo.type.UPPERCASE, 'recordInfo.type.title');
+
     if (recordInfo.type.UPPERCASE === 'OFFICE_365_ACCOUNT') {
       return ({
         companyId: recordInfo.client && recordInfo.client.id,
@@ -168,7 +86,7 @@ public getPassword () {
         key: recordInfo.key,
         links: recordInfo.userOrDevice,
         note: recordInfo.note,
-        password: (edit && recordInfo.password === this.password) ? null : recordInfo.password,
+        password: recordInfo.password,
         template: recordInfo.type.UPPERCASE,
         url: recordInfo.url,
         username: recordInfo.userName
@@ -178,7 +96,7 @@ public getPassword () {
         companyId: recordInfo.client && recordInfo.client.id,
         description: recordInfo.description,
         expiredDate: this.getFormatedDate(recordInfo.expiryDate),
-        password: (edit && recordInfo.password === this.password) ? null : recordInfo.password,
+        password: recordInfo.password,
         links: recordInfo.userOrDevice,
         url: recordInfo.url,
         template: recordInfo.type.UPPERCASE,
@@ -191,7 +109,7 @@ public getPassword () {
         companyId: recordInfo.client && recordInfo.client.id,
         description: recordInfo.description,
         expiredDate: this.getFormatedDate(recordInfo.expiryDate),
-        password: (edit && recordInfo.password === this.password) ? null : recordInfo.password,
+        password: recordInfo.password,
         links: recordInfo.userOrDevice,
         template: recordInfo.type.UPPERCASE,
         username: recordInfo.userName,
@@ -202,7 +120,7 @@ public getPassword () {
         companyId: recordInfo.client && recordInfo.client.id,
         description: recordInfo.description,
         expiredDate: this.getFormatedDate(recordInfo.expiryDate),
-        password: (edit && recordInfo.password === this.password) ? null : recordInfo.password,
+        password: recordInfo.password,
         template: recordInfo.type.UPPERCASE,
         username: recordInfo.userName,
         note: recordInfo.note,
@@ -213,7 +131,7 @@ public getPassword () {
         companyId: recordInfo.client && recordInfo.client.id,
         description: recordInfo.description,
         expiredDate: this.getFormatedDate(recordInfo.expiryDate),
-        password: (edit && recordInfo.password === this.password) ? null : recordInfo.password,
+        password: recordInfo.password,
         links: recordInfo.userOrDevice,
         template: recordInfo.type.UPPERCASE,
         username: recordInfo.userName,
@@ -229,7 +147,7 @@ public getPassword () {
         companyId: recordInfo.client && recordInfo.client.id,
         description: recordInfo.description,
         expiredDate: this.getFormatedDate(recordInfo.expiryDate),
-        password: (edit && recordInfo.password === this.password) ? null : recordInfo.password,
+        password: recordInfo.password,
         template: recordInfo.type.UPPERCASE,
         username: recordInfo.userName,
         note: recordInfo.note,
@@ -240,7 +158,7 @@ public getPassword () {
       return ({
         companyId: recordInfo.client && recordInfo.client.id,
         expiredDate: this.getFormatedDate(recordInfo.expiryDate),
-        password: (edit && recordInfo.password === this.password) ? null : recordInfo.password,
+        password: recordInfo.password,
         template: recordInfo.type.UPPERCASE,
         username: recordInfo.userName,
         description: recordInfo.description
@@ -250,7 +168,7 @@ public getPassword () {
         companyId: recordInfo.client && recordInfo.client.id,
         expiredDate: this.getFormatedDate(recordInfo.expiryDate),
         links: recordInfo.userOrDevice,
-        password: (edit && recordInfo.password === this.password) ? null : recordInfo.password,
+        password: recordInfo.password,
         template: recordInfo.type.UPPERCASE,
         ssid: recordInfo.ssid,
         description: recordInfo.description,
@@ -261,7 +179,7 @@ public getPassword () {
 
         companyId: recordInfo.client && recordInfo.client.id,
         expiredDate: this.getFormatedDate(recordInfo.expiryDate),
-        password: (edit && recordInfo.password === this.password) ? null : recordInfo.password,
+        password: recordInfo.password,
         template: recordInfo.type.UPPERCASE,
         username: recordInfo.userName,
         links: recordInfo.userOrDevice,
@@ -271,16 +189,10 @@ public getPassword () {
     }
   }
 
-  /**
-   * Close filters
-   */
   public closeFilters() {
     this.closeFilter.emit();
   }
 
-  /**
-   * Set mobile category
-   */
   public setMobileCategory() {
     this.mobileCategory.emit();
   }

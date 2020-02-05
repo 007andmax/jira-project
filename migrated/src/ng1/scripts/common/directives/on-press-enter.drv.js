@@ -12,9 +12,9 @@
         link: function (scope, element, attr) {
           element[0].addEventListener('keypress', function(evt) {
             if (evt.keyCode === 13) {
-            
+              console.log(func)
             }
-          
+            // console.log(evt.keyCode, attr.onPressEnter, fn)
           })
         }
       };

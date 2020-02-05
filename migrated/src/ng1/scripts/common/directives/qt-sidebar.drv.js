@@ -26,6 +26,9 @@
               if ($rootScope.isLeftPanelHidden) {
                 $scope.$broadcast('leftPanelClosedFromQTSidebar');
               }
+
+
+
               $document.off('click', closeLeftPanelOnSmallScreen);
               $document.on('click', closeLeftPanelOnSmallScreen);
 
@@ -38,6 +41,7 @@
                   $scope.$apply();
                 }
               }
+
 
             }
           }

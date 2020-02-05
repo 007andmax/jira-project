@@ -24,7 +24,7 @@
         };
         // $scope.showTotalAmount = true;
         // $scope.$watch('showTotalAmount', function(newData) {
-         
+        //   console.log(newData);
         //   $rootScope.$broadcast('changeShowTotalAmount', 'newData');
         // });
 
@@ -77,7 +77,6 @@
         $scope.getCustomerTicketReport = function (form) {
           if (form.$valid) {
             var dto = $scope.dto;
-           
             dto.startDate = formatDate(new Date(dto.startDate || $scope.currentCompany.createdAt));
             dto.endDate = formatDate(new Date(dto.endDate || undefined));
             dto.companyId = dto.company.id;

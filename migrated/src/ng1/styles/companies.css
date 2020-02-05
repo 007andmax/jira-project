@@ -1634,11 +1634,3 @@
   width: 20px;
   height: 20px;
 }
-
-.no-exist-receivable {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  left: 50%;
-  bottom: 0;
-}

@@ -25,11 +25,14 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              "src/ng2/assets",
               "src/ng1"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/ng2/styles.scss",
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/datatables.net-dt/css/jquery.dataTables.css",
+              "node_modules/ngx-select-dropdown/dist/assets/style.css",
               "src/ng1/styles/admin-tickets.css",
               "src/ng1/styles/bootstrap-datetimepicker.css",
               "src/ng1/styles/common.dropdown.css",
@@ -84,9 +87,11 @@
               "src/ng1/styles/customer-report.css",
               "src/ng1/styles/new-style.css",
               "src/ng1/styles/nv.d3.css",
-              "src/ng1/styles/daterangepicker.css"
+              "src/ng1/styles/daterangepicker.css",
+              "src/ng1/styles/proton.multi-list-picker.css"
             ],
             "scripts": [
+              "src/ng2/assets/md5-min.js",
               "src/ng1/bower_components/jquery/dist/jquery.js",
               "src/ng1/bower_components/jquery-mousewheel/jquery.mousewheel.js",
               "src/ng1/bower_components/angular/angular.js",
@@ -137,6 +142,7 @@
               "src/ng1/scripts/core/services/services.mdl.js",
               "src/ng1/scripts/core/settings/settings.mdl.js",
               "src/ng1/scripts/core/tickets/tickets.mdl.js",
+              "src/ng1/scripts/core/tickets/time-picker/time-picker.mdl.js",
               "src/ng1/scripts/core/users/users.mdl.js",
               "src/ng1/scripts/admin/admin-services/customer-list.js",
               "src/ng1/scripts/admin/customer-list/customer-list.drv.js",
@@ -257,7 +263,6 @@
               "src/ng1/scripts/common/services/local/user-notification.srv.js",
               "src/ng1/scripts/common/services/rest/address.js",
               "src/ng1/scripts/common/services/rest/billable.js",
-              "src/ng1/scripts/common/services/rest/quotes.js",
               "src/ng1/scripts/common/services/rest/colors.js",
               "src/ng1/scripts/common/services/rest/common.js",
               "src/ng1/scripts/common/services/rest/companies.js",
@@ -339,7 +344,6 @@
               "src/ng1/scripts/core/header/create-new-entity/create-new-entity.drv.js",
               "src/ng1/scripts/core/header/create-new-entity/create-product/create-product.ctrl.js",
               "src/ng1/scripts/core/header/create-new-entity/create-service/create-service.crtl.js",
-              "src/ng1/scripts/core/header/create-new-entity/create-preview/create-preview.ctrl.js",
               "src/ng1/scripts/core/header/create-new-entity/create-ticket/create-ticket.ctrl.js",
               "src/ng1/scripts/core/header/create-new-entity/create-user/create-user.ctrl.js",
               "src/ng1/scripts/core/header/global-search/adjust-height.drv.js",
@@ -467,21 +471,17 @@
               "src/ng1/scripts/js/vendors/date-range-picker/datepicker.js",
               "src/ng1/scripts/js/vendors/date-range-picker/datepicker.en.js",
               "src/ng1/scripts/js/handlebars-v3.0.3.js",
-              "src/ng1/scripts/core/user-list/user-list.ctrl.js",
-              "src/ng1/scripts/core/assign-user-list/assign-user-list.ctrl.js",
-              "src/ng1/scripts/core/duration/duration.ctrl.js",
-              "src/ng1/scripts/core/time-picker/time-picker.ctrl.js"
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/datatables.net/js/jquery.dataTables.min.js"
             ],
             "es5BrowserSupport": true
           },
           "configurations": {
             "production": {
-              "fileReplacements": [
-                {
-                  "replace": "src/ng2/environments/environment.ts",
-                  "with": "src/ng2/environments/environment.prod.ts"
-                }
-              ],
+              "fileReplacements": [{
+                "replace": "src/ng2/environments/environment.ts",
+                "with": "src/ng2/environments/environment.prod.ts"
+              }],
               "outputHashing": "all",
               "sourceMap": false,
               "extractCss": false,
@@ -490,21 +490,17 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "3mb",
-                  "maximumError": "6mb"
-                }
-              ]
+              "budgets": [{
+                "type": "initial",
+                "maximumWarning": "3mb",
+                "maximumError": "6mb"
+              }]
             },
             "dev": {
-              "fileReplacements": [
-                {
-                  "replace": "src/ng2/environments/environment.ts",
-                  "with": "src/ng2/environments/environment.dev.ts"
-                }
-              ]
+              "fileReplacements": [{
+                "replace": "src/ng2/environments/environment.ts",
+                "with": "src/ng2/environments/environment.dev.ts"
+              }]
             }
           }
         },
@@ -534,7 +530,6 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
             "scripts": [],

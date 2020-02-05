@@ -1,5 +1,6 @@
 .ticket-update {
-  margin: 0 30px 30px;
+  margin-left: 30px;
+  margin-right: 30px;
 }
 
 .ticket-update-header {
@@ -91,15 +92,13 @@
   font-size: 13px;
 }
 
-.ticket-update-avatar {
-  display: flex;
-  align-items: center;
-  position: relative;
+.ticket-update {
+  padding-top: 30px;
 }
 
-.ticket-update-avatar a {
-  position: absolute;
-  right: 0;
+.ticket-update-avatar {
+  width: 48px;
+  padding-right: 10px;
 }
 
 .ticket-update-avatar .icon-update {
@@ -108,8 +107,11 @@
 }
 
 .ticket-update-content .updater-name {
-  display: flex;
-  white-space: nowrap;
+  float: left;
+  width: 100%;
+  margin-top: -1px;
+  font-weight: bold;
+  color: #1f2a37;
 }
 
 .ticket-update-content .updater-name span {
@@ -123,20 +125,20 @@
 
 .ticket-update-content .ticket-update-message {
   float: left;
-  width: 98%;
+  width: 96%;
   margin-top: 4px;
   color: #748498;
   line-height: 20px;
   margin-bottom: 5px;
 }
 
-.ticket-update-meta {
+.ticket-update-content .ticket-update-meta {
   float: left;
   width: 100%;
   margin-top: 10px;
 }
 
-.ticket-update-meta .ticket-meta-wrapper {
+.ticket-update-content .ticket-update-meta .ticket-meta-wrapper {
   display: flex;
   align-items: center;
 }
@@ -147,16 +149,18 @@
   font-size: 10px;
 }
 
-.icn-delete-final {
-  background-image: url(../images/new-icons/remove-final.png);
-  width: 16px;
-  height: 16px;
+.ticket-update-content .icn-delete,
+.ticket-add-product-actions .icn-delete,
+.ticket-add-service-actions .icn-delete {
+  background-image: url(../images/new-icons/company-remove.svg);
+  width: 12px;
+  height: 12px;
 }
 
-.edit-icon-final {
-  background-image: url(../images/new-icons/edit-final.png);
-  width: 16px;
-  height: 16px;
+.ticket-update-content .edit-icon {
+  background-image: url(../images/new-icons/company-edit.svg);
+  width: 14px;
+  height: 14px;
   cursor: pointer;
 }
 
@@ -175,7 +179,7 @@
   margin-left: 10px;
 }
 
-.ticket-update-meta .avatar {
+.ticket-update-content .ticket-update-meta .avatar {
   position: relative;
   margin-left: 10px;
 }
@@ -195,7 +199,7 @@
   display: block;
 }
 
-.ticket-update-meta span.update-timestamp {
+.ticket-update-content .ticket-update-meta span.update-timestamp {
   margin-top: 7px;
   margin-right: 10px;
   font-size: 11px;
@@ -216,7 +220,7 @@
 }
 
 .ticket-update-meta .tooltip-name, .shared-users-list .tooltip-name {
-  color: #ffffff;
+  color: #fff;
   line-height: 12px;
 }
 
@@ -256,7 +260,7 @@
 }
 
 .tooltip-users .tooltip-inner > li > span.username {
-  color: #ffffff;
+  color: #fff;
 }
 
 .tooltip-users .tooltip-inner > li > span.usertitle {
@@ -266,9 +270,9 @@
 }
 
 .ticket-update-content {
-  /*width: calc(100% - 48px);*/
-  padding: 10px 0;
-  /*border-bottom: 1px solid #e7ecf2;*/
+  width: calc(100% - 48px);
+  padding: 10px 0 30px;
+  border-bottom: 1px solid #e7ecf2;
   position: relative;
 }
 
@@ -288,46 +292,6 @@
   -o-transition: border-radius 0.3s ease-out;
   -ms-ransition: border-radius 0.3s ease-out;
   transition: border-radius 0.3s ease-out;
-}
-
-.date-picker-icon-ui {
-  position: absolute !important;
-  top: 0px;
-  left: 0px;
-  opacity: 0;
-}
-
-.modal-ticket-edit-mask {
-  display: block;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, .6);
-  z-index: 998;
-  position: fixed;
-}
-
-.modal-ticket-edit-datepicker {
-  display: block;
-  top: 10%;
-  left: 10%;
-  background-color: #ffffff;
-  z-index: 999;
-  position: fixed;
-  width: 50%;
-  height: 50%;
-}
-
-.modal-ticket-edit-user {
-  display: block;
-  top: 40%;
-  left: 0;
-  background-color: #ffffff;
-  z-index: 999;
-  position: fixed;
-  width: 100%;
-  height: 40%;
 }
 
 @-moz-document url-prefix() {
@@ -369,6 +333,8 @@
 .table-wrapper {
   float: left;
   width: 100%;
+  margin-top: 9px;
+  margin-bottom: 10px;
 }
 
 .table-wrapper + .table-wrapper {
@@ -388,13 +354,13 @@
 }
 
 .table-wrapper .table-content {
-  /*width: calc(100% - 30px);*/
+  width: calc(100% - 30px);
   margin: 0;
   padding: 0;
   position: relative;
   list-style: none;
   color: #4f5f79;
-  /*background-color: #f6f8fa;*/
+  background-color: #f6f8fa;
 }
 
 .table-wrapper .table-content + .table-content {
@@ -453,17 +419,6 @@
   /*overflow: hidden;*/
 }
 
-.table-wrapper .table-content .table-content-top [class^="col-"] {
-  line-height: 0;
-  white-space: nowrap;
-}
-
-.table-wrapper .table-content .table-content-top > a {
-  position: absolute;
-  right: 0;
-  bottom: 7px;
-}
-
 .table-wrapper .table-content .form-group {
   margin-bottom: 0;
 }
@@ -497,7 +452,7 @@
 }
 
 .table-wrapper .service-table .col-md-1 {
-  width: 11.1%;
+  width: 11.8%;
 }
 
 .table-wrapper .table-content .col-2 {
@@ -609,7 +564,7 @@
   margin: 0;
   margin-bottom: 0px;
   margin-top: 0;
-  padding: 5px !important;
+  padding: 0;
   list-style: none;
 }
 
@@ -628,8 +583,8 @@
   clear: both;
   float: left;
   width: 100%;
-  /*height: 166px;*/
-  /*margin: 10px 0 0;*/
+  height: 166px;
+  margin: 10px 0 0;
 }
 
 .table-wrapper + .table-wrapper .table-content + .ticket-update-edit {
@@ -659,52 +614,6 @@
   /*padding: 30px 84px 30px 100px;*/
   /*box-shadow: rgba(10, 45, 89, 0.15) 0px 0px 25px 0px;*/
   /*background-color: #fff;*/
-}
-
-.ticket-update-service-edit .start-end-picker .time-picker-in,
-.ticket-update-service-edit .start-end-picker .time-picker-out {
-  width: 46.3%;
-}
-
-@media (min-width: 2560px) {
-  .ticket-update-service-edit .start-end-picker .time-picker-in,
-  .ticket-update-service-edit .start-end-picker .time-picker-out {
-    width: 47.8%;
-  }
-}
-
-@media (min-width: 2048px) {
-  .ticket-update-service-edit .duration .dropdown-menu .duration-container-content .duration-container-values-hours > div,
-  .ticket-update-service-edit .duration .dropdown-menu .duration-container-content .duration-container-values-minutes > div {
-    width: 86px;
-  }
-}
-
-@media (max-width: 1280px) {
-  .ticket-update-service-edit .duration .dropdown-menu .duration-container-content .duration-container-values-hours > div,
-  .ticket-update-service-edit .duration .dropdown-menu .duration-container-content .duration-container-values-minutes > div {
-    width: 86px;
-  }
-}
-
-.flex-text-right {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.ticket-update-service-edit .col-md-6.service-name textarea {
-  margin-left: 35px;
-  width: calc(100% - 36px) !important;
-  border: 1px solid #c4cbd5 !important;
-  border-radius: 4px;
-  padding: 0 5px;
-  font-size: 12px;
-  font-family: "Graphik Regular", sans-serif;
-  outline: none;
-  box-shadow: none;
-  overflow-y: scroll !important;
-  max-height: 126px;
 }
 
 .ticket-update-product-edit .edit-col1 {
@@ -739,14 +648,8 @@
   width: 9%;
 }
 
-.ticket-update-service-edit .service-name label {
-  margin-right: 10px;
-}
-
 .ticket-update-service-edit .edit-col1 {
-  width: calc(100% - 36px);
-  display: inline-block;
-  margin-bottom: 10px;
+  width: 145px;
 }
 
 .ticket-update-service-edit .edit-col2 {
@@ -805,7 +708,7 @@
 }
 
 .product-upd .table-content-top .col-md-1 {
-  width: 11.1%;
+  width: 12%;
 }
 
 .product-upd .table-content-top .col-md-9 {
@@ -816,7 +719,7 @@
   .table-wrapper.product-upd .table-content .col-1 {
     width: 15%;
   }
-
+  
   .table-wrapper.product-upd .table-content .col-3 {
     width: 18%;
   }
@@ -842,98 +745,11 @@
   padding-left: 268px;
 }
 
-.table-content .table-content-bottom .action-update {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.table-content .table-content-bottom .action-update .assign-icn {
-  margin: 0 16px 0 8px;
-}
-
-.table-content .ticket-update-service-edit .action-update .icn-label-save-dashboard,
-.table-content .ticket-update-service-edit .action-update .assign-icn,
-.table-content .ticket-update-product-edit .action-update .icn-label-save-dashboard,
-.table-content .ticket-update-product-edit .action-update .assign-icn {
-  margin: 0 8px;
-}
-
-.table-content .ticket-update-product-edit .action-update .dashboard-remove,
-.table-content .ticket-update-service-edit .action-update .dashboard-remove {
-  margin: 0 0 0 8px;
-}
-
-.ticket-update-service-edit .timer-quantity .time_drop_down ul {
-  width: 42px;
-}
-
-.ticket-update-service-edit .timer-quantity .time_drop_down ul li a:hover {
-  background: #16a4fa !important;
-  color: #ffffff;
-}
-
-.table-content .table-content-bottom [class*='col-md-'] {
-  font-size: 13px;
-  font-family: "Graphik-Regular", sans-serif;
-}
-
-.gm {
-  font-family: "Graphik Medium", sans-serif !important;
-}
-
 .table-content .table-content-top {
-  border-bottom: 1px solid #4f5f79;
-  font-size: 12px;
-  font-family: "Graphik Medium", sans-serif;
-  position: relative;
+  border-bottom: 1px solid #edf2f6;
 }
 
-.mob-ticket-updates .ticket-update-header {
-  position: relative;
-  border-bottom: 1px solid #4f5f79;
-}
-
-.table-content .table-content-top:before,
-.mob-ticket-updates .ticket-update-header:before {
-  position: absolute;
-  content: 'SERVICE';
-  font-size: 9px;
-  font-family: "Graphik Semibold", sans-serif;
-  padding: 0 8px;
-  background: #edf2f6;
-  color: #4f5f79;
-  left: 0;
-  top: 6px;
-}
-
-.mob-ticket-updates .ticket-update-header:before {
-  top: 0;
-}
-
-.product-upd .table-content-top:before,
-.mob-ticket-updates .mob-product-update .ticket-update-header:before {
-  content: 'PRODUCT';
-}
-
-.mob-ticket-updates .mob-product-update .ticket-update-header {
-  padding-left: 65px;
-}
-
-.mob-ticket-updates .mob-note-update .ticket-update-header {
-  padding-left: 47px;
-}
-
-.mob-ticket-updates .mob-service-update .ticket-update-header {
-  padding-left: 59px;
-}
-
-.note-upd .table-content-top:before,
-.mob-ticket-updates .mob-note-update .ticket-update-header:before {
-  content: 'NOTE';
-}
-
-.table-content .ticket-update-service-edit .timepicker {
+.table-content .table-content-top .timepicker {
   top: 6px;
 }
 
@@ -962,11 +778,7 @@
 
 .table-content .table-content-top,
 .table-content .table-content-bottom {
-  padding: 10px 0;
-}
-
-.table-content .table-content-bottom:not(:last-child) {
-  border-bottom: 1px solid #edf2f6;
+  padding: 6.5px 15px;
 }
 
 .table-wrapper .service-table .col-md-1.timer-quantity {
@@ -978,85 +790,26 @@
 }
 
 .table-wrapper .service-table .col-md-2.new-quantity-picker {
-  width: 22.2%;
-}
-
-.checkbox-container {
-  position: relative;
-  min-width: 22px;
-  height: 22px;
-  margin: 0;
-  cursor: pointer;
-}
-
-.container-ticket-content .checkbox-container .checkbox-mark {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 22px;
-  height: 22px;
-  background: url("../images/new-icons/checkbox-ticket.png");
-}
-
-.checkbox-container input {
-  opacity: 0;
-}
-
-.container-ticket-content .checkbox-container input:checked ~ .checkbox-mark {
-  background-position: 24px 0;
-}
-
-.service-name p:first-child {
-  font-family: "Graphik Medium", sans-serif;
-  font-size: 13px;
-  display: flex;
-}
-
-.ticket-update-service-edit .service-name p:first-child {
-  height: 40px;
-}
-
-.service-name p:first-child .checkbox-container,
-.product-upd .col-md-6 label {
-  margin-right: 10px;
-}
-
-.product-upd .col-md-6 {
-  display: flex;
-}
-
-.product-upd .col-md-6 p {
-  font-family: "Graphik Medium", sans-serif;
-}
-
-.product-upd .col-md-1 {
-  width: 11.1%;
-}
-
-.service-name p:last-child {
-  font-family: "Graphik Regular", sans-serif;
-  font-size: 12px;
-  line-height: 1.33;
-  padding-left: 33px;
+  width: 18%;
 }
 
 @media screen and (min-width: 2048px) {
   .table-content.service-table .col-3 {
     width: 75%;
   }
-
+  
   .opened-ticket .table-wrapper .service-table .col-3 {
     width: calc(100% - 605px);
   }
-
+  
   .opened-ticket-list .table-wrapper .service-table .col-3 {
     width: calc(100% - 485px);
   }
-
+  
   _:-moz-tree-row(hover), .opened-ticket-list .table-wrapper .service-table .col-3 {
     width: calc(100% - 488px);
   }
-
+  
   .qt-recurring-invoices .table-wrapper .table-content .col-sm-4 {
     width: 33.333333%;
   }
@@ -1068,238 +821,180 @@
 }
 
 @media screen and (max-width: 1600px) {
-  .table-content .ticket-update-service-edit .action-update .icn-label-save-dashboard,
-  .table-content .ticket-update-service-edit .action-update .assign-icn,
-  .table-content .ticket-update-product-edit .action-update .icn-label-save-dashboard,
-  .table-content .ticket-update-product-edit .action-update .assign-icn {
-    margin: 0 4px;
-  }
-
-  .table-content .ticket-update-product-edit .action-update .dashboard-remove,
-  .table-content .ticket-update-service-edit .action-update .dashboard-remove {
-    margin: 0 0 0 4px;
-  }
-
   .table-content input {
     font-size: 12px;
   }
-
+  
   .table-content .table-content-top .timepicker {
     right: 0;
   }
-
+  
   .table-content.service-table .col-3 {
     padding-left: 342px;
   }
-
+  
+  .table-wrapper .service-table .col-md-1 {
+    width: 15.8%;
+  }
+  
+  .table-wrapper .service-table .col-md-6 {
+    width: 41.66666667%;
+  }
+  
   .table-wrapper .service-table .table-content-top.without-duration .service-title {
     width: 50%;
   }
-
+  
   .table-wrapper .service-table .table-content-top.without-duration .service-datetimepicker,
   .table-wrapper .service-table .table-content-top.without-duration .new-quantity-picker {
     width: 25%;
   }
-
+  
   .table-wrapper .service-table .col-md-1.timer-quantity {
     width: 9%;
   }
-
+  
+  .table-wrapper .service-table .col-md-3.service-datetimepicker,
+  .table-wrapper .service-table .col-md-2.new-quantity-picker {
+    width: 23%;
+  }
+  
   .table-wrapper .service-table .col-md-5.service-title {
     width: 36%;
   }
-
+  
   /*.ticket-update-service-edit {*/
   /*padding: 30px 40px 30px 50px;*/
   /*}*/
   .ticket-update-product-edit {
     padding: 0;
   }
-
+  
   .ticket-update-edit .icon-edit {
     left: 30px;
   }
-
+  
   .table-wrapper .service-table .col-3 {
     width: calc(100% - 563px);
   }
-
+  
   .opened-ticket-list .table-wrapper .service-table .col-3 {
     width: 36%;
   }
-
+  
   _::-webkit-:not(:root:root), .opened-ticket-list .table-wrapper .service-table .col-3 {
     width: 35%;
   }
-
+  
   .opened-ticket-list .table-wrapper .service-table .col-5 div {
     white-space: nowrap;
   }
-
+  
   .inventory-details .table-wrapper .service-table .col-3 {
     width: calc(100% - 290px);
   }
-
+  
   .table-wrapper .table-content .discount-ticket {
     white-space: normal;
   }
-
+  
   .table-wrapper .service-table .col-2 {
     width: 20%;
   }
 }
 
 @media screen and (max-width: 1366px) {
-  /*.opened-ticket-list .product-upd .table-content-top .col-md-1 {*/
-  /*  width: 33.33333%;*/
-  /*}*/
-  .ticket-update-service-edit .start-end-picker .time-picker-in input,
-  .ticket-update-service-edit .start-end-picker .time-picker-out input {
-    font-size: 11px;
+  .opened-ticket-list .product-upd .table-content-top .col-md-1 {
+    width: 33.33333%;
   }
-
-  .ticket-add-content .ticket-add-service .col-2.new-date-picker {
-    width: 20%;
-  }
-
-  .time-picker-width {
-    width: 34% !important;
-  }
-
-  .opened-ticket-list .ticket-update {
-    margin: 0 20px 30px;
-  }
-
-  .opened-ticket-list .table-content .action-update .icn-label-save-dashboard {
-    position: absolute;
-    right: -21px;
-    top: 0;
-  }
-
-  .opened-ticket-list .table-content .action-update .dashboard-remove {
-    position: absolute;
-    right: -15px;
-    top: 26px;
-  }
-
-  .opened-ticket-list .ticket-update-service-edit .action-update {
-    width: 12%;
-  }
-
-  .opened-ticket-list .ticket-update-service-edit .col-md-1 {
-    width: 14%;
-  }
-
-  .opened-ticket-list .service-table .col-md-6 {
-    width: 45%;
-  }
-
-  .opened-ticket-list .service-table .col-md-6.service-name {
-    width: 42%;
-  }
-
-  .opened-ticket-list .table-wrapper .service-table .col-md-2.new-quantity-picker {
-    width: 28%;
-  }
-
-  .opened-ticket-list .table-wrapper .service-table .col-md-1 {
-    width: 13.7%;
-    font-size: 12px;
-  }
-
-  .opened-ticket-list .table-wrapper .ticket-update-service-edit .col-md-1 {
-    width: 13%;
-  }
-
+  
   .opened-ticket-list .product-upd .table-content-top .col-md-9,
   .opened-ticket.opened-ticket-list .ticket-update-product-edit .table-content-top .col-md-6 {
     width: 100%;
   }
-
+  
   .table-content .table-content-top .timepicker {
     right: auto;
   }
-
+  
   .table-content .table-content-top.without-duration .timepicker {
     right: 0;
   }
-
+  
   .table-content.service-table .col-3 {
     padding-left: 295px;
   }
-
+  
   .opened-ticket.opened-ticket-list .table-wrapper .service-table .table-content-top.without-duration .service-title {
     width: 40%;
   }
-
+  
   .opened-ticket.opened-ticket-list .table-wrapper .service-table .table-content-top.without-duration .service-datetimepicker {
     width: 27%;
   }
-
+  
   .opened-ticket.opened-ticket-list .table-wrapper .service-table .table-content-top.without-duration .new-quantity-picker {
     width: 33%;
   }
-
+  
   .table-wrapper .table-content .form-group input {
     font-size: 12px;
   }
-
+  
   .tax-recurring input {
     font-size: 12px;
   }
-
+  
   .table-wrapper .table-content .discount-ticket {
     white-space: nowrap;
   }
-
+  
   .table-wrapper .service-table .col-3 {
     width: calc(100% - 464px);
   }
-
+  
   .inventory-details .table-wrapper .service-table .col-3 {
     width: calc(100% - 230px);
   }
-
+  
   .opened-ticket-list .table-wrapper .service-table .col-3 {
     width: 75%;
   }
-
+  
+  .opened-ticket.opened-ticket-list .table-wrapper .service-table .col-md-3.service-datetimepicker,
+  .opened-ticket.opened-ticket-list .table-wrapper .service-table .col-md-2.new-quantity-picker,
+  .opened-ticket.opened-ticket-list .table-wrapper .service-table .col-md-1.timer-quantity {
+    width: 33.33333%;
+  }
+  
   .opened-ticket.opened-ticket-list .table-wrapper .service-table .col-md-5.service-title {
     width: 66.66666%;
   }
-
-  /*.opened-ticket.opened-ticket-list .table-content-top .col-md-1,*/
-  /*.opened-ticket.opened-ticket-list .table-content-top .col-md-2 {*/
-  /*  width: 33.33333333%;*/
-  /*  text-align: left !important;*/
-  /*}*/
-  /*.opened-ticket.opened-ticket-list .table-content-top .col-md-6 {*/
-  /*  width: 66.66666667%;*/
-  /*}*/
+  
+  .opened-ticket.opened-ticket-list .table-content-top .col-md-1,
+  .opened-ticket.opened-ticket-list .table-content-top .col-md-2 {
+    width: 33.33333333%;
+    text-align: left !important;
+  }
+  
+  .opened-ticket.opened-ticket-list .table-content-top .col-md-6 {
+    width: 66.66666667%;
+  }
 }
 
 @media screen and (max-width: 1280px) {
   .inventory-details .table-wrapper .service-table .col-3 {
     width: calc(100% - 210px);
   }
-
-  .table-content input {
-    font-size: 13px;
-  }
-
-  .ticket-update-service-edit .start-end-picker .time-picker-in input,
-  .ticket-update-service-edit .start-end-picker .time-picker-out input {
-    font-size: 13px;
-  }
-
+  
   .table-content.service-table .col-3 {
     padding-left: 278px;
   }
-
+  
   .table-wrapper .table-content .col-5 {
     width: 14%;
   }
-
+  
   .table-wrapper .table-content .col-2.col-2-has-serial-number {
     width: 71%;
   }

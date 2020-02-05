@@ -13,7 +13,7 @@
           }
 
           element.on(attrs.stopPropagation, function (e) {
-           
+            console.log('12341234');
             // e.preventDefault();
             e.stopPropagation();
           });

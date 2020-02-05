@@ -34,8 +34,6 @@
             const index = $scope.invocesList.findIndex((item) => item.id === newInvoice.data.id);
             $scope.invocesList[index] = newInvoice.data;
           }
-        
-          $scope.$apply();
         });
 
         $rootScope.$on('receivableInvoicePayment', function(event, newInvoice){
@@ -69,7 +67,7 @@
               $scope.invocesList = [...$scope.invocesList, ...resp];
               $scope.invocesList = removeDuplicates($scope.invocesList, 'id');
               $rootScope.allInvoices = $scope.invocesList;
- 
+
             }, data).then(() => {
                 $scope.stopReqeust = false;
                 $scope.stopScroll = false;
@@ -186,23 +184,20 @@
           $scope.receivableCompanies = [];
           $scope.invoiceToSent = {};
 
-          if (invoicesData && invoicesData.companies) {
-            for (var id in invoicesData.companies) {
-              var invoices = invoicesData.companies[id];
-              $scope.totalSum.companies[id] = 0;
-  
-              for (var i = 0; i < invoices.length; i++) {
-                var invoice = invoices[i];
-  
-                $scope.totalSum.invoices[invoice.id] = invoice.sum;
-                $scope.totalSum.companies[id] += invoice.sum;
-              }
-  
-              $scope.totalReceivables += $scope.totalSum.companies[id];
-              $scope.receivableCompanies.push(CompaniesService.getOneById(id));
+          for (var id in invoicesData.companies) {
+            var invoices = invoicesData.companies[id];
+            $scope.totalSum.companies[id] = 0;
+
+            for (var i = 0; i < invoices.length; i++) {
+              var invoice = invoices[i];
+
+              $scope.totalSum.invoices[invoice.id] = invoice.sum;
+              $scope.totalSum.companies[id] += invoice.sum;
             }
+
+            $scope.totalReceivables += $scope.totalSum.companies[id];
+            $scope.receivableCompanies.push(CompaniesService.getOneById(id));
           }
-        
 
           if ($scope.mode === 'group-by-company') {
 
@@ -216,7 +211,7 @@
             $scope.invoiceToSent.invoices = {};
           }
 
-          if (resp && !resp.list.length) {
+          if (!resp.list.length) {
             $scope.loadingInProgress = false;
           }
 

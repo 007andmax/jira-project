@@ -89,7 +89,7 @@ HoverPie.make = (function ($canvas, data, config) {
   var hovers = [];
 
   var hover = (function (ids) {
-   
+    //console.log(ids,stage.children);
 
     // This function is to be called with a list of stage IDs
     // it will revert any currently-hovered elements to their

@@ -1,43 +1,34 @@
-import { Component } from '@angular/core';
-import { Router } from "@angular/router";
+import { Component, OnInit, Renderer2, Inject } from '@angular/core';
+import { NavigationStart, Router } from '@angular/router';
+import { DOCUMENT } from '@angular/common';
 
-/**
- * Main component
- */
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss']
+  styleUrls: ['./main.component.scss'],
 })
-export class MainComponent {
-
+export class MainComponent implements OnInit {
   public appType: string;
 
-  /**
-   * Creates an instance of the MainComponent with the injected services
-   * @param {Router} router to work with routes
-   */
-  public constructor(private router: Router) {
-     this.router.events
-      .subscribe((event) => {
-        const appType = (this.router.url.startsWith('/ng2') || this.router.url.startsWith('/#/ng2')) ? 'ng2' : 'ng1';
-        this.setAppType(appType);
-      });
+  constructor(
+    private router: Router,
+    private renderer: Renderer2,
+    @Inject(DOCUMENT) private document: Document,
+  ) {
+    this.router.events.subscribe(event => {
+      const appType = this.router.url.startsWith('/ng2') ? 'ng2' : 'ng1';
+      this.setAppType(appType);
+    });
   }
 
-  /**
-   * set app type
-   * @param appType - application type
-   */
-  public setAppType(appType) {
+  ngOnInit() {
+  }
+
+  setAppType(appType) {
     this.appType = appType;
   }
 
-  /**
-   * check app type
-   */
-  public isAppTypeIsNg2() {
-    return this.appType == 'ng2';
+  isAppTypeIsNg2() {
+    return this.appType === 'ng2';
   }
-
 }

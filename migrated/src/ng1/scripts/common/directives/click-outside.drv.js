@@ -8,8 +8,7 @@
         restrict: 'A',
         scope: {
           type: '@',
-          show: '=',
-          clickOutside: '&'
+          show: '='
         },
         link: function ($scope, elem, attr) {
 
@@ -21,7 +20,6 @@
           }
 
           var eventHandler = function (e) {
-        
             var isClickedElementChildOfPopup = elem
               .find(e.target)
               .length > 0;
@@ -29,12 +27,7 @@
             if ($scope.type === 'time' && e.target.id !== 'time-picker-input' && !isClickedElementChildOfPopup) {
               $scope.$emit('hideTimepicker', true);
             };
-            if (elem !== e.target && !elem[0].contains(e.target) && elem.attr('id') === 'product-list-cont') {
-              $scope.$apply(function () {
-              
-                $scope.$eval($scope.clickOutside);
-              });
-          }
+
             if (angular.element(elem).hasClass("ng-hide")) {
               return;
             }

@@ -1,4 +1,7 @@
-import { Component, OnInit} from '@angular/core';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
 import { Subject } from "rxjs";
 
 import { ApiPasswordManagerService } from "../../services/password-manager/api-password-manager.service";
@@ -6,8 +9,6 @@ import { CompaniesService } from "../../services/company/companies.service";
 import { PasswordManagerService } from "../../services/password-manager/password-manager.service";
 import { UsersService } from "../../services/users/users.service";
 import { PermissionsService } from "../../services/permissions/permissions.service";
-import { PasswordManagerListService } from './services/password-manager-list.service';
-import { UsersStateService } from '../../states/users/users-state.service';
 
 /**
  * Password manager component
@@ -15,8 +16,7 @@ import { UsersStateService } from '../../states/users/users-state.service';
 @Component({
   selector: 'app-password-manager',
   templateUrl: './password-manager.component.html',
-  styleUrls: ['./password-manager.component.scss'],
-  providers: [PasswordManagerListService]
+  styleUrls: ['./password-manager.component.scss']
 })
 
 export class PasswordManagerComponent implements OnInit {
@@ -29,8 +29,7 @@ export class PasswordManagerComponent implements OnInit {
   public newRecord: Subject<boolean> = new Subject();
   public isMobileFilterShowing = false;
   public currentUser: any;
-  public sort: string = 'companyName';
-  public direction: string = 'ASC';
+
   /**
    * Creates an instance of the PasswordManagerComponent with the injected services
    * @param {ApiPasswordManagerService} apiPasswordManagerService Service to work with api
@@ -44,12 +43,8 @@ export class PasswordManagerComponent implements OnInit {
     private companiesService: CompaniesService,
     private passwordManagerService: PasswordManagerService,
     private userService: UsersService,
-    private permissionsService: PermissionsService,
-    private passwordManagerList: PasswordManagerListService,
-    private userState :UsersStateService
-  ) {
-  
-  }
+    private permissionsService: PermissionsService
+  ) {}
 
   /**
    * Initializes Password manager. See [ngOnInit]{@see OnInit#ngOnInit}
@@ -61,20 +56,9 @@ export class PasswordManagerComponent implements OnInit {
     this.getSelectedDate();
     this.getCurrentUser();
     this.apiPasswordManagerService.getRecords();
+    this.companiesService.getCompaniesList();
     this.checkCloseFilters();
   };
-
-  /**
- * Sort 
- * @param sort - type sort
- */
-public sortBy(sort) {
- 
-  this.direction = this.passwordManagerList.getDirection(this.direction, this.sort, sort);
-  this.sort = sort;
-  this.passwordManagerService.onInitSort({direction:this.direction,sort:sort});
- 
-}
 
   /**
    * Get selected company from filter
@@ -109,7 +93,6 @@ public sortBy(sort) {
    */
   public getSelectedDate() {
     this.passwordManagerService.selectedDate.subscribe((date) => {
-       
       if (date) {
         this.selectedDate = `${date.year}/${this.formatDayAndMonth(date.month)}/${this.formatDayAndMonth(date.day)}`
       } else {
@@ -151,7 +134,7 @@ public sortBy(sort) {
    * getCurrentUser
    */
   private getCurrentUser() {
-    this.currentUser = this.userState.getCurrentUser();
+    this.currentUser = this.userService.currentUser;
   }
 
   /**
@@ -166,13 +149,11 @@ public sortBy(sort) {
    */
   public checkCloseFilters() {
     this.passwordManagerService.closeFilter.subscribe(() => {
+      console.log('0000000');
       this.isMobileFilterShowing = false
     } )
   }
 
-  /**
-   * destroy password manager component
-   */
   ngOnDestroy() {
     this.apiPasswordManagerService.deleteSubscription();
   }
