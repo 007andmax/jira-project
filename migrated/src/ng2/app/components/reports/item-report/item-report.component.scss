@@ -29,7 +29,13 @@
 /deep/.dark-dropdown .report-caret-icon,
 /deep/.light-dropdown .report-caret-icon,
 /deep/.grey-dropdown .report-caret-icon,
-/deep/.run-report-content .icn-remove-ol{
+/deep/.run-report-content .icn-remove-old{
   top: 50% !important;
   transform: translateY(-3px);
 }
+
+/deep/#typeahead-focus1 ~ .loading.xs {
+  top: -3px !important;
+}
+
+
