@@ -22,6 +22,7 @@ export class ReportMenuComponent implements OnInit {
   yearToDate = false;
   @Output() getReport = new EventEmitter<any>();
   @Output() onRequest = new EventEmitter<any>();
+  @Output() onSelectedClient = new EventEmitter<any>();
   @ViewChild('dp') datePicker: any;
   constructor(private reportsService: ReportsService, private reportsStateService: ReportsStateService) { }
 
@@ -67,8 +68,8 @@ export class ReportMenuComponent implements OnInit {
       //  this.getCompanyDevices();
 
     }
-
-
+console.log("this.selectClient",this.selectedClient);
+this.onSelectedClient.emit(this.selectedClient);
     //  this.services = [new ForCreateService()];
     // this.cd.detectChanges();
     // this.reportsStateService.onChangeGlNumber(this.glNumber);

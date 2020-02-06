@@ -2,42 +2,13 @@
   <p class="report-title">GL number Report</p>
   <i class="back-page" ui-sref="reports"></i>
   <div>
-   <app-report-menu (onRequest)="onRequest($event)" (getReport)="getReport($event)"></app-report-menu>
+   <app-report-menu (onSelectedClient)="onSelectedClient($event)" (onRequest)="onRequest($event)" (getReport)="getReport($event)"></app-report-menu>
   </div>
 
   <div class="product-list___ticket">
-    <div class="product-list-report-btn product-list-report-btn-ticket clearfix">
-
-
-      <div class="product-report-btn" uib-dropdown keyboard-nav="true" uib-tooltip="export" tooltip-placement="top" (click)="getPdfIdFromRest(ACION_DOWNLOAD_PDF)">
-        <div uib-dropdown-toggle style="height: 100%;width: 100%;">
-          <img src="../../../../../ng1/images/new-icons/export-icon.png" alt="export">
-        </div>
-        <ul uib-dropdown-menu >
-          <li class="open-pdf-btn " >PDF</li>
-          <li   class="open-csv-btn">CSV</li>
-        </ul>
-      </div>
-      <div class="product-report-btn" uib-tooltip="print" tooltip-placement="top" (click)="getPdfIdFromRest(ACION_OPEN_PDF)">
-        <img src="../../../../../ng1/images/new-icons/printer-icon.png" alt="print">
-      </div>
-      <div class="product-report-btn dropdown-email"
-      uib-tooltip="send mail"
-      tooltip-placement="top"
-      modal-window-button="/ng1/scripts/core/header/create-new-entity/create-email/create-email.tpl.html"
-      modal-window-class="create-popup modal-create-ticket"
-      mw-controller="quicktech.createEmailCtrl">
-   <div style="height: 100%;width: 100%;">
-     <img src="ng1/images/new-icons/message-icon.png" alt="send mail to">
-   </div>
- </div>
-    
-  
-     
-  
-    </div>
+  <app-report-additional-actions [selectedClient]="selectedClient"></app-report-additional-actions>
     <div class="loading" *ngIf="loadingInProgress"></div>
-    <div class="product-list-ticket acc-col" style="height: 100%" *ngIf="!loadingInProgress">
+    <div id="product-list-ticket-data" class="product-list-ticket acc-col" style="height: 100%" *ngIf="!loadingInProgress">
       <div class="report-header">
         <h1>Accounts Receivable</h1>
         <div class="company-info">

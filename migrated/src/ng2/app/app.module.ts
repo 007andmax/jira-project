@@ -109,6 +109,8 @@ import { ItemReportComponent } from './components/reports/item-report/item-repor
 import { OverviewReportComponent } from './components/reports/overview-report/overview-report.component';
 import { ReportMenuComponent } from './components/reports/report-menu/report-menu.component';
 import { SelectComponent } from './components/shared/select/select.component';
+import { ReportAdditionalActionsComponent } from './components/reports/report-additional-actions/report-additional-actions.component';
+import { ReportSendEmailComponent } from './components/reports/report-additional-actions/report-send-email/report-send-email.component';
 
 
 /**
@@ -256,7 +258,9 @@ angular.module('quicktech')
     ItemReportComponent,
     OverviewReportComponent,
     ReportMenuComponent,
-    SelectComponent
+    SelectComponent,
+    ReportAdditionalActionsComponent,
+    ReportSendEmailComponent
   ],
   imports: [
     BrowserModule,
@@ -355,7 +359,8 @@ angular.module('quicktech')
     AlertComponent,
     ReportsComponent,
     ItemReportComponent,
-    OverviewReportComponent
+    OverviewReportComponent,
+    ReportSendEmailComponent
     // RecurringTicketsComponent
   ],
   providers: [

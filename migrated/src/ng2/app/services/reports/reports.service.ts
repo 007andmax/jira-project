@@ -21,4 +21,8 @@ export class ReportsService {
   public getReportByGlNumber(data) {
     return this.http.post(this.apiUrl + `reports/sales/byGlNumber`, data);
   }
+
+  public sendMessage (data) {
+    return this.http.post(this.apiUrl + `reports/email`, data);
+  }
 }

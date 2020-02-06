@@ -79,7 +79,7 @@
         }
 
         function getPdfIdFromRest() {
-          console.log('getPdfIdFromRest');
+          console.log('getPdfIdFromRest',attrs.selector);
           disableOpenPdfBtn();
 
           var source = $(attrs.selector);
