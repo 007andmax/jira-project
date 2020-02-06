@@ -10,6 +10,11 @@ export class ReportsService {
   private apiUrl = environment.apiUrl;
   constructor(private http: HttpClient ) { }
 
+  public getPdfUrl(data) {
+    return this.http.post(this.apiUrl + `reports/pdf`, data);
+    
+  }
+
   public getAccountingStartDate () {
     return this.http.get(this.apiUrl + `settings/companyProfile/accountingStartDate`);
   }
