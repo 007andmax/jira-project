@@ -171,6 +171,17 @@
         Utils.handleCallback(future, callback);
       }
 
+      function getGlNumbers(callback) {
+        
+
+        var future = $http({
+          url: '/glNumber',
+          method: 'GET'
+        });
+
+        Utils.handleCallback(future, callback);
+      }
+
       function move(mapping, callback) {
         if (!mapping) throw 'mapping is required argument!';
 
@@ -267,7 +278,7 @@
       }
 
       return {
-
+        getGlNumbers:getGlNumbers,
         getAllByCompany: getAllByCompany,
         getServicesData: getServicesData,
         getSpecialServices: getSpecialServices,

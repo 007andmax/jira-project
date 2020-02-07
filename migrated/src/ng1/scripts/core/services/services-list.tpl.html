@@ -30,6 +30,10 @@
       <span class="sort-span">Is Default<i class="icn-sm sort-icon icn-sort"
                                             ng-class="{'rotate': orderServices.reverse, 'active': orderServices.field === 'canUseInTicket'}"></i></span>
     </div>
+    <div class="col-5 is-billable" ng-click="setOrderForServices('canUseInTicket')">
+      <span class="sort-span">GL #<i class="icn-sm sort-icon icn-sort"
+                                            ng-class="{'rotate': orderServices.reverse, 'active': orderServices.field === 'canUseInTicket'}"></i></span>
+    </div>
   </li>
 
   <li ng-repeat="service in services | orderBy : orderByForServices : orderServices.reverse"
@@ -39,7 +43,7 @@
 
     <div class="intermediate-parent-elem">
 
-      <div class="col-1">
+      <div class="col-5">
         <div>{{ service.name }}</div>
       </div>
 
@@ -71,6 +75,23 @@
                  ng-click="onChangeDefaultState()">
           <span class="control-indicator"></span>
         </label>
+      </div>
+
+      <div class="col-5 is-billable">
+        <div  
+      
+             uib-dropdown  >
+             <span uib-dropdown-toggle>  {{(service.glNumber) ? service.glNumber.glNumber : 'Select GL number'}}</span>
+         
+      
+             <ul class="dropdown-account-type" uib-dropdown-menu style="width: 100%; z-index: 9999;">
+              <li ng-repeat="item in glNumbersList"
+                  ng-click="setGlNumber(item,service)">
+                <a tabindex="-1" href="javascript:void(0)">{{ item.glNumber }}</a>
+              </li>
+            </ul>
+        </div>
+      
       </div>
 
       <div class="col-5" ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')">
