@@ -2,8 +2,8 @@ import { reqGlNumber } from 'src/ng2/app/interfaces/reports/req-gl-number';
 import { GlNumberItem } from './gl-number-item';
 
 export class GlNumber {
-    startDate: string;
-    endDate: string;
+    startDate: string = '';
+    endDate: string = '';
     clientCompanyId: string;
     monthlyDetailed: boolean = false;
     dates: Array<string> = [];
@@ -15,6 +15,11 @@ export class GlNumber {
     }
     public clearList() {
         this.list = [];
+    }
+
+    public resetDates() {
+        this.startDate = '';
+        this.endDate = '';
     }
 
 

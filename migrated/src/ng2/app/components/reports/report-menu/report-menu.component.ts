@@ -6,6 +6,7 @@ import { ReportsService } from 'src/ng2/app/services/reports/reports.service';
 import { GlNumberItem } from '../class/gl-number-item';
 import { ReportsStateService } from 'src/ng2/app/states/reports/reports-state.service';
 import { MultiDatepickerComponent } from '../../shared/multi-datepicker/multi-datepicker.component';
+import { ReportValidate } from '../class/report-validate';
 
 @Component({
   selector: 'app-report-menu',
@@ -13,13 +14,14 @@ import { MultiDatepickerComponent } from '../../shared/multi-datepicker/multi-da
   styleUrls: ['./report-menu.component.scss']
 })
 export class ReportMenuComponent implements OnInit {
-  validate: Validate = new Validate();
+  
   selectedClient = null;
   className = '';
   glNumber: GlNumber = new GlNumber();
   loadingInProgress: boolean = true;
   listDetailed = ['Year to date', 'Monthly'];
   yearToDate = false;
+  validate:ReportValidate = new ReportValidate();
   @Output() getReport = new EventEmitter<any>();
   @Output() onRequest = new EventEmitter<any>();
   @Output() onSelectedClient = new EventEmitter<any>();
@@ -41,16 +43,21 @@ export class ReportMenuComponent implements OnInit {
         console.log("fffff");
         this.datePicker.clearDate();
         this.datePicker.setDisabled(true);
+     
         this.yearToDate = true;
       } else {
         this.datePicker.setDisabled(false);
       }
       this.glNumber.setMonthlyDetailed(false);
     }
+    this.glNumber.resetDates();
+    this.validate.resetDates();
+    this.validate.resetMonthlyDetailed();
+
     //this.reportsStateService.onChangeGlNumber(this.glNumber);
   }
   public selectClient(selectClient) {
-    this.validate.resetCompany();
+   
     if (selectClient === 'null') {
 
       //  this.recurringState.getCreateTicket().setCompany(null);
@@ -78,7 +85,11 @@ this.onSelectedClient.emit(this.selectedClient);
 
   
   getReportByGlNumber() {
+   
+    if (!this.validate.isValidate(this.glNumber.monthlyDetailed,this.yearToDate,this.glNumber.startDate,this.glNumber.endDate)) return;
+   
     this.onRequest.emit(true);
+    
     if (this.yearToDate) {
       this.reportsService.getAccountingStartDate().subscribe((res: any) => {
         console.log("res", res.accountingStartDate);

@@ -8,15 +8,20 @@
         </button>
 
         <div class="form-group content custom-width dropdown-height">
-          <app-select-client-company [blockEditMode]="true" [valid]="validate.getCompany()" style="width: 75%;"
+          <app-select-client-company [blockEditMode]="true"   style="width: 75%;"
             class="light-dropdown" [filter]="true" (selectedItem)="selectClient($event)"></app-select-client-company>
         </div>
         <div class="form-group content">
-        
+          <mat-error *ngIf="!validate.getDates() && validate.geMonthlyDetailed()">
+            Please select the dates
+          </mat-error>
             <app-multi-datepicker #dp (selectedDate)="filterByDate($event)"></app-multi-datepicker>
          
         </div>
         <div class="form-group content">
+          <mat-error *ngIf="!validate.getDates() && !validate.geMonthlyDetailed()">
+            Please select any dates or Year to date interval
+          </mat-error>
           <div class="input-field">
             <app-select [placeholder]="'Select filter'" [list]="listDetailed" (onChange)="onSelectDetailed($event)"></app-select>
           </div>
