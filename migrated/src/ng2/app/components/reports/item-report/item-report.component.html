@@ -1,6 +1,6 @@
 <div class="product-list-report ticket-report">
-  <p class="report-title">GL number Report</p>
-  <i class="back-page" ui-sref="reports"></i>
+  <p class="report-title">Income accounts Report</p>
+  <i class="back-page" (click)="back()"></i>
   <div>
    <app-report-menu (onSelectedClient)="onSelectedClient($event)" (onRequest)="onRequest($event)" (getReport)="getReport($event)"></app-report-menu>
   </div>

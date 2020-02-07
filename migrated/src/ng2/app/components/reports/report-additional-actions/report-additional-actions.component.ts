@@ -37,7 +37,7 @@ export class ReportAdditionalActionsComponent implements OnInit {
   }
   getPdfIdFromRest(action) {
     var dto = {
-      fileName: 'gl_number',
+      fileName: 'income_accounts',
       content: this.reportsStateService.parseReportContent(),
       id: null,
       orientation: 'PORTRAIT'
@@ -45,7 +45,7 @@ export class ReportAdditionalActionsComponent implements OnInit {
     this.reportsService.getPdfUrl(dto).subscribe((data: any) => {
       console.log("data", data);
       if (action === ACION_OPEN_PDF) window.open(data.url);
-      if (action === ACION_DOWNLOAD_PDF) this.appService.downloadByUrl(`${data.url}?isDownload=true`, 'gl_number');
+      if (action === ACION_DOWNLOAD_PDF) this.appService.downloadByUrl(`${data.url}?isDownload=true`, 'income_accounts');
     })
   }
   onSelectExport(item) {

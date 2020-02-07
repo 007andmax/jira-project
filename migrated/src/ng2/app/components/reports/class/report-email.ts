@@ -1,7 +1,7 @@
 export class ReportEmail {
-    content:string = "GL number"
+    content:string = "Income accounts"
     emails:Array<string>;
-    fileName:string = "gl_number";
+    fileName:string = "income_accounts";
     orientation:string = 'PORTRAIT';
     note:string;
     constructor() {}

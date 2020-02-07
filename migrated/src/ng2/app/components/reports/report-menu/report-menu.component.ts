@@ -149,10 +149,15 @@ this.onSelectedClient.emit(this.selectedClient);
   */
   public filterByDate(value) {
     if (value.start !== '' && value.end !== '') {
+      
       this.glNumber.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.glNumber.setEndDate(moment(value.end).format('YYYY/MM/DD'));
+      this.validate.resetDates();
+      this.validate.resetMonthlyDetailed();
+    } else {
+      this.glNumber.resetDates();
     }
-
+  
     //  this.reportsStateService.onChangeGlNumber(this.glNumber);
   }
 }

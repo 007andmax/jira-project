@@ -63,5 +63,15 @@ export class ItemReportComponent implements OnInit {
   perseEndDate() {
     return moment(this.glNumber.endDate).format('DD MMM YYYY')
   }
+  back() {
+   
+    let body = document.querySelector('.left-panel__category-wrap');
+    var link = document.createElement('a');
+    body.appendChild(link);
+    link.href = `#/reports`;
+    var e = document.createEvent('MouseEvents');
+    e.initEvent('click', true, true);
+    link.dispatchEvent(e);
+  }
 
 }

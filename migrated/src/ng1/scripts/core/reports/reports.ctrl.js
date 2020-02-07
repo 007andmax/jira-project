@@ -109,6 +109,8 @@ $scope.ticket_id = "1234567";
       };
 $scope.setReport = function (report) {
 localStorage.setItem('report',report);
+//$rootScope.$broadcast('hiddenLeftPanel', null);
+
 }
       $scope.getProducts = function(ticket) {
         return ticket.updates && ticket.updates.filter(function(el) {

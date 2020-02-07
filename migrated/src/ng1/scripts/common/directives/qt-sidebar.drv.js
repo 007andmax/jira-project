@@ -20,7 +20,8 @@
 
           function initLeftPanel(e) {
             var windowWidth = window.outerWidth;
-            if (!$state.is('settings') && $state.current.url.indexOf('reports') === -1) {
+            console.log("$state.current.url",$state.current.url);
+            if (!$state.is('settings') && $state.current.url.indexOf('reports') === -1 && $state.current.url.indexOf('report') === -1) {
               $rootScope.isLeftPanelHidden = windowWidth <= 1024;
 
               if ($rootScope.isLeftPanelHidden) {
