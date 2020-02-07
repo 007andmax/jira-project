@@ -6,6 +6,9 @@ export class ReportEmail {
     note:string;
     constructor() {}
 
+    public setContent(data) {
+        this.content = data;
+    }
     public setEmails(data) {
         this.emails = data;
 

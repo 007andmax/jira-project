@@ -9,6 +9,7 @@ import { FilesInfoItem } from '../../../shared/draft-email/class/files-Info-item
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ReportsService } from 'src/ng2/app/services/reports/reports.service';
 import { ReportEmail } from '../../class/report-email';
+import { ReportsStateService } from 'src/ng2/app/states/reports/reports-state.service';
 
 @Component({
   selector: 'app-report-send-email',
@@ -44,6 +45,7 @@ export class ReportSendEmailComponent implements OnInit {
     private draftEmailService: DraftEmailService, public cd: ChangeDetectorRef,
     public activeModal: NgbActiveModal,
     private reportsService: ReportsService,
+    private reportsStateService:ReportsStateService
   ) { }
 
   ngOnInit() {
@@ -122,7 +124,7 @@ export class ReportSendEmailComponent implements OnInit {
   }
   onSend() {
     
-     
+    this.draftEmail.setContent(this.reportsStateService.parseReportContent());
       this.draftEmail.setNote(this.messageContent);
    
 
