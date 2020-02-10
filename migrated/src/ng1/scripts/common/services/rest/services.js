@@ -127,6 +127,28 @@
         delete data[companyId];
       }
 
+      function resetContractGlNumber (id,contractType,callback) {
+       
+
+        var future = $http({
+          url: `/glNumber/resetContract/${contractType}`,
+          method: 'POST'
+        });
+  
+        Utils.handleCallback(future, callback);
+        }
+
+      function setContractGlNumber (id,contractType,callback) {
+       
+
+      var future = $http({
+        url: `/glNumber/${id}/${contractType}`,
+        method: 'POST'
+      });
+
+      Utils.handleCallback(future, callback);
+      }
+
       function save(service, callback) {
 
         if (!service) throw 'service is required!';
@@ -278,6 +300,8 @@
       }
 
       return {
+        resetContractGlNumber : resetContractGlNumber,
+        setContractGlNumber: setContractGlNumber,
         getGlNumbers:getGlNumbers,
         getAllByCompany: getAllByCompany,
         getServicesData: getServicesData,

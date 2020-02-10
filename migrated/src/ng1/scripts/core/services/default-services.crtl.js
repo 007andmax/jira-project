@@ -34,13 +34,59 @@
             console.log("resp", resp);
             var index = $scope.services.findIndex(item => item.versionedId.id === saveService.versionedId.id);
             if (index > -1) $scope.services[index].glNumber = glNumber;
-            console.log("$scope.services[index]",$scope.services[index]);
+            console.log("$scope.services[index]", $scope.services[index]);
             $rootScope.$broadcast('newServiceHasBeenCreated', resp.id);
 
           });
 
 
         };
+        $scope.checkClearContract = function (contractType) {
+          var index = $scope.glNumbersList.findIndex(item => item[contractType] === true);
+          if (index > -1) return true;
+          return false;
+        }
+        $scope.resetContract = function (contractType) {
+          var id;
+          var index = $scope.glNumbersList.findIndex(item => item[contractType] === true);
+          if (index > -1) id = $scope.glNumbersList[index].id;
+          ServicesService.resetContractGlNumber(id, contractType, function (data) {
+            console.log("data", data);
+            $scope.glNumbersList[index][contractType] = false;
+            //updateGlNumberContract(data,contractType,true);
+
+          })
+        }
+        $scope.setGlNumberContract = function (id, contractType) {
+          ServicesService.setContractGlNumber(id, contractType, function (data) {
+            console.log("data", data);
+            updateGlNumberContract(data, contractType, true);
+
+          })
+        }
+
+        function updateGlNumberContract(data, contractType, value) {
+          $scope.glNumbersList.forEach(element => {
+            if (element.id === data.id) {
+              element[contractType] = true;
+            } else {
+              element[contractType] = false;
+            }
+
+          });
+
+        }
+
+        $scope.getContracts = function (field) {
+          var glNumber = "Select GL number";
+          $scope.glNumbersList.forEach(element => {
+            if (element[field]) glNumber = element.glNumber;
+
+          });
+          return glNumber;
+        }
+
+
 
 
         $scope.$on(CompaniesService.getCurrentCompany().id + '-showService', function (event, serviceId) {
