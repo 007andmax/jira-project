@@ -82,7 +82,10 @@
       
              uib-dropdown  >
              <span uib-dropdown-toggle>  {{(service.glNumber) ? service.glNumber.glNumber : 'Select GL number'}}</span>
-         
+             <span class="x-mark"  ng-if="service.glNumber">
+              <i class="icn-sm icn-remove-old" ng-click="resetGlNumber(service)"  tooltip="clear"
+                 tooltip-placement="top"></i>
+            </span>
       
              <ul class="dropdown-account-type" uib-dropdown-menu style="width: 100%; z-index: 9999;">
               <li ng-repeat="item in glNumbersList"

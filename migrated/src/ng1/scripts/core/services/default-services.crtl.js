@@ -41,6 +41,24 @@
 
 
         };
+        $scope.resetGlNumber = function (service) {
+          var saveService = angular.copy(service);
+          saveService.taxIds = saveService.taxes.map(function (tax) {
+            return tax.id;
+          });
+          saveService.taxes = undefined;
+
+          saveService.glNumber = null;
+
+          ServicesService.save(saveService, function (resp) {
+            console.log("resp", resp);
+            var index = $scope.services.findIndex(item => item.versionedId.id === saveService.versionedId.id);
+            if (index > -1) $scope.services[index].glNumber = null;
+          
+            $rootScope.$broadcast('newServiceHasBeenCreated', resp.id);
+
+          });
+        }
         $scope.checkClearContract = function (contractType) {
           var index = $scope.glNumbersList.findIndex(item => item[contractType] === true);
           if (index > -1) return true;

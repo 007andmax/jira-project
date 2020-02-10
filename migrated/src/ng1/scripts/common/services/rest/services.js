@@ -127,6 +127,18 @@
         delete data[companyId];
       }
 
+      function createGlNumber (data,callback) {
+       
+
+        var future = $http({
+          url: `/glNumber`,
+          method: 'POST',
+          data: data
+        });
+  
+        Utils.handleCallback(future, callback);
+        }
+
       function resetContractGlNumber (id,contractType,callback) {
        
 
@@ -300,6 +312,7 @@
       }
 
       return {
+        createGlNumber: createGlNumber,
         resetContractGlNumber : resetContractGlNumber,
         setContractGlNumber: setContractGlNumber,
         getGlNumbers:getGlNumbers,

@@ -4,18 +4,42 @@
 
   angular.module('quicktech').controller('quicktech.createProductCtrl',
     ['$scope', 'ProductsService', 'CompaniesService', '$rootScope', 'quicktech.common.services.PermissionsService',
-      'TaxesService', '$timeout',
-    function ($scope, ProductsService, CompaniesService, $rootScope, PermissionsService, TaxesService, $timeout) {
+      'TaxesService', '$timeout','ServicesService',
+    function ($scope, ProductsService, CompaniesService, $rootScope, PermissionsService, TaxesService, $timeout,ServicesService) {
 
       $scope.discountAmountMsxLength;
       $scope.newCategoryNamePattern = /^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,100}$/;
-
+      $scope.glNumbersList = [];
+      $scope.isChangeGlNumber = false;
+      ServicesService.getGlNumbers(function (data) {
+        $scope.glNumbersList = data;
+      })
       $scope.$watch('currentUser.permissions', function (permissions) {
         if (permissions && !PermissionsService.isAllowed('MANAGE_PRODUCTS')) {
           $scope.closeWindow();
         }
       });
-
+      $scope.createGlNumber = function () {
+        var data = {
+          glNumber: $scope.editProduct.glNumber,
+          description: ""
+        };
+        ServicesService.createGlNumber(data, function (res) {
+          console.log("res", res);
+          $scope.glNumbersList.push(res);
+          $scope.isChangeGlNumber = false;
+        })
+      }
+      $scope.changeGlNumber = function () {
+        console.log("editProduct.glNumber",$scope.editProduct.glNumber);
+        if ($scope.editProduct.glNumber) {
+          var index = $scope.glNumbersList.findIndex(item => item.glNumber === $scope.editProduct.glNumber);
+          $scope.isChangeGlNumber = (index > -1) ? false : true;
+        } else {
+          $scope.isChangeGlNumber = false;
+        }
+       
+      }
       $scope.showModal = true;
 
       $timeout(function() {
@@ -159,7 +183,14 @@
         if (form.$valid || checkValid(form)) {
 
           $scope.disabledSaveChangeButton = true;
-
+          var glNumber = null;
+          if ($scope.editProduct.glNumber) {
+            var index = $scope.glNumbersList.findIndex(item => item.glNumber === $scope.editProduct.glNumber);
+          
+            glNumber = (index > -1) ? { id: $scope.glNumbersList[index].id } : null
+          } else {
+            glNumber = null;
+          }
           
           var changedProduct = {
             versionedId: $scope.editProduct.versionedId,
@@ -171,7 +202,7 @@
             companyId: $scope.editProduct.company ? $scope.editProduct.company.id : undefined,
             taxIds: [],
             categoryId: $scope.editProduct.category.id,
-            glNumber: $scope.editProduct.glNumber
+            glNumber: glNumber
           };
           for(var i=0; i<$scope.editProduct.taxes.length; i++) {
             changedProduct.taxIds.push($scope.editProduct.taxes[i].id)
