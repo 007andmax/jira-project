@@ -12,26 +12,27 @@
             class="light-dropdown" [filter]="true" (selectedItem)="selectClient($event)"></app-select-client-company>
         </div>
         <div class="form-group content">
+          <app-multi-datepicker #dp (selectedDate)="filterByDate($event)"></app-multi-datepicker>
           <mat-error *ngIf="!validate.getDates() && validate.geMonthlyDetailed()">
             Please select the dates
           </mat-error>
-            <app-multi-datepicker #dp (selectedDate)="filterByDate($event)"></app-multi-datepicker>
          
         </div>
         <div class="form-group content">
-          <mat-error *ngIf="!validate.getDates() && !validate.geMonthlyDetailed()">
-            Please select any dates or Year to date interval
-          </mat-error>
           <div class="input-field">
             <app-select [placeholder]="'Select filter'" [list]="listDetailed" (onChange)="onSelectDetailed($event)"></app-select>
           </div>
+  
+          <mat-error *ngIf="!validate.getDates() && !validate.geMonthlyDetailed()">
+            Please select any dates or Year to date interval
+          </mat-error>
         </div>
       </div>
     </div>
   </div>
   <div class="new-reports-btn">
-    <button class="form-group btn btn-success" (click)="getReportByGlNumber()">Get
-      Report
+    <button class="form-group btn btn-success" (click)="getReportByGlNumber()">
+      Get Report
     </button>
   </div>
 </div>

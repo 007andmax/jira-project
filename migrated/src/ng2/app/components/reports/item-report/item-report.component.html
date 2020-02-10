@@ -13,7 +13,7 @@
         <h1>Income accounts</h1>
         <div class="company-info">
           <h3  [textContent]="(selectedClient) ? selectedClient.name : 'All companies'"></h3>
-            <p><span [textContent]="perseStartDate()"></span> - <span [textContent]="perseEndDate()"></span></p>  
+            <p><span [textContent]="perseStartDate()"></span> - <span [textContent]="perseEndDate()"></span></p>
         </div>
       </div>
      <!--  <div class="header-product-list-ticket" >
@@ -22,21 +22,21 @@
         <p ng-if="reportAccountsReceivable.type ==='DETAILED' ">Account Recivable for <span [textContent]="(selectedClient) ? selectedClient.name : ''"></span>
         </p>
       </div>-->
-      <div  >
+      <div>
         <!--REPORT-->
         <ul class="acc-col">
           <li class="top-product-list-ticket clearfix">
             <div class="col-md-3">
-              <strong  >Company Name</strong>
+              <strong>Company Name</strong>
             </div>
             <div class="col-md-3"><strong>Description</strong></div>
             <ng-template ngFor let-item [ngForOf]="glNumber.getDate()"  [ngForTrackBy]="trackByIndex">
               <div class="col-md-1"><strong [textContent]="item"></strong></div>
             </ng-template>
            
-            <div class="col-md-2"><strong>Total</strong></div>
+            <div class="col-md-2 text-right"><strong>Total</strong></div>
           </li>
-          <ng-template ngFor let-item [ngForOf]="glNumber.list"    >
+          <ng-template ngFor let-item [ngForOf]="glNumber.list">
             <li class="content-product-list-ticket clearfix"
              >
           <div class="col-md-3">
@@ -50,9 +50,7 @@
               <div  [textContent]="'$ ' + itemSum"></div>
             </div>
           </ng-template>
-         
-          
-          <div class="col-md-2">
+          <div class="col-md-2 text-right">
             <div  [textContent]="'$ ' + item.total"></div>
           </div>
         </li>
