@@ -11,7 +11,8 @@
         $scope.isChangeGlNumber = false;
         $scope.taxes = TaxesService.getAll();
         ServicesService.getGlNumbers(function (data) {
-          $scope.glNumbersList = data;
+          $scope.glNumbersList = data.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
+          1 : ((b.glNumber.toLowerCase() > a.glNumber.toLowerCase()) ? -1 : 0));
         })
         $scope.showModal = false;
 

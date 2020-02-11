@@ -12,7 +12,8 @@
       $scope.glNumbersList = [];
       $scope.isChangeGlNumber = false;
       ServicesService.getGlNumbers(function (data) {
-        $scope.glNumbersList = data;
+        $scope.glNumbersList = data.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
+      1 : ((b.glNumber.toLowerCase() > a.glNumber.toLowerCase()) ? -1 : 0));
       })
       $scope.$watch('currentUser.permissions', function (permissions) {
         if (permissions && !PermissionsService.isAllowed('MANAGE_PRODUCTS')) {
@@ -81,6 +82,7 @@
 
 
         $scope.editProduct = angular.copy(origin);
+        console.log("$scope.editProduct",$scope.editProduct);
         $scope.editProduct.taxes = (origin.taxIds || []).map(function(taxId) {
           return $scope.taxes.find(function(el) {
             return el.id === taxId;

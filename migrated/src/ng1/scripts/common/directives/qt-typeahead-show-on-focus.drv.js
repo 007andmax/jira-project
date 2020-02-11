@@ -11,13 +11,29 @@
 
           var secretEmptyKey = '[$empty$]';
 
-          element.on('focus', function () {
+        /*  element.on('focus', function () {
+            console.log("focus");
             $timeout(function () {
               if (!scope.$eval(attrs.ngModel)) {
                 modelCtrl.$setViewValue(modelCtrl.$viewValue + ' ');
+                console.log("modelCtrl.$viewValue",modelCtrl.$viewValue);
               }
               $(element).trigger('input');
               $(element).trigger('change'); // for IE
+            });
+          });*/
+
+          element.on('click', function () {
+            console.log("click");
+            console.log("modelCtrl.$viewValue",modelCtrl.$viewValue);
+            $timeout(function () {
+            /*  if (!scope.$eval(attrs.ngModel)) {
+                modelCtrl.$setViewValue(modelCtrl.$viewValue + ' ');
+                console.log("modelCtrl.$viewValue",modelCtrl.$viewValue);
+              }*/
+              modelCtrl.$setViewValue(modelCtrl.$viewValue + ' ');
+              $(element).trigger('input');
+              $(element).trigger('change'); // for IE*/
             });
           });
 

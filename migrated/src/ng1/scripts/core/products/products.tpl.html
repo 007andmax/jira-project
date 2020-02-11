@@ -64,7 +64,7 @@
 
           <div class="col-md-1">{{ product.ilc}}</div>
 
-          <div class="col-md-1">{{product.glNumber}}</div>
+          <div class="col-md-1">{{(product.glNumber.glNumber) ? product.glNumber.glNumber : ''}}</div>
 
           <div class="col-md-1 btn-actions"
                uib-dropdown
