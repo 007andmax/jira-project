@@ -234,7 +234,7 @@
             <tr *ngFor="let techUser of userlist; let i = index">
               <td class="tech-user">
                 <div class="t-user">
-                  <span class="user-dp" *ngIf="techUser.avatar !== null">
+                  <span class="user-dp archiveUser" *ngIf="techUser.avatar !== null">
                     <span class="user-tech-dp">
                       <img
                         *ngIf="techUser.isEmailVerified"
@@ -391,7 +391,7 @@
 
         <div class="static-link">
           <label class="innert-links" for="profile-dp">{{
-            techUser && techUser.avatar ? "Change Photo" : "Upload Avatar"
+            fileAvatar ? "Change Photo" : "Upload Avatar"
           }}</label>
 
           <label
