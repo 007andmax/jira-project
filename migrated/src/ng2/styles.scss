@@ -2194,4 +2194,26 @@ ngb-datepicker {
   }
 }
 
+.quicktech__table {
+  width: 100%;
+  font-weight: 700;
+  font-size: 12px;
+  font-family: 'Graphik Medium', sans-serif;
+}
+
+.quicktech__table thead {
+  text-transform: uppercase;
+
+}
+
+.quicktech__table thead th,
+.quicktech__table tbody td {
+  padding: 15px 8px;
+  border-bottom: 1px solid #d3d8e1;
+}
+
+.quicktech__table tbody td {
+  font-weight: 500;
+}
+
 @import './assets/styles/mobile.scss';

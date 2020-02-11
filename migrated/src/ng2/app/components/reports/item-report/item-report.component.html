@@ -6,9 +6,9 @@
   </div>
   <app-report-additional-actions [selectedClient]="selectedClient"></app-report-additional-actions>
   <div class="loading" *ngIf="loadingInProgress"></div>
-  <div class="product-list___ticket" id="product-list-ticket-data">
+  <div class="product-list___ticket" id="product-list-ticket-data" >
 
-    <div  class="product-list-ticket acc-col" style="height: 100%" *ngIf="!loadingInProgress">
+    <div  class="product-list-ticket acc-col" style="height: 100%; width: 1180px" *ngIf="!loadingInProgress">
      <div class="report-header">
         <h1>Income accounts</h1>
         <div class="company-info">
@@ -24,39 +24,72 @@
       </div>-->
       <div>
         <!--REPORT-->
-        <ul class="acc-col">
-          <li class="top-product-list-ticket clearfix">
-            <div class="col-md-3">
-              <strong>Company Name</strong>
-            </div>
-            <div class="col-md-3"><strong>Description</strong></div>
-            <ng-template ngFor let-item [ngForOf]="glNumber.getDate()"  [ngForTrackBy]="trackByIndex">
-              <div class="col-md-1"><strong [textContent]="item"></strong></div>
-            </ng-template>
-           
-            <div class="col-md-2 text-right"><strong>Total</strong></div>
-          </li>
+        
+        
+        <table class="quicktech__table" >
+          <thead >
+            <tr>
+              <th>GL Number</th>
+              <th>Description</th>
+              <ng-template ngFor let-item [ngForOf]="glNumber.getDate()"  [ngForTrackBy]="trackByIndex">
+                <th [textContent]="item"></th>
+              </ng-template>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
           <ng-template ngFor let-item [ngForOf]="glNumber.list">
-            <li class="content-product-list-ticket clearfix"
-             >
-          <div class="col-md-3">
-            <div  [textContent]="item.glNumber"></div>
-          </div>
-          <div class="col-md-3">
-            <div  [textContent]="item.description"></div>
-          </div>
-          <ng-template ngFor let-itemSum [ngForOf]="item.sum"  >
-            <div class="col-md-1">
-              <div  [textContent]="'$ ' + itemSum"></div>
-            </div>
+            <tr>
+              <td [textContent]="item.glNumber"></td>
+              <td [textContent]="item.description"></td>
+              <ng-template ngFor let-itemSum [ngForOf]="item.sum"  >
+                  <td  [textContent]="'$' + itemSum"></td>
+              </ng-template>
+              <td [textContent]="'$' + item.total"></td>
+            </tr>
           </ng-template>
-          <div class="col-md-2 text-right">
-            <div  [textContent]="'$ ' + item.total"></div>
-          </div>
-        </li>
-            </ng-template>
-      
-        </ul>
+          </tbody>
+        </table>
+        
+      <!-- Report       -->
+<!--        <ul class="acc-col">-->
+<!--          <li class="top-product-list-ticket clearfix">-->
+<!--            <div class="col-md-3">-->
+<!--              <strong>Company Name</strong>-->
+<!--            </div>-->
+<!--            <div class="col-md-3"><strong>Description</strong></div>-->
+<!--            <ng-template ngFor let-item [ngForOf]="glNumber.getDate()"  [ngForTrackBy]="trackByIndex">-->
+<!--              <div class="col-md-1"><strong [textContent]="item"></strong></div>-->
+<!--            </ng-template>-->
+<!--           -->
+<!--            <div class="col-md-2 text-right"><strong>Total</strong></div>-->
+<!--          </li>-->
+<!--      -->
+<!--      -->
+<!--      -->
+<!--      -->
+<!--      -->
+<!--          <ng-template ngFor let-item [ngForOf]="glNumber.list">-->
+<!--            <li class="content-product-list-ticket clearfix"-->
+<!--             >-->
+<!--          <div class="col-md-3">-->
+<!--            <div  [textContent]="item.glNumber"></div>-->
+<!--          </div>-->
+<!--          <div class="col-md-3">-->
+<!--            <div  [textContent]="item.description"></div>-->
+<!--          </div>-->
+<!--          <ng-template ngFor let-itemSum [ngForOf]="item.sum"  >-->
+<!--            <div class="col-md-1">-->
+<!--              <div  [textContent]="'$ ' + itemSum"></div>-->
+<!--            </div>-->
+<!--          </ng-template>-->
+<!--          <div class="col-md-2 text-right">-->
+<!--            <div  [textContent]="'$ ' + item.total"></div>-->
+<!--          </div>-->
+<!--        </li>-->
+<!--            </ng-template>-->
+<!--      -->
+<!--        </ul>-->
       </div>
      <!-- <div class="product-report-total-sales acc-col clearfix" ng-if="reportAccountsReceivable.lines">
        
@@ -217,3 +250,5 @@
     </div>
   </div>-->
 </div>
+
+
