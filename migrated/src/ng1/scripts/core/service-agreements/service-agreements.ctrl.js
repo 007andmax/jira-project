@@ -46,11 +46,21 @@ $scope.action = '';
         $scope.$on('$destroy', function() {
          
           terminateAndEdit();
+          copyContract();
         });
-      var terminateAndEdit =  $rootScope.$on('terminateAndEdit', function (evt, val) {
+        var terminateAndEdit =  $rootScope.$on('terminateAndEdit', function (evt, val) {
           $scope.setInitEditAgreement(true); 
           console.log('val',val);
           $scope.openModal(val.type, true, val);
+
+        });
+
+      var copyContract =  $rootScope.$on('copyContract', function (evt, val) {
+          $scope.setInitEditAgreement(true); 
+          $scope.action = 'COPY';
+       
+          
+          $scope.openModal('COPY', true, val)
 
         });
         AgreementsService.getAllServiceAgreements($scope, function (data) {
@@ -143,56 +153,6 @@ $scope.action = '';
           } else {
             $scope.openModal(contractType, editMode, companyForReadOnlyMode)
           }
-
-        /*  function openModal(contractType, editMode, companyForReadOnlyMode) {
-            if ($scope.allowToOpenAgreementModal) {
-              var template;
-              console.log('contractType',contractType);
-              switch (contractType) {
-                case ('CREATE_NEW'):
-                  template = '/ng1/scripts/core/service-agreements/modal/create-new-modal.tpl.html';
-                  break;
-                case ('HOURLY'):
-                  template = '/ng1/scripts/core/service-agreements/modal/hourly-service-modal.tpl.html';
-                  break;
-                case ('BLOCK_TIME'):
-                  template = '/ng1/scripts/core/service-agreements/modal/block-time-billing-modal.tpl.html';
-                  break;
-                case ('SERVICE_CONTRACT'):
-                  template = (companyForReadOnlyMode.billType === 'OTHER') ? '/ng1/scripts/core/service-agreements/modal/service-contract-modal-other.tpl.html' :  '/ng1/scripts/core/service-agreements/modal/service-contract-modal.tpl.html';
-                  break;
-                default:
-
-              }
-              $scope.allowToOpenAgreementModal = false;
-              var modalInstance = $uibModal.open({
-                templateUrl: template,
-                animation: true,
-                backdrop: false,
-                size: 'md',
-                controller: 'serviceAgreementsModalCtrl',
-                windowClass: 'create-popup margin-top-modal-dialog',
-                resolve: {
-                  companyData: {
-                    editMode: editMode,
-                    isEditContract: $scope.isEditContract,
-                    companyForReadOnlyMode: companyForReadOnlyMode,
-                    contractType: contractType,
-                    preSetupCompany: preSetupCompany,
-                    action:$scope.action
-                  }
-                }
-
-              });
-
-              modalInstance.opened.then(function () {
-                $scope.allowToOpenAgreementModal = true;
-              });
-            }
-
-          }*/
-
-
         };
         $scope.openModal = function(contractType, editMode, companyForReadOnlyMode,preSetupCompany) {
           if ($scope.allowToOpenAgreementModal) {
@@ -202,6 +162,10 @@ $scope.action = '';
               case ('CREATE_NEW'):
                 template = '/ng1/scripts/core/service-agreements/modal/create-new-modal.tpl.html';
                 break;
+
+                case ('COPY'):
+                  template = '/ng1/scripts/core/service-agreements/modal/create-new-modal.tpl.html';
+                  break;
               case ('HOURLY'):
                 template =   '/ng1/scripts/core/service-agreements/modal/hourly-service-modal.tpl.html';
                 break;
@@ -265,9 +229,15 @@ $scope.action = companyData.action;
           $scope.descriptionPattern = /^[0-9A-Za-z!@.)(/,|\\#$&*-_№;:='"?\-\s ]{1,255}$/;
           $scope.serviceNamePattern = /^[0-9A-Za-z!@.)(/,|\\#$&*-_№;:='"?\-\s ]{1,255}$/;
           $scope.quantityPattern = /^\+?[0-9]{0,10}$/;
-
           $scope.selectedContractType = 'CREATE_NEW';
           $scope.modlToShow = 'CREATE_NEW';
+          if (companyData.contractType === 'COPY') {
+            $scope.selectedContractType = companyData.companyForReadOnlyMode.type;
+            $scope.modlToShow = 'COPY';
+            companyData.contractType = companyData.companyForReadOnlyMode.type;
+          }
+        
+        
           $scope.blockHourlyChoice = false;
           $scope.reInitEndDateHourly = true;
           $scope.notAddedHourlyServiceError = false;
@@ -360,6 +330,8 @@ $scope.showErrorValidationCurrentDate = false;
               billable: true,
               taxes: addDefaultTaxes()
             };
+            console.log("$scope.isEditContract",$scope.isEditContract);
+            console.log("$companyData.contractType",companyData.contractType);
             if ($scope.isEditContract && companyData.contractType === 'HOURLY') {
               $scope.editContract.description = companyData.companyForReadOnlyMode.description;
               $scope.editContract.companyId = companyData.companyForReadOnlyMode.companyId;
@@ -451,7 +423,9 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
               return false;
             }
           };
-
+$scope.changeCompany = function () {
+  console.log('contractCompany',$scope.contractCompany);
+}
           $scope.disabledCreateButtonInCreateNewModal = function () {
             var disable = false;
             if ($scope.contractCompany) {
@@ -605,8 +579,13 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
           // function addZeroIfNeed(n) {
           //   return n < 10 ? '0' + n : '' + n;
           // }
+          
 
-
+          $scope.onInitCopy = function () {
+          console.log("contractCompany",$scope.contractCompany);
+          $scope.editContract.companyId = $scope.contractCompany.id;
+            $scope.modlToShow = $scope.selectedContractType;
+          };
           $scope.changeModalToShow = function () {
             $scope.action = 'CREATE';
             $scope.modlToShow = $scope.selectedContractType
@@ -1220,7 +1199,13 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
               $rootScope.$broadcast('terminateAndCopy', null);
             })
           };
-
+          $scope.copy = function () {
+           
+            $scope.closeModal();
+            
+            
+            $rootScope.$broadcast('copyContract', $scope.editContract);
+          };
           $scope.terminateAndEdit = function () {
            
             $scope.closeModal();

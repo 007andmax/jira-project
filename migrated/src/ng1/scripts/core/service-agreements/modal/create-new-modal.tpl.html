@@ -16,6 +16,7 @@
           </qt-dropdown-typehead>
             <input type="text" class="form-control has-dropdown" next-after-text-editor
                    ng-model="contractCompany" name="contractCompany" autocomplete="off"
+                 
                    uib-typeahead="company as company.name for company in companiesList | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
                    typeahead-min-length="0" qt-typeahead-show-on-focus ng-trim="false"
                    custom-style="{'max-height': '190px', 'overflow-y': 'auto', 'width': '100%'}" required disabled ng-show="preSetupCompany">
@@ -56,6 +57,70 @@
     </div>
     <div class="btn btn-success btn-create pull-right" custom-disabled="{{selectedContractType === 'CREATE_NEW' || disabledCreateButtonInCreateNewModal()}}"
          ng-click="changeModalToShow()">Create
+    </div>
+  </div>
+</div>
+
+<div class="service-agreement-modal" ng-show="modlToShow === 'COPY'">
+  <div class="service-form-wrapper clearfix">
+    <div class="close-btn btn" ng-click="closeModal()" tabindex="1">
+      <i class="icn-sm icn-remove-old"></i>
+    </div>
+    <h3>Service Agreement</h3>
+    <div class="billing-payment clearfix">
+      <div class="col-xs-6">
+        <div class="form-group">
+          <p>Select Company</p>
+          <qt-dropdown-typehead list-for-dropdown="companiesList"
+                                selected-item="contractCompany"
+                               
+                                display-property="'name'"
+                                filter-property="'name'" ng-show="!preSetupCompany">
+
+          </qt-dropdown-typehead>
+            <input type="text" class="form-control has-dropdown" next-after-text-editor
+                   ng-model="contractCompany" name="contractCompany" autocomplete="off"
+                  
+                   uib-typeahead="company as company.name for company in companiesList | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
+                   typeahead-min-length="0" qt-typeahead-show-on-focus ng-trim="false"
+                   custom-style="{'max-height': '190px', 'overflow-y': 'auto', 'width': '100%'}" required disabled ng-show="preSetupCompany">
+        </div>
+      </div>
+      <div class="col-xs-6"></div>
+    </div>
+    <div class="billing-type-content clearfix">
+      <strong><h4>Select your type for this customer</h4></strong>
+
+      <div ng-show="!blockHourlyChoice" class="col-xs-12"  
+           ng-class="{'active': selectedContractType === 'HOURLY'}">
+        <h5>Hourly Billing</h5>
+        <p>Bill your customers by the hour, or create custom service that work for you and your customers</p>
+      </div>
+
+      <div ng-show="blockHourlyChoice" class="col-xs-12 hourly-not-active">
+        <h5>Hourly Billing</h5>
+        <p>This company already has one hourly billing contract</p>
+      </div>
+
+      <div class="col-xs-12" 
+           ng-class="{'active': selectedContractType === 'BLOCK_TIME_BILLING'}">
+        <h5>Block Time Billing</h5>
+        <p>Sell your customer a block of time, that you bill against each month, this can be carried over if not used.
+          You can still create custom Services for Projects or after hours support</p>
+      </div>
+      <div class="col-xs-12"  
+           ng-class="{'active': selectedContractType === 'PER_USER/DEVICE_BILLING'}">
+        <h5>Per user / device Billing</h5>
+        <p>Per user or Device billing, Track time with custom services or create services for projects</p>
+      </div>
+      <div class="col-xs-12"  
+      ng-class="{'active': selectedContractType === 'OTHER'}">
+   <h5>Product / Service Contracts</h5>
+   <p>Create a Product sales or Service contract, that is billed or sold as a contract.</p>
+ </div>
+    </div>
+    <div class="btn btn-success btn-create pull-right"  custom-disabled="{{disabledCreateButtonInCreateNewModal()}}"
+         ng-click="onInitCopy()">Copy
     </div>
   </div>
 </div>
