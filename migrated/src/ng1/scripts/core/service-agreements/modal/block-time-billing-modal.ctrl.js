@@ -74,6 +74,7 @@ console.log('isEditContract',$scope.isEditContract);
           $scope.modlToShow = 'COPY';
           companyData.contractType = companyData.companyForReadOnlyMode.type;
         }*/
+      //  if (!$scope.editContract.companyId) $scope.editContract.companyId = $scope.companyForReadOnlyMode.companyId;
         console.log('$scope.editContract', $scope.editContract);
         $rootScope.$on('terminateAndCopy', function (evt, val) {
           console.log('terminateAndCopy');
@@ -103,7 +104,7 @@ console.log('isEditContract',$scope.isEditContract);
             taxIds: [],
             taxes: $scope.addDefaultTaxes()
           };
-          if ($scope.isEditContract) {
+          if ($scope.isEditContract || !$scope.isEditContract && $scope.action === 'COPY') {
             var end_date = angular.copy($scope.editContract.endDate);
             $scope.blockTimeContract = angular.copy($scope.editContract);
             console.log('$scope.blockTimeContract',$scope.blockTimeContract);
@@ -893,6 +894,7 @@ console.log('data',data);
 
         function returnCompanyId() {
           var id;
+          console.log("$scope.blockTimeContract",$scope.blockTimeContract);
           if ($scope.blockTimeContract.companyId) {
             id = $scope.blockTimeContract.companyId;
           } else if ($scope.contractCompany && $scope.contractCompany.id) {
@@ -1312,23 +1314,7 @@ let EditendDate = $filter('date')(new Date(blockTimeContract.endDate), 'dd MMM y
           }
 
         };
-        function validateCrossingDatesHourly() {
-          $scope.showCreateHourlyContractValidationError = false;
-          var deferred = $q.defer();
-
-          var companyId = returnCompanyId();
-          AgreementsService.validateCrossingDatesHourly($scope.editContract.startDate, $scope.editContract.endDate, companyId, function (resp) {
-            if (resp.valid == true) {
-              deferred.resolve(resp)
-            } else {
-              $scope.showCreateHourlyContractValidationError = true;
-
-              deferred.reject();
-            }
-
-          });
-          return deferred.promise;
-        }
+       
         $scope.validateAndCreteBlockTimeContract = function (blockTimeContract, newBlockTimeService, newService) {
           if(!checkForInvalidFields()) {
             var emptyServices = true;

@@ -110,7 +110,7 @@ console.log('action',$scope.action);
           createDefaultServiceContractServicesToTrack();
           console.log('$scope.serviceContract.serviceExpenses',$scope.serviceContract.serviceExpenses);
          console.log('editContract',$scope.editContract);
-          if ($scope.isEditContract) {
+          if ($scope.isEditContract || !$scope.isEditContract && $scope.action === 'COPY') {
             var end_date = angular.copy($scope.editContract.endDate);
           $scope.serviceContract = angular.copy($scope.editContract);
           $scope.reInitPrpductsExpenseNameField = false;

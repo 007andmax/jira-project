@@ -63,6 +63,9 @@ $scope.action = '';
           $scope.openModal('COPY', true, val)
 
         });
+        $scope.setAction = function (action) {
+          $scope.action = action;
+        }
         AgreementsService.getAllServiceAgreements($scope, function (data) {
 
           $scope.agreementsList = data;
@@ -223,7 +226,9 @@ $scope.action = companyData.action;
           $scope.preSetupCompany = companyData.preSetupCompany;
           if ($scope.preSetupCompany) {
             $scope.contractCompany = $scope.preSetupCompany;
+            
           }
+       //   if ($scope.action === 'COPY')  $scope.editContract.companyId = companyData.companyForReadOnlyMode.companyId;
 
           $scope.companiesList = CompaniesService.getClientCompaniesWoClientsAndLeads();
           $scope.descriptionPattern = /^[0-9A-Za-z!@.)(/,|\\#$&*-_№;:='"?\-\s ]{1,255}$/;
@@ -347,11 +352,12 @@ $scope.showErrorValidationCurrentDate = false;
               $scope.editContract.services = companyData.companyForReadOnlyMode.services;
               $scope.startDate = new Date(angular.copy($scope.editContract.startDate));
             }
-            if ($scope.isEditContract && companyData.contractType === 'BLOCK_TIME' || $scope.isEditContract && companyData.contractType === 'SERVICE_CONTRACT') {
+            if ($scope.isEditContract && companyData.contractType === 'BLOCK_TIME' || $scope.isEditContract && companyData.contractType === 'SERVICE_CONTRACT' || !$scope.isEditContract && companyData.contractType === 'BLOCK_TIME' || !$scope.isEditContract && companyData.contractType === 'SERVICE_CONTRACT') {
               $scope.editContract = companyData.companyForReadOnlyMode;
               $scope.startDate = new Date(angular.copy($scope.editContract.startDate));
 
             }
+           
            
           } else {
 console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyMode);
