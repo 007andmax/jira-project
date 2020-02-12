@@ -109,12 +109,14 @@
           You can still create custom Services for Projects or after hours support</p>
       </div>
       <div class="col-xs-12"  
-           ng-class="{'active': selectedContractType === 'SERVICE_CONTRACT'}">
+      
+           ng-class="{'active': selectedContractType === 'SERVICE_CONTRACT' && billType === 'DEVICE' || selectedContractType === 'SERVICE_CONTRACT' && billType === 'USER'}">
         <h5>Per user / device Billing</h5>
         <p>Per user or Device billing, Track time with custom services or create services for projects</p>
       </div>
       <div class="col-xs-12"  
-      ng-class="{'active': selectedContractType === 'OTHER'}">
+    
+      ng-class="{'active': selectedContractType === 'SERVICE_CONTRACT' && billType === 'OTHER'}">
    <h5>Product / Service Contracts</h5>
    <p>Create a Product sales or Service contract, that is billed or sold as a contract.</p>
  </div>

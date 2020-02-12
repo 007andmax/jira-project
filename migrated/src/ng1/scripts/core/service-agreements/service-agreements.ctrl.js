@@ -231,9 +231,13 @@ $scope.action = companyData.action;
           $scope.quantityPattern = /^\+?[0-9]{0,10}$/;
           $scope.selectedContractType = 'CREATE_NEW';
           $scope.modlToShow = 'CREATE_NEW';
+          $scope.billType = '';
           if (companyData.contractType === 'COPY') {
             $scope.selectedContractType = companyData.companyForReadOnlyMode.type;
+            $scope.billType = companyData.companyForReadOnlyMode.billType;
             $scope.modlToShow = 'COPY';
+            console.log("$scope.selectedContractType",$scope.selectedContractType);
+            console.log("$scope.billType",$scope.billType);
             companyData.contractType = companyData.companyForReadOnlyMode.type;
           }
         
@@ -588,8 +592,11 @@ $scope.changeCompany = function () {
             if ($scope.selectedContractType === "BLOCK_TIME") {
               $scope.modlToShow = 'BLOCK_TIME_BILLING';
             }
-            if ($scope.selectedContractType === "SERVICE_CONTRACT") {
+            if ($scope.selectedContractType === 'SERVICE_CONTRACT' && $scope.billType === 'DEVICE' || $scope.selectedContractType === 'SERVICE_CONTRACT' && $scope.billType === 'USER') {
               $scope.modlToShow = 'PER_USER/DEVICE_BILLING';
+            }
+            if ($scope.selectedContractType === 'SERVICE_CONTRACT' && $scope.billType === 'OTHER') {
+              $scope.modlToShow = 'OTHER';
             }
           };
           $scope.changeModalToShow = function () {
