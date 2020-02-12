@@ -247,9 +247,13 @@
       amountChangeListeners.push(callback);
     }
     function parseDateTechCompany(end_date) {
+      console.log("end_date",end_date);
       var dateTechCompany = new Date(end_date).toLocaleString(storage.currentCompany.addresses[0].countryCode, { timeZone: storage.currentCompany.addresses[0].locale }).replace(",", "").replace(/:.. /, " ");
       var index = dateTechCompany.indexOf(" ");
+      console.log("index",index);
       var listDates = dateTechCompany.substring(0, index).split(".");
+      console.log("listDates",listDates);
+      console.log("dateTechCompany",dateTechCompany);
       return new Date(`${listDates[2]} ${listDates[1]} ${listDates[0]} ${dateTechCompany.substring(index + 1, dateTechCompany.length)}`);
     }
     function getCurrentCompany() {

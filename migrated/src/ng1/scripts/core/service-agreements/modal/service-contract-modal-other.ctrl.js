@@ -118,6 +118,7 @@ console.log('action',$scope.action);
             $scope.serviceContract = angular.copy($scope.editContract);
           $scope.reInitPrpductsExpenseNameField = false;
           var endDateTechCompany = CompaniesService.parseDateTechCompany(end_date); 
+          console.log("endDateTechCompany",endDateTechCompany);
           $scope.serviceContract.endDate = $filter('date')(endDateTechCompany, 'dd MMM yyyy');//$filter('date')(new Date($scope.serviceContract.endDate), 'dd MMM yyyy');
           $scope.serviceContract.endDatePreview = angular.copy($scope.serviceContract.endDate);
         
