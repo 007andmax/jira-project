@@ -585,6 +585,9 @@ $scope.changeCompany = function () {
           console.log("contractCompany",$scope.contractCompany);
           $scope.editContract.companyId = $scope.contractCompany.id;
             $scope.modlToShow = $scope.selectedContractType;
+            if ($scope.selectedContractType === "BLOCK_TIME") {
+              $scope.modlToShow = 'BLOCK_TIME_BILLING';
+            }
           };
           $scope.changeModalToShow = function () {
             $scope.action = 'CREATE';

@@ -558,11 +558,11 @@
             <div class="contacts-details-content-price">
               Total: {{(calculateTotalAmount() | currency: '$': 2) || '$ 0.00'}}
             </div>
-            <div class="btn btn-lg btn-success btn-create" ng-if="!isEditContract"
+            <div class="btn btn-lg btn-success btn-create" ng-if="!isEditContract || action === 'COPY'"
                  ng-click="validateAndCreteBlockTimeContract(blockTimeContract, newBlockTimeService, newContractService)">
               Create
             </div>
-            <div class="btn btn-lg btn-success btn-create" ng-if="isEditContract"
+            <div class="btn btn-lg btn-success btn-create" ng-if="isEditContract && action === 'EDIT'"
                  ng-click="validateAndUpdateBlockTimeContract(blockTimeContract, newBlockTimeService, newContractService)">
               Edit
             </div>

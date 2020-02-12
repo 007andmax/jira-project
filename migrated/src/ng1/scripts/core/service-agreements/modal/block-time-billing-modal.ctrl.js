@@ -68,6 +68,12 @@ console.log('isEditContract',$scope.isEditContract);
 
         var day = 1000 * 60 * 60 * 24;
         var month = 30 * day;
+
+     /*   if (companyData.contractType === 'COPY') {
+          $scope.selectedContractType = companyData.companyForReadOnlyMode.type;
+          $scope.modlToShow = 'COPY';
+          companyData.contractType = companyData.companyForReadOnlyMode.type;
+        }*/
         console.log('$scope.editContract', $scope.editContract);
         $rootScope.$on('terminateAndCopy', function (evt, val) {
           console.log('terminateAndCopy');
@@ -1249,6 +1255,12 @@ console.log('data',data);
               }
             })
           }
+        }
+        $scope.copy = function () {
+          $scope.closeModal();
+            
+            
+          $rootScope.$broadcast('copyContract', $scope.editContract);
         }
         $scope.validateAndUpdateBlockTimeContract = function (blockTimeContract, newBlockTimeService, newService) {
           console.log('validateAndUpdateBlockTimeContract');
