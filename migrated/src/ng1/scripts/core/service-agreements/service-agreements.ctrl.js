@@ -588,6 +588,9 @@ $scope.changeCompany = function () {
             if ($scope.selectedContractType === "BLOCK_TIME") {
               $scope.modlToShow = 'BLOCK_TIME_BILLING';
             }
+            if ($scope.selectedContractType === "SERVICE_CONTRACT") {
+              $scope.modlToShow = 'PER_USER/DEVICE_BILLING';
+            }
           };
           $scope.changeModalToShow = function () {
             $scope.action = 'CREATE';

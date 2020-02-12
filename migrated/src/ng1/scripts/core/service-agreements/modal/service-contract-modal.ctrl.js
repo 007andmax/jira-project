@@ -2182,7 +2182,12 @@ console.log('$scope.serviceContract.endDate',$scope.serviceContract.endDate);
           })
         };
 
-
+        $scope.copy = function () {
+          $scope.closeModal();
+            
+            
+          $rootScope.$broadcast('copyContract', $scope.editContract);
+        }
 
       }])
 

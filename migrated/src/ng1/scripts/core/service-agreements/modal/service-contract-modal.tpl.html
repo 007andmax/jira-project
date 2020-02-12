@@ -902,10 +902,10 @@
           Total: {{ (total | currency: '$': 2) || '$0.00' }}
         </div>
       </div>
-      <div class="btn btn-lg btn-success btn-create pull-right" ng-if="!isEditContract"
+      <div class="btn btn-lg btn-success btn-create pull-right" ng-if="!isEditContract || action === 'COPY'"
            ng-click="validateAndCreateServiceContract( serviceContract)" ng-disabled="dissableCreateButton">Create
       </div>
-      <div class="btn btn-lg btn-success btn-create pull-right" ng-if="isEditContract"
+      <div class="btn btn-lg btn-success btn-create pull-right" ng-if="isEditContract && action === 'EDIT'"
            ng-click="validateAndUpdateServiceContract( serviceContract)" ng-disabled="dissableCreateButton">Edit
       </div>
     </div>
