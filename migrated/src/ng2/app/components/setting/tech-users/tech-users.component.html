@@ -41,7 +41,7 @@
             <tr *ngFor="let techUser of techUsers; let i = index">
               <td class="tech-user">
                 <div class="t-user">
-                  <span class="user-dp online" *ngIf="techUser.avatar !== null">
+                  <span class="user-dp" [ngClass]="[techUser.online == false ? 'offline' : '', (techUser.online == true && techUser.lockScreen == false) ? 'online' : '', (techUser.online === true && techUser.lockScreen === true) ? 'away' : '']" *ngIf="techUser.avatar !== null">
                     <span class="user-tech-dp">
                       <img
                         *ngIf="techUser.isEmailVerified"
