@@ -1,5 +1,6 @@
 import { reqGlNumber } from 'src/ng2/app/interfaces/reports/req-gl-number';
 import { GlNumberItem } from './gl-number-item';
+import * as moment from "moment";
 
 export class GlNumber {
     startDate: string = '';
@@ -9,6 +10,15 @@ export class GlNumber {
     dates: Array<string> = [];
     list: Array<GlNumberItem> = [];
     constructor() { }
+
+    public setDataFromObject(data) {
+        this.startDate = data.startDate;
+        this.endDate = data.endDate;
+        this.clientCompanyId = data.clientCompanyId;
+        this.monthlyDetailed = data.monthlyDetailed;
+        this.dates = data.dates;
+        this.list = data.list;
+    }
 
     public clearDates() {
         this.dates = [];
@@ -21,7 +31,16 @@ export class GlNumber {
         this.startDate = '';
         this.endDate = '';
     }
-
+public getDataObject () {
+    return {
+        startDate: this.startDate,
+    endDate: this.endDate,
+    clientCompanyId: this.clientCompanyId,
+    monthlyDetailed: this.monthlyDetailed,
+    dates: this.dates,
+    list: this.list
+    }
+}
 
     public getList() {
         return this.list;
@@ -44,6 +63,14 @@ export class GlNumber {
         }
         return data;
 
+    }
+
+    public setDatesForMonthly() {
+        let firstDateYear = new Date();
+        firstDateYear.setMonth(0);
+        firstDateYear.setDate(1);
+        this.setStartDate(moment(firstDateYear).format('YYYY/MM/DD'));
+        this.setEndDate(moment(new Date()).format('YYYY/MM/DD'));
     }
 
     public  getMonthlyDetailed () {

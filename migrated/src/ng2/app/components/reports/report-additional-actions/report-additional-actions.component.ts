@@ -6,6 +6,7 @@ import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ModalQuoteComponent } from 'src/ng2/app/services/modal/modal-quote/modal-quote.component';
 import { ReportSendEmailComponent } from './report-send-email/report-send-email.component';
 import { ReportsStateService } from 'src/ng2/app/states/reports/reports-state.service';
+import { GlNumber } from '../class/gl-number';
 
 @Component({
   selector: 'app-report-additional-actions',
@@ -17,6 +18,7 @@ export class ReportAdditionalActionsComponent implements OnInit {
   ACION_OPEN_PDF = ACION_OPEN_PDF;
   ACION_DOWNLOAD_PDF = ACION_DOWNLOAD_PDF;
   listExport = ['PDF', 'CSV'];
+  glNumber: GlNumber = new GlNumber();
   @Input() selectedClient;
   constructor(private reportsService: ReportsService,
     private reportsStateService: ReportsStateService,
@@ -28,6 +30,10 @@ export class ReportAdditionalActionsComponent implements OnInit {
     }
 
   ngOnInit() {
+    this.reportsStateService.glNumber.subscribe((data: GlNumber) => {
+      this.glNumber = data;
+      
+    })
   }
 
   sendEmail() {
@@ -40,7 +46,7 @@ export class ReportAdditionalActionsComponent implements OnInit {
       fileName: 'income_accounts',
       content: this.reportsStateService.parseReportContent(),
       id: null,
-      orientation: 'PORTRAIT'
+      orientation: (!this.glNumber.getMonthlyDetailed()) ? 'PORTRAIT' : 'LANDSCAPE'
     };
     this.reportsService.getPdfUrl(dto).subscribe((data: any) => {
       console.log("data", data);

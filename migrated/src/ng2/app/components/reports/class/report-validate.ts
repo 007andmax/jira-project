@@ -20,7 +20,8 @@ export class ReportValidate {
    
     public isValidate(detailed,yearToDate,start,end) {
        
-        if (detailed  && start === '' && end === '') this.dates = false;
+       // if (detailed  && start === '' && end === '') this.dates = false;
+       
         if (!detailed && !yearToDate  && start === '' && end === '')  {
             this.dates = false;
             this.monthlyDetailed = false;

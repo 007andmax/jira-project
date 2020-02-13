@@ -36,7 +36,7 @@ export class ItemReportComponent implements OnInit {
   ngOnInit() {
     if (localStorage.report) this.report = localStorage.report;
     this.reportsStateService.glNumber.subscribe((data: GlNumber) => {
-      this.glNumber = data;
+      this.glNumber.setDataFromObject(JSON.parse(JSON.stringify(data.getDataObject())));
       console.log("this.glNumber", this.glNumber);
       console.log("this.glNumber.list", this.glNumber.list);
       this.cd.detectChanges();

@@ -8,7 +8,7 @@
   <div class="loading" *ngIf="loadingInProgress"></div>
   <div class="product-list___ticket" id="product-list-ticket-data" >
 
-    <div  class="product-list-ticket acc-col" style="height: 100%; width: 1180px" *ngIf="!loadingInProgress">
+    <div  class="product-list-ticket acc-col" [ngStyle]="{'width': (glNumber.getMonthlyDetailed()) ? '1180px' : '' }" style="height: 100%;" *ngIf="!loadingInProgress">
      <div class="report-header">
         <h1>Income accounts</h1>
         <div class="company-info">

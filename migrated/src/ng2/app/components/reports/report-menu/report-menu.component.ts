@@ -36,8 +36,10 @@ export class ReportMenuComponent implements OnInit {
   public onSelectDetailed(data) {
     this.yearToDate = false;
     if (data === 'Monthly') {
+    
       this.glNumber.setMonthlyDetailed(true);
-      this.datePicker.setDisabled(false);
+      this.datePicker.setDisabled(true);
+   
     } else {
       if (data === 'Year to date') {
         console.log("fffff");
@@ -100,6 +102,7 @@ this.onSelectedClient.emit(this.selectedClient);
         this.reportsService.getReportByGlNumber(this.glNumber.getForRequest()).subscribe(data => this.setDatareport(data));
       })
     } else {
+     this.glNumber.setDatesForMonthly();
       this.reportsService.getReportByGlNumber(this.glNumber.getForRequest()).subscribe(data => this.setDatareport(data));
     }
 
