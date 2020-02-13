@@ -81,9 +81,10 @@ console.log('isEditContract',$scope.isEditContract);
           $scope.action = 'COPY';
           console.log('$scope.terminateAndCopy', $scope.blockTimeContract);
           var end_date = angular.copy($scope.editContract.endDate);
-          $scope.blockTimeContract.endDate = $filter('date')(new Date(end_date - $scope.currentCompany.addresses[0].timeZone.timeOffset), 'dd MMM yyyy');//$filter('date')(new Date($scope.serviceContract.endDate), 'dd MMM yyyy');
+          var endDateTechCompany = CompaniesService.parseDateTechCompany(end_date); 
+          $scope.blockTimeContract.endDate = $filter('date')(endDateTechCompany, 'dd MMM yyyy');//$filter('date')(new Date($scope.serviceContract.endDate), 'dd MMM yyyy');
           $scope.blockTimeContract.endDatePreview = $scope.blockTimeContract.endDate;
-          console.log('$scope.blockTimeContract.endDate', $scope.blockTimeContract.endDate);
+         
           $scope.blockTimeContract.startDatePreview = $scope.blockTimeContract.startDate;
           $scope.blockTimeContract.startDate = $filter('date')($scope.editContract.startDate, 'dd MMM yyyy');
 
@@ -104,18 +105,18 @@ console.log('isEditContract',$scope.isEditContract);
             taxIds: [],
             taxes: $scope.addDefaultTaxes()
           };
-          if ($scope.isEditContract || !$scope.isEditContract && $scope.action === 'COPY') {
+          if ($scope.isEditContract) {
             var end_date = angular.copy($scope.editContract.endDate);
             $scope.blockTimeContract = angular.copy($scope.editContract);
-            console.log('$scope.blockTimeContract',$scope.blockTimeContract);
-            //$scope.blockTimeContract.endDatePreview = $scope.blockTimeContract.endDate;
-            $scope.blockTimeContract.endDate = $filter('date')(new Date(end_date - $scope.currentCompany.addresses[0].timeZone.timeOffset), 'dd MMM yyyy');//$filter('date')(new Date($scope.serviceContract.endDate), 'dd MMM yyyy');
+            var endDateTechCompany = CompaniesService.parseDateTechCompany(end_date); 
+            $scope.blockTimeContract.endDate = $filter('date')(endDateTechCompany, 'dd MMM yyyy');//$filter('date')(new Date($scope.serviceContract.endDate), 'dd MMM yyyy');
            // $scope.blockTimeContract.startDatePreview = $scope.blockTimeContract.startDate;
             $scope.blockTimeContract.startDate =  $filter('date')($scope.blockTimeContract.startDate, 'dd MMM yyyy');
            // $scope.blockTimeContract.numOfIntervalsPreview;
             $scope.blockTimeContract.minStartDate = Date.now();
             $scope.blockTimeContract.taxes = [];
          //   $scope.blockTimeContract.billForAdditionalService = false;
+         console.log("$scope.blockTimeContract.endDate",$scope.blockTimeContract.endDate);
             $scope.blockTimeContract.notifyBlockTimeUsed = $scope.blockTimeContract.shares.length>0;
             $timeout(function () {
               chnageNumOFIntervals($scope.blockTimeContract.startDatePreview, $scope.blockTimeContract.endDatePreview, true);
@@ -160,7 +161,8 @@ console.log('isEditContract',$scope.isEditContract);
           $scope.blockTimeContract = angular.copy($scope.editContract);
           var end_date = angular.copy($scope.editContract.endDate);
           //$scope.blockTimeContract.description = $scope.blockTimeContract.description + ' COPY';
-          $scope.blockTimeContract.endDatePreview = $filter('date')(new Date(end_date - $scope.currentCompany.addresses[0].timeZone.timeOffset), 'dd MMM yyyy');
+          var endDateTechCompany = CompaniesService.parseDateTechCompany(end_date); 
+          $scope.blockTimeContract.endDatePreview = $filter('date')(endDateTechCompany, 'dd MMM yyyy');
           $scope.blockTimeContract.endDate = '';
           $scope.blockTimeContract.startDatePreview = $scope.blockTimeContract.startDate;
           $scope.blockTimeContract.startDate = '';

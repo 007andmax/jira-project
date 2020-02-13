@@ -345,9 +345,10 @@ $scope.showErrorValidationCurrentDate = false;
               $scope.editContract.description = companyData.companyForReadOnlyMode.description;
               $scope.editContract.companyId = companyData.companyForReadOnlyMode.companyId;
               var startDate = new Date(companyData.companyForReadOnlyMode.startDate);
-              var endDate = new Date(companyData.companyForReadOnlyMode.endDate - $scope.currentCompany.addresses[0].timeZone.timeOffset);
+              var endDateTechCompany = CompaniesService.parseDateTechCompany(companyData.companyForReadOnlyMode.endDate); 
+            //  var endDate = new Date(companyData.companyForReadOnlyMode.endDate - $scope.currentCompany.addresses[0].timeZone.timeOffset);
               $scope.editContract.startDate = $filter('date')(startDate, 'dd MMM yyyy');
-              $scope.editContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
+              $scope.editContract.endDate = $filter('date')(endDateTechCompany, 'dd MMM yyyy');
               $scope.isEditContract = true;
               $scope.editContract.services = companyData.companyForReadOnlyMode.services;
               $scope.startDate = new Date(angular.copy($scope.editContract.startDate));
@@ -364,7 +365,8 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
             $scope.editContract = companyData.companyForReadOnlyMode;
             $scope.editContract.startDate = $filter('date')($scope.editContract.startDate, 'dd MMM yyyy');
          //   $scope.editContract.endDate = $filter('date')($scope.editContract.endDate, 'dd MMM yyyy');
-         $scope.endDatePreview = $filter('date')(angular.copy($scope.editContract.endDate - $scope.currentCompany.addresses[0].timeZone.timeOffset), 'dd MMM yyyy');
+         var endDateTechCompany = CompaniesService.parseDateTechCompany($scope.editContract.endDate); 
+         $scope.endDatePreview = $filter('date')(endDateTechCompany, 'dd MMM yyyy');
             AgreementsService.getServiceAgreementById($scope.editContract.id, function (data) {
               $scope.contractStatus = data.status;
             });
