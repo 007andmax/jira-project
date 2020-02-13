@@ -1,0 +1,86 @@
+/*** All css files include ***/
+
+@import '../../../../assets/scss/variable';
+@import '../../../../assets/scss/mixin';
+@import '../../../../assets/scss/custom';
+
+
+
+.cmn-area.incming-email{
+    margin-top: 3px; 
+    p{
+        margin-bottom: 24px;
+        font-size: 13px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.54;
+        letter-spacing: normal;
+        color: #4f5f79;
+    } 
+    .f-row{
+        margin-bottom: 0;
+        @media only screen and (max-width: 768px){
+            margin:0;
+        }
+        .f-col{ 
+            width: 416px;
+            @media only screen and (max-width: 768px){
+                width: 100%;
+            }
+        }
+        .cmn-checkbox{
+            margin-bottom: 33px;
+        }
+
+    }
+
+}
+
+.cmn-area.outgoing-email{
+margin-top: 3px;
+p{
+    margin-bottom: 28px;
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.54;
+    letter-spacing: normal;
+    color: #4f5f79;
+}
+.f-col{
+    &.col-25 {
+        width: 25%;
+    }
+}
+.f-row{
+    margin-bottom: 28px;
+}
+.password{
+    position: relative;
+    .password-co {
+        position: absolute;
+        right: 0;
+        width: 45px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+        bottom: 0;
+    }
+    .form-input{
+        padding-right: 45px;
+    }
+}
+
+}    
+.test-server {
+text-align: right;
+margin-top: -15px;
+.btn-outline {
+    display: inline-block;
+}
+}
+

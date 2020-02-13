@@ -1,0 +1,79 @@
+<ngx-loading [show]="loading"></ngx-loading>
+<div class="cmn-area products-area">
+  <div class="data-table-wrap">
+    <table dataTable class="display dataTable" style="width:100%">
+      <thead>
+        <tr>
+          <th class="p-name">Product Name</th>
+          <th class="rate">Rate (%)</th>
+          <th class="action">&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="categories">
+        <tr *ngFor="let category of categories;trackBy:category?.name; let i = index">
+          <td>{{ category.name }}</td>
+          <td>{{ category.commissionRate }}</td>
+          <td class="action">
+            <a
+              href="javascript:;"
+              data-tooltip="Edit"
+              class="edit"
+              (click)="editProduct(i)"
+              ><img src="../../../../../../ng1/images/setting-module/edit.svg" alt="Edit"
+            /></a>
+            <a href="javascript:;" data-tooltip="Remove" class="remove"
+            (click)="removeProduct(category)"
+              ><img src="../../../../../../ng1/images/setting-module/remove.svg" alt="Remove"
+            /></a>
+            <!-- Edit create Tags -->
+            <div class="modal-content toggle-area" [ngClass]="{'opened': selectedIdx === i}" >
+                <div class="modal-wrapper">
+                  <div class="toggle-header">
+                    <h2 class="h1">Edit Rate</h2>
+                  </div>
+                  <div class="modal-body">
+                    <form method="POST">
+                      <div class="f-row">
+                        <div class="f-col col-100">
+                          <label>Commission Rate (%)</label>
+                          <div class="form-row">
+                            <input
+                              type="text"
+                              class="form-input"
+                              name="commissionRate"
+                              autocomplete="off"
+                              #commissionRate
+                              value="{{category.commissionRate}}"
+                              step="0.01"
+                              placeholder="Enter Commission Rate"
+                            />
+                          </div>
+                        </div>
+                        <div class="m-btn-row">
+                          <div class="m-btn-col">
+                            <input
+                              type="submit"
+                              (click)="setCategoryRate(commissionRate.value,category.id,category)"
+                              value="Save"
+                              class="btn btn-primary"
+                            />
+                            <a
+                              href="javascript:;"
+                              class="btn btn-secondary"
+                              aria-label="Close"
+                              (click)="selectedIdx = -1"
+                              >Cancel</a
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>  
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

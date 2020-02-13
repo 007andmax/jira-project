@@ -1,0 +1,299 @@
+<ngx-loading [show]="loading"></ngx-loading>
+<!-- Middle Wrapper  -->
+<div class="page-container">
+  <div class="page-insider manage-taxes">
+    <div class="heading">
+      <h1>
+        <a
+          href="javascript:;"
+          (click)="onBackMenu()"
+          class="back-menu"
+          style="display: none;"
+          >backmneu</a
+        >Taxes
+      </h1>
+      <div class="heading-serach">
+        <a href="javascript:;" class="btn-outline" (click)="openModel(true)"
+          >Add Tax</a
+        >
+        <!-- Modal create Tags -->
+        <div class="modal-content toggle-area" [class.opened]="create">
+          <div class="modal-wrapper">
+            <div class="toggle-header">
+              <h2 class="h1">Add Tax</h2>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="taxForm" (ngSubmit)="onSubmit()">
+                <div class="f-row">
+                  <div class="f-col col-100">
+                    <label>Tax Name</label>
+                    <div class="form-row">
+                      <input
+                        type="text"
+                        class="form-input"
+                        formControlName="name"
+                        placeholder="Enter Tax Name"
+                        #name
+                        (blur)="isUniqueName(name.value)"
+                        [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
+                      />
+                      <div
+                        *ngIf="submitted && f.name.errors"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="f.name.errors.required">
+                          Name is required
+                        </div>
+                        <div *ngIf="f.name.errors.minlength">
+                          Name is too short.
+                        </div>
+                        <div *ngIf="f.name.errors.maxlength">
+                          Name is too long.
+                        </div>
+                      </div>
+                      <div *ngIf="!unique" class="invalid-feedback">
+                        Name is already taken.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="f-col col-100">
+                    <label>Tax Rate (%)</label>
+                    <div class="form-row">
+                      <input
+                        type="number"
+                        formControlName="rate"
+                        class="form-input"
+                        placeholder="Set Tax Rate"
+                        [ngClass]="{ 'is-invalid': submitted && f.rate.errors }"
+                      />
+                      <div
+                        *ngIf="submitted && f.rate.errors"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="f.rate.errors.required">
+                          Rate is required
+                        </div>
+                        <div *ngIf="f.rate.errors.min">To small.</div>
+                        <div *ngIf="f.rate.errors.max">To large.</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="f-col col-100 check-area">
+                    <span class="cmn-checkbox">
+                      <input
+                        type="checkbox"
+                        id="set-as"
+                        formControlName="isDefault"
+                      />
+                      <label for="set-as">Set as Default</label>
+                    </span>
+                  </div>
+                  <div class="m-btn-row">
+                    <div class="m-btn-col">
+                      <input
+                        type="submit"
+                        value="Save"
+                        class="btn btn-primary"
+                      />
+                      <a
+                        href="javascript:;"
+                        class="btn btn-secondary"
+                        aria-label="Close"
+                        (click)="create = !create"
+                        >Cancel</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cmn-area">
+      <div class="data-table-wrap">
+        <table class="display dataTable" style="width:100%">
+          <thead>
+            <tr>
+              <th class="tax-name">Tax Name</th>
+              <th class="rate">Rate (%)</th>
+              <th class="default">Set as Default</th>
+              <th class="action">&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="taxes">
+            <tr *ngFor="let tax of taxes; let i = index">
+              <td class="tax-name">{{ tax.name }}</td>
+              <td class="rate">{{ tax.rate }}%</td>
+              <td class="default">
+                <span class="cmn-checkbox">
+                  <input
+                    type="checkbox"
+                    id="gmi{{ i }}"
+                    (change)="defaultTax(tax)"
+                    [checked]="tax.isDefault"
+                  />
+                  <label for="gmi{{ i }}"></label>
+                </span>
+              </td>
+              <td class="action">
+                <a
+                  href="javascript:;"
+                  data-tooltip="Edit"
+                  (click)="openModel(false, i, tax)"
+                  class="edit"
+                  ><img
+                    src="../../../../../ng1/images/setting-module/edit.svg"
+                    alt="Edit"
+                /></a>
+                <a
+                  href="javascript:;"
+                  data-tooltip="Remove"
+                  class="remove"
+                  (click)="removeConfirm(tax)"
+                  ><img
+                    src="../../../../../ng1/images/setting-module/remove.svg"
+                    alt="Remove"
+                /></a>
+
+                <div
+                  class="modal-content toggle-area"
+                  [ngClass]="{ opened: selectedIdx === i }"
+                >
+                  <div class="modal-wrapper">
+                    <div class="toggle-header">
+                      <h2 class="h1">Edit Tax</h2>
+                    </div>
+                    <div class="modal-body">
+                      <form [formGroup]="taxForm" (ngSubmit)="onSubmit()">
+                        <div class="f-row">
+                          <div class="f-col col-100">
+                            <label>Tax Name</label>
+                            <div class="form-row">
+                              <input
+                                type="text"
+                                class="form-input"
+                                formControlName="name"
+                                placeholder="Enter Tax Name"
+                                (input)="isUniqueName($event.target.value)"
+                                [ngClass]="{
+                                  'is-invalid': submitted && f.name.errors
+                                }"
+                              />
+                              <div
+                                *ngIf="submitted && f.name.errors"
+                                class="invalid-feedback error-text-align"
+                              >
+                                <div *ngIf="f.name.errors.required">
+                                  Name is required
+                                </div>
+                                <div *ngIf="f.name.errors.minlength">
+                                  Name is too short.
+                                </div>
+                                <div *ngIf="f.name.errors.maxlength">
+                                  Name is too long.
+                                </div>
+                              </div>
+                              <div
+                                *ngIf="!unique"
+                                class="invalid-feedback error-text-align"
+                              >
+                                Name is already taken.
+                              </div>
+                            </div>
+                          </div>
+                          <div class="f-col col-100">
+                            <label>Tax Rate (%)</label>
+                            <div class="form-row">
+                              <input
+                                type="text"
+                                class="form-input"
+                                formControlName="rate"
+                                placeholder="Set Tax Rate"
+                              />
+                              <div
+                                *ngIf="submitted && f.rate.errors"
+                                class="invalid-feedback error-text-align"
+                              >
+                                <div *ngIf="f.rate.errors.required">
+                                  Rate is required
+                                </div>
+                                <div *ngIf="f.rate.errors.min">To small.</div>
+                                <div *ngIf="f.rate.errors.max">To large.</div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="f-col col-100 check-area">
+                            <span class="cmn-checkbox">
+                              <input
+                                type="checkbox"
+                                id="set-as{{ i }}"
+                                formControlName="isDefault"
+                              />
+                              <label for="set-as{{ i }}">Set as Default</label>
+                            </span>
+                          </div>
+                          <div class="m-btn-row">
+                            <div class="m-btn-col">
+                              <input
+                                type="submit"
+                                value="Save"
+                                class="btn btn-primary"
+                              />
+                              <a
+                                href="javascript:;"
+                                class="btn btn-secondary"
+                                aria-label="Close"
+                                (click)="selectedIdx = -1"
+                                >Cancel</a
+                              >
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- tag delete popup -->
+<div class="img-croparea deletePopup" *ngIf="popup">
+  <div class="crop-inner">
+    <div class="cropping">
+      <div class="popup-message">
+        <span class="icon-part">
+          <img
+            src="../../../../../ng1/images/setting-module/delete-red.svg"
+            alt="delete"
+          />
+        </span>
+        <div class="message-right">
+          <h1>Delete Tax</h1>
+          <p>Are you sure you want to delete?</p>
+        </div>
+        <a class="close-ico" href="javascript:;" (click)="popup = false"
+          ><img
+            src="../../../../../ng1/images/setting-module/close.svg"
+            alt="close"
+        /></a>
+      </div>
+      <div class="btn-crops">
+        <button type="button" class="btn btn-primary" (click)="removeTax()">
+          Yes, I am sure
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="popup = false">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

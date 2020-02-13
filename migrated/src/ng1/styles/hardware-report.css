@@ -1746,9 +1746,9 @@
   padding: 0px 2px !important;
 }
 
-.products div > *, .services div > * {
+/* .products div > *, .services div > * {
   padding: 5px 0 !important;
-}
+} */
 
 .customer-ticket__header {
   padding: 0 60px;

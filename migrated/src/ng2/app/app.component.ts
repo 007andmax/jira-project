@@ -9,11 +9,6 @@ import { UsersStateService } from './states/users/users-state.service';
 import { DevicesSateService } from './states/devices/devices-sate.service';
 import { CompaniesStateService } from './states/company/companies-state.service';
 import { AppService } from './states/app/app.service';
-
-
-/**
- * Root component
- */
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -47,7 +42,7 @@ export class AppComponent implements OnInit {
     this.devicesState.onInit();
     this.usersStateService.onInit();
     this.companiesState.onInit();
-    //  this.userService.getCurrentUser();
+    this.userService.getCurrentUser();
     this.websocketService.initializeWebSocketConnection();
     this.appService.onCheckMobile();
     window.addEventListener('resize', this.appService.onCheckMobile);

@@ -1,0 +1,31 @@
+<!-- Middle Wrapper  -->
+<div class="page-container commision-container">
+  <div class="page-insider commision">
+    <div class="heading">
+      <h1><a href="javascript:;" (click)="onBackMenu()" class="back-menu" style="display: none;">backmneu</a>Commissions</h1>
+      <div class="heading-serach" style="display: none;">
+        <a href="javascript:;" class="btn-outline">Add Commision</a>
+      </div>
+    </div>
+      <tabset>
+          <!-- Companies -->
+          <tab heading="Companies’s Sales Person" id="tab1">
+            <app-company-commission></app-company-commission>
+          </tab>
+          <!-- Product -->
+          <tab heading="Product">
+             <app-product></app-product> 
+          </tab>
+          <!-- Contract  -->
+          <tab heading="Contract">
+              <app-contract></app-contract>
+          </tab>
+          <!-- Service  -->
+          <tab heading="Service">
+              <app-service></app-service>
+          </tab>
+        </tabset>
+  </div>
+</div>
+
+

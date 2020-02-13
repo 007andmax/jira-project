@@ -1,0 +1,22 @@
+<!-- Middle Wrapper  -->
+<div class="page-container">
+  <div class="page-insider invoice-ticket">
+    <div class="heading">
+      <h1><a href="javascript:;" (click)="onBackMenu()" class="back-menu" style="display: none;">backmneu</a>Invoice and Ticket</h1>
+    </div>
+    <tabset>
+      <!-- Ticket Settings -->
+      <tab heading="Ticket Settings" id="tab1">
+        <app-ticket-settings></app-ticket-settings>
+      </tab>
+      <!-- Invoice Settings -->
+      <tab heading="Invoice Settings">
+        <app-invoice-settings></app-invoice-settings>
+      </tab>
+      <!-- Quotes Settings  -->
+      <tab heading="Quotes settings">
+        <app-quotes-settings></app-quotes-settings>
+      </tab>
+    </tabset>
+  </div>
+</div>

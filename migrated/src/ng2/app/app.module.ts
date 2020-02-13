@@ -1,15 +1,19 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule, NgZone } from '@angular/core';
+import { NgModule, InjectionToken, NgZone } from '@angular/core';
 import { RouterModule, UrlHandlingStrategy } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 // @ts-ignore
-import { UpgradeModule, downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
+import {
+  UpgradeModule,
+  downgradeComponent,
+  downgradeInjectable
+} from '@angular/upgrade/static';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { SelectModule } from 'ng2-select';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+// import { SelectModule } from 'ng2-select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgxSelectModule } from 'ngx-select-ex';
+
 import { SidebarModule } from 'ng-sidebar';
  
 import { ClickOutsideModule } from 'ng4-click-outside';
@@ -31,7 +35,7 @@ import { PasswordRecordsTypesComponent } from './components/left-panel/left-pane
 import { PasswordManagerTableComponent } from './components/password-manager/password-manager-table/password-manager-table.component';
 import { PasswoordManagerHeaderComponent } from './components/password-manager/passwoord-manager-header/passwoord-manager-header.component';
 
-import { ApiPasswordManagerService } from "./services/password-manager/api-password-manager.service";
+import { ApiPasswordManagerService } from './services/password-manager/api-password-manager.service';
 
 import { QuotesComponent } from './components/billing/quotes/quotes.component';
 import { QuoteCreateComponent } from './components/billing/quotes/quote-create/quote-create.component';
@@ -105,18 +109,72 @@ import { UsersAsideEditComponent } from './components/users/users-aside-edit/use
 import { ModalImageCropperComponent } from './services/modal/modal-image-cropper/modal-image-cropper.component';
 import { DraftEmailUserRecipientsComponent } from './components/shared/draft-email/draft-email-user-recipients/draft-email-user-recipients.component';
 
+import { QuotesComponent } from './components/billing/quotes/quotes.component';
+import { MyProfileComponent } from './components/setting/my-profile/my-profile.component';
+import { SettingComponent } from './components/setting/setting.component';
+import { ManageTagsComponent } from './components/setting/manage-tags/manage-tags.component';
+import { CompanyProfileComponent } from './components/setting/company-profile/company-profile.component';
 
-/**
- * declare angular
- */
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { ModalModule, TypeaheadModule } from 'ngx-bootstrap';
+
+import { LeftPanelSettingComponent } from './components/left-panel/left-panel-setting/left-panel-setting.component';
+
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { TechUsersComponent } from './components/setting/tech-users/tech-users.component';
+import { EmailSettingComponent } from './components/setting/email-setting/email-setting.component';
+import { TaxesComponent } from './components/setting/taxes/taxes.component';
+import { PermissionManageComponent } from './components/setting/permission-manage/permission-manage.component';
+import { EmailTempleteComponent } from './components/setting/email-templete/email-templete.component';
+import { IntegrationsComponent } from './components/setting/integrations/integrations.component';
+import { InvoiceTicketsComponent } from './components/setting/invoice-tickets/invoice-tickets.component';
+import { CommissionComponent } from './components/setting/commission/commission.component';
+import { SubscriptionComponent } from './components/setting/subscription/subscription.component';
+
+import { DataTablesModule } from 'angular-datatables';
+import { AccountComponent } from './components/setting/my-profile/account/account.component';
+import { EmailNotificationsComponent } from './components/setting/my-profile/email-notifications/email-notifications.component';
+import { ActivityHistoryComponent } from './components/setting/my-profile/activity-history/activity-history.component';
+
+import { AgmCoreModule } from '@agm/core';
+import { ProfileComponent } from './components/setting/my-profile/profile/profile.component';
+import { TagPipe } from './pipe/tag.pipe';
+
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
+import { SelectDropDownModule } from 'ngx-select-dropdown';
+import { IncomingEmailComponent } from './components/setting/email-setting/incoming-email/incoming-email.component';
+import { OutgoingEmailComponent } from './components/setting/email-setting/outgoing-email/outgoing-email.component';
+import { TicketSettingsComponent } from './components/setting/invoice-tickets/ticket-settings/ticket-settings.component';
+import { InvoiceSettingsComponent } from './components/setting/invoice-tickets/invoice-settings/invoice-settings.component';
+import { QuotesSettingsComponent } from './components/setting/invoice-tickets/quotes-settings/quotes-settings.component';
+import { Onlynumber } from './helpers/Onlynumber';
+import { CompanyComponent } from './components/setting/commission/company/company.component';
+import { ProductComponent } from './components/setting/commission/product/product.component';
+import { ContractComponent } from './components/setting/commission/contract/contract.component';
+import { ServiceComponent } from './components/setting/commission/service/service.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { AutocompleteComponent } from './shared/autocomplete/autocomplete.component';
+import { PhonePipe } from './pipe/phone.pipe';
+import { OrderByPipe } from './pipe/order-by.pipe';
+import { NgxMaskModule } from 'ngx-mask' 
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+
 declare var angular: any;
-
-/**
- * Hybrid mode
- */
+declare var $: any;
 export class CustomHandlingStrategy implements UrlHandlingStrategy {
+  constructor() {}
   shouldProcessUrl(url) {
-    return url.toString().startsWith("/ng2") || url.toString() == "/"
+    const appType = url.toString().startsWith('/ng2/setting') ? 'ng2' : 'ng1';
+    if (appType === 'ng2') {
+       $('body').addClass('ng7');
+       $('body').removeClass('backMenu');
+    } else {
+      $('body').removeClass('ng7');
+    }
+    return url.toString().startsWith('/ng2') || url.toString() == '/';
   }
   extract(url) { return url }
   merge(url, whole) { return url }
@@ -153,11 +211,71 @@ angular.module('quicktech')
     .directive(
     'usersComponent',
     downgradeComponent({component: UsersComponent}))
+  .directive(
+    'passwordManager',
+    downgradeComponent({ component: PasswordManagerComponent })
+  )
+  .directive(
+    'leftPanelComponent',
+    downgradeComponent({ component: LeftPanelComponent })
+  )
+  .directive(
+    'quotesComponent',
+    downgradeComponent({ component: QuotesComponent })
+  )
+  .directive(
+    'settingComponent',
+    downgradeComponent({ component: SettingComponent })
+  )
+  .directive(
+    'myprofileComponent',
+    downgradeComponent({ component: MyProfileComponent })
+  )
+  .directive(
+    'manageTagsComponent',
+    downgradeComponent({ component: ManageTagsComponent })
+  )
+  .directive(
+    'companyProfileComponent',
+    downgradeComponent({ component: CompanyProfileComponent })
+  )
+  .directive(
+    'techComponent',
+    downgradeComponent({ component: TechUsersComponent })
+  )
+  .directive(
+    'emailSettingComponent',
+    downgradeComponent({ component: EmailSettingComponent })
+  )
+  .directive(
+    'taxesComponent',
+    downgradeComponent({ component: TaxesComponent })
+  )
+  .directive(
+    'permissionManageComponent',
+    downgradeComponent({ component: PermissionManageComponent })
+  )
+  .directive(
+    'emailTempleteComponent',
+    downgradeComponent({ component: EmailTempleteComponent })
+  )
+  .directive(
+    'integrationsComponent',
+    downgradeComponent({ component: IntegrationsComponent })
+  )
+  .directive(
+    'invoiceTicketComponent',
+    downgradeComponent({ component: InvoiceTicketsComponent })
+  )
+  .directive(
+    'commissionComponent',
+    downgradeComponent({ component: CommissionComponent })
+  )
+  .directive(
+    'subscriptionComponent',
+    downgradeComponent({ component: SubscriptionComponent })
+  )
   .factory('ngZone', downgradeInjectable(NgZone));
-
-/**
- * This module represents the main application module
- */
 @NgModule({
   declarations: [
     AppComponent,
@@ -239,18 +357,49 @@ angular.module('quicktech')
     UsersAsideEditComponent,
     ModalImageCropperComponent,
     DraftEmailUserRecipientsComponent
+    MyProfileComponent,
+    SettingComponent,
+    CompanyProfileComponent,
+    LeftPanelSettingComponent,
+    ManageTagsComponent,
+    TechUsersComponent,
+    EmailSettingComponent,
+    TaxesComponent,
+    PermissionManageComponent,
+    EmailTempleteComponent,
+    IntegrationsComponent,
+    InvoiceTicketsComponent,
+    CommissionComponent,
+    SubscriptionComponent,
+    AccountComponent,
+    EmailNotificationsComponent,
+    ActivityHistoryComponent,
+    ProfileComponent,
+    TagPipe,
+    IncomingEmailComponent,
+    OutgoingEmailComponent,
+    TicketSettingsComponent,
+    InvoiceSettingsComponent,
+    QuotesSettingsComponent,
+    Onlynumber,
+    CompanyComponent,
+    ProductComponent,
+    ContractComponent,
+    ServiceComponent,
+    AutocompleteComponent,
+    PhonePipe,
+    OrderByPipe
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    BrowserAnimationsModule,
     UpgradeModule,
     HttpClientModule,
     FormsModule,
-    SelectModule,
+    AngularEditorModule ,
     NgbModule,
     InfiniteScrollModule,
     ClickOutsideModule,
-   
     NgxSelectModule,
     MatSelectModule,
     MatChipsModule,
@@ -259,6 +408,35 @@ angular.module('quicktech')
     BrowserAnimationsModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     SidebarModule.forRoot(),
+    ShowHidePasswordModule,
+    AppRoutingModule,
+    ImageCropperModule,
+    DataTablesModule,
+    NgSelectModule ,
+    SelectDropDownModule,
+    CKEditorModule,
+    TabsModule.forRoot(),
+    SidebarModule.forRoot(),
+    ModalModule.forRoot(),
+    TypeaheadModule.forRoot(),
+    ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAbP4DFpz4f9YcXMWUjdkOdyArX2peNt8s'
+    }),
+    NgxMaskModule.forRoot(),
+    ToastrModule.forRoot({
+      closeButton: true,
+      preventDuplicates: true,
+      timeOut: 3000
+    }),
+    NgxLoadingModule.forRoot({
+      animationType: ngxLoadingAnimationTypes.circleSwish,
+      backdropBackgroundColour: 'rgba(0,0,0,0.1)',
+      backdropBorderRadius: '4px',
+      primaryColour: '#16a4fa',
+      secondaryColour: '#16a4fa',
+      tertiaryColour: '#16a4fa'
+    })
     RouterModule.forRoot([
         {
           path: '',
@@ -327,8 +505,12 @@ angular.module('quicktech')
     ImageCropperComponent,
     CompanyPasswordManagerComponent,
     UsersComponent,
-    AlertComponent
-    // RecurringTicketsComponent
+    AlertComponent,
+    LeftPanelComponent
+  ],
+  exports:[
+    PhonePipe,
+    OrderByPipe
   ],
   providers: [
     {

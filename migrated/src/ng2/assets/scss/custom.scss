@@ -1,0 +1,80 @@
+// Font Family  
+
+$font-body: 'Graphik-Regular';
+$grahic-light:'Graphik-Light';
+$graphicSemibold:'Graphik-Semibold';
+$graphic-bold:'Graphik-Bold';
+$graphicMedBold:'Graphik-Medium';
+
+
+
+@mixin body-font {
+    color: $metal;
+    font-family: $font-body;
+    font-size: 13px;
+    line-height: 1.54;
+}  
+
+
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -o-border-radius: $radius;
+    border-radius: $radius;
+}
+
+@mixin opacity($opacity) {
+    -webkit-opacity: $opacity;
+    -moz-opacity: $opacity;
+    -o-opacity: $opacity;
+    -m-opacity: $opacity;
+    opacity: $opacity;
+}
+
+@mixin transition($seconds) {
+    -webkit-transition: all $seconds ease;
+    -moz-transition: all $seconds ease;
+    -ms-transition: all $seconds ease;
+    -o-transition: all $seconds ease;
+    transition: all $seconds ease;
+}
+
+@mixin trans-anim-none {
+    -webkit-transition: none;
+    -moz-transition: none;
+    -o-transition: none;
+    transition: none;
+}
+
+@mixin space-none {
+    margin: 0;
+    padding: 0;
+}
+
+@mixin app-none {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+}
+
+@mixin point-none {
+    -webkit-pointer-events: none;
+    -moz-pointer-events: none;
+    -o-pointer-events: none;
+    -ms-pointer-events: none;
+    pointer-events: none;
+}
+
+// Background properties  
+@mixin bg-cmn {
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@mixin bg-parallax {
+    background-attachment: fixed;
+    @include bg-cmn;
+}

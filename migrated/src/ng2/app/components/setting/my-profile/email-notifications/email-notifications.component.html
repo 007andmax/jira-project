@@ -1,0 +1,27 @@
+<div class="cmn-area email-note">
+  <form class="email-note-wrape" (ngSubmit)="onSubmit(emailForm)" #emailForm="ngForm" *ngIf="emailNotifications">
+    <ul class="list-unstyled">
+      <li class="cmn-checkbox">
+        <input type="checkbox" id="newDevice" [(ngModel)]="emailNotifications.newDevice" name="newDevice"
+          #newDevice1="ngModel" />
+        <label for="newDevice"> When my account is logged in from a new device </label>
+      </li>
+      <li class="cmn-checkbox">
+        <input type="checkbox" id="ticketCreated" [(ngModel)]="emailNotifications.ticketCreated" name="ticketCreated"
+          #ticketCreated="ngModel" />
+        <label for="ticketCreated"> When a New Ticket created </label>
+      </li>
+      <li class="cmn-checkbox">
+        <input id="my" type="checkbox" [(ngModel)]="emailNotifications.myTicketUpdated" name="myTicketUpdated"
+          #myTicketUpdated="ngModel" />
+        <label for="my"> When a ticket that is assigned to me is updated </label>
+      </li>
+      <li class="cmn-checkbox">
+        <input id="ticket" type="checkbox" [(ngModel)]="emailNotifications.ticketCloseNotifications"
+          name="ticketCloseNotifications" #ticketCloseNotifications="ngModel" />
+        <label for="ticket"> When any ticket is closed </label>
+      </li>
+    </ul>
+    <input type="submit" class="btn btn-primary" value="Save Changes" />
+  </form>
+</div>

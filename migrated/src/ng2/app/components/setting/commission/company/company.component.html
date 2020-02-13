@@ -1,0 +1,149 @@
+<ngx-loading [show]="loading"></ngx-loading>
+<div class="cmn-area companies">
+  <div class="data-table-wrap">
+    <table class="display dataTable" style="width:100%">
+      <thead>
+        <tr>
+          <th class="c-name">Company</th>
+          <th class="address">Address</th>
+          <th class="sp">Sales Person</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let company of clientsCompanies; let i = index">
+          <td class="c-name">
+            <!-- {{company | json}} -->
+            <div class="c-info">
+              <span class="c-logo">{{ displayFrstLstChar(company.name) }}</span>
+              <h5>{{ company.name }}</h5>
+            </div>
+          </td>
+          <td class="address">
+            {{
+              company.companyInfo.addresses[0]
+                .addressWithSuitNumberAndPostalCode
+            }}
+            {{ getClinetUrl(company) }}
+          </td>
+          <td class="sp">
+            <!-- <div uib-dropdown class="create-new col-md-2" style="box-shadow: none">
+              <div uib-dropdown-toggle
+                   class="pointer text-right valentin">
+                {{ selectedActiveTechUsers(company) }}
+              </div>
+              <div style="right: 0;" class="dropdown-menu dropdown-assign-ticket assign-ticket">
+      
+                <div class="assign-ticket-content">
+                  <div class="assign-ticket-header" (click)="$event.stopPropagation()">
+                    <div class="clearfix">
+                      <div class="form-group">
+                        <input class="form-control" placeholder="Search Tech Person" 
+                        [(ngModel)]="filterTechUsers">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="scroll-pane" style="background: white; margin-top: 79px">
+                    <div class="users-list custom-scroll">
+                      <div class="user-item" *ngFor="let client of activeTechUsers1()"
+                           >
+                        <a class="dropdown-link" (click)="company.techLeadId = client.id; setTechLeadId(company)">{{
+                                                                                                                   getFullName(client)
+                                                                                                                   }}</a>
+                      </div>
+                    </div>
+      
+      
+                  </div>
+                </div>
+              </div>
+            </div> -->
+            <!-- <div class="cmn-dropdown">
+              <div id="{{company.id}}" class="drop-down-select" (click)="selectedDropdown(i)">
+                <span class="selcted-dp">
+                  
+                 <span *ngIf="selectedActiveTechUserURL(company) !== null"> 
+                  <img  [src]="selectedActiveTechUserURL(company)" alt="user"
+                    />
+                  </span>
+                  <span *ngIf="selectedActiveTechUserURL(company) === null">{{dropFrstLstChar(company)}}</span>
+                  <b>{{ getFullName(company)}}</b>
+                </span>
+                
+                <span class="selected-opt">{{selectedActiveTechUsers(company.techLeadId)}}</span>
+              </div>
+              <div
+                class="cmn-dropdon-list"
+                *ngIf="selectedIdx >= 0 && selectedIdx === i"
+              >
+                <form method="POST">
+                  <input type="text" id="{{company.id}}" #name (keyup)= "searchTechUser(name.value,this)" placeholder="Search Tech Person" />
+                </form>
+                <ul class="list-unstyled" placeholder="Select Tech Users">
+                  <li id="{{company.id}}" *ngFor="let techUser of activeTechUsers" 
+                  (click)="company.techLeadId = techUser.id;setTechLead(techUser, company)">
+                    <span class="pic"
+                      >
+                     
+
+                    <img
+                    height="15"
+                    width="15"
+                    *ngIf="techUser.avatar"
+                    src="/users/{{ techUser.id }}/image.jpg?t={{
+                      techUser.avatar.updatedAt
+                    }}"
+                  />
+                  <span *ngIf="techUser.avatar === null">{{dropFrstLstChar(techUser)}}</span>
+
+                  </span>
+                    <div class="info">
+                      <h5>{{techUser.firstName}} {{techUser.lastName}}</h5>
+                      <span class="email">{{techUser.primaryEmail}}</span>
+                    </div>
+                  </li>
+                  
+                </ul>
+              </div>
+            </div> -->
+            <div class="">
+              <ng-select
+                class="disable-arrow disable-dropdown disable-clear-all"
+                [items]="activeTechUsers"
+                bindLabel="firstName"
+                bindValue="firstName"
+                (change)="setTechLead($event, company)"
+                placeholder="Select Tech Users"
+                [ngModel]="selectedActiveTechUsers(company, i)"
+              >
+                <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                  <!-- <img height="15" width="15" *ngIf="item.avatar" [src]="getClinetUrl(item)" /> -->
+                  <!-- <span *ngIf="item.avatar === null">{{dropFrstLstChar(item)}}</span> -->
+                  <b>{{ getFullName(item) }}</b>
+                </ng-template>
+                <ng-template ng-option-tmp let-item="item" let-index="index">
+                  <img
+                    height="15"
+                    width="15"
+                    *ngIf="item.avatar"
+                    src="/users/{{ item.id }}/image.jpg?t={{
+                      item.avatar.updatedAt
+                    }}"
+                  />
+                  <span *ngIf="item.avatar === null">{{
+                    dropFrstLstChar(item)
+                  }}</span>
+                  <!-- <b>{{ item.firstName }} {{ item.lastName }}</b>
+                  <b>{{ item.primaryEmail }}</b> -->
+                  <div class="info">
+                    <h5>{{ item.firstName }} {{ item.lastName }}</h5>
+                    <span class="email">{{ item.primaryEmail }}</span>
+                  </div>
+                </ng-template>
+              </ng-select>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
