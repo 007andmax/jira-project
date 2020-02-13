@@ -9,7 +9,7 @@
   <div class="product-list___ticket" id="product-list-ticket-data" >
 
     <div  class="product-list-ticket acc-col" [ngStyle]="{'width': (glNumber.getMonthlyDetailed()) ? '1180px' : '' }" style="height: 100%;" *ngIf="!loadingInProgress">
-     <div class="report-header">
+     <div class="report-header" [ngStyle]="{'width': (glNumber.getMonthlyDetailed()) ? '1180px' : '' }">
         <h1>Income accounts</h1>
         <div class="company-info">
           <h3  [textContent]="(selectedClient) ? selectedClient.name : 'All companies'"></h3>
@@ -105,12 +105,12 @@
         <div class="col-md-2"><strong>{{ (reportAccountsReceivable.totalOlderSum || 0) | currency: '$': 2 }}</strong>
         </div>
         <div class="col-md-2"><strong>{{ (reportAccountsReceivable.totalSum || 0) | currency: '$': 2 }}</strong></div>
-      </div>
-      <div class="report-footer">
+      </div-->
+      <div class="report-footer" [ngStyle]="{'width': (glNumber.getMonthlyDetailed()) ? '1180px' : '' }">
         <p>Prepare by : <span>{{ username }}</span></p>
         <p>{{ currentCompany.name }}</p>
         <p>Quicktech <span>2019</span> ©. All rights reserved</p>
-      </div>-->
+      </div>
     </div>
   </div>
  <!-- <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
