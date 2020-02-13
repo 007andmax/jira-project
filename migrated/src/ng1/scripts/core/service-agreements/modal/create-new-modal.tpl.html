@@ -92,7 +92,7 @@
       <strong><h4>Select your type for this customer</h4></strong>
 
       <div ng-show="!blockHourlyChoice" class="col-xs-12"  
-           ng-class="{'active': selectedContractType === 'HOURLY'}">
+           ng-class="{'active': selectedContractType === 'HOURLY','block-contract-disable' : selectedContractType !== 'HOURLY'}">
         <h5>Hourly Billing</h5>
         <p>Bill your customers by the hour, or create custom service that work for you and your customers</p>
       </div>
@@ -103,20 +103,20 @@
       </div>
 
       <div class="col-xs-12" 
-           ng-class="{'active': selectedContractType === 'BLOCK_TIME'}">
+           ng-class="{'active': selectedContractType === 'BLOCK_TIME' ,'block-contract-disable' : selectedContractType !== 'BLOCK_TIME'}">
         <h5>Block Time Billing</h5>
         <p>Sell your customer a block of time, that you bill against each month, this can be carried over if not used.
           You can still create custom Services for Projects or after hours support</p>
       </div>
       <div class="col-xs-12"  
       
-           ng-class="{'active': selectedContractType === 'SERVICE_CONTRACT' && billType === 'DEVICE' || selectedContractType === 'SERVICE_CONTRACT' && billType === 'USER'}">
+           ng-class="{'active': selectedContractType === 'SERVICE_CONTRACT' && billType === 'DEVICE' || selectedContractType === 'SERVICE_CONTRACT' && billType === 'USER','block-contract-disable' : selectedContractType !== 'SERVICE_CONTRACT'  || selectedContractType === 'SERVICE_CONTRACT' && billType !== 'DEVICE'  && billType !== 'USER' }">
         <h5>Per user / device Billing</h5>
         <p>Per user or Device billing, Track time with custom services or create services for projects</p>
       </div>
       <div class="col-xs-12"  
     
-      ng-class="{'active': selectedContractType === 'SERVICE_CONTRACT' && billType === 'OTHER'}">
+      ng-class="{'active': selectedContractType === 'SERVICE_CONTRACT' && billType === 'OTHER' ,'block-contract-disable' : selectedContractType === 'SERVICE_CONTRACT' && billType !== 'OTHER' || selectedContractType !== 'SERVICE_CONTRACT'}">
    <h5>Product / Service Contracts</h5>
    <p>Create a Product sales or Service contract, that is billed or sold as a contract.</p>
  </div>

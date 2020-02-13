@@ -58,14 +58,13 @@
       <p>Num.of Intervals</p>
 
       <input class="form-control" type="text"
-      ng-if="action !== 'PREVIEW'"
-             ng-model="numOfIntervals"
-             placeholder="&infin;"
-             custom-disabled="{{ disabledEndAndNum }}"
-             name="numToGenerate"
-             hard-reset-required="true"
-             ng-change="changeEndDateByNumToGenerate()"
-             hard-reset-pattern="decimalNumberPattern">
+      ng-model="numOfIntervals"
+      placeholder="&infin;"
+      custom-disabled="{{ disabledEndAndNum }}"
+      name="numToGenerate"
+      hard-reset-required="true"
+      ng-change="changeEndDateByNumToGenerate()"
+      hard-reset-pattern="decimalNumberPattern">
     </div>
     <div class="interval-agreement">
       <div class="form-group">

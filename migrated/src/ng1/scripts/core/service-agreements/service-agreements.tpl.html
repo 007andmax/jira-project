@@ -76,7 +76,7 @@
                 <a tabindex="-1" href="javascript:void(0)" ng-click="setInitEditAgreement(true); openAgreementsModal(agreement.type, true, agreement.id)" ng-show="agreement.status != 'TERMINATED' && agreement.status != 'EXPIRED'">Edit</a>
               </li>
               <li>
-                <a tabindex="-1" href="javascript:void(0)" ng-click="setInitEditAgreement(true); setAction('COPY'); openAgreementsModal(agreement.type, true, agreement.id)" ng-show="agreement.status != 'TERMINATED' && agreement.status != 'EXPIRED'">Copy</a>
+                <a tabindex="-1" href="javascript:void(0)" ng-click=" onCopyRightPanel(agreement.id)" ng-show="agreement.status != 'TERMINATED' && agreement.status != 'EXPIRED'">Copy</a>
               </li>
             </ul>
           </div>

@@ -136,6 +136,21 @@ $scope.action = '';
             })
           }
         };
+        $scope.onCopyRightPanel = function (agreementId) {
+          AgreementsService.getAgreement(agreementId, function (resp) {
+
+
+            if (resp.code !== 500) {
+             
+              $scope.setInitEditAgreement(true); 
+          $scope.action = 'COPY';
+       
+          
+          $scope.openModal('COPY', true, resp)
+            }
+
+          })
+        }
         $scope.setInitEditAgreement = function (data) {
           $scope.action = (data) ? 'EDIT' : 'PREVIEW';
           $scope.isEditContract = data;

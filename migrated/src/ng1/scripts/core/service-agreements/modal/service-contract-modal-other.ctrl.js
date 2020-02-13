@@ -135,7 +135,7 @@ console.log('action',$scope.action);
             changeNumOfIntervals($scope.serviceContract.startDate,$scope.serviceContract.endDate, true);
             $scope.$apply();
           }, 500);
-          $scope.numOfIntervals = 6;
+        //  $scope.numOfIntervals = 6;
           if($scope.serviceContract.blockTimeServices.length > 0) {
             $scope.serviceContract.contractWithBlockTime = true;
             $scope.serviceContract.serviceContractServicesToTrack = $scope.serviceContract.blockTimeServices
@@ -652,6 +652,7 @@ $scope.serviceContract.serviceExpenses.forEach((item) => {
         $scope.changeEndDateByNumToGenerate = function() {
           console.log('changeEndDateByNumToGenerate --------------------');
           var intervals = parseInt($scope.numOfIntervals);
+          console.log("intervals",intervals);
           changeEndDate($scope.serviceContract.period, intervals);
         };
 

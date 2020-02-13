@@ -571,6 +571,8 @@ console.log('$scope.serviceContract.endDate',$scope.serviceContract.endDate);
         }
 
         function changeEndDate(period, numOfIntervals) {
+          console.log("numOfIntervals",numOfIntervals);
+          console.log("period",period);
           if(numOfIntervals) {
             var date = $scope.serviceContract.startDate;
             var endDate = new Date(date);
@@ -657,7 +659,8 @@ console.log('$scope.serviceContract.endDate',$scope.serviceContract.endDate);
           }
         }
 
-        $scope.changeEndDateByNumToGenerate = function() {
+        $scope.changeEndDateByNumToGenerate = function(event) {
+          console.log("$scope.numOfIntervals",$scope.numOfIntervals);
           var intervals = parseInt($scope.numOfIntervals);
           changeEndDate($scope.serviceContract.period, intervals);
         };

@@ -13797,3 +13797,18 @@ button.close {
 .ngb-dp-week .hidden {
   display: block !important;
 }
+
+
+.block-contract-disable {
+  background-color: rgb(235, 235, 228) !important;
+  cursor: default !important;
+}
+
+.block-contract-disable:hover {
+
+  border: none !important;
+}
+.block-contract-disable h5:before {
+  border: none !important;
+}
+ 
