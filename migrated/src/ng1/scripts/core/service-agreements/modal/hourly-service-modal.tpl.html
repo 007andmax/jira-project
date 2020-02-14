@@ -56,7 +56,7 @@
         <div class="col-md-3">
           <div class="form-group">
             End Date*:
-
+ 
             <input class="form-control has-dropdown pointer"
                    ng-if="reInitEndDateHourly && !isEditContract && action === 'CREATE' || reInitEndDateHourly && isEditContract && action === 'EDIT'"
                    type="text"
@@ -222,10 +222,10 @@
       <div class="col-md-8" ng-show="showCreateHourlyContractValidationError">
         <p style="color: red; text-align: left">{{errorMessageCreateHourlyDuplicate}}</p>
       </div>
-      <div class="btn btn-success btn-create" ng-if="!isEditContract" ng-click="validateAndCreateHourlyContract(editService)">
+      <div class="btn btn-success btn-create" ng-if="!isEditContract || action === 'COPY'" ng-click="validateAndCreateHourlyContract(editService)">
         Create
       </div>
-      <div class="btn btn-success btn-create" ng-if="isEditContract" ng-click="validateAndUpdateHourlyContract(editService)">
+      <div class="btn btn-success btn-create" ng-if="isEditContract && action === 'EDIT'" ng-click="validateAndUpdateHourlyContract(editService)">
         Edit
       </div>
       <!--<div class="btn btn-primary btn-create">Terminate</div>-->

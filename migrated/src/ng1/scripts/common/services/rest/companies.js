@@ -246,7 +246,19 @@
     function _addAmountChangeListener(callback) {
       amountChangeListeners.push(callback);
     }
-
+    function parseDateTechCompany(end_date) {
+      console.log("end_date",end_date);
+      console.log("storage.currentCompany.addresses[0].countryCode",storage.currentCompany.addresses[0].countryCode);
+      var dateTechCompany = new Date(end_date).toLocaleString("CA", { timeZone: storage.currentCompany.addresses[0].locale }).replace(",", "").replace(/:.. /, " ");
+      var index = dateTechCompany.indexOf(" ");
+      console.log("firts",new Date(end_date).toLocaleString("CA", { timeZone: storage.currentCompany.addresses[0].locale }));
+      console.log("dateTechCompany",dateTechCompany);
+      console.log("index",index);
+      var listDates = dateTechCompany.substring(0, index).split("/");
+      console.log("listDates",listDates);
+      console.log("dateTechCompany",dateTechCompany);
+      return new Date(`${listDates[2]} ${listDates[1]} ${listDates[0]} ${dateTechCompany.substring(index + 1, dateTechCompany.length)}`);
+    }
     function getCurrentCompany() {
       return storage.currentCompany;
     }
@@ -1010,6 +1022,7 @@
     }
 
     return {
+      parseDateTechCompany: parseDateTechCompany,
       _addInitListener: addInitListener,
       _addAmountChangeListener: _addAmountChangeListener,
       _search: search,

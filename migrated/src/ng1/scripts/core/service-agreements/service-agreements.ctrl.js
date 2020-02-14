@@ -46,13 +46,26 @@ $scope.action = '';
         $scope.$on('$destroy', function() {
          
           terminateAndEdit();
+          copyContract();
         });
-      var terminateAndEdit =  $rootScope.$on('terminateAndEdit', function (evt, val) {
+        var terminateAndEdit =  $rootScope.$on('terminateAndEdit', function (evt, val) {
           $scope.setInitEditAgreement(true); 
         
           $scope.openModal(val.type, true, val);
 
         });
+
+      var copyContract =  $rootScope.$on('copyContract', function (evt, val) {
+          $scope.setInitEditAgreement(true); 
+          $scope.action = 'COPY';
+       
+          
+          $scope.openModal('COPY', true, val)
+
+        });
+        $scope.setAction = function (action) {
+          $scope.action = action;
+        }
         AgreementsService.getAllServiceAgreements($scope, function (data) {
 
           $scope.agreementsList = data;
@@ -123,6 +136,21 @@ $scope.action = '';
             })
           }
         };
+        $scope.onCopyRightPanel = function (agreementId) {
+          AgreementsService.getAgreement(agreementId, function (resp) {
+
+
+            if (resp.code !== 500) {
+             
+              $scope.setInitEditAgreement(true); 
+          $scope.action = 'COPY';
+       
+          
+          $scope.openModal('COPY', true, resp)
+            }
+
+          })
+        }
         $scope.setInitEditAgreement = function (data) {
           $scope.action = (data) ? 'EDIT' : 'PREVIEW';
           $scope.isEditContract = data;
@@ -156,6 +184,10 @@ $scope.action = '';
               case ('CREATE_NEW'):
                 template = '/ng1/scripts/core/service-agreements/modal/create-new-modal.tpl.html';
                 break;
+
+                case ('COPY'):
+                  template = '/ng1/scripts/core/service-agreements/modal/create-new-modal.tpl.html';
+                  break;
               case ('HOURLY'):
                 template =   '/ng1/scripts/core/service-agreements/modal/hourly-service-modal.tpl.html';
                 break;
@@ -213,15 +245,25 @@ $scope.action = companyData.action;
           $scope.preSetupCompany = companyData.preSetupCompany;
           if ($scope.preSetupCompany) {
             $scope.contractCompany = $scope.preSetupCompany;
+            
           }
+       //   if ($scope.action === 'COPY')  $scope.editContract.companyId = companyData.companyForReadOnlyMode.companyId;
 
           $scope.companiesList = CompaniesService.getClientCompaniesWoClientsAndLeads();
           $scope.descriptionPattern = /^[0-9A-Za-z!@.)(/,|\\#$&*-_№;:='"?\-\s ]{1,255}$/;
           $scope.serviceNamePattern = /^[0-9A-Za-z!@.)(/,|\\#$&*-_№;:='"?\-\s ]{1,255}$/;
           $scope.quantityPattern = /^\+?[0-9]{0,10}$/;
-
           $scope.selectedContractType = 'CREATE_NEW';
           $scope.modlToShow = 'CREATE_NEW';
+          $scope.billType = '';
+          if (companyData.contractType === 'COPY') {
+            $scope.selectedContractType = companyData.companyForReadOnlyMode.type;
+            $scope.billType = companyData.companyForReadOnlyMode.billType;
+            $scope.modlToShow = 'COPY';
+            companyData.contractType = companyData.companyForReadOnlyMode.type;
+          }
+        
+        
           $scope.blockHourlyChoice = false;
           $scope.reInitEndDateHourly = true;
           $scope.notAddedHourlyServiceError = false;
@@ -307,29 +349,32 @@ $scope.showErrorValidationCurrentDate = false;
               billable: true,
               taxes: addDefaultTaxes()
             };
+            
             if ($scope.isEditContract && companyData.contractType === 'HOURLY') {
               $scope.editContract.description = companyData.companyForReadOnlyMode.description;
               $scope.editContract.companyId = companyData.companyForReadOnlyMode.companyId;
               var startDate = new Date(companyData.companyForReadOnlyMode.startDate);
-              var endDate = new Date(companyData.companyForReadOnlyMode.endDate - $scope.currentCompany.addresses[0].timeZone.timeOffset);
-              $scope.editContract.startDate = $filter('date')(startDate, 'dd MMM yyyy');
-              $scope.editContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
+              var endDateTechCompany = CompaniesService.parseDateTechCompany(companyData.companyForReadOnlyMode.endDate); 
+               $scope.editContract.startDate = $filter('date')(startDate, 'dd MMM yyyy');
+              $scope.editContract.endDate = $filter('date')(endDateTechCompany, 'dd MMM yyyy');
               $scope.isEditContract = true;
               $scope.editContract.services = companyData.companyForReadOnlyMode.services;
               $scope.startDate = new Date(angular.copy($scope.editContract.startDate));
             }
-            if ($scope.isEditContract && companyData.contractType === 'BLOCK_TIME' || $scope.isEditContract && companyData.contractType === 'SERVICE_CONTRACT') {
+            if ($scope.isEditContract && companyData.contractType === 'BLOCK_TIME' || $scope.isEditContract && companyData.contractType === 'SERVICE_CONTRACT' || !$scope.isEditContract && companyData.contractType === 'BLOCK_TIME' || !$scope.isEditContract && companyData.contractType === 'SERVICE_CONTRACT') {
               $scope.editContract = companyData.companyForReadOnlyMode;
               $scope.startDate = new Date(angular.copy($scope.editContract.startDate));
 
             }
+           
            
           } else {
  
             $scope.editContract = companyData.companyForReadOnlyMode;
             $scope.editContract.startDate = $filter('date')($scope.editContract.startDate, 'dd MMM yyyy');
          //   $scope.editContract.endDate = $filter('date')($scope.editContract.endDate, 'dd MMM yyyy');
-         $scope.endDatePreview = $filter('date')(angular.copy($scope.editContract.endDate - $scope.currentCompany.addresses[0].timeZone.timeOffset), 'dd MMM yyyy');
+         var endDateTechCompany = CompaniesService.parseDateTechCompany($scope.editContract.endDate); 
+         $scope.endDatePreview = $filter('date')(endDateTechCompany, 'dd MMM yyyy');
             AgreementsService.getServiceAgreementById($scope.editContract.id, function (data) {
               $scope.contractStatus = data.status;
             });
@@ -397,7 +442,9 @@ $scope.showErrorValidationCurrentDate = false;
               return false;
             }
           };
-
+          $scope.changeCompany = function () {
+            
+          }
           $scope.disabledCreateButtonInCreateNewModal = function () {
             var disable = false;
             if ($scope.contractCompany) {
@@ -546,7 +593,20 @@ $scope.showErrorValidationCurrentDate = false;
 
            
 
-
+          $scope.onInitCopy = function () {
+         
+          $scope.editContract.companyId = $scope.contractCompany.id;
+            $scope.modlToShow = $scope.selectedContractType;
+            if ($scope.selectedContractType === "BLOCK_TIME") {
+              $scope.modlToShow = 'BLOCK_TIME_BILLING';
+            }
+            if ($scope.selectedContractType === 'SERVICE_CONTRACT' && $scope.billType === 'DEVICE' || $scope.selectedContractType === 'SERVICE_CONTRACT' && $scope.billType === 'USER') {
+              $scope.modlToShow = 'PER_USER/DEVICE_BILLING';
+            }
+            if ($scope.selectedContractType === 'SERVICE_CONTRACT' && $scope.billType === 'OTHER') {
+              $scope.modlToShow = 'OTHER';
+            }
+          };
           $scope.changeModalToShow = function () {
             $scope.action = 'CREATE';
             $scope.modlToShow = $scope.selectedContractType
@@ -1143,7 +1203,13 @@ $scope.showErrorValidationCurrentDate = false;
               $rootScope.$broadcast('terminateAndCopy', null);
             })
           };
-
+          $scope.copy = function () {
+           
+            $scope.closeModal();
+            
+            
+            $rootScope.$broadcast('copyContract', $scope.editContract);
+          };
           $scope.terminateAndEdit = function () {
            
             $scope.closeModal();

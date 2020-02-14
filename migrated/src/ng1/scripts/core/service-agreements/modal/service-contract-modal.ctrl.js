@@ -67,7 +67,8 @@
           $scope.action = 'COPY';
            
           var end_date = angular.copy($scope.editContract.endDate);
-          $scope.serviceContract.endDate = $filter('date')(new Date(end_date - $scope.currentCompany.addresses[0].timeZone.timeOffset), 'dd MMM yyyy');//$filter('date')(new Date($scope.serviceContract.endDate), 'dd MMM yyyy');
+          var endDateTechCompany = CompaniesService.parseDateTechCompany(end_date); 
+          $scope.serviceContract.endDate = $filter('date')(endDateTechCompany, 'dd MMM yyyy');//$filter('date')(new Date($scope.serviceContract.endDate), 'dd MMM yyyy');
           $scope.serviceContract.endDatePreview = $scope.serviceContract.endDate;
            
           $scope.serviceContract.startDatePreview = $scope.serviceContract.startDate;
@@ -107,13 +108,12 @@
           preCreateFirstServicesEntities();
           createDefaultServices();
           createDefaultServiceContractServicesToTrack();
-           
-          if ($scope.isEditContract) {
+          if ($scope.isEditContract || !$scope.isEditContract && $scope.action === 'COPY') {
             var end_date = angular.copy($scope.editContract.endDate);
           $scope.serviceContract = angular.copy($scope.editContract);
           $scope.reInitPrpductsExpenseNameField = false;
-        
-          $scope.serviceContract.endDate = $filter('date')(new Date(end_date - $scope.currentCompany.addresses[0].timeZone.timeOffset), 'dd MMM yyyy');//$filter('date')(new Date($scope.serviceContract.endDate), 'dd MMM yyyy');
+          var endDateTechCompany = CompaniesService.parseDateTechCompany(end_date); 
+          $scope.serviceContract.endDate = $filter('date')(endDateTechCompany, 'dd MMM yyyy');//$filter('date')(new Date($scope.serviceContract.endDate), 'dd MMM yyyy');
           $scope.serviceContract.endDatePreview = $scope.serviceContract.endDate;
            
           $scope.serviceContract.startDatePreview = $scope.serviceContract.startDate;
@@ -207,8 +207,8 @@
           var end_date = angular.copy($scope.editContract.endDate);
           $scope.serviceContract = angular.copy($scope.editContract);
           $scope.reInitPrpductsExpenseNameField = false;
-          $scope.serviceContract.endDatePreview = $filter('date')(end_date -$scope.currentCompany.addresses[0].timeZone.timeOffset , 'dd MMM yyyy');
-           
+          var endDateTechCompany = CompaniesService.parseDateTechCompany(end_date); 
+          $scope.serviceContract.endDatePreview = $filter('date')(endDateTechCompany , 'dd MMM yyyy');
           $scope.serviceContract.endDate = '';
           $scope.serviceContract.startDatePreview = $scope.serviceContract.startDate;
           $scope.serviceContract.startDate = '';
@@ -644,7 +644,7 @@ var data = resp;
           }
         }
 
-        $scope.changeEndDateByNumToGenerate = function() {
+        $scope.changeEndDateByNumToGenerate = function(event) {
           var intervals = parseInt($scope.numOfIntervals);
           changeEndDate($scope.serviceContract.period, intervals);
         };
@@ -2103,7 +2103,12 @@ var data = resp;
           })
         };
 
-
+        $scope.copy = function () {
+          $scope.closeModal();
+            
+            
+          $rootScope.$broadcast('copyContract', $scope.editContract);
+        }
 
       }])
 

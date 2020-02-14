@@ -74,7 +74,8 @@
           $scope.action = 'COPY';
            
           var end_date = angular.copy($scope.editContract.endDate);
-          $scope.blockTimeContract.endDate = $filter('date')(new Date(end_date - $scope.currentCompany.addresses[0].timeZone.timeOffset), 'dd MMM yyyy');//$filter('date')(new Date($scope.serviceContract.endDate), 'dd MMM yyyy');
+          var endDateTechCompany = CompaniesService.parseDateTechCompany(end_date); 
+          $scope.blockTimeContract.endDate = $filter('date')(endDateTechCompany, 'dd MMM yyyy');//$filter('date')(new Date($scope.serviceContract.endDate), 'dd MMM yyyy');
           $scope.blockTimeContract.endDatePreview = $scope.blockTimeContract.endDate;
            
           $scope.blockTimeContract.startDatePreview = $scope.blockTimeContract.startDate;
@@ -100,14 +101,14 @@
           if ($scope.isEditContract) {
             var end_date = angular.copy($scope.editContract.endDate);
             $scope.blockTimeContract = angular.copy($scope.editContract);
-             
-           
-            $scope.blockTimeContract.endDate = $filter('date')(new Date(end_date - $scope.currentCompany.addresses[0].timeZone.timeOffset), 'dd MMM yyyy');//$filter('date')(new Date($scope.serviceContract.endDate), 'dd MMM yyyy');
-           
+            var endDateTechCompany = CompaniesService.parseDateTechCompany(end_date); 
+            $scope.blockTimeContract.endDate = $filter('date')(endDateTechCompany, 'dd MMM yyyy');//$filter('date')(new Date($scope.serviceContract.endDate), 'dd MMM yyyy');
+           // $scope.blockTimeContract.startDatePreview = $scope.blockTimeContract.startDate;
             $scope.blockTimeContract.startDate =  $filter('date')($scope.blockTimeContract.startDate, 'dd MMM yyyy');
          
             $scope.blockTimeContract.minStartDate = Date.now();
             $scope.blockTimeContract.taxes = [];
+         //   $scope.blockTimeContract.billForAdditionalService = false;
       
             $scope.blockTimeContract.notifyBlockTimeUsed = $scope.blockTimeContract.shares.length>0;
             $timeout(function () {
@@ -152,8 +153,9 @@
         } else {
           $scope.blockTimeContract = angular.copy($scope.editContract);
           var end_date = angular.copy($scope.editContract.endDate);
-          
-          $scope.blockTimeContract.endDatePreview = $filter('date')(new Date(end_date - $scope.currentCompany.addresses[0].timeZone.timeOffset), 'dd MMM yyyy');
+          //$scope.blockTimeContract.description = $scope.blockTimeContract.description + ' COPY';
+          var endDateTechCompany = CompaniesService.parseDateTechCompany(end_date); 
+          $scope.blockTimeContract.endDatePreview = $filter('date')(endDateTechCompany, 'dd MMM yyyy');
           $scope.blockTimeContract.endDate = '';
           $scope.blockTimeContract.startDatePreview = $scope.blockTimeContract.startDate;
           $scope.blockTimeContract.startDate = '';
@@ -870,6 +872,7 @@ $scope.onChangeService = function (data) {
 
         function returnCompanyId() {
           var id;
+         
           if ($scope.blockTimeContract.companyId) {
             id = $scope.blockTimeContract.companyId;
           } else if ($scope.contractCompany && $scope.contractCompany.id) {
@@ -1220,6 +1223,12 @@ $scope.onChangeService = function (data) {
             })
           }
         }
+        $scope.copy = function () {
+          $scope.closeModal();
+            
+            
+          $rootScope.$broadcast('copyContract', $scope.editContract);
+        }
         $scope.validateAndUpdateBlockTimeContract = function (blockTimeContract, newBlockTimeService, newService) {
            
           if(!checkForInvalidFields()) {
@@ -1259,23 +1268,7 @@ $scope.onChangeService = function (data) {
           }
 
         };
-        function validateCrossingDatesHourly() {
-          $scope.showCreateHourlyContractValidationError = false;
-          var deferred = $q.defer();
-
-          var companyId = returnCompanyId();
-          AgreementsService.validateCrossingDatesHourly($scope.editContract.startDate, $scope.editContract.endDate, companyId, function (resp) {
-            if (resp.valid == true) {
-              deferred.resolve(resp)
-            } else {
-              $scope.showCreateHourlyContractValidationError = true;
-
-              deferred.reject();
-            }
-
-          });
-          return deferred.promise;
-        }
+       
         $scope.validateAndCreteBlockTimeContract = function (blockTimeContract, newBlockTimeService, newService) {
           if(!checkForInvalidFields()) {
             var emptyServices = true;
