@@ -8,8 +8,7 @@
       'quicktech.common.services.UserConfirmationsService', 'Utils','$rootScope',
       function ($scope, AgreementsService, CompaniesService, ServicesService,
                 ProductsService, $filter, $timeout, TaxesService, $q, UserConfirmationsService, Utils,$rootScope) {
-console.log('ffffffffffffffffffffff');
-console.log('action',$scope.action);
+ 
         $scope.intervals = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days'];
         $scope.serviceContractType = {
           DEVICE: 'By Device',
@@ -64,13 +63,13 @@ console.log('action',$scope.action);
         $scope.openedTab = 'product';
 
         $rootScope.$on('terminateAndCopy', function (evt, val) {
-          console.log('terminateAndCopy');
+           
           $scope.action = 'COPY';
-          console.log('$scope.terminateAndCopy', $scope.serviceContract);
+           
           var end_date = angular.copy($scope.editContract.endDate);
           $scope.serviceContract.endDate = $filter('date')(new Date(end_date - $scope.currentCompany.addresses[0].timeZone.timeOffset), 'dd MMM yyyy');//$filter('date')(new Date($scope.serviceContract.endDate), 'dd MMM yyyy');
           $scope.serviceContract.endDatePreview = $scope.serviceContract.endDate;
-          console.log('$scope.serviceContract.endDate',$scope.serviceContract.endDate);
+           
           $scope.serviceContract.startDatePreview = $scope.serviceContract.startDate;
           $scope.serviceContract.startDate = $filter('date')($scope.editContract.startDate, 'dd MMM yyyy');
          
@@ -88,7 +87,7 @@ console.log('action',$scope.action);
 
 
         if ($scope.editMode) {
-          console.log('-----------------');
+           
           $scope.serviceContract = {
             billType: null,
             minStartDate: Date.now(),
@@ -108,8 +107,7 @@ console.log('action',$scope.action);
           preCreateFirstServicesEntities();
           createDefaultServices();
           createDefaultServiceContractServicesToTrack();
-          console.log('$scope.serviceContract.serviceExpenses',$scope.serviceContract.serviceExpenses);
-         console.log('editContract',$scope.editContract);
+           
           if ($scope.isEditContract) {
             var end_date = angular.copy($scope.editContract.endDate);
           $scope.serviceContract = angular.copy($scope.editContract);
@@ -117,7 +115,7 @@ console.log('action',$scope.action);
         
           $scope.serviceContract.endDate = $filter('date')(new Date(end_date - $scope.currentCompany.addresses[0].timeZone.timeOffset), 'dd MMM yyyy');//$filter('date')(new Date($scope.serviceContract.endDate), 'dd MMM yyyy');
           $scope.serviceContract.endDatePreview = $scope.serviceContract.endDate;
-          console.log('$scope.serviceContract.endDate',$scope.serviceContract.endDate);
+           
           $scope.serviceContract.startDatePreview = $scope.serviceContract.startDate;
           $scope.serviceContract.startDate = $filter('date')($scope.editContract.startDate, 'dd MMM yyyy');
           $scope.serviceContract.numOfIntervalsPreview;
@@ -178,12 +176,9 @@ console.log('action',$scope.action);
             }
           }
 
-      /*    for(var g=0; g<$scope.serviceContract.serviceExpenses.length; g++) {
-            $scope.serviceContract.serviceExpenses[g].quantity = $scope.serviceContract.serviceExpenses[g].quantity * 60;
-          }
-*/
+     
           ProductsService.getFullListForAutocomplete($scope, function(resp) {
-            console.log('ggggggggggggggggggg');
+             
             var productsData = resp;
             if($scope.serviceContract.productExpenses.length>0) {
               for(var p=0; p<$scope.serviceContract.productExpenses.length; p++) {
@@ -205,17 +200,15 @@ console.log('action',$scope.action);
 
           $scope.total = $scope.serviceContract.amount;
           preCreateFirstServicesEntities();
-          console.log(' $scope.serviceContract', $scope.serviceContract);
-          console.log('serviceContractType',$scope.serviceContractType);
-          console.log('serviceContractType[serviceContract.billType],',$scope.serviceContractType[$scope.serviceContract.billType]);
+           
           }
         } else {
-          console.log('+++++++++++++++++++++++++++++');
+           
           var end_date = angular.copy($scope.editContract.endDate);
           $scope.serviceContract = angular.copy($scope.editContract);
           $scope.reInitPrpductsExpenseNameField = false;
           $scope.serviceContract.endDatePreview = $filter('date')(end_date -$scope.currentCompany.addresses[0].timeZone.timeOffset , 'dd MMM yyyy');
-          console.log('$scope.serviceContract.endDate',$scope.serviceContract.endDate);
+           
           $scope.serviceContract.endDate = '';
           $scope.serviceContract.startDatePreview = $scope.serviceContract.startDate;
           $scope.serviceContract.startDate = '';
@@ -277,12 +270,9 @@ console.log('action',$scope.action);
             }
           }
 
-      /*    for(var g=0; g<$scope.serviceContract.serviceExpenses.length; g++) {
-            $scope.serviceContract.serviceExpenses[g].quantity = $scope.serviceContract.serviceExpenses[g].quantity * 60;
-          }
-*/
+     
           ProductsService.getFullListForAutocompleteWithOutRealTime($scope, function(resp) {
-            console.log('getFullListForAutocompleteWithOutRealTime');
+             
             var productsData = resp;
             if($scope.serviceContract.productExpenses.length>0) {
               for(var p=0; p<$scope.serviceContract.productExpenses.length; p++) {
@@ -319,7 +309,7 @@ console.log('action',$scope.action);
 
         ServicesService.getServicesDataWithoutRealTime($scope, function(resp){
           if(resp) {
-            console.log('getServicesData 1');
+             
             for(var i=0; i<resp.length; i++) {
               var s = {
                 name: resp[i].name,
@@ -497,7 +487,7 @@ var data = resp;
           $scope.serviceContract.endDate = $scope.serviceContract.minStartDate + month;
         }
       
-console.log('$scope.serviceContract.endDate',$scope.serviceContract.endDate);
+ 
 
         $scope.defaultDareForServiceExpense = Date.now() + day;
 
@@ -574,7 +564,7 @@ console.log('$scope.serviceContract.endDate',$scope.serviceContract.endDate);
             var endDate = new Date(date);
             switch(period) {
               case('Month'):
-                //endDate.setMonth(endDate.getMonth() + 1);
+               
                 endDate = Utils.addNumberOfMonth(endDate, 1*numOfIntervals);
                 break;
               case('Year'):
@@ -585,7 +575,7 @@ console.log('$scope.serviceContract.endDate',$scope.serviceContract.endDate);
             }
             endDate = Utils.minusDays(endDate, 1);
             $scope.serviceContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
-            console.log('$scope.serviceContract.endDate',$scope.serviceContract.endDate);
+             
           }
 
         }
@@ -593,8 +583,7 @@ console.log('$scope.serviceContract.endDate',$scope.serviceContract.endDate);
         $scope.$watch(function() {
           return $scope.serviceContract.endDate;
         }, function(oldEndDate) {
-          console.log('gegegegegegege',   oldEndDate);
-          console.log('gegegegegegege', typeof oldEndDate);
+           
           if (typeof oldEndDate === "string" && typeof $scope.serviceContract.startDate === "string" || typeof oldEndDate === "object" && typeof $scope.serviceContract.startDate === "string") {
      
           changeNumOfIntervals($scope.serviceContract.startDate, oldEndDate)
@@ -721,10 +710,10 @@ console.log('$scope.serviceContract.endDate',$scope.serviceContract.endDate);
             $scope.serviceContract.customInterval = 1;
           }
           $scope.serviceContract.minStartDate = newMinStartDate;
-          //changeMinEndDate($scope.serviceContract.period);
+        
           changeStartDate();
           reInitStartDate();
-          //reInitEndDate();
+        
         });
 
         $scope.$watch(function () {
@@ -732,43 +721,6 @@ console.log('$scope.serviceContract.endDate',$scope.serviceContract.endDate);
         }, function () {
           changeStartDate()
         });
-
-
-
-     /*   ServicesService.getServicesData($scope, function (data) {
-          console.log('getServicesData 2');
-          for (var i = 0; i < data.length; i++) {
-            var serv = {
-              serviceId: data[i].versionedId.id,
-              name: data[i].name,
-              rate: data[i].rate,
-              billable: data[i].billable,
-              taxes: data[i].taxes || [],
-              taxIds: data[i].taxIds || [],
-              picked: false
-            };
-            if (data[i].taxIds && data[i].taxIds.length) {
-              for (var m = 0; m < data[i].taxIds.length; m++) {
-                serv.taxIds.push(data[i].taxes[m].id)
-              }
-            }
-            $scope.defaultServices.push(serv);
-          }
-
-
-
-          if ($scope.serviceContract.serviceExpenses.length > 0) {
-            for (var i = 0; i < $scope.serviceContract.serviceExpenses.length; i++) {
-              for (var j = 0; j < $scope.defaultServices.length; j++) {
-                if ($scope.serviceContract.serviceExpenses[i].serviceId === $scope.defaultServices[j].serviceId) {
-                  $scope.serviceContract.serviceExpenses[i].name = $scope.defaultServices[j];
-                  $scope.defaultServices[j].picked = true;
-                  break;
-                }
-              }
-            }
-          }
-        });*/
 
 
         $scope.changeContractType = function (type) {
@@ -1422,13 +1374,7 @@ console.log('$scope.serviceContract.endDate',$scope.serviceContract.endDate);
             if (typeof serv.name === 'object') {
               serv = Object.assign({}, serv);
 
-              // var defaultServ = serv;
-              // defaultServ.nameValue = defaultServ.name;
-              //
-             
-              // var newServ = $scope.defaultServicesAdditionalForDropDown.find(function(value) {
-              //   return value.name === serv.nameValue;
-              // });
+            
 
               var ns = {
                 name: serv.nameValue,
@@ -1942,14 +1888,7 @@ console.log('$scope.serviceContract.endDate',$scope.serviceContract.endDate);
               if(checkPE || checkSE) {
                 emptyServices = false;
               }
-              // if($scope.serviceContract.isAdditionalServices) {
-              //   if(checkServices) {
-              //     emptyServices = false;
-              //   }
-              // }
-              // if(checkSCSTT) {
-              //   emptyServices = false;
-              // }
+             
             } else {
               if(checkSCS) {
                 emptyServices = false;
@@ -2047,14 +1986,7 @@ console.log('$scope.serviceContract.endDate',$scope.serviceContract.endDate);
               if(checkPE || checkSE) {
                 emptyServices = false;
               }
-              // if($scope.serviceContract.isAdditionalServices) {
-              //   if(checkServices) {
-              //     emptyServices = false;
-              //   }
-              // }
-              // if(checkSCSTT) {
-              //   emptyServices = false;
-              // }
+              
             } else {
               if(checkSCS) {
                 emptyServices = false;
@@ -2165,20 +2097,9 @@ console.log('$scope.serviceContract.endDate',$scope.serviceContract.endDate);
             $scope.editService = { taxes: [] };
             var d = new Date($scope.editContract.startDate);
          
-         //   $scope.editContract.startDate = $filter('date')(Date.now(), 'dd MMM yyyy');
-          /*  $scope.editContract.serviceExpenses.forEach((item) => {
-             item.date = $filter('date')(Date.now(), 'dd MMM yyyy');
-              item.startDate =  $scope.editContract.startDate;
-            })*/
-         
-            console.log('$scope.editContract',$scope.editContract);
-            console.log('$scope.serviceContract',$scope.serviceContract);
-            // if (d.getTime() < $scope.today) {
-            //   $scope.editContract.startDate = '';
-            //   $scope.editContract.endDate = '';
-            // }
+        
             $scope.$apply();
-           // $rootScope.$broadcast('terminateAndCopy', null);
+          
           })
         };
 

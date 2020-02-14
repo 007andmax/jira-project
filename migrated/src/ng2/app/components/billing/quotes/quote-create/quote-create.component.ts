@@ -29,7 +29,7 @@ export class QuoteCreateComponent implements OnInit {
    * Initializes quotes create. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-    console.log('efefef',this.quoteStateService.getQuoteCreate());
+    
    if (!this.editMode) {
     this.quoteStateService.resetQuote();
    } else {

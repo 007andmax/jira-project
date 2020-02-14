@@ -211,8 +211,7 @@ export class QuoteCreateContentNotesComponent implements OnInit {
       this.selectedNoteNew = this.quoteStateService.getSelectedNote();
       this.selectedNote = this.quoteStateService.getSelectedNote();
      if (this.selectedNote) this.isEditMode = true;
-      console.log('this.selectedNoteNew',this.selectedNoteNew);
-      console.log('this.selectedNote',this.selectedNote);
+       
     }
   }
 

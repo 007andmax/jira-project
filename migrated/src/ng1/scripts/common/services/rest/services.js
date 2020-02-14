@@ -114,12 +114,12 @@
 
           if (newChange.action == 'SERVICE_SAVED') {
             if (newChange.data.isDefault) {
-              console.log('----------------- SERVICE_SAVED');
+            
               serviceSaved(newChange.data);
              
             }
           } else if (newChange.action == 'SERVICE_DELETED') {
-            console.log('----------------- SERVICE_DELETED');
+            
             serviceDeleted(newChange.data.versionedId.id, data);
          
           }
@@ -288,7 +288,7 @@
       }
 
       function searchDuplicatedServiceNames(startDate, endDate, companyId, serviceNamesList,agreementId, callback) {
-        console.log('agreementId',agreementId);
+      
         var future = $http({
           method: 'POST',
           url: '/services/searchDuplicatedServiceNames?' + 'startDate=' + startDate + '&endDate=' + endDate + '&companyId=' + companyId + ((agreementId) ? '&agreementId=' + agreementId : ''),

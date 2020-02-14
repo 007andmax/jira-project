@@ -49,7 +49,7 @@ $scope.action = '';
         });
       var terminateAndEdit =  $rootScope.$on('terminateAndEdit', function (evt, val) {
           $scope.setInitEditAgreement(true); 
-          console.log('val',val);
+        
           $scope.openModal(val.type, true, val);
 
         });
@@ -144,60 +144,14 @@ $scope.action = '';
             $scope.openModal(contractType, editMode, companyForReadOnlyMode)
           }
 
-        /*  function openModal(contractType, editMode, companyForReadOnlyMode) {
-            if ($scope.allowToOpenAgreementModal) {
-              var template;
-              console.log('contractType',contractType);
-              switch (contractType) {
-                case ('CREATE_NEW'):
-                  template = '/ng1/scripts/core/service-agreements/modal/create-new-modal.tpl.html';
-                  break;
-                case ('HOURLY'):
-                  template = '/ng1/scripts/core/service-agreements/modal/hourly-service-modal.tpl.html';
-                  break;
-                case ('BLOCK_TIME'):
-                  template = '/ng1/scripts/core/service-agreements/modal/block-time-billing-modal.tpl.html';
-                  break;
-                case ('SERVICE_CONTRACT'):
-                  template = (companyForReadOnlyMode.billType === 'OTHER') ? '/ng1/scripts/core/service-agreements/modal/service-contract-modal-other.tpl.html' :  '/ng1/scripts/core/service-agreements/modal/service-contract-modal.tpl.html';
-                  break;
-                default:
-
-              }
-              $scope.allowToOpenAgreementModal = false;
-              var modalInstance = $uibModal.open({
-                templateUrl: template,
-                animation: true,
-                backdrop: false,
-                size: 'md',
-                controller: 'serviceAgreementsModalCtrl',
-                windowClass: 'create-popup margin-top-modal-dialog',
-                resolve: {
-                  companyData: {
-                    editMode: editMode,
-                    isEditContract: $scope.isEditContract,
-                    companyForReadOnlyMode: companyForReadOnlyMode,
-                    contractType: contractType,
-                    preSetupCompany: preSetupCompany,
-                    action:$scope.action
-                  }
-                }
-
-              });
-
-              modalInstance.opened.then(function () {
-                $scope.allowToOpenAgreementModal = true;
-              });
-            }
-
-          }*/
+      
 
 
         };
         $scope.openModal = function(contractType, editMode, companyForReadOnlyMode,preSetupCompany) {
           if ($scope.allowToOpenAgreementModal) {
             var template;
-            console.log('contractType',contractType);
+            
             switch (contractType) {
               case ('CREATE_NEW'):
                 template = '/ng1/scripts/core/service-agreements/modal/create-new-modal.tpl.html';
@@ -252,7 +206,7 @@ $scope.action = '';
           UserConfirmationsService, UserNotificationService, Utils,$rootScope) {
 $scope.action = companyData.action;
           $scope.taxes = TaxesService.getAll();
-          console.log('companyData', companyData);
+        
           $scope.companyId = companyData.companyId;
           $scope.companyInfo = companyData.companyInfo;
           $scope.endDatePreview = '';
@@ -297,7 +251,7 @@ $scope.showErrorValidationCurrentDate = false;
           $scope.startDate = 0;
           $scope.currentCompany = CompaniesService.getCurrentCompany();
           if (companyData.editMode) {
-            console.log('companyData', companyData);
+          
             $scope.editContract = {};
          
         
@@ -345,14 +299,7 @@ $scope.showErrorValidationCurrentDate = false;
             setMiNDateForEndDate($scope.today);
             setDefaultTime($scope.today);
 
-            // $timeout(function () {
-            //   $scope.editService = {
-            //     name: '',
-            //     rate: null,
-            //     billable: true,
-            //     taxes: addDefaultTaxes()
-            //   };
-            // }, 1000);
+           
 
             $scope.editService = {
               name: '',
@@ -378,7 +325,7 @@ $scope.showErrorValidationCurrentDate = false;
             }
            
           } else {
-console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyMode);
+ 
             $scope.editContract = companyData.companyForReadOnlyMode;
             $scope.editContract.startDate = $filter('date')($scope.editContract.startDate, 'dd MMM yyyy');
          //   $scope.editContract.endDate = $filter('date')($scope.editContract.endDate, 'dd MMM yyyy');
@@ -400,8 +347,7 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
             }
 
           }
-          console.log('$scope.editContract.', $scope.editContract);
-          console.log('$scope.editMode',$scope.editMode);
+       
           if (!companyData.editMode) {
             ServicesService.getServicesDataWithoutRealTime($scope, function (data) {
 
@@ -554,30 +500,26 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
           }
 
           $scope.startDatePicker = function (date) {
-            console.log('startDatePicker', date);
+          
             var newEndDate = new Date(moment(date).year() + 1, moment(date).month() + 1, 0);
 
             if (date && date.length > 0) {
               var startDate = new Date(date);
              
               var startMonth = startDate.getMonth() + 1;
-              //$scope.editContract.startDate = startDate.getFullYear() + "/" + addZeroIfNeed(startMonth) + "/" + addZeroIfNeed(startDate.getDate());
-            
+             
               $scope.editContract.startDate = $filter('date')(startDate, 'dd MMM yyyy');
             
               var endDate = new Date(date);
-              //endDate.setMonth(endDate.getMonth() + 1);
+              
               var n = Utils.addNumberOfMonth(endDate, 1);
               var temp = Utils.minusDays(n, 1);
-              // var temp = new Date(n);
-              // temp.setDate(temp.getDate()-1);
-              // $scope.editContract.endDate = $filter('date')(temp, 'dd MMM yyyy');
+             
               var f = new Date(date);
-              // setMiNDateForEndDate(f);
-              // reInitEndDateHourly(newEndDate);
+             
               $scope.endDatePicker(newEndDate, true);
              
-              // setDefaultTime(newEndDate)
+             
 
             }
 
@@ -597,14 +539,12 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
               var endMonth = endDate.getMonth() + 1;
               $scope.editContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
               $scope.endDate = $scope.editContract.endDate;
-              console.log('$scope.endDate',$scope.endDate);
+            
             }
 
           };
 
-          // function addZeroIfNeed(n) {
-          //   return n < 10 ? '0' + n : '' + n;
-          // }
+           
 
 
           $scope.changeModalToShow = function () {
@@ -623,9 +563,7 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
 
           $scope.closeModal = function () {
             $uibModalInstance.close();
-            // if (!$state.includes('service-agreements')) {
-            //   $state.go('service-agreements');
-            // }
+            
           };
 
           $scope.getUniqueServicesForDropdown = function () {
@@ -734,7 +672,7 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
 
           function returnCompanyId() {
             var id;
-            console.log('$scope.editContract', $scope.editContract);
+          
             if ($scope.editContract.companyId) {
               id = $scope.editContract.companyId
             } else if ($scope.contractCompany && $scope.contractCompany.id) {
@@ -753,8 +691,7 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
             var deferred = $q.defer();
 
             var companyId = returnCompanyId();
-            console.log('$scope.isEditContract',$scope.isEditContract);
-            console.log('$scope.editContract',companyData.companyForReadOnlyMode);
+           
             AgreementsService.validateCrossingDatesHourly($scope.editContract.startDate, $scope.editContract.endDate, companyId,($scope.isEditContract) ? companyData.companyForReadOnlyMode.id : null, function (resp) {
               if (resp.valid == true) {
                 deferred.resolve(resp)
@@ -832,7 +769,7 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
             for (var i = 0; i < $scope.editContract.services.length; i++) {
               serviceNamesList.push(checkNameForObject($scope.editContract.services[i].name));
             }
-            console.log('checkForDuplicateServiceNames',$scope.editContract);
+          
             ServicesService.searchDuplicatedServiceNames($scope.editContract.startDate, $scope.editContract.endDate, companyId, serviceNamesList, ($scope.isEditContract) ? companyData.companyForReadOnlyMode.id : null, function (resp) {
               if (Object.keys(resp).length === 0) {
 
@@ -932,8 +869,7 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
               services: servicesWithTaxIds,
               type: 'HOURLY'
             };
-            console.log('companyContractInfo', companyContractInfo);
-            console.log('$scope.editContract', $scope.editContract);
+           
             var sd = new Date($scope.editContract.startDate);
             sd.setHours(0, 0, 0, 0);
             sd.setSeconds(0);
@@ -993,14 +929,13 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
 
 
             companyContractInfo.endDate = $filter('date')(new Date($scope.editContract.endDate), 'yyyy/MM/dd');
-            console.log('companyContractInfo', companyContractInfo);
-            console.log('$scope.editContract', $scope.editContract);
+           
  
 
             
 
             AgreementsService.updateContract(companyContractInfo, function (resp) {
-              console.log('resp', resp);
+             
               if (resp.message === 'Validation failed') {
                 $scope.showErrorInHourlyContract = true;
                 if (resp.validationResults && resp.validationResults.serviceAgreementDto) {
@@ -1029,8 +964,7 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
               current.setSeconds(0);
               current.setMinutes(0);
               current.setHours(0);
-              console.log('current',current);
-              console.log('startDate',startDate);
+             
 
               var now = new Date();
               now.setMilliseconds(0);
@@ -1061,15 +995,14 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
 
             function validateAndUpdate() {
               if (emptyNewService) {
-                console.log('$scope.editContract', $scope.editContract);
+            
 
 
 
                 var CurrentstartDate = $filter('date')(new Date(companyData.companyForReadOnlyMode.startDate), 'dd MMM yyyy');
                 var CurrentendDate = $filter('date')(new Date(companyData.companyForReadOnlyMode.endDate), 'dd MMM yyyy');
 
-                console.log('$scope.CurrentstartDate', CurrentstartDate);
-                console.log('$scope.CurrentendDate', CurrentendDate);
+                
                 if ($scope.editContract.startDate != CurrentstartDate || $scope.editContract.endDate != CurrentendDate) {
                   validateCrossingDatesHourly().then(function (resp) {
                     if (resp) {
@@ -1205,17 +1138,7 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
               $scope.editService = { taxes: [] };
               var d = new Date($scope.editContract.startDate);
            
-           //   $scope.editContract.startDate = $filter('date')(Date.now(), 'dd MMM yyyy');
-            /*  $scope.editContract.serviceExpenses.forEach((item) => {
-               item.date = $filter('date')(Date.now(), 'dd MMM yyyy');
-                item.startDate =  $scope.editContract.startDate;
-              })*/
            
-              console.log('$scope.editContract',$scope.editContract);
-              // if (d.getTime() < $scope.today) {
-              //   $scope.editContract.startDate = '';
-              //   $scope.editContract.endDate = '';
-              // }
               $scope.$apply();
               $rootScope.$broadcast('terminateAndCopy', null);
             })
@@ -1225,7 +1148,7 @@ console.log('companyData.companyForReadOnlyMode',companyData.companyForReadOnlyM
            
             $scope.closeModal();
             
-            console.log('$scope.editContract',$scope.editContract);
+          
             $rootScope.$broadcast('terminateAndEdit', $scope.editContract);
           };
 

@@ -158,11 +158,11 @@ export class ProductTableComponent implements OnInit, OnDestroy {
     let data = null;
     if (type === 'service') {
       data = { ...item, ...{ description: '', quantity: 1 } };
-      console.log('fffefe', data);
+       
     } else {
       data = { ...item, ...{ quantity: 1, markup: this.quoteStateService.setMarkups(item) } };
     }
-    console.log('item', data);
+     
     this.itemsListArray[index] = data;
     this.changedProductItemsArray.next(this.itemsListArray);
     this.hideDropDown(index);

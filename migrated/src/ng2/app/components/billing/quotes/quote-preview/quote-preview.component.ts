@@ -69,8 +69,7 @@ export class QuotePreviewComponent implements OnInit {
     this.getItemsArray();
     this.editable = this.quoteStateService.getState().params.editable;
     this.editMode = this.quoteStateService.getState().params.editMode;
-     console.log('this.editable',this.editable);
-     console.log('this.editMode',this.editMode);
+      
     this.handleSendMode();
     if (this.editMode) this.quoteForm = this.quoteStateService.getQuoteForm();
     this.quote.client = this.quoteStateService.getClent();
@@ -82,7 +81,7 @@ export class QuotePreviewComponent implements OnInit {
   public getQuoteInfo() {
     this.quote = this.quoteStateService.getQuote();
     this.quoteForCreate = this.quoteStateService.getQuoteCreate();
-   console.log('quoteForCreate.selectedNote',this.quoteForCreate);
+    
   }
 
   /**
@@ -248,7 +247,7 @@ export class QuotePreviewComponent implements OnInit {
    */
   public downloadPdf() {
     const isFormReady = this.quoteStateService.getType();
-    console.log('isFormReady',isFormReady);
+     
     if (isFormReady && this.editMode && this.quoteStateService.getQuoteCreate().id) {
       const currentQuote = this.quoteStateService.getQuoteCreate();
       this.quoteService.editQuote(currentQuote, currentQuote['id'], true)

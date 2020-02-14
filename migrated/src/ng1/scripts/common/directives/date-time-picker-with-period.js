@@ -75,7 +75,7 @@
               options.enabledDates = enabledDates;
 
               element.bind('dp.update', function (e) {
-                console.log("dp.update");
+               
                 var data = dp.data("DateTimePicker"),
                   minDate = new Date(scope.minDate);
                
@@ -83,10 +83,10 @@
                 if (e.viewDate._d.getMonth() === minDate.getMonth() &&
                   e.viewDate._d.getFullYear() === minDate.getFullYear()) {
                   options.minDate = minDate;
-                  console.log('options 1', options);
+                 
                 } else {
                   options.minDate = false;
-                  console.log('options 2', options);
+                 
                 }
 
                 dp = element.datetimepicker(options);
@@ -102,7 +102,7 @@
                   listDates.push($filter('date')(nextYear, 'd MMM yyyy'));
                   }
                   data.enabledDates(listDates);
-                  console.log('listDates',listDates);
+               
                  /* lastDate = new Date(lastDate);
 
                   var nextYear = lastDate.getFullYear() + 1;
@@ -115,29 +115,29 @@
                   var listDates = [];
                 /*  var d = new Date(sd);
                   d = Utils.addNumberOfMonth(d, 12);
-                  console.log('d',angular.copy(d));
+                
                   d = Utils.minusDays(d, 1);*/
                   
                   for (var i=1;i<=120;i++) {
                     var d = new Date(sd);
                   d = Utils.addNumberOfMonth(d, i);
-                  console.log('d',angular.copy(d));
+                  
                   d = Utils.minusDays(d, 1);
                   listDates.push($filter('date')(d, 'd MMM yyyy'));
                   }
-                  console.log('listDates',listDates);
+                
                   //enabledDates.push($filter('date')(d, 'd MMM yyyy'));
                  // enabledDates = enabledDates.concat($filter('date')(listDates, 'd MMM yyyy'));
                   data.enabledDates(listDates);
                    
 
                 }else {
-                  console.log('scope.defaultDate',angular.copy(scope.defaultDate));
+                
                   enabledDates = enabledDates.concat(getEnabledDates(scope.defaultDate, scope.period));
 
                   lastDate = enabledDates[enabledDates.length - 1];
                   data.enabledDates(enabledDates);
-                  console.log('444444444444',enabledDates);
+                  
                 }
                 scope.$apply();
               });
@@ -148,14 +148,14 @@
             }, 0);
 
             element.bind('dp.change', function (e) {
-              console.log("dp.change");
+             
               ctrl.$setViewValue(e.date._d);
               pickedDate = e.date._d;
               element.data('DateTimePicker') && element.data('DateTimePicker').hide();
             });
 
             element.bind('dp.hide', function (e) {
-              console.log("dp.hide");
+             
               if (scope.period) {
                 if(scope.period === 'Month') {
                   enabledDates = [];
@@ -171,7 +171,7 @@
             });
 
             element.bind('dp.show', function (e) {
-              console.log("dp.hide");
+             
               element.parent().find('.datepicker').removeClass('datepicker');
             });
 
@@ -201,7 +201,7 @@
               }
 
               lastDate = dates[dates.length - 1];
-              console.log('dates',angular.copy(dates));
+              
               return dates;
             }
           }

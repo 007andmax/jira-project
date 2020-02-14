@@ -51,8 +51,7 @@ export class MultiDatepickerComponent implements OnInit {
         start: this.dateService.getDateFromBootstrap(this.fromDate),
         end: this.dateService.getDateFromBootstrap(this.toDate),
       });
-      console.log("this.fromDate",this.fromDate);
-      console.log("this.toDate",this.toDate);
+       
       this.setSelectedDateModel(this.fromDate, this.toDate);
       this.hideDatePicker();
     }
@@ -101,10 +100,10 @@ export class MultiDatepickerComponent implements OnInit {
    */
   public setSelectedDateModel(start, end) {
     if (start && end) {
-      console.log("this.dateService.getDateFromBootstrap(start)",this.dateService.getDateFromBootstrap(start));
+       
       const startDate = new Date(this.dateService.getDateFromBootstrap(start));
       const endDate = new Date(this.dateService.getDateFromBootstrap(end));
-      console.log("startDate",startDate);
+       
       this.selectedDateModel = `${this.dateService.getInvoiceDate(startDate)} - ${this.dateService.getInvoiceDate(endDate)}`;
     } else {
       this.selectedDateModel = '';

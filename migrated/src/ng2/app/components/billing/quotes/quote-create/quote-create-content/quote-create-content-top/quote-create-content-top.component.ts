@@ -49,7 +49,7 @@ export class QuoteCreateContentTopComponent implements OnInit {
     this.onInitErrorHandle();
     if (this.editMode) {
       this.currentClient = this.quoteStateService.getClient();
-      console.log('this.currentClient', this.currentClient);
+       
       this.getServices();
     }
   }
