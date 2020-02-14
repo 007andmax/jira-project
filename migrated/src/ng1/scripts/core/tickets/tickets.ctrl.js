@@ -6,7 +6,7 @@
       'quicktech.common.services.PermissionsService', 'DevicesService', 'TagsService', '$rootScope', 'CustomStorageService', '$timeout',
       function ($scope, TicketsService, CompaniesService, UsersService, $state, $stateParams,
         TicketsPermissionsService, SharedStateService, Utils, PermissionsService, DevicesService, TagsService, $rootScope, CustomStorageService, $timeout) {
-        var availableTypes = ['all', 'unassigned', 'user', 'shared', 'spam', 'open', 'closed', 'trash', 'on_hold', 'completed', 'in_progress'],
+        var availableTypes = ['all', 'unassigned', 'user', 'shared', 'spam', 'open', 'closed', 'trash', 'on_hold', 'completed', 'in_progress','recurring_tickets_open','recurring_tickets_closed'],
           ticketsHeaderState = SharedStateService.getSharedState('ticketsHeader'),
           globalSearch = SharedStateService.getSharedState('globalSearch');
         var ticketsSharedState = ticketsHeaderState;

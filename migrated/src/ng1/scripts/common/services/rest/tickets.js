@@ -6,7 +6,7 @@
   services.factory('TicketsService', ['$http', '$rootScope', 'RealTimeService', 'Utils', 'quicktech.common.services.SharedStateService', '$timeout','$filter',
     function ($http, $rootScope, RealTimeService, Utils, SharedStateService, $timeout,$filter) {
       var scope = $rootScope.$new();
-      var ticketChangedActions = ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH', 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_SHARE', 'MARKED_AS_SPAM', 'EDITED_TICKET'];
+      var ticketChangedActions = ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH', 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_SHARE', 'MARKED_AS_SPAM', 'EDITED_TICKET','RECURRING_TICKETS_OPEN', 'RECURRING_TICKETS_CLOSED'];
       var queries, loadingInProcess, lastListType, queriesForCompanyProfilePage;
       var MY_TICKETS = false;
       var operators = {
@@ -155,8 +155,56 @@
                   }
                 ]
               }
-            ],
+            ], 
             "offset": 0
+          }, 
+          RECURRING_TICKETS_OPEN: {
+            excludeTrashSpam: true,
+            groupFieldFilters: [
+              {
+                fieldFilterDtos: [
+                  {
+                    path: "status",
+                    operator: "NOT_EQ",
+                    values: [
+                      "COMPLETED"
+                    ]
+                  },
+                  {
+                    path: "ticketSource",
+                    operator: "EQ",
+                    values: [
+                      "FROM_RECURRING_TICKET"
+                    ]
+                  }
+                ]
+              }
+            ],
+            offset: 0
+          },
+          RECURRING_TICKETS_CLOSED: {
+            excludeTrashSpam: true,
+            groupFieldFilters: [
+              {
+                fieldFilterDtos: [
+                  {
+                    path: "status",
+                    operator: "EQ",
+                    values: [
+                      "COMPLETED"
+                    ]
+                  },
+                  {
+                    path: "ticketSource",
+                    operator: "EQ",
+                    values: [
+                      "FROM_RECURRING_TICKET"
+                    ]
+                  }
+                ]
+              }
+            ],
+            offset: 0
           },
           SHARED: {
             excludeTrashSpam: true,
@@ -274,7 +322,7 @@
       function fetchTickets(listType, userId, companyId, callback) {
 
        
-        var query = queries[listType.toUpperCase()]
+        var query = queries[listType.toUpperCase()];
         
        
         MY_TICKETS = false;
@@ -406,9 +454,15 @@
           }
         
         }
+       if (listType === 'RECURRING_TICKETS_OPEN') {
+        listType = 'OPEN';
+       }  else if (listType === 'RECURRING_TICKETS_CLOSED') {
+        listType = 'CLOSED';
+       }
         loadMore(listType, callback);
       }
       function loadMore(listType, callback) {
+       
         lastListType = listType;
         // if(storage && storage.lastParams) {
         //   storage.lastParams.offset = storage.tickets.length;
@@ -423,7 +477,9 @@
        
         loadingInProcess = true;
         $http.post('/v2/tickets/getTickets', storage.lastParams, { params: { listType: listType } }).then(function (resp) {
+         
           if (resp && resp.config.params.listType === lastListType) {
+         
             for (var i = 0; i < resp.data.length; i++) {
               var ticket = resp.data[i];
               ticket.number = numberPrefix + ticket.number;
@@ -656,7 +712,7 @@
               "FROM_RECURRING_TICKET"
             ]
           });
-          console.log("queries_start",queries_start);
+        
 
          
           $http.post('/v2/tickets/counts', queries_start).then(function (resp) {

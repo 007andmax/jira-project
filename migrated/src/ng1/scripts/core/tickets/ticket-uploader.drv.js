@@ -53,7 +53,7 @@
             });
 
             function getTicketsList(filter) {
-              console.log("getTicketsList",filter);
+             
               if (!filter) {
                 return;
               }
@@ -67,7 +67,7 @@
               UserNotificationService.show('Loading... ');
               scope.loadingOrRendering = true;
               lastListType = $stateParams.listType.toUpperCase();
-              console.log("lastListType",lastListType);
+             
               TicketsService.getList(lastListType, filter.userId, filter.companyId, function (uploadedTickets) {
                 scope.tickets = uploadedTickets;
 
