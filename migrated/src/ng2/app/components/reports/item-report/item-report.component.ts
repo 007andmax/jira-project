@@ -11,6 +11,8 @@ import { AppService } from 'src/ng2/app/states/app/app.service';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
 import { TransitionCheckState } from '@angular/material';
+import { CurrentUser } from 'src/ng2/class/current-user/current-user';
+import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 
 @Component({
   selector: 'app-item-report',
@@ -25,13 +27,17 @@ export class ItemReportComponent implements OnInit {
   selectedClient = null;
   techCompany = null;
   showHeaders = false;
+  currentUser: CurrentUser;
+  currentCompany:any = null;
   constructor(private route: ActivatedRoute, private reportsStateService: ReportsStateService,
     private reportsService: ReportsService,
     public cd: ChangeDetectorRef,
     private elRef: ElementRef,
     private appService: AppService,
     private companiesService: CompaniesService,
-    private companiesStateService: CompaniesStateService) { }
+    private companiesStateService: CompaniesStateService,
+    private usersStateService:UsersStateService,
+   ) { }
 
   ngOnInit() {
     if (localStorage.report) this.report = localStorage.report;
@@ -46,6 +52,9 @@ export class ItemReportComponent implements OnInit {
     this.companiesService.getTechCompany().subscribe(data => {
       this.techCompany = data;
     })
+    this.currentUser  =this.usersStateService.getCurrentUser();
+    this.currentCompany = this.companiesStateService.getCurrentCompany();
+    console.log("currentUser",this.currentUser);
   }
   public onRequest(data) {
     this.loadingInProgress = data;

@@ -36,7 +36,7 @@ export class ReportMenuComponent implements OnInit {
   public onSelectDetailed(data) {
     this.yearToDate = false;
     if (data === 'Monthly') {
-    
+      this.datePicker.clearDate();
       this.glNumber.setMonthlyDetailed(true);
       this.datePicker.setDisabled(true);
    

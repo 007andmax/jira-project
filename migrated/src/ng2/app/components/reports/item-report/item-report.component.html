@@ -106,11 +106,11 @@
         </div>
         <div class="col-md-2"><strong>{{ (reportAccountsReceivable.totalSum || 0) | currency: '$': 2 }}</strong></div>
       </div>
-      <div class="report-footer">
-        <p>Prepare by : <span>{{ username }}</span></p>
-        <p>{{ currentCompany.name }}</p>
-        <p>Quicktech <span>2019</span> ©. All rights reserved</p>
-      </div>-->
+    --> <div class="report-footer">
+        <p>Prepare by : <span [textContent]="currentUser.firstName + ' ' + currentUser.lastName"> </span></p>
+        <p [textContent]="currentCompany.name"></p>
+        <p>Quicktech <span>2020</span> ©. All rights reserved</p>
+      </div> 
     </div>
   </div>
  <!-- <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
@@ -130,7 +130,7 @@
         <div class="report-footer">
           <p>Prepare by : <span>{{ username }}</span></p>
           <p>{{ currentCompany.name }}</p>
-          <p>Quicktech <span>2019</span> ©. All rights reserved</p>
+          <p>Quicktech <span>2020</span> ©. All rights reserved</p>
         </div>
         <div ng-show="showHeader" class="customer-ticket__report--summary" on-finish-render="buildPdf()">
           <h3>Resolved Tickets</h3>
