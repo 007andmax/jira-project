@@ -943,7 +943,44 @@
         Utils.handleCallback(future, callback);
       }
       function changeTicketsCounts() {
-        $http.post('/v2/tickets/counts', queries).then(function (resp) {
+        console.log("changeTicketsCounts");
+        var queries_start = JSON.parse(JSON.stringify(queries));
+        queries_start.USER.groupFieldFilters[1].fieldFilterDtos.push( {
+          path: "ticketSource",
+          operator: "NOT_EQ",
+          values: [
+            "FROM_RECURRING_TICKET"
+          ]
+        });
+        queries_start.ALL.groupFieldFilters = [
+          {
+            fieldFilterDtos: [
+              {
+                path: "ticketSource",
+                operator: "NOT_EQ",
+                values: [
+                  "FROM_RECURRING_TICKET"
+                ]
+              }
+            ]
+          }
+        ];
+        queries_start.OPEN.groupFieldFilters[0].fieldFilterDtos.push({
+          path: "ticketSource",
+          operator: "NOT_EQ",
+          values: [
+            "FROM_RECURRING_TICKET"
+          ]
+        });
+
+        queries_start.CLOSED.groupFieldFilters[0].fieldFilterDtos.push({
+          path: "ticketSource",
+          operator: "NOT_EQ",
+          values: [
+            "FROM_RECURRING_TICKET"
+          ]
+        });
+        $http.post('/v2/tickets/counts', queries_start).then(function (resp) {
           angular.copy(resp.data, storage.ticketsQuantityMap);
         })
       }
