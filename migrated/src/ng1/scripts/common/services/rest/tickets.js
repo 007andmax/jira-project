@@ -335,6 +335,7 @@
             var ticketFilterQuery = query.groupFieldFilters[0].fieldFilterDtos[0];
             groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(ticketFilterQuery)
           }
+          
           storage.lastParams = angular.copy(groupedQuery);
           getCompanyTicketCount(storage.lastParams);
         } else {
@@ -344,10 +345,19 @@
         }
         storage.tickets = [];
         if (MY_TICKETS && listType === 'USER')  {
-          storage.lastParams.groupFieldFilters = [];
+          storage.lastParams.groupFieldFilters = [{
+            fieldFilterDtos: [{  path: "ticketSource",
+            operator: "NOT_EQ",
+            values: [
+                "FROM_RECURRING_TICKET"
+            ]}]
+          
+        }];
+
           loadMore(listType, callback);
           return;
         }
+       
         if (userId) {
           storage.lastParams.groupFieldFilters = storage.lastParams.groupFieldFilters || [];
           storage.lastParams.groupFieldFilters.push({
@@ -368,7 +378,34 @@
             }]
           });
         }
-     
+        if (listType === 'USER') {
+          storage.lastParams.groupFieldFilters[0].fieldFilterDtos.push({  path: "ticketSource",
+            operator: "NOT_EQ",
+            values: [
+                "FROM_RECURRING_TICKET"
+            ]
+          });
+        }
+        if (listType === 'ALL' || listType === 'OPEN' || listType === 'CLOSED') {
+          if (!storage.lastParams.groupFieldFilters) {
+            storage.lastParams.groupFieldFilters = [{
+              fieldFilterDtos : [{  path: "ticketSource",
+              operator: "NOT_EQ",
+              values: [
+                  "FROM_RECURRING_TICKET"
+              ]
+            }]
+            }];
+          } else {
+            storage.lastParams.groupFieldFilters[0].fieldFilterDtos.push({  path: "ticketSource",
+            operator: "NOT_EQ",
+            values: [
+                "FROM_RECURRING_TICKET"
+            ]
+          });
+          }
+        
+        }
         loadMore(listType, callback);
       }
       function loadMore(listType, callback) {
@@ -573,10 +610,54 @@
         allCountsCallback = callback;
         if (queries) {
           var queries_start = JSON.parse(JSON.stringify(queries));
-          queries_start.USER = {"excludeTrashSpam": true,
-          "groupFieldFilters": [],
-          "offset": 0,
-          "myTicketsPage": true};
+          queries_start.USER = {
+            "excludeTrashSpam": true,
+            "groupFieldFilters": [
+              {
+                fieldFilterDtos: [
+                  {
+                    path: "ticketSource",
+                    operator: "NOT_EQ",
+                    values: [
+                      "FROM_RECURRING_TICKET"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "offset": 0,
+            "myTicketsPage": true
+          };
+          queries_start.ALL.groupFieldFilters = [
+            {
+              fieldFilterDtos: [
+                {
+                  path: "ticketSource",
+                  operator: "NOT_EQ",
+                  values: [
+                    "FROM_RECURRING_TICKET"
+                  ]
+                }
+              ]
+            }
+          ];
+          queries_start.OPEN.groupFieldFilters[0].fieldFilterDtos.push({
+            path: "ticketSource",
+            operator: "NOT_EQ",
+            values: [
+              "FROM_RECURRING_TICKET"
+            ]
+          });
+
+          queries_start.CLOSED.groupFieldFilters[0].fieldFilterDtos.push({
+            path: "ticketSource",
+            operator: "NOT_EQ",
+            values: [
+              "FROM_RECURRING_TICKET"
+            ]
+          });
+          console.log("queries_start",queries_start);
+
          
           $http.post('/v2/tickets/counts', queries_start).then(function (resp) {
             storage.ticketsQuantityMap = resp.data;
