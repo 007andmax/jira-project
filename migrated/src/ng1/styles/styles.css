@@ -5698,6 +5698,7 @@ tbody.collapse.in {
   -webkit-box-shadow: 0 4px 20px 0 rgba(10, 45, 89, 0.1);
   box-shadow: 0 4px 20px 0 rgba(10, 45, 89, 0.1);
   background-clip: padding-box;
+  max-height: 190px;
 }
 
 .dropdown-menu.dropdown-menu-services.dropdown-menu-services-create {
