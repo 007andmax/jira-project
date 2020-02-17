@@ -356,7 +356,7 @@ angular.module('quicktech')
     NotificationComponent,
     UsersAsideEditComponent,
     ModalImageCropperComponent,
-    DraftEmailUserRecipientsComponent
+    DraftEmailUserRecipientsComponent,
     MyProfileComponent,
     SettingComponent,
     CompanyProfileComponent,
@@ -436,7 +436,7 @@ angular.module('quicktech')
       primaryColour: '#16a4fa',
       secondaryColour: '#16a4fa',
       tertiaryColour: '#16a4fa'
-    })
+    }),
     RouterModule.forRoot([
         {
           path: '',
