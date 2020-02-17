@@ -56,6 +56,9 @@
         ticketsQuantity: 0,
         leftPanelCounters: {}
       };
+      $rootScope.$on('getCountsTickets', function(){
+        changeTicketsCounts();
+      });
       var globalSearch = SharedStateService.getSharedState('globalSearch');
       var userId;
       var unwatch = $rootScope.$watch('currentUser.id', function (currentUserId) {
@@ -851,6 +854,7 @@
         // if (value === 'COMPLETED') {
         data.recipientsIds = recipientsIds;
         // }
+        console.log("changeStatus 2");
         var future = $http.put(url, data);
         Utils.handleCallback(future, callback)
       }
