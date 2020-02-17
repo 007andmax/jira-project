@@ -35,7 +35,8 @@
           <div class="col-md-1 pointer"
                ng-click="setOrderForProducts('ilc')">ILC
           </div>
-          <div class="col-md-1">GL</div>
+          <div class="col-md-1 pointer"
+          ng-click="setOrderForProducts('glNumber')">GL</div>
         </div>
         <div class="products-content__list--item clearfix"
              ng-repeat="product in productsData.list | filterProductByName: productSearchName | filter : filterByCategory | orderBy : orderByForProducts : orderProducts.reverse track by product.versionedId.id"

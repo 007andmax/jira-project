@@ -102,7 +102,7 @@ this.onSelectedClient.emit(this.selectedClient);
         this.reportsService.getReportByGlNumber(this.glNumber.getForRequest()).subscribe(data => this.setDatareport(data));
       })
     } else {
-     this.glNumber.setDatesForMonthly();
+    if (this.glNumber.getMonthlyDetailed()) this.glNumber.setDatesForMonthly();
       this.reportsService.getReportByGlNumber(this.glNumber.getForRequest()).subscribe(data => this.setDatareport(data));
     }
 
