@@ -121,7 +121,6 @@ import { ModalModule, TypeaheadModule } from 'ngx-bootstrap';
 
 import { LeftPanelSettingComponent } from './components/left-panel/left-panel-setting/left-panel-setting.component';
 
-import { ImageCropperModule } from 'ngx-image-cropper';
 import { TechUsersComponent } from './components/setting/tech-users/tech-users.component';
 import { EmailSettingComponent } from './components/setting/email-setting/email-setting.component';
 import { TaxesComponent } from './components/setting/taxes/taxes.component';
@@ -142,7 +141,6 @@ import { ProfileComponent } from './components/setting/my-profile/profile/profil
 import { TagPipe } from './pipe/tag.pipe';
 
 import { ToastrModule } from 'ngx-toastr';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { SelectDropDownModule } from 'ngx-select-dropdown';
 import { IncomingEmailComponent } from './components/setting/email-setting/incoming-email/incoming-email.component';
@@ -416,7 +414,6 @@ angular.module('quicktech')
     SelectDropDownModule,
     CKEditorModule,
     TabsModule.forRoot(),
-    SidebarModule.forRoot(),
     ModalModule.forRoot(),
     TypeaheadModule.forRoot(),
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
