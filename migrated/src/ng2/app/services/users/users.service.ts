@@ -38,9 +38,9 @@ export class UsersService {
   /**
    * Get current user
    */
-  // public getCurrentUser() {
-  //   return this.http.get(this.apiUrl + 'users/current');
-  // }
+  public getCurrentUser() {
+    return this.http.get(this.apiUrl + 'users/current');
+  }
   /* public getCurrentUser() {
     return this.http.get(this.apiUrl + 'users/current').subscribe((res) => {
       this.currentUser = res;
@@ -48,11 +48,11 @@ export class UsersService {
     });
   }*/
 
-  getCurrentUser() {
-    return this.http.get(this.apiUrl + 'users/current').subscribe((res) => {
-      this.currentUser = res;
-    });
-  }
+  // getCurrentUser() {
+  //   return this.http.get(this.apiUrl + 'users/current').subscribe((res) => {
+  //     this.currentUser = res;
+  //   });
+  // }
   changeUserPermissions(permissions) {
     console.log(this.currentUser, '12351');
     console.log(permissions, '12351');
