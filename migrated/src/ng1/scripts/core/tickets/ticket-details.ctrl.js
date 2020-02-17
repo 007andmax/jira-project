@@ -1035,6 +1035,8 @@ $scope.countShowAssignedUsers = $scope.ticketDetails.multiAssignedUsers.length;
             $scope.showServicesError = false;
           });
           $scope.saveTicketUpdate = function (form, disableRestoringDefaults, callback, isExpenseEdit, value, close = false) {
+            
+      
             if (isExpenseEdit) {
               if (isExpenseEdit.note) {
                 var note = isExpenseEdit.note;
@@ -1144,6 +1146,7 @@ $scope.countShowAssignedUsers = $scope.ticketDetails.multiAssignedUsers.length;
                 });
               }
               TicketsService.createTicketUpdate(ticketUpdateToSend, close || false, function () {
+                if (close)   $rootScope.$broadcast('getCountsTickets', null);
                 $scope.isSavingUpdate = false;
                 if (callback) callback();
                 $scope.disabledWhenNoCompleted = (!$scope.checkCompleted()) ? true : false;
