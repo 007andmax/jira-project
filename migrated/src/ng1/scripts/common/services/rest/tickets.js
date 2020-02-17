@@ -945,13 +945,24 @@
       function changeTicketsCounts() {
         console.log("changeTicketsCounts");
         var queries_start = JSON.parse(JSON.stringify(queries));
-        queries_start.USER.groupFieldFilters[1].fieldFilterDtos.push( {
-          path: "ticketSource",
-          operator: "NOT_EQ",
-          values: [
-            "FROM_RECURRING_TICKET"
-          ]
-        });
+        queries_start.USER = {
+          "excludeTrashSpam": true,
+          "groupFieldFilters": [
+            {
+              fieldFilterDtos: [
+                {
+                  path: "ticketSource",
+                  operator: "NOT_EQ",
+                  values: [
+                    "FROM_RECURRING_TICKET"
+                  ]
+                }
+              ]
+            }
+          ],
+          "offset": 0,
+          "myTicketsPage": true
+        };
         queries_start.ALL.groupFieldFilters = [
           {
             fieldFilterDtos: [
