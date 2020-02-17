@@ -24,6 +24,8 @@ import { MatAutocompleteModule, MatIconModule } from "@angular/material";
 import { CronEditorModule } from "cron-editor";
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { NgxEditorModule } from 'ngx-editor';
+import { NgxSelectModule } from 'ngx-select-ex';
+import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppComponent } from './app.component';
@@ -109,7 +111,6 @@ import { UsersAsideEditComponent } from './components/users/users-aside-edit/use
 import { ModalImageCropperComponent } from './services/modal/modal-image-cropper/modal-image-cropper.component';
 import { DraftEmailUserRecipientsComponent } from './components/shared/draft-email/draft-email-user-recipients/draft-email-user-recipients.component';
 
-import { QuotesComponent } from './components/billing/quotes/quotes.component';
 import { MyProfileComponent } from './components/setting/my-profile/my-profile.component';
 import { SettingComponent } from './components/setting/setting.component';
 import { ManageTagsComponent } from './components/setting/manage-tags/manage-tags.component';
@@ -405,7 +406,6 @@ angular.module('quicktech')
     MatChipsModule,
     MatIconModule,
     MatAutocompleteModule,
-    BrowserAnimationsModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     SidebarModule.forRoot(),
     ShowHidePasswordModule,
@@ -487,7 +487,6 @@ angular.module('quicktech')
         enableTracing: false
       }),
       CronEditorModule,
-      ImageCropperModule,
       NgxEditorModule ,
       FontAwesomeModule
 
