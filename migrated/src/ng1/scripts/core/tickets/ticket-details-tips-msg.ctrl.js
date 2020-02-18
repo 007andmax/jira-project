@@ -14,6 +14,7 @@
 
         $scope.markAsOpen = function () {
           TicketsService.changeStatus($scope.ticketDetails.id, 'IN_PROGRESS', function (resp) {
+console.log("resp",resp);
 
             if (resp.code == 403) {
 
@@ -21,7 +22,7 @@
               alert($scope.getUserName(user) + ' locked this ticket to create invoice!');
               return;
             }
-
+            $rootScope.$broadcast('getCountsTickets', null);
             UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as open', true);
             $scope.uncheckTicket($scope.ticketDetails.id);
           });

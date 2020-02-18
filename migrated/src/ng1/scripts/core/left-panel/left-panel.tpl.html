@@ -419,6 +419,15 @@
              ng-click="stateGo($event, 'recurring-tickets')">
           Recurring Tickets
         </div>
+        <div class="center-category__category" ng-class="{active: $state.includes('tickets', {listType: 'recurring_tickets_open'})}"
+          ng-click="stateGo($event, 'tickets', {listType: 'recurring_tickets_open'})">
+          Recurring tickets Open <span>{{ticketsCounter.RECURRING_TICKETS_OPEN}}</span>
+        </div>
+        
+        <div class="center-category__category" ng-class="{active: $state.includes('tickets', {listType: 'recurring_tickets_closed'})}"
+          ng-click="stateGo($event, 'tickets', {listType: 'recurring_tickets_closed'})">
+          Recurring tickets Closed <span>{{ticketsCounter.RECURRING_TICKETS_CLOSED}}</span>
+        </div>
         <div class="left-panel-title font-medium">
           By tags
         </div>
