@@ -25,7 +25,7 @@ import { CronEditorModule } from "cron-editor";
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { NgxEditorModule } from 'ngx-editor';
 import { NgxSelectModule } from 'ngx-select-ex';
-import { ShowHidePasswordModule } from 'ngx-show-hide-password';
+// import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppComponent } from './app.component';
@@ -406,7 +406,7 @@ angular.module('quicktech')
     MatAutocompleteModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     SidebarModule.forRoot(),
-    ShowHidePasswordModule,
+    // ShowHidePasswordModule,
     AppRoutingModule,
     ImageCropperModule,
     DataTablesModule,
