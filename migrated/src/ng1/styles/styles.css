@@ -13811,4 +13811,13 @@ button.close {
 .block-contract-disable h5:before {
   border: none !important;
 }
- 
+
+.hourly-service-modal__buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.hourly-service-modal__buttons .btn-create {
+  margin-bottom: 10px;
+}
