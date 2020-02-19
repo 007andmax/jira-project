@@ -23,7 +23,7 @@
       'quicktech.core.quickSupport',
       'quicktech.core.reports',
       'quicktech.core.serviceAgreements',
-
+      'proton.multi-list-picker',
       'ui.router',
       'ui.select',
       'ui.bootstrap',
@@ -35,7 +35,7 @@
       'nvd3',
       'vs-repeat',
       'daterangepicker',
-      'infinite-scroll',
+      'infinite-scroll'
 
     ]);
 
@@ -138,10 +138,41 @@
                                                                 url: '/ng2/password-manager',
                                                                 template: '<password-manager></password-manager>'
                                                               }))
+                                                              .state('company-password-manager', waitForServices({
+          url: '/ng2/company-password-manager',
+          template: '<company-password-manager></company-password-manager>'
+        }))
                    .state('quotes-component', waitForServices({
-                                                                url: '/ng2/quotes',
-                                                                template: '<quotes-component></quotes-component>'
-                                                              }))
+                      url: '/ng2/quotes',
+                      template: '<quotes-component></quotes-component>'
+                    }))
+                    .state('quote-create-component', {
+                      url: '/ng2/quotes/quote-create',
+                      params: {
+                        editMode: null
+                      },
+                      template: '<quote-create-component></quote-create-component>'
+                    })
+                    .state('quote-preview-component', {
+                      url: '/ng2/quotes/quote-preview',
+                      params: {
+                        editMode: null,
+                        editable: null
+                      },
+                      template: '<quote-preview-component></quote-preview-component>'
+                    })
+                    .state('recurring-tickets', waitForServices({
+                      url: '/ng2/recurring-tickets',
+                      template: '<recurring-tickets-component></recurring-tickets-component>'
+                    }))
+                    .state('new-companies', waitForServices({
+                      url: '/ng2/companies',
+                      template: '<companies-component></companies-component>'
+                    }))
+                    .state('new-users', waitForServices({
+                      url: '/ng2/users',
+                      template: '<users-component></users-component>'
+                    }))
                     .state('myprofile-component', waitForServices({
                                                               url: '/ng2/setting/myprofile',
                                                               template: '<myprofile-component></myprofile-component>'
