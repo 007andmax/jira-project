@@ -264,9 +264,10 @@
              tooltip-placement="right"
              tooltip-append-to-body="true"></div>
       </div>
-      <div ui-sref="settings" ng-click="onClickSettings()"
-           ng-class="{'active': openedCategory === 'settings' || (openedCategory === undefined && $state.is('settings'))}"
-           style="width: calc(100% + 10px)">
+      <div class="left-panel__category"   ng-click="stateGo($event, 'myprofile-component')"
+      ng-click="toggleLeftPanel('myprofile-component', true)"
+        ng-class="{'active': openedCategory === 'myprofile-component' || (openedCategory === undefined && $state.is('myprofile-component'))}"
+        style="width: calc(100% + 10px)">
         <div class="settings-left-bar"></div>
       </div>
     </div>
