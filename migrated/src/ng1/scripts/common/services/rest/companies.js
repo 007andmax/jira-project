@@ -22,7 +22,9 @@
       },
       callbackForArchive,
       callbackForSavedCompanies = {},
+      glNumbers = [],
       companyPaymentInfo = {};
+      
 
 
     Utils.customizeObj(storage);
@@ -111,12 +113,26 @@
       Utils.customizeObj(resp.data, storage.currentCompany);
       setRealTimeCurrentCompany();
       checkInit();
+      console.log("resp.data",resp.data);
+
+      setRealTimeGLNumbers(resp.data.id);
+    //  $rootScope.$broadcast('setRealTimeGLNumbers', resp.data);
+     // ServicesService.setRealTimeGLNumbers(resp.data.id);
+
     },
       function (resp) {
         console.error(resp);
         throw 'Cannot initialize CompaniesService!';
       });
-
+     
+    $http.get('/glNumber').then(function (resp) {
+      // console.log("resp.data",resp);
+      glNumbers = resp.data.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
+        1 : ((b.glNumber.toLowerCase() > a.glNumber.toLowerCase()) ? -1 : 0));
+    })
+    function getGlNumbers() {
+      return angular.copy(glNumbers);
+    }
     function reloadCurrentCompany(callback) {
       $http.get('/company/current').then(function (resp) {
         if (callback) {
@@ -128,7 +144,21 @@
     }
 
     var checkInitsCount = 0;
+    function setRealTimeGLNumbers(id) {
 
+      RealTimeService.subscribe('/glNumber/' + id, serviceScope, function (newChange) {
+
+        if (newChange.action === "GL_NUMBER_SAVED") {
+          glNumbers.push(newChange.data);
+          console.log("glNumbers",angular.copy(glNumbers));
+          glNumbers = glNumbers.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
+          1 : ((b.glNumber.toLowerCase() > a.glNumber.toLowerCase()) ? -1 : 0));
+          $rootScope.$broadcast('setRealTimeGLNumbers', angular.copy(glNumbers));
+        }
+
+
+      })
+    }
     function checkInit() {
       checkInitsCount++;
       if (checkInitsCount === 3) {
@@ -138,6 +168,8 @@
           initListeners[i]();
         }
       }
+
+
     }
 
     RealTimeService.subscribe('/company', serviceScope, function (newChange) {
@@ -1010,6 +1042,7 @@
     }
 
     return {
+      getGlNumbers:getGlNumbers,
       _addInitListener: addInitListener,
       _addAmountChangeListener: _addAmountChangeListener,
       _search: search,

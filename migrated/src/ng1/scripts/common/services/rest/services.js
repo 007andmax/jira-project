@@ -8,7 +8,9 @@
 
   services.factory('ServicesService', ['$http', '$rootScope', 'RealTimeService', 'Utils', 'CompaniesService',
     function ($http, $rootScope, RealTimeService, Utils, CompaniesService) {
+    var  serviceScope = $rootScope.$new();
 
+  
       function search(keyword) {
 
         if (!keyword) {
@@ -205,17 +207,7 @@
         Utils.handleCallback(future, callback);
       }
 
-      function getGlNumbers(callback) {
-        
-
-        var future = $http({
-          url: '/glNumber',
-          method: 'GET'
-        });
-
-        Utils.handleCallback(future, callback);
-      }
-
+     
       function move(mapping, callback) {
         if (!mapping) throw 'mapping is required argument!';
 
@@ -310,12 +302,16 @@
         });
         Utils.handleCallback(future, callback);
       }
-
+    
+   
+      
+          console.log("CompaniesService.getCurrentCompany()",CompaniesService.getCurrentCompany());
       return {
+        
         createGlNumber: createGlNumber,
         resetContractGlNumber : resetContractGlNumber,
         setContractGlNumber: setContractGlNumber,
-        getGlNumbers:getGlNumbers,
+      
         getAllByCompany: getAllByCompany,
         getServicesData: getServicesData,
         getSpecialServices: getSpecialServices,

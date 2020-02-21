@@ -3,17 +3,20 @@
 (function () {
 
   angular.module('quicktech').controller('quicktech.editServiceCtrl',
-    ['$scope', '$rootScope', 'ServicesService', 'TaxesService', '$timeout',
-      function ($scope, $rootScope, ServicesService, TaxesService, $timeout) {
+    ['$scope', '$rootScope', 'ServicesService', 'TaxesService', '$timeout','CompaniesService',
+      function ($scope, $rootScope, ServicesService, TaxesService, $timeout,CompaniesService) {
 
         var savedState = $scope.getLastSavedState('service');
         $scope.glNumbersList = [];
         $scope.isChangeGlNumber = false;
         $scope.taxes = TaxesService.getAll();
-        ServicesService.getGlNumbers(function (data) {
-          $scope.glNumbersList = data.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
-          1 : ((b.glNumber.toLowerCase() > a.glNumber.toLowerCase()) ? -1 : 0));
-        })
+        $rootScope.$on('setRealTimeGLNumbers', function(event, newInvoice){
+          console.log('newInvoice',newInvoice);
+          $scope.glNumbersList = newInvoice;
+              });
+       // ServicesService.getGlNumbers(function (data) {
+          $scope.glNumbersList = CompaniesService.getGlNumbers();
+      //  })
         $scope.showModal = false;
 
         $timeout(function() {

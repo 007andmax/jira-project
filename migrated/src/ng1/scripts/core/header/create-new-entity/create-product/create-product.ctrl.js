@@ -11,10 +11,14 @@
       $scope.newCategoryNamePattern = /^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,100}$/;
       $scope.glNumbersList = [];
       $scope.isChangeGlNumber = false;
-      ServicesService.getGlNumbers(function (data) {
-        $scope.glNumbersList = data.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
-      1 : ((b.glNumber.toLowerCase() > a.glNumber.toLowerCase()) ? -1 : 0));
-      })
+      
+      $rootScope.$on('setRealTimeGLNumbers', function(event, newInvoice){
+        console.log('newInvoice',newInvoice);
+        $scope.glNumbersList = newInvoice;
+            });
+     // ServicesService.getGlNumbers(function (data) {
+        $scope.glNumbersList = CompaniesService.getGlNumbers();
+    //  })
       $scope.$watch('currentUser.permissions', function (permissions) {
         if (permissions && !PermissionsService.isAllowed('MANAGE_PRODUCTS')) {
           $scope.closeWindow();
