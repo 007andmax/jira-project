@@ -175,6 +175,16 @@ export class QuoteService {
       catchError(this.handleError));
   }
 
+    /**
+   * Get quote note
+   */
+  public getQuote(id) {
+    return this.http.get(this.apiUrl + `saleQuotes/${id}`).pipe(
+      tap(data => data),
+      catchError(this.handleError));
+  }
+
+
   /**
    * Get quote note
    */

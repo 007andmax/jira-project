@@ -163,14 +163,14 @@ export class QuoteCreateContentTopComponent implements OnInit {
    * return client company name
    */
   public getCLientUserName(companyInfo) {
-    return `${companyInfo.contacts[0].firstName} ${companyInfo.contacts[0].lastName}`
+    return (companyInfo) ? `${companyInfo.contacts[0].firstName} ${companyInfo.contacts[0].lastName}` : '';
   }
 
   /**
    * return client company address
    */
   public getCLientAddress(companyInfo) {
-    return `${companyInfo.addresses[0].address}`
+    return (companyInfo) ?  `${companyInfo.addresses[0].address}` : '';
   }
 
   /**

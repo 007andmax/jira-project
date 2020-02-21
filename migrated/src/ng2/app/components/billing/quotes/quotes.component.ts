@@ -247,14 +247,22 @@ export class QuotesComponent implements OnInit,OnDestroy {
    * @param quote - quote
    */
   goToQuoteEdit(quote) {
-    this.quoteStateService.setEditQuote(quote);
+    this.quoteServices.getQuote(quote.id).subscribe((data) => {
+      console.log("data",data);
+      this.quoteStateService.setEditQuote(data);
+    })
+  
   }
 
   /**
    * Change state to preview
    */
   public goToPreview(quote) {
-    this.quoteStateService.goToPreview(quote, false);
+    this.quoteServices.getQuote(quote.id).subscribe((data) => {
+      console.log("data",data);
+      this.quoteStateService.goToPreview(data, false);
+    })
+ //   this.quoteStateService.goToPreview(quote, false);
   }
 
   /**
@@ -344,8 +352,12 @@ export class QuotesComponent implements OnInit,OnDestroy {
     } else {
       let recipients = item.recipients;
       if (typeof recipients === "string") item.recipients = recipients.split(',');
-      const modalRef = this.modalService.open(ModalQuoteComponent,  item);
-      modalRef.componentInstance.data = item;
+      this.quoteServices.getQuote(item.id).subscribe((data) => {
+        console.log("data",data);
+        const modalRef = this.modalService.open(ModalQuoteComponent,  data);
+      modalRef.componentInstance.data = data;
+      })
+    
     }
 
   }

@@ -97,14 +97,14 @@ export class QuotePreviewComponent implements OnInit {
    * get client user name
    */
   public getCLientUserName(companyInfo) {
-    return `${companyInfo.contacts[0].firstName} ${companyInfo.contacts[0].lastName}`
+    return (companyInfo) ?  `${companyInfo.contacts[0].firstName} ${companyInfo.contacts[0].lastName}` : '';
   }
 
   /**
    * get client address
    */
   public getCLientAddress(companyInfo) {
-    return `${companyInfo.addresses[0].address}`
+    return (companyInfo) ? `${companyInfo.addresses[0].address}` : '';
   }
 
   /**

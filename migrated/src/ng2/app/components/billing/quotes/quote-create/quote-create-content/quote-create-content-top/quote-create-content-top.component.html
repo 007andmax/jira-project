@@ -14,7 +14,7 @@
     <div *ngIf="currentClient">
       <p>{{getCLientUserName(currentClient.companyInfo)}}</p>
       <p>{{getCLientAddress(currentClient.companyInfo)}}</p>
-      <p style="margin-bottom: 12px;">{{currentClient.companyInfo.contacts[0].primaryEmail}}</p>
+      <p style="margin-bottom: 12px;">{{(currentClient.companyInfo) ? currentClient.companyInfo.contacts[0].primaryEmail : ''}}</p>
     </div>
     <div class="quote-description editable-description"
          style="width: 75%;">
