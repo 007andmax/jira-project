@@ -117,7 +117,7 @@
       $scope.buildPdf = buildPdf;
 
       $scope.durationFilter = function(quanity) {
-        var minutes = (quanity * 60) % 60;
+        var minutes = Math.round((quanity * 60) % 60);
         var hours = Math.floor(quanity);
         hours = String(hours).length < 2 ? '0' + hours : hours;
         minutes = String(minutes).length < 2 ? '0' + minutes : minutes;
