@@ -40,6 +40,7 @@ export class ReportSendEmailComponent implements OnInit {
   filesInfo: FilesInfo = new FilesInfo();
   usersSelected: Array<User> = [];
   companiesSelected: Array<Company> = [];
+  @Input() orientation;
   @Input() selectedClient;
   constructor(private draftEmailStateService: DraftEmailStateService, private elRef: ElementRef,
     private draftEmailService: DraftEmailService, public cd: ChangeDetectorRef,
@@ -126,7 +127,7 @@ export class ReportSendEmailComponent implements OnInit {
     
     this.draftEmail.setContent(this.reportsStateService.parseReportContent());
       this.draftEmail.setNote(this.messageContent);
-   
+   this.draftEmail.setOrientation(this.orientation);
 
     this.filesInfo.files.forEach(item => {
       console.log("item",item);

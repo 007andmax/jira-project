@@ -13,6 +13,10 @@ export class ReportEmail {
         this.emails = data;
 
     }
+
+    public setOrientation (data) {
+        this.orientation = data;
+    }
     
     public setNote(data) {
         this.note = data;
