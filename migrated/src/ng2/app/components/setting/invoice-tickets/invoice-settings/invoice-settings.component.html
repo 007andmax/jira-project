@@ -1,4 +1,4 @@
-<ngx-loading [show]="loading"></ngx-loading>
+<div class="loading" *ngIf="loading"></div>
 <div class="page-insider invoice-ticket">
   <div class="cmn-area invoice">
     <form [formGroup]="invoiceForm" (ngSubmit)="onSubmit()">

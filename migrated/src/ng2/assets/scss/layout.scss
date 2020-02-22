@@ -608,7 +608,7 @@ header{
 .left-sidebar{
     position: fixed;
     left: 76px;
-    width: 255px;
+    width: 240px;
     z-index: 99;
     background-color: $secondary-color;
     top: 0;
@@ -1956,7 +1956,7 @@ ngx-loading > div {
     display: -webkit-flex;    
     display: flex;
 }    
-.ng7 .top-bar{margin-left: 255px !important;width: calc(100% - 255px) !important;}
+// .ng7 .top-bar{margin-left: 255px !important;width: calc(100% - 255px) !important;}
 .ng7 .topNavbarLeft{min-width: 30px !important;}
 .ng7 .modal-content.toggle-area{max-width: 88%;position: fixed;left: 0;
     right: 0;margin: 0 auto !important;z-index: 999;padding: 0;@include border-radius(0);border: none;background-color: transparent;

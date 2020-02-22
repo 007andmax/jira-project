@@ -6,7 +6,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { of } from "rxjs";
 import { ToastrService } from "ngx-toastr";
 
-import { AngularEditorConfig } from "@kolkov/angular-editor";
+// import { AngularEditorConfig } from "@kolkov/angular-editor";
 
 declare var $: any;
 
@@ -41,18 +41,18 @@ export class EmailTempleteComponent implements OnInit {
   @ViewChild("body") body: ElementRef;
   @ViewChild("subject") subject: ElementRef;
 
-  config: AngularEditorConfig = {
-    editable: true,
-    spellcheck: true,
-    height: "15rem",
-    minHeight: "5rem",
-    placeholder: "",
-    translate: "no",
-    defaultParagraphSeparator: "p",
-    defaultFontName: "Arial",
-    toolbarPosition: "bottom"
-    // showToolbar:false
-  };
+  // config: AngularEditorConfig = {
+  //   editable: true,
+  //   spellcheck: true,
+  //   height: "15rem",
+  //   minHeight: "5rem",
+  //   placeholder: "",
+  //   translate: "no",
+  //   defaultParagraphSeparator: "p",
+  //   defaultFontName: "Arial",
+  //   toolbarPosition: "bottom"
+  //   // showToolbar:false
+  // };
 
   constructor(
     private modalService: BsModalService,

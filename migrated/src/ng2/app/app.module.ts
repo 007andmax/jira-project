@@ -141,7 +141,7 @@ import { ProfileComponent } from './components/setting/my-profile/profile/profil
 import { TagPipe } from './pipe/tag.pipe';
 
 import { ToastrModule } from 'ngx-toastr';
-import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
+// import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { SelectDropDownModule } from 'ngx-select-dropdown';
 import { IncomingEmailComponent } from './components/setting/email-setting/incoming-email/incoming-email.component';
 import { OutgoingEmailComponent } from './components/setting/email-setting/outgoing-email/outgoing-email.component';
@@ -154,12 +154,12 @@ import { ProductComponent } from './components/setting/commission/product/produc
 import { ContractComponent } from './components/setting/commission/contract/contract.component';
 import { ServiceComponent } from './components/setting/commission/service/service.component';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { AngularEditorModule } from '@kolkov/angular-editor';
+// import { AngularEditorModule } from '@kolkov/angular-editor';
 import { AutocompleteComponent } from './shared/autocomplete/autocomplete.component';
 import { PhonePipe } from './pipe/phone.pipe';
 import { OrderByPipe } from './pipe/order-by.pipe';
 import { NgxMaskModule } from 'ngx-mask' 
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+// import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 declare var angular: any;
 declare var $: any;
@@ -395,7 +395,6 @@ angular.module('quicktech')
     UpgradeModule,
     HttpClientModule,
     FormsModule,
-    AngularEditorModule ,
     NgbModule,
     InfiniteScrollModule,
     ClickOutsideModule,
@@ -412,7 +411,6 @@ angular.module('quicktech')
     DataTablesModule,
     NgSelectModule ,
     SelectDropDownModule,
-    CKEditorModule,
     TabsModule.forRoot(),
     ModalModule.forRoot(),
     TypeaheadModule.forRoot(),
@@ -426,14 +424,7 @@ angular.module('quicktech')
       preventDuplicates: true,
       timeOut: 3000
     }),
-    NgxLoadingModule.forRoot({
-      animationType: ngxLoadingAnimationTypes.circleSwish,
-      backdropBackgroundColour: 'rgba(0,0,0,0.1)',
-      backdropBorderRadius: '4px',
-      primaryColour: '#16a4fa',
-      secondaryColour: '#16a4fa',
-      tertiaryColour: '#16a4fa'
-    }),
+    
     RouterModule.forRoot([
         {
           path: '',
