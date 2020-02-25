@@ -5701,6 +5701,16 @@ tbody.collapse.in {
   /*max-height: 190px;*/
 }
 
+.date-picker .dropdown-menu {
+  overflow-y: hidden;
+}
+
+.qt-default-services .dropdown-menu {
+  left: 0;
+  margin-top: 0;
+  top: calc(100% + 1px);
+}
+
 .dropdown-account-type.dropdown-menu {
   max-height: 190px;
 }
