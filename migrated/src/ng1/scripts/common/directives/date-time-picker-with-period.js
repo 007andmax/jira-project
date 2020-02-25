@@ -17,7 +17,7 @@
             startDate: '='
           },
           link: function (scope, element, attrs, ctrl) {
-
+console.log("scope",scope);
 
             var options = {
               keepOpen: true,
@@ -66,19 +66,23 @@
               if (scope.period === 'Month') {
                 enabledDates = [];
                 enabledDates.push(scope.minDate);
+              
               } else if (scope.period === 7) {
+                console.log(new Date(scope.defaultDate));
                 let listDates = [];
                 enabledDates = [];
-                let startDate = new Date(scope.startDate);
-                startDate = new Date(startDate.getTime() - 86400000);
+                let startDate = new Date(scope.defaultDate);
+              //  startDate = new Date(defaultDate.getTime() - 86400000);
+             
                 for (var i = 1; i <= 120; i++) {
                   var d = new Date(startDate.getTime() + 86400000 * 7 * i);
                   listDates.push($filter('date')(d, 'd MMM yyyy'));
                 }
                 enabledDates = listDates;
+                
               } else {
                 enabledDates = getEnabledDates(scope.minDate, scope.period);
-
+               
               }
               enabledDates.unshift(scope.minDate);
               lastDate = enabledDates[enabledDates.length - 1];
@@ -114,9 +118,18 @@
 
             element.bind('dp.change', function (e) {
 console.log("change",e);
-if (e.oldDate == null) return;
-              ctrl.$setViewValue(e.date._d);
-              pickedDate = e.date._d;
+var value;
+if (e.oldDate == null)  {
+  value = moment(scope.defaultDate);
+  e.oldDate = value;
+  console.log("change",e);
+} else {
+  value=  e.date._d;
+}
+console.log("defaultDate",value);
+
+              ctrl.$setViewValue(value);
+              pickedDate = value;
               element.data('DateTimePicker') && element.data('DateTimePicker').hide();
             });
 
