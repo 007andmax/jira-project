@@ -19,7 +19,7 @@ body
             .btn-primary{
                 line-height: 32px;
             }
-            .topNavbarRight {
+            .topNavbarRight,.topNavbar-create,.topNavbar-search {
                 .dropdown{
                     ul{
                         padding: 0;
@@ -51,6 +51,21 @@ body
                 padding: 0;
             }
         }
+        /*** Top SearchBar ***/
+        .global-search {
+            .dropdown-menu {
+                .category {
+                    .category-name{
+                        margin: 0;
+                        padding: 0;
+                        .icn-lg{
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+
     }
    
 }
@@ -604,7 +619,7 @@ header{
 }
 
 /*** Left sidebar ***/
-.top-bar{width: calc(100% - 330px);margin-left: 330px;}
+.top-bar{width: calc(100% - 315px);margin-left: 315px;}
 .left-sidebar{
     position: fixed;
     left: 76px;
@@ -1082,6 +1097,11 @@ tabset {
 .f-row {
     margin: 0 -8px 10px -8px;
     overflow: hidden;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .f-col {
@@ -1956,7 +1976,7 @@ ngx-loading > div {
     display: -webkit-flex;    
     display: flex;
 }    
-// .ng7 .top-bar{margin-left: 255px !important;width: calc(100% - 255px) !important;}
+.ng7 .top-bar{margin-left: 255px !important;width: calc(100% - 255px) !important;}
 .ng7 .topNavbarLeft{min-width: 30px !important;}
 .ng7 .modal-content.toggle-area{max-width: 88%;position: fixed;left: 0;
     right: 0;margin: 0 auto !important;z-index: 999;padding: 0;@include border-radius(0);border: none;background-color: transparent;
@@ -2242,6 +2262,15 @@ div#editor.angular-editor-textarea {
         font-size: 13px !important;
         line-height: 18px;
         text-transform: capitalize;
+    }
+    .loading{
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+        z-index: 99999;
     }
 }
     

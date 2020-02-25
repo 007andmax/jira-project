@@ -85,5 +85,10 @@
         }
       }
   }
+  .form-row{
+    &.primary-phone{
+        margin-bottom: 5px;
+    }
+}
 }
 
