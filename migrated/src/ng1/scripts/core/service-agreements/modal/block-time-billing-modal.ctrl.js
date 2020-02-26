@@ -107,7 +107,7 @@ console.log("$scope.blockTimeContract.endDate",$scope.blockTimeContract.endDate)
            // $scope.blockTimeContract.startDatePreview = $scope.blockTimeContract.startDate;
           // $scope.blockTimeContract.endDatePreview = $filter('date')(endDateTechCompany, 'dd MMM yyyy');
             $scope.blockTimeContract.startDate =  $filter('date')($scope.blockTimeContract.startDate, 'dd MMM yyyy');
-         
+         console.log("$scope.blockTimeContract",$scope.blockTimeContract);
             $scope.blockTimeContract.minStartDate = Date.now();
             $scope.blockTimeContract.taxes = [];
          //   $scope.blockTimeContract.billForAdditionalService = false;

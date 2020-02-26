@@ -47,7 +47,7 @@
               }
               options.defaultDate = $filter('date')(defaultDate, 'dd MMM yyyy');
             }
-
+console.log("options",options);
             $timeout(function () {
               element.datetimepicker(options);
               ctrl.$setPristine();
@@ -63,6 +63,7 @@
 
 
             element.bind('dp.change', function (e) {
+              console.log("e.date._d",e);
               var formattedDate = $filter('date')(e.date._d, 'dd MMM yyyy');
               
               if (isolate && open) {
