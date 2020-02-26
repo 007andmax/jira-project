@@ -17,7 +17,7 @@
             startDate: '='
           },
           link: function (scope, element, attrs, ctrl) {
-console.log("scope",scope);
+            console.log("scope", scope);
 
             var options = {
               keepOpen: true,
@@ -66,23 +66,43 @@ console.log("scope",scope);
               if (scope.period === 'Month') {
                 enabledDates = [];
                 enabledDates.push(scope.minDate);
-              
+
               } else if (scope.period === 7) {
                 console.log(new Date(scope.defaultDate));
                 let listDates = [];
                 enabledDates = [];
                 let startDate = new Date(scope.defaultDate);
-              //  startDate = new Date(defaultDate.getTime() - 86400000);
-             
+                //  startDate = new Date(defaultDate.getTime() - 86400000);
+
                 for (var i = 1; i <= 120; i++) {
                   var d = new Date(startDate.getTime() + 86400000 * 7 * i);
                   listDates.push($filter('date')(d, 'd MMM yyyy'));
                 }
                 enabledDates = listDates;
-                
+
+              } else if (scope.period === 15) {
+                let listDates = [];
+                enabledDates = [];
+                let startDate = new Date(scope.defaultDate);
+              //  startDate = new Date(startDate.getTime() - 86400000);
+                for (var i = 1; i <= 120; i++) {
+                  var d = new Date(startDate.getTime() + 86400000 * 15 * i);
+                  listDates.push($filter('date')(d, 'd MMM yyyy'));
+                }
+                enabledDates = listDates;
+              } else if (scope.period === 30) {
+                let listDates = [];
+                enabledDates = [];
+                let startDate = new Date(scope.defaultDate);
+              //  startDate = new Date(startDate.getTime() - 86400000);
+                for (var i = 1; i <= 120; i++) {
+                  var d = new Date(startDate.getTime() + 86400000 * 30 * i);
+                  listDates.push($filter('date')(d, 'd MMM yyyy'));
+                }
+                enabledDates = listDates;
               } else {
                 enabledDates = getEnabledDates(scope.minDate, scope.period);
-               
+
               }
               enabledDates.unshift(scope.minDate);
               lastDate = enabledDates[enabledDates.length - 1];
@@ -117,16 +137,16 @@ console.log("scope",scope);
             }, 0);
 
             element.bind('dp.change', function (e) {
-console.log("change",e);
-var value;
-if (e.oldDate == null)  {
-  value = moment(scope.defaultDate);
-  e.oldDate = value;
-  console.log("change",e);
-} else {
-  value=  e.date._d;
-}
-console.log("defaultDate",value);
+              console.log("change", e);
+              var value;
+              if (e.oldDate == null) {
+                value = moment(scope.defaultDate);
+                e.oldDate = value;
+                console.log("change", e);
+              } else {
+                value = e.date._d;
+              }
+              console.log("defaultDate", value);
 
               ctrl.$setViewValue(value);
               pickedDate = value;
@@ -190,6 +210,14 @@ console.log("defaultDate",value);
                 startDate = new Date(startDate.getTime() - 86400000);
                 for (var i = 1; i <= 120; i++) {
                   var d = new Date(startDate.getTime() + 86400000 * 15 * i);
+                  listDates.push($filter('date')(d, 'd MMM yyyy'));
+                }
+                data.enabledDates(listDates);
+              } else if (scope.period === 30) {
+                let startDate = new Date(scope.startDate);
+                startDate = new Date(startDate.getTime() - 86400000);
+                for (var i = 1; i <= 120; i++) {
+                  var d = new Date(startDate.getTime() + 86400000 * 30 * i);
                   listDates.push($filter('date')(d, 'd MMM yyyy'));
                 }
                 data.enabledDates(listDates);

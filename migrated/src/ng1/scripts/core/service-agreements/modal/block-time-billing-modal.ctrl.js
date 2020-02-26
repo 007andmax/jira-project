@@ -434,7 +434,7 @@ console.log("$scope.blockTimeContract.endDate",$scope.blockTimeContract.endDate)
                   var sd = startDate;
                 //  sd = Utils.calculateDateWithTimeZoneAndPeriod(sd, $scope.blockTimeContract.period, 1);
                 //  sd =  Utils.minusDays(sd, 1);
-                  var nt = new Date(sd.getTime() - 86400000 + 86400000 * 7 * d);
+                  var nt = new Date(sd.getTime() - 86400000 + 86400000 * Number($scope.blockTimeContract.period) * d);
                   nt.setHours(0, 0, 0, 0);
                   nt.setSeconds(0);
                   nt.setMilliseconds(0);
