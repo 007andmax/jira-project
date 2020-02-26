@@ -906,14 +906,15 @@ $scope.onChangeService = function (data) {
         function checkForDuplicateServiceNames(serviceList) {
           var deferred = $q.defer();
           var startDate = $filter('date')($scope.blockTimeContract.startDate, 'dd MMM yyyy');
-          var endDate = $filter('date')($scope.blockTimeContract.endDate, 'dd MMM yyyy');
+          console.log("$scope.blockTimeContract.endDate",angular.copy($scope.blockTimeContract.endDate));
+          var endDate =  $filter('date')($scope.blockTimeContract.endDate, 'dd MMM yyyy');
 
           var companyId = returnCompanyId();
           var serviceNamesList = [];
           for (var i = 0; i < serviceList.length; i++) {
             serviceNamesList.push(getNameAsObject(serviceList[i].name));
           }
-
+console.log("endDate",endDate);
           ServicesService.searchDuplicatedServiceNames(startDate, endDate, companyId, serviceNamesList,($scope.isEditContract) ?  $scope.blockTimeContract.id : null, function (resp) {
             if (Object.keys(resp).length === 0) {
               deferred.resolve(resp);

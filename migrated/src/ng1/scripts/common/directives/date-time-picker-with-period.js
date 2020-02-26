@@ -140,11 +140,12 @@
               console.log("change", e);
               var value;
               if (e.oldDate == null) {
-                value = moment(scope.defaultDate);
+                value = $filter('date')(scope.defaultDate, 'dd MMM yyyy');
                 e.oldDate = value;
                 console.log("change", e);
               } else {
                 value = e.date._d;
+                console.log('e.date._d',e.date._d);
               }
               console.log("defaultDate", value);
 
