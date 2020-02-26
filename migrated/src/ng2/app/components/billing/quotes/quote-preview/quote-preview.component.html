@@ -85,8 +85,12 @@
         <div class="col-md-7 text-right pr-30" *ngIf="company">
           <h4 class="bold">Quote #<span>{{quoteForCreate && quoteForCreate.quoteNumber}}</span></h4>
           <p class="bold">{{company.name}}</p>
-          <p>{{company.addresses[0].address}}</p>
-          <p *ngFor="let item of company.addresses[0].phoneNumbers">{{item.number}}</p>
+          <p>{{(company.addresses.length > 0 && company.addresses[0].address) ? company.addresses[0].address : ''}}</p>
+          <ng-container *ngIf="company.addresses.length > 0 && company.addresses[0].phoneNumbers">
+           <ng-template  ngFor let-item [ngForOf]="company.addresses[0].phoneNumbers"   >
+          <p  >{{item.number}}</p>
+          </ng-template> 
+        </ng-container>
         </div>
       </div>
       <div class="quote-list--header__bottom clearfix">

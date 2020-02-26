@@ -89,7 +89,8 @@ export class QuotePreviewComponent implements OnInit {
    */
   public getCurrentCompany() {
     this.companiesService.getTechCompany().subscribe((res) => {
-      return this.company = res;
+        this.company = res;
+        console.log("this.company",this.company);
     });
   }
 
@@ -151,6 +152,7 @@ export class QuotePreviewComponent implements OnInit {
    * get global note
    */
   public getGlobalNote() {
+    if (!this.quoteForCreate.globalNote) return '';
     if (this.quoteForCreate.globalNote.hasOwnProperty('line1')) {
       return this.quoteForCreate.globalNote.line1
     } else {

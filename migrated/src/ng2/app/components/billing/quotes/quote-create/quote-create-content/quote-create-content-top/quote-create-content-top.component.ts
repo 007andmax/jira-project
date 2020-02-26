@@ -170,7 +170,7 @@ export class QuoteCreateContentTopComponent implements OnInit {
    * return client company address
    */
   public getCLientAddress(companyInfo) {
-    return (companyInfo) ?  `${companyInfo.addresses[0].address}` : '';
+    return (companyInfo && companyInfo.addresses) ?  `${companyInfo.addresses[0].address}` : '';
   }
 
   /**
