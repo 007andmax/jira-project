@@ -38,6 +38,7 @@
               console.log("getMinStartDate",getMinStartDate(scope.period,scope.minDate ));
 
             } else {
+              options.minDate = $filter('date')(getMinStartDate(scope.period,Date.now() ), 'dd MMM yyyy');
               console.log("getMinStartDate",getMinStartDate(scope.period,scope.minDate ));
             }
 
