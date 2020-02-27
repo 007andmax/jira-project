@@ -1,4 +1,4 @@
-<div class="loading" *ngIf="loading"></div>
+
 <div class="cmn-area outgoing-email" *ngIf="smtp">
   <p>
     You can specify a custom outgoing email service if you prefer to use your
@@ -191,6 +191,7 @@
     </div>
     <input type="submit" class="btn btn-primary" value="Save Changes" />
   </form>
+  <div class="loading" *ngIf="loading"></div>
 </div>
 
 <div class="sidebar-popup" [class.opened]="create">
