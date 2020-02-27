@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-overview-report',
@@ -6,10 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./overview-report.component.scss']
 })
 export class OverviewReportComponent implements OnInit {
-
+  @Input() headers = [];
+  @Input() list = [];
   constructor() { }
 
   ngOnInit() {
   }
-
+  public trackByIndex(index, item) {
+    return index;
+  }
 }
