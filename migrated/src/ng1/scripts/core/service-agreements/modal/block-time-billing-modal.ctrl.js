@@ -81,7 +81,7 @@
           $scope.blockTimeContract.startDatePreview = $scope.blockTimeContract.startDate;
           $scope.blockTimeContract.startDate = $filter('date')($scope.editContract.startDate, 'dd MMM yyyy');
 console.log("$scope.blockTimeContract.endDate",$scope.blockTimeContract.endDate);
-          $scope.blockTimeContract.minStartDate = Date.now();
+          $scope.blockTimeContract.minStartDate = new Date($scope.blockTimeContract.startDate);
           $timeout(function () {
             console.log("$scope.blockTimeContract.endDatePreview",$scope.blockTimeContract.endDatePreview);
             chnageNumOFIntervals($scope.blockTimeContract.startDatePreview, $scope.blockTimeContract.endDatePreview, true);
@@ -108,7 +108,7 @@ console.log("$scope.blockTimeContract.endDate",$scope.blockTimeContract.endDate)
           // $scope.blockTimeContract.endDatePreview = $filter('date')(endDateTechCompany, 'dd MMM yyyy');
             $scope.blockTimeContract.startDate =  $filter('date')($scope.blockTimeContract.startDate, 'dd MMM yyyy');
          console.log("$scope.blockTimeContract",$scope.blockTimeContract);
-            $scope.blockTimeContract.minStartDate = Date.now();
+            $scope.blockTimeContract.minStartDate = new Date($scope.blockTimeContract.startDate);
             $scope.blockTimeContract.taxes = [];
          //   $scope.blockTimeContract.billForAdditionalService = false;
       
