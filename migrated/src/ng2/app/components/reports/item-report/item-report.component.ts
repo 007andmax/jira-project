@@ -58,6 +58,7 @@ export class ItemReportComponent implements OnInit {
   }
   public onRequest(data) {
     this.loadingInProgress = data;
+    this.cd.detectChanges();
   }
   public getReport(data) {
 

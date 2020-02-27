@@ -35,15 +35,16 @@
           $scope.isChangeGlNumber = false;
         })
       }
+     
       $scope.changeGlNumber = function () {
-        console.log("editProduct.glNumber",$scope.editProduct.glNumber);
+     
         if ($scope.editProduct.glNumber) {
           var index = $scope.glNumbersList.findIndex(item => item.glNumber === $scope.editProduct.glNumber);
           $scope.isChangeGlNumber = (index > -1) ? false : true;
         } else {
           $scope.isChangeGlNumber = false;
         }
-       
+        console.log("editProduct.glNumber",$scope.editProduct.glNumber);
       }
       $scope.showModal = true;
 
