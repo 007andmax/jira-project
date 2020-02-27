@@ -6,7 +6,7 @@
     ['$scope', '$rootScope', 'ServicesService', 'quicktech.common.services.UserConfirmationsService',
       function ($scope, $rootScope, ServicesService, UserConfirmationsService) {
 
-
+   
         $scope.deleteService = function () {
           var confirmMesage = 'Do you want to delete ' + $scope.service.name + '?',
             confirmButton = 'Yes';

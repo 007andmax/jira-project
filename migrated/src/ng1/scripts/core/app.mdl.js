@@ -198,6 +198,18 @@
           url: '/ng2/users',
           template: '<users-component></users-component>'
         }))
+        .state('new-reports', waitForServices({
+          url: '/ng2/reports',
+          template: '<reports-component></reports-component>'
+        }))
+        .state('new-item-report', waitForServices({
+          url: '/ng2/report/:ticketId',
+          params: {
+            ticketId: '',
+            remoteParams: null
+          },
+          template: '<item-report-component></item-report-component>'
+        }))
         .state('accounting', waitForServices({
           url: '/accounting',
           template: '<div ui-view></div>',

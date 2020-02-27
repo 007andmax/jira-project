@@ -35,6 +35,8 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
   userEmails = [];
   userList = [];
   reqUsersList = [];
+  @Input() selectedClient = null;
+  @Input() accountType:string = 'CLIENT';
   @Input() usersSelected:Array<User> = [];
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
@@ -57,14 +59,17 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-
+    console.log("accountType",this.accountType);
+console.log("this.selectedClient",this.selectedClient);
     this.getUsersList();
 
     this.draftEmailStateService.getOnClear().subscribe(data => {
       this.selectedUsers = [];
       this.userEmails = [];
       this.userCtrl.setValue(null);
-      this.cd.detectChanges();
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+    }
 
     })
   }
@@ -77,9 +82,9 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
 
   }
   private setUserList(data) {
-    this.reqUsersList = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt && item.primaryEmail !== '').sort((a, b) => (a.primaryEmail.toLowerCase() > b.primaryEmail.toLowerCase()) ?
+    this.reqUsersList = data.filter(item => ((this.accountType != null) ? item.accountType === this.accountType : true) && ((this.selectedClient !== null) ? (item.accountType ==='TECH' || item.company.id === this.selectedClient.id) : true) && !item.deletedAt && item.primaryEmail !== '').sort((a, b) => (a.primaryEmail.toLowerCase() > b.primaryEmail.toLowerCase()) ?
     1 : ((b.primaryEmail.toLowerCase() > a.primaryEmail.toLowerCase()) ? -1 : 0));
-    this.userList = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt && item.primaryEmail !== '').sort((a, b) => (a.primaryEmail.toLowerCase() > b.primaryEmail.toLowerCase()) ?
+    this.userList = data.filter(item => ((this.accountType != null) ? item.accountType === this.accountType : true) && ((this.selectedClient !== null) ? (item.accountType ==='TECH' || item.company.id === this.selectedClient.id) : true) && !item.deletedAt && item.primaryEmail !== '').sort((a, b) => (a.primaryEmail.toLowerCase() > b.primaryEmail.toLowerCase()) ?
     1 : ((b.primaryEmail.toLowerCase() > a.primaryEmail.toLowerCase()) ? -1 : 0));
 
     this.usersSelected.forEach(item => {

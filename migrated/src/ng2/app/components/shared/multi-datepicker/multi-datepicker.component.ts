@@ -19,6 +19,7 @@ export class MultiDatepickerComponent implements OnInit {
   public showDatePicker = false;
   public selectedDateModel = '';
   public outsideDays = 'hidden';
+  isDisabled = false;
   @Output() selectedDate = new EventEmitter<any>();
 
   /**
@@ -26,12 +27,12 @@ export class MultiDatepickerComponent implements OnInit {
    * @param {NgbCalendar} calendar Service to work with date
    * @param {DateService} dateService Service to work with date
    */
-  constructor (
+  constructor(
     private calendar: NgbCalendar,
     private dateService: DateService
-              ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   /**
    * check type for hover
@@ -85,6 +86,7 @@ export class MultiDatepickerComponent implements OnInit {
    * toggle date picker
    */
   public toggleDatePicker() {
+    if (this.isDisabled) return;
     this.showDatePicker = !this.showDatePicker;
   }
 
@@ -114,6 +116,7 @@ export class MultiDatepickerComponent implements OnInit {
    * Clear date picker date
    */
   public clearDate() {
+    console.log("clearDate");
     this.selectedDate.next({
       start: '',
       end: ''
@@ -123,5 +126,10 @@ export class MultiDatepickerComponent implements OnInit {
     this.setSelectedDateModel('', '');
     this.hideDatePicker();
   }
+
+  public setDisabled(data) {
+    this.isDisabled = data;
+  }
+
 
 }

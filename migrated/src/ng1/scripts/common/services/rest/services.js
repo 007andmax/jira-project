@@ -8,7 +8,9 @@
 
   services.factory('ServicesService', ['$http', '$rootScope', 'RealTimeService', 'Utils', 'CompaniesService',
     function ($http, $rootScope, RealTimeService, Utils, CompaniesService) {
+    var  serviceScope = $rootScope.$new();
 
+  
       function search(keyword) {
 
         if (!keyword) {
@@ -157,6 +159,40 @@
         delete data[companyId];
       }
 
+      function createGlNumber (data,callback) {
+       
+
+        var future = $http({
+          url: `/glNumber`,
+          method: 'POST',
+          data: data
+        });
+  
+        Utils.handleCallback(future, callback);
+        }
+
+      function resetContractGlNumber (id,contractType,callback) {
+       
+
+        var future = $http({
+          url: `/glNumber/resetContract/${contractType}`,
+          method: 'POST'
+        });
+  
+        Utils.handleCallback(future, callback);
+        }
+
+      function setContractGlNumber (id,contractType,callback) {
+       
+
+      var future = $http({
+        url: `/glNumber/${id}/${contractType}`,
+        method: 'POST'
+      });
+
+      Utils.handleCallback(future, callback);
+      }
+
       function save(service, callback) {
 
         if (!service) throw 'service is required!';
@@ -201,6 +237,7 @@
         Utils.handleCallback(future, callback);
       }
 
+     
       function move(mapping, callback) {
         if (!mapping) throw 'mapping is required argument!';
 
@@ -296,9 +333,16 @@
         });
         Utils.handleCallback(future, callback);
       }
-
+    
+   
+      
+          console.log("CompaniesService.getCurrentCompany()",CompaniesService.getCurrentCompany());
       return {
-
+        
+        createGlNumber: createGlNumber,
+        resetContractGlNumber : resetContractGlNumber,
+        setContractGlNumber: setContractGlNumber,
+      
         getAllByCompany: getAllByCompany,
         getServicesData: getServicesData,
         getSpecialServices: getSpecialServices,
