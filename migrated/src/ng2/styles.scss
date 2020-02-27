@@ -1701,8 +1701,17 @@ ngb-typeahead-window {
     width: 100%;
     height: 100%;
 
+    &:hover {
+      background: #c7c7c7;
+      color: whitesmoke;
+    }
+    &.range {
+      background: #3ba5fa;
+      color: white;
+    }
     &.faded {
       background: #efefef;
+      color: #0f0f0f;
     }
   }
 }
