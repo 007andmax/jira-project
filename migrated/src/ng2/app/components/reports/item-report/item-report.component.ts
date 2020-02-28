@@ -1,18 +1,5 @@
-import { Component, OnInit, ChangeDetectorRef, ElementRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ReportsStateService } from 'src/ng2/app/states/reports/reports-state.service';
-import { GlNumber } from '../class/gl-number';
-import { GlNumberItem } from '../class/gl-number-item';
-import * as $ from 'jquery';
-import * as moment from "moment";
-import { ReportsService } from 'src/ng2/app/services/reports/reports.service';
-import { ACION_OPEN_PDF, ACION_DOWNLOAD_PDF } from 'src/ng2/app/const/reports';
-import { AppService } from 'src/ng2/app/states/app/app.service';
-import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
-import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
-import { TransitionCheckState } from '@angular/material';
-import { CurrentUser } from 'src/ng2/class/current-user/current-user';
-import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+ 
 
 @Component({
   selector: 'app-item-report',
@@ -22,77 +9,15 @@ import { UsersStateService } from 'src/ng2/app/states/users/users-state.service'
 export class ItemReportComponent implements OnInit {
 
   report: string;
-  glNumber: GlNumber = new GlNumber();
-  loadingInProgress: boolean = false;
-  selectedClient = null;
-  techCompany = null;
-  showHeaders = false;
-  currentUser: CurrentUser;
-  currentCompany: any = null;
-  headers = [];
-  list = [];
-  constructor(private route: ActivatedRoute, private reportsStateService: ReportsStateService,
-    private reportsService: ReportsService,
+ 
+  constructor( 
     public cd: ChangeDetectorRef,
-    private elRef: ElementRef,
-    private appService: AppService,
-    private companiesService: CompaniesService,
-    private companiesStateService: CompaniesStateService,
-    private usersStateService: UsersStateService,
   ) { }
 
   ngOnInit() {
     if (localStorage.report) this.report = localStorage.report;
-    this.reportsStateService.glNumber.subscribe((data: GlNumber) => {
-      this.glNumber.setDataFromObject(JSON.parse(JSON.stringify(data.getDataObject())));
-      console.log("this.glNumber", this.glNumber);
-      console.log("this.glNumber.list", this.glNumber.list);
-      this.headers = [];
-      this.headers.push("GL Number");
-      this.headers.push("Description");
-      this.glNumber.getDate().forEach(item => {
-        this.headers.push(item);
-      })
-      this.headers.push("Total");
-      this.list = [];
-      this.glNumber.list.forEach(item => {
-        let list = [];
-        list.push(item.glNumber);
-        list.push(item.description);
-        item.sum.forEach((sum) => {
-          list.push(`$${sum}`);
-
-        })
-        list.push(`$${item.total}`);
-        this.list.push(list);
-      })
-      this.cd.detectChanges();
-    })
-
-    this.techCompany = this.companiesStateService.getCurrentCompany();
-    this.companiesService.getTechCompany().subscribe(data => {
-      this.techCompany = data;
-    })
-    this.currentUser = this.usersStateService.getCurrentUser();
-    this.currentCompany = this.companiesStateService.getCurrentCompany();
-    console.log("currentUser", this.currentUser);
-  }
-  public onRequest(data) {
-    this.loadingInProgress = data;
-    this.cd.detectChanges();
-  }
-  public getReport(data) {
-
-  }
-  onSelectedClient(client) {
-    this.selectedClient = client;
-    console.log("this.selectClient", this.selectedClient);
-  }
-  perseStartDate() {
-    return moment(this.glNumber.startDate).format('DD MMM YYYY')
-  }
-  perseEndDate() {
-    return moment(this.glNumber.endDate).format('DD MMM YYYY')
+    console.log("this.report",this.report);
+    
   }
   back() {
 

@@ -1,6 +1,6 @@
 <!--MENU FOR NON-TECH REPORTS-->
 <div class="report-menu">
-  <div>
+  <div *ngIf="report === 'income-accounts'">
     <div class="run-report-content clearfix" [ngClass]="className">
       <div class="new-reports-reverse">
         <button class="form-group btn btn-success" (click)="getReportByGlNumber()">Get
@@ -30,9 +30,21 @@
       </div>
     </div>
   </div>
-  <div class="new-reports-btn">
-    <button class="form-group btn btn-success" (click)="getReportByGlNumber()">
-      Get Report
-    </button>
+  <div *ngIf="report === 'accounts-receivable'">
+    <div class="run-report-content clearfix" [ngClass]="className">
+      <div class="new-reports-reverse">
+        <button class="form-group btn btn-success" (click)="getReportByAccountsReceivable()">Get
+          Report
+        </button>
+
+        <div class="form-group content custom-width dropdown-height">
+          <app-select-client-company [blockEditMode]="true"   style="width: 75%;"
+            class="light-dropdown" [filter]="true" (selectedItem)="selectClient($event)"></app-select-client-company>
+        </div>
+     
+      
+      </div>
+    </div>
   </div>
+   
 </div>

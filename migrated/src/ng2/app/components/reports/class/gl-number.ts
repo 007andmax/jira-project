@@ -31,16 +31,16 @@ export class GlNumber {
         this.startDate = '';
         this.endDate = '';
     }
-public getDataObject () {
-    return {
-        startDate: this.startDate,
-    endDate: this.endDate,
-    clientCompanyId: this.clientCompanyId,
-    monthlyDetailed: this.monthlyDetailed,
-    dates: this.dates,
-    list: this.list
+    public getDataObject() {
+        return {
+            startDate: this.startDate,
+            endDate: this.endDate,
+            clientCompanyId: this.clientCompanyId,
+            monthlyDetailed: this.monthlyDetailed,
+            dates: this.dates,
+            list: this.list
+        }
     }
-}
 
     public getList() {
         return this.list;
@@ -73,7 +73,7 @@ public getDataObject () {
         this.setEndDate(moment(new Date()).format('YYYY/MM/DD'));
     }
 
-    public  getMonthlyDetailed () {
+    public getMonthlyDetailed() {
         return this.monthlyDetailed;
     }
 

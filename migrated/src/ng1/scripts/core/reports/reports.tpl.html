@@ -39,7 +39,10 @@
         <p>Financial</p>
         <img src="ng1/images/new-icons/Report-Financial.svg">
         <ul>
-          <li class="content-report" ui-sref="accountsReceivable">Accounts receivable report</li>
+          <!-- ng-click="setReport('accounts-receivable')"  ui-sref="new-item-report({ ticketId: 'accounts-receivable' })"
+          ui-sref="accountsReceivable"
+          -->
+          <li class="content-report"  ng-click="setReport('accounts-receivable')"  ui-sref="new-item-report({ ticketId: 'accounts-receivable' })">Accounts receivable report</li>
         </ul>
       </div>
     </div>
@@ -90,7 +93,7 @@
         <p>Income accounts</p>
         <img src="ng1/images/new-icons/report-tickets.svg" style="top: 28px;width: 26px;">
         <ul>
-          <li class="content-report" ng-click="setReport('TEST')"  ui-sref="new-item-report({ ticketId: 'income-accounts' })">Income account report</li>
+          <li class="content-report" ng-click="setReport('income-accounts')"  ui-sref="new-item-report({ ticketId: 'income-accounts' })">Income account report</li>
         </ul>
       </div>
     </div>

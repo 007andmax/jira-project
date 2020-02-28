@@ -7,6 +7,7 @@ import { GlNumberItem } from '../class/gl-number-item';
 import { ReportsStateService } from 'src/ng2/app/states/reports/reports-state.service';
 import { MultiDatepickerComponent } from '../../shared/multi-datepicker/multi-datepicker.component';
 import { ReportValidate } from '../class/report-validate';
+import { AccountsReceivable } from '../class/accounts-receivable';
 
 @Component({
   selector: 'app-report-menu',
@@ -14,14 +15,16 @@ import { ReportValidate } from '../class/report-validate';
   styleUrls: ['./report-menu.component.scss']
 })
 export class ReportMenuComponent implements OnInit {
-  
+
   selectedClient = null;
   className = '';
   glNumber: GlNumber = new GlNumber();
+  accountsReceivable: AccountsReceivable = new AccountsReceivable();
   loadingInProgress: boolean = true;
   listDetailed = ['Year to date', 'Monthly'];
   yearToDate = false;
-  validate:ReportValidate = new ReportValidate();
+  validate: ReportValidate = new ReportValidate();
+  @Input() report = "";
   @Output() getReport = new EventEmitter<any>();
   @Output() onRequest = new EventEmitter<any>();
   @Output() onSelectedClient = new EventEmitter<any>();
@@ -31,7 +34,7 @@ export class ReportMenuComponent implements OnInit {
   ngOnInit() {
 
 
-
+    if (this.report === 'accounts-receivable') this.getReportByAccountsReceivable();
   }
   public onSelectDetailed(data) {
     this.yearToDate = false;
@@ -39,13 +42,13 @@ export class ReportMenuComponent implements OnInit {
       this.datePicker.clearDate();
       this.glNumber.setMonthlyDetailed(true);
       this.datePicker.setDisabled(true);
-   
+
     } else {
       if (data === 'Year to date') {
         console.log("fffff");
         this.datePicker.clearDate();
         this.datePicker.setDisabled(true);
-     
+
         this.yearToDate = true;
       } else {
         this.datePicker.setDisabled(false);
@@ -59,11 +62,11 @@ export class ReportMenuComponent implements OnInit {
     //this.reportsStateService.onChangeGlNumber(this.glNumber);
   }
   public selectClient(selectClient) {
-   
+
     if (selectClient === 'null') {
 
       //  this.recurringState.getCreateTicket().setCompany(null);
-
+      this.accountsReceivable.setClientCompanyId(null);
       this.selectedClient = null;
       this.glNumber.setClientCompanyId(null);
       //  this.recurringState.setClient(selectClient);
@@ -72,26 +75,32 @@ export class ReportMenuComponent implements OnInit {
       // this.recurringState.getCreateTicket().setCompany(selectClient.item.id);
       this.selectedClient = selectClient.item;
       this.glNumber.setClientCompanyId(selectClient.item.id);
+      this.accountsReceivable.setClientCompanyId(selectClient.item.id);
+
       //  this.recurringState.setClient(selectClient);
       //  this.onCheckListServices();
       //  this.getCompanyDevices();
 
     }
-console.log("this.selectClient",this.selectedClient);
-this.onSelectedClient.emit(this.selectedClient);
+    console.log("this.selectClient", this.selectedClient);
+    this.onSelectedClient.emit(this.selectedClient);
     //  this.services = [new ForCreateService()];
     // this.cd.detectChanges();
     // this.reportsStateService.onChangeGlNumber(this.glNumber);
 
   }
-
-  
-  getReportByGlNumber() {
-   
-    if (!this.validate.isValidate(this.glNumber.monthlyDetailed,this.yearToDate,this.glNumber.startDate,this.glNumber.endDate)) return;
-   
+  getReportByAccountsReceivable() {
     this.onRequest.emit(true);
-    
+    this.reportsService.getReportByAccountsReceivable(this.accountsReceivable.getForRequest()).subscribe(data => this.setDatareport(data));
+
+  }
+
+  getReportByGlNumber() {
+
+    if (!this.validate.isValidate(this.glNumber.monthlyDetailed, this.yearToDate, this.glNumber.startDate, this.glNumber.endDate)) return;
+
+    this.onRequest.emit(true);
+
     if (this.yearToDate) {
       this.reportsService.getAccountingStartDate().subscribe((res: any) => {
         console.log("res", res.accountingStartDate);
@@ -102,13 +111,20 @@ this.onSelectedClient.emit(this.selectedClient);
         this.reportsService.getReportByGlNumber(this.glNumber.getForRequest()).subscribe(data => this.setDatareport(data));
       })
     } else {
-    if (this.glNumber.getMonthlyDetailed()) this.glNumber.setDatesForMonthly();
+      if (this.glNumber.getMonthlyDetailed()) this.glNumber.setDatesForMonthly();
       this.reportsService.getReportByGlNumber(this.glNumber.getForRequest()).subscribe(data => this.setDatareport(data));
     }
 
 
   }
   private setDatareport(data) {
+    console.log("data", data);
+    this.accountsReceivable.clearLines();
+    this.accountsReceivable.setData(data);
+    this.reportsStateService.onChangeAccountsReceivable(this.accountsReceivable);
+    this.loadingInProgress = false;
+    this.onRequest.emit(false);
+    return;
     this.glNumber.clearDates();
     this.glNumber.clearList();
     if (this.glNumber.getMonthlyDetailed()) {
@@ -139,7 +155,7 @@ this.onSelectedClient.emit(this.selectedClient);
       });
     }
     this.reportsStateService.onChangeGlNumber(this.glNumber);
-   // this.getReport.emit(data);
+    // this.getReport.emit(data);
 
     this.loadingInProgress = false;
     this.onRequest.emit(false);
@@ -152,7 +168,7 @@ this.onSelectedClient.emit(this.selectedClient);
   */
   public filterByDate(value) {
     if (value.start !== '' && value.end !== '') {
-      
+
       this.glNumber.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.glNumber.setEndDate(moment(value.end).format('YYYY/MM/DD'));
       this.validate.resetDates();
@@ -160,7 +176,7 @@ this.onSelectedClient.emit(this.selectedClient);
     } else {
       this.glNumber.resetDates();
     }
-  
+
     //  this.reportsStateService.onChangeGlNumber(this.glNumber);
   }
 }

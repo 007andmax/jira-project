@@ -4,12 +4,16 @@ import { Injectable, EventEmitter } from '@angular/core';
   providedIn: 'root'
 })
 export class ReportsStateService {
-glNumber:EventEmitter<any> = new EventEmitter();
+  glNumber: EventEmitter<any> = new EventEmitter();
+  accountsReceivable: EventEmitter<any> = new EventEmitter();
   constructor() { }
 
   public onChangeGlNumber(data) {
     this.glNumber.emit(data);
-  } 
+  }
+  public onChangeAccountsReceivable(data) {
+    this.accountsReceivable.emit(data);
+  }
 
   public parseReportContent() {
     console.log('getPdfIdFromRest');
@@ -60,6 +64,6 @@ glNumber:EventEmitter<any> = new EventEmitter();
     if (selectedHtml.indexOf(unknownLoadingStr) !== -1) {
       selectedHtml = selectedHtml.slice(unknownLoadingStr.length);
     }
-return selectedHtml;
+    return selectedHtml;
   }
 }
