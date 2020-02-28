@@ -11,6 +11,8 @@ export class AccountsReceivableComponent implements OnInit {
   accountsReceivable: AccountsReceivable = new AccountsReceivable();
   headers = [];
   list = [];
+  selectedClient = null;
+  loadingInProgress: boolean = false;
   constructor(private reportsStateService: ReportsStateService, public cd: ChangeDetectorRef, ) { }
 
   ngOnInit() {
@@ -30,15 +32,17 @@ export class AccountsReceivableComponent implements OnInit {
       this.list = [];
       this.accountsReceivable.lines.forEach((item, index) => {
         let list = [];
+        
+        if (this.accountsReceivable.type === "SUMMARY")   list.push(item.clientCompanyName);
+        if (this.accountsReceivable.type === "DETAILED")   list.push(item.invoiceNumber);
+      
+        list.push(`$${this.parseTotal(item.currentSum)}`);
 
-        list.push(item.clientCompanyName);
-        list.push(`$${parseFloat(item.currentSum.toString()).toFixed(2)}`);
-
-        list.push(`$${item.month1Sum}`);
-        list.push(`$${item.month2Sum}`);
-        list.push(`$${item.month3Sum}`);
-        list.push(`$${item.olderSum}`);
-        list.push(`$${item.totalSum}`);
+        list.push(`$${this.parseTotal(item.month1Sum)}`);
+        list.push(`$${this.parseTotal(item.month2Sum)}`);
+        list.push(`$${this.parseTotal(item.month3Sum)}`);
+        list.push(`$${this.parseTotal(item.olderSum)}`);
+        list.push(`$${this.parseTotal(item.totalSum)}`);
 
 
 
@@ -46,15 +50,29 @@ export class AccountsReceivableComponent implements OnInit {
       })
       let list = [];
       list.push("Total");
-      list.push(`$${this.accountsReceivable.totalCurrentSum}`);
-      list.push(`$${this.accountsReceivable.total1MonthSum}`);
-      list.push(`$${this.accountsReceivable.total2MonthSum}`);
-      list.push(`$${this.accountsReceivable.total3MonthSum}`);
-      list.push(`$${this.accountsReceivable.totalOlderSum}`);
-      list.push(`$${this.accountsReceivable.totalSum}`);
+      list.push(`$${this.parseTotal(this.accountsReceivable.totalCurrentSum)}`);
+      list.push(`$${this.parseTotal(this.accountsReceivable.total1MonthSum)}`);
+      list.push(`$${this.parseTotal(this.accountsReceivable.total2MonthSum)}`);
+      list.push(`$${this.parseTotal(this.accountsReceivable.total3MonthSum)}`);
+      list.push(`$${this.parseTotal(this.accountsReceivable.totalOlderSum)}`);
+      list.push(`$${this.parseTotal(this.accountsReceivable.totalSum)}`);
       this.list.push(list);
       this.cd.detectChanges();
     })
+  }
+  public onRequest(data) {
+    this.loadingInProgress = data;
+    this.cd.detectChanges();
+  }
+  public getReport(data) {
+
+  }
+  onSelectedClient(client) {
+    this.selectedClient = client;
+   
+  }
+  parseTotal(value) {
+    return parseFloat(value.toString()).toFixed(2)
   }
 
 }

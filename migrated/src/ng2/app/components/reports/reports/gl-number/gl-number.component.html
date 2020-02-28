@@ -18,11 +18,7 @@
        <app-overview-report [headers]="headers" [list]="list"></app-overview-report>  
      
      </div>
-    <div class="report-footer" [ngStyle]="{'width': (glNumber.getMonthlyDetailed()) ? '1055px' : '' }">
-       <p>Prepare by : <span [textContent]="currentUser.firstName + ' ' + currentUser.lastName"> </span></p>
-       <p [textContent]="currentCompany.name"></p>
-       <p>Quicktech <span>2020</span> ©. All rights reserved</p>
-     </div> 
+     <app-report-footer></app-report-footer>
    </div>
  </div>
 

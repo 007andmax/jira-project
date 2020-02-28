@@ -23,8 +23,8 @@ export class GlNumberComponent implements OnInit {
   selectedClient = null;
   techCompany = null;
   showHeaders = false;
-  currentUser: CurrentUser;
-  currentCompany: any = null;
+   
+   
   headers = [];
   list = [];
   constructor(private route: ActivatedRoute, private reportsStateService: ReportsStateService,
@@ -68,8 +68,8 @@ export class GlNumberComponent implements OnInit {
     this.companiesService.getTechCompany().subscribe(data => {
       this.techCompany = data;
     })
-    this.currentUser = this.usersStateService.getCurrentUser();
-    this.currentCompany = this.companiesStateService.getCurrentCompany();
+   
+     
   
   }
  

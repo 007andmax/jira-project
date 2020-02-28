@@ -6,6 +6,7 @@ export class AccountsReceivableLine {
     olderSum: number;
     totalSum: number;
     clientCompanyName: string;
+    invoiceNumber:string;
     constructor(data) {
         this.currentSum =  data.currentSum;
         this.month1Sum =  data.month1Sum;
@@ -14,5 +15,6 @@ export class AccountsReceivableLine {
         this.olderSum =  data.olderSum;
         this.totalSum =  data.totalSum;
         this.clientCompanyName =  data.clientCompanyName;
+        this.invoiceNumber =  data.invoiceNumber;
     }
 }

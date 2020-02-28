@@ -113,6 +113,7 @@ import { ReportAdditionalActionsComponent } from './components/reports/report-ad
 import { ReportSendEmailComponent } from './components/reports/report-additional-actions/report-send-email/report-send-email.component';
 import { GlNumberComponent } from './components/reports/reports/gl-number/gl-number.component';
 import { AccountsReceivableComponent } from './components/reports/reports/accounts-receivable/accounts-receivable.component';
+import { ReportFooterComponent } from './components/reports/report-footer/report-footer.component';
  
 
 
@@ -266,6 +267,7 @@ angular.module('quicktech')
     ReportSendEmailComponent,
     GlNumberComponent,
     AccountsReceivableComponent,
+    ReportFooterComponent,
      
   ],
   imports: [
