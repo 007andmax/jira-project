@@ -8,7 +8,9 @@
         restrict: 'A',
         require: 'ngModel',
         link: function (scope, element, attrs, modelCtrl) {
-
+//console.log("scope",scope);
+//console.log("element",element);
+//console.log("attrs",attrs);
           var secretEmptyKey = '[$empty$]';
 var onInit = false;
           element.bind('click', triggerFunc);
@@ -39,7 +41,7 @@ var onInit = false;
 
           // this parser run before typeahead's parser
           modelCtrl.$parsers.unshift(function (inputValue) {
-         //   if (!onInit) return;
+            if (!onInit && attrs.name === "glNumber") return;
             console.log("unshift");
             var value = (inputValue ? inputValue : secretEmptyKey); // replace empty string with secretEmptyKey to bypass typeahead-min-length check
             modelCtrl.$viewValue = value; // this $viewValue must match the inputValue pass to typehead directive
@@ -48,7 +50,7 @@ var onInit = false;
 
           // this parser run after typeahead's parser
           modelCtrl.$parsers.push(function (inputValue) {
-         //   if (!onInit) return;
+            if (!onInit && attrs.name === "glNumber") return;
             console.log("push");
             return inputValue === secretEmptyKey ? '' : inputValue; // set the secretEmptyKey back to empty string
           });
