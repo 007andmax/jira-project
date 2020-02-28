@@ -38,6 +38,7 @@
     "cron-editor": "^2.1.7",
     "font-awesome": "^4.7.0",
     "hammerjs": "^2.0.8",
+    "jquery": "^3.4.1",
     "mol_time_all": "^1.1.9",
     "moment": "^2.24.0",
     "net": "^1.0.2",
