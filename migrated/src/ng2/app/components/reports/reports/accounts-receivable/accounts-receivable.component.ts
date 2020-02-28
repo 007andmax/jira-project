@@ -32,7 +32,7 @@ export class AccountsReceivableComponent implements OnInit {
         let list = [];
 
         list.push(item.clientCompanyName);
-        list.push(`$${item.currentSum}`);
+        list.push(`$${parseFloat(item.currentSum.toString()).toFixed(2)}`);
 
         list.push(`$${item.month1Sum}`);
         list.push(`$${item.month2Sum}`);
