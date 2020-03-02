@@ -8,6 +8,7 @@ import { ReportsStateService } from 'src/ng2/app/states/reports/reports-state.se
 import { MultiDatepickerComponent } from '../../shared/multi-datepicker/multi-datepicker.component';
 import { ReportValidate } from '../class/report-validate';
 import { AccountsReceivable } from '../class/accounts-receivable';
+import { TaxesReport } from '../class/taxes';
 
 @Component({
   selector: 'app-report-menu',
@@ -19,9 +20,11 @@ export class ReportMenuComponent implements OnInit {
   selectedClient = null;
   className = '';
   glNumber: GlNumber = new GlNumber();
+  taxes: TaxesReport = new TaxesReport();
   accountsReceivable: AccountsReceivable = new AccountsReceivable();
   loadingInProgress: boolean = true;
   listDetailed = ['Year to date', 'Monthly'];
+  listTypesTaxes = [ 'Summary','Detailed'];
   yearToDate = false;
   validate: ReportValidate = new ReportValidate();
   @Input() report = "";
@@ -61,6 +64,9 @@ export class ReportMenuComponent implements OnInit {
 
     //this.reportsStateService.onChangeGlNumber(this.glNumber);
   }
+  public onSelectTypeTaxes(data) {
+    this.taxes.setType(data);
+  }
   public selectClient(selectClient) {
 
     if (selectClient === 'null') {
@@ -87,6 +93,11 @@ export class ReportMenuComponent implements OnInit {
     //  this.services = [new ForCreateService()];
     // this.cd.detectChanges();
     // this.reportsStateService.onChangeGlNumber(this.glNumber);
+
+  }
+  getReportByTaxes() {
+    this.onRequest.emit(true);
+    this.reportsService.getReportByTaxes(this.taxes.getForRequest()).subscribe(data => this.setDatareport(data));
 
   }
   getReportByAccountsReceivable() {
@@ -118,44 +129,42 @@ export class ReportMenuComponent implements OnInit {
 
   }
   private setDatareport(data) {
-    console.log("data", data);
-    this.accountsReceivable.clearLines();
-    this.accountsReceivable.setData(data);
-    this.reportsStateService.onChangeAccountsReceivable(this.accountsReceivable);
-    this.loadingInProgress = false;
-    this.onRequest.emit(false);
-    return;
-    this.glNumber.clearDates();
-    this.glNumber.clearList();
-    if (this.glNumber.getMonthlyDetailed()) {
-      let keys = Object.keys(data);
-      keys = keys.sort();
-      keys.forEach((key, indexKey) => {
-        const element = data[key];
-        this.glNumber.addDate(key);
-        element.forEach((item, indexItem) => {
-          let index = this.glNumber.getList().findIndex(itemList => itemList.glNumber === item.glNumber);
-          if (index > -1) {
-            this.glNumber.getList()[index].setSum(indexKey, item.sum);
-            this.glNumber.getList()[index].updateTotal(item.sum);
-          } else {
-            this.glNumber.addItem(new GlNumberItem(item.glNumber, item.description, keys.length));
-            let indexLast = this.glNumber.getList().length - 1;
-            this.glNumber.getList()[indexLast].setSum(indexKey, item.sum);
-            this.glNumber.getList()[indexLast].updateTotal(item.sum);
-          }
-        });
 
-      });
-    } else {
-      data.forEach((item, index) => {
-        this.glNumber.addItem(new GlNumberItem(item.glNumber, item.description, null));
-        let indexLast = this.glNumber.getList().length - 1;
-        this.glNumber.getList()[indexLast].updateTotal(item.sum);
-      });
+    if (this.report === 'income-accounts') {
+      /*  this.glNumber.clearDates();
+        this.glNumber.clearList();
+        if (this.glNumber.getMonthlyDetailed()) {
+          let keys = Object.keys(data);
+          keys = keys.sort();
+          keys.forEach((key, indexKey) => {
+            const element = data[key];
+            this.glNumber.addDate(key);
+            element.forEach((item, indexItem) => {
+              let index = this.glNumber.getList().findIndex(itemList => itemList.glNumber === item.glNumber);
+              if (index > -1) {
+                this.glNumber.getList()[index].setSum(indexKey, item.sum);
+                this.glNumber.getList()[index].updateTotal(item.sum);
+              } else {
+                this.glNumber.addItem(new GlNumberItem(item.glNumber, item.description, keys.length));
+                let indexLast = this.glNumber.getList().length - 1;
+                this.glNumber.getList()[indexLast].setSum(indexKey, item.sum);
+                this.glNumber.getList()[indexLast].updateTotal(item.sum);
+              }
+            });
+    
+          });
+        } else {
+          data.forEach((item, index) => {
+            this.glNumber.addItem(new GlNumberItem(item.glNumber, item.description, null));
+            let indexLast = this.glNumber.getList().length - 1;
+            this.glNumber.getList()[indexLast].updateTotal(item.sum);
+          });
+        }*/
+      this.glNumber.setResponse(data);
+      this.reportsStateService.onChangeGlNumber(this.glNumber);
     }
-    this.reportsStateService.onChangeGlNumber(this.glNumber);
-    // this.getReport.emit(data);
+
+    this.getReport.emit(data);
 
     this.loadingInProgress = false;
     this.onRequest.emit(false);
@@ -171,6 +180,10 @@ export class ReportMenuComponent implements OnInit {
 
       this.glNumber.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.glNumber.setEndDate(moment(value.end).format('YYYY/MM/DD'));
+
+
+      this.taxes.setStartDate(moment(value.start).format('YYYY/MM/DD'));
+      this.taxes.setEndDate(moment(value.end).format('YYYY/MM/DD'));
       this.validate.resetDates();
       this.validate.resetMonthlyDetailed();
     } else {

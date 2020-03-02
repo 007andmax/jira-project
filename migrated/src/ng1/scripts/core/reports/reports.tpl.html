@@ -17,7 +17,8 @@
         <p>Taxes</p>
         <img src="ng1/images/new-icons/Report-Taxes.svg">
         <ul>
-          <li class="content-report" ui-sref="byTaxes">Tax report</li>
+          <!-- ng-click="setReport('byTaxes')"  ui-sref="new-item-report({ ticketId: 'byTaxes' })"   ui-sref="byTaxes"-->
+          <li class="content-report"  ng-click="setReport('byTaxes')"  ui-sref="new-item-report({ ticketId: 'byTaxes' })">Tax report</li>
         </ul>
       </div>
     </div>
@@ -83,7 +84,7 @@
         <p>Tickets</p>
         <img src="ng1/images/new-icons/report-tickets.svg" style="top: 28px;width: 26px;">
         <ul>
-          <li class="content-report" ui-sref="ticket-report">Tickets report</li>
+          <li class="content-report"  ui-sref="ticket-report">Tickets report</li>
         </ul>
       </div>
     </div>

@@ -2,10 +2,11 @@
   
   <p class="report-title" *ngIf="report === 'accounts-receivable'">Accounts Receivable</p>
   <p class="report-title" *ngIf="report === 'income-accounts'">Income accounts Report</p>
+  <p class="report-title" *ngIf="report === 'byTaxes'">Tax Report</p>
   <i class="back-page" (click)="back()"></i>
   <app-gl-number   *ngIf="report === 'income-accounts'"></app-gl-number>
   <app-accounts-receivable   *ngIf="report === 'accounts-receivable'"></app-accounts-receivable>
-  
+  <app-taxes-report   *ngIf="report === 'byTaxes'"></app-taxes-report>
 </div>
 
 

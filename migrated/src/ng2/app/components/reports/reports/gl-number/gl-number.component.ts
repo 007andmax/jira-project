@@ -10,6 +10,7 @@ import { CompaniesStateService } from 'src/ng2/app/states/company/companies-stat
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import * as $ from 'jquery';
 import * as moment from "moment";
+import { GlNumberItem } from '../../class/gl-number-item';
 
 @Component({
   selector: 'app-gl-number',
@@ -38,8 +39,40 @@ export class GlNumberComponent implements OnInit {
   ) { }
   ngOnInit() {
    
-    this.reportsStateService.glNumber.subscribe((data: GlNumber) => {
-      this.glNumber.setDataFromObject(JSON.parse(JSON.stringify(data.getDataObject())));
+    this.reportsStateService.glNumber.subscribe((res: GlNumber) => {
+      this.glNumber.setDataFromObject(JSON.parse(JSON.stringify(res.getDataObject())));
+
+let data = this.glNumber.response;
+      this.glNumber.clearDates();
+      this.glNumber.clearList();
+      if (this.glNumber.getMonthlyDetailed()) {
+        let keys = Object.keys(data);
+        keys = keys.sort();
+        keys.forEach((key, indexKey) => {
+          const element = data[key];
+          this.glNumber.addDate(key);
+          element.forEach((item, indexItem) => {
+            let index = this.glNumber.getList().findIndex(itemList => itemList.glNumber === item.glNumber);
+            if (index > -1) {
+              this.glNumber.getList()[index].setSum(indexKey, item.sum);
+              this.glNumber.getList()[index].updateTotal(item.sum);
+            } else {
+              this.glNumber.addItem(new GlNumberItem(item.glNumber, item.description, keys.length));
+              let indexLast = this.glNumber.getList().length - 1;
+              this.glNumber.getList()[indexLast].setSum(indexKey, item.sum);
+              this.glNumber.getList()[indexLast].updateTotal(item.sum);
+            }
+          });
+  
+        });
+      } else {
+        data.forEach((item, index) => {
+          this.glNumber.addItem(new GlNumberItem(item.glNumber, item.description, null));
+          let indexLast = this.glNumber.getList().length - 1;
+          this.glNumber.getList()[indexLast].updateTotal(item.sum);
+        });
+      }
+
       console.log("this.glNumber", this.glNumber);
       console.log("this.glNumber.list", this.glNumber.list);
       this.headers = [];
