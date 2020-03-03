@@ -28,7 +28,7 @@ export class ItemReportComponent implements OnInit {
   techCompany = null;
   showHeaders = false;
   currentUser: CurrentUser;
-  currentCompany:any = null;
+  currentCompany: any = null;
   constructor(private route: ActivatedRoute, private reportsStateService: ReportsStateService,
     private reportsService: ReportsService,
     public cd: ChangeDetectorRef,
@@ -36,8 +36,8 @@ export class ItemReportComponent implements OnInit {
     private appService: AppService,
     private companiesService: CompaniesService,
     private companiesStateService: CompaniesStateService,
-    private usersStateService:UsersStateService,
-   ) { }
+    private usersStateService: UsersStateService,
+  ) { }
 
   ngOnInit() {
     if (localStorage.report) this.report = localStorage.report;
@@ -45,6 +45,30 @@ export class ItemReportComponent implements OnInit {
       this.glNumber.setDataFromObject(JSON.parse(JSON.stringify(data.getDataObject())));
       console.log("this.glNumber", this.glNumber);
       console.log("this.glNumber.list", this.glNumber.list);
+      let item = new GlNumberItem("", "",(this.glNumber.list.length > 0) ?  this.glNumber.list[0].sum.length : null);
+      let total = 0;
+      this.glNumber.list.forEach(item => {
+        total += item.total;
+      })
+      item.glNumber = "";
+      item.description = "";
+      let count = 0;
+      if (this.glNumber.list.length > 0)
+      {
+        while (count < this.glNumber.list[0].sum.length) {
+          let item_sum = 0;
+          this.glNumber.list.forEach((itemList, index) => {
+            item_sum += itemList.sum[count];
+  
+          });
+          item.setSum(count, item_sum);
+          count++;
+        }
+      }  
+    
+      item.total = total;
+      console.log("item", item);
+      this.glNumber.list.push(item);
       this.cd.detectChanges();
     })
 
@@ -52,9 +76,9 @@ export class ItemReportComponent implements OnInit {
     this.companiesService.getTechCompany().subscribe(data => {
       this.techCompany = data;
     })
-    this.currentUser  =this.usersStateService.getCurrentUser();
+    this.currentUser = this.usersStateService.getCurrentUser();
     this.currentCompany = this.companiesStateService.getCurrentCompany();
-    console.log("currentUser",this.currentUser);
+    console.log("currentUser", this.currentUser);
   }
   public onRequest(data) {
     this.loadingInProgress = data;
@@ -74,7 +98,7 @@ export class ItemReportComponent implements OnInit {
     return moment(this.glNumber.endDate).format('DD MMM YYYY')
   }
   back() {
-   
+
     let body = document.querySelector('.left-panel__category-wrap');
     var link = document.createElement('a');
     body.appendChild(link);

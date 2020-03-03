@@ -38,12 +38,13 @@
             </tr>
           </thead>
           <tbody>
-          <ng-template ngFor let-item [ngForOf]="glNumber.list">
+          <ng-template ngFor let-item [ngForOf]="glNumber.list" let-last="last">
             <tr>
               <td [textContent]="item.glNumber"></td>
               <td [textContent]="item.description"></td>
               <ng-template ngFor let-itemSum [ngForOf]="item.sum"  >
-                  <td  [textContent]="'$' + itemSum"></td>
+                  <td    [textContent]="'$' + itemSum"></td>
+                
               </ng-template>
               <td [textContent]="'$' + item.total"></td>
             </tr>
