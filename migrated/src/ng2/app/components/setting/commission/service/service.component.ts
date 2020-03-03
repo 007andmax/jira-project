@@ -44,10 +44,10 @@ export class ServiceComponent implements OnInit {
    * get services
    */
   getServices() {
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     this.commissionService.getDefaultServices().subscribe(
       res => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
         this.services = res;
         res.forEach(ele => {
           if (ele) {
@@ -63,7 +63,7 @@ export class ServiceComponent implements OnInit {
         });
       },
       error => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
       }
     );
   }
@@ -72,10 +72,10 @@ export class ServiceComponent implements OnInit {
    * special services
    */
   getSpecialService() {
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     this.commissionService.getSpecialServices().subscribe(
       (res: any[]) => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
         if (res && res.length > 0) {
           res.map(el => {
             el.services.filter(service => {
@@ -90,7 +90,7 @@ export class ServiceComponent implements OnInit {
         }
       },
       error => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
       }
     );
   }
@@ -122,12 +122,12 @@ export class ServiceComponent implements OnInit {
           data.setForOldExpenses = true;
         }
       }
-      this.loading = true;
+      this.loading = true;$(".loading").css("display", "block");
       this.commissionService
         .setServiceRate(id, data.rate, data.setForOldExpenses)
         .subscribe(
           (res: any) => {
-            this.loading = false;
+            this.loading = false;$(".loading").css("display", "none");
             this.toastrService.success('Rate Changed Successfully.');
             service.commissionRate =
               res && res.commissionRate
@@ -139,7 +139,7 @@ export class ServiceComponent implements OnInit {
           },
           error => {
             this.toastrService.error(`Error Occurred, ${error}`);
-            this.loading = false;
+            this.loading = false;$(".loading").css("display", "none");
           }
         );
     } else {
@@ -156,11 +156,11 @@ export class ServiceComponent implements OnInit {
   removeServiceRate(i, service: any, isSpecialService: boolean) {
     if (service && service.commissionRate) {
       if (confirm(`Do you want ${service.name} commission rate to zero?`)) {
-        this.loading = true;
+        this.loading = true;$(".loading").css("display", "block");
         const id = !isSpecialService ? service.versionedId.id : service.id;
         this.commissionService.setServiceRate(id, '0', false).subscribe(
           res => {
-            this.loading = false;
+            this.loading = false;$(".loading").css("display", "none");
             this.toastrService.success('Rate Changed Successfully.');
             service.commissionRate = null;
 
@@ -170,7 +170,7 @@ export class ServiceComponent implements OnInit {
           },
           error => {
             this.toastrService.error(`Error Occurred, ${error}`);
-            this.loading = false;
+            this.loading = false;$(".loading").css("display", "none");
           }
         );
       }

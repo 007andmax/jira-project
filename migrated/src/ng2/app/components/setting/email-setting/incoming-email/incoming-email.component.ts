@@ -88,17 +88,17 @@ export class IncomingEmailComponent implements OnInit {
    * smtp settings
    */
   SMTPSettings() {
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     this.emailSettingService.getSMTPSettings().subscribe(
       (smtp: any) => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
         if (smtp) {
           this.smtpSettings = smtp.smtpSettings;
           this.supportMailBox = smtp.supportMailBox;
         }
       },
       error => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
         this.toastr.error(`Error Occured, ${error}`);
       }
     );

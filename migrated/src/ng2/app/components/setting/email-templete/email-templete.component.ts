@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from "@angular/core";
 import { BsModalRef, BsModalService } from "ngx-bootstrap";
 import { EmailTempleteService } from "./email-templete.service";
 import { map, catchError } from "rxjs/operators";
@@ -15,7 +15,7 @@ declare var $: any;
   templateUrl: "./email-templete.component.html",
   styleUrls: ["./email-templete.component.scss"]
 })
-export class EmailTempleteComponent implements OnInit {
+export class EmailTempleteComponent implements OnInit, OnDestroy {
   loading = false;
   submitted = false;
   edit = false;
@@ -73,12 +73,18 @@ export class EmailTempleteComponent implements OnInit {
   }
 
   ngOnInit() {
+    $('body').addClass('ng7');
+    $('body').removeClass('backMenu');
     this.keywords = [];
     this.templeteForm = this.formBuilder.group({
       subject: ["", Validators.required],
       body: ["", Validators.required]
     });
     this.getEmailPages();
+  }
+
+  ngOnDestroy() {
+    $('body').removeClass('ng7');
   }
 
   onBackMenu() {
@@ -105,16 +111,16 @@ export class EmailTempleteComponent implements OnInit {
    * email pages
    */
   getEmailPages() {
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     this.emailService
       .getEmailPages()
       .pipe(
         map(res => {
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
           this.emailPages = res;
         }),
         catchError(err => {
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
           return of("");
         })
       )
@@ -132,13 +138,13 @@ export class EmailTempleteComponent implements OnInit {
     }
     this.getEmailPages();
     this.templeteInfo = templete.value;
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     this.edit = true;
     this.emailService
       .getTemplate(templete.key)
       .pipe(
         map((res: any) => {
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
           if (res) {
             this.hideButtonTextEditor();
             this.templatesData.body = res.body;
@@ -331,7 +337,7 @@ export class EmailTempleteComponent implements OnInit {
 
     
 
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     this.emailService
       .saveEmailTemplate(this.templeteForm.value, this.openEmailTemplate)
       .pipe(
@@ -343,12 +349,12 @@ export class EmailTempleteComponent implements OnInit {
       )
       .subscribe(
         () => {
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
           this.toastr.success("Saved Successfully");
           this.getEmailPages();
         },
         error => {
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
           this.toastr.error(`Error Occured  ${error}`);
         }
       );
@@ -363,12 +369,12 @@ export class EmailTempleteComponent implements OnInit {
       return;
     }
 
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     this.emailService
       .setToDefaultTemplete(templeteKey)
       .pipe(
         map((defaultTemplate: any) => {
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
           if (defaultTemplate) {
             this.templeteForm.patchValue({
               subject: defaultTemplate.subject,

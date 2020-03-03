@@ -96,10 +96,10 @@ export class TicketSettingsComponent implements OnInit {
    * get actual number
    */
   getActualNumber() {
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     this.invoiceTicketsService.actualNumber('TICKET').subscribe(
       (res: any) => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
         if (res) {
           this.ticketForm.patchValue({
             ticketCount: res.number
@@ -114,10 +114,10 @@ export class TicketSettingsComponent implements OnInit {
    * get tax number
    */
   getTaxNumber() {
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     this.invoiceTicketsService.getTaxNumber().subscribe(
       (res: any) => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
         if (res) {
           this.ticketForm.patchValue({
             taxId: res.taxId,
@@ -126,7 +126,7 @@ export class TicketSettingsComponent implements OnInit {
         }
       },
       error => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
       }
     );
   }
@@ -135,16 +135,16 @@ export class TicketSettingsComponent implements OnInit {
    * get terms and conditions
    */
   getTermsAndConditions() {
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     this.invoiceTicketsService.termsAndConditions().subscribe(
       (res: any) => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
         this.ticketForm.patchValue({
           conditions: res.conditions
         });
       },
       error => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
       }
     );
   }
@@ -181,10 +181,10 @@ export class TicketSettingsComponent implements OnInit {
           : null
       }
     };
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     this.invoiceTicketsService.updateTicketsetting(objTicket).subscribe(
       (res: any) => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
         this.toastr.success('Saved Successfully');
         if (res && res.code === 409) {
           this.nextValid = res.message;
@@ -194,7 +194,7 @@ export class TicketSettingsComponent implements OnInit {
         }
       },
       error => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
         this.toastr.error('Bad Request');
       }
     );

@@ -2266,8 +2266,8 @@ div#editor.angular-editor-textarea {
     }
     .loading{
         position: absolute;
-        top: 0;
-        left: 0;
+        top: -50px;
+        left: -30px;
         bottom: 0;
         right: 0;
         margin: auto;
@@ -2276,6 +2276,10 @@ div#editor.angular-editor-textarea {
 }
 
 .ng7 {
+    .content-wrapper {
+        float: left;
+        width: 100%;
+    }
     .modal {
         background-color: unset;
         &.modal-create-ticket {

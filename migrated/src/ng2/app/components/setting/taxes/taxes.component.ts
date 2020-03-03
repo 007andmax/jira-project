@@ -1,15 +1,15 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { TaxesService } from "./taxes.service";
 import { ToastrService } from "ngx-toastr";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { map } from "rxjs/operators";
-
+declare var $:any;
 @Component({
   selector: "app-taxes",
   templateUrl: "./taxes.component.html",
   styleUrls: ["./taxes.component.scss"]
 })
-export class TaxesComponent implements OnInit {
+export class TaxesComponent implements OnInit, OnDestroy {
   loading = false;
   create = false;
   selectedIdx = -1;
@@ -30,6 +30,8 @@ export class TaxesComponent implements OnInit {
    * init
    */
   ngOnInit() {
+    $('body').addClass('ng7');
+    $('body').removeClass('backMenu');
     this.taxes = [];
     this.taxForm = this.formBuilder.group({
       name: [
@@ -47,6 +49,10 @@ export class TaxesComponent implements OnInit {
     this.getTaxes();
   }
 
+  ngOnDestroy() {
+    $('body').removeClass('ng7');
+  }
+
   // convenience getter for easy access to form fields
   get f() {
     return this.taxForm.controls;
@@ -56,7 +62,7 @@ export class TaxesComponent implements OnInit {
    * get taxes
    */
   getTaxes() {
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     this.taxesService
       .getTaxes()
       .pipe(
@@ -64,7 +70,7 @@ export class TaxesComponent implements OnInit {
           if (res) {
             this.taxes = res;
           }
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
         })
       )
       .subscribe();
@@ -101,12 +107,12 @@ export class TaxesComponent implements OnInit {
       isDefault: !tax.isDefault
     });
     console.log(this.taxForm.value);
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     this.taxesService
       .editTaxes(this.taxForm.value)
       .pipe(
         map((res: any) => {
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
           if (res) {
             let itemIndex = this.taxes.findIndex(item => item.id == res.id);
             this.taxes[itemIndex] = res;
@@ -119,7 +125,7 @@ export class TaxesComponent implements OnInit {
           this.toastrService.success("Tax Saved Successfully");
         },
         error => {
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
         }
       );
   }
@@ -134,12 +140,12 @@ export class TaxesComponent implements OnInit {
    * @param tax
    */
   removeTax() {
-      this.loading = true;
+      this.loading = true;$(".loading").css("display", "block");
       this.taxesService
         .delete(this.tax.id)
         .pipe(
           map(res => {
-            this.loading = false;
+            this.loading = false;$(".loading").css("display", "none");
             this.popup = false;
             this.taxes = this.taxes.filter(t => t.id !== this.tax.id);
             this.toastrService.success(`${this.tax.name} is Deleted Successfully.`);
@@ -186,12 +192,12 @@ export class TaxesComponent implements OnInit {
 
     if (this.taxForm.value.id) {
       // edit
-      this.loading = true;
+      this.loading = true;$(".loading").css("display", "block");
       this.taxesService
         .editTaxes(this.taxForm.value)
         .pipe(
           map((res: any) => {
-            this.loading = false;
+            this.loading = false;$(".loading").css("display", "none");
             if (res) {
               let itemIndex = this.taxes.findIndex(item => item.id == res.id);
               this.taxes[itemIndex] = res;
@@ -204,17 +210,17 @@ export class TaxesComponent implements OnInit {
             this.toastrService.success("Tax Saved Successfully");
           },
           error => {
-            this.loading = false;
+            this.loading = false;$(".loading").css("display", "none");
           }
         );
     } else {
       // add
-      this.loading = true;
+      this.loading = true;$(".loading").css("display", "block");
       this.taxesService
         .saveTaxes(this.taxForm.value)
         .pipe(
           map((res: any) => {
-            this.loading = false;
+            this.loading = false;$(".loading").css("display", "none");
             this.taxes.push(res);
             this.create = false;
           })

@@ -61,6 +61,8 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
    * init
    */
   ngOnInit() {
+    $('body').addClass('ng7');
+    $('body').removeClass('backMenu');
     this.techUsers = [];
 
     const emailPattern =
@@ -120,18 +122,18 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   restoreUser() {
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     this.techUsersService.restoreUser(this.userId)
       .pipe()
       .subscribe(
         response => {
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
           this.popup = false;
           this.getUsers();
           this.toastr.success('User has been restore successfully.');
         },
         error => {
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
           this.popup = false;
           this.toastr.error('Something wen to wrong. Please try again later');
           this.getUsers();
@@ -143,7 +145,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
    * get tech users from usres.
    */
   getUsers() {
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     this.techUsersService
       .getUsers()
       .pipe(
@@ -158,7 +160,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       )
       .subscribe(
         (techUsers: any) => {
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
           this.archivedemailNotification(this.userlist);
           if (techUsers) {
             this.techUsers = techUsers;
@@ -169,7 +171,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
           }
         },
         error => {
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
         }
       );
   }
@@ -304,12 +306,12 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
   removeTechUser() {
     const id = this.userId.id;
     if (this.userId) {
-      this.loading = true;
+      this.loading = true;$(".loading").css("display", "block");
       this.techUsersService
         .archiveUser([this.userId.id])
         .pipe(
           map(archiveUser => {
-            this.loading = false;
+            this.loading = false;$(".loading").css("display", "none");
             this.deletepopup = false;
             // deleted techuser.
             // if (this.techUsers.find((x: any) => x.id === this.userId.id)) {
@@ -358,18 +360,18 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       this.imageChangedEvent = event;
       const fromData = new FormData();
       fromData.append('file', event.target.files[0]);
-      this.loading = true;
+      this.loading = true;$(".loading").css("display", "block");
 
       this.settingService.fileAvatar(fromData).subscribe(
         result => {
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
           if (result) {
             this.isCroppedImg = true;
             this.fileAvatar = result;
           }
         },
         error => {
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
           this.isCroppedImg = false;
         }
       );
@@ -426,7 +428,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       return;
     }
 
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     this.settingService
       .updateAvatar(this.selectedTechUser.id, cropImage)
       .subscribe(
@@ -435,7 +437,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
             this.selectedTechUser
               ? (this.selectedTechUser.avatar = avatar)
               : null;
-            this.loading = false;
+            this.loading = false;$(".loading").css("display", "none");
             // this.edit = false;
             // this.getUsers();
 
@@ -443,7 +445,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
           }
         },
         error => {
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
         }
       );
   }
@@ -506,11 +508,11 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
         companyId: this.currentCompanyId,
         subscription: {}
       };
-      this.loading = true;
+      this.loading = true;$(".loading").css("display", "block");
       this.techUsersService.createUser(objTechUser).subscribe(
         (savedTechUsre: any) => {
           this.toastr.success('Saved Successfully');
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
           this.create = false;
           this.getUsers();
           if (savedTechUsre && savedTechUsre.id) {
@@ -519,7 +521,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
         },
         error => {
           this.create = false;
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
           const er = error.error.validationResults;
           this.toastr.error(er.techRole || 'Bad Request');
         }
@@ -678,7 +680,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       ? this.selectedTechUser.company.id
       : null;
 
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     this.techUsersService
       .updateTechUsers(this.selectedTechUser.id, this.selectedTechUser)
       .subscribe(
@@ -691,11 +693,11 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
           }
           this.submitted = false;
           this.selectedTechUser = null;
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
           this.edit = false;
         },
         error => {
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
           this.edit = false;
           const er = error.error.validationResults;
           this.toastr.error(er.techRole || 'Bad Request');
@@ -729,6 +731,7 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    $('body').removeClass('ng7');
     // Do not forget to unsubscribe the event
   }
 

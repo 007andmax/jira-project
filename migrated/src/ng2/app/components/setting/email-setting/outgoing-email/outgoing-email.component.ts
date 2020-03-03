@@ -162,10 +162,10 @@ export class OutgoingEmailComponent implements OnInit {
    * smtp settings
    */
   SMTPSettings() {
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     this.emailSettingService.getSMTPSettings().subscribe(
       (response: any) => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
         if (response) {
           this.smtp = response.smtpSettings;
           this.supportMailBox = response.supportMailBox;
@@ -202,7 +202,7 @@ export class OutgoingEmailComponent implements OnInit {
         }
       },
       (error: any) => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
         this.toastr.error(`Error Occured, ${error.errorMessage}`);
       }
     );
@@ -355,7 +355,7 @@ export class OutgoingEmailComponent implements OnInit {
    */
   saveSMTP(form, isTest) {
     this.submitted = true;
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     if (this.isSMTPLoginUnique) {
       if (this.smtpForm.valid && this.smtp.useSMTP) {
         this.smtp.login = this.smtpForm.value.login;
@@ -370,7 +370,7 @@ export class OutgoingEmailComponent implements OnInit {
 
         this.emailSettingService.SMTPSettings(this.smtp).subscribe(
           (res: any) => {
-            this.loading = false;
+            this.loading = false;$(".loading").css("display", "none");
             this.savedSMTPSettings = this.smtp;
             this.smtp.testEmail = this.savedSMTPSettings.login;
            
@@ -384,7 +384,7 @@ export class OutgoingEmailComponent implements OnInit {
             this.submitted = false;
           },
           error => {
-            this.loading = false;
+            this.loading = false;$(".loading").css("display", "none");
               // this.toastr.error(`Error Occured, ${error}`);
           }
         );
@@ -398,16 +398,16 @@ export class OutgoingEmailComponent implements OnInit {
         });
         this.emailSettingService.SMTPSettings(this.smtp).subscribe(
           (res: any) => {
-            this.loading = false;
+            this.loading = false;$(".loading").css("display", "none");
           },
           (error: any) => {
-            this.loading = false;
+            this.loading = false;$(".loading").css("display", "none");
               this.toastr.error(`Error Occured, ${error}`);
           }
         );
       }
     } else {
-      this.loading = false;
+      this.loading = false;$(".loading").css("display", "none");
       this.isSMTPLoginUnique = false;
     }
   }

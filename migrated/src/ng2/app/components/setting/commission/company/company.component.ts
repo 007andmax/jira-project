@@ -54,7 +54,7 @@ export class CompanyComponent implements OnInit {
    * get users list
    */
   getUsers() {
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     this.commissionService
       .getUsers()
       .pipe(
@@ -69,11 +69,11 @@ export class CompanyComponent implements OnInit {
       )
       .subscribe(
         (techUsers: any) => {
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
           this.activeTechUsers = techUsers;
         },
         error => {
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
         }
       );
   }
@@ -104,14 +104,14 @@ export class CompanyComponent implements OnInit {
     }
 
     const techLeadId = techLead.id;
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     this.commissionService.setTechLead(company.id, techLeadId).subscribe(
       res => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
         this.toastrService.success("Techlead Changed Successfully");
       },
       error => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
         this.toastrService.error(`Error Occured, ${error}`);
       }
     );
@@ -174,7 +174,7 @@ export class CompanyComponent implements OnInit {
    * companies data
    */
   getCompanies() {
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     this.commissionService
       .getCompanies()
       .pipe(
@@ -189,14 +189,14 @@ export class CompanyComponent implements OnInit {
       )
       .subscribe(
         (custCompany: any) => {
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
           if (custCompany) {
             this.clientsCompanies = custCompany;
             console.log(custCompany[0]);
           }
         },
         error => {
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
         }
       );
   }

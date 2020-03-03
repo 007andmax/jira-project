@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { SettingService } from "src/ng2/app/services/setting/setting.service";
 declare var $: any;
 @Component({
@@ -6,11 +6,18 @@ declare var $: any;
   templateUrl: "./my-profile.component.html",
   styleUrls: ["./my-profile.component.scss"]
 })
-export class MyProfileComponent implements OnInit {
+export class MyProfileComponent implements OnInit, OnDestroy {
   constructor() {}
 
-  ngOnInit() {}
-
+  ngOnInit() {
+    $('body').addClass('ng7');
+    $('body').removeClass('backMenu');
+  }
+  
+  ngOnDestroy() {
+    $('body').removeClass('ng7');
+  }
+  
   onBackMenu() {
     let body = document.getElementsByTagName("body")[0];
     body.classList.remove("backMenu"); //remove the class

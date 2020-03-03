@@ -26,10 +26,10 @@ export class ProductComponent implements OnInit {
    * get categories
    */
   getCategories() {
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     this.commissionService.getCategories().subscribe(
       res => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
         if (res && res.length > 0) {
           this.categories = res;
           for (const cat of this.categories) {
@@ -40,7 +40,7 @@ export class ProductComponent implements OnInit {
         }
       },
       error => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
       }
     );
   }
@@ -52,19 +52,19 @@ export class ProductComponent implements OnInit {
   removeProduct(category: any) {
     if (category && category.commissionRate) {
       if (confirm(`Do you want ${category.name} commission rate to zero?`)) {
-        this.loading = true;
+        this.loading = true;$(".loading").css("display", "block");
         this.commissionService
           .setCategoryRate(category.id, '0', false)
           .subscribe(
             res => {
               this.toastrService.success('Removed Successfully')
               this.selectedIdx = -1;
-              this.loading = false;
+              this.loading = false;$(".loading").css("display", "none");
               category.commissionRate = null;
             },
             error => {
               this.toastrService.error('Bad Request')
-              this.loading = false;
+              this.loading = false;$(".loading").css("display", "none");
             }
           );
       }
@@ -98,19 +98,19 @@ export class ProductComponent implements OnInit {
           data.setForOldExpenses = true;
         }
       }
-      this.loading = true;
+      this.loading = true;$(".loading").css("display", "block");
       this.commissionService
         .setCategoryRate(id, data.rate, data.setForOldExpenses)
         .subscribe(
           (res: any) => {
             this.toastrService.success(`Commission Rate Changed Successfully`);
-            this.loading = false;
+            this.loading = false;$(".loading").css("display", "none");
             category.commissionRate = res.commissionRate.toFixed(2);
             this.selectedIdx = -1;
           },
           error => {
             this.selectedIdx = -1;
-            this.loading = false;
+            this.loading = false;$(".loading").css("display", "none");
             this.toastrService.error('Bad Request');
           }
         );

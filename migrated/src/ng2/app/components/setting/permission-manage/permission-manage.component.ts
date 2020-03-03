@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PermissionManageService } from './permission-manage.service';
 import { map, catchError } from 'rxjs/operators';
 import { SettingService } from 'src/ng2/app/services/setting/setting.service';
 import { of } from 'rxjs';
 import { UsersService } from 'src/ng2/app/services/users/users.service';
 import { ToastrService } from 'ngx-toastr';
-
+declare var $:any;
 @Component({
   selector: 'app-permission-manage',
   templateUrl: './permission-manage.component.html',
   styleUrls: ['./permission-manage.component.scss']
 })
-export class PermissionManageComponent implements OnInit {
+export class PermissionManageComponent implements OnInit, OnDestroy {
   selectedRoleIndex = -1;
   selectedRole: string;
   loading = false;
@@ -59,11 +59,17 @@ export class PermissionManageComponent implements OnInit {
    * init
    */
   ngOnInit() {
+    $('body').addClass('ng7');
+    $('body').removeClass('backMenu');
     this.allUsers = [];
     this.getPermissionManage();
     this.getRoleNames();
     this.currentCompany();
     this.getAllUsers();
+  }
+
+  ngOnDestroy() {
+    $('body').removeClass('ng7');
   }
 
   /**
@@ -98,16 +104,16 @@ export class PermissionManageComponent implements OnInit {
    * permission manage
    */
   getPermissionManage() {
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     this.permissionManageService
       .getPermissions()
       .pipe(
         map(res => {
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
           this.roles = res;
         }),
         catchError(err => {
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
           throw err.message;
         })
       )
@@ -163,13 +169,13 @@ export class PermissionManageComponent implements OnInit {
       permissions: []
     };
 
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     this.permissionManageService
       .createTechRole(newRole)
       .pipe(
         map(res => {
           this.toastrService.success('Role Added Successfully');
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
           this.isNewRoleCreating = false;
           if (res) {
             this.roles.push(res);
@@ -185,13 +191,13 @@ export class PermissionManageComponent implements OnInit {
    * changed role name
    */
   changeRoleName() {
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     this.permissionManageService
       .updateTechRole(this.editData.id, this.editData.name)
       .pipe(
         map(res => {
           this.toastrService.success('Role changed successfully');
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
           const role = this.roles.find(el => {
             return el.id === this.editData.id;
           });
@@ -238,11 +244,11 @@ export class PermissionManageComponent implements OnInit {
     if (!id) {
       return;
     }
-    // this.loading = true;
+    // this.loading = true;$(".loading").css("display", "block");
     this.permissionManageService.deleteTechRole(id).subscribe(
       (res: any) => {
         this.toastrService.success('Deleted Role Successfully');
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
         if (res.length > 0) {
           this.usersToShift = res.map((user: any) => {
             const newUser = user.id; // this.permissionManageService.getOnebyId(user.id);
@@ -262,14 +268,14 @@ export class PermissionManageComponent implements OnInit {
           console.log(this.usersToShift);
         } else {
           this.delete = false;
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
           this.roles = this.roles.filter(el => {
             return el.id !== id;
           });
         }
       },
       (error: any) => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
         const errorData = error ? error.error : null;
         if (errorData && error.status === 406) {
           this.usersToShift = errorData.map((user: any) => {
@@ -463,10 +469,10 @@ export class PermissionManageComponent implements OnInit {
     user.techRole = event.target.value;
     console.log("--------------",user);
 
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     user.avatar.cropped = null;
     this.permissionManageService.save(user).subscribe(res => {
-      this.loading = false;
+      this.loading = false;$(".loading").css("display", "none");
       this.toastrService.success('Role Changed Successfully');
       const userIndex = this.usersToShift.findIndex(el => el.id === user.id);
 

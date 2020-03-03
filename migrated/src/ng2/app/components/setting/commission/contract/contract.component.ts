@@ -42,10 +42,10 @@ export class ContractComponent implements OnInit {
   }
 
   getAgreementsRates() {
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     this.commissionService.agreementRates().subscribe(
       res => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
         this.agreementsCommissions = res || {};
         this.oldAgreementsCommissions = Object.assign(
           {},
@@ -53,7 +53,7 @@ export class ContractComponent implements OnInit {
         );
       },
       error => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
       }
     );
   }
@@ -123,11 +123,11 @@ export class ContractComponent implements OnInit {
             this.toastrService.success('Successfully Changed')
             this.oldAgreementsCommissions[this.rate] = data[this.rate];
             this.isModelDisplayModel = false;
-            this.loading = false;
+            this.loading = false;$(".loading").css("display", "none");
           },
           error => {
             this.toastrService.error('Bad Request')
-            this.loading = false;
+            this.loading = false;$(".loading").css("display", "none");
           }
         );
       } else {
@@ -136,21 +136,21 @@ export class ContractComponent implements OnInit {
             this.toastrService.success('Changed Successfully')
             this.oldAgreementsCommissions[this.rate] = data[this.rate];
             this.isModelDisplayModel = false;
-            this.loading = false;
+            this.loading = false;$(".loading").css("display", "none");
           },
           error => {
             this.toastrService.error('Bad Request')
-            this.loading = false;
+            this.loading = false;$(".loading").css("display", "none");
           }
         );
       }
     } else {
-      this.loading = true;
+      this.loading = true;$(".loading").css("display", "block");
       this.commissionService.setAgreementRates(data, false).subscribe(
         res => {
           this.toastrService.success('Saved Successfully')
           this.isModelDisplayModel = false;
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
           this.agreementsCommissions = res || {};
           this.oldAgreementsCommissions = Object.assign(
             {},
@@ -159,7 +159,7 @@ export class ContractComponent implements OnInit {
         },
         error => {
           this.toastrService.error('Bad Request')
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
         }
       );
     }
@@ -201,12 +201,12 @@ export class ContractComponent implements OnInit {
 
       data = Object.assign({}, data, this.agreementsFlags);
 
-      this.loading = true;
+      this.loading = true;$(".loading").css("display", "block");
       this.commissionService.setAgreementRates(data, false).subscribe(
         res => {
           this.toastrService.success('Changed Successfully')
           this.isModelDisplayModel = false;
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
 
           this.agreementsCommissions = res || {};
           this.oldAgreementsCommissions = Object.assign(
@@ -216,7 +216,7 @@ export class ContractComponent implements OnInit {
         },
         error => {
           this.toastrService.error('Bad Request')
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
         }
       );
     }

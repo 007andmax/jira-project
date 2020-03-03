@@ -10,7 +10,7 @@ import { forkJoin, Observable, Subject } from "rxjs";
 import { map } from "rxjs/operators";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
-
+declare var $:any;
 @Component({
   selector: "app-manage-tags",
   templateUrl: "./manage-tags.component.html",
@@ -50,6 +50,8 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
    * init
    */
   ngOnInit() {
+    $('body').addClass('ng7');
+    $('body').removeClass('backMenu');
     this.searchTag = "";
     this.compnayForm = this.formBuilder.group({
       word: ["", Validators.required],
@@ -66,11 +68,11 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
    * load all services
    */
   getAllTags() {
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     forkJoin([this.serviceAllTickets, this.serviceAllCompany])
       .pipe(
         map(data => {
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
           this.ticketTags = data[0];
           this.companyTags = data[1];
         })
@@ -80,7 +82,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
           this.dtTrigger.next();
         },
         error => {
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
         }
       );
   }
@@ -89,14 +91,14 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
    * get all companies
    */
   getAllCompany() {
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     this.serviceAllCompany.subscribe(
       res => {
         this.companyTags = res;
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
       },
       error => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
         console.log(error);
       }
     );
@@ -106,14 +108,14 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
    * get all tickets
    */
   getAllTickets() {
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     this.serviceAllTickets.subscribe(
       res => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
         this.ticketTags = res;
       },
       error => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
         console.log(error);
       }
     );
@@ -179,11 +181,11 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
    * @param tagId
    */
   removeCompanyTag() {   
-      this.loading = true;
+      this.loading = true;$(".loading").css("display", "block");
       this.tagsService.removeCompanyTag(this.tagId, this.setActiveTab).subscribe(
         res => {
           this.tagId = null;
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
           this.deletePopup = false;
           this.toaster.success("Tag Removed Successfully");
           if (this.setActiveTab === "ticket") {
@@ -193,7 +195,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
           }
         },
         error => {
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
           this.deletePopup = false;
         }
       );    
@@ -212,7 +214,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
 
     this.selectedIdx = -1;
     this.create = false;
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
 
     if (!this.edit) {
       const tags = {
@@ -222,7 +224,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       };
       this.tagsService.tags(tags, this.setActiveTab).subscribe(
         res => {
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
           this.toaster.success("Tag Saved Successfully");
           if (this.setActiveTab === "ticket") {
             this.getAllTickets();
@@ -234,7 +236,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
           this.compnayForm.patchValue({ word: "" });
         },
         error => {
-          this.loading = false;
+          this.loading = false;$(".loading").css("display", "none");
           this.toaster.error(error);
         }
       );
@@ -247,7 +249,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
         )
         .subscribe(
           (res: any) => {
-            this.loading = false;
+            this.loading = false;$(".loading").css("display", "none");
             this.submitted = false;
             if (res) {
               this.toaster.success("Tag Updated Successfully", null, {
@@ -276,7 +278,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
             this.compnayForm.patchValue({ word: "" });
           },
           error => {
-            this.loading = false;
+            this.loading = false;$(".loading").css("display", "none");
             this.toaster.error(error);
           }
         );
@@ -290,6 +292,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
   }
 
   ngOnDestroy(): void {
+    $('body').removeClass('ng7');
     // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();
   }

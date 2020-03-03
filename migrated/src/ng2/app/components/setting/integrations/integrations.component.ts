@@ -1,15 +1,15 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { IntegrationsService } from "./integrations.service";
 import { map, catchError } from "rxjs/operators";
 import { of } from "rxjs";
 import { ToastrService } from "ngx-toastr";
-
+declare var $:any;
 @Component({
   selector: "app-integrations",
   templateUrl: "./integrations.component.html",
   styleUrls: ["./integrations.component.scss"]
 })
-export class IntegrationsComponent implements OnInit {
+export class IntegrationsComponent implements OnInit, OnDestroy {
   loading = false;
   show = false;
   paymentInfo: {
@@ -30,7 +30,13 @@ export class IntegrationsComponent implements OnInit {
    * init
    */
   ngOnInit() {
+    $('body').addClass('ng7');
+    $('body').removeClass('backMenu');
     this.getSetting();
+  }
+
+  ngOnDestroy() {
+    $('body').removeClass('ng7');
   }
 
   /**
@@ -47,14 +53,14 @@ export class IntegrationsComponent implements OnInit {
    * get settings
    */
   getSetting() {
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     this.integrationsService.settings().subscribe(
       (res: any) => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
         this.paymentInfo = res;
       },
       error => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
       }
     );
   }
@@ -63,18 +69,18 @@ export class IntegrationsComponent implements OnInit {
    * saved payment info
    */
   savePaymentInfo(isNotificationDis: boolean) {
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
 
     this.integrationsService.savePaymentInfo(this.paymentInfo).subscribe(
       (res: any) => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
         this.paymentInfo = res;
         if (isNotificationDis) {
           this.toastrService.success("Payment Info Changed Successfully.");
         }
       },
       error => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
         if (isNotificationDis) {
           this.toastrService.error(`Error Occured,  ${error}`);
         }

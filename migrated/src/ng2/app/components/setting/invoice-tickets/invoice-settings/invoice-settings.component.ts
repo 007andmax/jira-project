@@ -109,7 +109,7 @@ export class InvoiceSettingsComponent implements OnInit {
   }
 
   getConditions() {
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     this.invoiceTicketsService.termsAndConditions().subscribe(
       (res: any) => {
         this.invoiceForm.patchValue({
@@ -120,7 +120,7 @@ export class InvoiceSettingsComponent implements OnInit {
   }
 
   getTaxNumber() {
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     this.invoiceTicketsService.getTaxNumber().subscribe(
       (res: any) => {
         if (res) {
@@ -140,10 +140,10 @@ export class InvoiceSettingsComponent implements OnInit {
   getInvoiceContact() {
     this.getTaxNumber();
     this.getConditions();
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     this.invoiceTicketsService.getInvoiceContact().subscribe(
       (res: any) => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
         if (res) {
           this.isDisable = res.enabled;
           const state = !this.isDisable ? 'disable' : 'enable';
@@ -189,7 +189,7 @@ export class InvoiceSettingsComponent implements OnInit {
         }
       },
       error => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
       }
     );
   }
@@ -199,10 +199,10 @@ export class InvoiceSettingsComponent implements OnInit {
    */
 
   getTermsAndConditions() {
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     this.invoiceTicketsService.termsAndConditions().subscribe(
       (res: any) => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
         if (res) {
           this.invoiceForm.patchValue({
             invoiceTerms: res.term
@@ -210,7 +210,7 @@ export class InvoiceSettingsComponent implements OnInit {
         }
       },
       error => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
       }
     );
   }
@@ -219,10 +219,10 @@ export class InvoiceSettingsComponent implements OnInit {
    * get invoice number
    */
   getActualNumber() {
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     this.invoiceTicketsService.actualNumber('INVOICE').subscribe(
       (res: any) => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
         if (res) {
           this.invoiceForm.patchValue({
             invoiceCount: res.number
@@ -230,7 +230,7 @@ export class InvoiceSettingsComponent implements OnInit {
         }
       },
       error => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
       }
     );
   }
@@ -304,14 +304,14 @@ export class InvoiceSettingsComponent implements OnInit {
     }
     objInvoice.invoiceContactDto.phoneNumbers = phoneNumbers;
 
-    this.loading = true;
+    this.loading = true;$(".loading").css("display", "block");
     this.invoiceTicketsService.updateInvoiceContact(objInvoice).subscribe(
       res => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
         this.toaster.success('Saved Successfully.');
       },
       error => {
-        this.loading = false;
+        this.loading = false;$(".loading").css("display", "none");
         this.toaster.error('Bad Request');
       }
     );
