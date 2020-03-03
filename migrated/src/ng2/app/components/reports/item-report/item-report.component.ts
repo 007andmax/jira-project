@@ -45,7 +45,7 @@ export class ItemReportComponent implements OnInit {
       this.glNumber.setDataFromObject(JSON.parse(JSON.stringify(data.getDataObject())));
       console.log("this.glNumber", this.glNumber);
       console.log("this.glNumber.list", this.glNumber.list);
-      let item = new GlNumberItem("", "",(this.glNumber.list.length > 0) ?  this.glNumber.list[0].sum.length : null);
+      let item = new GlNumberItem("", "", (this.glNumber.list.length > 0) ? this.glNumber.list[0].sum.length : null);
       let total = 0;
       this.glNumber.list.forEach(item => {
         total += item.total;
@@ -53,22 +53,22 @@ export class ItemReportComponent implements OnInit {
       item.glNumber = "";
       item.description = "";
       let count = 0;
-      if (this.glNumber.list.length > 0)
-      {
+      if (this.glNumber.list.length > 0) {
         while (count < this.glNumber.list[0].sum.length) {
           let item_sum = 0;
           this.glNumber.list.forEach((itemList, index) => {
             item_sum += itemList.sum[count];
-  
+
           });
           item.setSum(count, item_sum);
           count++;
         }
-      }  
-    
+      }
+
       item.total = total;
       console.log("item", item);
       this.glNumber.list.push(item);
+     
       this.cd.detectChanges();
     })
 
@@ -107,5 +107,7 @@ export class ItemReportComponent implements OnInit {
     e.initEvent('click', true, true);
     link.dispatchEvent(e);
   }
-
+  parseTotal(value) {
+    return parseFloat(value.toString()).toFixed(2)
+  }
 }

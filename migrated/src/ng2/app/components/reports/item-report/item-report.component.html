@@ -43,10 +43,10 @@
               <td [textContent]="item.glNumber"></td>
               <td [textContent]="item.description"></td>
               <ng-template ngFor let-itemSum [ngForOf]="item.sum"  >
-                  <td    [textContent]="'$' + itemSum"></td>
+                  <td    [textContent]="'$' + parseTotal(itemSum)"></td>
                 
               </ng-template>
-              <td [textContent]="'$' + item.total"></td>
+              <td [textContent]="'$' + parseTotal(item.total)"></td>
             </tr>
           </ng-template>
           </tbody>
