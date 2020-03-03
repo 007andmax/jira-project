@@ -67,7 +67,7 @@
         </label>
       </div>
 
-      <div style="width: 7%" class=is-billable">
+      <div style="width: 7%" class="is-billable">
         <label class="control checkbox pull-left">
           <input type="checkbox" ng-checked="service.canUseInTicket"
                  custom-disabled="{{ disabledCheckbox || !PermissionsService.isAllowed('MANAGE_SERVICES') }}"
@@ -76,8 +76,29 @@
         </label>
       </div>
 
-      <div style="width: 14%" class="is-billable">
-        <div uib-dropdown  class="uib-dropdown__select">
+      <div style="width: 14%" class="is-billable ">
+        <div class="filter-left-panel category-expanded angular-animate" style="overflow: visible;"  >
+
+          <div class="x-mark-wrapper">
+            <input type="text" class="form-control has-dropdown pointer"
+                   placeholder="Select GL number"
+                   next-after-text-editor ng-trim="false"
+                   typeahead-input-formatter="getGlNumberName($model)"
+                   autocomplete="off" ng-model="glNumber"
+                   uib-typeahead="item as item.glNumber for item in glNumbersList | filter:{'glNumber': $viewValue}:stateComparator | orderBy:'glNumber'"
+                   qt-typeahead-async-show-on-focus smart-dropdown-menu-position
+                   no-overflow="true"
+                   custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
+            <div typeahead-input-icon="service.glNumber" ng-click="resetGlNumber(service)"></div>
+          </div>
+
+
+ 
+         
+        </div>
+
+
+     <!--    <div uib-dropdown  class="uib-dropdown__select">
              <span uib-dropdown-toggle class="uib-dropdown__select-label">  {{(service.glNumber) ? service.glNumber.glNumber : 'Select GL number'}}</span>
              <span class="x-mark"  ng-if="service.glNumber">
               <i class="icn-sm icn-remove-old" ng-click="resetGlNumber(service)"  tooltip="clear"
@@ -91,7 +112,7 @@
                 <a tabindex="-1" href="javascript:void(0)">{{ item.glNumber }}</a>
               </li>
             </ul>
-        </div>
+        </div>-->
       </div>
 
       <div style="width: 5%" ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')">

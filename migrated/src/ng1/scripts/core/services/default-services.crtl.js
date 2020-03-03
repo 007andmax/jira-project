@@ -46,6 +46,23 @@
 
 
         };
+        $scope.getGlNumberName = function (glNumber) {
+          console.log("glNumber",glNumber);
+          if (glNumber) {
+            var find = $scope.glNumbersList.find(function (c) {
+              return c.id === glNumber.id;
+            });
+            return find ? find.glNumber : '';
+          }
+        };
+        function getGlNumberById(id) {
+          //var company = $scope.clientCompanies().find((c) => c.id === id);
+          var glNumber = $scope.glNumbersList.find(function (c) {
+            return c.id === id;
+          });
+          return glNumber ? glNumber.glNumber : '';
+        }
+
         $scope.resetGlNumber = function (service) {
           var saveService = angular.copy(service);
           saveService.taxIds = saveService.taxes.map(function (tax) {
@@ -64,6 +81,17 @@
 
           });
         }
+        $scope.checkGlNumberValueMatched = function (inputValue) {
+          if (inputValue) {
+            console.log("inputValue",inputValue);
+            return $scope.glNumbersList.some(function (item) {
+              return item.id === inputValue.id
+            })
+          } else {
+            return false
+          }
+        };
+       
         $scope.checkClearContract = function (contractType) {
           var index = $scope.glNumbersList.findIndex(item => item[contractType] === true);
           if (index > -1) return true;
