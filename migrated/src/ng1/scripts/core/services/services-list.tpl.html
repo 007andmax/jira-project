@@ -79,7 +79,7 @@
       <div style="width: 14%" class="is-billable ">
         <div class="filter-left-panel category-expanded angular-animate" style="overflow: visible;"  >
 
-          <div class="x-mark-wrapper">
+          <div class="services-list__select">
             <input type="text" class="form-control has-dropdown pointer"
                    placeholder="Select GL number"
                    next-after-text-editor ng-trim="false"
@@ -91,10 +91,7 @@
                    custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
             <div typeahead-input-icon="service.glNumber" ng-click="resetGlNumber(service)"></div>
           </div>
-
-
- 
-         
+          
         </div>
 
 
@@ -161,7 +158,7 @@
   
   
   
-        <ul class="dropdown-account-type" uib-dropdown-menu style="width: 100%; z-index: 9999;">
+        <ul class="services-list__select-bottom-part dropdown-account-type" uib-dropdown-menu style="width: 100%; z-index: 9999;">
             <li ng-repeat="item in glNumbersList"
                 ng-click="setGlNumberContract(item.id,'blockTime')">
               <a tabindex="-1" href="javascript:void(0)">{{ item.glNumber }}</a>
@@ -189,7 +186,7 @@
             </span>
           <i class="show-dropdown-icon icn-sm report-caret-icon"></i>
           
-          <ul class="dropdown-account-type" uib-dropdown-menu style="width: 100%; z-index: 9999;">
+          <ul class="services-list__select-bottom-part dropdown-account-type" uib-dropdown-menu style="width: 100%; z-index: 9999;">
               <li ng-repeat="item in glNumbersList"
               ng-click="setGlNumberContract(item.id,'serviceContract')">
                 <a tabindex="-1" href="javascript:void(0)">{{ item.glNumber }}</a>
@@ -251,7 +248,29 @@
     cursor: auto !important;
     font-size: 14px;
   }
+  .services-list__select {
+    position: relative;
+  }
   
+  .services-list__select input.form-control {
+    background: white;
+  }
   
-
+  .services-list__select .dropdown-menu {
+    min-width: 170px;
+  }
+  
+  .services-list__select .dropdown-menu+.ng-scope {
+    position: absolute;
+    top: 0;
+    right: 8px;
+    transform: translateY(6px);
+  }
+  
+  .services-list__select-bottom-part {
+    left: 0;
+    margin: 0;
+    top: calc(100% + 1px);
+  }
+  
 </style>
