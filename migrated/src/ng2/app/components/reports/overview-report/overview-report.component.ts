@@ -6,6 +6,8 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./overview-report.component.scss']
 })
 export class OverviewReportComponent implements OnInit {
+  @Input() classes = [];
+  @Input() styles = [];
   @Input() headers = [];
   @Input() list = [];
   constructor() { }

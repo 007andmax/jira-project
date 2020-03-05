@@ -21,11 +21,17 @@ export class ReportsService {
   public getReportByGlNumber(data) {
     return this.http.post(this.apiUrl + `reports/sales/byGlNumber`, data);
   }
+  public getReportSalesByProducts(data) {
+    return this.http.post(this.apiUrl + `reports/sales/byProducts`, data);
+  }
   public getReportByTaxes(data) {
     return this.http.post(this.apiUrl + `reports/sales/byTaxes`, data);
   }
   public getReportByAccountsReceivable(data) {
     return this.http.post(this.apiUrl + `reports/sales/byReceivable`, data);
+  }
+  public getReportByProduct(data) {
+    return this.http.post(this.apiUrl + `reports/sales/byProducts`, data);
   }
   public sendMessage (data) {
     return this.http.post(this.apiUrl + `reports/email`, data);

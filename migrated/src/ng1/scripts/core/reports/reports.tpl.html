@@ -6,7 +6,8 @@
         <p>Sales</p>
         <img src="ng1/images/new-icons/Report-sales.svg">
         <ul>
-          <li class="content-report" ui-sref="byProducts">Product sales report
+          <!-- ui-sref="byProducts"-->
+          <li class="content-report" ng-click="setReport('byProducts')"  ui-sref="new-item-report({ ticketId: 'byProducts' })" >Product sales report
           </li>
           <li class="content-report" ui-sref="byCustomers">Customer sales report</li>
         </ul>

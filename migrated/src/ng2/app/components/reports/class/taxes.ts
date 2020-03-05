@@ -42,13 +42,13 @@ export class TaxesReport {
   }
   public setStartDate(startDate) {
     this.startDate = startDate;
-};
-public setEndDate(endDate) {
+  };
+  public setEndDate(endDate) {
     this.endDate = endDate;
-};
-public setType(data) {
-  this.type =data;
-}
+  };
+  public setType(data) {
+    this.type = data;
+  }
   public getForRequest() {
     let data: reqTaxesReport = {
       type: this.type.toUpperCase(),

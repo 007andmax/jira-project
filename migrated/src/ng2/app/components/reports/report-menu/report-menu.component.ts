@@ -9,6 +9,8 @@ import { MultiDatepickerComponent } from '../../shared/multi-datepicker/multi-da
 import { ReportValidate } from '../class/report-validate';
 import { AccountsReceivable } from '../class/accounts-receivable';
 import { TaxesReport } from '../class/taxes';
+import { ProductService } from 'src/ng2/app/services/product/product.service';
+import { ProductSalesReport } from '../class/product-sales-report';
 
 @Component({
   selector: 'app-report-menu',
@@ -22,22 +24,31 @@ export class ReportMenuComponent implements OnInit {
   glNumber: GlNumber = new GlNumber();
   taxes: TaxesReport = new TaxesReport();
   accountsReceivable: AccountsReceivable = new AccountsReceivable();
+  productSalesReport: ProductSalesReport = new ProductSalesReport();
   loadingInProgress: boolean = true;
   listDetailed = ['Year to date', 'Monthly'];
-  listTypesTaxes = [ 'Summary','Detailed'];
+  listTypes = ['Summary', 'Detailed'];
   yearToDate = false;
   validate: ReportValidate = new ReportValidate();
+  public productList = [];
+  isDisabledCompany:boolean = false;
   @Input() report = "";
   @Output() getReport = new EventEmitter<any>();
   @Output() onRequest = new EventEmitter<any>();
   @Output() onSelectedClient = new EventEmitter<any>();
   @ViewChild('dp') datePicker: any;
-  constructor(private reportsService: ReportsService, private reportsStateService: ReportsStateService) { }
+  @ViewChild('cp') companiesList: any;
+  constructor(private reportsService: ReportsService,
+    private reportsStateService: ReportsStateService,
+    private productService: ProductService, ) { }
 
   ngOnInit() {
-
-
     if (this.report === 'accounts-receivable') this.getReportByAccountsReceivable();
+    if (this.report === 'byProducts') {
+     this.isDisabledCompany = true;
+      this.getItemListProducts();
+    }
+
   }
   public onSelectDetailed(data) {
     this.yearToDate = false;
@@ -67,14 +78,20 @@ export class ReportMenuComponent implements OnInit {
   public onSelectTypeTaxes(data) {
     this.taxes.setType(data);
   }
+  public onSelectTypeProduct(data) {
+    this.productSalesReport.setType(data);
+    this.isDisabledCompany = (data === 'Summary') ? true : false;
+  }
   public selectClient(selectClient) {
-
+    console.log("companiesList",this.companiesList);
+   // this.companiesList.setDisabled(true);
     if (selectClient === 'null') {
 
       //  this.recurringState.getCreateTicket().setCompany(null);
       this.accountsReceivable.setClientCompanyId(null);
       this.selectedClient = null;
       this.glNumber.setClientCompanyId(null);
+      this.productSalesReport.setCompanyId(null);
       //  this.recurringState.setClient(selectClient);
 
     } else {
@@ -82,7 +99,8 @@ export class ReportMenuComponent implements OnInit {
       this.selectedClient = selectClient.item;
       this.glNumber.setClientCompanyId(selectClient.item.id);
       this.accountsReceivable.setClientCompanyId(selectClient.item.id);
-
+      this.productSalesReport.setCompanyId(selectClient.item.id);
+      this.validate.resetCompany();
       //  this.recurringState.setClient(selectClient);
       //  this.onCheckListServices();
       //  this.getCompanyDevices();
@@ -96,16 +114,27 @@ export class ReportMenuComponent implements OnInit {
 
   }
   getReportByTaxes() {
+    if (!this.validate.isValidateTaxes(this.glNumber.startDate, this.glNumber.endDate)) return;
+
     this.onRequest.emit(true);
     this.reportsService.getReportByTaxes(this.taxes.getForRequest()).subscribe(data => this.setDatareport(data));
 
   }
   getReportByAccountsReceivable() {
+
+
     this.onRequest.emit(true);
     this.reportsService.getReportByAccountsReceivable(this.accountsReceivable.getForRequest()).subscribe(data => this.setDatareport(data));
 
   }
 
+  getReportByProducts() {
+    if (!this.validate.isValidateProduct(this.productSalesReport.startDate, this.productSalesReport.endDate, this.productSalesReport.companyId, this.productSalesReport.type)) return;
+
+    this.onRequest.emit(true);
+    this.reportsService.getReportByProduct(this.productSalesReport.getForRequest()).subscribe(data => this.setDatareport(data));
+
+  }
   getReportByGlNumber() {
 
     if (!this.validate.isValidate(this.glNumber.monthlyDetailed, this.yearToDate, this.glNumber.startDate, this.glNumber.endDate)) return;
@@ -115,10 +144,8 @@ export class ReportMenuComponent implements OnInit {
     if (this.yearToDate) {
       this.reportsService.getAccountingStartDate().subscribe((res: any) => {
         console.log("res", res.accountingStartDate);
-
         this.glNumber.setStartDate(moment(res.accountingStartDate).format('YYYY/MM/DD'));
         this.glNumber.setEndDate(moment(new Date()).format('YYYY/MM/DD'));
-
         this.reportsService.getReportByGlNumber(this.glNumber.getForRequest()).subscribe(data => this.setDatareport(data));
       })
     } else {
@@ -131,41 +158,12 @@ export class ReportMenuComponent implements OnInit {
   private setDatareport(data) {
 
     if (this.report === 'income-accounts') {
-      /*  this.glNumber.clearDates();
-        this.glNumber.clearList();
-        if (this.glNumber.getMonthlyDetailed()) {
-          let keys = Object.keys(data);
-          keys = keys.sort();
-          keys.forEach((key, indexKey) => {
-            const element = data[key];
-            this.glNumber.addDate(key);
-            element.forEach((item, indexItem) => {
-              let index = this.glNumber.getList().findIndex(itemList => itemList.glNumber === item.glNumber);
-              if (index > -1) {
-                this.glNumber.getList()[index].setSum(indexKey, item.sum);
-                this.glNumber.getList()[index].updateTotal(item.sum);
-              } else {
-                this.glNumber.addItem(new GlNumberItem(item.glNumber, item.description, keys.length));
-                let indexLast = this.glNumber.getList().length - 1;
-                this.glNumber.getList()[indexLast].setSum(indexKey, item.sum);
-                this.glNumber.getList()[indexLast].updateTotal(item.sum);
-              }
-            });
-    
-          });
-        } else {
-          data.forEach((item, index) => {
-            this.glNumber.addItem(new GlNumberItem(item.glNumber, item.description, null));
-            let indexLast = this.glNumber.getList().length - 1;
-            this.glNumber.getList()[indexLast].updateTotal(item.sum);
-          });
-        }*/
       this.glNumber.setResponse(data);
       this.reportsStateService.onChangeGlNumber(this.glNumber);
     }
 
-    this.getReport.emit(data);
 
+    this.getReport.emit(data);
     this.loadingInProgress = false;
     this.onRequest.emit(false);
   }
@@ -182,14 +180,38 @@ export class ReportMenuComponent implements OnInit {
       this.glNumber.setEndDate(moment(value.end).format('YYYY/MM/DD'));
 
 
+      this.productSalesReport.setStartDate(moment(value.start).format('YYYY/MM/DD'));
+      this.productSalesReport.setEndDate(moment(value.end).format('YYYY/MM/DD'));
+
       this.taxes.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.taxes.setEndDate(moment(value.end).format('YYYY/MM/DD'));
       this.validate.resetDates();
       this.validate.resetMonthlyDetailed();
     } else {
       this.glNumber.resetDates();
+      this.productSalesReport.resetDates();
     }
 
     //  this.reportsStateService.onChangeGlNumber(this.glNumber);
+  }
+
+  /**
+ * Get product list
+ */
+  public getItemListProducts() {
+    this.productService.getCategories().subscribe((res: any) => {
+      this.productList = res;
+
+    });
+  }
+
+  /**
+  * Set product item
+  * @param item - product
+  */
+  public selectProduct(item) {
+    console.log("item", item);
+    this.productSalesReport.setProductId(item.versionedId.id);
+
   }
 }
