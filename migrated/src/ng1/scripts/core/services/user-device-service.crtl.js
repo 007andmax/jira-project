@@ -61,7 +61,8 @@
                     if (index > -1) id = $scope.glNumbersList[index].id;
                     ServicesService.resetContractGlNumber(id, contractType, function (data) {
                         console.log("data", data);
-                        $scope.glNumbersList[index][contractType] = false;
+                        if ($scope.glNumbersList[index][contractType])  $scope.glNumbersList[index][contractType] = false;
+                   
                         $scope.currentUserDeviceContracts = null;
                     })
                 }
