@@ -62,6 +62,7 @@
                     ServicesService.resetContractGlNumber(id, contractType, function (data) {
                         console.log("data", data);
                         $scope.glNumbersList[index][contractType] = false;
+                        $scope.currentUserDeviceContracts = null;
                     })
                 }
                 $scope.setGlNumberContract = function (id, contractType) {
