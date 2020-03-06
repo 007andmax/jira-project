@@ -149,10 +149,16 @@
       RealTimeService.subscribe('/glNumber/' + id, serviceScope, function (newChange) {
 
         if (newChange.action === "GL_NUMBER_SAVED") {
-          glNumbers.push(newChange.data);
-          console.log("glNumbers",angular.copy(glNumbers));
-          glNumbers = glNumbers.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
-          1 : ((b.glNumber.toLowerCase() > a.glNumber.toLowerCase()) ? -1 : 0));
+          var index = glNumbers.findIndex(item => item.id === newChange.data);
+          if (index > -1) {
+            glNumbers[index] = newChange.data;
+          } else {
+            glNumbers.push(newChange.data);
+            console.log("glNumbers",angular.copy(glNumbers));
+            glNumbers = glNumbers.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
+            1 : ((b.glNumber.toLowerCase() > a.glNumber.toLowerCase()) ? -1 : 0));
+          }
+         
           $rootScope.$broadcast('setRealTimeGLNumbers', angular.copy(glNumbers));
         }
 
