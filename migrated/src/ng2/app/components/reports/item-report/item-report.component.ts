@@ -50,7 +50,7 @@ export class ItemReportComponent implements OnInit {
       this.glNumber.list.forEach(item => {
         total += item.total;
       })
-      item.glNumber = "";
+      item.glNumber = "Total";
       item.description = "";
       let count = 0;
       if (this.glNumber.list.length > 0) {
