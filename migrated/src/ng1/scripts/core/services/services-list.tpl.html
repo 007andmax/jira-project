@@ -95,21 +95,7 @@
         </div>
 
 
-     <!--    <div uib-dropdown  class="uib-dropdown__select">
-             <span uib-dropdown-toggle class="uib-dropdown__select-label">  {{(service.glNumber) ? service.glNumber.glNumber : 'Select GL number'}}</span>
-             <span class="x-mark"  ng-if="service.glNumber">
-              <i class="icn-sm icn-remove-old" ng-click="resetGlNumber(service)"  tooltip="clear"
-                 tooltip-placement="top"></i>
-            </span>
-            <i class="show-dropdown-icon icn-sm report-caret-icon"></i>
-      
-             <ul class="dropdown-account-type" uib-dropdown-menu style="width: 100%; z-index: 9999;">
-              <li ng-repeat="item in glNumbersList"
-                  ng-click="setGlNumber(item,service)">
-                <a tabindex="-1" href="javascript:void(0)">{{ item.glNumber }}</a>
-              </li>
-            </ul>
-        </div>-->
+    
       </div>
 
       <div style="width: 5%" ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')">
@@ -140,61 +126,15 @@
     </div>
   </div>
   <ul class="qt-list" style="padding: 0">
-    <li>
-  
-  <div class="intermediate-parent-elem d-f">
-  
-    <div style="width: 79%;">
-      <div>Block Time Contracts</div>
-    </div>
-    <div class="is-billable" style="width: 14%">
-      <div uib-dropdown   class="uib-dropdown__select">
-           <span uib-dropdown-toggle class="uib-dropdown__select-label">{{getContracts('blockTime')}}</span>
-           <span class="x-mark"  ng-if="checkClearContract('blockTime')">
-            <i class="icn-sm icn-remove-old" ng-click="resetContract('blockTime')"  tooltip="clear"
-               tooltip-placement="top"></i>
-          </span>
-          <i class="show-dropdown-icon icn-sm report-caret-icon"></i>
-  
-  
-  
-        <ul class="services-list__select-bottom-part dropdown-account-type" uib-dropdown-menu style="width: 100%; z-index: 9999;">
-            <li ng-repeat="item in glNumbersList"
-                ng-click="setGlNumberContract(item.id,'blockTime')">
-              <a tabindex="-1" href="javascript:void(0)">{{ item.glNumber }}</a>
-            </li>
-          </ul>
-      </div>
-    
-    </div>
-    </div>
+    <li ng-controller="quicktech.core.services.blocktimeServiceCtrl">
+      <div ng-include="'/ng1/scripts/core/services/block-time-service.tpl.html'"></div>
+ 
     </li>
   
-    <li>
-
-    <div class="intermediate-parent-elem d-f">
-    
-      <div  style="width: 79%;">
-        <div>User / Device Contracts</div>
-      </div>
-      <div is-billable style="width: 14%">
-        <div uib-dropdown  class="uib-dropdown__select">
-             <span uib-dropdown-toggle class="uib-dropdown__select-label">{{getContracts('serviceContract')}}</span>
-             <span class="x-mark"  ng-if="checkClearContract('serviceContract')">
-              <i class="icn-sm icn-remove-old" ng-click="resetContract('serviceContract')"  tooltip="clear"
-                 tooltip-placement="top"></i>
-            </span>
-          <i class="show-dropdown-icon icn-sm report-caret-icon"></i>
-          
-          <ul class="services-list__select-bottom-part dropdown-account-type" uib-dropdown-menu style="width: 100%; z-index: 9999;">
-              <li ng-repeat="item in glNumbersList"
-              ng-click="setGlNumberContract(item.id,'serviceContract')">
-                <a tabindex="-1" href="javascript:void(0)">{{ item.glNumber }}</a>
-              </li>
-          </ul>
-        </div>
-      </div>
-      </li>
+    <li ng-controller="quicktech.core.services.userdeviceServiceCtrl">
+      <div ng-include="'/ng1/scripts/core/services/user-device-service.tpl.html'"></div>
+ 
+    </li>
   </ul>
 </div>
 <script>

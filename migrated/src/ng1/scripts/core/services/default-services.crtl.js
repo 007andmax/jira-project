@@ -7,34 +7,33 @@
       function ($scope, $rootScope, CompaniesService, ServicesService) {
         $scope.glNumbersList = [];
         $scope.showCheckboxes = true;
-
-        $rootScope.$on('setRealTimeGLNumbers', function(event, newInvoice){
-          console.log('newInvoice',newInvoice);
+        $rootScope.$on('setRealTimeGLNumbers', function (event, newInvoice) {
+          console.log('newInvoice', newInvoice);
           $scope.glNumbersList = newInvoice;
-              });
-
+        });
         $scope.$watch("servicesData.default.length", function (count) {
           if (count) {
             $scope.services = $scope.servicesData.default;
           }
         });
-       // ServicesService.getGlNumbers(function (data) {
-          $scope.glNumbersList = CompaniesService.getGlNumbers();
-     //   })
+        $scope.glNumbersList = CompaniesService.getGlNumbers();
+        $scope.getContracts = function (field) {
+          var glNumber = null;
+          $scope.glNumbersList.forEach(element => {
+            if (element[field]) glNumber = element;
 
+          });
+          return glNumber;
+        }
         $scope.setGlNumber = function (glNumber, service) {
-
-
           var saveService = angular.copy(service);
           saveService.taxIds = saveService.taxes.map(function (tax) {
             return tax.id;
           });
           saveService.taxes = undefined;
-
           saveService.glNumber = {
             id: glNumber.id
           }
-
           ServicesService.save(saveService, function (resp) {
             console.log("resp", resp);
             var index = $scope.services.findIndex(item => item.versionedId.id === saveService.versionedId.id);
@@ -43,11 +42,8 @@
             $rootScope.$broadcast('newServiceHasBeenCreated', resp.id);
 
           });
-
-
         };
         $scope.getGlNumberName = function (glNumber) {
-          console.log("glNumber",glNumber);
           if (glNumber) {
             var find = $scope.glNumbersList.find(function (c) {
               return c.id === glNumber.id;
@@ -55,35 +51,21 @@
             return find ? find.glNumber : '';
           }
         };
-        function getGlNumberById(id) {
-          //var company = $scope.clientCompanies().find((c) => c.id === id);
-          var glNumber = $scope.glNumbersList.find(function (c) {
-            return c.id === id;
-          });
-          return glNumber ? glNumber.glNumber : '';
-        }
-
         $scope.resetGlNumber = function (service) {
           var saveService = angular.copy(service);
           saveService.taxIds = saveService.taxes.map(function (tax) {
             return tax.id;
           });
           saveService.taxes = undefined;
-
           saveService.glNumber = null;
-
           ServicesService.save(saveService, function (resp) {
-            console.log("resp", resp);
             var index = $scope.services.findIndex(item => item.versionedId.id === saveService.versionedId.id);
             if (index > -1) $scope.services[index].glNumber = null;
-          
             $rootScope.$broadcast('newServiceHasBeenCreated', resp.id);
-
           });
         }
         $scope.checkGlNumberValueMatched = function (inputValue) {
           if (inputValue) {
-            console.log("inputValue",inputValue);
             return $scope.glNumbersList.some(function (item) {
               return item.id === inputValue.id
             })
@@ -91,31 +73,16 @@
             return false
           }
         };
-       
         $scope.checkClearContract = function (contractType) {
           var index = $scope.glNumbersList.findIndex(item => item[contractType] === true);
           if (index > -1) return true;
           return false;
         }
-        $scope.resetContract = function (contractType) {
-          var id;
-          var index = $scope.glNumbersList.findIndex(item => item[contractType] === true);
-          if (index > -1) id = $scope.glNumbersList[index].id;
-          ServicesService.resetContractGlNumber(id, contractType, function (data) {
-            console.log("data", data);
-            $scope.glNumbersList[index][contractType] = false;
-            //updateGlNumberContract(data,contractType,true);
-
-          })
-        }
         $scope.setGlNumberContract = function (id, contractType) {
           ServicesService.setContractGlNumber(id, contractType, function (data) {
-            console.log("data", data);
             updateGlNumberContract(data, contractType, true);
-
           })
         }
-
         function updateGlNumberContract(data, contractType, value) {
           $scope.glNumbersList.forEach(element => {
             if (element.id === data.id) {
@@ -123,27 +90,11 @@
             } else {
               element[contractType] = false;
             }
-
           });
-
         }
-
-        $scope.getContracts = function (field) {
-          var glNumber = "Select GL number";
-          $scope.glNumbersList.forEach(element => {
-            if (element[field]) glNumber = element.glNumber;
-
-          });
-          return glNumber;
-        }
-
-
-
-
         $scope.$on(CompaniesService.getCurrentCompany().id + '-showService', function (event, serviceId) {
           $scope.$broadcast('show-' + serviceId);
         });
-
       }]);
 
 }());

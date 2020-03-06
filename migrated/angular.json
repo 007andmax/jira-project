@@ -392,6 +392,8 @@
               "src/ng1/scripts/core/service-agreements/modal/service-contract-modal/product-expense-list.ctrl.js",
               "src/ng1/scripts/core/service-agreements/service-agreements.ctrl.js",
               "src/ng1/scripts/core/services/default-services.crtl.js",
+              "src/ng1/scripts/core/services/block-time-service.crtl.js",
+              "src/ng1/scripts/core/services/user-device-service.crtl.js",
               "src/ng1/scripts/core/services/service.crtl.js",
               "src/ng1/scripts/core/services/services.ctrl.js",
               "src/ng1/scripts/core/settings/activity-history/activity-history.ctrl.js",

@@ -8,32 +8,33 @@
         restrict: 'A',
         require: 'ngModel',
         link: function (scope, element, attrs, modelCtrl) {
-//console.log("scope",scope);
-//console.log("element",element);
-//console.log("attrs",attrs);
+          //console.log("scope",scope);
+          //console.log("element",element);
+          //console.log("attrs",attrs);
           var secretEmptyKey = '[$empty$]';
-var onInit = false;
+          var onInit = false;
+          console.log("attrs.name",attrs.name);
           element.bind('click', triggerFunc);
 
           function triggerFunc() {
             onInit = true;
             console.log("triggerFunc");
-            if(modelCtrl.testVar) {
+            if (modelCtrl.testVar) {
               modelCtrl.testVar = false;
               return;
             }
 
             var prev = modelCtrl.$modelValue || '';
             if (prev) {
-              console.log("prev",prev);
+              console.log("prev", prev);
               modelCtrl.$setViewValue('');
               // $timeout(function() {
               //   modelCtrl.$setViewValue(prev);
               // });
             } else {
-              console.log("modelCtrl",modelCtrl);
+              console.log("modelCtrl", modelCtrl);
               modelCtrl.$setViewValue(' ');
-              setTimeout(function() {
+              setTimeout(function () {
                 modelCtrl.$setViewValue(prev);
               });
             }
@@ -51,12 +52,12 @@ var onInit = false;
           // this parser run after typeahead's parser
           modelCtrl.$parsers.push(function (inputValue) {
             if (!onInit && attrs.name === "glNumber") return;
-            console.log("push");
+            
             return inputValue === secretEmptyKey ? '' : inputValue; // set the secretEmptyKey back to empty string
           });
 
           scope.stateComparator = function (state, viewValue) {
-         //   if (!onInit) return;
+            //   if (!onInit) return;
             console.log("stateComparator");
             var secretEmptyKey = '[$empty$]';
             return viewValue === secretEmptyKey || ('' + state).toLowerCase().indexOf(('' + viewValue).toLowerCase()) > -1;
