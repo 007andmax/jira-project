@@ -149,7 +149,7 @@
       RealTimeService.subscribe('/glNumber/' + id, serviceScope, function (newChange) {
 
         if (newChange.action === "GL_NUMBER_SAVED") {
-          var index = glNumbers.findIndex(item => item.id === newChange.data);
+          var index = glNumbers.findIndex(item => item.id === newChange.data.id);
           if (index > -1) {
             glNumbers[index] = newChange.data;
           } else {
