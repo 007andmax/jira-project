@@ -7,14 +7,14 @@
   var services = angular.module('main.services');
 
   services.factory('DevicesService', ['$http', '$rootScope', 'RealTimeService', 'Utils', 'UsersService', 'Downloader', 'CompaniesService',
-    function ($http, $rootScope, RealTimeService, Utils, UsersService, Downloader, CompaniesService ) {
+    function ($http, $rootScope, RealTimeService, Utils, UsersService, Downloader, CompaniesService) {
 
       var storage = { devices: {}, callbacks: {}, deviceCounter: {}, oneTimeCallbacks: {} },
         serviceScope = $rootScope.$new(),
         callbacksForRemoteInstall = {},
         callbacksForRemoteUninstall = {},
         callbackForRemoteConnection = {};
-        $rootScope.onInitDevciesCompleted = false;
+      $rootScope.onInitDevciesCompleted = false;
 
       var initListeners = [],
         initialized = false;
@@ -125,29 +125,29 @@
         },
 
       }
-      
+
       Utils.customizeObj(storage);
 
       CompaniesService._addInitListener(init);
 
       function init() {
-       
+
         $http.get("/devices?companyId=" + CompaniesService.getCurrentCompany().id).then(function (resp) {
           var devices = storage.devices;
           $rootScope.onInitDevciesCompleted = true;
           var listOfCompaniesWithAgents = {};
-          Object.keys(resp.data).forEach(function(key,index) {
-            if(resp.data[key] !== null) {
+          Object.keys(resp.data).forEach(function (key, index) {
+            if (resp.data[key] !== null) {
               listOfCompaniesWithAgents[key] = resp.data[key];
             }
           });
 
           Utils.customizeObj(listOfCompaniesWithAgents, devices);
           calculateDevicesCountersAndCallCallbacks();
-        
+
           $rootScope.$broadcast('onDevicesComplated', true);
           RealTimeService.subscribe('/device', serviceScope, function (newChange) {
-           
+
             if (false && newChange.action === 'REMOTE_INSTALL_INFO') {
 
               var device = Utils.findById(scannedDevices[companyId], newChange.data.netScanId);
@@ -189,7 +189,7 @@
               if (uninstallCall && typeof uninstallCall === "function") {
                 uninstallCall();
               }
-            } else  if (newChange.action === 'DEVICE_ONLINE') {
+            } else if (newChange.action === 'DEVICE_ONLINE') {
               var deviceFound = false;
               for (var i in devices[newChange.data.clientCompanyId]) {
                 if (devices[newChange.data.clientCompanyId][i].id === newChange.data.value) {
@@ -200,10 +200,10 @@
               }
 
               if (!deviceFound) {
-               
+
                 getUpdatedDevices();
                 // var username = newChange.data.username;
-               
+
                 // // var parsedData = JSON.parse(newChange.data.value);
                 // // parsedData.device.userName = newChange.data.userName;
                 // if (!devices[newChange.data.clientCompanyId]) {
@@ -230,7 +230,7 @@
               }
               calculateDevicesCountersAndCallCallbacks();
             } else if (newChange.action === 'DEVICE_INSTALLED') {
-             
+
               var parsedData = JSON.parse(newChange.data.value);
               parsedData.device.userName = newChange.data.userName;
               if (!devices[newChange.data.clientCompanyId]) {
@@ -261,19 +261,19 @@
                 if (device) {
                   device = _getNetScanByDeviceId(scannedDevices[newChange.data.companyId], device.id);
                   if (device && newChange.data.testResult.toUpperCase() === 'FAIL') {
-                   
+
                     $rootScope.$broadcast('masterAgentWrongCredentials-' + device.deviceId);
                   }
                 }
               }
-            } else if(newChange.action === 'AGENT_ACTIVITY_STATUS') {
-             
+            } else if (newChange.action === 'AGENT_ACTIVITY_STATUS') {
+
               var companyId = getCompanyIdByAgentId(newChange.data.agentId);
-              if(newChange.data && newChange.data.statuses && newChange.data.statuses.hasOwnProperty('Idle') ) {
-                if(companyId) {
-                  for (var i=0; i< devices[companyId].length; i++) {
+              if (newChange.data && newChange.data.statuses && newChange.data.statuses.hasOwnProperty('Idle')) {
+                if (companyId) {
+                  for (var i = 0; i < devices[companyId].length; i++) {
                     if (devices[companyId][i].agentId === newChange.data.agentId) {
-                      if(newChange.data.statuses.Idle) {
+                      if (newChange.data.statuses.Idle) {
                         storage.devices[companyId][i].Idle = newChange.data.statuses.Idle;
                       } else {
                         storage.devices[companyId][i].Idle = 'none';
@@ -285,9 +285,9 @@
                 }
 
               } else if (newChange.data && newChange.data.statuses && newChange.data.statuses.hasOwnProperty('NoRestart') && newChange.data.statuses.hasOwnProperty('Online')) {
-                
-                for (var i=0; i< devices[companyId].length; i++) {
-                  if(companyId) {
+
+                for (var i = 0; i < devices[companyId].length; i++) {
+                  if (companyId) {
                     if (devices[companyId][i].agentId === newChange.data.agentId) {
                       storage.devices[companyId][i].NoRestart = newChange.data.statuses.NoRestart;
                       storage.devices[companyId][i].Online = newChange.data.statuses.Online;
@@ -307,10 +307,10 @@
             if (newChange.action === 'REMOTE_CONNECTION_CLOSED') {
               var session = newChange.data;
               $rootScope.openCreateTicketForm(session.sessionId, session.duration, session.clientCompany.id, session.oneTime ? '' : session.deviceId);
-            } else if(newChange.action === 'ONE_TIME_CONNECTION_OPEN') {
+            } else if (newChange.action === 'ONE_TIME_CONNECTION_OPEN') {
               addRemoteConnectionSessionToDevice(newChange, devices);
 
-            } else if(newChange.action === 'ONE_TIME_DELETED') {
+            } else if (newChange.action === 'ONE_TIME_DELETED') {
 
 
 
@@ -331,8 +331,8 @@
           var devices = storage.devices;
 
           var listOfCompaniesWithAgents = {};
-          Object.keys(resp.data).forEach(function(key,index) {
-            if(resp.data[key] !== null) {
+          Object.keys(resp.data).forEach(function (key, index) {
+            if (resp.data[key] !== null) {
               listOfCompaniesWithAgents[key] = resp.data[key];
             }
           });
@@ -344,8 +344,8 @@
 
       function addRemoteConnectionSessionToDevice(newChange, devices) {
         //var device = Utils.findById(devices[newChange.data.clientCompany.id], newChange.data.deviceId);
-        for(var i=0; i<devices[newChange.data.clientCompany.id].length; i++) {
-          if(devices[newChange.data.clientCompany.id][i].id === newChange.data.deviceId) {
+        for (var i = 0; i < devices[newChange.data.clientCompany.id].length; i++) {
+          if (devices[newChange.data.clientCompany.id][i].id === newChange.data.deviceId) {
             devices[newChange.data.clientCompany.id][i].OneTimeConnectionData.push(newChange.data)
           }
         }
@@ -353,10 +353,10 @@
 
       function removeRemoteConnectionSessionToDevice(newChange, devices) {
         var companyId = getCompanyIdByAgenSessionId(newChange.data);
-        if(companyId) {
-          for(var i=0; i<devices[companyId].length; i++) {
-            for(var r=0; r<devices[companyId][i].OneTimeConnectionData.length; r++) {
-              if(devices[companyId][i].OneTimeConnectionData[r].id === newChange.data) {
+        if (companyId) {
+          for (var i = 0; i < devices[companyId].length; i++) {
+            for (var r = 0; r < devices[companyId][i].OneTimeConnectionData.length; r++) {
+              if (devices[companyId][i].OneTimeConnectionData[r].id === newChange.data) {
                 devices[companyId][i].OneTimeConnectionData.splice(r, 1);
               }
             }
@@ -446,7 +446,11 @@
           if (response.data.code >= 400) {
             return;
           }
-          Downloader.downloadByUrl(response.data.link);
+          var link = document.createElement('a');
+          link.target = "_blank";
+          link.href = response.data.link;
+          link.download = response.data.link.substring(response.data.link.lastIndexOf('/') + 1, response.data.link.length);;
+          link.click();
         });
       }
 
@@ -467,8 +471,8 @@
         }
 
         $http.post('/devices/updateMasterAgent', request)
-          .then(function(resp) {
-           
+          .then(function (resp) {
+
           })
       }
 
@@ -816,14 +820,14 @@
                 }
               }
 
-            
+
 
               if (device) {
-                
+
                 var statusName = newChange.data.status;
                 var status = installationStatuses[statusName];
 
-               
+
 
                 if (statusName === 'MANAGED') {
                   Utils.defineReadOnlyProperty(device, "agentStatus", 'managed')
@@ -996,7 +1000,7 @@
       }
 
       function _getDeviceByDeviceId(devices, agentId) {
-        if(devices) {
+        if (devices) {
           for (var i = 0; i < devices.length; i++) {
             var device = devices[i];
             if (device.id === agentId) {
@@ -1035,35 +1039,35 @@
       }
 
       function getCompanyIdByAgentId(value) {
-        if(value) {
-          return Object.keys(storage.devices).find(function(key) {
-            if(key !== 'staticCopy') {
-                for(var i=0; i<storage.devices[key].length; i++ ) {
-                  if(storage.devices[key][i].agentId === value) {
-                    return true;
-                  }
+        if (value) {
+          return Object.keys(storage.devices).find(function (key) {
+            if (key !== 'staticCopy') {
+              for (var i = 0; i < storage.devices[key].length; i++) {
+                if (storage.devices[key][i].agentId === value) {
+                  return true;
                 }
+              }
 
             }
-          } );
+          });
         }
       }
 
       function getCompanyIdByAgenSessionId(value) {
-        if(value) {
-          return Object.keys(storage.devices).find(function(key) {
-            if(key !== 'staticCopy') {
-              for(var i=0; i<storage.devices[key].length; i++ ) {
-                if(storage.devices[key][i].OneTimeConnectionData && storage.devices[key][i].OneTimeConnectionData.length) {
-                  for(var c=0; c<storage.devices[key][i].OneTimeConnectionData.length; c++) {
-                    if(storage.devices[key][i].OneTimeConnectionData[c].id === value) {
+        if (value) {
+          return Object.keys(storage.devices).find(function (key) {
+            if (key !== 'staticCopy') {
+              for (var i = 0; i < storage.devices[key].length; i++) {
+                if (storage.devices[key][i].OneTimeConnectionData && storage.devices[key][i].OneTimeConnectionData.length) {
+                  for (var c = 0; c < storage.devices[key][i].OneTimeConnectionData.length; c++) {
+                    if (storage.devices[key][i].OneTimeConnectionData[c].id === value) {
                       return true;
                     }
                   }
                 }
               }
             }
-          } );
+          });
         }
       }
 
@@ -1112,24 +1116,24 @@
       }
 
       function getAgentsAndReportsDataByCompanyId(scope, companyId, callback) {
-       
+
         var checking = 0;
         $rootScope.isAgentsRequestSending = true;
-        var extendedRespInterval = setInterval(function(){
-           
-          if(storage.devices[companyId] && storage.devices[companyId].length) {
-            $http.get('/devices/extended?companyId='+ companyId).then(function (resp) {
-              $rootScope.isAgentsRequestSending = false;
-              if(resp) {
+        var extendedRespInterval = setInterval(function () {
 
-                for(var i=0; i<storage.devices[companyId].length; i++) {
+          if (storage.devices[companyId] && storage.devices[companyId].length) {
+            $http.get('/devices/extended?companyId=' + companyId).then(function (resp) {
+              $rootScope.isAgentsRequestSending = false;
+              if (resp) {
+
+                for (var i = 0; i < storage.devices[companyId].length; i++) {
                   storage.devices[companyId][i].report = resp.data[companyId][i].report;
                   storage.devices[companyId][i].label = resp.data[companyId][i].label;
                   storage.devices[companyId][i].OneTimeConnectionData = [];
                   storage.devices[companyId][i].iconName = resp.data[companyId][i].iconName
                   storage.devices[companyId][i].remoteSessions = resp.data[companyId][i].remoteSessions;
-                  if(resp.data[companyId][i].remoteSessions && resp.data[companyId][i].remoteSessions.length && resp.data[companyId][i].remoteSessions.length > 0) {
-                    for(var r=0; r<resp.data[companyId][i].remoteSessions.length; r++) {
+                  if (resp.data[companyId][i].remoteSessions && resp.data[companyId][i].remoteSessions.length && resp.data[companyId][i].remoteSessions.length > 0) {
+                    for (var r = 0; r < resp.data[companyId][i].remoteSessions.length; r++) {
                       var connection = {
                         startedAt: resp.data[companyId][i].remoteSessions[r].createdAt || resp.data[companyId][i].remoteSessions[r].startedAt,
                         id: resp.data[companyId][i].remoteSessions[r].id,
@@ -1141,7 +1145,7 @@
                       storage.devices[companyId][i].OneTimeConnectionData.push(connection);
                     }
                   }
-                  if(!resp.data[companyId][i].online) {
+                  if (!resp.data[companyId][i].online) {
                     storage.devices[companyId][i].offlineSince = resp.data[companyId][i].offlineAt;
                   }
                 }
@@ -1149,19 +1153,19 @@
               getAgentsByCompany(scope, companyId, callback);
             });
           } else {
-          
+
             $rootScope.isAgentsRequestSending = false;
           }
           checking++;
-          if(checking > 4) {
-          
+          if (checking > 4) {
+
             clearInterval(extendedRespInterval);
           }
-          if(storage.devices[companyId]) {
-          
+          if (storage.devices[companyId]) {
+
             clearInterval(extendedRespInterval);
           }
-         
+
         }, 1000)
 
 
@@ -1181,10 +1185,10 @@
         Utils.handleCallback(future, callback);
       }
 
-      var actionsList = ["idle","norestart","online"];
+      var actionsList = ["idle", "norestart", "online"];
 
       function sendDeviceStatusRequest(companyId, agentId, callback) {
-        if(companyId && agentId) {
+        if (companyId && agentId) {
           var dto = {
             companyId: companyId,
             agentId: agentId,
@@ -1202,7 +1206,7 @@
 
       function getDevicesCredentials(devices, scope, callback) {
         var credentials = {};
-        $http.post('/passwordRecords/devices/password', devices).then(function(resp) {
+        $http.post('/passwordRecords/devices/password', devices).then(function (resp) {
           credentials = resp.data;
           RealTimeService.subscribe('/passwordRecords', scope, function (newChange) {
             if (newChange.action === 'PASSWORD_RECORD_CREATED') {
@@ -1223,11 +1227,11 @@
               }
 
 
-            } else if(newChange.action === 'PASSWORD_RECORD_UPDATED') {
+            } else if (newChange.action === 'PASSWORD_RECORD_UPDATED') {
               var agentId = newChange.data.links[0] && newChange.data.links[0].deviceId;
 
               if (agentId) {
-                var recordIndex = credentials[agentId].findIndex(function(el) {
+                var recordIndex = credentials[agentId].findIndex(function (el) {
                   return el.id === newChange.data.id;
                 })
 
@@ -1242,11 +1246,11 @@
               }
 
 
-            } else if(newChange.action === 'PASSWORD_RECORD_DELETED') {
+            } else if (newChange.action === 'PASSWORD_RECORD_DELETED') {
               var agents = Object.keys(credentials);
 
               for (var i = 0; i < agents.length; i++) {
-                credentials[agents[i]] = credentials[agents[i]].filter(function(el) {
+                credentials[agents[i]] = credentials[agents[i]].filter(function (el) {
                   return el.id !== newChange.data.id;
                 })
               }
@@ -1254,7 +1258,7 @@
             }
 
             if (callback) {
-              
+
               callback(credentials);
             }
           });
@@ -1311,9 +1315,9 @@
         getDevicesCredentials: getDevicesCredentials,
         markDeviceAsMaster: markDeviceAsMaster,
         getUpdatedDevices: getUpdatedDevices,
-      
+
       }
     }
   ]);
 })
-(window, jQuery);
+  (window, jQuery);
