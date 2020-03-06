@@ -7,7 +7,7 @@
   var services = angular.module('main.services');
 
   services.factory('CompaniesService', ['$http', '$rootScope', 'RealTimeService', 'Utils', function ($http, $rootScope, RealTimeService, Utils) {
- 
+
     var serviceScope = $rootScope.$new(),
       initialized = false,
       initListeners = [],
@@ -24,7 +24,7 @@
       callbackForSavedCompanies = {},
       glNumbers = [],
       companyPaymentInfo = {};
-      
+
 
 
     Utils.customizeObj(storage);
@@ -113,18 +113,18 @@
       Utils.customizeObj(resp.data, storage.currentCompany);
       setRealTimeCurrentCompany();
       checkInit();
-      console.log("resp.data",resp.data);
+      console.log("resp.data", resp.data);
 
       setRealTimeGLNumbers(resp.data.id);
-    //  $rootScope.$broadcast('setRealTimeGLNumbers', resp.data);
-     // ServicesService.setRealTimeGLNumbers(resp.data.id);
+      //  $rootScope.$broadcast('setRealTimeGLNumbers', resp.data);
+      // ServicesService.setRealTimeGLNumbers(resp.data.id);
 
     },
       function (resp) {
         console.error(resp);
         throw 'Cannot initialize CompaniesService!';
       });
-     
+
     $http.get('/glNumber').then(function (resp) {
       // console.log("resp.data",resp);
       glNumbers = resp.data.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
@@ -152,13 +152,23 @@
           var index = glNumbers.findIndex(item => item.id === newChange.data.id);
           if (index > -1) {
             glNumbers[index] = newChange.data;
+            if (newChange.data.blockTime || newChange.data.serviceContract) {
+              glNumbers.forEach((item, indexItem) => {
+                if (newChange.data.blockTime && index !== indexItem) {
+                  item.blockTime = false;
+                }
+                if (newChange.data.serviceContract && index !== indexItem) {
+                  item.serviceContract = false;
+                }
+              });
+            }
           } else {
             glNumbers.push(newChange.data);
-            console.log("glNumbers",angular.copy(glNumbers));
+            console.log("glNumbers", angular.copy(glNumbers));
             glNumbers = glNumbers.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
-            1 : ((b.glNumber.toLowerCase() > a.glNumber.toLowerCase()) ? -1 : 0));
+              1 : ((b.glNumber.toLowerCase() > a.glNumber.toLowerCase()) ? -1 : 0));
           }
-         
+
           $rootScope.$broadcast('setRealTimeGLNumbers', angular.copy(glNumbers));
         }
 
@@ -179,16 +189,16 @@
     }
 
     RealTimeService.subscribe('/company', serviceScope, function (newChange) {
-     
+
       if (!initialized) {
         return;
       }
-      
+
 
 
       var companyId = newChange.data.id;
       if (newChange.action == 'COMPANY_SAVED') {
-       
+
         var company = getOneById(companyId);
 
         if (companyId === getCurrentCompany().id) {
@@ -215,7 +225,7 @@
           }
 
           if (callbackForSavedCompanies[companyId]) {
-           
+
             callbackForSavedCompanies[companyId](companyId);
           }
         }
@@ -260,9 +270,9 @@
       }
     });
     function setRealTimeCurrentCompany() {
-    
+
       RealTimeService.subscribe('/company/' + storage.currentCompany.id, serviceScope, function (newChange) {
-        
+
         if (newChange.action === "SERVICE_EXPENSE_DATA_PICKER_CHANGED") {
           storage.currentCompany.serviceExpenseDurationPresentation = newChange.data.presentation;
           storage.currentCompany.serviceExpenseDurationPickerInterval = newChange.data.interval;
@@ -271,7 +281,7 @@
 
       })
     }
-    
+
     RealTimeService.subscribe('/companySettings', serviceScope, function (newChange) {
 
       if (newChange.action === 'SMTP_SETTINGS_UPDATED') {
@@ -1054,7 +1064,7 @@
 
     return {
       parseDateTechCompany: parseDateTechCompany,
-      getGlNumbers:getGlNumbers,
+      getGlNumbers: getGlNumbers,
       _addInitListener: addInitListener,
       _addAmountChangeListener: _addAmountChangeListener,
       _search: search,
