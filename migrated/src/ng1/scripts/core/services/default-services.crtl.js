@@ -8,7 +8,6 @@
         $scope.glNumbersList = [];
         $scope.showCheckboxes = true;
         $rootScope.$on('setRealTimeGLNumbers', function (event, newInvoice) {
-          console.log('newInvoice', newInvoice);
           $scope.glNumbersList = newInvoice;
         });
         $scope.$watch("servicesData.default.length", function (count) {
@@ -35,12 +34,9 @@
             id: glNumber.id
           }
           ServicesService.save(saveService, function (resp) {
-            console.log("resp", resp);
             var index = $scope.services.findIndex(item => item.versionedId.id === saveService.versionedId.id);
             if (index > -1) $scope.services[index].glNumber = glNumber;
-            console.log("$scope.services[index]", $scope.services[index]);
             $rootScope.$broadcast('newServiceHasBeenCreated', resp.id);
-
           });
         };
         $scope.getGlNumberName = function (glNumber) {

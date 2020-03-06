@@ -116,7 +116,6 @@ export class MultiDatepickerComponent implements OnInit {
    * Clear date picker date
    */
   public clearDate() {
-    console.log("clearDate");
     this.selectedDate.next({
       start: '',
       end: ''

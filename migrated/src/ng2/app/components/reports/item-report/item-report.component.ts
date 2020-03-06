@@ -43,8 +43,6 @@ export class ItemReportComponent implements OnInit {
     if (localStorage.report) this.report = localStorage.report;
     this.reportsStateService.glNumber.subscribe((data: GlNumber) => {
       this.glNumber.setDataFromObject(JSON.parse(JSON.stringify(data.getDataObject())));
-      console.log("this.glNumber", this.glNumber);
-      console.log("this.glNumber.list", this.glNumber.list);
       let item = new GlNumberItem("", "", (this.glNumber.list.length > 0) ? this.glNumber.list[0].sum.length : null);
       let total = 0;
       this.glNumber.list.forEach(item => {
@@ -66,9 +64,7 @@ export class ItemReportComponent implements OnInit {
       }
 
       item.total = total;
-      console.log("item", item);
       this.glNumber.list.push(item);
-     
       this.cd.detectChanges();
     })
 
@@ -78,7 +74,6 @@ export class ItemReportComponent implements OnInit {
     })
     this.currentUser = this.usersStateService.getCurrentUser();
     this.currentCompany = this.companiesStateService.getCurrentCompany();
-    console.log("currentUser", this.currentUser);
   }
   public onRequest(data) {
     this.loadingInProgress = data;
@@ -89,7 +84,6 @@ export class ItemReportComponent implements OnInit {
   }
   onSelectedClient(client) {
     this.selectedClient = client;
-    console.log("this.selectClient", this.selectedClient);
   }
   perseStartDate() {
     return moment(this.glNumber.startDate).format('DD MMM YYYY')

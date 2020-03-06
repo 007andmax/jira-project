@@ -14,10 +14,7 @@
 
         $scope.markAsOpen = function () {
           TicketsService.changeStatus($scope.ticketDetails.id, 'IN_PROGRESS', function (resp) {
-console.log("resp",resp);
-
             if (resp.code == 403) {
-
               var user = UsersService.getOneById(resp.message);
               alert($scope.getUserName(user) + ' locked this ticket to create invoice!');
               return;

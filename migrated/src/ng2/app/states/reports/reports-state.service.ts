@@ -12,7 +12,6 @@ glNumber:EventEmitter<any> = new EventEmitter();
   } 
 
   public parseReportContent() {
-    console.log('getPdfIdFromRest');
     //  disableOpenPdfBtn();
     var selectedHtml;
     var source = $("#product-list-ticket-data");

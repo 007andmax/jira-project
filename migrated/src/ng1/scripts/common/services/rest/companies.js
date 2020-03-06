@@ -113,20 +113,13 @@
       Utils.customizeObj(resp.data, storage.currentCompany);
       setRealTimeCurrentCompany();
       checkInit();
-      console.log("resp.data", resp.data);
-
       setRealTimeGLNumbers(resp.data.id);
-      //  $rootScope.$broadcast('setRealTimeGLNumbers', resp.data);
-      // ServicesService.setRealTimeGLNumbers(resp.data.id);
-
     },
       function (resp) {
-        console.error(resp);
         throw 'Cannot initialize CompaniesService!';
       });
 
     $http.get('/glNumber').then(function (resp) {
-      // console.log("resp.data",resp);
       glNumbers = resp.data.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
         1 : ((b.glNumber.toLowerCase() > a.glNumber.toLowerCase()) ? -1 : 0));
     })
@@ -164,15 +157,11 @@
             }
           } else {
             glNumbers.push(newChange.data);
-            console.log("glNumbers", angular.copy(glNumbers));
             glNumbers = glNumbers.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
               1 : ((b.glNumber.toLowerCase() > a.glNumber.toLowerCase()) ? -1 : 0));
           }
-
           $rootScope.$broadcast('setRealTimeGLNumbers', angular.copy(glNumbers));
         }
-
-
       })
     }
     function checkInit() {

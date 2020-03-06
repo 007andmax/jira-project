@@ -35,17 +35,10 @@
         $scope.$watch('glNumber', function (value) {
           if (value !== undefined && value !== "" && value !== " ") {
             if (value && $scope.checkGlNumberValueMatched(value)) {
-              console.log("value", value);
               if ($scope.service.glNumber == null || $scope.service.glNumber.id !== $scope.glNumber.id) {
-                console.log(" no =");
                 $scope.setGlNumber($scope.glNumber, $scope.service);
               }
-              //  setGlNumber(item,$scope.service);
-              // sendNewFilterToStorage("ticketPageFilterByCompanyHistory", $scope.companiesFilterHistoryTicketsPage, getCompanyNameById(value));
-
             }
-
-
           }
         });
 

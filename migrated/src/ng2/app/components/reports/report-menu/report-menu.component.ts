@@ -14,14 +14,14 @@ import { ReportValidate } from '../class/report-validate';
   styleUrls: ['./report-menu.component.scss']
 })
 export class ReportMenuComponent implements OnInit {
-  
+
   selectedClient = null;
   className = '';
   glNumber: GlNumber = new GlNumber();
   loadingInProgress: boolean = true;
   listDetailed = ['Year to date', 'Monthly'];
   yearToDate = false;
-  validate:ReportValidate = new ReportValidate();
+  validate: ReportValidate = new ReportValidate();
   @Output() getReport = new EventEmitter<any>();
   @Output() onRequest = new EventEmitter<any>();
   @Output() onSelectedClient = new EventEmitter<any>();
@@ -39,13 +39,11 @@ export class ReportMenuComponent implements OnInit {
       this.datePicker.clearDate();
       this.glNumber.setMonthlyDetailed(true);
       this.datePicker.setDisabled(true);
-   
+
     } else {
       if (data === 'Year to date') {
-        console.log("fffff");
         this.datePicker.clearDate();
         this.datePicker.setDisabled(true);
-     
         this.yearToDate = true;
       } else {
         this.datePicker.setDisabled(false);
@@ -59,7 +57,7 @@ export class ReportMenuComponent implements OnInit {
     //this.reportsStateService.onChangeGlNumber(this.glNumber);
   }
   public selectClient(selectClient) {
-   
+
     if (selectClient === 'null') {
 
       //  this.recurringState.getCreateTicket().setCompany(null);
@@ -77,32 +75,28 @@ export class ReportMenuComponent implements OnInit {
       //  this.getCompanyDevices();
 
     }
-console.log("this.selectClient",this.selectedClient);
-this.onSelectedClient.emit(this.selectedClient);
+    this.onSelectedClient.emit(this.selectedClient);
     //  this.services = [new ForCreateService()];
     // this.cd.detectChanges();
     // this.reportsStateService.onChangeGlNumber(this.glNumber);
 
   }
 
-  
+
   getReportByGlNumber() {
-   
-    if (!this.validate.isValidate(this.glNumber.monthlyDetailed,this.yearToDate,this.glNumber.startDate,this.glNumber.endDate)) return;
-   
+
+    if (!this.validate.isValidate(this.glNumber.monthlyDetailed, this.yearToDate, this.glNumber.startDate, this.glNumber.endDate)) return;
+
     this.onRequest.emit(true);
-    
+
     if (this.yearToDate) {
       this.reportsService.getAccountingStartDate().subscribe((res: any) => {
-        console.log("res", res.accountingStartDate);
-
         this.glNumber.setStartDate(moment(res.accountingStartDate).format('YYYY/MM/DD'));
         this.glNumber.setEndDate(moment(new Date()).format('YYYY/MM/DD'));
-
         this.reportsService.getReportByGlNumber(this.glNumber.getForRequest()).subscribe(data => this.setDatareport(data));
       })
     } else {
-    if (this.glNumber.getMonthlyDetailed()) this.glNumber.setDatesForMonthly();
+      if (this.glNumber.getMonthlyDetailed()) this.glNumber.setDatesForMonthly();
       this.reportsService.getReportByGlNumber(this.glNumber.getForRequest()).subscribe(data => this.setDatareport(data));
     }
 
@@ -139,7 +133,7 @@ this.onSelectedClient.emit(this.selectedClient);
       });
     }
     this.reportsStateService.onChangeGlNumber(this.glNumber);
-   // this.getReport.emit(data);
+    // this.getReport.emit(data);
 
     this.loadingInProgress = false;
     this.onRequest.emit(false);
@@ -152,7 +146,7 @@ this.onSelectedClient.emit(this.selectedClient);
   */
   public filterByDate(value) {
     if (value.start !== '' && value.end !== '') {
-      
+
       this.glNumber.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.glNumber.setEndDate(moment(value.end).format('YYYY/MM/DD'));
       this.validate.resetDates();
@@ -160,7 +154,7 @@ this.onSelectedClient.emit(this.selectedClient);
     } else {
       this.glNumber.resetDates();
     }
-  
+
     //  this.reportsStateService.onChangeGlNumber(this.glNumber);
   }
 }

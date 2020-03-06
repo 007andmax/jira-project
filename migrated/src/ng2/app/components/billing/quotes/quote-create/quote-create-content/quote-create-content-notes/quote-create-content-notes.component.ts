@@ -61,7 +61,6 @@ export class QuoteCreateContentNotesComponent implements OnInit {
    */
   getNotes() {
     this.quoteService.getQuoteNote().subscribe((res:any) => {
-      console.log("res",res);
       if (res.length > 0) {
         this.noteRegularList = res.filter((item) => item['noteType'] === 'REGULAR');
         this.noteGlobal = res.find((item) => item['noteType'] === 'GLOBAL');

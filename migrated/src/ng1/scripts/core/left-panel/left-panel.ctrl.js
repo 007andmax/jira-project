@@ -75,8 +75,6 @@
         $rootScope.$on('hiddenLeftPanel', function (event, toState, toParams, fromState) {
           $scope.isLeftPanelHidden = true;
           $scope.isRightPanelHidden = true;
-          console.log("$scope.isLeftPanelHidden",$scope.isLeftPanelHidden);
-
         });
         $scope.clearCategory = function() {
           $scope.newCategory = '';

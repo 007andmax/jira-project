@@ -37,11 +37,9 @@ export class ReportAdditionalActionsComponent implements OnInit {
   }
 
   sendEmail() {
-    console.log("this.selectClient",this.selectedClient);
     const modalRef = this.modalService.open(ReportSendEmailComponent, null);
     modalRef.componentInstance.selectedClient = this.selectedClient;
     modalRef.componentInstance.orientation =  (!this.glNumber.getMonthlyDetailed()) ? 'PORTRAIT' : 'LANDSCAPE';
-    
   }
   getPdfIdFromRest(action) {
     var dto = {
@@ -51,7 +49,6 @@ export class ReportAdditionalActionsComponent implements OnInit {
       orientation: (!this.glNumber.getMonthlyDetailed()) ? 'PORTRAIT' : 'LANDSCAPE'
     };
     this.reportsService.getPdfUrl(dto).subscribe((data: any) => {
-      console.log("data", data);
       if (action === ACION_OPEN_PDF) window.open(data.url);
       if (action === ACION_DOWNLOAD_PDF) this.appService.downloadByUrl(`${data.url}?isDownload=true`, 'income_accounts');
     })

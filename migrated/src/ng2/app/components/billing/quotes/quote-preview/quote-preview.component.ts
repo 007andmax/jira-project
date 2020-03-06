@@ -90,7 +90,6 @@ export class QuotePreviewComponent implements OnInit {
   public getCurrentCompany() {
     this.companiesService.getTechCompany().subscribe((res) => {
         this.company = res;
-        console.log("this.company",this.company);
     });
   }
 

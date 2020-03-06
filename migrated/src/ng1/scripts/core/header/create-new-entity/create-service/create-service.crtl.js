@@ -10,13 +10,10 @@
         $scope.glNumbersList = [];
         $scope.isChangeGlNumber = false;
         $scope.taxes = TaxesService.getAll();
-        $rootScope.$on('setRealTimeGLNumbers', function(event, newInvoice){
-          console.log('newInvoice',newInvoice);
+        $rootScope.$on('setRealTimeGLNumbers', function (event, newInvoice) {
           $scope.glNumbersList = newInvoice;
-              });
-       // ServicesService.getGlNumbers(function (data) {
-          $scope.glNumbersList = CompaniesService.getGlNumbers();
-      //  })
+        });
+        $scope.glNumbersList = CompaniesService.getGlNumbers();
         $scope.showModal = false;
 
         $timeout(function() {
@@ -52,7 +49,6 @@
             description: ""
           };
           ServicesService.createGlNumber(data, function (res) {
-            console.log("res", res);
             $scope.glNumbersList.push(res);
             $scope.isChangeGlNumber = false;
           })
@@ -69,15 +65,10 @@
             } else {
               saveService.glNumber = null;
             }
-         
-          
-            console.log("saveService",saveService);
-            
             saveService.taxIds = saveService.taxes.map(function (tax) {
               return tax.id;
             });
             saveService.taxes = undefined;
-
             ServicesService.save(saveService, function (resp) {
               $scope.disabledSaveButton = false;
 
@@ -104,7 +95,6 @@
         };
 
         $scope.changeGlNumber = function () {
-          console.log("editService.glNumber",$scope.editService.glNumber);
           if ($scope.editService.glNumber) {
             var index = $scope.glNumbersList.findIndex(item => item.glNumber === $scope.editService.glNumber);
             $scope.isChangeGlNumber = (index > -1) ? false : true;

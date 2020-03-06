@@ -17,10 +17,10 @@ import { ReportsStateService } from 'src/ng2/app/states/reports/reports-state.se
   styleUrls: ['./report-send-email.component.scss']
 })
 export class ReportSendEmailComponent implements OnInit {
-  
+
   messageContent: string = '';
   messageHTML: string = '';
-  
+
   editorConfig = {
     editable: true,
     spellcheck: false,
@@ -46,23 +46,20 @@ export class ReportSendEmailComponent implements OnInit {
     private draftEmailService: DraftEmailService, public cd: ChangeDetectorRef,
     public activeModal: NgbActiveModal,
     private reportsService: ReportsService,
-    private reportsStateService:ReportsStateService
+    private reportsStateService: ReportsStateService
   ) { }
 
   ngOnInit() {
-    console.log("selectedClient",this.selectedClient);
     this.usersSelected = this.draftEmailStateService.getSelectedUsers();
-      this.companiesSelected = this.draftEmailStateService.getSelectedCompanies();
-      this.action = this.draftEmailStateService.getAction();
-     
-      this.draftEmail = new ReportEmail();
-
+    this.companiesSelected = this.draftEmailStateService.getSelectedCompanies();
+    this.action = this.draftEmailStateService.getAction();
+    this.draftEmail = new ReportEmail();
   }
 
-  
+
 
   close() {
-    
+
     this.draftEmail = new ReportEmail();
     this.tab = 'plain';
     this.messageContent = '';
@@ -124,15 +121,10 @@ export class ReportSendEmailComponent implements OnInit {
 
   }
   onSend() {
-    
-    this.draftEmail.setContent(this.reportsStateService.parseReportContent());
-      this.draftEmail.setNote(this.messageContent);
-   this.draftEmail.setOrientation(this.orientation);
 
-    this.filesInfo.files.forEach(item => {
-      console.log("item",item);
-    //  if (!item.error) this.draftEmail.setAttachment(item.id)
-    });
+    this.draftEmail.setContent(this.reportsStateService.parseReportContent());
+    this.draftEmail.setNote(this.messageContent);
+    this.draftEmail.setOrientation(this.orientation);
     this.reportsService.sendMessage(this.draftEmail).subscribe((data) => {
 
       this.close();
@@ -187,8 +179,8 @@ export class ReportSendEmailComponent implements OnInit {
   trackByIndex(index, item) {
     return index;
   }
-  
+
 }
 
 
- 
+

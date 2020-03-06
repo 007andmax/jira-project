@@ -333,16 +333,10 @@
         });
         Utils.handleCallback(future, callback);
       }
-    
-   
-      
-          console.log("CompaniesService.getCurrentCompany()",CompaniesService.getCurrentCompany());
-      return {
-        
+      return {    
         createGlNumber: createGlNumber,
         resetContractGlNumber : resetContractGlNumber,
         setContractGlNumber: setContractGlNumber,
-      
         getAllByCompany: getAllByCompany,
         getServicesData: getServicesData,
         getSpecialServices: getSpecialServices,

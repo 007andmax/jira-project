@@ -11,9 +11,7 @@
       $scope.newCategoryNamePattern = /^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,100}$/;
       $scope.glNumbersList = [];
       $scope.isChangeGlNumber = false;
-      
       $rootScope.$on('setRealTimeGLNumbers', function(event, newInvoice){
-        console.log('newInvoice',newInvoice);
         $scope.glNumbersList = newInvoice;
             });
      // ServicesService.getGlNumbers(function (data) {
@@ -30,21 +28,18 @@
           description: ""
         };
         ServicesService.createGlNumber(data, function (res) {
-          console.log("res", res);
           $scope.glNumbersList.push(res);
           $scope.isChangeGlNumber = false;
         })
       }
      
       $scope.changeGlNumber = function () {
-     
         if ($scope.editProduct.glNumber) {
           var index = $scope.glNumbersList.findIndex(item => item.glNumber === $scope.editProduct.glNumber);
           $scope.isChangeGlNumber = (index > -1) ? false : true;
         } else {
           $scope.isChangeGlNumber = false;
         }
-        console.log("editProduct.glNumber",$scope.editProduct.glNumber);
       }
       $scope.showModal = true;
 
@@ -83,11 +78,8 @@
         if (origin.name) {
           savedState.item = { category: origin };
         }
-
-
-
+        
         $scope.editProduct = angular.copy(origin);
-        console.log("$scope.editProduct",$scope.editProduct);
         $scope.editProduct.taxes = (origin.taxIds || []).map(function(taxId) {
           return $scope.taxes.find(function(el) {
             return el.id === taxId;

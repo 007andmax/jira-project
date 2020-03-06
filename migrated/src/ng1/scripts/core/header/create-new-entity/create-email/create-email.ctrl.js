@@ -10,7 +10,6 @@
       $scope.emails = [];
       $scope.close = $uibModalInstance.dismiss;
       $scope.selectedCompany = $scope.$parent.reportSetting? $scope.$parent.reportSetting.company : {};
-      console.log("$scope.selectedCompany",$scope.selectedCompany);
       $scope.users = $scope.selectedCompany ? getCompanyAndTechUsers(UsersService.getAllUsers()) : getActiveUsers(UsersService.getAllUsers());
       $scope.removeEmail = function(index) {
         $scope.emails.splice(index, 1);
@@ -235,21 +234,16 @@
       }
 
       if ($scope.allUsersEmails) {
-        console.log("4")
         $scope.filteredUsersEmails = $scope.allUsersEmails.filter(function(el) {
           return el;
         });
-
         $scope.$watch('newEmail', function(val) {
-       
           if (val === undefined) return;
-          console.log("1")
           $scope.filteredUsersEmails = $scope.allUsersEmails.filter(function(el) {
             return el && el.includes(val);
           })
         })
       } else {
-        console.log("3")
         $scope.isReportEmail = true;
         $scope.filteredUsersEmails = $scope.$parent.$ctrl.tempUsers.concat($scope.users)
           .map(function(el) {
@@ -258,11 +252,8 @@
           .filter(function(el) {
             return el;
           })
-console.log("$scope.filteredUsersEmails",$scope.filteredUsersEmails);
         $scope.$watch('newEmail', function(val) {
-       
           if (val === undefined) return;
-          console.log("2")
           $scope.filteredUsersEmails = $scope.$parent.$ctrl.tempUsers.concat($scope.users)
             .map(function(el) {
               return el.primaryEmail;

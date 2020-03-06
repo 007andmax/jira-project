@@ -8,7 +8,6 @@
                 $scope.glNumbersList = [];
                 $scope.currentUserDeviceContracts = null;
                 $rootScope.$on('setRealTimeGLNumbers', function (event, newInvoice) {
-                    console.log('newInvoice', newInvoice);
                     $scope.glNumbersList = newInvoice;
                 });
                 $scope.glNumbersList = CompaniesService.getGlNumbers();
@@ -21,8 +20,7 @@
                     return glNumber;
                 }
                 $scope.currentUserDeviceContracts = $scope.getContracts('serviceContract');
-                console.log("$scope.currentUserDeviceContracts", $scope.currentUserDeviceContracts);
-                $scope.getGlNumberName = function (glNumber) {
+                 $scope.getGlNumberName = function (glNumber) {
                     if (glNumber) {
                         var find = $scope.glNumbersList.find(function (c) {
                             return c.id === glNumber.id;

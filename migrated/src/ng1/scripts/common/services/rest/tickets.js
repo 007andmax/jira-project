@@ -854,7 +854,6 @@
         // if (value === 'COMPLETED') {
         data.recipientsIds = recipientsIds;
         // }
-        console.log("changeStatus 2");
         var future = $http.put(url, data);
         Utils.handleCallback(future, callback)
       }
@@ -947,7 +946,6 @@
         Utils.handleCallback(future, callback);
       }
       function changeTicketsCounts() {
-        console.log("changeTicketsCounts");
         var queries_start = JSON.parse(JSON.stringify(queries));
         queries_start.USER = {
           "excludeTrashSpam": true,
