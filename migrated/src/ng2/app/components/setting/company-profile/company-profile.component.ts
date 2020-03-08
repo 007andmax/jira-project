@@ -203,6 +203,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
     this.cProfileForm = new FormGroup({
       name: new FormControl('', Validators.required),
      // url: new FormControl({ value: '' }, Validators.required),
+      url: new FormControl(''),
       timeZone: new FormControl(''),
       primaryId: new FormControl(''),
       primaryPhone: new FormControl(''),
@@ -293,9 +294,9 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
             this.cProfileForm.patchValue({
               name: res.name,
               url: res.supportMailBox,
-              suiteNumber: res.addresses[0].suiteNumber,
-              address: res.addresses[0].address,
-              postalCode: res.addresses[0].postalCode
+              suiteNumber: res.addresses.length === 0 ? '' : res.addresses[0].suiteNumber,
+              address: res.addresses.length === 0 ? '' : res.addresses[0].address,
+              postalCode: res.addresses.length === 0 ? '' : res.addresses[0].postalCode
             });
 
             for (let i = 0; i < this.cProfile.address.length; i++) {

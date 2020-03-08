@@ -29,7 +29,6 @@
             placeholder="Enter Alias Name"
             formControlName="emailAlias"
             (blur)="saveEmailAlias()"
-            [disabled]="!smtp.useSMTP || disableFields"
           />
         </div>
       </div>
@@ -66,7 +65,6 @@
             placeholder="Enter Domain"
             [ngClass]="{ 'is-invalid': submitted && f.domain.errors }"
             formControlName="domain"
-            [disabled]="!smtp.useSMTP || disableFields"
           />
         </div>
       </div>
@@ -92,7 +90,6 @@
             placeholder="Enter Port"
             formControlName="port"
             [ngClass]="{ 'is-invalid': submitted && f.port.errors }"
-            [disabled]="!smtp.useSMTP || disableFields"
           />
         </div>
       </div>
@@ -104,7 +101,6 @@
             class="cmn-select form-input"
             formControlName="encryptionType"
             (change)="changeEncryption($event.target.value)"
-            [disabled]="!smtp.useSMTP || disableFields"
           >
             <option value="NONE">PLAIN</option>
             <option value="TLS">TLS</option>
@@ -136,7 +132,6 @@
             placeholder="Enter Login Details"
             formControlName="login"
             (blur)="checkSMTPLoginUnique()"
-            [disabled]="!smtp.useSMTP || disableFields"
           />
         </div>
       </div>
@@ -154,7 +149,6 @@
             class="form-input"
             placeholder="Enter password"
             formControlName="password"
-            [disabled]="!smtp.useSMTP || disableFields"
           />
 
           <!-- <input type="{{ showPassword ? 'text' : 'password' }}" class="form-control"
