@@ -2205,20 +2205,42 @@ ngb-datepicker {
 
 .quicktech__table {
   width: 100%;
-  font-weight: 700;
   font-size: 12px;
   font-family: 'Graphik Medium', sans-serif;
-}
 
-.quicktech__table thead {
-  text-transform: uppercase;
+  thead {
+    text-transform: uppercase;
+    th {
+      font-weight: 700;
+    }
+  }
 
-}
+  th, td {
+    padding: 15px 8px;
+    border-bottom: 1px solid #d3d8e1;
+    &:first-child {
+      padding-left: 15px;
+    }
+    &:last-child {
+      padding-right: 15px;
+    }
+  }
 
-.quicktech__table thead th,
-.quicktech__table tbody td {
-  padding: 15px 8px;
-  border-bottom: 1px solid #d3d8e1;
+  &--list {
+    font-size: 14px;
+    font-family: 'Graphik Regular', sans-serif;
+    thead {
+      text-transform: none;
+      th {
+        font-weight: 500;
+        background: #f3f7f9;
+        padding: 20px 8px;
+      }
+    }
+    th, td {
+      border-bottom: 1px solid #eee;
+    }
+  }
 }
 
 .quicktech__table tbody td {
