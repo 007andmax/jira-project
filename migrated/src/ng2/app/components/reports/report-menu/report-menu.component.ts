@@ -11,6 +11,7 @@ import { AccountsReceivable } from '../class/accounts-receivable';
 import { TaxesReport } from '../class/taxes';
 import { ProductService } from 'src/ng2/app/services/product/product.service';
 import { ProductSalesReport } from '../class/product-sales-report';
+import { CustomerSalesReport } from '../class/customer-sales-report';
 
 @Component({
   selector: 'app-report-menu',
@@ -25,6 +26,7 @@ export class ReportMenuComponent implements OnInit {
   taxes: TaxesReport = new TaxesReport();
   accountsReceivable: AccountsReceivable = new AccountsReceivable();
   productSalesReport: ProductSalesReport = new ProductSalesReport();
+  customerSalesReport: CustomerSalesReport = new CustomerSalesReport();
   loadingInProgress: boolean = true;
   listDetailed = ['Year to date', 'Monthly'];
   listTypes = ['Summary', 'Detailed'];
@@ -48,6 +50,7 @@ export class ReportMenuComponent implements OnInit {
      this.isDisabledCompany = true;
       this.getItemListProducts();
     }
+    if (this.report === 'byCustomers') this.isDisabledCompany = true;
 
   }
   public onSelectDetailed(data) {
@@ -78,6 +81,10 @@ export class ReportMenuComponent implements OnInit {
   public onSelectTypeTaxes(data) {
     this.taxes.setType(data);
   }
+  public onSelectTypeCustomers(data) {
+    this.customerSalesReport.setType(data);
+    this.isDisabledCompany = (data === 'Summary') ? true : false;
+  }
   public onSelectTypeProduct(data) {
     this.productSalesReport.setType(data);
     this.isDisabledCompany = (data === 'Summary') ? true : false;
@@ -92,6 +99,7 @@ export class ReportMenuComponent implements OnInit {
       this.selectedClient = null;
       this.glNumber.setClientCompanyId(null);
       this.productSalesReport.setCompanyId(null);
+      this.customerSalesReport.setCompanyId(null);
       //  this.recurringState.setClient(selectClient);
 
     } else {
@@ -100,6 +108,7 @@ export class ReportMenuComponent implements OnInit {
       this.glNumber.setClientCompanyId(selectClient.item.id);
       this.accountsReceivable.setClientCompanyId(selectClient.item.id);
       this.productSalesReport.setCompanyId(selectClient.item.id);
+      this.customerSalesReport.setCompanyId(selectClient.item.id);
       this.validate.resetCompany();
       //  this.recurringState.setClient(selectClient);
       //  this.onCheckListServices();
@@ -125,6 +134,13 @@ export class ReportMenuComponent implements OnInit {
 
     this.onRequest.emit(true);
     this.reportsService.getReportByAccountsReceivable(this.accountsReceivable.getForRequest()).subscribe(data => this.setDatareport(data));
+
+  }
+  getReportByCustomers() {
+    if (!this.validate.isValidateCustomers(this.customerSalesReport.startDate, this.customerSalesReport.endDate, (this.selectedClient) ? this.selectedClient.id : null, this.customerSalesReport.type)) return;
+
+    this.onRequest.emit(true);
+    this.reportsService.getReportByCustomers(this.customerSalesReport.getForRequest()).subscribe(data => this.setDatareport(data));
 
   }
 
@@ -182,6 +198,9 @@ export class ReportMenuComponent implements OnInit {
 
       this.productSalesReport.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.productSalesReport.setEndDate(moment(value.end).format('YYYY/MM/DD'));
+
+      this.customerSalesReport.setStartDate(moment(value.start).format('YYYY/MM/DD'));
+      this.customerSalesReport.setEndDate(moment(value.end).format('YYYY/MM/DD'));
 
       this.taxes.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.taxes.setEndDate(moment(value.end).format('YYYY/MM/DD'));

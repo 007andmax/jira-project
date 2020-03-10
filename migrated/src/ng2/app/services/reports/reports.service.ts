@@ -33,6 +33,9 @@ export class ReportsService {
   public getReportByProduct(data) {
     return this.http.post(this.apiUrl + `reports/sales/byProducts`, data);
   }
+  public getReportByCustomers(data) {
+    return this.http.post(this.apiUrl + `reports/sales/byCustomers`, data);
+  }
   public sendMessage (data) {
     return this.http.post(this.apiUrl + `reports/email`, data);
   }

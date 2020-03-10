@@ -68,11 +68,11 @@ export class ProductSalesReportComponent implements OnInit {
       list.push(`$${this.parseTotal(line.discount)}`);
       this.list.push(list);
       if (index === this.productSalesReport.lines.length - 2) {
-        this.styles.push(line.salePrice < line.purchaseCost ? 'red' : 'none');
+        this.styles.push({'color': line.salePrice < line.purchaseCost ? 'red' : 'none'});
       } else if (index === this.productSalesReport.lines.length - 1) {
-        this.styles.push('red');
+        this.styles.push({'color': 'red'});
       } else {
-        this.styles.push(!line.invoiceNumber ? 'red' : 'none');
+        this.styles.push({'color':!line.invoiceNumber ? 'red' : 'none'});
       } 
     })
     let list = [];

@@ -116,6 +116,7 @@ import { AccountsReceivableComponent } from './components/reports/reports/accoun
 import { ReportFooterComponent } from './components/reports/report-footer/report-footer.component';
 import { TaxesReportComponent } from './components/reports/reports/taxes-report/taxes-report.component';
 import { ProductSalesReportComponent } from './components/reports/reports/product-sales-report/product-sales-report.component';
+import { CustomerSalesReportComponent } from './components/reports/reports/customer-sales-report/customer-sales-report.component';
  
 
 
@@ -272,6 +273,7 @@ angular.module('quicktech')
     ReportFooterComponent,
     TaxesReportComponent,
     ProductSalesReportComponent,
+    CustomerSalesReportComponent,
      
   ],
   imports: [

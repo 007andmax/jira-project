@@ -10,7 +10,7 @@
   </thead>
   <tbody>
     <ng-template ngFor let-item [ngForOf]="list" let-i="index" [ngForTrackBy]="trackByIndex">
-      <tr [ngStyle]="{'color': (styles.length > 0) ? styles[i] : 'none'}">
+      <tr [ngStyle]="(styles.length > 0) ? styles[i] : null">
         <ng-template ngFor let-child [ngForOf]="item" let-u="index" [ngForTrackBy]="trackByIndex">
         <td   [textContent]="child"></td>
       </ng-template>

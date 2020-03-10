@@ -20,6 +20,15 @@ export class ReportValidate {
     public resetMonthlyDetailed() {
         this.monthlyDetailed = true;
     }
+    public isValidateCustomers(start, end,company,type) {
+        if (type === 'Summary' && start === '' && end === '') {
+            this.dates = false;
+        } 
+        console.log("company",company);
+        if (type === 'Detailed' && start === '' && end === '' )  this.dates = false;
+        if (type === 'Detailed' && !company )  this.company = false;
+        return this.dates && this.company;
+    }
     public isValidateProduct(start, end,company,type) {
         if (type === 'Summary' && start === '' && end === '') {
             this.dates = false;
