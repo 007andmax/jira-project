@@ -302,21 +302,33 @@
         }
 
         $scope.activateCompanyProfileTab = function (tabToActivate) {
-        
+          console.log("tabToActivate", tabToActivate);
           if (tabToActivate == 'CompanyProfilePasswordManagerPage') {
-
-            window.location.href = '#/ng2/company-password-manager';
+            $scope.goToTab(`#/ng2/company-password-manager`);
             return;
           }
-         
+          if (tabToActivate == 'CompanyProfileUsersPage') {
+            $scope.goToTab(`#/ng2/company-user`);
+            return;
+          }
+
           var tab = $scope[tabToActivate];
           deactivateAllCompanyProfileTabs();
           if (tab === false) {
             $scope[tabToActivate] = true;
           }
-         
-         
+
+
         };
+        $scope.goToTab = function (url) {
+          let body = document.querySelector('.left-panel__category-wrap');
+          var link = document.createElement('a');
+          body.appendChild(link);
+          link.href = url;
+          var e = document.createEvent('MouseEvents');
+          e.initEvent('click', true, true);
+          link.dispatchEvent(e);
+        }
 
         $scope.companyIconClick = function () {
           $scope.isLeftPanelHidden = !$scope.isLeftPanelHidden
@@ -1561,7 +1573,7 @@
             return 'inbox';
           } else if (url.indexOf('companies') > -1) {
             return 'companies';
-          } else if (url.indexOf('companyProfile') > -1 || url.indexOf('company-password-manager') > -1) {
+          } else if (url.indexOf('companyProfile') > -1 || url.indexOf('company-password-manager') > -1 || url.indexOf('company-user') > -1) {
             return 'companyProfile';
           } else if (url.indexOf('users') > -1) {
             return 'users';

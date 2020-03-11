@@ -111,6 +111,7 @@ import { ReportMenuComponent } from './components/reports/report-menu/report-men
 import { SelectComponent } from './components/shared/select/select.component';
 import { ReportAdditionalActionsComponent } from './components/reports/report-additional-actions/report-additional-actions.component';
 import { ReportSendEmailComponent } from './components/reports/report-additional-actions/report-send-email/report-send-email.component';
+import { CompanyUserComponent } from './components/company-user/company-user.component';
 
 
 /**
@@ -140,6 +141,9 @@ angular.module('quicktech')
   .directive(
     'companyPasswordManager',
     downgradeComponent({ component: CompanyPasswordManagerComponent }))
+  .directive(
+    'companyUser',
+    downgradeComponent({ component: CompanyUserComponent }))
   .directive(
     'leftPanelComponent',
     downgradeComponent({ component: LeftPanelComponent }))
@@ -260,7 +264,8 @@ angular.module('quicktech')
     ReportMenuComponent,
     SelectComponent,
     ReportAdditionalActionsComponent,
-    ReportSendEmailComponent
+    ReportSendEmailComponent,
+    CompanyUserComponent
   ],
   imports: [
     BrowserModule,
@@ -295,6 +300,11 @@ angular.module('quicktech')
       {
         path: 'ng2/company-password-manager',
         component: CompanyPasswordManagerComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: 'ng2/company-user',
+        component: CompanyUserComponent,
         pathMatch: 'full'
       },
       {
@@ -355,6 +365,7 @@ angular.module('quicktech')
     DownloadAgentComponent,
     ImageCropperComponent,
     CompanyPasswordManagerComponent,
+    CompanyUserComponent,
     UsersComponent,
     AlertComponent,
     ReportsComponent,
