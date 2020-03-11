@@ -79,9 +79,11 @@ export class CompanyUserComponent implements OnInit {
  
         const reqIndex = this.reqUsers.findIndex((item) => item.id === data.data.id);
         if (reqIndex > -1) this.reqUsers[reqIndex] = new User(data.data);
-        if (reqIndex === -1) {
+        if (reqIndex === -1 && data.data.company.id === company_id) {
           this.reqUsers.unshift(new User(data.data));
           this.users.unshift(new User(data.data));
+
+        
           // this.onRelaodList();
         }
         const userIndex = this.users.findIndex((item) => item.id === data.data.id);
