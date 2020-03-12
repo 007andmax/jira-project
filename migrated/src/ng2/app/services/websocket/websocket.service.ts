@@ -10,6 +10,7 @@ import { UsersStateService } from '../../states/users/users-state.service';
 import { CompaniesRealTimeService } from '../../states/company/companies-real-time.service';
 import { DevicesRealTimeService } from '../../states/devices/devices-real-time.service';
 import { UsersRealTimeService } from '../../states/users/users-real-time.service';
+import { TaxesRealTimeService } from '../../states/taxes/taxes-real-time.service';
 
 /**
  * Websocket service to work with api
@@ -38,6 +39,7 @@ export class WebsocketService {
     private companiesRealTimeService:CompaniesRealTimeService,
     private usersRealTimeService:UsersRealTimeService,
     private passwordManagerService: PasswordManagerService,
+    private taxesRealTimeService:TaxesRealTimeService
 
     
   ) {
@@ -55,6 +57,7 @@ export class WebsocketService {
       that.subsribeToDevices();
       that.subsribeToCompany();
       that.subsribeToPasswordRecods();
+      that.subsribeToTaxes();
     });
   }
 private subsribeToDevices () {
@@ -152,6 +155,22 @@ private subsribeToDevices () {
         this.stompClient.subscribe(`/user/watch/passwordRecords`, (message) => {
           var newChange = JSON.parse(message.body);
           this.passwordManagerService.handleRealTimeChanges(newChange);
+        
+        });
+     
+    }, 3000);
+  }
+
+    /**
+   * subscribe to taxes realtime
+   */
+  public subsribeToTaxes() {
+   
+    setTimeout(() => {
+     
+        this.stompClient.subscribe(`/user/watch/taxes`, (message) => {
+          var newChange = JSON.parse(message.body);
+          this.taxesRealTimeService.handleRealTimeChanges(newChange);
         
         });
      

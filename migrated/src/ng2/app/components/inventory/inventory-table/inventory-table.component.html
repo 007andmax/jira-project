@@ -1,0 +1,35 @@
+<div class="products-content__list--item clearfix">
+  <div class="col-md-3 pre-line" [ngClass]="{'product-description': inventory.categoryIsdefault}"
+    [attr.uib-tooltip]="inventory.description" [attr.trimmed-tooltip-checker]="inventory.description">{{inventory.description}}</div>
+
+  <div class="col-md-2" [textContent]="getCompanyById(inventory.companyId).name"></div>
+
+  <div class="col-md-1" ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')" [textContent]="'$' + parseTotal(inventory.cost)">
+  </div>
+
+  <div class="col-md-1" [textContent]="'$' + parseTotal(inventory.sale)"></div>
+
+  <div class="col-md-1" [textContent]="inventory.manufacture"></div>
+
+  <div class="col-md-1" [textContent]="getSelectedTaxNames()"></div>
+
+  <div class="col-md-1" [textContent]="inventory.ilc"></div>
+
+  <div class="col-md-1" [textContent]="(inventory.glNumber) ? inventory.glNumber.glNumber : ''"></div>
+
+
+  <div class="col-md-1 btn-actions">
+    <div class="grey-dropdown right with-icons" ngbDropdown>
+      <i class="icn-16 more-vertical-ng2 pointer" id="dropdownBasic1" ngbDropdownToggle></i>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <button ngbDropdownItem (click)="edit()"><i class="icn-16 edit-grey-ng2"></i>Edit
+        </button>
+        <button ngbDropdownItem (click)="delete()"><i class="icn-16 archive-grey-ng2"></i>Delete
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+
+</div>

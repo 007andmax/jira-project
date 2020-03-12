@@ -112,6 +112,8 @@ import { SelectComponent } from './components/shared/select/select.component';
 import { ReportAdditionalActionsComponent } from './components/reports/report-additional-actions/report-additional-actions.component';
 import { ReportSendEmailComponent } from './components/reports/report-additional-actions/report-send-email/report-send-email.component';
 import { CompanyUserComponent } from './components/company-user/company-user.component';
+import { InventoryComponent } from './components/inventory/inventory.component';
+import { InventoryTableComponent } from './components/inventory/inventory-table/inventory-table.component';
 
 
 /**
@@ -171,6 +173,9 @@ angular.module('quicktech')
   .directive(
     'itemReportComponent',
     downgradeComponent({ component: ItemReportComponent }))
+  .directive(
+    'inventoryComponent',
+    downgradeComponent({ component: InventoryComponent }))
   .factory('ngZone', downgradeInjectable(NgZone));
 
 /**
@@ -265,7 +270,9 @@ angular.module('quicktech')
     SelectComponent,
     ReportAdditionalActionsComponent,
     ReportSendEmailComponent,
-    CompanyUserComponent
+    CompanyUserComponent,
+    InventoryComponent,
+    InventoryTableComponent
   ],
   imports: [
     BrowserModule,
@@ -341,6 +348,11 @@ angular.module('quicktech')
         pathMatch: 'full'
       },
       {
+        path: 'ng2/inventory/products',
+        component: InventoryComponent,
+        pathMatch: 'full'
+      },
+      {
         path: 'ng2/report/:id', component: ItemReportComponent
       }],
       {
@@ -371,7 +383,8 @@ angular.module('quicktech')
     ReportsComponent,
     ItemReportComponent,
     OverviewReportComponent,
-    ReportSendEmailComponent
+    ReportSendEmailComponent,
+    InventoryComponent
     // RecurringTicketsComponent
   ],
   providers: [

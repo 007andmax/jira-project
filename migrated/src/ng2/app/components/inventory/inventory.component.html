@@ -1,0 +1,87 @@
+<div>
+  <div  style="width: 100%; display: inline-block;"> <!--ng-hide="loadingInProgress"-->
+
+    <div class="products-content"  >
+
+      <div class="products-content__header">
+        <h3>Products</h3>
+    <!--    <div class="products-content__header--search-result" ng-if="successProductAdding">
+          Product has been added
+        </div>-->
+        <div class="products-content__header--search">
+          <input type="text" placeholder="Search Products…" [(ngModel)]="productSearchName">
+          <button class="plus-btn" create-new-entity="product">+</button>
+        </div>
+      </div>
+      <div class="products-content__list">
+        <div class="products-content__list--header clearfix">
+          <div class="col-md-3 pointer"
+               (click)="setOrderForProducts('description')">Product Name
+          </div>
+          <div class="col-md-2 pointer"
+               (click)="setOrderForProducts('vendor')">Vendor
+          </div>
+          <div class="col-md-1 pointer"
+               (click)="setOrderForProducts('cost')"
+               ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">Cost
+          </div>
+          <div class="col-md-1 pointer"
+               (click)="setOrderForProducts('sale')">Sale Price
+          </div>
+          <div class="col-md-1 pointer"
+               (click)="setOrderForProducts('manufacture')">#Mfg
+          </div>
+          <div class="col-md-1">Tax</div>
+          <div class="col-md-1 pointer"
+               (click)="setOrderForProducts('ilc')">ILC
+          </div>
+          <div class="col-md-1 pointer"
+          (click)="setOrderForProducts('glNumber')">GL</div>
+        </div>
+
+        <div class="products-content"
+        infiniteScroll
+        [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="50"
+        [infiniteScrollDisabled]="infiniteScrollDisabled"
+        (scrolled)="onScroll()">
+     <ng-template ngFor let-inventory
+                  [ngForOf]="inventoryList"
+                  [ngForTrackBy]="trackById">
+       <app-inventory-table [companies]="companies" [taxes]="taxes" [inventory]="inventory"></app-inventory-table>
+     </ng-template>
+     <div class="loading" *ngIf="showPreloader"></div>
+   </div>
+     
+      </div>
+
+      <!--<div class="tabs-container" style="margin-left: 15px">-->
+      <!--<div class="fixed-block-top" style="" fixed-block-top>-->
+      <!--<ul class="nav nav-qt" role="tablist" style="margin-left: 20px">-->
+
+      <!--<li role="presentation" ng-class="{'active': currentOpenTab === 'category'}">-->
+      <!--<a ui-sref="products({ tabName: 'category' })">Product by Category</a>-->
+      <!--</li>-->
+
+      <!--<li role="presentation" ng-class="{'active': currentOpenTab === 'list'}">-->
+      <!--<a ui-sref="products({ tabName: 'list' })">Products List</a>-->
+      <!--</li>-->
+
+      <!--</ul>-->
+      <!--</div>-->
+
+      <!--</div>-->
+
+
+      <!--<div ng-if="currentOpenTab === 'list'" ng-include="'/html/scripts/core/products/products-list.tpl.html'"></div>-->
+      <!--<div ng-if="currentOpenTab === 'category'"-->
+      <!--ng-include="'/html/scripts/core/products/group-by-category.tpl.html'"></div> -->
+    </div>
+    <!--<div ng-include="'/html/scripts/core/products/products-list.tpl.html'"></div>-->
+
+
+  </div>
+  <!--<loading-indicator loading-trigger="loadingInProgress"
+                     style="width: 100%;position: absolute;top: calc(50vh - 25px);"></loading-indicator> -->
+
+</div>
