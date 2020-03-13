@@ -1,6 +1,6 @@
 <div class="products-content__list--item clearfix">
   <div class="col-md-3 pre-line" [ngClass]="{'product-description': inventory.category.default}"
-    [attr.uib-tooltip]="inventory.description" [attr.trimmed-tooltip-checker]="inventory.description">{{inventory.description}}</div>
+    [attr.uib-tooltip]="inventory.description" [attr.trimmed-tooltip-checker]="inventory.description" [textContent]="inventory.description"></div>
 
   <div class="col-md-2" [textContent]="getCompanyName()"></div>
 

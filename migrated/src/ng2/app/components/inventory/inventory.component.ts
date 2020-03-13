@@ -40,7 +40,6 @@ export class InventoryComponent implements OnInit {
   ngOnInit() {
     if (this.companiesStateService.getCompanies().length > 0) this.companies = this.companiesStateService.getCompanies();
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
-
       this.companies = data;
     })
     this.sub.add(getOnCompanies);
@@ -53,7 +52,6 @@ export class InventoryComponent implements OnInit {
 
     if (this.taxesStateService.getTaxes().length > 0) this.taxes = this.taxesStateService.getTaxes();
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
-
       this.taxes = data;
     })
     this.sub.add(getOnTaxess);
@@ -65,8 +63,6 @@ export class InventoryComponent implements OnInit {
       this.reqInventoryList = res;
       this.onScroll();
       this.showPreloader = false;
-      console.log("res", res);
-
     });
   }
 
@@ -77,13 +73,6 @@ export class InventoryComponent implements OnInit {
     }
     this.page_number += 1;
     let listFilter = this.reqInventoryList.filter(item => (this.sortCategoty) ? item.category.id === this.sortCategoty.id : (!this.sortCategoty) ? true : false);
-    //let listFilter = [];
-   /* listcategories.forEach(item => {
-      listFilter = [...listFilter, ...item.products.map(product => {
-        let iventory = new InventoryItem(product);
-        return iventory;
-      })];
-    })*/
     listFilter = listFilter.filter(item => (this.productSearchName.length > 0) ? item.description.includes(this.productSearchName) : true);
     this.filter.onFilter(listFilter, this.companies, this.glNumbers);
     let start = (this.page_number - 1) * 30;
@@ -93,7 +82,6 @@ export class InventoryComponent implements OnInit {
       inventoryList.push(listFilter[i]);
     }
     this.inventoryList = [...this.inventoryList, ...inventoryList];
-    console.log("this.inventoryList", this.inventoryList);
     this.infiniteScrollDisabled = false;
     if ((this.page_number * 30) > listFilter.length) this.inventoryListService.setBlockList(true);
 
@@ -106,7 +94,6 @@ export class InventoryComponent implements OnInit {
     this.onScroll();
   }
   public onFilter(field) {
-    console.log("field", field);
     this.filter.onSetFilter(field);
     this.page_number = 0;
     this.inventoryListService.setBlockList(false);
@@ -116,7 +103,6 @@ export class InventoryComponent implements OnInit {
   public onScroll() {
     this.infiniteScrollDisabled = true;
     this.getProducts();
-
   }
 
   public trackById(index, item) {

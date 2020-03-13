@@ -13,7 +13,7 @@ export class InventoryTableComponent implements OnInit {
   @Input() companies;
   @Input() glNumbers;
   @Input() taxes;
-  
+
   constructor() { }
 
   ngOnInit() {
@@ -22,21 +22,18 @@ export class InventoryTableComponent implements OnInit {
   public getGlNumberName() {
     let glNumber = this.inventory.glNumber;
     if (!glNumber) return '';
-  //  let index = this.glNumbers.findIndex(item => item.id === glNumber.id);
-   // return (index > -1) ? this.glNumbers[index].glNumber : '';
-   return (glNumber.glNumber) ? glNumber.glNumber : '';
-}
+    return (glNumber.glNumber) ? glNumber.glNumber : '';
+  }
   public getCompanyName() {
     let conpany = this.companies.find(item => item.id === this.inventory.companyId);
     return (conpany) ? conpany.name : "";
   }
-
   getSelectedTaxNames() {
     let taxes = [];
-     this.taxes.forEach(item => {
+    this.taxes.forEach(item => {
       let index = this.inventory.taxIds.findIndex(taxId => taxId === item.id);
       if (index > -1) taxes.push(item.name);
-     })
+    })
     return (taxes.length > 0) ? taxes.join(', ') : 'No taxes';
   };
 
