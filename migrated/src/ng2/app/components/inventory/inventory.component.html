@@ -9,34 +9,34 @@
           Product has been added
         </div>-->
         <div class="products-content__header--search">
-          <input type="text" placeholder="Search Products…" [(ngModel)]="productSearchName">
+          <input type="text" placeholder="Search Products…" (input)="onSearch()" [(ngModel)]="productSearchName">
           <button class="plus-btn" create-new-entity="product">+</button>
         </div>
       </div>
       <div class="products-content__list">
         <div class="products-content__list--header clearfix">
           <div class="col-md-3 pointer"
-               (click)="setOrderForProducts('description')">Product Name
+               (click)="onFilter('description')">Product Name
           </div>
           <div class="col-md-2 pointer"
-               (click)="setOrderForProducts('vendor')">Vendor
+               (click)="onFilter('vendor')">Vendor
           </div>
           <div class="col-md-1 pointer"
-               (click)="setOrderForProducts('cost')"
+               (click)="onFilter('cost')"
                ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">Cost
           </div>
           <div class="col-md-1 pointer"
-               (click)="setOrderForProducts('sale')">Sale Price
+               (click)="onFilter('sale')">Sale Price
           </div>
           <div class="col-md-1 pointer"
-               (click)="setOrderForProducts('manufacture')">#Mfg
+               (click)="onFilter('manufacture')">#Mfg
           </div>
           <div class="col-md-1">Tax</div>
           <div class="col-md-1 pointer"
-               (click)="setOrderForProducts('ilc')">ILC
+               (click)="onFilter('ilc')">ILC
           </div>
           <div class="col-md-1 pointer"
-          (click)="setOrderForProducts('glNumber')">GL</div>
+          (click)="onFilter('glNumber')">GL</div>
         </div>
 
         <div class="products-content"
@@ -48,7 +48,7 @@
      <ng-template ngFor let-inventory
                   [ngForOf]="inventoryList"
                   [ngForTrackBy]="trackById">
-       <app-inventory-table [companies]="companies" [taxes]="taxes" [inventory]="inventory"></app-inventory-table>
+       <app-inventory-table [companies]="companies" [taxes]="taxes" [glNumbers]="glNumbers" [inventory]="inventory"></app-inventory-table>
      </ng-template>
      <div class="loading" *ngIf="showPreloader"></div>
    </div>

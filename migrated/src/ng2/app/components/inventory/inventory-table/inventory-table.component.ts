@@ -11,21 +11,32 @@ import { ItemFilterPerson } from '../../left-panel/left-panel-companies/class/it
 export class InventoryTableComponent implements OnInit {
   @Input() inventory: InventoryItem;
   @Input() companies;
+  @Input() glNumbers;
   @Input() taxes;
+  
   constructor() { }
 
   ngOnInit() {
   }
 
-  public getCompanyById(id) {
-    let conpany = this.companies.find(item => item.id === id);
+  public getGlNumberName() {
+    let glNumber = this.inventory.glNumber;
+    if (!glNumber) return '';
+  //  let index = this.glNumbers.findIndex(item => item.id === glNumber.id);
+   // return (index > -1) ? this.glNumbers[index].glNumber : '';
+   return (glNumber.glNumber) ? glNumber.glNumber : '';
+}
+  public getCompanyName() {
+    let conpany = this.companies.find(item => item.id === this.inventory.companyId);
     return (conpany) ? conpany.name : "";
   }
 
   getSelectedTaxNames() {
-    let taxes = this.inventory.taxes.map(item => {
-      return item.name;
-    })
+    let taxes = [];
+     this.taxes.forEach(item => {
+      let index = this.inventory.taxIds.findIndex(taxId => taxId === item.id);
+      if (index > -1) taxes.push(item.name);
+     })
     return (taxes.length > 0) ? taxes.join(', ') : 'No taxes';
   };
 

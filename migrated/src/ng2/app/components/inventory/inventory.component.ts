@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ProductService } from '../../services/product/product.service';
 import { CategoryProductitem } from 'src/ng2/class/category-product-item';
 import { Product } from '../../interfaces/product/product';
@@ -7,6 +7,10 @@ import { InventoryItem } from './class/inventory-item';
 import { CompaniesStateService } from '../../states/company/companies-state.service';
 import { Subscription } from 'rxjs';
 import { TaxesStateService } from '../../states/taxes/taxes-state.service';
+import { InventoryFilter } from './class/inventory-filter';
+import { GlNumber } from 'src/ng2/class/gl-number/gl-number';
+import { GlNumberStateService } from '../../states/gl-number/gl-number-state.service';
+import { Tax } from 'src/ng2/class/taxes/tax';
 
 @Component({
   selector: 'app-inventory',
@@ -17,16 +21,21 @@ import { TaxesStateService } from '../../states/taxes/taxes-state.service';
 export class InventoryComponent implements OnInit {
   sortCategoty: CategoryProductitem = null;
   inventoryList: Array<InventoryItem> = [];
-  reqInventoryList: Array<CategoryProductitem> = [];
+  reqInventoryList: Array<InventoryItem> = [];
+  filter: InventoryFilter = new InventoryFilter();
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
   showPreloader: boolean = true;
   companies = [];
-  taxes = [];
+  glNumbers: Array<GlNumber> = [];
+  productSearchName: string = '';
   sub: Subscription = new Subscription();
+  taxes:Array<Tax> = [];
   constructor(private productService: ProductService, private inventoryListService: InventoryListService,
     private companiesStateService: CompaniesStateService,
-    private taxesStateService:TaxesStateService) { }
+    private taxesStateService: TaxesStateService,
+    private glNumberStateService: GlNumberStateService,
+    public cd: ChangeDetectorRef, ) { }
 
   ngOnInit() {
     if (this.companiesStateService.getCompanies().length > 0) this.companies = this.companiesStateService.getCompanies();
@@ -35,16 +44,24 @@ export class InventoryComponent implements OnInit {
       this.companies = data;
     })
     this.sub.add(getOnCompanies);
+
+    if (this.glNumberStateService.getGLNumbers().length > 0) this.glNumbers = this.glNumberStateService.getGLNumbers();
+    let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe((data) => {
+      this.glNumbers = data;
+    })
+    this.sub.add(getOnGlNumbers);
+
     if (this.taxesStateService.getTaxes().length > 0) this.taxes = this.taxesStateService.getTaxes();
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
 
       this.taxes = data;
     })
     this.sub.add(getOnTaxess);
+
     this.getListProducts();
   }
   public getListProducts() {
-    this.productService.getCategories().subscribe((res: Array<CategoryProductitem>) => {
+    this.productService.getProducts().subscribe((res: Array<InventoryItem>) => {
       this.reqInventoryList = res;
       this.onScroll();
       this.showPreloader = false;
@@ -59,15 +76,16 @@ export class InventoryComponent implements OnInit {
       return;
     }
     this.page_number += 1;
-    let listcategories = this.reqInventoryList.filter(item => (this.sortCategoty) ? item.id === this.sortCategoty.id : (!this.sortCategoty) ? true : false);
-    let listFilter = [];
-    listcategories.forEach(item => {
+    let listFilter = this.reqInventoryList.filter(item => (this.sortCategoty) ? item.category.id === this.sortCategoty.id : (!this.sortCategoty) ? true : false);
+    //let listFilter = [];
+   /* listcategories.forEach(item => {
       listFilter = [...listFilter, ...item.products.map(product => {
         let iventory = new InventoryItem(product);
-        iventory.setCategoryDefault(item.default);
         return iventory;
       })];
-    })
+    })*/
+    listFilter = listFilter.filter(item => (this.productSearchName.length > 0) ? item.description.includes(this.productSearchName) : true);
+    this.filter.onFilter(listFilter, this.companies, this.glNumbers);
     let start = (this.page_number - 1) * 30;
     let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;
     let inventoryList = [];
@@ -79,13 +97,20 @@ export class InventoryComponent implements OnInit {
     this.infiniteScrollDisabled = false;
     if ((this.page_number * 30) > listFilter.length) this.inventoryListService.setBlockList(true);
 
-
+    this.cd.detectChanges();
+  }
+  onSearch() {
+    this.page_number = 0;
+    this.inventoryListService.setBlockList(false);
+    this.inventoryList = [];
+    this.onScroll();
   }
   public onFilter(field) {
-    this.filter.onFilter(field, this.reqUsers, this.companies)
+    console.log("field", field);
+    this.filter.onSetFilter(field);
     this.page_number = 0;
-    this.userListService.setBlockList(false);
-    this.users = [];
+    this.inventoryListService.setBlockList(false);
+    this.inventoryList = [];
     this.onScroll();
   }
   public onScroll() {

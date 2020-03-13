@@ -1,43 +1,33 @@
 import { Product } from 'src/ng2/app/interfaces/product/product';
+import { GlNumber } from 'src/ng2/class/gl-number/gl-number';
+import { InventoryCategory } from './inventory-category';
 
-export class InventoryItem implements Product {
+export class InventoryItem   {
     versionedId: import("../../../interfaces/versioned-id").VersionedId;
-    createdAt: number;
-    updatedAt: number;
-    deletedAt: number;
-    company: any;
     cost: number;
     sale: number;
-    category: import("../../../interfaces/product/category").Category;
     ilc: string;
-    glNumber: number;
     manufacture: string;
+    glNumber: GlNumber;
     description: string;
+    category: InventoryCategory;
+    companyId: string;
     billable: boolean;
-    taxes: import("../../../interfaces/service/tax").Tax[];
-    oldVersion: boolean;
-    categoryIsdefault: boolean;
-
+    taxIds: Array<String>
     constructor(data) {
-        this.versionedId = data.versionedId;
-        this.createdAt = data.createdAt;
-        this.updatedAt = data.updatedAt;
-        this.deletedAt = data.deletedAt;
-        this.company = data.company;
-        this.cost = data.cost;
-        this.sale = data.sale;
-        this.category = data.category;
-        this.ilc = data.ilc;
-        this.glNumber = data.glNumber;
-        this.manufacture = data.manufacture;
-        this.description = data.description;
-        this.billable = data.billable;
-        this.taxes = data.taxes;
-        this.oldVersion = data.oldVersion;
+        this.versionedId =data.versionedId;
+        this.cost=data.cost;
+        this.sale=data.sale;
+        this.ilc=data.ilc;
+        this.manufacture=data.manufacture;
+        this.glNumber=data.glNumber;
+        this.description=data.description;
+        this.category= new InventoryCategory(data.category);
+        this.companyId=data.companyId;
+        this.billable=data.billable;
+        this.taxIds=data.taxIds;
 
     }
 
-    public setCategoryDefault (data) {
-        this.categoryIsdefault = data;
-    }
+   
 }

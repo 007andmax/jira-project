@@ -1,112 +1,237 @@
+import { FilterListTop } from 'src/ng2/class/list/filter-list-top';
+import { InventoryItem } from './inventory-item';
+import { Company } from 'src/ng2/app/interfaces/company/company';
+
 export class InventoryFilter {
-    filterTop: Array<FilterListTop> = [new FilterListTop('name', 'ASC'),
-    new FilterListTop('company', ''),
-    new FilterListTop('contact', ''),
-    new FilterListTop('tickets', '')];
-    categoryId:string;
-     
+    filterTop: Array<FilterListTop> = [new FilterListTop('description', 'ASC'),
+    new FilterListTop('vendor', ''),
+    new FilterListTop('cost', ''),
+    new FilterListTop('sale', ''),
+    new FilterListTop('manufacture', ''),
+    new FilterListTop('ilc', ''),
+    new FilterListTop('glNumber', '')];
+    categoryId: string;
+
     constructor() { }
 
-    public setLeftFilters(clientType,company,clientIndustry,title) {
-        this.clientType = clientType;
-        this.company= company;
-        this.clientIndustry = clientIndustry;
-        this.title = title;
+
+    public setCompanyId(data) {
+        this.categoryId = data;
     }
-    public setCompany (data) {
-        this.company= data;
-    }
-    public setTitle(data) {
-        this.title = data;
-    }
-    public setClientType(data) {
-        this.clientType = data;
-    }
-    public getClientType() {
-        return this.clientType;
-    }
-    public getFilterList(reqCompaniesList: Array<User>,companies:Array<Company>) {
-         
-        let list = reqCompaniesList.filter(item => {
-            let indexCompany = companies.findIndex( company => company.id === item.company.id);
-            let clientType:boolean = false;
-            let clientIndustry:boolean = false;
-            if (indexCompany > -1 && this.clientType === companies[indexCompany].clientType) clientType = true;
-            if (indexCompany > -1 && this.clientIndustry === ((companies[indexCompany].clientIndustry) ? companies[indexCompany].clientIndustry.name : '')) clientIndustry = true;
-         
-            if (((this.clientType) ?  clientType === true : true) && ((this.title) ? item.designation === this.title : true) && ((this.company) ? this.company === item.company.id : true) && ((this.clientIndustry) ? clientIndustry === true : true)) {
-                return true;
-            } else  {
-                return false;
-            }
-         
+
+    public getFilterList(reqInventoryList: Array<InventoryItem>, companies: Array<Company>) {
+
+        let list = reqInventoryList.filter((item: InventoryItem) => {
+            let indexCompany = companies.findIndex(company => company.id === item.companyId);
+            if (indexCompany > -1) return true;
+            return false;
+
         })
         return list;
 
     }
-    
-    public setClientIndustry(data) {
-        this.clientIndustry = data;
-    }
+
 
 
     public clearFilter() {
         this.filterTop.forEach(item => item.filter = '');
     }
-
-    public onFilter(field, reqUsers,companies) {
-       
+    public onSetFilter(field) {
         let index = this.filterTop.findIndex(item => item.field === field);
         if (index > -1) {
             let sort = this.filterTop[index].filter;
-            if (field === 'name') {
+            console.log("sort", sort);
+            if (field === 'description') {
                 this.clearFilter();
+
                 if (sort === '' || sort === 'DESC') {
                     this.filterTop[index].filter = 'ASC';
-                    this.onFilterName(reqUsers);
+
                 } else {
                     this.filterTop[index].filter = 'DESC';
-                     reqUsers.reverse();
+
                 }
 
             }
-            if (field === 'company') {
+            if (field === 'vendor') {
                 this.clearFilter();
                 if (sort === '' || sort === 'DESC') {
 
                     this.filterTop[index].filter = 'ASC';
-                    this.onFilterCompany(reqUsers,companies);
+
 
                 } else {
 
                     this.filterTop[index].filter = 'DESC';
-                     reqUsers.reverse();
-                }
 
-
-            }
-            if (field === 'contact') {
-                this.clearFilter();
-                if (sort === '' || sort === 'DESC') {
-                    this.filterTop[index].filter = 'ASC';
-                    this.onFilterContact(reqUsers);
-                } else {
-                    this.filterTop[index].filter = 'DESC';
-                     reqUsers.reverse();
                 }
 
 
             }
-
-           
-            if (field === 'tickets') {
+            if (field === 'cost') {
                 this.clearFilter();
                 if (sort === '' || sort === 'DESC') {
                     this.filterTop[index].filter = 'ASC';
-                    this.onFilterTickets(reqUsers);
+
                 } else {
                     this.filterTop[index].filter = 'DESC';
-                     reqUsers.reverse();
+
+                }
+
+
+            }
+
+            if (field === 'sale') {
+                this.clearFilter();
+                if (sort === '' || sort === 'DESC') {
+                    this.filterTop[index].filter = 'ASC';
+
+                } else {
+                    this.filterTop[index].filter = 'DESC';
+
+                }
+
+
+            }
+
+
+            if (field === 'manufacture') {
+                this.clearFilter();
+                if (sort === '' || sort === 'DESC') {
+                    this.filterTop[index].filter = 'ASC';
+
+                } else {
+                    this.filterTop[index].filter = 'DESC';
+
+                }
+
+
+            }
+
+            if (field === 'ilc') {
+                this.clearFilter();
+                if (sort === '' || sort === 'DESC') {
+                    this.filterTop[index].filter = 'ASC';
+
+                } else {
+                    this.filterTop[index].filter = 'DESC';
+
+                }
+
+
+            }
+
+            if (field === 'glNumber') {
+                this.clearFilter();
+                if (sort === '' || sort === 'DESC') {
+                    this.filterTop[index].filter = 'ASC';
+
+                } else {
+                    this.filterTop[index].filter = 'DESC';
+
+                }
+
+
+            }
+            console.log("this.filterTop[index]", this.filterTop[index]);
+        }
+    }
+    public onFilter(reqInventory, companies,glNumbers) {
+        console.log("this.filterTop", this.filterTop);
+        let index = this.filterTop.findIndex(item => item.filter !== '');
+        if (index > -1) {
+            let sort = this.filterTop[index].filter;
+            let field = this.filterTop[index].field;
+            console.log("sort", sort);
+            console.log("field", field);
+            if (field === 'description') {
+
+                if (sort === 'ASC') {
+
+                    this.onFilterDescription(reqInventory);
+                } else {
+                    this.onFilterDescription(reqInventory);
+                    reqInventory.reverse();
+                }
+
+            }
+            if (field === 'vendor') {
+
+                if (sort === 'ASC') {
+
+
+                    this.onFilterCompany(reqInventory, companies);
+
+                } else {
+
+                    this.onFilterCompany(reqInventory, companies);
+                    reqInventory.reverse();
+                }
+
+
+            }
+            if (field === 'cost') {
+
+                if (sort === 'ASC') {
+
+                    this.onFilterCost(reqInventory);
+                } else {
+                    this.onFilterCost(reqInventory);
+                    reqInventory.reverse();
+                }
+
+
+            }
+
+            if (field === 'sale') {
+
+                if (sort === 'ASC') {
+
+                    this.onFilterSale(reqInventory);
+                } else {
+                    this.onFilterSale(reqInventory);
+                    reqInventory.reverse();
+                }
+
+
+            }
+
+
+            
+            if (field === 'manufacture') {
+
+                if (sort === 'ASC') {
+
+                    this.onFilterManufacture(reqInventory);
+                } else {
+                    this.onFilterManufacture(reqInventory);
+                    reqInventory.reverse();
+                }
+
+
+            }
+
+            if (field === 'ilc') {
+
+                if (sort === 'ASC') {
+
+                    this.onFilterIlc(reqInventory);
+                } else {
+                    this.onFilterIlc(reqInventory);
+                    reqInventory.reverse();
+                }
+
+
+            }
+
+            if (field === 'glNumber') {
+
+                if (sort === 'ASC') {
+
+                    this.onFilterGlNumber(reqInventory,glNumbers);
+                } else {
+                    this.onFilterGlNumber(reqInventory,glNumbers);
+                    reqInventory.reverse();
                 }
 
 
@@ -117,23 +242,33 @@ export class InventoryFilter {
         let str = '';
         if (user.phoneNumbers && user.phoneNumbers.length && user.phoneNumbers[0] && user.phoneNumbers[0].number) str += user.phoneNumbers[0].number;
         if (user.phoneNumbers && user.phoneNumbers.length && user.phoneNumbers[1] && user.phoneNumbers[1].number) str += user.phoneNumbers[1].number;
-       return str;
-      }
-    private getCompanyName(user, companies) {
-        if (user.company.isDefault) return '';
-        let index = companies.findIndex(item => item.id === user.company.id);
+        return str;
+    }
+    private getCompanyName(inventory, companies) {
+        let index = companies.findIndex(item => item.id === inventory.companyId);
         return (index > -1) ? companies[index].name : '';
     }
-    private onFilterContact (reqUsers) {
-        reqUsers.sort((a, b) => {
-            let first = this.getContact(a);
-            let next = this.getContact(b);
-            return (first.toLowerCase() > next.toLowerCase()) ?
-                1 : ((next.toLowerCase() > first.toLowerCase()) ? -1 : 0)
+    private getGlNumberName(inventory, glNumbers) {
+        let glNumber = inventory.glNumber;
+        if (!glNumber) return '';
+        let index = glNumbers.findIndex(item => item.id === glNumber.id);
+        return (index > -1) ? glNumbers[index].glNumber : '';
+    }
+    private onFilterCost(reqInventory) {
+        reqInventory.sort((a, b) => {
+            return (a.cost > b.cost) ?
+                1 : ((b.cost > a.cost) ? -1 : 0)
         });
     }
-    private onFilterCompany(reqUsers, companies) {
-        reqUsers.sort((a, b) => {
+
+    private onFilterSale(reqInventory) {
+        reqInventory.sort((a, b) => {
+            return (a.sale > b.sale) ?
+                1 : ((b.sale > a.sale) ? -1 : 0)
+        });
+    }
+    private onFilterCompany(reqInventory, companies) {
+        reqInventory.sort((a, b) => {
             let first = this.getCompanyName(a, companies);
             let next = this.getCompanyName(b, companies);
             return (first.toLowerCase() > next.toLowerCase()) ?
@@ -143,13 +278,28 @@ export class InventoryFilter {
 
     }
 
-    private onFilterTickets (reqUsers) {
-        reqUsers.sort((a, b) => ((a.userStatistic.ticketsSubmitted || 0) > (b.userStatistic.ticketsSubmitted || 0)) ?
-        1 : (((b.userStatistic.ticketsSubmitted || 0) > (a.userStatistic.ticketsSubmitted || 0)) ? -1 : 0));
-    }
 
-    private onFilterName(reqUsers) {
-        reqUsers.sort((a, b) => ((a.firstName + a.lastName).toLowerCase() > (b.firstName + b.lastName).toLowerCase()) ?
-            1 : (((b.firstName + b.lastName).toLowerCase() > (a.firstName + a.lastName).toLowerCase()) ? -1 : 0));
+    private onFilterGlNumber(reqInventory,glNumbers) {
+        reqInventory.sort((a, b) => {
+           // let first = this.getGlNumberName(a, glNumbers);
+           // let next = this.getGlNumberName(b, glNumbers);
+             let first = (a.glNumber && a.glNumber.glNumber) ? a.glNumber.glNumber : '';
+            let next = (b.glNumber && b.glNumber.glNumber) ? b.glNumber.glNumber : '';
+            return (first.toLowerCase() > next.toLowerCase()) ?
+            1 : ((next.toLowerCase() > first.toLowerCase()) ? -1 : 0)
+        });
+    }
+    private onFilterIlc(reqInventory) {
+      reqInventory.sort((a, b) => (((a.ilc) ? a.ilc : '').toLowerCase() > ((b.ilc) ? b.ilc : '').toLowerCase()) ?
+            1 : ((((b.ilc) ? b.ilc : '').toLowerCase() > ((a.ilc) ? a.ilc : '').toLowerCase()) ? -1 : 0));
+    }
+    private onFilterManufacture(reqInventory) {
+        
+        reqInventory.sort((a, b) => (((a.manufacture) ? a.manufacture : '').toLowerCase() > ((b.manufacture) ? b.manufacture : '').toLowerCase()) ?
+            1 : ((((b.manufacture) ? b.manufacture : '').toLowerCase() > ((a.manufacture) ? a.manufacture : '').toLowerCase()) ? -1 : 0));
+    }
+    private onFilterDescription(reqInventory) {
+        reqInventory.sort((a, b) => (((a.description) ? a.description : '').toLowerCase() > ((b.description) ? b.description : '').toLowerCase()) ?
+            1 : ((((b.description) ? b.description : '').toLowerCase() > ((a.description) ? a.description : '').toLowerCase()) ? -1 : 0));
     }
 }

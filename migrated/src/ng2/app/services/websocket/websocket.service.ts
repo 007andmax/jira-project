@@ -11,6 +11,7 @@ import { CompaniesRealTimeService } from '../../states/company/companies-real-ti
 import { DevicesRealTimeService } from '../../states/devices/devices-real-time.service';
 import { UsersRealTimeService } from '../../states/users/users-real-time.service';
 import { TaxesRealTimeService } from '../../states/taxes/taxes-real-time.service';
+import { GlNumberRealTimeService } from '../../states/gl-number/gl-number-real-time.service';
 
 /**
  * Websocket service to work with api
@@ -39,7 +40,8 @@ export class WebsocketService {
     private companiesRealTimeService:CompaniesRealTimeService,
     private usersRealTimeService:UsersRealTimeService,
     private passwordManagerService: PasswordManagerService,
-    private taxesRealTimeService:TaxesRealTimeService
+    private taxesRealTimeService:TaxesRealTimeService,
+    private glNumberRealTimeService:GlNumberRealTimeService
 
     
   ) {
@@ -171,6 +173,22 @@ private subsribeToDevices () {
         this.stompClient.subscribe(`/user/watch/taxes`, (message) => {
           var newChange = JSON.parse(message.body);
           this.taxesRealTimeService.handleRealTimeChanges(newChange);
+        
+        });
+     
+    }, 3000);
+  }
+
+      /**
+   * subscribe to gl number realtime
+   */
+  public subsribeToGlNumber(id) {
+   
+    setTimeout(() => {
+     
+        this.stompClient.subscribe(`/user/watch/glNumber/${id}`, (message) => {
+          var newChange = JSON.parse(message.body);
+          this.glNumberRealTimeService.handleRealTimeChanges(newChange);
         
         });
      

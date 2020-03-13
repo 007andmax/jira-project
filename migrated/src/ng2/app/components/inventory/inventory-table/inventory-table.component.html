@@ -1,13 +1,13 @@
 <div class="products-content__list--item clearfix">
-  <div class="col-md-3 pre-line" [ngClass]="{'product-description': inventory.categoryIsdefault}"
+  <div class="col-md-3 pre-line" [ngClass]="{'product-description': inventory.category.default}"
     [attr.uib-tooltip]="inventory.description" [attr.trimmed-tooltip-checker]="inventory.description">{{inventory.description}}</div>
 
-  <div class="col-md-2" [textContent]="getCompanyById(inventory.companyId).name"></div>
+  <div class="col-md-2" [textContent]="getCompanyName()"></div>
 
-  <div class="col-md-1" ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')" [textContent]="'$' + parseTotal(inventory.cost)">
+  <div class="col-md-1" ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')" [textContent]="'$' + parseTotal(inventory.cost || 0)">
   </div>
 
-  <div class="col-md-1" [textContent]="'$' + parseTotal(inventory.sale)"></div>
+  <div class="col-md-1" [textContent]="'$' + parseTotal(inventory.sale || 0)"></div>
 
   <div class="col-md-1" [textContent]="inventory.manufacture"></div>
 
@@ -15,7 +15,7 @@
 
   <div class="col-md-1" [textContent]="inventory.ilc"></div>
 
-  <div class="col-md-1" [textContent]="(inventory.glNumber) ? inventory.glNumber.glNumber : ''"></div>
+  <div class="col-md-1" [textContent]="getGlNumberName()"></div>
 
 
   <div class="col-md-1 btn-actions">

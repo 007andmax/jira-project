@@ -6,6 +6,7 @@ import { CompanyCalculateCount } from '../../components/companies/class/company-
 import { CompaniesRealTimeService } from './companies-real-time.service';
 import { CompanyUpdate } from '../../components/companies/class/company-update';
 import { User } from '../../components/users/class/user';
+import { WebsocketService } from '../../services/websocket/websocket.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,11 +24,14 @@ export class CompaniesStateService {
   onCalculateCount: EventEmitter<CompanyCalculateCount> = new EventEmitter();
   calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
   currentCompany:any = null;
-  constructor(private companiesService: CompaniesService, private companiesRealTimeService: CompaniesRealTimeService) {
+  constructor(private companiesService: CompaniesService, 
+    private companiesRealTimeService: CompaniesRealTimeService,
+    private websocketService: WebsocketService,) {
    }
   public onInit() {
     this.companiesService.getTechCompany().subscribe(data => {
       this.currentCompany= data;
+      this.websocketService.subsribeToGlNumber(this.currentCompany.id);
     })
     this.companiesService.getCompaniesList().subscribe((data) => {
       this.setAllCompanies(data);
