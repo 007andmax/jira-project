@@ -117,15 +117,15 @@
             type="text"
             class="form-input"
             placeholder="Enter Your First Name"
-            formControlName="userName"
+            formControlName="firstName"
           />
-          <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
-            <div *ngIf="f.userName.errors.required">Full Name is required</div>
-            <div *ngIf="f.userName.errors.minlength">
-              Full name is too short.
+          <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+            <div *ngIf="f.firstName.errors.required">Full Name is required</div>
+            <div *ngIf="f.firstName.errors.minlength">
+              First name is too short.
             </div>
-            <div *ngIf="f.userName.errors.maxlength">
-              Full name is too large.
+            <div *ngIf="f.firstName.errors.maxlength">
+              First name is too large.
             </div>
           </div>
         </div>
@@ -139,12 +139,12 @@
             type="text"
             class="form-input"
             placeholder="Enter Your Last Name"
-            formControlName="userName"
+            formControlName="lastName"
           />
-          <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
-            <div *ngIf="f.userName.errors.required">Full Name is required</div>
-            <div *ngIf="f.userName.errors.minlength">Full name is too short.</div>
-            <div *ngIf="f.userName.errors.maxlength">Full name is too large.</div>
+          <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+            <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+            <div *ngIf="f.lastName.errors.minlength">Last name is too short.</div>
+            <div *ngIf="f.lastName.errors.maxlength">Last name is too large.</div>
           </div>
         </div>
       </div>

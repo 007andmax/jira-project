@@ -85,7 +85,15 @@ export class ProfileComponent implements OnInit {
         this.currentUser.firstName,
         [Validators.required, Validators.minLength(3), Validators.maxLength(15)]
       ],
-      firstName: [this.currentUser.firstName],
+      firstName: [
+        this.currentUser.firstName,
+        [Validators.required, Validators.minLength(3), Validators.maxLength(15)]
+      ],
+      lastName: [
+        this.currentUser.lastName,
+        [Validators.required, Validators.minLength(3), Validators.maxLength(15)]
+      ],
+      // firstName: [this.currentUser.firstName],
       primaryEmail: [
         this.currentUser.primaryEmail,
         [Validators.required, Validators.pattern(emailPattern)]
@@ -361,7 +369,7 @@ export class ProfileComponent implements OnInit {
               basic: {
                 avatar: updateAvatar,
                 firstName: this.profileForm.value.userName,
-                lastName: this.currentUser.lastName,
+                lastName: this.profileForm.value.lastName,
                 designation: this.profileForm.value.designation,
                 primaryEmail: this.profileForm.value.primaryEmail,
                 secondaryEmail: null,
@@ -445,7 +453,7 @@ export class ProfileComponent implements OnInit {
             basic: {
               avatar: null,
               firstName: this.profileForm.value.userName,
-              lastName: this.currentUser.lastName,
+              lastName: this.profileForm.value.lastName,
               designation: this.profileForm.value.designation,
               primaryEmail: this.profileForm.value.primaryEmail,
               secondaryEmail: null,
@@ -570,8 +578,8 @@ export class ProfileComponent implements OnInit {
     const profileUser = {
       basic: {
         avatar: this.currentUser.avatar,
-        firstName: this.profileForm.value.userName,
-        lastName: this.currentUser.lastName,
+        firstName: this.profileForm.value.firstName,
+        lastName: this.profileForm.value.lastName,
         designation: this.profileForm.value.designation,
         primaryEmail: this.profileForm.value.primaryEmail,
         signature: this.userProfile.signature,
