@@ -1847,7 +1847,7 @@ ngx-loading > div {
 
 /*** Common layout ***/
  
-.ng7 .ngx-dropdown-container[_ngcontent-c6] .ngx-dropdown-button[_ngcontent-c6]{border: solid 1px #c4cbd5;background-color: #ffffff;
+.ng7 div.form-row ngx-select-dropdown .ngx-dropdown-container .ngx-dropdown-button{border: solid 1px #c4cbd5;background-color: #ffffff;
     padding: 9px 14px;
     font-size: 13px;
     font-weight: normal;
@@ -1855,16 +1855,16 @@ ngx-loading > div {
     line-height: 1.54;
     letter-spacing: normal;
     color: #4f5f79;}
-.ng7 .ngx-dropdown-container[_ngcontent-c6] .ngx-dropdown-list-container[_ngcontent-c6] .search-container[_ngcontent-c6]{margin-top:0}    
-.ng7 .ngx-dropdown-container[_ngcontent-c6] .ngx-dropdown-list-container[_ngcontent-c6] ul[_ngcontent-c6]{margin:0;height: auto;max-height: 180px;overflow-y: auto;}
-.ng7 .ngx-dropdown-container[_ngcontent-c6] .ngx-dropdown-list-container[_ngcontent-c6] .search-container[_ngcontent-c6] input[_ngcontent-c6]{padding: 10px;box-sizing: border-box;font-size: 12px;border-bottom: 0;}
-.ng7 .ngx-dropdown-container[_ngcontent-c6] .ngx-dropdown-list-container[_ngcontent-c6] .search-container[_ngcontent-c6] label[_ngcontent-c6]{top: -7px;left: 10px;height: 100%;font-size: 12px;}
-.ng7 .ngx-dropdown-container[_ngcontent-c6] .ngx-dropdown-list-container[_ngcontent-c6] .search-container[_ngcontent-c6] label[_ngcontent-c6] span{margin-right: 5px;}
-.ng7 .ngx-dropdown-container[_ngcontent-c6] .ngx-dropdown-list-container[_ngcontent-c6] ul.selected-items[_ngcontent-c6] li[_ngcontent-c6]{background-color: #16a4fa;margin:0;}
-.ng7 .ngx-dropdown-container[_ngcontent-c6] .ngx-dropdown-list-container[_ngcontent-c6] ul[_ngcontent-c6] li:before{display: none;}
-.ng7 .ngx-dropdown-container[_ngcontent-c6] .ngx-dropdown-list-container[_ngcontent-c6] ul[_ngcontent-c6] li[_ngcontent-c6]{padding:5px 10px;margin:0;}
-.ng7 .ngx-dropdown-container[_ngcontent-c6] .ngx-dropdown-list-container[_ngcontent-c6] hr{display: none;}
-.ng7 .ngx-dropdown-container[_ngcontent-c6] .ngx-dropdown-list-container[_ngcontent-c6]{padding: 0;}
+.ng7 div.form-row ngx-select-dropdown .ngx-dropdown-container .ngx-dropdown-list-container .search-container{margin-top:0 !important}    
+.ng7 div.form-row ngx-select-dropdown .ngx-dropdown-container .ngx-dropdown-list-container ul{margin:0 !important;height: auto;max-height: 180px;overflow-y: auto;}
+.ng7 div.form-row ngx-select-dropdown .ngx-dropdown-container .ngx-dropdown-list-container .search-container input{padding: 10px;box-sizing: border-box !important;font-size: 12px !important;border-bottom: 0 !important;}
+.ng7 div.form-row ngx-select-dropdown .ngx-dropdown-container .ngx-dropdown-list-container .search-container label{top: -7px !important;left: 10px !important;height: 100% !important;font-size: 12px !important;}
+.ng7 div.form-row ngx-select-dropdown .ngx-dropdown-container .ngx-dropdown-list-container .search-container label span{margin-right: 5px !important;}
+.ng7 div.form-row ngx-select-dropdown .ngx-dropdown-container .ngx-dropdown-list-container ul.selected-items li{background-color: #16a4fa;margin:0 !important;}
+.ng7 div.form-row ngx-select-dropdown .ngx-dropdown-container .ngx-dropdown-list-container ul li:before{display: none !important;}
+.ng7 div.form-row ngx-select-dropdown .ngx-dropdown-container .ngx-dropdown-list-container ul li{padding:5px 10px !important;margin:0 !important;}
+.ng7 div.form-row ngx-select-dropdown .ngx-dropdown-container .ngx-dropdown-list-container hr{display: none !important;}
+.ng7 div.form-row ngx-select-dropdown .ngx-dropdown-container .ngx-dropdown-list-container{padding: 0 !important;}
 
 /*** user select Dropdwon ****/
 .ng7 .ng-select.ng-select-single .ng-select-container {height: 32px;min-height: 32px;width: auto;min-width: inherit;max-width: 100%;border-color: #c4cbd5;}
@@ -2266,8 +2266,8 @@ div#editor.angular-editor-textarea {
     }
     .loading{
         position: absolute;
-        top: -50px;
-        left: -30px;
+        top: -53px;
+        left: -10px;
         bottom: 0;
         right: 0;
         margin: auto;
@@ -2279,6 +2279,7 @@ div#editor.angular-editor-textarea {
     .content-wrapper {
         float: left;
         width: 100%;
+        min-height: calc(100vh - 130px);
     }
     .modal {
         background-color: unset;
