@@ -14,4 +14,8 @@ export class TaxesService {
   public getTaxes() {
     return this.http.get(this.apiUrl + 'taxes');
   }
+
+  public addTax(data) {
+    return this.http.post(this.apiUrl + 'taxes',data);
+  }
 }

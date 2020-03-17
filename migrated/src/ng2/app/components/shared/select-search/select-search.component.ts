@@ -20,9 +20,11 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
   @Input() list = [];
   @ViewChild('instance') instance: NgbTypeahead;
   @Output() onSelectedItem = new EventEmitter<any>();
+  @Output() onAddItem = new EventEmitter<any>();
   @Input() valid: boolean = true;
   @Input() filter: boolean = false;
   public selectedItem;
+  public isAdd:boolean = false;
   focus$ = new Subject<string>();
   click$ = new Subject<string>();
   sub = new Subscription();
@@ -40,16 +42,24 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
    * Initializes select client. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
+    console.log("list",this.list);
 
   }
   ngDoCheck() {
     if (this.editItem) this.selectedItem = (this.field) ? this.editItem : this.editItem;
 
   }
-
+  onCheckAdd(event) {
+    let index = this.list.findIndex(item => (this.field) ? item[this.field] === this.selectedItem : item === this.selectedItem);
+    if (index === -1 && this.add) {
+      this.isAdd = true;
+    }else {
+      this.isAdd = false;
+    }
+  }
   onChange(event) {
     let index = this.list.findIndex(item => (this.field) ? item[this.field] === this.selectedItem : item === this.selectedItem);
-    if (index === -1) this.onSelectedItem.emit(this.selectedItem);
+    if (index === -1)   this.onSelectedItem.emit(this.selectedItem);
   }
 
   /**
@@ -72,6 +82,7 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
    * @param companyId - id of company
    */
   public selectItem(item) {
+    this.isAdd = false;
     this.onSelectedItem.emit(item.item);
 
   }
@@ -89,12 +100,16 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
    * clear client input
    */
   public clearClient() {
+    this.isAdd = false;
     this.onSelectedItem.emit(null);
     //   this.editItem = null;
     this.selectedItem = null;
   }
 
-
+  addItem() {
+    this.onAddItem.emit(this.selectedItem);
+    this.isAdd = false;
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
 

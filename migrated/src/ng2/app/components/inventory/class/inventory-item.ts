@@ -14,20 +14,23 @@ export class InventoryItem   {
     companyId: string;
     billable: boolean;
     taxIds: Array<String>
-    constructor(data) {
-        this.versionedId =data.versionedId;
-        this.cost=data.cost;
-        this.sale=data.sale;
-        this.ilc=data.ilc;
-        this.manufacture=data.manufacture;
-        this.glNumber=data.glNumber;
-        this.description=data.description;
-        this.category= new InventoryCategory(data.category);
-        this.companyId=data.companyId;
-        this.billable=data.billable;
-        this.taxIds=data.taxIds;
-
+    constructor(data = null) {
+        if (data != null) {
+            this.versionedId =data.versionedId;
+            this.cost=data.cost;
+            this.sale=data.sale;
+            this.ilc=data.ilc;
+            this.manufacture=data.manufacture;
+            this.glNumber=data.glNumber;
+            this.description=data.description;
+            this.category= new InventoryCategory(data.category);
+            this.companyId=data.companyId;
+            this.billable=data.billable;
+            this.taxIds=data.taxIds;
+    
+        }
+       
     }
-
+    
    
 }

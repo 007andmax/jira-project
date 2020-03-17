@@ -11,6 +11,7 @@ import { InventoryFilter } from './class/inventory-filter';
 import { GlNumber } from 'src/ng2/class/gl-number/gl-number';
 import { GlNumberStateService } from '../../states/gl-number/gl-number-state.service';
 import { Tax } from 'src/ng2/class/taxes/tax';
+import { InventoryStateService } from '../../states/inventory/inventory-state.service';
 
 @Component({
   selector: 'app-inventory',
@@ -35,6 +36,7 @@ export class InventoryComponent implements OnInit {
     private companiesStateService: CompaniesStateService,
     private taxesStateService: TaxesStateService,
     private glNumberStateService: GlNumberStateService,
+    private inventoryStateService:InventoryStateService,
     public cd: ChangeDetectorRef, ) { }
 
   ngOnInit() {
@@ -65,7 +67,9 @@ export class InventoryComponent implements OnInit {
       this.showPreloader = false;
     });
   }
-
+  addProduct() {
+    this.inventoryStateService.toggleAsideForAdd();
+  }
   getProducts() {
     if (this.inventoryListService.getBlockList()) {
       this.infiniteScrollDisabled = false;

@@ -1,0 +1,83 @@
+<div class="col-md-12 light-dropdown" ngbDropdown #taxesDropDown="ngbDropdown">
+  <div class="add-tax" (click)="onInitAddTax()">Add Tax</div>
+  <mat-form-field>
+    <mat-chip-list #chipList aria-label="Fruit selection">
+      <mat-chip *ngFor="let tax of selectedTax; let i = index" [selectable]="selectable" [removable]="removable"
+        (removed)="remove(i)">
+        {{tax.name}}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
+      <input id="dropdownServices" ngbDropdownToggle placeholder="Taxes" #userInput class="pointer"
+        [formControl]="taxCtrl" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        [matChipInputAddOnBlur]="addOnBlur">
+    </mat-chip-list>
+
+  </mat-form-field>
+  <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownServices">
+    <ng-template ngFor let-tax [ngForOf]="taxes" [ngForTrackBy]="trackById">
+      <button ngbDropdownItem class="dropdown-item" (click)="selected(tax)" [textContent]="tax.name">
+      </button>
+    </ng-template>
+  </div>
+
+  <div class="d-inline-block" ngbDropdown #addTax="ngbDropdown">
+    <a style="display: none;" class="nav-link" id="dropdownManual" ngbDropdownToggle>Contribute</a>
+    <div ngbDropdownMenu aria-labelledby="dropdownManual" class="dropdown-menu dropdown-menu-custom new-tax"
+      role="menu">
+      <div class="add-tax-dropdown">
+        <form *ngIf="taxForm" [formGroup]="taxForm" novalidate>
+          <div
+            *ngIf="taxForm.controls['name'].invalid && (taxForm.controls['name'].dirty || taxForm.controls['name'].touched)">
+
+            <label class="control-label" *ngIf="taxForm.controls['name'].errors.required">
+              Name is required.
+            </label>
+
+            <!--   <label class="control-label" ng-message="unique">
+            Name is already taken.
+          </label>
+-->
+            <label class="control-label" *ngIf="taxForm.controls['name'].errors.minlength">
+              Name is too short.
+            </label>
+
+            <label class="control-label" *ngIf="taxForm.controls['name'].errors.maxlength">
+              Name is too long.
+            </label>
+          </div>
+          <input placeholder="Enter Tax Name" type="text" class="form-validation" formControlName="name" minlength="2"
+            maxlength="30" required>
+
+
+          <div
+            *ngIf="taxForm.controls['rate'].invalid && (taxForm.controls['rate'].dirty || taxForm.controls['rate'].touched)">
+
+            <label style="white-space: nowrap;" class="control-label" *ngIf="taxForm.controls['rate'].errors.required">
+              Required.
+            </label>
+            <!--    <label style="white-space: nowrap;" class="control-label" ng-message="number">
+            Only numbers.
+          </label>-->
+            <label style="white-space: nowrap;" class="control-label" *ngIf="taxForm.controls['rate'].errors.min">
+              To small.
+            </label>
+            <label style="white-space: nowrap;" class="control-label" *ngIf="taxForm.controls['rate'].errors.max">
+              To large.
+            </label>
+          </div>
+          <input placeholder="Rate (%)" type="number" class="form-validation" formControlName="rate" required min="0.01"
+            max="99">
+          <label class="control checkbox" style="margin-bottom: 20px;">
+            <input type="checkbox" formControlName="isDefault">
+            <span class="control-indicator">
+            </span>Set as Default
+          </label>
+          <button ngbDropdownItem class="btn btn-success" type="submit" [disabled]="taxForm.pristine || taxForm.invalid"
+            (click)="onAddTax()">Add
+          </button>
+        </form>
+        <!--[disabled="{{ newTaxForm.$invalid || newTaxForm.$pristine }}"-->
+      </div>
+    </div>
+  </div>
+</div>

@@ -10,7 +10,7 @@
         </div>-->
         <div class="products-content__header--search">
           <input type="text" placeholder="Search Products…" (input)="onSearch()" [(ngModel)]="productSearchName">
-          <button class="plus-btn" create-new-entity="product">+</button>
+          <button class="plus-btn" create-new-entity="product" (click)="addProduct()">+</button>
         </div>
       </div>
       <div class="products-content__list">
@@ -84,3 +84,4 @@
  
 
 </div>
+<app-inventory-add-aside></app-inventory-add-aside>

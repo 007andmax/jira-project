@@ -26,4 +26,11 @@ export class GlNumberService {
   public getGlNumbers() {
     return this.http.get(`${this.apiUrl}glNumber`).pipe( map((data:any) =>  data.map(item => new GlNumber(item))));
   }
+
+    /**
+   * Get products categories
+   */
+  public addGlNumber(glNumber,description) {
+    return this.http.post(`${this.apiUrl}glNumber`,{glNumber:glNumber,description:description});
+  }
 }

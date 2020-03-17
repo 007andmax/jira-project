@@ -114,6 +114,9 @@ import { ReportSendEmailComponent } from './components/reports/report-additional
 import { CompanyUserComponent } from './components/company-user/company-user.component';
 import { InventoryComponent } from './components/inventory/inventory.component';
 import { InventoryTableComponent } from './components/inventory/inventory-table/inventory-table.component';
+import { InventoryAddAsideComponent } from './components/inventory/inventory-add-aside/inventory-add-aside.component';
+import { TaxesComponent } from './components/shared/taxes/taxes.component';
+ 
 
 
 /**
@@ -272,7 +275,9 @@ angular.module('quicktech')
     ReportSendEmailComponent,
     CompanyUserComponent,
     InventoryComponent,
-    InventoryTableComponent
+    InventoryTableComponent,
+    InventoryAddAsideComponent,
+    TaxesComponent
   ],
   imports: [
     BrowserModule,
@@ -362,7 +367,7 @@ angular.module('quicktech')
     CronEditorModule,
     ImageCropperModule,
     NgxEditorModule,
-    FontAwesomeModule
+    FontAwesomeModule,
 
   ],
   entryComponents: [

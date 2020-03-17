@@ -12,7 +12,7 @@ import { WebsocketService } from '../../services/websocket/websocket.service';
   providedIn: 'root'
 })
 export class CompaniesStateService {
-  allCompanies = [];
+  allCompanies:Array<Company> = [];
   industries = [];
   onGetCompanies: EventEmitter<any> = new EventEmitter();
   onChangeCompanies: EventEmitter<CompanyUpdate> = new EventEmitter();
@@ -24,6 +24,7 @@ export class CompaniesStateService {
   onCalculateCount: EventEmitter<CompanyCalculateCount> = new EventEmitter();
   calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
   currentCompany:any = null;
+  
   constructor(private companiesService: CompaniesService, 
     private companiesRealTimeService: CompaniesRealTimeService,
     private websocketService: WebsocketService,) {
@@ -33,7 +34,7 @@ export class CompaniesStateService {
       this.currentCompany= data;
       this.websocketService.subsribeToGlNumber(this.currentCompany.id);
     })
-    this.companiesService.getCompaniesList().subscribe((data) => {
+    this.companiesService.getCompaniesList().subscribe((data:any) => {
       this.setAllCompanies(data);
       this.onInitGetCompanies(data);
     })

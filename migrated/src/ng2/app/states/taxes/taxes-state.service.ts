@@ -11,6 +11,8 @@ export class TaxesStateService {
   taxes: Array<Tax> = [];
   onGetTaxes: EventEmitter<any> = new EventEmitter();
   onChangeTaxes: EventEmitter<TaxesChange> = new EventEmitter();
+  clearState = new EventEmitter<any>();
+  taxesFromEdit: EventEmitter<any> = new EventEmitter();
   constructor(private taxesService: TaxesService, private taxesRealTimeService:TaxesRealTimeService) { }
 
   public onInit() {
@@ -41,4 +43,33 @@ export class TaxesStateService {
   public setTaxes(data) {
     this.taxes = data;
   }
+
+    /**
+  * Initializes to subscribe for clear data
+  */
+ public onInitClear() {
+  this.clearState.emit(null);
+}
+
+/**
+* Get subscribe for clear data
+*/
+public getClearState () {
+  return this.clearState;
+}
+
+/**
+* Initializes to subscribe for edit mode
+*/
+public setTaxesFromtEdit(data) {
+  this.taxesFromEdit.emit(data);
+
+}
+
+/**
+* Get  subscribe for edit mode
+*/
+public getTaxesFromEdit () {
+  return this.taxesFromEdit;
+}
 }

@@ -10,6 +10,7 @@ import { DevicesSateService } from './states/devices/devices-sate.service';
 import { CompaniesStateService } from './states/company/companies-state.service';
 import { AppService } from './states/app/app.service';
 import { TaxesStateService } from './states/taxes/taxes-state.service';
+import { GlNumberStateService } from './states/gl-number/gl-number-state.service';
 
 
 /**
@@ -36,7 +37,8 @@ export class AppComponent implements OnInit {
     private devicesState: DevicesSateService,
     private companiesState: CompaniesStateService,
     private appService: AppService,
-    private taxesStateService:TaxesStateService
+    private taxesStateService:TaxesStateService,
+    private glNumberStateService:GlNumberStateService
 
   ) { }
 
@@ -50,6 +52,7 @@ export class AppComponent implements OnInit {
     this.usersStateService.onInit();
     this.companiesState.onInit();
     this.taxesStateService.onInit();
+    this.glNumberStateService.onInit();
     //  this.userService.getCurrentUser();
     this.websocketService.initializeWebSocketConnection();
     this.appService.onCheckMobile();

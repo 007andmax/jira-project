@@ -92,6 +92,7 @@ export class UsersAsideComponent implements OnInit {
     this.validate.checkValidPhoneNumber(i, this.user.phoneNumbers[i].number);
      
   }
+  
   onSelectDesignation(data) {
      
     this.user.setDesignation(data);
