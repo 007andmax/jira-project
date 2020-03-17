@@ -112,6 +112,7 @@ import { SelectComponent } from './components/shared/select/select.component';
 import { ReportAdditionalActionsComponent } from './components/reports/report-additional-actions/report-additional-actions.component';
 import { ReportSendEmailComponent } from './components/reports/report-additional-actions/report-send-email/report-send-email.component';
 import { CompanyUserComponent } from './components/company-user/company-user.component';
+import { TicketsComponent } from './components/tickets/tickets/tickets.component';
 
 
 /**
@@ -171,6 +172,9 @@ angular.module('quicktech')
   .directive(
     'itemReportComponent',
     downgradeComponent({ component: ItemReportComponent }))
+  .directive(
+    'ticketsComponent',
+    downgradeComponent({ component: TicketsComponent }))
   .factory('ngZone', downgradeInjectable(NgZone));
 
 /**
@@ -265,7 +269,8 @@ angular.module('quicktech')
     SelectComponent,
     ReportAdditionalActionsComponent,
     ReportSendEmailComponent,
-    CompanyUserComponent
+    CompanyUserComponent,
+    TicketsComponent
   ],
   imports: [
     BrowserModule,
@@ -330,7 +335,12 @@ angular.module('quicktech')
       {
         path: 'ng2/companies',
         component: CompaniesComponent,
-      }, {
+      }, 
+      {
+        path: 'ng2/tickets',
+        component: TicketsComponent,
+      }, 
+      {
         path: 'ng2/users',
         component: UsersComponent,
         pathMatch: 'full'
@@ -371,7 +381,8 @@ angular.module('quicktech')
     ReportsComponent,
     ItemReportComponent,
     OverviewReportComponent,
-    ReportSendEmailComponent
+    ReportSendEmailComponent,
+    TicketsComponent
     // RecurringTicketsComponent
   ],
   providers: [
