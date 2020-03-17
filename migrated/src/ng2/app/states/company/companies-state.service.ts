@@ -12,7 +12,7 @@ import { WebsocketService } from '../../services/websocket/websocket.service';
   providedIn: 'root'
 })
 export class CompaniesStateService {
-  allCompanies:Array<Company> = [];
+  allCompanies = [];
   industries = [];
   onGetCompanies: EventEmitter<any> = new EventEmitter();
   onChangeCompanies: EventEmitter<CompanyUpdate> = new EventEmitter();

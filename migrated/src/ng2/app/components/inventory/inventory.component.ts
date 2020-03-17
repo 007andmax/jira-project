@@ -12,6 +12,7 @@ import { GlNumber } from 'src/ng2/class/gl-number/gl-number';
 import { GlNumberStateService } from '../../states/gl-number/gl-number-state.service';
 import { Tax } from 'src/ng2/class/taxes/tax';
 import { InventoryStateService } from '../../states/inventory/inventory-state.service';
+import { PermissionsService } from '../../services/permissions/permissions.service';
 
 @Component({
   selector: 'app-inventory',
@@ -37,6 +38,7 @@ export class InventoryComponent implements OnInit {
     private taxesStateService: TaxesStateService,
     private glNumberStateService: GlNumberStateService,
     private inventoryStateService:InventoryStateService,
+    private permissionsService: PermissionsService,
     public cd: ChangeDetectorRef, ) { }
 
   ngOnInit() {
@@ -60,6 +62,13 @@ export class InventoryComponent implements OnInit {
 
     this.getListProducts();
   }
+   /**
+   * getPermission
+   */
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
+  }
+
   public getListProducts() {
     this.productService.getProducts().subscribe((res: Array<InventoryItem>) => {
       this.reqInventoryList = res;

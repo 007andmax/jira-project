@@ -88,18 +88,18 @@ export class InventoryAddAsideComponent implements OnInit {
   }
   public onChangeDescription(event) {
     this.inventory.description = event.target.value;
-   
+
   }
   public onPastDescription(value) {
-  
+
     this.inventory.description = value;
   }
   onTaxesChange(data) {
-    console.log("data",data);
+    console.log("data", data);
     this.inventory.taxIds = data.map(item => {
       return item.id;
     });
-    console.log("this.inventory",this.inventory);
+    console.log("this.inventory", this.inventory);
   }
   public onShowAside() {
     let getShowAsideForAdd = this.inventoryStateService.getShowAsideForAdd().subscribe(() => {
@@ -109,5 +109,7 @@ export class InventoryAddAsideComponent implements OnInit {
     })
     this.sub.add(getShowAsideForAdd);
   }
+  close() {
 
+  }
 }

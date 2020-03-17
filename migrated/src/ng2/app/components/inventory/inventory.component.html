@@ -10,7 +10,7 @@
         </div>-->
         <div class="products-content__header--search">
           <input type="text" placeholder="Search Products…" (input)="onSearch()" [(ngModel)]="productSearchName">
-          <button class="plus-btn" create-new-entity="product" (click)="addProduct()">+</button>
+          <button class="plus-btn" *ngIf="getPermissions('MANAGE_PRODUCTS')" (click)="addProduct()">+</button>
         </div>
       </div>
       <div class="products-content__list">
@@ -23,7 +23,7 @@
           </div>
           <div class="col-md-1 pointer"
                (click)="onFilter('cost')"
-               ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">Cost
+               *ngIf="getPermissions('VIEW_PRODUCT_COST')">Cost
           </div>
           <div class="col-md-1 pointer"
                (click)="onFilter('sale')">Sale Price
