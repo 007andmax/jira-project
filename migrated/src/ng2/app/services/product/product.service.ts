@@ -32,6 +32,20 @@ export class ProductService {
     return this.http.get(`${this.apiUrl}products/autocompleteList`).pipe(map((data: any) => data.map(item => new CategoryProductitem(item))));
   }
 
+   /**
+   * validate product name
+   */
+  public validateProductManufacture(manufacture,id) {
+    return this.http.get(`${this.apiUrl}products/isMfgUnique?manufacture=${manufacture}&id=${id}`);
+  }
+
+  /**
+   * validate product name
+   */
+  public validateProductILC(ilc,id) {
+    return this.http.get(`${this.apiUrl}products/isILCUnique?ilc=${ilc}&id=${id}`);
+  }
+
   /**
   * Get  categories
   */
@@ -58,11 +72,18 @@ export class ProductService {
   }
 
   /**
-* Get products categories
+* add  category
 */
   public addCategory(name) {
     return this.http.post(`${this.apiUrl}products/categories`, { name: name });
   }
+
+  /**
+* add product
+*/
+public addProduct(data) {
+  return this.http.post(`${this.apiUrl}products`, data);
+}
 
 
 }

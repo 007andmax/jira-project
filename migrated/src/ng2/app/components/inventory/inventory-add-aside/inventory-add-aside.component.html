@@ -8,13 +8,22 @@
       <div class="new-companies-content__modal--content advanced">
 
         <div class="col-md-4">
+          <mat-error *ngIf="!validate.getManufactureIsExist()">
+            This number already occupied
+          </mat-error>
+          <mat-error *ngIf="!validate.getManufacture()">
+            Item number is required
+          </mat-error>
           <p>Item number</p>
-          <input type="text" [(ngModel)]="inventory.manufacture" placeholder="Enter Suite Number">
+          <input type="text" [(ngModel)]="inventory.manufacture" (blur)="onCheckManufacture()" placeholder="Enter Suite Number">
         </div>
 
         <div class="col-md-4">
+          <mat-error *ngIf="!validate.getILCIsExist()">
+            This number already occupied
+          </mat-error>
           <p>ILC number</p>
-          <input type="text" [(ngModel)]="inventory.ilc" placeholder="Enter Suite Number">
+          <input type="text" [(ngModel)]="inventory.ilc"  (blur)="onCheckILC()" placeholder="Enter Suite Number">
         </div>
 
         <div class="col-md-4">
@@ -27,6 +36,9 @@
         </div>
 
         <div class="col-md-12">
+          <mat-error *ngIf="!validate.getDescription()">
+            Description is required
+          </mat-error>
           <p>Description</p>
           <div class="editable-description">
             <textarea appTextArea [limit]="160" id="inventory-description" placeholder="Write Description"
@@ -43,11 +55,17 @@
         </div>
 
         <div class="col-md-3">
+          <mat-error *ngIf="!validate.getSale()">
+            Price is required
+          </mat-error>
           <p>Price</p>
-          <input type="number"  [(ngModel)]="inventory.sale"  placeholder="Enter Suite Number">
+          <input type="number"  [(ngModel)]="inventory.sale" (input)="validate.resetSale()"  placeholder="Enter Suite Number">
         </div>
 
         <div class="col-md-6">
+          <mat-error *ngIf="!validate.getCategory()">
+            Category is required
+          </mat-error>
           <p>Category</p>
           <app-select-search [class]="['light-dropdown']" [list]="categories"
           [field]="'name'"
@@ -68,7 +86,7 @@
 
         <div class="col-md-12 new-companies-content__modal--content-footer">
           <div class="d-f">
-            <button class="btn-new btn-primary"  >Create Product</button>
+            <button class="btn-new btn-primary" (click)="add()" >Create Product</button>
             <button class="btn-new disabled" (click)="close()">Cancel</button>
           </div>
 

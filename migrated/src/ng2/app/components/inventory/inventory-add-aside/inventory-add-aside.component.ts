@@ -11,6 +11,7 @@ import { CompaniesStateService } from 'src/ng2/app/states/company/companies-stat
 import { Company } from 'src/ng2/app/interfaces/company/company';
 import { CategoryProduct } from 'src/ng2/app/interfaces/product/category-product';
 import { ProductService } from 'src/ng2/app/services/product/product.service';
+import { InventoryValidate } from '../class/inventory-validate';
 
 @Component({
   selector: 'app-inventory-add-aside',
@@ -27,6 +28,7 @@ export class InventoryAddAsideComponent implements OnInit {
   vendors: Array<Company> = [];
   companies: Array<Company> = [];
   categories: Array<CategoryProduct> = [];
+  validate: InventoryValidate = new InventoryValidate();
   constructor(private inventoryStateService: InventoryStateService,
     private taxesStateService: TaxesStateService,
     private glNumberStateService: GlNumberStateService,
@@ -60,17 +62,35 @@ export class InventoryAddAsideComponent implements OnInit {
     })
 
   }
+  onCheckILC() {
+    this.productService.validateProductILC(this.inventory.ilc, '').subscribe((data: any) => {
+      this.validate.resetILCIsExist();
+
+      if (!data.value) this.validate.setILCIsExist();
+    })
+  }
+  onCheckManufacture() {
+    this.productService.validateProductManufacture(this.inventory.manufacture, '').subscribe((data: any) => {
+      this.validate.resetManufacture();
+      this.validate.resetManufactureIsExist();
+      if (!data.value) this.validate.setManufactureIsExist();
+    })
+  }
   private onInitVendors(data) {
     this.vendors = data.filter(item => !item.deletedAt && !item.isDefault && item.clientType && item.clientType.toLowerCase() === 'vendor');
   }
   onAddCategory(data) {
     this.productService.addCategory(data).subscribe((data: any) => {
-
+      this.inventory.category = data;
+      this.validate.resetCategory();
     })
   }
   onSelectCategory(data) {
-    if (data) this.inventory.category = data;
-    if (data) this.inventory.category = null;
+    if (data) {
+      this.inventory.category = data;
+      this.validate.resetCategory();
+    }
+    if (!data) this.inventory.category = null;
   }
   onAddGlNumber(data) {
     this.glNumberService.addGlNumber(data, "").subscribe(res => {
@@ -82,16 +102,17 @@ export class InventoryAddAsideComponent implements OnInit {
     if (data) this.inventory.companyId = null;
   }
   onSelectGlNumbers(data) {
-    if (data) this.inventory.glNumber.id = data.id;
+    if (data) this.inventory.glNumber = data;
     if (!data) this.inventory.glNumber = null;
 
   }
   public onChangeDescription(event) {
+    this.validate.resetDescription();
     this.inventory.description = event.target.value;
 
   }
   public onPastDescription(value) {
-
+    this.validate.resetDescription();
     this.inventory.description = value;
   }
   onTaxesChange(data) {
@@ -111,5 +132,12 @@ export class InventoryAddAsideComponent implements OnInit {
   }
   close() {
 
+  }
+  add() {
+    if (!this.validate.isValidate(this.inventory)) return;
+    console.log("this.inventory", this.inventory);
+    this.productService.addProduct(this.inventory.getForAdd()).subscribe(data => {
+      console.log("data", data);
+    })
   }
 }
