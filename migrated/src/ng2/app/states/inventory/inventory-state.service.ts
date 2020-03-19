@@ -19,7 +19,6 @@ export class InventoryStateService {
     return this.onEditInventory;
   }
   public setEditInventory(data) {
-
     this.onEditInventory.emit(data);
   }
 }

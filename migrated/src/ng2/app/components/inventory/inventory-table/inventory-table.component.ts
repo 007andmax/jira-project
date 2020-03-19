@@ -18,7 +18,7 @@ export class InventoryTableComponent implements OnInit {
   @Input() taxes;
 
   constructor(private permissionsService: PermissionsService, private inventoryStateService: InventoryStateService,
-    private productService: ProductService ) { }
+    private productService: ProductService) { }
 
   ngOnInit() {
   }
@@ -27,7 +27,7 @@ export class InventoryTableComponent implements OnInit {
   }
   delete() {
     this.productService.removeProduct(this.inventory.versionedId.id).subscribe(data => {
-      console.log("data",data);
+      console.log("data", data);
     })
   }
   public getGlNumberName() {

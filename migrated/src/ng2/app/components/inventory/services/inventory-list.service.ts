@@ -3,12 +3,12 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class InventoryListService {
 
-  blockList:boolean = false;
+  blockList: boolean = false;
   constructor() { }
-  public setBlockList (data) {
+  public setBlockList(data) {
     this.blockList = data;
   }
-  public getBlockList () {
+  public getBlockList() {
     return this.blockList;
   }
 }
