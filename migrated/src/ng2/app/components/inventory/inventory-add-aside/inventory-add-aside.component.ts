@@ -12,6 +12,7 @@ import { Company } from 'src/ng2/app/interfaces/company/company';
 import { CategoryProduct } from 'src/ng2/app/interfaces/product/category-product';
 import { ProductService } from 'src/ng2/app/services/product/product.service';
 import { InventoryValidate } from '../class/inventory-validate';
+import { SelectSearchComponent } from '../../shared/select-search/select-search.component';
 
 @Component({
   selector: 'app-inventory-add-aside',
@@ -20,6 +21,9 @@ import { InventoryValidate } from '../class/inventory-validate';
 })
 export class InventoryAddAsideComponent implements OnInit {
   @ViewChild('addTax') containerAddTax;
+  @ViewChild('glNumberSelect') glNumberSelect: SelectSearchComponent;
+  @ViewChild('categoriesSelect') categoriesSelect: SelectSearchComponent;
+  @ViewChild('vendorsSelect') vendorsSelect: SelectSearchComponent;
   opened: boolean = false;
   inventory: InventoryItem = new InventoryItem();
   glNumbers: Array<GlNumber> = [];
@@ -29,6 +33,7 @@ export class InventoryAddAsideComponent implements OnInit {
   companies: Array<Company> = [];
   categories: Array<CategoryProduct> = [];
   validate: InventoryValidate = new InventoryValidate();
+
   constructor(private inventoryStateService: InventoryStateService,
     private taxesStateService: TaxesStateService,
     private glNumberStateService: GlNumberStateService,
@@ -99,7 +104,7 @@ export class InventoryAddAsideComponent implements OnInit {
   }
   onSelectVendor(data) {
     if (data) this.inventory.companyId = data.id;
-    if (data) this.inventory.companyId = null;
+    if (!data) this.inventory.companyId = null;
   }
   onSelectGlNumbers(data) {
     if (data) this.inventory.glNumber = data;
@@ -131,13 +136,18 @@ export class InventoryAddAsideComponent implements OnInit {
     this.sub.add(getShowAsideForAdd);
   }
   close() {
-
+    this.opened = false;
+    this.glNumberSelect.clearClient();
+    this.categoriesSelect.clearClient();
+    this.vendorsSelect.clearClient();
+    this.taxesStateService.onInitClear();
   }
   add() {
     if (!this.validate.isValidate(this.inventory)) return;
     console.log("this.inventory", this.inventory);
     this.productService.addProduct(this.inventory.getForAdd()).subscribe(data => {
       console.log("data", data);
+      this.close();
     })
   }
 }

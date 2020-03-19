@@ -74,6 +74,7 @@ export class InventoryComponent implements OnInit {
       this.reqInventoryList = res;
       this.onScroll();
       this.showPreloader = false;
+      this.cd.detectChanges();
     });
   }
   addProduct() {

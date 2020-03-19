@@ -1,7 +1,8 @@
 import { Product } from 'src/ng2/app/interfaces/product/product';
 import { GlNumber } from 'src/ng2/class/gl-number/gl-number';
 import { InventoryCategory } from './inventory-category';
-import { reqInventory } from 'src/ng2/app/interfaces/inventory/req-inventory';
+import { reqInventoryAdd } from 'src/ng2/app/interfaces/inventory/req-inventory-add';
+import { reqInventoryEdit } from 'src/ng2/app/interfaces/inventory/req-inventory-edit';
 
 export class InventoryItem {
     versionedId: import("../../../interfaces/versioned-id").VersionedId;
@@ -32,18 +33,34 @@ export class InventoryItem {
         }
 
     }
-
+   
 
     public getForAdd() {
-        let item: reqInventory = {
+        let item: reqInventoryAdd = {
             cost: this.cost,
             sale: this.sale,
+            ilc: this.ilc,
             manufacture: this.manufacture,
             description: this.description,
             companyId: this.companyId,
             taxIds: this.taxIds,
             categoryId: (this.category) ? this.category.id : null,
-            glNumber: (this.glNumber) ? { id: this.glNumber.id } : null,
+            glNumber:  (this.glNumber && this.glNumber.id) ? { id: this.glNumber.id } : null,
+        }
+        return item;
+    }
+    public getForEdit() {
+        let item: reqInventoryEdit = {
+            versionedId: this.versionedId,
+            cost: this.cost,
+            sale: this.sale,
+            ilc: this.ilc,
+            manufacture: this.manufacture,
+            description: this.description,
+            companyId: this.companyId,
+            taxIds: this.taxIds,
+            categoryId: (this.category) ? this.category.id : null,
+            glNumber: (this.glNumber && this.glNumber.id) ? { id: this.glNumber.id } : null,
         }
         return item;
     }

@@ -46,6 +46,14 @@ export class ProductService {
     return this.http.get(`${this.apiUrl}products/isILCUnique?ilc=${ilc}&id=${id}`);
   }
 
+
+   /**
+   * remove product 
+   */
+  public removeProduct(id) {
+    return this.http.delete(`${this.apiUrl}products/${id}`);
+  }
+
   /**
   * Get  categories
   */

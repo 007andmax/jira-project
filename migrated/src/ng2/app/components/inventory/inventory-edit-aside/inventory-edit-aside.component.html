@@ -1,0 +1,103 @@
+<ng-sidebar-container>
+  <ng-sidebar [(opened)]="opened" [position]="'right'">
+    <div class="new-companies-content__modal clearfix">
+      <div class="new-companies-content__modal--header">
+        <h3>Add New Product</h3>
+        <button class="close-modal" (click)="close()"></button>
+      </div>
+      <div class="new-companies-content__modal--content advanced">
+
+        <div class="col-md-4">
+          <mat-error *ngIf="!validate.getManufactureIsExist()">
+            This number already occupied
+          </mat-error>
+          <mat-error *ngIf="!validate.getManufacture()">
+            Item number is required
+          </mat-error>
+          <p>Item number</p>
+          <input type="text" [(ngModel)]="inventory.manufacture" (blur)="onCheckManufacture()" placeholder="Enter Suite Number">
+        </div>
+
+        <div class="col-md-4">
+          <mat-error *ngIf="!validate.getILCIsExist()">
+            This number already occupied
+          </mat-error>
+          <p>ILC number</p>
+          <input type="text" [(ngModel)]="inventory.ilc"  (blur)="onCheckILC()" placeholder="Enter Suite Number">
+        </div>
+
+        <div class="col-md-4">
+          <p>GL</p>
+          <app-select-search [class]="['light-dropdown']" [list]="glNumbers" #glNumberSelect
+          [add]="true" [field]="'glNumber'"
+          [editItem]="inventory.glNumber"
+          (onAddItem)="onAddGlNumber($event)"
+          (onSelectedItem)="onSelectGlNumbers($event)"></app-select-search>
+        
+        </div>
+
+        <div class="col-md-12">
+          <mat-error *ngIf="!validate.getDescription()">
+            Description is required
+          </mat-error>
+          <p>Description</p>
+          <div class="editable-description">
+            <textarea appTextArea [limit]="160" id="inventory-description" placeholder="Write Description"
+                      (input)="onChangeDescription($event)" (onPast)="onPastDescription($event)"></textarea>
+          </div>
+          
+        </div>
+
+     
+
+        <div class="col-md-3">
+          <p>Cost</p>
+          <input type="number"  [(ngModel)]="inventory.cost"  placeholder="Enter Suite Number">
+        </div>
+
+        <div class="col-md-3">
+          <mat-error *ngIf="!validate.getSale()">
+            Price is required
+          </mat-error>
+          <p>Price</p>
+          <input type="number"  [(ngModel)]="inventory.sale" (input)="validate.resetSale()"  placeholder="Enter Suite Number">
+        </div>
+
+        <div class="col-md-6">
+          <mat-error *ngIf="!validate.getCategory()">
+            Category is required
+          </mat-error>
+          <p>Category</p>
+          <app-select-search [class]="['light-dropdown']" [list]="categories" #categoriesSelect
+          [field]="'name'"
+          [add]="true"
+          [editItem]="inventory.category"
+          (onAddItem)="onAddCategory($event)"
+          (onSelectedItem)="onSelectCategory($event)"></app-select-search>
+        </div>
+
+
+        <div class="col-md-6">
+          <p>Vendors</p>
+          <app-select-search [class]="['light-dropdown']" [list]="vendors" #vendorsSelect
+          [field]="'name'"
+          [editItem]="editVendor"
+          (onSelectedItem)="onSelectVendor($event)"></app-select-search>
+        </div>
+
+        <app-taxes (taxesChange)="onTaxesChange($event)"></app-taxes>
+
+        <div class="col-md-12 new-companies-content__modal--content-footer">
+          <div class="d-f">
+            <button class="btn-new btn-primary" (click)="save()" >Save Product</button>
+            <button class="btn-new disabled" (click)="close()">Cancel</button>
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </div>
+  </ng-sidebar>
+</ng-sidebar-container>

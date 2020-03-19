@@ -3,6 +3,8 @@ import { Product } from 'src/ng2/app/interfaces/product/product';
 import { InventoryItem } from '../class/inventory-item';
 import { ItemFilterPerson } from '../../left-panel/left-panel-companies/class/item-filter-person';
 import { PermissionsService } from 'src/ng2/app/services/permissions/permissions.service';
+import { InventoryStateService } from 'src/ng2/app/states/inventory/inventory-state.service';
+import { ProductService } from 'src/ng2/app/services/product/product.service';
 
 @Component({
   selector: 'app-inventory-table',
@@ -15,11 +17,19 @@ export class InventoryTableComponent implements OnInit {
   @Input() glNumbers;
   @Input() taxes;
 
-  constructor(private permissionsService: PermissionsService,) { }
+  constructor(private permissionsService: PermissionsService, private inventoryStateService: InventoryStateService,
+    private productService: ProductService ) { }
 
   ngOnInit() {
   }
-
+  edit() {
+    this.inventoryStateService.setEditInventory(this.inventory);
+  }
+  delete() {
+    this.productService.removeProduct(this.inventory.versionedId.id).subscribe(data => {
+      console.log("data",data);
+    })
+  }
   public getGlNumberName() {
     let glNumber = this.inventory.glNumber;
     if (!glNumber) return '';

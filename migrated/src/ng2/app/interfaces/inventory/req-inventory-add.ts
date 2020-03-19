@@ -1,4 +1,5 @@
-export interface reqInventory {
+export interface reqInventoryAdd {
+    ilc:string;
     cost: number;
     sale: number;
     manufacture: string;

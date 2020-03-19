@@ -28,7 +28,7 @@
 
         <div class="col-md-4">
           <p>GL</p>
-          <app-select-search [class]="['light-dropdown']" [list]="glNumbers"
+          <app-select-search [class]="['light-dropdown']" [list]="glNumbers" #glNumberSelect
           [add]="true" [field]="'glNumber'"
           (onAddItem)="onAddGlNumber($event)"
           (onSelectedItem)="onSelectGlNumbers($event)"></app-select-search>
@@ -68,6 +68,7 @@
           </mat-error>
           <p>Category</p>
           <app-select-search [class]="['light-dropdown']" [list]="categories"
+          #categoriesSelect
           [field]="'name'"
           [add]="true"
           (onAddItem)="onAddCategory($event)"
@@ -79,6 +80,7 @@
           <p>Vendors</p>
           <app-select-search [class]="['light-dropdown']" [list]="vendors"
           [field]="'name'"
+          #vendorsSelect
           (onSelectedItem)="onSelectVendor($event)"></app-select-search>
         </div>
 
