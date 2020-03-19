@@ -10,14 +10,11 @@
         link: function (scope, element, attrs, modelCtrl) {
 
           var secretEmptyKey = '[$empty$]';
-
-          element.on('focus', function () {
+          element.on('click', function () {
             $timeout(function () {
-              if (!scope.$eval(attrs.ngModel)) {
-                modelCtrl.$setViewValue(modelCtrl.$viewValue + ' ');
-              }
+              modelCtrl.$setViewValue(modelCtrl.$viewValue + ' ');
               $(element).trigger('input');
-              $(element).trigger('change'); // for IE
+              $(element).trigger('change'); // for IE*/
             });
           });
 

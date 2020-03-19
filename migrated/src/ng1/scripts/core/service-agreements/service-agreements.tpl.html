@@ -64,7 +64,13 @@
             </a>
             <ul class="dropdown-menu agreement-list-dropdown" role="menu" style="overflow: visible; font-size: 14.1px;">
               <li>
+                <a tabindex="-1" href="javascript:void(0)" ng-click=" onCopyRightPanel(agreement.id)" ng-show="agreement.status != 'TERMINATED' && agreement.status != 'EXPIRED'">Copy</a>
+              </li>
+              <li>
                 <a tabindex="-1" href="javascript:void(0)" ng-click="deleteAgreement(agreement)" ng-show="canDeleteAgreements && agreement.status !== 'CURRENT'">Delete agreement</a>
+              </li>
+              <li>
+                <a tabindex="-1" href="javascript:void(0)" ng-click="setInitEditAgreement(true); openAgreementsModal(agreement.type, true, agreement.id)" ng-show="agreement.status != 'TERMINATED' && agreement.status != 'EXPIRED'">Edit</a>
               </li>
               <li>
                 <a tabindex="-1" href="javascript:void(0)" ng-click="forceCreate(agreement)" ng-hide="agreement.status == 'TERMINATED' || agreement.status == 'EXPIRED' || agreement.type == 'HOURLY'" >Force create</a>
@@ -72,9 +78,8 @@
               <li>
                 <a tabindex="-1" href="javascript:void(0)" ng-click="terminateContract(agreement.id)" ng-show="agreement.status !== 'TERMINATED'">Terminate</a>
               </li>
-              <li>
-                <a tabindex="-1" href="javascript:void(0)" ng-click="setInitEditAgreement(true); openAgreementsModal(agreement.type, true, agreement.id)" ng-show="agreement.status != 'TERMINATED' && agreement.status != 'EXPIRED'">Edit</a>
-              </li>
+             
+             
             </ul>
           </div>
 

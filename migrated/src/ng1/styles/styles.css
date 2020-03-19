@@ -5698,6 +5698,17 @@ tbody.collapse.in {
   -webkit-box-shadow: 0 4px 20px 0 rgba(10, 45, 89, 0.1);
   box-shadow: 0 4px 20px 0 rgba(10, 45, 89, 0.1);
   background-clip: padding-box;
+  /*max-height: 190px;*/
+}
+
+.qt-default-services .dropdown-menu {
+  left: 0;
+  margin-top: 0;
+  top: calc(100% + 1px);
+}
+
+.dropdown-account-type.dropdown-menu {
+  max-height: 190px;
 }
 
 .dropdown-menu.dropdown-menu-services.dropdown-menu-services-create {
@@ -13017,7 +13028,7 @@ button.close {
 .billing-type-content .col-xs-12:hover,
 .billing-type-content .col-xs-12.active {
   background-color: #ffffff;
-  border: 1px solid #2c9fdd;
+  border-color:    #2c9fdd;
 }
 
 .billing-type-content .col-xs-12:hover h5:before,
@@ -13796,4 +13807,28 @@ button.close {
 
 .ngb-dp-week .hidden {
   display: block !important;
+}
+
+
+.block-contract-disable {
+  background-color: rgb(235, 235, 228) !important;
+  cursor: default !important;
+}
+
+.block-contract-disable:hover {
+
+  border-color: transparent !important;
+}
+.block-contract-disable h5:before {
+  border: none !important;
+}
+
+.hourly-service-modal__buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.hourly-service-modal__buttons .btn-create {
+  margin-bottom: 10px;
 }

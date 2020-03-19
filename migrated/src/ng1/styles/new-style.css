@@ -43,9 +43,9 @@
     border: none; }
   .btn:focus, .btn:hover, .btn:active, .btn.active {
     color: #fff;
-    text-decoration: none;
-    outline-color: transparent;
-    outline-style: none; }
+    text-decoration: none !important;
+    outline-color: transparent !important;
+    outline-style: none !important; }
   .btn[disabled], .btn.disabled {
     box-shadow: none;
     background-color: transparent;

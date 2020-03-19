@@ -61,15 +61,18 @@ export class QuoteCreateContentNotesComponent implements OnInit {
    */
   getNotes() {
     this.quoteService.getQuoteNote().subscribe((res:any) => {
-      this.noteRegularList = res.filter((item) => item['noteType'] === 'REGULAR');
-      this.noteGlobal = res.find((item) => item['noteType'] === 'GLOBAL');
-    
-      this.noteGlobalId = this.noteGlobal.id;
-      if (this.editMode) {
-        this.noteGlobal = this.quoteStateService.getGlobalNote();
+      if (res.length > 0) {
+        this.noteRegularList = res.filter((item) => item['noteType'] === 'REGULAR');
+        this.noteGlobal = res.find((item) => item['noteType'] === 'GLOBAL');
+      
+        this.noteGlobalId = this.noteGlobal.id;
+        if (this.editMode) {
+          this.noteGlobal = this.quoteStateService.getGlobalNote();
+        }
+        if (this.noteGlobal) this.noteGlovalLine = this.noteGlobal.line1;
+        this.setGlobalNote(this.noteGlobal);
       }
-      if (this.noteGlobal) this.noteGlovalLine = this.noteGlobal.line1;
-      this.setGlobalNote(this.noteGlobal);
+     
     })
   }
 
@@ -211,8 +214,7 @@ export class QuoteCreateContentNotesComponent implements OnInit {
       this.selectedNoteNew = this.quoteStateService.getSelectedNote();
       this.selectedNote = this.quoteStateService.getSelectedNote();
      if (this.selectedNote) this.isEditMode = true;
-      console.log('this.selectedNoteNew',this.selectedNoteNew);
-      console.log('this.selectedNote',this.selectedNote);
+       
     }
   }
 

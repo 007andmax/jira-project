@@ -2856,7 +2856,7 @@ Devices tab
 .product-actions {
   position: absolute;
   top: 0;
-  right: 0;
+  right: 25px;
   
   display: none;
 }

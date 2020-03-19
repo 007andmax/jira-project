@@ -1618,8 +1618,18 @@ ngb-typeahead-window {
     align-items: center;
     width: 100%;
     height: 100%;
+
+    &:hover {
+      background: #c7c7c7;
+      color: whitesmoke;
+    }
+    &.range {
+      background: #3ba5fa;
+      color: white;
+    }
     &.faded {
       background: #efefef;
+      color: #0f0f0f;
     }
   }
 }
@@ -2095,6 +2105,51 @@ ngb-datepicker {
     }
   }
 }
+
+.quicktech__table {
+  width: 100%;
+  font-size: 12px;
+  font-family: 'Graphik Medium', sans-serif;
+
+  thead {
+    text-transform: uppercase;
+    th {
+      font-weight: 700;
+    }
+  }
+
+  th, td {
+    padding: 15px 8px;
+    border-bottom: 1px solid #d3d8e1;
+    &:first-child {
+      padding-left: 15px;
+    }
+    &:last-child {
+      padding-right: 15px;
+    }
+  }
+
+  &--list {
+    font-size: 14px;
+    font-family: 'Graphik Regular', sans-serif;
+    thead {
+      text-transform: none;
+      th {
+        font-weight: 500;
+        background: #f3f7f9;
+        padding: 20px 8px;
+      }
+    }
+    th, td {
+      border-bottom: 1px solid #eee;
+    }
+  }
+}
+
+.quicktech__table tbody td {
+  font-weight: 500;
+}
+
 @import './assets/styles/mobile.scss';
 
 @import './assets/styles/dropdowns.scss';

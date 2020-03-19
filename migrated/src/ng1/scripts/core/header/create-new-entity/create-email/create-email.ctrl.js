@@ -237,7 +237,6 @@
         $scope.filteredUsersEmails = $scope.allUsersEmails.filter(function(el) {
           return el;
         });
-
         $scope.$watch('newEmail', function(val) {
           if (val === undefined) return;
           $scope.filteredUsersEmails = $scope.allUsersEmails.filter(function(el) {
@@ -253,7 +252,6 @@
           .filter(function(el) {
             return el;
           })
-
         $scope.$watch('newEmail', function(val) {
           if (val === undefined) return;
           $scope.filteredUsersEmails = $scope.$parent.$ctrl.tempUsers.concat($scope.users)

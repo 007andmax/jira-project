@@ -148,6 +148,51 @@
 
       </div>
     </div>
+
+    <div class="col-md-6 col-xs-12 dd-w" add-on-focus  >
+      
+      <div class="placeholder">Gl number</div>
+      <input style="padding-right: 50px;" type="text" class="has-dropdown form-validation"
+             ng-maxlength="100"
+             autocomplete="off"
+             ng-model="editService.glNumber"
+             next-after-text-editor
+             ng-trim="false"
+             qt-typeahead-async-show-on-focus smart-dropdown-menu-position
+                     no-overflow="true"
+             name="glNumber"
+             typeahead-editable="true"
+             ng-change="changeGlNumber()"
+             tabindex="4"
+             uib-typeahead="glNumber.glNumber for glNumber in glNumbersList"
+             custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
+             hard-reset-pattern="newCategoryNamePattern">
+
+      <div class="product-actions category-caret"
+           ng-style="(editService.glNumber) ? { 'display': 'block' } : ''">
+
+        <a href="javascript:void(0)" class="hit-area ha-18-14 has-tooltip"
+           tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Save"
+           ng-show="editService.glNumber && isChangeGlNumber"
+           ng-click="createGlNumber()">
+          <i class="icn-sm icn-product-save"></i>
+        </a>
+
+        <a href="javascript:void(0)" class="hit-area ha-14 has-tooltip"
+           tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Clear"
+           ng-show="editService.glNumber"
+           ng-click="editService.glNumber = null">
+          <i class="icn-sm icn-product-cancel"></i>
+        </a>
+
+
+      </div>
+
+      <span class="caret-mark ng-hide" style="right: 27px;" ng-hide="editService.glNumber">
+        <i class="icn-sm report-caret-icon"></i>
+      </span>
+    </div>
+   
     <div class="col-md-12">
       <label class="control checkbox" style="margin-bottom: 15px;">
         <input type="checkbox" ng-model="editService.billable">

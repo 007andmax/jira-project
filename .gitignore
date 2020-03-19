@@ -8,3 +8,5 @@ node_modules
 terminal.glue
 dist.*
 .DS_Store
+dist
+/dist

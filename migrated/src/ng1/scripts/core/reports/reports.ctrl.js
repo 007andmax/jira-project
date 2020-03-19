@@ -12,7 +12,7 @@
       });
 
       $scope.PermissionsService = PermissionsService;
-
+$scope.ticket_id = "1234567";
       $scope.reportByTaxes = {};
       $scope.reportByCustomers = {};
       $scope.reportByProducts = {};
@@ -107,7 +107,11 @@
           return el.type === "SERVICE";
         });
       };
+$scope.setReport = function (report) {
+localStorage.setItem('report',report);
+//$rootScope.$broadcast('hiddenLeftPanel', null);
 
+}
       $scope.getProducts = function(ticket) {
         return ticket.updates && ticket.updates.filter(function(el) {
           return el.type === "PRODUCT"
@@ -117,7 +121,7 @@
       $scope.buildPdf = buildPdf;
 
       $scope.durationFilter = function(quanity) {
-        var minutes = (quanity * 60) % 60;
+        var minutes = Math.round((quanity * 60) % 60);
         var hours = Math.floor(quanity);
         hours = String(hours).length < 2 ? '0' + hours : hours;
         minutes = String(minutes).length < 2 ? '0' + minutes : minutes;

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef,Component, OnInit, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, OnDestroy } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 import { QuoteService } from '../../../services/quote/quote.service';
@@ -7,11 +7,11 @@ import { QUOTE_STATUS } from '../../../const/quote-status';
 import { DateService } from "../../../services/date/date.service";
 import { QuoteStateService } from "./quote-create/quote-state.service";
 import { QuoteRealTimeService } from "./quote-realtime/quote-realtime.service";
-import {ModalQuoteComponent} from "../../../services/modal/modal-quote/modal-quote.component";
-import {NgbModal, NgbModalConfig} from "@ng-bootstrap/ng-bootstrap";
+import { ModalQuoteComponent } from "../../../services/modal/modal-quote/modal-quote.component";
+import { NgbModal, NgbModalConfig } from "@ng-bootstrap/ng-bootstrap";
 import { Subscription } from 'rxjs';
 import { QuoteResult } from './class/quote-result';
- 
+
 import { NotificationStateService } from '../../shared/notification/services/notification-state.service';
 
 /**
@@ -21,10 +21,10 @@ import { NotificationStateService } from '../../shared/notification/services/not
   selector: 'app-quotes',
   templateUrl: './quotes.component.html',
   styleUrls: ['./quotes.component.scss'],
-  providers: [Location, {provide: LocationStrategy, useClass: PathLocationStrategy},NgbModalConfig, NgbModal],
+  providers: [Location, { provide: LocationStrategy, useClass: PathLocationStrategy }, NgbModalConfig, NgbModal],
 })
-export class QuotesComponent implements OnInit,OnDestroy {
- 
+export class QuotesComponent implements OnInit, OnDestroy {
+
 
   public quotesList = [];
   public page = 0;
@@ -41,9 +41,9 @@ export class QuotesComponent implements OnInit,OnDestroy {
     status: undefined
   };
   public showPreloader: boolean = true;
-  public quoteResultMessage:string = "";
+  public quoteResultMessage: string = "";
   public infiniteScrollDisabled = false;
-  public sub:Subscription = new Subscription();
+  public sub: Subscription = new Subscription();
 
   /**
    * Creates an instance of the QuoteCreateContentComponent with the injected services
@@ -57,24 +57,24 @@ export class QuotesComponent implements OnInit,OnDestroy {
   constructor(
     private quoteServices: QuoteService,
     private dateService: DateService,
-    private cdRef:ChangeDetectorRef,
+    private cdRef: ChangeDetectorRef,
     private quoteStateService: QuoteStateService,
     private quoteRealTimeService: QuoteRealTimeService,
     private modalService: NgbModal,
-  
-    private notificationStateService:NotificationStateService,
+
+    private notificationStateService: NotificationStateService,
     config: NgbModalConfig,
   ) {
     config.backdrop = 'static';
     config.keyboard = false;
-   }
+  }
 
   /**
    * Initializes quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
     this.getQuotes();
-  
+
     this.changeQuotesListItem();
     //this.onInitCheackQuoteSent();
   }
@@ -84,21 +84,21 @@ export class QuotesComponent implements OnInit,OnDestroy {
     this.sub.unsubscribe();
   }
 
-   /**
-   * Subscribe to check quote has been sent
-   */
-/*  public onInitCheackQuoteSent() {
-    this.checkQuoteHasSent();
-    let quoteStateService = this.quoteStateService.getHandleQuoteHasSent().subscribe(() => {
-    //  this.quoteResultMessage = this.quoteStateService.getQuoteResult().getMessage();
+  /**
+  * Subscribe to check quote has been sent
+  */
+  /*  public onInitCheackQuoteSent() {
       this.checkQuoteHasSent();
-    });
-    this.sub.add(quoteStateService);
-  }*/
+      let quoteStateService = this.quoteStateService.getHandleQuoteHasSent().subscribe(() => {
+      //  this.quoteResultMessage = this.quoteStateService.getQuoteResult().getMessage();
+        this.checkQuoteHasSent();
+      });
+      this.sub.add(quoteStateService);
+    }*/
 
-   /**
-   * Check quote has been sent
-   */
+  /**
+  * Check quote has been sent
+  */
   /*private checkQuoteHasSent () {
     let result:QuoteResult =  this.quoteStateService.getQuoteResult();
     let successQuoteAdding = (result) ? result.getShow() : false;
@@ -242,19 +242,25 @@ export class QuotesComponent implements OnInit,OnDestroy {
     this.quoteStateService.goToCreate();
   }
 
-   /**
-   * move to edit quote component
-   * @param quote - quote
-   */
+  /**
+  * move to edit quote component
+  * @param quote - quote
+  */
   goToQuoteEdit(quote) {
-    this.quoteStateService.setEditQuote(quote);
+    this.quoteServices.getQuote(quote.id).subscribe((data) => {
+      this.quoteStateService.setEditQuote(data);
+    })
+
   }
 
   /**
    * Change state to preview
    */
   public goToPreview(quote) {
-    this.quoteStateService.goToPreview(quote, false);
+    this.quoteServices.getQuote(quote.id).subscribe((data) => {
+      this.quoteStateService.goToPreview(data, false);
+    })
+    //   this.quoteStateService.goToPreview(quote, false);
   }
 
   /**
@@ -269,8 +275,8 @@ export class QuotesComponent implements OnInit,OnDestroy {
    * convert Quote to invoice
    */
   convertToInvoice(item) {
-    this.quoteServices.convertToInvoice({companyInfo: item.company}, item.id).subscribe((res) => {
-      
+    this.quoteServices.convertToInvoice({ companyInfo: item.company }, item.id).subscribe((res) => {
+
     });
   }
 
@@ -279,7 +285,7 @@ export class QuotesComponent implements OnInit,OnDestroy {
    */
   convertToTicket(item) {
     this.quoteServices.convertToTicket(item.company, item.id).subscribe((res) => {
-     
+
     });
   }
 
@@ -288,7 +294,7 @@ export class QuotesComponent implements OnInit,OnDestroy {
    */
   cancelQuote(item) {
     this.quoteServices.cancelQuote(item.company, item.id).subscribe((res) => {
-     
+
     });
   }
 
@@ -297,13 +303,13 @@ export class QuotesComponent implements OnInit,OnDestroy {
    */
   archiveQuote(item) {
     this.quoteServices.archiveQuote(item.company, item.id).subscribe((res) => {
-     
+
     });
   }
 
   markAsRead(item) {
     this.quoteServices.markAsRead(item.company, item.id).subscribe((res) => {
-      
+
     });
   }
 
@@ -312,7 +318,7 @@ export class QuotesComponent implements OnInit,OnDestroy {
    */
   approveQuote(item) {
     this.quoteServices.approveQuote(item.company, item.id).subscribe((res) => {
-      
+
     });
   }
 
@@ -328,9 +334,9 @@ export class QuotesComponent implements OnInit,OnDestroy {
         if (newChange.data.status !== 'ARCHIVED') {
           return this.quotesList[elemIndex] = newChange.data;
         } else {
-           this.quotesList.splice(elemIndex,1);
+          this.quotesList.splice(elemIndex, 1);
         }
-       
+
       }
     })
   }
@@ -344,8 +350,11 @@ export class QuotesComponent implements OnInit,OnDestroy {
     } else {
       let recipients = item.recipients;
       if (typeof recipients === "string") item.recipients = recipients.split(',');
-      const modalRef = this.modalService.open(ModalQuoteComponent,  item);
-      modalRef.componentInstance.data = item;
+      this.quoteServices.getQuote(item.id).subscribe((data) => {
+        const modalRef = this.modalService.open(ModalQuoteComponent, data);
+        modalRef.componentInstance.data = data;
+      })
+
     }
 
   }

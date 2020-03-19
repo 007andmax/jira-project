@@ -80,7 +80,6 @@
 
         function getPdfIdFromRest() {
           disableOpenPdfBtn();
-
           var source = $(attrs.selector);
           var target = source.clone(),
             unknownLoadingStr = 'Loading...',

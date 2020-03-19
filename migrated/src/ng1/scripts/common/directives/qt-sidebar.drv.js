@@ -20,15 +20,13 @@
 
           function initLeftPanel(e) {
             var windowWidth = window.outerWidth;
-            if (!$state.is('settings') && $state.current.url.indexOf('reports') === -1) {
+            if (!$state.is('settings') && $state.current.url.indexOf('reports') === -1 && $state.current.url.indexOf('report') === -1) {
               $rootScope.isLeftPanelHidden = windowWidth <= 1024;
-
               if ($rootScope.isLeftPanelHidden) {
                 $scope.$broadcast('leftPanelClosedFromQTSidebar');
               }
               $document.off('click', closeLeftPanelOnSmallScreen);
               $document.on('click', closeLeftPanelOnSmallScreen);
-
               if ($rootScope.isLeftPanelHidden === false && window.innerWidth < 1280) {
                 setTimeout(function(){
                   document.getElementById('toggle-left-panel').click();

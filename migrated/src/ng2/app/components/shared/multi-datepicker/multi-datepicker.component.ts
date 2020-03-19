@@ -19,6 +19,7 @@ export class MultiDatepickerComponent implements OnInit {
   public showDatePicker = false;
   public selectedDateModel = '';
   public outsideDays = 'hidden';
+  isDisabled = false;
   @Output() selectedDate = new EventEmitter<any>();
 
   /**
@@ -26,12 +27,12 @@ export class MultiDatepickerComponent implements OnInit {
    * @param {NgbCalendar} calendar Service to work with date
    * @param {DateService} dateService Service to work with date
    */
-  constructor (
+  constructor(
     private calendar: NgbCalendar,
     private dateService: DateService
-              ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   /**
    * check type for hover
@@ -51,8 +52,7 @@ export class MultiDatepickerComponent implements OnInit {
         start: this.dateService.getDateFromBootstrap(this.fromDate),
         end: this.dateService.getDateFromBootstrap(this.toDate),
       });
-      console.log("this.fromDate",this.fromDate);
-      console.log("this.toDate",this.toDate);
+       
       this.setSelectedDateModel(this.fromDate, this.toDate);
       this.hideDatePicker();
     }
@@ -86,6 +86,7 @@ export class MultiDatepickerComponent implements OnInit {
    * toggle date picker
    */
   public toggleDatePicker() {
+    if (this.isDisabled) return;
     this.showDatePicker = !this.showDatePicker;
   }
 
@@ -101,10 +102,10 @@ export class MultiDatepickerComponent implements OnInit {
    */
   public setSelectedDateModel(start, end) {
     if (start && end) {
-      console.log("this.dateService.getDateFromBootstrap(start)",this.dateService.getDateFromBootstrap(start));
+       
       const startDate = new Date(this.dateService.getDateFromBootstrap(start));
       const endDate = new Date(this.dateService.getDateFromBootstrap(end));
-      console.log("startDate",startDate);
+       
       this.selectedDateModel = `${this.dateService.getInvoiceDate(startDate)} - ${this.dateService.getInvoiceDate(endDate)}`;
     } else {
       this.selectedDateModel = '';
@@ -124,5 +125,10 @@ export class MultiDatepickerComponent implements OnInit {
     this.setSelectedDateModel('', '');
     this.hideDatePicker();
   }
+
+  public setDisabled(data) {
+    this.isDisabled = data;
+  }
+
 
 }

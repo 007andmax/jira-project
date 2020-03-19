@@ -8,7 +8,9 @@
 
   services.factory('ServicesService', ['$http', '$rootScope', 'RealTimeService', 'Utils', 'CompaniesService',
     function ($http, $rootScope, RealTimeService, Utils, CompaniesService) {
+    var  serviceScope = $rootScope.$new();
 
+  
       function search(keyword) {
 
         if (!keyword) {
@@ -114,12 +116,12 @@
 
           if (newChange.action == 'SERVICE_SAVED') {
             if (newChange.data.isDefault) {
-              console.log('----------------- SERVICE_SAVED');
+            
               serviceSaved(newChange.data);
              
             }
           } else if (newChange.action == 'SERVICE_DELETED') {
-            console.log('----------------- SERVICE_DELETED');
+            
             serviceDeleted(newChange.data.versionedId.id, data);
          
           }
@@ -155,6 +157,40 @@
         }
 
         delete data[companyId];
+      }
+
+      function createGlNumber (data,callback) {
+       
+
+        var future = $http({
+          url: `/glNumber`,
+          method: 'POST',
+          data: data
+        });
+  
+        Utils.handleCallback(future, callback);
+        }
+
+      function resetContractGlNumber (id,contractType,callback) {
+       
+
+        var future = $http({
+          url: `/glNumber/resetContract/${contractType}`,
+          method: 'POST'
+        });
+  
+        Utils.handleCallback(future, callback);
+        }
+
+      function setContractGlNumber (id,contractType,callback) {
+       
+
+      var future = $http({
+        url: `/glNumber/${id}/${contractType}`,
+        method: 'POST'
+      });
+
+      Utils.handleCallback(future, callback);
       }
 
       function save(service, callback) {
@@ -201,6 +237,7 @@
         Utils.handleCallback(future, callback);
       }
 
+     
       function move(mapping, callback) {
         if (!mapping) throw 'mapping is required argument!';
 
@@ -288,7 +325,7 @@
       }
 
       function searchDuplicatedServiceNames(startDate, endDate, companyId, serviceNamesList,agreementId, callback) {
-        console.log('agreementId',agreementId);
+      
         var future = $http({
           method: 'POST',
           url: '/services/searchDuplicatedServiceNames?' + 'startDate=' + startDate + '&endDate=' + endDate + '&companyId=' + companyId + ((agreementId) ? '&agreementId=' + agreementId : ''),
@@ -296,9 +333,10 @@
         });
         Utils.handleCallback(future, callback);
       }
-
-      return {
-
+      return {    
+        createGlNumber: createGlNumber,
+        resetContractGlNumber : resetContractGlNumber,
+        setContractGlNumber: setContractGlNumber,
         getAllByCompany: getAllByCompany,
         getServicesData: getServicesData,
         getSpecialServices: getSpecialServices,

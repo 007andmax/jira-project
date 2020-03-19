@@ -15,10 +15,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { SidebarModule } from 'ng-sidebar';
- 
+
 import { ClickOutsideModule } from 'ng4-click-outside';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule, MatIconModule } from "@angular/material";
 import { CronEditorModule } from "cron-editor";
@@ -46,7 +46,7 @@ import { QuoteCreateHeaderComponent } from './components/billing/quotes/quote-cr
 import { QuoteCreateContentTopComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-top/quote-create-content-top.component';
 import { QuoteCreateContentBottomComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-bottom/quote-create-content-bottom.component';
 import { QuoteCreateContentNotesComponent } from './components/billing/quotes/quote-create/quote-create-content/quote-create-content-notes/quote-create-content-notes.component';
-import { QuotePreviewComponent} from './components/billing/quotes/quote-preview/quote-preview.component';
+import { QuotePreviewComponent } from './components/billing/quotes/quote-preview/quote-preview.component';
 import { UserPipe } from './pipe/user.pipe';
 import { DateFormatPipe } from './pipe/date-format.pipe';
 import { CompanyPipe } from './pipe/company.pipe';
@@ -63,9 +63,9 @@ import { LeftPanelBillingComponent } from './components/left-panel/left-panel-bi
 import { ToNumerPipe } from './pipe/to-numer.pipe';
 import { ModalQuoteComponent } from './services/modal/modal-quote/modal-quote.component';
 import { RecurringTicketsComponent } from './components/tickets/recurring-tickets/recurring-tickets.component';
-import {RecurringTicketsHeaderComponent} from "./components/tickets/recurring-tickets/recurring-tickets-header/recurring-tickets-header.component";
-import {RecurringTicketsTableComponent} from "./components/tickets/recurring-tickets/recurring-tickets-table/recurring-tickets-table.component";
-import {RecurringTicketsEditAsideComponent} from "./components/tickets/recurring-tickets/recurring-tickets-edit-aside/recurring-tickets-edit-aside.component";
+import { RecurringTicketsHeaderComponent } from "./components/tickets/recurring-tickets/recurring-tickets-header/recurring-tickets-header.component";
+import { RecurringTicketsTableComponent } from "./components/tickets/recurring-tickets/recurring-tickets-table/recurring-tickets-table.component";
+import { RecurringTicketsEditAsideComponent } from "./components/tickets/recurring-tickets/recurring-tickets-edit-aside/recurring-tickets-edit-aside.component";
 import { DevicesRecurringTicketsComponent } from './components/tickets/recurring-tickets/devices-recurring-tickets/devices-recurring-tickets.component';
 import { TagsComponent } from './components/shared/tags/tags.component';
 import { IntervalComponent } from './components/shared/interval/interval.component';
@@ -110,6 +110,14 @@ import { NotificationComponent } from './components/shared/notification/notifica
 import { UsersAsideEditComponent } from './components/users/users-aside-edit/users-aside-edit.component';
 import { ModalImageCropperComponent } from './services/modal/modal-image-cropper/modal-image-cropper.component';
 import { DraftEmailUserRecipientsComponent } from './components/shared/draft-email/draft-email-user-recipients/draft-email-user-recipients.component';
+import { ReportsComponent } from './components/reports/reports.component';
+import { ItemReportComponent } from './components/reports/item-report/item-report.component';
+import { OverviewReportComponent } from './components/reports/overview-report/overview-report.component';
+import { ReportMenuComponent } from './components/reports/report-menu/report-menu.component';
+import { SelectComponent } from './components/shared/select/select.component';
+import { ReportAdditionalActionsComponent } from './components/reports/report-additional-actions/report-additional-actions.component';
+import { ReportSendEmailComponent } from './components/reports/report-additional-actions/report-send-email/report-send-email.component';
+import { CompanyUserComponent } from './components/company-user/company-user.component';
 
 import { MyProfileComponent } from './components/setting/my-profile/my-profile.component';
 import { SettingComponent } from './components/setting/setting.component';
@@ -172,35 +180,39 @@ export class CustomHandlingStrategy implements UrlHandlingStrategy {
   merge(url, whole) { return url }
 }
 
+
 /**
  * Component downgrade
  */
 angular.module('quicktech')
   .directive(
     'passwordManager',
-    downgradeComponent({component: PasswordManagerComponent}))
+    downgradeComponent({ component: PasswordManagerComponent }))
   .directive(
-      'companyPasswordManager',
-      downgradeComponent({component: CompanyPasswordManagerComponent}))
+    'companyPasswordManager',
+    downgradeComponent({ component: CompanyPasswordManagerComponent }))
+  .directive(
+    'companyUser',
+    downgradeComponent({ component: CompanyUserComponent }))
   .directive(
     'leftPanelComponent',
-    downgradeComponent({component: LeftPanelComponent}))
+    downgradeComponent({ component: LeftPanelComponent }))
   .directive(
     'quotesComponent',
-    downgradeComponent({component: QuotesComponent}))
+    downgradeComponent({ component: QuotesComponent }))
   .directive(
     'quoteCreateComponent',
-    downgradeComponent({component: QuoteCreateComponent}))
+    downgradeComponent({ component: QuoteCreateComponent }))
   .directive(
     'quotePreviewComponent',
-    downgradeComponent({component: QuotePreviewComponent}))
+    downgradeComponent({ component: QuotePreviewComponent }))
   .directive(
     'recurringTicketsComponent',
-    downgradeComponent({component: RecurringTicketsComponent}))
+    downgradeComponent({ component: RecurringTicketsComponent }))
   .directive(
     'companiesComponent',
-    downgradeComponent({component: CompaniesComponent}))
-    .directive(
+    downgradeComponent({ component: CompaniesComponent }))
+  .directive(
     'usersComponent',
     downgradeComponent({component: UsersComponent}))
   .directive(
@@ -267,7 +279,18 @@ angular.module('quicktech')
     'subscriptionComponent',
     downgradeComponent({ component: SubscriptionComponent })
   )
+  .directive(
+    'reportsComponent',
+    downgradeComponent({ component: ReportsComponent }))
+  .directive(
+    'itemReportComponent',
+    downgradeComponent({ component: ItemReportComponent }))
   .factory('ngZone', downgradeInjectable(NgZone));
+
+/**
+ * This module represents the main application module
+ */
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -380,7 +403,15 @@ angular.module('quicktech')
     ServiceComponent,
     AutocompleteComponent,
     PhonePipe,
-    OrderByPipe
+    OrderByPipe,
+    ReportsComponent,
+    ItemReportComponent,
+    OverviewReportComponent,
+    ReportMenuComponent,
+    SelectComponent,
+    ReportAdditionalActionsComponent,
+    ReportSendEmailComponent,
+    CompanyUserComponent
   ],
   imports: [
     BrowserModule,
@@ -396,7 +427,8 @@ angular.module('quicktech')
     MatChipsModule,
     MatIconModule,
     MatAutocompleteModule,
-    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
+    BrowserAnimationsModule,
+    ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     SidebarModule.forRoot(),
     // ShowHidePasswordModule,
     AppRoutingModule,
@@ -407,7 +439,6 @@ angular.module('quicktech')
     TabsModule.forRoot(),
     ModalModule.forRoot(),
     TypeaheadModule.forRoot(),
-    ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAbP4DFpz4f9YcXMWUjdkOdyArX2peNt8s'
     }),
@@ -419,57 +450,70 @@ angular.module('quicktech')
     }),
     
     RouterModule.forRoot([
-        {
-          path: '',
-          component: AppComponent,
-          pathMatch: 'full'
-        },
-        {
-          path: 'ng2/password-manager',
-          component: PasswordManagerComponent,
-          pathMatch: 'full'
-        },
-        {
-          path: 'ng2/company-password-manager',
-          component: CompanyPasswordManagerComponent,
-          pathMatch: 'full'
-        },
-        {
-          path: 'ng2/quotes',
-          component: QuotesComponent,
-          pathMatch: 'full'
-        },
-        {
-          path: 'ng2/quotes/quote-create',
-          component: QuoteCreateComponent,
-          pathMatch: 'full'
-        },
-        {
-          path: 'ng2/quotes/quote-preview',
-          component: QuotePreviewComponent,
-          pathMatch: 'full'
-        },
-        {
-          path: 'ng2/recurring-tickets',
-          component: RecurringTicketsComponent,
-          pathMatch: 'full'
-        },
-        {
-          path: 'ng2/companies',
-          component: CompaniesComponent,
-        },{
-          path: 'ng2/users',
-          component: UsersComponent,
-          pathMatch: 'full'
-        }
-      ],
+      {
+        path: '',
+        component: AppComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: 'ng2/password-manager',
+        component: PasswordManagerComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: 'ng2/company-password-manager',
+        component: CompanyPasswordManagerComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: 'ng2/company-user',
+        component: CompanyUserComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: 'ng2/quotes',
+        component: QuotesComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: 'ng2/quotes/quote-create',
+        component: QuoteCreateComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: 'ng2/quotes/quote-preview',
+        component: QuotePreviewComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: 'ng2/recurring-tickets',
+        component: RecurringTicketsComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: 'ng2/companies',
+        component: CompaniesComponent,
+      }, {
+        path: 'ng2/users',
+        component: UsersComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: 'ng2/reports',
+        component: ReportsComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: 'ng2/report/:id', component: ItemReportComponent
+      }],
       {
         useHash: true,
         enableTracing: false
       }),
-      CronEditorModule,
-      NgxEditorModule ,
-      FontAwesomeModule
+    CronEditorModule,
+    ImageCropperModule,
+    NgxEditorModule,
+    FontAwesomeModule
 
   ],
   entryComponents: [
@@ -484,9 +528,15 @@ angular.module('quicktech')
     DownloadAgentComponent,
     ImageCropperComponent,
     CompanyPasswordManagerComponent,
+    CompanyUserComponent,
     UsersComponent,
     AlertComponent,
-    LeftPanelComponent
+    LeftPanelComponent,
+    ReportsComponent,
+    ItemReportComponent,
+    OverviewReportComponent,
+    ReportSendEmailComponent
+    // RecurringTicketsComponent
   ],
   exports:[
     PhonePipe,
@@ -498,7 +548,7 @@ angular.module('quicktech')
       useFactory: ($injector: any) => $injector.get('$state'),
       deps: ['$injector']
     },
-    {provide: UrlHandlingStrategy, useClass: CustomHandlingStrategy},
+    { provide: UrlHandlingStrategy, useClass: CustomHandlingStrategy },
     ApiPasswordManagerService
   ],
   bootstrap: [AppComponent]

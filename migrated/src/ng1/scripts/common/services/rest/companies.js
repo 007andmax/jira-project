@@ -7,7 +7,7 @@
   var services = angular.module('main.services');
 
   services.factory('CompaniesService', ['$http', '$rootScope', 'RealTimeService', 'Utils', function ($http, $rootScope, RealTimeService, Utils) {
- 
+
     var serviceScope = $rootScope.$new(),
       initialized = false,
       initListeners = [],
@@ -22,7 +22,9 @@
       },
       callbackForArchive,
       callbackForSavedCompanies = {},
+      glNumbers = [],
       companyPaymentInfo = {};
+
 
 
     Utils.customizeObj(storage);
@@ -111,12 +113,19 @@
       Utils.customizeObj(resp.data, storage.currentCompany);
       setRealTimeCurrentCompany();
       checkInit();
+      setRealTimeGLNumbers(resp.data.id);
     },
       function (resp) {
-        console.error(resp);
         throw 'Cannot initialize CompaniesService!';
       });
 
+    $http.get('/glNumber').then(function (resp) {
+      glNumbers = resp.data.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
+        1 : ((b.glNumber.toLowerCase() > a.glNumber.toLowerCase()) ? -1 : 0));
+    })
+    function getGlNumbers() {
+      return angular.copy(glNumbers);
+    }
     function reloadCurrentCompany(callback) {
       $http.get('/company/current').then(function (resp) {
         if (callback) {
@@ -128,7 +137,33 @@
     }
 
     var checkInitsCount = 0;
+    function setRealTimeGLNumbers(id) {
 
+      RealTimeService.subscribe('/glNumber/' + id, serviceScope, function (newChange) {
+
+        if (newChange.action === "GL_NUMBER_SAVED") {
+          var index = glNumbers.findIndex(item => item.id === newChange.data.id);
+          if (index > -1) {
+            glNumbers[index] = newChange.data;
+            if (newChange.data.blockTime || newChange.data.serviceContract) {
+              glNumbers.forEach((item, indexItem) => {
+                if (newChange.data.blockTime && index !== indexItem) {
+                  item.blockTime = false;
+                }
+                if (newChange.data.serviceContract && index !== indexItem) {
+                  item.serviceContract = false;
+                }
+              });
+            }
+          } else {
+            glNumbers.push(newChange.data);
+            glNumbers = glNumbers.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
+              1 : ((b.glNumber.toLowerCase() > a.glNumber.toLowerCase()) ? -1 : 0));
+          }
+          $rootScope.$broadcast('setRealTimeGLNumbers', angular.copy(glNumbers));
+        }
+      })
+    }
     function checkInit() {
       checkInitsCount++;
       if (checkInitsCount === 3) {
@@ -138,19 +173,21 @@
           initListeners[i]();
         }
       }
+
+
     }
 
     RealTimeService.subscribe('/company', serviceScope, function (newChange) {
-     
+
       if (!initialized) {
         return;
       }
-      
+
 
 
       var companyId = newChange.data.id;
       if (newChange.action == 'COMPANY_SAVED') {
-       
+
         var company = getOneById(companyId);
 
         if (companyId === getCurrentCompany().id) {
@@ -177,7 +214,7 @@
           }
 
           if (callbackForSavedCompanies[companyId]) {
-           
+
             callbackForSavedCompanies[companyId](companyId);
           }
         }
@@ -222,9 +259,9 @@
       }
     });
     function setRealTimeCurrentCompany() {
-    
+
       RealTimeService.subscribe('/company/' + storage.currentCompany.id, serviceScope, function (newChange) {
-        
+
         if (newChange.action === "SERVICE_EXPENSE_DATA_PICKER_CHANGED") {
           storage.currentCompany.serviceExpenseDurationPresentation = newChange.data.presentation;
           storage.currentCompany.serviceExpenseDurationPickerInterval = newChange.data.interval;
@@ -233,7 +270,7 @@
 
       })
     }
-    
+
     RealTimeService.subscribe('/companySettings', serviceScope, function (newChange) {
 
       if (newChange.action === 'SMTP_SETTINGS_UPDATED') {
@@ -246,7 +283,12 @@
     function _addAmountChangeListener(callback) {
       amountChangeListeners.push(callback);
     }
-
+    function parseDateTechCompany(end_date) {
+      var dateTechCompany = new Date(end_date).toLocaleString("CA", { timeZone: storage.currentCompany.addresses[0].locale }).replace(",", "").replace(/:.. /, " ");
+      var index = dateTechCompany.indexOf(" ");
+      var listDates = dateTechCompany.substring(0, index).split("/");
+      return new Date(`${listDates[2]} ${listDates[1]} ${listDates[0]} ${dateTechCompany.substring(index + 1, dateTechCompany.length)}`);
+    }
     function getCurrentCompany() {
       return storage.currentCompany;
     }
@@ -1010,6 +1052,8 @@
     }
 
     return {
+      parseDateTechCompany: parseDateTechCompany,
+      getGlNumbers: getGlNumbers,
       _addInitListener: addInitListener,
       _addAmountChangeListener: _addAmountChangeListener,
       _search: search,

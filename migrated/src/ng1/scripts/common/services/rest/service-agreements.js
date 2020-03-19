@@ -109,7 +109,7 @@
       }
 
       function validateCrossingDatesHourly(startDate, endDate, companyId,agreementId, callback) {
-        console.log('agreementId',agreementId);
+       
         var future = $http({
           method: 'GET',
           url: '/serviceAgreements/validateCrossingDates?' + 'companyId=' + companyId  + '&startDate=' + startDate + '&endDate=' + endDate + ((agreementId) ? '&agreementId=' + agreementId : '')

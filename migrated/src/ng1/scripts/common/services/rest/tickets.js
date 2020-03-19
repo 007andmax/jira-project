@@ -6,7 +6,7 @@
   services.factory('TicketsService', ['$http', '$rootScope', 'RealTimeService', 'Utils', 'quicktech.common.services.SharedStateService', '$timeout','$filter',
     function ($http, $rootScope, RealTimeService, Utils, SharedStateService, $timeout,$filter) {
       var scope = $rootScope.$new();
-      var ticketChangedActions = ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH', 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_SHARE', 'MARKED_AS_SPAM', 'EDITED_TICKET'];
+      var ticketChangedActions = ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH', 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_SHARE', 'MARKED_AS_SPAM', 'EDITED_TICKET','RECURRING_TICKETS_OPEN', 'RECURRING_TICKETS_CLOSED'];
       var queries, loadingInProcess, lastListType, queriesForCompanyProfilePage;
       var MY_TICKETS = false;
       var operators = {
@@ -56,6 +56,9 @@
         ticketsQuantity: 0,
         leftPanelCounters: {}
       };
+      $rootScope.$on('getCountsTickets', function(){
+        changeTicketsCounts();
+      });
       var globalSearch = SharedStateService.getSharedState('globalSearch');
       var userId;
       var unwatch = $rootScope.$watch('currentUser.id', function (currentUserId) {
@@ -155,8 +158,56 @@
                   }
                 ]
               }
-            ],
+            ], 
             "offset": 0
+          }, 
+          RECURRING_TICKETS_OPEN: {
+            excludeTrashSpam: true,
+            groupFieldFilters: [
+              {
+                fieldFilterDtos: [
+                  {
+                    path: "status",
+                    operator: "NOT_EQ",
+                    values: [
+                      "COMPLETED"
+                    ]
+                  },
+                  {
+                    path: "ticketSource",
+                    operator: "EQ",
+                    values: [
+                      "FROM_RECURRING_TICKET"
+                    ]
+                  }
+                ]
+              }
+            ],
+            offset: 0
+          },
+          RECURRING_TICKETS_CLOSED: {
+            excludeTrashSpam: true,
+            groupFieldFilters: [
+              {
+                fieldFilterDtos: [
+                  {
+                    path: "status",
+                    operator: "EQ",
+                    values: [
+                      "COMPLETED"
+                    ]
+                  },
+                  {
+                    path: "ticketSource",
+                    operator: "EQ",
+                    values: [
+                      "FROM_RECURRING_TICKET"
+                    ]
+                  }
+                ]
+              }
+            ],
+            offset: 0
           },
           SHARED: {
             excludeTrashSpam: true,
@@ -274,7 +325,7 @@
       function fetchTickets(listType, userId, companyId, callback) {
 
        
-        var query = queries[listType.toUpperCase()]
+        var query = queries[listType.toUpperCase()];
         
        
         MY_TICKETS = false;
@@ -335,6 +386,7 @@
             var ticketFilterQuery = query.groupFieldFilters[0].fieldFilterDtos[0];
             groupedQuery.groupFieldFilters[0].fieldFilterDtos.push(ticketFilterQuery)
           }
+          
           storage.lastParams = angular.copy(groupedQuery);
           getCompanyTicketCount(storage.lastParams);
         } else {
@@ -344,10 +396,19 @@
         }
         storage.tickets = [];
         if (MY_TICKETS && listType === 'USER')  {
-          storage.lastParams.groupFieldFilters = [];
+          storage.lastParams.groupFieldFilters = [{
+            fieldFilterDtos: [{  path: "ticketSource",
+            operator: "NOT_EQ",
+            values: [
+                "FROM_RECURRING_TICKET"
+            ]}]
+          
+        }];
+
           loadMore(listType, callback);
           return;
         }
+       
         if (userId) {
           storage.lastParams.groupFieldFilters = storage.lastParams.groupFieldFilters || [];
           storage.lastParams.groupFieldFilters.push({
@@ -368,10 +429,43 @@
             }]
           });
         }
-     
+        if (listType === 'USER') {
+          storage.lastParams.groupFieldFilters[0].fieldFilterDtos.push({  path: "ticketSource",
+            operator: "NOT_EQ",
+            values: [
+                "FROM_RECURRING_TICKET"
+            ]
+          });
+        }
+        if (listType === 'ALL' || listType === 'OPEN' || listType === 'CLOSED') {
+          if (!storage.lastParams.groupFieldFilters) {
+            storage.lastParams.groupFieldFilters = [{
+              fieldFilterDtos : [{  path: "ticketSource",
+              operator: "NOT_EQ",
+              values: [
+                  "FROM_RECURRING_TICKET"
+              ]
+            }]
+            }];
+          } else {
+            storage.lastParams.groupFieldFilters[0].fieldFilterDtos.push({  path: "ticketSource",
+            operator: "NOT_EQ",
+            values: [
+                "FROM_RECURRING_TICKET"
+            ]
+          });
+          }
+        
+        }
+       if (listType === 'RECURRING_TICKETS_OPEN') {
+        listType = 'OPEN';
+       }  else if (listType === 'RECURRING_TICKETS_CLOSED') {
+        listType = 'CLOSED';
+       }
         loadMore(listType, callback);
       }
       function loadMore(listType, callback) {
+       
         lastListType = listType;
         // if(storage && storage.lastParams) {
         //   storage.lastParams.offset = storage.tickets.length;
@@ -386,7 +480,9 @@
        
         loadingInProcess = true;
         $http.post('/v2/tickets/getTickets', storage.lastParams, { params: { listType: listType } }).then(function (resp) {
+         
           if (resp && resp.config.params.listType === lastListType) {
+         
             for (var i = 0; i < resp.data.length; i++) {
               var ticket = resp.data[i];
               ticket.number = numberPrefix + ticket.number;
@@ -573,10 +669,54 @@
         allCountsCallback = callback;
         if (queries) {
           var queries_start = JSON.parse(JSON.stringify(queries));
-          queries_start.USER = {"excludeTrashSpam": true,
-          "groupFieldFilters": [],
-          "offset": 0,
-          "myTicketsPage": true};
+          queries_start.USER = {
+            "excludeTrashSpam": true,
+            "groupFieldFilters": [
+              {
+                fieldFilterDtos: [
+                  {
+                    path: "ticketSource",
+                    operator: "NOT_EQ",
+                    values: [
+                      "FROM_RECURRING_TICKET"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "offset": 0,
+            "myTicketsPage": true
+          };
+          queries_start.ALL.groupFieldFilters = [
+            {
+              fieldFilterDtos: [
+                {
+                  path: "ticketSource",
+                  operator: "NOT_EQ",
+                  values: [
+                    "FROM_RECURRING_TICKET"
+                  ]
+                }
+              ]
+            }
+          ];
+          queries_start.OPEN.groupFieldFilters[0].fieldFilterDtos.push({
+            path: "ticketSource",
+            operator: "NOT_EQ",
+            values: [
+              "FROM_RECURRING_TICKET"
+            ]
+          });
+
+          queries_start.CLOSED.groupFieldFilters[0].fieldFilterDtos.push({
+            path: "ticketSource",
+            operator: "NOT_EQ",
+            values: [
+              "FROM_RECURRING_TICKET"
+            ]
+          });
+        
+
          
           $http.post('/v2/tickets/counts', queries_start).then(function (resp) {
             storage.ticketsQuantityMap = resp.data;
@@ -806,7 +946,54 @@
         Utils.handleCallback(future, callback);
       }
       function changeTicketsCounts() {
-        $http.post('/v2/tickets/counts', queries).then(function (resp) {
+        var queries_start = JSON.parse(JSON.stringify(queries));
+        queries_start.USER = {
+          "excludeTrashSpam": true,
+          "groupFieldFilters": [
+            {
+              fieldFilterDtos: [
+                {
+                  path: "ticketSource",
+                  operator: "NOT_EQ",
+                  values: [
+                    "FROM_RECURRING_TICKET"
+                  ]
+                }
+              ]
+            }
+          ],
+          "offset": 0,
+          "myTicketsPage": true
+        };
+        queries_start.ALL.groupFieldFilters = [
+          {
+            fieldFilterDtos: [
+              {
+                path: "ticketSource",
+                operator: "NOT_EQ",
+                values: [
+                  "FROM_RECURRING_TICKET"
+                ]
+              }
+            ]
+          }
+        ];
+        queries_start.OPEN.groupFieldFilters[0].fieldFilterDtos.push({
+          path: "ticketSource",
+          operator: "NOT_EQ",
+          values: [
+            "FROM_RECURRING_TICKET"
+          ]
+        });
+
+        queries_start.CLOSED.groupFieldFilters[0].fieldFilterDtos.push({
+          path: "ticketSource",
+          operator: "NOT_EQ",
+          values: [
+            "FROM_RECURRING_TICKET"
+          ]
+        });
+        $http.post('/v2/tickets/counts', queries_start).then(function (resp) {
           angular.copy(resp.data, storage.ticketsQuantityMap);
         })
       }

@@ -3,6 +3,8 @@
          placeholder="Filter by date"
          (click)="toggleDatePicker()"
          [(ngModel)]="selectedDateModel"
+         [ngClass]="{'disabled': isDisabled}"
+         [disabled]="isDisabled"
          class="pointer">
   <i *ngIf="selectedDateModel"
      class="icn-sm icn-remove-old"

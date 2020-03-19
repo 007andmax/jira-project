@@ -3,13 +3,17 @@
 (function () {
 
   angular.module('quicktech').controller('quicktech.editServiceCtrl',
-    ['$scope', '$rootScope', 'ServicesService', 'TaxesService', '$timeout',
-      function ($scope, $rootScope, ServicesService, TaxesService, $timeout) {
+    ['$scope', '$rootScope', 'ServicesService', 'TaxesService', '$timeout','CompaniesService',
+      function ($scope, $rootScope, ServicesService, TaxesService, $timeout,CompaniesService) {
 
         var savedState = $scope.getLastSavedState('service');
-
+        $scope.glNumbersList = [];
+        $scope.isChangeGlNumber = false;
         $scope.taxes = TaxesService.getAll();
-
+        $rootScope.$on('setRealTimeGLNumbers', function (event, newInvoice) {
+          $scope.glNumbersList = newInvoice;
+        });
+        $scope.glNumbersList = CompaniesService.getGlNumbers();
         $scope.showModal = false;
 
         $timeout(function() {
@@ -39,16 +43,32 @@
         $scope.stopPropagation = function(e) {
           e.stopPropagation();
         }
+        $scope.createGlNumber = function () {
+          var data = {
+            glNumber: $scope.editService.glNumber,
+            description: ""
+          };
+          ServicesService.createGlNumber(data, function (res) {
+            $scope.glNumbersList.push(res);
+            $scope.isChangeGlNumber = false;
+          })
+        }
 
         $scope.saveEditService = function (form, isModal) {
           if (form.$valid || isModal && form.editServiceName.$valid && form.editServiceRate.$valid) {
             $scope.disabledSaveButton = true;
             var saveService = angular.copy($scope.editService);
+            if (saveService.glNumber) {
+              var index = $scope.glNumbersList.findIndex(item => item.glNumber === saveService.glNumber);
+            
+              saveService.glNumber = (index > -1) ? { id: $scope.glNumbersList[index].id } : null
+            } else {
+              saveService.glNumber = null;
+            }
             saveService.taxIds = saveService.taxes.map(function (tax) {
               return tax.id;
             });
             saveService.taxes = undefined;
-
             ServicesService.save(saveService, function (resp) {
               $scope.disabledSaveButton = false;
 
@@ -73,6 +93,16 @@
             afterValidationCallback();
           });
         };
+
+        $scope.changeGlNumber = function () {
+          if ($scope.editService.glNumber) {
+            var index = $scope.glNumbersList.findIndex(item => item.glNumber === $scope.editService.glNumber);
+            $scope.isChangeGlNumber = (index > -1) ? false : true;
+          } else {
+            $scope.isChangeGlNumber = false;
+          }
+         
+        }
 
         $scope.getValidationMessage = function (form) {
 

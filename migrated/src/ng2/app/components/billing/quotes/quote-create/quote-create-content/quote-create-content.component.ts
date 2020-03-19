@@ -148,7 +148,7 @@ export class QuoteCreateContentComponent implements OnInit {
             })
         }
       } else {
-        console.log('currentQuote',currentQuote);
+        
         if (notification) {
           this.quoteService.createQuote(currentQuote, true)
             .pipe(takeUntil(this.unsubscribe))
@@ -207,7 +207,7 @@ export class QuoteCreateContentComponent implements OnInit {
    */
   public downloadPdf() {
     const isFormReady = this.quoteStateService.getType();
-    console.log('isFormReady',isFormReady);
+     
     const currentQuote = this.quoteStateService.getQuoteCreate();
     if (isFormReady && this.editMode && currentQuote.id) {
     
@@ -250,7 +250,7 @@ export class QuoteCreateContentComponent implements OnInit {
    */
   public setRegularNote(value) {
     this.quoteForm.controls['regularNote'].setValue(value);
-    console.log('value',value);
+     
   }
 
   /**
