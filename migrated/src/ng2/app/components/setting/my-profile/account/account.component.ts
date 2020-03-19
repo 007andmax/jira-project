@@ -16,7 +16,7 @@ export class AccountComponent implements OnInit {
   authenticationTypesType = 'BASIC';
   oldPwdCorrect = true;
   public passwordForm: FormGroup;
-
+  show = false;
   constructor(
     private formBuilder: FormBuilder,
     private settingService: SettingService,

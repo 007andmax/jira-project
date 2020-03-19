@@ -293,10 +293,9 @@ export class ProfileComponent implements OnInit {
 
   /**
    * select file
-   * @param template
    * @param event
    */
-  onSelectFile(template: TemplateRef<any>, event) {
+  onSelectFile(event) {
     this.imageChangedEvent = event;
     this.isCroppedImg = true;
 

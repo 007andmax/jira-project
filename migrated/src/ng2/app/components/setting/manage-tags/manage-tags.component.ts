@@ -296,4 +296,8 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();
   }
+
+  trackByFn(index, item) {
+    return item.id;
+  }
 }

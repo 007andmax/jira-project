@@ -11,7 +11,12 @@ import { map } from "rxjs/operators";
 export class ActivityHistoryComponent implements OnInit {
   name: string = "";
   activityHistory = [];
-  selectedDevice = {};
+  selectedDevice = {
+    longitude: 0,
+    latitude: 0,
+    city: '',
+    country: ''
+  };
 
   constructor(
     private settingService: SettingService,

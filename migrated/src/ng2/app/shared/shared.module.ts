@@ -5,10 +5,6 @@ import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
-    CommonModule,
-    
-    
-    
   ],
   imports: [
     CommonModule,

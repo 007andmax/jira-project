@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 export class TicketSettingsComponent implements OnInit {
   loading = false;
   submitted = false;
+  used = false;
   ticketForm: FormGroup;
   nextValid: '';
   public currentUser: any;

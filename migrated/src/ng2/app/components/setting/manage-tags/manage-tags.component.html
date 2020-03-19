@@ -218,7 +218,7 @@
                   *ngFor="
                     let ticket of ticketTags | tag: searchTag;
                     let i = index;
-                    trackBy: ticket?.id
+                    trackBy: trackByFn
                   "
                 >
                   <td>{{ ticket.word | titlecase }}</td>
