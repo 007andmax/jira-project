@@ -1,0 +1,22 @@
+.qt-aside {
+  .ng-sidebar {
+    width: 592px
+  }
+
+  &__header {
+    background-color: #E7F5FE;
+    padding: 26px 24px 26px 39px;
+    display: flex;
+  }
+
+  &__title {
+    font-size: 20px;
+    font-weight: 500;
+    color: #364656;
+    font-weight: 600;
+  }
+
+  &__body {
+    padding: 33px 40px 40px 40px;
+  }
+}

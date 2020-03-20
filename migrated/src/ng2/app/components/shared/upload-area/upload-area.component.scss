@@ -1,0 +1,32 @@
+.qt-fileupload {
+  input[type=file] {
+    user-select:none;
+    display: none;
+  }
+  &__label {
+    width: 100%;
+    border: 2px dotted #16a4fa;
+    border-radius: 4px;
+    display: block;
+    cursor: pointer;
+    background-color: rgba(22, 164, 250, 0.05);
+    padding: 24px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__title {
+    color: #4f5f79;
+  }
+  &__link {
+    text-decoration: underline;
+    color: #16a4fa;
+  }
+
+  &__attach-icon {
+    margin-right: 8px;
+    width: 24px;
+    height: 24px;
+  }
+}

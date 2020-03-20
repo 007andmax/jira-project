@@ -59,7 +59,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
 
 
   onSearch(event) {
-     
+
     this.tags = this.reqTags.filter(item => item.word.includes(event.target.value));
   }
 
@@ -83,16 +83,16 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
   }
 
   onKeyUp (event) {
-     
+
     if (event.keyCode === 13) {
       const input = event.target.input;
       const value = event.target.value;
-  
+
       if ((value || '').trim()) {
         let tag: Tag = {
           colorCode: 0, usedCounter: 0, word: value.trim(), id: ''
         }
-  
+
         let setTags =  this.tagsService.setTags(tag.word).subscribe((res) => {
           tag.id = res.id;
           this.reqTags.push(tag);
@@ -106,7 +106,7 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
         });
         this.sub.add(setTags);
       }
-     
+
     }
 
   }
@@ -141,7 +141,6 @@ export class CompanyTagsComponent implements OnInit, OnDestroy {
     this.selectedTag = [];
     this.tags = this.reqTags;
     this.tagsChange.emit(this.selectedTag);
-    
   }
 
   public trackById(index, item) {

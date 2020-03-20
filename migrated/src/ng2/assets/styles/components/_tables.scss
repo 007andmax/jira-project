@@ -1,0 +1,48 @@
+table.qt-table-modern {
+  width: 100%;
+  thead {
+    font-size: 12px;
+    th {
+      padding: 16px 14px;
+    }
+  }
+  tbody {
+    font-size: 13px;
+    tr {
+      border: 2px solid #edf2f6;
+    }
+
+    td {
+      background: #ffffff;
+      padding: 14px 16px;
+      &:last-child {
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+      }
+      &:first-child {
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+      }
+    }
+  }
+  .qt-table-modern__circle-avatar {
+      width: 24px;
+      height: 24px;
+      min-width: 24px;
+      min-height: 24px;
+      border-radius: 50%;
+      background-position: center;
+      background-size: cover;
+      margin-right: 8px;
+      font-weight: 600;
+      color: white;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      font-size: 10px;
+      font-weight: 700;
+    }
+    .--strong {
+      font-weight: 600;
+    }
+}

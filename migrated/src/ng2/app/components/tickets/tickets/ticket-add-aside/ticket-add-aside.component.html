@@ -1,0 +1,57 @@
+<ng-sidebar-container>
+  <ng-sidebar [(opened)]="opened" [position]="'right'" class="ticket-add-aside qt-aside">
+    
+    <div class="qt-aside__header">
+      <div class="qt-aside__title">Create New Ticket</div>
+      <div class="qt-aside__ticket-name">QT 23904</div>
+      
+<!--      <button class="close-modal"></button>-->
+    </div>
+    
+    
+    <div class="qt-aside__body">
+      
+      <div class="qt-input-block qt-input-line">
+        <label for="add-ticket-subject" class="qt-input-block__label">Ticket Subject</label>
+        <input id="add-ticket-subject" class="qt-input-block__input"  type="text" placeholder="Write Ticket subject">
+      </div>
+      
+      
+      <div class="qt-input-block qt-input-line">
+        <label for="add-ticket-describe-issue" class="qt-input-block__label">Describe Issue</label>
+        <textarea id="add-ticket-describe-issue" class="qt-input-block__textarea"  placeholder="Describe Issue here…"></textarea>
+      </div>
+      
+      
+      <div class="qt-input-line">
+        <div class="qt-input-block">
+          <span class="qt-input-block__label">Company</span>
+          <app-select-search  [class]="['qt-dropdown']" [list]="['Company 1', 'Company 2']" [placeholder]="'Select Company'"></app-select-search>
+        </div>
+    
+        <div class="qt-input-block">
+          <span  class="qt-input-block__label">User</span>
+          <app-select-search  [class]="['qt-dropdown']" [list]="['User 1', 'User 2']" [placeholder]="'Select User'"></app-select-search>
+        </div>
+      </div>
+  
+      
+      <div class="qt-input-line">
+        <div class="qt-input-block">
+          <span class="qt-input-block__label">Assign To</span>
+          <app-select-search  [class]="['qt-dropdown']" [list]="['User assign 1', 'User assign 2']" [placeholder]="'Select User to assign'"></app-select-search>
+        </div>
+    
+        <div class="qt-input-block">
+          <span class="qt-input-block__label">Device</span>
+          <app-select-search  [class]="['qt-dropdown']" [list]="['Device 1', 'Device 2']" [placeholder]="'Select device'"></app-select-search>
+        </div>
+      </div>
+      
+      <app-upload-area class="ticket-fileupload"></app-upload-area>
+    </div>
+   
+  </ng-sidebar>
+</ng-sidebar-container>
+
+

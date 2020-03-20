@@ -113,6 +113,10 @@ import { ReportAdditionalActionsComponent } from './components/reports/report-ad
 import { ReportSendEmailComponent } from './components/reports/report-additional-actions/report-send-email/report-send-email.component';
 import { CompanyUserComponent } from './components/company-user/company-user.component';
 import { TicketsComponent } from './components/tickets/tickets/tickets.component';
+import { TicketsTableComponent } from './components/tickets/tickets/tickets-table/tickets-table.component';
+import { TicketsHeaderComponent } from './components/tickets/tickets/tickets-header/tickets-header.component';
+import { TicketAddAsideComponent } from './components/tickets/tickets/ticket-add-aside/ticket-add-aside.component';
+import { UploadAreaComponent } from './components/shared/upload-area/upload-area.component';
 
 
 /**
@@ -270,7 +274,11 @@ angular.module('quicktech')
     ReportAdditionalActionsComponent,
     ReportSendEmailComponent,
     CompanyUserComponent,
-    TicketsComponent
+    TicketsComponent,
+    TicketsTableComponent,
+    TicketsHeaderComponent,
+    TicketAddAsideComponent,
+    UploadAreaComponent
   ],
   imports: [
     BrowserModule,
