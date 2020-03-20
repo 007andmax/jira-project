@@ -445,7 +445,7 @@
 .company-devices li.list-heading [class*='col-md-'] {
   text-transform: uppercase;
   font-size: 11px;
-  font-family: 'Graphik Medium', sans-serif;
+  font-family: 'Graphik-Medium', sans-serif;
   color: #364656 !important;
 }
 
@@ -618,7 +618,7 @@
 .default-user-avatar span,
 .default-company-logo span {
   color: #364656;
-  font-family: 'Graphik Medium', sans-serif;
+  font-family: 'Graphik-Medium', sans-serif;
 }
 
 .default-company-logo-big {
@@ -4539,7 +4539,7 @@ Devices tab
 }
 
 .dashboard-network-scan .network-scan-steps div div:nth-child(2) {
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
   font-size: 15px;
 }
 
@@ -4570,7 +4570,7 @@ Devices tab
 }
 
 .dashboard-network-scan-list .users-list-wrapper .col-md-3 .company-device-name div p {
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
 }
 
 .dashboard-network-scan-list .users-list-wrapper .col-md-2,
@@ -4585,7 +4585,7 @@ Devices tab
   padding: 0 10px;
   font-size: 11px;
   border-radius: 3px;
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
   border: none;
   text-align: center;
   width: auto;
@@ -4607,7 +4607,7 @@ Devices tab
   box-shadow: 0 4px 28px 0 rgba(0, 0, 0, 0.1);
   color: #4f5f79;
   font-size: 13px;
-  font-family: "Graphik Regular", sans-serif;
+  font-family: "Graphik-Regular", sans-serif;
   cursor: text;
   background: #fff;
   z-index: 2;
@@ -4616,7 +4616,7 @@ Devices tab
 
 .full-text .full-text-title {
   color: #364656;
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
   margin-bottom: 10px !important;
 }
 
@@ -4776,7 +4776,7 @@ Devices tab
 
 .dashboard-network-scan-header .header-item p {
   font-size: 13px;
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
   margin-bottom: 10px;
 }
 
@@ -4801,7 +4801,7 @@ Devices tab
   border-radius: 3px;
   margin-bottom: 0;
   cursor: default;
-  font-family: "Graphik Regular", sans-serif;
+  font-family: "Graphik-Regular", sans-serif;
 }
 
 .saved-credentials p:hover {
@@ -4919,7 +4919,7 @@ Devices tab
   content: 'OR';
   color: #9ca5b6;
   font-size: 12px;
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
   bottom: -50px;
   left: 50%;
   transform: translateX(-50%);
@@ -5859,7 +5859,7 @@ Devices tab
   color: #fff;
   left: 4.5px;
   top: -4px;
-  font-family: Graphik Bold, sans-serif;
+  font-family: Graphik-Bold, sans-serif;
   font-weight: bold;
   font-style: normal;
 }

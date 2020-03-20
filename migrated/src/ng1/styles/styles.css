@@ -6,7 +6,7 @@
 /*@font-family-sans-serif:  "Helvetica Neue", Helvetica, Arial, sans-serif;*/
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 html {
-  font-family: 'Graphik Regular', sans-serif;
+  font-family: 'Graphik-Regular', sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   overflow-y: scroll;
@@ -365,7 +365,7 @@ html {
 }
 
 body {
-  font-family: 'Graphik Regular', sans-serif;
+  font-family: 'Graphik-Regular', sans-serif;
   font-size: 14px;
   line-height: 24px;
   color: #404b5f;
@@ -378,57 +378,57 @@ body input::-ms-clear {
 
 _::-webkit-:host:not(:root:root),
 body .left-panel-full {
-  font-family: 'Graphik Medium', sans-serif;
+  font-family: 'Graphik-Medium', sans-serif;
 }
 
 body .topNavbar {
-  font-family: 'Graphik Medium', sans-serif;
+  font-family: 'Graphik-Medium', sans-serif;
 }
 
 body .topNavbar strong span {
-  font-family: 'Graphik Medium', sans-serif;
+  font-family: 'Graphik-Medium', sans-serif;
 }
 
 .center-category p {
-  font-family: 'Graphik Regular', sans-serif;
+  font-family: 'Graphik-Regular', sans-serif;
 }
 
 .company-new-cover-wrapper p, strong {
-  font-family: 'Graphik Medium', sans-serif;
+  font-family: 'Graphik-Medium', sans-serif;
 }
 
 .btn {
-  font-family: 'Graphik Regular', sans-serif;
+  font-family: 'Graphik-Regular', sans-serif;
   font-weight: 600;
 }
 
 _::-webkit-:not(:root:root),
 body .left-panel-full {
-  font-family: 'Graphik Medium', sans-serif;
+  font-family: 'Graphik-Medium', sans-serif;
 }
 
 body .topNavbar {
-  font-family: 'Graphik Medium', sans-serif;
+  font-family: 'Graphik-Medium', sans-serif;
 }
 
 body .topNavbar strong span {
-  font-family: 'Graphik Medium', sans-serif;
+  font-family: 'Graphik-Medium', sans-serif;
 }
 
 .font-medium {
-  font-family: 'Graphik Medium', sans-serif !important;
+  font-family: 'Graphik-Medium', sans-serif !important;
 }
 
 .center-category p {
-  font-family: 'Graphik Regular', sans-serif;
+  font-family: 'Graphik-Regular', sans-serif;
 }
 
 .company-new-cover-wrapper p, strong {
-  font-family: 'Graphik Medium', sans-serif;
+  font-family: 'Graphik-Medium', sans-serif;
 }
 
 .btn {
-  font-family: 'Graphik Regular', sans-serif;
+  font-family: 'Graphik-Regular', sans-serif;
   font-weight: 600;
 }
 
@@ -1073,7 +1073,7 @@ hr {
   background-color: #ffffff;
   border-radius: 4px;
   margin-top: 25px;
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
 }
 
 .billable-items .billable-items-header h3 {
@@ -1109,7 +1109,7 @@ hr {
 .billable-items-list-item-sub {
   padding: 23px 30px 0 55px !important;
   font-size: 13px;
-  font-family: "Graphik Regular", sans-serif;
+  font-family: "Graphik-Regular", sans-serif;
 }
 
 .billable-items-list-item-sub-content {
@@ -1333,7 +1333,7 @@ invoices .invoices-header .invoices-header-filters > div input {
 }
 
 bold {
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
 }
 
 .receivable-content .product-list-ticket {
@@ -1472,7 +1472,7 @@ bold {
 .recurring-tickets-content__header h3,
 .new-companies-content__header h3,
 .password-content__header h3 {
-  font-family: "Graphik Regular", sans-serif;
+  font-family: "Graphik-Regular", sans-serif;
   font-size: 20px;
   margin: 0;
 }
@@ -1541,7 +1541,7 @@ bold {
 .password-content__list--header div {
   text-transform: uppercase;
   font-size: 11px;
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
   color: #364656;
 }
 
@@ -1654,7 +1654,7 @@ bold {
 .products-content__list--item [class*='col-md-'],
 .password-content__list--item [class*='col-md-'] {
   font-size: 13px;
-  font-family: "Graphik Regular", sans-serif;
+  font-family: "Graphik-Regular", sans-serif;
 }
 
 .products-content__header--search-result {
@@ -1688,7 +1688,7 @@ bold {
 
 .products-content__list--item .col-md-3,
 .password-content__list--item .col-md-3 {
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
 }
 
 .new-icn-delete-white {
@@ -2455,14 +2455,14 @@ h1,
 .h1 {
   font-size: 28px;
   line-height: 36px;
-  font-family: 'Graphik Medium', sans-serif;
+  font-family: 'Graphik-Medium', sans-serif;
 }
 
 h2,
 .h2 {
   font-size: 24px;
   line-height: 32px;
-  font-family: 'Graphik Medium', sans-serif;
+  font-family: 'Graphik-Medium', sans-serif;
 }
 
 h3,
@@ -2490,7 +2490,7 @@ p {
   font-size: 14px;
   margin: 0;
   line-height: 24px;
-  font-family: 'Graphik Regular', sans-serif;
+  font-family: 'Graphik-Regular', sans-serif;
 }
 
 @media (max-width: 1366px) {
@@ -2501,13 +2501,13 @@ p {
 
 _::-webkit-:host:not(:root:root),
 p {
-  font-family: 'Graphik Light', sans-serif;
+  font-family: 'Graphik-Light', sans-serif;
   font-weight: 600;
 }
 
 _::-webkit-:not(:root:root),
 p {
-  font-family: 'Graphik Light', sans-serif;
+  font-family: 'Graphik-Light', sans-serif;
   font-weight: 600;
 }
 
@@ -10662,7 +10662,7 @@ button.close {
   width: 100%;
   display: inline-block;
   font-size: 14px;
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
   padding: 4px;
 }
 
@@ -10674,7 +10674,7 @@ button.close {
 .create-note-modal h5 {
   margin: 10px 0 0;
   float: left;
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
   font-size: 11px;
   font-weight: 500;
   color: #9ca5b6;
@@ -10703,7 +10703,7 @@ button.close {
   margin-left: 10px;
   height: 40px;
   font-size: 14px;
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
   padding: 4px;
 }
 
@@ -10715,7 +10715,7 @@ button.close {
   margin: 0;
   padding-bottom: 15px;
   font-size: 20px;
-  font-family: 'Graphik Medium', sans-serif;
+  font-family: 'Graphik-Medium', sans-serif;
 }
 
 @-moz-document url-prefix() {
@@ -11166,12 +11166,12 @@ button.close {
 .create-note-modal .invoice-list-heading {
   text-transform: uppercase;
   font-size: 11px;
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
 }
 
 .receive .invoices-header .control-label,
 .create-note-modal .note-modal-content .control-label {
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
   font-size: 13px;
   margin-bottom: 10px;
 }
@@ -11216,7 +11216,7 @@ button.close {
 .create-note-modal .total-amount span {
   font-size: 11px;
   margin-right: 15px;
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
 }
 
 .modal-receive-payment .total-amount strong,
@@ -11234,7 +11234,7 @@ button.close {
 
 .create-note-modal .note label,
 .modal-receive-payment .note label {
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
   font-size: 13px;
   margin-bottom: 10px;
 }
@@ -11274,7 +11274,7 @@ button.close {
   position: absolute;
   z-index: 1070;
   display: block;
-  font-family: 'Graphik Regular', sans-serif;
+  font-family: 'Graphik-Regular', sans-serif;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
@@ -11414,7 +11414,7 @@ button.close {
   max-width: 400px;
   padding: 5px 10px;
   color: #1f2a37;
-  font-family: 'Graphik Regular', sans-serif;
+  font-family: 'Graphik-Regular', sans-serif;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
@@ -12350,7 +12350,7 @@ button.close {
 .alyosha-strong {
   padding: 10px;
   background: #edf2f6;
-  font-family: 'Graphik Medium', sans-serif;
+  font-family: 'Graphik-Medium', sans-serif;
   font-weight: 500;
   border-radius: 3px;
 }
@@ -12373,13 +12373,13 @@ button.close {
 
 .create-note-modal label input {
   margin-top: 15px;
-  font-family: "Graphik Regular", sans-serif;
+  font-family: "Graphik-Regular", sans-serif;
 }
 
 .create-note-modal label {
   font-size: 13px;
   width: 100%;
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
   color: #404b5f;
 }
 
@@ -12665,7 +12665,7 @@ button.close {
 }
 
 .invoice-edit.invoice-create .bold {
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
   font-weight: 500;
 }
 
@@ -13527,7 +13527,7 @@ button.close {
 .new-users-content__modal--content app-interval > [class*="col-md-"] p,
 .recurring-tickets-content__modal--content app-interval > [class*="col-md-"] p,
 .password-content__modal--content > [class*="col-md-"] p {
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
   font-size: 13px;
   margin-bottom: 8px;
 }
@@ -13704,7 +13704,7 @@ button.close {
 }
 
 .password-modal-footer-actions > div:first-child .password-users-history-popup p:first-child {
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
   font-size: 13px;
 }
 

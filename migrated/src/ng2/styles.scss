@@ -86,7 +86,7 @@
   color: #16a4fa;
   border: 1px solid #16a4fa;
   font-size: 12px;
-  font-family: "Graphik Semibold", sans-serif;
+  font-family: "Graphik-Semibold", sans-serif;
   font-weight: 600;
   &:hover {
     background: #16a4fa;
@@ -393,7 +393,7 @@ app-left-panel-tags-companies {
       }
     }
     .ngx-editor-placeholder {
-      font-family: "Graphik Regular", sans-serif !important;
+      font-family: "Graphik-Regular", sans-serif !important;
       font-size: 13px !important;
       padding: 24px !important;
       line-height: 1.54;
@@ -445,7 +445,7 @@ app-left-panel-tags-companies {
     margin: 0 20px;
     font-size: 12px;
     > div {
-      font-family: "Graphik Semibold", sans-serif;
+      font-family: "Graphik-Semibold", sans-serif;
       padding: 3px 0;
       cursor: pointer;
       margin-right: 24px;
@@ -481,7 +481,7 @@ app-left-panel-tags-companies {
         &:before {
           position: absolute;
           content: 'Tags';
-          font-family: "Graphik Medium", sans-serif;
+          font-family: "Graphik-Medium", sans-serif;
           font-size: 13px;
           left: 0;
           top: -28px;
@@ -490,7 +490,7 @@ app-left-panel-tags-companies {
       .mat-form-field-appearance-legacy .mat-form-field-label {
         padding: 12px 10px 10px 36px;
         font-size: 13px;
-        font-family: "Graphik Regular", sans-serif;
+        font-family: "Graphik-Regular", sans-serif;
         color: #9ca5b6;
       }
       .mat-form-field-infix {
@@ -606,7 +606,7 @@ app-left-panel-tags-companies {
   position: relative;
   &.confirm-user-modal {
     h3 {
-      font-family: 'Graphik Regular', sans-serif !important;
+      font-family: 'Graphik-Regular', sans-serif !important;
       font-size: 13px !important;
       margin: 15px 0 !important;
       font-weight: 500 !important;
@@ -626,7 +626,7 @@ app-left-panel-tags-companies {
     margin-bottom: 50px;
     padding-left: 70px;
     h3 {
-      font-family: "Graphik Semibold", sans-serif;
+      font-family: "Graphik-Semibold", sans-serif;
       font-size: 20px;
       font-weight: 600;
       line-height: 1.4;
@@ -655,7 +655,7 @@ app-left-panel-tags-companies {
       }
     }
     p {
-      font-family: "Graphik Regular", sans-serif;
+      font-family: "Graphik-Regular", sans-serif;
       font-size: 13px;
       line-height: 1.54;
     }
@@ -999,7 +999,7 @@ ngb-typeahead-window {
 .new-users-content__header h3,
 .recurring-tickets-content__header h3,
 .password-content__header h3 {
-  font-family: "Graphik Regular", sans-serif;
+  font-family: "Graphik-Regular", sans-serif;
   font-size: 20px;
   margin: 0;
 }
@@ -1072,7 +1072,7 @@ ngb-typeahead-window {
 .password-content__list--header div {
   text-transform: uppercase;
   font-size: 11px;
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
   color: #364656;
 }
 .products-content__list--header,
@@ -1192,7 +1192,7 @@ ngb-typeahead-window {
 .recurring-tickets-content__list--item [class*='col-md-'],
 .password-content__list--item [class*='col-md-'] {
   font-size: 13px;
-  font-family: "Graphik Regular", sans-serif;
+  font-family: "Graphik-Regular", sans-serif;
   p {
     word-break: break-all;
   }
@@ -1348,7 +1348,7 @@ ngb-typeahead-window {
         font-size: 12px;
         color: #364656;
         font-family: Graphik-Medium, sans-serif;
-        font-weight: bold;
+        font-weight: 500;
       }
     }
   }
@@ -1458,7 +1458,7 @@ ngb-typeahead-window {
         border-bottom: 2px solid transparent;
         padding: 8px 0;
         font-size: 12px;
-        font-family: "Graphik Semibold", sans-serif;
+        font-family: "Graphik-Semibold", sans-serif;
         font-weight: 600;
         cursor: pointer;
         .tab-product,
@@ -1513,7 +1513,7 @@ ngb-typeahead-window {
         align-items: center;
         margin-right: 20px;
         p {
-          font-family: "Graphik Regular", sans-serif;
+          font-family: "Graphik-Regular", sans-serif;
           margin: 0;
         }
         label {
@@ -1693,7 +1693,7 @@ ngb-typeahead-window {
         padding: 16px 0 0 50px;
         color: #9ca5b6;
         font-size: 12px;
-        font-family: "Graphik Semibold", sans-serif;
+        font-family: "Graphik-Semibold", sans-serif;
       }
     }
     .logo-upload {
@@ -1881,7 +1881,7 @@ ngb-typeahead-window {
     letter-spacing: 0;
     pointer-events: none;
     z-index: 99;
-    font-family: "Graphik Medium", sans-serif;
+    font-family: "Graphik-Medium", sans-serif;
   }
 }
 ngb-datepicker {
@@ -1923,7 +1923,7 @@ ngb-datepicker {
     color: #fff;
     .list-item,
     .types-item {
-      font-family: "Graphik Regular", sans-serif;
+      font-family: "Graphik-Regular", sans-serif;
       padding: 4px 24px;
       font-size: 12px;
       border-left: 2px solid transparent;
@@ -1946,7 +1946,7 @@ ngb-datepicker {
     .filter-item__header {
       padding: 8px 24px;
       opacity: .5;
-      font-family: "Graphik Semibold", sans-serif;
+      font-family: "Graphik-Semibold", sans-serif;
       font-size: 11px;
       text-transform: uppercase;
       font-weight: 600;
@@ -1973,7 +1973,7 @@ ngb-datepicker {
     justify-content: center;
     font-size: 20px;
     line-height: 1em;
-    font-family: 'Graphik Light', sans-serif;
+    font-family: 'Graphik-Light', sans-serif;
     position: fixed;
     width: 240px;
     background: #354053;
@@ -1988,7 +1988,7 @@ ngb-datepicker {
     }
     .list-item,
     .types-item {
-      font-family: "Graphik Regular", sans-serif;
+      font-family: "Graphik-Regular", sans-serif;
       padding: 8px 24px;
       border-left: 2px solid transparent;
       transition: all .3s;
@@ -2095,7 +2095,7 @@ ngb-datepicker {
     .filter-item__header {
       padding: 8px 24px;
       opacity: .5;
-      font-family: "Graphik Semibold", sans-serif;
+      font-family: "Graphik-Semibold", sans-serif;
       font-size: 11px;
       text-transform: uppercase;
       font-weight: 600;
@@ -2109,7 +2109,7 @@ ngb-datepicker {
 .quicktech__table {
   width: 100%;
   font-size: 12px;
-  font-family: 'Graphik Medium', sans-serif;
+  font-family: 'Graphik-Medium', sans-serif;
 
   thead {
     text-transform: uppercase;
@@ -2131,7 +2131,7 @@ ngb-datepicker {
 
   &--list {
     font-size: 14px;
-    font-family: 'Graphik Regular', sans-serif;
+    font-family: 'Graphik-Regular', sans-serif;
     thead {
       text-transform: none;
       th {
