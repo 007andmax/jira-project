@@ -9,58 +9,43 @@
   <div class="center-category collapsed-nav nano-content">
     <div class="inventory-lp-header">
       <div>Category List</div>
-      <div class="add-category-lp" uib-dropdown dropdown-append-to-body="true">
-        <div uib-dropdown-toggle class="new-link" no-restricted="true" dropdown-toogle aria-expanded="false"
-          data-toggle="dropdown">+Add
+      <div class="add-category-lp" ngbDropdown>
+        <div   class="new-link"id="dropdownManual" ngbDropdownToggle>+Add
         </div>
-       <!--  <div class="add-category-lp-dropdown" uib-dropdown-menu style="z-index: 100000000;">
-          <div>
-            <p>Add Category</p>
-            <label stop-propagation="click">
-              <span ng-if="!disableCreateCategory">Category Name</span>
-              <span style="color: red" ng-if="disableCreateCategory">Category name already exists</span>
-              <input type="text" placeholder="Category Name" ng-model="newCategory"
-                ng-change="checkDublicateCategory()">
-            </label>
-            <div class="add-category-lp-dropdown-btns">
-              <button class="btn btn-success" ng-disabled="newCategory.length < 1 || disableCreateCategory"
-                dropdown-toogle ng-click="addCategory(newCategory)">Save
-              </button>
-              <button class="btn btn-default" ng-click="clearCategory()" dropdown-toogle>Cancel</button>
-            </div>
-          </div>
-        </div> -->
+        <div class="add-category-lp-dropdown" ngbDropdownMenu aria-labelledby="dropdownManual" style="z-index: 100000000;">
+         <app-add-category-product [inventoryCategoryList]="inventoryCategoryList"></app-add-category-product>
+        </div> 
       </div>
     </div>
-    <div class="center-category__category" ng-class="{active: !currentCategory}"
+    <div class="center-category__category" ng-class="{active: !sortCategoty}"
       ng-click="stateGo($event, 'products', {category: ''})">
       <div class="center-category__category--item">
-        <div class="center-category__category--item__category-label">ALL PRODUCTS</div>
+        <div class="center-category__category--item__category-label" (click)="selectCategory(null)">ALL PRODUCTS</div>
         <div>{{getAllProductsCount()}}</div>
       </div>
     </div>
-    <ng-template ngFor let-category [ngForOf]="inventoryCategoryList" [ngForTrackBy]="trackById">
-      <div class="center-category__category" [ngClass]="{active: (currentCategory) ?  category.name === currentCategory.name : false}">
+    <ng-template ngFor let-category [ngForOf]="inventoryCategoryList" [ngForTrackBy]="trackById" let-i="index">
+      <div class="center-category__category" [ngClass]="{active: (sortCategoty) ?  category.name === sortCategoty.name : false}" *ngIf="i < countOfCategories">
         <div *ngIf="category.productsAmount >0 || category.name === 'Uncategorized'"
-          class="center-category__category--item" ng-click="stateGo($event, 'products', { category: category.name })">
+          class="center-category__category--item" (click)="selectCategory(category)">
           <div>{{category.name}}</div>
           <div>{{category.productsAmount}}</div>
         </div>
         <div *ngIf="category.productsAmount === 0 && category.name !== 'Uncategorized'"
           class="center-category__category--item">
-          <div ng-click="stateGo($event, 'products', { category: category.name })">
+          <div (click)="selectCategory(category)">
             {{category.name}}
           </div>
           <div>
-            <i class="icon-sm new-icn-delete-white pointer has-tooltip" ng-click="deleteCategory(category.id)"
+            <i class="icon-sm new-icn-delete-white pointer has-tooltip" (click)="deleteCategory(category)"
               tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Delete"></i>
           </div>
         </div>
       </div>
     </ng-template>
 
-    <div class="new-link" style="padding: 0 24px!important;" ng-if="inventoryCategoryList.length > 10"
-      ng-click="changeShowAllCategories()">Show All
+    <div class="new-link" style="padding: 0 24px!important;" *ngIf="inventoryCategoryList.length > 10"
+      (click)="changeShowAllCategories()">Show All
     </div>
   </div>
 </div>

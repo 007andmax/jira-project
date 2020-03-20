@@ -13,6 +13,9 @@ import { GlNumberStateService } from '../../states/gl-number/gl-number-state.ser
 import { Tax } from 'src/ng2/class/taxes/tax';
 import { InventoryStateService } from '../../states/inventory/inventory-state.service';
 import { PermissionsService } from '../../services/permissions/permissions.service';
+import { ConfirmStateService } from '../shared/confirm/services/confirm-state.service';
+import { DEARCHIVE_COMPANY, DELETE_COMPANY } from '../../const/confirm';
+import { CategoryProduct } from '../../interfaces/product/category-product';
 
 @Component({
   selector: 'app-inventory',
@@ -32,13 +35,14 @@ export class InventoryComponent implements OnInit {
   glNumbers: Array<GlNumber> = [];
   productSearchName: string = '';
   sub: Subscription = new Subscription();
-  taxes:Array<Tax> = [];
+  taxes: Array<Tax> = [];
   constructor(private productService: ProductService, private inventoryListService: InventoryListService,
     private companiesStateService: CompaniesStateService,
     private taxesStateService: TaxesStateService,
     private glNumberStateService: GlNumberStateService,
-    private inventoryStateService:InventoryStateService,
+    private inventoryStateService: InventoryStateService,
     private permissionsService: PermissionsService,
+    private confirmStateService: ConfirmStateService,
     public cd: ChangeDetectorRef, ) { }
 
   ngOnInit() {
@@ -60,11 +64,37 @@ export class InventoryComponent implements OnInit {
     })
     this.sub.add(getOnTaxess);
 
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      console.log("data", data);
+      if (data) {
+        console.log("this.confirmStateService.getConfirmAction()", this.confirmStateService.getConfirmAction());
+        if (this.confirmStateService.getConfirmAction() === DELETE_COMPANY) {
+          this.onRemoveCategory(this.inventoryStateService.getCategoryForDelete().id);
+        }
+      }
+    })
+    this.sub.add(getConfirm);
+
+    let getOnSortCategory = this.inventoryStateService.getOnSortCategory().subscribe(data => {
+      this.sortCategoty = data;
+      this.page_number = 0;
+      this.inventoryListService.setBlockList(false);
+      this.inventoryList = [];
+      this.onScroll();
+    })
+    this.sub.add(getOnSortCategory);
     this.getListProducts();
   }
-   /**
-   * getPermission
-   */
+
+  onRemoveCategory(id) {
+    console.log("category", id);
+    this.productService.removeCategory(id).subscribe(data => {
+
+    })
+  }
+  /**
+  * getPermission
+  */
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
   }
@@ -98,7 +128,7 @@ export class InventoryComponent implements OnInit {
     this.inventoryList = [...this.inventoryList, ...inventoryList];
     this.infiniteScrollDisabled = false;
     if ((this.page_number * 30) > listFilter.length) this.inventoryListService.setBlockList(true);
-
+    console.log("this.inventoryList", this.inventoryList);
     this.cd.detectChanges();
   }
   onSearch() {

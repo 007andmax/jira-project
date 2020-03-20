@@ -118,6 +118,7 @@ import { InventoryAddAsideComponent } from './components/inventory/inventory-add
 import { TaxesComponent } from './components/shared/taxes/taxes.component';
 import { InventoryEditAsideComponent } from './components/inventory/inventory-edit-aside/inventory-edit-aside.component';
 import { LeftPanelInventoryComponent } from './components/left-panel/left-panel-inventory/left-panel-inventory.component';
+import { AddCategoryProductComponent } from './components/left-panel/left-panel-inventory/add-category-product/add-category-product.component';
  
 
 
@@ -281,7 +282,8 @@ angular.module('quicktech')
     InventoryAddAsideComponent,
     TaxesComponent,
     InventoryEditAsideComponent,
-    LeftPanelInventoryComponent
+    LeftPanelInventoryComponent,
+    AddCategoryProductComponent
   ],
   imports: [
     BrowserModule,

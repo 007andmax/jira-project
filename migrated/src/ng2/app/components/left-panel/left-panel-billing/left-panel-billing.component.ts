@@ -22,7 +22,7 @@ export class LeftPanelBillingComponent implements OnInit {
   /**
    * Initializes quote service. See [ngOnInit]{@see OnInit#ngOnInit}
    */
-  ngOnInit() {}
+  ngOnInit() { }
 
   /**
    * Filter by password types

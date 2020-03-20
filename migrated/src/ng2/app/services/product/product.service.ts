@@ -54,6 +54,14 @@ export class ProductService {
   }
 
   /**
+  * remove category 
+  */
+ public removeCategory(id) {
+  return this.http.delete(`${this.apiUrl}products/categories/${id}`);
+}
+
+
+  /**
   * Get  categories
   */
   public getCategoriesProducts() {

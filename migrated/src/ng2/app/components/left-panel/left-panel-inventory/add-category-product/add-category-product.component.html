@@ -1,0 +1,15 @@
+<div>
+  <p>Add Category</p>
+  <label>
+    <span *ngIf="!disableCreateCategory">Category Name</span>
+    <span style="color: red" *ngIf="disableCreateCategory">Category name already exists</span>
+    <input type="text" placeholder="Category Name" (input)="checkDublicateCategory()" [(ngModel)]="name"
+      ng-change="checkDublicateCategory()">
+  </label>
+  <div class="add-category-lp-dropdown-btns">
+    <button class="btn btn-success" [disabled]="name.length < 1 || disableCreateCategory" ngbDropdownToggle
+      (click)="addCategory()">Save
+    </button>
+    <button class="btn btn-default" (click)="clearCategory()" ngbDropdownToggle>Cancel</button>
+  </div>
+</div>
