@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule, InjectionToken, NgZone } from '@angular/core';
-import { RouterModule, UrlHandlingStrategy } from '@angular/router';
+import { NgModule, NgZone } from '@angular/core';
+import { UrlHandlingStrategy } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 // @ts-ignore
 import {
@@ -448,68 +448,6 @@ angular.module('quicktech')
       preventDuplicates: true,
       timeOut: 3000
     }),
-    
-    RouterModule.forRoot([
-      {
-        path: '',
-        component: AppComponent,
-        pathMatch: 'full'
-      },
-      {
-        path: 'ng2/password-manager',
-        component: PasswordManagerComponent,
-        pathMatch: 'full'
-      },
-      {
-        path: 'ng2/company-password-manager',
-        component: CompanyPasswordManagerComponent,
-        pathMatch: 'full'
-      },
-      {
-        path: 'ng2/company-user',
-        component: CompanyUserComponent,
-        pathMatch: 'full'
-      },
-      {
-        path: 'ng2/quotes',
-        component: QuotesComponent,
-        pathMatch: 'full'
-      },
-      {
-        path: 'ng2/quotes/quote-create',
-        component: QuoteCreateComponent,
-        pathMatch: 'full'
-      },
-      {
-        path: 'ng2/quotes/quote-preview',
-        component: QuotePreviewComponent,
-        pathMatch: 'full'
-      },
-      {
-        path: 'ng2/recurring-tickets',
-        component: RecurringTicketsComponent,
-        pathMatch: 'full'
-      },
-      {
-        path: 'ng2/companies',
-        component: CompaniesComponent,
-      }, {
-        path: 'ng2/users',
-        component: UsersComponent,
-        pathMatch: 'full'
-      },
-      {
-        path: 'ng2/reports',
-        component: ReportsComponent,
-        pathMatch: 'full'
-      },
-      {
-        path: 'ng2/report/:id', component: ItemReportComponent
-      }],
-      {
-        useHash: true,
-        enableTracing: false
-      }),
     CronEditorModule,
     ImageCropperModule,
     NgxEditorModule,

@@ -17,22 +17,73 @@ import { IntegrationsComponent } from './components/setting/integrations/integra
 import { InvoiceTicketsComponent } from './components/setting/invoice-tickets/invoice-tickets.component';
 import { CommissionComponent } from './components/setting/commission/commission.component';
 import { SubscriptionComponent } from './components/setting/subscription/subscription.component';
+import { CompanyPasswordManagerComponent } from './components/company-password-manager/company-password-manager.component';
+import { CompanyUserComponent } from './components/company-user/company-user.component';
+import { QuoteCreateComponent } from './components/billing/quotes/quote-create/quote-create.component';
+import { QuotePreviewComponent } from './components/billing/quotes/quote-preview/quote-preview.component';
+import { RecurringTicketsComponent } from './components/tickets/recurring-tickets/recurring-tickets.component';
+import { CompaniesComponent } from './components/companies/companies.component';
+import { UsersComponent } from './components/users/users.component';
+import { ReportsComponent } from './components/reports/reports.component';
+import { ItemReportComponent } from './components/reports/item-report/item-report.component';
 
 const routes: Routes = [
   {
     path: '',
     component: AppComponent,
-    pathMatch: 'full',
+    pathMatch: 'full'
   },
   {
     path: 'ng2/password-manager',
     component: PasswordManagerComponent,
-    pathMatch: 'full',
+    pathMatch: 'full'
+  },
+  {
+    path: 'ng2/company-password-manager',
+    component: CompanyPasswordManagerComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'ng2/company-user',
+    component: CompanyUserComponent,
+    pathMatch: 'full'
   },
   {
     path: 'ng2/quotes',
     component: QuotesComponent,
-    pathMatch: 'full',
+    pathMatch: 'full'
+  },
+  {
+    path: 'ng2/quotes/quote-create',
+    component: QuoteCreateComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'ng2/quotes/quote-preview',
+    component: QuotePreviewComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'ng2/recurring-tickets',
+    component: RecurringTicketsComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'ng2/companies',
+    component: CompaniesComponent,
+  }, {
+    path: 'ng2/users',
+    component: UsersComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'ng2/reports',
+    component: ReportsComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'ng2/report/:id', 
+    component: ItemReportComponent
   },
   {
     path: 'ng2/setting/myprofile',
@@ -43,7 +94,7 @@ const routes: Routes = [
     path: 'ng2/setting/tags',
     component: ManageTagsComponent,
     pathMatch: 'full',
-    
+
   },
   {
     path: 'ng2/setting/companyprofile',
@@ -109,4 +160,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
