@@ -4,7 +4,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { PasswordManagerComponent } from './components/password-manager/password-manager.component';
 import { QuotesComponent } from './components/billing/quotes/quotes.component';
-import { SettingComponent } from './components/setting/setting.component';
 import { MyProfileComponent } from './components/setting/my-profile/my-profile.component';
 import { ManageTagsComponent } from './components/setting/manage-tags/manage-tags.component';
 import { CompanyProfileComponent } from './components/setting/company-profile/company-profile.component';
