@@ -117,6 +117,7 @@ import { TicketsTableComponent } from './components/tickets/tickets/tickets-tabl
 import { TicketsHeaderComponent } from './components/tickets/tickets/tickets-header/tickets-header.component';
 import { TicketAddAsideComponent } from './components/tickets/tickets/ticket-add-aside/ticket-add-aside.component';
 import { UploadAreaComponent } from './components/shared/upload-area/upload-area.component';
+import { TicketEditAsideComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-edit-aside.component';
 
 
 /**
@@ -278,7 +279,8 @@ angular.module('quicktech')
     TicketsTableComponent,
     TicketsHeaderComponent,
     TicketAddAsideComponent,
-    UploadAreaComponent
+    UploadAreaComponent,
+    TicketEditAsideComponent
   ],
   imports: [
     BrowserModule,
@@ -342,12 +344,13 @@ angular.module('quicktech')
       },
       {
         path: 'ng2/companies',
-        component: CompaniesComponent,
-      }, 
+        // component: CompaniesComponent,
+        loadChildren: './components/companies/#app-companies',
+      },
       {
         path: 'ng2/tickets',
-        component: TicketsComponent,
-      }, 
+        loadChildren: './components/tickets/tickets/#app-tickets',
+      },
       {
         path: 'ng2/users',
         component: UsersComponent,

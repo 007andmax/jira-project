@@ -1,0 +1,106 @@
+.ticket-edit-aside {
+  /deep/.ng-sidebar {
+    width: auto;
+    display: flex;
+  }
+  &__ticket-info {
+    width: 672px;
+  }
+
+  &__header {
+    padding: 24px 24px 24px 32px;
+  }
+
+  &__header-avatar {
+    width: 40px;
+    height: 40px;
+    margin-right: 12px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+  }
+
+  &__header-company {
+    font-size: 13px;
+    font-weight: 600;
+
+  }
+
+  &__header-info {
+    color: #4f5f79;
+    font-size: 13px;
+  }
+
+  .tag__modern {
+    border-radius: 3px;
+    margin-left: 6px;
+  }
+
+  .divider-point {
+    width: 4px;
+    height: 4px;
+    background-color: #9ca5b6;
+    border-radius: 50%;
+    margin: 2px 6px;
+    display: inline-block;
+  }
+
+  &__more-users-title {
+    font-size: 12px;
+    color: #16a4fa;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+
+  .more-users-avatars {
+    margin-left: 5px;
+    display: flex;
+    flex-direction: row-reverse;
+    &__avatar {
+      width: 28px;
+      height: 28px;
+      border: solid 2px #ffffff;
+      border-radius: 50%;
+      background-position: center;
+      background-size: cover;
+      margin-left: -13px;
+
+      &:last-child {
+        margin-left: 0;
+      }
+    }
+  }
+  &__ticket-text {
+    padding: 0 32px;
+    margin-top: 28px;
+    margin-bottom: 24px;
+  }
+
+  &__ticket-subject {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 10px
+  }
+
+  &__ticket-description {
+    font-size: 13px;
+    color: #4f5f79;
+  }
+
+}
+
+.qt-modal-circle-button {
+    width: 32px;
+    height: 32px;
+    border: solid 1px #dfe3e8;
+    background-color: #ffffff;
+    margin-left: 8px;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+}
+
+
+
+
