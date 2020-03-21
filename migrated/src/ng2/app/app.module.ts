@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 // @ts-ignore
 import { UpgradeModule, downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SelectModule } from 'ng2-select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSelectModule } from 'ngx-select-ex';
@@ -16,8 +16,8 @@ import { ClickOutsideModule } from 'ng4-click-outside';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
-import { MatAutocompleteModule, MatIconModule } from "@angular/material";
-import { CronEditorModule } from "cron-editor";
+import { MatAutocompleteModule, MatIconModule } from '@angular/material';
+import { CronEditorModule } from 'cron-editor';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { NgxEditorModule } from 'ngx-editor';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -31,7 +31,7 @@ import { PasswordRecordsTypesComponent } from './components/left-panel/left-pane
 import { PasswordManagerTableComponent } from './components/password-manager/password-manager-table/password-manager-table.component';
 import { PasswoordManagerHeaderComponent } from './components/password-manager/passwoord-manager-header/passwoord-manager-header.component';
 
-import { ApiPasswordManagerService } from "./services/password-manager/api-password-manager.service";
+import { ApiPasswordManagerService } from './services/password-manager/api-password-manager.service';
 
 import { QuotesComponent } from './components/billing/quotes/quotes.component';
 import { QuoteCreateComponent } from './components/billing/quotes/quote-create/quote-create.component';
@@ -280,7 +280,7 @@ angular.module('quicktech')
     TicketsHeaderComponent,
     TicketAddAsideComponent,
     UploadAreaComponent,
-    TicketEditAsideComponent
+    TicketEditAsideComponent,
   ],
   imports: [
     BrowserModule,
@@ -344,12 +344,11 @@ angular.module('quicktech')
       },
       {
         path: 'ng2/companies',
-        // component: CompaniesComponent,
-        loadChildren: './components/companies/#app-companies',
+        component: CompaniesComponent,
       },
       {
         path: 'ng2/tickets',
-        loadChildren: './components/tickets/tickets/#app-tickets',
+        component: TicketsComponent,
       },
       {
         path: 'ng2/users',
