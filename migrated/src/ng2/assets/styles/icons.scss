@@ -125,3 +125,31 @@
 .add-user {
   background: url("assets/img/icons/add-users.svg");
 }
+
+
+
+.icon {
+ &__assign-date {
+  background: url("assets/img/icons/assign-date.svg");
+  }
+ &__assign-user {
+    background: url("assets/img/icons/assign-user.svg");
+  }
+
+ &__task-pending {
+   background: url("assets/img/icons/task-pending.svg");
+ }
+}
+
+.priority-icon {
+  width: 14px;
+  height: 14px;
+  background-size: contain;
+  display: inline-block;
+
+  &.--high {background-image: url("assets/img/icons/priority-high.png");}
+  &.--medium {background-image: url("assets/img/icons/priority-medium.png");}
+  &.--low    {background-image: url("assets/img/icons/priority-low.png");}
+
+}
+

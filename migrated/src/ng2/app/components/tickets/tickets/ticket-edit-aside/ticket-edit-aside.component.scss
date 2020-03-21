@@ -87,6 +87,96 @@
     color: #4f5f79;
   }
 
+  &__claimed-info {
+    position: relative;
+    padding: 0 32px;
+    color: #4f5f79;
+    margin-bottom: 10px;
+  }
+
+  &__claimed-info-lines {
+    position: absolute;
+    border: 1px solid   #dfe3e8;
+    border-left: none;
+    border-right: none;
+    width: calc(100% - 64px);
+    height: 4px;
+    top: calc(50% - 2px);
+  }
+
+  &__claimed-date {
+    border: 1px solid #dfe3e8;
+    border-radius: 15px;
+    padding: 2px 14px;
+    z-index: 1;
+    background: white;
+  }
+
+//       <!--  TICKET SUBTASK   -->
+   &__subtasks {
+     padding: 0 32px;
+   }
+   .subtask {
+      &__header {
+        padding: 10px 0;
+      }
+      &__header-title {
+        text-transform: uppercase;
+        font-weight: 600;
+        font-size: 10px;
+      }
+
+      &__header-add-task {
+        color: #16a4fa;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      &__line {
+        border-bottom: 1px solid #dfe3e8;
+      }
+
+      &__done-status {
+        border-radius: 50%;
+        margin-right: 8px;
+        height: 24px;
+        width: 24px;
+        background-repeat: no-repeat;
+        background-size: contain;
+      }
+
+      &__input {
+        flex-grow: 1;
+        border: none;
+        margin-right: 8px;
+        height: 40px;
+        outline: none;
+        font-size: 13px;
+      }
+
+      &__date {
+        font-size: 12px;
+        margin-right: 8px;
+      }
+
+      &__user-photo, &__date-icon, &__user-icon {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background-size: cover;
+        background-position: center;
+      }
+
+      &__date-icon {
+        margin-right: 8px;
+      }
+
+
+   }
+
+
+
 }
 
 .qt-modal-circle-button {
