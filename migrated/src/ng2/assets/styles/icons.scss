@@ -130,15 +130,21 @@
 
 .icon {
  &__assign-date {
-  background: url("assets/img/icons/assign-date.svg");
+  background-image: url("assets/img/icons/assign-date.svg");
   }
  &__assign-user {
-    background: url("assets/img/icons/assign-user.svg");
+    background-image: url("assets/img/icons/assign-user.svg");
   }
 
  &__task-pending {
-   background: url("assets/img/icons/task-pending.svg");
+   background-image: url("assets/img/icons/task-pending.svg");
  }
+ &__users {
+   background-image: url("assets/img/icons/addusers.svg")
+ }
+ &__close {
+    background-image: url("assets/img/icons/close.svg")
+  }
 }
 
 .priority-icon {
@@ -150,6 +156,5 @@
   &.--high {background-image: url("assets/img/icons/priority-high.png");}
   &.--medium {background-image: url("assets/img/icons/priority-medium.png");}
   &.--low    {background-image: url("assets/img/icons/priority-low.png");}
-
 }
 

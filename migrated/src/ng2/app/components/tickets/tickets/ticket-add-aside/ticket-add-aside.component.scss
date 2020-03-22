@@ -9,4 +9,29 @@
     margin-right: 16px;
     font-weight: 600;
   }
+
+  .create-ticket-btn {
+    margin-right: 16px;
+  }
+
+}
+
+
+
+.users-to-notify {
+  margin-top: 35px;
+  &__title {
+    font-weight: 500;
+    font-size: 12px;
+    font-family: Graphik Medium;
+    margin-bottom: 14px;
+  }
+
+  &__add_users {
+    width: 32px;
+    height: 32px;
+    background-size: contain;
+    border-radius: 50%;
+    cursor: pointer;
+   }
 }

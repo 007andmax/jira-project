@@ -9,6 +9,13 @@
     display: flex;
   }
 
+  &__close-modal {
+    width: 24px;
+    height: 24px;
+    background-size: contain;
+    cursor: pointer;
+  }
+
   &__title {
     font-size: 20px;
     font-weight: 500;
@@ -18,5 +25,12 @@
 
   &__body {
     padding: 33px 40px 40px 40px;
+    height: calc(100% - 270px);
+    overflow-y: auto;
+  }
+
+  &__buttons {
+    padding: 40px;
+    display: flex;
   }
 }

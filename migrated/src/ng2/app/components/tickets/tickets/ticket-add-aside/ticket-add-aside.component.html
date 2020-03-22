@@ -1,11 +1,14 @@
 <ng-sidebar-container>
   <ng-sidebar [(opened)]="opened" [position]="'right'" class="ticket-add-aside qt-aside">
     
-    <div class="qt-aside__header">
-      <div class="qt-aside__title">Create New Ticket</div>
-      <div class="qt-aside__ticket-name">QT 23904</div>
-      
-<!--      <button class="close-modal"></button>-->
+    <div class="qt-aside__header d-f ai-c jc-sb">
+      <div class="d-f">
+        <div class="qt-aside__title">Create New Ticket</div>
+        <div class="qt-aside__ticket-name">QT 23904</div>
+      </div>
+      <div>
+        <div class="qt-aside__close-modal icon__close"></div>
+      </div>
     </div>
     
     
@@ -48,7 +51,20 @@
         </div>
       </div>
       
+      <!--  File upload    -->
       <app-upload-area class="ticket-fileupload"></app-upload-area>
+      
+      <!--  Users to notify  -->
+      <div class="users-to-notify">
+        <div class="users-to-notify__title">Add users to notify them ticket update</div>
+        <div class="icon__users users-to-notify__add_users"></div>
+      </div>
+      
+    </div>
+    
+    <div class="qt-aside__buttons">
+      <div class="qt-btn --btn40h create-ticket-btn">Create Ticket</div>
+      <div class="qt-btn --btn40h --outline-blue">Cancel</div>
     </div>
    
   </ng-sidebar>
