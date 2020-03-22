@@ -464,6 +464,10 @@
         .state('subscription-component', waitForServices({
           url: '/ng2/setting/subscription',
           template: '<subscription-component></subscription-component>'
+        }))
+        .state('glnumber-component', waitForServices({
+          url: '/ng2/setting/glnumber',
+          template: '<glnumber-component></glnumber-component>'
         }));
 
       function waitForServices(conf) {

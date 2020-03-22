@@ -1296,6 +1296,10 @@
               <a ng-click="stateGo($event, 'subscription-component')"><span class="nav-ico"><img
                   src="ng1/images/setting-module/subscription.svg" alt="Subscription" /></span>Subscription</a>
           </li>
+          <li ng-class="{active: $state.includes('glnumber-component')}">
+            <a ng-click="stateGo($event, 'glnumber-component')"><span class="nav-ico"><img
+                src="ng1/images/setting-module/gl-number.svg" alt="Glnumber" /></span>Manage GL number</a>
+          </li>
         </ul>
         </nav>
    
