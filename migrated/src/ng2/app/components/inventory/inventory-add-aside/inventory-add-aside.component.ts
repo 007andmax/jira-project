@@ -42,9 +42,9 @@ export class InventoryAddAsideComponent implements OnInit {
     private glNumberService: GlNumberService) { }
 
   ngOnInit() {
-    if (this.glNumberStateService.getGLNumbers().length > 0) this.glNumbers = this.glNumberStateService.getGLNumbers();
+    if (this.glNumberStateService.getGLNumbers().length > 0) this.glNumbers = this.sortGlNumbers(this.glNumberStateService.getGLNumbers());
     let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe((data) => {
-      this.glNumbers = data;
+      this.glNumbers = this.sortGlNumbers(data);
       console.log("glNumbers", this.glNumbers);
     })
     console.log("glNumbers", this.glNumbers);
@@ -62,7 +62,8 @@ export class InventoryAddAsideComponent implements OnInit {
     })
     this.sub.add(getOnCompanies);
     this.productService.getCategoriesProducts().subscribe((data: any) => {
-      this.categories = data;
+      this.categories = data.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
       console.log("this.categories", this.categories);
     })
 
@@ -82,7 +83,8 @@ export class InventoryAddAsideComponent implements OnInit {
     })
   }
   private onInitVendors(data) {
-    this.vendors = data.filter(item => !item.deletedAt && !item.isDefault && item.clientType && item.clientType.toLowerCase() === 'vendor');
+    this.vendors = data.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0)).filter(item => !item.deletedAt && !item.isDefault && item.clientType && item.clientType.toLowerCase() === 'vendor');
   }
   onAddCategory(data) {
     this.productService.addCategory(data).subscribe((data: any) => {
@@ -134,6 +136,10 @@ export class InventoryAddAsideComponent implements OnInit {
 
     })
     this.sub.add(getShowAsideForAdd);
+  }
+  private sortGlNumbers(data) {
+    return data.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
+      1 : ((b.glNumber.toLowerCase() > a.glNumber.toLowerCase()) ? -1 : 0));
   }
   close() {
     this.opened = false;
