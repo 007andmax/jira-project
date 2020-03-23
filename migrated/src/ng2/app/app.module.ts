@@ -113,6 +113,7 @@ import { ReportAdditionalActionsComponent } from './components/reports/report-ad
 import { ReportSendEmailComponent } from './components/reports/report-additional-actions/report-send-email/report-send-email.component';
 import { CompanyUserComponent } from './components/company-user/company-user.component';
 import { TicketsComponent } from './components/tickets/tickets/tickets.component';
+import { TicketsPrioritiesComponent } from './components/tickets/tickets-priorities/tickets-priorities.component';
 
 
 /**
@@ -270,7 +271,8 @@ angular.module('quicktech')
     ReportAdditionalActionsComponent,
     ReportSendEmailComponent,
     CompanyUserComponent,
-    TicketsComponent
+    TicketsComponent,
+    TicketsPrioritiesComponent
   ],
   imports: [
     BrowserModule,
