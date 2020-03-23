@@ -1,0 +1,25 @@
+.tag__modern {
+  font-size: 10px;
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 4px 8px;
+  white-space: nowrap;
+
+  &.--success {
+    color: #2ec866;
+    border-color: #2ec866;
+    background-color: #ebfff2;
+  }
+
+  &.--info {
+    color: #16a4fa;
+    border-color: #16a4fa;
+    background-color: #edf8ff;
+  }
+
+  &.--warning {
+    color: #ffb937;
+    border-color: #ffb937;
+    background-color: rgba(255, 185, 55, 0.1);
+    }
+}

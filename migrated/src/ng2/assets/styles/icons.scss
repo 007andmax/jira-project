@@ -31,6 +31,9 @@
 .icn-calendar-light {
   background: url("assets/img/calendar-light.png");
 }
+.icn-attach {
+  background: url("assets/img/attachment.svg");
+}
 
 .icn-delete {
   background-image: url(assets/img/icons/icn-remove.png) !important;
@@ -118,3 +121,40 @@
 .office-phone-icn {
   background: url("assets/img/icons/office-phone.png");
 }
+
+.add-user {
+  background: url("assets/img/icons/add-users.svg");
+}
+
+
+
+.icon {
+ &__assign-date {
+  background-image: url("assets/img/icons/assign-date.svg");
+  }
+ &__assign-user {
+    background-image: url("assets/img/icons/assign-user.svg");
+  }
+
+ &__task-pending {
+   background-image: url("assets/img/icons/task-pending.svg");
+ }
+ &__users {
+   background-image: url("assets/img/icons/addusers.svg")
+ }
+ &__close {
+    background-image: url("assets/img/icons/close.svg")
+  }
+}
+
+.priority-icon {
+  width: 14px;
+  height: 14px;
+  background-size: contain;
+  display: inline-block;
+
+  &.--high {background-image: url("assets/img/icons/priority-high.png");}
+  &.--medium {background-image: url("assets/img/icons/priority-medium.png");}
+  &.--low    {background-image: url("assets/img/icons/priority-low.png");}
+}
+

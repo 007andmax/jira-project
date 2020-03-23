@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 // @ts-ignore
 import { UpgradeModule, downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SelectModule } from 'ng2-select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSelectModule } from 'ngx-select-ex';
@@ -16,8 +16,8 @@ import { ClickOutsideModule } from 'ng4-click-outside';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
-import { MatAutocompleteModule, MatIconModule } from "@angular/material";
-import { CronEditorModule } from "cron-editor";
+import { MatAutocompleteModule, MatIconModule } from '@angular/material';
+import { CronEditorModule } from 'cron-editor';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { NgxEditorModule } from 'ngx-editor';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -31,7 +31,7 @@ import { PasswordRecordsTypesComponent } from './components/left-panel/left-pane
 import { PasswordManagerTableComponent } from './components/password-manager/password-manager-table/password-manager-table.component';
 import { PasswoordManagerHeaderComponent } from './components/password-manager/passwoord-manager-header/passwoord-manager-header.component';
 
-import { ApiPasswordManagerService } from "./services/password-manager/api-password-manager.service";
+import { ApiPasswordManagerService } from './services/password-manager/api-password-manager.service';
 
 import { QuotesComponent } from './components/billing/quotes/quotes.component';
 import { QuoteCreateComponent } from './components/billing/quotes/quote-create/quote-create.component';
@@ -113,8 +113,12 @@ import { ReportAdditionalActionsComponent } from './components/reports/report-ad
 import { ReportSendEmailComponent } from './components/reports/report-additional-actions/report-send-email/report-send-email.component';
 import { CompanyUserComponent } from './components/company-user/company-user.component';
 import { TicketsComponent } from './components/tickets/tickets/tickets.component';
+import { TicketsTableComponent } from './components/tickets/tickets/tickets-table/tickets-table.component';
+import { TicketsHeaderComponent } from './components/tickets/tickets/tickets-header/tickets-header.component';
+import { TicketAddAsideComponent } from './components/tickets/tickets/ticket-add-aside/ticket-add-aside.component';
+import { UploadAreaComponent } from './components/shared/upload-area/upload-area.component';
+import { TicketEditAsideComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-edit-aside.component';
 import { TicketsPrioritiesComponent } from './components/tickets/tickets-priorities/tickets-priorities.component';
-
 
 /**
  * declare angular
@@ -272,6 +276,11 @@ angular.module('quicktech')
     ReportSendEmailComponent,
     CompanyUserComponent,
     TicketsComponent,
+    TicketsTableComponent,
+    TicketsHeaderComponent,
+    TicketAddAsideComponent,
+    UploadAreaComponent,
+    TicketEditAsideComponent,
     TicketsPrioritiesComponent
   ],
   imports: [
@@ -337,11 +346,11 @@ angular.module('quicktech')
       {
         path: 'ng2/companies',
         component: CompaniesComponent,
-      }, 
+      },
       {
         path: 'ng2/tickets',
         component: TicketsComponent,
-      }, 
+      },
       {
         path: 'ng2/users',
         component: UsersComponent,
