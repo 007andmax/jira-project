@@ -5,6 +5,10 @@ import { ItemFilterPerson } from '../../left-panel/left-panel-companies/class/it
 import { PermissionsService } from 'src/ng2/app/services/permissions/permissions.service';
 import { InventoryStateService } from 'src/ng2/app/states/inventory/inventory-state.service';
 import { ProductService } from 'src/ng2/app/services/product/product.service';
+import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DELETE_COMPANY, DELETE_PRODUCT } from 'src/ng2/app/const/confirm';
+import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 
 @Component({
   selector: 'app-inventory-table',
@@ -17,7 +21,10 @@ export class InventoryTableComponent implements OnInit {
   @Input() glNumbers;
   @Input() taxes;
 
-  constructor(private permissionsService: PermissionsService, private inventoryStateService: InventoryStateService,
+  constructor(private permissionsService: PermissionsService, 
+    private inventoryStateService: InventoryStateService,
+    private confirmStateService: ConfirmStateService,
+    private modalService: NgbModal,
     private productService: ProductService) { }
 
   ngOnInit() {
@@ -26,9 +33,10 @@ export class InventoryTableComponent implements OnInit {
     this.inventoryStateService.setEditInventory(this.inventory);
   }
   delete() {
-    this.productService.removeProduct(this.inventory.versionedId.id).subscribe(data => {
-      console.log("data", data);
-    })
+    this.confirmStateService.setConfirmAction(DELETE_PRODUCT);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    modalRef.componentInstance.message = `Do you want to delete product?`;
+    this.inventoryStateService.setProductForDelete(this.inventory);
   }
   public getGlNumberName() {
     let glNumber = this.inventory.glNumber;
@@ -39,6 +47,7 @@ export class InventoryTableComponent implements OnInit {
     let conpany = this.companies.find(item => item.id === this.inventory.companyId);
     return (conpany) ? conpany.name : "";
   }
+   
   getSelectedTaxNames() {
     let taxes = [];
     this.taxes.forEach(item => {

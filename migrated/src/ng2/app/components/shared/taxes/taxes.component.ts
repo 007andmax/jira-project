@@ -34,7 +34,7 @@ export class TaxesComponent implements OnInit, OnDestroy {
   @ViewChild('taxesDropDown') taxesDropDown;
   @Output() taxesChange = new EventEmitter();
 
-  
+
   public constructor(
     private taxesStateService: TaxesStateService,
     private taxesService: TaxesService,
@@ -108,16 +108,30 @@ export class TaxesComponent implements OnInit, OnDestroy {
       this.taxesChange.emit(this.selectedTax);
     }
   }
-
+  getSelectedTaxes() {
+    return this.selectedTax.map(item => {
+      return item.name;
+    }).join(",");
+  }
   /**
    * Add tag to selected
    * @param tag - selected tag
    */
   public selected(tax): void {
-    this.selectedTax.push(tax);
+    const findIndex = this.selectedTax.findIndex(item => item.id === tax.id);
+    if (findIndex > -1) {
+      this.selectedTax.splice(findIndex, 1);
+    } else {
+      this.selectedTax.push(tax);
+    }
+
     this.taxesChange.emit(this.selectedTax);
     //  this.userInput.nativeElement.blur();
     this.taxCtrl.setValue(null);
+  }
+  public checkTaxIsSelected(tax) {
+    const find = this.selectedTax.find(item => item.id === tax.id);
+    return (find) ? true : false;
   }
 
   /**

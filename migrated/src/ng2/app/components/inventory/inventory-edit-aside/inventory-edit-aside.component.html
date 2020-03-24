@@ -11,9 +11,7 @@
           <mat-error *ngIf="!validate.getManufactureIsExist()">
             This number already occupied
           </mat-error>
-          <mat-error *ngIf="!validate.getManufacture()">
-            Item number is required
-          </mat-error>
+         
           <p>Item number</p>
           <input type="text" [(ngModel)]="inventory.manufacture" (blur)="onCheckManufacture()" placeholder="Enter Suite Number">
         </div>
@@ -48,11 +46,15 @@
           
         </div>
 
-     
-
+        <app-taxes (taxesChange)="onTaxesChange($event)"></app-taxes>
+        <div class="col-md-6"  *ngIf="!validate.getCostSale()">
+          <mat-error *ngIf="!validate.getCostSale()">
+            Cost cannot be higher than Price
+          </mat-error>
+        </div>
         <div class="col-md-3">
           <p>Cost</p>
-          <input type="number"  [(ngModel)]="inventory.cost"  placeholder="Enter Suite Number">
+          <input type="text" number [money]="'true'"  (blur)="validate.checkPriceCost(inventory.sale,inventory.cost)" [(ngModel)]="inventory.cost"  placeholder="Enter Suite Number">
         </div>
 
         <div class="col-md-3">
@@ -60,10 +62,10 @@
             Price is required
           </mat-error>
           <p>Price</p>
-          <input type="number"  [(ngModel)]="inventory.sale" (input)="validate.resetSale()"  placeholder="Enter Suite Number">
+          <input type="text" number [money]="'true'"  [(ngModel)]="inventory.sale" (blur)="validate.checkPriceCost(inventory.sale,inventory.cost)" (input)="validate.resetSale()"  placeholder="Enter Suite Number">
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-12">
           <mat-error *ngIf="!validate.getCategory()">
             Category is required
           </mat-error>
@@ -77,7 +79,7 @@
         </div>
 
 
-        <div class="col-md-6">
+        <div class="col-md-12">
           <p>Vendors</p>
           <app-select-search [class]="['light-dropdown']" [list]="vendors" #vendorsSelect
           [field]="'name'"
@@ -85,7 +87,7 @@
           (onSelectedItem)="onSelectVendor($event)"></app-select-search>
         </div>
 
-        <app-taxes (taxesChange)="onTaxesChange($event)"></app-taxes>
+      
 
         <div class="col-md-12 new-companies-content__modal--content-footer">
           <div class="d-f">

@@ -61,13 +61,13 @@ export class InventoryAddAsideComponent implements OnInit {
       this.onInitVendors(data);
     })
     this.sub.add(getOnCompanies);
-    this.productService.getCategoriesProducts().subscribe((data: any) => {
-      this.categories = data.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-        1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-      console.log("this.categories", this.categories);
+    if (this.inventoryStateService.getCategories().length > 0) this.categories = this.inventoryStateService.getCategories();
+    this.inventoryStateService.getOnCategries().subscribe((data) => {
+      this.categories = data;
     })
 
   }
+ 
   onCheckILC() {
     this.productService.validateProductILC(this.inventory.ilc, '').subscribe((data: any) => {
       this.validate.resetILCIsExist();
@@ -77,7 +77,7 @@ export class InventoryAddAsideComponent implements OnInit {
   }
   onCheckManufacture() {
     this.productService.validateProductManufacture(this.inventory.manufacture, '').subscribe((data: any) => {
-      this.validate.resetManufacture();
+     
       this.validate.resetManufactureIsExist();
       if (!data.value) this.validate.setManufactureIsExist();
     })

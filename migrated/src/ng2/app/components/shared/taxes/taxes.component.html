@@ -1,25 +1,22 @@
-<div class="col-md-12 light-dropdown" ngbDropdown #taxesDropDown="ngbDropdown">
+<div class="col-md-6 light-dropdown" ngbDropdown #taxesDropDown="ngbDropdown">
+  <p>Taxes</p>
   <div class="add-tax" (click)="onInitAddTax()">Add Tax</div>
-  <mat-form-field>
-    <mat-chip-list #chipList aria-label="Fruit selection">
-      <mat-chip *ngFor="let tax of selectedTax; let i = index" [selectable]="selectable" [removable]="removable"
-        (removed)="remove(i)">
-        {{tax.name}}
-        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-      </mat-chip>
-      <input id="dropdownServices" ngbDropdownToggle placeholder="Taxes" #userInput class="pointer"
-        [formControl]="taxCtrl" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-        [matChipInputAddOnBlur]="addOnBlur">
-    </mat-chip-list>
-
-  </mat-form-field>
-  <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownServices">
+  <i class="icn-sm report-caret-icon"></i>
+  <input type="text" [value]="getSelectedTaxes()"
+         autocomplete="new-password"
+         readonly
+         placeholder="Select Company Type"
+         id="dropdownTypeTaxes"
+         ngbDropdownToggle />
+  <div ngbDropdownMenu
+       aria-labelledby="dropdownTypeTaxes">
     <ng-template ngFor let-tax [ngForOf]="taxes" [ngForTrackBy]="trackById">
-      <button ngbDropdownItem class="dropdown-item" (click)="selected(tax)" [textContent]="tax.name">
-      </button>
+      <div class="dropdown-item" ngbDropdownItem  (click)="selected(tax)">
+        <button  [textContent]="tax.name"></button>
+        <i class="icn-sm icn-label-save" *ngIf="checkTaxIsSelected(tax)" style="right: 13px"></i>
+      </div>
     </ng-template>
   </div>
-
   <div class="d-inline-block" ngbDropdown #addTax="ngbDropdown">
     <a style="display: none;" class="nav-link" id="dropdownManual" ngbDropdownToggle>Contribute</a>
     <div ngbDropdownMenu aria-labelledby="dropdownManual" class="dropdown-menu new-tax"
@@ -33,10 +30,7 @@
               Name is required.
             </label>
 
-            <!--   <label class="control-label" ng-message="unique">
-            Name is already taken.
-          </label>
--->
+          
             <label class="control-label" *ngIf="taxForm.controls['name'].errors.minlength">
               Name is too short.
             </label>
@@ -55,9 +49,7 @@
             <label style="white-space: nowrap;" class="control-label" *ngIf="taxForm.controls['rate'].errors.required">
               Required.
             </label>
-            <!--    <label style="white-space: nowrap;" class="control-label" ng-message="number">
-            Only numbers.
-          </label>-->
+           
             <label style="white-space: nowrap;" class="control-label" *ngIf="taxForm.controls['rate'].errors.min">
               To small.
             </label>
@@ -76,7 +68,7 @@
             (click)="onAddTax()">Add
           </button>
         </form>
-        <!--[disabled="{{ newTaxForm.$invalid || newTaxForm.$pristine }}"-->
+     
       </div>
     </div>
   </div>

@@ -19,14 +19,16 @@ export class LeftPanelInventoryComponent implements OnInit {
   constructor(private productService: ProductService,
     private confirmStateService: ConfirmStateService,
     private inventoryStateService: InventoryStateService,
-    private modalService: NgbModal, ) { }
+    private modalService: NgbModal,
+  ) { }
 
   ngOnInit() {
-    this.productService.getCategoriesProducts().subscribe(data => {
-      this.inventoryCategoryList = data.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-      console.log("this.inventoryCategoryList", this.inventoryCategoryList.length);
+    if (this.inventoryStateService.getCategories().length > 0) this.inventoryCategoryList = this.inventoryStateService.getCategories();
+    this.inventoryStateService.getOnCategries().subscribe((data) => {
+      this.inventoryCategoryList = data;
+      console.log('data',data);
     })
+    console.log('this.inventoryCategoryList',this.inventoryCategoryList);
   }
   selectCategory(category) {
     this.sortCategoty = category;
@@ -52,6 +54,7 @@ export class LeftPanelInventoryComponent implements OnInit {
     modalRef.componentInstance.message = `Do you want to delete category?`;
     this.inventoryStateService.setCategoryForDelete(category);
   }
+
   public trackById(index, item) {
     return item.id;
   }

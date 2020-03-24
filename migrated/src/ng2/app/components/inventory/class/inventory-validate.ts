@@ -1,14 +1,21 @@
 import { InventoryItem } from './inventory-item';
 
 export class InventoryValidate {
-    manufacture: boolean = true;
+    
     description: boolean = true;
     sale: boolean = true;
+    cost_sale: boolean = true;
     category: boolean = true;
     manufactureIsExist: boolean = true;
     ilcIsExist: boolean = true;
     constructor() { }
 
+    public resetCostSale() {
+        this.cost_sale = true;
+    }
+    public getCostSale() {
+        return this.cost_sale;
+    }
     public resetManufactureIsExist() {
         this.manufactureIsExist = true;
     }
@@ -39,13 +46,7 @@ export class InventoryValidate {
         this.category = true;
     }
 
-    public resetManufacture() {
-        this.manufacture = true;
-    }
-
-    public getManufacture() {
-        return this.manufacture;
-    }
+    
     public getDescription() {
         return this.description;
     }
@@ -55,14 +56,15 @@ export class InventoryValidate {
     public getCategory() {
         return this.category;
     }
-
-    public checkValidManufacture(name) {
-        if (!name || name.length === 0) {
-            this.manufacture = false;
-        } else {
-            this.manufacture = true;
-        }
+    public checkPriceCost(price, cost) {
+        cost = (!cost) ? 0 : cost;
+        console.log("price",price);
+        console.log("cost",cost);
+      
+        this.cost_sale = (Number(price) > Number(cost)) ? true : false;
+        console.log("checkPriceCost",this.cost_sale);
     }
+   
     public checkValidDescription(description) {
         if (description.length === 0) {
             this.description = false;
@@ -89,10 +91,9 @@ export class InventoryValidate {
     }
 
     public isValidate(inventory: InventoryItem) {
-        if (!inventory.manufacture || inventory.manufacture.length === 0) this.manufacture = false;
         if (!inventory.description || inventory.description.length === 0) this.description = false;
         if (!inventory.sale) this.sale = false;
         if (!inventory.category) this.category = false;
-        return this.manufacture && this.description && this.sale && this.category && this.manufactureIsExist && this.ilcIsExist;
+        return this.description && this.sale && this.category && this.manufactureIsExist && this.ilcIsExist && this.cost_sale;
     }
 }

@@ -11,6 +11,7 @@ import { CompaniesStateService } from './states/company/companies-state.service'
 import { AppService } from './states/app/app.service';
 import { TaxesStateService } from './states/taxes/taxes-state.service';
 import { GlNumberStateService } from './states/gl-number/gl-number-state.service';
+import { InventoryStateService } from './states/inventory/inventory-state.service';
 
 
 /**
@@ -38,7 +39,8 @@ export class AppComponent implements OnInit {
     private companiesState: CompaniesStateService,
     private appService: AppService,
     private taxesStateService:TaxesStateService,
-    private glNumberStateService:GlNumberStateService
+    private glNumberStateService:GlNumberStateService,
+    private inventoryStateService:InventoryStateService
 
   ) { }
 
@@ -53,6 +55,7 @@ export class AppComponent implements OnInit {
     this.companiesState.onInit();
     this.taxesStateService.onInit();
     this.glNumberStateService.onInit();
+    this.inventoryStateService.onInit();
     //  this.userService.getCurrentUser();
     this.websocketService.initializeWebSocketConnection();
     this.appService.onCheckMobile();
