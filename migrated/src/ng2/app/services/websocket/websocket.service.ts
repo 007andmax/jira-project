@@ -12,6 +12,7 @@ import { DevicesRealTimeService } from '../../states/devices/devices-real-time.s
 import { UsersRealTimeService } from '../../states/users/users-real-time.service';
 import { TaxesRealTimeService } from '../../states/taxes/taxes-real-time.service';
 import { GlNumberRealTimeService } from '../../states/gl-number/gl-number-real-time.service';
+import { InventoryRealTimeService } from '../../states/inventory/inventory-real-time.service';
 
 /**
  * Websocket service to work with api
@@ -41,7 +42,8 @@ export class WebsocketService {
     private usersRealTimeService:UsersRealTimeService,
     private passwordManagerService: PasswordManagerService,
     private taxesRealTimeService:TaxesRealTimeService,
-    private glNumberRealTimeService:GlNumberRealTimeService
+    private glNumberRealTimeService:GlNumberRealTimeService,
+    private inventoryRealTimeService:InventoryRealTimeService
 
     
   ) {
@@ -60,6 +62,7 @@ export class WebsocketService {
       that.subsribeToCompany();
       that.subsribeToPasswordRecods();
       that.subsribeToTaxes();
+      that.subsribeToCategories();
     });
   }
 private subsribeToDevices () {
@@ -173,6 +176,22 @@ private subsribeToDevices () {
         this.stompClient.subscribe(`/user/watch/taxes`, (message) => {
           var newChange = JSON.parse(message.body);
           this.taxesRealTimeService.handleRealTimeChanges(newChange);
+        
+        });
+     
+    }, 3000);
+  }
+
+     /**
+   * subscribe to categories realtime
+   */
+  public subsribeToCategories() {
+   
+    setTimeout(() => {
+     
+        this.stompClient.subscribe(`/user/watch/productCategory`, (message) => {
+          var newChange = JSON.parse(message.body);
+          this.inventoryRealTimeService.handleRealTimeChangesCategories(newChange);
         
         });
      

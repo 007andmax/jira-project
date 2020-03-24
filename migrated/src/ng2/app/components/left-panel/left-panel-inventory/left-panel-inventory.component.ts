@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ProductService } from 'src/ng2/app/services/product/product.service';
 import { CategoryProduct } from 'src/ng2/app/interfaces/product/category-product';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
@@ -20,15 +20,17 @@ export class LeftPanelInventoryComponent implements OnInit {
     private confirmStateService: ConfirmStateService,
     private inventoryStateService: InventoryStateService,
     private modalService: NgbModal,
+    public cd: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
     if (this.inventoryStateService.getCategories().length > 0) this.inventoryCategoryList = this.inventoryStateService.getCategories();
     this.inventoryStateService.getOnCategries().subscribe((data) => {
       this.inventoryCategoryList = data;
-      console.log('data',data);
+      console.log('data', data);
+      this.cd.detectChanges();
     })
-    console.log('this.inventoryCategoryList',this.inventoryCategoryList);
+    console.log('this.inventoryCategoryList', this.inventoryCategoryList);
   }
   selectCategory(category) {
     this.sortCategoty = category;

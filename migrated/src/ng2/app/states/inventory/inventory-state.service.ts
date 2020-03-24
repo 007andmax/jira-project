@@ -2,6 +2,8 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { InventoryItem } from '../../components/inventory/class/inventory-item';
 import { CategoryProduct } from '../../interfaces/product/category-product';
 import { ProductService } from '../../services/product/product.service';
+import { InventoryRealTimeService } from './inventory-real-time.service';
+import { InventoryChange } from '../../components/inventory/class/inventory-change';
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +15,33 @@ export class InventoryStateService {
   productForDelete: InventoryItem = null;
   onSortCategory: EventEmitter<any> = new EventEmitter();
   onGetCategories: EventEmitter<any> = new EventEmitter();
+  onChangeCategories: EventEmitter<InventoryChange> = new EventEmitter();
   categories = [];
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService,
+    private inventoryRealTimeService: InventoryRealTimeService) { }
   public onInit() {
     this.productService.getCategoriesProducts().subscribe(data => {
-      console.log("data",data);
+      console.log("data", data);
       this.setCategories(data);
       this.onInitGetCategoriess(this.categories);
     })
-  
+
+    this.inventoryRealTimeService.changeCompaniesArray.subscribe(newChange => {
+      if (newChange.action === 'PRODUCT_CATEGORY_SAVED') {
+        this.categories.push(newChange.data);
+      }
+      if (newChange.action === 'PRODUCT_CATEGORY_DELETED') {
+        let index = this.categories.findIndex(item => item.id === newChange.data.id);
+        if (index > -1) this.categories.splice(index, 1);
+      }
+      //this.onChangeCategories.emit(new InventoryChange(newChange.action, newChange.data, this.categories));
+      this.setCategories(this.categories);
+      this.onInitGetCategoriess(this.categories);
+    })
+
+  }
+  public getChangeCategories() {
+    return this.onChangeCategories;
   }
   public getCategories() {
     return this.categories;
@@ -34,7 +54,7 @@ export class InventoryStateService {
   }
   public setCategories(data) {
     this.categories = data.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-    1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
   public toggleAsideForAdd() {
     this.showAsideForAdd.emit();
