@@ -17,6 +17,7 @@ import { ConfirmStateService } from '../shared/confirm/services/confirm-state.se
 import { DEARCHIVE_COMPANY, DELETE_COMPANY, DELETE_PRODUCT } from '../../const/confirm';
 import { CategoryProduct } from '../../interfaces/product/category-product';
 import { DELETE } from '@angular/cdk/keycodes';
+import { InventoryChange } from './class/inventory-change';
 
 @Component({
   selector: 'app-inventory',
@@ -69,8 +70,8 @@ export class InventoryComponent implements OnInit {
       console.log("data", data);
       if (data) {
         console.log("this.confirmStateService.getConfirmAction()", this.confirmStateService.getConfirmAction());
-        if (this.confirmStateService.getConfirmAction() === DELETE_COMPANY)   this.onRemoveCategory(this.inventoryStateService.getCategoryForDelete().id);
-        if (this.confirmStateService.getConfirmAction() === DELETE_PRODUCT)   this.onRemoveProduct(this.inventoryStateService.getProductForDelete().versionedId.id);
+        if (this.confirmStateService.getConfirmAction() === DELETE_COMPANY) this.onRemoveCategory(this.inventoryStateService.getCategoryForDelete().id);
+        if (this.confirmStateService.getConfirmAction() === DELETE_PRODUCT) this.onRemoveProduct(this.inventoryStateService.getProductForDelete().versionedId.id);
       }
     })
     this.sub.add(getConfirm);
@@ -83,6 +84,30 @@ export class InventoryComponent implements OnInit {
       this.onScroll();
     })
     this.sub.add(getOnSortCategory);
+
+    let getChangeProducts = this.inventoryStateService.getChangeProducts().subscribe((data: InventoryChange) => {
+      if (data.action === 'PRODUCT_SAVED') {
+        const reqIndex = this.reqInventoryList.findIndex((item) => item.versionedId.id === data.data.versionedId.id);
+        const Index = this.inventoryList.findIndex((item) => item.versionedId.id === data.data.versionedId.id);
+        if (reqIndex > -1) this.reqInventoryList[reqIndex] = new InventoryItem(data.data);
+        if (reqIndex === -1) this.reqInventoryList.push(new InventoryItem(data.data));
+        if (Index > -1) this.inventoryList[Index] = new InventoryItem(data.data);
+        if (Index === -1) {
+          this.inventoryList.push(new InventoryItem(data.data));
+          this.inventoryList = this.inventoryList.filter(item => (this.sortCategoty) ? item.category.id === this.sortCategoty.id : (!this.sortCategoty) ? true : false);
+          this.inventoryList = this.inventoryList.filter(item => (this.productSearchName.length > 0) ? item.description.toLowerCase().includes(this.productSearchName.toLowerCase()) : true);
+          this.filter.onFilter(this.inventoryList, this.companies, this.glNumbers);
+        }
+      }
+      if (data.action === 'PRODUCT_DELETED') {
+        const reqIndex = this.reqInventoryList.findIndex((item) => item.versionedId.id === data.data.versionedId.id);
+        if (reqIndex > -1) this.reqInventoryList.splice(reqIndex, 1);
+        const Index = this.inventoryList.findIndex((item) => item.versionedId.id === data.data.versionedId.id);
+        if (Index > -1) this.inventoryList.splice(Index, 1);
+      }
+      this.cd.detectChanges();
+    })
+    this.sub.add(getChangeProducts);
     this.getListProducts();
   }
   onRemoveProduct(id) {

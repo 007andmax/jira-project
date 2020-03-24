@@ -15,7 +15,7 @@ export class InventoryStateService {
   productForDelete: InventoryItem = null;
   onSortCategory: EventEmitter<any> = new EventEmitter();
   onGetCategories: EventEmitter<any> = new EventEmitter();
-  onChangeCategories: EventEmitter<InventoryChange> = new EventEmitter();
+  onChangeProducts: EventEmitter<InventoryChange> = new EventEmitter();
   categories = [];
   constructor(private productService: ProductService,
     private inventoryRealTimeService: InventoryRealTimeService) { }
@@ -27,8 +27,11 @@ export class InventoryStateService {
     })
 
     this.inventoryRealTimeService.changeCompaniesArray.subscribe(newChange => {
+      console.log("newChange",newChange);
       if (newChange.action === 'PRODUCT_CATEGORY_SAVED') {
-        this.categories.push(newChange.data);
+        let index = this.categories.findIndex(item => item.id === newChange.data.id);
+       if (index === -1) this.categories.push(newChange.data);
+       if (index > -1) this.categories[index] = newChange.data;
       }
       if (newChange.action === 'PRODUCT_CATEGORY_DELETED') {
         let index = this.categories.findIndex(item => item.id === newChange.data.id);
@@ -39,9 +42,23 @@ export class InventoryStateService {
       this.onInitGetCategoriess(this.categories);
     })
 
+    this.inventoryRealTimeService.changeProductsArray.subscribe(newChange => {
+     /* if (newChange.action === 'PRODUCT_SAVED') {
+        let index = this.categories.findIndex(item => item.id === newChange.data.id);
+       if (index === -1) this.categories.push(newChange.data);
+       if (index > -1) this.categories[index] = newChange.data;
+      }
+      if (newChange.action === 'PRODUCT_DELETED') {
+        let index = this.categories.findIndex(item => item.id === newChange.data.id);
+        if (index > -1) this.categories.splice(index, 1);
+      }*/
+      this.onChangeProducts.emit(new InventoryChange(newChange.action, newChange.data, []));
+     
+    })
+
   }
-  public getChangeCategories() {
-    return this.onChangeCategories;
+  public getChangeProducts() {
+    return this.onChangeProducts;
   }
   public getCategories() {
     return this.categories;

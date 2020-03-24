@@ -63,6 +63,7 @@ export class WebsocketService {
       that.subsribeToPasswordRecods();
       that.subsribeToTaxes();
       that.subsribeToCategories();
+      that.subsribeToProducts();
     });
   }
 private subsribeToDevices () {
@@ -192,6 +193,22 @@ private subsribeToDevices () {
         this.stompClient.subscribe(`/user/watch/productCategory`, (message) => {
           var newChange = JSON.parse(message.body);
           this.inventoryRealTimeService.handleRealTimeChangesCategories(newChange);
+        
+        });
+     
+    }, 3000);
+  }
+
+      /**
+   * subscribe to categories realtime
+   */
+  public subsribeToProducts() {
+   
+    setTimeout(() => {
+     
+        this.stompClient.subscribe(`/user/watch/product`, (message) => {
+          var newChange = JSON.parse(message.body);
+          this.inventoryRealTimeService.handleRealTimeChangesProducts(newChange);
         
         });
      

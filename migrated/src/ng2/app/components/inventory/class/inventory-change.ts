@@ -1,8 +1,8 @@
-import { CategoryProduct } from 'src/ng2/app/interfaces/product/category-product';
+import { InventoryItem } from './inventory-item';
 
 export class InventoryChange {
     action:string;
-    list:Array<CategoryProduct> = [];
+    list:Array<InventoryItem> = [];
     data:any;
     constructor(action,data,list) {
         this.action = action;
