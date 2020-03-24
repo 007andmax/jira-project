@@ -67,6 +67,7 @@ export class GlNumberComponent implements OnInit, OnDestroy {
         map((res: any) => {
           if (res) {
             this.numberList = res;
+            this.numberList.sort((a,b) => a.glNumber.localeCompare(b.glNumber));
           }
           this.loading = false;$(".loading").css("display", "none");
         })
@@ -165,6 +166,7 @@ export class GlNumberComponent implements OnInit, OnDestroy {
             this.loading = false;$(".loading").css("display", "none");
             this.toastrService.success("GL Number Saved Successfully");
             this.numberList.push(res);
+            this.numberList.sort((a,b) => a.glNumber.localeCompare(b.glNumber));
             this.create = false;
           })
         )
