@@ -13,7 +13,7 @@
           </mat-error>
           
           <p>Item number</p>
-          <input type="text" [(ngModel)]="inventory.manufacture" (blur)="onCheckManufacture()" placeholder="Enter Suite Number">
+          <input type="text" [(ngModel)]="inventory.manufacture" (blur)="onCheckManufacture()" placeholder="Enter Item number">
         </div>
 
         <div class="col-md-4">
@@ -21,12 +21,13 @@
             This number already occupied
           </mat-error>
           <p>ILC number</p>
-          <input type="text" [(ngModel)]="inventory.ilc"  (blur)="onCheckILC()" placeholder="Enter Suite Number">
+          <input type="text" [(ngModel)]="inventory.ilc"  (blur)="onCheckILC()" placeholder="Enter ILC number">
         </div>
 
         <div class="col-md-4">
-          <p>GL</p>
+          <p>GL number</p>
           <app-select-search [class]="['light-dropdown']" [list]="glNumbers" #glNumberSelect
+          [placeholder]="'Select GL'"
           [add]="true" [field]="'glNumber'"
           (onAddItem)="onAddGlNumber($event)"
           (onSelectedItem)="onSelectGlNumbers($event)"></app-select-search>
@@ -53,7 +54,7 @@
         </div>
         <div class="col-md-3">
           <p>Cost</p>
-          <input type="text" number [money]="'true'" (blur)="validate.checkPriceCost(inventory.sale,inventory.cost)" [(ngModel)]="inventory.cost"  placeholder="Enter Suite Number">
+          <input type="text" number [money]="false" (blur)="validate.checkPriceCost(inventory.sale,inventory.cost)" [(ngModel)]="inventory.cost"  placeholder="Enter Cost">
         </div>
 
         <div class="col-md-3">
@@ -61,7 +62,7 @@
             Price is required
           </mat-error>
           <p>Price</p>
-          <input type="text" number [money]="'true'"  [(ngModel)]="inventory.sale" (blur)="validate.checkPriceCost(inventory.sale,inventory.cost)" (input)="validate.resetSale()"  placeholder="Enter Suite Number">
+          <input type="text" number [money]="false"  [(ngModel)]="inventory.sale" (blur)="validate.checkPriceCost(inventory.sale,inventory.cost)" (input)="validate.resetSale()"  placeholder="Enter Price">
         </div>
 
         <div class="col-md-12">
@@ -71,6 +72,7 @@
           <p>Category</p>
           <app-select-search [class]="['light-dropdown']" [list]="categories"
           #categoriesSelect
+          [placeholder]="'Select Category'"
           [field]="'name'"
           [add]="true"
           (onAddItem)="onAddCategory($event)"
@@ -82,6 +84,7 @@
           <p>Vendors</p>
           <app-select-search [class]="['light-dropdown']" [list]="vendors"
           [field]="'name'"
+          [placeholder]="'Select Company'"
           #vendorsSelect
           (onSelectedItem)="onSelectVendor($event)"></app-select-search>
         </div>

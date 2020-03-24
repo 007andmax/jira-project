@@ -25,7 +25,7 @@
         By tittle
       </div>
 
-      <app-select-search [class]="['dark-dropdown']" [list]="allTitles"
+      <app-select-search [placeholder]="'Select Title'" [class]="['dark-dropdown']" [list]="allTitles"
                          (onSelectedItem)="onSelectTitle($event)"></app-select-search>
       <div class="tags-item"></div>
     </div>
@@ -37,7 +37,7 @@
         </div>
         <div class="filter-item__content">
           <div class="dark-dropdown">
-            <app-select-search [class]="['dark-dropdown']"
+            <app-select-search [placeholder]="'Select Company'" [class]="['dark-dropdown']"
               [field]="'name'" [editItem]="selectedCompany" [list]="companies"
               (onSelectedItem)="onSelectCompany($event)"></app-select-search>
           </div>
@@ -60,7 +60,7 @@
         </div>
         <div class="filter-item__content">
           <div class="dark-dropdown">
-            <app-select-search [class]="['dark-dropdown']"
+            <app-select-search [placeholder]="'Select Industry'" [class]="['dark-dropdown']"
               [editItem]="selectedClientIndustry" [list]="industries"
               (onSelectedItem)="onSelectClientIndustry($event)"></app-select-search>
           </div>

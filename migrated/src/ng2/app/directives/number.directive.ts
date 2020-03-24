@@ -17,7 +17,6 @@ export class numberDirective {
     ngOnInit() {
 
         this.element.nativeElement.addEventListener("input", (event) => {
-         
            event.target.value = this.commonService.validateNumber(event.target.value);
         });
         if (this.money) {

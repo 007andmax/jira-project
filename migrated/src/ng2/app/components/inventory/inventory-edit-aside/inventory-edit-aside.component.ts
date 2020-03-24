@@ -162,6 +162,7 @@ export class InventoryEditAsideComponent implements OnInit {
     this.categoriesSelect.clearClient();
     this.vendorsSelect.clearClient();
     this.taxesStateService.onInitClear();
+    this.elRef.nativeElement.querySelector('#inventory-description').value = '';
   }
   save() {
     if (!this.validate.isValidate(this.inventory)) return;

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 // @ts-ignore
 import { UpgradeModule } from "@angular/upgrade/static";
 import { setUpLocationSync } from '@angular/router/upgrade';
-
 import { UsersService } from "./services/users/users.service";
 import { WebsocketService } from "./services/websocket/websocket.service";
 import { UsersStateService } from './states/users/users-state.service';
