@@ -31,7 +31,8 @@ export class TaxesStateService {
         const Index = this.taxes.findIndex((item) => item.id === newChange.data.id);
         if (Index > -1) this.taxes.splice(Index, 1);
       }
-      this.onChangeTaxes.emit(new TaxesChange(newChange.action,newChange.data,this.taxes));
+      this.onInitGetTaxes(this.taxes);
+     // this.onChangeTaxes.emit(new TaxesChange(newChange.action,newChange.data,this.taxes));
     })
   }
   public getTaxes() {

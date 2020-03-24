@@ -149,6 +149,7 @@ export class InventoryAddAsideComponent implements OnInit {
     this.vendorsSelect.clearClient();
     this.taxesStateService.onInitClear();
     this.elRef.nativeElement.querySelector('#inventory-description').value = '';
+    this.validate = new InventoryValidate();
   }
   add() {
     if (!this.validate.isValidate(this.inventory)) return;

@@ -61,7 +61,7 @@ export class TaxesComponent implements OnInit, OnDestroy {
     console.log("onAddTax", this.taxForm.value);
     this.taxesService.addTax(this.taxForm.value).subscribe((data: Tax) => {
       this.selected(data);
-      this.taxes.push(data);
+     
     })
   }
 
