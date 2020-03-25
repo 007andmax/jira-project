@@ -1118,7 +1118,7 @@
               $rootScope.isLeftPanelHidden = false;
             }
           }
-         
+        //  $scope.globalSearch.openedItemName = section;
         };
 
 

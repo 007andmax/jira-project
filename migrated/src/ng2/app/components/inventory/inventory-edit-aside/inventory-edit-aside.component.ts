@@ -147,6 +147,14 @@ export class InventoryEditAsideComponent implements OnInit {
     this.inventory.description = event.target.value;
 
   }
+  onChangeCost(event) {
+    console.log("event.target.value",event.target.value);
+    this.inventory.cost = event.target.value;
+  }
+  onChangeSale(event) {
+    console.log("event.target.value",event.target.value);
+    this.inventory.sale = event.target.value;
+  }
   public onPastDescription(value) {
     this.validate.resetDescription();
     this.inventory.description = value;
@@ -161,6 +169,9 @@ export class InventoryEditAsideComponent implements OnInit {
   private sortGlNumbers(data) {
     return data.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
       1 : ((b.glNumber.toLowerCase() > a.glNumber.toLowerCase()) ? -1 : 0));
+  }
+  getParseMoney(value) {
+    return (value) ? parseFloat(value).toFixed(2) : '';
   }
   close() {
     this.opened = false;
