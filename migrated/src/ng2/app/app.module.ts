@@ -373,8 +373,7 @@ angular.module('quicktech')
     CronEditorModule,
     ImageCropperModule,
     NgxEditorModule,
-    FontAwesomeModule,
-
+    FontAwesomeModule
   ],
   entryComponents: [
     LeftPanelComponent,

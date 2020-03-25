@@ -47,8 +47,10 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
 
   }
   ngDoCheck() {
+ 
     if (this.editItem) this.selectedItem = (this.field) ? this.editItem : this.editItem;
-
+  //  console.log("this.editItem",this.editItem);
+  //  console.log("this.selectedItem",this.selectedItem);
   }
   onCheckAdd(event) {
     let index = this.list.findIndex(item => (this.field) ? item[this.field] === this.selectedItem : item === this.selectedItem);

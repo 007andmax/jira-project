@@ -14,6 +14,7 @@ import { ProductService } from 'src/ng2/app/services/product/product.service';
 import { GlNumberService } from 'src/ng2/app/services/gl-number/gl-number.service';
 import { CompanyProfile } from '../../companies/class/company-profile';
 import { SelectSearchComponent } from '../../shared/select-search/select-search.component';
+import { TextAreaDirective } from 'src/ng2/app/directives/text-area.directive';
 
 @Component({
   selector: 'app-inventory-edit-aside',
@@ -21,11 +22,7 @@ import { SelectSearchComponent } from '../../shared/select-search/select-search.
   styleUrls: ['./inventory-edit-aside.component.scss']
 })
 export class InventoryEditAsideComponent implements OnInit {
-
-  @ViewChild('addTax') containerAddTax;
-  @ViewChild('glNumberSelect') glNumberSelect: SelectSearchComponent;
-  @ViewChild('categoriesSelect') categoriesSelect: SelectSearchComponent;
-  @ViewChild('vendorsSelect') vendorsSelect: SelectSearchComponent;
+  description: TextAreaDirective;
   opened: boolean = false;
   inventory: InventoryItem = new InventoryItem();
   glNumbers: Array<GlNumber> = [];
@@ -36,6 +33,13 @@ export class InventoryEditAsideComponent implements OnInit {
   categories: Array<CategoryProduct> = [];
   validate: InventoryValidate = new InventoryValidate();
   editVendor: Company = null;
+  @ViewChild('addTax') containerAddTax;
+  @ViewChild('glNumberSelect') glNumberSelect: SelectSearchComponent;
+  @ViewChild('categoriesSelect') categoriesSelect: SelectSearchComponent;
+  @ViewChild('vendorsSelect') vendorsSelect: SelectSearchComponent;
+  @ViewChild(TextAreaDirective) set appTextArea(directive: TextAreaDirective) {
+    this.description = directive;
+  };
   constructor(private inventoryStateService: InventoryStateService,
     private taxesStateService: TaxesStateService,
     private glNumberStateService: GlNumberStateService,
@@ -87,7 +91,9 @@ export class InventoryEditAsideComponent implements OnInit {
 
       this.opened = true;
       //this.company.
+      this.description.update();
       this.cd.detectChanges();
+      console.log("description", this.description);
     })
     this.sub.add(getCompanyFromEdit);
   }
@@ -100,7 +106,7 @@ export class InventoryEditAsideComponent implements OnInit {
   }
   onCheckManufacture() {
     this.productService.validateProductManufacture(this.inventory.manufacture, this.inventory.versionedId.id).subscribe((data: any) => {
-   
+
       this.validate.resetManufactureIsExist();
       if (!data.value) this.validate.setManufactureIsExist();
     })
