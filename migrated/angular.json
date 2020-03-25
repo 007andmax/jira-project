@@ -319,7 +319,6 @@
               "src/ng1/scripts/core/companies/company-profile/tabs/network-scan-tab/network-scan-item.ctrl.js",
               "src/ng1/scripts/core/companies/company-profile/tabs/network-scan-tab/network-scan-tab.ctrl.js",
               "src/ng1/scripts/core/companies/company-profile/tabs/products-tab/company-product-report.ctrl.js",
-              "src/ng1/scripts/core/companies/company-profile/tabs/products-tab/products-tab.ctrl.js",
               "src/ng1/scripts/core/companies/company-profile/tabs/settings-tab/settings-tab.ctrl.js",
               "src/ng1/scripts/core/companies/company-profile/tabs/tickets-tab/tickets-tab.ctrl.js",
               "src/ng1/scripts/core/companies/company-profile/tabs/unknownFilter.fltr.js",
