@@ -27,7 +27,7 @@
             <div style="position: relative"
               *ngIf="taxForm.controls['rate'].invalid && (taxForm.controls['rate'].dirty || taxForm.controls['rate'].touched)">
               <label style="white-space: nowrap;" class="control-label" *ngIf="taxForm.controls['rate'].errors.required">
-                Required.
+                Field is required.
               </label>
               <label style="white-space: nowrap;" class="control-label" *ngIf="taxForm.controls['rate'].errors.min">
                 To small.

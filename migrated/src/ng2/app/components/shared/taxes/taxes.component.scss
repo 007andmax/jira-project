@@ -26,9 +26,13 @@
 .add-tax-inventory {
   top: 0 !important;
 
+  .control-label {
+    top: -13px !important;
+    color: red;
+  }
   .new-tax {
     overflow: visible;
-    width: 346px;
+    width: 346px !important;
     height: fit-content;
   }
 
@@ -95,10 +99,7 @@
         color: #4c5c6f;
       }
   }
-
-
 }
-
 
 #dropdownTypeTaxes {
   outline: none;

@@ -26,7 +26,7 @@
 
         <div class="col-md-4">
           <p>GL number</p>
-          <app-select-search [class]="['light-dropdown']" [list]="glNumbers" #glNumberSelect
+          <app-select-search [class]="['light-dropdown', 'new-product-gl-select']" [list]="glNumbers" #glNumberSelect
           [placeholder]="'Select GL'"
           [add]="true" [field]="'glNumber'"
           (onAddItem)="onAddGlNumber($event)"
@@ -46,14 +46,14 @@
         </div>
 
         <app-taxes (taxesChange)="onTaxesChange($event)"></app-taxes>
-        <div class="col-md-6"  *ngIf="!validate.getCostSale()">
-          <mat-error *ngIf="!validate.getCostSale()">
-            Cost cannot be higher than Price
-          </mat-error>
-        </div>
+<!--        <div class="col-md-6"  *ngIf="!validate.getCostSale()">-->
+<!--        </div>-->
         <div class="col-md-3">
           <p>Cost</p>
           <input type="text" number [money]="true" (blur)="validate.checkPriceCost(inventory.sale,inventory.cost)" [(ngModel)]="inventory.cost"  placeholder="Enter Cost">
+          <mat-error style="top: 73px; left: 15px; width: 200px;" *ngIf="!validate.getCostSale()">
+            Cost cannot be higher than Price
+          </mat-error>
         </div>
 
         <div class="col-md-3">

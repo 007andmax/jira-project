@@ -14,17 +14,19 @@
         </div>
         <div class="add-category-lp-dropdown" ngbDropdownMenu aria-labelledby="dropdownManual" style="z-index: 100000000;">
          <app-add-category-product #addCategory [inventoryCategoryList]="inventoryCategoryList"></app-add-category-product>
-        </div> 
+        </div>
       </div>
     </div>
-    <div class="center-category__category" ng-class="{active: !sortCategoty}"
-      ng-click="stateGo($event, 'products', {category: ''})">
-      <div class="center-category__category--item">
-        <div class="center-category__category--item__category-label" (click)="selectCategory(null)">ALL PRODUCTS</div>
-        <div>{{getAllProductsCount()}}</div>
+    
+    <div class="container-inventory-category">
+      <div class="center-category__category" ng-class="{active: !sortCategoty}"
+        ng-click="stateGo($event, 'products', {category: ''})">
+        <div class="center-category__category--item">
+          <div class="center-category__category--item__category-label" (click)="selectCategory(null)">ALL PRODUCTS</div>
+          <div>{{getAllProductsCount()}}</div>
+        </div>
       </div>
-    </div>
-    <ng-template ngFor let-category [ngForOf]="inventoryCategoryList" [ngForTrackBy]="trackById" let-i="index">
+      <ng-template ngFor let-category [ngForOf]="inventoryCategoryList" [ngForTrackBy]="trackById" let-i="index">
       <div class="center-category__category" [ngClass]="{active: (sortCategoty) ?  category.name === sortCategoty.name : false}" *ngIf="i < countOfCategories">
         <div *ngIf="category.productsAmount >0 || category.name === 'Uncategorized'"
           class="center-category__category--item" (click)="selectCategory(category)">
@@ -43,6 +45,7 @@
         </div>
       </div>
     </ng-template>
+    </div>
 
     <div class="new-link" style="padding: 0 24px!important;" *ngIf="inventoryCategoryList.length > 10"
       (click)="changeShowAllCategories()">Show All
