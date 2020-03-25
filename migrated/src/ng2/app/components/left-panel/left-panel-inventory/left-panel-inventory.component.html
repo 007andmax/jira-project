@@ -10,10 +10,10 @@
     <div class="inventory-lp-header">
       <div>Category List</div>
       <div class="add-category-lp" ngbDropdown>
-        <div   class="new-link"id="dropdownManual" ngbDropdownToggle>+Add
+        <div   class="new-link"id="dropdownManual" ngbDropdownToggle (click)="resetAddCategory()">+Add
         </div>
         <div class="add-category-lp-dropdown" ngbDropdownMenu aria-labelledby="dropdownManual" style="z-index: 100000000;">
-         <app-add-category-product [inventoryCategoryList]="inventoryCategoryList"></app-add-category-product>
+         <app-add-category-product #addCategory [inventoryCategoryList]="inventoryCategoryList"></app-add-category-product>
         </div> 
       </div>
     </div>

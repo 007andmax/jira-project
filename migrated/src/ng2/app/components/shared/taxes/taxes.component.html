@@ -62,7 +62,7 @@
        aria-labelledby="dropdownTypeTaxes">
     <ng-template ngFor let-tax [ngForOf]="taxes" [ngForTrackBy]="trackById">
       <div class="dropdown-item" ngbDropdownItem  (click)="selected(tax)">
-        <button  [textContent]="tax.name"></button>
+        <button  [textContent]="tax.name + ' ' + tax.rate + '%'"></button>
         <i class="icn-sm icn-label-save" *ngIf="checkTaxIsSelected(tax)" style="right: 13px"></i>
       </div>
     </ng-template>

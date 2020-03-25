@@ -18,7 +18,7 @@ export class TaxesStateService {
   public onInit() {
     this.taxesService.getTaxes().subscribe((data) => {
       this.setTaxes(data);
-      this.onInitGetTaxes(data);
+      this.onInitGetTaxes(this.taxes);
     })
 
     this.taxesRealTimeService.changeTaxesArray.subscribe(newChange => {
@@ -31,6 +31,7 @@ export class TaxesStateService {
         const Index = this.taxes.findIndex((item) => item.id === newChange.data.id);
         if (Index > -1) this.taxes.splice(Index, 1);
       }
+      this.setTaxes(this.taxes);
       this.onInitGetTaxes(this.taxes);
      // this.onChangeTaxes.emit(new TaxesChange(newChange.action,newChange.data,this.taxes));
     })
@@ -42,7 +43,8 @@ export class TaxesStateService {
     this.onGetTaxes.emit(data);
   }
   public setTaxes(data) {
-    this.taxes = data;
+    this.taxes = data.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+    1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
 
     /**

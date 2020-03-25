@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { ProductService } from 'src/ng2/app/services/product/product.service';
 import { CategoryProduct } from 'src/ng2/app/interfaces/product/category-product';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
@@ -6,6 +6,7 @@ import { DELETE_COMPANY } from 'src/ng2/app/const/confirm';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 import { InventoryStateService } from 'src/ng2/app/states/inventory/inventory-state.service';
+import { AddCategoryProductComponent } from './add-category-product/add-category-product.component';
 
 @Component({
   selector: 'app-left-panel-inventory',
@@ -16,6 +17,7 @@ export class LeftPanelInventoryComponent implements OnInit {
   inventoryCategoryList: Array<CategoryProduct> = [];
   countOfCategories: number = 10;
   sortCategoty: CategoryProduct = null;
+  @ViewChild('addCategory') addCategory:AddCategoryProductComponent;
   constructor(private productService: ProductService,
     private confirmStateService: ConfirmStateService,
     private inventoryStateService: InventoryStateService,
@@ -43,6 +45,9 @@ export class LeftPanelInventoryComponent implements OnInit {
     });
     return count;
   };
+  resetAddCategory() {
+    this.addCategory.clearCategory();
+  }
   changeShowAllCategories() {
     if (this.countOfCategories === 10) {
       this.countOfCategories = this.inventoryCategoryList.length;

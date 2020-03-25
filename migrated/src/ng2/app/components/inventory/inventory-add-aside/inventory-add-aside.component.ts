@@ -102,8 +102,8 @@ export class InventoryAddAsideComponent implements OnInit {
     if (!data) this.inventory.category = null;
   }
   onAddGlNumber(data) {
-    this.glNumberService.addGlNumber(data, "").subscribe(res => {
-
+    this.glNumberService.addGlNumber(data, "").subscribe((res: any) => {
+      this.inventory.glNumber = res;
     })
   }
   onSelectVendor(data) {

@@ -110,7 +110,7 @@ export class TaxesComponent implements OnInit, OnDestroy {
   }
   getSelectedTaxes() {
     return this.selectedTax.map(item => {
-      return item.name;
+      return `${item.name} ${item.rate}%`;
     }).join(",");
   }
   /**

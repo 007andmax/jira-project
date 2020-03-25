@@ -129,8 +129,8 @@ export class InventoryEditAsideComponent implements OnInit {
     if (!data) this.inventory.category = null;
   }
   onAddGlNumber(data) {
-    this.glNumberService.addGlNumber(data, "").subscribe(res => {
-
+    this.glNumberService.addGlNumber(data, "").subscribe((res: any) => {
+      this.inventory.glNumber = res;
     })
   }
   onSelectVendor(data) {
@@ -148,11 +148,11 @@ export class InventoryEditAsideComponent implements OnInit {
 
   }
   onChangeCost(event) {
-    console.log("event.target.value",event.target.value);
+    console.log("event.target.value", event.target.value);
     this.inventory.cost = event.target.value;
   }
   onChangeSale(event) {
-    console.log("event.target.value",event.target.value);
+    console.log("event.target.value", event.target.value);
     this.inventory.sale = event.target.value;
   }
   public onPastDescription(value) {

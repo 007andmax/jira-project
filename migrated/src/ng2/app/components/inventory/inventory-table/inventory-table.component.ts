@@ -52,7 +52,7 @@ export class InventoryTableComponent implements OnInit {
     let taxes = [];
     this.taxes.forEach(item => {
       let index = this.inventory.taxIds.findIndex(taxId => taxId === item.id);
-      if (index > -1) taxes.push(item.name);
+      if (index > -1) taxes.push(`${item.name} ${item.rate}%`);
     })
     return (taxes.length > 0) ? taxes.join(', ') : 'No taxes';
   };
