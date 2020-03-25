@@ -15,7 +15,6 @@ export class AddCategoryProductComponent implements OnInit {
 
   ngOnInit() {
   }
-
   clearCategory() {
     this.name = '';
   }

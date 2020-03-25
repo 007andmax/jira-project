@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { InventoryItem } from '../class/inventory-item';
 import { GlNumber } from 'src/ng2/class/gl-number/gl-number';
 import { Tax } from 'src/ng2/app/interfaces/service/tax';
@@ -21,7 +21,7 @@ import { TextAreaDirective } from 'src/ng2/app/directives/text-area.directive';
   templateUrl: './inventory-edit-aside.component.html',
   styleUrls: ['./inventory-edit-aside.component.scss']
 })
-export class InventoryEditAsideComponent implements OnInit {
+export class InventoryEditAsideComponent implements OnInit, OnDestroy {
   description: TextAreaDirective;
   opened: boolean = false;
   inventory: InventoryItem = new InventoryItem();
@@ -53,9 +53,7 @@ export class InventoryEditAsideComponent implements OnInit {
     if (this.glNumberStateService.getGLNumbers().length > 0) this.glNumbers = this.sortGlNumbers(this.glNumberStateService.getGLNumbers());
     let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe((data) => {
       this.glNumbers = this.sortGlNumbers(data);
-      console.log("glNumbers", this.glNumbers);
     })
-    console.log("glNumbers", this.glNumbers);
     this.sub.add(getOnGlNumbers);
     if (this.taxesStateService.getTaxes().length > 0) this.taxes = this.taxesStateService.getTaxes();
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
@@ -69,44 +67,36 @@ export class InventoryEditAsideComponent implements OnInit {
     })
     this.sub.add(getOnCompanies);
     if (this.inventoryStateService.getCategories().length > 0) this.categories = this.inventoryStateService.getCategories();
-    this.inventoryStateService.getOnCategries().subscribe((data) => {
+    let getOnCategries = this.inventoryStateService.getOnCategries().subscribe((data) => {
       this.categories = data;
     })
+    this.sub.add(getOnCategries);
     this.onEditCompany();
   }
   onEditCompany() {
     let getCompanyFromEdit = this.inventoryStateService.getInventoryFromEdit().subscribe((data: InventoryItem) => {
-      console.log("data", data);
       this.inventory = new InventoryItem(data);
-      //this.inventory.onEditMode(data);
       let taxes = this.taxes.filter(item => {
         let index = this.inventory.taxIds.findIndex(taxId => taxId === item.id);
         return (index > -1) ? true : false;
       })
       this.taxesStateService.setTaxesFromtEdit(taxes);
       this.editVendor = this.vendors.find(item => item.id === this.inventory.companyId);
-
-
       this.elRef.nativeElement.querySelector("#inventory-description").value = this.inventory.description;
-
       this.opened = true;
-      //this.company.
       this.description.update();
       this.cd.detectChanges();
-      console.log("description", this.description);
     })
     this.sub.add(getCompanyFromEdit);
   }
   onCheckILC() {
     this.productService.validateProductILC(this.inventory.ilc, this.inventory.versionedId.id).subscribe((data: any) => {
       this.validate.resetILCIsExist();
-
       if (!data.value) this.validate.setILCIsExist();
     })
   }
   onCheckManufacture() {
     this.productService.validateProductManufacture(this.inventory.manufacture, this.inventory.versionedId.id).subscribe((data: any) => {
-
       this.validate.resetManufactureIsExist();
       if (!data.value) this.validate.setManufactureIsExist();
     })
@@ -148,11 +138,9 @@ export class InventoryEditAsideComponent implements OnInit {
 
   }
   onChangeCost(event) {
-    console.log("event.target.value", event.target.value);
     this.inventory.cost = event.target.value;
   }
   onChangeSale(event) {
-    console.log("event.target.value", event.target.value);
     this.inventory.sale = event.target.value;
   }
   public onPastDescription(value) {
@@ -160,11 +148,9 @@ export class InventoryEditAsideComponent implements OnInit {
     this.inventory.description = value;
   }
   onTaxesChange(data) {
-    console.log("data", data);
     this.inventory.taxIds = data.map(item => {
       return item.id;
     });
-    console.log("this.inventory", this.inventory);
   }
   private sortGlNumbers(data) {
     return data.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
@@ -185,10 +171,11 @@ export class InventoryEditAsideComponent implements OnInit {
   }
   save() {
     if (!this.validate.isValidate(this.inventory)) return;
-    console.log("this.inventory", this.inventory);
     this.productService.addProduct(this.inventory.getForEdit()).subscribe(data => {
-      console.log("data", data);
       this.close();
     })
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

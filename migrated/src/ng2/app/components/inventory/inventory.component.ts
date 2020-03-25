@@ -1,7 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ProductService } from '../../services/product/product.service';
 import { CategoryProductitem } from 'src/ng2/class/category-product-item';
-import { Product } from '../../interfaces/product/product';
 import { InventoryListService } from './services/inventory-list.service';
 import { InventoryItem } from './class/inventory-item';
 import { CompaniesStateService } from '../../states/company/companies-state.service';
@@ -14,9 +13,7 @@ import { Tax } from 'src/ng2/class/taxes/tax';
 import { InventoryStateService } from '../../states/inventory/inventory-state.service';
 import { PermissionsService } from '../../services/permissions/permissions.service';
 import { ConfirmStateService } from '../shared/confirm/services/confirm-state.service';
-import { DEARCHIVE_COMPANY, DELETE_COMPANY, DELETE_PRODUCT } from '../../const/confirm';
-import { CategoryProduct } from '../../interfaces/product/category-product';
-import { DELETE } from '@angular/cdk/keycodes';
+import { DELETE_COMPANY, DELETE_PRODUCT } from '../../const/confirm';
 import { InventoryChange } from './class/inventory-change';
 
 @Component({
@@ -53,29 +50,23 @@ export class InventoryComponent implements OnInit {
       this.companies = data;
     })
     this.sub.add(getOnCompanies);
-
     if (this.glNumberStateService.getGLNumbers().length > 0) this.glNumbers = this.glNumberStateService.getGLNumbers();
     let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe((data) => {
       this.glNumbers = data;
     })
     this.sub.add(getOnGlNumbers);
-
     if (this.taxesStateService.getTaxes().length > 0) this.taxes = this.taxesStateService.getTaxes();
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
       this.taxes = data;
     })
     this.sub.add(getOnTaxess);
-
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
-      console.log("data", data);
       if (data) {
-        console.log("this.confirmStateService.getConfirmAction()", this.confirmStateService.getConfirmAction());
         if (this.confirmStateService.getConfirmAction() === DELETE_COMPANY) this.onRemoveCategory(this.inventoryStateService.getCategoryForDelete().id);
         if (this.confirmStateService.getConfirmAction() === DELETE_PRODUCT) this.onRemoveProduct(this.inventoryStateService.getProductForDelete().versionedId.id);
       }
     })
     this.sub.add(getConfirm);
-
     let getOnSortCategory = this.inventoryStateService.getOnSortCategory().subscribe(data => {
       this.sortCategoty = data;
       this.page_number = 0;
@@ -84,7 +75,6 @@ export class InventoryComponent implements OnInit {
       this.onScroll();
     })
     this.sub.add(getOnSortCategory);
-
     let getChangeProducts = this.inventoryStateService.getChangeProducts().subscribe((data: InventoryChange) => {
       if (data.action === 'PRODUCT_SAVED') {
         const reqIndex = this.reqInventoryList.findIndex((item) => item.versionedId.id === data.data.versionedId.id);
@@ -111,24 +101,16 @@ export class InventoryComponent implements OnInit {
     this.getListProducts();
   }
   onRemoveProduct(id) {
-    console.log("product", id);
     this.productService.removeProduct(id).subscribe(data => {
-
     })
   }
   onRemoveCategory(id) {
-    console.log("category", id);
     this.productService.removeCategory(id).subscribe(data => {
-
     })
   }
-  /**
-  * getPermission
-  */
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
   }
-
   public getListProducts() {
     this.productService.getProducts().subscribe((res: Array<InventoryItem>) => {
       this.reqInventoryList = res;
@@ -158,7 +140,6 @@ export class InventoryComponent implements OnInit {
     this.inventoryList = [...this.inventoryList, ...inventoryList];
     this.infiniteScrollDisabled = false;
     if ((this.page_number * 30) > listFilter.length) this.inventoryListService.setBlockList(true);
-    console.log("this.inventoryList", this.inventoryList);
     this.cd.detectChanges();
   }
   onSearch() {
@@ -178,7 +159,6 @@ export class InventoryComponent implements OnInit {
     this.infiniteScrollDisabled = true;
     this.getProducts();
   }
-
   public trackById(index, item) {
     return item.id;
   }

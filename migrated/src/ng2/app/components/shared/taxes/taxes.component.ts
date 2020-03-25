@@ -4,8 +4,6 @@ import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Tax } from 'src/ng2/app/interfaces/service/tax';
 import { Subscription } from 'rxjs';
-import { MatChipInputEvent } from '@angular/material';
-import { Tag } from 'src/ng2/app/interfaces/quote/tag';
 import { TaxesService } from 'src/ng2/app/services/taxes/taxes.service';
 
 @Component({
@@ -45,9 +43,6 @@ export class TaxesComponent implements OnInit, OnDestroy {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-
-
-
     if (this.taxesStateService.getTaxes().length > 0) this.taxes = this.taxesStateService.getTaxes();
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
       this.taxes = data;
@@ -58,10 +53,8 @@ export class TaxesComponent implements OnInit, OnDestroy {
   }
 
   public onAddTax() {
-    console.log("onAddTax", this.taxForm.value);
     this.taxesService.addTax(this.taxForm.value).subscribe((data: Tax) => {
       this.selected(data);
-     
     })
   }
 
@@ -97,7 +90,6 @@ export class TaxesComponent implements OnInit, OnDestroy {
     this.containerAddTax.open();
   }
 
-
   /**
    * Remove tag from selected
    * @param index - user index
@@ -124,9 +116,7 @@ export class TaxesComponent implements OnInit, OnDestroy {
     } else {
       this.selectedTax.push(tax);
     }
-
     this.taxesChange.emit(this.selectedTax);
-    //  this.userInput.nativeElement.blur();
     this.taxCtrl.setValue(null);
   }
   public checkTaxIsSelected(tax) {

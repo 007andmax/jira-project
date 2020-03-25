@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, OnDestroy } from '@angular/core';
 import { merge, Observable, Subject, Subscription } from "rxjs";
-
 import { debounceTime, distinctUntilChanged, filter, map } from "rxjs/operators";
 import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
 
@@ -10,7 +9,7 @@ import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
   styleUrls: ['./select-search.component.scss']
 })
 export class SelectSearchComponent implements OnInit, OnDestroy {
-  
+
 
   @Input() field: string = null;
   @Input() add: boolean = false;
@@ -25,7 +24,7 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
   @Input() valid: boolean = true;
   @Input() filter: boolean = false;
   public selectedItem;
-  public isAdd:boolean = false;
+  public isAdd: boolean = false;
   focus$ = new Subject<string>();
   click$ = new Subject<string>();
   sub = new Subscription();
@@ -43,26 +42,22 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
    * Initializes select client. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-    console.log("list",this.list);
 
   }
   ngDoCheck() {
- 
     if (this.editItem) this.selectedItem = (this.field) ? this.editItem : this.editItem;
-  //  console.log("this.editItem",this.editItem);
-  //  console.log("this.selectedItem",this.selectedItem);
   }
   onCheckAdd(event) {
     let index = this.list.findIndex(item => (this.field) ? item[this.field] === this.selectedItem : item === this.selectedItem);
     if (index === -1 && this.add) {
       this.isAdd = true;
-    }else {
+    } else {
       this.isAdd = false;
     }
   }
   onChange(event) {
     let index = this.list.findIndex(item => (this.field) ? item[this.field] === this.selectedItem : item === this.selectedItem);
-    if (index === -1)   this.onSelectedItem.emit(this.selectedItem);
+    if (index === -1) this.onSelectedItem.emit(this.selectedItem);
   }
 
   /**
@@ -95,7 +90,6 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
    * @param result
    */
   formatter = (result: string) => {
-
     return (this.field) ? result[this.field] : result;
   };
 
@@ -105,7 +99,6 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
   public clearClient() {
     this.isAdd = false;
     this.onSelectedItem.emit(null);
-    //   this.editItem = null;
     this.selectedItem = null;
   }
 

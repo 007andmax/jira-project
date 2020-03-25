@@ -13,8 +13,7 @@ export class InventoryFilter {
     categoryId: string;
 
     constructor() { }
-
-
+    
     public setCompanyId(data) {
         this.categoryId = data;
     }

@@ -21,39 +21,24 @@ export class InventoryStateService {
     private inventoryRealTimeService: InventoryRealTimeService) { }
   public onInit() {
     this.productService.getCategoriesProducts().subscribe(data => {
-      console.log("data", data);
       this.setCategories(data);
       this.onInitGetCategoriess(this.categories);
     })
-
     this.inventoryRealTimeService.changeCompaniesArray.subscribe(newChange => {
-      console.log("newChange",newChange);
       if (newChange.action === 'PRODUCT_CATEGORY_SAVED') {
         let index = this.categories.findIndex(item => item.id === newChange.data.id);
-       if (index === -1) this.categories.push(newChange.data);
-       if (index > -1) this.categories[index] = newChange.data;
+        if (index === -1) this.categories.push(newChange.data);
+        if (index > -1) this.categories[index] = newChange.data;
       }
       if (newChange.action === 'PRODUCT_CATEGORY_DELETED') {
         let index = this.categories.findIndex(item => item.id === newChange.data.id);
         if (index > -1) this.categories.splice(index, 1);
       }
-      //this.onChangeCategories.emit(new InventoryChange(newChange.action, newChange.data, this.categories));
       this.setCategories(this.categories);
       this.onInitGetCategoriess(this.categories);
     })
-
     this.inventoryRealTimeService.changeProductsArray.subscribe(newChange => {
-     /* if (newChange.action === 'PRODUCT_SAVED') {
-        let index = this.categories.findIndex(item => item.id === newChange.data.id);
-       if (index === -1) this.categories.push(newChange.data);
-       if (index > -1) this.categories[index] = newChange.data;
-      }
-      if (newChange.action === 'PRODUCT_DELETED') {
-        let index = this.categories.findIndex(item => item.id === newChange.data.id);
-        if (index > -1) this.categories.splice(index, 1);
-      }*/
       this.onChangeProducts.emit(new InventoryChange(newChange.action, newChange.data, []));
-     
     })
 
   }

@@ -17,7 +17,7 @@ export class LeftPanelInventoryComponent implements OnInit {
   inventoryCategoryList: Array<CategoryProduct> = [];
   countOfCategories: number = 10;
   sortCategoty: CategoryProduct = null;
-  @ViewChild('addCategory') addCategory:AddCategoryProductComponent;
+  @ViewChild('addCategory') addCategory: AddCategoryProductComponent;
   constructor(private productService: ProductService,
     private confirmStateService: ConfirmStateService,
     private inventoryStateService: InventoryStateService,
@@ -29,10 +29,8 @@ export class LeftPanelInventoryComponent implements OnInit {
     if (this.inventoryStateService.getCategories().length > 0) this.inventoryCategoryList = this.inventoryStateService.getCategories();
     this.inventoryStateService.getOnCategries().subscribe((data) => {
       this.inventoryCategoryList = data;
-      console.log('data', data);
       this.cd.detectChanges();
     })
-    console.log('this.inventoryCategoryList', this.inventoryCategoryList);
   }
   selectCategory(category) {
     this.sortCategoty = category;
@@ -61,7 +59,6 @@ export class LeftPanelInventoryComponent implements OnInit {
     modalRef.componentInstance.message = `Do you want to delete category?`;
     this.inventoryStateService.setCategoryForDelete(category);
   }
-
   public trackById(index, item) {
     return item.id;
   }

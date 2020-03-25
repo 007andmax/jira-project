@@ -1,7 +1,6 @@
 import { InventoryItem } from './inventory-item';
 
 export class InventoryValidate {
-    
     description: boolean = true;
     sale: boolean = true;
     cost_sale: boolean = true;
@@ -46,7 +45,6 @@ export class InventoryValidate {
         this.category = true;
     }
 
-    
     public getDescription() {
         return this.description;
     }
@@ -58,13 +56,9 @@ export class InventoryValidate {
     }
     public checkPriceCost(price, cost) {
         cost = (!cost) ? 0 : cost;
-        console.log("price",price);
-        console.log("cost",cost);
-      
         this.cost_sale = (Number(price) > Number(cost)) ? true : false;
-        console.log("checkPriceCost",this.cost_sale);
     }
-   
+
     public checkValidDescription(description) {
         if (description.length === 0) {
             this.description = false;

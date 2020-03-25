@@ -1,13 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Product } from 'src/ng2/app/interfaces/product/product';
 import { InventoryItem } from '../class/inventory-item';
-import { ItemFilterPerson } from '../../left-panel/left-panel-companies/class/item-filter-person';
 import { PermissionsService } from 'src/ng2/app/services/permissions/permissions.service';
 import { InventoryStateService } from 'src/ng2/app/states/inventory/inventory-state.service';
 import { ProductService } from 'src/ng2/app/services/product/product.service';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DELETE_COMPANY, DELETE_PRODUCT } from 'src/ng2/app/const/confirm';
+import { DELETE_PRODUCT } from 'src/ng2/app/const/confirm';
 import { ConfirmComponent } from '../../shared/confirm/confirm.component';
 
 @Component({
@@ -21,7 +19,7 @@ export class InventoryTableComponent implements OnInit {
   @Input() glNumbers;
   @Input() taxes;
 
-  constructor(private permissionsService: PermissionsService, 
+  constructor(private permissionsService: PermissionsService,
     private inventoryStateService: InventoryStateService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
@@ -47,7 +45,6 @@ export class InventoryTableComponent implements OnInit {
     let conpany = this.companies.find(item => item.id === this.inventory.companyId);
     return (conpany) ? conpany.name : "";
   }
-   
   getSelectedTaxNames() {
     let taxes = [];
     this.taxes.forEach(item => {
@@ -56,9 +53,7 @@ export class InventoryTableComponent implements OnInit {
     })
     return (taxes.length > 0) ? taxes.join(', ') : 'No taxes';
   };
-  /**
-   * getPermission
-   */
+
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
   }

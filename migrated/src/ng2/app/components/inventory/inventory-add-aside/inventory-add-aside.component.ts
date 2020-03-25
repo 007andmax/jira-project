@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { InventoryStateService } from 'src/ng2/app/states/inventory/inventory-state.service';
 import { Subscription } from 'rxjs';
 import { InventoryItem } from '../class/inventory-item';
@@ -19,7 +19,7 @@ import { SelectSearchComponent } from '../../shared/select-search/select-search.
   templateUrl: './inventory-add-aside.component.html',
   styleUrls: ['./inventory-add-aside.component.scss']
 })
-export class InventoryAddAsideComponent implements OnInit {
+export class InventoryAddAsideComponent implements OnInit,OnDestroy {
   @ViewChild('addTax') containerAddTax;
   @ViewChild('glNumberSelect') glNumberSelect: SelectSearchComponent;
   @ViewChild('categoriesSelect') categoriesSelect: SelectSearchComponent;
@@ -47,9 +47,7 @@ export class InventoryAddAsideComponent implements OnInit {
     if (this.glNumberStateService.getGLNumbers().length > 0) this.glNumbers = this.sortGlNumbers(this.glNumberStateService.getGLNumbers());
     let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe((data) => {
       this.glNumbers = this.sortGlNumbers(data);
-      console.log("glNumbers", this.glNumbers);
     })
-    console.log("glNumbers", this.glNumbers);
     this.sub.add(getOnGlNumbers);
     this.onShowAside();
     if (this.taxesStateService.getTaxes().length > 0) this.taxes = this.taxesStateService.getTaxes();
@@ -57,19 +55,18 @@ export class InventoryAddAsideComponent implements OnInit {
       this.taxes = data;
     })
     this.sub.add(getOnTaxess);
-
     if (this.companiesStateService.getCompanies().length > 0) this.onInitVendors(this.companiesStateService.getCompanies());
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.onInitVendors(data);
     })
     this.sub.add(getOnCompanies);
     if (this.inventoryStateService.getCategories().length > 0) this.categories = this.inventoryStateService.getCategories();
-    this.inventoryStateService.getOnCategries().subscribe((data) => {
+    let getOnCategries = this.inventoryStateService.getOnCategries().subscribe((data) => {
       this.categories = data;
     })
-
+    this.sub.add(getOnCategries);
   }
- 
+
   onCheckILC() {
     this.productService.validateProductILC(this.inventory.ilc, '').subscribe((data: any) => {
       this.validate.resetILCIsExist();
@@ -79,7 +76,7 @@ export class InventoryAddAsideComponent implements OnInit {
   }
   onCheckManufacture() {
     this.productService.validateProductManufacture(this.inventory.manufacture, '').subscribe((data: any) => {
-     
+
       this.validate.resetManufactureIsExist();
       if (!data.value) this.validate.setManufactureIsExist();
     })
@@ -125,11 +122,9 @@ export class InventoryAddAsideComponent implements OnInit {
     this.inventory.description = value;
   }
   onTaxesChange(data) {
-    console.log("data", data);
     this.inventory.taxIds = data.map(item => {
       return item.id;
     });
-    console.log("this.inventory", this.inventory);
   }
   public onShowAside() {
     let getShowAsideForAdd = this.inventoryStateService.getShowAsideForAdd().subscribe(() => {
@@ -155,10 +150,12 @@ export class InventoryAddAsideComponent implements OnInit {
   }
   add() {
     if (!this.validate.isValidate(this.inventory)) return;
-    console.log("this.inventory", this.inventory);
     this.productService.addProduct(this.inventory.getForAdd()).subscribe(data => {
-      console.log("data", data);
       this.close();
     })
   }
+  ngOnDestroy(): void {
+   this.sub.unsubscribe();
+  }
+
 }

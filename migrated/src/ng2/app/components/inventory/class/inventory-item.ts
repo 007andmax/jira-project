@@ -1,4 +1,3 @@
-import { Product } from 'src/ng2/app/interfaces/product/product';
 import { GlNumber } from 'src/ng2/class/gl-number/gl-number';
 import { InventoryCategory } from './inventory-category';
 import { reqInventoryAdd } from 'src/ng2/app/interfaces/inventory/req-inventory-add';
@@ -29,11 +28,9 @@ export class InventoryItem {
             this.companyId = data.companyId;
             this.billable = data.billable;
             this.taxIds = data.taxIds;
-
         }
-
     }
-   
+
 
     public getForAdd() {
         let item: reqInventoryAdd = {
@@ -45,7 +42,7 @@ export class InventoryItem {
             companyId: this.companyId,
             taxIds: this.taxIds,
             categoryId: (this.category) ? this.category.id : null,
-            glNumber:  (this.glNumber && this.glNumber.id) ? { id: this.glNumber.id } : null,
+            glNumber: (this.glNumber && this.glNumber.id) ? { id: this.glNumber.id } : null,
         }
         return item;
     }
