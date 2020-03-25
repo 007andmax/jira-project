@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { InventoryStateService } from 'src/ng2/app/states/inventory/inventory-state.service';
 import { Subscription } from 'rxjs';
 import { InventoryItem } from '../class/inventory-item';
@@ -40,6 +40,7 @@ export class InventoryAddAsideComponent implements OnInit {
     private companiesStateService: CompaniesStateService,
     private productService: ProductService,
     private elRef: ElementRef,
+    public cd: ChangeDetectorRef,
     private glNumberService: GlNumberService) { }
 
   ngOnInit() {
@@ -150,6 +151,7 @@ export class InventoryAddAsideComponent implements OnInit {
     this.taxesStateService.onInitClear();
     this.elRef.nativeElement.querySelector('#inventory-description').value = '';
     this.validate = new InventoryValidate();
+    this.cd.detectChanges();
   }
   add() {
     if (!this.validate.isValidate(this.inventory)) return;

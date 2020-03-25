@@ -170,6 +170,7 @@ export class InventoryEditAsideComponent implements OnInit {
     this.taxesStateService.onInitClear();
     this.elRef.nativeElement.querySelector('#inventory-description').value = '';
     this.validate = new InventoryValidate();
+    this.cd.detectChanges();
   }
   save() {
     if (!this.validate.isValidate(this.inventory)) return;
