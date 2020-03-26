@@ -7,7 +7,6 @@
       'main.services',
       'quicktech.core.dashboards',
       'quicktech.core.tickets',
-      'quicktech.core.users',
       'quicktech.common.services',
       'quicktech.common.directives',
       'quicktech.core.companies',
@@ -129,11 +128,6 @@
           url: '/tickets-dashboard',
           templateUrl: '/ng1/scripts/core/dashboards/tickets-dashboard/tickets-dashboard.tpl.html',
           controller: 'quicktech.core.dashboards.ticketsDashboardCtrl'
-        }))
-        .state('users', waitForServices({
-          url: '/clients/users',
-          templateUrl: '/ng1/scripts/core/users/users.tpl.html',
-          controller: 'quicktech.core.users.usersCtrl'
         }))
         .state('companies', waitForServices({
           url: '/clients/companies',

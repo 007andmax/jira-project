@@ -122,7 +122,7 @@
 
             <div class="photo" ng-style="{'background': 'url(' + getCompanyLogoUrl(company) + ') no-repeat'}"></div>
             <p class="ellipsis name"
-               uib-tooltip="{{ company.name }}" tooltip-placement="bottom" trimmed-tooltip-checker="company.name">
+               uib-tooltip="{{ company.name }}" tooltip-placement="bottom"  >
             </p>
           </div>
           <div class="card__info">
@@ -130,13 +130,13 @@
               <img src="ng1/images/settings-icon/user-profile.png" alt="">
               <p class="ellipsis" style="width: 180px;"
                  uib-tooltip="{{ getUserName(primaryContact) }}" tooltip-placement="bottom"
-                 trimmed-tooltip-checker="getUserName(primaryContact)">
+                  >
               </p>
               <span class="right-align-tooltip">
                 <span style="max-width: 95px" class="ellipsis badge pull-right badge-default"
                       ng-if="primaryContact.designation"
                       uib-tooltip="{{ primaryContact.designation }}" tooltip-placement="bottom"
-                      trimmed-tooltip-checker="primaryContact.designation">{{ primaryContact.designation }}</span>
+                       >{{ primaryContact.designation }}</span>
               </span>
             </div>
             <div class="clearfix" ng-if="primaryPhone && primaryPhone.number">
@@ -148,7 +148,7 @@
                    email-to="primaryContact.primaryEmail" stop-propagation="click">
               <p style="width: 275px;" class="ellipsis" tooltip-append-to-body="true"
                  uib-tooltip="{{ primaryContact.primaryEmail }}" tooltip-placement="bottom"
-                 trimmed-tooltip-checker="primaryContact.primaryEmail">
+                  >
               </p>
             </div>
             <div class="clearfix">

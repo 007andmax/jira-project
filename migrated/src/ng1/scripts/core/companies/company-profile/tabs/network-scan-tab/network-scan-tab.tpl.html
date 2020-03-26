@@ -215,7 +215,7 @@
             <div class="host-name" ng-hide="isEditDescrOpened" ng-click="toggleDescription(device.id)">
               <span style="display: inline-block"
                     uib-tooltip="{{ ((device.description | unknownFilter) || (device.hostName | unknownFilter) || device.ipAddress) + (device.deviceId === masterAgent.id ? ' (MASTER AGENT)' : '') }}"
-                    trimmed-tooltip-checker="((device.description | unknownFilter) || (device.hostName | unknownFilter) || device.ipAddress) + (device.deviceId === masterAgent.id ? ' (MASTER AGENT)' : '')">
+                     ><p>{{((device.description | unknownFilter) || (device.hostName | unknownFilter) || device.ipAddress) + (device.deviceId === masterAgent.id ? ' (MASTER AGENT)' : '')}}</p>
               </span>
               <i class="icon-sm edit-icon"></i>
               <p ng-if="device.description | unknownFilter">{{ device.hostName | unknownFilter }}</p>
@@ -232,7 +232,7 @@
       <div class="col-1" style="width: 16%;">{{ device.agentPassword.password ? '********' : '' }}</div>
       <div class="col-1">
         <div class="device-manufacturer" uib-tooltip="{{ (device.manufacturer | unknownFilter) || 'not defined' }}"
-             trimmed-tooltip-checker="(device.manufacturer | unknownFilter) || 'not defined'">
+              ><p>{{(device.manufacturer | unknownFilter) || 'not defined'}}</p>
         </div>
       </div>
       <div class="col-3" style="width: 11.5%;">
