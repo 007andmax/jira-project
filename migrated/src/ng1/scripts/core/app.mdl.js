@@ -129,11 +129,6 @@
           templateUrl: '/ng1/scripts/core/dashboards/tickets-dashboard/tickets-dashboard.tpl.html',
           controller: 'quicktech.core.dashboards.ticketsDashboardCtrl'
         }))
-        .state('companies', waitForServices({
-          url: '/clients/companies',
-          templateUrl: '/ng1/scripts/core/companies/companies.tpl.html',
-          controller: 'quicktech.core.companies.companiesCtrl'
-        }))
         .state('companyProfile', waitForServices({
           url: '/clients/companyProfile/:companyId?tabName',
           params: {
