@@ -143,16 +143,6 @@
           templateUrl: '/ng1/scripts/core/companies/company-profile/company-profile.tpl.html',
           controller: 'quicktech.core.companies.companyProfileCtrl'
         }))
-        .state('products', waitForServices({
-          url: '/inventory/products/{category}',
-          // url: '/inventory/products?tabName',
-          // params: {
-          //   tabName: 'category'
-          // },
-          reloadOnSearch: false,
-          templateUrl: '/ng1/scripts/core/products/products.tpl.html',
-          controller: 'quicktech.core.products.productsCtrl'
-        }))
         .state('password-manager', waitForServices({
           url: '/ng2/password-manager',
           template: '<password-manager></password-manager>'
