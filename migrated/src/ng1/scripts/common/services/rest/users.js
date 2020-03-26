@@ -11,7 +11,7 @@
 
       var serviceScope = $rootScope.$new(),
         initListeners = [],
-        initialized = false,
+        initialized = true,
         initializingStarted = false,
         storage = {
           users: [],
@@ -22,184 +22,11 @@
       Utils.customizeObj(storage);
 
 
-      CompaniesService._addInitListener(init);
+  //    CompaniesService._addInitListener(init);
 
 
-      function reinitUsers(callback) {
       
-        $http.get('/users').then(function (resp) {
-            Utils.customizeArray(resp.data, storage.users);
-            for (var i = 0; i < storage.users.length; i++) {
-              var user = storage.users[i];
-              generateInitials(user);
-              if (!storage.usersByCompanies[user.company.id]) {
-                storage.usersByCompanies[user.company.id] = [];
-              }
-              storage.usersByCompanies[user.company.id].push(user);
-              var oneByIdIncludeDeleted = CompaniesService.getOneById(user.company.id);
-              var isDeleted = (oneByIdIncludeDeleted && oneByIdIncludeDeleted.deletedAt) || user.deletedAt;
-              if (user.company.id !== CompaniesService.getCurrentCompany().id && !isDeleted && !user.isDefault) {
-                storage.clientUsers.push(user);
-              } else if (isDeleted) {
-                storage.deleted.push(user);
-              }
-            }
-            initialized = true;
-            for (var i = 0; i < initListeners.length; i++) {
-              initListeners[i]();
-            }
-            initListeners = [];
-
-            if (callback) {
-              callback(resp)
-            }
-          },
-          function (resp) {
-            console.error(resp);
-            throw 'Cannot initialize CompaniesService!';
-          });
-      }
-
-      function init() {
-
-        if (initializingStarted) {
-          return;
-        }
-
-        initializingStarted = true;
-       
-        $http.get('/users').then(function (resp) {
-            Utils.customizeArray(resp.data, storage.users);
-            for (var i = 0; i < storage.users.length; i++) {
-              var user = storage.users[i];
-              generateInitials(user);
-              if (!storage.usersByCompanies[user.company.id]) {
-                storage.usersByCompanies[user.company.id] = [];
-              }
-              storage.usersByCompanies[user.company.id].push(user);
-              var oneByIdIncludeDeleted = CompaniesService.getOneById(user.company.id);
-              var isDeleted = (oneByIdIncludeDeleted && oneByIdIncludeDeleted.deletedAt) || user.deletedAt;
-              if (user.company.id !== CompaniesService.getCurrentCompany().id && !isDeleted && !user.isDefault) {
-                storage.clientUsers.push(user);
-              } else if (isDeleted) {
-                storage.deleted.push(user);
-              }
-            }
-            initialized = true;
-            for (var i = 0; i < initListeners.length; i++) {
-              initListeners[i]();
-            }
-            initListeners = [];
-          },
-          function (resp) {
-            console.error(resp);
-            throw 'Cannot initialize CompaniesService!';
-          });
-
-        RealTimeService.subscribe('/user', serviceScope, function (newChange) {
-
-          if (!initialized) {
-            return;
-          }
-          if (newChange.action === 'USER_SAVED') {
-
-            var currentUser = getCurrentUser();
-            if (currentUser.id === newChange.data.id) {
-              var permissions = currentUser.permissions;
-              Utils.customizeObj(newChange.data, currentUser);
-              currentUser.permissions = permissions;
-              return;
-            }
-
-            if (newChange.data.company.id !== currentUser.company.id) {
-              addOrUpdateClientUser(newChange.data);
-            } else {
-              var techUser = Utils.findById(storage.usersByCompanies[newChange.data.company.id], newChange.data.id);
-
-              if (techUser) {
-                Utils.customizeObj(newChange.data, techUser);
-              } else {
-                storage.usersByCompanies[newChange.data.company.id] = storage.usersByCompanies[newChange.data.company.id] || [];
-                storage.usersByCompanies[newChange.data.company.id].push(Utils.customizeObj(newChange.data));
-                Utils.deleteById(storage.deleted, newChange.data.id);
-                storage.users.push(Utils.customizeObj(newChange.data));
-              }
-            }
-          } else if (newChange.action === 'USER_ARCHIVED') {
-            var user = Utils.findById(storage.deleted, newChange.data.id);
-            if (user) {
-              Utils.customizeObj(newChange.data, user);
-            } else {
-              user = Utils.findById(storage.users, newChange.data.id);
-              if (user) {
-                Utils.customizeObj(newChange.data, user);
-              }
-              storage.deleted.push(newChange.data);
-            }
-            Utils.deleteById(storage.users, newChange.data.id);
-            Utils.deleteById(storage.clientUsers, newChange.data.id);
-            // if (storage.usersByCompanies[newChange.data.company.id]) {
-            //   Utils.deleteById(storage.usersByCompanies[newChange.data.company.id], newChange.data.id);
-            // }
-          } else if (newChange.action === 'USER_ONLINE') {
-            var user = Utils.findById(storage.users, newChange.data.id);
-            if (user) {
-              Utils.defineReadOnlyProperty(user, 'online', !!newChange.data.online);
-            }
-          } else if (newChange.action === 'COMPANY_ARCHIVED') {
-            for (var i = 0; i < storage.users.length; i++) {
-              var user = storage.users[i];
-              if (user.company.id === newChange.data.id) {
-                var archivedUser = Utils.findById(storage.deleted, user.id);
-                if (!archivedUser) {
-                  user.deletedAt = Date.now();
-                  storage.deleted.push(user);
-                }
-                storage.users.splice(i, 1);
-                storage.clientUsers.splice(storage.clientUsers.indexOf(user), 1);
-                i--;
-              }
-            }
-            // delete storage.usersByCompanies[newChange.data.id];
-          } else if (newChange.action === 'USERS_DEARCHIVED') {
-            newChange.data.forEach(addOrUpdateClientUser);
-          }
-        });
-
-        RealTimeService.subscribe('/userSubmittedTicket', serviceScope, function (newChange) {
-
-          if (newChange.action === 'USER_SUBMITTED_TICKET') {
-            var user = getOneById(newChange.data);
-
-            var prevValue = user.userStatistic.ticketsSubmitted || 0;
-            Utils.defineReadOnlyProperty(user.userStatistic, 'ticketsSubmitted', prevValue + 1);
-          }
-        });
-
-        RealTimeService.subscribe('/subscription/' + CompaniesService.getCurrentCompany().id, serviceScope, function (newChange) {
-
-          if (!newChange.data.user) {
-            return;
-          }
-
-          var user = Utils.findById(storage.users, newChange.data.user.id);
-
-          if (user) {
-
-            if (newChange.action == 'SUBSCRIPTION_SAVED') {
-              Utils.defineReadOnlyProperty(user, 'subscription', Utils.customizeObj(newChange.data));
-            } else if (newChange.action == 'SUBSCRIPTION_DELETED') {
-              delete user.subscription;
-            }
-          }
-        });
-
-        RealTimeService.subscribe('/lockScreen/' + getCookie('LOCK_SCREEN_ID'), serviceScope, function (newChange) {
-          if (newChange.action === 'LOCK_SCREEN' && !$rootScope.isUnlockShowed) {
-            $rootScope.showLockModal();
-          }
-        });
-      }
+      
 
       function getCookie(name) {
         var matches = document.cookie.match(new RegExp(
@@ -310,31 +137,7 @@
         })
       }
 
-      function setGridPresentation(data) {
-        var translate = {
-          'list': 'LIST',
-          'grid': 'TILE'
-        }
-        var currentUser = getCurrentUser();
-        var users = translate[data.users];
-        var companies = translate[data.companies];
-
-        currentUser.usersGridPresentation = users ? users : currentUser.usersGridPresentation;
-        currentUser.companiesGridPresentation = companies ? companies : currentUser.companiesGridPresentation;
-
-
-        var future = $http({
-          url: '/settings/userProfile/gridPresentation',
-          method: 'PUT',
-          data: {
-            "usersGridPresentation": translate[data.users] || null,
-            "companiesGridPresentation": translate[data.companies] || null
-          }
-        })
-
-
-        Utils.handleCallback(future)
-      }
+      
 
       function getTechUsersEmailNotification(listOfTechUsers, callback) {
         var future = $http({
@@ -478,20 +281,7 @@
         Utils.handleCallback(future, callback);
       }
 
-      function saveUserSettingsDto(userDto, callback) {
-
-        if (!userDto) {
-          throw 'userDto is required!';
-        }
-
-        var future = $http({
-          url: '/settings/userProfile/',
-          method: 'PUT',
-          data: userDto
-        });
-
-        Utils.handleCallback(future, callback);
-      }
+     
 
       function saveForUserProfile(data, toUpdate, callback) {
 
@@ -602,15 +392,7 @@
         Utils.handleCallback(future, callback);
       }
 
-      function dearchiveUser(ids, callback) {
-        if (!Array.isArray(ids)) {
-          ids = [ids];
-        }
-
-        var future = $http.post('/users/dearchive', { ids: ids });
-        Utils.handleCallback(future, callback);
-      }
-
+     
       function deleteAvatar(userId, callback) {
         var future = $http({
           url: '/users/' + userId + '/avatar',
@@ -736,7 +518,6 @@
         _addInitListener: addInitListener,
         getCurrentUser: getCurrentUser,
         getAllUsers: getAllUsers,
-        reinitUsers: reinitUsers,
         getClientUsers: getClientUsers,
         getTechUsers: getTechUsers,
         getTechUsersEmailNotification: getTechUsersEmailNotification,
@@ -754,11 +535,8 @@
         changeUserRole: changeUserRole,
         changeUsersRoles: changeUsersRoles,
         save: save,
-        saveUserSettingsDto: saveUserSettingsDto,
-        setGridPresentation: setGridPresentation,
         saveForUserProfile: saveForUserProfile,
         archiveUser: archiveUser,
-        dearchiveUser: dearchiveUser,
         isEmailUnique: isEmailUnique,
         deleteAvatar: deleteAvatar,
         saveAvatar: saveAvatar,

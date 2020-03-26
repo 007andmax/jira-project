@@ -454,10 +454,21 @@
 
   app.run(
     ['$rootScope', '$templateRequest', 'CompaniesService', '$state', '$uibModal', 'TicketsService', '$stateParams',
-      'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.SharedStateService', '$http',
+      'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.SharedStateService', '$http','RealTimeService',
       function ($rootScope, $templateRequest, CompaniesService, $state, $uibModal, TicketsService, $stateParams,
-                UserConfirmationsService, SharedStateService, $http) {
-
+                UserConfirmationsService, SharedStateService, $http,RealTimeService) {
+        var serviceScope = $rootScope.$new();
+        RealTimeService.subscribe('/lockScreen/' + getCookie('LOCK_SCREEN_ID'), serviceScope, function (newChange) {
+          if (newChange.action === 'LOCK_SCREEN' && !$rootScope.isUnlockShowed) {
+            $rootScope.showLockModal();
+          }
+        });
+        function getCookie(name) {
+          var matches = document.cookie.match(new RegExp(
+            "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+          ));
+          return matches ? decodeURIComponent(matches[1]) : undefined;
+        }
         $rootScope.debounce = function (fn, time) {
           var isCalled = false;
           var interval;
