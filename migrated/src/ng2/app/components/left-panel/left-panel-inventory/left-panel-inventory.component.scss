@@ -122,7 +122,10 @@
 
  .container-inventory-category {
     overflow-y: auto;
-    height: calc(100% - 56px);
+    max-height: calc(100% - 56px);
   }
+
+
+
 
 

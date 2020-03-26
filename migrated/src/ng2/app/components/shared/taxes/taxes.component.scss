@@ -19,7 +19,7 @@
 .tax-title {
   font-size: 15px;
   color: #364656;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   font-weight: 700;
 }
 
@@ -42,10 +42,12 @@
 
   .dropdown {
     left: -30px;
+    top: -5px;
+
   }
 
   .add-tax-dropdown {
-    padding: 32px;
+    padding: 15px;
 
     input {
       height: 40px;
@@ -111,3 +113,14 @@
   width: 100%;
   background: white;
 }
+
+ .submit-tax-item {
+    margin-right: 12px;
+    width: auto !important;
+  }
+
+  .cancel-tax-item, .cancel-tax-item:hover {
+    width: auto !important;
+    background-color: #edf2f6 !important;
+    color: #4f5f79 !important
+  }

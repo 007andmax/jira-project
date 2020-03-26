@@ -42,9 +42,15 @@
               <span class="control-indicator">
             </span>Set as Default
             </label>
-            <button ngbDropdownItem class="btn  btn-new btn-primary" type="submit" [disabled]="taxForm.pristine || taxForm.invalid"
-                    (click)="onAddTax()">Save
-            </button>
+            
+            <div class="d-f">
+              <button ngbDropdownItem class="btn  btn-new btn-primary submit-tax-item" type="submit" [disabled]="taxForm.pristine || taxForm.invalid"
+                      (click)="onAddTax()">Save
+              </button>
+              <button ngbDropdownItem class="btn disabled  btn-new cancel-tax-item">
+                Cancel
+              </button>
+            </div>
           </form>
       
         </div>
