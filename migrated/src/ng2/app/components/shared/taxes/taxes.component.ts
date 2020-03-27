@@ -12,15 +12,6 @@ import { TaxesService } from 'src/ng2/app/services/taxes/taxes.service';
   styleUrls: ['./taxes.component.scss']
 })
 export class TaxesComponent implements OnInit, OnDestroy {
-
-  visible = true;
-  selectable = true;
-  removable = true;
-  addOnBlur = true;
-  focus = false;
-  isResend = false;
-  separatorKeysCodes: number[] = [ENTER, COMMA];
-  taxCtrl = new FormControl();
   selectedTax = [];
   taxes: Array<Tax> = [];
   sub = new Subscription();
@@ -79,10 +70,10 @@ export class TaxesComponent implements OnInit, OnDestroy {
   public onInitAddTax() {
     this.taxesDropDown.close();
     this.taxForm = this.fb.group({
-      name: [this.taxCtrl.value, [Validators.required,
+      name: ['', [Validators.required,
       Validators.minLength(2),
       Validators.maxLength(30)]],
-      rate: ["", [Validators.required,
+      rate: ['', [Validators.required,
       Validators.min(0.01),
       Validators.max(99)]],
       isDefault: [false]
@@ -117,7 +108,6 @@ export class TaxesComponent implements OnInit, OnDestroy {
       this.selectedTax.push(tax);
     }
     this.taxesChange.emit(this.selectedTax);
-    this.taxCtrl.setValue(null);
   }
   public checkTaxIsSelected(tax) {
     const find = this.selectedTax.find(item => item.id === tax.id);
