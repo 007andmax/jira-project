@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ChangeDetectorRef } from '@angular/core';
+import { AccountsReceivable } from '../../class/accounts-receivable';
 
 @Component({
   selector: 'app-ticket-report',
@@ -10,7 +11,12 @@ export class TicketReportComponent implements OnInit {
   options;
   data;
   chartColors = ["#16a4fa", "#ffb937", "#ff6e61", "#2ec866", "#f9f916", "#ff1ed2", "#1bf4fc", "#7d1a9e",'#7f1313'];
-  constructor() { }
+  accountsReceivable: AccountsReceivable = new AccountsReceivable();
+  headers = [];
+  list = [];
+  selectedClient = null;
+  loadingInProgress: boolean = false;
+  constructor(public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.options = {
@@ -41,36 +47,21 @@ export class TicketReportComponent implements OnInit {
         }
       }
     }
-    this.data = [
-      {
-        key: "One",
-        y: 5
-    },
-    {
-        key: "Two",
-        y: 2
-    },
-    {
-        key: "Three",
-        y: 9
-    },
-    {
-        key: "Four",
-        y: 7
-    },
-    {
-        key: "Five",
-        y: 4
-    },
-    {
-        key: "Six",
-        y: 3
-    },
-    {
-        key: "Seven",
-        y: .5
-    }
-    ];
+    this.data = [{"name":"Australia 3","time":8.92,"color":"#16a4fa"},{"name":"America","time":1.25,"color":"#ffb937"}];
   }
+  public onRequest(data) {
+    this.loadingInProgress = data;
+    this.cd.detectChanges();
+  }
+  public getReport(data) {
 
+  }
+  public onChangeTehUsers(tehusers) {
+   console.log("tehusers",tehusers);
+
+  }
+  onSelectedClient(client) {
+    this.selectedClient = client;
+
+  }
 }

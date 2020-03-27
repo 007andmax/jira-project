@@ -5,6 +5,7 @@
   <p class="report-title" *ngIf="report === 'byTaxes'">Tax Report</p>
   <p class="report-title" *ngIf="report === 'byProducts'">Product Sales Report</p>
   <p class="report-title" *ngIf="report === 'byCustomers'">Customer Sales Report</p>
+  <p class="report-title" *ngIf="report === 'ticket-report'">Tickets Report</p>
   <i class="back-page" (click)="back()"></i>
   <app-gl-number   *ngIf="report === 'income-accounts'"></app-gl-number>
   <app-accounts-receivable   *ngIf="report === 'accounts-receivable'"></app-accounts-receivable>

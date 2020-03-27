@@ -817,7 +817,7 @@ localStorage.setItem('report',report);
           el.color = $scope.chartColors[i];
           return el;
         });
-        console.log("$scope.chartData",$scope.chartData);
+        console.log("$scope.chartData",JSON.stringify($scope.chartData));
       }
 
 

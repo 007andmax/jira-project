@@ -122,6 +122,7 @@ import { NvD3Module } from 'ng2-nvd3';
 import 'd3';
 import 'nvd3';
 import { TicketReportComponent } from './components/reports/reports/ticket-report/ticket-report.component';
+import { TechUsersListReportComponent } from './components/reports/report-menu/tech-users-list-report/tech-users-list-report.component';
 /**
  * declare angular
  */
@@ -277,6 +278,7 @@ angular.module('quicktech')
     ProductSalesReportComponent,
     CustomerSalesReportComponent,
     TicketReportComponent,
+    TechUsersListReportComponent,
      
   ],
   imports: [

@@ -233,4 +233,9 @@ export class ReportMenuComponent implements OnInit {
     this.productSalesReport.setProductId(item.versionedId.id);
 
   }
+
+  public onChangeTehUsers(tehusers) {
+    console.log("tehusers",tehusers);
+ 
+   }
 }

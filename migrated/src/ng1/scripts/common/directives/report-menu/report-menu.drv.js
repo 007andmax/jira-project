@@ -120,6 +120,7 @@
     $scope.techReportTypes = ['Billed time', 'Product sold'];
     $scope.techReportType = "Billed time";
     $scope.clientCompanies = CompaniesService.getClientCompanies();
+    console.log("$scope.clientCompanies",$scope.clientCompanies);
     $scope.users = UsersService.getAllUsers();
     $scope.currentUser = UsersService.getCurrentUser();
     $scope.locationTechReport = $location.url();
