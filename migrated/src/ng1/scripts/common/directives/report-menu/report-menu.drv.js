@@ -387,7 +387,7 @@
     //Software Summary reports items end
 
     $scope.$watch('reportSetting.device', function(val) {
-      $rootScope.hardwareSummaryDevice = val.device;
+     if (val) $rootScope.hardwareSummaryDevice = val.device;
     });
 
     $scope.$watch('reportSetting.soft', function(val) {

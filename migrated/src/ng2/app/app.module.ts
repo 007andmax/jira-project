@@ -117,9 +117,11 @@ import { ReportFooterComponent } from './components/reports/report-footer/report
 import { TaxesReportComponent } from './components/reports/reports/taxes-report/taxes-report.component';
 import { ProductSalesReportComponent } from './components/reports/reports/product-sales-report/product-sales-report.component';
 import { CustomerSalesReportComponent } from './components/reports/reports/customer-sales-report/customer-sales-report.component';
- 
+import { NvD3Module } from 'ng2-nvd3';
 
-
+import 'd3';
+import 'nvd3';
+import { TicketReportComponent } from './components/reports/reports/ticket-report/ticket-report.component';
 /**
  * declare angular
  */
@@ -274,6 +276,7 @@ angular.module('quicktech')
     TaxesReportComponent,
     ProductSalesReportComponent,
     CustomerSalesReportComponent,
+    TicketReportComponent,
      
   ],
   imports: [
@@ -354,7 +357,8 @@ angular.module('quicktech')
     CronEditorModule,
     ImageCropperModule,
     NgxEditorModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NvD3Module 
 
   ],
   entryComponents: [
