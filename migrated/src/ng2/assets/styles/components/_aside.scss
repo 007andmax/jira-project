@@ -1,6 +1,8 @@
 .qt-aside {
   .ng-sidebar {
-    width: 592px
+    width: 592px;
+    height: calc(100vh - 78px);
+
   }
 
   &__header {
@@ -25,12 +27,12 @@
 
   &__body {
     padding: 33px 40px 40px 40px;
-    height: calc(100% - 270px);
+    height: calc(100% - 156px);
     overflow-y: auto;
   }
 
   &__buttons {
-    padding: 40px;
+    padding: 20px 40px;
     display: flex;
   }
 }

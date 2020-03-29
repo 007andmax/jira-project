@@ -32,7 +32,7 @@
   background: url("assets/img/calendar-light.png");
 }
 .icn-attach {
-  background: url("assets/img/attachment.svg");
+  background: url("assets/img/attachment-blue.svg");
 }
 
 .icn-delete {
@@ -137,14 +137,42 @@
   }
 
  &__task-pending {
-   background-image: url("assets/img/icons/task-pending.svg");
+    background-image: url("assets/img/icons/task-pending.svg");
  }
  &__users {
-   background-image: url("assets/img/icons/addusers.svg")
+    background-image: url("assets/img/icons/addusers.svg")
  }
  &__close {
     background-image: url("assets/img/icons/close.svg")
+ }
+ &__remove {
+    background-image: url("assets/img/icons/remove.svg")
+ }
+ &__attachment {
+    background-image: url("assets/img/icons/attachment.svg")
+ }
+ &__chat {
+    background-image: url("assets/img/icons/chat.svg");
+    &.active {
+        background-image: url("assets/img/icons/chat-blue.svg");
+      }
+ }
+ &__products {
+   background-image: url("assets/img/icons/products.svg");
+   &.active {
+     background-image: url("assets/img/icons/products-blue.svg");
+   }
+ }
+ &__service {
+  background-image: url("assets/img/icons/service.svg");
+  .active {
+     background-image: url("assets/img/icons/service-blue.svg");
   }
+ }
+ &__attach-blue {
+   background-image: url("assets/img/attachment-blue.svg");
+ }
+
 }
 
 .priority-icon {
