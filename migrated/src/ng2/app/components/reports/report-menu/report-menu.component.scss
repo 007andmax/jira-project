@@ -5,3 +5,26 @@
 /deep/.report-menu .dropdown-height .dropdown-menu {
    max-height: 190px !important;
 }
+
+/deep/.dropdown-button  {
+  button {
+    outline: none;
+    padding: 0 40px 0 10px;
+    width: 100%;
+    height: 36px;
+    border-radius: 4px 3px 3px 4px;
+    border: 1px solid #d3d8e1;
+    background-color: #fff;
+    text-align: left;
+    color: #404b5f;
+  }
+  .report-caret-icon {
+    top: 18px !important;
+  }
+
+  .dropdown-item:hover {
+    background: #16a4fa;
+    color: white;
+  }
+
+}
