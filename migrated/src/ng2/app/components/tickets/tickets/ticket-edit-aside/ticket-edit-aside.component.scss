@@ -73,6 +73,48 @@
     margin-right: 16px;
     width: 16px;
   }
+  &__users-linked-author, &__users-linked-partner {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
+    font-size: 10px;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    position: relative;
+    &::before {
+      position: absolute;
+      content: '';
+      width: 16px;
+      height: 16px;
+      border: 1px solid #c4cbd5;
+      background: white;
+      border-radius: 50%;
+      bottom: -7px;
+    }
+    &.selected {
+      &::before {
+        background-image: url("../../../../../assets/img/icons/selected.svg");
+        border: none;
+      }
+    }
+  }
+  &__users-linked-author {
+    margin-left: 4px;
+  }
+  &__users-linked-divider {
+    background: #dfe3e8;
+    width: 1px;
+    margin: 0 16px;
+  }
+   &__users-linked-partner {
+       margin-right: 4px;
+   }
 
   .more-users-avatars {
     margin-left: 5px;
@@ -104,9 +146,51 @@
     margin-bottom: 10px
   }
 
+  &__ticket-subject-edit {
+    font-size: 22px;
+    height: 48px;
+    font-weight: 600;
+    margin-left: -12px;
+    margin-right: -12px;
+    span {
+      padding: 8px 14px 8px 12px;
+      border: solid 1px #9ca5b6;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+      border-right: none;
+      color: #9ca5b6;
+    }
+    input {
+      padding: 8px 14px;
+      border: solid 1px #9ca5b6;
+      flex-grow: 1;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+  }
+
+  &__ticket-subject-flag {
+    margin-right: 6px;
+    margin-left: -22px;
+  }
+
   &__ticket-description {
     font-size: 13px;
     color: #4f5f79;
+  }
+
+  &__ticket-description-edit {
+    margin-left: -12px;
+    margin-right: -12px;
+    textarea {
+      height: 76px;
+      border-radius: 5px;
+      border: solid 1px #9ca5b6;
+      width: 100%;
+      padding: 8px 12px;
+      font-size: 13px;
+      color: #4f5f79;
+    }
   }
 
   &__claimed-info {

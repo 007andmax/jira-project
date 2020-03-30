@@ -33,14 +33,37 @@
         </div>
         <!--   TICKET SUBJECT AND DESCRIPTION   -->
         <div class="ticket-edit-aside__ticket-text">
-          <div class="ticket-edit-aside__ticket-subject">
+          
+          <div class="ticket-edit-aside__ticket-subject"
+               *ngIf="modeSubject === 'view'"
+               (dblclick)="modeSubject = 'edit'">
+            <span class="priority-icon --high ticket-edit-aside__ticket-subject-flag"></span>
             <span>Tkt# 3904</span>
             <span> - </span>
             <span>Checking anitvirus Dimension dentistry</span>
           </div>
           
-          <div class="ticket-edit-aside__ticket-description">
+          <div class="ticket-edit-aside__ticket-subject-edit d-f ai-c"
+               *ngIf="modeSubject === 'edit'"
+               (dblclick)="modeSubject = 'view'"
+          >
+            <span>Tkt# 3904</span>
+            <input value="Checking anitvirus Dimension dentistry"/>
+          </div>
+          
+          <div class="ticket-edit-aside__ticket-description"
+               *ngIf="modeDescription === 'view'"
+               (dblclick)="modeDescription = 'edit'"
+          >
             Hey Team, Joshna is not able to access the X drive for the Xerox scans in the office. I have checked my desk and i am able to connect and get the files. I tried to copy the pathway and put that in her computer but I get the attached error. Is it possible to rectify? Computer ADMTC1 Thanks, Kodie
+          </div>
+          <div class="ticket-edit-aside__ticket-description-edit"
+               *ngIf="modeDescription === 'edit'"
+               (dblclick)="modeDescription = 'view'"
+          >
+            <textarea>
+              Hey Team, Joshna is not able to access the X drive for the Xerox scans in the office. I have checked my desk and i am able to connect and get the files. I tried to copy the pathway and put
+            </textarea>
           </div>
         </div>
         <!--   TICKET CLAIMED INFO   -->
@@ -131,6 +154,15 @@
         <div class="d-f">
           <div class="ticket-edit-aside__attach icon__attachment"></div>
           <div class="ticket-edit-aside__users  icon__assign-user"></div>
+          
+          <div class="ticket-edit-aside__users-linked d-f">
+            <div class="ticket-edit-aside__users-linked-author selected" style="background-image: url(https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)"></div>
+            <div class="ticket-edit-aside__users-linked-divider"></div>
+            <div class="ticket-edit-aside__users-linked-partner selected" style="background-image: url(https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)"></div>
+            <div class="ticket-edit-aside__users-linked-partner" style="background-image: url(https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)"></div>
+            <div class="ticket-edit-aside__users-linked-partner" style="background-color: #16a4fa;">GB</div>
+          </div>
+          
         </div>
         <div class="d-f">
           <div class="qt-btn --btn40h --outline-blue update-ticket-btn">Update</div>

@@ -151,6 +151,9 @@
  &__attachment {
     background-image: url("assets/img/icons/attachment.svg")
  }
+ &__selected {
+     background-image: url("assets/img/icons/selected.svg")
+ }
  &__chat {
     background-image: url("assets/img/icons/chat.svg");
     &.active {

@@ -8,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class TicketEditAsideComponent implements OnInit {
 
   opened = true;
-
+  modeSubject = 'view';
+  modeDescription = 'view';
   constructor() { }
 
   ngOnInit() {
