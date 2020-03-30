@@ -138,7 +138,7 @@
                      options="datePickerOptions"
                      range max-date="{{ maxDateForDateRangeInputField }}"
                      ng-model="reportSetting.dateRange"
-                     placeholder="Select Date"> </input>
+                     placeholder="Select Date">
               <i class="report-calendar" ng-show="!startDate && !endDate"></i>
               <i class="icn-sm icn-remove-old pointer"
                  ng-show="startDate && endDate"
@@ -204,7 +204,7 @@
                      uib-typeahead="user as $ctrl.getUserName(user) for user in techUsers | filter: $viewValue:stateComparator | orderBy:'firstName'"
                      placeholder="Sales user"
                      qt-typeahead-async-show-on-focus
-                     custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"> </input>
+                     custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
               <div class="input-top-4" typeahead-input-icon="userCompany"></div>
 
             </div>
@@ -223,17 +223,17 @@
 
                 <input style="cursor: pointer;" ng-hide="isPLOpen" type="text" class="form-control has-dropdown"
                        pl-product-input
-                       placeholder="Product" autocomplete="off"> </input>
+                       placeholder="Product" autocomplete="off">
 
                 <input ng-show="isPLOpen" type="text" class="form-control has-dropdown" pl-search-product-input
-                       placeholder="Search Product" autocomplete="off" ng-model="searchProduct"> </input>
+                       placeholder="Search Product" autocomplete="off" ng-model="searchProduct">
 
                 <!--<i class="icn-sm icn-caret-gray"></i>-->
               </div>
               <i class="icn-sm icn-remove-old" ng-click="clearInputField(); showDropdown()"
                  ng-show="selectedProduct"></i>
 
-              <input type="hidden" name="product" ng-model="productExpense.item.description"> </input>
+              <input type="hidden" name="product" ng-model="productExpense.item.description">
 
               <div class="nano dropdown-menu custom-product-list" pl-conteiner
                    ng-include="'/ng1/scripts/common/templates/products-list.tpl.html'"></div>
@@ -248,28 +248,28 @@
         <div class="include-ticket-report">
           <p>What to include</p>
           <label class="control checkbox">
-            <input type="checkbox" ng-model="customerTicketWithTimeSpent"> </input>
+            <input type="checkbox" ng-model="customerTicketWithTimeSpent">
             <span class="control-indicator"></span>
             Show dashboard
           </label>
           <label class="control checkbox">
-            <input type="checkbox" ng-model="customerTicketWithResponseTime"> </input>
+            <input type="checkbox" ng-model="customerTicketWithResponseTime">
             <span class="control-indicator"></span>
             Average response time
           </label>
           <label ng-show="false" class="control checkbox">
             <input type="checkbox" ng-model="customerTicketShowTotalTicketAmount"
-                   ng-click="hideTotalTickets()"> </input>
+                   ng-click="hideTotalTickets()">
             <span class="control-indicator"></span>
             Total ticket amount
           </label>
           <label class="control checkbox">
-            <input type="checkbox" ng-model="customerTicketWithServices"> </input>
+            <input type="checkbox" ng-model="customerTicketWithServices">
             <span class="control-indicator"></span>
             Show services
           </label>
           <label class="control checkbox">
-            <input type="checkbox" ng-model="customerTicketWithProducts"> </input>
+            <input type="checkbox" ng-model="customerTicketWithProducts">
             <span class="control-indicator"></span>
             Show products
           </label>
@@ -409,7 +409,7 @@
         <div class="include-ticket-report">
 
           <!-- <label class="control checkbox">
-            <input type="checkbox" ng-model="customerTicketWithProducts"> </input>
+            <input type="checkbox" ng-model="customerTicketWithProducts">
             <span class="control-indicator"></span>
             Show products cost
           </label> -->
@@ -420,14 +420,14 @@
 
           <label class="control checkbox">
             <input type="radio" name="details" ng-checked="!detailsByProducts" ng-model="detailsByProducts"
-                   ng-value="false"> </input>
+                   ng-value="false">
             <span class="control-indicator"></span>
             Details by customer
           </label>
 
           <label class="control checkbox">
             <input type="radio" name="details" ng-checked="detailsByProducts" ng-model="detailsByProducts"
-                   ng-value="true"> </input>
+                   ng-value="true">
             <span class="control-indicator"></span>
             Details by product
           </label>
@@ -469,7 +469,7 @@
                  placeholder="Select date"
                  date-range-picker
                  max-date="{{ maxDateForDateRangeInputField }}"
-                 ng-model="reportSetting.dateRange"> </input>
+                 ng-model="reportSetting.dateRange">
 
           <i class="report-calendar" ng-show="!startDate && !endDate"></i>
           <i class="icn-sm icn-remove-old pointer"
@@ -493,7 +493,7 @@
                  qt-typeahead-async-show-on-focus
                  smart-dropdown-menu-position
                  readonly
-                 custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"> </input>
+                 custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
 
         </div>
       </div>

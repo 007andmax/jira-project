@@ -38,7 +38,7 @@
         <button class="form-group btn btn-success" (click)="getReportByTaxes()">Get
           Report
         </button>
-        <div class="grey-dropdown form-group content" ngbDropdown>
+        <div class="grey-dropdown form-group content dropdown-button" ngbDropdown>
           <button class="types-btn" id="dropdownBasic" ngbDropdownToggle [textContent]="taxes.type">
 
           </button>
@@ -136,7 +136,7 @@
         <button class="form-group btn btn-success" (click)="getReportByCustomers()">Get
           Report
         </button>
-        <div class="grey-dropdown form-group content" ngbDropdown>
+        <div class="grey-dropdown form-group content dropdown-button" ngbDropdown>
           <button class="types-btn" id="dropdownBasic" ngbDropdownToggle [textContent]="customerSalesReport.type">
 
           </button>
@@ -207,28 +207,28 @@
       <div class="include-ticket-report">
         <p>What to include</p>
         <label class="control checkbox">
-          <input type="checkbox" ng-model="customerTicketWithTimeSpent"> </input>
+          <input type="checkbox" ng-model="customerTicketWithTimeSpent">
           <span class="control-indicator"></span>
           Show dashboard
         </label>
         <label class="control checkbox">
-          <input type="checkbox" ng-model="customerTicketWithResponseTime"> </input>
+          <input type="checkbox" ng-model="customerTicketWithResponseTime">
           <span class="control-indicator"></span>
           Average response time
         </label>
         <label ng-show="false" class="control checkbox">
           <input type="checkbox" ng-model="customerTicketShowTotalTicketAmount"
-                 ng-click="hideTotalTickets()"> </input>
+                 ng-click="hideTotalTickets()">
           <span class="control-indicator"></span>
           Total ticket amount
         </label>
         <label class="control checkbox">
-          <input type="checkbox" ng-model="customerTicketWithServices"> </input>
+          <input type="checkbox" ng-model="customerTicketWithServices">
           <span class="control-indicator"></span>
           Show services
         </label>
         <label class="control checkbox">
-          <input type="checkbox" ng-model="customerTicketWithProducts"> </input>
+          <input type="checkbox" ng-model="customerTicketWithProducts">
           <span class="control-indicator"></span>
           Show products
         </label>
