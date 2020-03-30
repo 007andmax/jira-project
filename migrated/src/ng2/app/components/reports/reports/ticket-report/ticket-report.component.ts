@@ -54,7 +54,7 @@ export class TicketReportComponent implements OnInit {
     this.cd.detectChanges();
   }
   public getReport(data) {
-
+console.log("data",data);
   }
   public onChangeTehUsers(tehusers) {
    console.log("tehusers",tehusers);
