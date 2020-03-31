@@ -25,16 +25,15 @@
             <span [textContent]="(user.lastName.length > 0) ? user.lastName[0].toUpperCase() : ''"></span>
           </div>
           <div class="default-user-avatar avatar-background-color-odd ng-scope" *ngIf="user.avatar">
-            <img ng-if="user.avatar" class="img-circle avatar-26" style="margin: 0;"
+            <img ng-if="user.avatar" class="img-circle report-user-avatar" style="margin: 0;"
               [src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')"
               alt="...">
           </div>
           <span>
-            <p [textContent]="user.firstName + ' ' + user.lastName"></p>
-            <p [textContent]="user.primaryEmail" style="margin: 0;"></p>
+            <p class="report-user-name" [textContent]="user.firstName + ' ' + user.lastName"></p>
+            <p class="report-user-email"[textContent]="user.primaryEmail" style="margin: 0;"></p>
           </span>
         </a></div>
-    
     </ng-template>
   </div>
 </div>
