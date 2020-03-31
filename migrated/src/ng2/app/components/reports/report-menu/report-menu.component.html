@@ -38,7 +38,7 @@
         <button class="form-group btn btn-success" (click)="getReportByTaxes()">Get
           Report
         </button>
-        <div class="grey-dropdown form-group content" ngbDropdown>
+        <div class="grey-dropdown form-group content dropdown-button" ngbDropdown>
           <button class="types-btn" id="dropdownBasic" ngbDropdownToggle [textContent]="taxes.type">
 
           </button>
@@ -136,7 +136,7 @@
         <button class="form-group btn btn-success" (click)="getReportByCustomers()">Get
           Report
         </button>
-        <div class="grey-dropdown form-group content" ngbDropdown>
+        <div class="grey-dropdown form-group content dropdown-button" ngbDropdown>
           <button class="types-btn" id="dropdownBasic" ngbDropdownToggle [textContent]="customerSalesReport.type">
 
           </button>
@@ -204,7 +204,7 @@
         <div class="include-ticket-report">
           <p>What to include</p>
           <label class="control checkbox">
-            <input type="checkbox" (change)="toggleShowDashboard($event)" checked /> 
+            <input type="checkbox" (change)="toggleShowDashboard($event)" checked />
             <span class="control-indicator"></span>
             Show dashboard
           </label>
@@ -215,17 +215,17 @@
           </label>
          
           <label class="control checkbox">
-            <input type="checkbox" (change)="toggleShowServices($event)" checked  /> 
+            <input type="checkbox" (change)="toggleShowServices($event)" checked  />
             <span class="control-indicator"></span>
             Show services
           </label>
           <label class="control checkbox">
-            <input type="checkbox" (change)="toggleShowProducts($event)" checked />  
+            <input type="checkbox" (change)="toggleShowProducts($event)" checked />
             <span class="control-indicator"></span>
             Show products
           </label>
         </div>
-      </div> 
+      </div>
     </div>
    
   </div>

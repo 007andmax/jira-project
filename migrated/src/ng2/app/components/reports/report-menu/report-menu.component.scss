@@ -23,8 +23,9 @@
   }
 
   .dropdown-item:hover {
-    background: #16a4fa;
-    color: white;
+    background: #16a4fa !important;
+    color: white !important;
+    border-radius: 0;
   }
 
 }
