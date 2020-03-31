@@ -14,6 +14,10 @@ export class ReportsService {
     return this.http.post(this.apiUrl + `reports/pdf`, data);
     
   }
+  public getCustomPdfUrl(data) {
+    return this.http.post(this.apiUrl + `customerReport/pdf`, data);
+    
+  }
 
   public getAccountingStartDate () {
     return this.http.get(this.apiUrl + `settings/companyProfile/accountingStartDate`);

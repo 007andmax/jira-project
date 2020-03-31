@@ -17,8 +17,6 @@ export class TicketReportComponent implements OnInit {
   chartData;
   chartColors = ["#16a4fa", "#ffb937", "#ff6e61", "#2ec866", "#f9f916", "#ff1ed2", "#1bf4fc", "#7d1a9e", '#7f1313'];
   ticketsReport: TicketsReport = new TicketsReport();
-  headers = [];
-  list = [];
   customerTicketWithTimeSpent = true;
   overallServiceTime = [];
   selectedClient = null;

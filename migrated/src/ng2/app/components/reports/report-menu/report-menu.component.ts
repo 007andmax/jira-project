@@ -14,7 +14,7 @@ import { ProductSalesReport } from '../class/product-sales-report';
 import { CustomerSalesReport } from '../class/customer-sales-report';
 import { TicketsReport } from '../class/tickets-reports';
 import { TicketReportStateService } from '../reports/ticket-report/services/ticket-report-state.service';
- 
+
 
 @Component({
   selector: 'app-report-menu',
@@ -47,7 +47,7 @@ export class ReportMenuComponent implements OnInit {
   constructor(private reportsService: ReportsService,
     private reportsStateService: ReportsStateService,
     private productService: ProductService,
-    private ticketReportStateService:TicketReportStateService ) { }
+    private ticketReportStateService: TicketReportStateService) { }
 
   ngOnInit() {
     if (this.report === 'accounts-receivable') this.getReportByAccountsReceivable();
@@ -131,16 +131,16 @@ export class ReportMenuComponent implements OnInit {
 
   }
   toggleShowDashboard(event) {
-    console.log("event",event.target.checked);
-this.ticketReportStateService.toggleShowDashboard(event.target.checked);
+    console.log("event", event.target.checked);
+    this.ticketReportStateService.toggleShowDashboard(event.target.checked);
   }
   toggleShowServices(event) {
-    console.log("event",event.target.checked);
-this.ticketReportStateService.toggleShowServices(event.target.checked);
+    console.log("event", event.target.checked);
+    this.ticketReportStateService.toggleShowServices(event.target.checked);
   }
   toggleShowProducts(event) {
-    console.log("event",event.target.checked);
-this.ticketReportStateService.toggleShowProducts(event.target.checked);
+    console.log("event", event.target.checked);
+    this.ticketReportStateService.toggleShowProducts(event.target.checked);
   }
   onSelectTechUser(data) {
     this.ticketsReport.setTechUser(data);

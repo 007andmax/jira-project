@@ -19,6 +19,8 @@ export class ReportAdditionalActionsComponent implements OnInit {
   ACION_DOWNLOAD_PDF = ACION_DOWNLOAD_PDF;
   listExport = ['PDF', 'CSV'];
   glNumber: GlNumber = new GlNumber();
+  @Input() id:string = null;
+  @Input() template:string = "PDF_TEMPLATE";
   @Input() selectedClient;
   constructor(private reportsService: ReportsService,
     private reportsStateService: ReportsStateService,
@@ -47,14 +49,23 @@ export class ReportAdditionalActionsComponent implements OnInit {
     var dto = {
       fileName: 'income_accounts',
       content: this.reportsStateService.parseReportContent(),
-      id: null,
+      id: this.id,
       orientation: (!this.glNumber.getMonthlyDetailed()) ? 'PORTRAIT' : 'LANDSCAPE'
     };
-    this.reportsService.getPdfUrl(dto).subscribe((data: any) => {
-      console.log("data", data);
-      if (action === ACION_OPEN_PDF) window.open(data.url);
-      if (action === ACION_DOWNLOAD_PDF) this.appService.downloadByUrl(`${data.url}?isDownload=true`, 'income_accounts');
-    })
+    if (this.template === "PDF_TEMPLATE") {
+      this.reportsService.getPdfUrl(dto).subscribe((data: any) => {
+        console.log("data", data);
+        if (action === ACION_OPEN_PDF) window.open(data.url);
+        if (action === ACION_DOWNLOAD_PDF) this.appService.downloadByUrl(`${data.url}?isDownload=true`, 'income_accounts');
+      })
+    } else {
+      this.reportsService.getCustomPdfUrl(dto).subscribe((data: any) => {
+        console.log("data", data);
+        if (action === ACION_OPEN_PDF) window.open(data.url);
+        if (action === ACION_DOWNLOAD_PDF) this.appService.downloadByUrl(`${data.url}?isDownload=true`, 'income_accounts');
+      })
+    }
+  
   }
   onSelectExport(item) {
     if (item === 'PDF') this.getPdfIdFromRest(ACION_DOWNLOAD_PDF);
