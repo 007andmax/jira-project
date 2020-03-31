@@ -36,8 +36,8 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
   userList = [];
   reqUsersList = [];
   @Input() selectedClient = null;
-  @Input() accountType:string = 'CLIENT';
-  @Input() usersSelected:Array<User> = [];
+  @Input() accountType: string = 'CLIENT';
+  @Input() usersSelected: Array<User> = [];
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
   @Output() onCompanyEmails = new EventEmitter<any>();
@@ -59,8 +59,8 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-    console.log("accountType",this.accountType);
-console.log("this.selectedClient",this.selectedClient);
+    console.log("accountType", this.accountType);
+    console.log("this.selectedClient", this.selectedClient);
     this.getUsersList();
 
     this.draftEmailStateService.getOnClear().subscribe(data => {
@@ -69,7 +69,7 @@ console.log("this.selectedClient",this.selectedClient);
       this.userCtrl.setValue(null);
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
-    }
+      }
 
     })
   }
@@ -82,20 +82,19 @@ console.log("this.selectedClient",this.selectedClient);
 
   }
   private setUserList(data) {
-    this.reqUsersList = data.filter(item => ((this.accountType != null) ? item.accountType === this.accountType : true) && ((this.selectedClient !== null) ? (item.accountType ==='TECH' || item.company.id === this.selectedClient.id) : true) && !item.deletedAt && item.primaryEmail !== '').sort((a, b) => (a.primaryEmail.toLowerCase() > b.primaryEmail.toLowerCase()) ?
-    1 : ((b.primaryEmail.toLowerCase() > a.primaryEmail.toLowerCase()) ? -1 : 0));
-    this.userList = data.filter(item => ((this.accountType != null) ? item.accountType === this.accountType : true) && ((this.selectedClient !== null) ? (item.accountType ==='TECH' || item.company.id === this.selectedClient.id) : true) && !item.deletedAt && item.primaryEmail !== '').sort((a, b) => (a.primaryEmail.toLowerCase() > b.primaryEmail.toLowerCase()) ?
-    1 : ((b.primaryEmail.toLowerCase() > a.primaryEmail.toLowerCase()) ? -1 : 0));
+    this.reqUsersList = data.filter(item => ((this.accountType != null) ? item.accountType === this.accountType : true) && ((this.selectedClient !== null) ? (item.accountType === 'TECH' || item.company.id === this.selectedClient.id) : true) && !item.deletedAt && item.primaryEmail !== '').sort((a, b) => (a.primaryEmail.toLowerCase() > b.primaryEmail.toLowerCase()) ?
+      1 : ((b.primaryEmail.toLowerCase() > a.primaryEmail.toLowerCase()) ? -1 : 0));
+    this.userList = data.filter(item => ((this.accountType != null) ? item.accountType === this.accountType : true) && ((this.selectedClient !== null) ? (item.accountType === 'TECH' || item.company.id === this.selectedClient.id) : true) && !item.deletedAt && item.primaryEmail !== '').sort((a, b) => (a.primaryEmail.toLowerCase() > b.primaryEmail.toLowerCase()) ?
+      1 : ((b.primaryEmail.toLowerCase() > a.primaryEmail.toLowerCase()) ? -1 : 0));
 
     this.usersSelected.forEach(item => {
-      if (item.primaryEmail !== '')
-      {
+      if (item.primaryEmail !== '') {
         this.selectedUsers.push(item.primaryEmail);
         this.userEmails.push(item.primaryEmail);
       }
-    
+
     })
-    
+
     this.onCompanyEmails.emit(this.userEmails);
   }
 
@@ -133,26 +132,21 @@ console.log("this.selectedClient",this.selectedClient);
   }
 
   onSearch(event) {
-
-
     this.userList = this.reqUsersList.filter(item => item.primaryEmail.includes(event.target.value));
   }
   onKeyUp(event) {
-
-
     if (event.keyCode === 13) {
       const input = event.target.input;
       const value = event.target.value;
-
       if ((value || '').trim()) {
         this.selectedUsers.push(value.trim());
+        this.userEmails.push(value.trim());
         this.userList = this.reqUsersList;
       }
       if (input) {
         input.value = '';
       }
       this.userCtrl.setValue(null);
-
     }
 
   }

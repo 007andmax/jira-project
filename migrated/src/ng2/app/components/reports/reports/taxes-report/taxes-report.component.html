@@ -1,7 +1,7 @@
 <div>
   <app-report-menu [report]="'byTaxes'" (onSelectedClient)="onSelectedClient($event)" (onRequest)="onRequest($event)" (getReport)="getReport($event)"></app-report-menu>
  </div>
- <app-report-additional-actions [fileName]="'taxes_report'" [selectedClient]="selectedClient"></app-report-additional-actions>
+ <app-report-additional-actions   [fileName]="'taxes_report'" [selectedClient]="selectedClient"></app-report-additional-actions>
  <div class="loading" *ngIf="loadingInProgress"></div>
  <div class="product-list___ticket" id="product-list-ticket-data" >
 
