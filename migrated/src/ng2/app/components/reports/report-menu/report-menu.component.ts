@@ -12,7 +12,9 @@ import { TaxesReport } from '../class/taxes';
 import { ProductService } from 'src/ng2/app/services/product/product.service';
 import { ProductSalesReport } from '../class/product-sales-report';
 import { CustomerSalesReport } from '../class/customer-sales-report';
-import { TicektsReport } from '../class/tickets-reports';
+import { TicketsReport } from '../class/tickets-reports';
+import { TicketReportStateService } from '../reports/ticket-report/services/ticket-report-state.service';
+ 
 
 @Component({
   selector: 'app-report-menu',
@@ -28,7 +30,7 @@ export class ReportMenuComponent implements OnInit {
   accountsReceivable: AccountsReceivable = new AccountsReceivable();
   productSalesReport: ProductSalesReport = new ProductSalesReport();
   customerSalesReport: CustomerSalesReport = new CustomerSalesReport();
-  ticketsReport: TicektsReport = new TicektsReport();
+  ticketsReport: TicketsReport = new TicketsReport();
   loadingInProgress: boolean = true;
   listDetailed = ['Year to date', 'Monthly'];
   listTypes = ['Summary', 'Detailed'];
@@ -44,7 +46,8 @@ export class ReportMenuComponent implements OnInit {
   @ViewChild('cp') companiesList: any;
   constructor(private reportsService: ReportsService,
     private reportsStateService: ReportsStateService,
-    private productService: ProductService, ) { }
+    private productService: ProductService,
+    private ticketReportStateService:TicketReportStateService ) { }
 
   ngOnInit() {
     if (this.report === 'accounts-receivable') this.getReportByAccountsReceivable();
@@ -119,12 +122,25 @@ export class ReportMenuComponent implements OnInit {
       //  this.getCompanyDevices();
 
     }
+    this.ticketsReport.setDatesByCompany(this.selectedClient);
     console.log("this.selectClient", this.selectedClient);
     this.onSelectedClient.emit(this.selectedClient);
     //  this.services = [new ForCreateService()];
     // this.cd.detectChanges();
     // this.reportsStateService.onChangeGlNumber(this.glNumber);
 
+  }
+  toggleShowDashboard(event) {
+    console.log("event",event.target.checked);
+this.ticketReportStateService.toggleShowDashboard(event.target.checked);
+  }
+  toggleShowServices(event) {
+    console.log("event",event.target.checked);
+this.ticketReportStateService.toggleShowServices(event.target.checked);
+  }
+  toggleShowProducts(event) {
+    console.log("event",event.target.checked);
+this.ticketReportStateService.toggleShowProducts(event.target.checked);
   }
   onSelectTechUser(data) {
     this.ticketsReport.setTechUser(data);
@@ -142,6 +158,8 @@ export class ReportMenuComponent implements OnInit {
 
   }
   getReportByTickets() {
+    if (!this.validate.isValidateTickets(this.selectedClient)) return;
+
     this.onRequest.emit(true);
     this.reportsService.getReportByTickets(this.ticketsReport.getForRequest()).subscribe(data => this.setDatareport(data));
 
@@ -222,7 +240,7 @@ export class ReportMenuComponent implements OnInit {
     } else {
       this.glNumber.resetDates();
       this.productSalesReport.resetDates();
-      this.ticketsReport.resetDates();
+      this.ticketsReport.setDatesByCompany(this.selectedClient);
     }
 
     //  this.reportsStateService.onChangeGlNumber(this.glNumber);

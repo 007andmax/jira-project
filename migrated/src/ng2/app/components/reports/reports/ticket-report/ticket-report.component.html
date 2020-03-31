@@ -4,34 +4,153 @@
  <app-report-additional-actions [selectedClient]="selectedClient"></app-report-additional-actions>
  <div class="loading" *ngIf="loadingInProgress"></div>
  <div class="product-list___ticket" id="product-list-ticket-data" >
-
   <div  class="product-list-ticket acc-col"   style="height: 100%;" *ngIf="!loadingInProgress">
-    <div class="report-header"  >
-       <h1>Accounts Receivable</h1>
-       <div class="company-info">
-         <h3  [textContent]="(selectedClient) ? selectedClient.name : 'All companies'"></h3>
-         <!--  <p><span [textContent]="perseStartDate()"></span> - <span [textContent]="perseEndDate()"></span></p>-->
-       </div>
-     </div>
+    <div class="customer-ticket" *ngIf="onInit">
+      <div class="customer-ticket__report">
+        <div class="report-header">
+          <h1>Tickets Report</h1>
+          <div class="company-info">
+            <h3>{{ ticketsReport.companyName || 'All companies' }}</h3>
+            <p><span>{{ticketsReport.startDate}}</span> - <span>{{ ticketsReport.endDate }}</span></p>
+          </div>
+        </div>
+        <div class="report-footer">
+          <p>Prepare by : <span>{{ username }}</span></p>
+          <p>{{ currentCompany.name }}</p>
+          <p>Quicktech <span>2020</span> ©. All rights reserved</p>
+        </div>
+        <div *ngIf="showHeader" class="customer-ticket__report--summary"  >
+          <h3>Resolved Tickets</h3>
+          <div class="customer-ticket__header">
+            <div class="customer-ticket__header--item canvas-chart no-value">
+              <nvd3 [options]="chartOptions" [data]="chartData"></nvd3>
+            
+            </div>
+            <div class="customer-ticket__header--item">
+              <ng-template ngFor let-time [ngForOf]="overallServiceTime" let-i="index" [ngForTrackBy]="trackByIndex" >
+                <p *ngIf="ticketsReport.timeSpent"  
+                [ngClass]="'service-color-' + i">
+               {{ time.name }} <span>{{ time.time | reportTime }}</span>
+             </p>
+                </ng-template>
+             
 
-     <div class="report-header">
-      <h1>Accounts Receivable</h1>
-      <div class="company-info">
-        <h3 [textContent]="(accountsReceivable.clientCompanyName) ? accountsReceivable.clientCompanyName : 'All companies'"></h3>
-        <!-- <p><span>1 Dec 2018</span> - <span>31 Dec 2018</span></p> -->
+            </div>
+            <div class="customer-ticket__header--item">
+              <p *ngIf="!ticketsReport.hideTotalTickets">Total amount: <span>{{ticketsReport.tickets.length}}</span></p>
+              <div>
+                <p><span style="font-weight: 400;">{{ticketsReport.timeSpent | reportTime}}</span> hr</p>
+                <p style="color:#fff;">Time Spent</p>
+              </div>
+              <p class="ticket-report-time" *ngIf="ticketsReport.averageResponseTime"><span>{{ getFloorAverageResponseTime() }} Min</span>
+                Response time</p>
+            </div>
+          </div>
+
+        </div>
+        <div class="customer-ticket__report--details">
+          <h3>Ticket Details</h3>
+          <div class="details-header clearfix">
+            <div class="col-md-8" style="width: 70%;">TICKET NUMBER</div>
+            <div class="col-md-2" style="width: 20%;">DATE / TIME</div>
+            <div class="col-md-2" style="width: 10%;">STATUS</div>
+          </div>
+          <ng-template ngFor let-ticket [ngForOf]="ticketsReport.tickets" let-i="index" [ngForTrackBy]="trackByIndex" >
+            
+          <div class="details-content clearfix"  >
+            <div class="col-md-8 ellipsis" style="width: 70%;margin-bottom: 20px;">{{ticket.ticketNumber}} - {{ticket.description}}</div>
+            <div class="col-md-2" style="width: 20%;margin-bottom: 20px;">{{ parseDateTciket(ticket.ticketCreatedAt) }}</div>
+            <div class="col-md-2" style="width: 10%;margin-bottom: 20px;" *ngIf="ticket.status === 'ON_HOLD'">
+              <p class="network-scan-status status-warning">On Hold</p>
+            </div>
+            <div class="col-md-2" style="width: 10%;margin-bottom: 20px;" *ngIf="ticket.status === 'COMPLETED'">
+              <p class="network-scan-status status-success">Completed</p>
+            </div>
+            <div class="col-md-2" style="width: 10%;margin-bottom: 20px;" *ngIf="ticket.status === 'IN_PROGRESS'">
+              <p class="network-scan-status status-in-progress">In Progress</p>
+            </div>
+
+            <div *ngIf="ticket.updates && showServices"
+                 class="services">
+                 <ng-template ngFor let-service [ngForOf]="ticket.updates"   [ngForTrackBy]="trackByIndex" >
+              <div  >
+                <ng-template ngFor let-expence [ngForOf]="service.expenses"   [ngForTrackBy]="trackByIndex" >
+                <div *ngIf="service.type === 'SERVICE'" class="clearfix" >
+                  <div class="col-md-3 ellipsis">
+                    {{ expence.name }}
+                  </div>
+
+                  <div class="col-md-7">
+                    {{ expence.description }}
+                  </div>
+
+                  <div class="col-md-2">
+                    Time: {{ getDurationFilter(expence.totalQuantity) }}
+                  </div>
+                </div>
+              </ng-template>
+              </div>
+              </ng-template>
+            </div>
+
+            <div *ngIf="ticket.updates && showProducts" class="products">
+              <ng-template ngFor let-product [ngForOf]="ticket.updates"   [ngForTrackBy]="trackByIndex" >
+              <div  *ngIf="product.type === 'PRODUCT'">
+                <ng-template ngFor let-expence [ngForOf]="product.expenses"   [ngForTrackBy]="trackByIndex" >
+                <div class="clearfix"   *ngIf="expence.manufacture">
+                  <div class="col-md-12 ellipsis">
+                    {{ expence.name }}
+                  </div>
+                  <div class="col-md-2">
+                    Price: ${{ (+expence.price).toFixed(2) }}
+                  </div>
+                  <div class="col-md-2">
+                    QTY: {{ expence.quantity }}
+                  </div>
+                  <div class="col-md-2">
+                    Tax: ${{ calcTaxes(expence.taxes, expence.price * expence.quantity).toFixed(2) }}
+                  </div>
+                  <div class="col-md-2">
+                    Total: ${{ (expence.price * expence.quantity + calcTaxes(expence.taxes, expence.price *
+                    expence.quantity)).toFixed(2) }}
+                  </div>
+                </div>
+                  </ng-template>
+                  <ng-template ngFor let-expence [ngForOf]="product.expenses"   [ngForTrackBy]="trackByIndex" >
+                <div class="col-md-12"  *ngIf="!expence.manufacture">
+                  <div class="col-md-12 ellipsis">
+                    {{ expence.name }}
+                  </div>
+                  <div class="col-md-2">
+                    Price: ${{ (+expence.price).toFixed(2) }}
+                  </div>
+                  <div class="col-md-2">
+                    QTY: {{ expence.quantity }}
+                  </div>
+                  <div class="col-md-2">
+                    Tax: ${{ calcTaxes(expence.taxes, expence.price * expence.quantity).toFixed(2) }}
+                  </div>
+                  <div class="col-md-2">
+                    Total: ${{ (expence.price * expence.quantity + calcTaxes(expence.taxes, expence.price *
+                    expence.quantity)).toFixed(2)}}
+                  </div>
+                </div>
+                </ng-template>
+              </div>
+              </ng-template>
+            </div>
+
+            <div class="col-md-3 pdf-w" style="margin-top: 20px;">User: {{ getUserName(ticket.clientUserId) }}</div>
+            <div class="col-md-3 pdf-w" style="margin-top: 20px;">Device: {{ ticket.deviceName }}</div>
+            <div class="col-md-3 pdf-w" style="margin-top: 20px;">Tech: {{ getUserName(ticket.techUserId) }}</div>
+            <div ng-if="ticket.responseTime !== null" class="col-md-3 pdf-w" style="margin-top: 20px;">Response time: {{ formatResponseTime(ticket.responseTime) }}</div>
+          </div>
+</ng-template>
+        </div>
       </div>
     </div>
-    <div class="header-product-list-ticket" *ngIf="accountsReceivable.lines.length > 0">
-      <!--HEADER-->
-      <h3 [textContent]="accountsReceivable.techCompanyName"></h3>
-      <p *ngIf="accountsReceivable.type ==='DETAILED' ">Account Recivable for <span [textContent]="accountsReceivable.clientCompanyName"></span>
-      </p>
-    </div>
     
-     <div>
-       <app-overview-report [headers]="headers" [list]="list"></app-overview-report>  
-     
-     </div>
+   
   <app-report-footer></app-report-footer>
    </div>
  </div>

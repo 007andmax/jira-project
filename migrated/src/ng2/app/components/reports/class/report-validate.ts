@@ -41,6 +41,11 @@ export class ReportValidate {
     public getCompany() {
         return this.company;
     }
+
+    public isValidateTickets(company) {
+        if (!company)  this.company = false;
+        return this.company;
+    }
     public isValidateTaxes(start, end) {
         if (start === '' && end === '') {
             this.dates = false;

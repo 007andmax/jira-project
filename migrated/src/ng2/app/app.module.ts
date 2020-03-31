@@ -123,6 +123,7 @@ import 'd3';
 import 'nvd3';
 import { TicketReportComponent } from './components/reports/reports/ticket-report/ticket-report.component';
 import { TechUsersListReportComponent } from './components/reports/report-menu/tech-users-list-report/tech-users-list-report.component';
+import { ReportTimePipe } from './pipe/report-time.pipe';
 /**
  * declare angular
  */
@@ -279,6 +280,7 @@ angular.module('quicktech')
     CustomerSalesReportComponent,
     TicketReportComponent,
     TechUsersListReportComponent,
+    ReportTimePipe,
      
   ],
   imports: [
