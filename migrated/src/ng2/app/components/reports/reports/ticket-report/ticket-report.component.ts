@@ -116,6 +116,9 @@ this.ticketReportStateService.getOnShowProducts().subscribe(data => {
     this.onInit = true;
     console.log("ticketsReport",this.ticketsReport);
   }
+  getSelectedClientName() {
+    return  (this.selectedClient) ?  this.selectedClient.name.toLowerCase().split(' ').join('-') : '';
+  }
   parseDateTciket(ticketCreatedAt) {
     return moment(new Date(ticketCreatedAt)).format('DD MMM YYYY, hh:mm a');;
   }

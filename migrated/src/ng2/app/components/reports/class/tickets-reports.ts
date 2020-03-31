@@ -48,7 +48,6 @@ export class TicketsReport {
             extendedReport: this.extendedReport,
             withResponseTime: this.withResponseTime,
             withTimeSpent: this.withTimeSpent,
-            showTotalTicketAmount: this.showTotalTicketAmount,
             startDate: this.startDate,
             endDate: this.endDate,
             userId: this.userId

@@ -19,6 +19,7 @@ export class ReportAdditionalActionsComponent implements OnInit {
   ACION_DOWNLOAD_PDF = ACION_DOWNLOAD_PDF;
   listExport = ['PDF', 'CSV'];
   glNumber: GlNumber = new GlNumber();
+  @Input() fileName:string = "";
   @Input() id:string = null;
   @Input() template:string = "PDF_TEMPLATE";
   @Input() selectedClient;
@@ -43,11 +44,12 @@ export class ReportAdditionalActionsComponent implements OnInit {
     const modalRef = this.modalService.open(ReportSendEmailComponent, null);
     modalRef.componentInstance.selectedClient = this.selectedClient;
     modalRef.componentInstance.orientation =  (!this.glNumber.getMonthlyDetailed()) ? 'PORTRAIT' : 'LANDSCAPE';
-    
+    modalRef.componentInstance.template =  this.template;
+    modalRef.componentInstance.fileName =  this.fileName;
   }
   getPdfIdFromRest(action) {
     var dto = {
-      fileName: 'income_accounts',
+      fileName: this.fileName,
       content: this.reportsStateService.parseReportContent(),
       id: this.id,
       orientation: (!this.glNumber.getMonthlyDetailed()) ? 'PORTRAIT' : 'LANDSCAPE'
@@ -56,13 +58,13 @@ export class ReportAdditionalActionsComponent implements OnInit {
       this.reportsService.getPdfUrl(dto).subscribe((data: any) => {
         console.log("data", data);
         if (action === ACION_OPEN_PDF) window.open(data.url);
-        if (action === ACION_DOWNLOAD_PDF) this.appService.downloadByUrl(`${data.url}?isDownload=true`, 'income_accounts');
+        if (action === ACION_DOWNLOAD_PDF) this.appService.downloadByUrl(`${data.url}?isDownload=true`, this.fileName);
       })
     } else {
       this.reportsService.getCustomPdfUrl(dto).subscribe((data: any) => {
         console.log("data", data);
         if (action === ACION_OPEN_PDF) window.open(data.url);
-        if (action === ACION_DOWNLOAD_PDF) this.appService.downloadByUrl(`${data.url}?isDownload=true`, 'income_accounts');
+        if (action === ACION_DOWNLOAD_PDF) this.appService.downloadByUrl(`${data.url}?isDownload=true`, this.fileName);
       })
     }
   

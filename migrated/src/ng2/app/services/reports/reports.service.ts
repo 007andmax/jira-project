@@ -46,4 +46,7 @@ export class ReportsService {
   public sendMessage (data) {
     return this.http.post(this.apiUrl + `reports/email`, data);
   }
+  public sendCustomerMessage (data) {
+    return this.http.post(this.apiUrl + `customerReport/email`, data);
+  }
 }

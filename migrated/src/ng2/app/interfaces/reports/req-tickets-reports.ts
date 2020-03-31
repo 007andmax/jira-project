@@ -5,7 +5,6 @@ export interface reqTicketsReport {
     extendedReport: boolean;
     withResponseTime: boolean;
     withTimeSpent: boolean;
-    showTotalTicketAmount:boolean;
     startDate: string;
     endDate: string;
     userId: string;

@@ -17,10 +17,10 @@ import { ReportsStateService } from 'src/ng2/app/states/reports/reports-state.se
   styleUrls: ['./report-send-email.component.scss']
 })
 export class ReportSendEmailComponent implements OnInit {
-  
+
   messageContent: string = '';
   messageHTML: string = '';
-  
+
   editorConfig = {
     editable: true,
     spellcheck: false,
@@ -40,29 +40,31 @@ export class ReportSendEmailComponent implements OnInit {
   filesInfo: FilesInfo = new FilesInfo();
   usersSelected: Array<User> = [];
   companiesSelected: Array<Company> = [];
+  @Input() fileName:string = "";
+  @Input() template: string = "PDF_TEMPLATE";
   @Input() orientation;
   @Input() selectedClient;
   constructor(private draftEmailStateService: DraftEmailStateService, private elRef: ElementRef,
     private draftEmailService: DraftEmailService, public cd: ChangeDetectorRef,
     public activeModal: NgbActiveModal,
     private reportsService: ReportsService,
-    private reportsStateService:ReportsStateService
+    private reportsStateService: ReportsStateService
   ) { }
 
   ngOnInit() {
-    console.log("selectedClient",this.selectedClient);
+    console.log("selectedClient", this.selectedClient);
     this.usersSelected = this.draftEmailStateService.getSelectedUsers();
-      this.companiesSelected = this.draftEmailStateService.getSelectedCompanies();
-      this.action = this.draftEmailStateService.getAction();
-     
-      this.draftEmail = new ReportEmail();
+    this.companiesSelected = this.draftEmailStateService.getSelectedCompanies();
+    this.action = this.draftEmailStateService.getAction();
+
+    this.draftEmail = new ReportEmail();
 
   }
 
-  
+
 
   close() {
-    
+
     this.draftEmail = new ReportEmail();
     this.tab = 'plain';
     this.messageContent = '';
@@ -124,23 +126,31 @@ export class ReportSendEmailComponent implements OnInit {
 
   }
   onSend() {
-    
+
     this.draftEmail.setContent(this.reportsStateService.parseReportContent());
-      this.draftEmail.setNote(this.messageContent);
-   this.draftEmail.setOrientation(this.orientation);
-
+    this.draftEmail.setNote(this.messageContent);
+    this.draftEmail.setOrientation(this.orientation);
+    this.draftEmail.setFileName(this.fileName);
     this.filesInfo.files.forEach(item => {
-      console.log("item",item);
-    //  if (!item.error) this.draftEmail.setAttachment(item.id)
+      console.log("item", item);
+      //  if (!item.error) this.draftEmail.setAttachment(item.id)
     });
-    this.reportsService.sendMessage(this.draftEmail).subscribe((data) => {
-
-      this.close();
-
-      if (!this.cd['destroyed']) {
-        this.cd.detectChanges();
-      }
-    })
+    if (this.template === "PDF_TEMPLATE") {
+      this.reportsService.sendMessage(this.draftEmail).subscribe((data) => {
+        this.close();
+        if (!this.cd['destroyed']) {
+          this.cd.detectChanges();
+        }
+      })
+    } else {
+      this.reportsService.sendCustomerMessage(this.draftEmail).subscribe((data) => {
+        this.close();
+        if (!this.cd['destroyed']) {
+          this.cd.detectChanges();
+        }
+      })
+    }
+   
   }
 
   removeAttachment(index) {
@@ -154,12 +164,10 @@ export class ReportSendEmailComponent implements OnInit {
   uploadFile(file, fileInfo) {
     return new Promise((resolve, reject) => {
       this.setDisableUplaodFile(true);
-
       if (file.size > 4194304) {
         reject({ code: 500 });
         return;
       }
-
       var fd = new FormData();
       fd.append("file", file);
       var xhr = new XMLHttpRequest();
@@ -167,9 +175,7 @@ export class ReportSendEmailComponent implements OnInit {
         fileInfo.progress = 100 * (progress.loaded / progress.total);
       }, false);
       xhr.addEventListener("load", (event) => {
-
         resolve(xhr);
-
       }, false);
       xhr.addEventListener("error", (error) => {
         reject(error);
@@ -187,8 +193,8 @@ export class ReportSendEmailComponent implements OnInit {
   trackByIndex(index, item) {
     return index;
   }
-  
+
 }
 
 
- 
+
