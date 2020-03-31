@@ -130,6 +130,10 @@ export class ReportMenuComponent implements OnInit {
     // this.reportsStateService.onChangeGlNumber(this.glNumber);
 
   }
+  toggleShowResponseTime(event) {
+    console.log("event", event.target.checked);
+    this.ticketReportStateService.toggleShowResponseTime(event.target.checked);
+  }
   toggleShowDashboard(event) {
     console.log("event", event.target.checked);
     this.ticketReportStateService.toggleShowDashboard(event.target.checked);

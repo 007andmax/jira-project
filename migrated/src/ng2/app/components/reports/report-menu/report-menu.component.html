@@ -209,7 +209,7 @@
             Show dashboard
           </label>
           <label class="control checkbox">
-            <input type="checkbox" [(ngModel)]="ticketsReport.withResponseTime" />
+            <input type="checkbox"  (change)="toggleShowResponseTime($event)" />
             <span class="control-indicator"></span>
             Average response time
           </label>

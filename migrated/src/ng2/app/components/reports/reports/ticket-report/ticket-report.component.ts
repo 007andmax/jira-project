@@ -25,11 +25,11 @@ export class TicketReportComponent implements OnInit {
   showHeader = true;
   showServices = true;
   showProducts = true;
-  currentCompany:Company;
+  currentCompany: Company;
   constructor(public cd: ChangeDetectorRef,
     private companiesStateService: CompaniesStateService,
     private usersStateService: UsersStateService,
-    private ticketReportStateService:TicketReportStateService) { }
+    private ticketReportStateService: TicketReportStateService) { }
 
   ngOnInit() {
     this.currentCompany = this.companiesStateService.getCurrentCompany();
@@ -61,17 +61,19 @@ export class TicketReportComponent implements OnInit {
         }
       }
     }
-  //  this.chartData = [{ "name": "Australia 3", "time": 8.92, "color": "#16a4fa" }, { "name": "America", "time": 1.25, "color": "#ffb937" }];
-this.ticketReportStateService.getOnShowDashboard().subscribe(data => {
-  this.showHeader = data;
-}) 
-this.ticketReportStateService.getOnShowServices().subscribe(data => {
-  this.showServices = data;
-}) 
-this.ticketReportStateService.getOnShowProducts().subscribe(data => {
-  this.showProducts = data;
-}) 
-}
+    this.ticketReportStateService.getOnShowDashboard().subscribe(data => {
+      this.showHeader = data;
+    })
+    this.ticketReportStateService.getOnShowServices().subscribe(data => {
+      this.showServices = data;
+    })
+    this.ticketReportStateService.getOnShowProducts().subscribe(data => {
+      this.showProducts = data;
+    })
+    this.ticketReportStateService.getOnShowResponseTime().subscribe(data => {
+      this.ticketsReport.averageResponseTime = data;
+    })
+  }
   public onRequest(data) {
     this.loadingInProgress = data;
     this.cd.detectChanges();
@@ -95,13 +97,13 @@ this.ticketReportStateService.getOnShowProducts().subscribe(data => {
       let company = this.companiesStateService.getCompanies().find(item => item.id === this.ticketsReport.companyId);
       this.ticketsReport.companyName = (company) ? company.name : null;
 
-    /*  this.ticketsReport.tickets = this.ticketsReport.tickets.map(function (ticket) {
-        // ticket.username = UsersService.getOneById(ticket.clientUserId);
-        //ticket.techUsername = UsersService.getOneById(ticket.techUserId);
-        ticket.ticketCreatedAt = moment(new Date(ticket.ticketCreatedAt)).format('DD MMM YYYY, hh:mm a');
-
-        return ticket;
-      });*/
+      /*  this.ticketsReport.tickets = this.ticketsReport.tickets.map(function (ticket) {
+          // ticket.username = UsersService.getOneById(ticket.clientUserId);
+          //ticket.techUsername = UsersService.getOneById(ticket.techUserId);
+          ticket.ticketCreatedAt = moment(new Date(ticket.ticketCreatedAt)).format('DD MMM YYYY, hh:mm a');
+  
+          return ticket;
+        });*/
 
       this.calculateServicesTime(data.tickets);
     }
@@ -114,10 +116,10 @@ this.ticketReportStateService.getOnShowProducts().subscribe(data => {
     this.ticketsReport.startDate = moment(new Date(this.ticketsReport.startDate)).format('ll');
     this.ticketsReport.endDate = moment(new Date(this.ticketsReport.endDate)).format('ll');
     this.onInit = true;
-    console.log("ticketsReport",this.ticketsReport);
+    console.log("ticketsReport", this.ticketsReport);
   }
   getSelectedClientName() {
-    return  (this.selectedClient) ?  this.selectedClient.name.toLowerCase().split(' ').join('-') : '';
+    return (this.selectedClient) ? this.selectedClient.name.toLowerCase().split(' ').join('-') : '';
   }
   parseDateTciket(ticketCreatedAt) {
     return moment(new Date(ticketCreatedAt)).format('DD MMM YYYY, hh:mm a');;
