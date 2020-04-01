@@ -18,14 +18,14 @@ import { GlNumberItem } from '../../class/gl-number-item';
   styleUrls: ['./gl-number.component.scss']
 })
 export class GlNumberComponent implements OnInit {
-  
+
   glNumber: GlNumber = new GlNumber();
   loadingInProgress: boolean = false;
   selectedClient = null;
   techCompany = null;
   showHeaders = false;
-   
-   
+
+
   headers = [];
   list = [];
   constructor(private route: ActivatedRoute, private reportsStateService: ReportsStateService,
@@ -38,11 +38,11 @@ export class GlNumberComponent implements OnInit {
     private usersStateService: UsersStateService,
   ) { }
   ngOnInit() {
-   
+
     this.reportsStateService.glNumber.subscribe((res: GlNumber) => {
       this.glNumber.setDataFromObject(JSON.parse(JSON.stringify(res.getDataObject())));
 
-let data = this.glNumber.response;
+      let data = this.glNumber.response;
       this.glNumber.clearDates();
       this.glNumber.clearList();
       if (this.glNumber.getMonthlyDetailed()) {
@@ -63,7 +63,7 @@ let data = this.glNumber.response;
               this.glNumber.getList()[indexLast].updateTotal(item.sum);
             }
           });
-  
+
         });
       } else {
         data.forEach((item, index) => {
@@ -101,11 +101,11 @@ let data = this.glNumber.response;
     this.companiesService.getTechCompany().subscribe(data => {
       this.techCompany = data;
     })
-   
-     
-  
+
+
+
   }
- 
+
   public getReport(data) {
 
   }
@@ -115,7 +115,7 @@ let data = this.glNumber.response;
   }
   onSelectedClient(client) {
     this.selectedClient = client;
-   
+
   }
   perseStartDate() {
     return moment(this.glNumber.startDate).format('DD MMM YYYY')
@@ -123,6 +123,6 @@ let data = this.glNumber.response;
   perseEndDate() {
     return moment(this.glNumber.endDate).format('DD MMM YYYY')
   }
- 
+
 
 }

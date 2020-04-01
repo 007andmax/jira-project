@@ -81,38 +81,11 @@ export class TicketReportComponent implements OnInit {
   public getReport(data) {
     console.log("data", data);
     this.ticketsReport.setData(data);
-
-    //  this.ticketsReport.showTotalTicketAmount = $scope.customerTicketShowTotalTicketAmount;
-    /* if (resp.ticketsPerDate && resp.ticketsPerDate.length) {
-       $scope.reportChartData = [];
-       for (var i = 0; i < resp.ticketsPerDate.length; i++) {
-         var item = resp.ticketsPerDate[i];
-         if (item.ticketResolved) {
-           $scope.reportChartData.push(item);
-         }
-       }
-     }*/
-
     if (this.ticketsReport && this.ticketsReport.tickets) {
       let company = this.companiesStateService.getCompanies().find(item => item.id === this.ticketsReport.companyId);
       this.ticketsReport.companyName = (company) ? company.name : null;
-
-      /*  this.ticketsReport.tickets = this.ticketsReport.tickets.map(function (ticket) {
-          // ticket.username = UsersService.getOneById(ticket.clientUserId);
-          //ticket.techUsername = UsersService.getOneById(ticket.techUserId);
-          ticket.ticketCreatedAt = moment(new Date(ticket.ticketCreatedAt)).format('DD MMM YYYY, hh:mm a');
-  
-          return ticket;
-        });*/
-
       this.calculateServicesTime(data.tickets);
     }
-
-    /* if ($rootScope.customerTicketShowTotalTicketAmount === false) {
-       this.ticketsReport.hideTotalTickets = true;
-     }
- */
-    // this.showHeader = this.customerTicketWithTimeSpent;
     this.ticketsReport.startDate = moment(new Date(this.ticketsReport.startDate)).format('ll');
     this.ticketsReport.endDate = moment(new Date(this.ticketsReport.endDate)).format('ll');
     this.onInit = true;

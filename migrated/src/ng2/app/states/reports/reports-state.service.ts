@@ -5,11 +5,15 @@ declare var canvg: any;
 })
 export class ReportsStateService {
   glNumber: EventEmitter<any> = new EventEmitter();
+  serviceReport: EventEmitter<any> = new EventEmitter();
   accountsReceivable: EventEmitter<any> = new EventEmitter();
   constructor() { }
 
   public onChangeGlNumber(data) {
     this.glNumber.emit(data);
+  }
+  public onChangeServiceReport(data) {
+    this.serviceReport.emit(data);
   }
   public onChangeAccountsReceivable(data) {
     this.accountsReceivable.emit(data);

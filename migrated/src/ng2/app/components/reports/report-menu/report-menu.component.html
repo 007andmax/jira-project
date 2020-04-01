@@ -230,4 +230,44 @@
    
   </div>
 
+
+  <div *ngIf="report === 'service-report'">
+    <div class="run-report-content clearfix" [ngClass]="className">
+      <div class="new-reports-reverse">
+        <button class="form-group btn btn-success" (click)="getReportByService()">Get
+          Report
+        </button>
+        
+    
+        <div class="form-group content">
+          <app-multi-datepicker #dp (selectedDate)="filterByDate($event)"></app-multi-datepicker>
+          
+        </div>
+
+
+        <div class="form-group content custom-width dropdown-height">
+          <app-select-client-company [isDisabled]="isDisabledCompany" [blockEditMode]="true" style="width: 75%;" class="light-dropdown" [filter]="true"
+            (selectedItem)="selectClient($event)"></app-select-client-company>
+            <mat-error *ngIf="!validate.getCompany()">
+              Please select the company name
+            </mat-error>
+        </div>
+        
+
+      </div>
+      <div   class="col-md-11">
+        <div class="include-ticket-report">
+          <p>What to include</p>
+          <label class="control checkbox">
+            <input type="checkbox" (change)="toggleShowDashboard($event)" checked />
+            <span class="control-indicator"></span>
+            Show dashboard
+          </label>
+         
+        </div>
+      </div>
+    </div>
+   
+  </div>
+
 </div>
