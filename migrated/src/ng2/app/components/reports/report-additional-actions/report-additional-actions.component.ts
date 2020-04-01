@@ -19,33 +19,35 @@ export class ReportAdditionalActionsComponent implements OnInit {
   ACION_DOWNLOAD_PDF = ACION_DOWNLOAD_PDF;
   listExport = ['PDF', 'CSV'];
   glNumber: GlNumber = new GlNumber();
-  @Input() fileName:string = "";
-  @Input() id:string = null;
-  @Input() template:string = "PDF_TEMPLATE";
+  @Input() report: string = "";
+  @Input() fileName: string = "";
+  @Input() id: string = null;
+  @Input() template: string = "PDF_TEMPLATE";
   @Input() selectedClient;
   constructor(private reportsService: ReportsService,
     private reportsStateService: ReportsStateService,
     private appService: AppService,
     config: NgbModalConfig,
-    private modalService: NgbModal,) { 
-      config.backdrop = 'static';
-      config.keyboard = false;
-    }
+    private modalService: NgbModal, ) {
+    config.backdrop = 'static';
+    config.keyboard = false;
+  }
 
   ngOnInit() {
+    if (this.report === "service-report") this.listExport = ['PDF'];
     this.reportsStateService.glNumber.subscribe((data: GlNumber) => {
       this.glNumber = data;
-      
+
     })
   }
 
   sendEmail() {
-    console.log("this.selectClient",this.selectedClient);
+    console.log("this.selectClient", this.selectedClient);
     const modalRef = this.modalService.open(ReportSendEmailComponent, null);
     modalRef.componentInstance.selectedClient = this.selectedClient;
-    modalRef.componentInstance.orientation =  (!this.glNumber.getMonthlyDetailed()) ? 'PORTRAIT' : 'LANDSCAPE';
-    modalRef.componentInstance.template =  this.template;
-    modalRef.componentInstance.fileName =  this.fileName;
+    modalRef.componentInstance.orientation = (!this.glNumber.getMonthlyDetailed()) ? 'PORTRAIT' : 'LANDSCAPE';
+    modalRef.componentInstance.template = this.template;
+    modalRef.componentInstance.fileName = this.fileName;
   }
   getPdfIdFromRest(action) {
     var dto = {
@@ -67,7 +69,7 @@ export class ReportAdditionalActionsComponent implements OnInit {
         if (action === ACION_DOWNLOAD_PDF) this.appService.downloadByUrl(`${data.url}?isDownload=true`, this.fileName);
       })
     }
-  
+
   }
   onSelectExport(item) {
     if (item === 'PDF') this.getPdfIdFromRest(ACION_DOWNLOAD_PDF);

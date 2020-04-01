@@ -120,14 +120,15 @@ export class ReportMenuComponent implements OnInit {
       this.customerSalesReport.setCompanyId(selectClient.item.id);
       this.ticketsReport.setCompanyId(selectClient.item.id);
       this.serviceReport.setCompanyId(selectClient.item.id);
+      this.serviceReport.setDatesByCompany(this.selectedClient);
+      this.ticketsReport.setDatesByCompany(this.selectedClient);
       this.validate.resetCompany();
       //  this.recurringState.setClient(selectClient);
       //  this.onCheckListServices();
       //  this.getCompanyDevices();
 
     }
-    this.serviceReport.setDatesByCompany(this.selectedClient);
-    this.ticketsReport.setDatesByCompany(this.selectedClient);
+  
     console.log("this.selectClient", this.selectedClient);
     this.onSelectedClient.emit(this.selectedClient);
     //  this.services = [new ForCreateService()];
@@ -262,8 +263,11 @@ export class ReportMenuComponent implements OnInit {
     } else {
       this.glNumber.resetDates();
       this.productSalesReport.resetDates();
-      this.ticketsReport.setDatesByCompany(this.selectedClient);
-      this.serviceReport.setDatesByCompany(this.selectedClient);
+      if (this.selectedClient) {
+        this.ticketsReport.setDatesByCompany(this.selectedClient);
+        this.serviceReport.setDatesByCompany(this.selectedClient);
+      }
+     
     }
 
     //  this.reportsStateService.onChangeGlNumber(this.glNumber);
@@ -285,7 +289,7 @@ export class ReportMenuComponent implements OnInit {
   */
   public selectProduct(item) {
     console.log("item", item);
-    this.productSalesReport.setProductId(item.versionedId.id);
+    this.productSalesReport.setProductId((item) ? item.versionedId.id : null);
 
   }
 

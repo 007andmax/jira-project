@@ -140,12 +140,19 @@ export class ProductTableComponent implements OnInit, OnDestroy {
   }
 
   public selectProduct(item, index) {
-    item = { ...item, ...{ quantity: 1, markup: this.quoteStateService.setMarkups(item) } };
+    item = (item) ? { ...item, ...{ quantity: 1, markup: this.quoteStateService.setMarkups(item) } } : null;
 
+    if (item) {
+      this.itemsListArray[index] = item;
+      this.changedProductItemsArray.next(this.itemsListArray);
+      this.hideDropDown(index);
+    } else {
+      this.itemsListArray.splice(index, 1);
+      this.changedProductItemsArray.next(this.itemsListArray);
+      this.hideDropDown(index);
+      this.quoteStateService.onClearProduct();
+    }
 
-    this.itemsListArray[index] = item;
-    this.changedProductItemsArray.next(this.itemsListArray);
-    this.hideDropDown(index);
   }
 
   /**

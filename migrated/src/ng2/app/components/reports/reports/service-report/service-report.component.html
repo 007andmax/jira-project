@@ -1,14 +1,14 @@
 <div>
   <app-report-menu [report]="'service-report'" (onSelectedClient)="onSelectedClient($event)" (onRequest)="onRequest($event)" ></app-report-menu>
  </div>
- <app-report-additional-actions [fileName]="'customer-report-' + getSelectedClientName()" [template]="'CUSTOMER_REPORT'"  [selectedClient]="selectedClient"></app-report-additional-actions>
+ <app-report-additional-actions [report]="'service-report'" [fileName]="'customer-report-' + getSelectedClientName()" [template]="'CUSTOMER_REPORT'"  [selectedClient]="selectedClient"></app-report-additional-actions>
  <div class="loading" *ngIf="loadingInProgress"></div>
  <div class="product-list___ticket" id="product-list-ticket-data" >
-  <div  class="product-list-ticket acc-col"   style="height: 100%;" *ngIf="!loadingInProgress">
+  <div  class="product-list-ticket acc-col"   style="height: 100%; padding: 0;width: 980px;" *ngIf="!loadingInProgress">
     <div class="customer-ticket" *ngIf="onInit">
       <div class="customer-ticket__report">
         <div class="report-header">
-          <h1>Tickets Report</h1>
+          <h1>Service Report</h1>
           <div class="company-info">
             <h3>{{ serviceReport.companyName || 'All companies' }}</h3>
             <p><span>{{serviceReport.startDate}}</span> - <span>{{ serviceReport.endDate }}</span></p>
@@ -20,7 +20,7 @@
           <p>Quicktech <span>2020</span> ©. All rights reserved</p>
         </div>
         <div *ngIf="showHeader" class="customer-ticket__report--summary"  >
-          <h3>Resolved Tickets</h3>
+          <h3>Resolved Services</h3>
           <div class="customer-ticket__header">
             <div class="customer-ticket__header--item canvas-chart no-value">
               <nvd3 [options]="chartOptions" [data]="chartData"></nvd3>
@@ -48,7 +48,7 @@
 
         </div>
         <div class="customer-ticket__report--details" >
-          <h3>Ticket Details</h3>
+          <h3>Service Details</h3>
           <div class="details-header clearfix">
             <div class="col-md-8" style="width: 70%;">TICKET NUMBER</div>
             <div class="col-md-2" style="width: 20%;">DATE / TIME</div>
@@ -89,10 +89,7 @@
               </div>
              
             </div>
-
-            
-
-            <div class="col-md-3 pdf-w" style="margin-top: 20px;">User: {{ getUserName(ticket.serviceUser) }}</div>
+            <div class="col-md-3 pdf-w" style="margin-top: 20px;">Service user: {{ getUserName(ticket.serviceUser) }}</div>
             <div class="col-md-3 pdf-w" style="margin-top: 20px;">Device: {{ getDeviceName(ticket.ticketDevice) }}</div>
             <div class="col-md-3 pdf-w" style="margin-top: 20px;">Tech: {{ getUserName(ticket.ticketCreatedBy) }}</div>
             <div ng-if="ticket.responseTime !== null" class="col-md-3 pdf-w" style="margin-top: 20px;">Service date: {{ parseDateService(ticket.expenseDate) }}</div>
