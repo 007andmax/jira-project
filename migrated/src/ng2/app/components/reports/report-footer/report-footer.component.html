@@ -1,4 +1,4 @@
-<div class="report-footer"  >
+<div class="report-footer"   [ngStyle]="{'width': (orientation === 'LANDSCAPE') ? '1180px' : '' }">
   <p>Prepare by : <span [textContent]="currentUser.firstName + ' ' + currentUser.lastName"> </span></p>
   <p [textContent]="currentCompany.name"></p>
   <p>Quicktech <span>2020</span> ©. All rights reserved</p>

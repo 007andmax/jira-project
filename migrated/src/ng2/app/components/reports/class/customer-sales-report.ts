@@ -19,9 +19,9 @@ export class CustomerSalesReport {
         this.startDate = data.startDate;
         this.endDate = data.endDate;
         this.type = data.type;
-        this.lines = data.lines.map((item) => {
+        this.lines = (data.lines) ? data.lines.map((item) => {
           return new CustomerSalesReportLine(item);
-        })
+        }) : [];
         this.productsSum = data.productsSum;
         this.servicesSum = data.servicesSum;
         this.totalSum = data.totalSum;

@@ -18,8 +18,8 @@ export class ReportAdditionalActionsComponent implements OnInit {
   ACION_OPEN_PDF = ACION_OPEN_PDF;
   ACION_DOWNLOAD_PDF = ACION_DOWNLOAD_PDF;
   listExport = ['PDF', 'CSV'];
-  glNumber: GlNumber = new GlNumber();
   @Input() report: string = "";
+  @Input() orientation: string = "PORTRAIT";
   @Input() fileName: string = "";
   @Input() id: string = null;
   @Input() template: string = "PDF_TEMPLATE";
@@ -35,37 +35,22 @@ export class ReportAdditionalActionsComponent implements OnInit {
 
   ngOnInit() {
     if (this.report === "service-report") this.listExport = ['PDF'];
-    this.reportsStateService.glNumber.subscribe((data: GlNumber) => {
-      this.glNumber = data;
-
-    })
   }
 
   sendEmail() {
     console.log("this.selectClient", this.selectedClient);
     const modalRef = this.modalService.open(ReportSendEmailComponent, null);
     modalRef.componentInstance.selectedClient = this.selectedClient;
-    if (this.report === "byProducts") {
-      modalRef.componentInstance.orientation = "LANDSCAPE";
-    } else {
-      modalRef.componentInstance.orientation = (!this.glNumber.getMonthlyDetailed()) ? 'PORTRAIT' : 'LANDSCAPE';
-    }
-
+    modalRef.componentInstance.orientation = this.orientation;
     modalRef.componentInstance.template = this.template;
     modalRef.componentInstance.fileName = this.fileName;
   }
   getPdfIdFromRest(action) {
-    let orientation;
-    if (this.report === "byProducts") {
-      orientation = "LANDSCAPE";
-    } else {
-      orientation = (!this.glNumber.getMonthlyDetailed()) ? 'PORTRAIT' : 'LANDSCAPE';
-    }
     var dto = {
       fileName: this.fileName,
       content: this.reportsStateService.parseReportContent(),
       id: this.id,
-      orientation: orientation
+      orientation: this.orientation
     };
     if (this.template === "PDF_TEMPLATE") {
       this.reportsService.getPdfUrl(dto).subscribe((data: any) => {

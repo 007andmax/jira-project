@@ -234,7 +234,7 @@ export class ServiceReportComponent implements OnInit {
   }
 
   getDurationFilter(quanity) {
-    var minutes: string | number = (quanity * 60) % 60;
+    var minutes: string | number = Math.ceil((quanity * 60) % 60);
     var hours: string | number = Math.floor(quanity);
     hours = String(hours).length < 2 ? '0' + hours : hours;
     minutes = String(minutes).length < 2 ? '0' + minutes : minutes;

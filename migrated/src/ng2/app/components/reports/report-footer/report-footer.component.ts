@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CurrentUser } from 'src/ng2/class/current-user/current-user';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
@@ -11,6 +11,7 @@ import { UsersStateService } from 'src/ng2/app/states/users/users-state.service'
 export class ReportFooterComponent implements OnInit {
   currentUser: CurrentUser;
   currentCompany: any = null;
+  @Input() orientation: string = "PORTRAIT";
   constructor(  private companiesStateService: CompaniesStateService,
     private usersStateService: UsersStateService,) { }
 

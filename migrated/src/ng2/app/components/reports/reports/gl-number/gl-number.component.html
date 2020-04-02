@@ -1,7 +1,7 @@
 <div>
   <app-report-menu [report]="'income-accounts'" (onSelectedClient)="onSelectedClient($event)" (onRequest)="onRequest($event)" (getReport)="getReport($event)"></app-report-menu>
  </div>
- <app-report-additional-actions   [fileName]="'income_accounts'" [selectedClient]="selectedClient"></app-report-additional-actions>
+ <app-report-additional-actions [orientation]="(glNumber.getMonthlyDetailed()) ? 'LANDSCAPE' : 'PORTRAIT'"    [fileName]="'income_accounts'" [selectedClient]="selectedClient"></app-report-additional-actions>
  <div class="loading" *ngIf="loadingInProgress"></div>
  <div class="product-list___ticket" id="product-list-ticket-data" >
 
@@ -18,7 +18,7 @@
        <app-overview-report [headers]="headers" [list]="list"></app-overview-report>  
      
      </div>
-     <app-report-footer></app-report-footer>
+     <app-report-footer [orientation]="(glNumber.getMonthlyDetailed()) ? 'LANDSCAPE' : 'PORTRAIT'"></app-report-footer>
    </div>
  </div>
 
