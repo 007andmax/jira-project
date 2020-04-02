@@ -15,6 +15,7 @@ import { CustomerSalesReport } from '../class/customer-sales-report';
 import { TicketsReport } from '../class/tickets-reports';
 import { TicketReportStateService } from '../reports/ticket-report/services/ticket-report-state.service';
 import { ServiceReports } from '../class/service-reports';
+import { ExportCSV } from '../report-additional-actions/class/export-csv';
 
 
 @Component({
@@ -128,7 +129,7 @@ export class ReportMenuComponent implements OnInit {
       //  this.getCompanyDevices();
 
     }
-  
+
     console.log("this.selectClient", this.selectedClient);
     this.onSelectedClient.emit(this.selectedClient);
     //  this.services = [new ForCreateService()];
@@ -160,7 +161,7 @@ export class ReportMenuComponent implements OnInit {
 
     this.onRequest.emit(true);
     this.reportsService.getReportByTaxes(this.taxes.getForRequest()).subscribe(data => this.setDatareport(data));
-
+    this.reportsStateService.onChangeExportCSV(new ExportCSV('reports/sales/byTaxes', this.taxes.getForRequest(),'Sales_report_by_customer'));
   }
   getReportByAccountsReceivable() {
     this.onRequest.emit(true);
@@ -267,7 +268,7 @@ export class ReportMenuComponent implements OnInit {
         this.ticketsReport.setDatesByCompany(this.selectedClient);
         this.serviceReport.setDatesByCompany(this.selectedClient);
       }
-     
+
     }
 
     //  this.reportsStateService.onChangeGlNumber(this.glNumber);

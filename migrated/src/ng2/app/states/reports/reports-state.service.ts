@@ -7,8 +7,12 @@ export class ReportsStateService {
   glNumber: EventEmitter<any> = new EventEmitter();
   serviceReport: EventEmitter<any> = new EventEmitter();
   accountsReceivable: EventEmitter<any> = new EventEmitter();
+  exportCSV: EventEmitter<any> = new EventEmitter();
   constructor() { }
 
+  public onChangeExportCSV(data) {
+    this.exportCSV.emit(data);
+  }
   public onChangeGlNumber(data) {
     this.glNumber.emit(data);
   }
@@ -64,7 +68,8 @@ export class ReportsStateService {
   
 
   //  selectedHtml = target.wrap('div').parent().html();
-    selectedHtml = target.wrap('div').html();
+    selectedHtml = `<div>${target.html()}</div>`;
+    console.log("selectedHtml",selectedHtml);
     if (selectedHtml.indexOf(unknownLoadingStr) !== -1) {
       selectedHtml = selectedHtml.slice(unknownLoadingStr.length);
     }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Input } from '@angular/core';
+import { Component, OnInit, ElementRef, Input, OnDestroy } from '@angular/core';
 import { ACION_OPEN_PDF, ACION_DOWNLOAD_PDF } from 'src/ng2/app/const/reports';
 import { ReportsService } from 'src/ng2/app/services/reports/reports.service';
 import { AppService } from 'src/ng2/app/states/app/app.service';
@@ -7,6 +7,8 @@ import { ModalQuoteComponent } from 'src/ng2/app/services/modal/modal-quote/moda
 import { ReportSendEmailComponent } from './report-send-email/report-send-email.component';
 import { ReportsStateService } from 'src/ng2/app/states/reports/reports-state.service';
 import { GlNumber } from '../class/gl-number';
+import { ExportCSV } from './class/export-csv';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-report-additional-actions',
@@ -14,10 +16,12 @@ import { GlNumber } from '../class/gl-number';
   styleUrls: ['./report-additional-actions.component.scss'],
   providers: [NgbModalConfig, NgbModal]
 })
-export class ReportAdditionalActionsComponent implements OnInit {
+export class ReportAdditionalActionsComponent implements OnInit, OnDestroy {
   ACION_OPEN_PDF = ACION_OPEN_PDF;
   ACION_DOWNLOAD_PDF = ACION_DOWNLOAD_PDF;
   listExport = ['PDF', 'CSV'];
+  exportCSV: ExportCSV;
+  sub: Subscription = new Subscription();
   @Input() report: string = "";
   @Input() orientation: string = "PORTRAIT";
   @Input() fileName: string = "";
@@ -35,6 +39,10 @@ export class ReportAdditionalActionsComponent implements OnInit {
 
   ngOnInit() {
     if (this.report === "service-report") this.listExport = ['PDF'];
+    let exportCSV = this.reportsStateService.exportCSV.subscribe(data => {
+      this.exportCSV = data;
+    })
+    this.sub.add(exportCSV);
   }
 
   sendEmail() {
@@ -69,6 +77,20 @@ export class ReportAdditionalActionsComponent implements OnInit {
   }
   onSelectExport(item) {
     if (item === 'PDF') this.getPdfIdFromRest(ACION_DOWNLOAD_PDF);
+    if (item === 'CSV') this.exportCsv();
   }
+  exportCsv() {
+    this.reportsService.getCSV(this.exportCSV.url + '/csv', this.exportCSV.data).subscribe((resp: any) => {
+      var blob = new Blob([resp]);
+      var link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
 
+      link.download = this.exportCSV.fileName;
+      link.click();
+      window.URL.revokeObjectURL(link.href);
+    })
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }
