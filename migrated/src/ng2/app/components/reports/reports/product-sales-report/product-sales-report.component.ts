@@ -39,7 +39,7 @@ export class ProductSalesReportComponent implements OnInit {
     this.headers.push("Invoice number");
     this.headers.push("Purchase cost");
     this.headers.push("Sale price");
-    this.headers.push("Discount(amount)");
+    this.headers.push("Discount");
 
 
     /*this.classes.push("col-md-1");
@@ -75,7 +75,7 @@ export class ProductSalesReportComponent implements OnInit {
         this.styles.push({'color': 'red'});
       } else {
         this.styles.push({'color':!line.invoiceNumber ? 'red' : 'none'});
-      } 
+      }
     })
     let list = [];
     for (let i = 0; i < ((this.productSalesReport.type === 'SUMMARY') ? 6 : 5); i++) {
