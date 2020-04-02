@@ -215,6 +215,7 @@ export class ServiceReportComponent implements OnInit {
     this.drawChart(top);
   }
   public getDeviceName(data) {
+    if (!this.selectedClient) return "";
     let list = this.devicesSateService.getAllDevices()[this.selectedClient.id];
     if (!list) return "";
     let find = list.find(item => item.id === data);
