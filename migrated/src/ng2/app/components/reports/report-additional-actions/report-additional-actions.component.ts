@@ -45,7 +45,12 @@ export class ReportAdditionalActionsComponent implements OnInit {
     console.log("this.selectClient", this.selectedClient);
     const modalRef = this.modalService.open(ReportSendEmailComponent, null);
     modalRef.componentInstance.selectedClient = this.selectedClient;
-    modalRef.componentInstance.orientation = (!this.glNumber.getMonthlyDetailed()) ? 'PORTRAIT' : 'LANDSCAPE';
+    if (this.report === "byProducts") {
+      modalRef.componentInstance.orientation = "LANDSCAPE";
+    } else {
+      modalRef.componentInstance.orientation = (!this.glNumber.getMonthlyDetailed()) ? 'PORTRAIT' : 'LANDSCAPE';
+    }
+   
     modalRef.componentInstance.template = this.template;
     modalRef.componentInstance.fileName = this.fileName;
   }
