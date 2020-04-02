@@ -14,6 +14,10 @@ export class ReportsService {
     return this.http.post(this.apiUrl + `reports/pdf`, data);
     
   }
+  public getCSV(url,data) {
+    return this.http.post(this.apiUrl + url, data);
+    
+  }
   public getCustomPdfUrl(data) {
     return this.http.post(this.apiUrl + `customerReport/pdf`, data);
     

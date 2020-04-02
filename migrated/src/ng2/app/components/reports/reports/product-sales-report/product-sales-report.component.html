@@ -17,7 +17,7 @@
       <!--HEADER-->
       
       <h3>{{ productSalesReport.techCompanyName }}</h3>
-        <p ng-show="productSalesReport.type ==='DETAILED' ">Detailed sales for <span>{{ productSalesReport.clientCompanyName }}</span>
+        <p *ngIf="productSalesReport.type ==='DETAILED' ">Detailed sales for <span>{{ productSalesReport.clientCompanyName }}</span>
         </p>
         <p><span [textContent]="perseStartDate()"></span> to <span [textContent]="perseEndDate()"></span>
         </p>

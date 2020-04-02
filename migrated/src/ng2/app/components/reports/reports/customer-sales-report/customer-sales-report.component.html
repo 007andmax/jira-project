@@ -16,7 +16,7 @@
     <div class="header-product-list-ticket" *ngIf="customerSalesReport.lines.length > 0">
       <!--HEADER-->
       <h3>{{ customerSalesReport.techCompanyName }}</h3>
-        <p ng-if="customerSalesReport && customerSalesReport.type === 'DETAILED'">
+        <p *ngIf="customerSalesReport && customerSalesReport.type === 'DETAILED'">
           Detailed sales for <span>{{ customerSalesReport.clientCompanyName }}</span>
         </p>
         <p><span>{{ parseDate(customerSalesReport.startDate)   }}</span> to <span>{{ parseDate(customerSalesReport.endDate)   }}</span>

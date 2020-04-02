@@ -7,8 +7,12 @@ export class ReportsStateService {
   glNumber: EventEmitter<any> = new EventEmitter();
   serviceReport: EventEmitter<any> = new EventEmitter();
   accountsReceivable: EventEmitter<any> = new EventEmitter();
+  exportCSV: EventEmitter<any> = new EventEmitter();
   constructor() { }
 
+  public onChangeExportCSV(data) {
+    this.exportCSV.emit(data);
+  }
   public onChangeGlNumber(data) {
     this.glNumber.emit(data);
   }
