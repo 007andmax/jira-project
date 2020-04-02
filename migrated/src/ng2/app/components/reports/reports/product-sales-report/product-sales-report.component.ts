@@ -42,7 +42,7 @@ export class ProductSalesReportComponent implements OnInit {
     this.headers.push("Discount(amount)");
 
 
-    this.classes.push("col-md-1");
+    /*this.classes.push("col-md-1");
     if (this.productSalesReport.type === 'SUMMARY') this.classes.push("col-md-1");
     this.classes.push("col-md-1");
     if (this.productSalesReport.type === 'SUMMARY') {
@@ -54,7 +54,7 @@ export class ProductSalesReportComponent implements OnInit {
     this.classes.push("col-md-2");
     this.classes.push("col-md-2");
     this.classes.push("col-md-1");
-    this.classes.push("col-md-1");
+    this.classes.push("col-md-1");*/
 
     this.productSalesReport.lines.forEach((line,index) => {
       let list = [];
