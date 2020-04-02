@@ -66,8 +66,10 @@ export class ReportsStateService {
 
   //  selectedHtml = target.wrap('div').parent().html();
     selectedHtml = target.wrap('div').html();
+    console.log("selectedHtml",selectedHtml);
     if (selectedHtml.indexOf(unknownLoadingStr) !== -1) {
       selectedHtml = selectedHtml.slice(unknownLoadingStr.length);
+      console.log("selectedHtml.slice(unknownLoadingStr.length)",selectedHtml.slice(unknownLoadingStr.length));
     }
     return selectedHtml;
   }

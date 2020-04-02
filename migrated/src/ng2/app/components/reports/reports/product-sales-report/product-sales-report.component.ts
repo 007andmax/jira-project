@@ -30,6 +30,7 @@ export class ProductSalesReportComponent implements OnInit {
     this.headers = [];
     this.list = [];
     this.styles = [];
+    this.classes = [];
     this.headers.push("Date");
     if (this.productSalesReport.type === 'SUMMARY') this.headers.push("Client");
     this.headers.push("MFG#");
@@ -52,6 +53,7 @@ export class ProductSalesReportComponent implements OnInit {
     this.classes.push("col-md-2");
     this.classes.push("col-md-2");
     this.classes.push("col-md-2");
+    this.classes.push("col-md-1");
     this.classes.push("col-md-1");
 
     this.productSalesReport.lines.forEach((line,index) => {
@@ -83,6 +85,7 @@ export class ProductSalesReportComponent implements OnInit {
     list.push(`$${this.parseTotal((this.productSalesReport.salePriceSum) ? this.productSalesReport.salePriceSum : 0)}`);
     list.push(`$${this.parseTotal((this.productSalesReport.discountSum) ? this.productSalesReport.discountSum : 0)}`);
     this.list.push(list);
+    this.cd.detectChanges();
 
   }
   onSelectedClient(client) {
