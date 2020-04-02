@@ -91,6 +91,7 @@ export class ReportMenuComponent implements OnInit {
   public onSelectTypeCustomers(data) {
     this.customerSalesReport.setType(data);
     this.isDisabledCompany = (data === 'Summary') ? true : false;
+    if (data === 'Summary') this.validate.resetCompany();
   }
   public onSelectTypeProduct(data) {
     this.productSalesReport.setType(data);
