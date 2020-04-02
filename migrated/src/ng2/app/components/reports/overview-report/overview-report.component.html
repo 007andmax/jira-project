@@ -1,11 +1,9 @@
 <table class="quicktech__table">
   <thead>
     <tr>
-      <ng-template ngFor let-item [ngForOf]="headers" let-i="index" [ngForTrackBy]="trackByIndex"> 
-        <th [ngClass]="(classes.length > 0) ? classes[i] : ''" [textContent]="item"></th>
-
+      <ng-template ngFor let-item [ngForOf]="headers" let-i="index" [ngForTrackBy]="trackByIndex">
+        <th [ngClass]="(classes.length > 0) ? classes[i] : ''" [textContent]="item" style="white-space: nowrap"></th>
       </ng-template>
-
     </tr>
   </thead>
   <tbody>
