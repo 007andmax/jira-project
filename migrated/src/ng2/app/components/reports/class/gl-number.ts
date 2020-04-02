@@ -9,8 +9,12 @@ export class GlNumber {
     monthlyDetailed: boolean = false;
     dates: Array<string> = [];
     list: Array<GlNumberItem> = [];
+    response: any;
     constructor() { }
 
+    public setResponse(data) {
+        this.response = data;
+    }
     public setDataFromObject(data) {
         this.startDate = data.startDate;
         this.endDate = data.endDate;
@@ -18,6 +22,7 @@ export class GlNumber {
         this.monthlyDetailed = data.monthlyDetailed;
         this.dates = data.dates;
         this.list = data.list;
+        this.response = data.response;
     }
 
     public clearDates() {
@@ -31,16 +36,17 @@ export class GlNumber {
         this.startDate = '';
         this.endDate = '';
     }
-public getDataObject () {
-    return {
-        startDate: this.startDate,
-    endDate: this.endDate,
-    clientCompanyId: this.clientCompanyId,
-    monthlyDetailed: this.monthlyDetailed,
-    dates: this.dates,
-    list: this.list
+    public getDataObject() {
+        return {
+            startDate: this.startDate,
+            endDate: this.endDate,
+            clientCompanyId: this.clientCompanyId,
+            monthlyDetailed: this.monthlyDetailed,
+            dates: this.dates,
+            list: this.list,
+            response: this.response
+        }
     }
-}
 
     public getList() {
         return this.list;
@@ -73,7 +79,7 @@ public getDataObject () {
         this.setEndDate(moment(new Date()).format('YYYY/MM/DD'));
     }
 
-    public  getMonthlyDetailed () {
+    public getMonthlyDetailed() {
         return this.monthlyDetailed;
     }
 

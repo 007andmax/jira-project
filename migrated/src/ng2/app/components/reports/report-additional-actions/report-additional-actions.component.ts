@@ -18,40 +18,54 @@ export class ReportAdditionalActionsComponent implements OnInit {
   ACION_OPEN_PDF = ACION_OPEN_PDF;
   ACION_DOWNLOAD_PDF = ACION_DOWNLOAD_PDF;
   listExport = ['PDF', 'CSV'];
-  glNumber: GlNumber = new GlNumber();
+  @Input() report: string = "";
+  @Input() orientation: string = "PORTRAIT";
+  @Input() fileName: string = "";
+  @Input() id: string = null;
+  @Input() template: string = "PDF_TEMPLATE";
   @Input() selectedClient;
   constructor(private reportsService: ReportsService,
     private reportsStateService: ReportsStateService,
     private appService: AppService,
     config: NgbModalConfig,
-    private modalService: NgbModal,) { 
-      config.backdrop = 'static';
-      config.keyboard = false;
-    }
+    private modalService: NgbModal, ) {
+    config.backdrop = 'static';
+    config.keyboard = false;
+  }
 
   ngOnInit() {
-    this.reportsStateService.glNumber.subscribe((data: GlNumber) => {
-      this.glNumber = data;
-      
-    })
+    if (this.report === "service-report") this.listExport = ['PDF'];
   }
 
   sendEmail() {
+    console.log("this.selectClient", this.selectedClient);
     const modalRef = this.modalService.open(ReportSendEmailComponent, null);
     modalRef.componentInstance.selectedClient = this.selectedClient;
-    modalRef.componentInstance.orientation =  (!this.glNumber.getMonthlyDetailed()) ? 'PORTRAIT' : 'LANDSCAPE';
+    modalRef.componentInstance.orientation = this.orientation;
+    modalRef.componentInstance.template = this.template;
+    modalRef.componentInstance.fileName = this.fileName;
   }
   getPdfIdFromRest(action) {
     var dto = {
-      fileName: 'income_accounts',
+      fileName: this.fileName,
       content: this.reportsStateService.parseReportContent(),
-      id: null,
-      orientation: (!this.glNumber.getMonthlyDetailed()) ? 'PORTRAIT' : 'LANDSCAPE'
+      id: this.id,
+      orientation: this.orientation
     };
-    this.reportsService.getPdfUrl(dto).subscribe((data: any) => {
-      if (action === ACION_OPEN_PDF) window.open(data.url);
-      if (action === ACION_DOWNLOAD_PDF) this.appService.downloadByUrl(`${data.url}?isDownload=true`, 'income_accounts');
-    })
+    if (this.template === "PDF_TEMPLATE") {
+      this.reportsService.getPdfUrl(dto).subscribe((data: any) => {
+        console.log("data", data);
+        if (action === ACION_OPEN_PDF) window.open(data.url);
+        if (action === ACION_DOWNLOAD_PDF) this.appService.downloadByUrl(`${data.url}?isDownload=true`, this.fileName);
+      })
+    } else {
+      this.reportsService.getCustomPdfUrl(dto).subscribe((data: any) => {
+        console.log("data", data);
+        if (action === ACION_OPEN_PDF) window.open(data.url);
+        if (action === ACION_DOWNLOAD_PDF) this.appService.downloadByUrl(`${data.url}?isDownload=true`, this.fileName);
+      })
+    }
+
   }
   onSelectExport(item) {
     if (item === 'PDF') this.getPdfIdFromRest(ACION_DOWNLOAD_PDF);

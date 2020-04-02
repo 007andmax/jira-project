@@ -112,8 +112,20 @@ import { SelectComponent } from './components/shared/select/select.component';
 import { ReportAdditionalActionsComponent } from './components/reports/report-additional-actions/report-additional-actions.component';
 import { ReportSendEmailComponent } from './components/reports/report-additional-actions/report-send-email/report-send-email.component';
 import { CompanyUserComponent } from './components/company-user/company-user.component';
+import { GlNumberComponent } from './components/reports/reports/gl-number/gl-number.component';
+import { AccountsReceivableComponent } from './components/reports/reports/accounts-receivable/accounts-receivable.component';
+import { ReportFooterComponent } from './components/reports/report-footer/report-footer.component';
+import { TaxesReportComponent } from './components/reports/reports/taxes-report/taxes-report.component';
+import { ProductSalesReportComponent } from './components/reports/reports/product-sales-report/product-sales-report.component';
+import { CustomerSalesReportComponent } from './components/reports/reports/customer-sales-report/customer-sales-report.component';
+import { NvD3Module } from 'ng2-nvd3';
 
-
+import 'd3';
+import 'nvd3';
+import { TicketReportComponent } from './components/reports/reports/ticket-report/ticket-report.component';
+import { TechUsersListReportComponent } from './components/reports/report-menu/tech-users-list-report/tech-users-list-report.component';
+import { ReportTimePipe } from './pipe/report-time.pipe';
+import { ServiceReportComponent } from './components/reports/reports/service-report/service-report.component';
 /**
  * declare angular
  */
@@ -265,7 +277,18 @@ angular.module('quicktech')
     SelectComponent,
     ReportAdditionalActionsComponent,
     ReportSendEmailComponent,
-    CompanyUserComponent
+    CompanyUserComponent,
+    GlNumberComponent,
+    AccountsReceivableComponent,
+    ReportFooterComponent,
+    TaxesReportComponent,
+    ProductSalesReportComponent,
+    CustomerSalesReportComponent,
+    TicketReportComponent,
+    TechUsersListReportComponent,
+    ReportTimePipe,
+    ServiceReportComponent,
+     
   ],
   imports: [
     BrowserModule,
@@ -350,7 +373,8 @@ angular.module('quicktech')
     CronEditorModule,
     ImageCropperModule,
     NgxEditorModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NvD3Module 
 
   ],
   entryComponents: [

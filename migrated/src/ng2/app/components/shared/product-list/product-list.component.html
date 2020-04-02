@@ -2,7 +2,13 @@
   <input class="pointer" type="text"
     [ngClass]="{'no-valid': isFormValid}" placeholder="Product" (input)="onSearch($event)"
     id="dropdownProducts" ngbDropdownToggle>
-  <i class="icn-sm report-caret-icon"></i>
+    <span *ngIf="itemList">
+      <i *ngIf="selectedItem"
+         class="icn-sm icn-remove-old"
+         (click)="clear($event)"></i>
+      <i *ngIf="!selectedItem"
+         class="icn-sm report-caret-icon"></i>
+    </span>
   <div ngbDropdownMenu aria-labelledby="dropdownProducts" >
     <ngb-accordion #acc="ngbAccordion" class="item-list products-accordion">
       <ngb-panel *ngFor="let item of itemList | filter : resetSearch : search"> <!--| filter :'name' : search -->

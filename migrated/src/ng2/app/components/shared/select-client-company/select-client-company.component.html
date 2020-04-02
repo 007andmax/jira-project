@@ -1,10 +1,11 @@
 <input
+  [ngClass]="{'disabled': isDisabled,'no-valid' : !valid}"
+  [disabled]="isDisabled"
   id="typeahead-focus1"
   placeholder="Select Company"
   type="text"
   [(ngModel)]="selectedClient"
   class="pointer"
-  [ngClass]="(!valid) ? 'no-valid' : ''"
   [inputFormatter]="formatter"
   [resultFormatter]="formatter"
   [ngbTypeahead]="search"

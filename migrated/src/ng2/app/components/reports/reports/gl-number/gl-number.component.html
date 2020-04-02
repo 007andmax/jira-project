@@ -1,0 +1,26 @@
+<div>
+  <app-report-menu [report]="'income-accounts'" (onSelectedClient)="onSelectedClient($event)" (onRequest)="onRequest($event)" (getReport)="getReport($event)"></app-report-menu>
+ </div>
+ <app-report-additional-actions [orientation]="(glNumber.getMonthlyDetailed()) ? 'LANDSCAPE' : 'PORTRAIT'"    [fileName]="'income_accounts'" [selectedClient]="selectedClient"></app-report-additional-actions>
+ <div class="loading" *ngIf="loadingInProgress"></div>
+ <div class="product-list___ticket" id="product-list-ticket-data" >
+
+  <div  class="product-list-ticket acc-col" [ngStyle]="{'width': (glNumber.getMonthlyDetailed()) ? '1180px' : '' }" style="height: 100%;" *ngIf="!loadingInProgress">
+    <div class="report-header" [ngStyle]="{'width': (glNumber.getMonthlyDetailed()) ? '1055px' : '' }">
+       <h1>Income accounts</h1>
+       <div class="company-info">
+         <h3  [textContent]="(selectedClient) ? selectedClient.name : 'All companies'"></h3>
+           <p><span [textContent]="perseStartDate()"></span> - <span [textContent]="perseEndDate()"></span></p>
+       </div>
+     </div>
+    
+     <div>
+       <app-overview-report [headers]="headers" [list]="list"></app-overview-report>  
+     
+     </div>
+     <app-report-footer [orientation]="(glNumber.getMonthlyDetailed()) ? 'LANDSCAPE' : 'PORTRAIT'"></app-report-footer>
+   </div>
+ </div>
+
+
+

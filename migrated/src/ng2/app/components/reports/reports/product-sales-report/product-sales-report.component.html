@@ -1,0 +1,35 @@
+<div>
+  <app-report-menu [report]="'byProducts'" (onSelectedClient)="onSelectedClient($event)" (onRequest)="onRequest($event)" (getReport)="getReport($event)"></app-report-menu>
+ </div>
+ <app-report-additional-actions [orientation]="'LANDSCAPE'" [report]="'byProducts'"  [fileName]="'products_report'" [selectedClient]="selectedClient"></app-report-additional-actions>
+ <div class="loading" *ngIf="loadingInProgress"></div>
+ <div class="product-list___ticket" id="product-list-ticket-data" >
+
+  <div  class="product-list-ticket product-list-ticket-pdf"     style="height: 100%; width: 1180px;" *ngIf="!loadingInProgress">
+    <div class="report-header"   >
+       <h1>Product Sales Report</h1>
+       <div class="company-info">
+        <h3 [textContent]="(productSalesReport.clientCompanyName) ? productSalesReport.clientCompanyName : 'All companies'"></h3>
+          <p><span [textContent]="perseStartDate()"></span> - <span [textContent]="perseEndDate()"></span></p> 
+       </div>
+     </div>
+    <div class="header-product-list-ticket" *ngIf="productSalesReport.lines.length > 0">
+      <!--HEADER-->
+      
+      <h3>{{ productSalesReport.techCompanyName }}</h3>
+        <p ng-show="productSalesReport.type ==='DETAILED' ">Detailed sales for <span>{{ productSalesReport.clientCompanyName }}</span>
+        </p>
+        <p><span [textContent]="perseStartDate()"></span> to <span [textContent]="perseEndDate()"></span>
+        </p>
+    </div>
+    
+     <div>
+       <app-overview-report [classes]="classes" [styles]="styles" [headers]="headers" [list]="list"></app-overview-report>  
+     
+     </div>
+  <app-report-footer  [orientation]="'LANDSCAPE'"></app-report-footer>
+   </div>
+ </div>
+
+
+

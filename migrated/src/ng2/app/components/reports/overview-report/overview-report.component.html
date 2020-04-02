@@ -1,3 +1,20 @@
-<p>
-  overview-report works!
-</p>
+<table class="quicktech__table">
+  <thead>
+    <tr>
+      <ng-template ngFor let-item [ngForOf]="headers" let-i="index" [ngForTrackBy]="trackByIndex"> 
+        <th [ngClass]="(classes.length > 0) ? classes[i] : ''" [textContent]="item"></th>
+
+      </ng-template>
+
+    </tr>
+  </thead>
+  <tbody>
+    <ng-template ngFor let-item [ngForOf]="list" let-i="index" [ngForTrackBy]="trackByIndex">
+      <tr [ngStyle]="(styles.length > 0) ? styles[i] : null">
+        <ng-template ngFor let-child [ngForOf]="item" let-u="index" [ngForTrackBy]="trackByIndex">
+        <td   [textContent]="child"></td>
+      </ng-template>
+      </tr>
+    </ng-template>
+  </tbody>
+</table>

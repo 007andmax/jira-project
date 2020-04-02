@@ -107,7 +107,7 @@
              execute-when-outfocused="ticketCompanyOutfocus()"
              placeholder=""
              autocomplete="off"
-             uib-typeahead="company as company.name for company in clientCompanies | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
+             uib-typeahead="company as company.name for company in clientCompanies | orderBy:'name'"
              typeahead-min-length="0"
              qt-typeahead-async-show-on-focus
              ng-trim="false"

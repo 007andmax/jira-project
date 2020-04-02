@@ -17,6 +17,7 @@ export class ProductListComponent implements OnInit {
   public isFormValid = false;
   search:string = '';
   resetSearch:boolean = false;
+  selectedItem = false;
   /**
    * Creates an instance of the ProductListComponent with the injected services
    * @param {ElementRef} elRef Service to work with template
@@ -32,7 +33,12 @@ export class ProductListComponent implements OnInit {
     this.itemList.forEach(item => item.products.sort((a, b) => (a.description.toLowerCase() > b.description.toLowerCase()) ?
       1 : ((b.description.toLowerCase() > a.description.toLowerCase()) ? -1 : 0)));
      
-      if (this.editItem) this.elRef.nativeElement.querySelector('#dropdownProducts').value = this.getNameOrDescription(this.editItem);
+      if (this.editItem) {
+        let value = this.getNameOrDescription(this.editItem);
+        this.elRef.nativeElement.querySelector('#dropdownProducts').value = value;
+        if (value !== '') this.selectedItem = true;
+
+      }
 
   }
 
@@ -54,6 +60,7 @@ export class ProductListComponent implements OnInit {
     this.elRef.nativeElement.querySelector('#dropdownProducts').value = this.getNameOrDescription(productItem);
     this.products_dropDown.close();
     this.selectedProductItem.next(productItem);
+    this.selectedItem = true;
   }
 
   onSearch (event) {
@@ -65,6 +72,12 @@ export class ProductListComponent implements OnInit {
     this.resetSearch = true;
    // this.cd.detectChanges();
   }
-  
+  clear() {
+    this.elRef.nativeElement.querySelector('#dropdownProducts').value = '';
+    this.products_dropDown.close();
+    this.selectedProductItem.emit(null);
+    //   this.editItem = null;
+    this.selectedItem = false;
+  }
 
 }

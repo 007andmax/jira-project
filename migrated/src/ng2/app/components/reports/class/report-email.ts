@@ -1,10 +1,10 @@
 export class ReportEmail {
-    content:string = "Income accounts"
-    emails:Array<string>;
-    fileName:string = "income_accounts";
-    orientation:string = 'PORTRAIT';
-    note:string;
-    constructor() {}
+    content: string = "Income accounts"
+    emails: Array<string>;
+    fileName: string = "income_accounts";
+    orientation: string = 'PORTRAIT';
+    note: string;
+    constructor() { }
 
     public setContent(data) {
         this.content = data;
@@ -13,11 +13,13 @@ export class ReportEmail {
         this.emails = data;
 
     }
-
-    public setOrientation (data) {
+    public setFileName(data) {
+        this.fileName = data;
+    }
+    public setOrientation(data) {
         this.orientation = data;
     }
-    
+
     public setNote(data) {
         this.note = data;
     }
