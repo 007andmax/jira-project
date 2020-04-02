@@ -442,6 +442,14 @@
           url: '/reports/software-summary',
           templateUrl: '/ng1/scripts/core/reports/reports-templates/software-summary.tpl.html',
           controller: 'quicktech.core.reports.reportsCtrl'
+        }))
+        .state('device-dashboard', waitForServices({
+          url: '/ng2/device/dashboard',
+          template: '<device-dashboard></device-dashboard>'
+        }))
+        .state('device-hardware', waitForServices({
+          url: '/ng2/device/hardware',
+          template: '<device-hardware></device-hardware>'
         }));
 
 

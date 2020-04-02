@@ -1,0 +1,957 @@
+<div class="cmn-wrapper">
+  <div class="page-container windows-update">
+    <!-- Page Title -->
+        <div class="page-header">
+            <h3>Window Update</h3>
+            <div class="page-header-opt">
+              <div class="update-info" *ngIf="!show">
+                <a href="javascript:;" class="update" (click)="allUpdate = !allUpdate">All Updates</a>
+                <a href="javascript:;" class="hidden" (click)="allUpdate = !allUpdate">Hidden Updates</a>
+                <a href="javascript:;" class="installed">Installed Updates</a>
+              </div>
+              
+              <div class="selected-item" *ngIf="show">
+                  <span>2 Selected</span>
+                  <a class="Install" title="Install" href="javascript:;"><img src="assets/images/install-blue.svg" alt="install-blue"/></a>
+                  <a class="uninstall" title="uninstall-blue" href="javascript:;"><img src="assets/images/uninstall-blue.svg" alt="uninstall-blue"/></a>
+                  <a class="hide" title="hide" href="javascript:;"><img src="assets/images/hide-update-blue.svg" alt="hide"/></a>
+              </div>
+              <a href="javascript:;" class="btn-check"><img src="assets/images/check-update.svg" alt="update"> Check Update</a>
+            </div>    
+        </div>
+        <!-- Page Content All update -->
+        <div class="contant-area" *ngIf="!allUpdate">
+          <div class="table-wrap">
+            <table class="cmn-tab-head">
+                <thead>
+                  <tr>
+                    <th class="check-area">
+                      <div class="cmn-checkbox">
+                        <input type="checkbox" name="check" id="sl" (change)="show=!show"> 
+                        <label for="sl" aria-label="checkbox"></label>
+                      </div>
+                    </th>
+                    <th class="Title">Title</th>
+                    <th class="KB">KB</th>
+                    <th class="Classification">Classification</th>
+                    <th class="Serverity">Serverity</th>
+                    <th class="release">Release</th>
+                    <th class="installed">Installed</th>
+                    <th class="Status">Status</th>
+                    <th class="action">&nbsp;</th>
+                  </tr>
+                </thead>
+            </table>
+            <table class="cmn-table">
+              <tr>
+                <td class="check-area">
+                  <div class="cmn-checkbox">
+                    <input type="checkbox" name="check" (change)="show=!show" id="ar" />
+                    <label for="ar" aria-label="checkbox"></label>
+                  </div>
+                </td>
+                <td class="Title" (click)="details=!details">
+                    2018-05 Update for Windows 10
+                </td>
+                <td class="KB">44876388</td>
+                <td class="Classification">Update</td>
+                <td class="Serverity">Critical</td>
+                <td class="release">10/01/2019</td>
+                <td class="installed">11/01/2019</td>
+                <td class="Status">Installed</td>
+                <td class="action" dropdown>
+                  <a href="javascript:;" is="button-basic" aria-controls="dropdown-basic" dropdownToggle class="more" data-tooltip="More" ><img src="assets/images/more.svg" alt="more"/></a>
+                  <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu list-unstyled"
+                        role="menu" aria-labelledby="button-basic">
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/install.svg" alt="Install" />Install Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/uninstall.svg" alt="Uninstall" />Uninstall Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/hide-update.svg" alt="Hide Update" />Hide Update</a>
+                      </li>
+                      
+                    </ul>
+                
+                </td>
+              </tr>
+            </table>
+            <table class="cmn-table">
+              <tr>
+                <td class="check-area">
+                  <div class="cmn-checkbox">
+                    <input type="checkbox" name="check" (change)="show=!show" id="ar" />
+                    <label for="ar" aria-label="checkbox"></label>
+                  </div>
+                </td>
+                <td class="Title" (click)="details=!details">
+                  Feature update to Window 10
+                </td>
+                <td class="KB">44876388</td>
+                <td class="Classification">Update</td>
+                <td class="Serverity">Critical</td>
+                <td class="release">10/01/2019</td>
+                <td class="installed">11/01/2019</td>
+                <td class="Status">Installed</td>
+                <td class="action" dropdown>
+                  <a href="javascript:;" is="button-basic" aria-controls="dropdown-basic" dropdownToggle class="more" data-tooltip="More" ><img src="assets/images/more.svg" alt="more"/></a>
+                  <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu list-unstyled"
+                        role="menu" aria-labelledby="button-basic">
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/install.svg" alt="Install" />Install Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/uninstall.svg" alt="Uninstall" />Uninstall Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/hide-update.svg" alt="Hide Update" />Hide Update</a>
+                      </li>
+                      
+                    </ul>
+                
+                </td>
+              </tr>
+            </table>
+            <table class="cmn-table">
+              <tr>
+                <td class="check-area">
+                  <div class="cmn-checkbox">
+                    <input type="checkbox" name="check" (change)="show=!show" id="ar" />
+                    <label for="ar" aria-label="checkbox"></label>
+                  </div>
+                </td>
+                <td class="Title" (click)="details=!details">
+                  This is another useless
+                </td>
+                <td class="KB">44876388</td>
+                <td class="Classification">Update</td>
+                <td class="Serverity">Critical</td>
+                <td class="release">10/01/2019</td>
+                <td class="installed">11/01/2019</td>
+                <td class="Status">Installed</td>
+                <td class="action" dropdown>
+                  <a href="javascript:;" is="button-basic" aria-controls="dropdown-basic" dropdownToggle class="more" data-tooltip="More" ><img src="assets/images/more.svg" alt="more"/></a>
+                  <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu list-unstyled"
+                        role="menu" aria-labelledby="button-basic">
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/install.svg" alt="Install" />Install Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/uninstall.svg" alt="Uninstall" />Uninstall Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/hide-update.svg" alt="Hide Update" />Hide Update</a>
+                      </li>
+                      
+                    </ul>
+                
+                </td>
+              </tr>
+            </table>
+            <table class="cmn-table">
+              <tr>
+                <td class="check-area">
+                  <div class="cmn-checkbox">
+                    <input type="checkbox" name="check" (change)="show=!show" id="ar" />
+                    <label for="ar" aria-label="checkbox"></label>
+                  </div>
+                </td>
+                <td class="Title" (click)="details=!details">
+                  Window Security Patch
+                </td>
+                <td class="KB">44876388</td>
+                <td class="Classification">Update</td>
+                <td class="Serverity">Critical</td>
+                <td class="release">10/01/2019</td>
+                <td class="installed">11/01/2019</td>
+                <td class="Status">Installed</td>
+                <td class="action" dropdown>
+                  <a href="javascript:;" is="button-basic" aria-controls="dropdown-basic" dropdownToggle class="more" data-tooltip="More" ><img src="assets/images/more.svg" alt="more"/></a>
+                  <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu list-unstyled"
+                        role="menu" aria-labelledby="button-basic">
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/install.svg" alt="Install" />Install Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/uninstall.svg" alt="Uninstall" />Uninstall Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/hide-update.svg" alt="Hide Update" />Hide Update</a>
+                      </li>
+                      
+                    </ul>
+                
+                </td>
+              </tr>
+            </table>
+            <table class="cmn-table">
+              <tr>
+                <td class="check-area">
+                  <div class="cmn-checkbox">
+                    <input type="checkbox" name="check" (change)="show=!show" id="ar" />
+                    <label for="ar" aria-label="checkbox"></label>
+                  </div>
+                </td>
+                <td class="Title" (click)="details=!details">
+                  Feature update to Window 10
+                </td>
+                <td class="KB">44876388</td>
+                <td class="Classification">Update</td>
+                <td class="Serverity">Critical</td>
+                <td class="release">10/01/2019</td>
+                <td class="installed">11/01/2019</td>
+                <td class="Status">Installed</td>
+                <td class="action" dropdown>
+                  <a href="javascript:;" is="button-basic" aria-controls="dropdown-basic" dropdownToggle class="more" data-tooltip="More" ><img src="assets/images/more.svg" alt="more"/></a>
+                  <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu list-unstyled"
+                        role="menu" aria-labelledby="button-basic">
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/install.svg" alt="Install" />Install Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/uninstall.svg" alt="Uninstall" />Uninstall Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/hide-update.svg" alt="Hide Update" />Hide Update</a>
+                      </li>
+                      
+                    </ul>
+                
+                </td>
+              </tr>
+            </table>
+            <table class="cmn-table">
+              <tr>
+                <td class="check-area">
+                  <div class="cmn-checkbox">
+                    <input type="checkbox" name="check" (change)="show=!show" id="ar" />
+                    <label for="ar" aria-label="checkbox"></label>
+                  </div>
+                </td>
+                <td class="Title" (click)="details=!details">
+                  Window Security Patch
+                </td>
+                <td class="KB">44876388</td>
+                <td class="Classification">Update</td>
+                <td class="Serverity">Critical</td>
+                <td class="release">10/01/2019</td>
+                <td class="installed">11/01/2019</td>
+                <td class="Status">Installed</td>
+                <td class="action" dropdown>
+                  <a href="javascript:;" is="button-basic" aria-controls="dropdown-basic" dropdownToggle class="more" data-tooltip="More" ><img src="assets/images/more.svg" alt="more"/></a>
+                  <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu list-unstyled"
+                        role="menu" aria-labelledby="button-basic">
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/install.svg" alt="Install" />Install Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/uninstall.svg" alt="Uninstall" />Uninstall Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/hide-update.svg" alt="Hide Update" />Hide Update</a>
+                      </li>
+                      
+                    </ul>
+                
+                </td>
+              </tr>
+            </table>
+            <table class="cmn-table">
+              <tr>
+                <td class="check-area">
+                  <div class="cmn-checkbox">
+                    <input type="checkbox" name="check" (change)="show=!show" id="ar" />
+                    <label for="ar" aria-label="checkbox"></label>
+                  </div>
+                </td>
+                <td class="Title" (click)="details=!details">
+                  2018-05 Update for Windows 10
+                </td>
+                <td class="KB">44876388</td>
+                <td class="Classification">Update</td>
+                <td class="Serverity">Critical</td>
+                <td class="release">10/01/2019</td>
+                <td class="installed">11/01/2019</td>
+                <td class="Status">Installed</td>
+                <td class="action" dropdown>
+                  <a href="javascript:;" is="button-basic" aria-controls="dropdown-basic" dropdownToggle class="more" data-tooltip="More" ><img src="assets/images/more.svg" alt="more"/></a>
+                  <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu list-unstyled"
+                        role="menu" aria-labelledby="button-basic">
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/install.svg" alt="Install" />Install Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/uninstall.svg" alt="Uninstall" />Uninstall Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/hide-update.svg" alt="Hide Update" />Hide Update</a>
+                      </li>
+                      
+                    </ul>
+                
+                </td>
+              </tr>
+            </table>
+            <table class="cmn-table">
+              <tr>
+                <td class="check-area">
+                  <div class="cmn-checkbox">
+                    <input type="checkbox" name="check" (change)="show=!show" id="ar" />
+                    <label for="ar" aria-label="checkbox"></label>
+                  </div>
+                </td>
+                <td class="Title" (click)="details=!details">
+                  Window Security Patch
+                </td>
+                <td class="KB">44876388</td>
+                <td class="Classification">Update</td>
+                <td class="Serverity">Critical</td>
+                <td class="release">10/01/2019</td>
+                <td class="installed">11/01/2019</td>
+                <td class="Status">Installed</td>
+                <td class="action" dropdown>
+                  <a href="javascript:;" is="button-basic" aria-controls="dropdown-basic" dropdownToggle class="more" data-tooltip="More" ><img src="assets/images/more.svg" alt="more"/></a>
+                  <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu list-unstyled"
+                        role="menu" aria-labelledby="button-basic">
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/install.svg" alt="Install" />Install Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/uninstall.svg" alt="Uninstall" />Uninstall Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/hide-update.svg" alt="Hide Update" />Hide Update</a>
+                      </li>
+                      
+                    </ul>
+                
+                </td>
+              </tr>
+            </table>
+            <table class="cmn-table">
+              <tr>
+                <td class="check-area">
+                  <div class="cmn-checkbox">
+                    <input type="checkbox" name="check" (change)="show=!show" id="ar" />
+                    <label for="ar" aria-label="checkbox"></label>
+                  </div>
+                </td>
+                <td class="Title" (click)="details=!details">
+                  Feature update to Window 10
+                </td>
+                <td class="KB">44876388</td>
+                <td class="Classification">Update</td>
+                <td class="Serverity">Critical</td>
+                <td class="release">10/01/2019</td>
+                <td class="installed">11/01/2019</td>
+                <td class="Status">Installed</td>
+                <td class="action" dropdown>
+                  <a href="javascript:;" is="button-basic" aria-controls="dropdown-basic" dropdownToggle class="more" data-tooltip="More" ><img src="assets/images/more.svg" alt="more"/></a>
+                  <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu list-unstyled"
+                        role="menu" aria-labelledby="button-basic">
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/install.svg" alt="Install" />Install Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/uninstall.svg" alt="Uninstall" />Uninstall Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/hide-update.svg" alt="Hide Update" />Hide Update</a>
+                      </li>
+                      
+                    </ul>
+                
+                </td>
+              </tr>
+            </table>
+            <table class="cmn-table">
+              <tr>
+                <td class="check-area">
+                  <div class="cmn-checkbox">
+                    <input type="checkbox" name="check" (change)="show=!show" id="ar" />
+                    <label for="ar" aria-label="checkbox"></label>
+                  </div>
+                </td>
+                <td class="Title" (click)="details=!details">
+                  2018-05 Update for Windows 10
+                </td>
+                <td class="KB">44876388</td>
+                <td class="Classification">Update</td>
+                <td class="Serverity">Critical</td>
+                <td class="release">10/01/2019</td>
+                <td class="installed">11/01/2019</td>
+                <td class="Status">Installed</td>
+                <td class="action" dropdown>
+                  <a href="javascript:;" is="button-basic" aria-controls="dropdown-basic" dropdownToggle class="more" data-tooltip="More" ><img src="assets/images/more.svg" alt="more"/></a>
+                  <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu list-unstyled"
+                        role="menu" aria-labelledby="button-basic">
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/install.svg" alt="Install" />Install Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/uninstall.svg" alt="Uninstall" />Uninstall Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/hide-update.svg" alt="Hide Update" />Hide Update</a>
+                      </li>
+                      
+                    </ul>
+                
+                </td>
+              </tr>
+            </table>
+            <table class="cmn-table">
+              <tr>
+                <td class="check-area">
+                  <div class="cmn-checkbox">
+                    <input type="checkbox" name="check" (change)="show=!show" id="ar" />
+                    <label for="ar" aria-label="checkbox"></label>
+                  </div>
+                </td>
+                <td class="Title" (click)="details=!details">
+                  Window Security Patch
+                </td>
+                <td class="KB">44876388</td>
+                <td class="Classification">Update</td>
+                <td class="Serverity">Critical</td>
+                <td class="release">10/01/2019</td>
+                <td class="installed">11/01/2019</td>
+                <td class="Status">Installed</td>
+                <td class="action" dropdown>
+                  <a href="javascript:;" is="button-basic" aria-controls="dropdown-basic" dropdownToggle class="more" data-tooltip="More" ><img src="assets/images/more.svg" alt="more"/></a>
+                  <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu list-unstyled"
+                        role="menu" aria-labelledby="button-basic">
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/install.svg" alt="Install" />Install Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/uninstall.svg" alt="Uninstall" />Uninstall Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/hide-update.svg" alt="Hide Update" />Hide Update</a>
+                      </li>
+                      
+                    </ul>
+                
+                </td>
+              </tr>
+            </table>
+            <table class="cmn-table">
+              <tr>
+                <td class="check-area">
+                  <div class="cmn-checkbox">
+                    <input type="checkbox" name="check" (change)="show=!show" id="ar" />
+                    <label for="ar" aria-label="checkbox"></label>
+                  </div>
+                </td>
+                <td class="Title" (click)="details=!details">
+                  2018-05 Update for Windows 10
+                </td>
+                <td class="KB">44876388</td>
+                <td class="Classification">Update</td>
+                <td class="Serverity">Critical</td>
+                <td class="release">10/01/2019</td>
+                <td class="installed">11/01/2019</td>
+                <td class="Status">Installed</td>
+                <td class="action" dropdown>
+                  <a href="javascript:;" is="button-basic" aria-controls="dropdown-basic" dropdownToggle class="more" data-tooltip="More" ><img src="assets/images/more.svg" alt="more"/></a>
+                  <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu list-unstyled"
+                        role="menu" aria-labelledby="button-basic">
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/install.svg" alt="Install" />Install Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/uninstall.svg" alt="Uninstall" />Uninstall Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/hide-update.svg" alt="Hide Update" />Hide Update</a>
+                      </li>
+                      
+                    </ul>
+                
+                </td>
+              </tr>
+            </table>
+            <table class="cmn-table">
+              <tr>
+                <td class="check-area">
+                  <div class="cmn-checkbox">
+                    <input type="checkbox" name="check" (change)="show=!show" id="ar" />
+                    <label for="ar" aria-label="checkbox"></label>
+                  </div>
+                </td>
+                <td class="Title" (click)="details=!details">
+                  2018-05 Update for Windows 10…
+                </td>
+                <td class="KB">44876388</td>
+                <td class="Classification">Update</td>
+                <td class="Serverity">Critical</td>
+                <td class="release">10/01/2019</td>
+                <td class="installed">11/01/2019</td>
+                <td class="Status">Installed</td>
+                <td class="action" dropdown>
+                  <a href="javascript:;" is="button-basic" aria-controls="dropdown-basic" dropdownToggle class="more" data-tooltip="More" ><img src="assets/images/more.svg" alt="more"/></a>
+                  <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu list-unstyled"
+                        role="menu" aria-labelledby="button-basic">
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/install.svg" alt="Install" />Install Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/uninstall.svg" alt="Uninstall" />Uninstall Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/hide-update.svg" alt="Hide Update" />Hide Update</a>
+                      </li>
+                      
+                    </ul>
+                
+                </td>
+              </tr>
+            </table>
+            
+          </div>
+        </div>
+        <!-- Page Content Hiden update -->
+        <div class="contant-area" *ngIf="allUpdate">
+          <div class="table-wrap">
+            <table class="cmn-tab-head">
+              <thead>
+                <tr>
+                  <th class="check-area">
+                    <div class="cmn-checkbox">
+                      <input type="checkbox" name="check" id="sl" (change)="show=!show"> 
+                      <label for="sl" aria-label="checkbox"></label>
+                    </div>
+                  </th>
+                  <th class="Title">Title</th>
+                  <th class="KB">KB</th>
+                  <th class="Classification">Classification</th>
+                  <th class="Serverity">Serverity</th>
+                  <th class="release">Release</th>
+                  <th class="installed">Installed</th>
+                  <th class="Status">Status</th>
+                  <th class="action">&nbsp;</th>
+                </tr>
+              </thead>
+            </table>  
+            <table class="cmn-table">
+              <tr>
+                <td class="check-area">
+                  <div class="cmn-checkbox">
+                    <input type="checkbox" name="check" (change)="show=!show" id="ar" />
+                    <label for="ar" aria-label="checkbox"></label>
+                  </div>
+                </td>
+                <td class="Title" (click)="details=!details">
+                    2018-05 Update for Windows 10
+                </td>
+                <td class="KB">44876388</td>
+                <td class="Classification">Update</td>
+                <td class="Serverity">Critical</td>
+                <td class="release">10/01/2019</td>
+                <td class="installed">11/01/2019</td>
+                <td class="Status">Installed</td>
+                <td class="action" dropdown>
+                  <a href="javascript:;" is="button-basic" aria-controls="dropdown-basic" dropdownToggle class="more" data-tooltip="More" ><img src="assets/images/more.svg" alt="more"/></a>
+                  <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu list-unstyled"
+                        role="menu" aria-labelledby="button-basic">
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/install.svg" alt="Install" />Install Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/uninstall.svg" alt="Uninstall" />Uninstall Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/hide-update.svg" alt="Hide Update" />Hide Update</a>
+                      </li>
+                      
+                    </ul>
+                
+                </td>
+              </tr>
+            </table>
+            <table class="cmn-table">
+              <tr>
+                <td class="check-area">
+                  <div class="cmn-checkbox">
+                    <input type="checkbox" name="check" (change)="show=!show" id="ar" />
+                    <label for="ar" aria-label="checkbox"></label>
+                  </div>
+                </td>
+                <td class="Title" (click)="details=!details">
+                  Feature update to Window 10
+                </td>
+                <td class="KB">44876388</td>
+                <td class="Classification">Update</td>
+                <td class="Serverity">Critical</td>
+                <td class="release">10/01/2019</td>
+                <td class="installed">11/01/2019</td>
+                <td class="Status">Installed</td>
+                <td class="action" dropdown>
+                  <a href="javascript:;" is="button-basic" aria-controls="dropdown-basic" dropdownToggle class="more" data-tooltip="More" ><img src="assets/images/more.svg" alt="more"/></a>
+                  <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu list-unstyled"
+                        role="menu" aria-labelledby="button-basic">
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/install.svg" alt="Install" />Install Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/uninstall.svg" alt="Uninstall" />Uninstall Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/hide-update.svg" alt="Hide Update" />Hide Update</a>
+                      </li>
+                      
+                    </ul>
+                
+                </td>
+              </tr>
+            </table>
+            <table class="cmn-table">
+              <tr>
+                <td class="check-area">
+                  <div class="cmn-checkbox">
+                    <input type="checkbox" name="check" (change)="show=!show" id="ar" />
+                    <label for="ar" aria-label="checkbox"></label>
+                  </div>
+                </td>
+                <td class="Title" (click)="details=!details">
+                  This is another useless
+                </td>
+                <td class="KB">44876388</td>
+                <td class="Classification">Update</td>
+                <td class="Serverity">Critical</td>
+                <td class="release">10/01/2019</td>
+                <td class="installed">11/01/2019</td>
+                <td class="Status">Installed</td>
+                <td class="action" dropdown>
+                  <a href="javascript:;" is="button-basic" aria-controls="dropdown-basic" dropdownToggle class="more" data-tooltip="More" ><img src="assets/images/more.svg" alt="more"/></a>
+                  <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu list-unstyled"
+                        role="menu" aria-labelledby="button-basic">
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/install.svg" alt="Install" />Install Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/uninstall.svg" alt="Uninstall" />Uninstall Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/hide-update.svg" alt="Hide Update" />Hide Update</a>
+                      </li>
+                      
+                    </ul>
+                
+                </td>
+              </tr>
+            </table>
+            <table class="cmn-table">
+              <tr>
+                <td class="check-area">
+                  <div class="cmn-checkbox">
+                    <input type="checkbox" name="check" (change)="show=!show" id="ar" />
+                    <label for="ar" aria-label="checkbox"></label>
+                  </div>
+                </td>
+                <td class="Title" (click)="details=!details">
+                  Window Security Patch
+                </td>
+                <td class="KB">44876388</td>
+                <td class="Classification">Update</td>
+                <td class="Serverity">Critical</td>
+                <td class="release">10/01/2019</td>
+                <td class="installed">11/01/2019</td>
+                <td class="Status">Installed</td>
+                <td class="action" dropdown>
+                  <a href="javascript:;" is="button-basic" aria-controls="dropdown-basic" dropdownToggle class="more" data-tooltip="More" ><img src="assets/images/more.svg" alt="more"/></a>
+                  <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu list-unstyled"
+                        role="menu" aria-labelledby="button-basic">
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/install.svg" alt="Install" />Install Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/uninstall.svg" alt="Uninstall" />Uninstall Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/hide-update.svg" alt="Hide Update" />Hide Update</a>
+                      </li>
+                      
+                    </ul>
+                
+                </td>
+              </tr>
+            </table>
+            <table class="cmn-table">
+              <tr>
+                <td class="check-area">
+                  <div class="cmn-checkbox">
+                    <input type="checkbox" name="check" (change)="show=!show" id="ar" />
+                    <label for="ar" aria-label="checkbox"></label>
+                  </div>
+                </td>
+                <td class="Title" (click)="details=!details">
+                  Feature update to Window 10
+                </td>
+                <td class="KB">44876388</td>
+                <td class="Classification">Update</td>
+                <td class="Serverity">Critical</td>
+                <td class="release">10/01/2019</td>
+                <td class="installed">11/01/2019</td>
+                <td class="Status">Installed</td>
+                <td class="action" dropdown>
+                  <a href="javascript:;" is="button-basic" aria-controls="dropdown-basic" dropdownToggle class="more" data-tooltip="More" ><img src="assets/images/more.svg" alt="more"/></a>
+                  <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu list-unstyled"
+                        role="menu" aria-labelledby="button-basic">
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/install.svg" alt="Install" />Install Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/uninstall.svg" alt="Uninstall" />Uninstall Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/hide-update.svg" alt="Hide Update" />Hide Update</a>
+                      </li>
+                      
+                    </ul>
+                
+                </td>
+              </tr>
+            </table>
+            <table class="cmn-table">
+              <tr>
+                <td class="check-area">
+                  <div class="cmn-checkbox">
+                    <input type="checkbox" name="check" (change)="show=!show" id="ar" />
+                    <label for="ar" aria-label="checkbox"></label>
+                  </div>
+                </td>
+                <td class="Title" (click)="details=!details">
+                  Window Security Patch
+                </td>
+                <td class="KB">44876388</td>
+                <td class="Classification">Update</td>
+                <td class="Serverity">Critical</td>
+                <td class="release">10/01/2019</td>
+                <td class="installed">11/01/2019</td>
+                <td class="Status">Installed</td>
+                <td class="action" dropdown>
+                  <a href="javascript:;" is="button-basic" aria-controls="dropdown-basic" dropdownToggle class="more" data-tooltip="More" ><img src="assets/images/more.svg" alt="more"/></a>
+                  <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu list-unstyled"
+                        role="menu" aria-labelledby="button-basic">
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/install.svg" alt="Install" />Install Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/uninstall.svg" alt="Uninstall" />Uninstall Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/hide-update.svg" alt="Hide Update" />Hide Update</a>
+                      </li>
+                      
+                    </ul>
+                
+                </td>
+              </tr>
+            </table>
+            <table class="cmn-table">
+              <tr>
+                <td class="check-area">
+                  <div class="cmn-checkbox">
+                    <input type="checkbox" name="check" (change)="show=!show" id="ar" />
+                    <label for="ar" aria-label="checkbox"></label>
+                  </div>
+                </td>
+                <td class="Title" (click)="details=!details">
+                  2018-05 Update for Windows 10
+                </td>
+                <td class="KB">44876388</td>
+                <td class="Classification">Update</td>
+                <td class="Serverity">Critical</td>
+                <td class="release">10/01/2019</td>
+                <td class="installed">11/01/2019</td>
+                <td class="Status">Installed</td>
+                <td class="action" dropdown>
+                  <a href="javascript:;" is="button-basic" aria-controls="dropdown-basic" dropdownToggle class="more" data-tooltip="More" ><img src="assets/images/more.svg" alt="more"/></a>
+                  <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu list-unstyled"
+                        role="menu" aria-labelledby="button-basic">
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/install.svg" alt="Install" />Install Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/uninstall.svg" alt="Uninstall" />Uninstall Update</a>
+                      </li>
+                      <li role="menuitem">
+                        <a class="dropdown-item" href="javascript:;"><img src="assets/images/hide-update.svg" alt="Hide Update" />Hide Update</a>
+                      </li>
+                      
+                    </ul>
+                
+                </td>
+              </tr>
+            </table>
+           </div>
+        </div>
+  </div>
+
+  <app-ticket-task></app-ticket-task>
+<!-- sidebar popup Upload Details -->
+<div class="sidebar-popup upload-details" [class.opened]="details" >
+  <!-- header -->
+  <div class="sidebar-header">
+    <div class="sidebar-title">
+      <div class="h1">Update Detail</div>
+       <span class="staus"><img src="assets/images/installed.svg" alt="install" />Installed</span>
+    </div>
+     <a class="close" href="javascript:;" (click)="details=!details"><img src="assets/images/close.svg" alt="close"/></a>
+    </div>
+  <div class="middle-content">
+
+    <tabset>
+      <tab heading="General" id="tab2">
+          <div class="sidebar-tabs">
+              <ul class="list-unstyled">
+                  <li>
+                    <h5>File Name</h5>
+                    <p>
+                      2019-04 Security Update for Adobe flash Playerfor Windows 10 Version 1709 for x64-based System (KB4493478)
+                    </p>
+                  </li>
+                  <li>
+                    <div class="colum">
+                        <h5>Vendor Name</h5>
+                        <p>Microsoft</p>
+                    </div>
+                    <div class="colum">
+                      <h5>Vendor severity</h5>
+                      <p>Critical</p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="colum">
+                        <h5>Release date</h5>
+                        <p>10/01/2019</p>
+                    </div>
+                    <div class="colum">
+                      <h5>Installed date</h5>
+                      <p>11/01/2019</p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="colum">
+                        <h5>Classification</h5>
+                        <p>Update</p>
+                    </div>
+                    <div class="colum">
+                      <h5>KB</h5>
+                      <p>44876388</p>
+                    </div>
+                  </li>
+                  <li>
+                    <h5>Description</h5>
+                    <p>A security issue has been identified in a Microsoft software product that could affect your system. You can help protect your system by installing this update from Microsoft. For a complete listing of the issues that are include in this update, see the associated Microsoft Knowledge Base article. After you install this update, you may have to restart this system.</p>
+                  </li>
+                  <li>
+                    <h5>Support URL</h5>
+                    <p><a href="javascript:;">http://support.microsoft.com/help/44876388</a></p>
+                  </li>
+              </ul>
+          </div>
+      </tab>
+      <tab heading="Device List">
+        <div class="sidebar-tabs dlist">
+            <table class="sidebar-tabel">
+                <thead>
+                  <tr>
+                      <th class="dn">Device Name</th>
+                      <th class="on">Owner Name</th>
+                      <th class="cust">Customer</th>
+                      <th class="int">Installed</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                      <td>
+                        <span class="user-status online">online</span>
+                        Jarett-Office PC
+                      </td>
+                      <td>j.hausnet@gmail.com</td>
+                      <td>hausnet</td>
+                      <td>Yes</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span class="user-status away">away</span>
+                        Floyd-Office PC
+                      </td>
+                      <td>floyd_bins@weissnat.ca</td>
+                      <td>Laura Simmons</td>
+                      <td>No</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span class="user-status away">away</span>
+                        Hamill-Office PC
+                      </td>
+                      <td>hamill.ruthie@johnson.info</td>
+                      <td>Edwin Simon</td>
+                      <td>Yes</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span class="user-status away">online</span>
+                        Elton-Office PC
+                      </td>
+                      <td>leannon_elton@gmail.com</td>
+                      <td>Elijah Frazier</td>
+                      <td>Yes</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span class="user-status offline">offline</span>
+                        Frank PC
+                      </td>
+                      <td>frank.swaniawski@mara.com</td>
+                      <td>Joshua Holmes</td>
+                      <td>Yes</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span class="user-status offline">offline</span>
+                        Frank PC
+                      </td>
+                      <td>frank.swaniawski@mara.com</td>
+                      <td>Joshua Holmes</td>
+                      <td>Yes</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span class="user-status offline">offline</span>
+                        Frank PC
+                      </td>
+                      <td>frank.swaniawski@mara.com</td>
+                      <td>Joshua Holmes</td>
+                      <td>Yes</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span class="user-status offline">offline</span>
+                        Ezekiel-Office PC
+                      </td>
+                      <td>ezekiel_dare@yahoo.com</td>
+                      <td>Roxie Guerrero</td>
+                      <td>Yes</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+      </tab>
+      
+    </tabset>
+
+
+
+  </div> 
+</div>
+
+
+</div>
+

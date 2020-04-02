@@ -5,7 +5,7 @@ import { RouterModule, UrlHandlingStrategy } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 // @ts-ignore
 import { UpgradeModule, downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SelectModule } from 'ng2-select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -113,6 +113,33 @@ import { ReportAdditionalActionsComponent } from './components/reports/report-ad
 import { ReportSendEmailComponent } from './components/reports/report-additional-actions/report-send-email/report-send-email.component';
 import { CompanyUserComponent } from './components/company-user/company-user.component';
 
+// Device Module
+import { DeviceComponent } from './components/device/device.component';
+import { NavComponent } from './components/device/nav/nav.component';
+import { DashboardComponent } from './components/device/dashboard/dashboard.component';
+import { HardwareComponent } from './components/device/hardware/hardware.component';
+import { SoftwareComponent } from './components/device/software/software.component';
+import { StartupProgramesComponent } from './components/device/startup-programes/startup-programes.component';
+import { ServicesComponent } from './components/device/services/services.component';
+import { AntivirusComponent } from './components/device/antivirus/antivirus.component';
+import { TerminalComponent } from './components/device/terminal/terminal.component';
+import { WindowsUpdateComponent } from './components/device/windows-update/windows-update.component';
+import { FileExplorerComponent } from './components/device/file-explorer/file-explorer.component';
+import { PasswordComponent } from './components/device/password/password.component';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { NgxUploaderModule } from 'ngx-uploader';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ToastrModule } from 'ngx-toastr';
+import { SessionTimeoutComponent } from './components/device/session-timeout/session-timeout.component';
+import { LockScreenComponent } from './components/device/lock-screen/lock-screen.component';
+import { TicketTaskComponent } from './components/device/ticket-task/ticket-task.component';
+import { ErrorInterceptor } from './components/device/_helpers/error.interceptor';
+import { searchTextPipe } from './components/device/_pipe/searchText.pipe';
+import { HighlightDirective } from './components/device/_directive/highlight.directive';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+
 
 /**
  * declare angular
@@ -171,6 +198,15 @@ angular.module('quicktech')
   .directive(
     'itemReportComponent',
     downgradeComponent({ component: ItemReportComponent }))
+  .directive(
+    'deviceComponent',
+    downgradeComponent({ component: DeviceComponent }))
+  .directive(
+  'dashboardComponent',
+  downgradeComponent({ component: DashboardComponent }))
+  .directive(
+    'hardwareComponent',
+    downgradeComponent({ component: HardwareComponent }))
   .factory('ngZone', downgradeInjectable(NgZone));
 
 /**
@@ -265,7 +301,25 @@ angular.module('quicktech')
     SelectComponent,
     ReportAdditionalActionsComponent,
     ReportSendEmailComponent,
-    CompanyUserComponent
+    CompanyUserComponent,
+
+    DeviceComponent,
+    NavComponent,
+    DashboardComponent,
+    HardwareComponent,
+    SoftwareComponent,
+    StartupProgramesComponent,
+    ServicesComponent,
+    AntivirusComponent,
+    TerminalComponent,
+    WindowsUpdateComponent,
+    FileExplorerComponent,
+    PasswordComponent,
+    SessionTimeoutComponent,
+    LockScreenComponent,
+    TicketTaskComponent,
+    searchTextPipe,
+    HighlightDirective
   ],
   imports: [
     BrowserModule,
@@ -341,8 +395,23 @@ angular.module('quicktech')
         pathMatch: 'full'
       },
       {
+        path: 'ng2/device',
+        component: DeviceComponent,
+        pathMatch: 'full'
+      },
+      {
         path: 'ng2/report/:id', component: ItemReportComponent
-      }],
+      },
+      { path: 'ng2/device/dashboard', component: DashboardComponent, pathMatch: 'full' },
+      { path: 'ng2/device/hardware', component: HardwareComponent, pathMatch: 'full' },
+      { path: 'software', component: SoftwareComponent },
+      { path: 'startup-programes', component: StartupProgramesComponent },
+      { path: 'services', component: ServicesComponent },
+      { path: 'antivirus', component: AntivirusComponent },
+      { path: 'terminal', component: TerminalComponent },
+      { path: 'windows-update', component: WindowsUpdateComponent },
+      { path: 'file-explorer', component: FileExplorerComponent },
+      { path: 'password', component: PasswordComponent }],
       {
         useHash: true,
         enableTracing: false
@@ -350,7 +419,19 @@ angular.module('quicktech')
     CronEditorModule,
     ImageCropperModule,
     NgxEditorModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    
+    TabsModule.forRoot(),
+    ModalModule.forRoot(),
+    BsDropdownModule.forRoot(),
+    BsDatepickerModule.forRoot(),
+    NgxUploaderModule,
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      closeButton: true,
+      preventDuplicates: true,
+    }),
+    NgbModule
 
   ],
   entryComponents: [
@@ -371,7 +452,9 @@ angular.module('quicktech')
     ReportsComponent,
     ItemReportComponent,
     OverviewReportComponent,
-    ReportSendEmailComponent
+    ReportSendEmailComponent,
+    SessionTimeoutComponent, 
+    LockScreenComponent
     // RecurringTicketsComponent
   ],
   providers: [

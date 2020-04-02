@@ -1,0 +1,127 @@
+/*** All css files include ***/
+@import '../../../../assets/device/scss/variable';
+@import '../../../../assets/device/scss/mixin';
+@import '../../../../assets/device/scss/custom';
+
+
+
+.update-info {
+    display: inline-block;
+    vertical-align: middle;
+    a{
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 23px;
+        font-size: 12px;
+        font-family: $graphicMedBold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.33;
+        letter-spacing: normal;
+        color: #4f5f79;
+        padding-left: 25px;
+        min-height: 16px;
+        &:hover{
+            color: #16a4fa;
+        }
+        &.Command{
+            margin-left: 0;
+            background: url('../../../../assets/device/images/command-line-blue.svg') no-repeat left 0;
+            &.active{
+                background: url('../../../../assets/device/images/command-line-blue.svg') no-repeat left 0;
+                color: #16a4fa;
+            }
+        }
+        &.Power{
+            background: url('../../../../assets/device/images/power-shell.svg') no-repeat left 0;
+            &.active{
+                background: url('../../../../assets/device/images/power-shell.svg') no-repeat left 0;
+                color: #16a4fa;
+            }
+        }
+    }
+}
+
+.terminal-area {
+    float: left;
+    width: 100%;
+    .terminal-box {
+        float: left;
+        width: 100%;
+        height: 460px;
+        background-color: #151b21;
+        overflow: auto;
+        padding: 22px 20px;
+        font-size: 13px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.54;
+        letter-spacing: normal;
+        color: $white-color;
+        font-family: $sourceCode;
+        p {
+            margin-bottom: 0;
+            font-family: $sourceCode;
+        }
+    }
+}
+
+
+
+
+
+
+.cmn-tbs-content{
+    &.command {
+        li {
+            border-bottom: 1px dotted #ccc;
+            padding: 7.5px 0;
+            position: relative;
+            padding-right: 15px;
+        }
+        h5 {
+            margin-top: 0;
+            font-size: 12px;
+            color: #4f5f79;
+            line-height: 1.33;
+            margin-bottom: 3px;
+            
+        }
+        span {
+            font-size: 12px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.33;
+            letter-spacing: normal;
+            color: #4f5f79;
+            font-family: $sourceCode;
+        }
+        .copy {
+            font-size: 0;
+            width: 18px;
+            height: 16px;
+            position: absolute;
+            right: 0;
+            bottom: 12px;
+            font-family: $sourceCode;
+            background: url('../../../../assets/device/images/copy.svg') no-repeat center;
+        }
+    }
+    &.history {
+        p {
+            margin-bottom: 18px;
+            font-size: 12px;
+            font-weight: normal;
+            font-family: $sourceCode;
+            line-height: 1.33;
+            color: #4f5f79;
+        }
+    }
+}
+
+
+
+
+

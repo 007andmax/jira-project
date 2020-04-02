@@ -84,7 +84,11 @@
               "src/ng1/styles/customer-report.css",
               "src/ng1/styles/new-style.css",
               "src/ng1/styles/nv.d3.css",
-              "src/ng1/styles/daterangepicker.css"
+              "src/ng1/styles/daterangepicker.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.scss",
+              "./node_modules/ngx-toastr/toastr.css",
+              "src/ng2/assets/device/styles.scss"
             ],
             "scripts": [
               "src/ng1/bower_components/jquery/dist/jquery.js",
@@ -473,7 +477,8 @@
               "src/ng1/scripts/core/user-list/user-list.ctrl.js",
               "src/ng1/scripts/core/assign-user-list/assign-user-list.ctrl.js",
               "src/ng1/scripts/core/duration/duration.ctrl.js",
-              "src/ng1/scripts/core/time-picker/time-picker.ctrl.js"
+              "src/ng1/scripts/core/time-picker/time-picker.ctrl.js",
+              "node_modules/crypto-js/crypto-js.js"
             ],
             "es5BrowserSupport": true
           },

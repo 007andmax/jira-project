@@ -40,7 +40,6 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
     let getOnShowArchived = this.usersStateService.getOnShowArchived().subscribe(data => {
       this.showArchivedUsers = data;
-
       this.filter.setClientType(null);
       this.filter.clearFilter();
       this.setDefaultScoll();

@@ -59,7 +59,12 @@
     "stompjs": "^2.3.3",
     "tslib": "^1.9.0",
     "ui-select": "^0.19.8",
-    "zone.js": "0.9.0"
+    "zone.js": "0.9.0",
+    "bootstrap": "^4.4.1",
+    "crypto-js": "^3.3.0",
+    "ngx-toastr": "^10.1.0",
+    "ngx-uploader": "^8.0.0",
+    "node-sass": "^4.13.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.13.0",

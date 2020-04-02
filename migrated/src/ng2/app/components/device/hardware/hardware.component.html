@@ -1,0 +1,339 @@
+<div class="cmn-wrapper hardware">
+  <div class="page-container" *ngIf="loading == false">
+    <!-- Page Title -->
+        <div class="page-header">
+              <h3>Hardware</h3>
+        </div>
+        <!-- Page Content All update -->
+        <div class="contant-area">
+              <div class="hardware-list">
+                  <div class="hardware-row">
+                      <div class="hardware-col">
+                            <div class="col-title">
+                                <span class="hardware-ico">
+                                  <img src="assets/images/computer.svg" alt="computer" />
+                                </span>
+                                <h3>Computer</h3>
+                            </div>
+                            <ul class="list-unstyled">
+                              <li>
+                                  <span>Manufacturer:</span>
+                                  {{system.manufacturer || 'N/A'}}
+                              </li>
+                                <li>
+                                  <span>Computer Model:</span>
+                                  {{system.model || 'N/A'}}
+                              </li>
+                                <li>
+                                  <span>Computer Name:</span>
+                                  {{deviceName || 'N/A'}}
+                              </li>
+                                <li>
+                                  <span>System Type:</span>
+                                  ({{system.architecture}}) system
+                              </li>
+                              <li>
+                                <span>Warranty:</span>
+                                {{system.warranty || 'N/A'}}
+                            </li>
+                            </ul>
+                      </div>
+                      <div class="hardware-col">
+                        <div class="col-title">
+                            <span class="hardware-ico">
+                              <img src="assets/images/motherboard.svg" alt="motherboard" />
+                            </span>
+                            <h3>Motherboard</h3>
+                        </div>
+                        <ul class="list-unstyled">
+                          <li>
+                              <span>Manufacturer:</span>
+                              {{motherBoard.manufacturer || 'N/A'}}
+                          </li>
+                            <li>
+                              <span>Model:</span>
+                              {{motherBoard.serial_number || 'N/A'}}
+                          </li>
+                            <li>
+                              <span>BIOS Manufacture:</span>
+                              {{bios.manufacturer || 'N/A'}}
+                          </li>
+                            <li>
+                              <span>BIOS Model:</span>
+                              BIOS Date {{(bios.release_date | date : DateTimeFormat) || 'N/A'}} Version: {{bios.version || 'N/A'}}
+                          </li>
+                          
+                        </ul>
+                  
+                      </div>
+                      <div class="hardware-col">
+                        <div class="col-title">
+                            <span class="hardware-ico">
+                              <img src="assets/images/processor.svg" alt="processor" />
+                            </span>
+                            <h3>Processor</h3>
+                        </div>
+                        <ul class="list-unstyled">
+                          <li>
+                              <span>Model:</span>
+                              {{processors.name}}
+                          </li>
+                            <li>
+                              <span>Clock Speed:</span>
+                              N/A
+                          </li>
+                            <li>
+                              <span>Socket & Cache(s):</span>
+                              N/A
+                          </li>
+                            
+                        </ul>
+                     </div>
+                       <!-- <div class="hardware-col">
+                        <div class="col-title">
+                            <span class="hardware-ico">
+                              <img src="assets/images/mouse.svg" alt="mouse" />
+                            </span>
+                            <h3>Mouse</h3>
+                        </div>
+                          <ul class="list-unstyled">
+                            <li>
+                                <span>Manufacturer:</span>
+                                (Standard system devices)
+                            </li>
+                              <li>
+                                <span>Model:</span>
+                                USB Input Device
+                            </li>
+                              <li>
+                                <span># of Button:</span>
+                                2
+                            </li>
+                              <li>
+                                <span>Connection:</span>
+                                USB
+                            </li>
+                            
+                          </ul>
+                       </div> -->
+                      <div class="hardware-col">
+                        <div class="col-title">
+                            <span class="hardware-ico">
+                              <img src="assets/images/memory.svg" alt="memory" />
+                            </span>
+                            <h3>Memory</h3>
+                        </div>
+                        <ul class="list-unstyled">
+                          <li>
+                              <span>Size:</span>
+                              {{memory.capacity/1024/1024}} MB RAM
+                              <!-- <div>DIMM 1: 4,096 MB RAM (DDR3-1066 PC3-85— 533 MHz, DIMM)</div>
+                              <div>DIMM 1: 4,096 MB RAM (DDR3-1066 PC3-85— 533 MHz, DIMM)</div>
+                              <div>DIMM 1: 4,096 MB RAM (DDR3-1066 PC3-85— 533 MHz, DIMM)</div>
+                              <div>DIMM 1: 4,096 MB RAM (DDR3-1066 PC3-85— 533 MHz, DIMM)</div>
+                              <div>DIMM 1: 4,096 MB RAM (DDR3-1066 PC3-85— 533 MHz, DIMM)</div>
+                              <div>DIMM 1: 4,096 MB RAM (DDR3-1066 PC3-85— 533 MHz, DIMM)</div> -->
+                          </li>
+                          
+                        </ul>
+                      </div>
+                      <div class="hardware-col">
+                        <div class="col-title">
+                            <span class="hardware-ico">
+                              <img src="assets/images/networkcard.svg" alt="networkcard" />
+                            </span>
+                            <h3>Network Card</h3>
+                        </div>
+                          <ul class="list-unstyled">
+                            <li>
+                                <span>Model(s):</span>
+                                {{networkAdapters.description || 'N/A'}}
+                            </li>
+                              <li>
+                                <span>IP:</span>
+                                {{networkAdapters.ip_address || 'N/A'}}
+                            </li>
+                              <li>
+                                <span>MAC:</span>
+                                {{networkAdapters.mac || 'N/A'}}
+                            </li>
+                              <li>
+                                <span>DHCP:</span>
+                                {{networkAdapters.dhcp_server || 'N/A'}}
+                            </li>
+                            
+                          </ul>
+                       </div>
+                      
+                  </div>
+                  <div class="hardware-row">
+                    <div class="hardware-col">
+                          <div class="col-title">
+                              <span class="hardware-ico">
+                                <img src="assets/images/graphic-card.svg" alt="Graphics Card" />
+                              </span>
+                              <h3>Graphics Card</h3>
+                          </div>
+                          <ul class="list-unstyled">
+                            <li>
+                                <span>Model:</span>
+                                {{graphics.hardwareDeviceName || 'N/A'}}
+                            </li>
+                              <li>
+                                <span>Video Processor:</span>
+                                N/A
+                            </li>
+                              <li>
+                                <span>Memory Size:</span>
+                                {{graphics.memory/1024/1024}} MB VRAM
+                            </li>
+                              <li>
+                                <span>Driver:</span>
+                                version {{graphics.driverVersion}}
+                            </li>
+                            
+                          </ul>
+                    </div>
+                    <div class="hardware-col">
+                      <div class="col-title">
+                          <span class="hardware-ico">
+                            <img src="assets/images/display.svg" alt="Display" />
+                          </span>
+                          <h3>Display</h3>
+                      </div>
+                      <ul class="list-unstyled">
+                        <li>
+                            <span>Manufacturer:</span>
+                            {{display.manufacturer || 'N/A'}}
+                        </li>
+                          <li>
+                            <span>Model:</span>
+                            {{display.name || 'N/A'}}
+                        </li>
+                          <li>
+                            <span>Color Depth:</span>
+                            N/A
+                        </li>
+                          <li>
+                            <span>Refresh Rate:</span>
+                            N/A
+                        </li>
+                        
+                      </ul>
+                
+                    </div>
+                    <div class="hardware-col">
+                      <div class="col-title">
+                          <span class="hardware-ico">
+                            <img src="assets/images/harddisk.svg" alt="Hard disk" />
+                          </span>
+                          <h3>Hard disk</h3>
+                      </div>
+                      <ul class="list-unstyled">
+                        <li>
+                            <span>Model:</span>
+                            {{logicalDisks.device_id}}
+                        </li>
+                          <li>
+                            <span>File Format(s):</span>
+                            NTFS ({{logicalDisks.device_id}})
+                        </li>
+                        <li *ngIf="logicalDisks.size">
+                            <span>Size:</span>
+                            {{logicalDisks.size/1024/1024}} GB
+                        </li>
+                        <li *ngIf="!logicalDisks.size">
+                            <span>Size:</span>
+                            N/A
+                        </li>
+                        <li *ngIf="logicalDisks.free_space">
+                            <span>Free Space:</span>
+                            {{logicalDisks.free_space/1024/1024}} GB
+                        </li>
+                        <li *ngIf="!logicalDisks.free_space">
+                            <span>Free Space:</span>
+                            N/A
+                        </li>
+                          
+                      </ul>
+                   </div>
+                     <!-- <div class="hardware-col">
+                      <div class="col-title">
+                          <span class="hardware-ico">
+                            <img src="assets/images/keyboard.svg" alt="keyboard" />
+                          </span>
+                          <h3>Keyboard</h3>
+                      </div>
+                        <ul class="list-unstyled">
+                          <li>
+                              <span>Manufacturer:</span>
+                              (Standard system devices)
+                          </li>
+                            <li>
+                              <span>Model:</span>
+                              HD Keyboard Device
+                          </li>
+                            <li>
+                              <span>Type:</span>
+                              Enhanced (101- or 102-key)
+                          </li>
+                            <li>
+                              <span># of Function Keys:</span>
+                              12
+                          </li>
+                          
+                        </ul>
+                     </div> -->
+                    <!-- <div class="hardware-col">
+                      <div class="col-title">
+                          <span class="hardware-ico">
+                            <img src="assets/images/soundcard.svg" alt="Sound Card" />
+                          </span>
+                          <h3>Sound Card</h3>
+                      </div>
+                      <ul class="list-unstyled">
+                        <li>
+                            <span>Manufacturer:</span>
+                            Advanced Micro Devices
+                        </li>
+                        <li>
+                          <span>Model:</span>
+                          AMD High Definition Audio Device
+                      </li>
+                        
+                      </ul>
+                    </div> -->
+                    <div class="hardware-col">
+                      <div class="col-title">
+                          <span class="hardware-ico">
+                            <img src="assets/images/operating-system.svg" alt="Operating System" />
+                          </span>
+                          <h3>Operating System</h3>
+                      </div>
+                        <ul class="list-unstyled">
+                          <li>
+                              <span>Name:</span>
+                              {{system.caption || 'N/A'}}
+                          </li>
+                            <li>
+                              <span>IP:</span>
+                              {{networkAdapters.ip_address || 'N/A'}}
+                          </li>
+                            <li>
+                              <span>Version:</span>
+                              {{system.version || 'N/A'}}
+                          </li>
+                            <li>
+                              <span>Service Pack:</span>
+                              {{system.service_pack || 'N/A'}}
+                          </li>
+                          
+                        </ul>
+                     </div>
+                    
+                </div>
+              </div>
+        </div>
+  </div>
+</div>
+<div class="loading" *ngIf="loading"></div>

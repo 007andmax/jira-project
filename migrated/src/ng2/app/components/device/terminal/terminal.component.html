@@ -1,0 +1,117 @@
+<div class="cmn-wrapper">
+  <div class="page-container terminal">
+    <!-- Page Title -->
+        <div class="page-header">
+            <h3>Terminal</h3>
+            <div class="page-header-opt">
+              <div class="update-info">
+                  <a class="Command active" href="javascript:;">Command Line</a>
+                  <a class="Power" href="javascript:;">Power Shell</a>
+              </div>
+            </div>    
+        </div>
+        <!-- Page Content -->
+        <div class="contant-area">
+            <div class="terminal-area">
+                <div class="terminal-box">
+                    <p>C:\Users\Sam\Desktop</p>
+                </div>
+            </div>
+        </div>
+  </div>
+
+  
+  
+  
+  <!-- Right Side bar -->
+  <aside class="right-sidebar terminal-sidebar">
+    <div>
+        <a href="javascript:;" class="add-btn" (click)="create=!create"><img src="assets/images/add.svg" alt="add"/></a>
+
+         <!-- Modal Add New Command -->
+         <div class="modal-content toggle-area" [class.opened]="create">
+          <div class="toggle-header">
+            <h2 class="h1">Add New Command</h2>
+          </div>
+          <div class="modal-body">
+              <form method="POST">
+                  <div class="f-row">
+                      <div class="f-col col-100">
+                          <label for="Title">Command Title</label>
+                          <div class="form-row">
+                            <input type="text" id="Title" class="form-input" placeholder="Write Command title" />
+                          </div>
+                      </div>
+                      <div class="f-col col-100">
+                          <label for="command">Command</label>
+                          <div class="form-row">
+                            <input type="text" id="Command" class="form-input" placeholder="Type your command here" />
+                          </div>
+                      </div>
+                      <div class="m-btn-row"> 
+                        <div class="m-btn-col">
+                            <input type="submit" value="Save" class="btn btn-primary" />
+                            <a href="javascript:;" class="btn btn-secondary" aria-label="Close" (click)="create=!create">Cancel</a>
+                        </div>
+
+                      </div>
+                      
+                  </div>
+              </form>
+          </div>
+        </div>
+
+
+      <tabset>
+        <tab heading="Command">
+            <div class="cmn-tbs-content command">
+                <ul class="list-unstyled">
+                    <li>
+                        <h5>Get all IP info</h5>
+                        <span>ipconfig / all</span>
+                        <a href="javascript:;" class="copy" data-tooltip="Copy Command" >Copy Command</a>
+                    </li>
+                    <li>
+                      <h5>Compare content of two floppy disks</h5>
+                      <span>diskcomp</span>
+                      <a href="javascript:;" class="copy" data-tooltip="Copy Command" >Copy Command</a>
+                  </li>
+                  <li>
+                    <h5>Display group policies</h5>
+                    <span>gpresult</span>
+                    <a href="javascript:;" class="copy" data-tooltip="Copy Command" >Copy Command</a>
+                </li>
+                <li>
+                  <h5>Add/read/import/export registry entries</h5>
+                  <span>reg</span>
+                  <a href="javascript:;" class="copy" data-tooltip="Copy Command" >Copy Command</a>
+              </li>
+                   
+                </ul>
+            </div>
+        </tab>
+        <tab heading="History">
+          <div class="cmn-tbs-content history">
+            <p>C:\Users\Sam> Invoke-History
+              ping google.com</p>
+              <p>
+              Pinging google.com [2607:f8b0:400a:800:200e] with 32bytes of data:
+            </p>
+            <p>
+              Ping statistics for 2607:f8b0:400a:800: :200e:
+              Packets: Sent = 1, received =1, Lost = 0 (0% loss),
+              Approximate round trip times in mili-seconds:
+              Minimum = 18ms, Maximum = 18ms, Average = 18ms
+                    </p>  
+          </div>
+        </tab>
+      </tabset>
+    </div>
+ 
+  </aside>
+
+
+
+
+</div>
+
