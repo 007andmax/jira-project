@@ -50,16 +50,22 @@ export class ReportAdditionalActionsComponent implements OnInit {
     } else {
       modalRef.componentInstance.orientation = (!this.glNumber.getMonthlyDetailed()) ? 'PORTRAIT' : 'LANDSCAPE';
     }
-   
+
     modalRef.componentInstance.template = this.template;
     modalRef.componentInstance.fileName = this.fileName;
   }
   getPdfIdFromRest(action) {
+    let orientation;
+    if (this.report === "byProducts") {
+      orientation = "LANDSCAPE";
+    } else {
+      orientation = (!this.glNumber.getMonthlyDetailed()) ? 'PORTRAIT' : 'LANDSCAPE';
+    }
     var dto = {
       fileName: this.fileName,
       content: this.reportsStateService.parseReportContent(),
       id: this.id,
-      orientation: (!this.glNumber.getMonthlyDetailed()) ? 'PORTRAIT' : 'LANDSCAPE'
+      orientation: orientation
     };
     if (this.template === "PDF_TEMPLATE") {
       this.reportsService.getPdfUrl(dto).subscribe((data: any) => {

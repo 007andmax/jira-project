@@ -6,8 +6,8 @@
  <div class="product-list___ticket" id="product-list-ticket-data" >
 
   <div  class="product-list-ticket acc-col"     style="height: 100%; width: 1180px;" *ngIf="!loadingInProgress">
-    <div class="report-header"  >
-       <h1>Accounts Receivable</h1>
+    <div class="report-header" style="width: 1055px;" >
+       <h1>Product Sales Report</h1>
        <div class="company-info">
         <h3 [textContent]="(productSalesReport.clientCompanyName) ? productSalesReport.clientCompanyName : 'All companies'"></h3>
           <p><span [textContent]="perseStartDate()"></span> - <span [textContent]="perseEndDate()"></span></p> 
