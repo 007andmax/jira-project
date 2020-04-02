@@ -16,7 +16,7 @@ export class ReportTimePipe implements PipeTransform {
     if (!remainder) {
       return addZero(num) + ':' + '00';
     } else {
-      return addZero(Math.floor(num)) + ':' + Math.floor(remainder * 60);
+      return addZero(Math.floor(num)) + ':' + addZero(Math.round(remainder * 60));
     }
 
 
