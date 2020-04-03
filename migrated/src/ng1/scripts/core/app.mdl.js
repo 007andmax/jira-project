@@ -445,13 +445,13 @@
         }))
         .state('device-dashboard', waitForServices({
           url: '/ng2/device/dashboard',
-          template: '<device-dashboard></device-dashboard>'
+          template: '<device-component></device-component>'
         }))
         .state('device-hardware', waitForServices({
           url: '/ng2/device/hardware',
           template: '<device-hardware></device-hardware>'
         }));
-
+      
 
       function waitForServices(conf) {
         if (!conf.resolve) {

@@ -454,7 +454,9 @@ angular.module('quicktech')
     OverviewReportComponent,
     ReportSendEmailComponent,
     SessionTimeoutComponent, 
-    LockScreenComponent
+    LockScreenComponent,
+    DeviceComponent,
+    DashboardComponent
     // RecurringTicketsComponent
   ],
   providers: [
