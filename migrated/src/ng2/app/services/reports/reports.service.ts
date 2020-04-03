@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/ng2/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,17 @@ export class ReportsService {
     
   }
   public getCSV(url,data) {
-    return this.http.post(this.apiUrl + url, data);
+    const options: {
+        headers?: HttpHeaders;
+        observe?: 'body';
+        params?: HttpParams;
+        reportProgress?: boolean;
+        responseType: 'arraybuffer';
+        withCredentials?: boolean;
+    } = {
+        responseType: 'arraybuffer'
+    };
+    return this.http.post(this.apiUrl + url, data,options);
     
   }
   public getCustomPdfUrl(data) {
