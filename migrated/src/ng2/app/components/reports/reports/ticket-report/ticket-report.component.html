@@ -1,7 +1,7 @@
 <div>
   <app-report-menu [report]="'ticket-report'" (onSelectedClient)="onSelectedClient($event)" (onRequest)="onRequest($event)" (getReport)="getReport($event)"></app-report-menu>
  </div>
- <app-report-additional-actions  [fileName]="'customer-report-' + getSelectedClientName()" [template]="'CUSTOMER_REPORT'" [id]="ticketsReport.id" [selectedClient]="selectedClient"></app-report-additional-actions>
+ <app-report-additional-actions [report]="'ticket-report'" [fileName]="'customer-report-' + getSelectedClientName()" [template]="'CUSTOMER_REPORT'" [id]="ticketsReport.id" [selectedClient]="selectedClient"></app-report-additional-actions>
  <div class="loading" *ngIf="loadingInProgress"></div>
  <div class="product-list___ticket"  id="product-list-ticket-data">
   <div  class="product-list-ticket"   *ngIf="!loadingInProgress">
@@ -30,7 +30,7 @@
               <ng-template ngFor let-time [ngForOf]="overallServiceTime" let-i="index" [ngForTrackBy]="trackByIndex" >
                 <p *ngIf="ticketsReport.timeSpent"  
                 [ngClass]="'service-color-' + i">
-               {{ time.name }} <span>{{ time.time | reportTime }}</span>
+               {{ time.name }} <span>{{ formatServiceTime(time.hours,time.minutes) }}</span>
              </p>
                 </ng-template>
              
@@ -39,7 +39,7 @@
             <div class="customer-ticket__header--item">
               <p *ngIf="!ticketsReport.hideTotalTickets">Total amount: <span>{{ticketsReport.tickets.length}}</span></p>
               <div>
-                <p><span style="font-weight: 400;">{{ticketsReport.timeSpent | reportTime}}</span> hr</p>
+                <p><span style="font-weight: 400;">{{formatServiceTime(ticketsReport.timeSpent.hours,ticketsReport.timeSpent.minutes)}}</span> hr</p>
                 <p style="color:#fff;">Time Spent</p>
               </div>
               <p class="ticket-report-time" *ngIf="ticketsReport.averageResponseTime"><span>{{ getFloorAverageResponseTime() }} Min</span>

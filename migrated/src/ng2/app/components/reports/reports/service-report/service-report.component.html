@@ -30,7 +30,7 @@
               <ng-template ngFor let-time [ngForOf]="overallServiceTime" let-i="index" [ngForTrackBy]="trackByIndex" >
                 <p  
                 [ngClass]="'service-color-' + i">
-               {{ time.name }} <span>{{ time.time | reportTime }}</span>
+               {{ time.name }} <span>{{ formatServiceTime(time.hours,time.minutes)}}</span>
              </p>
                 </ng-template>
              
@@ -39,7 +39,7 @@
             <div class="customer-ticket__header--item">
              
               <div>
-                <p><span style="font-weight: 400;">{{timeSpent | reportTime}}</span> hr</p>
+                <p><span style="font-weight: 400;">{{formatServiceTime(timeSpent.hours,timeSpent.minutes)}}</span> hr</p>
                 <p style="color:#fff;">Time Spent</p>
               </div>
            <p class="ticket-report-time" >Total time of all services</p>

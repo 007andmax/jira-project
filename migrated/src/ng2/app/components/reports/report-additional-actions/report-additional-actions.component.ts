@@ -38,7 +38,7 @@ export class ReportAdditionalActionsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    if (this.report === "service-report") this.listExport = ['PDF'];
+    if (this.report === "service-report" || this.report === "ticket-report") this.listExport = ['PDF'];
     let exportCSV = this.reportsStateService.exportCSV.subscribe(data => {
       this.exportCSV = data;
     })
@@ -85,7 +85,7 @@ export class ReportAdditionalActionsComponent implements OnInit, OnDestroy {
       var link = document.createElement('a');
       link.href = window.URL.createObjectURL(blob);
 
-      link.download = this.exportCSV.fileName;
+      link.download = this.exportCSV.fileName + '.csv';
       link.click();
       window.URL.revokeObjectURL(link.href);
     })

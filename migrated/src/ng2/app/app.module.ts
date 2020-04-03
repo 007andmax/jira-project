@@ -65,7 +65,6 @@ import { TagsComponent } from './components/shared/tags/tags.component';
 import { IntervalComponent } from './components/shared/interval/interval.component';
 import { DurationComponent } from './components/shared/duration/duration.component';
 import { TehUsersComponent } from './components/shared/teh-users/teh-users.component';
-import { DurationFilterPipe } from './pipe/duration-filter.pipe';
 import { numberDirective } from './directives/number.directive';
 import { TextAreaDirective } from './directives/text-area.directive';
 import { DatePickerComponent } from './components/shared/date-picker/date-picker.component';
@@ -231,7 +230,6 @@ angular.module('quicktech')
     IntervalComponent,
     DurationComponent,
     TehUsersComponent,
-    DurationFilterPipe,
     numberDirective,
     TextAreaDirective,
     DatePickerComponent,

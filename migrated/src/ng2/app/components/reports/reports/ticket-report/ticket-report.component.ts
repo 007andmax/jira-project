@@ -89,7 +89,6 @@ export class TicketReportComponent implements OnInit {
     this.ticketsReport.startDate = moment(new Date(this.ticketsReport.startDate)).format('ll');
     this.ticketsReport.endDate = moment(new Date(this.ticketsReport.endDate)).format('ll');
     this.onInit = true;
-    console.log("ticketsReport", this.ticketsReport);
   }
   getSelectedClientName() {
     return (this.selectedClient) ? this.selectedClient.name.toLowerCase().split(' ').join('-') : '';
@@ -117,9 +116,16 @@ export class TicketReportComponent implements OnInit {
               var time = exp[k].totalQuantity;
 
               if (overallTime[name]) {
-                overallTime[name] += time;
+                overallTime[name].time += time;
+                overallTime[name].minutes += Math.round((time * 60) % 60);
+                overallTime[name].minutes = Math.round(overallTime[name].minutes % 60);
+                overallTime[name].hours = Math.floor(overallTime[name].time);
               } else {
-                overallTime[name] = time;
+                overallTime[name] = {
+                  minutes: Math.round((time * 60) % 60),
+                  hours: Math.floor(time),
+                  time: time
+                }
               }
             }
           }
@@ -149,7 +155,9 @@ export class TicketReportComponent implements OnInit {
     for (var i = 0; i < keys.length; i++) {
       var time = {
         name: keys[i],
-        time: timeObj[keys[i]]
+        time: timeObj[keys[i]].time,
+        minutes: timeObj[keys[i]].minutes,
+        hours: timeObj[keys[i]].hours
       };
 
       timeArr.push(time);
@@ -158,31 +166,39 @@ export class TicketReportComponent implements OnInit {
     timeArr.sort(function (a, b) {
       return b.time - a.time;
     })
-
     var top = timeArr.slice(0, 8);
     var rest = timeArr.slice(8);
-
     if (rest.length) {
-      var time = {
+      let minutes = rest.reduce(function (acc, i) {
+        acc += i.minutes;
+        return acc;
+      }, 0);
+      let hours = rest.reduce(function (acc, i) {
+        acc += i.hours;
+        return acc;
+      }, 0);
+      var timeRest = {
         name: 'Rest',
         time: rest.reduce(function (acc, i) {
           acc += i.time;
           return acc;
-        }, 0)
+        }, 0),
+        minutes: Math.round(minutes % 60),
+        hours: (hours + Math.floor(minutes / 60)),
       };
-      top.push(time);
-
-
+      top.push(timeRest);
     }
-
     this.overallServiceTime = top;
-
-    this.ticketsReport.timeSpent = top.reduce(function (acc, el) {
-      acc += el.time;
-      return acc;
-    }, 0);
-
-
+    let minutes = 0;
+    let hours = 0;
+    timeArr.forEach(element => {
+      minutes += element.minutes;
+      hours += element.hours;
+    });
+    this.ticketsReport.timeSpent = {
+      hours: (hours + Math.floor(minutes / 60)),
+      minutes: Math.round(minutes % 60)
+    };
     this.drawChart(top);
   }
   calcTaxes(taxes, sum) {
@@ -226,6 +242,15 @@ export class TicketReportComponent implements OnInit {
   public onChangeTehUsers(tehusers) {
     console.log("tehusers", tehusers);
 
+  }
+  formatServiceTime(hours, minutes) {
+    return this.addZero(hours) + ':' + this.addZero(minutes);
+  };
+  addZero(num) {
+    if (String(num).length < 2) {
+      return '0' + num;
+    }
+    return num;
   }
   onSelectedClient(client) {
     this.selectedClient = client;

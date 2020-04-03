@@ -31,7 +31,7 @@ export class ServiceReportComponent implements OnInit {
   showServices = true;
   showProducts = true;
   currentCompany: Company;
-  timeSpent: number = 0;
+  timeSpent: any;
   constructor(public cd: ChangeDetectorRef,
     private companiesStateService: CompaniesStateService,
     private usersStateService: UsersStateService,
@@ -83,7 +83,7 @@ export class ServiceReportComponent implements OnInit {
       this.serviceReport.startDate = moment(new Date(this.serviceReport.startDate)).format('ll');
       this.serviceReport.endDate = moment(new Date(this.serviceReport.endDate)).format('ll');
       this.onInit = true;
-      console.log("serviceReport", this.serviceReport.services.map( item => {
+      console.log("serviceReport", this.serviceReport.services.map(item => {
         return item.ticketDevice;
       }));
     })
@@ -106,112 +106,78 @@ export class ServiceReportComponent implements OnInit {
 
     let services = JSON.parse(JSON.stringify(s));
     let list = [];
+
     services.forEach((element1, index1) => {
-      let find = list.find(item => item.expenseName === element1.expenseName);
+      let find = list.find(item => item.name === element1.expenseName);
       if (!find) {
         //  let searchList = services.slice(index1 + 1, services.length);
         let findList = services.filter(item => item.expenseName === element1.expenseName);
+        let minutes = 0;
+       
         element1.serviceTime = findList.reduce(function (sum, current) {
+          minutes += Math.round((current.serviceTime * 60) % 60);
           return sum + current.serviceTime;
         }, 0);
-        list.push(element1);
+        console.log("minutes", minutes);
+        list.push({
+          name: element1.expenseName,
+          hours: Math.floor(element1.serviceTime),
+          minutes: Math.round(minutes % 60),
+          time: element1.serviceTime
+        })
+
       }
 
     });
-    console.log("services", list);
     this.calculateTopTime(list);
-    /*  let searchList = services.slice(index + 1, services.length);
-      searchList.for
-      let findIndex = searchList.findIndex(item => item.expenseName === element.expenseName);
-      if (findIndex > -1) {
-        element.serviceTime += searchList[findIndex].serviceTime;
-        services.splice()
-      }
-    });*/
-
-    /* var overallTime = {};
- 
-     for (var i = 0; i < services.length; i++) {
-       var upd = services[i].updates;
- 
-       if (!upd) continue;
- 
-       for (var j = 0; j < upd.length; j++) {
-        
-           var exp = upd[j].expenses;
- 
-           if (!exp) continue;
- 
-           for (var k = 0; k < exp.length; k++) {
-             if (exp[k].isServiceExpense) {
-               var name = exp[k].name;
-               var time = exp[k].totalQuantity;
- 
-               if (overallTime[name]) {
-                 overallTime[name] += time;
-               } else {
-                 overallTime[name] = time;
-               }
-             }
-           }
-         
-       }
-     }
- 
-     this.calculateTopTime(overallTime);*/
   }
-  formatResponseTime(time) {
-    if (!time && time !== 0) return;
-    var hours = Math.floor(time / 60);
-    var minutes = time % 60;
-    return addZero(hours) + ':' + addZero(minutes) + ' hr';
-
-    function addZero(num) {
-      if (String(num).length < 2) {
-        return '0' + num;
-      }
-      return num;
-    }
+  formatServiceTime(hours, minutes) {
+    return this.addZero(hours) + ':' + this.addZero(minutes);
   };
-  calculateTopTime(services) {
-
-    var timeArr = [];
-
-    for (var i = 0; i < services.length; i++) {
-      var time = {
-        name: services[i].expenseName,
-        time: services[i].serviceTime
-      };
-
-      timeArr.push(time);
+  addZero(num) {
+    if (String(num).length < 2) {
+      return '0' + num;
     }
-
+    return num;
+  }
+  calculateTopTime(services) {
+    var timeArr = services;
     timeArr.sort(function (a, b) {
       return b.time - a.time;
     })
-
     var top = timeArr.slice(0, 8);
     var rest = timeArr.slice(8);
-
     if (rest.length) {
+      let minutes = rest.reduce(function (acc, i) {
+        acc += i.minutes;
+        return acc;
+      }, 0);
+      let hours = rest.reduce(function (acc, i) {
+        acc += i.hours;
+        return acc;
+      }, 0);
       var timeRest = {
         name: 'Rest',
         time: rest.reduce(function (acc, i) {
           acc += i.time;
           return acc;
-        }, 0)
+        }, 0),
+        minutes: Math.round(minutes % 60),
+        hours: (hours + Math.floor(minutes / 60)),
       };
       top.push(timeRest);
     }
-
     this.overallServiceTime = top;
-
-    this.timeSpent = top.reduce(function (acc, el) {
-      acc += el.time;
-      return acc;
-    }, 0);
-
-
+    let minutes = 0;
+    let hours = 0;
+    top.forEach(element => {
+      minutes += element.minutes;
+      hours += element.hours;
+    });
+    this.timeSpent = {
+      hours: (hours + Math.floor(minutes / 60)),
+      minutes: Math.round(minutes % 60)
+    };
     this.drawChart(top);
   }
   public getDeviceName(data) {
@@ -221,7 +187,7 @@ export class ServiceReportComponent implements OnInit {
     let find = list.find(item => item.id === data);
     return (find) ? find.hostName : "";
   }
-  
+
 
   drawChart(data) {
 
@@ -244,7 +210,7 @@ export class ServiceReportComponent implements OnInit {
     let user = this.usersStateService.getAllUsers().find(item => item.id === data);
     return (user) ? `${user.firstName} ${user.lastName}` : "";
   }
- 
+
   onSelectedClient(client) {
     this.selectedClient = client;
 

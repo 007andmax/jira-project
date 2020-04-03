@@ -121,8 +121,9 @@ export class ReportMenuComponent implements OnInit {
       this.customerSalesReport.setCompanyId(selectClient.item.id);
       this.ticketsReport.setCompanyId(selectClient.item.id);
       this.serviceReport.setCompanyId(selectClient.item.id);
-      this.serviceReport.setDatesByCompany(this.selectedClient);
-      this.ticketsReport.setDatesByCompany(this.selectedClient);
+      if (this.ticketsReport.startDate === '' && this.ticketsReport.endDate === '')  this.ticketsReport.setDatesByCompany(this.selectedClient);
+      if (this.serviceReport.startDate === '' && this.serviceReport.endDate === '')  this.serviceReport.setDatesByCompany(this.selectedClient);
+      
       this.validate.resetCompany();
       //  this.recurringState.setClient(selectClient);
       //  this.onCheckListServices();
@@ -166,7 +167,7 @@ export class ReportMenuComponent implements OnInit {
   getReportByAccountsReceivable() {
     this.onRequest.emit(true);
     this.reportsService.getReportByAccountsReceivable(this.accountsReceivable.getForRequest()).subscribe(data => this.setDatareport(data));
-
+    this.reportsStateService.onChangeExportCSV(new ExportCSV('reports/sales/byReceivable', this.taxes.getForRequest(),'Sales_report_by_receivable'));
   }
   getReportByService() {
     if (!this.validate.isValidateService(this.selectedClient)) return;
@@ -186,7 +187,7 @@ export class ReportMenuComponent implements OnInit {
 
     this.onRequest.emit(true);
     this.reportsService.getReportByCustomers(this.customerSalesReport.getForRequest()).subscribe(data => this.setDatareport(data));
-
+    this.reportsStateService.onChangeExportCSV(new ExportCSV('reports/sales/byCustomers', this.productSalesReport.getForRequest(),'Sales_report_by_customer'));
   }
 
   getReportByProducts() {
@@ -194,6 +195,7 @@ export class ReportMenuComponent implements OnInit {
 
     this.onRequest.emit(true);
     this.reportsService.getReportByProduct(this.productSalesReport.getForRequest()).subscribe(data => this.setDatareport(data));
+    this.reportsStateService.onChangeExportCSV(new ExportCSV('reports/sales/byProducts', this.productSalesReport.getForRequest(),'Sales_report_by_products'));
 
   }
   getReportByGlNumber() {
