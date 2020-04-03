@@ -9,9 +9,7 @@ export class ServiceReports {
     endDate: string = '';
     services: Array<ServiceReportsItem> = [];
     companyName:string;
-    
 
-   
     public setData(data) {
         this.services = data.map(item => {
             return new ServiceReportsItem(item);

@@ -74,7 +74,6 @@ export class ServiceReportComponent implements OnInit {
     })
     this.reportsStateService.serviceReport.subscribe(data => {
       this.serviceReport.setDataFromObject(data);
-      console.log("data", data);
       if (this.serviceReport && this.serviceReport.services) {
         let company = this.companiesStateService.getCompanies().find(item => item.id === this.serviceReport.companyId);
         this.serviceReport.companyName = (company) ? company.name : null;
@@ -83,9 +82,6 @@ export class ServiceReportComponent implements OnInit {
       this.serviceReport.startDate = moment(new Date(this.serviceReport.startDate)).format('ll');
       this.serviceReport.endDate = moment(new Date(this.serviceReport.endDate)).format('ll');
       this.onInit = true;
-      console.log("serviceReport", this.serviceReport.services.map(item => {
-        return item.ticketDevice;
-      }));
     })
 
   }
@@ -113,12 +109,11 @@ export class ServiceReportComponent implements OnInit {
         //  let searchList = services.slice(index1 + 1, services.length);
         let findList = services.filter(item => item.expenseName === element1.expenseName);
         let minutes = 0;
-       
+
         element1.serviceTime = findList.reduce(function (sum, current) {
           minutes += Math.round((current.serviceTime * 60) % 60);
           return sum + current.serviceTime;
         }, 0);
-        console.log("minutes", minutes);
         list.push({
           name: element1.expenseName,
           hours: Math.floor(element1.serviceTime),
@@ -190,13 +185,11 @@ export class ServiceReportComponent implements OnInit {
 
 
   drawChart(data) {
-
     document.documentElement.classList.remove('no-d3-tooltip');
     this.chartData = data.map((el, i) => {
       el.color = this.chartColors[i];
       return el;
     });
-    console.log("$scope.chartData", JSON.stringify(this.chartData));
   }
 
   getDurationFilter(quanity) {

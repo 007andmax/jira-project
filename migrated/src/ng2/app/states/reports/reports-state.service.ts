@@ -24,7 +24,6 @@ export class ReportsStateService {
   }
 
   public parseReportContent() {
-    //  disableOpenPdfBtn();
     var selectedHtml;
     var source = $("#product-list-ticket-data");
     var target = source.clone(),
@@ -42,7 +41,6 @@ export class ReportsStateService {
       if (sourceSVGs && sourceSVGs.length) {
         var svgs = target.find('svg');
         svgs.replaceWith(function (index) {
-          console.log("sourceSVGs[index]",sourceSVGs[index]);
           var svg:any = $(sourceSVGs[index]),
             img = document.createElement('img');
           var width = svg.width() + 'px';
@@ -65,11 +63,7 @@ export class ReportsStateService {
           return img;
         });
       }
-  
-
-  //  selectedHtml = target.wrap('div').parent().html();
     selectedHtml = `<div>${target.html()}</div>`;
-    console.log("selectedHtml",selectedHtml);
     if (selectedHtml.indexOf(unknownLoadingStr) !== -1) {
       selectedHtml = selectedHtml.slice(unknownLoadingStr.length);
     }

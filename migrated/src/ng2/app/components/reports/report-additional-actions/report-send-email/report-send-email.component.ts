@@ -52,19 +52,15 @@ export class ReportSendEmailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log("selectedClient", this.selectedClient);
     this.usersSelected = this.draftEmailStateService.getSelectedUsers();
     this.companiesSelected = this.draftEmailStateService.getSelectedCompanies();
     this.action = this.draftEmailStateService.getAction();
-
     this.draftEmail = new ReportEmail();
-
   }
 
 
 
   close() {
-
     this.draftEmail = new ReportEmail();
     this.tab = 'plain';
     this.messageContent = '';
@@ -74,8 +70,6 @@ export class ReportSendEmailComponent implements OnInit {
     this.filesInfo = new FilesInfo();
     this.action = null;
     this.activeModal.dismiss('Cross click');
-
-
   }
 
   onChangeCompanyEmails(data) {
@@ -131,10 +125,6 @@ export class ReportSendEmailComponent implements OnInit {
     this.draftEmail.setNote(this.messageContent);
     this.draftEmail.setOrientation(this.orientation);
     this.draftEmail.setFileName(this.fileName);
-    this.filesInfo.files.forEach(item => {
-      console.log("item", item);
-      //  if (!item.error) this.draftEmail.setAttachment(item.id)
-    });
     if (this.template === "PDF_TEMPLATE") {
       this.reportsService.sendMessage(this.draftEmail).subscribe((data) => {
         this.close();

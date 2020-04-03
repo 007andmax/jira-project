@@ -42,11 +42,9 @@ export class TechUsersListReportComponent implements OnInit, OnDestroy {
   }
   onSelect(data) {
     this.selectedUser = data;
-
     this.onChange.emit(data);
   }
   clearClient() {
-
     this.selectedUser = null;
     this.onChange.emit(null);
   }

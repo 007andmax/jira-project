@@ -302,7 +302,6 @@
         }
 
         $scope.activateCompanyProfileTab = function (tabToActivate) {
-          console.log("tabToActivate", tabToActivate);
           if (tabToActivate == 'CompanyProfilePasswordManagerPage') {
             $scope.goToTab(`#/ng2/company-password-manager`);
             return;

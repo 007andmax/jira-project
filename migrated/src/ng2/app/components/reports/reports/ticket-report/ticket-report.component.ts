@@ -79,7 +79,6 @@ export class TicketReportComponent implements OnInit {
     this.cd.detectChanges();
   }
   public getReport(data) {
-    console.log("data", data);
     this.ticketsReport.setData(data);
     if (this.ticketsReport && this.ticketsReport.tickets) {
       let company = this.companiesStateService.getCompanies().find(item => item.id === this.ticketsReport.companyId);
@@ -223,7 +222,6 @@ export class TicketReportComponent implements OnInit {
       el.color = this.chartColors[i];
       return el;
     });
-    console.log("$scope.chartData", JSON.stringify(this.chartData));
   }
   public getFloorAverageResponseTime() {
     return Math.floor(this.ticketsReport.averageResponseTime);
@@ -240,7 +238,6 @@ export class TicketReportComponent implements OnInit {
     return (user) ? `${user.firstName} ${user.lastName}` : "";
   }
   public onChangeTehUsers(tehusers) {
-    console.log("tehusers", tehusers);
 
   }
   formatServiceTime(hours, minutes) {

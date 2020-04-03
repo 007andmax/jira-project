@@ -817,13 +817,7 @@ localStorage.setItem('report',report);
           el.color = $scope.chartColors[i];
           return el;
         });
-        console.log("$scope.chartData",JSON.stringify($scope.chartData));
       }
-
-
-
-
-
       $scope.changeReportPageView = function (reportType) {
         $scope.reportPageType = reportType;
       };

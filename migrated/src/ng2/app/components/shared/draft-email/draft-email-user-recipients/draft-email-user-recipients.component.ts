@@ -59,8 +59,6 @@ export class DraftEmailUserRecipientsComponent implements OnInit {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-    console.log("accountType", this.accountType);
-    console.log("this.selectedClient", this.selectedClient);
     this.getUsersList();
     this.draftEmailStateService.getOnClear().subscribe(data => {
       this.selectedUsers = [];

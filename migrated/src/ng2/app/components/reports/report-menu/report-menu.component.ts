@@ -81,8 +81,6 @@ export class ReportMenuComponent implements OnInit {
     this.glNumber.resetDates();
     this.validate.resetDates();
     this.validate.resetMonthlyDetailed();
-
-    //this.reportsStateService.onChangeGlNumber(this.glNumber);
   }
   public onSelectTypeTaxes(data) {
     this.taxes.setType(data);
@@ -98,11 +96,7 @@ export class ReportMenuComponent implements OnInit {
     if (data === 'Summary') this.validate.resetCompany();
   }
   public selectClient(selectClient) {
-    console.log("companiesList", this.companiesList);
-    // this.companiesList.setDisabled(true);
     if (selectClient === 'null') {
-
-      //  this.recurringState.getCreateTicket().setCompany(null);
       this.accountsReceivable.setClientCompanyId(null);
       this.selectedClient = null;
       this.glNumber.setClientCompanyId(null);
@@ -110,10 +104,7 @@ export class ReportMenuComponent implements OnInit {
       this.customerSalesReport.setCompanyId(null);
       this.serviceReport.setCompanyId(null);
       this.ticketsReport.setCompanyId(null);
-      //  this.recurringState.setClient(selectClient);
-
     } else {
-      // this.recurringState.getCreateTicket().setCompany(selectClient.item.id);
       this.selectedClient = selectClient.item;
       this.glNumber.setClientCompanyId(selectClient.item.id);
       this.accountsReceivable.setClientCompanyId(selectClient.item.id);
@@ -123,35 +114,20 @@ export class ReportMenuComponent implements OnInit {
       this.serviceReport.setCompanyId(selectClient.item.id);
       if (this.ticketsReport.startDate === '' && this.ticketsReport.endDate === '')  this.ticketsReport.setDatesByCompany(this.selectedClient);
       if (this.serviceReport.startDate === '' && this.serviceReport.endDate === '')  this.serviceReport.setDatesByCompany(this.selectedClient);
-      
       this.validate.resetCompany();
-      //  this.recurringState.setClient(selectClient);
-      //  this.onCheckListServices();
-      //  this.getCompanyDevices();
-
     }
-
-    console.log("this.selectClient", this.selectedClient);
     this.onSelectedClient.emit(this.selectedClient);
-    //  this.services = [new ForCreateService()];
-    // this.cd.detectChanges();
-    // this.reportsStateService.onChangeGlNumber(this.glNumber);
-
   }
   toggleShowResponseTime(event) {
-    console.log("event", event.target.checked);
     this.ticketReportStateService.toggleShowResponseTime(event.target.checked);
   }
   toggleShowDashboard(event) {
-    console.log("event", event.target.checked);
     this.ticketReportStateService.toggleShowDashboard(event.target.checked);
   }
   toggleShowServices(event) {
-    console.log("event", event.target.checked);
     this.ticketReportStateService.toggleShowServices(event.target.checked);
   }
   toggleShowProducts(event) {
-    console.log("event", event.target.checked);
     this.ticketReportStateService.toggleShowProducts(event.target.checked);
   }
   onSelectTechUser(data) {
@@ -159,7 +135,6 @@ export class ReportMenuComponent implements OnInit {
   }
   getReportByTaxes() {
     if (!this.validate.isValidateTaxes(this.glNumber.startDate, this.glNumber.endDate)) return;
-
     this.onRequest.emit(true);
     this.reportsService.getReportByTaxes(this.taxes.getForRequest()).subscribe(data => this.setDatareport(data));
     this.reportsStateService.onChangeExportCSV(new ExportCSV('reports/sales/byTaxes', this.taxes.getForRequest(),'Sales_report_by_customer'));
@@ -171,20 +146,17 @@ export class ReportMenuComponent implements OnInit {
   }
   getReportByService() {
     if (!this.validate.isValidateService(this.selectedClient)) return;
-
     this.onRequest.emit(true);
     this.reportsService.getReportByService(this.serviceReport.getForRequest()).subscribe(data => this.setDatareport(data));
   }
   getReportByTickets() {
     if (!this.validate.isValidateTickets(this.selectedClient)) return;
-
     this.onRequest.emit(true);
     this.reportsService.getReportByTickets(this.ticketsReport.getForRequest()).subscribe(data => this.setDatareport(data));
 
   }
   getReportByCustomers() {
     if (!this.validate.isValidateCustomers(this.customerSalesReport.startDate, this.customerSalesReport.endDate, (this.selectedClient) ? this.selectedClient.id : null, this.customerSalesReport.type)) return;
-
     this.onRequest.emit(true);
     this.reportsService.getReportByCustomers(this.customerSalesReport.getForRequest()).subscribe(data => this.setDatareport(data));
     this.reportsStateService.onChangeExportCSV(new ExportCSV('reports/sales/byCustomers', this.productSalesReport.getForRequest(),'Sales_report_by_customer'));
@@ -192,7 +164,6 @@ export class ReportMenuComponent implements OnInit {
 
   getReportByProducts() {
     if (!this.validate.isValidateProduct(this.productSalesReport.startDate, this.productSalesReport.endDate, this.productSalesReport.companyId, this.productSalesReport.type)) return;
-
     this.onRequest.emit(true);
     this.reportsService.getReportByProduct(this.productSalesReport.getForRequest()).subscribe(data => this.setDatareport(data));
     this.reportsStateService.onChangeExportCSV(new ExportCSV('reports/sales/byProducts', this.productSalesReport.getForRequest(),'Sales_report_by_products'));
@@ -206,7 +177,6 @@ export class ReportMenuComponent implements OnInit {
 
     if (this.yearToDate) {
       this.reportsService.getAccountingStartDate().subscribe((res: any) => {
-        console.log("res", res.accountingStartDate);
         this.glNumber.setStartDate(moment(res.accountingStartDate).format('YYYY/MM/DD'));
         this.glNumber.setEndDate(moment(new Date()).format('YYYY/MM/DD'));
         this.reportsService.getReportByGlNumber(this.glNumber.getForRequest()).subscribe(data => this.setDatareport(data));
@@ -245,20 +215,14 @@ export class ReportMenuComponent implements OnInit {
 
       this.glNumber.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.glNumber.setEndDate(moment(value.end).format('YYYY/MM/DD'));
-
-
       this.productSalesReport.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.productSalesReport.setEndDate(moment(value.end).format('YYYY/MM/DD'));
-
       this.customerSalesReport.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.customerSalesReport.setEndDate(moment(value.end).format('YYYY/MM/DD'));
-
       this.taxes.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.taxes.setEndDate(moment(value.end).format('YYYY/MM/DD'));
-
       this.ticketsReport.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.ticketsReport.setEndDate(moment(value.end).format('YYYY/MM/DD'));
-
       this.serviceReport.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.serviceReport.setEndDate(moment(value.end).format('YYYY/MM/DD'));
       this.validate.resetDates();
@@ -270,10 +234,7 @@ export class ReportMenuComponent implements OnInit {
         this.ticketsReport.setDatesByCompany(this.selectedClient);
         this.serviceReport.setDatesByCompany(this.selectedClient);
       }
-
     }
-
-    //  this.reportsStateService.onChangeGlNumber(this.glNumber);
   }
 
   /**
@@ -291,13 +252,11 @@ export class ReportMenuComponent implements OnInit {
   * @param item - product
   */
   public selectProduct(item) {
-    console.log("item", item);
     this.productSalesReport.setProductId((item) ? item.versionedId.id : null);
 
   }
 
   public onChangeTehUsers(tehusers) {
-    console.log("tehusers", tehusers);
 
   }
 }

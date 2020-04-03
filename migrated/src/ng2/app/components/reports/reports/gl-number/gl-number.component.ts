@@ -72,9 +72,6 @@ export class GlNumberComponent implements OnInit {
           this.glNumber.getList()[indexLast].updateTotal(item.sum);
         });
       }
-
-      console.log("this.glNumber", this.glNumber);
-      console.log("this.glNumber.list", this.glNumber.list);
       this.headers = [];
       this.headers.push("GL Number");
       this.headers.push("Description");

@@ -33,7 +33,6 @@ export class CustomerSalesReportComponent implements OnInit {
 
   }
   public getReport(data) {
-    console.log("data", data);
     this.customerSalesReport.setData(data);
     this.headers = [];
     this.list = [];

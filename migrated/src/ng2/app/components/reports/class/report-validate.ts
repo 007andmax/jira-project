@@ -24,7 +24,6 @@ export class ReportValidate {
         if (type === 'Summary' && start === '' && end === '') {
             this.dates = false;
         } 
-        console.log("company",company);
         if (type === 'Detailed' && start === '' && end === '' )  this.dates = false;
         if (type === 'Detailed' && !company )  this.company = false;
         return this.dates && this.company;
@@ -33,7 +32,6 @@ export class ReportValidate {
         if (type === 'Summary' && start === '' && end === '') {
             this.dates = false;
         } 
-        console.log("company",company);
         if (type === 'Detailed' && start === '' && end === '' )  this.dates = false;
         if (type === 'Detailed' && !company )  this.company = false;
         return this.dates && this.company;
@@ -59,9 +57,6 @@ export class ReportValidate {
     }
 
     public isValidate(detailed, yearToDate, start, end) {
-
-        // if (detailed  && start === '' && end === '') this.dates = false;
-
         if (!detailed && !yearToDate && start === '' && end === '') {
             this.dates = false;
             this.monthlyDetailed = false;

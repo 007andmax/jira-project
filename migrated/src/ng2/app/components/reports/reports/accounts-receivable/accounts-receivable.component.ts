@@ -23,13 +23,11 @@ export class AccountsReceivableComponent implements OnInit {
     this.cd.detectChanges();
   }
   public getReport(data) {
-    console.log("data", data);
     this.accountsReceivable.clearLines();
     this.accountsReceivable.setData(data);
     this.headers = [];
     this.headers.push("Company Name");
     this.headers.push("Current");
-
     this.headers.push("<1 month");
     this.headers.push("<2 month");
     this.headers.push("<3 month");
@@ -41,17 +39,12 @@ export class AccountsReceivableComponent implements OnInit {
 
       if (this.accountsReceivable.type === "SUMMARY") list.push(item.clientCompanyName);
       if (this.accountsReceivable.type === "DETAILED") list.push(item.invoiceNumber);
-
       list.push(`$${this.parseTotal(item.currentSum)}`);
-
       list.push(`$${this.parseTotal(item.month1Sum)}`);
       list.push(`$${this.parseTotal(item.month2Sum)}`);
       list.push(`$${this.parseTotal(item.month3Sum)}`);
       list.push(`$${this.parseTotal(item.olderSum)}`);
       list.push(`$${this.parseTotal(item.totalSum)}`);
-
-
-
       this.list.push(list);
     })
     let list = [];
@@ -64,7 +57,6 @@ export class AccountsReceivableComponent implements OnInit {
     list.push(`$${this.parseTotal(this.accountsReceivable.totalSum)}`);
     this.list.push(list);
     this.cd.detectChanges();
-    //this.reportsStateService.onChangeAccountsReceivable(this.accountsReceivable);
   }
   onSelectedClient(client) {
     this.selectedClient = client;
