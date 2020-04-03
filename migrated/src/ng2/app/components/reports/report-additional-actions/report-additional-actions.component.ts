@@ -85,7 +85,7 @@ export class ReportAdditionalActionsComponent implements OnInit, OnDestroy {
       var link = document.createElement('a');
       link.href = window.URL.createObjectURL(blob);
 
-      link.download = this.exportCSV.fileName;
+      link.download = this.exportCSV.fileName + '.csv';
       link.click();
       window.URL.revokeObjectURL(link.href);
     })
