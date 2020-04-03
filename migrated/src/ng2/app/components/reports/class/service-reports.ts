@@ -5,8 +5,8 @@ import { reqServiceReport } from 'src/ng2/app/interfaces/reports/req-service-rep
 export class ServiceReports {
 
     companyId: string;
-    startDate: string;
-    endDate: string;
+    startDate: string = '';
+    endDate: string = '';
     services: Array<ServiceReportsItem> = [];
     companyName:string;
     

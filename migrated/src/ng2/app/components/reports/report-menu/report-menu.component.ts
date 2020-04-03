@@ -123,8 +123,9 @@ export class ReportMenuComponent implements OnInit {
       this.customerSalesReport.setCompanyId(selectClient.item.id);
       this.ticketsReport.setCompanyId(selectClient.item.id);
       this.serviceReport.setCompanyId(selectClient.item.id);
-      this.serviceReport.setDatesByCompany(this.selectedClient);
-      this.ticketsReport.setDatesByCompany(this.selectedClient);
+      if (this.ticketsReport.startDate === '' && this.ticketsReport.endDate === '')  this.ticketsReport.setDatesByCompany(this.selectedClient);
+      if (this.serviceReport.startDate === '' && this.serviceReport.endDate === '')  this.serviceReport.setDatesByCompany(this.selectedClient);
+      
       this.validate.resetCompany();
       //  this.recurringState.setClient(selectClient);
       //  this.onCheckListServices();

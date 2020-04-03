@@ -6,7 +6,7 @@ import { TicketsReportItem } from './tickets-report-item';
 
 export class TicketsReport {
     id: string;
-    timeSpent: number;
+    timeSpent: any;
     averageResponseTime: number;
     ticketsPerDate: Array<TicketsPerDate> = [];
     tickets: Array<TicketsReportItem> = [];
@@ -16,8 +16,8 @@ export class TicketsReport {
     withTimeSpent: boolean = true;
     showTotalTicketAmount: boolean = true;
    
-    startDate: string;
-    endDate: string;
+    startDate: string = '';
+    endDate: string = '';
     userId: string;
 
     companyName:string;
