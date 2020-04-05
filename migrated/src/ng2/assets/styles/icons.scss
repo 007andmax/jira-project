@@ -175,7 +175,24 @@
  &__attach-blue {
    background-image: url("assets/img/attachment-blue.svg");
  }
-
+ &__filters {
+   background-image: url("assets/img/icons/filters.svg");
+ }
+ &__collapse-arrow {
+   background-image: url("assets/img/icons/collapse-arrow.svg");
+ }
+ &__company-info {
+   background-image: url("assets/img/icons/company-info.svg");
+ }
+ &__devices {
+   background-image: url("assets/img/icons/devices.svg");
+ }
+ &__panel-open {
+   background-image: url("assets/img/icons/panel-open.svg");
+ }
+ &__users {
+   background-image: url("assets/img/icons/users.svg");
+ }
 }
 
 .priority-icon {

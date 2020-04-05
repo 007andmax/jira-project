@@ -119,6 +119,7 @@ import { TicketAddAsideComponent } from './components/tickets/tickets/ticket-add
 import { UploadAreaComponent } from './components/shared/upload-area/upload-area.component';
 import { TicketEditAsideComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-edit-aside.component';
 import { TicketsPrioritiesComponent } from './components/tickets/tickets-priorities/tickets-priorities.component';
+import { LeftPanelTicketsComponent } from './components/left-panel/left-panel-tickets/left-panel-tickets.component';
 
 /**
  * declare angular
@@ -281,7 +282,8 @@ angular.module('quicktech')
     TicketAddAsideComponent,
     UploadAreaComponent,
     TicketEditAsideComponent,
-    TicketsPrioritiesComponent
+    TicketsPrioritiesComponent,
+    LeftPanelTicketsComponent
   ],
   imports: [
     BrowserModule,

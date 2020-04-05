@@ -429,5 +429,32 @@
   margin-right: 12px;
 }
 
+.ticket-edit-aside__menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.aside-menu-item {
+  width:24px;
+  height: 24px;
+  cursor: pointer;
+  margin-top: 16px;
+}
+
+.collapse-arrow {
+  width: 28px;
+  height: 28px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: white;
+  position: fixed;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
+  border: solid 1px #dfe3e8;
+  border-radius: 50%;
+  transform: translate(-14px, 30px);
+  cursor: pointer;
+}
+
 
 
