@@ -198,6 +198,18 @@
           url: '/ng2/users',
           template: '<users-component></users-component>'
         }))
+        .state('new-reports', waitForServices({
+          url: '/ng2/reports',
+          template: '<reports-component></reports-component>'
+        }))
+        .state('new-item-report', waitForServices({
+          url: '/ng2/report/:ticketId',
+          params: {
+            ticketId: '',
+            remoteParams: null
+          },
+          template: '<item-report-component></item-report-component>'
+        }))
         .state('accounting', waitForServices({
           url: '/accounting',
           template: '<div ui-view></div>',
@@ -363,21 +375,6 @@
           templateUrl: '/ng1/scripts/core/reports/reports-templates/remote-access-summary.tpl.html',
           controller: 'quicktech.core.reports.reportsCtrl'
         }))
-        .state('byCustomers', waitForServices({
-          url: '/reports/byCustomers',
-          templateUrl: '/ng1/scripts/core/reports/reports-templates/sales-by-customer.tpl.html',
-          controller: 'quicktech.core.reports.reportsCtrl'
-        }))
-        .state('byProducts', waitForServices({
-          url: '/reports/byProducts',
-          templateUrl: '/ng1/scripts/core/reports/reports-templates/sales-by-products.tpl.html',
-          controller: 'quicktech.core.reports.reportsCtrl'
-        }))
-        .state('byTaxes', waitForServices({
-          url: '/reports/byTaxes',
-          templateUrl: '/ng1/scripts/core/reports/reports-templates/sales-by-taxes.tpl.html',
-          controller: 'quicktech.core.reports.reportsCtrl'
-        }))
         .state('techReport-TicketCreated', waitForServices({
           url: '/reports/techReport-TicketCreated',
           templateUrl: '/ng1/scripts/core/reports/reports-templates/tech-report-ticked-created.tpl.html',
@@ -396,16 +393,6 @@
         .state('techReport-ProductSales', waitForServices({
           url: '/reports/techReport-ProductSales',
           templateUrl: '/ng1/scripts/core/reports/reports-templates/tech-report-product-sales.tpl.html',
-          controller: 'quicktech.core.reports.reportsCtrl'
-        }))
-        .state('ticket-report', waitForServices({
-          url: '/reports/ticket-report',
-          templateUrl: '/ng1/scripts/core/reports/reports-templates/tickets-report.tpl.html',
-          controller: 'quicktech.core.reports.reportsCtrl'
-        }))
-        .state('accountsReceivable', waitForServices({
-          url: '/reports/accountsReceivable',
-          templateUrl: '/ng1/scripts/core/reports/reports-templates/accounts-receivable.tpl.html',
           controller: 'quicktech.core.reports.reportsCtrl'
         }))
         .state('hardware-reports', waitForServices({

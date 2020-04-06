@@ -126495,6 +126495,18 @@ mod.directive('infiniteScroll', [
           url: '/ng2/users',
           template: '<users-component></users-component>'
         }))
+        .state('new-reports', waitForServices({
+          url: '/ng2/reports',
+          template: '<reports-component></reports-component>'
+        }))
+        .state('new-item-report', waitForServices({
+          url: '/ng2/report/:ticketId',
+          params: {
+            ticketId: '',
+            remoteParams: null
+          },
+          template: '<item-report-component></item-report-component>'
+        }))
         .state('accounting', waitForServices({
           url: '/accounting',
           template: '<div ui-view></div>',
@@ -126660,21 +126672,6 @@ mod.directive('infiniteScroll', [
           templateUrl: '/ng1/scripts/core/reports/reports-templates/remote-access-summary.tpl.html',
           controller: 'quicktech.core.reports.reportsCtrl'
         }))
-        .state('byCustomers', waitForServices({
-          url: '/reports/byCustomers',
-          templateUrl: '/ng1/scripts/core/reports/reports-templates/sales-by-customer.tpl.html',
-          controller: 'quicktech.core.reports.reportsCtrl'
-        }))
-        .state('byProducts', waitForServices({
-          url: '/reports/byProducts',
-          templateUrl: '/ng1/scripts/core/reports/reports-templates/sales-by-products.tpl.html',
-          controller: 'quicktech.core.reports.reportsCtrl'
-        }))
-        .state('byTaxes', waitForServices({
-          url: '/reports/byTaxes',
-          templateUrl: '/ng1/scripts/core/reports/reports-templates/sales-by-taxes.tpl.html',
-          controller: 'quicktech.core.reports.reportsCtrl'
-        }))
         .state('techReport-TicketCreated', waitForServices({
           url: '/reports/techReport-TicketCreated',
           templateUrl: '/ng1/scripts/core/reports/reports-templates/tech-report-ticked-created.tpl.html',
@@ -126693,16 +126690,6 @@ mod.directive('infiniteScroll', [
         .state('techReport-ProductSales', waitForServices({
           url: '/reports/techReport-ProductSales',
           templateUrl: '/ng1/scripts/core/reports/reports-templates/tech-report-product-sales.tpl.html',
-          controller: 'quicktech.core.reports.reportsCtrl'
-        }))
-        .state('ticket-report', waitForServices({
-          url: '/reports/ticket-report',
-          templateUrl: '/ng1/scripts/core/reports/reports-templates/tickets-report.tpl.html',
-          controller: 'quicktech.core.reports.reportsCtrl'
-        }))
-        .state('accountsReceivable', waitForServices({
-          url: '/reports/accountsReceivable',
-          templateUrl: '/ng1/scripts/core/reports/reports-templates/accounts-receivable.tpl.html',
           controller: 'quicktech.core.reports.reportsCtrl'
         }))
         .state('hardware-reports', waitForServices({
@@ -133138,7 +133125,8 @@ mod.directive('infiniteScroll', [
 
           function initLeftPanel(e) {
             var windowWidth = window.outerWidth;
-            if (!$state.is('settings') && $state.current.url.indexOf('reports') === -1) {
+            console.log("$state.current.url",$state.current.url);
+            if (!$state.is('settings') && $state.current.url.indexOf('reports') === -1 && $state.current.url.indexOf('report') === -1) {
               $rootScope.isLeftPanelHidden = windowWidth <= 1024;
 
               if ($rootScope.isLeftPanelHidden) {
@@ -133265,10 +133253,12 @@ mod.directive('infiniteScroll', [
         link: function (scope, element, attrs, modelCtrl) {
 
           var secretEmptyKey = '[$empty$]';
-
+var onInit = false;
           element.bind('click', triggerFunc);
 
           function triggerFunc() {
+            onInit = true;
+            console.log("triggerFunc");
             if(modelCtrl.testVar) {
               modelCtrl.testVar = false;
               return;
@@ -133276,11 +133266,13 @@ mod.directive('infiniteScroll', [
 
             var prev = modelCtrl.$modelValue || '';
             if (prev) {
+              console.log("prev",prev);
               modelCtrl.$setViewValue('');
               // $timeout(function() {
               //   modelCtrl.$setViewValue(prev);
               // });
             } else {
+              console.log("modelCtrl",modelCtrl);
               modelCtrl.$setViewValue(' ');
               setTimeout(function() {
                 modelCtrl.$setViewValue(prev);
@@ -133290,6 +133282,8 @@ mod.directive('infiniteScroll', [
 
           // this parser run before typeahead's parser
           modelCtrl.$parsers.unshift(function (inputValue) {
+            if (!onInit) return;
+            console.log("unshift");
             var value = (inputValue ? inputValue : secretEmptyKey); // replace empty string with secretEmptyKey to bypass typeahead-min-length check
             modelCtrl.$viewValue = value; // this $viewValue must match the inputValue pass to typehead directive
             return value;
@@ -133297,10 +133291,14 @@ mod.directive('infiniteScroll', [
 
           // this parser run after typeahead's parser
           modelCtrl.$parsers.push(function (inputValue) {
+            if (!onInit) return;
+            console.log("push");
             return inputValue === secretEmptyKey ? '' : inputValue; // set the secretEmptyKey back to empty string
           });
 
           scope.stateComparator = function (state, viewValue) {
+            if (!onInit) return;
+            console.log("stateComparator");
             var secretEmptyKey = '[$empty$]';
             return viewValue === secretEmptyKey || ('' + state).toLowerCase().indexOf(('' + viewValue).toLowerCase()) > -1;
           };
@@ -133323,13 +133321,29 @@ mod.directive('infiniteScroll', [
 
           var secretEmptyKey = '[$empty$]';
 
-          element.on('focus', function () {
+        /*  element.on('focus', function () {
+            console.log("focus");
             $timeout(function () {
               if (!scope.$eval(attrs.ngModel)) {
                 modelCtrl.$setViewValue(modelCtrl.$viewValue + ' ');
+                console.log("modelCtrl.$viewValue",modelCtrl.$viewValue);
               }
               $(element).trigger('input');
               $(element).trigger('change'); // for IE
+            });
+          });*/
+
+          element.on('click', function () {
+            console.log("click");
+            console.log("modelCtrl.$viewValue",modelCtrl.$viewValue);
+            $timeout(function () {
+            /*  if (!scope.$eval(attrs.ngModel)) {
+                modelCtrl.$setViewValue(modelCtrl.$viewValue + ' ');
+                console.log("modelCtrl.$viewValue",modelCtrl.$viewValue);
+              }*/
+              modelCtrl.$setViewValue(modelCtrl.$viewValue + ' ');
+              $(element).trigger('input');
+              $(element).trigger('change'); // for IE*/
             });
           });
 
@@ -133505,6 +133519,7 @@ mod.directive('infiniteScroll', [
     $scope.techReportTypes = ['Billed time', 'Product sold'];
     $scope.techReportType = "Billed time";
     $scope.clientCompanies = CompaniesService.getClientCompanies();
+    console.log("$scope.clientCompanies",$scope.clientCompanies);
     $scope.users = UsersService.getAllUsers();
     $scope.currentUser = UsersService.getCurrentUser();
     $scope.locationTechReport = $location.url();
@@ -133772,7 +133787,7 @@ mod.directive('infiniteScroll', [
     //Software Summary reports items end
 
     $scope.$watch('reportSetting.device', function(val) {
-      $rootScope.hardwareSummaryDevice = val.device;
+     if (val) $rootScope.hardwareSummaryDevice = val.device;
     });
 
     $scope.$watch('reportSetting.soft', function(val) {
@@ -139592,7 +139607,9 @@ scope.$apply();
       },
       callbackForArchive,
       callbackForSavedCompanies = {},
+      glNumbers = [],
       companyPaymentInfo = {};
+      
 
 
     Utils.customizeObj(storage);
@@ -139681,12 +139698,26 @@ scope.$apply();
       Utils.customizeObj(resp.data, storage.currentCompany);
       setRealTimeCurrentCompany();
       checkInit();
+      console.log("resp.data",resp.data);
+
+      setRealTimeGLNumbers(resp.data.id);
+    //  $rootScope.$broadcast('setRealTimeGLNumbers', resp.data);
+     // ServicesService.setRealTimeGLNumbers(resp.data.id);
+
     },
       function (resp) {
         console.error(resp);
         throw 'Cannot initialize CompaniesService!';
       });
-
+     
+    $http.get('/glNumber').then(function (resp) {
+      // console.log("resp.data",resp);
+      glNumbers = resp.data.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
+        1 : ((b.glNumber.toLowerCase() > a.glNumber.toLowerCase()) ? -1 : 0));
+    })
+    function getGlNumbers() {
+      return angular.copy(glNumbers);
+    }
     function reloadCurrentCompany(callback) {
       $http.get('/company/current').then(function (resp) {
         if (callback) {
@@ -139698,7 +139729,21 @@ scope.$apply();
     }
 
     var checkInitsCount = 0;
+    function setRealTimeGLNumbers(id) {
 
+      RealTimeService.subscribe('/glNumber/' + id, serviceScope, function (newChange) {
+
+        if (newChange.action === "GL_NUMBER_SAVED") {
+          glNumbers.push(newChange.data);
+          console.log("glNumbers",angular.copy(glNumbers));
+          glNumbers = glNumbers.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
+          1 : ((b.glNumber.toLowerCase() > a.glNumber.toLowerCase()) ? -1 : 0));
+          $rootScope.$broadcast('setRealTimeGLNumbers', angular.copy(glNumbers));
+        }
+
+
+      })
+    }
     function checkInit() {
       checkInitsCount++;
       if (checkInitsCount === 3) {
@@ -139708,6 +139753,8 @@ scope.$apply();
           initListeners[i]();
         }
       }
+
+
     }
 
     RealTimeService.subscribe('/company', serviceScope, function (newChange) {
@@ -140580,6 +140627,7 @@ scope.$apply();
     }
 
     return {
+      getGlNumbers:getGlNumbers,
       _addInitListener: addInitListener,
       _addAmountChangeListener: _addAmountChangeListener,
       _search: search,
@@ -144295,7 +144343,9 @@ scope.$apply();
 
   services.factory('ServicesService', ['$http', '$rootScope', 'RealTimeService', 'Utils', 'CompaniesService',
     function ($http, $rootScope, RealTimeService, Utils, CompaniesService) {
+    var  serviceScope = $rootScope.$new();
 
+  
       function search(keyword) {
 
         if (!keyword) {
@@ -144414,6 +144464,40 @@ scope.$apply();
         delete data[companyId];
       }
 
+      function createGlNumber (data,callback) {
+       
+
+        var future = $http({
+          url: `/glNumber`,
+          method: 'POST',
+          data: data
+        });
+  
+        Utils.handleCallback(future, callback);
+        }
+
+      function resetContractGlNumber (id,contractType,callback) {
+       
+
+        var future = $http({
+          url: `/glNumber/resetContract/${contractType}`,
+          method: 'POST'
+        });
+  
+        Utils.handleCallback(future, callback);
+        }
+
+      function setContractGlNumber (id,contractType,callback) {
+       
+
+      var future = $http({
+        url: `/glNumber/${id}/${contractType}`,
+        method: 'POST'
+      });
+
+      Utils.handleCallback(future, callback);
+      }
+
       function save(service, callback) {
 
         if (!service) throw 'service is required!';
@@ -144458,6 +144542,7 @@ scope.$apply();
         Utils.handleCallback(future, callback);
       }
 
+     
       function move(mapping, callback) {
         if (!mapping) throw 'mapping is required argument!';
 
@@ -144552,9 +144637,16 @@ scope.$apply();
         });
         Utils.handleCallback(future, callback);
       }
-
+    
+   
+      
+          console.log("CompaniesService.getCurrentCompany()",CompaniesService.getCurrentCompany());
       return {
-
+        
+        createGlNumber: createGlNumber,
+        resetContractGlNumber : resetContractGlNumber,
+        setContractGlNumber: setContractGlNumber,
+      
         getAllByCompany: getAllByCompany,
         getServicesData: getServicesData,
         getSpecialServices: getSpecialServices,
@@ -152487,6 +152579,7 @@ scope.$apply();
         }
 
         function getPdfIdFromRest() {
+          console.log('getPdfIdFromRest',attrs.selector);
           disableOpenPdfBtn();
 
           var source = $(attrs.selector);
@@ -156631,6 +156724,7 @@ scope.$apply();
       $scope.emails = [];
       $scope.close = $uibModalInstance.dismiss;
       $scope.selectedCompany = $scope.$parent.reportSetting? $scope.$parent.reportSetting.company : {};
+      console.log("$scope.selectedCompany",$scope.selectedCompany);
       $scope.users = $scope.selectedCompany ? getCompanyAndTechUsers(UsersService.getAllUsers()) : getActiveUsers(UsersService.getAllUsers());
       $scope.removeEmail = function(index) {
         $scope.emails.splice(index, 1);
@@ -156855,17 +156949,21 @@ scope.$apply();
       }
 
       if ($scope.allUsersEmails) {
+        console.log("4")
         $scope.filteredUsersEmails = $scope.allUsersEmails.filter(function(el) {
           return el;
         });
 
         $scope.$watch('newEmail', function(val) {
+       
           if (val === undefined) return;
+          console.log("1")
           $scope.filteredUsersEmails = $scope.allUsersEmails.filter(function(el) {
             return el && el.includes(val);
           })
         })
       } else {
+        console.log("3")
         $scope.isReportEmail = true;
         $scope.filteredUsersEmails = $scope.$parent.$ctrl.tempUsers.concat($scope.users)
           .map(function(el) {
@@ -156874,9 +156972,11 @@ scope.$apply();
           .filter(function(el) {
             return el;
           })
-
+console.log("$scope.filteredUsersEmails",$scope.filteredUsersEmails);
         $scope.$watch('newEmail', function(val) {
+       
           if (val === undefined) return;
+          console.log("2")
           $scope.filteredUsersEmails = $scope.$parent.$ctrl.tempUsers.concat($scope.users)
             .map(function(el) {
               return el.primaryEmail;
@@ -157172,18 +157272,48 @@ scope.$apply();
 
   angular.module('quicktech').controller('quicktech.createProductCtrl',
     ['$scope', 'ProductsService', 'CompaniesService', '$rootScope', 'quicktech.common.services.PermissionsService',
-      'TaxesService', '$timeout',
-    function ($scope, ProductsService, CompaniesService, $rootScope, PermissionsService, TaxesService, $timeout) {
+      'TaxesService', '$timeout','ServicesService',
+    function ($scope, ProductsService, CompaniesService, $rootScope, PermissionsService, TaxesService, $timeout,ServicesService) {
 
       $scope.discountAmountMsxLength;
       $scope.newCategoryNamePattern = /^[0-9A-Za-z!@.)(/,|\\;:-='"?&\-\s ]{1,100}$/;
-
+      $scope.glNumbersList = [];
+      $scope.isChangeGlNumber = false;
+      
+      $rootScope.$on('setRealTimeGLNumbers', function(event, newInvoice){
+        console.log('newInvoice',newInvoice);
+        $scope.glNumbersList = newInvoice;
+            });
+     // ServicesService.getGlNumbers(function (data) {
+        $scope.glNumbersList = CompaniesService.getGlNumbers();
+    //  })
       $scope.$watch('currentUser.permissions', function (permissions) {
         if (permissions && !PermissionsService.isAllowed('MANAGE_PRODUCTS')) {
           $scope.closeWindow();
         }
       });
-
+      $scope.createGlNumber = function () {
+        var data = {
+          glNumber: $scope.editProduct.glNumber,
+          description: ""
+        };
+        ServicesService.createGlNumber(data, function (res) {
+          console.log("res", res);
+          $scope.glNumbersList.push(res);
+          $scope.isChangeGlNumber = false;
+        })
+      }
+     
+      $scope.changeGlNumber = function () {
+     
+        if ($scope.editProduct.glNumber) {
+          var index = $scope.glNumbersList.findIndex(item => item.glNumber === $scope.editProduct.glNumber);
+          $scope.isChangeGlNumber = (index > -1) ? false : true;
+        } else {
+          $scope.isChangeGlNumber = false;
+        }
+        console.log("editProduct.glNumber",$scope.editProduct.glNumber);
+      }
       $scope.showModal = true;
 
       $timeout(function() {
@@ -157225,6 +157355,7 @@ scope.$apply();
 
 
         $scope.editProduct = angular.copy(origin);
+        console.log("$scope.editProduct",$scope.editProduct);
         $scope.editProduct.taxes = (origin.taxIds || []).map(function(taxId) {
           return $scope.taxes.find(function(el) {
             return el.id === taxId;
@@ -157327,7 +157458,14 @@ scope.$apply();
         if (form.$valid || checkValid(form)) {
 
           $scope.disabledSaveChangeButton = true;
-
+          var glNumber = null;
+          if ($scope.editProduct.glNumber) {
+            var index = $scope.glNumbersList.findIndex(item => item.glNumber === $scope.editProduct.glNumber);
+          
+            glNumber = (index > -1) ? { id: $scope.glNumbersList[index].id } : null
+          } else {
+            glNumber = null;
+          }
           
           var changedProduct = {
             versionedId: $scope.editProduct.versionedId,
@@ -157339,7 +157477,7 @@ scope.$apply();
             companyId: $scope.editProduct.company ? $scope.editProduct.company.id : undefined,
             taxIds: [],
             categoryId: $scope.editProduct.category.id,
-            glNumber: $scope.editProduct.glNumber
+            glNumber: glNumber
           };
           for(var i=0; i<$scope.editProduct.taxes.length; i++) {
             changedProduct.taxIds.push($scope.editProduct.taxes[i].id)
@@ -157507,13 +157645,20 @@ scope.$apply();
 (function () {
 
   angular.module('quicktech').controller('quicktech.editServiceCtrl',
-    ['$scope', '$rootScope', 'ServicesService', 'TaxesService', '$timeout',
-      function ($scope, $rootScope, ServicesService, TaxesService, $timeout) {
+    ['$scope', '$rootScope', 'ServicesService', 'TaxesService', '$timeout','CompaniesService',
+      function ($scope, $rootScope, ServicesService, TaxesService, $timeout,CompaniesService) {
 
         var savedState = $scope.getLastSavedState('service');
-
+        $scope.glNumbersList = [];
+        $scope.isChangeGlNumber = false;
         $scope.taxes = TaxesService.getAll();
-
+        $rootScope.$on('setRealTimeGLNumbers', function(event, newInvoice){
+          console.log('newInvoice',newInvoice);
+          $scope.glNumbersList = newInvoice;
+              });
+       // ServicesService.getGlNumbers(function (data) {
+          $scope.glNumbersList = CompaniesService.getGlNumbers();
+      //  })
         $scope.showModal = false;
 
         $timeout(function() {
@@ -157543,11 +157688,33 @@ scope.$apply();
         $scope.stopPropagation = function(e) {
           e.stopPropagation();
         }
+        $scope.createGlNumber = function () {
+          var data = {
+            glNumber: $scope.editService.glNumber,
+            description: ""
+          };
+          ServicesService.createGlNumber(data, function (res) {
+            console.log("res", res);
+            $scope.glNumbersList.push(res);
+            $scope.isChangeGlNumber = false;
+          })
+        }
 
         $scope.saveEditService = function (form, isModal) {
           if (form.$valid || isModal && form.editServiceName.$valid && form.editServiceRate.$valid) {
             $scope.disabledSaveButton = true;
             var saveService = angular.copy($scope.editService);
+            if (saveService.glNumber) {
+              var index = $scope.glNumbersList.findIndex(item => item.glNumber === saveService.glNumber);
+            
+              saveService.glNumber = (index > -1) ? { id: $scope.glNumbersList[index].id } : null
+            } else {
+              saveService.glNumber = null;
+            }
+         
+          
+            console.log("saveService",saveService);
+            
             saveService.taxIds = saveService.taxes.map(function (tax) {
               return tax.id;
             });
@@ -157577,6 +157744,17 @@ scope.$apply();
             afterValidationCallback();
           });
         };
+
+        $scope.changeGlNumber = function () {
+          console.log("editService.glNumber",$scope.editService.glNumber);
+          if ($scope.editService.glNumber) {
+            var index = $scope.glNumbersList.findIndex(item => item.glNumber === $scope.editService.glNumber);
+            $scope.isChangeGlNumber = (index > -1) ? false : true;
+          } else {
+            $scope.isChangeGlNumber = false;
+          }
+         
+        }
 
         $scope.getValidationMessage = function (form) {
 
@@ -159821,7 +159999,7 @@ scope.$apply();
         // }, true)
 
         $scope.currentCompany = CompaniesService.getCurrentCompany();
-console.log('grgrgr',$scope.currentCompany);
+ 
         $scope.addQuickSession = function () {
           sharedQuickSession.isCreateNew = true;
         };
@@ -160007,114 +160185,6 @@ console.log('grgrgr',$scope.currentCompany);
 
 (function () {
 
-  angular.module('quicktech.core.leftPanel').controller('quicktech.core.leftPanel.createReportCtrl',
-    ['$scope', '$uibModalInstance', 'CompaniesService', 'UsersService', 'StatisticsService', '$rootScope',
-      function ($scope, $uibModalInstance, CompaniesService, UsersService, StatisticsService, $rootScope) {
-
-        $scope.today = Date.now();
-        $scope.currentCompany = CompaniesService.getCurrentCompany();
-        $scope.clientCompanies = CompaniesService.getClientCompanies();
-        $scope.clientUsers = UsersService.getClientUsers();
-
-        $scope.dto = {
-          companyId: '',
-          userId: '',
-          startDate: new Date($scope.currentCompany.createdAt),
-          endDate: new Date,
-
-          withTimeSpent: true,
-          withResponseTime: true,
-          extendedReport: false,
-          showTotalTicketAmount: true
-        };
-        // $scope.showTotalAmount = true;
-        // $scope.$watch('showTotalAmount', function(newData) {
-         
-        //   $rootScope.$broadcast('changeShowTotalAmount', 'newData');
-        // });
-
-
-        $scope.dismiss = $uibModalInstance.dismiss;
-
-        $scope.$watch('dto.company.id', function (selectedCompanyId) {
-          if (!selectedCompanyId) {
-            $scope.dto.user = undefined;
-            $scope.dto.userId = undefined;
-          }
-        });
-
-        $scope.isShowingErrors = function (form, fieldName) {
-          return form && form[fieldName] && ($scope.triedToSave || form[fieldName].$dirty) && form[fieldName].$invalid;
-        };
-
-        $scope.filterUsers = function (value) {
-          return function (item) {
-            var selectedCompanyId = $scope.dto.company && $scope.dto.company.id;
-            if (selectedCompanyId && item.company.id !== selectedCompanyId) {
-              return false;
-            }
-
-            if (value && value.length > 0 && (value !== '[$empty$]')) {
-              var userEmail = (item.primaryEmail && item.primaryEmail.length > 0) ? ' ' + item.primaryEmail.toLowerCase() : '';
-              var fullSearchField = $scope.getUserName(item).toLowerCase() + userEmail;
-
-              return fullSearchField.indexOf(value.toLowerCase()) !== -1;
-            }
-            return true;
-          }
-        };
-
-        $scope.onUserSelect = function (user) {
-          $scope.dto.company = CompaniesService.getOneById(user.company.id);
-        };
-
-        $scope.onDateRangeSelect = function (selectedDates) {
-          var from = selectedDates[0], to = selectedDates[1];
-          var dto = $scope.dto;
-          if (from) {
-            dto.startDate = from;
-          }
-          if (to) {
-            dto.endDate = to;
-          }
-        };
-
-        $scope.getCustomerTicketReport = function (form) {
-          if (form.$valid) {
-            var dto = $scope.dto;
-           
-            dto.startDate = formatDate(new Date(dto.startDate || $scope.currentCompany.createdAt));
-            dto.endDate = formatDate(new Date(dto.endDate || undefined));
-            dto.companyId = dto.company.id;
-            if (dto.user) {
-              dto.userId = dto.user.id;
-            }
-
-            StatisticsService.getCustomerTicketReport(dto, function (data) {
-              $scope.customerReport = data;
-              $scope.customerReport.showTotalTicketAmount = dto.showTotalTicketAmount;
-              $scope.dismiss();
-            });
-          } else {
-            $scope.triedToSave = true;
-          }
-        };
-
-        function formatDate(date) {
-          if (!date || !date.getTime()) {
-            return null;
-          }
-          return date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate();
-        }
-
-      }]);
-
-}());
-
-;'use strict';
-
-(function () {
-
   angular.module('quicktech.core.leftPanel').controller('quicktech.core.leftPanel.customerTicketReportCtrl',
     ['$scope', 'CompaniesService', 'UsersService', '$rootScope', '$sce', '$filter',
       function ($scope, CompaniesService, UsersService, $rootScope, $sce, $filter) {
@@ -160295,7 +160365,12 @@ console.log('grgrgr',$scope.currentCompany);
             return $scope.disableCreateCategory = false;
           }
         };
+        $rootScope.$on('hiddenLeftPanel', function (event, toState, toParams, fromState) {
+          $scope.isLeftPanelHidden = true;
+          $scope.isRightPanelHidden = true;
+          console.log("$scope.isLeftPanelHidden",$scope.isLeftPanelHidden);
 
+        });
         $scope.clearCategory = function() {
           $scope.newCategory = '';
         };
@@ -161623,14 +161698,7 @@ console.log('grgrgr',$scope.currentCompany);
           }
         });
 
-        $scope.openCreateCustomerReportModal = function () {
-          $uibModal.open({
-            templateUrl: '/ng1/scripts/core/left-panel/customer-ticket-report/create-report-modal.tpl.html',
-            controller: 'quicktech.core.leftPanel.createReportCtrl',
-            windowClass: 'modal-customer-report',
-            animation: true
-          });
-        };
+       
 
         $scope.userReadable = function (text) {
           if (!text) {
@@ -162838,8 +162906,10 @@ console.log('grgrgr',$scope.currentCompany);
         $scope.orderByForProducts = function (item) {
           if ($scope.orderProducts.field === 'ilc') {
             return item.ilc;
-          } else if ($scope.orderProducts.field === 'manufacture') {
+          }else if ($scope.orderProducts.field === 'manufacture') {
             return item.manufacture;
+          } else if ($scope.orderProducts.field === 'glNumber') {
+            return (item.glNumber) ? item.glNumber.glNumber : item.glNumber;
           } else if ($scope.orderProducts.field === 'category') {
             return item.category.name;
           } else if ($scope.orderProducts.field === 'description') {
@@ -164868,6 +164938,19 @@ console.log('grgrgr',$scope.currentCompany);
           }
         };
 
+        String.prototype.replaceAll = function(searchStr, replaceStr) {
+          var str = this;
+        
+            // no match exists in string?
+            if(str.indexOf(searchStr) === -1) {
+                // return string
+                return str;
+            }
+        
+            // replace and remove first match, and do another recursirve search/replace
+            return (str.replace(searchStr, replaceStr)).replaceAll(searchStr, replaceStr);
+        }
+
         $scope.receivePayment = function (form) {
           if (checkNoteError()) {
             $scope.noteError = true;
@@ -164905,9 +164988,9 @@ console.log('grgrgr',$scope.currentCompany);
             }
           }
           $scope.disableReceiveButton = true;
-
+ 
           ReceivableService.receivePayment(
-            $scope.invoiceToReceive.method, invoiceIdPayment, !!$scope.invoiceToReceive.isSendNotification, $scope.note,
+            $scope.invoiceToReceive.method, invoiceIdPayment, !!$scope.invoiceToReceive.isSendNotification,($scope.note) ? $scope.note.replaceAll('$','&#36;') : "",
             function () {
               $uibModalInstance.dismiss('cancel');
               $scope.disableReceiveButton = false;
@@ -164934,7 +165017,7 @@ console.log('grgrgr',$scope.currentCompany);
       });
 
       $scope.PermissionsService = PermissionsService;
-
+$scope.ticket_id = "1234567";
       $scope.reportByTaxes = {};
       $scope.reportByCustomers = {};
       $scope.reportByProducts = {};
@@ -165029,7 +165112,11 @@ console.log('grgrgr',$scope.currentCompany);
           return el.type === "SERVICE";
         });
       };
+$scope.setReport = function (report) {
+localStorage.setItem('report',report);
+//$rootScope.$broadcast('hiddenLeftPanel', null);
 
+}
       $scope.getProducts = function(ticket) {
         return ticket.updates && ticket.updates.filter(function(el) {
           return el.type === "PRODUCT"
@@ -165735,6 +165822,7 @@ console.log('grgrgr',$scope.currentCompany);
           el.color = $scope.chartColors[i];
           return el;
         });
+        console.log("$scope.chartData",JSON.stringify($scope.chartData));
       }
 
 
@@ -170574,16 +170662,114 @@ console.log('grgrgr',$scope.currentCompany);
 (function () {
 
   angular.module('quicktech.core.services').controller('quicktech.core.services.defaultServicesCtrl',
-    ['$scope', '$rootScope', 'CompaniesService',
-      function ($scope, $rootScope, CompaniesService) {
-
+    ['$scope', '$rootScope', 'CompaniesService', 'ServicesService',
+      function ($scope, $rootScope, CompaniesService, ServicesService) {
+        $scope.glNumbersList = [];
         $scope.showCheckboxes = true;
+
+        $rootScope.$on('setRealTimeGLNumbers', function(event, newInvoice){
+          console.log('newInvoice',newInvoice);
+          $scope.glNumbersList = newInvoice;
+              });
 
         $scope.$watch("servicesData.default.length", function (count) {
           if (count) {
             $scope.services = $scope.servicesData.default;
           }
         });
+       // ServicesService.getGlNumbers(function (data) {
+          $scope.glNumbersList = CompaniesService.getGlNumbers();
+     //   })
+
+        $scope.setGlNumber = function (glNumber, service) {
+
+
+          var saveService = angular.copy(service);
+          saveService.taxIds = saveService.taxes.map(function (tax) {
+            return tax.id;
+          });
+          saveService.taxes = undefined;
+
+          saveService.glNumber = {
+            id: glNumber.id
+          }
+
+          ServicesService.save(saveService, function (resp) {
+            console.log("resp", resp);
+            var index = $scope.services.findIndex(item => item.versionedId.id === saveService.versionedId.id);
+            if (index > -1) $scope.services[index].glNumber = glNumber;
+            console.log("$scope.services[index]", $scope.services[index]);
+            $rootScope.$broadcast('newServiceHasBeenCreated', resp.id);
+
+          });
+
+
+        };
+        $scope.resetGlNumber = function (service) {
+          var saveService = angular.copy(service);
+          saveService.taxIds = saveService.taxes.map(function (tax) {
+            return tax.id;
+          });
+          saveService.taxes = undefined;
+
+          saveService.glNumber = null;
+
+          ServicesService.save(saveService, function (resp) {
+            console.log("resp", resp);
+            var index = $scope.services.findIndex(item => item.versionedId.id === saveService.versionedId.id);
+            if (index > -1) $scope.services[index].glNumber = null;
+          
+            $rootScope.$broadcast('newServiceHasBeenCreated', resp.id);
+
+          });
+        }
+        $scope.checkClearContract = function (contractType) {
+          var index = $scope.glNumbersList.findIndex(item => item[contractType] === true);
+          if (index > -1) return true;
+          return false;
+        }
+        $scope.resetContract = function (contractType) {
+          var id;
+          var index = $scope.glNumbersList.findIndex(item => item[contractType] === true);
+          if (index > -1) id = $scope.glNumbersList[index].id;
+          ServicesService.resetContractGlNumber(id, contractType, function (data) {
+            console.log("data", data);
+            $scope.glNumbersList[index][contractType] = false;
+            //updateGlNumberContract(data,contractType,true);
+
+          })
+        }
+        $scope.setGlNumberContract = function (id, contractType) {
+          ServicesService.setContractGlNumber(id, contractType, function (data) {
+            console.log("data", data);
+            updateGlNumberContract(data, contractType, true);
+
+          })
+        }
+
+        function updateGlNumberContract(data, contractType, value) {
+          $scope.glNumbersList.forEach(element => {
+            if (element.id === data.id) {
+              element[contractType] = true;
+            } else {
+              element[contractType] = false;
+            }
+
+          });
+
+        }
+
+        $scope.getContracts = function (field) {
+          var glNumber = "Select GL number";
+          $scope.glNumbersList.forEach(element => {
+            if (element[field]) glNumber = element.glNumber;
+
+          });
+          return glNumber;
+        }
+
+
+
 
         $scope.$on(CompaniesService.getCurrentCompany().id + '-showService', function (event, serviceId) {
           $scope.$broadcast('show-' + serviceId);
@@ -170601,7 +170787,7 @@ console.log('grgrgr',$scope.currentCompany);
     ['$scope', '$rootScope', 'ServicesService', 'quicktech.common.services.UserConfirmationsService',
       function ($scope, $rootScope, ServicesService, UserConfirmationsService) {
 
-
+   
         $scope.deleteService = function () {
           var confirmMesage = 'Do you want to delete ' + $scope.service.name + '?',
             confirmButton = 'Yes';

@@ -120,6 +120,7 @@
     $scope.techReportTypes = ['Billed time', 'Product sold'];
     $scope.techReportType = "Billed time";
     $scope.clientCompanies = CompaniesService.getClientCompanies();
+    console.log("$scope.clientCompanies",$scope.clientCompanies);
     $scope.users = UsersService.getAllUsers();
     $scope.currentUser = UsersService.getCurrentUser();
     $scope.locationTechReport = $location.url();
@@ -387,7 +388,7 @@
     //Software Summary reports items end
 
     $scope.$watch('reportSetting.device', function(val) {
-      $rootScope.hardwareSummaryDevice = val.device;
+     if (val) $rootScope.hardwareSummaryDevice = val.device;
     });
 
     $scope.$watch('reportSetting.soft', function(val) {

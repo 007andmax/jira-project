@@ -129,8 +129,10 @@
         $scope.orderByForProducts = function (item) {
           if ($scope.orderProducts.field === 'ilc') {
             return item.ilc;
-          } else if ($scope.orderProducts.field === 'manufacture') {
+          }else if ($scope.orderProducts.field === 'manufacture') {
             return item.manufacture;
+          } else if ($scope.orderProducts.field === 'glNumber') {
+            return (item.glNumber) ? item.glNumber.glNumber : item.glNumber;
           } else if ($scope.orderProducts.field === 'category') {
             return item.category.name;
           } else if ($scope.orderProducts.field === 'description') {

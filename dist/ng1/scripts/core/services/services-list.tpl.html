@@ -1,12 +1,12 @@
 <ul class="qt-list" ng-class="{'qt-services-list': companyService, 'qt-default-services': !companyService}">
 
-  <li class="list-heading" fixed-block-top offset-top="78" ng-show="services.length > 0" style="cursor: pointer !important;">
-    <div class="col-1" ng-click="setOrderForServices('name')">
+  <li class="list-heading"  style="cursor: pointer !important; display: flex;" fixed-block-top offset-top="78" ng-show="services.length > 0" >
+    <div style="width: 45%" ng-click="setOrderForServices('name')">
       <span class="sort-span">Service Name<i class="icn-sm sort-icon icn-sort"
                                              ng-class="{'rotate': orderServices.reverse, 'active': orderServices.field === 'name'}"></i></span>
     </div>
 
-    <div class="col-2" ng-click="setOrderForServices('rate')">
+    <div style="width: 10%" ng-click="setOrderForServices('rate')">
       <span class="sort-span">Per Hour<i class="icn-sm sort-icon icn-sort"
                                          ng-class="{'rotate': orderServices.reverse, 'active': orderServices.field === 'rate'}"></i></span>
     </div>
@@ -14,36 +14,39 @@
     <!--<div class="col-2" ng-click="setOrderForServices('discountAmount')">-->
       <!--<span class="sort-span">Discount<i class="icn-sm sort-icon icn-sort"-->
                                          <!--ng-class="{'rotate': orderServices.reverse, 'active': orderServices.field === 'discountAmount'}"></i></span>-->
-
     <!--</div>-->
 
-    <div class="col-3">
+    <div style="width: 10%">
       <span class="sort-span">taxes</span>
     </div>
 
-    <div class="col-5 is-billable" ng-click="setOrderForServices('billable')">
+    <div style="width: 7%" class="is-billable" ng-click="setOrderForServices('billable')">
       <span class="sort-span">Is Billable<i class="icn-sm sort-icon icn-sort"
                                             ng-class="{'rotate': orderServices.reverse, 'active': orderServices.field === 'billable'}"></i></span>
     </div>
 
-    <div class="col-5 is-billable" ng-click="setOrderForServices('canUseInTicket')">
+    <div style="width: 7%" class="is-billable" ng-click="setOrderForServices('canUseInTicket')">
       <span class="sort-span">Is Default<i class="icn-sm sort-icon icn-sort"
                                             ng-class="{'rotate': orderServices.reverse, 'active': orderServices.field === 'canUseInTicket'}"></i></span>
     </div>
+  
+    <div style="width: 5%" class="is-billable " ng-click="setOrderForServices('canUseInTicket')">
+      <span class="sort-span">GL #<i class="icn-sm sort-icon icn-sort"
+                                            ng-class="{'rotate': orderServices.reverse, 'active': orderServices.field === 'canUseInTicket'}"></i></span>
+    </div>
   </li>
-
   <li ng-repeat="service in services | orderBy : orderByForServices : orderServices.reverse"
       ng-controller="quicktech.core.services.serviceCtrl"
       on-finish-render="loadingFinished('default')"
       show-model-element="{{ 'show-' + service.versionedId.id }}">
 
-    <div class="intermediate-parent-elem">
+    <div class="intermediate-parent-elem d-f ai-c">
 
-      <div class="col-1">
+      <div  style="width: 45%" >
         <div>{{ service.name }}</div>
       </div>
 
-      <div class="col-2">
+      <div style="width: 10%">
         {{ service.rate | currency: '$': 2 }}
       </div>
 
@@ -51,11 +54,11 @@
         <!--<b ng-if="service.discountType =='FIXED' ">$</b> {{service.discountAmount | currency: '': 2 }} <b ng-if="service.discountType =='PERCENT' ">%</b>-->
       <!--</div>-->
 
-      <div class="col-3">
+      <div style="width: 10%">
         {{ getSelectedTaxNames(service.taxes) }}
       </div>
 
-      <div class="col-5 is-billable">
+      <div style="width: 7%" class="is-billable">
         <label class="control checkbox pull-left">
           <input type="checkbox" ng-checked="service.billable"
                  custom-disabled="{{ disabledCheckbox || !PermissionsService.isAllowed('MANAGE_SERVICES') }}"
@@ -64,7 +67,7 @@
         </label>
       </div>
 
-      <div class="col-5 is-billable">
+      <div style="width: 7%" class=is-billable">
         <label class="control checkbox pull-left">
           <input type="checkbox" ng-checked="service.canUseInTicket"
                  custom-disabled="{{ disabledCheckbox || !PermissionsService.isAllowed('MANAGE_SERVICES') }}"
@@ -73,8 +76,25 @@
         </label>
       </div>
 
-      <div class="col-5" ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')">
+      <div style="width: 14%" class="is-billable">
+        <div uib-dropdown  class="uib-dropdown__select">
+             <span uib-dropdown-toggle class="uib-dropdown__select-label">  {{(service.glNumber) ? service.glNumber.glNumber : 'Select GL number'}}</span>
+             <span class="x-mark"  ng-if="service.glNumber">
+              <i class="icn-sm icn-remove-old" ng-click="resetGlNumber(service)"  tooltip="clear"
+                 tooltip-placement="top"></i>
+            </span>
+            <i class="show-dropdown-icon icn-sm report-caret-icon"></i>
+      
+             <ul class="dropdown-account-type" uib-dropdown-menu style="width: 100%; z-index: 9999;">
+              <li ng-repeat="item in glNumbersList"
+                  ng-click="setGlNumber(item,service)">
+                <a tabindex="-1" href="javascript:void(0)">{{ item.glNumber }}</a>
+              </li>
+            </ul>
+        </div>
+      </div>
 
+      <div style="width: 5%" ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')">
         <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
            ng-click="deleteService()"
            tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Delete">
@@ -92,8 +112,73 @@
     </div>
 
   </li>
-
 </ul>
+
+
+<div>
+  <div class="contracts-table-header">
+    <div style="width: 45%" >
+      <span class="sort-span">Contracts</span>
+    </div>
+  </div>
+  <ul class="qt-list" style="padding: 0">
+    <li>
+  
+  <div class="intermediate-parent-elem d-f">
+  
+    <div style="width: 79%;">
+      <div>Block Time Contracts</div>
+    </div>
+    <div class="is-billable" style="width: 14%">
+      <div uib-dropdown   class="uib-dropdown__select">
+           <span uib-dropdown-toggle class="uib-dropdown__select-label">{{getContracts('blockTime')}}</span>
+           <span class="x-mark"  ng-if="checkClearContract('blockTime')">
+            <i class="icn-sm icn-remove-old" ng-click="resetContract('blockTime')"  tooltip="clear"
+               tooltip-placement="top"></i>
+          </span>
+          <i class="show-dropdown-icon icn-sm report-caret-icon"></i>
+  
+  
+  
+        <ul class="dropdown-account-type" uib-dropdown-menu style="width: 100%; z-index: 9999;">
+            <li ng-repeat="item in glNumbersList"
+                ng-click="setGlNumberContract(item.id,'blockTime')">
+              <a tabindex="-1" href="javascript:void(0)">{{ item.glNumber }}</a>
+            </li>
+          </ul>
+      </div>
+    
+    </div>
+    </div>
+    </li>
+  
+    <li>
+
+    <div class="intermediate-parent-elem d-f">
+    
+      <div  style="width: 79%;">
+        <div>User / Device Contracts</div>
+      </div>
+      <div is-billable style="width: 14%">
+        <div uib-dropdown  class="uib-dropdown__select">
+             <span uib-dropdown-toggle class="uib-dropdown__select-label">{{getContracts('serviceContract')}}</span>
+             <span class="x-mark"  ng-if="checkClearContract('serviceContract')">
+              <i class="icn-sm icn-remove-old" ng-click="resetContract('serviceContract')"  tooltip="clear"
+                 tooltip-placement="top"></i>
+            </span>
+          <i class="show-dropdown-icon icn-sm report-caret-icon"></i>
+          
+          <ul class="dropdown-account-type" uib-dropdown-menu style="width: 100%; z-index: 9999;">
+              <li ng-repeat="item in glNumbersList"
+              ng-click="setGlNumberContract(item.id,'serviceContract')">
+                <a tabindex="-1" href="javascript:void(0)">{{ item.glNumber }}</a>
+              </li>
+          </ul>
+        </div>
+      </div>
+      </li>
+  </ul>
+</div>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -104,3 +189,48 @@
   ga('send', 'pageview');
 
 </script>
+
+
+<style>
+  .uib-dropdown__select {
+    outline: none;
+    padding: 0 10px 0 10px;
+    width: 100%;
+    height: 36px;
+    border-radius: 4px 3px 3px 4px;
+    border: 1px solid #d3d8e1;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  .uib-dropdown__select .x-mark {
+    margin-left: 10px;
+  }
+  
+  .uib-dropdown__select-label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 91%;
+  }
+  
+  .uib-dropdown__select .show-dropdown-icon {
+    margin-left: 10px;
+    min-width: 13px;
+    background-repeat: no-repeat;
+  }
+  
+  .qt-list .ha-delete, .qt-list .ha-edit {
+    padding: 12px;
+  }
+  .contracts-table-header {
+    padding: 18px 15px;
+    background-color: #f3f7f9;
+    cursor: auto !important;
+    font-size: 14px;
+  }
+  
+  
+
+</style>

@@ -72,7 +72,12 @@
             return $scope.disableCreateCategory = false;
           }
         };
+        $rootScope.$on('hiddenLeftPanel', function (event, toState, toParams, fromState) {
+          $scope.isLeftPanelHidden = true;
+          $scope.isRightPanelHidden = true;
+          console.log("$scope.isLeftPanelHidden",$scope.isLeftPanelHidden);
 
+        });
         $scope.clearCategory = function() {
           $scope.newCategory = '';
         };
@@ -1400,14 +1405,7 @@
           }
         });
 
-        $scope.openCreateCustomerReportModal = function () {
-          $uibModal.open({
-            templateUrl: '/ng1/scripts/core/left-panel/customer-ticket-report/create-report-modal.tpl.html',
-            controller: 'quicktech.core.leftPanel.createReportCtrl',
-            windowClass: 'modal-customer-report',
-            animation: true
-          });
-        };
+       
 
         $scope.userReadable = function (text) {
           if (!text) {
