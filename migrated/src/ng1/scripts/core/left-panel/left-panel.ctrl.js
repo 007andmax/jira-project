@@ -311,8 +311,7 @@
             return;
           }
           if (tabToActivate == 'CompanyProfileProductsPage') {
-
-            window.location.href = '#/ng2/company-products';
+            $scope.goToTab(`#/ng2/company-products`);
             return;
           }
          
@@ -324,6 +323,16 @@
          
          
         };
+
+        $scope.goToTab = function (url) {
+          let body = document.querySelector('.left-panel__category-wrap');
+          var link = document.createElement('a');
+          body.appendChild(link);
+          link.href = url;
+          var e = document.createEvent('MouseEvents');
+          e.initEvent('click', true, true);
+          link.dispatchEvent(e);
+        }
 
         $scope.companyIconClick = function () {
           $scope.isLeftPanelHidden = !$scope.isLeftPanelHidden
