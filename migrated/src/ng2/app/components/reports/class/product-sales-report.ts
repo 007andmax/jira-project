@@ -1,5 +1,6 @@
 import { ProductSalesReportLine } from './product-sales-report-line';
 import { reqSalesByProduct } from 'src/ng2/app/interfaces/reports/req-sales-by-product';
+import * as moment from "moment";
 
 export class ProductSalesReport {
     productId: string;
@@ -67,7 +68,10 @@ export class ProductSalesReport {
         this.startDate = '';
         this.endDate = '';
     }
-
+    public setDatesByCompany(selectedClient) {
+        this.setStartDate(moment(selectedClient.createdAt).format('YYYY/MM/DD'));
+        this.setEndDate(moment(new Date()).format('YYYY/MM/DD'));
+    }
 
 
 }

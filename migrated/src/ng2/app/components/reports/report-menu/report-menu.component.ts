@@ -16,6 +16,8 @@ import { TicketsReport } from '../class/tickets-reports';
 import { TicketReportStateService } from '../reports/ticket-report/services/ticket-report-state.service';
 import { ServiceReports } from '../class/service-reports';
 import { ExportCSV } from '../report-additional-actions/class/export-csv';
+import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
+import { ProductCompanyReport } from '../class/product-company-report';
 
 
 @Component({
@@ -31,6 +33,7 @@ export class ReportMenuComponent implements OnInit {
   taxes: TaxesReport = new TaxesReport();
   accountsReceivable: AccountsReceivable = new AccountsReceivable();
   productSalesReport: ProductSalesReport = new ProductSalesReport();
+  productsCompanyReport: ProductCompanyReport = new ProductCompanyReport();
   customerSalesReport: CustomerSalesReport = new CustomerSalesReport();
   ticketsReport: TicketsReport = new TicketsReport();
   serviceReport: ServiceReports = new ServiceReports();
@@ -50,11 +53,12 @@ export class ReportMenuComponent implements OnInit {
   constructor(private reportsService: ReportsService,
     private reportsStateService: ReportsStateService,
     private productService: ProductService,
+    private companiesStateService:CompaniesStateService,
     private ticketReportStateService: TicketReportStateService) { }
 
   ngOnInit() {
     if (this.report === 'accounts-receivable') this.getReportByAccountsReceivable();
-    if (this.report === 'byProducts') {
+    if (this.report === 'byProducts' || this.report === 'company-roducts-report') {
       this.isDisabledCompany = true;
       this.getItemListProducts();
     }
@@ -123,9 +127,9 @@ export class ReportMenuComponent implements OnInit {
       this.customerSalesReport.setCompanyId(selectClient.item.id);
       this.ticketsReport.setCompanyId(selectClient.item.id);
       this.serviceReport.setCompanyId(selectClient.item.id);
-      if (this.ticketsReport.startDate === '' && this.ticketsReport.endDate === '')  this.ticketsReport.setDatesByCompany(this.selectedClient);
-      if (this.serviceReport.startDate === '' && this.serviceReport.endDate === '')  this.serviceReport.setDatesByCompany(this.selectedClient);
-      
+      if (this.ticketsReport.startDate === '' && this.ticketsReport.endDate === '') this.ticketsReport.setDatesByCompany(this.selectedClient);
+      if (this.serviceReport.startDate === '' && this.serviceReport.endDate === '') this.serviceReport.setDatesByCompany(this.selectedClient);
+
       this.validate.resetCompany();
       //  this.recurringState.setClient(selectClient);
       //  this.onCheckListServices();
@@ -164,12 +168,12 @@ export class ReportMenuComponent implements OnInit {
 
     this.onRequest.emit(true);
     this.reportsService.getReportByTaxes(this.taxes.getForRequest()).subscribe(data => this.setDatareport(data));
-    this.reportsStateService.onChangeExportCSV(new ExportCSV('reports/sales/byTaxes', this.taxes.getForRequest(),'Sales_report_by_customer'));
+    this.reportsStateService.onChangeExportCSV(new ExportCSV('reports/sales/byTaxes', this.taxes.getForRequest(), 'Sales_report_by_customer'));
   }
   getReportByAccountsReceivable() {
     this.onRequest.emit(true);
     this.reportsService.getReportByAccountsReceivable(this.accountsReceivable.getForRequest()).subscribe(data => this.setDatareport(data));
-    this.reportsStateService.onChangeExportCSV(new ExportCSV('reports/sales/byReceivable', this.taxes.getForRequest(),'Sales_report_by_receivable'));
+    this.reportsStateService.onChangeExportCSV(new ExportCSV('reports/sales/byReceivable', this.taxes.getForRequest(), 'Sales_report_by_receivable'));
   }
   getReportByService() {
     if (!this.validate.isValidateService(this.selectedClient)) return;
@@ -189,15 +193,28 @@ export class ReportMenuComponent implements OnInit {
 
     this.onRequest.emit(true);
     this.reportsService.getReportByCustomers(this.customerSalesReport.getForRequest()).subscribe(data => this.setDatareport(data));
-    this.reportsStateService.onChangeExportCSV(new ExportCSV('reports/sales/byCustomers', this.productSalesReport.getForRequest(),'Sales_report_by_customer'));
+    this.reportsStateService.onChangeExportCSV(new ExportCSV('reports/sales/byCustomers', this.productSalesReport.getForRequest(), 'Sales_report_by_customer'));
   }
+  getReportCompanyProducts() {
+    // if (!this.validate.isValidateProduct(this.productSalesReport.startDate, this.productSalesReport.endDate, this.productSalesReport.companyId, this.productSalesReport.type)) return;
+    
+    this.productsCompanyReport.setCompanyId(localStorage.getItem('company_id') || null);
+    
+    this.selectedClient = this.companiesStateService.getCompanies().find(item => item.id === this.productsCompanyReport.companyId);
+    if (this.productsCompanyReport.startDate === '' && this.productsCompanyReport.endDate === '') this.productsCompanyReport.setDatesByCompany(this.selectedClient);
+    this.onSelectedClient.emit(this.selectedClient);
+    this.productsCompanyReport.setType('Detailed');
+    this.onRequest.emit(true);
+    this.reportsService.getReportByProduct(this.productsCompanyReport.getForRequest()).subscribe(data => this.setDatareport(data));
+    this.reportsStateService.onChangeExportCSV(new ExportCSV('reports/sales/byProducts', this.productsCompanyReport.getForRequest(), 'Sales_report_by_products'));
 
+  }
   getReportByProducts() {
     if (!this.validate.isValidateProduct(this.productSalesReport.startDate, this.productSalesReport.endDate, this.productSalesReport.companyId, this.productSalesReport.type)) return;
 
     this.onRequest.emit(true);
     this.reportsService.getReportByProduct(this.productSalesReport.getForRequest()).subscribe(data => this.setDatareport(data));
-    this.reportsStateService.onChangeExportCSV(new ExportCSV('reports/sales/byProducts', this.productSalesReport.getForRequest(),'Sales_report_by_products'));
+    this.reportsStateService.onChangeExportCSV(new ExportCSV('reports/sales/byProducts', this.productSalesReport.getForRequest(), 'Sales_report_by_products'));
 
   }
   getReportByGlNumber() {
@@ -248,6 +265,10 @@ export class ReportMenuComponent implements OnInit {
       this.glNumber.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.glNumber.setEndDate(moment(value.end).format('YYYY/MM/DD'));
 
+      
+
+      this.productsCompanyReport.setStartDate(moment(value.start).format('YYYY/MM/DD'));
+      this.productsCompanyReport.setEndDate(moment(value.end).format('YYYY/MM/DD'));
 
       this.productSalesReport.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.productSalesReport.setEndDate(moment(value.end).format('YYYY/MM/DD'));
@@ -268,6 +289,8 @@ export class ReportMenuComponent implements OnInit {
     } else {
       this.glNumber.resetDates();
       this.productSalesReport.resetDates();
+      this.productsCompanyReport.resetDates();
+      
       if (this.selectedClient) {
         this.ticketsReport.setDatesByCompany(this.selectedClient);
         this.serviceReport.setDatesByCompany(this.selectedClient);
@@ -295,6 +318,7 @@ export class ReportMenuComponent implements OnInit {
   public selectProduct(item) {
     console.log("item", item);
     this.productSalesReport.setProductId((item) ? item.versionedId.id : null);
+    this.productsCompanyReport.setProductId((item) ? item.versionedId.id : null);
 
   }
 

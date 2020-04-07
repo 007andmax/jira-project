@@ -124,6 +124,7 @@ import { TicketReportComponent } from './components/reports/reports/ticket-repor
 import { TechUsersListReportComponent } from './components/reports/report-menu/tech-users-list-report/tech-users-list-report.component';
 import { ReportTimePipe } from './pipe/report-time.pipe';
 import { ServiceReportComponent } from './components/reports/reports/service-report/service-report.component';
+import { CompanyProductsComponent } from './components/companies/company-products/company-products.component';
 /**
  * declare angular
  */
@@ -178,6 +179,9 @@ angular.module('quicktech')
   .directive(
     'itemReportComponent',
     downgradeComponent({ component: ItemReportComponent }))
+  .directive(
+    'companyProducts',
+    downgradeComponent({ component: CompanyProductsComponent }))
   .factory('ngZone', downgradeInjectable(NgZone));
 
 /**
@@ -281,7 +285,8 @@ angular.module('quicktech')
     TechUsersListReportComponent,
     ReportTimePipe,
     ServiceReportComponent,
-     
+    CompanyProductsComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -341,7 +346,13 @@ angular.module('quicktech')
       {
         path: 'ng2/companies',
         component: CompaniesComponent,
-      }, {
+      },
+      {
+        path: 'ng2/company-products',
+        component: CompanyProductsComponent,
+        pathMatch: 'full'
+      },
+       {
         path: 'ng2/users',
         component: UsersComponent,
         pathMatch: 'full'
@@ -362,7 +373,7 @@ angular.module('quicktech')
     ImageCropperModule,
     NgxEditorModule,
     FontAwesomeModule,
-    NvD3Module 
+    NvD3Module
 
   ],
   entryComponents: [
@@ -382,7 +393,8 @@ angular.module('quicktech')
     ReportsComponent,
     ItemReportComponent,
     OverviewReportComponent,
-    ReportSendEmailComponent
+    ReportSendEmailComponent,
+    CompanyProductsComponent
     // RecurringTicketsComponent
   ],
   providers: [

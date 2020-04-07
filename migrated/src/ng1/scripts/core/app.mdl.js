@@ -194,6 +194,10 @@
           url: '/ng2/companies',
           template: '<companies-component></companies-component>'
         }))
+        .state('company-products', waitForServices({
+          url: '/ng2/company-products',
+          template: '<company-products></company-products>'
+        }))
         .state('new-users', waitForServices({
           url: '/ng2/users',
           template: '<users-component></users-component>'
