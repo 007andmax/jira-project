@@ -40,6 +40,7 @@ export class ReportSendEmailComponent implements OnInit {
   filesInfo: FilesInfo = new FilesInfo();
   usersSelected: Array<User> = [];
   companiesSelected: Array<Company> = [];
+  @Input() report:string = "";
   @Input() fileName:string = "";
   @Input() template: string = "PDF_TEMPLATE";
   @Input() orientation;
@@ -127,7 +128,7 @@ export class ReportSendEmailComponent implements OnInit {
   }
   onSend() {
 
-    this.draftEmail.setContent(this.reportsStateService.parseReportContent());
+    this.draftEmail.setContent(this.reportsStateService.parseReportContent(this.report));
     this.draftEmail.setNote(this.messageContent);
     this.draftEmail.setOrientation(this.orientation);
     this.draftEmail.setFileName(this.fileName);

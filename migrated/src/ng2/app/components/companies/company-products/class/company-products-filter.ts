@@ -15,7 +15,10 @@ export class CompanyproductsFilter {
     public clearFilter() {
         this.filterTop.forEach(item => item.filter = '');
     }
-
+    public onFilterList(lines) {
+        lines.sort((a, b) => (b.date.toLowerCase() > a.date.toLowerCase()) ?
+        1 : ((a.date.toLowerCase() > b.date.toLowerCase()) ? -1 : 0));
+    }
     public onFilter(field, lines) {
        console.log("field",field);
         let index = this.filterTop.findIndex(item => item.field === field);

@@ -1,8 +1,9 @@
 <div class="product-list-report product-list list-of-product">
+  <p class="report-title">List of products sold</p>
 <div>
-  <app-report-menu [report]="'company-roducts-report'" (onSelectedClient)="onSelectedClient($event)" (onRequest)="onRequest($event)" (getReport)="getReport($event)"></app-report-menu>
+  <app-report-menu [report]="'company-roducts-report'"  (onSelectedClient)="onSelectedClient($event)" (onRequest)="onRequest($event)" (getReport)="getReport($event)"></app-report-menu>
  </div>
- <app-report-additional-actions [report]="'company-roducts-report'"  [template]="'CUSTOMER_REPORT'"   [selectedClient]="selectedClient"></app-report-additional-actions>
+ <app-report-additional-actions [orientation]="'LANDSCAPE'" [report]="'company-roducts-report'" [fileName]="'products_report'"   [selectedClient]="selectedClient" (changePurchaseCost)="togglePurchaseCost($event)"></app-report-additional-actions>
  <div class="loading" *ngIf="loadingInProgress"></div>
  <div class="product-list___ticket"  id="product-list-ticket-data">
   <div  class="product-list-ticket product-list-ticket-pdf list-of-product-pdf company-report"   *ngIf="!loadingInProgress">
@@ -10,8 +11,8 @@
     <div class="report-header">
       <h1>List of products sold</h1>
       <div class="company-info">
-        <h3>Absolute Dentistry</h3>
-        <p><span>1 Dec 2018</span> - <span>31 Dec 2018</span></p>
+        <h3>{{productsCompanyReport.clientCompanyName}}</h3>
+        <p><span>{{productsCompanyReport.startDate}}</span> - <span>{{productsCompanyReport.endDate}}</span></p>
       </div>
     </div>
     <div *ngIf="productsCompanyReport.lines.length > 0"  >
@@ -24,7 +25,7 @@
       </div>
 
       <div *ngIf="productsCompanyReport.lines">
-        <ul>
+        <ul >
           <li class="top-product-list-ticket clearfix"  >
             <div style="width: 2%;" class="col-md-1"><strong>
               <label class="control checkbox hide-in-report">
@@ -53,6 +54,7 @@
             <!--<div class="col-md-1" >Sale price</div>-->
             <!--<div class="col-md-1"><strong>Discount(amount)</strong></div>-->
           </li>
+          <div id="list-products">
           <ng-template ngFor let-product
           [ngForOf]="productsCompanyReport.lines"
           [ngForTrackBy]="trackByIndex">
@@ -78,7 +80,7 @@
             <div class="col-md-2" [ngStyle]="{'color': product.invoiceNumber ? 'green' : 'none'}">
               {{product.invoiceNumber }}
             </div>
-            <div class="col-md-1 purchase-cost" ng-show="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
+            <div class="col-md-1 purchase-cost" *ngIf="getPermissions('VIEW_PRODUCT_COST')">
               {{'$' + parseTotal(product.purchaseCost) }}
             </div>
             <div class="col-md-1" [ngStyle]="{'color': product.salePrice < product.purchaseCost ? 'red' : 'none'}">
@@ -86,14 +88,15 @@
             </div>
           </li>
           </ng-template>
+        </div>
         </ul>
       </div>
-      <div class="product-report-total-sales clearfix" ng-if="productsCompanyReport.lines">
+      <div class="product-report-total-sales clearfix" *ngIf="productsCompanyReport.lines">
         <div class="col-md-10" style="width: 78%;"></div>
         <div class="col-md-1 purchase-cost"><br>
-          <strong><span>{{purchaseCostSum | currency: '$': 2}}</span></strong></div>
+          <strong><span> {{'$' + parseTotal(purchaseCostSum) }}</span></strong></div>
         <div class="col-md-1"><br> <strong><span
-          ng-show="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">{{salesPriceSum | currency: '$': 2}}</span></strong>
+          *ngIf="getPermissions('VIEW_PRODUCT_COST')">{{'$' + parseTotal(salesPriceSum) }}</span></strong>
         </div>
       </div>
     </div>

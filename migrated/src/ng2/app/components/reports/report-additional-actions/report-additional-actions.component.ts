@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, ElementRef, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { ACION_OPEN_PDF, ACION_DOWNLOAD_PDF } from 'src/ng2/app/const/reports';
 import { ReportsService } from 'src/ng2/app/services/reports/reports.service';
 import { AppService } from 'src/ng2/app/states/app/app.service';
@@ -28,6 +28,7 @@ export class ReportAdditionalActionsComponent implements OnInit, OnDestroy {
   @Input() id: string = null;
   @Input() template: string = "PDF_TEMPLATE";
   @Input() selectedClient;
+  @Output() changePurchaseCost = new EventEmitter<any>();
   constructor(private reportsService: ReportsService,
     private reportsStateService: ReportsStateService,
     private appService: AppService,
@@ -44,19 +45,23 @@ export class ReportAdditionalActionsComponent implements OnInit, OnDestroy {
     })
     this.sub.add(exportCSV);
   }
-
+  togglePurchaseCost(event) {
+    console.log("event", event.target.checked);
+    this.changePurchaseCost.emit(event.target.checked);
+  }
   sendEmail() {
     console.log("this.selectClient", this.selectedClient);
     const modalRef = this.modalService.open(ReportSendEmailComponent, null);
     modalRef.componentInstance.selectedClient = this.selectedClient;
     modalRef.componentInstance.orientation = this.orientation;
+    modalRef.componentInstance.report = this.report;
     modalRef.componentInstance.template = this.template;
     modalRef.componentInstance.fileName = this.fileName;
   }
   getPdfIdFromRest(action) {
     var dto = {
       fileName: this.fileName,
-      content: this.reportsStateService.parseReportContent(),
+      content: this.reportsStateService.parseReportContent(this.report),
       id: this.id,
       orientation: this.orientation
     };
