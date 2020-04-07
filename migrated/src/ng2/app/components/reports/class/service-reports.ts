@@ -27,12 +27,14 @@ export class ServiceReports {
 
     }
     public setDataFromObject(data) {
+        this.companyId = data.companyId;
         this.startDate = data.startDate;
         this.endDate = data.endDate;
         this.services = data.services;
     }
     public getDataObject() {
         return {
+            companyId: this.companyId,
             startDate: this.startDate,
             endDate: this.endDate,
             services: this.services
