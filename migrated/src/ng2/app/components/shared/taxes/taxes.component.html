@@ -1,0 +1,77 @@
+<div class="col-md-6 light-dropdown new-taxes-area" ngbDropdown #taxesDropDown="ngbDropdown">
+  <p class="label-name">Taxes</p>
+  <div class="add-tax add-tax-inventory" ><span (click)="onInitAddTax()">Add Tax</span>
+   
+    <div class="d-inline-block" ngbDropdown #addTax="ngbDropdown">
+      <a style="display: none;" class="nav-link" id="dropdownManual" ngbDropdownToggle>Contribute</a>
+      <div ngbDropdownMenu aria-labelledby="dropdownManual" class="dropdown-menu new-tax"
+           role="menu">
+        <div class="add-tax-dropdown">
+          <div class="tax-title">Add Tax</div>
+          
+          <form *ngIf="taxForm" [formGroup]="taxForm" novalidate>
+
+            <div class="add-tax-label">Tax Name</div>
+            <input placeholder="Enter Tax Name" type="text" class="form-validation" formControlName="name" minlength="2"
+                   maxlength="30" required>
+            <div style="position: relative"
+              *ngIf="taxForm.controls['name'].invalid && (taxForm.controls['name'].dirty || taxForm.controls['name'].touched)">
+              <label class="control-label" *ngIf="taxForm.controls['name'].errors.required">Name is required.</label>
+              <label class="control-label" *ngIf="taxForm.controls['name'].errors.minlength">Name is too short.</label>
+              <label class="control-label" *ngIf="taxForm.controls['name'].errors.maxlength">Name is too long.</label>
+            </div>
+  
+            <div class="add-tax-label">Rate (%)</div>
+            <input placeholder="Rate (%)" type="number" class="form-validation" formControlName="rate" required min="0.01"
+                   max="99">
+            <div style="position: relative"
+              *ngIf="taxForm.controls['rate'].invalid && (taxForm.controls['rate'].dirty || taxForm.controls['rate'].touched)">
+              <label style="white-space: nowrap;" class="control-label" *ngIf="taxForm.controls['rate'].errors.required">
+                Field is required.
+              </label>
+              <label style="white-space: nowrap;" class="control-label" *ngIf="taxForm.controls['rate'].errors.min">
+                To small.
+              </label>
+              <label style="white-space: nowrap;" class="control-label" *ngIf="taxForm.controls['rate'].errors.max">
+                To large.
+              </label>
+            </div>
+            
+            <label class="control checkbox" style="margin-bottom: 20px;">
+              <input type="checkbox" formControlName="isDefault">
+              <span class="control-indicator">
+            </span>Set as Default
+            </label>
+            
+            <div class="d-f">
+              <button ngbDropdownItem class="btn  btn-new btn-primary submit-tax-item" type="submit" [disabled]="taxForm.pristine || taxForm.invalid"
+                      (click)="onAddTax()">Save
+              </button>
+              <button ngbDropdownItem class="btn disabled  btn-new cancel-tax-item">
+                Cancel
+              </button>
+            </div>
+          </form>
+      
+        </div>
+      </div>
+    </div>
+  </div>
+  <i class="icn-sm report-caret-icon"></i>
+  <input type="text" [value]="getSelectedTaxes()"
+         autocomplete="new-password"
+         readonly
+         placeholder="Select Taxes"
+         id="dropdownTypeTaxes"
+         ngbDropdownToggle />
+  <div ngbDropdownMenu
+       aria-labelledby="dropdownTypeTaxes">
+    <ng-template ngFor let-tax [ngForOf]="taxes" [ngForTrackBy]="trackById">
+      <div class="dropdown-item" ngbDropdownItem  (click)="selected(tax)">
+        <button  [textContent]="tax.name + ' ' + tax.rate + '%'"></button>
+        <i class="icn-sm icn-label-save" *ngIf="checkTaxIsSelected(tax)" style="right: 13px"></i>
+      </div>
+    </ng-template>
+  </div>
+  
+</div>

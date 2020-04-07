@@ -118,6 +118,14 @@ import { TaxesReportComponent } from './components/reports/reports/taxes-report/
 import { ProductSalesReportComponent } from './components/reports/reports/product-sales-report/product-sales-report.component';
 import { CustomerSalesReportComponent } from './components/reports/reports/customer-sales-report/customer-sales-report.component';
 import { NvD3Module } from 'ng2-nvd3';
+import { InventoryComponent } from './components/inventory/inventory.component';
+import { InventoryTableComponent } from './components/inventory/inventory-table/inventory-table.component';
+import { InventoryAddAsideComponent } from './components/inventory/inventory-add-aside/inventory-add-aside.component';
+import { TaxesComponent } from './components/shared/taxes/taxes.component';
+import { InventoryEditAsideComponent } from './components/inventory/inventory-edit-aside/inventory-edit-aside.component';
+import { LeftPanelInventoryComponent } from './components/left-panel/left-panel-inventory/left-panel-inventory.component';
+import { AddCategoryProductComponent } from './components/left-panel/left-panel-inventory/add-category-product/add-category-product.component';
+ 
 
 import 'd3';
 import 'nvd3';
@@ -182,6 +190,9 @@ angular.module('quicktech')
   .directive(
     'itemReportComponent',
     downgradeComponent({ component: ItemReportComponent }))
+  .directive(
+    'inventoryComponent',
+    downgradeComponent({ component: InventoryComponent }))
   .factory('ngZone', downgradeInjectable(NgZone));
 
 /**
@@ -286,7 +297,13 @@ angular.module('quicktech')
     TechUsersListReportComponent,
     ReportTimePipe,
     ServiceReportComponent,
-     
+    InventoryComponent,
+    InventoryTableComponent,
+    InventoryAddAsideComponent,
+    TaxesComponent,
+    InventoryEditAsideComponent,
+    LeftPanelInventoryComponent,
+    AddCategoryProductComponent
   ],
   imports: [
     BrowserModule,
@@ -362,6 +379,11 @@ angular.module('quicktech')
         pathMatch: 'full'
       },
       {
+        path: 'ng2/inventory/products',
+        component: InventoryComponent,
+        pathMatch: 'full'
+      },
+      {
         path: 'ng2/report/:id', component: ItemReportComponent
       }],
       {
@@ -372,8 +394,7 @@ angular.module('quicktech')
     ImageCropperModule,
     NgxEditorModule,
     FontAwesomeModule,
-    NvD3Module 
-
+    NvD3Module
   ],
   entryComponents: [
     LeftPanelComponent,
@@ -393,7 +414,8 @@ angular.module('quicktech')
     ReportsComponent,
     ItemReportComponent,
     OverviewReportComponent,
-    ReportSendEmailComponent
+    ReportSendEmailComponent,
+    InventoryComponent
     // RecurringTicketsComponent
   ],
   providers: [

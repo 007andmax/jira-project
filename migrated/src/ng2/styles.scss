@@ -491,9 +491,10 @@ app-left-panel-tags-companies {
   }
   app-tags,
   app-company-tags,
+  app-taxes,
   app-draft-email-recipients,
   draft-email-user-recipients {
-    > .col-md-12 {
+    > .col-md-12,.col-md-6 {
       margin-top: 40px;
       .mat-form-field {
         width: 100%;
@@ -544,6 +545,11 @@ app-left-panel-tags-companies {
           margin: 0;
         }
       }
+    }
+  }
+  app-taxes .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+    &:before {
+      content: 'Taxes' !important;
     }
   }
   app-draft-email-recipients {
@@ -2251,6 +2257,17 @@ ngb-datepicker {
 .select-users-list {
   width: 400px !important;
 }
+
+
+.inventory .nano-content {
+  overflow: visible !important;
+}
+
+
+
+
+
+
 
 
 @import './assets/styles/mobile.scss';

@@ -237,7 +237,7 @@
              tooltip-append-to-body="true"></div>
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'inventory'}"
-           ui-sref="products({ tabName: 'category' })" ng-click="toggleLeftPanel('inventory', true)">
+           ui-sref="inventory" ng-click="toggleLeftPanel('inventory', true)">
         <div class="left-panel-icn left-panel-icons-inventory"
              uib-tooltip="inventory"
              tooltip-placement="right"
@@ -1244,7 +1244,8 @@
         </div>
         <span class="left-panel-full__head--header">Inventory</span>
       </div>
-      <div class="center-category collapsed-nav nano-content">
+      <div class="center-category collapsed-nav nano-content"></div>
+      <!--<div class="center-category collapsed-nav nano-content">
         <div class="inventory-lp-header">
           <div>Category List</div>
           <div class="add-category-lp"
@@ -1310,7 +1311,7 @@
              ng-if="inventoryCategoryList.length > 10"
              ng-click="changeShowAllCategories()">Show All
         </div>
-      </div>
+      </div>-->
     </div>
     <div class="left-panel-full-wrapper nano password"
          ng-show="openedCategory === 'password-manager' && !isLeftPanelHidden">

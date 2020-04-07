@@ -1709,7 +1709,8 @@ bold {
   justify-content: center;
   color: #ffffff;
   padding: 0 5px;
-  min-width: 22px;
+  min-width: 24px;
+  min-height: 24px;
   margin: 5px 0 5px 5px;
 }
 
