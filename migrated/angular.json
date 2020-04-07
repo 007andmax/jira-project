@@ -352,7 +352,6 @@
               "src/ng1/scripts/core/header/header-tickets-bulk.ctrl.js",
               "src/ng1/scripts/core/header/header.ctrl.js",
               "src/ng1/scripts/core/header/logout-btn.drv.js",
-              "src/ng1/scripts/core/left-panel/customer-ticket-report/create-report-modal.ctrl.js",
               "src/ng1/scripts/core/left-panel/customer-ticket-report/customer-ticket-report.ctrl.js",
               "src/ng1/scripts/core/left-panel/left-panel.ctrl.js",
               "src/ng1/scripts/core/password-manager/modal/open-password-modal.drv.js",

@@ -1414,14 +1414,7 @@
           }
         });
 
-        $scope.openCreateCustomerReportModal = function () {
-          $uibModal.open({
-            templateUrl: '/ng1/scripts/core/left-panel/customer-ticket-report/create-report-modal.tpl.html',
-            controller: 'quicktech.core.leftPanel.createReportCtrl',
-            windowClass: 'modal-customer-report',
-            animation: true
-          });
-        };
+       
 
         $scope.userReadable = function (text) {
           if (!text) {
