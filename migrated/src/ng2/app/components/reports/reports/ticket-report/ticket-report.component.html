@@ -3,21 +3,16 @@
  </div>
  <app-report-additional-actions [report]="'ticket-report'" [fileName]="'customer-report-' + getSelectedClientName()" [template]="'CUSTOMER_REPORT'" [id]="ticketsReport.id" [selectedClient]="selectedClient"></app-report-additional-actions>
  <div class="loading" *ngIf="loadingInProgress"></div>
- <div class="product-list___ticket"  id="product-list-ticket-data">
+ <div class="product-list___ticket report-show-footer-header"  id="product-list-ticket-data">
   <div  class="product-list-ticket"   *ngIf="!loadingInProgress">
     <div class="customer-ticket" *ngIf="onInit" >
       <div class="customer-ticket__report">
-        <div class="report-header">
+        <div  class="report-header">
           <h1>Tickets Report</h1>
           <div class="company-info">
             <h3>{{ ticketsReport.companyName || 'All companies' }}</h3>
             <p><span>{{ticketsReport.startDate}}</span> - <span>{{ ticketsReport.endDate }}</span></p>
           </div>
-        </div>
-        <div class="report-footer">
-          <p>Prepare by : <span>{{ username }}</span></p>
-          <p>{{ currentCompany.name }}</p>
-          <p>Quicktech <span>2020</span> ©. All rights reserved</p>
         </div>
         <div *ngIf="showHeader" class="customer-ticket__report--summary"  >
           <h3>Resolved Tickets</h3>
@@ -28,7 +23,7 @@
             </div>
             <div class="customer-ticket__header--item">
               <ng-template ngFor let-time [ngForOf]="overallServiceTime" let-i="index" [ngForTrackBy]="trackByIndex" >
-                <p *ngIf="ticketsReport.timeSpent"  
+                <p *ngIf="ticketsReport.timeSpent"
                 [ngClass]="'service-color-' + i">
                {{ time.name }} <span>{{ formatServiceTime(time.hours,time.minutes) }}</span>
              </p>
@@ -56,7 +51,7 @@
             <div class="col-md-2" style="width: 10%;">STATUS</div>
           </div>
           <ng-template ngFor let-ticket [ngForOf]="ticketsReport.tickets" let-i="index" [ngForTrackBy]="trackByIndex" >
-            
+          
           <div class="details-content clearfix"  >
             <div class="col-md-8 ellipsis" style="width: 70%;margin-bottom: 20px;">{{ticket.ticketNumber}} - {{ticket.description}}</div>
             <div class="col-md-2" style="width: 20%;margin-bottom: 20px;">{{ parseDateTciket(ticket.ticketCreatedAt) }}</div>
@@ -151,7 +146,6 @@
     </div>
     
    
-  <app-report-footer></app-report-footer>
+  <app-report-footer *ngIf="onInit"></app-report-footer>
    </div>
  </div>
- 
