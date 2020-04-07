@@ -20,46 +20,7 @@
           usersByCompanies: {}
         };
       Utils.customizeObj(storage);
-
-
       CompaniesService._addInitListener(init);
-
-
-      function reinitUsers(callback) {
-      
-        $http.get('/users').then(function (resp) {
-            Utils.customizeArray(resp.data, storage.users);
-            for (var i = 0; i < storage.users.length; i++) {
-              var user = storage.users[i];
-              generateInitials(user);
-              if (!storage.usersByCompanies[user.company.id]) {
-                storage.usersByCompanies[user.company.id] = [];
-              }
-              storage.usersByCompanies[user.company.id].push(user);
-              var oneByIdIncludeDeleted = CompaniesService.getOneById(user.company.id);
-              var isDeleted = (oneByIdIncludeDeleted && oneByIdIncludeDeleted.deletedAt) || user.deletedAt;
-              if (user.company.id !== CompaniesService.getCurrentCompany().id && !isDeleted && !user.isDefault) {
-                storage.clientUsers.push(user);
-              } else if (isDeleted) {
-                storage.deleted.push(user);
-              }
-            }
-            initialized = true;
-            for (var i = 0; i < initListeners.length; i++) {
-              initListeners[i]();
-            }
-            initListeners = [];
-
-            if (callback) {
-              callback(resp)
-            }
-          },
-          function (resp) {
-            console.error(resp);
-            throw 'Cannot initialize CompaniesService!';
-          });
-      }
-
       function init() {
 
         if (initializingStarted) {
@@ -67,30 +28,30 @@
         }
 
         initializingStarted = true;
-       
+
         $http.get('/users').then(function (resp) {
-            Utils.customizeArray(resp.data, storage.users);
-            for (var i = 0; i < storage.users.length; i++) {
-              var user = storage.users[i];
-              generateInitials(user);
-              if (!storage.usersByCompanies[user.company.id]) {
-                storage.usersByCompanies[user.company.id] = [];
-              }
-              storage.usersByCompanies[user.company.id].push(user);
-              var oneByIdIncludeDeleted = CompaniesService.getOneById(user.company.id);
-              var isDeleted = (oneByIdIncludeDeleted && oneByIdIncludeDeleted.deletedAt) || user.deletedAt;
-              if (user.company.id !== CompaniesService.getCurrentCompany().id && !isDeleted && !user.isDefault) {
-                storage.clientUsers.push(user);
-              } else if (isDeleted) {
-                storage.deleted.push(user);
-              }
+          Utils.customizeArray(resp.data, storage.users);
+          for (var i = 0; i < storage.users.length; i++) {
+            var user = storage.users[i];
+            generateInitials(user);
+            if (!storage.usersByCompanies[user.company.id]) {
+              storage.usersByCompanies[user.company.id] = [];
             }
-            initialized = true;
-            for (var i = 0; i < initListeners.length; i++) {
-              initListeners[i]();
+            storage.usersByCompanies[user.company.id].push(user);
+            var oneByIdIncludeDeleted = CompaniesService.getOneById(user.company.id);
+            var isDeleted = (oneByIdIncludeDeleted && oneByIdIncludeDeleted.deletedAt) || user.deletedAt;
+            if (user.company.id !== CompaniesService.getCurrentCompany().id && !isDeleted && !user.isDefault) {
+              storage.clientUsers.push(user);
+            } else if (isDeleted) {
+              storage.deleted.push(user);
             }
-            initListeners = [];
-          },
+          }
+          initialized = true;
+          for (var i = 0; i < initListeners.length; i++) {
+            initListeners[i]();
+          }
+          initListeners = [];
+        },
           function (resp) {
             console.error(resp);
             throw 'Cannot initialize CompaniesService!';
@@ -138,9 +99,9 @@
             }
             Utils.deleteById(storage.users, newChange.data.id);
             Utils.deleteById(storage.clientUsers, newChange.data.id);
-            // if (storage.usersByCompanies[newChange.data.company.id]) {
-            //   Utils.deleteById(storage.usersByCompanies[newChange.data.company.id], newChange.data.id);
-            // }
+            // if (storage.usersByCompanies[newChange.data.company.id]) {			
+            //   Utils.deleteById(storage.usersByCompanies[newChange.data.company.id], newChange.data.id);			
+            // }			
           } else if (newChange.action === 'USER_ONLINE') {
             var user = Utils.findById(storage.users, newChange.data.id);
             if (user) {
@@ -160,7 +121,7 @@
                 i--;
               }
             }
-            // delete storage.usersByCompanies[newChange.data.id];
+            // delete storage.usersByCompanies[newChange.data.id];			
           } else if (newChange.action === 'USERS_DEARCHIVED') {
             newChange.data.forEach(addOrUpdateClientUser);
           }
@@ -200,6 +161,10 @@
           }
         });
       }
+
+
+
+
 
       function getCookie(name) {
         var matches = document.cookie.match(new RegExp(
@@ -254,7 +219,7 @@
 
       function generateInitials(user) {
         var initials = [user.firstName, user.lastName].map(function (s) {
-          if (s == null) return  '';
+          if (s == null) return '';
           return s.charAt(0).toUpperCase();
         }).join('');
         Utils.defineReadOnlyProperty(user, 'initials', initials);
@@ -280,11 +245,11 @@
       }
 
       function getAllByCompanyIdNonArchived(companyId) {
-        var companyUsers =  storage.usersByCompanies[companyId] || [];
+        var companyUsers = storage.usersByCompanies[companyId] || [];
         var nonArchivedUsers = [];
-        if(companyUsers.length > 0) {
-          for(var i=0; i<companyUsers.length; i++) {
-            if(!companyUsers[i].deletedAt) {
+        if (companyUsers.length > 0) {
+          for (var i = 0; i < companyUsers.length; i++) {
+            if (!companyUsers[i].deletedAt) {
               nonArchivedUsers.push(companyUsers[i]);
             }
           }
@@ -303,38 +268,14 @@
       function resendWelcomeEmail(email, callback) {
         $http.post('/resend/verifyUserEmail', {
           "email": email
-        }).then(function(resp) {
+        }).then(function (resp) {
           if (callback) {
             callback(resp);
           }
         })
       }
 
-      function setGridPresentation(data) {
-        var translate = {
-          'list': 'LIST',
-          'grid': 'TILE'
-        }
-        var currentUser = getCurrentUser();
-        var users = translate[data.users];
-        var companies = translate[data.companies];
 
-        currentUser.usersGridPresentation = users ? users : currentUser.usersGridPresentation;
-        currentUser.companiesGridPresentation = companies ? companies : currentUser.companiesGridPresentation;
-
-
-        var future = $http({
-          url: '/settings/userProfile/gridPresentation',
-          method: 'PUT',
-          data: {
-            "usersGridPresentation": translate[data.users] || null,
-            "companiesGridPresentation": translate[data.companies] || null
-          }
-        })
-
-
-        Utils.handleCallback(future)
-      }
 
       function getTechUsersEmailNotification(listOfTechUsers, callback) {
         var future = $http({
@@ -348,7 +289,7 @@
       function saveUsersEmailNotification(userId, data, callback) {
         var future = $http({
           method: 'PUT',
-          url: '/settings/userProfile/saveUsersEmailNotifications?userId='+userId,
+          url: '/settings/userProfile/saveUsersEmailNotifications?userId=' + userId,
           data: data
         });
         Utils.handleCallback(future, callback)
@@ -466,7 +407,7 @@
         }
 
         if (addSubscription && !user.subscription) {
-          user.subscription = {id: null, invoice: null, ticket: null, ticketManager: null}
+          user.subscription = { id: null, invoice: null, ticket: null, ticketManager: null }
         }
 
         var future = $http({
@@ -478,20 +419,7 @@
         Utils.handleCallback(future, callback);
       }
 
-      function saveUserSettingsDto(userDto, callback) {
 
-        if (!userDto) {
-          throw 'userDto is required!';
-        }
-
-        var future = $http({
-          url: '/settings/userProfile/',
-          method: 'PUT',
-          data: userDto
-        });
-
-        Utils.handleCallback(future, callback);
-      }
 
       function saveForUserProfile(data, toUpdate, callback) {
 
@@ -602,14 +530,6 @@
         Utils.handleCallback(future, callback);
       }
 
-      function dearchiveUser(ids, callback) {
-        if (!Array.isArray(ids)) {
-          ids = [ids];
-        }
-
-        var future = $http.post('/users/dearchive', { ids: ids });
-        Utils.handleCallback(future, callback);
-      }
 
       function deleteAvatar(userId, callback) {
         var future = $http({
@@ -723,8 +643,8 @@
         });
       }
 
-      function changeTimePickerType(type,interval) {
-        $http.put('/settings/companyProfile/serviceExpenseDurationPresentation', { presentation: type ,interval:interval }).then(function (resp) {
+      function changeTimePickerType(type, interval) {
+        $http.put('/settings/companyProfile/serviceExpenseDurationPresentation', { presentation: type, interval: interval }).then(function (resp) {
           if (status === 200) {
             $rootScope.currentUser.serviceExpenseDurationPresentation = type;
           }
@@ -736,7 +656,6 @@
         _addInitListener: addInitListener,
         getCurrentUser: getCurrentUser,
         getAllUsers: getAllUsers,
-        reinitUsers: reinitUsers,
         getClientUsers: getClientUsers,
         getTechUsers: getTechUsers,
         getTechUsersEmailNotification: getTechUsersEmailNotification,
@@ -754,11 +673,8 @@
         changeUserRole: changeUserRole,
         changeUsersRoles: changeUsersRoles,
         save: save,
-        saveUserSettingsDto: saveUserSettingsDto,
-        setGridPresentation: setGridPresentation,
         saveForUserProfile: saveForUserProfile,
         archiveUser: archiveUser,
-        dearchiveUser: dearchiveUser,
         isEmailUnique: isEmailUnique,
         deleteAvatar: deleteAvatar,
         saveAvatar: saveAvatar,

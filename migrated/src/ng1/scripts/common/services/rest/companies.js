@@ -7,7 +7,7 @@
   var services = angular.module('main.services');
 
   services.factory('CompaniesService', ['$http', '$rootScope', 'RealTimeService', 'Utils', function ($http, $rootScope, RealTimeService, Utils) {
-
+    
     var serviceScope = $rootScope.$new(),
       initialized = false,
       initListeners = [],
@@ -28,48 +28,6 @@
 
 
     Utils.customizeObj(storage);
-
-    function reinitCompanies(callback) {
-      $http.get('/company/clients').then(function (resp) {
-        for (var i = 0; i < resp.data.length; i++) {
-          var custCompany = Utils.customizeObj(resp.data[i]);
-          if (custCompany.deletedAt) {
-            storage.deletedCompanies.push(custCompany);
-          } else {
-            if (!custCompany.isDefault && custCompany.clientType) {
-              if (custCompany.clientType === 'CLIENT') {
-                storage.clientCompaniesWoVendorsAndLeads.push(custCompany);
-              }
-              if (custCompany.clientType.toLowerCase() !== 'vendor') {
-                storage.clientCompanies.push(custCompany);
-              } else {
-                storage.clientCompanies.push(custCompany);
-                storage.vendors.push(custCompany);
-              }
-            }
-
-            storage.companies.push(custCompany);
-          }
-        }
-        checkInit();
-        $rootScope.companyListLoaded = true;
-
-        if (callback) {
-          callback(resp);
-        }
-      },
-        function (resp) {
-          console.error(resp);
-          throw 'Cannot initialize CompaniesService!';
-        });
-    }
-
-    function updateCompanyTags(newCompanyTags, companyId) {
-      const companyForChangeIndex = storage.companies.findIndex(function (item) {
-        return item.id === companyId;
-      });
-      return storage.companies[companyForChangeIndex].tags = newCompanyTags;
-    }
 
     $http.get('/company/clients').then(function (resp) {
       for (var i = 0; i < resp.data.length; i++) {
@@ -99,6 +57,15 @@
         console.error(resp);
         throw 'Cannot initialize CompaniesService!';
       });
+
+    function updateCompanyTags(newCompanyTags, companyId) {
+      const companyForChangeIndex = storage.companies.findIndex(function (item) {
+        return item.id === companyId;
+      });
+      return storage.companies[companyForChangeIndex].tags = newCompanyTags;
+    }
+
+    
 
     $http.get('/ps/settings').then(function (resp) {
       Utils.customizeObj(resp.data, companyPaymentInfo);
@@ -426,10 +393,7 @@
       Utils.handleCallback(future, callback);
     }
 
-    function dearchive(companyId, callback) {
-      var future = $http.get('/company/dearchive/' + companyId);
-      Utils.handleCallback(future, callback);
-    }
+   
 
     function getClientCompaniesInfo(scope, callback) {
 
@@ -505,47 +469,7 @@
         })
     }
 
-    function getCompanyInfo(companyId, scope, callback) {
-
-      if (!companyId) {
-        throw 'companyId is required!'
-      }
-
-      if (!scope || !scope.$id) {
-        throw 'Second argument must be Angularjs scope!'
-      }
-
-      var info = Utils.customizeObj({});
-
-      $http.get('/company/' + companyId + '/info').then(function (resp) {
-        Utils.customizeObj(resp.data, info);
-
-        if (callback) {
-          callback(resp.data);
-        }
-
-      }, function (resp) {
-        if (callback) {
-          callback(resp.data);
-        }
-      });
-
-      RealTimeService.subscribe('/clientCompaniesInfo', scope, function (newChange) {
-
-        if (newChange.action == 'CLIENT_COMPANY_INFO') {
-
-          var data = JSON.parse(newChange.data);
-
-          for (var key in data) {
-            if (key === companyId) {
-              Utils.customizeObj(data[companyId], info);
-            }
-          }
-        }
-      });
-
-      return info;
-    }
+    
 
     function getCompanyData(scope, companyId, callback) {
 
@@ -685,14 +609,7 @@
       }
     }
 
-    function deleteExample(callback) {
-      var future = $http({
-        url: '/company/removeExampleCompany',
-        method: 'POST',
-      });
-
-      Utils.handleCallback(future, callback);
-    }
+   
 
     function saveCompanySettingsDto(companyDto, callback) {
 
@@ -803,28 +720,7 @@
       return info;
     }
 
-    function isCompanyInboxUnique(inbox, callback) {
-
-      if (!inbox) {
-        throw 'inbox is required!'
-      }
-
-      var info = Utils.customizeObj({});
-
-      $http.get('/isCompanyInboxUnique?inbox=' + inbox).then(function (resp) {
-        Utils.customizeObj(resp.data, info);
-
-        if (callback) {
-          callback(resp.data);
-        }
-
-      }, function (resp) {
-        if (callback) {
-          callback(resp.data);
-        }
-      });
-      return info;
-    }
+    
 
     function saveLogo(croppedImage, companyId, callback) {
 
@@ -1029,9 +925,7 @@
       Utils.handleCallback(future, callback);
     }
 
-    function changeCompanyStatusToActive() {
-      return $http.get('/company/changeStatusFromSignUpToActive');
-    }
+   
 
     function isVendorHasProducts(vendorId, callback) {
       var future = $http.get('/company/' + vendorId + '/isProductExist');
@@ -1059,7 +953,6 @@
       _search: search,
       _isInitialized: isInitialized,
       getCurrentCompany: getCurrentCompany,
-      reinitCompanies: reinitCompanies,
       getVendors: getVendors,
       getClientCompanies: getClientCompanies,
       getClientCompaniesWoClientsAndLeads: getClientCompaniesWoClientsAndLeads,
@@ -1071,11 +964,8 @@
       searchByAllCompanies: searchByAllCompanies,
       searchByClientCompanies: searchByClientCompanies,
       getClientCompaniesInfo: getClientCompaniesInfo,
-      getCompanyInfo: getCompanyInfo,
       archive: archive,
-      dearchive: dearchive,
       save: save,
-      deleteExample: deleteExample,
       saveForCompanyProfile: saveForCompanyProfile,
       saveCompanySettingsDto: saveCompanySettingsDto,
       getCompanyForSettingPage: getCompanyForSettingPage,
@@ -1083,7 +973,6 @@
       getCompanyProfileData: getCompanyProfileData,
       isNameUnique: isNameUnique,
       isDomainUnique: isDomainUnique,
-      isCompanyInboxUnique: isCompanyInboxUnique,
       saveCover: saveCover,
       saveLogo: saveLogo,
       deleteCover: deleteCover,
@@ -1101,7 +990,6 @@
       getEmailAlias: getEmailAlias,
       saveEmailAlias: saveEmailAlias,
       getIndustries: getIndustries,
-      changeCompanyStatusToActive: changeCompanyStatusToActive,
       isVendorHasProducts: isVendorHasProducts,
       saveInboxEnabled: saveInboxEnabled,
       getCompanyPaymentInfo: getCompanyPaymentInfo,

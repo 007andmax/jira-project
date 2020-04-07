@@ -340,11 +340,9 @@
         };
 
         $scope.getTabTemplateUrl = function (tab) {
-          if (tab === 'dashboard') {
-            return '/ng1/scripts/core/companies/company-profile/tabs/users-tab/users-tab.tpl.html'
-          } else {
+          if (tab !== 'dashboard') {
             return '/ng1/scripts/core/companies/company-profile/tabs/' + tab + '-tab/' + tab + '-tab.tpl.html';
-          }
+          }  
         };
 
         $scope.companyProfileHeader.unCheckAll = function () {

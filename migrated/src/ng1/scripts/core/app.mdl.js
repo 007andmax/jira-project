@@ -7,7 +7,6 @@
       'main.services',
       'quicktech.core.dashboards',
       'quicktech.core.tickets',
-      'quicktech.core.users',
       'quicktech.common.services',
       'quicktech.common.directives',
       'quicktech.core.companies',
@@ -130,16 +129,6 @@
           templateUrl: '/ng1/scripts/core/dashboards/tickets-dashboard/tickets-dashboard.tpl.html',
           controller: 'quicktech.core.dashboards.ticketsDashboardCtrl'
         }))
-        .state('users', waitForServices({
-          url: '/clients/users',
-          templateUrl: '/ng1/scripts/core/users/users.tpl.html',
-          controller: 'quicktech.core.users.usersCtrl'
-        }))
-        .state('companies', waitForServices({
-          url: '/clients/companies',
-          templateUrl: '/ng1/scripts/core/companies/companies.tpl.html',
-          controller: 'quicktech.core.companies.companiesCtrl'
-        }))
         .state('companyProfile', waitForServices({
           url: '/clients/companyProfile/:companyId?tabName',
           params: {
@@ -148,16 +137,6 @@
           reloadOnSearch: false,
           templateUrl: '/ng1/scripts/core/companies/company-profile/company-profile.tpl.html',
           controller: 'quicktech.core.companies.companyProfileCtrl'
-        }))
-        .state('products', waitForServices({
-          url: '/inventory/products/{category}',
-          // url: '/inventory/products?tabName',
-          // params: {
-          //   tabName: 'category'
-          // },
-          reloadOnSearch: false,
-          templateUrl: '/ng1/scripts/core/products/products.tpl.html',
-          controller: 'quicktech.core.products.productsCtrl'
         }))
         .state('password-manager', waitForServices({
           url: '/ng2/password-manager',
@@ -453,7 +432,7 @@
       'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.SharedStateService', '$http',
       function ($rootScope, $templateRequest, CompaniesService, $state, $uibModal, TicketsService, $stateParams,
                 UserConfirmationsService, SharedStateService, $http) {
-
+       
         $rootScope.debounce = function (fn, time) {
           var isCalled = false;
           var interval;

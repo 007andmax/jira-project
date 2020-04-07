@@ -68,7 +68,7 @@
 
           <!--need to test it on environment with devices-->
           <div class="checkbox-caption" uib-tooltip="{{ (agent.hostName | unknownFilter) || agent.ip }}"
-               trimmed-tooltip-checker="(agent.hostName | unknownFilter) || agent.ip">
+                ><p>{{(agent.hostName | unknownFilter) || agent.ip}}</p>
           </div>
         </div>
       </div>

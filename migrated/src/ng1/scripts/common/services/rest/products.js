@@ -9,17 +9,7 @@
   services.factory('ProductsService', ['$http', '$rootScope', 'RealTimeService', 'Utils',
     function ($http, $rootScope, RealTimeService, Utils) {
 
-      function search(keyword) {
-
-        if (!keyword) {
-          throw 'Keyword is required!'
-        }
-
-        return $http.get("/products/search?keyword=" + keyword.toLowerCase()).then(function (response) {
-          return response.data;
-        });
-
-      }
+      
       function getFullListForAutocompleteWithOutRealTime(scope, callback) {
 
         if (!scope || !scope.$id) {
@@ -130,119 +120,7 @@
         return categories;
       }
 
-      function getAllProducts(scope, callback) {
-
-        if (!scope) {
-          throw 'scope is required!'
-        }
-
-        var data = {
-          list: [],
-          categories: []
-        };
-
-        $http.get("/products/categories").then(function (categoriesResp) {
-
-          var categories = categoriesResp.data;
-
-          for (var i = 0; i < categories.length; i++) {
-            categories[i].productsList = [];
-            data.categories.push(categories[i]);
-          }
-
-          $http.get('/products/').then(function (resp) {
-
-            data.list = resp.data;
-
-            for (var i = 0; i < data.list.length; i++) {
-              var category = Utils.findById(data.categories, data.list[i].category.id);
-              category.productsList.push(data.list[i]);
-            }
-
-            if (callback) {
-              callback(Utils.customizeObj(data));
-            }
-
-            RealTimeService.subscribe('/product', scope, function (newChange) {
-
-              if (newChange.action == 'PRODUCT_SAVED') {
-
-                var product = Utils.findById(data.list, newChange.data.versionedId.id);
-
-                if (product) {
-                  if (product.category.id !== newChange.data.category.id) {
-                    var categoryMoveFrom = Utils.findById(data.categories, product.category.id);
-                    Utils.deleteById(categoryMoveFrom.productsList, product.versionedId.id);
-
-                    var categoryMoveTo = Utils.findById(data.categories, newChange.data.category.id);
-                    categoryMoveTo.productsList.push(product);
-                  }
-                  Utils.customizeObj(newChange.data, product);
-                } else {
-                  var sourceCategory = Utils.findById(data.categories, newChange.data.category.id);
-                  var product = Utils.customizeObj(newChange.data);
-                  sourceCategory.productsList.push(product);
-                  data.list.push(product);
-                }
-
-              } else if (newChange.action == 'PRODUCT_DELETED') {
-                Utils.deleteById(data.list, newChange.data.versionedId.id);
-                category = Utils.findById(data.categories, newChange.data.category.id);
-                Utils.deleteById(category.productsList, newChange.data.versionedId.id);
-
-                scope.$broadcast("product_deleted", newChange.data);
-              }
-              if (callback) {
-                callback(data);
-              }
-            });
-
-          }, function (resp) {
-            if (callback) {
-              callback(resp.data);
-            }
-          });
-
-          RealTimeService.subscribe('/productCategory', scope, function (newChange) {
-
-            if (newChange.action == 'PRODUCT_CATEGORY_SAVED') {
-
-              var category = Utils.findById(data.categories, newChange.data.id);
-
-              if (category) {
-                Utils.customizeObj(newChange.data, category);
-
-                for (var i = 0; i < data.list.length; i++) {
-                  if (data.list[i].category.id === newChange.data.id) {
-                    Utils.customizeObj(newChange.data, data.list[i].category);
-                  }
-                }
-              } else {
-                newChange.data.productsList = [];
-                data.categories.push(Utils.customizeObj(newChange.data));
-              }
-
-            } else if (newChange.action == 'PRODUCT_CATEGORY_DELETED') {
-              Utils.deleteById(data.categories, newChange.data.id);
-              scope.$broadcast("product_category_deleted", newChange.data);
-
-              var productsToDelete = [];
-              for (var i = 0; i < data.list.length; i++) {
-                if (data.list[i].category.id === newChange.data.id) {
-                  productsToDelete.push(data.list[i].versionedId.id);
-                }
-              }
-              for (i = 0; i < productsToDelete.length; i++) {
-                Utils.deleteById(data.list, productsToDelete[i]);
-              }
-            }
-
-            if (callback) {
-              callback(data);
-            }
-          });
-        });
-      }
+      
 
       function getCategories(scope, callback) {
 
@@ -324,33 +202,9 @@
         Utils.handleCallback(future, callback);
       }
 
-      function deleteProduct(productId, callback) {
+     
 
-        if (!productId) throw 'productId is required argument!';
-
-        var future = $http({
-          url: '/products/' + productId,
-          method: 'DELETE'
-        });
-
-        Utils.handleCallback(future, callback);
-      }
-
-      function moveProducts(categoryId, productIds, callback) {
-
-        if (!categoryId) throw 'categoryId is required argument!';
-        if (!productIds) throw 'productIds is required argument!';
-
-        if (!Array.isArray(productIds)) productIds = [productIds];
-
-        var future = $http({
-          url: '/products/moveProduct?categoryId=' + categoryId,
-          method: 'POST',
-          data: productIds
-        });
-
-        Utils.handleCallback(future, callback);
-      }
+     
 
       function isILCUnique(ilc, id, callback) {
 
@@ -436,17 +290,13 @@
       }
 
       return {
-        search: search,
         getFullListForAutocomplete: getFullListForAutocomplete,
         getCategories: getCategories,
         saveCategory: saveCategory,
         deleteCategory: deleteCategory,
         saveProduct: saveProduct,
-        deleteProduct: deleteProduct,
         isILCUnique: isILCUnique,
         isMfgUnique: isMfgUnique,
-        moveProducts: moveProducts,
-        getAllProducts: getAllProducts,
         getProductsByCompany: getProductsByCompany,
         getFullListForAutocompleteWithOutRealTime:getFullListForAutocompleteWithOutRealTime
       }
