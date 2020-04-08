@@ -4,5 +4,5 @@ export interface reqCompanyProduct {
     endDate: string;
     productId: string;
     companyId: string;
-    serialNumber:string;
+    serialNumber?:string;
 }
