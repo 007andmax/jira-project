@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
  
 
 @Component({
@@ -6,13 +6,14 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
   templateUrl: './item-report.component.html',
   styleUrls: ['./item-report.component.scss']
 })
-export class ItemReportComponent implements OnInit {
+export class ItemReportComponent implements OnInit,OnDestroy {
 
   report: string;
  
   constructor( 
     public cd: ChangeDetectorRef,
   ) { }
+ 
 
   ngOnInit() {
     if (localStorage.report) this.report = localStorage.report;
@@ -29,5 +30,9 @@ export class ItemReportComponent implements OnInit {
   }
   parseTotal(value) {
     return parseFloat(value.toString()).toFixed(2)
+  }
+  ngOnDestroy(): void {
+    this.report = null;
+    console.log("ngOnDestroy ItemReportComponent");
   }
 }

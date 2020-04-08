@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { AccountsReceivable } from '../../class/accounts-receivable';
 import { TicketsReport } from '../../class/tickets-reports';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
@@ -12,7 +12,7 @@ import { TicketReportStateService } from './services/ticket-report-state.service
   styleUrls: ['./ticket-report.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class TicketReportComponent implements OnInit {
+export class TicketReportComponent implements OnInit,OnDestroy {
   chartOptions;
   chartData;
   chartColors = ["#16a4fa", "#ffb937", "#ff6e61", "#2ec866", "#f9f916", "#ff1ed2", "#1bf4fc", "#7d1a9e", '#7f1313'];
@@ -31,7 +31,9 @@ export class TicketReportComponent implements OnInit {
     private usersStateService: UsersStateService,
     private ticketReportStateService: TicketReportStateService) { }
 
+
   ngOnInit() {
+    console.log("ngOnInit ticket reports");
     this.currentCompany = this.companiesStateService.getCurrentCompany();
     this.chartOptions = {
       chart: {
@@ -255,5 +257,8 @@ export class TicketReportComponent implements OnInit {
   }
   public trackByIndex(index, item) {
     return index;
+  }
+  ngOnDestroy(): void {
+  console.log("ngOnDestroy ticket reports");
   }
 }
