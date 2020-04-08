@@ -79,7 +79,7 @@
             <div class="col-md-2" [ngStyle]="{'color': product.invoiceNumber ? 'green' : 'none'}">
               {{product.invoiceNumber }}
             </div>
-            <div class="col-md-1 purchase-cost" >
+            <div class="col-md-1 purchase-cost" *ngIf="getPermissions('VIEW_PRODUCT_COST')">
               {{'$' + parseTotal(product.purchaseCost) }}
             </div>
             <div class="col-md-1" [ngStyle]="{'color': product.salePrice < product.purchaseCost ? 'red' : 'none'}">
@@ -96,7 +96,7 @@
         <div class="col-md-1 list-of-product-bottom-space" style="width: 77.5%; display: inline-block;"></div>
         <div class="purchase-cost col-md-1" style="display: inline-block;">
           <strong><span> {{'$' + parseTotal(purchaseCostSum) }}</span></strong></div>
-        <div class="col-md-1" style="display: inline-block;"> <strong><span >{{'$' + parseTotal(salesPriceSum) }}</span></strong>
+        <div class="col-md-1" style="display: inline-block;"> <strong><span  *ngIf="getPermissions('VIEW_PRODUCT_COST')">{{'$' + parseTotal(salesPriceSum) }}</span></strong>
         </div>
       </div>
     </div>
