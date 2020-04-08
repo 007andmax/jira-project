@@ -59,7 +59,6 @@
           [ngForOf]="productsCompanyReport.lines"
           [ngForTrackBy]="trackByIndex">
           <li class="content-product-list-ticket clearfix"
-              
               on-finish-render="buildPdf()"
               ng-class="{'hide-in-report':product.isChecked}">
             <div style="width: 2%;padding: 0 5px;" class="col-md-1">
@@ -80,7 +79,7 @@
             <div class="col-md-2" [ngStyle]="{'color': product.invoiceNumber ? 'green' : 'none'}">
               {{product.invoiceNumber }}
             </div>
-            <div class="col-md-1 purchase-cost" *ngIf="getPermissions('VIEW_PRODUCT_COST')">
+            <div class="col-md-1 purchase-cost" >
               {{'$' + parseTotal(product.purchaseCost) }}
             </div>
             <div class="col-md-1" [ngStyle]="{'color': product.salePrice < product.purchaseCost ? 'red' : 'none'}">
@@ -88,15 +87,16 @@
             </div>
           </li>
           </ng-template>
+          
         </div>
         </ul>
+        
       </div>
-      <div class="product-report-total-sales clearfix" *ngIf="productsCompanyReport.lines">
-        <div class="col-md-10" style="width: 78%;"></div>
-        <div class="col-md-1 purchase-cost"><br>
+      <div class="product-report-total-sales clearfix" style="margin-top: 20px" *ngIf="productsCompanyReport.lines">
+        <div class="col-md-1 list-of-product-bottom-space" style="width: 77.5%; display: inline-block;"></div>
+        <div class="purchase-cost col-md-1" style="display: inline-block;">
           <strong><span> {{'$' + parseTotal(purchaseCostSum) }}</span></strong></div>
-        <div class="col-md-1"><br> <strong><span
-          *ngIf="getPermissions('VIEW_PRODUCT_COST')">{{'$' + parseTotal(salesPriceSum) }}</span></strong>
+        <div class="col-md-1" style="display: inline-block;"> <strong><span >{{'$' + parseTotal(salesPriceSum) }}</span></strong>
         </div>
       </div>
     </div>
