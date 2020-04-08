@@ -1,0 +1,622 @@
+<div class="cmn-wrapper">
+  <!-- Right Side bar -->
+  <aside class="right-sidebar">
+    <div>
+        <a href="javascript:;" class="add-btn" (click)="openPopupClick();"><img src="assets/images/add.svg" alt="add"/></a>
+      <tabset>
+        <tab heading="Ticket">
+            <div class="cmn-tbs-content ticket">
+                <ul class="list-unstyled">
+                    <li *ngFor="let ticket of ticketList">
+                      <div class="create-by"><span class="id">Tkt# {{ticket.number}}</span><span class="name">{{ticket.name}}</span></div>
+                      <h5>{{ticket.subject}}</h5>
+                      <div class="task-status-row">
+                        <span class="status completed" *ngIf="ticket.status == 'COMPLETED'">Completed</span>
+                        <span class="status progress" *ngIf="ticket.status == 'IN_PROGRESS'">In Progress</span>
+                        <span class="status hold" *ngIf="ticket.status == 'ON_HOLD'">On Hold</span>
+                        <span class="date">{{ticket.createdAt | date : DateFormat}}</span>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+            
+        </tab>
+        <!-- <tab heading="Task">
+            <div class="cmn-tbs-content task">
+                <ul class="list-unstyled">
+                    <li>
+                        <h5 class="pending">Need to Install Hardware in HP Machine</h5>
+                        <div class="task-status-row">
+                          <div class="img-bunch-row">
+                              <div class="img-bunch">
+                                <span class="img-wrap">
+                                  <img src="assets/images/user.jpg" alt="user" />
+                                </span>
+                                <span class="img-wrap">
+                                    <img src="assets/images/user.jpg" alt="user" />
+                                  </span>
+                                  <span class="img-wrap">
+                                      <img src="assets/images/user.jpg" alt="user" />
+                                    </span>
+                              </div>
+                              <a href="javascript:;" class="more">+ 3 more</a> 
+                          </div>
+                          <span class="date">24 Mar 2019</span>
+                        </div>
+                    </li>
+                    <li>
+                        <h5 class="complete">Printer Confuration for HP-7840 also check cartrige issue</h5>
+                        <div class="task-status-row">
+                          <div class="img-bunch-row">
+                              <div class="img-bunch">
+                                <span class="img-wrap">
+                                  <img src="assets/images/user.jpg" alt="user" />
+                                </span>
+                                <span class="img-wrap">
+                                    <img src="assets/images/user.jpg" alt="user" />
+                                  </span>
+                                  <span class="img-wrap">
+                                      <img src="assets/images/user.jpg" alt="user" />
+                                    </span>
+                              </div>
+                              <a href="javascript:;" class="more">+ 3 more</a> 
+                          </div>
+                          <span class="date">24 Mar 2019</span>
+                        </div>
+                    </li>
+                    <li>
+                        <h5 class="pending">Need to Formate John’s Laptop</h5>
+                        <div class="task-status-row">
+                          <div class="img-bunch-row">
+                              <div class="img-bunch">
+                                <span class="img-wrap">
+                                  <img src="assets/images/user.jpg" alt="user" />
+                                </span>
+                                <span class="img-wrap">
+                                    <img src="assets/images/user.jpg" alt="user" />
+                                  </span>
+                                  <span class="img-wrap">
+                                      <img src="assets/images/user.jpg" alt="user" />
+                                    </span>
+                              </div>
+                              <a href="javascript:;" class="more">+ 3 more</a> 
+                          </div>
+                          <span class="date">24 Mar 2019</span>
+                        </div>
+                    </li>
+                    <li>
+                        <h5 class="complete">Server Configuration for 
+                            Facebook</h5>
+                        <div class="task-status-row">
+                          <div class="img-bunch-row">
+                              <div class="img-bunch">
+                                <span class="img-wrap">
+                                  <img src="assets/images/user.jpg" alt="user" />
+                                </span>
+                                <span class="img-wrap">
+                                    <img src="assets/images/user.jpg" alt="user" />
+                                  </span>
+                                  <span class="img-wrap">
+                                      <img src="assets/images/user.jpg" alt="user" />
+                                    </span>
+                              </div>
+                              <a href="javascript:;" class="more">+ 3 more</a> 
+                          </div>
+                          <span class="date">24 Mar 2019</span>
+                        </div>
+                    </li>
+                    <li>
+                        <h5 class="pending">Check antivirus for Head office server and install it</h5>
+                        <div class="task-status-row">
+                          <div class="img-bunch-row">
+                              <div class="img-bunch">
+                                <span class="img-wrap">
+                                  <img src="assets/images/user.jpg" alt="user" />
+                                </span>
+                                <span class="img-wrap">
+                                    <img src="assets/images/user.jpg" alt="user" />
+                                  </span>
+                                  <span class="img-wrap">
+                                      <img src="assets/images/user.jpg" alt="user" />
+                                    </span>
+                              </div>
+                              <a href="javascript:;" class="more">+ 3 more</a> 
+                          </div>
+                          <span class="date">24 Mar 2019</span>
+                        </div>
+                    </li>
+                     <li>
+                        <h5 class="pending">Need to Install Hardware in HP Machine</h5>
+                        <div class="task-status-row">
+                          <div class="img-bunch-row">
+                              <div class="img-bunch">
+                                <span class="img-wrap">
+                                  <img src="assets/images/user.jpg" alt="user" />
+                                </span>
+                                <span class="img-wrap">
+                                    <img src="assets/images/user.jpg" alt="user" />
+                                  </span>
+                                  <span class="img-wrap">
+                                      <img src="assets/images/user.jpg" alt="user" />
+                                    </span>
+                              </div>
+                              <a href="javascript:;" class="more">+ 3 more</a> 
+                          </div>
+                          <span class="date">24 Mar 2019</span>
+                        </div>
+                    </li>
+                    <li>
+                        <h5 class="pending">File uploading issue</h5>
+                        <div class="task-status-row">
+                          <div class="img-bunch-row">
+                              <div class="img-bunch">
+                                <span class="img-wrap">
+                                  <img src="assets/images/user.jpg" alt="user" />
+                                </span>
+                                <span class="img-wrap">
+                                    <img src="assets/images/user.jpg" alt="user" />
+                                  </span>
+                                  <span class="img-wrap">
+                                      <img src="assets/images/user.jpg" alt="user" />
+                                    </span>
+                              </div>
+                              <a href="javascript:;" class="more">+ 3 more</a> 
+                          </div>
+                          <span class="date">24 Mar 2019</span>
+                        </div>
+                    </li>
+                   
+                </ul>
+            </div>
+        </tab> -->
+      </tabset>
+    </div>
+ 
+  </aside>
+
+<!-- sidebar popup Ticket -->
+<div class="sidebar-popup" [ngClass]="{'opened': create && openPopup == 'open_ticket'}">
+  <!-- header -->
+  <div class="sidebar-header">
+    <div class="sidebar-title">
+      <div class="h1">Create New Ticket</div>
+       <span class="h5" *ngIf="actualNumber != ''">QT {{actualNumber}}</span>
+       <div class="btn-group small-dropdown" dropdown>
+        <button id="button-basic" dropdownToggle type="button" class="dropdown-toggle" [ngClass]="{'high': ticketModal.priorityLevel == 'HIGH', 'low': ticketModal.priorityLevel == 'LOW'}"
+                aria-controls="dropdown-basic">
+                {{priorityLabel}} 
+        </button>
+        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu list-unstyled"
+            role="menu" aria-labelledby="button-basic">
+            <li role="menuitem" *ngFor="let priority of priorityList">
+              <a class="dropdown-item" href="javascript:;" (click)="ticketModal.priorityLevel = priority.value; priorityLabel = priority.name;">{{priority.name}}</a>
+            </li>
+          
+        </ul>
+      </div> 
+
+    </div>
+     <a class="close" href="javascript:;" (click)="create=!create;closeTicket();"><img src="assets/images/close.svg" alt="close"/></a>
+    </div>
+  <div class="middle-content">
+    <form novalidate #ticketFrm="ngForm">
+        <div class="f-row">
+            <div class="f-col col-100">
+                <label>Ticket Subject</label>
+                <div class="form-row">
+                  <input type="text" class="form-input" placeholder="Write Ticket subject" [(ngModel)]="ticketModal.subject" name="subject" #Subject="ngModel" required [class.validation-error]="submitted == true && Subject.errors && Subject.errors.required"/>
+                </div>
+            </div>
+            <div class="f-col col-100">
+              <label>Describe Issue</label>
+              <div class="form-row">
+                <textarea class="form-input" placeholder="Describe Issue here…" [(ngModel)]="ticketModal.note" name="note"></textarea>
+              </div>
+            </div>
+            <div class="f-col col-50">
+              <label>Company</label>
+              <div class="form-row">
+                <div class="grey-dropdown w-100" ngbDropdown>
+                  <input type="text"
+                         placeholder="Select Company"
+                         [value]="ticketModal.company.name"
+                         id="dropdownBasic1"
+                         ngbDropdownToggle
+                         autocomplete="off"
+                         class="cmn-select form-input"
+                         readOnly>
+                  <img *ngIf="ticketModal.company.name == ''" class="icn-sm report-caret-icon" src="./../../assets/images/selct-arrow.svg"/>
+                  <img *ngIf="ticketModal.company.name != ''" (click)="clearDropdown('company');" class="icn-sm report-close-icon" src="./../../assets/images/close.svg"/>
+                  <div ngbDropdownMenu
+                       aria-labelledby="dropdownBasic1">
+                    <button *ngFor="let company of companyClientList" ngbDropdownItem (click)="setUserList(company);">{{company.name}}</button>
+                  </div>
+                </div>
+                <!-- <select class="cmn-select form-input" [(ngModel)]="ticketModal.company" name="company" (change)="setUserList();">
+                  <option value="">Select Company</option>
+                  <option *ngFor="let company of companyClientList" value="{{company.id}}">{{company.name}}</option>
+               </select> -->
+              </div>
+            </div>
+            <div class="f-col col-50">
+              <label>User</label>
+              <div class="form-row">
+                <div class="grey-dropdown w-100" ngbDropdown>
+                  <input type="text"
+                         placeholder="Select User"
+                         [(ngModel)]="ticketModal.createduser.name"
+                         id="createduser"
+                         ngbDropdownToggle
+                         autocomplete="off"
+                         name="user"
+                         #User="ngModel"
+                         class="cmn-select form-input" required readOnly
+                         [class.validation-error]="submitted == true && User.errors && User.errors.required">
+                  <img *ngIf="ticketModal.createduser.name == ''" class="icn-sm report-caret-icon" src="./../../assets/images/selct-arrow.svg"/>
+                  <img *ngIf="ticketModal.createduser.name != ''" (click)="clearDropdown('user');" class="icn-sm report-close-icon" src="./../../assets/images/close.svg"/>
+                  <div ngbDropdownMenu
+                       aria-labelledby="createduser">
+                    <button *ngFor="let user of usersList" (click)="setUserData(user)" ngbDropdownItem>{{user.firstName}} {{user.lastName}}</button>
+                  </div>
+                </div>
+                <!-- <select class="cmn-select form-input" [(ngModel)]="ticketModal.createduser" name="createduser">
+                   <option value="">Select User</option>
+                   <option *ngFor="let user of usersList" value="{{user.id}}">{{user.firstName}} {{user.lastName}}</option>
+                </select> -->
+              </div>
+            </div>
+            <div class="f-col col-50">
+              <label>Assign To</label>
+              <div class="form-row">
+                <div class="cmn-dropdown">
+                  <div class="drop-down-select">
+                      <span (click)="toggle('assign')" class="d-block" >{{assignToLabel == '' ? 'Select User to assign' : assignToLabel}}</span>
+                      <img *ngIf="assignToLabel == ''" class="icn-sm report-caret-icon" src="./../../assets/images/selct-arrow.svg"/>
+                      <img *ngIf="assignToLabel != ''" (click)="clearDropdown('assign');" class="icn-sm report-close-icon" src="./../../assets/images/close.svg"/>
+                  </div>
+                  <div class="cmn-dropdon-list"  *ngIf="expand" clickOutside (clickOutside)="expand = !expand">
+                     <form method="POST">
+                        <input type="text" name="search" [(ngModel)]="search" placeholder="Search Users"/>
+                     </form>
+                     <ul class="list-unstyled">
+                        <li *ngFor="let assign of assignToList | searchText : search" (click)="addUserFunc(assign);expand = !expand;assignToLabel = assign.firstName + ' ' + assign.lastName">
+                          <span class="pic"><img src="{{ '/users/' + (assign.id || 'default') + '/image' + (assign.avatar.id ? '.jpg?t=' + assign.avatar.updatedAt : '') }}" alt="user" /></span>
+                           <div class="info">
+                             <h5>{{assign.firstName}} {{assign.lastName}}</h5>
+                             <span class="email">{{assign.primaryEmail}}</span>
+                           </div>
+                        </li>
+                     </ul>
+                  </div>
+              </div>
+              </div>
+            </div>
+            <div class="f-col col-50">
+              <label>Device</label>
+              <div class="form-row">
+                <div class="grey-dropdown w-100" ngbDropdown>
+                  <input type="text"
+                         placeholder="Select Device"
+                         [value]="ticketModal.linkedAgentId.hostName"
+                         id="linkAgent"
+                         ngbDropdownToggle
+                         autocomplete="off"
+                         class="cmn-select form-input"
+                         readOnly>
+                  <img *ngIf="ticketModal.linkedAgentId.hostName == ''" class="icn-sm report-caret-icon" src="./../../assets/images/selct-arrow.svg"/>
+                  <img *ngIf="ticketModal.linkedAgentId.hostName != ''" (click)="clearDropdown('device');" class="icn-sm report-close-icon" src="./../../assets/images/close.svg"/>
+                  <div ngbDropdownMenu
+                       aria-labelledby="linkAgent">
+                    <button *ngFor="let agent of linkedAgentList" (click)="ticketModal.linkedAgentId = agent" ngbDropdownItem>{{agent.hostName}}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="f-col col-100">
+               <!-- File Uploader -->
+                <div class="upload-box">
+                      <div class="upload-box-content">
+                        <div class="drop-container" ngFileDrop [options]="options" (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput">
+                          <p>
+                            <img src="assets/images/attachment.svg" alt="attach" />
+                            <span>Drag your file here or</span> 
+                            <label class="upload-button">
+                              <input type="file" ngFileSelect [options]="options" (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput" multiple> 
+                              Upload manually
+                            </label>
+                          </p>
+                        </div>
+                        <div class="upload-item">
+                          <div class="upload-item-content" *ngFor="let f of files; let i = index;">
+                            
+                                <span class="f-name">{{ f.name }}</span>
+                                <i class="ionicon ion-close-round" (click)="cancelUpload(f.id)" title="Close Tag"></i>
+                             
+                            <!-- File Upload progress content -->
+                            <!-- <div class="progress-content">
+                              <div class="progress">
+                                <span class="bar" [style.width]="f?.progress?.data?.percentage + '%'" [class.is-done]="f?.progress?.data?.percentage === 100"></span>
+                              </div>
+                            </div> -->
+                            
+                            <!-- <div class="progress-text-content">
+                              <span class="progress-text" [class.is-done]="f?.progress?.data?.percentage === 100">
+                                <span>{{ f.progress?.data?.percentage }}% </span>
+                                <span *ngIf="f.progress?.data?.percentage !== 100">Uploading...</span>
+                                <span *ngIf="f.progress?.data?.percentage === 100">Done</span>
+                              </span>
+                              <span class="speed-and-eta-text" *ngIf="f.progress?.data?.percentage !== 0 && f.progress?.data?.percentage !== 100">
+                                <span>{{ f.progress?.data?.speedHuman }} </span>
+                                <span>ETA {{ f.progress?.data?.etaHuman }}</span>
+                              </span>
+                            </div> -->
+                          </div>
+                        </div>
+                      </div>
+                </div>
+                <!-- End of File Uploader -->
+            </div>
+            <div class="f-col col-100 user-list-info">
+              <label>Add users to notify them ticket update</label>
+              <div class="form-row">
+                  <ul class="list-unstyled user-list">
+                    <li class="add-user">
+                      <a href="javascript:;" (click)="toggle('user')">
+                         <img src="assets/images/avatar-add.svg" alt="Add User">
+                      </a>
+                      <div class="cmn-dropdown">
+                        <div class="cmn-dropdon-list" *ngIf="editAddUser" clickOutside (clickOutside)="editAddUser = !editAddUser">
+                           <form method="POST">
+                              <input type="text" name="searchUser" [(ngModel)]="searchUser" placeholder="Search Users"/>
+                           </form>
+                          <ul class="list-unstyled">
+                              <li (click)="assign.selected = !assign.selected;addNotifyUser(assign);editAddUser = !editAddUser;" *ngFor="let assign of assignToList  | searchText : searchUser" [ngClass]="{'active': assign.selected == true}">
+                                <span class="pic"><img src="{{ '/users/' + (assign.id || 'default') + '/image' + (assign.avatar.id ? '.jpg?t=' + assign.avatar.updatedAt : '') }}" alt="user" /></span>
+                                 <div class="info">
+                                   <h5>{{assign.firstName}} {{assign.lastName}}</h5>
+                                   <span class="email">{{assign.primaryEmail}}</span>
+                                 </div>
+                              </li>
+                           </ul>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="pointer" [ngClass]="{'selected': notifyUser.selected == true}" (click)="notifyUser.selected = !notifyUser.selected" *ngFor="let notifyUser of notifyUserList">
+                      <div class="user-added">
+                         <span class="user-dp" *ngIf="notifyUser.avatar != null">
+                            <img src="{{ '/users/' + (notifyUser.id || 'default') + '/image' + (notifyUser.avatar.id ? '.jpg?t=' + notifyUser.avatar.updatedAt : '') }}" alt="{{notifyUser.firstName}} {{notifyUser.lastName}}">
+                         </span>
+                         <span class="user-dp name-dp" *ngIf="notifyUser.avatar == null">
+                            {{commonService.getShortName(notifyUser.firstName)}}{{commonService.getShortName(notifyUser.lastName)}}
+                         </span>
+                        </div>
+                    </li>
+                  </ul>
+              </div>
+            </div>
+           
+        </div>
+        <div class="btn-row">
+          <input type="button" (click)="createTicket();" value="Create Ticket" class="btn btn-primary" />
+          <a href="javascrip:;" class="btn btn-secondary" (click)="create=!create;closeTicket();">Cancel</a>
+        </div>
+    </form>
+  </div> 
+</div>
+
+<!-- sidebar popup Task -->
+<div class="sidebar-popup task" [ngClass]="{'opened': create && openPopup == 'open_task'}">
+  <!-- header -->
+  <div class="sidebar-header">
+    <div class="sidebar-title">
+      <div class="h1">Create New Task</div>
+    </div>
+     <a class="close" href="javascript:;" (click)="create=!create"><img src="assets/images/close.svg" alt="close"/></a>
+    </div>
+  <div class="middle-content">
+    <form method="POST">
+        <div class="f-row">
+            <div class="f-col col-100">
+                <label>Task Name</label>
+                <div class="form-row">
+                  <input type="text" class="form-input" placeholder="Write a task name" />
+                </div>
+            </div>
+            <div class="f-col col-100">
+              <label>Task Description</label>
+              <div class="form-row">
+                <textarea class="form-input" placeholder="Write task description"></textarea>
+              </div>
+            </div>
+            <div class="f-col col-50">
+              <label>Company</label>
+              <div class="form-row">
+                <select class="cmn-select form-input">
+                  <option>Select Company</option>
+                  <option>Select Company 1</option>
+                  <option>Select Company2</option>
+                  <option>Select Company3</option>
+               </select>
+              </div>
+            </div>
+            <div class="f-col col-50">
+              <label>Assign To</label>
+              <div class="form-row">
+                <div class="cmn-dropdown">
+                  <div class="drop-down-select" (click)="assignExpand = !assignExpand">
+                      Select User to assign
+                  </div>
+                  <div class="cmn-dropdon-list"  *ngIf="assignExpand">
+                     <form method="POST">
+                        <input type="text" placeholder="Search Users"/>
+                     </form>
+                    <ul class="list-unstyled">
+                        <li (click)="assignExpand = !assignExpand">
+                          <span class="pic"><img src="assets/images/user.jpg" alt="user" /></span>
+                           <div class="info">
+                             <h5>Tony Dawson</h5>
+                             <span class="email">bode.rigoberto@kemmer.com</span>
+                           </div>
+                        </li>
+                        <li (click)="assignExpand = !assignExpand">
+                            <span class="pic"><img src="assets/images/user.jpg" alt="user" /></span>
+                             <div class="info">
+                               <h5>Tony Dawson</h5>
+                               <span class="email">bode.rigoberto@kemmer.com</span>
+                             </div>
+                          </li>
+                          <li (click)="assignExpand = !assignExpand">
+                              <span class="pic"><img src="assets/images/user.jpg" alt="user" /></span>
+                               <div class="info">
+                                 <h5>Tony Dawson</h5>
+                                 <span class="email">bode.rigoberto@kemmer.com</span>
+                               </div>
+                            </li>
+                     </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="f-col col-50">
+              <label>Due Date</label>
+              <div class="form-row date-container">
+                <input type="text"
+                placeholder="Select Due Date"
+                class="form-input datepicker"
+                [bsConfig]="{ showWeekNumbers: false , dateInputFormat: 'Do MMMM YYYY' }"
+                bsDatepicker  container="">
+                <!-- <input type="text"
+                placeholder="Select Due Date"
+                class="form-input datepicker"
+                [bsConfig]="{ showWeekNumbers: false }"
+                [(ngModel)]="dob"
+                bsDatepicker> -->
+              </div>
+            </div>
+           
+            
+            <div class="f-col col-100">
+               <!-- File Uploader -->
+                <div class="upload-box">
+                      <div class="upload-box-content">
+                        <div class="drop-container" ngFileDrop [options]="options" (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput">
+                          <p>
+                            <img src="assets/images/attachment.svg" alt="attach" />
+                            <span>Drag your file here or</span> 
+                            <label class="upload-button">
+                              <input type="file" ngFileSelect [options]="options" (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput" multiple> 
+                              Upload manually
+                            </label>
+                          </p>
+                        </div>
+                        <div class="upload-item">
+                          <div class="add-file-raw" style="display: none;">
+                            <a href="javascript:;" class="add-files" title="Add Files">
+                              <img src="assets/images/addmore.svg" alt="Add More" />
+                            </a>
+                          </div>
+                          <div class="upload-item-content" *ngFor="let f of files; let i = index;">
+                            
+                                <span class="f-name">{{ f.name }}</span>
+                                <i class="ionicon ion-close-round" (click)="cancelUpload(f.id)" title="Close Tag"></i>
+                             
+                            <!-- File Upload progress content -->
+                            <!-- <div class="progress-content">
+                              <div class="progress">
+                                <span class="bar" [style.width]="f?.progress?.data?.percentage + '%'" [class.is-done]="f?.progress?.data?.percentage === 100"></span>
+                              </div>
+                            </div> -->
+                            
+                            <!-- <div class="progress-text-content">
+                              <span class="progress-text" [class.is-done]="f?.progress?.data?.percentage === 100">
+                                <span>{{ f.progress?.data?.percentage }}% </span>
+                                <span *ngIf="f.progress?.data?.percentage !== 100">Uploading...</span>
+                                <span *ngIf="f.progress?.data?.percentage === 100">Done</span>
+                              </span>
+                              <span class="speed-and-eta-text" *ngIf="f.progress?.data?.percentage !== 0 && f.progress?.data?.percentage !== 100">
+                                <span>{{ f.progress?.data?.speedHuman }} </span>
+                                <span>ETA {{ f.progress?.data?.etaHuman }}</span>
+                              </span>
+                            </div> -->
+                          </div>
+                        </div>
+                      </div>
+                </div>
+                <!-- End of File Uploader -->
+            </div>
+            <div class="f-col col-100 user-list-info">
+              <label>Add users to notify them task update</label>
+              <div class="form-row">
+                  <ul class="list-unstyled user-list">
+                    <li class="add-user">
+                      <a href="javascript:;" (click)="addUser = !addUser">
+                         <img src="assets/images/avatar-add.svg" alt="Add User">
+                      </a>
+
+                      <div class="cmn-dropdown">
+                        <div class="cmn-dropdon-list"  *ngIf="addUser">
+                           <form method="POST">
+                              <input type="text" placeholder="Search Users"/>
+                           </form>
+                          <ul class="list-unstyled">
+                              <li (click)="addUser = !addUser">
+                                <span class="pic"><img src="assets/images/user.jpg" alt="user" /></span>
+                                 <div class="info">
+                                   <h5>Tony Dawson</h5>
+                                   <span class="email">bode.rigoberto@kemmer.com</span>
+                                 </div>
+                              </li>
+                              <li (click)="addUser = !addUser">
+                                  <span class="pic"><img src="assets/images/user.jpg" alt="user" /></span>
+                                   <div class="info">
+                                     <h5>Tony Dawson</h5>
+                                     <span class="email">bode.rigoberto@kemmer.com</span>
+                                   </div>
+                                </li>
+                                <li (click)="addUser = !addUser">
+                                    <span class="pic"><img src="assets/images/user.jpg" alt="user" /></span>
+                                     <div class="info">
+                                       <h5>Tony Dawson</h5>
+                                       <span class="email">bode.rigoberto@kemmer.com</span>
+                                     </div>
+                                  </li>
+                           </ul>
+                        </div>
+                      </div>
+                  </li>
+                    <li class="selected">
+                      <div class="user-added">
+                         <span class="user-dp">
+                            <img src="assets/images/user.jpg" alt="user1">
+                         </span>
+                        </div>
+                    </li>
+                    <li class="selected">
+                      <div class="user-added">
+                         <span class="user-dp">
+                            <img src="assets/images/user.jpg" alt="user1">
+                         </span>
+                        </div>
+                    </li>
+                    <li class="unselected">
+                      <div class="user-added">
+                         <span class="user-dp">
+                            <img src="assets/images/user.jpg" alt="user1">
+                         </span>
+                        </div>
+                    </li>
+                  </ul>
+              </div>
+            </div>
+           
+        </div>
+        <div class="btn-row">
+          <input type="submit" value="Create Task" class="btn btn-primary" />
+          <a href="javascrip:;" class="btn btn-secondary" (click)="create=!create">Cancel</a>
+        </div>
+    </form>
+  </div> 
+</div>
+
+
+</div>

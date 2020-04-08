@@ -1,2 +1,0 @@
-export const ACION_OPEN_PDF = "OPEN_PDF";
-export const ACION_DOWNLOAD_PDF = "DOWNLOAD_PDF";
