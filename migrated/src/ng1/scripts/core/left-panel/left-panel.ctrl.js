@@ -311,6 +311,11 @@
             return;
           }
 
+          if (tabToActivate == 'CompanyProfileProductsPage') {
+            $scope.goToTab(`#/ng2/company-products`);
+            return;
+          }
+         
           var tab = $scope[tabToActivate];
           deactivateAllCompanyProfileTabs();
           if (tab === false) {
@@ -319,6 +324,16 @@
 
 
         };
+        $scope.goToTab = function (url) {
+          let body = document.querySelector('.left-panel__category-wrap');
+          var link = document.createElement('a');
+          body.appendChild(link);
+          link.href = url;
+          var e = document.createEvent('MouseEvents');
+          e.initEvent('click', true, true);
+          link.dispatchEvent(e);
+        }
+
         $scope.goToTab = function (url) {
           let body = document.querySelector('.left-panel__category-wrap');
           var link = document.createElement('a');
@@ -1565,7 +1580,7 @@
             return 'inbox';
           } else if (url.indexOf('companies') > -1) {
             return 'companies';
-          } else if (url.indexOf('companyProfile') > -1 || url.indexOf('company-password-manager') > -1 || url.indexOf('company-user') > -1) {
+          } else if (url.indexOf('companyProfile') > -1 || url.indexOf('company-password-manager') > -1 || url.indexOf('company-user') > -1 || url.indexOf('company-products') > -1) {
             return 'companyProfile';
           } else if (url.indexOf('users') > -1) {
             return 'users';

@@ -270,4 +270,35 @@
    
   </div>
 
+  <div *ngIf="report === 'company-roducts-report'">
+    <div class="run-report-content clearfix" [ngClass]="className">
+      <div class="new-reports-reverse">
+        <button class="form-group btn btn-success" (click)="getReportCompanyProducts()">Get
+          Report
+        </button>
+      
+        <div class="form-group content">
+          <app-multi-datepicker #dp (selectedDate)="filterByDate($event)"></app-multi-datepicker>
+          
+        </div>
+        <div class="form-group content"  >
+          <div  >
+            <input type="text"
+                   name="serialNumber"
+                   [(ngModel)]="productsCompanyReport.serialNumber"
+                   autocomplete="off"
+                   class="form-control"
+                   placeholder="Serial Number"
+                   custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}" />
+          </div>
+
+        </div>
+
+        <div class="form-group content custom-width">
+          <app-product-list  [editItem]="product" [itemList]="productList"
+            (selectedProductItem)="selectProduct($event,i)"></app-product-list>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

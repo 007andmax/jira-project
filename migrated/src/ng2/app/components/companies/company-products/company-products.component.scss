@@ -1,0 +1,33 @@
+/deep/.send-modal-center .new-companies-content {
+    &__modal--header {
+      border-top-right-radius: 10px;
+      border-top-left-radius: 10px;
+    }
+
+    &__modal--content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__modal--content-footer {
+      margin-bottom: 20px;
+    }
+
+    .tab-btns {
+      padding: 0;
+    }
+  }
+
+/deep/.list-of-product {
+  .ngb-dp-arrow-btn {
+    background-color: #3ba5fa !important;
+  }
+
+  .run-report-content i {
+    top: calc(50% - 7px);
+  }
+
+   .report-caret-icon {
+    top: calc(50% - 4px) !important;
+   }
+}

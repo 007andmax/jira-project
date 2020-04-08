@@ -125,7 +125,7 @@ import { TaxesComponent } from './components/shared/taxes/taxes.component';
 import { InventoryEditAsideComponent } from './components/inventory/inventory-edit-aside/inventory-edit-aside.component';
 import { LeftPanelInventoryComponent } from './components/left-panel/left-panel-inventory/left-panel-inventory.component';
 import { AddCategoryProductComponent } from './components/left-panel/left-panel-inventory/add-category-product/add-category-product.component';
- 
+
 
 import 'd3';
 import 'nvd3';
@@ -133,6 +133,7 @@ import { TicketReportComponent } from './components/reports/reports/ticket-repor
 import { TechUsersListReportComponent } from './components/reports/report-menu/tech-users-list-report/tech-users-list-report.component';
 import { ReportTimePipe } from './pipe/report-time.pipe';
 import { ServiceReportComponent } from './components/reports/reports/service-report/service-report.component';
+import { CompanyProductsComponent } from './components/companies/company-products/company-products.component';
 /**
  * declare angular
  */
@@ -193,6 +194,9 @@ angular.module('quicktech')
   .directive(
     'inventoryComponent',
     downgradeComponent({ component: InventoryComponent }))
+  .directive(
+    'companyProducts',
+    downgradeComponent({ component: CompanyProductsComponent }))
   .factory('ngZone', downgradeInjectable(NgZone));
 
 /**
@@ -303,7 +307,8 @@ angular.module('quicktech')
     TaxesComponent,
     InventoryEditAsideComponent,
     LeftPanelInventoryComponent,
-    AddCategoryProductComponent
+    AddCategoryProductComponent,
+    CompanyProductsComponent
   ],
   imports: [
     BrowserModule,
@@ -368,7 +373,13 @@ angular.module('quicktech')
       {
         path: 'ng2/companies',
         component: CompaniesComponent,
-      }, {
+      },
+      {
+        path: 'ng2/company-products',
+        component: CompanyProductsComponent,
+        pathMatch: 'full'
+      },
+      {
         path: 'ng2/users',
         component: UsersComponent,
         pathMatch: 'full'
@@ -415,7 +426,8 @@ angular.module('quicktech')
     ItemReportComponent,
     OverviewReportComponent,
     ReportSendEmailComponent,
-    InventoryComponent
+    InventoryComponent,
+    CompanyProductsComponent
     // RecurringTicketsComponent
   ],
   providers: [
