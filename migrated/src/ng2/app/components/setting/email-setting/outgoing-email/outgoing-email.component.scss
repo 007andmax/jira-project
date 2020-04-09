@@ -1,0 +1,123 @@
+/*** All css files include ***/
+
+@import "../../../../../assets/scss/variable";
+@import "../../../../../assets/scss/mixin";
+@import "../../../../../assets/scss/custom";
+
+.cmn-area.incming-email {
+  margin-top: 3px;
+  p {
+    margin-bottom: 24px;
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.54;
+    letter-spacing: normal;
+    color: #4f5f79;
+  }
+  .f-row {
+    margin-bottom: 0;
+    .f-col {
+      width: 416px;
+      @media only screen and (max-width: 768px){
+        width: 100%;
+      }
+    }
+    .cmn-checkbox {
+      margin-bottom: 33px;
+    }
+  }
+}
+
+.cmn-area.outgoing-email {
+  form{
+    @media only screen and (max-width: 768px){
+      padding-bottom: 40px;
+      .btn{
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+            width: 100%;
+          }
+        }    
+  }
+  margin-top: 3px;
+  p {
+    margin-bottom: 28px;
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.54;
+    letter-spacing: normal;
+    color: #4f5f79;
+  }
+  .f-col {
+    &.col-25 {
+      width: 25%;
+      @media only screen and (max-width: 576px){
+        width: 50%;
+      }
+    }
+  }
+  .f-row {
+    margin-bottom: 28px;
+  }
+  .password {
+    position: relative;
+    .password-co {
+      position: absolute;
+      right: 0;
+      width: 45px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      top: 0;
+      bottom: 0;
+    }
+    .form-input {
+      padding-right: 45px;
+    }
+  }
+}
+.test-server {
+  text-align: right;
+  margin-top: -15px;
+  @media only screen and (max-width: 768px){
+    text-align: left;
+  }
+  .btn-outline {
+    display: inline-block;
+    @media only screen and (max-width: 768px){
+      margin-left: 0;
+      margin-top: 15px;
+    }
+  }
+}
+
+.invalid-feedback {
+  margin-top: .25rem;
+  font-size: 80%;
+  color: #dc3545;
+}
+
+input.ng-invalid.is-invalid {
+  border: 1px solid red;
+}
+
+// #toast-container > div {
+//   opacity:1;
+//   }
+
+// .toast-info {
+//   display: inline-block !important;
+//   opacity: 1 !important;
+// }
+// .toast-success .toast .ng-trigger .ng-trigger-flyInOut{
+//   display: inline-block !important;
+//   opacity: 1 !important;
+// }

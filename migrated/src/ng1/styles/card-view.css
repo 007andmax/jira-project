@@ -195,15 +195,15 @@
   font-size: 16px;
   width: 205px;
   margin-bottom: 8px;
-  font-family:'Graphik Medium', sans-serif;
+  font-family:'Graphik-Medium', sans-serif;
 }
 _::-webkit-:host:not(:root:root),
 .card-wrapper .card .card-header .name {
-  font-family:'Graphik Regular', sans-serif;
+  font-family:'Graphik-Regular', sans-serif;
 }
 _::-webkit-:not(:root:root),
 .card-wrapper .card .card-header .name {
-  font-family:'Graphik Regular', sans-serif;
+  font-family:'Graphik-Regular', sans-serif;
 }
 .badge-default{
   background-color: #e9eef5;

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+    <g fill="none" fill-rule="evenodd">
+        <path stroke="#FFF" stroke-linecap="round" stroke-linejoin="round" d="M13.958 16.954A8 8 0 1 0 10 18M13.867 14.34l-.624 2.934 2.906.617"/>
+        <text fill="#FFF" font-family="Rubik-Medium, Rubik" font-size="9" font-weight="400">
+            <tspan x="7.14" y="12.97">$</tspan>
+        </text>
+    </g>
+</svg>

@@ -38,7 +38,7 @@
 .invoice-preview.invoice-create .invoice-create--header__btn .btn,
 .quote-preview .invoice-create--header__btn .btn {
   font-size: 14px !important;
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
   font-weight: 500;
 }
 
@@ -364,7 +364,7 @@
 .quote-list--item .pavlik,
 .quote-list--item .pavlik .bold {
   font-size: 11px !important;
-  font-family: "Graphik Semibold", sans-serif;
+  font-family: "Graphik-Semibold", sans-serif;
 }
 
 .invoice-list--item__header {
@@ -493,7 +493,7 @@
 /*OLD STYLES*/
 .invoice-page {
   background-color: #fff;
-  font-family: 'Graphik Regular', sans-serif;
+  font-family: 'Graphik-Regular', sans-serif;
   font-size: 13px;
   line-height: 20px;
   color: #1f2a37;

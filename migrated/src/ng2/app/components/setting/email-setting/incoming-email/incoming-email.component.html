@@ -1,0 +1,60 @@
+
+<div class="cmn-area incming-email workspace">
+  <p>
+    Incoming emails sent to your default address will automaticly create a new
+    ticket. If you have a support email already setup with your existing domain
+    then you should forward it to the email address below
+  </p>
+  <form method="POST">
+    <div class="f-row">
+      <div class="f-col col-100">
+        <label>Email Domain</label>
+        <div class="form-row">
+          <div class="custm-url">
+          <input
+            class="form-input"
+            *ngIf="supportMailBox"
+            type="text"
+            value="{{ supportMailBox }}"
+            disabled
+          />
+          </div>
+          <span class="slug">.quicktech.com</span>
+        </div>
+        <div class="form-row">
+          <p>
+            Your workspace URL can only contain lowercase letters, numbers and
+            dashes (and must start with a letter or number).
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="f-row">
+      <div class="f-col">
+        <span class="cmn-checkbox">
+          <input
+            type="checkbox"
+            [(ngModel)]="inboxEnabled"
+            [ngModelOptions]="{ standalone: true }"
+            id="incomming-email"
+          />
+          <label for="incomming-email"
+            >When disabled, it creates drafts from email, you could <br />
+            proceed drafts to tickets.</label
+          >
+        </span>
+      </div>
+    </div>
+    <div class="f-row">
+      <div class="f-col">
+        <input
+          type="button"
+          class="btn btn-primary"
+          (click)="saveInboxEnabled()"
+          value="Save Changes"
+        />
+      </div>
+    </div>
+  </form>
+  <!-- <div class="loading" *ngIf="loading"></div> -->
+</div>

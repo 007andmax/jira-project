@@ -117,7 +117,7 @@
   position: relative;
   padding-left: 24px;
   font-size: 13px;
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
 }
 
 .mob-note {
@@ -463,4 +463,3 @@
   background: #16a4fa;
     color: #fff;
 }
- 

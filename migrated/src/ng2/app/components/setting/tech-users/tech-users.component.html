@@ -1,0 +1,903 @@
+
+<!-- Middle Wrapper  -->
+<div class="page-container manage-tech">
+  <div class="page-insider">
+    <div class="heading">
+      <h1>
+        <a
+          href="javascript:;"
+          (click)="onBackMenu()"
+          class="back-menu"
+          style="display: none;"
+          >backmneu</a
+        >Manage Tech Users
+      </h1>
+      <div class="heading-serach">
+        <a
+          class="stati-link"
+          href="javascript:;"
+          (click)="isArchived = !isArchived"
+        >
+          {{ !isArchived ? "Archived" : "Tech" }} Users
+        </a>
+        <a href="javascript:;" (click)="creatTechUsr()" class="btn-outline"
+          >Create Tech User</a
+        >
+      </div>
+    </div>
+
+    <div class="cmn-area hs-area">
+      <div class="data-table-wrap mteh-data">
+        <table class="display dataTable" style="width:100%" *ngIf="!isArchived">
+          <thead>
+            <tr>
+              <th class="tech-user">Tech User</th>
+              <th class="email">Email</th>
+              <th class="e-note">Email Notification</th>
+              <th class="action">&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="techUsers.length > 0">
+            <tr *ngFor="let techUser of techUsers; let i = index">
+              <td class="tech-user">
+                <div class="t-user">
+                  <span class="user-dp" [ngClass]="[techUser.online == false ? 'offline' : '', (techUser.online == true && techUser.lockScreen == false) ? 'online' : '', (techUser.online === true && techUser.lockScreen === true) ? 'away' : '']" *ngIf="techUser.avatar !== null">
+                    <span class="user-tech-dp">
+                      <img
+                        *ngIf="techUser.isEmailVerified"
+                        src="/users/{{ techUser.id }}/image.jpg?t={{
+                          techUser.avatar.updatedAt
+                        }}"
+                        alt="user"
+                      />
+                      <span class="simple-dp" *ngIf="!techUser.isEmailVerified">
+                        {{ displayFrstLstChar(techUser) }}
+                      </span>
+                    </span>
+                  </span>
+
+                  <!-- <span
+                    class="user-dp online"
+                    *ngIf="
+                      !techUser.requestToChangePassword &&
+                      techUser.isEmailVerified
+                    "
+                  >
+                  <span class="user-tech-dp">
+                    <img
+                      *ngIf="techUser.avatar !== null"
+                      src="/users/{{ techUser.id }}/image.jpg?t={{
+                        techUser.avatar.updatedAt
+                      }}"
+                      alt="user"
+                    />
+                    <span class="simple-dp" *ngIf="techUser.avatar === null">
+                      {{displayFrstLstChar(techUser)}}
+                    </span>
+                  </span>
+
+                  </span> -->
+                  <span class="user-dp online" *ngIf="techUser.avatar === null">
+                    <img
+                      src="../../../../../../ng1/images/setting-module/avtar-56@2x.png"
+                      alt="user"
+                    />
+                  </span>
+
+                  <div class="t-info">
+                    <h5>{{ techUser.firstName }} {{ techUser.lastName }}</h5>
+                    <span>10:30 AM, 14 Jun</span>
+                  </div>
+                </div>
+              </td>
+              <td class="email">
+                <a href="mailto:{{ techUser.primaryEmail }}">{{
+                  techUser.primaryEmail
+                }}</a
+                ><span>{{ techUser.techRole }}</span>
+              </td>
+              <td class="e-note">
+                <a
+                  href="javascript:;"
+                  class="email-dropdown"
+                  (click)="emailNotificationDropDown(i)"
+                >
+                  New Device, New Ticket...</a
+                >
+                <div
+                  class="eml-ntl-list"
+                  [ngClass]="{ opened: selectedIdx === i }"
+                >
+                  <div
+                    class="email-note-wrape"
+                    *ngIf="techUseremailNotificationList"
+                  >
+                    <h5>Set Email Notification for Tech User</h5>
+                    <ul class="list-unstyled">
+                      <li class="cmn-checkbox">
+                        <input
+                          type="checkbox"
+                          readonly
+                          [(ngModel)]="
+                            techUseremailNotificationList[techUser.id].newDevice
+                          "
+                          id="newDevice1"
+                        />
+                        <label for="newDevice1">
+                          When my account is logged in from a new device
+                        </label>
+                      </li>
+                      <li class="cmn-checkbox">
+                        <input
+                          type="checkbox"
+                          id="ticketCreated"
+                          readonly
+                          [(ngModel)]="
+                            techUseremailNotificationList[techUser.id]
+                              .ticketCreated
+                          "
+                        />
+                        <label for="ticketCreated">
+                          When a New Ticket created
+                        </label>
+                      </li>
+                      <li class="cmn-checkbox">
+                        <input
+                          id="myTicketUpdated"
+                          type="checkbox"
+                          readonly
+                          [(ngModel)]="
+                            techUseremailNotificationList[techUser.id]
+                              .myTicketUpdated
+                          "
+                        />
+                        <label for="myTicketUpdated">
+                          When a ticket that is assigned to me is updated
+                        </label>
+                      </li>
+                      <li class="cmn-checkbox">
+                        <input
+                          id="ticketCloseNotifications"
+                          type="checkbox"
+                          readonly
+                          [(ngModel)]="
+                            techUseremailNotificationList[techUser.id]
+                              .ticketCloseNotifications
+                          "
+                        />
+                        <label for="ticketCloseNotifications">
+                          When any ticket is closed
+                        </label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </td>
+              <td class="action">
+                <a
+                  href="javascript:;"
+                  data-tooltip="Reset Password"
+                  class="reset"
+                  *ngIf="techUser.isEmailVerified"
+                  (click)="changePasswordRequest(techUser.id)"
+                  ><img
+                    src="../../../../../ng1/images/setting-module/reset-password.svg"
+                    alt="Edit"
+                /></a>
+                <a
+                  href="javascript:;"
+                  data-tooltip="Resend Email"
+                  class="reset"
+                  *ngIf="!(techUser.isEmailVerified && techUser.userEnabled)"
+                  (click)="resendWelcomeEmail(techUser.primaryEmail)"
+                >
+                  <img
+                    src="../../../../../ng1/images/setting-module/email-resend.svg"
+                    alt="Edit"
+                  />
+                </a>
+                <!--<p (click)="resendWelcomeEmail(techUser.primaryEmail)">
+                    <img src="/ng2/assets/img/reset-password.svg" alt="Edit" />
+                  </p>-->
+                <a
+                  href="javascript:;"
+                  data-tooltip="Edit"
+                  class="edit"
+                  (click)="editTechUser(techUser)"
+                  ><img
+                    src="../../../../../ng1/images/setting-module/edit.svg"
+                    alt="Edit"
+                /></a>
+                <a
+                  href="javascript:;"
+                  data-tooltip="remove"
+                  class="remove"
+                  (click)="removeUserConfirm(techUser)"
+                  ><img
+                    src="../../../../../ng1/images/setting-module/remove.svg"
+                    alt="Remove"
+                /></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="display dataTable" style="width:100%" *ngIf="isArchived">
+          <thead>
+            <tr>
+              <th class="tech-user">Archived User</th>
+              <th class="email">Email</th>
+              <th class="e-note">Email Notification</th>
+              <th class="action">&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="userlist.length > 0">
+            <tr *ngFor="let techUser of userlist; let i = index">
+              <td class="tech-user">
+                <div class="t-user">
+                  <span class="user-dp archiveUser" *ngIf="techUser.avatar !== null">
+                    <span class="user-tech-dp">
+                      <img
+                        *ngIf="techUser.isEmailVerified"
+                        src="/users/{{ techUser.id }}/image.jpg?t={{
+                          techUser.avatar.updatedAt
+                        }}"
+                        alt="user"
+                      />
+                      <span class="simple-dp" *ngIf="!techUser.isEmailVerified">
+                        {{ displayFrstLstChar(techUser) }}
+                      </span>
+                    </span>
+                  </span>
+
+                  <div class="t-info">
+                    <h5>{{ techUser.firstName }} {{ techUser.lastName }}</h5>
+                    <span>10:30 AM, 14 Jun</span>
+                  </div>
+                </div>
+              </td>
+              <td class="email">
+                <a href="mailto:{{ techUser.primaryEmail }}">{{
+                  techUser.primaryEmail
+                }}</a
+                ><span>{{ techUser.techRole }}</span>
+              </td>
+              <td class="e-note">
+                <a
+                  href="javascript:;"
+                  class="email-dropdown"
+                  (click)="emailNotificationDropDown(i)"
+                >
+                  New Device, New Ticket...</a
+                >
+                <div
+                  class="eml-ntl-list"
+                  [ngClass]="{ opened: selectedIdx === i }"
+                >
+                  <div
+                    class="email-note-wrape"
+                    *ngIf="archivedtechUseremailNotificationList"
+                  >
+                    <h5>Set Email Notification for Tech User</h5>
+                    <ul class="list-unstyled">
+                      <li class="cmn-checkbox">
+                        <input
+                          type="checkbox"
+                          readonly
+                          [(ngModel)]="
+                            archivedtechUseremailNotificationList[techUser.id]
+                              .newDevice
+                          "
+                          id="newDevice1"
+                        />
+                        <label for="newDevice1">
+                          When my account is logged in from a new device
+                        </label>
+                      </li>
+                      <li class="cmn-checkbox">
+                        <input
+                          type="checkbox"
+                          id="ticketCreated"
+                          readonly
+                          [(ngModel)]="
+                            archivedtechUseremailNotificationList[techUser.id]
+                              .ticketCreated
+                          "
+                        />
+                        <label for="ticketCreated">
+                          When a New Ticket created
+                        </label>
+                      </li>
+                      <li class="cmn-checkbox">
+                        <input
+                          id="myTicketUpdated"
+                          type="checkbox"
+                          readonly
+                          [(ngModel)]="
+                            archivedtechUseremailNotificationList[techUser.id]
+                              .myTicketUpdated
+                          "
+                        />
+                        <label for="myTicketUpdated">
+                          When a ticket that is assigned to me is updated
+                        </label>
+                      </li>
+                      <li class="cmn-checkbox">
+                        <input
+                          id="ticketCloseNotifications"
+                          type="checkbox"
+                          readonly
+                          [(ngModel)]="
+                            archivedtechUseremailNotificationList[techUser.id]
+                              .ticketCloseNotifications
+                          "
+                        />
+                        <label for="ticketCloseNotifications">
+                          When any ticket is closed
+                        </label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </td>
+              <td class="action">
+                <a
+                  href="javascript:;"
+                  data-tooltip="Restore User"
+                  class="reset"
+                  (click)="restoreConfirm(techUser.id)"
+                  ><img
+                    src="../../../../../../ng1/images/setting-module/restore-user.svg"
+                    alt="Restore User"
+                /></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- <div class="loading" *ngIf="loading"></div> -->
+  </div>
+  
+</div>
+
+<!-- sidebar popup -->
+<div class="sidebar-popup" [class.opened]="create">
+  <!-- header -->
+  <div class="sidebar-header">
+    <div class="h1">Create Tech User</div>
+    <a class="close" href="javascript:;" (click)="create = !create"
+      ><img src="../../../../../ng1/images/setting-module/close.svg" alt="close"
+    /></a>
+  </div>
+  <div class="middle-content">
+    <div class="dp-area">
+      <span class="dp">
+        <img
+          src="../../../../../ng1/images/setting-module/upload-photo.svg"
+          alt="user"
+          *ngIf="!fileAvatar"
+        />
+        <img [src]="croppedImage?.base64" alt="user" *ngIf="fileAvatar" />
+      </span>
+      <div class="dp-info">
+        <input
+          type="file"
+          id="profile-dp"
+          (change)="onSelectFile($event)"
+          (click)="onInputClick($event)"
+          accept="image/gif, image/jpeg, image/png, image/jpg"
+          style="display: none;"
+          multiple
+        />
+        <!-- <label for="profile-dp" class="static-link" (click)="onSelectFile($event)">Upload Avtar</label> -->
+
+        <div class="static-link">
+          <label class="innert-links" for="profile-dp">{{
+            fileAvatar ? "Change Photo" : "Upload Avatar"
+          }}</label>
+
+          <label
+            for="profile-dp"
+            (click)="deleteAvatar()"
+            *ngIf="selectedTechUser?.avatar?.updatedAt"
+          >
+            <a href="javascript:void(0)" restore-default-button=""
+              >Remove Photo</a
+            >
+          </label>
+          <!-- <label for="profile-dp" (click)="rePositionAvatar()">
+            <a href="javascript:void(0)" restore-default-button=""
+              >Reposition Photo</a
+            >
+          </label> -->
+        </div>
+        <span>Maximum size of 2MB. JPG, GIF, PNG</span>
+      </div>
+    </div>
+    <form [formGroup]="techUserForm" (ngSubmit)="onCreateSubmit()">
+      <div class="f-row">
+        <div class="f-col col-50">
+          <label>First Name</label>
+          <div class="form-row">
+            <input
+              type="text"
+              class="form-input"
+              formControlName="firstName"
+              placeholder="Enter First Name"
+            />
+            <div
+              *ngIf="submitted && f.firstName.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.firstName.errors.required">
+                First Name is required
+              </div>
+              <div *ngIf="f.firstName.errors.minlength">
+                First name is too short.
+              </div>
+              <div *ngIf="f.firstName.errors.maxlength">
+                First name is too large.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="f-col col-50">
+          <label>Last Name</label>
+          <div class="form-row">
+            <input
+              type="text"
+              class="form-input"
+              formControlName="lastName"
+              placeholder="Enter Last Name"
+            />
+            <div
+              *ngIf="submitted && f.lastName.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.lastName.errors.required">
+                Last Name is required
+              </div>
+              <!-- <div *ngIf="f.lastName.errors.minlength">
+                Last name is too short.
+              </div> -->
+              <div *ngIf="f.lastName.errors.maxlength">
+                Last name is too large.
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- {{submitted}} {{f.primaryEmail.errors | json}} {{isEmailIdUnique}} -->
+        <div class="f-col col-50">
+          <label>Email</label>
+          <div class="form-row">
+            <input
+              type="text"
+              class="form-input"
+              formControlName="primaryEmail"
+              #primaryEmail
+              (blur)="isEmailUnique(primaryEmail.value)"
+              placeholder="Enter Email Address"
+            />
+            <label
+              *ngIf="!isEmailIdUnique"
+              class="invalid-feedback"
+              >This email already occupied.</label
+            >
+            <div
+              *ngIf="submitted && f.primaryEmail.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.primaryEmail.errors.required">
+                Email is required
+              </div>
+              <!-- <div *ngIf="f.primaryEmail.errors.email">
+              Email must be a valid email address
+            </div> -->
+              <div *ngIf="f.primaryEmail.errors.pattern">
+                Email must be a valid email address
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="f-col col-50">
+          <label>Set Tech User Role</label>
+          <div class="form-row">
+            <select class="cmn-select form-input" formControlName="techRole">
+              <option *ngFor="let role of techRoles" value="{{ role }}">{{
+                role
+              }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="eml-ntl-list">
+          <div class="email-note-wrape">
+            <h5>Set Email Notification for Tech User</h5>
+            <ul class="list-unstyled">
+              <li class="cmn-checkbox">
+                <input
+                  type="checkbox"
+                  id="account"
+                  formControlName="newDevice"
+                />
+                <label for="account">
+                  When my account is logged in from a new device
+                </label>
+              </li>
+              <li class="cmn-checkbox">
+                <input
+                  type="checkbox"
+                  id="any"
+                  formControlName="ticketCreated"
+                />
+                <label for="any"> When a New Ticket created </label>
+              </li>
+              <li class="cmn-checkbox">
+                <input
+                  id="logged"
+                  type="checkbox"
+                  formControlName="myTicketUpdated"
+                />
+                <label for="logged">
+                  When a ticket that is assigned to me is updated
+                </label>
+              </li>
+              <li class="cmn-checkbox">
+                <input
+                  id="is"
+                  type="checkbox"
+                  formControlName="ticketCloseNotifications"
+                />
+                <label for="is"> When any ticket is closed </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <input type="submit" value="Save" class="btn btn-primary" />
+        <a
+          href="javascrip:;"
+          class="btn btn-secondary"
+          (click)="create = !create"
+          >Cancel</a
+        >
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- sidebar popup edit -->
+<div class="sidebar-popup role-dlt" [class.opened]="edit">
+  <!-- header -->
+  <div class="sidebar-header">
+    <div class="h1">Edit Tech User</div>
+    <a class="close" href="javascript:;" (click)="edit = !edit">
+      <img src="../../../../../ng1/images/setting-module/close.svg" alt="close"
+    /></a>
+  </div>
+  <div class="warn-msg" *ngIf="selectedTechUser && !selectedTechUser.isEmailVerified">
+    <img
+      src="../../../../../ng1/images/setting-module/warning.svg"
+      alt="warning"
+    />
+    <p>
+      User email is not verified yet to verify email click on link here <a href="javascript:;" (click)="resendWelcomeEmail(selectedTechUser.primaryEmail);">Resend Email</a>
+    </p>
+  </div>
+
+  <div class="middle-content">
+    <div class="dp-area">
+      <span
+        class="dp"
+        *ngIf="selectedTechUser && selectedTechUser.avatar !== null"
+      >
+        <img
+          *ngIf="selectedTechUser.isEmailVerified"
+          src="/users/{{ selectedTechUser.id }}/image.jpg?t={{
+            selectedTechUser.avatar.updatedAt
+          }}"
+          alt="user"
+        />
+        <span class="simple-dp" *ngIf="!selectedTechUser.isEmailVerified">
+          {{ displayFrstLstChar(selectedTechUser) }}
+        </span>
+      </span>
+      <span
+        class="dp"
+        *ngIf="selectedTechUser && selectedTechUser.avatar === null"
+      >
+        <span class="simple-dp" *ngIf="selectedTechUser.avatar === null">
+          <img
+            src="../../../../../../ng1/images/setting-module/avtar-56@2x.png"
+            alt="user"
+          />
+        </span>
+      </span>
+
+      <div class="dp-info">
+        <input type="file" id="profile-dp" style="display: none;" />
+        <!-- <label for="profile-dp" class="static-link">Upload Avtar</label> -->
+
+        <div class="static-link">
+          <label class="innert-links" for="profile-dp">
+            {{
+              selectedTechUser && selectedTechUser.avatar
+                ? "Change Photo"
+                : "Upload Avtar"
+            }}</label
+          >
+          <label for="profile-dp" *ngIf="selectedTechUser?.avatar?.updatedAt">
+            <a
+              href="javascript:void(0)"
+              restore-default-button=""
+              (click)="deleteAvatar()"
+              >Remove Photo</a
+            >
+          </label>
+
+          <!-- <label for="profile-dp">
+            <a
+              href="javascript:void(0)"
+              restore-default-button=""
+              (click)="rePositionAvatar()"
+              >Reposition Photo</a
+            >
+          </label> -->
+        </div>
+        <span>Maximum size of 2MB. JPG, GIF, PNG</span>
+      </div>
+
+      <div class="img-croparea" *ngIf="isCroppedImg">
+        <div class="crop-inner">
+          <div class="heading-area">
+            <h2>Crop Photo</h2>
+            <a
+              href="javascript:;"
+              class="close-btn"
+              (click)="isCroppedImg = false"
+              >remove</a
+            >
+          </div>
+          <div class="cropping">
+            <div class="img-crop">
+              <image-cropper
+                [imageBase64]="imageBase64"
+                [imageChangedEvent]="imageChangedEvent"
+                [maintainAspectRatio]="false"
+                [aspectRatio]="4 / 3"
+                [resizeToWidth]="128"
+                format="png"
+                (imageCropped)="imageCropped($event)"
+              ></image-cropper>
+            </div>
+
+            <div class="preview">
+              <h6>Profile Preview</h6>
+              <img [src]="croppedImage?.base64" />
+            </div>
+            <div class="btn-crops">
+              <button type="button" class="btn btn-primary" (click)="cropIt()">
+                Crop Photo
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                (click)="closeModel()"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <form [formGroup]="techUserForm" (ngSubmit)="onSubmit()">
+      <div class="f-row">
+        <div class="f-col col-50">
+          <label>First Name</label>
+          <div class="form-row">
+            <input type="text" formControlName="firstName" class="form-input" />
+            <div
+              *ngIf="submitted && f.firstName.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.firstName.errors.required">
+                First Name is required
+              </div>
+              <div *ngIf="f.firstName.errors.minlength">
+                First name is too short.
+              </div>
+              <div *ngIf="f.firstName.errors.maxlength">
+                First name is too large.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="f-col col-50">
+          <label>Last Name</label>
+          <div class="form-row">
+            <input type="text" class="form-input" formControlName="lastName" />
+            <div
+              *ngIf="submitted && f.lastName.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.lastName.errors.required">
+                Last Name is required
+              </div>
+              <div *ngIf="f.lastName.errors.minlength">
+                Last name is too short.
+              </div>
+              <div *ngIf="f.lastName.errors.maxlength">
+                Last name is too large.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="f-col col-50">
+          <label>Email</label>
+          <div class="form-row">
+            <input
+              type="text"
+              class="form-input"
+              formControlName="primaryEmail"
+              #primaryEmail
+              (blur)="isEmailUnique(primaryEmail.value)"
+              formControlName="primaryEmail"
+            />
+            <div
+              *ngIf="submitted && f.primaryEmail.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.primaryEmail.errors.required && isEmailIdUnique">
+                Email is required
+              </div>
+              <div *ngIf="f.primaryEmail.errors.pattern && isEmailIdUnique">
+                Email must be a valid email address
+              </div>
+            </div>
+            <label
+              *ngIf="!f.primaryEmail.errors && !isEmailIdUnique"
+              class="invalid-feedback"
+              >This email already occupied.</label
+            >
+          </div>
+        </div>
+        <div class="f-col col-50">
+          <label>Set Tech User Role</label>
+          <div class="form-row">
+            <select class="cmn-select form-input" formControlName="techRole">
+              <option *ngFor="let role of techRoles" value="{{ role }}">{{
+                role
+              }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="eml-ntl-list">
+          <div class="email-note-wrape">
+            <h5>Set Email Notification for Tech User</h5>
+            <ul class="list-unstyled">
+              <li class="cmn-checkbox">
+                <input
+                  type="checkbox"
+                  id="nDevice"
+                  formControlName="newDevice"
+                />
+                <label for="nDevice">
+                  When my account is logged in from a new device
+                </label>
+              </li>
+              <li class="cmn-checkbox">
+                <input
+                  type="checkbox"
+                  id="tCreated"
+                  formControlName="ticketCreated"
+                />
+                <label for="tCreated"> When a New Ticket created </label>
+              </li>
+              <li class="cmn-checkbox">
+                <input
+                  id="mTicketUpdated"
+                  type="checkbox"
+                  formControlName="myTicketUpdated"
+                />
+                <label for="mTicketUpdated">
+                  When a ticket that is assigned to me is updated
+                </label>
+              </li>
+              <li class="cmn-checkbox">
+                <input
+                  id="tCloseNotifications"
+                  type="checkbox"
+                  formControlName="ticketCloseNotifications"
+                />
+                <label for="tCloseNotifications">
+                  When any ticket is closed
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <input type="submit" value="Save" class="btn btn-primary" />
+        <a href="javascrip:;" class="btn btn-secondary" (click)="edit = !edit"
+          >Cancel</a
+        >
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- tag delete popup -->
+<div class="img-croparea deletePopup" *ngIf="popup">
+  <div class="crop-inner">
+    <div class="cropping">
+      <div class="popup-message">
+        <span class="icon-part">
+          <img
+            src="../../../../../ng1/images/setting-module/delete-red.svg"
+            alt="delete"
+          />
+        </span>
+        <div class="message-right">
+          <h1>Restore User</h1>
+          <p>Are you sure you want to restore user?</p>
+        </div>
+        <a class="close-ico" href="javascript:;" (click)="popup = false"
+          ><img
+            src="../../../../../ng1/images/setting-module/close.svg"
+            alt="close"
+        /></a>
+      </div>
+      <div class="btn-crops">
+        <button type="button" class="btn btn-primary" (click)="restoreUser()">
+          Yes, I am sure
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="popup = false">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- tag delete popup -->
+<div class="img-croparea deletePopup" *ngIf="deletepopup">
+  <div class="crop-inner">
+    <div class="cropping">
+      <div class="popup-message">
+        <span class="icon-part">
+          <img
+            src="../../../../../ng1/images/setting-module/delete-red.svg"
+            alt="delete"
+          />
+        </span>
+        <div class="message-right">
+          <h1>Delete User</h1>
+          <p>Are you sure you want to delete?</p>
+        </div>
+        <a class="close-ico" href="javascript:;" (click)="deletepopup = false"
+          ><img
+            src="../../../../../ng1/images/setting-module/close.svg"
+            alt="close"
+        /></a>
+      </div>
+      <div class="btn-crops">
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="removeTechUser()"
+        >
+          Yes, I am sure
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="deletepopup = false"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

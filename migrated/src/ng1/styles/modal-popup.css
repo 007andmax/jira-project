@@ -8,7 +8,7 @@
   transition: all .3s;
   pointer-events: none;
   z-index: 99;
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
 }
 
 .description .placeholder {
@@ -42,7 +42,7 @@
 }
 
 .alyosha {
-  font-family: "Graphik Bold", sans-serif;
+  font-family: "Graphik-Bold", sans-serif;
   font-size: 12px;
 }
 
@@ -569,7 +569,7 @@ _::-webkit-:not(:root:root),
   color: #364656;
   font-size: 28px;
   margin: 25px 0;
-  font-family: 'Graphik Medium', sans-serif;
+  font-family: 'Graphik-Medium', sans-serif;
 }
 
 .modal-unlock-window .unlock-hide-icn,
@@ -619,7 +619,7 @@ _::-webkit-:not(:root:root),
 .modal-unlock-window label {
   color: #4f5f79;
   font-size: 13px;
-  font-family: 'Graphik Medium', sans-serif;
+  font-family: 'Graphik-Medium', sans-serif;
   margin-bottom: 8px;
 }
 
@@ -1003,7 +1003,7 @@ _::-webkit-:not(:root:root),
 }
 
 .add-category-lp-dropdown > div p {
-  font-family: "Graphik Semibold", sans-serif;
+  font-family: "Graphik-Semibold", sans-serif;
   font-size: 15px;
   font-weight: 600;
   color: #4f5f79;
@@ -1011,7 +1011,7 @@ _::-webkit-:not(:root:root),
 }
 
 .add-category-lp-dropdown > div label span {
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
   font-size: 13px;
   font-weight: 500;
   color: #4f5f79;
@@ -1411,7 +1411,7 @@ _::-webkit-:not(:root:root),
   display: inline-block;
   margin: 0;
   border: 1px solid #edf2f6;
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
 }
 
 .tab-btns .btn:hover,
@@ -1497,7 +1497,7 @@ _::-webkit-:not(:root:root),
   height: 32px;
   background-color: #edf2f6 !important;
   border-radius: 4px;
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
   font-size: 13px;
   font-weight: 500;
   color: #4f5f79;
@@ -1567,7 +1567,7 @@ _::-webkit-:not(:root:root),
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
   font-size: 14px;
   font-weight: 500;
 }
@@ -1987,12 +1987,12 @@ _::-webkit-:not(:root:root),
   color: #4f5f79;
   font-size: 13px;
   letter-spacing: 0;
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
 }
 
 .create-new .input.dropdown-toggle {
   letter-spacing: 0;
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
   height: 32px !important;
   background-color: #edf2f6 !important;
   border-radius: 4px;
@@ -2210,7 +2210,7 @@ _::-webkit-:not(:root:root),
   color: #4f5f79;
   font-size: 13px;
   letter-spacing: 0;
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
 }
 
 .phone-number-anton > div > div:last-child button {

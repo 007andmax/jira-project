@@ -49,6 +49,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.upgrade.bootstrap(document.body, ['quicktech']);
     setUpLocationSync(this.upgrade);
+    this.userService.getUser();
     this.devicesState.onInit();
     this.usersStateService.onInit();
     this.companiesState.onInit();
@@ -56,6 +57,7 @@ export class AppComponent implements OnInit {
     this.glNumberStateService.onInit();
     this.inventoryStateService.onInit();
     //  this.userService.getCurrentUser();
+    
     this.websocketService.initializeWebSocketConnection();
     this.appService.onCheckMobile();
     window.addEventListener('resize', this.appService.onCheckMobile);

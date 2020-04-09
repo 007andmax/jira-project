@@ -1,0 +1,111 @@
+
+$font-body: 'Graphik-Regular';
+$grahic-light:'Graphik-Light';
+$graphicSemibold:'Graphik-Semibold';
+$graphic-bold:'Graphik-Bold';
+$graphicMedBold:'Graphik-Medium';
+
+.contract{
+    hr{
+        border-bottom: 1px solid #f3f7f9;
+        margin: 20px 0 20px 0;
+        padding: 0;
+        border-top: 0;
+    }
+    table{
+        -ms-box-sizing: border-box;
+        -o-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        &:first-child{
+            margin-bottom: 18px;
+            border-bottom: 1px solid #f3f7f9;
+            td{
+                padding: 0 15px 12px 0
+            }
+        }
+    }
+    td{
+        padding: 0 15px 0 0;
+        border-bottom: 0;
+        vertical-align: middle;
+        -ms-box-sizing: border-box;
+        -o-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        &:last-child{
+            padding-right: 0;
+        }
+        strong{
+            font-size: 12px;
+            font-weight: 500;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.33;
+            letter-spacing: normal;
+            color: #364656;
+            font-family: $graphicMedBold;
+        }
+        h5{
+            color: #4f5f79;
+            margin: 6px 0;
+            max-width: 420px;
+            font-family: $graphicMedBold;
+            font-weight: 500;
+            text-transform: none;
+        }
+        h5.headings{
+            margin-bottom: 4px;
+            margin-top:0;
+            position: relative;
+            max-width: initial;
+            font-family: $graphicSemibold;
+            color: #364656;
+            &::before{
+                position: absolute;
+                left: -20px;
+                height: 6px;
+                width: 6px;
+                background-color: #16a4fa;
+                border-radius: 50%;
+                content: "";
+                top: 6px;
+            }
+        }
+        p{
+            margin-bottom: 20px;
+            max-width: 420px;
+            font-size: 13px;
+            font-weight: normal;
+            font-style: normal;
+            line-height: 1.54;
+            letter-spacing: normal;
+            color: #4f5f79;
+            &:last-child{
+                margin-bottom: 0;
+            }
+        }
+    }
+    .p-name{
+        width: 478px;
+    }
+    .rate{
+        width: 100px;
+    }
+    .action{
+        width: 70px;
+        position: relative;
+    }
+}
+
+.margin-bottom{
+    margin: 0px 0px 10px 0px !important;
+}
+
+.contract .action .modal-content.toggle-area {
+    top: 35px;
+    right: 15px;
+    a.btn.btn-secondary{margin-left: 0;}
+}
