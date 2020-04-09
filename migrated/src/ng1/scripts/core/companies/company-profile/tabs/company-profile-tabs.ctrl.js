@@ -33,6 +33,7 @@
           selectDevicesIds: [],
           isOfflineDeviceSelected: false
         };
+        console.log("$scope.company",$scope.company);
         if($scope.company) {
           $rootScope.isAgentsRequestSending = true;
           if ($scope.company.clientType.toLowerCase() === 'vendor') {

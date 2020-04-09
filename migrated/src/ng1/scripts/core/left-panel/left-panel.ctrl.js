@@ -1616,11 +1616,13 @@
           return companyProfileSharedState.companyId;
         }, function (companyId) {
           if (companyId) {
+            console.log("companyId",companyId);
             $scope.companyProfilePageUsersList = UsersService.getAllByCompanyIdNonArchived(companyId);
             TicketsService.getAllCountsByCompanyId($scope, companyId, ticketCounterCallback);
             $scope.companyForCompanyProfile = CompaniesService.getOneById(companyId, function (resp) {
               $scope.companyForCompanyProfile = resp;
             });
+            console.log("$scope.companyForCompanyProfile",$scope.companyForCompanyProfile);
             $scope.companyDevices = $scope.devices.filter(function (device) {
               return device.companyId === companyId;
             })
