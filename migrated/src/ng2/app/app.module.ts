@@ -179,6 +179,7 @@ import { OutgoingEmailComponent } from './components/setting/email-setting/outgo
 import { TicketSettingsComponent } from './components/setting/invoice-tickets/ticket-settings/ticket-settings.component';
 import { InvoiceSettingsComponent } from './components/setting/invoice-tickets/invoice-settings/invoice-settings.component';
 import { QuotesSettingsComponent } from './components/setting/invoice-tickets/quotes-settings/quotes-settings.component';
+import { GlNumberSettingsComponent } from './components/setting/gl-number/gl-number.component';
 import { Onlynumber } from './helpers/Onlynumber';
 import { CompanyComponent } from './components/setting/commission/company/company.component';
 import { ProductComponent } from './components/setting/commission/product/product.component';
@@ -262,6 +263,10 @@ angular.module('quicktech')
   .directive(
     'manageTagsComponent',
     downgradeComponent({ component: ManageTagsComponent })
+  )
+  .directive(
+    'glnumberSettingsComponent',
+    downgradeComponent({ component: GlNumberSettingsComponent })
   )
   .directive(
     'companyProfileComponent',
@@ -459,7 +464,8 @@ angular.module('quicktech')
     LeftPanelInventoryComponent,
     AddCategoryProductComponent,
     CompanyProductsComponent,
-    TaxesComponent
+    TaxesComponent,
+    GlNumberSettingsComponent
   ],
   imports: [
     BrowserModule,

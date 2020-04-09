@@ -21,6 +21,7 @@ import { CompanyUserComponent } from './components/company-user/company-user.com
 import { QuoteCreateComponent } from './components/billing/quotes/quote-create/quote-create.component';
 import { QuotePreviewComponent } from './components/billing/quotes/quote-preview/quote-preview.component';
 import { RecurringTicketsComponent } from './components/tickets/recurring-tickets/recurring-tickets.component';
+import { GlNumberComponent } from './components/setting/gl-number/gl-number.component';
 import { CompaniesComponent } from './components/companies/companies.component';
 import { UsersComponent } from './components/users/users.component';
 import { ReportsComponent } from './components/reports/reports.component';
@@ -115,6 +116,11 @@ const routes: Routes = [
   {
     path: 'ng2/setting/taxes',
     component: TaxesSettingsComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'ng2/setting/glnumber',
+    component: GlNumberComponent,
     pathMatch: 'full',
   },
   {
