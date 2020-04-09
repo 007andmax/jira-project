@@ -61,6 +61,13 @@
         $scope.countOfCategories = 10;
         $scope.inventoryCategoryList = ProductsService.getCategories($scope);
 
+        function ticketCounterCallback(resp) {
+          $scope.ticketsCounterByCompany = resp;
+          companyProfileSharedState.ticketsCounts = resp;
+        }
+        var company_id = localStorage.getItem('company_id') || null;
+       
+
         $scope.checkDublicateCategory = function() {
           var duplicateCategory = $scope.inventoryCategoryList.filter(function(item){
            
@@ -302,6 +309,7 @@
         }
 
         $scope.activateCompanyProfileTab = function (tabToActivate) {
+
           if (tabToActivate == 'CompanyProfilePasswordManagerPage') {
             $scope.goToTab(`#/ng2/company-password-manager`);
             return;
@@ -1630,9 +1638,15 @@
           }
         })
 
-        function ticketCounterCallback(resp) {
-          $scope.ticketsCounterByCompany = resp;
-          companyProfileSharedState.ticketsCounts = resp;
+       if (company_id) {
+          $scope.companyProfilePageUsersList = UsersService.getAllByCompanyIdNonArchived(company_id);
+       //  TicketsService.getAllCountsByCompanyId($scope, company_id, ticketCounterCallback);
+           $scope.companyForCompanyProfile = CompaniesService.getOneById(company_id, function (resp) {
+            $scope.companyForCompanyProfile = resp;
+          });
+        /*  $scope.companyDevices = $scope.devices.filter(function (device) {
+            return device.companyId === company_id;
+          })*/
         }
 
 
