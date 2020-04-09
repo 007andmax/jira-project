@@ -10,7 +10,7 @@
                 UserConfirmationsService, CompaniesService, UsersService, SubscriptionsService,
                 Utils, PermissionsService, ProductsService, $rootScope) {
  
-        var tabs = ['dashboard', 'users', 'devices', 'network-scan', 'products'/*, 'agents', 'settings'*/],
+        var tabs = ['dashboard', 'users', 'devices', 'network-scan', 'products'/*, 'agents', 'settings'*/,'contracts','tickets-all'],
           devicesHeaderState = SharedStateService.getSharedState('devicesHeader');
 
         $scope.PermissionsService = PermissionsService;
@@ -33,6 +33,7 @@
           selectDevicesIds: [],
           isOfflineDeviceSelected: false
         };
+      
         if($scope.company) {
           $rootScope.isAgentsRequestSending = true;
           if ($scope.company.clientType.toLowerCase() === 'vendor') {

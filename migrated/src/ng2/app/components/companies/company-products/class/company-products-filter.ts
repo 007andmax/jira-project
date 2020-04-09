@@ -20,11 +20,9 @@ export class CompanyproductsFilter {
         1 : ((a.date.toLowerCase() > b.date.toLowerCase()) ? -1 : 0));
     }
     public onFilter(field, lines) {
-       console.log("field",field);
         let index = this.filterTop.findIndex(item => item.field === field);
         if (index > -1) {
             let sort = this.filterTop[index].filter;
-            console.log("field",field);
             if (field === 'date') {
                 this.clearFilter();
                 if (sort === '' || sort === 'DESC') {

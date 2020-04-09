@@ -52,6 +52,7 @@
       }
       checkInit();
       $rootScope.companyListLoaded = true;
+      $rootScope.$broadcast('onInitConpaiesList', null);
     },
       function (resp) {
         console.error(resp);
@@ -347,7 +348,6 @@
       if (companyId === storage.currentCompany.id) {
         return storage.currentCompany;
       }
-
       return Utils.findById(storage.companies, companyId) || Utils.findById(storage.deletedCompanies, companyId);
 
     }

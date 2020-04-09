@@ -26,7 +26,6 @@ export class ReportsStateService {
   }
 
   public parseReportContent(report) {
-    console.log('getPdfIdFromRest');
     //  disableOpenPdfBtn();
     var selectedHtml;
     var source = $("#product-list-ticket-data");
@@ -45,7 +44,6 @@ export class ReportsStateService {
     if (sourceSVGs && sourceSVGs.length) {
       var svgs = target.find('svg');
       svgs.replaceWith(function (index) {
-        console.log("sourceSVGs[index]", sourceSVGs[index]);
         var svg: any = $(sourceSVGs[index]),
           img = document.createElement('img');
         var width = svg.width() + 'px';
@@ -69,16 +67,12 @@ export class ReportsStateService {
       });
     }
     if (report === 'company-roducts-report') {
-      console.log("this.includePurchaseCost",this.includePurchaseCost);
       let products = target.find("#list-products").find("li");
-      // console.log("proucts",proucts);
       target.find("#list-products").html("");
       for (let i = 0; i < products.length; i++) {
         if (products.eq(i).find("input[type='checkbox']").prop('checked')) {
           target.find("#list-products").append(products.eq(i));
         }
-        //console.log(target.find("#list-products").html());
-        console.log(products.eq(i).find("input[type='checkbox']").prop('checked'));
       }
       if (!this.includePurchaseCost) target.find(".purchase-cost").hide();
 
