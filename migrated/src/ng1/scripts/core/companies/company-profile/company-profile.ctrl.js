@@ -44,7 +44,6 @@
         $scope.frequency = 'WEEKLY';
         $scope.selectedChart = 'countOfNewTickets';
         $scope.dateFormat = '%d %b';
-console.log("$scope.company",$scope.company);
         $scope.company = CompaniesService.getOneById($stateParams.companyId, function (resp) {
           if (resp === $scope.company.id) {
             $state.go('companies');

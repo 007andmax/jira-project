@@ -33,7 +33,6 @@ export class TicketReportComponent implements OnInit,OnDestroy {
 
 
   ngOnInit() {
-    console.log("ngOnInit ticket reports");
     this.currentCompany = this.companiesStateService.getCurrentCompany();
     this.chartOptions = {
       chart: {
@@ -259,6 +258,6 @@ export class TicketReportComponent implements OnInit,OnDestroy {
     return index;
   }
   ngOnDestroy(): void {
-  console.log("ngOnDestroy ticket reports");
+ 
   }
 }

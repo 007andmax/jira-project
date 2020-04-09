@@ -46,7 +46,6 @@ export class ReportAdditionalActionsComponent implements OnInit, OnDestroy {
     this.sub.add(exportCSV);
   }
   togglePurchaseCost(event) {
-    console.log("event", event.target.checked);
     this.changePurchaseCost.emit(event.target.checked);
   }
   sendEmail() {

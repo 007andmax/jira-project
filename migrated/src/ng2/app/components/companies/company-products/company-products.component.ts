@@ -25,7 +25,6 @@ export class CompanyProductsComponent implements OnInit {
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
-    console.log("ngOnInit");
     this.reportsStateService.includePurchaseCost = true;
   }
   parseDate(ticketCreatedAt) {
@@ -58,7 +57,6 @@ export class CompanyProductsComponent implements OnInit {
     this.filter.onFilterList(this.productsCompanyReport.lines);
     this.productsCompanyReport.startDate = moment(new Date(this.productsCompanyReport.startDate)).format('ll');
     this.productsCompanyReport.endDate = moment(new Date(this.productsCompanyReport.endDate)).format('ll');
-    console.log("this.productsCompanyReport", this.productsCompanyReport);
     this.calculateSumPrices();
     this.cd.detectChanges();
   }
@@ -74,7 +72,6 @@ export class CompanyProductsComponent implements OnInit {
     this.cd.detectChanges();
   }
   changeGeneralCheckbox() {
-    console.log("this.generalCheckbox", this.generalCheckbox);
     if (this.generalCheckbox) {
       this.productsCompanyReport.lines.forEach(item => item.isChecked = true)
     } else {
