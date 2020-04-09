@@ -5,11 +5,11 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { map } from "rxjs/operators";
 declare var $:any;
 @Component({
-  selector: "app-gl-number",
+  selector: "app-gl-number-settings",
   templateUrl: "./gl-number.component.html",
   styleUrls: ["./gl-number.component.scss"]
 })
-export class GlNumberComponent implements OnInit, OnDestroy {
+export class GlNumberSettingsComponent implements OnInit, OnDestroy {
   loading = false;
   create = false;
   selectedIdx = -1;
