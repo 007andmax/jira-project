@@ -347,7 +347,7 @@
       if (companyId === storage.currentCompany.id) {
         return storage.currentCompany;
       }
-
+console.log("storage.companies",storage.companies);
       return Utils.findById(storage.companies, companyId) || Utils.findById(storage.deletedCompanies, companyId);
 
     }

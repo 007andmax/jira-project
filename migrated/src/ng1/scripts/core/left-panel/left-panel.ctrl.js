@@ -1646,8 +1646,9 @@
        //  TicketsService.getAllCountsByCompanyId($scope, company_id, ticketCounterCallback);
            $scope.companyForCompanyProfile = CompaniesService.getOneById(company_id, function (resp) {
             $scope.companyForCompanyProfile = resp;
-            console.log("$scope.companyForCompanyProfile",$scope.companyForCompanyProfile);
+           
           });
+          console.log("$scope.companyForCompanyProfile",$scope.companyForCompanyProfile);
         /*  $scope.companyDevices = $scope.devices.filter(function (device) {
             return device.companyId === company_id;
           })*/
