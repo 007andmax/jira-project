@@ -5,11 +5,11 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { map } from "rxjs/operators";
 declare var $:any;
 @Component({
-  selector: "app-taxes",
+  selector: "app-taxes-settings",
   templateUrl: "./taxes.component.html",
   styleUrls: ["./taxes.component.scss"]
 })
-export class TaxesComponent implements OnInit, OnDestroy {
+export class TaxesSettingsComponent implements OnInit, OnDestroy {
   loading = false;
   create = false;
   selectedIdx = -1;

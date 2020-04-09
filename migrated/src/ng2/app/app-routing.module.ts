@@ -9,7 +9,7 @@ import { ManageTagsComponent } from './components/setting/manage-tags/manage-tag
 import { CompanyProfileComponent } from './components/setting/company-profile/company-profile.component';
 import { TechUsersComponent } from './components/setting/tech-users/tech-users.component';
 import { EmailSettingComponent } from './components/setting/email-setting/email-setting.component';
-import { TaxesComponent } from './components/setting/taxes/taxes.component';
+import { TaxesSettingsComponent } from './components/setting/taxes/taxes.component';
 import { PermissionManageComponent } from './components/setting/permission-manage/permission-manage.component';
 import { EmailTempleteComponent } from './components/setting/email-templete/email-templete.component';
 import { IntegrationsComponent } from './components/setting/integrations/integrations.component';
@@ -25,6 +25,8 @@ import { CompaniesComponent } from './components/companies/companies.component';
 import { UsersComponent } from './components/users/users.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { ItemReportComponent } from './components/reports/item-report/item-report.component';
+import { InventoryComponent } from './components/inventory/inventory.component';
+import { CompanyProductsComponent } from './components/companies/company-products/company-products.component';
 
 const routes: Routes = [
   {
@@ -112,7 +114,7 @@ const routes: Routes = [
   },
   {
     path: 'ng2/setting/taxes',
-    component: TaxesComponent,
+    component: TaxesSettingsComponent,
     pathMatch: 'full',
   },
   {
@@ -145,6 +147,16 @@ const routes: Routes = [
     component: SubscriptionComponent,
     pathMatch: 'full',
   },
+  {
+    path: 'ng2/inventory/products',
+    component: InventoryComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'ng2/company-products',
+    component: CompanyProductsComponent,
+    pathMatch: 'full'
+  }
 ];
 
 /**
