@@ -197,7 +197,7 @@
                         ng-click="toggleDescription(device.id)"
                         style="display: inline-block; max-width: 400px;"
                         uib-tooltip="{{ ((device.description | unknownFilter) || (device.hostName | unknownFilter) || device.ipAddress) + (device.deviceId === masterAgent.id ? ' (MASTER AGENT)' : '') }}"
-                        trimmed-tooltip-checker="((device.description | unknownFilter) || (device.hostName | unknownFilter) || device.ipAddress) + (device.deviceId === masterAgent.id ? ' (MASTER AGENT)' : '')"></span>
+                         ><p>{{((device.description | unknownFilter) || (device.hostName | unknownFilter) || device.ipAddress) + (device.deviceId === masterAgent.id ? ' (MASTER AGENT)' : '')}}</p></span>
 
                   <i class="icon-sm edit-icon" ng-show="showEditDeviceField" ng-click="toggleDescription(device.id)"></i>
                 </div>
@@ -217,7 +217,7 @@
           </div>
           <div class="col-md-2">
             <div class="device-manufacturer" uib-tooltip="{{ (device.manufacturer | unknownFilter) || 'not defined' }}"
-                 trimmed-tooltip-checker="(device.manufacturer | unknownFilter) || 'not defined'">
+                 ><p>{{(device.manufacturer | unknownFilter) || 'not defined'}}</p>
             </div>
           </div>
           <div class="col-md-2">

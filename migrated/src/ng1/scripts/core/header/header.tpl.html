@@ -18,7 +18,7 @@
       <!--</div>-->
 
       <p ng-if="!globalSearch.selectedItemsCount && (globalSearch.openedItemName || getPageNameByState())">
-          <span style="font-family: 'Graphik Light', sans-serif;">
+          <span style="font-family: 'Graphik-Light', sans-serif;">
             {{ globalSearch.openedItemName ? globalSearch.openedItemName : userReadable(getPageNameByState()) }}
           </span>
         <span class="text-muted"
@@ -241,16 +241,16 @@
           <i class="icn-sm icn-collapse"></i>
         </div>
         <ul class="dropdown-menu tag-list">
-          <li class="topNavbar-logout" ui-sref="settings.myProfile">
+          <li class="topNavbar-logout" ui-sref="myprofile-component"> 
             <a href="javascript:void(0)" class="ha-20-16">
-              <span>Profile</span>
+              <span>My Profile</span>
             </a>
           </li>
-          <li class="topNavbar-logout" ui-sref="settings">
+          <!-- <li class="topNavbar-logout" ui-sref="settings">
             <a href="javascript:void(0)" class="ha-20-16">
               <span>Settings</span>
             </a>
-          </li>
+          </li> -->
           <li class="topNavbar-logout" logout-btn>
             <a href="javascript:void(0)" class="ha-20-16">
               <span>Logout</span>

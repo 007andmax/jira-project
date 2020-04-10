@@ -818,11 +818,6 @@ localStorage.setItem('report',report);
           return el;
         });
       }
-
-
-
-
-
       $scope.changeReportPageView = function (reportType) {
         $scope.reportPageType = reportType;
       };

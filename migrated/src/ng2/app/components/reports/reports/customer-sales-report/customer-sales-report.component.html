@@ -1,0 +1,39 @@
+<div>
+  <app-report-menu [report]="'byCustomers'" (onSelectedClient)="onSelectedClient($event)" (onRequest)="onRequest($event)" (getReport)="getReport($event)"></app-report-menu>
+ </div>
+ <app-report-additional-actions [orientation]="(customerSalesReport.type === 'DETAILED') ? 'LANDSCAPE' : 'PORTRAIT'"  [fileName]="'sales_report'" [selectedClient]="selectedClient"></app-report-additional-actions>
+ <div class="loading" *ngIf="loadingInProgress"></div>
+ <div class="product-list___ticket" id="product-list-ticket-data" >
+
+  <div  class="product-list-ticket acc-col" [ngStyle]="{'width': customerSalesReport.type === 'DETAILED' ? '1180px' :  null}"   style="height: 100%;" *ngIf="!loadingInProgress">
+    <div class="report-header" [ngStyle]="{'width': (customerSalesReport.type === 'DETAILED') ? '1055px' : '' }">
+      <h1>Customer Sales Report</h1>
+      <div class="company-info">
+        <h3>{{customerSalesReport.clientCompanyName || 'All companies'}}</h3>
+        <p><span>{{customerSalesReport.startDate}}</span> - <span>{{customerSalesReport.endDate}}</span></p>
+      </div>
+    </div>
+    <div class="header-product-list-ticket" *ngIf="customerSalesReport.lines.length > 0">
+      <!--HEADER-->
+      <h3>{{ customerSalesReport.techCompanyName }}</h3>
+        <p *ngIf="customerSalesReport && customerSalesReport.type === 'DETAILED'">
+          Detailed sales for <span>{{ customerSalesReport.clientCompanyName }}</span>
+        </p>
+        <p><span>{{ parseDate(customerSalesReport.startDate)   }}</span> to <span>{{ parseDate(customerSalesReport.endDate)   }}</span>
+        </p>
+    </div>
+    
+     <div>
+       <app-overview-report [headers]="headers" [list]="list"></app-overview-report>  
+       <div class="product-report-detail-customer clearfix" *ngIf="customerSalesReport.type === 'DETAILED'">
+        <div class="col-md-3 pull-right">
+          <strong>Total Sales: <span [textContent]="parseTotal(customerSalesReport.totalSum)"></span></strong>
+        </div>
+      </div>
+     </div>
+  <app-report-footer  [orientation]="(customerSalesReport.type === 'DETAILED') ? 'LANDSCAPE' : 'PORTRAIT'" ></app-report-footer>
+   </div>
+ </div>
+
+
+

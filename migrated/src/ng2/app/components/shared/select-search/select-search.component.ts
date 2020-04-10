@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, OnDestroy } from '@angular/core';
 import { merge, Observable, Subject, Subscription } from "rxjs";
-
 import { debounceTime, distinctUntilChanged, filter, map } from "rxjs/operators";
 import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
 
@@ -17,14 +16,17 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
   @Input() class: string = null;
   @Input() editItem: any = null;
   @Input() maxlength: number = null;
+  @Input() placeholder: string = '';
   @Input() list = [];
   @Input() placeholder: string = '';
   @Input() id: string = '';
   @ViewChild('instance') instance: NgbTypeahead;
   @Output() onSelectedItem = new EventEmitter<any>();
+  @Output() onAddItem = new EventEmitter<any>();
   @Input() valid: boolean = true;
   @Input() filter: boolean = false;
   public selectedItem;
+  public isAdd: boolean = false;
   focus$ = new Subject<string>();
   click$ = new Subject<string>();
   sub = new Subscription();
@@ -46,9 +48,15 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
   }
   ngDoCheck() {
     if (this.editItem) this.selectedItem = (this.field) ? this.editItem : this.editItem;
-
   }
-
+  onCheckAdd(event) {
+    let index = this.list.findIndex(item => (this.field) ? item[this.field] === this.selectedItem : item === this.selectedItem);
+    if (index === -1 && this.add) {
+      this.isAdd = true;
+    } else {
+      this.isAdd = false;
+    }
+  }
   onChange(event) {
     let index = this.list.findIndex(item => (this.field) ? item[this.field] === this.selectedItem : item === this.selectedItem);
     if (index === -1) this.onSelectedItem.emit(this.selectedItem);
@@ -74,6 +82,7 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
    * @param companyId - id of company
    */
   public selectItem(item) {
+    this.isAdd = false;
     this.onSelectedItem.emit(item.item);
 
   }
@@ -83,7 +92,6 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
    * @param result
    */
   formatter = (result: string) => {
-
     return (this.field) ? result[this.field] : result;
   };
 
@@ -91,12 +99,15 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
    * clear client input
    */
   public clearClient() {
+    this.isAdd = false;
     this.onSelectedItem.emit(null);
-    //   this.editItem = null;
     this.selectedItem = null;
   }
 
-
+  addItem() {
+    this.onAddItem.emit(this.selectedItem);
+    this.isAdd = false;
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
 

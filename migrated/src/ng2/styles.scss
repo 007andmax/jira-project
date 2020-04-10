@@ -1,58 +1,46 @@
+
 @import './assets/styles/dropdowns.scss';
 @import './assets/styles/icons.scss';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "./../../node_modules/font-awesome/css/font-awesome.css";
 @import './assets/styles/main.scss';
 //COMMON STYLES ----------------------------
-
 .d-f {
   display: flex;
 }
-
 .jc-fs {
   justify-content: flex-start;
 }
-
 .jc-c {
   justify-content: center;
 }
-
 .jc-fe {
   justify-content: flex-end;
 }
-
 .ai-c {
   align-items: center;
 }
-
 .ff-g-m {
   font-family: Graphik-Medium, sans-serif;
 }
-
 .fw-600 {
   font-weight: 600;
 }
-
 .p-0 {
   padding: 0 !important;
 }
-
 .mt-20 {
   margin-top: 20px;
 }
-
 .mb-5 {
   margin-bottom: 5px;
 }
-
 .pl-0 {
   padding-left: 0 !important;
 }
-
 .pr-0 {
   padding-right: 0 !important;
 }
-
 .with-dollar, .with-percent {
   position: relative;
   input {
@@ -65,13 +53,11 @@
     top: 8px;
   }
 }
-
 .with-percent {
   &:before {
     content: '%';
   }
 }
-
 .circle-avatar {
   width: 40px;
   height: 40px;
@@ -96,20 +82,18 @@
     }
   }
 }
-
 .btn-new.btn-primary-white {
   background: #fff;
   color: #16a4fa;
   border: 1px solid #16a4fa;
   font-size: 12px;
-  font-family: "Graphik Semibold", sans-serif;
+  font-family: "Graphik-Semibold", sans-serif;
   font-weight: 600;
   &:hover {
     background: #16a4fa;
     color: #fff;
   }
 }
-
 .radio-container {
   display: flex;
   margin: 0;
@@ -155,7 +139,6 @@
     }
   }
 }
-
 .checkbox-container {
   position: relative;
   width: 16px;
@@ -177,11 +160,9 @@
     background-position: 16px 0;
   }
 }
-
 .ng-sidebar {
   z-index: 99 !important;
 }
-
 .btn-with-dropdown {
   display: flex !important;
   padding: 0 !important;
@@ -226,11 +207,9 @@
     }
   }
 }
-
 .main-container:nth-child(2) {
   display: none;
 }
-
 .ng-sidebar {
   position: fixed !important;
   background: #fff;
@@ -241,20 +220,17 @@
   right: -650px;
   opacity: 0;
 }
-
 .ng-sidebar.ng-sidebar--opened {
   opacity: 1;
   right: 0;
   //transition: all .3s !important;
   //transform: translateX(0);
 }
-
 .ng-sidebar--right {
   top: 78px !important;
   box-shadow: 0 0 60px 0 rgba(0, 0, 0, 0.1);
   overflow-x: hidden !important;
 }
-
 .left-panel-ng2__content--tags {
   app-select-search {
     .dark-dropdown {
@@ -282,7 +258,6 @@
     }
   }
 }
-
 .filter-item__content {
   app-select-search {
     > div {
@@ -290,7 +265,6 @@
     }
   }
 }
-
 app-left-panel-tags-companies {
   > .col-md-12 {
     padding: 0 24px;
@@ -337,7 +311,6 @@ app-left-panel-tags-companies {
     }
   }
 }
-
 .editor-container {
   .ngx-wrapper {
     margin-bottom: 64px;
@@ -421,7 +394,7 @@ app-left-panel-tags-companies {
       }
     }
     .ngx-editor-placeholder {
-      font-family: "Graphik Regular", sans-serif !important;
+      font-family: "Graphik-Regular", sans-serif !important;
       font-size: 13px !important;
       padding: 24px !important;
       line-height: 1.54;
@@ -432,7 +405,6 @@ app-left-panel-tags-companies {
     }
   }
 }
-
 .user-subscription {
   display: flex;
   height: 40px;
@@ -451,7 +423,6 @@ app-left-panel-tags-companies {
     margin-right: 4px;
   }
 }
-
 .left-panel-ng2.new-users {
   .left-panel-ng2__content--tags {
     app-select-search {
@@ -467,7 +438,6 @@ app-left-panel-tags-companies {
     }
   }
 }
-
 .new-companies-content__modal--content,
 .new-users-content__modal--content,
 .recurring-tickets-content__modal--content {
@@ -476,7 +446,7 @@ app-left-panel-tags-companies {
     margin: 0 20px;
     font-size: 12px;
     > div {
-      font-family: "Graphik Semibold", sans-serif;
+      font-family: "Graphik-Semibold", sans-serif;
       padding: 3px 0;
       cursor: pointer;
       margin-right: 24px;
@@ -491,9 +461,10 @@ app-left-panel-tags-companies {
   }
   app-tags,
   app-company-tags,
+  app-taxes,
   app-draft-email-recipients,
   draft-email-user-recipients {
-    > .col-md-12 {
+    > .col-md-12,.col-md-6 {
       margin-top: 40px;
       .mat-form-field {
         width: 100%;
@@ -512,7 +483,7 @@ app-left-panel-tags-companies {
         &:before {
           position: absolute;
           content: 'Tags';
-          font-family: "Graphik Medium", sans-serif;
+          font-family: "Graphik-Medium", sans-serif;
           font-size: 13px;
           left: 0;
           top: -28px;
@@ -521,7 +492,7 @@ app-left-panel-tags-companies {
       .mat-form-field-appearance-legacy .mat-form-field-label {
         padding: 12px 10px 10px 36px;
         font-size: 13px;
-        font-family: "Graphik Regular", sans-serif;
+        font-family: "Graphik-Regular", sans-serif;
         color: #9ca5b6;
       }
       .mat-form-field-infix {
@@ -544,6 +515,11 @@ app-left-panel-tags-companies {
           margin: 0;
         }
       }
+    }
+  }
+  app-taxes .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+    &:before {
+      content: 'Taxes' !important;
     }
   }
   app-draft-email-recipients {
@@ -613,7 +589,6 @@ app-left-panel-tags-companies {
     }
   }
 }
-
 .user-subscription {
   display: flex;
   height: 40px;
@@ -632,15 +607,13 @@ app-left-panel-tags-companies {
     margin-right: 4px;
   }
 }
-
-
 .archive-modal,
 .image-confirm-modal {
   padding: 40px 70px 40px 40px;
   position: relative;
   &.confirm-user-modal {
     h3 {
-      font-family: 'Graphik Regular', sans-serif !important;
+      font-family: 'Graphik-Regular', sans-serif !important;
       font-size: 13px !important;
       margin: 15px 0 !important;
       font-weight: 500 !important;
@@ -660,7 +633,7 @@ app-left-panel-tags-companies {
     margin-bottom: 50px;
     padding-left: 70px;
     h3 {
-      font-family: "Graphik Semibold", sans-serif;
+      font-family: "Graphik-Semibold", sans-serif;
       font-size: 20px;
       font-weight: 600;
       line-height: 1.4;
@@ -689,7 +662,7 @@ app-left-panel-tags-companies {
       }
     }
     p {
-      font-family: "Graphik Regular", sans-serif;
+      font-family: "Graphik-Regular", sans-serif;
       font-size: 13px;
       line-height: 1.54;
     }
@@ -721,7 +694,6 @@ app-left-panel-tags-companies {
     }
   }
 }
-
 .recurring-tickets-content__modal--content-footer,
 .new-users-content__modal--content-footer {
   .assigned-users-list {
@@ -738,7 +710,6 @@ app-left-panel-tags-companies {
     }
   }
 }
-
 .mat-chip.mat-standard-chip {
   padding: 9px 15px 9px 5px;
   border-radius: 3px !important;
@@ -774,23 +745,19 @@ app-left-panel-tags-companies {
     }
   }
 }
-
 ngb-typeahead-window {
   .dropdown-menu {
     width: 100%;
     max-height: 140px;
   }
 }
-
 .has-error {
   border-color: red !important;
 }
-
 .avoid-clicks {
   pointer-events: none;
   background: #ebebe4;
 }
-
 .device-user.has-placeholder {
   position: relative;
   &:before {
@@ -804,7 +771,6 @@ ngb-typeahead-window {
     width: auto;
   }
 }
-
 .error-field {
   position: absolute;
   right: 15px;
@@ -812,7 +778,6 @@ ngb-typeahead-window {
   font-size: 13px;
   color: red;
 }
-
 .left-panel-full-wrapper .loading {
   top: 10px;
   right: 10px;
@@ -822,7 +787,6 @@ ngb-typeahead-window {
   border: 0.1rem solid #4f5f79;
   border-top-color: #9ca5b6;
 }
-
 .left-panel-closed {
   .quotes__header {
     width: calc(100vw - 85px) !important;
@@ -831,7 +795,6 @@ ngb-typeahead-window {
     }
   }
 }
-
 // GLOBAL STYLES FOR QUOTES
 .quote-create {
   &__content {
@@ -844,7 +807,6 @@ ngb-typeahead-window {
     }
     &--notes {
       .notes-top {
-
       }
     }
     &--bottom {
@@ -986,7 +948,6 @@ ngb-typeahead-window {
     }
   }
 }
-
 .quote-content-body .editable-description {
   overflow-y: scroll;
   overflow-x: hidden;
@@ -1002,11 +963,9 @@ ngb-typeahead-window {
     outline: none;
     &:last-child {
       visibility: hidden;
-
     }
   }
 }
-
 // GLOBAL STYLES FOR product, password, recurring tickets
 .products-content,
 .new-users-content,
@@ -1018,7 +977,6 @@ ngb-typeahead-window {
   position: relative;
   min-height: calc(100vh - 86px);
 }
-
 .products-content__header,
 .new-users-content__header,
 .recurring-tickets-content__header,
@@ -1038,29 +996,25 @@ ngb-typeahead-window {
     }
   }
 }
-
 .download-modal {
   .modal-dialog {
     width: 450px;
   }
 }
-
 .products-content__header h3,
 .new-companies-content__header h3,
 .new-users-content__header h3,
 .recurring-tickets-content__header h3,
 .password-content__header h3 {
-  font-family: "Graphik Regular", sans-serif;
+  font-family: "Graphik-Regular", sans-serif;
   font-size: 20px;
   margin: 0;
 }
-
 .products-content__header--search,
 .new-users-content__header--search {
   display: flex;
   position: relative;
 }
-
 .products-content__header--search:before,
 .new-users-content__header--search:before {
   position: absolute;
@@ -1071,7 +1025,6 @@ ngb-typeahead-window {
   left: 10px;
   top: calc(50% - 10px);
 }
-
 .products-content__header--search input,
 .new-users-content__header--search input {
   width: 300px;
@@ -1083,13 +1036,11 @@ ngb-typeahead-window {
   font-size: 13px;
   outline: none;
 }
-
 .products-content__header--search input::placeholder,
 .new-users-content__header--search input::placeholder {
   color: #9ca5b6;
   opacity: 1;
 }
-
 .plus-btn {
   display: flex;
   align-items: center;
@@ -1104,11 +1055,9 @@ ngb-typeahead-window {
   outline: none;
   transition: all .3s;
 }
-
 .plus-btn:hover {
   background: #189947;
 }
-
 .products-content__list .products-content__list--item [class*='col-md-'],
 .new-companies-content__list .new-companies-content__list--item [class*='col-md-'],
 .new-users-content__list .new-users-content__list--item [class*='col-md-'],
@@ -1116,7 +1065,6 @@ ngb-typeahead-window {
 .password-content__list .password-content__list--item [class*='col-md-'] {
   word-break: break-all;
 }
-
 .products-content__list .products-content__list--header [class*='col-md-'],
 .new-companies-content__list .new-companies-content__list--header [class*='col-md-'],
 .new-users-content__list .new-users-content__list--header [class*='col-md-'],
@@ -1124,7 +1072,6 @@ ngb-typeahead-window {
 .password-content__list .password-content__list--header [class*='col-md-'] {
   white-space: nowrap;
 }
-
 .products-content__list--header div,
 .new-companies-content__list--header div,
 .new-users-content__list--header div,
@@ -1132,10 +1079,9 @@ ngb-typeahead-window {
 .password-content__list--header div {
   text-transform: uppercase;
   font-size: 11px;
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
   color: #364656;
 }
-
 .products-content__list--header,
 .new-companies-content__list--header,
 .new-users-content__list--header,
@@ -1143,7 +1089,6 @@ ngb-typeahead-window {
 .password-content__list--header {
   padding: 15px 0;
 }
-
 .products-content__list--item,
 .new-companies-content__list--item,
 .new-users-content__list--item,
@@ -1156,12 +1101,10 @@ ngb-typeahead-window {
   position: relative;
   display: flex;
 }
-
 .new-companies-content__list--item,
 .recurring-tickets-content__list--item {
   padding: 16px 0;
 }
-
 .new-users-content__list--item {
   padding: 12px 0;
   display: flex;
@@ -1186,7 +1129,6 @@ ngb-typeahead-window {
     }
   }
 }
-
 .password-content__list--item .col-md-3:before {
   position: absolute;
   content: '';
@@ -1195,7 +1137,6 @@ ngb-typeahead-window {
   left: -40px;
   top: -8px;
 }
-
 .new-companies-content__list--item .btn-actions,
 .recurring-tickets-content__list--item .btn-actions,
 .new-users-content__list--item .btn-actions,
@@ -1204,7 +1145,6 @@ ngb-typeahead-window {
   display: flex;
   align-items: flex-start;
 }
-
 .password-selected .new-link,
 .new-companies-selected .new-link,
 .new-users-selected .new-link,
@@ -1213,7 +1153,6 @@ ngb-typeahead-window {
   font-size: 13px;
   margin-right: 11px;
 }
-
 .password-selected,
 .new-companies-selected,
 .new-users-selected,
@@ -1232,14 +1171,12 @@ ngb-typeahead-window {
     font-size: 12px;
   }
 }
-
 .new-companies-content__header--search,
 .recurring-tickets-content__header--search,
 .new-users-content__header--search,
 .password-content__header--search {
   display: flex;
 }
-
 .password-selected-actions,
 .new-companies-selected-actions,
 .new-users-selected-actions,
@@ -1248,7 +1185,6 @@ ngb-typeahead-window {
   display: flex;
   align-items: center;
 }
-
 .password-selected-actions i,
 .new-companies-selected-actions i,
 .new-users-selected-actions i,
@@ -1257,19 +1193,17 @@ ngb-typeahead-window {
   margin-left: 20px;
   cursor: pointer;
 }
-
 .products-content__list--item [class*='col-md-'],
 .new-companies-content__list--item [class*='col-md-'],
 .new-users-content__list--item [class*='col-md-'],
 .recurring-tickets-content__list--item [class*='col-md-'],
 .password-content__list--item [class*='col-md-'] {
   font-size: 13px;
-  font-family: "Graphik Regular", sans-serif;
+  font-family: "Graphik-Regular", sans-serif;
   p {
     word-break: break-all;
   }
 }
-
 .with-number-types {
   display: flex;
   &.right {
@@ -1324,7 +1258,6 @@ ngb-typeahead-window {
     border-top-left-radius: 0 !important;
   }
 }
-
 // Global styles for RECURRING TICKETS and COMPANIES
 .new-companies__list,
 .new-users__list {
@@ -1355,7 +1288,6 @@ ngb-typeahead-window {
     }
   }
 }
-
 .new-users__list {
   .col-md-3 {
     width: 25%;
@@ -1364,12 +1296,10 @@ ngb-typeahead-window {
     width: 21%;
   }
 }
-
 .new-users-content .new-users__list--header,
 .new-companies-content .new-companies__list--header {
   display: flex;
 }
-
 .editable-description {
   position: relative;
   overflow-y: scroll;
@@ -1390,7 +1320,6 @@ ngb-typeahead-window {
     }
   }
 }
-
 .quote-create__content--top {
   .editable-description {
     max-height: 134px;
@@ -1399,7 +1328,6 @@ ngb-typeahead-window {
     }
   }
 }
-
 .recurring-tickets-content,
 .new-companies-content,
 .new-users-content {
@@ -1427,7 +1355,7 @@ ngb-typeahead-window {
         font-size: 12px;
         color: #364656;
         font-family: Graphik-Medium, sans-serif;
-        font-weight: bold;
+        font-weight: 500;
       }
     }
   }
@@ -1489,7 +1417,6 @@ ngb-typeahead-window {
           width: 8px;
         }
       }
-
     }
   }
   &__modal {
@@ -1538,7 +1465,7 @@ ngb-typeahead-window {
         border-bottom: 2px solid transparent;
         padding: 8px 0;
         font-size: 12px;
-        font-family: "Graphik Semibold", sans-serif;
+        font-family: "Graphik-Semibold", sans-serif;
         font-weight: 600;
         cursor: pointer;
         .tab-product,
@@ -1593,7 +1520,7 @@ ngb-typeahead-window {
         align-items: center;
         margin-right: 20px;
         p {
-          font-family: "Graphik Regular", sans-serif;
+          font-family: "Graphik-Regular", sans-serif;
           margin: 0;
         }
         label {
@@ -1686,14 +1613,12 @@ ngb-typeahead-window {
     }
   }
 }
-
 .date-picker {
   .ngb-dp-month-name {
     background: #3ba5fa;
     color: white;
     font-weight: 600;
   }
-
   .custom-day {
     display: flex;
     justify-content: center;
@@ -1715,8 +1640,6 @@ ngb-typeahead-window {
     }
   }
 }
-
-
 .new-users-content__modal--content {
   app-user-table-subscription {
     .subs-list {
@@ -1733,13 +1656,11 @@ ngb-typeahead-window {
     }
   }
 }
-
 .user-modal {
   .modal-dialog {
     width: 490px;
   }
 }
-
 .new-users-content__modal,
 .new-companies-content__modal {
   .advanced {
@@ -1779,7 +1700,7 @@ ngb-typeahead-window {
         padding: 16px 0 0 50px;
         color: #9ca5b6;
         font-size: 12px;
-        font-family: "Graphik Semibold", sans-serif;
+        font-family: "Graphik-Semibold", sans-serif;
       }
     }
     .logo-upload {
@@ -1851,7 +1772,6 @@ ngb-typeahead-window {
     }
   }
 }
-
 .new-companies-content__list--item {
   position: relative;
   [class*='col-md-'] {
@@ -1882,10 +1802,8 @@ ngb-typeahead-window {
     @media(max-width: 1366px) {
       width: 87%;
     }
-
   }
 }
-
 .light-dropdown .dropdown-menu.unique-down {
   width: calc(100% - 30px);
   left: 15px !important;
@@ -1894,13 +1812,11 @@ ngb-typeahead-window {
   transform: none !important;
   min-height: 190px;
 }
-
 .modal.fade {
   opacity: 1;
   transition: none;
   background: rgba(16, 24, 39, 0.4);
 }
-
 .cdk-overlay-container {
   z-index: 99999999;
   top: 6px;
@@ -1919,7 +1835,6 @@ ngb-typeahead-window {
     }
   }
 }
-
 .create-quote-mail {
   .mat-form-field-infix {
     border: none;
@@ -1973,14 +1888,12 @@ ngb-typeahead-window {
     letter-spacing: 0;
     pointer-events: none;
     z-index: 99;
-    font-family: "Graphik Medium", sans-serif;
+    font-family: "Graphik-Medium", sans-serif;
   }
 }
-
 ngb-datepicker {
   border: none !important;
 }
-
 .new-companies-content__modal,
 .recurring-tickets-content__modal,
 .new-users-content__modal {
@@ -2008,7 +1921,6 @@ ngb-datepicker {
     margin-right: 20px;
   }
 }
-
 // LEFT PANEL
 .left-panel-ng2 {
   [class*="left-panel-ng2__content"] {
@@ -2018,7 +1930,7 @@ ngb-datepicker {
     color: #fff;
     .list-item,
     .types-item {
-      font-family: "Graphik Regular", sans-serif;
+      font-family: "Graphik-Regular", sans-serif;
       padding: 4px 24px;
       font-size: 12px;
       border-left: 2px solid transparent;
@@ -2041,19 +1953,17 @@ ngb-datepicker {
     .filter-item__header {
       padding: 8px 24px;
       opacity: .5;
-      font-family: "Graphik Semibold", sans-serif;
+      font-family: "Graphik-Semibold", sans-serif;
       font-size: 11px;
       text-transform: uppercase;
       font-weight: 600;
     }
   }
 }
-
 // LEFT PANEL
 .mob-filters-btn {
   z-index: 2;
 }
-
 .left-panel-ng2 {
   @media(max-width: 414px) {
     margin-bottom: 110px;
@@ -2070,7 +1980,7 @@ ngb-datepicker {
     justify-content: center;
     font-size: 20px;
     line-height: 1em;
-    font-family: 'Graphik Light', sans-serif;
+    font-family: 'Graphik-Light', sans-serif;
     position: fixed;
     width: 240px;
     background: #354053;
@@ -2085,7 +1995,7 @@ ngb-datepicker {
     }
     .list-item,
     .types-item {
-      font-family: "Graphik Regular", sans-serif;
+      font-family: "Graphik-Regular", sans-serif;
       padding: 8px 24px;
       border-left: 2px solid transparent;
       transition: all .3s;
@@ -2192,7 +2102,7 @@ ngb-datepicker {
     .filter-item__header {
       padding: 8px 24px;
       opacity: .5;
-      font-family: "Graphik Semibold", sans-serif;
+      font-family: "Graphik-Semibold", sans-serif;
       font-size: 11px;
       text-transform: uppercase;
       font-weight: 600;
@@ -2206,12 +2116,13 @@ ngb-datepicker {
 .quicktech__table {
   width: 100%;
   font-size: 12px;
-  font-family: 'Graphik Medium', sans-serif;
+  font-family: 'Graphik-Medium', sans-serif;
 
   thead {
     text-transform: uppercase;
     th {
       font-weight: 700;
+      white-space: nowrap;
     }
   }
 
@@ -2228,7 +2139,7 @@ ngb-datepicker {
 
   &--list {
     font-size: 14px;
-    font-family: 'Graphik Regular', sans-serif;
+    font-family: 'Graphik-Regular', sans-serif;
     thead {
       text-transform: none;
       th {
@@ -2247,4 +2158,158 @@ ngb-datepicker {
   font-weight: 500;
 }
 
+.select-users-list {
+  width: 400px !important;
+}
+
+
+.inventory .nano-content {
+  overflow: visible !important;
+}
+
+.report-show-footer-header {
+  .customer-ticket__report--details {
+    padding-bottom: 100px !important;
+  }
+
+  .report-header, .report-footer {
+    display: flex;
+    margin: 0;
+  }
+
+  .report-footer {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+  }
+}
+
+
+
+
+
+
 @import './assets/styles/mobile.scss';
+
+@import './assets/styles/dropdowns.scss';
+@import './assets/styles/icons.scss';
+
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+.main-container:nth-child(2) {
+  display: none;
+}
+
+.ng-sidebar {
+  position: fixed !important;
+  background: #fff;
+  height: 100vh;
+  width: 650px;
+}
+
+.ng-sidebar--right {
+  top: 78px !important;
+  box-shadow: 0 0 60px 0 rgba(0, 0, 0, 0.1);
+}
+
+.password-content__modal {
+  top: 0 !important;
+  position: absolute !important;
+}
+
+ngb-typeahead-window {
+  .dropdown-menu {
+    width: 100%;
+    max-height: 140px;
+  }
+}
+
+.has-error {
+  border-color: red !important;
+}
+
+.avoid-clicks {
+  pointer-events: none;
+  background: #ebebe4;
+}
+
+.device-user.has-placeholder {
+  position: relative;
+
+  &:before {
+    position: absolute;
+    content: 'Select Device / User';
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: #a2a5bf;
+    width: auto;
+  }
+}
+
+.error-field {
+  position: absolute;
+  right: 15px;
+  top: 6px;
+  font-size: 13px;
+  color: red;
+}
+
+.left-panel-full-wrapper .loading {
+  top: 10px;
+  right: 10px;
+  left: auto;
+  width: 20px;
+  height: 20px;
+  border: 0.1rem solid #4f5f79;
+  border-top-color: #9ca5b6;
+}
+
+// .toast-container .toast-success {
+//   top: 105px;
+//   width: auto;
+//   border-radius: 6px;
+//   box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1);
+//   background: url('/ng2/assets/img/success-tick.png') #2ec866 no-repeat left
+//     16px center;
+//   background-color: #2ec866;
+//   padding: 8px 15px 8px 44px;
+//   font-size: 12px;
+//   font-weight: normal;
+//   font-style: normal;
+//   font-stretch: normal;
+//   line-height: 1.33;
+//   letter-spacing: normal;
+//   color: #ffffff;
+//   margin: 0 auto;
+//   left: 265px;
+//   right: 0;
+//   max-width: 236px;
+//   position: fixed;
+//   z-index: 99999999999;
+// }
+
+.invalid-feedback {
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;
+}
+
+input.ng-invalid.is-invalid {
+  border: 1px solid red;
+}
+
+// @import './assets/styles/mobile.scss';
+
+/*** All css files include ***/
+@import './assets/scss/fonts';
+@import './assets/scss/variable';
+@import './assets/scss/mixin';
+@import './assets/scss/custom';
+@import './assets/scss/layout';
+
+/* Add application styles & imports to this file! */
+#toast-container > div {
+  opacity:1;
+}

@@ -1551,7 +1551,7 @@
   border: none;
   background: #f3f7f9;
   box-shadow: none;
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
 }
 
 .company-report .top-product-list-ticket {
@@ -1746,9 +1746,9 @@
   padding: 0px 2px !important;
 }
 
-.products div > *, .services div > * {
+/* .products div > *, .services div > * {
   padding: 5px 0 !important;
-}
+} */
 
 .customer-ticket__header {
   padding: 0 60px;
@@ -1757,7 +1757,7 @@
 .customer-ticket__header--item:nth-child(3) > div p:first-child {
   font-size: 32px;
   margin: 10px 0;
-  font-family: 'Graphik Light', sans-serif;
+  font-family: 'Graphik-Light', sans-serif;
 }
 
 .customer-ticket__report--summary, .customer-ticket__report--details-plus {

@@ -14,9 +14,6 @@ export class GlNumberItem {
                 this.sum[i] = 0;
             }
         }
-      
-      
-      
     }
     public getTotal() {
         return this.total;

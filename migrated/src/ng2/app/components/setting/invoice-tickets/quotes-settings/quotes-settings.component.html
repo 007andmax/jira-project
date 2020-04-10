@@ -1,0 +1,56 @@
+<div class="page-insider invoice-ticket">
+  <div class="cmn-area invoice">
+    <form [formGroup]="quotesForm" (ngSubmit)="onSubmit()">
+      <div class="f-row">
+        <div class="f-col col-33">
+          <label
+            >Starting Quote Number</label
+          >
+          <div class="form-row">
+            <input
+              type="text"
+              formControlName="count"
+              class="form-input"
+              [ngClass]="{ 'is-invalid': submitted && f.count.errors }"
+              placeholder="Enter Starting ticket number"
+            />
+              <div *ngIf="submitted && f.count.errors" class="invalid-feedback">
+            <div *ngIf="f.count.errors.required">
+              Ticket Number is required
+            </div>
+            <div *ngIf="f.count.errors.pattern">
+              Only Number is allowed
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="f-col col-50">
+          <label>Default Quotes terms</label>
+          <div class="form-row">
+            <div class="input-select">
+              <select
+                class="cmn-select form-input"
+                formControlName="defaultTerms"
+              >
+                <option value="15days">15 days</option>
+                <option value="16days">16 days</option>
+                <option value="17days">17 days</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="f-col col-100">
+          <label>Memo of Quote</label>
+          <div class="form-row">
+            <textarea
+              class="form-input"
+              formControlName="memoQuote"
+              placeholder="Enter memo of quote"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+      <input type="submit" class="btn btn-primary" value="Save Changes" />
+    </form>
+  </div>
+</div>

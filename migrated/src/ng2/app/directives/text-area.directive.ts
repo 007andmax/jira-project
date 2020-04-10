@@ -3,7 +3,6 @@ import { Directive, OnInit, ElementRef, Injectable, Input, ChangeDetectorRef, On
 @Directive({
   selector: '[appTextArea]'
 })
-@Injectable()
 export class TextAreaDirective implements OnInit {
 
   cloned: HTMLTextAreaElement;
@@ -27,7 +26,7 @@ export class TextAreaDirective implements OnInit {
     this.element.nativeElement.addEventListener('cut', this.setNumberOfLines);
     this.element.nativeElement.addEventListener('paste', this.limitPaste);
     this.element.nativeElement.addEventListener('input', this.onUpdate);
-   
+
 
     if (this.limit) this.onInitLimit();
 
@@ -47,24 +46,20 @@ export class TextAreaDirective implements OnInit {
     this.cloned.style.position = 'absolute';
     this.cloned.style.width = this.element.nativeElement.clientWidth + 'px';
   }
-  private update() {
+  public update() {
 
     this.element.nativeElement.style.height = "auto";
     this.height = this.element.nativeElement.scrollHeight;
     if (this.height > 0) {
-
       if (this.limit && this.height >= this.limit) {
         this.element.nativeElement.style.height = this.limit + 'px';
       } else {
-
         if (this.element.nativeElement.value.length === 0 && this.minHeight) {
           this.element.nativeElement.style.height = this.minHeight + "px";
         } else {
           this.element.nativeElement.style.height = this.height + "px";
         }
-
       }
-
     }
   }
   private onInitCLine() {
@@ -76,10 +71,7 @@ export class TextAreaDirective implements OnInit {
 
   }
   private onUpdate = () => {
-
     this.update();
-
-    // this.cloned.innerHTML = this.element.nativeElement.value;
   }
   private getKeyNum(e) {
     let keynum;
@@ -133,41 +125,41 @@ export class TextAreaDirective implements OnInit {
   };
   private setNumberOfLines = (e) => {
     let keynum = this.getKeyNum(e);
-     
+
     if (this.keyCode === 17) this.ctrlDown = false;
     this.lines = this.getNumberOfLines(this.element.nativeElement.value);
   };
   private limitPaste = (e) => {
-    
+
     let clipboardData, pastedData, newValue, isOverflowed;
     // Stop data actually being pasted into div
-    
+
     e.stopPropagation();
     e.preventDefault();
 
     // Get pasted data via clipboard API
     clipboardData = e.clipboardData || (<any>window).clipboardData;
     pastedData = clipboardData.getData('Text');
- 
+
 
     newValue = (this.element.nativeElement.value || '').slice(0, e.srcElement.selectionStart) + pastedData + (this.element.nativeElement.value || '').slice(e.srcElement.selectionStart);
     this.cloned.innerHTML = newValue
     isOverflowed = this.cloned.scrollHeight > +this.limit
     let copiedValue = newValue;
-   
-  if (this.keyCode !== 86 && this.ctrlDown !== false || e.srcElement.selectionStart === e.srcElement.selectionEnd) {
-  
-    this.element.nativeElement.value = this.checkForOverflow(copiedValue);
-  } else {
-    this.cloned.innerHTML = pastedData
-    this.element.nativeElement.value = pastedData;
-    
-  }
+
+    if (this.keyCode !== 86 && this.ctrlDown !== false || e.srcElement.selectionStart === e.srcElement.selectionEnd) {
+
+      this.element.nativeElement.value = this.checkForOverflow(copiedValue);
+    } else {
+      this.cloned.innerHTML = pastedData
+      this.element.nativeElement.value = pastedData;
+
+    }
     this.element.nativeElement.blur();
     this.element.nativeElement.focus();
     this.element.nativeElement.click();
     this.cd.detectChanges();
-   
+
     this.onPast.emit(this.element.nativeElement.value);
     //scope.$digest()
   };

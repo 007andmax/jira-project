@@ -29,9 +29,11 @@ export class SelectClientCompanyComponent implements OnInit, OnDestroy {
   @Input() editItem: any;
   @Input() filter: boolean = false;
   @Input() blockEditMode: boolean = false;
+  @Input() isDisabled: boolean = false;
   public selectedClient;
   public subGetCompaniesList: ISubscription;
   public clientsList: any;
+  
   focus$ = new Subject<string>();
   click$ = new Subject<string>();
   sub = new Subscription();
@@ -149,7 +151,7 @@ export class SelectClientCompanyComponent implements OnInit, OnDestroy {
     this.selectedClient = null;
   }
 
-
+  
   ngOnDestroy(): void {
     this.sub.unsubscribe();
     this.subGetCompaniesList.unsubscribe();

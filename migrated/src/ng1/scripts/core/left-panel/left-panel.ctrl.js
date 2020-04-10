@@ -10,9 +10,9 @@
       '$timeout', '$location', 'ReceivableService', 'TaxesService', 'PaymentsService', 'ProductsService',
       'quicktech.common.services.UserConfirmationsService', '$stateParams',
       function ($scope, SharedStateService, $state, $rootScope, DevicesService, PermissionsService, CompaniesService,
-                TutorialsService, $uibModal, TicketsService, ColorsService, TagsService,
-                CustomStorageService, UsersService, $timeout, $location, ReceivableService, TaxesService, PaymentsService,
-                ProductsService, UserConfirmationsService, $stateParams) {
+        TutorialsService, $uibModal, TicketsService, ColorsService, TagsService,
+        CustomStorageService, UsersService, $timeout, $location, ReceivableService, TaxesService, PaymentsService,
+        ProductsService, UserConfirmationsService, $stateParams) {
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession'),
           usersSharedState = SharedStateService.getSharedState('usersHeader'),
@@ -23,8 +23,8 @@
 
         var $win = $(window);
 
-        $scope.newAngular = $location.url().startsWith('/ng2') ? true :  false;
- 
+        $scope.newAngular = $location.url().startsWith('/ng2') ? true : false;
+
         $scope.globalSearch = SharedStateService.getSharedState('globalSearch');
         $scope.usersSharedState = usersSharedState;
         $scope.companiesSharedState = companiesSharedState;
@@ -39,9 +39,9 @@
         $scope.maxDate = Date.now();
         $scope.disableCreateCategory = false;
         $scope.currentCategoryState = $stateParams.category;
-        $scope.$watchCollection(function(){
+        $scope.$watchCollection(function () {
           return $state.params;
-        }, function(){
+        }, function () {
           return $scope.currentCategoryState = $stateParams.category;
         });
         $scope.templates = [
@@ -60,10 +60,10 @@
         //categories start
         $scope.countOfCategories = 10;
         $scope.inventoryCategoryList = ProductsService.getCategories($scope);
-
-        $scope.checkDublicateCategory = function() {
-          var duplicateCategory = $scope.inventoryCategoryList.filter(function(item){
-           
+         
+        var company_id = localStorage.getItem('company_id') || null;
+        $scope.checkDublicateCategory = function () {
+          var duplicateCategory = $scope.inventoryCategoryList.filter(function (item) {
             return item.name.toLowerCase() === $scope.newCategory.toLowerCase();
           });
           if (duplicateCategory && duplicateCategory[0]) {
@@ -80,7 +80,7 @@
           $scope.newCategory = '';
         };
 
-        $scope.changeShowAllCategories = function() {
+        $scope.changeShowAllCategories = function () {
           if ($scope.countOfCategories === 10) {
             $scope.countOfCategories = $scope.inventoryCategoryList.length;
           } else {
@@ -88,15 +88,15 @@
           }
         };
 
-        $scope.getAllProductsCount = function() {
+        $scope.getAllProductsCount = function () {
           var count = 0;
-          $scope.inventoryCategoryList.map(function(item){
+          $scope.inventoryCategoryList.map(function (item) {
             count += item.productsAmount;
           });
           return count;
         };
 
-        $scope.deleteCategory = function(categoryId) {
+        $scope.deleteCategory = function (categoryId) {
           var confirmMesage = 'Do you want to delete category?',
             confirmButton = 'Yes';
 
@@ -107,7 +107,9 @@
         };
 
         $scope.addCategory = function (category) {
-          ProductsService.saveCategory({ name: category });
+          ProductsService.saveCategory({
+            name: category
+          });
           $scope.newCategory = ''
         };
 
@@ -149,9 +151,9 @@
 
         $scope.salesPerson = '';
 
-        $scope.$watch(function() {
+        $scope.$watch(function () {
           return $rootScope.companyCounters
-        }, function(val) {
+        }, function (val) {
           $scope.companyCounters = val;
         }, true)
 
@@ -166,37 +168,37 @@
           }
         };
 
-        $scope.getUserByID = function(userId) {
-          if(!userId) {
+        $scope.getUserByID = function (userId) {
+          if (!userId) {
             return
           }
           var user = UsersService.getOneById(userId);
-          if(user) {
-            if(user.lastName === '    ') {
+          if (user) {
+            if (user.lastName === '    ') {
               return user.firstName
             } else {
-              return user.firstName+' '+user.lastName;
+              return user.firstName + ' ' + user.lastName;
             }
           }
         };
 
-        $scope.toggleClickedStatus = function(state) {
+        $scope.toggleClickedStatus = function (state) {
 
 
           $scope.isSalesPersonClicked = state;
         }
 
 
-        $scope.activeTechUsers = function() {
+        $scope.activeTechUsers = function () {
 
-          return UsersService.getTechUsers().filter(function(el) {
+          return UsersService.getTechUsers().filter(function (el) {
             return el.userEnabled && !el.deletedAt;;
           })
         }
 
-        $scope.$watch(function() {
+        $scope.$watch(function () {
           return $scope.salesPerson
-        }, function(val) {
+        }, function (val) {
 
           if (window.innerWidth <= 414) {
             $scope.companiesSharedState.filter.salesPerson = val;
@@ -206,7 +208,7 @@
               sendNewFilterToStorage("companiesPageFilterBySalesHistory", $scope.salesFilterHistoryCompaniesPage, $scope.getUserByID(val))
             }
           } else {
-            $timeout(function() {
+            $timeout(function () {
               if (!val && $scope.isSalesPersonClicked) {
                 $scope.toggleClickedStatus(false);
                 return;
@@ -240,25 +242,25 @@
         $scope.mobileFilterTags = [];
 
 
-        $scope.toggleMobileLeftPanel = function(state) {
+        $scope.toggleMobileLeftPanel = function (state) {
           $rootScope.isLeftPanelOpened = state;
         };
 
-        $scope.toggleMobileMenu = function(menu) {
+        $scope.toggleMobileMenu = function (menu) {
           TicketsService.getAllCounts(function (resp) {
             resp && ($scope.ticketsCounter = resp);
             return $scope.test;
           });
-          $scope.listOfMobileTitles.forEach(function(title) {
+          $scope.listOfMobileTitles.forEach(function (title) {
             $scope[title] = false;
           });
 
           $scope[menu] = true;
         };
 
-        $scope.$watch('companyFilterTags', function(val) {
+        $scope.$watch('companyFilterTags', function (val) {
           if (val.length) {
-            TagsService.filterCompanies(val, function(res) {
+            TagsService.filterCompanies(val, function (res) {
               $rootScope.filteredCompanies = res.data;
             })
           } else {
@@ -271,15 +273,15 @@
           return $scope.test;
         });
 
-        $scope.$watch('ticketsCounter', function(newValue, oldValue) {
+        $scope.$watch('ticketsCounter', function (newValue, oldValue) {
           $scope.ticketsCounter = newValue;
           return $scope.ticketsCounter;
 
         });
 
-        $scope.$watch(function() {
+        $scope.$watch(function () {
           return $rootScope.exampleCompanyDeleted;
-        }, function(val) {
+        }, function (val) {
           if (val) {
            
             TicketsService.getAllCounts(function (resp) {
@@ -302,7 +304,7 @@
         }
 
         $scope.activateCompanyProfileTab = function (tabToActivate) {
-          console.log("tabToActivate", tabToActivate);
+
           if (tabToActivate == 'CompanyProfilePasswordManagerPage') {
             $scope.goToTab(`#/ng2/company-password-manager`);
             return;
@@ -312,6 +314,11 @@
             return;
           }
 
+          if (tabToActivate == 'CompanyProfileProductsPage') {
+            $scope.goToTab(`#/ng2/company-products`);
+            return;
+          }
+         
           var tab = $scope[tabToActivate];
           deactivateAllCompanyProfileTabs();
           if (tab === false) {
@@ -320,6 +327,16 @@
 
 
         };
+        $scope.goToTab = function (url) {
+          let body = document.querySelector('.left-panel__category-wrap');
+          var link = document.createElement('a');
+          body.appendChild(link);
+          link.href = url;
+          var e = document.createEvent('MouseEvents');
+          e.initEvent('click', true, true);
+          link.dispatchEvent(e);
+        }
+
         $scope.goToTab = function (url) {
           let body = document.querySelector('.left-panel__category-wrap');
           var link = document.createElement('a');
@@ -383,11 +400,11 @@
           }
         });
 
-        $scope.stateMobileGo = function() {
+        $scope.stateMobileGo = function () {
           $scope.lastSavedStatus = arguments;
         }
 
-        $scope.applyMobileFilters = function() {
+        $scope.applyMobileFilters = function () {
           $scope.companiesSharedState.filter.industry = $scope.mobileIndustryFilter;
           $scope.salesPerson = $scope.mobileSalesPerson;
           $scope.companyFilterTags = $scope.mobileFilterTags.slice();
@@ -395,7 +412,7 @@
           $scope.toggleMobileCompanyFilters(false);
         }
 
-        $scope.closeAndResetMobileFilters = function() {
+        $scope.closeAndResetMobileFilters = function () {
           $scope.mobileIndustryFilter = $scope.companiesSharedState.filter.industry;
           $scope.mobileSalesPerson = $scope.companiesSharedState.filter.salesPerson;
           $scope.mobileFilterTags = $scope.companyFilterTags.slice();
@@ -404,7 +421,7 @@
           $scope.toggleMobileCompanyFilters(false);
         }
 
-        $scope.applyMobileUsersFilters = function() {
+        $scope.applyMobileUsersFilters = function () {
           $scope.filterDesignation = $scope.mobileFilterDesignation;
           $scope.userPageCompanyIdFilter = $scope.mobileUserPageCompanyIdFilter
           $scope.filterUsers('title', $scope.filterDesignation);
@@ -414,7 +431,7 @@
           $scope.toggleMobileUsersFilters(false);
         }
 
-        $scope.closeAndResetMobileUsersFilters = function() {
+        $scope.closeAndResetMobileUsersFilters = function () {
           $scope.mobileFilterDesignation = $scope.filterDesignation;
           $scope.mobileUserPageCompanyIdFilter = $scope.userPageCompanyIdFilter;
           $scope.mobileFilterUsersIndustry = $scope.usersSharedState.filter.industry;
@@ -424,7 +441,7 @@
 
         }
 
-        $scope.closeAndResetMobileTicketsFilters = function() {
+        $scope.closeAndResetMobileTicketsFilters = function () {
 
           $scope.toggleMobileTicketsFilters(false);
         }
@@ -538,13 +555,13 @@
         $scope.ticketsFilterTags = [];
 
 
-        $rootScope.toggleMobileTicketsFilters = function(state) {
+        $rootScope.toggleMobileTicketsFilters = function (state) {
           $rootScope.areMobileTicketsFiltersOpened = state;
 
         }
 
 
-        $scope.closeAndResetMobileTicketsFilters = function() {
+        $scope.closeAndResetMobileTicketsFilters = function () {
           $scope.toggleMobileTicketsFilters(false);
 
           $scope.ticketsFilterTags = $scope.appliedTicketsTags.slice();
@@ -564,7 +581,7 @@
           $scope.lastSavedStatus = null;
         }
 
-        $scope.applyMobileTicketsFilters = function() {
+        $scope.applyMobileTicketsFilters = function () {
           $scope.toggleMobileTicketsFilters(false);
           $scope.appliedTicketsTags = $scope.ticketsFilterTags.slice();
 
@@ -583,7 +600,7 @@
 
           if ($scope.lastSavedStatus) {
 
-            $timeout(function() {
+            $timeout(function () {
               $scope.stateGo.apply(this, $scope.lastSavedStatus);
 
             }, 100)
@@ -597,7 +614,7 @@
 
         var counter = true;
 
-        $scope.$watch('appliedTicketsTags', function(val) {
+        $scope.$watch('appliedTicketsTags', function (val) {
           if (counter) {
             counter = false;
             return;
@@ -609,7 +626,9 @@
 
 
           if ($state.includes('tickets')) {
-            $scope.stateGo(null, 'tickets', {listType: getTicketsListType()});
+            $scope.stateGo(null, 'tickets', {
+              listType: getTicketsListType()
+            });
           }
         }, true)
 
@@ -677,12 +696,14 @@
 
         $scope.isTicketCompanyIdFieldEmpty = true;
 
-        $scope.$watch('ticketFilterTags', function(val) {
+        $scope.$watch('ticketFilterTags', function (val) {
           $scope.ticketsSharedState.filter.tags = val;
           ticketsSharedState.filter.tags = val;
 
           if ($state.includes('tickets')) {
-            $scope.stateGo(null, 'tickets', {listType: getTicketsListType()});
+            $scope.stateGo(null, 'tickets', {
+              listType: getTicketsListType()
+            });
           }
         }, true)
 
@@ -702,7 +723,9 @@
               return user.company.id === value;
             });
             if ($state.includes('tickets')) {
-              $scope.stateGo(null, 'tickets', {listType: getTicketsListType()});
+              $scope.stateGo(null, 'tickets', {
+                listType: getTicketsListType()
+              });
             }
 
           } else if (value === undefined) {
@@ -711,7 +734,9 @@
               // clearFilter(ticketsSharedState.filter);
 
               // LEO!!!
-              $scope.stateGo(null, 'tickets', {listType: getTicketsListType()});
+              $scope.stateGo(null, 'tickets', {
+                listType: getTicketsListType()
+              });
             }
           }
         });
@@ -757,25 +782,37 @@
               sendNewFilterToStorage("ticketPageFilterByClientUsersHistory", $scope.clientUsersFilterHistoryTicketsPage, $scope.getUserByID(value));
             }
             if ($state.includes('tickets')) {
-              $scope.stateGo(null, 'tickets', {listType: getTicketsListType()});
+              $scope.stateGo(null, 'tickets', {
+                listType: getTicketsListType()
+              });
             }
             if ($state.includes('companyProfile') && $location.search().tabName !== 'tickets-all') {
-              $scope.stateGo(null, 'companyProfile', {tabName: 'tickets-all'});
+              $scope.stateGo(null, 'companyProfile', {
+                tabName: 'tickets-all'
+              });
             } else if ($state.includes('companyProfile') && $location.search().tabName === 'tickets-all') {
               $rootScope.runTicketListUploader = true;
             }
           } else if (value === undefined) {
             if ($state.includes('tickets')) {
               if (ticketsSharedState.filter.companyId) {
-                $scope.stateGo(null, 'tickets', {listType: getTicketsListType()});
+                $scope.stateGo(null, 'tickets', {
+                  listType: getTicketsListType()
+                });
               } else {
                 // LEO!!!
-                $scope.stateGo(null, 'tickets', {listType: getTicketsListType()});
+                $scope.stateGo(null, 'tickets', {
+                  listType: getTicketsListType()
+                });
               }
               ticketsSharedState.filter.clientUserId = '';
             }
           }
         });
+        // $scope.stateBack(null, 'tickets', {
+        //   listType: getTicketsListType()
+        // });
+        
 
         $scope.$watch('ticketsSharedState.filter.techUserId', function (value) {
 
@@ -789,10 +826,14 @@
               sendNewFilterToStorage("ticketPageFilterByTechUsersHistory", $scope.techUsersFilterHistoryTicketsPage, $scope.getUserByID(value));
             }
             if ($state.includes('tickets')) {
-              $scope.stateGo(null, 'tickets', {listType: getTicketsListType()});
+              $scope.stateGo(null, 'tickets', {
+                listType: getTicketsListType()
+              });
             }
             if ($state.includes('companyProfile') && $location.search().tabName !== 'tickets-all') {
-              $scope.stateGo(null, 'companyProfile', {tabName: 'tickets-all'});
+              $scope.stateGo(null, 'companyProfile', {
+                tabName: 'tickets-all'
+              });
             } else if ($state.includes('companyProfile') && $location.search().tabName === 'tickets-all') {
 
               $rootScope.runTicketListUploader = true;
@@ -800,11 +841,15 @@
           } else if (value === undefined) {
             if ($state.includes('tickets')) {
               if (ticketsSharedState.filter.companyId) {
-                $scope.stateGo(null, 'tickets', {listType: getTicketsListType()});
+                $scope.stateGo(null, 'tickets', {
+                  listType: getTicketsListType()
+                });
               } else {
 
                 // LEO!!!
-                $scope.stateGo(null, 'tickets', {listType: getTicketsListType()});
+                $scope.stateGo(null, 'tickets', {
+                  listType: getTicketsListType()
+                });
               }
               ticketsSharedState.filter.techUserId = '';
             }
@@ -823,9 +868,9 @@
         };
 
 
-        $scope.checkSalesValueMatched = function(inputValue) {
+        $scope.checkSalesValueMatched = function (inputValue) {
           if (inputValue) {
-            return $scope.activeTechUsers().some(function(item) {
+            return $scope.activeTechUsers().some(function (item) {
               return item.id === inputValue;
             })
           } else {
@@ -889,7 +934,7 @@
           }
         });
 
-        $scope.clearAllFilters = function() {
+        $scope.clearAllFilters = function () {
           $scope.passwordSharedStateFilterCompanyId = undefined;
           $scope.passwordSharedStateFilterDeviceId = undefined;
           $scope.passwordSharedStateFilterTemplate = undefined;
@@ -927,7 +972,7 @@
         };
 
         $scope.applySalesFilterFromHistoryListCompanyPage = function (value) {
-          var user = $scope.activeTechUsers().find(function(el) {
+          var user = $scope.activeTechUsers().find(function (el) {
             return el.firstName + ' ' + el.lastName === value;
           })
 
@@ -936,7 +981,7 @@
         };
 
         $scope.mobileApplySalesFilterFromHistoryListCompanyPage = function (value) {
-          var user = $scope.activeTechUsers().find(function(el) {
+          var user = $scope.activeTechUsers().find(function (el) {
             return el.firstName + ' ' + el.lastName === value;
           })
 
@@ -944,7 +989,7 @@
 
         };
 
-        $scope.mobileApplyIndustryFilter = function(value) {
+        $scope.mobileApplyIndustryFilter = function (value) {
           $scope.mobileIndustryFilter = value;
           $rootScope.selectedIndustryItem = value;
         }
@@ -963,7 +1008,7 @@
           usersSharedState.filter.companyId = getCompanyIdByCompanyName(value);
 
           $scope.usersSharedState.filter.companyId = getCompanyIdByCompanyName(value);
-          $scope.userPageCompanyIdFilter =  getCompanyIdByCompanyName(value);
+          $scope.userPageCompanyIdFilter = getCompanyIdByCompanyName(value);
         };
 
         $scope.mobileApplyCompanyFilterFromHistoryListUserPage = function (value) {
@@ -1058,10 +1103,12 @@
           for (var companyId in resp) {
             var devicesByCompany = resp[companyId];
             if (companyId !== 'staticCopy') {
-              if(devicesByCompany && devicesByCompany.length) {for (var i = 0; i < devicesByCompany.length; i++) {
-                var device = devicesByCompany[i];
-                device.companyId = companyId;
-                $scope.devices.push(device);}
+              if (devicesByCompany && devicesByCompany.length) {
+                for (var i = 0; i < devicesByCompany.length; i++) {
+                  var device = devicesByCompany[i];
+                  device.companyId = companyId;
+                  $scope.devices.push(device);
+                }
               }
             }
           }
@@ -1118,20 +1165,20 @@
               $rootScope.isLeftPanelHidden = false;
             }
           }
-         
+        //  $scope.globalSearch.openedItemName = section;
         };
 
 
 
         function uploadReceivable() {
-          ReceivableService.getReceivableInvoicesData($scope, function(resp) {
+          ReceivableService.getReceivableInvoicesData($scope, function (resp) {
             $rootScope.uploadedReceivable = resp;
           })
         }
 
-        $scope.$watch(function() {
+        $scope.$watch(function () {
           return $rootScope.shouldUpdateReceivable;
-        }, function(val) {
+        }, function (val) {
           if (val) {
             $rootScope.shouldUpdateReceivable = false;
             uploadReceivable();
@@ -1183,14 +1230,18 @@
             $scope.isOnHoldTag = false;
           }
           if (event && event.button > 0) {
-            var url = $state.href(state, stateParams, {absolute: true});
+            var url = $state.href(state, stateParams, {
+              absolute: true
+            });
 
             window.open(url, '_blank');
           } else {
 
-            $state.go(state, { listType: 'trash' });
+            $state.go(state, {
+              listType: 'trash'
+            });
 
-            setTimeout(function() {
+            setTimeout(function () {
               $state.go(state, stateParams);
 
             }, 0)
@@ -1300,11 +1351,11 @@
         $scope.allUsers = UsersService.getAllUsers();
 
         $scope.allTitles = $scope.allUsers
-          .map(function(user) {
+          .map(function (user) {
             return user.designation;
           })
-          .reduce(function(acc, title) {
-            var index = acc.findIndex(function(el) {
+          .reduce(function (acc, title) {
+            var index = acc.findIndex(function (el) {
               return (el || '').toLowerCase() === (title || '').toLowerCase();
             })
 
@@ -1318,7 +1369,7 @@
 
         $scope.isTitleFilterTyped = true
 
-        $scope.$watch('filterDesignation', function(val) {
+        $scope.$watch('filterDesignation', function (val) {
 
         });
 
@@ -1330,9 +1381,9 @@
 
           switch (filter) {
             case 'title':
-                sharedFilter.designation = value;
+              sharedFilter.designation = value;
 
-                break;
+              break;
             case 'managers':
               sharedFilter.isStandard = '';
               sharedFilter.isContact = true;
@@ -1415,14 +1466,7 @@
           }
         });
 
-        $scope.openCreateCustomerReportModal = function () {
-          $uibModal.open({
-            templateUrl: '/ng1/scripts/core/left-panel/customer-ticket-report/create-report-modal.tpl.html',
-            controller: 'quicktech.core.leftPanel.createReportCtrl',
-            windowClass: 'modal-customer-report',
-            animation: true
-          });
-        };
+       
 
         $scope.userReadable = function (text) {
           if (!text) {
@@ -1459,8 +1503,8 @@
 
           return function (device) {
 
-            if ($scope.passwordSharedState.filter.companyId
-              && device.companyId != $scope.passwordSharedState.filter.companyId) {
+            if ($scope.passwordSharedState.filter.companyId &&
+              device.companyId != $scope.passwordSharedState.filter.companyId) {
               return false;
             }
 
@@ -1468,8 +1512,8 @@
               return true;
             }
 
-            return ((device.hostName && device.hostName.toLowerCase().indexOf(keyword) >= 0)
-              || (device.ip && device.ip.toLowerCase().indexOf(keyword) >= 0));
+            return ((device.hostName && device.hostName.toLowerCase().indexOf(keyword) >= 0) ||
+              (device.ip && device.ip.toLowerCase().indexOf(keyword) >= 0));
           };
 
           function noFilter() {
@@ -1573,7 +1617,7 @@
             return 'inbox';
           } else if (url.indexOf('companies') > -1) {
             return 'companies';
-          } else if (url.indexOf('companyProfile') > -1 || url.indexOf('company-password-manager') > -1 || url.indexOf('company-user') > -1) {
+          } else if (url.indexOf('companyProfile') > -1 || url.indexOf('company-password-manager') > -1 || url.indexOf('company-user') > -1 || url.indexOf('company-products') > -1) {
             return 'companyProfile';
           } else if (url.indexOf('users') > -1) {
             return 'users';
@@ -1583,6 +1627,8 @@
             return 'inventory';
           } else if (url.indexOf('password-manager') > -1) {
             return 'password-manager';
+          } else if (url.indexOf('ng2/setting') > -1) {
+            return 'ng2-setting';
           } else if (url.indexOf('reports') > -1) {
             return 'reports';
           } else if (url.indexOf('quotes') > -1) {
@@ -1603,18 +1649,16 @@
           if (companyId) {
             $scope.companyProfilePageUsersList = UsersService.getAllByCompanyIdNonArchived(companyId);
             TicketsService.getAllCountsByCompanyId($scope, companyId, ticketCounterCallback);
-            $scope.companyForCompanyProfile = CompaniesService.getOneById(companyId, function (resp) {
-              $scope.companyForCompanyProfile = resp;
-            });
+            $scope.companyForCompanyProfile = CompaniesService.getOneById(companyId);
             $scope.companyDevices = $scope.devices.filter(function (device) {
               return device.companyId === companyId;
             })
           }
         })
 
-        $scope.$watch(function() {
+        $scope.$watch(function () {
           return $rootScope.changeTicketCompany;
-        }, function(val) {
+        }, function (val) {
           if (val) {
             var id = companyProfileSharedState.companyId
             if (id === val.oldCompanyId || id === val.companyId) {
@@ -1629,6 +1673,14 @@
         }
 
 
+    
+        $rootScope.$on('onInitConpaiesList', function(){
+          if (company_id) {
+             $scope.companyProfilePageUsersList = UsersService.getAllByCompanyIdNonArchived(company_id);
+              $scope.companyForCompanyProfile = CompaniesService.getOneById(company_id);
+           }
+           $scope.$apply();
+        });
       }]);
 
 }());

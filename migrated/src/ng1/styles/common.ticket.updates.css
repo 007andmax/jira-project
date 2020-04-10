@@ -700,7 +700,7 @@
   border-radius: 4px;
   padding: 0 5px;
   font-size: 12px;
-  font-family: "Graphik Regular", sans-serif;
+  font-family: "Graphik-Regular", sans-serif;
   outline: none;
   box-shadow: none;
   overflow-y: scroll !important;
@@ -879,13 +879,13 @@
 }
 
 .gm {
-  font-family: "Graphik Medium", sans-serif !important;
+  font-family: "Graphik-Medium", sans-serif !important;
 }
 
 .table-content .table-content-top {
   border-bottom: 1px solid #4f5f79;
   font-size: 12px;
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
   position: relative;
 }
 
@@ -899,7 +899,7 @@
   position: absolute;
   content: 'SERVICE';
   font-size: 9px;
-  font-family: "Graphik Semibold", sans-serif;
+  font-family: "Graphik-Semibold", sans-serif;
   padding: 0 8px;
   background: #edf2f6;
   color: #4f5f79;
@@ -1007,7 +1007,7 @@
 }
 
 .service-name p:first-child {
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
   font-size: 13px;
   display: flex;
 }
@@ -1026,7 +1026,7 @@
 }
 
 .product-upd .col-md-6 p {
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
 }
 
 .product-upd .col-md-1 {
@@ -1034,7 +1034,7 @@
 }
 
 .service-name p:last-child {
-  font-family: "Graphik Regular", sans-serif;
+  font-family: "Graphik-Regular", sans-serif;
   font-size: 12px;
   line-height: 1.33;
   padding-left: 33px;

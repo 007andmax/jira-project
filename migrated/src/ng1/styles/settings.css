@@ -195,11 +195,11 @@
 
 .commissions-settings .assign-ticket-header input {
   font-weight: 500;
-  font-family: "Graphik Regular", sans-serif;
+  font-family: "Graphik-Regular", sans-serif;
 }
 
 .valentin {
-  font-family: 'Graphik Regular', sans-serif;
+  font-family: 'Graphik-Regular', sans-serif;
   color: #364656;
   font-weight: 500;
   position: relative;
@@ -241,7 +241,7 @@
 .create-new .dropdown-assign-ticket .users-list .user-item a {
   transition: all .3s;
   color: #4f5f79;
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
   font-weight: 500;
 }
 

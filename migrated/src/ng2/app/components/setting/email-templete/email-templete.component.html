@@ -1,0 +1,372 @@
+
+<!-- Middle Wrapper  -->
+<div class="page-container">
+  <div class="page-insider manage-tags">
+    <div class="heading">
+      <h1>
+        <a
+          href="javascript:;"
+          (click)="onBackMenu()"
+          class="back-menu"
+          style="display: none;"
+          >backmneu</a
+        >Email Templetes
+      </h1>
+    </div>
+    <tabset>
+      <!-- Ticket Templates -->
+      <tab heading="Ticket Templates" id="tab1">
+        <div class="cmn-area">
+          <div class="data-table-wrap">
+            <table class="dataTable display" style="width:100%">
+              <thead>
+                <tr>
+                  <th class="t-name">Template Name</th>
+                  <th class="action">&nbsp;</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="ticketTemplates">
+                <tr
+                  *ngFor="
+                    let template of ticketTemplates | keyvalue;
+                    trackBy: trackByTicket
+                  "
+                >
+                  <td class="t-name">{{ template.value.title }}</td>
+                  <td class="action">
+                    <a
+                      href="javascript:;"
+                      data-tooltip="Edit"
+                      class="edit"
+                      (click)="getTemplate(template, i)"
+                      ><img
+                        src="../../../../../ng1/images/setting-module/edit.svg"
+                        alt="Edit"
+                    /></a>
+                    <a
+                      *ngIf="
+                        emailPages &&
+                        emailPages.activeAndNotDefault[template.key]
+                          .isNotDefault
+                      "
+                      href="javascript:;"
+                      data-tooltip="Reset Default"
+                      (click)="restoreDefault(template.key)"
+                      class="view"
+                      ><img
+                        src="../../../../../ng1/images/setting-module/view-icon.svg"
+                        alt="view-icon"
+                    /></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </tab>
+      <!-- Agent Templates -->
+      <tab heading="Agent Templates">
+        <div class="cmn-area">
+          <div class="data-table-wrap">
+            <table class="dataTable display" style="width:100%">
+              <thead>
+                <tr>
+                  <th class="t-name">Template Name</th>
+                  <th class="action">&nbsp;</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="
+                    let template of agentTemplates | keyvalue;
+                    trackBy: trackByTicket
+                  "
+                >
+                  <td class="t-name">{{ template.value.title }}</td>
+                  <td class="action">
+                    <a
+                      href="javascript:;"
+                      data-tooltip="Edit"
+                      (click)="getTemplate(template, i)"
+                      class="edit"
+                      ><img
+                        src="../../../../../ng1/images/setting-module/edit.svg"
+                        alt="Edit"
+                    /></a>
+                    <a
+                      *ngIf="
+                        emailPages &&
+                        emailPages.activeAndNotDefault[template.key]
+                          .isNotDefault
+                      "
+                      (click)="restoreDefault(template.key)"
+                      href="javascript:;"
+                      data-tooltip="Reset Default"
+                      class="view"
+                      ><img
+                        src="../../../../../ng1/images/setting-module/view-icon.svg"
+                        alt="view-icon"
+                    /></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </tab>
+      <!-- Invoice Templates  -->
+      <tab heading="Invoice Templates">
+        <div class="cmn-area">
+          <div class="data-table-wrap">
+            <table class="dataTable display" style="width:100%">
+              <thead>
+                <tr>
+                  <th class="t-name">Template Name</th>
+                  <th class="action">&nbsp;</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="
+                    let template of invoiceTemplates | keyvalue;
+                    trackBy: trackByTicket
+                  "
+                >
+                  <td class="t-name">{{ template.value.title }}</td>
+                  <td class="action">
+                    <a
+                      href="javascript:;"
+                      data-tooltip="Edit"
+                      class="edit"
+                      (click)="getTemplate(template, i)"
+                      ><img
+                        src="../../../../../ng1/images/setting-module/edit.svg"
+                        alt="Edit"
+                    /></a>
+                    <a
+                      *ngIf="
+                        emailPages &&
+                        emailPages.activeAndNotDefault[template.key]
+                          .isNotDefault
+                      "
+                      (click)="restoreDefault(template.key)"
+                      href="javascript:;"
+                      data-tooltip="Reset Default"
+                      class="view"
+                      ><img
+                        src="../../../../../ng1/images/setting-module/view-icon.svg"
+                        alt="view-icon"
+                    /></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </tab>
+    </tabset>
+    <!-- <div class="loading" *ngIf="loading"></div> -->
+  </div>
+  
+</div>
+
+<!-- sidebar popup edit -->
+<div
+  class="sidebar-popup tmp-edit"
+  [ngClass]="{ opened: edit }"
+  *ngIf="templeteInfo"
+>
+  <!-- header -->
+  <div class="sidebar-header">
+    <div class="h1">{{ templeteInfo.title }}</div>
+    <a class="close" href="javascript:;" (click)="closeTemplete()"
+      ><img src="../../../../../ng1/images/setting-module/close.svg" alt="close"
+    /></a>
+  </div>
+  <div class="reciept">
+    <span><strong>Recipient:</strong> {{ templeteInfo.recipient }}</span>
+    <a
+      href="javascript:;"
+      class="templates-view"
+      (click)="emailPreview(template)"
+      *ngIf="templeteInfo.showPreview"
+      >Show Template Preview</a
+    >
+  </div>
+  <div class="middle-content">
+    <form [formGroup]="templeteForm" (ngSubmit)="saveEmailTemplate()">
+      <div class="f-row">
+        <div class="f-col col-100">
+          <label>Subject</label>
+          <div class="form-row">
+            <input
+              type="text"
+              formControlName="subject"
+              #subject
+              name="subject"
+              id="subject"
+              class="form-input insert-field"
+              [ngClass]="{ 'is-invalid': submitted && f.subject.errors }"
+              placeholder="Enter Subject"
+            />
+            <div *ngIf="submitted && f.subject.errors" class="invalid-feedback">
+              <div *ngIf="f.subject.errors.required">Subject is required</div>
+              <div *ngIf="f.subject.errors.pattern && templeteInfo">
+                {{ templeteInfo.requiredKeywords }} is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="f-col col-100">
+          <label>Email</label>
+          <div class="form-row">
+            <!-- <angular-editor
+              id="myEditor"
+              #body
+              name="body"
+              formControlName="body"
+              [config]="config"
+            ></angular-editor> -->
+              <textarea   
+              id="myEditor"
+              #body
+              class="form-input insert-field"
+              row="8"
+              name="body"
+              formControlName="body"></textarea>
+          </div>
+        </div>
+        <div class="f-col col-100">
+          <div class="keywords">
+            <label>Available keywords</label
+            ><a href="javascript:;" (click)="toggle()">{{ buttonName }}</a>
+          </div>
+
+          <div class="form-row tgs-list" *ngIf="!show">
+            <span
+              class="tags"
+              *ngFor="let key of keywords"
+              (mousedown)="insertAtCaret(key.keyName)"
+              >{{ key.keyName }}</span
+            >
+          </div>
+          <!-- on click hide show  -->
+          <div class="key-area" *ngIf="show">
+            <span
+              *ngFor="let key of keywords"
+              (mousedown)="insertAtCaret(key.keyName)"
+              ><strong>{{ key.keyName }} - </strong>{{ key.description }}</span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <input type="submit" value="Save" class="btn btn-primary" />
+
+        <a
+          href="javascrip:;"
+          class="btn btn-secondary"
+          (click)="closeTemplete()"
+          >Cancel</a
+        >
+        <button
+          type="button"
+          href="javascript:void(0)"
+          *ngIf="emailPages && openEmailTemplate"
+          class="restore"
+          [disabled]="
+            !emailPages.activeAndNotDefault[openEmailTemplate].isNotDefault
+          "
+          (click)="restoreDefault(openEmailTemplate)"
+        >
+          Restore Default
+        </button>
+        <!-- <a href="javascript:;" class="restore">Restore Default</a> -->
+      </div>
+    </form>
+  </div>
+  <div class="msg" *ngIf="templeteInfo">
+    {{ templeteInfo.description }}
+  </div>
+</div>
+<!-- Modal create Tags -->
+<ng-template #template>
+  <div class="modal-header">
+    <div class="modal-logo">
+      <img
+        src="../../../../../ng1/images/setting-module/company-logo.svg"
+        alt="accer"
+      />
+    </div>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="templat-area">
+      <h3>New Support Ticket #5365</h3>
+      <div class="t-view">
+        <h6>Hi Acer,</h6>
+        <p>
+          This is a copy of your original invoice #5365, that was originally
+          emailed to you. If you didn't receive a copy of this invoice you can
+          download it by clicking on the link below. Thank you!
+        </p>
+        <div class="tab-wrap">
+          <table>
+            <tr>
+              <th>Invoice#</th>
+              <th>Invoice date</th>
+              <th>Due date</th>
+              <th>Amount</th>
+            </tr>
+            <tr>
+              <td>0000</td>
+              <td>06 Nov 2018</td>
+              <td>10 Nov 2018</td>
+              <td>$864.00</td>
+            </tr>
+            <tr>
+              <td>0001</td>
+              <td>07 Jun 2018</td>
+              <td>16 Jun 2018</td>
+              <td>$710.00</td>
+            </tr>
+            <tr>
+              <td colspan="4">
+                <span>Total Amount <strong>$864.00</strong></span>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="t-footer">
+          <div class="t-f-left">
+            <h5>Michael Miller</h5>
+            <span>acer PVT Ltd.</span>
+          </div>
+          <div class="t-f-right">
+            <a href="mailto:michaelmiller_980@gmail.com"
+              >michaelmiller_980@gmail.com</a
+            >
+            <span>+1 (123) 456-7890123</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <span class="t-power"
+      >Please contact Active Information Systems @ or at
+      <a href="mailto:activeis@inbox.quicktech.com"
+        >activeis@inbox.quicktech.com</a
+      ></span
+    >
+    <span class="t-power"
+      >Powered by © 2019
+      <a href="javascript:;" target="_blank">Quicktech.com</a></span
+    >
+  </div>
+</ng-template>

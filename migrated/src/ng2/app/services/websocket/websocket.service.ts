@@ -10,6 +10,9 @@ import { UsersStateService } from '../../states/users/users-state.service';
 import { CompaniesRealTimeService } from '../../states/company/companies-real-time.service';
 import { DevicesRealTimeService } from '../../states/devices/devices-real-time.service';
 import { UsersRealTimeService } from '../../states/users/users-real-time.service';
+import { TaxesRealTimeService } from '../../states/taxes/taxes-real-time.service';
+import { GlNumberRealTimeService } from '../../states/gl-number/gl-number-real-time.service';
+import { InventoryRealTimeService } from '../../states/inventory/inventory-real-time.service';
 
 /**
  * Websocket service to work with api
@@ -38,6 +41,9 @@ export class WebsocketService {
     private companiesRealTimeService:CompaniesRealTimeService,
     private usersRealTimeService:UsersRealTimeService,
     private passwordManagerService: PasswordManagerService,
+    private taxesRealTimeService:TaxesRealTimeService,
+    private glNumberRealTimeService:GlNumberRealTimeService,
+    private inventoryRealTimeService:InventoryRealTimeService
 
     
   ) {
@@ -55,6 +61,9 @@ export class WebsocketService {
       that.subsribeToDevices();
       that.subsribeToCompany();
       that.subsribeToPasswordRecods();
+      that.subsribeToTaxes();
+      that.subsribeToCategories();
+      that.subsribeToProducts();
     });
   }
 private subsribeToDevices () {
@@ -152,6 +161,70 @@ private subsribeToDevices () {
         this.stompClient.subscribe(`/user/watch/passwordRecords`, (message) => {
           var newChange = JSON.parse(message.body);
           this.passwordManagerService.handleRealTimeChanges(newChange);
+        
+        });
+     
+    }, 3000);
+  }
+
+    /**
+   * subscribe to taxes realtime
+   */
+  public subsribeToTaxes() {
+   
+    setTimeout(() => {
+     
+        this.stompClient.subscribe(`/user/watch/taxes`, (message) => {
+          var newChange = JSON.parse(message.body);
+          this.taxesRealTimeService.handleRealTimeChanges(newChange);
+        
+        });
+     
+    }, 3000);
+  }
+
+     /**
+   * subscribe to categories realtime
+   */
+  public subsribeToCategories() {
+   
+    setTimeout(() => {
+     
+        this.stompClient.subscribe(`/user/watch/productCategory`, (message) => {
+          var newChange = JSON.parse(message.body);
+          this.inventoryRealTimeService.handleRealTimeChangesCategories(newChange);
+        
+        });
+     
+    }, 3000);
+  }
+
+      /**
+   * subscribe to categories realtime
+   */
+  public subsribeToProducts() {
+   
+    setTimeout(() => {
+     
+        this.stompClient.subscribe(`/user/watch/product`, (message) => {
+          var newChange = JSON.parse(message.body);
+          this.inventoryRealTimeService.handleRealTimeChangesProducts(newChange);
+        
+        });
+     
+    }, 3000);
+  }
+
+      /**
+   * subscribe to gl number realtime
+   */
+  public subsribeToGlNumber(id) {
+   
+    setTimeout(() => {
+     
+        this.stompClient.subscribe(`/user/watch/glNumber/${id}`, (message) => {
+          var newChange = JSON.parse(message.body);
+          this.glNumberRealTimeService.handleRealTimeChanges(newChange);
         
         });
      

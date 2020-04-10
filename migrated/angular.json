@@ -25,15 +25,17 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              "src/ng2/assets",
               "src/ng1"
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/ng2/styles.scss",
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/datatables.net-dt/css/jquery.dataTables.css",
               "src/ng1/styles/admin-tickets.css",
               "src/ng1/styles/bootstrap-datetimepicker.css",
               "src/ng1/styles/common.dropdown.css",
-              "src/ng1/styles/common.fonts.css",
               "src/ng1/styles/common.icons.css",
               "src/ng1/styles/common.left.css",
               "src/ng1/styles/common.lists.css",
@@ -87,6 +89,7 @@
               "src/ng1/styles/daterangepicker.css"
             ],
             "scripts": [
+              "src/ng2/assets/md5-min.js",
               "src/ng1/bower_components/jquery/dist/jquery.js",
               "src/ng1/bower_components/jquery-mousewheel/jquery.mousewheel.js",
               "src/ng1/bower_components/angular/angular.js",
@@ -126,7 +129,6 @@
               "src/ng1/scripts/core/dashboards/dashboards.mdl.js",
               "src/ng1/scripts/core/devices/devices.mdl.js",
               "src/ng1/scripts/core/left-panel/left-panel.mdl.js",
-              "src/ng1/scripts/core/password-manager/password-manager.mdl.js",
               "src/ng1/scripts/core/products/products.mdl.js",
               "src/ng1/scripts/core/quick-support/quick-support.mdl.js",
               "src/ng1/scripts/core/receipt-archive/receipt-archive.mdl.js",
@@ -137,7 +139,6 @@
               "src/ng1/scripts/core/services/services.mdl.js",
               "src/ng1/scripts/core/settings/settings.mdl.js",
               "src/ng1/scripts/core/tickets/tickets.mdl.js",
-              "src/ng1/scripts/core/users/users.mdl.js",
               "src/ng1/scripts/admin/admin-services/customer-list.js",
               "src/ng1/scripts/admin/customer-list/customer-list.drv.js",
               "src/ng1/scripts/common/directives/add-create-new-button.drv.js",
@@ -303,7 +304,6 @@
               "src/ng1/scripts/core/billable/newBillableModals.ctrl.js",
               "src/ng1/scripts/core/billable/payments/payments.ctrl.js",
               "src/ng1/scripts/core/billable/prevent-hash-change.drv.js",
-              "src/ng1/scripts/core/companies/companies.ctrl.js",
               "src/ng1/scripts/core/companies/company-profile/company-address-autocomplete.drv.js",
               "src/ng1/scripts/core/companies/company-profile/company-profile.ctrl.js",
               "src/ng1/scripts/core/companies/company-profile/download-agent/download-agent.ctrl.js",
@@ -318,13 +318,9 @@
               "src/ng1/scripts/core/companies/company-profile/tabs/devices-tab/devices-tab.ctrl.js",
               "src/ng1/scripts/core/companies/company-profile/tabs/network-scan-tab/network-scan-item.ctrl.js",
               "src/ng1/scripts/core/companies/company-profile/tabs/network-scan-tab/network-scan-tab.ctrl.js",
-              "src/ng1/scripts/core/companies/company-profile/tabs/products-tab/company-product-report.ctrl.js",
-              "src/ng1/scripts/core/companies/company-profile/tabs/products-tab/products-tab.ctrl.js",
               "src/ng1/scripts/core/companies/company-profile/tabs/settings-tab/settings-tab.ctrl.js",
               "src/ng1/scripts/core/companies/company-profile/tabs/tickets-tab/tickets-tab.ctrl.js",
               "src/ng1/scripts/core/companies/company-profile/tabs/unknownFilter.fltr.js",
-              "src/ng1/scripts/core/companies/company-profile/tabs/users-tab/users-tab.ctrl.js",
-              "src/ng1/scripts/core/companies/company.ctrl.js",
               "src/ng1/scripts/core/companies/confirm-modal.ctrl.js",
               "src/ng1/scripts/core/companies/download-agent.ctrl.js",
               "src/ng1/scripts/core/dashboards/billing-dashboard/billing-dashboard.ctrl.js",
@@ -352,17 +348,9 @@
               "src/ng1/scripts/core/header/header-tickets-bulk.ctrl.js",
               "src/ng1/scripts/core/header/header.ctrl.js",
               "src/ng1/scripts/core/header/logout-btn.drv.js",
-              "src/ng1/scripts/core/left-panel/customer-ticket-report/create-report-modal.ctrl.js",
               "src/ng1/scripts/core/left-panel/customer-ticket-report/customer-ticket-report.ctrl.js",
               "src/ng1/scripts/core/left-panel/left-panel.ctrl.js",
-              "src/ng1/scripts/core/password-manager/modal/open-password-modal.drv.js",
-              "src/ng1/scripts/core/password-manager/modal/password-modal.ctrl.js",
-              "src/ng1/scripts/core/password-manager/password-manager.ctrl.js",
-              "src/ng1/scripts/core/products/category.ctrl.js",
               "src/ng1/scripts/core/products/move-product.drv.js",
-              "src/ng1/scripts/core/products/product.ctrl.js",
-              "src/ng1/scripts/core/products/products-list.ctrl.js",
-              "src/ng1/scripts/core/products/products.ctrl.js",
               "src/ng1/scripts/core/quick-support/copy-key.drv.js",
               "src/ng1/scripts/core/quick-support/copy-url.drv.js",
               "src/ng1/scripts/core/quick-support/open-mail-manager.drv.js",
@@ -452,9 +440,6 @@
               "src/ng1/scripts/core/tickets/ticket-uploader.drv.js",
               "src/ng1/scripts/core/tickets/ticket.ctrl.js",
               "src/ng1/scripts/core/tickets/tickets.ctrl.js",
-              "src/ng1/scripts/core/users/trimmed-tooltip-checker.drv.js",
-              "src/ng1/scripts/core/users/user.ctrl.js",
-              "src/ng1/scripts/core/users/users.ctrl.js",
               "src/ng1/scripts/js/vendors/jquery.jscrollpane.js",
               "src/ng1/scripts/js/vendors/modernizr.js",
               "src/ng1/scripts/js/vendors/editor/jquery.hotkeys.js",
@@ -473,18 +458,17 @@
               "src/ng1/scripts/core/user-list/user-list.ctrl.js",
               "src/ng1/scripts/core/assign-user-list/assign-user-list.ctrl.js",
               "src/ng1/scripts/core/duration/duration.ctrl.js",
-              "src/ng1/scripts/core/time-picker/time-picker.ctrl.js"
+              "src/ng1/scripts/core/time-picker/time-picker.ctrl.js",
+              "node_modules/datatables.net/js/jquery.dataTables.min.js"
             ],
             "es5BrowserSupport": true
           },
           "configurations": {
             "production": {
-              "fileReplacements": [
-                {
-                  "replace": "src/ng2/environments/environment.ts",
-                  "with": "src/ng2/environments/environment.prod.ts"
-                }
-              ],
+              "fileReplacements": [{
+                "replace": "src/ng2/environments/environment.ts",
+                "with": "src/ng2/environments/environment.prod.ts"
+              }],
               "outputHashing": "all",
               "sourceMap": false,
               "extractCss": false,
@@ -493,21 +477,17 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "3mb",
-                  "maximumError": "6mb"
-                }
-              ]
+              "budgets": [{
+                "type": "initial",
+                "maximumWarning": "3mb",
+                "maximumError": "6mb"
+              }]
             },
             "dev": {
-              "fileReplacements": [
-                {
-                  "replace": "src/ng2/environments/environment.ts",
-                  "with": "src/ng2/environments/environment.dev.ts"
-                }
-              ]
+              "fileReplacements": [{
+                "replace": "src/ng2/environments/environment.ts",
+                "with": "src/ng2/environments/environment.dev.ts"
+              }]
             }
           }
         },

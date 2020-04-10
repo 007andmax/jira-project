@@ -1,28 +1,63 @@
 export class ReportValidate {
     dates: boolean = true;
     monthlyDetailed: boolean = true;
-     
+    company: boolean = true;
     constructor() { }
-    public getDates(){
+    public getDates() {
         return this.dates;
     }
-    public geMonthlyDetailed(){
+    public geMonthlyDetailed() {
         return this.monthlyDetailed;
     }
 
     public resetDates() {
         this.dates = true;
     }
+    public resetCompany() {
+        this.company = true;
+    }
 
-    public resetMonthlyDetailed () {
+    public resetMonthlyDetailed() {
         this.monthlyDetailed = true;
     }
-   
-    public isValidate(detailed,yearToDate,start,end) {
-       
-       // if (detailed  && start === '' && end === '') this.dates = false;
-       
-        if (!detailed && !yearToDate  && start === '' && end === '')  {
+    public isValidateCustomers(start, end,company,type) {
+        if (type === 'Summary' && start === '' && end === '') {
+            this.dates = false;
+        } 
+        if (type === 'Detailed' && start === '' && end === '' )  this.dates = false;
+        if (type === 'Detailed' && !company )  this.company = false;
+        return this.dates && this.company;
+    }
+    public isValidateProduct(start, end,company,type) {
+        if (type === 'Summary' && start === '' && end === '') {
+            this.dates = false;
+        } 
+        if (type === 'Detailed' && start === '' && end === '' )  this.dates = false;
+        if (type === 'Detailed' && !company )  this.company = false;
+        return this.dates && this.company;
+    }
+    public getCompany() {
+        return this.company;
+    }
+
+    public isValidateTickets(company) {
+        if (!company)  this.company = false;
+        return this.company;
+    }
+
+    public isValidateService(company) {
+        if (!company)  this.company = false;
+        return this.company;
+    }
+    public isValidateTaxes(start, end) {
+        if (start === '' && end === '') {
+            this.dates = false;
+        }
+        return this.dates;
+    }
+
+    public isValidate(detailed, yearToDate, start, end) {
+        if (!detailed && !yearToDate && start === '' && end === '') {
             this.dates = false;
             this.monthlyDetailed = false;
         }

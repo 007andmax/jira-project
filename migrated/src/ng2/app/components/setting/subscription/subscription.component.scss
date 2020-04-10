@@ -1,0 +1,531 @@
+/*** All css files include ***/
+@import '../../../../assets/scss/variable';
+@import '../../../../assets/scss/mixin';
+@import '../../../../assets/scss/custom';
+
+.subscription{
+    .heading{
+        padding: 34px 48px 45px 48px;
+        @media only screen and (max-width:768px){
+            padding: 15.5px 16px;
+        }
+    }
+    .cmn-area{
+        padding: 0 48px 56px;
+        @media only screen and (max-width:768px){
+            padding: 25px;
+        }
+    }
+
+    .current-plan {
+        float: left;
+        width: 100%;
+        .plan-heading {
+            float: left;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+
+            h6 {
+                font-size: 11px;
+                font-weight: 500;
+                font-family: $graphicMedBold;
+                line-height: 1.45;
+                letter-spacing: normal;
+                color: #9ca5b6;
+                text-transform: uppercase;
+                margin-bottom: 0;
+            }
+            a.h5 {
+                font-size: 12px;
+                font-family: $font-body;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: 1.33;
+                letter-spacing: normal;
+                color: #9ca5b6;
+                text-transform: none;
+                margin: 0;
+                &:hover{
+                    color: $primary-color;
+                }
+            }
+        }
+        .plan-des {
+            float: left;
+            width: 100%;
+            display: -webkit-flex;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 4px;
+            border: solid 1px #edf2f6;
+            background-color: #ffffff;
+            padding: 15px 24px;
+            margin-bottom: 40px;
+            flex-direction: row;
+            @media only screen and (max-width: 576px){
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+        .plan-info {
+            max-width: 200px;
+            @media only screen and (max-width: 576px){
+                max-width: 100%;
+                width: 100%;
+                margin-bottom: 25px;
+
+            }
+            h2 {
+                font-size: 18px;
+                font-family: $graphicSemibold;
+                line-height: 1.56;
+                letter-spacing: normal;
+                color: #364656;
+                margin-bottom: 0;
+            }
+            span {
+                font-size: 12px;
+                font-weight: normal;
+                line-height: 1.33;
+                letter-spacing: normal;
+                color: #4f5f79;
+            }
+
+        }
+        .upgrade-info {
+            @media only screen and (max-width: 576px){
+                width: 100%;
+                text-align: right;
+            }
+            a {
+                font-size: 12px;
+                font-weight: 500;
+                font-family: $graphicMedBold;
+                line-height: 1.33;
+                letter-spacing: -0.3px;
+                color: #16a4fa;
+                @media only screen and (max-width: 576px){
+                    @include border-radius(4px);
+                    display: inline-block;
+                }
+            }
+            .btn {
+                padding: 13px 24px;
+                margin-left: 24px;
+                color:$white-color;
+                letter-spacing: normal;
+                @media only screen and (max-width: 576px){
+                    padding: 11px 15px;
+                    margin-left: 15px;
+                }
+            }
+        }
+
+    }
+    .card-info {
+        float: left;
+        width: 100%;
+        display: -webkit-flex;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 4px;
+        background-color: rgba(156, 165, 182, 0.1);
+        flex-direction: row;
+        padding: 15px 24px;
+        .card-img {
+            display: -webkit-flex;
+            display: flex;
+            width: 33px;
+            height: 23px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card-left {
+            display: -webkit-inline-flex;
+            display: inline-flex;
+            align-items: center;
+            flex-direction: row;
+            width: 50%;
+        }
+        .card-des {
+            display: -webkit-flex;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            margin-left: 15px;
+            h5 {
+                margin: 0;
+                display: block;
+                color: #1b1b1b;
+            }
+            span {
+                font-size: 12px;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: 1.33;
+                letter-spacing: normal;
+                color: #4f5f79;
+            }
+        }
+
+        .card-action{
+            a {
+                margin-left: 17px;
+                margin-top: 0;
+            }
+        }
+    }
+
+}
+
+/*** Price table ***/
+
+.price-wrapper {
+    margin: 0 auto;
+    width: 945px;
+    @media only screen and (max-width:1280px){
+        width: 100%;
+    }
+    @media only screen and (max-width:768px){
+        background-color: #f3f7f9;
+    }
+    .price-content {
+        float: left;
+        width: 100%;
+        margin-bottom: 100px;
+        @media only screen and (max-width:768px){
+            background-color: #f3f7f9;
+            padding-bottom: 20px;
+            margin: 0;
+        }
+    }
+    .price-heading {
+        float: left;
+        width: 100%;
+        text-align: center;
+        margin-top: 35px;
+        margin-bottom: 73px;
+        @media only screen and (max-width:768px){
+            padding: 0 30px;
+            margin-bottom: 20px;
+            margin-top: 81px;
+        }
+        h1 {
+            margin-bottom: 0;
+        }
+        span {
+            letter-spacing: normal;
+            color: #364656;
+        }
+    }
+    .price-area {
+        float: left;
+        width: 100%;
+        position: relative;
+        @media only screen and (max-width:1280px){
+            width: 950px;
+        }
+    }
+    .pr-wrapper{
+        float: left;
+        width: 100%;overflow: hidden;
+        
+    }
+    table.price-table {
+        width: 100%;
+        -o-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        border-collapse: collapse;
+        @include border-radius(4px);
+        * {
+            -o-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        td {
+            padding: 13.5px 30px 13.5px 14px;
+            text-align: center;
+            background-color: #fff;
+            border-bottom: solid 1px #edf2f6;
+            font-size: 13px;
+            line-height: 1.54;
+            letter-spacing: normal;
+            text-align: center;
+            color: #4f5f79;
+        }
+        th.h-title {
+            padding: 18px 30px 18px 15px;
+            background-color: #fff;
+            font-family: $font-body;
+            font-weight: normal;
+            width: 236px;
+            font-size: 18px;
+            line-height: 1.56;
+            letter-spacing: normal;
+            text-align: center;
+            color: #364656;
+            border-bottom:  solid 1px #edf2f6;
+            text-transform: capitalize;
+            position: relative;
+        }
+        th.v-title {
+            font-size: 13px;
+            font-family: $graphicMedBold;
+            font-weight: 500;
+            line-height: 1.54;
+            letter-spacing: normal;
+            color: #364656;
+            background-color: #fff;
+            border-bottom: solid 1px #edf2f6;
+            padding: 13px 24px;
+        }
+
+    tr:first-child th.h-title:first-child {
+        background-color: transparent;
+    }
+    tr{
+        &:last-child{
+            td{
+                border-radius:0 0 4px;
+            }
+        }
+    }
+
+    th.h-title::before {content: "";position: absolute;top: 0;bottom: 0;right: 0;width: 19px;background-color: #f3f7f9;height: 1000px;}
+    th.h-title::after {content: "";position: absolute;top: 0;left: 0;width: 218px;
+        height: 3px;
+        border-radius: 4px 4px 0 0;
+        background-color: #4f5f79;}
+        th.h-title.standard{
+            &::after{
+                background-color: #16a4fa;
+            }
+        }
+        th.h-title.professional{
+            &::after{
+                background-color: #ffb937;
+            }
+        }
+    tr:first-child th.h-title:first-child::before {background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.1));top: 63px;width: 24px;right: 0;}
+    tr:first-child th.h-title:first-child::after{background-color: transparent;}
+
+    }
+    .btn {
+        padding: 9px 24px;
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: normal;
+        &.btn-yellow{
+            background-color: #ffb937;
+
+        }
+        &.btn-secondary{
+            cursor: not-allowed;
+        }
+    }
+    .price {
+        margin-bottom: 15px;
+        font-size: 32px;
+        font-weight: 500;
+        font-family: $graphicMedBold;
+        line-height: 1.25;
+        letter-spacing: normal;
+        text-align: center;
+        color: #364656;
+        sup {
+            font-size: 16px;
+            font-family: $font-body;
+            line-height: 1.5;
+            letter-spacing: normal;
+            text-align: center;
+            color: #4f5f79;
+            margin-right: 4px;
+        }
+        sub {
+            font-size: 16px;
+            font-family: $font-body;
+            line-height: 1.5;
+            letter-spacing: normal;
+            text-align: center;
+            color: #9ca5b6;
+            margin-left: 4px;
+        }
+
+
+
+    }
+    .plan {
+        padding-top: 10px !important;
+        padding-bottom: 23px !important;
+        &.plan.v-title{
+            vertical-align: top;
+            padding-top: 23px !important;  color: #4f5f79 !important;
+        }
+    }
+
+}
+
+.close-btn{
+    width: 32px;
+  height: 32px;
+  @include border-radius(4px);
+  background: url(/ng2/assets/img/close.svg) center no-repeat;
+  background-size: 20px auto;
+  position: absolute;
+  right: -25px;
+  font-size: 0;
+  top: 0;
+  background-color: #fff;
+
+  @media only screen and (max-width:768px){
+    width: 100%;
+    height: 56px;
+    border-radius: 0;
+    background: url(/ng2/assets/img/close-light.svg) left 20px center no-repeat;
+    background-size: 20px auto;
+    position: fixed;
+    right: 0;
+    font-size: 0;
+    top: 0;
+    background-color: #fff;
+    left: 0;
+    background-color: #27303f;
+    color: #fff;
+    display: flex; 
+    flex-direction: row;
+    font-size: 16px;
+    padding-left: 56px;
+    z-index: 999; 
+    align-items: center;
+  }
+
+}
+/** Switch box **/
+.reporting{
+    position: relative;
+    float: left;
+    width: 100%;
+    @media only screen and (max-width:1280px){
+        overflow-x: auto;
+        padding-bottom: 15px;
+    }
+    @media only screen and (max-width:768px){
+        padding-left: 15px;
+    }
+  
+.switchbox {
+    display: inline-block;
+    position: absolute;
+    height: 20px;
+    left: 90px;
+    top: 22px;
+    z-index: 1;
+    @media only screen and (max-width: 768px){
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        position: relative;
+        height: 20px;
+        left: auto;
+        top: auto;
+        z-index: 1;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 35px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+    input {
+        height: 0;
+        width: 0;
+        opacity: 0;
+        position: absolute;
+        &:checked + label{
+            &::before{
+                left: 15px;
+            }
+            + span.monthly{
+                color: #9ca5b6;
+                + span.Annual{
+                    color: #364656;
+                }
+            }
+
+        }
+    }
+    label {
+        width: 32px;
+        height: 18px;
+        border-radius: 12px;
+        border: solid 1px #16a4fa;
+        background-color: #16a4fa;
+        display: inline-block;
+        margin: 0 0  0 0;
+        position: relative;
+        cursor: pointer;
+        &::before {
+            content: "";
+            position: absolute;
+            left: 1px;
+            top: 1px;
+            width: 14px;
+            height: 14px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            border-radius: 50%;
+            @include transition(0.4s);
+            cursor: pointer;
+        }
+        @media only screen and (max-width: 768px){
+            order: 2;
+            margin: 0 10px;
+        }
+    }
+    span {
+        position: absolute;
+        top: 5px;
+        margin: auto;
+        font-size: 11px;
+        font-weight: 600;
+        font-family: $graphicSemibold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.45;
+        letter-spacing: normal;
+        color: #364656;
+        text-transform: uppercase;
+        @media only screen and (max-width: 768px){
+            position: static;
+            margin: 0;
+        }
+        &.monthly {
+            left: -64px;
+            @media only screen and (max-width: 768px){
+                left: 0;
+                order: 1;
+            }
+        }
+        &.Annual {
+            right: -64px;
+            color: #9ca5b6;
+            @media only screen and (max-width: 768px){
+                order: 3;
+            }
+
+        }
+    }
+}
+
+}

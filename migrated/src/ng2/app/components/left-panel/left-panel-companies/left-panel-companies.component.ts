@@ -49,6 +49,8 @@ export class LeftPanelCompaniesComponent implements OnInit {
       this.calculateCount = data;
 
     })
+
+    
   }
  /* private getIndustries() {
     this.companiesService.getIndustries().subscribe((data: Array<string>) => {

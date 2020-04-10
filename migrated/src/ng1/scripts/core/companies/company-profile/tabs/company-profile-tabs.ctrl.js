@@ -10,7 +10,7 @@
                 UserConfirmationsService, CompaniesService, UsersService, SubscriptionsService,
                 Utils, PermissionsService, ProductsService, $rootScope) {
  
-        var tabs = ['dashboard', 'users', 'devices', 'network-scan', 'products'/*, 'agents', 'settings'*/],
+        var tabs = ['dashboard', 'users', 'devices', 'network-scan', 'products'/*, 'agents', 'settings'*/,'contracts','tickets-all'],
           devicesHeaderState = SharedStateService.getSharedState('devicesHeader');
 
         $scope.PermissionsService = PermissionsService;
@@ -33,6 +33,7 @@
           selectDevicesIds: [],
           isOfflineDeviceSelected: false
         };
+      
         if($scope.company) {
           $rootScope.isAgentsRequestSending = true;
           if ($scope.company.clientType.toLowerCase() === 'vendor') {
@@ -340,11 +341,9 @@
         };
 
         $scope.getTabTemplateUrl = function (tab) {
-          if (tab === 'dashboard') {
-            return '/ng1/scripts/core/companies/company-profile/tabs/users-tab/users-tab.tpl.html'
-          } else {
+          if (tab !== 'dashboard') {
             return '/ng1/scripts/core/companies/company-profile/tabs/' + tab + '-tab/' + tab + '-tab.tpl.html';
-          }
+          }  
         };
 
         $scope.companyProfileHeader.unCheckAll = function () {

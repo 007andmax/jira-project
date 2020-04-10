@@ -1,30 +1,23 @@
 <div ng-controller="quicktech.core.companies.companyProfileTabsCtrl">
   <div ng-if=" companyData && company">
     <div ng-if="getOpenedTab() === 'dashboard'"
-         ng-include="'/ng1/scripts/core/companies/company-profile/tabs/dashboard/dashboard.tpl.html'">
+      ng-include="'/ng1/scripts/core/companies/company-profile/tabs/dashboard/dashboard.tpl.html'">
     </div>
-    <div
-      ng-if="getOpenedTab() === 'users-all' || getOpenedTab() === 'users-managers' || getOpenedTab() === 'users-clients'"
-      ng-include="'/ng1/scripts/core/companies/company-profile/tabs/users-tab/users-tab.tpl.html'">
-    </div>
+  
     <div
       ng-if="getOpenedTab() === 'tickets-all'|| getOpenedTab() === 'tickets-unassigned'|| getOpenedTab() === 'tickets-inProgress'|| getOpenedTab() === 'tickets-onHold' || getOpenedTab() === 'tickets-completed'"
       ng-include="'/ng1/scripts/core/companies/company-profile/tabs/tickets-tab/tickets-tab.tpl.html'">
     </div>
-    <div ng-if="getOpenedTab() === 'devices-all' || getOpenedTab() === 'devices-workstations' || getOpenedTab() === 'devices-servers' || getOpenedTab() === 'devices-devices'"
-         ng-include="'/ng1/scripts/core/companies/company-profile/tabs/devices-tab/companyDevices-tab.tpl.html'">
+    <div
+      ng-if="getOpenedTab() === 'devices-all' || getOpenedTab() === 'devices-workstations' || getOpenedTab() === 'devices-servers' || getOpenedTab() === 'devices-devices'"
+      ng-include="'/ng1/scripts/core/companies/company-profile/tabs/devices-tab/companyDevices-tab.tpl.html'">
     </div>
     <div ng-if="getOpenedTab() === 'network-scan'"
-         ng-include="'/ng1/scripts/core/companies/company-profile/tabs/network-scan-tab/dashboard-network-scan-tab.tpl.html'">
+      ng-include="'/ng1/scripts/core/companies/company-profile/tabs/network-scan-tab/dashboard-network-scan-tab.tpl.html'">
     </div>
-    <div ng-if="getOpenedTab() === 'products'"
-         ng-include="'/ng1/scripts/core/companies/company-profile/tabs/products-tab/list-of-products-sold.tpl.html'">
-    </div>
+    
     <div ng-if="getOpenedTab() === 'contracts'"
-         ng-include="'/ng1/scripts/core/companies/company-profile/tabs/contracts-tab/contracts-tab.tpl.html'">
-    </div>
-    <div ng-if="getOpenedTab() === 'password-manager'"
-         ng-include="'/ng1/scripts/core/companies/company-profile/tabs/password-manager-tab/password-manager-tab.tpl.html'">
+      ng-include="'/ng1/scripts/core/companies/company-profile/tabs/contracts-tab/contracts-tab.tpl.html'">
     </div>
   </div>
 </div>

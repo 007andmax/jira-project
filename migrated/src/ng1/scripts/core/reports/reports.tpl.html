@@ -6,9 +6,10 @@
         <p>Sales</p>
         <img src="ng1/images/new-icons/Report-sales.svg">
         <ul>
-          <li class="content-report" ui-sref="byProducts">Product sales report
+          <!-- ui-sref="byProducts"-->
+          <li class="content-report" ng-click="setReport('byProducts')"  ui-sref="new-item-report({ ticketId: 'byProducts' })" >Product sales report
           </li>
-          <li class="content-report" ui-sref="byCustomers">Customer sales report</li>
+          <li class="content-report" ng-click="setReport('byCustomers')"  ui-sref="new-item-report({ ticketId: 'byCustomers' })">Customer sales report</li>
         </ul>
       </div>
     </div>
@@ -17,7 +18,8 @@
         <p>Taxes</p>
         <img src="ng1/images/new-icons/Report-Taxes.svg">
         <ul>
-          <li class="content-report" ui-sref="byTaxes">Tax report</li>
+          <!-- ng-click="setReport('byTaxes')"  ui-sref="new-item-report({ ticketId: 'byTaxes' })"   ui-sref="byTaxes"-->
+          <li class="content-report"  ng-click="setReport('byTaxes')"  ui-sref="new-item-report({ ticketId: 'byTaxes' })">Tax report</li>
         </ul>
       </div>
     </div>
@@ -39,7 +41,10 @@
         <p>Financial</p>
         <img src="ng1/images/new-icons/Report-Financial.svg">
         <ul>
-          <li class="content-report" ui-sref="accountsReceivable">Accounts receivable report</li>
+          <!-- ng-click="setReport('accounts-receivable')"  ui-sref="new-item-report({ ticketId: 'accounts-receivable' })"
+          ui-sref="accountsReceivable"
+          -->
+          <li class="content-report"  ng-click="setReport('accounts-receivable')"  ui-sref="new-item-report({ ticketId: 'accounts-receivable' })">Accounts receivable report</li>
         </ul>
       </div>
     </div>
@@ -80,7 +85,10 @@
         <p>Tickets</p>
         <img src="ng1/images/new-icons/report-tickets.svg" style="top: 28px;width: 26px;">
         <ul>
-          <li class="content-report" ui-sref="ticket-report">Tickets report</li>
+          <!-- ui-sref="ticket-report" -->
+          <li class="content-report"    ng-click="setReport('ticket-report')"  ui-sref="new-item-report({ ticketId: 'ticket-report' })" >Tickets report</li>
+          <li class="content-report"    ng-click="setReport('service-report')"  ui-sref="new-item-report({ ticketId: 'service-report' })" >Service report</li>
+      
         </ul>
       </div>
     </div>
@@ -90,7 +98,7 @@
         <p>Income accounts</p>
         <img src="ng1/images/new-icons/report-tickets.svg" style="top: 28px;width: 26px;">
         <ul>
-          <li class="content-report" ng-click="setReport('TEST')"  ui-sref="new-item-report({ ticketId: 'income-accounts' })">Income account report</li>
+          <li class="content-report" ng-click="setReport('income-accounts')"  ui-sref="new-item-report({ ticketId: 'income-accounts' })">Income account report</li>
         </ul>
       </div>
     </div>

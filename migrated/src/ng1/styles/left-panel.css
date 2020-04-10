@@ -207,7 +207,7 @@
 .left-panel-full__head--header {
   font-size: 20px;
   line-height: 1em;
-  font-family: 'Graphik Light', sans-serif;
+  font-family: 'Graphik-Light', sans-serif;
 }
 
 .collapsed-nav > .center-category__category.active,
@@ -245,7 +245,8 @@
 
 .left-panel-full-wrapper {
   width: 100%;
-  overflow: hidden;
+  /*overflow: hidden;*/
+  overflow: visible;
 }
 
 .badge-pos {

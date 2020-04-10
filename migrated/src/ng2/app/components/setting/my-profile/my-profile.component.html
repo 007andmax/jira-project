@@ -1,0 +1,29 @@
+<!-- Middle Wrapper  -->
+<div class="page-container">
+  <div class="page-insider profile-insider">
+     <!-- Message -->
+      <!-- <div style="display: none" class="sucess-messages">Password Change Successfully</div> -->
+
+    <div class="heading" >
+      <h1><a href="javascript:;" (click)="onBackMenu()" class="back-menu" style="display: none;">backmneu</a>My Profile Settings</h1>
+    </div>
+    <tabset> 
+      <!-- Profile -->
+      <tab heading="Profile" id="tab1">
+        <app-profile></app-profile>
+      </tab>
+      <!-- Account  -->
+      <tab heading="Account">
+        <app-account></app-account>
+      </tab>
+      <!-- Email -->
+      <tab heading="Email Notifications">
+       <app-email-notifications></app-email-notifications>
+      </tab>
+      <!-- Activity History -->
+      <tab heading="Activity History" class="history">
+        <app-activity-history></app-activity-history>
+      </tab>
+    </tabset>
+  </div>
+</div>

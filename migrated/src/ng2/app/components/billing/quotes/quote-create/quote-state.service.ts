@@ -22,6 +22,7 @@ export class QuoteStateService {
   public handleQuoteHasSent: EventEmitter<any> = new EventEmitter();
   public handleServices: EventEmitter<any> = new EventEmitter();
   public handleProducts: EventEmitter<any> = new EventEmitter();
+  public handleClearProduct: EventEmitter<any> = new EventEmitter();
  // public quoteHasSent: boolean = false;
   public quoteNumber: number;
   public startQuoteNumber: number;
@@ -54,7 +55,9 @@ export class QuoteStateService {
   
   }
 
-  
+  public onClearProduct() {
+    this.handleClearProduct.emit(null);
+  }
   public getProducts() {
     this.productService.getCategories().subscribe((res: any) => {
        this.handleProducts.emit(res);

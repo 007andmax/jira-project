@@ -14,7 +14,7 @@ import { User } from '../../components/users/class/user';
 export class UsersService {
 
   private apiUrl = environment.apiUrl;
-
+  public currentUser: any;
   //allUsers = [];
 
   /**
@@ -47,6 +47,17 @@ export class UsersService {
   //    this.userState.onInitCurrentUser(res);
     });
   }*/
+
+  getUser() {
+    return this.http.get(this.apiUrl + 'users/current').subscribe((res) => {
+      this.currentUser = res;
+    });
+  }
+  changeUserPermissions(permissions) {
+    console.log(this.currentUser, '12351');
+    console.log(permissions, '12351');
+    return this.currentUser.permissions = permissions;
+  }
 
 
 

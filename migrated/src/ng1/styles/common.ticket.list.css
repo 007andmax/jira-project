@@ -200,12 +200,12 @@
 .ticket--footer .add-users > .list-users.dropdown-menu .item-user p:nth-child(2) {
   margin: 0 10px;
   font-size: 13px;
-  font-family: "Graphik Medium", sans-serif;
+  font-family: "Graphik-Medium", sans-serif;
 }
 
 .ticket--footer .add-users > .list-users.dropdown-menu .item-user p:last-child {
   font-size: 12px;
-  font-family: "Graphik Regular", sans-serif;
+  font-family: "Graphik-Regular", sans-serif;
 }
 
 .ticket--footer .add-users > .list-users.dropdown-menu .item-user .default-user-avatar,
@@ -229,12 +229,12 @@
 .ticket--footer .default-user-avatar span,
 .ticket--footer .default-company-logo span {
   font-size: 12px;
-  font-family: "Graphik Regular", sans-serif;
+  font-family: "Graphik-Regular", sans-serif;
 }
 
 .ticket--footer .selected-assign-user > div span {
   font-size: 12px;
-  font-family: "Graphik Regular", sans-serif;
+  font-family: "Graphik-Regular", sans-serif;
 }
 
 .assign-list .default-user-avatar,

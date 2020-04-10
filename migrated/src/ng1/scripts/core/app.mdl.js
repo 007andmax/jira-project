@@ -7,7 +7,6 @@
       'main.services',
       'quicktech.core.dashboards',
       'quicktech.core.tickets',
-      'quicktech.core.users',
       'quicktech.common.services',
       'quicktech.common.directives',
       'quicktech.core.companies',
@@ -23,7 +22,6 @@
       'quicktech.core.quickSupport',
       'quicktech.core.reports',
       'quicktech.core.serviceAgreements',
-
       'ui.router',
       'ui.select',
       'ui.bootstrap',
@@ -35,7 +33,7 @@
       'nvd3',
       'vs-repeat',
       'daterangepicker',
-      'infinite-scroll',
+      'infinite-scroll'
 
     ]);
 
@@ -47,34 +45,9 @@
         function ($delegate, $exceptionHandler) {
           var proto = Object.getPrototypeOf($delegate);
           var originalDigest = proto.$digest, originalApply = proto.$apply;
-     
-          proto.$digest = function (tt) {
-     
-        /*    if ($delegate.$$phase === '$digest' || $delegate.$$phase === '$apply') {
-              try {
-                this.$eval(tt);
-              } catch (e) {
-                $exceptionHandler(e);
-              }
-            } else {
-              try {
-            
-                originalDigest.call(this,tt);
-              } catch (error) {
-              
-                $exceptionHandler(error);
-              }
-            }*/
+          proto.$digest = function () {
             if ($delegate.$$phase === '$digest' || $delegate.$$phase === '$apply') return;
-            try {
-              originalDigest.call(this);
-            } catch (error) {
-            
-              $exceptionHandler(error);
-            }
-
-           
-           
+            originalDigest.call(this);
           };
           proto.$apply = function (fn) {
             if ($delegate.$$phase === '$digest' || $delegate.$$phase === '$apply') {
@@ -130,16 +103,6 @@
           templateUrl: '/ng1/scripts/core/dashboards/tickets-dashboard/tickets-dashboard.tpl.html',
           controller: 'quicktech.core.dashboards.ticketsDashboardCtrl'
         }))
-        .state('users', waitForServices({
-          url: '/clients/users',
-          templateUrl: '/ng1/scripts/core/users/users.tpl.html',
-          controller: 'quicktech.core.users.usersCtrl'
-        }))
-        .state('companies', waitForServices({
-          url: '/clients/companies',
-          templateUrl: '/ng1/scripts/core/companies/companies.tpl.html',
-          controller: 'quicktech.core.companies.companiesCtrl'
-        }))
         .state('companyProfile', waitForServices({
           url: '/clients/companyProfile/:companyId?tabName',
           params: {
@@ -148,16 +111,6 @@
           reloadOnSearch: false,
           templateUrl: '/ng1/scripts/core/companies/company-profile/company-profile.tpl.html',
           controller: 'quicktech.core.companies.companyProfileCtrl'
-        }))
-        .state('products', waitForServices({
-          url: '/inventory/products/{category}',
-          // url: '/inventory/products?tabName',
-          // params: {
-          //   tabName: 'category'
-          // },
-          reloadOnSearch: false,
-          templateUrl: '/ng1/scripts/core/products/products.tpl.html',
-          controller: 'quicktech.core.products.productsCtrl'
         }))
         .state('password-manager', waitForServices({
           url: '/ng2/password-manager',
@@ -170,6 +123,10 @@
         .state('company-user', waitForServices({
           url: '/ng2/company-user',
           template: '<company-user></company-user>'
+        }))
+        .state('inventory', waitForServices({
+          url: '/ng2/inventory/products',
+          template: '<inventory-component></inventory-component>'
         }))
         .state('quotes-component', {
           url: '/ng2/quotes',
@@ -201,6 +158,10 @@
         .state('new-tickets', waitForServices({
           url: '/ng2/tickets',
           template: '<tickets-component></tickets-component>'
+        }))
+        .state('company-products', waitForServices({
+          url: '/ng2/company-products',
+          template: '<company-products></company-products>'
         }))
         .state('new-users', waitForServices({
           url: '/ng2/users',
@@ -383,21 +344,6 @@
           templateUrl: '/ng1/scripts/core/reports/reports-templates/remote-access-summary.tpl.html',
           controller: 'quicktech.core.reports.reportsCtrl'
         }))
-        .state('byCustomers', waitForServices({
-          url: '/reports/byCustomers',
-          templateUrl: '/ng1/scripts/core/reports/reports-templates/sales-by-customer.tpl.html',
-          controller: 'quicktech.core.reports.reportsCtrl'
-        }))
-        .state('byProducts', waitForServices({
-          url: '/reports/byProducts',
-          templateUrl: '/ng1/scripts/core/reports/reports-templates/sales-by-products.tpl.html',
-          controller: 'quicktech.core.reports.reportsCtrl'
-        }))
-        .state('byTaxes', waitForServices({
-          url: '/reports/byTaxes',
-          templateUrl: '/ng1/scripts/core/reports/reports-templates/sales-by-taxes.tpl.html',
-          controller: 'quicktech.core.reports.reportsCtrl'
-        }))
         .state('techReport-TicketCreated', waitForServices({
           url: '/reports/techReport-TicketCreated',
           templateUrl: '/ng1/scripts/core/reports/reports-templates/tech-report-ticked-created.tpl.html',
@@ -418,16 +364,6 @@
           templateUrl: '/ng1/scripts/core/reports/reports-templates/tech-report-product-sales.tpl.html',
           controller: 'quicktech.core.reports.reportsCtrl'
         }))
-        .state('ticket-report', waitForServices({
-          url: '/reports/ticket-report',
-          templateUrl: '/ng1/scripts/core/reports/reports-templates/tickets-report.tpl.html',
-          controller: 'quicktech.core.reports.reportsCtrl'
-        }))
-        .state('accountsReceivable', waitForServices({
-          url: '/reports/accountsReceivable',
-          templateUrl: '/ng1/scripts/core/reports/reports-templates/accounts-receivable.tpl.html',
-          controller: 'quicktech.core.reports.reportsCtrl'
-        }))
         .state('hardware-reports', waitForServices({
           url: '/reports/hardware-reports',
           templateUrl: '/ng1/scripts/core/reports/reports-templates/hardware-summary.tpl.html',
@@ -438,16 +374,67 @@
           templateUrl: '/ng1/scripts/core/reports/reports-templates/device-ip-summary.tpl.html',
           controller: 'quicktech.core.reports.reportsCtrl'
         })).state('hardware-summary', waitForServices({
-        url: '/reports/hardware-summary',
-        templateUrl: '/ng1/scripts/core/reports/reports-templates/hardware-summary.tpl.html',
-        controller: 'quicktech.core.reports.reportsCtrl'
-      }))
+          url: '/reports/hardware-summary',
+          templateUrl: '/ng1/scripts/core/reports/reports-templates/hardware-summary.tpl.html',
+          controller: 'quicktech.core.reports.reportsCtrl'
+        }))
         .state('software-summary', waitForServices({
           url: '/reports/software-summary',
           templateUrl: '/ng1/scripts/core/reports/reports-templates/software-summary.tpl.html',
           controller: 'quicktech.core.reports.reportsCtrl'
+        }))
+        .state('myprofile-component', waitForServices({
+          url: '/ng2/setting/myprofile',
+          template: '<myprofile-component></myprofile-component>'
+        }))
+        .state('manage-tags-component', waitForServices({
+          url: '/ng2/setting/tags',
+          template: '<manage-tags-component></manage-tags-component>'
+        }))
+        .state('company-profile-component', waitForServices({
+          url: '/ng2/setting/companyprofile',
+          template: '<company-profile-component></company-profile-component>'
+        }))
+        .state('tech-component', waitForServices({
+          url: '/ng2/setting/techUsers',
+          template: '<tech-component></tech-component>'
+        }))
+        .state('email-setting-component', waitForServices({
+          url: '/ng2/setting/emailSetting',
+          template: '<email-setting-component></email-setting-component>'
+        }))
+        .state('taxes-component', waitForServices({
+          url: '/ng2/setting/taxes',
+          template: '<taxes-settings-component></taxes-settings-component>'
+        }))
+        .state('permission-manage-component', waitForServices({
+          url: '/ng2/setting/permission',
+          template: '<permission-manage-component></permission-manage-component>'
+        }))
+        .state('email-templete-component', waitForServices({
+          url: '/ng2/setting/emailTemplete',
+          template: '<email-templete-component></email-templete-component>'
+        }))
+        .state('integrations-component', waitForServices({
+          url: '/ng2/setting/integration',
+          template: '<integrations-component></integrations-component>'
+        }))
+        .state('invoice-ticket-component', waitForServices({
+          url: '/ng2/setting/invoiceTickets',
+          template: '<invoice-ticket-component></invoice-ticket-component>'
+        }))
+        .state('commission-component', waitForServices({
+          url: '/ng2/setting/commission',
+          template: '<commission-component></commission-component>'
+        }))
+        .state('subscription-component', waitForServices({
+          url: '/ng2/setting/subscription',
+          template: '<subscription-component></subscription-component>'
+        }))
+        .state('glnumber-component', waitForServices({
+          url: '/ng2/setting/glnumber',
+          template: '<glnumber-settings-component></glnumber-settings-component>'
         }));
-
 
       function waitForServices(conf) {
         if (!conf.resolve) {
@@ -478,7 +465,7 @@
       'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.SharedStateService', '$http',
       function ($rootScope, $templateRequest, CompaniesService, $state, $uibModal, TicketsService, $stateParams,
                 UserConfirmationsService, SharedStateService, $http) {
-
+       
         $rootScope.debounce = function (fn, time) {
           var isCalled = false;
           var interval;
@@ -593,7 +580,7 @@
           return '/company/' + (company.id || 'default') + '/cover.jpg?t=' + (company.cover ? company.cover.updatedAt :
             '');
         };
-        
+
         $rootScope.getCompanyLogoUrl = function (company) {
           if (company && company.logo && company.logo && company.logo.base64 && !company.logo.cropped) {
             return company.logo.base64;
@@ -803,7 +790,7 @@
               $scope.unlock = function (code, model) {
                 if (model.$valid) {
                   $scope.unlockModel.unlocking = true;
-                  $http.post('/unlockScreen', {code: hex_md5(code)}).then(function (resp) {
+                  $http.post('/unlockScreen', { code: hex_md5(code) }).then(function (resp) {
                     $uibModalInstance.close();
                     $scope.unlockModel.unlocking = false;
                   }, function (resp) {
@@ -854,7 +841,7 @@
 
         $rootScope.safeDigest = function () {
           if ($rootScope.$$phase !== '$apply' && $rootScope.$$phase !== '$digest') {
-          
+
             $rootScope.$digest();
           }
         };
@@ -890,7 +877,7 @@
       }]);
 
   function getUserDefaultPage() {
-  
+
 
 
     var defaultTicketsPage,

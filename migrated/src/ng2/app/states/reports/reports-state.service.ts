@@ -1,17 +1,31 @@
 import { Injectable, EventEmitter } from '@angular/core';
-
+import { CompaniesStateService } from '../company/companies-state.service';
+declare var canvg: any;
 @Injectable({
   providedIn: 'root'
 })
 export class ReportsStateService {
-glNumber:EventEmitter<any> = new EventEmitter();
+  includePurchaseCost:boolean = true;
+  glNumber: EventEmitter<any> = new EventEmitter();
+  serviceReport: EventEmitter<any> = new EventEmitter();
+  accountsReceivable: EventEmitter<any> = new EventEmitter();
+  exportCSV: EventEmitter<any> = new EventEmitter();
   constructor() { }
 
+  public onChangeExportCSV(data) {
+    this.exportCSV.emit(data);
+  }
   public onChangeGlNumber(data) {
     this.glNumber.emit(data);
-  } 
+  }
+  public onChangeServiceReport(data) {
+    this.serviceReport.emit(data);
+  }
+  public onChangeAccountsReceivable(data) {
+    this.accountsReceivable.emit(data);
+  }
 
-  public parseReportContent() {
+  public parseReportContent(report) {
     //  disableOpenPdfBtn();
     var selectedHtml;
     var source = $("#product-list-ticket-data");
@@ -24,41 +38,51 @@ glNumber:EventEmitter<any> = new EventEmitter();
     target.find('.hide-in-report').remove();
 
     /*  if (!$rootScope.isPurchaseShown) {
-        target.find('.purchase-cost').remove();
-      }*/
+          target.find('.purchase-cost').remove();
+        }*/
 
-    /*  if (sourceSVGs && sourceSVGs.length) {
-        var svgs = target.find('svg');
-        svgs.replaceWith(function (index) {
-          var svg = angular.element(sourceSVGs[index]),
-            img = document.createElement('img');
-          var width = svg.width() + 'px';
-          var height = svg.height() + 'px';
-  
-          svg.attr('width', width);
-          svg.attr('height', height);
-          var styles = svg.attr('style');
-          svg.attr('style', '');
-  
-       //   canvg(canvas, svg[0].outerHTML);
-  
-          svg.attr('width', '100%');
-          svg.attr('height', '100%');
-          svg.attr('style', styles);
-  
-          img.src = canvas.toDataURL();
-          img.style.width = width;
-          img.style.height = height;
-          return img;
-        });
+    if (sourceSVGs && sourceSVGs.length) {
+      var svgs = target.find('svg');
+      svgs.replaceWith(function (index) {
+        var svg: any = $(sourceSVGs[index]),
+          img = document.createElement('img');
+        var width = svg.width() + 'px';
+        var height = svg.height() + 'px';
+
+        svg.attr('width', width);
+        svg.attr('height', height);
+        var styles = svg.attr('style');
+        svg.attr('style', '');
+
+        canvg(canvas, svg[0].outerHTML);
+
+        svg.attr('width', '100%');
+        svg.attr('height', '100%');
+        svg.attr('style', styles);
+
+        img.src = canvas.toDataURL();
+        img.style.width = width;
+        img.style.height = height;
+        return img;
+      });
+    }
+    if (report === 'company-roducts-report') {
+      let products = target.find("#list-products").find("li");
+      target.find("#list-products").html("");
+      for (let i = 0; i < products.length; i++) {
+        if (products.eq(i).find("input[type='checkbox']").prop('checked')) {
+          target.find("#list-products").append(products.eq(i));
+        }
       }
-  */
+      if (!this.includePurchaseCost) target.find(".purchase-cost").hide();
 
-    //selectedHtml = target.wrap('div').parent().html();
-    selectedHtml = target.wrap('div').html();
+    }
+
+    //  selectedHtml = target.wrap('div').parent().html();
+    selectedHtml = `<div>${target.html()}</div>`;
     if (selectedHtml.indexOf(unknownLoadingStr) !== -1) {
       selectedHtml = selectedHtml.slice(unknownLoadingStr.length);
     }
-return selectedHtml;
+    return selectedHtml;
   }
 }

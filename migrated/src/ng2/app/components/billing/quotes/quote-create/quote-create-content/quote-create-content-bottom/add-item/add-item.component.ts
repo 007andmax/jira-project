@@ -48,6 +48,9 @@ export class AddItemComponent implements OnInit,OnDestroy {
    */
   ngOnInit() {
     this.subToFormValidation();
+    this.quoteStateService.handleClearProduct.subscribe(data =>  {
+      this.type = 'product';
+    })
   }
 
   /**
@@ -90,7 +93,7 @@ export class AddItemComponent implements OnInit,OnDestroy {
     if (this.type === 'service') {
       item = {...item, ...{description: '', quantity: 1}};
     } else {
-      item = {...item, ...{quantity: 1, markup: this.setMarkups(item)}};
+      item = (item) ?  {...item, ...{quantity: 1, markup: this.setMarkups(item)}} : null;
     }
     
     this.selectedServiceItem.emit(item);

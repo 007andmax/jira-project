@@ -40,6 +40,9 @@ export class ReportSendEmailComponent implements OnInit {
   filesInfo: FilesInfo = new FilesInfo();
   usersSelected: Array<User> = [];
   companiesSelected: Array<Company> = [];
+  @Input() report:string = "";
+  @Input() fileName:string = "";
+  @Input() template: string = "PDF_TEMPLATE";
   @Input() orientation;
   @Input() selectedClient;
   constructor(private draftEmailStateService: DraftEmailStateService, private elRef: ElementRef,
@@ -59,7 +62,6 @@ export class ReportSendEmailComponent implements OnInit {
 
 
   close() {
-
     this.draftEmail = new ReportEmail();
     this.tab = 'plain';
     this.messageContent = '';
@@ -69,8 +71,6 @@ export class ReportSendEmailComponent implements OnInit {
     this.filesInfo = new FilesInfo();
     this.action = null;
     this.activeModal.dismiss('Cross click');
-
-
   }
 
   onChangeCompanyEmails(data) {
@@ -122,17 +122,26 @@ export class ReportSendEmailComponent implements OnInit {
   }
   onSend() {
 
-    this.draftEmail.setContent(this.reportsStateService.parseReportContent());
+    this.draftEmail.setContent(this.reportsStateService.parseReportContent(this.report));
     this.draftEmail.setNote(this.messageContent);
     this.draftEmail.setOrientation(this.orientation);
-    this.reportsService.sendMessage(this.draftEmail).subscribe((data) => {
-
-      this.close();
-
-      if (!this.cd['destroyed']) {
-        this.cd.detectChanges();
-      }
-    })
+    this.draftEmail.setFileName(this.fileName);
+    if (this.template === "PDF_TEMPLATE") {
+      this.reportsService.sendMessage(this.draftEmail).subscribe((data) => {
+        this.close();
+        if (!this.cd['destroyed']) {
+          this.cd.detectChanges();
+        }
+      })
+    } else {
+      this.reportsService.sendCustomerMessage(this.draftEmail).subscribe((data) => {
+        this.close();
+        if (!this.cd['destroyed']) {
+          this.cd.detectChanges();
+        }
+      })
+    }
+   
   }
 
   removeAttachment(index) {
@@ -146,12 +155,10 @@ export class ReportSendEmailComponent implements OnInit {
   uploadFile(file, fileInfo) {
     return new Promise((resolve, reject) => {
       this.setDisableUplaodFile(true);
-
       if (file.size > 4194304) {
         reject({ code: 500 });
         return;
       }
-
       var fd = new FormData();
       fd.append("file", file);
       var xhr = new XMLHttpRequest();
@@ -159,9 +166,7 @@ export class ReportSendEmailComponent implements OnInit {
         fileInfo.progress = 100 * (progress.loaded / progress.total);
       }, false);
       xhr.addEventListener("load", (event) => {
-
         resolve(xhr);
-
       }, false);
       xhr.addEventListener("error", (error) => {
         reject(error);
