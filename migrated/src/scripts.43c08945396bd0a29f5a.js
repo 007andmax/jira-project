@@ -126613,15 +126613,6 @@ mod.directive('infiniteScroll', [
           templateUrl: '/ng1/scripts/core/settings/activity-history/activity-history.tpl.html',
           controller: 'quicktech.core.settings.activityHistoryCtrl'
         }))
-        .state('settings.companyProfile', waitForServices({
-          url: '/companyProfile',
-          params: {
-            isAddressFocused: false,
-            fromWelcomeWizard: false
-          },
-          templateUrl: '/ng1/scripts/core/settings/company-profile/company-profile.tpl.html',
-          controller: 'quicktech.core.settings.companyProfileCtrl'
-        }))
         .state('settings.techUsers', waitForServices({
           url: '/techUsers',
           templateUrl: '/ng1/scripts/core/settings/tech-users/tech-users.tpl.html',
