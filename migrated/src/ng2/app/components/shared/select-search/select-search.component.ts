@@ -18,7 +18,6 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
   @Input() maxlength: number = null;
   @Input() placeholder: string = '';
   @Input() list = [];
-  @Input() placeholder: string = '';
   @Input() id: string = '';
   @ViewChild('instance') instance: NgbTypeahead;
   @Output() onSelectedItem = new EventEmitter<any>();
