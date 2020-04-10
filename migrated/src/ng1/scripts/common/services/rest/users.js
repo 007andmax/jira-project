@@ -277,23 +277,9 @@
 
 
 
-      function getTechUsersEmailNotification(listOfTechUsers, callback) {
-        var future = $http({
-          url: '/settings/userProfile/getUsersEmailNotifications',
-          method: 'POST',
-          data: listOfTechUsers
-        });
-        Utils.handleCallback(future, callback)
-      }
+      
 
-      function saveUsersEmailNotification(userId, data, callback) {
-        var future = $http({
-          method: 'PUT',
-          url: '/settings/userProfile/saveUsersEmailNotifications?userId=' + userId,
-          data: data
-        });
-        Utils.handleCallback(future, callback)
-      }
+     
 
       function getArchivedUsers() {
         return storage.deleted;
@@ -420,65 +406,9 @@
       }
 
 
-
-      function saveForUserProfile(data, toUpdate, callback) {
-
-        if (!data && data !== false) {
-          throw 'data is required!';
-        }
-        if (!toUpdate) {
-          throw 'toUpdate is required!';
-        }
-
-        var url = '/settings/userProfile/' + toUpdate.toLowerCase(),
-          method = 'PUT';
-
-        var future = $http({
-          url: url,
-          method: method,
-          data: data
-        });
-        Utils.handleCallback(future, callback);
-      }
-
-      function getUserProfile(callback) {
-
-        var info = {};
-
-        $http.get('/settings/userProfile/').then(function (resp) {
-          Utils.customizeObj(resp.data, info);
-
-          if (callback) {
-            callback(resp.data);
-          }
-
-        }, function (resp) {
-          if (callback) {
-            callback(resp.data);
-          }
-        });
-        return info;
-      }
-
-      function getUserEmailNotifications(callback) {
-
-        var info = {};
-
-        $http.get('/settings/userProfile/emailNotifications').then(function (resp) {
-          Utils.customizeObj(resp.data, info);
-
-          if (callback) {
-            callback(resp.data);
-          }
-
-        }, function (resp) {
-          if (callback) {
-            callback(resp.data);
-          }
-        });
-        return info;
-      }
-
+ 
+ 
+     
       function isEmailUnique(email, id, isTechUser, companyId, callback) {
 
         if (!email) {
@@ -574,39 +504,19 @@
         return errorMessage;
       }
 
-      function getActivityHistory(callback) {
-        var future = $http.get('/settings/userProfile/device');
-        Utils.handleCallback(future, callback);
-      }
+     
 
-      function closeSessions(ids, callback) {
-        var future = $http.post('/settings/userProfile/device', ids);
-        Utils.handleCallback(future, callback);
-      }
-
-      function get2FA(callback) {
-        var future = $http.get('/users/twoFactorAuth');
-        Utils.handleCallback(future, callback);
-      }
-
-      function toggle2FA(type, callback) {
-        var future = $http.post('/users/twoFactorAuth?type=' + type, {});
-        Utils.handleCallback(future, callback);
-      }
+     
+     
+ 
 
       function deactivateAccount(note) {
         $http.post('/users/deactivate', { note: note });
       }
 
-      function restoreUser(userId, callback) {
-        var future = $http.post('/users/restore', { userId: userId });
-        Utils.handleCallback(future, callback);
-      }
+     
 
-      function requestToChangePassword(userId, callback) {
-        var future = $http.post('/users/changePasswordRequest', { userId: userId });
-        Utils.handleCallback(future, callback);
-      }
+    
 
       function updateWelcomeWizard(state, dontShowThisAgain) {
         var dto = $rootScope.currentUser.wizardTracker || {};
@@ -631,25 +541,10 @@
         $http.put('/settings/userProfile/updateWizard' + (dontShowThisAgain ? '?dontShowThisAgain=' + dontShowThisAgain : ''), dto);
       }
 
-      function changePassword(oldPass, newPass, callback) {
-        $http.post('/resetPassword', { oldPass: hex_md5(oldPass), newPass: hex_md5(newPass) }).then(function (resp) {
-          if (callback) {
-            callback(resp.data);
-          }
-        }, function (resp) {
-          if (callback) {
-            callback(resp);
-          }
-        });
-      }
+    
 
-      function changeTimePickerType(type, interval) {
-        $http.put('/settings/companyProfile/serviceExpenseDurationPresentation', { presentation: type, interval: interval }).then(function (resp) {
-          if (status === 200) {
-            $rootScope.currentUser.serviceExpenseDurationPresentation = type;
-          }
-        });
-      }
+      
+   
 
 
       return {
@@ -658,14 +553,10 @@
         getAllUsers: getAllUsers,
         getClientUsers: getClientUsers,
         getTechUsers: getTechUsers,
-        getTechUsersEmailNotification: getTechUsersEmailNotification,
-        saveUsersEmailNotification: saveUsersEmailNotification,
         getArchivedUsers: getArchivedUsers,
         getAllByCompanyId: getAllByCompanyId,
         getAllByCompanyIdNonArchived: getAllByCompanyIdNonArchived,
         getOneById: getOneById,
-        getUserProfile: getUserProfile,
-        getUserEmailNotifications: getUserEmailNotifications,
         getUnassignedUser: getUnassignedUser,
         searchByAllUsers: searchByAllUsers,
         searchByClientUsers: searchByClientUsers,
@@ -673,22 +564,13 @@
         changeUserRole: changeUserRole,
         changeUsersRoles: changeUsersRoles,
         save: save,
-        saveForUserProfile: saveForUserProfile,
         archiveUser: archiveUser,
         isEmailUnique: isEmailUnique,
         deleteAvatar: deleteAvatar,
         saveAvatar: saveAvatar,
-        getActivityHistory: getActivityHistory,
-        closeSessions: closeSessions,
-        toggle2FA: toggle2FA,
-        get2FA: get2FA,
         deactivateAccount: deactivateAccount,
-        restoreUser: restoreUser,
-        requestToChangePassword: requestToChangePassword,
         updateWelcomeWizard: updateWelcomeWizard,
-        changePassword: changePassword,
-        resendWelcomeEmail: resendWelcomeEmail,
-        changeTimePickerType: changeTimePickerType
+        resendWelcomeEmail: resendWelcomeEmail
       }
 
     }]);

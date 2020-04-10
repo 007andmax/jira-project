@@ -87,35 +87,7 @@
       return info;
     }
 
-    function getEmailSettingPageDto(scope, callback) {
-
-      if (!scope) throw 'scope is required!';
-
-      var info = Utils.customizeObj({});
-
-      $http.get('/settings/emailPages/').then(function (resp) {
-
-        Utils.customizeObj(resp.data, info);
-
-        if (callback) {
-          callback(resp.data);
-        }
-
-      }, function (resp) {
-        if (callback) {
-          callback(resp.data);
-        }
-      });
-
-      RealTimeService.subscribe('/companyEmailNotification', scope, function (newChange) {
-
-        if (newChange.action == 'COMPANY_EMAIL_NOTIFICATION') {
-          Utils.customizeObj(newChange.data, info.activeAndNotDefault);
-        }
-      });
-
-      return info;
-    }
+ 
 
     function setToDefaultTemplate(type, callback) {
 
@@ -205,7 +177,6 @@
     return {
       saveNumberForm: saveNumberForm,
       getCompanyEmailNotification: getCompanyEmailNotification,
-      getEmailSettingPageDto: getEmailSettingPageDto,
       getTermsAndConditions: getTermsAndConditions,
       setToDefaultTemplate: setToDefaultTemplate,
       getTemplate: getTemplate,
