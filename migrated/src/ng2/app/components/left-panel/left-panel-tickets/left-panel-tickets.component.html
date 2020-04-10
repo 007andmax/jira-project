@@ -1,0 +1,112 @@
+<div class="left-panel-ng2 new-tickets">
+  <div class="left-panel-ng2__header d-f jc-sb ">
+    <div>Filters</div>
+    <div class="header-filter-icon icon__filters"></div>
+  </div>
+  <div class="left-panel-ng2__content">
+    
+    <div class="left-panel-ng2__content--lists">
+      <div class="list-item">Dashboard</div>
+      <div class="list-item">All tickets</div>
+      <div class="list-item">Open</div>
+      <div class="list-item">Close</div>
+      <div class="list-item">On Hold</div>
+      <div class="list-item">Trash</div>
+      <div class="list-item">Spam</div>
+      <div class="list-item">Users</div>
+      <div class="list-item">Recurring Tickets</div>
+    </div>
+    
+    <div class="left-panel-ng2__content--types">
+      <div class="types-header">TICKET STATUS</div>
+      
+      <div class="ticket-statuses">
+        <div class="ticket-status-color d-f jc-sb ai-c ">
+          <div>Unassigned</div>
+          <div class="ticket-status-circle --red"></div>
+        </div>
+        <div class="ticket-status-color d-f jc-sb ai-c">
+          <div>Completed</div>
+          <div class="ticket-status-circle --green"></div>
+        </div>
+        <div class="ticket-status-color d-f jc-sb ai-c">
+          <div>In Progress</div>
+          <div class="ticket-status-circle --blue"></div>
+        </div>
+        <div class="ticket-status-color d-f jc-sb ai-c">
+          <div>On Hold</div>
+          <div class="ticket-status-circle --yellow"></div>
+        </div>
+      </div>
+      
+    </div>
+  
+    <div class="left-panel-ng2__content--filters">
+      <div class="filter-item">
+        <i class="icn-sm report-caret-icon"></i>
+        <div class="filter-item__header">
+          By Company
+        </div>
+        <div class="filter-item__content">
+          <div class="dark-dropdown">
+<!--            <app-select-search [class]="['dark-dropdown']"-->
+<!--                               [field]="'name'" [editItem]="selectedCompany" [list]="companies"-->
+<!--                               (onSelectedItem)="onSelectCompany($event)"></app-select-search>-->
+          </div>
+          <div class="resent-block">
+            <div class="resent-block__header">Recent</div>
+            <div class="resent-block__content">
+<!--              <ng-template ngFor let-item [ngForOf]="companiesHistory" let-i="index" [ngForTrackBy]="trackByIndex">-->
+<!--                <p [textContent]="item" (click)="selectClientCompany(item)"></p>-->
+<!--              </ng-template>-->
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="filter-item">
+        <i class="icn-sm report-caret-icon"></i>
+        <div class="filter-item__header">
+          By User
+        </div>
+        <div class="filter-item__content">
+          <div class="dark-dropdown">
+            <!--            <app-select-search [class]="['dark-dropdown']"-->
+            <!--                               [field]="'name'" [editItem]="selectedCompany" [list]="companies"-->
+            <!--                               (onSelectedItem)="onSelectCompany($event)"></app-select-search>-->
+          </div>
+          <div class="resent-block">
+            <div class="resent-block__header">Recent</div>
+            <div class="resent-block__content">
+              <!--              <ng-template ngFor let-item [ngForOf]="companiesHistory" let-i="index" [ngForTrackBy]="trackByIndex">-->
+              <!--                <p [textContent]="item" (click)="selectClientCompany(item)"></p>-->
+              <!--              </ng-template>-->
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="filter-item">
+        <i class="icn-sm report-caret-icon"></i>
+        <div class="filter-item__header">
+          By Tech Team
+        </div>
+        <div class="filter-item__content">
+          <div class="dark-dropdown">
+            <!--            <app-select-search [class]="['dark-dropdown']"-->
+            <!--                               [field]="'name'" [editItem]="selectedCompany" [list]="companies"-->
+            <!--                               (onSelectedItem)="onSelectCompany($event)"></app-select-search>-->
+          </div>
+          <div class="resent-block">
+            <div class="resent-block__header">Recent</div>
+            <div class="resent-block__content">
+              <!--              <ng-template ngFor let-item [ngForOf]="companiesHistory" let-i="index" [ngForTrackBy]="trackByIndex">-->
+              <!--                <p [textContent]="item" (click)="selectClientCompany(item)"></p>-->
+              <!--              </ng-template>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

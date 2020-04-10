@@ -287,8 +287,39 @@
 
   &__menu {
     width: 48px;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.05);
   }
 
+  &__additional-info {
+    width: 272px;
+    overflow: auto;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.05);
+    padding: 24px;
+  }
+
+//   company-info-aside
+
+  .company-info-aside {
+    &__main-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    &__main-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-size: cover;
+      background-position: center;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 10px;
+    }
+  }
 
 
 }
