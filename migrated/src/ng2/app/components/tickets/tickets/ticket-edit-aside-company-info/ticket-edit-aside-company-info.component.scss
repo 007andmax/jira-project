@@ -1,0 +1,137 @@
+.company-info-aside {
+  &__main-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  }
+  &__main-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 10px;
+  }
+  &__name {
+  font-size: 18px;
+  }
+  &__email {
+  font-size: 13px;
+  margin-bottom: 12px;
+  color: #4f5f79;
+  }
+  &__rating {
+     display: flex;
+  }
+  &__star {
+   width: 16px;
+   height: 16px;
+   margin-right: 4px;
+  }
+  &__divider {
+  border-top: 1px dashed #dfe3e8;
+  margin: 16px 0;
+  }
+  &__row-info {
+  margin-top: 24px;
+  }
+  &__row-info-line {
+  margin-bottom: 16px;
+  }
+  &__row-info-label {
+   font-size: 11px;
+   color: #9ca5b6;
+   line-height: 12px;
+   margin-bottom: 4px;
+  }
+  &__row-info-value {
+   font-size: 13px;
+   line-height: 16px;
+   color: #4f5f79;
+  }
+  &__get-direction {
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.45;
+    color: #16a4fa;
+    margin-top: 7px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    .icon__get-direction {
+        width: 20px;
+        height: 20px;
+        margin-right: 4px;
+    }
+  }
+  &__ticket-created-title,
+  &__primary-contacts-title {
+    font-size: 10px;
+    font-weight: 600;
+    color: #4f5f79;
+    margin-bottom: 14px;
+    line-height: 12px;
+    text-transform: uppercase;
+  }
+  &__ticket-created-name,
+  &__primary-contact-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: #4f5f79;
+    line-height: 16px;
+  }
+
+  &__ticket-created-email,
+  &__primary-contact-email {
+     font-size: 12px;
+     font-stretch: normal;
+     color: #4f5f79;
+     line-height: 1.33;
+  }
+
+  &__ticket-created-avatar,
+  &__primary-contact-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 10px;
+    min-width: 32px;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: white;
+  }
+  &__history-block {
+     margin-top: 17px;
+  }
+  &__history-block {
+    border-radius: 6px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.05);
+    border: solid 1px #dfe3e8;
+    padding: 9px 12px;
+    margin-bottom: 6px;
+    margin-left: -9px;
+    margin-right: -9px;
+  }
+  &__history-block-title {
+   font-size: 12px;
+   font-weight: 600;
+   line-height: 1.33;
+   color: #4f5f79;
+   margin-bottom: 4px;
+  }
+  &__history-block-date {
+   font-size: 11px;
+   line-height: 1.45;
+   color: #4f5f79;
+  }
+}

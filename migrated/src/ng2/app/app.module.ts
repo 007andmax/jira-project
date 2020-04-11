@@ -201,6 +201,7 @@ import { PhonePipe } from './pipe/phone.pipe';
 import { OrderByPipe } from './pipe/order-by.pipe';
 import { NgxMaskModule } from 'ngx-mask' 
 import { TaxesComponent } from './components/shared/taxes/taxes.component';
+import { TicketEditAsideCompanyInfoComponent } from './components/tickets/tickets/ticket-edit-aside-company-info/ticket-edit-aside-company-info.component';
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 declare var angular: any;
@@ -485,7 +486,8 @@ angular.module('quicktech')
     AddCategoryProductComponent,
     CompanyProductsComponent,
     TaxesComponent,
-    GlNumberSettingsComponent
+    GlNumberSettingsComponent,
+    TicketEditAsideCompanyInfoComponent
   ],
   imports: [
     BrowserModule,
