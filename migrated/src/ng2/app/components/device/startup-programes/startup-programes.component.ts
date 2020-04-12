@@ -11,7 +11,7 @@ import { first } from 'rxjs/operators';
   templateUrl: './startup-programes.component.html',
   styleUrls: ['./startup-programes.component.scss']
 })
-export class StartupProgramesComponent implements OnInit {
+export class StartupComponent implements OnInit {
 
  
   url = 'http://localhost:4200/upload';

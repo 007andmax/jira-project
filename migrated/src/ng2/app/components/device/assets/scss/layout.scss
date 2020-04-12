@@ -1,13 +1,12 @@
-
+body {
+    &.ng7-device {
+        padding: 0;
+        margin: 0;
+        @include body-font;
+        background-color: $bodyColor;        
 /*** Default stylesheet reset ***/
 *,*::before,*::after{box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;-o-box-sizing:border-box;}
-body
-{
-    padding: 0;
-    margin: 0;
-    @include body-font;
-    background-color: $bodyColor;
-}
+
 article,aside,figcaption,figure,footer,header,hgroup,main,nav,section{display:block;}
 .page-wrapper{display:block;overflow:hidden;width:100%;}
 main {
@@ -2437,3 +2436,6 @@ ngx-loading > div {
 }
 
 
+
+    }
+}

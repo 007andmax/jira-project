@@ -438,6 +438,34 @@
         .state('device-software', waitForServices({
           url: '/ng2/devicesoftware',
           template: '<software-component></software-component>'
+        }))
+        .state('device-service', waitForServices({
+          url: '/ng2/deviceservice',
+          template: '<services-component></services-component>'
+        }))
+        .state('device-antivirus', waitForServices({
+          url: '/ng2/deviceantivirus',
+          template: '<antivirus-component></antivirus-component>'
+        }))
+        .state('device-terminal', waitForServices({
+          url: '/ng2/deviceterminal',
+          template: '<terminal-component></terminal-component>'
+        }))
+        .state('device-password', waitForServices({
+          url: '/ng2/devicepassword',
+          template: '<password-component></password-component>'
+        }))
+        .state('device-windows', waitForServices({
+          url: '/ng2/devicewindows',
+          template: '<windows-component></windows-component>'
+        }))
+        .state('device-startup', waitForServices({
+          url: '/ng2/devicestartup',
+          template: '<startup-component></startup-component>'
+        }))
+        .state('device-file', waitForServices({
+          url: '/ng2/devicefile',
+          template: '<file-component></file-component>'
         }));
 
 

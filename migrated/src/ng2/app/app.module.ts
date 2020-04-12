@@ -110,12 +110,12 @@ import { NavComponent } from './components/device/nav/nav.component';
 import { DashboardComponent } from './components/device/dashboard/dashboard.component';
 import { HardwareComponent } from './components/device/hardware/hardware.component';
 import { SoftwareComponent } from './components/device/software/software.component';
-import { StartupProgramesComponent } from './components/device/startup-programes/startup-programes.component';
+import { StartupComponent } from './components/device/startup-programes/startup-programes.component';
 import { ServicesComponent } from './components/device/services/services.component';
 import { AntivirusComponent } from './components/device/antivirus/antivirus.component';
 import { TerminalComponent } from './components/device/terminal/terminal.component';
-import { WindowsUpdateComponent } from './components/device/windows-update/windows-update.component';
-import { FileExplorerComponent } from './components/device/file-explorer/file-explorer.component';
+import { WindowsComponent } from './components/device/windows-update/windows-update.component';
+import { FileComponent } from './components/device/file-explorer/file-explorer.component';
 import { PasswordComponent } from './components/device/password/password.component';
 
 import { TabsModule } from 'ngx-bootstrap/tabs';
@@ -179,14 +179,35 @@ angular.module('quicktech')
     'usersComponent',
     downgradeComponent({component: UsersComponent}))
     .directive(
-      'dashboardComponent',
-      downgradeComponent({component: DashboardComponent}))
-      .directive(
-        'hardwareComponent',
-        downgradeComponent({component: HardwareComponent}))
-        .directive(
-          'softwareComponent',
-          downgradeComponent({component: SoftwareComponent}))
+    'dashboardComponent',
+    downgradeComponent({component: DashboardComponent}))
+    .directive(
+    'hardwareComponent',
+    downgradeComponent({component: HardwareComponent}))
+    .directive(
+    'softwareComponent',
+    downgradeComponent({component: SoftwareComponent}))
+    .directive(
+    'servicesComponent',
+    downgradeComponent({component: ServicesComponent}))
+    .directive(
+    'antivirusComponent',
+    downgradeComponent({component: AntivirusComponent}))
+    .directive(
+    'terminalComponent',
+    downgradeComponent({component: TerminalComponent}))
+    .directive(
+    'passwordComponent',
+    downgradeComponent({component: PasswordComponent}))
+    .directive(
+    'windowsComponent',
+    downgradeComponent({component: WindowsComponent}))
+    .directive(
+    'startupComponent',
+    downgradeComponent({component: StartupComponent}))
+    .directive(
+    'fileComponent',
+    downgradeComponent({component: FileComponent}))
   .factory('ngZone', downgradeInjectable(NgZone));
 
 /**
@@ -279,12 +300,12 @@ angular.module('quicktech')
     DashboardComponent,
     HardwareComponent,
     SoftwareComponent,
-    StartupProgramesComponent,
+    StartupComponent,
     ServicesComponent,
     AntivirusComponent,
     TerminalComponent,
-    WindowsUpdateComponent,
-    FileExplorerComponent,
+    WindowsComponent,
+    FileComponent,
     PasswordComponent,
     SessionTimeoutComponent,
     LockScreenComponent,
@@ -366,6 +387,35 @@ angular.module('quicktech')
         {
           path: 'ng2/devicesoftware',
           component: SoftwareComponent
+        },
+
+        {
+          path: 'ng2/deviceservice',
+          component: ServicesComponent
+        },
+        {
+          path: 'ng2/deviceantivirus',
+          component: AntivirusComponent
+        },
+        {
+          path: 'ng2/deviceterminal',
+          component: TerminalComponent
+        },
+        {
+          path: 'ng2/devicepassword',
+          component: PasswordComponent
+        },
+        {
+          path: 'ng2/devicewindow',
+          component: WindowsComponent
+        },
+        {
+          path: 'ng2/devicestartup',
+          component: StartupComponent
+        },
+        {
+          path: 'ng2/devicefile',
+          component: FileComponent
         }
       ],
       {
@@ -408,16 +458,16 @@ angular.module('quicktech')
     DashboardComponent,
     HardwareComponent,
     SoftwareComponent,
-    // StartupProgramesComponent,
-    // ServicesComponent,
-    // AntivirusComponent,
-    // TerminalComponent,
-    // WindowsUpdateComponent,
-    // FileExplorerComponent,
-    // PasswordComponent,
-    // SessionTimeoutComponent,
-    // LockScreenComponent,
-    // TicketTaskComponent
+    StartupComponent,
+    ServicesComponent,
+    AntivirusComponent,
+    TerminalComponent,
+    WindowsComponent,
+    FileComponent,
+    PasswordComponent,
+    SessionTimeoutComponent,
+    LockScreenComponent,
+    TicketTaskComponent
     // RecurringTicketsComponent
   ],
   providers: [

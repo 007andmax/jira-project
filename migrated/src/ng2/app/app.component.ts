@@ -20,6 +20,7 @@ import { ToastrService } from 'ngx-toastr';
 import { HardwareService } from './components/device/_services/hardware.service';
 import { DeviceDetailService } from './components/device/_services/device_detail.service';
 import { first } from 'rxjs/operators';
+import $ from 'jquery';
 
 
 /**
@@ -75,6 +76,12 @@ export class AppComponent implements OnInit {
     this.router.events.subscribe(val => {
       if (this.location.path().includes('/device') === true) {
         this.isDevice = true;
+        setTimeout(() => {
+        $('body').addClass('ng7-device');
+      });
+      setInterval(() => {
+        this.updateTime();
+      },1000);
       } else {
         this.isDevice = false;
       }
@@ -88,14 +95,8 @@ export class AppComponent implements OnInit {
     this.websocketService.initializeWebSocketConnection();
     this.appService.onCheckMobile();
     window.addEventListener('resize', this.appService.onCheckMobile);
-
-    if (this.isDevice === true) {
-      this.getCurrentCompany();
+    this.getCurrentCompany();
     
-      setInterval(() => {
-        this.updateTime();
-      },1000);
-    }
 
   }
 

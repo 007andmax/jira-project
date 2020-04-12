@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './file-explorer.component.html',
   styleUrls: ['./file-explorer.component.scss']
 })
-export class FileExplorerComponent implements OnInit {
+export class FileComponent implements OnInit {
   show = false;
   create = false;
   expand = false;

@@ -13,7 +13,7 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./windows-update.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class WindowsUpdateComponent implements OnInit {
+export class WindowsComponent implements OnInit {
   allUpdate = false;
   details = false;
   create = false;
