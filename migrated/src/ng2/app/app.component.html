@@ -1,0 +1,125 @@
+<div class="alert alert-yellow hide" user-notification style="z-index: 991;" ></div>
+
+<div class="top-bar" style="z-index: 991;"
+     ng-include="'/ng1/scripts/core/header/header.tpl.html'" [hidden]="isDevice == true"></div>
+
+<div ng-controller="quicktech.core.header.headerCtrl" [hidden]="isDevice == true" 
+class="mobile-top-bar"
+ng-class="{ 'ticket-detail-header': isTicketOpened && !isTicketEditOpened, 'ticket-create-update': isTicketEditOpened }"
+style="z-index: 991;"
+ng-include="'/ng1/scripts/core/header/mobile-header.tpl.html'"></div>
+
+<aside id="left" style="z-index: 991;"
+       ng-include="'/ng1/scripts/core/left-panel/left-panel.tpl.html'" [hidden]="isDevice == true"></aside>
+
+<aside ng-controller="quicktech.core.leftPanel.leftPanelCtrl"
+id="mobile-left" ng-class="{opened: isLeftPanelOpened}"
+qt-sidebar style="z-index: 991;"
+ng-include="'/ng1/scripts/core/left-panel/mobile-left-panel.tpl.html'" [hidden]="isDevice == true"></aside>
+
+<aside id="right" class="nano collapsed" ng-if="!isRightPanelHidden && applicationLoaded" right-panel
+       ng-include="'/ng1/scripts/core/right-panel/right-panel.tpl.html'" [hidden]="isDevice == true"></aside>
+
+
+<div class="main-container" [hidden]="isDevice == true">
+  <div class="row">
+    <div class="content-container" ng-class="{'large': isRightPanelHidden}">
+      <div class="content-wrapper">
+        <div ng-include="'/ng1/scripts/common/templates/index-page-body.tpl.html'"></div>
+       <notification></notification>
+        <modal-image-cropper></modal-image-cropper>
+        <app-draft-email></app-draft-email>
+        <app-main></app-main>
+      </div>
+    </div>
+  </div>
+</div>
+<!--<div feedback-form ></div>-->
+<div welcome-wizard></div>
+
+<!-- Below HTML is for only device module -->
+
+<div class="page-wrapper" [hidden]="isDevice == false">
+  <!-- header  -->
+  <header>
+      <div class="cmn-wrapper">
+        <div class="header-left">
+            <div class="hp-device-info">
+                <span class="device-icn"><img src="../../../../ng1/images/device/device.svg" alt="device" /></span>
+                  <div class="head-device">
+                      <h6>Device</h6>
+                      <h5>{{deviceDetail.hostName}}</h5>
+                  </div>
+            </div>
+            <div class="hp-device-info">
+              <span class="device-icn"><img src="../../../../ng1/images/device/uptime.svg" alt="device" /></span>
+                <div class="head-device">
+                    <h6>Up Time</h6>
+                    <h5>5 hrs 5 min</h5>
+                </div>
+          </div>
+        </div>
+        <div class="header-right">
+            <a href="javascript:;" class="head-btn" (click)="openModal(template)">Remote Control</a>
+            <a href="javascript:;" class="head-btn-info btn-print" (click)="lock();"><img src="../../../../ng1/images/device/print-sheet.svg" alt="Print" /></a>
+            <a href="javascript:;" class="head-btn-info btn-refresh"><img src="../../../../ng1/images/device/restart.svg" alt="restart" /></a>
+            <a href="javascript:;" class="head-btn-info btn-shutDown"><img src="../../../../ng1/images/device/shutdown.svg" alt="shutdown" /></a>
+        </div>
+      </div>
+      <div class="head-counter"><img src="../../../../ng1/images/device/counter.svg" alt="Print" /> {{padNumber(this.totalHours)}} hr : {{padNumber(this.totalMinutes)}} min : {{padNumber(this.totalSeconds)}} sec</div>
+  </header>
+<!-- left sidebar nav -->
+  <aside class="left-sidebar">
+      <app-nav></app-nav>
+  </aside>
+  <!-- Main content bar -->
+    <main>
+      <div ng-include="'/ng1/scripts/common/templates/index-page-body.tpl.html'"></div>
+    </main>  
+    <app-draft-email></app-draft-email>
+    <app-main></app-main>
+</div>
+
+
+  <!-- Modal create Tags -->
+  <ng-template #template>
+     <div class="modal-body">
+          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+  
+            <div class="remote-area">
+                <ul class="list-unstyled">
+                    <li>
+                        <span class="remote-ico">
+                            <img src="../../../../ng1/images/device/quicktech-connect.svg" alt="quicktech-connect"/>
+                        </span>
+                        <div class="remote-info">
+                            <h3>Quicktech Connect</h3>
+                            <p>Get our Windows Installer package to install the app on your system. The app will be available to join future sessions instantly.</p>
+                            <a (click)="createConnection('CSS');" class="btn btn-primary">Launch Quicktech Connect</a>
+                        </div>
+                    </li>
+                    <!-- <li>
+                      <span class="remote-ico">
+                          <img src="../../../../ng1/images/device/remote-desktop.svg" alt="quicktech-connect"/>
+                      </span>
+                      <div class="remote-info">
+                          <h3>Remote Desktop</h3>
+                          <p>Launch our app already installed on your device. If not installed, we will attempt the next option after 2 seconds 
+                            have elapsed.</p>
+                          <a (click)="createConnection('RDP');" class="btn btn-primary">Launch RDP Connect</a>
+                      </div>
+                  </li> -->
+                </ul>
+            </div>
+            <div class="viewer-footer">
+                <p>You may need to download and install the viewer</p>
+                <a (click)="getViewer();" class="btn btn-dowanload">Download Viewer</a>
+            </div>
+     </div>
+ </ng-template> 
+ <div class="loading" *ngIf="loading"></div>
+
+
+

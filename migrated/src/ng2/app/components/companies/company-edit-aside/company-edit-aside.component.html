@@ -1,0 +1,255 @@
+<ng-sidebar-container>
+  <ng-sidebar [(opened)]="opened" [position]="'right'">
+    <div class="new-companies-content__modal clearfix">
+      <div class="new-companies-content__modal--header">
+        <h3>Edit Company</h3>
+        <button class="close-modal" (click)="close()"></button>
+      </div>
+      <!--      BASIC-->
+
+      <!--      ADVANCED -->
+      <div class="new-companies-content__modal--content advanced">
+
+        <div class="col-md-12">
+          <div class="logo-upload d-f">
+            <img *ngIf="company.logo" [src]="getCompanyLogoUrl()" (click)="onChangeAvatar()" />
+            <i class="icn-64 upload-logo" *ngIf="!company.logo"></i>
+            <div>
+              <div class="new-link">Upload Company logo</div>
+              <p>Maximum size of 2MB. JPG, GIF, PNG</p>
+              <input id="upload-file" type="file" (input)="uploadFileOnBrower($event)" />
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-md-12 google-plus"
+             [ngClass]="{'error-field':!validate.getName() || validate.getNameIsExist() }">
+          <mat-error *ngIf="validate.getNameIsExist()">
+            This company name already occupied
+          </mat-error>
+          <mat-error *ngIf="!validate.getName()">
+            Company name is required
+          </mat-error>
+          <p>Company Name</p>
+          <input type="text"
+                 [(ngModel)]="company.name" (blur)="onChangeName()"
+                 placeholder="Write Company or Search Company">
+        </div>
+        <div class="col-md-6" ngbDropdown [ngClass]="{'error-field':!validate.getType() }">
+          <mat-error *ngIf="!validate.getType()">
+            Client Type is required
+          </mat-error>
+          <p>Company Type</p>
+          <input type="text" [value]="getSelectedCompanyTypes()"
+                 autocomplete="new-password" (input)="onChangeType()"
+                 placeholder="Select Company Type" id="dropdownTypeCompany" ngbDropdownToggle />
+          <div ngbDropdownMenu aria-labelledby="dropdownTypeCompany">
+            <ng-template ngFor let-item [ngForOf]="companyTypes" let-i="index">
+              <button ngbDropdownItem [textContent]="item.title" (click)="onSelectCompanyTypes(i)"></button>
+            </ng-template>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <p>Client Type</p>
+          <div class="light-dropdown">
+            <app-select-search [class]="['light-dropdown']"
+                               [editItem]="(company.clientIndustry.name) ? company.clientIndustry.name : null"
+                               [list]="industries"
+                               (onSelectedItem)="onSelectClientIndustry($event)"></app-select-search>
+          </div>
+
+        </div>
+        <div class="col-md-12" [ngClass]="{'error-field':!validate.getDomain() }">
+          <mat-error *ngIf="!validate.getDomain()">
+            Please enter a valid domain
+          </mat-error>
+          <p>Domain Name</p>
+          <input type="text"
+                 (blur)="onChangeDomain()"
+                 [(ngModel)]="company.domain"
+                 placeholder="http://www.example.com">
+        </div>
+        <div class="col-md-12">
+          <p>Location</p>
+          <input type="text"
+					       #addresstext
+                 [(ngModel)]="company.addresses[0].address"
+
+                 (focus)="onCheckGoogleAutoComplete()"
+                 placeholder="Enter Location">
+        </div>
+        <div class="col-md-4">
+          <p>Suite No.</p>
+          <input type="text"
+                 [(ngModel)]="company.addresses[0].suiteNumber"
+                 placeholder="Enter Suite Number">
+        </div>
+        <div class="col-md-3">
+          <p>Zip</p>
+          <input type="text"
+                 [(ngModel)]="company.addresses[0].postalCode"
+                 placeholder="Enter Zip">
+        </div>
+        <div class="col-md-5" [ngClass]="{'error-field':!validate.getPhoneNumber() }">
+          <mat-error *ngIf="!validate.getPhoneNumber()">
+            Phone number is required
+          </mat-error>
+          <p>Phone Number</p>
+          <input type="text" *ngIf="company.addresses[0].phoneNumbers.length > 0" (input)="onChangePhoneNumber($event)"
+                 [(ngModel)]="company.addresses[0].phoneNumbers[0].number"
+                 placeholder="Enter Phone Number">
+        </div>
+
+        <div class="col-md-12 details-divider">
+          <p>Contact Detail</p>
+        </div>
+
+        <div class="col-md-6" [ngClass]="{'error-field':!validate.getFirstName() }">
+          <mat-error *ngIf="!validate.getFirstName()">
+            First name is required
+          </mat-error>
+          <p>First Name</p>
+          <input type="text" (input)="onChangeFirstName()"
+                 [(ngModel)]="company.contacts[0].firstName"
+                 placeholder="Enter First Name">
+        </div>
+        <div class="col-md-6">
+          <p>Last Name</p>
+          <input type="text"
+                 [(ngModel)]="company.contacts[0].lastName"
+                 placeholder="Enter Last Name">
+        </div>
+        <div class="col-md-6">
+          <p>Designation</p>
+          <input type="text"
+                 [(ngModel)]="company.contacts[0].designation"
+                 placeholder="Write Description">
+        </div>
+        <div class="col-md-6">
+
+          <p>Phone Number</p>
+          <div class="with-number-types">
+            <div class="grey-dropdown"
+                 ngbDropdown>
+              <button class="types-btn"
+                      id="dropdownBasic"
+                      *ngIf="company.contacts[0].phoneNumbers.length > 0"
+                      ngbDropdownToggle [textContent]="company.contacts[0].phoneNumbers[0].typeNumber">
+              </button>
+              <i class="icn-sm report-caret-icon"></i>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic">
+                <ng-template ngFor let-item [ngForOf]="phoneTypes">
+                  <button ngbDropdownItem [textContent]="item"
+                          (click)="company.contacts[0].phoneNumbers[0].typeNumber = item.toUpperCase()"></button>
+                </ng-template>
+
+              </div>
+            </div>
+            <input type="text" *ngIf="company.contacts[0].phoneNumbers.length > 0"
+                   [(ngModel)]="company.contacts[0].phoneNumbers[0].number"
+                   placeholder="Enter Phone Number">
+          </div>
+        </div>
+        <div class="col-md-6" [ngClass]="{'error-field':!validate.getPrimaryContactEmail() }">
+          <mat-error *ngIf="!validate.getPrimaryContactEmail()">
+            Please enter a valid email address
+          </mat-error>
+          <p>Primary Contact Email</p>
+          <input type="text" (input)="onChangePrimaryEmail()"
+                 [(ngModel)]="company.contacts[0].primaryEmail"
+                 placeholder="Primary Email Address">
+        </div>
+        <div class="col-md-12">
+          <p>Get Subscribe</p>
+          <app-company-subscription (subscribeChange)="onChangeSubscribe($event)"></app-company-subscription>
+        </div>
+
+        <div class="col-md-12 details-divider">
+          <p>Settings</p>
+        </div>
+
+        <div class="col-md-6">
+          <p>Time Zone</p>
+          <app-company-time-zone (selectedOffsetItem)="onChangeTimeZone($event)"></app-company-time-zone>
+        </div>
+        <div class="col-md-6">
+          <p>Payment Terms</p>
+          <div class="light-dropdown" ngbDropdown>
+            <i class="icn-sm report-caret-icon"></i>
+            <input type="text" [value]="getSelectedPaymentTerms()"
+                   autocomplete="new-password"
+                   placeholder="Select Payment Terms" id="dropdownPaymentTerms" ngbDropdownToggle />
+            <div ngbDropdownMenu aria-labelledby="dropdownPaymentTerms">
+              <ng-template ngFor let-item [ngForOf]="paymentTerms" let-i="index">
+                <button ngbDropdownItem [textContent]="item.title" (click)="onSelectPaymentTerms(i)"></button>
+              </ng-template>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-md-6">
+          <p>Payment Method</p>
+          <div class="light-dropdown" ngbDropdown>
+            <i class="icn-sm report-caret-icon"></i>
+            <input type="text" [value]="company.defaultPaymentMethod" autocomplete="new-password"
+                   placeholder="Select Payment Method"
+                   id="dropdownPaymentMethods" ngbDropdownToggle />
+            <div ngbDropdownMenu aria-labelledby="dropdownPaymentMethods">
+              <ng-template ngFor let-item [ngForOf]="paymentMethods">
+                <button ngbDropdownItem [textContent]="item" (click)="company.defaultPaymentMethod = item"></button>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <p>Service Type</p>
+          <div class="light-dropdown" ngbDropdown>
+            <i class="icn-sm report-caret-icon"></i>
+            <input type="text" [value]="getSelectedServiceType()" autocomplete="new-password"
+                   placeholder="Select Service Type"
+                   id="dropdownPaymentType" ngbDropdownToggle />
+            <div ngbDropdownMenu aria-labelledby="dropdownPaymentType">
+              <ng-template ngFor let-item [ngForOf]="serviceTypes" let-i="index">
+                <button ngbDropdownItem [textContent]="item.title" (click)="onSelectServiceTypes(i)"></button>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <p>Sales Person</p>
+          <div class="light-dropdown">
+            <app-select-search [class]="['light-dropdown']" [editItem]="selectedTechLead" [field]="'name'"
+                               [list]="listPersons"
+                               (onSelectedItem)="onSelectTechLead($event)"></app-select-search>
+          </div>
+
+        </div>
+        <app-company-tags (tagsChange)="onChangeTags($event)"></app-company-tags>
+        <div class="col-md-12 editable-field">
+          <p>Note for Company</p>
+          <div class="editable-description">
+            <textarea appTextArea
+                      [limit]="250"
+                      id="company-description"
+                      placeholder="Write Description"
+                      (input)="onChangeDescription($event)"></textarea>
+          </div>
+        </div>
+
+        <div class="col-md-12 new-companies-content__modal--content-footer">
+          <div class="d-f">
+            <button class="btn-new btn-primary" (click)="onUpdateFull()">Update Company</button>
+            <button class="btn-new disabled" (click)="close()">Cancel</button>
+          </div>
+          <div class="create-contract">
+            <div class="new-link">Create Contract</div>
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+  </ng-sidebar>
+</ng-sidebar-container>

@@ -1,0 +1,73 @@
+<div class="row fixed-width" *ngIf="type && (itemListServices || itemListProducts)">
+  <!-- IF SERVICE -->
+  <div class="col-md-1"
+       *ngIf="type === 'service'"
+       (clickOutside)="hideDropDown($event)">
+    <div class="light-dropdown">
+      <app-services-list [itemList]="itemListServices"
+                         (selectedServicesItem)="setItem($event)"></app-services-list>
+      <i class="icn-sm report-caret-icon"></i>
+      <!--<input class="pointer"
+              type="text"
+              (click)="toggleShowDropDown()"
+              [ngClass]="{'no-valid': isFormValid}"
+              placeholder="Service">
+       <i class="icn-sm report-caret-icon"></i>
+       <app-services-list
+         *ngIf="isDropDownShow"
+         [itemList]="itemListServices"
+         (selectedServicesItem)="setItem($event)"></app-services-list>-->
+    </div>
+  </div>
+  <div class="col-md-2"
+       *ngIf="type === 'service'">
+    <input type="text"
+           [disabled]="true"
+           placeholder="">
+
+
+  </div>
+
+  <!-- IF PRODUCT -->
+  <div class="col-md-3"
+       *ngIf="type === 'product'">
+    <div class="product-dropdown-new-ng light-dropdown">
+      <app-product-list [itemList]="itemListProducts"
+                        (selectedProductItem)="setItem($event)"></app-product-list>
+      <i class="icn-sm report-caret-icon"></i>
+      <!-- <input class="pointer"
+               type="text"
+               (click)="toggleShowDropDown()"
+               [ngClass]="{'no-valid': isFormValid}"
+               placeholder="Product">
+        <i class="icn-sm report-caret-icon"></i>
+        <app-product-list *ngIf="isDropDownShow"
+                          [itemList]="itemListProducts"
+                          (selectedProductItem)="setItem($event)"></app-product-list>-->
+    </div>
+  </div>
+
+  <div class="col-md-4 with-dollar">
+    <input type="text"
+           [ngClass]="{'no-valid': isFormValid}"
+           [disabled]="type === 'service'"
+           placeholder="">
+  </div>
+  <div class="col-md-4 with-percent">
+    <input type="text"
+           [ngClass]="{'no-valid': isFormValid}"
+           [disabled]="type === 'service'"
+           placeholder="">
+  </div>
+  <div class="col-md-4 with-dollar">
+    <input type="text"
+           [ngClass]="{'no-valid': isFormValid}"
+           placeholder="">
+  </div>
+  <div class="col-md-4">
+    <input type="text"
+           [ngClass]="{'no-valid': isFormValid}"
+           placeholder="">
+  </div>
+  <i class="icn-delete" (click)="hideAddForm()"></i>
+</div>

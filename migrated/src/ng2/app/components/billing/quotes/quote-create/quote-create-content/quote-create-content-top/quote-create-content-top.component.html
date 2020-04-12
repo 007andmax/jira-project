@@ -1,0 +1,96 @@
+<div class="quote-create__content--top row">
+  <div class="error-message" *ngIf="errorMessage"><p [textContent]="errorMessage"></p></div>
+  <div class="col-md-4">
+    <div class="quote-create-field">
+      <app-select-client-company style="width: 75%;"
+                                 class="light-dropdown"
+                                 [formGroup]="quoteForm"
+                                 [editItem]="editItem"
+                                 (selectedItem)="selectClient($event)"
+                                 (getAllItems)="setClients($event)">
+
+      </app-select-client-company>
+    </div>
+    <div *ngIf="currentClient">
+      <p>{{getCLientUserName(currentClient.companyInfo)}}</p>
+      <p>{{getCLientAddress(currentClient.companyInfo)}}</p>
+      <p style="margin-bottom: 12px;">{{currentClient.companyInfo.contacts[0].primaryEmail}}</p>
+    </div>
+    <div class="quote-description editable-description"
+         style="width: 75%;">
+      <textarea
+        [minHeight]="38"
+        [(ngModel)]="description"
+        (input)="onChangeDescription($event)"
+        appTextArea
+        [limit]="250"></textarea>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="quote-create-field">
+      <p>Quote Date</p>
+      <div class="input-group date-picker" [formGroup]="quoteForm">
+        <input class="pointer"
+               placeholder="yyyy-mm-dd"
+               formControlName="startDate"
+               name="dp"
+               (ngModelChange)="startDateChanges($event)"
+               ngbDatepicker #startDate="ngbDatepicker" (click)="startDate.toggle()">
+        <div class="input-group-append">
+          <i class="new-calendar"></i>
+        </div>
+      </div>
+    </div>
+    <div class="quote-create-field">
+      <p>Valid Until</p>
+      <div class="input-group date-picker" [formGroup]="quoteForm">
+        <input class="pointer"
+               placeholder="yyyy-mm-dd"
+               formControlName="endDate"
+               name="dp"
+               (ngModelChange)="endDateChanges($event)"
+               ngbDatepicker #endDate="ngbDatepicker" (click)="endDate.toggle()">
+        <div class="input-group-append">
+          <i class="new-calendar"></i>
+        </div>
+      </div>
+    </div>
+    <div
+      class="quote-create-field">
+      <p>Partial/ Deposit</p>
+      <input type="text"
+             [(ngModel)]="partialDeposit"
+             (ngModelChange)="setPartialDeposit($event)"
+             placeholder="">
+    </div>
+    <div class="request-payments">
+      <div></div>
+      <div><label class="control checkbox">
+        <input type="checkbox"
+               [(ngModel)]="requestPayment"
+               (ngModelChange)="setRequestPayment($event)">
+        <span class="control-indicator"
+              style="margin-top: 3px;">
+          </span>
+        <p>Request payment</p>
+      </label></div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="quote-create-field">
+      <p>Quote #</p>
+      <input type="text"
+             [(ngModel)]="quoteNumber"
+             (ngModelChange)="setNumber($event)"
+             placeholder="">
+    </div>
+    <div
+      class="quote-create-field">
+      <p>PO #</p>
+      <input type="text"
+             [(ngModel)]="purchaseOrder"
+             (ngModelChange)="setPurchaseOrder($event)"
+             placeholder="">
+    </div>
+  </div>
+</div>

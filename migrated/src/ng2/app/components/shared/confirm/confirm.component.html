@@ -1,0 +1,71 @@
+<!--<div class="confirm-modal" *ngIf="action !== 'ARCHIVE_COMPANY' && action !== 'DEARCHIVE_COMPANY'">
+  <div class="close-btn btn pull-right" (click)="closeModal()" tabindex="1" style="z-index: 1000">
+    <i class="icn-sm icn-remove-old" uib-tooltip="Close"></i>
+  </div>
+  <div class="modal-body">
+    <p [textContent]="message"></p>
+  </div>
+  <div class="modal-footer">
+    <div class="btn btn-lg btn-primary"
+         data-dismiss='modal' (click)=cancelConfirm() [textContent]="btnCancel">
+
+    </div>
+    <div class="btn btn-lg btn-primary" (click)=approveConfirm() [textContent]="buttonConfirm"></div>
+  </div>
+</div> -->
+
+<div class="archive-modal" *ngIf="action !== 'ARCHIVE_COMPANY' && action !== 'DEARCHIVE_COMPANY' && action !== 'SAVE_AND_SEND'">
+  <button class="close-modal" (click)=cancelConfirm()></button>
+  <div class="archive-modal__body">
+    <h3>Archive this User ?</h3>
+    <p [textContent]="message"></p>
+  </div>
+  <div class="archive-modal__footer">
+    <div class="d-f">
+      <button class="btn-new btn-primary"  (click)=approveConfirm()>Yes, I am sure</button>
+      <button class="btn-new disabled" (click)=cancelConfirm()>Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="archive-modal" *ngIf="action === 'ARCHIVE_COMPANY'">
+  <button class="close-modal" (click)=cancelConfirm()></button>
+  <div class="archive-modal__body">
+    <h3>Archive this Company ?</h3>
+    <p>All related users and service agreements will be archived and all agents will be uninstalled.</p>
+  </div>
+  <div class="archive-modal__footer">
+    <div class="d-f">
+      <button class="btn-new btn-primary"  (click)=approveConfirm()>Yes, I am sure</button>
+      <button class="btn-new disabled" (click)=cancelConfirm()>Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="archive-modal de-archive" *ngIf="action === 'DEARCHIVE_COMPANY'">
+  <button class="close-modal" (click)=cancelConfirm()></button>
+  <div class="archive-modal__body">
+    <h3 [textContent]="message"></h3>
+    <!--<p [textContent]="message"></p>-->
+  </div>
+  <div class="archive-modal__footer">
+    <div class="d-f">
+      <button class="btn-new btn-primary"  (click)=approveConfirm()>Yes, I am sure</button>
+      <button class="btn-new disabled" (click)=cancelConfirm()>Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="archive-modal" *ngIf="action === 'SAVE_AND_SEND'">
+  <button class="close-modal" (click)=cancelConfirm()></button>
+  <div class="archive-modal__body modal-body">
+    <p [textContent]="message"></p>
+  </div>
+  <div class="archive-modal__footer">
+    <div class="d-f">
+      <button class="btn-new btn-primary"  (click)=approveConfirm()>Yes, I am sure</button>
+      <button class="btn-new disabled" (click)=cancelConfirm()>Cancel</button>
+    </div>
+  </div>
+</div>
+

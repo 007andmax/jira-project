@@ -1,0 +1,259 @@
+<div class="service-form-wrapper">
+  <div class="block-time read-only clearfix" ng-controller="blockTimeBillingCtrl" ng-form="blockTimeContractForm2">
+    <div class="close-btn btn" ng-click="closeModal()" tabindex="1">
+      <i class="icn-sm icn-remove-old"></i>
+    </div>
+    <div class="service-header">
+      <h4 class="title-services">Block Time Billing</h4>
+      <p>Sell your cusotmer a block of time, that you bill against each month, this can be carried over if not useds.
+        You can still create custom Services for projects or after hours support</p>
+    </div>
+    <div class="service-contract-details clearfix">
+      <div class="col-md-8">
+        <div class="form-group">
+          Description
+          <input placeholder="Description"
+                 type="text"
+                 class="form-control"
+                 ng-model="blockTimeContract.description"
+                 ng-maxlength="255" readonly>
+        </div>
+      </div>
+      <div class="col-md-12"></div>
+      <div class="interval-agreement">
+        <div class="form-group">
+          Interval:
+          <input custom-style="{'width':'100%'}" type="text" class="form-control default-cursor"
+                 ng-model="previewInterval()"
+                 readonly onclick="return false">
+        </div>
+      </div>
+      <div class="interval-agreement">
+        <div class="form-group">
+          Start Date:
+
+          <input class="form-control default-cursor" type="text"
+                 readonly name="startDate"
+                 onclick="return false" value="{{parseDate(blockTimeContract.startDatePreview) | date: 'yyyy/MM/dd' }}">
+          <i class="report-calendar"></i>
+        </div>
+      </div>
+      <div class="form-group interval-agreement" >
+        <p>Num.of Intervals </p>
+
+        <input class="form-control default-cursor" type="text"
+               ng-model="blockTimeContract.numOfIntervalsPreview"
+               placeholder="&infin;"
+               custom-disabled="{{ disabledEndAndNum }}"
+               name="numToGenerate"
+               hard-reset-required="true"
+               hard-reset-pattern="decimalNumberPattern" readonly>
+      </div>
+      <div class="interval-agreement">
+        <div class="form-group">
+          End Date:
+
+          <input type="text" readonly ng-if="reInitEndDate"
+                 value="{{blockTimeContract.endDatePreview | date: 'yyyy/MM/dd' }}"
+                 class="form-control default-cursor" onclick="return false">
+
+          <i class="report-calendar"></i>
+        </div>
+      </div>
+
+      <div class="col-md-12"></div>
+
+      <div class="col-md-12">
+        <p class="info-block">Block Time Contracts are based on preselling a block of time your customer</p>
+      </div>
+    </div>
+    <div class="service-bill clearfix">
+      <h4>
+        <!--Select how you bill your customer-->
+      </h4>
+      <div class="col-md-12">
+        <div class="interval-agreement">
+          <div class="form-group">
+            Included hours:
+            <input placeholder="Hours"
+                   type="number"
+                   class="form-control"
+                   ng-model="blockTimeContract.includedHours" readonly>
+          </div>
+        </div>
+        <div class="interval-agreement">
+          <div class="form-group before-icon">
+            Block Rate:
+            <input placeholder="0.00"
+                   type="text"
+                   class="form-control"
+                   ng-model="blockTimeContract.blockRate"
+                   hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2" readonly>
+          </div>
+        </div>
+        <div class="interval-agreement">
+          <div class="form-group before-icon">
+            Total Amount:
+            <input placeholder="Total"
+                   type="text"
+                   class="form-control"
+                   ng-model="calculateTotalAmount()" hard-reset-pattern="decimalNumberPattern" readonly qt-to-fixed="2">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="col-md-4" style="width: 193px;padding-right: 0;">
+          <div class="form-group before-icon">
+            Rate exceeding block time:
+            <input style="width: 127px;"
+                   placeholder="0.00"
+                   type="text"
+                   class="form-control"
+                   ng-model="blockTimeContract.rateExceeding"
+                   hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2" required readonly>
+          </div>
+        </div>
+        <div class="tax-agreement form-group">
+          <div>
+            Select taxes
+            <select-taxes taxes="taxes" entity="blockTimeContract" is-preview-mode="true"
+                          ng-show="blockTimeContract.taxIds.length > 0"></select-taxes>
+            <input placeholder="No taxes selected" readonly type="text" class="form-control"
+                   ng-hide="blockTimeContract.taxIds.length > 0">
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-md-12 service-bill-hide-content">
+        <p>Create customer services to track your time spent with this block time contract</p>
+        <div class="col-md-12" style="padding-left: 15px;">Service name</div>
+        <!--<div class="col-md-2">Action</div>-->
+
+
+        <div class="bill-hide-content-item clearfix"
+             ng-repeat="blockTimeService in blockTimeContract.blockTimeServices">
+          <div class="col-md-7 form-group">
+            <input placeholder="Service Name"
+                   type="text" class="form-control"
+                   ng-model="blockTimeService.name"
+                   invalid-when="!isNameUnique(newBlockTimeService)"
+                   is-uniq-validation validation-func="validateServiceName" readonly>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="service-bill-content">
+        <div class="col-md-12">
+          <label class="control checkbox default-cursor" onclick="return false">
+            <input type="checkbox" ng-model="blockTimeContract.enableTimeRollover" onclick="return false">
+            <span class="control-indicator"></span>
+
+            Enable Time Rollover of unused hours
+          </label>
+          <div class="service-bill-hide-content " ng-show="blockTimeContract.enableTimeRollover">
+            <div class="form-group price-agreement">
+              <input class="form-control" type="text"
+                     placeholder="Max Hours"
+                     ng-model="blockTimeContract.maxRolloverHours"
+                     hard-reset-pattern="decimalNumberPattern" readonly>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-md-12">
+          <label class="control checkbox default-cursor" onclick="return false">
+            <input type="checkbox" ng-checked="blockTimeContract.services.length>0" onclick="return false">
+            <span class="control-indicator"></span>
+            Track and bill your customers for other services
+          </label>
+
+
+          <div class="service-bill-hide-content clearfix" ng-show="blockTimeContract.services.length>0">
+            <p style="padding-bottom: 15px;">All services that did not make as billable will be included in this
+              contract time</p>
+
+            <div class="service-name-agreement">Service name</div>
+            <div class="col-md-1 text-center" style="padding: 0;">Billable</div>
+            <div class="price-agreement text-center" ng-style="{'visibility': showAdditionalServiceColumn() ? 'visible' : 'hidden'}">Per hour</div>
+            <div class="tax-agreement text-center" ng-style="{'visibility': showAdditionalServiceColumn() ? 'visible' : 'hidden'}">Tax</div>
+            <!--<div class="col-md-1 text-center">Action</div>-->
+
+            <div class="bill-hide-content-item clearfix" ng-repeat="contractService in blockTimeContract.services">
+              <div class="service-name-agreement form-group">
+                <input placeholder="Service Name" type="text" class="form-control" ng-model="contractService.name"
+                       readonly>
+              </div>
+              <div class="col-md-1 form-group text-center">
+                <label class="control checkbox default-cursor" onclick="return false;">
+                  <input ng-model="contractService.billable" type="checkbox" onclick="return false">
+                  <span class="control-indicator"></span>
+                </label>
+              </div>
+              <div class="price-agreement fourm-group before-icon" ng-style="{'visibility': contractService.billable ? 'visible' : 'hidden'}">
+                <input placeholder="0.00" type="text" class="form-control"
+                       ng-model="contractService.rate"
+                       hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2" readonly>
+              </div>
+              <div class="tax-agreement form-group text-center" ng-style="{'visibility': contractService.billable ? 'visible' : 'hidden'}">
+                <div>
+                  <div>
+                    <select-taxes taxes="taxes" entity="contractService"
+                                  is-preview-mode="true"></select-taxes>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-1 form-group text-center"></div>
+            </div>
+          </div>
+
+
+        </div>
+        <div class="col-md-12">
+          <label class="control checkbox default-cursor">
+            <input type="checkbox" ng-model="blockTimeContract.notifyBlockTimeUsed" onclick="return false">
+            <span class="control-indicator"></span>
+            Notify when block time has been used
+          </label>
+
+          <div class="service-bill-hide-content ticket-add-footer">
+            <div class="pull-left shared-user-add">
+              <label class="control checkbox pull-left" ng-repeat="sharedUser in ticketSharedUsersList"
+                     ng-mousedown="validateNotifying(sharedUser, $event)">
+                <input type="checkbox" ng-model="sharedUser.notify" onclick="return false">
+                <span class="control-indicator"></span>
+                {{ getUserName(sharedUser.user) }}
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contacts-details col-md-12">
+      <h5>Details</h5>
+      <div class="contacts-details-content clearfix">
+        <div class="col-md-8">
+          <p class="col-md-12">Vereburn - Monthly Block Time</p>
+          <div class="col-md-6">
+            <p>Rollover: <span>{{blockTimeContract.enableTimeRollover}}</span></p>
+          </div>
+          <div class="col-md-6">
+            <p>Start Date: <span>{{parseDate(blockTimeContract.startDatePreview) | date: 'yyyy/MM/dd' }}</span></p>
+            <p>Expire Date: <span>{{parseDate(blockTimeContract.endDatePreview) | date: 'yyyy/MM/dd' }}</span></p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="contacts-details-content-price">
+             Total: {{(blockTimeContract.amount | currency: '$': 2)}}
+          </div>
+          <div class="col-md-12" ng-hide="contractStatus == 'TERMINATED'">
+            <div class="btn btn-primary btn-create" ng-click="terminateAndCopyBlockTime()">Terminate and copy</div>
+            <div class="btn btn-primary btn-create" ng-click="terminateContract()">Terminate and close</div>
+            <div class="btn btn-primary btn-create" ng-click="terminateAndEdit()">Edit</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

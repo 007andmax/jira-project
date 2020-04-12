@@ -1,0 +1,91 @@
+<button class="mobile-btn menu-btn" ng-click="toggleLeftPanel(true)"></button>
+<div class="mob-search">
+  <input type="text"
+         placeholder="Search by Company">
+</div>
+<div uib-dropdown class="mob-header-btn topNavbar-create">
+  <button class="mobile-btn primary header-btn" ng-if="applicationLoaded" uib-dropdown-toggle></button>
+  <ul class="dropdown-menu tag-list" style="transform: translateX(-80%)">
+    <li class="topNavbar-logout" create-new-entity="ticket">
+      <a href="javascript:void(0)" class="ha-20-16">
+        <span>Ticket</span>
+      </a>
+    </li>
+    <li class="topNavbar-logout" create-new-entity="user">
+      <a href="javascript:void(0)" class="ha-20-16">
+        <span>User</span>
+      </a>
+    </li>
+    <li class="topNavbar-logout" create-new-entity="company">
+      <a href="javascript:void(0)" class="ha-20-16">
+        <span>Company</span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<button class="mob-back-btn" ng-click="closeTicket()"></button>
+<h3 class="ticket-detail-subject">Ticket Detail</h3>
+
+
+<!-- <div class="more-ticket-details">
+  <button></button>
+</div> -->
+
+<div class="more-ticket-details" uib-dropdown>
+  <button aria-haspopup="true" aria-expanded="false"
+          uib-dropdown-toggle>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-right" style="width: 185px; overflow: visible;" role="menu">
+
+    <li  ng-if="TicketsPermissionsService.isActionVisible('claim_ticket', ticketDetails)">
+      <a tabindex="-1" href="javascript:void(0)" ng-click="ticketMobileSettings.data.claimTicket()">Claim Ticket</a>
+    </li>
+    <li class="dropdown-submenu left-align">
+      <a tabindex="-1" href="javascript:void(0)" stop-propagation="click">
+        {{ ticketMobileSettings.data.ticketDetails.assignedUser.id ? 'Reassign' : 'Assign' }} Ticket to...
+      </a>
+      <div class="dropdown-submenu-wrapper">
+        <div class="dropdown-assign-ticket dropdown-menu"
+             stop-propagation="click"
+             assign-user-button aub-ticket-id="ticketMobileSettings.data.ticketDetails.id"
+             ticket-assigned-user-id="ticketMobileSettings.data.ticketDetails.assignedUser.id"
+             aub-ticket-number="ticketMobileSettings.data.ticketDetails.number"
+             users="usersCurrentCompany"
+             aub-current-user="ticketMobileSettings.data.currentUser">
+        </div>
+      </div>
+    </li>
+
+    <li class="dropdown-submenu left-align linked-agent-dropdown"
+        ng-if="!ticketMobileSettings.data.ticketDetails.company.isDefault && ticketMobileSettings.data.agentList && ticketMobileSettings.data.agentList.length && ticketMobileSettings.data.isDeviceToLink(ticketMobileSettings.data.agentList, ticketMobileSettings.data.ticketDetails.agent)">
+      <a tabindex="-1" href="javascript:void(0)" stop-propagation="click">
+        {{ ticketMobileSettings.data.ticketDetails.agent && ticketMobileSettings.data.ticketDetails.agent.deviceId ? 'Relink with another' : 'Link with' }}
+        Agent
+      </a>
+      <ul class="dropdown-submenu-wrapper dropdown-menu">
+        <li ng-repeat="agent in ticketMobileSettings.data.agentList" ng-click="ticketMobileSettings.data.linkAgent(ticketMobileSettings.data.ticketDetails.id, agent.id)"
+            ng-if="!ticketMobileSettings.data.ticketDetails.agent || agent.id !== ticketMobileSettings.data.ticketDetails.agent.deviceId">
+          {{ agent.hostName || agent.ip }}
+        </li>
+      </ul>
+    </li>
+    <li ng-if="ticketMobileSettings.data.ticketDetails.agent && ticketMobileSettings.data.ticketDetails.agent.deviceId">
+      <a tabindex="-1" href="javascript:void(0)" ng-click="ticketMobileSettings.data.linkAgent(ticketMobileSettings.data.ticketDetails.id, '')">Unlink Agent</a>
+    </li>
+
+    <li>
+      <a tabindex="-1" href="javascript:void(0)" ng-if="ticketMobileSettings.data.currentUser.isOwner"
+         ng-click="ticketMobileSettings.data.moveIntoSpam()">Mark as Spam</a>
+      <a tabindex="-1" href="javascript:void(0)" ng-if="!ticketMobileSettings.data.currentUser.isOwner"
+         ng-click="ticketMobileSettings.data.moveIntoSpam()">Report as Spam</a>
+    </li>
+    <li>
+      <a tabindex="-1" href="javascript:void(0)" ng-click="ticketMobileSettings.data.moveToTrash(true)">Move to Trash</a>
+    </li>
+  </ul>
+</div>
+
+<button class="x-mark mobile-btn" ng-click="toggleUpdateWindow()"></button>
+<h3 class="ticket-update-subject">Create New</h3>
+<button class="add-new-ticket-update">+</button>

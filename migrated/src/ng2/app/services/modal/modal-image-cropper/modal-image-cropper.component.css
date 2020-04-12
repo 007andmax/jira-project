@@ -1,0 +1,29 @@
+.image-confirm-modal {
+  position: fixed;
+  left: 50%;
+  display: none;
+  z-index: 999;
+  background: #ffffff;
+  width: 600px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  box-shadow: 0 8px 25px 0 rgba(21, 30, 41, 0.4);
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0 40px 40px !important;
+}
+
+.image-confirm-modal__body {
+  padding-left: 0;
+}
+
+.image-confirm-modal .close-modal {
+  z-index: 999;
+  outline: none;
+  cursor: pointer;
+  right: 40px;
+}
+
+.image-confirm-modal__footer .btn-new {
+  width: 90px;
+}

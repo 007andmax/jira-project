@@ -1,0 +1,166 @@
+<div class="ticket-update-product-edit"
+     ng-controller="quicktech.core.tickets.ticketEditUpdateProductCtrl">
+  <form name="updateTicketProduct">
+    <div class="col-md-6 product-name gm pl-0">
+      <label class="checkbox-container">
+        <input type="checkbox">
+        <span class="checkbox-mark"></span>
+      </label>
+      <p class="pre-line" ng-bind-html="product.item.description"></p>
+    </div>
+    <div class="col-md-1">
+      <input type="number"
+             class="new-input form-control"
+             placeholder="Price"
+             name="productPrice"
+             ng-required="true"
+             ng-model="editProduct.item.sale"
+             qt-to-fixed="2"
+             ng-max="9999999999"
+             ng-readonly="!PermissionsService.isAllowed('MANAGE_PRODUCTS')"
+             hard-reset-pattern="pricePattern"
+             hard-reset-required="true"
+             uib-tooltip="Price"
+             tooltip-placement="top"
+             tooltip-append-to-body="true">
+    </div>
+    <div class="col-md-1">
+      <input type="text"
+             class="new-input form-control"
+             placeholder="Qty"
+             ng-model="editProduct.quantity"
+             ng-maxlength="10"
+             name="productQty"
+             hard-reset-required="true"
+             ng-change="controlProductQty(updateTicketProduct)"
+             hard-reset-pattern="numberPattern"
+             uib-tooltip="Qty"
+             tooltip-placement="top"
+             tooltip-append-to-body="true">
+    </div>
+    <div class="col-md-1 text-right gm"
+         style="height: 46px;padding: 13px 5px;">
+      {{ editProduct.item.sale * editProduct.quantity || ''| currency :'$':2 }}
+    </div>
+    <div class="col-md-2 action-update pr-0"
+         style="height: 46px;">
+      <i class="new-calendar-icn pointer"></i>
+      <i class="assign-icn pointer"></i>
+      <i class="icn-sm icn-label-save-dashboard icn-label-save pointer"
+         ng-click="saveUpdateProduct(updateTicketProduct)"></i>
+      <i class="icn-sm dashboard-remove icn-remove-old pointer"
+         ng-click="setEditExpenseId()"></i>
+    </div>
+
+
+    <!--    <div class="table-content">-->
+    <!--      <div class="table-content-top clearfix">-->
+    <!--        <div class="col-md-6"-->
+    <!--             ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'product') || !editProduct.item.description}">-->
+    <!--          <div products-list="editProduct"-->
+    <!--               id="product-list-cont"-->
+    <!--               click-outside="closeDropdown()"-->
+    <!--               outside-if-not="product-list-cont">-->
+    <!--            <input style="padding-right: 25px;"-->
+    <!--                   ng-hide="isPLOpen" type="text" class="new-input pointer form-control has-dropdown" pl-product-input-->
+    <!--                   placeholder="Product" autocomplete="off"-->
+    <!--                   uib-tooltip="Product"-->
+    <!--                   tooltip-placement="top"-->
+    <!--                   tooltip-append-to-body="true">-->
+    <!--            <input style="padding-right: 25px;"-->
+    <!--                   ng-show="isPLOpen" type="text" class="new-input pointer form-control has-dropdown"-->
+    <!--                   pl-search-product-input-->
+    <!--                   placeholder="Search or Add Product" autocomplete="off" ng-model="searchProduct"-->
+    <!--                   uib-tooltip="Search or Add Product"-->
+    <!--                   tooltip-placement="top"-->
+    <!--                   tooltip-append-to-body="true">-->
+    <!--            <i style="top: 19px;right: 16px;" class="icn-sm report-caret-icon"></i>-->
+    <!--            <input type="hidden" name="product" ng-model="editProduct.item.description" ng-required="true">-->
+    <!--            <div class="nano dropdown-menu custom-product-list" pl-conteiner-->
+    <!--                 ng-include="'/ng1/scripts/common/templates/products-list.tpl.html'"></div>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--        <div class="col-md-2" ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productCost')}">-->
+    <!--          <input type="number" class="new-input form-control" placeholder="Cost" name="productCost"-->
+    <!--                 ng-required="true" ng-model="editProduct.item.cost" qt-to-fixed="2"-->
+    <!--                 ng-readonly="!PermissionsService.isAllowed('MANAGE_PRODUCTS')"-->
+    <!--                 ng-max="editProduct.item.sale"-->
+    <!--                 hard-reset-pattern="pricePattern" hard-reset-required="true"-->
+    <!--                 uib-tooltip="Cost"-->
+    <!--                 tooltip-placement="top"-->
+    <!--                 tooltip-append-to-body="true">-->
+    <!--        </div>-->
+    <!--        <div class="col-md-2" ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productQty')}">-->
+    <!--          <input type="text" class="new-input form-control" placeholder="Qty"-->
+    <!--                 ng-model="editProduct.quantity" ng-maxlength="10"-->
+    <!--                 name="productQty" hard-reset-required="true" ng-change="controlProductQty(updateTicketProduct)"-->
+    <!--                 hard-reset-pattern="numberPattern"-->
+    <!--                 uib-tooltip="Qty"-->
+    <!--                 tooltip-placement="top"-->
+    <!--                 tooltip-append-to-body="true">-->
+    <!--        </div>-->
+    <!--        <div class="col-md-2" ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productPrice')}">-->
+    <!--          <input type="number" class="new-input form-control" placeholder="Price" name="productPrice"-->
+    <!--                 ng-required="true" ng-model="editProduct.item.sale" qt-to-fixed="2" ng-max="9999999999"-->
+    <!--                 ng-readonly="!PermissionsService.isAllowed('MANAGE_PRODUCTS')"-->
+    <!--                 hard-reset-pattern="pricePattern" hard-reset-required="true"-->
+    <!--                 uib-tooltip="Price"-->
+    <!--                 tooltip-placement="top"-->
+    <!--                 tooltip-append-to-body="true">-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--      <div class="table-content-bottom clearfix">-->
+    <!--        <div class="col-md-3"-->
+    <!--             ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productSerialNumber')}">-->
+    <!--          <input type="text"-->
+    <!--                 class="form-control new-input"-->
+    <!--                 name="productSerialNumber"-->
+    <!--                 placeholder="Serial number"-->
+    <!--                 ng-model="editProduct.serialNumber"-->
+    <!--                 ng-maxlength="55"-->
+    <!--                 execute-when-outfocused="isShowBarcotInputField = false"-->
+    <!--                 uib-tooltip="serial number"-->
+    <!--                 tooltip-placement="top"-->
+    <!--                 tooltip-append-to-body="true" />-->
+    <!--        </div>-->
+    <!--        <div class="col-md-7"></div>-->
+    <!--        <div class="col-md-2"-->
+    <!--             ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'discountAmount')}">-->
+    <!--          <input type="text"-->
+    <!--                 class="form-control new-input"-->
+    <!--                 name="discountAmount"-->
+    <!--                 ng-model="editProduct.discountAmount"-->
+    <!--                 ng-max="100"-->
+    <!--                 ng-min="0"-->
+    <!--                 qt-to-fixed-->
+    <!--                 uib-tooltip="Discount"-->
+    <!--                 tooltip-placement="top"-->
+    <!--                 tooltip-append-to-body="true"-->
+    <!--                 placeholder="Discount"-->
+    <!--                 hard-reset-pattern="PERCENT"-->
+    <!--                 execute-when-outfocused="isShowDiscountProductInputField = false"-->
+    <!--                 ng-keydown="$event.which === 13 && $event.preventDefault()">-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </div>-->
+
+
+  </form>
+</div>
+<script>
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments);
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+  ga('create', 'UA-93441341-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
