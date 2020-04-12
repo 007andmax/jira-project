@@ -9,6 +9,16 @@ span.qt-input-search {
       left: 10px;
       top: calc(50% - 10px);
   }
+
+  &.--dark {
+    input.qt-input-search {
+      background: #f4f6f8;
+      box-shadow: none;
+    }
+      &:placeholder {
+        color: #9ca5b6;
+    }
+  }
 }
 
 input.qt-input-search {
