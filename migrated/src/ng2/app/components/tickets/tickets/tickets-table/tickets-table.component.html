@@ -10,8 +10,20 @@
         <th>Created Date</th>
       </tr>
   </thead>
-  <tbody>
-    <tr>
+  <tbody  infiniteScroll
+  [infiniteScrollDistance]="2"
+  [infiniteScrollThrottle]="15"
+  [infiniteScrollDisabled]="infiniteScrollDisabled"
+  (scrolled)="onScroll()">
+    
+ <ng-template ngFor let-company
+              [ngForOf]="CompaniesList"
+              [ngForTrackBy]="trackById">
+   <app-companies-table [showArchivedCompanies]="showArchivedCompanies" [company]="company"></app-companies-table>
+ </ng-template>
+ <div class="loading" *ngIf="showPreloader"></div>
+ 
+  <!--   <tr>
       <td>
         <div class="d-f">
           <div class="qt-table-modern__circle-avatar" style="background: #16a4fa;"> NM </div>
@@ -129,7 +141,7 @@
         </td>
       <td> <span class="tag__modern --warning">On Hold</span></td>
       <td>14 Jul 2020</td>
-    </tr>
+    </tr> -->
   </tbody>
 </table>
 </div>

@@ -26,7 +26,7 @@ import { DraftEmailStateService } from '../../states/draft-email/draft-email-sta
   providers: [CompaniesListService]
 })
 export class CompaniesComponent implements OnInit, OnDestroy {
- 
+
   CompaniesList: Array<Company> = [];
   reqCompaniesList: Array<Company> = [];
   showPreloader: boolean = true;
@@ -45,7 +45,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   left_filter: LeftPanelCompaniesFilter = new LeftPanelCompaniesFilter();
   calculateCount: CompanyCalculateCount = new CompanyCalculateCount();
-  
+
   constructor(private companiesService: CompaniesService, private companiesList: CompaniesListService,
     private companiesStateService: CompaniesStateService, private userService: UsersService,
     private confirmStateService: ConfirmStateService, private devicesState: DevicesSateService, private usersStateService: UsersStateService,
@@ -53,25 +53,25 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     private companiesRealTimeService: CompaniesRealTimeService,
     private draftEmailStateService: DraftEmailStateService,
     public cd: ChangeDetectorRef
-   ) { }
+  ) { }
 
   ngOnInit() {
-   let getOnShowArchived = this.companiesStateService.getOnShowArchived().subscribe(data => {
+    let getOnShowArchived = this.companiesStateService.getOnShowArchived().subscribe(data => {
       this.showArchivedCompanies = data;
-     
+
       this.left_filter.setClientType(null);
       this.clearFilter();
       this.setDefaultScoll();
       this.getClientsList(this.companiesStateService.getCompanies());
     })
     this.sub.add(getOnShowArchived);
-    if (this.companiesStateService.getCompanies().length > 0)  this.getClientsList(this.companiesStateService.getCompanies());
-    let getOnCompanies =  this.companiesStateService.getOnCompanies().subscribe((data) => {
+    if (this.companiesStateService.getCompanies().length > 0) this.getClientsList(this.companiesStateService.getCompanies());
+    let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
 
-        this.getClientsList(data);
-      })
-      this.sub.add(getOnCompanies);
-    
+      this.getClientsList(data);
+    })
+    this.sub.add(getOnCompanies);
+
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === ARCHIVE_COMPANY) {
@@ -84,19 +84,19 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getConfirm);
 
-    if (this.devicesState.getAllDevices())   this.devices = this.devicesState.getAllDevices();
-     let getOnDevices = this.devicesState.getOnDevices().subscribe((data) => {
-    
-        this.devices = data;
-      })
-      this.sub.add(getOnDevices);
-    
-    if (this.usersStateService.getAllUsers().length > 0)    this.users = this.usersStateService.getAllUsers();
-    let getOnUsers =  this.usersStateService.getOnUsers().subscribe((data) => {
-        this.users = data;
-      })
-      this.sub.add(getOnUsers);
-    
+    if (this.devicesState.getAllDevices()) this.devices = this.devicesState.getAllDevices();
+    let getOnDevices = this.devicesState.getOnDevices().subscribe((data) => {
+
+      this.devices = data;
+    })
+    this.sub.add(getOnDevices);
+
+    if (this.usersStateService.getAllUsers().length > 0) this.users = this.usersStateService.getAllUsers();
+    let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
+      this.users = data;
+    })
+    this.sub.add(getOnUsers);
+
     let geLefttFilter = this.leftPanelStateService.getOnFilter().subscribe((data) => {
       this.left_filter = data;
       this.setDefaultScoll();
@@ -106,50 +106,49 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     })
     this.sub.add(geLefttFilter);
 
-   let getChangeCompanies = this.companiesStateService.getChangeCompanies().subscribe((data: CompanyUpdate) => {
-      
+    let getChangeCompanies = this.companiesStateService.getChangeCompanies().subscribe((data: CompanyUpdate) => {
+
       if (data.action === 'COMPANY_SAVED' || data.action === 'COMPANY_ARCHIVED') {
-       
+
         const reqIndex = this.reqCompaniesList.findIndex((item) => item.id === data.data.id);
         if (reqIndex > -1) this.reqCompaniesList[reqIndex] = data.data;
-        if (reqIndex === -1){
+        if (reqIndex === -1) {
           this.reqCompaniesList.unshift(data.data);
           this.CompaniesList.unshift(data.data);
-         // this.onRelaodList();
-        } 
+          // this.onRelaodList();
+        }
         const companyIndex = this.CompaniesList.findIndex((item) => item.id === data.data.id);
         if (companyIndex > -1) this.CompaniesList[companyIndex] = data.data;
       }
       if (data.action === 'COMPANY_DEARCHIVED') {
         const reqIndex = this.reqCompaniesList.findIndex((item) => item.id === data.data.id);
         if (reqIndex > -1) this.reqCompaniesList[reqIndex] = data.data;
-        if (this.showArchivedCompanies)
-        {
+        if (this.showArchivedCompanies) {
           const companyIndex = this.CompaniesList.findIndex((item) => item.id === data.data.id);
-          if (companyIndex > -1) this.CompaniesList.splice(companyIndex,1);
+          if (companyIndex > -1) this.CompaniesList.splice(companyIndex, 1);
         }
       }
-      
+
     })
     this.sub.add(getChangeCompanies);
 
-  /*  let getChangeDevices = this.devicesState.getChangeDevices().subscribe((data: DeviceUpdate) => {
-      if (data.action === 'DEVICE_UNINSTALLED' || data.action === 'DEVICE_INSTALLED') {
-      
-        const reqIndex = this.reqCompaniesList.findIndex((item) => item.id === data.data.id);
-        if (reqIndex > -1) this.reqCompaniesList[reqIndex] = data.data;
+    /*  let getChangeDevices = this.devicesState.getChangeDevices().subscribe((data: DeviceUpdate) => {
+        if (data.action === 'DEVICE_UNINSTALLED' || data.action === 'DEVICE_INSTALLED') {
         
-      }
-
-    });*/
+          const reqIndex = this.reqCompaniesList.findIndex((item) => item.id === data.data.id);
+          if (reqIndex > -1) this.reqCompaniesList[reqIndex] = data.data;
+          
+        }
+  
+      });*/
   }
-  onSelectAllCompanies (event) {
+  onSelectAllCompanies(event) {
     if (event.target.checked) {
-     let list_company_table = document.body.querySelectorAll('app-companies-table');
-     list_company_table.forEach(item => {
-      (<any>item.querySelector('input[type="checkbox"]')).checked = true;
-   
-     });
+      let list_company_table = document.body.querySelectorAll('app-companies-table');
+      list_company_table.forEach(item => {
+        (<any>item.querySelector('input[type="checkbox"]')).checked = true;
+
+      });
       this.draftEmailStateService.resetSelectedCompanies();
       this.CompaniesList.forEach(user => {
         this.draftEmailStateService.addSelectedCompany(user);
@@ -159,31 +158,31 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       let list_company_table = document.body.querySelectorAll('app-companies-table');
       list_company_table.forEach(item => {
         (<any>item.querySelector('input[type="checkbox"]')).checked = false;
-     
-       });
+
+      });
     }
   }
   showMobileFilter() {
     document.body.querySelector('app-left-panel-companies').classList.add('show');
   }
- /* private onRelaodList() {
-  
-    let listFilter = this.left_filter.getFilterList(this.reqCompaniesList);
-    let start = 0;
-    let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;
-    let CompaniesList = [];
-    for (let i = start; i < end; i++) {
-      CompaniesList.push(listFilter[i]);
-    }
-    this.CompaniesList = CompaniesList;
-    this.infiniteScrollDisabled = false;
-    if ((this.page_number * 30) > listFilter.length) this.companiesList.setBlockList(true);
-  
-  }*/
+  /* private onRelaodList() {
+   
+     let listFilter = this.left_filter.getFilterList(this.reqCompaniesList);
+     let start = 0;
+     let end = ((this.page_number * 30) > listFilter.length) ? listFilter.length : this.page_number * 30;
+     let CompaniesList = [];
+     for (let i = start; i < end; i++) {
+       CompaniesList.push(listFilter[i]);
+     }
+     this.CompaniesList = CompaniesList;
+     this.infiniteScrollDisabled = false;
+     if ((this.page_number * 30) > listFilter.length) this.companiesList.setBlockList(true);
+   
+   }*/
   public onFilterTags(tags) {
-    
+
     if (tags.length > 0) {
-    let getClientsByTags =   this.companiesService.getClientsByTags(tags).subscribe(data => {
+      let getClientsByTags = this.companiesService.getClientsByTags(tags).subscribe(data => {
         this.showPreloader = true;
         this.setDefaultScoll();
         this.getClientsList(data);
@@ -195,7 +194,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       this.getClientsList(this.companiesStateService.getCompanies());
 
     }
-this.cd.detectChanges();
+    this.cd.detectChanges();
   }
   private onInirCalculate() {
     this.calculateCount.onCalculate(this.reqCompaniesList, this.left_filter);
@@ -203,7 +202,7 @@ this.cd.detectChanges();
   }
   private getClientsList(data) {
     this.reqCompaniesList = data.filter(item => item.accountType === 'CLIENT' && ((!this.showArchivedCompanies) ? !item.deletedAt : item.deletedAt));
-     
+
     this.onInirCalculate();
     this.reqCompaniesList.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
@@ -226,7 +225,7 @@ this.cd.detectChanges();
     this.CompaniesList = [...this.CompaniesList, ...CompaniesList];
     this.infiniteScrollDisabled = false;
     if ((this.page_number * 30) > listFilter.length) this.companiesList.setBlockList(true);
-    
+
 
   }
 
@@ -254,7 +253,7 @@ this.cd.detectChanges();
           this.onFilterAdress();
 
         } else {
-          
+
           this.filter[index].filter = 'DESC';
           this.reqCompaniesList.reverse();
         }
@@ -303,7 +302,7 @@ this.cd.detectChanges();
         if (sort === '' || sort === 'DESC') {
           this.filter[index].filter = 'ASC';
           this.onFilterDevices();
-          
+
         } else {
           this.filter[index].filter = 'DESC';
           this.reqCompaniesList.reverse();
@@ -418,16 +417,16 @@ this.cd.detectChanges();
     this.CompaniesList = [];
   }
   public onDeArchiveCompany(id) {
-   let deArchive =  this.companiesService.deArchive(id).subscribe(data => {
+    let deArchive = this.companiesService.deArchive(id).subscribe(data => {
       let index = this.CompaniesList.findIndex(item => item.id === id);
       if (index > -1) this.CompaniesList.splice(index, 1);
     })
     this.sub.add(deArchive);
   }
   public onArchiveCompany(id) {
-    
-   let archiveCompany =  this.companiesService.archiveCompany(id).subscribe(data => {
-      
+
+    let archiveCompany = this.companiesService.archiveCompany(id).subscribe(data => {
+
       let index = this.CompaniesList.findIndex(item => item.id === id);
       if (index > -1) this.CompaniesList.splice(index, 1);
     })
