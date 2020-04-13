@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TicketsFilter } from '../../tickets/tickets/class/tickets-filter';
+import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.service';
 
 @Component({
   selector: 'app-left-panel-tickets',
@@ -6,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./left-panel-tickets.component.scss']
 })
 export class LeftPanelTicketsComponent implements OnInit {
-
-  constructor() { }
+  ticketsFilter: TicketsFilter = new TicketsFilter();
+  constructor(private ticketsStateService: TicketsStateService) { }
 
   ngOnInit() {
   }
-
+  setTypeFilter(type) {
+    this.ticketsFilter.setListType(type);
+    this.ticketsStateService.onInitFilter(this.ticketsFilter);
+  }
 }

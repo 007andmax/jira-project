@@ -25,6 +25,7 @@ export class TicketsTableItemComponent implements OnInit {
     return (user) ? `${user.firstName} ${user.lastName}` : '';
   }
   getNameForAvatar() {
+    if (!this.requestedUser) return '';
     if (!this.requestedUser.avatar) return `${(this.requestedUser.firstName) ? this.requestedUser.firstName[0].toUpperCase() : ''}${(this.requestedUser.lastName) ? this.requestedUser.lastName[0].toUpperCase() : ''}`;
     return '';
   }
@@ -57,10 +58,9 @@ getAssignedUserNameForAvatar (user) {
 }
   getCompanyName() {
     let company = this.companiesStateService.getCompanies().find(item => item.id === this.ticket.companyId);
-    console.log("company", company);
     return company.name;
   }
   getClassType() {
-    return `priority-icon --${this.ticket.priorityLevel.toLowerCase()}`;
+    return `priority-icon ${(this.ticket.priorityLevel) ? '--' + this.ticket.priorityLevel.toLowerCase() : ''}`;
   }
 }

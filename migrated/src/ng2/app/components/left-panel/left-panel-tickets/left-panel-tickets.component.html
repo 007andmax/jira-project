@@ -6,15 +6,17 @@
   <div class="left-panel-ng2__content">
     
     <div class="left-panel-ng2__content--lists">
-      <div class="list-item">Dashboard</div>
-      <div class="list-item">All tickets</div>
-      <div class="list-item">Open</div>
-      <div class="list-item">Close</div>
-      <div class="list-item">On Hold</div>
-      <div class="list-item">Trash</div>
-      <div class="list-item">Spam</div>
-      <div class="list-item">Users</div>
-      <div class="list-item">Recurring Tickets</div>
+      <!--<div class="list-item">Dashboard</div> -->
+      <div class="list-item" (click)="setTypeFilter('ALL')">All tickets</div>
+      <div class="list-item" (click)="setTypeFilter('UNASSIGNED')">Unassigned</div>
+      <div class="list-item" (click)="setTypeFilter('OPEN')">Open</div>
+      <div class="list-item" (click)="setTypeFilter('CLOSED')">Close</div>
+      <div class="list-item" (click)="setTypeFilter('ON_HOLD')">On Hold</div>
+      <div class="list-item" (click)="setTypeFilter('TRASH')">Trash</div>
+      <div class="list-item" (click)="setTypeFilter('SPAM')">Spam</div>
+      <div class="list-item" (click)="setTypeFilter('USERS')">Users</div>
+      <div class="list-item" (click)="setTypeFilter('RECURRING_TICKETS_OPEN')">Recurring tickets Open</div>
+      <div class="list-item" (click)="setTypeFilter('RECURRING_TICKETS_CLOSED')">Recurring tickets Closed</div>
     </div>
     
     <div class="left-panel-ng2__content--types">

@@ -3,6 +3,7 @@ import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 import { TicketsFilter } from '../class/tickets-filter';
 import { TicketsListService } from '../services/tickets-list.service';
 import { Ticket } from '../../class/ticket';
+import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.service';
 
 @Component({
   selector: 'app-tickets-table',
@@ -15,13 +16,21 @@ export class TicketsTableComponent implements OnInit {
   showPreloader: boolean = true;
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
-  tickets:Array<Ticket> = [];
+  tickets: Array<Ticket> = [];
   constructor(private ticketsService: TicketsService,
-    private ticketsListService: TicketsListService) { }
+    private ticketsListService: TicketsListService,
+    private ticketsStateService: TicketsStateService) { }
 
   ngOnInit() {
-
+    this.ticketsStateService.getOnInitFilter().subscribe(data => {
+      this.ticketsFilter = data;
+      this.showPreloader = true;
+      console.log("this.ticketsFilter",this.ticketsFilter);
+      this.setDefaultScoll();
+      this.onScroll();
+    })
     this.onScroll();
+    
 
   }
   private getTickets() {
@@ -29,7 +38,8 @@ export class TicketsTableComponent implements OnInit {
       this.infiniteScrollDisabled = false;
       return;
     }
-    this.ticketsService.getTickets(this.ticketsFilter.getListTupe(), this.ticketsFilter.getDataForRequest()).subscribe((data:Array<Ticket>) => {
+    this.ticketsFilter.setOffset(this.page_number * 15);
+    this.ticketsService.getTickets(this.ticketsFilter.getListTupe(), this.ticketsFilter.getDataForRequest()).subscribe((data: Array<Ticket>) => {
       console.log("data", data);
 
       this.tickets = [...this.tickets, ...data];
