@@ -105,7 +105,7 @@
   align-items: flex-start;
   justify-content: space-between;
   width: 100%;
-  padding-right: 25px;
+  /*padding-right: 25px;*/
   transition: all .3s;
 }
 
