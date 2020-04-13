@@ -202,6 +202,9 @@ import { OrderByPipe } from './pipe/order-by.pipe';
 import { NgxMaskModule } from 'ngx-mask' 
 import { TaxesComponent } from './components/shared/taxes/taxes.component';
 import { TicketsTableItemComponent } from './components/tickets/tickets/tickets-table/tickets-table-item/tickets-table-item.component';
+import { TicketEditAsideCompanyInfoComponent } from './components/tickets/tickets/ticket-edit-aside-company-info/ticket-edit-aside-company-info.component';
+import { TicketEditAsideDevicesComponent } from './components/tickets/tickets/ticket-edit-aside-devices/ticket-edit-aside-devices.component';
+import { TicketEditAsideUsersComponent } from './components/tickets/tickets/ticket-edit-aside-users/ticket-edit-aside-users.component';
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 declare var angular: any;
@@ -487,7 +490,10 @@ angular.module('quicktech')
     CompanyProductsComponent,
     TaxesComponent,
     GlNumberSettingsComponent,
-    TicketsTableItemComponent
+    TicketsTableItemComponent,
+    TicketEditAsideCompanyInfoComponent,
+    TicketEditAsideDevicesComponent,
+    TicketEditAsideUsersComponent
   ],
   imports: [
     BrowserModule,
