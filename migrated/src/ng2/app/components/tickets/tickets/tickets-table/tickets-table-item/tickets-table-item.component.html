@@ -1,21 +1,37 @@
 <tr>
   <td>
     <div class="d-f">
-      <div class="qt-table-modern__circle-avatar" style="background: #16a4fa;"> NM </div>
+      <div class="qt-table-modern__circle-avatar" [textContent]="getNameForAvatar()"
+        [ngStyle]="{'background': getStyleAvatar(requestedUser),'background-size': 'cover'}"></div>
+      <div [textContent]="getUserName(requestedUser)"></div>
+    </div>
+  </td>
+  <td class="--strong">{{'Tkt# ' + ticket.number + ' - ' + ticket.subject}} <span [ngClass]="getClassType()"></span>
+  </td>
+  <td [textContent]="getCompanyName()"></td>
 
-      <div>Norman Maxwell</div>
-    </div>
+  <td *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers.length > 0">
+    <ng-template ngFor let-user [ngForOf]="multiAssignedUsers" [ngForTrackBy]="trackById">
+      <div class="d-f">
+        <div class="qt-table-modern__circle-avatar" [textContent]="getAssignedUserNameForAvatar(user)"
+          [ngStyle]="{'background': getStyleAvatar(user),'background-size': 'cover'}"></div>
+        <div></div>
+      </div>
+    </ng-template>
+
+
   </td>
-  <td class="--strong">
-    Tkt# 3904 - Checking anitvirus Dimension dentisry  <span class="priority-icon --medium"></span>
-  </td>
-  <td>Avenue Dental Care</td>
-  <td>
+  <td *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers.length === 0"></td>
+  <td *ngIf="ticket.assignedUserId && ticket.multiAssignedUsers.length === 0">
     <div class="d-f">
-      <div class="qt-table-modern__circle-avatar" style="background-image: url(https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)"></div>
-      <div>Hettie Carpenter</div>
+      <div class="qt-table-modern__circle-avatar" [textContent]="getAssignedUserNameForAvatar(assignedUser)"
+        [ngStyle]="{'background': getStyleAvatar(assignedUser),'background-size': 'cover'}"></div>
+      <div [textContent]="getUserName(assignedUser)"></div>
     </div>
-    </td>
-  <td> <span class="tag__modern --info">In Progress</span></td>
-  <td>12:30 pm</td>
+  </td>
+  <td> <span class="tag__modern --info" *ngIf="ticket.status === 'IN_PROGRESS'">In Progress</span>
+    <span class="tag__modern --success" *ngIf="ticket.status === 'COMPLETED'">Completed</span>
+    <span class="tag__modern" *ngIf="ticket.status === null">Unassigned</span>
+    <span class="tag__modern --warning" *ngIf="ticket.status === 'ON_HOLD'">On Hold</span></td>
+  <td [textContent]="getCreateAt()"></td>
 </tr>

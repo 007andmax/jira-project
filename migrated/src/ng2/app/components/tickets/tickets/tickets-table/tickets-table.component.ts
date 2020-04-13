@@ -15,7 +15,7 @@ export class TicketsTableComponent implements OnInit {
   showPreloader: boolean = true;
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
-  tickets = [];
+  tickets:Array<Ticket> = [];
   constructor(private ticketsService: TicketsService,
     private ticketsListService: TicketsListService) { }
 

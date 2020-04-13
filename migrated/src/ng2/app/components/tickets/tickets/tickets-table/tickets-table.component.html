@@ -16,12 +16,12 @@
   [infiniteScrollDisabled]="infiniteScrollDisabled"
   (scrolled)="onScroll()">
     
- <ng-template ngFor let-company
-              [ngForOf]="CompaniesList"
+  <ng-template ngFor let-ticket
+              [ngForOf]="tickets"
               [ngForTrackBy]="trackById">
-   <app-companies-table [showArchivedCompanies]="showArchivedCompanies" [company]="company"></app-companies-table>
+   <app-tickets-table-item  [ticket]="ticket"></app-tickets-table-item>
  </ng-template>
- <div class="loading" *ngIf="showPreloader"></div>
+ <div class="loading" *ngIf="showPreloader"></div> 
  
   <!--   <tr>
       <td>

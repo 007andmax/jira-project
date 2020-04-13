@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TicketAddAsideComponent implements OnInit {
 
-  opened = true;
+  opened = false;
   mode = 'edit';
 
   constructor() {}
