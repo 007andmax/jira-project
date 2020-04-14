@@ -68,28 +68,28 @@
           </div>
         </div>
       </div>
-  
       <div class="filter-item">
         <i class="icn-sm report-caret-icon"></i>
-        <div class="filter-item__header">
+        <div class="filter-item__header" (click)="toggleFilter($event)">
           By User
         </div>
         <div class="filter-item__content">
           <div class="dark-dropdown">
-            <!--            <app-select-search [class]="['dark-dropdown']"-->
-            <!--                               [field]="'name'" [editItem]="selectedCompany" [list]="companies"-->
-            <!--                               (onSelectedItem)="onSelectCompany($event)"></app-select-search>-->
+            <app-select-search #usersDp [placeholder]="'Select User'"  [class]="['dark-dropdown']" [editItem]="selectedUser"    
+            [list]="getUserList()"
+                               (onSelectedItem)="onSelectUser($event)"></app-select-search>
           </div>
           <div class="resent-block">
             <div class="resent-block__header">Recent</div>
             <div class="resent-block__content">
-              <!--              <ng-template ngFor let-item [ngForOf]="companiesHistory" let-i="index" [ngForTrackBy]="trackByIndex">-->
-              <!--                <p [textContent]="item" (click)="selectClientCompany(item)"></p>-->
-              <!--              </ng-template>-->
+              <ng-template ngFor let-item [ngForOf]="usersHistory" let-i="index" [ngForTrackBy]="trackByIndex">
+                <p [textContent]="item" (click)="selectUser(item)"></p>
+              </ng-template>
             </div>
           </div>
         </div>
       </div>
+      
       
       <div class="filter-item">
         <i class="icn-sm report-caret-icon"></i>
@@ -98,7 +98,7 @@
         </div>
         <div class="filter-item__content">
           <div class="dark-dropdown">
-            <app-select-search [placeholder]="'Select Company'" [class]="['dark-dropdown']"
+            <app-select-search [placeholder]="'Select Tech User'" [class]="['dark-dropdown']"
             [editItem]="selectedTechUser"  [list]="getTechUserList()"
               (onSelectedItem)="onSelectTechUser($event)"></app-select-search>
           </div>
