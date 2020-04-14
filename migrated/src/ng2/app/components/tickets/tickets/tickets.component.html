@@ -1,10 +1,10 @@
 <app-left-panel-tickets></app-left-panel-tickets>
 
-<div class="page-list">
+<div class="page-list" *ngIf="listType !== 'RECURRING_TICKETS'">
   <app-tickets-header></app-tickets-header>
   <app-tickets-table></app-tickets-table>
 </div>
-
+<app-recurring-tickets *ngIf="listType === 'RECURRING_TICKETS'"></app-recurring-tickets>
 <!--<app-ticket-add-aside></app-ticket-add-aside>-->
 <app-ticket-edit-aside></app-ticket-edit-aside>
 

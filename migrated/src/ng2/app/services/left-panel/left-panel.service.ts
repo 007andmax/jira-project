@@ -29,6 +29,12 @@ export class LeftPanelService {
   public getCompaniesHistory() {
     return this.http.get(this.apiUrl + 'customStorage/user?customKey=userPageFilterByCompanyHistory');
   }
+  public getCompaniesHistoryTickets() {
+    return this.http.get(this.apiUrl + 'customStorage/user?customKey=ticketPageFilterByCompanyHistory');
+  }
+  public getCompaniesHistoryTechUsers() {
+    return this.http.get(this.apiUrl + 'customStorage/user?customKey=ticketPageFilterByTechUsersHistory');
+  }
 
   public getSalesHistory() {
     return this.http.get(this.apiUrl + 'customStorage/user?customKey=companiesPageFilterBySalesHistory');

@@ -11,13 +11,15 @@
   <td [textContent]="getCompanyName()"></td>
 
   <td *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers.length > 0">
-    <ng-template ngFor let-user [ngForOf]="multiAssignedUsers" [ngForTrackBy]="trackById">
+   
       <div class="d-f">
+        <ng-template ngFor let-user [ngForOf]="ticket.multiAssignedUsers" [ngForTrackBy]="trackById">
         <div class="qt-table-modern__circle-avatar" [textContent]="getAssignedUserNameForAvatar(user)"
           [ngStyle]="{'background': getStyleAvatar(user),'background-size': 'cover'}"></div>
-        <div></div>
+      
+      </ng-template>
       </div>
-    </ng-template>
+   
 
 
   </td>

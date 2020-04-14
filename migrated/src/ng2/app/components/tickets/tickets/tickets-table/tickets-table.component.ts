@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 import { TicketsFilter } from '../class/tickets-filter';
 import { TicketsListService } from '../services/tickets-list.service';
 import { Ticket } from '../../class/ticket';
 import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-tickets-table',
@@ -11,24 +12,26 @@ import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.se
   styleUrls: ['./tickets-table.component.scss'],
   providers: [TicketsListService]
 })
-export class TicketsTableComponent implements OnInit {
+export class TicketsTableComponent implements OnInit,OnDestroy {
   ticketsFilter: TicketsFilter = new TicketsFilter();
   showPreloader: boolean = true;
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
   tickets: Array<Ticket> = [];
+  sub:Subscription = new Subscription();
   constructor(private ticketsService: TicketsService,
     private ticketsListService: TicketsListService,
     private ticketsStateService: TicketsStateService) { }
 
   ngOnInit() {
-    this.ticketsStateService.getOnInitFilter().subscribe(data => {
+   let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
       this.ticketsFilter = data;
       this.showPreloader = true;
       console.log("this.ticketsFilter",this.ticketsFilter);
       this.setDefaultScoll();
       this.onScroll();
     })
+    this.sub.add(getOnInitFilter);
     this.onScroll();
     
 
@@ -58,6 +61,9 @@ export class TicketsTableComponent implements OnInit {
     this.page_number = 0;
     this.ticketsListService.setBlockList(false);
     this.tickets = [];
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
   public trackById(index, item) {
     return item.id;

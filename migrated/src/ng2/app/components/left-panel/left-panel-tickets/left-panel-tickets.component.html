@@ -15,6 +15,7 @@
       <div class="list-item" [ngClass]="{'active': listType === 'TRASH'}" (click)="setTypeFilter('TRASH')">Trash</div>
       <div class="list-item" [ngClass]="{'active': listType === 'SPAM'}" (click)="setTypeFilter('SPAM')">Spam</div>
       <div class="list-item" [ngClass]="{'active': listType === 'USERS'}" (click)="setTypeFilter('USERS')">Users</div>
+      <div class="list-item" [ngClass]="{'active': listType === 'RECURRING_TICKETS'}" (click)="setTypeFilter('RECURRING_TICKETS')">Recurring tickets</div>
       <div class="list-item" [ngClass]="{'active': listType === 'RECURRING_TICKETS_OPEN'}" (click)="setTypeFilter('RECURRING_TICKETS_OPEN')">Recurring tickets Open</div>
       <div class="list-item" [ngClass]="{'active': listType === 'RECURRING_TICKETS_CLOSED'}" (click)="setTypeFilter('RECURRING_TICKETS_CLOSED')">Recurring tickets Closed</div>
     </div>
@@ -46,21 +47,23 @@
     <div class="left-panel-ng2__content--filters">
       <div class="filter-item">
         <i class="icn-sm report-caret-icon"></i>
-        <div class="filter-item__header">
+        <div class="filter-item__header" (click)="toggleFilter($event)">
           By Company
         </div>
         <div class="filter-item__content">
           <div class="dark-dropdown">
-<!--            <app-select-search [class]="['dark-dropdown']"-->
-<!--                               [field]="'name'" [editItem]="selectedCompany" [list]="companies"-->
-<!--                               (onSelectedItem)="onSelectCompany($event)"></app-select-search>-->
+            <app-select-search [placeholder]="'Select Company'" [class]="['dark-dropdown']"
+            [field]="'name'" [editItem]="selectedCompany"  [list]="companies"
+              (onSelectedItem)="onSelectCompany($event)"></app-select-search>
           </div>
           <div class="resent-block">
             <div class="resent-block__header">Recent</div>
             <div class="resent-block__content">
-<!--              <ng-template ngFor let-item [ngForOf]="companiesHistory" let-i="index" [ngForTrackBy]="trackByIndex">-->
-<!--                <p [textContent]="item" (click)="selectClientCompany(item)"></p>-->
-<!--              </ng-template>-->
+              <ng-template ngFor let-item [ngForOf]="companiesHistory" let-i="index" [ngForTrackBy]="trackByIndex">
+                <p [textContent]="item" (click)="selectClientCompany(item)"></p>
+              </ng-template>
+
+
             </div>
           </div>
         </div>
@@ -87,24 +90,26 @@
           </div>
         </div>
       </div>
-  
+      
       <div class="filter-item">
         <i class="icn-sm report-caret-icon"></i>
-        <div class="filter-item__header">
+        <div class="filter-item__header" (click)="toggleFilter($event)">
           By Tech Team
         </div>
         <div class="filter-item__content">
           <div class="dark-dropdown">
-            <!--            <app-select-search [class]="['dark-dropdown']"-->
-            <!--                               [field]="'name'" [editItem]="selectedCompany" [list]="companies"-->
-            <!--                               (onSelectedItem)="onSelectCompany($event)"></app-select-search>-->
+            <app-select-search [placeholder]="'Select Company'" [class]="['dark-dropdown']"
+            [editItem]="selectedTechUser"  [list]="getTechUserList()"
+              (onSelectedItem)="onSelectTechUser($event)"></app-select-search>
           </div>
           <div class="resent-block">
             <div class="resent-block__header">Recent</div>
             <div class="resent-block__content">
-              <!--              <ng-template ngFor let-item [ngForOf]="companiesHistory" let-i="index" [ngForTrackBy]="trackByIndex">-->
-              <!--                <p [textContent]="item" (click)="selectClientCompany(item)"></p>-->
-              <!--              </ng-template>-->
+              <ng-template ngFor let-item [ngForOf]="techUsersHistory" let-i="index" [ngForTrackBy]="trackByIndex">
+                <p [textContent]="item" (click)="selectTechUser(item)"></p>
+              </ng-template>
+
+
             </div>
           </div>
         </div>
