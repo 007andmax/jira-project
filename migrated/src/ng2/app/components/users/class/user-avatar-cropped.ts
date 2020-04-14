@@ -1,5 +1,5 @@
 export class UserAvatarCropped {
-        createdAt: number;
+    createdAt: number;
     deletedAt: number;
     id: string;
     isOpened: boolean;

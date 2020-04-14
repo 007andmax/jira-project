@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TitleListType } from './class/title-list-type';
+import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.service';
 
 @Component({
   selector: 'app-tickets-header',
@@ -6,10 +8,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tickets-header.component.scss']
 })
 export class TicketsHeaderComponent implements OnInit {
-
-  constructor() { }
+  titleListTypes:Array<TitleListType> = [new TitleListType('All Tickets','ALL'),
+  new TitleListType('Unassigned','UNASSIGNED'),
+  new TitleListType('Open','OPEN'),
+  new TitleListType('Close','CLOSED'),
+  new TitleListType('On Hold','ON_HOLD'),
+  new TitleListType('Trash','TRASH'),
+  new TitleListType('Spam','SPAM'),
+  new TitleListType('Users','USERS'),
+  new TitleListType('Recurring tickets Open','RECURRING_TICKETS_OPEN'),
+  new TitleListType('Recurring tickets Closed','RECURRING_TICKETS_CLOSED')];
+  title:string = 'Users';
+  constructor(private ticketsStateService:TicketsStateService) { }
 
   ngOnInit() {
+    this.ticketsStateService.getOnInitFilter().subscribe(data => {
+      let listType = this.titleListTypes.find(item => item.type === data.listType);
+      this.title = listType.title;
+    })
   }
 
 }

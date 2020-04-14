@@ -9,11 +9,13 @@ import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.se
 })
 export class LeftPanelTicketsComponent implements OnInit {
   ticketsFilter: TicketsFilter = new TicketsFilter();
+  listType:string = "USERS";
   constructor(private ticketsStateService: TicketsStateService) { }
 
   ngOnInit() {
   }
   setTypeFilter(type) {
+    this.listType = type;
     this.ticketsFilter.setListType(type);
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
   }
