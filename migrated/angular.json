@@ -85,7 +85,6 @@
               "src/ng1/styles/new-style.css",
               "src/ng1/styles/nv.d3.css",
               "src/ng1/styles/daterangepicker.css",
-              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.scss",
               "./node_modules/ngx-toastr/toastr.css",
               "src/ng2/app/components/device/styles.scss"
