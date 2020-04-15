@@ -7,15 +7,15 @@ import { Subscription } from 'rxjs';
   templateUrl: './tickets.component.html',
   styleUrls: ['./tickets.component.scss']
 })
-export class TicketsComponent implements OnInit,OnDestroy {
-listType:string = "USERS";
-sub:Subscription = new Subscription();
-  constructor(private ticketsStateService:TicketsStateService) { }
- 
+export class TicketsComponent implements OnInit, OnDestroy {
+  listType: string = "USERS";
+  sub: Subscription = new Subscription();
+  constructor(private ticketsStateService: TicketsStateService) { }
+
 
   ngOnInit() {
-   let getOnInitFilter =  this.ticketsStateService.getOnInitFilter().subscribe(data => {
-   this.listType = data.listType;
+    let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
+      this.listType = data.listType;
     })
     this.sub.add(getOnInitFilter);
   }

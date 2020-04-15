@@ -1,3 +1,6 @@
+import { Company } from 'src/ng2/app/interfaces/company/company';
+import { User } from '../../../users/class/user';
+
 export class TicketsFilter {
     listType: string = "USERS";
     title: string = "All Tickets";
@@ -11,8 +14,20 @@ export class TicketsFilter {
     payloadRecurringTicketsOpen = null;
     payloadUser = null;
     payloadSpam = null;
+    selectedCompany: Company = null;
+    selectedTechUser: User = null;
+    selectedUser: User = null;
     constructor() {
         this.onInitUser();
+    }
+    public setCompany(data) {
+        this.selectedCompany = data;
+    }
+    public setTechUser(data) {
+        this.selectedTechUser = data;
+    }
+    public setUser(data) {
+        this.selectedUser = data;
     }
     public setListType(type) {
         this.listType = type;
@@ -33,30 +48,57 @@ export class TicketsFilter {
         return this.listType;
     }
     public setOffset(offset) {
-        if (this.listType === "ALL")  this.payloadAll.offset = offset;
-        if (this.listType === "UNASSIGNED")  this.payloadUnassigned.offset = offset;
-        if (this.listType === "OPEN")  this.payloadOpen.offset = offset;
-        if (this.listType === "CLOSED")  this.payloadClosed.offset = offset;
-        if (this.listType === "ON_HOLD")  this.payloadOnhold.offset = offset;
-        if (this.listType === "TRASH")  this.payloadTrash.offset = offset;
-        if (this.listType === "SPAM")  this.payloadSpam.offset = offset;
-        if (this.listType === "USERS")  this.payloadUser.offset = offset;
-        if (this.listType === "RECURRING_TICKETS_OPEN")  this.payloadRecurringTicketsOpen.offset = offset;
-        if (this.listType === "RECURRING_TICKETS_CLOSED")  this.payloadRecurringTicketsClosed.offset = offset;
-       
+        if (this.listType === "ALL") this.payloadAll.offset = offset;
+        if (this.listType === "UNASSIGNED") this.payloadUnassigned.offset = offset;
+        if (this.listType === "OPEN") this.payloadOpen.offset = offset;
+        if (this.listType === "CLOSED") this.payloadClosed.offset = offset;
+        if (this.listType === "ON_HOLD") this.payloadOnhold.offset = offset;
+        if (this.listType === "TRASH") this.payloadTrash.offset = offset;
+        if (this.listType === "SPAM") this.payloadSpam.offset = offset;
+        if (this.listType === "USERS") this.payloadUser.offset = offset;
+        if (this.listType === "RECURRING_TICKETS_OPEN") this.payloadRecurringTicketsOpen.offset = offset;
+        if (this.listType === "RECURRING_TICKETS_CLOSED") this.payloadRecurringTicketsClosed.offset = offset;
+
     }
     public getDataForRequest() {
-        if (this.listType === "ALL") return this.payloadAll;
-        if (this.listType === "UNASSIGNED") return this.payloadUnassigned;
-        if (this.listType === "OPEN") return this.payloadOpen;
-        if (this.listType === "CLOSED") return this.payloadClosed;
-        if (this.listType === "ON_HOLD") return this.payloadOnhold;
-        if (this.listType === "TRASH") return this.payloadTrash;
-        if (this.listType === "SPAM") return this.payloadSpam;
-        if (this.listType === "USERS") return this.payloadUser;
-        if (this.listType === "RECURRING_TICKETS_OPEN") return this.payloadRecurringTicketsOpen;
-        if (this.listType === "RECURRING_TICKETS_CLOSED") return this.payloadRecurringTicketsClosed;
+        let payload = null;
+        if (this.listType === "ALL") payload = JSON.parse(JSON.stringify(this.payloadAll));  
+        if (this.listType === "UNASSIGNED") payload = JSON.parse(JSON.stringify(this.payloadUnassigned)); 
+        if (this.listType === "OPEN") payload = JSON.parse(JSON.stringify(this.payloadOpen));   
+        if (this.listType === "CLOSED") payload = JSON.parse(JSON.stringify(this.payloadClosed));  
+        if (this.listType === "ON_HOLD") payload = JSON.parse(JSON.stringify(this.payloadOnhold));  
+        if (this.listType === "TRASH") payload = JSON.parse(JSON.stringify(this.payloadTrash));   
+        if (this.listType === "SPAM") payload = JSON.parse(JSON.stringify(this.payloadSpam));  
+        if (this.listType === "USERS")  payload = JSON.parse(JSON.stringify(this.payloadUser));
+        if (this.listType === "RECURRING_TICKETS_OPEN") payload = JSON.parse(JSON.stringify(this.payloadRecurringTicketsOpen));   
+        if (this.listType === "RECURRING_TICKETS_CLOSED") payload = JSON.parse(JSON.stringify(this.payloadRecurringTicketsClosed));  
+        if (this.selectedCompany) {
+            payload.groupFieldFilters[0].fieldFilterDtos.push({
+                operator: "EQ",
+                path: "companyId",
+                values: [this.selectedCompany.id]
+            });
+            payload.groupFieldFilters[0].predicateRule = "AND";
 
+        }
+        if (this.selectedTechUser) {
+            payload.groupFieldFilters[0].fieldFilterDtos.push({
+                operator: "EQ",
+                path: "assignedUser.id",
+                values: [this.selectedTechUser.id]
+            });
+            payload.groupFieldFilters[0].predicateRule = "AND";
+        }
+        if (this.selectedUser) {
+            console.log("selectedUser",this.selectedUser);
+            payload.groupFieldFilters[0].fieldFilterDtos.push({
+                operator: "EQ",
+                path: "createdUserId",
+                values: [this.selectedUser.id]
+            });
+            payload.groupFieldFilters[0].predicateRule = "AND";
+        }
+        return payload;
     }
 
     public onInitAll() {

@@ -63,28 +63,7 @@ export class LeftPanelTicketsComponent implements OnInit {
     this.ticketsFilter.setListType(type);
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
   }
-  public onSelectCompany(item) {
-    this.usersDp.clearClient();
-    if (!item) {
-      this.clearSelectedCompany();
-      return;
-    }
 
-    this.selectedCompany = null;
-    this.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.company.id === item.id));
-    //  this.filter.setCompany(item.id);
-    //  this.usersStateService.onInitFilter(this.filter);
-    let find = this.companiesHistory.find(history => history === item.name);
-    if (!find) {
-      this.companiesHistory.pop();
-      this.companiesHistory.unshift(item.name);
-    }
-
-    this.companiesService.setСustomStorage("ticketPageFilterByCompanyHistory", this.companiesHistory).subscribe(data => {
-
-    })
-
-  }
   onGetUsers(data) {
     this.users = data.filter(item => {
       if (item.accountType !== 'TECH' && !item.deletedAt) {
@@ -107,8 +86,12 @@ export class LeftPanelTicketsComponent implements OnInit {
     let indexCompany = this.companiesState.getCompanies().findIndex(company => company.name === item);
     //  this.showClearIndustry = true;
     // this.clientIndustry = item;
+    if (indexCompany > -1) {
+      this.selectedCompany = this.companiesState.getCompanies()[indexCompany];
+      this.ticketsFilter.setCompany(this.companiesState.getCompanies()[indexCompany]);
+      this.ticketsStateService.onInitFilter(this.ticketsFilter);
+    }
 
-    this.selectedCompany = this.companiesState.getCompanies()[indexCompany];
     //  this.filter.setCompany(this.companiesState.getCompanies()[indexCompany].id);
     //  this.usersStateService.onInitFilter(this.filter);
   }
@@ -120,8 +103,12 @@ export class LeftPanelTicketsComponent implements OnInit {
     console.log("indexTechUser", indexTechUser);
     //  this.showClearIndustry = true;
     // this.clientIndustry = item;
+    if (indexTechUser > -1) {
+      this.selectedTechUser = `${this.techUsersList[indexTechUser].firstName} ${this.techUsersList[indexTechUser].lastName}`;
+      this.ticketsFilter.setTechUser(this.techUsersList[indexTechUser]);
+      this.ticketsStateService.onInitFilter(this.ticketsFilter);
+    }
 
-    this.selectedTechUser = `${this.techUsersList[indexTechUser].firstName} ${this.techUsersList[indexTechUser].lastName}`;
     //  this.filter.setCompany(this.companiesState.getCompanies()[indexCompany].id);
     //  this.usersStateService.onInitFilter(this.filter);
   }
@@ -132,8 +119,12 @@ export class LeftPanelTicketsComponent implements OnInit {
     console.log("indexhUser", indexhUser);
     //  this.showClearIndustry = true;
     // this.clientIndustry = item;
+    if (indexhUser > -1) {
+      this.selectedUser = `${this.users[indexhUser].firstName} ${this.users[indexhUser].lastName}`;
+      this.ticketsFilter.setUser(this.users[indexhUser]);
+      this.ticketsStateService.onInitFilter(this.ticketsFilter);
+    }
 
-    this.selectedUser = `${this.users[indexhUser].firstName} ${this.users[indexhUser].lastName}`;
     //  this.filter.setCompany(this.companiesState.getCompanies()[indexCompany].id);
     //  this.usersStateService.onInitFilter(this.filter);
   }
@@ -158,43 +149,84 @@ export class LeftPanelTicketsComponent implements OnInit {
     // this.filter.setCompany(null);
     //  this.usersStateService.onInitFilter(this.filter);
   }
-  onSelectTechUser(item) {
+  public onSelectCompany(item) {
+    console.log("item", item);
+    this.usersDp.clearClient();
     if (!item) {
+      this.ticketsFilter.setCompany(null);
+      this.clearSelectedCompany();
+      this.users = [];
+    } else {
+      this.ticketsFilter.setCompany(item);
+      this.selectedCompany = null;
+      this.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.company.id === item.id));
+      //  this.filter.setCompany(item.id);
+      //  this.usersStateService.onInitFilter(this.filter);
+      let find = this.companiesHistory.find(history => history === item.name);
+      if (!find) {
+        this.companiesHistory.pop();
+        this.companiesHistory.unshift(item.name);
+      }
+
+      this.companiesService.setСustomStorage("ticketPageFilterByCompanyHistory", this.companiesHistory).subscribe(data => {
+
+      })
+    }
+
+    console.log("item", this.ticketsFilter.selectedCompany);
+    this.ticketsStateService.onInitFilter(this.ticketsFilter);
+  }
+  onSelectTechUser(item) {
+    console.log("item", item);
+    if (!item) {
+      this.ticketsFilter.setTechUser(null);
       this.clearSelectedTechUser();
-      return;
+
+    } else {
+      this.selectedTechUser = null;
+
+      //  this.filter.setCompany(item.id);
+      //  this.usersStateService.onInitFilter(this.filter);
+      let indexTechUser = this.techUsersList.findIndex(user => `${user.firstName} ${user.lastName}` === item);
+      if (indexTechUser > -1) this.ticketsFilter.setTechUser(this.techUsersList[indexTechUser]);
+      let find = this.techUsersHistory.find(history => history === item);
+      if (!find) {
+        this.techUsersHistory.pop();
+        this.techUsersHistory.unshift(item);
+      }
+
+      this.companiesService.setСustomStorage("ticketPageFilterByTechUsersHistory", this.techUsersHistory).subscribe(data => {
+
+      })
     }
-    this.selectedTechUser = null;
 
-    //  this.filter.setCompany(item.id);
-    //  this.usersStateService.onInitFilter(this.filter);
-    let find = this.techUsersHistory.find(history => history === item);
-    if (!find) {
-      this.techUsersHistory.pop();
-      this.techUsersHistory.unshift(item);
-    }
-
-    this.companiesService.setСustomStorage("ticketPageFilterByTechUsersHistory", this.techUsersHistory).subscribe(data => {
-
-    })
+    this.ticketsStateService.onInitFilter(this.ticketsFilter);
   }
   onSelectUser(item) {
+console.log("item",item);
     if (!item) {
+      this.ticketsFilter.setUser(null);
       this.clearSelectedUser();
-      return;
+
+    } else {
+      this.selectedUser = null;
+
+      //  this.filter.setCompany(item.id);
+      //  this.usersStateService.onInitFilter(this.filter);
+      let indexhUser = this.users.findIndex(user => `${user.firstName} ${user.lastName}` === item);
+      if (indexhUser > -1) this.ticketsFilter.setUser(this.users[indexhUser]);
+      let find = this.usersHistory.find(history => history === item);
+      if (!find) {
+        this.usersHistory.pop();
+        this.usersHistory.unshift(item);
+      }
+
+      this.companiesService.setСustomStorage("ticketPageFilterByClientUsersHistory", this.usersHistory).subscribe(data => {
+
+      })
     }
-    this.selectedUser = null;
-
-    //  this.filter.setCompany(item.id);
-    //  this.usersStateService.onInitFilter(this.filter);
-    let find = this.usersHistory.find(history => history === item);
-    if (!find) {
-      this.usersHistory.pop();
-      this.usersHistory.unshift(item);
-    }
-
-    this.companiesService.setСustomStorage("ticketPageFilterByClientUsersHistory", this.usersHistory).subscribe(data => {
-
-    })
+    console.log("ticketsFilter.selectedUser",this.ticketsFilter.selectedUser);
+    this.ticketsStateService.onInitFilter(this.ticketsFilter);
   }
   getTechUserList() {
     return this.techUsersList.map(item => {
