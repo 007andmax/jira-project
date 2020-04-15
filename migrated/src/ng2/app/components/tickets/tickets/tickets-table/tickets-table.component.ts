@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 import { TicketsFilter } from '../class/tickets-filter';
 import { TicketsListService } from '../services/tickets-list.service';
@@ -21,6 +21,7 @@ export class TicketsTableComponent implements OnInit,OnDestroy {
   sub:Subscription = new Subscription();
   constructor(private ticketsService: TicketsService,
     private ticketsListService: TicketsListService,
+    public cd: ChangeDetectorRef,
     private ticketsStateService: TicketsStateService) { }
 
   ngOnInit() {
@@ -50,6 +51,7 @@ export class TicketsTableComponent implements OnInit,OnDestroy {
       if (data.length > 15) this.ticketsListService.setBlockList(true);
       this.page_number += 1;
       this.showPreloader = false;
+      this.cd.detectChanges();
     })
   }
   public onScroll() {

@@ -49,8 +49,8 @@
         By tags
       </div>
     
-      <app-left-panel-tags-companies [blockCreateTag]="true">
-      </app-left-panel-tags-companies>
+      <app-left-panel-tags [type]="'ALL'" [blockCreateTag]="true" (tagsChange)="onChangeTags($event)"> 
+      </app-left-panel-tags>
     </div>
   
   

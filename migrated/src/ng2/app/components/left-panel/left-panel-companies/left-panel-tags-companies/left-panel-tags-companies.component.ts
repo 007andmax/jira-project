@@ -1,19 +1,19 @@
 import { Component, OnInit, OnDestroy, Input, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { FormControl } from '@angular/forms';
- 
+
 import { Subscription } from 'rxjs';
-import { CompanyTagsService } from '../../../companies/company-tags/services/company-tags.service';
- 
+
 import { MatChipInputEvent } from '@angular/material';
 import { Tag } from 'src/ng2/app/interfaces/tag/tag';
+import { TagsService } from 'src/ng2/app/services/tags/tags.service';
 
 @Component({
-  selector: 'app-left-panel-tags-companies',
+  selector: 'app-left-panel-tags',
   templateUrl: './left-panel-tags-companies.component.html',
   styleUrls: ['./left-panel-tags-companies.component.scss']
 })
-export class LeftPanelTagsCompaniesComponent implements OnInit, OnDestroy {
+export class LeftPanelTagsComponent implements OnInit, OnDestroy {
 
   visible = true;
   selectable = true;
@@ -27,64 +27,75 @@ export class LeftPanelTagsCompaniesComponent implements OnInit, OnDestroy {
   reqTags: Array<Tag> = [];
   tags: Array<Tag> = [];
   sub = new Subscription();
-  editItem:any;
+  editItem: any;
+  @Input() type: string = "COMPANY";
   @Input() blockCreateTag: boolean = false;
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @Output() tagsChange = new EventEmitter();
-  
+
   /**
    * Creates an instance of the TagsComponent with the injected services
    * @param {TagsService} tagsService Service to work with tags
    * @param {TagsStateService} tagsState to work with tags state
    */
   public constructor(
-    private tagsService: CompanyTagsService,
-     
+    private tagsService: TagsService
   ) { }
 
   /**
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-    this.tagsService.getTags().subscribe((data) => {
-      this.tags = data.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
-      1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
-      this.reqTags = data;
-    })
-    
-     
+    if (this.type === "COMPANY") {
+      this.tagsService.geCompanytTags().subscribe((data) => {
+        this.tags = data.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
+          1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
+        this.reqTags = data;
+      })
+    } else {
+      this.tagsService.getTags().subscribe((data) => {
+        this.tags = data.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
+          1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
+        this.reqTags = data;
+      })
+    }
+
+
+
   }
 
   onSearch(event) {
-     
+
     this.tags = this.reqTags.filter(item => item.word.includes(event.target.value));
   }
-   
+
 
   /**
    * Add selected tag
    * @param event - selected tag
    */
   public add(event: MatChipInputEvent): void {
-if (this.blockCreateTag) return;
+    if (this.blockCreateTag) return;
     // if (!this.matAutocomplete.isOpen) {
     const input = event.input;
     const value = event.value;
 
     if ((value || '').trim()) {
       let tag: Tag = {
-        colorCode: 0, usedCounter: 0, word: value.trim(), id :''
+        colorCode: 0, usedCounter: 0, word: value.trim(), id: ''
+      }
+      if (this.type === "COMPANY") {
+        this.tagsService.setCompanyTags(tag.word).subscribe((res) => {
+          tag.id = res.id;
+
+          this.reqTags.push(tag);
+          this.tags = this.reqTags;
+          this.selectedTag.push(tag);
+          this.tagsChange.emit(this.selectedTag);
+        });
       }
 
-      this.tagsService.setTags(tag.word).subscribe((res) => {
-        tag.id = res.id;
-        
-        this.reqTags.push(tag);
-        this.tags = this.reqTags;
-        this.selectedTag.push(tag);
-       this.tagsChange.emit(this.selectedTag);
-      });
-    
+
     }
     if (input) {
       input.value = '';
@@ -110,9 +121,9 @@ if (this.blockCreateTag) return;
    */
   public selected(tag): void {
     this.selectedTag.push(tag);
-  
+
     this.tagsChange.emit(this.selectedTag);
-  //  this.userInput.nativeElement.blur();
+    //  this.userInput.nativeElement.blur();
     this.tagCtrl.setValue(null);
     this.tags = this.reqTags;
   }

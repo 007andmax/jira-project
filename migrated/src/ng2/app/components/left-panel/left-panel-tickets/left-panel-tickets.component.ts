@@ -26,6 +26,7 @@ export class LeftPanelTicketsComponent implements OnInit {
   companiesHistory = [];
   techUsersHistory = [];
   techUsersList = [];
+  blockFilterUser: boolean = false;
   constructor(private ticketsStateService: TicketsStateService,
     private companiesState: CompaniesStateService,
     private usersStateService: UsersStateService,
@@ -151,6 +152,7 @@ export class LeftPanelTicketsComponent implements OnInit {
   }
   public onSelectCompany(item) {
     console.log("item", item);
+    this.blockFilterUser = true;
     this.usersDp.clearClient();
     if (!item) {
       this.ticketsFilter.setCompany(null);
@@ -203,7 +205,7 @@ export class LeftPanelTicketsComponent implements OnInit {
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
   }
   onSelectUser(item) {
-console.log("item",item);
+    console.log("item", item);
     if (!item) {
       this.ticketsFilter.setUser(null);
       this.clearSelectedUser();
@@ -225,7 +227,12 @@ console.log("item",item);
 
       })
     }
-    console.log("ticketsFilter.selectedUser",this.ticketsFilter.selectedUser);
+    console.log("ticketsFilter.selectedUser", this.ticketsFilter.selectedUser);
+    if (!this.blockFilterUser) this.ticketsStateService.onInitFilter(this.ticketsFilter);
+    this.blockFilterUser = false;
+  }
+  onChangeTags(tags) {
+    this.ticketsFilter.setTags(tags);
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
   }
   getTechUserList() {

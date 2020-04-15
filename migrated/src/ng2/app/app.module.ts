@@ -91,7 +91,7 @@ import { CompanyEditAsideComponent } from './components/companies/company-edit-a
 import { CompanyTagsComponent } from './components/companies/company-tags/company-tags.component';
 import { DraftEmailComponent } from './components/shared/draft-email/draft-email.component';
 import { DraftEmailRecipientsComponent } from './components/shared/draft-email/draft-email-recipients/draft-email-recipients.component';
-import { LeftPanelTagsCompaniesComponent } from './components/left-panel/left-panel-companies/left-panel-tags-companies/left-panel-tags-companies.component';
+import { LeftPanelTagsComponent } from './components/left-panel/left-panel-companies/left-panel-tags-companies/left-panel-tags-companies.component';
 import { SelectSearchComponent } from './components/shared/select-search/select-search.component';
 import { CompanyPasswordManagerComponent } from './components/company-password-manager/company-password-manager.component';
 import { CompanyPasswoordManagerHeaderComponent } from './components/company-password-manager/passwoord-manager-header/passwoord-manager-header.component';
@@ -403,7 +403,7 @@ angular.module('quicktech')
     CompanyTagsComponent,
     DraftEmailComponent,
     DraftEmailRecipientsComponent,
-    LeftPanelTagsCompaniesComponent,
+    LeftPanelTagsComponent,
     SelectSearchComponent,
     CompanyPasswordManagerComponent,
     CompanyPasswoordManagerHeaderComponent,

@@ -14,11 +14,15 @@ export class TicketsFilter {
     payloadRecurringTicketsOpen = null;
     payloadUser = null;
     payloadSpam = null;
+    tags = [];
     selectedCompany: Company = null;
     selectedTechUser: User = null;
     selectedUser: User = null;
     constructor() {
         this.onInitUser();
+    }
+    public setTags(data) {
+        this.tags = data;
     }
     public setCompany(data) {
         this.selectedCompany = data;
@@ -95,6 +99,16 @@ export class TicketsFilter {
                 operator: "EQ",
                 path: "createdUserId",
                 values: [this.selectedUser.id]
+            });
+            payload.groupFieldFilters[0].predicateRule = "AND";
+        }
+        if (this.tags.length > 0) {
+            payload.groupFieldFilters[0].fieldFilterDtos.push({
+                operator: "IN",
+                path: "tags.id",
+                values: this.tags.map(item =>  {
+                    return item.id;
+                })
             });
             payload.groupFieldFilters[0].predicateRule = "AND";
         }
