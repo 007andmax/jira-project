@@ -191,72 +191,12 @@
       return tags;
     }
 
-    function changeColor(tagId, colorCode, callback) {
-      if (!tagId) {
-        throw 'Tag id required!';
-      }
+   
+   
 
-      if (!colorCode) {
-        throw 'Color code is required';
-      }
+    
 
-      if (colorCode <= 0 || colorCode >= 9) {
-        throw 'Color code should be less then 10 and greater or equal then 0';
-      }
-
-      var future = $http.put('/tags/changeColorForTag?tagId=' + tagId + '&colorCode=' + colorCode, {});
-
-      Utils.handleCallback(future, callback);
-    }
-
-    function changeWord(tagId, word, callback) {
-      if (!tagId) {
-        throw 'Tag id required!';
-      }
-
-      if (!word) {
-        throw 'Word is required!';
-      }
-
-      var future = $http.put('/tags/setWordForTag?tagId=' + tagId + '&word=' + word, {});
-
-      Utils.handleCallback(future, callback);
-    }
-
-    function changeWordCompany(tagId, word, callback) {
-      if (!tagId) {
-        throw 'Tag id required!';
-      }
-
-      if (!word) {
-        throw 'Word is required!';
-      }
-
-      var future = $http.put('/company/tags/setWordForTag?tagId=' + tagId + '&word=' + word, {});
-
-      Utils.handleCallback(future, callback);
-    }
-
-    function remove(tagId, callback) {
-      if (!tagId) {
-        throw 'Tag id required!';
-      }
-
-      var future = $http.delete('/tags/removeTag?tagId=' + tagId);
-
-      Utils.handleCallback(future, callback);
-    }
-
-    function removeCompany(tagId, callback) {
-      if (!tagId) {
-        throw 'Tag id required!';
-      }
-
-      var future = $http.delete('/company/tags/removeTag?tagId=' + tagId);
-
-      Utils.handleCallback(future, callback);
-    }
-
+   
     function removeAndReplace(tagIdForDelete, tagIdForReplace, callback) {
       if (!tagIdForDelete) {
         throw 'Tag id for delete required!';
@@ -312,11 +252,6 @@
       getAll: getAll,
       getAllCompanies: getAllCompanies,
       saveForCompany: saveForCompany,
-      changeColor: changeColor,
-      changeWord: changeWord,
-      changeWordCompany: changeWordCompany,
-      remove: remove,
-      removeCompany: removeCompany,
       removeAndReplace: removeAndReplace,
       save: save,
       getColors: getColors,
