@@ -54,7 +54,8 @@
                    ng-change="changeStartDate()"
                    name="startDate"
                    qt-data-time-picker
-                   min-date="blockTimeContract.minStartDate"
+                   period="blockTimeContract.period"
+                   min-date="blockTimeContract.startDate"
                    required>
             <i class="report-calendar"></i>
           </div>
@@ -78,7 +79,7 @@
             ng-model="blockTimeContract.endDate"
             class="form-control" date-time-picker-with-period name="endDate"
             ng-change="changeNumOfIntervals(blockTimeContract.endDate)"
-            default-date="blockTimeContract.endDate" min-date="blockTimeContract.startDate"
+            default-date="blockTimeContract.endDate" min-date="blockTimeContract.endDate"
             period="blockTimeContract.period"   start-date="blockTimeContract.startDate" >
 
             <input type="text" placeholder="Select"
