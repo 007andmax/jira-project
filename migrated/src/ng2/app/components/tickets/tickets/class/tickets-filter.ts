@@ -14,6 +14,8 @@ export class TicketsFilter {
     payloadRecurringTicketsOpen = null;
     payloadUser = null;
     payloadSpam = null;
+    payloadCompleted = null;
+    payloadInProgress = null;
     tags = [];
     selectedCompany: Company = null;
     selectedTechUser: User = null;
@@ -45,6 +47,8 @@ export class TicketsFilter {
         if (this.listType === "USERS") this.onInitUser();
         if (this.listType === "RECURRING_TICKETS_OPEN") this.onInitRecurringTicketsOpen();
         if (this.listType === "RECURRING_TICKETS_CLOSED") this.onInitRecurringTicketsClosed();
+        if (this.listType === "COMPLETED") this.onInitCompleted();
+        if (this.listType === "IN_PROGRESS") this.onInitInProgress();
     }
     public getListTupe() {
         if (this.listType === "RECURRING_TICKETS_OPEN") return "OPEN";
@@ -62,20 +66,25 @@ export class TicketsFilter {
         if (this.listType === "USERS") this.payloadUser.offset = offset;
         if (this.listType === "RECURRING_TICKETS_OPEN") this.payloadRecurringTicketsOpen.offset = offset;
         if (this.listType === "RECURRING_TICKETS_CLOSED") this.payloadRecurringTicketsClosed.offset = offset;
+        if (this.listType === "COMPLETED") this.payloadCompleted.offset = offset;
+        if (this.listType === "IN_PROGRESS") this.payloadInProgress.offset = offset;
 
     }
     public getDataForRequest() {
         let payload = null;
-        if (this.listType === "ALL") payload = JSON.parse(JSON.stringify(this.payloadAll));  
-        if (this.listType === "UNASSIGNED") payload = JSON.parse(JSON.stringify(this.payloadUnassigned)); 
-        if (this.listType === "OPEN") payload = JSON.parse(JSON.stringify(this.payloadOpen));   
-        if (this.listType === "CLOSED") payload = JSON.parse(JSON.stringify(this.payloadClosed));  
-        if (this.listType === "ON_HOLD") payload = JSON.parse(JSON.stringify(this.payloadOnhold));  
-        if (this.listType === "TRASH") payload = JSON.parse(JSON.stringify(this.payloadTrash));   
-        if (this.listType === "SPAM") payload = JSON.parse(JSON.stringify(this.payloadSpam));  
-        if (this.listType === "USERS")  payload = JSON.parse(JSON.stringify(this.payloadUser));
-        if (this.listType === "RECURRING_TICKETS_OPEN") payload = JSON.parse(JSON.stringify(this.payloadRecurringTicketsOpen));   
-        if (this.listType === "RECURRING_TICKETS_CLOSED") payload = JSON.parse(JSON.stringify(this.payloadRecurringTicketsClosed));  
+        if (this.listType === "ALL") payload = JSON.parse(JSON.stringify(this.payloadAll));
+        if (this.listType === "UNASSIGNED") payload = JSON.parse(JSON.stringify(this.payloadUnassigned));
+        if (this.listType === "OPEN") payload = JSON.parse(JSON.stringify(this.payloadOpen));
+        if (this.listType === "CLOSED") payload = JSON.parse(JSON.stringify(this.payloadClosed));
+        if (this.listType === "ON_HOLD") payload = JSON.parse(JSON.stringify(this.payloadOnhold));
+        if (this.listType === "TRASH") payload = JSON.parse(JSON.stringify(this.payloadTrash));
+        if (this.listType === "SPAM") payload = JSON.parse(JSON.stringify(this.payloadSpam));
+        if (this.listType === "USERS") payload = JSON.parse(JSON.stringify(this.payloadUser));
+        if (this.listType === "RECURRING_TICKETS_OPEN") payload = JSON.parse(JSON.stringify(this.payloadRecurringTicketsOpen));
+        if (this.listType === "RECURRING_TICKETS_CLOSED") payload = JSON.parse(JSON.stringify(this.payloadRecurringTicketsClosed));
+        if (this.listType === "COMPLETED") payload = JSON.parse(JSON.stringify(this.payloadCompleted));
+        if (this.listType === "IN_PROGRESS") payload = JSON.parse(JSON.stringify(this.payloadInProgress));
+       
         if (this.selectedCompany) {
             payload.groupFieldFilters[0].fieldFilterDtos.push({
                 operator: "EQ",
@@ -94,7 +103,7 @@ export class TicketsFilter {
             payload.groupFieldFilters[0].predicateRule = "AND";
         }
         if (this.selectedUser) {
-            console.log("selectedUser",this.selectedUser);
+            console.log("selectedUser", this.selectedUser);
             payload.groupFieldFilters[0].fieldFilterDtos.push({
                 operator: "EQ",
                 path: "createdUserId",
@@ -106,7 +115,7 @@ export class TicketsFilter {
             payload.groupFieldFilters[0].fieldFilterDtos.push({
                 operator: "IN",
                 path: "tags.id",
-                values: this.tags.map(item =>  {
+                values: this.tags.map(item => {
                     return item.id;
                 })
             });
@@ -359,5 +368,43 @@ export class TicketsFilter {
             offset: 0
         }
             ;
+    }
+    public onInitCompleted() {
+        this.payloadCompleted = {
+            excludeTrashSpam: true,
+            groupFieldFilters: [
+                {
+                    fieldFilterDtos: [
+                        {
+                            operator: "EQ",
+                            path: "status",
+                            values: [
+                                "COMPLETED"
+                            ]
+                        }
+                    ]
+                }
+            ],
+            offset: 0
+        } ;
+    }
+    public onInitInProgress() {
+        this.payloadInProgress = {
+            excludeTrashSpam: true,
+            groupFieldFilters: [
+                {
+                    fieldFilterDtos: [
+                        {
+                            operator: "EQ",
+                            path: "status",
+                            values: [
+                                "IN_PROGRESS"
+                            ]
+                        }
+                    ]
+                }
+            ],
+            offset: 0
+        } ;
     }
 }

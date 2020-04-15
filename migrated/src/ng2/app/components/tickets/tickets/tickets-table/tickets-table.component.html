@@ -19,7 +19,7 @@
   <ng-template ngFor let-ticket
               [ngForOf]="tickets"
               [ngForTrackBy]="trackById">
-   <app-tickets-table-item  [ticket]="ticket"></app-tickets-table-item>
+   <app-tickets-table-item [listColors]="listColors" [statusColor]="statusColor"  [ticket]="ticket"></app-tickets-table-item>
  </ng-template>
  <div class="loading" *ngIf="showPreloader"></div> 
  

@@ -5,6 +5,8 @@ import { TicketsListService } from '../services/tickets-list.service';
 import { Ticket } from '../../class/ticket';
 import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.service';
 import { Subscription } from 'rxjs';
+import { StatusColor } from '../../../left-panel/left-panel-tickets/tickets-status/class/status-color';
+import { TicketsColor } from '../../../left-panel/left-panel-tickets/tickets-status/class/tickets-color';
 
 @Component({
   selector: 'app-tickets-table',
@@ -19,6 +21,8 @@ export class TicketsTableComponent implements OnInit,OnDestroy {
   public page_number: number = 0;
   tickets: Array<Ticket> = [];
   sub:Subscription = new Subscription();
+  listColors: Array<StatusColor> = [];
+  statusColor: TicketsColor;
   constructor(private ticketsService: TicketsService,
     private ticketsListService: TicketsListService,
     public cd: ChangeDetectorRef,
@@ -34,7 +38,12 @@ export class TicketsTableComponent implements OnInit,OnDestroy {
     })
     this.sub.add(getOnInitFilter);
     this.onScroll();
-    
+    this.ticketsStateService.getOnInitColor().subscribe(data => {
+      this.listColors = data;
+    })
+    this.ticketsStateService.getOnInitStatus().subscribe(data => {
+      this.statusColor = data;
+    })
 
   }
   private getTickets() {

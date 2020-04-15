@@ -31,9 +31,9 @@
       <div [textContent]="getUserName(assignedUser)"></div>
     </div>
   </td>
-  <td> <span class="tag__modern --info" *ngIf="ticket.status === 'IN_PROGRESS'">In Progress</span>
-    <span class="tag__modern --success" *ngIf="ticket.status === 'COMPLETED'">Completed</span>
-    <span class="tag__modern" *ngIf="ticket.status === null">Unassigned</span>
-    <span class="tag__modern --warning" *ngIf="ticket.status === 'ON_HOLD'">On Hold</span></td>
+  <td> <span class="tag__modern" [ngStyle]="getStyleStatus('inProgress')" *ngIf="ticket.status === 'IN_PROGRESS'">In Progress</span>
+    <span class="tag__modern" [ngStyle]="getStyleStatus('completed')" *ngIf="ticket.status === 'COMPLETED'">Completed</span>
+    <span class="tag__modern" [ngStyle]="getStyleStatus('unassigned')" *ngIf="ticket.status === null">Unassigned</span>
+    <span class="tag__modern" [ngStyle]="getStyleStatus('onHold')" *ngIf="ticket.status === 'ON_HOLD'">On Hold</span></td>
   <td [textContent]="getCreateAt()"></td>
 </tr>

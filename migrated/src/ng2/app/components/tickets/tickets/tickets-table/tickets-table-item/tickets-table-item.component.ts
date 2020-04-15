@@ -4,6 +4,8 @@ import { UsersStateService } from 'src/ng2/app/states/users/users-state.service'
 import { User } from 'src/ng2/app/components/users/class/user';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import * as moment from "moment";
+import { StatusColor } from 'src/ng2/app/components/left-panel/left-panel-tickets/tickets-status/class/status-color';
+import { TicketsColor } from 'src/ng2/app/components/left-panel/left-panel-tickets/tickets-status/class/tickets-color';
 
 @Component({
   selector: 'app-tickets-table-item',
@@ -12,6 +14,8 @@ import * as moment from "moment";
 })
 export class TicketsTableItemComponent implements OnInit {
   @Input() ticket: Ticket;
+  @Input() listColors: Array<StatusColor> = [];
+  @Input() statusColor: TicketsColor;
   assignedUser: User;
   requestedUser: User;
   constructor(private usersStateService: UsersStateService,
@@ -52,13 +56,16 @@ export class TicketsTableItemComponent implements OnInit {
     }
     return moment(date).format('DD MMM YYYY')
   }
-getAssignedUserNameForAvatar (user) {
-  if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}${(user.lastName) ? user.lastName[0].toUpperCase() : ''}`;
-  return '';
-}
+  getAssignedUserNameForAvatar(user) {
+    if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}${(user.lastName) ? user.lastName[0].toUpperCase() : ''}`;
+    return '';
+  }
   getCompanyName() {
     let company = this.companiesStateService.getCompanies().find(item => item.id === this.ticket.companyId);
     return company.name;
+  }
+  getStyleStatus(field) {
+    return {'border-color' : (this.statusColor) ?  this.listColors[this.statusColor[field]].borderColor : null,'background-color' : (this.statusColor) ?  this.listColors[this.statusColor[field]].backgroundColor : null,'color' : (this.statusColor) ?  this.listColors[this.statusColor[field]].borderColor : null}
   }
   getClassType() {
     return `priority-icon ${(this.ticket.priorityLevel) ? '--' + this.ticket.priorityLevel.toLowerCase() : ''}`;

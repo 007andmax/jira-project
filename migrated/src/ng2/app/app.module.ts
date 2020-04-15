@@ -205,6 +205,7 @@ import { TicketsTableItemComponent } from './components/tickets/tickets/tickets-
 import { TicketEditAsideCompanyInfoComponent } from './components/tickets/tickets/ticket-edit-aside-company-info/ticket-edit-aside-company-info.component';
 import { TicketEditAsideDevicesComponent } from './components/tickets/tickets/ticket-edit-aside-devices/ticket-edit-aside-devices.component';
 import { TicketEditAsideUsersComponent } from './components/tickets/tickets/ticket-edit-aside-users/ticket-edit-aside-users.component';
+import { TicketsStatusComponent } from './components/left-panel/left-panel-tickets/tickets-status/tickets-status.component';
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 declare var angular: any;
@@ -493,7 +494,8 @@ angular.module('quicktech')
     TicketsTableItemComponent,
     TicketEditAsideCompanyInfoComponent,
     TicketEditAsideDevicesComponent,
-    TicketEditAsideUsersComponent
+    TicketEditAsideUsersComponent,
+    TicketsStatusComponent
   ],
   imports: [
     BrowserModule,

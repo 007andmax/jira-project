@@ -7,6 +7,8 @@ import { TehUsersService } from 'src/ng2/app/services/teh-users/teh-users.servic
 import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { SelectSearchComponent } from '../../shared/select-search/select-search.component';
+import { StatusColor } from './tickets-status/class/status-color';
+import { TicketsColor } from './tickets-status/class/tickets-color';
 
 @Component({
   selector: 'app-left-panel-tickets',
@@ -53,6 +55,20 @@ export class LeftPanelTicketsComponent implements OnInit {
     let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
 
       this.getClientsList(data);
+    })
+
+    this.leftPanelService.getColors().subscribe((data: any) => {
+
+      let listColors = data.map(item => {
+        return new StatusColor(item.backgroundColor, item.borderColor);
+      })
+      this.ticketsStateService.onColorStatus(listColors);
+      
+    })
+    this.leftPanelService.getTicketsStatus().subscribe((data: any) => {
+
+      let ticketsColor = new TicketsColor(data);
+      this.ticketsStateService.onInitStatus(ticketsColor);
     })
   }
   private getClientsList(data) {
