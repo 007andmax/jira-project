@@ -91,7 +91,7 @@
                ng-mouseleave="showDeviceLabelEditButtom = false">
             <p class="ellipsis">
               <span
-                ng-click="openDevicesDetails = !openDevicesDetails">{{agent.label || agent.hostName || agent.ip}}</span>
+                ng-click="openDevicesDetails = !openDevicesDetails;redirectDevice(agent);">{{agent.label || agent.hostName || agent.ip}}</span>
               <button class="company-edit-icn company-edit-icn-sm"
                       ng-show="showDeviceLabelEditButtom && !showDeviceLabelEditForm"
                       ng-click="openDeviceLabelEditForm()" uib-tooltip="Edit Label"></button>

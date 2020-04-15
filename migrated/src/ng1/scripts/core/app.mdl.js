@@ -428,43 +428,43 @@
           controller: 'quicktech.core.reports.reportsCtrl'
         }))
         .state('device-dashboard', waitForServices({
-          url: '/ng2/devicedashboard',
+          url: '/ng2/deviced/ashboard',
           template: '<dashboard-component></dashboard-component>'
         }))
         .state('device-hardware', waitForServices({
-          url: '/ng2/devicehardware',
+          url: '/ng2/device/hardware',
           template: '<hardware-component></hardware-component>'
         }))
         .state('device-software', waitForServices({
-          url: '/ng2/devicesoftware',
+          url: '/ng2/device/software',
           template: '<software-component></software-component>'
         }))
         .state('device-service', waitForServices({
-          url: '/ng2/deviceservice',
+          url: '/ng2/device/service',
           template: '<services-component></services-component>'
         }))
         .state('device-antivirus', waitForServices({
-          url: '/ng2/deviceantivirus',
+          url: '/ng2/device/antivirus',
           template: '<antivirus-component></antivirus-component>'
         }))
         .state('device-terminal', waitForServices({
-          url: '/ng2/deviceterminal',
+          url: '/ng2/device/terminal',
           template: '<terminal-component></terminal-component>'
         }))
         .state('device-password', waitForServices({
-          url: '/ng2/devicepassword',
+          url: '/ng2/device/password',
           template: '<password-component></password-component>'
         }))
         .state('device-windows', waitForServices({
-          url: '/ng2/devicewindows',
+          url: '/ng2/device/windows',
           template: '<windows-component></windows-component>'
         }))
         .state('device-startup', waitForServices({
-          url: '/ng2/devicestartup',
+          url: '/ng2/device/startup',
           template: '<startup-component></startup-component>'
         }))
         .state('device-file', waitForServices({
-          url: '/ng2/devicefile',
+          url: '/ng2/device/file',
           template: '<file-component></file-component>'
         }));
 

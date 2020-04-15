@@ -8,6 +8,7 @@ import { HardwareService } from './_services/hardware.service';
 import { DeviceDetailService } from './_services/device_detail.service';
 import { first } from 'rxjs/operators';
 import { LockScreenComponent } from './lock-screen/lock-screen.component';
+declare var $:any;
 
 @Component({
   selector: 'app-root',
@@ -31,7 +32,7 @@ export class DeviceComponent implements OnInit {
     private deviceDetailService: DeviceDetailService, 
     private remoteControlService: RemoteControlService) {}
   openModal(template) {
-    if(this.deviceDetail.online === true) {
+    if (this.deviceDetail.online === true) {
       this.modalRef = this.modalService.show(
         template,
         Object.assign({}, { class: 'remote-control modal-dialog-centered' })
@@ -52,11 +53,12 @@ export class DeviceComponent implements OnInit {
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
+    $('body').addClass('ng7-device');
     this.getCurrentCompany();
     
-    setInterval(() => {
-      this.updateTime();
-    },1000);
+    // setInterval(() => {
+    //   this.updateTime();
+    // },1000);
   }
 
   getCurrentCompany() {
@@ -116,8 +118,9 @@ export class DeviceComponent implements OnInit {
           }
         }
         this.deviceDetailService.addDeviceList(deviceList);
-        this.deviceDetail = tempObj[Object.keys(tempObj)[0]][0];
-        localStorage.setItem('deviceDetail', JSON.stringify(tempObj[Object.keys(tempObj)[0]][0]))
+        let index = tempObj[Object.keys(tempObj)[0]].findIndex(value => value.agentId === localStorage.getItem('agentId'))
+        this.deviceDetail = tempObj[Object.keys(tempObj)[0]][index];
+        localStorage.setItem('deviceDetail', JSON.stringify(tempObj[Object.keys(tempObj)[0]][index]))
         localStorage.setItem('company_id', Object.keys(tempObj)[0]);
         // this.getDeviceDetail();
       },

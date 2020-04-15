@@ -377,44 +377,44 @@ angular.module('quicktech')
           pathMatch: 'full'
         },
         {
-          path: 'ng2/devicedashboard',
+          path: 'ng2/device/dashboard',
           component: DashboardComponent
         },
         {
-          path: 'ng2/devicehardware',
+          path: 'ng2/device/hardware',
           component: HardwareComponent
         },
         {
-          path: 'ng2/devicesoftware',
+          path: 'ng2/device/software',
           component: SoftwareComponent
         },
 
         {
-          path: 'ng2/deviceservice',
+          path: 'ng2/device/service',
           component: ServicesComponent
         },
         {
-          path: 'ng2/deviceantivirus',
+          path: 'ng2/device/antivirus',
           component: AntivirusComponent
         },
         {
-          path: 'ng2/deviceterminal',
+          path: 'ng2/device/terminal',
           component: TerminalComponent
         },
         {
-          path: 'ng2/devicepassword',
+          path: 'ng2/device/password',
           component: PasswordComponent
         },
         {
-          path: 'ng2/devicewindow',
+          path: 'ng2/device/window',
           component: WindowsComponent
         },
         {
-          path: 'ng2/devicestartup',
+          path: 'ng2/device/startup',
           component: StartupComponent
         },
         {
-          path: 'ng2/devicefile',
+          path: 'ng2/device/file',
           component: FileComponent
         }
       ],
@@ -467,7 +467,8 @@ angular.module('quicktech')
     PasswordComponent,
     SessionTimeoutComponent,
     LockScreenComponent,
-    TicketTaskComponent
+    TicketTaskComponent,
+    AppComponent
     // RecurringTicketsComponent
   ],
   providers: [
@@ -479,8 +480,37 @@ angular.module('quicktech')
     {provide: UrlHandlingStrategy, useClass: CustomHandlingStrategy},
     ApiPasswordManagerService
   ],
-  exports: [RouterModule],
-  bootstrap: [AppComponent]
+  exports: [RouterModule]
+  // bootstrap: [AppComponent]
 })
 export class AppModule {
+  ngDoBootstrap(app) {
+    fetch('url/to/fetch/component/name')
+      .then((name)=>{ bootstrapRootComponent(app, name)});
+  }
+}
+
+
+function bootstrapRootComponent(app, name) {
+  // define the possible bootstrap components 
+  // with their selectors (html host elements)
+  const options = {
+    'app': AppComponent,
+    'device': DeviceComponent
+  };
+  const component = options[name];
+  app.bootstrap(component);
+}
+
+function fetch(url) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      if (window.location.href.includes('/device/') === true) { 
+        resolve('device');
+      } else {
+        resolve('app');
+      }
+      
+    }, 2000);
+  });
 }

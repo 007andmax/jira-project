@@ -213,6 +213,12 @@
           });
         };
 
+        $scope.redirectDevice = function (agent) {
+          localStorage.setItem('agentId', agent.agentId);
+          var url = '/#/ng2/device/dashboard';
+          window.open(url,'_blank');
+        };
+
         function markDeviceAsMaster() {
           $scope.agents = $scope.agents.map(function(agent) {
             if (agent.agentId === $scope.agent.agentId) {
