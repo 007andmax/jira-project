@@ -32,7 +32,7 @@ export class DeviceComponent implements OnInit {
     private deviceDetailService: DeviceDetailService, 
     private remoteControlService: RemoteControlService) {}
   openModal(template) {
-    if (this.deviceDetail.online === false) {
+    if (this.deviceDetail.online === true) {
       this.modalRef = this.modalService.show(
         template,
         Object.assign({}, { class: 'remote-control modal-dialog-centered' })

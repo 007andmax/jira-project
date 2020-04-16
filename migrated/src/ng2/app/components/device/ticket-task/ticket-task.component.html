@@ -269,12 +269,13 @@
               <label>Assign To</label>
               <div class="form-row">
                 <div class="cmn-dropdown">
-                  <div class="drop-down-select">
-                      <span (click)="toggle('assign')" class="d-block" >{{assignToLabel == '' ? 'Select User to assign' : assignToLabel}}</span>
+                  <div (click)="toggle('assign')" class="drop-down-select">
+                      <span  class="d-block" >{{assignToLabel == '' ? 'Select User to assign' : assignToLabel}}</span>
                       <img *ngIf="assignToLabel == ''" class="icn-sm report-caret-icon" src="./../../../../../../ng1/images/device/selct-arrow.svg"/>
                       <img *ngIf="assignToLabel != ''" (click)="clearDropdown('assign');" class="icn-sm report-close-icon" src="./../../../../../../ng1/images/device/close.svg"/>
                   </div>
-                  <div class="cmn-dropdon-list"  *ngIf="expand" clickOutside (clickOutside)="expand = !expand">
+                  
+                  <div class="cmn-dropdon-list" *ngIf="expand">
                      <form method="POST">
                         <input type="text" name="search" [(ngModel)]="search" placeholder="Search Users"/>
                      </form>
@@ -365,7 +366,7 @@
                          <img src="../../../../../ng1/images/device/avatar-add.svg" alt="Add User">
                       </a>
                       <div class="cmn-dropdown">
-                        <div class="cmn-dropdon-list" *ngIf="editAddUser" clickOutside (clickOutside)="editAddUser = !editAddUser">
+                        <div class="cmn-dropdon-list" *ngIf="editAddUser">
                            <form method="POST">
                               <input type="text" name="searchUser" [(ngModel)]="searchUser" placeholder="Search Users"/>
                            </form>
@@ -381,7 +382,7 @@
                         </div>
                       </div>
                     </li>
-                    <li class="pointer" [ngClass]="{'selected': notifyUser.selected == true}" (click)="notifyUser.selected = !notifyUser.selected" *ngFor="let notifyUser of notifyUserList">
+                    <li class="pointer" [ngClass]="{'device-selected': notifyUser.selected == true}" (click)="notifyUser.selected = !notifyUser.selected" *ngFor="let notifyUser of notifyUserList">
                       <div class="user-added">
                          <span class="user-dp" *ngIf="notifyUser.avatar != null">
                             <img src="{{ '/users/' + (notifyUser.id || 'default') + '/image' + (notifyUser.avatar.id ? '.jpg?t=' + notifyUser.avatar.updatedAt : '') }}" alt="{{notifyUser.firstName}} {{notifyUser.lastName}}">
