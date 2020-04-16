@@ -115,6 +115,7 @@ ol li:before{content:counter(av-counter) ".";counter-increment:none;color:$secon
     -webkit-box-shadow: none !important;
     -moz-box-shadow: none !important;
     box-shadow: none !important;
+    height: auto;
     &.btn-primary{
         background-color: $primary-color !important;
         color: $white-color !important;
@@ -1440,6 +1441,9 @@ table {
     .close{
         @include opacity(1);
     }
+    .dropdown > input{
+        background-color: $white-color;
+    }
  }
 
 
@@ -1783,14 +1787,14 @@ ul.user-list {
             @include border-radius(50%);
             overflow: hidden;
         }
-        &.selected{
+        &.device-selected{
             .user-added{
                 &::after{
                     background: url(assets/images/selected.svg) no-repeat center;
                 } 
          }
         }
-        &.unselected{
+        &.device-unselected{
             .user-added{
                 &::after{
                     background: url(assets/images/unselected.svg) no-repeat center;
@@ -2421,7 +2425,7 @@ ngx-loading > div {
 .grey-dropdown .report-caret-icon, .report-caret-icon {
     position: absolute;
     cursor: pointer;
-    top: 10px !important;
+    top: 17px !important;
     right: 15px;
 }
 
