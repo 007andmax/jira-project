@@ -182,8 +182,13 @@ export class LeftPanelTicketsComponent implements OnInit {
       //  this.usersStateService.onInitFilter(this.filter);
       let find = this.companiesHistory.find(history => history === item.name);
       if (!find) {
-        this.companiesHistory.pop();
-        this.companiesHistory.unshift(item.name);
+        if (this.companiesHistory.length < 3) {
+          this.companiesHistory.unshift(item.name);
+        } else {
+          this.companiesHistory.pop();
+          this.companiesHistory.unshift(item.name);
+        }
+      
       }
 
       this.companiesService.setСustomStorage("ticketPageFilterByCompanyHistory", this.companiesHistory).subscribe(data => {
@@ -209,8 +214,13 @@ export class LeftPanelTicketsComponent implements OnInit {
       if (indexTechUser > -1) this.ticketsFilter.setTechUser(this.techUsersList[indexTechUser]);
       let find = this.techUsersHistory.find(history => history === item);
       if (!find) {
-        this.techUsersHistory.pop();
-        this.techUsersHistory.unshift(item);
+        if (this.techUsersHistory.length < 3) {
+          this.techUsersHistory.unshift(item);
+        } else {
+          this.techUsersHistory.pop();
+          this.techUsersHistory.unshift(item);
+        }
+       
       }
 
       this.companiesService.setСustomStorage("ticketPageFilterByTechUsersHistory", this.techUsersHistory).subscribe(data => {
@@ -235,8 +245,13 @@ export class LeftPanelTicketsComponent implements OnInit {
       if (indexhUser > -1) this.ticketsFilter.setUser(this.users[indexhUser]);
       let find = this.usersHistory.find(history => history === item);
       if (!find) {
-        this.usersHistory.pop();
-        this.usersHistory.unshift(item);
+        if (this.usersHistory.length < 3) {
+          this.usersHistory.unshift(item);
+        } else {
+          this.usersHistory.pop();
+          this.usersHistory.unshift(item);
+        }
+       
       }
 
       this.companiesService.setСustomStorage("ticketPageFilterByClientUsersHistory", this.usersHistory).subscribe(data => {
