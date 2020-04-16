@@ -34,7 +34,7 @@ export class TicketsStatusComponent implements OnInit {
   changeColor(field, index) {
     this.statusColor[field] = index;
     this.companiesService.setСustomStorage('ticketsTagsColors', this.statusColor).subscribe(data => {
-
+      this.ticketsStateService.onInitStatus(this.statusColor);
     })
   }
   public setStatus(data) {

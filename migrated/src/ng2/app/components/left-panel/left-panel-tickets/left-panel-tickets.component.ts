@@ -43,13 +43,13 @@ export class LeftPanelTicketsComponent implements OnInit {
     })
 
     this.leftPanelService.getCompaniesHistoryTicketsUser().subscribe((data: Array<string>) => {
-      this.usersHistory = data;
+      this.usersHistory = (data) ? data : [];
     })
     this.leftPanelService.getCompaniesHistoryTickets().subscribe((data: Array<string>) => {
-      this.companiesHistory = data;
+      this.companiesHistory = (data) ? data : [];
     })
     this.leftPanelService.getCompaniesHistoryTechUsers().subscribe((data: Array<string>) => {
-      this.techUsersHistory = data;
+      this.techUsersHistory = (data) ? data : [];
     })
     if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
     let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
