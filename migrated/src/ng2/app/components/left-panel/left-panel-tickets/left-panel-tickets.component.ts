@@ -269,12 +269,14 @@ export class LeftPanelTicketsComponent implements OnInit {
   getTechUserList() {
     return this.techUsersList.map(item => {
       return `${item.firstName} ${item.lastName}`
-    })
+    }).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
+    1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
   }
   getUserList() {
     return this.users.map(item => {
       return `${item.firstName} ${item.lastName}`
-    })
+    }).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
+    1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
   }
 
   toggleFilter(event) {
