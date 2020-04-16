@@ -37,6 +37,9 @@ export class TicketsStatusComponent implements OnInit {
       this.ticketsStateService.onInitStatus(this.statusColor);
     })
   }
+  getStyleStatus(field) {
+    return {'border-color' : (this.statusColor && this.listColors) ?  this.listColors[this.statusColor[field]].borderColor : null,'background-color' : (this.statusColor && this.listColors) ?  this.listColors[this.statusColor[field]].backgroundColor : null}
+  }
   public setStatus(data) {
     this.listType = data;
     this.onSetStatus.emit(data);

@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TitleListType } from './class/title-list-type';
 import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.service';
 import { Subscription } from 'rxjs';
+import { TicketsCounts } from '../class/tickets-counts';
 
 @Component({
   selector: 'app-tickets-header',
@@ -16,20 +17,27 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
   new TitleListType('On Hold', 'ON_HOLD'),
   new TitleListType('Trash', 'TRASH'),
   new TitleListType('Spam', 'SPAM'),
-  new TitleListType('Users', 'USERS'),
+  new TitleListType('My Tickets', 'USERS'),
   new TitleListType('Recurring tickets Open', 'RECURRING_TICKETS_OPEN'),
   new TitleListType('Recurring tickets Closed', 'RECURRING_TICKETS_CLOSED')];
   title: string = 'Users';
   sub: Subscription = new Subscription();
+  count = 0;
+  selectedListType:TitleListType = new TitleListType('My Tickets', 'USERS');
   constructor(private ticketsStateService: TicketsStateService) { }
 
   ngOnInit() {
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
-      let listType = this.titleListTypes.find(item => item.type === data.listType);
-      if (listType) this.title = listType.title;
+      this.selectedListType = this.titleListTypes.find(item => item.type === data.listType);
+      if (this.selectedListType) this.title = `${this.selectedListType.title} (${this.count})`
     })
     this.sub.add(getOnInitFilter);
+    this.ticketsStateService.getOnInitCount().subscribe(data => {
+    this.count = data;
+      this.title = `${this.selectedListType.title} (${this.count})`;
+    })
   }
+  
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

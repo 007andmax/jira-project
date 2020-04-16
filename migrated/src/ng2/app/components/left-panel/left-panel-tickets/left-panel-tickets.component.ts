@@ -9,6 +9,8 @@ import { UsersStateService } from 'src/ng2/app/states/users/users-state.service'
 import { SelectSearchComponent } from '../../shared/select-search/select-search.component';
 import { StatusColor } from './tickets-status/class/status-color';
 import { TicketsColor } from './tickets-status/class/tickets-color';
+import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
+import { TicketsCounts } from '../../tickets/tickets/class/tickets-counts';
 
 @Component({
   selector: 'app-left-panel-tickets',
@@ -29,8 +31,10 @@ export class LeftPanelTicketsComponent implements OnInit {
   techUsersHistory = [];
   techUsersList = [];
   blockFilterUser: boolean = false;
+  ticketsCounts:TicketsCounts;
   constructor(private ticketsStateService: TicketsStateService,
     private companiesState: CompaniesStateService,
+    private ticketsService: TicketsService,
     private usersStateService: UsersStateService,
     private companiesService: CompaniesService,
     private leftPanelService: LeftPanelService) { }
@@ -70,6 +74,25 @@ export class LeftPanelTicketsComponent implements OnInit {
       let ticketsColor = new TicketsColor(data);
       this.ticketsStateService.onInitStatus(ticketsColor);
     })
+    this.getCounts();
+  }
+  private getCount() {
+    this.ticketsService.getCount(this.ticketsFilter.getDataForRequest()).subscribe(data => {
+      console.log("data",data);
+      this.ticketsStateService.onInitCount(data);
+    })
+  }
+  getCountByField(field) {
+    return (this.ticketsCounts) ? this.ticketsCounts[field] : 0;
+  }
+  private getCounts ()  {
+    this.ticketsService.getCounts(this.ticketsFilter.getDataForCounts()).subscribe(data => {
+    
+      this.ticketsCounts = new TicketsCounts(data);
+      
+      this.ticketsStateService.onInitCount(this.ticketsCounts[(this.listType === 'USERS') ? 'USER' : this.listType]);
+     
+    })
   }
   private getClientsList(data) {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
@@ -79,6 +102,7 @@ export class LeftPanelTicketsComponent implements OnInit {
     this.listType = type;
     this.ticketsFilter.setListType(type);
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
+    this.getCount();
   }
 
   onGetUsers(data) {
@@ -107,6 +131,7 @@ export class LeftPanelTicketsComponent implements OnInit {
       this.selectedCompany = this.companiesState.getCompanies()[indexCompany];
       this.ticketsFilter.setCompany(this.companiesState.getCompanies()[indexCompany]);
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
+      this.getCount();
     }
 
     //  this.filter.setCompany(this.companiesState.getCompanies()[indexCompany].id);
@@ -124,6 +149,7 @@ export class LeftPanelTicketsComponent implements OnInit {
       this.selectedTechUser = `${this.techUsersList[indexTechUser].firstName} ${this.techUsersList[indexTechUser].lastName}`;
       this.ticketsFilter.setTechUser(this.techUsersList[indexTechUser]);
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
+      this.getCount();
     }
 
     //  this.filter.setCompany(this.companiesState.getCompanies()[indexCompany].id);
@@ -140,6 +166,7 @@ export class LeftPanelTicketsComponent implements OnInit {
       this.selectedUser = `${this.users[indexhUser].firstName} ${this.users[indexhUser].lastName}`;
       this.ticketsFilter.setUser(this.users[indexhUser]);
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
+      this.getCount();
     }
 
     //  this.filter.setCompany(this.companiesState.getCompanies()[indexCompany].id);
@@ -198,6 +225,7 @@ export class LeftPanelTicketsComponent implements OnInit {
 
     console.log("item", this.ticketsFilter.selectedCompany);
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
+    this.getCount();
   }
   onSelectTechUser(item) {
     console.log("item", item);
@@ -229,6 +257,8 @@ export class LeftPanelTicketsComponent implements OnInit {
     }
 
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
+    this.getCount();
+    
   }
   onSelectUser(item) {
     console.log("item", item);
@@ -259,12 +289,16 @@ export class LeftPanelTicketsComponent implements OnInit {
       })
     }
     console.log("ticketsFilter.selectedUser", this.ticketsFilter.selectedUser);
-    if (!this.blockFilterUser) this.ticketsStateService.onInitFilter(this.ticketsFilter);
+    if (!this.blockFilterUser) {
+      this.ticketsStateService.onInitFilter(this.ticketsFilter);
+      this.getCount();
+    } 
     this.blockFilterUser = false;
   }
   onChangeTags(tags) {
     this.ticketsFilter.setTags(tags);
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
+    this.getCount();
   }
   getTechUserList() {
     return this.techUsersList.map(item => {
