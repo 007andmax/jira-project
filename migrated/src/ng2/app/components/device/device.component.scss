@@ -53,8 +53,11 @@
         margin-bottom: 14px;
     }
     .btn {
-        min-width: 231px;
+        min-width: 231px !important;
         padding: 16.5px 15px;
+        display: inline-block;
+        height: auto;
+        line-height: 1;
         
     }
 }

@@ -5,14 +5,14 @@
         <a href="javascript:;" class="add-btn" (click)="openPopupClick();"><img src="../../../../../ng1/images/device/add.svg" alt="add"/></a>
       <tabset>
         <tab heading="Ticket">
-            <div class="cmn-tbs-content tickets">
+            <div class="cmn-tbs-content device-tickets">
                 <ul class="list-unstyled">
                     <li *ngFor="let ticket of ticketList">
                       <div class="create-by"><span class="id">Tkt# {{ticket.number}}</span><span class="name">{{ticket.name}}</span></div>
                       <h5>{{ticket.subject}}</h5>
                       <div class="task-status-row">
                         <span class="status completed" *ngIf="ticket.status == 'COMPLETED'">Completed</span>
-                        <span class="status progress" *ngIf="ticket.status == 'IN_PROGRESS'">In Progress</span>
+                        <span class="status device-progress" *ngIf="ticket.status == 'IN_PROGRESS'">In Progress</span>
                         <span class="status hold" *ngIf="ticket.status == 'ON_HOLD'">On Hold</span>
                         <span class="date">{{ticket.createdAt | date : DateFormat}}</span>
                       </div>
@@ -181,7 +181,7 @@
     <div class="sidebar-title">
       <div class="h1">Create New Ticket</div>
        <span class="h5" *ngIf="actualNumber != ''">QT {{actualNumber}}</span>
-       <div class="btn-group small-dropdown" dropdown>
+       <div class="btn-group device-small-dropdown" dropdown>
         <button id="button-basic" dropdownToggle type="button" class="dropdown-toggle" [ngClass]="{'high': ticketModal.priorityLevel == 'HIGH', 'low': ticketModal.priorityLevel == 'LOW'}"
                 aria-controls="dropdown-basic">
                 {{priorityLabel}} 
