@@ -428,7 +428,7 @@
           controller: 'quicktech.core.reports.reportsCtrl'
         }))
         .state('device-dashboard', waitForServices({
-          url: '/ng2/deviced/ashboard',
+          url: '/ng2/device/dashboard',
           template: '<dashboard-component></dashboard-component>'
         }))
         .state('device-hardware', waitForServices({
