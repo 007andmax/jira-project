@@ -316,4 +316,7 @@ export class LeftPanelTicketsComponent implements OnInit {
   toggleFilter(event) {
     event.target.parentNode.classList.toggle('show-filter');
   }
+  public trackByIndex(index, item) {
+    return index;
+  }
 }
