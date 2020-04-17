@@ -337,7 +337,10 @@
             $scope.clients = UsersService.getAllByCompanyId(val.id).filter(function(user) {
               return !user.deletedAt;
             });
-
+            $scope.clients.map(item => {
+              item.name = ($scope.getUserName(item)) ? $scope.getUserName(item).toLowerCase() : '';
+              return item;
+            })
           
 
             for (var i = 0; i < $scope.clients.length; i++) {
@@ -368,7 +371,10 @@
             $scope.clients = UsersService.getAllByCompanyId(val.id).filter(function(user) {
               return !user.deletedAt;
             });
-
+            $scope.clients.map(item => {
+              item.name = ($scope.getUserName(item)) ? $scope.getUserName(item).toLowerCase() : '';
+              return item;
+            })
             resetSharedUsers(val);
             $scope.serviceList = ServicesService.getAllByCompany($scope, val.id);
             $scope.ticketForm.ticketCompany.$setValidity('invalidName', true);
@@ -406,7 +412,10 @@
               $scope.ticketForm.ticketCompany.$setValidity('invalidName', true);
             }
             $scope.clients = UsersService.getClientUsers();
-
+            $scope.clients.map(item => {
+              item.name = ($scope.getUserName(item)) ? $scope.getUserName(item).toLowerCase() : '';
+              return item;
+            })
             $scope.ticketSharedUsersList = $scope.ticketSharedUsersList.filter(function(el) {
               var user = el.user;
 
@@ -758,7 +767,13 @@
             return 'Required fields can\'t be left empty.';
           }
         };
-
+        $scope.filterCompany = function (value) {
+          function searcInCompanies(item) {
+            if (value && value.length > 0 && (value !== '[$empty$]')) return item.name.toLowerCase().includes(value.toLowerCase());
+            return true;
+          }
+          return searcInCompanies;
+        };
         $scope.filterUserFullName = function (value) {
 
           function searchInUsers(item) {
