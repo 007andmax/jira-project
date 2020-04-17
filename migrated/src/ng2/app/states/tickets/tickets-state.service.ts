@@ -8,6 +8,7 @@ export class TicketsStateService {
   colorStatus: EventEmitter<any> = new EventEmitter();
   status: EventEmitter<any> = new EventEmitter();
   count: EventEmitter<number> = new EventEmitter();
+  toggleAddTicket: EventEmitter<any> = new EventEmitter();
   constructor() { }
   public onInitFilter(data) {
     this.filter.emit(data);
@@ -17,6 +18,9 @@ export class TicketsStateService {
   }
   public onInitStatus(data) {
     this.status.emit(data);
+  }
+  public onToggleAddTicket() {
+this.toggleAddTicket.emit(null);
   }
   public onInitCount(data) {
     this.count.emit(data);
@@ -32,5 +36,8 @@ export class TicketsStateService {
   }
   public getOnInitCount() {
     return this.count;
+  }
+  public getToggleAddTicket() {
+    return this.toggleAddTicket;
   }
 }

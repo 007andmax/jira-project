@@ -37,7 +37,9 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
       this.title = `${this.selectedListType.title} (${this.count})`;
     })
   }
-  
+  onAddTicket() {
+    this.ticketsStateService.onToggleAddTicket();
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

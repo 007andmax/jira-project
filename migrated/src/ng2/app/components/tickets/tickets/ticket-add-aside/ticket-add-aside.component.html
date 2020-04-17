@@ -16,25 +16,26 @@
       
       <div class="qt-input-block qt-input-line">
         <label for="add-ticket-subject" class="qt-input-block__label">Ticket Subject</label>
-        <input id="add-ticket-subject" class="qt-input-block__input"  type="text" placeholder="Write Ticket subject">
+        <input id="add-ticket-subject" class="qt-input-block__input" [(ngModel)]="ticketAdd.subject"  type="text" placeholder="Write Ticket subject">
       </div>
       
       
       <div class="qt-input-block qt-input-line">
         <label for="add-ticket-describe-issue" class="qt-input-block__label">Describe Issue</label>
-        <textarea id="add-ticket-describe-issue" class="qt-input-block__textarea"  placeholder="Describe Issue here…"></textarea>
+          <textarea id="add-ticket-describe-issue" class="qt-input-block__textarea" appTextArea [limit]="250"  
+                    placeholder="Describe Issue here…" (input)="onChangeNote($event)" (onPast)="onPastNote($event)"></textarea>
       </div>
       
       
       <div class="qt-input-line">
         <div class="qt-input-block">
           <span class="qt-input-block__label">Company</span>
-          <app-select-search  [class]="['qt-dropdown']" [list]="['Company 1', 'Company 2']" [placeholder]="'Select Company'"></app-select-search>
+          <app-select-search  [class]="['qt-dropdown']" [field]="'name'" [list]="companies" [placeholder]="'Select Company'"  (onSelectedItem)="onSelectCompany($event)"></app-select-search>
         </div>
     
         <div class="qt-input-block">
           <span  class="qt-input-block__label">User</span>
-          <app-select-search  [class]="['qt-dropdown']" [list]="['User 1', 'User 2']" [placeholder]="'Select User'"></app-select-search>
+          <app-select-search #userDP  [class]="['qt-dropdown']"  [list]="getUserList()" [placeholder]="'Select User'"  (onSelectedItem)="onSelectUser($event)"></app-select-search>
         </div>
       </div>
   
@@ -42,12 +43,13 @@
       <div class="qt-input-line">
         <div class="qt-input-block">
           <span class="qt-input-block__label">Assign To</span>
-          <app-select-search  [class]="['qt-dropdown']" [list]="['User assign 1', 'User assign 2']" [placeholder]="'Select User to assign'"></app-select-search>
+          <app-select-search  [class]="['qt-dropdown']" [list]="getTechUserList()"
+          (onSelectedItem)="onSelectTechUser($event)" [placeholder]="'Select User to assign'"></app-select-search>
         </div>
     
         <div class="qt-input-block">
           <span class="qt-input-block__label">Device</span>
-          <app-select-search  [class]="['qt-dropdown']" [list]="['Device 1', 'Device 2']" [placeholder]="'Select device'"></app-select-search>
+          <app-select-search  #deviceDP [class]="['qt-dropdown']" [field]="'hostName'" [list]="devices" [placeholder]="'Select device'"  (onSelectedItem)="onSelectDevice($event)"></app-select-search>
         </div>
       </div>
       
@@ -57,7 +59,24 @@
       <!--  Users to notify  -->
       <div class="users-to-notify">
         <div class="users-to-notify__title">Add users to notify them ticket update</div>
-        <div class="icon__users users-to-notify__add_users"></div>
+        <div class="save-template">
+          <app-teh-users [users]="listTechUsersForAssign" (usersChange)="onChangeShareUsers($event)"></app-teh-users>
+          <div class="assigned-users-list">
+            <ng-template ngFor let-user [ngForOf]="shareUsersList" let-i="index" [ngForTrackBy]="trackByIndex">
+              <div *ngIf="user.avatar">
+                <img ng-if="user.avatar" class="img-circle avatar-26"
+                     [src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')"
+                     alt="...">
+              </div>
+              <div *ngIf="!user.avatar">
+                <div class="default-user-avatar avatar-background-color-odd ng-scope">
+                  <span [textContent]="user.firstName[0].toUpperCase()"></span><span
+                  [textContent]="user.lastName[0].toUpperCase()"></span></div>
+              </div>
+              <input type="checkbox" [(ngModel)]="user.selected"  />
+            </ng-template>
+          </div>
+        </div>
       </div>
       
     </div>
