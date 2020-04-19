@@ -15,13 +15,12 @@
   [infiniteScrollThrottle]="15"
   [infiniteScrollDisabled]="infiniteScrollDisabled"
   (scrolled)="onScroll()">
-    
+  
   <ng-template ngFor let-ticket
               [ngForOf]="tickets"
               [ngForTrackBy]="trackById">
    <app-tickets-table-item [listColors]="listColors" [statusColor]="statusColor"  [ticket]="ticket"></app-tickets-table-item>
  </ng-template>
- <div class="loading" *ngIf="showPreloader"></div> 
  
   <!--   <tr>
       <td>
@@ -144,6 +143,7 @@
     </tr> -->
   </tbody>
 </table>
+  <div class="loading" *ngIf="showPreloader"></div>
 </div>
 
 

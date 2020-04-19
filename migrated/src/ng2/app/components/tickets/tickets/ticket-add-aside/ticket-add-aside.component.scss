@@ -21,10 +21,25 @@
 .users-to-notify {
   margin-top: 35px;
   &__title {
-    font-weight: 500;
+    font-weight: 600;
     font-size: 12px;
-    font-family: Graphik Medium;
     margin-bottom: 14px;
+  }
+
+  .save-template {
+    display: flex;
+  }
+
+  /deep/ #dropdownTehuser {
+      max-height: 24px;
+      max-width: 24px;
+      border-radius: 50%;
+      margin-right: 4px;
+      overflow: hidden;
+      color: transparent;
+      background-image: url('../../../../../assets/img/icons/assign-user.svg');
+      background-size: cover;
+      background-repeat: no-repeat;
   }
 
   &__add_users {
@@ -34,4 +49,69 @@
     border-radius: 50%;
     cursor: pointer;
    }
+
+  /deep/ .select-wrapper.dropdown-assign-ticket {
+      right: unset;
+      bottom: 45px;
+      box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .3);
+  }
+}
+
+.assigned-users-list {
+    display: flex;
+
+    .default-user-avatar {
+      width: 24px;
+      height: 24px;
+    }
+
+   .assigned-ticket-user__item {
+      width: 24px;
+      height: 24px;
+      margin-right: 2px;
+      position: relative;
+      font-size: 10px;
+
+
+  .assigned-ticket-user__checkmark {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+
+      &:before {
+        position: absolute;
+        content: '';
+        width: 16px;
+        height: 16px;
+        border: 1px solid #c4cbd5;
+        background: white;
+        border-radius: 50%;
+        bottom: -7px;
+      }
+    }
+
+      input {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+
+        &:checked ~ .assigned-ticket-user__checkmark {
+          &:before {
+            background-image: url('../../../../../assets/img/icons/selected.svg');
+            border: none;
+          }
+
+        }
+      }
+    }
 }

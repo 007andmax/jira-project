@@ -5,9 +5,11 @@
   width: 240px;
   left: 76px;
   top: 0;
-  z-index: 992;
+  z-index: 990;
   background: #354053;
   overflow-x: scroll;
+  transition: left 300ms;
+
   &__header {
     font-size: 12px;
     font-family: 'Graphik Medium', sans-serif;
@@ -100,4 +102,15 @@
 .ticket-status-color {
   margin-bottom: 12px;
   cursor: pointer
+}
+
+/deep/ .left-panel-closed {
+  .left-panel-ng2 {
+    left: -164px;
+  }
+}
+
+// hide old left panel
+/deep/ .left-panel-full {
+    display: none !important;
 }

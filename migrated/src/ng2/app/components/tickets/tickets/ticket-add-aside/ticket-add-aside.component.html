@@ -22,7 +22,7 @@
       
       <div class="qt-input-block qt-input-line">
         <label for="add-ticket-describe-issue" class="qt-input-block__label">Describe Issue</label>
-          <textarea id="add-ticket-describe-issue" class="qt-input-block__textarea" appTextArea [limit]="250"  
+          <textarea id="add-ticket-describe-issue" class="qt-input-block__textarea" appTextArea [limit]="250"
                     placeholder="Describe Issue here…" (input)="onChangeNote($event)" (onPast)="onPastNote($event)"></textarea>
       </div>
       
@@ -62,9 +62,10 @@
         <div class="save-template">
           <app-teh-users [users]="listTechUsersForAssign" (usersChange)="onChangeShareUsers($event)"></app-teh-users>
           <div class="assigned-users-list">
-            <ng-template ngFor let-user [ngForOf]="shareUsersList" let-i="index" [ngForTrackBy]="trackByIndex">
+            <ng-template class="assigned-ticket-user" ngFor let-user [ngForOf]="shareUsersList" let-i="index" [ngForTrackBy]="trackByIndex">
+            <div class="assigned-ticket-user__item">
               <div *ngIf="user.avatar">
-                <img ng-if="user.avatar" class="img-circle avatar-26"
+                <img ng-if="user.avatar" class="img-circle default-user-avatar"
                      [src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')"
                      alt="...">
               </div>
@@ -73,7 +74,12 @@
                   <span [textContent]="user.firstName[0].toUpperCase()"></span><span
                   [textContent]="user.lastName[0].toUpperCase()"></span></div>
               </div>
-              <input type="checkbox" [(ngModel)]="user.selected"  />
+              <label>
+                <input type="checkbox" [(ngModel)]="user.selected"  />
+                <span class="assigned-ticket-user__checkmark"></span>
+              </label>
+             
+            </div>
             </ng-template>
           </div>
         </div>

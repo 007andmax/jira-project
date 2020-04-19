@@ -6,6 +6,7 @@
 }
 .table-container {
   overflow-x: auto;
+  min-height: calc(100vh - 165px);
 }
 
 .priority-icon {
