@@ -1,16 +1,16 @@
 <tr>
-  <td>
+  <td class="ticket-table__requested-by">
     <div class="d-f">
       <div class="qt-table-modern__circle-avatar" [textContent]="getNameForAvatar()"
         [ngStyle]="{'background': getStyleAvatar(requestedUser),'background-size': 'cover'}"></div>
-      <div [textContent]="getUserName(requestedUser)"></div>
+      <div [textContent]="getUserName(requestedUser)" class="ellipsis"></div>
     </div>
   </td>
-  <td class="--strong">{{'Tkt# ' + ticket.number + ' - ' + ticket.subject}} <span [ngClass]="getClassType()"></span>
+  <td class="--strong ticket-table__subject">{{'Tkt# ' + ticket.number + ' - ' + ticket.subject}} <span [ngClass]="getClassType()"></span>
   </td>
-  <td [textContent]="getCompanyName()"></td>
+  <td class="ticket-table__company" [textContent]="getCompanyName()"></td>
 
-  <td *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers.length > 0">
+  <td class="ticket-table__assignee" *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers.length > 0">
    
       <div class="d-f">
         <ng-template ngFor let-user [ngForOf]="ticket.multiAssignedUsers" [ngForTrackBy]="trackById">
@@ -23,17 +23,17 @@
 
 
   </td>
-  <td *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers.length === 0"></td>
-  <td *ngIf="ticket.assignedUserId && ticket.multiAssignedUsers.length === 0">
+  <td class="ticket-table__assignee" *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers.length === 0"></td>
+  <td class="ticket-table__assignee" *ngIf="ticket.assignedUserId && ticket.multiAssignedUsers.length === 0">
     <div class="d-f">
       <div class="qt-table-modern__circle-avatar" [textContent]="getAssignedUserNameForAvatar(assignedUser)"
         [ngStyle]="{'background': getStyleAvatar(assignedUser),'background-size': 'cover'}"></div>
       <div [textContent]="getUserName(assignedUser)"></div>
     </div>
   </td>
-  <td> <span class="tag__modern" [ngStyle]="getStyleStatus('inProgress')" *ngIf="ticket.status === 'IN_PROGRESS'">In Progress</span>
+  <td class="ticket-table__status" > <span class="tag__modern" [ngStyle]="getStyleStatus('inProgress')" *ngIf="ticket.status === 'IN_PROGRESS'">In Progress</span>
     <span class="tag__modern" [ngStyle]="getStyleStatus('completed')" *ngIf="ticket.status === 'COMPLETED'">Completed</span>
     <span class="tag__modern" [ngStyle]="getStyleStatus('unassigned')" *ngIf="ticket.status === null">Unassigned</span>
     <span class="tag__modern" [ngStyle]="getStyleStatus('onHold')" *ngIf="ticket.status === 'ON_HOLD'">On Hold</span></td>
-  <td [textContent]="getCreateAt()"></td>
+  <td class="ticket-table__created-date" [textContent]="getCreateAt()"></td>
 </tr>

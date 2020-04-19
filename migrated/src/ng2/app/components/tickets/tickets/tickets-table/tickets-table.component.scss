@@ -1,8 +1,36 @@
-.ticket-table {
+/deep/ .ticket-table {
   max-width: 1320px;
   min-width: 1064px;
   width: auto;
   margin: 0 auto;
+
+  &__requested-by {
+    max-width: 166px;
+  }
+  &__subject {
+    max-width: 345px;
+  }
+  &__company {
+    max-width: 148px;
+  }
+  &__assignee {
+     max-width: 154px;
+  }
+  &__status {
+    max-width: 100px;
+  }
+  &__created-date {
+     max-width: 93px;
+  }
+
+  th {
+   white-space: nowrap;
+  }
+ td {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 }
 .table-container {
   overflow-x: auto;
@@ -15,4 +43,16 @@
 
 app-tickets-table-item {
   display: contents;
+}
+
+
+@media (min-width: 1920px) {
+  /deep/ .ticket-table {
+    &__subject {
+      max-width: 465px;
+    }
+    &__company {
+      max-width: 284px;
+    }
+  }
 }

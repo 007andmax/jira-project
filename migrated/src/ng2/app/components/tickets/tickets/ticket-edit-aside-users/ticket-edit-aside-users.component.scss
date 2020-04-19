@@ -24,6 +24,71 @@
        display: flex;
        &:hover {
          background-color: #edf2f6;
+         .users-aside__user-menu {
+           display: block;
+         }
        }
+
+       &.--online {
+         .users-aside__user-avatar {
+           &:before {
+             background-color: #2ec866;
+           }
+         }
+       }
+
+       &.--away {
+          .users-aside__user-avatar {
+            &:before {
+              background-color: #ffb937;
+            }
+          }
+        }
+
+
   }
+
+  &__user-avatar {
+    width: 32px;
+    height: 32px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    margin-right: 10px;
+    position: relative;
+    &:before {
+      content: '';
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border: solid 2px #ffffff;
+      background-color: #9ca5b6;
+      border-radius: 50%;
+      top: calc(69%);
+      left: calc(78%);
+      }
+  }
+
+  &__user-name {
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  &__user-email {
+    line-height: 1.33;
+  }
+
+   &__user-menu {
+        position: absolute;
+        right: 16px;
+        height: 16px;
+        width: 16px;
+        top: calc(50% - 8px);
+        background-image: url("../../../../../assets/img/icons/more-vertical-ng2.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        display: none;
+    }
 }
