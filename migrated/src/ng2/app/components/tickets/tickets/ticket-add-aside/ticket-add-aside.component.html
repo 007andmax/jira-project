@@ -5,6 +5,27 @@
       <div class="d-f">
         <div class="qt-aside__title">Create New Ticket</div>
         <div class="qt-aside__ticket-name">QT 23904</div>
+        <div class="ticket-priority create-dropdown" ngbDropdown>
+
+          <input type="text" class="form-control ticket-drop has-dropdown readonly-normal" ngbDropdownToggle
+                 readonly>
+          <i class="icn-sm report-caret-icon"></i>
+  
+          <ul class="dropdown-menu dropdown-priority" ngbDropdownMenu>
+            <ng-template class="assigned-ticket-user" ngFor let-item [ngForOf]="ticketPriorities"  >
+            <li   ngbDropdownItem (click)="ticketAdd.priorityLevel = item.type">
+              <a tabindex="-1" href="javascript:void(0)">
+                <span class="priority-dot {{ item.type.toLowerCase() }}"></span>{{ item.title }}
+              </a>
+            </li>
+             </ng-template>
+          </ul>
+  
+          <div class="default-value"><span
+            class="priority-dot {{ ticketAdd.priorityLevel.toLowerCase() }}"></span> {{getPriorityLevel()}}
+          </div>
+  
+        </div>
       </div>
       <div>
         <div class="qt-aside__close-modal icon__close"></div>

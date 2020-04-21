@@ -7,6 +7,7 @@ import { UsersStateService } from 'src/ng2/app/states/users/users-state.service'
 import { DevicesSateService } from 'src/ng2/app/states/devices/devices-sate.service';
 import { SelectSearchComponent } from '../../../shared/select-search/select-search.component';
 import { TechUserItem } from '../../../shared/teh-users/class/tech-user-item';
+import { TitleListType } from '../tickets-header/class/title-list-type';
 
 
 
@@ -27,6 +28,9 @@ export class TicketAddAsideComponent implements OnInit {
   techUsersList = [];
   shareUsersList = [];
   listTechUsersForAssign: Array<TechUserItem> = [];
+  ticketPriorities: Array<TitleListType> = [new TitleListType('Low Priority', 'LOW'),
+  new TitleListType('Medium Priority', 'MEDIUM'),
+  new TitleListType('High Priority', 'HIGH')];
   constructor(private ticketsStateService: TicketsStateService,
     private usersStateService: UsersStateService,
     private devicesSateService: DevicesSateService,
@@ -47,6 +51,11 @@ export class TicketAddAsideComponent implements OnInit {
 
       this.getClientsList(data);
     })
+  }
+
+  getPriorityLevel() {
+    let fid = this.ticketPriorities.find(item => item.type === this.ticketAdd.priorityLevel);
+    return `${(fid) ? fid.title : ''}`
   }
   onGetTechUsers(data) {
     this.techUsersList = data.filter(item => {
