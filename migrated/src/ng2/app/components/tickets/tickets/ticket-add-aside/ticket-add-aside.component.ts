@@ -55,11 +55,11 @@ export class TicketAddAsideComponent implements OnInit {
       }
     });
     this.listTechUsersForAssign = this.getListTechUsersForAssign();
-    console.log("this.listTechUsersForAssign",this.listTechUsersForAssign);
-    console.log("this.shareUsersList",this.shareUsersList);
+    console.log("this.listTechUsersForAssign", this.listTechUsersForAssign);
+    console.log("this.shareUsersList", this.shareUsersList);
   }
   private getListTechUsersForAssign() {
-  
+
     return [...this.techUsersList.map(item => {
       let user = new TechUserItem(item);
       return user;
@@ -75,7 +75,6 @@ export class TicketAddAsideComponent implements OnInit {
       let list = this.users.filter(item => item.subscription && item.subscription.ticketManager);
       list = list.map(item => {
         let user = new TechUserItem(item);
-        user.selected = true;
         return user;
       });
       this.shareUsersList = list;
@@ -90,25 +89,36 @@ export class TicketAddAsideComponent implements OnInit {
     this.deviceDP.clearClient();
     this.userDP.clearClient();
     this.cd.detectChanges();
-    
+
     this.listTechUsersForAssign = this.getListTechUsersForAssign();
-  
+
   }
   onSelectUser(item) {
+    
     if (item) {
+     if (this.ticketAdd.createdUser.id) this.removeShareUser(this.ticketAdd.createdUser.id);
       let indexhUser = this.users.findIndex(user => `${user.firstName} ${user.lastName}` === item);
       if (indexhUser > -1) this.ticketAdd.createdUser.setUserData(this.users[indexhUser]);
       this.shareUsersList.push(new TechUserItem(this.users[indexhUser]));
 
     } else {
+      this.removeShareUser(this.ticketAdd.createdUser.id);
       this.ticketAdd.createdUser.clearUserData();
     }
   }
   onSelectTechUser(item) {
     if (item) {
+     if (this.ticketAdd.assignedUser) this.removeShareUser(this.ticketAdd.assignedUser);
       let indexTechUser = this.techUsersList.findIndex(user => `${user.firstName} ${user.lastName}` === item);
-      if (indexTechUser > -1) this.ticketAdd.assignedUser = this.techUsersList[indexTechUser].id;
+      if (indexTechUser > -1) {
+        this.ticketAdd.assignedUser = this.techUsersList[indexTechUser].id;
+        let user = new TechUserItem(this.techUsersList[indexTechUser]);
+        user.selected = true;
+        this.shareUsersList.push(user);
+      }
+
     } else {
+      this.removeShareUser(this.ticketAdd.assignedUser);
       this.ticketAdd.clearAssignedUser();
     }
   }
@@ -119,7 +129,12 @@ export class TicketAddAsideComponent implements OnInit {
       this.ticketAdd.clearDeviceId();
     }
   }
-
+  removeShareUser(id) {
+    let index = this.shareUsersList.findIndex(shareUser => shareUser.id === id);
+    if (index > -1) {
+      this.shareUsersList.splice(index, 1);
+    }
+  }
   getTechUserList() {
     return this.techUsersList.map(item => {
       return `${item.firstName} ${item.lastName}`

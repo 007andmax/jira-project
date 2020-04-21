@@ -62,25 +62,49 @@
         <div class="save-template">
           <app-teh-users [users]="listTechUsersForAssign" (usersChange)="onChangeShareUsers($event)"></app-teh-users>
           <div class="assigned-users-list">
-            <ng-template class="assigned-ticket-user" ngFor let-user [ngForOf]="shareUsersList" let-i="index" [ngForTrackBy]="trackByIndex">
-            <div class="assigned-ticket-user__item">
-              <div *ngIf="user.avatar">
-                <img ng-if="user.avatar" class="img-circle default-user-avatar"
-                     [src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')"
-                     alt="...">
+            
+              <div class="assigned-users-type assigned-users-type-clients">
+                <ng-template class="assigned-ticket-user" ngFor let-user [ngForOf]="shareUsersList" let-i="index" [ngForTrackBy]="trackByIndex">
+                <div class="assigned-ticket-user__item"  *ngIf="user.accountType === 'CLIENT'">
+                  <div *ngIf="user.avatar">
+                    <img ng-if="user.avatar" class="img-circle default-user-avatar"
+                         [src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')"
+                         alt="...">
+                  </div>
+                  <div *ngIf="!user.avatar">
+                    <div class="default-user-avatar avatar-background-color-odd ng-scope">
+                      <span [textContent]="(user.firstName) ? user.firstName[0].toUpperCase() : ''"></span><span
+                      [textContent]="(user.lastName) ? user.lastName[0].toUpperCase() : ''"></span></div>
+                  </div>
+                  <label>
+                    <input type="checkbox" [(ngModel)]="user.selected"  />
+                    <span class="assigned-ticket-user__checkmark"></span>
+                  </label>
+                </div>
+              </ng-template>
               </div>
-              <div *ngIf="!user.avatar">
-                <div class="default-user-avatar avatar-background-color-odd ng-scope">
-                  <span [textContent]="user.firstName[0].toUpperCase()"></span><span
-                  [textContent]="user.lastName[0].toUpperCase()"></span></div>
+
+              <div class="assigned-users-type">
+                <ng-template class="assigned-ticket-user" ngFor let-user [ngForOf]="shareUsersList" let-i="index" [ngForTrackBy]="trackByIndex"> 
+                <div class="assigned-ticket-user__item"  *ngIf="user.accountType === 'TECH'">
+                  <div *ngIf="user.avatar">
+                    <img ng-if="user.avatar" class="img-circle default-user-avatar"
+                         [src]="'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt : '')"
+                         alt="...">
+                  </div>
+                  <div *ngIf="!user.avatar">
+                    <div class="default-user-avatar avatar-background-color-odd ng-scope">
+                      <span [textContent]="(user.firstName) ? user.firstName[0].toUpperCase() : ''"></span><span
+                      [textContent]="(user.lastName) ? user.lastName[0].toUpperCase() : ''"></span></div>
+                  </div>
+                  <label>
+                    <input type="checkbox" [(ngModel)]="user.selected"  />
+                    <span class="assigned-ticket-user__checkmark"></span>
+                  </label>
+                </div>
+              </ng-template>
               </div>
-              <label>
-                <input type="checkbox" [(ngModel)]="user.selected"  />
-                <span class="assigned-ticket-user__checkmark"></span>
-              </label>
-             
-            </div>
-            </ng-template>
+           
           </div>
         </div>
       </div>
