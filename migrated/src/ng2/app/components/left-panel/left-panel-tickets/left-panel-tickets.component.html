@@ -7,10 +7,10 @@
     
     <div class="left-panel-ng2__content--lists">
       <!--<div class="list-item">Dashboard</div> -->
-      <div class="list-item d-f jc-sb" [ngClass]="{'active': listType === 'ALL'}" (click)="setTypeFilter('ALL')">All tickets <div>{{getCountByField('ALL')}}</div></div>
+      <div class="list-item d-f jc-sb" [ngClass]="{'active': listType === 'ALL'}" (click)="setTypeFilter('ALL')">All Tickets <div>{{getCountByField('ALL')}}</div></div>
       <div class="list-item d-f jc-sb" [ngClass]="{'active': listType === 'UNASSIGNED'}" (click)="setTypeFilter('UNASSIGNED')">Unassigned <div>{{getCountByField('UNASSIGNED')}}</div></div>
       <div class="list-item d-f jc-sb" [ngClass]="{'active': listType === 'OPEN'}" (click)="setTypeFilter('OPEN')">Open <div>{{getCountByField('OPEN')}}</div></div>
-      <div class="list-item d-f jc-sb" [ngClass]="{'active': listType === 'CLOSED'}" (click)="setTypeFilter('CLOSED')">Close <div>{{getCountByField('CLOSED')}}</div></div>
+      <div class="list-item d-f jc-sb" [ngClass]="{'active': listType === 'CLOSED'}" (click)="setTypeFilter('CLOSED')">Closed <div>{{getCountByField('CLOSED')}}</div></div>
       <div class="list-item d-f jc-sb" [ngClass]="{'active': listType === 'ON_HOLD'}" (click)="setTypeFilter('ON_HOLD')">On Hold <div>{{getCountByField('ON_HOLD')}}</div></div>
       <div class="list-item d-f jc-sb" [ngClass]="{'active': listType === 'TRASH'}" (click)="setTypeFilter('TRASH')">Trash <div>{{getCountByField('TRASH')}}</div></div>
       <div class="list-item d-f jc-sb" [ngClass]="{'active': listType === 'SPAM'}" (click)="setTypeFilter('SPAM')">Spam <div>{{getCountByField('SPAM')}}</div></div>

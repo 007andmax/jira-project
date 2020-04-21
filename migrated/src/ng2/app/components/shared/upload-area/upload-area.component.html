@@ -7,17 +7,18 @@
 </div>
 <div class="files-list">
   <div class="single-file" *ngFor="let file of files; let i = index">
-    <img src="assets/img/dnd/ic-file.svg" width="45px" alt="file">
+   
     <div class="info">
       <h4 class="name">
         {{ file?.name }}
       </h4>
       <p class="size">
-        {{ formatBytes(file?.size) }}
+        {{ formatBytes(file?.size) }} <span class="file-error">{{(file.showError) ? error : ''}}</span>
       </p>
       <app-upload-area-progress [progress]="file?.progress"></app-upload-area-progress>
     </div>
-    <img src="assets/img/dnd/ic-delete-file.svg" class="delete" width="20px" alt="file" (click)="deleteFile(i)">
+    <i class="icn-sm icn-remove-old" (click)="deleteFile(i)"></i>
+   <!-- <img src="assets/img/dnd/ic-delete-file.svg" class="delete" width="20px" alt="file" (click)="deleteFile(i)">-->
   </div>
 </div>
 

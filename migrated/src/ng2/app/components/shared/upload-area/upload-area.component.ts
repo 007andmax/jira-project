@@ -10,6 +10,8 @@ export class UploadAreaComponent implements OnInit {
   files: any[] = [];
   idfiles: Array<String> = [];
   @Output() changeFiles = new EventEmitter<any>();
+  error: string = "- The uploaded file cannot be more than 4 MB.";
+  showError:boolean = false;
   constructor(public cd: ChangeDetectorRef, ) { }
 
   ngOnInit() {
@@ -43,10 +45,14 @@ export class UploadAreaComponent implements OnInit {
    * Simulate the upload process
    */
   uploadFilesSimulator(index: number) {
-   
       if (index === this.files.length) {
         return;
       } else {
+        if (this.files[index].size > 4000000) {
+          this.files[index].showError = true;
+          this.uploadFilesSimulator(index + 1);
+          return;
+         } 
         this.uploadFile(this.files[index]).then((data: any) => {
           let res = JSON.parse(data.response);
           // this.changeFile(file).then((base64: string): any => {
@@ -62,6 +68,9 @@ export class UploadAreaComponent implements OnInit {
           this.cd.detectChanges();
           // });
 
+        }).catch(() => {
+          this.files[index].showError = true;
+          this.uploadFilesSimulator(index + 1);
         });
 
       }
@@ -79,6 +88,11 @@ export class UploadAreaComponent implements OnInit {
         resolve(xhr);
 
       }, false);
+
+      xhr.upload.onprogress = (event)=> {
+        file.progress = Math.round((event.loaded /  event.total) * 100);
+        console.log( 'Загружено на сервер ' + event.loaded + ' байт из ' + event.total );
+      }
       xhr.addEventListener("error", (error) => {
         reject(error);
       }, false);

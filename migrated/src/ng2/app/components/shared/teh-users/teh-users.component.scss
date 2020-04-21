@@ -24,12 +24,14 @@
       }
     }
     .user-item {
-      &:hover,
       &.active {
         background: #16a4fa;
         p {
           color: #fff;
         }
+      }
+      &:hover {
+        background-color: #e7ecf2;
       }
     }
   }

@@ -107,6 +107,9 @@
       color: #a4a4a4;
       margin: 0;
       margin-bottom: 0.25rem;
+      .file-error {
+        color: red;
+      }
     }
 
     .info {
