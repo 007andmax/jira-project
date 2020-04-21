@@ -36,8 +36,11 @@
     <div class="qt-aside__body">
       
       <div class="qt-input-block qt-input-line">
+        <mat-error *ngIf="!ticketValidate.getSubject()">
+          Ticket Subject is required
+        </mat-error>
         <label for="add-ticket-subject" class="qt-input-block__label">Ticket Subject</label>
-        <input id="add-ticket-subject" class="qt-input-block__input" [(ngModel)]="ticketAdd.subject"  type="text" placeholder="Write Ticket subject">
+        <input id="add-ticket-subject" class="qt-input-block__input" [(ngModel)]="ticketAdd.subject" (change)="onChangeSubject()"  type="text" placeholder="Write Ticket subject">
       </div>
       
       
@@ -50,11 +53,17 @@
       
       <div class="qt-input-line">
         <div class="qt-input-block">
+          <mat-error *ngIf="!ticketValidate.getCompany()">
+            Company is required
+          </mat-error>
           <span class="qt-input-block__label">Company</span>
           <app-select-search  [class]="['qt-dropdown']" [field]="'name'" [list]="companies" [placeholder]="'Select Company'"  (onSelectedItem)="onSelectCompany($event)"></app-select-search>
         </div>
     
         <div class="qt-input-block">
+          <mat-error *ngIf="!ticketValidate.getClientUser()">
+            Client User is required
+          </mat-error>
           <span  class="qt-input-block__label">User</span>
           <app-select-search #userDP  [class]="['qt-dropdown']"  [list]="getUserList()" [placeholder]="'Select User'"  (onSelectedItem)="onSelectUser($event)"></app-select-search>
         </div>
@@ -133,7 +142,7 @@
     </div>
     
     <div class="qt-aside__buttons">
-      <div class="qt-btn --btn40h create-ticket-btn">Create Ticket</div>
+      <div class="qt-btn --btn40h create-ticket-btn" (click)="add()">Create Ticket</div>
       <div class="qt-btn --btn40h --outline-blue">Cancel</div>
     </div>
    

@@ -11,6 +11,10 @@ export class TicketsService {
 
   private apiUrl = environment.apiUrl;
   constructor( private http: HttpClient) { }
+
+  public addTicket(data) {
+    return this.http.post(this.apiUrl + `v2/tickets`,data);
+  }
   public getCount(data) {
     return this.http.post(this.apiUrl + `v2/tickets/count`,data);
   }

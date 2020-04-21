@@ -8,6 +8,8 @@ import { DevicesSateService } from 'src/ng2/app/states/devices/devices-sate.serv
 import { SelectSearchComponent } from '../../../shared/select-search/select-search.component';
 import { TechUserItem } from '../../../shared/teh-users/class/tech-user-item';
 import { TitleListType } from '../tickets-header/class/title-list-type';
+import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
+import { TicketValidate } from '../class/ticket-validate';
 
 
 
@@ -31,8 +33,10 @@ export class TicketAddAsideComponent implements OnInit {
   ticketPriorities: Array<TitleListType> = [new TitleListType('Low Priority', 'LOW'),
   new TitleListType('Medium Priority', 'MEDIUM'),
   new TitleListType('High Priority', 'HIGH')];
+  ticketValidate:TicketValidate= new TicketValidate();
   constructor(private ticketsStateService: TicketsStateService,
     private usersStateService: UsersStateService,
+    private ticketsService:TicketsService,
     private devicesSateService: DevicesSateService,
     public cd: ChangeDetectorRef,
     private companiesState: CompaniesStateService, ) { }
@@ -52,7 +56,14 @@ export class TicketAddAsideComponent implements OnInit {
       this.getClientsList(data);
     })
   }
+  add() {
+    if (this.ticketValidate.isValidate(this.ticketAdd)) {
+      this.ticketsService.addTicket(this.ticketAdd).subscribe(data => {
 
+      })
+    }
+   
+  }
   getPriorityLevel() {
     let fid = this.ticketPriorities.find(item => item.type === this.ticketAdd.priorityLevel);
     return `${(fid) ? fid.title : ''}`
@@ -87,7 +98,14 @@ export class TicketAddAsideComponent implements OnInit {
         return user;
       });
       this.shareUsersList = list;
+      this.ticketValidate.resetCompany();
 
+      let selectedUser = this.techUsersList.find(user => user.id === this.ticketAdd.assignedUser);
+      if (selectedUser) {
+        let user = new TechUserItem(selectedUser);
+        user.selected = true;
+        this.shareUsersList.push(user);
+      }
     } else {
       this.ticketAdd.createdUser = new TicketCreatedUser();
       this.ticketAdd.clearDeviceId();
@@ -109,6 +127,7 @@ export class TicketAddAsideComponent implements OnInit {
       let indexhUser = this.users.findIndex(user => `${user.firstName} ${user.lastName}` === item);
       if (indexhUser > -1) this.ticketAdd.createdUser.setUserData(this.users[indexhUser]);
       this.shareUsersList.push(new TechUserItem(this.users[indexhUser]));
+      this.ticketValidate.resetClientUser();
 
     } else {
       this.removeShareUser(this.ticketAdd.createdUser.id);
@@ -169,6 +188,9 @@ export class TicketAddAsideComponent implements OnInit {
     });
 
   }
+  onChangeSubject() {
+    this.ticketValidate.resetSubject();
+  }
   onChangeFiles(ids) {
     this.ticketAdd.setAttachFileIds(ids);
     console.log("ids", ids);
@@ -188,6 +210,8 @@ export class TicketAddAsideComponent implements OnInit {
   public onChangeNote(event) {
     this.ticketAdd.note = event.target.value;
   }
+
+   
   public trackByIndex(index, item) {
     return index;
   }
