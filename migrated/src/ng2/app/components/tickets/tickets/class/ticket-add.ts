@@ -22,4 +22,10 @@ export class TicketAdd {
     public setAttachFileIds (data){
         this.attachFileIds = data;
     }
+    public onAddSharedUsers(users) {
+        let selectedusers = users.filter(item => item.selected);
+        this.shares = selectedusers.map((item) => {
+            return new TicketShareUser(item.id);
+        })
+    }
 }

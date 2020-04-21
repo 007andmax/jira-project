@@ -28,7 +28,7 @@
         </div>
       </div>
       <div>
-        <div class="qt-aside__close-modal icon__close"></div>
+        <div class="qt-aside__close-modal icon__close" (click)="closed()"></div>
       </div>
     </div>
     
@@ -143,7 +143,7 @@
     
     <div class="qt-aside__buttons">
       <div class="qt-btn --btn40h create-ticket-btn" (click)="add()">Create Ticket</div>
-      <div class="qt-btn --btn40h --outline-blue">Cancel</div>
+      <div class="qt-btn --btn40h --outline-blue" (click)="closed()">Cancel</div>
     </div>
    
   </ng-sidebar>

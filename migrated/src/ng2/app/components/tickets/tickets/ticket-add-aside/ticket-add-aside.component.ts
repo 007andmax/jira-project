@@ -58,11 +58,21 @@ export class TicketAddAsideComponent implements OnInit {
   }
   add() {
     if (this.ticketValidate.isValidate(this.ticketAdd)) {
+      this.ticketAdd.onAddSharedUsers(this.shareUsersList);
       this.ticketsService.addTicket(this.ticketAdd).subscribe(data => {
 
       })
     }
    
+  }
+  closed() {
+    this.ticketAdd = new TicketAdd();
+    this.ticketValidate = new TicketValidate();
+    this.shareUsersList = [];
+    this.deviceDP.clearClient();
+    this.userDP.clearClient();
+    this.cd.detectChanges();
+
   }
   getPriorityLevel() {
     let fid = this.ticketPriorities.find(item => item.type === this.ticketAdd.priorityLevel);
