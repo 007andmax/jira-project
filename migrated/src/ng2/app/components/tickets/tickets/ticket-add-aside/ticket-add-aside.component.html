@@ -54,7 +54,7 @@
       </div>
       
       <!--  File upload    -->
-      <app-upload-area class="ticket-fileupload"></app-upload-area>
+      <app-upload-area (changeFiles)="onChangeFiles($event)" class="ticket-fileupload"></app-upload-area>
       
       <!--  Users to notify  -->
       <div class="users-to-notify">

@@ -94,9 +94,9 @@ export class TicketAddAsideComponent implements OnInit {
 
   }
   onSelectUser(item) {
-    
+
     if (item) {
-     if (this.ticketAdd.createdUser.id) this.removeShareUser(this.ticketAdd.createdUser.id);
+      if (this.ticketAdd.createdUser.id) this.removeShareUser(this.ticketAdd.createdUser.id);
       let indexhUser = this.users.findIndex(user => `${user.firstName} ${user.lastName}` === item);
       if (indexhUser > -1) this.ticketAdd.createdUser.setUserData(this.users[indexhUser]);
       this.shareUsersList.push(new TechUserItem(this.users[indexhUser]));
@@ -108,7 +108,7 @@ export class TicketAddAsideComponent implements OnInit {
   }
   onSelectTechUser(item) {
     if (item) {
-     if (this.ticketAdd.assignedUser) this.removeShareUser(this.ticketAdd.assignedUser);
+      if (this.ticketAdd.assignedUser) this.removeShareUser(this.ticketAdd.assignedUser);
       let indexTechUser = this.techUsersList.findIndex(user => `${user.firstName} ${user.lastName}` === item);
       if (indexTechUser > -1) {
         this.ticketAdd.assignedUser = this.techUsersList[indexTechUser].id;
@@ -159,6 +159,10 @@ export class TicketAddAsideComponent implements OnInit {
       }
     });
 
+  }
+  onChangeFiles(ids) {
+    this.ticketAdd.setAttachFileIds(ids);
+    console.log("ids", ids);
   }
   onChangeShareUsers(data) {
     console.log("data", data);

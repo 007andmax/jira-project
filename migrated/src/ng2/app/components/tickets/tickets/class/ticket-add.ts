@@ -18,4 +18,7 @@ export class TicketAdd {
     public clearDeviceId() {
         this.linkedAgentId = null;
     }
+    public setAttachFileIds (data){
+        this.attachFileIds = data;
+    }
 }
