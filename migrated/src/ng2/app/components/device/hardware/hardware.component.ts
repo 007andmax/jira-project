@@ -56,8 +56,8 @@ export class HardwareComponent implements OnInit {
     .subscribe(
       resp => {
         this.deviceDetailService.addDevice(resp);
-		this.hardwareDetail = this.deviceDetailService.getDevice();
-		this.setData();
+        this.hardwareDetail = this.deviceDetailService.getDevice();
+        this.setData();
         this.loading = false;
       },
       error => {
@@ -77,7 +77,7 @@ export class HardwareComponent implements OnInit {
 	this.logicalDisks = this.hardwareDetail.reports[0].logicalDisks.filter(value => value.is_system === true)[0];
 	this.processors = this.hardwareDetail.reports[0].processors[0];
 	this.memory = this.hardwareDetail.reports[0].ram.slots[0];
-	this.networkAdapters = this.hardwareDetail.reports[0].networkAdapters.filter(value => value.ip_enabled === true)[0];
+	this.networkAdapters = this.hardwareDetail.reports[0].networkAdapters.filter(value => value.ip_enabled === true)[0] || {};
 	this.externalIp = this.hardwareDetail.reports[0].externalIp;
   }
 

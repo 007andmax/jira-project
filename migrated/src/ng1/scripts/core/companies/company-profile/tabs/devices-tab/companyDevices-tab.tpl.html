@@ -90,7 +90,7 @@
                ng-mouseover="showDeviceLabelEditButtom = true"
                ng-mouseleave="showDeviceLabelEditButtom = false">
             <p class="ellipsis">
-              <span
+              <span class="pointer" 
                 ng-click="openDevicesDetails = !openDevicesDetails;redirectDevice(agent);">{{agent.label || agent.hostName || agent.ip}}</span>
               <button class="company-edit-icn company-edit-icn-sm"
                       ng-show="showDeviceLabelEditButtom && !showDeviceLabelEditForm"

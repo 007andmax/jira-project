@@ -115,13 +115,14 @@ export class DeviceComponent implements OnInit {
         for (let key of Object.keys(tempObj)) {
           for (let key1 of Object.keys(tempObj[key])) {
             deviceList.push(tempObj[key][key1]);
+            deviceList[deviceList.length - 1].company_id = key;
           }
         }
         this.deviceDetailService.addDeviceList(deviceList);
-        let index = tempObj[Object.keys(tempObj)[0]].findIndex(value => value.agentId === localStorage.getItem('agentId'))
-        this.deviceDetail = tempObj[Object.keys(tempObj)[0]][index];
-        localStorage.setItem('deviceDetail', JSON.stringify(tempObj[Object.keys(tempObj)[0]][index]))
-        localStorage.setItem('company_id', Object.keys(tempObj)[0]);
+        let index = deviceList.findIndex(value => value.agentId === localStorage.getItem('agentId'))
+        this.deviceDetail = deviceList[index];
+        localStorage.setItem('deviceDetail', JSON.stringify(deviceList[index]))
+        localStorage.setItem('company_id', deviceList[index].company_id);
         // this.getDeviceDetail();
       },
       error => {

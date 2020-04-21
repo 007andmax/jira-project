@@ -183,11 +183,15 @@
                                 <span>Video Processor:</span>
                                 N/A
                             </li>
-                              <li>
+                            <li *ngIf="graphics.memory">
                                 <span>Memory Size:</span>
                                 {{graphics.memory/1024/1024}} MB VRAM
                             </li>
-                              <li>
+                            <li *ngIf="!graphics.memory">
+                                <span>Memory Size:</span>
+                                N/A
+                            </li>
+                            <li>
                                 <span>Driver:</span>
                                 version {{graphics.driverVersion}}
                             </li>
