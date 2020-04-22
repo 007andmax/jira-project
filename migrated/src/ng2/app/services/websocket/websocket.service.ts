@@ -13,6 +13,7 @@ import { UsersRealTimeService } from '../../states/users/users-real-time.service
 import { TaxesRealTimeService } from '../../states/taxes/taxes-real-time.service';
 import { GlNumberRealTimeService } from '../../states/gl-number/gl-number-real-time.service';
 import { InventoryRealTimeService } from '../../states/inventory/inventory-real-time.service';
+import { TicketsRealTimeService } from '../../states/tickets/tickets-real-time.service';
 
 /**
  * Websocket service to work with api
@@ -43,7 +44,8 @@ export class WebsocketService {
     private passwordManagerService: PasswordManagerService,
     private taxesRealTimeService:TaxesRealTimeService,
     private glNumberRealTimeService:GlNumberRealTimeService,
-    private inventoryRealTimeService:InventoryRealTimeService
+    private inventoryRealTimeService:InventoryRealTimeService,
+    private ticketsRealTimeService:TicketsRealTimeService
 
     
   ) {
@@ -64,6 +66,7 @@ export class WebsocketService {
       that.subsribeToTaxes();
       that.subsribeToCategories();
       that.subsribeToProducts();
+      that.subsribeToTicketActualNumber();
     });
   }
 private subsribeToDevices () {
@@ -225,6 +228,19 @@ private subsribeToDevices () {
         this.stompClient.subscribe(`/user/watch/glNumber/${id}`, (message) => {
           var newChange = JSON.parse(message.body);
           this.glNumberRealTimeService.handleRealTimeChanges(newChange);
+        
+        });
+     
+    }, 3000);
+  }
+
+  public subsribeToTicketActualNumber() {
+   
+    setTimeout(() => {
+     
+        this.stompClient.subscribe(`/user/watch/number/TICKET`, (message) => {
+          var newChange = JSON.parse(message.body);
+          this.ticketsRealTimeService.handleRealTimeChangesActualNumber(newChange);
         
         });
      

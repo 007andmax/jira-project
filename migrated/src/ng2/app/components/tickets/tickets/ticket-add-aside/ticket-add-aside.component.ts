@@ -26,7 +26,7 @@ export class TicketAddAsideComponent implements OnInit {
   @ViewChild('deviceDP') deviceDP: SelectSearchComponent;
   @ViewChild('companyDP') companyDP: SelectSearchComponent;
   @ViewChild('uplaodFile') uplaodFile: UploadAreaComponent;
-  
+  actualNumber:string = '';
   opened = false;
   mode = 'edit';
   ticketAdd: TicketAdd = new TicketAdd();
@@ -50,6 +50,9 @@ export class TicketAddAsideComponent implements OnInit {
     private companiesState: CompaniesStateService, ) { }
 
   ngOnInit() {
+    this.ticketsStateService.getOnActualNumber().subscribe(data => {
+      this.actualNumber = data;
+    })
     if (this.usersStateService.getAllUsers().length > 0) this.onGetTechUsers(this.usersStateService.getAllUsers());
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.onGetTechUsers(data);

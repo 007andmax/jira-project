@@ -1,15 +1,30 @@
 import { Injectable, EventEmitter } from '@angular/core';
+import { TicketsRealTimeService } from './tickets-real-time.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TicketsStateService {
+  actualNumber:EventEmitter<any> = new EventEmitter();
   filter: EventEmitter<any> = new EventEmitter();
   colorStatus: EventEmitter<any> = new EventEmitter();
   status: EventEmitter<any> = new EventEmitter();
   count: EventEmitter<number> = new EventEmitter();
   toggleAddTicket: EventEmitter<any> = new EventEmitter();
-  constructor() { }
+  constructor(private ticketsRealTimeService:TicketsRealTimeService) { }
+
+  public onInit() {
+    this.ticketsRealTimeService.changeActualNumber.subscribe(newChange => {
+      if (newChange.action === 'NUMBER_CHANGED' && newChange.data.type === "TICKET") {
+        console.log("newChange.data",newChange.data);
+        this.onInitActualNumber(newChange.data.numPart);
+      }
+       
+    })
+  }
+  public onInitActualNumber(data) {
+    this.actualNumber.emit(data);
+  }
   public onInitFilter(data) {
     this.filter.emit(data);
   }
@@ -24,6 +39,9 @@ this.toggleAddTicket.emit(null);
   }
   public onInitCount(data) {
     this.count.emit(data);
+  }
+  public getOnActualNumber() {
+    return this.actualNumber;
   }
   public getOnInitFilter() {
     return this.filter;

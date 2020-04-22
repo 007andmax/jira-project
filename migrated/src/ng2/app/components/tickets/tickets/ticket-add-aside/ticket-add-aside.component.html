@@ -4,7 +4,7 @@
     <div class="qt-aside__header d-f ai-c jc-sb">
       <div class="d-f">
         <div class="qt-aside__title">Create New Ticket</div>
-        <div class="qt-aside__ticket-name">QT 23904</div>
+        <div class="qt-aside__ticket-name" [textContent]="'QT ' + actualNumber"></div>
         <div class="ticket-priority create-dropdown" ngbDropdown>
 
           <input type="text" class="form-control ticket-drop has-dropdown readonly-normal" ngbDropdownToggle
