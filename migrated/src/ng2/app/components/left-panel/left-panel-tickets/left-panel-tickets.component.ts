@@ -75,6 +75,13 @@ export class LeftPanelTicketsComponent implements OnInit {
       this.ticketsStateService.onInitStatus(ticketsColor);
     })
     this.getCounts();
+
+    this.ticketsStateService.getOnGetCounts().subscribe(data => {
+      this.getCounts();
+    })
+    this.ticketsStateService.getOnGetCount().subscribe(data => {
+      this.getCount();
+    })
   }
   private getCount() {
     this.ticketsService.getCount(this.ticketsFilter.getDataForRequest()).subscribe(data => {

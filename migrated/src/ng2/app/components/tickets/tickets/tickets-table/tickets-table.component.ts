@@ -30,14 +30,14 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
   constructor(private ticketsService: TicketsService,
     private ticketsListService: TicketsListService,
     public cd: ChangeDetectorRef,
- 
     private ticketsStateService: TicketsStateService) { }
 
   ngOnInit() {
     this.ticketsStateService.getOnAddTicket().subscribe(data => {
       console.log("data",data);
+      this.ticketsStateService.onGetCounts();
       if (this.ticketsListService.isTicketMatchesFilters(this.ticketsFilter,data)) {
-       
+        this.ticketsStateService.onGetCount();
         this.tickets.unshift(data);
       }
     })
