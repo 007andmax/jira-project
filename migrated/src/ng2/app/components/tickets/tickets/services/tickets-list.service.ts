@@ -53,7 +53,7 @@ export class TicketsListService {
 
     if (ticketsFilter.selectedTechUser) {
       let assignedUser:boolean = (ticketsFilter.selectedTechUser.id === ticket.assignedUserId);
-      let multiAssignedUser = ticket.multiAssignedUsers.find(item => item.id === ticketsFilter.selectedTechUser.id);
+      let multiAssignedUser = (ticket.multiAssignedUsers || []).find(item => item.id === ticketsFilter.selectedTechUser.id);
       selectedTechUser = (assignedUser && !multiAssignedUser);
     }
 
