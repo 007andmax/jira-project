@@ -64,7 +64,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     if (this.ticketsFilter.listType === "ALL" && ticket.ticketSource !== "FROM_RECURRING_TICKET") return true;
     if (this.ticketsFilter.listType === "UNASSIGNED" && ticket.status === null) return true;
     if (this.ticketsFilter.listType === "OPEN" && ticket.status !== "COMPLETED") return true;
-    if (this.ticketsFilter.listType === "USER") {
+    if (this.ticketsFilter.listType === "USERS") {
       if (ticket.assignedUserId === this.usersStateService.getCurrentUser().id) {
         return true;
       } else if (this.checkUserInMultiAssigned(ticket.multiAssignedUsers)) {

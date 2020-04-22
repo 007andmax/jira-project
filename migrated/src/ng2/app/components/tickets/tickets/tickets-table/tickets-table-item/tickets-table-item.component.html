@@ -10,7 +10,7 @@
   </td>
   <td class="ticket-table__company" [textContent]="getCompanyName()"></td>
 
-  <td class="ticket-table__assignee" *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers.length > 0">
+  <td class="ticket-table__assignee" *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length > 0">
    
       <div class="d-f">
         <ng-template ngFor let-user [ngForOf]="ticket.multiAssignedUsers" [ngForTrackBy]="trackById">
@@ -23,8 +23,8 @@
 
 
   </td>
-  <td class="ticket-table__assignee" *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers.length === 0"></td>
-  <td class="ticket-table__assignee" *ngIf="ticket.assignedUserId && ticket.multiAssignedUsers.length === 0">
+  <td class="ticket-table__assignee" *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length === 0"></td>
+  <td class="ticket-table__assignee" *ngIf="ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length === 0">
     <div class="d-f">
       <div class="qt-table-modern__circle-avatar" [textContent]="getAssignedUserNameForAvatar(assignedUser)"
         [ngStyle]="{'background': getStyleAvatar(assignedUser),'background-size': 'cover'}"></div>
