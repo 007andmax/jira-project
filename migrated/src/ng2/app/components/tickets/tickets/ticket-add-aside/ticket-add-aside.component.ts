@@ -26,8 +26,9 @@ export class TicketAddAsideComponent implements OnInit {
   @ViewChild('deviceDP') deviceDP: SelectSearchComponent;
   @ViewChild('companyDP') companyDP: SelectSearchComponent;
   @ViewChild('uplaodFile') uplaodFile: UploadAreaComponent;
-  actualNumber:string = '';
+  actualNumber: string = '';
   opened = false;
+  isAdd = false;
   mode = 'edit';
   ticketAdd: TicketAdd = new TicketAdd();
   companies = [];
@@ -39,10 +40,10 @@ export class TicketAddAsideComponent implements OnInit {
   ticketPriorities: Array<TitleListType> = [new TitleListType('Low Priority', 'LOW'),
   new TitleListType('Medium Priority', 'MEDIUM'),
   new TitleListType('High Priority', 'HIGH')];
-  ticketValidate:TicketValidate= new TicketValidate();
+  ticketValidate: TicketValidate = new TicketValidate();
   constructor(private ticketsStateService: TicketsStateService,
     private usersStateService: UsersStateService,
-    private ticketsService:TicketsService,
+    private ticketsService: TicketsService,
     private devicesSateService: DevicesSateService,
     private notificationStateService: NotificationStateService,
     private elRef: ElementRef,
@@ -70,12 +71,16 @@ export class TicketAddAsideComponent implements OnInit {
   add() {
     if (this.ticketValidate.isValidate(this.ticketAdd)) {
       this.ticketAdd.onAddSharedUsers(this.shareUsersList);
+      this.isAdd = true;
       this.ticketsService.addTicket(this.ticketAdd).subscribe(data => {
+        this.isAdd = false;
         this.notificationStateService.oninitShowNotification("Ticket has been created");
-this.closed();
+        this.closed();
+      },error => {
+        this.isAdd = false;
       })
     }
-   
+
   }
   closed() {
     this.ticketAdd = new TicketAdd();
@@ -127,18 +132,19 @@ this.closed();
       this.shareUsersList = list;
       this.ticketValidate.resetCompany();
 
-      let selectedUser = this.techUsersList.find(user => user.id === this.ticketAdd.assignedUser);
-      if (selectedUser) {
-        let user = new TechUserItem(selectedUser);
-        user.selected = true;
-        this.shareUsersList.push(user);
-      }
+     
     } else {
       this.ticketAdd.createdUser = new TicketCreatedUser();
       this.ticketAdd.clearDeviceId();
       this.users = [];
       this.devices = [];
       this.shareUsersList = [];
+    }
+    let selectedUser = this.techUsersList.find(user => user.id === this.ticketAdd.assignedUser);
+    if (selectedUser) {
+      let user = new TechUserItem(selectedUser);
+      user.selected = true;
+      this.shareUsersList.push(user);
     }
     this.deviceDP.clearClient();
     this.userDP.clearClient();
@@ -238,7 +244,7 @@ this.closed();
     this.ticketAdd.note = event.target.value;
   }
 
-   
+
   public trackByIndex(index, item) {
     return index;
   }
