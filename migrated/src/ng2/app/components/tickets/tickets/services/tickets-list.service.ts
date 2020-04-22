@@ -44,9 +44,9 @@ export class TicketsListService {
   }
   checkFilterUse(ticketsFilter:TicketsFilter,ticket: Ticket) {
     if (ticketsFilter.tags.length > 0) return false;
-  let  selectedCompany = false,
-    selectedTechUser = false,
-    selectedUser = false;
+  let  selectedCompany = true,
+    selectedTechUser = true,
+    selectedUser = true;
     if (ticketsFilter.selectedCompany) {
       selectedCompany = (ticketsFilter.selectedCompany.id === ticket.companyId);
     }
