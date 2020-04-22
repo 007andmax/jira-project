@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { StatusColor } from '../../../left-panel/left-panel-tickets/tickets-status/class/status-color';
 import { TicketsColor } from '../../../left-panel/left-panel-tickets/tickets-status/class/tickets-color';
 import { TicketsCounts } from '../class/tickets-counts';
+import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 
 @Component({
   selector: 'app-tickets-table',
@@ -25,13 +26,21 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
   listColors: Array<StatusColor> = [];
   statusColor: TicketsColor;
   offset: number = 15;
-  
+
   constructor(private ticketsService: TicketsService,
     private ticketsListService: TicketsListService,
     public cd: ChangeDetectorRef,
+    private usersStateService: UsersStateService,
     private ticketsStateService: TicketsStateService) { }
 
   ngOnInit() {
+    this.ticketsStateService.getOnAddTicket().subscribe(data => {
+      console.log("data",data);
+      if (this.isTicketMatchesFilters(data)) {
+        console.log("data", data);
+        this.tickets.unshift(data);
+      }
+    })
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
       this.ticketsFilter = data;
       this.showPreloader = true;
@@ -49,6 +58,27 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     })
 
   }
+  isTicketMatchesFilters(ticket: Ticket) {
+    if (this.ticketsFilter.listType === "ALL" && ticket.ticketSource !== "FROM_RECURRING_TICKET") return true;
+    if (this.ticketsFilter.listType === "UNASSIGNED" && ticket.status === null) return true;
+    if (this.ticketsFilter.listType === "OPEN" && ticket.status !== "COMPLETED") return true;
+    if (this.ticketsFilter.listType === "USER") {
+      if (ticket.assignedUserId === this.usersStateService.getCurrentUser().id) {
+        return true;
+      } else if (this.checkUserInMultiAssigned(ticket.multiAssignedUsers)) {
+        return true;
+      } else if (ticket.status === null) {
+        return true;
+      }
+    }
+    if (this.ticketsFilter.listType === "RECURRING_TICKETS_OPEN" && ticket.ticketSource === "FROM_RECURRING_TICKET" && ticket.status === "IN_PROGRESS") return true;
+    return false;
+  }
+  checkUserInMultiAssigned(multiAssignedUsers) {
+    let find = multiAssignedUsers.find(item => item.id === this.usersStateService.getCurrentUser().id);
+    return (find) ? true : false;
+  }
+
   private getTickets() {
     if (this.ticketsListService.getBlockList()) {
       this.infiniteScrollDisabled = false;

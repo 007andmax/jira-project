@@ -67,6 +67,7 @@ export class WebsocketService {
       that.subsribeToCategories();
       that.subsribeToProducts();
       that.subsribeToTicketActualNumber();
+      that.subsribeToTickets();
     });
   }
 private subsribeToDevices () {
@@ -241,6 +242,18 @@ private subsribeToDevices () {
         this.stompClient.subscribe(`/user/watch/number/TICKET`, (message) => {
           var newChange = JSON.parse(message.body);
           this.ticketsRealTimeService.handleRealTimeChangesActualNumber(newChange);
+        
+        });
+     
+    }, 3000);
+  }
+  public subsribeToTickets() {
+   
+    setTimeout(() => {
+     
+        this.stompClient.subscribe(`/user/watch/tickets`, (message) => {
+          var newChange = JSON.parse(message.body);
+          this.ticketsRealTimeService.handleRealTimeChangesTickets(newChange);
         
         });
      
