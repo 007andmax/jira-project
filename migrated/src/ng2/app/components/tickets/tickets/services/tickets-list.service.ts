@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { TicketsFilter } from '../class/tickets-filter';
+import { Ticket } from '../../class/ticket';
+import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 
 @Injectable()
 export class TicketsListService {
 
   blockList: boolean = false;
   sub: Subscription = new Subscription();
-  constructor() { }
+  constructor(private usersStateService: UsersStateService) { }
   public addSubscription(data) {
     this.sub.add(data);
 
@@ -19,5 +22,49 @@ export class TicketsListService {
   }
   public getBlockList() {
     return this.blockList;
+  }
+
+  isTicketMatchesFilters(ticketsFilter:TicketsFilter,ticket: Ticket) {
+    console.log("this.ticketsFilter.listType",ticketsFilter.listType);
+    console.log("ticket", ticket);
+    if (ticketsFilter.listType === "ALL" && ticket.ticketSource !== "FROM_RECURRING_TICKET" && this.checkFilterUse(ticketsFilter,ticket)) return true;
+    if (ticketsFilter.listType === "UNASSIGNED" && ticket.status === null  && this.checkFilterUse(ticketsFilter,ticket)) return true;
+    if (ticketsFilter.listType === "OPEN" && ticket.status !== "COMPLETED" && this.checkFilterUse(ticketsFilter,ticket)) return true;
+    if (ticketsFilter.listType === "USERS" && this.checkFilterUse(ticketsFilter,ticket)) {
+      if (ticket.assignedUserId === this.usersStateService.getCurrentUser().id) {
+        return true;
+      } else if (this.checkUserInMultiAssigned(ticket.multiAssignedUsers)) {
+        return true;
+      } else if (ticket.status === null) {
+        return true;
+      }
+    }
+    if (ticketsFilter.listType === "RECURRING_TICKETS_OPEN" && ticket.ticketSource === "FROM_RECURRING_TICKET" && ticket.status === "IN_PROGRESS" && this.checkFilterUse(ticketsFilter,ticket)) return true;
+    return false;
+  }
+  checkFilterUse(ticketsFilter:TicketsFilter,ticket: Ticket) {
+    if (ticketsFilter.tags.length > 0) return false;
+  let  selectedCompany = false,
+    selectedTechUser = false,
+    selectedUser = false;
+    if (ticketsFilter.selectedCompany) {
+      selectedCompany = (ticketsFilter.selectedCompany.id === ticket.companyId);
+    }
+
+    if (ticketsFilter.selectedTechUser) {
+      let assignedUser:boolean = (ticketsFilter.selectedTechUser.id === ticket.assignedUserId);
+      let multiAssignedUser = ticket.multiAssignedUsers.find(item => item.id === ticketsFilter.selectedTechUser.id);
+      selectedTechUser = (assignedUser && !multiAssignedUser);
+    }
+
+    if (ticketsFilter.selectedUser) {
+      selectedUser = (ticketsFilter.selectedUser.id === ticket.createdUserId);
+    }
+    return selectedCompany && selectedTechUser && selectedUser;
+
+  }
+  checkUserInMultiAssigned(multiAssignedUsers) {
+    let find = multiAssignedUsers.find(item => item.id === this.usersStateService.getCurrentUser().id);
+    return (find) ? true : false;
   }
 }

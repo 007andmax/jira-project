@@ -62,7 +62,7 @@ export class TicketsTableItemComponent implements OnInit {
   }
   getCompanyName() {
     let company = this.companiesStateService.getCompanies().find(item => item.id === this.ticket.companyId);
-    return company.name;
+    return (company) ?  company.name : '';
   }
   getStyleStatus(field) {
     return {'border-color' : (this.statusColor && this.listColors) ?  this.listColors[this.statusColor[field]].borderColor : null,'background-color' : (this.statusColor && this.listColors) ?  this.listColors[this.statusColor[field]].backgroundColor : null,'color' : (this.statusColor && this.listColors) ?  this.listColors[this.statusColor[field]].borderColor : null}
