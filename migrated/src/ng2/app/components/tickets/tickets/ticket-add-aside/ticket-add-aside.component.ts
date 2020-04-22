@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.service';
 import { TicketAdd } from '../class/ticket-add';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
@@ -10,6 +10,8 @@ import { TechUserItem } from '../../../shared/teh-users/class/tech-user-item';
 import { TitleListType } from '../tickets-header/class/title-list-type';
 import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 import { TicketValidate } from '../class/ticket-validate';
+import { UploadAreaComponent } from '../../../shared/upload-area/upload-area.component';
+import { NotificationStateService } from '../../../shared/notification/services/notification-state.service';
 
 
 
@@ -20,7 +22,11 @@ import { TicketValidate } from '../class/ticket-validate';
 })
 export class TicketAddAsideComponent implements OnInit {
   @ViewChild('userDP') userDP: SelectSearchComponent;
+  @ViewChild('techUserDP') techUserDP: SelectSearchComponent;
   @ViewChild('deviceDP') deviceDP: SelectSearchComponent;
+  @ViewChild('companyDP') companyDP: SelectSearchComponent;
+  @ViewChild('uplaodFile') uplaodFile: UploadAreaComponent;
+  
   opened = false;
   mode = 'edit';
   ticketAdd: TicketAdd = new TicketAdd();
@@ -38,6 +44,8 @@ export class TicketAddAsideComponent implements OnInit {
     private usersStateService: UsersStateService,
     private ticketsService:TicketsService,
     private devicesSateService: DevicesSateService,
+    private notificationStateService: NotificationStateService,
+    private elRef: ElementRef,
     public cd: ChangeDetectorRef,
     private companiesState: CompaniesStateService, ) { }
 
@@ -60,7 +68,8 @@ export class TicketAddAsideComponent implements OnInit {
     if (this.ticketValidate.isValidate(this.ticketAdd)) {
       this.ticketAdd.onAddSharedUsers(this.shareUsersList);
       this.ticketsService.addTicket(this.ticketAdd).subscribe(data => {
-
+        this.notificationStateService.oninitShowNotification("Ticket has been created");
+this.closed();
       })
     }
    
@@ -69,8 +78,13 @@ export class TicketAddAsideComponent implements OnInit {
     this.ticketAdd = new TicketAdd();
     this.ticketValidate = new TicketValidate();
     this.shareUsersList = [];
+    this.elRef.nativeElement.querySelector('#add-ticket-describe-issue').value = '';
+    this.opened = false;
     this.deviceDP.clearClient();
     this.userDP.clearClient();
+    this.techUserDP.clearClient();
+    this.companyDP.clearClient();
+    this.uplaodFile.onClearState();
     this.cd.detectChanges();
 
   }

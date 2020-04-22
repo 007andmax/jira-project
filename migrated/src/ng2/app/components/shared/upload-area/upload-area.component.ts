@@ -11,11 +11,15 @@ export class UploadAreaComponent implements OnInit {
   idfiles: Array<String> = [];
   @Output() changeFiles = new EventEmitter<any>();
   error: string = "- The uploaded file cannot be more than 4 MB.";
-  showError:boolean = false;
   constructor(public cd: ChangeDetectorRef, ) { }
 
   ngOnInit() {
 
+  }
+
+  onClearState() {
+    this.files = [];
+    this.idfiles = [];
   }
   /**
    * on file drop handler

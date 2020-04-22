@@ -57,7 +57,7 @@
             Company is required
           </mat-error>
           <span class="qt-input-block__label">Company</span>
-          <app-select-search  [class]="['qt-dropdown']" [field]="'name'" [list]="companies" [placeholder]="'Select Company'"  (onSelectedItem)="onSelectCompany($event)"></app-select-search>
+          <app-select-search  #companyDP  [class]="['qt-dropdown']" [field]="'name'" [list]="companies" [placeholder]="'Select Company'"  (onSelectedItem)="onSelectCompany($event)"></app-select-search>
         </div>
     
         <div class="qt-input-block">
@@ -73,7 +73,7 @@
       <div class="qt-input-line">
         <div class="qt-input-block">
           <span class="qt-input-block__label">Assign To</span>
-          <app-select-search  [class]="['qt-dropdown']" [list]="getTechUserList()"
+          <app-select-search #techUserDP  [class]="['qt-dropdown']" [list]="getTechUserList()"
           (onSelectedItem)="onSelectTechUser($event)" [placeholder]="'Select User to assign'"></app-select-search>
         </div>
     
@@ -84,7 +84,7 @@
       </div>
       
       <!--  File upload    -->
-      <app-upload-area (changeFiles)="onChangeFiles($event)" class="ticket-fileupload"></app-upload-area>
+      <app-upload-area #uplaodFile (changeFiles)="onChangeFiles($event)" class="ticket-fileupload"></app-upload-area>
       
       <!--  Users to notify  -->
       <div class="users-to-notify">

@@ -12,6 +12,9 @@ export class TicketsService {
   private apiUrl = environment.apiUrl;
   constructor( private http: HttpClient) { }
 
+  public getActualNumber() {
+    return this.http.get(this.apiUrl + `data/actualNumber?type=TICKET`);
+  }
   public addTicket(data) {
     return this.http.post(this.apiUrl + `v2/tickets`,data);
   }
