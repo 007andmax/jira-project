@@ -37,7 +37,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     this.ticketsStateService.getOnAddTicket().subscribe(data => {
       console.log("data",data);
       if (this.isTicketMatchesFilters(data)) {
-        console.log("data", data);
+       
         this.tickets.unshift(data);
       }
     })
@@ -59,6 +59,8 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
 
   }
   isTicketMatchesFilters(ticket: Ticket) {
+    console.log("this.ticketsFilter.listType",this.ticketsFilter.listType);
+    console.log("ticket", ticket);
     if (this.ticketsFilter.listType === "ALL" && ticket.ticketSource !== "FROM_RECURRING_TICKET") return true;
     if (this.ticketsFilter.listType === "UNASSIGNED" && ticket.status === null) return true;
     if (this.ticketsFilter.listType === "OPEN" && ticket.status !== "COMPLETED") return true;
