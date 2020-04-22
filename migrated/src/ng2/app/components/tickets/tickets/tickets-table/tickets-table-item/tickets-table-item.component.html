@@ -24,7 +24,7 @@
 
   </td>
   <td class="ticket-table__assignee" *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length === 0 || !ticket.assignedUserId && !ticket.multiAssignedUsers"></td>
-  <td class="ticket-table__assignee" *ngIf="ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length === 0">
+  <td class="ticket-table__assignee" *ngIf="ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length === 0 || ticket.assignedUserId && !ticket.multiAssignedUsers">
     <div class="d-f">
       <div class="qt-table-modern__circle-avatar" [textContent]="getAssignedUserNameForAvatar(assignedUser)"
         [ngStyle]="{'background': getStyleAvatar(assignedUser),'background-size': 'cover'}"></div>
