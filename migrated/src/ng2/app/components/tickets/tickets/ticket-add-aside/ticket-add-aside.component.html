@@ -2,7 +2,7 @@
   <ng-sidebar [(opened)]="opened" [position]="'right'" class="ticket-add-aside qt-aside">
     
     <div class="qt-aside__header d-f ai-c jc-sb">
-      <div class="d-f">
+      <div class="d-f ai-c">
         <div class="qt-aside__title">Create New Ticket</div>
         <div class="qt-aside__ticket-name" [textContent]="'QT ' + actualNumber"></div>
         <div class="ticket-priority create-dropdown" ngbDropdown>
@@ -115,7 +115,7 @@
               </div>
 
               <div class="assigned-users-type">
-                <ng-template class="assigned-ticket-user" ngFor let-user [ngForOf]="shareUsersList" let-i="index" [ngForTrackBy]="trackByIndex"> 
+                <ng-template class="assigned-ticket-user" ngFor let-user [ngForOf]="shareUsersList" let-i="index" [ngForTrackBy]="trackByIndex">
                 <div class="assigned-ticket-user__item"  *ngIf="user.accountType === 'TECH'">
                   <div *ngIf="user.avatar">
                     <img ng-if="user.avatar" class="img-circle default-user-avatar"
@@ -142,7 +142,7 @@
     </div>
     
     <div class="qt-aside__buttons">
-      <div class="qt-btn --btn40h create-ticket-btn" (click)="add()">
+      <div class="qt-btn --btn40h create-ticket-btn d-f ai-c jc-c" (click)="add()">
         <span *ngIf="!isAdd">Create Ticket</span>
         <span *ngIf="isAdd" class="windows8">
           <span class="wBall" id="wBall_1">

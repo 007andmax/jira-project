@@ -54,12 +54,14 @@ span.qt-input-search input.qt-input-search {
 .qt-input-block {
   display: flex;
   flex-direction: column;
+  position: relative;
 
   &__label {
     font-size: 13px;
     font-weight: 600;
     color: #4f5f79;
     margin-bottom: 11px;
+    line-height: unset;
   }
 
   &__input {
@@ -82,6 +84,12 @@ span.qt-input-search input.qt-input-search {
     &:placeholder {
         color: #9ca5b6;
     }
+  }
+
+  .mat-error {
+      font-size: 12px;
+      position: absolute;
+      top: -17px;
   }
 }
 

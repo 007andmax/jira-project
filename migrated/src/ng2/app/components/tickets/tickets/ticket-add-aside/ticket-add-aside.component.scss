@@ -1,3 +1,23 @@
+.ticket-add-aside {
+  .ticket-priority {
+      width: 160px;
+      font-size: 12px;
+
+      .dropdown-toggle {
+        height: 32px;
+        border: none;
+        background-color: white;
+      }
+      .default-value {
+        top: 0;
+        height: 100%;
+        display: flex;
+        align-items: center;
+      }
+  }
+
+}
+
 .qt-aside{
   &__title {
     margin-right: 24px;
@@ -121,3 +141,4 @@
 .assigned-users-type-clients {
   border-right: 1px solid #ccc;
 }
+
