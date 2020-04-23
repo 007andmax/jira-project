@@ -20,8 +20,8 @@
 <nav>
   <ul class="list-unstyled">
     <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"><a routerLink="/ng2/device/dashboard">Dashboard</a></li>
-    <li [routerLinkActive]="['active']"><a routerLink="/ng2/device/hardware">Hardware</a></li>
-    <li [routerLinkActive]="['active']"><a routerLink="/ng2/device/software">Software list</a></li>
+    <li [routerLinkActive]="['active']" *ngIf="deviceType !== 'printer'"><a routerLink="/ng2/device/hardware">Hardware</a></li>
+    <li [routerLinkActive]="['active']" *ngIf="deviceType !== 'printer'"><a routerLink="/ng2/device/software">Software list</a></li>
     <!-- <li [routerLinkActive]="['active']"><a routerLink="/device/startup-programes">Startup Programmes</a></li>
     <li [routerLinkActive]="['active']"><a routerLink="/device/services">Services</a></li>
     <li [routerLinkActive]="['active']"><a routerLink="/device/antivirus">Antivirus</a></li>

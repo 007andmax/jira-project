@@ -372,7 +372,7 @@
                            </form>
                           <ul class="list-unstyled">
                               <li (click)="assign.selected = !assign.selected;addNotifyUser(assign);editAddUser = !editAddUser;" *ngFor="let assign of assignToList  | searchText : searchUser" [ngClass]="{'active': assign.selected == true}">
-                                <span class="pic"><img src="{{ '/users/' + (assign.id || 'default') + '/image' + (assign.avatar.id ? '.jpg?t=' + assign.avatar.updatedAt : '') }}" alt="user" /></span>
+                                <span class="pic"><img *ngIf="assign.avatar != null" src="{{ '/users/' + (assign.id || 'default') + '/image' + (assign.avatar.id ? '.jpg?t=' + assign.avatar.updatedAt : '') }}" alt="user" /></span>
                                  <div class="info">
                                    <h5>{{assign.firstName}} {{assign.lastName}}</h5>
                                    <span class="email">{{assign.primaryEmail}}</span>

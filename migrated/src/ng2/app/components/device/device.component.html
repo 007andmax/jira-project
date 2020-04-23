@@ -7,7 +7,7 @@
                 <span class="device-icn"><img src="../../../ng1/images/device/device.svg" alt="device" /></span>
                   <div class="head-device">
                       <h6>Device</h6>
-                      <h5>{{deviceDetail.hostName}}</h5>
+                      <h5>{{deviceDetail.label || deviceDetail.hostName || deviceDetail.ip}}</h5>
                   </div>
             </div>
             <div class="hp-device-info">

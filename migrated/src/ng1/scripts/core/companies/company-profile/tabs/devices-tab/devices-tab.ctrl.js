@@ -214,9 +214,13 @@
         };
 
         $scope.redirectDevice = function (agent) {
-          localStorage.setItem('agentId', agent.agentId);
-          var url = '/#/ng2/device/dashboard';
-          window.open(url,'_blank');
+          if (agent.agentId) {
+            localStorage.setItem('agentId', agent.agentId);
+            localStorage.setItem('type', agent.type);
+            var url = '/#/ng2/device/dashboard';
+            window.open(url,'_blank');
+          }
+          
         };
 
         function markDeviceAsMaster() {

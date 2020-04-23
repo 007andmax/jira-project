@@ -28,9 +28,13 @@
                                   <span>Computer Name:</span>
                                   {{deviceName || 'N/A'}}
                               </li>
-                                <li>
+                              <li *ngIf="system.architecture != undefined && system.architecture != ''">
                                   <span>System Type:</span>
                                   ({{system.architecture}}) system
+                              </li>
+                              <li *ngIf="system.architecture == undefined || system.architecture == ''">
+                                  <span>System Type:</span>
+                                  N/A
                               </li>
                               <li>
                                 <span>Warranty:</span>
@@ -124,7 +128,7 @@
                             <h3>Memory</h3>
                         </div>
                         <ul class="list-unstyled">
-                          <li>
+                          <li *ngIf="memory.capacity != undefined">
                               <span>Size:</span>
                               {{memory.capacity/1024/1024}} MB RAM
                               <!-- <div>DIMM 1: 4,096 MB RAM (DDR3-1066 PC3-85— 533 MHz, DIMM)</div>
@@ -134,6 +138,10 @@
                               <div>DIMM 1: 4,096 MB RAM (DDR3-1066 PC3-85— 533 MHz, DIMM)</div>
                               <div>DIMM 1: 4,096 MB RAM (DDR3-1066 PC3-85— 533 MHz, DIMM)</div> -->
                           </li>
+                          <li *ngIf="memory.capacity == undefined">
+                            <span>Size:</span>
+                            N/A
+                        </li>
                           
                         </ul>
                       </div>
@@ -149,15 +157,35 @@
                                 <span>Model(s):</span>
                                 {{networkAdapters.description || 'N/A'}}
                             </li>
-                              <li>
+                            <li>
                                 <span>IP:</span>
                                 {{networkAdapters.ip_address || 'N/A'}}
                             </li>
-                              <li>
-                                <span>MAC:</span>
-                                {{networkAdapters.mac || 'N/A'}}
+                            <li>
+                                <span>Subnet Mask:</span>
+                                {{networkAdapters.subnet || 'N/A'}}
                             </li>
-                              <li>
+                            <li>
+                                <span>Preferred DNS Server:</span>
+                                {{networkAdapters.dns || 'N/A'}}
+                            </li>
+                            <li *ngIf="networkAdapters.speed != undefined">
+                                <span>Link Speed:</span>
+                                {{networkAdapters.speed/1000000}} (MegaBit)
+                            </li>
+                            <li *ngIf="networkAdapters.speed == undefined">
+                                <span>Link Speed:</span>
+                                N/A
+                            </li>
+                            <li>
+                                <span>External IP:</span>
+                                {{externalIp || 'N/A'}}
+                            </li>
+                            <li>
+                                <span>MAC:</span>
+                                {{formatMacAddress(networkAdapters.mac) || 'N/A'}}
+                            </li>
+                            <li>
                                 <span>DHCP:</span>
                                 {{networkAdapters.dhcp_server || 'N/A'}}
                             </li>
@@ -183,11 +211,11 @@
                                 <span>Video Processor:</span>
                                 N/A
                             </li>
-                            <li *ngIf="graphics.memory">
+                            <li *ngIf="graphics.memory != undefined">
                                 <span>Memory Size:</span>
                                 {{graphics.memory/1024/1024}} MB VRAM
                             </li>
-                            <li *ngIf="!graphics.memory">
+                            <li *ngIf="graphics.memory == undefined">
                                 <span>Memory Size:</span>
                                 N/A
                             </li>
@@ -242,11 +270,11 @@
                             <span>File Format(s):</span>
                             NTFS ({{logicalDisks.device_id}})
                         </li>
-                        <li *ngIf="logicalDisks.size">
+                        <li *ngIf="logicalDisks.size != undefined">
                             <span>Size:</span>
                             {{logicalDisks.size/1024/1024}} GB
                         </li>
-                        <li *ngIf="!logicalDisks.size">
+                        <li *ngIf="logicalDisks.size == undefined">
                             <span>Size:</span>
                             N/A
                         </li>

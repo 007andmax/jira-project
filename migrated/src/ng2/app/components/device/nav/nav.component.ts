@@ -14,10 +14,13 @@ export class NavComponent implements OnInit {
   currentUser = '';
   currentCompany = '';
   imgUrl = '';
+  deviceType = '';
   constructor(private commonHttpServices: CommonHttpServices,
     private toastr: ToastrService) { }
 
   ngOnInit() {
+    this.deviceType = localStorage.getItem('type');
+    // this.deviceType = 'printer';
     this.getCurrentUser();
     this.getCurrentCompany();
   } 

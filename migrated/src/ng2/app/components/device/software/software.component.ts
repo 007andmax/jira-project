@@ -8,6 +8,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { HardwareService } from '../_services/hardware.service';
 import { CONFIGCONSTANTS } from '../config/app-constants';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-software',
@@ -32,10 +33,14 @@ export class SoftwareComponent implements OnInit {
       private toastr: ToastrService,
       private modalService: BsModalService,
       private deviceDetailService: DeviceDetailService,
-      private hardwareService: HardwareService) {
+      private hardwareService: HardwareService,
+      private router: Router) {
   }
 
   ngOnInit() {
+    if(localStorage.getItem('type') === 'printer') {
+      this.router.navigate(['/ng2/device/dashboard']);
+    }
     this.myDateValue = new Date();
     this.deviceDetail = JSON.parse(localStorage.getItem('deviceDetail'));
     if (Object.keys(this.deviceDetailService.getDevice()).length === 0) {

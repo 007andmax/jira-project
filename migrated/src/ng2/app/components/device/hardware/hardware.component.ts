@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CommonHttpServices } from '../_services/common_http.service';
 import { CommonServices } from '../_services/common.service';
 import { CONFIGCONSTANTS } from '../config/app-constants';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-hardware',
@@ -35,16 +36,20 @@ export class HardwareComponent implements OnInit {
   DateTimeFormat = CONFIGCONSTANTS.DateTimeFormat;
   constructor(private hardwareService: HardwareService, private toastr: ToastrService,
 				 private commonHttpServices: CommonHttpServices, private commonServices: CommonServices,
-				 private deviceDetailService: DeviceDetailService) {}
+         private deviceDetailService: DeviceDetailService,
+         private router: Router) {}
 
   ngOnInit() {
-	this.deviceDetail = JSON.parse(localStorage.getItem('deviceDetail'));
-	this.hardwareDetail = this.deviceDetailService.getDevice();
-	if (Object.keys(this.hardwareDetail).length === 0) {
-		this.getDeviceDetail();
-	} else {
-		this.setData();
-	}
+    if(localStorage.getItem('type') === 'printer') {
+      this.router.navigate(['/ng2/device/dashboard']);
+    }
+    this.deviceDetail = JSON.parse(localStorage.getItem('deviceDetail'));
+    this.hardwareDetail = this.deviceDetailService.getDevice();
+    if (Object.keys(this.hardwareDetail).length === 0) {
+      this.getDeviceDetail();
+    } else {
+      this.setData();
+    }
 	
   }
 
@@ -68,17 +73,26 @@ export class HardwareComponent implements OnInit {
   }
 
   setData () {
-	this.system = this.hardwareDetail.reports[0].system;
+	this.system = this.hardwareDetail.reports[0].system || {};
 	this.deviceName = this.hardwareDetail.reports[0].deviceName;
-	this.graphics = this.hardwareDetail.reports[0].videoCards[0];
-	this.motherBoard = this.hardwareDetail.reports[0].motherboard;
-	this.bios = this.hardwareDetail.reports[0].bios;
-	this.display = this.hardwareDetail.reports[0].monitors[0];
-	this.logicalDisks = this.hardwareDetail.reports[0].logicalDisks.filter(value => value.is_system === true)[0];
-	this.processors = this.hardwareDetail.reports[0].processors[0];
-	this.memory = this.hardwareDetail.reports[0].ram.slots[0];
+	this.graphics = this.hardwareDetail.reports[0].videoCards[0] || {};
+	this.motherBoard = this.hardwareDetail.reports[0].motherboard || {};
+	this.bios = this.hardwareDetail.reports[0].bios || {};
+	this.display = this.hardwareDetail.reports[0].monitors[0] || {};
+	this.logicalDisks = this.hardwareDetail.reports[0].logicalDisks.filter(value => value.is_system === true)[0] || {};
+	this.processors = this.hardwareDetail.reports[0].processors[0] || {};
+	this.memory = this.hardwareDetail.reports[0].ram.slots[0] || {};
 	this.networkAdapters = this.hardwareDetail.reports[0].networkAdapters.filter(value => value.ip_enabled === true)[0] || {};
-	this.externalIp = this.hardwareDetail.reports[0].externalIp;
+	this.externalIp = this.hardwareDetail.reports[0].externalIp || {};
   }
+
+  formatMacAddress = function (mac) {
+    if(mac) {
+      return mac.match(/.{1,2}/g).join(' ');  
+    } else {
+      return 'N/A';
+    }
+    
+  };
 
 }

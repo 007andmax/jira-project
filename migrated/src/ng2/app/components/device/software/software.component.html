@@ -44,9 +44,9 @@
                     <h5>{{software.softName}}</h5>
                   </td>
                   <td class="pulisher">{{software.softPublisher}}</td>
-                  <td class="version">{{software.softVersion}}</td>
+                  <td class="version">{{software.softVersion || 'N/A'}}</td>
                   <td class="install">{{(software.softInstalledOn | date : DateFormat) || 'N/A'}}</td>
-                  <td class="c-version">{{software.softVersion}}</td>
+                  <td class="c-version">{{software.softVersion || 'N/A'}}</td>
                   <!-- <td class="action">
                     <a class="remove" data-tooltip="Remove" (click)="openModal(templateDelete, index + 1);"><img src="../../../../../ng1/images/device/remove.svg" alt="remove"/></a>
                   </td> -->
