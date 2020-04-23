@@ -1,5 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { TicketsRealTimeService } from './tickets-real-time.service';
+import { TicketProfile } from '../../components/tickets/tickets/class/ticket-profile';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,7 @@ import { TicketsRealTimeService } from './tickets-real-time.service';
 export class TicketsStateService {
   actualNumber: EventEmitter<any> = new EventEmitter();
   addTicket: EventEmitter<any> = new EventEmitter();
+  editTicket: EventEmitter<TicketProfile> = new EventEmitter();
   filter: EventEmitter<any> = new EventEmitter();
   getCounts: EventEmitter<any> = new EventEmitter();
   getCount: EventEmitter<any> = new EventEmitter();
@@ -30,6 +32,12 @@ export class TicketsStateService {
         this.addTicket.emit(newChange.data);
       }
     })
+  }
+  public onEditTicket(data) {
+    this.editTicket.emit(data);
+  }
+  public getOnEditTicket() {
+    return this.editTicket;
   }
   public onGetCounts() {
     this.getCounts.emit(null);

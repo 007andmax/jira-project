@@ -62,6 +62,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
   editTicket(id) {
     this.ticketsService.getTicket(id).subscribe(data => {
 console.log("data",data);
+this.ticketsStateService.onEditTicket(data);
     })
   }
   private getTickets() {
