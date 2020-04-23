@@ -54,7 +54,7 @@ export class TicketsTableItemComponent implements OnInit {
       let type = (date.getHours() >= 12) ? 'PM' : 'AM';
       return `${(hours < 10 ? '0' + hours : hours)}:${(date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes()} ${type}`;
     }
-    return moment(date).format('DD MMM YYYY')
+    return moment(date).format('DD MMM')
   }
   getAssignedUserNameForAvatar(user) {
     if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}${(user.lastName) ? user.lastName[0].toUpperCase() : ''}`;
@@ -68,6 +68,6 @@ export class TicketsTableItemComponent implements OnInit {
     return {'border-color' : (this.statusColor && this.listColors) ?  this.listColors[this.statusColor[field]].borderColor : null,'background-color' : (this.statusColor && this.listColors) ?  this.listColors[this.statusColor[field]].backgroundColor : null,'color' : (this.statusColor && this.listColors) ?  this.listColors[this.statusColor[field]].borderColor : null}
   }
   getClassType() {
-    return `priority-icon ${(this.ticket.priorityLevel) ? '--' + this.ticket.priorityLevel.toLowerCase() : ''}`;
+    return `priority-icon ${(this.ticket.priorityLevel && this.ticket.priorityLevel !== "MEDIUM") ? '--' + this.ticket.priorityLevel.toLowerCase() : ''}`;
   }
 }
