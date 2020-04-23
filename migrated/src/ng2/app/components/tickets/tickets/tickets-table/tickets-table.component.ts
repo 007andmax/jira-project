@@ -59,7 +59,11 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
 
   }
  
-
+  editTicket(id) {
+    this.ticketsService.getTicket(id).subscribe(data => {
+console.log("data",data);
+    })
+  }
   private getTickets() {
     if (this.ticketsListService.getBlockList()) {
       this.infiniteScrollDisabled = false;

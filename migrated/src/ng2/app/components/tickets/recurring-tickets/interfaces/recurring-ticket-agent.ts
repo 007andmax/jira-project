@@ -6,4 +6,5 @@ export interface RecurringTicketAgent {
     deviceType: string;
     label: string;
     iconName: string;
+    
 }
