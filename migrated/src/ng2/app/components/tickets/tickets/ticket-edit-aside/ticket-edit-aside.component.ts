@@ -21,7 +21,7 @@ export class TicketEditAsideComponent implements OnInit {
   listColors: Array<StatusColor> = [];
   statusColor: TicketsColor;
   listAssignedUser: Array<CurrentUser> = [];
-  
+
 
   constructor(private ticketsStateService: TicketsStateService,
     private ticketsService: TicketsService,
@@ -41,18 +41,35 @@ export class TicketEditAsideComponent implements OnInit {
       this.statusColor = data;
     })
   }
+  onChangeTags(data) {
+    this.ticketProfile.tags = data;
+    
+      let tags = this.ticketProfile.tags.map(item => {
+        return {
+          id: item.id,
+          word: item.word,
+          colorCode: 0,
+          usedCounter: item.usedCounter,
+        }
+      })
+      this.ticketsService.addTags(this.ticketProfile.id, tags).subscribe(res => {
+
+      })
+    
+
+  }
   onSelectAssignedUser(data) {
     this.listAssignedUser = data;
   }
   onToggleAddAssignedUser() {
     this.showAddAssignedUser = !this.showAddAssignedUser;
-    console.log("this.showAddAssignedUser",this.showAddAssignedUser);
+    console.log("this.showAddAssignedUser", this.showAddAssignedUser);
     if (!this.showAddAssignedUser && this.listAssignedUser.length > 0) {
       let ids = this.listAssignedUser.map(item => {
         return item.id;
       })
       this.ticketsService.addAssignUsers(this.ticketProfile.id, ids).subscribe(data => {
-         
+
       })
     }
   }

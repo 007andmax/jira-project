@@ -1,0 +1,38 @@
+<div class="col-md-12 light-dropdown"
+     ngbDropdown #products="ngbDropdown">
+  <mat-form-field>
+    <mat-chip-list #chipList aria-label="Fruit selection">
+      <mat-chip
+      class="selected-tag-ticket"
+        *ngFor="let tag of selectedTag; let i = index"
+        [selectable]="selectable"
+        [removable]="removable"
+        (removed)="remove(i)">
+        {{tag.word}}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
+      <input
+        id="dropdownServices" ngbDropdownToggle
+        placeholder="eg. Window update, Monthly maintainace"
+        #userInput
+        class="pointer"
+        [formControl]="tagCtrl"
+        [matChipInputFor]="chipList"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        [matChipInputAddOnBlur]="addOnBlur"
+       
+        (matChipInputTokenEnd)="add($event)">
+    </mat-chip-list>
+    
+  </mat-form-field>
+  <div class="dropdown-menu"
+       ngbDropdownMenu aria-labelledby="dropdownServices">
+    <ng-template ngFor let-tag [ngForOf]="tags" [ngForTrackBy]="trackById">
+      <button ngbDropdownItem class="dropdown-item"
+              (click)="selected(tag)"
+              [textContent]="tag.word">
+      </button>
+    </ng-template>
+  </div>
+</div>
+

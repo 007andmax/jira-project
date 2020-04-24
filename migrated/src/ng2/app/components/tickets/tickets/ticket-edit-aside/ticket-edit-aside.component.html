@@ -41,6 +41,7 @@
           </div>
   
         </div>
+        <app-ticket-edit-tags [selectedTag]="ticketProfile.tags" (tagsChange)="onChangeTags($event)"></app-ticket-edit-tags>
         <app-add-assigned-user [selectedUsers]="listAssignedUser" (onSelected)="onSelectAssignedUser($event)" (hidden)="onToggleAddAssignedUser()" *ngIf="showAddAssignedUser"></app-add-assigned-user>
         <!--   TICKET SUBJECT AND DESCRIPTION   -->
         <div class="ticket-edit-aside__ticket-text">

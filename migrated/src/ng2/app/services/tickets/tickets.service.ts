@@ -13,7 +13,9 @@ export class TicketsService {
   private apiUrl = environment.apiUrl;
   constructor( private http: HttpClient) { }
 
-  
+  public addTags(id,tags) {
+    return this.http.put(this.apiUrl + `tags?ticketId=${id}`,tags)
+  }
   public addAssignUsers(id,ids) {
     return this.http.put(this.apiUrl + `v2/tickets/${id}/assign`,{value: ids.join(",")})
   }

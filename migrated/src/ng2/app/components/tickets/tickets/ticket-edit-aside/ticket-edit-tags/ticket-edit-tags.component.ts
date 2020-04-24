@@ -1,0 +1,167 @@
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, HostListener, Input } from '@angular/core';
+import { ENTER, COMMA } from '@angular/cdk/keycodes';
+import { FormControl } from '@angular/forms';
+ 
+import { Subscription } from 'rxjs';
+ 
+import { TagsStateService } from 'src/ng2/app/components/shared/tags/services/tags-state.service';
+import { MatChipInputEvent } from '@angular/material';
+import { TagsService } from 'src/ng2/app/services/tags/tags.service';
+import { Tag } from 'src/ng2/app/interfaces/tag/tag';
+
+@Component({
+  selector: 'app-ticket-edit-tags',
+  templateUrl: './ticket-edit-tags.component.html',
+  styleUrls: ['./ticket-edit-tags.component.scss']
+})
+export class TicketEditTagsComponent implements OnInit, OnDestroy {
+
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  focus = false;
+  isResend = false;
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  tagCtrl = new FormControl();
+  @Input() selectedTag = [];
+  tags: Array<Tag> = [];
+  reqTags: Array<Tag> = [];
+  sub = new Subscription();
+  editItem:any;
+  init:boolean = false;
+  @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
+  @Output() tagsChange = new EventEmitter();
+  
+  /**
+   * Creates an instance of the TagsComponent with the injected services
+   * @param {TagsService} tagsService Service to work with tags
+   * @param {TagsStateService} tagsState to work with tags state
+   */
+  public constructor(
+    private tagsService: TagsService,
+    private tagsState: TagsStateService
+  ) { }
+
+  /**
+   * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
+   */
+  public ngOnInit() {
+    this.tagsService.getTags().subscribe((data) => {
+      this.tags = data.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
+        1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
+      this.reqTags = data;
+      console.log("this.tags",this.tags);
+    })
+    
+    this.onInitClearState();
+    this.onCheckEditItem();
+  }
+
+  /**
+  * Subscribe for edit mode
+  */
+  private onCheckEditItem () {
+    let getTagsFromEdit = this.tagsState.getTagsFromEdit().subscribe((data) => {
+      this.selectedTag = data;
+    });
+    this.sub.add(getTagsFromEdit);
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickout(event) {
+    console.log("clickout",event.target);
+    if (event.target.closest('.selected-tag-ticket')) return;
+    if (!event.target.closest('app-ticket-edit-tags') && !event.target.closest('.dropdown-menu') && this.init) {
+      this.init = false;
+      this.tagsChange.emit(this.selectedTag);
+    }   
+    //  if (event.target.tagName === 'NGB-MODAL-WINDOW' && this.initialized && !this.showConfirm)// this.onCheckChange();
+  }
+   
+  /**
+  * Subscribe for clear data
+  */
+  private onInitClearState() {
+    let getClearState = this.tagsState.getClearState().subscribe(() => this.close());
+    this.sub.add(getClearState);
+  }
+
+  /**
+   * Add selected tag
+   * @param event - selected tag
+   */
+  public add(event: MatChipInputEvent): void {
+
+    // if (!this.matAutocomplete.isOpen) {
+    const input = event.input;
+    const value = event.value;
+
+    if ((value || '').trim()) {
+      let tag: Tag = {
+        colorCode: 0, usedCounter: 0, word: value.trim(), id :''
+      }
+
+      this.tagsService.setTags(tag).subscribe((res) => {
+        this.init = true;
+        tag.id = res.id;
+        this.tags.push(tag);
+        this.selectedTag.push(tag);
+   //    this.tagsChange.emit(this.selectedTag);
+      });
+    
+    }
+    if (input) {
+      input.value = '';
+    }
+    this.tagCtrl.setValue(null);
+    // }
+  }
+
+  /**
+   * Remove tag from selected
+   * @param index - user index
+   */
+  public remove(index): void {
+    if (index >= 0) {
+      this.selectedTag.splice(index, 1);
+   //   this.tagsChange.emit(this.selectedTag);
+    }
+    this.init = true;
+  }
+
+  /**
+   * Add tag to selected
+   * @param tag - selected tag
+   */
+  public selected(tag): void {
+    this.init = true;
+    console.log("tag",tag);
+    console.log("this.selectedTag",this.selectedTag);
+    let find = this.selectedTag.find(item => item.id === tag.id);
+    if (!find) {
+      this.selectedTag.push(tag);
+    } 
+   
+//    this.tagsChange.emit(this.selectedTag);
+  //  this.userInput.nativeElement.blur();
+    this.tagCtrl.setValue(null);
+  }
+
+  /**
+   * Close tags list
+   */
+  public close() {
+    this.selectedTag = [];
+ //   this.tagsChange.emit(this.selectedTag);
+  }
+
+  public trackById(index, item) {
+    return item.id;
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
+}
