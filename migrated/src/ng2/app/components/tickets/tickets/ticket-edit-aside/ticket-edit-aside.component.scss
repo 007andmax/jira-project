@@ -26,6 +26,11 @@
     background-position: center;
     background-size: cover;
     border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: white;
   }
 
   &__header-company {
@@ -128,6 +133,12 @@
       background-position: center;
       background-size: cover;
       margin-left: -13px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 500;
 
       &:last-child {
         margin-left: 0;

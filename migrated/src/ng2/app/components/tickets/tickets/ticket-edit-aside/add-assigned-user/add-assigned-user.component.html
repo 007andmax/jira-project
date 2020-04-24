@@ -1,7 +1,8 @@
-<div class="col-md-12">
+<div class="ticket-edit-user-tags">
   <mat-form-field>
     <mat-chip-list #chipList aria-label="Fruit selection">
       <mat-chip
+        class="selected-tag-user"
         *ngFor="let user of selectedUsers; let i = index"
         [selectable]="selectable"
         [removable]="removable"
@@ -16,7 +17,6 @@
        
       </mat-chip>
       <input
-        placeholder="Add receipt email address"
         #userInput
         class="pointer"
         [formControl]="userCtrl"
@@ -26,13 +26,13 @@
         (input)="onSearchUser($event)"
         >
     </mat-chip-list>
-    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-      <mat-option *ngFor="let user of users" [value]="user">
+    <mat-autocomplete class="autocomplete-user-tags" #auto="matAutocomplete" (optionSelected)="selected($event)">
+      <mat-option class="ai-c" *ngFor="let user of users" [value]="user">
         <div class="assigne-user-item">
         <div class="assigne-user-avatar" [textContent]="getAssignedUserNameForAvatar(user)"
         [ngStyle]="{'background': getStyleAvatar(user),'background-size': 'cover'}"></div>
-        <div [textContent]="getUserName(user)"></div>
-        <span [textContent]="user.primaryEmail"></span>
+        <div class="assigne-user-name" [textContent]="getUserName(user)"></div>
+        <span class="assigne-user-email" [textContent]="user.primaryEmail"></span>
       </div>
       </mat-option>
     </mat-autocomplete>
