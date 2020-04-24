@@ -169,7 +169,8 @@ export class DeviceComponent implements OnInit {
         this.loading = false;
         if (type === 'CSS') {
           this.modalRef.hide();
-          this.getViewer();
+          // this.getViewer();
+          this.getConstant(resp.sessionId);
         } else {
           this.getConstant(resp.sessionId);
           
