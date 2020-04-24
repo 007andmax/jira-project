@@ -27,20 +27,21 @@
           </div>
     
           <div class="d-f ai-c">
-            <div class="ticket-edit-aside__more-users-title">
-              +5 more
+            <div class="ticket-edit-aside__more-users-title" *ngIf="listAssignedUser.length > 3" [textContent]="'+' + (listAssignedUser.length- 3) + ' more'">
+          
             </div>
             <div class="more-users-avatars">
-              <div class="more-users-avatars__avatar" style="background-image: url(https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)"></div>
-              <div class="more-users-avatars__avatar" style="background-image: url(https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)"></div>
-              <div class="more-users-avatars__avatar" style="background-image: url(https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)"></div>
-            </div>
+              <ng-template class="assigned-ticket-user" ngFor let-user [ngForOf]="listAssignedUser" let-i="index" [ngForTrackBy]="trackByIndex">
+                <div class="more-users-avatars__avatar" *ngIf="i < 3" [textContent]="getAssignedUserNameForAvatar(user)"   [ngStyle]="{'background': getStyleAvatar(user),'background-size': 'cover'}"></div>
+                </ng-template>
+              </div>
       
-            <div class="qt-modal-circle-button add-user"></div>
+            <div class="qt-modal-circle-button add-user" (click)="onToggleAddAssignedUser()"></div>
             <div class="qt-modal-circle-button more-vertical-ng2"></div>
           </div>
   
         </div>
+        <app-add-assigned-user [selectedUsers]="listAssignedUser" (onSelected)="onSelectAssignedUser($event)" (hidden)="onToggleAddAssignedUser()" *ngIf="showAddAssignedUser"></app-add-assigned-user>
         <!--   TICKET SUBJECT AND DESCRIPTION   -->
         <div class="ticket-edit-aside__ticket-text">
           

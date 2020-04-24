@@ -13,6 +13,10 @@ export class TicketsService {
   private apiUrl = environment.apiUrl;
   constructor( private http: HttpClient) { }
 
+  
+  public addAssignUsers(id,ids) {
+    return this.http.put(this.apiUrl + `v2/tickets/${id}/assign`,{value: ids.join(",")})
+  }
   public getTicket(id) {
     return this.http.get(this.apiUrl + `v2/tickets/${id}`).pipe( map((data:any) => new TicketProfile(data)));
   }

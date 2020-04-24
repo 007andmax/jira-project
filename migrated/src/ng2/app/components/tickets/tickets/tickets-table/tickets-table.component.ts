@@ -34,9 +34,9 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.ticketsStateService.getOnAddTicket().subscribe(data => {
-      console.log("data",data);
+      console.log("data", data);
       this.ticketsStateService.onGetCounts();
-      if (this.ticketsListService.isTicketMatchesFilters(this.ticketsFilter,data)) {
+      if (this.ticketsListService.isTicketMatchesFilters(this.ticketsFilter, data)) {
         this.ticketsStateService.onGetCount();
         this.tickets.unshift(data);
       }
@@ -58,11 +58,11 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     })
 
   }
- 
+
   editTicket(id) {
     this.ticketsService.getTicket(id).subscribe(data => {
-console.log("data",data);
-this.ticketsStateService.onEditTicket(data);
+      console.log("data", data);
+      this.ticketsStateService.onEditTicket(data);
     })
   }
   private getTickets() {

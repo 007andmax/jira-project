@@ -5,6 +5,8 @@ import { CompaniesStateService } from 'src/ng2/app/states/company/companies-stat
 import * as moment from "moment";
 import { StatusColor } from '../../../left-panel/left-panel-tickets/tickets-status/class/status-color';
 import { TicketsColor } from '../../../left-panel/left-panel-tickets/tickets-status/class/tickets-color';
+import { CurrentUser } from 'src/ng2/class/current-user/current-user';
+import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 @Component({
   selector: 'app-ticket-edit-aside',
   templateUrl: './ticket-edit-aside.component.html',
@@ -15,14 +17,21 @@ export class TicketEditAsideComponent implements OnInit {
   opened = false;
   modeSubject = 'view';
   modeDescription = 'view';
+  showAddAssignedUser = false;
   listColors: Array<StatusColor> = [];
   statusColor: TicketsColor;
+  listAssignedUser: Array<CurrentUser> = [];
+  
+
   constructor(private ticketsStateService: TicketsStateService,
+    private ticketsService: TicketsService,
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
     this.ticketsStateService.getOnEditTicket().subscribe(data => {
       this.ticketProfile = data;
+      if (this.ticketProfile.assignedUser) this.listAssignedUser.push(this.ticketProfile.assignedUser);
+      if (this.ticketProfile.multiAssignedUsers) this.listAssignedUser = [...this.listAssignedUser, ...this.ticketProfile.multiAssignedUsers];
       this.opened = true;
     })
     this.ticketsStateService.getOnInitColor().subscribe(data => {
@@ -32,7 +41,21 @@ export class TicketEditAsideComponent implements OnInit {
       this.statusColor = data;
     })
   }
-
+  onSelectAssignedUser(data) {
+    this.listAssignedUser = data;
+  }
+  onToggleAddAssignedUser() {
+    this.showAddAssignedUser = !this.showAddAssignedUser;
+    console.log("this.showAddAssignedUser",this.showAddAssignedUser);
+    if (!this.showAddAssignedUser && this.listAssignedUser.length > 0) {
+      let ids = this.listAssignedUser.map(item => {
+        return item.id;
+      })
+      this.ticketsService.addAssignUsers(this.ticketProfile.id, ids).subscribe(data => {
+         
+      })
+    }
+  }
   getCompantName() {
     let find = this.companiesStateService.getCompanies().find(item => item.id === this.ticketProfile.companyId);
     return (find) ? find.name : '';
@@ -66,7 +89,7 @@ export class TicketEditAsideComponent implements OnInit {
     return `${moment(date).format('DD MMM YYYY')}, ${(hours < 10 ? '0' + hours : hours)}:${(date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes()} ${type}`
   }
   getStyleStatus(field) {
-    return {'border-color' : (this.statusColor && this.listColors) ?  this.listColors[this.statusColor[field]].borderColor : null,'background-color' : (this.statusColor && this.listColors) ?  this.listColors[this.statusColor[field]].backgroundColor : null,'color' : (this.statusColor && this.listColors) ?  this.listColors[this.statusColor[field]].borderColor : null}
+    return { 'border-color': (this.statusColor && this.listColors) ? this.listColors[this.statusColor[field]].borderColor : null, 'background-color': (this.statusColor && this.listColors) ? this.listColors[this.statusColor[field]].backgroundColor : null, 'color': (this.statusColor && this.listColors) ? this.listColors[this.statusColor[field]].borderColor : null }
   }
   parseTicketSource() {
     if (!this.ticketProfile.ticketSource) {

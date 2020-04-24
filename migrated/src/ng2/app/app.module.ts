@@ -208,6 +208,7 @@ import { TicketEditAsideUsersComponent } from './components/tickets/tickets/tick
 import { TicketsStatusComponent } from './components/left-panel/left-panel-tickets/tickets-status/tickets-status.component';
 import { UploadAreaProgressComponent } from './components/shared/upload-area/upload-area-progress/upload-area-progress.component';
 import { DndDirective } from './directives/dnd.directive';
+import { AddAssignedUserComponent } from './components/tickets/tickets/ticket-edit-aside/add-assigned-user/add-assigned-user.component';
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 declare var angular: any;
@@ -499,7 +500,8 @@ angular.module('quicktech')
     TicketEditAsideUsersComponent,
     TicketsStatusComponent,
     UploadAreaProgressComponent,
-    DndDirective
+    DndDirective,
+    AddAssignedUserComponent
   ],
   imports: [
     BrowserModule,

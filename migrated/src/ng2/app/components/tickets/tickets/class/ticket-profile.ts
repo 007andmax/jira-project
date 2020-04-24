@@ -63,7 +63,7 @@ export class TicketProfile {
             }
             this.agent = new TicketProfileAgent(data.agent);
             this.assignPerformer = new CurrentUser(data.assignPerformer);
-            this.assignedUser = new CurrentUser(data.assignedUser);
+            this.assignedUser = (data.assignedUser) ? new CurrentUser(data.assignedUser) : null;
             this.attachments = data.attachments.map(item => {
                 return new TicketProfileAttachment(item);
             })
