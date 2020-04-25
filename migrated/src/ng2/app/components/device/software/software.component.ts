@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, OnDestroy } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { SoftwareListService } from './../_services/software-list.service';
 import { ToastrService } from 'ngx-toastr';
@@ -9,13 +9,14 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { HardwareService } from '../_services/hardware.service';
 import { CONFIGCONSTANTS } from '../config/app-constants';
 import { Router } from '@angular/router';
+import { Subject } from "rxjs";
 
 @Component({
   selector: 'app-software',
   templateUrl: './software.component.html',
   styleUrls: ['./software.component.scss']
 })
-export class SoftwareComponent implements OnInit {
+export class SoftwareComponent implements OnInit, OnDestroy {
 
   url = 'http://localhost:4200/upload';
   private modalRef: BsModalRef;
@@ -29,6 +30,28 @@ export class SoftwareComponent implements OnInit {
   dragOver: boolean;
   deviceDetail: any = {};
   DateFormat = CONFIGCONSTANTS.DateFormat;
+  dtOptions: DataTables.Settings = {
+    searching: false,
+    paging: false,
+    info: false,
+    columns: [{
+        data: 'softName',
+        orderable: true
+      }, {
+        data: 'softPublisher',
+        orderable: true
+      }, {
+        data: 'softVersion',
+        orderable: false
+      }, {
+        data: 'softInstalledOn',
+        orderable: true
+      }, {
+        data: 'softVersion',
+        orderable: false
+      }]
+  };
+  dtTrigger = new Subject();
   constructor(private softwareListService: SoftwareListService,
       private toastr: ToastrService,
       private modalService: BsModalService,
@@ -48,6 +71,7 @@ export class SoftwareComponent implements OnInit {
     } else {
       let temp = this.deviceDetailService.getDevice();
       this.softwareList = temp['reports'][0]['softList'];
+      this.dtTrigger.next();
     }
   }
 
@@ -60,6 +84,7 @@ export class SoftwareComponent implements OnInit {
       resp => {
         this.deviceDetailService.addDevice(resp);
         this.softwareList = this.deviceDetailService.getSoftware();
+        this.dtTrigger.next();
         this.loading = false;
       },
       error => {
@@ -126,6 +151,10 @@ export class SoftwareComponent implements OnInit {
   decline () {
     this.selectedList = [];
     this.modalRef.hide();
+  }
+
+  ngOnDestroy() {
+    this.dtTrigger.unsubscribe();
   }
 
 

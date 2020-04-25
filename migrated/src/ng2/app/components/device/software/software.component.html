@@ -13,7 +13,11 @@
         <!-- Page Content -->
         <div class="contant-area">
           <div class="table-wrap">
-              <table class="cmn-tab-head">
+              <table #dataTable
+              datatable
+              [dtTrigger]="dtTrigger"
+              [dtOptions]="dtOptions"
+              class="dataTable cmn-tab-head">
                   <thead>
                     <tr>
                       <!-- <th class="check-area">
@@ -22,36 +26,58 @@
                           <label for="check_all" aria-label="checkbox"></label>
                         </div>
                       </th> -->
-                      <th class="s-name">Software Name</th>
-                      <th class="pulisher">Publisher</th>
-                      <th class="version">Version</th>
-                      <th class="install">Installed on</th>
-                      <th class="c-version">Current Version</th>
+                      <th class="s-name"><span>Software Name</span></th>
+                      <th class="pulisher"><span>Publisher</span></th>
+                      <th class="version"><span>Version</span></th>
+                      <th class="install"><span>Installed on</span></th>
+                      <th class="c-version"><span>Current Version</span></th>
                       <!-- <th class="action">&nbsp;</th> -->
                     </tr>
                   </thead>
+                  <tbody>
+                    <tr *ngFor="let software of softwareList; let i = index;">
+                      <!-- <td class="check-area">
+                        <div class="cmn-checkbox">
+                          <input type="checkbox" name="check_{{i}}" (change)="selectedRecord('single', i);" id="check_{{i}}" [(ngModel)]="software.checked" [value]="true"/>
+                          <label for="check_{{i}}" aria-label="checkbox"></label>
+                        </div>
+                      </td> -->
+                      <td class="s-name">
+                        <!-- <span class="device-pic"><img src="../../../../../ng1/images/device/adb-reader.png" alt="adb-reader"/></span> -->
+                        <h5>{{software.softName || 'N/A'}}</h5>
+                      </td>
+                      <td class="pulisher">{{software.softPublisher || 'N/A'}}</td>
+                      <td class="version">{{software.softVersion || 'N/A'}}</td>
+                      <td class="install">{{(software.softInstalledOn | date : DateFormat) || 'N/A'}}</td>
+                      <td class="c-version">{{software.softVersion || 'N/A'}}</td>
+                      <!-- <td class="action">
+                        <a class="remove" data-tooltip="Remove" (click)="openModal(templateDelete, index + 1);"><img src="../../../../../ng1/images/device/remove.svg" alt="remove"/></a>
+                      </td> -->
+                    </tr>               
+
+                  </tbody>
               </table>
-              <table class="cmn-table" *ngFor="let software of softwareList; let i = index;">
+              <!-- <table class="cmn-table" *ngFor="let software of softwareList; let i = index;">
                 <tr>
-                  <!-- <td class="check-area">
+                  <td class="check-area">
                     <div class="cmn-checkbox">
                       <input type="checkbox" name="check_{{i}}" (change)="selectedRecord('single', i);" id="check_{{i}}" [(ngModel)]="software.checked" [value]="true"/>
                       <label for="check_{{i}}" aria-label="checkbox"></label>
                     </div>
-                  </td> -->
+                  </td> 
                   <td class="s-name">
-                    <!-- <span class="device-pic"><img src="../../../../../ng1/images/device/adb-reader.png" alt="adb-reader"/></span> -->
+                    <span class="device-pic"><img src="../../../../../ng1/images/device/adb-reader.png" alt="adb-reader"/></span>
                     <h5>{{software.softName}}</h5>
                   </td>
                   <td class="pulisher">{{software.softPublisher}}</td>
                   <td class="version">{{software.softVersion || 'N/A'}}</td>
                   <td class="install">{{(software.softInstalledOn | date : DateFormat) || 'N/A'}}</td>
                   <td class="c-version">{{software.softVersion || 'N/A'}}</td>
-                  <!-- <td class="action">
+                  <td class="action">
                     <a class="remove" data-tooltip="Remove" (click)="openModal(templateDelete, index + 1);"><img src="../../../../../ng1/images/device/remove.svg" alt="remove"/></a>
-                  </td> -->
+                  </td>
                 </tr>
-              </table>
+              </table> -->
 
           </div>  
         </div>

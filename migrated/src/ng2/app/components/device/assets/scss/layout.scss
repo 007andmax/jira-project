@@ -1186,8 +1186,9 @@ table {
             font-weight: 500;
     }
     td {
-        padding: 16px 5px;
+        padding: 9px 5px;
         word-break: break-word;
+        font-size: 12px;
     }
     .s-name {
         img {
@@ -2455,6 +2456,46 @@ ngx-loading > div {
     border: 1px solid red !important;
 }
 
+// Datatable design
+
+table.dataTable thead th.sorting_desc span, table.dataTable thead th.sorting_asc span, table.dataTable thead th.sorting span{
+    position: relative;
+    &::after{
+        content: "";
+        display: inline-block;
+        vertical-align: middle;
+        height: 16px;
+        width: 16px;
+        background: url('assets/images/sorting.svg') no-repeat center;
+        background-size: 16px auto;
+        margin-left: 5px;
+        margin-top: -2px;
+    }
+}
+
+table.dataTable td.dataTables_empty {
+    display: none;
+}
+
+table.dataTable thead th, table.dataTable thead td, table.dataTable.no-footer {
+    border-bottom: unset;
+}
+
+table.dataTable tbody tr td:first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+table.dataTable tbody tr td:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+table.dataTable tbody tr td {
+    border-bottom: 2px solid #f3f7f9;
+}
+
+table.dataTable thead tr th.sorting_desc, table.dataTable thead tr th.sorting_asc, table.dataTable thead tr th.sorting {
+    background-image: unset;
+}
 
 
     }

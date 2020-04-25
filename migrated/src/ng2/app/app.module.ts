@@ -11,6 +11,7 @@ import { SelectModule } from 'ng2-select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSelectModule } from 'ngx-select-ex';
 import { SidebarModule } from 'ng-sidebar';
+import { DataTablesModule } from 'angular-datatables';
  
 import { ClickOutsideModule } from 'ng4-click-outside';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
@@ -323,6 +324,7 @@ angular.module('quicktech')
     NgbModule,
     InfiniteScrollModule,
     ClickOutsideModule,
+    DataTablesModule,
     
     NgxSelectModule,
     MatSelectModule,

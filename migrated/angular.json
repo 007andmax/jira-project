@@ -32,6 +32,7 @@
               "src/ng2/styles.scss",
               "src/ng1/styles/admin-tickets.css",
               "src/ng1/styles/bootstrap-datetimepicker.css",
+              "node_modules/datatables.net-dt/css/jquery.dataTables.css",
               "src/ng1/styles/common.dropdown.css",
               "src/ng1/styles/common.fonts.css",
               "src/ng1/styles/common.icons.css",
@@ -475,7 +476,8 @@
               "src/ng1/scripts/core/assign-user-list/assign-user-list.ctrl.js",
               "src/ng1/scripts/core/duration/duration.ctrl.js",
               "src/ng1/scripts/core/time-picker/time-picker.ctrl.js",
-              "./node_modules/crypto-js/crypto-js.js"
+              "./node_modules/crypto-js/crypto-js.js",
+              "node_modules/datatables.net/js/jquery.dataTables.min.js"
             ],
             "es5BrowserSupport": true
           },
