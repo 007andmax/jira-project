@@ -1,5 +1,5 @@
 /deep/ .ticket-table {
-  max-width: 1320px;
+  // max-width: 1320px;
   min-width: 1064px;
   width: auto;
   margin: 0 auto;
@@ -48,11 +48,16 @@ app-tickets-table-item {
 
 @media (min-width: 1920px) {
   /deep/ .ticket-table {
-    &__subject {
-      max-width: 465px;
+    &__requested-by {
+      max-width: 300px;
+      width: 300px;
     }
     &__company {
-      max-width: 284px;
+      max-width: 250px;
     }
+    &__subject {
+      max-width: 650px;
+    }
+
   }
 }

@@ -138,6 +138,9 @@
 
  &__task-pending {
     background-image: url("assets/img/icons/task-pending.svg");
+    &.--done {
+      background-image: url("assets/img/icons/task-completed.svg");
+    }
  }
  &__users {
     background-image: url("assets/img/icons/addusers.svg")
@@ -204,6 +207,15 @@
   }
   &__rating{
      background-image: url("assets/img/icons/rating.svg");
+  }
+  &__expand{
+    background-image: url("assets/img/icons/expand.svg");
+  }
+  &__plus-white {
+    background-image: url("assets/img/icons/plus-white.svg");
+  }
+  &__close {
+    background-image: url("assets/img/icons/tag-close.svg");
   }
 }
 

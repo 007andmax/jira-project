@@ -1,9 +1,10 @@
-<div class="col-md-12 light-dropdown"
+<div class="light-dropdown ticket-edit-tags"
      ngbDropdown #products="ngbDropdown">
   <mat-form-field>
     <mat-chip-list #chipList aria-label="Fruit selection">
+      <span class="tag-icon"></span>
       <mat-chip
-      class="selected-tag-ticket"
+        class="selected-tag-ticket"
         *ngFor="let tag of selectedTag; let i = index"
         [selectable]="selectable"
         [removable]="removable"
@@ -13,7 +14,6 @@
       </mat-chip>
       <input
         id="dropdownServices" ngbDropdownToggle
-        placeholder="eg. Window update, Monthly maintainace"
         #userInput
         class="pointer"
         [formControl]="tagCtrl"
@@ -27,7 +27,7 @@
   </mat-form-field>
   <div class="dropdown-menu"
        ngbDropdownMenu aria-labelledby="dropdownServices">
-    <ng-template ngFor let-tag [ngForOf]="tags" [ngForTrackBy]="trackById">
+ <ng-template ngFor let-tag [ngForOf]="tags" [ngForTrackBy]="trackById">
       <button ngbDropdownItem class="dropdown-item"
               (click)="selected(tag)"
               [textContent]="tag.word">

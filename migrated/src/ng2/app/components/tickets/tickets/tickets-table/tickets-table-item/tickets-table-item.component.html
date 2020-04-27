@@ -1,8 +1,11 @@
 <tr>
   <td class="ticket-table__requested-by">
     <div class="d-f">
-      <div class="qt-table-modern__circle-avatar" [textContent]="getNameForAvatar()"
+      <!--  Have no idea what is going on here, but if avatar will be without any text - adding some padding to <td>  cell, dont delete this shit  -->
+      <div class="qt-table-modern__circle-avatar" [ngClass]="getNameForAvatar() ? 'transparent-text' : ''" [textContent]="getNameForAvatar() ? getNameForAvatar() : '.'"
         [ngStyle]="{'background': getStyleAvatar(requestedUser),'background-size': 'cover'}"></div>
+      
+      
       <div [textContent]="getUserName(requestedUser)" class="ellipsis"></div>
     </div>
   </td>
@@ -16,7 +19,6 @@
         <ng-template ngFor let-user [ngForOf]="ticket.multiAssignedUsers" [ngForTrackBy]="trackById">
         <div class="qt-table-modern__circle-avatar" [textContent]="getAssignedUserNameForAvatar(user)"
           [ngStyle]="{'background': getStyleAvatar(user),'background-size': 'cover'}"></div>
-      
       </ng-template>
       </div>
    
@@ -31,7 +33,7 @@
       <div [textContent]="getUserName(assignedUser)"></div>
     </div>
   </td>
-  <td class="ticket-table__status" > 
+  <td class="ticket-table__status" >
     <span class="tag__modern" [ngStyle]="getStyleStatus('inProgress')" *ngIf="ticket.status === 'IN_PROGRESS'">In Progress</span>
     <span class="tag__modern" [ngStyle]="getStyleStatus('completed')" *ngIf="ticket.status === 'COMPLETED'">Completed</span>
     <span class="tag__modern" [ngStyle]="getStyleStatus('unassigned')" *ngIf="ticket.status === null">Unassigned</span>
