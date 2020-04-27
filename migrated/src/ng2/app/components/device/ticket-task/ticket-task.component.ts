@@ -12,6 +12,7 @@ import { searchTextPipe } from './../_pipe/searchText.pipe';
 import { CommonServices } from '../_services/common.service';
 import { DeviceDetailService } from '../_services/device_detail.service';
 import { CONFIGCONSTANTS } from '../config/app-constants';
+declare  var $:any;
 
 @Component({
   selector: 'app-ticket-task',
@@ -384,6 +385,10 @@ export class TicketTaskComponent implements OnInit {
         this.editAddUser = !this.editAddUser;
       }
     });
+  }
+
+  toggleTicket(){
+    $("body").toggleClass("expandTicket");
   }
 
 }
