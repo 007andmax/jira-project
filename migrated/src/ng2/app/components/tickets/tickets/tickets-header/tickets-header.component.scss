@@ -5,9 +5,27 @@
 .tickets-list-header {
   position: sticky;
   top: 78px;
-  padding-top: 24px;
-  background: #edf2f6;
-  margin-top: -24px;
-  // max-width: 1320px;
+  padding: 24px 0 0 14px;
+  background-color: #edf2f6;
   margin: 0 auto;
+  max-width: 1320px;
+  width: 100%;
+}
+
+.tickets-list-table-header {
+  width: 100%;
+  position: sticky;
+  top: 166px;
+  background-color: #edf2f6;
+  overflow: auto;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+
+@media (min-width: 1920px) {
+  .tickets-list-header, .tickets-list-table-header {
+    width: 85%;
+    max-width: unset;
+  }
 }
