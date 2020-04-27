@@ -7,10 +7,14 @@ import { StatusColor } from '../../../left-panel/left-panel-tickets/tickets-stat
 import { TicketsColor } from '../../../left-panel/left-panel-tickets/tickets-status/class/tickets-color';
 import { CurrentUser } from 'src/ng2/class/current-user/current-user';
 import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
+import { DevicesSateService } from 'src/ng2/app/states/devices/devices-sate.service';
+import { TicketsPermissionsService } from './services/tickets-permissions.service';
+import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 @Component({
   selector: 'app-ticket-edit-aside',
   templateUrl: './ticket-edit-aside.component.html',
-  styleUrls: ['./ticket-edit-aside.component.scss']
+  styleUrls: ['./ticket-edit-aside.component.scss'],
+
 })
 export class TicketEditAsideComponent implements OnInit {
   ticketProfile: TicketProfile = new TicketProfile();
@@ -21,13 +25,17 @@ export class TicketEditAsideComponent implements OnInit {
   listColors: Array<StatusColor> = [];
   statusColor: TicketsColor;
   listAssignedUser: Array<CurrentUser> = [];
-
+ 
 
   constructor(private ticketsStateService: TicketsStateService,
     private ticketsService: TicketsService,
+   
+   
+    
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
+  
     this.ticketsStateService.getOnEditTicket().subscribe(data => {
       this.ticketProfile = data;
       if (this.ticketProfile.assignedUser) this.listAssignedUser.push(this.ticketProfile.assignedUser);
@@ -58,6 +66,8 @@ export class TicketEditAsideComponent implements OnInit {
     
 
   }
+ 
+  
   onSelectAssignedUser(data) {
     this.listAssignedUser = data;
   }

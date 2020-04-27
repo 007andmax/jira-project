@@ -37,9 +37,8 @@
               </div>
       
             <div class="qt-modal-circle-button add-user" (click)="onToggleAddAssignedUser()"></div>
-            <div class="qt-modal-circle-button more-vertical-ng2"></div>
-          </div>
-  
+          <app-ticket-profile-actions [ticketProfile]="ticketProfile"></app-ticket-profile-actions>
+           </div>
         </div>
         <app-ticket-edit-tags [selectedTag]="ticketProfile.tags" (tagsChange)="onChangeTags($event)"></app-ticket-edit-tags>
         <app-add-assigned-user [selectedUsers]="listAssignedUser" (onSelected)="onSelectAssignedUser($event)" (hidden)="onToggleAddAssignedUser()" *ngIf="showAddAssignedUser"></app-add-assigned-user>

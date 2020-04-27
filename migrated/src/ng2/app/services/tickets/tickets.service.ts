@@ -11,31 +11,53 @@ import { TicketProfile } from '../../components/tickets/tickets/class/ticket-pro
 export class TicketsService {
 
   private apiUrl = environment.apiUrl;
-  constructor( private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  public addTags(id,tags) {
-    return this.http.put(this.apiUrl + `tags?ticketId=${id}`,tags)
+  
+  public reportAsSpamTicket(id, value) {
+    let data = { value: value };
+    return this.http.put(this.apiUrl + `v2/tickets/${id}/reportAsSpam`, data);
   }
-  public addAssignUsers(id,ids) {
-    return this.http.put(this.apiUrl + `v2/tickets/${id}/assign`,{value: ids.join(",")})
+  public markAsSpamTicket(id, value) {
+    let data = { value: value };
+    return this.http.put(this.apiUrl + `v2/tickets/${id}/markAsSpam`, data);
+  }
+  public trashTicket(id, value) {
+    let data = { value: value };
+    return this.http.put(this.apiUrl + `v2/tickets/${id}/trash`, data);
+  }
+  public linkedAgentToTicket(id, value) {
+    let data = { value: value };
+    return this.http.put(this.apiUrl + `v2/tickets/${id}/linkedAgent`, data);
+  }
+  public assignUserToTicket(id, value) {
+    let data = { value: value };
+    return this.http.put(this.apiUrl + `v2/tickets/${id}/assign`, data);
+  }
+
+  public addTags(id, tags) {
+    return this.http.put(this.apiUrl + `tags?ticketId=${id}`, tags)
+  }
+  public addAssignUsers(id, ids) {
+    return this.http.put(this.apiUrl + `v2/tickets/${id}/assign`, { value: ids.join(",") })
   }
   public getTicket(id) {
-    return this.http.get(this.apiUrl + `v2/tickets/${id}`).pipe( map((data:any) => new TicketProfile(data)));
+    return this.http.get(this.apiUrl + `v2/tickets/${id}`).pipe(map((data: any) => new TicketProfile(data)));
   }
   public getActualNumber() {
     return this.http.get(this.apiUrl + `data/actualNumber?type=TICKET`);
   }
   public addTicket(data) {
-    return this.http.post(this.apiUrl + `v2/tickets`,data);
+    return this.http.post(this.apiUrl + `v2/tickets`, data);
   }
   public getCount(data) {
-    return this.http.post(this.apiUrl + `v2/tickets/count`,data);
+    return this.http.post(this.apiUrl + `v2/tickets/count`, data);
   }
   public getCounts(data) {
-    
-    return this.http.post(this.apiUrl + `v2/tickets/counts`,data);
+
+    return this.http.post(this.apiUrl + `v2/tickets/counts`, data);
   }
-  public getTickets(listType,data) {
-    return this.http.post(this.apiUrl + `v2/tickets/getTickets?listType=${listType}`,data).pipe(map((data: any) => data.map(item => new Ticket(item))));
+  public getTickets(listType, data) {
+    return this.http.post(this.apiUrl + `v2/tickets/getTickets?listType=${listType}`, data).pipe(map((data: any) => data.map(item => new Ticket(item))));
   }
 }

@@ -1,0 +1,114 @@
+import { Component, OnInit, Input } from '@angular/core';
+import { TicketsPermissionsService } from '../services/tickets-permissions.service';
+import { CurrentUser } from 'src/ng2/class/current-user/current-user';
+import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
+import { TicketProfile } from '../../class/ticket-profile';
+import { DevicesSateService } from 'src/ng2/app/states/devices/devices-sate.service';
+import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
+import { NotificationStateService } from 'src/ng2/app/components/shared/notification/services/notification-state.service';
+import { ConfirmStateService } from 'src/ng2/app/components/shared/confirm/services/confirm-state.service';
+import { MOVE_TO_SPAM_TICKET, MOVE_TO_TRASH_TICKET } from 'src/ng2/app/const/confirm';
+import { ConfirmComponent } from 'src/ng2/app/components/shared/confirm/confirm.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+@Component({
+  selector: 'app-ticket-profile-actions',
+  templateUrl: './ticket-profile-actions.component.html',
+  styleUrls: ['./ticket-profile-actions.component.scss'],
+  providers: [TicketsPermissionsService]
+})
+export class TicketProfileActionsComponent implements OnInit {
+  @Input() ticketProfile: TicketProfile = new TicketProfile();
+  currentUser: CurrentUser;
+  movedWay: boolean = false;
+  constructor(
+    public ticketsPermissionsService: TicketsPermissionsService,
+    private devicesSateService: DevicesSateService,
+    private ticketsService: TicketsService,
+    private notificationStateService: NotificationStateService,
+    private usersStateService: UsersStateService,
+    private confirmStateService: ConfirmStateService,
+    private modalService: NgbModal,
+  ) { }
+
+  ngOnInit() {
+    this.currentUser = this.usersStateService.getCurrentUser();
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === MOVE_TO_SPAM_TICKET) {
+          this.onMoveToSpam();
+        }
+        if (this.confirmStateService.getConfirmAction() === MOVE_TO_TRASH_TICKET) {
+          this.onMoveToTrash();
+        }
+      }
+    })
+  }
+  onMoveToTrash() {
+    this.ticketsService.trashTicket(this.ticketProfile.id, this.movedWay).subscribe(res => {
+      if (this.movedWay) this.notificationStateService.oninitShowNotification(`The ticket “${this.ticketProfile.number}” has been moved to Trash`);
+    })
+  }
+  onMoveToSpam() {
+    if (this.currentUser.isOwner) {
+      this.ticketsService.markAsSpamTicket(this.ticketProfile.id, false).subscribe(res => {
+        this.notificationStateService.oninitShowNotification(`The ticket “${this.ticketProfile.number}” has been marked as spam`);
+      })
+
+    } else {
+      this.ticketsService.reportAsSpamTicket(this.ticketProfile.id, false).subscribe(res => {
+        this.notificationStateService.oninitShowNotification(`The ticket “${this.ticketProfile.number}” has been reported as spam`);
+      })
+    }
+  }
+  getDevicesByCompany() {
+    let find = this.devicesSateService.getAllDevices()[this.ticketProfile.companyId];
+    return (find) ? find : []
+  }
+  isDeviceToLink() {
+    if (!this.ticketProfile.agent || !this.ticketProfile.agent.deviceId) return true;
+    return this.getDevicesByCompany().filter((agent) => agent.id !== this.ticketProfile.agent.deviceId).length;
+  };
+
+  claimTicket() {
+    var indexUser = this.ticketProfile.multiAssignedUsers.findIndex(user => user.id === this.currentUser.id);
+    var value = [];
+    this.ticketProfile.multiAssignedUsers.forEach(user => {
+      value.push(user.id);
+    })
+
+    if (this.ticketProfile.assignedUser && this.ticketProfile.assignedUser.id !== this.currentUser.id && indexUser === -1) {
+      value.push(this.ticketProfile.assignedUser.id);
+      value.push(this.currentUser.id);
+    } else if (this.ticketProfile.assignedUser && this.ticketProfile.assignedUser.id !== this.currentUser.id && indexUser > -1) {
+      value.push(this.ticketProfile.assignedUser.id);
+    } else if (this.ticketProfile.assignedUser && this.ticketProfile.assignedUser.id === this.currentUser.id && indexUser === -1) {
+      value.push(this.ticketProfile.assignedUser.id);
+    } else if (!this.ticketProfile.assignedUser && indexUser === -1) {
+      value.push(this.currentUser.id);
+    }
+    this.ticketsService.assignUserToTicket(this.ticketProfile.id, value.join(",")).subscribe(res => {
+
+    })
+
+  };
+
+  changeLinkedAgent(id) {
+    this.ticketsService.linkedAgentToTicket(this.ticketProfile.id, id).subscribe(res => {
+
+    })
+  }
+
+  moveToTrash(movedWay) {
+    this.movedWay = movedWay;
+    this.confirmStateService.setConfirmAction(MOVE_TO_TRASH_TICKET);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    modalRef.componentInstance.message = `Do you want to move the ticket to Trash?`;
+  };
+
+  moveIntoSpam() {
+    this.confirmStateService.setConfirmAction(MOVE_TO_SPAM_TICKET);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    modalRef.componentInstance.message = `Do you want to mark the ticket as spam?`;
+  }
+}

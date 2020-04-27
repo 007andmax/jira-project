@@ -1,0 +1,43 @@
+<div ngbDropdown>
+  <div class="qt-modal-circle-button more-vertical-ng2"  ngbDropdownToggle></div>
+    <div ngbDropdownMenu  >
+      
+      <ul class="" style="width: 179px; overflow: visible;" role="menu">
+      <li *ngIf="ticketsPermissionsService.isActionVisible('claim_ticket', ticketDetails)">
+          <a tabindex="-1" href="javascript:void(0)" (click)="claimTicket()">Claim Ticket</a>
+        </li>
+        <li class="dropdown-submenu left-align linked-agent-dropdown"
+            *ngIf="ticketProfile.company && !ticketProfile.company.isDefault && getDevicesByCompany() && isDeviceToLink()">
+          <a tabindex="-1" href="javascript:void(0)" class="link-user">
+            {{ ticketProfile.agent && ticketProfile.agent.deviceId ? 'Relink with another' : 'Link with' }}
+            Agent
+          </a>
+          <ul class="dropdown-submenu-wrapper dropdown-menu">
+            <ng-template ngFor let-agent [ngForOf]="getDevicesByCompany()">
+            <li  (click)="changeLinkedAgent(agent.id)"
+                *ngIf="!ticketProfile.agent || agent.id !== ticketProfile.agent.deviceId">
+              {{ agent.hostName || agent.ip }}
+            </li>
+            </ng-template>
+          </ul>
+        </li>
+        <li *ngIf="ticketProfile.agent && ticketProfile.agent.deviceId">
+          <a tabindex="-1" class="unlink-user" href="javascript:void(0)"
+             (click)="changeLinkedAgent('')">
+            Unlink Agent
+          </a>
+        </li>
+         <li *ngIf="ticketsPermissionsService.isActionVisible('send_to_trash', ticketProfile)">
+          <a tabindex="-1" class="trash-user" href="javascript:void(0)" (click)="moveToTrash(true)">Move to
+                                                                                                     Trash</a>
+        </li>
+        <li *ngIf="ticketsPermissionsService.isActionVisible('send_to_spam', ticketProfile)">
+          <a tabindex="-1" class="spam-user" href="javascript:void(0)" *ngIf="currentUser.isOwner"
+             (click)="moveIntoSpam()">Mark as Spam</a>
+          <a tabindex="-1" class="spam-user" href="javascript:void(0)" *ngIf="!currentUser.isOwner"
+             (click)="moveIntoSpam()">Report as Spam</a>
+        </li> 
+      </ul>
+    </div>
+   
+</div>
