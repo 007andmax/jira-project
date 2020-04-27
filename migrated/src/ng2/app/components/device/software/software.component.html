@@ -2,7 +2,7 @@
   <div class="page-container software-list">
     <!-- Page Title -->
         <div class="page-header">
-            <h3>Software list</h3>
+            <h3>Software list<a (click)="downloadCsv();">Print</a></h3>
             <div class="page-header-opt">
               <div class="selected-item" *ngIf="selectedList.length > 0">
                   <span>{{selectedList.length}} Selected</span>

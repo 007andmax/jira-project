@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonHttpServices } from './../_services/common_http.service';
+import { CommonServices } from './../_services/common.service';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
 
@@ -16,7 +17,8 @@ export class NavComponent implements OnInit {
   imgUrl = '';
   deviceType = '';
   constructor(private commonHttpServices: CommonHttpServices,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService,
+    public commonServices: CommonServices) { }
 
   ngOnInit() {
     this.deviceType = localStorage.getItem('type');

@@ -19,4 +19,8 @@ export class CommonServices {
     getShortName(name) { 
       return name.split(' ').map(n => n[0]).join('');
     }
+
+    getCharacter(name) { 
+      return name[0] + name[1];
+    }
 }

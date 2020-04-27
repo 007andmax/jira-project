@@ -3,6 +3,7 @@ import { EventEmitter } from '@angular/core';
 import { SoftwareListService } from './../_services/software-list.service';
 import { ToastrService } from 'ngx-toastr';
 import { DeviceDetailService } from './../_services/device_detail.service';
+import { ExcelService } from './../_services/download_csv.service';
 import { first } from 'rxjs/operators';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -57,7 +58,8 @@ export class SoftwareComponent implements OnInit, OnDestroy {
       private modalService: BsModalService,
       private deviceDetailService: DeviceDetailService,
       private hardwareService: HardwareService,
-      private router: Router) {
+      private router: Router,
+      private excelService: ExcelService) {
   }
 
   ngOnInit() {
@@ -155,6 +157,28 @@ export class SoftwareComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.dtTrigger.unsubscribe();
+  }
+
+  downloadCsv(){
+    let downloadCsvList = [];
+    this.softwareList.forEach(element => {
+      downloadCsvList.push([
+        element.softName.replace(',', ' ') || 'N/A',
+        element.softPublisher.replace(',', ' ') || 'N/A',
+        element.softVersion || 'N/A',
+        element.softInstalledOn || 'N/A',
+        element.softVersion || 'N/A'
+      ]);
+    });
+    let fileName = 'Software List';
+    // const columnNames = [
+    //   {name: 'Software Name', value: 'softName'},
+    //   {name: 'Publisher', value: 'softPublisher'}, 
+    //   {name: 'Version', value: 'softVersion'}, 
+    //   {name: 'Installed on', value: 'softInstalledOn'}, 
+    //   {name: 'Current Version', value: 'currentSoftVersion'}];
+    const columnNames = ['Software Name','Publisher', 'Version', 'Installed on', 'Current Version'];
+    this.excelService.generateExcel(downloadCsvList, columnNames, fileName);
   }
 
 
