@@ -14,9 +14,23 @@ main {
     margin-top: 108px;
     // overflow: hidden;
     margin-right: 352px;
+    @include transition(0.4s);
+    @media  only screen and (max-width:1440px){
+        margin-right: 64px;
+    }
 }
 section{float:left;padding:70px 0px;width:100%;}
 img{display:inline-block;max-width:100%;}
+
+.device-container {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1096px;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
 
 /*** Heading ***/
 
@@ -647,6 +661,33 @@ header{
     bottom: 0;
     z-index: 2;
     height: calc(100vh - 72px);
+    @include transition(0.4s);
+    @media  only screen and (max-width:1440px){
+        right: -288px;
+    }
+    .panel-bar {
+        width: 35px;
+        height: 32px;
+        @include border-radius(6px 0 0 6px);
+        @include transition(0.4s);
+        box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
+        border: solid 1px #e1e9f5;
+        background-color: #ffffff;
+        position: fixed;
+        right: -1px;
+        top: 88px;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img{
+            @include transition(0.4s);
+        }
+        @media  only screen and (min-width:1441px){
+            display: none;
+        }
+    }
     &> div {
         float: left;
         width: 100%;
@@ -1189,6 +1230,9 @@ table {
         padding: 9px 5px;
         word-break: break-word;
         font-size: 12px;
+        h5{
+            font-size: 12px;
+        }
     }
     .s-name {
         img {
@@ -1202,7 +1246,11 @@ table {
         display: inline-block;
         vertical-align: middle;
         padding-left: 12px;
-        width: calc(100% - 24px);
+        width:auto;
+        max-width:  calc(100% - 24px);
+        // white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     .action {
         text-align: center;
@@ -1211,7 +1259,7 @@ table {
     }
     
     .s-name {
-        width: 26%;
+        width: 35%;
         padding-left: 0;
     }
     .pulisher {
@@ -1222,7 +1270,7 @@ table {
     }
     
     .install {
-        width: 14%;
+        width: 15%;
     }
     
     .c-version {
@@ -2498,5 +2546,34 @@ table.dataTable thead tr th.sorting_desc, table.dataTable thead tr th.sorting_as
 }
 
 
+    }
+}
+
+
+
+/*** Ticket Sidebar Expand ***/
+@media only screen and (max-width:1440px){
+    body{
+        &.ng7-device{
+            &.expandTicket{
+                .page-wrapper{
+                    main{
+                        margin-right: 352px;
+                    }
+                } 
+                .right-sidebar{
+                    right: 0;
+                    .panel-bar{
+                        right: 287px;
+                        img{
+                            transform: rotate(180deg);
+                        }
+                            
+                        
+                    }
+                }
+    
+            }
+        }
     }
 }
