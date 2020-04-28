@@ -10,8 +10,7 @@ export class TicketsStateService {
   addTicket: EventEmitter<any> = new EventEmitter();
   editTicket: EventEmitter<TicketProfile> = new EventEmitter();
   filter: EventEmitter<any> = new EventEmitter();
-  getCounts: EventEmitter<any> = new EventEmitter();
-  getCount: EventEmitter<any> = new EventEmitter();
+  updateCounts: EventEmitter<any> = new EventEmitter();
   colorStatus: EventEmitter<any> = new EventEmitter();
   status: EventEmitter<any> = new EventEmitter();
   count: EventEmitter<number> = new EventEmitter();
@@ -31,6 +30,12 @@ export class TicketsStateService {
         console.log("newChange.data", newChange.data);
         this.addTicket.emit(newChange.data);
       }
+      if (newChange.action === 'ALL_TICKETS_COUNT') {
+        console.log("newChange.data", newChange.data);
+        this.onUpdateCounts(newChange.data);
+       
+      }
+      
     })
   }
   public onEditTicket(data) {
@@ -39,12 +44,10 @@ export class TicketsStateService {
   public getOnEditTicket() {
     return this.editTicket;
   }
-  public onGetCounts() {
-    this.getCounts.emit(null);
+  public onUpdateCounts(data) {
+    this.updateCounts.emit(data);
   }
-  public onGetCount() {
-    this.getCount.emit(null);
-  }
+   
   public onInitActualNumber(data) {
     this.actualNumber.emit(data);
   }
@@ -81,12 +84,10 @@ export class TicketsStateService {
   public getToggleAddTicket() {
     return this.toggleAddTicket;
   }
-  public getOnGetCounts() {
-    return this.getCounts;
+  public getOnUpdateCounts() {
+    return this.updateCounts;
   }
-  public getOnGetCount() {
-    return this.getCount;
-  }
+ 
   public getOnAddTicket() {
     return this.addTicket;
   }

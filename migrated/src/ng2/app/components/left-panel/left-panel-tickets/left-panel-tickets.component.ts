@@ -76,12 +76,13 @@ export class LeftPanelTicketsComponent implements OnInit {
     })
     this.getCounts();
 
-    this.ticketsStateService.getOnGetCounts().subscribe(data => {
-      this.getCounts();
+    this.ticketsStateService.getOnUpdateCounts().subscribe(data => {
+      this.ticketsCounts = new TicketsCounts(data);
+      
+      this.ticketsStateService.onInitCount(this.ticketsCounts[(this.listType === 'USERS') ? 'USER' : this.listType]);
+  
     })
-    this.ticketsStateService.getOnGetCount().subscribe(data => {
-      this.getCount();
-    })
+   
   }
   private getCount() {
     this.ticketsService.getCount(this.ticketsFilter.getDataForRequest()).subscribe(data => {

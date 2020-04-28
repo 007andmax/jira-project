@@ -35,7 +35,7 @@ export class TicketEditAsideComponent implements OnInit {
 
     this.ticketsStateService.getOnEditTicket().subscribe(data => {
       this.ticketProfile = data;
-      if (this.ticketProfile.note.length ===0 ) this.modeDescription = 'edit';
+      if (this.ticketProfile.note.length === 0) this.modeDescription = 'edit';
       if (this.ticketProfile.assignedUser) this.listAssignedUser.push(this.ticketProfile.assignedUser);
       if (this.ticketProfile.multiAssignedUsers) this.listAssignedUser = [...this.listAssignedUser, ...this.ticketProfile.multiAssignedUsers];
       this.opened = true;
@@ -66,22 +66,18 @@ export class TicketEditAsideComponent implements OnInit {
   }
   toggleSubject() {
     this.modeSubject = (this.modeSubject === 'view') ? 'edit' : 'view';
-    console.log("toggleSubject",this.modeSubject)
-    if (this.modeSubject === 'view') {
-      this.ticketsService.changeSubjectNoteTicket(this.ticketProfile.id,this.ticketProfile.subject,this.ticketProfile.note).subscribe(data => {
-
-      })
-    }
+    console.log("toggleSubject", this.modeSubject)
+    if (this.modeSubject === 'view') this.onChangeSubjectNote();
   }
   toggleNote() {
     this.modeDescription = (this.modeDescription === 'view') ? 'edit' : 'view';
-    if (this.modeDescription === 'view') {
-      this.ticketsService.changeSubjectNoteTicket(this.ticketProfile.id,this.ticketProfile.subject,this.ticketProfile.note).subscribe(data => {
-        
-      })
-    }
+    if (this.modeDescription === 'view') this.onChangeSubjectNote();
   }
+  onChangeSubjectNote() {
+    this.ticketsService.changeSubjectNoteTicket(this.ticketProfile.id, this.ticketProfile.subject, this.ticketProfile.note).subscribe(data => {
 
+    })
+  }
   onSelectAssignedUser(data) {
     this.listAssignedUser = data;
   }
