@@ -3,7 +3,7 @@
     <div ngbDropdownMenu  >
       
       <ul class="" style="width: 179px; overflow: visible;" role="menu">
-      <li *ngIf="ticketsPermissionsService.isActionVisible('claim_ticket', ticketDetails)">
+      <li *ngIf="ticketsPermissionsService.isActionVisible('claim_ticket', ticketProfile)">
           <a tabindex="-1" href="javascript:void(0)" (click)="claimTicket()">Claim Ticket</a>
         </li>
         <li class="dropdown-submenu left-align linked-agent-dropdown"

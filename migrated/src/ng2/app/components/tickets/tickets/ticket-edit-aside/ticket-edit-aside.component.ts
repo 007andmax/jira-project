@@ -38,6 +38,7 @@ export class TicketEditAsideComponent implements OnInit {
       this.showPreloader = true;
     })
     this.ticketsStateService.getOnEditTicket().subscribe(data => {
+      this.listAssignedUser = [];
       this.ticketProfile = data;
       this.elRef.nativeElement.querySelector("#ticket-note").value = this.ticketProfile.note;
       // if (this.ticketProfile.note.length === 0) this.modeDescription = 'edit';
@@ -162,6 +163,7 @@ export class TicketEditAsideComponent implements OnInit {
     this.modeDescription = 'view';
     this.showAddAssignedUser = false;
     this.showPreloader = true;
+    this.listAssignedUser = [];
   }
   getClassType() {
     return `priority-icon ticket-edit-aside__ticket-subject-flag ${(this.ticketProfile.priorityLevel && this.ticketProfile.priorityLevel !== "MEDIUM") ? '--' + this.ticketProfile.priorityLevel.toLowerCase() : ''}`;

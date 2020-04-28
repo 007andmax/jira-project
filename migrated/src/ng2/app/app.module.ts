@@ -211,6 +211,7 @@ import { DndDirective } from './directives/dnd.directive';
 import { AddAssignedUserComponent } from './components/tickets/tickets/ticket-edit-aside/add-assigned-user/add-assigned-user.component';
 import { TicketEditTagsComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-edit-tags/ticket-edit-tags.component';
 import { TicketProfileActionsComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-actions/ticket-profile-actions.component';
+import { TicketClaimInfoComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-claim-info/ticket-claim-info.component';
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 declare var angular: any;
@@ -505,7 +506,8 @@ angular.module('quicktech')
     DndDirective,
     AddAssignedUserComponent,
     TicketEditTagsComponent,
-    TicketProfileActionsComponent
+    TicketProfileActionsComponent,
+    TicketClaimInfoComponent
   ],
   imports: [
     BrowserModule,

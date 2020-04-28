@@ -64,7 +64,7 @@ export class TicketsListService {
 
   }
   checkUserInMultiAssigned(multiAssignedUsers) {
-    let find = multiAssignedUsers.find(item => item.id === this.usersStateService.getCurrentUser().id);
+    let find =  ((multiAssignedUsers) ? multiAssignedUsers : []).find(item => item.id === this.usersStateService.getCurrentUser().id);
     return (find) ? true : false;
   }
 }
