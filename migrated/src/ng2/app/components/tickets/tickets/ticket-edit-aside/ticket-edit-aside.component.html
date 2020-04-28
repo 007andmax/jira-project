@@ -1,10 +1,13 @@
 <ng-sidebar-container>
   <ng-sidebar [(opened)]="opened" [position]="'right'" class="ticket-edit-aside qt-aside d-f">
 
-    <div class="collapse-arrow icon__collapse-arrow"></div>
+    <div class="collapse-arrow icon__collapse-arrow" (click)="close()"></div>
 
 
     <div class="ticket-edit-aside__ticket-info">
+      <div class="prelaoder-body" *ngIf="showPreloader">
+        <div class="loading" ></div>
+      </div>
       <div class="qt-aside__body">
         <!--   TICKET HEADER   -->
         <div class="ticket-edit-aside__header d-f jc-sb ai-c">
@@ -61,14 +64,14 @@
           </div>
 
           <div class="ticket-edit-aside__ticket-description"
-          [hidden]="modeDescription === 'edit'"
+          [hidden]="true"
                (click)="toggleNote()"
           [textContent]="ticketProfile.note"></div>
           <div class="ticket-edit-aside__ticket-description-edit"
-          [hidden]="modeDescription === 'view'"
-               appClickOtside [init]="modeDescription === 'edit'" [class]="'.ticket-edit-aside__ticket-text'" (onOutSide)="toggleNote()"
+        
+               appClickOtside [init]="opened" [class]="'.ticket-edit-aside__ticket-text'" (onOutSide)="toggleNote()"
           >
-            <textarea  [(ngModel)]="ticketProfile.note"></textarea>
+            <textarea id="ticket-note"  ></textarea>
           </div>
         </div>
         <!--   TICKET CLAIMED INFO   -->

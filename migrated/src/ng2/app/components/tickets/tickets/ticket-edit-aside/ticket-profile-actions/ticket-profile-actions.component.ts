@@ -102,13 +102,13 @@ export class TicketProfileActionsComponent implements OnInit {
   moveToTrash(movedWay) {
     this.movedWay = movedWay;
     this.confirmStateService.setConfirmAction(MOVE_TO_TRASH_TICKET);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
     modalRef.componentInstance.message = `Do you want to move the ticket to Trash?`;
   };
 
   moveIntoSpam() {
     this.confirmStateService.setConfirmAction(MOVE_TO_SPAM_TICKET);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
     modalRef.componentInstance.message = `Do you want to mark the ticket as spam?`;
   }
 }

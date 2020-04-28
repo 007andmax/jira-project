@@ -8,6 +8,7 @@ import { TicketProfile } from '../../components/tickets/tickets/class/ticket-pro
 export class TicketsStateService {
   actualNumber: EventEmitter<any> = new EventEmitter();
   addTicket: EventEmitter<any> = new EventEmitter();
+  openTicket: EventEmitter<any> = new EventEmitter();
   editTicket: EventEmitter<TicketProfile> = new EventEmitter();
   filter: EventEmitter<any> = new EventEmitter();
   updateCounts: EventEmitter<any> = new EventEmitter();
@@ -37,6 +38,9 @@ export class TicketsStateService {
       }
       
     })
+  }
+  public onOpenTicket() {
+    this.openTicket.emit(null);
   }
   public onEditTicket(data) {
     this.editTicket.emit(data);
@@ -87,7 +91,9 @@ export class TicketsStateService {
   public getOnUpdateCounts() {
     return this.updateCounts;
   }
- 
+ public getOnOpenTicket() {
+   return this.openTicket;
+ }
   public getOnAddTicket() {
     return this.addTicket;
   }

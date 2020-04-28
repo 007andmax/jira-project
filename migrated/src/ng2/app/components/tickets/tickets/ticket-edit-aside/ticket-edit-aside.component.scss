@@ -13,8 +13,18 @@
   &__ticket-info {
     width: 672px;
     overflow: auto;
+    position: relative;
   }
-
+.prelaoder-body {
+  display: block;
+  position: absolute;
+  z-index: 1000;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background-color: #ffffff;
+}
   &__header {
     padding: 24px 24px 24px 32px;
   }

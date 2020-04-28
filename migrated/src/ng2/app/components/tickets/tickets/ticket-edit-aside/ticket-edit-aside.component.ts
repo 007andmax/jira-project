@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.service';
 import { TicketProfile } from '../class/ticket-profile';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
@@ -22,6 +22,7 @@ export class TicketEditAsideComponent implements OnInit {
   modeSubject = 'view';
   modeDescription = 'view';
   showAddAssignedUser = false;
+  showPreloader: boolean = true;
   listColors: Array<StatusColor> = [];
   statusColor: TicketsColor;
   listAssignedUser: Array<CurrentUser> = [];
@@ -29,16 +30,21 @@ export class TicketEditAsideComponent implements OnInit {
 
   constructor(private ticketsStateService: TicketsStateService,
     private ticketsService: TicketsService,
+    private elRef: ElementRef,
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
-
+    this.ticketsStateService.getOnOpenTicket().subscribe(data => {
+      this.showPreloader = true;
+    })
     this.ticketsStateService.getOnEditTicket().subscribe(data => {
       this.ticketProfile = data;
-      if (this.ticketProfile.note.length === 0) this.modeDescription = 'edit';
+      this.elRef.nativeElement.querySelector("#ticket-note").value = this.ticketProfile.note;
+      // if (this.ticketProfile.note.length === 0) this.modeDescription = 'edit';
       if (this.ticketProfile.assignedUser) this.listAssignedUser.push(this.ticketProfile.assignedUser);
       if (this.ticketProfile.multiAssignedUsers) this.listAssignedUser = [...this.listAssignedUser, ...this.ticketProfile.multiAssignedUsers];
       this.opened = true;
+      this.showPreloader = false;
     })
     this.ticketsStateService.getOnInitColor().subscribe(data => {
       this.listColors = data;
@@ -70,8 +76,14 @@ export class TicketEditAsideComponent implements OnInit {
     if (this.modeSubject === 'view') this.onChangeSubjectNote();
   }
   toggleNote() {
-    this.modeDescription = (this.modeDescription === 'view') ? 'edit' : 'view';
-    if (this.modeDescription === 'view') this.onChangeSubjectNote();
+    // this.modeDescription = (this.modeDescription === 'view') ? 'edit' : 'view';
+
+    //if (this.modeDescription === 'edit') {
+    if (this.elRef.nativeElement.querySelector("#ticket-note").value != this.ticketProfile.note) {
+      this.onChangeSubjectNote();
+      this.ticketProfile.note = this.elRef.nativeElement.querySelector("#ticket-note").value;
+    }
+    //  } 
   }
   onChangeSubjectNote() {
     this.ticketsService.changeSubjectNoteTicket(this.ticketProfile.id, this.ticketProfile.subject, this.ticketProfile.note).subscribe(data => {
@@ -143,6 +155,14 @@ export class TicketEditAsideComponent implements OnInit {
     }
     return result;
   };
+  close() {
+    this.ticketProfile = new TicketProfile();
+    this.opened = false;
+    this.modeSubject = 'view';
+    this.modeDescription = 'view';
+    this.showAddAssignedUser = false;
+    this.showPreloader = true;
+  }
   getClassType() {
     return `priority-icon ticket-edit-aside__ticket-subject-flag ${(this.ticketProfile.priorityLevel && this.ticketProfile.priorityLevel !== "MEDIUM") ? '--' + this.ticketProfile.priorityLevel.toLowerCase() : ''}`;
   }
