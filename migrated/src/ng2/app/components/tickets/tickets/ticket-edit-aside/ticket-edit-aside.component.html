@@ -45,37 +45,30 @@
         <!--   TICKET SUBJECT AND DESCRIPTION   -->
         <div class="ticket-edit-aside__ticket-text">
 
-          <div class="ticket-edit-aside__ticket-subject"
-               *ngIf="modeSubject === 'view'"
-               (dblclick)="modeSubject = 'edit'">
+          <div class="ticket-edit-aside__ticket-subject" [hidden]="modeSubject === 'edit'"
+               (click)="toggleSubject()">
                <span [ngClass]="getClassType()"></span>
 
-            <span>Tkt# 3904</span>
+            <span [textContent]="'Tkt# ' + ticketProfile.number"></span>
             <span> - </span>
-            <span>Checking anitvirus Dimension dentistry</span>
+            <span [textContent]="ticketProfile.subject"></span>
           </div>
 
           <div class="ticket-edit-aside__ticket-subject-edit d-f ai-c"
-               *ngIf="modeSubject === 'edit'"
-               (dblclick)="modeSubject = 'view'"
-          >
-            <span>Tkt# 3904</span>
-            <input value="Checking anitvirus Dimension dentistry"/>
+               [hidden]="modeSubject === 'view'" appClickOtside [init]="modeSubject === 'edit'" [class]="'.ticket-edit-aside__ticket-text'" (onOutSide)="toggleSubject()">
+            <span [textContent]="'Tkt# ' + ticketProfile.number"></span>
+            <input    [(ngModel)]="ticketProfile.subject"/>
           </div>
 
           <div class="ticket-edit-aside__ticket-description"
-               *ngIf="modeDescription === 'view'"
-               (dblclick)="modeDescription = 'edit'"
-          >
-            Hey Team, Joshna is not able to access the X drive for the Xerox scans in the office. I have checked my desk and i am able to connect and get the files. I tried to copy the pathway and put that in her computer but I get the attached error. Is it possible to rectify? Computer ADMTC1 Thanks, Kodie
-          </div>
+          [hidden]="modeDescription === 'edit'"
+               (click)="toggleNote()"
+          [textContent]="ticketProfile.note"></div>
           <div class="ticket-edit-aside__ticket-description-edit"
-               *ngIf="modeDescription === 'edit'"
-               (dblclick)="modeDescription = 'view'"
+          [hidden]="modeDescription === 'view'"
+               appClickOtside [init]="modeDescription === 'edit'" [class]="'.ticket-edit-aside__ticket-text'" (onOutSide)="toggleNote()"
           >
-            <textarea>
-              Hey Team, Joshna is not able to access the X drive for the Xerox scans in the office. I have checked my desk and i am able to connect and get the files. I tried to copy the pathway and put
-            </textarea>
+            <textarea  [(ngModel)]="ticketProfile.note"></textarea>
           </div>
         </div>
         <!--   TICKET CLAIMED INFO   -->

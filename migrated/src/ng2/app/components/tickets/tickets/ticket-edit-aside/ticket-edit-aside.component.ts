@@ -25,19 +25,17 @@ export class TicketEditAsideComponent implements OnInit {
   listColors: Array<StatusColor> = [];
   statusColor: TicketsColor;
   listAssignedUser: Array<CurrentUser> = [];
- 
+
 
   constructor(private ticketsStateService: TicketsStateService,
     private ticketsService: TicketsService,
-   
-   
-    
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
-  
+
     this.ticketsStateService.getOnEditTicket().subscribe(data => {
       this.ticketProfile = data;
+      if (this.ticketProfile.note.length ===0 ) this.modeDescription = 'edit';
       if (this.ticketProfile.assignedUser) this.listAssignedUser.push(this.ticketProfile.assignedUser);
       if (this.ticketProfile.multiAssignedUsers) this.listAssignedUser = [...this.listAssignedUser, ...this.ticketProfile.multiAssignedUsers];
       this.opened = true;
@@ -51,23 +49,39 @@ export class TicketEditAsideComponent implements OnInit {
   }
   onChangeTags(data) {
     this.ticketProfile.tags = data;
-    
-      let tags = this.ticketProfile.tags.map(item => {
-        return {
-          id: item.id,
-          word: item.word,
-          colorCode: 0,
-          usedCounter: item.usedCounter,
-        }
-      })
-      this.ticketsService.addTags(this.ticketProfile.id, tags).subscribe(res => {
 
-      })
-    
+    let tags = this.ticketProfile.tags.map(item => {
+      return {
+        id: item.id,
+        word: item.word,
+        colorCode: 0,
+        usedCounter: item.usedCounter,
+      }
+    })
+    this.ticketsService.addTags(this.ticketProfile.id, tags).subscribe(res => {
+
+    })
+
 
   }
- 
-  
+  toggleSubject() {
+    this.modeSubject = (this.modeSubject === 'view') ? 'edit' : 'view';
+    console.log("toggleSubject",this.modeSubject)
+    if (this.modeSubject === 'view') {
+      this.ticketsService.changeSubjectNoteTicket(this.ticketProfile.id,this.ticketProfile.subject,this.ticketProfile.note).subscribe(data => {
+
+      })
+    }
+  }
+  toggleNote() {
+    this.modeDescription = (this.modeDescription === 'view') ? 'edit' : 'view';
+    if (this.modeDescription === 'view') {
+      this.ticketsService.changeSubjectNoteTicket(this.ticketProfile.id,this.ticketProfile.subject,this.ticketProfile.note).subscribe(data => {
+        
+      })
+    }
+  }
+
   onSelectAssignedUser(data) {
     this.listAssignedUser = data;
   }

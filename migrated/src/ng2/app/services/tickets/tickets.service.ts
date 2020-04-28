@@ -13,7 +13,10 @@ export class TicketsService {
   private apiUrl = environment.apiUrl;
   constructor(private http: HttpClient) { }
 
-  
+  public changeSubjectNoteTicket(id, subject,note) {
+    let data = { id: id,subject:subject,note:note };
+    return this.http.put(this.apiUrl + `v2/tickets/edit`, data);
+  }
   public reportAsSpamTicket(id, value) {
     let data = { value: value };
     return this.http.put(this.apiUrl + `v2/tickets/${id}/reportAsSpam`, data);
