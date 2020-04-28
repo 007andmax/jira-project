@@ -2,11 +2,55 @@
   background-color: #edf2f6;
 }
 
-.page-list {
-  padding: 24px;
-}
-
 .ticket-fileupload {
   margin-top: 32px;
 }
 
+.page-list-ticket {
+  padding: 0 24px 24px 24px;
+}
+
+
+/deep/ .ticket-table {
+  &__requested-by {
+    max-width: 166px;
+    width: 166px;
+
+  }
+  &__subject {
+    max-width: 345px;
+    width: 345px;
+  }
+  &__company {
+    max-width: 148px;
+    width: 148px;
+
+  }
+  &__assignee {
+     max-width: 154px;
+     width: 154px;
+  }
+  &__status {
+    max-width: 100px;
+    width: 100px;
+  }
+  &__created-date {
+     max-width: 93px;
+     width: 93px;
+  }
+}
+
+@media (min-width: 1920px) {
+  /deep/ .ticket-table {
+    &__requested-by {
+      max-width: 300px;
+      width: 300px;
+    }
+    &__company {
+      max-width: 250px;
+    }
+    &__subject {
+      max-width: 650px;
+    }
+  }
+}

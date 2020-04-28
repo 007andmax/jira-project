@@ -2021,7 +2021,7 @@ ngb-datepicker {
             z-index: 2;
           }
           .filter-item__content {
-            height: 156px;
+            height: fit-content;
             transform: scaleY(1);
             opacity: 1;
             overflow: visible;
