@@ -39,12 +39,12 @@
                 </ng-template>
               </div>
 
-            <div class="qt-modal-circle-button add-user" (click)="onToggleAddAssignedUser()"></div>
+            <div class="qt-modal-circle-button add-user toggle-select-user" (click)="onToggleAddAssignedUser()"></div>
           <app-ticket-profile-actions [ticketProfile]="ticketProfile"></app-ticket-profile-actions>
            </div>
         </div>
         <app-ticket-edit-tags [selectedTag]="ticketProfile.tags" (tagsChange)="onChangeTags($event)" *ngIf="!showAddAssignedUser"></app-ticket-edit-tags>
-        <app-add-assigned-user [selectedUsers]="listAssignedUser" (onSelected)="onSelectAssignedUser($event)" (hidden)="onToggleAddAssignedUser()" *ngIf="showAddAssignedUser"></app-add-assigned-user>
+        <app-add-assigned-user [userList]="getUsersForAssign()" [selectedUsers]="listAssignedUser" (onSelected)="onSelectAssignedUser($event)" (hidden)="onToggleAddAssignedUser()" *ngIf="showAddAssignedUser"></app-add-assigned-user>
         <!--   TICKET SUBJECT AND DESCRIPTION   -->
         <div class="ticket-edit-aside__ticket-text">
 
@@ -218,18 +218,26 @@
       <div class="qt-aside__buttons jc-sb ai-c">
         <div class="d-f">
           <div class="ticket-edit-aside__attach icon__attachment"></div>
-          <div class="ticket-edit-aside__users  icon__assign-user"></div>
-
+          <div class="ticket-edit-aside__users  icon__assign-user toggle-select-user" *ngIf="!showAddUpdateUser" (click)="onToggleAddUpdateUser()"></div>
+          <app-add-assigned-user [userList]="getUsersForUpdate()" [selectedUsers]="lisUpdateUser" (onSelected)="onSelectUpdateUser($event)" (hidden)="onToggleAddUpdateUser()" *ngIf="showAddUpdateUser"></app-add-assigned-user>
+      
           <div class="ticket-edit-aside__users-linked d-f">
-            <div class="ticket-edit-aside__users-linked-author selected" style="background-image: url(https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)"></div>
+            <ng-template class="assigned-ticket-user" ngFor let-user [ngForOf]="lisUpdateUser" let-i="index" [ngForTrackBy]="trackByIndex">
+              <div class="ticket-edit-aside__users-linked-author" *ngIf="user.accountType === 'CLIENT' && !showAddUpdateUser" [textContent]="getAssignedUserNameForAvatar(user)"   [ngStyle]="{'background': getStyleAvatar(user),'background-size': 'cover'}"></div> 
+            </ng-template>
+            <div class="ticket-edit-aside__users-linked-divider" *ngIf="!showAddUpdateUser"></div>
+            <ng-template class="assigned-ticket-user" ngFor let-user [ngForOf]="lisUpdateUser" let-i="index" [ngForTrackBy]="trackByIndex">
+              <div class="ticket-edit-aside__users-linked-author" *ngIf="user.accountType === 'TECH' && !showAddUpdateUser" [textContent]="getAssignedUserNameForAvatar(user)"   [ngStyle]="{'background': getStyleAvatar(user),'background-size': 'cover'}"></div> 
+            </ng-template>
+        <!--    <div class="ticket-edit-aside__users-linked-author selected" style="background-image: url(https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)"></div>
             <div class="ticket-edit-aside__users-linked-divider"></div>
             <div class="ticket-edit-aside__users-linked-partner selected" style="background-image: url(https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)"></div>
             <div class="ticket-edit-aside__users-linked-partner" style="background-image: url(https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)"></div>
             <div class="ticket-edit-aside__users-linked-partner" style="background-color: #16a4fa;">GB</div>
-          </div>
+      -->    </div>
 
         </div>
-        <div class="d-f">
+        <div class="d-f" *ngIf="!showAddUpdateUser">
           <div class="qt-btn --btn40h --outline-blue update-ticket-btn">Update</div>
           <div class="qt-btn --btn40h">Update & Close</div>
         </div>

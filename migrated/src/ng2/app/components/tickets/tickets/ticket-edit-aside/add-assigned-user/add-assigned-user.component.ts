@@ -28,6 +28,7 @@ export class AddAssignedUserComponent implements OnInit {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   userCtrl = new FormControl();
  @Input() selectedUsers = [];
+ @Input() userList = [];
   users = [];
   reqUsers = [];
   sub: Subscription = new Subscription();
@@ -55,7 +56,9 @@ export class AddAssignedUserComponent implements OnInit {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-    this.getAllUsers();
+    this.users = JSON.parse(JSON.stringify(this.userList));
+    this.reqUsers = JSON.parse(JSON.stringify(this.userList));
+    
     this.userInput.nativeElement.onblur = (e) => {
       if (this.matAutocomplete.isOpen) {
         let modal = this.matAutocomplete.panel.nativeElement;
@@ -67,7 +70,7 @@ export class AddAssignedUserComponent implements OnInit {
   @HostListener('document:click', ['$event'])
   clickout(event) {
     console.log("clickout",event.target);
-    if (event.target.classList.contains('add-user')) return;
+    if (event.target.classList.contains('toggle-select-user')) return;
     if (!event.target.closest('app-add-assigned-user') && !event.target.closest('.assigne-user-item'))   this.hidden.emit(true);
     //  if (event.target.tagName === 'NGB-MODAL-WINDOW' && this.initialized && !this.showConfirm)// this.onCheckChange();
   }
@@ -103,15 +106,7 @@ export class AddAssignedUserComponent implements OnInit {
     this.userInput.nativeElement.value = '';
   }
 
-  /**
-   * Get user list
-   */
-  private getAllUsers() {
-    let userList = this.usersStateService.getAllUsers().sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?
-      1 : ((`${b.firstName} ${b.lastName}`.toLowerCase() > `${a.firstName} ${a.lastName}`.toLowerCase()) ? -1 : 0));
-    this.users = userList.filter((item) => item.accountType === USER.TYPE.TECH && !item.deletedAt);
-    this.reqUsers = userList.filter((item) => item.accountType === USER.TYPE.TECH && !item.deletedAt);
-  }
+  
 
   onSearchUser(event) {
     if (event.target.value.length > 0) {

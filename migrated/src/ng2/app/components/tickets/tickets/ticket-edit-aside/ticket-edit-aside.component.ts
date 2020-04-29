@@ -22,15 +22,17 @@ export class TicketEditAsideComponent implements OnInit {
   modeSubject = 'view';
   modeDescription = 'view';
   showAddAssignedUser = false;
+  showAddUpdateUser = false;
   showPreloader: boolean = true;
   listColors: Array<StatusColor> = [];
   statusColor: TicketsColor;
   listAssignedUser: Array<CurrentUser> = [];
-
+  lisUpdateUser: Array<CurrentUser> = [];
 
   constructor(private ticketsStateService: TicketsStateService,
     private ticketsService: TicketsService,
     private elRef: ElementRef,
+    private usersStateService: UsersStateService,
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
@@ -39,11 +41,16 @@ export class TicketEditAsideComponent implements OnInit {
     })
     this.ticketsStateService.getOnEditTicket().subscribe(data => {
       this.listAssignedUser = [];
+      this.lisUpdateUser = [];
       this.ticketProfile = data;
       this.elRef.nativeElement.querySelector("#ticket-note").value = this.ticketProfile.note;
       // if (this.ticketProfile.note.length === 0) this.modeDescription = 'edit';
       if (this.ticketProfile.assignedUser) this.listAssignedUser.push(this.ticketProfile.assignedUser);
       if (this.ticketProfile.multiAssignedUsers) this.listAssignedUser = [...this.listAssignedUser, ...this.ticketProfile.multiAssignedUsers];
+      this.lisUpdateUser = this.ticketProfile.updates.map(item => item.user);
+      this.lisUpdateUser = [...this.listAssignedUser,...this.lisUpdateUser]
+      this.lisUpdateUser = this.lisUpdateUser.filter((item,index) => this.lisUpdateUser.findIndex(user => user.id === item.id) === index);
+      console.log("this.lisUpdateUser",this.lisUpdateUser);
       this.opened = true;
       this.showPreloader = false;
     })
@@ -71,6 +78,20 @@ export class TicketEditAsideComponent implements OnInit {
 
 
   }
+  getUsersForAssign() {
+    let userList = this.usersStateService.getAllUsers().sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?
+      1 : ((`${b.firstName} ${b.lastName}`.toLowerCase() > `${a.firstName} ${a.lastName}`.toLowerCase()) ? -1 : 0));
+    return userList.filter((item) => item.accountType === "TECH" && !item.deletedAt);
+
+  }
+  getUsersForUpdate() {
+    let userList = this.usersStateService.getAllUsers().sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?
+      1 : ((`${b.firstName} ${b.lastName}`.toLowerCase() > `${a.firstName} ${a.lastName}`.toLowerCase()) ? -1 : 0));
+      let techusers = userList.filter((item) => item.accountType === "TECH" && !item.deletedAt);
+      let clientUsers = userList.filter((item) => item.accountType === "CLIENT" && !item.deletedAt && item.company.id === this.ticketProfile.companyId);
+    return [...techusers,...clientUsers];
+
+  }
   toggleSubject() {
     this.modeSubject = (this.modeSubject === 'view') ? 'edit' : 'view';
     console.log("toggleSubject", this.modeSubject)
@@ -91,6 +112,9 @@ export class TicketEditAsideComponent implements OnInit {
 
     })
   }
+  onSelectUpdateUser(data) {
+this.lisUpdateUser = data;
+  }
   onSelectAssignedUser(data) {
     this.listAssignedUser = data;
   }
@@ -105,6 +129,9 @@ export class TicketEditAsideComponent implements OnInit {
 
       })
     }
+  }
+  onToggleAddUpdateUser() {
+    this.showAddUpdateUser = !this.showAddUpdateUser;
   }
   getCompantName() {
     let find = this.companiesStateService.getCompanies().find(item => item.id === this.ticketProfile.companyId);
