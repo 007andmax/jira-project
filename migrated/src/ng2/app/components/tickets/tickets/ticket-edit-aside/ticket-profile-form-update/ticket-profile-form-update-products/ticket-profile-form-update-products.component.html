@@ -1,0 +1,47 @@
+<div  class="cps-block__products-block">
+  <ng-template class="assigned-ticket-user" ngFor let-product [ngForOf]="addedProductList" let-i="index" [ngForTrackBy]="trackByIndex">
+             
+  <div class="product-item">
+    <div class="product-item__first-line d-f">
+      <app-product-list [editItem]="product" class="product-item__prodect-list" [itemList]="productList"
+      (selectedProductItem)="selectProduct($event)"></app-product-list>
+         <button class="product-item__btn-del">
+        <span class="icon__close btn-icon"></span>
+      </button>
+    </div>
+
+    <div class="d-f">
+      <input class="product-item__input serial-num" type="text"   placeholder="Serial No">
+      <input class="product-item__input cost" type="text"  [(ngModel)]="product.cost" placeholder="Cost">
+      <span class="product-item__input-with-prefix qty">
+        <span class=product-item__prefix>Qty</span>
+        <input class="product-item__input qty" value="1" type="text">
+      </span>
+      <input class="product-item__input price" type="text" [(ngModel)]="product.price" placeholder="Price">
+      <span class="product-item__input-with-prefix discount">
+        <span class=product-item__prefix>Discount</span>
+        <input class="product-item__input" type="text"  >
+      </span>
+    </div>
+  </div>
+  </ng-template>
+
+  <div class="product-item">
+    <div class="product-item__first-line d-f">
+      <app-product-list class="product-item__prodect-list" [itemList]="productList"
+      (selectedProductItem)="selectProduct($event)"></app-product-list>
+     
+      <button class="product-item__btn-add">
+        <span class="icon__plus-white btn-icon"></span>
+      </button>
+    </div>
+
+    <div class="d-f">
+      <input class="product-item__input serial-num"   type="text" placeholder="Serial No">
+      <input class="product-item__input cost" [(ngModel)]="currentProduct.cost" placeholder="Cost">
+      <input class="product-item__input qty" value="1" placeholder="Qty">
+      <input class="product-item__input price" [(ngModel)]="currentProduct.sale" placeholder="Price">
+      <input class="product-item__input discount" type="text" placeholder="Discount">
+    </div>
+  </div>
+</div>

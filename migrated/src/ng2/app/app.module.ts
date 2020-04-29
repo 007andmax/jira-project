@@ -212,6 +212,8 @@ import { AddAssignedUserComponent } from './components/tickets/tickets/ticket-ed
 import { TicketEditTagsComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-edit-tags/ticket-edit-tags.component';
 import { TicketProfileActionsComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-actions/ticket-profile-actions.component';
 import { TicketClaimInfoComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-claim-info/ticket-claim-info.component';
+import { TicketProfileFormUpdateComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-form-update/ticket-profile-form-update.component';
+import { TicketProfileFormUpdateProductsComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-form-update/ticket-profile-form-update-products/ticket-profile-form-update-products.component';
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 declare var angular: any;
@@ -507,7 +509,9 @@ angular.module('quicktech')
     AddAssignedUserComponent,
     TicketEditTagsComponent,
     TicketProfileActionsComponent,
-    TicketClaimInfoComponent
+    TicketClaimInfoComponent,
+    TicketProfileFormUpdateComponent,
+    TicketProfileFormUpdateProductsComponent
   ],
   imports: [
     BrowserModule,

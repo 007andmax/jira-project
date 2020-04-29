@@ -10,10 +10,12 @@ import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 import { DevicesSateService } from 'src/ng2/app/states/devices/devices-sate.service';
 import { TicketsPermissionsService } from './services/tickets-permissions.service';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
+import { TicketsListService } from '../services/tickets-list.service';
 @Component({
   selector: 'app-ticket-edit-aside',
   templateUrl: './ticket-edit-aside.component.html',
   styleUrls: ['./ticket-edit-aside.component.scss'],
+  providers: [TicketsListService]
 
 })
 export class TicketEditAsideComponent implements OnInit {
@@ -22,7 +24,7 @@ export class TicketEditAsideComponent implements OnInit {
   modeSubject = 'view';
   modeDescription = 'view';
   showAddAssignedUser = false;
-  showAddUpdateUser = false;
+ 
   showPreloader: boolean = true;
   listColors: Array<StatusColor> = [];
   statusColor: TicketsColor;
@@ -32,6 +34,7 @@ export class TicketEditAsideComponent implements OnInit {
   constructor(private ticketsStateService: TicketsStateService,
     private ticketsService: TicketsService,
     private elRef: ElementRef,
+    public ticketsListService:TicketsListService,
     private usersStateService: UsersStateService,
     private companiesStateService: CompaniesStateService) { }
 
@@ -61,6 +64,8 @@ export class TicketEditAsideComponent implements OnInit {
       this.statusColor = data;
     })
   }
+   
+
   onChangeTags(data) {
     this.ticketProfile.tags = data;
 
@@ -112,9 +117,7 @@ export class TicketEditAsideComponent implements OnInit {
 
     })
   }
-  onSelectUpdateUser(data) {
-this.lisUpdateUser = data;
-  }
+ 
   onSelectAssignedUser(data) {
     this.listAssignedUser = data;
   }
@@ -130,9 +133,7 @@ this.lisUpdateUser = data;
       })
     }
   }
-  onToggleAddUpdateUser() {
-    this.showAddUpdateUser = !this.showAddUpdateUser;
-  }
+ 
   getCompantName() {
     let find = this.companiesStateService.getCompanies().find(item => item.id === this.ticketProfile.companyId);
     return (find) ? find.name : '';
@@ -141,24 +142,8 @@ this.lisUpdateUser = data;
     if (!this.ticketProfile.createdUser) return '';
     return `${this.ticketProfile.createdUser.firstName} ${this.ticketProfile.createdUser.lastName}`
   }
-  getAssignedUserNameForAvatar(user) {
-    if (!user) return '';
-    if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}${(user.lastName) ? user.lastName[0].toUpperCase() : ''}`;
-    return '';
-  }
-  getStyleAvatar(user) {
-    if (!(user && user.avatar)) {
-      return '#16a4fa';
-    }
-    if (user.id) {
-      return `url(${'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt :
-        '')}) no-repeat`
-    } else if (user.avatar && user.avatar.origin && user.avatar.origin.id) {
-      return `url(/file/${(user.avatar.origin.id)}.jpg) no-repeat`;
-    } else {
-      return '#16a4fa';
-    }
-  };
+
+  
   getCreatAt() {
     let date = new Date(this.ticketProfile.createdAt);
     let hours = (date.getHours() > 12) ? date.getHours() - 12 : date.getHours();

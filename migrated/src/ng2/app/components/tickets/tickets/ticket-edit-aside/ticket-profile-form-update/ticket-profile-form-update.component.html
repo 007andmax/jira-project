@@ -1,0 +1,86 @@
+<div class="cps-block">
+  <div class="cps-block__header d-f">
+    <div class="cps-block__photo" style="background-image: url(https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)"></div>
+    <ul class="cps-block__nav">
+      <li class="cps-block__nav-item icon__chat" [ngClass]="{'active':tab === 'CHAT' }" (click)="tab = 'CHAT'">Chat</li>
+      <li class="cps-block__nav-item icon__products" [ngClass]="{'active':tab === 'PRODUCTS' }" (click)="tab = 'PRODUCTS'">Products</li>
+      <li class="cps-block__nav-item icon__service" [ngClass]="{'active':tab === 'SERVICES' }" (click)="tab = 'SERVICES'">Service</li>
+    </ul>
+  </div>
+  <div class="cps-block__content">
+   <div class="cps-block__chat-block" *ngIf="tab === 'CHAT'" >
+    <div class="editable-description editable-chat">
+    <textarea name="cps-chat" class="cps-block__content-textarea" appTextArea   id="chat" placeholder="Write ticket conversation here…"
+    (input)="onChangeChat($event)" (onPast)="onPastChat($event)"></textarea>
+    </div>
+    <div class="files-list">
+      <div class="single-file" *ngFor="let file of files; let i = index">
+       
+        <div class="info">
+          <h4 class="name">
+            {{ file?.name }}
+          </h4>
+          <p class="size">
+            {{ formatBytes(file?.size) }} <span class="file-error">{{(file.showError) ? error : ''}}</span>
+          </p>
+          <app-upload-area-progress [progress]="file?.progress"></app-upload-area-progress>
+        </div>
+        <i class="icn-sm icn-remove-old" (click)="deleteFile(i)"></i>
+       <!-- <img src="assets/img/dnd/ic-delete-file.svg" class="delete" width="20px" alt="file" (click)="deleteFile(i)">-->
+      </div>
+    </div>
+    
+  </div> 
+  
+  <app-ticket-profile-form-update-products *ngIf="tab === 'PRODUCTS'"></app-ticket-profile-form-update-products>
+
+
+    <div class="cps-block__service-block" *ngIf="tab === 'SERVICES'">
+      <div class="service-item">
+        <div class="service-item__first-line d-f">
+          <input class="service-item__input device" type="text" placeholder="Device">
+          <input class="service-item__input time" type="text" placeholder="Hr(s) : Min(s)">
+          <input class="service-item__input date" type="text" placeholder="8 Mar 2018">
+
+          <button class="service-item__btn-add">
+            <span class="icon__plus-white btn-icon"></span>
+          </button>
+        </div>
+        <div>
+          <input class="service-item__input description" type="text" placeholder="Description">
+        </div>
+      </div>
+
+   </div> 
+  </div>
+</div>
+
+<div class="qt-aside__buttons jc-sb ai-c">
+  <div class="d-f">
+    <div class="ticket-edit-aside__attach icon__attachment">
+      <input type="file" #fileDropRef id="fileDropRef" multiple (change)="fileBrowseHandler($event.target.files)" />
+    </div>
+    <div class="ticket-edit-aside__users  icon__assign-user toggle-select-user" *ngIf="!showAddUpdateUser" (click)="onToggleAddUpdateUser()"></div>
+    <app-add-assigned-user [userList]="getUsersForUpdate()" [selectedUsers]="lisUpdateUser" (onSelected)="onSelectUpdateUser($event)" (hidden)="onToggleAddUpdateUser()" *ngIf="showAddUpdateUser"></app-add-assigned-user>
+
+    <div class="ticket-edit-aside__users-linked d-f">
+      <ng-template class="assigned-ticket-user" ngFor let-user [ngForOf]="lisUpdateUser" let-i="index" [ngForTrackBy]="trackByIndex">
+        <div class="ticket-edit-aside__users-linked-author" *ngIf="user.accountType === 'CLIENT' && !showAddUpdateUser" [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"   [ngStyle]="{'background': ticketsListService.getStyleAvatar(user),'background-size': 'cover'}"></div> 
+      </ng-template>
+      <div class="ticket-edit-aside__users-linked-divider" *ngIf="!showAddUpdateUser"></div>
+      <ng-template class="assigned-ticket-user" ngFor let-user [ngForOf]="lisUpdateUser" let-i="index" [ngForTrackBy]="trackByIndex">
+        <div class="ticket-edit-aside__users-linked-author" *ngIf="user.accountType === 'TECH' && !showAddUpdateUser" [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"   [ngStyle]="{'background': ticketsListService.getStyleAvatar(user),'background-size': 'cover'}"></div> 
+      </ng-template>
+  <!--    <div class="ticket-edit-aside__users-linked-author selected" style="background-image: url(https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)"></div>
+      <div class="ticket-edit-aside__users-linked-divider"></div>
+      <div class="ticket-edit-aside__users-linked-partner selected" style="background-image: url(https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)"></div>
+      <div class="ticket-edit-aside__users-linked-partner" style="background-image: url(https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)"></div>
+      <div class="ticket-edit-aside__users-linked-partner" style="background-color: #16a4fa;">GB</div>
+-->    </div>
+
+  </div>
+  <div class="d-f" *ngIf="!showAddUpdateUser">
+    <div class="qt-btn --btn40h --outline-blue update-ticket-btn" (click)="update()">Update</div>
+    <div class="qt-btn --btn40h">Update & Close</div>
+  </div>
+</div>

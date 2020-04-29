@@ -13,8 +13,8 @@
         <div class="ticket-edit-aside__header d-f jc-sb ai-c">
           <div class="d-f">
 
-            <div class="ticket-edit-aside__header-avatar" [textContent]="getAssignedUserNameForAvatar(ticketProfile.createdUser)"
-            [ngStyle]="{'background': getStyleAvatar(ticketProfile.createdUser),'background-size': 'cover'}"></div>
+            <div class="ticket-edit-aside__header-avatar" [textContent]="ticketsListService.getAssignedUserNameForAvatar(ticketProfile.createdUser)"
+            [ngStyle]="{'background': ticketsListService.getStyleAvatar(ticketProfile.createdUser),'background-size': 'cover'}"></div>
 
             <div>
               <div class="ticket-edit-aside__header-company" [textContent]="getCompantName() + ' - ' + getNameCreateUser()"></div>
@@ -35,7 +35,7 @@
             </div>
             <div class="more-users-avatars">
               <ng-template class="assigned-ticket-user" ngFor let-user [ngForOf]="listAssignedUser" let-i="index" [ngForTrackBy]="trackByIndex">
-                <div class="more-users-avatars__avatar" *ngIf="i < 3" [textContent]="getAssignedUserNameForAvatar(user)"   [ngStyle]="{'background': getStyleAvatar(user),'background-size': 'cover'}"></div>
+                <div class="more-users-avatars__avatar" *ngIf="i < 3" [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"   [ngStyle]="{'background': ticketsListService.getStyleAvatar(user),'background-size': 'cover'}"></div>
                 </ng-template>
               </div>
 
@@ -135,113 +135,12 @@
         </div>
 
       </div>
+    </div>
         <!--  CHAT PRODUCTS SERVICE  -->
-        <div class="cps-block">
-          <div class="cps-block__header d-f">
-            <div class="cps-block__photo" style="background-image: url(https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)"></div>
-            <ul class="cps-block__nav">
-              <li class="cps-block__nav-item icon__chat">Chat</li>
-              <li class="cps-block__nav-item icon__products active">Products</li>
-              <li class="cps-block__nav-item icon__service">Service</li>
-            </ul>
-          </div>
-          <div class="cps-block__content">
-            <!-- <div class="cps-block__chat-block"> -->
-              <!-- <textarea name="cps-chat" class="cps-block__content-textarea"  placeholder="Write ticket conversation here…"></textarea> -->
-            <!-- </div> -->
+        <app-ticket-profile-form-update [ticket]="ticketProfile" [lisUpdateUser]="lisUpdateUser"></app-ticket-profile-form-update>
+     
 
-
-            <div  class="cps-block__products-block">
-              <div class="product-item">
-                <div class="product-item__first-line d-f">
-                  <input type="text" class="product-item__input device" value="HP Laser Jet 2300 interface dpi resolutions printer speed">
-                  <button class="product-item__btn-del">
-                    <span class="icon__close btn-icon"></span>
-                  </button>
-                </div>
-
-                <div class="d-f">
-                  <input class="product-item__input serial-num" type="text" value="88456341" placeholder="Serial No">
-                  <input class="product-item__input cost" type="text" value="$350.00" placeholder="Cost">
-                  <span class="product-item__input-with-prefix qty">
-                    <span class=product-item__prefix>Qty</span>
-                    <input class="product-item__input qty" value="2" type="text">
-                  </span>
-                  <input class="product-item__input price" type="text" value="$375.00" placeholder="Price">
-                  <span class="product-item__input-with-prefix discount">
-                    <span class=product-item__prefix>Discount</span>
-                    <input class="product-item__input" type="text" value="2%">
-                  </span>
-                </div>
-              </div>
-
-              <div class="product-item">
-                <div class="product-item__first-line d-f">
-                  <app-product-list class="product-item__prodect-list"></app-product-list>
-                  <button class="product-item__btn-add">
-                    <span class="icon__plus-white btn-icon"></span>
-                  </button>
-                </div>
-
-                <div class="d-f">
-                  <input class="product-item__input serial-num" type="text" placeholder="Serial No">
-                  <input class="product-item__input cost" type="text" placeholder="Cost">
-                  <input class="product-item__input qty" type="text" placeholder="Qty">
-                  <input class="product-item__input price" type="text" placeholder="Price">
-                  <input class="product-item__input discount" type="text" placeholder="Discount">
-                </div>
-              </div>
-            </div>
-
-
-           <!-- <div class="cps-block__service-block">
-              <div class="service-item">
-                <div class="service-item__first-line d-f">
-                  <input class="service-item__input device" type="text" placeholder="Device">
-                  <input class="service-item__input time" type="text" placeholder="Hr(s) : Min(s)">
-                  <input class="service-item__input date" type="text" placeholder="8 Mar 2018">
-
-                  <button class="service-item__btn-add">
-                    <span class="icon__plus-white btn-icon"></span>
-                  </button>
-                </div>
-                <div>
-                  <input class="service-item__input description" type="text" placeholder="Description">
-                </div>
-              </div>
-
-           </div> -->
-          </div>
-        </div>
-      </div>
-
-      <div class="qt-aside__buttons jc-sb ai-c">
-        <div class="d-f">
-          <div class="ticket-edit-aside__attach icon__attachment"></div>
-          <div class="ticket-edit-aside__users  icon__assign-user toggle-select-user" *ngIf="!showAddUpdateUser" (click)="onToggleAddUpdateUser()"></div>
-          <app-add-assigned-user [userList]="getUsersForUpdate()" [selectedUsers]="lisUpdateUser" (onSelected)="onSelectUpdateUser($event)" (hidden)="onToggleAddUpdateUser()" *ngIf="showAddUpdateUser"></app-add-assigned-user>
-      
-          <div class="ticket-edit-aside__users-linked d-f">
-            <ng-template class="assigned-ticket-user" ngFor let-user [ngForOf]="lisUpdateUser" let-i="index" [ngForTrackBy]="trackByIndex">
-              <div class="ticket-edit-aside__users-linked-author" *ngIf="user.accountType === 'CLIENT' && !showAddUpdateUser" [textContent]="getAssignedUserNameForAvatar(user)"   [ngStyle]="{'background': getStyleAvatar(user),'background-size': 'cover'}"></div> 
-            </ng-template>
-            <div class="ticket-edit-aside__users-linked-divider" *ngIf="!showAddUpdateUser"></div>
-            <ng-template class="assigned-ticket-user" ngFor let-user [ngForOf]="lisUpdateUser" let-i="index" [ngForTrackBy]="trackByIndex">
-              <div class="ticket-edit-aside__users-linked-author" *ngIf="user.accountType === 'TECH' && !showAddUpdateUser" [textContent]="getAssignedUserNameForAvatar(user)"   [ngStyle]="{'background': getStyleAvatar(user),'background-size': 'cover'}"></div> 
-            </ng-template>
-        <!--    <div class="ticket-edit-aside__users-linked-author selected" style="background-image: url(https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)"></div>
-            <div class="ticket-edit-aside__users-linked-divider"></div>
-            <div class="ticket-edit-aside__users-linked-partner selected" style="background-image: url(https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)"></div>
-            <div class="ticket-edit-aside__users-linked-partner" style="background-image: url(https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)"></div>
-            <div class="ticket-edit-aside__users-linked-partner" style="background-color: #16a4fa;">GB</div>
-      -->    </div>
-
-        </div>
-        <div class="d-f" *ngIf="!showAddUpdateUser">
-          <div class="qt-btn --btn40h --outline-blue update-ticket-btn">Update</div>
-          <div class="qt-btn --btn40h">Update & Close</div>
-        </div>
-      </div>
+     
 
     </div>
 

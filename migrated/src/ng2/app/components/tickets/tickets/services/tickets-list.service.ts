@@ -67,4 +67,22 @@ export class TicketsListService {
     let find =  ((multiAssignedUsers) ? multiAssignedUsers : []).find(item => item.id === this.usersStateService.getCurrentUser().id);
     return (find) ? true : false;
   }
+  getStyleAvatar(user) {
+    if (!(user && user.avatar)) {
+      return '#16a4fa';
+    }
+    if (user.id) {
+      return `url(${'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt :
+        '')}) no-repeat`
+    } else if (user.avatar && user.avatar.origin && user.avatar.origin.id) {
+      return `url(/file/${(user.avatar.origin.id)}.jpg) no-repeat`;
+    } else {
+      return '#16a4fa';
+    }
+  };
+  getAssignedUserNameForAvatar(user) {
+    if (!user) return '';
+    if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}${(user.lastName) ? user.lastName[0].toUpperCase() : ''}`;
+    return '';
+  }
 }
