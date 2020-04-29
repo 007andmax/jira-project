@@ -1,14 +1,14 @@
 <ng-sidebar-container>
   <ng-sidebar [(opened)]="opened" [position]="'right'" class="ticket-edit-aside qt-aside d-f">
 
-    <div class="collapse-arrow icon__collapse-arrow" (click)="close()"></div>
+    <div class="collapse-arrow icon__close" (click)="close()"></div>
 
 
     <div class="ticket-edit-aside__ticket-info">
       <div class="prelaoder-body" *ngIf="showPreloader">
         <div class="loading" ></div>
       </div>
-      <div class="qt-aside__body">
+      <div class="qt-aside__body ticket-edit-aside__body">
         <!--   TICKET HEADER   -->
         <div class="ticket-edit-aside__header d-f jc-sb ai-c">
           <div class="d-f">
@@ -68,7 +68,7 @@
                (click)="toggleNote()"
           [textContent]="ticketProfile.note"></div>
           <div class="ticket-edit-aside__ticket-description-edit"
-        
+
                appClickOtside [init]="opened" [class]="'.ticket-edit-aside__ticket-text'" (onOutSide)="toggleNote()"
           >
             <textarea id="ticket-note"  ></textarea>
@@ -135,12 +135,10 @@
         </div>
 
       </div>
-    </div>
         <!--  CHAT PRODUCTS SERVICE  -->
         <app-ticket-profile-form-update [ticket]="ticketProfile" [lisUpdateUser]="lisUpdateUser"></app-ticket-profile-form-update>
-     
+    </div>
 
-     
 
     </div>
 
