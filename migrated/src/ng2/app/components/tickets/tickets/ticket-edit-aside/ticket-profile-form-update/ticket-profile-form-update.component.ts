@@ -153,4 +153,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
     this.ticketProfileFormUpdate.removeFile(index);
 
   }
+  public trackByIndex(index, item) {
+    return index;
+  }
 }
