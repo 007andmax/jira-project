@@ -6,7 +6,7 @@ import { TicketProfile } from '../../components/tickets/tickets/class/ticket-pro
   providedIn: 'root'
 })
 export class TicketsStateService {
-  updateForm:EventEmitter<any> = new EventEmitter();
+  clearFormUpdate:EventEmitter<any> = new EventEmitter();
   actualNumber: EventEmitter<any> = new EventEmitter();
   addTicket: EventEmitter<any> = new EventEmitter();
   openTicket: EventEmitter<any> = new EventEmitter();
@@ -40,8 +40,8 @@ export class TicketsStateService {
       
     })
   }
-  public onUpdateForm(data) {
-    this.updateForm.emit(data);
+  public onClearFormUpdate() {
+    this.clearFormUpdate.emit(null);
   }
   public onOpenTicket() {
     this.openTicket.emit(null);
@@ -101,7 +101,8 @@ export class TicketsStateService {
   public getOnAddTicket() {
     return this.addTicket;
   }
-  public getOnUpdateForm() {
-    return this.updateForm;
+  public getOnClearFormUpdate() {
+    return this.clearFormUpdate;
   }
+  
 }

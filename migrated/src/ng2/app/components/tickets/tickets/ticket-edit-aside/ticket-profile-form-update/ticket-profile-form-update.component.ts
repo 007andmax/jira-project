@@ -24,7 +24,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
   };
   showAddUpdateUser = false;
   files: any[] = [];
-  tab:string = "CHAT";
+  tab: string = "NOTE";
   constructor(private ticketsStateService: TicketsStateService,
     public cd: ChangeDetectorRef,
     private ticketsService: TicketsService,
@@ -34,17 +34,34 @@ export class TicketProfileFormUpdateComponent implements OnInit {
   }
   public onChangeChat(event) {
     this.ticketProfileFormUpdate.setChatMessage(event.target.value);
-    this.ticketsStateService.onUpdateForm(this.ticketProfileFormUpdate);
+   
   }
   public onPastChat(value) {
     this.ticketProfileFormUpdate.setChatMessage(value);
-    this.ticketsStateService.onUpdateForm(this.ticketProfileFormUpdate);
+   
   }
   update() {
-    if (!this.ticketProfileFormUpdate.isValidateNote()) return;
-    this.ticketsService.updateTicket(this.ticketProfileFormUpdate.getDataForUpdateNote()).subscribe(data => {
-      this.ticketProfileFormUpdate.setChatMessage("");
-    })
+    if (this.tab === "NOTE") {
+      if (!this.ticketProfileFormUpdate.isValidateNote()) return;
+      this.ticketsService.updateTicket(this.ticketProfileFormUpdate.getDataForUpdateNote()).subscribe(data => {
+        this.ticketProfileFormUpdate.setChatMessage("");
+      })
+    }
+    if (this.tab === "PRODUCT") {
+      if (!this.ticketProfileFormUpdate.isValidateProduct()) return;
+      this.ticketsService.updateTicket(this.ticketProfileFormUpdate.getDataForUpdateProduct()).subscribe(data => {
+       // this.ticketProfileFormUpdate.setChatMessage("");
+       this.ticketsStateService.onClearFormUpdate();
+      })
+    }
+
+  }
+  public setTab(data) {
+    this.tab = data;
+    this.ticketProfileFormUpdate.setType(data);
+  }
+  onChangeProducts(data) {
+    this.ticketProfileFormUpdate.setProducts(data);
   }
   onToggleAddUpdateUser() {
     this.showAddUpdateUser = !this.showAddUpdateUser;
@@ -76,7 +93,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
         // this.changeFile(file).then((base64: string): any => {
         console.log("res", res);
         this.ticketProfileFormUpdate.addFile(res.id);
-         
+
         //   this.changeFiles.emit(this.idfiles);
         //  this.modalImageCropperStateService.onInitOpen(new ImageCroper(res.base64,res.id));
 

@@ -1,0 +1,17 @@
+<div class="cps-block__service-block" *ngIf="areTicketsPresented && !areTicketsTerminated || !areTicketsPresented">
+  <div class="service-item">
+    <div class="service-item__first-line d-f">
+      <app-services-list [editItem]="service" [itemList]="servicesList"
+      (selectedServicesItem)="setService($event,i)"></app-services-list>
+      <input class="service-item__input time" type="text" placeholder="Hr(s) : Min(s)">
+      <input class="service-item__input date" type="text" placeholder="8 Mar 2018">
+      <button class="service-item__btn-add">
+        <span class="icon__plus-white btn-icon"></span>
+      </button>
+    </div>
+    <div>
+      <input class="service-item__input description" type="text" placeholder="Description">
+    </div>
+  </div>
+</div> 
+<p *ngIf="areTicketsPresented && areTicketsTerminated">Your contacts are expired/terminated. Please recreate them in order to use contract's services or remove them in order to use default services</p>

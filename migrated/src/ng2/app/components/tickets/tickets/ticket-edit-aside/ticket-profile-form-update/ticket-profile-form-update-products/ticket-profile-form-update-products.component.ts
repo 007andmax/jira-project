@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { ProductService } from 'src/ng2/app/services/product/product.service';
 import { Product } from 'src/ng2/app/interfaces/product/product';
+import { TicketProfileFormProduct } from '../../class/ticket-profile-form-product';
+import { ProductListComponent } from 'src/ng2/app/components/shared/product-list/product-list.component';
+import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.service';
 
 @Component({
   selector: 'app-ticket-profile-form-update-products',
@@ -8,13 +11,20 @@ import { Product } from 'src/ng2/app/interfaces/product/product';
   styleUrls: ['./ticket-profile-form-update-products.component.scss']
 })
 export class TicketProfileFormUpdateProductsComponent implements OnInit {
+  @ViewChild('productDP') productDP: ProductListComponent;
+  @Output() changeProducts = new EventEmitter<any>();
   addedProductList = [];
   public productList = [];
-  currentProduct: Product;
-  constructor(private productService: ProductService, ) { }
+  currentProduct: TicketProfileFormProduct = new TicketProfileFormProduct();
+  constructor(private productService: ProductService,
+    private ticketsStateService:TicketsStateService ) { }
 
   ngOnInit() {
-    this.currentProduct = this.getDefaultProfuct();
+    this.ticketsStateService.getOnClearFormUpdate().subscribe(data => {
+      this.addedProductList = [];
+      this.currentProduct = new TicketProfileFormProduct();
+      this.productDP.clear();
+    })
     this.getItemListProducts();
   }
   public getItemListProducts() {
@@ -25,28 +35,24 @@ export class TicketProfileFormUpdateProductsComponent implements OnInit {
   }
   public selectProduct(item) {
     console.log("item", item);
-    this.currentProduct = item;
+    this.currentProduct.setData(item, this.getItemOrger());
+  }
+  public addProduct() {
+    this.addedProductList.push(JSON.parse(JSON.stringify(this.currentProduct)));
+    this.currentProduct = new TicketProfileFormProduct();
+    this.productDP.clear();
+    this.changeProducts.emit(this.addedProductList);
+  }
+  public removeProduct(i) {
+    this.addedProductList.splice(i, 1);
+    this.currentProduct.setItemOrder(this.getItemOrger());
+    this.changeProducts.emit(this.addedProductList);
+  }
+  private getItemOrger() {
+    return (this.addedProductList.length - 1) >= 0 ? this.addedProductList.length - 1 : 0;
   }
   public trackByIndex(index, item) {
     return index;
   }
-  private getDefaultProfuct() {
-    return {
-      cost: 0,
-      description: "",
-      glNumber: null,
-      ilc: "",
-      manufacture: "",
-      sale: 0,
-      taxes: [],
-      versionedId: null,
-      createdAt: null,
-      updatedAt: null,
-      deletedAt: null,
-      company: null,
-      category: null,
-      billable: null,
-      oldVersion: null,
-    }
-  }
+
 }

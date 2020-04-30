@@ -2,13 +2,13 @@
   <div class="cps-block__header d-f">
     <div class="cps-block__photo" style="background-image: url(https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)"></div>
     <ul class="cps-block__nav">
-      <li class="cps-block__nav-item icon__chat" [ngClass]="{'active':tab === 'CHAT' }" (click)="tab = 'CHAT'">Chat</li>
-      <li class="cps-block__nav-item icon__products" [ngClass]="{'active':tab === 'PRODUCTS' }" (click)="tab = 'PRODUCTS'">Products</li>
-      <li class="cps-block__nav-item icon__service" [ngClass]="{'active':tab === 'SERVICES' }" (click)="tab = 'SERVICES'">Service</li>
+      <li class="cps-block__nav-item icon__chat" [ngClass]="{'active':tab === 'NOTE' }" (click)="setTab('NOTE')">Chat</li>
+      <li class="cps-block__nav-item icon__products" [ngClass]="{'active':tab === 'PRODUCT' }" (click)="setTab('PRODUCT')">Products</li>
+      <li class="cps-block__nav-item icon__service" [ngClass]="{'active':tab === 'SERVICES' }" (click)="setTab('SERVICES')">Service</li>
     </ul>
   </div>
   <div class="cps-block__content">
-   <div class="cps-block__chat-block" *ngIf="tab === 'CHAT'" >
+   <div class="cps-block__chat-block" *ngIf="tab === 'NOTE'" >
     <div class="editable-description editable-chat">
     <textarea name="cps-chat" class="cps-block__content-textarea" appTextArea   id="chat" placeholder="Write ticket conversation here…"
     (input)="onChangeChat($event)" (onPast)="onPastChat($event)"></textarea>
@@ -32,26 +32,10 @@
     
   </div> 
   
-  <app-ticket-profile-form-update-products *ngIf="tab === 'PRODUCTS'"></app-ticket-profile-form-update-products>
+  <app-ticket-profile-form-update-products (changeProducts)="onChangeProducts($event)" *ngIf="tab === 'PRODUCT'"></app-ticket-profile-form-update-products>
 
-
-    <div class="cps-block__service-block" *ngIf="tab === 'SERVICES'">
-      <div class="service-item">
-        <div class="service-item__first-line d-f">
-          <input class="service-item__input device" type="text" placeholder="Device">
-          <input class="service-item__input time" type="text" placeholder="Hr(s) : Min(s)">
-          <input class="service-item__input date" type="text" placeholder="8 Mar 2018">
-
-          <button class="service-item__btn-add">
-            <span class="icon__plus-white btn-icon"></span>
-          </button>
-        </div>
-        <div>
-          <input class="service-item__input description" type="text" placeholder="Description">
-        </div>
-      </div>
-
-   </div> 
+ 
+  <app-ticket-profile-form-update-services [ticketProfile]="ticketProfile"  *ngIf="tab === 'SERVICES'"></app-ticket-profile-form-update-services>
   </div>
 </div>
 
