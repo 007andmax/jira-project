@@ -76,27 +76,19 @@ export class TicketsPermissionsService {
             var user = this.usersStateService.getCurrentUser(),
               otherAPerformerAndAUser = ticket.assignedUser && ticket.assignPerformer.id !== ticket.assignedUser.id;
             var indexUser = (ticket.multiAssignedUsers) ? ticket.multiAssignedUsers.findIndex(user_s => user_s.id === user.id) : -1;
+            let indexPerformerMultiAssigned = (ticket.multiAssignedUsers) ? ticket.multiAssignedUsers.findIndex(user_s => user_s.id === ticket.assignPerformer.id) : -1;
             switch (type) {
               case 'ASSIGNED_TO_ME':
                 return (ticket.assignPerformer.id !== user.id) && (ticket.assignedUser && (ticket.assignedUser.id === user.id || indexUser > -1)) && !ticket.isReassigned;
     
-              case 'RE-ASSIGNED_TO_ME':
-                return (ticket.assignPerformer.id !== user.id) && (ticket.assignedUser && (ticket.assignedUser.id === user.id || indexUser > -1)) && ticket.isReassigned;
-    
               case 'I_ASSIGNED_TO_USER':
                 return (ticket.assignPerformer.id === user.id) && (ticket.assignedUser && (ticket.assignedUser.id !== user.id && indexUser === -1)) && !ticket.isReassigned;
     
-              case 'I_RE-ASSIGNED_TO_USER':
-                return (ticket.assignPerformer.id === user.id) && (ticket.assignedUser && (ticket.assignedUser.id !== user.id && indexUser === -1)) && ticket.isReassigned;
-    
               case 'USER_CLAIMED':
-                return (ticket.assignPerformer.id !== user.id) && (ticket.assignedUser && ticket.assignedUser.id === ticket.assignPerformer.id);
-    
-              case 'USER_RE-ASSIGNED_USER':
-                return ticket.assignPerformer.id !== user.id && ticket.assignedUser && ticket.assignedUser.id !== user.id && otherAPerformerAndAUser && ticket.isReassigned;
+                return (ticket.assignPerformer.id !== user.id) && ((ticket.assignedUser && ticket.assignedUser.id === ticket.assignPerformer.id || indexPerformerMultiAssigned > -1));
     
               case 'USER_ASSIGNED_USER':
-                return ticket.assignPerformer.id !== user.id && ticket.assignedUser && ticket.assignedUser.id !== user.id && otherAPerformerAndAUser && !ticket.isReassigned;
+                return ticket.assignPerformer.id !== user.id && ticket.assignedUser && ticket.assignedUser.id !== user.id && indexUser === -1 && (otherAPerformerAndAUser && indexPerformerMultiAssigned === -1) && !ticket.isReassigned;
     
               case 'MY_TICKET':
                 return (ticket.assignPerformer.id === user.id) && (ticket.assignedUser && ticket.assignedUser.id === user.id) || (ticket.assignPerformer.id === user.id) && indexUser > -1;
