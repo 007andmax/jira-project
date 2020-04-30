@@ -79,16 +79,16 @@ export class TicketsPermissionsService {
             let indexPerformerMultiAssigned = (ticket.multiAssignedUsers) ? ticket.multiAssignedUsers.findIndex(user_s => user_s.id === ticket.assignPerformer.id) : -1;
             switch (type) {
               case 'ASSIGNED_TO_ME':
-                return (ticket.assignPerformer.id !== user.id) && (ticket.assignedUser && (ticket.assignedUser.id === user.id || indexUser > -1)) && !ticket.isReassigned;
+                return (ticket.assignPerformer.id !== user.id) && (((ticket.assignedUser && (ticket.assignedUser.id === user.id || indexUser > -1))) || !ticket.assignedUser && indexUser > -1);
     
               case 'I_ASSIGNED_TO_USER':
-                return (ticket.assignPerformer.id === user.id) && (ticket.assignedUser && (ticket.assignedUser.id !== user.id && indexUser === -1)) && !ticket.isReassigned;
+                return (ticket.assignPerformer.id === user.id) && ((ticket.assignedUser && (ticket.assignedUser.id !== user.id && indexUser === -1)) || !ticket.assignedUser && indexUser === -1);
     
               case 'USER_CLAIMED':
-                return (ticket.assignPerformer.id !== user.id) && ((ticket.assignedUser && ticket.assignedUser.id === ticket.assignPerformer.id || indexPerformerMultiAssigned > -1));
+                return (ticket.assignPerformer.id !== user.id) && (((ticket.assignedUser && ticket.assignedUser.id === ticket.assignPerformer.id || indexPerformerMultiAssigned > -1)) || !ticket.assignedUser && indexPerformerMultiAssigned > -1);
     
               case 'USER_ASSIGNED_USER':
-                return ticket.assignPerformer.id !== user.id && ticket.assignedUser && ticket.assignedUser.id !== user.id && indexUser === -1 && (otherAPerformerAndAUser && indexPerformerMultiAssigned === -1) && !ticket.isReassigned;
+                return ticket.assignPerformer.id !== user.id && (ticket.assignedUser && ticket.assignedUser.id !== user.id && indexUser === -1 && (otherAPerformerAndAUser && indexPerformerMultiAssigned === -1)) || !ticket.assignedUser && indexUser === -1 && (otherAPerformerAndAUser && indexPerformerMultiAssigned === -1);
     
               case 'MY_TICKET':
                 return (ticket.assignPerformer.id === user.id) && (ticket.assignedUser && ticket.assignedUser.id === user.id) || (ticket.assignPerformer.id === user.id) && indexUser > -1;
