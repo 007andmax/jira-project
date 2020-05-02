@@ -3,13 +3,17 @@
   <div class="page-container software-list">
     <!-- Page Title -->
         <div class="page-header">
-            <h3>Software list<a (click)="downloadCsv();">Print</a></h3>
-            <div class="page-header-opt">
+            <h3>Software list</h3>
+            <div class="download-print">
+              <a (click)="printPdf();" data-tooltip="Print"><img src="../../../../ng1/images/device/print.svg"></a>
+              <a (click)="downloadCsv();" data-tooltip="Download CSV"><img src="../../../../ng1/images/device/download_csv.svg"></a>
+            </div>
+            <!-- <div class="page-header-opt">
               <div class="selected-item" *ngIf="selectedList.length > 0">
                   <span>{{selectedList.length}} Selected</span>
                   <a class="delete" title="Remove" (click)="openModal(templateDelete, 0);"><img src="../../../../../ng1/images/device/remove-primary.svg" alt="remove"/></a>
               </div>
-            </div>    
+            </div>     -->
         </div>
         <!-- Page Content -->
         <div class="contant-area">

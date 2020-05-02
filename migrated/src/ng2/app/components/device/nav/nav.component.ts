@@ -35,6 +35,7 @@ export class NavComponent implements OnInit {
       resp => {
         
         this.currentUser = (resp.firstName + ' ' + resp.lastName).trim();
+        localStorage.setItem('currentUser', this.currentUser);
         this.imgUrl = `/users/${resp.id}/image.jpg?t=${resp.avatar.updatedAt}`;
       },
       error => {
@@ -50,6 +51,7 @@ export class NavComponent implements OnInit {
     .subscribe(
       resp => {
         this.currentCompany = resp.name;
+        localStorage.setItem('currentCompanyName', this.currentCompany);
         localStorage.setItem('currentCompany', resp.id);
       },
       error => {

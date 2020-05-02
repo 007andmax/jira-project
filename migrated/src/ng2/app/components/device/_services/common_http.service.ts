@@ -30,4 +30,11 @@ export class CommonHttpServices {
             return data;
         }))
     }
+
+    printPdf (data: any) {
+        return this.http.post<any>(CONFIG.printPdfURL, data)
+        .pipe(map(data => {
+            return data;
+        }))
+    }
 }

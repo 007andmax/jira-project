@@ -4,7 +4,7 @@
       <div class="cmn-wrapper">
         <div class="header-left">
             <div class="hp-device-info">
-                <span class="device-icn"><img src="../../../ng1/images/device/device.svg" alt="device" /></span>
+                <span class="device-icn"><img src="{{deviceImg}}" alt="device" /></span>
                   <div class="head-device">
                       <h6>Device</h6>
                       <h5>{{deviceDetail.label || deviceDetail.hostName || deviceDetail.ip}}</h5>
@@ -20,13 +20,13 @@
         </div>
         <div class="header-right">
             <a href="javascript:;" class="head-btn" (click)="openModal(template)">Remote Control</a>
-            <a href="javascript:;" class="head-btn-info btn-print" (click)="lock();"><img src="../../../ng1/images/device/print-sheet.svg" alt="Print" /></a>
+            <!-- <a href="javascript:;" class="head-btn-info btn-print" (click)="lock();"><img src="../../../ng1/images/device/print-sheet.svg" alt="Print" /></a> -->
             <a href="javascript:;" class="head-btn-info btn-refresh"><img src="../../../ng1/images/device/restart.svg" alt="restart" /></a>
             <a href="javascript:;" class="head-btn-info btn-shutDown"><img src="../../../ng1/images/device/shutdown.svg" alt="shutdown" /></a>
         </div>
       </div>
-      <!-- <div class="head-counter"><img src="../../../ng1/images/device/counter.svg" alt="Print" /> {{padNumber(this.totalHours)}} hr : {{padNumber(this.totalMinutes)}} min : {{padNumber(this.totalSeconds)}} sec</div> -->
-      <div class="head-counter"><img src="../../../ng1/images/device/counter.svg" alt="Print" /> 00 hr : 00 min : 00 sec</div>
+      <div class="head-counter"><img src="../../../ng1/images/device/counter.svg" alt="Print" /> {{padNumber(this.totalHours)}} hr : {{padNumber(this.totalMinutes)}} min : {{padNumber(this.totalSeconds)}} sec</div>
+      <!-- <div class="head-counter"><img src="../../../ng1/images/device/counter.svg" alt="Print" /> 00 hr : 00 min : 00 sec</div> -->
   </header>
 <!-- left sidebar nav -->
   <aside class="left-sidebar">

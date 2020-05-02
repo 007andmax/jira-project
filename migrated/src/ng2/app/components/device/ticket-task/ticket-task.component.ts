@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, OnDestroy } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions, } from 'ngx-uploader';
 import { TicketService } from './../_services/ticket.service';
@@ -19,7 +19,7 @@ declare  var $:any;
   templateUrl: './ticket-task.component.html',
   styleUrls: ['./ticket-task.component.scss']
 })
-export class TicketTaskComponent implements OnInit {
+export class TicketTaskComponent implements OnInit, OnDestroy {
   @ViewChild(TabsetComponent) tabset: TabsetComponent;
   @ViewChild('ticketFrm') form: any;
   url = environment.apiEndpoint + 'file?isAvatar=false';
@@ -389,6 +389,10 @@ export class TicketTaskComponent implements OnInit {
 
   toggleTicket(){
     $("body").toggleClass("expandTicket");
+  }
+
+  ngOnDestroy() {
+    $("body").removeClass("expandTicket");
   }
 
 }

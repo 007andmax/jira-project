@@ -45,6 +45,7 @@ export const CONFIG = {
   // REMOTE CONTROL
   getViewerURL: BASE_URL + 'data/connection-viewer',
   createConnectionURL: BASE_URL + 'remote/createRemoteSession?',
-  getConstant: BASE_URL + 'data/getConstants'
+  getConstant: BASE_URL + 'data/getConstants',
+  printPdfURL: BASE_URL + 'reports/pdf'
 
 };
