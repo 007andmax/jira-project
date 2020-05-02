@@ -1,0 +1,57 @@
+.service-item {
+  &__first-line {
+    margin-bottom: 8px;
+  }
+
+  &__btn-add, &__btn-del {
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    margin-left: 8px;
+    display: flex;
+    background-color: #637382;
+    align-items: center;
+    justify-content: center;
+
+    .btn-icon {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  &__input {
+    height: 40px;
+    border-radius: 3px;
+    border: solid 1px #c4cbd5;
+    margin-right: 8px;
+    font-size: 13px;
+    padding: 10px 12px;
+    flex-grow: 1;
+    outline: none;
+    &::placeholder {
+      color: #9ca5b6;
+    }
+    &.description {
+      width: 100%;
+    }
+    &.device {
+      width: 243px;
+      padding: 0;
+      /deep/ .dropdown-toggle {
+        width: 100%;
+        background: white;
+        border: none;
+        height: 38px;
+        border-radius: 3px;
+      }
+    }
+    &.time {
+      width: 148px;
+    }
+    &.date {
+      width: 146px;
+      margin: 0;
+    }
+  }
+}
