@@ -76,6 +76,34 @@
         </div>
         <!--   TICKET CLAIMED INFO   -->
        <app-ticket-claim-info [ticketProfile]="ticketProfile"></app-ticket-claim-info>
+
+
+       <div class="ticket-notify">
+         <div class="ticket-notify__item">
+          <div class="ticket-notify__item-icon icon__ticket-status"></div>
+          <div class="ticket-notify__item-title">The Ticket is now closed. You can re-open it by simply clicking <strong>"Mark as Open"</strong> button.</div>
+          <button class="ticket-notify__item-btn">Mark as Open</button>
+         </div>
+
+         <div class="ticket-notify__item">
+          <div class="ticket-notify__item-icon icon__claim-ticket"></div>
+          <div class="ticket-notify__item-title">Got nothing to work on today? Hit up the <strong>"Claim Ticket"</strong> button to get the troubleshooting process started!</div>
+          <button class="ticket-notify__item-btn">Claim Ticket</button>
+         </div>
+
+         <div class="ticket-notify__item">
+          <div class="ticket-notify__item-icon icon__ticket-status"></div>
+          <div>
+            <div class="ticket-notify__item-title">The Ticket is older than <strong>30days</strong>. you cannot re-open it now.</div>
+            <div class="ticket-notify__item-desc d-f">
+              <div class="ticket-notify__item-desc-icon icon__tips"></div>
+              <div  class="ticket-notify__item-desc-text">You can create a new Ticket any time, and use this ticket’s number as reference
+                to continue troubleshooting.</div>
+            </div>
+          </div>
+         </div>
+       </div>
+
         <!--  TICKET SUBTASK   -->
         <div class="ticket-edit-aside__subtasks">
           <div class="subtask__header d-f jc-sb">

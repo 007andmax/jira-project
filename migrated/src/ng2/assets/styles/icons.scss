@@ -220,6 +220,16 @@
   &__more {
     background: url("assets/img/icons/more-vertical-ng2.png") ;
   }
+  &__claim-ticket {
+    background-image: url("assets/img/icons/claim-ticket.svg");
+  }
+  &__ticket-status {
+    background: url("assets/img/icons/ticket-status.svg") ;
+  }
+  &__tips {
+    background: url("assets/img/icons/tips.svg") ;
+  }
+
 }
 
 .priority-icon {
