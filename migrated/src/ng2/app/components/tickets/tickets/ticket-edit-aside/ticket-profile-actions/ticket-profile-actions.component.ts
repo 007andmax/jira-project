@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TicketsPermissionsService } from '../services/tickets-permissions.service';
 import { CurrentUser } from 'src/ng2/class/current-user/current-user';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
@@ -18,6 +18,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   providers: [TicketsPermissionsService]
 })
 export class TicketProfileActionsComponent implements OnInit {
+  @Output() onClaimTicket = new EventEmitter();
   @Input() ticketProfile: TicketProfile = new TicketProfile();
   currentUser: CurrentUser;
   movedWay: boolean = false;
@@ -71,27 +72,8 @@ export class TicketProfileActionsComponent implements OnInit {
   };
 
   claimTicket() {
-    var indexUser = this.ticketProfile.multiAssignedUsers.findIndex(user => user.id === this.currentUser.id);
-    var value = [];
-    this.ticketProfile.multiAssignedUsers.forEach(user => {
-      value.push(user.id);
-    })
-
-    if (this.ticketProfile.assignedUser && this.ticketProfile.assignedUser.id !== this.currentUser.id && indexUser === -1) {
-      value.push(this.ticketProfile.assignedUser.id);
-      value.push(this.currentUser.id);
-    } else if (this.ticketProfile.assignedUser && this.ticketProfile.assignedUser.id !== this.currentUser.id && indexUser > -1) {
-      value.push(this.ticketProfile.assignedUser.id);
-    } else if (this.ticketProfile.assignedUser && this.ticketProfile.assignedUser.id === this.currentUser.id && indexUser === -1) {
-      value.push(this.ticketProfile.assignedUser.id);
-    } else if (!this.ticketProfile.assignedUser && indexUser === -1) {
-      value.push(this.currentUser.id);
-    }
-    this.ticketsService.assignUserToTicket(this.ticketProfile.id, value.join(",")).subscribe(res => {
-
-    })
-
-  };
+    this.onClaimTicket.emit(null);
+  }
 
   changeLinkedAgent(id) {
     this.ticketsService.linkedAgentToTicket(this.ticketProfile.id, id).subscribe(res => {

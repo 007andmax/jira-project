@@ -136,7 +136,29 @@ export class TicketEditAsideComponent implements OnInit {
       })
     }
   }
- 
+  claimTicket() {
+    let currentUser = this.usersStateService.getCurrentUser();
+    var indexUser = this.ticketProfile.multiAssignedUsers.findIndex(user => user.id === currentUser.id);
+    var value = [];
+    this.ticketProfile.multiAssignedUsers.forEach(user => {
+      value.push(user.id);
+    })
+
+    if (this.ticketProfile.assignedUser && this.ticketProfile.assignedUser.id !== currentUser.id && indexUser === -1) {
+      value.push(this.ticketProfile.assignedUser.id);
+      value.push(currentUser.id);
+    } else if (this.ticketProfile.assignedUser && this.ticketProfile.assignedUser.id !== currentUser.id && indexUser > -1) {
+      value.push(this.ticketProfile.assignedUser.id);
+    } else if (this.ticketProfile.assignedUser && this.ticketProfile.assignedUser.id === currentUser.id && indexUser === -1) {
+      value.push(this.ticketProfile.assignedUser.id);
+    } else if (!this.ticketProfile.assignedUser && indexUser === -1) {
+      value.push(currentUser.id);
+    }
+    this.ticketsService.assignUserToTicket(this.ticketProfile.id, value.join(",")).subscribe(res => {
+
+    })
+
+  };
   getCompantName() {
     let find = this.companiesStateService.getCompanies().find(item => item.id === this.ticketProfile.companyId);
     return (find) ? find.name : '';
