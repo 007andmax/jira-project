@@ -33,6 +33,9 @@ export class TicketProfileFormUpdateProductsComponent implements OnInit {
 
     });
   }
+  public onChangeProduct(item,i) {
+    this.addedProductList[i].setData(item, this.getItemOrger());
+  }
   public selectProduct(item) {
     console.log("item", item);
     this.currentProduct.setData(item, this.getItemOrger());
