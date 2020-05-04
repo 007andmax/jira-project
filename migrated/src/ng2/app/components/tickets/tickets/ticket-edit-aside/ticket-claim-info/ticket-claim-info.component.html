@@ -17,7 +17,7 @@
     <strong>{{ ticketProfile.assignedAt | date: 'EEE, d MMM yyyy, h:mm a' }}</strong>
   </div>
 </div>
-<div class="ticket-edit-aside__claimed-info d-f at-c jc-c"  *ngIf="ticketsPermissionsService.isActionVisible('user_tip', ticketProfile, 'I_ASSIGNED_TO_USER')">
+<div class="ticket-edit-aside__claimed-info d-f at-c jc-c"  *ngIf="ticketsPermissionsService.isActionVisible('user_tip', ticketProfile, 'I_ASSIGNED_TO_USER',null)">
   <div class="ticket-edit-aside__claimed-info-lines"></div>
   <div class="ticket-edit-aside__claimed-date">
     <strong>You</strong> assigned this ticket to

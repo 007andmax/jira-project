@@ -43,9 +43,7 @@ export class TicketsStateService {
     })
   }
 
-  public onGetServiceList(data) {
-    this.serviceList.emit(data);
-  }
+   
   public onClearFormUpdate() {
     this.clearFormUpdate.emit(null);
   }
@@ -107,9 +105,7 @@ export class TicketsStateService {
   public getOnAddTicket() {
     return this.addTicket;
   }
-  public getOnGetServiceList() {
-    return this.serviceList;
-  }
+ 
   public getOnClearFormUpdate() {
     return this.clearFormUpdate;
   }
