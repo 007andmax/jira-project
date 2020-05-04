@@ -1,6 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { TicketsRealTimeService } from './tickets-real-time.service';
 import { TicketProfile } from '../../components/tickets/tickets/class/ticket-profile';
+import { ServiceAgreementsService } from '../../services/service-agreements/service-agreements.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class TicketsStateService {
   status: EventEmitter<any> = new EventEmitter();
   count: EventEmitter<number> = new EventEmitter();
   toggleAddTicket: EventEmitter<any> = new EventEmitter();
+ 
   constructor(private ticketsRealTimeService: TicketsRealTimeService) { }
 
   public onInit() {
@@ -39,6 +41,10 @@ export class TicketsStateService {
       }
       
     })
+  }
+
+  public onGetServiceList(data) {
+    this.serviceList.emit(data);
   }
   public onClearFormUpdate() {
     this.clearFormUpdate.emit(null);
@@ -100,6 +106,9 @@ export class TicketsStateService {
  }
   public getOnAddTicket() {
     return this.addTicket;
+  }
+  public getOnGetServiceList() {
+    return this.serviceList;
   }
   public getOnClearFormUpdate() {
     return this.clearFormUpdate;

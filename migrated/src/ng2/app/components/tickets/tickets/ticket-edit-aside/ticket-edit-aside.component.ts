@@ -11,6 +11,7 @@ import { DevicesSateService } from 'src/ng2/app/states/devices/devices-sate.serv
 import { TicketsPermissionsService } from './services/tickets-permissions.service';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { TicketsListService } from '../services/tickets-list.service';
+import { TicketStateService } from './services/ticket-state.service';
 @Component({
   selector: 'app-ticket-edit-aside',
   templateUrl: './ticket-edit-aside.component.html',
@@ -36,6 +37,7 @@ export class TicketEditAsideComponent implements OnInit {
     private elRef: ElementRef,
     public ticketsListService:TicketsListService,
     private usersStateService: UsersStateService,
+    private  ticketStateService:TicketStateService,
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
@@ -56,6 +58,7 @@ export class TicketEditAsideComponent implements OnInit {
       console.log("this.lisUpdateUser",this.lisUpdateUser);
       this.opened = true;
       this.showPreloader = false;
+      this.ticketStateService.getServicesList(this.ticketProfile);
     })
     this.ticketsStateService.getOnInitColor().subscribe(data => {
       this.listColors = data;

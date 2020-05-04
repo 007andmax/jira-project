@@ -54,6 +54,13 @@ export class TicketProfileFormUpdateComponent implements OnInit {
        this.ticketsStateService.onClearFormUpdate();
       })
     }
+    if (this.tab === "SERVICE") {
+      if (!this.ticketProfileFormUpdate.isValidateService()) return;
+      this.ticketsService.updateTicket(this.ticketProfileFormUpdate.getDataForUpdateService()).subscribe(data => {
+       // this.ticketProfileFormUpdate.setChatMessage("");
+       this.ticketsStateService.onClearFormUpdate();
+      })
+    }
 
   }
   public setTab(data) {
@@ -62,6 +69,9 @@ export class TicketProfileFormUpdateComponent implements OnInit {
   }
   onChangeProducts(data) {
     this.ticketProfileFormUpdate.setProducts(data);
+  }
+  onChangeServices(data){
+    this.ticketProfileFormUpdate.setServices(data);
   }
   onToggleAddUpdateUser() {
     this.showAddUpdateUser = !this.showAddUpdateUser;

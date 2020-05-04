@@ -1,4 +1,5 @@
 import { TicketProfileFormProduct } from './ticket-profile-form-product';
+import { TicketProfileFormService } from './ticket-profile-form-service';
 
 export class TicketProfileFormUpdate {
     note: string = "";
@@ -7,6 +8,7 @@ export class TicketProfileFormUpdate {
     ticket: any;
     attachments: any = [];
     products: Array<TicketProfileFormProduct> = [];
+    services: Array<TicketProfileFormService> = [];
     constructor() { }
     public setChatMessage(data) {
         this.note = data;
@@ -29,6 +31,15 @@ export class TicketProfileFormUpdate {
 
         }
     }
+    public getDataForUpdateService() {
+        return {
+            services: this.services,
+            type: this.type,
+            shares: this.shares,
+            ticket: this.ticket,
+
+        }
+    }
     public setType(data) {
         this.type = data;
     }
@@ -37,6 +48,9 @@ export class TicketProfileFormUpdate {
     }
     public isValidateProduct() {
         return this.type === "PRODUCT" && this.products.length > 0;
+    }
+    public isValidateService() {
+        return this.type === "SERVICE" && this.services.length > 0;
     }
     public setTicketId(id) {
         this.ticket = { id: id };
@@ -49,5 +63,8 @@ export class TicketProfileFormUpdate {
     }
     public setProducts(data) {
         this.products = data;
+    }
+    public setServices(data) {
+        this.services = data;
     }
 }

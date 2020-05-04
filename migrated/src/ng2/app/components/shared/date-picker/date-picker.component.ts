@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef, ElementRef, EventEmitter, Output, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef, ElementRef, EventEmitter, Output, OnDestroy, Input } from '@angular/core';
 import { NgbDropdown, NgbDateStruct, NgbCalendar, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { RecurringTicketsEditAsideDate } from '../../tickets/recurring-tickets/class/recurring-tickets-edit-aside-date';
 import { DatePickerStateService } from './services/date-picker-state.service';
@@ -13,7 +13,7 @@ import { DatePickerService } from './services/date-picker.service';
   providers: [DatePickerService]
 })
 export class DatePickerComponent implements OnInit, OnDestroy {
-
+  
   @ViewChild('date') date_dropDown: NgbDropdown;
 
   @Output() onChange: EventEmitter<ChangeDatePicker> = new EventEmitter();
@@ -22,22 +22,22 @@ export class DatePickerComponent implements OnInit, OnDestroy {
   public navDate: any;
   public minDate: NgbDateStruct;
 
-   /**
-   * Creates an instance of the DatePickerComponent with the injected services
-   * @param {NgbCalendar} calendar to work calendar api
-   * @param {ChangeDetectorRef} cd Service to work with date
-   * @param {DatePickerStateService} stateDatePicker to work date picker state
-   * @param {DatePickerService} sericeDatePicker Service to work with date picker
-   */
+  /**
+  * Creates an instance of the DatePickerComponent with the injected services
+  * @param {NgbCalendar} calendar to work calendar api
+  * @param {ChangeDetectorRef} cd Service to work with date
+  * @param {DatePickerStateService} stateDatePicker to work date picker state
+  * @param {DatePickerService} sericeDatePicker Service to work with date picker
+  */
   constructor(private calendar: NgbCalendar,
     public cd: ChangeDetectorRef,
     private stateDatePicker: DatePickerStateService,
     private sericeDatePicker: DatePickerService) { }
 
 
-    /**
-   * Initializes date picker. See [ngOnInit]{@see OnInit#ngOnInit}
-   */
+  /**
+ * Initializes date picker. See [ngOnInit]{@see OnInit#ngOnInit}
+ */
   ngOnInit() {
     this.minDate = this.calendar.getToday();;
     this.oninitreset();
@@ -46,9 +46,9 @@ export class DatePickerComponent implements OnInit, OnDestroy {
 
   }
 
-   /**
-   * Subscribe to clear date picker
-   */
+  /**
+  * Subscribe to clear date picker
+  */
   private oninitClear() {
     let clear = this.stateDatePicker.getOnClear().subscribe((data) => {
       this.date.clearTitle();
@@ -57,9 +57,9 @@ export class DatePickerComponent implements OnInit, OnDestroy {
     this.sericeDatePicker.addSubscription(clear);
   }
 
-   /**
-   * Subscribe to edit mode
-   */
+  /**
+  * Subscribe to edit mode
+  */
   private onInitEditMode() {
     let edit = this.stateDatePicker.getOnEditMode().subscribe((data: number) => {
       let date = new Date(data);
@@ -72,21 +72,21 @@ export class DatePickerComponent implements OnInit, OnDestroy {
     this.sericeDatePicker.addSubscription(edit);
   }
 
-   /**
-   * Subscribe to reset data
-   */
+  /**
+  * Subscribe to reset data
+  */
   private oninitreset() {
     let reset = this.stateDatePicker.getOnReset().subscribe((data) => {
-      
+
       this.selectDate(this.sericeDatePicker.getDateForDatePicker(null));
     })
     this.sericeDatePicker.addSubscription(reset);
   }
 
-   /**
-   * Set date
-   * @param data - date
-   */
+  /**
+  * Set date
+  * @param data - date
+  */
   public selectDate(data: NgbDate) {
     this.datepicker = data;
     if (this.navDate) this.sericeDatePicker.updateMonthAndYearDatePicker(this.datepicker, this.navDate);
@@ -121,9 +121,9 @@ export class DatePickerComponent implements OnInit, OnDestroy {
     this.updateDate();
   }
 
-   /**
-   * Update  date
-   */
+  /**
+  * Update  date
+  */
   private updateDate() {
     this.date.setTitle(this.datepicker);
     this.onChange.emit(new ChangeDatePicker(this.datepicker.day, this.datepicker.month, this.datepicker.year));
@@ -131,9 +131,9 @@ export class DatePickerComponent implements OnInit, OnDestroy {
     this.date_dropDown.close();
   }
 
-   /**
-   * Set first day in month
-   */
+  /**
+  * Set first day in month
+  */
   public selectStartMonth() {
     let date = this.calendar.getToday();
     date.day = 1;
@@ -154,10 +154,10 @@ export class DatePickerComponent implements OnInit, OnDestroy {
     this.updateDate();
   }
 
-   /**
-   * Set date
-   * @param data - date vent
-   */
+  /**
+  * Set date
+  * @param data - date vent
+  */
   public navigateDate(data: NgbDatepickerNavigateEvent) {
     this.navDate = data;
   }

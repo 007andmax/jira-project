@@ -4,7 +4,7 @@
     <ul class="cps-block__nav">
       <li class="cps-block__nav-item icon__chat" [ngClass]="{'active':tab === 'NOTE' }" (click)="setTab('NOTE')">Chat</li>
       <li class="cps-block__nav-item icon__products" [ngClass]="{'active':tab === 'PRODUCT' }" (click)="setTab('PRODUCT')">Products</li>
-      <li class="cps-block__nav-item icon__service" [ngClass]="{'active':tab === 'SERVICES' }" (click)="setTab('SERVICES')">Service</li>
+      <li class="cps-block__nav-item icon__service" [ngClass]="{'active':tab === 'SERVICE' }" (click)="setTab('SERVICE')">Service</li>
     </ul>
   </div>
   <div class="cps-block__content">
@@ -35,7 +35,7 @@
   <app-ticket-profile-form-update-products (changeProducts)="onChangeProducts($event)" *ngIf="tab === 'PRODUCT'"></app-ticket-profile-form-update-products>
 
  
-  <app-ticket-profile-form-update-services [ticketProfile]="ticketProfile"  *ngIf="tab === 'SERVICES'"></app-ticket-profile-form-update-services>
+  <app-ticket-profile-form-update-services  (changeServices)="onChangeServices($event)" [ticketProfile]="ticketProfile"  *ngIf="tab === 'SERVICE'"></app-ticket-profile-form-update-services>
   </div>
 </div>
 

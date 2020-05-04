@@ -1,8 +1,9 @@
-<div class="input-group date-picker" ngbDropdown [autoClose]="'outside'" #date="ngbDropdown" >
+<div class="input-group date-picker" ngbDropdown  [autoClose]="'outside'" #date="ngbDropdown" >
   <input type="text" class="pointer" placeholder="Select Date" ngbDropdownToggle id="dropdownDate" readonly>
   <i class="icn-16 icn-calendar-light pointer"></i>
-  <div ngbDropdownMenu aria-labelledby="dropdownDate">
+  <div ngbDropdownMenu aria-labelledby="dropdownDate" class="date-picker-container">
     <ngb-datepicker [navigation]="'arrows'" [(ngModel)]="datepicker" (select)="selectDate($event)"
+     
                     (navigate)="navigateDate($event)" [startDate]="datepicker"
                     [ngModelOptions]="{standalone: true}"
                     [minDate]="minDate"
