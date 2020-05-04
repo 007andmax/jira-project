@@ -4,13 +4,18 @@
       <app-services-list class="service-item__input device" [editItem]="service" [itemList]="servicesList"
       (selectedServicesItem)="setService($event,i)"></app-services-list>
       <input class="service-item__input time" type="text" placeholder="Hr(s) : Min(s)">
-      <input class="service-item__input date" type="text" placeholder="8 Mar 2018">
+      <app-date-picker (onChange)="onChangeDatePicker($event)"></app-date-picker>
+     
       <button class="service-item__btn-add">
         <span class="icon__plus-white btn-icon"></span>
       </button>
     </div>
     <div>
-      <input class="service-item__input description" type="text" placeholder="Description">
+      <div class="editable-description editable-chat">
+        <textarea  name="cps-chat" class="cps-block__content-textarea" appTextArea  [minHeight]="48" id="service-description" placeholder="Write ticket conversation here…"
+        (input)="onChangeDescription($event)" (onPast)="onPastDescription($event)"></textarea>
+        </div>
+    
     </div>
   </div>
 </div>

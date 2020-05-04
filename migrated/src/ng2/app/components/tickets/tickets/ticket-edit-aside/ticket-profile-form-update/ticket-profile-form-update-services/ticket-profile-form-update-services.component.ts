@@ -33,11 +33,22 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit {
       })
     })
   }
+  public onChangeDatePicker(data) {
+console.log("data",data);
+  }
   private getListServices(value) {
     this.recurringService.getServiceList(value.id).subscribe((res: any) => {
       this.servicesList = res;
       this.getServiceAgreements();
     })
+  }
+  public onChangeDescription(event) {
+  //  this.company.description = event.target.value;
+   
+  }
+  public onPastDescription(value) {
+   
+//    this.inventory.description = value;
   }
 
 }

@@ -20,10 +20,10 @@ export class TicketClaimInfoComponent implements OnInit {
   public getUserName(user: CurrentUser) {
     return (user) ? `${user.firstName} ${user.lastName}` : '';
   }
-public getMultiAssignedUsers () {
-  let users = (this.ticketProfile.multiAssignedUsers) ? this.ticketProfile.multiAssignedUsers.map(item => {
-    return this.getUserName(item);
-  }) : [];
-  return users.join(",");
-}
+  public getMultiAssignedUsers() {
+    let users = (this.ticketProfile.multiAssignedUsers) ? this.ticketProfile.multiAssignedUsers.map(item => {
+      return this.getUserName(item);
+    }) : [];
+    return users.join(",");
+  }
 }

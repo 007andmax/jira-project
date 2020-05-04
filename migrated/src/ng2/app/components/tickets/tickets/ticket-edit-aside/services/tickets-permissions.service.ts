@@ -85,7 +85,7 @@ export class TicketsPermissionsService {
                 return (ticket.assignPerformer.id === user.id) && ((ticket.assignedUser && (ticket.assignedUser.id !== user.id && indexUser === -1)) || !ticket.assignedUser && indexUser === -1);
     
               case 'USER_CLAIMED':
-                return (ticket.assignPerformer.id !== user.id) && (((ticket.assignedUser && ticket.assignedUser.id === ticket.assignPerformer.id || indexPerformerMultiAssigned > -1)) || !ticket.assignedUser && indexPerformerMultiAssigned > -1);
+                return (ticket.assignPerformer.id !== user.id) && (((ticket.assignedUser && ticket.assignedUser.id === ticket.assignPerformer.id || indexPerformerMultiAssigned > -1) && indexUser=== -1)  || !ticket.assignedUser && indexPerformerMultiAssigned > -1 && indexUser === -1);
     
               case 'USER_ASSIGNED_USER':
                 return ticket.assignPerformer.id !== user.id && (ticket.assignedUser && ticket.assignedUser.id !== user.id && indexUser === -1 && (otherAPerformerAndAUser && indexPerformerMultiAssigned === -1)) || !ticket.assignedUser && indexUser === -1 && (otherAPerformerAndAUser && indexPerformerMultiAssigned === -1);
