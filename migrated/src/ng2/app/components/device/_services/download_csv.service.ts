@@ -32,7 +32,7 @@ export class ExcelService {
     }
     );
     //Generate Excel File with given name
-    workbook.xlsx.writeBuffer().then((data) => {
+    workbook.csv.writeBuffer().then((data) => {
       let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
       fs.saveAs(blob, fileName + '.csv');
     })
@@ -120,7 +120,7 @@ export class ExcelService {
     worksheet.getCell('A54').font = {bold: true};
 
     //Generate Excel File with given name
-    workbook.xlsx.writeBuffer().then((data) => {
+    workbook.csv.writeBuffer().then((data) => {
       let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
       fs.saveAs(blob, fileName + '.csv');
     })
