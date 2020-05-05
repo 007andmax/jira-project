@@ -14,7 +14,7 @@
   </div>
 </div> -->
 
-<div class="archive-modal" *ngIf="action !== 'ARCHIVE_COMPANY' && action !== 'DEARCHIVE_COMPANY' && action !== 'SAVE_AND_SEND' && action !==  'DELETE_COMPANY' && action !== 'DELETE_PRODUCT' && action !== 'MOVE_TO_SPAM_TICKET' && action !== 'MOVE_TO_TRASH_TICKET'">
+<div class="archive-modal" *ngIf="action === 'ARCHIVE_USER'">
   <button class="close-modal" (click)=cancelConfirm()></button>
   <div class="archive-modal__body">
     <h3>Archive this User ?</h3>
@@ -56,7 +56,7 @@
   </div>
 </div>
 
-<div class="archive-modal" *ngIf="action === 'SAVE_AND_SEND' || action === 'DELETE_COMPANY' || action === 'DELETE_PRODUCT' ||  action === 'MOVE_TO_SPAM_TICKET' || action === 'MOVE_TO_TRASH_TICKET'">
+<div class="archive-modal" *ngIf="action !== 'ARCHIVE_USER' && action !== 'ARCHIVE_COMPANY' && action !== 'DEARCHIVE_COMPANY'">
   <button class="close-modal" (click)=cancelConfirm()></button>
   <div class="archive-modal__body modal-body">
     <p [textContent]="message"></p>

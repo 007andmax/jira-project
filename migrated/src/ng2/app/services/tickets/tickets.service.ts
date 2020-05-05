@@ -17,10 +17,21 @@ export class TicketsService {
     let data = { id: id,subject:subject,note:note };
     return this.http.put(this.apiUrl + `v2/tickets/edit`, data);
   }
-
+public restoreFromSpam(id,value) {
+  let data = { value: value };
+  return this.http.put(this.apiUrl + `v2/tickets/${id}/restoreFromSpam`, data);
+}
+  public deleteTicket(ids) {
+    
+    return this.http.post(this.apiUrl + `v2/tickets/delete/`, { ids: ids });
+  }
   public updateTicket(data) {
     
     return this.http.post(this.apiUrl + `v2/tickets/updates?close=false`, data);
+  }
+  public changeStatus(id, value) {
+    let data = { value: value };
+    return this.http.put(this.apiUrl + `v2/tickets/${id}/status`, data);
   }
   public reportAsSpamTicket(id, value) {
     let data = { value: value };

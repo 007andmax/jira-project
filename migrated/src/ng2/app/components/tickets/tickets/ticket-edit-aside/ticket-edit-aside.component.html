@@ -78,7 +78,7 @@
        <app-ticket-claim-info [ticketProfile]="ticketProfile"></app-ticket-claim-info>
 
 
-      <app-ticket-message (onClaimTicket)="claimTicket()" [ticketProfile]="ticketProfile"></app-ticket-message>
+      <app-ticket-message (onMoveToTrash)="moveToTrash($event)" (onRestoreFromSpam)="restoreFromSpam()" (onOpenTicket)="markAsOpen()" (onClaimTicket)="claimTicket()" [ticketProfile]="ticketProfile"></app-ticket-message>
 
         <!--  TICKET SUBTASK   -->
         <div class="ticket-edit-aside__subtasks">

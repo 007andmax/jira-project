@@ -2,7 +2,7 @@
   <div class="ticket-notify__item" *ngIf="ticketsPermissionsService.isActionVisible('reopen', ticketProfile, 'billable',null)">
    <div class="ticket-notify__item-icon icon__ticket-status"></div>
    <div class="ticket-notify__item-title">The Ticket is now closed.  <span *ngIf="getPermissions('REOPEN_CLOSED_TICKETS')">You can re-open it by simply clicking <strong>"Mark as Open"</strong> button.</span></div>
-   <button class="ticket-notify__item-btn" *ngIf="getPermissions('REOPEN_CLOSED_TICKETS')">Mark as Open</button>
+   <button class="ticket-notify__item-btn" *ngIf="getPermissions('REOPEN_CLOSED_TICKETS')" (click)="markAsOpen()">Mark as Open</button>
   </div>
 
   <div class="ticket-notify__item"  *ngIf="ticketsPermissionsService.isActionVisible('claim_ticket', ticketProfile)">
@@ -26,7 +26,7 @@
   <div class="ticket-notify__item" *ngIf="ticketsPermissionsService.isActionVisible('reopen', ticketProfile, 'open')" [hidden]="ticketProfile.hasInvoice">
     <div class="ticket-notify__item-icon icon__ticket-status"></div>
     <div class="ticket-notify__item-title">The Ticket is now closed.   You can re-open it within {{ getDaysLeftToOpen() }} days by simply clicking <strong>"Re-open Ticket"</strong> button.</div>
-    <button class="ticket-notify__item-btn" *ngIf="getPermissions('REOPEN_CLOSED_TICKETS')">Re-open Ticket</button>
+    <button class="ticket-notify__item-btn" *ngIf="getPermissions('REOPEN_CLOSED_TICKETS')" (click)="markAsOpen()">Re-open Ticket</button>
    </div>
 
    <div class="ticket-notify__item"   *ngIf="ticketsPermissionsService.isActionVisible('reopen', ticketProfile, 'billed')">
@@ -54,8 +54,8 @@
         <div  class="ticket-notify__item-desc-text">Restoring ticket moves the ticket back to its original folder where it was deleted from.</div>
       </div>
     </div>
-    <button class="ticket-notify__item-btn" *ngIf="ticketsPermissionsService.isActionVisible('delete_forever', ticketProfile)">Delete Forever</button>
-    <button class="ticket-notify__item-btn"  >Restore</button>
+    <button class="ticket-notify__item-btn" *ngIf="ticketsPermissionsService.isActionVisible('delete_forever', ticketProfile)" (click)="deleteForever()">Delete Forever</button>
+    <button class="ticket-notify__item-btn"  (click)="moveToTrash(false)">Restore</button>
    </div>
 
    <div class="ticket-notify__item"   *ngIf="ticketsPermissionsService.isActionVisible('restore', ticketProfile, 'from_trash') && ticketProfile.deletePerformer.id === currentUser.id">
@@ -69,8 +69,8 @@
         <div  class="ticket-notify__item-desc-text">Restoring ticket moves the ticket back to its original folder where it was deleted from.</div>
       </div>
     </div>
-    <button class="ticket-notify__item-btn" *ngIf="ticketsPermissionsService.isActionVisible('delete_forever', ticketProfile)">Delete Forever</button>
-    <button class="ticket-notify__item-btn"  >Restore</button>
+    <button class="ticket-notify__item-btn" *ngIf="ticketsPermissionsService.isActionVisible('delete_forever', ticketProfile)" (click)="deleteForever()">Delete Forever</button>
+    <button class="ticket-notify__item-btn"  (click)="moveToTrash(false)" >Restore</button>
    </div>
 
    <div class="ticket-notify__item"   *ngIf="ticketsPermissionsService.isActionVisible('restore', ticketProfile, 'from_spam')">
@@ -86,8 +86,8 @@
         <div  class="ticket-notify__item-desc-text">Restoring ticket moves the ticket back to its original folder where it was reported as spam.</div>
       </div>
     </div>
-    <button class="ticket-notify__item-btn" *ngIf="ticketsPermissionsService.isActionVisible('delete_forever', ticketProfile)">Delete Forever</button>
-    <button class="ticket-notify__item-btn"  *ngIf="currentUser.isOwner && !ticketProfile.spamMarker">Mark as Spam</button>
-    <button class="ticket-notify__item-btn"  >Restore</button>
+    <button class="ticket-notify__item-btn" *ngIf="ticketsPermissionsService.isActionVisible('delete_forever', ticketProfile)" (click)="deleteForever()">Delete Forever</button>
+    <button class="ticket-notify__item-btn"  *ngIf="currentUser.isOwner && !ticketProfile.spamMarker"  (click)="moveIntoSpam()">Mark as Spam</button>
+    <button class="ticket-notify__item-btn"   (click)="restoreFromSpam()">Restore</button>
    </div>
 </div>

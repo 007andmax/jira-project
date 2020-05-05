@@ -12,6 +12,11 @@ import { TicketsPermissionsService } from './services/tickets-permissions.servic
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { TicketsListService } from '../services/tickets-list.service';
 import { TicketStateService } from './services/ticket-state.service';
+import { NotificationStateService } from '../../../shared/notification/services/notification-state.service';
+import { ConfirmStateService } from '../../../shared/confirm/services/confirm-state.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MOVE_TO_TRASH_TICKET, DELETE_FOREVER, MOVE_TO_SPAM_OR_REPORT_TICKET } from 'src/ng2/app/const/confirm';
+import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
 @Component({
   selector: 'app-ticket-edit-aside',
   templateUrl: './ticket-edit-aside.component.html',
@@ -25,7 +30,7 @@ export class TicketEditAsideComponent implements OnInit {
   modeSubject = 'view';
   modeDescription = 'view';
   showAddAssignedUser = false;
- 
+
   showPreloader: boolean = true;
   listColors: Array<StatusColor> = [];
   statusColor: TicketsColor;
@@ -33,11 +38,13 @@ export class TicketEditAsideComponent implements OnInit {
   lisUpdateUser: Array<CurrentUser> = [];
 
   constructor(private ticketsStateService: TicketsStateService,
+    private confirmStateService: ConfirmStateService,
     private ticketsService: TicketsService,
     private elRef: ElementRef,
-    public ticketsListService:TicketsListService,
+    public ticketsListService: TicketsListService,
     private usersStateService: UsersStateService,
-    private  ticketStateService:TicketStateService,
+    private ticketStateService: TicketStateService,
+    private notificationStateService: NotificationStateService,
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
@@ -53,9 +60,9 @@ export class TicketEditAsideComponent implements OnInit {
       if (this.ticketProfile.assignedUser) this.listAssignedUser.push(this.ticketProfile.assignedUser);
       if (this.ticketProfile.multiAssignedUsers) this.listAssignedUser = [...this.listAssignedUser, ...this.ticketProfile.multiAssignedUsers];
       this.lisUpdateUser = this.ticketProfile.updates.map(item => item.user);
-      this.lisUpdateUser = [...this.listAssignedUser,...this.lisUpdateUser]
-      this.lisUpdateUser = this.lisUpdateUser.filter((item,index) => this.lisUpdateUser.findIndex(user => user.id === item.id) === index);
-      console.log("this.lisUpdateUser",this.lisUpdateUser);
+      this.lisUpdateUser = [...this.listAssignedUser, ...this.lisUpdateUser]
+      this.lisUpdateUser = this.lisUpdateUser.filter((item, index) => this.lisUpdateUser.findIndex(user => user.id === item.id) === index);
+      console.log("this.lisUpdateUser", this.lisUpdateUser);
       this.opened = true;
       this.showPreloader = false;
       this.ticketStateService.getServicesList(this.ticketProfile);
@@ -66,9 +73,42 @@ export class TicketEditAsideComponent implements OnInit {
     this.ticketsStateService.getOnInitStatus().subscribe(data => {
       this.statusColor = data;
     })
-  }
-   
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === DELETE_FOREVER) {
+          this.onDeleteForever();
+        }
+        if (this.confirmStateService.getConfirmAction() === MOVE_TO_SPAM_OR_REPORT_TICKET) {
+          this.onMoveIntoSpam();
+        }
 
+      }
+    })
+  }
+  onMoveIntoSpam () {
+    if (this.usersStateService.getCurrentUser().isOwner) {
+      this.ticketsService.markAsSpamTicket(this.ticketProfile.id,false).subscribe(data => {
+        this.notificationStateService.oninitShowNotification(`The ticket “${this.ticketProfile.number}” has been marked as spam`);
+      });
+    } else {
+      this.ticketsService.reportAsSpamTicket(this.ticketProfile.id,false).subscribe(data => {
+        this.notificationStateService.oninitShowNotification(`The ticket “${this.ticketProfile.number}” has been reported as spam`);
+       
+      });
+    }
+  }
+  moveToTrash(data) {
+    this.ticketsService.trashTicket(this.ticketProfile.id,data).subscribe(res => {
+      if (data) {
+        this.notificationStateService.oninitShowNotification(`The ticket “${this.ticketProfile.number}” has been moved to Trash`);
+      }
+    })
+  }
+  restoreFromSpam() {
+    this.ticketsService.restoreFromSpam(this.ticketProfile.id, false).subscribe(data => {
+
+    })
+  }
   onChangeTags(data) {
     this.ticketProfile.tags = data;
 
@@ -95,9 +135,9 @@ export class TicketEditAsideComponent implements OnInit {
   getUsersForUpdate() {
     let userList = this.usersStateService.getAllUsers().sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?
       1 : ((`${b.firstName} ${b.lastName}`.toLowerCase() > `${a.firstName} ${a.lastName}`.toLowerCase()) ? -1 : 0));
-      let techusers = userList.filter((item) => item.accountType === "TECH" && !item.deletedAt);
-      let clientUsers = userList.filter((item) => item.accountType === "CLIENT" && !item.deletedAt && item.company.id === this.ticketProfile.companyId);
-    return [...techusers,...clientUsers];
+    let techusers = userList.filter((item) => item.accountType === "TECH" && !item.deletedAt);
+    let clientUsers = userList.filter((item) => item.accountType === "CLIENT" && !item.deletedAt && item.company.id === this.ticketProfile.companyId);
+    return [...techusers, ...clientUsers];
 
   }
   toggleSubject() {
@@ -120,7 +160,24 @@ export class TicketEditAsideComponent implements OnInit {
 
     })
   }
- 
+  markAsOpen() {
+    this.ticketsService.changeStatus(this.ticketProfile.id, 'IN_PROGRESS').subscribe((data: any) => {
+      if (data.code == 403) {
+        var user = this.usersStateService.getAllUsers().find(item => item.id === data.message);
+        this.notificationStateService.oninitShowNotification(`${this.getUserName(user)} locked this ticket to create invoice!`);
+        return;
+      }
+      this.notificationStateService.oninitShowNotification(`The ticket “${this.ticketProfile.number}” has been marked as open`);
+    })
+  };
+  onDeleteForever() {
+    this.ticketsService.deleteTicket([this.ticketProfile.id]).subscribe(data => {
+      this.notificationStateService.oninitShowNotification(`The ticket “${this.ticketProfile.number}” has been deleted`);
+    })
+  }
+  public getUserName(user) {
+    return (user) ? `${user.firstName} ${user.lastName}` : '';
+  }
   onSelectAssignedUser(data) {
     this.listAssignedUser = data;
   }
@@ -168,7 +225,7 @@ export class TicketEditAsideComponent implements OnInit {
     return `${this.ticketProfile.createdUser.firstName} ${this.ticketProfile.createdUser.lastName}`
   }
 
-  
+
   getCreatAt() {
     let date = new Date(this.ticketProfile.createdAt);
     let hours = (date.getHours() > 12) ? date.getHours() - 12 : date.getHours();
