@@ -1,0 +1,12 @@
+<div class="d-f ai-c ticket-updates__update-info"  >
+  <span class="ticket-updates__date" [textContent]="shares.length + ' may'"></span>
+  <span class="divider-point"></span>
+  <span class="ticket-updates__people-added" [textContent]="shares.length + ' people added to this update'"></span>
+  <div class="d-f">
+    <ng-template   ngFor let-share [ngForOf]="shares" let-i="index" [ngForTrackBy]="trackByIndex">
+      <div class="ticket-updates__photo-people" [textContent]="ticketsListService.getAssignedUserNameForAvatar(share.user)"
+      [ngStyle]="{'background': ticketsListService.getStyleAvatar(share.user),'background-size': 'cover'}"></div>
+      </ng-template>
+  
+      </div>
+</div>

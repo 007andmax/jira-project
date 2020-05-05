@@ -80,6 +80,9 @@ export class TicketsListService {
       return '#16a4fa';
     }
   };
+  public getUserName(user) {
+    return (user) ? `${user.firstName} ${user.lastName}` : '';
+  }
   getAssignedUserNameForAvatar(user) {
     if (!user) return '';
     if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}${(user.lastName) ? user.lastName[0].toUpperCase() : ''}`;

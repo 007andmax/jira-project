@@ -216,6 +216,12 @@ import { TicketProfileFormUpdateComponent } from './components/tickets/tickets/t
 import { TicketProfileFormUpdateProductsComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-form-update/ticket-profile-form-update-products/ticket-profile-form-update-products.component';
 import { TicketProfileFormUpdateServicesComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-form-update/ticket-profile-form-update-services/ticket-profile-form-update-services.component';
 import { TicketMessageComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-message/ticket-message.component';
+import { TicketProfileFormUpdatesComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-form-updates/ticket-profile-form-updates.component';
+import { TicketProfileUpdatesComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates.component';
+import { TicketProfileUpdatesNoteComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-note/ticket-profile-updates-note.component';
+import { TicketProfileUpdatesProductComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-product/ticket-profile-updates-product.component';
+import { TicketProfileUpdatesFooterComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-footer/ticket-profile-updates-footer.component';
+import { TicketProfileUpdatesServiceComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service/ticket-profile-updates-service.component';
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 declare var angular: any;
@@ -515,7 +521,13 @@ angular.module('quicktech')
     TicketProfileFormUpdateComponent,
     TicketProfileFormUpdateProductsComponent,
     TicketProfileFormUpdateServicesComponent,
-    TicketMessageComponent
+    TicketMessageComponent,
+    TicketProfileFormUpdatesComponent,
+    TicketProfileUpdatesComponent,
+    TicketProfileUpdatesNoteComponent,
+    TicketProfileUpdatesProductComponent,
+    TicketProfileUpdatesFooterComponent,
+    TicketProfileUpdatesServiceComponent
   ],
   imports: [
     BrowserModule,

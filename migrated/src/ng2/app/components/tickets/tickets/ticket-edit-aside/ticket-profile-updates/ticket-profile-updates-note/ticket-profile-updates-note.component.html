@@ -1,0 +1,17 @@
+<div class="d-f  ticket-updates__update-block"  >
+  <div class="ticket-updates__ticket-photo" [textContent]="ticketsListService.getAssignedUserNameForAvatar(update.user)"
+  [ngStyle]="{'background': ticketsListService.getStyleAvatar(update.user),'background-size': 'cover'}"></div>
+
+  <div class="ticket-updates__content">
+    <div class="ticket-updates__author-line d-f jc-sb ai-c ">
+      <div><span class="ticket-updates__author" [textContent]="ticketsListService.getUserName(update.user)"></span> <span class="ticket-updates__add-note">added a note</span></div>
+      <div class="ticket-updates__delete icon__remove"></div>
+    </div>
+    <div class="ticket-updates__message-line d-f jc-sb ai-c">
+      <div><span class="ticket-updates__message" [textContent]="update.note"></span></div>
+      <div class="ticket-updates__edit edit-grey-ng2"></div>
+    </div>
+    <app-ticket-profile-updates-footer [shares]="update.shares"></app-ticket-profile-updates-footer>
+  </div>
+
+</div>

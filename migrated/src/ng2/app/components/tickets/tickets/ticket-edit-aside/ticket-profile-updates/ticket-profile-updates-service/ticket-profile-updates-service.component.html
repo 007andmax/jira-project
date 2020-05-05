@@ -1,0 +1,47 @@
+<div class="d-f ticket-updates__update-block"  >
+  <div class="ticket-updates__ticket-photo" [textContent]="ticketsListService.getAssignedUserNameForAvatar(update.user)"
+  [ngStyle]="{'background': ticketsListService.getStyleAvatar(update.user),'background-size': 'cover'}"></div>
+
+  <div class="ticket-updates__content">
+    <div class="ticket-updates__author-line d-f jc-sb ai-c ">
+      <div><span class="ticket-updates__author" [textContent]="ticketsListService.getUserName(update.user)"></span> <span class="ticket-updates__add-note">added a service</span></div>
+      <div class="ticket-updates__delete icon__remove"></div>
+    </div>
+    <div class="d-f jc-sb ai-fs ticket-updates__ticket-info-container">
+      <div class="ticket-updates__ticket-info">
+        <div class="ticket-updates__ticket-header d-f">
+          <div class="ticket-updates__service-header-name">Service Name</div>
+          <div class="ticket-updates__service-header-price">Time In</div>
+          <div class="ticket-updates__service-header-qty">Time Out</div>
+          <div class="ticket-updates__service-header-total">Duration</div>
+        </div>
+        <ng-template   ngFor let-servic [ngForOf]="update.services" let-i="index" [ngForTrackBy]="trackByIndex">
+        <div class="ticket-updates__ticket-body">
+          <div class="d-f">
+            <div class="ticket-updates__done-status icon__task-pending" [ngClass]="{'--done':servic.completed}"></div>
+            <div class="ticket-updates__service-title" [textContent]="servic.item.name">OnSite Service</div>
+            <div class="ticket-updates__service-time-in" [textContent]="getTime(servic.durationStart)"></div>
+            <div class="ticket-updates__service-time-out" [textContent]="getTime(servic.durationEnd)"></div>
+            <div class="ticket-updates__service-duration" [textContent]="getDuration(servic.quantity)"></div>
+            <div class="ticket-updates__date-icon icon__assign-date"></div>
+            <div class="ticket-updates__photo-people" [textContent]="ticketsListService.getAssignedUserNameForAvatar(servic.user)"
+            [ngStyle]="{'background': ticketsListService.getStyleAvatar(servic.user),'background-size': 'cover'}"></div>
+          </div>
+
+          <div class="ticket-updates__service-subinfo">
+            <div>Backup Computer</div>
+            <div>Install the new drive</div>
+            <div>Install the drive and clone to new drive</div>
+          </div>
+        </div>
+        <span  class="tag__modern ticket-updates__service-tag-completed" *ngIf="servic.completed" [textContent]="'Completed on ' + getDate(servic.date)"></span>
+        <span  class="tag__modern ticket-updates__service-tag-completed" *ngIf="!servic.completed && servic.date" [textContent]="'Due date - ' + getDate(servic.date)"></span>
+        </ng-template>
+      </div>
+      <div class="ticket-updates__more icon__more"></div>
+    </div>
+    <app-ticket-profile-updates-footer [shares]="update.shares"  ></app-ticket-profile-updates-footer>
+  
+  </div>
+
+</div>

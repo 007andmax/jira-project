@@ -1,6 +1,7 @@
 import { CurrentUser } from 'src/ng2/class/current-user/current-user';
 import { TicketProfileService } from './ticket-profile-service';
 import { TicketProfileProduct } from './ticket-profile-product';
+import { TicketProfileShare } from './ticket-profile-share';
 
 export class TicketProfileUpdate {
     attachments: [];
@@ -11,7 +12,7 @@ export class TicketProfileUpdate {
     notifyTicketCreator: boolean;
     products: Array<TicketProfileProduct> = [];
     services: Array<TicketProfileService> = [];
-    shares: [];
+    shares: Array<TicketProfileShare> = [];
     type: string;
     unread: boolean;
     updateSource: string;
@@ -30,7 +31,9 @@ export class TicketProfileUpdate {
         this.services= data.services.map(item =>  {
             return new TicketProfileService(item);
         })
-        this.shares= data.shares;
+        this.shares= data.shares.map(item => {
+            return new TicketProfileShare(item);
+        });
         this.type = data.type;
         this.unread = data.unread;
         this.updateSource = data.updateSource;
