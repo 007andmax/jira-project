@@ -108,7 +108,7 @@
 
         </div>
         <!--  TICKET UPDATES  -->
-       <app-ticket-profile-updates *ngIf="ticketProfile.updates && ticketProfile.updates.length > 0" [updates]="ticketProfile.updates"></app-ticket-profile-updates>
+       <app-ticket-profile-updates *ngIf="ticketProfile.updates && ticketProfile.updates.length > 0" [ticketProfile]="ticketProfile" [updates]="ticketProfile.updates"></app-ticket-profile-updates>
         <!--  CHAT PRODUCTS SERVICE  -->
         <app-ticket-profile-form-update [ticket]="ticketProfile" [lisUpdateUser]="lisUpdateUser"></app-ticket-profile-form-update>
       </div>

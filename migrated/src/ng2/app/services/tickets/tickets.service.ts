@@ -21,6 +21,10 @@ public restoreFromSpam(id,value) {
   let data = { value: value };
   return this.http.put(this.apiUrl + `v2/tickets/${id}/restoreFromSpam`, data);
 }
+public deleteUpdate(id,updateId) {
+ 
+  return this.http.delete(this.apiUrl + `/v2/tickets/${id}/updates/${updateId}`);
+}
   public deleteTicket(ids) {
     
     return this.http.post(this.apiUrl + `v2/tickets/delete/`, { ids: ids });

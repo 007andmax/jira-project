@@ -5,7 +5,7 @@
   <div class="ticket-updates__content">
     <div class="ticket-updates__author-line d-f jc-sb ai-c ">
       <div><span class="ticket-updates__author" [textContent]="ticketsListService.getUserName(update.user)"></span> <span class="ticket-updates__add-note">added a note</span></div>
-      <div class="ticket-updates__delete icon__remove"></div>
+      <div class="ticket-updates__delete icon__remove" (click)="remove()"></div>
     </div>
     <div class="ticket-updates__message-line d-f jc-sb ai-c">
       <div><span class="ticket-updates__message" [textContent]="update.note"></span></div>
