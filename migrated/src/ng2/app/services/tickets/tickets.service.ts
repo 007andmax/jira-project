@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/ng2/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Ticket } from '../../components/tickets/class/ticket';
 import { map } from 'rxjs/operators';
 import { TicketProfile } from '../../components/tickets/tickets/class/ticket-profile';
@@ -13,24 +13,44 @@ export class TicketsService {
   private apiUrl = environment.apiUrl;
   constructor(private http: HttpClient) { }
 
-  public changeSubjectNoteTicket(id, subject,note) {
-    let data = { id: id,subject:subject,note:note };
+  public changeSubjectNoteTicket(id, subject, note) {
+    let data = { id: id, subject: subject, note: note };
     return this.http.put(this.apiUrl + `v2/tickets/edit`, data);
   }
-public restoreFromSpam(id,value) {
-  let data = { value: value };
-  return this.http.put(this.apiUrl + `v2/tickets/${id}/restoreFromSpam`, data);
-}
-public deleteUpdate(id,updateId) {
- 
-  return this.http.delete(this.apiUrl + `/v2/tickets/${id}/updates/${updateId}`);
-}
+  public restoreFromSpam(id, value) {
+    let data = { value: value };
+    return this.http.put(this.apiUrl + `v2/tickets/${id}/restoreFromSpam`, data);
+  }
+  public removeService(ticketId, updateId, serviceId) {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body:  { "productExpenseIds": null, "serviceExpenseIds": [serviceId] }
+    };
+  
+    return this.http.delete(this.apiUrl + `v2/tickets/${ticketId}/updates/${updateId}/deleteExpenses`, options);
+  }
+  public removeProduct(ticketId, updateId, productId) {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body:  {"productExpenseIds":[productId],"serviceExpenseIds":null}
+    };
+  
+    return this.http.delete(this.apiUrl + `v2/tickets/${ticketId}/updates/${updateId}/deleteExpenses`, options);
+  }
+  public deleteUpdate(id, updateId) {
+
+    return this.http.delete(this.apiUrl + `v2/tickets/${id}/updates/${updateId}`);
+  }
   public deleteTicket(ids) {
-    
+
     return this.http.post(this.apiUrl + `v2/tickets/delete/`, { ids: ids });
   }
   public updateTicket(data) {
-    
+
     return this.http.post(this.apiUrl + `v2/tickets/updates?close=false`, data);
   }
   public changeStatus(id, value) {

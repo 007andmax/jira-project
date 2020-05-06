@@ -4,7 +4,7 @@ import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 import { TicketProfile } from '../../class/ticket-profile';
 import { NotificationStateService } from 'src/ng2/app/components/shared/notification/services/notification-state.service';
 import { ConfirmStateService } from 'src/ng2/app/components/shared/confirm/services/confirm-state.service';
-import { REMOVE_UPDATE_TICKET } from 'src/ng2/app/const/confirm';
+import { REMOVE_UPDATE_TICKET, REMOVE_UPDATE_TICKET_SERVICE, REMOVE_UPDATE_TICKET_PRODUCT } from 'src/ng2/app/const/confirm';
 import { TicketStateService } from '../services/ticket-state.service';
 
 @Component({
@@ -26,9 +26,26 @@ export class TicketProfileUpdatesComponent implements OnInit {
         if (this.confirmStateService.getConfirmAction() === REMOVE_UPDATE_TICKET) {
           this.removeUpdate();
         }
-       
-
+        if (this.confirmStateService.getConfirmAction() === REMOVE_UPDATE_TICKET_SERVICE) {
+          this.removeService();
+        }
+        if (this.confirmStateService.getConfirmAction() === REMOVE_UPDATE_TICKET_PRODUCT) {
+          this.removeProduct();
+        }
+        
       }
+    })
+  }
+  removeService() {
+    this.ticketsService.removeService(this.ticketProfile.id, this.ticketStateService.getUpdateForRemove().id,this.ticketStateService.getServiceForRemove().id).subscribe(data => {
+ 
+
+    })
+  }
+  removeProduct() {
+    this.ticketsService.removeProduct(this.ticketProfile.id, this.ticketStateService.getUpdateForRemove().id,this.ticketStateService.getProductForRemove().id).subscribe(data => {
+ 
+
     })
   }
   removeUpdate() {

@@ -2,6 +2,8 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { ServiceAgreementsService } from 'src/ng2/app/services/service-agreements/service-agreements.service';
 import { RecurringService } from 'src/ng2/app/services/recurring/recurring.service';
 import { TicketProfileUpdate } from '../../class/ticket-profile-update';
+import { TicketProfileService } from '../../class/ticket-profile-service';
+import { TicketProfileProduct } from '../../class/ticket-profile-product';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +11,8 @@ import { TicketProfileUpdate } from '../../class/ticket-profile-update';
 export class TicketStateService {
   servicesList: EventEmitter<any> = new EventEmitter();
   updateForRemove:TicketProfileUpdate = null;
+  serviceForRemove:TicketProfileService = null;
+  productForRemove:TicketProfileProduct = null;
   areTicketsPresented: boolean = false;
   areTicketsTerminated: boolean = false;
   servicesForTicket = [];
@@ -38,8 +42,20 @@ export class TicketStateService {
     })
     this.servicesList.emit(this.servicesForTicket);
   }
+  public setProductForRemove(data) {
+    this.productForRemove = data;
+  }
+  public setServiceForRemove(data) {
+    this.serviceForRemove = data;
+  }
   public setUpdateForRemove(data) {
     this.updateForRemove = data;
+  }
+  public getProductForRemove() {
+    return this.productForRemove;
+  }
+  public getServiceForRemove() {
+    return this.serviceForRemove;
   }
   public getUpdateForRemove() {
     return this.updateForRemove;
