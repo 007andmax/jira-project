@@ -2313,3 +2313,6 @@ input.ng-invalid.is-invalid {
 #toast-container > div {
   opacity:1;
 }
+.igx-overlay__wrapper {
+  z-index: 9999 !important;
+}

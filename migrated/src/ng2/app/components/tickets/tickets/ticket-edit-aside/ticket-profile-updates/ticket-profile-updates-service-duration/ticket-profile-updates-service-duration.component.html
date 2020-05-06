@@ -1,0 +1,10 @@
+<igx-time-picker id="timepicker2" #picker format="HH:mm" [itemsDelta]="{hours:1, minutes:15}" mode="dropdown" [(ngModel)]="date">
+  <ng-template igxTimePickerActions>
+    <div class="container action-buttons">
+        
+        <button igxButton="flat" (click)="picker.okButtonClick()">ok</button>
+        
+    </div>
+</ng-template>
+</igx-time-picker>
+  

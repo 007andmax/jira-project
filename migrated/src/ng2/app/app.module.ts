@@ -14,7 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SelectModule } from 'ng2-select';
 // import { SelectModule } from 'ng2-select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { IgxTimePickerModule } from 'igniteui-angular';
 import { SidebarModule } from 'ng-sidebar';
 
 import { ClickOutsideModule } from 'ng4-click-outside';
@@ -222,6 +222,10 @@ import { TicketProfileUpdatesNoteComponent } from './components/tickets/tickets/
 import { TicketProfileUpdatesProductComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-product/ticket-profile-updates-product.component';
 import { TicketProfileUpdatesFooterComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-footer/ticket-profile-updates-footer.component';
 import { TicketProfileUpdatesServiceComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service/ticket-profile-updates-service.component';
+import { TicketProfileUpdatesServiceDurationComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-duration/ticket-profile-updates-service-duration.component';
+ 
+import { TicketProfileUpdatesServiceTimepickerComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-timepicker/ticket-profile-updates-service-timepicker.component';
+ 
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 declare var angular: any;
@@ -527,7 +531,10 @@ angular.module('quicktech')
     TicketProfileUpdatesNoteComponent,
     TicketProfileUpdatesProductComponent,
     TicketProfileUpdatesFooterComponent,
-    TicketProfileUpdatesServiceComponent
+    TicketProfileUpdatesServiceComponent,
+    TicketProfileUpdatesServiceDurationComponent,
+   
+    TicketProfileUpdatesServiceTimepickerComponent
   ],
   imports: [
     BrowserModule,
@@ -568,7 +575,10 @@ angular.module('quicktech')
     ImageCropperModule,
     NgxEditorModule,
     FontAwesomeModule,
-    NvD3Module
+    NvD3Module,
+    BrowserAnimationsModule, 
+    IgxTimePickerModule
+  
   ],
   entryComponents: [
     LeftPanelComponent,
@@ -597,7 +607,8 @@ angular.module('quicktech')
   ],
   exports:[
     PhonePipe,
-    OrderByPipe
+    OrderByPipe,
+   
   ],
   providers: [
     {
