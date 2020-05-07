@@ -29,8 +29,8 @@
       <app-services-list class="service-item__input device" #serviceDP   [itemList]="servicesList"
       (selectedServicesItem)="selectService($event)"></app-services-list>
      <!-- <app-ticket-profile-updates-service-duration></app-ticket-profile-updates-service-duration>-->
-      <app-ticket-profile-updates-service-timepicker></app-ticket-profile-updates-service-timepicker>
-      <input class="service-item__input time" type="text" placeholder="Hr(s) : Min(s)" [hidden]="true">
+      <app-ticket-profile-updates-service-timepicker *ngIf="currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'"></app-ticket-profile-updates-service-timepicker>
+       <app-ticket-profile-updates-service-duration *ngIf="currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER'"></app-ticket-profile-updates-service-duration>
       <app-date-picker  (onChange)="onChangeDatePicker($event)"></app-date-picker>
      
       <button class="service-item__btn-add" (click)="addService()">

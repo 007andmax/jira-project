@@ -6,6 +6,7 @@ import { TicketProfileFormService } from '../../class/ticket-profile-form-servic
 import { ServicesListComponent } from 'src/ng2/app/components/shared/services-list/services-list.component';
 import * as moment from "moment";
 import { TicketStateService } from '../../services/ticket-state.service';
+import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 
 @Component({
   selector: 'app-ticket-profile-form-update-services',
@@ -20,12 +21,16 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit {
   areTicketsPresented: boolean = false;
   servicesList = [];
   addedServiceList = [];
+  currentCompany = null;
   currentService: TicketProfileFormService = new TicketProfileFormService();
   constructor(private serviceAgreementsService: ServiceAgreementsService, 
     private recurringService: RecurringService,
+    private companiesStateService:CompaniesStateService,
     private ticketStateService:TicketStateService) { }
 
   ngOnInit() {
+    this.currentCompany = this.companiesStateService.getCurrentCompany();
+    console.log("this.currentCompany",this.currentCompany);
     this.getServices();
     this.ticketStateService.getOnGetServicesList().subscribe(data => {
      this.getServices();

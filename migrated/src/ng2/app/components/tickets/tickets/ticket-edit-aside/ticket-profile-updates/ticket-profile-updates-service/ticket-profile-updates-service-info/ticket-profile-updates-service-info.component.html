@@ -1,0 +1,43 @@
+<div class="d-f jc-sb ai-fs ticket-updates__ticket-info-container">
+  <div class="ticket-updates__ticket-info">
+    <div class="ticket-updates__ticket-header d-f">
+      <div class="ticket-updates__service-header-name">Service Name</div>
+      <div class="ticket-updates__service-header-price">Time In</div>
+      <div class="ticket-updates__service-header-qty">Time Out</div>
+      <div class="ticket-updates__service-header-total">Duration</div>
+    </div>
+     <div class="ticket-updates__ticket-body">
+      <div class="d-f">
+        <div class="ticket-updates__done-status icon__task-pending" [ngClass]="{'--done':service.completed}"></div>
+        <div class="ticket-updates__service-title" [textContent]="service.item.name"></div>
+        <div class="ticket-updates__service-time-in" [textContent]="getTime(service.durationStart)"></div>
+        <div class="ticket-updates__service-time-out" [textContent]="getTime(service.durationEnd)"></div>
+        <div class="ticket-updates__service-duration" [textContent]="getDuration(service.quantity)"></div>
+       
+        <div class="ticket-updates__date-icon icon__assign-date"></div>
+        <div class="ticket-updates__photo-people" [textContent]="ticketsListService.getAssignedUserNameForAvatar(service.user)"
+        [ngStyle]="{'background': ticketsListService.getStyleAvatar(service.user),'background-size': 'cover'}"></div>
+      </div>
+
+      <div class="ticket-updates__service-subinfo" [textContent]="service.description">
+        
+      </div>
+    </div>
+    <span  class="tag__modern ticket-updates__service-tag-completed" *ngIf="service.completed" [textContent]="'Completed on ' + getDate(service.date)"></span>
+    <span  class="tag__modern ticket-updates__service-tag-completed" *ngIf="!service.completed && service.date" [textContent]="'Due date - ' + getDate(service.date)"></span>
+ 
+  </div>
+  <div ngbDropdown>
+  <div class="ticket-updates__more icon__more" id="dropdownBasic1"
+  ngbDropdownToggle></div>
+  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+    <button ngbDropdownItem *ngIf="!showArchivedUsers" (click)="edit()"><i class="icn-16 edit-grey-ng2"></i>Edit
+    </button>
+   
+    <button ngbDropdownItem  
+            (click)="removeService(i)"><i class="icn-16 archive-grey-ng2"></i>Delete
+    </button>
+    
+  </div>
+</div>
+</div>
