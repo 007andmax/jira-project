@@ -5,6 +5,7 @@ import { TicketProfile } from '../../class/ticket-profile';
 import { CurrentUser } from 'src/ng2/class/current-user/current-user';
 import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 import { TicketsListService } from '../../services/tickets-list.service';
+import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 
 @Component({
   selector: 'app-ticket-profile-form-update',
@@ -27,6 +28,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
   tab: string = "NOTE";
   constructor(private ticketsStateService: TicketsStateService,
     public cd: ChangeDetectorRef,
+    private usersStateService:UsersStateService,
     private ticketsService: TicketsService,
     public ticketsListService: TicketsListService) { }
 
@@ -39,6 +41,14 @@ export class TicketProfileFormUpdateComponent implements OnInit {
   public onPastChat(value) {
     this.ticketProfileFormUpdate.setChatMessage(value);
    
+  }
+  getUsersForUpdate() {
+    let userList = this.usersStateService.getAllUsers().sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?
+      1 : ((`${b.firstName} ${b.lastName}`.toLowerCase() > `${a.firstName} ${a.lastName}`.toLowerCase()) ? -1 : 0));
+    let techusers = userList.filter((item) => item.accountType === "TECH" && !item.deletedAt);
+    let clientUsers = userList.filter((item) => item.accountType === "CLIENT" && !item.deletedAt && item.company.id === this.ticketProfile.companyId);
+    return [...techusers, ...clientUsers];
+
   }
   update() {
     if (this.tab === "NOTE") {
