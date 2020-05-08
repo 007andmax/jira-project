@@ -11,10 +11,10 @@
         <div class="ticket-updates__done-status icon__task-pending" [ngClass]="{'--done':service.completed}"></div>
         <div class="ticket-updates__service-title" [textContent]="service.item.name"></div>
         
-        <app-ticket-profile-updates-service-timepicker [editMode]="true" [start]="durationStart" [end]="durationEnd" *ngIf="currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'"></app-ticket-profile-updates-service-timepicker>
-        <app-ticket-profile-updates-service-duration [hour]="hours" [minute]="minutes" *ngIf="currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER'"></app-ticket-profile-updates-service-duration>
-        <div class="ticket-updates__service-duration" *ngIf="currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'" [textContent]="getDuration(service.quantity)"></div>
-       
+        <app-ticket-profile-updates-service-timepicker (onChangeStart)="onChangeStartTimePicker($event)" (onChangeEnd)="onChangeEndTimePicker($event)" #editTimePicker [quantity]="quantity" [editMode]="true" [start]="durationStart" [end]="durationEnd" ></app-ticket-profile-updates-service-timepicker>
+        <app-ticket-profile-updates-service-duration (onChange)="onChangeDuration($event)" [editMode]="true" [hour]="hours" [minute]="minutes" *ngIf="currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER'"></app-ticket-profile-updates-service-duration>
+        <div class="ticket-updates__service-duration" *ngIf="currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'" [textContent]="getDuration(quantity)"></div>
+         
         <div class="ticket-updates__date-icon icon__assign-date"></div>
         <div class="ticket-updates__photo-people" [textContent]="ticketsListService.getAssignedUserNameForAvatar(service.user)"
         [ngStyle]="{'background': ticketsListService.getStyleAvatar(service.user),'background-size': 'cover'}"></div>

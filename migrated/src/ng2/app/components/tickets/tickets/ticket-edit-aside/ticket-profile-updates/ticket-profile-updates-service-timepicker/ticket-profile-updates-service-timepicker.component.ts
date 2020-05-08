@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import * as moment from "moment";
 var $ = require("jquery");
 import "timepicker";
@@ -12,15 +12,18 @@ import { CompaniesStateService } from 'src/ng2/app/states/company/companies-stat
 export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
   @Input() start: number = 0;
   @Input() end: number = 0;
-  @Input() duration: number = 0;
-  @Input() editMode:boolean = false;
+  @Input() quantity: number = 0;
+  @Input() editMode: boolean = false;
+  @Output() onChangeEnd = new EventEmitter<any>();
+  @Output() onChangeStart = new EventEmitter<any>();
+  currentCompany = null;
   step: number = 1;
   constructor(private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
-    console.log('', moment(new Date()).format('hh:mma'));
+
+    this.currentCompany = this.companiesStateService.getCurrentCompany();
     $(document).ready(() => {
-      console.log("companiesStateService", this.companiesStateService.getCurrentCompany());
 
       let serviceExpenseDurationPickerInterval = this.companiesStateService.getCurrentCompany().serviceExpenseDurationPickerInterval;
       if (serviceExpenseDurationPickerInterval === 'ONE_MINUTE') this.step = 1;
@@ -43,38 +46,47 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
       $('#datepairExample .start').on('selectTime', (data) => {
         console.log("selectTime", data);
         this.changeStart();
+        let startDate = new Date($('#datepairExample .start').timepicker('getTime'));
+        this.onChangeStart.emit(startDate.getTime());
       });
       $('#datepairExample .end').on('selectTime', (data) => {
         console.log("selectTime", data);
-
+        let endDate = new Date($('#datepairExample .end').timepicker('getTime'));
+        this.onChangeEnd.emit(endDate.getTime());
       });
       $('#datepairExample .end').on('showTimepicker', (data) => {
         console.log("showTimepicker", data);
         $('.ui-timepicker-with-duration').scrollTop(0);
       });
-let startDate = (this.start > 0) ? new Date(this.start) : new Date();
-let endDate = (this.end > 0) ? new Date(this.end) : new Date();
-      $('#datepairExample .start').timepicker('setTime', startDate);
-      $('#datepairExample .end').timepicker('setTime', endDate);
-
+      if (this.editMode) {
+        let startDate = new Date(this.start);
+        let endDate = new Date(this.end);
+        $('#datepairExample .start').timepicker('setTime', startDate);
+        $('#datepairExample .end').timepicker('setTime', endDate);
+         $('#datepairExample .end').timepicker('option', 'minTime', $('#datepairExample .start').val());
+      
+      }else {
+        $('#datepairExample .start').timepicker('setTime', new Date());
+        $('#datepairExample .end').timepicker('setTime', new Date());
+      }
       // initialize datepair
     });
   }
-  changeStart() {
-    
+  getEndText() {
+    let startDate = $('#datepairExample .start').timepicker('getTime');
+    let endDate = new Date(new Date(startDate).getTime() + (this.quantity * 3600000));
+    return moment(new Date(endDate)).format('hh:mm A');
+  }
 
-    console.log("changeStart");
+  public changeStart() {
     if (this.editMode) {
-      let startDate = $('#getTimeExample').timepicker('getTime');
-      console.log("startDate",startDate);
-      let endDate = new Date(this.start)
+      let startDate = $('#datepairExample .start').timepicker('getTime');
+      console.log("startDate", startDate);
+      let endDate = new Date(new Date(startDate).getTime() + (this.quantity * 3600000));
+      console.log("endDate", endDate);
+      console.log("quantity,this.", this.quantity);
       $('#datepairExample .end').timepicker('setTime', endDate);
-    } else {
-   
-    }
+    } 
     $('#datepairExample .end').timepicker('option', 'minTime', $('#datepairExample .start').val());
-
-
-
   }
 }

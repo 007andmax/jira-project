@@ -32,9 +32,9 @@
                                                                                                      Trash</a>
         </li>
         <li *ngIf="ticketsPermissionsService.isActionVisible('send_to_spam', ticketProfile,null,null)">
-          <a tabindex="-1" class="spam-user" href="javascript:void(0)" *ngIf="currentUser.isOwner"
+          <a tabindex="-1" class="spam-user" href="javascript:void(0)" *ngIf="currentUser && currentUser.isOwner"
              (click)="moveIntoSpam()">Mark as Spam</a>
-          <a tabindex="-1" class="spam-user" href="javascript:void(0)" *ngIf="!currentUser.isOwner"
+          <a tabindex="-1" class="spam-user" href="javascript:void(0)" *ngIf="currentUser && !currentUser.isOwner"
              (click)="moveIntoSpam()">Report as Spam</a>
         </li> 
       </ul>

@@ -1,4 +1,6 @@
 <p id="datepairExample" class="start-end-timer">
 	<input type="text" class="time start"/>
-	<input type="text" class="time end"/>
+	<input *ngIf="!editMode || editMode && currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'" type="text" class="time end"/>
+	
 </p>
+<p *ngIf="editMode && currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER'" [textContent]="getEndText()"></p>
