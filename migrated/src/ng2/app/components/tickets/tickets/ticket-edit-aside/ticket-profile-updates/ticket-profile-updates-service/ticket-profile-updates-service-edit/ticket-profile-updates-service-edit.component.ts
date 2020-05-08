@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { TicketProfileUpdate } from '../../../../class/ticket-profile-update';
 import { TicketsListService } from '../../../../services/tickets-list.service';
 import { ConfirmStateService } from 'src/ng2/app/components/shared/confirm/services/confirm-state.service';
@@ -26,13 +26,17 @@ export class TicketProfileUpdatesServiceEditComponent implements OnInit {
   durationStart: number = 0;
   durationEnd: number = 0;
   quantity: number = 0;
+  servicesList = [];
+  editService: TicketProfileService;
   constructor(public ticketsListService: TicketsListService,
     private confirmStateService: ConfirmStateService,
     private ticketStateService: TicketStateService,
     private companiesStateService: CompaniesStateService,
+    private elRef: ElementRef,
     private modalService: NgbModal) { }
 
   ngOnInit() {
+    this.editService = JSON.parse(JSON.stringify(this.service));
     this.currentCompany = this.companiesStateService.getCurrentCompany();
     this.quantity = JSON.parse(JSON.stringify(this.service.quantity));
     this.durationStart = this.service.durationStart;
@@ -40,9 +44,31 @@ export class TicketProfileUpdatesServiceEditComponent implements OnInit {
     var timeInMinutes = this.service.quantity * 60;
     this.hours = Math.floor(timeInMinutes / 60);
     this.minutes = Math.round(timeInMinutes - (this.hours * 60));
+this.elRef.nativeElement.querySelector('#service-description').value = this.editService.description;
+    
     console.log("this.service.quantity", this.service.quantity);
     console.log("this.hours", this.hours);
     console.log("this.minutes", this.minutes);
+    this.getServices();
+    this.ticketStateService.getOnGetServicesList().subscribe(data => {
+      this.getServices();
+    })
+  }
+  private getServices() {
+    this.servicesList = this.ticketStateService.getServicesForTicket();
+
+  }
+  public onChangeDescription(event) {
+    //  this.company.description = event.target.value;
+    this.editService.description = event.target.value;
+
+  }
+  public onPastDescription(value) {
+    this.editService.description = value;
+    //    this.inventory.description = value;
+  }
+  public selectService(item) {
+    this.editService.item = item;
   }
   public onChangeDuration(quantity) {
     this.quantity = quantity;

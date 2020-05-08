@@ -4,6 +4,7 @@ import { TehUsersSateService } from './services/teh-users-sate.service';
 import { Subscription } from 'rxjs';
 import { RecurringTicketUser } from '../../tickets/recurring-tickets/interfaces/recurring-ticket-user';
 import { TechUserItem } from './class/tech-user-item';
+import { SINGLE_SELECT, MULTIPLE_SELECT } from 'src/ng2/app/const/users';
 
 @Component({
   selector: 'app-teh-users',
@@ -13,15 +14,18 @@ import { TechUserItem } from './class/tech-user-item';
 export class TehUsersComponent implements OnInit, OnDestroy {
   @Input('users')
   set setUsers(value) {
-      this.users = value;
-      this.usersList = value;
+    this.users = value;
+    this.usersList = value;
   }
   public usersList: Array<TechUserItem> = [];
   public showSelect = false;
   public selectedUsers = [];
-  users:Array<TechUserItem> = [];
+  @Input() selectedMode: string = MULTIPLE_SELECT;
+  @Input() editUsers = [];
+  @Input() editMode: boolean = false;
+  users: Array<TechUserItem> = [];
   sub = new Subscription();
- 
+
   @Output() usersChange = new EventEmitter();
 
   /**
@@ -38,9 +42,14 @@ export class TehUsersComponent implements OnInit, OnDestroy {
    */
   ngOnInit() {
 
-   
 
 
+    if (this.editMode) {
+      this.usersList.forEach(item => {
+        let index = this.editUsers.findIndex(user => user.id === item.id);
+        if (index > -1) item.selected = true;
+      })
+    }
     this.onInitClearState();
     this.checUsersForEdit();
   }
@@ -93,6 +102,11 @@ export class TehUsersComponent implements OnInit, OnDestroy {
      */
   public selectUser(index) {
     this.usersList[index].selected = !this.usersList[index].selected;
+    if (this.selectedMode === SINGLE_SELECT) {
+      this.usersList.forEach((item, i) => {
+        if (i !== index) item.selected = false;
+      });
+    }
     this.selectedUsers = this.usersList.filter(item => item.selected);
     this.usersChange.emit(this.selectedUsers);
   }

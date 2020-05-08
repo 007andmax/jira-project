@@ -65,13 +65,14 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit {
     this.currentService.setItemOrder(this.getItemOrger());
     this.changeServices.emit(this.addedServiceList);
   }
+ 
+  private getItemOrger() {
+    return (this.addedServiceList.length - 1) >= 0 ? this.addedServiceList.length - 1 : 0;
+  }
   public onChangeDescription(event) {
     //  this.company.description = event.target.value;
     this.currentService.setDescription(event.target.value);
 
-  }
-  private getItemOrger() {
-    return (this.addedServiceList.length - 1) >= 0 ? this.addedServiceList.length - 1 : 0;
   }
   public onPastDescription(value) {
     this.currentService.setDescription(value);

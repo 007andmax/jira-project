@@ -9,7 +9,9 @@
      <div class="ticket-updates__ticket-body">
       <div class="d-f">
         <div class="ticket-updates__done-status icon__task-pending" [ngClass]="{'--done':service.completed}"></div>
-        <div class="ticket-updates__service-title" [textContent]="service.item.name"></div>
+        <app-services-list class="service-item__input device" [type]="'TICKET'" [editItem]="service.item"  [itemList]="servicesList"
+        (selectedServicesItem)="selectService($event)"></app-services-list>
+       
         
         <app-ticket-profile-updates-service-timepicker (onChangeStart)="onChangeStartTimePicker($event)" (onChangeEnd)="onChangeEndTimePicker($event)" #editTimePicker [quantity]="quantity" [editMode]="true" [start]="durationStart" [end]="durationEnd" ></app-ticket-profile-updates-service-timepicker>
         <app-ticket-profile-updates-service-duration (onChange)="onChangeDuration($event)" [editMode]="true" [hour]="hours" [minute]="minutes" *ngIf="currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER'"></app-ticket-profile-updates-service-duration>
@@ -19,9 +21,9 @@
         <div class="ticket-updates__photo-people" [textContent]="ticketsListService.getAssignedUserNameForAvatar(service.user)"
         [ngStyle]="{'background': ticketsListService.getStyleAvatar(service.user),'background-size': 'cover'}"></div>
       </div>
-
-      <div class="ticket-updates__service-subinfo" [textContent]="service.description">
-        
+      <div class="editable-description">
+      <textarea    appTextArea  [minHeight]="48"  cols="5" rows="1" id="service-description" placeholder="Write ticket conversation here…"
+      (input)="onChangeDescription($event)" (onPast)="onPastDescription($event)"></textarea>
       </div>
     </div>
     <span  class="tag__modern ticket-updates__service-tag-completed" *ngIf="service.completed" [textContent]="'Completed on ' + getDate(service.date)"></span>

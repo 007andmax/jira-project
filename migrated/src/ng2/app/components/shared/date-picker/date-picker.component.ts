@@ -5,6 +5,7 @@ import { DatePickerStateService } from './services/date-picker-state.service';
 import { ChangeDatePicker } from './class/change-date-picker';
 import { NgbDatepickerNavigateEvent } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker';
 import { DatePickerService } from './services/date-picker.service';
+import { TYPE_INPUT } from 'src/ng2/app/const/date-picker';
 
 @Component({
   selector: 'app-date-picker',
@@ -13,14 +14,17 @@ import { DatePickerService } from './services/date-picker.service';
   providers: [DatePickerService]
 })
 export class DatePickerComponent implements OnInit, OnDestroy {
-  
-  @ViewChild('date') date_dropDown: NgbDropdown;
 
+  @ViewChild('date') date_dropDown: NgbDropdown;
+  @Input() type: string = TYPE_INPUT;
+  @Input() editMode: boolean = false;
+  @Input() editDate: number = 0;
+  @Input() useMinDate: boolean = true;
   @Output() onChange: EventEmitter<ChangeDatePicker> = new EventEmitter();
   public datepicker: NgbDateStruct;
   public date: RecurringTicketsEditAsideDate = new RecurringTicketsEditAsideDate();
   public navDate: any;
-  public minDate: NgbDateStruct;
+  public minDate: NgbDateStruct = null;
 
   /**
   * Creates an instance of the DatePickerComponent with the injected services
@@ -39,10 +43,12 @@ export class DatePickerComponent implements OnInit, OnDestroy {
  * Initializes date picker. See [ngOnInit]{@see OnInit#ngOnInit}
  */
   ngOnInit() {
-    this.minDate = this.calendar.getToday();;
+   if (this.useMinDate) this.minDate = this.calendar.getToday();
     this.oninitreset();
     this.onInitEditMode();
     this.oninitClear();
+    console.log("this.editDate",this.editDate);
+    if (this.editMode) this.setEditDate(this.editDate);
 
   }
 
@@ -62,14 +68,17 @@ export class DatePickerComponent implements OnInit, OnDestroy {
   */
   private onInitEditMode() {
     let edit = this.stateDatePicker.getOnEditMode().subscribe((data: number) => {
-      let date = new Date(data);
-      this.navDate = this.sericeDatePicker.getNavDate(date);
-      this.datepicker = this.sericeDatePicker.getDateForDatePicker(data);
-      if (this.navDate) this.sericeDatePicker.updateMonthAndYearDatePicker(this.datepicker, this.navDate);
-      this.date.setTitle(this.datepicker);
-      this.sericeDatePicker.setTextInput('dropdownDate', this.date.getTitle());
+      this.setEditDate(data);
     })
     this.sericeDatePicker.addSubscription(edit);
+  }
+  private setEditDate(data: number) {
+    let date = new Date(data);
+    this.navDate = this.sericeDatePicker.getNavDate(date);
+    this.datepicker = this.sericeDatePicker.getDateForDatePicker(data);
+    if (this.navDate) this.sericeDatePicker.updateMonthAndYearDatePicker(this.datepicker, this.navDate);
+    this.date.setTitle(this.datepicker);
+    if (this.type === TYPE_INPUT)  this.sericeDatePicker.setTextInput('dropdownDate', this.date.getTitle());
   }
 
   /**
@@ -92,7 +101,7 @@ export class DatePickerComponent implements OnInit, OnDestroy {
     if (this.navDate) this.sericeDatePicker.updateMonthAndYearDatePicker(this.datepicker, this.navDate);
     this.date.setTitle(this.datepicker);
 
-    this.sericeDatePicker.setTextInput('dropdownDate', this.date.getTitle());
+   if (this.type === TYPE_INPUT) this.sericeDatePicker.setTextInput('dropdownDate', this.date.getTitle());
     this.onChange.emit(new ChangeDatePicker(this.datepicker.day, this.datepicker.month, this.datepicker.year));
     // this.recurringState.getCreateTicket().setStartDate(this.datepicker.day, this.datepicker.month, this.datepicker.year, this.recurringState.getTehCompany().addresses[0].timeZone.timeOffset);
     this.date_dropDown.close();
@@ -127,7 +136,7 @@ export class DatePickerComponent implements OnInit, OnDestroy {
   private updateDate() {
     this.date.setTitle(this.datepicker);
     this.onChange.emit(new ChangeDatePicker(this.datepicker.day, this.datepicker.month, this.datepicker.year));
-    this.sericeDatePicker.setTextInput('dropdownDate', this.date.getTitle());
+    if (this.type === TYPE_INPUT) this.sericeDatePicker.setTextInput('dropdownDate', this.date.getTitle());
     this.date_dropDown.close();
   }
 

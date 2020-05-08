@@ -8,6 +8,8 @@ import { REMOVE_UPDATE_TICKET, REMOVE_UPDATE_TICKET_SERVICE } from 'src/ng2/app/
 import { ConfirmComponent } from 'src/ng2/app/components/shared/confirm/confirm.component';
 import { TicketProfileUpdate } from '../../../../class/ticket-profile-update';
 import { TicketProfileService } from '../../../../class/ticket-profile-service';
+import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
+import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 
 @Component({
   selector: 'app-ticket-profile-updates-service-info',
@@ -18,12 +20,18 @@ export class TicketProfileUpdatesServiceInfoComponent implements OnInit {
   @Input() update: TicketProfileUpdate;
   @Input() service: TicketProfileService;
   @Output() onEdit = new EventEmitter();
+  userService = [];
+  listTehUsers = [];
   constructor(public ticketsListService: TicketsListService,
+    private usersStateService: UsersStateService,
     private confirmStateService: ConfirmStateService,
-    private ticketStateService:TicketStateService,
+    private ticketStateService: TicketStateService,
+    private ticketsService: TicketsService,
     private modalService: NgbModal) { }
 
   ngOnInit() {
+    if (this.service.user) this.userService = [this.service.user];
+    this.listTehUsers = this.getUsersForAssign();
   }
   edit() {
     this.onEdit.emit(null);
@@ -36,9 +44,39 @@ export class TicketProfileUpdatesServiceInfoComponent implements OnInit {
   }
   public getDuration(quantity) {
     var timeInMinutes = quantity * 60,
-    hours = Math.floor(timeInMinutes / 60),
-    minutes = Math.round(timeInMinutes - (hours * 60));
-    return`${(hours < 10) ? '0' + hours : hours} : ${(minutes < 10) ? '0' + minutes : minutes}`
+      hours = Math.floor(timeInMinutes / 60),
+      minutes = Math.round(timeInMinutes - (hours * 60));
+    return `${(hours < 10) ? '0' + hours : hours} : ${(minutes < 10) ? '0' + minutes : minutes}`
+  }
+  setComplete() {
+    this.service.setCompleted(!this.service.completed);
+    this.updateService();
+  }
+  public onChangeDatePicker(data) {
+    console.log("data", data);
+
+    let date = new Date(data.year, data.month - 1, data.day);
+    this.service.setDate(date.toISOString());
+    this.updateService();
+  }
+  private updateService() {
+    this.ticketsService.updateExpense(this.service.getDateForUpdate(this.update.id)).subscribe(data => {
+
+    })
+  }
+  public onChangeUser(data) {
+    console.log("data", data);
+    if (data.length === 0) this.service.setUser({id: ""});
+    if (data.length === 1) this.service.setUser(data[0]);
+    this.ticketsService.updateExpense(this.service.getDateForUpdate(this.update.id)).subscribe(data => {
+
+    })
+  }
+  getUsersForAssign() {
+    let userList = this.usersStateService.getAllUsers().sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?
+      1 : ((`${b.firstName} ${b.lastName}`.toLowerCase() > `${a.firstName} ${a.lastName}`.toLowerCase()) ? -1 : 0));
+    return userList.filter((item) => item.accountType === "TECH" && !item.deletedAt);
+
   }
   remove() {
     this.ticketStateService.setUpdateForRemove(this.update);
@@ -52,6 +90,6 @@ export class TicketProfileUpdatesServiceInfoComponent implements OnInit {
     this.confirmStateService.setConfirmAction(REMOVE_UPDATE_TICKET_SERVICE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
     modalRef.componentInstance.message = `Do you want to remove the item?`;
-   
+
   }
 }

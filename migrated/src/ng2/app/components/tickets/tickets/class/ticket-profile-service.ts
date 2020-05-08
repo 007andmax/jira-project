@@ -35,11 +35,38 @@ export class TicketProfileService {
     constructor(data = null) {
         if (data) {
             for (const key in data) {
-              //  if (this.hasOwnProperty(key)) {
-                    this[key] = data[key];
-                    
-               // }
+                //  if (this.hasOwnProperty(key)) {
+                this[key] = data[key];
+
+                // }
             }
         }
-     }
+    }
+    public setUser(data) {
+        this.user = data;
+    }
+    public setDate(data) {
+        this.date = data;
+    }
+    public setCompleted (data) {
+        this.completed = data;
+    }
+    public getDateForUpdate(id) {
+        return {
+            serviceExpense: {
+                completed: this.completed,
+                date: this.date,
+                description: this.description,
+                discountAmount: this.discountAmount,
+                discountType: this.discountType,
+                durationEnd: this.durationEnd,
+                durationStart: this.durationStart,
+                id: this.id,
+                item: this.item,
+                quantity: this.quantity,
+                user: this.user,
+            },
+            ticketUpdateId: id
+        }
+    }
 }

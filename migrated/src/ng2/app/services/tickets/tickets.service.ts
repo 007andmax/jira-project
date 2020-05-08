@@ -13,6 +13,11 @@ export class TicketsService {
   private apiUrl = environment.apiUrl;
   constructor(private http: HttpClient) { }
 
+  public updateExpense( data) {
+   
+    return this.http.put(this.apiUrl + `v2/tickets/ticketUpdate/updateExpense`, data);
+  }
+
   public changeSubjectNoteTicket(id, subject, note) {
     let data = { id: id, subject: subject, note: note };
     return this.http.put(this.apiUrl + `v2/tickets/edit`, data);
@@ -26,9 +31,9 @@ export class TicketsService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }),
-      body:  { "productExpenseIds": null, "serviceExpenseIds": [serviceId] }
+      body: { "productExpenseIds": null, "serviceExpenseIds": [serviceId] }
     };
-  
+
     return this.http.delete(this.apiUrl + `v2/tickets/${ticketId}/updates/${updateId}/deleteExpenses`, options);
   }
   public removeProduct(ticketId, updateId, productId) {
@@ -36,9 +41,9 @@ export class TicketsService {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }),
-      body:  {"productExpenseIds":[productId],"serviceExpenseIds":null}
+      body: { "productExpenseIds": [productId], "serviceExpenseIds": null }
     };
-  
+
     return this.http.delete(this.apiUrl + `v2/tickets/${ticketId}/updates/${updateId}/deleteExpenses`, options);
   }
   public deleteUpdate(id, updateId) {

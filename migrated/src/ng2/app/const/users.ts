@@ -7,3 +7,6 @@ export const USER = {
     TECH: 'TECH'
   }
 };
+export const SINGLE_SELECT = "SINGLE";
+export const MULTIPLE_SELECT = "MULTIPLE";
+ 
