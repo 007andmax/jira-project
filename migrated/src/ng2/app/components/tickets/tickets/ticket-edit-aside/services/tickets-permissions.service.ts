@@ -74,7 +74,7 @@ export class TicketsPermissionsService {
           }
           if (ticket && ticket.assignPerformer && ticket.assignPerformer.id && ticket.assignedUser && ticket.assignedUser.id || ticket && ticket.assignPerformer && ticket.assignPerformer.id && ticket.multiAssignedUsers.length > 0) {
             var user = this.usersStateService.getCurrentUser(),
-              otherAPerformerAndAUser = ticket.assignedUser && ticket.assignPerformer.id !== ticket.assignedUser.id;
+              otherAPerformerAndAUser = (ticket.assignedUser) ? ticket.assignPerformer.id !== ticket.assignedUser.id : true;
             var indexUser = (ticket.multiAssignedUsers) ? ticket.multiAssignedUsers.findIndex(user_s => user_s.id === user.id) : -1;
             let indexPerformerMultiAssigned = (ticket.multiAssignedUsers) ? ticket.multiAssignedUsers.findIndex(user_s => user_s.id === ticket.assignPerformer.id) : -1;
             switch (type) {
@@ -88,7 +88,7 @@ export class TicketsPermissionsService {
                 return (ticket.assignPerformer.id !== user.id) && (((ticket.assignedUser && ticket.assignedUser.id === ticket.assignPerformer.id || indexPerformerMultiAssigned > -1) && indexUser=== -1)  || !ticket.assignedUser && indexPerformerMultiAssigned > -1 && indexUser === -1);
     
               case 'USER_ASSIGNED_USER':
-                return ticket.assignPerformer.id !== user.id && (ticket.assignedUser && ticket.assignedUser.id !== user.id && indexUser === -1 && (otherAPerformerAndAUser && indexPerformerMultiAssigned === -1)) || !ticket.assignedUser && indexUser === -1 && (otherAPerformerAndAUser && indexPerformerMultiAssigned === -1);
+                return ticket.assignPerformer.id !== user.id && ((ticket.assignedUser && ticket.assignedUser.id !== user.id && indexUser === -1 && (otherAPerformerAndAUser && indexPerformerMultiAssigned === -1)) || !ticket.assignedUser && indexUser === -1 && (otherAPerformerAndAUser && indexPerformerMultiAssigned === -1));
     
               case 'MY_TICKET':
                 return (ticket.assignPerformer.id === user.id) && (ticket.assignedUser && ticket.assignedUser.id === user.id) || (ticket.assignPerformer.id === user.id) && indexUser > -1;

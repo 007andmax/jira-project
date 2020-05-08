@@ -63,15 +63,15 @@
             <input    [(ngModel)]="ticketProfile.subject"/>
           </div>
 
-          <div class="ticket-edit-aside__ticket-description"
+        <!--  <div class="ticket-edit-aside__ticket-description"
           [hidden]="true"
                (click)="toggleNote()"
-          [textContent]="ticketProfile.note"></div>
+          [textContent]="ticketProfile.note"></div>-->
           <div class="ticket-edit-aside__ticket-description-edit"
 
                appClickOtside [init]="opened" [class]="'.ticket-edit-aside__ticket-text'" (onOutSide)="toggleNote()"
           >
-            <textarea id="ticket-note"  ></textarea>
+            <textarea id="ticket-note" placeholder="Enter description here"  ></textarea>
           </div>
         </div>
         <!--   TICKET CLAIMED INFO   -->

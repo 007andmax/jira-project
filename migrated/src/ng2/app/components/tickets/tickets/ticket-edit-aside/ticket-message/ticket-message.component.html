@@ -44,7 +44,7 @@
     <div class="ticket-notify__item-icon icon__ticket-status"></div>
     <div>
       <div class="ticket-notify__item-title"><strong  >
-        {{ getUserName(ticketProfile.deletePerformer.id) }}
+        {{ getUserName(ticketProfile.deletePerformer) }}
       </strong> has moved this ticket to trash.
       <span *ngIf="getPermissions('DELETE_TICKETS')">
         You can either delete the ticket forever or restore the ticket status anytime, using the respective option.
@@ -77,9 +77,9 @@
     <div class="ticket-notify__item-icon icon__ticket-status"></div>
     <div>
       <div class="ticket-notify__item-title"> <strong class="text-info">
-        {{ getUserName(ticketProfile.spamMarker ? ticketProfile.spamMarker.id : ticketProfile.spamReporter.id) }}
+        {{ getUserName(ticketProfile.spamMarker ? ticketProfile.spamMarke : ticketProfile.spamReporter) }}
       </strong>
-      {{ getSpamMessages(ticketProfile.spamMarker ? ticketProfile.spamMarker.id : ticketProfile.spamReporter.id,
+      {{ getSpamMessages(ticketProfile.spamMarker ? ticketProfile.spamMarker : ticketProfile.spamReporter,
       ticketProfile.spamMarker ? 'MARK' : 'REPORT') }}</div>
       <div class="ticket-notify__item-desc d-f">
         <div class="ticket-notify__item-desc-icon icon__tips"></div>

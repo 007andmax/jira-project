@@ -20,7 +20,7 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
   new TitleListType('My Tickets', 'USERS'),
   new TitleListType('Recurring tickets Open', 'RECURRING_TICKETS_OPEN'),
   new TitleListType('Recurring tickets Closed', 'RECURRING_TICKETS_CLOSED')];
-  title: string = 'Users';
+  title: string = 'My Tickets';
   sub: Subscription = new Subscription();
   count = 0;
   selectedListType:TitleListType = new TitleListType('My Tickets', 'USERS');
