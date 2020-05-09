@@ -1,0 +1,10 @@
+.ticket-updates {
+  &__ticket-photo {
+    width: 32px;
+    height: 32px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    margin-right: 16px;
+}
+}
