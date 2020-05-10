@@ -33,11 +33,13 @@ export class SoftwareComponent implements OnInit, OnDestroy {
   dragOver: boolean;
   deviceDetail: any = {};
   pdfUrl = '';
+  search = '';
   DateFormat = CONFIGCONSTANTS.DateFormat;
   dtOptions: DataTables.Settings = {
     searching: false,
     paging: false,
     info: false,
+    order: [[0, 'asc']],
     columns: [{
         data: 'softName',
         orderable: true
@@ -204,7 +206,6 @@ export class SoftwareComponent implements OnInit, OnDestroy {
         element.softVersion || 'N/A'
       ]);
     });
-    let name = 'Ankit Dadhich'
     let html = `
     <style>
     * {

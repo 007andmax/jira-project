@@ -6,6 +6,16 @@
         <div class="page-header">
             <h3>Software list</h3>
             <div class="download-print">
+              <form method="GET">
+                <input
+                  type="search"
+                  class="form-input"
+                  [(ngModel)]="search"
+                  name="search"
+                  placeholder="Search Software…"
+                  autocomplete="off"
+                />
+              </form>
               <a (click)="printPdf();" data-tooltip="Print"><img src="../../../../ng1/images/device/print.svg"></a>
               <a (click)="downloadCsv();" data-tooltip="Download CSV"><img src="../../../../ng1/images/device/download_csv.svg"></a>
             </div>
@@ -41,7 +51,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let software of softwareList; let i = index;">
+                    <tr *ngFor="let software of softwareList | soft: search; let i = index;">
                       <!-- <td class="check-area">
                         <div class="cmn-checkbox">
                           <input type="checkbox" name="check_{{i}}" (change)="selectedRecord('single', i);" id="check_{{i}}" [(ngModel)]="software.checked" [value]="true"/>

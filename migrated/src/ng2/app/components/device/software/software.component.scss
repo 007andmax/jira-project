@@ -14,6 +14,7 @@ li.add-user {
 
 .download-print {
     display: flex;
+    align-items: center;
     a {
         border: solid 1px #dfe3e8;
         background: #fff;
@@ -71,8 +72,19 @@ li.add-user {
         z-index: 1;
         visibility: hidden;
     }
-    a:first-child {
+    a:nth-child(2) {
         margin-right: 8px;
+    }
+    form {
+        width: unset;
+        margin-right: 8px;
+        .form-input {
+            padding: 7px 14px 7px 34px;
+            background: url(../../../../../ng2/assets/img/search-ico.svg) no-repeat 12px center;
+            font-size: 12px;
+            line-height: 1.67;
+            background-color: #ffffff;
+        }
     }
 }
 

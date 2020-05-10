@@ -132,6 +132,7 @@ import { ErrorInterceptor } from './components/device/_helpers/error.interceptor
 import { searchTextPipe } from './components/device/_pipe/searchText.pipe';
 import { HighlightDirective } from './components/device/_directive/highlight.directive';
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { SoftwarePipe } from './pipe/software.pipe';
 
 /**
  * declare angular
@@ -313,7 +314,8 @@ angular.module('quicktech')
     LockScreenComponent,
     TicketTaskComponent,
     searchTextPipe,
-    HighlightDirective
+    HighlightDirective,
+    SoftwarePipe
   ],
   imports: [
     BrowserModule,
