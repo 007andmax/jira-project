@@ -1,1 +1,680 @@
-<p>dashboard works!</p>
+<div class="cmn-wrapper dashboard">
+    <div class="page-container">
+      <!-- Page Title -->
+      <div class="page-header">
+        <h3>Dashboard</h3>
+      </div>
+      <!-- Page Content All update -->
+      <div class="contant-area">
+        <div class="dashboard-list">
+          <div class="dashboard-row">
+            <div class="dashboard-col  work-group">
+              <div class="col-title">
+                <span class="hardware-ico">
+                  <img src="../../../../ng1/images/device/computer.svg" alt="computer" />
+                </span>
+                <h3>Clifford Office PC (in Workgroup)</h3>
+                <span class="edit-field" style="display:none">
+                    <input type="text" class="form-control" value="Clifford Office PC (in Workgroup)">
+                    </span>
+    
+              </div>
+              <ul class="list-unstyled">
+                <li>
+                  <span>Description</span>
+                  <div> Whitebox PC</div>
+                <span class="edit-field" style="display:none">
+                  <input type="text" class="form-control" value="Whitebox PC">
+                  </span>
+
+                </li>
+                <li>
+                  <span>Deployment Date</span>
+                  <div [bsConfig]="{ showWeekNumbers: false , dateInputFormat: 'Do MMMM YYYY' }"
+                bsDatepicker  container="">24/12/2018</div>
+
+                </li>
+                <li>
+                  <span>Manufacturer</span>
+                  <div>Microsoft Corporation</div>
+                </li>
+                <li>
+                  <span>Asset Tag</span>
+                  <div>LA4-00014</div>
+                </li>
+                <li>
+                  <span>Warrenty Date</span>
+                  <div>17/06/2019</div>
+                </li>
+                <li>
+                  <span>Computer Model</span>
+                  <div>System Product Name</div>
+                </li>
+                <li>
+                  <span>Site</span>
+                  T<div>Tower System</div>
+                </li>
+                <li>
+                  <span>Bought Date</span>
+                  <div>06/17/2019</div>
+                </li>
+                <li>
+                  <span>System Type</span>
+                  <div>x64 (64-bit) system</div>
+                </li>
+                <li>
+                  <span>Time Zone</span>
+                  <div>(UTC +08:00) Perth</div>
+                </li>
+                <li>
+                  <span>Expire Date</span>
+                  <div>12/03/2019</div>
+                </li>
+                <li>
+                  <span>Warranty</span>
+                  <div>3 years -Expires : 06/17/2019</div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="dashboard-row auto-marging">
+            <div class="dashboard-col col-50 disk-drive">
+              <h2>Disk Drives</h2>
+              <ul class="list-unstyled">
+                <li class="c-drive">
+                  <span class="pie-chart">
+                    <circle-progress
+                    [percent]="76"
+                    [radius]="16"
+                    [maxPercent]="100"
+                    [outerStrokeWidth]="3"
+                    [innerStrokeWidth]="3"
+                    [outerStrokeColor]="'#2ec866'"
+                    [innerStrokeColor]="'#f4f6f8'"
+                    [animation]="true"
+                    [animationDuration]="300"
+                    [titleFontSize]="10"
+                    [imageHeight]="37"
+                    [imageWidth]="37"
+                    [showSubtitle]="false"
+                    [space]="-3"
+                    [toFixed]="0"
+                    [backgroundPadding]="-50"
+                  ></circle-progress>
+  
+                  </span>
+                  <div class="drive-status">
+                    <span class="drive-name">C: ( NTFS on drive 1)</span>
+                    <span class="drive-limit">340GB / 512GB</span>
+                  </div>
+                </li>
+                <li class="d-drive">
+                  <span class="pie-chart">
+                    <circle-progress
+                    [percent]="50"
+                    [radius]="16"
+                    [maxPercent]="100"
+                    [outerStrokeWidth]="3"
+                    [innerStrokeWidth]="3"
+                    [outerStrokeColor]="'#0057a8'"
+                    [innerStrokeColor]="'#f4f6f8'"
+                    [animation]="true"
+                    [animationDuration]="300"
+                    [titleFontSize]="10"
+                    [imageHeight]="37"
+                    [imageWidth]="37"
+                    [showSubtitle]="false"
+                    [space]="-3"
+                    [toFixed]="0"
+                    [backgroundPadding]="-50"
+                  ></circle-progress>
+  
+                  </span>
+                  <div class="drive-status">
+                    <span class="drive-name">D: ( NTFS on drive 0)</span>
+                    <span class="drive-limit">120GB / 240GB</span>
+                  </div>
+                </li>
+                <li class="e-drive">
+                  <span class="pie-chart">
+                    <circle-progress
+                    [percent]="20"
+                    [radius]="16"
+                    [maxPercent]="100"
+                    [outerStrokeWidth]="3"
+                    [innerStrokeWidth]="3"
+                    [outerStrokeColor]="'#00d8e7'"
+                    [innerStrokeColor]="'#f4f6f8'"
+                    [animation]="true"
+                    [animationDuration]="300"
+                    [titleFontSize]="10"
+                    [imageHeight]="37"
+                    [imageWidth]="37"
+                    [showSubtitle]="false"
+                    [space]="-3"
+                    [toFixed]="0"
+                    [backgroundPadding]="-50"
+                  ></circle-progress>
+  
+                  </span>
+                  <div class="drive-status">
+                    <span class="drive-name">E: ( NTFS on drive 2)</span>
+                    <span class="drive-limit">78GB / 1000GB</span>
+                  </div>
+                </li>
+                <li class="f-drive">
+                  <span class="pie-chart">
+                    <circle-progress
+                    [percent]="38"
+                    [radius]="16"
+                    [maxPercent]="100"
+                    [outerStrokeWidth]="3"
+                    [innerStrokeWidth]="3"
+                    [outerStrokeColor]="'#16a4fa'"
+                    [innerStrokeColor]="'#f4f6f8'"
+                    [animation]="true"
+                    [animationDuration]="300"
+                    [titleFontSize]="10"
+                    [imageHeight]="37"
+                    [imageWidth]="37"
+                    [showSubtitle]="false"
+                    [space]="-3"
+                    [toFixed]="0"
+                    [backgroundPadding]="-50"
+                  ></circle-progress>
+  
+                  </span>
+                  <div class="drive-status">
+                    <span class="drive-name">F: ( NTFS on drive 3)</span>
+                    <span class="drive-limit">112GB / 512GB</span>
+                  </div>
+                </li>
+  
+              </ul>
+            </div>
+            <div class="dashboard-col col-50 services">
+              <h2>Services</h2>
+              <ul class="list-unstyled">
+                <li class="updated">
+                  <figure>
+                    <img src="../../../../ng1/images/device/virus-protection.svg" alt="virus-protection" />
+                  </figure>
+                  <h4>Virus Protection</h4>
+                  <span>Up-to-date</span>
+                </li>
+                <li class="alert">
+                  <figure>
+                    <img src="../../../../ng1/images/device/security-update.svg" alt="Security Update" />
+                  </figure>
+                  <h4>Security Update</h4>
+                  <span>7 missing Updates</span>
+                </li>
+  
+                <li class="updated">
+                  <figure>
+                    <img src="../../../../ng1/images/device/drivers-missing.svg" alt="drivers-missing" />
+                  </figure>
+                  <h4>Drivers Misssing</h4>
+                  <span>Up-to-date</span>
+                </li>
+  
+  
+              </ul>
+            </div>
+            <div class="dashboard-col col-50 tags">
+              <div class="col-title">
+                <h2>Tags</h2>
+                <a href="#javascript:;" class="static-link">+Add Tags</a>
+              </div>
+              <ul class="list-unstyled">
+                <li>
+                  <span class="tag">Server Exchange Server</span>
+                  <a href="javascript:;" class="tag-close">
+                    <img src="../../../../ng1/images/device/tag-close-2.svg" alt="Tag close" />
+                  </a>
+                </li>
+                <li>
+                  <span class="tag">DNS</span>
+                  <a href="javascript:;" class="tag-close">
+                    <img src="../../../../ng1/images/device/tag-close-2.svg" alt="Tag close" />
+                  </a>
+                </li>
+                <li>
+                  <span class="tag">SQL</span>
+                  <a href="javascript:;" class="tag-close">
+                    <img src="../../../../ng1/images/device/tag-close-2.svg" alt="Tag close" />
+                  </a>
+                </li>
+                <li>
+                  <span class="tag">FIle Server</span>
+                  <a href="javascript:;" class="tag-close">
+                    <img src="../../../../ng1/images/device/tag-close-2.svg" alt="Tag close" />
+                  </a>
+                </li>
+                <li>
+                  <span class="tag">Support Files</span>
+                  <a href="javascript:;" class="tag-close">
+                    <img src="../../../../ng1/images/device/tag-close-2.svg" alt="Tag close" />
+                  </a>
+                </li>
+                <li>
+                  <span class="tag">Carestream</span>
+                  <a href="javascript:;" class="tag-close">
+                    <img src="../../../../ng1/images/device/tag-close-2.svg" alt="Tag close" />
+                  </a>
+                </li>
+                <li>
+                  <span class="tag">Server Cleardent</span>
+                  <a href="javascript:;" class="tag-close">
+                    <img src="../../../../ng1/images/device/tag-close-2.svg" alt="Tag close" />
+                  </a>
+                </li>
+                <li>
+                  <span class="tag">SQL Master</span>
+                  <a href="javascript:;" class="tag-close">
+                    <img src="../../../../ng1/images/device/tag-close-2.svg" alt="Tag close" />
+                  </a>
+                </li>
+                <li>
+                  <span class="tag">Server Exchange Server</span>
+                  <a href="javascript:;" class="tag-close">
+                    <img src="../../../../ng1/images/device/tag-close-2.svg" alt="Tag close" />
+                  </a>
+                </li>
+                <li>
+                  <span class="tag">DNS</span>
+                  <a href="javascript:;" class="tag-close">
+                    <img src="../../../../ng1/images/device/tag-close-2.svg" alt="Tag close" />
+                  </a>
+                </li>
+                <li>
+                  <span class="tag">SQL</span>
+                  <a href="javascript:;" class="tag-close">
+                    <img src="../../../../ng1/images/device/tag-close-2.svg" alt="Tag close" />
+                  </a>
+                </li>
+                <li>
+                  <span class="tag">FIle Server</span>
+                  <a href="javascript:;" class="tag-close">
+                    <img src="../../../../ng1/images/device/tag-close-2.svg" alt="Tag close" />
+                  </a>
+                </li>
+                <li>
+                  <span class="tag">Support Files</span>
+                  <a href="javascript:;" class="tag-close">
+                    <img src="../../../../ng1/images/device/tag-close-2.svg" alt="Tag close" />
+                  </a>
+                </li>
+                <li>
+                  <span class="tag">Carestream</span>
+                  <a href="javascript:;" class="tag-close">
+                    <img src="../../../../ng1/images/device/tag-close-2.svg" alt="Tag close" />
+                  </a>
+                </li>
+                <li>
+                  <span class="tag">Server Cleardent</span>
+                  <a href="javascript:;" class="tag-close">
+                    <img src="../../../../ng1/images/device/tag-close-2.svg" alt="Tag close" />
+                  </a>
+                </li>
+                <li>
+                  <span class="tag">SQL Master</span>
+                  <a href="javascript:;" class="tag-close">
+                    <img src="../../../../ng1/images/device/tag-close-2.svg" alt="Tag close" />
+                  </a>
+                </li>
+                <li>
+                  <span class="tag">Carestream</span>
+                  <a href="javascript:;" class="tag-close">
+                    <img src="../../../../ng1/images/device/tag-close-2.svg" alt="Tag close" />
+                  </a>
+                </li>
+                <li>
+                  <span class="tag">Server Cleardent</span>
+                  <a href="javascript:;" class="tag-close">
+                    <img src="../../../../ng1/images/device/tag-close-2.svg" alt="Tag close" />
+                  </a>
+                </li>
+                <li>
+                  <span class="tag">SQL Master</span>
+                  <a href="javascript:;" class="tag-close">
+                    <img src="../../../../ng1/images/device/tag-close-2.svg" alt="Tag close" />
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="dashboard-col col-50 recent-activity">
+              <h2>Recent Activity</h2>
+              <div class="activity-wrapper">
+                <ul class="list-unstyled">
+                  <li>
+                    <div class="activity-name">
+                      <h5>Computer rebooted</h5><span class="time-by">24min ago</span>
+                    </div>
+                    <span class="added-by">by admin</span>
+                  </li>
+                  <li>
+                    <div class="activity-name">
+                      <h5>Window updates installed</h5><span class="time-by">30min ago</span>
+                    </div>
+                    <span class="added-by">by guest</span>
+                  </li>
+                  <li>
+                    <div class="activity-name">
+                      <h5>Computer Formated</h5><span class="time-by">27 Jun, 2019</span>
+                    </div>
+                    <span class="added-by">by admin</span>
+                  </li>
+                  <li>
+                    <div class="activity-name">
+                      <h5>User logon</h5><span class="time-by">26 Jun, 2019</span>
+                    </div>
+                    <span class="added-by">by Sam</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="load-more">
+                <a href="javascript:;">Load more Timeline</a>
+              </div>
+            </div>
+            <div class="dashboard-col notes">
+              <div class="col-title">
+                <h2>Notes</h2>
+                <a href="#javascript:;" class="static-link" (click)="create=!create">+Add Notes</a>
+              </div>
+                <ul class="list-unstyled">
+                    <li  (click)="editNote=!editNote">
+                      <a href="javascript:;" class="attashmnets"><img src="../../../../ng1/images/device/attachment-12.svg" alt="attachment" /></a>
+                      <h5>System Credentials</h5>
+                      <p>Duis aute irure dolor in reprehenderit in voluptate velit ess…</p>
+                      <div class="small-tag">
+                        <a href="javascript:;">Agent</a>
+                        <a href="javascript:;">Credentials</a>
+                      </div>
+                      <a href="javascript:;" class="more-link">+2 more</a>
+                      <div class="notes-by">
+                          <figure>
+                            <img src="../../../../ng1/images/device/user.jpg" alt="user" />
+                          </figure>
+                          <div class="other-info">
+                              <span class="name">Alberta Stanley</span>
+                              <span class="date">24 Mar 2020</span>
+                          </div>
+                      </div>
+                    </li>
+                    <li (click)="editNote=!editNote">
+                      <h5>System Credentials</h5>
+                      <p>Duis aute irure dolor in reprehenderit in voluptate velit ess…</p>
+                      <div class="small-tag">
+                        <a href="javascript:;">Agent</a>
+                        <a href="javascript:;">Credentials</a>
+                      </div>
+                      <a href="javascript:;" class="more-link">+2 more</a>
+                      <div class="notes-by">
+                          <figure>
+                            <img src="../../../../ng1/images/device/user.jpg" alt="user" />
+                          </figure>
+                          <div class="other-info">
+                              <span class="name">Alberta Stanley</span>
+                              <span class="date">24 Mar 2020</span>
+                          </div>
+                      </div>
+                    </li>
+                    <li (click)="editNote=!editNote">
+                      <h5>System Credentials</h5>
+                      <p>Duis aute irure dolor in reprehenderit in voluptate velit ess…</p>
+                      <div class="small-tag">
+                        <a href="javascript:;">Agent</a>
+                        <a href="javascript:;">Credentials</a>
+                      </div>
+                      <a href="javascript:;" class="more-link">+2 more</a>
+                      <div class="notes-by">
+                          <figure>
+                            <img src="../../../../ng1/images/device/user.jpg" alt="user" />
+                          </figure>
+                          <div class="other-info">
+                              <span class="name">Alberta Stanley</span>
+                              <span class="date">24 Mar 2020</span>
+                          </div>
+                      </div>
+                    </li>
+                    <li (click)="editNote=!editNote">
+                      <h5>System Credentials</h5>
+                      <p>Duis aute irure dolor in reprehenderit in voluptate velit ess…</p>
+                      <div class="small-tag">
+                        <a href="javascript:;">Agent</a>
+                        <a href="javascript:;">Credentials</a>
+                      </div>
+                      <a href="javascript:;" class="more-link">+2 more</a>
+                      <div class="notes-by">
+                          <figure>
+                            <img src="../../../../ng1/images/device/user.jpg" alt="user" />
+                          </figure>
+                          <div class="other-info">
+                              <span class="name">Alberta Stanley</span>
+                              <span class="date">24 Mar 2020</span>
+                          </div>
+                      </div>
+                    </li>
+                    <li (click)="editNote=!editNote">
+                      <h5>System Credentials</h5>
+                      <p>Duis aute irure dolor in reprehenderit in voluptate velit ess…</p>
+                      <div class="small-tag">
+                        <a href="javascript:;">Agent</a>
+                        <a href="javascript:;">Credentials</a>
+                      </div>
+                      <a href="javascript:;" class="more-link">+2 more</a>
+                      <div class="notes-by">
+                          <figure>
+                            <img src="../../../../ng1/images/device/user.jpg" alt="user" />
+                          </figure>
+                          <div class="other-info">
+                              <span class="name">Alberta Stanley</span>
+                              <span class="date">24 Mar 2020</span>
+                          </div>
+                      </div>
+                    </li>
+                    <li (click)="editNote=!editNote">
+                      <h5>System Credentials</h5>
+                      <p>Duis aute irure dolor in reprehenderit in voluptate velit ess…</p>
+                      <div class="small-tag">
+                        <a href="javascript:;">Agent</a>
+                        <a href="javascript:;">Credentials</a>
+                      </div>
+                      <a href="javascript:;" class="more-link">+2 more</a>
+                      <div class="notes-by">
+                          <figure>
+                            <img src="../../../../ng1/images/device/user.jpg" alt="user" />
+                          </figure>
+                          <div class="other-info">
+                              <span class="name">Alberta Stanley</span>
+                              <span class="date">24 Mar 2020</span>
+                          </div>
+                      </div>
+                    </li>
+                </ul>
+          </div>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+
+
+      <!-- sidebar popup Task -->
+<div class="sidebar-popup note" [class.opened]="create">
+    <!-- header -->
+    <div class="sidebar-header">
+      <div class="sidebar-title">
+        <div class="h1">Create Note</div>
+      </div>
+       <a class="close" href="javascript:;" (click)="create=!create"><img src="../../../../ng1/images/device/close.svg" alt="close"/></a>
+      </div>
+    <div class="middle-content">
+      <form method="POST">
+          <div class="f-row">
+              <div class="f-col col-100">
+                  <label>Note Subject</label>
+                  <div class="form-row">
+                    <input type="text" placeholder="Write Ticket subject" class="form-input" />
+                  </div>
+              </div>
+              <div class="f-col col-100">
+                <label>Description</label>
+                <div class="form-row">
+                  <textarea class="form-input" placeholder="Write Description here…"></textarea>
+                </div>
+              </div>
+              <div class="f-col col-100">
+                <label>Add Tags</label>
+                <div class="form-row">
+                  <input type="text" class="form-input" placeholder="Start typing tags. Hit tab, comma, or return to complete." />
+                </div>
+              </div>
+              <div class="f-col col-100">
+                 <!-- File Uploader -->
+                  <div class="upload-box">
+                        <div class="upload-box-content">
+                          <div class="drop-container" ngFileDrop [options]="options" (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput">
+                            <p>
+                              <img src="../../../../ng1/images/device/attachment.svg" alt="attach" />
+                              <span>Drag your file here or</span> 
+                              <label class="upload-button">
+                                <input type="file" ngFileSelect [options]="options" (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput" multiple> 
+                                Upload manually
+                              </label>
+                            </p>
+                          </div>
+                          <div class="upload-item">
+                            <div class="add-file-raw" style="display: none;">
+                              <a href="javascript:;" class="add-files" title="Add Files">
+                                <img src="../../../../ng1/images/device/addmore.svg" alt="Add More" />
+                              </a>
+                            </div>
+                            <div class="upload-item-content" *ngFor="let f of files; let i = index;">
+                              
+                                  <span class="f-name">{{ f.name }}</span>
+                                  <i class="ionicon ion-close-round" (click)="cancelUpload(f.id)" title="Close Tag"></i>
+                               
+                              <!-- File Upload progress content -->
+                              <!-- <div class="progress-content">
+                                <div class="progress">
+                                  <span class="bar" [style.width]="f?.progress?.data?.percentage + '%'" [class.is-done]="f?.progress?.data?.percentage === 100"></span>
+                                </div>
+                              </div> -->
+                              
+                              <!-- <div class="progress-text-content">
+                                <span class="progress-text" [class.is-done]="f?.progress?.data?.percentage === 100">
+                                  <span>{{ f.progress?.data?.percentage }}% </span>
+                                  <span *ngIf="f.progress?.data?.percentage !== 100">Uploading...</span>
+                                  <span *ngIf="f.progress?.data?.percentage === 100">Done</span>
+                                </span>
+                                <span class="speed-and-eta-text" *ngIf="f.progress?.data?.percentage !== 0 && f.progress?.data?.percentage !== 100">
+                                  <span>{{ f.progress?.data?.speedHuman }} </span>
+                                  <span>ETA {{ f.progress?.data?.etaHuman }}</span>
+                                </span>
+                              </div> -->
+                            </div>
+                          </div>
+                        </div>
+                  </div>
+                  <!-- End of File Uploader -->
+              </div>
+          </div>
+          <div class="btn-row">
+            <input type="submit" value="Create Note" class="btn btn-primary" />
+            <a href="javascrip:;" class="btn btn-secondary" (click)="create=!create">Cancel</a>
+          </div>
+      </form>
+    </div> 
+  </div>
+  <div class="sidebar-popup note" [class.opened]="editNote">
+    <!-- header -->
+    <div class="sidebar-header">
+      <div class="sidebar-title">
+        <div class="h1">Edit Note</div>
+      </div>
+       <a class="close" href="javascript:;" (click)="editNote=!editNote"><img src="../../../../ng1/images/device/close.svg" alt="close"/></a>
+      </div>
+    <div class="middle-content">
+      <form method="POST">
+          <div class="f-row">
+              <div class="f-col col-100">
+                  <label>Note Subject</label>
+                  <div class="form-row">
+                    <input type="text" value="Driver Install guide" class="form-input" />
+                  </div>
+              </div>
+              <div class="f-col col-100">
+                <label>Description</label>
+                <div class="form-row">
+                  <textarea class="form-input" value="There are many variations of passages of Lorem Ipsum available, but themajority have suffered alteration in some form, by injected humour.">
+                  </textarea>
+                </div>
+              </div>
+              <div class="f-col col-100">
+                <label>Add Tags</label>
+                <div class="form-row">
+                  <input type="text" class="form-input" placeholder="Start typing tags. Hit tab, comma, or return to complete." />
+                </div>
+              </div>
+              <div class="f-col col-100">
+                 <!-- File Uploader -->
+                  <div class="upload-box">
+                        <div class="upload-box-content">
+                          <div class="drop-container" ngFileDrop [options]="options" (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput">
+                            <p>
+                              <img src="../../../../ng1/images/device/attachment.svg" alt="attach" />
+                              <span>Drag your file here or</span> 
+                              <label class="upload-button">
+                                <input type="file" ngFileSelect [options]="options" (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput" multiple> 
+                                Upload manually
+                              </label>
+                            </p>
+                          </div>
+                          <div class="upload-item">
+                            <div class="add-file-raw" style="display: none;">
+                              <a href="javascript:;" class="add-files" title="Add Files">
+                                <img src="../../../../ng1/images/device/addmore.svg" alt="Add More" />
+                              </a>
+                            </div>
+                            <div class="upload-item-content" *ngFor="let f of files; let i = index;">
+                              
+                                  <span class="f-name">{{ f.name }}</span>
+                                  <i class="ionicon ion-close-round" (click)="cancelUpload(f.id)" title="Close Tag"></i>
+                               
+                              <!-- File Upload progress content -->
+                              <!-- <div class="progress-content">
+                                <div class="progress">
+                                  <span class="bar" [style.width]="f?.progress?.data?.percentage + '%'" [class.is-done]="f?.progress?.data?.percentage === 100"></span>
+                                </div>
+                              </div> -->
+                              
+                              <!-- <div class="progress-text-content">
+                                <span class="progress-text" [class.is-done]="f?.progress?.data?.percentage === 100">
+                                  <span>{{ f.progress?.data?.percentage }}% </span>
+                                  <span *ngIf="f.progress?.data?.percentage !== 100">Uploading...</span>
+                                  <span *ngIf="f.progress?.data?.percentage === 100">Done</span>
+                                </span>
+                                <span class="speed-and-eta-text" *ngIf="f.progress?.data?.percentage !== 0 && f.progress?.data?.percentage !== 100">
+                                  <span>{{ f.progress?.data?.speedHuman }} </span>
+                                  <span>ETA {{ f.progress?.data?.etaHuman }}</span>
+                                </span>
+                              </div> -->
+                            </div>
+                          </div>
+                        </div>
+                  </div>
+                  <!-- End of File Uploader -->
+              </div> 
+          </div>
+          <div class="btn-row">
+            <input type="submit" value="Edit Note" class="btn btn-primary" />
+            <a href="javascrip:;" class="btn btn-secondary" (click)="editNote=!editNote">Cancel</a>
+          </div>
+      </form>
+    </div> 
+  </div>
+  
+  </div>
+  

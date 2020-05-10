@@ -12,6 +12,7 @@ import { HardwareService } from '../_services/hardware.service';
 import { CONFIGCONSTANTS } from '../config/app-constants';
 import { Router } from '@angular/router';
 import { Subject } from "rxjs";
+declare var $:any;
 
 @Component({
   selector: 'app-software',
@@ -66,6 +67,12 @@ export class SoftwareComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    // if (window.innerWidth <= 1440) {
+    //   $('main').css('margin-right', '64px')
+    // } else {
+    //   $('main').css('margin-right', '352px')
+    // }
+    
     if(localStorage.getItem('type') === 'printer') {
       this.router.navigate(['/ng2/device/dashboard']);
     }

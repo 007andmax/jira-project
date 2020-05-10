@@ -8,7 +8,7 @@ import { ExcelService } from '../_services/download_csv.service';
 import { CommonServices } from '../_services/common.service';
 import { CONFIGCONSTANTS } from '../config/app-constants';
 import { Router } from '@angular/router';
-
+declare var $:any;
 @Component({
   selector: 'app-hardware',
   templateUrl: './hardware.component.html',
@@ -51,6 +51,8 @@ export class HardwareComponent implements OnInit {
          private excelService: ExcelService) {}
 
   ngOnInit() {
+
+    // $('main').css('margin-right', '64px')
     if(localStorage.getItem('type') === 'printer') {
       this.router.navigate(['/ng2/device/dashboard']);
     }

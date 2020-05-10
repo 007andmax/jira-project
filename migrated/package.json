@@ -68,7 +68,8 @@
     "stompjs": "^2.3.3",
     "tslib": "^1.9.0",
     "ui-select": "^0.19.8",
-    "zone.js": "0.9.0"
+    "zone.js": "0.9.0",
+    "ng-circle-progress": "^1.5.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.13.0",
