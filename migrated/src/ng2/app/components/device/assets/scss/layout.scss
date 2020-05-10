@@ -18,6 +18,9 @@ main {
     @media  only screen and (max-width:1440px){
         margin-right: 64px;
     }
+    &.mainSidebar{
+        margin-right: 64px;
+    }
 }
 section{float:left;padding:70px 0px;width:100%;}
 img{display:inline-block;max-width:100%;}
@@ -1228,8 +1231,11 @@ table {
     }
     td {
         padding: 9px 5px;
-        word-break: break-word;
+        // word-break: break-word;
         font-size: 12px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
         h5{
             font-size: 12px;
         }
@@ -1259,22 +1265,22 @@ table {
     }
     
     .s-name {
-        width: 35%;
+        width: 35% !important;
         padding-left: 0;
     }
     .pulisher {
-        width: 20%;
+        width: 20% !important;
     }
     .version {
-        width: 15%;
+        width: 15% !important;
     }
     
     .install {
-        width: 15%;
+        width: 15% !important;
     }
     
     .c-version {
-        width: 15%;
+        width: 15% !important;
     }
     .cmn-checkbox {
         label{
@@ -1293,6 +1299,7 @@ table {
     &.cmn-tab-head {
         width: 100%;
         border-collapse: collapse;
+        table-layout: fixed;
         th {
             padding-top: 0;
         }
