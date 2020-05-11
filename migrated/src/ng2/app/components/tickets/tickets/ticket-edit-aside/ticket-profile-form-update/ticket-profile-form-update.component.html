@@ -15,7 +15,7 @@
     </div>
     <div class="files-list">
       <div class="single-file" *ngFor="let file of files; let i = index">
-       
+
         <div class="info">
           <h4 class="name">
             {{ file?.name }}
@@ -29,18 +29,18 @@
        <!-- <img src="assets/img/dnd/ic-delete-file.svg" class="delete" width="20px" alt="file" (click)="deleteFile(i)">-->
       </div>
     </div>
-    
-  </div> 
-  
+
+  </div>
+
   <app-ticket-profile-form-update-products (changeProducts)="onChangeProducts($event)" *ngIf="tab === 'PRODUCT'"></app-ticket-profile-form-update-products>
 
- 
+
   <app-ticket-profile-form-update-services  (changeServices)="onChangeServices($event)" [ticketProfile]="ticketProfile"  *ngIf="tab === 'SERVICE'"></app-ticket-profile-form-update-services>
   </div>
 </div>
 
 <div class="qt-aside__buttons jc-sb ai-c">
-  <div class="d-f">
+  <div class="d-f ticket-edit-aside-bottom-part-users-attack">
     <div class="ticket-edit-aside__attach icon__attachment">
       <input type="file" #fileDropRef id="fileDropRef" multiple (change)="fileBrowseHandler($event.target.files)" />
     </div>
@@ -49,11 +49,11 @@
 
     <div class="ticket-edit-aside__users-linked d-f">
       <ng-template class="assigned-ticket-user" ngFor let-user [ngForOf]="lisUpdateUser" let-i="index" [ngForTrackBy]="trackByIndex">
-        <div class="ticket-edit-aside__users-linked-author" *ngIf="user.accountType === 'CLIENT' && !showAddUpdateUser" [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"   [ngStyle]="{'background': ticketsListService.getStyleAvatar(user),'background-size': 'cover'}"></div> 
+        <div class="ticket-edit-aside__users-linked-author" *ngIf="user.accountType === 'CLIENT' && !showAddUpdateUser" [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"   [ngStyle]="{'background': ticketsListService.getStyleAvatar(user),'background-size': 'cover'}"></div>
       </ng-template>
       <div class="ticket-edit-aside__users-linked-divider" *ngIf="!showAddUpdateUser"></div>
       <ng-template class="assigned-ticket-user" ngFor let-user [ngForOf]="lisUpdateUser" let-i="index" [ngForTrackBy]="trackByIndex">
-        <div class="ticket-edit-aside__users-linked-author" *ngIf="user.accountType === 'TECH' && !showAddUpdateUser" [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"   [ngStyle]="{'background': ticketsListService.getStyleAvatar(user),'background-size': 'cover'}"></div> 
+        <div class="ticket-edit-aside__users-linked-author" *ngIf="user.accountType === 'TECH' && !showAddUpdateUser" [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"   [ngStyle]="{'background': ticketsListService.getStyleAvatar(user),'background-size': 'cover'}"></div>
       </ng-template>
   <!--    <div class="ticket-edit-aside__users-linked-author selected" style="background-image: url(https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)"></div>
       <div class="ticket-edit-aside__users-linked-divider"></div>

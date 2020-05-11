@@ -1,8 +1,8 @@
 <div ngbDropdown>
   <div class="qt-modal-circle-button more-vertical-ng2"  ngbDropdownToggle></div>
-    <div ngbDropdownMenu  >
-      
-      <ul class="" style="width: 179px; overflow: visible;" role="menu">
+    <div ngbDropdownMenu class="dropdown-menu-qt">
+
+      <ul class="" style="width: 179px; overflow: visible;" role="menu" class="dropdown-qt">
       <li *ngIf="ticketsPermissionsService.isActionVisible('claim_ticket', ticketProfile,null,null)">
           <a tabindex="-1" href="javascript:void(0)" (click)="claimTicket()">Claim Ticket</a>
         </li>
@@ -36,8 +36,8 @@
              (click)="moveIntoSpam()">Mark as Spam</a>
           <a tabindex="-1" class="spam-user" href="javascript:void(0)" *ngIf="currentUser && !currentUser.isOwner"
              (click)="moveIntoSpam()">Report as Spam</a>
-        </li> 
+        </li>
       </ul>
     </div>
-   
+
 </div>

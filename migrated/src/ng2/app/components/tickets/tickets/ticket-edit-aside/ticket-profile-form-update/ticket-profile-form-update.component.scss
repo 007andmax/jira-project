@@ -133,9 +133,20 @@
      }
   }
 
-
-
-
 .update-ticket-btn {
   margin-right: 12px;
+}
+
+.ticket-edit-aside-bottom-part-users-attack {
+  width: 100%;
+  /deep/ app-add-assigned-user {
+    margin-right: 5px;
+    margin-top: 5px;
+    width: 100%;
+  }
+
+
+  /deep/ .ticket-edit-user-tags {
+    padding: 0;
+  }
 }
