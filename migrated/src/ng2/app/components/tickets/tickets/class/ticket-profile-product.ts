@@ -42,4 +42,30 @@ export class TicketProfileProduct {
             }
         }
      }
+     public setUser(data) {
+        this.user = data;
+    }
+     public setDate(data) {
+        this.date = data;
+    }
+     public setCompleted (data) {
+        this.completed = data;
+    }
+    public getDateForUpdate(id) {
+        let user = (!this.user) ? {id:""} : this.user;
+        return {
+            productExpense: {
+                completed: this.completed,
+                date: this.date,
+                discountAmount: this.discountAmount,
+                discountType: this.discountType,
+                id: this.id,
+                item: this.item,
+                quantity: this.quantity,
+                serialNumber: null,
+                user: user,
+            },
+            ticketUpdateId: id
+        }
+    }
 }

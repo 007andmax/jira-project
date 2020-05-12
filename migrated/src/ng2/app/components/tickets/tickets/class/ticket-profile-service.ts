@@ -52,6 +52,7 @@ export class TicketProfileService {
         this.completed = data;
     }
     public getDateForUpdate(id) {
+        let user = (!this.user) ? {id:""} : this.user;
         return {
             serviceExpense: {
                 completed: this.completed,
@@ -64,7 +65,7 @@ export class TicketProfileService {
                 id: this.id,
                 item: this.item,
                 quantity: this.quantity,
-                user: this.user,
+                user: user,
             },
             ticketUpdateId: id
         }

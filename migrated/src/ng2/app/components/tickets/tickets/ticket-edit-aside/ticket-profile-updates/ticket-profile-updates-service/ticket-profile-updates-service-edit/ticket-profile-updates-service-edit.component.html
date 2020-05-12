@@ -32,17 +32,7 @@
     <span  class="tag__modern ticket-updates__service-tag-completed" *ngIf="!service.completed && service.date" [textContent]="'Due date - ' + getDate(service.date)"></span>
 
   </div>
-  <div ngbDropdown>
-  <div class="ticket-updates__more icon__more" id="dropdownBasic1"
-  ngbDropdownToggle></div>
-  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-    <button ngbDropdownItem *ngIf="!showArchivedUsers" (click)="edit()"><i class="icn-16 edit-grey-ng2"></i>Edit
-    </button>
-
-    <button ngbDropdownItem
-            (click)="removeService(i)"><i class="icn-16 archive-grey-ng2"></i>Delete
-    </button>
-
-  </div>
-</div>
+  <button ngbDropdownItem
+  (click)="saveService()"><i class="icn-16 archive-grey-ng2"></i>save
+</button>
 </div>

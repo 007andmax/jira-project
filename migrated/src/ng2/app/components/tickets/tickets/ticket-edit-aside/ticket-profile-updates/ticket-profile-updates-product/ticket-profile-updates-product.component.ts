@@ -35,12 +35,5 @@ export class TicketProfileUpdatesProductComponent implements OnInit {
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
     modalRef.componentInstance.message = `The ticket update containing a service will become inaccessible. Continue with permanent deletion?`;
   }
-  removeProduct(i) {
-    this.ticketStateService.setUpdateForRemove(this.update);
-    this.ticketStateService.setProductForRemove(this.update.products[i]);
-    this.confirmStateService.setConfirmAction(REMOVE_UPDATE_TICKET_PRODUCT);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
-    modalRef.componentInstance.message = `Do you want to remove the item?`;
-    
-  }
+
 }

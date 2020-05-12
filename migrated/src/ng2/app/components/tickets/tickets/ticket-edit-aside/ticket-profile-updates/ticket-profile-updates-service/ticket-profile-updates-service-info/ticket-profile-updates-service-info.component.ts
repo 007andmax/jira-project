@@ -68,9 +68,7 @@ export class TicketProfileUpdatesServiceInfoComponent implements OnInit {
     console.log("data", data);
     if (data.length === 0) this.service.setUser({id: ""});
     if (data.length === 1) this.service.setUser(data[0]);
-    this.ticketsService.updateExpense(this.service.getDateForUpdate(this.update.id)).subscribe(data => {
-
-    })
+  this.updateService();
   }
   getUsersForAssign() {
     let userList = this.usersStateService.getAllUsers().sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?

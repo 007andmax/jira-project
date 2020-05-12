@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { TicketProfileUpdate } from '../../../../class/ticket-profile-update';
 import { TicketsListService } from '../../../../services/tickets-list.service';
 import { ConfirmStateService } from 'src/ng2/app/components/shared/confirm/services/confirm-state.service';
@@ -20,6 +20,7 @@ export class TicketProfileUpdatesServiceEditComponent implements OnInit {
   @Input() service: TicketProfileService;
   @Input() update: TicketProfileUpdate;
   @ViewChild('editTimePicker') editTimePicker: TicketProfileUpdatesServiceTimepickerComponent;
+  @Output() onEdit = new EventEmitter();
   currentCompany = null;
   minutes: number = 0;
   hours: number = 0;
@@ -44,8 +45,8 @@ export class TicketProfileUpdatesServiceEditComponent implements OnInit {
     var timeInMinutes = this.service.quantity * 60;
     this.hours = Math.floor(timeInMinutes / 60);
     this.minutes = Math.round(timeInMinutes - (this.hours * 60));
-this.elRef.nativeElement.querySelector('#service-description').value = this.editService.description;
-    
+    this.elRef.nativeElement.querySelector('#service-description').value = this.editService.description;
+
     console.log("this.service.quantity", this.service.quantity);
     console.log("this.hours", this.hours);
     console.log("this.minutes", this.minutes);
@@ -108,6 +109,9 @@ this.elRef.nativeElement.querySelector('#service-description').value = this.edit
       minutes = Math.round(timeInMinutes - (hours * 60));
     return `${(hours < 10) ? '0' + hours : hours} : ${(minutes < 10) ? '0' + minutes : minutes}`
 
+  }
+  saveService() {
+    this.onEdit.emit(null);
   }
   remove() {
     this.ticketStateService.setUpdateForRemove(this.update);

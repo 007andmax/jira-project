@@ -227,6 +227,9 @@ import { TicketProfileUpdatesServiceTimepickerComponent } from './components/tic
 import { TicketProfileUpdatesServiceInfoComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service/ticket-profile-updates-service-info/ticket-profile-updates-service-info.component';
 import { TicketProfileUpdatesServiceEditComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service/ticket-profile-updates-service-edit/ticket-profile-updates-service-edit.component';
 import { TicketProfileUpdatesServiceItemComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service/ticket-profile-updates-service-item/ticket-profile-updates-service-item.component';
+import { TicketProfileUpdatesProductItemComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-product/ticket-profile-updates-product-item/ticket-profile-updates-product-item.component';
+import { TicketProfileUpdatesProductInfoComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-product/ticket-profile-updates-product-info/ticket-profile-updates-product-info.component';
+import { TicketProfileUpdatesProductEditComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-product/ticket-profile-updates-product-edit/ticket-profile-updates-product-edit.component';
  
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
@@ -541,7 +544,13 @@ angular.module('quicktech')
    
     TicketProfileUpdatesServiceEditComponent,
    
-    TicketProfileUpdatesServiceItemComponent
+    TicketProfileUpdatesServiceItemComponent,
+   
+    TicketProfileUpdatesProductItemComponent,
+   
+    TicketProfileUpdatesProductInfoComponent,
+   
+    TicketProfileUpdatesProductEditComponent
   ],
   imports: [
     BrowserModule,
