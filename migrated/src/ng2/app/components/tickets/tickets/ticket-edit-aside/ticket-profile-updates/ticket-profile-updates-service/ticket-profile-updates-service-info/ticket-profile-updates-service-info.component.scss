@@ -188,6 +188,12 @@
       line-height: 1.33;
       margin-top: 3px;
       margin-left: 28px;
+      pre {
+        margin: 0;
+        font-family: 'Graphik-Regular', sans-serif;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
     }
 
     &__service-tag-completed {
@@ -200,5 +206,5 @@
       margin-right: 32px;
     }
 
-    // /deep/ 
+    // /deep/
   }

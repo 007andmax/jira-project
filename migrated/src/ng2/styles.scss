@@ -2316,3 +2316,58 @@ input.ng-invalid.is-invalid {
 .igx-overlay__wrapper {
   z-index: 9999 !important;
 }
+
+.divider-point {
+  width: 4px;
+  height: 4px;
+  background-color: #9ca5b6;
+  border-radius: 50%;
+  margin: 2px 6px;
+  display: inline-block;
+}
+//  ticket edit aside
+.ticket-updates__service-tag-completed {
+  margin-left: auto;
+  margin-right: 0 !important;
+  margin-top: 8px;
+  display: flex;
+  width: fit-content;
+  margin-bottom: -28px;
+}
+.ticket-updates__add-note {
+  color: #9ca5b6;
+}
+
+.dropdown-menu-qt {
+  overflow: visible;
+  ul {
+    list-style: none;
+    padding: 6px 0;
+    margin: 0;
+  }
+  li {
+    padding: 6px 17px;
+    color: #4f5f79;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    i {
+      margin-right: 3px;
+    }
+    a {
+      color: #4f5f79;
+    }
+    &:hover {
+      background-color: #edf2f6;
+    }
+  }
+}
+
+.ticket-updates__photo-people {
+  text-align: center;
+  color: white;
+}
+.ticket-updates__author {
+  font-weight : 600;
+  line-height: 2.5;
+}

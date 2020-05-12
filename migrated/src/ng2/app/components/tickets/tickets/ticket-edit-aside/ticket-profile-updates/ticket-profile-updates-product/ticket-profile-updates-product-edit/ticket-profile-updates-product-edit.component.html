@@ -10,9 +10,9 @@
       <div class="ticket-updates__done-status icon__task-pending"></div>
       <app-product-list [editItem]="editProduct.item" class="product-item__prodect-list" [itemList]="productList"
       (selectedProductItem)="onChangeProduct($event)"></app-product-list>
-   
-      <input  [(ngModel)]="editProduct.item.sale"   /> 
-     <input  [(ngModel)]="editProduct.quantity"   /> 
+
+      <input  [(ngModel)]="editProduct.item.sale"   />
+     <input  [(ngModel)]="editProduct.quantity"   />
       <div class="ticket-updates__ticket-total" [textContent]="'$' + getTotal(editProduct.item.sale,editProduct.quantity)"></div>
 
       <div class="ticket-updates__date-icon icon__assign-date"></div>
@@ -21,20 +21,19 @@
     </div>
     <span  class="tag__modern ticket-updates__service-tag-completed" *ngIf="editProduct.completed" [textContent]="'Completed on ' + getDate(editProduct.date)"></span>
     <span  class="tag__modern ticket-updates__service-tag-completed" *ngIf="!editProduct.completed && editProduct.date" [textContent]="'Due date - ' + getDate(editProduct.date)"></span>
- 
- 
+
+
   </div>
   <div ngbDropdown>
     <div class="ticket-updates__more icon__more" id="dropdownBasic1"
     ngbDropdownToggle></div>
-    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-      <button ngbDropdownItem *ngIf="!showArchivedUsers" (click)="edit()"><i class="icn-16 edit-grey-ng2"></i>Edit
-      </button>
-     
-      <button ngbDropdownItem  
-              (click)="removeProduct(i)"><i class="icn-16 archive-grey-ng2"></i>Delete
-      </button>
-      
+    <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="dropdown-menu-qt">
+
+      <ul>
+        <li ngbDropdownItem *ngIf="!showArchivedUsers" (click)="edit()"><i class="icn-16 edit-grey-ng2"></i>Edit</li>
+        <li ngbDropdownItem (click)="removeProduct(i)"><i class="icn-16 archive-grey-ng2"></i>Delete</li>
+      </ul>
+
     </div>
   </div>
 </div>

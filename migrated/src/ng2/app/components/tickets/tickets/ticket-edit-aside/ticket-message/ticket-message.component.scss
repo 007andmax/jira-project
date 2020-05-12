@@ -1,8 +1,7 @@
 .ticket-notify {
     padding: 0 32px;
     margin-top: 40px;
-    margin-bottom: 112px;
-    
+
     &__item {
       border-radius: 10px;
       box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
@@ -12,7 +11,7 @@
       display: flex;
       margin-bottom: 16px;
     }
-  
+
     &__item-icon {
       width: 40px;
       height: 40px;
@@ -20,13 +19,13 @@
       margin-right: 10px;
       border-radius: 50%;
     }
-  
+
     &__item-title {
       font-size: 13px;
       line-height: 1.54;
     }
-  
-  
+
+
     &__item-btn {
       padding: 14px 20px;
       white-space: nowrap;
@@ -40,14 +39,14 @@
       border: none;
       margin-left: 16px;
     }
-  
+
     &__item-desc-icon {
       width: 16px;
       height: 16px;
       min-width: 16px;
       margin-right: 5px;
     }
-  
+
     &__item-desc-text {
       font-size: 12px;
       line-height: 1.33;
@@ -55,4 +54,3 @@
       margin-top: 2px;
     }
   }
-  

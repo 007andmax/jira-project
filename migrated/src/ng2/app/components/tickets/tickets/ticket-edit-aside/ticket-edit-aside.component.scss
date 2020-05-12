@@ -541,7 +541,6 @@
 .ticket-notify {
   padding: 0 32px;
   margin-top: 40px;
-  margin-bottom: 112px;
 
   &__item {
     border-radius: 10px;
@@ -685,22 +684,4 @@
   z-index: 1;
 }
 
-/deep/ .dropdown-menu-qt {
-  overflow: visible;
-  ul {
-    list-style: none;
-    padding: 6px 0;
-    margin: 0;
-  }
-  li {
-    padding: 6px 17px;
-    color: #4f5f79;
-    font-size: 13px;
-    a {
-      color: #4f5f79;
-    }
-    &:hover {
-      background-color: #edf2f6;
-    }
-  }
-}
+
