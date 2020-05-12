@@ -4,12 +4,14 @@ import { TehUsersSateService } from './services/teh-users-sate.service';
 import { Subscription } from 'rxjs';
 import { RecurringTicketUser } from '../../tickets/recurring-tickets/interfaces/recurring-ticket-user';
 import { TechUserItem } from './class/tech-user-item';
-import { SINGLE_SELECT, MULTIPLE_SELECT } from 'src/ng2/app/const/users';
+import { SINGLE_SELECT, MULTIPLE_SELECT, RECURRING_TICEKTS } from 'src/ng2/app/const/users';
+import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 
 @Component({
   selector: 'app-teh-users',
   templateUrl: './teh-users.component.html',
-  styleUrls: ['./teh-users.component.scss']
+  styleUrls: ['./teh-users.component.scss'],
+  providers: [TicketsListService]
 })
 export class TehUsersComponent implements OnInit, OnDestroy {
   @Input('users')
@@ -23,6 +25,7 @@ export class TehUsersComponent implements OnInit, OnDestroy {
   @Input() selectedMode: string = MULTIPLE_SELECT;
   @Input() editUsers = [];
   @Input() editMode: boolean = false;
+  @Input() type: string = RECURRING_TICEKTS;
   users: Array<TechUserItem> = [];
   sub = new Subscription();
 
@@ -35,19 +38,21 @@ export class TehUsersComponent implements OnInit, OnDestroy {
   */
   constructor(private tehService: TehUsersService,
     private tehState: TehUsersSateService,
+    public ticketsListService:TicketsListService
   ) { }
 
   /**
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-
-
-
     if (this.editMode) {
       this.usersList.forEach(item => {
         let index = this.editUsers.findIndex(user => user.id === item.id);
-        if (index > -1) item.selected = true;
+        if (index > -1) {
+          item.selected = true;
+          this.selectedUsers = [item];
+          console.log("this.selectedUsers",this.selectedUsers[0]);
+        } 
       })
     }
     this.onInitClearState();
