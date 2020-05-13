@@ -4,6 +4,7 @@ import { TicketProfileUpdate } from '../../../../class/ticket-profile-update';
 import { ProductService } from 'src/ng2/app/services/product/product.service';
 import { TicketsListService } from '../../../../services/tickets-list.service';
 import * as moment from 'moment';
+import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 
 @Component({
   selector: 'app-ticket-profile-updates-product-edit',
@@ -18,10 +19,11 @@ export class TicketProfileUpdatesProductEditComponent implements OnInit {
   public productList = [];
   editProduct: TicketProfileProduct;
   constructor(private productService: ProductService,
+    private ticketsService: TicketsService,
     public ticketsListService: TicketsListService) { }
 
   ngOnInit() {
-    this.editProduct = JSON.parse(JSON.stringify(this.product));
+    this.editProduct = new TicketProfileProduct(this.product);
     this.getItemListProducts();
   }
   public getTotal(price, quantity) {
@@ -41,7 +43,10 @@ export class TicketProfileUpdatesProductEditComponent implements OnInit {
     });
   }
   saveProduct() {
-    this.onEdit.emit(null);
+    this.ticketsService.updateExpense(this.editProduct.getDateForUpdate(this.update.id)).subscribe(data => {
+      this.onEdit.emit(null);
+     })
+ 
   }
   cancelProduct() {
     this.onEdit.emit(null);

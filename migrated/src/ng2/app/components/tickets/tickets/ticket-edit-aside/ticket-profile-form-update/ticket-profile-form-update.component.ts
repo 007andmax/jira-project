@@ -51,6 +51,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
 
   }
   update() {
+    console.log("this.ticketProfileFormUpdate",this.ticketProfileFormUpdate);
     if (this.tab === "NOTE") {
       if (!this.ticketProfileFormUpdate.isValidateNote()) return;
       this.ticketsService.updateTicket(this.ticketProfileFormUpdate.getDataForUpdateNote()).subscribe(data => {

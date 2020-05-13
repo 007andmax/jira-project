@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { TicketProfileUpdate } from '../../class/ticket-profile-update';
 import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 import { TicketProfile } from '../../class/ticket-profile';
@@ -6,19 +6,22 @@ import { NotificationStateService } from 'src/ng2/app/components/shared/notifica
 import { ConfirmStateService } from 'src/ng2/app/components/shared/confirm/services/confirm-state.service';
 import { REMOVE_UPDATE_TICKET, REMOVE_UPDATE_TICKET_SERVICE, REMOVE_UPDATE_TICKET_PRODUCT } from 'src/ng2/app/const/confirm';
 import { TicketStateService } from '../services/ticket-state.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-ticket-profile-updates',
   templateUrl: './ticket-profile-updates.component.html',
   styleUrls: ['./ticket-profile-updates.component.scss']
 })
-export class TicketProfileUpdatesComponent implements OnInit {
+export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
   @Input() updates: Array<TicketProfileUpdate>;
   @Input() ticketProfile: TicketProfile = new TicketProfile();
-  constructor(private ticketsService: TicketsService, 
+  sub: Subscription = new Subscription();
+  constructor(private ticketsService: TicketsService,
     private confirmStateService: ConfirmStateService,
-    private ticketStateService:TicketStateService,
+    private ticketStateService: TicketStateService,
     private notificationStateService: NotificationStateService, ) { }
+
 
   ngOnInit() {
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
@@ -32,19 +35,20 @@ export class TicketProfileUpdatesComponent implements OnInit {
         if (this.confirmStateService.getConfirmAction() === REMOVE_UPDATE_TICKET_PRODUCT) {
           this.removeProduct();
         }
-        
+
       }
     })
+    this.sub.add(getConfirm);
   }
   removeService() {
-    this.ticketsService.removeService(this.ticketProfile.id, this.ticketStateService.getUpdateForRemove().id,this.ticketStateService.getServiceForRemove().id).subscribe(data => {
- 
+    this.ticketsService.removeService(this.ticketProfile.id, this.ticketStateService.getUpdateForRemove().id, this.ticketStateService.getServiceForRemove().id).subscribe(data => {
+
 
     })
   }
   removeProduct() {
-    this.ticketsService.removeProduct(this.ticketProfile.id, this.ticketStateService.getUpdateForRemove().id,this.ticketStateService.getProductForRemove().id).subscribe(data => {
- 
+    this.ticketsService.removeProduct(this.ticketProfile.id, this.ticketStateService.getUpdateForRemove().id, this.ticketStateService.getProductForRemove().id).subscribe(data => {
+
 
     })
   }
@@ -53,5 +57,8 @@ export class TicketProfileUpdatesComponent implements OnInit {
       this.notificationStateService.oninitShowNotification(`The ticket update containing a note has been deleted`);
 
     })
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

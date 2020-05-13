@@ -10,6 +10,7 @@ import { ConfirmComponent } from 'src/ng2/app/components/shared/confirm/confirm.
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { TicketProfileService } from '../../../../class/ticket-profile-service';
 import { TicketProfileUpdatesServiceTimepickerComponent } from '../../ticket-profile-updates-service-timepicker/ticket-profile-updates-service-timepicker.component';
+import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 
 @Component({
   selector: 'app-ticket-profile-updates-service-edit',
@@ -34,10 +35,11 @@ export class TicketProfileUpdatesServiceEditComponent implements OnInit {
     private ticketStateService: TicketStateService,
     private companiesStateService: CompaniesStateService,
     private elRef: ElementRef,
+    private ticketsService: TicketsService,
     private modalService: NgbModal) { }
 
   ngOnInit() {
-    this.editService = JSON.parse(JSON.stringify(this.service));
+    this.editService = new TicketProfileService(this.service);
     this.currentCompany = this.companiesStateService.getCurrentCompany();
     this.quantity = JSON.parse(JSON.stringify(this.service.quantity));
     this.durationStart = this.service.durationStart;
@@ -111,7 +113,10 @@ export class TicketProfileUpdatesServiceEditComponent implements OnInit {
 
   }
   saveService() {
-    this.onEdit.emit(null);
+    this.ticketsService.updateExpense(this.editService.getDateForUpdate(this.update.id)).subscribe(data => {
+
+      this.onEdit.emit(null);
+    })
   }
   cancelService() {
     this.onEdit.emit(null);
