@@ -29,6 +29,8 @@ export class AddAssignedUserComponent implements OnInit {
   userCtrl = new FormControl();
  @Input() selectedUsers = [];
  @Input() userList = [];
+ @Input() placement = 'top-left';
+ 
   users = [];
   reqUsers = [];
   sub: Subscription = new Subscription();
@@ -60,10 +62,10 @@ export class AddAssignedUserComponent implements OnInit {
     this.reqUsers = JSON.parse(JSON.stringify(this.userList));
     
     this.userInput.nativeElement.onblur = (e) => {
-      if (this.matAutocomplete.isOpen) {
+      /*if (this.matAutocomplete.isOpen) {
         let modal = this.matAutocomplete.panel.nativeElement;
         modal.parentNode.style.width = 'max-content';
-      }
+      }*/
     }
   }
 
@@ -95,10 +97,10 @@ export class AddAssignedUserComponent implements OnInit {
    * Add user to selected
    * @param event - selected user
    */
-  public selected(event: MatAutocompleteSelectedEvent): void {
-    let find = this.selectedUsers.find(item => item.id === event.option.value.id);
+  public selected(data): void {
+    let find = this.selectedUsers.find(item => item.id === data.id);
     if (!find) {
-      this.selectedUsers.push(event.option.value);
+      this.selectedUsers.push(data);
       this.onSelected.emit(this.selectedUsers);
     } 
     this.userInput.nativeElement.blur();

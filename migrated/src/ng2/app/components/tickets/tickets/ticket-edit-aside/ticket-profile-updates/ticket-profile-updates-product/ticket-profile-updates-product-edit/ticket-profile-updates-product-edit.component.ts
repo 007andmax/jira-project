@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TicketProfileProduct } from '../../../../class/ticket-profile-product';
 import { TicketProfileUpdate } from '../../../../class/ticket-profile-update';
 import { ProductService } from 'src/ng2/app/services/product/product.service';
@@ -14,6 +14,7 @@ import * as moment from 'moment';
 export class TicketProfileUpdatesProductEditComponent implements OnInit {
   @Input() product: TicketProfileProduct;
   @Input() update: TicketProfileUpdate;
+  @Output() onEdit = new EventEmitter();
   public productList = [];
   editProduct: TicketProfileProduct;
   constructor(private productService: ProductService,
@@ -38,5 +39,11 @@ export class TicketProfileUpdatesProductEditComponent implements OnInit {
       this.productList = res;
 
     });
+  }
+  saveProduct() {
+    this.onEdit.emit(null);
+  }
+  cancelProduct() {
+    this.onEdit.emit(null);
   }
 }

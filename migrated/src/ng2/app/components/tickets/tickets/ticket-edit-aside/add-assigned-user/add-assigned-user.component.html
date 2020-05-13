@@ -1,7 +1,7 @@
 <div class="ticket-edit-user-tags">
-  <mat-form-field>
+  <mat-form-field ngbDropdown [autoClose]="'outside'" [placement]="placement">
     <mat-chip-list #chipList aria-label="Fruit selection">
-      <mat-chip
+      <mat-chip ngbDropdownAnchor
         class="selected-tag-user"
         *ngFor="let user of selectedUsers; let i = index"
         [selectable]="selectable"
@@ -20,14 +20,17 @@
         #userInput
         class="pointer"
         [formControl]="userCtrl"
-        [matAutocomplete]="auto"
+       
         [matChipInputFor]="chipList"
         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
         (input)="onSearchUser($event)"
+        id="dropdown" ngbDropdownToggle
         >
     </mat-chip-list>
-    <mat-autocomplete class="autocomplete-user-tags" #auto="matAutocomplete" (optionSelected)="selected($event)">
-      <mat-option class="ai-c" *ngFor="let user of users" [value]="user">
+   
+    <div class="autocomplete-user-tags" ngbDropdownMenu aria-labelledby="dropdown" >
+   <!-- <mat-autocomplete class="autocomplete-user-tags" #auto="matAutocomplete" (optionSelected)="selected($event)">-->
+      <mat-option class="ai-c" *ngFor="let user of users" [value]="user" (click)="selected(user)">
         <div class="assigne-user-item">
         <div class="assigne-user-avatar" [textContent]="getAssignedUserNameForAvatar(user)"
         [ngStyle]="{'background': getStyleAvatar(user),'background-size': 'cover'}"></div>
@@ -35,6 +38,7 @@
         <span class="assigne-user-email" [textContent]="user.primaryEmail"></span>
       </div>
       </mat-option>
-    </mat-autocomplete>
+    <!--</mat-autocomplete> -->
+  </div>
   </mat-form-field>
 </div>

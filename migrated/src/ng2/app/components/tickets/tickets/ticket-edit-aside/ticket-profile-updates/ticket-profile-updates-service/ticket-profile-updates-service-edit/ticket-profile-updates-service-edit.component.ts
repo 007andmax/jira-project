@@ -113,6 +113,9 @@ export class TicketProfileUpdatesServiceEditComponent implements OnInit {
   saveService() {
     this.onEdit.emit(null);
   }
+  cancelService() {
+    this.onEdit.emit(null);
+  }
   remove() {
     this.ticketStateService.setUpdateForRemove(this.update);
     this.confirmStateService.setConfirmAction(REMOVE_UPDATE_TICKET);

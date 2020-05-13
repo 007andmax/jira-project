@@ -32,7 +32,8 @@
     <span  class="tag__modern ticket-updates__service-tag-completed" *ngIf="!service.completed && service.date" [textContent]="'Due date - ' + getDate(service.date)"></span>
 
   </div>
-  <button ngbDropdownItem
-  (click)="saveService()"><i class="icn-16 archive-grey-ng2"></i>save
-</button>
+  <button (click)="saveService()"><i class="icn-16 archive-grey-ng2"></i>save
+  </button>
+  <button (click)="cancelService()"><i class="icn-16 archive-grey-ng2"></i>cancel
+  </button>
 </div>
