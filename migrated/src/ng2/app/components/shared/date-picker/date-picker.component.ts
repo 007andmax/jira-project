@@ -78,9 +78,12 @@ export class DatePickerComponent implements OnInit, OnDestroy {
     this.datepicker = this.sericeDatePicker.getDateForDatePicker(data);
     if (this.navDate) this.sericeDatePicker.updateMonthAndYearDatePicker(this.datepicker, this.navDate);
     this.date.setTitle(this.datepicker);
-    if (this.type === TYPE_INPUT)  this.sericeDatePicker.setTextInput('dropdownDate', this.date.getTitle());
+ //   if (this.type === TYPE_INPUT)  this.sericeDatePicker.setTextInput('dropdownDate', this.date.getTitle());
   }
 
+  public geTextDate() {
+    return this.date.getTitle();
+  }
   /**
   * Subscribe to reset data
   */

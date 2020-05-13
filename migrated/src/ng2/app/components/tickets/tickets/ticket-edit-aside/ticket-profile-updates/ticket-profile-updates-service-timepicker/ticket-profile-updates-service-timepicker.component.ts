@@ -63,12 +63,13 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
         let endDate = new Date(this.end);
         $('#datepairExample .start').timepicker('setTime', startDate);
         $('#datepairExample .end').timepicker('setTime', endDate);
-         $('#datepairExample .end').timepicker('option', 'minTime', $('#datepairExample .start').val());
+        
       
       }else {
         $('#datepairExample .start').timepicker('setTime', new Date());
         $('#datepairExample .end').timepicker('setTime', new Date());
       }
+      $('#datepairExample .end').timepicker('option', 'minTime', $('#datepairExample .start').val());
       // initialize datepair
     });
   }

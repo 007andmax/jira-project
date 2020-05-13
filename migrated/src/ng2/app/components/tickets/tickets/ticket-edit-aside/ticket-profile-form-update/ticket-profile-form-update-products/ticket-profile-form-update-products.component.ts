@@ -12,12 +12,11 @@ import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.se
 })
 export class TicketProfileFormUpdateProductsComponent implements OnInit {
   @ViewChild('productDP') productDP: ProductListComponent;
-  @Output() changeProducts = new EventEmitter<any>();
   addedProductList = [];
   public productList = [];
   currentProduct: TicketProfileFormProduct = new TicketProfileFormProduct();
   constructor(private productService: ProductService,
-    private ticketsStateService:TicketsStateService ) { }
+    private ticketsStateService: TicketsStateService) { }
 
   ngOnInit() {
     this.ticketsStateService.getOnClearFormUpdate().subscribe(data => {
@@ -33,23 +32,24 @@ export class TicketProfileFormUpdateProductsComponent implements OnInit {
 
     });
   }
-  public onChangeProduct(item,i) {
+  public onChangeProduct(item, i) {
     this.addedProductList[i].setData(item, this.getItemOrger());
   }
   public selectProduct(item) {
     console.log("item", item);
-    this.currentProduct.setData(item, this.getItemOrger());
+    if (item) this.currentProduct.setData(item, this.getItemOrger());
+    if (!item) this.currentProduct = new TicketProfileFormProduct();
   }
   public addProduct() {
     this.addedProductList.push(JSON.parse(JSON.stringify(this.currentProduct)));
     this.currentProduct = new TicketProfileFormProduct();
     this.productDP.clear();
-    this.changeProducts.emit(this.addedProductList);
+   
   }
   public removeProduct(i) {
     this.addedProductList.splice(i, 1);
     this.currentProduct.setItemOrder(this.getItemOrger());
-    this.changeProducts.emit(this.addedProductList);
+   
   }
   private getItemOrger() {
     return (this.addedProductList.length - 1) >= 0 ? this.addedProductList.length - 1 : 0;
@@ -57,5 +57,7 @@ export class TicketProfileFormUpdateProductsComponent implements OnInit {
   public trackByIndex(index, item) {
     return index;
   }
-
+  public getSelectedProducts() {
+    return(this.currentProduct.item.versionedId) ? [...this.addedProductList,this.currentProduct] : this.addedProductList;
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 import { TicketProfileFormUpdate } from '../class/ticket-profile-form-update';
 import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.service';
 import { TicketProfile } from '../../class/ticket-profile';
@@ -6,6 +6,8 @@ import { CurrentUser } from 'src/ng2/class/current-user/current-user';
 import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 import { TicketsListService } from '../../services/tickets-list.service';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
+import { TicketProfileFormUpdateProductsComponent } from './ticket-profile-form-update-products/ticket-profile-form-update-products.component';
+import { TicketProfileFormUpdateServicesComponent } from './ticket-profile-form-update-services/ticket-profile-form-update-services.component';
 
 @Component({
   selector: 'app-ticket-profile-form-update',
@@ -17,6 +19,8 @@ import { UsersStateService } from 'src/ng2/app/states/users/users-state.service'
 export class TicketProfileFormUpdateComponent implements OnInit {
   ticketProfile: TicketProfile = new TicketProfile();
   ticketProfileFormUpdate: TicketProfileFormUpdate = new TicketProfileFormUpdate();
+  @ViewChild('selectProducts') selectProducts: TicketProfileFormUpdateProductsComponent;
+  @ViewChild('selectServices') selectServices: TicketProfileFormUpdateServicesComponent;
   @Input() lisUpdateUser: Array<CurrentUser> = [];
   @Input() set ticket(value) {
     this.ticketProfile = value;
@@ -28,19 +32,29 @@ export class TicketProfileFormUpdateComponent implements OnInit {
   tab: string = "NOTE";
   constructor(private ticketsStateService: TicketsStateService,
     public cd: ChangeDetectorRef,
-    private usersStateService:UsersStateService,
+    private usersStateService: UsersStateService,
     private ticketsService: TicketsService,
+    private elRef: ElementRef,
     public ticketsListService: TicketsListService) { }
 
   ngOnInit() {
   }
   public onChangeChat(event) {
     this.ticketProfileFormUpdate.setChatMessage(event.target.value);
-   
+
   }
   public onPastChat(value) {
     this.ticketProfileFormUpdate.setChatMessage(value);
-   
+
+  }
+  public reset() {
+    if (this.tab === "NOTE") this.elRef.nativeElement.querySelector("#chat").value = "";
+    this.tab = "NOTE";
+    this.files = [];
+    this.showAddUpdateUser = false;
+
+
+
   }
   getUsersForUpdate() {
     let userList = this.usersStateService.getAllUsers().sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?
@@ -51,7 +65,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
 
   }
   update() {
-    console.log("this.ticketProfileFormUpdate",this.ticketProfileFormUpdate);
+    console.log("this.ticketProfileFormUpdate", this.ticketProfileFormUpdate);
     if (this.tab === "NOTE") {
       if (!this.ticketProfileFormUpdate.isValidateNote()) return;
       this.ticketsService.updateTicket(this.ticketProfileFormUpdate.getDataForUpdateNote()).subscribe(data => {
@@ -59,17 +73,19 @@ export class TicketProfileFormUpdateComponent implements OnInit {
       })
     }
     if (this.tab === "PRODUCT") {
+      this.onChangeProducts(this.selectProducts.getSelectedProducts());
       if (!this.ticketProfileFormUpdate.isValidateProduct()) return;
       this.ticketsService.updateTicket(this.ticketProfileFormUpdate.getDataForUpdateProduct()).subscribe(data => {
-       // this.ticketProfileFormUpdate.setChatMessage("");
-       this.ticketsStateService.onClearFormUpdate();
+        // this.ticketProfileFormUpdate.setChatMessage("");
+        this.ticketsStateService.onClearFormUpdate();
       })
     }
     if (this.tab === "SERVICE") {
+      this.onChangeServices(this.selectServices.getSelectedServices());
       if (!this.ticketProfileFormUpdate.isValidateService()) return;
       this.ticketsService.updateTicket(this.ticketProfileFormUpdate.getDataForUpdateService()).subscribe(data => {
-       // this.ticketProfileFormUpdate.setChatMessage("");
-       this.ticketsStateService.onClearFormUpdate();
+        // this.ticketProfileFormUpdate.setChatMessage("");
+        this.ticketsStateService.onClearFormUpdate();
       })
     }
 
@@ -81,7 +97,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
   onChangeProducts(data) {
     this.ticketProfileFormUpdate.setProducts(data);
   }
-  onChangeServices(data){
+  onChangeServices(data) {
     this.ticketProfileFormUpdate.setServices(data);
   }
   onToggleAddUpdateUser() {
@@ -174,6 +190,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
     this.ticketProfileFormUpdate.removeFile(index);
 
   }
+
   public trackByIndex(index, item) {
     return index;
   }

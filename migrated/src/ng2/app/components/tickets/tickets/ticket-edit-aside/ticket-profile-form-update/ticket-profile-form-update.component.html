@@ -32,10 +32,10 @@
 
   </div>
 
-  <app-ticket-profile-form-update-products (changeProducts)="onChangeProducts($event)" *ngIf="tab === 'PRODUCT'"></app-ticket-profile-form-update-products>
+  <app-ticket-profile-form-update-products #selectProducts   *ngIf="tab === 'PRODUCT'"></app-ticket-profile-form-update-products>
 
 
-  <app-ticket-profile-form-update-services  (changeServices)="onChangeServices($event)" [ticketProfile]="ticketProfile"  *ngIf="tab === 'SERVICE'"></app-ticket-profile-form-update-services>
+  <app-ticket-profile-form-update-services   #selectServices  [ticketProfile]="ticketProfile"  *ngIf="tab === 'SERVICE'"></app-ticket-profile-form-update-services>
   </div>
 </div>
 

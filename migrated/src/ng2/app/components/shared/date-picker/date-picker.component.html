@@ -1,5 +1,5 @@
 <div class="input-group date-picker" ngbDropdown  [autoClose]="'outside'" #date="ngbDropdown" >
-  <input *ngIf="type === 'INPUT'" type="text" class="pointer" placeholder="Select Date" ngbDropdownToggle id="dropdownDate" readonly>
+  <input *ngIf="type === 'INPUT'" type="text" class="pointer" placeholder="Select Date" ngbDropdownToggle id="dropdownDate" [value]="geTextDate()" readonly>
   <div *ngIf="type === 'ICON'" class="ticket-updates__date-icon icon__assign-date" ngbDropdownToggle id="dropdownDate" >
    
   </div>

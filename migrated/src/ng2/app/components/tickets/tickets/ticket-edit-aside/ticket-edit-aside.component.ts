@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.service';
 import { TicketProfile } from '../class/ticket-profile';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
@@ -17,6 +17,7 @@ import { ConfirmStateService } from '../../../shared/confirm/services/confirm-st
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MOVE_TO_TRASH_TICKET, DELETE_FOREVER, MOVE_TO_SPAM_OR_REPORT_TICKET } from 'src/ng2/app/const/confirm';
 import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
+import { TicketProfileFormUpdateComponent } from './ticket-profile-form-update/ticket-profile-form-update.component';
 @Component({
   selector: 'app-ticket-edit-aside',
   templateUrl: './ticket-edit-aside.component.html',
@@ -25,6 +26,7 @@ import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
 
 })
 export class TicketEditAsideComponent implements OnInit {
+  @ViewChild('updateForm') updateForm:TicketProfileFormUpdateComponent;
   ticketProfile: TicketProfile = new TicketProfile();
   opened = false;
   modeSubject = 'view';
@@ -52,6 +54,7 @@ export class TicketEditAsideComponent implements OnInit {
       this.showPreloader = true;
     })
     this.ticketsStateService.getOnEditTicket().subscribe(data => {
+      this.updateForm.reset();
       this.listAssignedUser = [];
       this.lisUpdateUser = [];
       this.ticketProfile = data;
