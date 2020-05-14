@@ -8,7 +8,7 @@ export class TicketsRealTimeService {
   public changeActualNumber: EventEmitter<any> = new EventEmitter();
   public changeTickets: EventEmitter<any> = new EventEmitter();
   public changeTicket: EventEmitter<any> = new EventEmitter();
-
+  public ticketSubscription;
   /**
    * Quote real time service constructor
    */
@@ -27,5 +27,8 @@ export class TicketsRealTimeService {
   public handleRealTimeChangesTicket(newChange) {
     this.changeTicket.emit(newChange);
   }
-   
+  public unsubscribeTicket() {
+    this.ticketSubscription.unsubscribe();
+  }
+
 }

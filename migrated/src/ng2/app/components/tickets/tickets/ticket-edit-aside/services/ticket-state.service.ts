@@ -4,30 +4,48 @@ import { RecurringService } from 'src/ng2/app/services/recurring/recurring.servi
 import { TicketProfileUpdate } from '../../class/ticket-profile-update';
 import { TicketProfileService } from '../../class/ticket-profile-service';
 import { TicketProfileProduct } from '../../class/ticket-profile-product';
+import { TicketsRealTimeService } from 'src/ng2/app/states/tickets/tickets-real-time.service';
+import { WebsocketService } from 'src/ng2/app/services/websocket/websocket.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TicketStateService {
   servicesList: EventEmitter<any> = new EventEmitter();
-  updateForRemove:TicketProfileUpdate = null;
-  serviceForRemove:TicketProfileService = null;
-  productForRemove:TicketProfileProduct = null;
+  changeUpdatesTicket: EventEmitter<any> = new EventEmitter();
+  updateForRemove: TicketProfileUpdate = null;
+  serviceForRemove: TicketProfileService = null;
+  productForRemove: TicketProfileProduct = null;
   areTicketsPresented: boolean = false;
   areTicketsTerminated: boolean = false;
   servicesForTicket = [];
   constructor(private serviceAgreementsService: ServiceAgreementsService,
-    private recurringService: RecurringService,) { }
+    private recurringService: RecurringService, private ticketsRealTimeService: TicketsRealTimeService, private websocketService: WebsocketService) {
+    this.ticketsRealTimeService.changeTicket.subscribe(newChange => {
+
+      this.changeUpdatesTicket.emit(newChange);
+    });
+  }
 
   public getServicesList(ticketProfile) {
-  
-      this.recurringService.getServiceList(ticketProfile.company.id).subscribe((res: any) => {
-        this.servicesForTicket = res;
-        this.getServiceAgreements(ticketProfile);
-      })
-  
-   
+
+    this.recurringService.getServiceList(ticketProfile.company.id).subscribe((res: any) => {
+      this.servicesForTicket = res;
+      this.getServiceAgreements(ticketProfile);
+    })
+
+
   }
+  public subsribeToTicket(id) {
+    this.websocketService.subsribeToTicket(id);
+  }
+  public unsubscribeTicket() {
+    this.ticketsRealTimeService.unsubscribeTicket();
+  }
+  public getOnChangeUpdatesTicket() {
+    return this.changeUpdatesTicket;
+  }
+
   private getServiceAgreements(ticketProfile) {
     this.serviceAgreementsService.getServiceAgreements().subscribe((data: any) => {
       let listAgreements = data;
@@ -63,10 +81,10 @@ export class TicketStateService {
   public getServicesForTicket() {
     return this.servicesForTicket;
   }
-  public isTicketsPresented () {
+  public isTicketsPresented() {
     return this.areTicketsPresented;
   }
-  public isTicketsTerminated () {
+  public isTicketsTerminated() {
     return this.areTicketsTerminated;
   }
   public getOnGetServicesList() {

@@ -50,7 +50,7 @@ export class TicketEditAsideComponent implements OnInit {
     private usersStateService: UsersStateService,
     private ticketStateService: TicketStateService,
     private notificationStateService: NotificationStateService,
-    private websocketService: WebsocketService,
+  
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
@@ -58,6 +58,7 @@ export class TicketEditAsideComponent implements OnInit {
       this.showPreloader = true;
     })
     this.ticketsStateService.getOnEditTicket().subscribe(data => {
+      this.ticketStateService.unsubscribeTicket();
       this.updateForm.reset();
       this.ticketProfile = data;
       this.elRef.nativeElement.querySelector("#ticket-note").value = this.ticketProfile.note;
@@ -69,7 +70,7 @@ export class TicketEditAsideComponent implements OnInit {
       this.opened = true;
       this.showPreloader = false;
       this.ticketStateService.getServicesList(this.ticketProfile);
-      this.websocketService.subsribeToTicket(this.ticketProfile.id);
+      this.ticketStateService.subsribeToTicket(this.ticketProfile.id);
     })
     this.ticketsStateService.getOnInitColor().subscribe(data => {
       this.listColors = data;
@@ -113,7 +114,7 @@ export class TicketEditAsideComponent implements OnInit {
         if (this.ticketProfile.id === data.id) this.ticketProfile[data.field] = data.value;
       }
     });
-    this.ticketsStateService.getOnChangeUpdatesTicket().subscribe(newChange => {
+    this.ticketStateService.getOnChangeUpdatesTicket().subscribe(newChange => {
       
       if (newChange.action == 'UPDATE_SAVED' || newChange.action == 'UPDATE_CREATED') {
         let update = this.ticketProfile.updates.find(item => item.id === newChange.data.id),
@@ -311,7 +312,7 @@ export class TicketEditAsideComponent implements OnInit {
     this.showAddAssignedUser = false;
     this.showPreloader = true;
     this.listAssignedUser = [];
-
+    this.ticketStateService.unsubscribeTicket();
   }
   getClassType() {
     return `priority-icon ticket-edit-aside__ticket-subject-flag ${(this.ticketProfile.priorityLevel && this.ticketProfile.priorityLevel !== "MEDIUM") ? '--' + this.ticketProfile.priorityLevel.toLowerCase() : ''}`;
