@@ -10,6 +10,7 @@ export class TicketsStateService {
   clearFormUpdate:EventEmitter<any> = new EventEmitter();
   actualNumber: EventEmitter<any> = new EventEmitter();
   addTicket: EventEmitter<any> = new EventEmitter();
+  updateTicket: EventEmitter<any> = new EventEmitter();
   openTicket: EventEmitter<any> = new EventEmitter();
   editTicket: EventEmitter<TicketProfile> = new EventEmitter();
   filter: EventEmitter<any> = new EventEmitter();
@@ -18,7 +19,7 @@ export class TicketsStateService {
   status: EventEmitter<any> = new EventEmitter();
   count: EventEmitter<number> = new EventEmitter();
   toggleAddTicket: EventEmitter<any> = new EventEmitter();
- 
+  ticketChangedActions = ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH', 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_SHARE', 'MARKED_AS_SPAM', 'EDITED_TICKET','RECURRING_TICKETS_OPEN', 'RECURRING_TICKETS_CLOSED'];
   constructor(private ticketsRealTimeService: TicketsRealTimeService) { }
 
   public onInit() {
@@ -33,6 +34,27 @@ export class TicketsStateService {
       if (newChange.action === 'CREATED_TICKET') {
         console.log("newChange.data", newChange.data);
         this.addTicket.emit(newChange.data);
+      }
+      if (this.ticketChangedActions.indexOf(newChange.action) > -1) {
+         
+       
+      /*  if (storage.openedTicket && newChange.data.id === storage.openedTicket.id) {
+          Utils.customizeObj(newChange.data, storage.openedTicket);
+        }*/
+      /*  if (isTicketMatchesFilters(newChange.data, storage.lastParams)) {
+          if (ticketById) {
+            Utils.customizeObj(newChange.data, ticketById);
+          } else if (insertToFitOrdering(newChange.data, storage.tickets)) { //returns true if inserted successfully
+            storage.ticketsQuantity++;
+            global++;
+          }
+        } else if (ticketById) {
+          storage.tickets.splice(ticketIndex, 1);
+          storage.ticketsQuantity--;
+          global--;
+        }
+        */
+       this.updateTicket.emit(newChange.data);
       }
       if (newChange.action === 'ALL_TICKETS_COUNT') {
         console.log("newChange.data", newChange.data);
@@ -105,7 +127,10 @@ export class TicketsStateService {
   public getOnAddTicket() {
     return this.addTicket;
   }
- 
+  public getOnUpdateTicket() {
+    return this.updateTicket;
+  }
+  
   public getOnClearFormUpdate() {
     return this.clearFormUpdate;
   }
