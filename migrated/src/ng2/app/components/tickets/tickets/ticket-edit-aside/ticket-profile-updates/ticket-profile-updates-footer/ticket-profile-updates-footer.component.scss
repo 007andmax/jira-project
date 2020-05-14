@@ -2,8 +2,7 @@
     padding: 24px 32px;
     background-color: #f9fafb;
     font-size: 13px;
-    box-shadow: inset 0px -5px 9px -6px rgba(0, 0, 0, 0.15);
-  
+
     &__count {
       font-weight: 600;
     }
@@ -15,15 +14,15 @@
         border-radius: 50%;
         margin-right: 16px;
     }
-  
+
     &__content {
       flex-grow: 1;
     }
-  
+
     &__author-line, &__message-line {
       margin-bottom: 8px;
     }
-  
+
     &__author {
         font-weight: 600;
     }
@@ -53,7 +52,7 @@
       color: #9ca5b6;
       margin-right: 8px;
     }
-  
+
     &__photo-people {
        width: 24px;
        height: 24px;
@@ -92,24 +91,24 @@
       width: 55px;
       margin-right: 8px;
     }
-  
+
     &__ticket-qty {
       width: 32px;
       margin-right: 8px;
     }
-  
+
     &__ticket-total {
       margin-right: 8px;
       width: 55px;
     }
-  
+
     &__date-icon {
       width: 24px;
       height: 24px;
       cursor: pointer;
       margin-right: 8px;
     }
-  
+
     &__ticket-header {
       font-weight: 600;
     }
@@ -129,7 +128,7 @@
       margin-right: 8px;
       width: 55px;
     }
-  
+
     &__more {
       width: 24px;
       height: 24px;
@@ -139,27 +138,27 @@
       position: relative;
       top: 32px;
     }
-  
+
     &__service-header-name {
       width: 289px;
       margin-right: 8px;
     }
-  
+
     &__service-header-price {
       margin-right: 8px;
       width: 60px;
     }
-  
+
     &__service-header-qty {
       margin-right: 8px;
       width: 60px;
     }
-  
+
     &__service-header-total {
       margin-right: 8px;
       width: 60px;
     }
-  
+
     &__service-title {
       width: 252px;
       font-weight: 600;
@@ -168,28 +167,28 @@
       white-space: nowrap;
       margin-right: 8px;
     }
-  
+
     &__service-time-in {
       width: 60px;
       margin-right: 8px;
     }
-  
+
     &__service-time-out {
       width: 60px;
       margin-right: 8px;
     }
-  
+
     &__service-duration {
       width: 60px;
       margin-right: 8px;
     }
-  
+
     &__service-subinfo {
       line-height: 1.33;
       margin-top: 3px;
       margin-left: 28px;
     }
-  
+
     &__service-tag-completed {
       height: 20px;
       line-height: 12px;
@@ -200,4 +199,3 @@
       margin-right: 32px;
     }
   }
-  

@@ -9,7 +9,7 @@
         <app-ticket-profile-updates-service-duration  (onChange)="onChangeDurationService($event,i)" [editMode]="true" [hour]="getHours(service)" [minute]="getMinutes(service)" *ngIf="currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER'"></app-ticket-profile-updates-service-duration>
         <app-date-picker [editMode]="true" [editDate]="service.getDateTime()" [useMinDate]="false"  (onChange)="onChangeDatePickerService($event,i)"></app-date-picker>
 
-        <button class="product-item__btn-del" (click)="removeService(i)">
+        <button class="service-item__btn-del" (click)="removeService(i)">
           <span class="icon__close btn-icon"></span>
         </button>
       </div>

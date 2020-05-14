@@ -2371,3 +2371,12 @@ input.ng-invalid.is-invalid {
   font-weight : 600;
   line-height: 2.5;
 }
+
+.ticket-updates__ticket-photo,
+.cps-block__photo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+}
