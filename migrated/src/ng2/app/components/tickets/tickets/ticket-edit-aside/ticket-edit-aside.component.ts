@@ -18,6 +18,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MOVE_TO_TRASH_TICKET, DELETE_FOREVER, MOVE_TO_SPAM_OR_REPORT_TICKET } from 'src/ng2/app/const/confirm';
 import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
 import { TicketProfileFormUpdateComponent } from './ticket-profile-form-update/ticket-profile-form-update.component';
+import { Ticket } from '../../class/ticket';
 @Component({
   selector: 'app-ticket-edit-aside',
   templateUrl: './ticket-edit-aside.component.html',
@@ -26,7 +27,7 @@ import { TicketProfileFormUpdateComponent } from './ticket-profile-form-update/t
 
 })
 export class TicketEditAsideComponent implements OnInit {
-  @ViewChild('updateForm') updateForm:TicketProfileFormUpdateComponent;
+  @ViewChild('updateForm') updateForm: TicketProfileFormUpdateComponent;
   ticketProfile: TicketProfile = new TicketProfile();
   opened = false;
   modeSubject = 'view';
@@ -55,17 +56,13 @@ export class TicketEditAsideComponent implements OnInit {
     })
     this.ticketsStateService.getOnEditTicket().subscribe(data => {
       this.updateForm.reset();
-      this.listAssignedUser = [];
-      this.lisUpdateUser = [];
       this.ticketProfile = data;
       this.elRef.nativeElement.querySelector("#ticket-note").value = this.ticketProfile.note;
+      this.updateListAssignedUser();
+      this.updateLisUpdateUser();
       // if (this.ticketProfile.note.length === 0) this.modeDescription = 'edit';
-      if (this.ticketProfile.assignedUser) this.listAssignedUser.push(this.ticketProfile.assignedUser);
-      if (this.ticketProfile.multiAssignedUsers) this.listAssignedUser = [...this.listAssignedUser, ...this.ticketProfile.multiAssignedUsers];
-      this.lisUpdateUser = this.ticketProfile.updates.map(item => item.user);
-      this.lisUpdateUser = [...this.listAssignedUser, ...this.lisUpdateUser]
-      this.lisUpdateUser = this.lisUpdateUser.filter((item, index) => this.lisUpdateUser.findIndex(user => user.id === item.id) === index);
-      console.log("this.lisUpdateUser", this.lisUpdateUser);
+
+
       this.opened = true;
       this.showPreloader = false;
       this.ticketStateService.getServicesList(this.ticketProfile);
@@ -87,21 +84,47 @@ export class TicketEditAsideComponent implements OnInit {
 
       }
     })
+    this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
+      console.log("data", data);
+      if (this.opened) {
+        let ticket = new Ticket(data);
+        if (this.ticketProfile.id === ticket.id) {
+          this.ticketProfile.update(data);
+          this.elRef.nativeElement.querySelector("#ticket-note").value = this.ticketProfile.note;
+          this.updateListAssignedUser();
+          this.updateLisUpdateUser();
+        }
+      }
+
+
+    })
   }
-  onMoveIntoSpam () {
+  private updateListAssignedUser() {
+    this.listAssignedUser = [];
+    if (this.ticketProfile.assignedUser) this.listAssignedUser.push(this.ticketProfile.assignedUser);
+    if (this.ticketProfile.multiAssignedUsers) this.listAssignedUser = [...this.listAssignedUser, ...this.ticketProfile.multiAssignedUsers];
+  }
+  private updateLisUpdateUser() {
+    this.lisUpdateUser = [];
+    this.lisUpdateUser = this.ticketProfile.updates.map(item => item.user);
+    this.lisUpdateUser = [...this.listAssignedUser, ...this.lisUpdateUser]
+    this.lisUpdateUser = this.lisUpdateUser.filter((item, index) => this.lisUpdateUser.findIndex(user => user.id === item.id) === index);
+    console.log("this.lisUpdateUser", this.lisUpdateUser);
+  }
+  onMoveIntoSpam() {
     if (this.usersStateService.getCurrentUser().isOwner) {
-      this.ticketsService.markAsSpamTicket(this.ticketProfile.id,false).subscribe(data => {
+      this.ticketsService.markAsSpamTicket(this.ticketProfile.id, false).subscribe(data => {
         this.notificationStateService.oninitShowNotification(`The ticket “${this.ticketProfile.number}” has been marked as spam`);
       });
     } else {
-      this.ticketsService.reportAsSpamTicket(this.ticketProfile.id,false).subscribe(data => {
+      this.ticketsService.reportAsSpamTicket(this.ticketProfile.id, false).subscribe(data => {
         this.notificationStateService.oninitShowNotification(`The ticket “${this.ticketProfile.number}” has been reported as spam`);
-       
+
       });
     }
   }
   moveToTrash(data) {
-    this.ticketsService.trashTicket(this.ticketProfile.id,data).subscribe(res => {
+    this.ticketsService.trashTicket(this.ticketProfile.id, data).subscribe(res => {
       if (data) {
         this.notificationStateService.oninitShowNotification(`The ticket “${this.ticketProfile.number}” has been moved to Trash`);
       }

@@ -89,4 +89,38 @@ export class TicketProfile {
         }
     }
 
+    public update(data) {
+        for (const key in data) {
+            //  if (this.hasOwnProperty(key)) {
+            this[key] = data[key];
+
+            // }
+        }
+        if (data.agent) this.agent = new TicketProfileAgent(data.agent);
+        if (data.assignPerformer) this.assignPerformer = new CurrentUser(data.assignPerformer);
+        this.assignedUser = (data.assignedUser) ? new CurrentUser(data.assignedUser) : null;
+        if (data.attachments) this.attachments = data.attachments.map(item => {
+            return new TicketProfileAttachment(item);
+        })
+        if (data.createdUser) this.createdUser = new CurrentUser(data.createdUser);
+        if (data.multiAssignedUsers) this.multiAssignedUsers = data.multiAssignedUsers.map(item => {
+            return new CurrentUser(item);
+        })
+        if (data.shares) this.shares = data.shares.map(item => {
+            return new TicketProfileShare(item);
+        })
+        if (data.tags) this.tags = data.tags.map(item => {
+            let tag: Tag = {
+                colorCode: item.colorCode,
+                usedCounter: item.usedCounter,
+                word: item.word,
+                id: item.id
+            }
+            return tag;
+        })
+        if (data.updates) this.updates = data.updates.map(item => {
+            return new TicketProfileUpdate(item);
+        })
+    }
+
 }
