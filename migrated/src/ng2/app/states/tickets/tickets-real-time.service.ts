@@ -28,7 +28,7 @@ export class TicketsRealTimeService {
     this.changeTicket.emit(newChange);
   }
   public unsubscribeTicket() {
-    this.ticketSubscription.unsubscribe();
+   if (this.ticketSubscription) this.ticketSubscription.unsubscribe();
   }
 
 }
