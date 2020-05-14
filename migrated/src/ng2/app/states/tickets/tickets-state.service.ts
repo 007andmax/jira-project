@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { TicketsRealTimeService } from './tickets-real-time.service';
 import { TicketProfile } from '../../components/tickets/tickets/class/ticket-profile';
 import { ServiceAgreementsService } from '../../services/service-agreements/service-agreements.service';
+import { TicketChangeField } from '../../components/tickets/tickets/class/ticket-change-field';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,10 @@ export class TicketsStateService {
   actualNumber: EventEmitter<any> = new EventEmitter();
   addTicket: EventEmitter<any> = new EventEmitter();
   updateTicket: EventEmitter<any> = new EventEmitter();
+  changeUpdatesTicket: EventEmitter<any> = new EventEmitter();
+  changeFieldTicket: EventEmitter<TicketChangeField> = new EventEmitter();
   openTicket: EventEmitter<any> = new EventEmitter();
+  removeTicket: EventEmitter<any> = new EventEmitter();
   editTicket: EventEmitter<TicketProfile> = new EventEmitter();
   filter: EventEmitter<any> = new EventEmitter();
   updateCounts: EventEmitter<any> = new EventEmitter();
@@ -36,33 +40,22 @@ export class TicketsStateService {
         this.addTicket.emit(newChange.data);
       }
       if (this.ticketChangedActions.indexOf(newChange.action) > -1) {
-         
-       
-      /*  if (storage.openedTicket && newChange.data.id === storage.openedTicket.id) {
-          Utils.customizeObj(newChange.data, storage.openedTicket);
-        }*/
-      /*  if (isTicketMatchesFilters(newChange.data, storage.lastParams)) {
-          if (ticketById) {
-            Utils.customizeObj(newChange.data, ticketById);
-          } else if (insertToFitOrdering(newChange.data, storage.tickets)) { //returns true if inserted successfully
-            storage.ticketsQuantity++;
-            global++;
-          }
-        } else if (ticketById) {
-          storage.tickets.splice(ticketIndex, 1);
-          storage.ticketsQuantity--;
-          global--;
-        }
-        */
        this.updateTicket.emit(newChange.data);
       }
-      if (newChange.action === 'ALL_TICKETS_COUNT') {
-        console.log("newChange.data", newChange.data);
-        this.onUpdateCounts(newChange.data);
-       
-      }
-      
+      if (newChange.action === 'ALL_TICKETS_COUNT')   this.onUpdateCounts(newChange.data);
+      if (newChange.action === 'READ')  this.changeFieldTicket.emit(new TicketChangeField("unread", newChange.data.id,false));
+      if (newChange.action === 'TICKET_UPDATES_READ')  this.changeFieldTicket.emit(new TicketChangeField("hasNewUpdates", newChange.data.id,false));
+      if (newChange.action === 'TICKET_DELETED')   this.removeTicket.emit(newChange.data);
+      if (newChange.action === 'TICKET_BILLABLE')  this.changeFieldTicket.emit(new TicketChangeField("isBillable", newChange.data.id,newChange.data.isBillable));
+      if (newChange.action === 'TICKET_INVOICED')  this.changeFieldTicket.emit(new TicketChangeField("hasInvoice", newChange.data.id,newChange.data.hasInvoice));
+      if (newChange.action === 'LINKED_AGENT_CHANGED')  this.changeFieldTicket.emit(new TicketChangeField("agent", newChange.data.id,(newChange.data.deviceId) ?  { deviceId: newChange.data.deviceId } : null));
+      if (newChange.action === 'DISCOUNT_CHANGED')  this.changeFieldTicket.emit(new TicketChangeField("discount", newChange.data.id,newChange.data.discount));
     })
+
+    this.ticketsRealTimeService.changeTicket.subscribe(newChange => {
+ 
+this.changeUpdatesTicket.emit(newChange);
+    });
   }
 
    
@@ -129,6 +122,15 @@ export class TicketsStateService {
   }
   public getOnUpdateTicket() {
     return this.updateTicket;
+  }
+  public getOnRemoveTicket() {
+    return this.removeTicket;
+  }
+  public getOnChangeFieldTicket() {
+    return this.changeFieldTicket;
+  }
+  public getOnChangeUpdatesTicket() {
+    return this.changeUpdatesTicket;
   }
   
   public getOnClearFormUpdate() {

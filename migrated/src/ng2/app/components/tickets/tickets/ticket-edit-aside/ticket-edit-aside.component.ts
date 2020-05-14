@@ -19,6 +19,8 @@ import { MOVE_TO_TRASH_TICKET, DELETE_FOREVER, MOVE_TO_SPAM_OR_REPORT_TICKET } f
 import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
 import { TicketProfileFormUpdateComponent } from './ticket-profile-form-update/ticket-profile-form-update.component';
 import { Ticket } from '../../class/ticket';
+import { TicketChangeField } from '../class/ticket-change-field';
+import { WebsocketService } from 'src/ng2/app/services/websocket/websocket.service';
 @Component({
   selector: 'app-ticket-edit-aside',
   templateUrl: './ticket-edit-aside.component.html',
@@ -48,6 +50,7 @@ export class TicketEditAsideComponent implements OnInit {
     private usersStateService: UsersStateService,
     private ticketStateService: TicketStateService,
     private notificationStateService: NotificationStateService,
+    private websocketService: WebsocketService,
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
@@ -66,6 +69,7 @@ export class TicketEditAsideComponent implements OnInit {
       this.opened = true;
       this.showPreloader = false;
       this.ticketStateService.getServicesList(this.ticketProfile);
+      this.websocketService.subsribeToTicket(this.ticketProfile.id);
     })
     this.ticketsStateService.getOnInitColor().subscribe(data => {
       this.listColors = data;
@@ -98,6 +102,36 @@ export class TicketEditAsideComponent implements OnInit {
 
 
     })
+
+    this.ticketsStateService.getOnRemoveTicket().subscribe(data => {
+      if (this.opened) {
+        if (this.ticketProfile.id === data.id) this.close();
+      }
+    });
+    this.ticketsStateService.getOnChangeFieldTicket().subscribe((data: TicketChangeField) => {
+      if (this.opened) {
+        if (this.ticketProfile.id === data.id) this.ticketProfile[data.field] = data.value;
+      }
+    });
+    this.ticketsStateService.getOnChangeUpdatesTicket().subscribe(newChange => {
+      
+      if (newChange.action == 'UPDATE_SAVED' || newChange.action == 'UPDATE_CREATED') {
+        let update = this.ticketProfile.updates.find(item => item.id === newChange.data.id),
+          attachments = newChange.data.attachments;
+        if (update) {
+          this.ticketProfile.setUpdate(newChange.data);
+        } else {
+          this.ticketProfile.addUpdate(newChange.data);
+        }
+        if (attachments && attachments.length) {
+          for (var i = 0; i < attachments.length; i++) {
+            this.ticketProfile.addAttachment(attachments[i]);
+          }
+        }
+      }
+      if (newChange.action == 'UPDATE_DELETED')   this.ticketProfile.removeUpdate(newChange.data);
+
+    });
   }
   private updateListAssignedUser() {
     this.listAssignedUser = [];
@@ -277,6 +311,7 @@ export class TicketEditAsideComponent implements OnInit {
     this.showAddAssignedUser = false;
     this.showPreloader = true;
     this.listAssignedUser = [];
+
   }
   getClassType() {
     return `priority-icon ticket-edit-aside__ticket-subject-flag ${(this.ticketProfile.priorityLevel && this.ticketProfile.priorityLevel !== "MEDIUM") ? '--' + this.ticketProfile.priorityLevel.toLowerCase() : ''}`;

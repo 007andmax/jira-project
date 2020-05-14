@@ -88,7 +88,20 @@ export class TicketProfile {
             })
         }
     }
-
+    public addAttachment (data) {
+        this.attachments.push(new TicketProfileAttachment(data));
+    }
+    public addUpdate(data) {
+        this.updates.push(new TicketProfileUpdate(data));
+    }
+    public removeUpdate(data) {
+        let index = this.updates.findIndex(item => item.id === data.id);
+        if (index > -1) this.updates.splice(index,1);
+    }
+    public setUpdate(data) {
+        let index = this.updates.findIndex(item => item.id === data.id);
+        if (index > -1) this.updates[index] = new TicketProfileUpdate(data);
+    }
     public update(data) {
         for (const key in data) {
             //  if (this.hasOwnProperty(key)) {

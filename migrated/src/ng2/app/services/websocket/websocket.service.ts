@@ -235,6 +235,17 @@ private subsribeToDevices () {
     }, 3000);
   }
 
+  public subsribeToTicket(id) {
+   
+        this.stompClient.subscribe(`/user/watch/ticketUpdates/${id}`, (message) => {
+          var newChange = JSON.parse(message.body);
+          this.ticketsRealTimeService.handleRealTimeChangesTicket(newChange);
+        
+        });
+        console.log("this.stompClient",this.stompClient);
+     
+  }
+
   public subsribeToTicketActualNumber() {
    
     setTimeout(() => {
