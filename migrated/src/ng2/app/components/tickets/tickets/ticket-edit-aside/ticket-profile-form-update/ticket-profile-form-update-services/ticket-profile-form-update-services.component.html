@@ -7,7 +7,7 @@
         (selectedServicesItem)="selectService($event)"></app-services-list>
         <app-ticket-profile-updates-service-timepicker  *ngIf="currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'" (onChangeStart)="onChangeStartTimePickerService($event,i)" (onChangeEnd)="onChangeEndTimePickerSerice($event,i)" #editTimePicker [quantity]="service.quantity" [editMode]="true" [start]="service.durationStart" [end]="service.durationEnd" ></app-ticket-profile-updates-service-timepicker>
         <app-ticket-profile-updates-service-duration  (onChange)="onChangeDurationService($event,i)" [editMode]="true" [hour]="getHours(service)" [minute]="getMinutes(service)" *ngIf="currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER'"></app-ticket-profile-updates-service-duration>
-        <app-date-picker  (onChange)="onChangeDatePicker($event)"></app-date-picker>
+        <app-date-picker [editMode]="true" [editDate]="service.getDateTime()" [useMinDate]="false"  (onChange)="onChangeDatePickerService($event,i)"></app-date-picker>
 
         <button class="product-item__btn-del" (click)="removeService(i)">
           <span class="icon__close btn-icon"></span>

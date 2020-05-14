@@ -30,6 +30,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
   showAddUpdateUser = false;
   files: any[] = [];
   tab: string = "NOTE";
+  currentUser:CurrentUser;
   constructor(private ticketsStateService: TicketsStateService,
     public cd: ChangeDetectorRef,
     private usersStateService: UsersStateService,
@@ -38,6 +39,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
     public ticketsListService: TicketsListService) { }
 
   ngOnInit() {
+    this.currentUser = this.usersStateService.getCurrentUser();
   }
   public onChangeChat(event) {
     this.ticketProfileFormUpdate.setChatMessage(event.target.value);

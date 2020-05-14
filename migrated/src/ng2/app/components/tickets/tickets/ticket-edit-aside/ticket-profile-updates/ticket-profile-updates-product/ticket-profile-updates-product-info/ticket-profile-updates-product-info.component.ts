@@ -10,6 +10,7 @@ import { REMOVE_UPDATE_TICKET_PRODUCT } from 'src/ng2/app/const/confirm';
 import { ConfirmComponent } from 'src/ng2/app/components/shared/confirm/confirm.component';
 import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
+import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 
 @Component({
   selector: 'app-ticket-profile-updates-product-info',
@@ -27,6 +28,7 @@ export class TicketProfileUpdatesProductInfoComponent implements OnInit {
     private ticketStateService:TicketStateService,
     private ticketsService:TicketsService,
     private usersStateService:UsersStateService,
+    private companiesStateService:CompaniesStateService,
     private modalService: NgbModal) { }
 
   ngOnInit() {
@@ -58,16 +60,8 @@ export class TicketProfileUpdatesProductInfoComponent implements OnInit {
    this.updateProduct();
   }
   public onChangeDatePicker(data) {
- //   console.log("data", data);
-
-    let date = new Date(data.year, data.month - 1, data.day);
   
-  /*  let currentDate = new Date(this.productDate);
-    console.log("date",date);
-    console.log("currentDate",currentDate);
-    if (date.getDate() === currentDate.getDate() && date.getMonth() === currentDate.getMonth() && date.getFullYear() === currentDate.getFullYear()) return;
-   */
-    this.product.setDate(date.toISOString());
+    this.product.setDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.updateProduct();
   }
   getUsersForAssign() {

@@ -1,7 +1,7 @@
 import { Product } from 'src/ng2/app/interfaces/product/product';
 import { CurrentUserCompany } from 'src/ng2/class/current-user/current-user-company';
 import { CurrentUser } from 'src/ng2/class/current-user/current-user';
-
+import * as moment from "moment";
 export class TicketProfileProduct {
     billable: boolean;
     billableQuantity: number;
@@ -45,8 +45,17 @@ export class TicketProfileProduct {
      public setUser(data) {
         this.user = data;
     }
-     public setDate(data) {
-        this.date = data;
+    public setDate(day, month, year, timeOffset) {
+        let current = new Date();
+        if (day !== current.getDate() || current.getMonth() !== (month - 1)) {
+            let dateDatePicker = new Date(year, month - 1, day).getTime(); // timestamp from calendar
+            let finalDate = new Date(dateDatePicker - (current.getTimezoneOffset() * 60000/* dont touch*/) - timeOffset /* timezone.timeOffset */);
+            this.date = finalDate.getTime();
+        } else {
+            let currentTime = new Date(current.getFullYear(), current.getMonth(), current.getDate()).getTime();
+            let finalDate = new Date(currentTime - (current.getTimezoneOffset() * 60000) - timeOffset);
+            this.date = finalDate.getTime();
+        }
     }
      public setCompleted (data) {
         this.completed = data;

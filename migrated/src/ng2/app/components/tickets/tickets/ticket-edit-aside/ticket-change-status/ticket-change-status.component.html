@@ -1,0 +1,17 @@
+<div ngbDropdown>
+<span class="tag__modern" [ngStyle]="getStyleStatus('inProgress')" *ngIf="ticketProfile.status === 'IN_PROGRESS'" ngbDropdownToggle>In Progress</span>
+ <span class="tag__modern" [ngStyle]="getStyleStatus('completed')" *ngIf="ticketProfile.status === 'COMPLETED'">Completed</span>
+ <span class="tag__modern" [ngStyle]="getStyleStatus('unassigned')" *ngIf="ticketProfile.status === null">Unassigned</span>
+ <span class="tag__modern" [ngStyle]="getStyleStatus('onHold')" *ngIf="ticketProfile.status === 'ON_HOLD'" ngbDropdownToggle>On Hold</span>
+ <div ngbDropdownMenu
+  aria-labelledby="dropdown1">
+<ng-template ngFor
+            let-item
+            [ngForOf]="list"
+            let-i="index">
+ <button ngbDropdownItem
+         [textContent]="item.title"
+         (click)="changeTicketStatus(item.type,item.title)"></button>
+</ng-template>
+</div>
+</div>

@@ -20,11 +20,21 @@
               <div class="ticket-edit-aside__header-company" [textContent]="getCompantName() + ' - ' + getNameCreateUser()"></div>
               <div class="ticket-edit-aside__header-info"><span [textContent]="parseTicketSource() + ', Agent - ' + ticketProfile.sourceName"></span> <span class="divider-point"></span> <span [textContent]="getCreatAt()"></span>
 
-
-                 <span class="tag__modern" [ngStyle]="getStyleStatus('inProgress')" *ngIf="ticketProfile.status === 'IN_PROGRESS'">In Progress</span>
+<app-ticket-change-status [ticketProfile]="ticketProfile"></app-ticket-change-status>
+             <!--    <span class="tag__modern" [ngStyle]="getStyleStatus('inProgress')" *ngIf="ticketProfile.status === 'IN_PROGRESS'" ngbDropdown ngbDropdownToggle>In Progress  <div ngbDropdownMenu
+                  aria-labelledby="dropdown1">
+               <ng-template ngFor
+                            let-item
+                            [ngForOf]="list"
+                            let-i="index">
+                 <button ngbDropdownItem
+                         [textContent]="item"
+                         (click)="onSelect(item)"></button>
+               </ng-template>
+             </div></span>
                  <span class="tag__modern" [ngStyle]="getStyleStatus('completed')" *ngIf="ticketProfile.status === 'COMPLETED'">Completed</span>
                  <span class="tag__modern" [ngStyle]="getStyleStatus('unassigned')" *ngIf="ticketProfile.status === null">Unassigned</span>
-                 <span class="tag__modern" [ngStyle]="getStyleStatus('onHold')" *ngIf="ticketProfile.status === 'ON_HOLD'">On Hold</span>
+                 <span class="tag__modern" [ngStyle]="getStyleStatus('onHold')" *ngIf="ticketProfile.status === 'ON_HOLD'">On Hold</span>-->
                  </div>
             </div>
           </div>

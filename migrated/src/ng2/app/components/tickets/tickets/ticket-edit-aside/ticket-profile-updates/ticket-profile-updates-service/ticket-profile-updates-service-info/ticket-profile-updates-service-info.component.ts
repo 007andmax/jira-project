@@ -10,6 +10,7 @@ import { TicketProfileUpdate } from '../../../../class/ticket-profile-update';
 import { TicketProfileService } from '../../../../class/ticket-profile-service';
 import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
+import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 
 @Component({
   selector: 'app-ticket-profile-updates-service-info',
@@ -27,6 +28,7 @@ export class TicketProfileUpdatesServiceInfoComponent implements OnInit {
     private confirmStateService: ConfirmStateService,
     private ticketStateService: TicketStateService,
     private ticketsService: TicketsService,
+    private companiesStateService:CompaniesStateService,
     private modalService: NgbModal) { }
 
   ngOnInit() {
@@ -56,7 +58,7 @@ export class TicketProfileUpdatesServiceInfoComponent implements OnInit {
     console.log("data", data);
 
     let date = new Date(data.year, data.month - 1, data.day);
-    this.service.setDate(date.toISOString());
+    this.service.setDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.updateService();
   }
   private updateService() {

@@ -17,7 +17,7 @@ export class TicketsService {
    
     return this.http.put(this.apiUrl + `v2/tickets/ticketUpdate/updateExpense`, data);
   }
-
+ 
   public changeSubjectNoteTicket(id, subject, note) {
     let data = { id: id, subject: subject, note: note };
     return this.http.put(this.apiUrl + `v2/tickets/edit`, data);
