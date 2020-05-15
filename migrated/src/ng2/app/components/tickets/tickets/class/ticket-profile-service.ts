@@ -57,6 +57,15 @@ export class TicketProfileService {
             this.date = finalDate.getTime();
         }
     }
+    public setDurationStart(data) {
+        this.durationStart = data;
+    }
+    public setDurationEnd(data) {
+        this.durationEnd = data;
+    }
+    public setQuantity(data) {
+        this.quantity = data;
+    }
     public setCompleted (data) {
         this.completed = data;
     }

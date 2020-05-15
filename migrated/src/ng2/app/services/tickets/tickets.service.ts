@@ -62,9 +62,9 @@ export class TicketsService {
 
     return this.http.post(this.apiUrl + `v2/tickets/delete/`, { ids: ids });
   }
-  public updateTicket(data) {
+  public updateTicket(data,close = false) {
 
-    return this.http.post(this.apiUrl + `v2/tickets/updates?close=false`, data);
+    return this.http.post(this.apiUrl + `v2/tickets/updates?close=${close}`, data);
   }
   public changeStatus(id, value) {
     let data = { value: value };

@@ -7,7 +7,7 @@
         (selectedServicesItem)="selectService($event)"></app-services-list>
         <app-ticket-profile-updates-service-timepicker  *ngIf="currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'" (onChangeStart)="onChangeStartTimePickerService($event,i)" (onChangeEnd)="onChangeEndTimePickerSerice($event,i)" #editTimePicker [quantity]="service.quantity" [editMode]="true" [start]="service.durationStart" [end]="service.durationEnd" ></app-ticket-profile-updates-service-timepicker>
         <app-ticket-profile-updates-service-duration  (onChange)="onChangeDurationService($event,i)" [editMode]="true" [hour]="getHours(service)" [minute]="getMinutes(service)" *ngIf="currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER'"></app-ticket-profile-updates-service-duration>
-        <app-date-picker [useMaxDate]="true" [editMode]="true" [editDate]="service.getDateTime()" [useMinDate]="false"  (onChange)="onChangeDatePickerService($event,i)"></app-date-picker>
+        <app-date-picker   [editMode]="true" [editDate]="service.getDateTime()" [useMinDate]="false"  (onChange)="onChangeDatePickerService($event,i)"></app-date-picker>
 
         <button class="service-item__btn-del" (click)="removeService(i)">
           <span class="icon__close btn-icon"></span>
@@ -32,7 +32,7 @@
      <!-- <app-ticket-profile-updates-service-duration></app-ticket-profile-updates-service-duration>-->
       <app-ticket-profile-updates-service-timepicker  (onChangeStart)="onChangeStartTimePicker($event)" (onChangeEnd)="onChangeEndTimePicker($event)" *ngIf="currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'"></app-ticket-profile-updates-service-timepicker>
        <app-ticket-profile-updates-service-duration #durationD (onChange)="onChangeDuration($event)" *ngIf="currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER'"></app-ticket-profile-updates-service-duration>
-      <app-date-picker [useMaxDate]="true" [editMode]="true" [editDate]="currentService.getDateTime()" [useMinDate]="false" (onChange)="onChangeDatePicker($event)"></app-date-picker>
+      <app-date-picker   [editMode]="true" [editDate]="currentService.getDateTime()" [useMinDate]="false" (onChange)="onChangeDatePicker($event)"></app-date-picker>
 
       <button class="service-item__btn-add" (click)="addService()">
         <span class="icon__plus-white btn-icon"></span>

@@ -48,6 +48,7 @@ export class TicketProfileFormService {
     }
     public setDate(day, month, year, timeOffset) {
         let current = new Date();
+      
         if (day !== current.getDate() || current.getMonth() !== (month - 1)) {
             let dateDatePicker = new Date(year, month - 1, day).getTime(); // timestamp from calendar
             let finalDate = new Date(dateDatePicker - (current.getTimezoneOffset() * 60000/* dont touch*/) - timeOffset /* timezone.timeOffset */);
@@ -58,6 +59,12 @@ export class TicketProfileFormService {
             this.date = finalDate.getTime();
         }
     }
+      public setComplated (day, month, year) {
+        let current = new Date();
+        let dateDP = new Date(year, month - 1, day);
+        if (current.getDate() === dateDP.getDate() && current.getMonth() === dateDP.getMonth() || dateDP.getTime() < current.getTime())  this.completed = true;
+        if (dateDP.getTime() > current.getTime()) this.completed = false;
+      }
     public calculateQuantity() {
         let durationEnd = 0;
         if (this.durationStart - this.durationEnd > 0) durationEnd = this.durationEnd + 24 * 3600000;

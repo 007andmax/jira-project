@@ -13,6 +13,15 @@ export class TicketProfileFormUpdate {
     public setChatMessage(data) {
         this.note = data;
     }
+    public getDataForClose() {
+        return {
+            note: "Ticket has been closed",
+            type: "NOTE",
+            shares: this.shares,
+            ticket: this.ticket,
+            attachments: this.attachments
+        }
+    }
     public getDataForUpdateNote() {
         return {
             note: this.note,
@@ -51,6 +60,14 @@ export class TicketProfileFormUpdate {
     }
     public isValidateService() {
         return this.type === "SERVICE" && this.services.length > 0;
+    }
+    public isValidateServiceUpdateAndClose() {
+        let dateValidate  = true;
+        let currentDate = new Date().getTime();
+        this.services.forEach(item => {
+            if (item.date > currentDate) dateValidate = false;
+        }) 
+        return this.type === "SERVICE" && this.services.length > 0 && dateValidate;
     }
     public setTicketId(id) {
         this.ticket = { id: id };

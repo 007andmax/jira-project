@@ -15,7 +15,7 @@
       <div class="ticket-updates__ticket-qty" [textContent]="product.quantity"></div>
       <div class="ticket-updates__ticket-total" [textContent]="'$' + getTotal(product.price,product.quantity)"></div>
 
-      <app-date-picker [useMaxDate]="true" [useMinDate]="false" [editMode]="true" [editDate]="product.date" [type]="'ICON'" (onChange)="onChangeDatePicker($event)"></app-date-picker>
+      <app-date-picker  [useMinDate]="false" [editMode]="true" [editDate]="product.date" [type]="'ICON'" (onChange)="onChangeDatePicker($event)"></app-date-picker>
 
       <app-teh-users [type]="'TICEKTS'" [editMode]="true" [selectedMode]="'SINGLE'" [editUsers]="userService" [users]="listTehUsers" (usersChange)="onChangeUser($event)"></app-teh-users>
     </div>

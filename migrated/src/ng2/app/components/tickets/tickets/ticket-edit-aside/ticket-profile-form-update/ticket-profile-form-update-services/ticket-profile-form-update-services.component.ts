@@ -48,11 +48,12 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit {
   public onChangeDatePicker(data) {
     console.log("data", data);
     this.currentService.setDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.currentService.setComplated(data.day, data.month, data.year);
   }
-public onChangeDatePickerService(data,i) {
-  this.addedServiceList[i].setDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-
-}
+  public onChangeDatePickerService(data, i) {
+    this.addedServiceList[i].setDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.addedServiceList[i].setComplated(data.day, data.month, data.year);
+  }
   public addService() {
     this.addedServiceList.push(new TicketProfileFormService(this.currentService));
     console.log("addedServiceList", this.addedServiceList);

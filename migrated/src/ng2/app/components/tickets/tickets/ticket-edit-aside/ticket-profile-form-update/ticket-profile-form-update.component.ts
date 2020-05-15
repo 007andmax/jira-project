@@ -92,6 +92,65 @@ export class TicketProfileFormUpdateComponent implements OnInit {
     }
 
   }
+  updateAndClose() {
+    if (!this.checkUpdateAndClose()) return;
+    console.log("updateAndClose");
+    if (this.tab === "NOTE") {
+      if (this.ticketProfileFormUpdate.isValidateNote())  {
+        this.ticketsService.updateTicket(this.ticketProfileFormUpdate.getDataForUpdateNote(),true).subscribe(data => {
+          this.ticketProfileFormUpdate.setChatMessage("");
+        })
+      } else {
+        this.ticketsService.updateTicket(this.ticketProfileFormUpdate.getDataForClose(),true).subscribe(data => {
+          // this.ticketProfileFormUpdate.setChatMessage("");
+          this.ticketsStateService.onClearFormUpdate();
+        })
+      }
+    
+    }
+    if (this.tab === "PRODUCT") {
+      this.onChangeProducts(this.selectProducts.getSelectedProducts());
+      if (this.ticketProfileFormUpdate.isValidateProduct()) {
+        this.ticketsService.updateTicket(this.ticketProfileFormUpdate.getDataForUpdateProduct(),true).subscribe(data => {
+          // this.ticketProfileFormUpdate.setChatMessage("");
+          this.ticketsStateService.onClearFormUpdate();
+        })
+      } else {
+        this.ticketsService.updateTicket(this.ticketProfileFormUpdate.getDataForClose(),true).subscribe(data => {
+          // this.ticketProfileFormUpdate.setChatMessage("");
+          this.ticketsStateService.onClearFormUpdate();
+        })
+      }
+    
+    }
+    if (this.tab === "SERVICE") {
+      this.onChangeServices(this.selectServices.getSelectedServices());
+      if (this.ticketProfileFormUpdate.isValidateServiceUpdateAndClose()) {
+        this.ticketsService.updateTicket(this.ticketProfileFormUpdate.getDataForUpdateService(),true).subscribe(data => {
+          // this.ticketProfileFormUpdate.setChatMessage("");
+          this.ticketsStateService.onClearFormUpdate();
+        })
+      } else if (this.ticketProfileFormUpdate.isValidateService()) {
+        this.ticketsService.updateTicket(this.ticketProfileFormUpdate.getDataForClose(),true).subscribe(data => {
+          // this.ticketProfileFormUpdate.setChatMessage("");
+          this.ticketsStateService.onClearFormUpdate();
+        })
+      }
+     
+    }
+  }
+  private checkUpdateAndClose() {
+    if (this.ticketProfile.updates.length === 0) return true;
+    let completeServices = true;
+    let completeProducts = true;
+    this.ticketProfile.updates.forEach(update => {
+     if (completeServices)   completeServices = (update.services.find(item => !item.completed) ? false : true);
+     if (completeProducts)   completeProducts = (update.products.find(item => !item.completed) ? false : true);
+    });
+
+    return completeServices && completeProducts;
+   
+  }
   public setTab(data) {
     this.tab = data;
     this.ticketProfileFormUpdate.setType(data);

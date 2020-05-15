@@ -67,7 +67,9 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
     this.ticketsService.fetchUpdates(this.ticketProfile).subscribe((resp:any) => {
       console.log("resp",resp);
      let updates = this.updates || [];
-     updates = [...updates,...resp];
+     updates = [...updates,...resp.map(item => {
+       return new TicketProfileUpdate(item);
+     })];
       this.updates = updates;
       this.showPreloader = false;
     })

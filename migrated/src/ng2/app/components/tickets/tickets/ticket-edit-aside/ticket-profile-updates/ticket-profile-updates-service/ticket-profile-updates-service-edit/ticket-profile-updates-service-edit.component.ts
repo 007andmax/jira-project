@@ -76,9 +76,11 @@ export class TicketProfileUpdatesServiceEditComponent implements OnInit {
   public onChangeDuration(quantity) {
     this.quantity = quantity;
     this.editTimePicker.changeStart();
+    this.editService.setQuantity(this.quantity);
   }
   public onChangeEndTimePicker(endDate) {
     this.durationEnd = endDate;
+    this.editService.setDurationEnd(this.durationEnd);
     if (this.currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER') {
       let durationEnd = JSON.parse(JSON.stringify(this.durationEnd));
 
@@ -86,12 +88,14 @@ export class TicketProfileUpdatesServiceEditComponent implements OnInit {
       if (this.durationStart - this.durationEnd > 0) durationEnd = this.durationEnd + 24 * 3600000;
       this.quantity = (durationEnd - this.durationStart) / 3600000 > 0 ? (durationEnd - this.durationStart) / 3600000 : 0;
       if (this.quantity > 24) this.quantity -= 24;
+      this.editService.setQuantity(this.quantity);
       //  this.setHoursAndMinutes(this.quantity);
       console.log("quantity", this.quantity);
     }
   }
   public onChangeStartTimePicker(startDate) {
     this.durationStart = startDate;
+    this.editService.setDurationStart(this.durationStart);
   }
   private setHoursAndMinutes(quantity) {
     var timeInMinutes = quantity * 60;
@@ -113,6 +117,7 @@ export class TicketProfileUpdatesServiceEditComponent implements OnInit {
 
   }
   saveService() {
+    this.editService.setDurationEnd(this.durationStart + this.quantity * 3600000);
     this.ticketsService.updateExpense(this.editService.getDateForUpdate(this.update.id)).subscribe(data => {
 
       this.onEdit.emit(null);
