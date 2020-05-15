@@ -50,7 +50,7 @@ export class TicketEditAsideComponent implements OnInit {
     private usersStateService: UsersStateService,
     private ticketStateService: TicketStateService,
     private notificationStateService: NotificationStateService,
-  
+
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
@@ -115,7 +115,7 @@ export class TicketEditAsideComponent implements OnInit {
       }
     });
     this.ticketStateService.getOnChangeUpdatesTicket().subscribe(newChange => {
-      
+
       if (newChange.action == 'UPDATE_SAVED' || newChange.action == 'UPDATE_CREATED') {
         let update = this.ticketProfile.updates.find(item => item.id === newChange.data.id),
           attachments = newChange.data.attachments;
@@ -130,7 +130,7 @@ export class TicketEditAsideComponent implements OnInit {
           }
         }
       }
-      if (newChange.action == 'UPDATE_DELETED')   this.ticketProfile.removeUpdate(newChange.data);
+      if (newChange.action == 'UPDATE_DELETED') this.ticketProfile.removeUpdate(newChange.data);
 
     });
   }
@@ -238,7 +238,7 @@ export class TicketEditAsideComponent implements OnInit {
   onToggleAddAssignedUser() {
     this.showAddAssignedUser = !this.showAddAssignedUser;
     console.log("this.showAddAssignedUser", this.showAddAssignedUser);
-    if (!this.showAddAssignedUser && this.listAssignedUser.length > 0) {
+    if (!this.showAddAssignedUser && this.listAssignedUser.length > 0 && !this.checkAssignedUser()) {
       let ids = this.listAssignedUser.map(item => {
         return item.id;
       })
@@ -246,6 +246,20 @@ export class TicketEditAsideComponent implements OnInit {
 
       })
     }
+  }
+  private checkAssignedUser() {
+    let listAssignedUser = [];
+    if (this.ticketProfile.assignedUser) listAssignedUser.push(this.ticketProfile.assignedUser);
+    if (this.ticketProfile.multiAssignedUsers) listAssignedUser = [...listAssignedUser, ...this.ticketProfile.multiAssignedUsers];
+    if (listAssignedUser.length != this.listAssignedUser.length) return false;
+    for (let i = 0; i < listAssignedUser.length; i++) {
+      let find = this.listAssignedUser.find(item => item.id === listAssignedUser[i].id);
+      if (!find) return false;
+    }
+
+    return true;
+
+
   }
   claimTicket() {
     let currentUser = this.usersStateService.getCurrentUser();

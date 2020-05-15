@@ -28,13 +28,10 @@ export class TicketStateService {
   }
 
   public getServicesList(ticketProfile) {
-
     this.recurringService.getServiceList(ticketProfile.company.id).subscribe((res: any) => {
       this.servicesForTicket = res;
       this.getServiceAgreements(ticketProfile);
     })
-
-
   }
   public subsribeToTicket(id) {
     this.websocketService.subsribeToTicket(id);

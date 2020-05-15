@@ -33,6 +33,7 @@ export class AddAssignedUserComponent implements OnInit {
  
   users = [];
   reqUsers = [];
+  currentUsers = [];
   sub: Subscription = new Subscription();
 
   @Output() hidden = new EventEmitter<any>();
@@ -58,6 +59,7 @@ export class AddAssignedUserComponent implements OnInit {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
+    this.currentUsers = JSON.parse(JSON.stringify(this.selectedUsers));
     this.users = JSON.parse(JSON.stringify(this.userList));
     this.reqUsers = JSON.parse(JSON.stringify(this.userList));
     
