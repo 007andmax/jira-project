@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.service';
 import { TicketProfile } from '../class/ticket-profile';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
@@ -25,7 +25,7 @@ import { WebsocketService } from 'src/ng2/app/services/websocket/websocket.servi
   selector: 'app-ticket-edit-aside',
   templateUrl: './ticket-edit-aside.component.html',
   styleUrls: ['./ticket-edit-aside.component.scss'],
-  providers: [TicketsListService]
+  providers: [TicketsListService,TicketsPermissionsService]
 
 })
 export class TicketEditAsideComponent implements OnInit {
@@ -49,17 +49,20 @@ export class TicketEditAsideComponent implements OnInit {
     public ticketsListService: TicketsListService,
     private usersStateService: UsersStateService,
     private ticketStateService: TicketStateService,
+    public ticketsPermissionsService:TicketsPermissionsService,
     private notificationStateService: NotificationStateService,
-
+    public cd: ChangeDetectorRef,
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
     this.ticketsStateService.getOnOpenTicket().subscribe(data => {
       this.showPreloader = true;
+      console.log("getOnOpenTicket");
     })
-    this.ticketsStateService.getOnEditTicket().subscribe(data => {
+    this.ticketsStateService.getOnEditTicket().subscribe(data => { 
+      console.log("getOnEditTicket");
       this.ticketStateService.unsubscribeTicket();
-      this.updateForm.reset();
+      if (this.updateForm) this.updateForm.reset();
       this.ticketProfile = data;
       this.elRef.nativeElement.querySelector("#ticket-note").value = this.ticketProfile.note;
       this.updateListAssignedUser();
@@ -71,6 +74,7 @@ export class TicketEditAsideComponent implements OnInit {
       this.showPreloader = false;
       this.ticketStateService.getServicesList(this.ticketProfile);
       this.ticketStateService.subsribeToTicket(this.ticketProfile.id);
+      this.cd.detectChanges();
     })
     this.ticketsStateService.getOnInitColor().subscribe(data => {
       this.listColors = data;

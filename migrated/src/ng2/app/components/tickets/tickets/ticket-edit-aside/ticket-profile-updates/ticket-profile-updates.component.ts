@@ -17,6 +17,7 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
   @Input() updates: Array<TicketProfileUpdate>;
   @Input() ticketProfile: TicketProfile = new TicketProfile();
   sub: Subscription = new Subscription();
+  showLoadMoreUpdates = false;
   constructor(private ticketsService: TicketsService,
     private confirmStateService: ConfirmStateService,
     private ticketStateService: TicketStateService,
@@ -24,6 +25,7 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+    this.showLoadMoreUpdates = (this.ticketProfile.unloadedUpdates > 0) ? true:  false;
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_UPDATE_TICKET) {
@@ -57,6 +59,18 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
       this.notificationStateService.oninitShowNotification(`The ticket update containing a note has been deleted`);
 
     })
+  }
+  fetchUpdates() {
+    this.ticketsService.fetchUpdates(this.ticketProfile).subscribe((resp:any) => {
+      console.log("resp",resp);
+     let updates = this.updates || [];
+     updates = [...updates,...resp];
+      this.updates = updates;
+      this.showLoadMoreUpdates = false;
+    })
+   /* TicketsService.loadRemainingTicketUpdates($scope.ticketDetails, function () {
+      $scope.allUpdatesLoaded = true;
+    })*/
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

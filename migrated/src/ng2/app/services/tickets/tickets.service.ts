@@ -17,7 +17,15 @@ export class TicketsService {
    
     return this.http.put(this.apiUrl + `v2/tickets/ticketUpdate/updateExpense`, data);
   }
- 
+  public fetchUpdates(ticket) {
+    var loadedIds = [];
+        if (ticket.updates) {
+          for (var i = 0; i < ticket.updates.length; i++) {
+            loadedIds.push(ticket.updates[i].id)
+          }
+        }
+    return this.http.post(this.apiUrl + `v2/tickets/${ticket.id}/updates/fetch`, loadedIds);
+  }
   public changeSubjectNoteTicket(id, subject, note) {
     let data = { id: id, subject: subject, note: note };
     return this.http.put(this.apiUrl + `v2/tickets/edit`, data);

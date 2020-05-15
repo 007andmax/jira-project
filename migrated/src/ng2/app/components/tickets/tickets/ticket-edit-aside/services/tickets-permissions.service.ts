@@ -135,8 +135,7 @@ export class TicketsPermissionsService {
       indexUser = ticket.multiAssignedUsers.findIndex(item => item.id == this.usersStateService.getCurrentUser().id);
     }
     return this.isTicketOpen(ticket) &&
-      ((this.usersStateService.getCurrentUser() && (ticket.assignedUser && ticket.assignedUser.id === this.usersStateService.getCurrentUser().id)) ||
-        (ticket.assignedUser && ticket.assignedUser.id === this.usersStateService.getCurrentUser().id) || indexUser > -1 ||
+      ((this.usersStateService.getCurrentUser() && (ticket.assignedUser && ticket.assignedUser.id === this.usersStateService.getCurrentUser().id))  || indexUser > -1 ||
         this.isSharedToCurrentUser(ticket));
   }
 
