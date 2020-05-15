@@ -1,5 +1,5 @@
 <div class="ticket-updates">
-  <div class="ticket-updates__title"><span class="ticket-updates__count" [textContent]="updates.length + ticketProfile.unloadedUpdates"></span> Ticket
+  <div class="ticket-updates__title"><span class="ticket-updates__count" [textContent]="getCountUpdates()"></span> Ticket
     Updates</div>
 
   <div class="ticket-updates__ticket">
@@ -13,7 +13,9 @@
     </ng-template>
 
 <button *ngIf="showLoadMoreUpdates" (click)="fetchUpdates()">Load More Updates</button>
-
+<div class="prelaoder-body" *ngIf="showPreloader">
+  <div class="loading" ></div>
+</div>
 
   </div>
 </div>

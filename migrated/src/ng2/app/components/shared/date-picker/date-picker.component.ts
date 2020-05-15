@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef, ElementRef, EventEmitter, Output, OnDestroy, Input } from '@angular/core';
-import { NgbDropdown, NgbDateStruct, NgbCalendar, NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdown, NgbDateStruct, NgbCalendar, NgbDate  } from '@ng-bootstrap/ng-bootstrap';
 import { RecurringTicketsEditAsideDate } from '../../tickets/recurring-tickets/class/recurring-tickets-edit-aside-date';
 import { DatePickerStateService } from './services/date-picker-state.service';
 import { ChangeDatePicker } from './class/change-date-picker';
@@ -20,12 +20,17 @@ export class DatePickerComponent implements OnInit, OnDestroy {
   @Input() editMode: boolean = false;
   @Input() editDate: number = 0;
   @Input() useMinDate: boolean = true;
+  @Input() useMaxDate: boolean = false;
+  @Input() minDate: number = new Date().getTime();
+  @Input() maxDate: number = new Date().getTime();
   @Output() onChange: EventEmitter<ChangeDatePicker> = new EventEmitter();
   public datepicker: NgbDateStruct;
   public date: RecurringTicketsEditAsideDate = new RecurringTicketsEditAsideDate();
   public navDate: any;
-  public minDate: NgbDateStruct = null;
-
+  public minDateDP: NgbDateStruct = null;
+  public maxDateDP: NgbDateStruct = null;
+ /* public minDate: NgbDateStruct = null;
+  public maxDate: NgbDateStruct = null;*/
   /**
   * Creates an instance of the DatePickerComponent with the injected services
   * @param {NgbCalendar} calendar to work calendar api
@@ -43,7 +48,11 @@ export class DatePickerComponent implements OnInit, OnDestroy {
  * Initializes date picker. See [ngOnInit]{@see OnInit#ngOnInit}
  */
   ngOnInit() {
-   if (this.useMinDate) this.minDate = this.calendar.getToday();
+    console.log("this.calendar.getToday()",this.calendar.getToday());
+    
+   if (this.useMinDate) this.minDateDP = this.sericeDatePicker.getDateStruct(this.minDate);
+   if (this.useMaxDate) this.maxDateDP = this.sericeDatePicker.getDateStruct(this.maxDate);
+   
     this.oninitreset();
     this.onInitEditMode();
     this.oninitClear();

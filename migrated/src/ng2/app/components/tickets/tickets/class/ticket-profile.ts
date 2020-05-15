@@ -92,7 +92,7 @@ export class TicketProfile {
         this.attachments.push(new TicketProfileAttachment(data));
     }
     public addUpdate(data) {
-        this.updates.push(new TicketProfileUpdate(data));
+        this.updates.unshift(new TicketProfileUpdate(data));
     }
     public removeUpdate(data) {
         let index = this.updates.findIndex(item => item.id === data.id);

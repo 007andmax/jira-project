@@ -13,7 +13,6 @@ export class TicketsStateService {
   actualNumber: EventEmitter<any> = new EventEmitter();
   addTicket: EventEmitter<any> = new EventEmitter();
   updateTicket: EventEmitter<any> = new EventEmitter();
- 
   changeFieldTicket: EventEmitter<TicketChangeField> = new EventEmitter();
   openTicket: EventEmitter<any> = new EventEmitter();
   removeTicket: EventEmitter<any> = new EventEmitter();
@@ -24,8 +23,8 @@ export class TicketsStateService {
   status: EventEmitter<any> = new EventEmitter();
   count: EventEmitter<number> = new EventEmitter();
   toggleAddTicket: EventEmitter<any> = new EventEmitter();
-  ticketChangedActions = ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH', 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_SHARE', 'MARKED_AS_SPAM', 'EDITED_TICKET', 'RECURRING_TICKETS_OPEN', 'RECURRING_TICKETS_CLOSED'];
-  constructor(private ticketsRealTimeService: TicketsRealTimeService, private websocketService: WebsocketService, ) { }
+  ticketChangedActions = ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH', 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_SHARE', 'MARKED_AS_SPAM', 'EDITED_TICKET'];
+  constructor(private ticketsRealTimeService: TicketsRealTimeService) { }
 
   public onInit() {
     this.ticketsRealTimeService.changeActualNumber.subscribe(newChange => {
