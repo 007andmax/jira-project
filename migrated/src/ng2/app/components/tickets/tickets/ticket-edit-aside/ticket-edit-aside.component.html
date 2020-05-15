@@ -53,7 +53,7 @@
           <app-ticket-profile-actions (onClaimTicket)="claimTicket()" [ticketProfile]="ticketProfile"></app-ticket-profile-actions>
            </div>
         </div>
-        <app-ticket-edit-tags [selectedTag]="ticketProfile.tags" (tagsChange)="onChangeTags($event)" *ngIf="!showAddAssignedUser"></app-ticket-edit-tags>
+        <app-ticket-edit-tags [selectedTag]="ticketProfile.tags" (tagsChange)="onChangeTags($event)" [hidden]="showAddAssignedUser"></app-ticket-edit-tags>
         <app-add-assigned-user [placement]="'bottom-left'" [userList]="getUsersForAssign()" [selectedUsers]="listAssignedUser" (onSelected)="onSelectAssignedUser($event)" (hidden)="onToggleAddAssignedUser()" *ngIf="showAddAssignedUser"></app-add-assigned-user>
         <!--   TICKET SUBJECT AND DESCRIPTION   -->
         <div class="ticket-edit-aside__ticket-text">
