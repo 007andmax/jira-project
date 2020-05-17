@@ -1,4 +1,4 @@
-<div class="d-f jc-sb ai-fs ticket-updates">
+<div class="d-f jc-sb ai-fs ticket-updates ticket-update-service-edit">
   <div class="ticket-updates__ticket-info">
     <div class="ticket-updates__ticket-header d-f">
       <div class="ticket-updates__service-header-name">Service Name</div>
@@ -32,8 +32,9 @@
     <span  class="tag__modern ticket-updates__service-tag-completed" *ngIf="!service.completed && service.date" [textContent]="'Due date - ' + getDate(service.date)"></span>
 
   </div>
-  <button (click)="saveService()"><i class="icn-16 archive-grey-ng2"></i>save
-  </button>
-  <button (click)="cancelService()"><i class="icn-16 archive-grey-ng2"></i>cancel
-  </button>
+
+  <div class="right-side-icons">
+  <i (click)="saveService()" class="icn-20 icon__check save-service"></i>
+  <i (click)="cancelService()" class="icn-20 icon__close "></i>
+  </div>
 </div>

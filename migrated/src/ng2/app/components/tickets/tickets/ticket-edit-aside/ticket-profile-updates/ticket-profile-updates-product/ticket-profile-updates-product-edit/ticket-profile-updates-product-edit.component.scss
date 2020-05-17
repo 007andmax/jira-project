@@ -199,3 +199,47 @@
       margin-right: 32px;
     }
   }
+
+
+
+.ticket-update-product-edit {
+
+  .right-side-icons {
+    margin-top: 25px;
+    .save-product {
+      background-size: 15px;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin-bottom: 3px;
+    }
+  }
+
+  .input-price, .input-qty {
+    margin-right: 8px;
+    width: 70px;
+  }
+
+  app-product-list {
+    margin-right: 8px;
+    width: 241px;
+  }
+
+  .ticket-updates__ticket-header-name {
+    width: 279px;
+    margin-right: 8px;
+  }
+
+  .ticket-updates__ticket-header-price {
+    margin-right: 8px;
+    width: 69px;
+  }
+
+  .ticket-updates__ticket-header-qty {
+    margin-right: 8px;
+    width: 69px;
+  }
+
+  /deep/ .select-product__dropdown {
+    min-width: 450px;
+  }
+}

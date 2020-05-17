@@ -2387,3 +2387,50 @@ input.ng-invalid.is-invalid {
       margin-bottom: 0;
     }
 }
+
+ .ticket-updates__date-icon {
+    width: 24px !important;
+    height: 24px !important;
+    margin-right: 8px;
+}
+
+// .ticket-updates__update-info {
+  // margin-left: -48px;
+// }
+
+app-ticket-profile-updates-product-item {
+  .ticket-updates__ticket-info-container {
+    margin: 35px 0 8px -48px;
+  }
+  &:nth-child(2) {
+    .ticket-updates__ticket-info-container {
+      margin-top: 0;
+    }
+  }
+}
+
+// .ticket-updates__message-line {
+  // max-width: 533px;
+// }
+
+app-ticket-profile-updates-service-timepicker {
+  display: flex;
+}
+
+.ticket-updates__ticket-photo {
+  min-width: 32px;
+}
+
+.input-default {
+  height: 40px;
+  font-size: 13px;
+  border-radius: 3px;
+  border: solid 1px #c4cbd5;
+  background-color: white;
+  color: #4f5f79;
+  padding: 10px 12px;
+}
+
+.ticket-updates__edit {
+  min-width: 24px;
+}

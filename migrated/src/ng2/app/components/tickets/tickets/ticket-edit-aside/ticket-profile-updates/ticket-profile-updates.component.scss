@@ -199,3 +199,20 @@
       margin-right: 32px;
     }
   }
+
+
+.button-loader {
+  position: relative;
+  width: fit-content;
+  text-decoration: underline;
+  cursor: pointer;
+  margin: 0 auto;
+  font-weight: 600;
+  .loading {
+    width: 20px;
+    height: 20px;
+    right: -28px;
+    left: unset;
+    top: calc(50% - 10px);
+  }
+}
