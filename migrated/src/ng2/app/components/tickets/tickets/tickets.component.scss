@@ -15,28 +15,34 @@
   &__requested-by {
     max-width: 166px;
     width: 166px;
-
+    min-width: 166px;
   }
   &__subject {
     max-width: 345px;
     width: 345px;
+    min-width: 345px;
   }
   &__company {
     max-width: 148px;
     width: 148px;
+    min-width: 148px;
 
   }
   &__assignee {
      max-width: 154px;
      width: 154px;
+     min-width: 154px;
+     overflow: auto !important;
   }
   &__status {
     max-width: 100px;
     width: 100px;
+    min-width: 100px;
   }
   &__created-date {
      max-width: 93px;
      width: 93px;
+     min-width: 93px;
   }
 }
 
@@ -45,12 +51,16 @@
     &__requested-by {
       max-width: 300px;
       width: 300px;
+      min-width: 300px;
     }
     &__company {
       max-width: 250px;
+      width: 250px;
+      min-width: 250px;
     }
     &__subject {
-      max-width: 650px;
+      // max-width: 650px;
+      width: max-content;
     }
   }
 }
