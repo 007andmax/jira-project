@@ -1,13 +1,15 @@
 import { DOCUMENT } from "@angular/common";
 import { Component, HostListener, Inject, OnInit, ViewChild, Input, Output, EventEmitter } from "@angular/core";
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
-import { IgxTimePickerComponent } from 'igniteui-angular';
+import { IgxTimePickerComponent, InteractionMode } from 'igniteui-angular';
+var $ = require("jquery");
 @Component({
     selector: 'app-ticket-profile-updates-service-duration',
     templateUrl: './ticket-profile-updates-service-duration.component.html',
     styleUrls: ['./ticket-profile-updates-service-duration.component.scss']
 })
 export class TicketProfileUpdatesServiceDurationComponent implements OnInit {
+    public mode = InteractionMode.DropDown;
     @ViewChild('picker') picker: IgxTimePickerComponent;
     @Output() onChange = new EventEmitter<any>();
     @Input() hour: number = 0;
@@ -43,5 +45,11 @@ export class TicketProfileUpdatesServiceDurationComponent implements OnInit {
         let quantity = hours + ((minutes) ? (minutes / 60) : 0);
         this.onChange.emit(quantity);
     }
-
+    public onOpened(data) {
+        let topInput = $(data.input.nativeElement).offset().top;
+        let height = $(data.container.nativeElement).parent().height();
+        $(data.container.nativeElement).parent().offset({ top: topInput - height - 15 });
+        $(data.container.nativeElement).parent().css({"opacity": 1});
+        //console.log("top",$(data.container.nativeElement).parent().offset().top);
+    }
 }
