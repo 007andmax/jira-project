@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter, ElementRef, OnDestroy } from '@angular/core';
 import { ServiceAgreementsService } from 'src/ng2/app/services/service-agreements/service-agreements.service';
 import { TicketProfile } from '../../../class/ticket-profile';
 import { RecurringService } from 'src/ng2/app/services/recurring/recurring.service';
@@ -8,15 +8,22 @@ import * as moment from "moment";
 import { TicketStateService } from '../../services/ticket-state.service';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { TicketProfileUpdatesServiceDurationComponent } from '../../ticket-profile-updates/ticket-profile-updates-service-duration/ticket-profile-updates-service-duration.component';
+import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.service';
+import { Subscription } from 'rxjs';
+import { DatePickerComponent } from 'src/ng2/app/components/shared/date-picker/date-picker.component';
 
 @Component({
   selector: 'app-ticket-profile-form-update-services',
   templateUrl: './ticket-profile-form-update-services.component.html',
   styleUrls: ['./ticket-profile-form-update-services.component.scss']
 })
-export class TicketProfileFormUpdateServicesComponent implements OnInit {
-  @ViewChild('durationD') durationD: TicketProfileUpdatesServiceDurationComponent;
+export class TicketProfileFormUpdateServicesComponent implements OnInit,OnDestroy {
+  @ViewChild('durationPicker') durationPicker: TicketProfileUpdatesServiceDurationComponent;
+  @ViewChild('timePicker') timePicker: TicketProfileUpdatesServiceDurationComponent;
+  
   @ViewChild('serviceDP') serviceDP: ServicesListComponent;
+  @ViewChild('datePicker') datePicker: DatePickerComponent;
+  
   @Input() ticketProfile: TicketProfile = new TicketProfile();
   areTicketsTerminated: boolean = false;
   areTicketsPresented: boolean = false;
@@ -24,12 +31,26 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit {
   addedServiceList = [];
   currentCompany = null;
   currentService: TicketProfileFormService = new TicketProfileFormService();
+  sub:Subscription = new Subscription();
   constructor(private serviceAgreementsService: ServiceAgreementsService,
     private recurringService: RecurringService,
+    private elRef: ElementRef,
+    private ticketsStateService: TicketsStateService,
     private companiesStateService: CompaniesStateService,
     private ticketStateService: TicketStateService) { }
+  
 
   ngOnInit() {
+   let getOnClearFormUpdate =  this.ticketsStateService.getOnClearFormUpdate().subscribe(data => {
+      this.addedServiceList = [];
+      this.elRef.nativeElement.querySelector('#service-description').value = "";
+      this.currentService = new TicketProfileFormService();
+      this.serviceDP.clear();
+      this.datePicker.reset();
+     if (this.currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER') this.timePicker.refresh();
+     if (this.currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER') this.durationPicker.refresh();
+    })
+    this.sub.add(getOnClearFormUpdate);
     this.currentCompany = this.companiesStateService.getCurrentCompany();
     console.log("this.currentCompany", this.currentCompany);
     this.getServices();
@@ -59,8 +80,8 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit {
     console.log("addedServiceList", this.addedServiceList);
     this.currentService = new TicketProfileFormService();
     this.serviceDP.clear();
-    this.durationD.refresh();
-
+   if (this.currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER') this.durationPicker.refresh();
+  if (this.currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER')  this.timePicker.refresh();
   }
   public getHours(service) {
     let timeInMinutes = service.quantity * 60;
@@ -132,5 +153,8 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit {
   }
   public getSelectedServices() {
     return (this.currentService.item && this.currentService.item.versionedId) ? [...this.addedServiceList, this.currentService] : this.addedServiceList;
+  }
+  ngOnDestroy(): void {
+   this.sub.unsubscribe();
   }
 }

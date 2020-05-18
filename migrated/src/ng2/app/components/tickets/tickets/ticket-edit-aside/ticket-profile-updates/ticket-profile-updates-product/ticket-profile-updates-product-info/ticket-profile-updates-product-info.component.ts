@@ -39,7 +39,8 @@ export class TicketProfileUpdatesProductInfoComponent implements OnInit {
     return price * quantity;
   }
   public getDate(date) {
-    return moment(new Date(date)).format('DD MMM YYYY');
+
+    return moment((date) ? new Date(date) : new Date()).format('DD MMM YYYY');
   }
   edit() {
     this.onEdit.emit(null);

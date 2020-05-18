@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef, ElementRef, EventEmitter, Output, OnDestroy, Input } from '@angular/core';
-import { NgbDropdown, NgbDateStruct, NgbCalendar, NgbDate  } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdown, NgbDateStruct, NgbCalendar, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { RecurringTicketsEditAsideDate } from '../../tickets/recurring-tickets/class/recurring-tickets-edit-aside-date';
 import { DatePickerStateService } from './services/date-picker-state.service';
 import { ChangeDatePicker } from './class/change-date-picker';
@@ -29,8 +29,8 @@ export class DatePickerComponent implements OnInit, OnDestroy {
   public navDate: any;
   public minDateDP: NgbDateStruct = null;
   public maxDateDP: NgbDateStruct = null;
- /* public minDate: NgbDateStruct = null;
-  public maxDate: NgbDateStruct = null;*/
+  /* public minDate: NgbDateStruct = null;
+   public maxDate: NgbDateStruct = null;*/
   /**
   * Creates an instance of the DatePickerComponent with the injected services
   * @param {NgbCalendar} calendar to work calendar api
@@ -48,15 +48,15 @@ export class DatePickerComponent implements OnInit, OnDestroy {
  * Initializes date picker. See [ngOnInit]{@see OnInit#ngOnInit}
  */
   ngOnInit() {
-    console.log("this.calendar.getToday()",this.calendar.getToday());
-    
-   if (this.useMinDate) this.minDateDP = this.sericeDatePicker.getDateStruct(this.minDate);
-   if (this.useMaxDate) this.maxDateDP = this.sericeDatePicker.getDateStruct(this.maxDate);
-   
+    console.log("this.calendar.getToday()", this.calendar.getToday());
+
+    if (this.useMinDate) this.minDateDP = this.sericeDatePicker.getDateStruct(this.minDate);
+    if (this.useMaxDate) this.maxDateDP = this.sericeDatePicker.getDateStruct(this.maxDate);
+
     this.oninitreset();
     this.onInitEditMode();
     this.oninitClear();
-    console.log("this.editDate",this.editDate);
+    console.log("this.editDate", this.editDate);
     if (this.editMode) this.setEditDate(this.editDate);
 
   }
@@ -66,12 +66,18 @@ export class DatePickerComponent implements OnInit, OnDestroy {
   */
   private oninitClear() {
     let clear = this.stateDatePicker.getOnClear().subscribe((data) => {
-      this.date.clearTitle();
-      this.navDate = null;
+      this.reset();
     });
     this.sericeDatePicker.addSubscription(clear);
   }
 
+  public reset() {
+    this.date.clearTitle();
+    let date = new Date();
+    this.navDate = this.sericeDatePicker.getNavDate(date);
+    this.datepicker = this.sericeDatePicker.getDateForDatePicker(date);
+    this.date.setTitle(this.datepicker);
+  }
   /**
   * Subscribe to edit mode
   */
@@ -87,7 +93,7 @@ export class DatePickerComponent implements OnInit, OnDestroy {
     this.datepicker = this.sericeDatePicker.getDateForDatePicker(data);
     if (this.navDate) this.sericeDatePicker.updateMonthAndYearDatePicker(this.datepicker, this.navDate);
     this.date.setTitle(this.datepicker);
- //   if (this.type === TYPE_INPUT)  this.sericeDatePicker.setTextInput('dropdownDate', this.date.getTitle());
+    //   if (this.type === TYPE_INPUT)  this.sericeDatePicker.setTextInput('dropdownDate', this.date.getTitle());
   }
 
   public geTextDate() {
@@ -113,7 +119,7 @@ export class DatePickerComponent implements OnInit, OnDestroy {
     if (this.navDate) this.sericeDatePicker.updateMonthAndYearDatePicker(this.datepicker, this.navDate);
     this.date.setTitle(this.datepicker);
 
-   if (this.type === TYPE_INPUT) this.sericeDatePicker.setTextInput('dropdownDate', this.date.getTitle());
+    if (this.type === TYPE_INPUT) this.sericeDatePicker.setTextInput('dropdownDate', this.date.getTitle());
     this.onChange.emit(new ChangeDatePicker(this.datepicker.day, this.datepicker.month, this.datepicker.year));
     // this.recurringState.getCreateTicket().setStartDate(this.datepicker.day, this.datepicker.month, this.datepicker.year, this.recurringState.getTehCompany().addresses[0].timeZone.timeOffset);
     this.date_dropDown.close();

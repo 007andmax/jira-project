@@ -9,7 +9,7 @@ export class TicketProfileFormService {
     durationStart: number;
     item: Service;
     itemOrder: number;
-    quantity: number = 1;
+    quantity: number = 0;
 
     constructor(data = null) {
         if (data) {

@@ -100,12 +100,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
         this.ticketsService.updateTicket(this.ticketProfileFormUpdate.getDataForUpdateNote(),true).subscribe(data => {
           this.ticketProfileFormUpdate.setChatMessage("");
         })
-      } else {
-        this.ticketsService.updateTicket(this.ticketProfileFormUpdate.getDataForClose(),true).subscribe(data => {
-          // this.ticketProfileFormUpdate.setChatMessage("");
-          this.ticketsStateService.onClearFormUpdate();
-        })
-      }
+      } else this.onUpdateTicketAndClose();
     
     }
     if (this.tab === "PRODUCT") {
@@ -115,12 +110,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
           // this.ticketProfileFormUpdate.setChatMessage("");
           this.ticketsStateService.onClearFormUpdate();
         })
-      } else {
-        this.ticketsService.updateTicket(this.ticketProfileFormUpdate.getDataForClose(),true).subscribe(data => {
-          // this.ticketProfileFormUpdate.setChatMessage("");
-          this.ticketsStateService.onClearFormUpdate();
-        })
-      }
+      } else this.onUpdateTicketAndClose();
     
     }
     if (this.tab === "SERVICE") {
@@ -130,14 +120,16 @@ export class TicketProfileFormUpdateComponent implements OnInit {
           // this.ticketProfileFormUpdate.setChatMessage("");
           this.ticketsStateService.onClearFormUpdate();
         })
-      } else if (this.ticketProfileFormUpdate.isValidateService()) {
-        this.ticketsService.updateTicket(this.ticketProfileFormUpdate.getDataForClose(),true).subscribe(data => {
-          // this.ticketProfileFormUpdate.setChatMessage("");
-          this.ticketsStateService.onClearFormUpdate();
-        })
-      }
+      } else if (this.ticketProfileFormUpdate.isValidateService()) this.onUpdateTicketAndClose();
      
     }
+  }
+  onUpdateTicketAndClose() {
+    this.ticketsService.updateTicket(this.ticketProfileFormUpdate.getDataForClose(),true).subscribe(data => {
+      // this.ticketProfileFormUpdate.setChatMessage("");
+      this.ticketsStateService.onClearFormUpdate();
+      
+    })
   }
   private checkUpdateAndClose() {
     if (this.ticketProfile.updates.length === 0) return true;

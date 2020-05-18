@@ -175,6 +175,7 @@ export class TicketEditAsideComponent implements OnInit {
     })
   }
   onChangeTags(data) {
+    if (!this.opened) return;
     this.ticketProfile.tags = data;
 
     let tags = this.ticketProfile.tags.map(item => {

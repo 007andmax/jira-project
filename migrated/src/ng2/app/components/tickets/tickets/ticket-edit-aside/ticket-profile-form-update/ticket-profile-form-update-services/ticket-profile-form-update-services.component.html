@@ -15,7 +15,7 @@
       </div>
       <div>
         <div class="editable-description editable-chat">
-          <textarea  name="cps-chat" class="cps-block__content-textarea" appTextArea  [minHeight]="48"  cols="5" rows="1" id="service-description" placeholder="Write ticket conversation here…"
+          <textarea  name="cps-chat" class="cps-block__content-textarea" appTextArea  [minHeight]="48"  cols="5" rows="1"   placeholder="Write ticket conversation here…"
           (input)="onChangeDescriptionService($event,i)" (onPast)="onPastDescriptionService($event,i)"></textarea>
           </div>
 
@@ -30,9 +30,9 @@
       <app-services-list class="service-item__input device" #serviceDP   [itemList]="servicesList"
       (selectedServicesItem)="selectService($event)"></app-services-list>
      <!-- <app-ticket-profile-updates-service-duration></app-ticket-profile-updates-service-duration>-->
-      <app-ticket-profile-updates-service-timepicker  (onChangeStart)="onChangeStartTimePicker($event)" (onChangeEnd)="onChangeEndTimePicker($event)" *ngIf="currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'"></app-ticket-profile-updates-service-timepicker>
-       <app-ticket-profile-updates-service-duration #durationD (onChange)="onChangeDuration($event)" *ngIf="currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER'"></app-ticket-profile-updates-service-duration>
-      <app-date-picker   [editMode]="true" [editDate]="currentService.getDateTime()" [useMinDate]="false" (onChange)="onChangeDatePicker($event)"></app-date-picker>
+      <app-ticket-profile-updates-service-timepicker #timePicker  (onChangeStart)="onChangeStartTimePicker($event)" (onChangeEnd)="onChangeEndTimePicker($event)" *ngIf="currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'"></app-ticket-profile-updates-service-timepicker>
+       <app-ticket-profile-updates-service-duration #durationPicker (onChange)="onChangeDuration($event)" *ngIf="currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER'"></app-ticket-profile-updates-service-duration>
+      <app-date-picker #datePicker  [editMode]="true" [editDate]="currentService.getDateTime()" [useMinDate]="false" (onChange)="onChangeDatePicker($event)"></app-date-picker>
 
       <button class="service-item__btn-add" (click)="addService()">
         <span class="icon__plus-white btn-icon"></span>
