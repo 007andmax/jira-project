@@ -32,6 +32,7 @@ export class TicketProfileUpdatesProductInfoComponent implements OnInit {
     private modalService: NgbModal) { }
 
   ngOnInit() {
+    if (!this.product.date) this.product.date = new Date().getTime();
     if (this.product.user) this.userService = [this.product.user];
     this.listTehUsers = this.getUsersForAssign();
   }
