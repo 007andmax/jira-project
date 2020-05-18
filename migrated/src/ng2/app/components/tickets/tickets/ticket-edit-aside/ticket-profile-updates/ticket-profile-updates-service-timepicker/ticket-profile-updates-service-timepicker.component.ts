@@ -87,6 +87,7 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
       console.log("endDate", endDate);
       console.log("quantity,this.", this.quantity);
       $('#datepairExample .end').timepicker('setTime', endDate);
+      this.onChangeEnd.emit(endDate.getTime());
     }
     $('#datepairExample .end').timepicker('option', 'minTime', $('#datepairExample .start').val());
   }

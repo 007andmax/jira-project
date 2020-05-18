@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { TicketProfileUpdate } from '../../../../class/ticket-profile-update';
 import { TicketsListService } from '../../../../services/tickets-list.service';
 import { ConfirmStateService } from 'src/ng2/app/components/shared/confirm/services/confirm-state.service';
@@ -35,6 +35,7 @@ export class TicketProfileUpdatesServiceEditComponent implements OnInit {
     private ticketStateService: TicketStateService,
     private companiesStateService: CompaniesStateService,
     private elRef: ElementRef,
+    public cd: ChangeDetectorRef,
     private ticketsService: TicketsService,
     private modalService: NgbModal) { }
 
@@ -75,6 +76,8 @@ export class TicketProfileUpdatesServiceEditComponent implements OnInit {
   }
   public onChangeDuration(quantity) {
     this.quantity = quantity;
+    console.log("quantity", this.quantity);
+    this.cd.detectChanges();
     this.editTimePicker.changeStart();
     this.editService.setQuantity(this.quantity);
   }
@@ -83,15 +86,14 @@ export class TicketProfileUpdatesServiceEditComponent implements OnInit {
     this.editService.setDurationEnd(this.durationEnd);
     if (this.currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER') {
       let durationEnd = JSON.parse(JSON.stringify(this.durationEnd));
-
-
-      if (this.durationStart - this.durationEnd > 0) durationEnd = this.durationEnd + 24 * 3600000;
+      if (this.durationStart - this.durationEnd > 0) durationEnd =  durationEnd + 24 * 3600000;
       this.quantity = (durationEnd - this.durationStart) / 3600000 > 0 ? (durationEnd - this.durationStart) / 3600000 : 0;
       if (this.quantity > 24) this.quantity -= 24;
       this.editService.setQuantity(this.quantity);
       //  this.setHoursAndMinutes(this.quantity);
       console.log("quantity", this.quantity);
     }
+    console.log("this.durationEnd",new Date(this.durationEnd));
   }
   public onChangeStartTimePicker(startDate) {
     this.durationStart = startDate;
@@ -117,7 +119,8 @@ export class TicketProfileUpdatesServiceEditComponent implements OnInit {
 
   }
   saveService() {
-    this.editService.setDurationEnd(this.durationStart + this.quantity * 3600000);
+   // this.editService.setDurationEnd(this.durationStart + this.quantity * 3600000);
+ //  this.editService.setDurationEnd(this.durationEnd);
     this.ticketsService.updateExpense(this.editService.getDateForUpdate(this.update.id)).subscribe(data => {
 
       this.onEdit.emit(null);
