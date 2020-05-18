@@ -171,7 +171,7 @@
  }
  &__service {
   background-image: url("assets/img/icons/service.svg");
-  .active {
+  &.active {
      background-image: url("assets/img/icons/service-blue.svg");
   }
  }
@@ -229,7 +229,16 @@
   &__tips {
     background: url("assets/img/icons/tips.svg") ;
   }
+  &__check {
+    background-image: url("assets/img/icons/check.png");
+  }
 
+}
+
+.icn-20 {
+  background-size: cover;
+  width: 20px;
+  height: 20px;
 }
 
 .priority-icon {

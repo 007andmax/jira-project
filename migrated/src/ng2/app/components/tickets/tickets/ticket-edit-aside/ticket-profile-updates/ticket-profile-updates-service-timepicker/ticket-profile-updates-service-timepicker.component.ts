@@ -63,8 +63,8 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
         let endDate = new Date(this.end);
         $('#datepairExample .start').timepicker('setTime', startDate);
         $('#datepairExample .end').timepicker('setTime', endDate);
-        
-      
+
+
       }else {
         $('#datepairExample .start').timepicker('setTime', new Date());
         $('#datepairExample .end').timepicker('setTime', new Date());
@@ -76,7 +76,7 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
   getEndText() {
     let startDate = $('#datepairExample .start').timepicker('getTime');
     let endDate = new Date(new Date(startDate).getTime() + (this.quantity * 3600000));
-    return moment(new Date(endDate)).format('hh:mm A');
+    return moment(new Date(endDate)).format('hh:mma');
   }
 
   public changeStart() {
@@ -87,7 +87,7 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
       console.log("endDate", endDate);
       console.log("quantity,this.", this.quantity);
       $('#datepairExample .end').timepicker('setTime', endDate);
-    } 
+    }
     $('#datepairExample .end').timepicker('option', 'minTime', $('#datepairExample .start').val());
   }
 }

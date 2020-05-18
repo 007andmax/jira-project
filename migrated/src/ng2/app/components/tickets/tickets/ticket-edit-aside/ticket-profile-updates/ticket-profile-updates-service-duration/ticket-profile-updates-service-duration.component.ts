@@ -34,7 +34,8 @@ export class TicketProfileUpdatesServiceDurationComponent implements OnInit {
         this.picker.openDialog();
     }
     public refresh() {
-        this.date = new Date();
+        // this.date = new Date();
+        this.date = null;
         this.date.setHours(this.hour);
         this.date.setMinutes(this.minute);
     }

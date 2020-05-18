@@ -19,6 +19,15 @@
     width: 672px;
     overflow: auto;
     position: relative;
+
+    /deep/ .mat-form-field-label {
+      padding-left: 24px;
+      line-height: 1.5;
+    }
+    /deep/ .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+      line-height: 1;
+      padding-left: 38px;
+    }
   }
 .prelaoder-body {
   display: block;

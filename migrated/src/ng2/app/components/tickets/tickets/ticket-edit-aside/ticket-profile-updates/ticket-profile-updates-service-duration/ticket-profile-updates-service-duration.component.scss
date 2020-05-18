@@ -93,7 +93,27 @@
 }
 
 
+/deep/ app-ticket-profile-updates-service-duration {
+  margin-right: 8px;
 
+}
+
+/deep/ igx-time-picker {
+  width: 100%;
+  background: white;
+  height: 40px;
+  border-radius: 3px;
+  border: solid 1px #c4cbd5;
+  padding: 0px 12px;
+  display: flex;
+  align-items: center;
+
+  input {
+    font-size: 13px !important;
+    color: #404b5f !important;
+    height: 40px !important;
+  }
+}
 
 /deep/ .igx-input-group {
   .igx-input-group__bundle {
@@ -110,6 +130,12 @@
   .igx-input-group__border {
     display: none;
   }
+
+  .igx-input-group__bundle {
+    box-shadow: none;
+  }
+
+
 }
 
 .action-buttons {

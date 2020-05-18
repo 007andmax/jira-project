@@ -1,4 +1,4 @@
-<div class="d-f jc-sb ai-fs ticket-updates__ticket-info-container">
+<div class="d-f jc-sb ai-fs ticket-updates__ticket-info-container ticket-update-product-edit">
   <div class="ticket-updates__ticket-info">
     <div class="ticket-updates__ticket-header d-f">
       <div class="ticket-updates__ticket-header-name">Product Name</div>
@@ -6,13 +6,13 @@
       <div class="ticket-updates__ticket-header-qty">Qty</div>
       <div class="ticket-updates__ticket-header-total">Total</div>
     </div>
-    <div class="d-f ticket-updates__ticket-body" [ngClass]="{'--done':editProduct.completed}">
+    <div class="d-f ai-c ticket-updates__ticket-body" [ngClass]="{'--done':editProduct.completed}">
       <div class="ticket-updates__done-status icon__task-pending"></div>
       <app-product-list [editItem]="editProduct.item" class="product-item__prodect-list" [itemList]="productList"
       (selectedProductItem)="onChangeProduct($event)"></app-product-list>
 
-      <input  [(ngModel)]="editProduct.item.sale"   />
-     <input  [(ngModel)]="editProduct.quantity"   />
+      <input class="input-default input-price"  [(ngModel)]="editProduct.item.sale"   />
+      <input  class="input-default input-qty" [(ngModel)]="editProduct.quantity"   />
       <div class="ticket-updates__ticket-total" [textContent]="'$' + getTotal(editProduct.item.sale,editProduct.quantity)"></div>
 
       <div class="ticket-updates__date-icon icon__assign-date"></div>
@@ -24,8 +24,10 @@
 
 
   </div>
-  <button (click)="saveProduct()"><i class="icn-16 archive-grey-ng2"></i>save
-  </button>
-  <button (click)="cancelProduct()"><i class="icn-16 archive-grey-ng2"></i>cancel
-  </button>
+
+
+  <div class="right-side-icons">
+    <i (click)="saveProduct()" class="icn-20 icon__check save-product"></i>
+    <i (click)="cancelProduct()" class="icn-20 icon__close "></i>
+    </div>
 </div>
