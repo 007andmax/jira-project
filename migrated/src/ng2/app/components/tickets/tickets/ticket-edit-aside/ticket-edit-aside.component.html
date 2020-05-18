@@ -91,7 +91,7 @@
       <app-ticket-message (onMoveToTrash)="moveToTrash($event)" (onRestoreFromSpam)="restoreFromSpam()" (onOpenTicket)="markAsOpen()" (onClaimTicket)="claimTicket()" [ticketProfile]="ticketProfile"></app-ticket-message>
 
         <!--  TICKET SUBTASK   -->
-        <div class="ticket-edit-aside__subtasks">
+        <!-- div class="ticket-edit-aside__subtasks">
           <div class="subtask__header d-f jc-sb">
             <div class="subtask__header-title">Subtask</div>
             <div class="subtask__header-add-task">+ Add subtask</div>
@@ -102,21 +102,21 @@
             <input class="subtask__input" type="text" value="Need to fix IP configuration">
             <div class="subtask__date">12 Mar 2020</div>
             <div class="subtask__user-photo" style="background-image: url(https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)"></div>
-  <!--          <div class="subtask__date-icon icon__assign-date"></div>-->
-  <!--          <div class="subtask__user-icon icon__assign-user"></div>-->
+
+
           </div>
 
 
           <div class="subtask__line d-f ai-c">
             <div class="subtask__done-status icon__task-pending --done"></div>
             <input class="subtask__input" type="text" value="Anstall auto">
-  <!--          <div class="subtask__date">12 Mar 2020</div>-->
-  <!--          <div class="subtask__user-photo" style="background-image: url(https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)"></div>-->
+
+
             <div class="subtask__date-icon icon__assign-date"></div>
             <div class="subtask__user-icon icon__assign-user"></div>
           </div>
 
-        </div>
+        </!-- -->
         <!--  TICKET UPDATES  -->
        <app-ticket-profile-updates *ngIf="ticketProfile.updates && ticketProfile.updates.length > 0" [ticketProfile]="ticketProfile" [updates]="ticketProfile.updates"></app-ticket-profile-updates>
         <!--  CHAT PRODUCTS SERVICE  -->

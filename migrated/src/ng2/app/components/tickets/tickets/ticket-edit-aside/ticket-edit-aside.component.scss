@@ -25,8 +25,11 @@
       line-height: 1.5;
     }
     /deep/ .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
-      line-height: 1;
-      padding-left: 38px;
+      // line-height: 1;
+      // padding-left: 38px;
+      padding-left: 28px;
+      font-size: 11px;
+      transform: translateY(-17px);
     }
   }
 .prelaoder-body {
@@ -550,7 +553,7 @@
 
 .ticket-notify {
   padding: 0 32px;
-  margin-top: 40px;
+  margin-top: 20px;
 
   &__item {
     border-radius: 10px;

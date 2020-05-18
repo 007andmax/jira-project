@@ -6,10 +6,21 @@
     font-size: 12px;
     font-weight: 600;
     background-color: #16a4fa;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     color: white;
     line-height: 36px;
     white-space: nowrap;
+
+    &.--loading {
+      color: transparent;
+      app-preloader-ticket {
+        position: absolute !important;
+      }
+    }
 
     &.--outline-blue {
         background-color: #ffffff;
@@ -22,5 +33,10 @@
       padding-right: 32px;
       height: 40px;
       line-height: 40px;
+    }
+
+    &.disabled {
+      cursor: default;
+      background-color: #d1d2d5;
     }
 }
