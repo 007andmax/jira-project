@@ -98,6 +98,14 @@ export class TicketProfileUpdatesServiceEditComponent implements OnInit {
   public onChangeStartTimePicker(startDate) {
     this.durationStart = startDate;
     this.editService.setDurationStart(this.durationStart);
+   /* if (this.currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER') {
+      this.durationEnd =  this.durationStart + this.quantity * 3600000;
+      this.editService.setDurationEnd(this.durationEnd);
+    }*/
+  }
+  public onSetDurationEnd(endDate) {
+    this.durationEnd = endDate;
+    this.editService.setDurationEnd(this.durationEnd);
   }
   private setHoursAndMinutes(quantity) {
     var timeInMinutes = quantity * 60;

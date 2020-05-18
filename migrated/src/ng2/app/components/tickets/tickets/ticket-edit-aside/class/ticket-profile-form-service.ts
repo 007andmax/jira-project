@@ -66,10 +66,11 @@ export class TicketProfileFormService {
         if (dateDP.getTime() > current.getTime()) this.completed = false;
       }
     public calculateQuantity() {
-        let durationEnd = 0;
+        let durationEnd = JSON.parse(JSON.stringify(this.durationEnd));
         if (this.durationStart - this.durationEnd > 0) durationEnd = this.durationEnd + 24 * 3600000;
         this.quantity = (durationEnd - this.durationStart) / 3600000 > 0 ? (durationEnd - this.durationStart) / 3600000 : 0;
         if (this.quantity > 24) this.quantity -= 24;
+        console.log("this.quantity",this.quantity);
     }
     public setQuantity(data) {
         this.quantity = data;

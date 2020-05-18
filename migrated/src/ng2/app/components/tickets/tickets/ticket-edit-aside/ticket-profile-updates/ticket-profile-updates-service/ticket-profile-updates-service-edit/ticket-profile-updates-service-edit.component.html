@@ -13,7 +13,7 @@
         (selectedServicesItem)="selectService($event)"></app-services-list>
 
 
-        <app-ticket-profile-updates-service-timepicker (onChangeStart)="onChangeStartTimePicker($event)" (onChangeEnd)="onChangeEndTimePicker($event)" #editTimePicker [quantity]="quantity" [editMode]="true" [start]="durationStart" [end]="durationEnd" ></app-ticket-profile-updates-service-timepicker>
+        <app-ticket-profile-updates-service-timepicker (onSetEnd)="onSetDurationEnd($event)" (onChangeStart)="onChangeStartTimePicker($event)" (onChangeEnd)="onChangeEndTimePicker($event)" #editTimePicker [quantity]="quantity" [editMode]="true" [start]="durationStart" [end]="durationEnd" ></app-ticket-profile-updates-service-timepicker>
         <app-ticket-profile-updates-service-duration (onChange)="onChangeDuration($event)" [editMode]="true" [hour]="hours" [minute]="minutes" *ngIf="currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER'"></app-ticket-profile-updates-service-duration>
         <div class="ticket-updates__service-duration" *ngIf="currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'" [textContent]="getDuration(quantity)"></div>
 

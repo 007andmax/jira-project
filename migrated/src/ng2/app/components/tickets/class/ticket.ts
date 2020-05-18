@@ -35,9 +35,9 @@ export class Ticket {
         this.deletedAt = data.deletedAt;
         this.id = data.id;
         this.markedAsSpamAt = data.markedAsSpamAt;
-        this.multiAssignedUsers = data.multiAssignedUsers.map(item => {
+        this.multiAssignedUsers = (data.multiAssignedUsers) ? data.multiAssignedUsers.map(item => {
             return new MultiAssignedUsers(item);
-        });
+        }) : [];
         this.number = data.number;
         this.previewNote = data.previewNote;
         this.priorityLevel = data.priorityLevel;

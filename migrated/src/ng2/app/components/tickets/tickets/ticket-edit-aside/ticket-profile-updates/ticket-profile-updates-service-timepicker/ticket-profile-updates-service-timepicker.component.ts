@@ -15,6 +15,7 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
   @Input() quantity: number = 0;
   @Input() editMode: boolean = false;
   @Output() onChangeEnd = new EventEmitter<any>();
+  @Output() onSetEnd = new EventEmitter<any>();
   @Output() onChangeStart = new EventEmitter<any>();
   currentCompany = null;
   step: number = 1;
@@ -93,7 +94,7 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
       console.log("endDate", endDate);
       console.log("quantity,this.", this.quantity);
       $('#datepairExample .end').timepicker('setTime', endDate);
-      this.onChangeEnd.emit(endDate.getTime());
+      this.onSetEnd.emit(endDate.getTime());
     }
     $('#datepairExample .end').timepicker('option', 'minTime', $('#datepairExample .start').val());
   }

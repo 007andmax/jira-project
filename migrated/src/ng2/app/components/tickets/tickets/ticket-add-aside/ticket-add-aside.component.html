@@ -144,23 +144,8 @@
     <div class="qt-aside__buttons">
       <div class="qt-btn --btn40h create-ticket-btn d-f ai-c jc-c" (click)="add()">
         <span *ngIf="!isAdd">Create Ticket</span>
-        <span *ngIf="isAdd" class="windows8">
-          <span class="wBall" id="wBall_1">
-              <span class="wInnerBall"></span>
-          </span>
-          <span class="wBall" id="wBall_2">
-              <span class="wInnerBall"></span>
-          </span>
-          <span class="wBall" id="wBall_3">
-              <span class="wInnerBall"></span>
-          </span>
-          <span class="wBall" id="wBall_4">
-              <span class="wInnerBall"></span>
-          </span>
-          <span class="wBall" id="wBall_5">
-              <span class="wInnerBall"></span>
-          </span>
-        </span>
+        <app-preloader-ticket *ngIf="isAdd"></app-preloader-ticket>
+    
       </div>
       <div class="qt-btn --btn40h --outline-blue" (click)="closed()">Cancel</div>
     </div>

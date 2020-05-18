@@ -28,6 +28,8 @@ export class TicketProfileFormUpdateComponent implements OnInit {
     console.log("this.ticketProfileFormUpdate", this.ticketProfileFormUpdate);
   };
   showAddUpdateUser = false;
+  isUpdate:boolean = false;
+  isUpdateAndClose:boolean = false;
   files: any[] = [];
   tab: string = "NOTE";
   currentUser:CurrentUser;
@@ -70,64 +72,76 @@ export class TicketProfileFormUpdateComponent implements OnInit {
     console.log("this.ticketProfileFormUpdate", this.ticketProfileFormUpdate);
     if (this.tab === "NOTE") {
       if (!this.ticketProfileFormUpdate.isValidateNote()) return;
-      this.ticketsService.updateTicket(this.ticketProfileFormUpdate.getDataForUpdateNote()).subscribe(data => {
-        this.ticketProfileFormUpdate.setChatMessage("");
-      })
+      this.onUpdateTicket(this.ticketProfileFormUpdate.getDataForUpdateNote());
+      
     }
     if (this.tab === "PRODUCT") {
       this.onChangeProducts(this.selectProducts.getSelectedProducts());
       if (!this.ticketProfileFormUpdate.isValidateProduct()) return;
-      this.ticketsService.updateTicket(this.ticketProfileFormUpdate.getDataForUpdateProduct()).subscribe(data => {
-        // this.ticketProfileFormUpdate.setChatMessage("");
-        this.ticketsStateService.onClearFormUpdate();
-      })
+      this.onUpdateTicket(this.ticketProfileFormUpdate.getDataForUpdateProduct());
+     
     }
     if (this.tab === "SERVICE") {
       this.onChangeServices(this.selectServices.getSelectedServices());
       if (!this.ticketProfileFormUpdate.isValidateService()) return;
-      this.ticketsService.updateTicket(this.ticketProfileFormUpdate.getDataForUpdateService()).subscribe(data => {
-        // this.ticketProfileFormUpdate.setChatMessage("");
-        this.ticketsStateService.onClearFormUpdate();
-      })
+      this.onUpdateTicket(this.ticketProfileFormUpdate.getDataForUpdateService());
+      
     }
 
+  }
+  onUpdateTicket(data) {
+    this.isUpdate = true;
+    this.ticketsService.updateTicket(data).subscribe(data => {
+      // this.ticketProfileFormUpdate.setChatMessage("");
+      this.isUpdate = false;
+      if (this.tab === "NOTE") {
+        this.ticketProfileFormUpdate.setChatMessage("");
+        this.elRef.nativeElement.querySelector("#chat").value = "";
+      } else {
+        this.ticketsStateService.onClearFormUpdate();
+      }
+    })
   }
   updateAndClose() {
     if (!this.checkUpdateAndClose()) return;
     console.log("updateAndClose");
     if (this.tab === "NOTE") {
       if (this.ticketProfileFormUpdate.isValidateNote())  {
-        this.ticketsService.updateTicket(this.ticketProfileFormUpdate.getDataForUpdateNote(),true).subscribe(data => {
-          this.ticketProfileFormUpdate.setChatMessage("");
-        })
-      } else this.onUpdateTicketAndClose();
+        this.onUpdateTicketAndClose(this.ticketProfileFormUpdate.getDataForUpdateNote());
+       
+      } else this.onUpdateTicketAndClose(this.ticketProfileFormUpdate.getDataForClose());
     
     }
     if (this.tab === "PRODUCT") {
       this.onChangeProducts(this.selectProducts.getSelectedProducts());
       if (this.ticketProfileFormUpdate.isValidateProduct()) {
-        this.ticketsService.updateTicket(this.ticketProfileFormUpdate.getDataForUpdateProduct(),true).subscribe(data => {
-          // this.ticketProfileFormUpdate.setChatMessage("");
-          this.ticketsStateService.onClearFormUpdate();
-        })
-      } else this.onUpdateTicketAndClose();
+        this.onUpdateTicketAndClose(this.ticketProfileFormUpdate.getDataForUpdateProduct());
+      
+      } else this.onUpdateTicketAndClose(this.ticketProfileFormUpdate.getDataForClose());
     
     }
     if (this.tab === "SERVICE") {
       this.onChangeServices(this.selectServices.getSelectedServices());
       if (this.ticketProfileFormUpdate.isValidateServiceUpdateAndClose()) {
-        this.ticketsService.updateTicket(this.ticketProfileFormUpdate.getDataForUpdateService(),true).subscribe(data => {
-          // this.ticketProfileFormUpdate.setChatMessage("");
-          this.ticketsStateService.onClearFormUpdate();
-        })
-      } else if (this.ticketProfileFormUpdate.isValidateService()) this.onUpdateTicketAndClose();
+        this.onUpdateTicketAndClose(this.ticketProfileFormUpdate.getDataForUpdateService());
+       
+      } else if (this.ticketProfileFormUpdate.isValidateService()) this.onUpdateTicketAndClose(this.ticketProfileFormUpdate.getDataForClose());
      
     }
   }
-  onUpdateTicketAndClose() {
-    this.ticketsService.updateTicket(this.ticketProfileFormUpdate.getDataForClose(),true).subscribe(data => {
+  onUpdateTicketAndClose(data) {
+    this.isUpdateAndClose = true;
+    //
+    this.ticketsService.updateTicket(data,true).subscribe(data => {
       // this.ticketProfileFormUpdate.setChatMessage("");
-      this.ticketsStateService.onClearFormUpdate();
+      this.isUpdateAndClose = false;
+      if (this.tab === "NOTE") {
+        this.ticketProfileFormUpdate.setChatMessage("");
+        this.elRef.nativeElement.querySelector("#chat").value = "";
+      } else {
+        this.ticketsStateService.onClearFormUpdate();
+      }
+    
       
     })
   }
