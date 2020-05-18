@@ -110,10 +110,12 @@ export class DeviceComponent implements OnInit {
       this.totalMinutes = 0;
       this.totalHours++;
     }
+    $('#counter').text(this.padNumber(this.totalHours) + ' hr : ' + this.padNumber(this.totalMinutes) + ' min : ' + this.padNumber(this.totalSeconds) + ' sec');
   }
 
   getDevicesByCompany() {
-    this.commonHttpServices.getDevicesByCompany(localStorage.getItem('currentCompany'))
+    // localStorage.getItem('currentCompany')
+    this.commonHttpServices.getDevicesByCompany(localStorage.getItem('company_id'))
       .pipe()
       .subscribe(resp => {
         const tempObj = this.commonServices.cleanObject(resp);

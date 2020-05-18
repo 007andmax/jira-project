@@ -17,4 +17,18 @@ export class HardwareService {
         return data;
       }));
   }
+
+  saveDeviceName(data: any) {
+    return this.http.post<any>(CONFIG.saveDeviceNameURL, data)
+      .pipe(map(data => {
+        return data;
+      }));
+  }
+
+  getVirusInfo(companyUuid: string) {
+    return this.http.get<any>(CONFIG.getVirusInfoURL + companyUuid)
+      .pipe(map(data => {
+        return data;
+      }));
+  }
 }

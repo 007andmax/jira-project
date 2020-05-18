@@ -7,7 +7,7 @@
                 <span class="device-icn"><img src="{{deviceImg}}" alt="device" /></span>
                   <div class="head-device">
                       <h6>Device</h6>
-                      <h5>{{deviceDetail.label || deviceDetail.hostName || deviceDetail.ip}}</h5>
+                      <h5 id="head-label">{{deviceDetail.label || deviceDetail.hostName || deviceDetail.ip}}</h5>
                   </div>
             </div>
             <div class="hp-device-info">
@@ -25,7 +25,7 @@
             <a href="javascript:;" class="head-btn-info btn-shutDown"><img src="../../../ng1/images/device/shutdown.svg" alt="shutdown" /></a>
         </div>
       </div>
-      <div class="head-counter"><img src="../../../ng1/images/device/counter.svg" alt="Print" /> {{padNumber(this.totalHours)}} hr : {{padNumber(this.totalMinutes)}} min : {{padNumber(this.totalSeconds)}} sec</div>
+      <div class="head-counter"><img src="../../../ng1/images/device/counter.svg" alt="Print" /> <span id="counter">{{padNumber(this.totalHours)}} hr : {{padNumber(this.totalMinutes)}} min : {{padNumber(this.totalSeconds)}} sec</span></div>
       <!-- <div class="head-counter"><img src="../../../ng1/images/device/counter.svg" alt="Print" /> 00 hr : 00 min : 00 sec</div> -->
   </header>
 <!-- left sidebar nav -->

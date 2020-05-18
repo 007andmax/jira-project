@@ -134,6 +134,18 @@
                     }
                 }
             }
+            .label-field {
+                border-color: transparent;
+                background-color: #ffffff;
+                font-size: 16px;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+            
+            .label-field:hover, .label-field:focus {
+                border: solid 1px #c4cbd5;
+                outline: 0;
+            }
             &.disk-drive {
                 h2{
                     margin-bottom: 7px;
@@ -383,7 +395,7 @@
                                         color: #9ca5b6;
                                     }
                                 }
-                                .added-by {
+                                .device-added-by {
                                     font-size: 12px;
                                     color: #4f5f79;
                                     line-height: 1.33;

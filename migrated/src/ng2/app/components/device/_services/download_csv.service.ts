@@ -66,58 +66,21 @@ export class ExcelService {
         title = 'Operating System';
       }
       let titleRow = worksheet.addRow([title]);
-      titleRow.font = { size: 16, bold: true }
+      titleRow.font = { size: 20, bold: true }
       data[i].forEach(d => {
         let row = worksheet.addRow(d);
       });
       worksheet.addRow([]);
     }
-    worksheet.mergeCells('A1:B1');
-    worksheet.mergeCells('A8:B8');
-    worksheet.mergeCells('A14:B14');
-    worksheet.mergeCells('A19:B19');
-    worksheet.mergeCells('A22:B22');
-    worksheet.mergeCells('A32:B32');
-    worksheet.mergeCells('A38:B38');
-    worksheet.mergeCells('A44:B44');
-    worksheet.mergeCells('A50:B50');
-    worksheet.getCell('A2').font = {bold: true};
-    worksheet.getCell('A3').font = {bold: true};
-    worksheet.getCell('A4').font = {bold: true};
-    worksheet.getCell('A5').font = {bold: true};
-    worksheet.getCell('A6').font = {bold: true};
-    worksheet.getCell('A9').font = {bold: true};
-    worksheet.getCell('A10').font = {bold: true};
-    worksheet.getCell('A11').font = {bold: true};
-    worksheet.getCell('A12').font = {bold: true};
-    worksheet.getCell('A15').font = {bold: true};
-    worksheet.getCell('A16').font = {bold: true};
-    worksheet.getCell('A17').font = {bold: true};
-    worksheet.getCell('A20').font = {bold: true};
-    worksheet.getCell('A23').font = {bold: true};
-    worksheet.getCell('A24').font = {bold: true};
-    worksheet.getCell('A25').font = {bold: true};
-    worksheet.getCell('A26').font = {bold: true};
-    worksheet.getCell('A27').font = {bold: true};
-    worksheet.getCell('A28').font = {bold: true};
-    worksheet.getCell('A29').font = {bold: true};
-    worksheet.getCell('A30').font = {bold: true};
-    worksheet.getCell('A33').font = {bold: true};
-    worksheet.getCell('A34').font = {bold: true};
-    worksheet.getCell('A35').font = {bold: true};
-    worksheet.getCell('A36').font = {bold: true};
-    worksheet.getCell('A39').font = {bold: true};
-    worksheet.getCell('A40').font = {bold: true};
-    worksheet.getCell('A41').font = {bold: true};
-    worksheet.getCell('A42').font = {bold: true};
-    worksheet.getCell('A45').font = {bold: true};
-    worksheet.getCell('A46').font = {bold: true};
-    worksheet.getCell('A47').font = {bold: true};
-    worksheet.getCell('A48').font = {bold: true};
-    worksheet.getCell('A51').font = {bold: true};
-    worksheet.getCell('A52').font = {bold: true};
-    worksheet.getCell('A53').font = {bold: true};
-    worksheet.getCell('A54').font = {bold: true};
+    // worksheet.mergeCells('A1:B1');
+    // worksheet.mergeCells('A8:B8');
+    // worksheet.mergeCells('A14:B14');
+    // worksheet.mergeCells('A19:B19');
+    // worksheet.mergeCells('A22:B22');
+    // worksheet.mergeCells('A32:B32');
+    // worksheet.mergeCells('A38:B38');
+    // worksheet.mergeCells('A44:B44');
+    // worksheet.mergeCells('A50:B50');
 
     //Generate Excel File with given name
     workbook.csv.writeBuffer().then((data) => {

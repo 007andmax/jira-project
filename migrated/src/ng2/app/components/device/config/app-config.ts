@@ -15,6 +15,7 @@ export const CONFIG = {
 
   // HARDWARE
   getAllHardwareListURL: BASE_URL + DEVICE + '/report?companyId=',
+  getVirusInfoURL: BASE_URL + DEVICE + '/extended?companyId=',
 
   // SOFTWARE
   getAllSoftwareListURL: BASE_URL + DEVICE + MODULE + '/get_hardware',
@@ -46,6 +47,9 @@ export const CONFIG = {
   getViewerURL: BASE_URL + 'data/connection-viewer',
   createConnectionURL: BASE_URL + 'remote/createRemoteSession?',
   getConstant: BASE_URL + 'data/getConstants',
-  printPdfURL: BASE_URL + 'reports/pdf'
+  printPdfURL: BASE_URL + 'reports/pdf',
+  saveDeviceNameURL: BASE_URL + DEVICE + '/editAgentInfo'
+
+  // DASHBOARD
 
 };

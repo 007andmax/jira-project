@@ -11,7 +11,7 @@ export class CommonHttpServices {
     constructor (private http: HttpClient) {}
 
     getDevicesByCompany (uuid: string) {
-        return this.http.get<any>(CONFIG.getDevicesByCompanyURL + uuid)
+        return this.http.get<any>(CONFIG.getVirusInfoURL + uuid)
         .pipe(map(data => {
             return data;
         }))

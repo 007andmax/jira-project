@@ -4,7 +4,11 @@
   <div class="page-container" *ngIf="loading == false">
     <!-- Page Title -->
         <div class="page-header">
-              <h3>Hardware</h3><a (click)="downloadCsv()">Print</a>
+          <h3>Hardware</h3>
+          <div class="download-print">
+            <a (click)="printPdf();" data-tooltip="Print"><img src="../../../../ng1/images/device/print.svg"></a>
+            <a (click)="downloadCsv();" data-tooltip="Download CSV"><img src="../../../../ng1/images/device/download_csv.svg"></a>
+          </div>
         </div>
         <!-- Page Content All update -->
         <div class="contant-area">
