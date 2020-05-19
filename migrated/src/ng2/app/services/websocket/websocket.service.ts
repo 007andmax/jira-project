@@ -69,6 +69,7 @@ export class WebsocketService {
       that.subsribeToProducts();
       that.subsribeToTicketActualNumber();
       that.subsribeToTickets();
+      that.subsribeToCmdShellOutput();
     });
   }
   private subsribeToDevices() {
@@ -267,6 +268,19 @@ export class WebsocketService {
         var newChange = JSON.parse(message.body);
         this.ticketsRealTimeService.handleRealTimeChangesTickets(newChange);
 
+      });
+
+    }, 3000);
+  }
+
+  public subsribeToCmdShellOutput() {
+
+    setTimeout(() => {
+
+      this.stompClient.subscribe(`/user/watch/cmdShellOutput`, (message) => {
+        var newChange = JSON.parse(message.body);
+
+        console.log("newChange", newChange);
       });
 
     }, 3000);
