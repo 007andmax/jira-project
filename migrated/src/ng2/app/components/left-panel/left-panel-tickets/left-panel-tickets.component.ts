@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { TicketsFilter } from '../../tickets/tickets/class/tickets-filter';
 import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.service';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
@@ -37,6 +37,7 @@ export class LeftPanelTicketsComponent implements OnInit {
     private ticketsService: TicketsService,
     private usersStateService: UsersStateService,
     private companiesService: CompaniesService,
+    private elRef: ElementRef,
     private leftPanelService: LeftPanelService) { }
 
   ngOnInit() {
@@ -302,6 +303,14 @@ export class LeftPanelTicketsComponent implements OnInit {
       this.getCount();
     } 
     this.blockFilterUser = false;
+  }
+  onOpenDropDownFilter(id) {
+    console.log("onOpenDropDownCompany");
+    let containers =  this.elRef.nativeElement.querySelectorAll('.show-filter');
+    containers.forEach((item:any) => {
+      item.style.zIndex = 2;
+    })
+    this.elRef.nativeElement.querySelector(`#${id}`).style.zIndex = 9999;
   }
   onChangeTags(tags) {
     this.ticketsFilter.setTags(tags);

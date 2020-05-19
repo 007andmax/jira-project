@@ -17,6 +17,7 @@
     autocomplete="new-password"
     [attr.maxlength]="maxlength"
     (blur)="onChange($event)"
+    (isPopupOpen)="isDropDownOpen()"
   />
   <span *ngIf="list">
     <i *ngIf="selectedItem"

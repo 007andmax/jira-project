@@ -33,14 +33,14 @@
   
   
     <div class="left-panel-ng2__content--filters">
-      <div class="filter-item">
+      <div id="filter-by-company" class="filter-item" >
         <i class="icn-sm report-caret-icon"></i>
         <div class="filter-item__header" (click)="toggleFilter($event)">
           By Company
         </div>
         <div class="filter-item__content">
           <div class="dark-dropdown">
-            <app-select-search [placeholder]="'Select Company'" [change]="false" [class]="['dark-dropdown']"
+            <app-select-search (onOpenDropDown)="onOpenDropDownFilter('filter-by-company')" [placeholder]="'Select Company'" [change]="false" [class]="['dark-dropdown']"
             [field]="'name'" [editItem]="selectedCompany"  [list]="companies"
               (onSelectedItem)="onSelectCompany($event)"></app-select-search>
           </div>
@@ -56,14 +56,14 @@
           </div>
         </div>
       </div>
-      <div class="filter-item">
+      <div id="filter-by-user" class="filter-item">
         <i class="icn-sm report-caret-icon"></i>
         <div class="filter-item__header" (click)="toggleFilter($event)">
           By User
         </div>
         <div class="filter-item__content">
           <div class="dark-dropdown">
-            <app-select-search #usersDp [placeholder]="'Select User'" [change]="false" [class]="['dark-dropdown']" [editItem]="selectedUser"
+            <app-select-search (onOpenDropDown)="onOpenDropDownFilter('filter-by-user')" #usersDp [placeholder]="'Select User'" [change]="false" [class]="['dark-dropdown']" [editItem]="selectedUser"
             [list]="getUserList()"
                                (onSelectedItem)="onSelectUser($event)"></app-select-search>
           </div>
@@ -79,14 +79,14 @@
       </div>
       
       
-      <div class="filter-item">
+      <div id="filter-by-tech-user" class="filter-item">
         <i class="icn-sm report-caret-icon"></i>
         <div class="filter-item__header" (click)="toggleFilter($event)">
           By Tech Team
         </div>
         <div class="filter-item__content">
           <div class="dark-dropdown">
-            <app-select-search [placeholder]="'Select Tech User'" [change]="false" [class]="['dark-dropdown']"
+            <app-select-search (onOpenDropDown)="onOpenDropDownFilter('filter-by-tech-user')" [placeholder]="'Select Tech User'" [change]="false" [class]="['dark-dropdown']"
             [editItem]="selectedTechUser"  [list]="getTechUserList()"
               (onSelectedItem)="onSelectTechUser($event)"></app-select-search>
           </div>
