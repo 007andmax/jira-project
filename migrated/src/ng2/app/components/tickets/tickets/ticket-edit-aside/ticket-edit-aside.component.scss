@@ -64,7 +64,7 @@
   &__header-company {
     font-size: 13px;
     font-weight: 600;
-
+    margin-right: 10px;
   }
 
   &__header-info {
@@ -710,3 +710,7 @@
   box-shadow: 0px -5px 9px -6px rgba(0, 0, 0, 0.15);
 }
 
+
+app-ticket-change-status {
+  cursor: pointer;
+}

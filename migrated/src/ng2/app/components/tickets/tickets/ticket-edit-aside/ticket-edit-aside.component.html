@@ -17,10 +17,12 @@
             [ngStyle]="{'background': ticketsListService.getStyleAvatar(ticketProfile.createdUser),'background-size': 'cover'}"></div>
 
             <div>
-              <div class="ticket-edit-aside__header-company" [textContent]="getCompantName() + ' - ' + getNameCreateUser()"></div>
+              <div class="d-f ai-c">
+                <div class="ticket-edit-aside__header-company" [textContent]="getCompantName() + ' - ' + getNameCreateUser()"></div>
+                <app-ticket-change-status [ticketProfile]="ticketProfile"></app-ticket-change-status>
+              </div>
               <div class="ticket-edit-aside__header-info"><span [textContent]="parseTicketSource() + ', Agent - ' + ticketProfile.sourceName"></span> <span class="divider-point"></span> <span [textContent]="getCreatAt()"></span>
 
-<app-ticket-change-status [ticketProfile]="ticketProfile"></app-ticket-change-status>
              <!--    <span class="tag__modern" [ngStyle]="getStyleStatus('inProgress')" *ngIf="ticketProfile.status === 'IN_PROGRESS'" ngbDropdown ngbDropdownToggle>In Progress  <div ngbDropdownMenu
                   aria-labelledby="dropdown1">
                <ng-template ngFor
