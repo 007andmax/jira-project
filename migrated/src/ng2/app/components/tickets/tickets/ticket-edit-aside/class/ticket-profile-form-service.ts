@@ -20,8 +20,9 @@ export class TicketProfileFormService {
                 // }
             }
         } else {
-            this.durationStart = new Date().getTime();
-            this.durationEnd = new Date().getTime();
+            let currentDate = new Date();
+            this.durationStart = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(),currentDate.getHours(),currentDate.getMinutes()).getTime();
+            this.durationEnd =  new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(),currentDate.getHours(),currentDate.getMinutes()).getTime();
         }
 
     }
@@ -48,7 +49,7 @@ export class TicketProfileFormService {
     }
     public setDate(day, month, year, timeOffset) {
         let current = new Date();
-      
+
         if (day !== current.getDate() || current.getMonth() !== (month - 1)) {
             let dateDatePicker = new Date(year, month - 1, day).getTime(); // timestamp from calendar
             let finalDate = new Date(dateDatePicker - (current.getTimezoneOffset() * 60000/* dont touch*/) - timeOffset /* timezone.timeOffset */);
@@ -59,18 +60,20 @@ export class TicketProfileFormService {
             this.date = finalDate.getTime();
         }
     }
-      public setComplated (day, month, year) {
+    public setComplated(day, month, year) {
         let current = new Date();
         let dateDP = new Date(year, month - 1, day);
-        if (current.getDate() === dateDP.getDate() && current.getMonth() === dateDP.getMonth() || dateDP.getTime() < current.getTime())  this.completed = true;
+        if (current.getDate() === dateDP.getDate() && current.getMonth() === dateDP.getMonth() || dateDP.getTime() < current.getTime()) this.completed = true;
         if (dateDP.getTime() > current.getTime()) this.completed = false;
-      }
+    }
     public calculateQuantity() {
         let durationEnd = JSON.parse(JSON.stringify(this.durationEnd));
+        console.log("durationEnd", new Date(durationEnd));
+        console.log("this.durationStart", new Date(this.durationStart));
         if (this.durationStart - this.durationEnd > 0) durationEnd = this.durationEnd + 24 * 3600000;
         this.quantity = (durationEnd - this.durationStart) / 3600000 > 0 ? (durationEnd - this.durationStart) / 3600000 : 0;
         if (this.quantity > 24) this.quantity -= 24;
-        console.log("this.quantity",this.quantity);
+        console.log("this.quantity", this.quantity);
     }
     public setQuantity(data) {
         this.quantity = data;

@@ -1203,6 +1203,7 @@
 
         $scope.onClickReports = function () {
           $rootScope.isLeftPanelHidden = true;
+       
           $scope.openedCategory = getOpenedCategory($state.current.url + ' ' + $state.current.name);
           document.title = 'Reports'
         };

@@ -127187,7 +127187,7 @@ mod.directive('infiniteScroll', [
     }
 
 
-    return '/tickets/user';
+    return '/ng2/tickets';
   }
 
 }());

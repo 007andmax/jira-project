@@ -910,7 +910,7 @@
     }
 
 
-    return '/tickets/user';
+    return '/ng2/tickets';
   }
 
 }());

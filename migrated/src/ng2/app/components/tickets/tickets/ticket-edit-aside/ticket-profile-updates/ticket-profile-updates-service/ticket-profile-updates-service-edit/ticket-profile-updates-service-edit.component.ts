@@ -83,6 +83,7 @@ export class TicketProfileUpdatesServiceEditComponent implements OnInit {
   }
   public onChangeEndTimePicker(endDate) {
     this.durationEnd = endDate;
+    console.log("endDate",new Date(endDate));
     this.editService.setDurationEnd(this.durationEnd);
     if (this.currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER') {
       let durationEnd = JSON.parse(JSON.stringify(this.durationEnd));

@@ -43,7 +43,8 @@ $scope.ticket_id = "1234567";
       $scope.chartColors = ["#16a4fa", "#ffb937", "#ff6e61", "#2ec866", "#f9f916", "#ff1ed2", "#1bf4fc", "#7d1a9e",'#7f1313'];
       $scope.Math = Math;
       $scope.softSelect = [];
-
+  //  $rootScope.isLeftPanelHidden = true;
+console.log("$rootScope.isLeftPanelHidden",$rootScope.isLeftPanelHidden);
       $scope.chartOptions = {
         chart: {
                 type: 'pieChart',

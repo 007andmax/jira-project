@@ -5,7 +5,7 @@
   width: 240px;
   left: 76px;
   top: 0;
-  z-index: 990;
+  z-index: 992;
   background: #354053;
   overflow-x: scroll;
   transition: left 300ms;
@@ -112,5 +112,5 @@
 
 // hide old left panel
 /deep/ .left-panel-full {
-    display: none !important;
+   /* display: none !important;*/
 }

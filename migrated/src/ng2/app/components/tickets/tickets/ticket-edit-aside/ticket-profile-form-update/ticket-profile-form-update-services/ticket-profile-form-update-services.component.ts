@@ -11,19 +11,20 @@ import { TicketProfileUpdatesServiceDurationComponent } from '../../ticket-profi
 import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.service';
 import { Subscription } from 'rxjs';
 import { DatePickerComponent } from 'src/ng2/app/components/shared/date-picker/date-picker.component';
+import { TicketProfileUpdatesServiceTimepickerComponent } from '../../ticket-profile-updates/ticket-profile-updates-service-timepicker/ticket-profile-updates-service-timepicker.component';
 
 @Component({
   selector: 'app-ticket-profile-form-update-services',
   templateUrl: './ticket-profile-form-update-services.component.html',
   styleUrls: ['./ticket-profile-form-update-services.component.scss']
 })
-export class TicketProfileFormUpdateServicesComponent implements OnInit,OnDestroy {
+export class TicketProfileFormUpdateServicesComponent implements OnInit, OnDestroy {
   @ViewChild('durationPicker') durationPicker: TicketProfileUpdatesServiceDurationComponent;
-  @ViewChild('timePicker') timePicker: TicketProfileUpdatesServiceDurationComponent;
-  
+  @ViewChild('timePicker') timePicker: TicketProfileUpdatesServiceTimepickerComponent;
+
   @ViewChild('serviceDP') serviceDP: ServicesListComponent;
   @ViewChild('datePicker') datePicker: DatePickerComponent;
-  
+
   @Input() ticketProfile: TicketProfile = new TicketProfile();
   areTicketsTerminated: boolean = false;
   areTicketsPresented: boolean = false;
@@ -31,24 +32,24 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit,OnDestro
   addedServiceList = [];
   currentCompany = null;
   currentService: TicketProfileFormService = new TicketProfileFormService();
-  sub:Subscription = new Subscription();
+  sub: Subscription = new Subscription();
   constructor(private serviceAgreementsService: ServiceAgreementsService,
     private recurringService: RecurringService,
     private elRef: ElementRef,
     private ticketsStateService: TicketsStateService,
     private companiesStateService: CompaniesStateService,
     private ticketStateService: TicketStateService) { }
-  
+
 
   ngOnInit() {
-   let getOnClearFormUpdate =  this.ticketsStateService.getOnClearFormUpdate().subscribe(data => {
+    let getOnClearFormUpdate = this.ticketsStateService.getOnClearFormUpdate().subscribe(data => {
       this.addedServiceList = [];
       this.elRef.nativeElement.querySelector('#service-description').value = "";
       this.currentService = new TicketProfileFormService();
       this.serviceDP.clear();
       this.datePicker.reset();
-     if (this.currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER') this.timePicker.refresh();
-     if (this.currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER') this.durationPicker.refresh();
+      if (this.currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER') this.timePicker.refresh();
+      if (this.currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER') this.durationPicker.refresh();
     })
     this.sub.add(getOnClearFormUpdate);
     this.currentCompany = this.companiesStateService.getCurrentCompany();
@@ -80,8 +81,8 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit,OnDestro
     console.log("addedServiceList", this.addedServiceList);
     this.currentService = new TicketProfileFormService();
     this.serviceDP.clear();
-   if (this.currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER') this.durationPicker.refresh();
-  if (this.currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER')  this.timePicker.refresh();
+    if (this.currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER') this.durationPicker.refresh();
+    if (this.currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER') this.timePicker.refresh();
   }
   public getHours(service) {
     let timeInMinutes = service.quantity * 60;
@@ -155,6 +156,6 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit,OnDestro
     return (this.currentService.item && this.currentService.item.versionedId) ? [...this.addedServiceList, this.currentService] : this.addedServiceList;
   }
   ngOnDestroy(): void {
-   this.sub.unsubscribe();
+    this.sub.unsubscribe();
   }
 }

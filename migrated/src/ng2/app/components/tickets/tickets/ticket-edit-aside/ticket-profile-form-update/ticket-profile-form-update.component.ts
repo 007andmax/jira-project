@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { TicketProfileFormUpdate } from '../class/ticket-profile-form-update';
 import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.service';
 import { TicketProfile } from '../../class/ticket-profile';
@@ -8,6 +8,7 @@ import { TicketsListService } from '../../services/tickets-list.service';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { TicketProfileFormUpdateProductsComponent } from './ticket-profile-form-update-products/ticket-profile-form-update-products.component';
 import { TicketProfileFormUpdateServicesComponent } from './ticket-profile-form-update-services/ticket-profile-form-update-services.component';
+import { NotificationStateService } from 'src/ng2/app/components/shared/notification/services/notification-state.service';
 
 @Component({
   selector: 'app-ticket-profile-form-update',
@@ -27,6 +28,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
     this.ticketProfileFormUpdate.setTicketId(this.ticketProfile.id);
     console.log("this.ticketProfileFormUpdate", this.ticketProfileFormUpdate);
   };
+  @Output() onClosed = new EventEmitter();
   showAddUpdateUser = false;
   isUpdate:boolean = false;
   isUpdateAndClose:boolean = false;
@@ -39,6 +41,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
     private usersStateService: UsersStateService,
     private ticketsService: TicketsService,
     private elRef: ElementRef,
+    private notificationStateService: NotificationStateService,
     public ticketsListService: TicketsListService) { }
 
   ngOnInit() {
@@ -103,6 +106,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
         this.ticketsStateService.onClearFormUpdate();
       }
       this.ticketProfileFormUpdate.clearShares();
+      this.notificationStateService.oninitShowNotification(`Update has been added`);
     })
   }
   updateAndClose() {
@@ -145,7 +149,9 @@ export class TicketProfileFormUpdateComponent implements OnInit {
         this.ticketsStateService.onClearFormUpdate();
       }
       this.ticketProfileFormUpdate.clearShares();
-      
+      this.notificationStateService.oninitShowNotification(`Ticket has been closed`);
+    
+      this.onClosed.emit(null);
     })
   }
   private checkUpdateAndClose() {

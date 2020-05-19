@@ -120,7 +120,7 @@
         <!--  TICKET UPDATES  -->
        <app-ticket-profile-updates *ngIf="ticketProfile.updates && ticketProfile.updates.length > 0" [ticketProfile]="ticketProfile" [updates]="ticketProfile.updates"></app-ticket-profile-updates>
         <!--  CHAT PRODUCTS SERVICE  -->
-        <app-ticket-profile-form-update *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)" #updateForm [ticket]="ticketProfile" [lisUpdateUser]="lisUpdateUser"></app-ticket-profile-form-update>
+        <app-ticket-profile-form-update (onClosed)="close()" *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)" #updateForm [ticket]="ticketProfile" [lisUpdateUser]="lisUpdateUser"></app-ticket-profile-form-update>
       </div>
 
 
