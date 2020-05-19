@@ -1,10 +1,12 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy, TemplateRef } from "@angular/core";
 import { BsModalRef, BsModalService } from "ngx-bootstrap";
 import { EmailTempleteService } from "./email-templete.service";
 import { map, catchError } from "rxjs/operators";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { of } from "rxjs";
 import { ToastrService } from "ngx-toastr";
+import { DomSanitizer } from '@angular/platform-browser';
+import { SanitizeHtmlPipe } from './../../../pipe/sanitize-html.pipe';
 
 // import { AngularEditorConfig } from "@kolkov/angular-editor";
 
@@ -29,7 +31,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   templeteInfo: any;
   emailPreviewHtml: any;
   gettingEmailTemplatePreview: boolean;
-
+  type = '';
   emailPages: any;
   elEditor: any = "";
   templeteForm: FormGroup;
@@ -58,7 +60,8 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     private modalService: BsModalService,
     private emailService: EmailTempleteService,
     private formBuilder: FormBuilder,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private sanitizer: DomSanitizer
   ) {
     this.ticketTemplates = this.emailService.getTicketTemplates();
     this.agentTemplates = this.emailService.getAgentTemplates();
@@ -98,11 +101,9 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   }
 
   onReady(eventData) {
-    console.log(eventData);
     eventData.plugins.get("FileRepository").createUploadAdapter = function(
       loader
     ) {
-      console.log(btoa(loader.file));
       return new UploadAdapter(loader);
     };
   }
@@ -150,6 +151,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
             this.templatesData.body = res.body;
             this.templatesData.subject = res.subject;
             this.keywords = res.keywords;
+            this.type = res.type
 
             this.templeteForm.controls["subject"].clearValidators();
 
@@ -187,10 +189,8 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
    */
   insertAtCaret(text) {
     var el = document.activeElement;
-    console.log(el);
 
     if (el.id === "subject") {
-      console.log(this.subject);
       var startPos = this.subject.nativeElement.selectionStart;
 
       this.subject.nativeElement.value =
@@ -285,21 +285,23 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     }
   }
 
-  emailPreview(templateKey: any) {
-    this.emailPreviewHtml = undefined;
+  emailPreview(template: TemplateRef<any>) {
+    this.emailPreviewHtml = '';
     this.gettingEmailTemplatePreview = true;
-
-    alert("Api is remaining for our new design template");
-
-    // this.emailService
-    //   .getHtmlForPreview(templateKey, this.templatesData)
-    //   .pipe(
-    //     map(resp => {
-    //       this.emailPreviewHtml = resp;
-    //       this.gettingEmailTemplatePreview = false;
-    //     })
-    //   )
-    //   .subscribe();
+    this.emailService
+      .getHtmlForPreview(this.type, this.templatesData)
+      .pipe(
+        map(resp => {
+          this.emailPreviewHtml = resp;
+          this.emailPreviewHtml = this.emailPreviewHtml.replace(/font-family: Graphik, sans-serif;/gi, '')
+          this.gettingEmailTemplatePreview = false;
+          this.modalRef = this.modalService.show(
+            template,
+            Object.assign({}, { class: "manage-tags modal-dialog-centered" })
+          );
+        })
+      )
+      .subscribe();
   }
 
   closeTemplete() {
@@ -436,7 +438,6 @@ export class UploadAdapter {
   private loader;
   constructor(loader: any) {
     this.loader = loader;
-    console.log(this.readThis(loader.file));
   }
 
   // upload() {

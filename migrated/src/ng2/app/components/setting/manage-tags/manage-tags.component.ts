@@ -10,6 +10,7 @@ import { forkJoin, Observable, Subject } from "rxjs";
 import { map } from "rxjs/operators";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
+import { TabsetComponent, TabDirective } from 'ngx-bootstrap/tabs';
 declare var $:any;
 @Component({
   selector: "app-manage-tags",
@@ -38,6 +39,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     info: false
   };
   @ViewChild("tickets") tickets: ElementRef;
+  @ViewChild('tabset') tabset: TabsetComponent;
   dtTrigger = new Subject();
 
   constructor(
@@ -130,11 +132,18 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     }
     this.searchTag = "";
     this.compnayForm.patchValue({ word: "" });
-    if (this.tickets.nativeElement.className.indexOf("active") > -1) {
-      this.setActiveTab = "ticket";
-    } else {
+    if (this.tabset.tabs[0].active === true) {
       this.setActiveTab = "company";
+    } else if (this.tabset.tabs[1].active === true) {
+      this.setActiveTab = "ticket";
+    } else if (this.tabset.tabs[2].active === true) {
+      this.setActiveTab = "device";
     }
+    // if (this.tickets.nativeElement.className.indexOf("active") > -1) {
+    //   this.setActiveTab = "ticket";
+    // } else {
+    //   this.setActiveTab = "company";
+    // }
   }
 
   // convenience getter for easy access to form fields

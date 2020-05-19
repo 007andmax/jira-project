@@ -53,6 +53,7 @@ import { CompanyPipe } from './pipe/company.pipe';
 import { PasswordManagerEditAsideComponent } from './components/password-manager/password-manager-edit-aside/password-manager-edit-aside.component';
 import { DeviceUserPipe } from './pipe/device-user.pipe';
 import { PasswordCategoryPipe } from './pipe/password-category.pipe';
+import { SanitizeHtmlPipe } from './pipe/sanitize-html.pipe';
 import { SelectClientCompanyComponent } from './components/shared/select-client-company/select-client-company.component';
 import { ProductListComponent } from './components/shared/product-list/product-list.component';
 import { ServicesListComponent } from './components/shared/services-list/services-list.component';
@@ -312,6 +313,7 @@ angular.module('quicktech')
     PasswordManagerEditAsideComponent,
     DeviceUserPipe,
     PasswordCategoryPipe,
+    SanitizeHtmlPipe,
     QuotesComponent,
     QuoteCreateComponent,
     QuoteCreateContentComponent,

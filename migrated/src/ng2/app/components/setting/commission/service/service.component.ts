@@ -14,8 +14,14 @@ export class ServiceComponent implements OnInit {
   selectedSpecIdx = -1;
   companyId = '';
   services: any;
+  public deleteServicePopup = false;
+  public confirmServicePopup = false;
+  service: any;
+  isSpecialService: boolean;
+  factItem = false;
   specialService: any[] = [];
-
+  rate: any;
+  id: string;
   constructor(
     private commissionService: CommissionService,
     private toastrService: ToastrService
@@ -110,30 +116,30 @@ export class ServiceComponent implements OnInit {
    * @param service
    * @param isSpecialService
    */
-  setServiceRate(rate, id: string, service: any, isSpecialService: boolean) {
-    if (rate || rate === 0) {
+  setServiceRate() {
+    if (this.rate || this.rate === 0) {
       var data = {
-        rate: rate,
+        rate: this.rate,
         setForOldExpenses: false
       };
 
-      if (service.commissionRate === null) {
-        if (confirm('Do you want this commission to fact old items?')) {
+      if (this.service.commissionRate === null) {
+        if (this.factItem === true) {
           data.setForOldExpenses = true;
         }
       }
       this.loading = true;$(".loading").css("display", "block");
       this.commissionService
-        .setServiceRate(id, data.rate, data.setForOldExpenses)
+        .setServiceRate(this.id, data.rate, data.setForOldExpenses)
         .subscribe(
           (res: any) => {
             this.loading = false;$(".loading").css("display", "none");
             this.toastrService.success('Rate Changed Successfully.');
-            service.commissionRate =
+            this.service.commissionRate =
               res && res.commissionRate
                 ? res.commissionRate.toFixed(2)
                 : res.commissionRate;
-            isSpecialService
+                this.isSpecialService
               ? (this.selectedSpecIdx = -1)
               : (this.selectedIdx = -1);
           },
@@ -153,27 +159,46 @@ export class ServiceComponent implements OnInit {
    * @param service 
    * @param isSpecialService 
    */
-  removeServiceRate(i, service: any, isSpecialService: boolean) {
-    if (service && service.commissionRate) {
-      if (confirm(`Do you want ${service.name} commission rate to zero?`)) {
-        this.loading = true;$(".loading").css("display", "block");
-        const id = !isSpecialService ? service.versionedId.id : service.id;
-        this.commissionService.setServiceRate(id, '0', false).subscribe(
-          res => {
-            this.loading = false;$(".loading").css("display", "none");
-            this.toastrService.success('Rate Changed Successfully.');
-            service.commissionRate = null;
+  removeServiceRate() {
+    if (this.service && this.service.commissionRate) {
+      this.loading = true;$(".loading").css("display", "block");
+      const id = !this.isSpecialService ? this.service.versionedId.id : this.service.id;
+      this.commissionService.setServiceRate(id, '0', false).subscribe(
+        res => {
+          this.loading = false;$(".loading").css("display", "none");
+          this.toastrService.success('Rate Changed Successfully.');
+          this.service.commissionRate = null;
 
-            isSpecialService
-              ? (this.selectedSpecIdx = -1)
-              : (this.selectedIdx = -1);
-          },
-          error => {
-            this.toastrService.error(`Error Occurred, ${error}`);
-            this.loading = false;$(".loading").css("display", "none");
-          }
-        );
-      }
+          this.isSpecialService
+            ? (this.selectedSpecIdx = -1)
+            : (this.selectedIdx = -1);
+        },
+        error => {
+          this.toastrService.error(`Error Occurred, ${error}`);
+          this.loading = false;$(".loading").css("display", "none");
+        }
+      );
+    }
+  }
+
+  confirmServiceDelete(i, service: any, isSpecialService: boolean){
+    this.service = service;
+    this.isSpecialService = isSpecialService;
+    if (this.service && this.service.commissionRate) {
+      this.deleteServicePopup = true;
+    }
+  }
+
+  confirmServiceEdit(rate, id: string, service: any, isSpecialService: boolean){
+    this.rate = rate;
+    this.id = id;
+    this.service = service;
+    this.isSpecialService = isSpecialService;
+    if (this.service.commissionRate === null) {
+      this.confirmServicePopup = true;
+    } else {
+      this.confirmServicePopup = false;
+      this.setServiceRate();
     }
   }
 }
