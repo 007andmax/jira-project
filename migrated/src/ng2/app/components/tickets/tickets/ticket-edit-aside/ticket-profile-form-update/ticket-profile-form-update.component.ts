@@ -31,6 +31,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
   isUpdate:boolean = false;
   isUpdateAndClose:boolean = false;
   files: any[] = [];
+  
   tab: string = "NOTE";
   currentUser:CurrentUser;
   constructor(private ticketsStateService: TicketsStateService,
@@ -56,6 +57,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
     this.tab = "NOTE";
     this.files = [];
     this.showAddUpdateUser = false;
+    this.ticketProfileFormUpdate = new  TicketProfileFormUpdate();
 
 
 
@@ -100,6 +102,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
       } else {
         this.ticketsStateService.onClearFormUpdate();
       }
+      this.ticketProfileFormUpdate.clearShares();
     })
   }
   updateAndClose() {
@@ -141,7 +144,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
       } else {
         this.ticketsStateService.onClearFormUpdate();
       }
-    
+      this.ticketProfileFormUpdate.clearShares();
       
     })
   }
@@ -160,6 +163,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
   public setTab(data) {
     this.tab = data;
     this.ticketProfileFormUpdate.setType(data);
+    this.ticketProfileFormUpdate.clearShares();
   }
   onChangeProducts(data) {
     this.ticketProfileFormUpdate.setProducts(data);
@@ -176,6 +180,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
   fileBrowseHandler(files) {
     this.prepareFilesList(files);
   }
+  
   prepareFilesList(files: Array<any>) {
     for (const item of files) {
       item.progress = 0;

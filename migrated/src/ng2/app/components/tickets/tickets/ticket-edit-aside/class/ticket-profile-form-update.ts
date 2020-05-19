@@ -49,6 +49,9 @@ export class TicketProfileFormUpdate {
 
         }
     }
+    public clearShares() {
+        this.shares = [];
+    }
     public setType(data) {
         this.type = data;
     }
@@ -83,5 +86,14 @@ export class TicketProfileFormUpdate {
     }
     public setServices(data) {
         this.services = data;
+    }
+    public toggleShares(user) {
+       let findIndex =  this.shares.findIndex(item => item.user.id === user.id);
+       if (findIndex > -1)this.shares.splice(findIndex,1);
+       if (findIndex === -1)this.shares.push({user:{id:user.id}});
+    }
+    public checkShares(user) {
+        let find =  this.shares.find(item => item.user.id === user.id);
+        return (find) ? true : false;
     }
 }
