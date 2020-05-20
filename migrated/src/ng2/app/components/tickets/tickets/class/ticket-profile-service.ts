@@ -35,10 +35,7 @@ export class TicketProfileService {
     constructor(data = null) {
         if (data) {
             for (const key in data) {
-                //  if (this.hasOwnProperty(key)) {
                 this[key] = data[key];
-
-                // }
             }
         }
     }

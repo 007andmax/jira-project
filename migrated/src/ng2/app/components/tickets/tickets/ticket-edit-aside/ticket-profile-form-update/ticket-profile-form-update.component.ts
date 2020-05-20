@@ -26,16 +26,14 @@ export class TicketProfileFormUpdateComponent implements OnInit {
   @Input() set ticket(value) {
     this.ticketProfile = value;
     this.ticketProfileFormUpdate.setTicketId(this.ticketProfile.id);
-    console.log("this.ticketProfileFormUpdate", this.ticketProfileFormUpdate);
   };
   @Output() onClosed = new EventEmitter();
   showAddUpdateUser = false;
-  isUpdate:boolean = false;
-  isUpdateAndClose:boolean = false;
+  isUpdate: boolean = false;
+  isUpdateAndClose: boolean = false;
   files: any[] = [];
-  
   tab: string = "NOTE";
-  currentUser:CurrentUser;
+  currentUser: CurrentUser;
   constructor(private ticketsStateService: TicketsStateService,
     public cd: ChangeDetectorRef,
     private usersStateService: UsersStateService,
@@ -60,10 +58,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
     this.tab = "NOTE";
     this.files = [];
     this.showAddUpdateUser = false;
-    this.ticketProfileFormUpdate = new  TicketProfileFormUpdate();
-
-
-
+    this.ticketProfileFormUpdate = new TicketProfileFormUpdate();
   }
   getUsersForUpdate() {
     let userList = this.usersStateService.getAllUsers().sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?
@@ -74,30 +69,28 @@ export class TicketProfileFormUpdateComponent implements OnInit {
 
   }
   update() {
-    console.log("this.ticketProfileFormUpdate", this.ticketProfileFormUpdate);
     if (this.tab === "NOTE") {
       if (!this.ticketProfileFormUpdate.isValidateNote()) return;
       this.onUpdateTicket(this.ticketProfileFormUpdate.getDataForUpdateNote());
-      
+
     }
     if (this.tab === "PRODUCT") {
       this.onChangeProducts(this.selectProducts.getSelectedProducts());
       if (!this.ticketProfileFormUpdate.isValidateProduct()) return;
       this.onUpdateTicket(this.ticketProfileFormUpdate.getDataForUpdateProduct());
-     
+
     }
     if (this.tab === "SERVICE") {
       this.onChangeServices(this.selectServices.getSelectedServices());
       if (!this.ticketProfileFormUpdate.isValidateService()) return;
       this.onUpdateTicket(this.ticketProfileFormUpdate.getDataForUpdateService());
-      
+
     }
 
   }
   onUpdateTicket(data) {
     this.isUpdate = true;
     this.ticketsService.updateTicket(data).subscribe(data => {
-      // this.ticketProfileFormUpdate.setChatMessage("");
       this.isUpdate = false;
       if (this.tab === "NOTE") {
         this.ticketProfileFormUpdate.setChatMessage("");
@@ -111,36 +104,32 @@ export class TicketProfileFormUpdateComponent implements OnInit {
   }
   updateAndClose() {
     if (!this.checkUpdateAndClose()) return;
-    console.log("updateAndClose");
     if (this.tab === "NOTE") {
-      if (this.ticketProfileFormUpdate.isValidateNote())  {
+      if (this.ticketProfileFormUpdate.isValidateNote()) {
         this.onUpdateTicketAndClose(this.ticketProfileFormUpdate.getDataForUpdateNote());
-       
       } else this.onUpdateTicketAndClose(this.ticketProfileFormUpdate.getDataForClose());
-    
+
     }
     if (this.tab === "PRODUCT") {
       this.onChangeProducts(this.selectProducts.getSelectedProducts());
       if (this.ticketProfileFormUpdate.isValidateProduct()) {
         this.onUpdateTicketAndClose(this.ticketProfileFormUpdate.getDataForUpdateProduct());
-      
+
       } else this.onUpdateTicketAndClose(this.ticketProfileFormUpdate.getDataForClose());
-    
+
     }
     if (this.tab === "SERVICE") {
       this.onChangeServices(this.selectServices.getSelectedServices());
       if (this.ticketProfileFormUpdate.isValidateServiceUpdateAndClose()) {
         this.onUpdateTicketAndClose(this.ticketProfileFormUpdate.getDataForUpdateService());
-       
+
       } else if (this.ticketProfileFormUpdate.isValidateService()) this.onUpdateTicketAndClose(this.ticketProfileFormUpdate.getDataForClose());
-     
+
     }
   }
   onUpdateTicketAndClose(data) {
     this.isUpdateAndClose = true;
-    //
-    this.ticketsService.updateTicket(data,true).subscribe(data => {
-      // this.ticketProfileFormUpdate.setChatMessage("");
+    this.ticketsService.updateTicket(data, true).subscribe(data => {
       this.isUpdateAndClose = false;
       if (this.tab === "NOTE") {
         this.ticketProfileFormUpdate.setChatMessage("");
@@ -150,7 +139,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
       }
       this.ticketProfileFormUpdate.clearShares();
       this.notificationStateService.oninitShowNotification(`Ticket has been closed`);
-    
+
       this.onClosed.emit(null);
     })
   }
@@ -159,12 +148,12 @@ export class TicketProfileFormUpdateComponent implements OnInit {
     let completeServices = true;
     let completeProducts = true;
     this.ticketProfile.updates.forEach(update => {
-     if (completeServices)   completeServices = (update.services.find(item => !item.completed) ? false : true);
-     if (completeProducts)   completeProducts = (update.products.find(item => !item.completed) ? false : true);
+      if (completeServices) completeServices = (update.services.find(item => !item.completed) ? false : true);
+      if (completeProducts) completeProducts = (update.products.find(item => !item.completed) ? false : true);
     });
 
     return completeServices && completeProducts;
-   
+
   }
   public setTab(data) {
     this.tab = data;
@@ -186,7 +175,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
   fileBrowseHandler(files) {
     this.prepareFilesList(files);
   }
-  
+
   prepareFilesList(files: Array<any>) {
     for (const item of files) {
       item.progress = 0;
@@ -205,20 +194,9 @@ export class TicketProfileFormUpdateComponent implements OnInit {
       }
       this.uploadFile(this.files[index]).then((data: any) => {
         let res = JSON.parse(data.response);
-        // this.changeFile(file).then((base64: string): any => {
-        console.log("res", res);
         this.ticketProfileFormUpdate.addFile(res.id);
-
-        //   this.changeFiles.emit(this.idfiles);
-        //  this.modalImageCropperStateService.onInitOpen(new ImageCroper(res.base64,res.id));
-
-        //   const modalRef = this.modalService.open(ImageCropperComponent);
-        //   modalRef.componentInstance.imageBase64 = res.base64;
-        //   modalRef.componentInstance.id = res.id;
         this.uploadFilesSimulator(index + 1);
         this.cd.detectChanges();
-        // });
-
       }).catch(() => {
         this.files[index].showError = true;
         this.uploadFilesSimulator(index + 1);
@@ -229,26 +207,19 @@ export class TicketProfileFormUpdateComponent implements OnInit {
   }
   uploadFile(file) {
     return new Promise((resolve, reject) => {
-      //  var file = this.dataURLtoFile(this.img, this.fileName);
-
       var fd = new FormData();
       fd.append("file", file);
       var xhr = new XMLHttpRequest();
       xhr.addEventListener("load", (event) => {
-
         resolve(xhr);
-
       }, false);
 
       xhr.upload.onprogress = (event) => {
         file.progress = Math.round((event.loaded / event.total) * 100);
-        console.log('Загружено на сервер ' + event.loaded + ' байт из ' + event.total);
       }
       xhr.addEventListener("error", (error) => {
         reject(error);
       }, false);
-
-
       xhr.open("POST", "/file?isAvatar=false");
       xhr.send(fd);
     });

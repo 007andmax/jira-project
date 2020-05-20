@@ -27,15 +27,11 @@
           <app-upload-area-progress [progress]="file?.progress"></app-upload-area-progress>
         </div>
         <i class="icn-sm icn-remove-old" (click)="deleteFile(i)"></i>
-       <!-- <img src="assets/img/dnd/ic-delete-file.svg" class="delete" width="20px" alt="file" (click)="deleteFile(i)">-->
       </div>
     </div>
 
   </div>
-
   <app-ticket-profile-form-update-products #selectProducts   *ngIf="tab === 'PRODUCT'"></app-ticket-profile-form-update-products>
-
-
   <app-ticket-profile-form-update-services   #selectServices  [ticketProfile]="ticketProfile"  *ngIf="tab === 'SERVICE'"></app-ticket-profile-form-update-services>
   </div>
 </div>
@@ -56,12 +52,7 @@
       <ng-template class="assigned-ticket-user" ngFor let-user [ngForOf]="lisUpdateUser" let-i="index" [ngForTrackBy]="trackByIndex">
         <div class="ticket-edit-aside__users-linked-author pointer"  [ngClass]="{'selected':ticketProfileFormUpdate.checkShares(user)}" (click)="ticketProfileFormUpdate.toggleShares(user)" *ngIf="user.accountType === 'TECH' && !showAddUpdateUser" [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"   [ngStyle]="{'background': ticketsListService.getStyleAvatar(user),'background-size': 'cover'}"></div>
       </ng-template>
-  <!--    <div class="ticket-edit-aside__users-linked-author selected" style="background-image: url(https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)"></div>
-      <div class="ticket-edit-aside__users-linked-divider"></div>
-      <div class="ticket-edit-aside__users-linked-partner selected" style="background-image: url(https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)"></div>
-      <div class="ticket-edit-aside__users-linked-partner" style="background-image: url(https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)"></div>
-      <div class="ticket-edit-aside__users-linked-partner" style="background-color: #16a4fa;">GB</div>
--->    </div>
+    </div>
 
   </div>
   <div class="d-f" *ngIf="!showAddUpdateUser">

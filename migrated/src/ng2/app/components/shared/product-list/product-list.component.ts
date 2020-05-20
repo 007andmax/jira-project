@@ -63,10 +63,8 @@ export class ProductListComponent implements OnInit {
     this.selectedItem = true;
   }
   togglePanel(data, event) {
-    console.log("data", data);
     event.target.closest('.card').classList.toggle('opened-card');
     if (!data) {
-      console.log("closest", event.target.closest('.card'))
     }
   }
   onSearch(event) {

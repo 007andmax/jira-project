@@ -29,14 +29,11 @@ export class TicketsStateService {
   public onInit() {
     this.ticketsRealTimeService.changeActualNumber.subscribe(newChange => {
       if (newChange.action === 'NUMBER_CHANGED' && newChange.data.type === "TICKET") {
-        console.log("newChange.data", newChange.data);
         this.onInitActualNumber(newChange.data.numPart);
       }
-
     })
     this.ticketsRealTimeService.changeTickets.subscribe(newChange => {
       if (newChange.action === 'CREATED_TICKET') {
-        console.log("newChange.data", newChange.data);
         this.addTicket.emit(newChange.data);
       }
       if (this.ticketChangedActions.indexOf(newChange.action) > -1) {

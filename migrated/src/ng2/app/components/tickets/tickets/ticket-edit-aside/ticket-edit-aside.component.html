@@ -1,18 +1,13 @@
 <ng-sidebar-container>
   <ng-sidebar [(opened)]="opened" [position]="'right'" class="ticket-edit-aside qt-aside d-f">
-
     <div class="collapse-arrow icon__close" (click)="close()"></div>
-
-
     <div class="ticket-edit-aside__ticket-info">
       <div class="prelaoder-body" *ngIf="showPreloader">
         <div class="loading" ></div>
       </div>
       <div class="qt-aside__body ticket-edit-aside__body">
-        <!--   TICKET HEADER   -->
         <div class="ticket-edit-aside__header d-f jc-sb ai-c">
           <div class="d-f">
-
             <div class="ticket-edit-aside__header-avatar" [textContent]="ticketsListService.getAssignedUserNameForAvatar(ticketProfile.createdUser)"
             [ngStyle]="{'background': ticketsListService.getStyleAvatar(ticketProfile.createdUser),'background-size': 'cover'}"></div>
 
@@ -22,21 +17,6 @@
                 <app-ticket-change-status [ticketProfile]="ticketProfile"></app-ticket-change-status>
               </div>
               <div class="ticket-edit-aside__header-info"><span [textContent]="parseTicketSource() + ', Agent - ' + ticketProfile.sourceName"></span> <span class="divider-point"></span> <span [textContent]="getCreatAt()"></span>
-
-             <!--    <span class="tag__modern" [ngStyle]="getStyleStatus('inProgress')" *ngIf="ticketProfile.status === 'IN_PROGRESS'" ngbDropdown ngbDropdownToggle>In Progress  <div ngbDropdownMenu
-                  aria-labelledby="dropdown1">
-               <ng-template ngFor
-                            let-item
-                            [ngForOf]="list"
-                            let-i="index">
-                 <button ngbDropdownItem
-                         [textContent]="item"
-                         (click)="onSelect(item)"></button>
-               </ng-template>
-             </div></span>
-                 <span class="tag__modern" [ngStyle]="getStyleStatus('completed')" *ngIf="ticketProfile.status === 'COMPLETED'">Completed</span>
-                 <span class="tag__modern" [ngStyle]="getStyleStatus('unassigned')" *ngIf="ticketProfile.status === null">Unassigned</span>
-                 <span class="tag__modern" [ngStyle]="getStyleStatus('onHold')" *ngIf="ticketProfile.status === 'ON_HOLD'">On Hold</span>-->
                  </div>
             </div>
           </div>
@@ -57,7 +37,6 @@
         </div>
         <app-ticket-edit-tags [selectedTag]="ticketProfile.tags" (tagsChange)="onChangeTags($event)" [hidden]="showAddAssignedUser"></app-ticket-edit-tags>
         <app-add-assigned-user [placement]="'bottom-left'" [userList]="getUsersForAssign()" [selectedUsers]="listAssignedUser" (onSelected)="onSelectAssignedUser($event)" (hidden)="onToggleAddAssignedUser()" *ngIf="showAddAssignedUser"></app-add-assigned-user>
-        <!--   TICKET SUBJECT AND DESCRIPTION   -->
         <div class="ticket-edit-aside__ticket-text">
 
           <div class="ticket-edit-aside__ticket-subject" [hidden]="modeSubject === 'edit'"
@@ -74,76 +53,24 @@
             <span [textContent]="'Tkt# ' + ticketProfile.number"></span>
             <input    [(ngModel)]="ticketProfile.subject"/>
           </div>
-
-        <!--  <div class="ticket-edit-aside__ticket-description"
-          [hidden]="true"
-               (click)="toggleNote()"
-          [textContent]="ticketProfile.note"></div>-->
           <div class="ticket-edit-aside__ticket-description-edit"
-
                appClickOtside [init]="opened" [class]="'.ticket-edit-aside__ticket-text'" (onOutSide)="toggleNote()"
           >
             <textarea id="ticket-note" placeholder="Enter description here"  ></textarea>
           </div>
         </div>
-        <!--   TICKET CLAIMED INFO   -->
        <app-ticket-claim-info [ticketProfile]="ticketProfile"></app-ticket-claim-info>
-
-
       <app-ticket-message (onMoveToTrash)="moveToTrash($event)" (onRestoreFromSpam)="restoreFromSpam()" (onOpenTicket)="markAsOpen()" (onClaimTicket)="claimTicket()" [ticketProfile]="ticketProfile"></app-ticket-message>
-
-        <!--  TICKET SUBTASK   -->
-        <!-- div class="ticket-edit-aside__subtasks">
-          <div class="subtask__header d-f jc-sb">
-            <div class="subtask__header-title">Subtask</div>
-            <div class="subtask__header-add-task">+ Add subtask</div>
-          </div>
-
-          <div class="subtask__line d-f ai-c">
-            <div class="subtask__done-status icon__task-pending"></div>
-            <input class="subtask__input" type="text" value="Need to fix IP configuration">
-            <div class="subtask__date">12 Mar 2020</div>
-            <div class="subtask__user-photo" style="background-image: url(https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)"></div>
-
-
-          </div>
-
-
-          <div class="subtask__line d-f ai-c">
-            <div class="subtask__done-status icon__task-pending --done"></div>
-            <input class="subtask__input" type="text" value="Anstall auto">
-
-
-            <div class="subtask__date-icon icon__assign-date"></div>
-            <div class="subtask__user-icon icon__assign-user"></div>
-          </div>
-
-        </!-- -->
-        <!--  TICKET UPDATES  -->
        <app-ticket-profile-updates *ngIf="ticketProfile.updates && ticketProfile.updates.length > 0" [ticketProfile]="ticketProfile" [updates]="ticketProfile.updates"></app-ticket-profile-updates>
-        <!--  CHAT PRODUCTS SERVICE  -->
         <app-ticket-profile-form-update (onClosed)="close()" *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)" #updateForm [ticket]="ticketProfile" [lisUpdateUser]="lisUpdateUser"></app-ticket-profile-form-update>
       </div>
-
-
     </div>
-
-<!--    <div class="ticket-edit-aside__additional-info">-->
-<!--      <app-ticket-edit-aside-company-info></app-ticket-edit-aside-company-info>-->
-<!--      <app-ticket-edit-aside-devices></app-ticket-edit-aside-devices>-->
-<!--      <app-ticket-edit-aside-users></app-ticket-edit-aside-users>-->
-<!--    </div>-->
-
-
     <div class="ticket-edit-aside__menu">
       <div class="aside-menu-item icon__panel-open"></div>
       <div class="aside-menu-item icon__company-info"></div>
       <div class="aside-menu-item icon__devices"></div>
       <div class="aside-menu-item icon__users"></div>
     </div>
-
-
-
   </ng-sidebar>
 </ng-sidebar-container>
 

@@ -1,5 +1,5 @@
 import { Service } from 'src/ng2/app/interfaces/service/service';
-import * as moment from "moment";
+
 export class TicketProfileFormService {
     completed: boolean = true;
     date: number = new Date().getTime();
@@ -14,15 +14,12 @@ export class TicketProfileFormService {
     constructor(data = null) {
         if (data) {
             for (const key in data) {
-                //  if (this.hasOwnProperty(key)) {
                 this[key] = data[key];
-
-                // }
             }
         } else {
             let currentDate = new Date();
-            this.durationStart = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(),currentDate.getHours(),currentDate.getMinutes()).getTime();
-            this.durationEnd =  new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(),currentDate.getHours(),currentDate.getMinutes()).getTime();
+            this.durationStart = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), currentDate.getHours(), currentDate.getMinutes()).getTime();
+            this.durationEnd = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), currentDate.getHours(), currentDate.getMinutes()).getTime();
         }
 
     }
@@ -68,13 +65,9 @@ export class TicketProfileFormService {
     }
     public calculateQuantity() {
         let durationEnd = JSON.parse(JSON.stringify(this.durationEnd));
-        console.log("durationEnd", new Date(durationEnd));
-        console.log("this.durationStart", new Date(this.durationStart));
-        console.log("this.quantity",this.quantity);
         if (this.durationStart - this.durationEnd > 0) durationEnd = this.durationEnd + 24 * 3600000;
         this.quantity = (durationEnd - this.durationStart) / 3600000 > 0 ? (durationEnd - this.durationStart) / 3600000 : 0;
         if (this.quantity > 24) this.quantity -= 24;
-        console.log("this.quantity", this.quantity);
     }
     public setQuantity(data) {
         this.quantity = data;

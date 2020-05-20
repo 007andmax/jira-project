@@ -56,10 +56,7 @@ export class TicketProfile {
     constructor(data = null) {
         if (data) {
             for (const key in data) {
-                //  if (this.hasOwnProperty(key)) {
                 this[key] = data[key];
-
-                // }
             }
             this.agent = new TicketProfileAgent(data.agent);
             this.assignPerformer = new CurrentUser(data.assignPerformer);
@@ -88,7 +85,7 @@ export class TicketProfile {
             })
         }
     }
-    public addAttachment (data) {
+    public addAttachment(data) {
         this.attachments.push(new TicketProfileAttachment(data));
     }
     public addUpdate(data) {
@@ -96,7 +93,7 @@ export class TicketProfile {
     }
     public removeUpdate(data) {
         let index = this.updates.findIndex(item => item.id === data.id);
-        if (index > -1) this.updates.splice(index,1);
+        if (index > -1) this.updates.splice(index, 1);
     }
     public setUpdate(data) {
         let index = this.updates.findIndex(item => item.id === data.id);
@@ -104,10 +101,7 @@ export class TicketProfile {
     }
     public update(data) {
         for (const key in data) {
-            //  if (this.hasOwnProperty(key)) {
             this[key] = data[key];
-
-            // }
         }
         if (data.agent) this.agent = new TicketProfileAgent(data.agent);
         if (data.assignPerformer) this.assignPerformer = new CurrentUser(data.assignPerformer);

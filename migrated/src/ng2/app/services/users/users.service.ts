@@ -41,12 +41,6 @@ export class UsersService {
   public getCurrentUser() {
     return this.http.get(this.apiUrl + 'users/current');
   }
-  /* public getCurrentUser() {
-    return this.http.get(this.apiUrl + 'users/current').subscribe((res) => {
-      this.currentUser = res;
-  //    this.userState.onInitCurrentUser(res);
-    });
-  }*/
 
   getUser() {
     return this.http.get(this.apiUrl + 'users/current').subscribe((res) => {
@@ -54,12 +48,8 @@ export class UsersService {
     });
   }
   changeUserPermissions(permissions) {
-    console.log(this.currentUser, '12351');
-    console.log(permissions, '12351');
     return this.currentUser.permissions = permissions;
   }
-
-
 
   /**
    * Get user info

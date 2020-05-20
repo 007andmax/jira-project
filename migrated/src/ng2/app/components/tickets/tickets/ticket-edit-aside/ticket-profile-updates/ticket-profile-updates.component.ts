@@ -23,10 +23,8 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     private ticketStateService: TicketStateService,
     private notificationStateService: NotificationStateService, ) { }
-
-
   ngOnInit() {
-    this.showLoadMoreUpdates = (this.ticketProfile.unloadedUpdates > 0) ? true:  false;
+    this.showLoadMoreUpdates = (this.ticketProfile.unloadedUpdates > 0) ? true : false;
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_UPDATE_TICKET) {
@@ -45,37 +43,28 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
   }
   removeService() {
     this.ticketsService.removeService(this.ticketProfile.id, this.ticketStateService.getUpdateForRemove().id, this.ticketStateService.getServiceForRemove().id).subscribe(data => {
-
-
     })
   }
   removeProduct() {
     this.ticketsService.removeProduct(this.ticketProfile.id, this.ticketStateService.getUpdateForRemove().id, this.ticketStateService.getProductForRemove().id).subscribe(data => {
-
-
     })
   }
   removeUpdate() {
     this.ticketsService.deleteUpdate(this.ticketProfile.id, this.ticketStateService.getUpdateForRemove().id).subscribe(data => {
       this.notificationStateService.oninitShowNotification(`The ticket update containing a note has been deleted`);
-
     })
   }
   fetchUpdates() {
     this.showLoadMoreUpdates = false;
     this.showPreloader = true;
-    this.ticketsService.fetchUpdates(this.ticketProfile).subscribe((resp:any) => {
-      console.log("resp",resp);
-     let updates = this.updates || [];
-     updates = [...updates,...resp.map(item => {
-       return new TicketProfileUpdate(item);
-     })];
+    this.ticketsService.fetchUpdates(this.ticketProfile).subscribe((resp: any) => {
+      let updates = this.updates || [];
+      updates = [...updates, ...resp.map(item => {
+        return new TicketProfileUpdate(item);
+      })];
       this.updates = updates;
       this.showPreloader = false;
     })
-   /* TicketsService.loadRemainingTicketUpdates($scope.ticketDetails, function () {
-      $scope.allUpdatesLoaded = true;
-    })*/
   }
   getCountUpdates() {
     if (!this.showLoadMoreUpdates) return this.updates.length;
@@ -83,5 +72,8 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
+  }
+  public trackByIndex(index, item) {
+    return index;
   }
 }

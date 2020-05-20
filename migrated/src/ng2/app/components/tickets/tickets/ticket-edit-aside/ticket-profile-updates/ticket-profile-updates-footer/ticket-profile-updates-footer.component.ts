@@ -9,18 +9,19 @@ import * as moment from "moment";
   styleUrls: ['./ticket-profile-updates-footer.component.scss']
 })
 export class TicketProfileUpdatesFooterComponent implements OnInit {
-  @Input() shares:Array<TicketProfileShare> = [];
-  @Input() date:number = 0;
+  @Input() shares: Array<TicketProfileShare> = [];
+  @Input() date: number = 0;
   constructor(public ticketsListService: TicketsListService) { }
 
   ngOnInit() {
   }
-
   public getDate() {
     let now = new Date();
     let date = new Date(this.date);
-    if (now.getDate() == date.getDate() && now.getMonth() == date.getMonth() && now.getFullYear() == date.getFullYear())  return moment(new Date(this.date)).format('hh:mm A');
+    if (now.getDate() == date.getDate() && now.getMonth() == date.getMonth() && now.getFullYear() == date.getFullYear()) return moment(new Date(this.date)).format('hh:mm A');
     return moment(new Date(this.date)).format('DD MMM');
   }
-
+  public trackByIndex(index, item) {
+    return index;
+  }
 }

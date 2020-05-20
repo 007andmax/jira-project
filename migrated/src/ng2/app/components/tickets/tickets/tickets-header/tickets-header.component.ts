@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TitleListType } from './class/title-list-type';
 import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.service';
 import { Subscription } from 'rxjs';
-import { TicketsCounts } from '../class/tickets-counts';
 
 @Component({
   selector: 'app-tickets-header',
@@ -23,7 +22,7 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
   title: string = 'My Tickets';
   sub: Subscription = new Subscription();
   count = 0;
-  selectedListType:TitleListType = new TitleListType('My Tickets', 'USERS');
+  selectedListType: TitleListType = new TitleListType('My Tickets', 'USERS');
   constructor(private ticketsStateService: TicketsStateService) { }
 
   ngOnInit() {
@@ -33,7 +32,7 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnInitFilter);
     this.ticketsStateService.getOnInitCount().subscribe(data => {
-    this.count = data;
+      this.count = data;
       this.title = `${this.selectedListType.title} (${this.count})`;
     })
   }

@@ -87,7 +87,6 @@ export class LeftPanelTicketsComponent implements OnInit {
   }
   private getCount() {
     this.ticketsService.getCount(this.ticketsFilter.getDataForRequest()).subscribe(data => {
-      console.log("data",data);
       this.ticketsStateService.onInitCount(data);
     })
   }
@@ -148,10 +147,9 @@ export class LeftPanelTicketsComponent implements OnInit {
   }
   selectTechUser(item) {
 
-    console.log("item", item);
-    console.log("this.techUsersList", this.techUsersList);
+    
     let indexTechUser = this.techUsersList.findIndex(user => `${user.firstName} ${user.lastName}` === item);
-    console.log("indexTechUser", indexTechUser);
+   
     //  this.showClearIndustry = true;
     // this.clientIndustry = item;
     if (indexTechUser > -1) {
@@ -168,7 +166,7 @@ export class LeftPanelTicketsComponent implements OnInit {
 
 
     let indexhUser = this.users.findIndex(user => `${user.firstName} ${user.lastName}` === item);
-    console.log("indexhUser", indexhUser);
+    
     //  this.showClearIndustry = true;
     // this.clientIndustry = item;
     if (indexhUser > -1) {
@@ -203,7 +201,7 @@ export class LeftPanelTicketsComponent implements OnInit {
     //  this.usersStateService.onInitFilter(this.filter);
   }
   public onSelectCompany(item) {
-    console.log("item", item);
+    
     this.blockFilterUser = true;
     this.usersDp.clearClient();
     if (!item) {
@@ -232,12 +230,12 @@ export class LeftPanelTicketsComponent implements OnInit {
       })
     }
 
-    console.log("item", this.ticketsFilter.selectedCompany);
+   
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
     this.getCount();
   }
   onSelectTechUser(item) {
-    console.log("item", item);
+   
     if (!item) {
       this.ticketsFilter.setTechUser(null);
       this.clearSelectedTechUser();
@@ -270,7 +268,7 @@ export class LeftPanelTicketsComponent implements OnInit {
     
   }
   onSelectUser(item) {
-    console.log("item", item);
+    
     if (!item) {
       this.ticketsFilter.setUser(null);
       this.clearSelectedUser();
@@ -297,7 +295,6 @@ export class LeftPanelTicketsComponent implements OnInit {
 
       })
     }
-    console.log("ticketsFilter.selectedUser", this.ticketsFilter.selectedUser);
     if (!this.blockFilterUser) {
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
       this.getCount();
@@ -305,7 +302,7 @@ export class LeftPanelTicketsComponent implements OnInit {
     this.blockFilterUser = false;
   }
   onOpenDropDownFilter(id) {
-    console.log("onOpenDropDownCompany");
+   
     let containers =  this.elRef.nativeElement.querySelectorAll('.show-filter');
     containers.forEach((item:any) => {
       item.style.zIndex = 2;

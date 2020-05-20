@@ -82,11 +82,7 @@
           <app-select-search  #deviceDP [class]="['qt-dropdown']" [field]="'hostName'" [list]="devices" [placeholder]="'Select device'"  (onSelectedItem)="onSelectDevice($event)"></app-select-search>
         </div>
       </div>
-
-      <!--  File upload    -->
       <app-upload-area #uplaodFile (changeFiles)="onChangeFiles($event)" class="ticket-fileupload"></app-upload-area>
-
-      <!--  Users to notify  -->
       <div class="users-to-notify">
         <div class="users-to-notify__title">Add users to notify them ticket update</div>
         <div class="save-template">

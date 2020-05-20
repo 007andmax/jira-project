@@ -9,21 +9,18 @@ import { TicketProfile } from '../../components/tickets/tickets/class/ticket-pro
   providedIn: 'root'
 })
 export class TicketsService {
-
   private apiUrl = environment.apiUrl;
   constructor(private http: HttpClient) { }
-
-  public updateExpense( data) {
-   
+  public updateExpense(data) {
     return this.http.put(this.apiUrl + `v2/tickets/ticketUpdate/updateExpense`, data);
   }
   public fetchUpdates(ticket) {
     var loadedIds = [];
-        if (ticket.updates) {
-          for (var i = 0; i < ticket.updates.length; i++) {
-            loadedIds.push(ticket.updates[i].id)
-          }
-        }
+    if (ticket.updates) {
+      for (var i = 0; i < ticket.updates.length; i++) {
+        loadedIds.push(ticket.updates[i].id)
+      }
+    }
     return this.http.post(this.apiUrl + `v2/tickets/${ticket.id}/updates/fetch`, loadedIds);
   }
   public changeSubjectNoteTicket(id, subject, note) {
@@ -62,7 +59,7 @@ export class TicketsService {
 
     return this.http.post(this.apiUrl + `v2/tickets/delete/`, { ids: ids });
   }
-  public updateTicket(data,close = false) {
+  public updateTicket(data, close = false) {
 
     return this.http.post(this.apiUrl + `v2/tickets/updates?close=${close}`, data);
   }

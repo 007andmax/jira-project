@@ -60,7 +60,7 @@ export class TicketAddAsideComponent implements OnInit {
     })
     this.ticketsStateService.getToggleAddTicket().subscribe(data => {
       this.opened = !this.opened;
-      console.log("this.opened", this.opened);
+
     })
     if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
     let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
@@ -76,7 +76,7 @@ export class TicketAddAsideComponent implements OnInit {
         this.isAdd = false;
         this.notificationStateService.oninitShowNotification("Ticket has been created");
         this.closed();
-      },error => {
+      }, error => {
         this.isAdd = false;
       })
     }
@@ -107,8 +107,7 @@ export class TicketAddAsideComponent implements OnInit {
       }
     });
     this.listTechUsersForAssign = this.getListTechUsersForAssign();
-    console.log("this.listTechUsersForAssign", this.listTechUsersForAssign);
-    console.log("this.shareUsersList", this.shareUsersList);
+
   }
   private getListTechUsersForAssign() {
 
@@ -132,7 +131,7 @@ export class TicketAddAsideComponent implements OnInit {
       this.shareUsersList = list;
       this.ticketValidate.resetCompany();
 
-     
+
     } else {
       this.ticketAdd.createdUser = new TicketCreatedUser();
       this.ticketAdd.clearDeviceId();
@@ -211,7 +210,7 @@ export class TicketAddAsideComponent implements OnInit {
   onGetDevices(data) {
     this.devices = ((data) ? data : []).sort((a, b) => (a.hostName.toLowerCase() > b.hostName.toLowerCase()) ?
       1 : ((b.hostName.toLowerCase() > a.hostName.toLowerCase()) ? -1 : 0));
-    console.log("this.devices", this.devices);
+
   }
   onGetUsers(data) {
     this.users = data.filter(item => {
@@ -226,10 +225,9 @@ export class TicketAddAsideComponent implements OnInit {
   }
   onChangeFiles(ids) {
     this.ticketAdd.setAttachFileIds(ids);
-    console.log("ids", ids);
   }
   onChangeShareUsers(data) {
-    console.log("data", data);
+
     this.shareUsersList = JSON.parse(JSON.stringify(data));
   }
   public onPastNote(value) {
@@ -243,7 +241,6 @@ export class TicketAddAsideComponent implements OnInit {
   public onChangeNote(event) {
     this.ticketAdd.note = event.target.value;
   }
-
 
   public trackByIndex(index, item) {
     return index;

@@ -51,7 +51,6 @@ export class TehUsersComponent implements OnInit, OnDestroy {
         if (index > -1) {
           item.selected = true;
           this.selectedUsers = [item];
-          console.log("this.selectedUsers",this.selectedUsers[0]);
         } 
       })
     }

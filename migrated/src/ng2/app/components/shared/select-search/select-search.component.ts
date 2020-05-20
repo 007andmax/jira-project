@@ -71,7 +71,6 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
   }
   onChange(event) {
     if (!this.change) return;
-    console.log("onChange");
     let index = this.list.findIndex(item => (this.field) ? item[this.field] === this.selectedItem : item === this.selectedItem);
     if (index === -1) this.onSelectedItem.emit(this.selectedItem);
   }
@@ -96,14 +95,14 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
    * @param companyId - id of company
    */
   public selectItem(item) {
-    console.log("selectItem");
+    
     this.isAdd = false;
     this.onSelectedItem.emit(item.item);
 
   }
 
   public isDropDownOpen() {
-    console.log("isDropDownOpen");
+  
   }
 
   /**
@@ -118,7 +117,7 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
    * clear client input
    */
   public clearClient() {
-    console.log("clearClient");
+    
     this.isAdd = false;
     this.onSelectedItem.emit(null);
     this.selectedItem = null;

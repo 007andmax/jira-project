@@ -59,19 +59,10 @@ export class UploadAreaComponent implements OnInit {
          } 
         this.uploadFile(this.files[index]).then((data: any) => {
           let res = JSON.parse(data.response);
-          // this.changeFile(file).then((base64: string): any => {
-          console.log("res", res);
-          this.idfiles.push(res.id);
+            this.idfiles.push(res.id);
           this.changeFiles.emit(this.idfiles);
-          //  this.modalImageCropperStateService.onInitOpen(new ImageCroper(res.base64,res.id));
-
-          //   const modalRef = this.modalService.open(ImageCropperComponent);
-          //   modalRef.componentInstance.imageBase64 = res.base64;
-          //   modalRef.componentInstance.id = res.id;
           this.uploadFilesSimulator(index + 1);
           this.cd.detectChanges();
-          // });
-
         }).catch(() => {
           this.files[index].showError = true;
           this.uploadFilesSimulator(index + 1);
@@ -82,26 +73,19 @@ export class UploadAreaComponent implements OnInit {
   }
   uploadFile(file) {
     return new Promise((resolve, reject) => {
-      //  var file = this.dataURLtoFile(this.img, this.fileName);
-
       var fd = new FormData();
       fd.append("file", file);
       var xhr = new XMLHttpRequest();
       xhr.addEventListener("load", (event) => {
-
         resolve(xhr);
-
       }, false);
 
       xhr.upload.onprogress = (event)=> {
         file.progress = Math.round((event.loaded /  event.total) * 100);
-        console.log( 'Загружено на сервер ' + event.loaded + ' байт из ' + event.total );
       }
       xhr.addEventListener("error", (error) => {
         reject(error);
       }, false);
-
-
       xhr.open("POST", "/file?isAvatar=false");
       xhr.send(fd);
     });

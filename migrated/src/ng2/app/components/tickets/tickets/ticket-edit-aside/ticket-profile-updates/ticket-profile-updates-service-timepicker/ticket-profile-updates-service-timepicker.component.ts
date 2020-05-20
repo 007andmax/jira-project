@@ -19,19 +19,17 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
   @Output() onChangeStart = new EventEmitter<any>();
   currentCompany = null;
   step: number = 1;
-  isShowEnd:boolean = false;
-  isShowStart:boolean = false;
+  isShowEnd: boolean = false;
+  isShowStart: boolean = false;
   inputTarget = null;
-
   timePickerStart;
   timePickerEnd;
-  constructor(private companiesStateService: CompaniesStateService,  public cd: ChangeDetectorRef, private elRef: ElementRef,) { }
+  constructor(private companiesStateService: CompaniesStateService, public cd: ChangeDetectorRef, private elRef: ElementRef, ) { }
 
   ngOnInit() {
 
     this.currentCompany = this.companiesStateService.getCurrentCompany();
     $(document).ready(() => {
-
       let serviceExpenseDurationPickerInterval = this.companiesStateService.getCurrentCompany().serviceExpenseDurationPickerInterval;
       if (serviceExpenseDurationPickerInterval === 'ONE_MINUTE') this.step = 1;
       if (serviceExpenseDurationPickerInterval === 'FIVE_MINUTES') this.step = 5;
@@ -53,85 +51,61 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
         'step': this.step
       });
       this.timePickerStart.on('selectTime', (data) => {
-        console.log("selectTime", data);
         this.changeStart();
         let startDate = new Date(this.timePickerStart.timepicker('getTime'));
         this.onChangeStart.emit(startDate.getTime());
       });
       this.timePickerStart.on('showTimepicker', (data) => {
-      this.inputTarget = data.currentTarget;
-       this.isShowStart = true;
-       this.onSetPosition();
+        this.inputTarget = data.currentTarget;
+        this.isShowStart = true;
+        this.onSetPosition();
       });
       this.timePickerStart.on('hideTimepicker', (data) => {
-        
         this.isShowStart = false;
         this.inputTarget = null;
       });
-
-      /*$('#datepairExample .start').on('showTimepicker', (data) => {
-        $('body').append("<div class='igx-overlay'><div class='igx-overlay__wrapper'></div></div>");
-        $('.igx-overlay__wrapper').append($(".ui-timepicker-wrapper"));
-      });*/
       this.timePickerEnd.on('selectTime', (data) => {
-        console.log("selectTime", data);
         let endDate = new Date(this.timePickerEnd.timepicker('getTime'));
         this.onChangeEnd.emit(endDate.getTime());
       });
       this.timePickerEnd.on('showTimepicker', (data) => {
         this.inputTarget = data.currentTarget;
-        console.log("showTimepicker", data);
         $('.ui-timepicker-with-duration').scrollTop(0);
-       this.isShowEnd = true;
-       this.onSetPosition();
+        this.isShowEnd = true;
+        this.onSetPosition();
       });
       this.timePickerEnd.on('hideTimepicker', (data) => {
         this.isShowEnd = false;
         this.inputTarget = null;
       });
-      
       if (this.editMode) {
         let startDate = new Date(this.start);
         let endDate = new Date(this.end);
         this.timePickerStart.timepicker('setTime', startDate);
         this.timePickerEnd.timepicker('setTime', endDate);
-
-
       } else {
         this.timePickerStart.timepicker('setTime', new Date());
         this.timePickerEnd.timepicker('setTime', new Date());
       }
       this.timePickerEnd.timepicker('option', 'minTime', this.timePickerStart.val());
-
       $(".ticket-edit-aside__body").scroll(() => {
         if (!this.inputTarget) return;
         this.onSetPosition();
       })
-     /* window.addEventListener('scroll', ()=> {
-        console.log("html");
-        if (!this.inputTarget) return;
-        let topInput =  $(this.inputTarget).offset().top;
-        let height = $(".ui-timepicker-wrapper").height();
-        $(".ui-timepicker-wrapper").offset({ top: topInput - height - 15 });
-      });*/
       $(window).scroll(() => {
-        console.log("html");
         if (!this.inputTarget) return;
-     this.onSetPosition();
+        this.onSetPosition();
       })
-      // initialize datepair
     });
   }
-  private onSetPosition () {
-    let topInput =  $(this.inputTarget).offset().top;
+  private onSetPosition() {
+    let topInput = $(this.inputTarget).offset().top;
     let height = $(".ui-timepicker-wrapper").height();
     $(".ui-timepicker-wrapper").offset({ top: topInput - height - 15 });
   }
   public refresh() {
-    console.log("refresh");
     let startDate = new Date();
     let endDate = new Date();
-     
     this.timePickerStart.timepicker('setTime', startDate);
     this.timePickerEnd.timepicker('setTime', endDate);
     this.cd.detectChanges();
@@ -145,10 +119,7 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
   public changeStart() {
     if (this.editMode) {
       let startDate = this.timePickerStart.timepicker('getTime');
-      console.log("startDate", startDate);
       let endDate = new Date(new Date(startDate).getTime() + (this.quantity * 3600000));
-      console.log("endDate", endDate);
-      console.log("quantity,this.", this.quantity);
       this.timePickerEnd.timepicker('setTime', endDate);
       this.onSetEnd.emit(endDate.getTime());
     }

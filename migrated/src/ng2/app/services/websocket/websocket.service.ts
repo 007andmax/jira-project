@@ -279,7 +279,6 @@ export class WebsocketService {
 
       this.stompClient.subscribe(`/user/watch/cmdShellOutput`, (message) => {
         var newChange = JSON.parse(message.body);
-
         console.log("newChange", newChange);
       });
 

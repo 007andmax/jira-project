@@ -18,7 +18,7 @@ export class TicketProfileUpdatesProductComponent implements OnInit {
   @Input() update: TicketProfileUpdate;
   constructor(public ticketsListService: TicketsListService,
     private confirmStateService: ConfirmStateService,
-    private ticketStateService:TicketStateService,
+    private ticketStateService: TicketStateService,
     private modalService: NgbModal) { }
 
   ngOnInit() {
@@ -35,5 +35,7 @@ export class TicketProfileUpdatesProductComponent implements OnInit {
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
     modalRef.componentInstance.message = `The ticket update containing a service will become inaccessible. Continue with permanent deletion?`;
   }
-
+  public trackByIndex(index, item) {
+    return index;
+  }
 }

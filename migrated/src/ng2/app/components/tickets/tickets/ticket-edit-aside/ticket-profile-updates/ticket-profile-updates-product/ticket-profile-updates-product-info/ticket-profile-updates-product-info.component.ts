@@ -25,10 +25,10 @@ export class TicketProfileUpdatesProductInfoComponent implements OnInit {
   listTehUsers = [];
   constructor(public ticketsListService: TicketsListService,
     private confirmStateService: ConfirmStateService,
-    private ticketStateService:TicketStateService,
-    private ticketsService:TicketsService,
-    private usersStateService:UsersStateService,
-    private companiesStateService:CompaniesStateService,
+    private ticketStateService: TicketStateService,
+    private ticketsService: TicketsService,
+    private usersStateService: UsersStateService,
+    private companiesStateService: CompaniesStateService,
     private modalService: NgbModal) { }
 
   ngOnInit() {
@@ -52,17 +52,15 @@ export class TicketProfileUpdatesProductInfoComponent implements OnInit {
   }
   private updateProduct() {
     this.ticketsService.updateExpense(this.product.getDateForUpdate(this.update.id)).subscribe(data => {
-     // this.productDate = new Date(this.product.date).toISOString();
     })
   }
   public onChangeUser(data) {
-    console.log("data", data);
-    if (data.length === 0) this.product.setUser({id: ""});
+    if (data.length === 0) this.product.setUser({ id: "" });
     if (data.length === 1) this.product.setUser(data[0]);
-   this.updateProduct();
+    this.updateProduct();
   }
   public onChangeDatePicker(data) {
-  
+
     this.product.setDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.updateProduct();
   }
@@ -78,6 +76,6 @@ export class TicketProfileUpdatesProductInfoComponent implements OnInit {
     this.confirmStateService.setConfirmAction(REMOVE_UPDATE_TICKET_PRODUCT);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
     modalRef.componentInstance.message = `Do you want to remove the item?`;
-    
+
   }
 }

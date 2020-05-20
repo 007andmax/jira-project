@@ -123,7 +123,7 @@ export class TicketsFilter {
             payload.groupFieldFilters[0].predicateRule = "AND";
         }
         if (this.selectedUser) {
-            console.log("selectedUser", this.selectedUser);
+           
             payload.groupFieldFilters[0].fieldFilterDtos.push({
                 operator: "EQ",
                 path: "createdUserId",

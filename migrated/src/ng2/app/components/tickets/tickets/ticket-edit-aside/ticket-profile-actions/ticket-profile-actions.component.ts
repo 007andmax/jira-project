@@ -63,7 +63,7 @@ export class TicketProfileActionsComponent implements OnInit {
     }
   }
   getDevicesByCompany() {
-    let find = (this.devicesSateService.getAllDevices()) ?  this.devicesSateService.getAllDevices()[this.ticketProfile.companyId] : false;
+    let find = (this.devicesSateService.getAllDevices()) ? this.devicesSateService.getAllDevices()[this.ticketProfile.companyId] : false;
     return (find) ? find : []
   }
   isDeviceToLink() {

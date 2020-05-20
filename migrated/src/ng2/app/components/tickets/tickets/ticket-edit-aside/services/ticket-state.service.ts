@@ -22,7 +22,6 @@ export class TicketStateService {
   constructor(private serviceAgreementsService: ServiceAgreementsService,
     private recurringService: RecurringService, private ticketsRealTimeService: TicketsRealTimeService, private websocketService: WebsocketService) {
     this.ticketsRealTimeService.changeTicket.subscribe(newChange => {
-
       this.changeUpdatesTicket.emit(newChange);
     });
   }
@@ -45,12 +44,9 @@ export class TicketStateService {
 
   private getServiceAgreements(ticketProfile) {
     this.serviceAgreementsService.getServiceAgreements().subscribe((data: any) => {
-      let listAgreements = data;
       let Agreements = data.filter((el) => el.company.id === ticketProfile.company.id)
       this.areTicketsPresented = (Agreements.length > 0) ? true : false;
-      // if (this.areTicketsPresented)
       this.servicesForTicket.filter(item => item.canUseInTicket);
-      console.log("Agreements", Agreements);
       this.areTicketsTerminated = Agreements.every((el) => {
         return el.status === 'EXPIRED' || el.status === 'TERMINATED'
       })

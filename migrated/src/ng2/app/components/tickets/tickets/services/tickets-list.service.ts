@@ -25,8 +25,6 @@ export class TicketsListService {
   }
 
   isTicketMatchesFilters(ticketsFilter:TicketsFilter,ticket: Ticket) {
-    console.log("this.ticketsFilter.listType",ticketsFilter.listType);
-    console.log("ticket", ticket);
     if (ticketsFilter.listType === "ALL" && ticket.ticketSource !== "FROM_RECURRING_TICKET" && this.checkFilterUse(ticketsFilter,ticket)) return true;
     if (ticketsFilter.listType === "UNASSIGNED" && ticket.status === null  && this.checkFilterUse(ticketsFilter,ticket)) return true;
     if (ticketsFilter.listType === "OPEN" && ticket.status !== "COMPLETED" && this.checkFilterUse(ticketsFilter,ticket)) return true;

@@ -25,7 +25,7 @@ import { WebsocketService } from 'src/ng2/app/services/websocket/websocket.servi
   selector: 'app-ticket-edit-aside',
   templateUrl: './ticket-edit-aside.component.html',
   styleUrls: ['./ticket-edit-aside.component.scss'],
-  providers: [TicketsListService,TicketsPermissionsService]
+  providers: [TicketsListService, TicketsPermissionsService]
 
 })
 export class TicketEditAsideComponent implements OnInit {
@@ -35,7 +35,6 @@ export class TicketEditAsideComponent implements OnInit {
   modeSubject = 'view';
   modeDescription = 'view';
   showAddAssignedUser = false;
-
   showPreloader: boolean = true;
   listColors: Array<StatusColor> = [];
   statusColor: TicketsColor;
@@ -49,7 +48,7 @@ export class TicketEditAsideComponent implements OnInit {
     public ticketsListService: TicketsListService,
     private usersStateService: UsersStateService,
     private ticketStateService: TicketStateService,
-    public ticketsPermissionsService:TicketsPermissionsService,
+    public ticketsPermissionsService: TicketsPermissionsService,
     private notificationStateService: NotificationStateService,
     public cd: ChangeDetectorRef,
     private companiesStateService: CompaniesStateService) { }
@@ -57,19 +56,14 @@ export class TicketEditAsideComponent implements OnInit {
   ngOnInit() {
     this.ticketsStateService.getOnOpenTicket().subscribe(data => {
       this.showPreloader = true;
-      console.log("getOnOpenTicket");
     })
-    this.ticketsStateService.getOnEditTicket().subscribe(data => { 
-      console.log("getOnEditTicket");
+    this.ticketsStateService.getOnEditTicket().subscribe(data => {
       this.ticketStateService.unsubscribeTicket();
       if (this.updateForm) this.updateForm.reset();
       this.ticketProfile = data;
       this.elRef.nativeElement.querySelector("#ticket-note").value = this.ticketProfile.note;
       this.updateListAssignedUser();
       this.updateLisUpdateUser();
-      // if (this.ticketProfile.note.length === 0) this.modeDescription = 'edit';
-
-
       this.opened = true;
       this.showPreloader = false;
       this.ticketStateService.getServicesList(this.ticketProfile);
@@ -94,7 +88,7 @@ export class TicketEditAsideComponent implements OnInit {
       }
     })
     this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
-      console.log("data", data);
+
       if (this.opened) {
         let ticket = new Ticket(data);
         if (this.ticketProfile.id === ticket.id) {
@@ -148,7 +142,7 @@ export class TicketEditAsideComponent implements OnInit {
     this.lisUpdateUser = this.ticketProfile.updates.map(item => item.user);
     this.lisUpdateUser = [...this.listAssignedUser, ...this.lisUpdateUser]
     this.lisUpdateUser = this.lisUpdateUser.filter((item, index) => this.lisUpdateUser.findIndex(user => user.id === item.id) === index);
-    console.log("this.lisUpdateUser", this.lisUpdateUser);
+
   }
   onMoveIntoSpam() {
     if (this.usersStateService.getCurrentUser().isOwner) {
@@ -189,8 +183,6 @@ export class TicketEditAsideComponent implements OnInit {
     this.ticketsService.addTags(this.ticketProfile.id, tags).subscribe(res => {
 
     })
-
-
   }
   getUsersForAssign() {
     let userList = this.usersStateService.getAllUsers().sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?
@@ -201,22 +193,16 @@ export class TicketEditAsideComponent implements OnInit {
 
   toggleSubject() {
     this.modeSubject = (this.modeSubject === 'view') ? 'edit' : 'view';
-    console.log("toggleSubject", this.modeSubject)
     if (this.modeSubject === 'view') this.onChangeSubjectNote();
   }
   toggleNote() {
-    // this.modeDescription = (this.modeDescription === 'view') ? 'edit' : 'view';
-
-    //if (this.modeDescription === 'edit') {
     if (this.elRef.nativeElement.querySelector("#ticket-note").value != this.ticketProfile.note) {
       this.onChangeSubjectNote();
       this.ticketProfile.note = this.elRef.nativeElement.querySelector("#ticket-note").value;
     }
-    //  } 
   }
   onChangeSubjectNote() {
     this.ticketsService.changeSubjectNoteTicket(this.ticketProfile.id, this.ticketProfile.subject, this.ticketProfile.note).subscribe(data => {
-
     })
   }
   markAsOpen() {
@@ -242,7 +228,7 @@ export class TicketEditAsideComponent implements OnInit {
   }
   onToggleAddAssignedUser() {
     this.showAddAssignedUser = !this.showAddAssignedUser;
-    console.log("this.showAddAssignedUser", this.showAddAssignedUser);
+
     if (!this.showAddAssignedUser && this.listAssignedUser.length > 0 && !this.checkAssignedUser()) {
       let ids = this.listAssignedUser.map(item => {
         return item.id;
@@ -261,10 +247,7 @@ export class TicketEditAsideComponent implements OnInit {
       let find = this.listAssignedUser.find(item => item.id === listAssignedUser[i].id);
       if (!find) return false;
     }
-
     return true;
-
-
   }
   claimTicket() {
     let currentUser = this.usersStateService.getCurrentUser();
@@ -285,7 +268,6 @@ export class TicketEditAsideComponent implements OnInit {
       value.push(currentUser.id);
     }
     this.ticketsService.assignUserToTicket(this.ticketProfile.id, value.join(",")).subscribe(res => {
-
     })
 
   };
@@ -297,7 +279,6 @@ export class TicketEditAsideComponent implements OnInit {
     if (!this.ticketProfile.createdUser) return '';
     return `${this.ticketProfile.createdUser.firstName} ${this.ticketProfile.createdUser.lastName}`
   }
-
 
   getCreatAt() {
     let date = new Date(this.ticketProfile.createdAt);

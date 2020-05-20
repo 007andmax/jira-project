@@ -18,9 +18,9 @@ export class TicketChangeStatusComponent implements OnInit {
   statusColor: TicketsColor;
   list: Array<TitleListType> = [new TitleListType('In Progress', 'IN_PROGRESS'),
   new TitleListType('On Hold', 'ON_HOLD')];
-  constructor(private ticketsStateService:TicketsStateService,
+  constructor(private ticketsStateService: TicketsStateService,
     private notificationStateService: NotificationStateService,
-    private ticketsService: TicketsService,) { }
+    private ticketsService: TicketsService, ) { }
 
   ngOnInit() {
     this.ticketsStateService.getOnInitColor().subscribe(data => {
@@ -33,10 +33,10 @@ export class TicketChangeStatusComponent implements OnInit {
   getStyleStatus(field) {
     return { 'border-color': (this.statusColor && this.listColors) ? this.listColors[this.statusColor[field]].borderColor : null, 'background-color': (this.statusColor && this.listColors) ? this.listColors[this.statusColor[field]].backgroundColor : null, 'color': (this.statusColor && this.listColors) ? this.listColors[this.statusColor[field]].borderColor : null }
   }
-  changeTicketStatus(type,title) {
+  changeTicketStatus(type, title) {
     this.ticketsService.changeStatus(this.ticketProfile.id, type).subscribe((data: any) => {
       this.notificationStateService.oninitShowNotification(`The tickets “${this.ticketProfile.number}” status has been changed to "${title}"`);
     })
-   
+
   }
 }

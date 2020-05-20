@@ -13,15 +13,15 @@ import { TicketStateService } from '../../services/ticket-state.service';
   styleUrls: ['./ticket-profile-updates-note.component.scss']
 })
 export class TicketProfileUpdatesNoteComponent implements OnInit {
-  @Input() update:TicketProfileUpdate;
+  @Input() update: TicketProfileUpdate;
   @Output() onRemove = new EventEmitter();
   constructor(public ticketsListService: TicketsListService,
     private confirmStateService: ConfirmStateService,
-    private ticketStateService:TicketStateService,
-    private modalService: NgbModal,) { }
+    private ticketStateService: TicketStateService,
+    private modalService: NgbModal, ) { }
 
   ngOnInit() {
-   
+
   }
   remove() {
     this.ticketStateService.setUpdateForRemove(this.update);

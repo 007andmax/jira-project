@@ -60,7 +60,7 @@ export class TicketMessageComponent implements OnInit {
   moveToTrash(value) {
     this.onMoveToTrash.emit(value);
   }
-  moveIntoSpam  () {
+  moveIntoSpam() {
     this.confirmStateService.setConfirmAction(MOVE_TO_SPAM_OR_REPORT_TICKET);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
     modalRef.componentInstance.message = `Do you want to ${this.currentUser.isOwner ? 'mark' : 'report'} the ticket as spam?`;

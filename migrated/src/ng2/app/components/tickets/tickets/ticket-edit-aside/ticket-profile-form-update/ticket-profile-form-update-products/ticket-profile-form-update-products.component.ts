@@ -36,7 +36,6 @@ export class TicketProfileFormUpdateProductsComponent implements OnInit {
     this.addedProductList[i].setData(item, this.getItemOrger());
   }
   public selectProduct(item) {
-    console.log("item", item);
     if (item) this.currentProduct.setData(item, this.getItemOrger());
     if (!item) this.currentProduct = new TicketProfileFormProduct();
   }
@@ -44,12 +43,12 @@ export class TicketProfileFormUpdateProductsComponent implements OnInit {
     this.addedProductList.push(JSON.parse(JSON.stringify(this.currentProduct)));
     this.currentProduct = new TicketProfileFormProduct();
     this.productDP.clear();
-   
+
   }
   public removeProduct(i) {
     this.addedProductList.splice(i, 1);
     this.currentProduct.setItemOrder(this.getItemOrger());
-   
+
   }
   private getItemOrger() {
     return (this.addedProductList.length - 1) >= 0 ? this.addedProductList.length - 1 : 0;
@@ -58,6 +57,6 @@ export class TicketProfileFormUpdateProductsComponent implements OnInit {
     return index;
   }
   public getSelectedProducts() {
-    return(this.currentProduct.item.versionedId) ? [...this.addedProductList,this.currentProduct] : this.addedProductList;
+    return (this.currentProduct.item.versionedId) ? [...this.addedProductList, this.currentProduct] : this.addedProductList;
   }
 }

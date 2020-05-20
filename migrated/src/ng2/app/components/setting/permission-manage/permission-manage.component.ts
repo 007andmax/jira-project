@@ -267,7 +267,7 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
           });
 
           this.roleToDelete = id;
-          console.log(this.usersToShift);
+        
         } else {
           this.delete = false;
           this.loading = false;$(".loading").css("display", "none");
@@ -284,7 +284,7 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
             const newUser = this.allUsers.find(x => x.id == user.id);
             if (newUser) {
               if (newUser.firstName === 'Joana') {
-                console.log(newUser);
+           
               }
               newUser.companyId = newUser.company.id;
               if (!newUser.subscription) {
@@ -322,11 +322,11 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
       return role.id === id;
     });
 
-    // console.log(id, roleToDelete, roles, 'IM HERE SDADASDAS')
+    
 
     for (let i = 0; i < this.usersToShift.length; i++) {
       const user = this.usersToShift[i];
-      // console.log(user.techRole, roleToDelete.name, user.techRole === roleToDelete.name, 'userROle')
+    
       if (user.techRole === roleToDelete.name) {
         return true;
       }
@@ -363,7 +363,7 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
         .permissions(role)
         .pipe(
           map(res => {
-            console.log(res);
+         
           })
         )
         .subscribe();
@@ -469,7 +469,7 @@ export class PermissionManageComponent implements OnInit, OnDestroy {
    */
   changeUsersRole(user, event) {
     user.techRole = event.target.value;
-    console.log("--------------",user);
+   
 
     this.loading = true;$(".loading").css("display", "block");
     user.avatar.cropped = null;

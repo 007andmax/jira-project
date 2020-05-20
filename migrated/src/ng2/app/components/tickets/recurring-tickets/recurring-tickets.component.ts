@@ -46,19 +46,16 @@ export class RecurringTicketsComponent implements OnInit {
  * Get ticker
  */
   public getTicket() {
-    console.log("this.listSerivce.getBlockList()",this.listSerivce.getBlockList());
+   
     if (this.listSerivce.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;
     }
-    console.log("getTicket");
     this.recurringService.getTicketsList(this.page_number, this.items_per_page, this.sort, this.direction).subscribe((res: Array<RecurringTicket>) => {
-       console.log("res.length",res.length);
       if (res.length < 30) this.listSerivce.setBlockList(true);
       this.ticketList = [...this.ticketList, ...res];
       this.page_number += 1;
       this.showPreloader = false;
-
       this.infiniteScrollDisabled = false;
     })
   }

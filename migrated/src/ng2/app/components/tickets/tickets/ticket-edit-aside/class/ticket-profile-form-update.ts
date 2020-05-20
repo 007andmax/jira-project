@@ -65,11 +65,11 @@ export class TicketProfileFormUpdate {
         return this.type === "SERVICE" && this.services.length > 0;
     }
     public isValidateServiceUpdateAndClose() {
-        let dateValidate  = true;
+        let dateValidate = true;
         let currentDate = new Date().getTime();
         this.services.forEach(item => {
             if (item.date > currentDate) dateValidate = false;
-        }) 
+        })
         return this.type === "SERVICE" && this.services.length > 0 && dateValidate;
     }
     public setTicketId(id) {
@@ -88,12 +88,12 @@ export class TicketProfileFormUpdate {
         this.services = data;
     }
     public toggleShares(user) {
-       let findIndex =  this.shares.findIndex(item => item.user.id === user.id);
-       if (findIndex > -1)this.shares.splice(findIndex,1);
-       if (findIndex === -1)this.shares.push({user:{id:user.id}});
+        let findIndex = this.shares.findIndex(item => item.user.id === user.id);
+        if (findIndex > -1) this.shares.splice(findIndex, 1);
+        if (findIndex === -1) this.shares.push({ user: { id: user.id } });
     }
     public checkShares(user) {
-        let find =  this.shares.find(item => item.user.id === user.id);
+        let find = this.shares.find(item => item.user.id === user.id);
         return (find) ? true : false;
     }
 }

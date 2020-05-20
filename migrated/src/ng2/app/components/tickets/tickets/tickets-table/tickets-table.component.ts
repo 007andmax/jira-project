@@ -7,8 +7,7 @@ import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.se
 import { Subscription } from 'rxjs';
 import { StatusColor } from '../../../left-panel/left-panel-tickets/tickets-status/class/status-color';
 import { TicketsColor } from '../../../left-panel/left-panel-tickets/tickets-status/class/tickets-color';
-import { TicketsCounts } from '../class/tickets-counts';
-import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
+
 
 @Component({
   selector: 'app-tickets-table',
@@ -34,34 +33,28 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.ticketsStateService.getOnAddTicket().subscribe(data => {
-      console.log("data", data);
-    
       if (this.ticketsListService.isTicketMatchesFilters(this.ticketsFilter, data)) {
-       
         this.tickets.unshift(data);
       }
     })
     this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
-      console.log("data", data);
-
       let ticket = new Ticket(data);
       let findIndex = this.tickets.findIndex(item => item.id === ticket.id);
       if (this.ticketsListService.isTicketMatchesFilters(this.ticketsFilter, data)) {
-       if (findIndex > -1)   this.tickets[findIndex] = data;
+        if (findIndex > -1) this.tickets[findIndex] = data;
       } else {
-        if (findIndex > -1)   this.tickets.splice(findIndex,1);
+        if (findIndex > -1) this.tickets.splice(findIndex, 1);
       }
     })
 
     this.ticketsStateService.getOnRemoveTicket().subscribe(data => {
       let findIndex = this.tickets.findIndex(item => item.id === data.id);
-      if (findIndex > -1)   this.tickets.splice(findIndex,1);
+      if (findIndex > -1) this.tickets.splice(findIndex, 1);
     });
-    
+
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
       this.ticketsFilter = data;
       this.showPreloader = true;
-      console.log("this.ticketsFilter", this.ticketsFilter);
       this.setDefaultScoll();
       this.onScroll();
     })
@@ -79,7 +72,6 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
   editTicket(id) {
     this.ticketsStateService.onOpenTicket();
     this.ticketsService.getTicket(id).subscribe(data => {
-      console.log("data", data);
       this.ticketsStateService.onEditTicket(data);
     })
   }
@@ -90,8 +82,6 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     }
     this.ticketsFilter.setOffset(this.page_number * this.offset);
     this.ticketsService.getTickets(this.ticketsFilter.getListTupe(), this.ticketsFilter.getDataForRequest()).subscribe((data: Array<Ticket>) => {
-      console.log("data", data);
-
       this.tickets = [...this.tickets, ...data];
       this.infiniteScrollDisabled = false;
       if (data.length < this.offset) this.ticketsListService.setBlockList(true);

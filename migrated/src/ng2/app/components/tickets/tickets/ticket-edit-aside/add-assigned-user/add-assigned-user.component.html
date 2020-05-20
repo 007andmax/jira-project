@@ -29,8 +29,7 @@
     </mat-chip-list>
    
     <div class="autocomplete-user-tags" ngbDropdownMenu aria-labelledby="dropdown" >
-   <!-- <mat-autocomplete class="autocomplete-user-tags" #auto="matAutocomplete" (optionSelected)="selected($event)">-->
-      <mat-option class="ai-c" *ngFor="let user of users" [value]="user" (click)="selected(user)">
+       <mat-option class="ai-c" *ngFor="let user of users" [value]="user" (click)="selected(user)">
         <div class="assigne-user-item">
         <div class="assigne-user-avatar" [textContent]="getAssignedUserNameForAvatar(user)"
         [ngStyle]="{'background': getStyleAvatar(user),'background-size': 'cover'}"></div>
@@ -38,7 +37,6 @@
         <span class="assigne-user-email" [textContent]="user.primaryEmail"></span>
       </div>
       </mat-option>
-    <!--</mat-autocomplete> -->
   </div>
   </mat-form-field>
 </div>

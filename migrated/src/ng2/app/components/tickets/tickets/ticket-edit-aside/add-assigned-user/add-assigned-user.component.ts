@@ -1,19 +1,10 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, HostListener, Output, EventEmitter } from '@angular/core';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { FormControl } from '@angular/forms';
-import { Subscription, Subject } from 'rxjs';
-import { MatAutocomplete, MatChipInputEvent, MatAutocompleteSelectedEvent } from '@angular/material';
-import { NgbActiveModal, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
-import { UsersService } from 'src/ng2/app/services/users/users.service';
-import { QuoteStateService } from 'src/ng2/app/components/billing/quotes/quote-create/quote-state.service';
-import { QuoteService } from 'src/ng2/app/services/quote/quote.service';
-import { NotificationStateService } from 'src/ng2/app/components/shared/notification/services/notification-state.service';
-import { ConfirmStateService } from 'src/ng2/app/components/shared/confirm/services/confirm-state.service';
+import { Subscription } from 'rxjs';
+import { MatAutocomplete } from '@angular/material';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
-import { SAVE_AND_SEND } from 'src/ng2/app/const/confirm';
-import { ConfirmComponent } from 'src/ng2/app/components/shared/confirm/confirm.component';
-import { USER } from 'src/ng2/app/const/users';
-import { takeUntil } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-add-assigned-user',
@@ -27,10 +18,10 @@ export class AddAssignedUserComponent implements OnInit {
   addOnBlur = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   userCtrl = new FormControl();
- @Input() selectedUsers = [];
- @Input() userList = [];
- @Input() placement = 'top-left';
- 
+  @Input() selectedUsers = [];
+  @Input() userList = [];
+  @Input() placement = 'top-left';
+
   users = [];
   reqUsers = [];
   currentUsers = [];
@@ -62,26 +53,13 @@ export class AddAssignedUserComponent implements OnInit {
     this.currentUsers = JSON.parse(JSON.stringify(this.selectedUsers));
     this.users = JSON.parse(JSON.stringify(this.userList));
     this.reqUsers = JSON.parse(JSON.stringify(this.userList));
-    
-    this.userInput.nativeElement.onblur = (e) => {
-      /*if (this.matAutocomplete.isOpen) {
-        let modal = this.matAutocomplete.panel.nativeElement;
-        modal.parentNode.style.width = 'max-content';
-      }*/
-    }
   }
 
   @HostListener('document:click', ['$event'])
   clickout(event) {
-    console.log("clickout",event.target);
     if (event.target.classList.contains('toggle-select-user')) return;
-    if (!event.target.closest('app-add-assigned-user') && !event.target.closest('.assigne-user-item'))   this.hidden.emit(true);
-    //  if (event.target.tagName === 'NGB-MODAL-WINDOW' && this.initialized && !this.showConfirm)// this.onCheckChange();
+    if (!event.target.closest('app-add-assigned-user') && !event.target.closest('.assigne-user-item')) this.hidden.emit(true);
   }
-
-
-
-  
 
   /**
    * Remove user from selected
@@ -91,7 +69,6 @@ export class AddAssignedUserComponent implements OnInit {
     if (index >= 0 && this.selectedUsers.length > 1) {
       this.selectedUsers.splice(index, 1);
       this.onSelected.emit(this.selectedUsers);
-      // this.isResend && (this.data.recipients = this.usersEmails);
     }
   }
 
@@ -104,19 +81,15 @@ export class AddAssignedUserComponent implements OnInit {
     if (!find) {
       this.selectedUsers.push(data);
       this.onSelected.emit(this.selectedUsers);
-    } 
+    }
     this.userInput.nativeElement.blur();
     this.userCtrl.setValue(null);
     this.userInput.nativeElement.value = '';
   }
 
-  
-
   onSearchUser(event) {
     if (event.target.value.length > 0) {
-      console.log("event.target.value", event.target.value);
       this.users = this.reqUsers.filter(item => (`${item.firstName} ${item.lastName}`).toLowerCase().includes(event.target.value.toLowerCase()));
-      console.log("users", this.users.length);
     } else {
       this.users = JSON.parse(JSON.stringify(this.reqUsers));
     }

@@ -5,13 +5,13 @@
    <button class="ticket-notify__item-btn" *ngIf="getPermissions('REOPEN_CLOSED_TICKETS')" (click)="markAsOpen()">Mark as Open</button>
   </div>
 
-  <div class="ticket-notify__item"  *ngIf="ticketsPermissionsService.isActionVisible('claim_ticket', ticketProfile)">
+  <div class="ticket-notify__item"  *ngIf="ticketsPermissionsService.isActionVisible('claim_ticket', ticketProfile,null,null)">
    <div class="ticket-notify__item-icon icon__claim-ticket"></div>
    <div class="ticket-notify__item-title">Got nothing to work on today? Hit up the <strong>"Claim Ticket"</strong> button to get the troubleshooting process started!</div>
    <button class="ticket-notify__item-btn" (click)="claimTicket()">Claim Ticket</button>
   </div>
 
-  <div class="ticket-notify__item"   *ngIf="ticketsPermissionsService.isActionVisible('reopen', ticketProfile, 'old')">
+  <div class="ticket-notify__item"   *ngIf="ticketsPermissionsService.isActionVisible('reopen', ticketProfile, 'old',null)">
    <div class="ticket-notify__item-icon icon__ticket-status"></div>
    <div>
      <div class="ticket-notify__item-title">The Ticket is older than <strong>30days</strong>. you cannot re-open it now.</div>
@@ -23,13 +23,13 @@
    </div>
   </div>
 
-  <div class="ticket-notify__item" *ngIf="ticketsPermissionsService.isActionVisible('reopen', ticketProfile, 'open')" [hidden]="ticketProfile.hasInvoice">
+  <div class="ticket-notify__item" *ngIf="ticketsPermissionsService.isActionVisible('reopen', ticketProfile, 'open',null)" [hidden]="ticketProfile.hasInvoice">
     <div class="ticket-notify__item-icon icon__ticket-status"></div>
     <div class="ticket-notify__item-title">The Ticket is now closed.   You can re-open it within {{ getDaysLeftToOpen() }} days by simply clicking <strong>"Re-open Ticket"</strong> button.</div>
     <button class="ticket-notify__item-btn" *ngIf="getPermissions('REOPEN_CLOSED_TICKETS')" (click)="markAsOpen()">Re-open Ticket</button>
    </div>
 
-   <div class="ticket-notify__item"   *ngIf="ticketsPermissionsService.isActionVisible('reopen', ticketProfile, 'billed')">
+   <div class="ticket-notify__item"   *ngIf="ticketsPermissionsService.isActionVisible('reopen', ticketProfile, 'billed',null)">
     <div class="ticket-notify__item-icon icon__ticket-status"></div>
     <div>
       <div class="ticket-notify__item-title">The Ticket is now closed, and already <strong>billed to the client.</strong> You cannot re-open it</div>
@@ -40,7 +40,7 @@
     </div>
    </div>
 
-   <div class="ticket-notify__item"   *ngIf="ticketsPermissionsService.isActionVisible('restore', ticketProfile, 'from_trash') && ticketProfile.deletePerformer.id !== currentUser.id">
+   <div class="ticket-notify__item"   *ngIf="ticketsPermissionsService.isActionVisible('restore', ticketProfile, 'from_trash',null) && ticketProfile.deletePerformer.id !== currentUser.id">
     <div class="ticket-notify__item-icon icon__ticket-status"></div>
     <div>
       <div class="ticket-notify__item-title"><strong  >
@@ -54,11 +54,11 @@
         <div  class="ticket-notify__item-desc-text">Restoring ticket moves the ticket back to its original folder where it was deleted from.</div>
       </div>
     </div>
-    <button class="ticket-notify__item-btn" *ngIf="ticketsPermissionsService.isActionVisible('delete_forever', ticketProfile)" (click)="deleteForever()">Delete Forever</button>
+    <button class="ticket-notify__item-btn" *ngIf="ticketsPermissionsService.isActionVisible('delete_forever', ticketProfile,null,null)" (click)="deleteForever()">Delete Forever</button>
     <button class="ticket-notify__item-btn"  (click)="moveToTrash(false)">Restore</button>
    </div>
 
-   <div class="ticket-notify__item"   *ngIf="ticketsPermissionsService.isActionVisible('restore', ticketProfile, 'from_trash') && ticketProfile.deletePerformer.id === currentUser.id">
+   <div class="ticket-notify__item"   *ngIf="ticketsPermissionsService.isActionVisible('restore', ticketProfile, 'from_trash',null) && ticketProfile.deletePerformer.id === currentUser.id">
     <div class="ticket-notify__item-icon icon__ticket-status"></div>
     <div>
       <div class="ticket-notify__item-title"><strong>You</strong> can <span *ngIf="getPermissions('DELETE_TICKETS')">
@@ -69,11 +69,11 @@
         <div  class="ticket-notify__item-desc-text">Restoring ticket moves the ticket back to its original folder where it was deleted from.</div>
       </div>
     </div>
-    <button class="ticket-notify__item-btn" *ngIf="ticketsPermissionsService.isActionVisible('delete_forever', ticketProfile)" (click)="deleteForever()">Delete Forever</button>
+    <button class="ticket-notify__item-btn" *ngIf="ticketsPermissionsService.isActionVisible('delete_forever', ticketProfile,null,null)" (click)="deleteForever()">Delete Forever</button>
     <button class="ticket-notify__item-btn"  (click)="moveToTrash(false)" >Restore</button>
    </div>
 
-   <div class="ticket-notify__item"   *ngIf="ticketsPermissionsService.isActionVisible('restore', ticketProfile, 'from_spam')">
+   <div class="ticket-notify__item"   *ngIf="ticketsPermissionsService.isActionVisible('restore', ticketProfile, 'from_spam',null)">
     <div class="ticket-notify__item-icon icon__ticket-status"></div>
     <div>
       <div class="ticket-notify__item-title"> <strong class="text-info">
@@ -86,7 +86,7 @@
         <div  class="ticket-notify__item-desc-text">Restoring ticket moves the ticket back to its original folder where it was reported as spam.</div>
       </div>
     </div>
-    <button class="ticket-notify__item-btn" *ngIf="ticketsPermissionsService.isActionVisible('delete_forever', ticketProfile)" (click)="deleteForever()">Delete Forever</button>
+    <button class="ticket-notify__item-btn" *ngIf="ticketsPermissionsService.isActionVisible('delete_forever', ticketProfile,null,null)" (click)="deleteForever()">Delete Forever</button>
     <button class="ticket-notify__item-btn"  *ngIf="currentUser.isOwner && !ticketProfile.spamMarker"  (click)="moveIntoSpam()">Mark as Spam</button>
     <button class="ticket-notify__item-btn"   (click)="restoreFromSpam()">Restore</button>
    </div>

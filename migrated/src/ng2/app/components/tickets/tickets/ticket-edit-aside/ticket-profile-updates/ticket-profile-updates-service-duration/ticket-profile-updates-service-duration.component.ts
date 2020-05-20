@@ -24,7 +24,6 @@ export class TicketProfileUpdatesServiceDurationComponent implements OnInit {
 
     public ngOnInit() {
         this.refresh();
-        //  this.createThemeStyle();
         let serviceExpenseDurationPickerInterval = this.companiesStateService.getCurrentCompany().serviceExpenseDurationPickerInterval;
         if (serviceExpenseDurationPickerInterval === 'FIVE_MINUTES') this.step = 5;
         if (serviceExpenseDurationPickerInterval === 'TEN_MINUTES') this.step = 10;
@@ -34,8 +33,7 @@ export class TicketProfileUpdatesServiceDurationComponent implements OnInit {
         this.picker.openDialog();
     }
     public refresh() {
-        // this.date = new Date();
-        this.date =  new Date();
+        this.date = new Date();
         this.date.setHours(this.hour);
         this.date.setMinutes(this.minute);
     }
@@ -50,7 +48,6 @@ export class TicketProfileUpdatesServiceDurationComponent implements OnInit {
         let topInput = $(data.input.nativeElement).offset().top;
         let height = $(data.container.nativeElement).parent().height();
         $(data.container.nativeElement).parent().offset({ top: topInput - height - 15 });
-        $(data.container.nativeElement).parent().css({"opacity": 1});
-        //console.log("top",$(data.container.nativeElement).parent().offset().top);
+        $(data.container.nativeElement).parent().css({ "opacity": 1 });
     }
 }

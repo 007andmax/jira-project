@@ -10,12 +10,10 @@ export class TicketProfileFormProduct {
     discountType: string = "PERCENT";
     completed: boolean = true;
     constructor() {
-
     }
     public setData(data, index) {
         this.item = new TicketProfileFormItemProduct(data);
         this.itemOrder = index;
-
     }
     public setItemOrder (data) {
         this.itemOrder  =data;

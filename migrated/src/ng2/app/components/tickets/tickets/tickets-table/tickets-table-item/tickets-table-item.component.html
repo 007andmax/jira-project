@@ -1,8 +1,7 @@
 <tr>
   <td class="ticket-table__requested-by">
     <div class="d-f">
-      <!--  Have no idea what is going on here, but if avatar will be without any text - adding some padding to <td>  cell, dont delete this shit  -->
-      <div class="qt-table-modern__circle-avatar" [ngClass]="getNameForAvatar() ? 'transparent-text' : ''" [textContent]="getNameForAvatar() ? getNameForAvatar() : '.'"
+       <div class="qt-table-modern__circle-avatar" [ngClass]="getNameForAvatar() ? 'transparent-text' : ''" [textContent]="getNameForAvatar() ? getNameForAvatar() : '.'"
         [ngStyle]="{'background': getStyleAvatar(requestedUser),'background-size': 'cover'}"></div>
       
       
@@ -21,9 +20,6 @@
           [ngStyle]="{'background': getStyleAvatar(user),'background-size': 'cover'}"></div>
       </ng-template>
       </div>
-   
-
-
   </td>
   <td class="ticket-table__assignee" *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length === 0 || !ticket.assignedUserId && !ticket.multiAssignedUsers"></td>
   <td class="ticket-table__assignee" *ngIf="ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length === 0 || ticket.assignedUserId && !ticket.multiAssignedUsers">

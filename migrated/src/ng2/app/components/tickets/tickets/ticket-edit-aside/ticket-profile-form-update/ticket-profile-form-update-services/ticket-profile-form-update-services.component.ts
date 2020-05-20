@@ -21,10 +21,8 @@ import { TicketProfileUpdatesServiceTimepickerComponent } from '../../ticket-pro
 export class TicketProfileFormUpdateServicesComponent implements OnInit, OnDestroy {
   @ViewChild('durationPicker') durationPicker: TicketProfileUpdatesServiceDurationComponent;
   @ViewChild('timePicker') timePicker: TicketProfileUpdatesServiceTimepickerComponent;
-
   @ViewChild('serviceDP') serviceDP: ServicesListComponent;
   @ViewChild('datePicker') datePicker: DatePickerComponent;
-
   @Input() ticketProfile: TicketProfile = new TicketProfile();
   areTicketsTerminated: boolean = false;
   areTicketsPresented: boolean = false;
@@ -53,7 +51,7 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit, OnDestr
     })
     this.sub.add(getOnClearFormUpdate);
     this.currentCompany = this.companiesStateService.getCurrentCompany();
-    console.log("this.currentCompany", this.currentCompany);
+
     this.getServices();
     this.ticketStateService.getOnGetServicesList().subscribe(data => {
       this.getServices();
@@ -68,7 +66,6 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit, OnDestr
   }
 
   public onChangeDatePicker(data) {
-    console.log("data", data);
     this.currentService.setDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.currentService.setComplated(data.day, data.month, data.year);
   }
@@ -78,7 +75,6 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit, OnDestr
   }
   public addService() {
     this.addedServiceList.push(new TicketProfileFormService(JSON.parse(JSON.stringify(this.currentService))));
-    console.log("addedServiceList", this.addedServiceList);
     this.currentService = new TicketProfileFormService();
     this.serviceDP.clear();
     if (this.currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER') this.durationPicker.refresh();
@@ -106,7 +102,6 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit, OnDestr
     this.addedServiceList[i].setDurationEnd(durationEnd);
   }
   public selectService(item) {
-    console.log("item", item);
     this.currentService.setItem(item);
     this.currentService.setItemOrder(this.getItemOrger());
   }
@@ -124,12 +119,10 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit, OnDestr
     this.addedServiceList[i].calculateQuantity();
   }
   public onChangeStartTimePicker(data) {
-    console.log("onChangeStartTimePicker");
     this.currentService.setDurationStart(data);
     this.currentService.calculateQuantity();
   }
   public onChangeEndTimePicker(data) {
-    console.log("onChangeEndTimePicker");
     this.currentService.setDurationEnd(data);
     this.currentService.calculateQuantity();
   }
@@ -137,22 +130,18 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit, OnDestr
     return (this.addedServiceList.length - 1) >= 0 ? this.addedServiceList.length - 1 : 0;
   }
   public onChangeDescription(event) {
-    //  this.company.description = event.target.value;
     this.currentService.setDescription(event.target.value);
 
   }
   public onChangeDescriptionService(event, i) {
-    //  this.company.description = event.target.value;
     this.addedServiceList[i].setDescription(event.target.value);
 
   }
   public onPastDescription(value) {
     this.currentService.setDescription(value);
-    //    this.inventory.description = value;
   }
   public onPastDescriptionService(value, i) {
     this.addedServiceList[i].setDescription(value);
-    //    this.inventory.description = value;
   }
   public getSelectedServices() {
     return (this.currentService.item && this.currentService.item.versionedId) ? [...this.addedServiceList, this.currentService] : this.addedServiceList;

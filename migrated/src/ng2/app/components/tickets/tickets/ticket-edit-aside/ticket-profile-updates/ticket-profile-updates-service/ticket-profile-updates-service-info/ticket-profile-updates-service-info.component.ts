@@ -28,7 +28,7 @@ export class TicketProfileUpdatesServiceInfoComponent implements OnInit {
     private confirmStateService: ConfirmStateService,
     private ticketStateService: TicketStateService,
     private ticketsService: TicketsService,
-    private companiesStateService:CompaniesStateService,
+    private companiesStateService: CompaniesStateService,
     private modalService: NgbModal) { }
 
   ngOnInit() {
@@ -55,8 +55,6 @@ export class TicketProfileUpdatesServiceInfoComponent implements OnInit {
     this.updateService();
   }
   public onChangeDatePicker(data) {
-    console.log("data", data);
-
     let date = new Date(data.year, data.month - 1, data.day);
     this.service.setDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.updateService();
@@ -67,10 +65,9 @@ export class TicketProfileUpdatesServiceInfoComponent implements OnInit {
     })
   }
   public onChangeUser(data) {
-    console.log("data", data);
-    if (data.length === 0) this.service.setUser({id: ""});
+    if (data.length === 0) this.service.setUser({ id: "" });
     if (data.length === 1) this.service.setUser(data[0]);
-  this.updateService();
+    this.updateService();
   }
   getUsersForAssign() {
     let userList = this.usersStateService.getAllUsers().sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?
@@ -84,9 +81,9 @@ export class TicketProfileUpdatesServiceInfoComponent implements OnInit {
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
     modalRef.componentInstance.message = `The ticket update containing a service will become inaccessible. Continue with permanent deletion?`;
   }
-  removeService(i) {
+  removeService() {
     this.ticketStateService.setUpdateForRemove(this.update);
-    this.ticketStateService.setServiceForRemove(this.update.services[i]);
+    this.ticketStateService.setServiceForRemove(this.service);
     this.confirmStateService.setConfirmAction(REMOVE_UPDATE_TICKET_SERVICE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
     modalRef.componentInstance.message = `Do you want to remove the item?`;
