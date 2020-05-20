@@ -36,6 +36,8 @@ export class TicketProfileUpdatesServiceDurationComponent implements OnInit {
         this.date = new Date();
         this.date.setHours(this.hour);
         this.date.setMinutes(this.minute);
+        this.date.setSeconds(0);
+        this.date.setMilliseconds(0);
     }
     onSelected() {
         let date = new Date(this.picker.value);
