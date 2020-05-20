@@ -24,7 +24,6 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
     private ticketStateService: TicketStateService,
     private notificationStateService: NotificationStateService, ) { }
   ngOnInit() {
-    this.showLoadMoreUpdates = (this.ticketProfile.unloadedUpdates > 0) ? true : false;
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_UPDATE_TICKET) {
@@ -40,6 +39,9 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+  }
+  ngDoCheck() {
+    this.showLoadMoreUpdates = (this.ticketProfile.unloadedUpdates > 0) ? true : false;
   }
   removeService() {
     this.ticketsService.removeService(this.ticketProfile.id, this.ticketStateService.getUpdateForRemove().id, this.ticketStateService.getServiceForRemove().id).subscribe(data => {

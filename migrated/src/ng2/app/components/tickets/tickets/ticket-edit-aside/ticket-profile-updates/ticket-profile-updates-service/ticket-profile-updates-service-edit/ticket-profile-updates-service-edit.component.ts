@@ -119,12 +119,7 @@ export class TicketProfileUpdatesServiceEditComponent implements OnInit {
   cancelService() {
     this.onEdit.emit(null);
   }
-  remove() {
-    this.ticketStateService.setUpdateForRemove(this.update);
-    this.confirmStateService.setConfirmAction(REMOVE_UPDATE_TICKET);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
-    modalRef.componentInstance.message = `The ticket update containing a service will become inaccessible. Continue with permanent deletion?`;
-  }
+
   removeService(i) {
     this.ticketStateService.setUpdateForRemove(this.update);
     this.ticketStateService.setServiceForRemove(this.update.services[i]);

@@ -111,6 +111,7 @@ export class TicketProfileUpdatesServiceTimepickerComponent implements OnInit {
     this.cd.detectChanges();
   }
   getEndText() {
+    if (!this.timePickerStart) return '';
     let startDate = this.timePickerStart.timepicker('getTime');
     let endDate = new Date(new Date(startDate).getTime() + (this.quantity * 3600000));
     return moment(new Date(endDate)).format('hh:mma');

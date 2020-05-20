@@ -96,6 +96,7 @@ export class AddAssignedUserComponent implements OnInit {
   }
 
   getAssignedUserNameForAvatar(user) {
+    if (!user) return '';
     if (!user.avatar) return `${(user.firstName) ? user.firstName[0].toUpperCase() : ''}${(user.lastName) ? user.lastName[0].toUpperCase() : ''}`;
     return '';
   }
