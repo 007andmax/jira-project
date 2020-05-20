@@ -70,6 +70,7 @@ export class TicketProfileFormService {
         let durationEnd = JSON.parse(JSON.stringify(this.durationEnd));
         console.log("durationEnd", new Date(durationEnd));
         console.log("this.durationStart", new Date(this.durationStart));
+        console.log("this.quantity",this.quantity);
         if (this.durationStart - this.durationEnd > 0) durationEnd = this.durationEnd + 24 * 3600000;
         this.quantity = (durationEnd - this.durationStart) / 3600000 > 0 ? (durationEnd - this.durationStart) / 3600000 : 0;
         if (this.quantity > 24) this.quantity -= 24;

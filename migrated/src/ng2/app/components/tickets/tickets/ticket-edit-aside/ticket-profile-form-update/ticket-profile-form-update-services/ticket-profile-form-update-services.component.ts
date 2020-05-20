@@ -77,7 +77,7 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit, OnDestr
     this.addedServiceList[i].setComplated(data.day, data.month, data.year);
   }
   public addService() {
-    this.addedServiceList.push(new TicketProfileFormService(this.currentService));
+    this.addedServiceList.push(new TicketProfileFormService(JSON.parse(JSON.stringify(this.currentService))));
     console.log("addedServiceList", this.addedServiceList);
     this.currentService = new TicketProfileFormService();
     this.serviceDP.clear();
@@ -124,10 +124,12 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit, OnDestr
     this.addedServiceList[i].calculateQuantity();
   }
   public onChangeStartTimePicker(data) {
+    console.log("onChangeStartTimePicker");
     this.currentService.setDurationStart(data);
     this.currentService.calculateQuantity();
   }
   public onChangeEndTimePicker(data) {
+    console.log("onChangeEndTimePicker");
     this.currentService.setDurationEnd(data);
     this.currentService.calculateQuantity();
   }
