@@ -16,7 +16,7 @@
     white-space: nowrap;
 
     &.--loading {
-      color: transparent;
+      color: transparent !important;
       app-preloader-ticket {
         position: absolute !important;
       }
