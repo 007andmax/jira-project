@@ -56,9 +56,10 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    window.scrollTo(0,0);
     let getOnShowArchived = this.companiesStateService.getOnShowArchived().subscribe(data => {
       this.showArchivedCompanies = data;
-
+      window.scrollTo(0,0);
       this.left_filter.setClientType(null);
       this.clearFilter();
       this.setDefaultScoll();
@@ -98,6 +99,7 @@ export class CompaniesComponent implements OnInit, OnDestroy {
     this.sub.add(getOnUsers);
 
     let geLefttFilter = this.leftPanelStateService.getOnFilter().subscribe((data) => {
+      window.scrollTo(0,0);
       this.left_filter = data;
       this.setDefaultScoll();
       this.onScroll();

@@ -45,6 +45,7 @@ export class InventoryComponent implements OnInit {
     public cd: ChangeDetectorRef, ) { }
 
   ngOnInit() {
+    window.scrollTo(0,0);
     if (this.companiesStateService.getCompanies().length > 0) this.companies = this.companiesStateService.getCompanies();
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.companies = data;
@@ -68,6 +69,7 @@ export class InventoryComponent implements OnInit {
     })
     this.sub.add(getConfirm);
     let getOnSortCategory = this.inventoryStateService.getOnSortCategory().subscribe(data => {
+      window.scrollTo(0,0);
       this.sortCategoty = data;
       this.page_number = 0;
       this.inventoryListService.setBlockList(false);
