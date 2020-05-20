@@ -1111,7 +1111,7 @@
   padding-left: 13px;
 }
 
-.days {
+span.days {
   width: initial;
   position: absolute;
   right: 112px;

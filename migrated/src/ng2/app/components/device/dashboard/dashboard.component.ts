@@ -110,7 +110,18 @@ export class DashboardComponent implements OnInit {
         this.logicalDisk = resp.reports[0].logicalDisks;
         this.virusInfo = resp.reports[0].antivirus[0];
         this.system = resp.reports[0].system || {};
+        let colors = ['#0057a8', '#00d8e7', '#16a4fa'];
+        let count = 0;
         this.logicalDisk.forEach(element => {
+          if(element.is_system === true) {
+            element.color = '#2ec866';  
+          } else {
+            element.color = colors[count];
+            count++;
+          }
+          if (count == 3) {
+            count = 0;
+          }
           if(element.free_space != '' && element.size != '') {
             let size = this.convertToGB(element.size);
             let free = this.convertToGB(element.free_space)
@@ -121,6 +132,12 @@ export class DashboardComponent implements OnInit {
           }
           
         });
+        this.logicalDisk.sort(function(x, y) {
+        // true values first
+        return (x.is_system === y.is_system)? 0 : x? -1 : 1;
+        // false values first
+        // return (x === y)? 0 : x? 1 : -1;
+    });
       },
       error => {
       this.toastr.error('Something went wrong please try again.');

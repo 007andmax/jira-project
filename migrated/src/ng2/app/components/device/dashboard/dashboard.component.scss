@@ -48,6 +48,7 @@
             background-color: $white-color;
             padding: 20px 24px 24px;
             margin-bottom: 16px;
+            
             h2 {
                 margin-bottom: 15px;
             }
@@ -146,6 +147,8 @@
                 border: solid 1px #c4cbd5;
                 outline: 0;
             }
+
+            
             &.disk-drive {
                 h2{
                     margin-bottom: 7px;
@@ -579,3 +582,5 @@
         }
     }
 }
+
+
