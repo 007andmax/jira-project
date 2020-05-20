@@ -31,65 +31,12 @@
     height: 40px;
     border-radius: 3px;
     border: solid 1px #c4cbd5;
-    margin-right: 8px;
     font-size: 13px;
     padding: 10px 12px;
     flex-grow: 1;
     outline: none;
     &::placeholder {
       color: #9ca5b6;
-    }
-    &.serial-num {
-      width: 128px;
-    }
-    &.cost {
-      width: 116px;
-    }
-    &.price {
-      width: 108px;
-    }
-    &.qty {
-      width: 94px;
-    }
-    &.discount {
-      width: 106px;
-      margin: 0;
-    }
-    &.device {
-      margin: 0;
-    }
-  }
-
-  &__input-with-prefix {
-    margin-right: 8px;
-    display: flex;
-    border-radius: 3px;
-    box-sizing: inherit;
-    border: solid 1px #c4cbd5;
-    height: 40px;
-    padding: 0;
-    &.qty {
-      width: 94px;
-    }
-    &.discount {
-      width: 106px;
-      margin: 0;
-    }
-    .product-item {
-      &__input {
-        margin: 0;
-        border: none;
-        height: 100%;
-        width: 100%;
-        padding: 0;
-      }
-      &__prefix {
-        color: #9ca5b6;
-        font-size: 13px;
-        display: flex;
-        align-items: center;
-        padding: 10px 12px;
-      }
     }
   }
 }

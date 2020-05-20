@@ -2399,14 +2399,15 @@ input.ng-invalid.is-invalid {
 // }
 
 app-ticket-profile-updates-product-item,
-app-ticket-profile-updates-service-item {
+app-ticket-profile-updates-service-item,
+app-ticket-profile-updates-note {
   .ticket-updates__ticket-info-container {
     margin: 35px 0 8px -48px;
     margin-top: 35px !important;
   }
   &:nth-child(2) {
     .ticket-updates__ticket-info-container {
-      margin-top: 0 !important;
+      margin-top: 15px !important;
     }
   }
 }
@@ -2451,5 +2452,130 @@ app-ticket-profile-updates-service-timepicker {
 }
 
 .pointer {
+  cursor: pointer;
+}
+
+
+@mixin product-item-label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  margin-right: 8px;
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+@mixin product-item-input {
+  transform: translateY(1px);
+  font-size: 11px;
+  position: absolute;
+  left: 12px;
+  font-weight: 600;
+}
+
+.product-item__serial-num-input {
+  @include product-item-label;
+  &:before {
+    @include product-item-input;
+    content: 'Serial No';
+  }
+  input {
+    padding-left: 65px !important;
+    width: 100%;
+  }
+}
+
+.product-item__cost-input {
+  @include product-item-label;
+  max-width: 128px;
+  min-width: 128px;
+  &:before {
+    @include product-item-input;
+    content: 'Cost $';
+  }
+  input {
+    padding-left: 46px !important;
+    width: 100%;
+  }
+}
+
+.product-item__qty-input {
+  @include product-item-label;
+  max-width: 80px;
+  min-width: 80px;
+  &:before {
+    @include product-item-input;
+    content: 'Qty';
+  }
+  input {
+    padding-left: 38px !important;
+    width: 100%;
+  }
+}
+
+.product-item__price-input {
+  @include product-item-label;
+  max-width: 128px;
+  min-width: 128px;
+  &:before {
+    @include product-item-input;
+    content: 'Price $';
+  }
+  input {
+    padding-left: 47px !important;
+    width: 100%;
+  }
+}
+
+.product-item__discount-input {
+  @include product-item-label;
+  max-width: 124px;
+  min-width: 124px;
+  &:before {
+    @include product-item-input;
+    content: 'Discount';
+  }
+  &:after {
+    @include product-item-input;
+    content: '%';
+    left: unset;
+    right: 22px;
+  }
+  input {
+    padding-left: 65px !important;
+    padding-right: 32px !important;
+    text-align: right;
+    width: 100%;
+  }
+}
+
+.ticket-updates__title {
+  
+}
+
+.ticket-updates__update-block {
+  border-bottom: 1px solid #dfe3e8;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+}
+
+
+.ticket-updates .ticket-updates__ticket-item {
+  &:last-child {
+    .ticket-updates__update-block {
+      border-bottom: none;
+    }
+  }
+}
+
+
+.ticket-updates__delete {
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 16px;
   cursor: pointer;
 }

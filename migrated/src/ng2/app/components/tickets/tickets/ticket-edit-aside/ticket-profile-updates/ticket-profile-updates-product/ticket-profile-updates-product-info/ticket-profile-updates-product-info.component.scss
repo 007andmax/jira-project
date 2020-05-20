@@ -41,13 +41,7 @@
       background-size: 16px;
       cursor: pointer;
     }
-    &__update-block {
-      padding: 16px 0;
-      border-bottom: 1px solid #dfe3e8;
-      &:last-child {
-        border-bottom: none;
-      }
-    }
+
     &__update-info {
       font-size: 12px;
       margin-left: -48px;
@@ -85,7 +79,7 @@
       margin-right: 4px;
     }
     &__ticket-title {
-      width: 290px;
+      width: 342px;
       font-weight: 600;
       // text-overflow: ellipsis;
       // overflow: hidden;
@@ -99,18 +93,18 @@
       }
     }
     &__ticket-price {
-      width: 55px;
+      width: 65px;
       margin-right: 8px;
     }
 
     &__ticket-qty {
-      width: 32px;
+      width: 42px;
       margin-right: 8px;
     }
 
     &__ticket-total {
       margin-right: 8px;
-      width: 55px;
+      width: 65px;
     }
 
     &__date-icon {
@@ -124,20 +118,20 @@
       font-weight: 600;
     }
     &__ticket-header-name {
-      width: 325px;
+      width: 378px;
       margin-right: 8px;
     }
     &__ticket-header-price {
       margin-right: 8px;
-      width: 55px;
+      width: 65px;
     }
     &__ticket-header-qty {
       margin-right: 8px;
-      width: 32px;
+      width: 42px;
     }
     &__ticket-header-total {
       margin-right: 8px;
-      width: 55px;
+      width: 65px;
     }
 
     &__more {

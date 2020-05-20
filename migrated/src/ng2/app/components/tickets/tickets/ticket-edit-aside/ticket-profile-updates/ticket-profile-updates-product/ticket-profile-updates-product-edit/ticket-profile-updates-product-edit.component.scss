@@ -38,13 +38,6 @@
       background-size: 16px;
       cursor: pointer;
     }
-    &__update-block {
-      padding: 16px 0;
-      border-bottom: 1px solid #dfe3e8;
-      &:last-child {
-        border-bottom: none;
-      }
-    }
     &__update-info {
       font-size: 12px;
     }
@@ -99,7 +92,7 @@
 
     &__ticket-total {
       margin-right: 8px;
-      width: 55px;
+      width: 65px;
     }
 
     &__date-icon {
@@ -126,7 +119,7 @@
     }
     &__ticket-header-total {
       margin-right: 8px;
-      width: 55px;
+      width: 65px;
     }
 
     &__more {
@@ -216,27 +209,27 @@
 
   .input-price, .input-qty {
     margin-right: 8px;
-    width: 70px;
+    width: 80px;
   }
 
   app-product-list {
     margin-right: 8px;
-    width: 241px;
+    width: 291px;
   }
 
   .ticket-updates__ticket-header-name {
-    width: 279px;
+    width: 327px;
     margin-right: 8px;
   }
 
   .ticket-updates__ticket-header-price {
     margin-right: 8px;
-    width: 69px;
+    width: 79px;
   }
 
   .ticket-updates__ticket-header-qty {
     margin-right: 8px;
-    width: 69px;
+    width: 79px;
   }
 
   /deep/ .select-product__dropdown {

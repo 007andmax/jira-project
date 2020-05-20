@@ -38,13 +38,7 @@
       background-size: 16px;
       cursor: pointer;
     }
-    &__update-block {
-      padding: 16px 0;
-      border-bottom: 1px solid #dfe3e8;
-      &:last-child {
-        border-bottom: none;
-      }
-    }
+
     &__update-info {
       font-size: 12px;
     }
@@ -140,27 +134,27 @@
     }
 
     &__service-header-name {
-      width: 289px;
+      width: 339px;
       margin-right: 8px;
     }
 
     &__service-header-price {
       margin-right: 8px;
-      width: 60px;
+      width: 70px;
     }
 
     &__service-header-qty {
       margin-right: 8px;
-      width: 60px;
+      width: 70px;
     }
 
     &__service-header-total {
       margin-right: 8px;
-      width: 60px;
+      width: 70px;
     }
 
     &__service-title {
-      width: 252px;
+      width: 304px;
       font-weight: 600;
       text-overflow: ellipsis;
       overflow: hidden;
@@ -169,17 +163,17 @@
     }
 
     &__service-time-in {
-      width: 60px;
+      width: 70px;
       margin-right: 8px;
     }
 
     &__service-time-out {
-      width: 60px;
+      width: 70px;
       margin-right: 8px;
     }
 
     &__service-duration {
-      width: 60px;
+      width: 70px;
       margin-right: 8px;
     }
 

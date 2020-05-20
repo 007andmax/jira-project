@@ -11,17 +11,26 @@
     </div>
 
     <div class="d-f">
-      <input class="product-item__input serial-num" type="text"  [(ngModel)]="product.serialNumber" placeholder="Serial No">
-      <input class="product-item__input cost" type="text" [(ngModel)]="product.item.cost" placeholder="Cost">
-      <span class="product-item__input-with-prefix qty">
-        <span class=product-item__prefix>Qty</span>
+      <label class="product-item__serial-num-input">
+        <input class="product-item__input serial-num" type="text"  [(ngModel)]="product.serialNumber">
+      </label>
+
+      <label class="product-item__cost-input">
+        <input class="product-item__input cost" type="text" [(ngModel)]="product.item.cost">
+      </label>
+
+      <label class="product-item__qty-input">
         <input class="product-item__input qty" [(ngModel)]="product.item.quantity" type="text">
-      </span>
-      <input class="product-item__input price" type="text" [(ngModel)]="product.item.sale" placeholder="Price">
-      <span class="product-item__input-with-prefix discount">
-        <span class=product-item__prefix>Discount</span>
-        <input class="product-item__input" [(ngModel)]="product.discountAmount" type="text"  >
-      </span>
+      </label>
+
+      <label class="product-item__price-input">
+        <input class="product-item__input price" type="text" [(ngModel)]="product.item.sale">
+      </label>
+
+      <label class="product-item__discount-input">
+        <input class="product-item__input" [(ngModel)]="product.discountAmount" type="text">
+      </label>
+
     </div>
   </div>
   </ng-template>
@@ -37,11 +46,25 @@
     </div>
 
     <div class="d-f">
-      <input class="product-item__input serial-num"  [(ngModel)]="currentProduct.serialNumber" type="text" placeholder="Serial No">
-      <input class="product-item__input cost" [(ngModel)]="currentProduct.item.cost" placeholder="Cost">
-      <input class="product-item__input qty" [(ngModel)]="currentProduct.quantity" placeholder="Qty">
-      <input class="product-item__input price" [(ngModel)]="currentProduct.item.sale" placeholder="Price">
-      <input class="product-item__input discount" [(ngModel)]="currentProduct.discountAmount" type="text" placeholder="Discount">
+      <label class="product-item__serial-num-input">
+        <input class="product-item__input serial-num"  [(ngModel)]="currentProduct.serialNumber" type="text">
+      </label>
+
+      <label class="product-item__cost-input">
+        <input class="product-item__input cost" [(ngModel)]="currentProduct.item.cost">
+      </label>
+
+      <label class="product-item__qty-input">
+        <input class="product-item__input qty" [(ngModel)]="currentProduct.quantity">
+      </label>
+
+      <label class="product-item__price-input">
+        <input class="product-item__input price" [(ngModel)]="currentProduct.item.sale">
+      </label>
+
+      <label class="product-item__discount-input">
+        <input class="product-item__input discount" [(ngModel)]="currentProduct.discountAmount" type="text">
+      </label>
     </div>
   </div>
 </div>
