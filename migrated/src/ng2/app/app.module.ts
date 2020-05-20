@@ -232,6 +232,7 @@ import { TicketProfileUpdatesProductInfoComponent } from './components/tickets/t
 import { TicketProfileUpdatesProductEditComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-product/ticket-profile-updates-product-edit/ticket-profile-updates-product-edit.component';
 import { TicketChangeStatusComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-change-status/ticket-change-status.component';
 import { PreloaderTicketComponent } from './components/tickets/tickets/preloader-ticket/preloader-ticket.component';
+import { TicketProfileAttachmentsComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-attachments/ticket-profile-attachments.component';
  
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
@@ -556,7 +557,9 @@ angular.module('quicktech')
    
     TicketChangeStatusComponent,
    
-    PreloaderTicketComponent
+    PreloaderTicketComponent,
+   
+    TicketProfileAttachmentsComponent
   ],
   imports: [
     BrowserModule,

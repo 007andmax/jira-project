@@ -1,0 +1,7 @@
+<ng-template ngFor let-attachment [ngForOf]="attachments" [ngForTrackBy]="trackById">
+  <div >
+    <p [textContent]="attachment.file.name"></p>
+    <button (click)="download(attachment.file.id,attachment.file.name)">download</button>
+  </div>
+
+  </ng-template>

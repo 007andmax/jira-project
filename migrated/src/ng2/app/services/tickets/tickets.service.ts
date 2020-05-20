@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/ng2/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Ticket } from '../../components/tickets/class/ticket';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { TicketProfile } from '../../components/tickets/tickets/class/ticket-profile';
 
 @Injectable({
@@ -50,6 +50,14 @@ export class TicketsService {
     };
 
     return this.http.delete(this.apiUrl + `v2/tickets/${ticketId}/updates/${updateId}/deleteExpenses`, options);
+  }
+  public downloadPdf(id) {
+    return this.http.get(this.apiUrl + `file/${id}`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/pdf',
+      }), responseType: 'blob'
+    }).pipe(
+      tap(data => data));
   }
   public deleteUpdate(id, updateId) {
 
