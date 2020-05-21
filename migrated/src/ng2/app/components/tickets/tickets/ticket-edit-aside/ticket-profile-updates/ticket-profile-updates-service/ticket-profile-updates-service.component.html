@@ -6,7 +6,7 @@
     <div class="ticket-updates__content">
       <div class="ticket-updates__author-line d-f jc-sb ai-c ">
         <div><span class="ticket-updates__author" [textContent]="ticketsListService.getUserName(update.user)"></span> <span class="ticket-updates__add-note">&nbsp;added a service</span></div>
-        <div class="ticket-updates__delete icon__remove" (click)="remove()"></div>
+        <div class="ticket-updates__delete icon__remove" (click)="remove()" placement="top" ngbTooltip="Delete Update"></div>
       </div>
       <ng-template   ngFor let-service [ngForOf]="update.services" let-i="index" [ngForTrackBy]="trackByIndex">
 

@@ -1,7 +1,10 @@
-<ng-template ngFor let-attachment [ngForOf]="attachments" [ngForTrackBy]="trackById">
+<button (click)="hiddenAttachments = !hiddenAttachments">toggle</button>
+<div [hidden]="hiddenAttachments">
+<ng-template  ngFor let-attachment [ngForOf]="attachments" [ngForTrackBy]="trackById">
   <div >
     <p [textContent]="attachment.file.name"></p>
     <button (click)="download(attachment.file.id,attachment.file.name)">download</button>
   </div>
 
   </ng-template>
+</div>

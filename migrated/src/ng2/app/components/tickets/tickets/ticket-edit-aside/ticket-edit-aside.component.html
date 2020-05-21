@@ -31,8 +31,8 @@
                 </ng-template>
               </div>
 
-            <div class="qt-modal-circle-button add-user toggle-select-user" (click)="onToggleAddAssignedUser()"></div>
-          <app-ticket-profile-actions (onClaimTicket)="claimTicket()" [ticketProfile]="ticketProfile"></app-ticket-profile-actions>
+            <div class="qt-modal-circle-button add-user toggle-select-user" (click)="onToggleAddAssignedUser()" placement="top" ngbTooltip="Assign"></div>
+          <app-ticket-profile-actions (onClaimTicket)="claimTicket()" [ticketProfile]="ticketProfile" placement="top" ngbTooltip="Settings"></app-ticket-profile-actions>
            </div>
         </div>
         <app-ticket-edit-tags [selectedTag]="ticketProfile.tags" (tagsChange)="onChangeTags($event)" [hidden]="showAddAssignedUser"></app-ticket-edit-tags>

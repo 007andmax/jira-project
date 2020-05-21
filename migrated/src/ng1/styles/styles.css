@@ -11296,7 +11296,7 @@ button.close {
   color: #ffffff;
   box-shadow: 0 0 5px 0 rgba(10, 45, 89, 0.25);
   text-transform: uppercase;
-  opacity: 0;
+  opacity: 1;
   filter: alpha(opacity=0);
 }
 
