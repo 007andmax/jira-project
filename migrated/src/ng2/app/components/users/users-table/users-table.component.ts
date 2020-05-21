@@ -62,11 +62,11 @@ export class UsersTableComponent implements OnInit {
 
     if (this.user.id) {
       return `url(${'/users/' + (this.user.id || 'default') + '/image' + (this.user.avatar ? '.jpg?t=' + this.user.avatar.updatedAt :
-        '')}) no-repeat`
+        '')}) 0% 0% / cover no-repeat`
     } else if (this.user.avatar && this.user.avatar.origin && this.user.avatar.origin.id) {
-      return `url(/file/${(this.user.avatar.origin.id)}.jpg) no-repeat`;
+      return `url(/file/${(this.user.avatar.origin.id)}.jpg) 0% 0% / cover no-repeat`;
     } else {
-      return 'url(/users/default/image.jpg)';
+      return 'url(/users/default/image.jpg) 0% 0% / cover no-repeat';
     }
   };
   edit() {
