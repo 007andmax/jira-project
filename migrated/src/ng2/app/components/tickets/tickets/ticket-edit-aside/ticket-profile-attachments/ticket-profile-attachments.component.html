@@ -2,7 +2,7 @@
 <div [hidden]="hiddenAttachments">
 <ng-template  ngFor let-attachment [ngForOf]="attachments" [ngForTrackBy]="trackById">
   <div >
-    <p [textContent]="attachment.file.name"></p>
+    <p [textContent]="attachment.file.name" (click)="preview(attachment.file.id,attachment.file.contentType)"></p>
     <button (click)="download(attachment.file.id,attachment.file.contentType,attachment.file.name)">download</button>
   </div>
 

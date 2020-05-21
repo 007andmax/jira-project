@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TicketProfileAttachment } from '../../class/ticket-profile-attachment';
 import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
+import { PreviewAttachmentComponent } from '../preview-attachment/preview-attachment.component';
+import { PreviewAttachmentStateService } from '../preview-attachment/services/preview-attachment-state.service';
 
 @Component({
   selector: 'app-ticket-profile-attachments',
@@ -10,9 +12,13 @@ import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 export class TicketProfileAttachmentsComponent implements OnInit {
   @Input() attachments: Array<TicketProfileAttachment> = [];
   hiddenAttachments: boolean = false;
-  constructor(private ticketsService: TicketsService) { }
+  constructor(private ticketsService: TicketsService, 
+    private previewAttachmentStateService:PreviewAttachmentStateService) { }
 
   ngOnInit() {
+  }
+  preview(attachmentId,contentType) {
+   if (contentType === "image/jpg" || contentType === "image/png") this.previewAttachmentStateService.onInitPreview(`/file/${attachmentId}`);
   }
   download(attachmentId, contentType, fileName) {
 

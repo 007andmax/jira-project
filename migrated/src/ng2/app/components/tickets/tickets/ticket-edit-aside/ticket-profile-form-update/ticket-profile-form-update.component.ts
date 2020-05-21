@@ -9,6 +9,7 @@ import { UsersStateService } from 'src/ng2/app/states/users/users-state.service'
 import { TicketProfileFormUpdateProductsComponent } from './ticket-profile-form-update-products/ticket-profile-form-update-products.component';
 import { TicketProfileFormUpdateServicesComponent } from './ticket-profile-form-update-services/ticket-profile-form-update-services.component';
 import { NotificationStateService } from 'src/ng2/app/components/shared/notification/services/notification-state.service';
+import { ErrorNotificationStateService } from 'src/ng2/app/components/shared/error-notification/services/error-notification-state.service';
 
 @Component({
   selector: 'app-ticket-profile-form-update',
@@ -39,6 +40,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
     private usersStateService: UsersStateService,
     private ticketsService: TicketsService,
     private elRef: ElementRef,
+    private errorNotificationStateService:ErrorNotificationStateService,
     private notificationStateService: NotificationStateService,
     public ticketsListService: TicketsListService) { }
 
@@ -144,6 +146,9 @@ export class TicketProfileFormUpdateComponent implements OnInit {
       this.files = [];
       this.ticketProfileFormUpdate.clearAttachments();
       this.onClosed.emit(null);
+    },err=> {
+      console.log("err",err.error.message);
+      this.errorNotificationStateService.oninitShowNotification(err.error.message);
     })
   }
   private checkUpdateAndClose() {

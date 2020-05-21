@@ -37,7 +37,8 @@
 </div>
 
 <div class="qt-aside__buttons jc-sb ai-c">
-  <div class="d-f ticket-edit-aside-bottom-part-users-attack">
+  <div class="d-f ticket-edit-aside-bottom-part-users-attack" >
+    <!--<div *ngIf="tab === 'NOTE'"> -->
     <div class="ticket-edit-aside__attach icon__attachment" placement="top" ngbTooltip="Add Attachment">
       <input type="file" #fileDropRef id="fileDropRef" multiple (change)="fileBrowseHandler($event.target.files)" />
     </div>
@@ -56,8 +57,9 @@
         <div class="ticket-edit-aside__users-linked-author pointer" placement="top" [ngbTooltip]="tipContent" [ngClass]="{'selected':ticketProfileFormUpdate.checkShares(user)}" (click)="ticketProfileFormUpdate.toggleShares(user)" *ngIf="user.accountType === 'TECH' && !showAddUpdateUser" [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"   [ngStyle]="{'background': ticketsListService.getStyleAvatar(user),'background-size': 'cover'}"></div>
       </ng-template>
     </div>
-
+     <!-- </div>-->
   </div>
+  
   <div class="d-f" *ngIf="!showAddUpdateUser">
     <div class="qt-btn --btn40h --outline-blue update-ticket-btn" [ngClass]="{'--loading':isUpdate}" (click)="update()" ><span>Update</span> <app-preloader-ticket *ngIf="isUpdate"></app-preloader-ticket></div>
 
