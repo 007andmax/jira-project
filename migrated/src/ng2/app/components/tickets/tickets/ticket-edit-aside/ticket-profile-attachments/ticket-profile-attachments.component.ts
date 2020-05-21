@@ -16,9 +16,10 @@ export class TicketProfileAttachmentsComponent implements OnInit {
   }
   download(attachmentId, fileName) {
 
-    /*this.ticketsService.downloadPdf(attachmentId).subscribe(data => {
+  this.ticketsService.downloadPdf(attachmentId).subscribe(data => {
       console.log("data",data);
-    })*/
+    })
+    return;
     const indexOfDot = fileName && fileName.lastIndexOf('.');
     const fileFormat = fileName && fileName.substring(indexOfDot);
     var link = document.createElement('a');
