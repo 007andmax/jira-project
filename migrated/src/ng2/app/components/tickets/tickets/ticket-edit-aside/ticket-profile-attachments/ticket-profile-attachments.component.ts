@@ -12,11 +12,11 @@ import { PreviewAttachmentStateService } from '../preview-attachment/services/pr
 export class TicketProfileAttachmentsComponent implements OnInit {
   @Input() attachments: Array<TicketProfileAttachment> = [];
   hiddenAttachments: boolean = false;
-  constructor(private ticketsService: TicketsService, 
+  constructor(private ticketsService: TicketsService,
     private previewAttachmentStateService:PreviewAttachmentStateService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
+
   preview(attachmentId,contentType) {
    if (contentType === "image/jpg" || contentType === "image/png") this.previewAttachmentStateService.onInitPreview(`/file/${attachmentId}`);
   }

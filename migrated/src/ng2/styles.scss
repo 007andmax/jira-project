@@ -2351,6 +2351,7 @@ input.ng-invalid.is-invalid {
     font-size: 13px;
     display: flex;
     align-items: center;
+    cursor: pointer;
     i {
       margin-right: 3px;
     }
@@ -2493,10 +2494,20 @@ app-ticket-profile-updates-service-timepicker {
   min-width: 128px;
   &:before {
     @include product-item-input;
-    content: 'Cost $';
+    content: 'Cost';
+  }
+  &:after {
+    @include product-item-input;
+    content: '$';
+    left: unset;
+    right: 22px;
+    font-size: 13px;
+    transform: translateY(0px);
+    left: 39px;
+    font-weight: 500;
   }
   input {
-    padding-left: 46px !important;
+    padding-left: 47px !important;
     width: 100%;
   }
 }
@@ -2521,10 +2532,20 @@ app-ticket-profile-updates-service-timepicker {
   min-width: 128px;
   &:before {
     @include product-item-input;
-    content: 'Price $';
+    content: 'Price';
+  }
+  &:after {
+    @include product-item-input;
+    content: '$';
+    left: unset;
+    right: 22px;
+    font-size: 13px;
+    transform: translateY(0px);
+    left: 41px;
+    font-weight: 500;
   }
   input {
-    padding-left: 47px !important;
+    padding-left: 49px !important;
     width: 100%;
   }
 }
@@ -2542,6 +2563,10 @@ app-ticket-profile-updates-service-timepicker {
     content: '%';
     left: unset;
     right: 22px;
+    font-size: 13px;
+    transform: translateY(0px);
+    right: 20px;
+    font-weight: 500;
   }
   input {
     padding-left: 65px !important;
@@ -2578,4 +2603,35 @@ app-ticket-profile-updates-service-timepicker {
   background-position: center;
   background-size: 16px;
   cursor: pointer;
+}
+
+
+app-ticket-profile-form-update {
+  position: sticky !important;
+  bottom: 0;
+  background: white;
+  z-index: 30;
+}
+
+.dropdown-menu.services-container.show {
+  min-width: 100%;
+}
+
+.ticket-updates__content {
+  flex-grow: 1;
+}
+
+
+.tooltip {
+  font-size: 12px;
+  border-radius: 4px;
+  div {
+    margin-top: 5px;
+  }
+  div:first-child {
+    margin-top: 0;
+  }
+  & > div {
+    margin: 0;
+  }
 }

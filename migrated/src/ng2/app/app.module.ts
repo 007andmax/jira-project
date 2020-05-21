@@ -199,7 +199,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { AutocompleteComponent } from './shared/autocomplete/autocomplete.component';
 import { PhonePipe } from './pipe/phone.pipe';
 import { OrderByPipe } from './pipe/order-by.pipe';
-import { NgxMaskModule } from 'ngx-mask' 
+import { NgxMaskModule } from 'ngx-mask'
 import { TaxesComponent } from './components/shared/taxes/taxes.component';
 import { TicketsTableItemComponent } from './components/tickets/tickets/tickets-table/tickets-table-item/tickets-table-item.component';
 import { TicketEditAsideCompanyInfoComponent } from './components/tickets/tickets/ticket-edit-aside-company-info/ticket-edit-aside-company-info.component';
@@ -222,7 +222,7 @@ import { TicketProfileUpdatesProductComponent } from './components/tickets/ticke
 import { TicketProfileUpdatesFooterComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-footer/ticket-profile-updates-footer.component';
 import { TicketProfileUpdatesServiceComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service/ticket-profile-updates-service.component';
 import { TicketProfileUpdatesServiceDurationComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-duration/ticket-profile-updates-service-duration.component';
- 
+
 import { TicketProfileUpdatesServiceTimepickerComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-timepicker/ticket-profile-updates-service-timepicker.component';
 import { TicketProfileUpdatesServiceInfoComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service/ticket-profile-updates-service-info/ticket-profile-updates-service-info.component';
 import { TicketProfileUpdatesServiceEditComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service/ticket-profile-updates-service-edit/ticket-profile-updates-service-edit.component';
@@ -235,7 +235,9 @@ import { PreloaderTicketComponent } from './components/tickets/tickets/preloader
 import { TicketProfileAttachmentsComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-attachments/ticket-profile-attachments.component';
 import { ErrorNotificationComponent } from './components/shared/error-notification/error-notification.component';
 import { PreviewAttachmentComponent } from './components/tickets/tickets/ticket-edit-aside/preview-attachment/preview-attachment.component';
- 
+
+
+
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 declare var angular: any;
@@ -542,29 +544,29 @@ angular.module('quicktech')
     TicketProfileUpdatesFooterComponent,
     TicketProfileUpdatesServiceComponent,
     TicketProfileUpdatesServiceDurationComponent,
-   
+
     TicketProfileUpdatesServiceTimepickerComponent,
-   
+
     TicketProfileUpdatesServiceInfoComponent,
-   
+
     TicketProfileUpdatesServiceEditComponent,
-   
+
     TicketProfileUpdatesServiceItemComponent,
-   
+
     TicketProfileUpdatesProductItemComponent,
-   
+
     TicketProfileUpdatesProductInfoComponent,
-   
+
     TicketProfileUpdatesProductEditComponent,
-   
+
     TicketChangeStatusComponent,
-   
+
     PreloaderTicketComponent,
-   
+
     TicketProfileAttachmentsComponent,
-   
+
     ErrorNotificationComponent,
-   
+
     PreviewAttachmentComponent
   ],
   imports: [
@@ -607,9 +609,9 @@ angular.module('quicktech')
     NgxEditorModule,
     FontAwesomeModule,
     NvD3Module,
-    BrowserAnimationsModule, 
+    BrowserAnimationsModule,
     IgxTimePickerModule
-  
+
   ],
   entryComponents: [
     LeftPanelComponent,
@@ -639,7 +641,7 @@ angular.module('quicktech')
   exports:[
     PhonePipe,
     OrderByPipe,
-   
+
   ],
   providers: [
     {

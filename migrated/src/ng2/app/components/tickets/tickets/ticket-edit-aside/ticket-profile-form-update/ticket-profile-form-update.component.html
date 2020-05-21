@@ -47,19 +47,19 @@
 
     <div class="ticket-edit-aside__users-linked d-f">
       <ng-template class="assigned-ticket-user" ngFor let-user [ngForOf]="lisUpdateUser" let-i="index" [ngForTrackBy]="trackByIndex">
-        <ng-template #tipContent><span [textContent]="ticketsListService.getUserName(user)"></span><p [textContent]="user.primaryEmail"></p></ng-template>
+        <ng-template #tipContent><div [textContent]="ticketsListService.getUserName(user)"></div><div [textContent]="user.primaryEmail"></div></ng-template>
         <div class="ticket-edit-aside__users-linked-author pointer" placement="top" [ngbTooltip]="tipContent" [ngClass]="{'selected':ticketProfileFormUpdate.checkShares(user)}" (click)="ticketProfileFormUpdate.toggleShares(user)" *ngIf="user.accountType === 'CLIENT' && !showAddUpdateUser" [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"   [ngStyle]="{'background': ticketsListService.getStyleAvatar(user),'background-size': 'cover'}"></div>
       </ng-template>
       <div class="ticket-edit-aside__users-linked-divider" *ngIf="!showAddUpdateUser"></div>
       <ng-template class="assigned-ticket-user" ngFor let-user [ngForOf]="lisUpdateUser" let-i="index" [ngForTrackBy]="trackByIndex">
-        <ng-template #tipContent><span [textContent]="ticketsListService.getUserName(user)"></span><p [textContent]="user.primaryEmail"></p></ng-template>
-  
+        <ng-template #tipContent><div [textContent]="ticketsListService.getUserName(user)"></div><div [textContent]="user.primaryEmail"></div></ng-template>
+
         <div class="ticket-edit-aside__users-linked-author pointer" placement="top" [ngbTooltip]="tipContent" [ngClass]="{'selected':ticketProfileFormUpdate.checkShares(user)}" (click)="ticketProfileFormUpdate.toggleShares(user)" *ngIf="user.accountType === 'TECH' && !showAddUpdateUser" [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"   [ngStyle]="{'background': ticketsListService.getStyleAvatar(user),'background-size': 'cover'}"></div>
       </ng-template>
     </div>
      <!-- </div>-->
   </div>
-  
+
   <div class="d-f" *ngIf="!showAddUpdateUser">
     <div class="qt-btn --btn40h --outline-blue update-ticket-btn" [ngClass]="{'--loading':isUpdate}" (click)="update()" ><span>Update</span> <app-preloader-ticket *ngIf="isUpdate"></app-preloader-ticket></div>
 
