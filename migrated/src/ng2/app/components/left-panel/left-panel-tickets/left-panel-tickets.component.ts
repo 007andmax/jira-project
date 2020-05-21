@@ -110,7 +110,7 @@ export class LeftPanelTicketsComponent implements OnInit {
     this.listType = type;
     this.ticketsFilter.setListType(type);
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
-    this.getCount();
+   if (type !== 'RECURRING_TICKETS') this.getCount();
   }
 
   onGetUsers(data) {

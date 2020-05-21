@@ -33,7 +33,7 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     this.sub.add(getOnInitFilter);
     this.ticketsStateService.getOnInitCount().subscribe(data => {
       this.count = data;
-      this.title = `${this.selectedListType.title} (${this.count})`;
+      this.title = `${(this.selectedListType) ? this.selectedListType.title : ''} (${this.count})`;
     })
   }
   onAddTicket() {
