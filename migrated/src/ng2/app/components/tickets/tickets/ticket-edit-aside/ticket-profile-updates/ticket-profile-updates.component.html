@@ -12,7 +12,7 @@
       </app-ticket-profile-updates-service>
     </ng-template>
   </div>
-  <div *ngIf="showLoadMoreUpdates || showPreloader" class="button-loader" (click)="fetchUpdates()">
+  <div *ngIf="showLoadMoreUpdates && ticketProfile.unloadedUpdates > 0" class="button-loader" (click)="fetchUpdates()">
     Load More Updates <span *ngIf="showPreloader" class="loading"></span>
   </div>
 </div>

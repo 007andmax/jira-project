@@ -81,6 +81,9 @@ export class TicketProfileFormUpdate {
     public removeFile(index) {
         this.attachments.splice(index, 1);
     }
+    public clearAttachments() {
+        this.attachments = [];
+    }
     public setProducts(data) {
         this.products = data;
     }

@@ -101,6 +101,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
       this.ticketProfileFormUpdate.clearShares();
       this.notificationStateService.oninitShowNotification(`Update has been added`);
       this.files = [];
+      this.ticketProfileFormUpdate.clearAttachments();
     })
   }
   updateAndClose() {
@@ -141,6 +142,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
       this.ticketProfileFormUpdate.clearShares();
       this.notificationStateService.oninitShowNotification(`Ticket has been closed`);
       this.files = [];
+      this.ticketProfileFormUpdate.clearAttachments();
       this.onClosed.emit(null);
     })
   }

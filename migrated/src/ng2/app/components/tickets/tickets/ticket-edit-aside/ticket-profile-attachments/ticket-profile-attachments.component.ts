@@ -9,46 +9,30 @@ import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 })
 export class TicketProfileAttachmentsComponent implements OnInit {
   @Input() attachments: Array<TicketProfileAttachment> = [];
-  hiddenAttachments:boolean = false;
+  hiddenAttachments: boolean = false;
   constructor(private ticketsService: TicketsService) { }
 
   ngOnInit() {
   }
-  download(attachmentId, fileName) {
+  download(attachmentId, contentType, fileName) {
 
-  this.ticketsService.downloadPdf(attachmentId).subscribe(data => {
-      console.log("data",data);
-    })
-    return;
-    const indexOfDot = fileName && fileName.lastIndexOf('.');
-    const fileFormat = fileName && fileName.substring(indexOfDot);
-    var link = document.createElement('a');
-    link.target = "_blank";
-    link.href = '/file/' + attachmentId + fileFormat;
+    this.ticketsService.downloadFile(attachmentId, contentType).subscribe(res => {
+      var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
 
-    if (link.download !== undefined) {
-      //Set HTML5 download attribute. This will prevent file from opening if supported.
-     
-
-      // alert(url);
-      // alert(fileName);
-      //if (!open) {
+      const data = window.URL.createObjectURL(res);
+      var link = document.createElement('a');
+      link.href = data;
+      //   link.download=`${this.apiUrl}saleQuotes/${id}/pdf.pdf`;
+      if (isFirefox) {
+        link.href = `${window.location.origin}/file/${attachmentId}/attachment`;
+        link.target = "_blank";
+      } else {
         link.download = fileName;
-
-    //  }
-
-      // alert(link.download)
-    }
-
-    //Dispatching click event.
-    if (document.createEvent) {
+      }
       var e = document.createEvent('MouseEvents');
       e.initEvent('click', true, true);
       link.dispatchEvent(e);
-      return true;
-    }
-  //  }
-
+    })
   }
 
 

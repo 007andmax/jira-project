@@ -17,7 +17,7 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
   @Input() updates: Array<TicketProfileUpdate>;
   @Input() ticketProfile: TicketProfile = new TicketProfile();
   sub: Subscription = new Subscription();
-  showLoadMoreUpdates = false;
+  showLoadMoreUpdates = true;
   showPreloader: boolean = false;
   constructor(private ticketsService: TicketsService,
     private confirmStateService: ConfirmStateService,
@@ -40,9 +40,7 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getConfirm);
   }
-  ngDoCheck() {
-    this.showLoadMoreUpdates = (this.ticketProfile.unloadedUpdates > 0) ? true : false;
-  }
+  
   removeService() {
     this.ticketsService.removeService(this.ticketProfile.id, this.ticketStateService.getUpdateForRemove().id, this.ticketStateService.getServiceForRemove().id).subscribe(data => {
     })
@@ -57,7 +55,7 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
     })
   }
   fetchUpdates() {
-    this.showLoadMoreUpdates = false;
+   
     this.showPreloader = true;
     this.ticketsService.fetchUpdates(this.ticketProfile).subscribe((resp: any) => {
       let updates = this.updates || [];
@@ -66,10 +64,11 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
       })];
       this.updates = updates;
       this.showPreloader = false;
+      this.showLoadMoreUpdates = false;
     })
   }
   getCountUpdates() {
-    if (!this.showLoadMoreUpdates) return this.updates.length;
+    
     return this.updates.length + this.ticketProfile.unloadedUpdates;
   }
   ngOnDestroy(): void {

@@ -51,10 +51,10 @@ export class TicketsService {
 
     return this.http.delete(this.apiUrl + `v2/tickets/${ticketId}/updates/${updateId}/deleteExpenses`, options);
   }
-  public downloadPdf(id) {
-    return this.http.get(this.apiUrl + `file/${id}`, {
+  public downloadFile(id,contentType) {
+    return this.http.get( this.apiUrl + `file/${id}/attachment`,{
       headers: new HttpHeaders({
-        'Content-Type': 'application/pdf',
+        'Content-Type': contentType,
       }), responseType: 'blob'
     }).pipe(
       tap(data => data));
