@@ -7,7 +7,7 @@
     <!--[ngStyle]="{'background': 'url(' + getUserAvatarUrl(user) + ') no-repeat','background-size': 'contain'}"-->
     <div class="user-details" (click)="showUserDetails()">
     <div class="circle-avatar"
-         [ngStyle]="{'background': 'url(' + getUserAvatarUrl() + ') no-repeat','background-size': 'cover'}"
+         [ngStyle]="{'background':  getUserAvatarUrl(),'background-size': 'cover'}"
          [textContent]="getNameForAvatar()">
     </div>
     <div class="mob-styles contact">
