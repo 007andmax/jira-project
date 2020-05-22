@@ -8,7 +8,7 @@
   <div [hidden]="hiddenAttachments" class="attached-files-container">
     <ng-template  ngFor let-attachment [ngForOf]="attachments" [ngForTrackBy]="trackById">
       <div class="attachment-item" [ngClass]="attachment.file.contentType">
-        <div class="attachment-item__type" [textContent]="attachment.file.contentType"></div>
+        <div class="attachment-item__type" [textContent]="getTypeFile(attachment.file.name)"></div>
         <p [textContent]="attachment.file.name" (click)="preview(attachment.file.id,attachment.file.contentType)"></p>
 
 

@@ -15,6 +15,7 @@ import { TicketStateService } from '../../services/ticket-state.service';
 export class TicketProfileUpdatesNoteComponent implements OnInit {
   @Input() update: TicketProfileUpdate;
   @Output() onRemove = new EventEmitter();
+  @Input() idTicket: string;
   constructor(public ticketsListService: TicketsListService,
     private confirmStateService: ConfirmStateService,
     private ticketStateService: TicketStateService,

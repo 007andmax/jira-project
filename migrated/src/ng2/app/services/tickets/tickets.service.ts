@@ -14,6 +14,9 @@ export class TicketsService {
   public updateExpense(data) {
     return this.http.put(this.apiUrl + `v2/tickets/ticketUpdate/updateExpense`, data);
   }
+  public updateNote(ticketId,updateId,note) {
+    return this.http.put(this.apiUrl + `v2/tickets/${ticketId}/updates/${updateId}/updateNote`, {note: note});
+  }
   public fetchUpdates(ticket) {
     var loadedIds = [];
     if (ticket.updates) {

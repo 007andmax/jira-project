@@ -116,6 +116,20 @@
         }
       }
     }
+    &.archive\/zip {
+      .attachment-item {
+        &__type {
+          background: #ff5263;
+        }
+      }
+    }
+    &.image\/bmp {
+      .attachment-item {
+        &__type {
+          background: #7c77cb;
+        }
+      }
+    }
   }
 
 }

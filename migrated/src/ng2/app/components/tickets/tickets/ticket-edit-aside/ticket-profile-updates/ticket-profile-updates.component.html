@@ -4,7 +4,7 @@
 
   <div class="ticket-updates__ticket">
     <ng-template ngFor let-update [ngForOf]="updates" let-i="index" [ngForTrackBy]="trackByIndex">
-      <app-ticket-profile-updates-note class="ticket-updates__ticket-item" (onRemove)="removeUpdate($event)" *ngIf="update.type === 'NOTE'" [update]="update">
+      <app-ticket-profile-updates-note class="ticket-updates__ticket-item" (onRemove)="removeUpdate($event)" *ngIf="update.type === 'NOTE'" [idTicket]="ticketProfile.id" [update]="update">
       </app-ticket-profile-updates-note>
       <app-ticket-profile-updates-product class="ticket-updates__ticket-item" *ngIf="update.type === 'PRODUCT'" [update]="update">
       </app-ticket-profile-updates-product>

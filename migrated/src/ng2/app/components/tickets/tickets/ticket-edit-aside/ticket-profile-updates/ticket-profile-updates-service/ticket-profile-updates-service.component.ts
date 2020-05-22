@@ -14,7 +14,7 @@ import { ConfirmComponent } from 'src/ng2/app/components/shared/confirm/confirm.
 })
 export class TicketProfileUpdatesServiceComponent implements OnInit {
   @Input() update: TicketProfileUpdate;
-  editMode:boolean = false;
+  
   constructor(public ticketsListService: TicketsListService,
     private confirmStateService: ConfirmStateService,
     private ticketStateService: TicketStateService,

@@ -11,14 +11,18 @@ import { PreviewAttachmentStateService } from '../preview-attachment/services/pr
 })
 export class TicketProfileAttachmentsComponent implements OnInit {
   @Input() attachments: Array<TicketProfileAttachment> = [];
-  hiddenAttachments: boolean = false;
+  hiddenAttachments: boolean = true;
   constructor(private ticketsService: TicketsService,
-    private previewAttachmentStateService:PreviewAttachmentStateService) { }
+    private previewAttachmentStateService: PreviewAttachmentStateService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
-  preview(attachmentId,contentType) {
-   if (contentType === "image/jpg" || contentType === "image/png") this.previewAttachmentStateService.onInitPreview(`/file/${attachmentId}`);
+  preview(attachmentId, contentType) {
+    if (contentType === "image/jpg" || contentType === "image/png") this.previewAttachmentStateService.onInitPreview(`/file/${attachmentId}`);
+  }
+  public getTypeFile(name: string) {
+    let type = name.substring(name.lastIndexOf(".") + 1, name.length);
+    return type.toUpperCase();
   }
   download(attachmentId, contentType, fileName) {
 

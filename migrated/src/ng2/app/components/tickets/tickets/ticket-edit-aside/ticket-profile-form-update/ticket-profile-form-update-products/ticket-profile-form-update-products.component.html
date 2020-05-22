@@ -16,7 +16,11 @@
       </label>
 
       <label class="product-item__cost-input">
-        <input class="product-item__input cost" type="text" [(ngModel)]="product.item.cost">
+        <input class="product-item__input cost" type="text" 
+        number
+        [money]="true"
+        [ngModel]="product.item.cost"
+        (ngModelChange)="onChangeCostProduct($event, i)">
       </label>
 
       <label class="product-item__qty-input">
@@ -24,7 +28,11 @@
       </label>
 
       <label class="product-item__price-input">
-        <input class="product-item__input price" type="text" [(ngModel)]="product.item.sale">
+        <input class="product-item__input price" type="text" [(ngModel)]="product.item.sale"
+        number
+        [money]="true"
+        [ngModel]="product.item.sale"
+        (ngModelChange)="onChangeSaleProduct($event, i)">
       </label>
 
       <label class="product-item__discount-input">
@@ -51,7 +59,11 @@
       </label>
 
       <label class="product-item__cost-input">
-        <input class="product-item__input cost" [(ngModel)]="currentProduct.item.cost">
+        <input class="product-item__input cost" 
+        number
+        [money]="true"
+        [ngModel]="currentProduct.item.cost"
+        (ngModelChange)="onChangeCost($event)">
       </label>
 
       <label class="product-item__qty-input">
@@ -59,7 +71,11 @@
       </label>
 
       <label class="product-item__price-input">
-        <input class="product-item__input price" [(ngModel)]="currentProduct.item.sale">
+        <input class="product-item__input price"  
+        number
+        [money]="true"
+        [ngModel]="currentProduct.item.sale"
+        (ngModelChange)="onChangeSale($event)">
       </label>
 
       <label class="product-item__discount-input">

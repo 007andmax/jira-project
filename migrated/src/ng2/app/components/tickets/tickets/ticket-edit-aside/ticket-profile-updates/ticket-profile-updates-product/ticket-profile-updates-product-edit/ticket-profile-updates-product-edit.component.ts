@@ -32,6 +32,10 @@ export class TicketProfileUpdatesProductEditComponent implements OnInit {
   public getDate(date) {
     return moment((date) ? new Date(date) : new Date()).format('DD MMM YYYY');
   }
+  public onChangeSale(val) {
+    let value = Number(val);
+    this.editProduct.item.sale = value;
+  }
   onChangeProduct(item) {
     this.editProduct.item = item;
     this.editProduct.quantity = 1;

@@ -235,6 +235,9 @@ import { PreloaderTicketComponent } from './components/tickets/tickets/preloader
 import { TicketProfileAttachmentsComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-attachments/ticket-profile-attachments.component';
 import { ErrorNotificationComponent } from './components/shared/error-notification/error-notification.component';
 import { PreviewAttachmentComponent } from './components/tickets/tickets/ticket-edit-aside/preview-attachment/preview-attachment.component';
+import { TicketProfileUpdatesNoteItemComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-note/ticket-profile-updates-note-item/ticket-profile-updates-note-item.component';
+import { TicketProfileUpdatesNoteInfoComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-note/ticket-profile-updates-note-info/ticket-profile-updates-note-info.component';
+import { TicketProfileUpdatesNoteEditComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-note/ticket-profile-updates-note-edit/ticket-profile-updates-note-edit.component';
 
 
 
@@ -567,7 +570,13 @@ angular.module('quicktech')
 
     ErrorNotificationComponent,
 
-    PreviewAttachmentComponent
+    PreviewAttachmentComponent,
+
+    TicketProfileUpdatesNoteItemComponent,
+
+    TicketProfileUpdatesNoteInfoComponent,
+
+    TicketProfileUpdatesNoteEditComponent
   ],
   imports: [
     BrowserModule,
