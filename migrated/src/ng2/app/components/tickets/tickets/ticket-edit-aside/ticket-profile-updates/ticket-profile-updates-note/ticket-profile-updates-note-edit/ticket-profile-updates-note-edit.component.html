@@ -1,11 +1,11 @@
-<div class="ticket-updates__message-line d-f jc-sb ai-c">
+<div class="ticket-updates__message-line d-f jc-sb ai-fs">
   <div class="editable-description">
     <textarea    appTextArea  [minHeight]="48"  cols="5" rows="1" id="note-description" placeholder="Write ticket conversation here…"
     (input)="onChangeDescription($event)" (onPast)="onPastDescription($event)"></textarea>
     </div>
 
     <div class="right-side-icons">
-      <i (click)="saveService()" class="icn-20 icon__check save-service pointer"></i>
+      <i (click)="saveService()" class="icn-20 icon__check save-ticket-note pointer"></i>
       <i (click)="cancelService()" class="icn-20 icon__close pointer"></i>
       </div>
 </div>
