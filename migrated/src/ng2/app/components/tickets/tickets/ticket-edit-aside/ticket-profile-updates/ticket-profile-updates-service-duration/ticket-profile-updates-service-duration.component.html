@@ -1,4 +1,4 @@
-<igx-time-picker id="timepicker2" #picker format="HH:mm"  placeholder="time" [itemsDelta]="{hours:1, minutes:step}" (click)="show()" [vertical]="true" [mode]="mode" [(ngModel)]="date" (onOpened)="onOpened($event)">
+<igx-time-picker id="timepicker2" #picker format="HH:mm"  placeholder="time" [itemsDelta]="{hours:1, minutes:step}" (click)="show()" [vertical]="true" [mode]="mode" [value]="date" (onOpened)="onOpened($event)" (onClosed)="onClosed($event)">
   <ng-template igxTimePickerActions>
     <div class="container action-buttons">
         <button igxButton="flat" (click)="picker.okButtonClick();onSelected()">Set it</button>

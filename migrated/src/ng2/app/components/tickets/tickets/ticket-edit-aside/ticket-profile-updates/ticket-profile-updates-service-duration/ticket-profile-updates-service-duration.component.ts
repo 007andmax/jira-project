@@ -40,11 +40,16 @@ export class TicketProfileUpdatesServiceDurationComponent implements OnInit {
         this.date.setMilliseconds(0);
     }
     onSelected() {
-        let date = new Date(this.picker.value);
-        let hours = date.getHours();
-        let minutes = date.getMinutes();
+        this.date = new Date(this.picker.value);
+        let hours = this.date.getHours();
+        let minutes = this.date.getMinutes();
         let quantity = hours + ((minutes) ? (minutes / 60) : 0);
         this.onChange.emit(quantity);
+        console.log("date",this.date);
+    }
+    onClosed() {
+        console.log("this.date",this.date);
+        this.picker.value = this.date;
     }
     public onOpened(data) {
         let topInput = $(data.input.nativeElement).offset().top;

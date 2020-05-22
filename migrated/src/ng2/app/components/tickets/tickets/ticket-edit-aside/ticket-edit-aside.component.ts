@@ -21,6 +21,7 @@ import { TicketProfileFormUpdateComponent } from './ticket-profile-form-update/t
 import { Ticket } from '../../class/ticket';
 import { TicketChangeField } from '../class/ticket-change-field';
 import { WebsocketService } from 'src/ng2/app/services/websocket/websocket.service';
+import { TicketProfileUpdate } from '../class/ticket-profile-update';
 @Component({
   selector: 'app-ticket-edit-aside',
   templateUrl: './ticket-edit-aside.component.html',
@@ -121,6 +122,7 @@ export class TicketEditAsideComponent implements OnInit {
           this.ticketProfile.setUpdate(newChange.data);
         } else {
           this.ticketProfile.addUpdate(newChange.data);
+          console.log("addUpdate");
         }
         if (attachments && attachments.length) {
           for (var i = 0; i < attachments.length; i++) {
@@ -168,6 +170,13 @@ export class TicketEditAsideComponent implements OnInit {
     this.ticketsService.restoreFromSpam(this.ticketProfile.id, false).subscribe(data => {
 
     })
+  }
+  onFetchUpdates(resp) {
+    let updates = this.ticketProfile.updates || [];
+    updates = [...updates, ...resp.map(item => {
+      return new TicketProfileUpdate(item);
+    })];
+    this.ticketProfile.updates = updates;
   }
   onChangeTags(data) {
     if (!this.opened) return;

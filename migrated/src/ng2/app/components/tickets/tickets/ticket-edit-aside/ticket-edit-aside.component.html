@@ -62,7 +62,7 @@
        <app-ticket-claim-info [ticketProfile]="ticketProfile"></app-ticket-claim-info>
       <app-ticket-message (onMoveToTrash)="moveToTrash($event)" (onRestoreFromSpam)="restoreFromSpam()" (onOpenTicket)="markAsOpen()" (onClaimTicket)="claimTicket()" [ticketProfile]="ticketProfile"></app-ticket-message>
      <app-ticket-profile-attachments [attachments]="ticketProfile.attachments"></app-ticket-profile-attachments>
-      <app-ticket-profile-updates *ngIf="ticketProfile.updates && ticketProfile.updates.length > 0" [ticketProfile]="ticketProfile" [updates]="ticketProfile.updates"></app-ticket-profile-updates>
+      <app-ticket-profile-updates *ngIf="ticketProfile.updates && ticketProfile.updates.length > 0" (onFetchUpdates)="onFetchUpdates($event)" [ticketProfile]="ticketProfile" [updates]="ticketProfile.updates"></app-ticket-profile-updates>
         <app-ticket-profile-form-update (onClosed)="close()" *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)" #updateForm [ticket]="ticketProfile" [lisUpdateUser]="lisUpdateUser"></app-ticket-profile-form-update>
       </div>
     </div>

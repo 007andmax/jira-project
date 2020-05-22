@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { TicketProfileUpdate } from '../../class/ticket-profile-update';
 import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 import { TicketProfile } from '../../class/ticket-profile';
@@ -16,6 +16,7 @@ import { Subscription } from 'rxjs';
 export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
   @Input() updates: Array<TicketProfileUpdate>;
   @Input() ticketProfile: TicketProfile = new TicketProfile();
+  @Output() onFetchUpdates = new EventEmitter<any>();
   sub: Subscription = new Subscription();
   showLoadMoreUpdates = true;
   showPreloader: boolean = false;
@@ -55,21 +56,16 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
     })
   }
   fetchUpdates() {
-   
     this.showPreloader = true;
     this.ticketsService.fetchUpdates(this.ticketProfile).subscribe((resp: any) => {
-      let updates = this.updates || [];
-      updates = [...updates, ...resp.map(item => {
-        return new TicketProfileUpdate(item);
-      })];
-      this.updates = updates;
+      this.onFetchUpdates.emit(resp);
       this.showPreloader = false;
       this.showLoadMoreUpdates = false;
     })
   }
   getCountUpdates() {
     
-    return this.updates.length + this.ticketProfile.unloadedUpdates;
+    return (this.showLoadMoreUpdates) ? this.updates.length + this.ticketProfile.unloadedUpdates : this.updates.length;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
