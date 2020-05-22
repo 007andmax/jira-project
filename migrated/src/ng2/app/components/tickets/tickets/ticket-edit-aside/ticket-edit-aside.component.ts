@@ -129,7 +129,8 @@ export class TicketEditAsideComponent implements OnInit {
         }
       }
       if (newChange.action == 'UPDATE_DELETED') this.ticketProfile.removeUpdate(newChange.data);
-
+      this.cd.detectChanges();
+      console.log("this.ticketProfile", this.ticketProfile);
     });
   }
   private updateListAssignedUser() {
