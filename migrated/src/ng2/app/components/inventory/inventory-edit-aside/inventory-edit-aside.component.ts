@@ -33,6 +33,8 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
   categories: Array<CategoryProduct> = [];
   validate: InventoryValidate = new InventoryValidate();
   editVendor: Company = null;
+  cost:string;
+  sale:string;
   @ViewChild('addTax') containerAddTax;
   @ViewChild('glNumberSelect') glNumberSelect: SelectSearchComponent;
   @ViewChild('categoriesSelect') categoriesSelect: SelectSearchComponent;
@@ -76,6 +78,7 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
   onEditCompany() {
     let getCompanyFromEdit = this.inventoryStateService.getInventoryFromEdit().subscribe((data: InventoryItem) => {
       this.inventory = new InventoryItem(data);
+      console.log("this.inventory",this.inventory);
       let taxes = this.taxes.filter(item => {
         let index = this.inventory.taxIds.findIndex(taxId => taxId === item.id);
         return (index > -1) ? true : false;
@@ -84,6 +87,8 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
       this.editVendor = this.vendors.find(item => item.id === this.inventory.companyId);
       this.elRef.nativeElement.querySelector("#inventory-description").value = this.inventory.description;
       this.opened = true;
+      this.cost = this.inventory.cost.toFixed(2);
+      this.sale = this.inventory.sale.toFixed(2);
       this.description.update();
       this.cd.detectChanges();
     })
