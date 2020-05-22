@@ -7,7 +7,7 @@
       'quicktech.common.services.SharedStateService', '$stateParams', '$rootScope',
       'quicktech.common.services.TicketsPermissionsService', 'localStorageService', '$timeout', '$location', 'quicktech.common.services.ticketMobileSettings',
       function ($scope, $state, CompaniesService, UsersService, PermissionsService, SharedStateService,
-                $stateParams, $rootScope, TicketsPermissionsService, localStorageService, $timeout, $location, ticketMobileSettings) {
+        $stateParams, $rootScope, TicketsPermissionsService, localStorageService, $timeout, $location, ticketMobileSettings) {
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession');
 
@@ -20,7 +20,7 @@
         $scope.showCounter = location.hash.includes('receivable/list');
 
 
-        $rootScope.$on('$locationChangeStart', function(event, next, current) {
+        $rootScope.$on('$locationChangeStart', function (event, next, current) {
           $scope.showCounter = location.hash.includes('receivable');
         });
         $scope.usersCurrentCompany = UsersService.getAllByCompanyIdNonArchived(CompaniesService.getCurrentCompany().id);
@@ -30,35 +30,44 @@
 
 
         // $scope.$watch('ticketMobileSettings', function(val) {
-      
+
         // }, true)
 
         $scope.currentCompany = CompaniesService.getCurrentCompany();
- 
+
         $scope.addQuickSession = function () {
           sharedQuickSession.isCreateNew = true;
         };
 
 
-        $scope.$watch(function() {
+        $scope.$watch(function () {
           return $rootScope.isTicketOpened;
-        }, function(val) {
+        }, function (val) {
           $scope.isTicketOpened = val;
         })
 
-        $scope.$watch(function() {
+        $scope.$watch(function () {
           return $rootScope.isTicketEditOpened;
-        }, function(val) {
+        }, function (val) {
           $scope.isTicketEditOpened = val;
         })
 
-        $scope.closeEditTicket = function() {
+        $scope.closeEditTicket = function () {
           $rootScope.isMobileUpdateShown = false;
         }
 
-        $scope.toggleLeftPanel = function(state) {
+        $scope.toggleLeftPanel = function (state) {
+
           $rootScope.isLeftPanelOpened = state;
           $rootScope.isLeftPanelHidden = !$rootScope.isLeftPanelHidden;
+          if ($rootScope.isLeftPanelHidden) {
+            $("app-left-panel-tickets .left-panel-ng2").css({ zIndex: 990 });
+          } else {
+            setTimeout(()=> {
+              $("app-left-panel-tickets .left-panel-ng2").css({ zIndex: 992 });
+            },500);
+          
+          }
         }
 
         $scope.getAssignUserId = function (ticket) {
@@ -183,11 +192,11 @@
           return $location.search().tabName
         };
 
-        $scope.isToggleLeftPanelButtonAvailable = function() {
-          return ($state.includes('settings') || $state.includes('reports') )
+        $scope.isToggleLeftPanelButtonAvailable = function () {
+          return ($state.includes('settings') || $state.includes('reports'))
         };
 
-        $scope.tooltipForLeftPanelToggleIcon = function() {
+        $scope.tooltipForLeftPanelToggleIcon = function () {
           return window.outerWidth <= 1024 ? '' : 'Toggle left panel'
         }
 
