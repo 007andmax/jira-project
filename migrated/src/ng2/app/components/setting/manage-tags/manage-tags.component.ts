@@ -23,7 +23,8 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
   companyTags: any[] = [];
   serviceAllTickets: Observable<any>;
   serviceAllCompany: Observable<any>;
-
+  serviceCreateCustomTags: Observable<any>;
+  allowCreateTags: any;
   compnayForm: FormGroup;
   submitted = false;
   edit = false;
@@ -59,7 +60,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       word: ["", Validators.required],
       id: [""]
     });
-
+    this.getCurrentCompany();
     this.serviceAllTickets = this.tagsService.getAllTickets();
     this.serviceAllCompany = this.tagsService.getAllCompany();
 
@@ -87,6 +88,27 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
           this.loading = false;$(".loading").css("display", "none");
         }
       );
+  }
+
+  getCurrentCompany() {
+    this.tagsService.getCurrentCompany().subscribe(
+      res => {
+        this.allowCreateTags = res['allowCreateTags'];
+      },
+      error => {
+      }
+    ); 
+  }
+
+  saveAllowingCreateCustomTags() {
+    this.tagsService.saveAllowingCreateCustomTags(this.allowCreateTags).subscribe(
+      res => {
+        
+      },
+      error => {
+        this.allowCreateTags = !this.allowCreateTags;
+      }
+    ); 
   }
 
   /**
