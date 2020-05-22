@@ -78,4 +78,5 @@ export class TicketProfileUpdatesProductInfoComponent implements OnInit {
     modalRef.componentInstance.message = `Do you want to remove the item?`;
 
   }
+ 
 }
