@@ -7,11 +7,12 @@
     <tabset>
       <!-- Profile -->
       <tab heading="Incoming Email" id="tab1">
-        <app-incoming-email></app-incoming-email>
+        <app-incoming-email [smtpSettingsInput]="smtpSettings" [supportMailBoxInput]="supportMailBox" *ngIf="showIn == true"></app-incoming-email>
       </tab>
       <!-- Account  -->
       <tab heading="Outgoing Email">
-        <app-outgoing-email></app-outgoing-email>
+        <app-outgoing-email [smtpInput]="smtp" [supportMailBoxInput]="supportMailBox" [testEmailInput]="smtp.testEmail"
+          [savedSMTPSettingsInput]="savedSMTPSettings" [portIsEmptyInput]="portIsEmpty" [usedEmailViaInput]="usedEmailVia" *ngIf="showIn == true"></app-outgoing-email>
       </tab>
     </tabset>
   </div>

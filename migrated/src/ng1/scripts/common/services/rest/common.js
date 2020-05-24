@@ -10,7 +10,7 @@
     $provide.factory('myHttpInterceptor', ['$rootScope', '$q', function ($rootScope, $q) {
 
       function processResponse(response) {
-
+        $rootScope.showLockModal(true);
         var unlockExpiredHeader = response.headers('SESSION_UNLOCK_EXPIRED');
         var userDisabledHeader = response.headers('USER_DISABLED');
         var isUnauthorized= response.data.errorMessage === 'unauthorized' || response.data.authMessage === 'unauthorized',

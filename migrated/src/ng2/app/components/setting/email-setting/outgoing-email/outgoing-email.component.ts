@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { EmailSettingService } from "../email-setting.service";
 import { SettingService } from "src/ng2/app/services/setting/setting.service";
 import { ToastrService } from "ngx-toastr";
@@ -74,6 +74,13 @@ export class OutgoingEmailComponent implements OnInit {
   ];
   emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
   domainPattern = /^(((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?))|((?:[0-9]{1,3}\.){3}[0-9]{1,3})$/;
+  @Input() smtpSettingsInput: any;
+  @Input() supportMailBoxInput: any;
+  @Input() smtpInput: any;
+  @Input() testEmailInput: any;
+  @Input() savedSMTPSettingsInput: any;
+  @Input() portIsEmptyInput: any;
+  @Input() usedEmailViaInput: any;
 
   constructor(
     private emailSettingService: EmailSettingService,
@@ -117,7 +124,7 @@ export class OutgoingEmailComponent implements OnInit {
       id: [""]
     });
 
-    this.SMTPSettings();
+    this.SMTPSettingsInput();
     this.getEmailAlias();
   }
 
@@ -157,6 +164,37 @@ export class OutgoingEmailComponent implements OnInit {
       return false;
     }
     return true;
+  }
+
+  SMTPSettingsInput() {
+    this.smtp = this.smtpInput;
+    this.supportMailBox = this.supportMailBoxInput;
+    this.smtp.testEmail = this.testEmailInput;
+    this.savedSMTPSettings = this.savedSMTPSettingsInput;
+    this.portIsEmpty = this.portIsEmptyInput;
+    this.usedEmailVia = this.usedEmailViaInput;
+    if (!this.smtp.useSMTP || this.disableFields) {
+      this.smtpForm.get("login").disable();
+      this.smtpForm.get("domain").disable();
+      this.smtpForm.get("port").disable();
+      this.smtpForm.get("encryptionType").disable();
+      this.smtpForm.get("password").disable();
+    } else {
+      this.smtpForm.get("login").enable();
+      this.smtpForm.get("domain").enable();
+      this.smtpForm.get("port").enable();
+      this.smtpForm.get("encryptionType").enable();
+      this.smtpForm.get("password").enable();
+    }
+
+    this.smtpForm.patchValue({
+      usedEmailVia: this.usedEmailVia.label,
+      port: this.smtp.port,
+      domain: this.smtp.domain,
+      encryptionType: this.smtp.encryptionType,
+      login: this.smtp.login,
+      password: this.smtp.password
+    });
   }
 
   /**

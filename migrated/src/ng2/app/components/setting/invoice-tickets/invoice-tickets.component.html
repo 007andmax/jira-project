@@ -7,11 +7,11 @@
     <tabset>
       <!-- Ticket Settings -->
       <tab heading="Ticket Settings" id="tab1">
-        <app-ticket-settings></app-ticket-settings>
+        <app-ticket-settings [taxIdDescInput]="taxIdDescription" [taxIdInput]="taxId" [conditionInput]="condition" *ngIf="showTab == true && showTerm == true"></app-ticket-settings>
       </tab>
       <!-- Invoice Settings -->
       <tab heading="Invoice Settings">
-        <app-invoice-settings></app-invoice-settings>
+        <app-invoice-settings [taxIdDescInput]="taxIdDescription" [taxIdInput]="taxId" [termInput]="term" [conditionInput]="condition" *ngIf="showTab == true && showTerm == true"></app-invoice-settings>
       </tab>
       <!-- Quotes Settings  -->
       <tab heading="Quotes settings">

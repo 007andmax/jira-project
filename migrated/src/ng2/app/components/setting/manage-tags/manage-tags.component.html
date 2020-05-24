@@ -77,8 +77,20 @@
         </div>
       </div>
     </div>
-
-    <tabset (click)="setTab()">
+    <div class="tag_description">	
+        <p>Tags can be used in tickets to identify specific issues, when quicktech matches tag words in a ticket	
+          they will automaticly be added to the tags. Tags can be used to search tickets</p>	
+          <br>	
+          <div class="clearfix">	
+            <label class="control checkbox">	
+              <input type="checkbox" name="allowCreateTags"	
+                     [(ngModel)]="allowCreateTags" (change)="saveAllowingCreateCustomTags(allowCreateTags)">	
+              <span style="margin-top: 1px; margin-left: 5px;" class="control-indicator"></span>	
+            </label>	
+            <span>Allow user to create custom Tags</span>	
+          </div>	
+        </div>
+    <tabset (click)="setTab()" #tabset>
       <!-- Companies -->
       <tab heading="Companies" id="tab1">
         <div class="cmn-area">

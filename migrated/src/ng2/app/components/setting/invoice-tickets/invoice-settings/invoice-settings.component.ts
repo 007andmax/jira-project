@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { InvoiceTicketsService } from '../invoice-tickets.service';
 import { ToastrService } from 'ngx-toastr';
@@ -14,7 +14,10 @@ export class InvoiceSettingsComponent implements OnInit {
   isAddPhone = false;
   loading = false;
   isDisable: boolean;
-
+  @Input() taxIdDescInput: any;
+  @Input() taxIdInput: any;
+  @Input() termInput: any;
+  @Input() conditionInput: any;
   constructor(
     private formBuilder: FormBuilder,
     private invoiceTicketsService: InvoiceTicketsService,
@@ -81,8 +84,16 @@ export class InvoiceSettingsComponent implements OnInit {
     });
 
     this.getInvoiceContact();
-    this.getTermsAndConditions();
+    // this.getTermsAndConditions();
     this.getActualNumber();
+    this.invoiceForm.patchValue({
+      taxId: this.taxIdInput,
+      taxIdDescription: this.taxIdDescInput
+    });
+    this.invoiceForm.patchValue({
+      invoiceTerms: this.termInput,
+      conditions: this.conditionInput
+    });
   }
 
   // convenience getter for easy access to form fields
@@ -138,8 +149,8 @@ export class InvoiceSettingsComponent implements OnInit {
    * get invoice contact details
    */
   getInvoiceContact() {
-    this.getTaxNumber();
-    this.getConditions();
+    // this.getTaxNumber();
+    // this.getConditions();
     this.loading = true;$(".loading").css("display", "block");
     this.invoiceTicketsService.getInvoiceContact().subscribe(
       (res: any) => {
