@@ -60,6 +60,12 @@
     }
   }
 
+  .cps-block__content-textarea {
+    min-height: 56px;
+  }
+
+
+
   /deep/ .date-picker input{
     height: 40px;
     width: 146px;
