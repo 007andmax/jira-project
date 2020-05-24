@@ -372,7 +372,7 @@ export class PasswordManagerEditAsideComponent implements OnInit {
 
      this.getGadgets();
     //  this.subGetDevices = this.devicesService.getCompanyDevices(companyId.item.id).subscribe((res) => {
-    if (this.devicesSateService.getAllDevices()[companyId.item.id]) {
+    if (this.devicesSateService.getAllDevices() && this.devicesSateService.getAllDevices()[companyId.item.id]) {
       this.deviceCheckbox = new Array([...this.devicesSateService.getAllDevices()[companyId.item.id]].length);
       this.showGadgetsForm = false;
       for (var i = 0; i < this.deviceCheckbox.length; ++i) { this.deviceCheckbox[i] = false; }
