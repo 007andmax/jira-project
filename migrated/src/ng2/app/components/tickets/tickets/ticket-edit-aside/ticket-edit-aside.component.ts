@@ -41,7 +41,7 @@ export class TicketEditAsideComponent implements OnInit {
   statusColor: TicketsColor;
   listAssignedUser: Array<CurrentUser> = [];
   lisUpdateUser: Array<CurrentUser> = [];
-
+toggleRightPanel:boolean = false;
   constructor(private ticketsStateService: TicketsStateService,
     private confirmStateService: ConfirmStateService,
     private ticketsService: TicketsService,
