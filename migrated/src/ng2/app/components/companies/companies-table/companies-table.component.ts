@@ -35,8 +35,10 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
   IS_MOBILE: boolean = false;
 
   sub: Subscription = new Subscription();
-  constructor(private usersStateService: UsersStateService, private companiesStateService: CompaniesStateService,
-    private devicesState: DevicesSateService, private modalService: NgbModal,
+  constructor(private usersStateService: UsersStateService,
+    private companiesStateService: CompaniesStateService,
+    private devicesState: DevicesSateService,
+    private modalService: NgbModal,
     private confirmStateService: ConfirmStateService,
     private companiesService: CompaniesService,
     private downloadAgentStateService: DownloadAgentStateService,
@@ -45,7 +47,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     private elRef: ElementRef) { }
 
   ngOnInit() {
- 
+
     /*  this.companiesStateService.getOnShowArchived().subscribe(data => {
         this.showArchivedCompanies = data;
       })*/
@@ -59,7 +61,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     if (this.devicesState.getAllDevices()) this.onGetDevicesCount(this.devicesState.getAllDevices());
     let getOnDevices = this.devicesState.getOnDevices().subscribe((data) => {
       this.showArchivedCompanies = false;
-      
+
       this.onGetDevicesCount(data);
     })
     this.sub.add(getOnDevices);
@@ -102,9 +104,9 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
       }
     }
   }
-checkLogo() {
-  return (this.company && this.company.logo && this.company.logo.cropped && this.company.logo.cropped.id || this.company && this.company.logo && this.company.logo.origin && this.company.logo.origin.id)
-}
+  checkLogo() {
+    return (this.company && this.company.logo && this.company.logo.cropped && this.company.logo.cropped.id || this.company && this.company.logo && this.company.logo.origin && this.company.logo.origin.id)
+  }
 
   goToDashboard() {
 
@@ -126,21 +128,21 @@ checkLogo() {
   getCompanyLogoUrl() {
     if (this.company && this.company.logo && this.company.logo && this.company.logo.base64 && !this.company.logo.cropped) return this.company.logo.base64;
     if (this.company && this.company.logo && this.company.logo.cropped && this.company.logo.cropped.id) return `/file/${this.company.logo.cropped.id}`;
-    if (this.company && this.company.logo && this.company.logo.origin && this.company.logo.origin.id ) return `/file/${this.company.logo.origin.id}`;
+    if (this.company && this.company.logo && this.company.logo.origin && this.company.logo.origin.id) return `/file/${this.company.logo.origin.id}`;
     return '/company/default/logo.jpg';
   }
   getUserName() {
     return `${this.primaryContact.firstName} ${this.primaryContact.lastName}`;
   };
   downloadAgent() {
-  
-     this.downloadAgentStateService.setCompnay(this.company);
-     const modalRef = this.modalService.open(DownloadAgentComponent, { windowClass: 'download-modal' });
+
+    this.downloadAgentStateService.setCompnay(this.company);
+    const modalRef = this.modalService.open(DownloadAgentComponent, { windowClass: 'download-modal' });
 
   }
   edit() {
     let getCompany = this.companiesService.getCompany(this.company.id).subscribe((data: CompanyProfile) => {
-       
+
       this.companiesStateService.setEditCompany(data);
     })
     this.sub.add(getCompany);
@@ -149,16 +151,15 @@ checkLogo() {
   remove() {
     this.confirmStateService.setConfirmAction(ARCHIVE_COMPANY);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
-
     modalRef.componentInstance.message = `Do you want to archive ${this.company.name}? All related users and service agreements will be archived and all agents will be uninstalled.`;
     this.companiesStateService.setCompnayForArchive(this.company);
   }
   private onGetDevicesCount(data) {
 
     let devices = data;
-    
+
     this.countDevices = (devices[this.company.id]) ? devices[this.company.id].length : 0;
-   
+
   }
   private onGetUsersCount(data) {
 
@@ -170,7 +171,7 @@ checkLogo() {
   }
 
   onSelectCompany(event) {
-     
+
     if (event.target.checked) {
       this.draftEmailStateService.addSelectedCompany(this.company);
     } else {

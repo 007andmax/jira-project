@@ -1,0 +1,34 @@
+<div class="d-f jc-sb ai-fs ticket-updates__ticket-info-container ticket-update-product-edit">
+  <div class="ticket-updates__ticket-info">
+    <div class="ticket-updates__ticket-header d-f">
+      <div class="ticket-updates__ticket-header-name">Product Name</div>
+      <div class="ticket-updates__ticket-header-price">Price</div>
+      <div class="ticket-updates__ticket-header-qty">Qty</div>
+      <div class="ticket-updates__ticket-header-total">Total</div>
+    </div>
+    <div class="d-f ai-c ticket-updates__ticket-body" [ngClass]="{'--done':editProduct.completed}">
+      <div class="ticket-updates__done-status icon__task-pending"></div>
+      <app-product-list [editItem]="editProduct.item" class="product-item__prodect-list" [itemList]="productList"
+      (selectedProductItem)="onChangeProduct($event)"></app-product-list>
+
+      <input class="input-default input-price"  
+      number
+      [money]="true"
+      [ngModel]="editProduct.item.sale"
+      appToFixed
+      (ngModelChange)="onChangeSale($event)"  />
+      <input  class="input-default input-qty" [(ngModel)]="editProduct.quantity"   />
+      <div class="ticket-updates__ticket-total" [textContent]="'$' + getTotal(editProduct.item.sale,editProduct.quantity)"></div>
+
+      <div class="ticket-updates__date-icon icon__assign-date"></div>
+      <div class="ticket-updates__photo-people" [textContent]="ticketsListService.getAssignedUserNameForAvatar(editProduct.user)"
+      [ngStyle]="{'background': ticketsListService.getStyleAvatar(editProduct.user),'background-size': 'cover'}"></div>
+    </div>
+    <span  class="tag__modern ticket-updates__service-tag-completed" *ngIf="editProduct.completed" [textContent]="'Completed on ' + getDate(editProduct.date)"></span>
+    <span  class="tag__modern ticket-updates__service-tag-completed" *ngIf="!editProduct.completed && editProduct.date" [textContent]="'Due date - ' + getDate(editProduct.date)"></span>
+  </div>
+  <div class="right-side-icons">
+    <i (click)="saveProduct()" class="icn-20 icon__check save-product pointer"></i>
+    <i (click)="cancelProduct()" class="icn-20 icon__close pointer"></i>
+    </div>
+</div>

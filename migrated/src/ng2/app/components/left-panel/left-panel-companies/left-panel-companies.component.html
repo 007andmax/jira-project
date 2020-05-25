@@ -27,8 +27,8 @@
         By tags
       </div>
 
-      <app-left-panel-tags-companies [blockCreateTag]="true"
-                                     (tagsChange)="onChangeTags($event)"></app-left-panel-tags-companies>
+      <app-left-panel-tags [blockCreateTag]="true"
+                                     (tagsChange)="onChangeTags($event)"></app-left-panel-tags>
     </div>
     <div class="left-panel-ng2__content--filters">
       <!--      for show "filter-item__content" click on "filter-item__header" and add class "show-filter" for "filter-item"-->
@@ -42,22 +42,6 @@
             <app-select-search [placeholder]="'Select Sales Person'"  [class]="['dark-dropdown']" [editItem]="selectedTechLead" [field]="'name'" [list]="listPersons"
                                (onSelectedItem)="onSelectTechLead($event)"></app-select-search>
           </div>
-          <!-- <div class="dark-dropdown"
-				ngbDropdown>
-			 <input id="dropdownPersons"
-					[value]="getSelectedTechLead()"
-					placeholder="Select Sales Person"
-					ngbDropdownToggle>
-			 <i class="icn-sm icn-remove-old" *ngIf="showClearSalesPerson" (click)="clearSalesPerson()" tooltip="clear"
-				tooltip-placement="top"></i>
-			 <i class="icn-sm report-caret-icon" *ngIf="!showClearSalesPerson"></i>
-			 <div ngbDropdownMenu aria-labelledby="dropdownPersons">
-			   <ng-template ngFor let-item [ngForOf]="listPersons" let-i="index">
-				 <button ngbDropdownItem [textContent]="item.firstName + ' ' + item.lastName"
-						 (click)="onSelectTechLead(i)"></button>
-			   </ng-template>
-			 </div>
-		   </div> -->
           <div class="resent-block">
             <div class="resent-block__header">Recent</div>
             <div class="resent-block__content">

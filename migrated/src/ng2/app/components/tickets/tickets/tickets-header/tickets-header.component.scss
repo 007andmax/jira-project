@@ -1,0 +1,32 @@
+.tickets-list-search {
+  margin-right: 8px;
+}
+
+.tickets-list-header {
+  position: sticky;
+  top: 78px;
+  padding: 24px 0 0 14px;
+  background-color: #edf2f6;
+  margin: 0 auto;
+  max-width: 1320px;
+  width: 100%;
+}
+
+.tickets-list-table-header {
+  width: 100%;
+  position: sticky;
+  top: 166px;
+  background-color: #edf2f6;
+  overflow: auto;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+
+@media (min-width: 1920px) {
+  .tickets-list-header, .tickets-list-table-header {
+    width: 85%;
+    // width: 100%;
+    max-width: unset;
+  }
+}

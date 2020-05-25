@@ -98,11 +98,11 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   }
 
   onReady(eventData) {
-    console.log(eventData);
+    
     eventData.plugins.get("FileRepository").createUploadAdapter = function(
       loader
     ) {
-      console.log(btoa(loader.file));
+    
       return new UploadAdapter(loader);
     };
   }
@@ -187,10 +187,10 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
    */
   insertAtCaret(text) {
     var el = document.activeElement;
-    console.log(el);
+   
 
     if (el.id === "subject") {
-      console.log(this.subject);
+     
       var startPos = this.subject.nativeElement.selectionStart;
 
       this.subject.nativeElement.value =
@@ -436,7 +436,7 @@ export class UploadAdapter {
   private loader;
   constructor(loader: any) {
     this.loader = loader;
-    console.log(this.readThis(loader.file));
+    
   }
 
   // upload() {

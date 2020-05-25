@@ -17,6 +17,8 @@ import { Validate } from '../class/validate';
 import { ChangeDatePicker } from '../../../shared/date-picker/class/change-date-picker';
 import { DevicesRecurringTicketsStateService } from '../devices-recurring-tickets/services/devices-recurring-tickets-state.service';
 import { TextAreaDirective } from 'src/ng2/app/directives/text-area.directive';
+import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
+import { TechUserItem } from '../../../shared/teh-users/class/tech-user-item';
 
 @Component({
   selector: 'app-recurring-tickets-edit-aside',
@@ -38,6 +40,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   public tehUsers = [];
   public ticketForEdit: RecurringTicket = null;
   public validate: Validate = new Validate();
+  public listTehUsers: Array<TechUserItem> = [];
   description: TextAreaDirective;
   @ViewChild(TextAreaDirective) set appTextArea(directive: TextAreaDirective) {
     this.description = directive;
@@ -63,6 +66,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     private companiesState: SelectClientCompanyStateService,
     private recurringState: RecurringTicketsStateService,
     public createService: RecurringTicketsService,
+    private usersStateService:UsersStateService
   ) {
   }
 
@@ -73,7 +77,10 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.getItemListProducts();
 
     this.onCheckEditMode();
-
+    if (this.usersStateService.getAllUsers().length > 0) this.onGetTechUsers(this.usersStateService.getAllUsers());
+    let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
+      this.onGetTechUsers(data);
+    })
   }
 
   /**
@@ -201,6 +208,15 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
   public onCheckListServices() {
     const value = this.recurringState.getClient();
     value && this.getListServices(value);
+  }
+  
+  private onGetTechUsers(data) {
+    this.listTehUsers = data.filter(item => {
+
+      if (item.accountType === 'TECH' && !item.deletedAt) {
+        return new TechUserItem(item);
+      }
+    });
   }
 
   /**

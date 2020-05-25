@@ -3,20 +3,20 @@ import { Subscription } from 'rxjs';
 
 @Injectable()
 export class UserListService {
-  blockList:boolean = false;
-sub:Subscription = new Subscription();
+  blockList: boolean = false;
+  sub: Subscription = new Subscription();
   constructor() { }
-  public addSubscription (data) {
+  public addSubscription(data) {
     this.sub.add(data);
-   
+
   }
-  public onUnsubscribe () {
+  public onUnsubscribe() {
     this.sub.unsubscribe();
   }
-  public setBlockList (data) {
+  public setBlockList(data) {
     this.blockList = data;
   }
-  public getBlockList () {
+  public getBlockList() {
     return this.blockList;
   }
 }

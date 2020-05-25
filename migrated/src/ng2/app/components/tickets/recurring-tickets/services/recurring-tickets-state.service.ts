@@ -12,7 +12,6 @@ import { EditProduct } from 'src/ng2/app/interfaces/product/edit-product';
 export class RecurringTicketsStateService {
   create: CreateRecurringTickets = new CreateRecurringTickets();
   public client: any;
-  public tecketForCreate: Ticket = new Ticket();
   public onEditMode: EventEmitter<any> = new EventEmitter();
   public onCopyCreate: EventEmitter<any> = new EventEmitter();
   public showTicketAddRecurringAside: EventEmitter<any> = new EventEmitter();
@@ -53,7 +52,6 @@ export class RecurringTicketsStateService {
 */
   public setClient(client) {
     this.client = client.item;
-    this.tecketForCreate.client = client;
   }
 
   /**

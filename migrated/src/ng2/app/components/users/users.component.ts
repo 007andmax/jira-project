@@ -38,9 +38,10 @@ export class UsersComponent implements OnInit {
     private websocketService:WebsocketService) { }
 
   ngOnInit() {
+    window.scrollTo(0,0);
     let getOnShowArchived = this.usersStateService.getOnShowArchived().subscribe(data => {
       this.showArchivedUsers = data;
-
+      window.scrollTo(0,0);
       this.filter.setClientType(null);
       this.filter.clearFilter();
       this.setDefaultScoll();
@@ -49,6 +50,7 @@ export class UsersComponent implements OnInit {
     this.userListService.addSubscription(getOnShowArchived);
 
     let geLefttFilter = this.usersStateService.getOnFilter().subscribe((data) => {
+      window.scrollTo(0,0);
       this.filter.setLeftFilters(data.clientType, data.company, data.clientIndustry, data.title);
       this.setDefaultScoll();
       this.onScroll();

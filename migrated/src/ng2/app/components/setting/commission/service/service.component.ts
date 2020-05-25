@@ -54,11 +54,6 @@ export class ServiceComponent implements OnInit {
             ele.commissionRate = ele.commissionRate
               ? ele.commissionRate.toFixed(2)
               : ele.commissionRate;
-            // if (ele.company.id === this.companyId) {
-            //   console.log('same');
-            // } else {
-            //   console.log('unsame');
-            // }
           }
         });
       },

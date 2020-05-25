@@ -1,4 +1,12 @@
 .date-picker {
     overflow: visible;
   }
-  
+  .date-picker-container
+  {
+    height: min-content;
+  }
+  .icon__assign-date {
+    width: 20px;
+    height: 20px;
+    // background-color: red;
+  }

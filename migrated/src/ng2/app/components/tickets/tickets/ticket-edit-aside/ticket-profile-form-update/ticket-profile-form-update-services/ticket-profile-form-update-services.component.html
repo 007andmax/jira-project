@@ -1,0 +1,46 @@
+<div class="cps-block__service-block" *ngIf="areTicketsPresented && !areTicketsTerminated || !areTicketsPresented">
+  <ng-template class="assigned-ticket-user" ngFor let-service [ngForOf]="addedServiceList" let-i="index" [ngForTrackBy]="trackByIndex">
+
+    <div class="service-item">
+      <div class="service-item__first-line d-f">
+        <app-services-list class="service-item__input device" [type]="'TICKET'" [editItem]="service.item"  [itemList]="servicesList"
+        (selectedServicesItem)="selectService($event)"></app-services-list>
+        <app-ticket-profile-updates-service-timepicker  *ngIf="currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'" (onChangeStart)="onChangeStartTimePickerService($event,i)" (onChangeEnd)="onChangeEndTimePickerSerice($event,i)" #editTimePicker [quantity]="service.quantity" [editMode]="true" [start]="service.durationStart" [end]="service.durationEnd" ></app-ticket-profile-updates-service-timepicker>
+        <app-ticket-profile-updates-service-duration  (onChange)="onChangeDurationService($event,i)" [editMode]="true" [hour]="getHours(service)" [minute]="getMinutes(service)" *ngIf="currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER'"></app-ticket-profile-updates-service-duration>
+        <app-date-picker   [editMode]="true" [editDate]="service.getDateTimeWithTimeOffset(companiesStateService.getCurrentCompany())" [useMinDate]="false"  (onChange)="onChangeDatePickerService($event,i)"></app-date-picker>
+
+        <button class="service-item__btn-del" (click)="removeService(i)">
+          <span class="icon__close btn-icon"></span>
+        </button>
+      </div>
+      <div>
+        <div class="editable-description editable-chat">
+          <textarea  name="cps-chat" class="cps-block__content-textarea" appTextArea  [minHeight]="48"  cols="5" rows="1"   placeholder="Write ticket conversation here…"
+          (input)="onChangeDescriptionService($event,i)" (onPast)="onPastDescriptionService($event,i)"></textarea>
+          </div>
+
+      </div>
+    </div>
+    </ng-template>
+  <div class="service-item">
+    <div class="service-item__first-line d-f">
+      <app-services-list class="service-item__input device" #serviceDP   [itemList]="servicesList"
+      (selectedServicesItem)="selectService($event)"></app-services-list>
+      <app-ticket-profile-updates-service-timepicker #timePicker  (onChangeStart)="onChangeStartTimePicker($event)" (onChangeEnd)="onChangeEndTimePicker($event)" *ngIf="currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'"></app-ticket-profile-updates-service-timepicker>
+       <app-ticket-profile-updates-service-duration #durationPicker (onChange)="onChangeDuration($event)" *ngIf="currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER'"></app-ticket-profile-updates-service-duration>
+      <app-date-picker #datePicker  [editMode]="true" [editDate]="currentService.getDateTimeWithTimeOffset(companiesStateService.getCurrentCompany())" [useMinDate]="false" (onChange)="onChangeDatePicker($event)"></app-date-picker>
+
+      <button class="service-item__btn-add" (click)="addService()">
+        <span class="icon__plus-white btn-icon"></span>
+      </button>
+    </div>
+    <div>
+      <div class="editable-description editable-chat">
+        <textarea  name="cps-chat" class="cps-block__content-textarea" appTextArea  [minHeight]="48"  cols="5" rows="1" id="service-description" placeholder="Write ticket conversation here…"
+        (input)="onChangeDescription($event)" (onPast)="onPastDescription($event)"></textarea>
+        </div>
+
+    </div>
+  </div>
+</div>
+<p *ngIf="areTicketsPresented && areTicketsTerminated">Your contacts are expired/terminated. Please recreate them in order to use contract's services or remove them in order to use default services</p>

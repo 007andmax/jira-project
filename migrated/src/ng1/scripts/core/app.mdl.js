@@ -155,6 +155,10 @@
           url: '/ng2/companies',
           template: '<companies-component></companies-component>'
         }))
+        .state('new-tickets', waitForServices({
+          url: '/ng2/tickets',
+          template: '<tickets-component></tickets-component>'
+        }))
         .state('company-products', waitForServices({
           url: '/ng2/company-products',
           template: '<company-products></company-products>'
@@ -806,7 +810,7 @@
     }
 
 
-    return '/tickets/user';
+    return '/ng2/tickets';
   }
 
 }());

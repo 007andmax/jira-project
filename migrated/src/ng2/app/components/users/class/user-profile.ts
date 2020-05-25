@@ -25,7 +25,7 @@ export class UserProfile {
     }
     public onEdit(user: User) {
         this.role = user.role;
-        if (user.phoneNumbers.length === 0)
+        if (user.phoneNumbers && user.phoneNumbers.length === 0 || !user.phoneNumbers)
         {
             this.phoneNumbers = [new PhoneNumber('OFFICE')];
         } else {

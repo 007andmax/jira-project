@@ -55,7 +55,7 @@
         </div>
         <div class="col-md-3">
           <p>Cost</p>
-          <input type="text" number [money]="true"  (blur)="validate.checkPriceCost(inventory.sale,inventory.cost)" [value]="getParseMoney(inventory.cost)" (input)="onChangeCost($event)"  placeholder="Enter Cost">
+          <input type="text" number  [money]="true"  (blur)="validate.checkPriceCost(inventory.sale,inventory.cost)" [(ngModel)]="cost"   (input)="onChangeCost($event)"  placeholder="Enter Cost">
         </div>
 
         <div class="col-md-3">
@@ -63,7 +63,7 @@
             Price is required
           </mat-error>
           <p>Price</p>
-          <input type="text" number [money]="true"  [value]="getParseMoney(inventory.sale)" (input)="onChangeSale($event)" (blur)="validate.checkPriceCost(inventory.sale,inventory.cost)" (input)="validate.resetSale()"  placeholder="Enter Price">
+          <input type="text" number [money]="true" [(ngModel)]="sale"    (input)="onChangeSale($event);validate.resetSale()" (blur)="validate.checkPriceCost(inventory.sale,inventory.cost)" placeholder="Enter Price">
         </div>
 
         <div class="col-md-12">

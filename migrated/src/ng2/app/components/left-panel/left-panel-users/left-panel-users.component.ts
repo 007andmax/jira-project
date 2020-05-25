@@ -25,9 +25,12 @@ export class LeftPanelUsersComponent implements OnInit, OnDestroy {
   selectedCompany: string = null;
 //  clientIndustry: string = '';
   companies = [];
-  constructor(private usersStateService: UsersStateService, private leftPanelUsersService: LeftPanelUsersService,
+  constructor(private usersStateService: UsersStateService, 
+    private leftPanelUsersService: LeftPanelUsersService,
     public cd: ChangeDetectorRef,
-    private companiesState: CompaniesStateService, private leftPanelService: LeftPanelService, private companiesService: CompaniesService) { }
+    private companiesState: CompaniesStateService, 
+    private leftPanelService: LeftPanelService, 
+    private companiesService: CompaniesService) { }
 
   ngOnInit() {
     if (this.usersStateService.getAllUsers().length > 0) this.getUsersTitle(this.usersStateService.getAllUsers());

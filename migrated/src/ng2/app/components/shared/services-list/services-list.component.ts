@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ElementRef, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
-import { TYPE_QUOTE } from 'src/ng2/app/const/services';
+import { TYPE_QUOTE, TYPE_TICKET } from 'src/ng2/app/const/services';
 
 /**
  *  Service list component
@@ -17,7 +17,7 @@ export class ServicesListComponent implements OnInit {
   @Input() itemList: any;
   @Output() serviceList: any;
   @Output() selectedServicesItem = new EventEmitter<any>();
-  @Input() type:string;
+  @Input() type: string;
   public client: any;
   public isFormValid = false;
   /**
@@ -25,15 +25,16 @@ export class ServicesListComponent implements OnInit {
    * @param {ElementRef} elRef Service to work with template
    */
   constructor(private elRef: ElementRef,
-    public cd: ChangeDetectorRef,) { }
+    public cd: ChangeDetectorRef, ) { }
 
   /**
    * Initializes service list. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-      
+
     if (this.editItem && this.editItem.duration) this.elRef.nativeElement.querySelector('#dropdownServices').value = this.getNameOrDescription(this.editItem);
-  if (this.editItem && this.type === TYPE_QUOTE) this.elRef.nativeElement.querySelector('#dropdownServices').value = this.getNameOrDescription(this.editItem);
+    if (this.editItem && this.type === TYPE_QUOTE) this.elRef.nativeElement.querySelector('#dropdownServices').value = this.getNameOrDescription(this.editItem);
+    if (this.editItem && this.type === TYPE_TICKET) this.elRef.nativeElement.querySelector('#dropdownServices').value = this.getNameOrDescription(this.editItem);
   }
 
 
@@ -42,8 +43,8 @@ export class ServicesListComponent implements OnInit {
   * Get name serivce / produuct
   *  @param item - serivce / produuct
   */
-   getNameOrDescription(item) {
-    
+  getNameOrDescription(item) {
+
     if (item && item.name) return item.name;
     return '';
   }
@@ -53,14 +54,17 @@ export class ServicesListComponent implements OnInit {
    * @param item - selected services item
    */
   public selectServicesItem(item) {
-     
+
     this.elRef.nativeElement.querySelector('#dropdownServices').value = this.getNameOrDescription(item);
-    
+
     this.products_dropDown.close();
     this.selectedServicesItem.next(item)
     this.cd.detectChanges();
   }
 
-
+  public clear() {
+    this.elRef.nativeElement.querySelector('#dropdownServices').value = '';
+    this.cd.detectChanges();
+  }
 
 }

@@ -1,0 +1,42 @@
+<div class="ticket-edit-user-tags">
+  <mat-form-field ngbDropdown [autoClose]="'outside'" [placement]="placement">
+    <mat-chip-list #chipList aria-label="Fruit selection">
+      <mat-chip ngbDropdownAnchor
+        class="selected-tag-user"
+        *ngFor="let user of selectedUsers; let i = index"
+        [selectable]="selectable"
+        [removable]="removable"
+        (removed)="remove(i)">
+        <div class="assigne-user-item">
+          <div class="assigne-user-avatar" [textContent]="getAssignedUserNameForAvatar(user)"
+          [ngStyle]="{'background': getStyleAvatar(user),'background-size': 'cover'}"></div>
+          <div [textContent]="getUserName(user)"></div>
+         
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </div>
+       
+      </mat-chip>
+      <input
+        #userInput
+        class="pointer"
+        [formControl]="userCtrl"
+       
+        [matChipInputFor]="chipList"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        (input)="onSearchUser($event)"
+        id="dropdown" ngbDropdownToggle
+        >
+    </mat-chip-list>
+   
+    <div class="autocomplete-user-tags" ngbDropdownMenu aria-labelledby="dropdown" >
+       <mat-option class="ai-c" *ngFor="let user of users" [value]="user" (click)="selected(user)">
+        <div class="assigne-user-item">
+        <div class="assigne-user-avatar" [textContent]="getAssignedUserNameForAvatar(user)"
+        [ngStyle]="{'background': getStyleAvatar(user),'background-size': 'cover'}"></div>
+        <div class="assigne-user-name" [textContent]="getUserName(user)"></div>
+        <span class="assigne-user-email" [textContent]="user.primaryEmail"></span>
+      </div>
+      </mat-option>
+  </div>
+  </mat-form-field>
+</div>

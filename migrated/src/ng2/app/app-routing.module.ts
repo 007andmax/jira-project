@@ -28,6 +28,7 @@ import { ReportsComponent } from './components/reports/reports.component';
 import { ItemReportComponent } from './components/reports/item-report/item-report.component';
 import { InventoryComponent } from './components/inventory/inventory.component';
 import { CompanyProductsComponent } from './components/companies/company-products/company-products.component';
+import { TicketsComponent } from './components/tickets/tickets/tickets.component';
 
 const routes: Routes = [
   {
@@ -162,7 +163,11 @@ const routes: Routes = [
     path: 'ng2/company-products',
     component: CompanyProductsComponent,
     pathMatch: 'full'
-  }
+  },
+  {
+    path: 'ng2/tickets',
+    component: TicketsComponent,
+  },
 ];
 
 /**

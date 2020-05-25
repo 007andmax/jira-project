@@ -1,7 +1,11 @@
 <div class="" ngbDropdown [autoClose]="'outside'" >
-  <div class="device-user pointer" id="dropdownTehuser" style="margin-bottom: 10px;width: 109px;" ngbDropdownToggle>
+  <div class="device-user pointer" *ngIf="type === 'RECURRING_TICEKTS'" id="dropdownTehuser" style="margin-bottom: 10px;width: 109px;" ngbDropdownToggle>
     Assigned Users
   </div>
+  <div   class="tech__user-icon icon__assign-user" *ngIf="type === 'TICEKTS' && selectedUsers.length === 0"  id="dropdownTehuser"  ngbDropdownToggle></div>
+  <div class="ticket-updates__photo-people" *ngIf="type === 'TICEKTS' && selectedUsers.length === 1" [textContent]="ticketsListService.getAssignedUserNameForAvatar(selectedUsers[0])"
+  [ngStyle]="{'background': ticketsListService.getStyleAvatar(selectedUsers[0]) + ' 0% 0% / cover'}" id="dropdownTehuser"  ngbDropdownToggle placement="top" [ngbTooltip]="ticketsListService.getUserName(selectedUsers[0])"></div>
+
   <div class="teh-user-body" ngbDropdownMenu aria-labelledby="dropdownTehuser">
     <div class="select-wrapper dropdown-assign-ticket fixed-assign">
 
@@ -28,8 +32,8 @@
                       [ngClass]="(user.selected) ? 'active' : ''"><a href="javascript:void(0)" [id]="user.id"
                         class="dropdown-link">
                         <div class="default-user-avatar avatar-background-color-odd ng-scope" *ngIf="!user.avatar">
-                          <span [textContent]="(user.firstName.length > 0) ? user.firstName[0].toUpperCase() : ''"></span>
-                          <span [textContent]="(user.lastName.length > 0) ? user.lastName[0].toUpperCase() : ''"></span>
+                          <span [textContent]="(user.firstName) ? user.firstName[0].toUpperCase() : ''"></span>
+                          <span [textContent]="(user.lastName) ? user.lastName[0].toUpperCase() : ''"></span>
                         </div>
                         <div class="default-user-avatar avatar-background-color-odd ng-scope" *ngIf="user.avatar">
                           <img ng-if="user.avatar" class="img-circle avatar-26" style="margin: 0;"

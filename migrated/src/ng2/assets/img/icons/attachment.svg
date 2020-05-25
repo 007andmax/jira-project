@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+    <g fill="none" fill-rule="evenodd" stroke="#4F5F79" stroke-linejoin="round" stroke-width="1.5">
+        <path stroke-linecap="round" d="M11 5c0-2.761-2.239-5-5-5S1 2.239 1 5M11 5v5M1 10V5" transform="matrix(-1 0 0 1 14 2)"/>
+        <path d="M8 5c0-1.105-.895-2-2-2s-2 .895-2 2" transform="matrix(-1 0 0 1 14 2)"/>
+        <path stroke-linecap="round" d="M8 5v5M4 9V5M1 9.5C1 11.433 2.567 13 4.5 13S8 11.433 8 9.5" transform="matrix(-1 0 0 1 14 2)"/>
+    </g>
+</svg>

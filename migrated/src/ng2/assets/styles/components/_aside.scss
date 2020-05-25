@@ -1,0 +1,38 @@
+.qt-aside {
+  .ng-sidebar {
+    width: 592px;
+    height: calc(100vh - 78px);
+
+  }
+
+  &__header {
+    background-color: #E7F5FE;
+    padding: 26px 24px 26px 39px;
+    display: flex;
+  }
+
+  &__close-modal {
+    width: 24px;
+    height: 24px;
+    background-size: contain;
+    cursor: pointer;
+  }
+
+  &__title {
+    font-size: 20px;
+    font-weight: 500;
+    color: #364656;
+    font-weight: 600;
+  }
+
+  &__body {
+    padding: 33px 40px 40px 40px;
+    height: calc(100% - 156px);
+    overflow-y: auto;
+  }
+
+  &__buttons {
+    padding: 20px 40px;
+    display: flex;
+  }
+}

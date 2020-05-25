@@ -24,12 +24,14 @@
       }
     }
     .user-item {
-      &:hover,
       &.active {
         background: #16a4fa;
         p {
           color: #fff;
         }
+      }
+      &:hover {
+        background-color: #e7ecf2;
       }
     }
   }
@@ -37,3 +39,17 @@
 .teh-user-body {
   overflow: visible;
 }
+ .tech__user-icon{
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+ }
+ .ticket-updates__photo-people {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+ }

@@ -15,14 +15,14 @@ export class ProductListComponent implements OnInit {
   @Input() itemList: any;
   @Input() editItem: any;
   public isFormValid = false;
-  search:string = '';
-  resetSearch:boolean = false;
+  search: string = '';
+  resetSearch: boolean = false;
   selectedItem = false;
   /**
    * Creates an instance of the ProductListComponent with the injected services
    * @param {ElementRef} elRef Service to work with template
    */
-  constructor(private elRef: ElementRef,  public cd: ChangeDetectorRef,) { }
+  constructor(private elRef: ElementRef, public cd: ChangeDetectorRef, ) { }
 
   /**
    * Initializes product list. See [ngOnInit]{@see OnInit#ngOnInit}
@@ -32,13 +32,13 @@ export class ProductListComponent implements OnInit {
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
     this.itemList.forEach(item => item.products.sort((a, b) => (a.description.toLowerCase() > b.description.toLowerCase()) ?
       1 : ((b.description.toLowerCase() > a.description.toLowerCase()) ? -1 : 0)));
-     
-      if (this.editItem) {
-        let value = this.getNameOrDescription(this.editItem);
-        this.elRef.nativeElement.querySelector('#dropdownProducts').value = value;
-        if (value !== '') this.selectedItem = true;
 
-      }
+    if (this.editItem) {
+      let value = this.getNameOrDescription(this.editItem);
+      this.elRef.nativeElement.querySelector('#dropdownProducts').value = value;
+      if (value !== '') this.selectedItem = true;
+
+    }
 
   }
 
@@ -62,15 +62,19 @@ export class ProductListComponent implements OnInit {
     this.selectedProductItem.next(productItem);
     this.selectedItem = true;
   }
-
-  onSearch (event) {
+  togglePanel(data, event) {
+    event.target.closest('.card').classList.toggle('opened-card');
+    if (!data) {
+    }
+  }
+  onSearch(event) {
     this.search = event.target.value;
-   
+
     this.resetSearch = false;
   }
   onCloseProducts(open) {
     this.resetSearch = true;
-   // this.cd.detectChanges();
+    // this.cd.detectChanges();
   }
   clear() {
     this.elRef.nativeElement.querySelector('#dropdownProducts').value = '';

@@ -1,0 +1,19 @@
+<div class="table-container">
+<table class="qt-table-modern ticket-table">
+  <tbody  infiniteScroll
+  [infiniteScrollDistance]="2"
+  [infiniteScrollThrottle]="15"
+  [infiniteScrollDisabled]="infiniteScrollDisabled"
+  (scrolled)="onScroll()">
+
+  <ng-template ngFor let-ticket
+              [ngForOf]="tickets"
+              [ngForTrackBy]="trackById">
+   <app-tickets-table-item (click)="editTicket(ticket.id)" [listColors]="listColors" [statusColor]="statusColor"  [ticket]="ticket"></app-tickets-table-item>
+ </ng-template>
+  </tbody>
+</table>
+  <div class="loading" *ngIf="showPreloader"></div>
+</div>
+
+

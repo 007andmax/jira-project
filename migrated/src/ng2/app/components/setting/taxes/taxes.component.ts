@@ -98,7 +98,7 @@ export class TaxesSettingsComponent implements OnInit, OnDestroy {
   }
 
   defaultTax(tax: any) {
-    console.log(tax);
+    
 
     this.taxForm.patchValue({
       name: tax.name,
@@ -106,7 +106,7 @@ export class TaxesSettingsComponent implements OnInit, OnDestroy {
       id: tax.id,
       isDefault: !tax.isDefault
     });
-    console.log(this.taxForm.value);
+    
     this.loading = true;$(".loading").css("display", "block");
     this.taxesService
       .editTaxes(this.taxForm.value)

@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, OnDestroy, ElementRef } from '@angular/core';
 import { merge, Observable, Subject, Subscription } from "rxjs";
 import { debounceTime, distinctUntilChanged, filter, map } from "rxjs/operators";
 import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
+var $ = require("jquery");
 
 @Component({
   selector: 'app-select-search',
@@ -12,19 +13,24 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
 
 
   @Input() field: string = null;
+  @Input() change: boolean = true;
   @Input() add: boolean = false;
   @Input() class: string = null;
   @Input() editItem: any = null;
   @Input() maxlength: number = null;
   @Input() placeholder: string = '';
   @Input() list = [];
+  @Input() id: string = '';
   @ViewChild('instance') instance: NgbTypeahead;
   @Output() onSelectedItem = new EventEmitter<any>();
   @Output() onAddItem = new EventEmitter<any>();
+  @Output() onOpenDropDown = new EventEmitter<any>();
+  @Output() onClosedDropDown = new EventEmitter<any>();
   @Input() valid: boolean = true;
   @Input() filter: boolean = false;
   public selectedItem;
   public isAdd: boolean = false;
+  private isOpen:boolean = false;
   focus$ = new Subject<string>();
   click$ = new Subject<string>();
   sub = new Subscription();
@@ -35,7 +41,7 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
    * @param {SelectClientCompanyStateService} companiesState to work with companiies state
    */
   constructor(
-
+   
   ) { }
 
   /**
@@ -46,6 +52,14 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
   }
   ngDoCheck() {
     if (this.editItem) this.selectedItem = (this.field) ? this.editItem : this.editItem;
+    if (this.instance.isPopupOpen() && !this.isOpen) {
+      this.isOpen = true;
+       this.onOpenDropDown.emit(null);
+    }
+    if (!this.instance.isPopupOpen() && this.isOpen) {
+      this.isOpen = false; 
+      this.onClosedDropDown.emit(null);
+    }   
   }
   onCheckAdd(event) {
     let index = this.list.findIndex(item => (this.field) ? item[this.field] === this.selectedItem : item === this.selectedItem);
@@ -56,6 +70,7 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
     }
   }
   onChange(event) {
+    if (!this.change) return;
     let index = this.list.findIndex(item => (this.field) ? item[this.field] === this.selectedItem : item === this.selectedItem);
     if (index === -1) this.onSelectedItem.emit(this.selectedItem);
   }
@@ -80,9 +95,14 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
    * @param companyId - id of company
    */
   public selectItem(item) {
+    
     this.isAdd = false;
     this.onSelectedItem.emit(item.item);
 
+  }
+
+  public isDropDownOpen() {
+  
   }
 
   /**
@@ -97,6 +117,7 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
    * clear client input
    */
   public clearClient() {
+    
     this.isAdd = false;
     this.onSelectedItem.emit(null);
     this.selectedItem = null;

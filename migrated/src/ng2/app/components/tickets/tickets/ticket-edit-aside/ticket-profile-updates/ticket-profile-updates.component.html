@@ -1,0 +1,18 @@
+<div class="ticket-updates">
+  <div class="ticket-updates__title"><span class="ticket-updates__count" [textContent]="getCountUpdates()"></span> Ticket
+    Updates</div>
+
+  <div class="ticket-updates__ticket">
+    <ng-template ngFor let-update [ngForOf]="updates" let-i="index" [ngForTrackBy]="trackById">
+      <app-ticket-profile-updates-note class="ticket-updates__ticket-item" (onRemove)="removeUpdate($event)" *ngIf="update.type === 'NOTE'" [idTicket]="ticketProfile.id" [update]="update">
+      </app-ticket-profile-updates-note>
+      <app-ticket-profile-updates-product class="ticket-updates__ticket-item" *ngIf="update.type === 'PRODUCT'" [update]="update">
+      </app-ticket-profile-updates-product>
+      <app-ticket-profile-updates-service class="ticket-updates__ticket-item" *ngIf="update.type === 'SERVICE'" [update]="update">
+      </app-ticket-profile-updates-service>
+    </ng-template>
+  </div>
+  <div *ngIf="showLoadMoreUpdates && ticketProfile.unloadedUpdates > 0" class="button-loader" (click)="fetchUpdates()">
+    Load More Updates <span *ngIf="showPreloader" class="loading"></span>
+  </div>
+</div>

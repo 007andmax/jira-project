@@ -269,14 +269,14 @@ export class ProfileComponent implements OnInit {
           this.uniqueEmail = res.value;
         },
         error => {
-          console.log(error);
+         
         }
       );
   }
 
   phonehandle(event) {
     const valid = this.f.primaryPhone.valid;
-    console.log(event);
+     
 
     if (valid === true && event.keyCode === 32) {
       this.suffix = ',1234';
@@ -310,7 +310,7 @@ export class ProfileComponent implements OnInit {
           }
         },
         error => {
-          console.log(error);
+         
         }
       );
     }
@@ -384,7 +384,7 @@ export class ProfileComponent implements OnInit {
               },
               error => {
                 this.loading = false;$(".loading").css("display", "none");
-                console.log(error);
+              
               }
             );
           }

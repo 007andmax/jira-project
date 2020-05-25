@@ -5,7 +5,7 @@
          placeholder="Service" id="dropdownServices" ngbDropdownToggle>
   <i class="icn-sm report-caret-icon"></i>
 
-  <div class="dropdown-menu show" ngbDropdownMenu aria-labelledby="dropdownServices">
+  <div class="dropdown-menu services-container" ngbDropdownMenu aria-labelledby="dropdownServices">
     <button class="dropdown-item"
             *ngFor="let item of itemList"
             (click)="selectServicesItem(item)"

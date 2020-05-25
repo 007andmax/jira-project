@@ -1,0 +1,116 @@
+.left-panel-ng2 {
+  display: block;
+  height: 100vh;
+  position: fixed;
+  width: 240px;
+  left: 76px;
+  top: 0;
+  z-index: 992;
+  background: #354053;
+  overflow-x: scroll;
+  transition: left 300ms;
+
+  &__header {
+    font-size: 12px;
+    font-family: 'Graphik Medium', sans-serif;
+    font-weight: 500;
+  }
+  &::-webkit-scrollbar-thumb,
+  &::-webkit-scrollbar{
+    display: none;
+    width: 0;
+  }
+  @media (max-width: 414px) {
+    width: 100vw;
+    left: 0;
+    transition: all .3s;
+    top: 100%;
+    &.show {
+      top: 0;
+    }
+  }
+}
+
+.left-panel-ng2 {
+  @media (max-width: 414px) {
+
+    .center-category {
+      padding: 0 0 50px !important;
+    }
+
+    .left-panel-filter {
+      width: 100%;
+      padding: 20px 20px 0;
+      margin: 0;
+    }
+
+    .mob-version {
+      display: block;
+    }
+
+    .desktop-version {
+      display: none;
+    }
+
+  }
+}
+
+.mob-version {
+  display: none;
+}
+
+.desktop-version {
+  display: block;
+}
+
+.header-filter-icon {
+  width: 24px;
+  height: 24px;
+  background-size: contain;
+  cursor: pointer;
+}
+
+.ticket-statuses {
+  padding: 0px 24px;
+  font-size: 12px;
+}
+
+.types-header {
+  padding: 0 24px;
+  margin-bottom: 16px
+}
+
+.ticket-status-circle {
+  width: 12px;
+  height: 12px;
+  border: 2px solid;
+  border-radius: 50%;
+  &.--red {
+    border-color: #ff4940;
+  }
+  &.--green {
+    border-color: #2ec866;
+  }
+  &.--blue {
+    border-color: #16a4fa;
+  }
+  &.--yellow {
+    border-color: #ffb937;
+  }
+}
+
+.ticket-status-color {
+  margin-bottom: 12px;
+  cursor: pointer
+}
+
+/deep/ .left-panel-closed {
+  .left-panel-ng2 {
+    left: -164px;
+  }
+}
+
+// hide old left panel
+/deep/ .left-panel-full {
+   /* display: none !important;*/
+}

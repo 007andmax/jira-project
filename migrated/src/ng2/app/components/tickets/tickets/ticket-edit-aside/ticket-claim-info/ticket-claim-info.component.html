@@ -1,0 +1,35 @@
+<div class="ticket-edit-aside__claimed-info d-f at-c jc-c"  *ngIf="ticketsPermissionsService.isActionVisible('user_tip', ticketProfile, 'MY_TICKET',null)">
+  <div class="ticket-edit-aside__claimed-info-lines"></div>
+  <div class="ticket-edit-aside__claimed-date"><strong>You </strong>Claimed this ticket on {{ ticketProfile.assignedAt | date: 'EEE, d MMM yyyy, h:mm a' }}</div>
+</div>
+<div class="ticket-edit-aside__claimed-info d-f at-c jc-c"  *ngIf="ticketsPermissionsService.isActionVisible('user_tip', ticketProfile, 'ASSIGNED_TO_ME',null)">
+  <div class="ticket-edit-aside__claimed-info-lines"></div>
+  <div class="ticket-edit-aside__claimed-date"><strong>{{ getUserName(ticketProfile.assignPerformer)}}</strong>
+    assigned this ticket to <strong>You</strong> on
+    <strong>{{ ticketProfile.assignedAt | date: 'EEE, d MMM yyyy, h:mm a' }}</strong></div>
+</div>
+ 
+<div class="ticket-edit-aside__claimed-info d-f at-c jc-c"  *ngIf="ticketsPermissionsService.isActionVisible('user_tip', ticketProfile, 'USER_ASSIGNED_USER',null)">
+  <div class="ticket-edit-aside__claimed-info-lines"></div>
+  <div class="ticket-edit-aside__claimed-date"><strong>{{ getUserName(ticketProfile.assignPerformer) }}</strong>
+    assigned this ticket to
+    <strong>{{ getUserName(ticketProfile.assignedUser)  + " " + getMultiAssignedUsers() }}</strong> on
+    <strong>{{ ticketProfile.assignedAt | date: 'EEE, d MMM yyyy, h:mm a' }}</strong>
+  </div>
+</div>
+<div class="ticket-edit-aside__claimed-info d-f at-c jc-c"  *ngIf="ticketsPermissionsService.isActionVisible('user_tip', ticketProfile, 'I_ASSIGNED_TO_USER',null)">
+  <div class="ticket-edit-aside__claimed-info-lines"></div>
+  <div class="ticket-edit-aside__claimed-date">
+    <strong>You</strong> assigned this ticket to
+    <strong>{{ getUserName(ticketProfile.assignedUser)  + " " + getMultiAssignedUsers() }}</strong> on
+    <strong>{{ ticketProfile.assignedAt | date: 'EEE, d MMM yyyy, h:mm a' }}</strong>
+  </div>
+</div>
+ 
+<div class="ticket-edit-aside__claimed-info d-f at-c jc-c"  *ngIf="ticketsPermissionsService.isActionVisible('user_tip', ticketProfile, 'USER_CLAIMED',null)">
+  <div class="ticket-edit-aside__claimed-info-lines"></div>
+  <div class="ticket-edit-aside__claimed-date">
+    <strong>{{ getUserName(ticketProfile.assignedUser)  + " " + getMultiAssignedUsers() }}</strong>
+      Claimed this ticket on {{ ticketProfile.assignedAt | date: 'EEE, d MMM yyyy, h:mm a' }}
+  </div>
+</div>

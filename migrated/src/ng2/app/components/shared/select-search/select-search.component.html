@@ -1,10 +1,10 @@
 <div [ngClass]="class" >
   <input
-    id="typeahead-focus1"
+    [id]="id"
     [placeholder]="placeholder"
     type="text"
     [(ngModel)]="selectedItem"
-    class="pointer"
+    class="pointer typeahead-focus1"
     [ngClass]="(!valid) ? 'no-valid' : ''"
     [inputFormatter]="formatter"
     [resultFormatter]="formatter"
@@ -17,6 +17,7 @@
     autocomplete="new-password"
     [attr.maxlength]="maxlength"
     (blur)="onChange($event)"
+    (isPopupOpen)="isDropDownOpen()"
   />
   <span *ngIf="list">
     <i *ngIf="selectedItem"

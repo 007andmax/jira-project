@@ -99,7 +99,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       },
       error => {
         this.loading = false;$(".loading").css("display", "none");
-        console.log(error);
+        
       }
     );
   }
@@ -116,7 +116,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       },
       error => {
         this.loading = false;$(".loading").css("display", "none");
-        console.log(error);
+     
       }
     );
   }

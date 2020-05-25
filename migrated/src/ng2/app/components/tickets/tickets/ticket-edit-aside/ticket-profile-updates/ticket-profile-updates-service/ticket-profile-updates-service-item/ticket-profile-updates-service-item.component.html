@@ -1,0 +1,2 @@
+<app-ticket-profile-updates-service-info [update]="update" *ngIf="!editMode" (onEdit)="editMode = true" [service]="service"></app-ticket-profile-updates-service-info>
+<app-ticket-profile-updates-service-edit [update]="update" *ngIf="editMode" (onEdit)="editMode = false"  [service]="service"></app-ticket-profile-updates-service-edit>

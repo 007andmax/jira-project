@@ -158,7 +158,7 @@ export class CompanyComponent implements OnInit {
       techUser = this.activeTechUsers.filter(client => {
         if (client.id === company.techLeadId) {
           if (client.firstName === "Edge") {
-            console.log(client);
+         
           }
           return client;
         }
@@ -192,7 +192,7 @@ export class CompanyComponent implements OnInit {
           this.loading = false;$(".loading").css("display", "none");
           if (custCompany) {
             this.clientsCompanies = custCompany;
-            console.log(custCompany[0]);
+          
           }
         },
         error => {
@@ -286,29 +286,6 @@ export class CompanyComponent implements OnInit {
           return s.charAt(0).toUpperCase();
         }
       })
-      .join("");
-
-    let techUser: any = [];
-    // if (this.activeTechUsers) {
-    //   techUser = this.activeTechUsers.filter(client => {
-    //     if (client.id === company.techLeadId) {
-    //       return client;
-    //     }
-    //   });
-
-    //   if(techUser.firstName === 'Lori'){
-    //     console.log(techUser)
-    //   }
-
-    //   return techUser.length > 0
-    //     ? [techUser[0].firstName, techUser[0].lastName]
-    //         .map(function(s) {
-    //           if (s) {
-    //             return s.charAt(0).toUpperCase();
-    //           }
-    //         })
-    //         .join("")
-    //     : null;
-    // }
+      .join(""); 
   }
 }

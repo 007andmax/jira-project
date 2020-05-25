@@ -1,15 +1,17 @@
-import { Directive, HostListener, ElementRef, Input } from '@angular/core';
+import { Directive, HostListener, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 
 @Directive({
   selector: '[appClickOtside]'
 })
 export class ClickOtsideDirective {
-@Input() init:boolean = false;
+  @Input() init: boolean = false;
+  @Input() class: string = "";
+  @Output() onOutSide = new EventEmitter<any>();
   constructor(private eRef: ElementRef) { }
   @HostListener('document:click', ['$event'])
   clickout(event) {
-    if(!this.eRef.nativeElement.contains(event.target)) {
-     // this.text = "clicked inside";
-    } 
+    if (!this.init) return;
+    if ($(event.target).parents(this.class).length != 0) return;
+    this.onOutSide.emit(true);
   }
 }

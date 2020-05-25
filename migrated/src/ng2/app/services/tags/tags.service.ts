@@ -18,7 +18,15 @@ export class TagsService {
   constructor(
     private http: HttpClient
   ) {}
+  public geCompanytTags() {
+    return this.http.get(this.apiUrl + `company/tags/getAll`).pipe(
+      tap((data:any) => data.data));
+  }
 
+  public setCompanyTags(word) {
+    return this.http.post(this.apiUrl + `company/tags`, {word : word}).pipe(
+      tap((data:any) => data.data));
+  }
 
   public getTags() {
     return this.http.get(this.apiUrl + `tags/getAll`).pipe(

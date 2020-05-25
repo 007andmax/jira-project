@@ -1,0 +1,78 @@
+<ng-sidebar-container>
+  <ng-sidebar [(opened)]="opened" [position]="'right'" class="ticket-edit-aside qt-aside d-f">
+    <div class="collapse-arrow icon__close" (click)="close()"></div>
+    <div class="ticket-edit-aside__ticket-info">
+      <div class="prelaoder-body" *ngIf="showPreloader">
+        <div class="loading" ></div>
+      </div>
+      <div class="qt-aside__body ticket-edit-aside__body">
+        <div class="ticket-edit-aside__header d-f jc-sb ai-c">
+          <div class="d-f">
+            <div class="ticket-edit-aside__header-avatar" [textContent]="ticketsListService.getAssignedUserNameForAvatar(ticketProfile.createdUser)"
+            [ngStyle]="{'background': ticketsListService.getStyleAvatar(ticketProfile.createdUser),'background-size': 'cover'}"></div>
+
+            <div>
+              <div class="d-f ai-c">
+                <div class="ticket-edit-aside__header-company" [textContent]="getCompantName() + ' - ' + getNameCreateUser()"></div>
+                <app-ticket-change-status [ticketProfile]="ticketProfile"></app-ticket-change-status>
+              </div>
+              <div class="ticket-edit-aside__header-info"><span [textContent]="parseTicketSource() + ', Agent - ' + ticketProfile.sourceName"></span> <span class="divider-point"></span> <span [textContent]="getCreatAt()"></span>
+                 </div>
+            </div>
+          </div>
+
+          <div class="d-f ai-c">
+            <div class="ticket-edit-aside__more-users-title" *ngIf="listAssignedUser.length > 3" [textContent]="'+' + (listAssignedUser.length- 3) + ' more'">
+
+            </div>
+            <div class="more-users-avatars">
+              <ng-template class="assigned-ticket-user" ngFor let-user [ngForOf]="listAssignedUser" let-i="index" [ngForTrackBy]="trackByIndex">
+                <div class="more-users-avatars__avatar" *ngIf="i < 3" [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"   [ngStyle]="{'background': ticketsListService.getStyleAvatar(user),'background-size': 'cover'}"></div>
+                </ng-template>
+              </div>
+
+            <div class="qt-modal-circle-button add-user toggle-select-user" (click)="onToggleAddAssignedUser()" placement="top" ngbTooltip="Assign"></div>
+          <app-ticket-profile-actions (onClaimTicket)="claimTicket()" [ticketProfile]="ticketProfile" placement="top" ngbTooltip="Settings"></app-ticket-profile-actions>
+           </div>
+        </div>
+        <app-ticket-edit-tags [selectedTag]="ticketProfile.tags" (tagsChange)="onChangeTags($event)" [hidden]="showAddAssignedUser"></app-ticket-edit-tags>
+        <app-add-assigned-user [placement]="'bottom-left'" [userList]="getUsersForAssign()" [selectedUsers]="listAssignedUser" (onSelected)="onSelectAssignedUser($event)" (hidden)="onToggleAddAssignedUser()" *ngIf="showAddAssignedUser"></app-add-assigned-user>
+        <div class="ticket-edit-aside__ticket-text">
+
+          <div class="ticket-edit-aside__ticket-subject" [hidden]="modeSubject === 'edit'"
+               (click)="toggleSubject()">
+               <span [ngClass]="getClassType()"></span>
+
+            <span [textContent]="'Tkt# ' + ticketProfile.number"></span>
+            <span> - </span>
+            <span [textContent]="ticketProfile.subject"></span>
+          </div>
+
+          <div class="ticket-edit-aside__ticket-subject-edit d-f ai-c"
+               [hidden]="modeSubject === 'view'" appClickOtside [init]="modeSubject === 'edit'" [class]="'.ticket-edit-aside__ticket-text'" (onOutSide)="toggleSubject()">
+            <span [textContent]="'Tkt# ' + ticketProfile.number"></span>
+            <input    [(ngModel)]="ticketProfile.subject"/>
+          </div>
+          <div class="ticket-edit-aside__ticket-description-edit"
+               appClickOtside [init]="opened" [class]="'.ticket-edit-aside__ticket-text'" (onOutSide)="toggleNote()"
+          >
+            <textarea id="ticket-note" placeholder="Enter description here"  ></textarea>
+          </div>
+        </div>
+       <app-ticket-claim-info [ticketProfile]="ticketProfile"></app-ticket-claim-info>
+      <app-ticket-message (onMoveToTrash)="moveToTrash($event)" (onRestoreFromSpam)="restoreFromSpam()" (onOpenTicket)="markAsOpen()" (onClaimTicket)="claimTicket()" [ticketProfile]="ticketProfile"></app-ticket-message>
+     <app-ticket-profile-attachments [attachments]="ticketProfile.attachments"></app-ticket-profile-attachments>
+      <app-ticket-profile-updates *ngIf="ticketProfile.updates && ticketProfile.updates.length > 0" (onFetchUpdates)="onFetchUpdates($event)" [ticketProfile]="ticketProfile" [updates]="ticketProfile.updates"></app-ticket-profile-updates>
+        <app-ticket-profile-form-update (onClosed)="close()" *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)" #updateForm [ticket]="ticketProfile" [lisUpdateUser]="lisUpdateUser"></app-ticket-profile-form-update>
+      </div>
+    </div>
+    <div class="ticket-edit-aside__menu">
+      <div class="aside-menu-item icon__panel-open"></div>
+      <div class="aside-menu-item icon__company-info"></div>
+      <div class="aside-menu-item icon__devices"></div>
+      <div class="aside-menu-item icon__users"></div>
+    </div>
+  </ng-sidebar>
+</ng-sidebar-container>
+
+

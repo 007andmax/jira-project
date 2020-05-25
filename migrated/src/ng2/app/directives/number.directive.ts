@@ -13,9 +13,10 @@ import { CommonService } from '../services/common/common.service';
 export class numberDirective {
     lastValue: number = 1;
     @Input("money") money: boolean = false;
+    
     constructor(private element: ElementRef, private commonService: CommonService) { }
     ngOnInit() {
-
+      
         this.element.nativeElement.addEventListener("input", (event) => {
             event.target.value = this.commonService.validateNumber(event.target.value);
         });

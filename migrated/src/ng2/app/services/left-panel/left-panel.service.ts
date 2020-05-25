@@ -19,7 +19,12 @@ export class LeftPanelService {
     private http: HttpClient,
    
   ) {}
-
+  public getTicketsStatus() {
+    return this.http.get(this.apiUrl + 'customStorage/user?customKey=ticketsTagsColors');
+  }
+  public getColors() {
+    return this.http.get(this.apiUrl + 'data/getColors');
+  }
   public getIndustryHistory() {
     return this.http.get(this.apiUrl + 'customStorage/user?customKey=companiesPageFilterByIndustryHistory');
   }
@@ -28,6 +33,15 @@ export class LeftPanelService {
   }
   public getCompaniesHistory() {
     return this.http.get(this.apiUrl + 'customStorage/user?customKey=userPageFilterByCompanyHistory');
+  }
+  public getCompaniesHistoryTickets() {
+    return this.http.get(this.apiUrl + 'customStorage/user?customKey=ticketPageFilterByCompanyHistory');
+  }
+  public getCompaniesHistoryTicketsUser() {
+    return this.http.get(this.apiUrl + 'customStorage/user?customKey=ticketPageFilterByClientUsersHistory');
+  }
+  public getCompaniesHistoryTechUsers() {
+    return this.http.get(this.apiUrl + 'customStorage/user?customKey=ticketPageFilterByTechUsersHistory');
   }
 
   public getSalesHistory() {

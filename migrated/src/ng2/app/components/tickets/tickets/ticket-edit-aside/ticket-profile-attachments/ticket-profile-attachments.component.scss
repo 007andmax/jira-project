@@ -1,0 +1,136 @@
+.attachment-component {
+  padding: 0 32px;
+  margin-bottom: 16px;
+
+  .attached-files-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .attachment-item {
+    display: flex;
+    margin-right: 8px;
+    height: 30px;
+    border-radius: 16px;
+    border: solid 1px #dfe3e8;
+    background-color: #ffffff;
+    padding: 5px 13px 5px 5px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-bottom: 8px;
+    font-size: 12px;
+
+    &__header {
+      border-bottom: 1px solid #dfe3e8;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    &__count-items {
+      text-transform: uppercase;
+      font-weight: 600;
+      font-size: 12px;
+  }
+
+    &__show-hide-btn {
+      width: 32px;
+      height: 32px;
+      border: solid 1px #dfe3e8;
+      background-color: #ffffff;
+      border-radius: 50%;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin-bottom: 8px;
+      background-image: url('../../../../../../assets/img/icons/download.svg');
+
+    }
+
+
+    &__type {
+      margin-right: 6px;
+      background: #2170bb;
+      border-radius: 11px;
+      font-size: 10px;
+      font-weight: 600;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 8px;
+      text-transform: uppercase;
+      height: 20px;
+    }
+
+    &__download {
+      position: absolute;
+      display: none;
+      right: 5px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-image: url('../../../../../../assets/img/icons/download-blue.svg');
+      background-size: 20px;
+      background-repeat: no-repeat;
+      cursor: pointer;
+      background-position: center;
+    }
+
+    &:hover {
+      border: solid 1px #16a4fa;
+      background-color: #e7f5fe;
+      .attachment-item {
+        &__download {
+          display: block;
+        }
+      }
+    }
+
+    &.text\/plain {
+      .attachment-item {
+        &__type {
+          background: #848484;
+        }
+      }
+    }
+    &.image\/png {
+      .attachment-item {
+        &__type {
+          background: #2bc7c6;
+        }
+      }
+    }
+    &.image\/jpg, &.image\/jpeg {
+      .attachment-item {
+        &__type {
+          background: #7c77cb;
+        }
+      }
+    }
+    &.application\/pdf {
+      .attachment-item {
+        &__type {
+          background: #ff5263;
+        }
+      }
+    }
+    &.archive\/zip {
+      .attachment-item {
+        &__type {
+          background: #ff5263;
+        }
+      }
+    }
+    &.image\/bmp {
+      .attachment-item {
+        &__type {
+          background: #7c77cb;
+        }
+      }
+    }
+  }
+
+}
+

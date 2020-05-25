@@ -13,6 +13,7 @@ import { UsersRealTimeService } from '../../states/users/users-real-time.service
 import { TaxesRealTimeService } from '../../states/taxes/taxes-real-time.service';
 import { GlNumberRealTimeService } from '../../states/gl-number/gl-number-real-time.service';
 import { InventoryRealTimeService } from '../../states/inventory/inventory-real-time.service';
+import { TicketsRealTimeService } from '../../states/tickets/tickets-real-time.service';
 
 /**
  * Websocket service to work with api
@@ -24,6 +25,7 @@ export class WebsocketService {
 
   private serverUrl = '/realtime';
   private stompClient;
+  privae
 
   /**
    * Users api service constructor
@@ -37,23 +39,24 @@ export class WebsocketService {
     private companiesService: CompaniesService,
     private quoteRealTimeService: QuoteRealTimeService,
     private recurringTicketsRealTimeService: RecurringTicketsRealTimeService,
-    private usersState:UsersStateService,
-    private companiesRealTimeService:CompaniesRealTimeService,
-    private usersRealTimeService:UsersRealTimeService,
+    private usersState: UsersStateService,
+    private companiesRealTimeService: CompaniesRealTimeService,
+    private usersRealTimeService: UsersRealTimeService,
     private passwordManagerService: PasswordManagerService,
-    private taxesRealTimeService:TaxesRealTimeService,
-    private glNumberRealTimeService:GlNumberRealTimeService,
-    private inventoryRealTimeService:InventoryRealTimeService
+    private taxesRealTimeService: TaxesRealTimeService,
+    private glNumberRealTimeService: GlNumberRealTimeService,
+    private inventoryRealTimeService: InventoryRealTimeService,
+    private ticketsRealTimeService: TicketsRealTimeService
 
-    
+
   ) {
   }
 
-  public initializeWebSocketConnection(){
-    let ws =  new SockJS(this.serverUrl);
+  public initializeWebSocketConnection() {
+    let ws = new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(ws);
     let that = this;
-    this.stompClient.connect({}, function() {
+    this.stompClient.connect({}, function () {
       that.subsribeToPermissions();
       that.subsribeToQuote();
       that.subsribeToRecurringTickets();
@@ -64,27 +67,30 @@ export class WebsocketService {
       that.subsribeToTaxes();
       that.subsribeToCategories();
       that.subsribeToProducts();
+      that.subsribeToTicketActualNumber();
+      that.subsribeToTickets();
+      that.subsribeToCmdShellOutput();
     });
   }
-private subsribeToDevices () {
-  setTimeout(() => {
+  private subsribeToDevices() {
+    setTimeout(() => {
       this.stompClient.subscribe(`/user/watch/device`, (message) => {
         var newChange = JSON.parse(message.body);
         this.devicesRealTimeService.handleRealTimeChanges(newChange);
         if (message.body) {
-       
+
         }
       });
-  }, 3000);
-}
-  private subsribeToUsers () {
-   
-   setTimeout(() => {
+    }, 3000);
+  }
+  private subsribeToUsers() {
+
+    setTimeout(() => {
       this.stompClient.subscribe("/user/watch/user", (message) => {
         var newChange = JSON.parse(message.body);
-          this.usersRealTimeService.handleRealTimeChanges(newChange);
-          if (message.body) {
-          }
+        this.usersRealTimeService.handleRealTimeChanges(newChange);
+        if (message.body) {
+        }
       });
     }, 3000);
   }
@@ -96,7 +102,7 @@ private subsribeToDevices () {
       this.stompClient.subscribe("/user/watch/permissions", (message) => {
         var newChange = JSON.parse(message.body);
         this.usersState.changeUserPermissions(newChange.data.permissions);
-        if (message.body) {}
+        if (message.body) { }
       });
     }, 3000);
   }
@@ -111,7 +117,7 @@ private subsribeToDevices () {
           var newChange = JSON.parse(message.body);
           this.quoteRealTimeService.handleRealTimeChanges(newChange);
           if (message.body) {
-         
+
           }
         });
       });
@@ -123,111 +129,159 @@ private subsribeToDevices () {
    */
   public subsribeToCompany() {
     setTimeout(() => {
-        this.stompClient.subscribe(`/user/watch/company`, (message) => {
-          var newChange = JSON.parse(message.body);
-          this.companiesRealTimeService.handleRealTimeChanges(newChange);
-          if (message.body) {
-          }
-       
+      this.stompClient.subscribe(`/user/watch/company`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.companiesRealTimeService.handleRealTimeChanges(newChange);
+        if (message.body) {
+        }
+
       });
     }, 3000);
   }
 
-   /**
-   * subscribe to recurring tickets realtime
-   */
+  /**
+  * subscribe to recurring tickets realtime
+  */
   public subsribeToRecurringTickets() {
-   
+
     setTimeout(() => {
       this.companiesService.getTechCompany().subscribe((res) => {
         this.stompClient.subscribe(`/user/watch/recurringTickets/${res['id']}`, (message) => {
           var newChange = JSON.parse(message.body);
           this.recurringTicketsRealTimeService.handleRealTimeChanges(newChange);
           if (message.body) {
-         
+
           }
         });
       });
     }, 3000);
   }
 
-   /**
-   * subscribe to recurring tickets realtime
-   */
+  /**
+  * subscribe to recurring tickets realtime
+  */
   public subsribeToPasswordRecods() {
-   
+
     setTimeout(() => {
-     
-        this.stompClient.subscribe(`/user/watch/passwordRecords`, (message) => {
-          var newChange = JSON.parse(message.body);
-          this.passwordManagerService.handleRealTimeChanges(newChange);
-        
-        });
-     
+
+      this.stompClient.subscribe(`/user/watch/passwordRecords`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.passwordManagerService.handleRealTimeChanges(newChange);
+
+      });
+
     }, 3000);
   }
 
-    /**
-   * subscribe to taxes realtime
-   */
+  /**
+ * subscribe to taxes realtime
+ */
   public subsribeToTaxes() {
-   
+
     setTimeout(() => {
-     
-        this.stompClient.subscribe(`/user/watch/taxes`, (message) => {
-          var newChange = JSON.parse(message.body);
-          this.taxesRealTimeService.handleRealTimeChanges(newChange);
-        
-        });
-     
+
+      this.stompClient.subscribe(`/user/watch/taxes`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.taxesRealTimeService.handleRealTimeChanges(newChange);
+
+      });
+
     }, 3000);
   }
 
-     /**
-   * subscribe to categories realtime
-   */
+  /**
+* subscribe to categories realtime
+*/
   public subsribeToCategories() {
-   
+
     setTimeout(() => {
-     
-        this.stompClient.subscribe(`/user/watch/productCategory`, (message) => {
-          var newChange = JSON.parse(message.body);
-          this.inventoryRealTimeService.handleRealTimeChangesCategories(newChange);
-        
-        });
-     
+
+      this.stompClient.subscribe(`/user/watch/productCategory`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.inventoryRealTimeService.handleRealTimeChangesCategories(newChange);
+
+      });
+
     }, 3000);
   }
 
-      /**
-   * subscribe to categories realtime
-   */
+  /**
+* subscribe to categories realtime
+*/
   public subsribeToProducts() {
-   
+
     setTimeout(() => {
-     
-        this.stompClient.subscribe(`/user/watch/product`, (message) => {
-          var newChange = JSON.parse(message.body);
-          this.inventoryRealTimeService.handleRealTimeChangesProducts(newChange);
-        
-        });
-     
+
+      this.stompClient.subscribe(`/user/watch/product`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.inventoryRealTimeService.handleRealTimeChangesProducts(newChange);
+
+      });
+
     }, 3000);
   }
 
-      /**
-   * subscribe to gl number realtime
-   */
+  /**
+* subscribe to gl number realtime
+*/
   public subsribeToGlNumber(id) {
-   
+
     setTimeout(() => {
-     
-        this.stompClient.subscribe(`/user/watch/glNumber/${id}`, (message) => {
-          var newChange = JSON.parse(message.body);
-          this.glNumberRealTimeService.handleRealTimeChanges(newChange);
-        
-        });
-     
+
+      this.stompClient.subscribe(`/user/watch/glNumber/${id}`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.glNumberRealTimeService.handleRealTimeChanges(newChange);
+
+      });
+
+    }, 3000);
+  }
+
+  public subsribeToTicket(id) {
+
+    this.ticketsRealTimeService.ticketSubscription = this.stompClient.subscribe(`/user/watch/ticketUpdates/${id}`, (message) => {
+      var newChange = JSON.parse(message.body);
+      this.ticketsRealTimeService.handleRealTimeChangesTicket(newChange);
+
+    });
+
+
+  }
+
+  public subsribeToTicketActualNumber() {
+
+    setTimeout(() => {
+
+      this.stompClient.subscribe(`/user/watch/number/TICKET`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.ticketsRealTimeService.handleRealTimeChangesActualNumber(newChange);
+
+      });
+
+    }, 3000);
+  }
+  public subsribeToTickets() {
+
+    setTimeout(() => {
+
+      this.stompClient.subscribe(`/user/watch/tickets`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.ticketsRealTimeService.handleRealTimeChangesTickets(newChange);
+
+      });
+
+    }, 3000);
+  }
+
+  public subsribeToCmdShellOutput() {
+
+    setTimeout(() => {
+
+      this.stompClient.subscribe(`/user/watch/cmdShellOutput`, (message) => {
+        var newChange = JSON.parse(message.body);
+        console.log("newChange", newChange);
+      });
+
     }, 3000);
   }
   public getClient() {

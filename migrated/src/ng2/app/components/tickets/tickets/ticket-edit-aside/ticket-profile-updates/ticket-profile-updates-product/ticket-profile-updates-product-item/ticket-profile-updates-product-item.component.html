@@ -1,0 +1,2 @@
+<app-ticket-profile-updates-product-info [update]="update" *ngIf="!editMode" (onEdit)="editMode = true" [product]="product"></app-ticket-profile-updates-product-info>
+<app-ticket-profile-updates-product-edit [update]="update" *ngIf="editMode" (onEdit)="editMode = false"  [product]="product"></app-ticket-profile-updates-product-edit>

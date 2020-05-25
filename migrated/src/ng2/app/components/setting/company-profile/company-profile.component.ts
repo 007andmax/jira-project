@@ -331,7 +331,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
         },
         error => {
           this.loading = false;$(".loading").css("display", "none");
-          console.log(error);
+        
         }
       );
     } catch (error) {
@@ -444,7 +444,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
         },
         error => {
           this.loading = false;$(".loading").css("display", "none");
-          console.log(error);
+         
         }
       );
     }

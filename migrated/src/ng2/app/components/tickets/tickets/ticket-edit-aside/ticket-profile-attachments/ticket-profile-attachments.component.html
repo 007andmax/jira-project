@@ -1,0 +1,21 @@
+
+<div class="attachment-component">
+  <div class="attachment-item__header">
+    <div class="attachment-item__count-items" [textContent]="attachments.length + ' Attchments'"></div>
+    <div (click)="hiddenAttachments = !hiddenAttachments" class="attachment-item__show-hide-btn pointer"></div>
+  </div>
+
+  <div [hidden]="hiddenAttachments" class="attached-files-container">
+    <ng-template  ngFor let-attachment [ngForOf]="attachments" [ngForTrackBy]="trackById">
+      <div class="attachment-item" [ngClass]="attachment.file.contentType">
+        <div class="attachment-item__type" [textContent]="getTypeFile(attachment.file.name)"></div>
+        <p [textContent]="attachment.file.name" (click)="preview(attachment.file.id,attachment.file.contentType)"></p>
+
+
+        <div class="attachment-item__download pointer"
+        (click)="download(attachment.file.id,attachment.file.contentType,attachment.file.name)"
+        ></div>
+      </div>
+    </ng-template>
+  </div>
+</div>

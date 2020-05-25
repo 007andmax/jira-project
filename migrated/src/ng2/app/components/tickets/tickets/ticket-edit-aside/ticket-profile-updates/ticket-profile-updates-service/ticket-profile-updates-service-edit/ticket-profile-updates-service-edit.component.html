@@ -1,0 +1,40 @@
+<div class="d-f jc-sb ai-fs ticket-updates ticket-update-service-edit">
+  <div class="ticket-updates__ticket-info">
+    <div class="ticket-updates__ticket-header d-f">
+      <div class="ticket-updates__service-header-name">Service Name</div>
+      <div class="ticket-updates__service-header-price">Time In</div>
+      <div class="ticket-updates__service-header-qty">Time Out</div>
+      <div class="ticket-updates__service-header-total">Duration</div>
+    </div>
+     <div class="ticket-updates__ticket-body">
+      <div class="d-f ai-c ticket-updates__first-line">
+        <div class="ticket-updates__done-status icon__task-pending" [ngClass]="{'--done':service.completed}"></div>
+        <app-services-list class="ticket-updates__input device" [type]="'TICKET'" [editItem]="service.item"  [itemList]="servicesList"
+        (selectedServicesItem)="selectService($event)"></app-services-list>
+
+
+        <app-ticket-profile-updates-service-timepicker (onSetEnd)="onSetDurationEnd($event)" (onChangeStart)="onChangeStartTimePicker($event)" (onChangeEnd)="onChangeEndTimePicker($event)" #editTimePicker [quantity]="quantity" [editMode]="true" [start]="durationStart" [end]="durationEnd" ></app-ticket-profile-updates-service-timepicker>
+        <app-ticket-profile-updates-service-duration (onChange)="onChangeDuration($event)" [editMode]="true" [hour]="hours" [minute]="minutes" *ngIf="currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER'"></app-ticket-profile-updates-service-duration>
+        <div class="ticket-updates__service-duration" *ngIf="currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'" [textContent]="getDuration(quantity)"></div>
+
+        <div class="ticket-updates__date-icon icon__assign-date"></div>
+        <div class="ticket-updates__photo-people" [textContent]="ticketsListService.getAssignedUserNameForAvatar(service.user)"
+        [ngStyle]="{'background': ticketsListService.getStyleAvatar(service.user),'background-size': 'cover'}"></div>
+      </div>
+      <div class="editable-description">
+      <textarea    appTextArea  [minHeight]="48"  cols="5" rows="1" id="service-description" placeholder="Write ticket conversation here…"
+      (input)="onChangeDescription($event)" (onPast)="onPastDescription($event)"></textarea>
+      </div>
+    </div>
+
+
+    <span  class="tag__modern ticket-updates__service-tag-completed" *ngIf="service.completed" [textContent]="'Completed on ' + getDate(service.date)"></span>
+    <span  class="tag__modern ticket-updates__service-tag-completed" *ngIf="!service.completed && service.date" [textContent]="'Due date - ' + getDate(service.date)"></span>
+
+  </div>
+
+  <div class="right-side-icons">
+  <i (click)="saveService()" class="icn-20 icon__check save-service pointer"></i>
+  <i (click)="cancelService()" class="icn-20 icon__close pointer"></i>
+  </div>
+</div>

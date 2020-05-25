@@ -11,17 +11,18 @@ import {
 } from '@angular/upgrade/static';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SelectModule } from 'ng2-select';
 // import { SelectModule } from 'ng2-select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { IgxTimePickerModule } from 'igniteui-angular';
 import { SidebarModule } from 'ng-sidebar';
 
 import { ClickOutsideModule } from 'ng4-click-outside';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
-import { MatAutocompleteModule, MatIconModule } from "@angular/material";
-import { CronEditorModule } from "cron-editor";
+import { MatAutocompleteModule, MatIconModule } from '@angular/material';
+import { CronEditorModule } from 'cron-editor';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { NgxEditorModule } from 'ngx-editor';
 import { NgxSelectModule } from 'ngx-select-ex';
@@ -90,7 +91,7 @@ import { CompanyEditAsideComponent } from './components/companies/company-edit-a
 import { CompanyTagsComponent } from './components/companies/company-tags/company-tags.component';
 import { DraftEmailComponent } from './components/shared/draft-email/draft-email.component';
 import { DraftEmailRecipientsComponent } from './components/shared/draft-email/draft-email-recipients/draft-email-recipients.component';
-import { LeftPanelTagsCompaniesComponent } from './components/left-panel/left-panel-companies/left-panel-tags-companies/left-panel-tags-companies.component';
+import { LeftPanelTagsComponent } from './components/left-panel/left-panel-companies/left-panel-tags-companies/left-panel-tags-companies.component';
 import { SelectSearchComponent } from './components/shared/select-search/select-search.component';
 import { CompanyPasswordManagerComponent } from './components/company-password-manager/company-password-manager.component';
 import { CompanyPasswoordManagerHeaderComponent } from './components/company-password-manager/passwoord-manager-header/passwoord-manager-header.component';
@@ -117,6 +118,14 @@ import { SelectComponent } from './components/shared/select/select.component';
 import { ReportAdditionalActionsComponent } from './components/reports/report-additional-actions/report-additional-actions.component';
 import { ReportSendEmailComponent } from './components/reports/report-additional-actions/report-send-email/report-send-email.component';
 import { CompanyUserComponent } from './components/company-user/company-user.component';
+import { TicketsComponent } from './components/tickets/tickets/tickets.component';
+import { TicketsTableComponent } from './components/tickets/tickets/tickets-table/tickets-table.component';
+import { TicketsHeaderComponent } from './components/tickets/tickets/tickets-header/tickets-header.component';
+import { TicketAddAsideComponent } from './components/tickets/tickets/ticket-add-aside/ticket-add-aside.component';
+import { UploadAreaComponent } from './components/shared/upload-area/upload-area.component';
+import { TicketEditAsideComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-edit-aside.component';
+import { TicketsPrioritiesComponent } from './components/tickets/tickets-priorities/tickets-priorities.component';
+import { LeftPanelTicketsComponent } from './components/left-panel/left-panel-tickets/left-panel-tickets.component';
 import { GlNumberComponent } from './components/reports/reports/gl-number/gl-number.component';
 import { AccountsReceivableComponent } from './components/reports/reports/accounts-receivable/accounts-receivable.component';
 import { ReportFooterComponent } from './components/reports/report-footer/report-footer.component';
@@ -190,8 +199,49 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { AutocompleteComponent } from './shared/autocomplete/autocomplete.component';
 import { PhonePipe } from './pipe/phone.pipe';
 import { OrderByPipe } from './pipe/order-by.pipe';
-import { NgxMaskModule } from 'ngx-mask' 
+import { NgxMaskModule } from 'ngx-mask'
 import { TaxesComponent } from './components/shared/taxes/taxes.component';
+import { TicketsTableItemComponent } from './components/tickets/tickets/tickets-table/tickets-table-item/tickets-table-item.component';
+import { TicketEditAsideCompanyInfoComponent } from './components/tickets/tickets/ticket-edit-aside-company-info/ticket-edit-aside-company-info.component';
+import { TicketEditAsideDevicesComponent } from './components/tickets/tickets/ticket-edit-aside-devices/ticket-edit-aside-devices.component';
+import { TicketEditAsideUsersComponent } from './components/tickets/tickets/ticket-edit-aside-users/ticket-edit-aside-users.component';
+import { TicketsStatusComponent } from './components/left-panel/left-panel-tickets/tickets-status/tickets-status.component';
+import { UploadAreaProgressComponent } from './components/shared/upload-area/upload-area-progress/upload-area-progress.component';
+import { DndDirective } from './directives/dnd.directive';
+import { AddAssignedUserComponent } from './components/tickets/tickets/ticket-edit-aside/add-assigned-user/add-assigned-user.component';
+import { TicketEditTagsComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-edit-tags/ticket-edit-tags.component';
+import { TicketProfileActionsComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-actions/ticket-profile-actions.component';
+import { TicketClaimInfoComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-claim-info/ticket-claim-info.component';
+import { TicketProfileFormUpdateComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-form-update/ticket-profile-form-update.component';
+import { TicketProfileFormUpdateProductsComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-form-update/ticket-profile-form-update-products/ticket-profile-form-update-products.component';
+import { TicketProfileFormUpdateServicesComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-form-update/ticket-profile-form-update-services/ticket-profile-form-update-services.component';
+import { TicketMessageComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-message/ticket-message.component';
+import { TicketProfileUpdatesComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates.component';
+import { TicketProfileUpdatesNoteComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-note/ticket-profile-updates-note.component';
+import { TicketProfileUpdatesProductComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-product/ticket-profile-updates-product.component';
+import { TicketProfileUpdatesFooterComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-footer/ticket-profile-updates-footer.component';
+import { TicketProfileUpdatesServiceComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service/ticket-profile-updates-service.component';
+import { TicketProfileUpdatesServiceDurationComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-duration/ticket-profile-updates-service-duration.component';
+
+import { TicketProfileUpdatesServiceTimepickerComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service-timepicker/ticket-profile-updates-service-timepicker.component';
+import { TicketProfileUpdatesServiceInfoComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service/ticket-profile-updates-service-info/ticket-profile-updates-service-info.component';
+import { TicketProfileUpdatesServiceEditComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service/ticket-profile-updates-service-edit/ticket-profile-updates-service-edit.component';
+import { TicketProfileUpdatesServiceItemComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-service/ticket-profile-updates-service-item/ticket-profile-updates-service-item.component';
+import { TicketProfileUpdatesProductItemComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-product/ticket-profile-updates-product-item/ticket-profile-updates-product-item.component';
+import { TicketProfileUpdatesProductInfoComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-product/ticket-profile-updates-product-info/ticket-profile-updates-product-info.component';
+import { TicketProfileUpdatesProductEditComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-product/ticket-profile-updates-product-edit/ticket-profile-updates-product-edit.component';
+import { TicketChangeStatusComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-change-status/ticket-change-status.component';
+import { PreloaderTicketComponent } from './components/tickets/tickets/preloader-ticket/preloader-ticket.component';
+import { TicketProfileAttachmentsComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-attachments/ticket-profile-attachments.component';
+import { ErrorNotificationComponent } from './components/shared/error-notification/error-notification.component';
+import { PreviewAttachmentComponent } from './components/tickets/tickets/ticket-edit-aside/preview-attachment/preview-attachment.component';
+import { TicketProfileUpdatesNoteItemComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-note/ticket-profile-updates-note-item/ticket-profile-updates-note-item.component';
+import { TicketProfileUpdatesNoteInfoComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-note/ticket-profile-updates-note-info/ticket-profile-updates-note-info.component';
+import { TicketProfileUpdatesNoteEditComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-note/ticket-profile-updates-note-edit/ticket-profile-updates-note-edit.component';
+import { ToFixedDirective } from './directives/to-fixed.directive';
+
+
+
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 declare var angular: any;
@@ -315,6 +365,9 @@ angular.module('quicktech')
     'itemReportComponent',
     downgradeComponent({ component: ItemReportComponent }))
   .directive(
+    'ticketsComponent',
+    downgradeComponent({ component: TicketsComponent }))
+    .directive(
     'inventoryComponent',
     downgradeComponent({ component: InventoryComponent }))
   .directive(
@@ -387,7 +440,7 @@ angular.module('quicktech')
     CompanyTagsComponent,
     DraftEmailComponent,
     DraftEmailRecipientsComponent,
-    LeftPanelTagsCompaniesComponent,
+    LeftPanelTagsComponent,
     SelectSearchComponent,
     CompanyPasswordManagerComponent,
     CompanyPasswoordManagerHeaderComponent,
@@ -446,6 +499,14 @@ angular.module('quicktech')
     ReportAdditionalActionsComponent,
     ReportSendEmailComponent,
     CompanyUserComponent,
+    TicketsComponent,
+    TicketsTableComponent,
+    TicketsHeaderComponent,
+    TicketAddAsideComponent,
+    UploadAreaComponent,
+    TicketEditAsideComponent,
+    TicketsPrioritiesComponent,
+    LeftPanelTicketsComponent,
     GlNumberComponent,
     AccountsReceivableComponent,
     ReportFooterComponent,
@@ -465,7 +526,60 @@ angular.module('quicktech')
     AddCategoryProductComponent,
     CompanyProductsComponent,
     TaxesComponent,
-    GlNumberSettingsComponent
+    GlNumberSettingsComponent,
+    TicketsTableItemComponent,
+    TicketEditAsideCompanyInfoComponent,
+    TicketEditAsideDevicesComponent,
+    TicketEditAsideUsersComponent,
+    TicketsStatusComponent,
+    UploadAreaProgressComponent,
+    DndDirective,
+    AddAssignedUserComponent,
+    TicketEditTagsComponent,
+    TicketProfileActionsComponent,
+    TicketClaimInfoComponent,
+    TicketProfileFormUpdateComponent,
+    TicketProfileFormUpdateProductsComponent,
+    TicketProfileFormUpdateServicesComponent,
+    TicketMessageComponent,
+    TicketProfileUpdatesComponent,
+    TicketProfileUpdatesNoteComponent,
+    TicketProfileUpdatesProductComponent,
+    TicketProfileUpdatesFooterComponent,
+    TicketProfileUpdatesServiceComponent,
+    TicketProfileUpdatesServiceDurationComponent,
+
+    TicketProfileUpdatesServiceTimepickerComponent,
+
+    TicketProfileUpdatesServiceInfoComponent,
+
+    TicketProfileUpdatesServiceEditComponent,
+
+    TicketProfileUpdatesServiceItemComponent,
+
+    TicketProfileUpdatesProductItemComponent,
+
+    TicketProfileUpdatesProductInfoComponent,
+
+    TicketProfileUpdatesProductEditComponent,
+
+    TicketChangeStatusComponent,
+
+    PreloaderTicketComponent,
+
+    TicketProfileAttachmentsComponent,
+
+    ErrorNotificationComponent,
+
+    PreviewAttachmentComponent,
+
+    TicketProfileUpdatesNoteItemComponent,
+
+    TicketProfileUpdatesNoteInfoComponent,
+
+    TicketProfileUpdatesNoteEditComponent,
+
+    ToFixedDirective
   ],
   imports: [
     BrowserModule,
@@ -506,7 +620,10 @@ angular.module('quicktech')
     ImageCropperModule,
     NgxEditorModule,
     FontAwesomeModule,
-    NvD3Module
+    NvD3Module,
+    BrowserAnimationsModule,
+    IgxTimePickerModule
+
   ],
   entryComponents: [
     LeftPanelComponent,
@@ -528,13 +645,15 @@ angular.module('quicktech')
     ItemReportComponent,
     OverviewReportComponent,
     ReportSendEmailComponent,
+    TicketsComponent,
     InventoryComponent,
     CompanyProductsComponent
     // RecurringTicketsComponent
   ],
   exports:[
     PhonePipe,
-    OrderByPipe
+    OrderByPipe,
+
   ],
   providers: [
     {

@@ -6,5 +6,5 @@ export interface RecurringTicketCompany {
     tags: any;
     unknown: boolean;
     deletedAt: number;
-    default: boolean
+    default: boolean;
 }

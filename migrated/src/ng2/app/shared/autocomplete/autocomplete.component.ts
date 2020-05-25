@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, Input, Output, ViewChild } from "@angular/core";
-import {  EventEmitter } from '@angular/core'
+import { EventEmitter } from '@angular/core'
 
 declare var google: any;
 
@@ -10,17 +10,16 @@ declare var google: any;
 })
 export class AutocompleteComponent implements OnInit, AfterViewInit {
   @Input() adressType: string;
-  @Output() setAddress  = new EventEmitter();
+  @Output() setAddress = new EventEmitter();
   @ViewChild("addresstext") addresstext: any;
 
   autocompleteInput: string;
   queryWait: boolean;
-  place : any;
+  place: any;
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
-    console.log('autocomplete')
   }
 
   ngAfterViewInit() {
@@ -32,7 +31,7 @@ export class AutocompleteComponent implements OnInit, AfterViewInit {
       this.addresstext.nativeElement,
       {
         componentRestrictions: { country: "US" },
-        types: [this.adressType] // 'establishment' / 'address' / 'geocode'
+        types: [this.adressType]
       }
     );
     google.maps.event.addListener(autocomplete, "place_changed", () => {
