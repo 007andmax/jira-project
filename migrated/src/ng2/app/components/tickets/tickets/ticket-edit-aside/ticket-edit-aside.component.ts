@@ -178,6 +178,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       return new TicketProfileUpdate(item);
     })];
     this.ticketProfile.updates = updates;
+    this.cd.detectChanges();
   }
   onChangeTags(data) {
     if (!this.opened) return;
