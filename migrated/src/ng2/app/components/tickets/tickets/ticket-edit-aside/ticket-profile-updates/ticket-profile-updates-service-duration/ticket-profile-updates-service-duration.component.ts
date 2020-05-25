@@ -45,10 +45,8 @@ export class TicketProfileUpdatesServiceDurationComponent implements OnInit {
         let minutes = this.date.getMinutes();
         let quantity = hours + ((minutes) ? (minutes / 60) : 0);
         this.onChange.emit(quantity);
-        console.log("date",this.date);
     }
     onClosed() {
-        console.log("this.date",this.date);
         this.picker.value = this.date;
     }
     public onOpened(data) {

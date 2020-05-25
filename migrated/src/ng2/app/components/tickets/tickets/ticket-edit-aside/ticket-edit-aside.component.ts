@@ -122,7 +122,6 @@ export class TicketEditAsideComponent implements OnInit {
           this.ticketProfile.setUpdate(newChange.data);
         } else {
           this.ticketProfile.addUpdate(newChange.data);
-          console.log("addUpdate");
         }
         if (attachments && attachments.length) {
           for (var i = 0; i < attachments.length; i++) {
@@ -132,7 +131,6 @@ export class TicketEditAsideComponent implements OnInit {
       }
       if (newChange.action == 'UPDATE_DELETED') this.ticketProfile.removeUpdate(newChange.data);
       this.cd.detectChanges();
-      console.log("this.ticketProfile", this.ticketProfile);
     });
   }
   private updateListAssignedUser() {

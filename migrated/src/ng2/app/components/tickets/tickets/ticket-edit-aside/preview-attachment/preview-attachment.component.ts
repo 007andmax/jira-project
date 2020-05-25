@@ -15,7 +15,6 @@ export class PreviewAttachmentComponent implements OnInit {
     this.previewAttachmentStateService.getOnPreview().subscribe(data => {
       this.src = data;
       this.show = true;
-      console.log("data",data);
       this.cd.detectChanges();
     })
   }

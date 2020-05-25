@@ -92,11 +92,6 @@ export class TicketProfileUpdatesServiceEditComponent implements OnInit {
     this.durationEnd = endDate;
     this.editService.setDurationEnd(this.durationEnd);
   }
-  private setHoursAndMinutes(quantity) {
-    var timeInMinutes = quantity * 60;
-    this.hours = Math.floor(timeInMinutes / 60);
-    this.minutes = Math.round(timeInMinutes - (this.hours * 60));
-  }
   public getDate(date) {
     return moment(new Date(date)).format('DD MMM YYYY');
   }

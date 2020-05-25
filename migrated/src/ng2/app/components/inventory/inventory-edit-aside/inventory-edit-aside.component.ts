@@ -78,7 +78,6 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
   onEditCompany() {
     let getCompanyFromEdit = this.inventoryStateService.getInventoryFromEdit().subscribe((data: InventoryItem) => {
       this.inventory = new InventoryItem(data);
-      console.log("this.inventory",this.inventory);
       let taxes = this.taxes.filter(item => {
         let index = this.inventory.taxIds.findIndex(taxId => taxId === item.id);
         return (index > -1) ? true : false;

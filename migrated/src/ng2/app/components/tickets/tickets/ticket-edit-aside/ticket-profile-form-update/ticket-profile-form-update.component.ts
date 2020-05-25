@@ -147,7 +147,6 @@ export class TicketProfileFormUpdateComponent implements OnInit {
       this.ticketProfileFormUpdate.clearAttachments();
       this.onClosed.emit(null);
     },err=> {
-      console.log("err",err.error.message);
       this.errorNotificationStateService.oninitShowNotification(err.error.message);
     })
   }
