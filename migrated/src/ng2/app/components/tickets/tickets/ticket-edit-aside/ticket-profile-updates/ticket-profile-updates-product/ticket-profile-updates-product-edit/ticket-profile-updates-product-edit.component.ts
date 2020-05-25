@@ -27,7 +27,7 @@ export class TicketProfileUpdatesProductEditComponent implements OnInit {
     this.getItemListProducts();
   }
   public getTotal(price, quantity) {
-    return price * quantity;
+    return (price * quantity).toFixed(2);
   }
   public getDate(date) {
     return moment((date) ? new Date(date) : new Date()).format('DD MMM YYYY');

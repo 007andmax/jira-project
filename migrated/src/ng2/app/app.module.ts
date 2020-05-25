@@ -238,6 +238,7 @@ import { PreviewAttachmentComponent } from './components/tickets/tickets/ticket-
 import { TicketProfileUpdatesNoteItemComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-note/ticket-profile-updates-note-item/ticket-profile-updates-note-item.component';
 import { TicketProfileUpdatesNoteInfoComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-note/ticket-profile-updates-note-info/ticket-profile-updates-note-info.component';
 import { TicketProfileUpdatesNoteEditComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-note/ticket-profile-updates-note-edit/ticket-profile-updates-note-edit.component';
+import { ToFixedDirective } from './directives/to-fixed.directive';
 
 
 
@@ -576,7 +577,9 @@ angular.module('quicktech')
 
     TicketProfileUpdatesNoteInfoComponent,
 
-    TicketProfileUpdatesNoteEditComponent
+    TicketProfileUpdatesNoteEditComponent,
+
+    ToFixedDirective
   ],
   imports: [
     BrowserModule,

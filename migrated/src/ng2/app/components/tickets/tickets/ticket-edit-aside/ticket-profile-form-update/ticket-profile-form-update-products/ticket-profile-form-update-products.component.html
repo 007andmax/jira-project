@@ -20,6 +20,7 @@
         number
         [money]="true"
         [ngModel]="product.item.cost"
+        appToFixed
         (ngModelChange)="onChangeCostProduct($event, i)">
       </label>
 
@@ -32,6 +33,7 @@
         number
         [money]="true"
         [ngModel]="product.item.sale"
+        appToFixed
         (ngModelChange)="onChangeSaleProduct($event, i)">
       </label>
 
@@ -63,6 +65,7 @@
         number
         [money]="true"
         [ngModel]="currentProduct.item.cost"
+        appToFixed
         (ngModelChange)="onChangeCost($event)">
       </label>
 
@@ -75,6 +78,7 @@
         number
         [money]="true"
         [ngModel]="currentProduct.item.sale"
+        appToFixed
         (ngModelChange)="onChangeSale($event)">
       </label>
 

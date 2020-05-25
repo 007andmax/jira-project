@@ -35,13 +35,29 @@ export class TicketProfileUpdatesProductInfoComponent implements OnInit {
     if (!this.product.date) this.product.date = new Date().getTime();
     if (this.product.user) this.userService = [this.product.user];
     this.listTehUsers = this.getUsersForAssign();
+    if (this.product.date)  this.setDateWithTimeOffset();
   }
   public getTotal(price, quantity) {
-    return price * quantity;
+    return (price * quantity).toFixed(2);
+  }
+  public getPrice() {
+    return this.product.price.toFixed(2);
+  }
+  public setDateWithTimeOffset() {
+    let currentTimeOffset = new Date().getTimezoneOffset() * 60000;
+    currentTimeOffset = (currentTimeOffset < 0) ? -currentTimeOffset : currentTimeOffset;
+    let companyTimeOffset = this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset;
+    companyTimeOffset = (companyTimeOffset < 0) ? -companyTimeOffset : companyTimeOffset;
+    let timeOffset = (currentTimeOffset > companyTimeOffset) ? currentTimeOffset - companyTimeOffset : companyTimeOffset - currentTimeOffset;
+    this.product.date = this.product.date + timeOffset;
   }
   public getDate(date) {
-
-    return moment((date) ? new Date(date) : new Date()).format('DD MMM YYYY');
+  /*  let currentTimeOffset = new Date().getTimezoneOffset() * 60000;
+    currentTimeOffset = (currentTimeOffset < 0) ? -currentTimeOffset : currentTimeOffset;
+    let companyTimeOffset = this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset;
+    companyTimeOffset = (companyTimeOffset < 0) ? -companyTimeOffset : companyTimeOffset;
+    let timeOffset = (currentTimeOffset > companyTimeOffset) ? currentTimeOffset - companyTimeOffset : companyTimeOffset - currentTimeOffset;
+*/    return moment((date) ? new Date(date) : new Date()).format('DD MMM YYYY');
   }
   edit() {
     this.onEdit.emit(null);
@@ -78,5 +94,5 @@ export class TicketProfileUpdatesProductInfoComponent implements OnInit {
     modalRef.componentInstance.message = `Do you want to remove the item?`;
 
   }
- 
+
 }

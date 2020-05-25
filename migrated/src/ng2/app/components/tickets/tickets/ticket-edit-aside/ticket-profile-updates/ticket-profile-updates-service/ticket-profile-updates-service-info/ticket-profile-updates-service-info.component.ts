@@ -34,12 +34,27 @@ export class TicketProfileUpdatesServiceInfoComponent implements OnInit {
   ngOnInit() {
     if (this.service.user) this.userService = [this.service.user];
     this.listTehUsers = this.getUsersForAssign();
+    if (this.service.date)  this.setDateWithTimeOffset();
   }
   edit() {
     this.onEdit.emit(null);
   }
+  public setDateWithTimeOffset() {
+    let currentTimeOffset = new Date().getTimezoneOffset() * 60000;
+    currentTimeOffset = (currentTimeOffset < 0) ? -currentTimeOffset : currentTimeOffset;
+    let companyTimeOffset = this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset;
+    companyTimeOffset = (companyTimeOffset < 0) ? -companyTimeOffset : companyTimeOffset;
+    let timeOffset = (currentTimeOffset > companyTimeOffset) ? currentTimeOffset - companyTimeOffset : companyTimeOffset - currentTimeOffset;
+    this.service.date = this.service.date + timeOffset;
+  }
   public getDate(date) {
-    return moment(new Date(date)).format('DD MMM YYYY');
+ /*   let currentTimeOffset = new Date().getTimezoneOffset() * 60000;
+    currentTimeOffset = (currentTimeOffset < 0) ? -currentTimeOffset : currentTimeOffset;
+    let companyTimeOffset = this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset;
+    companyTimeOffset = (companyTimeOffset < 0) ? -companyTimeOffset : companyTimeOffset;
+    let timeOffset = (currentTimeOffset > companyTimeOffset) ? currentTimeOffset - companyTimeOffset : companyTimeOffset - currentTimeOffset;
+*/    return moment((date) ? new Date(date) : new Date()).format('DD MMM YYYY');
+
   }
   public getTime(time) {
     return moment(new Date(time)).format('hh:mm A');

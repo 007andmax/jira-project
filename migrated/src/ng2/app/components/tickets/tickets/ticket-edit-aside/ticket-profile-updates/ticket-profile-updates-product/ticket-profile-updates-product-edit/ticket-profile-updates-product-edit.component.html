@@ -15,6 +15,7 @@
       number
       [money]="true"
       [ngModel]="editProduct.item.sale"
+      appToFixed
       (ngModelChange)="onChangeSale($event)"  />
       <input  class="input-default input-qty" [(ngModel)]="editProduct.quantity"   />
       <div class="ticket-updates__ticket-total" [textContent]="'$' + getTotal(editProduct.item.sale,editProduct.quantity)"></div>
