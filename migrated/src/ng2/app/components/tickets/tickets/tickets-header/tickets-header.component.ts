@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { TitleListType } from './class/title-list-type';
 import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.service';
 import { Subscription } from 'rxjs';
@@ -23,7 +23,8 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   count = 0;
   selectedListType: TitleListType = new TitleListType('My Tickets', 'USERS');
-  constructor(private ticketsStateService: TicketsStateService) { }
+  constructor(private ticketsStateService: TicketsStateService,
+    public cd: ChangeDetectorRef, ) { }
 
   ngOnInit() {
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
@@ -34,6 +35,7 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     this.ticketsStateService.getOnInitCount().subscribe(data => {
       this.count = data;
       this.title = `${(this.selectedListType) ? this.selectedListType.title : ''} (${this.count})`;
+      this.cd.detectChanges();
     })
   }
   onAddTicket() {
