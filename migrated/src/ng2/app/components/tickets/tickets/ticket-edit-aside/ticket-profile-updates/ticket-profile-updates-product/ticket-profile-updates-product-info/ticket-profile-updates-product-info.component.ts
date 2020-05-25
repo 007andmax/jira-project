@@ -52,6 +52,7 @@ export class TicketProfileUpdatesProductInfoComponent implements OnInit {
     return moment((date) ? new Date(date) : new Date()).format('DD MMM YYYY');
   }
   private getTimeOffSet() {
+      // getting milliseconds of a date, after calculating timeOffSet of the tech user and timeOffset of the technical company
     let currentTimeOffset = new Date().getTimezoneOffset() * 60000;
     currentTimeOffset = (currentTimeOffset < 0) ? -currentTimeOffset : currentTimeOffset;
     let companyTimeOffset = this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset;

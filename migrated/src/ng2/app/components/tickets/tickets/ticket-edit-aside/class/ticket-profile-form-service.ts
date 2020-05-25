@@ -27,6 +27,7 @@ export class TicketProfileFormService {
         return new Date(this.date).getTime();
     }
     public getDateTimeWithTimeOffset(currentCompany) {
+        // getting milliseconds of a date, after calculating timeOffSet of the tech user and timeOffset of the technical company
         let currentTimeOffset = new Date().getTimezoneOffset() * 60000;
         currentTimeOffset = (currentTimeOffset < 0) ? -currentTimeOffset : currentTimeOffset;
         let companyTimeOffset = currentCompany.addresses[0].timeZone.timeOffset;
