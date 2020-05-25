@@ -1,4 +1,4 @@
-<div class="table-container">
+<div class="table-container" [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}">
 <table class="qt-table-modern ticket-table">
   <tbody  infiniteScroll
   [infiniteScrollDistance]="2"
@@ -13,6 +13,7 @@
  </ng-template>
   </tbody>
 </table>
+<div class="loading pengind-loading" *ngIf="showPendingPreloader"></div>
   <div class="loading" *ngIf="showPreloader"></div>
 </div>
 

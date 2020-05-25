@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { TicketsPermissionsService } from '../services/tickets-permissions.service';
 import { CurrentUser } from 'src/ng2/class/current-user/current-user';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
@@ -10,6 +10,7 @@ import { ConfirmStateService } from 'src/ng2/app/components/shared/confirm/servi
 import { MOVE_TO_SPAM_TICKET, MOVE_TO_TRASH_TICKET } from 'src/ng2/app/const/confirm';
 import { ConfirmComponent } from 'src/ng2/app/components/shared/confirm/confirm.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-ticket-profile-actions',
@@ -17,11 +18,12 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./ticket-profile-actions.component.scss'],
   providers: [TicketsPermissionsService]
 })
-export class TicketProfileActionsComponent implements OnInit {
+export class TicketProfileActionsComponent implements OnInit, OnDestroy {
   @Output() onClaimTicket = new EventEmitter();
   @Input() ticketProfile: TicketProfile = new TicketProfile();
   currentUser: CurrentUser;
   movedWay: boolean = false;
+  sub = new Subscription();
   constructor(
     public ticketsPermissionsService: TicketsPermissionsService,
     private devicesSateService: DevicesSateService,
@@ -31,6 +33,7 @@ export class TicketProfileActionsComponent implements OnInit {
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
   ) { }
+
 
   ngOnInit() {
     this.currentUser = this.usersStateService.getCurrentUser();
@@ -44,6 +47,7 @@ export class TicketProfileActionsComponent implements OnInit {
         }
       }
     })
+    this.sub.add(getConfirm);
   }
   onMoveToTrash() {
     this.ticketsService.trashTicket(this.ticketProfile.id, this.movedWay).subscribe(res => {
@@ -92,5 +96,8 @@ export class TicketProfileActionsComponent implements OnInit {
     this.confirmStateService.setConfirmAction(MOVE_TO_SPAM_TICKET);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
     modalRef.componentInstance.message = `Do you want to mark the ticket as spam?`;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }
