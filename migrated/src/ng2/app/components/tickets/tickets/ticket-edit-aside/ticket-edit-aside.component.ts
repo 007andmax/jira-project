@@ -209,8 +209,9 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
   }
   toggleNote() {
     if (this.elRef.nativeElement.querySelector("#ticket-note").value != this.ticketProfile.note) {
-      this.onChangeSubjectNote();
       this.ticketProfile.note = this.elRef.nativeElement.querySelector("#ticket-note").value;
+      this.onChangeSubjectNote();
+    
     }
   }
   onChangeSubjectNote() {
