@@ -4,7 +4,7 @@
   </div>
   <div   class="tech__user-icon icon__assign-user" *ngIf="type === 'TICEKTS' && selectedUsers.length === 0"  id="dropdownTehuser"  ngbDropdownToggle></div>
   <div class="ticket-updates__photo-people" *ngIf="type === 'TICEKTS' && selectedUsers.length === 1" [textContent]="ticketsListService.getAssignedUserNameForAvatar(selectedUsers[0])"
-  [ngStyle]="{'background': ticketsListService.getStyleAvatar(selectedUsers[0]) + ' 0% 0% / cover'}" id="dropdownTehuser"  ngbDropdownToggle placement="top" [ngbTooltip]="ticketsListService.getUserName(selectedUsers[0])"></div>
+  [ngStyle]="{'background': ticketsListService.getStyleAvatar(selectedUsers[0])}" id="dropdownTehuser"  ngbDropdownToggle placement="top" [ngbTooltip]="ticketsListService.getUserName(selectedUsers[0])"></div>
 
   <div class="teh-user-body" ngbDropdownMenu aria-labelledby="dropdownTehuser">
     <div class="select-wrapper dropdown-assign-ticket fixed-assign">

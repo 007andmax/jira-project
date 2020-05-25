@@ -22,7 +22,7 @@
 
       <div class="ticket-updates__date-icon icon__assign-date"></div>
       <div class="ticket-updates__photo-people" [textContent]="ticketsListService.getAssignedUserNameForAvatar(editProduct.user)"
-      [ngStyle]="{'background': ticketsListService.getStyleAvatar(editProduct.user),'background-size': 'cover'}"></div>
+      [ngStyle]="{'background': ticketsListService.getStyleAvatar(editProduct.user)}"></div>
     </div>
     <span  class="tag__modern ticket-updates__service-tag-completed" *ngIf="editProduct.completed" [textContent]="'Completed on ' + getDate(editProduct.date)"></span>
     <span  class="tag__modern ticket-updates__service-tag-completed" *ngIf="!editProduct.completed && editProduct.date" [textContent]="'Due date - ' + getDate(editProduct.date)"></span>

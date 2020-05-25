@@ -9,7 +9,7 @@
         <div class="ticket-edit-aside__header d-f jc-sb ai-c">
           <div class="d-f">
             <div class="ticket-edit-aside__header-avatar" [textContent]="ticketsListService.getAssignedUserNameForAvatar(ticketProfile.createdUser)"
-            [ngStyle]="{'background': ticketsListService.getStyleAvatar(ticketProfile.createdUser),'background-size': 'cover'}"></div>
+            [ngStyle]="{'background': ticketsListService.getStyleAvatar(ticketProfile.createdUser)}"></div>
 
             <div>
               <div class="d-f ai-c">
@@ -27,7 +27,7 @@
             </div>
             <div class="more-users-avatars">
               <ng-template class="assigned-ticket-user" ngFor let-user [ngForOf]="listAssignedUser" let-i="index" [ngForTrackBy]="trackByIndex">
-                <div class="more-users-avatars__avatar" *ngIf="i < 3" [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"   [ngStyle]="{'background': ticketsListService.getStyleAvatar(user),'background-size': 'cover'}"></div>
+                <div class="more-users-avatars__avatar" *ngIf="i < 3" [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"   [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"></div>
                 </ng-template>
               </div>
 
