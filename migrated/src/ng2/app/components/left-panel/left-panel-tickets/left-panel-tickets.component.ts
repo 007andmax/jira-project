@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { TicketsFilter } from '../../tickets/tickets/class/tickets-filter';
 import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.service';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
@@ -31,13 +31,14 @@ export class LeftPanelTicketsComponent implements OnInit {
   techUsersHistory = [];
   techUsersList = [];
   blockFilterUser: boolean = false;
-  ticketsCounts:TicketsCounts;
+  ticketsCounts: TicketsCounts;
   constructor(private ticketsStateService: TicketsStateService,
     private companiesState: CompaniesStateService,
     private ticketsService: TicketsService,
     private usersStateService: UsersStateService,
     private companiesService: CompaniesService,
     private elRef: ElementRef,
+    public cd: ChangeDetectorRef,
     private leftPanelService: LeftPanelService) { }
 
   ngOnInit() {
@@ -68,7 +69,7 @@ export class LeftPanelTicketsComponent implements OnInit {
         return new StatusColor(item.backgroundColor, item.borderColor);
       })
       this.ticketsStateService.onColorStatus(listColors);
-      
+
     })
     this.leftPanelService.getTicketsStatus().subscribe((data: any) => {
 
@@ -79,11 +80,10 @@ export class LeftPanelTicketsComponent implements OnInit {
 
     this.ticketsStateService.getOnUpdateCounts().subscribe(data => {
       this.ticketsCounts = new TicketsCounts(data);
-      
       this.ticketsStateService.onInitCount(this.ticketsCounts[(this.listType === 'USERS') ? 'USER' : this.listType]);
-  
+      this.cd.detectChanges();
     })
-   
+
   }
   private getCount() {
     this.ticketsService.getCount(this.ticketsFilter.getDataForRequest()).subscribe(data => {
@@ -93,13 +93,11 @@ export class LeftPanelTicketsComponent implements OnInit {
   getCountByField(field) {
     return (this.ticketsCounts) ? this.ticketsCounts[field] : 0;
   }
-  private getCounts ()  {
+  private getCounts() {
     this.ticketsService.getCounts(this.ticketsFilter.getDataForCounts()).subscribe(data => {
-    
       this.ticketsCounts = new TicketsCounts(data);
-      
       this.ticketsStateService.onInitCount(this.ticketsCounts[(this.listType === 'USERS') ? 'USER' : this.listType]);
-     
+      this.cd.detectChanges();
     })
   }
   private getClientsList(data) {
@@ -110,7 +108,7 @@ export class LeftPanelTicketsComponent implements OnInit {
     this.listType = type;
     this.ticketsFilter.setListType(type);
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
-   if (type !== 'RECURRING_TICKETS') this.getCount();
+    if (type !== 'RECURRING_TICKETS') this.getCount();
   }
 
   onGetUsers(data) {
@@ -147,9 +145,9 @@ export class LeftPanelTicketsComponent implements OnInit {
   }
   selectTechUser(item) {
 
-    
+
     let indexTechUser = this.techUsersList.findIndex(user => `${user.firstName} ${user.lastName}` === item);
-   
+
     //  this.showClearIndustry = true;
     // this.clientIndustry = item;
     if (indexTechUser > -1) {
@@ -166,7 +164,7 @@ export class LeftPanelTicketsComponent implements OnInit {
 
 
     let indexhUser = this.users.findIndex(user => `${user.firstName} ${user.lastName}` === item);
-    
+
     //  this.showClearIndustry = true;
     // this.clientIndustry = item;
     if (indexhUser > -1) {
@@ -201,7 +199,7 @@ export class LeftPanelTicketsComponent implements OnInit {
     //  this.usersStateService.onInitFilter(this.filter);
   }
   public onSelectCompany(item) {
-    
+
     this.blockFilterUser = true;
     this.usersDp.clearClient();
     if (!item) {
@@ -222,7 +220,7 @@ export class LeftPanelTicketsComponent implements OnInit {
           this.companiesHistory.pop();
           this.companiesHistory.unshift(item.name);
         }
-      
+
       }
 
       this.companiesService.setСustomStorage("ticketPageFilterByCompanyHistory", this.companiesHistory).subscribe(data => {
@@ -230,12 +228,12 @@ export class LeftPanelTicketsComponent implements OnInit {
       })
     }
 
-   
+
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
     this.getCount();
   }
   onSelectTechUser(item) {
-   
+
     if (!item) {
       this.ticketsFilter.setTechUser(null);
       this.clearSelectedTechUser();
@@ -255,7 +253,7 @@ export class LeftPanelTicketsComponent implements OnInit {
           this.techUsersHistory.pop();
           this.techUsersHistory.unshift(item);
         }
-       
+
       }
 
       this.companiesService.setСustomStorage("ticketPageFilterByTechUsersHistory", this.techUsersHistory).subscribe(data => {
@@ -265,10 +263,10 @@ export class LeftPanelTicketsComponent implements OnInit {
 
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
     this.getCount();
-    
+
   }
   onSelectUser(item) {
-    
+
     if (!item) {
       this.ticketsFilter.setUser(null);
       this.clearSelectedUser();
@@ -288,7 +286,7 @@ export class LeftPanelTicketsComponent implements OnInit {
           this.usersHistory.pop();
           this.usersHistory.unshift(item);
         }
-       
+
       }
 
       this.companiesService.setСustomStorage("ticketPageFilterByClientUsersHistory", this.usersHistory).subscribe(data => {
@@ -298,13 +296,13 @@ export class LeftPanelTicketsComponent implements OnInit {
     if (!this.blockFilterUser) {
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
       this.getCount();
-    } 
+    }
     this.blockFilterUser = false;
   }
   onOpenDropDownFilter(id) {
-   
-    let containers =  this.elRef.nativeElement.querySelectorAll('.show-filter');
-    containers.forEach((item:any) => {
+
+    let containers = this.elRef.nativeElement.querySelectorAll('.show-filter');
+    containers.forEach((item: any) => {
       item.style.zIndex = 2;
     })
     this.elRef.nativeElement.querySelector(`#${id}`).style.zIndex = 9999;
@@ -318,13 +316,13 @@ export class LeftPanelTicketsComponent implements OnInit {
     return this.techUsersList.map(item => {
       return `${item.firstName} ${item.lastName}`
     }).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
-    1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
+      1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
   }
   getUserList() {
     return this.users.map(item => {
       return `${item.firstName} ${item.lastName}`
     }).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
-    1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
+      1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
   }
 
   toggleFilter(event) {
