@@ -42,6 +42,8 @@ export class TicketProfileAttachmentsComponent implements OnInit {
       link.dispatchEvent(e);
     })
   }
-
+  public trackById(index, item) {
+    return item.id;
+  }
 
 }
