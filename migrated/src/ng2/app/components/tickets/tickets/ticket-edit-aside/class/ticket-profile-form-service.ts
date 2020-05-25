@@ -26,6 +26,15 @@ export class TicketProfileFormService {
     public getDateTime() {
         return new Date(this.date).getTime();
     }
+    public getDateTimeWithTimeOffset(currentCompany) {
+        let currentTimeOffset = new Date().getTimezoneOffset() * 60000;
+        currentTimeOffset = (currentTimeOffset < 0) ? -currentTimeOffset : currentTimeOffset;
+        let companyTimeOffset = currentCompany.addresses[0].timeZone.timeOffset;
+        companyTimeOffset = (companyTimeOffset < 0) ? -companyTimeOffset : companyTimeOffset;
+        let timeOffset = (currentTimeOffset > companyTimeOffset) ? currentTimeOffset - companyTimeOffset : companyTimeOffset - currentTimeOffset;
+        return new Date(this.date).getTime() + timeOffset;
+    }
+
     public setItem(data) {
         this.item = data;
     }

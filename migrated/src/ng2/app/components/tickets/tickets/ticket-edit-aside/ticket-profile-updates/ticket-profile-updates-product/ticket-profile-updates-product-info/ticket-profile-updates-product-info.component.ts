@@ -21,6 +21,7 @@ export class TicketProfileUpdatesProductInfoComponent implements OnInit {
   @Input() product: TicketProfileProduct;
   @Input() update: TicketProfileUpdate;
   @Output() onEdit = new EventEmitter();
+  changeDate: boolean = false;
   userService = [];
   listTehUsers = [];
   constructor(public ticketsListService: TicketsListService,
@@ -35,7 +36,7 @@ export class TicketProfileUpdatesProductInfoComponent implements OnInit {
     if (!this.product.date) this.product.date = new Date().getTime();
     if (this.product.user) this.userService = [this.product.user];
     this.listTehUsers = this.getUsersForAssign();
-    if (this.product.date)  this.setDateWithTimeOffset();
+    if (this.product.date) this.setDateWithTimeOffset();
   }
   public getTotal(price, quantity) {
     return (price * quantity).toFixed(2);
@@ -44,20 +45,19 @@ export class TicketProfileUpdatesProductInfoComponent implements OnInit {
     return this.product.price.toFixed(2);
   }
   public setDateWithTimeOffset() {
+    this.product.date = this.product.date + this.getTimeOffSet();
+  }
+  public getDate(date) {
+    if (this.changeDate) return moment((date) ? new Date(date + this.getTimeOffSet()) : new Date()).format('DD MMM YYYY');
+    return moment((date) ? new Date(date) : new Date()).format('DD MMM YYYY');
+  }
+  private getTimeOffSet() {
     let currentTimeOffset = new Date().getTimezoneOffset() * 60000;
     currentTimeOffset = (currentTimeOffset < 0) ? -currentTimeOffset : currentTimeOffset;
     let companyTimeOffset = this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset;
     companyTimeOffset = (companyTimeOffset < 0) ? -companyTimeOffset : companyTimeOffset;
-    let timeOffset = (currentTimeOffset > companyTimeOffset) ? currentTimeOffset - companyTimeOffset : companyTimeOffset - currentTimeOffset;
-    this.product.date = this.product.date + timeOffset;
-  }
-  public getDate(date) {
-  /*  let currentTimeOffset = new Date().getTimezoneOffset() * 60000;
-    currentTimeOffset = (currentTimeOffset < 0) ? -currentTimeOffset : currentTimeOffset;
-    let companyTimeOffset = this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset;
-    companyTimeOffset = (companyTimeOffset < 0) ? -companyTimeOffset : companyTimeOffset;
-    let timeOffset = (currentTimeOffset > companyTimeOffset) ? currentTimeOffset - companyTimeOffset : companyTimeOffset - currentTimeOffset;
-*/    return moment((date) ? new Date(date) : new Date()).format('DD MMM YYYY');
+    return (currentTimeOffset > companyTimeOffset) ? currentTimeOffset - companyTimeOffset : companyTimeOffset - currentTimeOffset;
+
   }
   edit() {
     this.onEdit.emit(null);
@@ -79,6 +79,7 @@ export class TicketProfileUpdatesProductInfoComponent implements OnInit {
 
     this.product.setDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.updateProduct();
+    this.changeDate = true;
   }
   getUsersForAssign() {
     let userList = this.usersStateService.getAllUsers().sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?

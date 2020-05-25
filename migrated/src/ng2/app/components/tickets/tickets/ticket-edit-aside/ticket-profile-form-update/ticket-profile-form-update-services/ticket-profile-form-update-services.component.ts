@@ -35,15 +35,17 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit, OnDestr
     private recurringService: RecurringService,
     private elRef: ElementRef,
     private ticketsStateService: TicketsStateService,
-    private companiesStateService: CompaniesStateService,
+    public companiesStateService: CompaniesStateService,
     private ticketStateService: TicketStateService) { }
 
 
   ngOnInit() {
+   
     let getOnClearFormUpdate = this.ticketsStateService.getOnClearFormUpdate().subscribe(data => {
       this.addedServiceList = [];
       this.elRef.nativeElement.querySelector('#service-description').value = "";
       this.currentService = new TicketProfileFormService();
+  
       this.serviceDP.clear();
       this.datePicker.reset();
       if (this.currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER') this.timePicker.refresh();
@@ -56,9 +58,12 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit, OnDestr
     this.ticketStateService.getOnGetServicesList().subscribe(data => {
       this.getServices();
     })
+   
     let currentDate = new Date();
     this.currentService.setDate(currentDate.getDate(), currentDate.getMonth() + 1, currentDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-  }
+  
+    }
+ 
   private getServices() {
     this.servicesList = this.ticketStateService.getServicesForTicket();
     this.areTicketsPresented = this.ticketStateService.isTicketsTerminated();
@@ -76,6 +81,9 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit, OnDestr
   public addService() {
     this.addedServiceList.push(new TicketProfileFormService(JSON.parse(JSON.stringify(this.currentService))));
     this.currentService = new TicketProfileFormService();
+    /*let currentDate = new Date();
+    this.currentService.setDate(currentDate.getDate(), currentDate.getMonth() + 1, currentDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+  */
     this.serviceDP.clear();
     if (this.currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER') this.durationPicker.refresh();
     if (this.currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER') this.timePicker.refresh();

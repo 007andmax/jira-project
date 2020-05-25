@@ -21,6 +21,7 @@ export class TicketProfileUpdatesServiceInfoComponent implements OnInit {
   @Input() update: TicketProfileUpdate;
   @Input() service: TicketProfileService;
   @Output() onEdit = new EventEmitter();
+  changeDate: boolean = false;
   userService = [];
   listTehUsers = [];
   constructor(public ticketsListService: TicketsListService,
@@ -40,20 +41,18 @@ export class TicketProfileUpdatesServiceInfoComponent implements OnInit {
     this.onEdit.emit(null);
   }
   public setDateWithTimeOffset() {
+    this.service.date = this.service.date + this.getTimeOffSet();
+  }
+  public getDate(date) {
+    if (this.changeDate) return moment((date) ? new Date(date + this.getTimeOffSet()) : new Date()).format('DD MMM YYYY');
+    return moment((date) ? new Date(date) : new Date()).format('DD MMM YYYY');
+  }
+  private getTimeOffSet() {
     let currentTimeOffset = new Date().getTimezoneOffset() * 60000;
     currentTimeOffset = (currentTimeOffset < 0) ? -currentTimeOffset : currentTimeOffset;
     let companyTimeOffset = this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset;
     companyTimeOffset = (companyTimeOffset < 0) ? -companyTimeOffset : companyTimeOffset;
-    let timeOffset = (currentTimeOffset > companyTimeOffset) ? currentTimeOffset - companyTimeOffset : companyTimeOffset - currentTimeOffset;
-    this.service.date = this.service.date + timeOffset;
-  }
-  public getDate(date) {
- /*   let currentTimeOffset = new Date().getTimezoneOffset() * 60000;
-    currentTimeOffset = (currentTimeOffset < 0) ? -currentTimeOffset : currentTimeOffset;
-    let companyTimeOffset = this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset;
-    companyTimeOffset = (companyTimeOffset < 0) ? -companyTimeOffset : companyTimeOffset;
-    let timeOffset = (currentTimeOffset > companyTimeOffset) ? currentTimeOffset - companyTimeOffset : companyTimeOffset - currentTimeOffset;
-*/    return moment((date) ? new Date(date) : new Date()).format('DD MMM YYYY');
+    return (currentTimeOffset > companyTimeOffset) ? currentTimeOffset - companyTimeOffset : companyTimeOffset - currentTimeOffset;
 
   }
   public getTime(time) {
@@ -73,6 +72,7 @@ export class TicketProfileUpdatesServiceInfoComponent implements OnInit {
     let date = new Date(data.year, data.month - 1, data.day);
     this.service.setDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.updateService();
+    this.changeDate = true;
   }
   private updateService() {
     this.ticketsService.updateExpense(this.service.getDateForUpdate(this.update.id)).subscribe(data => {
