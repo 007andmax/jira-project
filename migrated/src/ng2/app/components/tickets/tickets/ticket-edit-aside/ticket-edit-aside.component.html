@@ -66,7 +66,7 @@
         <app-ticket-profile-form-update (onClosed)="close()" *ngIf="ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)" #updateForm [ticket]="ticketProfile" [lisUpdateUser]="lisUpdateUser"></app-ticket-profile-form-update>
       </div>
     </div>
-    <app-ticket-edit-aside-company-info *ngIf="toggleRightPanel"></app-ticket-edit-aside-company-info>
+    <app-ticket-edit-aside-company-info [setCompanyId]="ticketProfile.companyId" *ngIf="toggleRightPanel"></app-ticket-edit-aside-company-info>
     <div class="ticket-edit-aside__menu">
       <div class="aside-menu-item icon__panel-open" (click)="toggleRightPanel = !toggleRightPanel"></div>
       <div class="aside-menu-item icon__company-info"></div>

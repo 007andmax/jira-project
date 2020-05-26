@@ -5,4 +5,5 @@ export interface CompanyInfo {
     primaryAddress: any; 
     addresses: Array<CompanyAndress>;
     contacts: Array<CompanyAndressContact>;
+    reputation: number;
 }
