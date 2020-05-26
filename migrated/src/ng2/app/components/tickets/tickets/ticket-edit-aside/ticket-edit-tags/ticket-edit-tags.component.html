@@ -1,5 +1,5 @@
 <div class="light-dropdown ticket-edit-tags"
-     ngbDropdown #products="ngbDropdown">
+     ngbDropdown #products="ngbDropdown" (openChange)="onChangeDropDown($event)">
   <mat-form-field>
     <mat-chip-list #chipList aria-label="Fruit selection">
       <span class="tag-icon"></span>
@@ -21,13 +21,14 @@
         [matChipInputFor]="chipList"
         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
         [matChipInputAddOnBlur]="addOnBlur"
-       
-        (matChipInputTokenEnd)="add($event)">
+        (input)="onSearch($event)"
+        (keyup)="onKeyUp($event)"
+         >
     </mat-chip-list>
     
   </mat-form-field>
   <div class="dropdown-menu"
-       ngbDropdownMenu aria-labelledby="dropdownServices">
+       ngbDropdownMenu aria-labelledby="dropdownServices" >
  <ng-template ngFor let-tag [ngForOf]="tags" [ngForTrackBy]="trackById">
       <button ngbDropdownItem class="dropdown-item"
               (click)="selected(tag)"

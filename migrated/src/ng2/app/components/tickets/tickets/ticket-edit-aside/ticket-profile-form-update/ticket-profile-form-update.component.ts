@@ -27,6 +27,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
   @Input() set ticket(value) {
     this.ticketProfile = value;
     this.ticketProfileFormUpdate.setTicketId(this.ticketProfile.id);
+    this.addCreatedUser();
   };
   @Output() onClosed = new EventEmitter();
   showAddUpdateUser = false;
@@ -40,12 +41,17 @@ export class TicketProfileFormUpdateComponent implements OnInit {
     private usersStateService: UsersStateService,
     private ticketsService: TicketsService,
     private elRef: ElementRef,
-    private errorNotificationStateService:ErrorNotificationStateService,
+    private errorNotificationStateService: ErrorNotificationStateService,
     private notificationStateService: NotificationStateService,
     public ticketsListService: TicketsListService) { }
 
   ngOnInit() {
     this.currentUser = this.usersStateService.getCurrentUser();
+  }
+  private addCreatedUser() {
+    if (!this.ticketProfile.createdUser) return;
+    let find = this.lisUpdateUser.find(item => item.id === this.ticketProfile.createdUser.id);
+    if (!find) this.lisUpdateUser.unshift(this.ticketProfile.createdUser);
   }
   public onChangeChat(event) {
     this.ticketProfileFormUpdate.setChatMessage(event.target.value);
@@ -146,7 +152,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
       this.files = [];
       this.ticketProfileFormUpdate.clearAttachments();
       this.onClosed.emit(null);
-    },err=> {
+    }, err => {
       this.errorNotificationStateService.oninitShowNotification(err.error.message);
     })
   }
@@ -178,6 +184,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
   }
   onSelectUpdateUser(data) {
     this.lisUpdateUser = data;
+    this.addCreatedUser();
   }
   fileBrowseHandler(files) {
     this.prepareFilesList(files);
