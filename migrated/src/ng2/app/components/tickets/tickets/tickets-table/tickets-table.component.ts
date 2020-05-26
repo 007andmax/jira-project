@@ -39,6 +39,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     })
     this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
       let ticket = new Ticket(data);
+      if (data.assignedUser) ticket.setAssignedUserId(data.assignedUser.id);
       let findIndex = this.tickets.findIndex(item => item.id === ticket.id);
       if (this.ticketsListService.isTicketMatchesFilters(this.ticketsFilter, data)) {
         if (findIndex > -1) this.tickets[findIndex] = data;
