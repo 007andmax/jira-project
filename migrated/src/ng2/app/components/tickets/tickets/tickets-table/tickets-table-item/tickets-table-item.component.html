@@ -2,7 +2,7 @@
   <td class="ticket-table__requested-by">
     <div class="d-f">
        <div class="qt-table-modern__circle-avatar" [ngClass]="getNameForAvatar() ? 'transparent-text' : ''" [textContent]="getNameForAvatar() ? getNameForAvatar() : '.'"
-        [ngStyle]="{'background': getStyleAvatar(requestedUser),'background-size': 'cover'}"></div>
+        [ngStyle]="{'background': ticketsListService.getStyleAvatar(requestedUser) }"></div>
       
       
       <div [textContent]="getUserName(requestedUser)" class="ellipsis"></div>
@@ -17,7 +17,7 @@
       <div class="d-f">
         <ng-template ngFor let-user [ngForOf]="ticket.multiAssignedUsers" [ngForTrackBy]="trackById">
         <div class="qt-table-modern__circle-avatar" [textContent]="getAssignedUserNameForAvatar(user)"
-          [ngStyle]="{'background': getStyleAvatar(user),'background-size': 'cover'}"></div>
+          [ngStyle]="{'background': ticketsListService.getStyleAvatar(user) }"></div>
       </ng-template>
       </div>
   </td>
@@ -25,7 +25,7 @@
   <td class="ticket-table__assignee" *ngIf="ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length === 0 || ticket.assignedUserId && !ticket.multiAssignedUsers">
     <div class="d-f">
       <div class="qt-table-modern__circle-avatar" [textContent]="getAssignedUserNameForAvatar(assignedUser)"
-        [ngStyle]="{'background': getStyleAvatar(assignedUser),'background-size': 'cover'}"></div>
+        [ngStyle]="{'background': ticketsListService.getStyleAvatar(assignedUser)}"></div>
       <div [textContent]="getUserName(assignedUser)"></div>
     </div>
   </td>

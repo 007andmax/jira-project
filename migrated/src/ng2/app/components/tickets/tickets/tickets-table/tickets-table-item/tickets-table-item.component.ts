@@ -6,11 +6,13 @@ import { CompaniesStateService } from 'src/ng2/app/states/company/companies-stat
 import * as moment from "moment";
 import { StatusColor } from 'src/ng2/app/components/left-panel/left-panel-tickets/tickets-status/class/status-color';
 import { TicketsColor } from 'src/ng2/app/components/left-panel/left-panel-tickets/tickets-status/class/tickets-color';
+import { TicketsListService } from '../../services/tickets-list.service';
 
 @Component({
   selector: 'app-tickets-table-item',
   templateUrl: './tickets-table-item.component.html',
-  styleUrls: ['./tickets-table-item.component.scss']
+  styleUrls: ['./tickets-table-item.component.scss'],
+  providers: [TicketsListService]
 })
 export class TicketsTableItemComponent implements OnInit {
   @Input() ticket: Ticket;
@@ -19,6 +21,7 @@ export class TicketsTableItemComponent implements OnInit {
   assignedUser: User;
   requestedUser: User;
   constructor(private usersStateService: UsersStateService,
+    public ticketsListService:TicketsListService,
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
