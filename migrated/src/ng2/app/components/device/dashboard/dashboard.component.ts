@@ -110,7 +110,7 @@ export class DashboardComponent implements OnInit {
         this.logicalDisk = resp.reports[0].logicalDisks;
         this.virusInfo = resp.reports[0].antivirus[0];
         this.system = resp.reports[0].system || {};
-        let colors = ['#0057a8', '#00d8e7', '#16a4fa'];
+        let colors = ['#0057a8', '#00d8e7', '#16a4fa', '#0CB2B2', '#485EF0'];
         let count = 0;
         this.logicalDisk.forEach(element => {
           if(element.is_system === true) {
@@ -119,7 +119,7 @@ export class DashboardComponent implements OnInit {
             element.color = colors[count];
             count++;
           }
-          if (count == 3) {
+          if (count == 5) {
             count = 0;
           }
           if(element.free_space != '' && element.size != '') {
