@@ -46,6 +46,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
       } else {
         if (findIndex > -1) this.tickets.splice(findIndex, 1);
       }
+      this.cd.detectChanges();
     })
 
     this.ticketsStateService.getOnRemoveTicket().subscribe(data => {

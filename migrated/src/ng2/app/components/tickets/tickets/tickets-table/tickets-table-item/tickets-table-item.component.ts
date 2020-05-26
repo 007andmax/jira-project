@@ -15,7 +15,10 @@ import { TicketsListService } from '../../services/tickets-list.service';
   providers: [TicketsListService]
 })
 export class TicketsTableItemComponent implements OnInit {
-  @Input() ticket: Ticket;
+  ticket: Ticket;
+  @Input() set setTicket(value) {
+    this.ticket = value;
+  };
   @Input() listColors: Array<StatusColor> = [];
   @Input() statusColor: TicketsColor;
   assignedUser: User;
