@@ -1,36 +1,45 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { Company } from 'src/ng2/app/interfaces/company/company';
 import { CompanyAndressContact } from 'src/ng2/app/interfaces/company/company-address-contact';
 import { CompanyAndress } from 'src/ng2/app/interfaces/company/company-address';
 import { TicketsListService } from '../services/tickets-list.service';
+import { CurrentUser } from 'src/ng2/class/current-user/current-user';
+import { MapModalStateService } from 'src/ng2/app/states/map-modal/map-modal-state.service';
+import { CompanyInfoHistoryComponent } from './company-info-history/company-info-history.component';
 
 @Component({
   selector: 'app-ticket-edit-aside-company-info',
   templateUrl: './ticket-edit-aside-company-info.component.html',
   styleUrls: ['./ticket-edit-aside-company-info.component.scss'],
   providers: [TicketsListService]
-  
+
 })
 export class TicketEditAsideCompanyInfoComponent implements OnInit {
   companyId: string;
   company: Company;
+  @ViewChild('companyHistory') companyHistory:CompanyInfoHistoryComponent;
   @Input() set setCompanyId(value) {
     this.companyId = value;
     this.company = this.companiesStateService.getCompanies().find(item => item.id === this.companyId);
-console.log("this.company",this.company);
-console.log("this.companyId",this.companyId);
+    console.log("this.company", this.company);
+   if (this.companyHistory) this.companyHistory.onInitGetTickets();
+
   };
+  
+  @Input() createdUser: CurrentUser;
   reputations = [1, 2, 3, 4, 5];
   public primaryContact: CompanyAndressContact;
   public primaryAddress: CompanyAndress;
   public location: string = '';
   public primaryPhone: any;
+  public workingTime: string = '';
   constructor(private companiesStateService: CompaniesStateService,
-    public ticketsListService:TicketsListService) { }
+    public ticketsListService: TicketsListService,
+    private mapModalStateService: MapModalStateService) { }
 
   ngOnInit() {
-
+   
   }
   ngDoCheck() {
     if (this.company) {
@@ -50,18 +59,36 @@ console.log("this.companyId",this.companyId);
           }
         }
         if (primaryAddress && primaryAddress.phoneNumbers.length) primaryPhone = primaryAddress.phoneNumbers[0];
+        let workingTime = this.company.companyInfo.workingTime[new Date().getDay() - 1];
+
+        let startTime = workingTime.startTime / 3600;
+        let typeTime = (startTime > 12) ? "PM" : "AM";
+        startTime = (startTime > 12) ? startTime - 12 : startTime;
+        var timeInMinutes = startTime * 60,
+          hours = Math.floor(timeInMinutes / 60),
+          minutes = Math.round(timeInMinutes - (hours * 60));
+        this.workingTime = `${(hours < 10) ? '0' + hours : hours}:${(minutes < 10) ? '0' + minutes : minutes} ${typeTime}`;
       }
 
       this.primaryContact = primaryContact;
       this.primaryAddress = primaryAddress;
       this.primaryPhone = primaryPhone;
 
+
       if (primaryAddress) {
         this.location = primaryAddress.addressWithSuitNumberAndPostalCode;
       } else {
         this.location = '';
       }
+
     }
+  }
+  onShowMap() {
+    this.mapModalStateService.onSohwMap({
+      latitude: this.company.companyInfo.addresses[0].locationLat,
+      longitude: this.company.companyInfo.addresses[0].locationLng,
+      title: this.company.companyInfo.addresses[0].longCity
+    })
   }
   getCompanyLogoUrl() {
     if (this.company && this.company.logo && this.company.logo && this.company.logo.base64 && !this.company.logo.cropped) return this.company.logo.base64;

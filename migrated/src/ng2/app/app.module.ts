@@ -239,6 +239,8 @@ import { TicketProfileUpdatesNoteItemComponent } from './components/tickets/tick
 import { TicketProfileUpdatesNoteInfoComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-note/ticket-profile-updates-note-info/ticket-profile-updates-note-info.component';
 import { TicketProfileUpdatesNoteEditComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-profile-updates/ticket-profile-updates-note/ticket-profile-updates-note-edit/ticket-profile-updates-note-edit.component';
 import { ToFixedDirective } from './directives/to-fixed.directive';
+import { MapModalComponent } from './components/shared/map-modal/map-modal.component';
+import { CompanyInfoHistoryComponent } from './components/tickets/tickets/ticket-edit-aside-company-info/company-info-history/company-info-history.component';
 
 
 
@@ -579,7 +581,11 @@ angular.module('quicktech')
 
     TicketProfileUpdatesNoteEditComponent,
 
-    ToFixedDirective
+    ToFixedDirective,
+
+    MapModalComponent,
+
+    CompanyInfoHistoryComponent
   ],
   imports: [
     BrowserModule,

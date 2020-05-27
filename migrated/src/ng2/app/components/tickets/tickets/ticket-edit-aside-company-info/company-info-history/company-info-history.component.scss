@@ -1,0 +1,34 @@
+.company-info-aside {
+    &__history {
+        height: 300px;
+        overflow-y: auto;
+        position: relative;
+     }
+  
+    &__history-block {
+       margin-top: 17px;
+    }
+    &__history-block {
+      border-radius: 6px;
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.05);
+      border: solid 1px #dfe3e8;
+      padding: 9px 12px;
+      margin-bottom: 6px;
+      margin-left: -9px;
+      margin-right: -9px;
+   
+    }
+    &__history-block-title {
+     font-size: 12px;
+     font-weight: 600;
+     line-height: 1.33;
+     color: #4f5f79;
+     margin-bottom: 4px;
+    }
+    &__history-block-date {
+     font-size: 11px;
+     line-height: 1.45;
+     color: #4f5f79;
+    }
+  }
+  
