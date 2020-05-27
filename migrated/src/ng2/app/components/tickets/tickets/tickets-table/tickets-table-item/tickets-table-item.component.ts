@@ -6,24 +6,31 @@ import { CompaniesStateService } from 'src/ng2/app/states/company/companies-stat
 import * as moment from "moment";
 import { StatusColor } from 'src/ng2/app/components/left-panel/left-panel-tickets/tickets-status/class/status-color';
 import { TicketsColor } from 'src/ng2/app/components/left-panel/left-panel-tickets/tickets-status/class/tickets-color';
+import { TicketsListService } from '../../services/tickets-list.service';
 
 @Component({
   selector: 'app-tickets-table-item',
   templateUrl: './tickets-table-item.component.html',
-  styleUrls: ['./tickets-table-item.component.scss']
+  styleUrls: ['./tickets-table-item.component.scss'],
+  providers: [TicketsListService]
 })
 export class TicketsTableItemComponent implements OnInit {
-  @Input() ticket: Ticket;
+  ticket: Ticket;
+  @Input() set setTicket(value) {
+    this.ticket = value;
+    this.assignedUser = this.usersStateService.getAllUsers().find(item => item.id === this.ticket.assignedUserId);
+    this.requestedUser = this.usersStateService.getAllUsers().find(item => item.id === this.ticket.createdUserId);
+    console.log("this.ticket", this.ticket);
+  };
   @Input() listColors: Array<StatusColor> = [];
   @Input() statusColor: TicketsColor;
   assignedUser: User;
   requestedUser: User;
   constructor(private usersStateService: UsersStateService,
+    public ticketsListService: TicketsListService,
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
-    this.assignedUser = this.usersStateService.getAllUsers().find(item => item.id === this.ticket.assignedUserId);
-    this.requestedUser = this.usersStateService.getAllUsers().find(item => item.id === this.ticket.createdUserId);
   }
   public getUserName(user) {
     return (user) ? `${user.firstName} ${user.lastName}` : '';

@@ -303,22 +303,9 @@
         })
     }
 
-    function setReferenceDate(date, callback) {
-      $http.post('/settings/companyProfile/accountingStartDate', date)
-        .then(function (res) {
-          if (callback) callback(res)
-        })
-    }
+   
 
-    function setTechLead(companyId, techLeadId, callback) {
-      if (!companyId || !techLeadId) return;
-      $http.put('/company/' + companyId + '/setTechLead/' + techLeadId).
-        then(function (res) {
-          if (callback) {
-            callback()
-          }
-        })
-    }
+  
 
     function getCompanyByAddressId(id) {
       var clients = storage.clientCompanies;
@@ -439,35 +426,11 @@
       return info;
     }
 
-    function setCategoryRate(id, data, callback) {
-      $http.put('/settings/companyProfile/categoryRate/' + id + '?setForOldExpenses=' + data.setForOldExpenses, {
-        commissionRate: data.rate
-      }).then(function (res) {
-        if (callback) callback(res);
-      })
-    }
+    
+     
+    
 
-    function setServiceRate(id, data, callback) {
-      $http.put('/settings/companyProfile/serviceRate/' + id + '?setForOldExpenses=' + data.setForOldExpenses, {
-        commissionRate: data.rate
-      }).then(function (res) {
-        if (callback) callback(res);
-      })
-    }
-
-    function setAgreementsRate(rates, setForOldExpenses, callback) {
-      $http.post('/settings/companyProfile/agreementRates' + "?setForOldExpenses=" + setForOldExpenses, rates)
-        .then(function (res) {
-          if (callback) callback(res);
-        })
-    }
-
-    function getAgreementsRates(callback) {
-      $http.get('/settings/companyProfile/agreementRates')
-        .then(function (res) {
-          if (callback) callback(res);
-        })
-    }
+    
 
     
 
@@ -624,34 +587,7 @@
       Utils.handleCallback(future, callback);
     }
 
-    function saveForCompanyProfile(data, toUpdate, callback) {
-
-      if (!data) throw 'data is required!';
-      if (!toUpdate) throw 'toUpdate is required!';
-
-      if (toUpdate === 'addresses') {
-        data = { addresses: data }
-      }
-
-      var url = '/settings/companyProfile/' + toUpdate,
-        method = 'PUT',
-        saveData = angular.copy(data);
-
-      $http({
-        url: url,
-        method: method,
-        data: data
-      }).then(function (resp) {
-        if (callback) {
-          callback(resp.data, saveData);
-        }
-      }, function (resp) {
-        if (callback) {
-          callback(resp.data, saveData);
-        }
-      });
-
-    }
+ 
 
     function getCompanyForSettingPage(callback) {
 
@@ -847,78 +783,22 @@
       $http.put('/settings/companyProfile/allowUsersCreateTags?allow=' + value, {});
     }
 
-    function saveCompanyPaymentInfo(data, callback) {
-      if (data === undefined) {
-        throw 'First parameter required!'
-      }
-      var future = $http({
-        url: '/ps/settings',
-        method: 'PUT',
-        data: data
-      });
+   
+ 
 
-      Utils.handleCallback(future, callback);
-    }
+     
 
-    function getCompanySMTPSettings(callback) {
-      var future = $http.get('/settings/companyProfile/SMTPSettings');
-      Utils.handleCallback(future, callback);
-    }
+ 
 
-    function checkSMTPLoginUnique(email, callback) {
-      var future = $http.get('/settings/companyProfile/SMTPSettings/checkEmailUnique?email=' + email);
-      Utils.handleCallback(future, callback);
-    }
+   
+   
+ 
 
-    function changeRoleName(name, id, callback) {
-      var future = $http.put('/settings/companyProfile/updateTechRoleName/' + id, { newTechRoleName: name });
-      Utils.handleCallback(future, callback);
-    }
+   
 
-    function addNewRole(role, callback) {
-      var future = $http.post('/settings/companyProfile/createTechRole', role);
-      Utils.handleCallback(future, callback);
-    }
+  
 
-    function deleteRole(roleId, callback) {
-      var future = $http.delete('/settings/companyProfile/deleteTechRole/' + roleId);
-      Utils.handleCallback(future, callback);
-    }
-
-    function getPermissions(callback) {
-      var future = $http.get('/settings/companyProfile/permissions');
-      Utils.handleCallback(future, callback);
-    }
-
-    function savePermissions(permissions, callback) {
-      $http.post('/settings/companyProfile/permissions', permissions);
-    }
-
-    function getTechRoles(callback) {
-      var future = $http.get('/settings/companyProfile/getRoleNames');
-
-      RealTimeService.subscribe('/techRoles', $rootScope.$new(), function (newChange) {
-
-
-        if (newChange.action === 'TECH_ROLE_DELETED') {
-          $rootScope.techRolesChanged = newChange.data.id;
-        } else {
-          $rootScope.techRolesChanged = newChange.data;
-        }
-      })
-
-      Utils.handleCallback(future, callback);
-    }
-
-    function getEmailAlias(callback) {
-      var future = $http.get('/settings/companyProfile/emailAlias');
-      Utils.handleCallback(future, callback);
-    }
-
-    function saveEmailAlias(emailAlias, callback) {
-      var future = $http.post('/settings/companyProfile/emailAlias', { emailAlias: emailAlias });
-      Utils.handleCallback(future, callback);
-    }
+  
 
     function getIndustries(callback) {
       var future = $http.get('/company/getIndustries');
@@ -966,7 +846,6 @@
       getClientCompaniesInfo: getClientCompaniesInfo,
       archive: archive,
       save: save,
-      saveForCompanyProfile: saveForCompanyProfile,
       saveCompanySettingsDto: saveCompanySettingsDto,
       getCompanyForSettingPage: getCompanyForSettingPage,
       getCompanyData: getCompanyData,
@@ -979,31 +858,14 @@
       deleteLogo: deleteLogo,
       getCompanyContacts: getCompanyContacts,
       saveAllowingCreateCustomTags: saveAllowingCreateCustomTags,
-      getCompanySMTPSettings: getCompanySMTPSettings,
-      checkSMTPLoginUnique: checkSMTPLoginUnique,
-      getPermissions: getPermissions,
-      savePermissions: savePermissions,
-      changeRoleName: changeRoleName,
-      addNewRole: addNewRole,
-      deleteRole: deleteRole,
-      getTechRoles: getTechRoles,
-      getEmailAlias: getEmailAlias,
-      saveEmailAlias: saveEmailAlias,
       getIndustries: getIndustries,
       isVendorHasProducts: isVendorHasProducts,
       saveInboxEnabled: saveInboxEnabled,
       getCompanyPaymentInfo: getCompanyPaymentInfo,
-      saveCompanyPaymentInfo: saveCompanyPaymentInfo,
       changePrimaryContact: changePrimaryContact,
       checkStorageCompanyLength: checkStorageCompanyLength,
       reloadCurrentCompany: reloadCurrentCompany,
-      setServiceRate: setServiceRate,
-      setCategoryRate: setCategoryRate,
-      setAgreementsRate: setAgreementsRate,
-      getAgreementsRates: getAgreementsRates,
-      setTechLead: setTechLead,
       getReferenceDate: getReferenceDate,
-      setReferenceDate: setReferenceDate,
       resetReferenceDate: resetReferenceDate,
       sendEmail: sendEmail,
       updateCompanyTags: updateCompanyTags

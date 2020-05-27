@@ -1,4 +1,4 @@
-<div class="table-container">
+<div class="table-container" [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}">
 <table class="qt-table-modern ticket-table">
   <tbody  infiniteScroll
   [infiniteScrollDistance]="2"
@@ -9,10 +9,11 @@
   <ng-template ngFor let-ticket
               [ngForOf]="tickets"
               [ngForTrackBy]="trackById">
-   <app-tickets-table-item (click)="editTicket(ticket.id)" [listColors]="listColors" [statusColor]="statusColor"  [ticket]="ticket"></app-tickets-table-item>
+   <app-tickets-table-item (click)="editTicket(ticket.id)" [listColors]="listColors" [statusColor]="statusColor"  [setTicket]="ticket"></app-tickets-table-item>
  </ng-template>
   </tbody>
 </table>
+<div class="loading pengind-loading" *ngIf="showPendingPreloader"></div>
   <div class="loading" *ngIf="showPreloader"></div>
 </div>
 

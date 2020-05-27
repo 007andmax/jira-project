@@ -71,9 +71,9 @@ export class TicketsListService {
     }
     if (user.id) {
       return `url(${'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt :
-        '')}) no-repeat`
+        '')}) 0% 0% / cover no-repeat`
     } else if (user.avatar && user.avatar.origin && user.avatar.origin.id) {
-      return `url(/file/${(user.avatar.origin.id)}.jpg) no-repeat`;
+      return `url(/file/${(user.avatar.origin.id)}.jpg) 0% 0% / cover no-repeat`;
     } else {
       return '#16a4fa';
     }

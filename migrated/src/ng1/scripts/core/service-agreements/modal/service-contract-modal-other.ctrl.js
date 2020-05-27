@@ -126,7 +126,7 @@
           $scope.serviceContract.numOfIntervalsPreview;
           $scope.serviceContract.isAdditionalServices = $scope.serviceContract.services.length > 0;
           $scope.serviceContract.minStartDate = Date.now();
-           
+          console.log("$scope.serviceContract",$scope.serviceContract);
           $timeout(function () {
              
             changeNumOfIntervals($scope.serviceContract.startDate,$scope.serviceContract.endDate, true);
@@ -609,14 +609,18 @@ $scope.serviceContract.serviceExpenses.forEach((item) => {
                   startDate.setHours(0, 0, 0, 0);
                   startDate.setSeconds(0);
                   startDate.setMilliseconds(0);
+
+                  endDate.setHours(0, 0, 0, 0);
+                  endDate.setSeconds(0);
+                  endDate.setMilliseconds(0);
                   var sd = startDate;
-                  sd = Utils.calculateDateWithTimeZoneAndPeriod(sd, $scope.serviceContract.period, 1);
-                  sd = Utils.minusDays(sd, 1);
-                  var nt = sd;
+                //  sd = Utils.calculateDateWithTimeZoneAndPeriod(sd, $scope.blockTimeContract.period, 1);
+                //  sd =  Utils.minusDays(sd, 1);
+                  var nt = new Date(sd.getTime() - 86400000 + 86400000 * Number($scope.serviceContract.period) * d);
                   nt.setHours(0, 0, 0, 0);
                   nt.setSeconds(0);
                   nt.setMilliseconds(0);
-                  if(nt.getTime() === endDate.getTime()) {
+                  if(nt.getTime() == endDate.getTime()) {
                     interval = d;
                     break;
                   }

@@ -19,7 +19,7 @@
 
         <div class="ticket-updates__date-icon icon__assign-date"></div>
         <div class="ticket-updates__photo-people" [textContent]="ticketsListService.getAssignedUserNameForAvatar(service.user)"
-        [ngStyle]="{'background': ticketsListService.getStyleAvatar(service.user),'background-size': 'cover'}"></div>
+        [ngStyle]="{'background': ticketsListService.getStyleAvatar(service.user)}"></div>
       </div>
       <div class="editable-description">
       <textarea    appTextArea  [minHeight]="48"  cols="5" rows="1" id="service-description" placeholder="Write ticket conversation here…"

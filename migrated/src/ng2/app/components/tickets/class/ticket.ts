@@ -52,4 +52,7 @@ export class Ticket {
         this.unread = data.unread;
         this.userCompanies = data.userCompanies;
     }
+    public setAssignedUserId(id) {
+        this.assignedUserId = id;
+    }
 }

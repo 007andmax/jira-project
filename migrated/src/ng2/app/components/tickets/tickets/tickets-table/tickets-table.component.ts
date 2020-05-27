@@ -25,7 +25,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
   listColors: Array<StatusColor> = [];
   statusColor: TicketsColor;
   offset: number = 15;
-
+  showPendingPreloader:boolean = false;
   constructor(private ticketsService: TicketsService,
     private ticketsListService: TicketsListService,
     public cd: ChangeDetectorRef,
@@ -39,12 +39,14 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     })
     this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
       let ticket = new Ticket(data);
+      if (data.assignedUser) ticket.setAssignedUserId(data.assignedUser.id);
       let findIndex = this.tickets.findIndex(item => item.id === ticket.id);
       if (this.ticketsListService.isTicketMatchesFilters(this.ticketsFilter, data)) {
         if (findIndex > -1) this.tickets[findIndex] = data;
       } else {
         if (findIndex > -1) this.tickets.splice(findIndex, 1);
       }
+      this.cd.detectChanges();
     })
 
     this.ticketsStateService.getOnRemoveTicket().subscribe(data => {
@@ -82,13 +84,18 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
       return;
     }
     this.ticketsFilter.setOffset(this.page_number * this.offset);
+    
+ 
+  if (this.page_number > 0)this.showPendingPreloader = true;
     this.ticketsService.getTickets(this.ticketsFilter.getListTupe(), this.ticketsFilter.getDataForRequest()).subscribe((data: Array<Ticket>) => {
       this.tickets = [...this.tickets, ...data];
       this.infiniteScrollDisabled = false;
       if (data.length < this.offset) this.ticketsListService.setBlockList(true);
       this.page_number += 1;
       this.showPreloader = false;
+      this.showPendingPreloader = false;
       this.cd.detectChanges();
+    
     })
   }
   public onScroll() {

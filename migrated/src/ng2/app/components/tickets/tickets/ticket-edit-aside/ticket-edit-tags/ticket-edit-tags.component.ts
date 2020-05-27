@@ -45,12 +45,12 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-    this.tagsService.getTags().subscribe((data) => {
+    let getTags = this.tagsService.getTags().subscribe((data) => {
       this.tags = data.sort((a, b) => (a.word.toLowerCase() > b.word.toLowerCase()) ?
         1 : ((b.word.toLowerCase() > a.word.toLowerCase()) ? -1 : 0));
       this.reqTags = data;
     })
-
+    this.sub.add(getTags);
     this.onInitClearState();
     this.onCheckEditItem();
   }
@@ -70,6 +70,7 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
     if (event.target.closest('.selected-tag-ticket')) return;
     if (!event.target.closest('app-ticket-edit-tags') && !event.target.closest('.dropdown-menu') && (this.init || this.isChangeInput)) {
       if (this.isChangeInput) {
+        console.log("on add tag",this.userInput.nativeElement.value);
         let tag: Tag = {
           colorCode: 0, usedCounter: 0, word: this.userInput.nativeElement.value.trim(), id: ''
         }
@@ -149,6 +150,7 @@ export class TicketEditTagsComponent implements OnInit, OnDestroy {
     if (!find) {
       this.selectedTag.push(tag);
     }
+    this.isChangeInput = false;
     this.tagCtrl.setValue(null);
   }
 

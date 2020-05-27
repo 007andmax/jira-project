@@ -11,10 +11,11 @@
           scope: {
             minDate: '=',
             maxDate: '=',
-            defaultDate: '='
+            defaultDate: '=',
+            period: '='
           },
           link: function (scope, element, attrs, ctrl) {
-           
+           console.log("scope",scope);
             var isolate = (element[0].getAttribute('isolate')) ? true : false;
             var mobile = (element[0].getAttribute('mobile')) ? true : false;
           let open = false;
@@ -31,9 +32,14 @@
             };
 
 
-
+            console.log("scope.minDate",scope.minDate);
             if (scope.minDate) {
-              options.minDate = $filter('date')(scope.minDate, 'dd MMM yyyy');
+              options.minDate = $filter('date')(getMinStartDate(scope.period,scope.minDate ), 'dd MMM yyyy');
+              console.log("getMinStartDate",getMinStartDate(scope.period,scope.minDate ));
+
+            } else {
+              options.minDate = $filter('date')(getMinStartDate(scope.period,Date.now() ), 'dd MMM yyyy');
+              console.log("getMinStartDate",getMinStartDate(scope.period,scope.minDate ));
             }
 
             if (scope.maxDate) {
@@ -47,7 +53,7 @@
               }
               options.defaultDate = $filter('date')(defaultDate, 'dd MMM yyyy');
             }
-
+console.log("options",options);
             $timeout(function () {
               element.datetimepicker(options);
               ctrl.$setPristine();
@@ -63,6 +69,7 @@
 
 
             element.bind('dp.change', function (e) {
+              console.log("e.date._d",e);
               var formattedDate = $filter('date')(e.date._d, 'dd MMM yyyy');
               
               if (isolate && open) {
@@ -84,6 +91,42 @@
               if (element.data('DateTimePicker') && mobile)  element.parents().find('.dropdown-menu').removeClass('mobile-datepicker');
               open = false;
             });
+
+            function getMinStartDate(interval,startDate) {
+              var newMinStartDate;
+              var now = new Date(startDate);
+              var n = new Date(now);
+              console.log("interval",interval);
+              var day = 1000 * 60 * 60 * 24;
+              if (interval === 'Month') {
+                
+                n.setMonth(n.getMonth() - 1);
+                newMinStartDate = n.getTime() + day;
+    
+              } else if (interval === 'Year') {
+               
+                n.setFullYear(n.getFullYear() - 1);
+                newMinStartDate = n.getTime() + day;
+    
+              } else if (interval === 30) {
+                
+                newMinStartDate = now - (29*day);
+    
+              } else if (interval === 15) {
+               
+                newMinStartDate = now - (14*day);
+    
+              } else if (interval === 7) {
+                 
+                newMinStartDate = now - (6*day);
+    
+              } else if(interval === 1) {
+              
+              }
+
+              return newMinStartDate;
+            
+            }
 
           }
         }

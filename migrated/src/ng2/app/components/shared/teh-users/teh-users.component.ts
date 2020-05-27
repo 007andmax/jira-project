@@ -54,6 +54,8 @@ export class TehUsersComponent implements OnInit, OnDestroy {
         } 
       })
     }
+    console.log("this.editUsers",this.editUsers);
+    console.log("this.usersList",this.usersList);
     this.onInitClearState();
     this.checUsersForEdit();
   }

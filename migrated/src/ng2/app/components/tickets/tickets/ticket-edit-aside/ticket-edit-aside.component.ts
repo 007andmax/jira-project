@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.service';
 import { TicketProfile } from '../class/ticket-profile';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
@@ -22,6 +22,7 @@ import { Ticket } from '../../class/ticket';
 import { TicketChangeField } from '../class/ticket-change-field';
 import { WebsocketService } from 'src/ng2/app/services/websocket/websocket.service';
 import { TicketProfileUpdate } from '../class/ticket-profile-update';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-ticket-edit-aside',
   templateUrl: './ticket-edit-aside.component.html',
@@ -29,7 +30,7 @@ import { TicketProfileUpdate } from '../class/ticket-profile-update';
   providers: [TicketsListService, TicketsPermissionsService]
 
 })
-export class TicketEditAsideComponent implements OnInit {
+export class TicketEditAsideComponent implements OnInit, OnDestroy {
   @ViewChild('updateForm') updateForm: TicketProfileFormUpdateComponent;
   ticketProfile: TicketProfile = new TicketProfile();
   opened = false;
@@ -42,6 +43,7 @@ export class TicketEditAsideComponent implements OnInit {
   listAssignedUser: Array<CurrentUser> = [];
   lisUpdateUser: Array<CurrentUser> = [];
 toggleRightPanel:boolean = false;
+  sub: Subscription = new Subscription();
   constructor(private ticketsStateService: TicketsStateService,
     private confirmStateService: ConfirmStateService,
     private ticketsService: TicketsService,
@@ -54,11 +56,12 @@ toggleRightPanel:boolean = false;
     public cd: ChangeDetectorRef,
     private companiesStateService: CompaniesStateService) { }
 
+
   ngOnInit() {
     this.ticketsStateService.getOnOpenTicket().subscribe(data => {
       this.showPreloader = true;
     })
-    this.ticketsStateService.getOnEditTicket().subscribe(data => {
+    let getOnEditTicket = this.ticketsStateService.getOnEditTicket().subscribe(data => {
       this.ticketStateService.unsubscribeTicket();
       if (this.updateForm) this.updateForm.reset();
       this.ticketProfile = data;
@@ -71,6 +74,7 @@ toggleRightPanel:boolean = false;
       this.ticketStateService.subsribeToTicket(this.ticketProfile.id);
       this.cd.detectChanges();
     })
+    this.sub.add(getOnEditTicket);
     this.ticketsStateService.getOnInitColor().subscribe(data => {
       this.listColors = data;
     })
@@ -175,6 +179,7 @@ toggleRightPanel:boolean = false;
       return new TicketProfileUpdate(item);
     })];
     this.ticketProfile.updates = updates;
+    this.cd.detectChanges();
   }
   onChangeTags(data) {
     if (!this.opened) return;
@@ -205,8 +210,9 @@ toggleRightPanel:boolean = false;
   }
   toggleNote() {
     if (this.elRef.nativeElement.querySelector("#ticket-note").value != this.ticketProfile.note) {
-      this.onChangeSubjectNote();
       this.ticketProfile.note = this.elRef.nativeElement.querySelector("#ticket-note").value;
+      this.onChangeSubjectNote();
+    
     }
   }
   onChangeSubjectNote() {
@@ -327,5 +333,8 @@ toggleRightPanel:boolean = false;
   }
   public trackByIndex(index, item) {
     return index;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }
