@@ -11,6 +11,7 @@ import { StatusColor } from './tickets-status/class/status-color';
 import { TicketsColor } from './tickets-status/class/tickets-color';
 import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 import { TicketsCounts } from '../../tickets/tickets/class/tickets-counts';
+import { Company } from 'src/ng2/app/interfaces/company/company';
 
 @Component({
   selector: 'app-left-panel-tickets',
@@ -21,7 +22,7 @@ export class LeftPanelTicketsComponent implements OnInit {
   @ViewChild('usersDp') usersDp: SelectSearchComponent;
   ticketsFilter: TicketsFilter = new TicketsFilter();
   listType: string = "USERS";
-  selectedCompany: string = null;
+  selectedCompany: Company = null;
   selectedTechUser: string = null;
   selectedUser: string = null;
   companies = [];
@@ -137,6 +138,7 @@ export class LeftPanelTicketsComponent implements OnInit {
       this.selectedCompany = this.companiesState.getCompanies()[indexCompany];
       this.ticketsFilter.setCompany(this.companiesState.getCompanies()[indexCompany]);
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
+      this.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.company.id === this.selectedCompany.id));
       this.getCount();
     }
 

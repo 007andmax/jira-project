@@ -7,6 +7,7 @@ import { TicketsListService } from '../services/tickets-list.service';
 import { CurrentUser } from 'src/ng2/class/current-user/current-user';
 import { MapModalStateService } from 'src/ng2/app/states/map-modal/map-modal-state.service';
 import { CompanyInfoHistoryComponent } from './company-info-history/company-info-history.component';
+import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 
 @Component({
   selector: 'app-ticket-edit-aside-company-info',
@@ -18,16 +19,23 @@ import { CompanyInfoHistoryComponent } from './company-info-history/company-info
 export class TicketEditAsideCompanyInfoComponent implements OnInit {
   companyId: string;
   company: Company;
+  lastUserId: string = '';
+  lastCompanyId: string = '';
+  @Input() createdUser: CurrentUser;
   @ViewChild('companyHistory') companyHistory:CompanyInfoHistoryComponent;
   @Input() set setCompanyId(value) {
     this.companyId = value;
     this.company = this.companiesStateService.getCompanies().find(item => item.id === this.companyId);
     console.log("this.company", this.company);
-   if (this.companyHistory) this.companyHistory.onInitGetTickets();
+    if (this.company && this.createdUser && this.companyHistory && this.lastCompanyId !== this.company.id && this.lastUserId !== this.createdUser.id) {
+      this.lastCompanyId = this.company.id;
+      this.lastUserId = this.createdUser.id;
+      this.companyHistory.onInitGetTickets();
+     }
 
   };
   
-  @Input() createdUser: CurrentUser;
+ 
   reputations = [1, 2, 3, 4, 5];
   public primaryContact: CompanyAndressContact;
   public primaryAddress: CompanyAndress;
@@ -36,6 +44,7 @@ export class TicketEditAsideCompanyInfoComponent implements OnInit {
   public workingTime: string = '';
   constructor(private companiesStateService: CompaniesStateService,
     public ticketsListService: TicketsListService,
+    private usersStateService:UsersStateService,
     private mapModalStateService: MapModalStateService) { }
 
   ngOnInit() {
@@ -82,6 +91,12 @@ export class TicketEditAsideCompanyInfoComponent implements OnInit {
       }
 
     }
+   
+  }
+  getPhoneNumbers(userId) {
+   let user =  this.usersStateService.getAllUsers().find(item => item.id === userId);
+   if (user && user.phoneNumbers) return user.phoneNumbers;
+   return [];
   }
   onShowMap() {
     this.mapModalStateService.onSohwMap({

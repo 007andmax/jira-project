@@ -59,7 +59,7 @@
       ></div>
       <div>
         <div class="company-info-aside__primary-contact-name" [textContent]="ticketsListService.getUserName(primaryContact)"></div>
-        <ng-template class="assigned-ticket-user" ngFor let-phoneNumber [ngForOf]="primaryContact.phoneNumbers"  [ngForTrackBy]="trackByIndex">
+        <ng-template class="assigned-ticket-user" ngFor let-phoneNumber [ngForOf]="getPhoneNumbers(primaryContact.id)"  [ngForTrackBy]="trackByIndex">
           <div class="company-info-aside__ticket-created-name"  [textContent]="phoneNumber.number"></div>
           </ng-template>
         <div class="company-info-aside__primary-contact-email" [textContent]="primaryContact.primaryEmail"></div>
@@ -78,7 +78,7 @@
       [ngStyle]="{'background': ticketsListService.getStyleAvatar(createdUser)}"></div>
       <div>
         <div class="company-info-aside__ticket-created-name"  [textContent]="ticketsListService.getUserName(createdUser)"></div>
-        <ng-template class="assigned-ticket-user" ngFor let-phoneNumber [ngForOf]="createdUser.phoneNumbers"  [ngForTrackBy]="trackByIndex">
+        <ng-template class="assigned-ticket-user" ngFor let-phoneNumber [ngForOf]="getPhoneNumbers(createdUser)"  [ngForTrackBy]="trackByIndex">
           <div class="company-info-aside__ticket-created-name"  [textContent]="phoneNumber.number"></div>
           </ng-template>
         <div class="company-info-aside__ticket-created-email" [textContent]="createdUser.primaryEmail"></div>

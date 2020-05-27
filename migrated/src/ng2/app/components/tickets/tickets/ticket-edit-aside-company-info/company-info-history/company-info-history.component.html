@@ -1,13 +1,14 @@
 <div class="company-info-aside__history" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="15"
-  [infiniteScrollDisabled]="infiniteScrollDisabled" (scrolled)="onScroll()">
+  [infiniteScrollDisabled]="infiniteScrollDisabled" [scrollWindow]="false" (scrolled)="onScroll()" [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}">
   <ng-template ngFor let-ticket [ngForOf]="tickets" [ngForTrackBy]="trackById">
-    <div class="company-info-aside__history-block">
+    <div class="company-info-aside__history-block" (click)="editTicket(ticket.id)">
       <div class="company-info-aside__history-block-title">
         {{'Tkt# ' + ticket.number + ' - ' + ticket.subject}}
       </div>
-      <div class="company-info-aside__history-block-date" [textContent]="getCreateAt()">
+      <div class="company-info-aside__history-block-date" [textContent]="getCreateAt(ticket.createdAt)">
       </div>
     </div>
   </ng-template>
+  <div class="loading pengind-loading" *ngIf="showPendingPreloader"></div>
   <div class="loading" *ngIf="showPreloader"></div>
 </div>
