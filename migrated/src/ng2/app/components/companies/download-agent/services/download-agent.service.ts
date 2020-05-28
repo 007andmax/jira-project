@@ -9,7 +9,7 @@ export class DownloadAgentService {
   private apiUrl = environment.apiUrl;
   constructor( private http: HttpClient) { }
 
-  public  archiveCompany (companyId,userName,userPassword,globalAutoInstall) {
+  public  downoad (companyId,userName,userPassword,globalAutoInstall) {
     return this.http.get(this.apiUrl + 'data/prepareDownloadAgent?companyId=' + companyId + "&userName=" + userName +
     "&userPassword=" + userPassword + "&autoGlobalRemoteInstall=" + globalAutoInstall);
   }

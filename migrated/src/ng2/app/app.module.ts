@@ -241,7 +241,9 @@ import { TicketProfileUpdatesNoteEditComponent } from './components/tickets/tick
 import { ToFixedDirective } from './directives/to-fixed.directive';
 import { MapModalComponent } from './components/shared/map-modal/map-modal.component';
 import { CompanyInfoHistoryComponent } from './components/tickets/tickets/ticket-edit-aside-company-info/company-info-history/company-info-history.component';
-
+import { TicketEditAsideRightPanelComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-edit-aside-right-panel/ticket-edit-aside-right-panel.component';
+import { ModalCustomShareScreenComponent } from './services/modal/modal-custom-share-screen/modal-custom-share-screen.component';
+ 
 
 
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
@@ -585,7 +587,11 @@ angular.module('quicktech')
 
     MapModalComponent,
 
-    CompanyInfoHistoryComponent
+    CompanyInfoHistoryComponent,
+
+    TicketEditAsideRightPanelComponent,
+
+    ModalCustomShareScreenComponent,
   ],
   imports: [
     BrowserModule,
@@ -653,7 +659,8 @@ angular.module('quicktech')
     ReportSendEmailComponent,
     TicketsComponent,
     InventoryComponent,
-    CompanyProductsComponent
+    CompanyProductsComponent,
+    ModalCustomShareScreenComponent
     // RecurringTicketsComponent
   ],
   exports:[

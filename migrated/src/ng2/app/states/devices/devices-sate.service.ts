@@ -11,6 +11,7 @@ import { DeviceUpdate } from './class/device-update';
 export class DevicesSateService {
   allDevices = null;
   onGetDevices: EventEmitter<any> = new EventEmitter();
+  onRemoveConnecion: EventEmitter<any> = new EventEmitter();
  // onChangeDevices: EventEmitter<DeviceUpdate> = new EventEmitter();
   constructor(private userStateService: UsersStateService, private devicesService: DevicesService,
     private devicesRealTimeService: DevicesRealTimeService) { }
@@ -55,7 +56,12 @@ export class DevicesSateService {
       this.onInitGetDevices(this.allDevices);
     })
   }
- 
+ public onInitRemoveConnection() {
+   this.onRemoveConnecion.emit(null);
+ }
+ public getOnRemoveConnection() {
+   return this.onRemoveConnecion;
+ }
   public setAllDevices(data) {
     this.allDevices = data;
   }

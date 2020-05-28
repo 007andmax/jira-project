@@ -12,6 +12,7 @@ import { TaxesStateService } from './states/taxes/taxes-state.service';
 import { GlNumberStateService } from './states/gl-number/gl-number-state.service';
 import { InventoryStateService } from './states/inventory/inventory-state.service';
 import { TicketsStateService } from './states/tickets/tickets-state.service';
+import { ConstantsStateService } from './states/constants/constants-state.service';
 
 
 /**
@@ -41,7 +42,8 @@ export class AppComponent implements OnInit {
     private taxesStateService:TaxesStateService,
     private glNumberStateService:GlNumberStateService,
     private inventoryStateService:InventoryStateService,
-    private ticketsStateService:TicketsStateService
+    private ticketsStateService:TicketsStateService,
+    private constantsStateService:ConstantsStateService
 
   ) { }
 
@@ -59,6 +61,7 @@ export class AppComponent implements OnInit {
     this.glNumberStateService.onInit();
     this.inventoryStateService.onInit();
     this.ticketsStateService.onInit();
+    this.constantsStateService.onInit();
     //  this.userService.getCurrentUser();
     
     this.websocketService.initializeWebSocketConnection();

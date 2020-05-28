@@ -51,7 +51,7 @@ export class DownloadAgentComponent implements OnInit {
     document.body.removeChild(textArea);
   }
   downloadAgent() {
-    this.downloadAgentService.archiveCompany(this.downloadAgentStateService.getCompany().id, "", "", false).subscribe((data: any) => {
+    this.downloadAgentService.downoad(this.downloadAgentStateService.getCompany().id, "", "", false).subscribe((data: any) => {
 
       var link = document.createElement('a');
       link.target = "_blank";

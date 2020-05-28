@@ -42,7 +42,8 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
   statusColor: TicketsColor;
   listAssignedUser: Array<CurrentUser> = [];
   lisUpdateUser: Array<CurrentUser> = [];
-toggleRightPanel:boolean = false;
+
+
   sub: Subscription = new Subscription();
   constructor(private ticketsStateService: TicketsStateService,
     private confirmStateService: ConfirmStateService,

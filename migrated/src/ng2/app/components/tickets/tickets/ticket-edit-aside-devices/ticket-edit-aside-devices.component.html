@@ -1,64 +1,39 @@
 <div class="devices-aside">
-  <div class="devices-aside__title">
-    Devices (18)
+  <div class="devices-aside__title" [textContent]="'Devices (' + devices.length +')'">
   </div>
   
   <div class="devices-aside__search">
     <span  class="qt-input-search devices-aside__search-devices --dark">
-      <input  class="qt-input-search" placeholder="Search Device…" title="Search device" type="text">
+      <input  class="qt-input-search" placeholder="Search Device…" title="Search device" type="text" (input)="onSearch($event)">
     </span>
   </div>
   
   <div class="devices-aside__device-list">
-    
-    <div class="devices-aside__device --online --desktop">
-      <div class="devices-aside__device-name">Sam’s macbook pro</div>
-      <div class="devices-aside__device-owner">Jackson Sutton</div>
-      <div class="devices-aside__device-menu"></div>
-    </div>
-  
-    <div class="devices-aside__device --online --server">
-      <div class="devices-aside__device-name">File Server</div>
-      <div class="devices-aside__device-owner">Olivia Vaughn</div>
-      <div class="devices-aside__device-menu"></div>
-    </div>
-  
-    <div class="devices-aside__device --online --tables">
-      <div class="devices-aside__device-name">Tab-06</div>
-      <div class="devices-aside__device-owner">Theodore Warner</div>
-      <div class="devices-aside__device-menu"></div>
-    </div>
-  
-    <div class="devices-aside__device  --printer">
-      <div class="devices-aside__device-name">Printer-98</div>
-      <div class="devices-aside__device-owner">Beatrice Harris</div>
-      <div class="devices-aside__device-menu"></div>
-    </div>
-  
-    <div class="devices-aside__device --online --desktop">
-      <div class="devices-aside__device-name">Sam’s macbook pro</div>
-      <div class="devices-aside__device-owner">Jackson Sutton</div>
-      <div class="devices-aside__device-menu"></div>
-    </div>
-  
-    <div class="devices-aside__device --online --server">
-      <div class="devices-aside__device-name">HV File Server</div>
-      <div class="devices-aside__device-owner">Administrator</div>
-      <div class="devices-aside__device-menu"></div>
-    </div>
-  
-    <div class="devices-aside__device --online --desktop">
-      <div class="devices-aside__device-name">Scott Machine</div>
-      <div class="devices-aside__device-owner">Gary Medina</div>
-      <div class="devices-aside__device-menu"></div>
-    </div>
-  
-    <div class="devices-aside__device --online --printer">
-      <div class="devices-aside__device-name">Hp-3000</div>
-      <div class="devices-aside__device-owner">Erik Pratt</div>
-      <div class="devices-aside__device-menu"></div>
-    </div>
-  
+    <ng-template ngFor let-device [ngForOf]="devices" [ngForTrackBy]="trackById">
+ 
+      <div class="devices-aside__device" [ngClass]="{'--online': device.online,
+       '--desktop' : device.type === 'workstation',
+       '--server' : device.type === 'server',
+       '--tables' : device.type === 'tablet',
+       '--printer' : device.type === 'printer'}" ngbDropdown >
+        <div class="devices-aside__device-name" [textContent]="(device.hostName.length > 0) ? device.hostName  :  'Name is not defined'"></div>
+        <div class="devices-aside__device-owner" [textContent]="device.userName"></div>
+        <div class="devices-aside__device-menu" id="dropdownForm1" ngbDropdownToggle>
+        </div>
+        <div ngbDropdownMenu aria-labelledby="dropdownForm1">
+          <button (click)="showRemoteAccess = !showRemoteAccess ">Remote Access</button>
+          <div *ngIf="showRemoteAccess"><button ngbDropdownItem (click)="remoteAccess('CSS', device)">Custom Share Screen</button>
+            <button ngbDropdownItem>Remote desktop protocol</button></div>
+          <button ngbDropdownItem>Restart</button>
+          <button ngbDropdownItem>Shutdown</button>
+          <button ngbDropdownItem>Remove</button>
+          <button ngbDropdownItem>Mark as master</button>
+        </div>
+
+      </div>
+
+      </ng-template>
+
     
   </div>
 </div>
