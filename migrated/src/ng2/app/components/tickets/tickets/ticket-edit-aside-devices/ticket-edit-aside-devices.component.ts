@@ -73,6 +73,29 @@ export class TicketEditAsideDevicesComponent implements OnInit {
     });*/
    
   };
+   restart  (device) {
+    this.devicesService.sendPowerAction(this.companyId, device.agentId, 'reboot').subscribe(data => {
+
+    });
+   
+  };
+   shutdown  (device) {
+    this.devicesService.sendPowerAction(this.companyId, device.agentId, 'shutdown').subscribe(data => {
+
+    });
+   
+  };
+  markDeviceAsMaster(device) {
+    this.devicesService.markDeviceAsMaster(this.companyId, device.agentId).subscribe(data => {
+
+    })
+  }
+   remove  (device) {
+    this.devicesService.sendUninstallAgentRequest(this.companyId, device.agentId).subscribe(data => {
+
+    })
+    
+  }
   public connectRemoteAccess(sessionId, conectionType, isOneTime) {
     if (!sessionId) {
       throw 'SessionId is required';

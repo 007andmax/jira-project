@@ -29,27 +29,42 @@ export class DevicesService {
    * @param companyId - id of company
    */
   public getCompanyDevices(companyId){
-
     return this.http.get(this.apiUrl + `devices?companyId=${companyId}`);
-    
+  }
+  public sendPowerAction(companyId, agentIds, action) {
+  
+    if (!Array.isArray(agentIds)) {
+      agentIds = [agentIds];
+    }
+    return this.http.post(this.apiUrl + '/devices/sendPowerAction?companyId=' + companyId + '&action=' + action, agentIds);
+   
+  }
+    sendUninstallAgentRequest(companyId, devicesIds) {
+   
+    if (!Array.isArray(devicesIds)) {
+      devicesIds = [devicesIds];
+    }
+    return this.http.post(this.apiUrl + '/devices/sendUninstallAgentRequest?companyId=' + companyId,devicesIds);
   }
 public createRemoteSession(deviceId, companyId, connectionType, ticketId) {
   return this.http.get(this.apiUrl + '/remote/createRemoteSession?deviceId=' + deviceId + '&connectionType=' + connectionType + '&companyId=' + companyId + (ticketId ? '&ticketId=' + ticketId : ''));
 }
+  markDeviceAsMaster(companyId, agentId) {
+  var request = {
+    "masterAgentId": agentId,
+    "clientCompanyId": companyId
+  }
+  return this.http.post(this.apiUrl + '/devices/updateMasterAgent',request);
   
+}
 
- 
 public getSessionId(remoteSessionId, connectionType) {
-
   if (!remoteSessionId) {
     throw 'remoteSessionId is required!';
   }
-
   if (!connectionType) {
     throw 'connectionType is required!';
   }
   return this.http.get(this.apiUrl + '/devices/getSessionId?remoteSessionId=' + remoteSessionId + '&connectionType=' + connectionType);
-
-   
 }
 }

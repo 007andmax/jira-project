@@ -23,11 +23,11 @@
         <div ngbDropdownMenu aria-labelledby="dropdownForm1">
           <button (click)="showRemoteAccess = !showRemoteAccess ">Remote Access</button>
           <div *ngIf="showRemoteAccess"><button ngbDropdownItem (click)="remoteAccess('CSS', device)">Custom Share Screen</button>
-            <button ngbDropdownItem>Remote desktop protocol</button></div>
-          <button ngbDropdownItem>Restart</button>
-          <button ngbDropdownItem>Shutdown</button>
-          <button ngbDropdownItem>Remove</button>
-          <button ngbDropdownItem>Mark as master</button>
+            <button ngbDropdownItem (click)="remoteAccess('RDP', device)">Remote desktop protocol</button></div>
+          <button ngbDropdownItem (click)="restart(device)">Restart</button>
+          <button ngbDropdownItem (click)="shutdown(device)">Shutdown</button>
+          <button ngbDropdownItem (click)="remove(device)">Remove</button>
+          <button ngbDropdownItem (click)="markDeviceAsMaster(device)">Mark as master</button>
         </div>
 
       </div>
