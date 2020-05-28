@@ -34,7 +34,7 @@ export class CompanyInfoHistoryComponent implements OnInit {
 
   ngOnInit() {
     console.log("CompanyInfoHistoryComponent");
-    this.ticketsFilter.setListType("ALL");
+ 
 
 
   }
@@ -76,10 +76,12 @@ export class CompanyInfoHistoryComponent implements OnInit {
       this.infiniteScrollDisabled = false;
       return;
     }
+    this.ticketsFilter.setListType("ALL");
     this.ticketsFilter.setOffset(this.page_number * this.offset);
     if (this.page_number > 0) this.showPendingPreloader = true;
     console.log("this.showPendingPreloader", this.showPendingPreloader);
     console.log("this.page_number", this.page_number);
+    console.log("this.this.ticketsFilter.getListTupe()", this.ticketsFilter.getListTupe());
     this.ticketsService.getTickets(this.ticketsFilter.getListTupe(), this.ticketsFilter.getDataForRequest()).subscribe((data: Array<Ticket>) => {
       this.tickets = [...this.tickets, ...data];
       this.infiniteScrollDisabled = false;

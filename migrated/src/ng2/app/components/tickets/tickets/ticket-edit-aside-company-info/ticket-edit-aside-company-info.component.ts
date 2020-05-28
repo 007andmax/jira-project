@@ -21,6 +21,7 @@ export class TicketEditAsideCompanyInfoComponent implements OnInit {
   company: Company;
   lastUserId: string = '';
   lastCompanyId: string = '';
+  showPreloader:boolean = true;
   @Input() createdUser: CurrentUser;
   @ViewChild('companyHistory') companyHistory:CompanyInfoHistoryComponent;
   @Input() set setCompanyId(value) {
@@ -28,11 +29,13 @@ export class TicketEditAsideCompanyInfoComponent implements OnInit {
     this.company = this.companiesStateService.getCompanies().find(item => item.id === this.companyId);
     console.log("this.company", this.company);
     if (this.company && this.createdUser && this.companyHistory && this.lastCompanyId !== this.company.id && this.lastUserId !== this.createdUser.id) {
+    this.showPreloader  = true;
       this.lastCompanyId = this.company.id;
       this.lastUserId = this.createdUser.id;
       this.companyHistory.onInitGetTickets();
+    
      }
-
+     if (this.company && this.createdUser)   this.showPreloader = false;
   };
   
  
