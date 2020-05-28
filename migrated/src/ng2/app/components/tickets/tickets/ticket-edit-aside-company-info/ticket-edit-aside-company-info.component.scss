@@ -19,6 +19,7 @@
   color: white;
   margin-bottom: 10px;
   // border: solid 1px #dfe3e8;
+  background: rgb(22, 164, 250);
   border: 1px solid rgba(22, 164, 250, 0.2);
   overflow: hidden;
   }
@@ -74,6 +75,10 @@
         margin-right: 4px;
     }
   }
+  &__ticket-created {
+    margin-bottom: 17px;
+  }
+
   &__ticket-created-title,
   &__primary-contacts-title {
     font-size: 10px;
@@ -115,16 +120,14 @@
     color: white;
   }
   &__history-block {
-     margin-top: 17px;
-  }
-  &__history-block {
     border-radius: 6px;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.05);
     border: solid 1px #dfe3e8;
     padding: 9px 12px;
     margin-bottom: 6px;
-    margin-left: -9px;
-    margin-right: -9px;
+    margin-top: 0;
+    // margin-left: -9px;
+    // margin-right: -9px;
   }
   &__history-block-title {
    font-size: 12px;

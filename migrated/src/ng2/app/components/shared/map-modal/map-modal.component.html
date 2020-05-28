@@ -1,5 +1,5 @@
 <div class="map-modal" *ngIf="show">
-  <button (click)="show = false">closed</button>
+  <div (click)="show = false" class="close-map-icon icon__close"></div>
   <div class="map-area">
   <agm-map [latitude]="latitude" [longitude]="longitude" [mapTypeControl]='true'
     [zoom]="15" [title]="title">

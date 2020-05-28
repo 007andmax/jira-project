@@ -3,8 +3,9 @@
   <div class="company-info-aside__main-info">
     <div
       class="company-info-aside__main-avatar"
+      [ngStyle]="{'background': 'url('+getCompanyLogoUrl()+')'}"
     >
-    <img [src]="getCompanyLogoUrl()" class="qwe" alt="" *ngIf="checkLogo()" />
+    <!-- <img [src]="getCompanyLogoUrl()" class="qwe" alt="" *ngIf="checkLogo()" /> -->
     <span *ngIf="!checkLogo()" [textContent]="company.name[0].toUpperCase()"></span>
     </div>
     <div class="company-info-aside__name" [textContent]="company.name"></div>
@@ -12,46 +13,46 @@
     <div class="company-info-aside__rating">
       <ng-template class="assigned-ticket-user" ngFor let-reputation [ngForOf]="reputations" let-i="index" [ngForTrackBy]="trackByIndex">
       <span class="company-info-aside__star"   [ngClass]="{'icon__rating-filled' : reputation <= company.companyInfo.reputation, 'icon__rating' : reputation > company.companyInfo.reputation}"  ></span>
-      
+
       </ng-template>
     </div>
   </div>
-  
+
   <hr class="company-info-aside__divider">
-  
+
   <div class="company-info-aside__row-info">
     <div class="company-info-aside__row-info-line">
       <div class="company-info-aside__row-info-label">Telephone</div>
       <div class="company-info-aside__row-info-value" [textContent]="(primaryPhone && primaryPhone.number) ? primaryPhone.number : ''"></div>
     </div>
-    
+
     <div class="company-info-aside__row-info-line">
       <div class="company-info-aside__row-info-label">Address</div>
       <div class="company-info-aside__row-info-value">{{location}}</div>
       <div class="company-info-aside__get-direction" (click)="onShowMap()"> <span class="icon__get-direction"></span>Get Direction</div>
     </div>
-    
+
     <div class="company-info-aside__row-info-line">
       <div class="company-info-aside__row-info-label">Website</div>
       <div class="company-info-aside__row-info-value" [textContent]="company.domain"></div>
     </div>
-    
+
     <div class="company-info-aside__row-info-line">
       <div class="company-info-aside__row-info-label">Working Hours</div>
       <div class="company-info-aside__row-info-value" [textContent]="'Opens  ' + workingTime"></div>
     </div>
-    
+
     <div class="company-info-aside__row-info-line">
       <div class="company-info-aside__row-info-label">Industry</div>
       <div class="company-info-aside__row-info-value" [textContent]="(company.clientIndustry) ? company.clientIndustry.name : ''"></div>
     </div>
   </div>
-  
+
   <hr class="company-info-aside__divider">
-  
+
   <div class="company-info-aside__primary-contacts">
     <div class="company-info-aside__primary-contacts-title">PRIMARY CONTACT(S)</div>
-    
+
     <div class="company-info-aside__primary-contact d-f">
       <div class="company-info-aside__primary-contact-avatar"
       [textContent]="ticketsListService.getAssignedUserNameForAvatar(primaryContact)"
@@ -66,12 +67,12 @@
       </div>
     </div>
   </div>
-  
+
   <hr class="company-info-aside__divider">
-  
+
   <div class="company-info-aside__ticket-created">
     <div class="company-info-aside__ticket-created-title">Ticket Created by</div>
-    
+
     <div class="d-f">
       <div class="company-info-aside__ticket-created-avatar"
       [textContent]="ticketsListService.getAssignedUserNameForAvatar(createdUser)"

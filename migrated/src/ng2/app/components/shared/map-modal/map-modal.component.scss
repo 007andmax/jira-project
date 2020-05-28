@@ -9,6 +9,9 @@
     align-items: center;
     justify-content: space-between;
     background-color: rgba(0,0,0,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     .map-area {
         margin-top: -31px;
         margin-left: -48px;
@@ -17,10 +20,19 @@
         float: inherit;
         border-radius: 0;
         height: 240px;
-       
+
         width: 500px;
         agm-map {
             height: 300px;
         }
     }
+  .close-map-icon {
+    transform: translate(265px, -145px);
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background-size: cover;
+    cursor: pointer;
+    filter: invert(1);
+  }
 }
