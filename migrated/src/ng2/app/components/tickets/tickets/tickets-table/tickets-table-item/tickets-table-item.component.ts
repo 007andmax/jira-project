@@ -20,7 +20,6 @@ export class TicketsTableItemComponent implements OnInit {
     this.ticket = value;
     this.assignedUser = this.usersStateService.getAllUsers().find(item => item.id === this.ticket.assignedUserId);
     this.requestedUser = this.usersStateService.getAllUsers().find(item => item.id === this.ticket.createdUserId);
-    console.log("this.ticket", this.ticket);
   };
   @Input() listColors: Array<StatusColor> = [];
   @Input() statusColor: TicketsColor;

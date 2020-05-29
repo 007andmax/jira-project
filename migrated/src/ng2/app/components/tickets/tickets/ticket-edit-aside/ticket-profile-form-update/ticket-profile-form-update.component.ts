@@ -27,7 +27,6 @@ export class TicketProfileFormUpdateComponent implements OnInit {
   @Input() set ticket(value) {
     this.ticketProfile = value;
     this.ticketProfileFormUpdate.setTicketId(this.ticketProfile.id);
-    console.log("this.ticketProfile",this.ticketProfile.updates);
     this.addCreatedUser();
   };
   @Output() onClosed = new EventEmitter();
@@ -165,8 +164,6 @@ export class TicketProfileFormUpdateComponent implements OnInit {
       if (completeServices) completeServices = (update.services.find(item => !item.completed) ? false : true);
       if (completeProducts) completeProducts = (update.products.find(item => !item.completed) ? false : true);
     });
-console.log("completeServices",completeServices);
-console.log("completeProducts",completeProducts);
     return completeServices && completeProducts;
 
   }

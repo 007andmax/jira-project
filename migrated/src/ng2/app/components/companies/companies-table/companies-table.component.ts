@@ -92,7 +92,6 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
         }
         if (primaryAddress && primaryAddress.phoneNumbers.length) primaryPhone = primaryAddress.phoneNumbers[0];
       }
-console.log("this.primaryContact",this.primaryContact);
       this.primaryContact = primaryContact;
       this.primaryAddress = primaryAddress;
       this.primaryPhone = primaryPhone;

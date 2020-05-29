@@ -36,7 +36,6 @@ export class TicketProfileUpdatesServiceInfoComponent implements OnInit {
     if (this.service.user) this.userService = [this.service.user];
     this.listTehUsers = this.getUsersForAssign();
     if (this.service.date)  this.setDateWithTimeOffset();
-    console.log("this.userService",this.userService);
   }
   edit() {
     this.onEdit.emit(null);

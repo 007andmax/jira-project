@@ -20,7 +20,8 @@ export class CompanyInfoHistoryComponent implements OnInit {
   @Input() user: CurrentUser;
   @Input() company: Company;
   showPreloader: boolean = true;
- 
+  lastUserId: string = '';
+  lastCompanyId: string = '';
   public infiniteScrollDisabled = true;
   public page_number: number = 0;
   tickets: Array<Ticket> = [];
@@ -29,19 +30,19 @@ export class CompanyInfoHistoryComponent implements OnInit {
   constructor(private ticketsListService: TicketsListService,
     private ticketsService: TicketsService,
     private elRef: ElementRef,
-    private ticketsStateService:TicketsStateService,
+    private ticketsStateService: TicketsStateService,
     public cd: ChangeDetectorRef, ) { }
 
   ngOnInit() {
-    console.log("CompanyInfoHistoryComponent");
- 
-
 
   }
   public onInitGetTickets() {
-    
-  
-    console.log("onInitGetTickets");
+    if (this.company && this.user && this.lastCompanyId !== this.company.id && this.lastUserId !== this.user.id) {
+      this.lastCompanyId = this.company.id;
+      this.lastUserId = this.user.id;
+    } else {
+      return;
+    }
     this.ticketsFilter.setCompany(this.company);
     this.ticketsFilter.setUser(this.user);
     this.showPreloader = true;
@@ -71,7 +72,7 @@ export class CompanyInfoHistoryComponent implements OnInit {
     return moment(date).format('DD MMM YYYY')
   }
   public getTickets() {
- 
+
     if (this.ticketsListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;
@@ -79,9 +80,6 @@ export class CompanyInfoHistoryComponent implements OnInit {
     this.ticketsFilter.setListType("ALL");
     this.ticketsFilter.setOffset(this.page_number * this.offset);
     if (this.page_number > 0) this.showPendingPreloader = true;
-    console.log("this.showPendingPreloader", this.showPendingPreloader);
-    console.log("this.page_number", this.page_number);
-    console.log("this.this.ticketsFilter.getListTupe()", this.ticketsFilter.getListTupe());
     this.ticketsService.getTickets(this.ticketsFilter.getListTupe(), this.ticketsFilter.getDataForRequest()).subscribe((data: Array<Ticket>) => {
       this.tickets = [...this.tickets, ...data];
       this.infiniteScrollDisabled = false;

@@ -32,12 +32,10 @@ export class TicketEditAsideDevicesComponent implements OnInit {
     let devices = this.devicesSateService.getAllDevices()[this.companyId]
     this.devices = (devices) ? devices : [];
     this.reqDevices = (devices) ? devices : []
-    console.log("this.devices", this.devices);
     this.devicesSateService.getOnRemoveConnection().subscribe(data => {
      let remoteConnectPort = this.constantsStateService.getConstant('remote.connect.port'),
       restServerAddress = this.constantsStateService.getConstant('rest.server.address'),
       url = 'quicktech://connect?serverIP=' + restServerAddress + '&port=' + remoteConnectPort + '&sessionID=' + this.realSessionId;
-      console.log("url",url);
     //  window.open(url);
        window.open(url, '_self');
    /* DevicesService.subscribeToRemoteConnection(realSessionId, function () {
@@ -53,7 +51,6 @@ export class TicketEditAsideDevicesComponent implements OnInit {
     })
   }
   onSearch(event) {
-    console.log("event", event.target);
     if (event.target.value === "") {
       this.devices = JSON.parse(JSON.stringify(this.reqDevices));
       return;
@@ -61,9 +58,7 @@ export class TicketEditAsideDevicesComponent implements OnInit {
     this.devices = this.reqDevices.filter(item => item.hostName.toLowerCase().includes(event.target.value));
   }
    remoteAccess  (connectionType,device) {
-  
       this.devicesService.createRemoteSession(device.id,this.companyId,connectionType,null).subscribe((resp:any) => {
-        console.log("resp",resp);
         this.connectRemoteAccess(resp.sessionId, connectionType,false);
       })
 
@@ -105,7 +100,6 @@ export class TicketEditAsideDevicesComponent implements OnInit {
     }
     if (isOneTime) {
       this.devicesService.getSessionId(sessionId, conectionType).subscribe((realSessionId:any) => {
-        console.log("realSessionId",realSessionId);
         if (!realSessionId || !realSessionId.sessionId || realSessionId.sessionId.length < 1) {
           throw "Not session Id"
         } else {

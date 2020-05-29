@@ -5,18 +5,17 @@ import { ConstantsService } from '../../services/constants/constants.service';
   providedIn: 'root'
 })
 export class ConstantsStateService {
-    constants;
-  constructor(private constantsService:ConstantsService) { }
+  constants;
+  constructor(private constantsService: ConstantsService) { }
 
   public onInit() {
     this.constantsService.getConstants().subscribe(data => {
-      console.log("data",data);
       this.constants = data;
     })
 
   }
-  public  getConstant(constantName) {
-return this.constants[constantName];
-  
+  public getConstant(constantName) {
+    return this.constants[constantName];
+
   }
 }
