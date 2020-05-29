@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { TicketProfile } from '../../class/ticket-profile';
 
 @Component({
@@ -10,11 +10,24 @@ export class TicketEditAsideRightPanelComponent implements OnInit {
   @Input() ticketProfile: TicketProfile;
   type: string = 'COMPANY_INFO';
   toggleRightPanel: boolean = false;
-  constructor() { }
+  constructor(public cd: ChangeDetectorRef, ) { }
 
   ngOnInit() {
   }
-  public togglePanel(type) {
+  public togglePanel(type = null) {
+    console.log("type", type);
+    if (this.toggleRightPanel && !type) {
+      this.toggleRightPanel = false;
+      console.log("1");
+      return;
+    }
+    if (!this.toggleRightPanel && !type) {
+      this.toggleRightPanel = true;
+      this.type = 'COMPANY_INFO';
+      console.log("2");
+      return;
+    }
+    console.log("3");
     if (this.toggleRightPanel && this.type === type) {
       this.toggleRightPanel = false;
       this.type = 'COMPANY_INFO';
@@ -24,6 +37,6 @@ export class TicketEditAsideRightPanelComponent implements OnInit {
       this.toggleRightPanel = true;
       this.type = type;
     }
-
+    this.cd.detectChanges();
   }
 }

@@ -16,9 +16,14 @@ import { ConstantsStateService } from 'src/ng2/app/states/constants/constants-st
 export class TicketEditAsideDevicesComponent implements OnInit {
   devices = [];
   reqDevices = [];
-  @Input() companyId: string = '';
+    companyId: string = '';
   showRemoteAccess: boolean = false;
   realSessionId: string;
+  lastCompanyId:string;
+  @Input() set setCompanyId(value) {
+    this.companyId = value;
+    this.onGetDevices();
+  };
   constructor(private devicesSateService: DevicesSateService,
     private constantsStateService: ConstantsStateService,
     private modalService: NgbModal,
@@ -29,15 +34,23 @@ export class TicketEditAsideDevicesComponent implements OnInit {
   }
 
   ngOnInit() {
-    let devices = this.devicesSateService.getAllDevices()[this.companyId]
-    this.devices = (devices) ? devices : [];
-    this.reqDevices = (devices) ? devices : [];
+   this.onGetDevices();
     this.devicesSateService.getOnRemoveConnection().subscribe(data => {
       let remoteConnectPort = this.constantsStateService.getConstant('remote.connect.port'),
         restServerAddress = this.constantsStateService.getConstant('rest.server.address'),
         url = 'quicktech://connect?serverIP=' + restServerAddress + '&port=' + remoteConnectPort + '&sessionID=' + this.realSessionId;
       window.open(url, '_self');
     })
+  }
+  onGetDevices() {
+    if (this.companyId && this.lastCompanyId !== this.companyId ) {
+      this.lastCompanyId = this.companyId;
+    } else {
+      return;
+    }
+    let devices = this.devicesSateService.getAllDevices()[this.companyId]
+    this.devices = (devices) ? devices : [];
+    this.reqDevices = (devices) ? devices : [];
   }
   onSearch(event) {
     if (event.target.value === "") {

@@ -15,56 +15,69 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./ticket-edit-aside-users.component.scss'],
   providers: [TicketsListService]
 })
-export class TicketEditAsideUsersComponent implements OnInit,OnDestroy {
-  @Input() companyId: string;
-  users:Array<User> = [];
-  reqUsers:Array<User> = [];
-  showPrivilege:boolean = false;
-  showSubscription:boolean = false;
-  sub:Subscription = new Subscription();
-  constructor(private usersStateService:UsersStateService,
-    private usersService:UsersService,
+export class TicketEditAsideUsersComponent implements OnInit, OnDestroy {
+  companyId: string;
+  users: Array<User> = [];
+  reqUsers: Array<User> = [];
+  showPrivilege: boolean = false;
+  showSubscription: boolean = false;
+  sub: Subscription = new Subscription();
+  lastCompanyId:string = '';
+  @Input() set setCompanyId(value) {
+    this.companyId = value;
+    this.onGetUsers();
+  };
+  constructor(private usersStateService: UsersStateService,
+    private usersService: UsersService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
-    public ticketsListService: TicketsListService,) { }
- 
+    public ticketsListService: TicketsListService, ) { }
+
 
   ngOnInit() {
-    let users = this.usersStateService.getAllUsers().filter(item => item.company.id === this.companyId && item.accountType !== 'TECH' && !item.deletedAt);
-    this.users = (users) ? users : [];
-    this.reqUsers = (users) ? users : [];
-    console.log("users",users);
+  
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
-        if (this.confirmStateService.getConfirmAction() === ARCHIVE_USER)   this.onArchiveUser(this.usersStateService.getUserForArchive().id);
+        if (this.confirmStateService.getConfirmAction() === ARCHIVE_USER) this.onArchiveUser(this.usersStateService.getUserForArchive().id);
       }
     })
     this.sub.add(getConfirm);
+  }
+  public onGetUsers() {
+    if (this.companyId && this.lastCompanyId !== this.companyId ) {
+      this.lastCompanyId = this.companyId;
+    } else {
+      return;
+    }
+    let users = this.usersStateService.getAllUsers().filter(item => item.company.id === this.companyId && item.accountType !== 'TECH' && !item.deletedAt);
+    this.users = (users) ? users : [];
+    this.reqUsers = (users) ? users : [];
+    console.log("users", users);
   }
   private onArchiveUser(id) {
     let ids = [];
     ids.push(id);
     let archiveUser = this.usersService.onArchiveUsers(ids).subscribe(data => {
-        let index = this.users.findIndex(item => item.id === id);
-        if (index > -1) this.users.splice(index, 1);
-        let indexReq = this.reqUsers.findIndex(item => item.id === id);
-        if (indexReq > -1) this.reqUsers.splice(indexReq, 1);
+      let index = this.users.findIndex(item => item.id === id);
+      if (index > -1) this.users.splice(index, 1);
+      let indexReq = this.reqUsers.findIndex(item => item.id === id);
+      if (indexReq > -1) this.reqUsers.splice(indexReq, 1);
     })
-   this.sub.add(archiveUser);
+    this.sub.add(archiveUser);
   }
   sendEmail(user) {
     window.open("mailto:" + user.primaryEmail, '_parent');
   }
-  changeUserRole  (user,userRole) {
+  changeUserRole(user, userRole) {
     this.usersService.changeUserRole(user.id, userRole).subscribe(data => {
 
     })
   };
-  onChangeSubscriptions(field,user) {
+  onChangeSubscriptions(field, user) {
     let subscription = JSON.parse(JSON.stringify(user.subscription));
     subscription[field] = !subscription[field];
     this.usersService.setSubscriptions(subscription).subscribe(res => {
-       
+
       user.subscription = subscription;
     })
   }
@@ -83,6 +96,6 @@ export class TicketEditAsideUsersComponent implements OnInit,OnDestroy {
     this.users = this.reqUsers.filter(item => this.ticketsListService.getUserName(item).toLowerCase().includes(event.target.value));
   }
   ngOnDestroy(): void {
-   this.sub.unsubscribe();
+    this.sub.unsubscribe();
   }
 }
