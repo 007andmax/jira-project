@@ -29,10 +29,11 @@
     }
 
     &.--btn40h {
-      padding-left: 32px;
-      padding-right: 32px;
+      padding-left: 20px;
+      padding-right: 20px;
       height: 40px;
       line-height: 40px;
+      font-family: 'Graphik-Meium', sans-serif;
     }
 
     &.disabled {

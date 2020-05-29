@@ -26,13 +26,14 @@
       margin-bottom: 16px;
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-end;
+
     }
 
     &__count-items {
       text-transform: uppercase;
       font-weight: 600;
-      font-size: 12px;
+      font-size: 10px;
   }
 
     &__show-hide-btn {

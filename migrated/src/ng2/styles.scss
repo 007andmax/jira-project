@@ -2650,3 +2650,18 @@ app-ticket-profile-form-update {
   cursor: pointer;
   z-index: 1;
 }
+
+app-add-assigned-user {
+  .mat-chip-remove {
+    opacity: 1 !important;
+  }
+
+  .mat-chip-remove:before {
+    background: url('./assets/img/icons/tag-user-close.svg') no-repeat !important;
+    filter: brightness(1) !important;
+    width: 16px !important;
+    top: 1px !important;
+    height: 16px !important;
+    right: 0px !important;
+  }
+}
