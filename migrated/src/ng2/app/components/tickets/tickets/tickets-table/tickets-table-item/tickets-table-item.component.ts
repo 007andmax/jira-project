@@ -25,33 +25,24 @@ export class TicketsTableItemComponent implements OnInit {
   @Input() statusColor: TicketsColor;
   assignedUser: User;
   requestedUser: User;
+  indexNoAvatar: number = 0;
+  listColorNoAvatar = ['#0cdeaa','#16a4fa','#7c77cb','#ffb937'];
   constructor(private usersStateService: UsersStateService,
     public ticketsListService: TicketsListService,
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
+    this.indexNoAvatar = this.ticketsListService.randomInteger(0, 3);
   }
   public getUserName(user) {
     return (user) ? `${user.firstName} ${user.lastName}` : '';
   }
+
   getNameForAvatar() {
     if (!this.requestedUser) return '';
     if (!this.requestedUser.avatar) return `${(this.requestedUser.firstName) ? this.requestedUser.firstName[0].toUpperCase() : ''}${(this.requestedUser.lastName) ? this.requestedUser.lastName[0].toUpperCase() : ''}`;
     return '';
   }
-  getStyleAvatar(user) {
-    if (!(user && user.avatar)) {
-      return '#16a4fa';
-    }
-    if (user.id) {
-      return `url(${'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt :
-        '')}) no-repeat`
-    } else if (user.avatar && user.avatar.origin && user.avatar.origin.id) {
-      return `url(/file/${(user.avatar.origin.id)}.jpg) no-repeat`;
-    } else {
-      return '#16a4fa';
-    }
-  };
   getCreateAt() {
     let date = new Date(this.ticket.createdAt);
     let currentDate = new Date();

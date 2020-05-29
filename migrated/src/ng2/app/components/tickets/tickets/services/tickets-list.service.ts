@@ -65,9 +65,9 @@ export class TicketsListService {
     let find =  ((multiAssignedUsers) ? multiAssignedUsers : []).find(item => item.id === this.usersStateService.getCurrentUser().id);
     return (find) ? true : false;
   }
-  getStyleAvatar(user) {
+  getStyleAvatar(user,color = null) {
     if (!(user && user.avatar)) {
-      return '#16a4fa';
+      return (color) ? color : '#16a4fa';
     }
     if (user.id) {
       return `url(${'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt :
@@ -75,9 +75,14 @@ export class TicketsListService {
     } else if (user.avatar && user.avatar.origin && user.avatar.origin.id) {
       return `url(/file/${(user.avatar.origin.id)}.jpg) 0% 0% / cover no-repeat`;
     } else {
-      return '#16a4fa';
+      return (color) ? color : '#16a4fa';
     }
   };
+    randomInteger(min, max) {
+    // случайное число от min до (max+1)
+    let rand = min + Math.random() * (max + 1 - min);
+    return Math.floor(rand);
+  }
   public getUserName(user) {
     return (user) ? `${user.firstName} ${user.lastName}` : '';
   }
