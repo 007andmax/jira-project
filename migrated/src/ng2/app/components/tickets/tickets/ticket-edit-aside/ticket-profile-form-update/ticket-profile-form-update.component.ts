@@ -110,6 +110,8 @@ export class TicketProfileFormUpdateComponent implements OnInit {
       this.notificationStateService.oninitShowNotification(`Update has been added`);
       this.files = [];
       this.ticketProfileFormUpdate.clearAttachments();
+    },err => {
+      this.isUpdate = false;
     })
   }
   updateAndClose() {
@@ -153,6 +155,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
       this.ticketProfileFormUpdate.clearAttachments();
       this.onClosed.emit(null);
     }, err => {
+      this.isUpdateAndClose = false;
       this.errorNotificationStateService.oninitShowNotification(err.error.message);
     })
   }

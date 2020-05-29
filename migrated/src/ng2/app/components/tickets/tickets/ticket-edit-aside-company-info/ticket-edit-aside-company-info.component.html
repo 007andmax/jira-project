@@ -3,7 +3,7 @@
   <div class="company-info-aside__main-info">
     <div
       class="company-info-aside__main-avatar"
-      [ngStyle]="{'background': 'url('+getCompanyLogoUrl()+')'}"
+      [ngStyle]="{'background': 'url('+getCompanyLogoUrl()+') center / cover no-repeat'}"
     >
     <!-- <img [src]="getCompanyLogoUrl()" class="qwe" alt="" *ngIf="checkLogo()" /> -->
     <span *ngIf="!checkLogo()" [textContent]="company.name[0].toUpperCase()"></span>
