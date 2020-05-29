@@ -82,6 +82,12 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   public longitude: number;
   public searchControl: FormControl;
   public zoom: number;
+  countryCode = '';
+  country = '';
+  longCity = '';
+  shortCity = '';
+  longState = '';
+  shortState = '';
 
   @ViewChild('search')
   public searchElementRef: ElementRef;
@@ -168,7 +174,6 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
           this.cProfileForm.patchValue({
             postalCode: ''
           });
-
           for (let i = 0, len = place.address_components.length; i < len; i++) {
             if (
               place.address_components[i].types.indexOf('postal_code') !== -1
@@ -176,6 +181,18 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
               this.cProfileForm.patchValue({
                 postalCode: place.address_components[i].short_name
               });
+            }
+            if (place.address_components[i].types.indexOf('country') !== -1) {
+              this.country = place.address_components[i].long_name;
+              this.countryCode = place.address_components[i].short_name;
+            }
+            if (place.address_components[i].types.indexOf('locality') !== -1) {
+              this.longCity = place.address_components[i].long_name;
+              this.shortCity = place.address_components[i].short_name;
+            }
+            if (place.address_components[i].types.indexOf('administrative_area_level_1') !== -1) {
+              this.longState = place.address_components[i].long_name;
+              this.shortState = place.address_components[i].short_name;
             }
           }
 
@@ -298,6 +315,13 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
               address: res.addresses.length === 0 ? '' : res.addresses[0].address,
               postalCode: res.addresses.length === 0 ? '' : res.addresses[0].postalCode
             });
+            
+              this.country = res.addresses[0].country;
+              this.countryCode = res.addresses[0].countryCode;
+              this.longCity = res.addresses[0].longCity;
+              this.shortCity = res.addresses[0].shortCity;
+              this.longState = res.addresses[0].longState;
+              this.shortState = res.addresses[0].shortState;
 
             for (let i = 0; i < this.cProfile.address.length; i++) {
               const phoneNumbers = this.cProfile.address[i].phoneNumbers,
@@ -650,47 +674,88 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
    */
   onSubmit() {
     this.submitted = true;
-
+    debugger;
+    
     // stop here if form is invalid
     if (this.cProfileForm.invalid) {
       return;
     }
-
-    if (!this.cProfile.address[0]) {
+let data = {};
+data['id'] = this.currentCompany.addresses[0].id;
+data['isPrimary'] = true;
+data['suiteNumber'] = this.cProfileForm.get('suiteNumber').value;
+let timeZone = this.cProfileForm.get('timeZone').value;
+let index = this.timezones.findIndex(value => value.city === timeZone);
+data['timeZone'] = {
+  name: this.cProfileForm.get(
+    'timeZone'
+  ).value || '',
+  displayName: '',
+  timeOffset: index !== -1
+  ? this.timezones[index].offset
+  : ''
+};
+data['address'] = this.searchElementRef.nativeElement.value;
+data['postalCode'] = this.cProfileForm.get(
+  'postalCode'
+).value;
+data['country'] = this.country;
+data['locale'] = this.cProfileForm.get(
+  'timeZone'
+).value
+|| '';
+data['countryCode'] = this.countryCode;
+data['locationLat'] = this.latitude;
+data['locationLng'] = this.longitude;
+data['longCity'] = this.longCity;
+data['shortCity'] = this.shortCity;
+data['longState'] = this.longState;
+data['shortState'] = this.shortState;
+    // this.cProfile.address[0].suiteNumber = this.cProfileForm.get(
+    //   'suiteNumber'
+    // ).value;
+    // this.cProfile.address[0].timeZone.name = this.cProfileForm.value.timeZone
+    //   ? this.cProfileForm.value.timeZone.city
+    //   : '';
+    // this.cProfile.address[0].address = this.searchElementRef.nativeElement.value; // this.cProfileForm.get("address").value;
+    // this.cProfile.address[0].postalCode = this.cProfileForm.get(
+    //   'postalCode'
+    // ).value;
+    if (data['address'] == '') {
       return;
     }
-
-    this.cProfile.address[0].suiteNumber = this.cProfileForm.get(
-      'suiteNumber'
-    ).value;
-    this.cProfile.address[0].timeZone.name = this.cProfileForm.value.timeZone
-      ? this.cProfileForm.value.timeZone.city
-      : '';
-    this.cProfile.address[0].address = this.searchElementRef.nativeElement.value; // this.cProfileForm.get("address").value;
-    this.cProfile.address[0].postalCode = this.cProfileForm.get(
-      'postalCode'
-    ).value;
-
     const phones = [];
     if (this.cProfileForm.value.primaryPhone) {
       phones.push({
-        number: this.cProfileForm.value.primaryPhone,
-        typeNumber: this.cProfileForm.value.primaryPhoneType,
-        id: this.cProfileForm.value.primaryId,
+        number: this.cProfileForm.get(
+          'primaryPhone'
+        ).value,
+        typeNumber: this.cProfileForm.get(
+          'primaryPhoneType'
+        ).value,
+        id: this.cProfileForm.get(
+          'primaryId'
+        ).value,
         priority: 0
       });
     }
 
     if (this.cProfileForm.value.secondaryPhoneType) {
       phones.push({
-        number: this.cProfileForm.value.secondaryPhone,
-        typeNumber: this.cProfileForm.value.secondaryPhoneType,
-        id: this.cProfileForm.value.secondaryId || ''
+        number: this.cProfileForm.get(
+          'secondaryPhone'
+        ).value,
+        typeNumber: this.cProfileForm.get(
+          'secondaryPhoneType'
+        ).value,
+        id: this.cProfileForm.get(
+          'secondaryId'
+        ).value || ''
       });
     }
 
-    this.cProfile.address[0].phoneNumbers = phones;
-
+    data['phoneNumbers'] = phones;
+debugger;
     if (this.cProfile.name !== this.cProfileForm.get('name').value) {
       this.loading = true;$(".loading").css("display", "block");
       this.companyProfileService
@@ -726,7 +791,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
           }
         );
     } else {
-      const address = { addresses: this.cProfile.address };
+      const address = { addresses: [data] };
       this.loading = true;$(".loading").css("display", "block");
       this.companyProfileService.addresses(address).subscribe(
         res => {

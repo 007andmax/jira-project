@@ -104,7 +104,7 @@
               </div>
             </div>
           </div>
-          <form [formGroup]="cProfileForm" (ngSubmit)="onSubmit()">
+          <form [formGroup]="cProfileForm">
             <div class="f-row">
               <div class="f-col col-100">
                 <label
@@ -273,7 +273,7 @@
                 </div>
               </div>
             </div>
-            <input type="submit" class="btn btn-primary" value="Save Changes" />
+            <input type="button" (click)="onSubmit()" class="btn btn-primary" value="Save Changes" />
           </form>
         </div>
       </tab>
