@@ -32,7 +32,12 @@ export class UsersService {
   public getAllusers() {
 
     return this.http.get(this.apiUrl + 'users').pipe(
-      map((data:any) => data.map((item) =>  new User(item))));
+      map((data: any) => data.map((item) => new User(item))));
+  }
+
+  public changeUserRole(userId, roleName) {
+    return this.http.put(this.apiUrl + '/users/updateRole/' + userId + '?role=' + roleName.toUpperCase(), {});
+
   }
 
   /**

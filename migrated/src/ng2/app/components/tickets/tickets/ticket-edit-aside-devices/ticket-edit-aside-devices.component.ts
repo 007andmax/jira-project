@@ -11,43 +11,32 @@ import { ConstantsStateService } from 'src/ng2/app/states/constants/constants-st
   selector: 'app-ticket-edit-aside-devices',
   templateUrl: './ticket-edit-aside-devices.component.html',
   styleUrls: ['./ticket-edit-aside-devices.component.scss'],
-  providers: [ NgbModalConfig, NgbModal],
+  providers: [NgbModalConfig, NgbModal],
 })
 export class TicketEditAsideDevicesComponent implements OnInit {
   devices = [];
   reqDevices = [];
   @Input() companyId: string = '';
-  showRemoteAccess:boolean = false;
-  realSessionId:string;
+  showRemoteAccess: boolean = false;
+  realSessionId: string;
   constructor(private devicesSateService: DevicesSateService,
-    private constantsStateService:ConstantsStateService,
+    private constantsStateService: ConstantsStateService,
     private modalService: NgbModal,
     config: NgbModalConfig,
-    private devicesService:DevicesService,) { 
-      config.backdrop = 'static';
-      config.keyboard = false;
-    }
+    private devicesService: DevicesService, ) {
+    config.backdrop = 'static';
+    config.keyboard = false;
+  }
 
   ngOnInit() {
     let devices = this.devicesSateService.getAllDevices()[this.companyId]
     this.devices = (devices) ? devices : [];
-    this.reqDevices = (devices) ? devices : []
+    this.reqDevices = (devices) ? devices : [];
     this.devicesSateService.getOnRemoveConnection().subscribe(data => {
-     let remoteConnectPort = this.constantsStateService.getConstant('remote.connect.port'),
-      restServerAddress = this.constantsStateService.getConstant('rest.server.address'),
-      url = 'quicktech://connect?serverIP=' + restServerAddress + '&port=' + remoteConnectPort + '&sessionID=' + this.realSessionId;
-    //  window.open(url);
-       window.open(url, '_self');
-   /* DevicesService.subscribeToRemoteConnection(realSessionId, function () {
-      if (modalInstance) {
-        modalInstance.dismiss();
-      }
-      if (promise) {
-        $interval.cancel(promise);
-      }
-      $rootScope.currentRemoteSessionId = realSessionId;
-    });
-    window.open(url, '_self');*/
+      let remoteConnectPort = this.constantsStateService.getConstant('remote.connect.port'),
+        restServerAddress = this.constantsStateService.getConstant('rest.server.address'),
+        url = 'quicktech://connect?serverIP=' + restServerAddress + '&port=' + remoteConnectPort + '&sessionID=' + this.realSessionId;
+      window.open(url, '_self');
     })
   }
   onSearch(event) {
@@ -57,39 +46,33 @@ export class TicketEditAsideDevicesComponent implements OnInit {
     }
     this.devices = this.reqDevices.filter(item => item.hostName.toLowerCase().includes(event.target.value));
   }
-   remoteAccess  (connectionType,device) {
-      this.devicesService.createRemoteSession(device.id,this.companyId,connectionType,null).subscribe((resp:any) => {
-        this.connectRemoteAccess(resp.sessionId, connectionType,false);
-      })
-
- /*  hideThisPopover();
-    DevicesService.createRemoteSession(deviceId, companyId, connectionType, function (resp) {
-      RemoteAccessService.connectRemoteAccess(resp.sessionId, connectionType);
-    });*/
-   
+  remoteAccess(connectionType, device) {
+    this.devicesService.createRemoteSession(device.id, this.companyId, connectionType, null).subscribe((resp: any) => {
+      this.connectRemoteAccess(resp.sessionId, connectionType, false);
+    })
   };
-   restart  (device) {
+  restart(device) {
     this.devicesService.sendPowerAction(this.companyId, device.agentId, 'reboot').subscribe(data => {
 
     });
-   
+
   };
-   shutdown  (device) {
+  shutdown(device) {
     this.devicesService.sendPowerAction(this.companyId, device.agentId, 'shutdown').subscribe(data => {
 
     });
-   
+
   };
   markDeviceAsMaster(device) {
     this.devicesService.markDeviceAsMaster(this.companyId, device.agentId).subscribe(data => {
 
     })
   }
-   remove  (device) {
+  remove(device) {
     this.devicesService.sendUninstallAgentRequest(this.companyId, device.agentId).subscribe(data => {
 
     })
-    
+
   }
   public connectRemoteAccess(sessionId, conectionType, isOneTime) {
     if (!sessionId) {
@@ -99,7 +82,7 @@ export class TicketEditAsideDevicesComponent implements OnInit {
       throw 'conectionType is required';
     }
     if (isOneTime) {
-      this.devicesService.getSessionId(sessionId, conectionType).subscribe((realSessionId:any) => {
+      this.devicesService.getSessionId(sessionId, conectionType).subscribe((realSessionId: any) => {
         if (!realSessionId || !realSessionId.sessionId || realSessionId.sessionId.length < 1) {
           throw "Not session Id"
         } else {
@@ -114,42 +97,42 @@ export class TicketEditAsideDevicesComponent implements OnInit {
     this.realSessionId = realSessionId;
     const modalRef = this.modalService.open(ModalCustomShareScreenComponent, null);
     modalRef.componentInstance.companyId = this.companyId;
-   // modalRef.componentInstance.data = null;
-   /*
-    let counter = 0;
-    let  message = 'Wait until the connection is established... ';
-     var modalInstance = $uibModal.open(modalParams);
-     var promise;
-     var remoteConnectPort;
-     var restServerAddress;
-     var url;
-   
-   
-   
-     //$rootScope.launchRemoteApp = function() {
-       promise = setInterval(function () {
-         counter++;
-       }, 1000);
-       remoteConnectPort = this.constantsStateService.getConstant('remote.connect.port'),
-         restServerAddress = this.constantsStateService.getConstant('rest.server.address'),
-         url = 'quicktech://connect?serverIP=' + restServerAddress + '&port=' + remoteConnectPort + '&sessionID=' + realSessionId;
-       modalInstance.result.then(angular.noop, function () {
-         if (promise) {
-           $interval.cancel(promise);
-         }
-       });
-       DevicesService.subscribeToRemoteConnection(realSessionId, function () {
-         if (modalInstance) {
-           modalInstance.dismiss();
-         }
-         if (promise) {
-           $interval.cancel(promise);
-         }
-         $rootScope.currentRemoteSessionId = realSessionId;
-       });
-       window.open(url, '_self');
-   //  }
-      */
-   
-   }
+    // modalRef.componentInstance.data = null;
+    /*
+     let counter = 0;
+     let  message = 'Wait until the connection is established... ';
+      var modalInstance = $uibModal.open(modalParams);
+      var promise;
+      var remoteConnectPort;
+      var restServerAddress;
+      var url;
+    
+    
+    
+      //$rootScope.launchRemoteApp = function() {
+        promise = setInterval(function () {
+          counter++;
+        }, 1000);
+        remoteConnectPort = this.constantsStateService.getConstant('remote.connect.port'),
+          restServerAddress = this.constantsStateService.getConstant('rest.server.address'),
+          url = 'quicktech://connect?serverIP=' + restServerAddress + '&port=' + remoteConnectPort + '&sessionID=' + realSessionId;
+        modalInstance.result.then(angular.noop, function () {
+          if (promise) {
+            $interval.cancel(promise);
+          }
+        });
+        DevicesService.subscribeToRemoteConnection(realSessionId, function () {
+          if (modalInstance) {
+            modalInstance.dismiss();
+          }
+          if (promise) {
+            $interval.cancel(promise);
+          }
+          $rootScope.currentRemoteSessionId = realSessionId;
+        });
+        window.open(url, '_self');
+    //  }
+       */
+
+  }
 }

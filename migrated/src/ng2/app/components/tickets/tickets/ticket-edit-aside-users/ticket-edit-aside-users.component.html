@@ -1,50 +1,58 @@
 <div class="users-aside">
-  <div class="users-aside__title">
-    Users (67)
+  <div class="users-aside__title" [textContent]="'Users (' + users.length + ')'">
+   
   </div>
   
   <div class="users-aside__search">
     <span  class="qt-input-search users-aside__search-devices --dark">
-      <input  class="qt-input-search" placeholder="Search Users…" title="Search users" type="text">
+      <input  class="qt-input-search" placeholder="Search Users…" title="Search users" type="text" (input)="onSearch($event)">
     </span>
   </div>
   
   <div class="users-aside__users-list">
+    <ng-template ngFor let-user [ngForOf]="users" [ngForTrackBy]="trackById">
+      <div class="users-aside__user" [ngClass]="{'--online': user.online, '--away' : !user.online}" ngbDropdown>
+        <div  class="users-aside__user-avatar"
+        [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
+        [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
+        ></div>
+        <div>
+          <div class="users-aside__user-name" [textContent]="ticketsListService.getUserName(user)"></div>
+          <ng-template ngFor let-phoneNumber [ngForOf]="user.phoneNumbers" [ngForTrackBy]="trackById">
+            <div class="users-aside__user-email" [textContent]="user.phoneNumber"></div>
+            </ng-template>
+          
+          <div class="users-aside__user-email" [textContent]="user.primaryEmail"></div>
+        </div>
   
-  <div class="users-aside__user --online">
-      <div  class="users-aside__user-avatar"
-            style="background-image: url(https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)"
-      ></div>
-      <div>
-        <div class="users-aside__user-name">Gilbert McDaniel</div>
-        <div class="users-aside__user-email">jimmy_huels@hotmail.com</div>
-      </div>
+        <div class="users-aside__user-menu" id="dropdownForm1" ngbDropdownToggle></div>
 
-      <div class="users-aside__user-menu"></div>
-    </div>
-  
-  <div class="users-aside__user --away">
-      <div  class="users-aside__user-avatar"
-            style="background-image: url(https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)"
-      ></div>
-      <div>
-        <div class="users-aside__user-name">Margaret Reese</div>
-        <div class="users-aside__user-email">cindy.hermiston@lubowitz.com</div>
+        <div ngbDropdownMenu aria-labelledby="dropdownForm1">
+          <button (click)="sendEmail(user)">Email</button>
+          <button (click)="showPrivilege = !showPrivilege ">Set {{ user.firstName }} Privilege</button>
+          <div *ngIf="showPrivilege"><button *ngIf="user.role !== 'USER'" ngbDropdownItem (click)="changeUserRole(user,'USER')">User</button>
+            <button ngbDropdownItem *ngIf="user.role !== 'ADMIN'"  (click)="changeUserRole(user,'ADMIN')">Administrator</button></div>
+          <button   (click)="showSubscription = !showSubscription">Subscribe {{ user.firstName }} to...</button>
+          <div *ngIf="showSubscription">
+           
+              <label >
+                <input type="checkbox" (change)="onChangeSubscriptions('ticket',user)" [checked]="user.subscription.ticket">
+                 Ticket Updates
+              </label> 
+           
+              <label >
+                <input type="checkbox" (change)="onChangeSubscriptions('invoice',user)" [checked]="user.subscription.invoice">
+                 Invoice Updates
+              </label> 
+            
+              <label >
+                <input type="checkbox" (change)="onChangeSubscriptions('ticketManager',user)" [checked]="user.subscription.ticketManager">
+                 Ticket Manager
+              </label> 
+          </div>
+          <button ngbDropdownItem (click)="archiveUser(user)">Archive</button>
+          
+        </div>
       </div>
-    
-      <div class="users-aside__user-menu"></div>
-    </div>
-  </div>
-  
-  <div class="users-aside__user">
-    <div  class="users-aside__user-avatar"
-          style="background-image: url(https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)"
-    ></div>
-    <div>
-      <div class="users-aside__user-name">Andrew Herrera</div>
-      <div class="users-aside__user-email">linda.schumm@hotmail.com</div>
-    </div>
-    
-    <div class="users-aside__user-menu"></div>
-  </div>
+      </ng-template>
 </div>

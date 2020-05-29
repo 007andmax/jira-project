@@ -1,5 +1,6 @@
 <app-ticket-edit-aside-devices   [companyId]="ticketProfile.companyId" *ngIf="toggleRightPanel && type === 'DEVICES'"></app-ticket-edit-aside-devices>
 <app-ticket-edit-aside-company-info [createdUser]="ticketProfile.createdUser" [setCompanyId]="ticketProfile.companyId" *ngIf="toggleRightPanel && type === 'COMPANY_INFO'"></app-ticket-edit-aside-company-info>
+<app-ticket-edit-aside-users [companyId]="ticketProfile.companyId" *ngIf="toggleRightPanel && type === 'USERS'"></app-ticket-edit-aside-users>
 <div class="ticket-edit-aside__menu">
   <div class="aside-menu-item icon__panel-open" (click)="togglePanel('COMPANY_INFO')"></div>
   <div class="aside-menu-item icon__company-info" (click)="togglePanel('COMPANY_INFO')"></div>
