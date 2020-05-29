@@ -134,7 +134,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
       if (this.ticketProfileFormUpdate.isValidateServiceUpdateAndClose()) {
         this.onUpdateTicketAndClose(this.ticketProfileFormUpdate.getDataForUpdateService());
 
-      } else if (this.ticketProfileFormUpdate.isValidateService()) this.onUpdateTicketAndClose(this.ticketProfileFormUpdate.getDataForClose());
+      } else this.onUpdateTicketAndClose(this.ticketProfileFormUpdate.getDataForClose());
 
     }
   }
