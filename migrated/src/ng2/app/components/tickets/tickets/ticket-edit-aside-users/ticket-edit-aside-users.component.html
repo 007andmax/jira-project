@@ -1,18 +1,18 @@
 <div class="users-aside">
   <div class="users-aside__title" [textContent]="'Users (' + users.length + ')'">
-   
+
   </div>
-  
+
   <div class="users-aside__search">
     <span  class="qt-input-search users-aside__search-devices --dark">
       <input  class="qt-input-search" placeholder="Search Users…" title="Search users" type="text" (input)="onSearch($event)">
     </span>
   </div>
-  
+
   <div class="users-aside__users-list">
     <ng-template ngFor let-user [ngForOf]="users" [ngForTrackBy]="trackById">
       <div class="users-aside__user" [ngClass]="{'--online': user.online, '--away' : !user.online}" ngbDropdown>
-        <div  class="users-aside__user-avatar"
+        <div  class="users-aside__user-avatar" [ngClass]="{'--letter-avatar': ticketsListService.getAssignedUserNameForAvatar(user)}"
         [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
         [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
         ></div>
@@ -21,37 +21,42 @@
           <ng-template ngFor let-phoneNumber [ngForOf]="user.phoneNumbers" [ngForTrackBy]="trackById">
             <div class="users-aside__user-email" [textContent]="user.number"></div>
             </ng-template>
-          
+
           <div class="users-aside__user-email" [textContent]="user.primaryEmail"></div>
         </div>
-  
+
         <div class="users-aside__user-menu" id="dropdownForm1" ngbDropdownToggle></div>
 
-        <div ngbDropdownMenu aria-labelledby="dropdownForm1">
-          <button (click)="sendEmail(user)">Email</button>
-          <button (click)="showPrivilege = !showPrivilege ">Set {{ user.firstName }} Privilege</button>
-          <div *ngIf="showPrivilege"><button *ngIf="user.role !== 'USER'" ngbDropdownItem (click)="changeUserRole(user,'USER')">User</button>
-            <button ngbDropdownItem *ngIf="user.role !== 'ADMIN'"  (click)="changeUserRole(user,'ADMIN')">Administrator</button></div>
-          <button   (click)="showSubscription = !showSubscription">Subscribe {{ user.firstName }} to...</button>
-          <div *ngIf="showSubscription">
-           
-              <label >
-                <input type="checkbox" (change)="onChangeSubscriptions('ticket',user)" [checked]="user.subscription.ticket">
-                 Ticket Updates
-              </label> 
-           
-              <label >
-                <input type="checkbox" (change)="onChangeSubscriptions('invoice',user)" [checked]="user.subscription.invoice">
-                 Invoice Updates
-              </label> 
-            
-              <label >
-                <input type="checkbox" (change)="onChangeSubscriptions('ticketManager',user)" [checked]="user.subscription.ticketManager">
-                 Ticket Manager
-              </label> 
-          </div>
-          <button ngbDropdownItem (click)="archiveUser(user)">Archive</button>
-          
+        <div class="dropdown-menu-qt" ngbDropdownMenu aria-labelledby="dropdownForm1">
+          <ul>
+            <li (click)="sendEmail(user)">Email</li>
+            <li (click)="showPrivilege = !showPrivilege ">Set {{ user.firstName }} Privilege</li>
+
+            <li *ngIf="showPrivilege">
+              <button *ngIf="user.role !== 'USER'" ngbDropdownItem (click)="changeUserRole(user,'USER')">User</button>
+              <button ngbDropdownItem *ngIf="user.role !== 'ADMIN'"  (click)="changeUserRole(user,'ADMIN')">Administrator</button>
+            </li>
+
+            <li (click)="showSubscription = !showSubscription">Subscribe {{ user.firstName }} to...</li>
+            <ul *ngIf="showSubscription">
+
+                <li >
+                  <input type="checkbox" (change)="onChangeSubscriptions('ticket',user)" [checked]="user.subscription.ticket">
+                    Ticket Updates
+                </li>
+
+                <li >
+                  <input type="checkbox" (change)="onChangeSubscriptions('invoice',user)" [checked]="user.subscription.invoice">
+                    Invoice Updates
+                </li>
+
+                <li >
+                  <input type="checkbox" (change)="onChangeSubscriptions('ticketManager',user)" [checked]="user.subscription.ticketManager">
+                    Ticket Manager
+                </li>
+            </ul>
+            <li ngbDropdownItem (click)="archiveUser(user)">Archive</li>
+          </ul>
         </div>
       </div>
       </ng-template>

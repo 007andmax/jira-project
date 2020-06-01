@@ -1,16 +1,16 @@
 <div class="devices-aside">
   <div class="devices-aside__title" [textContent]="'Devices (' + devices.length +')'">
   </div>
-  
+
   <div class="devices-aside__search">
     <span  class="qt-input-search devices-aside__search-devices --dark">
       <input  class="qt-input-search" placeholder="Search Device…" title="Search device" type="text" (input)="onSearch($event)">
     </span>
   </div>
-  
+
   <div class="devices-aside__device-list">
     <ng-template ngFor let-device [ngForOf]="devices" [ngForTrackBy]="trackById">
- 
+
       <div class="devices-aside__device" [ngClass]="{'--online': device.online,
        '--desktop' : device.type === 'workstation',
        '--server' : device.type === 'server',
@@ -20,20 +20,21 @@
         <div class="devices-aside__device-owner" [textContent]="device.userName"></div>
         <div class="devices-aside__device-menu" id="dropdownForm1" ngbDropdownToggle>
         </div>
-        <div ngbDropdownMenu aria-labelledby="dropdownForm1">
-          <button (click)="showRemoteAccess = !showRemoteAccess ">Remote Access</button>
-          <div *ngIf="showRemoteAccess"><button ngbDropdownItem (click)="remoteAccess('CSS', device)">Custom Share Screen</button>
-            <button ngbDropdownItem (click)="remoteAccess('RDP', device)">Remote desktop protocol</button></div>
-          <button ngbDropdownItem (click)="restart(device)">Restart</button>
-          <button ngbDropdownItem (click)="shutdown(device)">Shutdown</button>
-          <button ngbDropdownItem (click)="remove(device)">Remove</button>
-          <button ngbDropdownItem (click)="markDeviceAsMaster(device)">Mark as master</button>
-        </div>
+
+        <ul class="dropdown-menu-qt" ngbDropdownMenu aria-labelledby="dropdownForm1">
+          <li (click)="showRemoteAccess = !showRemoteAccess ">Remote Access</li>
+          <li *ngIf="showRemoteAccess"><button ngbDropdownItem (click)="remoteAccess('CSS', device)">Custom Share Screen</button>
+            <button ngbDropdownItem (click)="remoteAccess('RDP', device)">Remote desktop protocol</button></li>
+          <li ngbDropdownItem (click)="restart(device)">Restart</li>
+          <li ngbDropdownItem (click)="shutdown(device)">Shutdown</li>
+          <li ngbDropdownItem (click)="remove(device)">Remove</li>
+          <li ngbDropdownItem (click)="markDeviceAsMaster(device)">Mark as master</li>
+        </ul>
 
       </div>
 
       </ng-template>
 
-    
+
   </div>
 </div>

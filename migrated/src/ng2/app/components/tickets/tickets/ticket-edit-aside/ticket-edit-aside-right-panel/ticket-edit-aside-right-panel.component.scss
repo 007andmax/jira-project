@@ -18,18 +18,32 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-top: 10px;
+    border-left: 1px solid #dfe3e8;
   }
 
   .aside-menu-item {
-    width:24px;
-    height: 24px;
     cursor: pointer;
-    margin-top: 16px;
+    height: 36px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 24px;
+    width: 100%;
+    &.active {
+      background-color: #edf2f67d;
+      border: 1px solid #dfe3e8;
+      border-left: none;
+      border-right: none;
+    }
   }
 
- 
+  .icon__panel-open.opened {
+    transform: rotate(180deg);
+  }
 
-  app-ticket-edit-aside-company-info {
+  app-ticket-edit-aside-company-info,
+  app-ticket-edit-aside-users,
+  app-ticket-edit-aside-devices {
     overflow: auto;
     width: 272px;
     border-left: 1px solid #dfe3e8;

@@ -59,6 +59,13 @@
     border-radius: 50%;
     margin-right: 10px;
     position: relative;
+    background-color: white;
+    color: #4f5f79;
+    font-size: 10px;
+    font-weight: 600;
+    &.--letter-avatar {
+      border: solid 1px rgba(22, 164, 250, 0.2);
+    }
     &:before {
       content: '';
       position: absolute;

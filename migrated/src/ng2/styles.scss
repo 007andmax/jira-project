@@ -963,6 +963,7 @@ ngb-typeahead-window {
     outline: none;
     &:last-child {
       visibility: hidden;
+      display: none;
     }
   }
 }
@@ -1317,6 +1318,7 @@ ngb-typeahead-window {
     outline: none;
     &:last-child {
       visibility: hidden;
+      display: none;
     }
   }
 }
@@ -1442,6 +1444,7 @@ ngb-typeahead-window {
         outline: none;
         &:last-child {
           visibility: hidden;
+          display: none;
         }
       }
     }
@@ -2611,6 +2614,7 @@ app-ticket-profile-form-update {
   bottom: 0;
   background: white;
   z-index: 30;
+
 }
 
 .dropdown-menu.services-container.show {
@@ -2663,5 +2667,15 @@ app-add-assigned-user {
     top: 1px !important;
     height: 16px !important;
     right: 0px !important;
+  }
+}
+
+
+.ticket-edit-aside__body,
+app-ticket-edit-aside-company-info,
+app-ticket-edit-aside-users,
+app-ticket-edit-aside-devices  {
+  &::-webkit-scrollbar {
+    display: none;
   }
 }

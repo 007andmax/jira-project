@@ -184,8 +184,10 @@
       pre {
         margin: 0;
         font-family: 'Graphik-Regular', sans-serif;
-        text-overflow: ellipsis;
-        overflow: hidden;
+        text-overflow: unset;
+        overflow: auto;
+        max-width: 602px;
+        white-space: pre-wrap;
       }
     }
 
