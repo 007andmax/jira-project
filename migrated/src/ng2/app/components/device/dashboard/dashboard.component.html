@@ -24,9 +24,9 @@
                 <ul class="list-unstyled">
                   <li>
                     <span>Host Name</span>
-                    <div> {{hostName}}</div>
-                  <span class="edit-field" style="display:none">
-                    <input type="text" class="form-control" value="Whitebox PC">
+                    <!-- <div> {{hostName}}</div> -->
+                  <span class="edit-field">
+                    <input type="text" class="form-control sub-label-field" [(ngModel)]="hostName">
                     </span>
 
                   </li>
@@ -255,7 +255,7 @@
               <div class="dashboard-col col-50 tags">
                 <div class="col-title">
                   <h2>Tags</h2>
-                  <a href="#javascript:;" class="static-link">+Add Tags</a>
+                  <a click="" class="static-link disabled">+Add Tags</a>
                 </div>
                 <ul class="list-unstyled">
                   <li>
@@ -411,7 +411,7 @@
               <div class="dashboard-col notes">
                 <div class="col-title">
                   <h2>Notes</h2>
-                  <a href="#javascript:;" class="static-link" (click)="create=!create">+Add Notes</a>
+                  <a href="#javascript:;" class="static-link disabled" (click)="create=create">+Add Notes</a>
                 </div>
                   <ul class="list-unstyled">
                       <li  (click)="editNote=!editNote">

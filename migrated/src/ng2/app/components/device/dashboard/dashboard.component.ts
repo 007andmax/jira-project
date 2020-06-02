@@ -132,12 +132,21 @@ export class DashboardComponent implements OnInit {
           }
           
         });
-        this.logicalDisk.sort(function(x, y) {
-        // true values first
-        return (x.is_system === y.is_system)? 0 : x? -1 : 1;
-        // false values first
-        // return (x === y)? 0 : x? 1 : -1;
-    });
+        // this.logicalDisk.sort(function(x, y) {
+        //   return (x.is_system === y.is_system)? 0 : x? -1 : 1;
+        // });
+
+        this.logicalDisk.sort((a, b) => {
+          if (a['device_id'] && b['device_id']) {
+            return ((a['device_id'].toLowerCase() > b['device_id'].toLowerCase()) ?
+              1 : ((b['device_id'].toLowerCase() > a['device_id'].toLowerCase()) ? -1 : 0));
+          } else if (a['device_id']) {
+            return 1
+          } else if (b['device_id']) {
+            return -1
+          }
+          return 0;
+        });
       },
       error => {
       this.toastr.error('Something went wrong please try again.');

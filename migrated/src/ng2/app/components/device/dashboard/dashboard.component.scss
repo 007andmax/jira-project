@@ -148,6 +148,17 @@
                 outline: 0;
             }
 
+            .sub-label-field {
+                border-color: transparent;
+                background-color: #ffffff;
+                font-family: 'Graphik-Medium' !important;
+            }
+            
+            .sub-label-field:hover, .sub-label-field:focus {
+                border: solid 1px #c4cbd5;
+                outline: 0;
+            }
+
             
             &.disk-drive {
                 h2{
@@ -569,6 +580,11 @@
         background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) -25%, #ffffff 73%, #ffffff 73%);
         left: 0;
         right: 0;
+    }
+
+    a.disabled {
+        color: gray;
+        cursor: not-allowed;
     }
 }
 
