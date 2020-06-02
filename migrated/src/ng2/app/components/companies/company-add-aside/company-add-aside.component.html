@@ -247,9 +247,12 @@
         </div>
         <div class="col-md-6">
           <p>Designation</p>
-          <input type="text"
-                 [(ngModel)]="company.contacts[0].designation"
-                 placeholder="Write Description">
+
+          <app-select-search [placeholder]="'Select Designation'" #role [maxlength]="30" [add]="true" [class]="['light-dropdown']" [list]="allTitles"
+          
+          (onSelectedItem)="onSelectDesignation($event)"></app-select-search>
+          
+         
         </div>
         <div class="col-md-6">
 

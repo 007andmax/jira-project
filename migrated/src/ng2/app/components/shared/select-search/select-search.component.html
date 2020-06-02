@@ -20,7 +20,7 @@
     (isPopupOpen)="isDropDownOpen()"
   />
   <span *ngIf="list">
-    <i *ngIf="selectedItem"
+    <i *ngIf="selectedItem && !isAdd"
        class="icn-sm icn-remove-old"
        (click)="clearClient($event)"></i>
     <i *ngIf="!selectedItem"

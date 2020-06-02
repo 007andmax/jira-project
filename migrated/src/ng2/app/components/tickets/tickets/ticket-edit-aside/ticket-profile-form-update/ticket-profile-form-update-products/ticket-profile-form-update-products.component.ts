@@ -37,7 +37,8 @@ export class TicketProfileFormUpdateProductsComponent implements OnInit, OnDestr
   public getItemListProducts() {
     this.productService.getCategories().subscribe((res: any) => {
       this.productList = res;
-
+      this.productDP.onUpdateList();
+      this.cd.detectChanges();
       let getChangeProducts = this.inventoryStateService.getChangeProducts().subscribe((data: InventoryChange) => {
         if (data.action === 'PRODUCT_SAVED') {
 
@@ -46,7 +47,7 @@ export class TicketProfileFormUpdateProductsComponent implements OnInit, OnDestr
           if (Index > -1) {
             this.productList[Index].products.push(data.data);
           }
-console.log("this.productList[Index]",this.productList[Index]);
+          console.log("this.productList[Index]", this.productList[Index]);
         }
         this.productDP.onUpdateList();
         this.cd.detectChanges();

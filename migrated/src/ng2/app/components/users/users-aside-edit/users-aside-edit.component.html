@@ -48,8 +48,8 @@
                  placeholder="Enter Email">
         </div>
         <div class="col-md-6">
-          <p>Role</p>
-          <app-select-search [placeholder]="'Select Role'" [maxlength]="30" [add]="true" #role [class]="['light-dropdown']"
+          <p>Designation</p>
+          <app-select-search [placeholder]="'Select Designation'" [maxlength]="30" [add]="true" #role [class]="['light-dropdown']"
                              [editItem]="(user.designation) ? user.designation : null" [list]="allTitles"
                              (onSelectedItem)="onSelectDesignation($event)"></app-select-search>
 

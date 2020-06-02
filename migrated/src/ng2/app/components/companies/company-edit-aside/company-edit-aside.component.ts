@@ -49,6 +49,7 @@ export class CompanyEditAsideComponent implements OnInit,OnDestroy {
   sub: Subscription = new Subscription();
   locationIsinit:boolean = false;
   @ViewChild('addresstext') addresstext: any;
+  allTitles: Array<string> = [];
   constructor(private companiesStateService: CompaniesStateService, private companiesService: CompaniesService,
     private usersStateService: UsersStateService, private modalService: NgbModal, private imageCropperStateService: ImageCropperStateService,
     private elRef: ElementRef,
@@ -63,15 +64,42 @@ export class CompanyEditAsideComponent implements OnInit,OnDestroy {
 this.company.fullVersion();
    // this.getIndustries();
     this.industries = this.companiesStateService.getIndustries();
-    if (this.usersStateService.getAllUsers().length > 0) this.getTehusers(this.usersStateService.getAllUsers());
+    if (this.usersStateService.getAllUsers().length > 0) {
+      this.getTehusers(this.usersStateService.getAllUsers());
+      this.getUsersTitle(this.usersStateService.getAllUsers());
+    } 
     let getOnUsers =   this.usersStateService.getOnUsers().subscribe((data) => {
         this.getTehusers(data);
+        this.getUsersTitle(data);
       })
       this.sub.add(getOnUsers);
     
 
     this.onCroppImage();
     this.onEditCompany();
+  }
+  getUsersTitle(allUsers) {
+    this.allTitles = allUsers
+      .map((user) => {
+        return user.designation;
+      })
+      .reduce((acc, title) => {
+        let index = acc.findIndex((el) => {
+          return (el || '').toLowerCase() === (title || '').toLowerCase();
+        })
+
+        if (index === -1 && title) {
+          acc.push(title);
+        }
+
+        return acc;
+      }, []).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
+      1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
+
+  }
+  onSelectDesignation(data) {
+    this.company.contacts[0].designation = data;
+   
   }
   private getPlaceAutocomplete() {
     this.locationIsinit = true;
