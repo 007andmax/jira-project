@@ -81,6 +81,20 @@ export class TicketEditAsideUsersComponent implements OnInit, OnDestroy {
       user.subscription = subscription;
     })
   }
+
+  getStyleAvatar(user) {
+    if (!(user && user.avatar)) {
+      return '/company/default/logo.jpg';
+    }
+    if (user.id) {
+      return `url(${'/users/' + (user.id || 'default') + '/image' + (user.avatar ? '.jpg?t=' + user.avatar.updatedAt :
+        '')}) 0% 0% / cover no-repeat`
+    } else if (user.avatar && user.avatar.origin && user.avatar.origin.id) {
+      return `url(/file/${(user.avatar.origin.id)}.jpg) 0% 0% / cover no-repeat`;
+    } else {
+      return '/company/default/logo.jpg';
+    }
+  };
   archiveUser(user) {
     this.confirmStateService.setConfirmAction(ARCHIVE_USER);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });

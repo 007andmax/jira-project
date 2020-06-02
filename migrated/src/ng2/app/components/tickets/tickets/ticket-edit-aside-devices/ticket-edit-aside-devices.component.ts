@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef } from '@angular/core';
 import { DevicesSateService } from 'src/ng2/app/states/devices/devices-sate.service';
 import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
@@ -16,10 +16,10 @@ import { ConstantsStateService } from 'src/ng2/app/states/constants/constants-st
 export class TicketEditAsideDevicesComponent implements OnInit {
   devices = [];
   reqDevices = [];
-    companyId: string = '';
+  companyId: string = '';
   showRemoteAccess: boolean = false;
   realSessionId: string;
-  lastCompanyId:string;
+  lastCompanyId: string;
   @Input() set setCompanyId(value) {
     this.companyId = value;
     this.onGetDevices();
@@ -27,6 +27,7 @@ export class TicketEditAsideDevicesComponent implements OnInit {
   constructor(private devicesSateService: DevicesSateService,
     private constantsStateService: ConstantsStateService,
     private modalService: NgbModal,
+    private elRef: ElementRef,
     config: NgbModalConfig,
     private devicesService: DevicesService, ) {
     config.backdrop = 'static';
@@ -34,16 +35,35 @@ export class TicketEditAsideDevicesComponent implements OnInit {
   }
 
   ngOnInit() {
-   this.onGetDevices();
+    this.onGetDevices();
     this.devicesSateService.getOnRemoveConnection().subscribe(data => {
       let remoteConnectPort = this.constantsStateService.getConstant('remote.connect.port'),
         restServerAddress = this.constantsStateService.getConstant('rest.server.address'),
         url = 'quicktech://connect?serverIP=' + restServerAddress + '&port=' + remoteConnectPort + '&sessionID=' + this.realSessionId;
       window.open(url, '_self');
     })
+
+    $(this.elRef.nativeElement).scroll(() => {
+      let list = this.elRef.nativeElement.querySelectorAll('.dropdown-menu-qt');
+      list.forEach(element => {
+        $(element).css({ display: 'none' });
+      });
+    });
+  }
+  onOpenDropDown(input, dropDown) {
+    let list = this.elRef.nativeElement.querySelectorAll('.dropdown-menu-qt');
+    list.forEach(element => {
+      $(element).css({ display: 'none' });
+    });
+    let viewportOffset = input.getBoundingClientRect();
+    $(dropDown).css({ top: `${viewportOffset.y}px`, left: `${viewportOffset.x - $(dropDown).height()}px`, display: 'block' });
+
+  }
+  hiddenDropDown(data) {
+    $(data).css({ display: 'none' });
   }
   onGetDevices() {
-    if (this.companyId && this.lastCompanyId !== this.companyId ) {
+    if (this.companyId && this.lastCompanyId !== this.companyId) {
       this.lastCompanyId = this.companyId;
     } else {
       return;

@@ -9,19 +9,20 @@
   </div>
 
   <div class="devices-aside__device-list">
-    <ng-template ngFor let-device [ngForOf]="devices" [ngForTrackBy]="trackById">
+    <ng-template ngFor let-device [ngForOf]="devices" [ngForTrackBy]="trackById" let-i="index">
 
       <div class="devices-aside__device" [ngClass]="{'--online': device.online,
        '--desktop' : device.type === 'workstation',
        '--server' : device.type === 'server',
        '--tables' : device.type === 'tablet',
-       '--printer' : device.type === 'printer'}" ngbDropdown >
+       '--printer' : device.type === 'printer'}"   ngbDropdown   >
+      <div [ngClass]="'devices-aside__device-' + i">
         <div class="devices-aside__device-name" [textContent]="(device.hostName.length > 0) ? device.hostName  :  'Name is not defined'"></div>
         <div class="devices-aside__device-owner" [textContent]="device.userName"></div>
-        <div class="devices-aside__device-menu" id="dropdownForm1" ngbDropdownToggle>
+        <div class="devices-aside__device-menu" id="dropdownForm1" (click)="onOpenDropDown(input,bodyDropDown)"  #input>
         </div>
 
-        <ul class="dropdown-menu-qt" ngbDropdownMenu aria-labelledby="dropdownForm1">
+        <ul class="dropdown-menu-qt" ngbDropdownMenu aria-labelledby="dropdownForm1"  #bodyDropDown appClickOtside [init]="true" [class]="'.devices-aside__device-' + i" (onOutSide)="hiddenDropDown(bodyDropDown)">
           <li (click)="showRemoteAccess = !showRemoteAccess ">Remote Access</li>
           <li *ngIf="showRemoteAccess"><button ngbDropdownItem (click)="remoteAccess('CSS', device)">Custom Share Screen</button>
             <button ngbDropdownItem (click)="remoteAccess('RDP', device)">Remote desktop protocol</button></li>
@@ -30,10 +31,62 @@
           <li ngbDropdownItem (click)="remove(device)">Remove</li>
           <li ngbDropdownItem (click)="markDeviceAsMaster(device)">Mark as master</li>
         </ul>
-
+      </div>
       </div>
 
       </ng-template>
+
+      <ng-template ngFor let-device [ngForOf]="devices" [ngForTrackBy]="trackById">
+
+        <div class="devices-aside__device" [ngClass]="{'--online': device.online,
+         '--desktop' : device.type === 'workstation',
+         '--server' : device.type === 'server',
+         '--tables' : device.type === 'tablet',
+         '--printer' : device.type === 'printer'}" ngbDropdown   >
+          <div class="devices-aside__device-name" [textContent]="(device.hostName.length > 0) ? device.hostName  :  'Name is not defined'"></div>
+          <div class="devices-aside__device-owner" [textContent]="device.userName"></div>
+          <div class="devices-aside__device-menu" id="dropdownForm1" (click)="onOpenDropDown(input,bodyDropDown)"  #input>
+          </div>
+  
+          <ul class="dropdown-menu-qt" ngbDropdownMenu aria-labelledby="dropdownForm1" #bodyDropDown>
+            <li (click)="showRemoteAccess = !showRemoteAccess ">Remote Access</li>
+            <li *ngIf="showRemoteAccess"><button ngbDropdownItem (click)="remoteAccess('CSS', device)">Custom Share Screen</button>
+              <button ngbDropdownItem (click)="remoteAccess('RDP', device)">Remote desktop protocol</button></li>
+            <li ngbDropdownItem (click)="restart(device)">Restart</li>
+            <li ngbDropdownItem (click)="shutdown(device)">Shutdown</li>
+            <li ngbDropdownItem (click)="remove(device)">Remove</li>
+            <li ngbDropdownItem (click)="markDeviceAsMaster(device)">Mark as master</li>
+          </ul>
+  
+        </div>
+  
+        </ng-template>
+
+        <ng-template ngFor let-device [ngForOf]="devices" [ngForTrackBy]="trackById">
+
+          <div class="devices-aside__device" [ngClass]="{'--online': device.online,
+           '--desktop' : device.type === 'workstation',
+           '--server' : device.type === 'server',
+           '--tables' : device.type === 'tablet',
+           '--printer' : device.type === 'printer'}" ngbDropdown   >
+            <div class="devices-aside__device-name" [textContent]="(device.hostName.length > 0) ? device.hostName  :  'Name is not defined'"></div>
+            <div class="devices-aside__device-owner" [textContent]="device.userName"></div>
+            <div class="devices-aside__device-menu" id="dropdownForm1" (click)="onOpenDropDown(input,bodyDropDown)"  #input>
+            </div>
+    
+            <ul class="dropdown-menu-qt" ngbDropdownMenu aria-labelledby="dropdownForm1" #bodyDropDown>
+              <li (click)="showRemoteAccess = !showRemoteAccess ">Remote Access</li>
+              <li *ngIf="showRemoteAccess"><button ngbDropdownItem (click)="remoteAccess('CSS', device)">Custom Share Screen</button>
+                <button ngbDropdownItem (click)="remoteAccess('RDP', device)">Remote desktop protocol</button></li>
+              <li ngbDropdownItem (click)="restart(device)">Restart</li>
+              <li ngbDropdownItem (click)="shutdown(device)">Shutdown</li>
+              <li ngbDropdownItem (click)="remove(device)">Remove</li>
+              <li ngbDropdownItem (click)="markDeviceAsMaster(device)">Mark as master</li>
+            </ul>
+    
+          </div>
+    
+          </ng-template>
 
 
   </div>

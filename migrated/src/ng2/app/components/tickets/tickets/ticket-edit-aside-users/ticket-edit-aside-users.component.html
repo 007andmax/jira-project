@@ -14,7 +14,7 @@
       <div class="users-aside__user" [ngClass]="{'--online': user.online, '--away' : !user.online}" ngbDropdown>
         <div  class="users-aside__user-avatar" [ngClass]="{'--letter-avatar': ticketsListService.getAssignedUserNameForAvatar(user)}"
         [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
-        [ngStyle]="{'background': ticketsListService.getStyleAvatar(user)}"
+        [ngStyle]="{'background': getStyleAvatar(user)}"
         ></div>
         <div>
           <div class="users-aside__user-name" [textContent]="ticketsListService.getUserName(user)"></div>
