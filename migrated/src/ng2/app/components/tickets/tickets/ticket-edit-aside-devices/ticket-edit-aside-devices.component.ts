@@ -130,42 +130,5 @@ export class TicketEditAsideDevicesComponent implements OnInit {
     this.realSessionId = realSessionId;
     const modalRef = this.modalService.open(ModalCustomShareScreenComponent, null);
     modalRef.componentInstance.companyId = this.companyId;
-    // modalRef.componentInstance.data = null;
-    /*
-     let counter = 0;
-     let  message = 'Wait until the connection is established... ';
-      var modalInstance = $uibModal.open(modalParams);
-      var promise;
-      var remoteConnectPort;
-      var restServerAddress;
-      var url;
-    
-    
-    
-      //$rootScope.launchRemoteApp = function() {
-        promise = setInterval(function () {
-          counter++;
-        }, 1000);
-        remoteConnectPort = this.constantsStateService.getConstant('remote.connect.port'),
-          restServerAddress = this.constantsStateService.getConstant('rest.server.address'),
-          url = 'quicktech://connect?serverIP=' + restServerAddress + '&port=' + remoteConnectPort + '&sessionID=' + realSessionId;
-        modalInstance.result.then(angular.noop, function () {
-          if (promise) {
-            $interval.cancel(promise);
-          }
-        });
-        DevicesService.subscribeToRemoteConnection(realSessionId, function () {
-          if (modalInstance) {
-            modalInstance.dismiss();
-          }
-          if (promise) {
-            $interval.cancel(promise);
-          }
-          $rootScope.currentRemoteSessionId = realSessionId;
-        });
-        window.open(url, '_self');
-    //  }
-       */
-
   }
 }

@@ -23,6 +23,7 @@ import { TicketChangeField } from '../class/ticket-change-field';
 import { WebsocketService } from 'src/ng2/app/services/websocket/websocket.service';
 import { TicketProfileUpdate } from '../class/ticket-profile-update';
 import { Subscription } from 'rxjs';
+import { TicketEditAsideRightPanelComponent } from './ticket-edit-aside-right-panel/ticket-edit-aside-right-panel.component';
 @Component({
   selector: 'app-ticket-edit-aside',
   templateUrl: './ticket-edit-aside.component.html',
@@ -31,7 +32,9 @@ import { Subscription } from 'rxjs';
 
 })
 export class TicketEditAsideComponent implements OnInit, OnDestroy {
+  
   @ViewChild('updateForm') updateForm: TicketProfileFormUpdateComponent;
+  @ViewChild('rightPanel') rightPanel: TicketEditAsideRightPanelComponent;
   ticketProfile: TicketProfile = new TicketProfile();
   opened = false;
   modeSubject = 'view';
@@ -327,6 +330,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     this.showAddAssignedUser = false;
     this.showPreloader = true;
     this.listAssignedUser = [];
+    this.rightPanel.close();
     this.ticketStateService.unsubscribeTicket();
   }
   getClassType() {

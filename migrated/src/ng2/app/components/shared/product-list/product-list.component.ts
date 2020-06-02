@@ -28,17 +28,20 @@ export class ProductListComponent implements OnInit {
    * Initializes product list. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
-    this.itemList.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-    this.itemList.forEach(item => item.products.sort((a, b) => (a.description.toLowerCase() > b.description.toLowerCase()) ?
-      1 : ((b.description.toLowerCase() > a.description.toLowerCase()) ? -1 : 0)));
-
+  this.onUpdateList();
     if (this.editItem) {
       let value = this.getNameOrDescription(this.editItem);
       this.elRef.nativeElement.querySelector('#dropdownProducts').value = value;
       if (value !== '') this.selectedItem = true;
 
     }
+
+  }
+  public onUpdateList() {
+    this.itemList.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+    1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+  this.itemList.forEach(item => item.products.sort((a, b) => (a.description.toLowerCase() > b.description.toLowerCase()) ?
+    1 : ((b.description.toLowerCase() > a.description.toLowerCase()) ? -1 : 0)));
 
   }
 

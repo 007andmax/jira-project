@@ -10,8 +10,9 @@
   </div>
 
   <div class="users-aside__users-list">
-    <ng-template ngFor let-user [ngForOf]="users" [ngForTrackBy]="trackById">
+    <ng-template ngFor let-user [ngForOf]="users" [ngForTrackBy]="trackById" let-i="index">
       <div class="users-aside__user" [ngClass]="{'--online': user.online, '--away' : !user.online}" ngbDropdown>
+        <div [ngClass]="'users-aside__user-' + i">
         <div  class="users-aside__user-avatar" [ngClass]="{'--letter-avatar': ticketsListService.getAssignedUserNameForAvatar(user)}"
         [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
         [ngStyle]="{'background': getStyleAvatar(user)}"
@@ -25,9 +26,10 @@
           <div class="users-aside__user-email" [textContent]="user.primaryEmail"></div>
         </div>
 
-        <div class="users-aside__user-menu" id="dropdownForm1" ngbDropdownToggle></div>
+        <div class="users-aside__user-menu" id="dropdownForm1" (click)="onOpenDropDown(input,bodyDropDown)"  #input></div>
 
-        <div class="dropdown-menu-qt" ngbDropdownMenu aria-labelledby="dropdownForm1">
+        <div class="dropdown-menu-qt" ngbDropdownMenu aria-labelledby="dropdownForm1"
+        #bodyDropDown appClickOtside [init]="true" [class]="'.users-aside__user-' + i" (onOutSide)="hiddenDropDown(bodyDropDown)">
           <ul>
             <li (click)="sendEmail(user)">Email</li>
             <li (click)="showPrivilege = !showPrivilege ">Set {{ user.firstName }} Privilege</li>
@@ -59,5 +61,6 @@
           </ul>
         </div>
       </div>
+    </div>
       </ng-template>
 </div>

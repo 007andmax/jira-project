@@ -48,7 +48,7 @@
           </div>
         </div>
         <div class="col-md-6">
-          <p>Primary Contact</p>
+          <p>Primary Number</p>
           <input type="text" *ngIf="company.contacts[0].phoneNumbers.length > 0"
                  [(ngModel)]="company.contacts[0].phoneNumbers[0].number"
                  placeholder="Enter Primary Phone">
@@ -62,7 +62,7 @@
           <input type="text"
                  (blur)="onChangeDomain()"
                  [(ngModel)]="company.domain"
-                 placeholder="http://www.example.com">
+                 placeholder="www.example.com">
         </div>
         <div class="col-md-6">
           <mat-error *ngIf="!validate.getFirstName()">
@@ -194,7 +194,7 @@
           <input type="text"
                  [(ngModel)]="company.domain"
                  (blur)="onChangeDomain()"
-                 placeholder="http://www.example.com">
+                 placeholder="www.example.com">
         </div>
         <div class="col-md-12">
           <p>Location</p>

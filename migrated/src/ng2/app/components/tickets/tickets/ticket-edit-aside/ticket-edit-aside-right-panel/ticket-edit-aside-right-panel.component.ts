@@ -8,25 +8,21 @@ import { TicketProfile } from '../../class/ticket-profile';
 })
 export class TicketEditAsideRightPanelComponent implements OnInit {
   @Input() ticketProfile: TicketProfile;
-  type: string = 'COMPANY_INFO';
+  type: string = '';
   toggleRightPanel: boolean = false;
+  opened: boolean = false;
   constructor(public cd: ChangeDetectorRef, ) { }
 
   ngOnInit() {
   }
-  public togglePanel(type = null) {
+  public togglePanel() {
+    this.opened = !this.opened;
+    if (!this.opened)this.close();
+  }
+
+  public toggleTypeOnPanel(type = null) {
     console.log("type", type);
-    if (this.toggleRightPanel && !type) {
-      this.toggleRightPanel = false;
-      console.log("1");
-      return;
-    }
-    if (!this.toggleRightPanel && !type) {
-      this.toggleRightPanel = true;
-      this.type = 'COMPANY_INFO';
-      console.log("2");
-      return;
-    }
+  
     console.log("3");
     if (this.toggleRightPanel && this.type === type) {
       this.toggleRightPanel = false;
@@ -36,7 +32,12 @@ export class TicketEditAsideRightPanelComponent implements OnInit {
     } else if (!this.toggleRightPanel) {
       this.toggleRightPanel = true;
       this.type = type;
+      this.opened = true;
     }
     this.cd.detectChanges();
+  }
+  public close() {
+    this.type = 'COMPANY_INFO';
+    this.toggleRightPanel = false;
   }
 }

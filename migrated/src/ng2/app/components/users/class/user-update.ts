@@ -24,7 +24,7 @@ export class UserUpdate {
   constructor(data: UserProfile, user: User) {
     this.role = data.role;
      
-    if (data.phoneNumbers.length === 1 && data.phoneNumbers[0].number === '' && user.phoneNumbers.length === 0){
+    if (!user.phoneNumbers || data.phoneNumbers.length === 1 && data.phoneNumbers[0].number === '' && user.phoneNumbers.length === 0){
       this.phoneNumbers = [];
     } else {
       this.phoneNumbers = data.phoneNumbers.map((item, index) => {

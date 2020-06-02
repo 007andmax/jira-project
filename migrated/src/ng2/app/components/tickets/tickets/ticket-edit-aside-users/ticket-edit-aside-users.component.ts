@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, ElementRef } from '@angular/core';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { User } from '../../../users/class/user';
 import { TicketsListService } from '../services/tickets-list.service';
@@ -31,6 +31,7 @@ export class TicketEditAsideUsersComponent implements OnInit, OnDestroy {
     private usersService: UsersService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
+    private elRef: ElementRef,
     public ticketsListService: TicketsListService, ) { }
 
 
@@ -42,6 +43,18 @@ export class TicketEditAsideUsersComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+  }
+  onOpenDropDown(input, dropDown) {
+    let list = this.elRef.nativeElement.querySelectorAll('.dropdown-menu-qt');
+    list.forEach(element => {
+      $(element).css({ display: 'none' });
+    });
+    let viewportOffset = input.getBoundingClientRect();
+    $(dropDown).css({ top: `${viewportOffset.y}px`, left: `${viewportOffset.x - $(dropDown).height()}px`, display: 'block' });
+
+  }
+  hiddenDropDown(data) {
+    $(data).css({ display: 'none' });
   }
   public onGetUsers() {
     if (this.companyId && this.lastCompanyId !== this.companyId ) {
