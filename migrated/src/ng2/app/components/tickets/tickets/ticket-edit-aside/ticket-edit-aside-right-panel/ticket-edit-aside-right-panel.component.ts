@@ -17,7 +17,12 @@ export class TicketEditAsideRightPanelComponent implements OnInit {
   }
   public togglePanel() {
     this.opened = !this.opened;
-    if (!this.opened)this.close();
+    if (!this.opened) {
+      this.close();
+    } else {
+      this.type = 'COMPANY_INFO';
+      this.toggleRightPanel = true;
+    }
   }
 
   public toggleTypeOnPanel(type = null) {
@@ -37,7 +42,8 @@ export class TicketEditAsideRightPanelComponent implements OnInit {
     this.cd.detectChanges();
   }
   public close() {
-    this.type = 'COMPANY_INFO';
+    this.type = '';
     this.toggleRightPanel = false;
+    this.opened  =false;
   }
 }
