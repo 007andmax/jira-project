@@ -227,12 +227,38 @@
     background: url("assets/img/icons/ticket-status.svg") ;
   }
   &__tips {
-    background: url("assets/img/icons/tips.svg") ;
+    background: url("assets/img/icons/tips.svg");
   }
   &__check {
     background-image: url("assets/img/icons/check.png");
   }
-
+  &__archive {
+    background-image: url("assets/img/icons/archive.svg");
+  }
+  &__email-dark {
+    background-image: url("assets/img/icons/email-dark.svg");
+  }
+  &__set-privilege {
+    background-image: url("assets/img/icons/set-privilege.svg");
+  }
+  &__subscribe {
+    background-image: url("assets/img/icons/subscribe.svg");
+  }
+  &__mark-as-master {
+    background-image: url("assets/img/icons/mark-as-master.svg");
+  }
+  &__remote-access {
+    background-image: url("assets/img/icons/remote-access.svg");
+  }
+  &__remove-12 {
+    background-image: url("assets/img/icons/remove-12.svg");
+  }
+  &__restart {
+    background-image: url("assets/img/icons/restart.svg");
+  }
+  &__shutdown {
+    background-image: url("assets/img/icons/shutdown.svg");
+  }
 }
 
 .icn-20 {

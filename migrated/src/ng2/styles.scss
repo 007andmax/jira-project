@@ -2342,7 +2342,19 @@ input.ng-invalid.is-invalid {
 }
 
 .dropdown-menu-qt {
-  overflow: visible;
+  &.--left-side {
+    right: 0;
+    left: unset !important;
+  }
+  overflow: visible !important;
+
+  &__submenu {
+    right: calc(100% + 4px);
+    top: -6px !important;
+    background: white;
+    display: block !important;
+  }
+
   ul {
     list-style: none;
     padding: 6px 0;
@@ -2355,6 +2367,13 @@ input.ng-invalid.is-invalid {
     display: flex;
     align-items: center;
     cursor: pointer;
+    height: 32px;
+    position: relative;
+    white-space: nowrap;
+
+    .dropdown-input {
+      margin: 0 8px 0 0;
+    }
     i {
       margin-right: 3px;
     }
@@ -2363,6 +2382,23 @@ input.ng-invalid.is-invalid {
     }
     &:hover {
       background-color: #edf2f6;
+    }
+  }
+  &__item-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+  }
+
+  &__input-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    white-space: nowrap;
+    input {
+      margin: 0 8px 0 0 !important;
+      width: 16px;
     }
   }
 }

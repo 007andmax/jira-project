@@ -12,7 +12,7 @@
   <div class="users-aside__users-list">
     <ng-template ngFor let-user [ngForOf]="users" [ngForTrackBy]="trackById" let-i="index">
       <div class="users-aside__user" [ngClass]="{'--online': user.online, '--away' : !user.online}" ngbDropdown>
-        <div [ngClass]="'users-aside__user-' + i">
+        <div [ngClass]="'users-aside__user-' + i" class="d-f" >
         <div  class="users-aside__user-avatar" [ngClass]="{'--letter-avatar': ticketsListService.getAssignedUserNameForAvatar(user)}"
         [textContent]="ticketsListService.getAssignedUserNameForAvatar(user)"
         [ngStyle]="{'background': getStyleAvatar(user)}"
@@ -31,33 +31,37 @@
         <div class="dropdown-menu-qt" ngbDropdownMenu aria-labelledby="dropdownForm1"
         #bodyDropDown appClickOtside [init]="true" [class]="'.users-aside__user-' + i" (onOutSide)="hiddenDropDown(bodyDropDown)">
           <ul>
-            <li (click)="sendEmail(user)">Email</li>
-            <li (click)="showPrivilege = !showPrivilege ">Set {{ user.firstName }} Privilege</li>
+            <li (click)="sendEmail(user)"><span class="dropdown-menu-qt__item-icon icon__email-dark"></span>Email</li>
 
-            <li *ngIf="showPrivilege">
-              <button *ngIf="user.role !== 'USER'" ngbDropdownItem (click)="changeUserRole(user,'USER')">User</button>
-              <button ngbDropdownItem *ngIf="user.role !== 'ADMIN'"  (click)="changeUserRole(user,'ADMIN')">Administrator</button>
+            <li (click)="showPrivilege = !showPrivilege">
+              <span class="dropdown-menu-qt__item-icon icon__set-privilege"></span>Set {{ user.firstName }} Privilege
+
+              <ul class="dropdown-menu-qt__submenu dropdown-menu" *ngIf="showPrivilege">
+                <li *ngIf="user.role !== 'USER'" ngbDropdownItem (click)="changeUserRole(user,'USER')">User</li>
+                <li ngbDropdownItem *ngIf="user.role !== 'ADMIN'"  (click)="changeUserRole(user,'ADMIN')">Administrator</li>
+              </ul>
+
             </li>
 
-            <li (click)="showSubscription = !showSubscription">Subscribe {{ user.firstName }} to...</li>
-            <ul *ngIf="showSubscription">
+            <li (click)="showSubscription = !showSubscription">
+              <span class="dropdown-menu-qt__item-icon icon__subscribe"></span>Subscribe {{ user.firstName }} to...
+              <ul *ngIf="showSubscription" class="dropdown-menu-qt__submenu dropdown-menu">
 
                 <li >
-                  <input type="checkbox" (change)="onChangeSubscriptions('ticket',user)" [checked]="user.subscription.ticket">
-                    Ticket Updates
+                  <label class="checkbox-container dropdown-menu-qt__input-item"><input (change)="onChangeSubscriptions('ticket',user)" [checked]="user.subscription.ticket" type="checkbox"><span class="checkbox-mark"></span> Ticket Updates</label>
                 </li>
 
                 <li >
-                  <input type="checkbox" (change)="onChangeSubscriptions('invoice',user)" [checked]="user.subscription.invoice">
-                    Invoice Updates
+                  <label class="checkbox-container dropdown-menu-qt__input-item"><input (change)="onChangeSubscriptions('invoice',user)" [checked]="user.subscription.invoice" type="checkbox"><span class="checkbox-mark"></span>Invoice Updates</label>
                 </li>
 
-                <li >
-                  <input type="checkbox" (change)="onChangeSubscriptions('ticketManager',user)" [checked]="user.subscription.ticketManager">
-                    Ticket Manager
+                <li>
+                  <label class="checkbox-container dropdown-menu-qt__input-item"><input (change)="onChangeSubscriptions('ticketManager',user)" [checked]="user.subscription.ticketManager" type="checkbox"><span class="checkbox-mark"></span>Ticket Manager</label>
                 </li>
             </ul>
-            <li ngbDropdownItem (click)="archiveUser(user)">Archive</li>
+            </li>
+
+            <li ngbDropdownItem (click)="archiveUser(user)"><span class="dropdown-menu-qt__item-icon icon__archive"></span>Archive</li>
           </ul>
         </div>
       </div>

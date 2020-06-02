@@ -22,15 +22,35 @@
         <div class="devices-aside__device-menu" id="dropdownForm1" (click)="onOpenDropDown(input,bodyDropDown)"  #input>
         </div>
 
-        <ul class="dropdown-menu-qt" ngbDropdownMenu aria-labelledby="dropdownForm1"  #bodyDropDown appClickOtside [init]="true" [class]="'.devices-aside__device-' + i" (onOutSide)="hiddenDropDown(bodyDropDown)">
-          <li (click)="showRemoteAccess = !showRemoteAccess ">Remote Access</li>
-          <li *ngIf="showRemoteAccess"><button ngbDropdownItem (click)="remoteAccess('CSS', device)">Custom Share Screen</button>
-            <button ngbDropdownItem (click)="remoteAccess('RDP', device)">Remote desktop protocol</button></li>
-          <li ngbDropdownItem (click)="restart(device)">Restart</li>
-          <li ngbDropdownItem (click)="shutdown(device)">Shutdown</li>
-          <li ngbDropdownItem (click)="remove(device)">Remove</li>
-          <li ngbDropdownItem (click)="markDeviceAsMaster(device)">Mark as master</li>
-        </ul>
+        <div ngbDropdownMenu class="dropdown-menu-qt" aria-labelledby="dropdownForm1"  #bodyDropDown appClickOtside [init]="true" [class]="'.devices-aside__device-' + i" (onOutSide)="hiddenDropDown(bodyDropDown)">
+          <ul>
+            <li (click)="showRemoteAccess = !showRemoteAccess ">
+              <span class="dropdown-menu-qt__item-icon icon__remote-access"></span>Remote Access
+              <ul class="dropdown-menu-qt__submenu dropdown-menu" *ngIf="showRemoteAccess">
+                <li ngbDropdownItem (click)="remoteAccess('CSS', device)">Custom Share Screen</li>
+                <li ngbDropdownItem (click)="remoteAccess('RDP', device)">Remote desktop protocol</li>
+              </ul>
+            </li>
+
+
+
+            <li ngbDropdownItem (click)="restart(device)">
+              <span class="dropdown-menu-qt__item-icon icon__restart"></span>Restart
+            </li>
+
+            <li ngbDropdownItem (click)="shutdown(device)">
+              <span class="dropdown-menu-qt__item-icon icon__shutdown"></span>Shutdown
+            </li>
+
+            <li ngbDropdownItem (click)="remove(device)">
+              <span class="dropdown-menu-qt__item-icon icon__remove-12"></span>Remove
+            </li>
+
+            <li ngbDropdownItem (click)="markDeviceAsMaster(device)">
+              <span class="dropdown-menu-qt__item-icon icon__mark-as-master"></span>Mark as master
+            </li>
+          </ul>
+        </div>
       </div>
       </div>
 
@@ -47,7 +67,7 @@
           <div class="devices-aside__device-owner" [textContent]="device.userName"></div>
           <div class="devices-aside__device-menu" id="dropdownForm1" (click)="onOpenDropDown(input,bodyDropDown)"  #input>
           </div>
-  
+
           <ul class="dropdown-menu-qt" ngbDropdownMenu aria-labelledby="dropdownForm1" #bodyDropDown>
             <li (click)="showRemoteAccess = !showRemoteAccess ">Remote Access</li>
             <li *ngIf="showRemoteAccess"><button ngbDropdownItem (click)="remoteAccess('CSS', device)">Custom Share Screen</button>
@@ -57,9 +77,9 @@
             <li ngbDropdownItem (click)="remove(device)">Remove</li>
             <li ngbDropdownItem (click)="markDeviceAsMaster(device)">Mark as master</li>
           </ul>
-  
+
         </div>
-  
+
         </ng-template>
 
         <ng-template ngFor let-device [ngForOf]="devices" [ngForTrackBy]="trackById">
@@ -73,7 +93,7 @@
             <div class="devices-aside__device-owner" [textContent]="device.userName"></div>
             <div class="devices-aside__device-menu" id="dropdownForm1" (click)="onOpenDropDown(input,bodyDropDown)"  #input>
             </div>
-    
+
             <ul class="dropdown-menu-qt" ngbDropdownMenu aria-labelledby="dropdownForm1" #bodyDropDown>
               <li (click)="showRemoteAccess = !showRemoteAccess ">Remote Access</li>
               <li *ngIf="showRemoteAccess"><button ngbDropdownItem (click)="remoteAccess('CSS', device)">Custom Share Screen</button>
@@ -83,9 +103,9 @@
               <li ngbDropdownItem (click)="remove(device)">Remove</li>
               <li ngbDropdownItem (click)="markDeviceAsMaster(device)">Mark as master</li>
             </ul>
-    
+
           </div>
-    
+
           </ng-template>
 
 
