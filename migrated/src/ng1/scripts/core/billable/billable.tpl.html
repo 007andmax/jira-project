@@ -712,7 +712,8 @@
                   </a>
                   <a class="has-tooltip" tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Edit">
                     <i ng-if="!ticket.isOrder"
-                       ui-sref="tickets.details({ listType: 'all', ticketId: ticket.id, remoteParams: null })"
+                    ng-click="setBillableTicketEdit(ticket.id)"
+                    ui-sref="new-tickets"
                        ng-if="ticket.isOrder" class="icon-sm edit-icon pointer"></i>
                   </a>
                 </div>

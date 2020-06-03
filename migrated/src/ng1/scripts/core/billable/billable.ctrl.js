@@ -381,7 +381,9 @@
             }
           }
         };
-
+        $scope.setBillableTicketEdit = function (id) {
+          localStorage.setItem('billable_ticket_id', id)
+        }
         $scope.changeCompanyCheckbox = function (companyId) {
 
           var ticketsSelection = $scope.ticketsSelection[companyId];

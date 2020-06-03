@@ -25,7 +25,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
   listColors: Array<StatusColor> = [];
   statusColor: TicketsColor;
   offset: number = 15;
-  showPendingPreloader:boolean = false;
+  showPendingPreloader: boolean = false;
   constructor(private ticketsService: TicketsService,
     private ticketsListService: TicketsListService,
     public cd: ChangeDetectorRef,
@@ -57,7 +57,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
       this.ticketsFilter = data;
       this.showPreloader = true;
-      window.scrollTo(0,0);
+      window.scrollTo(0, 0);
       this.setDefaultScoll();
       this.onScroll();
     })
@@ -69,7 +69,10 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     this.ticketsStateService.getOnInitStatus().subscribe(data => {
       this.statusColor = data;
     })
-
+    if (localStorage.getItem('billable_ticket_id')) {
+      this.editTicket(localStorage.getItem('billable_ticket_id'));
+      localStorage.removeItem('billable_ticket_id');
+    }
   }
 
   editTicket(id) {
@@ -84,9 +87,9 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
       return;
     }
     this.ticketsFilter.setOffset(this.page_number * this.offset);
-    
- 
-  if (this.page_number > 0)this.showPendingPreloader = true;
+
+
+    if (this.page_number > 0) this.showPendingPreloader = true;
     this.ticketsService.getTickets(this.ticketsFilter.getListTupe(), this.ticketsFilter.getDataForRequest()).subscribe((data: Array<Ticket>) => {
       this.tickets = [...this.tickets, ...data];
       this.infiniteScrollDisabled = false;
@@ -95,7 +98,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
       this.showPreloader = false;
       this.showPendingPreloader = false;
       this.cd.detectChanges();
-    
+
     })
   }
   public onScroll() {
