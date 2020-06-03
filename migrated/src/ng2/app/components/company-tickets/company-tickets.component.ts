@@ -74,6 +74,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     if (localStorage.getItem('company_id')) {
       let ticket_id = localStorage.getItem('company_id');
       let company = this.companiesStateService.getCompanies().find(item => item.id === ticket_id);
+      this.ticketsFilter.setListType("ALL");
       this.ticketsFilter.setCompany(company);
       this.onScroll();
     }

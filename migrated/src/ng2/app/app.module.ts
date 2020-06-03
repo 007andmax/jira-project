@@ -276,7 +276,7 @@ angular.module('quicktech')
     'companyUser',
     downgradeComponent({ component: CompanyUserComponent }))
     .directive(
-      'companyTicket',
+      'companyTickets',
       downgradeComponent({ component: CompanyTicketsComponent }))
   .directive(
     'leftPanelComponent',

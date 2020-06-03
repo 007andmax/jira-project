@@ -320,7 +320,7 @@
           }
 
           if (tabToActivate == 'CompanyProfileTicketsPage') {
-            $scope.goToTab(`#/ng2/company-ticket`);
+            $scope.goToTab(`#/ng2/company-tickets`);
             return;
           }
          

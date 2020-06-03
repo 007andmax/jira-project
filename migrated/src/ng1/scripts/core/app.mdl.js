@@ -124,8 +124,8 @@
           url: '/ng2/company-user',
           template: '<company-user></company-user>'
         }))
-        .state('company-ticket', waitForServices({
-          url: '/ng2/company-ticket',
+        .state('company-tickets', waitForServices({
+          url: '/ng2/company-tickets',
           template: '<company-tickets></company-tickets>'
         }))
         .state('inventory', waitForServices({

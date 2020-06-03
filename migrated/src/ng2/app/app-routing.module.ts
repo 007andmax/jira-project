@@ -53,7 +53,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'ng2/company-ticket',
+    path: 'ng2/company-tickets',
     component: CompanyTicketsComponent,
     pathMatch: 'full'
   },
