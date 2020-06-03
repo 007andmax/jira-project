@@ -23,6 +23,7 @@ export class TicketEditAsideUsersComponent implements OnInit, OnDestroy {
   showSubscription: boolean = false;
   sub: Subscription = new Subscription();
   lastCompanyId:string = '';
+  isOpenDropDown: boolean = false;
   @Input() set setCompanyId(value) {
     this.companyId = value;
     this.onGetUsers();
@@ -44,10 +45,12 @@ export class TicketEditAsideUsersComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getConfirm);
     $(this.elRef.nativeElement).scroll(() => {
+      if (!this.isOpenDropDown) return;
       let list = this.elRef.nativeElement.querySelectorAll('.dropdown-menu-qt');
       list.forEach(element => {
         $(element).css({ display: 'none' });
       });
+      this.isOpenDropDown = false;
     });
   }
   onOpenDropDown(input, dropDown) {
@@ -57,7 +60,7 @@ export class TicketEditAsideUsersComponent implements OnInit, OnDestroy {
     });
     let viewportOffset = input.getBoundingClientRect();
     $(dropDown).css({ top: `${viewportOffset.y}px`, left: `${viewportOffset.x - $(dropDown).height()}px`, display: 'block' });
-
+    this.isOpenDropDown = true;
   }
   hiddenDropDown(data) {
     $(data).css({ display: 'none' });
@@ -125,7 +128,7 @@ export class TicketEditAsideUsersComponent implements OnInit, OnDestroy {
       this.users = JSON.parse(JSON.stringify(this.reqUsers));
       return;
     }
-    this.users = this.reqUsers.filter(item => this.ticketsListService.getUserName(item).toLowerCase().includes(event.target.value));
+    this.users = this.reqUsers.filter(item => this.ticketsListService.getUserName(item).toLowerCase().includes(event.target.value.toLowerCase()));
   }
   public trackById(index, item) {
     return item.id;

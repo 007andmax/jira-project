@@ -21,6 +21,7 @@ export class TicketEditAsideDevicesComponent implements OnInit, OnDestroy {
   showRemoteAccess: boolean = false;
   realSessionId: string;
   lastCompanyId: string;
+  isOpenDropDown: boolean = false;
   @Input() set setCompanyId(value) {
     this.companyId = value;
     this.onGetDevices();
@@ -47,10 +48,12 @@ export class TicketEditAsideDevicesComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnRemoveConnection);
     $(this.elRef.nativeElement).scroll(() => {
+      if (!this.isOpenDropDown) return;
       let list = this.elRef.nativeElement.querySelectorAll('.dropdown-menu-qt');
       list.forEach(element => {
         $(element).css({ display: 'none' });
       });
+      this.isOpenDropDown = false;
     });
   }
   onOpenDropDown(input, dropDown) {
@@ -60,7 +63,7 @@ export class TicketEditAsideDevicesComponent implements OnInit, OnDestroy {
     });
     let viewportOffset = input.getBoundingClientRect();
     $(dropDown).css({ top: `${viewportOffset.y}px`, left: `${viewportOffset.x - $(dropDown).height()}px`, display: 'block' });
-
+    this.isOpenDropDown = true;
   }
   hiddenDropDown(data) {
     $(data).css({ display: 'none' });
@@ -71,7 +74,7 @@ export class TicketEditAsideDevicesComponent implements OnInit, OnDestroy {
     } else {
       return;
     }
-    let devices = this.devicesSateService.getAllDevices()[this.companyId]
+    let devices = (this.devicesSateService.getAllDevices()) ? this.devicesSateService.getAllDevices()[this.companyId] : [];
     this.devices = (devices) ? devices : [];
     this.reqDevices = (devices) ? devices : [];
   }
@@ -80,7 +83,7 @@ export class TicketEditAsideDevicesComponent implements OnInit, OnDestroy {
       this.devices = JSON.parse(JSON.stringify(this.reqDevices));
       return;
     }
-    this.devices = this.reqDevices.filter(item => item.hostName.toLowerCase().includes(event.target.value));
+    this.devices = this.reqDevices.filter(item => item.hostName.toLowerCase().includes(event.target.value.toLowerCase()));
   }
   remoteAccess(connectionType, device) {
     this.devicesService.createRemoteSession(device.id, this.companyId, connectionType, null).subscribe((resp: any) => {
@@ -138,6 +141,6 @@ export class TicketEditAsideDevicesComponent implements OnInit, OnDestroy {
     return item.id;
   }
   ngOnDestroy(): void {
-  this.sub.unsubscribe();
+    this.sub.unsubscribe();
   }
 }
