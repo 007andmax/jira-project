@@ -131,4 +131,7 @@ export class TicketEditAsideDevicesComponent implements OnInit {
     const modalRef = this.modalService.open(ModalCustomShareScreenComponent, null);
     modalRef.componentInstance.companyId = this.companyId;
   }
+  public trackById(index, item) {
+    return item.id;
+  }
 }

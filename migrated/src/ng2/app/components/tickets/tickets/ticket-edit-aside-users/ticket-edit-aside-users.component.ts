@@ -127,6 +127,9 @@ export class TicketEditAsideUsersComponent implements OnInit, OnDestroy {
     }
     this.users = this.reqUsers.filter(item => this.ticketsListService.getUserName(item).toLowerCase().includes(event.target.value));
   }
+  public trackById(index, item) {
+    return item.id;
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
