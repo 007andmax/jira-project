@@ -243,6 +243,7 @@ import { MapModalComponent } from './components/shared/map-modal/map-modal.compo
 import { CompanyInfoHistoryComponent } from './components/tickets/tickets/ticket-edit-aside-company-info/company-info-history/company-info-history.component';
 import { TicketEditAsideRightPanelComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-edit-aside-right-panel/ticket-edit-aside-right-panel.component';
 import { ModalCustomShareScreenComponent } from './services/modal/modal-custom-share-screen/modal-custom-share-screen.component';
+import { CompanyTicketsComponent } from './components/company-tickets/company-tickets.component';
  
 
 
@@ -263,6 +264,7 @@ export class CustomHandlingStrategy implements UrlHandlingStrategy {
 /**
  * Component downgrade
  */
+
 angular.module('quicktech')
   .directive(
     'passwordManager',
@@ -273,6 +275,9 @@ angular.module('quicktech')
   .directive(
     'companyUser',
     downgradeComponent({ component: CompanyUserComponent }))
+    .directive(
+      'companyTicket',
+      downgradeComponent({ component: CompanyTicketsComponent }))
   .directive(
     'leftPanelComponent',
     downgradeComponent({ component: LeftPanelComponent }))
@@ -592,6 +597,8 @@ angular.module('quicktech')
     TicketEditAsideRightPanelComponent,
 
     ModalCustomShareScreenComponent,
+
+    CompanyTicketsComponent,
   ],
   imports: [
     BrowserModule,
@@ -650,6 +657,7 @@ angular.module('quicktech')
     ImageCropperComponent,
     CompanyPasswordManagerComponent,
     CompanyUserComponent,
+    CompanyTicketsComponent,
     UsersComponent,
     AlertComponent,
     LeftPanelComponent,

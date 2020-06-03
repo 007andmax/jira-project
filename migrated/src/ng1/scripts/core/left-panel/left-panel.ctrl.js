@@ -318,6 +318,11 @@
             $scope.goToTab(`#/ng2/company-products`);
             return;
           }
+
+          if (tabToActivate == 'CompanyProfileTicketsPage') {
+            $scope.goToTab(`#/ng2/company-ticket`);
+            return;
+          }
          
           var tab = $scope[tabToActivate];
           deactivateAllCompanyProfileTabs();
