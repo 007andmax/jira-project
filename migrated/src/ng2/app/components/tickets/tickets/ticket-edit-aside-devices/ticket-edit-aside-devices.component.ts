@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, OnDestroy } from '@angular/core';
 import { DevicesSateService } from 'src/ng2/app/states/devices/devices-sate.service';
 import { DevicesService } from 'src/ng2/app/services/devices/devices.service';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
@@ -6,6 +6,7 @@ import { ModalQuoteComponent } from 'src/ng2/app/services/modal/modal-quote/moda
 import { data } from 'jquery';
 import { ModalCustomShareScreenComponent } from 'src/ng2/app/services/modal/modal-custom-share-screen/modal-custom-share-screen.component';
 import { ConstantsStateService } from 'src/ng2/app/states/constants/constants-state.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-ticket-edit-aside-devices',
@@ -13,7 +14,7 @@ import { ConstantsStateService } from 'src/ng2/app/states/constants/constants-st
   styleUrls: ['./ticket-edit-aside-devices.component.scss'],
   providers: [NgbModalConfig, NgbModal],
 })
-export class TicketEditAsideDevicesComponent implements OnInit {
+export class TicketEditAsideDevicesComponent implements OnInit, OnDestroy {
   devices = [];
   reqDevices = [];
   companyId: string = '';
@@ -24,6 +25,7 @@ export class TicketEditAsideDevicesComponent implements OnInit {
     this.companyId = value;
     this.onGetDevices();
   };
+  sub: Subscription = new Subscription();
   constructor(private devicesSateService: DevicesSateService,
     private constantsStateService: ConstantsStateService,
     private modalService: NgbModal,
@@ -34,15 +36,16 @@ export class TicketEditAsideDevicesComponent implements OnInit {
     config.keyboard = false;
   }
 
+
   ngOnInit() {
     this.onGetDevices();
-    this.devicesSateService.getOnRemoveConnection().subscribe(data => {
+    let getOnRemoveConnection = this.devicesSateService.getOnRemoveConnection().subscribe(data => {
       let remoteConnectPort = this.constantsStateService.getConstant('remote.connect.port'),
         restServerAddress = this.constantsStateService.getConstant('rest.server.address'),
         url = 'quicktech://connect?serverIP=' + restServerAddress + '&port=' + remoteConnectPort + '&sessionID=' + this.realSessionId;
       window.open(url, '_self');
     })
-
+    this.sub.add(getOnRemoveConnection);
     $(this.elRef.nativeElement).scroll(() => {
       let list = this.elRef.nativeElement.querySelectorAll('.dropdown-menu-qt');
       list.forEach(element => {
@@ -133,5 +136,8 @@ export class TicketEditAsideDevicesComponent implements OnInit {
   }
   public trackById(index, item) {
     return item.id;
+  }
+  ngOnDestroy(): void {
+  this.sub.unsubscribe();
   }
 }

@@ -48,15 +48,15 @@
               <ul *ngIf="showSubscription" class="dropdown-menu-qt__submenu dropdown-menu">
 
                 <li >
-                  <label class="checkbox-container dropdown-menu-qt__input-item"><input (change)="onChangeSubscriptions('ticket',user)" [checked]="user.subscription.ticket" type="checkbox"><span class="checkbox-mark"></span> Ticket Updates</label>
+                  <label class="checkbox-container dropdown-menu-qt__input-item" [attr.for]="'ticket-' + i" (click)="onChangeSubscriptions('ticket',user)"><input [attr.id]="'ticket-' + i"  [checked]="user.subscription.ticket" type="checkbox"><span class="checkbox-mark"></span> Ticket Updates</label>
                 </li>
 
                 <li >
-                  <label class="checkbox-container dropdown-menu-qt__input-item"><input (change)="onChangeSubscriptions('invoice',user)" [checked]="user.subscription.invoice" type="checkbox"><span class="checkbox-mark"></span>Invoice Updates</label>
+                  <label class="checkbox-container dropdown-menu-qt__input-item" [attr.for]="'invoice-' + i" (click)="onChangeSubscriptions('invoice',user)"><input [attr.id]="'invoice-' + i"  [checked]="user.subscription.invoice" type="checkbox"><span class="checkbox-mark"></span>Invoice Updates</label>
                 </li>
 
                 <li>
-                  <label class="checkbox-container dropdown-menu-qt__input-item"><input (change)="onChangeSubscriptions('ticketManager',user)" [checked]="user.subscription.ticketManager" type="checkbox"><span class="checkbox-mark"></span>Ticket Manager</label>
+                  <label class="checkbox-container dropdown-menu-qt__input-item" [attr.for]="'ticketManager-' + i" (click)="onChangeSubscriptions('ticketManager',user)"><input [attr.id]="'ticketManager-' + i"  [checked]="user.subscription.ticketManager" type="checkbox"><span class="checkbox-mark"></span>Ticket Manager</label>
                 </li>
             </ul>
             </li>
