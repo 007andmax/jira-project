@@ -43,6 +43,12 @@ export class TicketEditAsideUsersComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+    $(this.elRef.nativeElement).scroll(() => {
+      let list = this.elRef.nativeElement.querySelectorAll('.dropdown-menu-qt');
+      list.forEach(element => {
+        $(element).css({ display: 'none' });
+      });
+    });
   }
   onOpenDropDown(input, dropDown) {
     let list = this.elRef.nativeElement.querySelectorAll('.dropdown-menu-qt');
