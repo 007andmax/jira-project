@@ -41,13 +41,10 @@ export class TicketProfileFormUpdateProductsComponent implements OnInit, OnDestr
       this.cd.detectChanges();
       let getChangeProducts = this.inventoryStateService.getChangeProducts().subscribe((data: InventoryChange) => {
         if (data.action === 'PRODUCT_SAVED') {
-
           const Index = this.productList.findIndex((item) => item.id === data.data.category.id);
-
           if (Index > -1) {
             this.productList[Index].products.push(data.data);
           }
-          console.log("this.productList[Index]", this.productList[Index]);
         }
         this.productDP.onUpdateList();
         this.cd.detectChanges();

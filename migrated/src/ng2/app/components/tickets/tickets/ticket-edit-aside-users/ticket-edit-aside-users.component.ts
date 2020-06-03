@@ -71,7 +71,6 @@ export class TicketEditAsideUsersComponent implements OnInit, OnDestroy {
     let users = this.usersStateService.getAllUsers().filter(item => item.company.id === this.companyId && item.accountType !== 'TECH' && !item.deletedAt);
     this.users = (users) ? users : [];
     this.reqUsers = (users) ? users : [];
-    console.log("users", users);
   }
   private onArchiveUser(id) {
     let ids = [];

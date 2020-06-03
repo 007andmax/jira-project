@@ -15,7 +15,6 @@
             period: '='
           },
           link: function (scope, element, attrs, ctrl) {
-           console.log("scope",scope);
             var isolate = (element[0].getAttribute('isolate')) ? true : false;
             var mobile = (element[0].getAttribute('mobile')) ? true : false;
           let open = false;
@@ -30,18 +29,11 @@
                 vertical: 'auto'
               }
             };
-
-
-            console.log("scope.minDate",scope.minDate);
             if (scope.minDate) {
               options.minDate = $filter('date')(getMinStartDate(scope.period,scope.minDate ), 'dd MMM yyyy');
-              console.log("getMinStartDate",getMinStartDate(scope.period,scope.minDate ));
-
             } else {
               options.minDate = $filter('date')(getMinStartDate(scope.period,Date.now() ), 'dd MMM yyyy');
-              console.log("getMinStartDate",getMinStartDate(scope.period,scope.minDate ));
             }
-
             if (scope.maxDate) {
               options.maxDate = $filter('date')(scope.maxDate, 'dd MMM yyyy');
             }
@@ -53,7 +45,6 @@
               }
               options.defaultDate = $filter('date')(defaultDate, 'dd MMM yyyy');
             }
-console.log("options",options);
             $timeout(function () {
               element.datetimepicker(options);
               ctrl.$setPristine();
@@ -69,22 +60,17 @@ console.log("options",options);
 
 
             element.bind('dp.change', function (e) {
-              console.log("e.date._d",e);
               var formattedDate = $filter('date')(e.date._d, 'dd MMM yyyy');
-              
               if (isolate && open) {
                 var type = element[0].getAttribute('isolate-type');
                 var id = element[0].getAttribute('id-item');
-              
                 if (type == "product") {
                   $rootScope.$broadcast('onChangeProductDate', {date:e.date._d,id: id});
                 }
                 if (type == "service") {
                   $rootScope.$broadcast('onChangeServiceDate', {date:e.date._d,id: id});
                 }
-                
               }
-            //  if (open)  $rootScope.$broadcast('resetBlockUpdateAndClosed', null);
               ctrl.$setViewValue(formattedDate);
 
               element.data('DateTimePicker') && element.data('DateTimePicker').hide();
@@ -96,7 +82,6 @@ console.log("options",options);
               var newMinStartDate;
               var now = new Date(startDate);
               var n = new Date(now);
-              console.log("interval",interval);
               var day = 1000 * 60 * 60 * 24;
               if (interval === 'Month') {
                 

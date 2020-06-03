@@ -80,10 +80,8 @@
            
           $scope.blockTimeContract.startDatePreview = $scope.blockTimeContract.startDate;
           $scope.blockTimeContract.startDate = $filter('date')($scope.editContract.startDate, 'dd MMM yyyy');
-console.log("$scope.blockTimeContract.endDate",$scope.blockTimeContract.endDate);
           $scope.blockTimeContract.minStartDate = new Date($scope.blockTimeContract.startDate);
           $timeout(function () {
-            console.log("$scope.blockTimeContract.endDatePreview",$scope.blockTimeContract.endDatePreview);
             chnageNumOFIntervals($scope.blockTimeContract.startDatePreview, $scope.blockTimeContract.endDatePreview, true);
           }, 50);
         });
@@ -104,27 +102,14 @@ console.log("$scope.blockTimeContract.endDate",$scope.blockTimeContract.endDate)
             $scope.blockTimeContract = angular.copy($scope.editContract);
             var endDateTechCompany = CompaniesService.parseDateTechCompany(end_date); 
             $scope.blockTimeContract.endDate = $filter('date')(endDateTechCompany, 'dd MMM yyyy');//$filter('date')(new Date($scope.serviceContract.endDate), 'dd MMM yyyy');
-           // $scope.blockTimeContract.startDatePreview = $scope.blockTimeContract.startDate;
-          // $scope.blockTimeContract.endDatePreview = $filter('date')(endDateTechCompany, 'dd MMM yyyy');
             $scope.blockTimeContract.startDate =  $filter('date')($scope.blockTimeContract.startDate, 'dd MMM yyyy');
-         console.log("$scope.blockTimeContract",$scope.blockTimeContract);
             $scope.blockTimeContract.minStartDate = new Date($scope.blockTimeContract.startDate);
             $scope.blockTimeContract.taxes = [];
-         //   $scope.blockTimeContract.billForAdditionalService = false;
-      
-            $scope.blockTimeContract.notifyBlockTimeUsed = $scope.blockTimeContract.shares.length>0;
-          /*  $timeout(function () {
-              console.log("$scope.blockTimeContract.endDatePreview",$scope.blockTimeContract.endDatePreview);
-              chnageNumOFIntervals($scope.blockTimeContract.startDatePreview, $scope.blockTimeContract.endDatePreview, true);
-            }, 50);*/
-  
+           $scope.blockTimeContract.notifyBlockTimeUsed = $scope.blockTimeContract.shares.length>0;
             if($scope.blockTimeContract.interval == null) {
               $scope.blockTimeContract.interval = $scope.blockTimeContract.customInterval + ' days';
             }
-  
-  
             AgreementsService.getServiceAgreementById($scope.editContract.id, function(data){
-               
               $scope.contractStatus = data.status;
             });
   
@@ -375,25 +360,15 @@ console.log("$scope.blockTimeContract.endDate",$scope.blockTimeContract.endDate)
             }
             endDate = Utils.minusDays(endDate, 1);
             $scope.blockTimeContract.endDate = $filter('date')(endDate, 'dd MMM yyyy');
-            console.log("$scope.blockTimeContract.endDate",$scope.blockTimeContract.endDate);
           }
-
         }
-
-
-
         $scope.$watch(function() {
           return $scope.blockTimeContract.endDate;
         }, function(oldEndDate) {
-          console.log("oldEndDate",oldEndDate);
           chnageNumOFIntervals($scope.blockTimeContract.startDate, oldEndDate);
         });
 
-
-   
-
         function chnageNumOFIntervals(startDatee, endDatee, ifForIntervals) {
-          console.log("endDatee",endDatee);
           if(startDatee && endDatee) {
             var startDate = new Date(startDatee);
             var endDate = new Date(endDatee);
@@ -443,9 +418,7 @@ console.log("$scope.blockTimeContract.endDate",$scope.blockTimeContract.endDate)
                     break;
                   }
                 }
-                console.log("endDate",endDate);
             }
-             console.log("interval",interval);
             if(ifForIntervals) {
               $scope.blockTimeContract.numOfIntervalsPreview = interval
             } else {
@@ -906,15 +879,12 @@ $scope.onChangeService = function (data) {
         function checkForDuplicateServiceNames(serviceList) {
           var deferred = $q.defer();
           var startDate = $filter('date')($scope.blockTimeContract.startDate, 'dd MMM yyyy');
-          console.log("$scope.blockTimeContract.endDate",angular.copy($scope.blockTimeContract.endDate));
           var endDate =  $filter('date')($scope.blockTimeContract.endDate, 'dd MMM yyyy');
-
           var companyId = returnCompanyId();
           var serviceNamesList = [];
           for (var i = 0; i < serviceList.length; i++) {
             serviceNamesList.push(getNameAsObject(serviceList[i].name));
           }
-console.log("endDate",endDate);
           ServicesService.searchDuplicatedServiceNames(startDate, endDate, companyId, serviceNamesList,($scope.isEditContract) ?  $scope.blockTimeContract.id : null, function (resp) {
             if (Object.keys(resp).length === 0) {
               deferred.resolve(resp);

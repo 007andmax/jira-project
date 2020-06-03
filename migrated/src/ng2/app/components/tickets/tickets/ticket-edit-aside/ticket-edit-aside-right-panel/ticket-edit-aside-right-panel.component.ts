@@ -26,9 +26,6 @@ export class TicketEditAsideRightPanelComponent implements OnInit {
   }
 
   public toggleTypeOnPanel(type = null) {
-    console.log("type", type);
-  
-    console.log("3");
     if (this.toggleRightPanel && this.type === type) {
       this.toggleRightPanel = false;
       this.type = 'COMPANY_INFO';

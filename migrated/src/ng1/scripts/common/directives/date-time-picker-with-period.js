@@ -17,7 +17,7 @@
             startDate: '='
           },
           link: function (scope, element, attrs, ctrl) {
-            console.log("scope", scope);
+           
 
             var options = {
               keepOpen: true,
@@ -68,7 +68,7 @@
                 enabledDates.push(scope.minDate);
 
               } else if (scope.period === 7) {
-                console.log(new Date(scope.defaultDate));
+               
                 let listDates = [];
                 enabledDates = [];
                 let startDate = new Date(scope.defaultDate);
@@ -108,7 +108,7 @@
               lastDate = enabledDates[enabledDates.length - 1];
               options.enabledDates = enabledDates;
 
-              console.log("options.enabledDates", options.enabledDates);
+            
               element.bind('dp.update', function (e) {
 
                 var data = dp.data("DateTimePicker"),
@@ -125,8 +125,7 @@
                 }
 
                 dp = element.datetimepicker(options);
-                console.log("scope.period", scope.period);
-                console.log("scope.startDate", scope.startDate);
+               
 
                 changeDatePicker();
               });
@@ -137,18 +136,14 @@
             }, 0);
 
             element.bind('dp.change', function (e) {
-              console.log("change", e);
+            
               var value;
               if (e.oldDate == null) {
                 value = $filter('date')(scope.defaultDate, 'dd MMM yyyy');
                 e.oldDate = value;
-                console.log("change", e);
               } else {
                 value = e.date._d;
-                console.log('e.date._d',e.date._d);
               }
-              console.log("defaultDate", value);
-
               ctrl.$setViewValue(value);
               pickedDate = value;
               element.data('DateTimePicker') && element.data('DateTimePicker').hide();
@@ -171,7 +166,6 @@
             });
 
             element.bind('dp.show', function (e) {
-              console.log("e", e);
               changeDatePicker();
               element.parent().find('.datepicker').removeClass('datepicker');
             });

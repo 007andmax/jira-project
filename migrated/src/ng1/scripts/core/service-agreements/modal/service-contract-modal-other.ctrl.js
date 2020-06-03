@@ -126,9 +126,7 @@
           $scope.serviceContract.numOfIntervalsPreview;
           $scope.serviceContract.isAdditionalServices = $scope.serviceContract.services.length > 0;
           $scope.serviceContract.minStartDate = Date.now();
-          console.log("$scope.serviceContract",$scope.serviceContract);
           $timeout(function () {
-             
             changeNumOfIntervals($scope.serviceContract.startDate,$scope.serviceContract.endDate, true);
             $scope.$apply();
           }, 500);
