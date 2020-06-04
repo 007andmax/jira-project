@@ -84,7 +84,7 @@ export class LeftPanelTicketsComponent implements OnInit {
       this.ticketsStateService.onInitCount(this.ticketsCounts[(this.listType === 'USERS') ? 'USER' : this.listType]);
       this.cd.detectChanges();
     })
-
+    if (window.innerWidth < 1280)  $("app-left-panel-tickets .left-panel-ng2").css({ zIndex: 990 });
   }
   private getCount() {
     this.ticketsService.getCount(this.ticketsFilter.getDataForRequest()).subscribe(data => {

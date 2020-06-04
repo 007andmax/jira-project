@@ -18,6 +18,7 @@ export class ServicesListComponent implements OnInit {
   @Output() serviceList: any;
   @Output() selectedServicesItem = new EventEmitter<any>();
   @Input() type: string;
+  searchName: string = null;
   public client: any;
   public isFormValid = false;
   /**
@@ -37,6 +38,9 @@ export class ServicesListComponent implements OnInit {
     if (this.editItem && this.type === TYPE_TICKET) this.elRef.nativeElement.querySelector('#dropdownServices').value = this.getNameOrDescription(this.editItem);
   }
 
+  onSearch(event) {
+    this.searchName = (event.target.value.length > 0) ? event.target.value : null
+  }
 
 
   /**
@@ -58,7 +62,8 @@ export class ServicesListComponent implements OnInit {
     this.elRef.nativeElement.querySelector('#dropdownServices').value = this.getNameOrDescription(item);
 
     this.products_dropDown.close();
-    this.selectedServicesItem.next(item)
+    this.selectedServicesItem.next(item);
+    this.searchName = null;
     this.cd.detectChanges();
   }
 

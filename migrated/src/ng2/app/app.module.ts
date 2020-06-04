@@ -245,6 +245,7 @@ import { TicketEditAsideRightPanelComponent } from './components/tickets/tickets
 import { ModalCustomShareScreenComponent } from './services/modal/modal-custom-share-screen/modal-custom-share-screen.component';
 import { CompanyTicketsComponent } from './components/company-tickets/company-tickets.component';
 import { InventoryAddBodyComponent } from './components/inventory/inventory-add-aside/inventory-add-body/inventory-add-body.component';
+import { ServicePipe } from './pipe/service.pipe';
  
 
 
@@ -602,6 +603,8 @@ angular.module('quicktech')
     CompanyTicketsComponent,
 
     InventoryAddBodyComponent,
+
+    ServicePipe,
   ],
   imports: [
     BrowserModule,
