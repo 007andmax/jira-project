@@ -10,6 +10,7 @@ import { TicketsStateService } from '../../states/tickets/tickets-state.service'
 import { CompaniesStateService } from '../../states/company/companies-state.service';
 import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
 import { TicketsHeaderComponent } from '../tickets/tickets/tickets-header/tickets-header.component';
+import { LeftPanelService } from '../../services/left-panel/left-panel.service';
 
 @Component({
   selector: 'company-tickets',
@@ -32,10 +33,25 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
   constructor(private ticketsService: TicketsService,
     private ticketsListService: TicketsListService,
     public cd: ChangeDetectorRef,
+    private leftPanelService:LeftPanelService,
     private companiesStateService: CompaniesStateService,
     private ticketsStateService: TicketsStateService) { }
 
   ngOnInit() {
+    
+    this.leftPanelService.getColors().subscribe((data: any) => {
+
+      let listColors = data.map(item => {
+        return new StatusColor(item.backgroundColor, item.borderColor);
+      })
+      this.ticketsStateService.onColorStatus(listColors);
+
+    })
+    this.leftPanelService.getTicketsStatus().subscribe((data: any) => {
+
+      let ticketsColor = new TicketsColor(data);
+      this.ticketsStateService.onInitStatus(ticketsColor);
+    })
     this.ticketsStateService.getOnAddTicket().subscribe(data => {
       if (this.ticketsListService.isTicketMatchesFilters(this.ticketsFilter, data)) {
         this.tickets.unshift(data);
