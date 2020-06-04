@@ -45,8 +45,12 @@
     </ngb-accordion>
   </div>
 
-  <div class="create-profuct"  *ngIf="isCreateproduct" >
-    <h3>Create Product</h3>
-    <app-inventory-add-body #body (onClose)="isCreateproduct = false"></app-inventory-add-body>
+  <div *ngIf="isCreateproduct" >
+    <div class="create-product">
+      <h3 class="create-product__title">Create Product</h3>
+      <app-inventory-add-body #body (onClose)="isCreateproduct = false"></app-inventory-add-body>
+    </div>
+    <div class="product-popup-triangle"></div>
   </div>
+
   </div>
