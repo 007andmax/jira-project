@@ -20,7 +20,7 @@
         <div>
           <div class="users-aside__user-name" [textContent]="ticketsListService.getUserName(user)"></div>
           <ng-template ngFor let-phoneNumber [ngForOf]="user.phoneNumbers" [ngForTrackBy]="trackById">
-            <div class="users-aside__user-email" [textContent]="user.number"></div>
+            <div class="users-aside__user-email" [textContent]="phoneNumber.number"></div>
             </ng-template>
 
           <div class="users-aside__user-email" [textContent]="user.primaryEmail"></div>

@@ -1,7 +1,7 @@
  
 
 <div class="page-list page-list-ticket"  >
-  <app-tickets-header></app-tickets-header>
+  <app-tickets-header #header></app-tickets-header>
   <div class="table-container" [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}">
     <table class="qt-table-modern ticket-table">
       <tbody  infiniteScroll

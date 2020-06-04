@@ -244,6 +244,7 @@ import { CompanyInfoHistoryComponent } from './components/tickets/tickets/ticket
 import { TicketEditAsideRightPanelComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-edit-aside-right-panel/ticket-edit-aside-right-panel.component';
 import { ModalCustomShareScreenComponent } from './services/modal/modal-custom-share-screen/modal-custom-share-screen.component';
 import { CompanyTicketsComponent } from './components/company-tickets/company-tickets.component';
+import { InventoryAddBodyComponent } from './components/inventory/inventory-add-aside/inventory-add-body/inventory-add-body.component';
  
 
 
@@ -599,6 +600,8 @@ angular.module('quicktech')
     ModalCustomShareScreenComponent,
 
     CompanyTicketsComponent,
+
+    InventoryAddBodyComponent,
   ],
   imports: [
     BrowserModule,
