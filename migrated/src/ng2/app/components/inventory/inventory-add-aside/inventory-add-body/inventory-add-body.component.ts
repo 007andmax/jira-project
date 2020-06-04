@@ -66,6 +66,7 @@ export class InventoryAddBodyComponent implements OnInit,OnDestroy {
       this.categories = data;
     })
     this.sub.add(getOnCategries);
+    this.cd.detectChanges();
   }
 
   onCheckILC() {

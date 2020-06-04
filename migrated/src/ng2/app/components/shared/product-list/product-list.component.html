@@ -12,7 +12,7 @@
   <div class=select-product__dropdown ngbDropdownMenu aria-labelledby="dropdownProducts" >
     <div class="select-product__header">
         <div class="select-product__header-title">Product list</div>
-        <div class="select-product__header-add-product">+ Create Product</div>
+        <div class="select-product__header-add-product" (click)="onCreateProduct()">+ Create Product</div>
     </div>
     <ngb-accordion #acc="ngbAccordion" class="item-list products-accordion"  >
       <ngb-panel   *ngFor="let item of itemList | filter : resetSearch : search"  > <!--| filter :'name' : search -->
@@ -43,5 +43,10 @@
         </ng-template>
       </ngb-panel>
     </ngb-accordion>
+  </div>
+
+  <div class="create-profuct"  *ngIf="isCreateproduct" >
+    <h3>Create Product</h3>
+    <app-inventory-add-body #body (onClose)="isCreateproduct = false"></app-inventory-add-body>
   </div>
   </div>

@@ -15,6 +15,7 @@ export class ProductListComponent implements OnInit {
   @Input() itemList: any;
   @Input() editItem: any;
   public isFormValid = false;
+  isCreateproduct: boolean = false;
   search: string = '';
   resetSearch: boolean = false;
   selectedItem = false;
@@ -43,6 +44,12 @@ export class ProductListComponent implements OnInit {
     this.itemList.forEach(item => item.products.sort((a, b) => (a.description.toLowerCase() > b.description.toLowerCase()) ?
       1 : ((b.description.toLowerCase() > a.description.toLowerCase()) ? -1 : 0)));
 
+  }
+
+  
+  onCreateProduct() {
+    this.products_dropDown.close();
+    this.isCreateproduct = true;
   }
 
   /**
