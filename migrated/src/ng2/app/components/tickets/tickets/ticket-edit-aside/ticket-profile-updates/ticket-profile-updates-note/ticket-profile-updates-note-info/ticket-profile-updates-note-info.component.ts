@@ -16,9 +16,6 @@ export class TicketProfileUpdatesNoteInfoComponent implements OnInit {
   ngOnInit() {
     this.note = this.getHtml(this.update.note);
   }
-  ngDoCheck() {
-   // this.note = this.getHtml(this.update.note);
-  }
   ngOnChanges() {
     this.note = (this.update) ?  this.getHtml(this.update.note) : '';
   }
