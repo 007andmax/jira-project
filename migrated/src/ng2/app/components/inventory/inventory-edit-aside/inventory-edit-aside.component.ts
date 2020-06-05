@@ -88,7 +88,7 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
       this.opened = true;
       this.cost = this.inventory.cost.toFixed(2);
       this.sale = this.inventory.sale.toFixed(2);
-      this.description.update();
+   //   this.description.update();
       this.cd.detectChanges();
     })
     this.sub.add(getCompanyFromEdit);

@@ -41,7 +41,7 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getConfirm);
   }
-  
+
   removeService() {
     this.ticketsService.removeService(this.ticketProfile.id, this.ticketStateService.getUpdateForRemove().id, this.ticketStateService.getServiceForRemove().id).subscribe(data => {
     })
@@ -64,7 +64,7 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
     })
   }
   getCountUpdates() {
-    
+
     return (this.showLoadMoreUpdates) ? this.updates.length + this.ticketProfile.unloadedUpdates : this.updates.length;
   }
   ngOnDestroy(): void {

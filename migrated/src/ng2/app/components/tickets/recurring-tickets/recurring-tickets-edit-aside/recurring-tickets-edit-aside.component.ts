@@ -126,7 +126,7 @@ export class RecurringTicketsEditAsideComponent implements OnInit, OnDestroy {
     this.createService.getTehState().setUsersFromtEdit(data.assignedUsers);
     this.createService.setCronForEdit(data.cronExpression);
     this.onChangeCron(data.cronExpression);
-    this.description.update();
+   // this.description.update();
     this.cd.detectChanges();
 
   }
