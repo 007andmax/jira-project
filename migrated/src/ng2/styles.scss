@@ -2715,3 +2715,124 @@ app-ticket-edit-aside-devices  {
     display: none;
   }
 }
+
+
+// create product
+.create-product {
+  background-color: #ffffff;
+  position: absolute;
+  bottom: 46px;
+  height: fit-content;
+  width: 584px;
+  padding: 26px 24px;
+  border-radius: 5px;
+  overflow: auto;
+  border: solid 1px #dfe3e8;
+  max-height: calc(100vh - 300px);
+  box-shadow: 0px 2px 20px 10px #0000000e;
+  &::before {
+    content: '';
+    position: absolute;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.33;
+  }
+
+  .new-companies-content__modal--content {
+    padding: 0;
+  }
+
+  .create-product__col {
+    padding-left: 0;
+    margin-top: 17px !important;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      padding-left: 0;
+    }
+    &.p-0 {
+      padding: 0;
+    }
+  }
+
+  app-taxes {
+    .label-name {
+      font-weight: 600;
+      line-height: 21px;
+    }
+
+    .new-taxes-area {
+      padding-left: 0;
+    }
+  }
+
+  .new-companies-content__modal--content-footer {
+    margin-bottom: 0;
+    margin-top: 24px !important;
+  }
+
+  #inventory-description {
+    height: 40px !important;
+    padding: 10px 14px;
+  }
+
+  .btn-new {
+    padding-left: 16px;
+    padding-right: 16px;
+    font-weight: 600;
+  }
+
+  .btn-second {
+    color: #16a4fa;
+    background: white;
+    border: 1px solid #16a4fa;
+  }
+
+  .new-taxes-area .dropdown-item button {
+    background: transparent;
+    border: none;
+
+    &:hover {
+      color: white;
+    }
+  }
+
+  .new-taxes-area .dropdown-item:hover {
+    button {
+      color: white !important;
+    }
+  }
+
+  .dropdown-menu {
+    width: 100% !important;
+    min-height: 190px !important;
+    height: fit-content !important;
+  }
+
+}
+
+.product-popup-triangle {
+  background: white;
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  transform: rotate(45deg);
+  left: 15px;
+  bottom: 42px;
+  border: solid 1px #dfe3e8;
+  border-left: none;
+  border-top: none;
+}
+
+.select-open-top .dropdown-menu {
+  bottom: 40px !important;
+  top: unset !important;
+  transform: translate(0px, 0px) !important;
+}

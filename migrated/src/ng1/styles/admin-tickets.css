@@ -14,30 +14,24 @@
     height: 78px;
     margin-left: 315px;
     padding: 20px 30px;
-    
+
     background: #3e4b61;
     box-shadow: 0 2px 6px 0 rgba(10, 45, 89, 0.15);
   }
-  
+
   .left-panel-closed .top-bar {
     position: fixed;
     z-index: 1050;
     top: 0;
     right: 0;
     left: 0;
-    
+
     width: calc(100% - 76px);
     height: 78px;
     margin-left: 76px;
     padding: 20px 30px;
-    
-    box-shadow: 0 2px 6px 0 rgba(10, 45, 89, 0.15);
-  }
-}
 
-@media only screen and (max-width: 1280px) {
-  .left-panel-icons-remote {
-    background: url(../images/left-panel-icons-x1.png) 211px 1px !important;
+    box-shadow: 0 2px 6px 0 rgba(10, 45, 89, 0.15);
   }
 }
 
@@ -55,28 +49,28 @@
     top: 0;
     right: 0;
     left: 0;
-    
+
     width: calc(100% - 76px);
     height: 78px;
     margin-left: 76px;
     padding: 20px 30px;
-    
+
     background: white;
     box-shadow: 0 2px 6px 0 rgba(10, 45, 89, 0.15);
   }
-  
+
   .top-bar {
     position: fixed;
     z-index: 1050;
     top: 0;
     right: 0;
     left: 0;
-    
+
     width: calc(100% - 76px);
     height: 78px;
     margin-left: 76px;
     padding: 20px 30px;
-    
+
     background: white;
     box-shadow: 0 2px 6px 0 rgba(10, 45, 89, 0.15);
   }
@@ -103,7 +97,7 @@
 .content-container {
   margin-left: 316px;
   transition: 300ms all;
-  
+
 }
 
 .left-panel-closed .content-container {
@@ -112,7 +106,7 @@
 
 .content-wrapper {
   position: relative;
-  
+
   height: 100%;
 }
 
@@ -128,7 +122,7 @@
 
 body.opened-ticket-list .content-wrapper .container-ticket-list {
   display: block;
-  
+
   width: 100%;
 }
 
@@ -147,7 +141,7 @@ body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
   position: fixed;
   display: block;
   float: right;
-  
+
   width: calc(100% - 392px);
   padding-bottom: 30px;
 }
@@ -160,7 +154,7 @@ body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
 .right-panel-closed.left-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
   right: 0;
   width: calc(100% - 77px);
-  
+
 }
 
 .opened-ticket-list.opened-ticket .content-wrapper .container-ticket-content {
@@ -179,7 +173,7 @@ body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
 
 .left-panel-closed.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-content {
   width: calc(100% - 653px);
-  
+
 }
 
 .right-panel-closed.left-panel-closed.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-content {
@@ -188,7 +182,7 @@ body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
 
 .right-panel-closed.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-content {
   right: 0;
-  
+
   width: calc(100% - 856px);
 }
 
@@ -196,14 +190,14 @@ body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
   .opened-ticket .content-wrapper .container-ticket-content {
     width: calc(100% - 392px);
   }
-  
+
   .right-panel-closed.left-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
     width: calc(100% - 76px);
   }
-  
+
   .right-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
     right: 0;
-    
+
     width: calc(100% - 316px);
   }
 }
@@ -211,19 +205,19 @@ body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
 @media screen and (max-width: 1315px) {
   .left-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
     right: 77px;
-    
+
     /*width: calc(100% - 77px);*/
   }
-  
+
   .opened-ticket .content-wrapper .container-ticket-content {
     right: 77px;
-    
+
     /*width: calc(100% - 77px);*/
   }
-  
+
   .right-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
     right: 0;
-    
+
     width: 100%;
   }
 }
@@ -254,15 +248,15 @@ body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
   body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
     width: 340px;
   }
-  
+
   body.opened-ticket-list.opened-ticket.left-panel-closed .content-wrapper .container-ticket-list {
     width: 540px;
   }
-  
+
   .opened-ticket-list.opened-ticket .content-wrapper .container-ticket-content {
     width: calc(100% - 733px);
   }
-  
+
   .right-panel-closed.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-content {
     right: 0;
     width: calc(100% - 656px);

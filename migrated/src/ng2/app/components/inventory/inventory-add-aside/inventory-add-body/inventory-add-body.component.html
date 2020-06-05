@@ -1,15 +1,15 @@
 <div class="new-companies-content__modal--content advanced">
 
-  <div class="col-md-4">
+  <div class="col-md-4 create-product__col">
     <mat-error *ngIf="!validate.getManufactureIsExist()">
       This number already occupied
     </mat-error>
-    
+
     <p>Item number</p>
     <input type="text" [(ngModel)]="inventory.manufacture" (blur)="onCheckManufacture()" placeholder="Enter Item number">
   </div>
 
-  <div class="col-md-4">
+  <div class="col-md-4 create-product__col">
     <mat-error *ngIf="!validate.getILCIsExist()">
       This number already occupied
     </mat-error>
@@ -17,17 +17,17 @@
     <input type="text" [(ngModel)]="inventory.ilc"  (blur)="onCheckILC()" placeholder="Enter ILC number">
   </div>
 
-  <div class="col-md-4">
+  <div class="col-md-4 create-product__col p-0">
     <p>GL number</p>
     <app-select-search [class]="['light-dropdown', 'new-product-gl-select']" [list]="glNumbers" #glNumberSelect
     [placeholder]="'Select GL'"
     [add]="true" [field]="'glNumber'"
     (onAddItem)="onAddGlNumber($event)"
     (onSelectedItem)="onSelectGlNumbers($event)"></app-select-search>
-  
+
   </div>
 
-  <div class="col-md-12">
+  <div class="col-md-12 create-product__col p-0">
     <mat-error *ngIf="!validate.getDescription()">
       Description is required
     </mat-error>
@@ -41,7 +41,7 @@
   <app-taxes (taxesChange)="onTaxesChange($event)"></app-taxes>
 <!--        <div class="col-md-6"  *ngIf="!validate.getCostSale()">-->
 <!--        </div>-->
-  <div class="col-md-3">
+  <div class="col-md-3 create-product__col">
     <p>Cost</p>
     <input type="text" number [money]="true" (blur)="validate.checkPriceCost(inventory.sale,inventory.cost)" [(ngModel)]="inventory.cost"  placeholder="Enter Cost">
     <mat-error style="top: 73px; left: 15px; width: 200px;" *ngIf="!validate.getCostSale()">
@@ -49,7 +49,7 @@
     </mat-error>
   </div>
 
-  <div class="col-md-3">
+  <div class="col-md-3 create-product__col p-0">
     <mat-error *ngIf="!validate.getSale()">
       Price is required
     </mat-error>
@@ -57,7 +57,7 @@
     <input type="text" number [money]="true"  [(ngModel)]="inventory.sale" (blur)="validate.checkPriceCost(inventory.sale,inventory.cost)" (input)="validate.resetSale()"  placeholder="Enter Price">
   </div>
 
-  <div class="col-md-12">
+  <div class="col-md-12 create-product__col p-0 select-open-top">
     <mat-error *ngIf="!validate.getCategory()">
       Category is required
     </mat-error>
@@ -72,7 +72,7 @@
   </div>
 
 
-  <div class="col-md-12">
+  <div class="col-md-12 create-product__col p-0 select-open-top">
     <p>Vendors</p>
     <app-select-search [class]="['light-dropdown']" [list]="vendors"
     [field]="'name'"
@@ -83,10 +83,10 @@
 
 
 
-  <div class="col-md-12 new-companies-content__modal--content-footer">
+  <div class="col-md-12 create-product__col p-0 new-companies-content__modal--content-footer">
     <div class="d-f">
       <button class="btn-new btn-primary" (click)="add()" >Create Product</button>
-      <button class="btn-new disabled" (click)="close()">Cancel</button>
+      <button class="btn-new btn-second" (click)="close()">Cancel</button>
     </div>
 
   </div>
