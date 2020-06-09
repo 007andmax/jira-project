@@ -113,7 +113,7 @@ export class QuoteService {
       "message": notification ? this.quoteStateService.getQuoteCreate()['message'] : null,
       "subject": notification ? this.quoteStateService.getQuoteCreate()['subject'] : null,
       "globalNote": value.globalNote ? value.globalNote : this.quoteStateService.getGlobalNote(),
-      "regularNote":  this.quoteStateService.getSelectedNote() ? this.quoteStateService.getSelectedNote() : (value.selectedNote !== '') ? this.quoteStateService.getRegularNote(value.selectedNote) : null,
+      "regularNote":  this.quoteStateService.getSelectedNote() ? this.quoteStateService.getSelectedNote() : (value.selectedNote && value.selectedNote !== '' ) ? this.quoteStateService.getRegularNote(value.selectedNote) : null,
       "sendNotification": notification
     }).pipe(
       tap(data => this.handleQuoteSent(data, 'Quote has been saved')),
