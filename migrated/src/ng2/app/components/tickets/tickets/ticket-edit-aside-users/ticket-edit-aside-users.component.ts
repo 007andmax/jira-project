@@ -133,9 +133,7 @@ export class TicketEditAsideUsersComponent implements OnInit, OnDestroy {
   public trackById(index, item) {
     return item.id;
   }
-  public trackById(index, item) {
-    return item.id;
-  }
+
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
