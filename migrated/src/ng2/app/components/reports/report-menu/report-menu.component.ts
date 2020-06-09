@@ -42,7 +42,6 @@ export class ReportMenuComponent implements OnInit {
   listTypes = ['Summary', 'Detailed'];
   yearToDate = false;
   validate: ReportValidate = new ReportValidate();
-  public productList = [];
   isDisabledCompany: boolean = false;
   @Input() report = "";
   @Output() getReport = new EventEmitter<any>();
@@ -60,7 +59,6 @@ export class ReportMenuComponent implements OnInit {
     if (this.report === 'accounts-receivable') this.getReportByAccountsReceivable();
     if (this.report === 'byProducts' || this.report === 'company-roducts-report') {
       this.isDisabledCompany = true;
-      this.getItemListProducts();
     }
     if (this.report === 'byCustomers') this.isDisabledCompany = true;
 
@@ -260,16 +258,6 @@ export class ReportMenuComponent implements OnInit {
         this.serviceReport.setDatesByCompany(this.selectedClient);
       }
     }
-  }
-
-  /**
- * Get product list
- */
-  public getItemListProducts() {
-    this.productService.getCategories().subscribe((res: any) => {
-      this.productList = res;
-
-    });
   }
 
   /**

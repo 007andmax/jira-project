@@ -15,7 +15,7 @@ import { Subscription } from 'rxjs';
 export class ProductListComponent implements OnInit,OnDestroy {
   @ViewChild('products') products_dropDown: NgbDropdown;
   @Output() selectedProductItem = new EventEmitter<any>();
-  @Input() itemList: any;
+  itemList: any;
   @Input() editItem: any;
   @Input() type: string;
   classAddProduct:string

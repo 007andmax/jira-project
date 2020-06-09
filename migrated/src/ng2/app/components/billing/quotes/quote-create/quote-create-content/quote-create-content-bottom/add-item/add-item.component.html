@@ -1,4 +1,4 @@
-<div class="row fixed-width" *ngIf="type && (itemListServices || itemListProducts)">
+<div class="row fixed-width" *ngIf="type && itemListServices">
   <!-- IF SERVICE -->
   <div class="col-md-1"
        *ngIf="type === 'service'"
@@ -32,7 +32,7 @@
   <div class="col-md-3"
        *ngIf="type === 'product'">
     <div class="product-dropdown-new-ng light-dropdown">
-      <app-product-list [type]="'QUOTE'" [itemList]="itemListProducts"
+      <app-product-list [type]="'QUOTE'"
                         (selectedProductItem)="setItem($event)"></app-product-list>
     
       <!-- <input class="pointer"

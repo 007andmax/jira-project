@@ -34,7 +34,7 @@
   <div class="col-md-3"
        *ngIf="getMarkup(item)">
     <div class="product-dropdown-new-ng light-dropdown">
-      <app-product-list [type]="'QUOTE'" [editItem]="item" [itemList]="productList"
+      <app-product-list [type]="'QUOTE'" [editItem]="item"
                         (selectedProductItem)="selectProduct($event, i)"></app-product-list>
       <!-- <input type="text"
               class="pointer"

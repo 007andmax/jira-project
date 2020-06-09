@@ -16,7 +16,6 @@ import { Subscription } from 'rxjs';
 export class TicketProfileFormUpdateProductsComponent implements OnInit, OnDestroy {
   @ViewChild('productDP') productDP: ProductListComponent;
   addedProductList = [];
-  public productList = [];
   currentProduct: TicketProfileFormProduct = new TicketProfileFormProduct();
   sub: Subscription = new Subscription();
   constructor(private productService: ProductService,
@@ -31,28 +30,8 @@ export class TicketProfileFormUpdateProductsComponent implements OnInit, OnDestr
       this.currentProduct = new TicketProfileFormProduct();
       this.productDP.clear();
     })
-   // this.getItemListProducts();
-
   }
-  public getItemListProducts() {
-    this.productService.getCategories().subscribe((res: any) => {
-      this.productList = res;
-      this.productDP.onUpdateList();
-      this.cd.detectChanges();
-      let getChangeProducts = this.inventoryStateService.getChangeProducts().subscribe((data: InventoryChange) => {
-        if (data.action === 'PRODUCT_SAVED') {
-          const Index = this.productList.findIndex((item) => item.id === data.data.category.id);
-          if (Index > -1) {
-            this.productList[Index].products.push(data.data);
-          }
-        }
-        this.productDP.onUpdateList();
-        this.cd.detectChanges();
-      })
-      this.sub.add(getChangeProducts);
-
-    });
-  }
+  
   public onChangeSaleProduct(val, index) {
     let value = Number(val);
     this.addedProductList[index].item.sale = value;

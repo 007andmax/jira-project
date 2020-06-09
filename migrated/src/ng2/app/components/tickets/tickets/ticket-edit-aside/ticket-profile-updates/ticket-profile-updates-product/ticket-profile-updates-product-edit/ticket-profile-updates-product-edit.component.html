@@ -8,7 +8,7 @@
     </div>
     <div class="d-f ai-c ticket-updates__ticket-body" [ngClass]="{'--done':editProduct.completed}">
       <div class="ticket-updates__done-status icon__task-pending"></div>
-      <app-product-list [type]="'TICKET'" [editItem]="editProduct.item" class="product-item__prodect-list" [itemList]="productList"
+      <app-product-list [type]="'TICKET'" [editItem]="editProduct.item" class="product-item__prodect-list"  
       (selectedProductItem)="onChangeProduct($event)"></app-product-list>
 
       <input class="input-default input-price"  

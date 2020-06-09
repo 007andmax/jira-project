@@ -25,7 +25,6 @@ export class ProductTableComponent implements OnInit, OnDestroy {
   };
   @Output() changedProductItemsArray = new EventEmitter<any>();
   public itemsListArray = [];
-  public productList = [];
   public servicesList = [];
   public isDropDownShow = [];
   public markups = [];
@@ -125,10 +124,6 @@ export class ProductTableComponent implements OnInit, OnDestroy {
    * get products list item
    */
   public getItemListProducts() {
-    this.productList = this.quoteStateService.getProductsList();
-    let handleProducts = this.quoteStateService.handleProducts.subscribe((res: any) => {
-      this.productList = res;
-    });
     //  const value = this.quoteStateService.getClient();
     this.servicesList = this.quoteStateService.getServices();
     let handleServices = this.quoteStateService.handleServices.subscribe((res: any) => {
@@ -136,7 +131,6 @@ export class ProductTableComponent implements OnInit, OnDestroy {
       this.servicesList = res;
     });
     this.sub.add(handleServices);
-    this.sub.add(handleProducts);
   }
 
   public selectProduct(item, index) {

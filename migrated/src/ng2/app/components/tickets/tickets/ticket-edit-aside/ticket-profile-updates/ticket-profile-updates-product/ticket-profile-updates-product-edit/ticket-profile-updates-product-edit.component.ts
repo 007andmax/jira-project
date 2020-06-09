@@ -16,7 +16,6 @@ export class TicketProfileUpdatesProductEditComponent implements OnInit {
   @Input() product: TicketProfileProduct;
   @Input() update: TicketProfileUpdate;
   @Output() onEdit = new EventEmitter();
-  public productList = [];
   editProduct: TicketProfileProduct;
   constructor(private productService: ProductService,
     private ticketsService: TicketsService,
@@ -24,7 +23,6 @@ export class TicketProfileUpdatesProductEditComponent implements OnInit {
 
   ngOnInit() {
     this.editProduct = new TicketProfileProduct(this.product);
-    this.getItemListProducts();
   }
   public getTotal(price, quantity) {
     return (price * quantity).toFixed(2);
@@ -40,12 +38,7 @@ export class TicketProfileUpdatesProductEditComponent implements OnInit {
     this.editProduct.item = item;
     this.editProduct.quantity = 1;
   }
-  public getItemListProducts() {
-    this.productService.getCategories().subscribe((res: any) => {
-      this.productList = res;
-
-    });
-  }
+ 
   saveProduct() {
     this.ticketsService.updateExpense(this.editProduct.getDateForUpdate(this.update.id)).subscribe(data => {
       this.onEdit.emit(null);

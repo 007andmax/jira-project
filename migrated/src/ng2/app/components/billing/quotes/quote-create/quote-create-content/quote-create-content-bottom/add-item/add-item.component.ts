@@ -24,7 +24,6 @@ export class AddItemComponent implements OnInit,OnDestroy {
   };
   public isDropDownShow = false;
   public type: string;
-  public itemListProducts: any;
   public itemListServices: any;
   public isFormValid = false;
   sub:Subscription = new Subscription();
@@ -71,10 +70,6 @@ export class AddItemComponent implements OnInit,OnDestroy {
    * get services list
    */
   public getServicesList() {
-    this.itemListProducts = this.quoteStateService.getProductsList();
-    let handleProducts =   this.quoteStateService.handleProducts.subscribe((res: any) => {
-         this.itemListProducts = res;
-       });
   //  const value = this.quoteStateService.getClient();
     this.itemListServices = this.quoteStateService.getServices();
     let handleServices =   this.quoteStateService.handleServices.subscribe((res: any) => {
@@ -82,7 +77,6 @@ export class AddItemComponent implements OnInit,OnDestroy {
          this.itemListServices = res;
       });
       this.sub.add(handleServices);
-      this.sub.add(handleProducts);
   }
 
   /**
