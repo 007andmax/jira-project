@@ -32,7 +32,7 @@ import { TicketEditAsideRightPanelComponent } from './ticket-edit-aside-right-pa
 
 })
 export class TicketEditAsideComponent implements OnInit, OnDestroy {
-  
+
   @ViewChild('updateForm') updateForm: TicketProfileFormUpdateComponent;
   @ViewChild('rightPanel') rightPanel: TicketEditAsideRightPanelComponent;
   ticketProfile: TicketProfile = new TicketProfile();
@@ -151,7 +151,10 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     this.lisUpdateUser = this.ticketProfile.updates.map(item => item.user);
     this.lisUpdateUser = [...this.listAssignedUser, ...this.lisUpdateUser]
     this.lisUpdateUser = this.lisUpdateUser.filter((item, index) => this.lisUpdateUser.findIndex(user => user.id === item.id) === index);
-
+    if (this.ticketProfile.createdUser) {
+      let find = this.lisUpdateUser.find(item => item.id === this.ticketProfile.createdUser.id);
+      if (find) this.lisUpdateUser.push(find);
+    }
   }
   onMoveIntoSpam() {
     if (this.usersStateService.getCurrentUser().isOwner) {
@@ -216,7 +219,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     if (this.elRef.nativeElement.querySelector("#ticket-note").value != this.ticketProfile.note) {
       this.ticketProfile.note = this.elRef.nativeElement.querySelector("#ticket-note").value;
       this.onChangeSubjectNote();
-    
+
     }
   }
   onChangeSubjectNote() {

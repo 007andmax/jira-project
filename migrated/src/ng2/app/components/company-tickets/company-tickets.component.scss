@@ -1,0 +1,131 @@
+/deep/ .ticket-table {
+    max-width: 1320px;
+    min-width: 1064px;
+    width: auto;
+    margin: 0 auto;
+  
+  
+    th {
+     white-space: nowrap;
+    }
+   td {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+  .table-container {
+    overflow-x: auto;
+    min-height: calc(100vh - 165px);
+  }
+  
+  .priority-icon {
+    margin-left: 8px;
+  }
+  
+  app-tickets-table-item {
+    display: contents;
+  }
+  
+  
+  @media (min-width: 1920px) {
+    /deep/ .ticket-table {
+      width: 100%;
+      max-width: 100%;
+    }
+    .table-container {
+      width: 85%;
+      max-width: 85%;
+      margin: 0 auto;
+    }
+  }
+  
+  
+  .pengind-loading {
+    bottom: 20px;
+    top: auto;
+  }
+
+  /deep/.main-container {
+    background-color: #edf2f6;
+  }
+  
+  .ticket-fileupload {
+    margin-top: 32px;
+  }
+  
+  .page-list-ticket {
+    padding: 0 24px 24px 24px;
+  }
+  
+  
+  /deep/ .ticket-table {
+    &__requested-by {
+      max-width: 166px;
+      width: 166px;
+      min-width: 166px;
+    }
+    &__subject {
+      max-width: 345px;
+      width: 345px;
+      min-width: 345px;
+    }
+    &__company {
+      max-width: 148px;
+      width: 148px;
+      min-width: 148px;
+  
+    }
+    &__assignee {
+       max-width: 147px;
+       width: 147px;
+       min-width: 147px;
+       overflow: auto !important;
+    }
+    &__status {
+      max-width: 100px;
+      width: 100px;
+      min-width: 100px;
+    }
+    &__created-date {
+       max-width: 100px;
+       width: 100px;
+       min-width: 100px;
+    }
+  }
+  
+  @media (min-width: 1920px) {
+    /deep/ .ticket-table {
+      &__requested-by {
+        max-width: 300px;
+        width: 300px;
+        min-width: 300px;
+      }
+      &__company {
+        max-width: 250px;
+        width: 250px;
+        min-width: 250px;
+      }
+      &__status {
+        max-width: 110px;
+        width: 110px;
+        min-width: 110px;
+      }
+      &__created-date {
+         max-width: 110px;
+         width: 110px;
+         min-width: 110px;
+      }
+      &__assignee {
+        max-width: 180px;
+        width: 180px;
+        min-width: 180px;
+        overflow: auto !important;
+     }
+      &__subject {
+        // max-width: 650px;
+        width: max-content;
+      }
+    }
+  }
+  

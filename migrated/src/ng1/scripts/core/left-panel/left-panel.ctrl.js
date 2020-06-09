@@ -318,6 +318,11 @@
             $scope.goToTab(`#/ng2/company-products`);
             return;
           }
+
+          if (tabToActivate == 'CompanyProfileTicketsPage') {
+            $scope.goToTab(`#/ng2/company-tickets`);
+            return;
+          }
          
           var tab = $scope[tabToActivate];
           deactivateAllCompanyProfileTabs();
@@ -1125,7 +1130,6 @@
             }
 
             $scope.openedCategory = getOpenedCategory(value);
-
             if ($scope.openedCategory) {
               document.title = $scope.userReadable($scope.openedCategory);
             } else if (value.indexOf('settings') > -1) {
@@ -1612,13 +1616,11 @@
             return 'quick-support';
           } else if (url.indexOf('settings.') > -1) {
             return 'settings';
-          } else if (url.indexOf('tickets') > -1) {
-            return 'tickets';
-          } else if (url.indexOf('drafts') > -1) {
+          }  else if (url.indexOf('drafts') > -1) {
             return 'inbox';
           } else if (url.indexOf('companies') > -1) {
             return 'companies';
-          } else if (url.indexOf('companyProfile') > -1 || url.indexOf('company-password-manager') > -1 || url.indexOf('company-user') > -1 || url.indexOf('company-products') > -1) {
+          } else if (url.indexOf('companyProfile') > -1 || url.indexOf('company-password-manager') > -1 || url.indexOf('company-user') > -1 || url.indexOf('company-products') > -1 || url.indexOf('company-tickets') > -1) {
             return 'companyProfile';
           } else if (url.indexOf('users') > -1) {
             return 'users';
@@ -1634,6 +1636,8 @@
             return 'reports';
           } else if (url.indexOf('quotes') > -1) {
             return 'billing';
+          } else if (url.indexOf('tickets') > -1) {
+            return 'tickets';
           } else {
             return undefined;
           }

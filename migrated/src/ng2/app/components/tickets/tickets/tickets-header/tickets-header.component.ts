@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, Input } from '@angular/core';
 import { TitleListType } from './class/title-list-type';
 import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.service';
 import { Subscription } from 'rxjs';
@@ -35,8 +35,14 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
     this.ticketsStateService.getOnInitCount().subscribe(data => {
       this.count = data;
       this.title = `${(this.selectedListType) ? this.selectedListType.title : ''} (${this.count})`;
-      this.cd.detectChanges();
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+      }
     })
+  }
+  public setTitle(title) {
+    this.title = `${title} (${this.count})`;
+    
   }
   onAddTicket() {
     this.ticketsStateService.onToggleAddTicket();

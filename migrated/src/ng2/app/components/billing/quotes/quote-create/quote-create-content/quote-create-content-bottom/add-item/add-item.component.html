@@ -32,7 +32,7 @@
   <div class="col-md-3"
        *ngIf="type === 'product'">
     <div class="product-dropdown-new-ng light-dropdown">
-      <app-product-list [itemList]="itemListProducts"
+      <app-product-list [type]="'QUOTE'" [itemList]="itemListProducts"
                         (selectedProductItem)="setItem($event)"></app-product-list>
     
       <!-- <input class="pointer"

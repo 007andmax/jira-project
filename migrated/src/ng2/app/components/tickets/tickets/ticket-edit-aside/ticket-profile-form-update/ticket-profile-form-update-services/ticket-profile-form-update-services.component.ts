@@ -82,6 +82,7 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit, OnDestr
     this.addedServiceList.push(new TicketProfileFormService(JSON.parse(JSON.stringify(this.currentService))));
     this.currentService = new TicketProfileFormService();
     this.serviceDP.clear();
+    this.elRef.nativeElement.querySelector('#service-description').value = "";
     if (this.currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER') this.durationPicker.refresh();
     if (this.currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER') this.timePicker.refresh();
   }

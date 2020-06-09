@@ -2,12 +2,12 @@
 <div class="light-dropdown" ngbDropdown [autoClose]="'outside'" #products="ngbDropdown">
   <input class="pointer" type="text" 
          [ngClass]="{'no-valid': isFormValid}"
-         placeholder="Service" id="dropdownServices" ngbDropdownToggle>
+         placeholder="Service" (input)="onSearch($event)" id="dropdownServices" ngbDropdownToggle>
   <i class="icn-sm report-caret-icon"></i>
 
   <div class="dropdown-menu services-container" ngbDropdownMenu aria-labelledby="dropdownServices">
     <button class="dropdown-item"
-            *ngFor="let item of itemList"
+            *ngFor="let item of itemList | service:searchName"
             (click)="selectServicesItem(item)"
     >
       {{item.name}}

@@ -14,7 +14,10 @@ export class ProductListComponent implements OnInit {
   @Output() selectedProductItem = new EventEmitter<any>();
   @Input() itemList: any;
   @Input() editItem: any;
+  @Input() type: string;
+  classAddProduct:string
   public isFormValid = false;
+  isCreateproduct: boolean = false;
   search: string = '';
   resetSearch: boolean = false;
   selectedItem = false;
@@ -28,6 +31,10 @@ export class ProductListComponent implements OnInit {
    * Initializes product list. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   ngOnInit() {
+    if (this.type === 'QUOTE') this.classAddProduct = 'quote-add-product';
+    if (this.type === 'REPORT') this.classAddProduct = 'report-add-product';
+    if (this.type === 'RECURRING-TICKET') this.classAddProduct = 'recurring-ticket-add-product';
+    if (this.type === 'TICKET') this.classAddProduct = 'ticket-add-product';
     this.onUpdateList();
     if (this.editItem) {
       let value = this.getNameOrDescription(this.editItem);
@@ -43,6 +50,12 @@ export class ProductListComponent implements OnInit {
     this.itemList.forEach(item => item.products.sort((a, b) => (a.description.toLowerCase() > b.description.toLowerCase()) ?
       1 : ((b.description.toLowerCase() > a.description.toLowerCase()) ? -1 : 0)));
 
+  }
+
+  
+  onCreateProduct() {
+    this.products_dropDown.close();
+    this.isCreateproduct = true;
   }
 
   /**

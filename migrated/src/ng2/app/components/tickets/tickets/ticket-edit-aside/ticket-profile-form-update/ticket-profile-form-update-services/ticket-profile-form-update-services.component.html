@@ -15,8 +15,8 @@
       </div>
       <div>
         <div class="editable-description editable-chat">
-          <textarea  name="cps-chat" class="cps-block__content-textarea" appTextArea  [minHeight]="48"  cols="5" rows="1"   placeholder="Write ticket conversation here…"
-          (input)="onChangeDescriptionService($event,i)" (onPast)="onPastDescriptionService($event,i)"></textarea>
+          <textarea  name="cps-chat" class="cps-block__content-textarea" appTextArea  [(ngModel)]="service.description"   cols="5" rows="1"   placeholder="Write ticket conversation here…"
+          ></textarea>
           </div>
 
       </div>
@@ -36,8 +36,8 @@
     </div>
     <div>
       <div class="editable-description editable-chat">
-        <textarea  name="cps-chat" class="cps-block__content-textarea" appTextArea  [minHeight]="48"  cols="5" rows="1" id="service-description" placeholder="Write ticket conversation here…"
-        (input)="onChangeDescription($event)" (onPast)="onPastDescription($event)"></textarea>
+        <textarea  name="cps-chat" class="cps-block__content-textarea"  appTextArea  [(ngModel)]="currentService.description"   maxlength="250"   cols="5" rows="1" id="service-description" placeholder="Write ticket conversation here…"
+       ></textarea>
         </div>
 
     </div>

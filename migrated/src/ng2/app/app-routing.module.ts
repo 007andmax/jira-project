@@ -29,6 +29,7 @@ import { ItemReportComponent } from './components/reports/item-report/item-repor
 import { InventoryComponent } from './components/inventory/inventory.component';
 import { CompanyProductsComponent } from './components/companies/company-products/company-products.component';
 import { TicketsComponent } from './components/tickets/tickets/tickets.component';
+import { CompanyTicketsComponent } from './components/company-tickets/company-tickets.component';
 
 const routes: Routes = [
   {
@@ -49,6 +50,11 @@ const routes: Routes = [
   {
     path: 'ng2/company-user',
     component: CompanyUserComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'ng2/company-tickets',
+    component: CompanyTicketsComponent,
     pathMatch: 'full'
   },
   {

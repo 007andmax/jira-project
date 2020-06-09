@@ -52,7 +52,7 @@ export class TicketProfile {
     trash: boolean;
     unloadedUpdates: number;
     unread: boolean;
-    updates: Array<TicketProfileUpdate>;
+    updates: Array<TicketProfileUpdate> = [];
     constructor(data = null) {
         if (data) {
             for (const key in data) {

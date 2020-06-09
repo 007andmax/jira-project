@@ -54,11 +54,11 @@ export class TicketProfileFormUpdateComponent implements OnInit {
     if (!find) this.lisUpdateUser.unshift(this.ticketProfile.createdUser);
   }
   public onChangeChat(event) {
-    this.ticketProfileFormUpdate.setChatMessage(event.target.value);
+    this.ticketProfileFormUpdate.setChatMessage(event.target.value.replace(/\n/g, '<br/>'));
 
   }
   public onPastChat(value) {
-    this.ticketProfileFormUpdate.setChatMessage(value);
+    this.ticketProfileFormUpdate.setChatMessage(value.replace(/\n/g, '<br/>'));
 
   }
   public reset() {

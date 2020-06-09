@@ -3,7 +3,7 @@ import { Service } from 'src/ng2/app/interfaces/service/service';
 export class TicketProfileFormService {
     completed: boolean = true;
     date: number = new Date().getTime();
-    description: string
+    description: string = "";
     discountType: "PERCENT"
     durationEnd: number;
     durationStart: number;

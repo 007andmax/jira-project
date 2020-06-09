@@ -86,9 +86,9 @@ export class InventoryEditAsideComponent implements OnInit, OnDestroy {
       this.editVendor = this.vendors.find(item => item.id === this.inventory.companyId);
       this.elRef.nativeElement.querySelector("#inventory-description").value = this.inventory.description;
       this.opened = true;
-      this.cost = this.inventory.cost.toFixed(2);
-      this.sale = this.inventory.sale.toFixed(2);
-      this.description.update();
+      this.cost = (this.inventory.cost) ? this.inventory.cost.toFixed(2) : "0.00";
+      this.sale = (this.inventory.sale) ? this.inventory.sale.toFixed(2) : "0.00";
+   //   this.description.update();
       this.cd.detectChanges();
     })
     this.sub.add(getCompanyFromEdit);
