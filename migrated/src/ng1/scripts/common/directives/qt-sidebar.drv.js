@@ -22,7 +22,6 @@
             var windowWidth = window.outerWidth;
             if (!$state.is('settings') && $state.current.url.indexOf('reports') === -1 && $state.current.url.indexOf('report') === -1) {
               $rootScope.isLeftPanelHidden = windowWidth <= 1024;
-              console.log(" $rootScope.isLeftPanelHidden", $rootScope.isLeftPanelHidden);
               if ($rootScope.isLeftPanelHidden) {
                 $scope.$broadcast('leftPanelClosedFromQTSidebar');
               }

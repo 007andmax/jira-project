@@ -26,15 +26,15 @@ export class TextAreaDirective implements OnInit {
     this.element.nativeElement.parentNode.style.position = 'relative';
   }
   ngDoCheck() {
-    
+
     if (this.element.nativeElement.value === "") {
       this.element.nativeElement.setAttribute("rows", 1);
     } else {
       this.lines = this.getNumberOfLines(this.element.nativeElement.value);
-      this.element.nativeElement.setAttribute("rows", this.lines);
+      if (this.lines <= this.maxLines) this.element.nativeElement.setAttribute("rows", this.lines);
     }
   }
- 
+
   private getNumberOfLines(str) {
     if (str) {
       return str.split(/\r\n|\r|\n/).length;

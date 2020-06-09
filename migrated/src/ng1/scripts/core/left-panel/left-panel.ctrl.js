@@ -1130,7 +1130,6 @@
             }
 
             $scope.openedCategory = getOpenedCategory(value);
-console.log("$scope.openedCategory",$scope.openedCategory);
             if ($scope.openedCategory) {
               document.title = $scope.userReadable($scope.openedCategory);
             } else if (value.indexOf('settings') > -1) {
@@ -1613,7 +1612,6 @@ console.log("$scope.openedCategory",$scope.openedCategory);
         }
 
         function getOpenedCategory(url) {
-          console.log("url",url);
           if (url.indexOf('quickSupport') > -1) {
             return 'quick-support';
           } else if (url.indexOf('settings.') > -1) {

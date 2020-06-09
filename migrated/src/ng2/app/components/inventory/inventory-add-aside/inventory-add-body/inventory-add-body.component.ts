@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, ChangeDetectorRef, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, ChangeDetectorRef, EventEmitter, Output, Input } from '@angular/core';
 import { SelectSearchComponent } from '../../../shared/select-search/select-search.component';
 import { InventoryItem } from '../../class/inventory-item';
 import { GlNumber } from 'src/ng2/class/gl-number/gl-number';
@@ -25,6 +25,7 @@ export class InventoryAddBodyComponent implements OnInit,OnDestroy {
   @ViewChild('categoriesSelect') categoriesSelect: SelectSearchComponent;
   @ViewChild('vendorsSelect') vendorsSelect: SelectSearchComponent;
   @Output() onClose:EventEmitter<any> = new EventEmitter();
+  @Input() class:string;
   //opened: boolean = false;
   inventory: InventoryItem = new InventoryItem();
   glNumbers: Array<GlNumber> = [];

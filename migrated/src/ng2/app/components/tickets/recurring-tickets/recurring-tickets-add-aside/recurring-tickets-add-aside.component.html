@@ -77,7 +77,7 @@
               </div>
               <div class="col-md-12" [ngClass]="(product.noValid) ? 'no-valid-product' : ''">
                 <p>Search Product</p>
-                <app-product-list [editItem]="product" [itemList]="productList"
+                <app-product-list [type]="'RECURRING-TICKET'" [editItem]="product" [itemList]="productList"
                                   (selectedProductItem)="selectProduct($event,i)"></app-product-list>
                 <i class="icn-delete" *ngIf="products.length > 1" (click)="removeProduct(i)"></i>
               </div>

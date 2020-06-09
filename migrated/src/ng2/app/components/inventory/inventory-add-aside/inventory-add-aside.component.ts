@@ -44,7 +44,6 @@ export class InventoryAddAsideComponent implements OnInit,OnDestroy {
     this.sub.add(getShowAsideForAdd);
   }
   onClosed() {
-    console.log("onClose");
     this.opened = false;
   }
   close() {

@@ -149,3 +149,16 @@
     }
   }
 }
+ .recurring-ticket-add-product,.quote-add-product,.report-add-product {
+  position: fixed;
+  top: calc(50% - 295px);
+  z-index: 999;
+  left: calc(50% - 292px);
+  overflow-x: hidden;
+  .create-product {
+    position: unset; 
+    bottom: unset; 
+    max-height: calc(100vh - 100px);
+    overflow-x: hidden;
+  }
+ }
