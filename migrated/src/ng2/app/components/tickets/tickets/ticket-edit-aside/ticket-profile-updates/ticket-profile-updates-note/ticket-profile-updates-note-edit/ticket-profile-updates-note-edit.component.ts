@@ -17,14 +17,14 @@ export class TicketProfileUpdatesNoteEditComponent implements OnInit {
 
   ngOnInit() {
     this.editUpdate = new TicketProfileUpdate(this.update);
-    this.elRef.nativeElement.querySelector('#note-description').value = this.update.note;
+    this.elRef.nativeElement.querySelector('#note-description').value = this.update.note.replace(/<br\s*[\/]?>/gi, "\n");
   }
   public onChangeDescription(event) {
-    this.editUpdate.note = event.target.value;
+    this.editUpdate.note = event.target.value.replace(/\n/g, '<br/>');
 
   }
   public onPastDescription(value) {
-    this.editUpdate.note = value;
+    this.editUpdate.note = value.replace(/\n/g, '<br/>');
   }
   saveService() {
     this.ticketsService.updateNote(this.idTicket,this.update.id,this.editUpdate.note).subscribe(data => {

@@ -11,7 +11,8 @@
   <div class="cps-block__content">
    <div class="cps-block__chat-block" *ngIf="tab === 'NOTE'" >
     <div class="editable-description editable-chat">
-    <textarea name="cps-chat" class="cps-block__content-textarea" appTextArea   id="chat" placeholder="Write ticket conversation here…"
+    
+    <textarea id="chat" name="cps-chat" class="cps-block__content-textarea" appTextArea     maxlength="250"   cols="5" rows="1"   placeholder="Write ticket conversation here…"
     (input)="onChangeChat($event)" (onPast)="onPastChat($event)"></textarea>
     </div>
     <div class="files-list">
