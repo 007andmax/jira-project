@@ -31,7 +31,7 @@ export class TicketProfileFormUpdateProductsComponent implements OnInit, OnDestr
       this.currentProduct = new TicketProfileFormProduct();
       this.productDP.clear();
     })
-    this.getItemListProducts();
+   // this.getItemListProducts();
 
   }
   public getItemListProducts() {

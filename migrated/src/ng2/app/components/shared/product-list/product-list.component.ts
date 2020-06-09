@@ -1,5 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ElementRef, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+import { InventoryStateService } from 'src/ng2/app/states/inventory/inventory-state.service';
+import { InventoryChange } from '../../inventory/class/inventory-change';
+import { Subscription } from 'rxjs';
 
 /**
  * Product list component
@@ -9,7 +12,7 @@ import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss']
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent implements OnInit,OnDestroy {
   @ViewChild('products') products_dropDown: NgbDropdown;
   @Output() selectedProductItem = new EventEmitter<any>();
   @Input() itemList: any;
@@ -21,11 +24,15 @@ export class ProductListComponent implements OnInit {
   search: string = '';
   resetSearch: boolean = false;
   selectedItem = false;
+  sub:Subscription = new Subscription();
   /**
    * Creates an instance of the ProductListComponent with the injected services
    * @param {ElementRef} elRef Service to work with template
    */
-  constructor(private elRef: ElementRef, public cd: ChangeDetectorRef, ) { }
+  constructor(private elRef: ElementRef, 
+    public cd: ChangeDetectorRef, 
+    private inventoryStateService:InventoryStateService) { }
+
 
   /**
    * Initializes product list. See [ngOnInit]{@see OnInit#ngOnInit}
@@ -35,6 +42,12 @@ export class ProductListComponent implements OnInit {
     if (this.type === 'REPORT') this.classAddProduct = 'report-add-product';
     if (this.type === 'RECURRING-TICKET') this.classAddProduct = 'recurring-ticket-add-product';
     if (this.type === 'TICKET') this.classAddProduct = 'ticket-add-product';
+    if (this.inventoryStateService.getListProducts().length > 0) this.itemList = this.inventoryStateService.getListProducts();
+   let getOnProducts =  this.inventoryStateService.getOnProducts().subscribe(data => {
+      this.itemList = data;
+      this.onUpdateList();
+    })
+    this.sub.add(getOnProducts);
     this.onUpdateList();
     if (this.editItem) {
       let value = this.getNameOrDescription(this.editItem);
@@ -42,6 +55,18 @@ export class ProductListComponent implements OnInit {
       if (value !== '') this.selectedItem = true;
 
     }
+
+    let getChangeProducts = this.inventoryStateService.getChangeProducts().subscribe((data: InventoryChange) => {
+      if (data.action === 'PRODUCT_SAVED') {
+        const Index = this.itemList.findIndex((item) => item.id === data.data.category.id);
+        if (Index > -1) {
+          this.itemList[Index].products.push(data.data);
+        }
+      }
+      this.onUpdateList();
+      this.cd.detectChanges();
+    })
+    this.sub.add(getChangeProducts);
 
   }
   public onUpdateList() {
@@ -99,5 +124,7 @@ export class ProductListComponent implements OnInit {
     //   this.editItem = null;
     this.selectedItem = false;
   }
-
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }

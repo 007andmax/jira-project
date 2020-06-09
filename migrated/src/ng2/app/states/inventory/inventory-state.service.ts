@@ -15,8 +15,10 @@ export class InventoryStateService {
   productForDelete: InventoryItem = null;
   onSortCategory: EventEmitter<any> = new EventEmitter();
   onGetCategories: EventEmitter<any> = new EventEmitter();
+  onGetProducts: EventEmitter<any> = new EventEmitter();
   onChangeProducts: EventEmitter<InventoryChange> = new EventEmitter();
   categories = [];
+  productList = [];
   constructor(private productService: ProductService,
     private inventoryRealTimeService: InventoryRealTimeService) { }
   public onInit() {
@@ -40,7 +42,19 @@ export class InventoryStateService {
     this.inventoryRealTimeService.changeProductsArray.subscribe(newChange => {
       this.onChangeProducts.emit(new InventoryChange(newChange.action, newChange.data, []));
     })
+    this.productService.getCategories().subscribe((res: any) => {
+      this.setproducts(res);
+      this.onInitGetProducts(this.productList);
 
+
+    });
+  }
+  public getListProducts() {
+   return this.productList;
+  }
+ 
+  public setproducts(data) {
+    this.productList = data;
   }
   public getChangeProducts() {
     return this.onChangeProducts;
@@ -51,8 +65,14 @@ export class InventoryStateService {
   public getOnCategries() {
     return this.onGetCategories;
   }
+  public getOnProducts() {
+    return this.onGetProducts;
+  }
   public onInitGetCategoriess(data) {
     this.onGetCategories.emit(data);
+  }
+  public onInitGetProducts(data) {
+    this.onGetProducts.emit(data);
   }
   public setCategories(data) {
     this.categories = data.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
