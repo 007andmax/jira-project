@@ -74,6 +74,7 @@
                 });
                 $rootScope.deviceCredentialsRecived = false;
                 DevicesService.getDevicesCredentials(devicesIds, $scope, function (resp) {
+                  console.log("resp",resp);
                   if (resp) {
                     $scope.devicesCredentials = resp;
                     $rootScope.deviceCredentialsRecived = true;

@@ -1206,6 +1206,7 @@
 
       function getDevicesCredentials(devices, scope, callback) {
         var credentials = {};
+        console.log("getDevicesCredentials");
         $http.post('/passwordRecords/devices/password', devices).then(function (resp) {
           credentials = resp.data;
           RealTimeService.subscribe('/passwordRecords', scope, function (newChange) {

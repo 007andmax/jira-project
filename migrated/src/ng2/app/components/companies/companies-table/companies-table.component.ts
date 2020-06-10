@@ -157,7 +157,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
 
     let devices = data;
 
-    this.countDevices = (devices[this.company.id]) ? devices[this.company.id].length : 0;
+    this.countDevices = (devices && devices[this.company.id]) ? devices[this.company.id].length : 0;
 
   }
   private onGetUsersCount(data) {
