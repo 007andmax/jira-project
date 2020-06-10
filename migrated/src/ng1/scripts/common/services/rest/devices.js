@@ -719,7 +719,7 @@
       }
 
       function getAgentsByCompany(scope, companyId, callback) {
-
+console.log("getAgentsByCompany");
         if (!scope) {
           throw "scope is required!"
         }
@@ -1150,6 +1150,7 @@
                   }
                 }
               }
+              console.log("devices/extended?companyId=");
               getAgentsByCompany(scope, companyId, callback);
             });
           } else {
