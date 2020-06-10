@@ -719,7 +719,7 @@
       }
 
       function getAgentsByCompany(scope, companyId, callback) {
-console.log("getAgentsByCompany");
+        console.log("getAgentsByCompany");
         if (!scope) {
           throw "scope is required!"
         }
@@ -1151,7 +1151,10 @@ console.log("getAgentsByCompany");
                 }
               }
               console.log("devices/extended?companyId=");
-           //   getAgentsByCompany(scope, companyId, callback);
+              //   getAgentsByCompany(scope, companyId, callback);
+              if (storage.devices[companyId] && callback) {
+                callback(storage.devices[companyId]);
+              }
             });
           } else {
 
