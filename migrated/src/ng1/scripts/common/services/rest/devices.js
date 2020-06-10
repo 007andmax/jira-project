@@ -1151,7 +1151,7 @@ console.log("getAgentsByCompany");
                 }
               }
               console.log("devices/extended?companyId=");
-              getAgentsByCompany(scope, companyId, callback);
+           //   getAgentsByCompany(scope, companyId, callback);
             });
           } else {
 
