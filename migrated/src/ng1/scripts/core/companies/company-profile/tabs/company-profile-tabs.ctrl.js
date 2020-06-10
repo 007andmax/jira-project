@@ -55,7 +55,7 @@
           $scope.users = UsersService.getAllByCompanyId($scope.company.id);
           $scope.userSubscriptionsByCompanyId = SubscriptionsService.getUserSubscriptionsByCompanyId($scope.company.id, $scope);
           function getCompanyDevices() {
-           
+           console.log("getCompanyDevices");
           
            // if (onGetDevicesComplated) return;
         //    onGetDevicesComplated = true;
@@ -73,6 +73,7 @@
                   devicesIds.push(device.id);
                 });
                 $rootScope.deviceCredentialsRecived = false;
+                console.log("getAgentsAndReportsDataByCompanyId");
                 DevicesService.getDevicesCredentials(devicesIds, $scope, function (resp) {
                   console.log("resp",resp);
                   if (resp) {
