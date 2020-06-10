@@ -156,9 +156,12 @@
   left: calc(50% - 292px);
   overflow-x: hidden;
   .create-product {
-    position: unset; 
-    bottom: unset; 
+    position: unset;
+    bottom: unset;
     max-height: calc(100vh - 100px);
     overflow-x: hidden;
+  }
+  .product-popup-triangle {
+    display: none;
   }
  }

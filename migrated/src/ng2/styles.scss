@@ -2836,3 +2836,50 @@ app-ticket-edit-aside-devices  {
   top: unset !important;
   transform: translate(0px, 0px) !important;
 }
+
+
+.create-product {
+  .label-name {
+    font-size: 13px !important;
+    margin-bottom: 8px !important;
+    font-weight: 600;
+  }
+}
+
+.qt-inputs-row {
+  display: flex;
+  & > div {
+    margin-right: 15px;
+    flex-grow: 1;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+  p.label-name {
+    width: unset;
+  }
+  input {
+    width: 100%;
+  }
+}
+
+.create-product-taxes-select {
+  .new-taxes-area.dropdown {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 100% !important;
+  }
+
+  .add-tax.add-tax-inventory {
+    right: 0;
+  }
+}
+
+.qt-input-40,
+.qt-select-input-40 input {
+  height: 40px !important;
+  padding: 0 12px !important;
+  font-size: 13px !important;
+  border: 1px solid #c4cbd5 !important;
+  border-radius: 4px !important;
+}
