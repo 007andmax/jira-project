@@ -246,6 +246,7 @@ import { ModalCustomShareScreenComponent } from './services/modal/modal-custom-s
 import { CompanyTicketsComponent } from './components/company-tickets/company-tickets.component';
 import { InventoryAddBodyComponent } from './components/inventory/inventory-add-aside/inventory-add-body/inventory-add-body.component';
 import { ServicePipe } from './pipe/service.pipe';
+import { LeftPanelSettingsComponent } from './components/left-panel/left-panel-settings/left-panel-settings.component';
  
 
 
@@ -605,6 +606,8 @@ angular.module('quicktech')
     InventoryAddBodyComponent,
 
     ServicePipe,
+
+    LeftPanelSettingsComponent,
   ],
   imports: [
     BrowserModule,
@@ -674,7 +677,7 @@ angular.module('quicktech')
     TicketsComponent,
     InventoryComponent,
     CompanyProductsComponent,
-    ModalCustomShareScreenComponent
+    ModalCustomShareScreenComponent,
     // RecurringTicketsComponent
   ],
   exports:[
