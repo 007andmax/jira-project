@@ -68,7 +68,7 @@
           <input type="text"
                  (blur)="onChangeDomain()"
                  [(ngModel)]="company.domain"
-                 placeholder="www.example.com">
+                 placeholder="example.com">
         </div>
         <div class="col-md-12">
           <p>Location</p>
@@ -127,7 +127,7 @@
           [editItem]="(company.contacts[0].designation) ? company.contacts[0].designation : null" [list]="allTitles"
           (onSelectedItem)="onSelectDesignation($event)"></app-select-search>
 
-          
+
         </div>
         <div class="col-md-6">
 

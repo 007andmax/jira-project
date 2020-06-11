@@ -2717,19 +2717,22 @@ app-ticket-edit-aside-devices  {
 }
 
 
+
 // create product
 .create-product {
-  background-color: #ffffff;
-  position: absolute;
-  bottom: 46px;
-  height: fit-content;
-  width: 584px;
-  padding: 26px 24px;
-  border-radius: 5px;
-  overflow: auto;
-  border: solid 1px #dfe3e8;
-  max-height: calc(100vh - 300px);
-  box-shadow: 0px 2px 20px 10px #0000000e;
+  &.--modal {
+    background-color: #ffffff;
+    position: absolute;
+    bottom: 46px;
+    height: fit-content;
+    width: 584px;
+    padding: 26px 24px;
+    border-radius: 5px;
+    overflow: auto;
+    border: solid 1px #dfe3e8;
+    max-height: calc(100vh - 300px);
+    box-shadow: 0px 2px 20px 10px #0000000e;
+  }
   &::before {
     content: '';
     position: absolute;
@@ -2749,16 +2752,12 @@ app-ticket-edit-aside-devices  {
   .create-product__col {
     padding-left: 0;
     margin-top: 17px !important;
+    position: relative;
 
-    &:first-child {
-      padding-left: 0;
-    }
-
-    &:last-child {
-      padding-left: 0;
-    }
-    &.p-0 {
-      padding: 0;
+    .mat-error {
+      font-size: 12px;
+      position: absolute;
+      top: -17px;
     }
   }
 
@@ -2816,6 +2815,12 @@ app-ticket-edit-aside-devices  {
     height: fit-content !important;
   }
 
+}
+
+.new-companies-content__modal {
+  .create-product {
+    height: 600px;
+  }
 }
 
 .product-popup-triangle {

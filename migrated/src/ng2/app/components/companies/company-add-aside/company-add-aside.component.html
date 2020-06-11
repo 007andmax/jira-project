@@ -62,7 +62,7 @@
           <input type="text"
                  (blur)="onChangeDomain()"
                  [(ngModel)]="company.domain"
-                 placeholder="www.example.com">
+                 placeholder="example.com">
         </div>
         <div class="col-md-6">
           <mat-error *ngIf="!validate.getFirstName()">
@@ -194,7 +194,7 @@
           <input type="text"
                  [(ngModel)]="company.domain"
                  (blur)="onChangeDomain()"
-                 placeholder="www.example.com">
+                 placeholder="example.com">
         </div>
         <div class="col-md-12">
           <p>Location</p>
@@ -249,10 +249,10 @@
           <p>Designation</p>
 
           <app-select-search [placeholder]="'Select Designation'" #role [maxlength]="30" [add]="true" [class]="['light-dropdown']" [list]="allTitles"
-          
+
           (onSelectedItem)="onSelectDesignation($event)"></app-select-search>
-          
-         
+
+
         </div>
         <div class="col-md-6">
 

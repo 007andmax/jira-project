@@ -46,7 +46,7 @@
   </div>
 
   <div *ngIf="isCreateproduct" [ngClass]="classAddProduct">
-    <div class="create-product">
+    <div class="create-product --modal">
       <h3 class="create-product__title">Create Product</h3>
       <app-inventory-add-body   #body (onClose)="isCreateproduct = false"></app-inventory-add-body>
     </div>
