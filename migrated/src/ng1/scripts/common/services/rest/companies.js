@@ -289,12 +289,7 @@
     }
 
 
-    function resetReferenceDate(callback) {
-      $http.post('/settings/companyProfile/accountingStartDate/reset')
-        .then(function (res) {
-          if (callback) callback(res)
-        })
-    }
+     
 
     function getReferenceDate(callback) {
       $http.get('/settings/companyProfile/accountingStartDate')
@@ -572,22 +567,6 @@
       }
     }
 
-   
-
-    function saveCompanySettingsDto(companyDto, callback) {
-
-      if (!companyDto) throw 'companyDto is required!';
-
-      var future = $http({
-        url: '/settings/companyProfile/',
-        method: 'PUT',
-        data: companyDto
-      });
-
-      Utils.handleCallback(future, callback);
-    }
-
- 
 
     function getCompanyForSettingPage(callback) {
 
@@ -735,71 +714,6 @@
       })
     }
 
-    function getCompanyContacts(scope, companyId, callback) {
-
-      if (!scope || !scope.$id) {
-        throw 'First argument must be Angularjs scope!';
-      }
-      if (!companyId) {
-        throw 'Second argument must be companyId!';
-      }
-
-      return Utils.getListByUrl('/company/' + companyId + '/contacts', callback, function (list) {
-
-        RealTimeService.subscribe('/companyContact', scope, function (newChange) {
-
-          if (newChange.action == 'COMPANY_CONTACT') {
-            list.splice(0, list.length);
-            Utils.customizeArray(newChange.data, list);
-          }
-        });
-
-        RealTimeService.subscribe('/subscription/' + companyId, scope, function (newChange) {
-
-          if (!newChange.data.contact) {
-            return;
-          }
-
-          var contact = Utils.findById(list, newChange.data.contact.id);
-
-          if (contact) {
-
-            if (newChange.action == 'SUBSCRIPTION_SAVED') {
-              Utils.defineReadOnlyProperty(contact, 'subscription', Utils.customizeObj(newChange.data));
-            } else if (newChange.action == 'SUBSCRIPTION_DELETED') {
-              delete contact.subscription;
-            }
-          }
-
-        });
-      });
-    }
-
-    function saveAllowingCreateCustomTags(value) {
-      if (value === undefined) {
-        throw 'First parameter required!'
-      }
-
-      $http.put('/settings/companyProfile/allowUsersCreateTags?allow=' + value, {});
-    }
-
-   
- 
-
-     
-
- 
-
-   
-   
- 
-
-   
-
-  
-
-  
-
     function getIndustries(callback) {
       var future = $http.get('/company/getIndustries');
       Utils.handleCallback(future, callback);
@@ -812,10 +726,7 @@
       Utils.handleCallback(future, callback);
     }
 
-    function saveInboxEnabled(isEnabled, callback) {
-      var future = $http.put('/settings/companyProfile/inbox', { enabled: isEnabled });
-      Utils.handleCallback(future, callback);
-    }
+  
 
     function changePrimaryContact(id, callback) {
       var future = $http({
@@ -846,7 +757,6 @@
       getClientCompaniesInfo: getClientCompaniesInfo,
       archive: archive,
       save: save,
-      saveCompanySettingsDto: saveCompanySettingsDto,
       getCompanyForSettingPage: getCompanyForSettingPage,
       getCompanyData: getCompanyData,
       getCompanyProfileData: getCompanyProfileData,
@@ -856,17 +766,13 @@
       saveLogo: saveLogo,
       deleteCover: deleteCover,
       deleteLogo: deleteLogo,
-      getCompanyContacts: getCompanyContacts,
-      saveAllowingCreateCustomTags: saveAllowingCreateCustomTags,
       getIndustries: getIndustries,
       isVendorHasProducts: isVendorHasProducts,
-      saveInboxEnabled: saveInboxEnabled,
       getCompanyPaymentInfo: getCompanyPaymentInfo,
       changePrimaryContact: changePrimaryContact,
       checkStorageCompanyLength: checkStorageCompanyLength,
       reloadCurrentCompany: reloadCurrentCompany,
       getReferenceDate: getReferenceDate,
-      resetReferenceDate: resetReferenceDate,
       sendEmail: sendEmail,
       updateCompanyTags: updateCompanyTags
     }
