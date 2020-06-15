@@ -1,5 +1,8 @@
 table.qt-table-modern {
   width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 2px;
+
   thead {
     font-size: 12px;
     th {
@@ -9,21 +12,35 @@ table.qt-table-modern {
   tbody {
     font-size: 13px;
     tr {
-      border: 2px solid #edf2f6;
+      td {
+        background: #ffffff;
+        padding: 10px 16px 11px 16px;
+        border-top: 1px solid transparent;
+        border-bottom: 1px solid transparent;
+
+        &:last-child {
+          border-top-right-radius: 5px;
+          border-bottom-right-radius: 5px;
+          border-right: 1px solid transparent;
+        }
+        &:first-child {
+          border-top-left-radius: 5px;
+          border-bottom-left-radius: 5px;
+          border-left: 1px solid transparent;
+
+        }
+      }
+
+      &.selected-ticket {
+        td {
+          background: #f4fbff;
+          border-color: #16a4fa;
+
+        }
+      }
     }
 
-    td {
-      background: #ffffff;
-      padding: 11px 16px 12px 16px;
-      &:last-child {
-        border-top-right-radius: 8px;
-        border-bottom-right-radius: 8px;
-      }
-      &:first-child {
-        border-top-left-radius: 8px;
-        border-bottom-left-radius: 8px;
-      }
-    }
+
   }
   .qt-table-modern__circle-avatar {
       width: 24px;

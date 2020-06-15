@@ -1,5 +1,5 @@
 <div ng-controller="quicktech.core.leftPanel.leftPanelCtrl" style="height: 100%">
-  
+
   <div class="mob-filters" ng-class="{ opened: areMobileTicketsFiltersOpened }">
     <div class="mob-filters-header">
       <button class="x-mark mobile-btn" ng-click="closeAndResetMobileTicketsFilters()"></button>
@@ -187,7 +187,7 @@
     </div>
     <button class="mob-filters-btn mobile-btn primary" ng-click="applyMobileTicketsFilters()">Apply Filters</button>
   </div>
-  
+
   <div class="left-panel nano">
     <div class="left-panel-head">
       <img class="logo-head" src="ng1/images/logo.png" alt="logo">
@@ -274,7 +274,7 @@
       </div>
     </div>
   </div>
-  
+
   <div class="left-panel-full" ng-style="{'width': isLeftPanelHidden ? '0px' : '240px'}">
     <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'quick-support' && !isLeftPanelHidden">
       <div class="left-panel-full__head">
@@ -313,7 +313,7 @@
         </div>
       </div>
     </div>
-   
+
     <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'companies' && !isLeftPanelHidden">
       <div class="left-panel-full__head">
         <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)"
@@ -344,7 +344,7 @@
           <div class="col-2 user-company-circle">
             <span>{{ companyCounters.CLIENT }}</span>
           </div>
-        
+
         </div>
         <div class="center-category__category sked" ng-click="filterCompanies('leads')"
              ng-class="{'active': companiesSharedState.filter.isLead}">
@@ -352,7 +352,7 @@
           <div class="col-2 user-company-circle">
             <span>{{ companyCounters.LEAD }}</span>
           </div>
-         
+
         </div>
         <div class="center-category__category sked" ng-click="filterCompanies('vendors')"
              ng-class="{'active': companiesSharedState.filter.isVendor}">
@@ -360,7 +360,7 @@
           <div class="col-2 user-company-circle">
             <span>{{ companyCounters.VENDOR }}</span>
           </div>
-          
+
         </div>
         <div class="left-panel-title font-medium">
           by tags
@@ -402,7 +402,7 @@
           </div>
           <div class="filter-left-panel category-expanded angular-animate" ng-show="dropdownByIndustryCompanyPage">
             <div class="x-mark-wrapper">
-             
+
               <qt-dropdown-typehead list-for-dropdown="industries"
                                     selected-item="companiesSharedState.filter.industry"
                                     no-overflow="true"
@@ -439,7 +439,7 @@
           <a class="left-panel-title left-panel-title-hover"
              ng-click="activateCompanyProfileTab('CompanyProfileTicketsPage')"
              ng-class="{'left-panel-active': CompanyProfileTicketsPage}"
-             
+
           >
             Tickets
             <i class="report-caret-icon" ng-class="{'report-caret-icon-up': CompanyProfileTicketsPage}"></i>
@@ -535,7 +535,7 @@
              ng-class="{'left-panel-active': CompanyProfileUsersPage}"
           >
             Users
-            
+
           </a>
           <div class="filter-left-panel category-expanded angular-animate" ng-show="CompanyProfileUsersPage">
             <a class="center-category__category sked"
@@ -682,10 +682,10 @@
              ng-click="activateCompanyProfileTab('CompanyProfileProductsPage')"
              ng-class="{'left-panel-active': CompanyProfileProductsPage}"
              href="#/ng2/company-products"
-             
+
           >
             Products
-            
+
           </a>
           <div class="filter-left-panel category-expanded angular-animate" ng-show="CompanyProfileProductsPage">
             <a class="center-category__category sked"
@@ -752,7 +752,7 @@
         <div class="left-panel-title font-medium">
           By title
         </div>
-        
+
         <div class="filter-left-panel" style="height: auto !important">
           <div class="x-mark-wrapper" style="position: relative;">
             <input style="padding-right: 50px;" type="text" class="form-control has-dropdown pointer"
@@ -778,7 +778,7 @@
                 <i class="icn-sm icn-product-cancel"></i>
               </a>
             </div>
-            
+
           </div>
         </div>
         <div class="left-panel-hide-filter">
@@ -812,7 +812,7 @@
           </div>
           <div class="filter-left-panel category-expanded angular-animate" ng-show="dropdownByIndustryUserPage">
             <div class="x-mark-wrapper select-to-click">
-              
+
               <qt-dropdown-typehead list-for-dropdown="industries"
                                     selected-item="usersSharedState.filter.industry"
                                     qt-class="'form-control has-dropdown pointer'"

@@ -2888,3 +2888,30 @@ app-ticket-edit-aside-devices  {
   border: 1px solid #c4cbd5 !important;
   border-radius: 4px !important;
 }
+
+.qt-tooltip-error {
+  z-index: 200;
+  border-radius: 3px;
+  width: 139px;
+  position: absolute;
+  background-color: #ff5263;
+  padding: 8px;
+  color: white;
+  font-size: 12px;
+  line-height: 1.33;
+  top: calc(100% + 6px);
+  &:before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: 12px;
+    transform: rotate(45deg);
+    background-color: #ff5263;
+    width: 7px;
+    height: 7px;
+  }
+}
+
+.--input-error {
+  border: solid 1px #ff5263 !important;
+}

@@ -314,15 +314,18 @@
 .settings-left-bar {
   position: absolute;
   bottom: 20px;
-  left: 25px;
-  background: url("../images/new-icons/settings-icon.png");
-  width: 25px;
-  height: 25px;
+  left: 24px;
+  background: url('../../ng2/assets/img/icons/settings.svg');
+  background-position: center;
+  background-size: cover;
+  width: 28px;
+  height: 28px;
   cursor: pointer;
 }
 
-.settings-left-bar:hover {
-  background: url("../images/new-icons/settings-icon.png") 25px 0px;
+.left-panel__category.active .settings-left-bar,
+ .settings-left-bar:hover {
+  filter: brightness(10);
 }
 
 .tutorial-left-bar {

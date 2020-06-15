@@ -3,7 +3,7 @@
 
   <div class="product-item">
     <div class="product-item__first-line d-f">
-      <app-product-list [type]="'TICKET'" [editItem]="product.item" class="product-item__prodect-list"  
+      <app-product-list [type]="'TICKET'" [editItem]="product.item" class="product-item__prodect-list"
       (selectedProductItem)="onChangeProduct($event,i)"></app-product-list>
          <button class="product-item__btn-del " (click)="removeProduct(i)">
         <span class="icon__close btn-icon"></span>
@@ -16,7 +16,7 @@
       </label>
 
       <label class="product-item__cost-input">
-        <input class="product-item__input cost" type="text" 
+        <input class="product-item__input cost" type="text"
         number
         [money]="true"
         [ngModel]="product.item.cost"
@@ -31,16 +31,18 @@
 
       <label class="product-item__price-input">
         <input class="product-item__input price" type="text" [(ngModel)]="product.item.sale"
+        [ngClass]="{'--input-error':!product.valdiateSaleCost}"
         number
         [money]="true"
         [ngModel]="product.item.sale"
         (blur)="onValidateSaleCostProduct(i)"
         appToFixed
         (ngModelChange)="onChangeSaleProduct($event, i)">
+        <mat-error class="qt-tooltip-error" *ngIf="!product.valdiateSaleCost">
+          Product price can not be lower then cost
+        </mat-error>
       </label>
-      <mat-error *ngIf="!product.valdiateSaleCost">
-        Product price can not be lower then cost
-      </mat-error>
+
       <label class="product-item__discount-input">
         <input class="product-item__input" [(ngModel)]="product.discountAmount" type="text">
       </label>
@@ -51,7 +53,7 @@
 
   <div class="product-item">
     <div class="product-item__first-line d-f">
-      <app-product-list [type]="'TICKET'" #productDP class="product-item__prodect-list"  
+      <app-product-list [type]="'TICKET'" #productDP class="product-item__prodect-list"
       (selectedProductItem)="selectProduct($event)"></app-product-list>
 
       <button class="product-item__btn-add" (click)="addProduct()">
@@ -65,7 +67,7 @@
       </label>
 
       <label class="product-item__cost-input">
-        <input class="product-item__input cost" 
+        <input class="product-item__input cost"
         number
         [money]="true"
         [ngModel]="currentProduct.item.cost"
@@ -79,17 +81,19 @@
       </label>
 
       <label class="product-item__price-input">
-        <input class="product-item__input price"  
+        <input class="product-item__input price"
+        [ngClass]="{'--input-error':!currentProduct.valdiateSaleCost}"
         number
         [money]="true"
         [ngModel]="currentProduct.item.sale"
         (blur)="onValidateSaleCost()"
         appToFixed
         (ngModelChange)="onChangeSale($event)">
+        <mat-error class="qt-tooltip-error" *ngIf="!currentProduct.valdiateSaleCost">
+          Product price can not be lower then cost
+        </mat-error>
       </label>
-      <mat-error *ngIf="!currentProduct.valdiateSaleCost">
-        Product price can not be lower then cost
-      </mat-error>
+
       <label class="product-item__discount-input">
         <input class="product-item__input discount" [(ngModel)]="currentProduct.discountAmount" type="text">
       </label>
