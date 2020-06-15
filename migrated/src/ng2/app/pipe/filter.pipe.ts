@@ -17,7 +17,7 @@ export class FilterPipe implements PipeTransform {
       } else {
         let categories = JSON.parse(JSON.stringify(args));
        categories = categories.filter(item => {
-          let products = item.products.filter(product => product.description.toLowerCase().includes(value.toLowerCase()));
+          let products = item.products.filter(product => product.description.toLowerCase().includes(value.toLowerCase()) || product.manufacture && product.manufacture.toLowerCase().includes(value.toLowerCase()) ||product.ilc && product.ilc.toLowerCase().includes(value.toLowerCase()));
           item.products = products;
           return (products.length === 0) ? false : true;
         })
