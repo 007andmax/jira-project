@@ -9,6 +9,7 @@ export class TicketProfileFormProduct {
     discountAmount: number;
     discountType: string = "PERCENT";
     completed: boolean = true;
+    valdiateSaleCost:boolean = true;
     constructor() {
     }
     public setData(data, index) {

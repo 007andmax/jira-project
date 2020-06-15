@@ -31,7 +31,7 @@ export class TicketProfileFormUpdateProductsComponent implements OnInit, OnDestr
       this.productDP.clear();
     })
   }
-  
+
   public onChangeSaleProduct(val, index) {
     let value = Number(val);
     this.addedProductList[index].item.sale = value;
@@ -50,10 +50,12 @@ export class TicketProfileFormUpdateProductsComponent implements OnInit, OnDestr
   }
   public onChangeProduct(item, i) {
     this.addedProductList[i].setData(item, this.getItemOrger());
+    this.addedProductList[i].valdiateSaleCost  = true;
   }
   public selectProduct(item) {
     if (item) this.currentProduct.setData(item, this.getItemOrger());
     if (!item) this.currentProduct = new TicketProfileFormProduct();
+    this.currentProduct.valdiateSaleCost  = true;
   }
   public addProduct() {
     this.addedProductList.push(JSON.parse(JSON.stringify(this.currentProduct)));
@@ -66,11 +68,34 @@ export class TicketProfileFormUpdateProductsComponent implements OnInit, OnDestr
     this.currentProduct.setItemOrder(this.getItemOrger());
 
   }
+  public onValidateSaleCostProduct(i) {
+
+    if (Number(this.addedProductList[i].item.sale) > Number(this.addedProductList[i].item.cost))  this.addedProductList[i].valdiateSaleCost = true;
+
+  }
+  public onValidateSaleCost() {
+    if (this.currentProduct.item.versionedId) {
+   if (Number(this.currentProduct.item.sale) > Number(this.currentProduct.item.cost)) this.currentProduct.valdiateSaleCost =  true;
+    }
+
+  }
   private getItemOrger() {
     return (this.addedProductList.length - 1) >= 0 ? this.addedProductList.length - 1 : 0;
   }
   public trackByIndex(index, item) {
     return index;
+  }
+  public onValidateProducts() {
+    this.addedProductList.forEach((item, index) => {
+      if (Number(item.item.sale) < Number(item.item.cost)) {
+        item.valdiateSaleCost = false;
+      } else {
+        item.valdiateSaleCost = true;
+      }
+    })
+    let find = this.addedProductList.find(item => !item.valdiateSaleCost);
+    if (this.currentProduct.item.versionedId) this.currentProduct.valdiateSaleCost = Number(this.currentProduct.item.sale) < Number(this.currentProduct.item.cost) ? false : true;
+    return ((find) ? false : true) && this.currentProduct.valdiateSaleCost;
   }
   public getSelectedProducts() {
     return (this.currentProduct.item.versionedId) ? [...this.addedProductList, this.currentProduct] : this.addedProductList;

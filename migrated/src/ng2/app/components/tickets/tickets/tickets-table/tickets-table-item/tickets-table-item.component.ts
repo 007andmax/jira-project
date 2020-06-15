@@ -23,10 +23,12 @@ export class TicketsTableItemComponent implements OnInit {
   };
   @Input() listColors: Array<StatusColor> = [];
   @Input() statusColor: TicketsColor;
+  @Input() selected:boolean = false;
   assignedUser: User;
   requestedUser: User;
   indexNoAvatar: number = 0;
   listColorNoAvatar = ['#0cdeaa','#16a4fa','#7c77cb','#ffb937'];
+  
   constructor(private usersStateService: UsersStateService,
     public ticketsListService: TicketsListService,
     private companiesStateService: CompaniesStateService) { }

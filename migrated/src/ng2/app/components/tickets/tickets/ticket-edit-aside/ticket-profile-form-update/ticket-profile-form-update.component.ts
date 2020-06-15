@@ -84,7 +84,8 @@ export class TicketProfileFormUpdateComponent implements OnInit {
     }
     if (this.tab === "PRODUCT") {
       this.onChangeProducts(this.selectProducts.getSelectedProducts());
-      if (!this.ticketProfileFormUpdate.isValidateProduct()) return;
+      console.log("this.selectProducts.onValidateProducts()",this.selectProducts.onValidateProducts());
+      if (!this.ticketProfileFormUpdate.isValidateProduct() || !this.selectProducts.onValidateProducts()) return;
       this.onUpdateTicket(this.ticketProfileFormUpdate.getDataForUpdateProduct());
 
     }
@@ -124,7 +125,9 @@ export class TicketProfileFormUpdateComponent implements OnInit {
     }
     if (this.tab === "PRODUCT") {
       this.onChangeProducts(this.selectProducts.getSelectedProducts());
+      
       if (this.ticketProfileFormUpdate.isValidateProduct()) {
+        if (!this.selectProducts.onValidateProducts()) return;
         this.onUpdateTicketAndClose(this.ticketProfileFormUpdate.getDataForUpdateProduct());
 
       } else this.onUpdateTicketAndClose(this.ticketProfileFormUpdate.getDataForClose());

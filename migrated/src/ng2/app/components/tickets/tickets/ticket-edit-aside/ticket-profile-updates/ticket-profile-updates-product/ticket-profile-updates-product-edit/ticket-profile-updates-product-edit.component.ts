@@ -17,6 +17,7 @@ export class TicketProfileUpdatesProductEditComponent implements OnInit {
   @Input() update: TicketProfileUpdate;
   @Output() onEdit = new EventEmitter();
   editProduct: TicketProfileProduct;
+  valdiateSaleCost: boolean = true;
   constructor(private productService: ProductService,
     private ticketsService: TicketsService,
     public ticketsListService: TicketsListService) { }
@@ -33,17 +34,24 @@ export class TicketProfileUpdatesProductEditComponent implements OnInit {
   public onChangeSale(val) {
     let value = Number(val);
     this.editProduct.item.sale = value;
+  
+  }
+  onValidateSaleCost() {
+    if (this.editProduct.item.sale > this.editProduct.item.cost) this.valdiateSaleCost = true;
   }
   onChangeProduct(item) {
     this.editProduct.item = item;
     this.editProduct.quantity = 1;
+    if (this.editProduct.item.sale > this.editProduct.item.cost) this.valdiateSaleCost = true;
   }
- 
+
   saveProduct() {
+    this.valdiateSaleCost = (this.editProduct.item.sale < this.editProduct.item.cost) ? false : true;
+    if (!this.valdiateSaleCost) return;
     this.ticketsService.updateExpense(this.editProduct.getDateForUpdate(this.update.id)).subscribe(data => {
       this.onEdit.emit(null);
-     })
- 
+    })
+
   }
   cancelProduct() {
     this.onEdit.emit(null);

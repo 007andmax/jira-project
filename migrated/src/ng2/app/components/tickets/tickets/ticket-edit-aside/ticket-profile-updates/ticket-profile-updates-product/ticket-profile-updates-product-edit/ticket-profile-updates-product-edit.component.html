@@ -16,7 +16,11 @@
       [money]="true"
       [ngModel]="editProduct.item.sale"
       appToFixed
+      (blur)="onValidateSaleCost()"
       (ngModelChange)="onChangeSale($event)"  />
+      <mat-error *ngIf="!valdiateSaleCost">
+        Product price can not be lower then cost
+      </mat-error>
       <input  class="input-default input-qty" [(ngModel)]="editProduct.quantity"   />
       <div class="ticket-updates__ticket-total" [textContent]="'$' + getTotal(editProduct.item.sale,editProduct.quantity)"></div>
 
