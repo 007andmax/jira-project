@@ -1,0 +1,51 @@
+.page-list-billable {
+  .billable-list-search {
+    margin-right: 8px;
+    width: 300px;
+  }
+
+  span.qt-input-search {
+    &:before {
+      width: 16px;
+      height: 16px;
+      background-position: center;
+      background-size: 16px;
+    }
+  }
+
+  .table-container {
+    min-height: calc(100vh - 246px);
+  }
+
+
+  .billable-table {
+
+    td, th {
+      &:first-child {
+        padding-left: 24px;
+      }
+      &:last-child {
+        padding-right: 24px;
+      }
+    }
+
+    &__company-name {
+      width: 45%;
+    }
+
+    &__tickets {
+      width: 31%;
+    }
+
+    &__sales {
+      width: 12%;
+    }
+
+    &__billable {
+      width: 12%;
+    }
+  }
+}
+
+
+

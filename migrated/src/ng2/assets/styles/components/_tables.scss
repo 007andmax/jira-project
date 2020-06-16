@@ -63,3 +63,29 @@ table.qt-table-modern {
       font-weight: 600;
     }
 }
+
+
+.qt-table-modern__sorting {
+  position: relative;
+  width: 8px;
+  height: 12px;
+  display: inline-flex;
+  line-height: 8px;
+  top: 2px;
+
+  &:before {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 6px;
+    background-image: url('assets/img/icons/sorting-up.svg');
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 6px;
+    top: 6px;
+    background-image: url('assets/img/icons/sorting-down.svg');
+  }
+}
