@@ -247,6 +247,7 @@ import { CompanyTicketsComponent } from './components/company-tickets/company-ti
 import { InventoryAddBodyComponent } from './components/inventory/inventory-add-aside/inventory-add-body/inventory-add-body.component';
 import { ServicePipe } from './pipe/service.pipe';
 import { LeftPanelSettingsComponent } from './components/left-panel/left-panel-settings/left-panel-settings.component';
+import { BillableComponent } from './components/billing/billable/billable.component';
  
 
 
@@ -379,6 +380,9 @@ angular.module('quicktech')
   .directive(
     'ticketsComponent',
     downgradeComponent({ component: TicketsComponent }))
+    .directive(
+      'billableComponent',
+      downgradeComponent({ component: BillableComponent }))
     .directive(
     'inventoryComponent',
     downgradeComponent({ component: InventoryComponent }))
@@ -608,6 +612,8 @@ angular.module('quicktech')
     ServicePipe,
 
     LeftPanelSettingsComponent,
+
+    BillableComponent,
   ],
   imports: [
     BrowserModule,
@@ -678,6 +684,7 @@ angular.module('quicktech')
     InventoryComponent,
     CompanyProductsComponent,
     ModalCustomShareScreenComponent,
+    BillableComponent
     // RecurringTicketsComponent
   ],
   exports:[

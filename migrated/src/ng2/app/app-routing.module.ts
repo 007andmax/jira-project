@@ -30,6 +30,7 @@ import { InventoryComponent } from './components/inventory/inventory.component';
 import { CompanyProductsComponent } from './components/companies/company-products/company-products.component';
 import { TicketsComponent } from './components/tickets/tickets/tickets.component';
 import { CompanyTicketsComponent } from './components/company-tickets/company-tickets.component';
+import { BillableComponent } from './components/billing/billable/billable.component';
 
 const routes: Routes = [
   {
@@ -173,6 +174,10 @@ const routes: Routes = [
   {
     path: 'ng2/tickets',
     component: TicketsComponent,
+  },
+  {
+    path: 'ng2/billable',
+    component: BillableComponent,
   },
 ];
 

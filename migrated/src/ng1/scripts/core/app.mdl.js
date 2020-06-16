@@ -147,6 +147,10 @@
           url: '/ng2/users',
           template: '<users-component></users-component>'
         }))
+        .state('new-billable', waitForServices({
+          url: '/ng2/billable',
+          template: '<billable-component></billable-component>'
+        }))
         .state('new-reports', waitForServices({
           url: '/ng2/reports',
           template: '<reports-component></reports-component>'
