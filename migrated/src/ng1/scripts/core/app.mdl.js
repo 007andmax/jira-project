@@ -74,30 +74,6 @@
       $urlRouterProvider.when('/accounting', '/accounting/billable');
 
       $stateProvider
-        .state('tickets', waitForServices({
-          url: '/tickets/:listType',
-          templateUrl: '/ng1/scripts/core/tickets/tickets.tpl.html',
-          controller: 'quicktech.core.tickets.ticketsCtrl'
-        }))
-        .state('tickets.details', waitForServices({
-          url: '/:ticketId',
-          params: {
-            ticketId: '',
-            remoteParams: null
-          },
-          templateUrl: '/ng1/scripts/core/tickets/ticket-details.tpl.html',
-          controller: 'quicktech.core.tickets.ticketDetailsCtrl'
-        }))
-        .state('drafts', waitForServices({
-          url: '/drafts',
-          templateUrl: '/ng1/scripts/core/tickets/drafts/drafts.tpl.html',
-          controller: 'quicktech.core.tickets.draftsCtrl'
-        }))
-        .state('drafts.details', waitForServices({
-          url: '/:draftId',
-          templateUrl: '/ng1/scripts/core/tickets/drafts/draft-details.tpl.html',
-          controller: 'quicktech.core.tickets.draftDetailsCtrl'
-        }))
         .state('tickets-dashboard', waitForServices({
           url: '/tickets-dashboard',
           templateUrl: '/ng1/scripts/core/dashboards/tickets-dashboard/tickets-dashboard.tpl.html',

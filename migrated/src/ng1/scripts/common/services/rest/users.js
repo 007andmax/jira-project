@@ -265,22 +265,6 @@
         return storage.usersByCompanies[$rootScope.currentUser.company.id] || [];
       }
 
-      function resendWelcomeEmail(email, callback) {
-        $http.post('/resend/verifyUserEmail', {
-          "email": email
-        }).then(function (resp) {
-          if (callback) {
-            callback(resp);
-          }
-        })
-      }
-
-
-
-      
-
-     
-
       function getArchivedUsers() {
         return storage.deleted;
       }
@@ -341,23 +325,7 @@
         return searchResult;
       }
 
-      function changeUserRole(userId, roleName, callback) {
-
-        if (!userId) {
-          throw 'userId is required!'
-        }
-
-        if (!roleName) {
-          throw 'roleName is required!'
-        }
-
-        var future = $http({
-          url: '/users/updateRole/' + userId + '?role=' + roleName.toUpperCase(),
-          method: 'PUT'
-        });
-
-        Utils.handleCallback(future, callback);
-      }
+    
 
       function changeUsersRoles(userIds, role, callback) {
 
@@ -504,20 +472,6 @@
         return errorMessage;
       }
 
-     
-
-     
-     
- 
-
-      function deactivateAccount(note) {
-        $http.post('/users/deactivate', { note: note });
-      }
-
-     
-
-    
-
       function updateWelcomeWizard(state, dontShowThisAgain) {
         var dto = $rootScope.currentUser.wizardTracker || {};
         switch (state.split('.').pop()) {
@@ -541,12 +495,6 @@
         $http.put('/settings/userProfile/updateWizard' + (dontShowThisAgain ? '?dontShowThisAgain=' + dontShowThisAgain : ''), dto);
       }
 
-    
-
-      
-   
-
-
       return {
         _addInitListener: addInitListener,
         getCurrentUser: getCurrentUser,
@@ -561,16 +509,14 @@
         searchByAllUsers: searchByAllUsers,
         searchByClientUsers: searchByClientUsers,
         searchByUsersFromCompany: searchByUsersFromCompany,
-        changeUserRole: changeUserRole,
         changeUsersRoles: changeUsersRoles,
         save: save,
         archiveUser: archiveUser,
         isEmailUnique: isEmailUnique,
         deleteAvatar: deleteAvatar,
         saveAvatar: saveAvatar,
-        deactivateAccount: deactivateAccount,
         updateWelcomeWizard: updateWelcomeWizard,
-        resendWelcomeEmail: resendWelcomeEmail
+        
       }
 
     }]);

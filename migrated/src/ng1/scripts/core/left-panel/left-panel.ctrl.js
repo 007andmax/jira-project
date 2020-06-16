@@ -247,10 +247,10 @@
         };
 
         $scope.toggleMobileMenu = function (menu) {
-          TicketsService.getAllCounts(function (resp) {
+       /*   TicketsService.getAllCounts(function (resp) {
             resp && ($scope.ticketsCounter = resp);
             return $scope.test;
-          });
+          });*/
           $scope.listOfMobileTitles.forEach(function (title) {
             $scope[title] = false;
           });
@@ -268,10 +268,10 @@
           }
         }, true);
 
-        TicketsService.getAllCounts(function (resp) {
+      /*  TicketsService.getAllCounts(function (resp) {
           resp && ($scope.ticketsCounter = resp);
           return $scope.test;
-        });
+        });*/
 
         $scope.$watch('ticketsCounter', function (newValue, oldValue) {
           $scope.ticketsCounter = newValue;
@@ -284,9 +284,9 @@
         }, function (val) {
           if (val) {
            
-            TicketsService.getAllCounts(function (resp) {
+         /*   TicketsService.getAllCounts(function (resp) {
               $scope.ticketsCounter = resp;
-            });
+            });*/
           }
         });
 
@@ -1653,7 +1653,7 @@
         }, function (companyId) {
           if (companyId) {
             $scope.companyProfilePageUsersList = UsersService.getAllByCompanyIdNonArchived(companyId);
-            TicketsService.getAllCountsByCompanyId($scope, companyId, ticketCounterCallback);
+           // TicketsService.getAllCountsByCompanyId($scope, companyId, ticketCounterCallback);
             $scope.companyForCompanyProfile = CompaniesService.getOneById(companyId);
             $scope.companyDevices = $scope.devices.filter(function (device) {
               return device.companyId === companyId;
@@ -1667,7 +1667,7 @@
           if (val) {
             var id = companyProfileSharedState.companyId
             if (id === val.oldCompanyId || id === val.companyId) {
-              TicketsService.getAllCountsByCompanyId($scope, id, ticketCounterCallback);
+            //  TicketsService.getAllCountsByCompanyId($scope, id, ticketCounterCallback);
             }
           }
         })
