@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, Input, ViewChild } from '@angular/core';
 import { TitleListType } from './class/title-list-type';
 import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.service';
 import { Subscription } from 'rxjs';
+import { TicketsFilterComponent } from './tickets-filter/tickets-filter.component';
 
 @Component({
   selector: 'app-tickets-header',
@@ -9,6 +10,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./tickets-header.component.scss']
 })
 export class TicketsHeaderComponent implements OnInit, OnDestroy {
+  @ViewChild('filter') filter: TicketsFilterComponent;
   titleListTypes: Array<TitleListType> = [new TitleListType('All Tickets', 'ALL'),
   new TitleListType('Unassigned', 'UNASSIGNED'),
   new TitleListType('Open', 'OPEN'),
@@ -22,9 +24,11 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
   title: string = 'My Tickets';
   sub: Subscription = new Subscription();
   count = 0;
+  toggleFilter: boolean = true;
+  countFilter: number = 0;
   selectedListType: TitleListType = new TitleListType('My Tickets', 'USERS');
   constructor(private ticketsStateService: TicketsStateService,
-    public cd: ChangeDetectorRef, ) { }
+    public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
     let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
@@ -40,9 +44,18 @@ export class TicketsHeaderComponent implements OnInit, OnDestroy {
       }
     })
   }
+  clearAll() {
+    this.filter.onClearAll();
+  }
+  getTextCountFilters() {
+    return `Filters${(this.countFilter > 0) ? ' (' + this.countFilter + ')' : ''}`;
+  }
+  onChangeCountFilter(data) {
+    this.countFilter = data;
+  }
   public setTitle(title) {
     this.title = `${title} (${this.count})`;
-    
+
   }
   onAddTicket() {
     this.ticketsStateService.onToggleAddTicket();

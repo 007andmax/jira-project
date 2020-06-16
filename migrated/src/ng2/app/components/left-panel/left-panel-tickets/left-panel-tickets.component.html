@@ -20,7 +20,7 @@
       <div class="list-item d-f jc-sb" [ngClass]="{'active': listType === 'RECURRING_TICKETS_CLOSED'}" (click)="setTypeFilter('RECURRING_TICKETS_CLOSED')">Recurring tickets Closed <div>{{getCountByField('RECURRING_TICKETS_CLOSED')}}</div></div>
     </div>
     
-  <app-tickets-status (onSetStatus)="setTypeFilter($event)"></app-tickets-status>
+  
   
     <div class="left-panel-ng2__content--tags clearfix">
       <div class="tags-header">
@@ -32,76 +32,6 @@
     </div>
   
   
-    <div class="left-panel-ng2__content--filters">
-      <div id="filter-by-company" class="filter-item" >
-        <i class="icn-sm report-caret-icon"></i>
-        <div class="filter-item__header" (click)="toggleFilter($event)">
-          By Company
-        </div>
-        <div class="filter-item__content">
-          <div class="dark-dropdown">
-            <app-select-search (onOpenDropDown)="onOpenDropDownFilter('filter-by-company')" [placeholder]="'Select Company'" [change]="false" [class]="['dark-dropdown']"
-            [field]="'name'" [editItem]="selectedCompany"  [list]="companies"
-              (onSelectedItem)="onSelectCompany($event)"></app-select-search>
-          </div>
-          <div class="resent-block">
-            <div class="resent-block__header">Recent</div>
-            <div class="resent-block__content">
-              <ng-template ngFor let-item [ngForOf]="companiesHistory" let-i="index" [ngForTrackBy]="trackByIndex">
-                <p [textContent]="item" (click)="selectClientCompany(item)"></p>
-              </ng-template>
-
-
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="filter-by-user" class="filter-item">
-        <i class="icn-sm report-caret-icon"></i>
-        <div class="filter-item__header" (click)="toggleFilter($event)">
-          By User
-        </div>
-        <div class="filter-item__content">
-          <div class="dark-dropdown">
-            <app-select-search (onOpenDropDown)="onOpenDropDownFilter('filter-by-user')" #usersDp [placeholder]="'Select User'" [change]="false" [class]="['dark-dropdown']" [editItem]="selectedUser"
-            [list]="getUserList()"
-                               (onSelectedItem)="onSelectUser($event)"></app-select-search>
-          </div>
-          <div class="resent-block">
-            <div class="resent-block__header">Recent</div>
-            <div class="resent-block__content">
-              <ng-template ngFor let-item [ngForOf]="usersHistory" let-i="index" [ngForTrackBy]="trackByIndex">
-                <p [textContent]="item" (click)="selectUser(item)"></p>
-              </ng-template>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      
-      <div id="filter-by-tech-user" class="filter-item">
-        <i class="icn-sm report-caret-icon"></i>
-        <div class="filter-item__header" (click)="toggleFilter($event)">
-          By Tech Team
-        </div>
-        <div class="filter-item__content">
-          <div class="dark-dropdown">
-            <app-select-search (onOpenDropDown)="onOpenDropDownFilter('filter-by-tech-user')" [placeholder]="'Select Tech User'" [change]="false" [class]="['dark-dropdown']"
-            [editItem]="selectedTechUser"  [list]="getTechUserList()"
-              (onSelectedItem)="onSelectTechUser($event)"></app-select-search>
-          </div>
-          <div class="resent-block">
-            <div class="resent-block__header">Recent</div>
-            <div class="resent-block__content">
-              <ng-template ngFor let-item [ngForOf]="techUsersHistory" let-i="index" [ngForTrackBy]="trackByIndex">
-                <p [textContent]="item" (click)="selectTechUser(item)"></p>
-              </ng-template>
-
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+   
   </div>
 </div>

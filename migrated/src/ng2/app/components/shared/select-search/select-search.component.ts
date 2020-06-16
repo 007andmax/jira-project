@@ -122,6 +122,11 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
     this.onSelectedItem.emit(null);
     this.selectedItem = null;
   }
+  public clearWithOutChanges() {
+    
+    this.isAdd = false;
+    this.selectedItem = null;
+  }
 
   addItem() {
     this.onAddItem.emit(this.selectedItem);

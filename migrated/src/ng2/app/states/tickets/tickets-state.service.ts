@@ -23,6 +23,9 @@ export class TicketsStateService {
   status: EventEmitter<any> = new EventEmitter();
   count: EventEmitter<number> = new EventEmitter();
   toggleAddTicket: EventEmitter<any> = new EventEmitter();
+  typeFilter: EventEmitter<any> = new EventEmitter();
+  tagsFilter: EventEmitter<any> = new EventEmitter();
+  leftPanelFilter: EventEmitter<any> = new EventEmitter();
   ticketChangedActions = ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH', 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_SHARE', 'MARKED_AS_SPAM', 'EDITED_TICKET'];
   constructor(private ticketsRealTimeService: TicketsRealTimeService) { }
 
@@ -49,10 +52,28 @@ export class TicketsStateService {
       if (newChange.action === 'DISCOUNT_CHANGED') this.changeFieldTicket.emit(new TicketChangeField("discount", newChange.data.id, newChange.data.discount));
     })
 
-  
-  }
- 
 
+  }
+  public onChangeLeftPanelFilter(data) {
+    this.leftPanelFilter.emit(data);
+  }
+  public getOnChangeLeftPanelFilter() {
+    return this.leftPanelFilter;
+  }
+
+  public onChangeTagsFilter(data) {
+    this.tagsFilter.emit(data);
+  }
+  public getOnChangeTagsFilter() {
+    return this.tagsFilter;
+  }
+
+  public onChangeTypeFilter(data) {
+    this.typeFilter.emit(data);
+  }
+  public getOnChangeTypeFilter() {
+    return this.typeFilter;
+  }
   public onClearFormUpdate() {
     this.clearFormUpdate.emit(null);
   }
