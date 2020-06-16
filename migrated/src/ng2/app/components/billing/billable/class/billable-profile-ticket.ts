@@ -7,7 +7,7 @@ export class BillableProfileTicket {
     lockedBy: null
     productExpense: null
     productSum: number;
-    serviceExpense: [{…}]
+  //  serviceExpense: [{…}]
     serviceSum: number;
     subject: string;
     sum: number;

@@ -1,4 +1,4 @@
 export class BillableProfile {
 id:string;
-tickets:
+tickets:any;
 }
