@@ -335,6 +335,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     this.listAssignedUser = [];
     this.rightPanel.close();
     this.ticketStateService.unsubscribeTicket();
+    this.ticketStateService.onTicketClosed();
   }
   getClassType() {
     return `priority-icon ticket-edit-aside__ticket-subject-flag ${(this.ticketProfile.priorityLevel && this.ticketProfile.priorityLevel !== "MEDIUM") ? '--' + this.ticketProfile.priorityLevel.toLowerCase() : ''}`;

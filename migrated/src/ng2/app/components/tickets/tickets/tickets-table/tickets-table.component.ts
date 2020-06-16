@@ -7,6 +7,7 @@ import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.se
 import { Subscription } from 'rxjs';
 import { StatusColor } from '../../../left-panel/left-panel-tickets/tickets-status/class/status-color';
 import { TicketsColor } from '../../../left-panel/left-panel-tickets/tickets-status/class/tickets-color';
+import { TicketStateService } from '../ticket-edit-aside/services/ticket-state.service';
 
 
 @Component({
@@ -29,6 +30,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
   idEditTicket:string = '';
   constructor(private ticketsService: TicketsService,
     private ticketsListService: TicketsListService,
+    private ticketStateService: TicketStateService,
     public cd: ChangeDetectorRef,
     private ticketsStateService: TicketsStateService) { }
 
@@ -37,6 +39,9 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
       if (this.ticketsListService.isTicketMatchesFilters(this.ticketsFilter, data)) {
         this.tickets.unshift(data);
       }
+    })
+    this.ticketStateService.getOnTicketClosed().subscribe(data => {
+      this.idEditTicket = '';
     })
     this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
       let ticket = new Ticket(data);

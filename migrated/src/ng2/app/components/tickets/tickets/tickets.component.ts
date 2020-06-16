@@ -25,6 +25,7 @@ export class TicketsComponent implements OnInit, OnDestroy {
       this.ticketsStateService.onInitActualNumber(data.number);
     })
   }
+ 
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

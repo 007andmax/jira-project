@@ -13,6 +13,7 @@ import { WebsocketService } from 'src/ng2/app/services/websocket/websocket.servi
 export class TicketStateService {
   servicesList: EventEmitter<any> = new EventEmitter();
   changeUpdatesTicket: EventEmitter<any> = new EventEmitter();
+  closedTicket: EventEmitter<any> = new EventEmitter();
   updateForRemove: TicketProfileUpdate = null;
   serviceForRemove: TicketProfileService = null;
   productForRemove: TicketProfileProduct = null;
@@ -25,7 +26,12 @@ export class TicketStateService {
       this.changeUpdatesTicket.emit(newChange);
     });
   }
-
+  public onTicketClosed() {
+    this.closedTicket.emit(null);
+  }
+  public getOnTicketClosed() {
+    return this.closedTicket;
+  }
   public getServicesList(ticketProfile) {
     this.recurringService.getServiceList(ticketProfile.company.id).subscribe((res: any) => {
       this.servicesForTicket = res;

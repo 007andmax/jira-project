@@ -49,10 +49,10 @@ export class TicketsStateService {
       if (newChange.action === 'DISCOUNT_CHANGED') this.changeFieldTicket.emit(new TicketChangeField("discount", newChange.data.id, newChange.data.discount));
     })
 
-  
-  }
- 
 
+  }
+
+ 
   public onClearFormUpdate() {
     this.clearFormUpdate.emit(null);
   }
