@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BillableService } from 'src/ng2/app/services/billable/billable.service';
 
 @Component({
   selector: 'billable',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BillableComponent implements OnInit {
 
-  constructor() { }
+  constructor(private billableService:BillableService) { }
 
   ngOnInit() {
+    this.billableService.getBillable().subscribe(data => {
+      console.log("data",data);
+    })
   }
 
 }

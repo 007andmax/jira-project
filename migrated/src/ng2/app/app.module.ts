@@ -248,6 +248,7 @@ import { InventoryAddBodyComponent } from './components/inventory/inventory-add-
 import { ServicePipe } from './pipe/service.pipe';
 import { LeftPanelSettingsComponent } from './components/left-panel/left-panel-settings/left-panel-settings.component';
 import { BillableComponent } from './components/billing/billable/billable.component';
+import { BillableItemComponent } from './components/billing/billable/billable-item/billable-item.component';
  
 
 
@@ -614,6 +615,8 @@ angular.module('quicktech')
     LeftPanelSettingsComponent,
 
     BillableComponent,
+
+    BillableItemComponent,
   ],
   imports: [
     BrowserModule,
