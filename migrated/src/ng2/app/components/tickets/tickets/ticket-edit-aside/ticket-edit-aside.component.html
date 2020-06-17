@@ -16,7 +16,7 @@
                 <div class="ticket-edit-aside__header-company" [textContent]="getCompantName() + ' - ' + getNameCreateUser()"></div>
                 <app-ticket-change-status [ticketProfile]="ticketProfile"></app-ticket-change-status>
               </div>
-              <div class="ticket-edit-aside__header-info"><span [textContent]="parseTicketSource() + ', Agent - ' + ticketProfile.sourceName"></span> <span class="divider-point"></span> <span [textContent]="getCreatAt()"></span>
+              <div class="ticket-edit-aside__header-info"><span [textContent]="parseTicketSource() + getAgentName()"></span> <span class="divider-point"></span> <span [textContent]="getCreatAt()"></span>
                  </div>
             </div>
           </div>

@@ -325,6 +325,10 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     }
     return result;
   };
+  getAgentName() {
+    if (!this.ticketProfile.agent || !this.ticketProfile.agent.label)     return '';
+    return `, Agent - ${this.ticketProfile.agent.label}`;
+  }
   close() {
     this.ticketProfile = new TicketProfile();
     this.opened = false;
