@@ -11,6 +11,7 @@ import { CompaniesStateService } from '../../states/company/companies-state.serv
 import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.service';
 import { TicketsHeaderComponent } from '../tickets/tickets/tickets-header/tickets-header.component';
 import { LeftPanelService } from '../../services/left-panel/left-panel.service';
+import { TicketStateService } from '../tickets/tickets/ticket-edit-aside/services/ticket-state.service';
 
 @Component({
   selector: 'company-tickets',
@@ -30,15 +31,19 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
   statusColor: TicketsColor;
   offset: number = 15;
   showPendingPreloader: boolean = false;
+  idEditTicket:string = '';
   constructor(private ticketsService: TicketsService,
     private ticketsListService: TicketsListService,
     public cd: ChangeDetectorRef,
+    private ticketStateService: TicketStateService,
     private leftPanelService:LeftPanelService,
     private companiesStateService: CompaniesStateService,
     private ticketsStateService: TicketsStateService) { }
 
   ngOnInit() {
-    
+    this.ticketStateService.getOnTicketClosed().subscribe(data => {
+      this.idEditTicket = '';
+    })
     this.leftPanelService.getColors().subscribe((data: any) => {
 
       let listColors = data.map(item => {
@@ -98,6 +103,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     })
   }
   editTicket(id) {
+    this.idEditTicket = id;
     this.ticketsStateService.onOpenTicket();
     this.ticketsService.getTicket(id).subscribe(data => {
       this.ticketsStateService.onEditTicket(data);
