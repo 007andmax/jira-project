@@ -1,4 +1,5 @@
 import { BillableProfileTicketProductExpenseItem } from './billable-profile-ticket-product-expense-item';
+import { Tax } from 'src/ng2/class/taxes/tax';
 
 export class BillableProfileTicketProductExpense {
     billableQuantity: number;
@@ -12,7 +13,7 @@ export class BillableProfileTicketProductExpense {
     serialNumber: string;
     sum: number;
     taxSum: number;
-    taxes: any;
+    taxes: Array<Tax>;
     ticketId: string;
     ticketUpdateId: string;
     totalSum: number;

@@ -22,6 +22,6 @@ export interface Company {
     name: string;
     paymentTerms: number;
     status: string;
-    techLeadId: any;
+    techLeadId: string;
     type: any;
 }

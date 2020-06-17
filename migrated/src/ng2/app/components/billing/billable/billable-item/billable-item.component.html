@@ -1,3 +1,16 @@
-<p>
-  billable-item works!
-</p>
+<tr>
+  <td class="billable-table__company-name --strong" [textContent]="item.name"></td>
+  <td class="billable-table__tickets">
+    <div class="d-f">
+      <div
+        class="qt-table-modern__circle-avatar"
+        [textContent]="ticketsListService.getAssignedUserNameForAvatar(salesPerson)"
+        [ngStyle]="{'background': getStyleAvatar(salesPerson)}">
+       
+      </div>
+      <div [textContent]="ticketsListService.getUserName(salesPerson)"></div>
+    </div>
+  </td>
+  <td class="billable-table__sales" [textContent]="item.countTickets"></td>
+  <td class="billable-table__billable" [textContent]="(item.total | currency)"></td>
+</tr>
