@@ -39,17 +39,18 @@
   <div class="table-container">
     <table class="qt-table-modern billable-table">
       <tbody>
-
         <ng-template ngFor let-item
         [ngForOf]="list"
         [ngForTrackBy]="trackById">
-<app-billable-item [item]="item"  ></app-billable-item>
-</ng-template>
-         
+      <app-billable-item [item]="item"  ></app-billable-item>
+      </ng-template>
+
       </tbody>
     </table>
   </div>
 
-
-
 </div>
+
+
+
+<!-- <app-billable-item-list></app-billable-item-list> -->

@@ -249,6 +249,7 @@ import { ServicePipe } from './pipe/service.pipe';
 import { LeftPanelSettingsComponent } from './components/left-panel/left-panel-settings/left-panel-settings.component';
 import { BillableComponent } from './components/billing/billable/billable.component';
 import { BillableItemComponent } from './components/billing/billable/billable-item/billable-item.component';
+import { BillableItemListComponent } from './components/billing/billable/billable-item-list/billable-item-list.component';
  
 
 
@@ -617,6 +618,8 @@ angular.module('quicktech')
     BillableComponent,
 
     BillableItemComponent,
+
+    BillableItemListComponent,
   ],
   imports: [
     BrowserModule,

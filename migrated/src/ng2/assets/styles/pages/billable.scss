@@ -1,4 +1,6 @@
 .page-list-billable {
+
+  // ***** billable list
   .billable-list-search {
     margin-right: 8px;
     width: 300px;
@@ -46,6 +48,52 @@
     }
   }
 }
+
+
+// ***** billable item list
+.billable-item-table {
+
+  tr:hover {
+    td {
+      background-color: #f9fafb;
+
+    }
+  }
+  tr.--selected {
+    td {
+      background-color: #f4fbff;
+      border-color: #16a4fa !important;
+    }
+  }
+
+    tbody {
+      .billable-item-table {
+        &__ticket {
+          color: #16a4fa;
+          font-weight: 600;
+        }
+    }
+
+  }
+
+  &__check {
+    width: 40px;
+  }
+
+
+  &__date, &__ticket {
+    width: 112px;
+  }
+
+  &__subject {
+    width: max-content;
+  }
+
+  &__amount {
+    width: 112px;
+  }
+}
+
 
 
 
