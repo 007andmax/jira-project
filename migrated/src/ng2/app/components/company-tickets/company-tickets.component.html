@@ -13,7 +13,7 @@
       <ng-template ngFor let-ticket
                   [ngForOf]="tickets"
                   [ngForTrackBy]="trackById">
-       <app-tickets-table-item (click)="editTicket(ticket.id)" [listColors]="listColors" [statusColor]="statusColor"  [setTicket]="ticket"></app-tickets-table-item>
+       <app-tickets-table-item [selected]="idEditTicket === ticket.id" (click)="editTicket(ticket.id)" [listColors]="listColors" [statusColor]="statusColor"  [setTicket]="ticket"></app-tickets-table-item>
      </ng-template>
       </tbody>
     </table>

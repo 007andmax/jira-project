@@ -3,3 +3,13 @@
     color: transparent;
   }
 }
+tr {
+  cursor: pointer;
+  &:hover {
+    td {
+      background: #f4fbff;
+      border-color: #16a4fa;
+
+    }
+  }
+}
