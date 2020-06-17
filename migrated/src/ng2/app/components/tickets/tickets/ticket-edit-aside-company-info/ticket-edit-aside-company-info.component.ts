@@ -64,15 +64,20 @@ export class TicketEditAsideCompanyInfoComponent implements OnInit {
           }
         }
         if (primaryAddress && primaryAddress.phoneNumbers.length) primaryPhone = primaryAddress.phoneNumbers[0];
-        let workingTime = this.company.companyInfo.workingTime[new Date().getDay() - 1];
+        if (!this.company.companyInfo.workingTime) {
+          this.workingTime= '';
+        } else {
+          let workingTime = this.company.companyInfo.workingTime[new Date().getDay() - 1];
 
-        let startTime = workingTime.startTime / 3600;
-        let typeTime = (startTime > 12) ? "PM" : "AM";
-        startTime = (startTime > 12) ? startTime - 12 : startTime;
-        var timeInMinutes = startTime * 60,
-          hours = Math.floor(timeInMinutes / 60),
-          minutes = Math.round(timeInMinutes - (hours * 60));
-        this.workingTime = `${(hours < 10) ? '0' + hours : hours}:${(minutes < 10) ? '0' + minutes : minutes} ${typeTime}`;
+          let startTime = workingTime.startTime / 3600;
+          let typeTime = (startTime > 12) ? "PM" : "AM";
+          startTime = (startTime > 12) ? startTime - 12 : startTime;
+          var timeInMinutes = startTime * 60,
+            hours = Math.floor(timeInMinutes / 60),
+            minutes = Math.round(timeInMinutes - (hours * 60));
+          this.workingTime = `${(hours < 10) ? '0' + hours : hours}:${(minutes < 10) ? '0' + minutes : minutes} ${typeTime}`;
+        }
+       
       }
 
       this.primaryContact = primaryContact;
