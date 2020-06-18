@@ -62,8 +62,8 @@
   </div>
 
   <div class="d-f" *ngIf="!showAddUpdateUser">
-    <div class="qt-btn --btn40h --outline-blue update-ticket-btn" [ngClass]="{'--loading':isUpdate}" (click)="update()" ><span>Update</span> <app-preloader-ticket *ngIf="isUpdate"></app-preloader-ticket></div>
+    <div class="qt-btn --btn40h --outline-blue update-ticket-btn" [ngClass]="{'--loading':isUpdate}" appDisabledBtn #updateBtn="disabled" (onClick)="update()" ><span>Update</span> <app-preloader-ticket *ngIf="isUpdate"></app-preloader-ticket></div>
 
-    <div class="qt-btn --btn40h" placement="top" ngbTooltip="You cannot close the ticket. It contains incomplete products / services." [disableTooltip]="checkUpdateAndClose()" (click)="updateAndClose()" [ngClass]="{'disabled':!checkUpdateAndClose(), '--loading':isUpdateAndClose}"><span>Update & Close</span><app-preloader-ticket *ngIf="isUpdateAndClose"></app-preloader-ticket></div>
+    <div class="qt-btn --btn40h" placement="top" ngbTooltip="You cannot close the ticket. It contains incomplete products / services." [disableTooltip]="checkUpdateAndClose()" appDisabledBtn #update_closeBtn="disabled" (onClick)="updateAndClose()"  [ngClass]="{'disabled':!checkUpdateAndClose(), '--loading':isUpdateAndClose}"><span>Update & Close</span><app-preloader-ticket *ngIf="isUpdateAndClose"></app-preloader-ticket></div>
   </div>
 </div>

@@ -10,6 +10,7 @@ import { TicketProfileFormUpdateProductsComponent } from './ticket-profile-form-
 import { TicketProfileFormUpdateServicesComponent } from './ticket-profile-form-update-services/ticket-profile-form-update-services.component';
 import { NotificationStateService } from 'src/ng2/app/components/shared/notification/services/notification-state.service';
 import { ErrorNotificationStateService } from 'src/ng2/app/components/shared/error-notification/services/error-notification-state.service';
+import { DisabledBtnDirective } from 'src/ng2/app/directives/disabled-btn.directive';
 
 @Component({
   selector: 'app-ticket-profile-form-update',
@@ -22,6 +23,8 @@ export class TicketProfileFormUpdateComponent implements OnInit {
   ticketProfile: TicketProfile = new TicketProfile();
   ticketProfileFormUpdate: TicketProfileFormUpdate = new TicketProfileFormUpdate();
   @ViewChild('selectProducts') selectProducts: TicketProfileFormUpdateProductsComponent;
+  @ViewChild('update_closeBtn') update_closeBtn: DisabledBtnDirective;
+  @ViewChild('updateBtn') updateBtn: DisabledBtnDirective;
   @ViewChild('selectServices') selectServices: TicketProfileFormUpdateServicesComponent;
   @Input() lisUpdateUser: Array<CurrentUser> = [];
   @Input() set ticket(value) {
@@ -98,6 +101,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
 
   }
   onUpdateTicket(data) {
+    this.updateBtn.setDisabled(true);
     this.isUpdate = true;
     this.ticketsService.updateTicket(data).subscribe(data => {
       this.isUpdate = false;
@@ -111,11 +115,14 @@ export class TicketProfileFormUpdateComponent implements OnInit {
       this.notificationStateService.oninitShowNotification(`Update has been added`);
       this.files = [];
       this.ticketProfileFormUpdate.clearAttachments();
+      this.updateBtn.setDisabled(false);
     },err => {
       this.isUpdate = false;
+      this.updateBtn.setDisabled(false);
     })
   }
   updateAndClose() {
+    console.log("updateAndClose");
     if (!this.checkUpdateAndClose()) return;
     if (this.tab === "NOTE") {
       if (this.ticketProfileFormUpdate.isValidateNote()) {
@@ -143,6 +150,8 @@ export class TicketProfileFormUpdateComponent implements OnInit {
     }
   }
   onUpdateTicketAndClose(data) {
+    console.log("this.update_closeBtn",this.update_closeBtn);
+    this.update_closeBtn.setDisabled(true);
     this.isUpdateAndClose = true;
     this.ticketsService.updateTicket(data, true).subscribe(data => {
       this.isUpdateAndClose = false;
@@ -157,9 +166,11 @@ export class TicketProfileFormUpdateComponent implements OnInit {
       this.files = [];
       this.ticketProfileFormUpdate.clearAttachments();
       this.onClosed.emit(null);
+      this.update_closeBtn.setDisabled(false);
     }, err => {
       this.isUpdateAndClose = false;
       this.errorNotificationStateService.oninitShowNotification(err.error.message);
+      this.update_closeBtn.setDisabled(false);
     })
   }
   private checkUpdateAndClose() {
