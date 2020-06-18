@@ -18,6 +18,7 @@ export class BillableComponent implements OnInit {
   new CompanyFilterTop('countTickets', ''),
   new CompanyFilterTop('salesPerson', ''),
   new CompanyFilterTop('total', '')];
+  showPreloader:boolean = true;
   constructor(private billableService: BillableService,
     private companiesStateService:CompaniesStateService,
     public ticketsListService: TicketsListService,
@@ -34,6 +35,7 @@ export class BillableComponent implements OnInit {
         
       }
       this.onFilterName();
+      this.showPreloader = false;
       console.log("this.list",this.list);
     })
   }

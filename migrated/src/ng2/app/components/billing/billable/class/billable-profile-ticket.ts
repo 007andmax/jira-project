@@ -16,7 +16,10 @@ export class BillableProfileTicket {
     sum: number;
     taxSum: number;
     ticketNumber: string;
-    constructor() {
-      
+    selected:boolean = false;
+    constructor(data) {
+        for (const key in data) {
+            this[key] = data[key];
+        }
     }
 }

@@ -249,8 +249,8 @@ import { ServicePipe } from './pipe/service.pipe';
 import { LeftPanelSettingsComponent } from './components/left-panel/left-panel-settings/left-panel-settings.component';
 import { BillableComponent } from './components/billing/billable/billable.component';
 import { BillableItemComponent } from './components/billing/billable/billable-item/billable-item.component';
-import { BillableItemListComponent } from './components/billing/billable/billable-item-list/billable-item-list.component';
- 
+import { BillableTicketsComponent } from './components/billing/billable/billable-tickets/billable-tickets.component';
+
 
 
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
@@ -258,7 +258,7 @@ import { BillableItemListComponent } from './components/billing/billable/billabl
 declare var angular: any;
 declare var $: any;
 export class CustomHandlingStrategy implements UrlHandlingStrategy {
-  constructor() {}
+  constructor() { }
   shouldProcessUrl(url) {
     return url.toString().startsWith('/ng2') || url.toString() == '/';
   }
@@ -281,9 +281,9 @@ angular.module('quicktech')
   .directive(
     'companyUser',
     downgradeComponent({ component: CompanyUserComponent }))
-    .directive(
-      'companyTickets',
-      downgradeComponent({ component: CompanyTicketsComponent }))
+  .directive(
+    'companyTickets',
+    downgradeComponent({ component: CompanyTicketsComponent }))
   .directive(
     'leftPanelComponent',
     downgradeComponent({ component: LeftPanelComponent }))
@@ -304,7 +304,7 @@ angular.module('quicktech')
     downgradeComponent({ component: CompaniesComponent }))
   .directive(
     'usersComponent',
-    downgradeComponent({component: UsersComponent}))
+    downgradeComponent({ component: UsersComponent }))
   .directive(
     'passwordManager',
     downgradeComponent({ component: PasswordManagerComponent })
@@ -382,10 +382,13 @@ angular.module('quicktech')
   .directive(
     'ticketsComponent',
     downgradeComponent({ component: TicketsComponent }))
-    .directive(
-      'billableComponent',
-      downgradeComponent({ component: BillableComponent }))
-    .directive(
+  .directive(
+    'billableComponent',
+    downgradeComponent({ component: BillableComponent }))
+  .directive(
+    'billableTicketsComponent',
+    downgradeComponent({ component: BillableTicketsComponent }))
+  .directive(
     'inventoryComponent',
     downgradeComponent({ component: InventoryComponent }))
   .directive(
@@ -618,8 +621,7 @@ angular.module('quicktech')
     BillableComponent,
 
     BillableItemComponent,
-
-    BillableItemListComponent,
+    BillableTicketsComponent,
   ],
   imports: [
     BrowserModule,
@@ -642,7 +644,7 @@ angular.module('quicktech')
     AppRoutingModule,
     ImageCropperModule,
     DataTablesModule,
-    NgSelectModule ,
+    NgSelectModule,
     SelectDropDownModule,
     TabsModule.forRoot(),
     ModalModule.forRoot(),
@@ -690,10 +692,11 @@ angular.module('quicktech')
     InventoryComponent,
     CompanyProductsComponent,
     ModalCustomShareScreenComponent,
-    BillableComponent
+    BillableComponent,
+    BillableTicketsComponent
     // RecurringTicketsComponent
   ],
-  exports:[
+  exports: [
     PhonePipe,
     OrderByPipe,
 

@@ -1,0 +1,73 @@
+<div class="page-list page-list-billable" >
+
+  <div class="qt-list-header sticky-list-header">
+    <div class="d-f ai-c">
+     <div class="page-list__back-button icon__collapse-arrow button-icon pointer" (click)="back()"></div> <h3 class="list-title" [textContent]="billableProfile.name"></h3>
+    </div>
+
+    <div class="d-f ai-c">
+        <button class="qt-btn --outline-blue">Create Invoice</button>
+    </div>
+  </div>
+
+  <div class="sticky-list-table-header">
+    <table class="qt-table-modern">
+      <thead>
+        <tr>
+          <th class="billable-item-table__check">
+            <div class="d-f">
+              <label class="qt-checkbox">
+                <input type="checkbox" (change)="onToggleAll($event)">
+                <span></span>
+              </label>
+            </div>
+          </th>
+          <th class="billable-item-table__date">
+            Date
+            <span class="qt-table-modern__sorting"></span>
+          </th>
+          <th class="billable-item-table__ticket">
+            Ticket#
+            <span class="qt-table-modern__sorting"></span>
+          </th>
+          <th class="billable-item-table__subject">
+            Ticket Subject
+            <span class="qt-table-modern__sorting"></span>
+          </th>
+          <th class="billable-item-table__amount">
+            Amount
+            <span class="qt-table-modern__sorting"></span>
+          </th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+
+  <div class="table-container">
+    <table class="qt-table-modern billable-item-table">
+      <tbody>
+
+        <ng-template ngFor let-item
+        [ngForOf]="billableProfile.tickets" let-i="index"
+        [ngForTrackBy]="trackById">
+     
+        <tr [ngClass]="{'--selected': item.selected}">
+          <td class="billable-item-table__check">
+            <div class="d-f">
+              <label class="qt-checkbox" [attr.for]="'ticket-' + i">
+                <input [attr.id]="'ticket-' + i"  [(ngModel)]="item.selected"  type="checkbox">
+                <span ></span>
+              </label>
+            </div>
+          </td>
+          <td class="billable-item-table__date">03 Sep 2020</td>
+          <td class="billable-item-table__ticket" [textContent]="item.ticketNumber"></td>
+          <td class="billable-item-table__subject" [textContent]="item.subject"></td>
+          <td class="billable-item-table__amount" [textContent]="item.sum | currency"></td>
+        </tr>
+      </ng-template>
+      </tbody>
+    </table>
+  </div>
+
+</div>
