@@ -26,13 +26,13 @@ export class TicketMessageComponent implements OnInit {
   @Output() onRestoreFromSpam = new EventEmitter();
   @Output() onMoveToTrash = new EventEmitter();
   currentUser: CurrentUser;
-  isClaimTicket:boolean = false;
-  isMarkAsOpen:boolean = false;
+  isClaimTicket: boolean = false;
+  isMarkAsOpen: boolean = false;
   constructor(public ticketsPermissionsService: TicketsPermissionsService,
     private usersStateService: UsersStateService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
-    private permissionsService: PermissionsService, ) { }
+    private permissionsService: PermissionsService,) { }
 
   ngOnInit() {
     this.currentUser = this.usersStateService.getCurrentUser();
@@ -50,8 +50,8 @@ export class TicketMessageComponent implements OnInit {
   }
   markAsOpen() {
     this.isMarkAsOpen = true;
-    this.markAsOpenBillableBtn.setDisabled(true);
-    this.markAsOpenBtn.setDisabled(true);
+    if (this.markAsOpenBillableBtn) this.markAsOpenBillableBtn.setDisabled(true);
+    if (this.markAsOpenBtn) this.markAsOpenBtn.setDisabled(true);
     this.onOpenTicket.emit(null);
   }
   deleteForever() {
