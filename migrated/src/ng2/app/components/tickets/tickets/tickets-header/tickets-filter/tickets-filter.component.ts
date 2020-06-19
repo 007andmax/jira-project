@@ -23,7 +23,7 @@ export class TicketsFilterComponent implements OnInit {
   @ViewChild('companyDp') companyDp: SelectSearchComponent;
   @ViewChild('techUsersDp') techUsersDp: SelectSearchComponent;
   @ViewChild('statusDp') statusDp: SelectSearchComponent;
-  ticketsFilter: TicketsFilter = new TicketsFilter();
+  public ticketsFilter: TicketsFilter = new TicketsFilter();
   listType: string = "USERS";
   selectedCompany: Company = null;
   selectedTechUser: string = null;
@@ -115,7 +115,7 @@ export class TicketsFilterComponent implements OnInit {
     this.ticketsStateService.onChangeLeftPanelFilter(this.listType);
   }
 
-  private onChangeCounterFilter() {
+  public onChangeCounterFilter() {
     let count = 0;
     if (this.ticketsFilter.selectedCompany) count ++;
     if (this.ticketsFilter.selectedTechUser) count ++;
@@ -135,6 +135,10 @@ export class TicketsFilterComponent implements OnInit {
   private getClientsList(data) {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+  }
+  public setTypeFilterWithoutChange(type) {
+    this.listType = type;
+    this.ticketsFilter.setListType(type);
   }
   setTypeFilter(type) {
     this.listType = type;

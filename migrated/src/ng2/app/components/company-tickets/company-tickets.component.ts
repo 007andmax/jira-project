@@ -19,7 +19,6 @@ import { LeftPanelService } from '../../services/left-panel/left-panel.service';
   providers: [TicketsListService]
 })
 export class CompanyTicketsComponent implements OnInit, OnDestroy {
-@ViewChild('header') header:TicketsHeaderComponent;
   ticketsFilter: TicketsFilter = new TicketsFilter();
   showPreloader: boolean = true;
   public infiniteScrollDisabled = true;
@@ -30,15 +29,16 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
   statusColor: TicketsColor;
   offset: number = 15;
   showPendingPreloader: boolean = false;
+  @ViewChild('header') header: TicketsHeaderComponent;
   constructor(private ticketsService: TicketsService,
     private ticketsListService: TicketsListService,
     public cd: ChangeDetectorRef,
-    private leftPanelService:LeftPanelService,
+    private leftPanelService: LeftPanelService,
     private companiesStateService: CompaniesStateService,
     private ticketsStateService: TicketsStateService) { }
 
   ngOnInit() {
-    
+
     this.leftPanelService.getColors().subscribe((data: any) => {
 
       let listColors = data.map(item => {
@@ -74,6 +74,15 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
       if (findIndex > -1) this.tickets.splice(findIndex, 1);
     });
 
+    let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
+      this.ticketsFilter = data;
+      this.showPreloader = true;
+      window.scrollTo(0, 0);
+      this.setDefaultScoll();
+      this.onScroll();
+    })
+    this.sub.add(getOnInitFilter);
+
     this.ticketsStateService.getOnInitColor().subscribe(data => {
       this.listColors = data;
     })
@@ -84,6 +93,10 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     if (localStorage.getItem('company_id')) {
       let ticket_id = localStorage.getItem('company_id');
       let company = this.companiesStateService.getCompanies().find(item => item.id === ticket_id);
+      this.header.filter.setTypeFilterWithoutChange("ALL");
+      this.header.filter.companyDp.editItem = company;
+      this.header.filter.ticketsFilter.setCompany(company);
+      this.header.filter.onChangeCounterFilter();
       this.ticketsFilter.setListType("ALL");
       this.ticketsFilter.setCompany(company);
 
