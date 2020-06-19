@@ -48,7 +48,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
   ngOnInit() {
     this.currentUser = this.usersStateService.getCurrentUser();
   }
-  private addCreatedUser() {
+  public addCreatedUser() {
     if (!this.ticketProfile.createdUser) return;
     let find = this.lisUpdateUser.find(item => item.id === this.ticketProfile.createdUser.id);
     if (!find) this.lisUpdateUser.unshift(this.ticketProfile.createdUser);
