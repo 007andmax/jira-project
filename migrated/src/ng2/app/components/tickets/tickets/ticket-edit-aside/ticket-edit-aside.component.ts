@@ -153,9 +153,9 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     this.lisUpdateUser = this.ticketProfile.updates.map(item => item.user);
     this.lisUpdateUser = [...this.listAssignedUser, ...this.lisUpdateUser]
     this.lisUpdateUser = this.lisUpdateUser.filter((item, index) => this.lisUpdateUser.findIndex(user => user.id === item.id) === index);
-    if (this.ticketProfile.createdUser && this.ticketProfile.createdUser.id) {
+    if (this.ticketProfile.createdUser) {
       let find = this.lisUpdateUser.find(item => item.id === this.ticketProfile.createdUser.id);
-      if (!find) this.lisUpdateUser.unshift(find);
+      if (!find) this.lisUpdateUser.unshift(this.ticketProfile.createdUser);
     }
     console.log("lisUpdateUser",this.lisUpdateUser);
   }

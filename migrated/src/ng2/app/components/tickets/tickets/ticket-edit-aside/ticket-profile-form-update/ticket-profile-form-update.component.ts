@@ -48,10 +48,14 @@ export class TicketProfileFormUpdateComponent implements OnInit {
   ngOnInit() {
     this.currentUser = this.usersStateService.getCurrentUser();
   }
-  public addCreatedUser() {
-    if (!this.ticketProfile.createdUser) return;
-    let find = this.lisUpdateUser.find(item => item.id === this.ticketProfile.createdUser.id);
-    if (!find) this.lisUpdateUser.unshift(this.ticketProfile.createdUser);
+  private addCreatedUser() {
+    console.log("this.ticketProfile",this.ticketProfile);
+    console.log("this.lisUpdateUser",this.lisUpdateUser);
+    if (this.ticketProfile.createdUser) {
+      let find = this.lisUpdateUser.find(item => item.id === this.ticketProfile.createdUser.id);
+      if (!find) this.lisUpdateUser.unshift(this.ticketProfile.createdUser);
+    }
+   
   }
   public onChangeChat(event) {
     this.ticketProfileFormUpdate.setChatMessage(event.target.value.replace(/\n/g, '<br/>'));

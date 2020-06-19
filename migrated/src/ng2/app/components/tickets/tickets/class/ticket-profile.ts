@@ -64,7 +64,7 @@ export class TicketProfile {
             this.attachments = data.attachments.map(item => {
                 return new TicketProfileAttachment(item);
             })
-            this.createdUser = new CurrentUser(data.createdUser);
+            this.createdUser = (data.createdUser) ?  new CurrentUser(data.createdUser) : null;
             this.multiAssignedUsers = data.multiAssignedUsers.map(item => {
                 return new CurrentUser(item);
             })
