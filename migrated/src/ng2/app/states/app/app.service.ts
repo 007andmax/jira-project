@@ -5,8 +5,22 @@ import * as $ from 'jquery';
 })
 export class AppService {
   isMobile: boolean = false;
+  isInit:boolean = false;
   onMobile: EventEmitter<any> = new EventEmitter();
+  init: EventEmitter<any> = new EventEmitter();
+
   constructor() { }
+  public onInit () {
+    this.isInit = true;
+    this.init.emit(null);
+   
+  }
+  public getOnInit() {
+    return this.init;
+  }
+  public getIsInit() {
+    return this.isInit;
+  }
   public checkMobile() {
     return this.isMobile;
   }

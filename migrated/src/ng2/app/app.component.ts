@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 // @ts-ignore
 import { UpgradeModule } from "@angular/upgrade/static";
 import { setUpLocationSync } from '@angular/router/upgrade';
@@ -13,7 +13,7 @@ import { GlNumberStateService } from './states/gl-number/gl-number-state.service
 import { InventoryStateService } from './states/inventory/inventory-state.service';
 import { TicketsStateService } from './states/tickets/tickets-state.service';
 import { ConstantsStateService } from './states/constants/constants-state.service';
-
+ 
 
 /**
  * Root component
@@ -24,7 +24,11 @@ import { ConstantsStateService } from './states/constants/constants-state.servic
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-
+  showPreloader:boolean = true;
+  isUsersInit:boolean = false;
+  isCompaniesInit:boolean = false;
+  isDevicesInit:boolean = false;
+  
   /**
    * Creates an instance of the MainComponent with the injected services
    * @param {UpgradeModule} upgrade service
@@ -43,7 +47,8 @@ export class AppComponent implements OnInit {
     private glNumberStateService:GlNumberStateService,
     private inventoryStateService:InventoryStateService,
     private ticketsStateService:TicketsStateService,
-    private constantsStateService:ConstantsStateService
+    private constantsStateService:ConstantsStateService,
+    public cd: ChangeDetectorRef,
 
   ) { }
 
@@ -67,6 +72,28 @@ export class AppComponent implements OnInit {
     this.websocketService.initializeWebSocketConnection();
     this.appService.onCheckMobile();
     window.addEventListener('resize', this.appService.onCheckMobile);
+
+    this.devicesState.getOnDevices().subscribe(data => {
+      this.isDevicesInit = true;
+      this.onCheckInitAll();
+    })
+    this.usersStateService.getOnUsers().subscribe(data => {
+      this.isUsersInit = true;
+      this.onCheckInitAll();
+    })
+    this.companiesState.getOnCompanies().subscribe(data => {
+      this.isCompaniesInit = true;
+      this.onCheckInitAll();
+
+    })
+
+  }
+  private onCheckInitAll() {
+    if (this.isCompaniesInit && this.isDevicesInit && this.isUsersInit) {
+      this.appService.onInit();
+      this.showPreloader = false;
+      this.cd.detectChanges();
+    }
 
   }
   
