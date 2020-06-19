@@ -22,19 +22,19 @@
               </label>
             </div>
           </th>
-          <th class="billable-item-table__date">
+          <th class="billable-item-table__date" (click)="onFilter('closedAt')">
             Date
             <span class="qt-table-modern__sorting"></span>
           </th>
-          <th class="billable-item-table__ticket">
+          <th class="billable-item-table__ticket" (click)="onFilter('ticketNumber')">
             Ticket#
             <span class="qt-table-modern__sorting"></span>
           </th>
-          <th class="billable-item-table__subject">
+          <th class="billable-item-table__subject" (click)="onFilter('subject')">
             Ticket Subject
             <span class="qt-table-modern__sorting"></span>
           </th>
-          <th class="billable-item-table__amount">
+          <th class="billable-item-table__amount" (click)="onFilter('sum')">
             Amount
             <span class="qt-table-modern__sorting"></span>
           </th>
@@ -60,7 +60,7 @@
               </label>
             </div>
           </td>
-          <td class="billable-item-table__date">03 Sep 2020</td>
+          <td class="billable-item-table__date" [textContent]="getDate(item.closedAt)"></td>
           <td class="billable-item-table__ticket" [textContent]="item.ticketNumber"></td>
           <td class="billable-item-table__subject" [textContent]="item.subject"></td>
           <td class="billable-item-table__amount" [textContent]="item.sum | currency"></td>
