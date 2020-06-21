@@ -1,19 +1,19 @@
 <div class="left-panel-ng2__content--filters">
-  <app-select-search  #companyDp  [placeholder]="'Select Company'"
+  <app-select-search class="search-company"  #companyDp  [placeholder]="'Select Company'"
     [change]="false" [class]="['qt-dropdown']" [field]="'name'" [list]="companies"
     (onSelectedItem)="onSelectCompany($event)"></app-select-search>
 
 
-  <app-select-search   #usersDp [placeholder]="'Select User'"
+  <app-select-search  class="search-users"   #usersDp [placeholder]="'Select User'"
     [change]="false" [class]="['qt-dropdown']"  [list]="getUserList()"
     (onSelectedItem)="onSelectUser($event)"></app-select-search>
 
 
-  <app-select-search  #techUsersDp [placeholder]="'Select Tech User'"
+  <app-select-search class="search-tech-users"  #techUsersDp [placeholder]="'Select Tech User'"
     [change]="false" [class]="['qt-dropdown']"  [list]="getTechUserList()"
     (onSelectedItem)="onSelectTechUser($event)"></app-select-search>
 
-    <app-select-search  #statusDp  [placeholder]="'Select by Status'"
+    <app-select-search  class="search-status"  #statusDp  [placeholder]="'Select by Status'"
     [change]="false" [class]="['qt-dropdown']" [list]="listsStatus" [field]="'title'"
     (onSelectedItem)="onSelectStatus($event)"></app-select-search>
 </div>

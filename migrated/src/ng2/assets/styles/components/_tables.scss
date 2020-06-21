@@ -14,7 +14,9 @@ table.qt-table-modern {
 
     td {
       background: #ffffff;
-      padding: 11px 16px 12px 16px;
+      // padding: 11px 16px 12px 16px;
+      padding: 0px 16px 0px 16px;
+      height: 48px;
       &:last-child {
         border-top-right-radius: 8px;
         border-bottom-right-radius: 8px;
@@ -41,8 +43,19 @@ table.qt-table-modern {
       display: flex;
       font-size: 10px;
       font-weight: 700;
+      &.transparent-text:before {
+        content: '.';
+        color: transparent;
+        position: relative;
+      }
     }
     .--strong {
       font-weight: 600;
     }
+}
+
+
+
+.h100 {
+  height: 100%;
 }

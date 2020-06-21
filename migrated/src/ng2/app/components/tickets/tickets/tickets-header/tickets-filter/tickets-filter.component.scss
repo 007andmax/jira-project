@@ -1,0 +1,26 @@
+.left-panel-ng2__content--filters {
+  display: flex;
+  app-select-search {
+    margin-right: 8px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .search-company {
+    width: 34%;
+  }
+
+  .search-users {
+    width: 23%;
+  }
+
+  .search-tech-users {
+    width: 23%;
+  }
+
+  .search-status {
+    width: 20%;
+  }
+
+}

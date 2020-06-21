@@ -5,7 +5,7 @@
 .tickets-list-header {
   position: sticky;
   top: 78px;
-  padding: 24px 0 0 14px;
+  padding: 24px 0 0 0;
   background-color: #edf2f6;
   margin: 0 auto;
   max-width: 1320px;
@@ -17,9 +17,20 @@
   position: sticky;
   top: 166px;
   background-color: #edf2f6;
-  overflow: auto;
+  // overflow: auto;
   max-width: 1320px;
   margin: 0 auto;
+}
+
+.btn-mr-8 {
+  margin-right: 8px;
+}
+
+.filter-button {
+  padding-left: 30px;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  background-size: 16px;
 }
 
 
