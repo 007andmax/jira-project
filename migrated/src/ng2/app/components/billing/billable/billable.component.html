@@ -36,8 +36,8 @@
     </table>
   </div>
 
-  <div class="table-container">
-    <table class="qt-table-modern billable-table">
+  <div class="table-container"  >
+    <table class="qt-table-modern billable-table" *ngIf="!showPreloader">
       <tbody>
         <ng-template ngFor let-item
         [ngForOf]="list"
@@ -47,6 +47,7 @@
 
       </tbody>
     </table>
+    <div class="loading" *ngIf="showPreloader"></div>
   </div>
 
 

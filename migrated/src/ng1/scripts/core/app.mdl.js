@@ -151,6 +151,10 @@
           url: '/ng2/billable',
           template: '<billable-component></billable-component>'
         }))
+        .state('new-billable-tickets', waitForServices({
+          url: '/ng2/billable-tickets',
+          template: '<billable-tickets-component></billable-tickets-component>'
+        }))
         .state('new-reports', waitForServices({
           url: '/ng2/reports',
           template: '<reports-component></reports-component>'

@@ -9,7 +9,9 @@ export class BillableProfile {
     total:number = 0;
     constructor(id,tickets,name,salesPerson) {
         this.id = id;
-        this.tickets = tickets;
+        this.tickets = tickets.map(item => {
+            return new BillableProfileTicket(item);
+        });
         this.name = (name) ? name : '';
         this.countTickets = this.tickets.length;
         this.tickets.forEach(item => {

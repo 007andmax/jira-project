@@ -5,6 +5,7 @@ import { CompanyFilterTop } from '../../companies/class/copany-filter-top';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
+import { AppService } from 'src/ng2/app/states/app/app.service';
 
 @Component({
   selector: 'billable',
@@ -18,23 +19,35 @@ export class BillableComponent implements OnInit {
   new CompanyFilterTop('countTickets', ''),
   new CompanyFilterTop('salesPerson', ''),
   new CompanyFilterTop('total', '')];
+  showPreloader: boolean = true;
   constructor(private billableService: BillableService,
-    private companiesStateService:CompaniesStateService,
+    private companiesStateService: CompaniesStateService,
     public ticketsListService: TicketsListService,
     public cd: ChangeDetectorRef,
-    private usersStateService:UsersStateService) { }
+    private appService: AppService,
+    private usersStateService: UsersStateService) { }
 
   ngOnInit() {
+    if (this.appService.getIsInit()) this.getList();
+    this.appService.getOnInit().subscribe(data => {
+      this.getList();
+    })
+
+  }
+  private getList() {
     this.billableService.getBillable().subscribe(data => {
       //  console.log("data",data);
       for (const key in data) {
         let company = this.companiesStateService.getCompanies().find(item => item.id === key);
-        let salesPerson = this.usersStateService.getAllUsers().find(item => item.id ===  company.techLeadId);
-        this.list.push(new BillableProfile(key, data[key].tickets,company.name,this.ticketsListService.getUserName(salesPerson)));
-        
+
+        let salesPerson = this.usersStateService.getAllUsers().find(item => item.id === company.techLeadId);
+        this.list.push(new BillableProfile(key, data[key].tickets, company.name, this.ticketsListService.getUserName(salesPerson)));
+
+
       }
       this.onFilterName();
-      console.log("this.list",this.list);
+      this.showPreloader = false;
+      console.log("this.list", this.list);
     })
   }
   onFilter(field) {
@@ -43,7 +56,7 @@ export class BillableComponent implements OnInit {
     if (index > -1) {
       let sort = this.filter[index].filter;
       if (field === 'name') {
-      if (sort === '') this.clearFilter();
+        if (sort === '') this.clearFilter();
         if (sort === '' || sort === 'DESC') {
           this.filter[index].filter = 'ASC';
           this.onFilterName();
@@ -93,7 +106,7 @@ export class BillableComponent implements OnInit {
 
 
       }
-      
+
     }
     this.cd.detectChanges();
   }
