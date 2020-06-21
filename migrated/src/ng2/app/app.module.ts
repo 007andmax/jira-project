@@ -250,6 +250,8 @@ import { LeftPanelSettingsComponent } from './components/left-panel/left-panel-s
 import { BillableComponent } from './components/billing/billable/billable.component';
 import { BillableItemComponent } from './components/billing/billable/billable-item/billable-item.component';
 import { BillableItemListComponent } from './components/billing/billable/billable-item-list/billable-item-list.component';
+import { BillableAsideComponent } from './components/billing/billable/billable-aside/billable-aside.component';
+import { InvoiceFormComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-form.component';
  
 
 
@@ -620,6 +622,10 @@ angular.module('quicktech')
     BillableItemComponent,
 
     BillableItemListComponent,
+
+    BillableAsideComponent,
+
+    InvoiceFormComponent,
   ],
   imports: [
     BrowserModule,

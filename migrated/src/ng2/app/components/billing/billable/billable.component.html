@@ -1,4 +1,4 @@
-<div class="page-list page-list-billable" [hidden]="listType === 'RECURRING_TICKETS'">
+<div class="page-list page-list-billable billing-page" [hidden]="listType === 'RECURRING_TICKETS'">
 
   <div class="qt-list-header sticky-list-header">
     <div>
@@ -49,8 +49,10 @@
     </table>
   </div>
 
-</div>
 
+  <app-billable-aside></app-billable-aside>
+
+</div>
 
 
 <!-- <app-billable-item-list></app-billable-item-list> -->
