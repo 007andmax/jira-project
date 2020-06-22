@@ -28,6 +28,7 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
   @Output() onClosedDropDown = new EventEmitter<any>();
   @Input() valid: boolean = true;
   @Input() filter: boolean = false;
+  @Input() isDisabled: boolean = false;
   public selectedItem;
   public isAdd: boolean = false;
   private isOpen:boolean = false;

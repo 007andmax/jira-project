@@ -94,6 +94,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
       let ticket_id = localStorage.getItem('company_id');
       let company = this.companiesStateService.getCompanies().find(item => item.id === ticket_id);
       this.header.filter.setTypeFilterWithoutChange("ALL");
+      this.header.filter.companyDp.isDisabled = true;
       this.header.filter.companyDp.editItem = company;
       this.header.filter.ticketsFilter.setCompany(company);
       this.header.filter.onChangeCounterFilter();

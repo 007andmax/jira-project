@@ -48,7 +48,7 @@ export class TicketsFilterComponent implements OnInit {
     public cd: ChangeDetectorRef,
     private leftPanelService: LeftPanelService) { }
 
-  
+
   ngOnInit() {
 
     this.ticketsStateService.getOnChangeTypeFilter().subscribe(type => {
@@ -67,7 +67,7 @@ export class TicketsFilterComponent implements OnInit {
       this.onGetTechUsers(data);
     })
 
-  
+
     if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
     let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
 
@@ -87,40 +87,39 @@ export class TicketsFilterComponent implements OnInit {
       let ticketsColor = new TicketsColor(data);
       this.ticketsStateService.onInitStatus(ticketsColor);
     })
-//    this.getCounts();
+    //    this.getCounts();
 
     this.ticketsStateService.getOnUpdateCounts().subscribe(data => {
       this.ticketsCounts = new TicketsCounts(data);
       this.ticketsStateService.onInitCount(this.ticketsCounts[(this.listType === 'USERS') ? 'USER' : this.listType]);
       this.cd.detectChanges();
     })
-   
-  }
- public onClearAll() {
 
-    this.ticketsFilter.setCompany(null);
+  }
+  public onClearAll() {
+
+    if (!this.companyDp.isDisabled) this.ticketsFilter.setCompany(null);
     this.ticketsFilter.setTechUser(null);
     this.ticketsFilter.setUser(null);
     this.ticketsFilter.setStatus(null);
     this.usersDp.clearWithOutChanges();
-    this.companyDp.clearWithOutChanges();
+    if (!this.companyDp.isDisabled) this.companyDp.clearWithOutChanges();
     this.techUsersDp.clearWithOutChanges();
     this.statusDp.clearWithOutChanges();
 
     this.listType = "ALL";
     this.ticketsFilter.setListType("ALL");
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
-    this.changeCountFilter.emit(0);
-    this.getCount();
+    this.onChangeCounterFilter();
     this.ticketsStateService.onChangeLeftPanelFilter(this.listType);
   }
 
   public onChangeCounterFilter() {
     let count = 0;
-    if (this.ticketsFilter.selectedCompany) count ++;
-    if (this.ticketsFilter.selectedTechUser) count ++;
-    if (this.ticketsFilter.selectedUser) count ++;
-    if (this.ticketsFilter.selectedStatus) count ++;
+    if (this.ticketsFilter.selectedCompany) count++;
+    if (this.ticketsFilter.selectedTechUser) count++;
+    if (this.ticketsFilter.selectedUser) count++;
+    if (this.ticketsFilter.selectedStatus) count++;
     this.changeCountFilter.emit(count);
   }
   private getCount() {
@@ -131,7 +130,7 @@ export class TicketsFilterComponent implements OnInit {
   getCountByField(field) {
     return (this.ticketsCounts) ? this.ticketsCounts[field] : 0;
   }
-  
+
   private getClientsList(data) {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
@@ -175,7 +174,7 @@ export class TicketsFilterComponent implements OnInit {
       this.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.company.id === item.id));
       //  this.filter.setCompany(item.id);
       //  this.usersStateService.onInitFilter(this.filter);
-     
+
     }
 
 
@@ -194,7 +193,7 @@ export class TicketsFilterComponent implements OnInit {
       //  this.usersStateService.onInitFilter(this.filter);
       let indexTechUser = this.techUsersList.findIndex(user => `${user.firstName} ${user.lastName}` === item);
       if (indexTechUser > -1) this.ticketsFilter.setTechUser(this.techUsersList[indexTechUser]);
-     
+
     }
 
     this.ticketsStateService.onInitFilter(this.ticketsFilter);
@@ -225,7 +224,7 @@ export class TicketsFilterComponent implements OnInit {
       //  this.usersStateService.onInitFilter(this.filter);
       let indexhUser = this.users.findIndex(user => `${user.firstName} ${user.lastName}` === item);
       if (indexhUser > -1) this.ticketsFilter.setUser(this.users[indexhUser]);
-      
+
     }
     if (!this.blockFilterUser) {
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
@@ -234,10 +233,10 @@ export class TicketsFilterComponent implements OnInit {
     this.blockFilterUser = false;
     this.onChangeCounterFilter();
   }
- 
+
   onChangeTags(tags) {
     this.ticketsStateService.onChangeTagsFilter(tags);
-   
+
   }
   getTechUserList() {
     return this.techUsersList.map(item => {
@@ -252,7 +251,7 @@ export class TicketsFilterComponent implements OnInit {
       1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
   }
 
-  
+
   public trackByIndex(index, item) {
     return index;
   }
