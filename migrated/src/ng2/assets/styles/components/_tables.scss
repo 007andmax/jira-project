@@ -58,8 +58,19 @@ table.qt-table-modern {
       display: flex;
       font-size: 10px;
       font-weight: 700;
+      &.transparent-text:before {
+        content: '.';
+        color: transparent;
+        position: relative;
+      }
     }
     .--strong {
       font-weight: 600;
     }
+}
+
+
+
+.h100 {
+  height: 100%;
 }

@@ -7,12 +7,16 @@
     <span class="qt-input-search" [hidden]="true">
       <input class="qt-input-search tickets-list-search" placeholder="Search Tickets…" type="text" title="Ticket Search" name="ticket_search">
     </span>
-
+    <button class="qt-btn --outline-blue btn-mr-8" (click)="clearAll()" *ngIf="countFilter > 0">Clear all</button>
+    <button class="qt-btn filter-button icon__filter-active --light-blue btn-mr-8 d-f" [ngClass]="{'active':!toggleFilter}" (click)="toggleFilter = !toggleFilter" [textContent]="getTextCountFilters()"></button>
     <button class="qt-btn --outline-blue" (click)="onAddTicket()">Add ticket</button>
   </div>
 </div>
 
 <div class="tickets-list-table-header">
+
+  <app-tickets-filter #filter (changeCountFilter)="onChangeCountFilter($event)" [hidden]="toggleFilter"></app-tickets-filter>
+
   <table class="qt-table-modern">
     <thead>
         <tr>

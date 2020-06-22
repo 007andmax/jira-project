@@ -1,17 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { TicketsFilter } from '../../tickets/tickets/class/tickets-filter';
 import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.service';
-import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { LeftPanelService } from 'src/ng2/app/services/left-panel/left-panel.service';
-import { TehUsersService } from 'src/ng2/app/services/teh-users/teh-users.service';
-import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
-import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { SelectSearchComponent } from '../../shared/select-search/select-search.component';
 import { StatusColor } from './tickets-status/class/status-color';
 import { TicketsColor } from './tickets-status/class/tickets-color';
 import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 import { TicketsCounts } from '../../tickets/tickets/class/tickets-counts';
-import { Company } from 'src/ng2/app/interfaces/company/company';
 
 @Component({
   selector: 'app-left-panel-tickets',
@@ -22,50 +17,20 @@ export class LeftPanelTicketsComponent implements OnInit {
   @ViewChild('usersDp') usersDp: SelectSearchComponent;
   ticketsFilter: TicketsFilter = new TicketsFilter();
   listType: string = "USERS";
-  selectedCompany: Company = null;
-  selectedTechUser: string = null;
-  selectedUser: string = null;
-  companies = [];
-  users = [];
-  usersHistory = [];
-  companiesHistory = [];
-  techUsersHistory = [];
-  techUsersList = [];
   blockFilterUser: boolean = false;
   ticketsCounts: TicketsCounts;
   constructor(private ticketsStateService: TicketsStateService,
-    private companiesState: CompaniesStateService,
     private ticketsService: TicketsService,
-    private usersStateService: UsersStateService,
-    private companiesService: CompaniesService,
-    private elRef: ElementRef,
     public cd: ChangeDetectorRef,
     private leftPanelService: LeftPanelService) { }
 
   ngOnInit() {
-
-    if (this.usersStateService.getAllUsers().length > 0) this.onGetTechUsers(this.usersStateService.getAllUsers());
-    let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
-      this.onGetTechUsers(data);
+    
+    this.ticketsStateService.getOnChangeLeftPanelFilter().subscribe(data => {
+      this.listType = data;
     })
-
-    this.leftPanelService.getCompaniesHistoryTicketsUser().subscribe((data: Array<string>) => {
-      this.usersHistory = (data) ? data : [];
-    })
-    this.leftPanelService.getCompaniesHistoryTickets().subscribe((data: Array<string>) => {
-      this.companiesHistory = (data) ? data : [];
-    })
-    this.leftPanelService.getCompaniesHistoryTechUsers().subscribe((data: Array<string>) => {
-      this.techUsersHistory = (data) ? data : [];
-    })
-    if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
-    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
-
-      this.getClientsList(data);
-    })
-
+  
     this.leftPanelService.getColors().subscribe((data: any) => {
-
       let listColors = data.map(item => {
         return new StatusColor(item.backgroundColor, item.borderColor);
       })
@@ -84,13 +49,9 @@ export class LeftPanelTicketsComponent implements OnInit {
       this.ticketsStateService.onInitCount(this.ticketsCounts[(this.listType === 'USERS') ? 'USER' : this.listType]);
       this.cd.detectChanges();
     })
-    if (window.innerWidth < 1280)  $("app-left-panel-tickets .left-panel-ng2").css({ zIndex: 990 });
+    if (window.innerWidth < 1280) $("app-left-panel-tickets .left-panel-ng2").css({ zIndex: 990 });
   }
-  private getCount() {
-    this.ticketsService.getCount(this.ticketsFilter.getDataForRequest()).subscribe(data => {
-      this.ticketsStateService.onInitCount(data);
-    })
-  }
+ 
   getCountByField(field) {
     return (this.ticketsCounts) ? this.ticketsCounts[field] : 0;
   }
@@ -101,234 +62,9 @@ export class LeftPanelTicketsComponent implements OnInit {
       this.cd.detectChanges();
     })
   }
-  private getClientsList(data) {
-    this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-  }
-  setTypeFilter(type) {
-    this.listType = type;
-    this.ticketsFilter.setListType(type);
-    this.ticketsStateService.onInitFilter(this.ticketsFilter);
-    if (type !== 'RECURRING_TICKETS') this.getCount();
-  }
-
-  onGetUsers(data) {
-    this.users = data.filter(item => {
-      if (item.accountType !== 'TECH' && !item.deletedAt) {
-        return item;
-      }
-    });
-
-  }
-  onGetTechUsers(data) {
-    this.techUsersList = data.filter(item => {
-      if (item.accountType === 'TECH' && !item.deletedAt) {
-        return item;
-      }
-    });
-  }
-
-  selectClientCompany(item) {
-
-
-    let indexCompany = this.companiesState.getCompanies().findIndex(company => company.name === item);
-    //  this.showClearIndustry = true;
-    // this.clientIndustry = item;
-    if (indexCompany > -1) {
-      this.selectedCompany = this.companiesState.getCompanies()[indexCompany];
-      this.ticketsFilter.setCompany(this.companiesState.getCompanies()[indexCompany]);
-      this.ticketsStateService.onInitFilter(this.ticketsFilter);
-      this.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.company.id === this.selectedCompany.id));
-      this.getCount();
-    }
-
-    //  this.filter.setCompany(this.companiesState.getCompanies()[indexCompany].id);
-    //  this.usersStateService.onInitFilter(this.filter);
-  }
-  selectTechUser(item) {
-
-
-    let indexTechUser = this.techUsersList.findIndex(user => `${user.firstName} ${user.lastName}` === item);
-
-    //  this.showClearIndustry = true;
-    // this.clientIndustry = item;
-    if (indexTechUser > -1) {
-      this.selectedTechUser = `${this.techUsersList[indexTechUser].firstName} ${this.techUsersList[indexTechUser].lastName}`;
-      this.ticketsFilter.setTechUser(this.techUsersList[indexTechUser]);
-      this.ticketsStateService.onInitFilter(this.ticketsFilter);
-      this.getCount();
-    }
-
-    //  this.filter.setCompany(this.companiesState.getCompanies()[indexCompany].id);
-    //  this.usersStateService.onInitFilter(this.filter);
-  }
-  selectUser(item) {
-
-
-    let indexhUser = this.users.findIndex(user => `${user.firstName} ${user.lastName}` === item);
-
-    //  this.showClearIndustry = true;
-    // this.clientIndustry = item;
-    if (indexhUser > -1) {
-      this.selectedUser = `${this.users[indexhUser].firstName} ${this.users[indexhUser].lastName}`;
-      this.ticketsFilter.setUser(this.users[indexhUser]);
-      this.ticketsStateService.onInitFilter(this.ticketsFilter);
-      this.getCount();
-    }
-
-    //  this.filter.setCompany(this.companiesState.getCompanies()[indexCompany].id);
-    //  this.usersStateService.onInitFilter(this.filter);
-  }
-  clearSelectedCompany() {
-    //  this.showClearIndustry = false;
-    //this.selectedCompany = '';
-    this.selectedCompany = null;
-    // this.filter.setCompany(null);
-    //  this.usersStateService.onInitFilter(this.filter);
-  }
-  clearSelectedTechUser() {
-    //  this.showClearIndustry = false;
-    //this.selectedCompany = '';
-    this.selectedTechUser = null;
-    // this.filter.setCompany(null);
-    //  this.usersStateService.onInitFilter(this.filter);
-  }
-  clearSelectedUser() {
-    //  this.showClearIndustry = false;
-    //this.selectedCompany = '';
-    this.selectedUser = null;
-    // this.filter.setCompany(null);
-    //  this.usersStateService.onInitFilter(this.filter);
-  }
-  public onSelectCompany(item) {
-
-    this.blockFilterUser = true;
-    this.usersDp.clearClient();
-    if (!item) {
-      this.ticketsFilter.setCompany(null);
-      this.clearSelectedCompany();
-      this.users = [];
-    } else {
-      this.ticketsFilter.setCompany(item);
-      this.selectedCompany = null;
-      this.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.company.id === item.id));
-      //  this.filter.setCompany(item.id);
-      //  this.usersStateService.onInitFilter(this.filter);
-      let find = this.companiesHistory.find(history => history === item.name);
-      if (!find) {
-        if (this.companiesHistory.length < 3) {
-          this.companiesHistory.unshift(item.name);
-        } else {
-          this.companiesHistory.pop();
-          this.companiesHistory.unshift(item.name);
-        }
-
-      }
-
-      this.companiesService.setСustomStorage("ticketPageFilterByCompanyHistory", this.companiesHistory).subscribe(data => {
-
-      })
-    }
-
-
-    this.ticketsStateService.onInitFilter(this.ticketsFilter);
-    this.getCount();
-  }
-  onSelectTechUser(item) {
-
-    if (!item) {
-      this.ticketsFilter.setTechUser(null);
-      this.clearSelectedTechUser();
-
-    } else {
-      this.selectedTechUser = null;
-
-      //  this.filter.setCompany(item.id);
-      //  this.usersStateService.onInitFilter(this.filter);
-      let indexTechUser = this.techUsersList.findIndex(user => `${user.firstName} ${user.lastName}` === item);
-      if (indexTechUser > -1) this.ticketsFilter.setTechUser(this.techUsersList[indexTechUser]);
-      let find = this.techUsersHistory.find(history => history === item);
-      if (!find) {
-        if (this.techUsersHistory.length < 3) {
-          this.techUsersHistory.unshift(item);
-        } else {
-          this.techUsersHistory.pop();
-          this.techUsersHistory.unshift(item);
-        }
-
-      }
-
-      this.companiesService.setСustomStorage("ticketPageFilterByTechUsersHistory", this.techUsersHistory).subscribe(data => {
-
-      })
-    }
-
-    this.ticketsStateService.onInitFilter(this.ticketsFilter);
-    this.getCount();
-
-  }
-  onSelectUser(item) {
-
-    if (!item) {
-      this.ticketsFilter.setUser(null);
-      this.clearSelectedUser();
-
-    } else {
-      this.selectedUser = null;
-
-      //  this.filter.setCompany(item.id);
-      //  this.usersStateService.onInitFilter(this.filter);
-      let indexhUser = this.users.findIndex(user => `${user.firstName} ${user.lastName}` === item);
-      if (indexhUser > -1) this.ticketsFilter.setUser(this.users[indexhUser]);
-      let find = this.usersHistory.find(history => history === item);
-      if (!find) {
-        if (this.usersHistory.length < 3) {
-          this.usersHistory.unshift(item);
-        } else {
-          this.usersHistory.pop();
-          this.usersHistory.unshift(item);
-        }
-
-      }
-
-      this.companiesService.setСustomStorage("ticketPageFilterByClientUsersHistory", this.usersHistory).subscribe(data => {
-
-      })
-    }
-    if (!this.blockFilterUser) {
-      this.ticketsStateService.onInitFilter(this.ticketsFilter);
-      this.getCount();
-    }
-    this.blockFilterUser = false;
-  }
-  onOpenDropDownFilter(id) {
-
-    let containers = this.elRef.nativeElement.querySelectorAll('.show-filter');
-    containers.forEach((item: any) => {
-      item.style.zIndex = 2;
-    })
-    this.elRef.nativeElement.querySelector(`#${id}`).style.zIndex = 9999;
-  }
   onChangeTags(tags) {
-    this.ticketsFilter.setTags(tags);
-    this.ticketsStateService.onInitFilter(this.ticketsFilter);
-    this.getCount();
-  }
-  getTechUserList() {
-    return this.techUsersList.map(item => {
-      return `${item.firstName} ${item.lastName}`
-    }).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
-      1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
-  }
-  getUserList() {
-    return this.users.map(item => {
-      return `${item.firstName} ${item.lastName}`
-    }).sort((a, b) => (a.toLowerCase() > b.toLowerCase()) ?
-      1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
-  }
-
-  toggleFilter(event) {
-    event.target.parentNode.classList.toggle('show-filter');
+    this.ticketsStateService.onChangeTagsFilter(tags);
+    
   }
   public trackByIndex(index, item) {
     return index;
