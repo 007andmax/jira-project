@@ -2,13 +2,13 @@
   <div class="ticket-notify__item" *ngIf="ticketsPermissionsService.isActionVisible('reopen', ticketProfile, 'billable',null)">
    <div class="ticket-notify__item-icon icon__ticket-status"></div>
    <div class="ticket-notify__item-title">The Ticket is now closed.  <span *ngIf="getPermissions('REOPEN_CLOSED_TICKETS')">You can re-open it by simply clicking <strong>"Mark as Open"</strong> button.</span></div>
-   <button class="ticket-notify__item-btn" *ngIf="getPermissions('REOPEN_CLOSED_TICKETS')" (click)="markAsOpen()">Mark as Open</button>
+   <button class="ticket-notify__item-btn" *ngIf="getPermissions('REOPEN_CLOSED_TICKETS')" appDisabledBtn #markAsOpenBillableBtn="disabled" (onClick)="markAsOpen()" ><span>Mark as Open</span><app-preloader-ticket *ngIf="isMarkAsOpen"></app-preloader-ticket></button>
   </div>
 
   <div class="ticket-notify__item"  *ngIf="ticketsPermissionsService.isActionVisible('claim_ticket', ticketProfile,null,null)">
    <div class="ticket-notify__item-icon icon__claim-ticket"></div>
    <div class="ticket-notify__item-title">Got nothing to work on today? Hit up the <strong>"Claim Ticket"</strong> button to get the troubleshooting process started!</div>
-   <button class="ticket-notify__item-btn" (click)="claimTicket()">Claim Ticket</button>
+   <button class="ticket-notify__item-btn" appDisabledBtn #claimTicketBtn="disabled" (onClick)="claimTicket()"  ><span>Claim Ticket</span><app-preloader-ticket *ngIf="isClaimTicket"></app-preloader-ticket></button>
   </div>
 
   <div class="ticket-notify__item"   *ngIf="ticketsPermissionsService.isActionVisible('reopen', ticketProfile, 'old',null)">
@@ -26,7 +26,7 @@
   <div class="ticket-notify__item" *ngIf="ticketsPermissionsService.isActionVisible('reopen', ticketProfile, 'open',null)" [hidden]="ticketProfile.hasInvoice">
     <div class="ticket-notify__item-icon icon__ticket-status"></div>
     <div class="ticket-notify__item-title">The Ticket is now closed.   You can re-open it within {{ getDaysLeftToOpen() }} days by simply clicking <strong>"Re-open Ticket"</strong> button.</div>
-    <button class="ticket-notify__item-btn" *ngIf="getPermissions('REOPEN_CLOSED_TICKETS')" (click)="markAsOpen()">Re-open Ticket</button>
+    <button class="ticket-notify__item-btn" *ngIf="getPermissions('REOPEN_CLOSED_TICKETS')" appDisabledBtn #markAsOpenBtn="disabled" (onClick)="markAsOpen()"><span>Re-open Ticket</span><app-preloader-ticket *ngIf="isMarkAsOpen"></app-preloader-ticket></button>
    </div>
 
    <div class="ticket-notify__item"   *ngIf="ticketsPermissionsService.isActionVisible('reopen', ticketProfile, 'billed',null)">

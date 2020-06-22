@@ -248,6 +248,7 @@ import { InventoryAddBodyComponent } from './components/inventory/inventory-add-
 import { ServicePipe } from './pipe/service.pipe';
 import { LeftPanelSettingsComponent } from './components/left-panel/left-panel-settings/left-panel-settings.component';
 import { TicketsFilterComponent } from './components/tickets/tickets/tickets-header/tickets-filter/tickets-filter.component';
+import { DisabledBtnModule } from './modules/disabled-btn/disabled-btn.module';
  
 
 
@@ -653,7 +654,8 @@ angular.module('quicktech')
     FontAwesomeModule,
     NvD3Module,
     BrowserAnimationsModule,
-    IgxTimePickerModule
+    IgxTimePickerModule,
+    DisabledBtnModule
 
   ],
   entryComponents: [
