@@ -11,8 +11,8 @@ import { CompanyFilterTop } from '../../../companies/class/copany-filter-top';
 })
 export class BillableTicketsComponent implements OnInit {
   billableProfile:BillableProfile;
-  filter: Array<CompanyFilterTop> = [new CompanyFilterTop('closedAt', 'ASC'),
-  new CompanyFilterTop('ticketNumber', ''),
+  filter: Array<CompanyFilterTop> = [new CompanyFilterTop('closedAt', ''),
+  new CompanyFilterTop('ticketNumber', 'DESC'),
   new CompanyFilterTop('subject', ''),
   new CompanyFilterTop('sum', '')];
   constructor(  private billableStateService:BillableStateService,
@@ -21,7 +21,8 @@ export class BillableTicketsComponent implements OnInit {
   ngOnInit() {
     this.billableProfile = this.billableStateService.getBillableProfile();
     console.log("this.billableProfile",this.billableProfile);
-    this.onFilterСlosedAt();
+    this.onFilterTicketNumber();
+    this.billableProfile.tickets.reverse();
   }
   onToggleTicket(ticket) {
     ticket.selected = !ticket.selected;

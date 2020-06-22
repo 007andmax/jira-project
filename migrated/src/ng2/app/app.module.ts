@@ -249,7 +249,6 @@ import { ServicePipe } from './pipe/service.pipe';
 import { LeftPanelSettingsComponent } from './components/left-panel/left-panel-settings/left-panel-settings.component';
 import { BillableComponent } from './components/billing/billable/billable.component';
 import { BillableItemComponent } from './components/billing/billable/billable-item/billable-item.component';
-import { BillableItemListComponent } from './components/billing/billable/billable-item-list/billable-item-list.component';
 import { BillableAsideComponent } from './components/billing/billable/billable-aside/billable-aside.component';
 import { InvoiceFormComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-form.component';
 import { BillableTicketsComponent } from './components/billing/billable/billable-tickets/billable-tickets.component';
@@ -625,8 +624,6 @@ angular.module('quicktech')
     BillableComponent,
 
     BillableItemComponent,
-
-    BillableItemListComponent,
 
     BillableAsideComponent,
 
