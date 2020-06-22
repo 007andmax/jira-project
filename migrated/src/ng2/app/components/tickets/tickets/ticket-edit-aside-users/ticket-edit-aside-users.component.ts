@@ -72,6 +72,8 @@ export class TicketEditAsideUsersComponent implements OnInit, OnDestroy {
       return;
     }
     let users = this.usersStateService.getAllUsers().filter(item => item.company.id === this.companyId && item.accountType !== 'TECH' && !item.deletedAt);
+    if (users)   users.sort((a, b) => (this.ticketsListService.getUserName(a).toLowerCase() > this.ticketsListService.getUserName(b).toLowerCase()) ?
+    1 : ((this.ticketsListService.getUserName(b).toLowerCase() > this.ticketsListService.getUserName(a).toLowerCase()) ? -1 : 0));
     this.users = (users) ? users : [];
     this.reqUsers = (users) ? users : [];
   }
