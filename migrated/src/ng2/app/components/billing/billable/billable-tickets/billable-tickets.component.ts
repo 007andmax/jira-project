@@ -3,6 +3,8 @@ import { BillableStateService } from 'src/ng2/app/states/billable/billable-state
 import { BillableProfile } from '../class/billable-profile';
 import * as moment from "moment";
 import { CompanyFilterTop } from '../../../companies/class/copany-filter-top';
+import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.service';
+import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
 
 @Component({
   selector: 'billable-tickets',
@@ -16,6 +18,8 @@ export class BillableTicketsComponent implements OnInit {
   new CompanyFilterTop('subject', ''),
   new CompanyFilterTop('sum', '')];
   constructor(  private billableStateService:BillableStateService,
+    private ticketsStateService: TicketsStateService,
+    private ticketsService: TicketsService,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
@@ -23,6 +27,13 @@ export class BillableTicketsComponent implements OnInit {
     console.log("this.billableProfile",this.billableProfile);
     this.onFilterTicketNumber();
     this.billableProfile.tickets.reverse();
+  }
+  editTicket(id) {
+  
+    this.ticketsStateService.onOpenTicket();
+    this.ticketsService.getTicket(id).subscribe(data => {
+      this.ticketsStateService.onEditTicket(data);
+    })
   }
   onToggleTicket(ticket) {
     ticket.selected = !ticket.selected;

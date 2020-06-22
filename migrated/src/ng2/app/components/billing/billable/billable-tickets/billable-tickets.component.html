@@ -61,7 +61,7 @@
             </div>
           </td>
           <td class="billable-item-table__date" [textContent]="getDate(item.closedAt)"></td>
-          <td class="billable-item-table__ticket" [textContent]="item.ticketNumber"></td>
+          <td class="billable-item-table__ticket" [textContent]="item.ticketNumber" (click)="editTicket(item.id)"></td>
           <td class="billable-item-table__subject" [textContent]="item.subject"></td>
           <td class="billable-item-table__amount" [textContent]="item.sum | currency"></td>
         </tr>
@@ -71,3 +71,4 @@
   </div>
 
 </div>
+<app-ticket-edit-aside></app-ticket-edit-aside>
