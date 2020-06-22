@@ -9,14 +9,21 @@
       </div>
     </div>
 
-    <div class="qt-w50 qt-pt-30 qt-pl-24 qt-pr-24 qt-pb-30">
+    <div class="qt-w50 qt-pt-30 qt-pl-24 qt-pr-24 qt-pb-30" ngbDropdown [autoClose]="'inside'">
       <div class="qt-fs-10 qt-ff-sb  qt-df qt-ai-c qt-mb-4"><div class="qt-sz-16 icon__company-address qt-ic-c qt-mr-4"></div> BILLING ADDRESS</div>
       <div class="qt-fs-13 qt-mb-4 qt-fw-b qt-color-dark">Bearstone EX</div>
       <div class="qt-fs-13 qt-mb-4">53 Industry Way SE Calgary, </div>
       <div class="qt-fs-13 qt-mb-10">AB T3S 0B5</div>
-      <div class="qt-fs-13 qt-color-info  qt-pointer">Edit Customer</div>
+      <div class="qt-fs-13 qt-color-info  qt-pointer" id="dropdownForm1" ngbDropdownToggle>Edit Customer</div>
+
+      <div ngbDropdownMenu aria-labelledby="dropdownForm1">
+          
+      <app-invoice-form-edit-customer></app-invoice-form-edit-customer>
+        </div>
+      
     </div>
 
+    
   </div>
 
   <div class="infoice-info-row qt-df qt-pt-16 qt-pl-30 qt-pr-30 qt-mb-24 ">
@@ -33,12 +40,14 @@
 
     <div class="qt-input-block qt-mr-16 qt-w100">
       <label>Invoice Date</label>
-      <input  type="text">
+      <app-date-picker   [editMode]="true"   [useMinDate]="false" (onChange)="onChangeDatePicker($event)"></app-date-picker>
+
     </div>
 
     <div class="qt-input-block qt-w100">
       <label>Due Date</label>
-      <input type="text">
+      <app-date-picker   [editMode]="true"   [useMinDate]="false" (onChange)="onChangeDatePicker($event)"></app-date-picker>
+
     </div>
   </div>
 

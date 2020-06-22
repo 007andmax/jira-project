@@ -1,0 +1,21 @@
+ 
+  <div class="form-group">
+    <p>Location</p>
+    <input type="text"
+           #addresstext
+          
+           (focus)="onCheckGoogleAutoComplete()"
+           placeholder="Enter Location">
+  </div>
+  <div class="form-check">
+    <input type="checkbox" class="form-check-input" id="dropdownCheck">
+    <label class="form-check-label" for="dropdownCheck">
+      Remember me
+    </label>
+  </div>
+  <button type="submit" class="btn btn-primary">Sign in</button>
+
+<div class="dropdown-divider"></div>
+<button ngbDropdownItem>New around here? Sign up</button>
+<button ngbDropdownItem>Forgot password?</button>
+ 
