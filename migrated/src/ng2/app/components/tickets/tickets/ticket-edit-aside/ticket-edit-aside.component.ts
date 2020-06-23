@@ -69,7 +69,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       this.ticketStateService.unsubscribeTicket();
       if (this.updateForm) this.updateForm.reset();
       this.ticketProfile = data;
-      this.elRef.nativeElement.querySelector("#ticket-note").value = this.ticketProfile.note;
+      this.elRef.nativeElement.querySelector("#ticket-note").innerHTML = this.ticketProfile.note;
       this.updateListAssignedUser();
       this.updateLisUpdateUser();
       this.opened = true;
@@ -102,7 +102,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
         let ticket = new Ticket(data);
         if (this.ticketProfile.id === ticket.id) {
           this.ticketProfile.update(data);
-          this.elRef.nativeElement.querySelector("#ticket-note").value = this.ticketProfile.note;
+          this.elRef.nativeElement.querySelector("#ticket-note").innerHTML = this.ticketProfile.note;
           this.updateListAssignedUser();
           this.updateLisUpdateUser();
         
@@ -219,8 +219,8 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     if (this.modeSubject === 'view') this.onChangeSubjectNote();
   }
   toggleNote() {
-    if (this.elRef.nativeElement.querySelector("#ticket-note").value != this.ticketProfile.note) {
-      this.ticketProfile.note = this.elRef.nativeElement.querySelector("#ticket-note").value;
+    if (this.elRef.nativeElement.querySelector("#ticket-note").innerHTML != this.ticketProfile.note) {
+      this.ticketProfile.note = this.elRef.nativeElement.querySelector("#ticket-note").innerHTML;
       this.onChangeSubjectNote();
 
     }

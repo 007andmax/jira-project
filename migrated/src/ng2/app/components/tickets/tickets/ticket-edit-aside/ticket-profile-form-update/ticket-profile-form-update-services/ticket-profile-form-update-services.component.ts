@@ -40,12 +40,12 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit, OnDestr
 
 
   ngOnInit() {
-   
+
     let getOnClearFormUpdate = this.ticketsStateService.getOnClearFormUpdate().subscribe(data => {
       this.addedServiceList = [];
       this.elRef.nativeElement.querySelector('#service-description').value = "";
       this.currentService = new TicketProfileFormService();
-  
+
       this.serviceDP.clear();
       this.datePicker.reset();
       if (this.currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER') this.timePicker.refresh();
@@ -58,12 +58,12 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit, OnDestr
     this.ticketStateService.getOnGetServicesList().subscribe(data => {
       this.getServices();
     })
-   
+
     let currentDate = new Date();
     this.currentService.setDate(currentDate.getDate(), currentDate.getMonth() + 1, currentDate.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
-  
-    }
- 
+
+  }
+
   private getServices() {
     this.servicesList = this.ticketStateService.getServicesForTicket();
     this.areTicketsPresented = this.ticketStateService.isTicketsTerminated();
@@ -107,19 +107,20 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit, OnDestr
     let durationEnd = (3600000 * data) + this.addedServiceList[i].durationStart;
     this.addedServiceList[i].setDurationEnd(durationEnd);
   }
-  public onSelectService(item,i) {
+  public onSelectService(item, i) {
     this.addedServiceList[i].setItem(item);
-  
+    this.addedServiceList[i].setValidate(true);
   }
   public selectService(item) {
     this.currentService.setItem(item);
     this.currentService.setItemOrder(this.getItemOrger());
+    this.currentService.setValidate(true);
   }
   public removeService(i) {
     this.addedServiceList.splice(i, 1);
     this.currentService.setItemOrder(this.getItemOrger());
-    console.log("this.addedServiceList",this.addedServiceList);
-    console.log("currentService",this.currentService);
+    console.log("this.addedServiceList", this.addedServiceList);
+    console.log("currentService", this.currentService);
   }
   public onChangeStartTimePickerService(data, i) {
     this.addedServiceList[i].setDurationStart(data);
@@ -156,6 +157,14 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit, OnDestr
   }
   public getSelectedServices() {
     return (this.currentService.item && this.currentService.item.versionedId) ? [...this.addedServiceList, this.currentService] : this.addedServiceList;
+  }
+  public onValidateServices() {
+    this.addedServiceList.forEach((item, index) => {
+      item.checkValidate();
+    })
+    let find = this.addedServiceList.find(item => !item.validate);
+    this.currentService.checkValidate();
+    return ((find) ? false : true) && this.currentService.validate;
   }
   public trackByIndex(index, item) {
     return index;

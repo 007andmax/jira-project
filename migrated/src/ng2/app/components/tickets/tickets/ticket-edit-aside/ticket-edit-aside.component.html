@@ -56,7 +56,8 @@
           <div class="ticket-edit-aside__ticket-description-edit"
                appClickOtside [init]="opened" [class]="'.ticket-edit-aside__ticket-text'" (onOutSide)="toggleNote()"
           >
-            <textarea id="ticket-note" placeholder="Enter description here"  ></textarea>
+          <div  class="form-control editor" contenteditable="true" style="min-height: 92px;height: auto;border: none; color: rgb(64, 75, 95);"   id="ticket-note" placeholder="Enter description here"></div> 
+           <!-- <textarea id="ticket-note" placeholder="Enter description here"  ></textarea>-->
           </div>
         </div>
        <app-ticket-claim-info [ticketProfile]="ticketProfile"></app-ticket-claim-info>
