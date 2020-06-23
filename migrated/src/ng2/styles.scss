@@ -2913,8 +2913,15 @@ app-ticket-edit-aside-devices  {
     width: 7px;
     height: 7px;
   }
+  &.--max-width {
+    width: fit-content;
+  }
 }
 
 .--input-error {
   border: solid 1px #ff5263 !important;
+}
+
+.relative {
+  position: relative;
 }
