@@ -31,6 +31,17 @@
   background-repeat: no-repeat;
   background-position: 10px center;
   background-size: 16px;
+  background-color: white;
+  color: #16a4fa;
+  color: #364656;
+  border: none;
+  background-image: url(../../../../../assets/img/icons/filter.svg);
+
+  &.active {
+    background-color: #16a4fa10;
+    border: none;
+    background-image: url(../../../../../assets/img/icons/filter-active.svg);
+  }
 }
 
 
