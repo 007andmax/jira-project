@@ -4,7 +4,7 @@
     <div class="service-item">
       <div class="service-item__first-line d-f">
         <app-services-list class="service-item__input device" [type]="'TICKET'" [editItem]="service.item"  [itemList]="servicesList"
-        (selectedServicesItem)="selectService($event)"></app-services-list>
+        (selectedServicesItem)="onSelectService($event,i)"></app-services-list>
         <app-ticket-profile-updates-service-timepicker  *ngIf="currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'" (onChangeStart)="onChangeStartTimePickerService($event,i)" (onChangeEnd)="onChangeEndTimePickerSerice($event,i)" #editTimePicker [quantity]="service.quantity" [editMode]="true" [start]="service.durationStart" [end]="service.durationEnd" ></app-ticket-profile-updates-service-timepicker>
         <app-ticket-profile-updates-service-duration  (onChange)="onChangeDurationService($event,i)" [editMode]="true" [hour]="getHours(service)" [minute]="getMinutes(service)" *ngIf="currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER'"></app-ticket-profile-updates-service-duration>
         <app-date-picker   [editMode]="true" [editDate]="service.getDateTimeWithTimeOffset(companiesStateService.getCurrentCompany())" [useMinDate]="false"  (onChange)="onChangeDatePickerService($event,i)"></app-date-picker>

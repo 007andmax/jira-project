@@ -107,6 +107,10 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit, OnDestr
     let durationEnd = (3600000 * data) + this.addedServiceList[i].durationStart;
     this.addedServiceList[i].setDurationEnd(durationEnd);
   }
+  public onSelectService(item,i) {
+    this.addedServiceList[i].setItem(item);
+  
+  }
   public selectService(item) {
     this.currentService.setItem(item);
     this.currentService.setItemOrder(this.getItemOrger());
@@ -114,7 +118,8 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit, OnDestr
   public removeService(i) {
     this.addedServiceList.splice(i, 1);
     this.currentService.setItemOrder(this.getItemOrger());
-
+    console.log("this.addedServiceList",this.addedServiceList);
+    console.log("currentService",this.currentService);
   }
   public onChangeStartTimePickerService(data, i) {
     this.addedServiceList[i].setDurationStart(data);
@@ -151,6 +156,9 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit, OnDestr
   }
   public getSelectedServices() {
     return (this.currentService.item && this.currentService.item.versionedId) ? [...this.addedServiceList, this.currentService] : this.addedServiceList;
+  }
+  public trackByIndex(index, item) {
+    return index;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
