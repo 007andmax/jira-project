@@ -1,4 +1,4 @@
-<div class="billing-page__aside">
+<div class="billing-page__aside" *ngIf="opened">
 
 
   <div class="aside-header qt-df qt-ai-c qt-jc-sb qt-pr-16 qt-pl-32">
@@ -13,8 +13,10 @@
     </div>
   </div>
 
-  <app-invoice-form></app-invoice-form>
-
+  <app-invoice-form *ngIf="!showPreloader" [company]="company" [invoice]="invoice"></app-invoice-form>
+  <div class="prelaoder-body" *ngIf="showPreloader">
+    <div class="loading" ></div>
+  </div>
 
 
 

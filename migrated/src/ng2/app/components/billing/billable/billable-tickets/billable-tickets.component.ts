@@ -35,6 +35,13 @@ export class BillableTicketsComponent implements OnInit {
       this.ticketsStateService.onEditTicket(data);
     })
   }
+  onCreateInvoice() {
+    let listIds = [];
+    this.billableProfile.tickets.forEach(item => {
+    if (item.selected) listIds.push(item.id);
+    })
+    if (listIds.length > 0) this.billableStateService.onCreate(listIds);
+  }
   onToggleTicket(ticket) {
     ticket.selected = !ticket.selected;
     console.log("ticket.selected",ticket.selected);

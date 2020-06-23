@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { BillableProfile } from '../../components/billing/billable/class/billable-profile';
 
 @Injectable({
@@ -6,8 +6,15 @@ import { BillableProfile } from '../../components/billing/billable/class/billabl
 })
 export class BillableStateService {
   billableProfile:BillableProfile;
+  create: EventEmitter<any> = new EventEmitter();
   constructor() { }
 
+  public onCreate(ticketsIds) {
+    this.create.emit(ticketsIds);
+  }
+  public getOnCreate() {
+    return this.create;
+  }
   public getBillableProfile() {
     return this.billableProfile;
   }
