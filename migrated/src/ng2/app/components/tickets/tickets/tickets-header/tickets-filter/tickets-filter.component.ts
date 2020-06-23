@@ -139,7 +139,7 @@ export class TicketsFilterComponent implements OnInit {
     this.listType = type;
     this.ticketsFilter.setListType(type);
   }
-  setTypeFilter(type) {
+  public setTypeFilter(type) {
     this.listType = type;
     this.ticketsFilter.setListType(type);
     this.ticketsStateService.onInitFilter(this.ticketsFilter);

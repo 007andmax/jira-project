@@ -55,6 +55,10 @@ export class LeftPanelTicketsComponent implements OnInit {
   getCountByField(field) {
     return (this.ticketsCounts) ? this.ticketsCounts[field] : 0;
   }
+  public setTypeFilter(type) {
+    this.listType = type;
+   this.ticketsStateService.onChangeTypeFilter(type);
+  }
   private getCounts() {
     this.ticketsService.getCounts(this.ticketsFilter.getDataForCounts()).subscribe(data => {
       this.ticketsCounts = new TicketsCounts(data);
