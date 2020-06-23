@@ -589,6 +589,13 @@
     line-height: normal;
     border: none;
     margin-left: 16px;
+    justify-content: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    app-preloader-ticket {
+      position: absolute;
+    }
   }
 
   &__item-desc-icon {
