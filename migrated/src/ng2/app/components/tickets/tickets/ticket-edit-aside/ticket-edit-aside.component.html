@@ -51,7 +51,7 @@
           <div class="ticket-edit-aside__ticket-subject-edit d-f ai-c"
                [hidden]="modeSubject === 'view'" appClickOtside [init]="modeSubject === 'edit'" [class]="'.ticket-edit-aside__ticket-text'" (onOutSide)="toggleSubject()">
             <span [textContent]="'Tkt# ' + ticketProfile.number"></span>
-            <input    [(ngModel)]="ticketProfile.subject"/>
+            <input id="ticket-subject"   [value]="ticketProfile.subject"/>
           </div>
           <div class="ticket-edit-aside__ticket-description-edit"
                appClickOtside [init]="opened" [class]="'.ticket-edit-aside__ticket-text'" (onOutSide)="toggleNote()"

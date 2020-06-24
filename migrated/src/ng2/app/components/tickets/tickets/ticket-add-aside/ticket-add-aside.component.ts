@@ -240,7 +240,7 @@ export class TicketAddAsideComponent implements OnInit {
   }
 
   public onChangeNote(event) {
-    this.ticketAdd.note = event.target.value;
+    this.ticketAdd.note = event.target.innerHTML;
   }
 
   public trackByIndex(index, item) {

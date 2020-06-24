@@ -46,8 +46,10 @@
 
       <div class="qt-input-block qt-input-line">
         <label for="add-ticket-describe-issue" class="qt-input-block__label">Describe Issue</label>
-          <textarea id="add-ticket-describe-issue" class="qt-input-block__textarea" appTextArea [limit]="250"
-                    placeholder="Describe Issue here…" (input)="onChangeNote($event)" (onPast)="onPastNote($event)"></textarea>
+        <div id="add-ticket-describe-issue" class="qt-input-block__textarea" contenteditable="true"       placeholder="Describe Issue here…" (input)="onChangeNote($event)"></div> 
+
+       <!--    <textarea id="add-ticket-describe-issue" class="qt-input-block__textarea" appTextArea [limit]="250"
+                    placeholder="Describe Issue here…" (input)="onChangeNote($event)" (onPast)="onPastNote($event)"></textarea>-->
       </div>
 
 

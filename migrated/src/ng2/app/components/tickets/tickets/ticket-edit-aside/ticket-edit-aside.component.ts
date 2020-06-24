@@ -218,8 +218,13 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
   }
 
   toggleSubject() {
+    var textCurrent = this.elRef.nativeElement.querySelector("#ticket-subject").value;
+    var textOld = this.ticketProfile.subject;
     this.modeSubject = (this.modeSubject === 'view') ? 'edit' : 'view';
-    if (this.modeSubject === 'view') this.onChangeSubjectNote();
+    if (this.modeSubject === 'view' && textCurrent != textOld) {
+      this.ticketProfile.subject = textCurrent;
+      this.onChangeSubjectNote();
+    }
   }
   toggleNote() {
     var textCurrent = this.elRef.nativeElement.querySelector("#ticket-note").innerHTML.replace(/<\/?[^>]+>/ig, "");
