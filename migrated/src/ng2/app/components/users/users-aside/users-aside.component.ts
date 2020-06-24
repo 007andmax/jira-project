@@ -10,6 +10,7 @@ import { SelectClientCompanyStateService } from '../../shared/select-client-comp
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ImageCropperComponent } from '../../shared/image-cropper/image-cropper.component';
 import { CompanySubscriptionStateService } from '../../companies/company-subscription/class/company-subscription-state.service';
+import { DisabledBtnDirective } from 'src/ng2/app/directives/disabled-btn.directive';
 
 @Component({
   selector: 'app-users-aside',
@@ -19,6 +20,7 @@ import { CompanySubscriptionStateService } from '../../companies/company-subscri
 })
 export class UsersAsideComponent implements OnInit {
   @ViewChild('role') role: any;
+  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   public opened = false;
   user: UserProfile = new UserProfile();
   allTitles: Array<string> = [];
@@ -119,8 +121,12 @@ export class UsersAsideComponent implements OnInit {
   }
   onAdd() {
     if (!this.validate.isValidate(this.user)) return;
+    this.addBtn.setDisabled(true);
     this.usersService.addUser(this.user.getUserForAdd()).subscribe(data => {
       this.close();
+      this.addBtn.setDisabled(false);
+    },err => {
+      this.addBtn.setDisabled(false);
     })
 
   }
