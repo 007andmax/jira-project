@@ -239,6 +239,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
         this.notificationStateService.oninitShowNotification(`${this.getUserName(user)} locked this ticket to create invoice!`);
         return;
       }
+      this.ticketMessage.isMarkAsOpen = false;
       this.notificationStateService.oninitShowNotification(`The ticket “${this.ticketProfile.number}” has been marked as open`);
     })
   };
@@ -295,7 +296,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       value.push(currentUser.id);
     }
     this.ticketsService.assignUserToTicket(this.ticketProfile.id, value.join(",")).subscribe(res => {
-      this.ticketMessage.claimTicketBtn.setDisabled(false);
+      this.ticketMessage.isClaimTicket = false;
     })
 
   };
