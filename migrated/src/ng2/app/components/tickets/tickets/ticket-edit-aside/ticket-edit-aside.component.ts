@@ -24,6 +24,7 @@ import { WebsocketService } from 'src/ng2/app/services/websocket/websocket.servi
 import { TicketProfileUpdate } from '../class/ticket-profile-update';
 import { Subscription } from 'rxjs';
 import { TicketEditAsideRightPanelComponent } from './ticket-edit-aside-right-panel/ticket-edit-aside-right-panel.component';
+import { TicketMessageComponent } from './ticket-message/ticket-message.component';
 @Component({
   selector: 'app-ticket-edit-aside',
   templateUrl: './ticket-edit-aside.component.html',
@@ -35,6 +36,8 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
 
   @ViewChild('updateForm') updateForm: TicketProfileFormUpdateComponent;
   @ViewChild('rightPanel') rightPanel: TicketEditAsideRightPanelComponent;
+  @ViewChild('ticketMessage') ticketMessage: TicketMessageComponent;
+
   ticketProfile: TicketProfile = new TicketProfile();
   opened = false;
   modeSubject = 'view';
@@ -105,7 +108,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
           this.elRef.nativeElement.querySelector("#ticket-note").innerHTML = this.ticketProfile.note;
           this.updateListAssignedUser();
           this.updateLisUpdateUser();
-        
+
         }
       }
 
@@ -146,7 +149,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     this.listAssignedUser = [];
     if (this.ticketProfile.assignedUser) this.listAssignedUser.push(this.ticketProfile.assignedUser);
     if (this.ticketProfile.multiAssignedUsers) this.listAssignedUser = [...this.listAssignedUser, ...this.ticketProfile.multiAssignedUsers];
-    console.log("listAssignedUser",this.listAssignedUser);
+    console.log("listAssignedUser", this.listAssignedUser);
   }
   private updateLisUpdateUser() {
     this.lisUpdateUser = [];
@@ -157,7 +160,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       let find = this.lisUpdateUser.find(item => item.id === this.ticketProfile.createdUser.id);
       if (!find) this.lisUpdateUser.unshift(this.ticketProfile.createdUser);
     }
-    console.log("lisUpdateUser",this.lisUpdateUser);
+    console.log("lisUpdateUser", this.lisUpdateUser);
   }
   onMoveIntoSpam() {
     if (this.usersStateService.getCurrentUser().isOwner) {
@@ -292,6 +295,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       value.push(currentUser.id);
     }
     this.ticketsService.assignUserToTicket(this.ticketProfile.id, value.join(",")).subscribe(res => {
+      this.ticketMessage.claimTicketBtn.setDisabled(false);
     })
 
   };
@@ -329,7 +333,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     return result;
   };
   getAgentName() {
-    if (!this.ticketProfile.agent || !this.ticketProfile.agent.label)     return '';
+    if (!this.ticketProfile.agent || !this.ticketProfile.agent.label) return '';
     return `, Agent - ${this.ticketProfile.agent.label}`;
   }
   close() {
