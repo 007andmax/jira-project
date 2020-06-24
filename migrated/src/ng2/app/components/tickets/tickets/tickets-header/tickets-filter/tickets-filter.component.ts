@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ChangeDetectorRef, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ElementRef, ChangeDetectorRef, ViewChild, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { TicketsFilter } from '../../class/tickets-filter';
 import { Company } from 'src/ng2/app/interfaces/company/company';
 import { TicketsCounts } from '../../class/tickets-counts';
@@ -12,13 +12,14 @@ import { StatusColor } from 'src/ng2/app/components/left-panel/left-panel-ticket
 import { TicketsColor } from 'src/ng2/app/components/left-panel/left-panel-tickets/tickets-status/class/tickets-color';
 import { SelectSearchComponent } from 'src/ng2/app/components/shared/select-search/select-search.component';
 import { ItemStatus } from 'src/ng2/app/components/left-panel/left-panel-tickets/tickets-status/class/item-status';
+import { Subscribable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-tickets-filter',
   templateUrl: './tickets-filter.component.html',
   styleUrls: ['./tickets-filter.component.scss']
 })
-export class TicketsFilterComponent implements OnInit {
+export class TicketsFilterComponent implements OnInit,OnDestroy {
   @ViewChild('usersDp') usersDp: SelectSearchComponent;
   @ViewChild('companyDp') companyDp: SelectSearchComponent;
   @ViewChild('techUsersDp') techUsersDp: SelectSearchComponent;
@@ -38,6 +39,7 @@ export class TicketsFilterComponent implements OnInit {
   new ItemStatus('On Hold', 'onHold', 'ON_HOLD')]
   blockFilterUser: boolean = false;
   ticketsCounts: TicketsCounts;
+  sub:Subscription = new Subscription();
   @Output() changeCountFilter = new EventEmitter<any>();
   constructor(private ticketsStateService: TicketsStateService,
     private companiesState: CompaniesStateService,
@@ -47,40 +49,41 @@ export class TicketsFilterComponent implements OnInit {
     private elRef: ElementRef,
     public cd: ChangeDetectorRef,
     private leftPanelService: LeftPanelService) { }
+ 
 
 
   ngOnInit() {
 
-    this.ticketsStateService.getOnChangeTypeFilter().subscribe(type => {
+   let getOnChangeTypeFilter =  this.ticketsStateService.getOnChangeTypeFilter().subscribe(type => {
       this.listType = type;
       this.ticketsFilter.setListType(type);
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
       if (type !== 'RECURRING_TICKETS') this.getCount();
     })
-    this.ticketsStateService.getOnChangeTagsFilter().subscribe(tags => {
+    this.sub.add(getOnChangeTypeFilter);
+    let getOnChangeTagsFilter = this.ticketsStateService.getOnChangeTagsFilter().subscribe(tags => {
       this.ticketsFilter.setTags(tags);
       this.ticketsStateService.onInitFilter(this.ticketsFilter);
       this.getCount();
     });
+    this.sub.add(getOnChangeTagsFilter);
     if (this.usersStateService.getAllUsers().length > 0) this.onGetTechUsers(this.usersStateService.getAllUsers());
     let getOnUsers = this.usersStateService.getOnUsers().subscribe((data) => {
       this.onGetTechUsers(data);
     })
-
+    this.sub.add(getOnUsers);
 
     if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
     let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
 
       this.getClientsList(data);
     })
-
+    this.sub.add(getOnCompanies);
     this.leftPanelService.getColors().subscribe((data: any) => {
-
       let listColors = data.map(item => {
         return new StatusColor(item.backgroundColor, item.borderColor);
       })
       this.ticketsStateService.onColorStatus(listColors);
-
     })
     this.leftPanelService.getTicketsStatus().subscribe((data: any) => {
 
@@ -89,12 +92,12 @@ export class TicketsFilterComponent implements OnInit {
     })
     //    this.getCounts();
 
-    this.ticketsStateService.getOnUpdateCounts().subscribe(data => {
+   let getOnUpdateCounts =  this.ticketsStateService.getOnUpdateCounts().subscribe(data => {
       this.ticketsCounts = new TicketsCounts(data);
       this.ticketsStateService.onInitCount(this.ticketsCounts[(this.listType === 'USERS') ? 'USER' : this.listType]);
       this.cd.detectChanges();
     })
-
+    this.sub.add(getOnUpdateCounts);
   }
   public onClearAll() {
 
@@ -251,7 +254,9 @@ export class TicketsFilterComponent implements OnInit {
       1 : ((b.toLowerCase() > a.toLowerCase()) ? -1 : 0));
   }
 
-
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
   public trackByIndex(index, item) {
     return index;
   }
