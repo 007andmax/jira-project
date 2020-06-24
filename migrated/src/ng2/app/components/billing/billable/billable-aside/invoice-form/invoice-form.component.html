@@ -9,7 +9,7 @@
       </div>
     </div>
    
-    <div class="qt-w50 qt-pt-30 qt-pl-24 qt-pr-24 qt-pb-30" ngbDropdown [autoClose]="'inside'">
+    <div class="qt-w50 qt-pt-30 qt-pl-24 qt-pr-24 qt-pb-30" ngbDropdown [autoClose]="'inside'" #editCustomer="ngbDropdown">
       <div class="qt-fs-10 qt-ff-sb  qt-df qt-ai-c qt-mb-4"><div class="qt-sz-16 icon__company-address qt-ic-c qt-mr-4"></div> BILLING ADDRESS</div>
       <div class="qt-fs-13 qt-mb-4 qt-fw-b qt-color-dark" [textContent]="company.name"></div>
       <div class="qt-fs-13 qt-mb-4" [textContent]="company.contacts[0].firstName + ' ' +
@@ -18,11 +18,11 @@
       <div class="qt-fs-13 qt-mb-4" [textContent]="company.contacts[0].primaryEmail"></div>
       <div class="qt-fs-13 qt-mb-4" [textContent]="(company.contacts[0].phoneNumbers.length > 0) ? company.contacts[0].phoneNumbers[0].number : ''"></div>
     <!--  <div class="qt-fs-13 qt-mb-10">AB T3S 0B5</div>-->
-      <div class="qt-fs-13 qt-color-info  qt-pointer" id="dropdownForm1" ngbDropdownToggle>Edit Customer</div>
+      <div class="qt-fs-13 qt-color-info  qt-pointer" id="dropdownForm1" ngbDropdownToggle (click)="onEditCustomer()">Edit Customer</div>
 
-      <div ngbDropdownMenu aria-labelledby="dropdownForm1">
+      <div ngbDropdownMenu aria-labelledby="dropdownForm1" >
           
-      <app-invoice-form-edit-customer></app-invoice-form-edit-customer>
+      <app-invoice-form-edit-customer   [dropDown]="editCustomer"></app-invoice-form-edit-customer>
         </div>
       
     </div>

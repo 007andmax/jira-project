@@ -7,6 +7,7 @@ import { BillableProfile } from '../class/billable-profile';
 import { InvoiceLock } from '../class/invoice-lock';
 import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
 import { Company } from 'src/ng2/app/interfaces/company/company';
+import { CompanyProfile } from '../../../companies/class/company-profile';
 
 @Component({
   selector: 'app-billable-aside',
@@ -20,7 +21,7 @@ export class BillableAsideComponent implements OnInit {
   billableProfile: BillableProfile;
   invoice: InvoiceLock;
   showPreloader: boolean = true;
-  company: Company;
+  company: CompanyProfile = new CompanyProfile();
   constructor(private billableStateService: BillableStateService,
     private companiesService: CompaniesService,
     private billableService: BillableService) { }
@@ -38,8 +39,8 @@ export class BillableAsideComponent implements OnInit {
     })
   }
   private getCompany(id) {
-    this.companiesService.getCompany(id).subscribe((data:Company) => {
-      this.company = data;
+    this.companiesService.getCompany(id).subscribe((data:any) => {
+      this.company.onEditMode(data);
     })
   }
   private getInvoiceNote() {

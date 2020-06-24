@@ -1,21 +1,67 @@
- 
-  <div class="form-group">
-    <p>Location</p>
-    <input type="text"
-           #addresstext
-          
-           (focus)="onCheckGoogleAutoComplete()"
-           placeholder="Enter Location">
-  </div>
-  <div class="form-check">
-    <input type="checkbox" class="form-check-input" id="dropdownCheck">
-    <label class="form-check-label" for="dropdownCheck">
-      Remember me
-    </label>
-  </div>
-  <button type="submit" class="btn btn-primary">Sign in</button>
+<div class="col-md-12 google-plus">
 
-<div class="dropdown-divider"></div>
-<button ngbDropdownItem>New around here? Sign up</button>
-<button ngbDropdownItem>Forgot password?</button>
- 
+  <mat-error *ngIf="validate.getNameIsExist()">
+    This company name already occupied
+  </mat-error>
+  <mat-error *ngIf="!validate.getName()">
+    Company name is required
+  </mat-error>
+  <p>Company Name</p>
+  <input type="text" [(ngModel)]="company.name" placeholder="Write Company or Search Company"
+    (blur)="onChangeName($event)">
+</div>
+<div class="form-group">
+  <p>Location</p>
+  <input type="text" #addresstext (focus)="onCheckGoogleAutoComplete()" placeholder="Enter Location">
+</div>
+<div class="col-md-6">
+
+  <p>Suite No.</p>
+  <input type="text" [(ngModel)]="company.addresses[0].suiteNumber" placeholder="Enter Suite Number">
+</div>
+<div class="col-md-6">
+  <p>Postal/Zip code</p>
+  <input type="text" [(ngModel)]="company.addresses[0].postalCode" placeholder="Enter Zip">
+</div>
+<div class="col-md-6">
+  <mat-error *ngIf="!validate.getFirstName()">
+    First name is required
+  </mat-error>
+  <p>First Name</p>
+  <input type="text" [(ngModel)]="company.contacts[0].firstName" (input)="onChangeFirstName($event)"
+    placeholder="Enter First Name">
+</div>
+<div class="col-md-6">
+  <mat-error *ngIf="!validate.getLastName()">
+    Last name is required
+  </mat-error>
+  <p>Last Name</p>
+  <input type="text" [(ngModel)]="company.contacts[0].lastName" (input)="onChangeLastName($event)"
+    placeholder="Enter Last Name">
+</div>
+<div class="col-md-6">
+  <mat-error *ngIf="!validate.getPrimaryContactEmail()">
+    Please enter a valid email address
+  </mat-error>
+  <p>Primary Contact Email</p>
+  <input type="text" [(ngModel)]="company.contacts[0].primaryEmail" (input)="onChangePrimaryEmail($event)"
+    placeholder="Primary Email Address">
+</div>
+
+<div class="col-md-6">
+  <mat-error *ngIf="!validate.getPhoneNumber()">
+    Phone number is required
+  </mat-error>
+  <p>Phone Number</p>
+  <input type="text" *ngIf="company.addresses[0].phoneNumbers.length > 0"
+    [(ngModel)]="company.addresses[0].phoneNumbers[0].number" placeholder="Enter Phone Number"
+    (input)="onChangePhoneNumber($event)">
+</div>
+
+<div class="col-md-12 new-companies-content__modal--content-footer">
+  <div class="d-f">
+    <button class="btn-new btn-primary" (click)="onUpdate()">Save</button>
+    <button class="btn-new disabled" (click)="close()">Cancel</button>
+  </div>
+
+</div>
