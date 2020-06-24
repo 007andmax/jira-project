@@ -5,7 +5,7 @@
       <div class="service-item__first-line d-f relative">
         <app-services-list class="service-item__input device"   [ngClass]="{'--input-error':!service.validate}"  [type]="'TICKET'" [editItem]="service.item"  [itemList]="servicesList"
         (selectedServicesItem)="onSelectService($event,i)"></app-services-list>
-        <mat-error class="qt-tooltip-error --max-width" *ngIf="!currentService.validate">
+        <mat-error class="qt-tooltip-error --max-width" *ngIf="!service.validate">
           The Service is required
         </mat-error>
         <app-ticket-profile-updates-service-timepicker  *ngIf="currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'" (onChangeStart)="onChangeStartTimePickerService($event,i)" (onChangeEnd)="onChangeEndTimePickerSerice($event,i)" #editTimePicker [quantity]="service.quantity" [editMode]="true" [start]="service.durationStart" [end]="service.durationEnd" ></app-ticket-profile-updates-service-timepicker>
