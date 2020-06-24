@@ -224,7 +224,7 @@
   &__ticket-description-edit {
     margin-left: -12px;
     margin-right: -12px;
-    textarea {
+    textarea,#ticket-note {
       height: 76px;
       border-radius: 5px;
       border: solid 1px #9ca5b6;
@@ -233,6 +233,15 @@
       font-size: 13px;
       color: #4f5f79;
     }
+    #ticket-note
+    {
+      min-height: 92px;
+      max-height: 400px;
+      background-color: #ffffff;
+      overflow: auto;
+      height: auto;
+      
+    } 
   }
 
   &__claimed-info {
@@ -698,4 +707,9 @@ app-ticket-change-status {
 
 app-ticket-edit-aside-right-panel {
   display: flex;
+}
+[contenteditable=true]:empty:before{
+  content: attr(placeholder);
+  pointer-events: none;
+  display: block; /* For Firefox */
 }
