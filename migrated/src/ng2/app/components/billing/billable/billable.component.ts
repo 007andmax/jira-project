@@ -26,7 +26,7 @@ export class BillableComponent implements OnInit {
     public ticketsListService: TicketsListService,
     public cd: ChangeDetectorRef,
     private appService: AppService,
-    private billableRealTimeService: BillableRealTimeService,,
+    private billableRealTimeService: BillableRealTimeService,
     private usersStateService: UsersStateService) { }
 
   ngOnInit() {
