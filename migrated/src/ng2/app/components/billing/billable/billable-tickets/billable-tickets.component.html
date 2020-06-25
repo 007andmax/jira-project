@@ -1,4 +1,4 @@
-<div class="page-list page-list-billable" >
+<div class="page-list page-list-billable" *ngIf="billableProfile">
 
   <div class="qt-list-header sticky-list-header">
     <div class="d-f ai-c">
@@ -43,7 +43,7 @@
     </table>
   </div>
 
-  <div class="table-container">
+  <div class="table-container" >
     <table class="qt-table-modern billable-item-table">
       <tbody>
 

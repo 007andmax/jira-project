@@ -24,6 +24,10 @@ export class BillableTicketsComponent implements OnInit {
 
   ngOnInit() {
     this.billableProfile = this.billableStateService.getBillableProfile();
+    if (!this.billableProfile)  {
+      window.location.href = '#/ng2/billable';
+      return;
+    }
     console.log("this.billableProfile",this.billableProfile);
     this.onFilterTicketNumber();
     this.billableProfile.tickets.reverse();

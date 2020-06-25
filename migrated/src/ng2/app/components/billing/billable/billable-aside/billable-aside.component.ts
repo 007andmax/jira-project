@@ -31,10 +31,11 @@ export class BillableAsideComponent implements OnInit {
     this.billableStateService.getOnCreate().subscribe(data => {
       this.billableProfile = this.billableStateService.getBillableProfile();
       this.opened = true;
-      this.getCompany(this.billableProfile.id);
+     
       this.getInvoiceNote();
       this.getTaxNumber();
       this.getActualNumber();
+      console.log("data",data);
       this.getInvoiceLock(data);
       // this.billableProfile = this.billableStateService.getBillableProfile();
     })
@@ -47,6 +48,7 @@ export class BillableAsideComponent implements OnInit {
   private getCompany(id) {
     this.companiesService.getCompany(id).subscribe((data:any) => {
       this.company.onEditMode(data);
+      this.showPreloader = false;
     })
   }
   private getInvoiceNote() {
@@ -70,14 +72,15 @@ export class BillableAsideComponent implements OnInit {
   private getInvoiceLock(ticketsIds) {
     this.billableService.getInvoiceLock(ticketsIds).subscribe(data => {
       this.invoice = data;
-      console.log("data", data);
+      console.log("invoice", data);
       this.getInvoiceLockTime(this.invoice.lockId);
     })
   }
   private getInvoiceLockTime(id) {
     this.billableService.getInvoiceLockTime(id).subscribe(data => {
       console.log("data", data);
-      this.showPreloader = false;
+      this.getCompany(this.billableProfile.id);
+     
     })
   }
 
