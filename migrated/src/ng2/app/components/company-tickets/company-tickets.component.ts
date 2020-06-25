@@ -12,6 +12,7 @@ import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.
 import { TicketsHeaderComponent } from '../tickets/tickets/tickets-header/tickets-header.component';
 import { LeftPanelService } from '../../services/left-panel/left-panel.service';
 import { TicketStateService } from '../tickets/tickets/ticket-edit-aside/services/ticket-state.service';
+import { UsersStateService } from '../../states/users/users-state.service';
 
 @Component({
   selector: 'company-tickets',
@@ -39,6 +40,7 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     private ticketStateService:TicketStateService,
     private leftPanelService: LeftPanelService,
+    private usersStateService:UsersStateService,
     private companiesStateService: CompaniesStateService,
     private ticketsStateService: TicketsStateService) { }
 
@@ -107,7 +109,8 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
       this.header.filter.onChangeCounterFilter();
       this.ticketsFilter.setListType("ALL");
       this.ticketsFilter.setCompany(company);
-
+      this.header.filter.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.company.id === company.id));
+    
       this.getCount();
       this.onScroll();
     }

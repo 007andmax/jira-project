@@ -149,7 +149,7 @@ export class TicketsFilterComponent implements OnInit,OnDestroy {
     if (type !== 'RECURRING_TICKETS') this.getCount();
   }
 
-  onGetUsers(data) {
+  public onGetUsers(data) {
     this.users = data.filter(item => {
       if (item.accountType !== 'TECH' && !item.deletedAt) {
         return item;
