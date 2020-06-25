@@ -12,33 +12,38 @@ import { InvoiceLock } from '../../components/billing/billable/class/invoice-loc
 export class BillableService {
 
   private apiUrl = environment.apiUrl;
- 
+
   /**
    * Device api service constructor
    * @param {HttpClient} http Service to work with request
    */
   public constructor(
     private http: HttpClient,
-    private constantsStateService:ConstantsStateService
+    private constantsStateService: ConstantsStateService
   ) { }
-
-  public getBillable(){
+  public unlock(lockId) {
+    return this.http.get(this.apiUrl + `invoice/unlock/${lockId}`);
+  }
+  public getBillable() {
     return this.http.get(this.apiUrl + `billable/billablePageInfo`);
   }
-  public getInvoiceNote(){
+  public updateInvoiceData(lockId, data) {
+    return this.http.post(this.apiUrl + `invoice/partialUpdate/${lockId}`, data);
+  }
+  public getInvoiceNote() {
     return this.http.get(this.apiUrl + `invoice/invoiceNote/getAll`).pipe(map((data: any) => data.map(item => new InvoiceNote(item))));
   }
-  public getTaxNumber(){
+  public getTaxNumber() {
     return this.http.get(this.apiUrl + `settings/emailPages/taxNumber`).pipe(map((data: any) => new InvoiceTaxNumber(data)));
   }
-  public getActualNumber(){
+  public getActualNumber() {
     return this.http.get(this.apiUrl + `data/actualNumber?type=INVOICE`);
   }
-  public getInvoiceLock(ids){
-    return this.http.post(this.apiUrl + `invoice/lock`,ids).pipe(map((data: any) => new InvoiceLock(data)));
-    
+  public getInvoiceLock(ids) {
+    return this.http.post(this.apiUrl + `invoice/lock`, ids).pipe(map((data: any) => new InvoiceLock(data)));
+
   }
-  public getInvoiceLockTime(id){
+  public getInvoiceLockTime(id) {
     return this.http.get(this.apiUrl + `invoice/lock/timeToUnlock/${id}`);
   }
 }

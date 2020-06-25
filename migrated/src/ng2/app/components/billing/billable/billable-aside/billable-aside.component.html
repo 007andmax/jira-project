@@ -9,11 +9,11 @@
     <div class="qt-df qt-ai-c">
       <div class="icon__clock-timer qt-sz-20 qt-ic-c qt-mr-6"></div>
       <div class="qt-fs-13 qt-ff-gr qt-mr-16"><span class="qt-ff-gm qt-color-dark">14:46</span>  mins remaining until unlock</div>
-      <div class="icon__close qt-sz-24 qt-ic-c qt-pointer"></div>
+      <div class="icon__close qt-sz-24 qt-ic-c qt-pointer" (click)="unlock()"></div>
     </div>
   </div>
 
-  <app-invoice-form *ngIf="!showPreloader" [company]="company" [invoice]="invoice"></app-invoice-form>
+  <app-invoice-form *ngIf="!showPreloader" [invoiceNumber]="invoiceNumber" [company]="company" [invoice]="invoice"></app-invoice-form>
   <div class="prelaoder-body" *ngIf="showPreloader">
     <div class="loading" ></div>
   </div>

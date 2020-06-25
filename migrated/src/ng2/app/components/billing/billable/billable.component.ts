@@ -6,6 +6,7 @@ import { CompaniesStateService } from 'src/ng2/app/states/company/companies-stat
 import { TicketsListService } from '../../tickets/tickets/services/tickets-list.service';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { AppService } from 'src/ng2/app/states/app/app.service';
+import { BillableRealTimeService } from 'src/ng2/app/states/billable/billable-real-time.service';
 
 @Component({
   selector: 'billable',
@@ -25,6 +26,7 @@ export class BillableComponent implements OnInit {
     public ticketsListService: TicketsListService,
     public cd: ChangeDetectorRef,
     private appService: AppService,
+    private billableRealTimeService: BillableRealTimeService,,
     private usersStateService: UsersStateService) { }
 
   ngOnInit() {
@@ -32,7 +34,29 @@ export class BillableComponent implements OnInit {
     this.appService.getOnInit().subscribe(data => {
       this.getList();
     })
-
+    this.billableRealTimeService.changeBillable.subscribe(data => {
+      if (data.action == 'TICKET_LOCKED') {
+        console.log("data", data);
+        /*  var userId = Object.keys(data.data)[0];
+      
+          for (var i = 0; i < data.data[userId].length; i++) {
+            for (var key in info) {
+              if (key === 'staticCopy') continue;
+              var ticket = Utils.findById(info[key].tickets, data.data[userId][i]);
+              if (ticket) {
+                Utils.defineReadOnlyProperty(ticket, 'lockedBy', userId);
+              }
+            }
+          }
+          setLockTypeForCompanies(info);
+          if (callback) {
+            callback(info);
+          }*/
+      }
+      if (data.action == 'TICKET_UNLOCKED') {
+        console.log("data", data);
+      }
+    })
   }
   private getList() {
     this.billableService.getBillable().subscribe(data => {

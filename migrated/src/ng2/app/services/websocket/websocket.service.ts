@@ -14,6 +14,7 @@ import { TaxesRealTimeService } from '../../states/taxes/taxes-real-time.service
 import { GlNumberRealTimeService } from '../../states/gl-number/gl-number-real-time.service';
 import { InventoryRealTimeService } from '../../states/inventory/inventory-real-time.service';
 import { TicketsRealTimeService } from '../../states/tickets/tickets-real-time.service';
+import { BillableRealTimeService } from '../../states/billable/billable-real-time.service';
 
 /**
  * Websocket service to work with api
@@ -46,7 +47,8 @@ export class WebsocketService {
     private taxesRealTimeService: TaxesRealTimeService,
     private glNumberRealTimeService: GlNumberRealTimeService,
     private inventoryRealTimeService: InventoryRealTimeService,
-    private ticketsRealTimeService: TicketsRealTimeService
+    private ticketsRealTimeService: TicketsRealTimeService,
+    private billableRealTimeService:BillableRealTimeService,
 
 
   ) {
@@ -70,6 +72,7 @@ export class WebsocketService {
       that.subsribeToTicketActualNumber();
       that.subsribeToTickets();
       that.subsribeToCmdShellOutput();
+      that.subsribeToBillable();
     });
   }
   private subsribeToDevices() {
@@ -267,6 +270,19 @@ export class WebsocketService {
       this.stompClient.subscribe(`/user/watch/tickets`, (message) => {
         var newChange = JSON.parse(message.body);
         this.ticketsRealTimeService.handleRealTimeChangesTickets(newChange);
+
+      });
+
+    }, 3000);
+  }
+
+  public subsribeToBillable() {
+
+    setTimeout(() => {
+
+      this.stompClient.subscribe(`/user/watch/billablePage`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.billableRealTimeService.handleRealTimeChangesBillable(newChange);
 
       });
 

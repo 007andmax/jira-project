@@ -22,6 +22,7 @@ export class BillableAsideComponent implements OnInit {
   invoice: InvoiceLock;
   showPreloader: boolean = true;
   company: CompanyProfile = new CompanyProfile();
+  invoiceNumber:string;
   constructor(private billableStateService: BillableStateService,
     private companiesService: CompaniesService,
     private billableService: BillableService) { }
@@ -36,6 +37,11 @@ export class BillableAsideComponent implements OnInit {
       this.getActualNumber();
       this.getInvoiceLock(data);
       // this.billableProfile = this.billableStateService.getBillableProfile();
+    })
+  }
+  unlock() {
+    this.billableService.unlock(this.invoice.lockId).subscribe(data => {
+      this.opened = false;
     })
   }
   private getCompany(id) {
@@ -56,8 +62,9 @@ export class BillableAsideComponent implements OnInit {
     })
   }
   private getActualNumber() {
-    this.billableService.getActualNumber().subscribe(data => {
+    this.billableService.getActualNumber().subscribe((data:any) => {
       console.log("data", data);
+      this.invoiceNumber = data.number;
     })
   }
   private getInvoiceLock(ticketsIds) {

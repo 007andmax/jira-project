@@ -5,7 +5,7 @@
     <div class="qt-w50 qt-pt-16 qt-pr-24 qt-pl-32 qt-pb-16">
       <div class="qt-input-block">
         <label>Customer Name</label>
-        <input  [(ngModel)]="company.name" type="text">
+        <input  [value]="company.name" type="text">
       </div>
     </div>
    
@@ -44,13 +44,13 @@
 
     <div class="qt-input-block qt-mr-16 qt-w100">
       <label>Invoice Date</label>
-      <app-date-picker   [editMode]="true"   [useMinDate]="false" (onChange)="onChangeDatePicker($event)"></app-date-picker>
+      <app-date-picker   [editMode]="true" [editDate]="invoice.invoiceDataDto.date"   [useMinDate]="false" (onChange)="onChangeDate($event)"></app-date-picker>
 
     </div>
 
     <div class="qt-input-block qt-w100">
       <label>Due Date</label>
-      <app-date-picker   [editMode]="true"   [useMinDate]="false" (onChange)="onChangeDatePicker($event)"></app-date-picker>
+      <app-date-picker   [editMode]="true"  [editDate]="invoice.invoiceDataDto.dueDate" [useMinDate]="false" (onChange)="onChangeDueDate($event)"></app-date-picker>
 
     </div>
   </div>
