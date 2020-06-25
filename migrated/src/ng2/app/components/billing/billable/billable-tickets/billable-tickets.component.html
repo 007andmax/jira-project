@@ -52,7 +52,7 @@
         [ngForTrackBy]="trackById">
      
         <tr [ngClass]="{'--selected': item.selected}">
-          <td class="billable-item-table__check">
+          <td class="billable-item-table__check" *ngIf="!item.lockedBy">
             <div class="d-f">
               <label class="qt-checkbox" [attr.for]="'ticket-' + i">
                 <input [attr.id]="'ticket-' + i"  [(ngModel)]="item.selected"  type="checkbox">
@@ -60,6 +60,7 @@
               </label>
             </div>
           </td>
+          <td class="billable-item-table__check" *ngIf="item.lockedBy"></td>
           <td class="billable-item-table__date" [textContent]="getDate(item.closedAt)"></td>
           <td class="billable-item-table__ticket" [textContent]="item.ticketNumber" (click)="editTicket(item.id)"></td>
           <td class="billable-item-table__subject" [textContent]="item.subject"></td>

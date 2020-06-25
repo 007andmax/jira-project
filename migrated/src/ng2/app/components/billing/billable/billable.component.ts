@@ -37,24 +37,28 @@ export class BillableComponent implements OnInit {
     this.billableRealTimeService.changeBillable.subscribe(data => {
       if (data.action == 'TICKET_LOCKED') {
         console.log("data", data);
-        /*  var userId = Object.keys(data.data)[0];
-      
-          for (var i = 0; i < data.data[userId].length; i++) {
-            for (var key in info) {
-              if (key === 'staticCopy') continue;
-              var ticket = Utils.findById(info[key].tickets, data.data[userId][i]);
-              if (ticket) {
-                Utils.defineReadOnlyProperty(ticket, 'lockedBy', userId);
-              }
-            }
-          }
-          setLockTypeForCompanies(info);
-          if (callback) {
-            callback(info);
-          }*/
+        var companyId = Object.keys(data.data)[0];
+
+        let index = this.list.findIndex(item => item.id === companyId);
+        if (index > -1) {
+          let tickets = data.data[companyId];
+          tickets.forEach(item => {
+            let indexTicket = this.list[index].tickets.findIndex(ticket => ticket.id === item);
+            if (indexTicket > -1) this.list[index].tickets[indexTicket].lockedBy = new Date().getTime();
+          });
+
+        }
       }
       if (data.action == 'TICKET_UNLOCKED') {
         console.log("data", data);
+        data.data.forEach(item => {
+          this.list.forEach(itemList => {
+            itemList.tickets.forEach(ticket => {
+              if (ticket.id === item) ticket.lockedBy = null;
+            });
+
+          })
+        });
       }
     })
   }
