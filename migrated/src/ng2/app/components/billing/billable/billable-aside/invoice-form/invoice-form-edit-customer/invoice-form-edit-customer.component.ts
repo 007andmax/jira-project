@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, ChangeDetectorRef, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { CompanyProfile } from 'src/ng2/app/components/companies/class/company-profile';
 import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
 import { CompanyValdiate } from 'src/ng2/app/components/companies/class/company-validate';
@@ -16,6 +16,7 @@ export class InvoiceFormEditCustomerComponent implements OnInit, OnDestroy {
   company: CompanyProfile = new CompanyProfile();
   @Input() dropDown: NgbDropdown;
   @ViewChild('addresstext') addresstext: any;
+  @Output() onUpdateCompany = new EventEmitter();
   locationIsinit: boolean = false;
   sub: Subscription = new Subscription();
   validate: CompanyInvoiceValdiate = new CompanyInvoiceValdiate();
@@ -35,7 +36,9 @@ export class InvoiceFormEditCustomerComponent implements OnInit, OnDestroy {
   public onCheckGoogleAutoComplete() {
     if (!this.locationIsinit) this.getPlaceAutocomplete();
   }
-  
+  public getCompany() {
+    return this.company;
+  }
   private getPlaceAutocomplete() {
     this.locationIsinit = true;
     const autocomplete = new google.maps.places.Autocomplete(this.addresstext.nativeElement,
@@ -86,7 +89,7 @@ export class InvoiceFormEditCustomerComponent implements OnInit, OnDestroy {
     if (!this.validate.isValidate(this.company)) return;
 
     let updateCompany = this.companiesService.updateCompany(this.company).subscribe(data => {
-
+      this.onUpdateCompany.emit(null);
       this.close();
       this.cd.detectChanges();
     })

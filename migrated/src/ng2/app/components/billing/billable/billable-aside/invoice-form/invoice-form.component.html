@@ -22,7 +22,7 @@
 
       <div ngbDropdownMenu aria-labelledby="dropdownForm1" >
           
-      <app-invoice-form-edit-customer   [dropDown]="editCustomer"></app-invoice-form-edit-customer>
+      <app-invoice-form-edit-customer #companyEdit (onUpdateCompany)="onUpdateCompany()"  [dropDown]="editCustomer"></app-invoice-form-edit-customer>
         </div>
       
     </div>
