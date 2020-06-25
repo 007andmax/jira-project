@@ -13,7 +13,12 @@
     </div>
   </div>
 
-  <app-invoice-form *ngIf="!showPreloader" [invoiceNumber]="invoiceNumber" [company]="company" [invoice]="invoice"></app-invoice-form>
+  <!-- <app-invoice-form *ngIf="!showPreloader" [invoiceNumber]="invoiceNumber" [company]="company" [invoice]="invoice"></app-invoice-form> -->
+
+  <app-invoice-preview></app-invoice-preview>
+
+
+
   <div class="prelaoder-body" *ngIf="showPreloader">
     <div class="loading" ></div>
   </div>

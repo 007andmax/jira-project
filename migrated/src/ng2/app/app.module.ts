@@ -253,6 +253,7 @@ import { BillableAsideComponent } from './components/billing/billable/billable-a
 import { InvoiceFormComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-form.component';
 import { BillableTicketsComponent } from './components/billing/billable/billable-tickets/billable-tickets.component';
 import { InvoiceFormEditCustomerComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-form-edit-customer/invoice-form-edit-customer.component';
+import { InvoicePreviewComponent } from './components/billing/billable/billable-aside/invoice-preview/invoice-preview.component';
 
 
 
@@ -633,6 +634,8 @@ angular.module('quicktech')
     BillableTicketsComponent,
 
     InvoiceFormEditCustomerComponent,
+
+    InvoicePreviewComponent,
   ],
   imports: [
     BrowserModule,
