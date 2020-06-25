@@ -52,8 +52,6 @@ export class TicketProfileFormUpdateComponent implements OnInit {
     this.currentUser = this.usersStateService.getCurrentUser();
   }
   private addCreatedUser() {
-    console.log("this.ticketProfile", this.ticketProfile);
-    console.log("this.lisUpdateUser", this.lisUpdateUser);
     if (this.ticketProfile.createdUser) {
       let find = this.lisUpdateUser.find(item => item.id === this.ticketProfile.createdUser.id);
       if (!find) this.lisUpdateUser.unshift(this.ticketProfile.createdUser);
@@ -91,7 +89,6 @@ export class TicketProfileFormUpdateComponent implements OnInit {
     }
     if (this.tab === "PRODUCT") {
       this.onChangeProducts(this.selectProducts.getSelectedProducts());
-      console.log("this.selectProducts.onValidateProducts()", this.selectProducts.onValidateProducts());
       if (!this.ticketProfileFormUpdate.isValidateProduct() || !this.selectProducts.onValidateProducts()) return;
       this.onUpdateTicket(this.ticketProfileFormUpdate.getDataForUpdateProduct());
 
@@ -126,7 +123,6 @@ export class TicketProfileFormUpdateComponent implements OnInit {
     })
   }
   updateAndClose() {
-    console.log("updateAndClose");
     if (!this.checkUpdateAndClose()) return;
     if (this.tab === "NOTE") {
       if (this.ticketProfileFormUpdate.isValidateNote()) {
@@ -155,7 +151,6 @@ export class TicketProfileFormUpdateComponent implements OnInit {
     }
   }
   onUpdateTicketAndClose(data) {
-    console.log("this.update_closeBtn", this.update_closeBtn);
     this.update_closeBtn.setDisabled(true);
     this.isUpdateAndClose = true;
     this.ticketsService.updateTicket(data, true).subscribe(data => {

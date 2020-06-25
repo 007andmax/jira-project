@@ -149,7 +149,6 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     this.listAssignedUser = [];
     if (this.ticketProfile.assignedUser) this.listAssignedUser.push(this.ticketProfile.assignedUser);
     if (this.ticketProfile.multiAssignedUsers) this.listAssignedUser = [...this.listAssignedUser, ...this.ticketProfile.multiAssignedUsers];
-    console.log("listAssignedUser", this.listAssignedUser);
   }
   private updateLisUpdateUser() {
     this.lisUpdateUser = [];
@@ -160,7 +159,6 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       let find = this.lisUpdateUser.find(item => item.id === this.ticketProfile.createdUser.id);
       if (!find) this.lisUpdateUser.unshift(this.ticketProfile.createdUser);
     }
-    console.log("lisUpdateUser", this.lisUpdateUser);
   }
   onMoveIntoSpam() {
     if (this.usersStateService.getCurrentUser().isOwner) {

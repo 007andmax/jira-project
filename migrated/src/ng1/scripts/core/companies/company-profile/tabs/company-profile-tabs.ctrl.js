@@ -54,28 +54,16 @@
           }
           $scope.users = UsersService.getAllByCompanyId($scope.company.id);
           $scope.userSubscriptionsByCompanyId = SubscriptionsService.getUserSubscriptionsByCompanyId($scope.company.id, $scope);
-          function getCompanyDevices() {
-           console.log("getCompanyDevices");
-          
-           // if (onGetDevicesComplated) return;
-        //    onGetDevicesComplated = true;
+          function getCompanyDevices() {    
             DevicesService.getAgentsAndReportsDataByCompanyId($scope, $scope.company.id, function (resp) {
               if (resp && resp.length) {
-                //var agentsList = resp;
-                // $scope.agents = agentsList.sort(function (a, b) {
-                //   return a.hostName > b.hostName
-                // });
                 $scope.agents = resp;
-  
-  
                 var devicesIds = [];
                 $scope.agents.forEach(function (device) {
                   devicesIds.push(device.id);
                 });
                 $rootScope.deviceCredentialsRecived = false;
-                console.log("getAgentsAndReportsDataByCompanyId");
                 DevicesService.getDevicesCredentials(devicesIds, $scope, function (resp) {
-                  console.log("resp",resp);
                   if (resp) {
                     $scope.devicesCredentials = resp;
                     $rootScope.deviceCredentialsRecived = true;

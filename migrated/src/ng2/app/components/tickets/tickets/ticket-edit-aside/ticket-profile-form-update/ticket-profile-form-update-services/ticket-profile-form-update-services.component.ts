@@ -119,8 +119,6 @@ export class TicketProfileFormUpdateServicesComponent implements OnInit, OnDestr
   public removeService(i) {
     this.addedServiceList.splice(i, 1);
     this.currentService.setItemOrder(this.getItemOrger());
-    console.log("this.addedServiceList", this.addedServiceList);
-    console.log("currentService", this.currentService);
   }
   public onChangeStartTimePickerService(data, i) {
     this.addedServiceList[i].setDurationStart(data);
