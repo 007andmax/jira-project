@@ -53,8 +53,8 @@
     Phone number is required
   </mat-error>
   <p>Phone Number</p>
-  <input type="text" *ngIf="company.addresses[0].phoneNumbers.length > 0"
-    [(ngModel)]="company.addresses[0].phoneNumbers[0].number" placeholder="Enter Phone Number"
+  <input type="text" *ngIf="company.contacts[0].phoneNumbers.length > 0"
+    [(ngModel)]="company.contacts[0].phoneNumbers[0].number" placeholder="Enter Phone Number"
     (input)="onChangePhoneNumber($event)">
 </div>
 

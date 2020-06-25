@@ -22,7 +22,7 @@ export class CompanyInvoiceValdiate extends CompanyValdiate {
         if (!company.contacts[0].lastName || company.contacts[0].lastName.length === 0) this.lastName = false;
 
         if (!company.contacts[0].primaryEmail || !company.contacts[0].primaryEmail.match(this.reEmail)) this.primaryContactEmail = false;
-        if (!company.addresses[0].phoneNumbers[0].number || !company.addresses[0].phoneNumbers[0].number.match(this.rePhoneNumber)) this.phoneNumber = false;
+        if (!company.contacts[0].phoneNumbers[0].number || !company.contacts[0].phoneNumbers[0].number.match(this.rePhoneNumber)) this.phoneNumber = false;
         return this.name && this.primaryContactEmail && this.phoneNumber && this.firstName && this.lastName;
 
     }
