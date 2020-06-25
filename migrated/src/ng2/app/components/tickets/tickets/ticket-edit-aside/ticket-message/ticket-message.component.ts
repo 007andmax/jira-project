@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { TicketsPermissionsService } from '../services/tickets-permissions.service';
 import { TicketProfile } from '../../class/ticket-profile';
 import { PermissionsService } from 'src/ng2/app/services/permissions/permissions.service';
@@ -8,6 +8,7 @@ import { ConfirmStateService } from 'src/ng2/app/components/shared/confirm/servi
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DELETE_FOREVER, MOVE_TO_SPAM_TICKET, MOVE_TO_SPAM_OR_REPORT_TICKET } from 'src/ng2/app/const/confirm';
 import { ConfirmComponent } from 'src/ng2/app/components/shared/confirm/confirm.component';
+import { DisabledBtnDirective } from 'src/ng2/app/directives/disabled-btn.directive';
 
 @Component({
   selector: 'app-ticket-message',
@@ -16,17 +17,22 @@ import { ConfirmComponent } from 'src/ng2/app/components/shared/confirm/confirm.
   providers: [TicketsPermissionsService]
 })
 export class TicketMessageComponent implements OnInit {
+  @ViewChild('claimTicketBtn') claimTicketBtn: DisabledBtnDirective;
+  @ViewChild('markAsOpenBillableBtn') markAsOpenBillableBtn: DisabledBtnDirective;
+  @ViewChild('markAsOpenBtn') markAsOpenBtn: DisabledBtnDirective;
   @Input() ticketProfile: TicketProfile = new TicketProfile();
   @Output() onClaimTicket = new EventEmitter();
   @Output() onOpenTicket = new EventEmitter();
   @Output() onRestoreFromSpam = new EventEmitter();
   @Output() onMoveToTrash = new EventEmitter();
   currentUser: CurrentUser;
+  isClaimTicket: boolean = false;
+  isMarkAsOpen: boolean = false;
   constructor(public ticketsPermissionsService: TicketsPermissionsService,
     private usersStateService: UsersStateService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
-    private permissionsService: PermissionsService, ) { }
+    private permissionsService: PermissionsService,) { }
 
   ngOnInit() {
     this.currentUser = this.usersStateService.getCurrentUser();
@@ -38,9 +44,14 @@ export class TicketMessageComponent implements OnInit {
     return this.permissionsService.isAllowed(action)
   }
   claimTicket() {
+    this.claimTicketBtn.setDisabled(true);
+    this.isClaimTicket = true;
     this.onClaimTicket.emit(null);
   }
   markAsOpen() {
+    this.isMarkAsOpen = true;
+    if (this.markAsOpenBillableBtn) this.markAsOpenBillableBtn.setDisabled(true);
+    if (this.markAsOpenBtn) this.markAsOpenBtn.setDisabled(true);
     this.onOpenTicket.emit(null);
   }
   deleteForever() {

@@ -10,7 +10,7 @@ export class TicketProfileFormService {
     item: Service;
     itemOrder: number;
     quantity: number = 0;
-
+    validate: boolean = true;
     constructor(data = null) {
         if (data) {
             for (const key in data) {
@@ -22,6 +22,16 @@ export class TicketProfileFormService {
             this.durationEnd = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), currentDate.getHours(), currentDate.getMinutes()).getTime();
         }
 
+    }
+    public checkValidate() {
+        if (this.item) {
+            this.setValidate(true);
+        } else {
+            this.setValidate(false);
+        }
+    }
+    public setValidate(data) {
+        this.validate = data;
     }
     public getDateTime() {
         return new Date(this.date).getTime();

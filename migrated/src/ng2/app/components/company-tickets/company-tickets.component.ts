@@ -12,6 +12,7 @@ import { LeftPanelStateService } from '../../states/left-panel/left-panel-state.
 import { TicketsHeaderComponent } from '../tickets/tickets/tickets-header/tickets-header.component';
 import { LeftPanelService } from '../../services/left-panel/left-panel.service';
 import { TicketStateService } from '../tickets/tickets/ticket-edit-aside/services/ticket-state.service';
+import { UsersStateService } from '../../states/users/users-state.service';
 
 @Component({
   selector: 'company-tickets',
@@ -20,7 +21,6 @@ import { TicketStateService } from '../tickets/tickets/ticket-edit-aside/service
   providers: [TicketsListService]
 })
 export class CompanyTicketsComponent implements OnInit, OnDestroy {
-@ViewChild('header') header:TicketsHeaderComponent;
   ticketsFilter: TicketsFilter = new TicketsFilter();
   showPreloader: boolean = true;
   public infiniteScrollDisabled = true;
@@ -32,11 +32,15 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
   offset: number = 15;
   showPendingPreloader: boolean = false;
   idEditTicket:string = '';
+  @ViewChild('header') header: TicketsHeaderComponent;
+  
+ 
   constructor(private ticketsService: TicketsService,
     private ticketsListService: TicketsListService,
     public cd: ChangeDetectorRef,
-    private ticketStateService: TicketStateService,
-    private leftPanelService:LeftPanelService,
+    private ticketStateService:TicketStateService,
+    private leftPanelService: LeftPanelService,
+    private usersStateService:UsersStateService,
     private companiesStateService: CompaniesStateService,
     private ticketsStateService: TicketsStateService) { }
 
@@ -79,6 +83,15 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
       if (findIndex > -1) this.tickets.splice(findIndex, 1);
     });
 
+    let getOnInitFilter = this.ticketsStateService.getOnInitFilter().subscribe(data => {
+      this.ticketsFilter = data;
+      this.showPreloader = true;
+      window.scrollTo(0, 0);
+      this.setDefaultScoll();
+      this.onScroll();
+    })
+    this.sub.add(getOnInitFilter);
+
     this.ticketsStateService.getOnInitColor().subscribe(data => {
       this.listColors = data;
     })
@@ -89,9 +102,15 @@ export class CompanyTicketsComponent implements OnInit, OnDestroy {
     if (localStorage.getItem('company_id')) {
       let ticket_id = localStorage.getItem('company_id');
       let company = this.companiesStateService.getCompanies().find(item => item.id === ticket_id);
+      this.header.filter.setTypeFilterWithoutChange("ALL");
+      this.header.filter.companyDp.isDisabled = true;
+      this.header.filter.companyDp.editItem = company;
+      this.header.filter.ticketsFilter.setCompany(company);
+      this.header.filter.onChangeCounterFilter();
       this.ticketsFilter.setListType("ALL");
       this.ticketsFilter.setCompany(company);
-
+      this.header.filter.onGetUsers(this.usersStateService.getAllUsers().filter(user => user.company.id === company.id));
+    
       this.getCount();
       this.onScroll();
     }

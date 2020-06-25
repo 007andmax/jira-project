@@ -51,16 +51,17 @@
           <div class="ticket-edit-aside__ticket-subject-edit d-f ai-c"
                [hidden]="modeSubject === 'view'" appClickOtside [init]="modeSubject === 'edit'" [class]="'.ticket-edit-aside__ticket-text'" (onOutSide)="toggleSubject()">
             <span [textContent]="'Tkt# ' + ticketProfile.number"></span>
-            <input    [(ngModel)]="ticketProfile.subject"/>
+            <input id="ticket-subject"   [value]="ticketProfile.subject"/>
           </div>
           <div class="ticket-edit-aside__ticket-description-edit"
                appClickOtside [init]="opened" [class]="'.ticket-edit-aside__ticket-text'" (onOutSide)="toggleNote()"
           >
-            <textarea id="ticket-note" placeholder="Enter description here"  ></textarea>
+          <div  class="form-control editor" contenteditable="true"     id="ticket-note" placeholder="Enter description here"></div> 
+          <!-- <textarea id="ticket-note" placeholder="Enter description here"  ></textarea> -->
           </div>
         </div>
        <app-ticket-claim-info [ticketProfile]="ticketProfile"></app-ticket-claim-info>
-      <app-ticket-message (onMoveToTrash)="moveToTrash($event)" (onRestoreFromSpam)="restoreFromSpam()" (onOpenTicket)="markAsOpen()" (onClaimTicket)="claimTicket()" [ticketProfile]="ticketProfile"></app-ticket-message>
+      <app-ticket-message #ticketMessage (onMoveToTrash)="moveToTrash($event)" (onRestoreFromSpam)="restoreFromSpam()" (onOpenTicket)="markAsOpen()" (onClaimTicket)="claimTicket()" [ticketProfile]="ticketProfile"></app-ticket-message>
      <app-ticket-profile-attachments [attachments]="ticketProfile.attachments"></app-ticket-profile-attachments>
       <app-ticket-profile-updates *ngIf="ticketProfile.updates && ticketProfile.updates.length > 0" (onFetchUpdates)="onFetchUpdates($event)" [ticketProfile]="ticketProfile" [updates]="ticketProfile.updates"></app-ticket-profile-updates>
         <app-ticket-profile-form-update (onClosed)="close()" [hidden]="!ticketsPermissionsService.isActionVisible('update', ticketProfile,null,null)" #updateForm [ticket]="ticketProfile" [lisUpdateUser]="lisUpdateUser"></app-ticket-profile-form-update>

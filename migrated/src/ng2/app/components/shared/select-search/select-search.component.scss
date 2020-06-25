@@ -1,6 +1,10 @@
 .no-valid {
     border: 1px solid red !important;
 }
+.disabled {
+  background-color: #ebebe4;
+  cursor: default !important;
+}
 /deep/.qt-dropdown {
   position: relative;
   &.with-placeholder {

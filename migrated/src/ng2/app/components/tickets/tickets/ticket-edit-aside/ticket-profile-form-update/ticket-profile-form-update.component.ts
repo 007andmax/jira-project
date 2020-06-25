@@ -10,6 +10,7 @@ import { TicketProfileFormUpdateProductsComponent } from './ticket-profile-form-
 import { TicketProfileFormUpdateServicesComponent } from './ticket-profile-form-update-services/ticket-profile-form-update-services.component';
 import { NotificationStateService } from 'src/ng2/app/components/shared/notification/services/notification-state.service';
 import { ErrorNotificationStateService } from 'src/ng2/app/components/shared/error-notification/services/error-notification-state.service';
+import { DisabledBtnDirective } from 'src/ng2/app/directives/disabled-btn.directive';
 
 @Component({
   selector: 'app-ticket-profile-form-update',
@@ -22,6 +23,8 @@ export class TicketProfileFormUpdateComponent implements OnInit {
   ticketProfile: TicketProfile = new TicketProfile();
   ticketProfileFormUpdate: TicketProfileFormUpdate = new TicketProfileFormUpdate();
   @ViewChild('selectProducts') selectProducts: TicketProfileFormUpdateProductsComponent;
+  @ViewChild('update_closeBtn') update_closeBtn: DisabledBtnDirective;
+  @ViewChild('updateBtn') updateBtn: DisabledBtnDirective;
   @ViewChild('selectServices') selectServices: TicketProfileFormUpdateServicesComponent;
   @Input() lisUpdateUser: Array<CurrentUser> = [];
   @Input() set ticket(value) {
@@ -49,13 +52,11 @@ export class TicketProfileFormUpdateComponent implements OnInit {
     this.currentUser = this.usersStateService.getCurrentUser();
   }
   private addCreatedUser() {
-    console.log("this.ticketProfile",this.ticketProfile);
-    console.log("this.lisUpdateUser",this.lisUpdateUser);
     if (this.ticketProfile.createdUser) {
       let find = this.lisUpdateUser.find(item => item.id === this.ticketProfile.createdUser.id);
       if (!find) this.lisUpdateUser.unshift(this.ticketProfile.createdUser);
     }
-   
+
   }
   public onChangeChat(event) {
     this.ticketProfileFormUpdate.setChatMessage(event.target.value.replace(/\n/g, '<br/>'));
@@ -88,20 +89,20 @@ export class TicketProfileFormUpdateComponent implements OnInit {
     }
     if (this.tab === "PRODUCT") {
       this.onChangeProducts(this.selectProducts.getSelectedProducts());
-      console.log("this.selectProducts.onValidateProducts()",this.selectProducts.onValidateProducts());
       if (!this.ticketProfileFormUpdate.isValidateProduct() || !this.selectProducts.onValidateProducts()) return;
       this.onUpdateTicket(this.ticketProfileFormUpdate.getDataForUpdateProduct());
 
     }
     if (this.tab === "SERVICE") {
       this.onChangeServices(this.selectServices.getSelectedServices());
-      if (!this.ticketProfileFormUpdate.isValidateService()) return;
+      if (!this.selectServices.onValidateServices() || !this.ticketProfileFormUpdate.isValidateService()) return;
       this.onUpdateTicket(this.ticketProfileFormUpdate.getDataForUpdateService());
 
     }
 
   }
   onUpdateTicket(data) {
+    this.updateBtn.setDisabled(true);
     this.isUpdate = true;
     this.ticketsService.updateTicket(data).subscribe(data => {
       this.isUpdate = false;
@@ -115,8 +116,10 @@ export class TicketProfileFormUpdateComponent implements OnInit {
       this.notificationStateService.oninitShowNotification(`Update has been added`);
       this.files = [];
       this.ticketProfileFormUpdate.clearAttachments();
-    },err => {
+      this.updateBtn.setDisabled(false);
+    }, err => {
       this.isUpdate = false;
+      this.updateBtn.setDisabled(false);
     })
   }
   updateAndClose() {
@@ -129,7 +132,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
     }
     if (this.tab === "PRODUCT") {
       this.onChangeProducts(this.selectProducts.getSelectedProducts());
-      
+
       if (this.ticketProfileFormUpdate.isValidateProduct()) {
         if (!this.selectProducts.onValidateProducts()) return;
         this.onUpdateTicketAndClose(this.ticketProfileFormUpdate.getDataForUpdateProduct());
@@ -140,6 +143,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
     if (this.tab === "SERVICE") {
       this.onChangeServices(this.selectServices.getSelectedServices());
       if (this.ticketProfileFormUpdate.isValidateServiceUpdateAndClose()) {
+        if (!this.selectServices.onValidateServices()) return;
         this.onUpdateTicketAndClose(this.ticketProfileFormUpdate.getDataForUpdateService());
 
       } else this.onUpdateTicketAndClose(this.ticketProfileFormUpdate.getDataForClose());
@@ -147,6 +151,7 @@ export class TicketProfileFormUpdateComponent implements OnInit {
     }
   }
   onUpdateTicketAndClose(data) {
+    this.update_closeBtn.setDisabled(true);
     this.isUpdateAndClose = true;
     this.ticketsService.updateTicket(data, true).subscribe(data => {
       this.isUpdateAndClose = false;
@@ -161,9 +166,11 @@ export class TicketProfileFormUpdateComponent implements OnInit {
       this.files = [];
       this.ticketProfileFormUpdate.clearAttachments();
       this.onClosed.emit(null);
+      this.update_closeBtn.setDisabled(false);
     }, err => {
       this.isUpdateAndClose = false;
       this.errorNotificationStateService.oninitShowNotification(err.error.message);
+      this.update_closeBtn.setDisabled(false);
     })
   }
   private checkUpdateAndClose() {

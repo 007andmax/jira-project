@@ -1,19 +1,20 @@
 <tr [ngClass]="{'selected-ticket': selected}">
   <td class="ticket-table__requested-by">
-    <div class="d-f">
-       <div class="qt-table-modern__circle-avatar" [ngClass]="getNameForAvatar() ? 'transparent-text' : ''" [textContent]="getNameForAvatar() ? getNameForAvatar() : '.'"
+    <div class="d-f ai-c h100">
+       <div class="qt-table-modern__circle-avatar" [ngClass]="!getNameForAvatar().length ? 'transparent-text' : ''" [textContent]="getNameForAvatar()"
         [ngStyle]="{'background': ticketsListService.getStyleAvatar(requestedUser,listColorNoAvatar[indexNoAvatar]) }"></div>
-      
-      
+
+
       <div [textContent]="getUserName(requestedUser)" class="ellipsis"></div>
     </div>
   </td>
-  <td class="--strong ticket-table__subject">{{'Tkt# ' + ticket.number + ' - ' + ticket.subject}} <span [ngClass]="getClassType()"></span>
+  <td class="--strong ticket-table__subject">
+      {{'Tkt# ' + ticket.number + ' - ' + ticket.subject}} <span [ngClass]="getClassType()"></span>
   </td>
   <td class="ticket-table__company" [textContent]="getCompanyName()"></td>
 
   <td class="ticket-table__assignee" *ngIf="!ticket.assignedUserId && ticket.multiAssignedUsers &&  ticket.multiAssignedUsers.length > 0">
-   
+
       <div class="d-f">
         <ng-template ngFor let-user [ngForOf]="ticket.multiAssignedUsers" [ngForTrackBy]="trackById">
         <div class="qt-table-modern__circle-avatar" [textContent]="getAssignedUserNameForAvatar(user)"

@@ -20,8 +20,12 @@ export class TicketsFilter {
     selectedCompany: Company = null;
     selectedTechUser: User = null;
     selectedUser: User = null;
+    selectedStatus: string = null;
     constructor() {
         this.onInitUser();
+    }
+    public setStatus(data) {
+        this.selectedStatus = data;
     }
     public setTags(data) {
         this.tags = data;
@@ -43,7 +47,7 @@ export class TicketsFilter {
             "IN_PROGRESS": this.getInProgressPayLoad(),
             "ON_HOLD": this.getHoldPayLoad(),
             "OPEN": this.getOpenPayLoad(),
-            "RECURRING_TICKETS_CLOSED":this.getRecurringTicketsClosedPayLoad(),
+            "RECURRING_TICKETS_CLOSED": this.getRecurringTicketsClosedPayLoad(),
             "RECURRING_TICKETS_OPEN": this.getRecurringTicketsOpenPayLoad(),
             "SPAM": this.getSpamPayLoad(),
             "TRASH": this.getTrashPayLoad(),
@@ -104,7 +108,7 @@ export class TicketsFilter {
         if (this.listType === "RECURRING_TICKETS_CLOSED") payload = JSON.parse(JSON.stringify(this.payloadRecurringTicketsClosed));
         if (this.listType === "COMPLETED") payload = JSON.parse(JSON.stringify(this.payloadCompleted));
         if (this.listType === "IN_PROGRESS") payload = JSON.parse(JSON.stringify(this.payloadInProgress));
-       
+
         if (this.selectedCompany) {
             payload.groupFieldFilters[0].fieldFilterDtos.push({
                 operator: "EQ",
@@ -123,7 +127,7 @@ export class TicketsFilter {
             payload.groupFieldFilters[0].predicateRule = "AND";
         }
         if (this.selectedUser) {
-           
+
             payload.groupFieldFilters[0].fieldFilterDtos.push({
                 operator: "EQ",
                 path: "createdUserId",
@@ -151,7 +155,7 @@ export class TicketsFilter {
     public onInitUnassigned() {
         this.payloadUnassigned = this.getUnassignedPayLoad();
         this.payloadUnassigned.offset = 0;
-            
+
     }
     public onInitOpen() {
         this.payloadOpen = this.getOpenPayLoad();
@@ -160,12 +164,12 @@ export class TicketsFilter {
     public onInitClosed() {
         this.payloadClosed = this.getClsoedPayLoad();
         this.payloadClosed.offset = 0;
-            
+
     }
     public onInitOnhold() {
         this.payloadOnhold = this.getHoldPayLoad();
         this.payloadOnhold.offset = 0;
-            
+
     }
     public onInitTrash() {
         this.payloadTrash = this.getTrashPayLoad();
@@ -178,17 +182,17 @@ export class TicketsFilter {
     public onInitRecurringTicketsClosed() {
         this.payloadRecurringTicketsClosed = this.getRecurringTicketsClosedPayLoad();
         this.payloadRecurringTicketsClosed.offset = 0;
-            
+
     }
     public onInitUser() {
         this.payloadUser = this.getUserPayLoad();
         this.payloadUser.offset = 0;
-            
+
     }
     public onInitSpam() {
         this.payloadSpam = this.getSpamPayLoad();
         this.payloadSpam.offset = 0;
-            
+
     }
     public onInitCompleted() {
         this.payloadCompleted = this.getCompletedPayLoad();
@@ -277,7 +281,7 @@ export class TicketsFilter {
         }
     }
     private getClsoedPayLoad() {
-        return  {
+        return {
             excludeTrashSpam: true,
             groupFieldFilters: [
                 {
@@ -302,7 +306,7 @@ export class TicketsFilter {
         }
     }
     private getHoldPayLoad() {
-        return  {
+        return {
             excludeTrashSpam: true,
             groupFieldFilters: [
                 {
@@ -320,7 +324,7 @@ export class TicketsFilter {
         }
     }
     private getTrashPayLoad() {
-        return  {
+        return {
             groupFieldFilters: [
                 {
                     fieldFilterDtos: [
@@ -337,7 +341,7 @@ export class TicketsFilter {
         }
     }
     private getRecurringTicketsOpenPayLoad() {
-        return  {
+        return {
             excludeTrashSpam: true,
             groupFieldFilters: [
                 {
@@ -362,7 +366,7 @@ export class TicketsFilter {
         }
     }
     private getRecurringTicketsClosedPayLoad() {
-        return  {
+        return {
             excludeTrashSpam: true,
             groupFieldFilters: [
                 {
@@ -387,7 +391,7 @@ export class TicketsFilter {
         }
     }
     private getUserPayLoad() {
-        return  {
+        return {
             excludeTrashSpam: true,
             groupFieldFilters: [
                 {
@@ -406,7 +410,7 @@ export class TicketsFilter {
         }
     }
     private getSpamPayLoad() {
-        return  {
+        return {
             groupFieldFilters: [
                 {
                     predicateRule: "OR",
@@ -425,7 +429,7 @@ export class TicketsFilter {
         }
     }
     private getCompletedPayLoad() {
-        return  {
+        return {
             excludeTrashSpam: true,
             groupFieldFilters: [
                 {
@@ -440,10 +444,10 @@ export class TicketsFilter {
                     ]
                 }
             ],
-        } ;
+        };
     }
     private getInProgressPayLoad() {
-        return  {
+        return {
             excludeTrashSpam: true,
             groupFieldFilters: [
                 {
@@ -458,7 +462,7 @@ export class TicketsFilter {
                     ]
                 }
             ],
-        
-        } ;
+
+        };
     }
 }
