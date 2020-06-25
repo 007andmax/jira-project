@@ -32,7 +32,7 @@ export class InvoiceFormComponent implements OnInit,OnDestroy {
         this.company.addresses[0].addressWithSuitNumberAndPostalCode = data.data.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode;
         this.company.contacts[0].primaryEmail = data.data.companyInfo.contacts[0].primaryEmail;
         this.company.contacts[0].phoneNumbers = data.data.companyInfo.contacts[0].phoneNumbers;
-
+console.log("this.company",this.company);
       }
 
 
