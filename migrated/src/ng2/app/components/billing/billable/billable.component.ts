@@ -36,29 +36,20 @@ export class BillableComponent implements OnInit {
     })
     this.billableRealTimeService.changeBillable.subscribe(data => {
       if (data.action == 'TICKET_LOCKED') {
-        console.log("data", data);
-        var key = Object.keys(data.data)[0];
+        let key = Object.keys(data.data)[0];
         let tickets = data.data[key];
-        console.log("tickets", tickets);
         tickets.forEach(item => {
           this.list.forEach(itemList => {
             let indexTicket = itemList.tickets.findIndex(ticket => ticket.id === item);
-            if (indexTicket > -1) {
-              itemList.tickets[indexTicket].lockedBy = new Date().getTime();
-              console.log("this.list[index].tickets[indexTicket]", itemList.tickets[indexTicket]);
-            }
+            if (indexTicket > -1)   itemList.tickets[indexTicket].lockedBy = new Date().getTime();
           })
         });
       }
       if (data.action == 'TICKET_UNLOCKED') {
-        console.log("data", data);
         data.data.forEach(item => {
           this.list.forEach(itemList => {
             itemList.tickets.forEach(ticket => {
-              if (ticket.id === item) {
-                ticket.lockedBy = null;
-                console.log("ticket", ticket);
-              }
+              if (ticket.id === item) ticket.lockedBy = null;
             });
 
           })
