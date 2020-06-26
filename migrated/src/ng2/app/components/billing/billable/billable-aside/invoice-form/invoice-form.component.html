@@ -5,7 +5,7 @@
     <div class="qt-w50 qt-pt-16 qt-pr-24 qt-pl-32 qt-pb-16">
       <div class="qt-input-block">
         <label>Customer Name</label>
-        <input  [value]="company.name" type="text">
+        <input  [value]="company.name" type="text" disabled>
       </div>
     </div>
    
@@ -56,13 +56,15 @@
   </div>
 
   <div class="invoice-items">
-
+    <ng-template ngFor let-ticket
+    [ngForOf]="invoice.invoiceDataDto.tickets"
+    [ngForTrackBy]="trackById">
     <div class="invoice-item qt-mb-16 qt-w100">
       <div class="qt-df qt-ai-c">
         <div class="invoice-item__header qt-w100 qt-ml-30 qt-df qt-ai-c qt-pt-10 qt-pb-10 qt-h40">
-          <div class="invoice-item__number qt-color-white qt-fs-10 qt-pt-4 qt-pb-4 qt-pl-4 qt-pr-4 qt-mr-16">Tkt# 22874</div>
-          <div class="qt-fs-12 qt-mr-16" ><span class="qt-fs-11 qt-fw-b">Tkt# 22874</span> 30/05/2020</div>
-          <div class="qt-fs-12"><span class="qt-fs-11 qt-fw-b">Subject:</span> Renew licence in this computers as printer’s is not working</div>
+          <div class="invoice-item__number qt-color-white qt-fs-10 qt-pt-4 qt-pb-4 qt-pl-4 qt-pr-4 qt-mr-16" [textContent]="'Tkt# ' + ticket.number"></div>
+          <div class="qt-fs-12 qt-mr-16" ><span class="qt-fs-11 qt-fw-b">Date</span> {{getDate(ticket.closedAt)}}</div>
+          <div class="qt-fs-12"><span class="qt-fs-11 qt-fw-b">Subject:</span> {{ticket.subject}}</div>
         </div>
         <div class="delete-item-container qt-pl-4">
           <div class="qt-pointer  qt-sz-16 icon__raw-clear qt-ic-c " ></div>
@@ -83,6 +85,11 @@
           </tr>
         </thead>
         <tbody>
+          <ng-template ngFor let-service
+    [ngForOf]="ticket.serviceExpenses"
+    [ngForTrackBy]="trackById">
+
+  
           <tr>
             <td>
               <div class=" qt-pointer qt-sz-20 icon__move-light qt-ic-c"></div>
@@ -97,7 +104,7 @@
               <div class="qt-pointer qt-ml-4 qt-sz-16 icon__raw-clear qt-ic-c"></div>
             </td>
           </tr>
-
+        </ng-template>
           <tr>
             <td>
               <div class=" qt-pointer qt-sz-20 icon__move-light qt-ic-c"></div>
@@ -115,7 +122,7 @@
         </tbody>
       </table>
     </div>
-
+</ng-template>
     <div class="invoice-item qt-mb-16 qt-w100">
       <div class="qt-df qt-ai-c">
         <div class="invoice-item__header qt-w100 qt-ml-30 qt-df qt-ai-c qt-pt-10 qt-pb-10 qt-h40">

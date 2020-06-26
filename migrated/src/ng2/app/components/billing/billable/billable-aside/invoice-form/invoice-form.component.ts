@@ -10,7 +10,8 @@ import { InvoiceFormEditCustomerComponent } from './invoice-form-edit-customer/i
 import { PartialUpdate } from './class/partial-update';
 import { BillableService } from 'src/ng2/app/services/billable/billable.service';
 import { InvoiceTaxNumber } from '../../class/invoice-tax-number';
-
+import { BillableTaimer } from '../class/billable-taimer';
+import * as moment from "moment";
 
 @Component({
   selector: 'app-invoice-form',
@@ -21,8 +22,10 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   @ViewChild('companyEdit') companyEdit: InvoiceFormEditCustomerComponent;
   @Input() invoice: InvoiceLock;
   @Input() invoiceNumber: string;
+  
   @Input() company: CompanyProfile = new CompanyProfile();
   @Input() invoiceTaxNumber: InvoiceTaxNumber;
+ 
   currentCompany: any;
   sub: Subscription = new Subscription();
   constructor(private billableStateService: BillableStateService,
@@ -31,6 +34,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+    
     this.currentCompany = this.companiesStateService.getCurrentCompany();
     let getChangeCompanies = this.companiesStateService.getChangeCompanies().subscribe((data: CompanyUpdate) => {
 
@@ -66,6 +70,9 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   }
   onChangeGSTNumber() {
 
+  }
+  public getDate(date) {
+    return moment(new Date(date)).format('DD/MM/YYYY');
   }
   onChangeInvoiceNumber() {
     let request: PartialUpdate = new PartialUpdate(null, null, this.invoiceNumber, null, null);
