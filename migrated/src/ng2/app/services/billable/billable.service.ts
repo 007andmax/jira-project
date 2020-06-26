@@ -36,6 +36,9 @@ export class BillableService {
   public getTaxNumber() {
     return this.http.get(this.apiUrl + `settings/emailPages/taxNumber`).pipe(map((data: any) => new InvoiceTaxNumber(data)));
   }
+  public editTaxNumber(data) {
+    return this.http.put(this.apiUrl + `settings/emailPages/taxNumber`,data);
+  }
   public getActualNumber() {
     return this.http.get(this.apiUrl + `data/actualNumber?type=INVOICE`);
   }

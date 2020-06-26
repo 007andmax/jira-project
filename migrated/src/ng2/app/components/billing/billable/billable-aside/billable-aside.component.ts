@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BillableStateService } from 'src/ng2/app/states/billable/billable-state.service';
 import { BillableService } from 'src/ng2/app/services/billable/billable.service';
 import { InvoiceNote } from '../class/invoice-note';
@@ -8,13 +8,14 @@ import { InvoiceLock } from '../class/invoice-lock';
 import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
 import { Company } from 'src/ng2/app/interfaces/company/company';
 import { CompanyProfile } from '../../../companies/class/company-profile';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-billable-aside',
   templateUrl: './billable-aside.component.html',
   styleUrls: ['./billable-aside.component.scss']
 })
-export class BillableAsideComponent implements OnInit {
+export class BillableAsideComponent implements OnInit, OnDestroy {
   opened: boolean = false;
   invoiceTaxNumber: InvoiceTaxNumber;
   invoiceNotes: Array<InvoiceNote> = [];
@@ -22,23 +23,26 @@ export class BillableAsideComponent implements OnInit {
   invoice: InvoiceLock;
   showPreloader: boolean = true;
   company: CompanyProfile = new CompanyProfile();
-  invoiceNumber:string;
+  invoiceNumber: string;
+  sub: Subscription = new Subscription();
   constructor(private billableStateService: BillableStateService,
     private companiesService: CompaniesService,
     private billableService: BillableService) { }
 
+
   ngOnInit() {
-    this.billableStateService.getOnCreate().subscribe(data => {
+    let getOnCreate = this.billableStateService.getOnCreate().subscribe(data => {
       this.billableProfile = this.billableStateService.getBillableProfile();
       this.opened = true;
-     
+
       this.getInvoiceNote();
       this.getTaxNumber();
       this.getActualNumber();
-      console.log("data",data);
+      console.log("data", data);
       this.getInvoiceLock(data);
       // this.billableProfile = this.billableStateService.getBillableProfile();
     })
+    this.sub.add(getOnCreate);
   }
   unlock() {
     this.billableService.unlock(this.invoice.lockId).subscribe(data => {
@@ -46,7 +50,7 @@ export class BillableAsideComponent implements OnInit {
     })
   }
   private getCompany(id) {
-    this.companiesService.getCompany(id).subscribe((data:any) => {
+    this.companiesService.getCompany(id).subscribe((data: any) => {
       this.company.onEditMode(data);
       this.showPreloader = false;
     })
@@ -64,7 +68,7 @@ export class BillableAsideComponent implements OnInit {
     })
   }
   private getActualNumber() {
-    this.billableService.getActualNumber().subscribe((data:any) => {
+    this.billableService.getActualNumber().subscribe((data: any) => {
       console.log("data", data);
       this.invoiceNumber = data.number;
     })
@@ -80,8 +84,10 @@ export class BillableAsideComponent implements OnInit {
     this.billableService.getInvoiceLockTime(id).subscribe(data => {
       console.log("data", data);
       this.getCompany(this.billableProfile.id);
-     
+
     })
   }
-
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }

@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 import { InvoiceFormEditCustomerComponent } from './invoice-form-edit-customer/invoice-form-edit-customer.component';
 import { PartialUpdate } from './class/partial-update';
 import { BillableService } from 'src/ng2/app/services/billable/billable.service';
+import { InvoiceTaxNumber } from '../../class/invoice-tax-number';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   @Input() invoice: InvoiceLock;
   @Input() invoiceNumber: string;
   @Input() company: CompanyProfile = new CompanyProfile();
+  @Input() invoiceTaxNumber: InvoiceTaxNumber;
   currentCompany: any;
   sub: Subscription = new Subscription();
   constructor(private billableStateService: BillableStateService,
@@ -61,6 +63,14 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
       return finalDate.getTime();
     }
 
+  }
+  onChangeGSTNumber() {
+
+  }
+  onChangeInvoiceNumber() {
+    let request: PartialUpdate = new PartialUpdate(null, null, this.invoiceNumber, null, null);
+    console.log("request", request);
+    this.updateInvoiceData(request);
   }
   onChangeDate(date) {
     console.log("date", date);

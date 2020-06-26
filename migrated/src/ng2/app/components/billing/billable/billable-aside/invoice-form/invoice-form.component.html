@@ -34,12 +34,12 @@
 
     <div class="qt-input-block qt-mr-16 qt-w100">
       <label>Invoice#</label>
-      <input type="text">
+      <input [(ngModel)]="invoiceNumber" (blur)="onChangeInvoiceNumber()" type="text">
     </div>
 
     <div class="qt-input-block qt-mr-16 qt-w100">
-      <label>GST Number</label>
-      <input type="text">
+      <label [textContent]="invoiceTaxNumber.taxIdDescription"></label>
+      <input [(ngModel)]="invoiceTaxNumber.taxId"   type="text">
     </div>
 
     <div class="qt-input-block qt-mr-16 qt-w100">
