@@ -309,6 +309,10 @@
             $scope.goToTab(`#/ng2/company-password-manager`);
             return;
           }
+          if (tabToActivate == 'billablePageNew') {
+            $scope.goToTab(`#/ng2/billable`);
+            return;
+          }
           if (tabToActivate == 'CompanyProfileUsersPage') {
             $scope.goToTab(`#/ng2/company-user`);
             return;
@@ -342,7 +346,7 @@
           link.dispatchEvent(e);
         }
 
-        $scope.goToTab = function (url) {
+      /*  $scope.goToTab = function (url) {
           let body = document.querySelector('.left-panel__category-wrap');
           var link = document.createElement('a');
           body.appendChild(link);
@@ -351,7 +355,7 @@
           e.initEvent('click', true, true);
           link.dispatchEvent(e);
         }
-
+*/
         $scope.companyIconClick = function () {
           $scope.isLeftPanelHidden = !$scope.isLeftPanelHidden
         };
