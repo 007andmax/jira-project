@@ -96,11 +96,7 @@
 
 // billing aside
 .billing-page {
-  padding: 0;
-  margin: 0;
-  width: 100vw;
-  height: 100vh;
-  color:  #4f5f79;
+
 
   &__aside{
     background: white;
@@ -114,19 +110,157 @@
     top: 79px;
     right: 0;
     height: calc(100vh - 79px);
-  }
 
-  .billing-aside-scroll-content {
-    overflow: auto;
-    height: calc(100% - 127px);
-  }
+    .billing-aside-scroll-content {
+      overflow: auto;
+      height: calc(100% - 127px);
+    }
 
-  .aside-header {
-    height: 56px;
-    background-color: #f9fafb;
-    border-bottom: 1px solid #dfe3e8;
-  }
+    .aside-header {
+      height: 56px;
+      background-color: #f9fafb;
+      border-bottom: 1px solid #dfe3e8;
+    }
 
+    .invoice-items {
+      color: #364656;
+      border-radius: 4px;
+    }
+    .invoice-item  {
+      &__header {
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+        border: solid 1px #dfe3e8;
+        background-color: #ffffff;
+      }
+
+      &__number {
+        background-color: #637382;
+      }
+
+      .delete-item-container {
+        min-width: 30px;
+        width: 30px;
+      }
+
+      &__table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0px;
+        th, td {
+          background-color: #f9fafb;
+          border: solid 1px #dfe3e8;
+          border-left: none;
+          height: 36px;
+          padding: 0 12px;
+          font-weight: 600;
+          font-size: 11px;
+          border-top: none;
+          &:first-child, &:last-child  {
+            border: none;
+            width: 30px;
+            background: transparent;
+            padding: 0;
+            .icon__move-light {
+              margin-left: auto;
+            }
+          }
+          &:nth-child(2) {
+            border-left: solid 1px #dfe3e8;
+          }
+        }
+
+        td {
+          background-color: white;
+          font-size: 12px;
+          font-weight: 500;
+        }
+        tbody {
+          tr:last-child {
+            td:nth-child(2) {
+              border-bottom-left-radius: 4px;
+            }
+            td:last-child {
+              border-bottom-right-radius: 4px;
+            }
+          }
+        }
+      }
+      &__col-item {
+        text-align: left;
+      }
+      &__col-desc {
+        text-align: left;
+      }
+      &__col-price {
+        text-align: right;
+        width: 94px;
+      }
+      &__col-quentity {
+        text-align: right;
+        width: 90px;
+      }
+      &__col-tax {
+        text-align: right;
+        width: 80px;
+      }
+      &__col-amount {
+        text-align: right;
+        width: 109px;
+      }
+    }
+
+    .summary-info {
+      &__notes {
+        width: 447px;
+      }
+      &__textarea {
+        height: 72px;
+      }
+    }
+
+    .invoice-total {
+      width: 275px;
+      border-radius: 6px;
+      border: dashed 1px #637381;
+      padding: 15px 20px;
+
+      &__total-line {
+        border-top: dashed 1px #637381;
+      }
+    }
+
+
+    .info-button-sm {
+      display: flex;
+      font-size: 12px;
+      align-items: center;
+      height: 28px;
+      border-radius: 4px;
+      border: solid 1px #16a4fa;
+      background-color: #ffffff;
+      padding: 0 8px;
+      width: fit-content;
+      color: #16a4fa;
+      cursor: pointer;
+    }
+
+    .terms-n-conditions {
+      background-color: #f9fafb;
+
+      &__textarea  {
+        width: 541px;
+        height: 72px;
+      }
+    }
+
+    .aside-footer {
+      height: 72px;
+      border: 1px solid #dfe3e8;
+      background: white;
+    }
+  }
   .address-block {
     border-bottom: 1px solid #dfe3e8;
     &__horisontal-divider {
@@ -142,145 +276,110 @@
     }
   }
 
-  .invoice-items {
-    color: #364656;
-    border-radius: 4px;
+
+}
+
+app-invoice-preview {
+
+  .billing-aside-scroll-content {
+    overflow: auto;
+    height: calc(100% - 127px);
   }
-  .invoice-item  {
-    &__header {
-      border-top-left-radius: 4px;
-      border-top-right-radius: 4px;
-      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+
+  .invoice-info {
+    border-radius: 4px;
+    border: solid 1px #16a4fa;
+    background-color: rgba(22, 164, 250, 0.05);
+  }
+
+  .invoice-preview {
+    box-shadow: 0 8px 16px 10px rgba(0, 0, 0, 0.05);
+    background-color: #ffffff;
+    padding: 40px;
+
+    .company-logo {
+      max-width: 200;
+      max-height: 70px;
+    }
+    .company-info {
+      border-bottom: 1px solid #dfe3e8;
+    }
+
+    .invoice-info-value {
+      width: 125px;
+    }
+
+    &__item-header {
       border: solid 1px #dfe3e8;
-      background-color: #ffffff;
-    }
-
-    &__number {
-      background-color: #637382;
-    }
-
-    .delete-item-container {
-      min-width: 30px;
-      width: 30px;
+      background-color: #f9fafb;
     }
 
     &__table {
       width: 100%;
       border-collapse: separate;
       border-spacing: 0px;
+
       th, td {
-        background-color: #f9fafb;
-        border: solid 1px #dfe3e8;
-        border-left: none;
-        height: 36px;
-        padding: 0 12px;
-        font-weight: 600;
-        font-size: 11px;
-        border-top: none;
-        &:first-child, &:last-child  {
-          border: none;
-          width: 30px;
-          background: transparent;
-          padding: 0;
-          .icon__move-light {
-            margin-left: auto;
-          }
-        }
-        &:nth-child(2) {
+        border-bottom: solid 1px #dfe3e8;
+        &:first-child {
           border-left: solid 1px #dfe3e8;
         }
-      }
-
-      td {
-        background-color: white;
-        font-size: 12px;
-        font-weight: 500;
-      }
-      tbody {
-        tr:last-child {
-          td:nth-child(2) {
-            border-bottom-left-radius: 4px;
-          }
-          td:last-child {
-            border-bottom-right-radius: 4px;
-          }
+        &:last-child {
+          border-right: solid 1px #dfe3e8;
         }
       }
+      th {
+        padding: 10px 12px;
+        font-size: 11px;
+        font-family: Graphik-Semibold, sans-serif;
+      }
+      td {
+        font-size: 12px;
+        padding: 12px;
+      }
     }
+
+    &__item-header-number {
+      width: 90px;
+    }
+
+    &__item-header-date {
+      width: 102px;
+    }
+
     &__col-item {
       text-align: left;
+      width: 140px;
     }
+
     &__col-desc {
       text-align: left;
     }
-    &__col-price {
+
+    &__col-qty {
       text-align: right;
       width: 94px;
     }
-    &__col-quentity {
-      text-align: right;
-      width: 90px;
-    }
+
     &__col-tax {
+      text-align: right;
+      width: 54px;
+    }
+
+    &__col-amount, &__col-price {
       text-align: right;
       width: 80px;
     }
-    &__col-amount {
-      text-align: right;
-      width: 109px;
+
+    &__total-block {
+      width: 247px;
+    }
+
+    &__total-price {
+      background-color: #f9fafb;
     }
   }
 
-  .summary-info {
-    &__notes {
-      width: 447px;
-    }
-    &__textarea {
-      height: 72px;
-    }
-  }
-
-  .invoice-total {
-    width: 275px;
-    border-radius: 6px;
-    border: dashed 1px #637381;
-    padding: 15px 20px;
-
-    &__total-line {
-      border-top: dashed 1px #637381;
-    }
-  }
-
-
-  .info-button-sm {
-    display: flex;
-    font-size: 12px;
-    align-items: center;
-    height: 28px;
-    border-radius: 4px;
-    border: solid 1px #16a4fa;
-    background-color: #ffffff;
-    padding: 0 8px;
-    width: fit-content;
-    color: #16a4fa;
-    cursor: pointer;
-  }
-
-  .terms-n-conditions {
-    background-color: #f9fafb;
-
-    &__textarea  {
-      width: 541px;
-      height: 72px;
-    }
-  }
-
-  .aside-footer {
-    height: 72px;
-    border: 1px solid #dfe3e8;
-    background: white;
-  }
 
 }
-
 
