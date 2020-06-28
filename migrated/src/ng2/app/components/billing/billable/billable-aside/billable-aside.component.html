@@ -7,8 +7,10 @@
     </div>
 
     <div class="qt-df qt-ai-c">
-      <div class="icon__clock-timer qt-sz-20 qt-ic-c qt-mr-6"></div>
+      <div class="icon__clock-timer qt-sz-20 qt-ic-c qt-mr-6" *ngIf="billableTaimer && !billableTaimer.isFinished"></div>
       <div class="qt-fs-13 qt-ff-gr qt-mr-16" *ngIf="billableTaimer && !billableTaimer.isFinished"><span class="qt-ff-gm qt-color-dark" [textContent]="billableTaimer.getTimeText()">14:46</span>  mins remaining until unlock</div>
+
+      <div class="icon__invoice-expired qt-sz-20 qt-ic-c qt-mr-6" *ngIf="billableTaimer && billableTaimer.isFinished"></div>
       <div class="qt-fs-13 qt-ff-gr qt-mr-16" *ngIf="billableTaimer && billableTaimer.isFinished">Invoice has been expired and it cannot be saved</div>
 
       <div class="icon__close qt-sz-24 qt-ic-c qt-pointer" (click)="unlock()"></div>
@@ -29,8 +31,16 @@
 
  <div class="aside-footer qt-pr-30 qt-pl-30 qt-pb-16 qt-pt-16 qt-df qt-ai-c qt-jc-sb">
   <div class="qt-df">
-    <button class=" qt-button --with-menu qt-mr-12">Save and Send <div class="button-menu"> <div class="qt-sz-16 qt-ic-c icon__dropdown-arrow-up"></div> </div></button>
+    <div class="qt-pos-rel">
+      <ul class="qt-dropdown-menu --open-top">
+        <li><div class="icon__print qt-sz-16 qt-mr-8"></div>Save and Print</li>
+        <li><div class="icon__email-dark qt-sz-16 qt-mr-8"></div>Save and Send</li>
+        <li><div class="icon__download qt-sz-16 qt-mr-8"></div>Save and Download</li>
+      </ul>
+      <button class=" qt-button --with-menu qt-mr-12">Save and Send <div class="button-menu"> <div class="qt-sz-16 qt-ic-c icon__dropdown-arrow-up"></div> </div></button>
+    </div>
     <button class="qt-button --outline">Preview</button>
+    <!-- <button class="qt-button --outline">Edit</button> -->
   </div>
    <button class="qt-button --outline">Save as Draft</button>
  </div>
