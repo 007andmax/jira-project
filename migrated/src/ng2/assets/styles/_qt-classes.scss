@@ -138,6 +138,7 @@
 .qt-fs-11 {font-size: 11px;}
 .qt-fs-12 {font-size: 12px;}
 .qt-fs-13 {font-size: 13px;}
+.qt-fs-15 {font-size: 15px;}
 .qt-fs-16 {font-size: 16px;}
 .qt-fs-20 {font-size: 20px;}
 .qt-fs-26 {font-size: 20px;}
@@ -196,9 +197,21 @@
   flex-direction: column;
   label {
     font-family: Graphik-Medium, sans-serif;
-    font-weight: 600;
     font-size: 13px;
     margin-bottom: 12px;
+    color: #4f5f79;
+  }
+
+  mat-error {
+    position: absolute;
+    top: 6px;
+    max-height: none;
+    white-space: nowrap;
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    bottom: 34px !important;
+    top: unset !important;
   }
 
   input {
@@ -209,6 +222,7 @@
     padding: 10px 14px;
     color: #4f5f79;
     font-size: 13px;
+    width: 100%;
     &::placeholder {
       color: #9ca5b6;
     }
@@ -241,6 +255,7 @@
   border: none;
   width: fit-content;
   cursor: pointer;
+  font-family: Graphik-Medium, sans-serif;
 
   &.--outline {
     color: #16a4fa;
@@ -256,4 +271,14 @@
     padding: 12px;
     margin-left: 20px;
   }
+}
+
+.qt-popup-arrow {
+  left: 20px;
+  background: white;
+  width: 10px;
+  height: 10px;
+  top: -5px;
+  position: fixed;
+  transform: rotate(45deg);
 }

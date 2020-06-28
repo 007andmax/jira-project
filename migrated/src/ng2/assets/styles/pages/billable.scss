@@ -82,7 +82,7 @@
 
 
   &__date, &__ticket {
-    width: 112px;
+    width: 115px;
   }
 
   &__subject {
@@ -90,7 +90,7 @@
   }
 
   &__amount {
-    width: 112px;
+    width: 115px;
   }
 }
 
@@ -379,7 +379,29 @@ app-invoice-preview {
       background-color: #f9fafb;
     }
   }
+}
 
+.billable-edit-customer {
+  width: 388px;
+}
+
+app-invoice-form {
+  .dropdown-menu {
+    max-height: none;
+    overflow: visible;
+  }
+
+  app-invoice-form-edit {
+    &::before {
+      position: absolute;
+      left: 10px;
+      width: 5px;
+      height: 5px;
+      top: -3px;
+      background: orange;
+      transform: rotate(45deg);
+    }
+  }
 
 }
 

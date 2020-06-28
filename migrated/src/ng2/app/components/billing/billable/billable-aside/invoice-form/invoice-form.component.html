@@ -8,7 +8,7 @@
         <input  [value]="company.name" type="text" disabled>
       </div>
     </div>
-   
+
     <div class="qt-w50 qt-pt-30 qt-pl-24 qt-pr-24 qt-pb-30" ngbDropdown [autoClose]="'inside'" #editCustomer="ngbDropdown">
       <div class="qt-fs-10 qt-ff-sb  qt-df qt-ai-c qt-mb-4"><div class="qt-sz-16 icon__company-address qt-ic-c qt-mr-4"></div> BILLING ADDRESS</div>
       <div class="qt-fs-13 qt-mb-4 qt-fw-b qt-color-dark" [textContent]="company.name"></div>
@@ -21,13 +21,13 @@
       <div class="qt-fs-13 qt-color-info  qt-pointer" id="dropdownForm1" ngbDropdownToggle (click)="onEditCustomer()">Edit Customer</div>
 
       <div ngbDropdownMenu aria-labelledby="dropdownForm1" >
-          
+
       <app-invoice-form-edit-customer #companyEdit (onUpdateCompany)="onUpdateCompany()"  [dropDown]="editCustomer"></app-invoice-form-edit-customer>
         </div>
-      
+
     </div>
 
-    
+
   </div>
 
   <div class="infoice-info-row qt-df qt-pt-16 qt-pl-30 qt-pr-30 qt-mb-24 ">
@@ -45,7 +45,6 @@
     <div class="qt-input-block qt-mr-16 qt-w100">
       <label>Invoice Date</label>
       <app-date-picker   [editMode]="true" [editDate]="invoice.invoiceDataDto.date"   [useMinDate]="false" (onChange)="onChangeDate($event)"></app-date-picker>
-
     </div>
 
     <div class="qt-input-block qt-w100">
@@ -89,7 +88,7 @@
     [ngForOf]="ticket.serviceExpenses"
     [ngForTrackBy]="trackById">
 
-  
+
           <tr>
             <td>
               <div class=" qt-pointer qt-sz-20 icon__move-light qt-ic-c"></div>
@@ -111,7 +110,7 @@
     [ngForOf]="ticket.productExpenses"
     [ngForTrackBy]="trackById">
 
-  
+
           <tr>
             <td>
               <div class=" qt-pointer qt-sz-20 icon__move-light qt-ic-c"></div>
@@ -127,12 +126,12 @@
             </td>
           </tr>
         </ng-template>
-          
+
         </tbody>
       </table>
     </div>
 </ng-template>
-  
+
   </div>
 
   <div class="summary-info qt-df qt-pl-30 qt-pr-30 qt-pb-24 qt-jc-sb">
