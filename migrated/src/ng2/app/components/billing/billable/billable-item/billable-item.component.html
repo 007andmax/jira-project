@@ -1,12 +1,12 @@
 <tr (click)="moToBillableTickets()">
   <td class="billable-table__company-name --strong" [textContent]="item.name"></td>
   <td class="billable-table__tickets">
-    <div class="d-f">
+    <div class="d-f" *ngIf="ticketsListService.getAssignedUserNameForAvatar(salesPerson).length">
       <div
         class="qt-table-modern__circle-avatar"
         [textContent]="ticketsListService.getAssignedUserNameForAvatar(salesPerson)"
         [ngStyle]="{'background': getStyleAvatar(salesPerson)}">
-       
+
       </div>
       <div [textContent]="ticketsListService.getUserName(salesPerson)"></div>
     </div>

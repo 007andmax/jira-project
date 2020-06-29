@@ -50,7 +50,7 @@
         <ng-template ngFor let-item
         [ngForOf]="billableProfile.tickets" let-i="index"
         [ngForTrackBy]="trackById">
-     
+
         <tr [ngClass]="{'--selected': item.selected}">
           <td class="billable-item-table__check" *ngIf="!item.lockedBy">
             <div class="d-f">
@@ -60,7 +60,7 @@
               </label>
             </div>
           </td>
-          <td class="billable-item-table__check" *ngIf="item.lockedBy"></td>
+          <td class="billable-item-table__check" *ngIf="item.lockedBy"><div class="icon__locked qt-sz-16"></div></td>
           <td class="billable-item-table__date" [textContent]="getDate(item.closedAt)"></td>
           <td class="billable-item-table__ticket" [textContent]="item.ticketNumber" (click)="editTicket(item.id)"></td>
           <td class="billable-item-table__subject" [textContent]="item.subject"></td>
