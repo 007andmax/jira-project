@@ -4,6 +4,7 @@
 
   .list-title {
     font-size: 16px;
+    font-family: Graphik-Semibold, sans-serif;
   }
 
   &__back-button {
@@ -22,7 +23,7 @@
 .sticky-list-header {
   position: sticky;
   top: 78px;
-  padding: 24px 0 0 14px;
+  padding: 24px 0 0 0;
   background-color: #edf2f6;
   margin: 0 auto;
   max-width: 1320px;

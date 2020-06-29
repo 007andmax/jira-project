@@ -178,6 +178,7 @@
 .qt-w100 {width: 100%;}
 
 .qt-color-dark {color: #364656;}
+.qt-color-dark-light {color: #4f5f79;}
 .qt-color-light {color: #9ca5b6;}
 .qt-color-info {color: #16a4fa;}
 .qt-color-white {color: white;}
@@ -227,6 +228,13 @@
       color: #9ca5b6;
     }
   }
+  .date-picker {
+    width: 100%;
+  }
+}
+
+.input_inside_white_important, .input_inside_white_important input  {
+  background-color: white !important;
 }
 
 
@@ -362,4 +370,10 @@
       background-color: #edf2f6;
     }
   }
+}
+
+
+
+.qt-lh-154 {
+  line-height: 1.54;
 }

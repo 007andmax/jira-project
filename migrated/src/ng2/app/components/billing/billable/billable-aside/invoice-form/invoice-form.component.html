@@ -10,12 +10,12 @@
     </div>
 
     <div class="qt-w50 qt-pt-30 qt-pl-24 qt-pr-24 qt-pb-30" ngbDropdown [autoClose]="'inside'" #editCustomer="ngbDropdown">
-      <div class="qt-fs-10 qt-ff-sb  qt-df qt-ai-c qt-mb-4"><div class="qt-sz-16 icon__company-address qt-ic-c qt-mr-4"></div> BILLING ADDRESS</div>
-      <div class="qt-fs-13 qt-mb-4 qt-fw-b qt-color-dark" [textContent]="company.name"></div>
-      <div class="qt-fs-13 qt-mb-4" [textContent]="company.contacts[0].firstName + ' ' +
+      <div class="qt-fs-10 qt-ff-sb  qt-df qt-ai-c qt-mb-4 qt-lh-154"><div class="qt-sz-16 icon__company-address qt-ic-c qt-mr-4"></div> BILLING ADDRESS</div>
+      <div class="qt-fs-13 qt-lh-154 qt-fw-b qt-color-dark" [textContent]="company.name"></div>
+      <div class="qt-fs-13 qt-lh-154" [textContent]="company.contacts[0].firstName + ' ' +
       company.contacts[0].lastName"></div>
-      <div class="qt-fs-13 qt-mb-4" [textContent]="company.addresses[0].addressWithSuitNumberAndPostalCode"></div>
-      <div class="qt-fs-13 qt-mb-4" [textContent]="company.contacts[0].primaryEmail"></div>
+      <div class="qt-fs-13 qt-lh-154" [textContent]="company.addresses[0].addressWithSuitNumberAndPostalCode"></div>
+      <div class="qt-fs-13 qt-lh-154" [textContent]="company.contacts[0].primaryEmail"></div>
       <div class="qt-fs-13 qt-mb-4" [textContent]="(company.contacts[0].phoneNumbers && company.contacts[0].phoneNumbers.length > 0) ? company.contacts[0].phoneNumbers[0].number : ''"></div>
     <!--  <div class="qt-fs-13 qt-mb-10">AB T3S 0B5</div>-->
       <div class="qt-fs-13 qt-color-info  qt-pointer" id="dropdownForm1" ngbDropdownToggle (click)="onEditCustomer()">Edit Customer</div>
@@ -42,12 +42,12 @@
       <input [(ngModel)]="invoiceTaxNumber.taxId"   type="text">
     </div>
 
-    <div class="qt-input-block qt-mr-16 qt-w100">
+    <div class="qt-input-block qt-mr-16 qt-w100 input_inside_white_important">
       <label>Invoice Date</label>
       <app-date-picker   [editMode]="true" [editDate]="invoice.invoiceDataDto.date"   [useMinDate]="false" (onChange)="onChangeDate($event)"></app-date-picker>
     </div>
 
-    <div class="qt-input-block qt-w100">
+    <div class="qt-input-block qt-w100 input_inside_white_important">
       <label>Due Date</label>
       <app-date-picker   [editMode]="true"  [editDate]="invoice.invoiceDataDto.dueDate" [useMinDate]="false" (onChange)="onChangeDueDate($event)"></app-date-picker>
 
@@ -62,8 +62,8 @@
       <div class="qt-df qt-ai-c">
         <div class="invoice-item__header qt-w100 qt-ml-30 qt-df qt-ai-c qt-pt-10 qt-pb-10 qt-h40">
           <div class="invoice-item__number qt-color-white qt-fs-10 qt-pt-4 qt-pb-4 qt-pl-4 qt-pr-4 qt-mr-16" [textContent]="'Tkt# ' + ticket.number"></div>
-          <div class="qt-fs-12 qt-mr-16" ><span class="qt-fs-11 qt-fw-b">Date</span> {{getDate(ticket.closedAt)}}</div>
-          <div class="qt-fs-12"><span class="qt-fs-11 qt-fw-b">Subject:</span> {{ticket.subject}}</div>
+          <div class="qt-fs-12 qt-mr-16" ><span class="qt-fs-11 qt-ff-sb">Date</span> {{getDate(ticket.closedAt)}}</div>
+          <div class="qt-fs-12"><span class="qt-fs-11 qt-ff-sb">Subject:</span> {{ticket.subject}}</div>
         </div>
         <div class="delete-item-container qt-pl-4">
           <div class="qt-pointer  qt-sz-16 icon__raw-clear qt-ic-c " ></div>
@@ -74,12 +74,12 @@
         <thead >
           <tr>
             <th></th>
-            <th class="invoice-item__col-item">Item</th>
-            <th class="invoice-item__col-desc">Description</th>
-            <th class="invoice-item__col-price">Unit Price</th>
-            <th class="invoice-item__col-quentity">Quantity</th>
-            <th class="invoice-item__col-tax">Tax</th>
-            <th class="invoice-item__col-amount">Amount</th>
+            <th class="invoice-item__col-item  qt-ff-sb">Item</th>
+            <th class="invoice-item__col-desc  qt-ff-sb" >Description</th>
+            <th class="invoice-item__col-price qt-ff-sb">Unit Price</th>
+            <th class="invoice-item__col-quentity qt-ff-sb">Quantity</th>
+            <th class="invoice-item__col-tax qt-ff-sb">Tax</th>
+            <th class="invoice-item__col-amount qt-ff-sb">Amount</th>
             <th></th>
           </tr>
         </thead>
@@ -137,7 +137,7 @@
   <div class="summary-info qt-df qt-pl-30 qt-pr-30 qt-pb-24 qt-jc-sb">
     <div>
       <div class="qt-mb-30">
-        <div class="info-button-sm "><div class="icon__discount qt-mr-4 qt-sz-16 qt-ic-c"></div> Apply Discount</div>
+        <div class="info-button-sm qt-ff-gm"><div class="icon__discount qt-mr-4 qt-sz-16 qt-ic-c"></div> Apply Discount</div>
       </div>
 
       <div class="summary-info__notes">
