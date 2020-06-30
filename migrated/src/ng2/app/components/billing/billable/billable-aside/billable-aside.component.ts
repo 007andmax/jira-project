@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import { BillableStateService } from 'src/ng2/app/states/billable/billable-state.service';
 import { BillableService } from 'src/ng2/app/services/billable/billable.service';
 import { InvoiceNote } from '../class/invoice-note';
@@ -10,6 +10,8 @@ import { Company } from 'src/ng2/app/interfaces/company/company';
 import { CompanyProfile } from '../../../companies/class/company-profile';
 import { Subscription } from 'rxjs';
 import { BillableTaimer } from './class/billable-taimer';
+import { ConfirmStateService } from '../../../shared/confirm/services/confirm-state.service';
+import { REMOVE_TICKET_INVOICE } from 'src/ng2/app/const/confirm';
 
 @Component({
   selector: 'app-billable-aside',
@@ -17,6 +19,7 @@ import { BillableTaimer } from './class/billable-taimer';
   styleUrls: ['./billable-aside.component.scss']
 })
 export class BillableAsideComponent implements OnInit, OnDestroy {
+  @Output() onSetSelectedTickets = new EventEmitter();
   opened: boolean = false;
   invoiceTaxNumber: InvoiceTaxNumber;
   invoiceNotes: Array<InvoiceNote> = [];
@@ -33,10 +36,31 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
   constructor(private billableStateService: BillableStateService,
     private companiesService: CompaniesService,
     public cd: ChangeDetectorRef,
+    private confirmStateService: ConfirmStateService,
     private billableService: BillableService) { }
 
 
   ngOnInit() {
+    
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === REMOVE_TICKET_INVOICE) {
+         let lockedTickets = this.invoice.lockedTickets;
+         lockedTickets.splice(lockedTickets.findIndex(item => item === this.billableStateService.getLockedTicketForRemove()),1);
+         this.billableService.unlock(this.invoice.lockId).subscribe(data => {
+          this.opened = false;
+         
+          this.isUnlock = true;
+          this.clearTaimer();
+          this.getInvoiceLock(lockedTickets);
+          this.opened = true;
+          this.showPreloader = true;
+          this.onSetSelectedTickets.emit(lockedTickets);
+        })
+        }
+      }
+    })
+    this.sub.add(getConfirm);
     let getOnCreate = this.billableStateService.getOnCreate().subscribe(data => {
       this.billableProfile = this.billableStateService.getBillableProfile();
       this.opened = true;
@@ -45,7 +69,7 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
       this.getTaxNumber();
       this.getActualNumber();
       console.log("data", data);
-      this.getInvoiceLock(data);
+      this.getInvoiceLock(data,true);
       // this.billableProfile = this.billableStateService.getBillableProfile();
     })
     this.sub.add(getOnCreate);
@@ -82,14 +106,14 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
       this.invoiceNumber = data.number;
     })
   }
-  private getInvoiceLock(ticketsIds) {
+  private getInvoiceLock(ticketsIds,getComapny = false) {
     this.billableService.getInvoiceLock(ticketsIds).subscribe(data => {
       this.invoice = data;
       console.log("invoice", data);
-      this.getInvoiceLockTime(this.invoice.lockId);
+      this.getInvoiceLockTime(this.invoice.lockId,getComapny);
     })
   }
-  private getInvoiceLockTime(id) {
+  private getInvoiceLockTime(id,getComapny) {
     this.billableService.getInvoiceLockTime(id).subscribe((data: any) => {
       console.log("data", data);
       this.billableTaimer = new BillableTaimer(data.time);
@@ -102,13 +126,13 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
         this.billableTaimer.seconds--;
         this.cd.detectChanges();
       }, 1000);
-      this.getCompany(this.billableProfile.id);
-
+      if (getComapny)this.getCompany(this.billableProfile.id);
+      if (!getComapny) this.showPreloader = false;
     })
   }
   
   public clearTaimer() {
-    clearTimeout(this.timer);
+    clearInterval(this.timer);
     this.billableTaimer.minutes = 0;
     this.billableTaimer.seconds = 0;
     this.billableTaimer.isFinished = true;

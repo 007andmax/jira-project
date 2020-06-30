@@ -12,6 +12,10 @@ import { BillableService } from 'src/ng2/app/services/billable/billable.service'
 import { InvoiceTaxNumber } from '../../class/invoice-tax-number';
 import { BillableTaimer } from '../class/billable-taimer';
 import * as moment from "moment";
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmStateService } from 'src/ng2/app/components/shared/confirm/services/confirm-state.service';
+import { REMOVE_TICKET_INVOICE } from 'src/ng2/app/const/confirm';
+import { ConfirmComponent } from 'src/ng2/app/components/shared/confirm/confirm.component';
 
 @Component({
   selector: 'app-invoice-form',
@@ -30,6 +34,8 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   constructor(private billableStateService: BillableStateService,
     private billableService: BillableService,
+    private modalService: NgbModal,
+    private confirmStateService: ConfirmStateService,
     private companiesStateService: CompaniesStateService) { }
 
 
@@ -117,9 +123,12 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     this.billableStateService.onEditCustomer(this.company);
 
   }
-  delete() {
-   /* const modalRef = this.modalService.open(AlertComponent, { windowClass: 'xs-modal user-modal' });
-      modalRef.componentInstance.message = `You cannot archive primary contact user`;*/
+  delete(ticket) {
+    this.confirmStateService.setConfirmAction(REMOVE_TICKET_INVOICE);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+
+    modalRef.componentInstance.message = `Do you want to remove the ticket?`;
+    this.billableStateService.setLockedTicketForRemove(ticket.id);
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

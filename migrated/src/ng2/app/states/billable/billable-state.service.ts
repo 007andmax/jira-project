@@ -5,14 +5,19 @@ import { BillableProfile } from '../../components/billing/billable/class/billabl
   providedIn: 'root'
 })
 export class BillableStateService {
-  billableProfile:BillableProfile;
+  billableProfile: BillableProfile;
+  lockedTicketForRemove: string = null;
   create: EventEmitter<any> = new EventEmitter();
   preview: EventEmitter<any> = new EventEmitter();
   editCustomer: EventEmitter<any> = new EventEmitter();
   constructor() { }
 
-
-   
+  public getLockedTicketForRemove() {
+    return this.lockedTicketForRemove;
+  }
+  public setLockedTicketForRemove(data) {
+    this.lockedTicketForRemove = data;
+  }
   public getOnEditCustomer() {
     return this.editCustomer;
   }
@@ -23,7 +28,7 @@ export class BillableStateService {
     this.create.emit(ticketsIds);
   }
   public onPreview() {
-     this.preview.emit(null);
+    this.preview.emit(null);
   }
   public getOnPreview() {
     return this.preview;

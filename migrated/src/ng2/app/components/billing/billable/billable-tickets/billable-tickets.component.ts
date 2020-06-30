@@ -12,43 +12,54 @@ import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
   styleUrls: ['./billable-tickets.component.scss']
 })
 export class BillableTicketsComponent implements OnInit {
-  billableProfile:BillableProfile;
+  billableProfile: BillableProfile;
   filter: Array<CompanyFilterTop> = [new CompanyFilterTop('closedAt', ''),
   new CompanyFilterTop('ticketNumber', 'DESC'),
   new CompanyFilterTop('subject', ''),
   new CompanyFilterTop('sum', '')];
-  constructor(  private billableStateService:BillableStateService,
+  constructor(private billableStateService: BillableStateService,
     private ticketsStateService: TicketsStateService,
     private ticketsService: TicketsService,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
     this.billableProfile = this.billableStateService.getBillableProfile();
-    if (!this.billableProfile)  {
+    if (!this.billableProfile) {
       window.location.href = '#/ng2/billable';
       return;
     }
-    console.log("this.billableProfile",this.billableProfile);
+    console.log("this.billableProfile", this.billableProfile);
     this.onFilterTicketNumber();
     this.billableProfile.tickets.reverse();
   }
   editTicket(id) {
-  
+
     this.ticketsStateService.onOpenTicket();
     this.ticketsService.getTicket(id).subscribe(data => {
       this.ticketsStateService.onEditTicket(data);
     })
   }
+  setSelectedTickets(listIds) {
+    this.billableProfile.tickets.forEach(item => {
+      let find = listIds.find(ticketIds => ticketIds === item.id);
+      if (find) {
+        item.selected = true;
+      } else {
+        item.selected = false;
+      }
+    })
+    console.log("this.billableProfile.tickets",this.billableProfile.tickets);
+  }
   onCreateInvoice() {
     let listIds = [];
     this.billableProfile.tickets.forEach(item => {
-    if (item.selected) listIds.push(item.id);
+      if (item.selected) listIds.push(item.id);
     })
     if (listIds.length > 0) this.billableStateService.onCreate(listIds);
   }
   onToggleTicket(ticket) {
     ticket.selected = !ticket.selected;
-    console.log("ticket.selected",ticket.selected);
+    console.log("ticket.selected", ticket.selected);
   }
   onToggleAll(event) {
     this.billableProfile.tickets.forEach(item => {
@@ -64,7 +75,7 @@ export class BillableTicketsComponent implements OnInit {
     if (index > -1) {
       let sort = this.filter[index].filter;
       if (field === 'closedAt') {
-      if (sort === '') this.clearFilter();
+        if (sort === '') this.clearFilter();
         if (sort === '' || sort === 'DESC') {
           this.filter[index].filter = 'ASC';
           this.onFilterСlosedAt();
@@ -114,7 +125,7 @@ export class BillableTicketsComponent implements OnInit {
 
 
       }
-      
+
     }
     this.cd.detectChanges();
   }
@@ -127,8 +138,8 @@ export class BillableTicketsComponent implements OnInit {
       1 : ((b.subject.toLowerCase() > a.subject.toLowerCase()) ? -1 : 0));
   }
   private onFilterTicketNumber() {
-    this.billableProfile.tickets.sort((a, b) => (Number(a.ticketNumber)  > Number(b.ticketNumber)) ?
-      1 : ((Number(b.ticketNumber)  > Number(a.ticketNumber)) ? -1 : 0));
+    this.billableProfile.tickets.sort((a, b) => (Number(a.ticketNumber) > Number(b.ticketNumber)) ?
+      1 : ((Number(b.ticketNumber) > Number(a.ticketNumber)) ? -1 : 0));
   }
   private onFilterСlosedAt() {
     this.billableProfile.tickets.sort((a, b) => (a.closedAt > b.closedAt) ?
@@ -138,7 +149,7 @@ export class BillableTicketsComponent implements OnInit {
     this.filter.forEach(item => item.filter = '');
   }
   back() {
-     
+
     let body = document.querySelector('.left-panel__category-wrap');
     var link = document.createElement('a');
     body.appendChild(link);

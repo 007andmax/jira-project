@@ -66,7 +66,7 @@
           <div class="qt-fs-12"><span class="qt-fs-11 qt-ff-sb">Subject:</span> {{ticket.subject}}</div>
         </div>
         <div class="delete-item-container qt-pl-4">
-          <div class="qt-pointer  qt-sz-16 icon__raw-clear qt-ic-c " ></div>
+          <div class="qt-pointer  qt-sz-16 icon__raw-clear qt-ic-c " *ngIf="invoice.invoiceDataDto.tickets.length > 1" placement="left" ngbTooltip="Remove Ticket" (click)="delete(ticket)"></div>
         </div>
       </div>
 
@@ -101,7 +101,7 @@
             <td class="invoice-item__col-tax" [textContent]="service.taxSum | currency"></td>
             <td class="invoice-item__col-amount" [textContent]="service.totalSum | currency"></td>
             <td>
-              <div class="qt-pointer qt-ml-4 qt-sz-16 icon__raw-clear qt-ic-c" placement="left" ngbTooltip="Remove Item"></div>
+          
             </td>
           </tr>
         </ng-template>
@@ -122,7 +122,7 @@
             <td class="invoice-item__col-tax" [textContent]="product.taxSum | currency"></td>
             <td class="invoice-item__col-amount" [textContent]="product.totalSum | currency"></td>
             <td>
-              <div class="qt-pointer qt-ml-4 qt-sz-16 icon__raw-clear qt-ic-c" placement="left" ngbTooltip="Remove Item"></div>
+           
             </td>
           </tr>
         </ng-template>
@@ -173,7 +173,7 @@
         <td class="invoice-item__col-tax"  ></td>
         <td class="invoice-item__col-amount"  ></td>
         <td>
-          <div class="qt-pointer qt-ml-4 qt-sz-16 icon__raw-clear qt-ic-c"></div>
+       
         </td>
       </tr>
     
