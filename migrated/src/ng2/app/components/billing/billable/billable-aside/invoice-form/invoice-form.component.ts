@@ -117,6 +117,10 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     this.billableStateService.onEditCustomer(this.company);
 
   }
+  delete() {
+   /* const modalRef = this.modalService.open(AlertComponent, { windowClass: 'xs-modal user-modal' });
+      modalRef.componentInstance.message = `You cannot archive primary contact user`;*/
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

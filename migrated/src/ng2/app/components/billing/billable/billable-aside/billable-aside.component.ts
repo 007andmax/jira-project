@@ -23,6 +23,7 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
   billableProfile: BillableProfile;
   invoice: InvoiceLock;
   showPreloader: boolean = true;
+  showPreview:boolean = false;
   company: CompanyProfile = new CompanyProfile();
   invoiceNumber: string;
   isUnlock: boolean = false;
@@ -105,6 +106,7 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
 
     })
   }
+  
   public clearTaimer() {
     clearTimeout(this.timer);
     this.billableTaimer.minutes = 0;
@@ -112,10 +114,11 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
     this.billableTaimer.isFinished = true;
   }
   onPreview() {
-    this.opened = false;
+    this.showPreview = true;
+ /*   this.opened = false;
     this.showPreloader = true;
     this.clearTaimer();
-    this.billableStateService.onPreview();
+    this.billableStateService.onPreview();*/
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

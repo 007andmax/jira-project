@@ -18,9 +18,9 @@
   </div>
 
   <div class="billing-aside-scroll-content">
- <app-invoice-form *ngIf="!showPreloader" [invoiceTaxNumber]="invoiceTaxNumber" [invoiceNumber]="invoiceNumber" [company]="company" [invoice]="invoice"></app-invoice-form>
+ <app-invoice-form *ngIf="!showPreloader && !showPreview" [invoiceTaxNumber]="invoiceTaxNumber" [invoiceNumber]="invoiceNumber" [company]="company" [invoice]="invoice"></app-invoice-form>
 
-    <!-- <app-invoice-preview></app-invoice-preview> -->
+     <app-invoice-preview *ngIf="showPreview"></app-invoice-preview>  
   </div>
 
 
