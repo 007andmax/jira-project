@@ -11321,6 +11321,7 @@ button.close {
   transform: rotate(90deg);
 }
 
+
 .tooltip.bottom {
   margin-top: 6px;
   padding: 0 !important;
@@ -11329,6 +11330,12 @@ button.close {
 .tooltip.left {
   margin-left: -6px;
   padding: 0;
+}
+
+.tooltip.left .tooltip-inner:after {
+  top: calc(50% - 2.5px);
+  left: 100%;
+  transform: rotate(-90deg);
 }
 
 .tooltip.top.body-tooltip {

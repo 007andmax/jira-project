@@ -2676,6 +2676,18 @@ app-ticket-profile-form-update {
   }
 }
 
+.tooltip.left {
+  margin-left: -6px;
+  padding: 0;
+}
+
+.tooltip.left .tooltip-inner:after {
+  top: calc(50% - 2.5px);
+  left: 100%;
+  transform: rotate(-90deg);
+}
+
+
 .collapse-arrow {
   width: 28px;
   height: 28px;
