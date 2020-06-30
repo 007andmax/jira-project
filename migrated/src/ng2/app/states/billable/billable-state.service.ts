@@ -7,9 +7,12 @@ import { BillableProfile } from '../../components/billing/billable/class/billabl
 export class BillableStateService {
   billableProfile:BillableProfile;
   create: EventEmitter<any> = new EventEmitter();
+  preview: EventEmitter<any> = new EventEmitter();
   editCustomer: EventEmitter<any> = new EventEmitter();
   constructor() { }
 
+
+   
   public getOnEditCustomer() {
     return this.editCustomer;
   }
@@ -18,6 +21,12 @@ export class BillableStateService {
   }
   public onCreate(ticketsIds) {
     this.create.emit(ticketsIds);
+  }
+  public onPreview() {
+     this.preview.emit(null);
+  }
+  public getOnPreview() {
+    return this.preview;
   }
   public getOnCreate() {
     return this.create;

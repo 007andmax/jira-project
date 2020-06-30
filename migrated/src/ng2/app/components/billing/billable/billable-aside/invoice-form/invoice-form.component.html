@@ -101,7 +101,7 @@
             <td class="invoice-item__col-tax" [textContent]="service.taxSum | currency"></td>
             <td class="invoice-item__col-amount" [textContent]="service.totalSum | currency"></td>
             <td>
-              <div class="qt-pointer qt-ml-4 qt-sz-16 icon__raw-clear qt-ic-c"></div>
+              <div class="qt-pointer qt-ml-4 qt-sz-16 icon__raw-clear qt-ic-c" placement="left" ngbTooltip="Remove Item"></div>
             </td>
           </tr>
         </ng-template>
@@ -115,14 +115,14 @@
             <td>
               <div class=" qt-pointer qt-sz-20 icon__move-light qt-ic-c"></div>
             </td>
-            <td class="invoice-item__col-item" [textContent]="product.item.manufacture"></td>
+            <td class="invoice-item__col-item" [textContent]="product.item.manufacture"> </td>
             <td class="invoice-item__col-desc" [textContent]="product.item.description"></td>
             <td class="invoice-item__col-price" [textContent]="product.item.sale | currency"></td>
              <td class="invoice-item__col-quentity"   [textContent]="product.billableQuantity"></td>
             <td class="invoice-item__col-tax" [textContent]="product.taxSum | currency"></td>
             <td class="invoice-item__col-amount" [textContent]="product.totalSum | currency"></td>
             <td>
-              <div class="qt-pointer qt-ml-4 qt-sz-16 icon__raw-clear qt-ic-c"></div>
+              <div class="qt-pointer qt-ml-4 qt-sz-16 icon__raw-clear qt-ic-c" placement="left" ngbTooltip="Remove Item"></div>
             </td>
           </tr>
         </ng-template>
@@ -132,6 +132,55 @@
     </div>
 </ng-template>
 
+
+
+
+<div class="invoice-item qt-mb-16 qt-w100">
+ <div class="qt-df qt-ai-c">
+   <!--  <div class="invoice-item__header qt-w100 qt-ml-30 qt-df qt-ai-c qt-pt-10 qt-pb-10 qt-h40">
+      <div class="invoice-item__number qt-color-white qt-fs-10 qt-pt-4 qt-pb-4 qt-pl-4 qt-pr-4 qt-mr-16" [textContent]="'Tkt# ' + ticket.number"></div>
+      <div class="qt-fs-12 qt-mr-16" ><span class="qt-fs-11 qt-ff-sb">Date</span> {{getDate(ticket.closedAt)}}</div>
+      <div class="qt-fs-12"><span class="qt-fs-11 qt-ff-sb">Subject:</span> {{ticket.subject}}</div>
+    </div>
+    <div class="delete-item-container qt-pl-4">
+      <div class="qt-pointer  qt-sz-16 icon__raw-clear qt-ic-c " ></div>
+    </div> -->
+  </div>
+
+  <table class="invoice-item__table">
+    <thead >
+      <tr>
+        <th></th>
+        <th class="invoice-item__col-item  qt-ff-sb border-top">Item</th>
+        <th class="invoice-item__col-desc  qt-ff-sb border-top" >Description</th>
+        <th class="invoice-item__col-price qt-ff-sb border-top">Unit Price</th>
+        <th class="invoice-item__col-quentity qt-ff-sb border-top">Quantity</th>
+        <th class="invoice-item__col-tax qt-ff-sb border-top">Tax</th>
+        <th class="invoice-item__col-amount qt-ff-sb border-top">Amount</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+  
+      <tr>
+        <td>
+          <div class=" qt-pointer qt-sz-20 icon__move-light qt-ic-c"></div>
+        </td>
+        <td class="invoice-item__col-item" ><div class="qt-green-label">Discount</div></td>
+        <td class="invoice-item__col-desc"  ></td>
+        <td class="invoice-item__col-price" ></td>
+         <td class="invoice-item__col-quentity"   ></td>
+        <td class="invoice-item__col-tax"  ></td>
+        <td class="invoice-item__col-amount"  ></td>
+        <td>
+          <div class="qt-pointer qt-ml-4 qt-sz-16 icon__raw-clear qt-ic-c"></div>
+        </td>
+      </tr>
+    
+
+    </tbody>
+  </table>
+</div>
   </div>
 
   <div class="summary-info qt-df qt-pl-30 qt-pr-30 qt-pb-24 qt-jc-sb">
@@ -143,13 +192,13 @@
       <div class="summary-info__notes">
         <div class="qt-df qt-jc-sb qt-mb-12">
           <div class="qt-fs-13 qt-ff-gm">Customer Note</div>
-          <div class="qt-fs-12 qt-color-info qt-ff-gm">Saved Notes +</div>
+          <div class="qt-fs-12 qt-color-info qt-ff-gm" placement="top" ngbTooltip="Expand Notes">Saved Notes +</div>
 
         </div>
         <div>
           <div class="qt-mb-16 qt-df">
             <input type="text" class="qt-input  qt-mr-8" placeholder="Select Saved Notes">
-            <div class="qt-square-btn --add"></div>
+            <div class="qt-square-btn --add" placement="top" ngbTooltip="Add Note"></div>
             <!-- <div class="qt-square-btn --done"></div> -->
           </div>
           <textarea class="summary-info__textarea qt-textarea" placeholder="Type your custom note here" name="" id="" cols="30" rows="10"></textarea>

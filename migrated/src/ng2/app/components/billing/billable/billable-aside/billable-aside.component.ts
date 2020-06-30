@@ -52,6 +52,7 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
   unlock() {
     this.billableService.unlock(this.invoice.lockId).subscribe(data => {
       this.opened = false;
+      this.showPreloader = true;
       this.isUnlock = true;
       this.clearTaimer();
     })
@@ -109,6 +110,12 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
     this.billableTaimer.minutes = 0;
     this.billableTaimer.seconds = 0;
     this.billableTaimer.isFinished = true;
+  }
+  onPreview() {
+    this.opened = false;
+    this.showPreloader = true;
+    this.clearTaimer();
+    this.billableStateService.onPreview();
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
