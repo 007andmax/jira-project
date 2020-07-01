@@ -8,7 +8,7 @@
     <div class="qt-input-block">
       <label>Company Name</label>
       <input type="text" [(ngModel)]="company.name" placeholder="Write Company or Search Company"
-      (blur)="onChangeName($event)">
+      (blur)="onChangeName()">
       <mat-error *ngIf="validate.getNameIsExist()">
         This company name already occupied
       </mat-error>
@@ -39,7 +39,7 @@
   <div class="qt-df qt-mb-16">
     <div class="qt-input-block qt-w100 qt-mr-16">
       <label>First Name</label>
-      <input type="text" [(ngModel)]="company.contacts[0].firstName" (input)="onChangeFirstName($event)"
+      <input type="text" [(ngModel)]="company.contacts[0].firstName" (input)="onChangeFirstName()"
         placeholder="Enter First Name">
       <mat-error *ngIf="!validate.getFirstName()">
         First name is required
@@ -48,7 +48,7 @@
 
     <div class="qt-input-block qt-w100">
       <label>Last Name</label>
-      <input type="text" [(ngModel)]="company.contacts[0].lastName" (input)="onChangeLastName($event)"
+      <input type="text" [(ngModel)]="company.contacts[0].lastName" (input)="onChangeLastName()"
         placeholder="Enter Last Name">
       <mat-error *ngIf="!validate.getLastName()">
         Last name is required
@@ -58,7 +58,7 @@
 
   <div class="qt-input-block qt-w100 qt-mb-16">
     <label>Primary Contact Email</label>
-    <input type="text" [(ngModel)]="company.contacts[0].primaryEmail" (input)="onChangePrimaryEmail($event)"
+    <input type="text" [(ngModel)]="company.contacts[0].primaryEmail" (input)="onChangePrimaryEmail()"
       placeholder="Primary Email Address">
     <mat-error *ngIf="!validate.getPrimaryContactEmail()">
       Please enter a valid email address

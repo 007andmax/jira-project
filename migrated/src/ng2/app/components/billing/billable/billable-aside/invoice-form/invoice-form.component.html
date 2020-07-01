@@ -19,15 +19,10 @@
       <div class="qt-fs-13 qt-mb-4" [textContent]="(company.contacts[0].phoneNumbers && company.contacts[0].phoneNumbers.length > 0) ? company.contacts[0].phoneNumbers[0].number : ''"></div>
     <!--  <div class="qt-fs-13 qt-mb-10">AB T3S 0B5</div>-->
       <div class="qt-fs-13 qt-color-info  qt-pointer" id="dropdownForm1" ngbDropdownToggle (click)="onEditCustomer()">Edit Customer</div>
-
       <div ngbDropdownMenu aria-labelledby="dropdownForm1" >
-
       <app-invoice-form-edit-customer #companyEdit (onUpdateCompany)="onUpdateCompany()"  [dropDown]="editCustomer"></app-invoice-form-edit-customer>
         </div>
-
     </div>
-
-
   </div>
 
   <div class="infoice-info-row qt-df qt-pt-16 qt-pl-30 qt-pr-30 qt-mb-24 ">
@@ -39,7 +34,7 @@
 
     <div class="qt-input-block qt-mr-16 qt-w100">
       <label [textContent]="invoiceTaxNumber.taxIdDescription"></label>
-      <input [(ngModel)]="invoiceTaxNumber.taxId"   type="text">
+      <input [(ngModel)]="invoiceTaxNumber.taxId" (blur)="onChangeTax()"  type="text">
     </div>
 
     <div class="qt-input-block qt-mr-16 qt-w100 input_inside_white_important">
@@ -192,16 +187,24 @@
       <div class="summary-info__notes">
         <div class="qt-df qt-jc-sb qt-mb-12">
           <div class="qt-fs-13 qt-ff-gm">Customer Note</div>
-          <div class="qt-fs-12 qt-color-info qt-ff-gm" placement="top" ngbTooltip="Expand Notes">Saved Notes +</div>
+          <div class="qt-fs-12 qt-color-info qt-ff-gm" placement="top" ngbTooltip="Expand Notes" (click)="toogleCustomerNote = !toogleCustomerNote">Saved Notes +</div>
 
         </div>
-        <div>
-          <div class="qt-mb-16 qt-df">
-            <input type="text" class="qt-input  qt-mr-8" placeholder="Select Saved Notes">
-            <div class="qt-square-btn --add" placement="top" ngbTooltip="Add Note"></div>
-            <!-- <div class="qt-square-btn --done"></div> -->
+        <div >
+          <div class="qt-mb-16 qt-df" *ngIf="toogleCustomerNote" ngbDropdown [autoClose]="'inside'" #addNoteDd="ngbDropdown">
+            <app-invoice-select-note   [placeholder]="'Select Saved Notes'"   [class]="['light-dropdown']"
+            [field]="'title'"   [list]="regularNotes" (onChangeInput)="onCheckUpdateTitleNote($event)"
+              (onSelectedItem)="onSelectNotes($event)"></app-invoice-select-note>
+
+          
+            <div class="qt-square-btn --done" (click)="onUpdateRegularNote()" *ngIf="changeRegularNote"></div> 
+            <div class="qt-square-btn --add" placement="top" ngbTooltip="Add Note"  id="dropdownAddNote" ngbDropdownToggle></div> <!--*ngIf="getLenRegularNotes() < 5"-->
+            <div ngbDropdownMenu aria-labelledby="dropdownAddNote" >
+
+              <app-invoice-add-note   (onUpdateNotes)="getInvoiceNote()" [dropDown]="addNoteDd"></app-invoice-add-note>
+                </div>
           </div>
-          <textarea class="summary-info__textarea qt-textarea" placeholder="Type your custom note here" name="" id="" cols="30" rows="10"></textarea>
+          <textarea (input)="onCheckUpdateDescriptionNote()"  (blur)="onChangeRegularNote()" class="summary-info__textarea qt-textarea" placeholder="Type your custom note here" name="" id="description-regular-note" appTextArea    maxlength="250"   cols="30" rows="1"></textarea>
         </div>
       </div>
     </div>

@@ -1,0 +1,30 @@
+<div [ngClass]="class" >
+  <input
+    [id]="id"
+    [placeholder]="placeholder"
+    type="text"
+    [(ngModel)]="selectedItem"
+    class="pointer typeahead-focus1"
+    [ngClass]="(!valid) ? 'no-valid' : ''"
+    [inputFormatter]="formatter"
+    [resultFormatter]="formatter"
+    [ngbTypeahead]="search"
+    (selectItem)="selectItem($event)"
+    (input)="onCheckChange($event)"
+    (focus)="focus$.next('')"
+    (click)="click$.next('')"
+		#instance="ngbTypeahead"
+    autocomplete="new-password"
+    [attr.maxlength]="maxlength"
+    (isPopupOpen)="isDropDownOpen()"
+  />
+  <span *ngIf="list">
+    <i *ngIf="selectedItem"
+       class="icn-sm icn-remove-old"
+       (click)="clearClient($event)"></i>
+    <i *ngIf="!selectedItem"
+       class="icn-sm report-caret-icon"></i>
+    
+  </span>
+  <i class="loading xs" *ngIf="!list"></i>
+</div>

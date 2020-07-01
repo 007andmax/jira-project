@@ -1,0 +1,23 @@
+<h3>Add Saved Note</h3>
+<div class="qt-mb-16">
+  <div class="qt-input-block">
+    <mat-error *ngIf="!validate.getTitle()">
+      This company name already occupied
+    </mat-error>
+    <label>Note Subject</label>
+    <input type="text"  [(ngModel)]="createNote.title" (blur)="validate.checkValidTitle(createNote.title)" placeholder="Write Note Subject">
+  </div>
+</div>
+<div class="qt-mb-16">
+  <div class="qt-input-block">
+    <mat-error *ngIf="!validate.getLine1()">
+      This company name already occupied
+    </mat-error>
+    <label>Note Description</label>
+   <textarea [(ngModel)]="createNote.line1" (blur)="validate.checkValidLine1(createNote.line1)" placeholder="Write Note Description"></textarea>
+  </div>
+</div>
+<div class="qt-df">
+  <button class="qt-button qt-mr-12"  (click)="add()">Save Note</button>
+  <button class="qt-button --outline" (click)="close()">Cancel</button>
+</div>

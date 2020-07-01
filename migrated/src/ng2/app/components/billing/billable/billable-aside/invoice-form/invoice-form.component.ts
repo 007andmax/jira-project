@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { InvoiceLock } from '../../class/invoice-lock';
 import { Company } from 'src/ng2/app/interfaces/company/company';
 import { CompanyProfile } from 'src/ng2/app/components/companies/class/company-profile';
@@ -16,6 +16,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmStateService } from 'src/ng2/app/components/shared/confirm/services/confirm-state.service';
 import { REMOVE_TICKET_INVOICE } from 'src/ng2/app/const/confirm';
 import { ConfirmComponent } from 'src/ng2/app/components/shared/confirm/confirm.component';
+import { InvoiceTicketsService } from 'src/ng2/app/components/setting/invoice-tickets/invoice-tickets.service';
+import { InvoiceNote } from '../../class/invoice-note';
+import { NoteService } from 'src/ng2/app/services/note/note.service';
 
 @Component({
   selector: 'app-invoice-form',
@@ -26,21 +29,27 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   @ViewChild('companyEdit') companyEdit: InvoiceFormEditCustomerComponent;
   @Input() invoice: InvoiceLock;
   @Input() invoiceNumber: string;
-  
+  @Input() invoiceNotes: Array<InvoiceNote> = [];
   @Input() company: CompanyProfile = new CompanyProfile();
   @Input() invoiceTaxNumber: InvoiceTaxNumber;
- 
+  selectedNote: InvoiceNote = null;
+  toogleCustomerNote: boolean = false;
   currentCompany: any;
+  changeRegularNote: boolean = false;
+  regularNotes: Array<InvoiceNote> = [];
   sub: Subscription = new Subscription();
   constructor(private billableStateService: BillableStateService,
     private billableService: BillableService,
     private modalService: NgbModal,
+    private invoiceTicketsService: InvoiceTicketsService,
     private confirmStateService: ConfirmStateService,
+    private elRef: ElementRef,
+    private noteService: NoteService,
     private companiesStateService: CompaniesStateService) { }
 
 
   ngOnInit() {
-    
+    this.regularNotes = this.invoiceNotes.filter(item => item.noteType === "REGULAR");
     this.currentCompany = this.companiesStateService.getCurrentCompany();
     let getChangeCompanies = this.companiesStateService.getChangeCompanies().subscribe((data: CompanyUpdate) => {
 
@@ -74,13 +83,94 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     }
 
   }
+  onChangeTax() {
+    let data = { "taxNumber": { "taxIdDescription": this.invoiceTaxNumber.taxIdDescription, "taxId": this.invoiceTaxNumber.taxId } };
+
+    this.invoiceTicketsService.updateInvoiceContact(data).subscribe(res => {
+
+    })
+  }
   getDuration(input) {
     var timeInMinutes = input * 60,
-    hours = Math.floor(timeInMinutes / 60),
-    minutes = Math.round(timeInMinutes - (hours * 60));
+      hours = Math.floor(timeInMinutes / 60),
+      minutes = Math.round(timeInMinutes - (hours * 60));
 
-  return (hours >= 10 ? hours : '0' + hours) + ':' + (minutes >= 10 ? minutes : '0' + minutes) + ' hr(s)';
+    return (hours >= 10 ? hours : '0' + hours) + ':' + (minutes >= 10 ? minutes : '0' + minutes) + ' hr(s)';
 
+  }
+  onCheckUpdateTitleNote(data) {
+    if (this.selectedNote) {
+      this.changeRegularNote = true;
+      this.selectedNote.title = data;
+      console.log("data", data);
+    }
+
+  }
+  onCheckUpdateDescriptionNote() {
+    if (this.selectedNote) this.changeRegularNote = true;
+
+  }
+  onUpdateRegularNote() {
+    this.noteService.updateNote({ "title": this.selectedNote.title, "line1": this.elRef.nativeElement.querySelector("#description-regular-note").value, "line2": "" }, this.invoice.lockId).subscribe(data => {
+      this.changeRegularNote = false;
+    })
+  }
+  onSelectNotes(data) {
+    this.selectedNote = data;
+    console.log("selectedNote", this.selectedNote);
+    if (this.selectedNote) {
+      let request: PartialUpdate = new PartialUpdate(null, null, null, this.selectedNote, null);
+      console.log("request", request);
+      this.updateInvoiceData(request);
+      this.elRef.nativeElement.querySelector("#description-regular-note").value = this.selectedNote.line1;
+
+    } else {
+      this.changeRegularNote = false;
+      this.elRef.nativeElement.querySelector("#description-regular-note").value = "";
+    }
+  }
+  onChangeDescriptionNote() {
+    let request: PartialUpdate = new PartialUpdate(null, null, null, this.selectedNote, null);
+    console.log("request", request);
+    this.updateInvoiceData(request);
+  }
+  getLenRegularNotes() {
+    return this.invoiceNotes.filter(item => item.noteType === "REGULAR").length;
+  }
+  onChangeRegularNote() {
+    console.log("onChangeRegularNote");
+    if (this.selectedNote) {
+      let selectedNote = JSON.parse(JSON.stringify(this.selectedNote));
+      selectedNote.line1 = this.elRef.nativeElement.querySelector("#description-regular-note").value;
+      let request: PartialUpdate = new PartialUpdate(null, null, null, selectedNote, null);
+      console.log("request", request);
+      this.updateInvoiceData(request);
+
+    } else {
+      let selectedNote = new InvoiceNote({
+        line1: this.elRef.nativeElement.querySelector("#description-regular-note").value,
+        line2: "",
+        noteType: "REGULAR",
+        suggestedNote: false,
+      });
+      let request: PartialUpdate = new PartialUpdate(null, null, null, selectedNote, null);
+      console.log("request", request);
+      this.updateInvoiceData(request);
+
+    }
+
+  }
+    getInvoiceNote() {
+    this.billableService.getInvoiceNote().subscribe(data => {
+      this.invoiceNotes = data;
+      this.regularNotes = this.invoiceNotes.filter(item => item.noteType === "REGULAR");
+      console.log("regularNotes", this.regularNotes);
+    })
+  }
+  onSetRegularNote(data) {
+    console.log("data", data);
+    this.selectedNote.title = data;
+    this.changeRegularNote = true;
   }
   onChangeGSTNumber() {
 
@@ -129,6 +219,9 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
 
     modalRef.componentInstance.message = `Do you want to remove the ticket?`;
     this.billableStateService.setLockedTicketForRemove(ticket.id);
+  }
+  public trackById(index, item) {
+    return item.id;
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

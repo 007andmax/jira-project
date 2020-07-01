@@ -16,6 +16,7 @@ import { BillableRealTimeService } from 'src/ng2/app/states/billable/billable-re
 })
 export class BillableComponent implements OnInit {
   list: Array<BillableProfile> = [];
+  reqList: Array<BillableProfile> = [];
   filter: Array<CompanyFilterTop> = [new CompanyFilterTop('name', 'ASC'),
   new CompanyFilterTop('countTickets', ''),
   new CompanyFilterTop('salesPerson', ''),
@@ -41,7 +42,11 @@ export class BillableComponent implements OnInit {
         tickets.forEach(item => {
           this.list.forEach(itemList => {
             let indexTicket = itemList.tickets.findIndex(ticket => ticket.id === item);
-            if (indexTicket > -1)   itemList.tickets[indexTicket].lockedBy = new Date().getTime();
+            if (indexTicket > -1) itemList.tickets[indexTicket].lockedBy = new Date().getTime();
+          })
+          this.reqList.forEach(itemList => {
+            let indexTicket = itemList.tickets.findIndex(ticket => ticket.id === item);
+            if (indexTicket > -1) itemList.tickets[indexTicket].lockedBy = new Date().getTime();
           })
         });
       }
@@ -53,9 +58,24 @@ export class BillableComponent implements OnInit {
             });
 
           })
+          this.reqList.forEach(itemList => {
+            itemList.tickets.forEach(ticket => {
+              if (ticket.id === item) ticket.lockedBy = null;
+            });
+
+          })
         });
       }
     })
+  }
+  onSearch(event) {
+    console.log("event", event.target.value);
+    if (event.target.value.length > 0) {
+      this.list = this.reqList.filter(item => item.name.toLowerCase().includes(event.target.value.toLowerCase()));
+    } else {
+      this.list = JSON.parse(JSON.stringify(this.reqList));
+    }
+
   }
   private getList() {
     this.billableService.getBillable().subscribe(data => {
@@ -65,7 +85,7 @@ export class BillableComponent implements OnInit {
 
         let salesPerson = this.usersStateService.getAllUsers().find(item => item.id === company.techLeadId);
         this.list.push(new BillableProfile(key, data[key].tickets, company.name, this.ticketsListService.getUserName(salesPerson)));
-
+        this.reqList.push(new BillableProfile(key, data[key].tickets, company.name, this.ticketsListService.getUserName(salesPerson)));
 
       }
       this.onFilterName();
