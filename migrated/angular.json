@@ -476,7 +476,6 @@
               "src/ng1/scripts/core/assign-user-list/assign-user-list.ctrl.js",
               "src/ng1/scripts/core/duration/duration.ctrl.js",
               "src/ng1/scripts/core/time-picker/time-picker.ctrl.js",
-              "./node_modules/crypto-js/crypto-js.js",
               "node_modules/datatables.net/js/jquery.dataTables.min.js"
             ],
             "es5BrowserSupport": true

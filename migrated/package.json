@@ -38,7 +38,6 @@
     "bootstrap": "^4.4.1",
     "core-js": "^2.5.4",
     "cron-editor": "^2.1.7",
-    "crypto-js": "^3.3.0",
     "datatables.net": "^1.10.20",
     "datatables.net-dt": "^1.10.20",
     "exceljs": "^1.12.0",
