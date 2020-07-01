@@ -191,18 +191,21 @@
 
         </div>
         <div >
-          <div class="qt-mb-16 qt-df" *ngIf="toogleCustomerNote" ngbDropdown [autoClose]="'inside'" #addNoteDd="ngbDropdown">
+          <div class="qt-mb-16 qt-df" style="display: flex !important;" *ngIf="toogleCustomerNote" ngbDropdown [autoClose]="'inside'" #addNoteDd="ngbDropdown">
             <app-invoice-select-note   [placeholder]="'Select Saved Notes'"   [class]="['light-dropdown']"
             [field]="'title'"   [list]="regularNotes" (onChangeInput)="onCheckUpdateTitleNote($event)"
               (onSelectedItem)="onSelectNotes($event)"></app-invoice-select-note>
 
-          
-            <div class="qt-square-btn --done" (click)="onUpdateRegularNote()" *ngIf="changeRegularNote"></div> 
-            <div class="qt-square-btn --add" placement="top" ngbTooltip="Add Note"  id="dropdownAddNote" ngbDropdownToggle></div> <!--*ngIf="getLenRegularNotes() < 5"-->
-            <div ngbDropdownMenu aria-labelledby="dropdownAddNote" >
 
-              <app-invoice-add-note   (onUpdateNotes)="getInvoiceNote()" [dropDown]="addNoteDd"></app-invoice-add-note>
-                </div>
+            <div class="qt-square-btn --done" (click)="onUpdateRegularNote()" *ngIf="changeRegularNote"></div>
+
+            <div class="qt-square-btn --add" placement="top" ngbTooltip="Add Note"  id="dropdownAddNote" ngbDropdownToggle>
+
+              <div class="billable-popup-add-note" ngbDropdownMenu aria-labelledby="dropdownAddNote">
+                <app-invoice-add-note (onUpdateNotes)="getInvoiceNote()" [dropDown]="addNoteDd"></app-invoice-add-note>
+              </div>
+
+            </div> <!--*ngIf="getLenRegularNotes() < 5"-->
           </div>
           <textarea (input)="onCheckUpdateDescriptionNote()"  (blur)="onChangeRegularNote()" class="summary-info__textarea qt-textarea" placeholder="Type your custom note here" name="" id="description-regular-note" appTextArea    maxlength="250"   cols="30" rows="1"></textarea>
         </div>
@@ -223,9 +226,10 @@
           <div class="qt-fs-13 qt-fw-b">Total</div>
           <div class="qt-fs-16 qt-fw-b">$98.43</div>
         </div>
-
       </div>
+
     </div>
+
   </div>
 
   <div class="terms-n-conditions qt-pl-30 qt-pr-30 qt-pb-24 qt-pt-16">

@@ -289,6 +289,9 @@
   top: -5px;
   position: fixed;
   transform: rotate(45deg);
+  &.--bottom {
+    top: calc(100% - 5px);
+  }
 }
 
 
@@ -397,4 +400,15 @@
 
 .qt-lh-133 {
   line-height: 1.33;
+}
+
+.qt-df-important {
+  display: flex !important;
+}
+
+
+.qt-text-area-block {
+  mat-error {
+    top: 6px !important;
+  }
 }
