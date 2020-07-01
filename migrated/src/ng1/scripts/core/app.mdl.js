@@ -48,33 +48,9 @@
           var proto = Object.getPrototypeOf($delegate);
           var originalDigest = proto.$digest, originalApply = proto.$apply;
      
-          proto.$digest = function (tt) {
-     
-        /*    if ($delegate.$$phase === '$digest' || $delegate.$$phase === '$apply') {
-              try {
-                this.$eval(tt);
-              } catch (e) {
-                $exceptionHandler(e);
-              }
-            } else {
-              try {
-            
-                originalDigest.call(this,tt);
-              } catch (error) {
-              
-                $exceptionHandler(error);
-              }
-            }*/
+          proto.$digest = function () {
             if ($delegate.$$phase === '$digest' || $delegate.$$phase === '$apply') return;
-            try {
-              originalDigest.call(this);
-            } catch (error) {
-            
-              $exceptionHandler(error);
-            }
-
-           
-           
+            originalDigest.call(this);
           };
           proto.$apply = function (fn) {
             if ($delegate.$$phase === '$digest' || $delegate.$$phase === '$apply') {
