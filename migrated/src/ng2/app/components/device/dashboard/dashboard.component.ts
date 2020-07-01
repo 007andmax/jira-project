@@ -5,6 +5,7 @@ import { HardwareService } from './../_services/hardware.service';
 import { first } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { CONFIGCONSTANTS } from '../config/app-constants';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +14,7 @@ import { CONFIGCONSTANTS } from '../config/app-constants';
 })
 export class DashboardComponent implements OnInit {
 
-  url = 'http://localhost:4200/upload';
+  url = environment.apiUrl + 'upload'; 
   formData: FormData;
   files: UploadFile[];
   uploadInput: EventEmitter<UploadInput>;
