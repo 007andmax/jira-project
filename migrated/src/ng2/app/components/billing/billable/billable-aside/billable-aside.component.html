@@ -35,9 +35,9 @@
     <div class="qt-pos-rel" ngbDropdown [placement]="'top-right'">
       <ul class="qt-dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownSave">
         <li ngbDropdownItem (click)="saveAndPrint()"><div class="icon__print qt-sz-16 qt-mr-8"></div>Save and Print</li>
-        <li ngbDropdownItem><div class="icon__download qt-sz-16 qt-mr-8"></div>Save and Download</li>
+        <li ngbDropdownItem (click)="saveAndDownload()"><div class="icon__download qt-sz-16 qt-mr-8"></div>Save and Download</li>
       </ul>
-      <button class=" qt-button --with-menu qt-mr-12">Save and Send <div class="button-menu"  id="dropdownSave" ngbDropdownToggle> <div class="qt-sz-16 qt-ic-c icon__dropdown-arrow-up"></div> </div></button>
+      <button class=" qt-button --with-menu qt-mr-12" ><span (click)="saveAndSend()">Save and Send</span> <div class="button-menu"  id="dropdownSave" ngbDropdownToggle> <div class="qt-sz-16 qt-ic-c icon__dropdown-arrow-up"></div> </div></button>
     </div>
     <button class="qt-button --outline" *ngIf="!showPreview" (click)="onPreview()">Preview</button>
       <button class="qt-button --outline" *ngIf="showPreview" (click)="showPreview = false">Edit</button>  

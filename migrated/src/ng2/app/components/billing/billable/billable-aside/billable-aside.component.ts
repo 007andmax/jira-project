@@ -13,6 +13,7 @@ import { BillableTaimer } from './class/billable-taimer';
 import { ConfirmStateService } from '../../../shared/confirm/services/confirm-state.service';
 import { REMOVE_TICKET_INVOICE } from 'src/ng2/app/const/confirm';
 import { environment } from 'src/ng2/environments/environment';
+import { NotificationStateService } from '../../../shared/notification/services/notification-state.service';
 
 @Component({
   selector: 'app-billable-aside',
@@ -38,6 +39,7 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
   constructor(private billableStateService: BillableStateService,
     private companiesService: CompaniesService,
     public cd: ChangeDetectorRef,
+    private notificationStateService: NotificationStateService,
     private confirmStateService: ConfirmStateService,
     private billableService: BillableService) { }
 
@@ -84,10 +86,30 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
       this.clearTaimer();
     })
   }
+  onShowNotificationAfterCreate() {
+    this.notificationStateService.oninitShowNotification("The invoice has been created");
+  }
+  saveAndSend() {
+    this.billableService.create(this.invoice.lockId, true, this.invoice.invoiceDataDto.billTo[0].id, this.invoice.invoiceDataDto.shipTo[0].id).subscribe(data => {
+      //  http://localhost:4200/invoice/show/lock/a6e7c281-587a-4017-af31-fbf18b07d5e8/pdf?isEditable=true&shipTo=aea6cb98-9302-42b7-b013-681232f058d2&billTo=aea6cb98-9302-42b7-b013-681232f058d2
+      this.unlock();
+      this.onShowNotificationAfterCreate();
+    })
+  }
   saveAndPrint() {
     window.open(this.apiUrl + `/invoice/show/lock/${this.invoice.lockId}/pdf?isEditable=${true}&billTo=${this.invoice.invoiceDataDto.billTo[0].id}&shipTo=${this.invoice.invoiceDataDto.shipTo[0].id}`, "_blank");
     this.billableService.create(this.invoice.lockId, false, this.invoice.invoiceDataDto.billTo[0].id, this.invoice.invoiceDataDto.shipTo[0].id).subscribe(data => {
       //  http://localhost:4200/invoice/show/lock/a6e7c281-587a-4017-af31-fbf18b07d5e8/pdf?isEditable=true&shipTo=aea6cb98-9302-42b7-b013-681232f058d2&billTo=aea6cb98-9302-42b7-b013-681232f058d2
+      this.unlock();
+      this.onShowNotificationAfterCreate();
+    })
+  }
+  saveAndDownload() {
+    window.open(this.apiUrl + `/invoice/show/lock/${this.invoice.lockId}/pdf?isDownload=${true}&shipTo=${this.invoice.invoiceDataDto.shipTo[0].id}&billTo=${this.invoice.invoiceDataDto.billTo[0].id}.pdf`, "_blank");
+    this.billableService.create(this.invoice.lockId, false, this.invoice.invoiceDataDto.billTo[0].id, this.invoice.invoiceDataDto.shipTo[0].id).subscribe(data => {
+      //  http://localhost:4200/invoice/show/lock/a6e7c281-587a-4017-af31-fbf18b07d5e8/pdf?isEditable=true&shipTo=aea6cb98-9302-42b7-b013-681232f058d2&billTo=aea6cb98-9302-42b7-b013-681232f058d2
+      this.unlock();
+      this.onShowNotificationAfterCreate();
     })
   }
   private getCompany(id) {
