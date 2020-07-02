@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 import { BillableTaimer } from './class/billable-taimer';
 import { ConfirmStateService } from '../../../shared/confirm/services/confirm-state.service';
 import { REMOVE_TICKET_INVOICE } from 'src/ng2/app/const/confirm';
+import { environment } from 'src/ng2/environments/environment';
 
 @Component({
   selector: 'app-billable-aside',
@@ -26,12 +27,13 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
   billableProfile: BillableProfile;
   invoice: InvoiceLock;
   showPreloader: boolean = true;
-  showPreview:boolean = false;
+  showPreview: boolean = false;
   company: CompanyProfile = new CompanyProfile();
   invoiceNumber: string;
   isUnlock: boolean = false;
   billableTaimer: BillableTaimer;
   timer;
+  apiUrl = environment.apiUrl;
   sub: Subscription = new Subscription();
   constructor(private billableStateService: BillableStateService,
     private companiesService: CompaniesService,
@@ -41,22 +43,22 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    
+
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_TICKET_INVOICE) {
-         let lockedTickets = this.invoice.lockedTickets;
-         lockedTickets.splice(lockedTickets.findIndex(item => item === this.billableStateService.getLockedTicketForRemove()),1);
-         this.billableService.unlock(this.invoice.lockId).subscribe(data => {
-          this.opened = false;
-         
-          this.isUnlock = true;
-          this.clearTaimer();
-          this.getInvoiceLock(lockedTickets);
-          this.opened = true;
-          this.showPreloader = true;
-          this.onSetSelectedTickets.emit(lockedTickets);
-        })
+          let lockedTickets = this.invoice.lockedTickets;
+          lockedTickets.splice(lockedTickets.findIndex(item => item === this.billableStateService.getLockedTicketForRemove()), 1);
+          this.billableService.unlock(this.invoice.lockId).subscribe(data => {
+            this.opened = false;
+
+            this.isUnlock = true;
+            this.clearTaimer();
+            this.getInvoiceLock(lockedTickets);
+            this.opened = true;
+            this.showPreloader = true;
+            this.onSetSelectedTickets.emit(lockedTickets);
+          })
         }
       }
     })
@@ -69,7 +71,7 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
       this.getTaxNumber();
       this.getActualNumber();
       console.log("data", data);
-      this.getInvoiceLock(data,true);
+      this.getInvoiceLock(data, true);
       // this.billableProfile = this.billableStateService.getBillableProfile();
     })
     this.sub.add(getOnCreate);
@@ -80,6 +82,12 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
       this.showPreloader = true;
       this.isUnlock = true;
       this.clearTaimer();
+    })
+  }
+  saveAndPrint() {
+    window.open(this.apiUrl + `/invoice/show/lock/${this.invoice.lockId}/pdf?isEditable=${true}&billTo=${this.invoice.invoiceDataDto.billTo[0].id}&shipTo=${this.invoice.invoiceDataDto.shipTo[0].id}`, "_blank");
+    this.billableService.create(this.invoice.lockId, false, this.invoice.invoiceDataDto.billTo[0].id, this.invoice.invoiceDataDto.shipTo[0].id).subscribe(data => {
+      //  http://localhost:4200/invoice/show/lock/a6e7c281-587a-4017-af31-fbf18b07d5e8/pdf?isEditable=true&shipTo=aea6cb98-9302-42b7-b013-681232f058d2&billTo=aea6cb98-9302-42b7-b013-681232f058d2
     })
   }
   private getCompany(id) {
@@ -106,14 +114,14 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
       this.invoiceNumber = data.number;
     })
   }
-  private getInvoiceLock(ticketsIds,getComapny = false) {
+  private getInvoiceLock(ticketsIds, getComapny = false) {
     this.billableService.getInvoiceLock(ticketsIds).subscribe(data => {
       this.invoice = data;
       console.log("invoice", data);
-      this.getInvoiceLockTime(this.invoice.lockId,getComapny);
+      this.getInvoiceLockTime(this.invoice.lockId, getComapny);
     })
   }
-  private getInvoiceLockTime(id,getComapny) {
+  private getInvoiceLockTime(id, getComapny) {
     this.billableService.getInvoiceLockTime(id).subscribe((data: any) => {
       console.log("data", data);
       this.billableTaimer = new BillableTaimer(data.time);
@@ -126,23 +134,24 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
         this.billableTaimer.seconds--;
         this.cd.detectChanges();
       }, 1000);
-      if (getComapny)this.getCompany(this.billableProfile.id);
+      if (getComapny) this.getCompany(this.billableProfile.id);
       if (!getComapny) this.showPreloader = false;
     })
   }
-  
+
   public clearTaimer() {
     clearInterval(this.timer);
     this.billableTaimer.minutes = 0;
     this.billableTaimer.seconds = 0;
     this.billableTaimer.isFinished = true;
+    this.showPreview = false;
   }
   onPreview() {
     this.showPreview = true;
- /*   this.opened = false;
-    this.showPreloader = true;
-    this.clearTaimer();
-    this.billableStateService.onPreview();*/
+    /*   this.opened = false;
+       this.showPreloader = true;
+       this.clearTaimer();
+       this.billableStateService.onPreview();*/
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

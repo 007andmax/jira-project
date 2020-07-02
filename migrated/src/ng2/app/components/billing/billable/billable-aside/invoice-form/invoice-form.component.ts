@@ -36,7 +36,9 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   toogleCustomerNote: boolean = false;
   currentCompany: any;
   changeRegularNote: boolean = false;
+  changeGlobalNote: boolean = false;
   regularNotes: Array<InvoiceNote> = [];
+  globalNote: InvoiceNote = null;
   sub: Subscription = new Subscription();
   constructor(private billableStateService: BillableStateService,
     private billableService: BillableService,
@@ -50,6 +52,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.regularNotes = this.invoiceNotes.filter(item => item.noteType === "REGULAR");
+    this.globalNote = this.invoiceNotes.filter(item => item.noteType === "GLOBAL")[0];
     this.currentCompany = this.companiesStateService.getCurrentCompany();
     let getChangeCompanies = this.companiesStateService.getChangeCompanies().subscribe((data: CompanyUpdate) => {
 
@@ -110,9 +113,18 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     if (this.selectedNote) this.changeRegularNote = true;
 
   }
+  onCheckUpdateGlobalNote() {
+    if (this.globalNote) this.changeGlobalNote = true;
+
+  }
   onUpdateRegularNote() {
-    this.noteService.updateNote({ "title": this.selectedNote.title, "line1": this.elRef.nativeElement.querySelector("#description-regular-note").value, "line2": "" }, this.invoice.lockId).subscribe(data => {
+    this.noteService.updateNote({ "title": this.selectedNote.title, "line1": this.elRef.nativeElement.querySelector("#description-regular-note").value, "line2": "" }, this.selectedNote.id).subscribe(data => {
       this.changeRegularNote = false;
+    })
+  }
+  onUpdateGlobalNote() {
+    this.noteService.updateNote({ "title": this.globalNote.title, "line1": this.elRef.nativeElement.querySelector("#description-global-note").value, "line2": "" }, this.globalNote.id).subscribe(data => {
+      this.changeGlobalNote = false;
     })
   }
   onSelectNotes(data) {

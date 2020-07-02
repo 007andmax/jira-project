@@ -553,6 +553,7 @@
         $scope.createInvoice = function (lock, callback) {
           if (lock && !lock.expired ) {
             $scope.savingInvoiceInProcess.push(lock.id);
+            console.log(" $scope.lockInfo", $scope.lockInfo);
             var contactId = $scope.lockInfo[$scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId].contactId;
             var addressId = $scope.lockInfo[$scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId].addressId;
             var isSend = !callback;

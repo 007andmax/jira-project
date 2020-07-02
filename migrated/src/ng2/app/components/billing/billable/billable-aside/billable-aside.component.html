@@ -20,7 +20,7 @@
   <div class="billing-aside-scroll-content">
  <app-invoice-form *ngIf="!showPreloader && !showPreview" [invoiceNotes]="invoiceNotes" [invoiceTaxNumber]="invoiceTaxNumber" [invoiceNumber]="invoiceNumber" [company]="company" [invoice]="invoice"></app-invoice-form>
 
-     <app-invoice-preview *ngIf="showPreview"></app-invoice-preview>  
+     <app-invoice-preview   [company]="company" [invoiceNumber]="invoiceNumber" [invoice]="invoice" *ngIf="showPreview"></app-invoice-preview>  
   </div>
 
 
@@ -32,16 +32,15 @@
 
  <div class="aside-footer qt-pr-30 qt-pl-30 qt-pb-16 qt-pt-16 qt-df qt-ai-c qt-jc-sb">
   <div class="qt-df">
-    <div class="qt-pos-rel">
-      <ul class="qt-dropdown-menu --open-top">
-        <li><div class="icon__print qt-sz-16 qt-mr-8"></div>Save and Print</li>
-        <li><div class="icon__email-dark qt-sz-16 qt-mr-8"></div>Save and Send</li>
-        <li><div class="icon__download qt-sz-16 qt-mr-8"></div>Save and Download</li>
+    <div class="qt-pos-rel" ngbDropdown [placement]="'top-right'">
+      <ul class="qt-dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownSave">
+        <li ngbDropdownItem (click)="saveAndPrint()"><div class="icon__print qt-sz-16 qt-mr-8"></div>Save and Print</li>
+        <li ngbDropdownItem><div class="icon__download qt-sz-16 qt-mr-8"></div>Save and Download</li>
       </ul>
-      <button class=" qt-button --with-menu qt-mr-12">Save and Send <div class="button-menu"> <div class="qt-sz-16 qt-ic-c icon__dropdown-arrow-up"></div> </div></button>
+      <button class=" qt-button --with-menu qt-mr-12">Save and Send <div class="button-menu"  id="dropdownSave" ngbDropdownToggle> <div class="qt-sz-16 qt-ic-c icon__dropdown-arrow-up"></div> </div></button>
     </div>
-    <button class="qt-button --outline" (click)="onPreview()">Preview</button>
-    <!-- <button class="qt-button --outline">Edit</button> -->
+    <button class="qt-button --outline" *ngIf="!showPreview" (click)="onPreview()">Preview</button>
+      <button class="qt-button --outline" *ngIf="showPreview" (click)="showPreview = false">Edit</button>  
   </div>
    <button class="qt-button --outline">Save as Draft</button>
  </div>

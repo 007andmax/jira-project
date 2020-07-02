@@ -4,9 +4,11 @@ import { BillableProfileTicket } from './billable-profile-ticket';
 import { InvoiceNote } from './invoice-note';
 import { UserPhoneNumber } from '../../../users/class/user-phone-number';
 import { InvoiceCompany } from './invoice-company';
+import { InvoiceDtoBillTo } from './invoice-dto-bill-to';
+import { InvoiceDtoShipTo } from './invoice-dto-ship-to';
 
 export class InvoiceDto {
-    billTo: Array<CompanyProfileAddress> = [];
+    billTo: Array<InvoiceDtoBillTo> = [];
     billingAddress: string;
     company: InvoiceCompany;
     companyName: string;
@@ -26,7 +28,7 @@ export class InvoiceDto {
     senderAddress: string;
     senderUser: User;
     servicesSum: number;
-    shipTo: Array<CompanyProfileAddress> = [];
+    shipTo: Array<InvoiceDtoShipTo> = [];
     shippingAddress: string;
     taxId: string;
     taxIdDescription: string;

@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { BillableStateService } from 'src/ng2/app/states/billable/billable-state.service';
 import { Subscription } from 'rxjs';
-
+import * as moment from "moment";
+import { InvoiceLock } from '../../class/invoice-lock';
+import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
+import { CompanyProfile } from 'src/ng2/app/components/companies/class/company-profile';
 @Component({
   selector: 'app-invoice-preview',
   templateUrl: './invoice-preview.component.html',
@@ -10,20 +13,17 @@ import { Subscription } from 'rxjs';
 export class InvoicePreviewComponent implements OnInit {
   opened:boolean = false;
   sub: Subscription = new Subscription();
-  constructor(private billableStateService:BillableStateService) { }
+  @Input() invoiceNumber: string;
+  @Input() invoice: InvoiceLock;
+  @Input() company: CompanyProfile = new CompanyProfile();
+  currentCompany: any;
+  constructor(private billableStateService:BillableStateService,
+    private companiesStateService:CompaniesStateService) { }
 
   ngOnInit() {
-    let getOnPreview = this.billableStateService.getOnPreview().subscribe(data => {
-     
-      this.opened = true;
-
-   
-      
-    })
-    this.sub.add(getOnPreview);
+    
   }
-  ngOnDestroy(): void {
-    this.sub.unsubscribe();
-   
+  public getDate(date) {
+    return moment(new Date(date)).format('DD MMM YYYY');
   }
 }

@@ -21,6 +21,12 @@ export class BillableService {
     private http: HttpClient,
     private constantsStateService: ConstantsStateService
   ) { }
+
+  public create(lockId,isSend,contactId,addressId) {
+  
+    return this.http.get(this.apiUrl + `/invoice/create/${lockId}?isSendNotification=${isSend}&billTo=${contactId}&shipTo=${addressId}`);
+    
+  }
   public unlock(lockId) {
     return this.http.get(this.apiUrl + `invoice/unlock/${lockId}`);
   }
