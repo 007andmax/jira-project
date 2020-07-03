@@ -6,7 +6,7 @@
   <div class="qt-mb-16">
     <div class="qt-input-block qt-lh-154">
       <mat-error *ngIf="!validate.getTitle()">
-        This company name already occupied
+        Subject is required
       </mat-error>
       <label>Note Subject</label>
       <input type="text"  [(ngModel)]="createNote.title" (blur)="validate.checkValidTitle(createNote.title)" placeholder="Write Note Subject">
@@ -16,7 +16,7 @@
   <div class="qt-mb-24">
     <div class="qt-input-block qt-text-area-block">
       <mat-error *ngIf="!validate.getLine1()">
-        This company name already occupied
+        Description is required
       </mat-error>
       <label class="qt-lh-154">Note Description</label>
     <textarea class="qt-textarea" [(ngModel)]="createNote.line1" (blur)="validate.checkValidLine1(createNote.line1)" placeholder="Write Note Description"></textarea>

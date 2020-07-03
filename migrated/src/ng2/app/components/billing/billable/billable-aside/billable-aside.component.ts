@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, Output, EventEmitter, ViewChild } from '@angular/core';
 import { BillableStateService } from 'src/ng2/app/states/billable/billable-state.service';
 import { BillableService } from 'src/ng2/app/services/billable/billable.service';
 import { InvoiceNote } from '../class/invoice-note';
@@ -14,6 +14,7 @@ import { ConfirmStateService } from '../../../shared/confirm/services/confirm-st
 import { REMOVE_TICKET_INVOICE } from 'src/ng2/app/const/confirm';
 import { environment } from 'src/ng2/environments/environment';
 import { NotificationStateService } from '../../../shared/notification/services/notification-state.service';
+import { DisabledBtnDirective } from 'src/ng2/app/directives/disabled-btn.directive';
 
 @Component({
   selector: 'app-billable-aside',
@@ -22,6 +23,11 @@ import { NotificationStateService } from '../../../shared/notification/services/
 })
 export class BillableAsideComponent implements OnInit, OnDestroy {
   @Output() onSetSelectedTickets = new EventEmitter();
+  @ViewChild('saveAndSendBtn') saveAndSendBtn: DisabledBtnDirective;
+  @ViewChild('saveAndPrintBtn') saveAndPrintBtn: DisabledBtnDirective;
+  @ViewChild('saveAndDownloadBtn') saveAndDownloadBtn: DisabledBtnDirective;
+  
+  
   opened: boolean = false;
   invoiceTaxNumber: InvoiceTaxNumber;
   invoiceNotes: Array<InvoiceNote> = [];
@@ -98,27 +104,43 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
   onShowNotificationAfterCreate() {
     this.notificationStateService.oninitShowNotification("The invoice has been created");
   }
+  disabledSaveBtns() {
+    this.saveAndSendBtn.setDisabled(true);
+    this.saveAndPrintBtn.setDisabled(true);
+    this.saveAndDownloadBtn.setDisabled(true);
+  }
+  activeSaveBtns() {
+    this.saveAndSendBtn.setDisabled(false);
+    this.saveAndPrintBtn.setDisabled(false);
+    this.saveAndDownloadBtn.setDisabled(false);
+  }
   saveAndSend() {
+    this.disabledSaveBtns();
     this.billableService.create(this.invoice.lockId, true, this.invoice.invoiceDataDto.billTo[0].id, this.invoice.invoiceDataDto.shipTo[0].id).subscribe(data => {
       //  http://localhost:4200/invoice/show/lock/a6e7c281-587a-4017-af31-fbf18b07d5e8/pdf?isEditable=true&shipTo=aea6cb98-9302-42b7-b013-681232f058d2&billTo=aea6cb98-9302-42b7-b013-681232f058d2
       this.unlock();
       this.onShowNotificationAfterCreate();
+     this.activeSaveBtns();
     })
   }
   saveAndPrint() {
+    this.disabledSaveBtns();
     window.open(this.apiUrl + `/invoice/show/lock/${this.invoice.lockId}/pdf?isEditable=${true}&billTo=${this.invoice.invoiceDataDto.billTo[0].id}&shipTo=${this.invoice.invoiceDataDto.shipTo[0].id}`, "_blank");
     this.billableService.create(this.invoice.lockId, false, this.invoice.invoiceDataDto.billTo[0].id, this.invoice.invoiceDataDto.shipTo[0].id).subscribe(data => {
       //  http://localhost:4200/invoice/show/lock/a6e7c281-587a-4017-af31-fbf18b07d5e8/pdf?isEditable=true&shipTo=aea6cb98-9302-42b7-b013-681232f058d2&billTo=aea6cb98-9302-42b7-b013-681232f058d2
       this.unlock();
       this.onShowNotificationAfterCreate();
+      this.activeSaveBtns();
     })
   }
   saveAndDownload() {
+    this.disabledSaveBtns();
     window.open(this.apiUrl + `/invoice/show/lock/${this.invoice.lockId}/pdf?isDownload=${true}&shipTo=${this.invoice.invoiceDataDto.shipTo[0].id}&billTo=${this.invoice.invoiceDataDto.billTo[0].id}.pdf`, "_blank");
     this.billableService.create(this.invoice.lockId, false, this.invoice.invoiceDataDto.billTo[0].id, this.invoice.invoiceDataDto.shipTo[0].id).subscribe(data => {
       //  http://localhost:4200/invoice/show/lock/a6e7c281-587a-4017-af31-fbf18b07d5e8/pdf?isEditable=true&shipTo=aea6cb98-9302-42b7-b013-681232f058d2&billTo=aea6cb98-9302-42b7-b013-681232f058d2
       this.unlock();
       this.onShowNotificationAfterCreate();
+      this.activeSaveBtns();
     })
   }
   private getCompany(id) {

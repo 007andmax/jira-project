@@ -12,6 +12,9 @@ export class DisabledBtnDirective {
   public setDisabled(data) {
     this.block = data;
   }
+  public isBlock() {
+    return this.block;
+  }
   @HostListener('click', ['$event'])
   clickout(event) {
     if (!this.block) this.onClick.emit(null);

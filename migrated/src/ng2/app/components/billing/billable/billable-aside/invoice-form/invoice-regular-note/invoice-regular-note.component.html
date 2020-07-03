@@ -13,13 +13,13 @@
 
       <div class="qt-square-btn --done" (click)="onUpdateRegularNote()" *ngIf="changeRegularNote"></div>
 
-      <div class="qt-square-btn --add" placement="top" ngbTooltip="Add Note"  id="dropdownAddNote" ngbDropdownToggle>
+      <div class="qt-square-btn --add" placement="top" ngbTooltip="Add Note"  id="dropdownAddNote" ngbDropdownToggle *ngIf="getLenRegularNotes() < 5">
 
         <div class="billable-popup-add-note" ngbDropdownMenu aria-labelledby="dropdownAddNote">
           <app-invoice-add-note (onUpdateNotes)="getInvoiceNote()" [dropDown]="addNoteDd"></app-invoice-add-note>
         </div>
 
-      </div> <!--*ngIf="getLenRegularNotes() < 5"-->
+      </div>
     </div>
     <textarea (input)="onCheckUpdateDescriptionNote()"  (blur)="onChangeRegularNote()" class="summary-info__textarea qt-textarea" placeholder="Type your custom note here" name="" id="description-regular-note" appTextArea    maxlength="250"   cols="30" rows="1"></textarea>
   </div>
