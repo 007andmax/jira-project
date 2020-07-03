@@ -152,7 +152,7 @@
 
         <div class="col-md-12 new-users-content__modal--content-footer">
           <div class="d-f">
-            <button class="btn-new btn-primary" (click)="onAdd()">Add User</button>
+            <button class="btn-new btn-primary" appDisabledBtn #addBtn="disabled" (onClick)="onAdd()" >Add User</button>
             <button class="btn-new disabled" (click)="close()">Cancel</button>
           </div>
         </div>

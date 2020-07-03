@@ -48,7 +48,7 @@ export class TicketAddAsideComponent implements OnInit {
     private notificationStateService: NotificationStateService,
     private elRef: ElementRef,
     public cd: ChangeDetectorRef,
-    private companiesState: CompaniesStateService, ) { }
+    private companiesState: CompaniesStateService,) { }
 
   ngOnInit() {
     this.ticketsStateService.getOnActualNumber().subscribe(data => {
@@ -158,11 +158,12 @@ export class TicketAddAsideComponent implements OnInit {
       if (this.ticketAdd.createdUser.id) this.removeShareUser(this.ticketAdd.createdUser.id);
       let indexhUser = this.users.findIndex(user => `${user.firstName} ${user.lastName}` === item);
       if (indexhUser > -1) this.ticketAdd.createdUser.setUserData(this.users[indexhUser]);
-      this.shareUsersList.push(new TechUserItem(this.users[indexhUser]));
+      let findSharedUser = this.shareUsersList.find(item => item.id === this.users[indexhUser].id);
+      if (!findSharedUser) this.shareUsersList.push(new TechUserItem(this.users[indexhUser]));
       this.ticketValidate.resetClientUser();
 
     } else {
-      this.removeShareUser(this.ticketAdd.createdUser.id);
+    //  this.removeShareUser(this.ticketAdd.createdUser.id);
       this.ticketAdd.createdUser.clearUserData();
     }
   }
@@ -239,7 +240,7 @@ export class TicketAddAsideComponent implements OnInit {
   }
 
   public onChangeNote(event) {
-    this.ticketAdd.note = event.target.value;
+    this.ticketAdd.note = event.target.innerHTML;
   }
 
   public trackByIndex(index, item) {

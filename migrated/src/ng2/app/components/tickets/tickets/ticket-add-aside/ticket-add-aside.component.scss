@@ -146,3 +146,8 @@
   height: auto;
   min-height: 64px;
 }
+[contenteditable=true]:empty:before{
+  content: attr(placeholder);
+  pointer-events: none;
+  display: block; /* For Firefox */
+}

@@ -17,7 +17,7 @@ export class UserTableSubscriptionComponent implements OnInit {
     this.title = '';
     if (this.subscription.ticket) this.list.push('Updates');
     if (this.subscription.invoice) this.list.push('Invoice');
-    if (this.subscription.ticketManager) this.list.push('Manager');
+    if (this.subscription.ticketManager) this.list.push('Ticket Manager');
     this.title = this.list.join(', ');
 
   }

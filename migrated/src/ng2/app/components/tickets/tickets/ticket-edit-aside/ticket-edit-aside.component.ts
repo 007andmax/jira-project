@@ -24,6 +24,7 @@ import { WebsocketService } from 'src/ng2/app/services/websocket/websocket.servi
 import { TicketProfileUpdate } from '../class/ticket-profile-update';
 import { Subscription } from 'rxjs';
 import { TicketEditAsideRightPanelComponent } from './ticket-edit-aside-right-panel/ticket-edit-aside-right-panel.component';
+import { TicketMessageComponent } from './ticket-message/ticket-message.component';
 @Component({
   selector: 'app-ticket-edit-aside',
   templateUrl: './ticket-edit-aside.component.html',
@@ -35,6 +36,8 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
 
   @ViewChild('updateForm') updateForm: TicketProfileFormUpdateComponent;
   @ViewChild('rightPanel') rightPanel: TicketEditAsideRightPanelComponent;
+  @ViewChild('ticketMessage') ticketMessage: TicketMessageComponent;
+
   ticketProfile: TicketProfile = new TicketProfile();
   opened = false;
   modeSubject = 'view';
@@ -69,7 +72,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       this.ticketStateService.unsubscribeTicket();
       if (this.updateForm) this.updateForm.reset();
       this.ticketProfile = data;
-      this.elRef.nativeElement.querySelector("#ticket-note").value = this.ticketProfile.note;
+      this.elRef.nativeElement.querySelector("#ticket-note").innerHTML = this.ticketProfile.note;
       this.updateListAssignedUser();
       this.updateLisUpdateUser();
       this.opened = true;
@@ -102,9 +105,10 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
         let ticket = new Ticket(data);
         if (this.ticketProfile.id === ticket.id) {
           this.ticketProfile.update(data);
-          this.elRef.nativeElement.querySelector("#ticket-note").value = this.ticketProfile.note;
+          this.elRef.nativeElement.querySelector("#ticket-note").innerHTML = this.ticketProfile.note;
           this.updateListAssignedUser();
           this.updateLisUpdateUser();
+
         }
       }
 
@@ -153,7 +157,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     this.lisUpdateUser = this.lisUpdateUser.filter((item, index) => this.lisUpdateUser.findIndex(user => user.id === item.id) === index);
     if (this.ticketProfile.createdUser) {
       let find = this.lisUpdateUser.find(item => item.id === this.ticketProfile.createdUser.id);
-      if (find) this.lisUpdateUser.push(find);
+      if (!find) this.lisUpdateUser.unshift(this.ticketProfile.createdUser);
     }
   }
   onMoveIntoSpam() {
@@ -212,14 +216,20 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
   }
 
   toggleSubject() {
+    var textCurrent = this.elRef.nativeElement.querySelector("#ticket-subject").value;
+    var textOld = this.ticketProfile.subject;
     this.modeSubject = (this.modeSubject === 'view') ? 'edit' : 'view';
-    if (this.modeSubject === 'view') this.onChangeSubjectNote();
+    if (this.modeSubject === 'view' && textCurrent != textOld) {
+      this.ticketProfile.subject = textCurrent;
+      this.onChangeSubjectNote();
+    }
   }
   toggleNote() {
-    if (this.elRef.nativeElement.querySelector("#ticket-note").value != this.ticketProfile.note) {
-      this.ticketProfile.note = this.elRef.nativeElement.querySelector("#ticket-note").value;
+    var textCurrent = this.elRef.nativeElement.querySelector("#ticket-note").innerHTML.replace(/<\/?[^>]+>/ig, "");
+    var textOld = this.ticketProfile.note.replace(/<\/?[^>]+>/ig, "");
+    if (textCurrent != textOld) {
+      this.ticketProfile.note = this.elRef.nativeElement.querySelector("#ticket-note").innerHTML;
       this.onChangeSubjectNote();
-
     }
   }
   onChangeSubjectNote() {
@@ -233,6 +243,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
         this.notificationStateService.oninitShowNotification(`${this.getUserName(user)} locked this ticket to create invoice!`);
         return;
       }
+      this.ticketMessage.isMarkAsOpen = false;
       this.notificationStateService.oninitShowNotification(`The ticket “${this.ticketProfile.number}” has been marked as open`);
     })
   };
@@ -289,6 +300,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       value.push(currentUser.id);
     }
     this.ticketsService.assignUserToTicket(this.ticketProfile.id, value.join(",")).subscribe(res => {
+      this.ticketMessage.isClaimTicket = false;
     })
 
   };
@@ -325,6 +337,10 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     }
     return result;
   };
+  getAgentName() {
+    if (!this.ticketProfile.agent || !this.ticketProfile.agent.label) return '';
+    return `, Agent - ${this.ticketProfile.agent.label}`;
+  }
   close() {
     this.ticketProfile = new TicketProfile();
     this.opened = false;

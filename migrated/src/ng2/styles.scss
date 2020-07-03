@@ -978,6 +978,9 @@ ngb-typeahead-window {
   position: relative;
   min-height: calc(100vh - 86px);
 }
+.new-users-content {
+  padding: 21px 24px 80px 24px;
+}
 .products-content__header,
 .new-users-content__header,
 .recurring-tickets-content__header,
@@ -2922,8 +2925,19 @@ app-ticket-edit-aside-devices  {
     width: 7px;
     height: 7px;
   }
+  &.--max-width {
+    width: fit-content;
+  }
 }
 
 .--input-error {
   border: solid 1px #ff5263 !important;
+}
+
+.relative {
+  position: relative;
+}
+
+.text-transparent {
+  color: transparent !important;
 }

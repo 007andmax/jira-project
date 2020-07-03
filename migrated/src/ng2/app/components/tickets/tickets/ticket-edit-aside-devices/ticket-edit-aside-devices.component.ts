@@ -75,6 +75,9 @@ export class TicketEditAsideDevicesComponent implements OnInit, OnDestroy {
       return;
     }
     let devices = (this.devicesSateService.getAllDevices()) ? this.devicesSateService.getAllDevices()[this.companyId] : [];
+
+    if (devices)   devices.sort((a, b) => (a.hostName.toLowerCase() > b.hostName.toLowerCase()) ?
+    1 : ((b.hostName.toLowerCase() > a.hostName.toLowerCase()) ? -1 : 0));
     this.devices = (devices) ? devices : [];
     this.reqDevices = (devices) ? devices : [];
   }

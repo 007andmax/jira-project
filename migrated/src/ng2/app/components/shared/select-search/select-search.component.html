@@ -1,5 +1,7 @@
 <div [ngClass]="class" >
   <input
+  [ngClass]="{'disabled': isDisabled}"
+  [disabled]="isDisabled"
     [id]="id"
     [placeholder]="placeholder"
     type="text"
@@ -19,7 +21,7 @@
     (blur)="onChange($event)"
     (isPopupOpen)="isDropDownOpen()"
   />
-  <span *ngIf="list">
+  <span *ngIf="list && !isDisabled">
     <i *ngIf="selectedItem && !isAdd"
        class="icn-sm icn-remove-old"
        (click)="clearClient($event)"></i>

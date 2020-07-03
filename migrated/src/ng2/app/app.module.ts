@@ -259,6 +259,9 @@ import { InvoiceSelectNoteComponent } from './components/billing/billable/billab
 import { InvoiceRegularNoteComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-regular-note/invoice-regular-note.component';
 
 
+import { TicketsFilterComponent } from './components/tickets/tickets/tickets-header/tickets-filter/tickets-filter.component';
+import { DisabledBtnModule } from './modules/disabled-btn/disabled-btn.module';
+ 
 
 
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
@@ -645,6 +648,7 @@ angular.module('quicktech')
     InvoiceSelectNoteComponent,
 
     InvoiceRegularNoteComponent,
+    TicketsFilterComponent,
   ],
   imports: [
     BrowserModule,
@@ -687,7 +691,8 @@ angular.module('quicktech')
     FontAwesomeModule,
     NvD3Module,
     BrowserAnimationsModule,
-    IgxTimePickerModule
+    IgxTimePickerModule,
+    DisabledBtnModule
 
   ],
   entryComponents: [

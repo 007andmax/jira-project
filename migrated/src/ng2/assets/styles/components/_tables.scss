@@ -14,7 +14,8 @@ table.qt-table-modern {
     tr {
       td {
         background: #ffffff;
-        padding: 10px 16px 11px 16px;
+        padding: 0 16px 0 16px;
+        height: 48px;
         border-top: 1px solid transparent;
         border-bottom: 1px solid transparent;
 
@@ -58,6 +59,11 @@ table.qt-table-modern {
       display: flex;
       font-size: 10px;
       font-weight: 700;
+      &.transparent-text:before {
+        content: '.';
+        color: transparent;
+        position: relative;
+      }
     }
     .--strong {
       font-weight: 600;
@@ -88,4 +94,8 @@ table.qt-table-modern {
     top: 6px;
     background-image: url('assets/img/icons/sorting-down.svg');
   }
+}
+
+.h100 {
+  height: 100%;
 }
