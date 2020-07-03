@@ -31,7 +31,7 @@
       </div>
 
       <div class="qt-fs-13 qt-text-right qt-lh-154">
-        <div class="qt-df qt-jc-sb qt-mb-8">
+        <div class="qt-df qt-jc-sb qt-mb-8" *ngIf="invoiceTaxNumber">
           <div class="qt-ff-gm qt-text-right invoice-info-title" [textContent]="invoiceTaxNumber.taxIdDescription + ':'"></div>
           <div class="invoice-info-value" [textContent]="invoiceTaxNumber.taxId"></div>
         </div>

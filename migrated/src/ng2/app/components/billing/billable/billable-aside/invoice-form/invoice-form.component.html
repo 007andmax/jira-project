@@ -32,7 +32,7 @@
       <input [(ngModel)]="invoiceNumber" (blur)="onChangeInvoiceNumber()" type="text">
     </div>
 
-    <div class="qt-input-block qt-mr-16 qt-w100">
+    <div class="qt-input-block qt-mr-16 qt-w100" *ngIf="invoiceTaxNumber">
       <label [textContent]="invoiceTaxNumber.taxIdDescription"></label>
       <input [(ngModel)]="invoiceTaxNumber.taxId" (blur)="onChangeTax()"  type="text">
     </div>
