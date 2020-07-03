@@ -58,20 +58,12 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
         if (this.confirmStateService.getConfirmAction() === REMOVE_TICKET_INVOICE) {
           let lockedTickets = this.invoice.lockedTickets;
           let index = lockedTickets.findIndex(item => item === this.billableStateService.getLockedTicketForRemove());
-          console.log("index",index);
           lockedTickets.splice(index, 1);
-          console.log("lockedTickets",lockedTickets);
-
-         let find =  this.billableProfile.tickets.filter(item => item.selected && item.id !== this.billableStateService.getLockedTicketForRemove())
-     console.log("find",find);
-         return;
           this.billableService.unlock(this.invoice.lockId).subscribe(data => {
-            this.opened = false;
-
+            this.isInit = false;
             this.isUnlock = true;
             this.clearTaimer();
             this.getInvoiceLock(lockedTickets);
-            this.opened = true;
             this.showPreloader = true;
             this.onSetSelectedTickets.emit(lockedTickets);
           })
