@@ -6,6 +6,7 @@ import { UserPhoneNumber } from '../../../users/class/user-phone-number';
 import { InvoiceCompany } from './invoice-company';
 import { InvoiceDtoBillTo } from './invoice-dto-bill-to';
 import { InvoiceDtoShipTo } from './invoice-dto-ship-to';
+import { InvoiceProfileTicket } from './invoice-profile-ticket';
 
 export class InvoiceDto {
     billTo: Array<InvoiceDtoBillTo> = [];
@@ -35,6 +36,6 @@ export class InvoiceDto {
     taxSum: number;
     techCompanyName: string;
     termsAndConditions: string;
-    tickets: Array<BillableProfileTicket>;
+    tickets: Array<InvoiceProfileTicket>;
     totalSum: number;
 }

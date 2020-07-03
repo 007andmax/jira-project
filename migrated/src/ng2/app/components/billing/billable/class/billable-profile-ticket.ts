@@ -10,7 +10,7 @@ export class BillableProfileTicket {
     lockedBy: any;
     productExpense: Array<BillableProfileTicketProductExpense>;
     productSum: number;
-    serviceExpense: Array<BillableProfileTicketServiceExpense>
+    serviceExpense: Array<BillableProfileTicketServiceExpense>;
     serviceSum: number;
     subject: string;
     sum: number;

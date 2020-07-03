@@ -6,7 +6,7 @@
       New Invoice
     </div>
 
-    <div class="qt-df qt-ai-c">
+    <div class="qt-df qt-ai-c" *ngIf="isInit">
       <div class="icon__clock-timer qt-sz-20 qt-ic-c qt-mr-6" *ngIf="billableTaimer && !billableTaimer.isFinished"></div>
       <div class="qt-fs-13 qt-ff-gr qt-mr-16 qt-color-dark-light" *ngIf="billableTaimer && !billableTaimer.isFinished"><span class="qt-ff-gm qt-color-dark" [textContent]="billableTaimer.getTimeText()">14:46</span>  mins remaining until unlock</div>
 

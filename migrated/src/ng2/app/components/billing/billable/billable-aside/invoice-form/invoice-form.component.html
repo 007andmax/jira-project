@@ -52,7 +52,8 @@
   <div class="invoice-items">
     <ng-template ngFor let-ticket
     [ngForOf]="invoice.invoiceDataDto.tickets"
-    [ngForTrackBy]="trackById">
+    let-i="index"
+    [ngForTrackBy]="trackByIndex">
     <div class="invoice-item qt-mb-16 qt-w100">
       <div class="qt-df qt-ai-c">
         <div class="invoice-item__header qt-w100 qt-ml-30 qt-df qt-ai-c qt-pt-10 qt-pb-10 qt-h40">
@@ -61,7 +62,7 @@
           <div class="qt-fs-12"><span class="qt-fs-11 qt-ff-sb">Subject:</span> {{ticket.subject}}</div>
         </div>
         <div class="delete-item-container qt-pl-4">
-          <div class="qt-pointer  qt-sz-16 icon__raw-clear qt-ic-c " *ngIf="invoice.invoiceDataDto.tickets.length > 1" placement="left" ngbTooltip="Remove Ticket" (click)="delete(ticket)"></div>
+          <div class="qt-pointer  qt-sz-16 icon__raw-clear qt-ic-c " *ngIf="invoice.invoiceDataDto.tickets.length > 1" placement="left" ngbTooltip="Remove Ticket" (click)="delete(i)"></div>
         </div>
       </div>
 

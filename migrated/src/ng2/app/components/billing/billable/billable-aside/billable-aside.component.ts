@@ -32,6 +32,7 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
   company: CompanyProfile = new CompanyProfile();
   invoiceNumber: string;
   isUnlock: boolean = false;
+  isInit:boolean = false;
   billableTaimer: BillableTaimer;
   timer;
   apiUrl = environment.apiUrl;
@@ -50,7 +51,14 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_TICKET_INVOICE) {
           let lockedTickets = this.invoice.lockedTickets;
-          lockedTickets.splice(lockedTickets.findIndex(item => item === this.billableStateService.getLockedTicketForRemove()), 1);
+          let index = lockedTickets.findIndex(item => item === this.billableStateService.getLockedTicketForRemove());
+          console.log("index",index);
+          lockedTickets.splice(index, 1);
+          console.log("lockedTickets",lockedTickets);
+
+         let find =  this.billableProfile.tickets.filter(item => item.selected && item.id !== this.billableStateService.getLockedTicketForRemove())
+     console.log("find",find);
+         return;
           this.billableService.unlock(this.invoice.lockId).subscribe(data => {
             this.opened = false;
 
@@ -81,6 +89,7 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
   unlock() {
     this.billableService.unlock(this.invoice.lockId).subscribe(data => {
       this.opened = false;
+      this.isInit = false;
       this.showPreloader = true;
       this.isUnlock = true;
       this.clearTaimer();
@@ -116,6 +125,7 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
     this.companiesService.getCompany(id).subscribe((data: any) => {
       this.company.onEditMode(data);
       this.showPreloader = false;
+      this.isInit = true;
     })
   }
   private getInvoiceNote() {
@@ -157,7 +167,10 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
         this.cd.detectChanges();
       }, 1000);
       if (getComapny) this.getCompany(this.billableProfile.id);
-      if (!getComapny) this.showPreloader = false;
+      if (!getComapny) {
+        this.showPreloader = false;
+        this.isInit = true;
+      } 
     })
   }
 

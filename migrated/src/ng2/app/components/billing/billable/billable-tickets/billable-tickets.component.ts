@@ -63,7 +63,7 @@ export class BillableTicketsComponent implements OnInit {
   }
   onToggleAll(event) {
     this.billableProfile.tickets.forEach(item => {
-      item.selected = event.target.checked;
+     if (!item.lockedBy) item.selected = event.target.checked;
     })
   }
   public getDate(date) {
