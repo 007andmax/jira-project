@@ -256,6 +256,7 @@ import { InvoiceFormEditCustomerComponent } from './components/billing/billable/
 import { InvoicePreviewComponent } from './components/billing/billable/billable-aside/invoice-preview/invoice-preview.component';
 import { InvoiceAddNoteComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-add-note/invoice-add-note.component';
 import { InvoiceSelectNoteComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-select-note/invoice-select-note.component';
+import { InvoiceRegularNoteComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-regular-note/invoice-regular-note.component';
 
 
 
@@ -642,6 +643,8 @@ angular.module('quicktech')
     InvoiceAddNoteComponent,
 
     InvoiceSelectNoteComponent,
+
+    InvoiceRegularNoteComponent,
   ],
   imports: [
     BrowserModule,

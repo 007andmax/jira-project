@@ -184,32 +184,7 @@
         <div class="info-button-sm qt-ff-gm"><div class="icon__discount qt-mr-4 qt-sz-16 qt-ic-c"></div> Apply Discount</div>
       </div>
 
-      <div class="summary-info__notes">
-        <div class="qt-df qt-jc-sb qt-mb-12">
-          <div class="qt-fs-13 qt-ff-gm">Customer Note</div>
-          <div class="qt-fs-12 qt-color-info qt-ff-gm" placement="top" ngbTooltip="Expand Notes" (click)="toogleCustomerNote = !toogleCustomerNote">Saved Notes +</div>
-
-        </div>
-        <div >
-          <div class="qt-mb-16 qt-df" style="display: flex !important;" *ngIf="toogleCustomerNote" ngbDropdown [autoClose]="'inside'" #addNoteDd="ngbDropdown">
-            <app-invoice-select-note   [placeholder]="'Select Saved Notes'"   [class]="['light-dropdown']"
-            [field]="'title'"   [list]="regularNotes" (onChangeInput)="onCheckUpdateTitleNote($event)"
-              (onSelectedItem)="onSelectNotes($event)"></app-invoice-select-note>
-
-
-            <div class="qt-square-btn --done" (click)="onUpdateRegularNote()" *ngIf="changeRegularNote"></div>
-
-            <div class="qt-square-btn --add" placement="top" ngbTooltip="Add Note"  id="dropdownAddNote" ngbDropdownToggle>
-
-              <div class="billable-popup-add-note" ngbDropdownMenu aria-labelledby="dropdownAddNote">
-                <app-invoice-add-note (onUpdateNotes)="getInvoiceNote()" [dropDown]="addNoteDd"></app-invoice-add-note>
-              </div>
-
-            </div> <!--*ngIf="getLenRegularNotes() < 5"-->
-          </div>
-          <textarea (input)="onCheckUpdateDescriptionNote()"  (blur)="onChangeRegularNote()" class="summary-info__textarea qt-textarea" placeholder="Type your custom note here" name="" id="description-regular-note" appTextArea    maxlength="250"   cols="30" rows="1"></textarea>
-        </div>
-      </div>
+ <app-invoice-regular-note [invoiceNotes]="invoiceNotes" (onUpdateInvoiceData)="updateInvoiceData($event)"></app-invoice-regular-note>
     </div>
 
     <div>

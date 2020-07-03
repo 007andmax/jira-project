@@ -32,12 +32,8 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   @Input() invoiceNotes: Array<InvoiceNote> = [];
   @Input() company: CompanyProfile = new CompanyProfile();
   @Input() invoiceTaxNumber: InvoiceTaxNumber;
-  selectedNote: InvoiceNote = null;
-  toogleCustomerNote: boolean = false;
   currentCompany: any;
-  changeRegularNote: boolean = false;
   changeGlobalNote: boolean = false;
-  regularNotes: Array<InvoiceNote> = [];
   globalNote: InvoiceNote = null;
   sub: Subscription = new Subscription();
   constructor(private billableStateService: BillableStateService,
@@ -51,23 +47,18 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    this.regularNotes = this.invoiceNotes.filter(item => item.noteType === "REGULAR");
+
     this.globalNote = this.invoiceNotes.filter(item => item.noteType === "GLOBAL")[0];
     this.currentCompany = this.companiesStateService.getCurrentCompany();
     let getChangeCompanies = this.companiesStateService.getChangeCompanies().subscribe((data: CompanyUpdate) => {
-
       if (data.action === 'COMPANY_SAVED' && this.company.id === data.data.id) {
-
         this.company.name = data.data.name;
         this.company.contacts[0].firstName = data.data.companyInfo.contacts[0].firstName;
         this.company.contacts[0].lastName = data.data.companyInfo.contacts[0].lastName;
         this.company.addresses[0].addressWithSuitNumberAndPostalCode = data.data.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode;
         this.company.contacts[0].primaryEmail = data.data.companyInfo.contacts[0].primaryEmail;
-
         console.log("this.company", this.company);
       }
-
-
     })
     this.sub.add(getChangeCompanies);
   }
@@ -88,105 +79,30 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   }
   onChangeTax() {
     let data = { "taxNumber": { "taxIdDescription": this.invoiceTaxNumber.taxIdDescription, "taxId": this.invoiceTaxNumber.taxId } };
-
     this.invoiceTicketsService.updateInvoiceContact(data).subscribe(res => {
 
     })
   }
   getDuration(input) {
-    var timeInMinutes = input * 60,
+    let timeInMinutes = input * 60,
       hours = Math.floor(timeInMinutes / 60),
       minutes = Math.round(timeInMinutes - (hours * 60));
-
     return (hours >= 10 ? hours : '0' + hours) + ':' + (minutes >= 10 ? minutes : '0' + minutes) + ' hr(s)';
 
   }
-  onCheckUpdateTitleNote(data) {
-    if (this.selectedNote) {
-      this.changeRegularNote = true;
-      this.selectedNote.title = data;
-      console.log("data", data);
-    }
 
-  }
-  onCheckUpdateDescriptionNote() {
-    if (this.selectedNote) this.changeRegularNote = true;
 
-  }
   onCheckUpdateGlobalNote() {
     if (this.globalNote) this.changeGlobalNote = true;
 
   }
-  onUpdateRegularNote() {
-    this.noteService.updateNote({ "title": this.selectedNote.title, "line1": this.elRef.nativeElement.querySelector("#description-regular-note").value, "line2": "" }, this.selectedNote.id).subscribe(data => {
-      this.changeRegularNote = false;
-    })
-  }
+
   onUpdateGlobalNote() {
     this.noteService.updateNote({ "title": this.globalNote.title, "line1": this.elRef.nativeElement.querySelector("#description-global-note").value, "line2": "" }, this.globalNote.id).subscribe(data => {
       this.changeGlobalNote = false;
     })
   }
-  onSelectNotes(data) {
-    this.selectedNote = data;
-    console.log("selectedNote", this.selectedNote);
-    if (this.selectedNote) {
-      let request: PartialUpdate = new PartialUpdate(null, null, null, this.selectedNote, null);
-      console.log("request", request);
-      this.updateInvoiceData(request);
-      this.elRef.nativeElement.querySelector("#description-regular-note").value = this.selectedNote.line1;
 
-    } else {
-      this.changeRegularNote = false;
-      this.elRef.nativeElement.querySelector("#description-regular-note").value = "";
-    }
-  }
-  onChangeDescriptionNote() {
-    let request: PartialUpdate = new PartialUpdate(null, null, null, this.selectedNote, null);
-    console.log("request", request);
-    this.updateInvoiceData(request);
-  }
-  getLenRegularNotes() {
-    return this.invoiceNotes.filter(item => item.noteType === "REGULAR").length;
-  }
-  onChangeRegularNote() {
-    console.log("onChangeRegularNote");
-    if (this.selectedNote) {
-      let selectedNote = JSON.parse(JSON.stringify(this.selectedNote));
-      selectedNote.line1 = this.elRef.nativeElement.querySelector("#description-regular-note").value;
-      let request: PartialUpdate = new PartialUpdate(null, null, null, selectedNote, null);
-      console.log("request", request);
-      this.updateInvoiceData(request);
-
-    } else {
-      let selectedNote = new InvoiceNote({
-        line1: this.elRef.nativeElement.querySelector("#description-regular-note").value,
-        line2: "",
-        noteType: "REGULAR",
-        suggestedNote: false,
-      });
-      let request: PartialUpdate = new PartialUpdate(null, null, null, selectedNote, null);
-      console.log("request", request);
-      this.updateInvoiceData(request);
-
-    }
-
-  }
-    getInvoiceNote() {
-    this.billableService.getInvoiceNote().subscribe(data => {
-      this.invoiceNotes = data;
-      this.regularNotes = this.invoiceNotes.filter(item => item.noteType === "REGULAR");
-      console.log("regularNotes", this.regularNotes);
-    })
-  }
-  onSetRegularNote(data) {
-    console.log("data", data);
-    this.selectedNote.title = data;
-    this.changeRegularNote = true;
-  }
-  onChangeGSTNumber() {
-
-  }
   public getDate(date) {
     return moment(new Date(date)).format('DD/MM/YYYY');
   }
@@ -210,9 +126,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   }
   onChangeDueDate(date) {
     let dueDate = this.parseDateFromDatePicker(new Date(date.year, date.month - 1, date.day));
-
     let request: PartialUpdate = new PartialUpdate(null, dueDate, this.invoiceNumber, null, null);
-
     this.updateInvoiceData(request);
 
   }
@@ -228,7 +142,6 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   delete(ticket) {
     this.confirmStateService.setConfirmAction(REMOVE_TICKET_INVOICE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
-
     modalRef.componentInstance.message = `Do you want to remove the ticket?`;
     this.billableStateService.setLockedTicketForRemove(ticket.id);
   }
