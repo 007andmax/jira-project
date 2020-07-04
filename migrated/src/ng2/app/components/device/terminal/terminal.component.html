@@ -1,33 +1,39 @@
+<main class="terminal-page-area">
 <div class="cmn-wrapper">
-  <div class="page-container terminal">
-    <!-- Page Title -->
-        <div class="page-header">
-            <h3>Terminal</h3>
-            <div class="page-header-opt">
-              <div class="update-info">
-                  <a class="Command active" href="javascript:;">Command Line</a>
-                  <a class="Power" href="javascript:;">Power Shell</a>
-              </div>
-            </div>    
-        </div>
-        <!-- Page Content -->
-        <div class="contant-area">
-            <div class="terminal-area">
-                <div class="terminal-box">
-                    <p>C:\Users\Sam\Desktop</p>
+  <div class="device-container">
+    <div class="page-container terminal">
+      <!-- Page Title -->
+          <div class="page-header">
+              <h3>Terminal</h3>
+              <div class="page-header-opt">
+                <div class="update-info">
+                    <a class="Command active" href="javascript:;">Command Line</a>
+                    <a class="Power" href="javascript:;">Power Shell</a>
                 </div>
-            </div>
-        </div>
+              </div>    
+          </div>
+          <!-- Page Content -->
+          <div class="contant-area">
+              <div class="terminal-area">
+                  <div class="terminal-box">
+                      <p>C:\Users\Sam\Desktop</p>
+                  </div>
+              </div>
+          </div>
+    </div>
   </div>
+ 
 
   
   
   
   <!-- Right Side bar -->
   <aside class="right-sidebar terminal-sidebar">
+    <!-- <a href="javascript:;" class="panel-bar" (click)="toggleTicket();">
+      <img src="../../../../../ng1/images/device/panel-open.svg" alt="Open" title="Ticket" />
+    </a> -->
     <div>
-        <a href="javascript:;" class="add-btn" (click)="create=!create"><img src="assets/images/add.svg" alt="add"/></a>
-
+        <a href="javascript:;" class="add-btn" (click)="create=!create"><img src="../../../../../ng1/images/device/add.svg" alt="add"/></a>
          <!-- Modal Add New Command -->
          <div class="modal-content toggle-area" [class.opened]="create">
           <div class="toggle-header">
@@ -115,3 +121,4 @@
 
 </div>
 
+</main>

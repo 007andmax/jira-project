@@ -4,6 +4,44 @@
 @import '../assets/scss/custom';
 
 
+    main{
+
+        &.terminal-page-area{
+            margin-right: 352px;
+            .right-sidebar.terminal-sidebar{
+                right: 0 !important;
+                border-left:1px solid #dfe3e8;
+                -ms-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
+                -o-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
+                -webkit-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
+                -moz-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
+                box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
+                .tab-container{
+                    ul.nav-tabs{
+                            -ms-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
+                            -o-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
+                            -webkit-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
+                            -moz-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
+                            box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
+                        }
+                    
+                    .tab-content{
+                        .tab-pane{
+                            .cmn-tbs-content{
+                                ul {
+                                    li{
+                                        border-color: #c4cbd5;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+            }
+        }
+    }
+
 
 .update-info {
     display: inline-block;
@@ -72,6 +110,8 @@
 
 
 
+
+
 .cmn-tbs-content{
     &.command {
         li {
@@ -118,7 +158,7 @@
             line-height: 1.33;
             color: #4f5f79;
         }
-    }
+    } 
 }
 
 
