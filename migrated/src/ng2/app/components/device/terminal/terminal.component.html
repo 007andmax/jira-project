@@ -35,7 +35,7 @@
         <!-- Modal Add New Command -->
         <div class="modal-content toggle-area" [class.opened]="create">
           <div class="toggle-header">
-            <h2 class="h1">Add New Command</h2>
+            <h2 class="h1">Create Command</h2>
           </div>
           <div class="modal-body">
             <form method="POST">
@@ -47,19 +47,38 @@
                       type="text"
                       id="Title"
                       class="form-input"
-                      placeholder="Write Command title"
+                      placeholder="USB access"
                     />
                   </div>
                 </div>
-                <div class="f-col col-100">
-                  <label for="command">Command</label>
+                <div class="f-col col-70">
+                  <label for="command">Category</label>
                   <div class="form-row">
-                    <input
-                      type="text"
-                      id="Command"
-                      class="form-input"
-                      placeholder="Type your command here"
-                    />
+                    <select class="form-input cmn-select">
+                      <option>Window > USB access</option>
+                      <option>Window > USB access 1</option>
+                      <option>Window > USB access 2</option>
+                      <option>Window > USB access 3</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="f-col col-30">
+                  <label for="command">Script Type</label>
+                  <div class="form-row">
+                    <select class="form-input cmn-select">
+                      <option>Command line</option>
+                      <option>Command line 1</option>
+                      <option>Command line 2</option>
+                      <option>Command line 3</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="f-col col-100">
+                  <label for="Title">Command</label>
+                  <div class="form-row">
+                   <textarea class="form-input">
+                     
+                   </textarea>  
                   </div>
                 </div>
                 <div class="m-btn-row">
@@ -396,9 +415,240 @@
             </div>
           </tab>
         </tabset>
-        <a href="javascript:;" class="btn btn-primary"><img src="../../../../../ng1/images/device/run-script-blue.svg" alt="run-script"
+        <a href="javascript:;" (click)="runScript = !runScript" class="btn btn-primary"><img src="../../../../../ng1/images/device/run-script-blue.svg" alt="run-script"
           />Run Script</a>
       </div>
     </aside>
+
+    <!-- Script Sidebar  -->
+
+    
+    <aside class="right-sidebar script-sidebar" [class.opened]="runScript">
+      <div>
+        <div class="script-side-heder">
+            <h2>Run Script</h2>
+            <a href="javascript:;" class="close-btn" title="Close" (click)="runScript = !runScript">
+              <img src="../../../../../ng1/images/device/close.svg" alt="close" title="close" />
+            </a>
+        </div>
+        <tabset>
+          <tab heading="My Scripts (3)">
+            <div class="cmn-tbs-content myScript">
+              <form method="POST">
+                <div class="f-row">
+                 
+                  <div class="f-col col-50">
+                    <label for="command">Category</label>
+                    <div class="form-row">
+                      <select class="form-input cmn-select">
+                        <option>Window > USB access</option>
+                        <option>Window > USB access 1</option>
+                        <option>Window > USB access 2</option>
+                        <option>Window > USB access 3</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="f-col col-50">
+                    <label for="command">Search Scripts</label>
+                    <div class="form-row">
+                        <input type="text" placeholder="Search description or filename" class="form-input script-search" />
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <ul class="list-unstyled script-list">
+                <li>
+                  <div class="script-left">
+                    <h5>Delete Temporary Files for all User (copy)</h5>
+                    <span>Deletes Temporary files for all users (including user profiles…</span>
+                    <span class="clone-cat">Cloned Scripts</span>
+
+                  </div>  
+                  <div class="script-right">
+                      <a href="javascript:;" class="play-btn" data-tooltip="Run Script">
+                        <img src="../../../../../ng1/images/device/play-script.svg" alt="play-script" title="play-script" />
+                      </a>
+                      <a href="javascript:;" class="view-btn" data-tooltip="View Script">
+                        <img src="../../../../../ng1/images/device/view-script.svg" alt="view-script" title="view-script" />
+                      </a>
+                  </div>
+                </li>
+                <li>
+                  <div class="script-left">
+                    <h5>Delete Temporary Files for all User (copy)</h5>
+                    <span>Deletes Temporary files for all users (including user profiles…</span>
+                    <span class="clone-cat">Cloned Scripts</span>
+
+                  </div>  
+                  <div class="script-right">
+                      <a href="javascript:;" class="play-btn" data-tooltip="Run Script">
+                        <img src="../../../../../ng1/images/device/play-script.svg" alt="play-script" title="play-script" />
+                      </a>
+                      <a href="javascript:;" class="view-btn" data-tooltip="View Script">
+                        <img src="../../../../../ng1/images/device/view-script.svg" alt="view-script" title="view-script" />
+                      </a>
+                  </div>
+                </li>
+                <li>
+                  <div class="script-left">
+                    <h5>Delete Temporary Files for all User (copy)</h5>
+                    <span>Deletes Temporary files for all users (including user profiles…</span>
+                    <span class="clone-cat">Cloned Scripts</span>
+
+                  </div>  
+                  <div class="script-right">
+                      <a href="javascript:;" class="play-btn" data-tooltip="Run Script">
+                        <img src="../../../../../ng1/images/device/play-script.svg" alt="play-script" title="play-script" />
+                      </a>
+                      <a href="javascript:;" class="view-btn" data-tooltip="View Script">
+                        <img src="../../../../../ng1/images/device/view-script.svg" alt="view-script" title="view-script" />
+                      </a>
+                  </div>
+                </li>
+                <li>
+                  <div class="script-left">
+                    <h5>Delete Temporary Files for all User (copy)</h5>
+                    <span>Deletes Temporary files for all users (including user profiles…</span>
+                    <span class="clone-cat">Cloned Scripts</span>
+
+                  </div>  
+                  <div class="script-right">
+                      <a href="javascript:;" class="play-btn" data-tooltip="Run Script">
+                        <img src="../../../../../ng1/images/device/play-script.svg" alt="play-script" title="play-script" />
+                      </a>
+                      <a href="javascript:;" class="view-btn" data-tooltip="View Script">
+                        <img src="../../../../../ng1/images/device/view-script.svg" alt="view-script" title="view-script" />
+                      </a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </tab>
+          <tab heading="Shared Script Library (85)">
+            <div class="cmn-tbs-content script-library">
+              <form method="POST">
+                <div class="f-row">
+                 
+                  <div class="f-col col-50">
+                    <label for="command">Category</label>
+                    <div class="form-row">
+                      <select class="form-input cmn-select">
+                        <option>Window > USB access</option>
+                        <option>Window > USB access 1</option>
+                        <option>Window > USB access 2</option>
+                        <option>Window > USB access 3</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="f-col col-50">
+                    <label for="command">Search Scripts</label>
+                    <div class="form-row">
+                        <input type="text" placeholder="Search description or filename" class="form-input script-search" />
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <ul class="list-unstyled script-list">
+                <li>
+                  <div class="script-left">
+                    <h5>Delete Temporary Files for all User (copy)</h5>
+                    <span>Deletes Temporary files for all users (including user profiles…</span>
+                    <span class="clone-cat">Cloned Scripts</span>
+
+                  </div>  
+                  <div class="script-right">
+                      <a href="javascript:;" class="play-btn" data-tooltip="Copy Script">
+                        <img src="../../../../../ng1/images/device/copy-script.svg" alt="copy-script" title="copy-script" />
+                      </a>
+                      <a href="javascript:;" class="view-btn" data-tooltip="View Script">
+                        <img src="../../../../../ng1/images/device/view-script.svg" alt="view-script" title="view-script" />
+                      </a>
+                  </div>
+                </li>
+                <li>
+                  <div class="script-left">
+                    <h5>Delete Temporary Files for all User (copy)</h5>
+                    <span>Deletes Temporary files for all users (including user profiles…</span>
+                    <span class="clone-cat">Cloned Scripts</span>
+
+                  </div>  
+                  <div class="script-right">
+                      <a href="javascript:;" class="play-btn" data-tooltip="Copy Script">
+                        <img src="../../../../../ng1/images/device/copy-script.svg" alt="copy-script" title="copy-script" />
+                      </a>
+                      <a href="javascript:;" class="view-btn" data-tooltip="View Script">
+                        <img src="../../../../../ng1/images/device/view-script.svg" alt="view-script" title="view-script" />
+                      </a>
+                  </div>
+                </li>
+                <li>
+                  <div class="script-left">
+                    <h5>Delete Temporary Files for all User (copy)</h5>
+                    <span>Deletes Temporary files for all users (including user profiles…</span>
+                    <span class="clone-cat">Cloned Scripts</span>
+
+                  </div>  
+                  <div class="script-right">
+                      <a href="javascript:;" class="play-btn" data-tooltip="Copy Script">
+                        <img src="../../../../../ng1/images/device/copy-script.svg" alt="copy-script" title="copy-script" />
+                      </a>
+                      <a href="javascript:;" class="view-btn" data-tooltip="View Script">
+                        <img src="../../../../../ng1/images/device/view-script.svg" alt="view-script" title="view-script" />
+                      </a>
+                  </div>
+                </li>
+                <li>
+                  <div class="script-left">
+                    <h5>Delete Temporary Files for all User (copy)</h5>
+                    <span>Deletes Temporary files for all users (including user profiles…</span>
+                    <span class="clone-cat">Cloned Scripts</span>
+
+                  </div>  
+                  <div class="script-right">
+                      <a href="javascript:;" class="play-btn" data-tooltip="Copy Script">
+                        <img src="../../../../../ng1/images/device/copy-script.svg" alt="copy-script" title="copy-script" />
+                      </a>
+                      <a href="javascript:;" class="view-btn" data-tooltip="View Script">
+                        <img src="../../../../../ng1/images/device/view-script.svg" alt="view-script" title="view-script" />
+                      </a>
+                  </div>
+                </li>
+              </ul>
+              <ul class="list-unstyled pagination">
+                <li class="next"> 
+                  <a href="javascript:;">
+                    <img src="../../../../../ng1/images/device/prev-pag.svg" alt="prev" title="prev" />
+                  </a>
+                </li>
+                <li>
+                  <a href="javascript:;">1</a>
+                </li>
+                <li>
+                  <a href="javascript:;">2</a>
+                </li>
+                <li class="current">
+                  <a href="javascript:;">3</a>
+                </li>
+                <li>
+                  <a href="javascript:;">4</a>
+                </li>
+                <li>
+                  <a href="javascript:;">…</a>
+                </li>
+                <li>
+                  <a href="javascript:;">17</a>
+                </li>
+                <li class="prev">
+                  <a href="javascript:;">
+                    <img src="../../../../../ng1/images/device/next-pag.svg" alt="next-pag" title="next-pag" />
+                  </a>
+                </li>
+              </ul> 
+            </div>
+          </tab>
+        </tabset>
+      </div>
+    </aside>
+
   </div>
 </main>
