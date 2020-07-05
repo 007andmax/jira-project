@@ -203,6 +203,8 @@
       }
       &__col-desc {
         text-align: left;
+        max-width: 345px;
+        overflow-wrap: break-word;
       }
       &__col-price {
         text-align: right;
@@ -270,6 +272,10 @@
       height: 72px;
       border: 1px solid #dfe3e8;
       background: white;
+
+      .save-billable-aside-btn{
+        min-width: 91px;
+      }
     }
   }
   .address-block {
@@ -372,6 +378,8 @@ app-invoice-preview {
 
     &__col-desc {
       text-align: left;
+      max-width: 285px;
+      overflow-wrap: break-word;
     }
 
     &__col-qty {
