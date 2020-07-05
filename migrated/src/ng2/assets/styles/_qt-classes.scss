@@ -211,7 +211,7 @@
     width: 100%;
     text-overflow: ellipsis;
     overflow: hidden;
-    bottom: 34px !important;
+    bottom: 37px !important;
     top: unset !important;
   }
 
@@ -268,6 +268,12 @@
   &.--outline {
     color: #16a4fa;
     border: 1px solid #16a4fa;
+    background-color: white;
+  }
+
+  &.--gray {
+    color: #4f5f79;
+    border: solid 1px #c5cdd5;
     background-color: white;
   }
 
@@ -409,6 +415,6 @@
 
 .qt-text-area-block {
   mat-error {
-    top: 6px !important;
+    top: 11px !important;
   }
 }

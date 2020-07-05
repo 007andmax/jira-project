@@ -13,7 +13,7 @@
 
       <div class="qt-square-btn --done" (click)="onUpdateRegularNote()" *ngIf="changeRegularNote"></div>
 
-      <div class="qt-square-btn --add" placement="top" ngbTooltip="Add Note"  id="dropdownAddNote" ngbDropdownToggle *ngIf="getLenRegularNotes() < 5">
+      <div class="qt-square-btn --add qt-ml-8" placement="top" ngbTooltip="Add Note"  id="dropdownAddNote" ngbDropdownToggle *ngIf="getLenRegularNotes() < 5">
 
         <div class="billable-popup-add-note" ngbDropdownMenu aria-labelledby="dropdownAddNote">
           <app-invoice-add-note (onUpdateNotes)="getInvoiceNote()" [dropDown]="addNoteDd"></app-invoice-add-note>
