@@ -1,124 +1,404 @@
 <main class="terminal-page-area">
-<div class="cmn-wrapper">
-  <div class="device-container">
-    <div class="page-container terminal">
-      <!-- Page Title -->
-          <div class="page-header">
-              <h3>Terminal</h3>
-              <div class="page-header-opt">
-                <div class="update-info">
-                    <a class="Command active" href="javascript:;">Command Line</a>
-                    <a class="Power" href="javascript:;">Power Shell</a>
-                </div>
-              </div>    
+  <div class="cmn-wrapper">
+    <div class="device-container">
+      <div class="page-container terminal">
+        <!-- Page Title -->
+        <div class="page-header">
+          <h3>Terminal</h3>
+          <div class="page-header-opt">
+            <div class="update-info">
+              <a class="Command active" href="javascript:;">Command Line</a>
+              <a class="Power" href="javascript:;">Power Shell</a>
+            </div>
           </div>
-          <!-- Page Content -->
-          <div class="contant-area">
-              <div class="terminal-area">
-                  <div class="terminal-box">
-                      <p>C:\Users\Sam\Desktop</p>
-                  </div>
-              </div>
+        </div>
+        <!-- Page Content -->
+        <div class="contant-area">
+          <div class="terminal-area">
+            <div class="terminal-box">
+              <p>C:\Users\Sam\Desktop</p>
+            </div>
           </div>
+        </div>
+      </div>
     </div>
-  </div>
- 
 
-  
-  
-  
-  <!-- Right Side bar -->
-  <aside class="right-sidebar terminal-sidebar">
-    <!-- <a href="javascript:;" class="panel-bar" (click)="toggleTicket();">
+    <!-- Right Side bar -->
+    <aside class="right-sidebar terminal-sidebar">
+      <!-- <a href="javascript:;" class="panel-bar" (click)="toggleTicket();">
       <img src="../../../../../ng1/images/device/panel-open.svg" alt="Open" title="Ticket" />
     </a> -->
-    <div>
-        <a href="javascript:;" class="add-btn" (click)="create=!create"><img src="../../../../../ng1/images/device/add.svg" alt="add"/></a>
-         <!-- Modal Add New Command -->
-         <div class="modal-content toggle-area" [class.opened]="create">
+      <div>
+        <a href="javascript:;" class="add-btn" (click)="create = !create"
+          ><img src="../../../../../ng1/images/device/add.svg" alt="add"
+        /></a>
+        <!-- Modal Add New Command -->
+        <div class="modal-content toggle-area" [class.opened]="create">
           <div class="toggle-header">
             <h2 class="h1">Add New Command</h2>
           </div>
           <div class="modal-body">
-              <form method="POST">
-                  <div class="f-row">
-                      <div class="f-col col-100">
-                          <label for="Title">Command Title</label>
-                          <div class="form-row">
-                            <input type="text" id="Title" class="form-input" placeholder="Write Command title" />
-                          </div>
-                      </div>
-                      <div class="f-col col-100">
-                          <label for="command">Command</label>
-                          <div class="form-row">
-                            <input type="text" id="Command" class="form-input" placeholder="Type your command here" />
-                          </div>
-                      </div>
-                      <div class="m-btn-row"> 
-                        <div class="m-btn-col">
-                            <input type="submit" value="Save" class="btn btn-primary" />
-                            <a href="javascript:;" class="btn btn-secondary" aria-label="Close" (click)="create=!create">Cancel</a>
-                        </div>
-
-                      </div>
-                      
+            <form method="POST">
+              <div class="f-row">
+                <div class="f-col col-100">
+                  <label for="Title">Command Title</label>
+                  <div class="form-row">
+                    <input
+                      type="text"
+                      id="Title"
+                      class="form-input"
+                      placeholder="Write Command title"
+                    />
                   </div>
-              </form>
+                </div>
+                <div class="f-col col-100">
+                  <label for="command">Command</label>
+                  <div class="form-row">
+                    <input
+                      type="text"
+                      id="Command"
+                      class="form-input"
+                      placeholder="Type your command here"
+                    />
+                  </div>
+                </div>
+                <div class="m-btn-row">
+                  <div class="m-btn-col">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <a
+                      href="javascript:;"
+                      class="btn btn-secondary"
+                      aria-label="Close"
+                      (click)="create = !create"
+                      >Cancel</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
 
-
-      <tabset>
-        <tab heading="Command">
+        <tabset>
+          <tab heading="Command">
             <div class="cmn-tbs-content command">
-                <ul class="list-unstyled">
-                    <li>
-                        <h5>Get all IP info</h5>
-                        <span>ipconfig / all</span>
-                        <a href="javascript:;" class="copy" data-tooltip="Copy Command" >Copy Command</a>
-                    </li>
-                    <li>
-                      <h5>Compare content of two floppy disks</h5>
-                      <span>diskcomp</span>
-                      <a href="javascript:;" class="copy" data-tooltip="Copy Command" >Copy Command</a>
-                  </li>
-                  <li>
-                    <h5>Display group policies</h5>
-                    <span>gpresult</span>
-                    <a href="javascript:;" class="copy" data-tooltip="Copy Command" >Copy Command</a>
+              <ul class="list-unstyled">
+                <li>
+                  <div class="terminal-cmd-opt">
+                    <div class="cmd-list-left">
+                      <img
+                        src="../../../../../ng1/images/device/command-line.svg"
+                        alt="command-line"
+                        title="command-line"
+                      />
+                      <h5>Get all IP info</h5>
+                    </div>
+                    <div class="cmd-list-right">
+                      <a
+                        href="javascript:;"
+                        class="copy"
+                        data-tooltip="Copy to terminal"
+                        >Copy to terminal</a
+                      >
+                      <div class="btn-group" dropdown>
+                        <button
+                          id="button-basic"
+                          dropdownToggle
+                          type="button"
+                          class="dropdown-toggle"
+                          aria-controls="dropdown-basic"
+                        >
+                          Button dropdown
+                        </button>
+                        <ul
+                          id="dropdown-basic"
+                          *dropdownMenu
+                          class="dropdown-menu"
+                          role="menu"
+                          aria-labelledby="button-basic"
+                        >
+                          <li role="menuitem">
+                            <a class="dropdown-item" href="javascript:void(0);">
+                              <img
+                                src="../../../../../ng1/images/device/edit-cmd.svg"
+                                alt="edit-cmd"
+                                title="edit-cmd"
+                              />
+                              Edit</a
+                            >
+                          </li>
+                          <li role="menuitem">
+                            <a class="dropdown-item" href="javascript:void(0);">
+                              <img
+                                src="../../../../../ng1/images/device/remove-terminal.svg"
+                                alt="edit-cmd"
+                                title="edit-cmd"
+                              />
+                              Delete</a
+                            >
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="cmd-details">
+                    <span>ipconfig / all</span>
+                  </div>
                 </li>
                 <li>
-                  <h5>Add/read/import/export registry entries</h5>
-                  <span>reg</span>
-                  <a href="javascript:;" class="copy" data-tooltip="Copy Command" >Copy Command</a>
-              </li>
-                   
-                </ul>
+                  <div class="terminal-cmd-opt">
+                    <div class="cmd-list-left">
+                      <img
+                        src="../../../../../ng1/images/device/command-line.svg"
+                        alt="command-line"
+                        title="command-line"
+                      />
+                      <h5>Guest</h5>
+                    </div>
+                    <div class="cmd-list-right">
+                      <a
+                        href="javascript:;"
+                        class="copy"
+                        data-tooltip="Copy to terminal"
+                        >Copy to terminal</a
+                      >
+                      <div class="btn-group" dropdown>
+                        <button
+                          id="button-basic"
+                          dropdownToggle
+                          type="button"
+                          class="dropdown-toggle"
+                          aria-controls="dropdown-basic"
+                        >
+                          Button dropdown
+                        </button>
+                        <ul
+                          id="dropdown-basic"
+                          *dropdownMenu
+                          class="dropdown-menu"
+                          role="menu"
+                          aria-labelledby="button-basic"
+                        >
+                          <li role="menuitem">
+                            <a class="dropdown-item" href="javascript:void(0);">
+                              <img
+                                src="../../../../../ng1/images/device/edit-cmd.svg"
+                                alt="edit-cmd"
+                                title="edit-cmd"
+                              />
+                              Edit</a
+                            >
+                          </li>
+                          <li role="menuitem">
+                            <a class="dropdown-item" href="javascript:void(0);">
+                              <img
+                                src="../../../../../ng1/images/device/remove-terminal.svg"
+                                alt="edit-cmd"
+                                title="edit-cmd"
+                              />
+                              Delete</a
+                            >
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="cmd-details">
+                    <span
+                      >bdehdcfg -target
+                      &#123;default|unallocated|&lt;drive_letter&gt;
+                      shrink|&lt;drive_letter &gt; merge&#125; -restart</span
+                    >
+                  </div>
+                </li>
+                <li>
+                  <div class="terminal-cmd-opt">
+                    <div class="cmd-list-left">
+                      <img
+                        src="../../../../../ng1/images/device/command-line.svg"
+                        alt="command-line"
+                        title="command-line"
+                      />
+                      <h5>Windows > Driver Cleanup</h5>
+                    </div>
+                    <div class="cmd-list-right">
+                      <a
+                        href="javascript:;"
+                        class="copy"
+                        data-tooltip="Copy to terminal"
+                        >Copy to terminal</a
+                      >
+                      <div class="btn-group" dropdown>
+                        <button
+                          id="button-basic"
+                          dropdownToggle
+                          type="button"
+                          class="dropdown-toggle"
+                          aria-controls="dropdown-basic"
+                        >
+                          Button dropdown
+                        </button>
+                        <ul
+                          id="dropdown-basic"
+                          *dropdownMenu
+                          class="dropdown-menu"
+                          role="menu"
+                          aria-labelledby="button-basic"
+                        >
+                          <li role="menuitem">
+                            <a class="dropdown-item" href="javascript:void(0);">
+                              <img
+                                src="../../../../../ng1/images/device/edit-cmd.svg"
+                                alt="edit-cmd"
+                                title="edit-cmd"
+                              />
+                              Edit</a
+                            >
+                          </li>
+                          <li role="menuitem">
+                            <a class="dropdown-item" href="javascript:void(0);">
+                              <img
+                                src="../../../../../ng1/images/device/remove-terminal.svg"
+                                alt="edit-cmd"
+                                title="edit-cmd"
+                              />
+                              Delete</a
+                            >
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="cmd-details">
+                    <span>reg / all</span>
+                  </div>
+                </li>
+              </ul>
             </div>
-        </tab>
-        <tab heading="History">
-          <div class="cmn-tbs-content history">
-            <p>C:\Users\Sam> Invoke-History
-              ping google.com</p>
-              <p>
-              Pinging google.com [2607:f8b0:400a:800:200e] with 32bytes of data:
-            </p>
-            <p>
-              Ping statistics for 2607:f8b0:400a:800: :200e:
-              Packets: Sent = 1, received =1, Lost = 0 (0% loss),
-              Approximate round trip times in mili-seconds:
-              Minimum = 18ms, Maximum = 18ms, Average = 18ms
-                    </p>  
-          </div>
-        </tab>
-      </tabset>
-    </div>
- 
-  </aside>
-
-
-
-
-</div>
-
+          </tab>
+          <tab heading="History">
+            <div class="cmn-tbs-content history-cmd">
+              <ul class="list-unstyled">
+                <li>
+                  <div class="terminal-cmd-opt">
+                    <div class="cmd-list-left">
+                      <h5>Gordon Fitzgerald</h5>
+                    </div>
+                    <div class="cmd-list-right">
+                      <span class="date">3 Jun, 13:37:13</span>
+                    </div>
+                  </div>
+                  <div class="cmd-details">
+                     <h5>ipconfig / all</h5>
+                     <span>Window IP Configuration
+                      Ethernet adapter Local Area 
+                      Connection 2:</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="terminal-cmd-opt">
+                    <div class="cmd-list-left">
+                      <h5>Gordon Fitzgerald</h5>
+                    </div>
+                    <div class="cmd-list-right">
+                      <span class="date">3 Jun, 13:37:13</span>
+                    </div>
+                  </div>
+                  <div class="cmd-details">
+                     <h5>ipconfig / all</h5>
+                     <span>Window IP Configuration
+                      Ethernet adapter Local Area 
+                      Connection 2:</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="terminal-cmd-opt">
+                    <div class="cmd-list-left">
+                      <h5>Gordon Fitzgerald</h5>
+                    </div>
+                    <div class="cmd-list-right">
+                      <span class="date">3 Jun, 13:37:13</span>
+                    </div>
+                  </div>
+                  <div class="cmd-details">
+                     <h5>ipconfig / all</h5>
+                     <span>Window IP Configuration
+                      Ethernet adapter Local Area 
+                      Connection 2:</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="terminal-cmd-opt">
+                    <div class="cmd-list-left">
+                      <h5>Gordon Fitzgerald</h5>
+                    </div>
+                    <div class="cmd-list-right">
+                      <span class="date">3 Jun, 13:37:13</span>
+                    </div>
+                  </div>
+                  <div class="cmd-details">
+                     <h5>ipconfig / all</h5>
+                     <span>Window IP Configuration
+                      Ethernet adapter Local Area 
+                      Connection 2:</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="terminal-cmd-opt">
+                    <div class="cmd-list-left">
+                      <h5>Gordon Fitzgerald</h5>
+                    </div>
+                    <div class="cmd-list-right">
+                      <span class="date">3 Jun, 13:37:13</span>
+                    </div>
+                  </div>
+                  <div class="cmd-details">
+                     <h5>ipconfig / all</h5>
+                     <span>Window IP Configuration
+                      Ethernet adapter Local Area 
+                      Connection 2:</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="terminal-cmd-opt">
+                    <div class="cmd-list-left">
+                      <h5>Gordon Fitzgerald</h5>
+                    </div>
+                    <div class="cmd-list-right">
+                      <span class="date">3 Jun, 13:37:13</span>
+                    </div>
+                  </div>
+                  <div class="cmd-details">
+                     <h5>ipconfig / all</h5>
+                     <span>Window IP Configuration
+                      Ethernet adapter Local Area 
+                      Connection 2:</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="terminal-cmd-opt">
+                    <div class="cmd-list-left">
+                      <h5>Gordon Fitzgerald</h5>
+                    </div>
+                    <div class="cmd-list-right">
+                      <span class="date">3 Jun, 13:37:13</span>
+                    </div>
+                  </div>
+                  <div class="cmd-details">
+                     <h5>ipconfig / all</h5>
+                     <span>Window IP Configuration
+                      Ethernet adapter Local Area 
+                      Connection 2:</span>
+                  </div>
+                </li>
+               
+              </ul>
+            </div>
+          </tab>
+        </tabset>
+        <a href="javascript:;" class="btn btn-primary"><img src="../../../../../ng1/images/device/run-script-blue.svg" alt="run-script"
+          />Run Script</a>
+      </div>
+    </aside>
+  </div>
 </main>

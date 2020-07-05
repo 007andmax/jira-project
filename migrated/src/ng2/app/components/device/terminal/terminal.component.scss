@@ -1,52 +1,208 @@
 /*** All css files include ***/
-@import '../assets/scss/variable';
-@import '../assets/scss/mixin';
-@import '../assets/scss/custom';
+@import "../assets/scss/variable";
+@import "../assets/scss/mixin";
+@import "../assets/scss/custom";
 
+main {
+    &.terminal-page-area {
+        margin-right: 352px !important;
+        .right-sidebar.terminal-sidebar {
+            right: 0 !important;
+            border-left: 1px solid #dfe3e8;
+            -ms-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
+            -o-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
+            -webkit-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
+            -moz-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
+            box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
+            @media only screen and (min-width: 1601px) {
+                width: 448px;
+            }
+            .tab-container {
+                ul.nav-tabs {
+                    -ms-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
+                    -o-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
+                    -webkit-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
+                    -moz-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
+                    box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
+                }
 
-    main{
+                .tab-content {
+                    .tab-pane {
+                        .cmn-tbs-content {
+                            & > ul {
+                                & > li {
+                                    border-bottom: 1px dotted #c4cbd5;
+                                    padding: 8px 0;
+                                    .terminal-cmd-opt {
+                                        display: -ms-flexbox;
+                                        display: -webkit-flex;
+                                        display: flex;
+                                        width: 100%;
+                                        flex-direction: row;
+                                        align-items: center;
+                                        justify-content: space-between;
+                                        margin-bottom: 5px;
+                                        .cmd-list-right {
+                                            width: 30px;
+                                            display: -ms-flexbox;
+                                            display: -webkit-flex;
+                                            display: flex;
+                                            align-items: center;
+                                            justify-content: space-between;
+                                            & > .btn-group {
+                                                width: 8px;
+                                                line-height: 1;
+                                                & > button {
+                                                    width: 8px;
+                                                    height: 16px;
+                                                    font-size: 0;
+                                                    border: none;
+                                                    outline: none;
+                                                    padding: 0;
+                                                    margin: 0;
+                                                    background: url("../../../../../ng1/images/device/more-terminal.svg")
+                                                        no-repeat center;
+                                                    line-height: 1;
+                                                }
 
-        &.terminal-page-area{
-            margin-right: 352px;
-            .right-sidebar.terminal-sidebar{
-                right: 0 !important;
-                border-left:1px solid #dfe3e8;
-                -ms-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
-                -o-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
-                -webkit-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
-                -moz-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
-                box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
-                .tab-container{
-                    ul.nav-tabs{
-                            -ms-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
-                            -o-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
-                            -webkit-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
-                            -moz-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
-                            box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
-                        }
-                    
-                    .tab-content{
-                        .tab-pane{
-                            .cmn-tbs-content{
-                                ul {
-                                    li{
-                                        border-color: #c4cbd5;
+                                                .dropdown-menu {
+                                                    width: 120px;
+                                                    @include border-radius(4px);
+                                                    -ms-box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
+                                                    -o-box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
+                                                    -webkit-box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
+                                                    -moz-box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
+                                                    box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
+                                                    background-color: #ffffff;
+                                                    padding: 6px 0;
+                                                    right: 0 !important;
+                                                    top: 25px !important;
+                                                    min-width: initial !important;
+                                                    li {
+                                                        padding: 0;
+                                                        margin: 0;
+                                                        border: none;
+                                                        a {
+                                                            display: -ms-flexbox;
+                                                            display: -webkit-flex;
+                                                            display: flex;
+                                                            align-items: center;
+                                                            width: 100%;
+                                                            font-size: 13px;
+                                                            line-height: 1.54;
+                                                            letter-spacing: normal;
+                                                            color: #4f5f79;
+                                                            padding: 7px 15px;
+                                                            border: none;
+                                                            img {
+                                                                max-width: 16px;
+                                                                margin-right: 8px;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        .cmd-list-left {
+                                            display: -ms-flexbox;
+                                            display: -webkit-flex;
+                                            display: flex;
+                                            align-items: center;
+                                            width: calc(100% - 50px);
+                                            img {
+                                                margin-right: 4px;
+                                                max-width: 16px;
+                                            }
+                                            h5 {
+                                                margin: 2px 0 0;
+                                                max-width: calc(100% - 20px);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            &.history-cmd {
+                                & > ul {
+                                    & > li {
+                                        border-bottom: 1px dotted #c4cbd5;
+                                        padding: 8px 0;
+                                        .terminal-cmd-opt {
+                                            margin-bottom: 0;
+                                            .cmd-list-right {
+                                                width: 70px;
+                                                .date{
+                                                    font-size: 10px;
+                                                    font-weight: normal;
+                                                    line-height: 1.2;
+                                                    letter-spacing: normal;
+                                                    text-align: right;
+                                                    color: #4f5f79;
+                                                }
+                                            }
+
+                                            .cmd-list-left {
+                                                display: -ms-flexbox;
+                                                display: -webkit-flex;
+                                                display: flex;
+                                                align-items: center;
+                                                width: calc(100% - 80px);
+                                                h5 {
+                                                    margin: 0;
+                                                    max-width: calc(100% - 20px);
+                                                    color: #4f5f79;
+                                                    font-size: 12px;
+                                                    font-family:$graphicMedBold;
+                                                }
+                                            }
+                                        }
+                                        .cmd-details{
+                                            h5{
+                                                font-size: 12px;
+                                                font-weight: bold;
+                                                font-family:$sourceCode;
+                                            }
+                                            span{
+                                                font-family:$sourceCode;
+                                                font-size: 12px;
+                                                font-weight: normal;
+                                                font-style: normal;
+                                                line-height: 1.33;
+                                                letter-spacing: normal;
+                                                color: #4f5f79;
+                                            }
+                                        }
+
                                     }
                                 }
                             }
                         }
                     }
                 }
-                
+            }
+            & > div {
+              & >  .btn.btn-primary {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    @include border-radius(0);
+                    font-size: 13px;
+                    padding: 10px;
+                    img {
+                        max-width: 20px;
+                        margin-right: 5px;
+                    }
+                }
             }
         }
     }
-
+}
 
 .update-info {
     display: inline-block;
     vertical-align: middle;
-    a{
+    a {
         display: inline-block;
         vertical-align: middle;
         margin-left: 23px;
@@ -59,21 +215,21 @@
         color: #4f5f79;
         padding-left: 25px;
         min-height: 16px;
-        &:hover{
+        &:hover {
             color: #16a4fa;
         }
-        &.Command{
+        &.Command {
             margin-left: 0;
-            background: url('../assets/images/command-line-blue.svg') no-repeat left 0;
-            &.active{
-                background: url('../assets/images/command-line-blue.svg') no-repeat left 0;
+            background: url("../assets/images/command-line-blue.svg") no-repeat left 0;
+            &.active {
+                background: url("../assets/images/command-line-blue.svg") no-repeat left 0;
                 color: #16a4fa;
             }
         }
-        &.Power{
-            background: url('../assets/images/power-shell.svg') no-repeat left 0;
-            &.active{
-                background: url('../assets/images/power-shell.svg') no-repeat left 0;
+        &.Power {
+            background: url("../assets/images/power-shell.svg") no-repeat left 0;
+            &.active {
+                background: url("../assets/images/power-shell.svg") no-repeat left 0;
                 color: #16a4fa;
             }
         }
@@ -105,14 +261,7 @@
     }
 }
 
-
-
-
-
-
-
-
-.cmn-tbs-content{
+.cmn-tbs-content {
     &.command {
         li {
             border-bottom: 1px dotted #ccc;
@@ -126,7 +275,6 @@
             color: #4f5f79;
             line-height: 1.33;
             margin-bottom: 3px;
-            
         }
         span {
             font-size: 12px;
@@ -140,13 +288,15 @@
         }
         .copy {
             font-size: 0;
-            width: 18px;
+            width: 16px;
             height: 16px;
-            position: absolute;
-            right: 0;
-            bottom: 12px;
+            position: relative;
             font-family: $sourceCode;
-            background: url('../assets/images/copy.svg') no-repeat center;
+            background: url("../../../../../ng1/images/device/send-to-front.svg") no-repeat center;
+            &::before {
+                font-weight: 400;
+                font-family: $font-body;
+            }
         }
     }
     &.history {
@@ -158,10 +308,5 @@
             line-height: 1.33;
             color: #4f5f79;
         }
-    } 
+    }
 }
-
-
-
-
-
