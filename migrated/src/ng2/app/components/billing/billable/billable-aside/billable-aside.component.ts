@@ -57,7 +57,7 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
 
     let changeNumber = this.invoiceRealTimeService.changeNumber.subscribe(data => {
 
-      if (data.action === 'NUMBER_CHANGED') this.invoiceNumber = data.data;
+      if (data.action === 'NUMBER_CHANGED') this.invoiceNumber = data.data.numPart;
 
     })
     this.sub.add(changeNumber);
