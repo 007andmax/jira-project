@@ -185,7 +185,7 @@
         <div class="info-button-sm qt-ff-gm"><div class="icon__discount qt-mr-4 qt-sz-16 qt-ic-c"></div> Apply Discount</div>
       </div>
 
- <app-invoice-regular-note [invoiceNotes]="invoiceNotes" (onUpdateInvoiceData)="updateInvoiceData($event)"></app-invoice-regular-note>
+ <app-invoice-regular-note   [invoiceNotes]="invoiceNotes" (onUpdateInvoiceData)="updateInvoiceData($event)"></app-invoice-regular-note>
     </div>
 
     <div>
@@ -212,7 +212,7 @@
   <div class="terms-n-conditions qt-pl-30 qt-pr-30 qt-pb-24 qt-pt-16">
 
     <div class="qt-fs-13 qt-ff-gm qt-mb-12">Terms & Conditions</div>
-    <div class="qt-fs-12 qt-color-info qt-ff-gm" placement="top" ngbTooltip="Expand Notes" *ngIf="changeGlobalNote" (click)="onUpdateGlobalNote()">Save Terms & Conditions +</div>
+    <div class="qt-fs-12 qt-color-info qt-ff-gm"  *ngIf="changeGlobalNote" (click)="onUpdateGlobalNote()">Save Terms & Conditions</div>
 
     <textarea id="description-global-note" (input)="onCheckUpdateGlobalNote()" class="terms-n-conditions__textarea qt-textarea" placeholder="Enter the terms and conditions of your business to be displayed in your transaction" appTextArea    maxlength="250"   cols="30" rows="1"></textarea>
 

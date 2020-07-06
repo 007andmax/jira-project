@@ -110,15 +110,16 @@
       <div class="invoice-preview__total-block">
         <div class="qt-df qt-jc-sb qt-pl-12 qt-pr-12">
           <div class="qt-text-left">Sub Total</div>
-          <div class="invoice-info-value qt-text-right">$93.75</div>
+          <div class="invoice-info-value qt-text-right" [textContent]="(invoice.invoiceDataDto.productsSum + invoice.invoiceDataDto.servicesSum ) |
+          currency"></div>
         </div>
         <div class="qt-df qt-jc-sb qt-pl-12 qt-pt-10 qt-pr-12 qt-pb-10">
           <div class=" qt-text-left">Tax</div>
-          <div class="invoice-info-value  qt-text-right">$4.68</div>
+          <div class="invoice-info-value  qt-text-right" [textContent]="invoice.invoiceDataDto.taxSum | currency"></div>
         </div>
         <div class="qt-df qt-jc-sb qt-pl-12 qt-pr-12  qt-ai-c invoice-preview__total-price">
           <div class=" qt-text-left">Total</div>
-          <div class="invoice-info-value qt-text-right qt-fs-16 qt-lh-15">$98.43</div>
+          <div class="invoice-info-value qt-text-right qt-fs-16 qt-lh-15" [textContent]="invoice.invoiceDataDto.totalSum | currency"></div>
         </div>
       </div>
     </div>
@@ -127,12 +128,12 @@
     <div>
       <div class="qt-mb-20">
         <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-dark qt-ff-gm qt-lh-133">Customer Note</div>
-        <div class="qt-fs-13 qt-lh-154 ">Hi Sam, I would request you to please pay this by Cheque?</div>
+        <div class="qt-fs-13 qt-lh-154 " *ngIf="selectedNote" [textContent]="selectedNote.line1"></div>
       </div>
 
       <div>
         <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-dark qt-ff-gm qt-lh-133">Terms & Conditions</div>
-        <div class="qt-fs-13 qt-lh-154 ">Payment terms is 15 days</div>
+        <div class="qt-fs-13 qt-lh-154 " *ngIf="globalNote" [textContent]="globalNote.line1"></div>
       </div>
     </div>
 

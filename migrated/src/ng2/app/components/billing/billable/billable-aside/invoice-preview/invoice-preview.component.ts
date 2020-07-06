@@ -6,6 +6,7 @@ import { InvoiceLock } from '../../class/invoice-lock';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { CompanyProfile } from 'src/ng2/app/components/companies/class/company-profile';
 import { InvoiceTaxNumber } from '../../class/invoice-tax-number';
+import { InvoiceNote } from '../../class/invoice-note';
 @Component({
   selector: 'app-invoice-preview',
   templateUrl: './invoice-preview.component.html',
@@ -18,11 +19,15 @@ export class InvoicePreviewComponent implements OnInit {
   @Input() invoice: InvoiceLock;
   @Input() company: CompanyProfile = new CompanyProfile();
   @Input() invoiceTaxNumber: InvoiceTaxNumber;
+    selectedNote: InvoiceNote = null;
+    globalNote: InvoiceNote = null;
   currentCompany: any;
   constructor(private billableStateService:BillableStateService,
     private companiesStateService:CompaniesStateService) { }
 
   ngOnInit() {
+    this.selectedNote = this.billableStateService.getRegularNote();
+    this.globalNote = this.billableStateService.getGlobalNote();
     this.currentCompany = this.companiesStateService.getCurrentCompany();
     console.log("this.currentCompany",this.currentCompany);
   }

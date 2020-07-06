@@ -49,7 +49,10 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     this.globalNote = this.invoiceNotes.filter(item => item.noteType === "GLOBAL")[0];
+    if (this.billableStateService.getGlobalNote()) this.globalNote = this.billableStateService.getGlobalNote();
     this.currentCompany = this.companiesStateService.getCurrentCompany();
+    if (this.globalNote) this.elRef.nativeElement.querySelector("#description-global-note").value = this.globalNote.line1;
+    this.billableStateService.setGlobalNote(this.globalNote);
     let getChangeCompanies = this.companiesStateService.getChangeCompanies().subscribe((data: CompanyUpdate) => {
       if (data.action === 'COMPANY_SAVED' && this.company.id === data.data.id) {
         this.company.name = data.data.name;
@@ -100,6 +103,13 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   onUpdateGlobalNote() {
     this.noteService.updateNote({ "title": this.globalNote.title, "line1": this.elRef.nativeElement.querySelector("#description-global-note").value, "line2": "" }, this.globalNote.id).subscribe(data => {
       this.changeGlobalNote = false;
+      this.billableStateService.setGlobalNote({
+        id: this.globalNote.id,
+        line1: this.elRef.nativeElement.querySelector("#description-global-note").value,
+        line2: "",
+        noteType: this.globalNote.noteType,
+        title: this.globalNote.title
+      })
     })
   }
 

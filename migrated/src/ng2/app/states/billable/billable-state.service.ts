@@ -1,17 +1,33 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { BillableProfile } from '../../components/billing/billable/class/billable-profile';
+import { InvoiceNote } from '../../components/billing/billable/class/invoice-note';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BillableStateService {
   billableProfile: BillableProfile;
+  selectedNote: InvoiceNote = null;
+  globalNote: InvoiceNote = null;
   lockedTicketForRemove: string = null;
   create: EventEmitter<any> = new EventEmitter();
   preview: EventEmitter<any> = new EventEmitter();
   editCustomer: EventEmitter<any> = new EventEmitter();
   constructor() { }
 
+  public setRegulatNote(selectedNote) {
+    this.selectedNote = selectedNote;
+  }
+  public getRegularNote () {
+    return this.selectedNote;
+  }
+
+  public setGlobalNote(globalNote) {
+    this.globalNote = globalNote;
+  }
+  public getGlobalNote () {
+    return this.globalNote;
+  }
   public getLockedTicketForRemove() {
     return this.lockedTicketForRemove;
   }
