@@ -38,7 +38,7 @@ export class BillableComponent implements OnInit {
     })
     this.billableRealTimeService.changeBillableCount.subscribe(data => {
       if (data.action == 'LEFT_PANEL_COUNTS') {
-        this.count = data.BILLABLE;
+        this.count = data.data.BILLABLE;
       }
     })
     this.billableRealTimeService.changeBillable.subscribe(data => {
