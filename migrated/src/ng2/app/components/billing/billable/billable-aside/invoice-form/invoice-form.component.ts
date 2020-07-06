@@ -19,6 +19,7 @@ import { ConfirmComponent } from 'src/ng2/app/components/shared/confirm/confirm.
 import { InvoiceTicketsService } from 'src/ng2/app/components/setting/invoice-tickets/invoice-tickets.service';
 import { InvoiceNote } from '../../class/invoice-note';
 import { NoteService } from 'src/ng2/app/services/note/note.service';
+import { InvoiceValidate } from './class/invoice-validate';
 
 @Component({
   selector: 'app-invoice-form',
@@ -35,6 +36,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   currentCompany: any;
   changeGlobalNote: boolean = false;
   globalNote: InvoiceNote = null;
+  validate: InvoiceValidate = new InvoiceValidate();
   sub: Subscription = new Subscription();
   constructor(private billableStateService: BillableStateService,
     private billableService: BillableService,
@@ -119,7 +121,11 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   onChangeInvoiceNumber() {
     let request: PartialUpdate = new PartialUpdate(null, null, this.invoiceNumber, null, null);
     console.log("request", request);
-    this.updateInvoiceData(request);
+    this.billableService.updateInvoiceData(this.invoice.lockId, request).subscribe(data => {
+      this.validate.resetNumber();
+    }, err => {
+      this.validate.setNumberValid(false);
+    })
   }
   onChangeDate(date) {
     console.log("date", date);

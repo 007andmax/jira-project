@@ -15,6 +15,7 @@ import { REMOVE_TICKET_INVOICE } from 'src/ng2/app/const/confirm';
 import { environment } from 'src/ng2/environments/environment';
 import { NotificationStateService } from '../../../shared/notification/services/notification-state.service';
 import { DisabledBtnDirective } from 'src/ng2/app/directives/disabled-btn.directive';
+import { InvoiceRealTimeService } from 'src/ng2/app/states/invoice/invoice-real-time.service';
 
 @Component({
   selector: 'app-billable-aside',
@@ -48,11 +49,18 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     private notificationStateService: NotificationStateService,
     private confirmStateService: ConfirmStateService,
+    private invoiceRealTimeService:InvoiceRealTimeService,
     private billableService: BillableService) { }
 
 
   ngOnInit() {
 
+    let changeNumber = this.invoiceRealTimeService.changeNumber.subscribe(data => {
+
+      if (data.action === 'NUMBER_CHANGED') this.invoiceNumber = data.data;
+
+    })
+    this.sub.add(changeNumber);
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_TICKET_INVOICE) {
@@ -206,6 +214,6 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
-    if (!this.isUnlock) this.unlock();
+    if (!this.isUnlock && this.invoice) this.unlock();
   }
 }

@@ -30,6 +30,8 @@
     <div class="qt-input-block qt-mr-16 qt-w100">
       <label>Invoice#</label>
       <input [(ngModel)]="invoiceNumber" (blur)="onChangeInvoiceNumber()" type="text">
+      <mat-error class="qt-tooltip-error" *ngIf="!validate.getNumber()" [textContent]="'Invoice with number ' + invoiceNumber + ' is already occupied'">
+      </mat-error>
     </div>
 
     <div class="qt-input-block qt-mr-16 qt-w100" *ngIf="invoiceTaxNumber">

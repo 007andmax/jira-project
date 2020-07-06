@@ -15,6 +15,7 @@ import { GlNumberRealTimeService } from '../../states/gl-number/gl-number-real-t
 import { InventoryRealTimeService } from '../../states/inventory/inventory-real-time.service';
 import { TicketsRealTimeService } from '../../states/tickets/tickets-real-time.service';
 import { BillableRealTimeService } from '../../states/billable/billable-real-time.service';
+import { InvoiceRealTimeService } from '../../states/invoice/invoice-real-time.service';
 
 /**
  * Websocket service to work with api
@@ -49,6 +50,7 @@ export class WebsocketService {
     private inventoryRealTimeService: InventoryRealTimeService,
     private ticketsRealTimeService: TicketsRealTimeService,
     private billableRealTimeService:BillableRealTimeService,
+    private invoiceRealTimeService:InvoiceRealTimeService,
 
 
   ) {
@@ -73,6 +75,7 @@ export class WebsocketService {
       that.subsribeToTickets();
       that.subsribeToCmdShellOutput();
       that.subsribeToBillable();
+      that.subsribeToInvoiceNumber();
     });
   }
   private subsribeToDevices() {
@@ -298,6 +301,18 @@ export class WebsocketService {
 
     }, 3000);
   }
+  public subsribeToInvoiceNumber() {
+    setTimeout(() => {
+      this.stompClient.subscribe(`/user/watch/number/INVOICE`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.invoiceRealTimeService.handleRealTimeChangesNumber(newChange);
+      });
+
+    }, 3000);
+  }
+
+
+  
   public getClient() {
     return this.stompClient;
   }
