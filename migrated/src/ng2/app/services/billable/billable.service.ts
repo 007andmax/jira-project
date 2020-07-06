@@ -27,6 +27,10 @@ export class BillableService {
     return this.http.get(this.apiUrl + `/invoice/create/${lockId}?isSendNotification=${isSend}&billTo=${contactId}&shipTo=${addressId}`);
     
   }
+  public getCounters() {
+    return this.http.get(this.apiUrl + `/data/getCounters`);
+    
+  }
   public unlock(lockId) {
     return this.http.get(this.apiUrl + `invoice/unlock/${lockId}`);
   }

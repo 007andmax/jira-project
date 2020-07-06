@@ -76,6 +76,7 @@ export class WebsocketService {
       that.subsribeToCmdShellOutput();
       that.subsribeToBillable();
       that.subsribeToInvoiceNumber();
+      that.subsribeToBillableCount();
     });
   }
   private subsribeToDevices() {
@@ -306,6 +307,15 @@ export class WebsocketService {
       this.stompClient.subscribe(`/user/watch/number/INVOICE`, (message) => {
         var newChange = JSON.parse(message.body);
         this.invoiceRealTimeService.handleRealTimeChangesNumber(newChange);
+      });
+
+    }, 3000);
+  }
+  public subsribeToBillableCount() {
+    setTimeout(() => {
+      this.stompClient.subscribe(`/user/watch/leftPanelCounts`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.billableRealTimeService.handleRealTimeChangesBillableCount(newChange);
       });
 
     }, 3000);

@@ -22,6 +22,7 @@ export class BillableComponent implements OnInit {
   new CompanyFilterTop('salesPerson', ''),
   new CompanyFilterTop('total', '')];
   showPreloader: boolean = true;
+  count:number = 0;
   constructor(private billableService: BillableService,
     private companiesStateService: CompaniesStateService,
     public ticketsListService: TicketsListService,
@@ -34,6 +35,11 @@ export class BillableComponent implements OnInit {
     if (this.appService.getIsInit()) this.getList();
     this.appService.getOnInit().subscribe(data => {
       this.getList();
+    })
+    this.billableRealTimeService.changeBillableCount.subscribe(data => {
+      if (data.action == 'LEFT_PANEL_COUNTS') {
+        this.count = data.BILLABLE;
+      }
     })
     this.billableRealTimeService.changeBillable.subscribe(data => {
       if (data.action == 'TICKET_LOCKED') {
@@ -66,6 +72,13 @@ export class BillableComponent implements OnInit {
           })
         });
       }
+    })
+    this.getCounters();
+  }
+  public getCounters() {
+    this.billableService.getCounters().subscribe((data:any) => {
+      console.log("data",data);
+      this.count = data.BILLABLE;
     })
   }
   onSearch(event) {
