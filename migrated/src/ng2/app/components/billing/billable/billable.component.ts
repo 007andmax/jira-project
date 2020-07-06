@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { BillableService } from 'src/ng2/app/services/billable/billable.service';
 import { BillableProfile } from './class/billable-profile';
 import { CompanyFilterTop } from '../../companies/class/copany-filter-top';
@@ -7,6 +7,8 @@ import { TicketsListService } from '../../tickets/tickets/services/tickets-list.
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { AppService } from 'src/ng2/app/states/app/app.service';
 import { BillableRealTimeService } from 'src/ng2/app/states/billable/billable-real-time.service';
+import { Subscription } from 'rxjs';
+import { BillableProfileTicket } from './class/billable-profile-ticket';
 
 @Component({
   selector: 'billable',
@@ -14,7 +16,7 @@ import { BillableRealTimeService } from 'src/ng2/app/states/billable/billable-re
   styleUrls: ['./billable.component.scss'],
   providers: [TicketsListService]
 })
-export class BillableComponent implements OnInit {
+export class BillableComponent implements OnInit, OnDestroy {
   list: Array<BillableProfile> = [];
   reqList: Array<BillableProfile> = [];
   filter: Array<CompanyFilterTop> = [new CompanyFilterTop('name', 'ASC'),
@@ -23,6 +25,7 @@ export class BillableComponent implements OnInit {
   new CompanyFilterTop('total', '')];
   showPreloader: boolean = true;
   count: number = 0;
+  sub: Subscription = new Subscription();
   constructor(private billableService: BillableService,
     private companiesStateService: CompaniesStateService,
     public ticketsListService: TicketsListService,
@@ -31,17 +34,19 @@ export class BillableComponent implements OnInit {
     private billableRealTimeService: BillableRealTimeService,
     private usersStateService: UsersStateService) { }
 
+
   ngOnInit() {
     if (this.appService.getIsInit()) this.getList();
     this.appService.getOnInit().subscribe(data => {
       this.getList();
     })
-    this.billableRealTimeService.changeBillableCount.subscribe(data => {
+    let changeBillableCount = this.billableRealTimeService.changeBillableCount.subscribe(data => {
       if (data.action == 'LEFT_PANEL_COUNTS') {
         this.count = data.data.BILLABLE;
       }
     })
-    this.billableRealTimeService.changeBillable.subscribe(data => {
+    this.sub.add(changeBillableCount);
+    let changeBillable = this.billableRealTimeService.changeBillable.subscribe(data => {
       if (data.action == 'TICKET_LOCKED') {
         let key = Object.keys(data.data)[0];
         let tickets = data.data[key];
@@ -77,9 +82,27 @@ export class BillableComponent implements OnInit {
         this.removeTicket(data, this.reqList);
         this.removeTicket(data, this.list);
       }
-
+      if (data.action == 'BILLABLE_EXPENSE_ADDED') {
+        this.addTicket(data, this.reqList);
+        this.addTicket(data, this.list);
+      }
     })
+    this.sub.add(changeBillable);
     this.getCounters();
+  }
+  private addTicket(data, list) {
+    let clientCompanyId = data.data.companyId;
+    let findIndex = list.findIndex(item => item.id === clientCompanyId);
+    let company = this.companiesStateService.getCompanies().find(item => item.id === clientCompanyId);
+    if (findIndex === -1) {
+      let tickets = [new BillableProfileTicket(data.data)];
+      list.push(new BillableProfile(company.id, tickets, company.name, null));
+
+    } else {
+      list[findIndex].addTicket(data.data);
+      list[findIndex].updateCountTickets();
+      list[findIndex].updateTotal();
+    }
   }
   private removeTicket(data, list) {
     let companyIndex = list.findIndex(item => item.id === data.data.companyId);
@@ -206,5 +229,8 @@ export class BillableComponent implements OnInit {
   }
   public trackById(index, item) {
     return item.id;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

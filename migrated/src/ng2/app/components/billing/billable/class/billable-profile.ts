@@ -21,6 +21,9 @@ export class BillableProfile {
         this.salesPerson = salesPerson;
 
     }
+    public addTicket(data) {
+        this.tickets.push(new BillableProfileTicket(data));
+    }
     public updateCountTickets() {
         this.countTickets = this.tickets.length;
     }
