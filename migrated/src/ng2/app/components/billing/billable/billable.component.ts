@@ -22,7 +22,7 @@ export class BillableComponent implements OnInit {
   new CompanyFilterTop('salesPerson', ''),
   new CompanyFilterTop('total', '')];
   showPreloader: boolean = true;
-  count:number = 0;
+  count: number = 0;
   constructor(private billableService: BillableService,
     private companiesStateService: CompaniesStateService,
     public ticketsListService: TicketsListService,
@@ -72,27 +72,31 @@ export class BillableComponent implements OnInit {
           })
         });
       }
+      console.log("data", data);
       if (data.action == 'BILLABLE_EXPENSE_REMOVED') {
-        let companyIndex = this.reqList.findIndex(item => item.id === data.data.companyId);
-        if (companyIndex > -1) {
-          let ticketIndex = this.reqList[companyIndex].tickets.findIndex(item => item.id === data.data.ticketId);
-          if (ticketIndex > -1) {
-            this.reqList[companyIndex].tickets.splice(ticketIndex,1);
-            this.reqList[companyIndex].updateCountTickets();
-            this.reqList[companyIndex].updateTotal();
-            if (this.reqList[companyIndex].tickets.length === 0) this.reqList.splice(companyIndex,1);
-          }
-        
-        }
-      
+        this.removeTicket(data, this.reqList);
+        this.removeTicket(data, this.list);
       }
 
     })
     this.getCounters();
   }
+  private removeTicket(data, list) {
+    let companyIndex = list.findIndex(item => item.id === data.data.companyId);
+    if (companyIndex > -1) {
+      let ticketIndex = list[companyIndex].tickets.findIndex(item => item.id === data.data.ticketId);
+      if (ticketIndex > -1) {
+        list[companyIndex].tickets.splice(ticketIndex, 1);
+        list[companyIndex].updateCountTickets();
+        list[companyIndex].updateTotal();
+        if (list[companyIndex].tickets.length === 0) list.splice(companyIndex, 1);
+      }
+
+    }
+  }
   public getCounters() {
-    this.billableService.getCounters().subscribe((data:any) => {
-      console.log("data",data);
+    this.billableService.getCounters().subscribe((data: any) => {
+      console.log("data", data);
       this.count = data.BILLABLE;
     })
   }
