@@ -265,7 +265,7 @@ main {
                 width: 592px;
                 z-index: 99;
                 @include transition(0.4s);
-                &.opened{
+                &.opened {
                     right: 0;
                 }
 
@@ -435,7 +435,7 @@ main {
                                                 }
                                             }
                                             &.current {
-                                                a{
+                                                a {
                                                     background-color: #16a4fa;
                                                     color: #fff;
                                                 }
@@ -448,6 +448,97 @@ main {
                                 padding-left: 30px;
                                 background: url("../../../../../ng1/images/device/search-script.svg") no-repeat left
                                     12px center;
+                            }
+                        }
+                    }
+                }
+            }
+            &.script-details {
+                .script-side-heder {
+                    padding: 14px 32px 14px 15px;
+                    .close-btn {
+                        margin-right: 8px;
+                    }
+                    .clone-cat {
+                        @include border-radius(3px);
+                        border: solid 1px #dfe3e8;
+                        background-color: #fff;
+                        font-size: 10px;
+                        font-style: normal;
+                        line-height: 1.2;
+                        letter-spacing: normal;
+                        color: #4f5f79;
+                        padding: 3px 8px;
+                        font-family:$graphicMedBold;
+                        
+                    }
+                }
+                .script-details-area {
+                    display: -ms-flexbox;
+                    display: -webkit-flex;
+                    display: flex;
+                    width: 100%;
+                    flex-direction: column;
+                    padding: 15px 32px;
+                    .f-row {
+                        display: -ms-flexbox;
+                        display: -webkit-flex;
+                        display: flex;
+                        flex-direction: column;
+                        textarea {
+                            height: 200px;
+                        }
+                        .form-row {
+                            .btn {
+                                margin-right: 15px;
+                                padding: 10px 20px;
+                                font-size: 13px;
+                                &.btn-secondary {
+                                    border: solid 1px #c5cdd5;
+                                    background-color: #ffffff !important;
+                                }
+                            }
+                        }
+                    }
+                    h2 {
+                        font-size: 22px;
+                        font-weight: normal;
+                        font-style: normal;
+                        line-height: 1.45;
+                        letter-spacing: -0.5px;
+                        margin-bottom: 20px;
+                        font-family: $font-body;
+                        text-transform: none;
+                    }
+                    .script-info {
+                        display: -ms-flexbox;
+                        display: -webkit-flex;
+                        display: flex;
+                        align-items: flex-start;
+                        justify-content: space-between;
+                        flex-wrap: wrap;
+                        width: 100%;
+                        margin-bottom: 20px;
+                        .script-col {
+                            width: 25%;
+                            display: -ms-flexbox;
+                            display: -webkit-flex;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: flex-start;
+                            h5 {
+                                font-size: 12px;
+                                margin-bottom: 3px;
+                                text-transform: none;
+                            }
+                            span {
+                                font-size: 12px;
+                                font-weight: normal;
+                                font-stretch: normal;
+                                font-style: normal;
+                                line-height: 1.33;
+                                letter-spacing: normal;
+                                color: #364656;
                             }
                         }
                     }
