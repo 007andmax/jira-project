@@ -21,5 +21,14 @@ export class BillableProfile {
         this.salesPerson = salesPerson;
 
     }
+    public updateCountTickets() {
+        this.countTickets = this.tickets.length;
+    }
+    public updateTotal() {
+        this.total = 0;
+        this.tickets.forEach(item => {
+            this.total += item.sum;
+          })
+    }
    
 }

@@ -72,6 +72,21 @@ export class BillableComponent implements OnInit {
           })
         });
       }
+      if (data.action == 'BILLABLE_EXPENSE_REMOVED') {
+        let companyIndex = this.reqList.findIndex(item => item.id === data.data.companyId);
+        if (companyIndex > -1) {
+          let ticketIndex = this.reqList[companyIndex].tickets.findIndex(item => item.id === data.data.ticketId);
+          if (ticketIndex > -1) {
+            this.reqList[companyIndex].tickets.splice(ticketIndex,1);
+            this.reqList[companyIndex].updateCountTickets();
+            this.reqList[companyIndex].updateTotal();
+            if (this.reqList[companyIndex].tickets.length === 0) this.reqList.splice(companyIndex,1);
+          }
+        
+        }
+      
+      }
+
     })
     this.getCounters();
   }
