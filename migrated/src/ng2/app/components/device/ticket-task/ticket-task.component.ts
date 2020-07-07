@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, OnDestroy, ViewContainerRef } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions, } from 'ngx-uploader';
 import { TicketService } from './../_services/ticket.service';
@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { TabsetComponent, TabDirective } from 'ngx-bootstrap';
+import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from './../../../../environments/environment';
 import { searchTextPipe } from './../_pipe/searchText.pipe';
 import { CommonServices } from '../_services/common.service';
@@ -20,7 +20,10 @@ declare  var $:any;
   styleUrls: ['./ticket-task.component.scss']
 })
 export class TicketTaskComponent implements OnInit, OnDestroy {
-  @ViewChild(TabsetComponent) tabset: TabsetComponent;
+  private tabSet: ViewContainerRef;
+  @ViewChild(NgbTabset) set content(content: ViewContainerRef) {
+    this.tabSet = content;
+  };
   @ViewChild('ticketFrm') form: any;
   url = environment.apiEndpoint + 'file?isAvatar=false';
   private modalRef: BsModalRef;
@@ -222,15 +225,14 @@ export class TicketTaskComponent implements OnInit, OnDestroy {
   }
 
   openPopupClick() {
-    const activeTab = this.tabset.tabs.filter(tab => tab.active);
     this.create = !this.create;
-    if (activeTab[0].heading === 'Ticket') {
+    if (this.tabSet['activeId'] === 'ngb-tab-0') {
       this.linkedAgentList = this.deviceDetailService.getDeviceList();
       this.getActualNumber();
       this.getAllCompanyClient();
       this.getAllUsers();
       this.openPopup = 'open_ticket';
-    } else if (activeTab[0].heading === 'Task') {
+    } else if (this.tabSet['activeId'] === 'ngb-tab-1') {
       this.openPopup = 'open_task';
     }
   }
