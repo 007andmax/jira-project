@@ -22,7 +22,7 @@
       (blur)="onValidateSaleCost()"
       (ngModelChange)="onChangeSale($event)"  />
       <mat-error class="qt-tooltip-error" *ngIf="!valdiateSaleCost">
-        Product price can not be lower then cost
+        Product price can not be lower than cost
       </mat-error>
       </div>
       <input  class="input-default input-qty" [(ngModel)]="editProduct.quantity"   />

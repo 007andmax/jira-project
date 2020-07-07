@@ -213,7 +213,16 @@
     overflow: hidden;
     bottom: 37px !important;
     top: unset !important;
+
+    &.qt-tooltip-error {
+      top: calc(100% + 6px) !important;
+      max-width: 250px;
+      bottom: unset !important;
+      overflow: visible;
+      white-space: normal;
+    }
   }
+
 
   input {
     height: 40px;

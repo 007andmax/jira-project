@@ -5,7 +5,7 @@
 
   <div class="qt-mb-16">
     <div class="qt-input-block qt-lh-154">
-      <mat-error *ngIf="!validate.getTitle()">
+      <mat-error class="qt-tooltip-error"  *ngIf="!validate.getTitle()">
         Subject is required
       </mat-error>
       <label>Note Subject</label>
@@ -15,7 +15,7 @@
 
   <div class="qt-mb-24">
     <div class="qt-input-block qt-text-area-block">
-      <mat-error *ngIf="!validate.getLine1()">
+      <mat-error class="qt-tooltip-error"  *ngIf="!validate.getLine1()">
         Description is required
       </mat-error>
       <label class="qt-lh-154">Note Description</label>
