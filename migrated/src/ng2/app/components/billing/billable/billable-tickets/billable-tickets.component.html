@@ -80,9 +80,7 @@
           <td class="billable-item-table__ticket" [textContent]="item.ticketNumber" (click)="editTicket(item.id)"></td>
           <td class="billable-item-table__subject" [textContent]="item.subject"></td>
           <td class="billable-item-table__check">
-          <a *ngIf="item.isOrder" class="has-tooltip" tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Delete">
-            <i  (click)="deleteTicket(item)" class="icon-sm icn-delete pointer"></i>
-          </a>
+            <div *ngIf="item.isOrder" class="ticket-updates__delete icon__remove" (click)="deleteTicket(item)" placement="top" ngbTooltip="Delete"></div>
         </td>
           <td class="billable-item-table__amount" [textContent]="item.sum | currency"></td>
         </tr>

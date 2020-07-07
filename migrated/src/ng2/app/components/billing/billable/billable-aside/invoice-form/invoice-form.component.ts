@@ -38,6 +38,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   globalNote: InvoiceNote = null;
   validate: InvoiceValidate = new InvoiceValidate();
   sub: Subscription = new Subscription();
+  editMode:boolean = false;
   constructor(private billableStateService: BillableStateService,
     private billableService: BillableService,
     private modalService: NgbModal,

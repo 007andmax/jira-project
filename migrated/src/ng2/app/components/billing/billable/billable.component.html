@@ -42,7 +42,7 @@
         <ng-template ngFor let-item
         [ngForOf]="list"
         [ngForTrackBy]="trackById">
-      <app-billable-item [item]="item"  ></app-billable-item>
+      <app-billable-item [item]="item"  *ngIf="!item.isDefault"></app-billable-item>
       </ng-template>
 
       </tbody>

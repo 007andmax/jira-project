@@ -96,7 +96,7 @@ export class BillableComponent implements OnInit, OnDestroy {
     let company = this.companiesStateService.getCompanies().find(item => item.id === clientCompanyId);
     if (findIndex === -1) {
       let tickets = [new BillableProfileTicket(data.data)];
-      list.push(new BillableProfile(company.id, tickets, company.name, null));
+      list.push(new BillableProfile(company.id, tickets, company.name, null,company.isDefault));
 
     } else {
       list[findIndex].addTicket(data.data);
@@ -139,8 +139,8 @@ export class BillableComponent implements OnInit, OnDestroy {
         let company = this.companiesStateService.getCompanies().find(item => item.id === key);
 
         let salesPerson = this.usersStateService.getAllUsers().find(item => item.id === company.techLeadId);
-        this.list.push(new BillableProfile(key, data[key].tickets, company.name, this.ticketsListService.getUserName(salesPerson)));
-        this.reqList.push(new BillableProfile(key, data[key].tickets, company.name, this.ticketsListService.getUserName(salesPerson)));
+        this.list.push(new BillableProfile(key, data[key].tickets, company.name, this.ticketsListService.getUserName(salesPerson),company.isDefault));
+        this.reqList.push(new BillableProfile(key, data[key].tickets, company.name, this.ticketsListService.getUserName(salesPerson),company.isDefault));
 
       }
       this.onFilterName();

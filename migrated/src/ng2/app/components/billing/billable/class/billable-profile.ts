@@ -7,7 +7,8 @@ export class BillableProfile {
     countTickets:number = 0;
     salesPerson:string = '';
     total:number = 0;
-    constructor(id,tickets,name,salesPerson) {
+    isDefault:boolean = false;
+    constructor(id,tickets,name,salesPerson,isDefault = false) {
         this.id = id;
         this.tickets = tickets.map(item => {
             return new BillableProfileTicket(item);
@@ -19,7 +20,7 @@ export class BillableProfile {
           })
         
         this.salesPerson = salesPerson;
-
+this.isDefault = isDefault;
     }
     public addTicket(data) {
         this.tickets.push(new BillableProfileTicket(data));

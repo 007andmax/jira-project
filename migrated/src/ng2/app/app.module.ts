@@ -261,6 +261,9 @@ import { InvoiceRegularNoteComponent } from './components/billing/billable/billa
 
 import { TicketsFilterComponent } from './components/tickets/tickets/tickets-header/tickets-filter/tickets-filter.component';
 import { DisabledBtnModule } from './modules/disabled-btn/disabled-btn.module';
+  import { InvoiceFormTicketInfoComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-info/invoice-form-ticket-info.component';
+import { InvoiceFormTicketEditComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit.component';
+import { InvoiceFormTicketEditServiceComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-service/invoice-form-ticket-edit-service.component';
  
 
 
@@ -649,6 +652,9 @@ angular.module('quicktech')
 
     InvoiceRegularNoteComponent,
     TicketsFilterComponent,
+    InvoiceFormTicketInfoComponent,
+    InvoiceFormTicketEditComponent,
+    InvoiceFormTicketEditServiceComponent,
   ],
   imports: [
     BrowserModule,
