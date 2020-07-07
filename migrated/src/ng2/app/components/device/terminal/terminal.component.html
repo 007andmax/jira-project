@@ -96,8 +96,9 @@
           </div>
         </div>
 
-        <tabset>
-          <tab heading="Command">
+        <ngb-tabset>
+          <ngb-tab title="Command">
+            <ng-template ngbTabContent>
             <div class="cmn-tbs-content command">
               <ul class="list-unstyled">
                 <li>
@@ -292,8 +293,10 @@
                 </li>
               </ul>
             </div>
-          </tab>
-          <tab heading="History">
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="History">
+            <ng-template ngbTabContent>
             <div class="cmn-tbs-content history-cmd">
               <ul class="list-unstyled">
                 <li>
@@ -417,8 +420,9 @@
                 </li>
               </ul>
             </div>
-          </tab>
-        </tabset>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
         <a
           href="javascript:;"
           (click)="runScript = !runScript"
@@ -449,8 +453,9 @@
             />
           </a>
         </div>
-        <tabset>
-          <tab heading="My Scripts (3)">
+        <ngb-tabset>
+          <ngb-tab title="My Scripts (3)">
+            <ng-template ngbTabContent>
             <div class="cmn-tbs-content myScript">
               <form method="POST">
                 <div class="f-row">
@@ -620,8 +625,10 @@
                 </li>
               </ul>
             </div>
-          </tab>
-          <tab heading="Shared Script Library (85)">
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab heading="Shared Script Library (85)">
+            <ng-template ngbTabContent>
             <div class="cmn-tbs-content script-library">
               <form method="POST">
                 <div class="f-row">
@@ -829,8 +836,9 @@
                 </li>
               </ul>
             </div>
-          </tab>
-        </tabset>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
       </div>
     </aside>
 

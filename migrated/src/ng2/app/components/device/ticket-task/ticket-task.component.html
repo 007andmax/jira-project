@@ -6,8 +6,9 @@
     </a>
     <div>
         <a href="javascript:;" class="add-btn" (click)="openPopupClick();"><img src="../../../../../ng1/images/device/add.svg" alt="add"/></a>
-      <tabset>
-        <tab heading="Ticket">
+      <ngb-tabset #t="ngbTabset">
+        <ngb-tab title="Ticket">
+          <ng-template ngbTabContent>
             <div class="cmn-tbs-content device-tickets">
                 <ul class="list-unstyled">
                     <li *ngFor="let ticket of ticketList">
@@ -22,9 +23,10 @@
                     </li>
                 </ul>
             </div>
-            
-        </tab>
-        <!-- <tab heading="Task">
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Task">
+          <ng-template ngbTabContent>
             <div class="cmn-tbs-content task">
                 <ul class="list-unstyled">
                     <li>
@@ -171,8 +173,9 @@
                    
                 </ul>
             </div>
-        </tab> -->
-      </tabset>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
     </div>
  
   </aside>
@@ -484,11 +487,11 @@
             <div class="f-col col-50">
               <label>Due Date</label>
               <div class="form-row date-container">
-                <input type="text"
+                <!-- <input type="text"
                 placeholder="Select Due Date"
                 class="form-input datepicker"
                 [bsConfig]="{ showWeekNumbers: false , dateInputFormat: 'Do MMMM YYYY' }"
-                bsDatepicker  container="">
+                bsDatepicker  container=""> -->
                 <!-- <input type="text"
                 placeholder="Select Due Date"
                 class="form-input datepicker"

@@ -805,8 +805,9 @@
     </div>
   <div class="middle-content">
 
-    <tabset>
-      <tab heading="General" id="tab2">
+    <ngb-tabset>
+      <ngb-tab title="General" id="tab2">
+        <ng-template ngbTabContent>
           <div class="sidebar-tabs">
               <ul class="list-unstyled">
                   <li>
@@ -855,8 +856,10 @@
                   </li>
               </ul>
           </div>
-      </tab>
-      <tab heading="Device List">
+          </ng-template>
+      </ngb-tab>
+      <ngb-tab title="Device List">
+        <ng-template ngbTabContent>
         <div class="sidebar-tabs dlist">
             <table class="sidebar-tabel">
                 <thead>
@@ -943,9 +946,10 @@
                 </tbody>
             </table>
         </div>
-      </tab>
+        </ng-template>
+      </ngb-tab>
       
-    </tabset>
+    </ngb-tabset>
 
 
 

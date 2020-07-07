@@ -32,9 +32,10 @@
                   </li>
                   <li>
                     <span>Deployment Date</span>
-                    <div [bsConfig]="{ showWeekNumbers: false , dateInputFormat: 'Do MMMM YYYY' }"
-                  bsDatepicker  container="">{{(system.install_date | date : DateFormat) || 'N/A'}}</div>
-
+                    <div (click)="visible = !visible">{{(system.install_date | date : DateFormat) || 'N/A'}}</div>
+                    <ngb-datepicker class="dropdown-menu p-0"
+                    [class.show]="visible">
+                  </ngb-datepicker>
                   </li>
                   <li>
                     <span>Manufacturer</span>
@@ -106,7 +107,7 @@
                     ></circle-progress>
     
                     </span> -->
-                    <div class="progress-circle p10">
+                    <div class="progress-circle p{{drive.percent}}">
                       <span>{{drive.percent}}%</span>
                       <div class="left-half-clipper">
                          <div class="first50-bar"></div>
