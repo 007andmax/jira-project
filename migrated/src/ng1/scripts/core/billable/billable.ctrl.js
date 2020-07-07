@@ -280,7 +280,7 @@
         });
 
         $scope.billableData = BillableService.getBillablePageDto($scope, getBillableDto);
-
+console.log("$scope.billableData",$scope.billableData);
         function getBillableDto(respData) {
           $scope.billableData = respData;
 
@@ -327,6 +327,7 @@
 
             }
           }
+          console.log("$scope.billableData",$scope.billableData);
         }
 
         $scope.addDiscountInBillable = function (expenseId, discountAmount) {

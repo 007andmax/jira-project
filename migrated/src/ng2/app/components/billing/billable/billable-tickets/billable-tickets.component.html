@@ -6,7 +6,22 @@
     </div>
 
     <div class="d-f ai-c">
-        <button class="qt-btn --outline-blue" (click)="onCreateInvoice()">Create Invoice</button>
+        <button class="qt-btn --outline-blue" [disabled]="!isCurrentCompanyAddressEmpty" (click)="onCreateInvoice()">Create Invoice</button>
+        
+        <div *ngIf="!isCurrentCompanyAddressEmpty">
+          <div class="modal-body" style="width: 250px;">
+            {{ currentUser.isOwner
+            ? 'You can not use invoicing feature, because you have not entered the company\'s address.'
+            : 'The owner of the company has not filled the address of the company, therefore you can not use invoicing feature.'
+            }}
+          </div>
+          <div class="modal-footer" *ngIf="currentUser.isOwner">
+            <div class="btn btn-lg btn-primary" (click)="goToSettings()">
+              Enter Address
+            </div>
+          </div>
+        </div>
+        
     </div>
   </div>
 
@@ -64,6 +79,11 @@
           <td class="billable-item-table__date" [textContent]="getDate(item.closedAt)"></td>
           <td class="billable-item-table__ticket" [textContent]="item.ticketNumber" (click)="editTicket(item.id)"></td>
           <td class="billable-item-table__subject" [textContent]="item.subject"></td>
+          <td class="billable-item-table__check">
+          <a *ngIf="item.isOrder" class="has-tooltip" tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Delete">
+            <i  (click)="deleteTicket(item)" class="icon-sm icn-delete pointer"></i>
+          </a>
+        </td>
           <td class="billable-item-table__amount" [textContent]="item.sum | currency"></td>
         </tr>
       </ng-template>

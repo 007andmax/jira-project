@@ -16,6 +16,7 @@ import { environment } from 'src/ng2/environments/environment';
 import { NotificationStateService } from '../../../shared/notification/services/notification-state.service';
 import { DisabledBtnDirective } from 'src/ng2/app/directives/disabled-btn.directive';
 import { InvoiceRealTimeService } from 'src/ng2/app/states/invoice/invoice-real-time.service';
+import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 
 @Component({
   selector: 'app-billable-aside',
@@ -28,7 +29,7 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
   @ViewChild('saveAndPrintBtn') saveAndPrintBtn: DisabledBtnDirective;
   @ViewChild('saveAndDownloadBtn') saveAndDownloadBtn: DisabledBtnDirective;
   
-  
+ 
   opened: boolean = false;
   invoiceTaxNumber: InvoiceTaxNumber;
   invoiceNotes: Array<InvoiceNote> = [];
@@ -47,6 +48,7 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
   constructor(private billableStateService: BillableStateService,
     private companiesService: CompaniesService,
     public cd: ChangeDetectorRef,
+    private companiesStateService:CompaniesStateService,
     private notificationStateService: NotificationStateService,
     private confirmStateService: ConfirmStateService,
     private invoiceRealTimeService:InvoiceRealTimeService,
@@ -209,10 +211,6 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
   }
   onPreview() {
     this.showPreview = true;
-    /*   this.opened = false;
-       this.showPreloader = true;
-       this.clearTaimer();
-       this.billableStateService.onPreview();*/
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
