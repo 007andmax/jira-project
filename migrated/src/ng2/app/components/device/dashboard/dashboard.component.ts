@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions, } from 'ngx-uploader';
 import { HardwareService } from './../_services/hardware.service';
@@ -6,6 +6,7 @@ import { first } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { CONFIGCONSTANTS } from '../config/app-constants';
 import { environment } from '../../../../environments/environment';
+import { NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +14,7 @@ import { environment } from '../../../../environments/environment';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-
+  @ViewChild(NgbDatepicker) d: NgbDatepicker;
   url = environment.apiUrl + 'upload'; 
   formData: FormData;
   files: UploadFile[];
@@ -29,6 +30,8 @@ export class DashboardComponent implements OnInit {
   hostName = '';
   label = '';
   showInput = true;
+  progressClass = 'p20';
+  visible = false;
   DateFormat = CONFIGCONSTANTS.DateFormat1;
    constructor(private hardwareService: HardwareService,
     private toastr: ToastrService) {
