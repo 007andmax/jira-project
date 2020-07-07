@@ -118,7 +118,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   public getDate(date) {
     return moment(new Date(date)).format('DD/MM/YYYY');
   }
-  onChangeInvoiceNumber() {
+  public onChangeInvoiceNumber() {
     let request: PartialUpdate = new PartialUpdate(null, null, this.invoiceNumber, null, null);
     console.log("request", request);
     this.billableService.updateInvoiceData(this.invoice.lockId, request).subscribe(data => {

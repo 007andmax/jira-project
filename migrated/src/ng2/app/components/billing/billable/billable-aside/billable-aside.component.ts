@@ -17,6 +17,7 @@ import { NotificationStateService } from '../../../shared/notification/services/
 import { DisabledBtnDirective } from 'src/ng2/app/directives/disabled-btn.directive';
 import { InvoiceRealTimeService } from 'src/ng2/app/states/invoice/invoice-real-time.service';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
+import { InvoiceFormComponent } from './invoice-form/invoice-form.component';
 
 @Component({
   selector: 'app-billable-aside',
@@ -28,7 +29,7 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
   @ViewChild('saveAndSendBtn') saveAndSendBtn: DisabledBtnDirective;
   @ViewChild('saveAndPrintBtn') saveAndPrintBtn: DisabledBtnDirective;
   @ViewChild('saveAndDownloadBtn') saveAndDownloadBtn: DisabledBtnDirective;
-  
+  @ViewChild('formInvoice') formInvoice: InvoiceFormComponent;
  
   opened: boolean = false;
   invoiceTaxNumber: InvoiceTaxNumber;
@@ -59,7 +60,10 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
 
     let changeNumber = this.invoiceRealTimeService.changeNumber.subscribe(data => {
 
-      if (data.action === 'NUMBER_CHANGED') this.invoiceNumber = data.data.numPart;
+      if (data.action === 'NUMBER_CHANGED' && !this.invoiceIsCreating()) {
+        this.invoiceNumber = data.data.numPart;
+        this.formInvoice.onChangeInvoiceNumber();
+      }
 
     })
     this.sub.add(changeNumber);
@@ -95,7 +99,9 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
     this.sub.add(getOnCreate);
   
   }
- 
+ private invoiceIsCreating () {
+   return this.saveAndSendBtn.isBlock() && this.saveAndPrintBtn.isBlock() && this.saveAndDownloadBtn.isBlock();
+ }
   unlock() {
     this.billableService.unlock(this.invoice.lockId).subscribe(data => {
       this.billableStateService.setGlobalNote(null);
