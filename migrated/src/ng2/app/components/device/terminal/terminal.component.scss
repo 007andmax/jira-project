@@ -370,12 +370,16 @@ main {
                                                     margin-left: 8px;
                                                     position: relative;
                                                     &::before {
-                                                        width: 81px;
+                                                        width: 85px;
                                                         top: -42px;
                                                     }
                                                     &::after {
                                                         bottom: auto;
                                                         top: -9px;
+                                                    }
+                                                    &:hover {
+                                                        background-color: #f4f6f8;
+                                                        border-color: #f4f6f8;
                                                     }
                                                     img {
                                                         max-width: 16px;
@@ -469,8 +473,7 @@ main {
                         letter-spacing: normal;
                         color: #4f5f79;
                         padding: 3px 8px;
-                        font-family:$graphicMedBold;
-                        
+                        font-family: $graphicMedBold;
                     }
                 }
                 .script-details-area {
@@ -652,6 +655,84 @@ main {
                     font-family: $sourceCode;
                     line-height: 1.33;
                     color: #4f5f79;
+                }
+            }
+        }
+    }
+}
+
+body {
+    &.ng7-device {
+        /*** Modal styles ***/
+        .modal {
+            .modal-dialog.confirm-control {
+                .modal-content {
+                    @include border-radius(6px);
+                    -ms-box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+                    -o-box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+                    -webkit-box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+                    -moz-box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+                    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+                    background-color: #ffffff;
+                    margin-bottom: 0;
+                    .modal-header {
+                        padding: 10px 16px 10px 32px;
+                        border-bottom: 1px solid #dfe3e8;
+                        display: -ms-flexbox;
+                        display: -webkit-flex;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        h2 {
+                            font-size: 20px;
+                            font-weight: 600;
+                            font-stretch: normal;
+                            font-style: normal;
+                            line-height: 1.4;
+                            letter-spacing: -0.5px;
+                            text-transform: capitalize;
+                            font-family: $graphicSemibold;
+                            margin: 0;
+                        }
+                        button{
+                            &.close{
+                                position: static;
+                            }
+                        }
+                    }
+                    .modal-body{
+                        padding: 15px 32px 32px 32px;
+                        .confirm-message{
+                            width: 100%;
+                            p{
+                                margin: 0 0 40px 0;
+                                line-height: 1.54;
+                                letter-spacing: normal;
+                                font-size: 13px;
+                            }
+                        }
+                        .confirm-btn {
+                            display: -ms-flexbox;
+                            display: -webkit-flex;
+                            display: flex;
+                            align-items: center;
+                            justify-content: flex-end;
+                            .btn{
+                                padding:13px 16px;
+                                text-align:center;
+                                margin-left:10px;
+                                font-size:13px;
+                                &.btn-secondary{
+                                    border: solid 1px #c5cdd5;
+
+                                }
+                                &.btn-remove{
+                                    background-color: #ff5263;
+                                    border-color:#ff5263;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

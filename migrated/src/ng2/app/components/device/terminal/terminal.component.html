@@ -145,7 +145,7 @@
                             >
                           </li>
                           <li role="menuitem">
-                            <a class="dropdown-item" href="javascript:void(0);">
+                            <a class="dropdown-item" href="javascript:void(0);" (click)="openModal(template)">
                               <img
                                 src="../../../../../ng1/images/device/remove-terminal.svg"
                                 alt="edit-cmd"
@@ -207,7 +207,7 @@
                             >
                           </li>
                           <li role="menuitem">
-                            <a class="dropdown-item" href="javascript:void(0);">
+                            <a class="dropdown-item" href="javascript:void(0);" (click)="openModal(template)">
                               <img
                                 src="../../../../../ng1/images/device/remove-terminal.svg"
                                 alt="edit-cmd"
@@ -273,7 +273,7 @@
                             >
                           </li>
                           <li role="menuitem">
-                            <a class="dropdown-item" href="javascript:void(0);">
+                            <a class="dropdown-item" href="javascript:void(0);" (click)="openModal(template)">
                               <img
                                 src="../../../../../ng1/images/device/remove-terminal.svg"
                                 alt="edit-cmd"
@@ -662,7 +662,7 @@
                     <a
                       href="javascript:;"
                       class="play-btn"
-                      data-tooltip="Copy Script"
+                      data-tooltip="Clone Script"
                     >
                       <img
                         src="../../../../../ng1/images/device/copy-script.svg"
@@ -697,7 +697,7 @@
                     <a
                       href="javascript:;"
                       class="play-btn"
-                      data-tooltip="Copy Script"
+                      data-tooltip="Clone Script"
                     >
                       <img
                         src="../../../../../ng1/images/device/copy-script.svg"
@@ -732,7 +732,7 @@
                     <a
                       href="javascript:;"
                       class="play-btn"
-                      data-tooltip="Copy Script"
+                      data-tooltip="Clone Script"
                     >
                       <img
                         src="../../../../../ng1/images/device/copy-script.svg"
@@ -767,7 +767,7 @@
                     <a
                       href="javascript:;"
                       class="play-btn"
-                      data-tooltip="Copy Script"
+                      data-tooltip="Clone Script"
                     >
                       <img
                         src="../../../../../ng1/images/device/copy-script.svg"
@@ -900,5 +900,35 @@
         </div>
       </div>
     </aside>
+    
+<!-- Delete Confirmation -->
+
+<ng-template #template class="cmn-terminal-modal">
+  <div class="modal-header">
+    <h2>Delete Script</h2>
+    <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()">
+      <img
+      src="../../../../../ng1/images/device/close.svg"
+      alt="close"
+      title="close"
+    />
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="confirm-message">
+        <p>Are you sure you want to delete <strong>Enable USB access</strong> script?</p>
+    </div>
+    <div class="confirm-btn">
+      <button type="button" class="btn btn-secondary" aria-label="Close" (click)="modalRef.hide()">
+        Cancel
+      </button>
+      <button type="button" class="btn btn-remove">
+        Remove
+      </button>
+    </div>
+  </div>
+</ng-template>
   </div>
 </main>
+
+

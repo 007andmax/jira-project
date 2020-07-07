@@ -2,6 +2,8 @@ import { Component, OnInit ,ViewEncapsulation  } from '@angular/core';
 import { TerminalService } from '../_services/terminal.service';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+
 
 
 @Component({
@@ -12,8 +14,11 @@ import { first } from 'rxjs/operators';
 })
 export class TerminalComponent implements OnInit {
   create = false;
+  modalRef: BsModalRef;
   constructor(private terminalService: TerminalService,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService,
+    private modalService: BsModalService  
+    ) { }
 
   ngOnInit() {
     this.getAllTerminalList();
@@ -28,6 +33,16 @@ export class TerminalComponent implements OnInit {
     });
   }
 
+
+ 
+  
+ 
+  openModal(template) {
+    this.modalRef = this.modalService.show(
+      template,
+      Object.assign({}, { class: 'confirm-control modal-dialog-centered' })
+    );
+  }
 
 
 }
