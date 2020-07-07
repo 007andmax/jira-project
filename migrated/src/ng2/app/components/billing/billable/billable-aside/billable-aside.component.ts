@@ -62,6 +62,7 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
 
       if (data.action === 'NUMBER_CHANGED' && !this.invoiceIsCreating()) {
         this.invoiceNumber = data.data.numPart;
+        this.cd.detectChanges();
         this.formInvoice.onChangeInvoiceNumber();
       }
 
