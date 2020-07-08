@@ -187,14 +187,14 @@
     <div class="sidebar-title">
       <div class="h1">Create New Ticket</div>
        <span class="h5" *ngIf="actualNumber != ''">QT {{actualNumber}}</span>
-       <div class="btn-group device-small-dropdown" dropdown>
-        <button id="button-basic" dropdownToggle type="button" class="dropdown-toggle" [ngClass]="{'high': ticketModal.priorityLevel == 'HIGH', 'low': ticketModal.priorityLevel == 'LOW'}"
+       <div class="btn-group device-small-dropdown" ngbDropdown >
+        <button id="button-basic" ngbDropdownToggle type="button" class="dropdown-toggle" [ngClass]="{'high': ticketModal.priorityLevel == 'HIGH', 'low': ticketModal.priorityLevel == 'LOW'}"
                 aria-controls="dropdown-basic">
                 {{priorityLabel}} 
         </button>
-        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu list-unstyled"
+        <ul id="dropdown-basic" ngbDropdownMenu class="dropdown-menu list-unstyled"
             role="menu" aria-labelledby="button-basic">
-            <li role="menuitem" *ngFor="let priority of priorityList">
+            <li role="menuitem" *ngFor="let priority of priorityList" ngbDropdownItem>
               <a class="dropdown-item" href="javascript:;" (click)="ticketModal.priorityLevel = priority.value; priorityLabel = priority.name;">{{priority.name}}</a>
             </li>
           

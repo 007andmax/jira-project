@@ -119,7 +119,6 @@ import { WindowsComponent } from './components/device/windows-update/windows-upd
 import { FileComponent } from './components/device/file-explorer/file-explorer.component';
 import { PasswordComponent } from './components/device/password/password.component';
 
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { NgxUploaderModule } from 'ngx-uploader';
 import { ToastrModule } from 'ngx-toastr';
 import { SessionTimeoutComponent } from './components/device/session-timeout/session-timeout.component';
@@ -429,7 +428,6 @@ angular.module('quicktech')
       ImageCropperModule,
       NgxEditorModule ,
       FontAwesomeModule,
-      BsDropdownModule.forRoot(),
       NgxUploaderModule,
       ToastrModule.forRoot({
         timeOut: 5000,
