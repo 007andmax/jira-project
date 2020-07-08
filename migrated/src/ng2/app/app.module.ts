@@ -119,7 +119,6 @@ import { WindowsComponent } from './components/device/windows-update/windows-upd
 import { FileComponent } from './components/device/file-explorer/file-explorer.component';
 import { PasswordComponent } from './components/device/password/password.component';
 
-import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { NgxUploaderModule } from 'ngx-uploader';
 import { ToastrModule } from 'ngx-toastr';
@@ -131,7 +130,6 @@ import { searchTextPipe } from './components/device/_pipe/searchText.pipe';
 import { HighlightDirective } from './components/device/_directive/highlight.directive';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { SoftwarePipe } from './pipe/software.pipe';
-import { CompaniesProfileComponent } from './components/companies/company-profile/company-profile.component';
 
 /**
  * declare angular
@@ -177,9 +175,6 @@ angular.module('quicktech')
   .directive(
     'companiesComponent',
     downgradeComponent({component: CompaniesComponent}))
-    .directive(
-      'companiesProfileComponent',
-      downgradeComponent({ component: CompaniesProfileComponent }))
     .directive(
     'usersComponent',
     downgradeComponent({component: UsersComponent}))
@@ -271,7 +266,6 @@ angular.module('quicktech')
     CompaniesHeaderComponent,
     CompaniesTableComponent,
     CompanyAddAsideComponent,
-    CompaniesProfileComponent,
     ConfirmComponent,
     DownloadAgentComponent,
     CompanySubscriptionComponent,
@@ -426,10 +420,6 @@ angular.module('quicktech')
           path: 'ng2/device/file',
           component: FileComponent
         },
-        {
-          path: 'ng2/companyProfile',
-          component: CompaniesProfileComponent,
-        }
       ],
       {
         useHash: true,
@@ -439,7 +429,6 @@ angular.module('quicktech')
       ImageCropperModule,
       NgxEditorModule ,
       FontAwesomeModule,
-      ModalModule.forRoot(),
       BsDropdownModule.forRoot(),
       NgxUploaderModule,
       ToastrModule.forRoot({
@@ -479,8 +468,7 @@ angular.module('quicktech')
     SessionTimeoutComponent,
     LockScreenComponent,
     TicketTaskComponent,
-    AppComponent,
-    CompaniesProfileComponent
+    AppComponent
     // RecurringTicketsComponent
   ],
   providers: [

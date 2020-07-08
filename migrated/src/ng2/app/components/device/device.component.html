@@ -41,9 +41,9 @@
 
 
   <!-- Modal create Tags -->
-  <ng-template #template>
+  <ng-template #template let-modal>
      <div class="modal-body">
-          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <button type="button" class="close pull-right" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
           </button>
   

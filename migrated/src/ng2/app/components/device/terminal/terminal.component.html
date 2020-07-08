@@ -911,10 +911,10 @@
     
 <!-- Delete Confirmation -->
 
-<ng-template #template class="cmn-terminal-modal">
+<ng-template #template let-modal class="cmn-terminal-modal">
   <div class="modal-header">
     <h2>Delete Script</h2>
-    <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()">
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <img
       src="../../../../../ng1/images/device/close.svg"
       alt="close"
@@ -927,7 +927,7 @@
         <p>Are you sure you want to delete <strong>Enable USB access</strong> script?</p>
     </div>
     <div class="confirm-btn">
-      <button type="button" class="btn btn-secondary" aria-label="Close" (click)="modalRef.hide()">
+      <button type="button" class="btn btn-secondary" aria-label="Close" (click)="modal.dismiss('Cross click')">
         Cancel
       </button>
       <button type="button" class="btn btn-remove">
