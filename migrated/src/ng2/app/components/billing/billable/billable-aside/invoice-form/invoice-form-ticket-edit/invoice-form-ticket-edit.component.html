@@ -36,20 +36,7 @@
 [ngForTrackBy]="trackById">
 
 
-      <tr>
-        <td>
-          <div class=" qt-pointer qt-sz-20 icon__move-light qt-ic-c"></div>
-        </td>
-        <td class="invoice-item__col-item" [textContent]="product.item.manufacture"> </td>
-        <td class="invoice-item__col-desc" [textContent]="product.item.description"></td>
-        <td class="invoice-item__col-price" [textContent]="product.item.sale | currency"></td>
-         <td class="invoice-item__col-quentity"   [textContent]="product.billableQuantity"></td>
-        <td class="invoice-item__col-tax" [textContent]="product.taxSum | currency"></td>
-        <td class="invoice-item__col-amount" [textContent]="product.totalSum | currency"></td>
-        <td>
-
-        </td>
-      </tr>
+    <app-invoice-form-ticket-edit-product [product]="product"></app-invoice-form-ticket-edit-product>
     </ng-template>
 
     </tbody>

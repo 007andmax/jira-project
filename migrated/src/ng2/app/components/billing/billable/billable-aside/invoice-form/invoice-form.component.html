@@ -50,19 +50,24 @@
 
     </div>
   </div>
-
-  <div class="invoice-items">
+ 
+  <div class="invoice-items" >
     <button *ngIf="!editMode" (click)="editMode = true">edit mode</button>
     <button *ngIf="editMode">save</button>
     <button *ngIf="editMode" (click)="editMode = true">cancel</button>
-    <ng-template ngFor let-ticket
-    [ngForOf]="invoice.invoiceDataDto.tickets"
-    let-i="index"
-    [ngForTrackBy]="trackByIndex">
-  <app-invoice-form-ticket-info *ngIf="!editMode" [ticketsLength]="invoice.invoiceDataDto.tickets.length" (onDelete)="delete(i)" [ticket]="ticket"></app-invoice-form-ticket-info>
-  <app-invoice-form-ticket-edit *ngIf="editMode"  [ticket]="ticket"></app-invoice-form-ticket-edit>
-</ng-template>
-
+    <div *ngIf="!editMode">
+      <ng-template ngFor let-ticket [ngForOf]="invoice.invoiceDataDto.tickets" let-i="index" [ngForTrackBy]="trackByIndex">
+        <app-invoice-form-ticket-info [ticketsLength]="invoice.invoiceDataDto.tickets.length" (onDelete)="delete(i)"
+          [ticket]="ticket"></app-invoice-form-ticket-info>
+      </ng-template>
+    </div>
+    
+    
+    <div *ngIf="editMode">
+      <ng-template ngFor let-ticket [ngForOf]="editTickets" let-i="index" [ngForTrackBy]="trackByIndex">
+        <app-invoice-form-ticket-edit [ticket]="ticket"></app-invoice-form-ticket-edit>
+      </ng-template>
+    </div>
 
 
 

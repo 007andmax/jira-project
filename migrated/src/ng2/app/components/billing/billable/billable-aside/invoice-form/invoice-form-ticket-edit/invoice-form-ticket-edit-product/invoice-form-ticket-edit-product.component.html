@@ -1,0 +1,31 @@
+<tr>
+  <td>
+    <div class=" qt-pointer qt-sz-20 icon__move-light qt-ic-c"></div>
+  </td>
+  <td class="invoice-item__col-item" [textContent]="product.item.manufacture"> </td>
+  <td class="invoice-item__col-desc" [textContent]="product.item.description"></td>
+  <td class="invoice-item__col-price"  >
+    <input
+    class="input-default input-price"
+    [ngClass]="{'--input-error':!valdiateSaleCost}"
+    number
+    [money]="true"
+    [ngModel]="product.item.sale"
+    appToFixed
+    (blur)="onValidateSaleCost()"
+    (ngModelChange)="onChangeSale($event)"  />
+    <mat-error class="qt-tooltip-error" *ngIf="!valdiateSaleCost">
+      Product price can not be lower than cost
+    </mat-error>
+  </td>
+   <td class="invoice-item__col-quentity"   >
+    <input  class="input-default input-qty" [(ngModel)]="product.quantity"   />
+   </td>
+  <td class="invoice-item__col-tax"  >
+    <app-invoice-form-ticket-edit-taxes #taxes (taxesChange)="onTaxesChange($event)"></app-invoice-form-ticket-edit-taxes>
+  </td>
+  <td class="invoice-item__col-amount" [textContent]="product.totalSum | currency"></td>
+  <td>
+
+  </td>
+</tr>

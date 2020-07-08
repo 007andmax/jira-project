@@ -20,6 +20,7 @@ import { InvoiceTicketsService } from 'src/ng2/app/components/setting/invoice-ti
 import { InvoiceNote } from '../../class/invoice-note';
 import { NoteService } from 'src/ng2/app/services/note/note.service';
 import { InvoiceValidate } from './class/invoice-validate';
+import { InvoiceProfileTicket } from '../../class/invoice-profile-ticket';
 
 @Component({
   selector: 'app-invoice-form',
@@ -38,7 +39,8 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   globalNote: InvoiceNote = null;
   validate: InvoiceValidate = new InvoiceValidate();
   sub: Subscription = new Subscription();
-  editMode:boolean = false;
+  editMode: boolean = false;
+  editTickets: Array<InvoiceProfileTicket>;
   constructor(private billableStateService: BillableStateService,
     private billableService: BillableService,
     private modalService: NgbModal,
@@ -50,7 +52,10 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-
+    this.editTickets = this.invoice.invoiceDataDto.tickets.map(item => {
+      return new InvoiceProfileTicket(item);
+    })
+    console.log("editTickets",this.editTickets);
     this.globalNote = this.invoiceNotes.filter(item => item.noteType === "GLOBAL")[0];
     if (this.billableStateService.getGlobalNote()) this.globalNote = this.billableStateService.getGlobalNote();
     this.currentCompany = this.companiesStateService.getCurrentCompany();
