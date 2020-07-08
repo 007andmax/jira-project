@@ -2,17 +2,20 @@
   <td>
     <div class=" qt-pointer qt-sz-20 icon__move-light qt-ic-c"></div>
   </td>
-  <td class="invoice-item__col-item" [textContent]="service.item.name"></td>
-  <td class="invoice-item__col-desc" [textContent]="service.description"></td>
-  <td class="invoice-item__col-price" [textContent]="service.item.rate | currency"></td>
+  <td class="invoice-item__col-item" [textContent]="editService.item.name"></td>
+  <td class="invoice-item__col-desc"  >
+    <textarea    appTextArea  [minHeight]="48"  cols="5" rows="1" id="service-description" placeholder="Write ticket conversation here…"
+    (input)="onChangeDescription($event)" (onPast)="onPastDescription($event)"></textarea>
+  </td>
+  <td class="invoice-item__col-price" [textContent]="editService.item.rate | currency"></td>
   
   <td class="invoice-item__col-quentity"   >
-    <app-ticket-profile-updates-service-timepicker (onSetEnd)="onSetDurationEnd($event)" (onChangeStart)="onChangeStartTimePicker($event)" (onChangeEnd)="onChangeEndTimePicker($event)" #editTimePicker [quantity]="service.billableQuantity" [editMode]="true" [start]="durationStart" [end]="durationEnd" ></app-ticket-profile-updates-service-timepicker>
+    <app-ticket-profile-updates-service-timepicker *ngIf="currentCompany.serviceExpenseDurationPresentation === 'TIME_PICKER'" (onChangeStart)="onChangeStartTimePicker($event)" (onChangeEnd)="onChangeEndTimePicker($event)" #editTimePicker [quantity]="editService.billableQuantity" [editMode]="true" [start]="durationStart" [end]="durationEnd" ></app-ticket-profile-updates-service-timepicker>
     <app-ticket-profile-updates-service-duration (onChange)="onChangeDuration($event)" [editMode]="true" [hour]="hours" [minute]="minutes" *ngIf="currentCompany.serviceExpenseDurationPresentation === 'DURATION_PICKER'"></app-ticket-profile-updates-service-duration>
 
   </td>
-   <td class="invoice-item__col-tax" [textContent]="service.taxSum | currency"></td>
-  <td class="invoice-item__col-amount" [textContent]="service.totalSum | currency"></td>
+   <td class="invoice-item__col-tax" [textContent]="editService.taxSum | currency"></td>
+  <td class="invoice-item__col-amount" [textContent]="editService.totalSum | currency"></td>
   <td>
 
   </td>

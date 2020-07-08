@@ -52,9 +52,9 @@
   </div>
 
   <div class="invoice-items">
-    <button *ngIf="!editMode">edit mode</button>
+    <button *ngIf="!editMode" (click)="editMode = true">edit mode</button>
     <button *ngIf="editMode">save</button>
-    <button *ngIf="editMode">cancel</button>
+    <button *ngIf="editMode" (click)="editMode = true">cancel</button>
     <ng-template ngFor let-ticket
     [ngForOf]="invoice.invoiceDataDto.tickets"
     let-i="index"
