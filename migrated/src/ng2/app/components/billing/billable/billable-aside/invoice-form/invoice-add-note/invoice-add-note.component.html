@@ -9,7 +9,7 @@
         Subject is required
       </mat-error>
       <label>Note Subject</label>
-      <input type="text"  [(ngModel)]="createNote.title" (blur)="validate.checkValidTitle(createNote.title)" placeholder="Write Note Subject">
+      <input [ngClass]="{'--input-error':!validate.getTitle()}" type="text"  [(ngModel)]="createNote.title" (blur)="validate.checkValidTitle(createNote.title)" placeholder="Write Note Subject">
     </div>
   </div>
 
@@ -19,7 +19,7 @@
         Description is required
       </mat-error>
       <label class="qt-lh-154">Note Description</label>
-    <textarea class="qt-textarea" [(ngModel)]="createNote.line1" (blur)="validate.checkValidLine1(createNote.line1)" placeholder="Write Note Description"></textarea>
+    <textarea [ngClass]="{'--input-error':!validate.getLine1()}"  class="qt-textarea" [(ngModel)]="createNote.line1" (blur)="validate.checkValidLine1(createNote.line1)" placeholder="Write Note Description"></textarea>
     </div>
   </div>
 

@@ -217,6 +217,7 @@
     &.qt-tooltip-error {
       top: calc(100% + 6px) !important;
       max-width: 250px;
+      width: fit-content;
       bottom: unset !important;
       overflow: visible;
       white-space: normal;

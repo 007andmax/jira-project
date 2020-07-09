@@ -27,9 +27,9 @@
 
   <div class="infoice-info-row qt-df qt-pt-16 qt-pl-30 qt-pr-30 qt-mb-24 ">
 
-    <div class="qt-input-block qt-mr-16 qt-w100">
+    <div  class="qt-input-block qt-mr-16 qt-w100">
       <label>Invoice#</label>
-      <input [(ngModel)]="invoiceNumber" (blur)="onChangeInvoiceNumber()" type="text">
+      <input  [ngClass]="{'--input-error':!validate.getNumber()}" [(ngModel)]="invoiceNumber" (blur)="onChangeInvoiceNumber()" type="text">
       <mat-error class="qt-tooltip-error" *ngIf="!validate.getNumber()" [textContent]="'Invoice with number ' + invoiceNumber + ' is already occupied'">
       </mat-error>
     </div>
