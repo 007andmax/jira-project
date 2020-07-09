@@ -666,3 +666,17 @@ app-invoice-form-ticket-edit-service,app-invoice-form-ticket-edit-product {
   }
 
 }
+
+.billable-address-empty-popup {
+  background: white;
+  position: fixed;
+  top: 154px;
+  right: 24px;
+  z-index: 100;
+  padding: 15px;
+  box-shadow: 0px 0px 9px 1px #00000038;
+  border-radius: 4px;
+  .modal-body {
+    padding: 15px;
+  }
+}

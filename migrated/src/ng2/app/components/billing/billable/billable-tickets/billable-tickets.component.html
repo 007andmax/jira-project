@@ -1,5 +1,19 @@
 <div class="page-list page-list-billable" *ngIf="billableProfile">
 
+  <div class="billable-address-empty-popup" *ngIf="!isCurrentCompanyAddressEmpty">
+    <div class="modal-body" style="width: 250px;">
+      {{ currentUser.isOwner
+      ? 'You can not use invoicing feature, because you have not entered the company\'s address.'
+      : 'The owner of the company has not filled the address of the company, therefore you can not use invoicing feature.'
+      }}
+    </div>
+    <div class="modal-footer" *ngIf="currentUser.isOwner">
+      <div class="btn btn-lg btn-primary" (click)="goToSettings()">
+        Enter Address
+      </div>
+    </div>
+  </div>
+
   <div class="qt-list-header sticky-list-header">
     <div class="d-f ai-c">
      <div class="page-list__back-button icon__collapse-arrow button-icon pointer" (click)="back()"></div> <h3 class="list-title" [textContent]="billableProfile.name"></h3>
@@ -7,21 +21,6 @@
 
     <div class="d-f ai-c">
         <button class="qt-btn --outline-blue" [disabled]="!isCurrentCompanyAddressEmpty" (click)="onCreateInvoice()">Create Invoice</button>
-        
-        <div *ngIf="!isCurrentCompanyAddressEmpty">
-          <div class="modal-body" style="width: 250px;">
-            {{ currentUser.isOwner
-            ? 'You can not use invoicing feature, because you have not entered the company\'s address.'
-            : 'The owner of the company has not filled the address of the company, therefore you can not use invoicing feature.'
-            }}
-          </div>
-          <div class="modal-footer" *ngIf="currentUser.isOwner">
-            <div class="btn btn-lg btn-primary" (click)="goToSettings()">
-              Enter Address
-            </div>
-          </div>
-        </div>
-        
     </div>
   </div>
 
@@ -92,4 +91,3 @@
 </div>
 <app-ticket-edit-aside ></app-ticket-edit-aside>
 <app-billable-aside (onSetSelectedTickets)="setSelectedTickets($event)"></app-billable-aside>
- 
