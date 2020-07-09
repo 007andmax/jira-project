@@ -71,7 +71,7 @@
 
 
 
-<app-invoice-discount (onDelete)="toggleDiscount = false" [lockId]="invoice.lockId" *ngIf="toggleDiscount"></app-invoice-discount>
+<app-invoice-discount (onDelete)="onDeleteDiscount($event)" (onUpdate)="onUpdateDiscount($event)" [lockId]="invoice.lockId" *ngIf="toggleDiscount"></app-invoice-discount>
   </div>
 
   <div class="summary-info qt-df qt-pl-30 qt-pr-30 qt-pb-24 qt-jc-sb">
@@ -88,6 +88,11 @@
         <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-15">
           <div>Sub Total</div>
           <div [textContent]="(invoice.invoiceDataDto.productsSum + invoice.invoiceDataDto.servicesSum ) |
+          currency"></div>
+        </div>
+        <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-15" *ngIf="invoice.invoiceDataDto.invoiceDiscount">
+          <div>Discount</div>
+          <div [textContent]="(-invoice.invoiceDataDto.invoiceDiscount.amount) |
           currency"></div>
         </div>
         <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-15">

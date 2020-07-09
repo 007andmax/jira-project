@@ -113,6 +113,12 @@
           <div class="invoice-info-value qt-text-right" [textContent]="(invoice.invoiceDataDto.productsSum + invoice.invoiceDataDto.servicesSum ) |
           currency"></div>
         </div>
+
+        <div class="qt-df qt-jc-sb qt-pl-12 qt-pr-12" *ngIf="invoice.invoiceDataDto.invoiceDiscount">
+          <div class="qt-text-left">Discount</div>
+          <div class="invoice-info-value qt-text-right" [textContent]="(-invoice.invoiceDataDto.invoiceDiscount.amount) |
+          currency"></div>
+        </div>
         <div class="qt-df qt-jc-sb qt-pl-12 qt-pt-10 qt-pr-12 qt-pb-10">
           <div class=" qt-text-left">Tax</div>
           <div class="invoice-info-value  qt-text-right" [textContent]="invoice.invoiceDataDto.taxSum | currency"></div>

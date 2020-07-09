@@ -32,15 +32,16 @@
         
          </td>
          <td class="invoice-item__col-price" ></td>
-          <td class="invoice-item__col-quentity"   ></td>
+          <td class="invoice-item__col-quentity"   >1</td>
          <td class="invoice-item__col-tax"  ></td>
          <td class="invoice-item__col-amount"  > <input
           class="input-default input-price"
           number
           [money]="true"
-          [(ngModel)]="discount.amount"
+          [ngModel]="discount.amount"
           appToFixed
           (blur)="onChange()"
+          (ngModelChange)="onChangeAmount($event)"
           /></td>
          <td>
  

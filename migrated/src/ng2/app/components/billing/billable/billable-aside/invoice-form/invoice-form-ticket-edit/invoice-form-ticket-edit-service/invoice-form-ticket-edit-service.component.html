@@ -17,7 +17,7 @@
    <td class="invoice-item__col-tax"  >
     <app-invoice-form-ticket-edit-taxes #taxes (taxesChange)="onTaxesChange($event)"></app-invoice-form-ticket-edit-taxes>
    </td>
-  <td class="invoice-item__col-amount" [textContent]="service.totalSum | currency"></td>
+  <td class="invoice-item__col-amount" [textContent]="service.sum | currency"></td>
   <td>
 
   </td>

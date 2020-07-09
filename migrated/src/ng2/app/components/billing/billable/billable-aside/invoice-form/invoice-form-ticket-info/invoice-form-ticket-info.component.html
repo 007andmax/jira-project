@@ -39,7 +39,7 @@
         <td class="invoice-item__col-quentity" *ngIf="service.description =='By User' || service.description =='By Device' || service.description =='Managed Service Contract'" [textContent]="service.billableQuantity"></td>
         <td class="invoice-item__col-quentity"  *ngIf="service.description !=='By User' && service.description !=='By Device' && service.description !=='Managed Service Contract'" [textContent]="getDuration(service.billableQuantity)"></td>
         <td class="invoice-item__col-tax" [innerHTML]="getSelectedTaxes(service.taxes)"></td>
-        <td class="invoice-item__col-amount" [textContent]="service.totalSum | currency"></td>
+        <td class="invoice-item__col-amount" [textContent]="service.sum | currency"></td>
         <td>
 
         </td>
@@ -60,7 +60,7 @@
         <td class="invoice-item__col-price" [textContent]="product.item.sale | currency"></td>
          <td class="invoice-item__col-quentity"   [textContent]="product.billableQuantity"></td>
         <td class="invoice-item__col-tax" [innerHTML]="getSelectedTaxes(product.taxes)"></td>
-        <td class="invoice-item__col-amount" [textContent]="product.totalSum | currency"></td>
+        <td class="invoice-item__col-amount" [textContent]="product.sum | currency"></td>
         <td>
 
         </td>

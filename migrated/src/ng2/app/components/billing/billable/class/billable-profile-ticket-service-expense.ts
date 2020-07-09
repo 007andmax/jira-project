@@ -3,5 +3,5 @@ import { Tax } from 'src/ng2/class/taxes/tax';
 import { TicketProfileService } from '../../../tickets/tickets/class/ticket-profile-service';
 
 export class BillableProfileTicketServiceExpense extends TicketProfileService {
-    
+    ticketUpdate:any;
 }

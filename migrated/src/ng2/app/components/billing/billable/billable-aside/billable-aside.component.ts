@@ -37,6 +37,7 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
   billableProfile: BillableProfile;
   invoice: InvoiceLock;
   showPreloader: boolean = true;
+  isUdpateInvoice: boolean = false;
   showPreview: boolean = false;
   company: CompanyProfile = new CompanyProfile();
   invoiceNumber: string;
@@ -99,6 +100,17 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getOnCreate);
   
+  }
+  public onUpdateInvoice(request) {
+    this.isUdpateInvoice = true;
+    this.billableService.updateInvoiceData(this.invoice.lockId, request).subscribe((data:any) => {
+      this.invoice.setInvoiceDataDto(data.invoiceDataDto);
+      this.isUdpateInvoice = false;
+      this.formInvoice.onCancelTickets();
+      this.cd.detectChanges();
+    },err => {
+      this.isUdpateInvoice = false;
+    })
   }
  private invoiceIsCreating () {
    return this.saveAndSendBtn.isBlock() && this.saveAndPrintBtn.isBlock() && this.saveAndDownloadBtn.isBlock();

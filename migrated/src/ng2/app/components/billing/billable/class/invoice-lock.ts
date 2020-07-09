@@ -11,4 +11,7 @@ export class InvoiceLock {
         this.lockId =  data.lockId;
         this.lockedTickets =  data.lockedTickets;
     }
+    public setInvoiceDataDto (data) {
+        this.invoiceDataDto = data;
+    }
 }

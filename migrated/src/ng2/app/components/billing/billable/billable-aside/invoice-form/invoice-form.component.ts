@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { InvoiceLock } from '../../class/invoice-lock';
 import { Company } from 'src/ng2/app/interfaces/company/company';
 import { CompanyProfile } from 'src/ng2/app/components/companies/class/company-profile';
@@ -29,12 +29,13 @@ import { InvoiceProfileTicket } from '../../class/invoice-profile-ticket';
 })
 export class InvoiceFormComponent implements OnInit, OnDestroy {
   @ViewChild('companyEdit') companyEdit: InvoiceFormEditCustomerComponent;
+  @Output() onUpdateInvoice = new EventEmitter();
   @Input() invoice: InvoiceLock;
   @Input() invoiceNumber: string;
   @Input() invoiceNotes: Array<InvoiceNote> = [];
   @Input() company: CompanyProfile = new CompanyProfile();
   @Input() invoiceTaxNumber: InvoiceTaxNumber;
-  toggleDiscount:boolean = false;
+  toggleDiscount: boolean = false;
   currentCompany: any;
   changeGlobalNote: boolean = false;
   globalNote: InvoiceNote = null;
@@ -48,13 +49,14 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     private invoiceTicketsService: InvoiceTicketsService,
     private confirmStateService: ConfirmStateService,
     private elRef: ElementRef,
+    public cd: ChangeDetectorRef,
     private noteService: NoteService,
     private companiesStateService: CompaniesStateService) { }
 
 
   ngOnInit() {
-   this.onSetEditTickets();
-    console.log("editTickets",this.editTickets);
+    this.onSetEditTickets();
+    console.log("editTickets", this.editTickets);
     this.globalNote = this.invoiceNotes.filter(item => item.noteType === "GLOBAL")[0];
     if (this.billableStateService.getGlobalNote()) this.globalNote = this.billableStateService.getGlobalNote();
     this.currentCompany = this.companiesStateService.getCurrentCompany();
@@ -71,6 +73,15 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getChangeCompanies);
+  }
+  onDeleteDiscount(data) {
+    this.toggleDiscount = false;
+    this.invoice.setInvoiceDataDto(data.invoiceDataDto);
+    this.cd.detectChanges();
+  }
+  onUpdateDiscount(data) {
+    this.invoice.setInvoiceDataDto(data.invoiceDataDto);
+    this.cd.detectChanges();
   }
   parseDateFromDatePicker(due) {
     let date = new Date(due); // timestamp from calendar	
@@ -100,11 +111,11 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     return (hours >= 10 ? hours : '0' + hours) + ':' + (minutes >= 10 ? minutes : '0' + minutes) + ' hr(s)';
 
   }
-private onSetEditTickets () {
-  this.editTickets = this.invoice.invoiceDataDto.tickets.map(item => {
-    return new InvoiceProfileTicket(JSON.parse(JSON.stringify(item)));
-  })
-}
+  private onSetEditTickets() {
+    this.editTickets = this.invoice.invoiceDataDto.tickets.map(item => {
+      return new InvoiceProfileTicket(JSON.parse(JSON.stringify(item)));
+    })
+  }
 
   onCheckUpdateGlobalNote() {
     if (this.globalNote) this.changeGlobalNote = true;
@@ -128,7 +139,7 @@ private onSetEditTickets () {
     return moment(new Date(date)).format('DD/MM/YYYY');
   }
   public onChangeInvoiceNumber() {
-    let request: PartialUpdate = new PartialUpdate(null, null, this.invoiceNumber, null, null,null);
+    let request: PartialUpdate = new PartialUpdate(null, null, this.invoiceNumber, null, null, null);
     console.log("request", request);
     this.billableService.updateInvoiceData(this.invoice.lockId, request).subscribe(data => {
       this.validate.resetNumber();
@@ -140,7 +151,7 @@ private onSetEditTickets () {
     console.log("date", date);
     let invoiceDate = this.parseDateFromDatePicker(new Date(date.year, date.month - 1, date.day));
     console.log("invoiceDate", invoiceDate);
-    let request: PartialUpdate = new PartialUpdate(invoiceDate, null, this.invoiceNumber, null, null,null);
+    let request: PartialUpdate = new PartialUpdate(invoiceDate, null, this.invoiceNumber, null, null, null);
     console.log("request", request);
     this.updateInvoiceData(request);
   }
@@ -151,25 +162,25 @@ private onSetEditTickets () {
   }
   onChangeDueDate(date) {
     let dueDate = this.parseDateFromDatePicker(new Date(date.year, date.month - 1, date.day));
-    let request: PartialUpdate = new PartialUpdate(null, dueDate, this.invoiceNumber, null, null,null);
+    let request: PartialUpdate = new PartialUpdate(null, dueDate, this.invoiceNumber, null, null, null);
     this.updateInvoiceData(request);
 
   }
   onEditTickets() {
     let expensesToUpdate = [];
-    console.log("this.editTickets",this.editTickets);
-    this.editTickets.forEach((item,index) => {
-      expensesToUpdate = [...expensesToUpdate,...item.getDateForUpdate(item.id)];
+    console.log("this.editTickets", this.editTickets);
+    this.editTickets.forEach((item, index) => {
+      expensesToUpdate = [...expensesToUpdate, ...item.getDateForUpdate()];
     });
-    console.log("expensesToUpdate",expensesToUpdate);
-    let request: PartialUpdate = new PartialUpdate(null, null, null, null, null,expensesToUpdate);
+    console.log("expensesToUpdate", expensesToUpdate);
+    let request: PartialUpdate = new PartialUpdate(null, null, null, null, null, expensesToUpdate);
     console.log("request", request);
-    this.updateInvoiceData(request);
+    this.onUpdateInvoice.emit(request);
   }
-  onCancelTickets() {
+  public onCancelTickets() {
     this.onSetEditTickets();
     this.editMode = false;
-    console.log("this.editTickets",this.editTickets);
+    console.log("this.editTickets", this.editTickets);
   }
   onUpdateCompany() {
     let data = this.companyEdit.getCompany();

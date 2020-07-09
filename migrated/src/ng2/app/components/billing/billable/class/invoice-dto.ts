@@ -7,6 +7,7 @@ import { InvoiceCompany } from './invoice-company';
 import { InvoiceDtoBillTo } from './invoice-dto-bill-to';
 import { InvoiceDtoShipTo } from './invoice-dto-ship-to';
 import { InvoiceProfileTicket } from './invoice-profile-ticket';
+import { InvoiceDiscount } from '../billable-aside/invoice-form/invoice-discount/class/invoice-discount';
 
 export class InvoiceDto {
     billTo: Array<InvoiceDtoBillTo> = [];
@@ -38,4 +39,5 @@ export class InvoiceDto {
     termsAndConditions: string;
     tickets: Array<InvoiceProfileTicket>;
     totalSum: number;
+    invoiceDiscount:InvoiceDiscount;
 }

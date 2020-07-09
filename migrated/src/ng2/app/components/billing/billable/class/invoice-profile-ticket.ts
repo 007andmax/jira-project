@@ -13,12 +13,13 @@ export class InvoiceProfileTicket {
     subject: string;
     taxSum: number;
     totalSum: number;
+   
     constructor(data) {
         for (const key in data) {
             this[key] = data[key];
         }
     }
-    public getDateForUpdate(ticketUpdateId) {
+    public getDateForUpdate() {
         let productExpenses = [];
         this.productExpenses.forEach(item => {
             productExpenses.push({
@@ -34,7 +35,7 @@ export class InvoiceProfileTicket {
                     taxes: item.taxes,
                     user: item.user,
                 },
-                ticketUpdateId: ticketUpdateId
+                ticketUpdateId: item.ticketUpdate.id
             })
         });
 
@@ -58,7 +59,7 @@ export class InvoiceProfileTicket {
                     user: item.user,
                     taxes:taxes
                 },
-                ticketUpdateId: ticketUpdateId
+                ticketUpdateId: item.ticketUpdate.id
             })
         });
         return [...productExpenses,...serviceExpenses];

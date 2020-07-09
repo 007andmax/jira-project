@@ -18,13 +18,13 @@
   </div>
 
   <div class="billing-aside-scroll-content">
- <app-invoice-form #formInvoice *ngIf="!showPreloader && !showPreview" [invoiceNotes]="invoiceNotes" [invoiceTaxNumber]="invoiceTaxNumber" [invoiceNumber]="invoiceNumber" [company]="company" [invoice]="invoice"></app-invoice-form>
+ <app-invoice-form [hidden]="isUdpateInvoice || showPreview" (onUpdateInvoice)="onUpdateInvoice($event)" #formInvoice *ngIf="!showPreloader" [invoiceNotes]="invoiceNotes" [invoiceTaxNumber]="invoiceTaxNumber" [invoiceNumber]="invoiceNumber" [company]="company" [invoice]="invoice"></app-invoice-form>
 
      <app-invoice-preview [invoiceTaxNumber]="invoiceTaxNumber"  [company]="company" [invoiceNumber]="invoiceNumber" [invoice]="invoice" *ngIf="showPreview"></app-invoice-preview>
   </div>
 
 
-  <div class="prelaoder-body" *ngIf="showPreloader">
+  <div class="prelaoder-body" *ngIf="showPreloader || isUdpateInvoice">
     <div class="loading" ></div>
   </div>
 

@@ -10,6 +10,7 @@ import { BillableService } from 'src/ng2/app/services/billable/billable.service'
 export class InvoiceDiscountComponent implements OnInit {
   @Input() lockId: string;
   @Output() onDelete = new EventEmitter();
+  @Output() onUpdate = new EventEmitter();
   discount: InvoiceDiscount = new InvoiceDiscount();
   canRemove:boolean = false;
   constructor(private billableService: BillableService,) { }
@@ -18,13 +19,19 @@ export class InvoiceDiscountComponent implements OnInit {
   }
   delete() {
     this.billableService.deleteDiscount(this.lockId).subscribe(data => {
-      this.onDelete.emit(null);
+      this.onDelete.emit(data);
       this.canRemove = false;
     })
+  }
+  onChangeAmount(val) {
+    
+    let value = Number(val);
+    this.discount.amount = value;
   }
   onChange() {
     this.billableService.addDiscount(this.lockId, this.discount).subscribe(data => {
       console.log("data", data);
+      this.onUpdate.emit(data);
       this.canRemove = true;
     })
   }
