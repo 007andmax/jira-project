@@ -597,18 +597,21 @@ app-invoice-form-ticket-edit-service,app-invoice-form-ticket-edit-product {
       .dropdown-menu {
         max-height: 250px;
         overflow: auto;
+        max-width: 120px !important;
       }
 
       .dropdown-item {
         display: flex;
         align-items: center;
+        padding: 0 8px;
         button {
           background: transparent;
           border: none;
         }
         &:hover {
+          background: #f9fafb;
           button {
-            color: white;
+            color: #4c5c6f;
           }
         }
       }
@@ -619,4 +622,47 @@ app-invoice-form-ticket-edit-service,app-invoice-form-ticket-edit-product {
       padding-right: 25px !important;
     }
   }
+}
+
+.billable-invoice-apply-discount {
+  th.invoice-item__col-item,
+  th.invoice-item__col-desc ,
+  th.invoice-item__col-quentity,
+  th.invoice-item__col-amount {
+    border-top: 1px solid #dfe3e9;
+  }
+
+  th.invoice-item__col-item {
+    border-top-left-radius: 4px;
+  }
+  th.invoice-item__col-amount  {
+    border-top-right-radius: 4px;
+  }
+
+  td.invoice-item__col-desc {
+    padding: 0 !important;
+
+    textarea {
+      box-shadow: inset 0px 0px 2px 0px #00000047;
+      border: none;
+      padding: 15px 8px;
+    }
+  }
+
+  td.invoice-item__col-amount {
+    width: 120px;
+    .input-price {
+      width: 100%;
+      text-align: right;
+      border: none;
+      box-shadow: inset 0px 0px 2px 0px #00000047;
+    }
+  }
+
+  .delete-item-container {
+    position: absolute;
+    right: 0;
+    top: 10px;
+  }
+
 }

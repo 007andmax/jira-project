@@ -15,7 +15,7 @@
       </div>
 
       <div class="qt-color-dark qt-lh-131 qt-pr-24 qt-fs-26 qt-text-upper qt-ff-gm" [textContent]="'Invoice#' + invoiceNumber">
-        
+
       </div>
     </div>
 
@@ -49,7 +49,7 @@
         </div>
       </div>
     </div>
-   
+
     <div class="invoice-preview__items">
       <ng-template ngFor let-ticket
       [ngForOf]="invoice.invoiceDataDto.tickets"
@@ -114,7 +114,7 @@
           currency"></div>
         </div>
 
-        <div class="qt-df qt-jc-sb qt-pl-12 qt-pr-12" *ngIf="invoice.invoiceDataDto.invoiceDiscount">
+        <div class="qt-df qt-jc-sb qt-pl-12 qt-pt-10 qt-pr-12" *ngIf="invoice.invoiceDataDto.invoiceDiscount">
           <div class="qt-text-left">Discount</div>
           <div class="invoice-info-value qt-text-right" [textContent]="(-invoice.invoiceDataDto.invoiceDiscount.amount) |
           currency"></div>
