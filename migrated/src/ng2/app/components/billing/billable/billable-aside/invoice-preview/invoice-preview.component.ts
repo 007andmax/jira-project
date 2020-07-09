@@ -44,6 +44,11 @@ export class InvoicePreviewComponent implements OnInit {
     return (hours >= 10 ? hours : '0' + hours) + ':' + (minutes >= 10 ? minutes : '0' + minutes) + ' hr(s)';
 
   }
+  getSelectedTaxes(taxes) {
+    return taxes.map(item => {
+      return `${item.name}`;
+    }).join("<br>");
+  }
   public getDate(date) {
     return moment(new Date(date)).format('DD MMM YYYY');
   }

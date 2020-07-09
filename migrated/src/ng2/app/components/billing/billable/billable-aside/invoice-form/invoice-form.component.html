@@ -53,8 +53,8 @@
  
   <div class="invoice-items" >
     <button *ngIf="!editMode" (click)="editMode = true">edit mode</button>
-    <button *ngIf="editMode">save</button>
-    <button *ngIf="editMode" (click)="editMode = true">cancel</button>
+    <button *ngIf="editMode" (click)="onEditTickets()">save</button>
+    <button *ngIf="editMode" (click)="onCancelTickets()">cancel</button>
     <div *ngIf="!editMode">
       <ng-template ngFor let-ticket [ngForOf]="invoice.invoiceDataDto.tickets" let-i="index" [ngForTrackBy]="trackByIndex">
         <app-invoice-form-ticket-info [ticketsLength]="invoice.invoiceDataDto.tickets.length" (onDelete)="delete(i)"
@@ -71,58 +71,13 @@
 
 
 
-<div class="invoice-item qt-mb-16 qt-w100">
- <div class="qt-df qt-ai-c">
-   <!--  <div class="invoice-item__header qt-w100 qt-ml-30 qt-df qt-ai-c qt-pt-10 qt-pb-10 qt-h40">
-      <div class="invoice-item__number qt-color-white qt-fs-10 qt-pt-4 qt-pb-4 qt-pl-4 qt-pr-4 qt-mr-16" [textContent]="'Tkt# ' + ticket.number"></div>
-      <div class="qt-fs-12 qt-mr-16" ><span class="qt-fs-11 qt-ff-sb">Date</span> {{getDate(ticket.closedAt)}}</div>
-      <div class="qt-fs-12"><span class="qt-fs-11 qt-ff-sb">Subject:</span> {{ticket.subject}}</div>
-    </div>
-    <div class="delete-item-container qt-pl-4">
-      <div class="qt-pointer  qt-sz-16 icon__raw-clear qt-ic-c " ></div>
-    </div> -->
-  </div>
-
-  <table class="invoice-item__table">
-    <thead >
-      <tr>
-        <th></th>
-        <th class="invoice-item__col-item  qt-ff-sb border-top">Item</th>
-        <th class="invoice-item__col-desc  qt-ff-sb border-top" >Description</th>
-        <th class="invoice-item__col-price qt-ff-sb border-top">Unit Price</th>
-        <th class="invoice-item__col-quentity qt-ff-sb border-top">Quantity</th>
-        <th class="invoice-item__col-tax qt-ff-sb border-top">Tax</th>
-        <th class="invoice-item__col-amount qt-ff-sb border-top">Amount</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-
-      <tr>
-        <td>
-          <div class=" qt-pointer qt-sz-20 icon__move-light qt-ic-c"></div>
-        </td>
-        <td class="invoice-item__col-item" ><div class="qt-green-label">Discount</div></td>
-        <td class="invoice-item__col-desc"  ></td>
-        <td class="invoice-item__col-price" ></td>
-         <td class="invoice-item__col-quentity"   ></td>
-        <td class="invoice-item__col-tax"  ></td>
-        <td class="invoice-item__col-amount"  ></td>
-        <td>
-
-        </td>
-      </tr>
-
-
-    </tbody>
-  </table>
-</div>
+<app-invoice-discount (onDelete)="toggleDiscount = false" [lockId]="invoice.lockId" *ngIf="toggleDiscount"></app-invoice-discount>
   </div>
 
   <div class="summary-info qt-df qt-pl-30 qt-pr-30 qt-pb-24 qt-jc-sb">
     <div>
-      <div class="qt-mb-30">
-        <div class="info-button-sm qt-ff-gm"><div class="icon__discount qt-mr-4 qt-sz-16 qt-ic-c"></div> Apply Discount</div>
+      <div class="qt-mb-30" *ngIf="!toggleDiscount">
+        <div class="info-button-sm qt-ff-gm" (click)="toggleDiscount = !toggleDiscount"><div class="icon__discount qt-mr-4 qt-sz-16 qt-ic-c"></div> Apply Discount</div>
       </div>
 
  <app-invoice-regular-note   [invoiceNotes]="invoiceNotes" (onUpdateInvoiceData)="updateInvoiceData($event)"></app-invoice-regular-note>

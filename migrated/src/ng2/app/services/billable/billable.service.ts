@@ -21,7 +21,12 @@ export class BillableService {
     private http: HttpClient,
     private constantsStateService: ConstantsStateService
   ) { }
-
+  public deleteDiscount(lockId) {
+    return this.http.delete(this.apiUrl + `invoice/removeDiscount/${lockId}`);
+  }
+  public addDiscount(lockId,data) {
+    return this.http.post(this.apiUrl + `invoice/addDiscount/${lockId}`, data);
+  }
   public create(lockId,isSend,contactId,addressId) {
   
     return this.http.get(this.apiUrl + `/invoice/create/${lockId}?isSendNotification=${isSend}&billTo=${contactId}&shipTo=${addressId}`);
