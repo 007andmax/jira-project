@@ -1,10 +1,10 @@
-<div class="col-md-6 light-dropdown new-taxes-area" ngbDropdown #taxesDropDown="ngbDropdown">
+<div class="col-md-6 light-dropdown new-taxes-area-edit" ngbDropdown #taxesDropDown="ngbDropdown">
 
   <i class="icn-sm report-caret-icon"></i>
   <input type="text" [value]="getSelectedTaxes()"
          autocomplete="new-password"
          readonly
-         placeholder="Select Taxes"
+         placeholder="Taxes"
          id="dropdownTypeTaxes"
          ngbDropdownToggle />
   <div ngbDropdownMenu
@@ -16,5 +16,5 @@
       </div>
     </ng-template>
   </div>
-  
+
 </div>

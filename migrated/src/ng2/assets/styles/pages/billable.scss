@@ -187,9 +187,9 @@
         }
         tbody {
           tr:last-child {
-            td:nth-child(2) {
-              border-bottom-left-radius: 4px;
-            }
+            // td:nth-child(2) {
+              // border-bottom-left-radius: 4px;
+            // }
             td:last-child {
               border-bottom-right-radius: 4px;
             }
@@ -208,6 +208,7 @@
       &__col-price {
         text-align: right;
         width: 94px;
+
       }
       &__col-quentity {
         text-align: right;
@@ -460,4 +461,162 @@ app-invoice-form {
 
 app-invoice-form-ticket-edit-service,app-invoice-form-ticket-edit-product {
   display: contents;
+}
+
+.billing-aside-edit-mode {
+  color: #16a4fa;
+  border: 1px solid #16a4fa;
+  background-color: white;
+  border-radius: 4px;
+}
+
+.billing-aside-save-mode {
+  border-radius: 4px;
+  background-color: #16a4fa;
+  color: white;
+  border: 1px solid #16a4fa;
+}
+
+.billing-aside-cancel-mode {
+  border-radius: 4px;
+  color: #4f5f79;
+  border: solid 1px #c5cdd5;
+  background-color: white;
+}
+
+
+.invoice-ticket-edit-service-product {
+  td.invoice-item__col-desc {
+    padding: 0;
+    textarea {
+      box-shadow: inset 0px 0px 2px 0px #00000047;
+      border: none;
+      height: 100%;
+      padding: 15px 8px;
+    }
+    &.--product {
+      padding: 8px 8px;
+    }
+  }
+
+
+
+  .invoice-item__col-price {
+    max-width: 100px;
+    width: 100px;
+  }
+
+  td.invoice-item__col-price {
+    vertical-align: top;
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+    &.--product {
+      padding-top: 0  !important;
+      padding-bottom: 0  !important;
+    }
+    .input-price  {
+      margin-top: 8px;
+      display: block;
+      max-width: 100px;
+      border: none;
+      box-shadow: inset 0px 0px 2px 0px #00000047;
+      width: 100%;
+      padding-left: 6px;
+      padding-right: 6px;
+      text-align: right;
+      font-size: 12px;
+      color: #485765;
+      margin-bottom: 8px;
+    }
+  }
+
+
+  td.invoice-item__col-quentity {
+    padding: 0;
+    min-width: 120px;
+    vertical-align: top;
+    padding-top: 7px;
+    padding: 7px 12px;
+
+    .input-qty {
+      text-align: right;
+      width: 100%;
+      border: none;
+      box-shadow: inset 0px 0px 2px 0px #00000047;
+    }
+
+
+    app-ticket-profile-updates-service-timepicker {
+      flex-direction: column;
+  }
+
+    .time.start, .time.end {
+      border: none !important;
+      box-shadow: inset 0px 0px 2px 0px #00000047;
+      margin-left: 0;
+      margin-right: 0;
+      text-align: center;
+      width: 100%;
+    }
+
+    .time.start {
+      margin-bottom: 5px;
+    }
+
+
+    app-ticket-profile-updates-service-duration {
+      display: block;
+      width: 100%;
+    }
+    igx-time-picker {
+      border: none;
+      box-shadow: inset 0px 0px 2px 0px #00000047;
+    }
+  }
+
+  .invoice-item__col-tax  {
+    width: 80px;
+    padding: 0;
+    vertical-align: top;
+    padding-top: 8px;
+  }
+  td.invoice-item__col-tax {
+    padding: 0;
+    vertical-align: top;
+    .new-taxes-area-edit {
+      margin: 0 !important;
+      padding: 0;
+      width: 100%;
+
+      .report-caret-icon {
+        position: absolute;
+        top: 17px !important;
+        right: 11px;
+      }
+
+      .dropdown-menu {
+        max-height: 250px;
+        overflow: auto;
+      }
+
+      .dropdown-item {
+        display: flex;
+        align-items: center;
+        button {
+          background: transparent;
+          border: none;
+        }
+        &:hover {
+          button {
+            color: white;
+          }
+        }
+      }
+    }
+
+    input {
+      border: none !important;
+      padding-right: 25px !important;
+    }
+  }
 }

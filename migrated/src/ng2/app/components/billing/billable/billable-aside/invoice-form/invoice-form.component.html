@@ -41,7 +41,7 @@
 
     <div class="qt-input-block qt-mr-16 qt-w100 input_inside_white_important">
       <label>Invoice Date</label>
-      <app-date-picker   [editMode]="true" [editDate]="invoice.invoiceDataDto.date"   [useMinDate]="false" (onChange)="onChangeDate($event)"></app-date-picker>
+      <app-date-picker [editMode]="true" [editDate]="invoice.invoiceDataDto.date" [useMinDate]="false" (onChange)="onChangeDate($event)"></app-date-picker>
     </div>
 
     <div class="qt-input-block qt-w100 input_inside_white_important">
@@ -50,19 +50,21 @@
 
     </div>
   </div>
- 
+
   <div class="invoice-items" >
-    <button *ngIf="!editMode" (click)="editMode = true">edit mode</button>
-    <button *ngIf="editMode" (click)="onEditTickets()">save</button>
-    <button *ngIf="editMode" (click)="onCancelTickets()">cancel</button>
+    <div class="qt-df qt-jc-fe qt-mb-10 qt-pr-30 qt-pl-30">
+      <button class="billing-aside-edit-mode" *ngIf="!editMode" (click)="editMode = true">Edit</button>
+      <button class="qt-ml-10 billing-aside-save-mode" *ngIf="editMode" (click)="onEditTickets()">Save</button>
+      <button class="qt-ml-10 billing-aside-cancel-mode" *ngIf="editMode" (click)="onCancelTickets()">Cancel</button>
+    </div>
     <div *ngIf="!editMode">
       <ng-template ngFor let-ticket [ngForOf]="invoice.invoiceDataDto.tickets" let-i="index" [ngForTrackBy]="trackByIndex">
         <app-invoice-form-ticket-info [ticketsLength]="invoice.invoiceDataDto.tickets.length" (onDelete)="delete(i)"
           [ticket]="ticket"></app-invoice-form-ticket-info>
       </ng-template>
     </div>
-    
-    
+
+
     <div *ngIf="editMode">
       <ng-template ngFor let-ticket [ngForOf]="editTickets" let-i="index" [ngForTrackBy]="trackByIndex">
         <app-invoice-form-ticket-edit [ticket]="ticket"></app-invoice-form-ticket-edit>
