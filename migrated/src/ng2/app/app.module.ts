@@ -131,7 +131,7 @@ import { searchTextPipe } from './components/device/_pipe/searchText.pipe';
 import { HighlightDirective } from './components/device/_directive/highlight.directive';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { SoftwarePipe } from './pipe/software.pipe';
-import { CompaniesProfileComponent } from './components/companies/company-profile/company-profile.component';
+// import { CompaniesProfileComponent } from './components/companies/company-profile/company-profile.component';
 
 /**
  * declare angular
@@ -177,9 +177,9 @@ angular.module('quicktech')
   .directive(
     'companiesComponent',
     downgradeComponent({component: CompaniesComponent}))
-    .directive(
-      'companiesProfileComponent',
-      downgradeComponent({ component: CompaniesProfileComponent }))
+    // .directive(
+    //   'companiesProfileComponent',
+    //   downgradeComponent({ component: CompaniesProfileComponent }))
     .directive(
     'usersComponent',
     downgradeComponent({component: UsersComponent}))
@@ -271,7 +271,7 @@ angular.module('quicktech')
     CompaniesHeaderComponent,
     CompaniesTableComponent,
     CompanyAddAsideComponent,
-    CompaniesProfileComponent,
+    // CompaniesProfileComponent,
     ConfirmComponent,
     DownloadAgentComponent,
     CompanySubscriptionComponent,
@@ -426,10 +426,10 @@ angular.module('quicktech')
           path: 'ng2/device/file',
           component: FileComponent
         },
-        {
-          path: 'ng2/companyProfile',
-          component: CompaniesProfileComponent,
-        }
+        // {
+        //   path: 'ng2/companyProfile',
+        //   component: CompaniesProfileComponent,
+        // }
       ],
       {
         useHash: true,
@@ -480,7 +480,7 @@ angular.module('quicktech')
     LockScreenComponent,
     TicketTaskComponent,
     AppComponent,
-    CompaniesProfileComponent
+    // CompaniesProfileComponent
     // RecurringTicketsComponent
   ],
   providers: [
