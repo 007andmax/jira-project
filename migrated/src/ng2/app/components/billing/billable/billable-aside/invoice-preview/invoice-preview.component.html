@@ -134,12 +134,12 @@
     <div>
       <div class="qt-mb-20">
         <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-dark qt-ff-gm qt-lh-133">Customer Note</div>
-        <div class="qt-fs-13 qt-lh-154 " *ngIf="selectedNote" [textContent]="selectedNote.line1"></div>
+        <div class="qt-fs-13 qt-lh-154 note" *ngIf="selectedNote" [textContent]="selectedNote.line1"></div>
       </div>
 
       <div>
         <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-dark qt-ff-gm qt-lh-133">Terms & Conditions</div>
-        <div class="qt-fs-13 qt-lh-154 " *ngIf="globalNote" [textContent]="globalNote.line1"></div>
+        <div class="qt-fs-13 qt-lh-154 note" *ngIf="globalNote" [textContent]="globalNote.line1"></div>
       </div>
     </div>
 

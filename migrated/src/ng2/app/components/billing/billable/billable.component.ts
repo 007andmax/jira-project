@@ -137,6 +137,7 @@ export class BillableComponent implements OnInit, OnDestroy {
       }
       this.onFilterName();
       this.showPreloader = false;
+      this.cd.detectChanges();
     })
   }
   onFilter(field) {

@@ -171,10 +171,13 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   }
   onUpdateCompany() {
     let data = this.companyEdit.getCompany();
-    this.company.contacts[0].phoneNumbers = data.contacts[0].phoneNumbers;
+    this.company = data;
   }
   onEditCustomer() {
     this.billableStateService.onEditCustomer(this.company);
+  }
+  onUpdateSubjectTicket(subject,i) {
+    this.invoice.invoiceDataDto.tickets[i].subject = subject;
   }
   delete(i) {
     this.confirmStateService.setConfirmAction(REMOVE_TICKET_INVOICE);
