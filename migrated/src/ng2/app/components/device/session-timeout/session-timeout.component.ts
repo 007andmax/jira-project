@@ -4,7 +4,6 @@ import { first } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { CommonHttpServices } from '../_services/common_http.service';
 import { CommonServices } from '../_services/common.service';
-import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-session-timeout',
@@ -14,7 +13,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 export class SessionTimeoutComponent implements OnInit {
 
   constructor(private hardwareService: HardwareService, private toastr: ToastrService,
-	             private commonHttpServices: CommonHttpServices, private commonServices: CommonServices, public modalRef: BsModalRef) {}
+	             private commonHttpServices: CommonHttpServices, private commonServices: CommonServices) {}
 
   ngOnInit() {
 	

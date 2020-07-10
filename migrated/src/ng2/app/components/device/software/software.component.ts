@@ -6,8 +6,6 @@ import { DeviceDetailService } from './../_services/device_detail.service';
 import { CommonHttpServices } from './../_services/common_http.service';
 import { ExcelService } from './../_services/download_csv.service';
 import { first } from 'rxjs/operators';
-import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { BsModalService } from 'ngx-bootstrap/modal';
 import { HardwareService } from '../_services/hardware.service';
 import { CONFIGCONSTANTS } from '../config/app-constants';
 import { Router } from '@angular/router';
@@ -22,7 +20,6 @@ declare var $:any;
 export class SoftwareComponent implements OnInit, OnDestroy {
 
   url = 'http://localhost:4200/upload';
-  private modalRef: BsModalRef;
   formData: FormData;
   loading = false;
   myDateValue: Date;
@@ -60,7 +57,6 @@ export class SoftwareComponent implements OnInit, OnDestroy {
   dtTrigger = new Subject();
   constructor(private softwareListService: SoftwareListService,
       private toastr: ToastrService,
-      private modalService: BsModalService,
       private deviceDetailService: DeviceDetailService,
       private hardwareService: HardwareService,
       private router: Router,
@@ -139,12 +135,12 @@ export class SoftwareComponent implements OnInit, OnDestroy {
     }
   }
 
-  openModal (template: TemplateRef<any>, id) {
-    if (this.selectedList.length === 0 && id !== '') {
-      this.selectedList.push(id);
-    }
-    this.modalRef = this.modalService.show(template, { class: 'modal-md' });
-  }
+  // openModal (template: TemplateRef<any>, id) {
+  //   if (this.selectedList.length === 0 && id !== '') {
+  //     this.selectedList.push(id);
+  //   }
+  //   this.modalRef = this.modalService.show(template, { class: 'modal-md' });
+  // }
 
   deleteSoftware() {
     this.loading = true;  
@@ -166,7 +162,6 @@ export class SoftwareComponent implements OnInit, OnDestroy {
 
   decline () {
     this.selectedList = [];
-    this.modalRef.hide();
   }
 
   ngOnDestroy() {

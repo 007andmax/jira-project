@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { CommonHttpServices } from './_services/common_http.service';
 import { RemoteControlService } from './_services/remoteControl.service';
 import { CommonServices } from './_services/common.service';
@@ -7,7 +7,6 @@ import { ToastrService } from 'ngx-toastr';
 import { HardwareService } from './_services/hardware.service';
 import { DeviceDetailService } from './_services/device_detail.service';
 import { first } from 'rxjs/operators';
-import { LockScreenComponent } from './lock-screen/lock-screen.component';
 declare var $:any;
 
 @Component({
@@ -27,29 +26,40 @@ export class DeviceComponent implements OnInit {
   remoteConnectPort = 0;
   deviceType = '';
   deviceImg = '../../../ng1/images/device/device.svg';
-  modalRef: BsModalRef;
-  constructor(private modalService: BsModalService, private commonHttpServices: CommonHttpServices,
+  closeResult = '';
+  constructor(private modalService: NgbModal, private commonHttpServices: CommonHttpServices,
     private commonServices: CommonServices, private toastr: ToastrService,
     private hardwareService: HardwareService,
     private deviceDetailService: DeviceDetailService, 
     private remoteControlService: RemoteControlService) {}
   openModal(template) {
     if (this.deviceDetail.online === true) {
-      this.modalRef = this.modalService.show(
-        template,
-        Object.assign({}, { class: 'remote-control modal-dialog-centered' })
-      );
+      this.modalService.open(template, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+        this.closeResult = `Closed with: ${result}`;
+      }, (reason) => {
+        this.closeResult = `Dismissed ${this.getDismiss(reason)}`;
+      });
     } else {
       this.toastr.error('The device is offline!');
     }
     
   }
 
+  private getDismiss(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
   lock() {
-    this.modalRef = this.modalService.show(
-      LockScreenComponent,
-      Object.assign({}, { class: 'remote-control modal-dialog-centered lock', backdrop: true })
-    );
+    // this.modalRef = this.modalService.show(
+    //   LockScreenComponent,
+    //   Object.assign({}, { class: 'remote-control modal-dialog-centered lock', backdrop: true })
+    // );
   }
   
   ngOnInit(): void {
@@ -176,7 +186,7 @@ export class DeviceComponent implements OnInit {
       .subscribe(resp => {
         this.loading = false;
         if (type === 'CSS') {
-          this.modalRef.hide();
+          // this.modalRef.hide();
           // this.getViewer();
           this.getConstant(resp.sessionId);
         } else {

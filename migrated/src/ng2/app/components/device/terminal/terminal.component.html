@@ -118,10 +118,10 @@
                         data-tooltip="Copy to terminal"
                         >Copy to terminal</a
                       >
-                      <div class="btn-group" dropdown>
+                      <div class="btn-group" ngbDropdown>
                         <button
                           id="button-basic"
-                          dropdownToggle
+                          ngbDropdownToggle
                           type="button"
                           class="dropdown-toggle"
                           aria-controls="dropdown-basic"
@@ -130,12 +130,12 @@
                         </button>
                         <ul
                           id="dropdown-basic"
-                          *dropdownMenu
+                          ngbDropdownMenu
                           class="dropdown-menu"
                           role="menu"
                           aria-labelledby="button-basic"
                         >
-                          <li role="menuitem">
+                          <li role="menuitem" ngbDropdownItem>
                             <a class="dropdown-item" href="javascript:void(0);">
                               <img
                                 src="../../../../../ng1/images/device/edit-cmd.svg"
@@ -145,7 +145,7 @@
                               Edit</a
                             >
                           </li>
-                          <li role="menuitem">
+                          <li role="menuitem" ngbDropdownItem>
                             <a class="dropdown-item" href="javascript:void(0);" (click)="openModal(template)">
                               <img
                                 src="../../../../../ng1/images/device/remove-terminal.svg"
@@ -180,10 +180,10 @@
                         data-tooltip="Copy to terminal"
                         >Copy to terminal</a
                       >
-                      <div class="btn-group" dropdown>
+                      <div class="btn-group" ngbDropdown>
                         <button
                           id="button-basic"
-                          dropdownToggle
+                          ngbDropdownToggle
                           type="button"
                           class="dropdown-toggle"
                           aria-controls="dropdown-basic"
@@ -192,12 +192,12 @@
                         </button>
                         <ul
                           id="dropdown-basic"
-                          *dropdownMenu
+                          ngbDropdownMenu
                           class="dropdown-menu"
                           role="menu"
                           aria-labelledby="button-basic"
                         >
-                          <li role="menuitem">
+                          <li role="menuitem" ngbDropdownItem>
                             <a class="dropdown-item" href="javascript:void(0);">
                               <img
                                 src="../../../../../ng1/images/device/edit-cmd.svg"
@@ -207,7 +207,7 @@
                               Edit</a
                             >
                           </li>
-                          <li role="menuitem">
+                          <li role="menuitem" ngbDropdownItem>
                             <a class="dropdown-item" href="javascript:void(0);" (click)="openModal(template)">
                               <img
                                 src="../../../../../ng1/images/device/remove-terminal.svg"
@@ -246,24 +246,21 @@
                         data-tooltip="Copy to terminal"
                         >Copy to terminal</a
                       >
-                      <div class="btn-group" dropdown>
+                      <div class="btn-group" ngbDropdown>
                         <button
                           id="button-basic"
-                          dropdownToggle
+                          ngbDropdownToggle
                           type="button"
                           class="dropdown-toggle"
-                          aria-controls="dropdown-basic"
                         >
                           Button dropdown
                         </button>
                         <ul
                           id="dropdown-basic"
-                          *dropdownMenu
+                          ngbDropdownMenu
                           class="dropdown-menu"
-                          role="menu"
-                          aria-labelledby="button-basic"
                         >
-                          <li role="menuitem">
+                          <li role="menuitem" ngbDropdownItem>
                             <a class="dropdown-item" href="javascript:void(0);">
                               <img
                                 src="../../../../../ng1/images/device/edit-cmd.svg"
@@ -273,7 +270,7 @@
                               Edit</a
                             >
                           </li>
-                          <li role="menuitem">
+                          <li role="menuitem" ngbDropdownItem>
                             <a class="dropdown-item" href="javascript:void(0);" (click)="openModal(template)">
                               <img
                                 src="../../../../../ng1/images/device/remove-terminal.svg"
@@ -911,10 +908,10 @@
     
 <!-- Delete Confirmation -->
 
-<ng-template #template class="cmn-terminal-modal">
+<ng-template #template let-modal class="cmn-terminal-modal">
   <div class="modal-header">
     <h2>Delete Script</h2>
-    <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()">
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <img
       src="../../../../../ng1/images/device/close.svg"
       alt="close"
@@ -927,7 +924,7 @@
         <p>Are you sure you want to delete <strong>Enable USB access</strong> script?</p>
     </div>
     <div class="confirm-btn">
-      <button type="button" class="btn btn-secondary" aria-label="Close" (click)="modalRef.hide()">
+      <button type="button" class="btn btn-secondary" aria-label="Close" (click)="modal.dismiss('Cross click')">
         Cancel
       </button>
       <button type="button" class="btn btn-remove">

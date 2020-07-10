@@ -4,8 +4,6 @@ import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions, 
 import { TicketService } from './../_services/ticket.service';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
-import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { BsModalService } from 'ngx-bootstrap/modal';
 import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from './../../../../environments/environment';
 import { searchTextPipe } from './../_pipe/searchText.pipe';
@@ -26,7 +24,6 @@ export class TicketTaskComponent implements OnInit, OnDestroy {
   };
   @ViewChild('ticketFrm') form: any;
   url = environment.apiEndpoint + 'file?isAvatar=false';
-  private modalRef: BsModalRef;
   formData: FormData;
   files: UploadFile[];
   loading = false;
@@ -78,7 +75,6 @@ export class TicketTaskComponent implements OnInit, OnDestroy {
 
   constructor(private ticketService: TicketService,
       private toastr: ToastrService,
-      private modalService: BsModalService,
       public commonService: CommonServices,
       private deviceDetailService: DeviceDetailService) {
     this.options = { concurrency: 1, maxUploads: 10, maxFileSize: 1000000 };
