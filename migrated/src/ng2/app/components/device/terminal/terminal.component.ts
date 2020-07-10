@@ -38,7 +38,7 @@ export class TerminalComponent implements OnInit {
   
  
   openModal(template) {
-    this.modalService.open(template, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.modalService.open(template, {ariaLabelledBy: 'modal-basic-title' ,windowClass: 'cmn-terminal-modal confirm-control' , centered: true}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismiss(reason)}`;
