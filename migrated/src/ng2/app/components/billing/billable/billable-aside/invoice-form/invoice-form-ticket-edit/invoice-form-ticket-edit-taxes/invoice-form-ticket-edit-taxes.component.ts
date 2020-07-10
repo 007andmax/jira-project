@@ -37,12 +37,9 @@ export class InvoiceFormTicketEditTaxesComponent implements OnInit, OnDestroy {
     if (this.taxesStateService.getTaxes().length > 0) this.taxes = [...this.taxes,...this.taxesStateService.getTaxes()];
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
       this.taxes = [...this.taxes,...data];
-      console.log("this.taxes",this.taxes);
-      console.log("this.data",data);
     })
     this.sub.add(getOnTaxess);
     this.onInitClearState();
-
   }
 
   public onAddTax() {
@@ -56,13 +53,10 @@ export class InvoiceFormTicketEditTaxesComponent implements OnInit, OnDestroy {
   */
   public addTax(data) {
     this.taxes.push(data);
-    console.log("12");
   }
   public setEditItems(data) {
     this.selectedTax = data;
     this.cd.detectChanges();
-    console.log("this.selectedTax", this.selectedTax);
-    console.log("this.taxes",this.taxes);
   }
 
   /**

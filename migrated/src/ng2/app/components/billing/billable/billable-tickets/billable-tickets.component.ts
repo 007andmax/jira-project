@@ -36,7 +36,7 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
     private ticketsService: TicketsService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
-    private usersStateService:UsersStateService,
+    private usersStateService: UsersStateService,
     private companiesStateService: CompaniesStateService,
     private notificationStateService: NotificationStateService,
     private billableRealTimeService: BillableRealTimeService,
@@ -51,10 +51,8 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
       window.location.href = '#/ng2/billable';
       return;
     }
-    console.log("this.billableProfile", this.billableProfile);
     this.onFilterTicketNumber();
     this.billableProfile.tickets.reverse();
-
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_TICKET_BILLABLE) {
@@ -67,23 +65,21 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
-
     let changeBillable = this.billableRealTimeService.changeBillable.subscribe(data => {
       if (data.action == 'BILLABLE_EXPENSE_REMOVED') {
-       if (data.data.companyId === this.billableProfile.id) {
-        let ticketIndex = this.billableProfile.tickets.findIndex(item => item.id === data.data.ticketId);
-        if (ticketIndex > -1) {
-          this.billableProfile.tickets.splice(ticketIndex, 1);
-          this.billableProfile.updateCountTickets();
-          this.billableProfile.updateTotal();
+        if (data.data.companyId === this.billableProfile.id) {
+          let ticketIndex = this.billableProfile.tickets.findIndex(item => item.id === data.data.ticketId);
+          if (ticketIndex > -1) {
+            this.billableProfile.tickets.splice(ticketIndex, 1);
+            this.billableProfile.updateCountTickets();
+            this.billableProfile.updateTotal();
+          }
         }
-       }
-       
       }
     });
     this.sub.add(changeBillable);
   }
- 
+
   goToSettings() {
     let body = document.querySelector('.left-panel__category-wrap');
     var link = document.createElement('a');
@@ -94,7 +90,6 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
     link.dispatchEvent(e);
   }
   editTicket(id) {
-
     this.ticketsStateService.onOpenTicket();
     this.ticketsService.getTicket(id).subscribe(data => {
       this.ticketsStateService.onEditTicket(data);
@@ -109,7 +104,6 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
         item.selected = false;
       }
     })
-    console.log("this.billableProfile.tickets", this.billableProfile.tickets);
   }
   onCreateInvoice() {
     let listIds = [];
@@ -120,7 +114,6 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
   }
   onToggleTicket(ticket) {
     ticket.selected = !ticket.selected;
-    console.log("ticket.selected", ticket.selected);
   }
   deleteTicket(ticket) {
     this.confirmStateService.setConfirmAction(REMOVE_TICKET_BILLABLE);
@@ -137,7 +130,6 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
     return moment(new Date(date)).format('DD MMM YYYY');
   }
   onFilter(field) {
-
     let index = this.filter.findIndex(item => item.field === field);
     if (index > -1) {
       let sort = this.filter[index].filter;
@@ -150,22 +142,16 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
           this.filter[index].filter = 'DESC';
           this.billableProfile.tickets.reverse();
         }
-
       }
       if (field === 'ticketNumber') {
         if (sort === '') this.clearFilter();
         if (sort === '' || sort === 'DESC') {
-
           this.filter[index].filter = 'ASC';
           this.onFilterTicketNumber();
-
         } else {
-
           this.filter[index].filter = 'DESC';
           this.billableProfile.tickets.reverse();
         }
-
-
       }
       if (field === 'subject') {
         if (sort === '') this.clearFilter();
@@ -176,10 +162,7 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
           this.filter[index].filter = 'DESC';
           this.billableProfile.tickets.reverse();
         }
-
-
       }
-
       if (field === 'sum') {
         if (sort === '') this.clearFilter();
         if (sort === '' || sort === 'DESC') {
@@ -189,10 +172,7 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
           this.filter[index].filter = 'DESC';
           this.billableProfile.tickets.reverse();
         }
-
-
       }
-
     }
     this.cd.detectChanges();
   }
@@ -216,7 +196,6 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
     this.filter.forEach(item => item.filter = '');
   }
   back() {
-
     let body = document.querySelector('.left-panel__category-wrap');
     var link = document.createElement('a');
     body.appendChild(link);

@@ -56,7 +56,6 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.onSetEditTickets();
-    console.log("editTickets", this.editTickets);
     this.globalNote = this.invoiceNotes.filter(item => item.noteType === "GLOBAL")[0];
     if (this.billableStateService.getGlobalNote()) this.globalNote = this.billableStateService.getGlobalNote();
     this.currentCompany = this.companiesStateService.getCurrentCompany();
@@ -69,7 +68,6 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
         this.company.contacts[0].lastName = data.data.companyInfo.contacts[0].lastName;
         this.company.addresses[0].addressWithSuitNumberAndPostalCode = data.data.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode;
         this.company.contacts[0].primaryEmail = data.data.companyInfo.contacts[0].primaryEmail;
-        console.log("this.company", this.company);
       }
     })
     this.sub.add(getChangeCompanies);
@@ -101,7 +99,6 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   onChangeTax() {
     let data = { "taxNumber": { "taxIdDescription": this.invoiceTaxNumber.taxIdDescription, "taxId": this.invoiceTaxNumber.taxId } };
     this.invoiceTicketsService.updateInvoiceContact(data).subscribe(res => {
-
     })
   }
   getDuration(input) {
@@ -109,7 +106,6 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
       hours = Math.floor(timeInMinutes / 60),
       minutes = Math.round(timeInMinutes - (hours * 60));
     return (hours >= 10 ? hours : '0' + hours) + ':' + (minutes >= 10 ? minutes : '0' + minutes) + ' hr(s)';
-
   }
   private onSetEditTickets() {
     this.editTickets = this.invoice.invoiceDataDto.tickets.map(item => {
@@ -119,7 +115,6 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
 
   onCheckUpdateGlobalNote() {
     if (this.globalNote) this.changeGlobalNote = true;
-
   }
 
   onUpdateGlobalNote() {
@@ -140,7 +135,6 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   }
   public onChangeInvoiceNumber() {
     let request: PartialUpdate = new PartialUpdate(null, null, this.invoiceNumber, null, null, null);
-    console.log("request", request);
     this.billableService.updateInvoiceData(this.invoice.lockId, request).subscribe(data => {
       this.validate.resetNumber();
     }, err => {
@@ -148,17 +142,13 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     })
   }
   onChangeDate(date) {
-    console.log("date", date);
     let invoiceDate = this.parseDateFromDatePicker(new Date(date.year, date.month - 1, date.day));
-    console.log("invoiceDate", invoiceDate);
     let request: PartialUpdate = new PartialUpdate(invoiceDate, null, this.invoiceNumber, null, null, null);
-    console.log("request", request);
     this.updateInvoiceData(request);
     this.invoice.invoiceDataDto.date = invoiceDate;
   }
   private updateInvoiceData(request) {
     this.billableService.updateInvoiceData(this.invoice.lockId, request).subscribe(data => {
-
     })
   }
   onChangeDueDate(date) {
@@ -169,28 +159,22 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   }
   onEditTickets() {
     let expensesToUpdate = [];
-    console.log("this.editTickets", this.editTickets);
     this.editTickets.forEach((item, index) => {
       expensesToUpdate = [...expensesToUpdate, ...item.getDateForUpdate()];
     });
-    console.log("expensesToUpdate", expensesToUpdate);
     let request: PartialUpdate = new PartialUpdate(null, null, null, null, null, expensesToUpdate);
-    console.log("request", request);
     this.onUpdateInvoice.emit(request);
   }
   public onCancelTickets() {
     this.onSetEditTickets();
     this.editMode = false;
-    console.log("this.editTickets", this.editTickets);
   }
   onUpdateCompany() {
     let data = this.companyEdit.getCompany();
     this.company.contacts[0].phoneNumbers = data.contacts[0].phoneNumbers;
-
   }
   onEditCustomer() {
     this.billableStateService.onEditCustomer(this.company);
-
   }
   delete(i) {
     this.confirmStateService.setConfirmAction(REMOVE_TICKET_INVOICE);

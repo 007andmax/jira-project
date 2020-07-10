@@ -30,7 +30,6 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
   @ViewChild('saveAndPrintBtn') saveAndPrintBtn: DisabledBtnDirective;
   @ViewChild('saveAndDownloadBtn') saveAndDownloadBtn: DisabledBtnDirective;
   @ViewChild('formInvoice') formInvoice: InvoiceFormComponent;
- 
   opened: boolean = false;
   invoiceTaxNumber: InvoiceTaxNumber;
   invoiceNotes: Array<InvoiceNote> = [];
@@ -42,7 +41,7 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
   company: CompanyProfile = new CompanyProfile();
   invoiceNumber: string;
   isUnlock: boolean = false;
-  isInit:boolean = false;
+  isInit: boolean = false;
   billableTaimer: BillableTaimer;
   timer;
   apiUrl = environment.apiUrl;
@@ -50,17 +49,16 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
   constructor(private billableStateService: BillableStateService,
     private companiesService: CompaniesService,
     public cd: ChangeDetectorRef,
-    private companiesStateService:CompaniesStateService,
+    private companiesStateService: CompaniesStateService,
     private notificationStateService: NotificationStateService,
     private confirmStateService: ConfirmStateService,
-    private invoiceRealTimeService:InvoiceRealTimeService,
+    private invoiceRealTimeService: InvoiceRealTimeService,
     private billableService: BillableService) { }
 
 
   ngOnInit() {
 
     let changeNumber = this.invoiceRealTimeService.changeNumber.subscribe(data => {
-
       if (data.action === 'NUMBER_CHANGED' && !this.invoiceIsCreating()) {
         this.invoiceNumber = data.data.numPart;
         this.cd.detectChanges();
@@ -90,31 +88,27 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
     let getOnCreate = this.billableStateService.getOnCreate().subscribe(data => {
       this.billableProfile = this.billableStateService.getBillableProfile();
       this.opened = true;
-
       this.getInvoiceNote();
       this.getTaxNumber();
       this.getActualNumber();
-      console.log("data", data);
       this.getInvoiceLock(data, true);
-      // this.billableProfile = this.billableStateService.getBillableProfile();
     })
     this.sub.add(getOnCreate);
-  
   }
   public onUpdateInvoice(request) {
     this.isUdpateInvoice = true;
-    this.billableService.updateInvoiceData(this.invoice.lockId, request).subscribe((data:any) => {
+    this.billableService.updateInvoiceData(this.invoice.lockId, request).subscribe((data: any) => {
       this.invoice.setInvoiceDataDto(data.invoiceDataDto);
       this.isUdpateInvoice = false;
       this.formInvoice.onCancelTickets();
       this.cd.detectChanges();
-    },err => {
+    }, err => {
       this.isUdpateInvoice = false;
     })
   }
- private invoiceIsCreating () {
-   return this.saveAndSendBtn.isBlock() && this.saveAndPrintBtn.isBlock() && this.saveAndDownloadBtn.isBlock();
- }
+  private invoiceIsCreating() {
+    return this.saveAndSendBtn.isBlock() && this.saveAndPrintBtn.isBlock() && this.saveAndDownloadBtn.isBlock();
+  }
   unlock() {
     this.billableService.unlock(this.invoice.lockId).subscribe(data => {
       this.billableStateService.setGlobalNote(null);
@@ -142,17 +136,15 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
   saveAndSend() {
     this.disabledSaveBtns();
     this.billableService.create(this.invoice.lockId, true, this.invoice.invoiceDataDto.billTo[0].id, this.invoice.invoiceDataDto.shipTo[0].id).subscribe(data => {
-      //  http://localhost:4200/invoice/show/lock/a6e7c281-587a-4017-af31-fbf18b07d5e8/pdf?isEditable=true&shipTo=aea6cb98-9302-42b7-b013-681232f058d2&billTo=aea6cb98-9302-42b7-b013-681232f058d2
       this.unlock();
       this.onShowNotificationAfterCreate();
-     this.activeSaveBtns();
+      this.activeSaveBtns();
     })
   }
   saveAndPrint() {
     this.disabledSaveBtns();
     window.open(this.apiUrl + `/invoice/show/lock/${this.invoice.lockId}/pdf?isEditable=${true}&billTo=${this.invoice.invoiceDataDto.billTo[0].id}&shipTo=${this.invoice.invoiceDataDto.shipTo[0].id}`, "_blank");
     this.billableService.create(this.invoice.lockId, false, this.invoice.invoiceDataDto.billTo[0].id, this.invoice.invoiceDataDto.shipTo[0].id).subscribe(data => {
-      //  http://localhost:4200/invoice/show/lock/a6e7c281-587a-4017-af31-fbf18b07d5e8/pdf?isEditable=true&shipTo=aea6cb98-9302-42b7-b013-681232f058d2&billTo=aea6cb98-9302-42b7-b013-681232f058d2
       this.unlock();
       this.onShowNotificationAfterCreate();
       this.activeSaveBtns();
@@ -162,7 +154,6 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
     this.disabledSaveBtns();
     window.open(this.apiUrl + `/invoice/show/lock/${this.invoice.lockId}/pdf?isDownload=${true}&shipTo=${this.invoice.invoiceDataDto.shipTo[0].id}&billTo=${this.invoice.invoiceDataDto.billTo[0].id}.pdf`, "_blank");
     this.billableService.create(this.invoice.lockId, false, this.invoice.invoiceDataDto.billTo[0].id, this.invoice.invoiceDataDto.shipTo[0].id).subscribe(data => {
-      //  http://localhost:4200/invoice/show/lock/a6e7c281-587a-4017-af31-fbf18b07d5e8/pdf?isEditable=true&shipTo=aea6cb98-9302-42b7-b013-681232f058d2&billTo=aea6cb98-9302-42b7-b013-681232f058d2
       this.unlock();
       this.onShowNotificationAfterCreate();
       this.activeSaveBtns();
@@ -178,31 +169,26 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
   private getInvoiceNote() {
     this.billableService.getInvoiceNote().subscribe(data => {
       this.invoiceNotes = data;
-      console.log("invoiceNotes", this.invoiceNotes);
     })
   }
   private getTaxNumber() {
     this.billableService.getTaxNumber().subscribe(data => {
       this.invoiceTaxNumber = data;
-      console.log("invoiceTaxNumber", this.invoiceTaxNumber);
     })
   }
   private getActualNumber() {
     this.billableService.getActualNumber().subscribe((data: any) => {
-      console.log("data", data);
       this.invoiceNumber = data.number;
     })
   }
   private getInvoiceLock(ticketsIds, getComapny = false) {
     this.billableService.getInvoiceLock(ticketsIds).subscribe(data => {
       this.invoice = data;
-      console.log("invoice", data);
       this.getInvoiceLockTime(this.invoice.lockId, getComapny);
     })
   }
   private getInvoiceLockTime(id, getComapny) {
     this.billableService.getInvoiceLockTime(id).subscribe((data: any) => {
-      console.log("data", data);
       this.billableTaimer = new BillableTaimer(data.time);
       this.timer = setInterval(() => {
         if (this.billableTaimer.seconds === 0) {
@@ -217,7 +203,7 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
       if (!getComapny) {
         this.showPreloader = false;
         this.isInit = true;
-      } 
+      }
     })
   }
 

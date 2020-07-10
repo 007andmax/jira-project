@@ -3,7 +3,7 @@
 (function () {
 
   angular.module('quicktech.core.billable').controller('quicktech.core.billable.createInvoiceCtrl',
-    ['$scope', 'BillableService', 'CompaniesService', 'Downloader',  'quicktech.common.services.UserNotificationService', '$timeout', '$rootScope', 'EmailSettingsService', 'FilesService',
+    ['$scope', 'BillableService', 'CompaniesService', 'Downloader', 'quicktech.common.services.UserNotificationService', '$timeout', '$rootScope', 'EmailSettingsService', 'FilesService',
       function ($scope, BillableService, CompaniesService, Downloader, UserNotificationService, $timeout, $rootScope, EmailSettingsService, FilesService) {
 
         var locksCount = 0;
@@ -57,19 +57,19 @@
           },
         ]
 
-        BillableService.getInvoiceData(function(res) {
+        BillableService.getInvoiceData(function (res) {
           var data = res.data;
-           
-         
+
+
           if (false) {
             var requests = 0;
 
             for (var i = 0; i < placeholderNotes.length; i++) {
-              BillableService.createNote(placeholderNotes[i], function(res) {
+              BillableService.createNote(placeholderNotes[i], function (res) {
                 requests++;
 
                 if (request === 6) {
-                  BillableService.getInvoiceData(function(res) {
+                  BillableService.getInvoiceData(function (res) {
                     var data = res.data;
 
                     adaptNotes(data);
@@ -83,11 +83,11 @@
 
 
           function adaptNotes(data) {
-            $scope.regularNotes = data.filter(function(el) {
+            $scope.regularNotes = data.filter(function (el) {
               return el.noteType === 'REGULAR' && el.title;
             });
 
-            $scope.globalNote = data.filter(function(el) {
+            $scope.globalNote = data.filter(function (el) {
               return el.noteType === 'GLOBAL';
             })[0];
 
@@ -108,12 +108,12 @@
           taxIdDescription: '',
           taxId: ''
         };
-        EmailSettingsService.getTaxNumber(function(resp) {
+        EmailSettingsService.getTaxNumber(function (resp) {
           $scope.taxIdData = resp || taxIdData;
         });
 
-        $scope.changeTaxIdData = function() {
-          EmailSettingsService.updateTaxNumber($scope.taxIdData, function(resp) {
+        $scope.changeTaxIdData = function () {
+          EmailSettingsService.updateTaxNumber($scope.taxIdData, function (resp) {
           })
 
           BillableService.updateInvoiceData({ taxId: $scope.taxIdData.taxId }, $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId)
@@ -121,7 +121,7 @@
         };
 
 
-        $scope.goBackToList = function() {
+        $scope.goBackToList = function () {
           $scope.unlockAllTickets();
 
           $rootScope.hideInvoiceWhenBack = true;
@@ -132,11 +132,11 @@
         $scope.isRegularNoteUpdated = false;
         $scope.isGlobalNoteUpdated = false;
 
-        $scope.hideRegularNoteButton = function(state) {
+        $scope.hideRegularNoteButton = function (state) {
           $scope.isRegularNoteUpdated = state;
         }
 
-        $scope.hideGlobalNoteButton = function(state) {
+        $scope.hideGlobalNoteButton = function (state) {
           $scope.isGlobalNoteUpdated = state;
         }
 
@@ -173,7 +173,7 @@
                 // file.origin = finish;
                 $rootScope.draggedAvatar = { origin: finish, id: $scope.editCompany.id }
                 $rootScope.safeDigest();
-              }, function (error) {}, true);
+              }, function (error) { }, true);
           } else {
             $scope.fileLoadOrError = true;
 
@@ -190,29 +190,29 @@
         };
 
 
-        $scope.$watch(function() {
+        $scope.$watch(function () {
           return $rootScope.attachDraggedAvatar;
-        }, function(val) {
+        }, function (val) {
           if (val) {
             $scope.attachDraggedAvatar = val;
-          
+
           }
         })
-        $scope.$watch('ticketNote', function(val) {
-           
+        $scope.$watch('ticketNote', function (val) {
+
         })
 
-        $scope.saveNote = function(note) {
+        $scope.saveNote = function (note) {
 
           $scope.ticketNote = note;
           var chosen = $scope.chosenNote;
-        
+
 
           if (chosen.id) {
 
           }
 
-          
+
 
           chosen.title = note;
 
@@ -221,7 +221,7 @@
 
         }
 
-        $scope.isSaveButtonShown = function() {
+        $scope.isSaveButtonShown = function () {
           var chosen = $scope.chosenNote;
 
           if (!chosen.id && $scope.regularNotes.length === 5) {
@@ -237,7 +237,7 @@
 
         }
 
-        $scope.saveUpdatedNote = function(globalUpdate, note, isGlobalNote) {
+        $scope.saveUpdatedNote = function (globalUpdate, note, isGlobalNote) {
           var note = note || $scope.chosenNote;
           var line1 = note.line.slice(0, 255);
           var line2 = note.line.slice(255, 510)
@@ -258,7 +258,7 @@
 
             if (!note.id) {
               data.noteType = isGlobalNote ? 'GLOBAL' : 'REGULAR';
-              BillableService.createNote(data, function(resp) {
+              BillableService.createNote(data, function (resp) {
                 var id = resp.ids[0];
                 if (isGlobalNote) {
                   $scope.globalNote = note;
@@ -279,7 +279,7 @@
               return;
             }
 
-            var noteToUpdate = $scope.regularNotes.find(function(el) {
+            var noteToUpdate = $scope.regularNotes.find(function (el) {
               return el.id === note.id;
             })
 
@@ -298,7 +298,7 @@
             BillableService.updateNote(data, note.id)
 
             if (!note) {
-             
+
             }
 
 
@@ -314,7 +314,7 @@
 
         }
 
-        $scope.onTextareaChange = function(e) {
+        $scope.onTextareaChange = function (e) {
           var area;
           var counter = 0;
 
@@ -328,7 +328,7 @@
 
 
             // while (area.clientHeight < area.scrollHeight) {
-            
+
             //
             //   counter++;
             //
@@ -380,11 +380,11 @@
 
         }
 
-        $scope.updateNote = function(note) {
+        $scope.updateNote = function (note) {
           $scope.hideRegularNoteButton(false);
           $scope.chosenNote = Object.assign({}, note);
 
-          
+
           $scope.ticketNote = note.title;
           // $scope.chosenNote = note;
           $scope.chosenNote.line = note.line1 + (note.line2 || '');
@@ -393,30 +393,30 @@
           note.suggestedNote = true;
 
           $scope.addNoteToInvoice(note);
-          
+
         }
 
-        $scope.savePaymentDue = function(due) {
-          
+        $scope.savePaymentDue = function (due) {
+
 
           $scope.paymentDue = moment(due).format("YYYY-MM-DD")
 
-          
 
-       /*   if (!$scope.firstUpdatedDate) {
-            $scope.firstUpdatedDate = true;
-          } else {*/
-            var request = {
-              "invoiceNumber": $scope.invoiceNumber || null, // null is allowed
-              "dueDate": $scope.paymentDue, // null is allowed
-              "invoiceNoteIds": [] || null
-            }
 
-            BillableService.updateInvoiceData(request, $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId)
-       //   }
+          /*   if (!$scope.firstUpdatedDate) {
+               $scope.firstUpdatedDate = true;
+             } else {*/
+          var request = {
+            "invoiceNumber": $scope.invoiceNumber || null, // null is allowed
+            "dueDate": $scope.paymentDue, // null is allowed
+            "invoiceNoteIds": [] || null
+          }
+
+          BillableService.updateInvoiceData(request, $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId)
+          //   }
         }
 
-        $scope.savePaymentDate = function(due) {
+        $scope.savePaymentDate = function (due) {
           $scope.date = moment(due).format("YYYY-MM-DD");
 
           var request = {
@@ -429,7 +429,7 @@
           BillableService.updateInvoiceData(request, $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId);
         }
 
-        $scope.addNoteToInvoice = function(data) {
+        $scope.addNoteToInvoice = function (data) {
           var request = {
             regularInvoiceNote: data
           };
@@ -444,18 +444,18 @@
 
         $scope.isInvoiceHeaderShown = true;
 
-        $scope.$watch(function() {
+        $scope.$watch(function () {
           return $rootScope.isSenderAddress;
-        }, function(val) {
-          
+        }, function (val) {
+
           $scope.isInvoiceHeaderShown = !($scope.editCompany && $scope.editCompany.logo && $scope.editCompany.logo.cropped && $scope.editCompany.logo.cropped.id) || !val;
         })
 
-        $scope.$watch('ticketNote', function(val) {
-        
+        $scope.$watch('ticketNote', function (val) {
+
         }, true)
 
-         
+
 
         for (var companyId in $scope.ticketsSelection) {
 
@@ -478,11 +478,11 @@
           }
         }
 
-        $scope.toggleInvoiceHeader = function() {
+        $scope.toggleInvoiceHeader = function () {
           $scope.isInvoiceHeaderShown = !$scope.isInvoiceHeaderShown;
         }
 
-        $scope.unlockAllTickets = function() {
+        $scope.unlockAllTickets = function () {
           $scope.invoiceLocks.forEach(function (lock) {
             BillableService.unlockTicketIds(lock.lockId);
           })
@@ -551,17 +551,14 @@
 
 
         $scope.createInvoice = function (lock, callback) {
-          if (lock && !lock.expired ) {
+          if (lock && !lock.expired) {
             $scope.savingInvoiceInProcess.push(lock.id);
-            console.log(" $scope.lockInfo", $scope.lockInfo);
             var contactId = $scope.lockInfo[$scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId].contactId;
             var addressId = $scope.lockInfo[$scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId].addressId;
             var isSend = !callback;
-
             if (callback) {
               callback();
             }
-
             BillableService.createInvoice(lock.lockId, isSend, contactId, addressId, function (resp) {
               if (resp.id) {
                 $scope.invoiceLocks.splice($scope.showInvoiceLockIndex, 1);
@@ -571,24 +568,21 @@
                   $scope.setShowInvoiceLockIndex($scope.showInvoiceLockIndex - 1);
                 }
                 $scope.shoeInvoiceCreatedMessage = true;
-
               }
-
               var index = $scope.savingInvoiceInProcess.indexOf(lock.id);
               if (index > -1) {
                 $scope.savingInvoiceInProcess.splice(index, 1);
               }
               $scope.invoiceCreated = true;
-
               $rootScope.isInvoiceCreated = true;
               $rootScope.shouldUpdateReceivable = true;
             })
           }
         };
 
-        $scope.$watch('invoiceNum', function(val) {
+        $scope.$watch('invoiceNum', function (val) {
           if ($scope.receivedInvoiceNumber && $scope.invoiceLocks[$scope.showInvoiceLockIndex] && $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId) {
-           
+
             var request = {
               "invoiceNumber": val, // null is allowed
               "dueDate": $scope.paymentDue || null, // null is allowed
@@ -597,7 +591,7 @@
 
             $rootScope.invoiceNumError = '';
 
-            BillableService.updateInvoiceData(request, $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId, function(res) {
+            BillableService.updateInvoiceData(request, $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId, function (res) {
 
               if (res.code == 400) {
                 $rootScope.invoiceNumError = res.message;
@@ -610,11 +604,11 @@
 
         function changeInvoiceNumber(value) {
 
-        
+
           $scope.invoiceNum = value;
         }
 
-        $scope.updateInvoice = function(data) {
+        $scope.updateInvoice = function (data) {
 
         }
 
@@ -622,7 +616,7 @@
 
           locksCount++;
 
-          
+
 
           if (selectedTickets) {
 
@@ -653,7 +647,7 @@
           }
 
           locksCount--;
-          
+
 
           if (locksCount === 0) {
             $scope.locksInitialized = true;

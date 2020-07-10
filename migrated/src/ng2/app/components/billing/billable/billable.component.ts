@@ -77,7 +77,6 @@ export class BillableComponent implements OnInit, OnDestroy {
           })
         });
       }
-      console.log("data", data);
       if (data.action == 'BILLABLE_EXPENSE_REMOVED') {
         this.removeTicket(data, this.reqList);
         this.removeTicket(data, this.list);
@@ -96,8 +95,7 @@ export class BillableComponent implements OnInit, OnDestroy {
     let company = this.companiesStateService.getCompanies().find(item => item.id === clientCompanyId);
     if (findIndex === -1) {
       let tickets = [new BillableProfileTicket(data.data)];
-      list.push(new BillableProfile(company.id, tickets, company.name, null,company.isDefault));
-
+      list.push(new BillableProfile(company.id, tickets, company.name, null, company.isDefault));
     } else {
       list[findIndex].addTicket(data.data);
       list[findIndex].updateCountTickets();
@@ -119,37 +117,29 @@ export class BillableComponent implements OnInit, OnDestroy {
   }
   public getCounters() {
     this.billableService.getCounters().subscribe((data: any) => {
-      console.log("data", data);
       this.count = data.BILLABLE;
     })
   }
   onSearch(event) {
-    console.log("event", event.target.value);
     if (event.target.value.length > 0) {
       this.list = this.reqList.filter(item => item.name.toLowerCase().includes(event.target.value.toLowerCase()));
     } else {
       this.list = JSON.parse(JSON.stringify(this.reqList));
     }
-
   }
   private getList() {
     this.billableService.getBillable().subscribe(data => {
-      //  console.log("data",data);
       for (const key in data) {
         let company = this.companiesStateService.getCompanies().find(item => item.id === key);
-
         let salesPerson = this.usersStateService.getAllUsers().find(item => item.id === company.techLeadId);
-        this.list.push(new BillableProfile(key, data[key].tickets, company.name, this.ticketsListService.getUserName(salesPerson),company.isDefault));
-        this.reqList.push(new BillableProfile(key, data[key].tickets, company.name, this.ticketsListService.getUserName(salesPerson),company.isDefault));
-
+        this.list.push(new BillableProfile(key, data[key].tickets, company.name, this.ticketsListService.getUserName(salesPerson), company.isDefault));
+        this.reqList.push(new BillableProfile(key, data[key].tickets, company.name, this.ticketsListService.getUserName(salesPerson), company.isDefault));
       }
       this.onFilterName();
       this.showPreloader = false;
-      console.log("this.list", this.list);
     })
   }
   onFilter(field) {
-
     let index = this.filter.findIndex(item => item.field === field);
     if (index > -1) {
       let sort = this.filter[index].filter;
@@ -162,22 +152,16 @@ export class BillableComponent implements OnInit, OnDestroy {
           this.filter[index].filter = 'DESC';
           this.list.reverse();
         }
-
       }
       if (field === 'countTickets') {
         if (sort === '') this.clearFilter();
         if (sort === '' || sort === 'DESC') {
-
           this.filter[index].filter = 'ASC';
           this.onFilterCountTickets();
-
         } else {
-
           this.filter[index].filter = 'DESC';
           this.list.reverse();
         }
-
-
       }
       if (field === 'salesPerson') {
         if (sort === '') this.clearFilter();
@@ -188,10 +172,7 @@ export class BillableComponent implements OnInit, OnDestroy {
           this.filter[index].filter = 'DESC';
           this.list.reverse();
         }
-
-
       }
-
       if (field === 'total') {
         if (sort === '') this.clearFilter();
         if (sort === '' || sort === 'DESC') {
@@ -201,10 +182,7 @@ export class BillableComponent implements OnInit, OnDestroy {
           this.filter[index].filter = 'DESC';
           this.list.reverse();
         }
-
-
       }
-
     }
     this.cd.detectChanges();
   }

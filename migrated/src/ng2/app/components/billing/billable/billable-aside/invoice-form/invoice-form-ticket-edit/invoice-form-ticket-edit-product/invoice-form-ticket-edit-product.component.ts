@@ -13,20 +13,15 @@ import { Subscription } from 'rxjs';
 export class InvoiceFormTicketEditProductComponent implements OnInit, OnDestroy {
   @Input() product: BillableProfileTicketProductExpense;
   @ViewChild('taxes') taxesDropDown: InvoiceFormTicketEditTaxesComponent;
-  
   valdiateSaleCost: boolean = true;
   taxes: Array<Tax> = [];
   sub: Subscription = new Subscription();
   constructor(private taxesStateService: TaxesStateService,) { }
 
-
   ngOnInit() {
-    
     if (this.taxesStateService.getTaxes().length > 0) this.taxes = this.taxesStateService.getTaxes();
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
-      this.taxes = [...this.taxes,...data];
-      console.log("this.taxes",this.taxes);
-      console.log("this.data",data);
+      this.taxes = [...this.taxes, ...data];
       this.onSetEditTaxes();
     })
     this.onSetEditTaxes();
@@ -37,7 +32,6 @@ export class InvoiceFormTicketEditProductComponent implements OnInit, OnDestroy 
     let taxes = this.taxes.filter(item => {
       let index = this.product.taxes.findIndex(tax => tax.id === item.id);
       return (index > -1) ? true : false;
-     
     })
     this.product.taxes.forEach(item => {
       let index = this.taxes.findIndex(tax => tax.id === item.id);
@@ -46,8 +40,7 @@ export class InvoiceFormTicketEditProductComponent implements OnInit, OnDestroy 
         notFindTax.push(item);
       }
     });
-    
-    taxes = [...taxes,...notFindTax];
+    taxes = [...taxes, ...notFindTax];
     this.taxesDropDown.setEditItems(taxes);
   }
   onTaxesChange(data) {
@@ -59,7 +52,6 @@ export class InvoiceFormTicketEditProductComponent implements OnInit, OnDestroy 
   public onChangeSale(val) {
     let value = Number(val);
     this.product.item.sale = value;
-
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

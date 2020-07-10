@@ -12,7 +12,7 @@ export class InvoiceDiscountComponent implements OnInit {
   @Output() onDelete = new EventEmitter();
   @Output() onUpdate = new EventEmitter();
   discount: InvoiceDiscount = new InvoiceDiscount();
-  canRemove:boolean = false;
+  canRemove: boolean = false;
   constructor(private billableService: BillableService,) { }
 
   ngOnInit() {
@@ -24,13 +24,11 @@ export class InvoiceDiscountComponent implements OnInit {
     })
   }
   onChangeAmount(val) {
-    
     let value = Number(val);
     this.discount.amount = value;
   }
   onChange() {
     this.billableService.addDiscount(this.lockId, this.discount).subscribe(data => {
-      console.log("data", data);
       this.onUpdate.emit(data);
       this.canRemove = true;
     })

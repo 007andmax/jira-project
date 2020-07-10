@@ -6,15 +6,15 @@
     ['$scope', 'BillableService', 'CompaniesService', 'quicktech.common.services.SharedStateService',
       'quicktech.common.services.PermissionsService', 'TicketsService', 'TaxesService', '$uibModal', '$rootScope', 'RealTimeService',
       function ($scope,
-                BillableService,
-                CompaniesService,
-                SharedStateService,
-                PermissionsService,
-                TicketsService,
-                TaxesService,
-                $uibModal,
-                $rootScope,
-                RealTimeService) {
+        BillableService,
+        CompaniesService,
+        SharedStateService,
+        PermissionsService,
+        TicketsService,
+        TaxesService,
+        $uibModal,
+        $rootScope,
+        RealTimeService) {
         var globalSearch = SharedStateService.getSharedState('globalSearch');
 
         TicketsService.getCounts($scope, function (resp) {
@@ -32,36 +32,36 @@
         });
 
 
-        $scope.$watch(function() {
+        $scope.$watch(function () {
           return $rootScope.currentBillTo;
-        }, function(val) {
+        }, function (val) {
 
           if (val) {
             $scope.invoiceBillTo = CompaniesService.getCompanyByAddressId(val.id);
 
-            var companyData = CompaniesService.getCompanyData($scope, $scope.invoiceBillTo.id, function() {
-            
+            var companyData = CompaniesService.getCompanyData($scope, $scope.invoiceBillTo.id, function () {
+
               $scope.invoiceBillTo.contacts = companyData.contacts;
             })
 
-           
+
           }
 
         })
 
-        
 
-        $scope.deleteTicket = function(ticket) {
-          TicketsService.deleteForever(ticket.id, function(res) {
+
+        $scope.deleteTicket = function (ticket) {
+          TicketsService.deleteForever(ticket.id, function (res) {
 
           })
-         
+
         }
 
-        $scope.$watch(function() {
+        $scope.$watch(function () {
           return $rootScope.deletedTicket;
-        }, function(val) {
-          var keys = Object.keys($scope.billableData).filter(function(prop) {
+        }, function (val) {
+          var keys = Object.keys($scope.billableData).filter(function (prop) {
             return $scope.billableData.hasOwnProperty(prop);
           });
 
@@ -82,13 +82,13 @@
 
 
 
-        $scope.$watch(function() {
+        $scope.$watch(function () {
           return $rootScope.updateBillTo;
-        }, function(val) {
+        }, function (val) {
 
           if (val) {
 
-            
+
             var companyName = val.companyName.$modelValue;
             var firstName = val.firstName.$modelValue;
             var lastName = val.lastName.$modelValue;
@@ -132,7 +132,7 @@
             company = CompaniesService.getCompanyByAddressId(company.id);
           }
 
-          
+
 
           $rootScope.savedCompanyId = company.id;
           $uibModal.open({
@@ -156,10 +156,10 @@
           });
         };
 
-        $scope.sorted = function(arr) {
+        $scope.sorted = function (arr) {
           var newArr = arr.slice();
-          newArr.sort(function(a, b) {
-          
+          newArr.sort(function (a, b) {
+
             return a.title.localeCompare(b.title);
           });
 
@@ -175,26 +175,26 @@
         $scope.expandedCompanyId = '';
 
 
-        $scope.showInvoice = function() {
+        $scope.showInvoice = function () {
           $scope.isInvoiceShown = true;
         };
 
-        $scope.$on('$destroy', function() {
-         
+        $scope.$on('$destroy', function () {
+
         })
 
-        $scope.$watch(function() {
+        $scope.$watch(function () {
           return $rootScope.hideInvoiceWhenBack
-        }, function(val) {
+        }, function (val) {
           if (val) {
             $rootScope.hideInvoiceWhenBack = false;
             $scope.isInvoiceShown = false;
           }
         });
 
-        $scope.$watch(function() {
+        $scope.$watch(function () {
           return $rootScope.isInvoiceCreated;
-        }, function(val) {
+        }, function (val) {
           if (val) {
             $rootScope.isInvoiceCreated = false;
 
@@ -202,7 +202,7 @@
           }
         });
 
-        $scope.togglePreview = function() {
+        $scope.togglePreview = function () {
           $scope.isPreviewShown = !$scope.isPreviewShown;
 
         };
@@ -280,42 +280,30 @@
         });
 
         $scope.billableData = BillableService.getBillablePageDto($scope, getBillableDto);
-console.log("$scope.billableData",$scope.billableData);
         function getBillableDto(respData) {
           $scope.billableData = respData;
-
           var companyIds = Object.keys(respData).filter(function (id) {
             return id !== 'staticCopy' && !CompaniesService.getOneById(id).isDefault;
           });
-
           if (respData && !companyIds.length) {
             $scope.loadingInProgress = false;
           }
-
           var companies = [];
           $scope.totalbillables = 0;
-
           for (var companyId in $scope.billableData) {
-
             if (companyId !== 'staticCopy') {
               var company = CompaniesService.getOneById(companyId);
               $scope.totalbillables += $scope.billableData[companyId].totalSum || 0;
-
               companies.push(company);
             }
           }
-
           for (var companyId in $scope.ticketsSelection) {
-
             if (!$scope.billableData[companyId]) {
               delete $scope.ticketsSelection[companyId];
               continue;
             }
-
             var tickets = $scope.ticketsSelection[companyId].tickets;
-
-            for (var ticketId in  tickets) {
-
+            for (var ticketId in tickets) {
               for (var i = 0; i < $scope.billableData[companyId].tickets.length; i++) {
                 if (ticketId === $scope.billableData[companyId].tickets[i].id) {
                   if ($scope.billableData[companyId].tickets[i].lockedBy) {
@@ -324,10 +312,8 @@ console.log("$scope.billableData",$scope.billableData);
                   }
                 }
               }
-
             }
           }
-          console.log("$scope.billableData",$scope.billableData);
         }
 
         $scope.addDiscountInBillable = function (expenseId, discountAmount) {
@@ -339,7 +325,7 @@ console.log("$scope.billableData",$scope.billableData);
               discountType: 'PERCENT'
             };
             BillableService.saveBillableDiscount(data, function (resp) {
-              
+
             })
           }
           else {
@@ -349,7 +335,7 @@ console.log("$scope.billableData",$scope.billableData);
               discountType: null
             };
             BillableService.saveBillableDiscount(data, function (resp) {
-           
+
             })
           }
 
@@ -359,7 +345,7 @@ console.log("$scope.billableData",$scope.billableData);
           $scope.loadingInProgress = false;
         };
 
-        $scope.clearAllSelections = function() {
+        $scope.clearAllSelections = function () {
 
         }
 

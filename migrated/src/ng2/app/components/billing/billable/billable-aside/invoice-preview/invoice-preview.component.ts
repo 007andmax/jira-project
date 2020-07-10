@@ -13,23 +13,22 @@ import { InvoiceNote } from '../../class/invoice-note';
   styleUrls: ['./invoice-preview.component.scss']
 })
 export class InvoicePreviewComponent implements OnInit {
-  opened:boolean = false;
-  sub: Subscription = new Subscription();
   @Input() invoiceNumber: string;
   @Input() invoice: InvoiceLock;
   @Input() company: CompanyProfile = new CompanyProfile();
   @Input() invoiceTaxNumber: InvoiceTaxNumber;
-    selectedNote: InvoiceNote = null;
-    globalNote: InvoiceNote = null;
+  opened: boolean = false;
+  sub: Subscription = new Subscription();
+  selectedNote: InvoiceNote = null;
+  globalNote: InvoiceNote = null;
   currentCompany: any;
-  constructor(private billableStateService:BillableStateService,
-    private companiesStateService:CompaniesStateService) { }
+  constructor(private billableStateService: BillableStateService,
+    private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
     this.selectedNote = this.billableStateService.getRegularNote();
     this.globalNote = this.billableStateService.getGlobalNote();
     this.currentCompany = this.companiesStateService.getCurrentCompany();
-    console.log("this.currentCompany",this.currentCompany);
   }
   getCompanyLogoUrl() {
     if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo && this.currentCompany.logo.base64 && !this.currentCompany.logo.cropped) return this.currentCompany.logo.base64;
@@ -42,7 +41,6 @@ export class InvoicePreviewComponent implements OnInit {
       hours = Math.floor(timeInMinutes / 60),
       minutes = Math.round(timeInMinutes - (hours * 60));
     return (hours >= 10 ? hours : '0' + hours) + ':' + (minutes >= 10 ? minutes : '0' + minutes) + ' hr(s)';
-
   }
   getSelectedTaxes(taxes) {
     return taxes.map(item => {

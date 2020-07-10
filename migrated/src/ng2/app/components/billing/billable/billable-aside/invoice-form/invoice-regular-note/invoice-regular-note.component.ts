@@ -13,7 +13,6 @@ import { BillableStateService } from 'src/ng2/app/states/billable/billable-state
 export class InvoiceRegularNoteComponent implements OnInit {
   @Input() invoiceNotes: Array<InvoiceNote> = [];
   @Output() onUpdateInvoiceData = new EventEmitter();
-  
   selectedNote: InvoiceNote = null;
   toogleCustomerNote: boolean = false;
   regularNotes: Array<InvoiceNote> = [];
@@ -38,18 +37,14 @@ export class InvoiceRegularNoteComponent implements OnInit {
     if (this.selectedNote) {
       this.changeRegularNote = true;
       this.selectedNote.title = data;
-      console.log("data", data);
     }
-
   }
   onSetRegularNote(data) {
-    console.log("data", data);
     this.selectedNote.title = data;
     this.changeRegularNote = true;
   }
   onCheckUpdateDescriptionNote() {
     if (this.selectedNote) this.changeRegularNote = true;
-
   }
   onUpdateRegularNote() {
     this.noteService.updateNote({ "title": this.selectedNote.title, "line1": this.elRef.nativeElement.querySelector("#description-regular-note").value, "line2": "" }, this.selectedNote.id).subscribe(data => {
@@ -64,19 +59,16 @@ export class InvoiceRegularNoteComponent implements OnInit {
     })
   }
   onChangeDescriptionNote() {
-    let request: PartialUpdate = new PartialUpdate(null, null, null, this.selectedNote, null,null);
-    console.log("request", request);
+    let request: PartialUpdate = new PartialUpdate(null, null, null, this.selectedNote, null, null);
     this.onUpdateInvoiceData.emit(request);
     this.billableStateService.setRegulatNote(this.selectedNote);
   }
 
   onChangeRegularNote() {
-    console.log("onChangeRegularNote");
     if (this.selectedNote) {
       let selectedNote = JSON.parse(JSON.stringify(this.selectedNote));
       selectedNote.line1 = this.elRef.nativeElement.querySelector("#description-regular-note").value;
-      let request: PartialUpdate = new PartialUpdate(null, null, null, selectedNote, null,null);
-      console.log("request", request);
+      let request: PartialUpdate = new PartialUpdate(null, null, null, selectedNote, null, null);
       this.onUpdateInvoiceData.emit(request);
       this.billableStateService.setRegulatNote(selectedNote);
     } else {
@@ -86,8 +78,7 @@ export class InvoiceRegularNoteComponent implements OnInit {
         noteType: "REGULAR",
         suggestedNote: false,
       });
-      let request: PartialUpdate = new PartialUpdate(null, null, null, selectedNote, null,null);
-      console.log("request", request);
+      let request: PartialUpdate = new PartialUpdate(null, null, null, selectedNote, null, null);
       this.onUpdateInvoiceData.emit(request);
       this.billableStateService.setRegulatNote(selectedNote);
     }
@@ -95,10 +86,8 @@ export class InvoiceRegularNoteComponent implements OnInit {
   }
   onSelectNotes(data) {
     this.selectedNote = data;
-    console.log("selectedNote", this.selectedNote);
     if (this.selectedNote) {
-      let request: PartialUpdate = new PartialUpdate(null, null, null, this.selectedNote, null,null);
-      console.log("request", request);
+      let request: PartialUpdate = new PartialUpdate(null, null, null, this.selectedNote, null, null);
       this.onUpdateInvoiceData.emit(request);
       this.elRef.nativeElement.querySelector("#description-regular-note").value = this.selectedNote.line1;
       this.billableStateService.setRegulatNote(this.selectedNote);
@@ -112,7 +101,6 @@ export class InvoiceRegularNoteComponent implements OnInit {
     this.billableService.getInvoiceNote().subscribe(data => {
       this.invoiceNotes = data;
       this.regularNotes = this.invoiceNotes.filter(item => item.noteType === "REGULAR");
-      console.log("regularNotes", this.regularNotes);
     })
   }
 }
