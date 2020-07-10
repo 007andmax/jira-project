@@ -76,17 +76,20 @@ export class InvoiceFormTicketEditServiceComponent implements OnInit {
   public onChangeStartTimePicker(startDate) {
     this.durationStart = startDate;
     this.service.setDurationStart(this.durationStart);
+    this.service.calculateQuantity();
   }
   public onChangeEndTimePicker(endDate) {
     this.durationEnd = endDate;
     this.service.setDurationEnd(this.durationEnd);
+    this.service.calculateQuantity();
     
   }
   public onChangeDuration(quantity) {
     this.quantity = quantity;
-    this.cd.detectChanges();
    
+   console.log("this.service",this.service);
     this.service.setQuantity(this.quantity);
+    this.cd.detectChanges();
   }
   public onChangeDescription(event) {
     this.service.description = event.target.value;

@@ -30,7 +30,7 @@ export class InvoiceFormTicketInfoComponent implements OnInit {
   }
   getSelectedTaxes(taxes) {
     return taxes.map(item => {
-      return `${item.name}`;
+      return `${item.name} ${item.rate}%`;
     }).join("<br>");
   }
 }

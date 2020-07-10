@@ -64,6 +64,11 @@
           //$scope.close();
         };
 
+        $scope.getSelectedTaxes = function(taxes) {
+          return taxes.map(item => {
+            return `${item.name} ${item.rate}%`;
+          }).join("<br>");
+        }
         $scope.sentInvoiceToMail = function () {
           var idInvoiceToSend = $rootScope.invoiceToShow.id;
           //$scope.sending[idInvoiceToSend] = true;

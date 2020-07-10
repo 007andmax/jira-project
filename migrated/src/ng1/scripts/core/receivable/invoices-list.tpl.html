@@ -203,8 +203,8 @@
                 <div class="col-md-3 pre-line" style="width: 35.4%;">{{ productExpense.item.description }}</div>
                 <div class="col-md-2" style="width: 13%;">{{ productExpense.item.sale | currency: '$':2 }}</div>
                 <div class="col-md-2" style="width: 13%;">{{ productExpense.billableQuantity }}</div>
-                <div class="col-md-1">{{ productExpense.taxSum | currency: '$':2 }}</div>
-                <div class="col-md-2 text-right pr-30" style="width: 13%;">{{ productExpense.totalSum | currency: '$':2
+                <div class="col-md-1" ng-bind-html="getSelectedTaxes(productExpense.taxes)"></div>
+                <div class="col-md-2 text-right pr-30" style="width: 13%;">{{ productExpense.sum | currency: '$':2
                                                                            }}
                 </div>
               </div>
@@ -230,8 +230,8 @@
                      ng-if="serviceExpense.description !=='By User' && serviceExpense.description !=='By Device' && serviceExpense.description !=='Managed Service Contract'">
                   {{ serviceExpense.billableQuantity | durationFilter }} hr(s)
                 </div>
-                <div class="col-md-1">{{ serviceExpense.taxSum | currency: '$':2 }}</div>
-                <div class="col-md-2 text-right pr-30" style="width: 13%;">{{ serviceExpense.totalSum | currency: '$':2
+                <div class="col-md-1" ng-bind-html="getSelectedTaxes(serviceExpense.taxes)"></div>
+                <div class="col-md-2 text-right pr-30" style="width: 13%;">{{ serviceExpense.sum | currency: '$':2
                                                                            }}
                 </div>
               </div>
@@ -242,7 +242,14 @@
               <div class="clearfix" style="margin-bottom: 5px;">
                 <div class="col-md-8 bold pl-30">Customer Note Type</div>
                 <div class="col-md-2 bold fz-11">Sub Total</div>
-                <div class="col-md-2 text-right pr-30">{{ (currentInvoice.totalSum - currentInvoice.taxSum ) | currency:
+                <div class="col-md-2 text-right pr-30">{{ (currentInvoice.productsSum + currentInvoice.servicesSum ) | currency:
+                                                       '$':2 }}
+                </div>
+              </div>
+              <div class="clearfix"  ng-if="currentInvoice.invoiceDiscount">
+                <div class="col-md-8 bold pl-30"></div>
+                <div class="col-md-2 bold fz-11">Discount</div>
+                <div class="col-md-2 text-right pr-30">{{ (-currentInvoice.invoiceDiscount.amount) | currency:
                                                        '$':2 }}
                 </div>
               </div>

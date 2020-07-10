@@ -18,6 +18,12 @@ export class InvoiceProfileTicket {
         for (const key in data) {
             this[key] = data[key];
         }
+        this.productExpenses  = data.productExpenses.map(item => {
+            return new BillableProfileTicketProductExpense(item);
+        })
+        this.serviceExpenses  = data.serviceExpenses.map(item => {
+            return new BillableProfileTicketServiceExpense(item);
+        })
     }
     public getDateForUpdate() {
         let productExpenses = [];
