@@ -842,7 +842,7 @@ header{
     
 
    &.task {
-       padding-left: 30px;
+    //    padding-left: 30px;
     h5 {
         line-height: 1.54;
         position: relative;
@@ -855,11 +855,11 @@ header{
             left: -30px;
             content: "";
             position: absolute;
-            background: url(assets/images/task-pending.svg);
+            background:url("./../../../../ng1/images/device/task-pending.svg") no-repeat center;
         }
         &.complete{
             &::before{
-                background: url(assets/images/task-completed.svg);
+                background:url("./../../../../ng1/images/device/task-completed.svg") no-repeat center;
             }
         }
     }
@@ -923,7 +923,7 @@ header{
 
 
 /*** Common Tabbings ***/
-tabset {
+ngb-tabset {
     float: left;
     width: 100%;
     ul.nav-tabs {
