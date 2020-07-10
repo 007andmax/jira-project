@@ -231,7 +231,7 @@
              tooltip-append-to-body="true"></div>
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'billing'}"
-           ui-sref="accounting.billable" ng-click="toggleLeftPanel('billing', true)"
+           ui-sref="new-billable" ng-click="toggleLeftPanel('billing', true)"
            ng-if="PermissionsService.isAllowed('VIEW_ACCOUNTING')">
         <div class="left-panel-icn left-panel-icons-billing"
              uib-tooltip="billing"
@@ -849,15 +849,15 @@
              ng-click="stateGo($event, 'services', { tabName: 'default' })">
           Default Services
         </div>
-        <div class="center-category__category"
+      <!--   <div class="center-category__category"
              ng-class="{active: $state.includes('accounting.billable')}"
              ng-click="stateGo($event, 'accounting.billable')">
           Billable Items
-        </div>
+        </div> -->
         <div class="center-category__category"
-        ng-class="{active: $state.includes('accounting.billable')}"
+        ng-class="{active: $state.includes('new-billable')}"
         ng-click="stateGo($event, 'new-billable')">
-     Billable Items 2
+     Billable Items
    </div>
 
       

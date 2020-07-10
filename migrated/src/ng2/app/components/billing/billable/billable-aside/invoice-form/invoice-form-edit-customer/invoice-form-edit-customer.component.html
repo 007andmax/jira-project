@@ -21,7 +21,7 @@
   <div class="qt-mb-16">
     <div class="qt-input-block">
       <label>Location</label>
-      <input type="text" #addresstext (focus)="onCheckGoogleAutoComplete()" placeholder="Enter Location">
+      <input type="text" #addresstext   [(ngModel)]="company.addresses[0].address" (focus)="onCheckGoogleAutoComplete()" placeholder="Enter Location">
     </div>
   </div>
 

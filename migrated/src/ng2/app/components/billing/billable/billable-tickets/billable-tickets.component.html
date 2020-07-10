@@ -76,7 +76,9 @@
           </td>
           <td class="billable-item-table__check" *ngIf="item.lockedBy"><div class="icon__locked qt-sz-16" placement="top" ngbTooltip="Is being used by other user"></div></td>
           <td class="billable-item-table__date" [textContent]="getDate(item.closedAt)"></td>
-          <td class="billable-item-table__ticket" [textContent]="item.ticketNumber" (click)="editTicket(item.id)"></td>
+          <td class="billable-item-table__ticket" *ngIf="!item.isOrder" [textContent]="item.ticketNumber" (click)="editTicket(item.id)"></td>
+          <td class="billable-item-table__ticket no-edit-ticket" *ngIf="item.isOrder" [textContent]="item.ticketNumber" ></td>
+        
           <td class="billable-item-table__subject" [textContent]="item.subject"></td>
           <td class="billable-item-table__check">
             <div *ngIf="item.isOrder" class="ticket-updates__delete icon__remove" (click)="deleteTicket(item)" placement="top" ngbTooltip="Delete"></div>

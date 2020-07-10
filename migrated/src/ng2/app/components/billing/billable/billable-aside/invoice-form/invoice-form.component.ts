@@ -154,6 +154,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     let request: PartialUpdate = new PartialUpdate(invoiceDate, null, this.invoiceNumber, null, null, null);
     console.log("request", request);
     this.updateInvoiceData(request);
+    this.invoice.invoiceDataDto.date = invoiceDate;
   }
   private updateInvoiceData(request) {
     this.billableService.updateInvoiceData(this.invoice.lockId, request).subscribe(data => {
@@ -164,7 +165,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     let dueDate = this.parseDateFromDatePicker(new Date(date.year, date.month - 1, date.day));
     let request: PartialUpdate = new PartialUpdate(null, dueDate, this.invoiceNumber, null, null, null);
     this.updateInvoiceData(request);
-
+    this.invoice.invoiceDataDto.dueDate = dueDate;
   }
   onEditTickets() {
     let expensesToUpdate = [];

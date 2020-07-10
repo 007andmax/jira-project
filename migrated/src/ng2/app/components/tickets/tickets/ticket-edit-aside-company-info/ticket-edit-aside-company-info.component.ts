@@ -27,7 +27,8 @@ export class TicketEditAsideCompanyInfoComponent implements OnInit {
   @Input() set setCompanyId(value) {
     this.companyId = value;
     this.company = this.companiesStateService.getCompanies().find(item => item.id === this.companyId);
-   
+   console.log("this.company",this.company);
+   console.log("this.createdUser",this.createdUser);
      if (this.company && this.createdUser)   this.showPreloader = false;
   };
   

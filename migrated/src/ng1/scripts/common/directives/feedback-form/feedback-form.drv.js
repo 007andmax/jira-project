@@ -210,7 +210,7 @@
             return 'Products';
           } else if ($state.includes("services")) {
             return 'Services';
-          } else if ($state.includes("accounting.billable")) {
+          } else if ($state.includes("accounting.billable") || $state.includes("new-billable")) {
             return 'Billable';
           } else if ($state.includes("receivable")) {
             return 'Receivable';

@@ -125,7 +125,7 @@
             return 'services';
           } else if ($state.includes("password-manager")) {
             return 'password-manager';
-          } else if ($state.includes("accounting.billable")) {
+          } else if ($state.includes("accounting.billable") || $state.includes("new-billable")) {
             return 'billable';
           } else if ($state.includes("receivable")) {
             return 'receivable';
