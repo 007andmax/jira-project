@@ -5,7 +5,7 @@ import { DatePickerStateService } from './services/date-picker-state.service';
 import { ChangeDatePicker } from './class/change-date-picker';
 import { NgbDatepickerNavigateEvent } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker';
 import { DatePickerService } from './services/date-picker.service';
-import { TYPE_INPUT } from 'src/ng2/app/const/date-picker';
+import { TYPE_INPUT, FORMAT_DATE_1 } from 'src/ng2/app/const/date-picker';
 
 @Component({
   selector: 'app-date-picker',
@@ -17,6 +17,7 @@ export class DatePickerComponent implements OnInit, OnDestroy {
 
   @ViewChild('date') date_dropDown: NgbDropdown;
   @Input() type: string = TYPE_INPUT;
+  @Input() formatDate: string = FORMAT_DATE_1;
   @Input() editMode: boolean = false;
   @Input() editDate: number = 0;
   @Input() useMinDate: boolean = true;
@@ -75,7 +76,7 @@ export class DatePickerComponent implements OnInit, OnDestroy {
     let date = new Date();
     this.navDate = this.sericeDatePicker.getNavDate(date);
     this.datepicker = this.sericeDatePicker.getDateForDatePicker(date);
-    this.date.setTitle(this.datepicker);
+    this.date.setTitle(this.datepicker,this.formatDate);
   }
   /**
   * Subscribe to edit mode
@@ -91,7 +92,7 @@ export class DatePickerComponent implements OnInit, OnDestroy {
     this.navDate = this.sericeDatePicker.getNavDate(date);
     this.datepicker = this.sericeDatePicker.getDateForDatePicker(data);
     if (this.navDate) this.sericeDatePicker.updateMonthAndYearDatePicker(this.datepicker, this.navDate);
-    this.date.setTitle(this.datepicker);
+    this.date.setTitle(this.datepicker,this.formatDate);
   }
 
   public geTextDate() {
@@ -115,7 +116,7 @@ export class DatePickerComponent implements OnInit, OnDestroy {
   public selectDate(data: NgbDate) {
     this.datepicker = data;
     if (this.navDate) this.sericeDatePicker.updateMonthAndYearDatePicker(this.datepicker, this.navDate);
-    this.date.setTitle(this.datepicker);
+    this.date.setTitle(this.datepicker,this.formatDate);
 
     if (this.type === TYPE_INPUT) this.sericeDatePicker.setTextInput('dropdownDate', this.date.getTitle());
     this.onChange.emit(new ChangeDatePicker(this.datepicker.day, this.datepicker.month, this.datepicker.year));
@@ -149,7 +150,7 @@ export class DatePickerComponent implements OnInit, OnDestroy {
   * Update  date
   */
   private updateDate() {
-    this.date.setTitle(this.datepicker);
+    this.date.setTitle(this.datepicker,this.formatDate);
     this.onChange.emit(new ChangeDatePicker(this.datepicker.day, this.datepicker.month, this.datepicker.year));
     if (this.type === TYPE_INPUT) this.sericeDatePicker.setTextInput('dropdownDate', this.date.getTitle());
     this.date_dropDown.close();

@@ -41,12 +41,12 @@
 
     <div class="qt-input-block qt-mr-16 qt-w100 input_inside_white_important">
       <label>Invoice Date</label>
-      <app-date-picker [editMode]="true" [editDate]="invoice.invoiceDataDto.date" [useMinDate]="false" (onChange)="onChangeDate($event)"></app-date-picker>
+      <app-date-picker [formatDate]="formatDate" [editMode]="true" [editDate]="invoice.invoiceDataDto.date" [useMinDate]="false" (onChange)="onChangeDate($event)"></app-date-picker>
     </div>
 
     <div class="qt-input-block qt-w100 input_inside_white_important">
       <label>Due Date</label>
-      <app-date-picker   [editMode]="true"  [editDate]="invoice.invoiceDataDto.dueDate" [useMinDate]="false" (onChange)="onChangeDueDate($event)"></app-date-picker>
+      <app-date-picker [formatDate]="formatDate"  [editMode]="true"  [editDate]="invoice.invoiceDataDto.dueDate" [useMinDate]="false" (onChange)="onChangeDueDate($event)"></app-date-picker>
 
     </div>
   </div>

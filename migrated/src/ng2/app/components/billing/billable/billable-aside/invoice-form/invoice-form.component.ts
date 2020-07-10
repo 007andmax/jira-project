@@ -21,6 +21,7 @@ import { InvoiceNote } from '../../class/invoice-note';
 import { NoteService } from 'src/ng2/app/services/note/note.service';
 import { InvoiceValidate } from './class/invoice-validate';
 import { InvoiceProfileTicket } from '../../class/invoice-profile-ticket';
+import { FORMAT_DATE_2 } from 'src/ng2/app/const/date-picker';
 
 @Component({
   selector: 'app-invoice-form',
@@ -35,6 +36,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   @Input() invoiceNotes: Array<InvoiceNote> = [];
   @Input() company: CompanyProfile = new CompanyProfile();
   @Input() invoiceTaxNumber: InvoiceTaxNumber;
+  formatDate:string = FORMAT_DATE_2;
   toggleDiscount: boolean = false;
   currentCompany: any;
   changeGlobalNote: boolean = false;
