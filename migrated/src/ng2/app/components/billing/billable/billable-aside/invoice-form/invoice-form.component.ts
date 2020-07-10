@@ -149,7 +149,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     this.updateInvoiceData(request);
     this.invoice.invoiceDataDto.date = invoiceDate;
   }
-  private updateInvoiceData(request) {
+  public updateInvoiceData(request) {
     this.billableService.updateInvoiceData(this.invoice.lockId, request).subscribe(data => {
     })
   }

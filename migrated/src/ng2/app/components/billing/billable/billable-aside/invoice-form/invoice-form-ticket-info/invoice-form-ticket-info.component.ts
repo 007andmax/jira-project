@@ -33,4 +33,7 @@ export class InvoiceFormTicketInfoComponent implements OnInit {
       return `${item.name} ${item.rate}%`;
     }).join("<br>");
   }
+  public trackById(index, item) {
+    return item.id;
+  }
 }

@@ -9,7 +9,7 @@ import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
   styleUrls: ['./invoice-form-ticket-edit.component.scss']
 })
 export class InvoiceFormTicketEditComponent implements OnInit {
-  @Input() ticket:InvoiceProfileTicket;
+  @Input() ticket: InvoiceProfileTicket;
   @Output() onUpdateSubject = new EventEmitter();
   currentCompany;
   constructor(private companiesStateService: CompaniesStateService,
@@ -23,7 +23,7 @@ export class InvoiceFormTicketEditComponent implements OnInit {
   }
   onChangeSubject() {
     this.ticketsService.changeSubjectNoteTicket(this.ticket.id, this.ticket.subject, "").subscribe(data => {
-   this.onUpdateSubject.emit(this.ticket.subject);
+      this.onUpdateSubject.emit(this.ticket.subject);
     })
   }
   getDuration(input) {
@@ -31,6 +31,8 @@ export class InvoiceFormTicketEditComponent implements OnInit {
       hours = Math.floor(timeInMinutes / 60),
       minutes = Math.round(timeInMinutes - (hours * 60));
     return (hours >= 10 ? hours : '0' + hours) + ':' + (minutes >= 10 ? minutes : '0' + minutes) + ' hr(s)';
-
+  }
+  public trackById(index, item) {
+    return item.id;
   }
 }

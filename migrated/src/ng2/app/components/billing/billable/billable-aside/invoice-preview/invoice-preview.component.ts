@@ -53,4 +53,7 @@ export class InvoicePreviewComponent implements OnInit {
   public getDateTicket(date) {
     return moment(new Date(date)).format('DD/MM/YYYY');
   }
+  public trackByIndex(index, item) {
+    return index;
+  }
 }
