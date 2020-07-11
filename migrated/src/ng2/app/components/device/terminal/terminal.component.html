@@ -38,34 +38,70 @@
             <h2 class="h1">Create Command</h2>
           </div>
           <div class="modal-body">
-            <form method="POST">
+            <form novalidate #commandFrm="ngForm">
               <div class="f-row">
                 <div class="f-col col-100">
                   <label for="Title">Command Title</label>
                   <div class="form-row">
                     <input
                       type="text"
-                      id="Title"
+                      id="title"
                       class="form-input"
-                      placeholder="USB access"
+                      placeholder="Command Title"
+                      [(ngModel)]="commandModal.title" 
+                      name="title" 
+                      #Title="ngModel" 
+                      required 
+                      [class.validation-error]="submitted == true && Title.errors && Title.errors.required"
                     />
                   </div>
                 </div>
                 <div class="f-col col-70">
                   <label for="command">Category</label>
                   <div class="form-row">
-                    <select class="form-input cmn-select">
+                    <!-- <select class="form-input cmn-select"
+                      [(ngModel)]="commandModal.category" 
+                      name="category" 
+                      #Category="ngModel" 
+                      required 
+                      [class.validation-error]="submitted == true && Category.errors && Category.errors.required"
+                    >
+                      <option value="">Select Category</option>
                       <option>Window > USB access</option>
                       <option>Window > USB access 1</option>
                       <option>Window > USB access 2</option>
                       <option>Window > USB access 3</option>
-                    </select>
+                    </select> -->
+                    <div class="grey-dropdown w-100" ngbDropdown>
+                      <input type="text"
+                        placeholder="Select Category"
+                        [(ngModel)]="commandModal.category"
+                        id="category"
+                        ngbDropdownToggle
+                        autocomplete="off"
+                        class="cmn-select form-input"
+                        name="category" 
+                        #Category="ngModel" 
+                        required readonly
+                        [class.validation-error]="submitted == true && Category.errors && Category.errors.required">
+                      <img class="icn-sm report-caret-icon" src="./../../../../../../ng1/images/device/selct-arrow.svg"/>
+                      <div ngbDropdownMenu
+                           aria-labelledby="dropdownBasic1">
+                           <button *ngFor="let category of cmdCategoryReadList" ngbDropdownItem (click)="selectCategory(category);">{{category.name}}</button>
+                           <button ngbDropdownItem (click)="manageCategory(templateManageCategory);">Manage Category</button>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="f-col col-30">
                   <label for="command">Script Type</label>
                   <div class="form-row">
-                    <select class="form-input cmn-select">
+                    <select class="form-input cmn-select"
+                      [(ngModel)]="commandModal.type" 
+                      name="type" 
+                      #Type="ngModel" 
+                    >
+                      <option value="">Select Script Type</option>
                       <option>Command line</option>
                       <option>Command line 1</option>
                       <option>Command line 2</option>
@@ -76,12 +112,18 @@
                 <div class="f-col col-100">
                   <label for="Title">Command</label>
                   <div class="form-row">
-                    <textarea class="form-input"> </textarea>
+                    <textarea class="form-input"
+                      [(ngModel)]="commandModal.command" 
+                      name="command" 
+                      #Command="ngModel" 
+                      required 
+                      [class.validation-error]="submitted == true && Command.errors && Command.errors.required"
+                    > </textarea>
                   </div>
                 </div>
                 <div class="m-btn-row">
                   <div class="m-btn-col">
-                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <input type="submit" value="Save" (click)="createCommand()" class="btn btn-primary" />
                     <a
                       href="javascript:;"
                       class="btn btn-secondary"
@@ -929,6 +971,34 @@
       </button>
       <button type="button" class="btn btn-remove">
         Remove
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #templateManageCategory let-modal>
+  <div class="modal-header">
+    <h2>Manage Category</h2>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <img
+      src="../../../../../ng1/images/device/close.svg"
+      alt="close"
+      title="close"
+    />
+    </button>
+  </div>
+  <div class="modal-body">
+    <div>
+        <ul>
+          <li *ngFor="let category of cmdCategoryList">
+            <span *ngIf="!category.create">{{category.name}}</span>
+            <input *ngIf="category.create" type="text" [(ngModel)]="category.name" />
+          </li>
+        </ul>
+    </div>
+    <div class="confirm-btn">
+      <button type="button" class="btn btn-remove" (click)="addNewCategory()">
+        Add New Category
       </button>
     </div>
   </div>

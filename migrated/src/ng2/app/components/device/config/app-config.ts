@@ -48,7 +48,12 @@ export const CONFIG = {
   createConnectionURL: BASE_URL + 'remote/createRemoteSession?',
   getConstant: BASE_URL + 'data/getConstants',
   printPdfURL: BASE_URL + 'reports/pdf',
-  saveDeviceNameURL: BASE_URL + DEVICE + '/editAgentInfo'
+  saveDeviceNameURL: BASE_URL + DEVICE + '/editAgentInfo',
+
+  // TERMINAL
+  createCommandURL: BASE_URL + 'cmdCommands/create',
+  getCommandURL: BASE_URL + 'cmdCommands',
+  getCmdCategoryURL: BASE_URL + 'cmdCommands/categories'
 
   // DASHBOARD
 
