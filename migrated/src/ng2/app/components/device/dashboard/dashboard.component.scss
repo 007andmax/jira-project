@@ -185,7 +185,7 @@
                             display: flex;
                             flex-direction: row;
                             align-items: center;
-                            .pie-chart {
+                            .pie-chart,.progress-circle {
                                 @include border-radius(50%);
                                 margin-right: 11px;
                                 font-family: $graphicSemibold;
@@ -209,6 +209,7 @@
                             }
                         &.c-drive{
                             border-color: #2ec866;
+                            background-color: rgba(46, 200, 102, 0.05);
                             .pie-chart{
                                 // -ms-box-shadow: 0 2px 4px 0 rgba(34, 148, 75, 0.15);
                                 // -webkit-box-shadow: 0 2px 4px 0 rgba(34, 148, 75, 0.15);

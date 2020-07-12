@@ -157,7 +157,7 @@
                       <a
                         href="javascript:;"
                         class="copy"
-                        data-tooltip="Copy to terminal"
+                        datadata-tooltip="Copy to terminal"
                         >Copy to terminal</a
                       >
                       <div class="btn-group" ngbDropdown>
@@ -988,17 +988,100 @@
     </button>
   </div>
   <div class="modal-body">
-    <div>
+    <!-- <div>
         <ul>
           <li *ngFor="let category of cmdCategoryList">
             <span *ngIf="!category.create">{{category.name}}</span>
             <input *ngIf="category.create" type="text" [(ngModel)]="category.name" />
           </li>
         </ul>
+    </div> -->
+    <div class="terminal-category-list">
+       <form method="post">
+      <ul class="list-unstyled">
+            <li>
+              <input type="text" class="form-input" value="Windows > DNS" autofocus />
+              <a href="javascript:;" class="cat-action edit-cat" data-tooltip="Edit">
+                <img 
+                    src="../../../../../ng1/images/device/save-changes.svg"
+                    alt="save-changes"
+                    title="save-changes"
+                  />
+              </a>
+            </li>
+            <li>
+              <input type="text" class="form-input" value="Windows > Clear Events Logs" readonly />
+              <a href="javascript:;" class="cat-action delete" data-tooltip="Delete">
+                <img
+                    src="../../../../../ng1/images/device/remove-terminal.svg"
+                    alt="close"
+                    title="close"
+                  />
+              </a>
+            </li>
+            <li>
+              <input type="text" class="form-input" value="Windows > Delete Temporary Files" readonly />
+              <a href="javascript:;" class="cat-action delete" data-tooltip="Delete">
+                <img
+                    src="../../../../../ng1/images/device/remove-terminal.svg"
+                    alt="close"
+                    title="close"
+                  />
+              </a>
+            </li>
+            <li>
+              <input type="text" class="form-input" value="Windows > Clear Browsing History > Chrome" readonly />
+              <a href="javascript:;" class="cat-action delete" data-tooltip="Delete">
+                <img
+                    src="../../../../../ng1/images/device/remove-terminal.svg"
+                    alt="close"
+                    title="close"
+                  />
+              </a>
+            </li>
+            <li>
+              <input type="text" class="form-input" value="Windows > Clear Browsing History > Mozila" readonly />
+              <a href="javascript:;" class="cat-action delete" data-tooltip="Delete">
+                <img
+                    src="../../../../../ng1/images/device/remove-terminal.svg"
+                    alt="close"
+                    title="close"
+                  />
+              </a>
+            </li>
+            <li>
+              <input type="text" class="form-input" value="Windows > User Access Control" readonly />
+              <a href="javascript:;" class="cat-action delete" data-tooltip="Delete">
+                <img
+                    src="../../../../../ng1/images/device/remove-terminal.svg"
+                    alt="close"
+                    title="close"
+                  />
+              </a>
+            </li>
+            <li>
+              <input type="text" class="form-input" placeholder="Write category Name" />
+              <a href="javascript:;" class="cat-action edit-cat" data-tooltip="Add">
+                <img
+                    src="../../../../../ng1/images/device/save-changes.svg"
+                    alt="save-changes"
+                    title="save-changes"
+                  />
+              </a>
+            </li>
+
+        </ul>
+      </form>  
     </div>
+    
     <div class="confirm-btn">
-      <button type="button" class="btn btn-remove" (click)="addNewCategory()">
-        Add New Category
+      
+      <button type="button" class="btn btn-small" (click)="addNewCategory()">
+        <img
+        src="../../../../../ng1/images/device/add-task.svg"
+        alt="add-task"
+        title="add-task"
+      /> Add New Category
       </button>
     </div>
   </div>

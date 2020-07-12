@@ -217,7 +217,7 @@ main {
                         //     overflow-x: hidden;
                         // }
                         .modal-body {
-                            @media only screen and (max-width: 1440px) {
+                            @media only screen and (max-height: 700px) {
                                 padding: 0;
                                 max-height: 410px;
                                 overflow-y: auto;
@@ -248,6 +248,41 @@ main {
                                         min-width: inherit;
                                         padding: 13px 16px;
                                     }
+                                }
+                            }
+                        }
+                    }
+                }
+                .dropdown{
+                    .dropdown-menu{
+                        box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
+                        border: solid 1px #dfe3e8;
+                        background-color: #ffffff;
+                        border-radius: 4px;
+                        padding-top: 8px;
+                        button{
+                            &.dropdown-item{
+                                padding: 6px 15px;
+                                font-size: 13px;
+                                font-weight: normal;
+                                font-style: normal;
+                                line-height: 1.54;
+                                letter-spacing: normal;
+                                color: #364656;
+                                height: auto;
+                                &:hover{
+                                    background-color: #edf2f6;
+                                }
+                                &:last-child{
+                                    border-top:1px solid  #dfe3e8;
+                                    font-size: 12px;
+                                    font-weight: 500;
+                                    font-style: normal;
+                                    line-height: 1.33;
+                                    letter-spacing: normal;
+                                    color: #16a4fa; 
+                                    font-family:$graphicMedBold;
+                                    padding: 12px 15px;
                                 }
                             }
                         }
@@ -734,6 +769,94 @@ body {
                                     }
                                 }
                             }
+                        }
+                    }
+                }
+            }
+            &.category-modal{
+                .terminal-category-list {
+                    display: flex;
+                    width: 100%;
+                    flex-direction: column;
+                    ul.list-unstyled {
+                        margin: 0;
+                        display: flex;
+                        flex-direction: column;
+                        width: 100%;
+                        li {
+                            width: 100%;
+                            display: -ms-flexbox;
+                            display: -webkit-flex;
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            justify-content: space-between;
+                            margin-bottom: 8px;
+                            .form-input {
+                                width: calc(100% - 48px);
+                            }
+                            .cat-action {
+                                width: 40px;
+                                height: 40px;
+                                display: -ms-flexbox;
+                                display: -webkit-flex;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                @include border-radius(4px);
+                                border: solid 1px #dfe3e8;
+                                background-color: #ffffff;
+                                &.edit-cat{
+                                    background-color: #637382;
+                                    border-color: #637382;
+                                }
+                                &::before{
+                                    left: -14px;
+                                    margin: 0 auto;
+                                    top: -42px;
+                                }
+                                &::after {
+                                    bottom: auto;
+                                    top: -9px;
+                                }
+                                &.delete{
+                                    &:hover{
+                                        background-color: #f4f6f8;
+                                        border-color:#f4f6f8;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                
+                
+                
+                
+                
+                
+                
+            }
+            &.category-modal {
+                .confirm-btn {
+                    align-items: center;
+                    justify-content: flex-start !important;
+                    button{
+                        &.btn.btn-small {
+                            margin-left: 0 !important;
+                            background-color: transparent;
+                            border: 1px solid #16a4fa;
+                            color: #16a4fa;
+                            font-size: 12px !important;
+                            padding: 9px 8px !important;
+                            display: -ms-flexbox !important;
+                            display: -webkit-flex !important;
+                            display: flex !important;
+                            align-items: center;
+                            justify-content: center;
+                            line-height: 1;
+                            margin-top: 10px;
                         }
                     }
                 }

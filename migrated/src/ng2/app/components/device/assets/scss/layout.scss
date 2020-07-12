@@ -1082,7 +1082,7 @@ ngb-tabset {
 
 /*** action button ***/
 
-.edit,.remove,.view,.block,.reset,.copy,.script-right a{
+.edit,.remove,.view,.block,.reset,.copy,.script-right a,.cat-action{
     display: inline-block;
     vertical-align: middle;
     position: relative;
@@ -1452,6 +1452,11 @@ table {
                 color: $metal;
                 margin-right: 16px;
                 margin-bottom: 0;
+            }
+            .device-small-dropdown{
+                .dropdown-menu{
+                    top:1px !important;
+                }
             }
         }
         
@@ -1929,7 +1934,7 @@ ul.user-list {
     background: url(assets/images/calander.svg) no-repeat right 12px center;
     padding-right: 30px;
 }
-.bs-datepicker{
+.bs-datepicker,.ngb-datepicker{
     width: 280px;
     @include border-radius(3px);
     -webkit-box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
@@ -1981,10 +1986,10 @@ ul.user-list {
         }
     }
 }
-.bs-datepicker-head button.next span, .bs-datepicker-head button.previous span{display: none;}
-.bs-datepicker-head button.next, .bs-datepicker-head button.previous{height: 16px !important;width: 16px !important;}
-.bs-datepicker-head button.next{background: url(assets/images/next.svg) no-repeat center;float: right;}
-.bs-datepicker-head button.previous{background: url(assets/images/prev.svg) no-repeat center;float: left;}
+.bs-datepicker-head button.next span, .bs-datepicker-head button.previous span,.ngb-dp-arrow .btn-link span{display: none;}
+.bs-datepicker-head button.next, .bs-datepicker-head button.previous,.ngb-dp-arrow .btn-link{height: 16px !important;width: 16px !important;background-color: transparent;padding: 0;}
+.bs-datepicker-head button.next,.ngb-dp-arrow .btn-link[aria-label="Next"]{background: url(assets/images/next.svg) no-repeat center;float: right;}
+.bs-datepicker-head button.previous,.ngb-dp-arrow .btn-link[aria-label="Previous"]{background: url(assets/images/prev.svg) no-repeat center;float: left;}
 .bs-datepicker-body table{table-layout: fixed;}
 bs-datepicker-navigation-view {
     width: 100%;
@@ -2098,9 +2103,11 @@ cursor: not-allowed;
         box-shadow:none;
         left: 0;
         right: 0;
-        top: 20%;
+        top: 0;
         bottom: 0;
         margin: auto;
+        position: static;
+        transform: none;
         .modal-content{
             -ms-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
             -o-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
@@ -2152,9 +2159,9 @@ cursor: not-allowed;
     align-items: center;
     min-height: calc(100% - 1rem);
     @media only screen and (min-width:576px){
-        .modal-dialog-centered {
+        
             min-height: calc(100% - 3.5rem);
-        }
+       
     }
 }
 
