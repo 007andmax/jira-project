@@ -155,6 +155,10 @@
           url: '/ng2/billable-tickets',
           template: '<billable-tickets-component></billable-tickets-component>'
         }))
+        .state('new-billable-invoices', waitForServices({
+          url: '/ng2/invoices',
+          template: '<invoices-component></invoices-component>'
+        }))
         .state('new-reports', waitForServices({
           url: '/ng2/reports',
           template: '<reports-component></reports-component>'
@@ -353,7 +357,7 @@
       'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.SharedStateService', '$http',
       function ($rootScope, $templateRequest, CompaniesService, $state, $uibModal, TicketsService, $stateParams,
                 UserConfirmationsService, SharedStateService, $http) {
-       
+
         $rootScope.debounce = function (fn, time) {
           var isCalled = false;
           var interval;

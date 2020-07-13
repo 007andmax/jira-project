@@ -267,7 +267,8 @@ import { InvoiceFormTicketEditServiceComponent } from './components/billing/bill
 import { InvoiceFormTicketEditProductComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-product/invoice-form-ticket-edit-product.component';
 import { InvoiceFormTicketEditTaxesComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.component';
 import { InvoiceDiscountComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-discount/invoice-discount.component';
- 
+import { InvoicesComponent } from './components/billing/invoices/invoices.component';
+
 
 
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
@@ -402,6 +403,9 @@ angular.module('quicktech')
   .directive(
     'billableComponent',
     downgradeComponent({ component: BillableComponent }))
+  .directive(
+    'invoicesComponent',
+    downgradeComponent({ component: InvoicesComponent }))
   .directive(
     'billableTicketsComponent',
     downgradeComponent({ component: BillableTicketsComponent }))
@@ -661,6 +665,7 @@ angular.module('quicktech')
     InvoiceFormTicketEditProductComponent,
     InvoiceFormTicketEditTaxesComponent,
     InvoiceDiscountComponent,
+    InvoicesComponent,
   ],
   imports: [
     BrowserModule,
@@ -733,6 +738,7 @@ angular.module('quicktech')
     CompanyProductsComponent,
     ModalCustomShareScreenComponent,
     BillableComponent,
+    InvoicesComponent,
     BillableTicketsComponent
     // RecurringTicketsComponent
   ],
