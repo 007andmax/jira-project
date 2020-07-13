@@ -86,32 +86,12 @@
                 <h2>Disk Drives</h2>
                 <ul class="list-unstyled">
                   <li [ngClass]="{'e-drive':drive.is_system == false,'c-drive':drive.is_system == true, 'e-drive':drive.is_system == false && drive.device_id == 'E:', 'd-drive':drive.is_system == false && drive.device_id == 'D:', 'f-drive':drive.is_system == false && drive.device_id == 'F:'}" *ngFor="let drive of logicalDisk">
-                    <!-- <span class="pie-chart">
-                      <circle-progress
-                      [percent]="drive.percent"
-                      [radius]="16"
-                      [maxPercent]="100"
-                      [outerStrokeWidth]="3"
-                      [innerStrokeWidth]="3"
-                      [outerStrokeColor]="drive.color"
-                      [innerStrokeColor]="'#f4f6f8'"
-                      [animation]="true"
-                      [animationDuration]="300"
-                      [titleFontSize]="10"
-                      [imageHeight]="37"
-                      [imageWidth]="37"
-                      [showSubtitle]="false"
-                      [space]="-3"
-                      [toFixed]="0"
-                      [backgroundPadding]="-50"
-                    ></circle-progress>
-    
-                    </span> -->
+                    
                     <div class="progress-circle p{{drive.percent}}">
                       <span>{{drive.percent}}%</span>
                       <div class="left-half-clipper">
                          <div class="first50-bar"></div>
-                         <div class="value-bar"></div>
+                      <div class="value-bar" [ngStyle]="{'border-color': drive.color}"></div>
                       </div>
                    </div>
                     <div class="drive-status">
@@ -119,114 +99,6 @@
                       <span class="drive-limit" *ngIf="drive.free_space != '' && drive.size != ''">{{convertToGB(drive.size) - convertToGB(drive.free_space)}}GB / {{convertToGB(drive.size)}}GB</span>
                     </div>
                   </li>
-                  <!-- <li class="c-drive">
-                    <span class="pie-chart">
-                      <circle-progress
-                      [percent]="76"
-                      [radius]="16"
-                      [maxPercent]="100"
-                      [outerStrokeWidth]="3"
-                      [innerStrokeWidth]="3"
-                      [outerStrokeColor]="'#2ec866'"
-                      [innerStrokeColor]="'#f4f6f8'"
-                      [animation]="true"
-                      [animationDuration]="300"
-                      [titleFontSize]="10"
-                      [imageHeight]="37"
-                      [imageWidth]="37"
-                      [showSubtitle]="false"
-                      [space]="-3"
-                      [toFixed]="0"
-                      [backgroundPadding]="-50"
-                    ></circle-progress>
-    
-                    </span>
-                    <div class="drive-status">
-                      <span class="drive-name">C: ( NTFS on drive 1)</span>
-                      <span class="drive-limit">340GB / 512GB</span>
-                    </div>
-                  </li>
-                  <li class="d-drive">
-                    <span class="pie-chart">
-                      <circle-progress
-                      [percent]="50"
-                      [radius]="16"
-                      [maxPercent]="100"
-                      [outerStrokeWidth]="3"
-                      [innerStrokeWidth]="3"
-                      [outerStrokeColor]="'#0057a8'"
-                      [innerStrokeColor]="'#f4f6f8'"
-                      [animation]="true"
-                      [animationDuration]="300"
-                      [titleFontSize]="10"
-                      [imageHeight]="37"
-                      [imageWidth]="37"
-                      [showSubtitle]="false"
-                      [space]="-3"
-                      [toFixed]="0"
-                      [backgroundPadding]="-50"
-                    ></circle-progress>
-    
-                    </span>
-                    <div class="drive-status">
-                      <span class="drive-name">D: ( NTFS on drive 0)</span>
-                      <span class="drive-limit">120GB / 240GB</span>
-                    </div>
-                  </li>
-                  <li class="e-drive">
-                    <span class="pie-chart">
-                      <circle-progress
-                      [percent]="20"
-                      [radius]="16"
-                      [maxPercent]="100"
-                      [outerStrokeWidth]="3"
-                      [innerStrokeWidth]="3"
-                      [outerStrokeColor]="'#00d8e7'"
-                      [innerStrokeColor]="'#f4f6f8'"
-                      [animation]="true"
-                      [animationDuration]="300"
-                      [titleFontSize]="10"
-                      [imageHeight]="37"
-                      [imageWidth]="37"
-                      [showSubtitle]="false"
-                      [space]="-3"
-                      [toFixed]="0"
-                      [backgroundPadding]="-50"
-                    ></circle-progress>
-    
-                    </span>
-                    <div class="drive-status">
-                      <span class="drive-name">E: ( NTFS on drive 2)</span>
-                      <span class="drive-limit">78GB / 1000GB</span>
-                    </div>
-                  </li>
-                  <li class="f-drive">
-                    <span class="pie-chart">
-                      <circle-progress
-                      [percent]="38"
-                      [radius]="16"
-                      [maxPercent]="100"
-                      [outerStrokeWidth]="3"
-                      [innerStrokeWidth]="3"
-                      [outerStrokeColor]="'#16a4fa'"
-                      [innerStrokeColor]="'#f4f6f8'"
-                      [animation]="true"
-                      [animationDuration]="300"
-                      [titleFontSize]="10"
-                      [imageHeight]="37"
-                      [imageWidth]="37"
-                      [showSubtitle]="false"
-                      [space]="-3"
-                      [toFixed]="0"
-                      [backgroundPadding]="-50"
-                    ></circle-progress>
-    
-                    </span>
-                    <div class="drive-status">
-                      <span class="drive-name">F: ( NTFS on drive 3)</span>
-                      <span class="drive-limit">112GB / 512GB</span>
-                    </div>
-                  </li> -->
     
                 </ul>
               </div>
