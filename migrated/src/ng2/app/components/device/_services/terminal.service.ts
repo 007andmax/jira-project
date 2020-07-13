@@ -17,6 +17,13 @@ export class TerminalService {
         }))
     }
 
+    updateCommand(data: any) {
+        return this.http.put<any>(CONFIG.updateCommandURL, data)
+        .pipe(map(data => {
+            return data;
+        }))
+    }
+
     createCategory(data: any) {
         return this.http.post<any>(CONFIG.createCategoryURL + data.name, {})
         .pipe(map(data => {
@@ -33,6 +40,13 @@ export class TerminalService {
 
     deleteCategory(id: string) {
         return this.http.delete<any>(CONFIG.deleteCategoryURL + id)
+        .pipe(map(data => {
+            return data;
+        }))
+    }
+
+    deleteCommand(id: string) {
+        return this.http.delete<any>(CONFIG.deleteCommandURL + id)
         .pipe(map(data => {
             return data;
         }))

@@ -29,13 +29,13 @@
       <img src="../../../../../ng1/images/device/panel-open.svg" alt="Open" title="Ticket" />
     </a> -->
       <div>
-        <a href="javascript:;" class="add-btn" (click)="create = !create"
+        <a href="javascript:;" class="add-btn" (click)="resetCmdModal();submitted = false;create = !create"
           ><img src="../../../../../ng1/images/device/add.svg" alt="add"
         /></a>
         <!-- Modal Add New Command -->
         <div class="modal-content toggle-area" [class.opened]="create">
           <div class="toggle-header">
-            <h2 class="h1">Create Command</h2>
+            <h2 class="h1">{{commandModal.id == '' ? 'Create' : 'Edit'}} Command</h2>
           </div>
           <div class="modal-body">
             <form novalidate #commandFrm="ngForm">
@@ -74,7 +74,7 @@
                       <img class="icn-sm report-caret-icon" src="./../../../../../../ng1/images/device/selct-arrow.svg"/>
                       <div ngbDropdownMenu
                            aria-labelledby="dropdownBasic1">
-                           <button *ngFor="let category of cmdCategoryReadList" ngbDropdownItem (click)="commandModal.category = category.name;">{{category.name}}</button>
+                           <button *ngFor="let category of cmdCategoryReadList" ngbDropdownItem (click)="commandModal.category = category.name;commandModal.categoryId = category.id;">{{category.name}}</button>
                            <button ngbDropdownItem (click)="manageCategory(templateManageCategory);">Manage Category</button>
                       </div>
                     </div>
@@ -128,7 +128,7 @@
             <ng-template ngbTabContent>
             <div class="cmn-tbs-content command">
               <ul class="list-unstyled">
-                <li>
+                <li *ngFor="let cmd of commandList">
                   <div class="terminal-cmd-opt">
                     <div class="cmd-list-left">
                       <img
@@ -136,7 +136,7 @@
                         alt="command-line"
                         title="command-line"
                       />
-                      <h5>Get all IP info</h5>
+                      <h5>{{cmd.title}}</h5>
                     </div>
                     <div class="cmd-list-right">
                       <a
@@ -163,7 +163,7 @@
                           aria-labelledby="button-basic"
                         >
                           <li role="menuitem" ngbDropdownItem>
-                            <a class="dropdown-item" href="javascript:void(0);">
+                            <a class="dropdown-item" href="javascript:void(0);" (click)="submitted = false;openEditCommand(cmd)">
                               <img
                                 src="../../../../../ng1/images/device/edit-cmd.svg"
                                 alt="edit-cmd"
@@ -173,11 +173,11 @@
                             >
                           </li>
                           <li role="menuitem" ngbDropdownItem>
-                            <a class="dropdown-item" href="javascript:void(0);" (click)="openModal(template)">
+                            <a class="dropdown-item" href="javascript:void(0);" (click)="openModal(template, cmd.id, cmd.title, 'deleteCmd')">
                               <img
                                 src="../../../../../ng1/images/device/remove-terminal.svg"
-                                alt="edit-cmd"
-                                title="edit-cmd"
+                                alt="delete-cmd"
+                                title="delete-cmd"
                               />
                               Delete</a
                             >
@@ -187,132 +187,7 @@
                     </div>
                   </div>
                   <div class="cmd-details">
-                    <span>ipconfig / all</span>
-                  </div>
-                </li>
-                <li>
-                  <div class="terminal-cmd-opt">
-                    <div class="cmd-list-left">
-                      <img
-                        src="../../../../../ng1/images/device/command-line.svg"
-                        alt="command-line"
-                        title="command-line"
-                      />
-                      <h5>Guest</h5>
-                    </div>
-                    <div class="cmd-list-right">
-                      <a
-                        href="javascript:;"
-                        class="copy"
-                        data-tooltip="Copy to terminal"
-                        >Copy to terminal</a
-                      >
-                      <div class="btn-group" ngbDropdown>
-                        <button
-                          id="button-basic"
-                          ngbDropdownToggle
-                          type="button"
-                          class="dropdown-toggle"
-                          aria-controls="dropdown-basic"
-                        >
-                          Button dropdown
-                        </button>
-                        <ul
-                          id="dropdown-basic"
-                          ngbDropdownMenu
-                          class="dropdown-menu"
-                          role="menu"
-                          aria-labelledby="button-basic"
-                        >
-                          <li role="menuitem" ngbDropdownItem>
-                            <a class="dropdown-item" href="javascript:void(0);">
-                              <img
-                                src="../../../../../ng1/images/device/edit-cmd.svg"
-                                alt="edit-cmd"
-                                title="edit-cmd"
-                              />
-                              Edit</a
-                            >
-                          </li>
-                          <li role="menuitem" ngbDropdownItem>
-                            <a class="dropdown-item" href="javascript:void(0);" (click)="openModal(template)">
-                              <img
-                                src="../../../../../ng1/images/device/remove-terminal.svg"
-                                alt="edit-cmd"
-                                title="edit-cmd"
-                              />
-                              Delete</a
-                            >
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="cmd-details">
-                    <span
-                      >bdehdcfg -target
-                      &#123;default|unallocated|&lt;drive_letter&gt;
-                      shrink|&lt;drive_letter &gt; merge&#125; -restart</span
-                    >
-                  </div>
-                </li>
-                <li>
-                  <div class="terminal-cmd-opt">
-                    <div class="cmd-list-left">
-                      <img
-                        src="../../../../../ng1/images/device/command-line.svg"
-                        alt="command-line"
-                        title="command-line"
-                      />
-                      <h5>Windows > Driver Cleanup</h5>
-                    </div>
-                    <div class="cmd-list-right">
-                      <a
-                        href="javascript:;"
-                        class="copy"
-                        data-tooltip="Copy to terminal"
-                        >Copy to terminal</a
-                      >
-                      <div class="btn-group" ngbDropdown>
-                        <button
-                          id="button-basic"
-                          ngbDropdownToggle
-                          type="button"
-                          class="dropdown-toggle"
-                        >
-                          Button dropdown
-                        </button>
-                        <ul
-                          id="dropdown-basic"
-                          ngbDropdownMenu
-                          class="dropdown-menu"
-                        >
-                          <li role="menuitem" ngbDropdownItem>
-                            <a class="dropdown-item" href="javascript:void(0);">
-                              <img
-                                src="../../../../../ng1/images/device/edit-cmd.svg"
-                                alt="edit-cmd"
-                                title="edit-cmd"
-                              />
-                              Edit</a
-                            >
-                          </li>
-                          <li role="menuitem" ngbDropdownItem>
-                            <a class="dropdown-item" href="javascript:void(0);" (click)="openModal(template)">
-                              <img
-                                src="../../../../../ng1/images/device/remove-terminal.svg"
-                                alt="edit-cmd"
-                                title="edit-cmd"
-                              />
-                              Delete</a
-                            >
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="cmd-details">
-                    <span>reg / all</span>
+                    <span>{{cmd.command}}</span>
                   </div>
                 </li>
               </ul>
@@ -948,13 +823,13 @@
   </div>
   <div class="modal-body">
     <div class="confirm-message">
-        <p>Are you sure you want to delete <strong>Enable USB access</strong> script?</p>
+        <p>Are you sure you want to delete <strong>{{deleteTitle}}</strong> script?</p>
     </div>
     <div class="confirm-btn">
       <button type="button" class="btn btn-secondary" aria-label="Close" (click)="modal.dismiss('Cross click')">
         Cancel
       </button>
-      <button type="button" class="btn btn-remove">
+      <button type="button" class="btn btn-remove" (click)="deleteCommand();modal.dismiss('Cross click')">
         Remove
       </button>
     </div>

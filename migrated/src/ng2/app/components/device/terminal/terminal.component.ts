@@ -22,8 +22,12 @@ export class TerminalComponent implements OnInit {
   commandModal = {
     title: '',
     command: '',
-    category: ''
+    category: '',
+    categoryId: '',
+    id: ''
   };
+  deleteId = '';
+  deleteTitle = '';
   commandList = [];
   cmdCategoryList = [];
   cmdCategoryReadList = [];
@@ -38,12 +42,18 @@ export class TerminalComponent implements OnInit {
   }
 
   getCommandList () {
-    
     this.terminalService.getCommand()
     .pipe(first())
     .subscribe(data => {
       if (isArray(this.commandList)) {
-        this.commandList = data;
+        this.commandList = [];
+        let response = data;
+        for (let key in response) {
+          response[key].forEach(element => {
+            this.commandList.push(element);  
+          });
+          
+        }
       }
     },
     error => {
@@ -54,6 +64,16 @@ export class TerminalComponent implements OnInit {
         this.toastr.error('Something went wrong please try again.');
       }
     });
+  }
+
+  resetCmdModal() {
+    this.commandModal = {
+      title: '',
+      command: '',
+      category: '',
+      categoryId: '',
+      id: ''
+    };
   }
 
   getCmdCategory () {
@@ -124,6 +144,21 @@ export class TerminalComponent implements OnInit {
     });
   }
 
+  deleteCommand() {
+    this.loading = true;
+    this.terminalService.deleteCommand(this.deleteId)
+    .pipe(first())
+    .subscribe(resp => {
+      this.loading = false;
+      this.getCommandList();
+      this.toastr.success('Command Deleted Successfully');
+    },
+    error => {
+      this.loading = false;
+      const statusError = error;
+    });
+  }
+
   cancelCategory(flag) {
     if (flag === 'create') {
       this.cmdCategoryList.splice(this.cmdCategoryList.length - 1, 1);
@@ -135,19 +170,53 @@ export class TerminalComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
+    let data = {
+      title: this.commandModal.title,
+      categoryId: this.commandModal.categoryId,
+      command: this.commandModal.command,
+      id: this.commandModal.id
+    }
+    if (this.commandModal.id == '') {
+      delete data.id;
+      this.terminalService.createCommand(data)
+      .pipe(first())
+      .subscribe(resp => {
+        if (resp.id !== '') {
+          this.toastr.success('Command Created Successfully');
+          this.create=!this.create;
+          this.getCommandList();
+        }
+      },
+      error => {
+        const statusError = error;
+        
+      });
+    } else {
+      this.terminalService.updateCommand(data)
+      .pipe(first())
+      .subscribe(resp => {
+        if (resp.id !== '') {
+          this.toastr.success('Command Updated Successfully');
+          this.create=!this.create;
+          this.getCommandList();
+        }
+      },
+      error => {
+        const statusError = error;
+        
+      });
+    }
     
-    this.terminalService.createCommand(this.form.value)
-    .pipe(first())
-    .subscribe(resp => {
-      if (resp.id !== '') {
-        this.toastr.success('Command Created Successfully');
-        this.create=!this.create;
-      }
-    },
-    error => {
-      const statusError = error;
-      
-    });
+  }
+
+  openEditCommand(data: any) {
+    this.commandModal.title = data.title;
+    this.commandModal.command = data.command;
+    this.commandModal.id = data.id;
+    this.commandModal.categoryId = data.cateogryId;
+    let res = this.cmdCategoryReadList.filter(x => x.id == data.categoryId);
+    this.commandModal.category = res[0].name;
+    this.create = !this.create;
   }
 
   createCategory(data) {
@@ -190,7 +259,11 @@ export class TerminalComponent implements OnInit {
  
   
  
-  openModal(template) {
+  openModal(template, id, title, flag) {
+    if (flag === 'deleteCmd') {
+      this.deleteId = id;
+      this.deleteTitle = title;
+    }
     this.modalService.open(template, {ariaLabelledBy: 'modal-basic-title' ,windowClass: 'cmn-terminal-modal confirm-control' , centered: true}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
