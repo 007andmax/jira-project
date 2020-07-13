@@ -1934,7 +1934,7 @@ ul.user-list {
     background: url(assets/images/calander.svg) no-repeat right 12px center;
     padding-right: 30px;
 }
-.bs-datepicker,.ngb-datepicker{
+.bs-datepicker{
     width: 280px;
     @include border-radius(3px);
     -webkit-box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
@@ -1942,15 +1942,15 @@ ul.user-list {
     -moz-box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
     box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
     background-color: #ffffff;
-    padding: 24px 24px 30px 24px;
+    padding: 24px 24px 30px 24px !important;
     overflow: hidden;
     font-size: 12px;
     font-weight: normal;
-    font-stretch: normal;
     font-style: normal;
     line-height: normal;
     letter-spacing: normal;
     color: #4f5f79;
+    border:1px solid #dfe3e8;
     .bs-datepicker-container{
         padding: 0;
         .bs-datepicker-head {
@@ -1985,11 +1985,12 @@ ul.user-list {
             line-height: 17px;
         }
     }
+    .ngb-dp-header{display: none;}
 }
-.bs-datepicker-head button.next span, .bs-datepicker-head button.previous span,.ngb-dp-arrow .btn-link span{display: none;}
-.bs-datepicker-head button.next, .bs-datepicker-head button.previous,.ngb-dp-arrow .btn-link{height: 16px !important;width: 16px !important;background-color: transparent;padding: 0;}
-.bs-datepicker-head button.next,.ngb-dp-arrow .btn-link[aria-label="Next"]{background: url(assets/images/next.svg) no-repeat center;float: right;}
-.bs-datepicker-head button.previous,.ngb-dp-arrow .btn-link[aria-label="Previous"]{background: url(assets/images/prev.svg) no-repeat center;float: left;}
+.bs-datepicker-head button.next span, .bs-datepicker-head button.previous span{display: none;}
+.bs-datepicker-head button.next, .bs-datepicker-head button.previous{height: 16px !important;width: 16px !important;background-color: transparent;padding: 0;}
+.bs-datepicker-head button.next{background: url(assets/images/next.svg) no-repeat center;float: right;}
+.bs-datepicker-head button.previous{background: url(assets/images/prev.svg) no-repeat center;float: left;}
 .bs-datepicker-body table{table-layout: fixed;}
 bs-datepicker-navigation-view {
     width: 100%;
@@ -2021,6 +2022,9 @@ bs-datepicker-navigation-view {
     font-size: 12px;
     text-transform: uppercase;
 }
+
+
+
 .bs-datepicker-body table th {
     font-size: 10px;
     font-weight: 500;
@@ -2085,6 +2089,171 @@ cursor: not-allowed;
     bs-datepicker-container{
         left: 20px !important;
         top: 4px !important;
+    }
+}
+
+
+
+
+/*** New Date Picker  ***/
+
+ngb-datepicker{
+    width: 280px;
+    @include border-radius(3px);
+    -webkit-box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
+    -o-box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    padding: 24px 15px 15px 15px !important;
+    overflow: hidden;
+    font-size: 12px;
+    font-weight: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #4f5f79;
+    border: 1px solid #dfe3e8 !important;
+    z-index: 1;
+   
+    .ngb-dp-header{
+        padding: 0;
+        margin: 0;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        ngb-datepicker-navigation{
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+        // .ngb-dp-navigation-select{
+        //     display: none;
+        // }
+        .ngb-dp-arrow{
+            margin: 0;
+            width: 16px;
+            height: auto;
+            flex: auto;
+            .btn{
+                &.btn-link {
+                    span{display: none;}
+                    &.ngb-dp-arrow-btn{
+                        padding: 0;
+                        margin: 0;
+                        height: 16px !important;
+                        width: 16px !important;
+                        background-color: transparent;
+                        background: url(assets/images/prev.svg) no-repeat left center;float: left;
+
+                    }
+                }
+            }
+            &.right{
+                .btn{
+                    &.btn-link {
+                        
+                        &.ngb-dp-arrow-btn{
+                            background: url(assets/images/next.svg) no-repeat right center;float: right;
+                        }
+                    }
+                }
+            }
+            
+        }
+    }
+    .ngb-dp-weekdays {
+        .ngb-dp-weekday {
+            font-size: 10px;
+            font-weight: 500;
+            font-family: $graphicSemibold;
+            font-style: normal;
+            line-height: 1;
+            letter-spacing: normal;
+            text-align: center;
+            color: #4f5f79;
+            border-bottom: 1px solid #edf2f6;
+            padding: 25px 5px 10px 5px;
+            text-align: center;
+        }
+    }
+
+    .ngb-dp-months{
+        width: 100%;
+        .ngb-dp-month{
+            width: 100%;
+        }
+      
+    }
+    ngb-datepicker-month-view{
+        width: 100%;
+        display: table;
+        & > div{
+            display: table-row;
+            padding: 0 !important;
+            .ngb-dp-weekday{
+                height: auto;
+                width: auto;
+                display: table-cell;
+    
+            }
+            .ngb-dp-day{
+                height: auto;
+                width: auto;
+                display: table-cell;
+                font-size: 12px;
+                font-weight: normal;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: normal;
+                letter-spacing: normal;
+                color: #4f5f79; 
+                text-align: center;
+                padding: 5px 5px 5px 5px;
+                border: none !important;
+                outline: none !important;
+                &.ngb-dp-today{
+                    .btn-light{
+                        @include border-radius(50%);
+                    background-color: #16a4fa;
+                    color:#fff;
+                    }
+                }
+                .btn-light{
+                    height: auto;
+                    width: auto;
+                    line-height: 1 !important;
+                    font-size: 12px;
+                    font-weight: normal;
+                    font-family:$font-body;
+                    font-stretch: normal;
+                    font-style: normal;
+                    line-height: normal;
+                    letter-spacing: normal;
+                    color: #4f5f79; 
+                    text-align: center;
+                    min-width: 24px;
+                    min-height: 24px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    @include border-radius(50%);
+                    &.active{
+                        
+                        background-color: #16a4fa;
+                        color:#fff;
+                    }
+                }
+            }
+            .ngb-dp-weekdays{padding: 0 !important;
+                border: 0 !important;width: 100%;}
+        }
     }
 }
 
