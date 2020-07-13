@@ -17,6 +17,27 @@ export class TerminalService {
         }))
     }
 
+    createCategory(data: any) {
+        return this.http.post<any>(CONFIG.createCategoryURL + data.name, {})
+        .pipe(map(data => {
+            return data;
+        }))
+    }
+
+    updateCategory(data: any) {
+        return this.http.put<any>(CONFIG.updateCategoryURL + data.id + '/' + data.name, {})
+        .pipe(map(data => {
+            return data;
+        }))
+    }
+
+    deleteCategory(id: string) {
+        return this.http.delete<any>(CONFIG.deleteCategoryURL + id)
+        .pipe(map(data => {
+            return data;
+        }))
+    }
+
     getCommand() {
         return this.http.get<any>(CONFIG.getCommandURL)
         .pipe(map(data => {

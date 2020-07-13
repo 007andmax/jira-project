@@ -59,19 +59,6 @@
                 <div class="f-col col-70">
                   <label for="command">Category</label>
                   <div class="form-row">
-                    <!-- <select class="form-input cmn-select"
-                      [(ngModel)]="commandModal.category" 
-                      name="category" 
-                      #Category="ngModel" 
-                      required 
-                      [class.validation-error]="submitted == true && Category.errors && Category.errors.required"
-                    >
-                      <option value="">Select Category</option>
-                      <option>Window > USB access</option>
-                      <option>Window > USB access 1</option>
-                      <option>Window > USB access 2</option>
-                      <option>Window > USB access 3</option>
-                    </select> -->
                     <div class="grey-dropdown w-100" ngbDropdown>
                       <input type="text"
                         placeholder="Select Category"
@@ -87,7 +74,7 @@
                       <img class="icn-sm report-caret-icon" src="./../../../../../../ng1/images/device/selct-arrow.svg"/>
                       <div ngbDropdownMenu
                            aria-labelledby="dropdownBasic1">
-                           <button *ngFor="let category of cmdCategoryReadList" ngbDropdownItem (click)="selectCategory(category);">{{category.name}}</button>
+                           <button *ngFor="let category of cmdCategoryReadList" ngbDropdownItem (click)="commandModal.category = category.name;">{{category.name}}</button>
                            <button ngbDropdownItem (click)="manageCategory(templateManageCategory);">Manage Category</button>
                       </div>
                     </div>
@@ -97,9 +84,7 @@
                   <label for="command">Script Type</label>
                   <div class="form-row">
                     <select class="form-input cmn-select"
-                      [(ngModel)]="commandModal.type" 
                       name="type" 
-                      #Type="ngModel" 
                     >
                       <option value="">Select Script Type</option>
                       <option>Command line</option>
@@ -988,84 +973,31 @@
     </button>
   </div>
   <div class="modal-body">
-    <!-- <div>
-        <ul>
-          <li *ngFor="let category of cmdCategoryList">
-            <span *ngIf="!category.create">{{category.name}}</span>
-            <input *ngIf="category.create" type="text" [(ngModel)]="category.name" />
-          </li>
-        </ul>
-    </div> -->
     <div class="terminal-category-list">
-       <form method="post">
+       <form novalidate>
       <ul class="list-unstyled">
-            <li>
-              <input type="text" class="form-input" value="Windows > DNS" autofocus />
-              <a href="javascript:;" class="cat-action edit-cat" data-tooltip="Edit">
+            <li *ngFor="let category of cmdCategoryList; let i = index;">
+              <input *ngIf="!category.create" type="text" class="form-input" name="cat_{{i}}" [(ngModel)]="category.name" (focus)="category.edit = true;"/>
+              <input *ngIf="category.create" type="text" class="form-input" name="cat_{{i}}" [(ngModel)]="category.name" placeholder="Write category Name"/>
+              <a *ngIf="!category.create && category.edit" href="javascript:;" class="cat-action edit-cat" data-tooltip="Edit" (click)="updateCategory(category, i)">
                 <img 
                     src="../../../../../ng1/images/device/save-changes.svg"
                     alt="save-changes"
                     title="save-changes"
                   />
               </a>
-            </li>
-            <li>
-              <input type="text" class="form-input" value="Windows > Clear Events Logs" readonly />
-              <a href="javascript:;" class="cat-action delete" data-tooltip="Delete">
-                <img
-                    src="../../../../../ng1/images/device/remove-terminal.svg"
-                    alt="close"
-                    title="close"
-                  />
-              </a>
-            </li>
-            <li>
-              <input type="text" class="form-input" value="Windows > Delete Temporary Files" readonly />
-              <a href="javascript:;" class="cat-action delete" data-tooltip="Delete">
-                <img
-                    src="../../../../../ng1/images/device/remove-terminal.svg"
-                    alt="close"
-                    title="close"
-                  />
-              </a>
-            </li>
-            <li>
-              <input type="text" class="form-input" value="Windows > Clear Browsing History > Chrome" readonly />
-              <a href="javascript:;" class="cat-action delete" data-tooltip="Delete">
-                <img
-                    src="../../../../../ng1/images/device/remove-terminal.svg"
-                    alt="close"
-                    title="close"
-                  />
-              </a>
-            </li>
-            <li>
-              <input type="text" class="form-input" value="Windows > Clear Browsing History > Mozila" readonly />
-              <a href="javascript:;" class="cat-action delete" data-tooltip="Delete">
-                <img
-                    src="../../../../../ng1/images/device/remove-terminal.svg"
-                    alt="close"
-                    title="close"
-                  />
-              </a>
-            </li>
-            <li>
-              <input type="text" class="form-input" value="Windows > User Access Control" readonly />
-              <a href="javascript:;" class="cat-action delete" data-tooltip="Delete">
-                <img
-                    src="../../../../../ng1/images/device/remove-terminal.svg"
-                    alt="close"
-                    title="close"
-                  />
-              </a>
-            </li>
-            <li>
-              <input type="text" class="form-input" placeholder="Write category Name" />
-              <a href="javascript:;" class="cat-action edit-cat" data-tooltip="Add">
+              <a *ngIf="category.create" href="javascript:;" class="cat-action edit-cat" data-tooltip="Add" (click)="createCategory(category)">
                 <img
                     src="../../../../../ng1/images/device/save-changes.svg"
                     alt="save-changes"
                     title="save-changes"
+                  />
+              </a>
+              <a *ngIf="!category.edit && !category.create" href="javascript:;" (click)="deleteCategory(category.id, i)" class="cat-action delete" data-tooltip="Delete">
+                <img
+                    src="../../../../../ng1/images/device/remove-terminal.svg"
+                    alt="close"
+                    title="close"
                   />
               </a>
             </li>
@@ -1088,5 +1020,5 @@
 </ng-template>
   </div>
 </main>
-
+<div class="loading" *ngIf="loading"></div>
 

@@ -33,7 +33,7 @@ export class DeviceComponent implements OnInit {
     private deviceDetailService: DeviceDetailService, 
     private remoteControlService: RemoteControlService) {}
   openModal(template) {
-    if (this.deviceDetail.online === false) {
+    if (this.deviceDetail.online === true) {
       this.modalService.open(template, {ariaLabelledBy: 'modal-basic-title' , centered:true}).result.then((result) => {
         this.closeResult = `Closed with: ${result}`;
       }, (reason) => {

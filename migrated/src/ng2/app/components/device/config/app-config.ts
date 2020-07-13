@@ -53,7 +53,10 @@ export const CONFIG = {
   // TERMINAL
   createCommandURL: BASE_URL + 'cmdCommands/create',
   getCommandURL: BASE_URL + 'cmdCommands',
-  getCmdCategoryURL: BASE_URL + 'cmdCommands/categories'
+  getCmdCategoryURL: BASE_URL + 'cmdCommands/categories',
+  createCategoryURL: BASE_URL + 'cmdCommands/categories/create/',
+  deleteCategoryURL: BASE_URL + 'cmdCommands/categories/delete/',
+  updateCategoryURL: BASE_URL + 'cmdCommands/categories/edit/'
 
   // DASHBOARD
 
