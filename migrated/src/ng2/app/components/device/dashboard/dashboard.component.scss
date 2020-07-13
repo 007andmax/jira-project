@@ -210,39 +210,76 @@
                         &.c-drive{
                             border-color: #2ec866;
                             background-color: rgba(46, 200, 102, 0.05);
-                            .pie-chart{
-                                // -ms-box-shadow: 0 2px 4px 0 rgba(34, 148, 75, 0.15);
-                                // -webkit-box-shadow: 0 2px 4px 0 rgba(34, 148, 75, 0.15);
-                                // -moz-box-shadow: 0 2px 4px 0 rgba(34, 148, 75, 0.15);
-                                // box-shadow: 0 2px 4px 0 rgba(34, 148, 75, 0.15);
-                                
+                            .progress-circle{
+                                .value-bar{
+                                    border-color: #2ec866;
+                                }
+                                &.over50{
+                                    .first50-bar{
+                                        background-color: #2ec866;
+                                    }
+                                }
                             }
                          }
-                        &.d-drive{
-                            .pie-chart{
-                                // -ms-box-shadow: 0 2px 4px 0 rgba(0, 74, 143, 0.15);
-                                // -o-box-shadow: 0 2px 4px 0 rgba(0, 74, 143, 0.15);
-                                // -webkit-box-shadow: 0 2px 4px 0 rgba(0, 74, 143, 0.15);
-                                // -moz-box-shadow: 0 2px 4px 0 rgba(0, 74, 143, 0.15);
-                                // box-shadow: 0 2px 4px 0 rgba(0, 74, 143, 0.15);
+                        &:nth-child(2){
+                            .progress-circle{
+                                .value-bar{
+                                    background-color: #0057a8;
+                                }
+                                &.over50{
+                                    .first50-bar{
+                                        background-color: #0057a8;
+                                    }
+                                }
+                                
                             }
                         } 
-                        &.e-drive{
-                            .pie-chart{
-                                // -ms-box-shadow: 0 2px 4px 0 rgba(0, 169, 181, 0.15);
-                                // -o-box-shadow: 0 2px 4px 0 rgba(0, 169, 181, 0.15);
-                                // -webkit-box-shadow: 0 2px 4px 0 rgba(0, 169, 181, 0.15);
-                                // -moz-box-shadow: 0 2px 4px 0 rgba(0, 169, 181, 0.15);
-                                // box-shadow: 0 2px 4px 0 rgba(0, 169, 181, 0.15);
+                        &:nth-child(3){
+                            .progress-circle{
+                                .value-bar{
+                                    border-color: #00d8e7;
+                                }
+                                &.over50{
+                                    .first50-bar{
+                                        background-color: #00d8e7;
+                                    }
+                                }
                             }
                         }  
-                        &.f-drive{
-                            .pie-chart{
-                                // -ms-box-shadow: 0 2px 4px 0 rgba(18, 130, 199, 0.15);
-                                // -o-box-shadow: 0 2px 4px 0 rgba(18, 130, 199, 0.15);
-                                // -webkit-box-shadow: 0 2px 4px 0 rgba(18, 130, 199, 0.15);
-                                // -moz-box-shadow: 0 2px 4px 0 rgba(18, 130, 199, 0.15);
-                                // box-shadow: 0 2px 4px 0 rgba(18, 130, 199, 0.15);
+                        &:nth-child(4){
+                            .progress-circle{
+                                .value-bar{
+                                    border-color: #16a4fa;
+                                }
+                                &.over50{
+                                    .first50-bar{
+                                        background-color: #16a4fa;
+                                    }
+                                }
+                            }
+                        }
+                        &:nth-child(5){
+                            .progress-circle{
+                                .value-bar{
+                                    border-color: #2ec866;
+                                }
+                                &.over50{
+                                    .first50-bar{
+                                        background-color: #2ec866;
+                                    }
+                                }
+                            }
+                        }
+                        &:nth-child(6){
+                            .progress-circle{
+                                .value-bar{
+                                    border-color: #2ec866;
+                                }
+                                &.over50{
+                                    .first50-bar{
+                                        background-color: #2ec866;
+                                    }
+                                }
                             }
                         }
                     }
