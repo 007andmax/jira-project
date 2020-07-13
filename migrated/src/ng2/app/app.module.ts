@@ -127,7 +127,6 @@ import { TicketTaskComponent } from './components/device/ticket-task/ticket-task
 import { ErrorInterceptor } from './components/device/_helpers/error.interceptor';
 import { searchTextPipe } from './components/device/_pipe/searchText.pipe';
 import { HighlightDirective } from './components/device/_directive/highlight.directive';
-import { NgCircleProgressModule } from 'ng-circle-progress';
 import { SoftwarePipe } from './pipe/software.pipe';
 
 /**
@@ -333,7 +332,6 @@ angular.module('quicktech')
     BrowserAnimationsModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     SidebarModule.forRoot(),
-    NgCircleProgressModule.forRoot(),
     RouterModule.forRoot([
         {
           path: '',
