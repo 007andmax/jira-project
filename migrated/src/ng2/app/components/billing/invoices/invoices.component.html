@@ -1,3 +1,316 @@
-<p>
-  invoices works!
-</p>
+<div class="page-list page-list-billable billing-page">
+
+  <div class="qt-list-header sticky-list-header">
+    <div>
+      <h3 class="list-title" [textContent]="'Invoices'"></h3>
+    </div>
+
+    <div class="d-f ai-c">
+      <button class="qt-btn --outline-blue">Clear All</button>
+      <button class="qt-btn --outline-blue qt-ml-8">Filters</button>
+      <button class="qt-btn --outline-blue qt-ml-8">Create Invoice</button>
+      <button class="qt-btn --outline-blue qt-ml-8">Record Payment</button>
+
+    </div>
+  </div>
+
+  <div class="sticky-list-table-header">
+    <table class="qt-table-modern">
+      <thead>
+        <tr>
+          <th class="invoice-table__check">
+            <div class="d-f">
+              <label class="qt-checkbox">
+                <input type="checkbox">
+                <span></span>
+              </label>
+            </div>
+          </th>
+
+          <th class="invoce-table__date">
+            Date
+            <span class="qt-table-modern__sorting"></span>
+          </th>
+
+          <th class="invoce-table__invoice">
+            Invoice#
+            <span class="qt-table-modern__sorting"></span>
+          </th>
+
+          <th class="invoce-table__company">
+            Company
+            <span class="qt-table-modern__sorting"></span>
+          </th>
+
+          <th class="invoce-table__status">
+            Status
+            <span class="qt-table-modern__sorting"></span>
+          </th>
+
+          <th class="invoce-table__read-on">
+            Read On
+            <span class="qt-table-modern__sorting"></span>
+          </th>
+
+          <th class="invoce-table__amount">
+            Amount
+            <span class="qt-table-modern__sorting"></span>
+          </th>
+
+          <th class="invoce-table__balance-due">
+            Balance Due
+            <span class="qt-table-modern__sorting"></span>
+          </th>
+
+          <th class="invoce-table__menu"></th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+
+  <div class="table-container">
+    <table class="qt-table-modern billable-table">
+      <tbody>
+        <tr>
+          <td class="invoice-table__check">
+            <div class="d-f">
+              <label class="qt-checkbox">
+                <input  type="checkbox">
+                <span ></span>
+              </label>
+            </div>
+          </td>
+
+          <td class="invoce-table__date">03 Sep 2020</td>
+          <td class="invoce-table__invoice">7848</td>
+          <td class="invoce-table__company">123dentist Summit Dental</td>
+          <td class="invoce-table__status">Due in 16 days</td>
+          <td class="invoce-table__read-on">18 Nov 2020</td>
+          <td class="invoce-table__amount">$424.00</td>
+          <td class="invoce-table__balance-due">$394.00</td>
+          <td class="invoce-table__menu"></td>
+        </tr>
+
+        <tr>
+          <td class="invoice-table__check">
+            <div class="d-f">
+              <label class="qt-checkbox">
+                <input  type="checkbox">
+                <span ></span>
+              </label>
+            </div>
+          </td>
+
+          <td class="invoce-table__date">03 Sep 2020</td>
+          <td class="invoce-table__invoice">7848</td>
+          <td class="invoce-table__company">123dentist Summit Dental</td>
+          <td class="invoce-table__status">Due in 16 days</td>
+          <td class="invoce-table__read-on">18 Nov 2020</td>
+          <td class="invoce-table__amount">$424.00</td>
+          <td class="invoce-table__balance-due">$394.00</td>
+          <td class="invoce-table__menu"></td>
+        </tr>
+
+        <tr>
+          <td class="invoice-table__check">
+            <div class="d-f">
+              <label class="qt-checkbox">
+                <input  type="checkbox">
+                <span ></span>
+              </label>
+            </div>
+          </td>
+
+          <td class="invoce-table__date">03 Sep 2020</td>
+          <td class="invoce-table__invoice">7848</td>
+          <td class="invoce-table__company">123dentist Summit Dental</td>
+          <td class="invoce-table__status">Due in 16 days</td>
+          <td class="invoce-table__read-on">18 Nov 2020</td>
+          <td class="invoce-table__amount">$424.00</td>
+          <td class="invoce-table__balance-due">$394.00</td>
+          <td class="invoce-table__menu"></td>
+        </tr>
+
+        <tr>
+          <td class="invoice-table__check">
+            <div class="d-f">
+              <label class="qt-checkbox">
+                <input  type="checkbox">
+                <span ></span>
+              </label>
+            </div>
+          </td>
+
+          <td class="invoce-table__date">03 Sep 2020</td>
+          <td class="invoce-table__invoice">7848</td>
+          <td class="invoce-table__company">123dentist Summit Dental</td>
+          <td class="invoce-table__status">Due in 16 days</td>
+          <td class="invoce-table__read-on">18 Nov 2020</td>
+          <td class="invoce-table__amount">$424.00</td>
+          <td class="invoce-table__balance-due">$394.00</td>
+          <td class="invoce-table__menu"></td>
+        </tr>
+
+        <tr>
+          <td class="invoice-table__check">
+            <div class="d-f">
+              <label class="qt-checkbox">
+                <input  type="checkbox">
+                <span ></span>
+              </label>
+            </div>
+          </td>
+
+          <td class="invoce-table__date">03 Sep 2020</td>
+          <td class="invoce-table__invoice">7848</td>
+          <td class="invoce-table__company">123dentist Summit Dental</td>
+          <td class="invoce-table__status">Due in 16 days</td>
+          <td class="invoce-table__read-on">18 Nov 2020</td>
+          <td class="invoce-table__amount">$424.00</td>
+          <td class="invoce-table__balance-due">$394.00</td>
+          <td class="invoce-table__menu"></td>
+        </tr>
+
+        <tr>
+          <td class="invoice-table__check">
+            <div class="d-f">
+              <label class="qt-checkbox">
+                <input  type="checkbox">
+                <span ></span>
+              </label>
+            </div>
+          </td>
+
+          <td class="invoce-table__date">03 Sep 2020</td>
+          <td class="invoce-table__invoice">7848</td>
+          <td class="invoce-table__company">123dentist Summit Dental</td>
+          <td class="invoce-table__status">Due in 16 days</td>
+          <td class="invoce-table__read-on">18 Nov 2020</td>
+          <td class="invoce-table__amount">$424.00</td>
+          <td class="invoce-table__balance-due">$394.00</td>
+          <td class="invoce-table__menu"></td>
+        </tr>
+
+        <tr>
+          <td class="invoice-table__check">
+            <div class="d-f">
+              <label class="qt-checkbox">
+                <input  type="checkbox">
+                <span ></span>
+              </label>
+            </div>
+          </td>
+
+          <td class="invoce-table__date">03 Sep 2020</td>
+          <td class="invoce-table__invoice">7848</td>
+          <td class="invoce-table__company">123dentist Summit Dental</td>
+          <td class="invoce-table__status">Due in 16 days</td>
+          <td class="invoce-table__read-on">18 Nov 2020</td>
+          <td class="invoce-table__amount">$424.00</td>
+          <td class="invoce-table__balance-due">$394.00</td>
+          <td class="invoce-table__menu"></td>
+        </tr>
+
+        <tr>
+          <td class="invoice-table__check">
+            <div class="d-f">
+              <label class="qt-checkbox">
+                <input  type="checkbox">
+                <span ></span>
+              </label>
+            </div>
+          </td>
+
+          <td class="invoce-table__date">03 Sep 2020</td>
+          <td class="invoce-table__invoice">7848</td>
+          <td class="invoce-table__company">123dentist Summit Dental</td>
+          <td class="invoce-table__status">Due in 16 days</td>
+          <td class="invoce-table__read-on">18 Nov 2020</td>
+          <td class="invoce-table__amount">$424.00</td>
+          <td class="invoce-table__balance-due">$394.00</td>
+          <td class="invoce-table__menu"></td>
+        </tr>
+
+        <tr>
+          <td class="invoice-table__check">
+            <div class="d-f">
+              <label class="qt-checkbox">
+                <input  type="checkbox">
+                <span ></span>
+              </label>
+            </div>
+          </td>
+
+          <td class="invoce-table__date">03 Sep 2020</td>
+          <td class="invoce-table__invoice">7848</td>
+          <td class="invoce-table__company">123dentist Summit Dental</td>
+          <td class="invoce-table__status">Due in 16 days</td>
+          <td class="invoce-table__read-on">18 Nov 2020</td>
+          <td class="invoce-table__amount">$424.00</td>
+          <td class="invoce-table__balance-due">$394.00</td>
+          <td class="invoce-table__menu"></td>
+        </tr>
+
+        <tr>
+          <td class="invoice-table__check">
+            <div class="d-f">
+              <label class="qt-checkbox">
+                <input  type="checkbox">
+                <span ></span>
+              </label>
+            </div>
+          </td>
+
+          <td class="invoce-table__date">03 Sep 2020</td>
+          <td class="invoce-table__invoice">7848</td>
+          <td class="invoce-table__company">123dentist Summit Dental</td>
+          <td class="invoce-table__status">Due in 16 days</td>
+          <td class="invoce-table__read-on">18 Nov 2020</td>
+          <td class="invoce-table__amount">$424.00</td>
+          <td class="invoce-table__balance-due">$394.00</td>
+          <td class="invoce-table__menu"></td>
+        </tr>
+
+        <tr>
+          <td class="invoice-table__check">
+            <div class="d-f">
+              <label class="qt-checkbox">
+                <input  type="checkbox">
+                <span ></span>
+              </label>
+            </div>
+          </td>
+
+          <td class="invoce-table__date">03 Sep 2020</td>
+          <td class="invoce-table__invoice">7848</td>
+          <td class="invoce-table__company">123dentist Summit Dental</td>
+          <td class="invoce-table__status">Due in 16 days</td>
+          <td class="invoce-table__read-on">18 Nov 2020</td>
+          <td class="invoce-table__amount">$424.00</td>
+          <td class="invoce-table__balance-due">$394.00</td>
+          <td class="invoce-table__menu"></td>
+        </tr>
+
+        <tr>
+          <td class="invoice-table__check">
+            <div class="d-f">
+              <label class="qt-checkbox">
+                <input  type="checkbox">
+                <span ></span>
+              </label>
+            </div>
+          </td>
+
+          <td class="invoce-table__date">03 Sep 2020</td>
+          <td class="invoce-table__invoice">7848</td>
+          <td class="invoce-table__company">123dentist Summit Dental</td>
+          <td class="invoce-table__status">Due in 16 days</td>
+          <td class="invoce-table__read-on">18 Nov 2020</td>
+          <td class="invoce-table__amount">$424.00</td>
+          <td class="invoce-table__balance-due">$394.00</td>
+          <td class="invoce-table__menu"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
