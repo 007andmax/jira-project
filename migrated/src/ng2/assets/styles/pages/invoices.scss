@@ -40,6 +40,13 @@
     width: 100px;
   }
 
+  .invoce-table__company {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 100px;
+  }
+
   .invoce-table__invoice {
     padding-left: 8px;
     padding-right: 8px;
