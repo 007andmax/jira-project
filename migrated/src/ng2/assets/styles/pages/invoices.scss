@@ -1,0 +1,102 @@
+.invoices-page {
+  &__list-container {
+    min-height: calc(100vh - 102px);
+  }
+
+  .filters-icon {
+    background-color: white;
+    border: solid 1px #dfe3e8;
+    background-size: auto;
+  }
+
+  .filter-counter {
+    margin-left: -8px;
+  }
+
+  .filter-status {
+    max-width: 216px;
+  }
+
+  .filter-invoice {
+    max-width: 216px;
+  }
+
+  .filter-date {
+    max-width: 216px;
+  }
+
+  .invoice-table td {
+    border: 1px solid transparent;
+  }
+
+  .invoice-table__check {
+    width: 32px;
+    padding-right: 0;
+  }
+
+  .invoce-table__date {
+    padding-left: 8px;
+    padding-right: 8px;
+    width: 100px;
+  }
+
+  .invoce-table__invoice {
+    padding-left: 8px;
+    padding-right: 8px;
+    width: 93px;
+  }
+  td.invoce-table__invoice {
+    font-family: Graphik-Medium, sans-serif;
+    color: #16a4fa;
+  }
+
+  .invoce-table__status {
+    width: 133px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .invoce-table__read-on {
+    width: 107px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .invoce-table__due-date {
+    width: 116px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .invoce-table__amount {
+
+
+    width: 89px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .invoce-table__balance-due {
+    width: 110px;
+    padding-left: 8px;
+    padding-right: 8px;
+    text-align: right;
+  }
+
+  .invoce-table__menu {
+    width: 28px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .total-divider {
+    border-top: 1px solid #dfe3e8;
+  }
+
+  @media (min-width: 1920px) {
+    .total-info {
+      width: 85%;
+    }
+
+  }
+}

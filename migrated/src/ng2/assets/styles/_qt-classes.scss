@@ -8,6 +8,9 @@
 .qt-jc-sa {justify-content: space-around;}
 .qt-jc-fe {justify-content: flex-end;}
 .qt-jc-fs {justify-content: flex-start;}
+.qt-jc-c {justify-content: center;}
+
+.qt-fd-c {flex-direction: column;}
 
 .qt-pl-0 {padding-left: 0;}
 .qt-pl-4 {padding-left: 4px;}
@@ -159,8 +162,10 @@
 
 
 .qt-sz-16 {width: 16px; height: 16px;}
+.qt-sz-18 {width: 18px; height: 18px;}
 .qt-sz-20 {width: 20px; height: 20px;}
 .qt-sz-24 {width: 24px; height: 24px;}
+.qt-sz-32 {width: 32px; height: 32px;}
 
 .qt-h40 {height: 40px;}
 
@@ -168,6 +173,10 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+.qt-bg-contain {
+  background-size: contain;
 }
 
 .qt-pointer {
@@ -183,6 +192,10 @@
 .qt-color-info {color: #16a4fa;}
 .qt-color-white {color: white;}
 
+
+.qt-bg-info {background-color: #16a4fa;}
+
+
 .qt-pos-rel {
   position: relative;
 }
@@ -192,6 +205,9 @@
 
 .qt-scroll-auto {overflow: auto;}
 
+.qt-circle {
+  border-radius: 50%;
+}
 
 .qt-input-block {
   display: flex;
@@ -237,6 +253,9 @@
     &::placeholder {
       color: #9ca5b6;
     }
+  }
+  &.h36 {
+    height: 36px;
   }
   .date-picker {
     width: 100%;
