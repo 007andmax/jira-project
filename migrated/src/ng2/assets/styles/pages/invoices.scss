@@ -104,6 +104,141 @@
     .total-info {
       width: 85%;
     }
+  }
 
+  &__aside {
+    color: #4f5f79;
+    background: white;
+    width: 880px;;
+    position: absolute;
+    border-left: 1px solid #dfe3e8;
+    height: 100%;
+    right: 0;
+    box-shadow: -8px 0 8px 0 rgba(0, 0, 0, 0.05);
+    position: fixed;
+    top: 79px;
+    right: 0;
+    height: calc(100vh - 79px);
+
+
+  .billing-aside-scroll-content {
+    overflow: auto;
+    height: calc(100% - 127px);
+  }
+
+  .aside-header {
+    height: 56px;
+    background-color: #f9fafb;
+    border-bottom: 1px solid #dfe3e8;
+  }
+
+  .address-block {
+    border-bottom: 1px solid #dfe3e8;
+  }
+
+  .receive-full-amount-check {
+    margin-bottom: 0;
+  }
+
+  .unpaid-table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: initial;
+    color: #364656;
+    th {
+      border: solid 1px #dfe3e8;
+      border-right: none;
+      border-bottom: none;
+      background-color: #f9fafb;
+      height: 36px;
+      font-size: 11px;
+      padding: 0 12px;
+      font-family: Graphik-Semibold, sans-serif;
+      &:first-child {
+        border-top-left-radius: 4px;
+      }
+      &:last-child {
+        border-top-right-radius: 4px;
+        border-right: solid 1px #dfe3e8;
+      }
+    }
+
+    td {
+      border: solid 1px #dfe3e8;
+      height: 36px;
+      font-size: 12px;
+      padding: 0 12px;
+      border-right: none;
+      border-bottom: none;
+      &:last-child {
+        border-right: solid 1px #dfe3e8;
+      }
+    }
+
+    tr {
+      &:last-child {
+        td {
+          border-bottom: solid 1px #dfe3e8;
+
+          &:first-child {
+            border-bottom-left-radius: 4px;
+          }
+          &:last-child {
+            border-bottom-right-radius: 4px;
+          }
+        }
+      }
+    }
+
+    &__check {
+      width: 36px;
+      label {
+        display: flex;
+      }
+    }
+
+    &__date {
+      width: 156px;
+    }
+
+    &__amount {
+      width: 156px;
+    }
+
+    &__due {
+      width: 156px;
+    }
+
+    &__payment {
+      width: 161px;
+    }
+  }
+
+  .summary-info {
+    &__notes {
+      width: 447px;
+    }
+    &__textarea {
+      height: 80px;
+    }
+  }
+
+  .invoice-total {
+    width: 275px;
+    border-radius: 6px;
+    border: dashed 1px #637381;
+    padding: 15px 20px;
+
+    &__total-line {
+      border-top: dashed 1px #637381;
+    }
+  }
+
+
+  .aside-footer {
+    height: 72px;
+    border: 1px solid #dfe3e8;
+    background: white;
+  }
   }
 }

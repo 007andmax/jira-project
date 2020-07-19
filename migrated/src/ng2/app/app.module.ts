@@ -268,6 +268,8 @@ import { InvoiceFormTicketEditProductComponent } from './components/billing/bill
 import { InvoiceFormTicketEditTaxesComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.component';
 import { InvoiceDiscountComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-discount/invoice-discount.component';
 import { InvoicesComponent } from './components/billing/invoices/invoices.component';
+import { InvoicesAsideComponent } from './components/billing/invoices/invoices-aside/invoices-aside.component';
+import { RecordPaymentFormComponent } from './components/billing/invoices/invoices-aside/record-payment-form/record-payment-form.component';
 
 
 
@@ -666,6 +668,8 @@ angular.module('quicktech')
     InvoiceFormTicketEditTaxesComponent,
     InvoiceDiscountComponent,
     InvoicesComponent,
+    InvoicesAsideComponent,
+    RecordPaymentFormComponent,
   ],
   imports: [
     BrowserModule,
