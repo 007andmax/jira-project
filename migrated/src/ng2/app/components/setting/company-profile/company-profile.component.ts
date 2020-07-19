@@ -44,6 +44,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
   isCroppedImg = false;
   fileAvatar: any;
   imageBase64 = '';
+  fromGoogle = false;
   public loading = false;
   public currentCompany: any;
 
@@ -170,7 +171,7 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
           // set latitude, longitude and zoom
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
-
+          this.fromGoogle = true;
           this.cProfileForm.patchValue({
             postalCode: ''
           });
@@ -674,13 +675,13 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
    */
   onSubmit() {
     this.submitted = true;
-    debugger;
     
     // stop here if form is invalid
     if (this.cProfileForm.invalid) {
       return;
     }
 let data = {};
+debugger;
 data['id'] = this.currentCompany.addresses[0].id;
 data['isPrimary'] = true;
 data['suiteNumber'] = this.cProfileForm.get('suiteNumber').value;
@@ -689,11 +690,11 @@ let index = this.timezones.findIndex(value => value.city === timeZone);
 data['timeZone'] = {
   name: this.cProfileForm.get(
     'timeZone'
-  ).value || '',
+  ).value.city || '',
   displayName: '',
-  timeOffset: index !== -1
-  ? this.timezones[index].offset
-  : ''
+  timeOffset: this.cProfileForm.get(
+    'timeZone'
+  ).value.offset || ''
 };
 data['address'] = this.searchElementRef.nativeElement.value;
 data['postalCode'] = this.cProfileForm.get(
@@ -702,7 +703,7 @@ data['postalCode'] = this.cProfileForm.get(
 data['country'] = this.country;
 data['locale'] = this.cProfileForm.get(
   'timeZone'
-).value
+).value.city
 || '';
 data['countryCode'] = this.countryCode;
 data['locationLat'] = this.latitude;
@@ -711,6 +712,8 @@ data['longCity'] = this.longCity;
 data['shortCity'] = this.shortCity;
 data['longState'] = this.longState;
 data['shortState'] = this.shortState;
+data['addressWithSuitNumberAndPostalCode'] = '';
+data['fromGoogle'] = this.fromGoogle;
     // this.cProfile.address[0].suiteNumber = this.cProfileForm.get(
     //   'suiteNumber'
     // ).value;
@@ -755,7 +758,6 @@ data['shortState'] = this.shortState;
     }
 
     data['phoneNumbers'] = phones;
-debugger;
     if (this.cProfile.name !== this.cProfileForm.get('name').value) {
       this.loading = true;$(".loading").css("display", "block");
       this.companyProfileService

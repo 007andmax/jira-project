@@ -121,14 +121,8 @@ export class ServiceComponent implements OnInit {
     if (this.rate || this.rate === 0) {
       var data = {
         rate: this.rate,
-        setForOldExpenses: false
+        setForOldExpenses: this.factItem
       };
-
-      if (this.service.commissionRate === null) {
-        if (confirm('Do you want this commission to fact old items?')) {
-          data.setForOldExpenses = true;
-        }
-      }
       this.loading = true;$(".loading").css("display", "block");
       this.commissionService
         .setServiceRate(this.id, data.rate, data.setForOldExpenses)

@@ -95,14 +95,8 @@ export class ProductComponent implements OnInit {
     if (this.rate || this.rate === 0) {
       data = {
         rate: this.rate,
-        setForOldExpenses: false
+        setForOldExpenses: this.factItem
       };
-
-      if (this.category.commissionRate === null) {
-        if (confirm('Do you want this commission to fact old items?')) {
-          data.setForOldExpenses = true;
-        }
-      }
       this.loading = true;$(".loading").css("display", "block");
       this.commissionService
         .setCategoryRate(this.id, data.rate, data.setForOldExpenses)
