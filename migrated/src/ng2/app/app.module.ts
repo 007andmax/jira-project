@@ -271,6 +271,7 @@ import { InvoicesComponent } from './components/billing/invoices/invoices.compon
 import { InvoicesAsideComponent } from './components/billing/invoices/invoices-aside/invoices-aside.component';
 import { RecordPaymentFormComponent } from './components/billing/invoices/invoices-aside/record-payment-form/record-payment-form.component';
 import { InvoicesItemComponent } from './components/billing/invoices/invoices-item/invoices-item.component';
+import { BillingInvoicePreviewComponent } from './components/billing/invoices/invoices-aside/billing-invoice-preview/billing-invoice-preview.component';
 
 
 
@@ -672,6 +673,7 @@ angular.module('quicktech')
     InvoicesAsideComponent,
     RecordPaymentFormComponent,
     InvoicesItemComponent,
+    BillingInvoicePreviewComponent,
   ],
   imports: [
     BrowserModule,

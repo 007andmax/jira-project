@@ -245,3 +245,121 @@
 app-invoices-item {
   display: contents;
 }
+
+// aside invoice preview
+.invoices-page__aside {
+  .invoice-preview {
+    box-shadow: 0 8px 16px 10px rgba(0, 0, 0, 0.05);
+    background-color: #ffffff;
+    padding: 40px;
+
+    .company-logo {
+      max-width: 200;
+      max-height: 70px;
+    }
+    .company-info {
+      border-bottom: 1px solid #dfe3e8;
+    }
+
+    .invoice-info-value {
+      width: 125px;
+    }
+    .invoice-info-title {
+      width: 100px;
+    }
+
+    &__item-header {
+      border: solid 1px #dfe3e8;
+      background-color: #f9fafb;
+      height: 32px;
+    }
+
+    &__table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0px;
+
+      th, td {
+        border-bottom: solid 1px #dfe3e8;
+        &:first-child {
+          border-left: solid 1px #dfe3e8;
+        }
+        &:last-child {
+          border-right: solid 1px #dfe3e8;
+        }
+      }
+      th {
+        padding: 0 12px;
+        font-size: 11px;
+        font-family: Graphik-Semibold, sans-serif;
+        height: 32px;
+      }
+      td {
+        font-size: 12px;
+        padding: 0 12px;
+        height: 40px;
+      }
+    }
+
+    &__item-header-number {
+      width: 90px;
+
+    }
+
+    &__item-header-date {
+      width: 102px;
+    }
+
+    &__col-item {
+      text-align: left;
+      width: 128px;
+    }
+
+    &__col-desc {
+      text-align: left;
+      max-width: 285px;
+      overflow-wrap: break-word;
+    }
+
+    &__col-qty {
+      text-align: right;
+      width: 94px;
+    }
+
+    &__col-tax {
+      text-align: right;
+      width: 54px;
+    }
+
+    &__col-amount, &__col-price {
+      text-align: right;
+      width: 80px;
+    }
+
+    &__total-block {
+      width: 247px;
+    }
+
+    &__total-price {
+      background-color: #f9fafb;
+      height: 40px;
+    }
+
+    .invoice-preview__status {
+      position: absolute;
+      width: 88px;
+      height: 88px;
+      top: -22px;
+      left: -20px;
+      background: url(../ng2/assets/img/update-label.svg);
+
+    }
+  }
+
+  .billing-invoice-preview-scroll-content {
+    overflow: auto;
+    height: calc(100% - 56px);
+  }
+}
+
+
