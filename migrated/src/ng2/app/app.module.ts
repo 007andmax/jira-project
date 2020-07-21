@@ -244,6 +244,7 @@ import { CompanyInfoHistoryComponent } from './components/tickets/tickets/ticket
 import { TicketEditAsideRightPanelComponent } from './components/tickets/tickets/ticket-edit-aside/ticket-edit-aside-right-panel/ticket-edit-aside-right-panel.component';
 import { ModalCustomShareScreenComponent } from './services/modal/modal-custom-share-screen/modal-custom-share-screen.component';
 import { CompanyTicketsComponent } from './components/company-tickets/company-tickets.component';
+import { CompanyDashboardComponent } from './components/company-dashboard/company-dashboard.component';
 import { InventoryAddBodyComponent } from './components/inventory/inventory-add-aside/inventory-add-body/inventory-add-body.component';
 import { ServicePipe } from './pipe/service.pipe';
 import { LeftPanelSettingsComponent } from './components/left-panel/left-panel-settings/left-panel-settings.component';
@@ -283,6 +284,9 @@ angular.module('quicktech')
     .directive(
       'companyTickets',
       downgradeComponent({ component: CompanyTicketsComponent }))
+      .directive(
+        'companyDashboard',
+        downgradeComponent({ component: CompanyDashboardComponent }))
   .directive(
     'leftPanelComponent',
     downgradeComponent({ component: LeftPanelComponent }))
@@ -605,6 +609,8 @@ angular.module('quicktech')
 
     CompanyTicketsComponent,
 
+    CompanyDashboardComponent,
+
     InventoryAddBodyComponent,
 
     ServicePipe,
@@ -672,6 +678,7 @@ angular.module('quicktech')
     CompanyPasswordManagerComponent,
     CompanyUserComponent,
     CompanyTicketsComponent,
+    CompanyDashboardComponent,
     UsersComponent,
     AlertComponent,
     LeftPanelComponent,
