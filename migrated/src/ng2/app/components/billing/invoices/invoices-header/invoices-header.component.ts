@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { InvoicesFilter } from '../class/invoices-filter';
 import { InvoicesFilterComponent } from './invoices-filter/invoices-filter.component';
 
@@ -10,8 +10,9 @@ import { InvoicesFilterComponent } from './invoices-filter/invoices-filter.compo
 export class InvoicesHeaderComponent implements OnInit {
   @ViewChild('filter') filter: InvoicesFilterComponent;
   countFilter: number = 0;
-  
+
   toggleFilter: boolean = true;
+  @Output() onCreateInvoice = new EventEmitter<any>();
   constructor() { }
 
   ngOnInit() {
@@ -22,5 +23,7 @@ export class InvoicesHeaderComponent implements OnInit {
   onChangeCountFilter(data) {
     this.countFilter = data;
   }
-  
+  onShowCreateInvoice() {
+    this.onCreateInvoice.emit(null);
+  }
 }

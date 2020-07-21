@@ -269,11 +269,10 @@ import { InvoiceFormTicketEditTaxesComponent } from './components/billing/billab
 import { InvoiceDiscountComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-discount/invoice-discount.component';
 import { InvoicesComponent } from './components/billing/invoices/invoices.component';
 import { InvoicesAsideComponent } from './components/billing/invoices/invoices-aside/invoices-aside.component';
-import { RecordPaymentFormComponent } from './components/billing/invoices/invoices-aside/record-payment-form/record-payment-form.component';
-import { InvoicesItemComponent } from './components/billing/invoices/invoices-item/invoices-item.component';
-import { BillingInvoicePreviewComponent } from './components/billing/invoices/invoices-aside/billing-invoice-preview/billing-invoice-preview.component';
-import { InvoicesHeaderComponent } from './components/billing/invoices/invoices-header/invoices-header.component';
+ import { InvoicesItemComponent } from './components/billing/invoices/invoices-item/invoices-item.component';
+ import { InvoicesHeaderComponent } from './components/billing/invoices/invoices-header/invoices-header.component';
 import { InvoicesFilterComponent } from './components/billing/invoices/invoices-header/invoices-filter/invoices-filter.component';
+import { InvoicesAsidePreviewComponent } from './components/billing/invoices/invoices-aside-preview/invoices-aside-preview.component';
  
 
 
@@ -673,12 +672,10 @@ angular.module('quicktech')
     InvoiceDiscountComponent,
     InvoicesComponent,
     InvoicesAsideComponent,
-    RecordPaymentFormComponent,
     InvoicesItemComponent,
-    BillingInvoicePreviewComponent,
     InvoicesHeaderComponent,
     InvoicesFilterComponent,
-   
+    InvoicesAsidePreviewComponent
   ],
   imports: [
     BrowserModule,

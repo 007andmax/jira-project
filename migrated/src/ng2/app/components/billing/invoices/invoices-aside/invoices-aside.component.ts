@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-invoices-aside',
@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./invoices-aside.component.scss']
 })
 export class InvoicesAsideComponent implements OnInit {
-
+  @Output() onClose = new EventEmitter<any>();
   constructor() { }
 
   ngOnInit() {
   }
-
+  close() {
+    this.onClose.emit(null);
+  }
 }

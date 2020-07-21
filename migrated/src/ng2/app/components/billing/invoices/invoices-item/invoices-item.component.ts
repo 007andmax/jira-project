@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import * as moment from "moment";
 import { Invoice } from '../class/invoice';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
@@ -8,14 +8,18 @@ import { CompaniesStateService } from 'src/ng2/app/states/company/companies-stat
   styleUrls: ['./invoices-item.component.scss']
 })
 export class InvoicesItemComponent implements OnInit {
-  @Input() invoice:Invoice;
-  company:any;
-  constructor(private companiesStateService:CompaniesStateService) { }
+  @Input() invoice: Invoice;
+  company: any;
+  @Output() onPreviewInvoice = new EventEmitter<any>();
+  constructor(private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
     this.company = this.companiesStateService.getCompanies().find(item => item.id === this.invoice.companyId);
   }
   getDate(date) {
-    return (date) ?  moment(date).format('DD MMM YYYY') : '';
+    return (date) ? moment(date).format('DD MMM YYYY') : '';
+  }
+  onShowPreviewInvoice() {
+    this.onPreviewInvoice.emit(null);
   }
 }

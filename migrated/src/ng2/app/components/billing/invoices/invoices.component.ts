@@ -20,6 +20,8 @@ export class InvoicesComponent implements OnInit,OnDestroy {
   showPreloader: boolean = true;
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
+  showCreateInvoice:boolean = false;
+  showPreviewInvoice:boolean = false;
   offset: number = 20;
   sub:Subscription = new Subscription();
   constructor(private invoicesService:InvoicesService,
