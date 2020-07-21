@@ -2,30 +2,11 @@
 
   <div class="qt-df qt-fd-c qt-jc-sb invoices-page__list-container">
     <div>
-      <div class="qt-list-header sticky-list-header">
-        <div>
-          <h3 class="list-title" [textContent]="'Invoices'"></h3>
-        </div>
-
-        <div class="d-f ai-c">
-          <button class="qt-btn --transparent">Clear All</button>
-          <button class="qt-btn --light-blue qt-ml-8"> <span class="filter-counter qt-circle qt-sz-18 qt-ff-sb qt-fs-10 qt-color-white qt-bg-info qt-mr-8 qt-df qt-ai-c qt-jc-c">2</span> Filters</button>
-          <button class="qt-btn --outline-blue qt-ml-8">Create Invoice</button>
-          <button class="qt-btn --outline-blue qt-ml-8">Record Payment</button>
-        </div>
-      </div>
+      <app-invoices-header></app-invoices-header>
 
       <div class="sticky-list-table-header">
 
-        <div class="qt-df qt-ai-c">
-          <input type="text" placeholder="123dentist Summit Dental" class="qt-mr-8 qt-input h36 filter-search">
-          <input type="text" placeholder="Select Status" class="qt-mr-8 qt-input h36 filter-status">
-          <input type="text" placeholder="Enter invoice #" class="qt-mr-8 qt-input h36 filter-invoice">
-          <input type="text" placeholder="Filter by date" class="qt-mr-16 qt-input h36 filter-date">
-          <div class="qt-circle qt-sz-32 icon__print qt-ic-c qt-mr-8 filters-icon"></div>
-          <div class="qt-circle qt-sz-32 icon__download qt-ic-c filters-icon"></div>
-
-        </div>
+      
 
         <table class="qt-table-modern invoice-table">
           <thead>
@@ -90,10 +71,10 @@
           [infiniteScrollThrottle]="50"
           [infiniteScrollDisabled]="infiniteScrollDisabled"
           (scrolled)="onScroll()">
-       <ng-template ngFor let-company
+       <ng-template ngFor let-invoice
                     [ngForOf]="invoices"
                     [ngForTrackBy]="trackById">
-                    <app-invoices-item></app-invoices-item>
+                    <app-invoices-item [invoice]="invoice"></app-invoices-item>
        </ng-template>
        <div class="loading" *ngIf="showPreloader"></div>
      </tbody>
@@ -115,4 +96,4 @@
   </div>
 </div>
 
-<app-invoices-aside></app-invoices-aside>
+<!--<app-invoices-aside></app-invoices-aside> -->

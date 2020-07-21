@@ -1,0 +1,26 @@
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { InvoicesFilter } from '../class/invoices-filter';
+import { InvoicesFilterComponent } from './invoices-filter/invoices-filter.component';
+
+@Component({
+  selector: 'app-invoices-header',
+  templateUrl: './invoices-header.component.html',
+  styleUrls: ['./invoices-header.component.scss']
+})
+export class InvoicesHeaderComponent implements OnInit {
+  @ViewChild('filter') filter: InvoicesFilterComponent;
+  countFilter: number = 0;
+  
+  toggleFilter: boolean = true;
+  constructor() { }
+
+  ngOnInit() {
+  }
+  clearAll() {
+    this.filter.onClearAll();
+  }
+  onChangeCountFilter(data) {
+    this.countFilter = data;
+  }
+  
+}

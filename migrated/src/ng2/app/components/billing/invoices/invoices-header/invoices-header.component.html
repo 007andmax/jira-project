@@ -1,0 +1,14 @@
+<div class="qt-list-header sticky-list-header">
+  <div>
+    <h3 class="list-title" [textContent]="'Invoices'"></h3>
+  </div>
+
+  <div class="d-f ai-c">
+    <button class="qt-btn --transparent" (click)="clearAll()" *ngIf="countFilter > 0">Clear All</button>
+    <button class="qt-btn --light-blue qt-ml-8" (click)="toggleFilter  = !toggleFilter"> <span class="filter-counter qt-circle qt-sz-18 qt-ff-sb qt-fs-10 qt-color-white qt-bg-info qt-mr-8 qt-df qt-ai-c qt-jc-c" *ngIf="countFilter > 0" [textContent]="countFilter"></span> Filters</button>
+    <button class="qt-btn --outline-blue qt-ml-8">Create Invoice</button>
+    <button class="qt-btn --outline-blue qt-ml-8">Record Payment</button>
+  </div>
+<app-invoices-filter #filter (changeCountFilter)="onChangeCountFilter($event)" [hidden]="toggleFilter"></app-invoices-filter>
+ 
+</div>

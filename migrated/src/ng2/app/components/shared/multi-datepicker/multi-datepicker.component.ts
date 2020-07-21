@@ -126,6 +126,14 @@ export class MultiDatepickerComponent implements OnInit {
     this.hideDatePicker();
   }
 
+  public clearWithOutChanges() {
+    
+    this.fromDate = undefined;
+    this.toDate = undefined;
+    this.setSelectedDateModel('', '');
+    this.hideDatePicker();
+  }
+
   public setDisabled(data) {
     this.isDisabled = data;
   }

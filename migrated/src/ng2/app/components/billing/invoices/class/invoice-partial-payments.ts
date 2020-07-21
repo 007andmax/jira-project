@@ -11,5 +11,11 @@ export class InvoicePartialPayments {
     reference: any;
     refundMethod: any;
     totalSum: number;
-    constructor() {}
+    constructor(data = null) {
+        if (data) {
+            for (const key in data) {
+                this[key] = data[key];
+            }
+        }
+    }
 }

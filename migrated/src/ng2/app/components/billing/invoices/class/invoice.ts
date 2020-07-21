@@ -16,4 +16,23 @@ export class Invoice {
     status: string;
     sum: number;
     ticketNumbers: Array<String>;
+    constructor(data) {
+        this.companyId = (data.company) ? data.company.id : '';
+        this.date = data.date;
+        this.deletedAt = data.deletedAt;
+        this.dueDate = data.dueDate;
+        this.id = data.id;
+        this.number = data.number;
+        this.paidOn = data.paidOn;
+        this.paidSum = data.paidSum;
+        this.partialPayments = (data.partialPayments) ? data.partialPayments.map(item => {
+            return new InvoicePartialPayments(item);
+        }) : [];
+        this.payment = data.payment;
+        this.readedAt = data.readedAt;
+        this.recurringInvoice = data.recurringInvoice;
+        this.status = data.status;
+        this.sum = data.sum;
+        this.ticketNumbers = data.ticketNumbers;
+    }
 }

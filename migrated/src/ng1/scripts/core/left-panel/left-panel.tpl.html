@@ -867,6 +867,11 @@
           Invoices
         </div>
         <div class="center-category__category"
+        ng-class="{active: $state.includes('new-billable-invoices')}"
+        ng-click="stateGo($event, 'new-billable-invoices')">
+     Invoices 2
+   </div>
+        <div class="center-category__category"
              ng-class="{active: $state.includes('quotes-component')}"
              ng-click="stateGo($event, 'quotes-component')">
           Quotes

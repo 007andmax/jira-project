@@ -212,7 +212,7 @@
             return 'Services';
           } else if ($state.includes("accounting.billable") || $state.includes("new-billable")) {
             return 'Billable';
-          } else if ($state.includes("receivable")) {
+          } else if ($state.includes("receivable") || $state.includes("new-billable-invoices")) {
             return 'Receivable';
           } else if ($state.includes("receipt-archive")) {
             return 'Receipt Archive';

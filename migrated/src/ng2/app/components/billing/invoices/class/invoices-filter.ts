@@ -1,11 +1,11 @@
 export class InvoicesFilter {
-    companyName: any;
-    endDate: any;
-    invoiceNumber: any;
+    companyName: string;
+    endDate: number;
+    invoiceNumber: string;
     limit: number= 20;
     offset: number = 0;
     sortBy: any;
-    startDate: any;
+    startDate: number;
     status: any;
     constructor() { }
 
@@ -23,5 +23,19 @@ export class InvoicesFilter {
     }
     public setOffset(offset) {
         this.offset  = offset;
+    }
+    public setCompany(data) {
+        this.companyName = data;
+    }
+    public setStartDate (data) {
+        console.log("data",data);
+        this.startDate = data;
+    }
+    public setEndDate (data) {
+        console.log("data",data);
+        this.endDate = data;
+    }
+    public setInvoiceNumber(data) {
+        this.invoiceNumber = data;
     }
 }
