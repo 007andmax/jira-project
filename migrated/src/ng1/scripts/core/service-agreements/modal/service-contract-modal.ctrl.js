@@ -125,8 +125,10 @@
             changeNumOfIntervals($scope.serviceContract.startDate, $scope.serviceContract.endDate, false);
           }, 500);
           if($scope.serviceContract.blockTimeServices.length > 0) {
+            console.log("$scope.serviceContract.blockTimeServices",$scope.serviceContract.blockTimeServices);
             $scope.serviceContract.contractWithBlockTime = true;
-            $scope.serviceContract.serviceContractServicesToTrack = $scope.serviceContract.blockTimeServices
+            $scope.serviceContract.serviceContractServicesToTrack = $scope.serviceContract.blockTimeServices;
+            console.log("$scope.serviceContract.serviceContractServicesToTrack",$scope.serviceContract.serviceContractServicesToTrack);
           }
 
           AgreementsService.getServiceAgreementById($scope.editContract.id, function(data){
@@ -220,7 +222,9 @@
           }, 500);
           if($scope.serviceContract.blockTimeServices.length > 0) {
             $scope.serviceContract.contractWithBlockTime = true;
-            $scope.serviceContract.serviceContractServicesToTrack = $scope.serviceContract.blockTimeServices
+            $scope.serviceContract.serviceContractServicesToTrack = $scope.serviceContract.blockTimeServices;
+            console.log("$scope.serviceContract.blockTimeServices",$scope.serviceContract.blockTimeServices);
+            console.log("$scope.serviceContract.serviceContractServicesToTrack",$scope.serviceContract.serviceContractServicesToTrack);
           }
 
           AgreementsService.getServiceAgreementById($scope.editContract.id, function(data){
@@ -1477,6 +1481,7 @@ var data = resp;
             servContract.endDate = $filter('date')(ed, 'yyyy/MM/dd');
 
             if(serviceContract.billType !== 'OTHER') {
+              console.log("serviceContract.serviceContractServicesToTrack",JSON.parse(JSON.stringify(serviceContract.serviceContractServicesToTrack)));
               if(serviceContract.serviceContractServicesToTrack && serviceContract.serviceContractServicesToTrack.length) {
                 for (var l=0; l<serviceContract.serviceContractServicesToTrack.length; l++) {
                   var scstt = {
@@ -1485,7 +1490,7 @@ var data = resp;
                     name: serviceContract.serviceContractServicesToTrack[l].name,
                     rate: (serviceContract.serviceContractServicesToTrack[l].rate) ? serviceContract.serviceContractServicesToTrack[l].rate : 0,
                     count: (serviceContract.serviceContractServicesToTrack[l].count) ? serviceContract.serviceContractServicesToTrack[l].count : null,
-                    billable: (serviceContract.serviceContractServicesToTrack[l].billable) ? serviceContract.serviceContractServicesToTrack[l].billable : true,
+                    billable: (serviceContract.serviceContractServicesToTrack[l].billable !== undefined) ? serviceContract.serviceContractServicesToTrack[l].billable : true,
                     basedOnDefault: (serviceContract.serviceContractServicesToTrack[l].basedOnDefault) ? serviceContract.serviceContractServicesToTrack[l].basedOnDefault : false,
                     commissionRate: (serviceContract.serviceContractServicesToTrack[l].commissionRate) ? serviceContract.serviceContractServicesToTrack[l].commissionRate : 0,
                     taxIds: (serviceContract.serviceContractServicesToTrack[l].taxIds)  ? serviceContract.serviceContractServicesToTrack[l].taxIds : [],
@@ -1499,6 +1504,7 @@ var data = resp;
                 }
               }
               if (serviceContract.isAdditionalServices && serviceContract.services && serviceContract.services.length) {
+                console.log("serviceContract.services",serviceContract.services);
                 for (var i = 0; i < serviceContract.services.length; i++) {
                   var serv = {
                     name: serviceContract.services[i].nameValue || serviceContract.services[i].name,
@@ -1526,6 +1532,7 @@ var data = resp;
 
 
             if(serviceContract.billType === 'DEVICE' && $scope.presettupDeviceServices.length>0) {
+              console.log("$scope.presettupDeviceServices",$scope.presettupDeviceServices);
               for(var d=0; d<$scope.presettupDeviceServices.length; d++) {
                 var dServ = {
                   name: $scope.presettupDeviceServices[d].name,
@@ -1547,6 +1554,7 @@ var data = resp;
             }
 
             if(serviceContract.billType === 'USER' && $scope.presettupUsersServices.length>0) {
+              console.log("$scope.presettupUsersServices",$scope.presettupUsersServices);
               for(var d=0; d<$scope.presettupUsersServices.length; d++) {
                 var uServ = {
                   name: $scope.presettupUsersServices[d].name,
@@ -1568,6 +1576,7 @@ var data = resp;
             }
 
             if (serviceContract.serviceContractServices && serviceContract.serviceContractServices.length) {
+              console.log("serviceContract.serviceContractServices",serviceContract.serviceContractServices);
               for (var m = 0; m < serviceContract.serviceContractServices.length; m++) {
                 var scs = {
                   name: serviceContract.serviceContractServices[m].name,
