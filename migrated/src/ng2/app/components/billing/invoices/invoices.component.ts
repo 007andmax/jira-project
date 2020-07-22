@@ -6,6 +6,8 @@ import { Invoice } from './class/invoice';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { InvoiceStateService } from 'src/ng2/app/states/invoice/invoice-state.service';
 import { Subscription } from 'rxjs';
+import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
+import { DELETE_INVOICE } from 'src/ng2/app/const/confirm';
 
 @Component({
   selector: 'app-invoices',
@@ -28,6 +30,7 @@ export class InvoicesComponent implements OnInit,OnDestroy {
     public cd: ChangeDetectorRef,
     private companiesStateService:CompaniesStateService,
     private invoiceStateService:InvoiceStateService,
+    private confirmStateService: ConfirmStateService,
     private invoicesListService:InvoicesListService) { }
 
   ngOnInit() {
@@ -41,6 +44,20 @@ export class InvoicesComponent implements OnInit,OnDestroy {
       this.onScroll();
     })
     this.sub.add(getOnInitFilter);
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === DELETE_INVOICE) {
+          this.onRemoveInvoice(this.invoiceStateService.getInvoiceForRemove());
+        }
+        
+      }
+    })
+    this.sub.add(getConfirm);
+  }
+  onRemoveInvoice(invoice) {
+    this.invoicesService.remove(invoice.id).subscribe(data => {
+
+    })
   }
   getInvoices () {
     if (this.invoicesListService.getBlockList()) {

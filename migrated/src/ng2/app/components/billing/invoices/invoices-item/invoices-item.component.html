@@ -19,6 +19,13 @@
   <td class="invoce-table__read-on" [textContent]="getDate(invoice.readedAt)"></td>
   <td class="invoce-table__amount" [textContent]="invoice.sum | currency"></td>
   <td class="invoce-table__balance-due" [textContent]="invoice.paidSum | currency"></td>
-  <td class="invoce-table__menu"> <div class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"></div> </td>
+  <td class="invoce-table__menu" ngbDropdown> <div class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"  id="dropdownBasic1"
+    ngbDropdownToggle></div> 
+    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+      <button ngbDropdownItem (click)="resendInvoices()">Resend</button>
+      <button ngbDropdownItem *ngIf="!invoice.readedAt" (click)="markAsRead()">Mark as Read</button>
+      <button ngbDropdownItem (click)="deleteInvoice()">Remove</button>
+      <button ngbDropdownItem (click)="exportAsPDF()">Export as PDF</button>
+    </div></td>
 
 </tr>
