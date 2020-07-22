@@ -32,26 +32,26 @@
                   </li>
                   <li>
                     <span>Deployment Date</span>
-                    <div (click)="visible = !visible">{{(system.install_date | date : DateFormat) || 'N/A'}}</div>
+                    <div (click)="visible = !visible">{{(system?.install_date | date : DateFormat) || 'N/A'}}</div>
                     <ngb-datepicker class="dropdown-menu p-0"
                     [class.show]="visible">
                   </ngb-datepicker>
                   </li>
                   <li>
                     <span>Manufacturer</span>
-                    <div>{{system.manufacturer || 'N/A'}}</div>
+                    <div>{{system?.manufacturer || 'N/A'}}</div>
                   </li>
                   <li>
                     <span>Asset Tag</span>
-                    <div>{{system.asset_tag || 'N/A'}}</div>
+                    <div>{{system?.asset_tag || 'N/A'}}</div>
                   </li>
                   <li>
                     <span>Warranty Date</span>
-                    <div>{{(system.warranty | date : DateFormat) || 'N/A'}}</div>
+                    <div>{{(system?.warranty | date : DateFormat) || 'N/A'}}</div>
                   </li>
                   <li>
                     <span>Computer Model</span>
-                    <div>{{system.model || 'N/A'}}</div>
+                    <div>{{system?.model || 'N/A'}}</div>
                   </li>
                   <li>
                     <span>Site</span>
@@ -59,12 +59,12 @@
                   </li>
                   <li>
                     <span>Bought Date</span>
-                    <div>{{(system.install_date | date : DateFormat) || 'N/A'}}</div>
+                    <div>{{(system?.install_date | date : DateFormat) || 'N/A'}}</div>
                   </li>
                   <li>
                     <span>System Type</span>
-                    <div *ngIf="system.architecture != undefined && system.architecture != ''">({{system.architecture}}) system</div>
-                    <div *ngIf="system.architecture == undefined || system.architecture == ''">N/A</div>
+                    <div *ngIf="system?.architecture != undefined && system?.architecture != ''">({{system?.architecture}}) system</div>
+                    <div *ngIf="system?.architecture == undefined || system?.architecture == ''">N/A</div>
                   </li>
                   <li>
                     <span>Time Zone</span>
@@ -76,7 +76,7 @@
                   </li>
                   <li>
                     <span>Warranty</span>
-                    <div>{{system.warranty || 'N/A'}}</div>
+                    <div>{{system?.warranty || 'N/A'}}</div>
                   </li>
                 </ul>
               </div>

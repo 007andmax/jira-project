@@ -31,6 +31,8 @@ export class TerminalComponent implements OnInit {
   commandList = [];
   cmdCategoryList = [];
   cmdCategoryReadList = [];
+  runScript = false;
+  scriptDetail = false;
   constructor(private terminalService: TerminalService,
     private toastr: ToastrService,
     private modalService: NgbModal  

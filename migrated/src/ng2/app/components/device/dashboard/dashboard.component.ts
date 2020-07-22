@@ -24,7 +24,14 @@ export class DashboardComponent implements OnInit {
   options: UploaderOptions;
   show = false;
   deviceDetail: any = {};
-  system = {};
+  system = {
+    install_date: '',
+    manufacturer: '',
+    asset_tag: '',
+    warranty: '',
+    architecture: '',
+    model: ''
+  };
   logicalDisk: any = [];
   virusInfo: any = [];
   hostName = '';
@@ -32,6 +39,8 @@ export class DashboardComponent implements OnInit {
   showInput = true;
   progressClass = 'p20';
   visible = false;
+  editNote = false;
+  create = false;
   DateFormat = CONFIGCONSTANTS.DateFormat1;
    constructor(private hardwareService: HardwareService,
     private toastr: ToastrService) {
