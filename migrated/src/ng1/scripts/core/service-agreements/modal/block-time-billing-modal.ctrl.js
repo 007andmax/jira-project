@@ -1144,7 +1144,7 @@ $scope.onChangeService = function (data) {
                 taxIds: [],
                 rate: 0,
                 basedOnDefault: true,
-                id: $scope.blockTimeContract.services[m].id.id,
+                id: ($scope.action === "COPY") ? $scope.blockTimeContract.services[m].id : $scope.blockTimeContract.services[m].id.id,
                 commissionRate: $scope.blockTimeContract.services[m].commissionRate
               };
 
