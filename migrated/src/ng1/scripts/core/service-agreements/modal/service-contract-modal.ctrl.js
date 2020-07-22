@@ -1495,7 +1495,7 @@ var data = resp;
                     rate: (serviceContract.serviceContractServicesToTrack[l].rate) ? serviceContract.serviceContractServicesToTrack[l].rate : 0,
                     count: (serviceContract.serviceContractServicesToTrack[l].count) ? serviceContract.serviceContractServicesToTrack[l].count : null,
                     billable: (serviceContract.serviceContractServicesToTrack[l].billable !== undefined) ? serviceContract.serviceContractServicesToTrack[l].billable : true,
-                    basedOnDefault: (serviceContract.serviceContractServicesToTrack[l].basedOnDefault) ? serviceContract.serviceContractServicesToTrack[l].basedOnDefault : false,
+                    basedOnDefault: (serviceContract.serviceContractServicesToTrack[l].basedOnDefault !== undefined) ? serviceContract.serviceContractServicesToTrack[l].basedOnDefault : false,
                     commissionRate: (serviceContract.serviceContractServicesToTrack[l].commissionRate) ? serviceContract.serviceContractServicesToTrack[l].commissionRate : 0,
                     taxIds: (serviceContract.serviceContractServicesToTrack[l].taxIds)  ? serviceContract.serviceContractServicesToTrack[l].taxIds : [],
                   };
@@ -1515,7 +1515,7 @@ var data = resp;
                     rate: 0,
                     billable: serviceContract.services[i].billable,
                     taxIds: [],
-                    basedOnDefault: serviceContract.services[i].basedOnDefault,
+                    basedOnDefault: (serviceContract.services[i].basedOnDefault !== undefined) ? serviceContract.services[i].basedOnDefault : true,
                     id: (typeof serviceContract.services[i].id === "string")? serviceContract.services[i].id : serviceContract.services[i].id.id,
                     commissionRate: serviceContract.services[i].commissionRate,
                     count : serviceContract.services[i].count
@@ -1545,7 +1545,7 @@ var data = resp;
                   taxIds: [],
                   id: $scope.presettupDeviceServices[d].id,
                   billable: $scope.presettupDeviceServices[d].billable,
-                  basedOnDefault: $scope.presettupDeviceServices[d].basedOnDefault,
+                  basedOnDefault: ($scope.presettupDeviceServices[d].basedOnDefault !== undefined) ? $scope.presettupDeviceServices[d].basedOnDefault  : true,
                   commissionRate: $scope.presettupDeviceServices[d].commissionRate,
                 };
                 if ($scope.presettupDeviceServices[d].taxes && $scope.presettupDeviceServices[d].taxes.length) {
@@ -1567,7 +1567,7 @@ var data = resp;
                   taxIds: [],
                   id: $scope.presettupUsersServices[d].id,
                   billable: $scope.presettupUsersServices[d].billable,
-                  basedOnDefault: $scope.presettupUsersServices[d].basedOnDefault,
+                  basedOnDefault: ($scope.presettupUsersServices[d].basedOnDefault !== undefined) ? $scope.presettupUsersServices[d].basedOnDefault : true,
                   commissionRate: $scope.presettupUsersServices[d].commissionRate,
                 };
                 if ($scope.presettupUsersServices[d].taxes && $scope.presettupUsersServices[d].taxes.length) {
@@ -1589,7 +1589,7 @@ var data = resp;
                   taxIds: [],
                   id: serviceContract.serviceContractServices[m].id,
                   billable: serviceContract.serviceContractServices[m].billable,
-                  basedOnDefault: serviceContract.serviceContractServices[m].basedOnDefault,
+                  basedOnDefault: (serviceContract.serviceContractServices[m].basedOnDefault !== undefined) ? serviceContract.serviceContractServices[m].basedOnDefault : true,
                   commissionRate: serviceContract.serviceContractServices[m].commissionRate,
                 };
                 if (serviceContract.serviceContractServices[m].taxes && serviceContract.serviceContractServices[m].taxes.length) {
