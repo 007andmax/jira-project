@@ -1,13 +1,20 @@
-<div class="invoices-page__aside">
- 
+<div class="invoices-page__aside aside-preview">
 
-<div class="aside-header qt-df qt-ai-c qt-jc-sb qt-pr-16 qt-pl-32">
+
+<div class="aside-header qt-df qt-ai-c qt-jc-sb qt-pr-16 qt-pl-20">
 
   <div class="qt-fs-20 qt-ff-gm qt-color-dark">
     Invoice#7848
   </div>
 
   <div class="qt-df qt-ai-c" (click)="close()">
+
+    <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__edit"></div>
+    <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__email-dark"></div>
+    <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__print"></div>
+    <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__download-pdf"></div>
+    <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-16 header-circle-icon icon__remove"></div>
+
     <div class="icon__close qt-sz-24 qt-pointer qt-ic-c "></div>
   </div>
 
@@ -16,6 +23,72 @@
 <div class="billing-invoice-preview-scroll-content">
 
 <div class="qt-pl-50 qt-pr-50 qt-pt-24 qt-pb-50">
+
+  <div class="invoice-status-timeline qt-pt-10 qt-pl-16 qt-pr-16 qt-pb-20 qt-mb-24"> <!-- Add class '--closed' to close timeline -->
+    <div class="invoice-status-timeline__header qt-df qt-jc-sb">
+      <div class="qt-fs-13 qt-lh-154 qt-color-dark qt-mb-15 qt-ff-gm">Invoice Status</div>
+      <div class="qt-ic-c qt-sz-16 toggle-invoice-timeline"></div>  <!-- by clicking this button you should toggle class '--closed' for .invoice-status-timeline  -->
+    </div>
+
+    <div class="invoice-status-timeline__line">
+      <div class="invoice-status-timeline__line-point"></div>
+      <div class="invoice-status-timeline__line-point"></div>
+      <div class="invoice-status-timeline__line-point"></div>
+      <div class="invoice-status-timeline__line-point"></div>
+    </div>
+
+    <div class="invoice-status-timeline__steps qt-df">
+
+      <div class="qt-df qt-ai-c" >
+        <div class="step-citcle qt-mr-5 icon__check"></div>
+        <div>
+          <div class="qt-fs-12 qt-ff-gm qt-lh-133  qt-color-dark ">Create Invoice</div>
+          <div class="qt-fs-11 qt-lh-145 qt-color-dark-light">21/05/2020 09:47 AM</div>
+        </div>
+      </div>
+
+      <div class="qt-df qt-ai-c" >
+        <div class="step-citcle qt-mr-5 icon__invoice-email"></div>
+        <div>
+          <div class="qt-fs-12 qt-ff-gm qt-lh-133  qt-color-dark ">Send Invoice</div>
+          <div class="qt-fs-11 qt-lh-145 qt-color-dark-light">21/05/2020 09:47 AM</div>
+        </div>
+      </div>
+
+      <div class="qt-df qt-ai-c" >
+        <div class="step-citcle qt-mr-5 icon__read-on"></div>
+        <div>
+          <div class="qt-fs-12 qt-ff-gm qt-lh-133  qt-color-dark ">Read on</div>
+          <div class="qt-fs-11 qt-lh-145 qt-color-dark-light">21/05/2020 09:47 AM</div>
+        </div>
+      </div>
+
+      <div class="qt-df qt-ai-c" >
+        <div class="step-citcle qt-mr-5 icon__get-paid"></div>
+        <div>
+          <div class="qt-fs-12 qt-ff-gm qt-lh-133  qt-color-dark ">Get paid</div>
+          <div class="qt-fs-11 qt-lh-145 qt-color-dark-light">21/05/2020 09:47 AM</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- <div class="qt-mb-24">
+    <div class="invoice-aside-info-block qt-df qt-ai-c qt-jc-sb qt-pb-12 qt-pt-12 qt-pl-16 qt-pr-16">
+      <div class="qt-df qt-ai-c">
+        <div class="qt-circle qt-sz-40 qt-mr-10 icon__faster-payment"></div>
+        <div class="qt-ff-sb qt-color-dark">Get paid faster with online payment gateways</div>
+      </div>
+
+      <div class="qt-df">
+        <div class="qt-button qt-mr-12 --outline">Record Payment by CC</div>
+        <div class="qt-button">Record Payment Offline</div>
+      </div>
+    </div>
+  </div> -->
 
   <div class="invoice-preview qt-pos-rel">
     <div class="invoice-preview__status --paid"></div>

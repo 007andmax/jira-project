@@ -248,6 +248,17 @@ app-invoices-item {
 
 // aside invoice preview
 .invoices-page__aside {
+  &.aside-preview {
+    width: 940px;
+  }
+
+  .header-circle-icon {
+    background-size: 16px !important;
+    border: 1px solid #dfe3e8;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+  }
   .invoice-preview {
     box-shadow: 0 8px 16px 10px rgba(0, 0, 0, 0.05);
     background-color: #ffffff;
@@ -345,20 +356,99 @@ app-invoices-item {
       height: 40px;
     }
 
-    .invoice-preview__status {
-      position: absolute;
-      width: 88px;
-      height: 88px;
-      top: -22px;
-      left: -20px;
-      background: url(../ng2/assets/img/update-label.svg);
-
-    }
   }
 
   .billing-invoice-preview-scroll-content {
     overflow: auto;
     height: calc(100% - 56px);
+  }
+
+  .invoice-preview__status {
+    position: absolute;
+    width: 88px;
+    height: 88px;
+    top: -22px;
+    left: -20px;
+    background: url(../ng2/assets/img/update-label.svg);
+
+  }
+
+  .invoice-status-timeline {
+    border-radius: 6px;
+    border: solid 1px #dfe3e8;
+    background-color: #ffffff;
+    transition: height .3s;
+
+    .toggle-invoice-timeline {
+      background-image: url(../ng2/assets/img/icons/collapse-task.svg);
+      cursor: pointer;
+      background-size: 12px;
+      background-position: bottom center;
+      transition: transform .3s;
+    }
+
+    &__line {
+      width: 100%;
+      border-top: 1px solid #dfe3e8;
+      display: flex;
+      justify-content: space-between;
+      padding-left: 16px;
+      padding-right: 177px;
+      margin-bottom: 5px;
+    }
+
+    &__line-point {
+      border-radius: 50%;
+      background: #2EC866;
+      width: 8px;
+      height: 8px;
+      position: relative;
+      top: -5px;
+    }
+
+    &__steps {
+      justify-content: space-between;
+      padding-right: 50px;
+    }
+
+    &.--closed {
+      .toggle-invoice-timeline {
+        transform: rotate(-90deg);
+      }
+      height: 40px;
+      overflow: hidden;
+    }
+  }
+
+  .step-citcle {
+    width: 40px;
+    height: 40px;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.05);
+    border: solid 1px #dfe3e8;
+    background-color: #ffffff;
+    border-radius: 50%;
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    &::before {
+      content: "";
+      position: absolute;
+      left: calc(50% - 2px);
+      top: -3px;
+      width: 4px;
+      height: 4px;
+      background: #fff;
+      transform: rotate(45deg);
+      border-left: 1px solid #dfe3e8;
+      border-top: 1px solid #dfe3e8;
+    }
+  }
+
+
+  .invoice-aside-info-block {
+    border-radius: 10px;
+    border: dotted 1px #c5cdd5;
+    background-color: #ffffff;
   }
 }
 

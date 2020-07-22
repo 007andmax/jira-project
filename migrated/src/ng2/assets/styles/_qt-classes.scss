@@ -188,11 +188,13 @@
 }
 
 
+.qt-sz-12 {width: 12px; height: 12px;}
 .qt-sz-16 {width: 16px; height: 16px;}
 .qt-sz-18 {width: 18px; height: 18px;}
 .qt-sz-20 {width: 20px; height: 20px;}
 .qt-sz-24 {width: 24px; height: 24px;}
 .qt-sz-32 {width: 32px; height: 32px;}
+.qt-sz-40 {width: 40px; height: 40px;}
 
 .qt-h40 {height: 40px;}
 
@@ -221,6 +223,9 @@
 
 
 .qt-bg-info {background-color: #16a4fa;}
+.qt-bg-white {background-color: white;}
+
+
 
 
 .qt-pos-rel {
@@ -490,6 +495,11 @@
   line-height: 1.63;
 }
 
+.qt-lh-145 {
+  line-height: 1.45;
+}
+
+
 .qt-df-important {
   display: flex !important;
 }
@@ -500,3 +510,6 @@
     top: 11px !important;
   }
 }
+
+
+
