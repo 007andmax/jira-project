@@ -78,6 +78,9 @@
           $timeout(function () {
             changeNumOfIntervals($scope.serviceContract.startDate, $scope.serviceContract.endDate, false);
           }, 500);
+
+          console.log("$scope.serviceContract",$scope.serviceContract);
+          console.log("$scope.editContract",$scope.editContract);
         });
 
         var day = 1000 * 60 * 60 * 24;
@@ -111,6 +114,7 @@
           if ($scope.isEditContract || !$scope.isEditContract && $scope.action === 'COPY') {
             var end_date = angular.copy($scope.editContract.endDate);
           $scope.serviceContract = angular.copy($scope.editContract);
+          console.log("$scope.serviceContract",$scope.serviceContract);
           $scope.reInitPrpductsExpenseNameField = false;
           var endDateTechCompany = CompaniesService.parseDateTechCompany(end_date); 
           $scope.serviceContract.endDate = $filter('date')(endDateTechCompany, 'dd MMM yyyy');//$filter('date')(new Date($scope.serviceContract.endDate), 'dd MMM yyyy');
@@ -1401,7 +1405,7 @@ var data = resp;
 
                 validateNewServiceName(serv.nameValue).then(function (resp) {
                   if (resp) {
-                   
+                   console.log("resp",resp);
                     $scope.serviceContract.services.splice(id, 1, ns);
                   }
                 }, function() {
@@ -1730,7 +1734,7 @@ var data = resp;
                     billable: serviceContract.services[i].billable,
                     taxIds: [],
                     basedOnDefault: true,
-                    id: serviceContract.services[i].id.id,
+                    id: ($scope.action === "COPY") ? serviceContract.services[i].id : serviceContract.services[i].id.id,
                     commissionRate: serviceContract.services[i].commissionRate
                   };
                   if(serviceContract.services[i].billable) {
