@@ -246,7 +246,6 @@ export class QuoteService {
         }
       })
     } else {
-      console.log("itemsAray",itemsAray);
       itemsAray = itemsAray.filter((item) => !item.hasOwnProperty('rate'));
       return itemsAray.map((item, index) => ({
         item: item,

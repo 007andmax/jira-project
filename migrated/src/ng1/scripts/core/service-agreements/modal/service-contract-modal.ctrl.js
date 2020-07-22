@@ -78,10 +78,7 @@
           $timeout(function () {
             changeNumOfIntervals($scope.serviceContract.startDate, $scope.serviceContract.endDate, false);
           }, 500);
-
-          console.log("$scope.serviceContract",$scope.serviceContract);
-          console.log("$scope.editContract",$scope.editContract);
-        });
+       });
 
         var day = 1000 * 60 * 60 * 24;
         var month = 30 * day;
@@ -114,7 +111,6 @@
           if ($scope.isEditContract || !$scope.isEditContract && $scope.action === 'COPY') {
             var end_date = angular.copy($scope.editContract.endDate);
           $scope.serviceContract = angular.copy($scope.editContract);
-          console.log("$scope.serviceContract",$scope.serviceContract);
           $scope.reInitPrpductsExpenseNameField = false;
           var endDateTechCompany = CompaniesService.parseDateTechCompany(end_date); 
           $scope.serviceContract.endDate = $filter('date')(endDateTechCompany, 'dd MMM yyyy');//$filter('date')(new Date($scope.serviceContract.endDate), 'dd MMM yyyy');
@@ -129,11 +125,9 @@
             changeNumOfIntervals($scope.serviceContract.startDate, $scope.serviceContract.endDate, false);
           }, 500);
           if($scope.serviceContract.blockTimeServices.length > 0) {
-            console.log("$scope.serviceContract.blockTimeServices",$scope.serviceContract.blockTimeServices);
-            $scope.serviceContract.contractWithBlockTime = true;
+             $scope.serviceContract.contractWithBlockTime = true;
             $scope.serviceContract.serviceContractServicesToTrack = $scope.serviceContract.blockTimeServices;
-            console.log("$scope.serviceContract.serviceContractServicesToTrack",$scope.serviceContract.serviceContractServicesToTrack);
-          }
+           }
 
           AgreementsService.getServiceAgreementById($scope.editContract.id, function(data){
             $scope.contractStatus = data.status;
@@ -227,9 +221,7 @@
           if($scope.serviceContract.blockTimeServices.length > 0) {
             $scope.serviceContract.contractWithBlockTime = true;
             $scope.serviceContract.serviceContractServicesToTrack = $scope.serviceContract.blockTimeServices;
-            console.log("$scope.serviceContract.blockTimeServices",$scope.serviceContract.blockTimeServices);
-            console.log("$scope.serviceContract.serviceContractServicesToTrack",$scope.serviceContract.serviceContractServicesToTrack);
-          }
+           }
 
           AgreementsService.getServiceAgreementById($scope.editContract.id, function(data){
             $scope.contractStatus = data.status;
@@ -1405,7 +1397,6 @@ var data = resp;
 
                 validateNewServiceName(serv.nameValue).then(function (resp) {
                   if (resp) {
-                   console.log("resp",resp);
                     $scope.serviceContract.services.splice(id, 1, ns);
                   }
                 }, function() {
@@ -1485,8 +1476,7 @@ var data = resp;
             servContract.endDate = $filter('date')(ed, 'yyyy/MM/dd');
 
             if(serviceContract.billType !== 'OTHER') {
-              console.log("serviceContract.serviceContractServicesToTrack",JSON.parse(JSON.stringify(serviceContract.serviceContractServicesToTrack)));
-              if(serviceContract.serviceContractServicesToTrack && serviceContract.serviceContractServicesToTrack.length) {
+             if(serviceContract.serviceContractServicesToTrack && serviceContract.serviceContractServicesToTrack.length) {
                 for (var l=0; l<serviceContract.serviceContractServicesToTrack.length; l++) {
                   var scstt = {
                     
@@ -1508,7 +1498,6 @@ var data = resp;
                 }
               }
               if (serviceContract.isAdditionalServices && serviceContract.services && serviceContract.services.length) {
-                console.log("serviceContract.services",serviceContract.services);
                 for (var i = 0; i < serviceContract.services.length; i++) {
                   var serv = {
                     name: serviceContract.services[i].nameValue || serviceContract.services[i].name,
@@ -1536,7 +1525,6 @@ var data = resp;
 
 
             if(serviceContract.billType === 'DEVICE' && $scope.presettupDeviceServices.length>0) {
-              console.log("$scope.presettupDeviceServices",$scope.presettupDeviceServices);
               for(var d=0; d<$scope.presettupDeviceServices.length; d++) {
                 var dServ = {
                   name: $scope.presettupDeviceServices[d].name,
@@ -1558,7 +1546,6 @@ var data = resp;
             }
 
             if(serviceContract.billType === 'USER' && $scope.presettupUsersServices.length>0) {
-              console.log("$scope.presettupUsersServices",$scope.presettupUsersServices);
               for(var d=0; d<$scope.presettupUsersServices.length; d++) {
                 var uServ = {
                   name: $scope.presettupUsersServices[d].name,
@@ -1580,7 +1567,6 @@ var data = resp;
             }
 
             if (serviceContract.serviceContractServices && serviceContract.serviceContractServices.length) {
-              console.log("serviceContract.serviceContractServices",serviceContract.serviceContractServices);
               for (var m = 0; m < serviceContract.serviceContractServices.length; m++) {
                 var scs = {
                   name: serviceContract.serviceContractServices[m].name,
