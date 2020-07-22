@@ -126,8 +126,12 @@ export class QuoteService {
    * @param recipients - users list
    */
   public resend(item, recipients) {
-    this.productsArray = this.getProductItems([...item.products], 'product');
-    this.servicesArray = this.getProductItems([...item.services], 'service');
+    this.itemsListArray = this.quoteStateService.getItemArray();
+    this.productsArray = this.getProductItems(this.itemsListArray, 'product');
+    this.servicesArray = this.getProductItems(this.itemsListArray, 'service');
+
+   /* this.productsArray = this.getProductItems([...item.products], 'product');
+    this.servicesArray = this.getProductItems([...item.services], 'service');*/
     return this.http.put(`${this.apiUrl}saleQuotes/${item.id}`, {
       "companyId": item.company.id,
       "number": item.number,
@@ -242,6 +246,7 @@ export class QuoteService {
         }
       })
     } else {
+      console.log("itemsAray",itemsAray);
       itemsAray = itemsAray.filter((item) => !item.hasOwnProperty('rate'));
       return itemsAray.map((item, index) => ({
         item: item,
