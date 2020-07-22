@@ -6,7 +6,7 @@ export class InvoicesFilter {
     offset: number = 0;
     sortBy: any;
     startDate: number;
-    status: any;
+    status: string;
     constructor() { }
 
     public getFIlter() {
@@ -23,6 +23,9 @@ export class InvoicesFilter {
     }
     public setOffset(offset) {
         this.offset  = offset;
+    }
+    public setStatus(status) {
+        this.status  = status;
     }
     public setCompany(data) {
         this.companyName = data;

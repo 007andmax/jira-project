@@ -5,6 +5,7 @@ import { InvoicesFilter } from '../../class/invoices-filter';
 import { InvoiceStateService } from 'src/ng2/app/states/invoice/invoice-state.service';
 import { SelectSearchComponent } from 'src/ng2/app/components/shared/select-search/select-search.component';
 import { MultiDatepickerComponent } from 'src/ng2/app/components/shared/multi-datepicker/multi-datepicker.component';
+import { CompanySetting } from 'src/ng2/app/components/companies/class/company-setting';
 
 @Component({
   selector: 'app-invoices-filter',
@@ -14,10 +15,12 @@ import { MultiDatepickerComponent } from 'src/ng2/app/components/shared/multi-da
 export class InvoicesFilterComponent implements OnInit {
   companies = [];
   @ViewChild('companyDp') companyDp: SelectSearchComponent;
+  @ViewChild('statusDp') statusDp: SelectSearchComponent;
   @ViewChild('datesDp') datesDp: MultiDatepickerComponent;
   sub: Subscription = new Subscription();
   invoicesFilter: InvoicesFilter = new InvoicesFilter();
   @Output() changeCountFilter = new EventEmitter<any>();
+  statusTypes = [new CompanySetting('Paid invoices', 'PAID'), new CompanySetting('Unpaid invoices', 'UNPAID'), new CompanySetting('Unpaid invoices', 'OVERDUE')];
   constructor(private companiesState: CompaniesStateService,
     private invoiceStateService: InvoiceStateService) { }
 
@@ -29,6 +32,12 @@ export class InvoicesFilterComponent implements OnInit {
     })
     this.sub.add(getOnCompanies);
   }
+  onSelectStatus (status) {
+console.log("status",status);
+this.invoicesFilter.setStatus((status) ? status.value : null);
+this.invoiceStateService.onInitFilter(this.invoicesFilter);
+this.onChangeCounterFilter();
+  }
   private getClientsList(data) {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
@@ -37,7 +46,9 @@ export class InvoicesFilterComponent implements OnInit {
 
     this.companyDp.clearWithOutChanges();
     this.datesDp.clearWithOutChanges();
+    this.statusDp.clearWithOutChanges();
 
+this.invoicesFilter.setStatus(null);
     this.invoicesFilter.setCompany(null);
     this.invoicesFilter.setStartDate(null);
     this.invoicesFilter.setEndDate(null);

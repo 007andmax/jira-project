@@ -11,7 +11,11 @@
   <td class="invoce-table__date" [textContent]="getDate(invoice.date)"></td>
   <td class="invoce-table__invoice" [textContent]="invoice.number" (click)="onShowPreviewInvoice()"></td>
   <td class="invoce-table__company" [textContent]="company.name"></td>
-  <td class="invoce-table__status"><span class="tag__modern">Due in 16 days</span></td>
+  <td class="invoce-table__status">
+    <span class="tag__modern" *ngIf="invoice.isOverDue && !invoice.paidOn" [textContent]="'Overdue by ' + getDueDate() + ' days'"></span>
+    <span class="tag__modern" *ngIf="!invoice.isOverDue && !invoice.paidOn" [textContent]="'Due in ' + getDueDate() + ' days'"></span>
+    <span class="tag__modern" *ngIf="invoice.paidOn" [textContent]="'Paid ' + getPaidOnDate() + ' days ago'"></span>    
+    </td>
   <td class="invoce-table__read-on" [textContent]="getDate(invoice.readedAt)"></td>
   <td class="invoce-table__amount" [textContent]="invoice.sum | currency"></td>
   <td class="invoce-table__balance-due" [textContent]="invoice.paidSum | currency"></td>

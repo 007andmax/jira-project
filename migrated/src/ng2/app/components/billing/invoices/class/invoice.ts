@@ -15,6 +15,7 @@ export class Invoice {
     recurringInvoice: any;
     status: string;
     sum: number;
+    isOverDue: boolean = false;
     ticketNumbers: Array<String>;
     constructor(data) {
         this.companyId = (data.company) ? data.company.id : '';
@@ -34,5 +35,11 @@ export class Invoice {
         this.status = data.status;
         this.sum = data.sum;
         this.ticketNumbers = data.ticketNumbers;
+
+
+        var today = Date.now();
+        var dueDate = new Date(this.dueDate).getTime();
+        let overDue = (dueDate - today) / 86400000;
+        this.isOverDue = (overDue < 0);
     }
 }
