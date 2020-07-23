@@ -234,7 +234,12 @@ export class QuotePreviewComponent implements OnInit {
 
   onlySend() {
     const modalRef = this.modalService.open(ModalQuoteComponent, null);
-    modalRef.componentInstance.data = this.quoteForCreate;
+    let data = JSON.parse(JSON.stringify(this.quoteForCreate));
+    let itemsArray =  data.itemsArray;
+    console.log("itemsArray", itemsArray);
+    data.products = this.quoteStateService.getProductsQuote(itemsArray);
+    data.services = this.quoteStateService.getServicesQuote(itemsArray);
+    modalRef.componentInstance.data = data;
     modalRef.componentInstance.onlySendMode = true;
   }
   onlyDownloadPdf () {
@@ -289,7 +294,12 @@ export class QuotePreviewComponent implements OnInit {
    */
   public saveAndSend() {
     const modalRef = this.modalService.open(ModalQuoteComponent, this.quoteForCreate);
-    modalRef.componentInstance.data = this.quoteForCreate;
+    let data = JSON.parse(JSON.stringify(this.quoteForCreate));
+    let itemsArray =  data.itemsArray;
+    console.log("itemsArray", itemsArray);
+    data.products = this.quoteStateService.getProductsQuote(itemsArray);
+    data.services = this.quoteStateService.getServicesQuote(itemsArray);
+    modalRef.componentInstance.data = data;
   }
 
   /**
