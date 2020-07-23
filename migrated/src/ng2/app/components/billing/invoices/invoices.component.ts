@@ -7,7 +7,7 @@ import { CompaniesStateService } from 'src/ng2/app/states/company/companies-stat
 import { InvoiceStateService } from 'src/ng2/app/states/invoice/invoice-state.service';
 import { Subscription } from 'rxjs';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
-import { DELETE_INVOICE } from 'src/ng2/app/const/confirm';
+import { DELETE_INVOICE, ROLLBACK_INVOICE, REFUND_PAYMENTS } from 'src/ng2/app/const/confirm';
 
 @Component({
   selector: 'app-invoices',
@@ -25,6 +25,7 @@ export class InvoicesComponent implements OnInit,OnDestroy {
   showCreateInvoice:boolean = false;
   showPreviewInvoice:boolean = false;
   offset: number = 20;
+  previewInvoice:Invoice;
   sub:Subscription = new Subscription();
   constructor(private invoicesService:InvoicesService,
     public cd: ChangeDetectorRef,
@@ -49,10 +50,24 @@ export class InvoicesComponent implements OnInit,OnDestroy {
         if (this.confirmStateService.getConfirmAction() === DELETE_INVOICE) {
           this.onRemoveInvoice(this.invoiceStateService.getInvoiceForRemove());
         }
-        
+        if (this.confirmStateService.getConfirmAction() === ROLLBACK_INVOICE) {
+          this.onRollbackInvoice(this.invoiceStateService.getInvoiceForRollback());
+        }
+        if (this.confirmStateService.getConfirmAction() === REFUND_PAYMENTS) {
+          this.onRollbackInvoice(this.invoiceStateService.getInvoiceForRefund());
+        }
       }
     })
     this.sub.add(getConfirm);
+  }
+  onPreviewInvoice(data) {
+this.previewInvoice = data;
+this.showPreviewInvoice = true;
+  }
+  onRollbackInvoice(invoice) {
+    this.invoicesService.rollback(invoice.id).subscribe(data => {
+
+    })
   }
   onRemoveInvoice(invoice) {
     this.invoicesService.remove(invoice.id).subscribe(data => {

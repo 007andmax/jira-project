@@ -74,7 +74,7 @@
        <ng-template ngFor let-invoice
                     [ngForOf]="invoices"
                     [ngForTrackBy]="trackById">
-                    <app-invoices-item (onPreviewInvoice)="showPreviewInvoice = true" [invoice]="invoice"></app-invoices-item>
+                    <app-invoices-item (onPreviewInvoice)="onPreviewInvoice($event)" [invoice]="invoice"></app-invoices-item>
        </ng-template>
        <div class="loading" *ngIf="showPreloader"></div>
      </tbody>
@@ -97,4 +97,4 @@
 </div>
 
 <app-invoices-aside *ngIf="showCreateInvoice" (onClose)="showCreateInvoice = false"></app-invoices-aside>
-<app-invoices-aside-preview *ngIf="showPreviewInvoice" (onClose)="showPreviewInvoice = false"></app-invoices-aside-preview>
+<app-invoices-aside-preview *ngIf="showPreviewInvoice" (onClose)="showPreviewInvoice = false" [invoice]="previewInvoice"></app-invoices-aside-preview>

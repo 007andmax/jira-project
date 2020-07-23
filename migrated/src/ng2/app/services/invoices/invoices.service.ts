@@ -20,6 +20,12 @@ export class InvoicesService {
     private http: HttpClient,
    
   ) { }
+  public getInvoice(invoiceId) {
+    return this.http.get(`${this.apiUrl}invoice/getDataByInvoiceId?invoiceId=${invoiceId}`);
+  }
+  public rollback(invoiceId) {
+    return this.http.put(`${this.apiUrl}invoice/rollback?invoiceId=${invoiceId}`,{});
+  }
   public remove(invoiceId) {
     return this.http.delete(`${this.apiUrl}invoice/delete?invoiceId=${invoiceId}`,{});
   }
