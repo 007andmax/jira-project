@@ -61,7 +61,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     this.globalNote = this.invoiceNotes.filter(item => item.noteType === "GLOBAL")[0];
     if (this.billableStateService.getGlobalNote()) this.globalNote = this.billableStateService.getGlobalNote();
     this.currentCompany = this.companiesStateService.getCurrentCompany();
-    if (this.globalNote) this.elRef.nativeElement.querySelector("#description-global-note").value = this.globalNote.line1;
+    if (this.invoice.invoiceDataDto.termsAndConditions) this.elRef.nativeElement.querySelector("#description-global-note").value = this.invoice.invoiceDataDto.termsAndConditions;
     this.billableStateService.setGlobalNote(this.globalNote);
     let getChangeCompanies = this.companiesStateService.getChangeCompanies().subscribe((data: CompanyUpdate) => {
       if (data.action === 'COMPANY_SAVED' && this.company.id === data.data.id) {

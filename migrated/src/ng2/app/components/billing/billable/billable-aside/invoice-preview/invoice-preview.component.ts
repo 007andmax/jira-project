@@ -20,14 +20,12 @@ export class InvoicePreviewComponent implements OnInit {
   opened: boolean = false;
   sub: Subscription = new Subscription();
   selectedNote: InvoiceNote = null;
-  globalNote: InvoiceNote = null;
   currentCompany: any;
   constructor(private billableStateService: BillableStateService,
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
     this.selectedNote = this.billableStateService.getRegularNote();
-    this.globalNote = this.billableStateService.getGlobalNote();
     this.currentCompany = this.companiesStateService.getCurrentCompany();
   }
   getCompanyLogoUrl() {

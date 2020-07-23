@@ -271,8 +271,8 @@
             </div>
             <div class="invoice-list--footer__bottom clearfix">
               <div class="col-md-12 bold pl-30">Terms & Conditions</div>
-              <div class="col-md-12 pl-30 notes">{{currentInvoice.globalNote.line1 + (currentInvoice.globalNote.line2 ||
-                                                 '')}}
+              <div class="col-md-12 pl-30 notes">{{currentInvoice.termsAndConditions ||
+                                                 ''}}
               </div>
             </div>
           </div>
