@@ -1,8 +1,8 @@
-<tr>
+<tr [ngClass]="{'--selected': invoice.selected}">
   <td class="invoice-table__check">
     <div class="d-f">
-      <label class="qt-checkbox">
-        <input  type="checkbox">
+      <label class="qt-checkbox" [attr.for]="'invoice-' + invoice.id">
+        <input [attr.id]="'invoice-' + invoice.id"  [(ngModel)]="invoice.selected"  type="checkbox">
         <span ></span>
       </label>
     </div>

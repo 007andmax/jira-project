@@ -1,0 +1,13 @@
+tr:hover {
+    cursor: pointer;
+  td {
+    background-color: #f9fafb;
+
+  }
+}
+tr.--selected {
+  td {
+    background-color: #f4fbff;
+    border-color: #16a4fa !important;
+  }
+}

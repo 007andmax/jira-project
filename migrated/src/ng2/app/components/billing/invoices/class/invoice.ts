@@ -17,6 +17,7 @@ export class Invoice {
     sum: number;
     isOverDue: boolean = false;
     ticketNumbers: Array<String>;
+    selected:boolean = false;
     constructor(data) {
         this.companyId = (data.company) ? data.company.id : '';
         this.date = data.date;
