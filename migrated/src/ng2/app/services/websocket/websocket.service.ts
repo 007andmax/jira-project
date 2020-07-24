@@ -77,6 +77,7 @@ export class WebsocketService {
       that.subsribeToBillable();
       that.subsribeToInvoiceNumber();
       that.subsribeToBillableCount();
+      that.subsribeToInvoice();
     });
   }
   private subsribeToDevices() {
@@ -320,7 +321,15 @@ export class WebsocketService {
 
     }, 3000);
   }
+  public subsribeToInvoice() {
+    setTimeout(() => {
+      this.stompClient.subscribe(`/user/watch/receivableInvoice`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.invoiceRealTimeService.handleRealTimeChangesInvoice(newChange);
+      });
 
+    }, 3000);
+  }
 
   
   public getClient() {

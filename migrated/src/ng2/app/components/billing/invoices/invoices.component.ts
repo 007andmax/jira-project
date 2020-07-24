@@ -8,6 +8,7 @@ import { InvoiceStateService } from 'src/ng2/app/states/invoice/invoice-state.se
 import { Subscription } from 'rxjs';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { DELETE_INVOICE, ROLLBACK_INVOICE, REFUND_PAYMENTS } from 'src/ng2/app/const/confirm';
+import { InvoiceRealTimeService } from 'src/ng2/app/states/invoice/invoice-real-time.service';
 
 @Component({
   selector: 'app-invoices',
@@ -31,6 +32,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   constructor(private invoicesService: InvoicesService,
     public cd: ChangeDetectorRef,
+    private invoiceRealTimeService:InvoiceRealTimeService,
     private companiesStateService: CompaniesStateService,
     private invoiceStateService: InvoiceStateService,
     private confirmStateService: ConfirmStateService,
@@ -66,6 +68,29 @@ export class InvoicesComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+
+   let changeInvoice =  this.invoiceRealTimeService.changeInvoice.subscribe(data => {
+      if (data.action === 'INVOICE_SAVED') {
+        let index = this.invoices.findIndex(item => item.id === data.id);
+        let invoice = new Invoice(data.data);
+        if (index > -1) {
+          this.invoices[index] = invoice;
+        } else {
+          this.invoices.unshift(invoice);
+        }
+
+      }
+      if (data.action === 'INVOICE_STATUS') {
+        let index = this.invoices.findIndex(item => item.id === data.id);
+        let invoice = new Invoice(data.data);
+        if (index > -1)  this.invoices[index] = invoice;
+      }
+      if (data.action === 'INVOICE_DELETED' || data.action === 'PAYMENT_RECEIVED' || data.action === 'INVOICE_ROLLBACK') {
+        let index = this.invoices.findIndex(item => item.id === data.id);
+        if (index > -1)  this.invoices.splice(index,1);
+      }
+    })
+    this.sub.add(changeInvoice);
   }
   onPreviewInvoice(data) {
     this.previewInvoice = data;
