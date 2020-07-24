@@ -38,7 +38,12 @@ export class InvoicesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     window.scrollTo(0, 0);
-    this.onScroll();
+    if (this.companiesStateService.getCompanies().length > 0)   this.onScroll();
+    let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
+      this.onScroll();
+    })
+    this.sub.add(getOnCompanies);
+  
     let getOnInitFilter = this.invoiceStateService.getOnInitFilter().subscribe(data => {
       this.invoicesFilter = data;
       this.showPreloader = true;
