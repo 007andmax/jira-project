@@ -76,7 +76,6 @@
                     [ngForTrackBy]="trackById">
                     <app-invoices-item (onPreviewInvoice)="onPreviewInvoice($event)" [invoice]="invoice"></app-invoices-item>
        </ng-template>
-       <div class="loading" *ngIf="showPreloader"></div>
      </tbody>
         </table>
         <div class="loading pengind-loading" *ngIf="showPendingPreloader"></div>

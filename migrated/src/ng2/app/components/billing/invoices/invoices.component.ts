@@ -15,27 +15,27 @@ import { DELETE_INVOICE, ROLLBACK_INVOICE, REFUND_PAYMENTS } from 'src/ng2/app/c
   styleUrls: ['./invoices.component.scss'],
   providers: [InvoicesListService]
 })
-export class InvoicesComponent implements OnInit,OnDestroy {
-  invoicesFilter:InvoicesFilter = new InvoicesFilter();
-  invoices:Array<Invoice> = [];
+export class InvoicesComponent implements OnInit, OnDestroy {
+  invoicesFilter: InvoicesFilter = new InvoicesFilter();
+  invoices: Array<Invoice> = [];
   showPendingPreloader: boolean = false;
   showPreloader: boolean = true;
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
-  showCreateInvoice:boolean = false;
-  showPreviewInvoice:boolean = false;
+  showCreateInvoice: boolean = false;
+  showPreviewInvoice: boolean = false;
   offset: number = 20;
-  previewInvoice:Invoice;
-  sub:Subscription = new Subscription();
-  constructor(private invoicesService:InvoicesService,
+  previewInvoice: Invoice;
+  sub: Subscription = new Subscription();
+  constructor(private invoicesService: InvoicesService,
     public cd: ChangeDetectorRef,
-    private companiesStateService:CompaniesStateService,
-    private invoiceStateService:InvoiceStateService,
+    private companiesStateService: CompaniesStateService,
+    private invoiceStateService: InvoiceStateService,
     private confirmStateService: ConfirmStateService,
-    private invoicesListService:InvoicesListService) { }
+    private invoicesListService: InvoicesListService) { }
 
   ngOnInit() {
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
     this.onScroll();
     let getOnInitFilter = this.invoiceStateService.getOnInitFilter().subscribe(data => {
       this.invoicesFilter = data;
@@ -61,8 +61,8 @@ export class InvoicesComponent implements OnInit,OnDestroy {
     this.sub.add(getConfirm);
   }
   onPreviewInvoice(data) {
-this.previewInvoice = data;
-this.showPreviewInvoice = true;
+    this.previewInvoice = data;
+    this.showPreviewInvoice = true;
   }
   onRollbackInvoice(invoice) {
     this.invoicesService.rollback(invoice.id).subscribe(data => {
@@ -71,10 +71,10 @@ this.showPreviewInvoice = true;
   }
   onRemoveInvoice(invoice) {
     this.invoicesService.remove(invoice.id).subscribe(data => {
-
+      this.showPreviewInvoice = false;
     })
   }
-  getInvoices () {
+  getInvoices() {
     if (this.invoicesListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
       return;
@@ -83,9 +83,9 @@ this.showPreviewInvoice = true;
 
 
     if (this.page_number > 0) this.showPendingPreloader = true;
-    this.invoicesService.getInvoices(this.invoicesFilter.getFIlter()).subscribe((data:any) => {  
-      console.log("data",data);
-       this.invoices = [...this.invoices, ...data];
+    this.invoicesService.getInvoices(this.invoicesFilter.getFIlter()).subscribe((data: any) => {
+      console.log("data", data);
+      this.invoices = [...this.invoices, ...data];
       this.infiniteScrollDisabled = false;
       if (data.length < this.offset) this.invoicesListService.setBlockList(true);
       this.page_number += 1;
@@ -95,7 +95,7 @@ this.showPreviewInvoice = true;
 
     })
 
- 
+
   }
   public setDefaultScoll() {
     this.page_number = 0;
