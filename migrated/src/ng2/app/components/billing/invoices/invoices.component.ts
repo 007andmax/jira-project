@@ -70,8 +70,9 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     this.sub.add(getConfirm);
 
    let changeInvoice =  this.invoiceRealTimeService.changeInvoice.subscribe(data => {
+     console.log("data",data);
       if (data.action === 'INVOICE_SAVED') {
-        let index = this.invoices.findIndex(item => item.id === data.id);
+        let index = this.invoices.findIndex(item => item.id === data.data.id);
         let invoice = new Invoice(data.data);
         if (index > -1) {
           this.invoices[index] = invoice;
@@ -81,12 +82,12 @@ export class InvoicesComponent implements OnInit, OnDestroy {
 
       }
       if (data.action === 'INVOICE_STATUS') {
-        let index = this.invoices.findIndex(item => item.id === data.id);
+        let index = this.invoices.findIndex(item => item.id === data.data.id);
         let invoice = new Invoice(data.data);
         if (index > -1)  this.invoices[index] = invoice;
       }
       if (data.action === 'INVOICE_DELETED' || data.action === 'PAYMENT_RECEIVED' || data.action === 'INVOICE_ROLLBACK') {
-        let index = this.invoices.findIndex(item => item.id === data.id);
+        let index = this.invoices.findIndex(item => item.id === data.data.id);
         if (index > -1)  this.invoices.splice(index,1);
       }
     })
