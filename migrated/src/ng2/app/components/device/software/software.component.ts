@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {formatDate} from '@angular/common';
 import { SoftwareListService } from './../_services/software-list.service';
 import { ToastrService } from 'ngx-toastr';
@@ -171,23 +171,16 @@ export class SoftwareComponent implements OnInit, OnDestroy {
   downloadCsv(){
     let downloadCsvList = [];
     this.softwareList.forEach(element => {
-      downloadCsvList.push([
-        element.softName.replace(',', ' ') || 'N/A',
-        element.softPublisher.replace(',', ' ') || 'N/A',
-        element.softVersion || 'N/A',
-        element.softInstalledOn || 'N/A',
-        element.softVersion || 'N/A'
-      ]);
+      downloadCsvList.push({
+        'Software Name': element.softName || 'N/A',
+        'Publisher': element.softPublisher || 'N/A',
+        'Version': element.softVersion || 'N/A',
+        'Installed On': element.softInstalledOn || 'N/A',
+        'Current Version': element.softVersion || 'N/A'
+      });
     });
     let fileName = 'Software List';
-    // const columnNames = [
-    //   {name: 'Software Name', value: 'softName'},
-    //   {name: 'Publisher', value: 'softPublisher'}, 
-    //   {name: 'Version', value: 'softVersion'}, 
-    //   {name: 'Installed on', value: 'softInstalledOn'}, 
-    //   {name: 'Current Version', value: 'currentSoftVersion'}];
-    const columnNames = ['Software Name','Publisher', 'Version', 'Installed on', 'Current Version'];
-    this.excelService.generateExcel(downloadCsvList, columnNames, fileName);
+    this.excelService.generateExcel(downloadCsvList, fileName, 'software');
   }
 
   getPdfData() {

@@ -40,7 +40,6 @@
     "cron-editor": "^2.1.7",
     "datatables.net": "^1.10.20",
     "datatables.net-dt": "^1.10.20",
-    "exceljs": "^1.12.0",
     "file-saver": "^2.0.2",
     "font-awesome": "^4.7.0",
     "hammerjs": "^2.0.8",

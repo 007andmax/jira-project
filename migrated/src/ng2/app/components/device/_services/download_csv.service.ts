@@ -1,91 +1,68 @@
 import { Injectable } from '@angular/core';
-import { Workbook } from 'exceljs';
-import * as fs from 'file-saver';
 @Injectable({
   providedIn: 'root'
 })
 export class ExcelService {
   constructor() {
   }
-  generateExcel(data, header, fileName) {
-    
-    //Create workbook and worksheet
-    let workbook = new Workbook();
-    let worksheet = workbook.addWorksheet(fileName + 'Data');
-    //Add Header Row
-    let headerRow = worksheet.addRow(header);
-    
-    // Cell Style : Fill and Border
-    headerRow.eachCell((cell, number) => {
-      cell.fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FFCCFFE5' },
-        bgColor: { argb: 'FFCCFFE5' }
-      }
-      cell.style = {font:{bold: true}}
-    })
-    // worksheet.addRows(data);
-    // Add Data and Conditional Formatting
-    data.forEach(d => {
-      let row = worksheet.addRow(d);
-    }
-    );
-    //Generate Excel File with given name
-    workbook.csv.writeBuffer().then((data) => {
-      let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-      fs.saveAs(blob, fileName + '.csv');
-    })
+
+  generateExcel(data: any, fileName: any, type: any) {
+    this.downloadFile(data, fileName, type);
   }
 
-  generateHardwareExcel(data, fileName) {
-    
-    //Create workbook and worksheet
-    let workbook = new Workbook();
-    let worksheet = workbook.addWorksheet(fileName + 'Data');
-
-    for(let i = 0; i < data.length; i++) {
-      let title = '';
-      if (i == 0) {
-        title = 'Computer';
-      } else if (i == 1) {
-        title = 'Motherboard';
-      } else if (i == 2) {
-        title = 'Processor';
-      } else if (i == 3) {
-        title = 'Memory';
-      } else if (i == 4) {
-        title = 'Network Card';
-      } else if (i == 5) {
-        title = 'Graphics Card';
-      } else if (i == 6) {
-        title = 'Display';
-      } else if (i == 7) {
-        title = 'Hard disk';
-      } else if (i == 8) {
-        title = 'Operating System';
-      }
-      let titleRow = worksheet.addRow([title]);
-      titleRow.font = { size: 20, bold: true }
-      data[i].forEach(d => {
-        let row = worksheet.addRow(d);
-      });
-      worksheet.addRow([]);
+  downloadFile(data: any, fileName: any, type: any) {
+    let typeArr: string[];
+    if (type === 'hardware') {
+      typeArr = ['label', 'value'];
+    } else [
+      typeArr = ['Software Name', 'Publisher', 'Version', 'Installed On', 'Current Version']
+    ]
+    let csvData = this.ConvertToCSV(data, typeArr, type);
+    let blob = new Blob(['\ufeff' + csvData], { type: 'text/csv;charset=utf-8;' });
+    let dwldLink = document.createElement("a");
+    let url = URL.createObjectURL(blob);
+    let isSafariBrowser = navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1;
+    if (isSafariBrowser) {  //if Safari open in new window to save file with random filename.
+        dwldLink.setAttribute("target", "_blank");
     }
-    // worksheet.mergeCells('A1:B1');
-    // worksheet.mergeCells('A8:B8');
-    // worksheet.mergeCells('A14:B14');
-    // worksheet.mergeCells('A19:B19');
-    // worksheet.mergeCells('A22:B22');
-    // worksheet.mergeCells('A32:B32');
-    // worksheet.mergeCells('A38:B38');
-    // worksheet.mergeCells('A44:B44');
-    // worksheet.mergeCells('A50:B50');
+    dwldLink.setAttribute("href", url);
+    dwldLink.setAttribute("download", fileName + ".csv");
+    dwldLink.style.visibility = "hidden";
+    document.body.appendChild(dwldLink);
+    dwldLink.click();
+    document.body.removeChild(dwldLink);
+}
 
-    //Generate Excel File with given name
-    workbook.csv.writeBuffer().then((data) => {
-      let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-      fs.saveAs(blob, fileName + '.csv');
-    })
-  }
+ConvertToCSV(objArray, headerList, type) {
+     let array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+     let str = '';
+     let row = '';
+     if (type === 'software') {
+      row = 'S.No,';
+
+      for (let index in headerList) {
+          row += headerList[index] + ',';
+      }
+     }
+     row = row.slice(0, -1);
+     if (type === 'software') {
+      str += row + '\r\n';
+     }
+     for (let i = 0; i < array.length; i++) {
+         let line = '';
+         if (type === 'software') [
+          line = (i+1)+''
+         ]
+         for (let index in headerList) {
+            let head = headerList[index];
+            if (index === '0' && type === 'hardware') {
+              line += array[i][head];
+            } else {
+              line += ',' + array[i][head];
+            }
+         }
+         str += line + '\r\n';
+     }
+     return str;
+ }
 }
