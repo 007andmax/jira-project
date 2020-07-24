@@ -1,21 +1,21 @@
 <div class="invoices-page__aside aside-preview">
 
 
-<div class="aside-header qt-df qt-ai-c qt-jc-sb qt-pr-16 qt-pl-20">
+<div class="aside-header qt-df qt-ai-c qt-jc-sb qt-pr-16 qt-pl-20" *ngIf="!showPreloader">
 
-  <div class="qt-fs-20 qt-ff-gm qt-color-dark" *ngIf="!showPreloader" [textContent]="'Invoice#' + invoiceProfile.number">
+  <div class="qt-fs-20 qt-ff-gm qt-color-dark"  [textContent]="'Invoice#' + invoiceProfile.number">
    
   </div>
 
-  <div class="qt-df qt-ai-c" (click)="close()">
+  <div class="qt-df qt-ai-c" >
 
-    <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__edit"></div>
-    <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__email-dark"></div>
-    <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__print"></div>
-    <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__download-pdf"></div>
-    <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-16 header-circle-icon icon__remove"></div>
+   <!-- <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__edit"></div>-->
+    <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__email-dark" (click)="resendInvoices()"></div>
+    <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__print" (click)="print()"></div>
+    <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__download-pdf" (click)="downloadPDF()"></div>
+    <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-16 header-circle-icon icon__remove" (click)="deleteInvoice()"></div>
 
-    <div class="icon__close qt-sz-24 qt-pointer qt-ic-c "></div>
+    <div class="icon__close qt-sz-24 qt-pointer qt-ic-c " (click)="close()"></div>
   </div>
 
 </div>
@@ -28,17 +28,17 @@
   <div class="invoice-status-timeline qt-pt-10 qt-pl-16 qt-pr-16 qt-pb-20 qt-mb-24"> <!-- Add class '--closed' to close timeline -->
     <div class="invoice-status-timeline__header qt-df qt-jc-sb">
       <div class="qt-fs-13 qt-lh-154 qt-color-dark qt-mb-15 qt-ff-gm">Invoice Status</div>
-      <div class="qt-ic-c qt-sz-16 toggle-invoice-timeline"></div>  <!-- by clicking this button you should toggle class '--closed' for .invoice-status-timeline  -->
+      <div class="qt-ic-c qt-sz-16 toggle-invoice-timeline" (click)="toggleStatus = !toggleStatus"></div>  <!-- by clicking this button you should toggle class '--closed' for .invoice-status-timeline  -->
     </div>
 
-    <div class="invoice-status-timeline__line">
+    <div class="invoice-status-timeline__line" *ngIf="toggleStatus">
       <div class="invoice-status-timeline__line-point"></div>
       <div class="invoice-status-timeline__line-point"></div>
       <div class="invoice-status-timeline__line-point"></div>
       <div class="invoice-status-timeline__line-point"></div>
     </div>
 
-    <div class="invoice-status-timeline__steps qt-df">
+    <div class="invoice-status-timeline__steps qt-df" *ngIf="toggleStatus">
 
       <div class="qt-df qt-ai-c" >
         <div class="step-citcle qt-mr-5 icon__check"></div>

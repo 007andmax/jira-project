@@ -4,6 +4,12 @@ import { Invoice } from '../class/invoice';
 import { InvoiceProfile } from '../class/invoice-profile';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import * as moment from "moment";
+import { AppService } from 'src/ng2/app/states/app/app.service';
+import { ConfirmStateService } from '../../../shared/confirm/services/confirm-state.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DELETE_INVOICE } from 'src/ng2/app/const/confirm';
+import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
+import { InvoiceStateService } from 'src/ng2/app/states/invoice/invoice-state.service';
 @Component({
   selector: 'app-invoices-aside-preview',
   templateUrl: './invoices-aside-preview.component.html',
@@ -15,7 +21,12 @@ export class InvoicesAsidePreviewComponent implements OnInit {
   @Output() onClose = new EventEmitter<any>();
   currentCompany: any;
   showPreloader: boolean = true;
+  toggleStatus:boolean = true;
   constructor(private invoicesService: InvoicesService,
+    private appService: AppService,
+    private modalService: NgbModal,
+    private confirmStateService: ConfirmStateService,
+    private invoiceStateService: InvoiceStateService,
     private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
@@ -27,6 +38,25 @@ export class InvoicesAsidePreviewComponent implements OnInit {
     })
 
 
+  }
+  resendInvoices() {
+    this.invoicesService.resendInvoices([this.invoice.id]).subscribe(data => {
+
+    })
+  }
+  deleteInvoice() {
+    this.confirmStateService.setConfirmAction(DELETE_INVOICE);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    modalRef.componentInstance.message = `Do you want to delete invoice #${this.invoice.number} ?`;
+    this.invoiceStateService.setInvoiceForemove(this.invoice);
+  }
+  downloadPDF() {
+    let company = this.companiesStateService.getCompanies().find(item => item.id === this.invoice.companyId);
+    this.appService.download(`/invoice/show/${this.invoice.id}/pdf`, `${company.name}-${this.invoice.number}.pdf`);
+  }
+  print() {
+    var wnd = window.open('/invoice/show/' +this.invoice.id + '/pdf');
+    wnd.print();
   }
   public getDateTicket(date) {
     return moment(new Date(date)).format('DD/MM/YYYY');

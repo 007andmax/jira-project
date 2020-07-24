@@ -20,6 +20,10 @@ export class InvoicesService {
     private http: HttpClient,
    
   ) { }
+  
+  public resendInvoices(invoiceIds) {
+    return this.http.post(`${this.apiUrl}receivable/resend`,{ ids: invoiceIds });
+  }
   public getInvoice(invoiceId) {
     return this.http.get(`${this.apiUrl}invoice/getDataByInvoiceId?invoiceId=${invoiceId}`);
   }
@@ -32,7 +36,7 @@ export class InvoicesService {
   public markAsRead(invoiceId) {
     return this.http.post(`${this.apiUrl}invoice/${invoiceId}/markAsRead`,{});
   }
-  public resendInvoices(invoiceIds) {
+  public resendArchiveInvoices(invoiceIds) {
     return this.http.post(`${this.apiUrl}receiptArchive/resend`,{ids: invoiceIds});
   }
   public getInvoices(data) {

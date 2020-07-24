@@ -5,15 +5,15 @@ import * as $ from 'jquery';
 })
 export class AppService {
   isMobile: boolean = false;
-  isInit:boolean = false;
+  isInit: boolean = false;
   onMobile: EventEmitter<any> = new EventEmitter();
   init: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
-  public onInit () {
+  public onInit() {
     this.isInit = true;
     this.init.emit(null);
-   
+
   }
   public getOnInit() {
     return this.init;
@@ -54,16 +54,16 @@ export class AppService {
       let shortUrl = url.slice(url.indexOf('.com') + 4);
 
       if (indexOf !== -1) {
-        return this.redownload(url,fileName, true) && this.redownload(shortUrl,fileName);
+        return this.redownload(url, fileName, true) && this.redownload(shortUrl, fileName);
       } else {
 
-     //   return redownload(url);
+        //   return redownload(url);
         if (fileFormat === '.pdf' || fileFormat === '.html') {
-        
-          return this.redownload((url + fileFormat),fileName, true);
+
+          return this.redownload((url + fileFormat), fileName, true);
         } else {
-        
-          return this.redownload((url + fileFormat),fileName);
+
+          return this.redownload((url + fileFormat), fileName);
         }
       }
 
@@ -75,16 +75,41 @@ export class AppService {
     }
 
     // Force file download (whether supported by server).
-//            url += '?download';
-//todo fix bug with multiple files download
+    //            url += '?download';
+    //todo fix bug with multiple files download
     window.open(url, '_blank');
     return true;
 
-  
+
 
   }
+  public download(url, fileName) {
+    let link = document.createElement('a');
+    link.target = "_blank";
+    link.href = url;
 
-  private redownload(url,fileName, open = false) {
+
+    //Set HTML5 download attribute. This will prevent file from opening if supported.
+    if (!fileName) {
+      fileName = url.substring(url.lastIndexOf('/') + 1, url.length);
+    }
+
+    // alert(url);
+    // alert(fileName);
+    link.download = fileName;
+
+    // alert(link.download)
+
+    console.log("link", link);
+    //Dispatching click event.
+
+    let e = document.createEvent('MouseEvents');
+    e.initEvent('click', true, true);
+    link.dispatchEvent(e);
+
+
+  }
+  private redownload(url, fileName, open = false) {
     let link = document.createElement('a');
     link.target = "_blank";
     link.href = url;
@@ -104,7 +129,7 @@ export class AppService {
 
       // alert(link.download)
     }
-
+    console.log("link", link);
     //Dispatching click event.
     if (document.createEvent) {
       let e = document.createEvent('MouseEvents');
@@ -114,7 +139,7 @@ export class AppService {
     }
   }
 
-  public onCheckMobile =()=> {
+  public onCheckMobile = () => {
     if (document.documentElement.clientWidth <= 414 && !this.checkMobile()) {
       this.setMobile(true);
     } else if (document.documentElement.clientWidth > 414 && this.checkMobile()) {

@@ -97,7 +97,7 @@ export class InvoicesItemComponent implements OnInit {
     this.invoiceStateService.setInvoiceForemove(this.invoice);
   }
   resendInvoices() {
-    this.invoicesService.resendInvoices([this.invoice.id]).subscribe(data => {
+    this.invoicesService.resendArchiveInvoices([this.invoice.id]).subscribe(data => {
 
     })
   }
@@ -125,6 +125,6 @@ export class InvoicesItemComponent implements OnInit {
   }
   exportAsPDF() {
     let company = this.companiesStateService.getCompanies().find(item => item.id === this.invoice.companyId);
-    this.appService.downloadByUrl(`/invoice/show/${this.invoice.id}/pdf`, `${company.name}-${this.invoice.number}.pdf`);
+    this.appService.download(`/invoice/show/${this.invoice.id}/pdf`, `${company.name}-${this.invoice.number}.pdf`);
   }
 }
