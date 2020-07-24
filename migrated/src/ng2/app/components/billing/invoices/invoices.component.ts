@@ -20,11 +20,13 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   invoices: Array<Invoice> = [];
   showPendingPreloader: boolean = false;
   showPreloader: boolean = true;
+  public sort: string = '';
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
   showCreateInvoice: boolean = false;
   showPreviewInvoice: boolean = false;
   offset: number = 20;
+  public direction: string = 'ASC';
   previewInvoice: Invoice;
   sub: Subscription = new Subscription();
   constructor(private invoicesService: InvoicesService,
@@ -68,6 +70,14 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     this.invoicesService.rollback(invoice.id).subscribe(data => {
 
     })
+  }
+  public sortBy(sort) {
+    this.direction = this.invoicesListService.getDirection(this.direction, this.sort, sort);
+    this.sort = sort;
+    this.invoicesFilter.setSortBy(`${this.sort}_${this.direction}`);
+    this.setDefaultScoll();
+    window.scrollTo(0, 0);
+    this.onScroll();
   }
   onRemoveInvoice(invoice) {
     this.invoicesService.remove(invoice.id).subscribe(data => {

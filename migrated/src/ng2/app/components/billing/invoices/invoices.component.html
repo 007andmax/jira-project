@@ -20,38 +20,37 @@
                 </div>
               </th>
 
-              <th class="invoce-table__date">
+              <th class="invoce-table__date" (click)="sortBy('INVOICE_DATE')">
                 Date
                 <span class="qt-table-modern__sorting"></span>
               </th>
 
-              <th class="invoce-table__invoice">
+              <th class="invoce-table__invoice" (click)="sortBy('INVOICE_NUMBER')">
                 Invoice#
                 <span class="qt-table-modern__sorting"></span>
               </th>
 
-              <th class="invoce-table__company">
+              <th class="invoce-table__company" (click)="sortBy('COMPANY_NAME')">
                 Company
                 <span class="qt-table-modern__sorting"></span>
               </th>
 
               <th class="invoce-table__status">
                 Status
-                <span class="qt-table-modern__sorting"></span>
               </th>
 
-              <th class="invoce-table__read-on">
+              <th class="invoce-table__read-on" (click)="sortBy('READ_ON')">
                 Read On
                 <span class="qt-table-modern__sorting"></span>
               </th>
 
 
-              <th class="invoce-table__amount">
+              <th class="invoce-table__amount" (click)="sortBy('AMOUNT')">
                 Amount
                 <span class="qt-table-modern__sorting"></span>
               </th>
 
-              <th class="invoce-table__balance-due">
+              <th class="invoce-table__balance-due" (click)="sortBy('BALANCE')">
                 Balance Due
                 <span class="qt-table-modern__sorting"></span>
               </th>

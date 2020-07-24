@@ -4,7 +4,7 @@ export class InvoicesFilter {
     invoiceNumber: string;
     limit: number= 20;
     offset: number = 0;
-    sortBy: any;
+    sortBy: string;
     startDate: number;
     status: string;
     constructor() { }
@@ -20,6 +20,9 @@ export class InvoicesFilter {
             startDate: this.startDate,
             status: this.status,
         }
+    }
+    public setSortBy (data) {
+        this.sortBy = data;
     }
     public setOffset(offset) {
         this.offset  = offset;

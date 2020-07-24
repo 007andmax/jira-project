@@ -106,6 +106,7 @@ export class RecurringTicketsComponent implements OnInit {
  * Refresh ticket list
  */
   private refreshTicketList() {
+    this.listSerivce.setBlockList(false);
     this.page_number = 0;
     this.ticketList = [];
     this.showPreloader = true;
