@@ -90,6 +90,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
   public ngOnInit() {
    
     (this.data) && this.initResendMode();
+    console.log("data", this.data);
     this.getAllUsers();
     this.userInput.nativeElement.onblur = (e) => {
       
