@@ -124,9 +124,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { SessionTimeoutComponent } from './components/device/session-timeout/session-timeout.component';
 import { LockScreenComponent } from './components/device/lock-screen/lock-screen.component';
 import { TicketTaskComponent } from './components/device/ticket-task/ticket-task.component';
-import { ErrorInterceptor } from './components/device/_helpers/error.interceptor';
 import { searchTextPipe } from './components/device/_pipe/searchText.pipe';
-import { HighlightDirective } from './components/device/_directive/highlight.directive';
 import { SoftwarePipe } from './pipe/software.pipe';
 
 /**
@@ -309,7 +307,6 @@ angular.module('quicktech')
     LockScreenComponent,
     TicketTaskComponent,
     searchTextPipe,
-    HighlightDirective,
     SoftwarePipe
   ],
   imports: [
