@@ -4,7 +4,7 @@
 <div class="aside-header qt-df qt-ai-c qt-jc-sb qt-pr-16 qt-pl-20" *ngIf="!showPreloader">
 
   <div class="qt-fs-20 qt-ff-gm qt-color-dark"  [textContent]="'Invoice#' + invoiceProfile.number">
-   
+
   </div>
 
   <div class="qt-df qt-ai-c" >
@@ -25,7 +25,7 @@
   <div class="loading" *ngIf="showPreloader"></div>
 <div class="qt-pl-50 qt-pr-50 qt-pt-24 qt-pb-50" *ngIf="!showPreloader">
 
-  <div class="invoice-status-timeline qt-pt-10 qt-pl-16 qt-pr-16 qt-pb-20 qt-mb-24"> <!-- Add class '--closed' to close timeline -->
+  <div class="invoice-status-timeline qt-pt-10 qt-pl-16 qt-pr-16 qt-pb-20 qt-mb-24" [ngClass]="{'--closed': !toggleStatus}"> <!-- Add class '--closed' to close timeline -->
     <div class="invoice-status-timeline__header qt-df qt-jc-sb">
       <div class="qt-fs-13 qt-lh-154 qt-color-dark qt-mb-15 qt-ff-gm">Invoice Status</div>
       <div class="qt-ic-c qt-sz-16 toggle-invoice-timeline" (click)="toggleStatus = !toggleStatus"></div>  <!-- by clicking this button you should toggle class '--closed' for .invoice-status-timeline  -->
@@ -193,7 +193,7 @@
 
       </div>
 </ng-template>
-      
+
 
 
     </div>
