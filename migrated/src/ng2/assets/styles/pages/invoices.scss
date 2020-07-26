@@ -1,29 +1,103 @@
 .invoices-page {
+
+  .invoices-list-header {
+    display: flex;
+    flex-wrap: wrap;
+    z-index: 2;
+  }
+
+  app-invoices-filter {
+    width: 100%;
+  }
+  .invoices-company-filter {
+    width: 35%;
+    margin-right: 8px;
+    input {
+      color: #364656
+    }
+    input::placeholder {
+      color: #4f5f79;
+      font-size: 12px;
+    }
+  }
+
+  .invoices-status-filter {
+    width: 21%;
+    margin-right: 8px;
+    input {
+      color: #364656
+    }
+    input::placeholder {
+      color: #4f5f79;
+      font-size: 12px;
+    }
+  }
+  .invoices-number-filter {
+    width: 21%;
+    margin-right: 8px;
+    color: #364656;
+    &::placeholder {
+      color: #4f5f79;
+      font-size: 12px;
+    }
+  }
+
+  .invoices-date-filter {
+    width: 23%;
+    margin-right: 8px;
+    input {
+      color: #364656
+    }
+    input::placeholder {
+      color: #4f5f79;
+      font-size: 12px;
+    }
+    .date-picker {
+      position: relative;
+      display: table;
+      border-collapse: separate;
+    }
+    .dropdown-menu {
+      left: auto;
+      right: 0;
+      margin-top: 0;
+    }
+  }
+
+  .invoice-list-table-header {
+    z-index: 1;
+    &.--filters-open {
+      top: 198px;
+    }
+  }
   &__list-container {
     min-height: calc(100vh - 102px);
   }
+
+
 
   .filters-icon {
     background-color: white;
     border: solid 1px #dfe3e8;
     background-size: auto;
+    min-width: 32px;
   }
 
   .filter-counter {
     margin-left: -8px;
   }
 
-  .filter-status {
-    max-width: 216px;
-  }
+  // .filter-status {
+  //   max-width: 216px;
+  // }
 
-  .filter-invoice {
-    max-width: 216px;
-  }
+  // .filter-invoice {
+  //   max-width: 216px;
+  // }
 
-  .filter-date {
-    max-width: 216px;
-  }
+  // .filter-date {
+  //   max-width: 216px;
+  // }
 
   .invoice-table td {
     border: 1px solid transparent;
@@ -119,6 +193,7 @@
     top: 79px;
     right: 0;
     height: calc(100vh - 79px);
+    z-index: 5;
 
 
   .billing-aside-scroll-content {
@@ -450,7 +525,7 @@ app-invoices-item {
     border: dotted 1px #c5cdd5;
     background-color: #ffffff;
   }
- 
+
 }
 
 
