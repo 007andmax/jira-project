@@ -378,7 +378,7 @@ app-invoices-item {
   .invoice-preview {
     box-shadow: 0 8px 16px 10px rgba(0, 0, 0, 0.05);
     background-color: #ffffff;
-    padding: 40px;
+    padding: 40px 32px;
 
     .company-logo {
       max-width: 200;
@@ -408,9 +408,10 @@ app-invoices-item {
 
       th, td {
         border-bottom: solid 1px #dfe3e8;
-        &:first-child {
-          border-left: solid 1px #dfe3e8;
-        }
+        border-left: solid 1px #dfe3e8;
+        // &:first-child {
+        //   border-left: solid 1px #dfe3e8;
+        // }
         &:last-child {
           border-right: solid 1px #dfe3e8;
         }
@@ -423,13 +424,19 @@ app-invoices-item {
       }
       td {
         font-size: 12px;
-        padding: 0 12px;
         height: 40px;
+        padding: 10px 12px;
+        vertical-align: middle;
       }
     }
 
     &__item-header-number {
-      width: 90px;
+      color: white;
+      background-color: #637382;
+      margin-left: -13px;
+      height: 20px;
+      line-height: 20px;
+      padding: 0 4px;
 
     }
 
@@ -439,7 +446,7 @@ app-invoices-item {
 
     &__col-item {
       text-align: left;
-      width: 128px;
+      width: 200px;
     }
 
     &__col-desc {
@@ -450,17 +457,22 @@ app-invoices-item {
 
     &__col-qty {
       text-align: right;
-      width: 94px;
+      width: 87px;
     }
 
     &__col-tax {
       text-align: right;
-      width: 54px;
+      width: 75px;
     }
 
-    &__col-amount, &__col-price {
+    &__col-amount {
       text-align: right;
-      width: 80px;
+      width: 89px;
+    }
+
+    &__col-price {
+      text-align: right;
+      width: 84px;
     }
 
     &__total-block {
@@ -493,7 +505,9 @@ app-invoices-item {
     border-radius: 6px;
     border: solid 1px #dfe3e8;
     background-color: #ffffff;
-    transition: height .3s;
+    height: 121px;
+    max-height: 121px;
+    transition: max-height .3s;
 
     .toggle-invoice-timeline {
       background-image: url(../ng2/assets/img/icons/collapse-task.svg);
@@ -531,7 +545,7 @@ app-invoices-item {
       .toggle-invoice-timeline {
         transform: rotate(-90deg);
       }
-      height: 40px;
+      max-height: 40px;
       overflow: hidden;
     }
   }
