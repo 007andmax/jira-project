@@ -13,9 +13,13 @@ export class InvoicesHeaderComponent implements OnInit {
 
   toggleFilter: boolean = true;
   @Output() onCreateInvoice = new EventEmitter<any>();
+  @Output() onSortBy = new EventEmitter<any>();
   constructor() { }
 
   ngOnInit() {
+  }
+  sortBy(data) {
+    this.onSortBy.emit(data);
   }
   clearAll() {
     this.filter.onClearAll();

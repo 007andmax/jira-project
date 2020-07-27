@@ -2,65 +2,7 @@
 
   <div class="qt-df qt-fd-c qt-jc-sb invoices-page__list-container">
     <div>
-      <app-invoices-header (onCreateInvoice)="showCreateInvoice = true"></app-invoices-header>
-
-      <div class="sticky-list-table-header invoice-list-table-header --filters-open"> <!-- add --filters-open class only if invoices filters is -->
-
-
-        <table class="qt-table-modern invoice-table">
-          <thead>
-            <tr>
-              <th class="invoice-table__check">
-                <div class="d-f">
-                  <label class="qt-checkbox">
-                    <input type="checkbox">
-                    <span></span>
-                  </label>
-                </div>
-              </th>
-
-              <th class="invoce-table__date" (click)="sortBy('INVOICE_DATE')">
-                Date
-                <span class="qt-table-modern__sorting"></span>
-              </th>
-
-              <th class="invoce-table__invoice" (click)="sortBy('INVOICE_NUMBER')">
-                Invoice#
-                <span class="qt-table-modern__sorting"></span>
-              </th>
-
-              <th class="invoce-table__company" (click)="sortBy('COMPANY_NAME')">
-                Company
-                <span class="qt-table-modern__sorting"></span>
-              </th>
-
-              <th class="invoce-table__status">
-                Status
-              </th>
-
-              <th class="invoce-table__read-on" (click)="sortBy('READ_ON')">
-                Read On
-                <span class="qt-table-modern__sorting"></span>
-              </th>
-
-
-              <th class="invoce-table__amount" (click)="sortBy('AMOUNT')">
-                Amount
-                <span class="qt-table-modern__sorting"></span>
-              </th>
-
-              <th class="invoce-table__balance-due" (click)="sortBy('BALANCE')">
-                Balance Due
-                <span class="qt-table-modern__sorting"></span>
-              </th>
-
-              <th class="invoce-table__menu"></th>
-            </tr>
-          </thead>
-        </table>
-      </div>
-
-
+      <app-invoices-header (onCreateInvoice)="showCreateInvoice = true" (onSortBy)="sortBy($event)"></app-invoices-header>
       <div class="table-container">
         <table class="qt-table-modern billable-table">
           <tbody

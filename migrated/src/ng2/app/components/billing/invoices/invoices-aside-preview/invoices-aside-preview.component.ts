@@ -44,6 +44,13 @@ export class InvoicesAsidePreviewComponent implements OnInit {
 
     })
   }
+  getStatusDate(dateInvoice) {
+    let date = new Date(dateInvoice);
+    let typeTime = (date.getHours() > 12) ? "PM" : "AM",
+    hours = (date.getHours() > 12) ? date.getHours() - 12 : date.getHours(),
+    minutes = (date.getMinutes() > 10) ? date.getMinutes() : "0" + date.getMinutes();
+    return `${this.getDateTicket(this.invoice.date)} ${(hours > 10) ? hours : "0" + hours}:${minutes} ${typeTime}`;
+  }
   deleteInvoice() {
     this.confirmStateService.setConfirmAction(DELETE_INVOICE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
@@ -58,6 +65,7 @@ export class InvoicesAsidePreviewComponent implements OnInit {
     var wnd = window.open('/invoice/show/' +this.invoice.id + '/pdf');
     wnd.print();
   }
+
   public getDateTicket(date) {
     return moment(new Date(date)).format('DD/MM/YYYY');
   }
