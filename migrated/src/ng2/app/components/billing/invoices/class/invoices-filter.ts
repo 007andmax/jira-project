@@ -21,6 +21,9 @@ export class InvoicesFilter {
             status: this.status,
         }
     }
+    public setLimit (data) {
+        this.limit = data;
+    }
     public setSortBy (data) {
         this.sortBy = data;
     }

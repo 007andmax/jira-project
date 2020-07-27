@@ -1,4 +1,12 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
+import { Subscription } from 'rxjs';
+import { InvoicesService } from 'src/ng2/app/services/invoices/invoices.service';
+import { InvoicesFilter } from '../class/invoices-filter';
+import { Invoice } from '../class/invoice';
+import { FORMAT_DATE_2 } from 'src/ng2/app/const/date-picker';
+import { CompanySetting } from '../../../companies/class/company-setting';
+import * as moment from "moment";
 
 @Component({
   selector: 'app-invoices-aside',
@@ -6,10 +14,54 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./invoices-aside.component.scss']
 })
 export class InvoicesAsideComponent implements OnInit {
+  companies = [];
+  reference:string = '';
+  formatDate: string = FORMAT_DATE_2;
+  today = new Date().getTime();
+  invoices: Array<Invoice> = [];
+  invoicesFilter: InvoicesFilter = new InvoicesFilter();
+  paymentModes = [new CompanySetting('Cash', 'CASH'), new CompanySetting('Cheque', 'CHEQUE'), new CompanySetting('Debit Card', 'DEBIT_CARD'),
+  new CompanySetting('Credit Card', 'CREDIT_CARD'),
+  new CompanySetting('Wire Transfer', 'WIRE_TRANSFER')];
+
   @Output() onClose = new EventEmitter<any>();
-  constructor() { }
+  sub: Subscription = new Subscription();
+  constructor(private companiesState: CompaniesStateService,
+    private invoicesService: InvoicesService) { }
 
   ngOnInit() {
+    if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
+    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
+
+      this.getClientsList(data);
+    })
+    this.sub.add(getOnCompanies);
+  }
+  onSelectPaymentModes(data) {
+
+  }
+  onSelectCompany(item) {
+
+    if (item) {
+      this.invoicesFilter.setLimit(10000);
+      this.invoicesFilter.setStatus("UNPAID");
+      this.invoicesFilter.setCompany(item.name);
+      this.invoicesService.getInvoices(this.invoicesFilter.getFIlter()).subscribe((data: Array<Invoice>) => {
+        this.invoices = data;
+      })
+    } else {
+      this.invoices = [];
+    }
+  }
+  getDate(date) {
+    return (date) ? moment(date).format('DD MMM YYYY') : '';
+  }
+  onChangeDate() {
+
+  }
+  private getClientsList(data) {
+    this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
   close() {
     this.onClose.emit(null);

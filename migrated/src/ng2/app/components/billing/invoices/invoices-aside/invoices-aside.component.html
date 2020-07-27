@@ -18,7 +18,9 @@
       <div class="qt-w50 qt-pt-16 qt-pr-24 qt-pl-32 qt-pb-24">
         <div class="qt-input-block">
           <label class="qt-lh-154">Customer Name</label>
-          <input value="Aspen accounting office, 1696178 AB LTD" type="text">
+          <app-select-search class="search-company invoices-company-filter"  #companyDp  [placeholder]="'Select Company'"
+    [change]="false" [class]="['qt-dropdown']" [field]="'name'" [list]="companies"
+    (onSelectedItem)="onSelectCompany($event)"></app-select-search>
         </div>
       </div>
 
@@ -29,7 +31,8 @@
 
       <div class="qt-input-block qt-mr-16 qt-w100">
         <label class="qt-lh-154">Payment Date</label>
-        <input type="text">
+        <app-date-picker [formatDate]="formatDate" [editMode]="true" [editDate]="today" [useMinDate]="false" (onChange)="onChangeDate($event)"></app-date-picker>
+  
       </div>
 
       <div class="qt-input-block qt-mr-16 qt-w100">
@@ -38,28 +41,30 @@
           <div class="qt-input-prefix">$</div><input class="qt-input-prepend" type="text">
         </div>
 
-        <div class="qt-df qt-ai-c">
+        <!-- <div class="qt-df qt-ai-c">
           <label class="qt-checkbox receive-full-amount-check qt-mb-0">
             <input type="checkbox">
             <span></span>
           </label>
 
-          <div class="qt-fs-12 qt-ml-5">
+         <div class="qt-fs-12 qt-ml-5">
             Received full amount
           </div>
 
-        </div>
+        </div>-->
 
       </div>
 
       <div class="qt-input-block qt-mr-16 qt-w100">
         <label class="qt-lh-154">Payment Mode</label>
-        <input type="text">
+        <app-select-search class="search-company invoices-status-filter"  #statusDp  [placeholder]="'Select Status'"
+        [change]="false" [class]="['qt-dropdown']" [field]="'title'" [list]="paymentModes"
+        (onSelectedItem)="onSelectPaymentModes($event)"></app-select-search>
       </div>
 
       <div class="qt-input-block qt-w100">
         <label class="qt-lh-154">Reference#</label>
-        <input type="text">
+        <input type="text"  [(ngModel)]="reference">
       </div>
     </div>
 
@@ -87,6 +92,9 @@
         </tr>
       </thead>
       <tbody>
+        <ng-template ngFor let-invoice
+                    [ngForOf]="invoices"
+                    [ngForTrackBy]="trackById">
         <tr>
           <td class="unpaid-table__check">
             <label class="qt-checkbox">
@@ -94,54 +102,13 @@
               <span></span>
             </label>
           </td>
-          <td class="unpaid-table__invoice">INV 681435</td>
-          <td class="unpaid-table__date">04 Jun 2020</td>
-          <td class="unpaid-table__amount qt-text-right">1500.99</td>
-          <td class="unpaid-table__due qt-text-right">1500.99</td>
+          <td class="unpaid-table__invoice" [textContent]="'INV ' + invoice.number"></td>
+          <td class="unpaid-table__date" [textContent]="getDate(invoice.date)"></td>
+          <td class="unpaid-table__amount qt-text-right" [textContent]="invoice.sum | currency"></td>
+          <td class="unpaid-table__due qt-text-right" [textContent]="(invoice.sum - invoice.paidSum) | currency"></td>
           <td class="unpaid-table__payment qt-text-right">1500.99</td>
         </tr>
-
-        <tr>
-          <td class="unpaid-table__check">
-            <label class="qt-checkbox">
-              <input type="checkbox">
-              <span></span>
-            </label>
-          </td>
-          <td class="unpaid-table__invoice">INV 681435</td>
-          <td class="unpaid-table__date">04 Jun 2020</td>
-          <td class="unpaid-table__amount qt-text-right">1500.99</td>
-          <td class="unpaid-table__due qt-text-right">1500.99</td>
-          <td class="unpaid-table__payment qt-text-right">1500.99</td>
-        </tr>
-
-        <tr>
-          <td class="unpaid-table__check">
-            <label class="qt-checkbox">
-              <input type="checkbox">
-              <span></span>
-            </label>
-          </td>
-          <td class="unpaid-table__invoice">INV 681435</td>
-          <td class="unpaid-table__date">04 Jun 2020</td>
-          <td class="unpaid-table__amount qt-text-right">1500.99</td>
-          <td class="unpaid-table__due qt-text-right">1500.99</td>
-          <td class="unpaid-table__payment qt-text-right">1500.99</td>
-        </tr>
-
-        <tr>
-          <td class="unpaid-table__check">
-            <label class="qt-checkbox">
-              <input type="checkbox">
-              <span></span>
-            </label>
-          </td>
-          <td class="unpaid-table__invoice">INV 681435</td>
-          <td class="unpaid-table__date">04 Jun 2020</td>
-          <td class="unpaid-table__amount qt-text-right">1500.99</td>
-          <td class="unpaid-table__due qt-text-right">1500.99</td>
-          <td class="unpaid-table__payment qt-text-right">1500.99</td>
-        </tr>
+</ng-template>
 
       </tbody>
     </table>
@@ -163,7 +130,7 @@
         <div class="summary-info__notes qt-pt-16">
           <div class="qt-fs-13 qt-lh-154 qt-pb-12"><span class="qt-ff-gm">Notes</span> (Internal use. Not visible to customer)</div>
           <div>
-            <textarea class="summary-info__textarea qt-textarea" placeholder="Partial Payment Recived from Aspen accounting office" name="" id="" cols="30" rows="10"></textarea>
+            <textarea class="summary-info__textarea qt-textarea" placeholder="Partial Payment Recived from Aspen accounting office" appTextArea    maxlength="250"   cols="30" rows="1"></textarea>
           </div>
           <div class="qt-df qt-ai-c">
             <label class="qt-checkbox receive-full-amount-check qt-mb-0">
@@ -202,7 +169,7 @@
  <div class="aside-footer qt-pr-30 qt-pl-30 qt-pb-16 qt-pt-16 qt-df qt-ai-c qt-jc-sb">
   <div class="qt-df">
     <button class="qt-button qt-mr-12">Record Payment</button>
-    <button class="qt-button qt-mr-12">Record Payment by CC</button>
+  <!--  <button class="qt-button qt-mr-12">Record Payment by CC</button>-->
     <button class="qt-button --gray">Cancel</button>
   </div>
  </div>

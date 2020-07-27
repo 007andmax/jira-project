@@ -32,11 +32,11 @@ export class InvoicesFilterComponent implements OnInit {
     })
     this.sub.add(getOnCompanies);
   }
-  onSelectStatus (status) {
-console.log("status",status);
-this.invoicesFilter.setStatus((status) ? status.value : null);
-this.invoiceStateService.onInitFilter(this.invoicesFilter);
-this.onChangeCounterFilter();
+  onSelectStatus(status) {
+    console.log("status", status);
+    this.invoicesFilter.setStatus((status) ? status.value : null);
+    this.invoiceStateService.onInitFilter(this.invoicesFilter);
+    this.onChangeCounterFilter();
   }
   private getClientsList(data) {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
@@ -48,7 +48,7 @@ this.onChangeCounterFilter();
     this.datesDp.clearWithOutChanges();
     this.statusDp.clearWithOutChanges();
 
-this.invoicesFilter.setStatus(null);
+    this.invoicesFilter.setStatus(null);
     this.invoicesFilter.setCompany(null);
     this.invoicesFilter.setStartDate(null);
     this.invoicesFilter.setEndDate(null);
