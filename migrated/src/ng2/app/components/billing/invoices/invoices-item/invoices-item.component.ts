@@ -18,9 +18,10 @@ export class InvoicesItemComponent implements OnInit {
   @Input() invoice: Invoice;
   company: any;
   @Output() onPreviewInvoice = new EventEmitter<any>();
+  @Output() onSelectInvoice = new EventEmitter<any>();
   allPayments = [];
-  paymentSum:number;
-  allPaymentsSum:number = 0;
+  paymentSum: number;
+  allPaymentsSum: number = 0;
   constructor(private companiesStateService: CompaniesStateService,
     private modalService: NgbModal,
     private invoiceStateService: InvoiceStateService,
@@ -57,13 +58,16 @@ export class InvoicesItemComponent implements OnInit {
       })
     }
   }
+  onChangeSelect() {
+    this.onSelectInvoice.emit(true);
+  }
   getDate(date) {
     return (date) ? moment(date).format('DD MMM YYYY') : '';
   }
-   parsePaymentMethod (method) {
+  parsePaymentMethod(method) {
     return method.split('_').map((el) => el[0].toUpperCase() + el.slice(1).toLowerCase()).join(' ');
   };
-  
+
   getDueDate() {
     var dueDate = new Date(this.invoice.dueDate).getTime();
     var today = Date.now();
@@ -114,7 +118,7 @@ export class InvoicesItemComponent implements OnInit {
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
     modalRef.componentInstance.message = `Do you want to rollback invoice #${this.invoice.number}? 
     ${(this.invoice.ticketNumbers && this.invoice.ticketNumbers.length ? (this.invoice.ticketNumbers.length > 1 ? 'Tickets #' : 'Ticket #') +
-    this.invoice.ticketNumbers.join(', #') + ' will be restored.' : '')}`;
+        this.invoice.ticketNumbers.join(', #') + ' will be restored.' : '')}`;
     this.invoiceStateService.setInvoiceForRollback(this.invoice);
   }
   refundPayments() {

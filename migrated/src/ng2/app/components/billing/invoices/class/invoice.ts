@@ -18,6 +18,7 @@ export class Invoice {
     isOverDue: boolean = false;
     ticketNumbers: Array<String>;
     selected:boolean = false;
+    blockSelected:boolean = false;
     constructor(data) {
         this.companyId = (data.company) ? data.company.id : '';
         this.date = data.date;

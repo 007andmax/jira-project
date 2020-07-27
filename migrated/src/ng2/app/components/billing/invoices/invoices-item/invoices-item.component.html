@@ -2,7 +2,7 @@
   <td class="invoice-table__check">
     <div class="d-f">
       <label class="qt-checkbox" [attr.for]="'invoice-' + invoice.id">
-        <input [attr.id]="'invoice-' + invoice.id"  [(ngModel)]="invoice.selected"  type="checkbox">
+        <input [attr.id]="'invoice-' + invoice.id"  [(ngModel)]="invoice.selected"  type="checkbox" (change)="onChangeSelect()" [disabled]="invoice.blockSelected">
         <span ></span>
       </label>
     </div>

@@ -21,6 +21,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   invoices: Array<Invoice> = [];
   showPendingPreloader: boolean = false;
   showPreloader: boolean = true;
+  selectedCompanyId: string = null;
   public sort: string = '';
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
@@ -32,7 +33,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
   constructor(private invoicesService: InvoicesService,
     public cd: ChangeDetectorRef,
-    private invoiceRealTimeService:InvoiceRealTimeService,
+    private invoiceRealTimeService: InvoiceRealTimeService,
     private companiesStateService: CompaniesStateService,
     private invoiceStateService: InvoiceStateService,
     private confirmStateService: ConfirmStateService,
@@ -40,12 +41,12 @@ export class InvoicesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     window.scrollTo(0, 0);
-    if (this.companiesStateService.getCompanies().length > 0)   this.onScroll();
+    if (this.companiesStateService.getCompanies().length > 0) this.onScroll();
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.onScroll();
     })
     this.sub.add(getOnCompanies);
-  
+
     let getOnInitFilter = this.invoiceStateService.getOnInitFilter().subscribe(data => {
       this.invoicesFilter = data;
       this.showPreloader = true;
@@ -69,8 +70,8 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     })
     this.sub.add(getConfirm);
 
-   let changeInvoice =  this.invoiceRealTimeService.changeInvoice.subscribe(data => {
-     console.log("data",data);
+    let changeInvoice = this.invoiceRealTimeService.changeInvoice.subscribe(data => {
+      console.log("data", data);
       if (data.action === 'INVOICE_SAVED') {
         let index = this.invoices.findIndex(item => item.id === data.data.id);
         let invoice = new Invoice(data.data);
@@ -84,11 +85,11 @@ export class InvoicesComponent implements OnInit, OnDestroy {
       if (data.action === 'INVOICE_STATUS') {
         let index = this.invoices.findIndex(item => item.id === data.data.id);
         let invoice = new Invoice(data.data);
-        if (index > -1)  this.invoices[index] = invoice;
+        if (index > -1) this.invoices[index] = invoice;
       }
       if (data.action === 'INVOICE_DELETED' || data.action === 'PAYMENT_RECEIVED' || data.action === 'INVOICE_ROLLBACK') {
         let index = this.invoices.findIndex(item => item.id === data.data.id);
-        if (index > -1)  this.invoices.splice(index,1);
+        if (index > -1) this.invoices.splice(index, 1);
       }
     })
     this.sub.add(changeInvoice);
@@ -110,6 +111,22 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     window.scrollTo(0, 0);
     this.onScroll();
   }
+  onSelectInvoice() {
+    let find = this.invoices.find(item => item.selected);
+    if (find) {
+      this.selectedCompanyId = find.companyId;
+      this.invoices.forEach(item => {
+        if (item.companyId !== this.selectedCompanyId) item.blockSelected = true;
+        if (item.companyId === this.selectedCompanyId) item.blockSelected = false;
+      })
+    } else {
+      this.selectedCompanyId = null;
+      this.invoices.forEach(item => {
+        item.blockSelected = false
+      })
+    }
+    this.cd.detectChanges();
+  }
   onRemoveInvoice(invoice) {
     this.invoicesService.remove(invoice.id).subscribe(data => {
       this.showPreviewInvoice = false;
@@ -127,6 +144,10 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     this.invoicesService.getInvoices(this.invoicesFilter.getFIlter()).subscribe((data: any) => {
       console.log("data", data);
       this.invoices = [...this.invoices, ...data];
+      if (this.selectedCompanyId) this.invoices.forEach(item => {
+        if (item.companyId !== this.selectedCompanyId) item.blockSelected = true;
+        if (item.companyId === this.selectedCompanyId) item.blockSelected = false;
+      })
       this.infiniteScrollDisabled = false;
       if (data.length < this.offset) this.invoicesListService.setBlockList(true);
       this.page_number += 1;
