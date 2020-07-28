@@ -79,8 +79,8 @@
       <thead>
         <tr>
           <th class="unpaid-table__check" >
-            <label class="qt-checkbox">
-              <input type="checkbox">
+            <label class="qt-checkbox" for="invoice-preview-all">
+              <input id="invoice-preview-all"  [(ngModel)]="selectAllInvoice"  type="checkbox" (change)="onToggleAllInvoices($event)">
               <span></span>
             </label>
           </th>
@@ -97,8 +97,8 @@
                     [ngForTrackBy]="trackById">
         <tr>
           <td class="unpaid-table__check">
-            <label class="qt-checkbox"  [attr.for]="'invoice-preview-' + invoice.id">
-              <input [attr.id]="'invoice-preview-' + invoice.id"  [(ngModel)]="invoice.selected"  type="checkbox" >
+            <label class="qt-checkbox pointer"  [attr.for]="'invoice-preview-' + invoice.id">
+              <input [attr.id]="'invoice-preview-' + invoice.id"  [(ngModel)]="invoice.selected" (change)="onSelectInvoice($event)"  type="checkbox" >
         <span ></span>
             </label>
           </td>

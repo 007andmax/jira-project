@@ -26,8 +26,9 @@ export class InvoicesAsideComponent implements OnInit {
   new CompanySetting('Credit Card', 'CREDIT_CARD'),
   new CompanySetting('Wire Transfer', 'WIRE_TRANSFER')];
   selectedCompany: any = null;
-  @Input() selectedInvoices: Array<Invoice> = [];
+  selectAllInvoice: boolean = false;
   sub: Subscription = new Subscription();
+  @Input() selectedInvoices: Array<Invoice> = [];
   @Output() onClose = new EventEmitter<any>();
   constructor(private companiesState: CompaniesStateService,
     private invoicesService: InvoicesService) { }
@@ -49,12 +50,25 @@ export class InvoicesAsideComponent implements OnInit {
   onSelectPaymentModes(data) {
 
   }
+  onSelectInvoice(event) {
+    this.selectAllInvoice = true;
+    this.invoices.forEach(item => {
+      if (!item.selected) this.selectAllInvoice = false;
+    })
+    console.log("selectAllInvoice",this.selectAllInvoice);
+  }
   getSubtotal() {
     let subTotal = 0;
     this.invoices.forEach(item => {
       if (item.selected) subTotal += (item.sum - item.paidSum);
     })
     return subTotal;
+  }
+  onToggleAllInvoices(event) {
+    console.log(event.target.checked);
+    this.invoices.forEach(item => {
+      item.selected = event.target.checked;
+    })
   }
   onSelectCompany(item) {
 
