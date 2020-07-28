@@ -16,6 +16,7 @@ import * as moment from "moment";
 })
 export class InvoicesAsideComponent implements OnInit {
   companies = [];
+  reqCompanies = [];
   reference: string = '';
   formatDate: string = FORMAT_DATE_2;
   today = new Date().getTime();
@@ -40,7 +41,7 @@ export class InvoicesAsideComponent implements OnInit {
     this.sub.add(getOnCompanies);
     console.log("selectedInvoices", this.selectedInvoices);
     if (this.selectedInvoices.length > 0) {
-      this.selectedCompany = this.companies.find(item => item.id === this.selectedInvoices[0].companyId);
+      this.selectedCompany = this.reqCompanies.find(item => item.id === this.selectedInvoices[0].companyId);
       this.onSelectCompany(this.selectedCompany);
     }
     console.log("selectedCompany", this.selectedCompany);
@@ -81,6 +82,7 @@ export class InvoicesAsideComponent implements OnInit {
 
   }
   private getClientsList(data) {
+    this.reqCompanies = data;
     this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
