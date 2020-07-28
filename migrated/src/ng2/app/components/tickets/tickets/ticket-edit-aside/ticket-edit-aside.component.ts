@@ -300,7 +300,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       value.push(currentUser.id);
     }
     this.ticketsService.assignUserToTicket(this.ticketProfile.id, value.join(",")).subscribe(res => {
-      this.ticketMessage.isClaimTicket = false;
+     // this.ticketMessage.isClaimTicket = false;
     })
 
   };
