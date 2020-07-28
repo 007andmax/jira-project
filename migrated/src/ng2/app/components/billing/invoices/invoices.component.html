@@ -29,7 +29,7 @@
       <div class="loading pengind-loading" *ngIf="showPendingPreloader"></div>
       <hr class="total-divider qt-mb-16">
       <div class="qt-df qt-jc-fe">
-        <div><span class="qt-ff-sb qt-fs-13 qt-mr-5">Total:</span> <span class="qt-ff-sb qt-fs-16">$39399.00</span></div>
+        <div><span class="qt-ff-sb qt-fs-13 qt-mr-5">Total:</span> <span class="qt-ff-sb qt-fs-16" [textContent]="getTotal() | currency"></span></div>
       </div>
     </div>
 

@@ -99,6 +99,13 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     })
     this.sub.add(changeInvoice);
   }
+  getTotal() {
+    let total = 0;
+    this.invoices.forEach(item => {
+      total +=item.sum;
+    })
+    return total;
+  }
   onCreatePayment() {
     this.selectedInvoices = [];
     if (this.selectedCompanyId) {
