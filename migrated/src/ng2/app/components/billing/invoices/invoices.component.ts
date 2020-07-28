@@ -130,6 +130,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     })
   }
   public sortBy(sort) {
+    this.showPreloader = true;
     this.selectedInvoices = [];
     this.selectedCompanyId = null;
     this.direction = this.invoicesListService.getDirection(this.direction, this.sort, sort);

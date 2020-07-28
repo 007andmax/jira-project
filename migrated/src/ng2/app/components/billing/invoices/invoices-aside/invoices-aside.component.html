@@ -97,8 +97,8 @@
                     [ngForTrackBy]="trackById">
         <tr>
           <td class="unpaid-table__check">
-            <label class="qt-checkbox"  [attr.for]="'invoice-' + invoice.id">
-              <input [attr.id]="'invoice-' + invoice.id"  [(ngModel)]="invoice.selected"  type="checkbox" >
+            <label class="qt-checkbox"  [attr.for]="'invoice-preview-' + invoice.id">
+              <input [attr.id]="'invoice-preview-' + invoice.id"  [(ngModel)]="invoice.selected"  type="checkbox" >
         <span ></span>
             </label>
           </td>
@@ -114,16 +114,6 @@
     </table>
 
    </div>
-
-
-
-
-
-
-
-
-
-
     <div class="summary-info qt-df qt-pl-30 qt-pr-30 qt-pb-24 qt-jc-sb">
       <div>
 

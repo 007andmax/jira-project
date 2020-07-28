@@ -52,7 +52,7 @@ export class InvoicesAsideComponent implements OnInit {
   getSubtotal() {
     let subTotal = 0;
     this.invoices.forEach(item => {
-      subTotal += (item.sum - item.paidSum);
+      if (item.selected) subTotal += (item.sum - item.paidSum);
     })
     return subTotal;
   }
