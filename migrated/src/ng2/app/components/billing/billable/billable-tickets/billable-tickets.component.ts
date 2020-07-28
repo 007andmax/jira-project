@@ -22,7 +22,7 @@ import { BillableRealTimeService } from 'src/ng2/app/states/billable/billable-re
   styleUrls: ['./billable-tickets.component.scss']
 })
 export class BillableTicketsComponent implements OnInit, OnDestroy {
-  billableProfile: BillableProfile;
+  billableProfile: BillableProfile = null;
   filter: Array<CompanyFilterTop> = [new CompanyFilterTop('closedAt', ''),
   new CompanyFilterTop('ticketNumber', 'DESC'),
   new CompanyFilterTop('subject', ''),
@@ -48,7 +48,7 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
     if (this.companiesStateService.getCurrentCompany().addresses.length === 0) this.isCurrentCompanyAddressEmpty = false;
     this.billableProfile = this.billableStateService.getBillableProfile();
     if (!this.billableProfile) {
-      window.location.href = '#/ng2/billable';
+     this.moToBillable();
       return;
     }
     this.onFilterTicketNumber();
@@ -79,7 +79,15 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
     });
     this.sub.add(changeBillable);
   }
-
+  moToBillable() {
+    let body = document.querySelector('.left-panel__category-wrap');
+    var link = document.createElement('a');
+    body.appendChild(link);
+    link.href = `#/ng2/billable`;
+    var e = document.createEvent('MouseEvents');
+    e.initEvent('click', true, true);
+    link.dispatchEvent(e);
+  }
   goToSettings() {
     let body = document.querySelector('.left-panel__category-wrap');
     var link = document.createElement('a');

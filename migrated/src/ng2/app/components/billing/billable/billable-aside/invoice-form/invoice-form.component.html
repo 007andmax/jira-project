@@ -46,7 +46,7 @@
 
     <div class="qt-input-block qt-w100 input_inside_white_important">
       <label>Due Date</label>
-      <app-date-picker [formatDate]="formatDate"  [editMode]="true"  [editDate]="invoice.invoiceDataDto.dueDate" [useMinDate]="false" (onChange)="onChangeDueDate($event)"></app-date-picker>
+      <app-date-picker [formatDate]="formatDate"  [editMode]="true"  [editDate]="invoice.invoiceDataDto.dueDate" [useMinDate]="true" (onChange)="onChangeDueDate($event)"></app-date-picker>
 
     </div>
   </div>

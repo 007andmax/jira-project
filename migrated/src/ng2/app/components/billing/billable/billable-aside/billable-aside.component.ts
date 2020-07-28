@@ -139,6 +139,7 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
       this.unlock();
       this.onShowNotificationAfterCreate();
       this.activeSaveBtns();
+      this.moToBillable();
     })
   }
   saveAndPrint() {
@@ -148,7 +149,17 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
       this.unlock();
       this.onShowNotificationAfterCreate();
       this.activeSaveBtns();
+      this.moToBillable();
     })
+  }
+  moToBillable() {
+    let body = document.querySelector('.left-panel__category-wrap');
+    var link = document.createElement('a');
+    body.appendChild(link);
+    link.href = `#/ng2/billable`;
+    var e = document.createEvent('MouseEvents');
+    e.initEvent('click', true, true);
+    link.dispatchEvent(e);
   }
   saveAndDownload() {
     this.disabledSaveBtns();
@@ -157,6 +168,7 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
       this.unlock();
       this.onShowNotificationAfterCreate();
       this.activeSaveBtns();
+      this.moToBillable();
     })
   }
   private getCompany(id) {

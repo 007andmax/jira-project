@@ -21,20 +21,21 @@ export class BillableService {
     private http: HttpClient,
     private constantsStateService: ConstantsStateService
   ) { }
+ 
   public deleteDiscount(lockId) {
     return this.http.delete(this.apiUrl + `invoice/removeDiscount/${lockId}`);
   }
-  public addDiscount(lockId,data) {
+  public addDiscount(lockId, data) {
     return this.http.post(this.apiUrl + `invoice/addDiscount/${lockId}`, data);
   }
-  public create(lockId,isSend,contactId,addressId) {
-  
+  public create(lockId, isSend, contactId, addressId) {
+
     return this.http.get(this.apiUrl + `/invoice/create/${lockId}?isSendNotification=${isSend}&billTo=${contactId}&shipTo=${addressId}`);
-    
+
   }
   public getCounters() {
     return this.http.get(this.apiUrl + `/data/getCounters`);
-    
+
   }
   public unlock(lockId) {
     return this.http.get(this.apiUrl + `invoice/unlock/${lockId}`);
@@ -52,7 +53,7 @@ export class BillableService {
     return this.http.get(this.apiUrl + `settings/emailPages/taxNumber`).pipe(map((data: any) => new InvoiceTaxNumber(data)));
   }
   public editTaxNumber(data) {
-    return this.http.put(this.apiUrl + `settings/emailPages/taxNumber`,data);
+    return this.http.put(this.apiUrl + `settings/emailPages/taxNumber`, data);
   }
   public getActualNumber() {
     return this.http.get(this.apiUrl + `data/actualNumber?type=INVOICE`);
