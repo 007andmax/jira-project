@@ -4,6 +4,7 @@
   span {
     border: 1px solid #C4CBD5;
     background: white;
+    min-width: 16px;
     width: 16px;
     height: 16px;
     border-radius: 2px;
@@ -22,6 +23,13 @@
         border: none;
       }
     }
+  }
+
+  &.--disabled {
+    span {
+      background: #C4CBD5;
+    }
+
   }
 }
 

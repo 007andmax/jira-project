@@ -1,7 +1,7 @@
 <tr [ngClass]="{'--selected': invoice.selected}">
   <td class="invoice-table__check">
-    <div class="d-f" [ngClass]="{'disabled-checkbox':invoice.blockSelected}">
-      <label class="qt-checkbox" [attr.for]="'invoice-' + invoice.id">
+    <div class="d-f">
+      <label class="qt-checkbox" [ngClass]="{'--disabled':invoice.blockSelected}" [attr.for]="'invoice-' + invoice.id">
         <input [attr.id]="'invoice-' + invoice.id"  [(ngModel)]="invoice.selected"  type="checkbox" (change)="onChangeSelect()" [disabled]="invoice.blockSelected">
         <span ></span>
       </label>
@@ -28,7 +28,7 @@
       <li class="pointer" ngbDropdownItem *ngIf="invoice.paidOn" (click)="refundPayments()">Refund Payments</li>
       <li class="pointer" ngbDropdownItem *ngIf="!invoice.paidOn" (click)="rollbackInvoice()">  <div class="icon__restart qt-sz-16 qt-mr-8"></div> Rollback</li>
       <li class="pointer" ngbDropdownItem (click)="deleteInvoice()"> <div class="icon__remove qt-sz-16 qt-mr-8"></div> Remove</li>
-      <li ngbDropdownItem>Payment history
+      <li ngbDropdownItem class="payment-menu-item">Payment history
 
         <div class="dropdown-submenu-wrapper payment-info-submenu">
           <div class="payment-info clearfix">
