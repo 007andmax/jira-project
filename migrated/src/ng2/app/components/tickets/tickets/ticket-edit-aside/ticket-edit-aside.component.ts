@@ -79,6 +79,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       this.showPreloader = false;
       this.ticketStateService.getServicesList(this.ticketProfile);
       this.ticketStateService.subsribeToTicket(this.ticketProfile.id);
+      this.ticketMessage.reset();
       this.cd.detectChanges();
     })
     this.sub.add(getOnEditTicket);
@@ -352,6 +353,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     this.rightPanel.close();
     this.ticketStateService.unsubscribeTicket();
     this.ticketStateService.onTicketClosed();
+    this.ticketMessage.reset();
   }
   getClassType() {
     return `priority-icon ticket-edit-aside__ticket-subject-flag ${(this.ticketProfile.priorityLevel && this.ticketProfile.priorityLevel !== "MEDIUM") ? '--' + this.ticketProfile.priorityLevel.toLowerCase() : ''}`;

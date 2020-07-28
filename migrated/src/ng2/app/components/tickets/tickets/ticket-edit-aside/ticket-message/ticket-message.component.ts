@@ -43,6 +43,10 @@ export class TicketMessageComponent implements OnInit {
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
   }
+  public reset() {
+    this.isClaimTicket  = false;
+    this.isMarkAsOpen  = false;
+  }
   claimTicket() {
     this.claimTicketBtn.setDisabled(true);
     this.isClaimTicket = true;
