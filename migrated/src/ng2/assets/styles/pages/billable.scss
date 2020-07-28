@@ -312,7 +312,7 @@ app-invoice-preview {
   .invoice-preview {
     box-shadow: 0 8px 16px 10px rgba(0, 0, 0, 0.05);
     background-color: #ffffff;
-    padding: 40px;
+    padding: 40px 32px;
 
     .company-logo {
       max-width: 200;
@@ -342,9 +342,7 @@ app-invoice-preview {
 
       th, td {
         border-bottom: solid 1px #dfe3e8;
-        &:first-child {
-          border-left: solid 1px #dfe3e8;
-        }
+        border-left: solid 1px #dfe3e8;
         &:last-child {
           border-right: solid 1px #dfe3e8;
         }
@@ -357,14 +355,19 @@ app-invoice-preview {
       }
       td {
         font-size: 12px;
-        padding: 0 12px;
+        padding: 10px 12px;
         height: 40px;
+        vertical-align: middle;
       }
     }
 
     &__item-header-number {
-      width: 90px;
-
+      color: white;
+      background-color: #637382;
+      margin-left: -13px;
+      height: 20px;
+      line-height: 20px;
+      padding: 0 4px;
     }
 
     &__item-header-date {
@@ -373,7 +376,7 @@ app-invoice-preview {
 
     &__col-item {
       text-align: left;
-      width: 128px;
+      width: 200px;
     }
 
     &__col-desc {
@@ -381,21 +384,27 @@ app-invoice-preview {
       max-width: 285px;
       overflow-wrap: break-word;
     }
+    &__col-price {
+      text-align: right;
+      width: 84px;
+    }
 
     &__col-qty {
       text-align: right;
-      width: 94px;
+      width: 87px;
     }
 
     &__col-tax {
       text-align: right;
-      width: 54px;
+      width: 75px;
     }
 
-    &__col-amount, &__col-price {
+
+    &__col-amount {
       text-align: right;
-      width: 80px;
+      width: 89px;
     }
+
 
     &__total-block {
       width: 247px;
