@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { Subscription } from 'rxjs';
 import { InvoicesService } from 'src/ng2/app/services/invoices/invoices.service';
@@ -8,6 +8,7 @@ import { FORMAT_DATE_2 } from 'src/ng2/app/const/date-picker';
 import { CompanySetting } from '../../../companies/class/company-setting';
 import * as moment from "moment";
 
+
 @Component({
   selector: 'app-invoices-aside',
   templateUrl: './invoices-aside.component.html',
@@ -15,7 +16,7 @@ import * as moment from "moment";
 })
 export class InvoicesAsideComponent implements OnInit {
   companies = [];
-  reference:string = '';
+  reference: string = '';
   formatDate: string = FORMAT_DATE_2;
   today = new Date().getTime();
   invoices: Array<Invoice> = [];
@@ -23,9 +24,10 @@ export class InvoicesAsideComponent implements OnInit {
   paymentModes = [new CompanySetting('Cash', 'CASH'), new CompanySetting('Cheque', 'CHEQUE'), new CompanySetting('Debit Card', 'DEBIT_CARD'),
   new CompanySetting('Credit Card', 'CREDIT_CARD'),
   new CompanySetting('Wire Transfer', 'WIRE_TRANSFER')];
-
-  @Output() onClose = new EventEmitter<any>();
+  selectedCompany: any = null;
+  @Input() selectedInvoices: Array<Invoice> = [];
   sub: Subscription = new Subscription();
+  @Output() onClose = new EventEmitter<any>();
   constructor(private companiesState: CompaniesStateService,
     private invoicesService: InvoicesService) { }
 
@@ -36,9 +38,22 @@ export class InvoicesAsideComponent implements OnInit {
       this.getClientsList(data);
     })
     this.sub.add(getOnCompanies);
+    console.log("selectedInvoices", this.selectedInvoices);
+    if (this.selectedInvoices.length > 0) {
+      this.selectedCompany = this.companies.find(item => item.id === this.selectedInvoices[0].companyId);
+      this.onSelectCompany(this.selectedCompany);
+    }
+    console.log("selectedCompany", this.selectedCompany);
   }
   onSelectPaymentModes(data) {
 
+  }
+  getSubtotal() {
+    let subTotal = 0;
+    this.invoices.forEach(item => {
+      subTotal += (item.sum - item.paidSum);
+    })
+    return subTotal;
   }
   onSelectCompany(item) {
 
@@ -48,9 +63,15 @@ export class InvoicesAsideComponent implements OnInit {
       this.invoicesFilter.setCompany(item.name);
       this.invoicesService.getInvoices(this.invoicesFilter.getFIlter()).subscribe((data: Array<Invoice>) => {
         this.invoices = data;
+        this.invoices.forEach(item => {
+          let find = this.selectedInvoices.find(selectInvoice => selectInvoice.id === item.id);
+          if (find) item.selected = true;
+        })
       })
+      this.selectedCompany = item;
     } else {
       this.invoices = [];
+      this.selectedCompany = null;
     }
   }
   getDate(date) {

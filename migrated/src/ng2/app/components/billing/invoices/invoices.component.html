@@ -2,7 +2,7 @@
 
   <div class="qt-df qt-fd-c qt-jc-sb invoices-page__list-container">
     <div>
-      <app-invoices-header (onCreateInvoice)="showCreateInvoice = true" (onSortBy)="sortBy($event)"></app-invoices-header>
+      <app-invoices-header (onCreateInvoice)="onCreatePayment()" (onSortBy)="sortBy($event)"></app-invoices-header>
       <div class="table-container">
         <table class="qt-table-modern billable-table">
           <tbody
@@ -36,5 +36,5 @@
   </div>
 </div>
 
-<app-invoices-aside *ngIf="showCreateInvoice" (onClose)="showCreateInvoice = false"></app-invoices-aside>
-<app-invoices-aside-preview *ngIf="showPreviewInvoice" (onClose)="showPreviewInvoice = false" [invoice]="previewInvoice"></app-invoices-aside-preview>
+<app-invoices-aside *ngIf="showCreateInvoice" (onClose)="showCreateInvoice = false" [selectedInvoices]="selectedInvoices"></app-invoices-aside>
+<app-invoices-aside-preview #previewInvoiceAside *ngIf="showPreviewInvoice" (onClose)="showPreviewInvoice = false" [invoice]="previewInvoice"></app-invoices-aside-preview>

@@ -96,7 +96,7 @@ export class InvoicesItemComponent implements OnInit {
   };
   deleteInvoice() {
     this.confirmStateService.setConfirmAction(DELETE_INVOICE);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal'});
     modalRef.componentInstance.message = `Do you want to delete invoice #${this.invoice.number} ?`;
     this.invoiceStateService.setInvoiceForemove(this.invoice);
   }

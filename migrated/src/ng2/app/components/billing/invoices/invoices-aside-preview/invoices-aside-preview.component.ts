@@ -31,13 +31,15 @@ export class InvoicesAsidePreviewComponent implements OnInit {
 
   ngOnInit() {
     this.currentCompany = this.companiesStateService.getCurrentCompany();
+    this.onGetInvoice();
+  }
+  public onGetInvoice() {
+    this.showPreloader = true;
     this.invoicesService.getInvoice(this.invoice.id).subscribe(data => {
       this.invoiceProfile = new InvoiceProfile(data);
       console.log("invoiceProfile",this.invoiceProfile);
       this.showPreloader = false;
     })
-
-
   }
   resendInvoices() {
     this.invoicesService.resendInvoices([this.invoice.id]).subscribe(data => {

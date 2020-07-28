@@ -20,25 +20,25 @@
     <thead>
       <tr>
         <th class="invoice-table__check">
-          <div class="d-f">
+        <!--   <div class="d-f">
             <label class="qt-checkbox">
               <input type="checkbox">
               <span></span>
             </label>
-          </div>
+          </div> -->
         </th>
 
-        <th class="invoce-table__date" (click)="sortBy('INVOICE_DATE')">
+        <th class="invoce-table__date pointer" (click)="sortBy('INVOICE_DATE')">
           Date
           <span class="qt-table-modern__sorting"></span>
         </th>
 
-        <th class="invoce-table__invoice" (click)="sortBy('INVOICE_NUMBER')">
+        <th class="invoce-table__invoice pointer" (click)="sortBy('INVOICE_NUMBER')">
           Invoice#
           <span class="qt-table-modern__sorting"></span>
         </th>
 
-        <th class="invoce-table__company" (click)="sortBy('COMPANY_NAME')">
+        <th class="invoce-table__company pointer" (click)="sortBy('COMPANY_NAME')">
           Company
           <span class="qt-table-modern__sorting"></span>
         </th>
@@ -47,18 +47,18 @@
           Status
         </th>
 
-        <th class="invoce-table__read-on" (click)="sortBy('READ_ON')">
+        <th class="invoce-table__read-on pointer" (click)="sortBy('READ_ON')">
           Read On
           <span class="qt-table-modern__sorting"></span>
         </th>
 
 
-        <th class="invoce-table__amount" (click)="sortBy('AMOUNT')">
+        <th class="invoce-table__amount pointer" (click)="sortBy('AMOUNT')">
           Amount
           <span class="qt-table-modern__sorting"></span>
         </th>
 
-        <th class="invoce-table__balance-due" (click)="sortBy('BALANCE')">
+        <th class="invoce-table__balance-due pointer" (click)="sortBy('BALANCE')">
           Balance Due
           <span class="qt-table-modern__sorting"></span>
         </th>

@@ -19,7 +19,7 @@
         <div class="qt-input-block">
           <label class="qt-lh-154">Customer Name</label>
           <app-select-search class="search-company invoices-company-filter"  #companyDp  [placeholder]="'Select Company'"
-    [change]="false" [class]="['qt-dropdown']" [field]="'name'" [list]="companies"
+    [change]="false" [class]="['qt-dropdown']" [field]="'name'" [editItem]="selectedCompany" [list]="companies"
     (onSelectedItem)="onSelectCompany($event)"></app-select-search>
         </div>
       </div>
@@ -97,9 +97,9 @@
                     [ngForTrackBy]="trackById">
         <tr>
           <td class="unpaid-table__check">
-            <label class="qt-checkbox">
-              <input type="checkbox">
-              <span></span>
+            <label class="qt-checkbox"  [attr.for]="'invoice-' + invoice.id">
+              <input [attr.id]="'invoice-' + invoice.id"  [(ngModel)]="invoice.selected"  type="checkbox" >
+        <span ></span>
             </label>
           </td>
           <td class="unpaid-table__invoice" [textContent]="'INV ' + invoice.number"></td>
@@ -149,7 +149,7 @@
         <div class="invoice-total qt-color-dark" >
           <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12">
             <div>Sub Total</div>
-            <div>$6,698.47</div>
+            <div [textContent]="getSubtotal() | currency"></div>
           </div>
           <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12">
             <div>Total Payment</div>
@@ -170,7 +170,7 @@
   <div class="qt-df">
     <button class="qt-button qt-mr-12">Record Payment</button>
   <!--  <button class="qt-button qt-mr-12">Record Payment by CC</button>-->
-    <button class="qt-button --gray">Cancel</button>
+    <button class="qt-button --gray" (click)="close()">Cancel</button>
   </div>
  </div>
 

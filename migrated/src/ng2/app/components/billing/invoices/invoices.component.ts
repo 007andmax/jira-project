@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy, ViewChild } from '@angular/core';
 import { InvoicesService } from 'src/ng2/app/services/invoices/invoices.service';
 import { InvoicesFilter } from './class/invoices-filter';
 import { InvoicesListService } from './services/invoices-list.service';
@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { DELETE_INVOICE, ROLLBACK_INVOICE, REFUND_PAYMENTS } from 'src/ng2/app/const/confirm';
 import { InvoiceRealTimeService } from 'src/ng2/app/states/invoice/invoice-real-time.service';
+import { InvoicesAsidePreviewComponent } from './invoices-aside-preview/invoices-aside-preview.component';
 
 @Component({
   selector: 'app-invoices',
@@ -30,6 +31,8 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   offset: number = 20;
   public direction: string = 'ASC';
   previewInvoice: Invoice;
+  selectedInvoices:Array<Invoice> = [];
+  @ViewChild('previewInvoiceAside') previewInvoiceAside:InvoicesAsidePreviewComponent;
   sub: Subscription = new Subscription();
   constructor(private invoicesService: InvoicesService,
     public cd: ChangeDetectorRef,
@@ -48,6 +51,8 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     this.sub.add(getOnCompanies);
 
     let getOnInitFilter = this.invoiceStateService.getOnInitFilter().subscribe(data => {
+      this.selectedInvoices = [];
+      this.selectedCompanyId = null;
       this.invoicesFilter = data;
       this.showPreloader = true;
       window.scrollTo(0, 0);
@@ -94,8 +99,22 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     })
     this.sub.add(changeInvoice);
   }
+  onCreatePayment() {
+    this.selectedInvoices = [];
+    if (this.selectedCompanyId) {
+      this.invoices.forEach(item => {
+        if (item.selected) this.selectedInvoices.push(item);
+      })
+    }
+    this.showCreateInvoice = true;
+
+  }
   onPreviewInvoice(data) {
     this.previewInvoice = data;
+    if (this.showPreviewInvoice) {
+      this.cd.detectChanges();
+      this.previewInvoiceAside.onGetInvoice();
+    }
     this.showPreviewInvoice = true;
   }
   onRollbackInvoice(invoice) {
@@ -104,6 +123,8 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     })
   }
   public sortBy(sort) {
+    this.selectedInvoices = [];
+    this.selectedCompanyId = null;
     this.direction = this.invoicesListService.getDirection(this.direction, this.sort, sort);
     this.sort = sort;
     this.invoicesFilter.setSortBy(`${this.sort}_${this.direction}`);

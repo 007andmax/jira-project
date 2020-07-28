@@ -1,6 +1,6 @@
 <tr [ngClass]="{'--selected': invoice.selected}">
   <td class="invoice-table__check">
-    <div class="d-f">
+    <div class="d-f" [ngClass]="{'disabled-checkbox':invoice.blockSelected}">
       <label class="qt-checkbox" [attr.for]="'invoice-' + invoice.id">
         <input [attr.id]="'invoice-' + invoice.id"  [(ngModel)]="invoice.selected"  type="checkbox" (change)="onChangeSelect()" [disabled]="invoice.blockSelected">
         <span ></span>
@@ -23,14 +23,11 @@
     <div class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"  id="dropdownBasic1" ngbDropdownToggle></div>
     <ul class="qt-dropdown-menu invoice-items-dropdown"  ngbDropdownMenu aria-labelledby="dropdownBasic1">
       <li ngbDropdownItem (click)="resendInvoices()"> <div class="icon__email-dark qt-sz-16 qt-mr-8"></div> Resend</li>
-
       <li ngbDropdownItem *ngIf="!invoice.readedAt" (click)="markAsRead()">Mark as Read</li>
-      <li ngbDropdownItem (click)="deleteInvoice()"> <div class="icon__remove qt-sz-16 qt-mr-8"></div> Remove</li>
-
-
       <li ngbDropdownItem (click)="exportAsPDF()"> <div class="icon__download-pdf qt-sz-16 qt-mr-8"></div> Export as PDF</li>
-      <li ngbDropdownItem *ngIf="!invoice.paidOn" (click)="rollbackInvoice()">  <div class="icon__restart qt-sz-16 qt-mr-8"></div> Rollback</li>
       <li ngbDropdownItem *ngIf="invoice.paidOn" (click)="refundPayments()">Refund Payments</li>
+      <li ngbDropdownItem *ngIf="!invoice.paidOn" (click)="rollbackInvoice()">  <div class="icon__restart qt-sz-16 qt-mr-8"></div> Rollback</li>
+      <li ngbDropdownItem (click)="deleteInvoice()"> <div class="icon__remove qt-sz-16 qt-mr-8"></div> Remove</li>
       <li ngbDropdownItem>Payment history
 
         <div class="dropdown-submenu-wrapper payment-info-submenu">
