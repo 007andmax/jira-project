@@ -18,19 +18,6 @@ export class DraftEmailComponent implements OnInit {
   messageContent: string = '';
   messageHTML: string = '';
   opened = false;
-  /* editorConfig = {
-     editable: true,
-     spellcheck: false,
-     height: '10rem',
-     minHeight: '5rem',
-     placeholder: 'Write your draft for companies',
-     translate: 'no',
-     toolbar: ["bold", "italic", "underline", "fontName",
-       "fontSize", "justifyLeft", "justifyCenter",
-       "justifyRight", "removeFormat", "orderedList",
-       "unorderedList"]
-   };*/
-
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: false,

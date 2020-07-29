@@ -25,9 +25,7 @@
 
           <div style="position:relative;">
             <angular-editor *ngIf="tab == 'plain'"  [(ngModel)]="messageContent" [config]="editorConfig"></angular-editor>
-            <!--<app-ngx-editor *ngIf="tab == 'plain'" [config]="editorConfig" [spellcheck]="true"
-                            [(ngModel)]="messageContent"></app-ngx-editor>-->
-            <div *ngIf="tab == 'plain'" class="editor-container-attachments">
+              <div *ngIf="tab == 'plain'" class="editor-container-attachments">
               <i class="icn-16 icn-text-attachment"></i>
               <input id="upload-file-email" type="file" (input)="uploadFileOnBrower($event)" />
             </div>
