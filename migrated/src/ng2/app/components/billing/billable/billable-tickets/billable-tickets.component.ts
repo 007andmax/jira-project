@@ -48,7 +48,7 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
     if (this.companiesStateService.getCurrentCompany().addresses.length === 0) this.isCurrentCompanyAddressEmpty = false;
     this.billableProfile = this.billableStateService.getBillableProfile();
     if (!this.billableProfile) {
-     this.moToBillable();
+      this.moToBillable();
       return;
     }
     this.onFilterTicketNumber();
@@ -74,6 +74,16 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
             this.billableProfile.updateCountTickets();
             this.billableProfile.updateTotal();
           }
+        }
+      }
+      if (data.action == 'BILLABLE_EXPENSE_ADDED') {
+        if (data.data.companyId === this.billableProfile.id) {
+          let ticket = new BillableProfileTicket(data.data);
+          this.billableProfile.tickets.push(ticket);
+          this.billableProfile.updateCountTickets();
+          this.billableProfile.updateTotal();
+          console.log("this.billableProfile.tickets",this.billableProfile.tickets);
+          this.cd.detectChanges();
         }
       }
     });
