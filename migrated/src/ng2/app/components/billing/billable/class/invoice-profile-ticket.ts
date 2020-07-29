@@ -28,6 +28,9 @@ export class InvoiceProfileTicket {
     public getDateForUpdate() {
         let productExpenses = [];
         this.productExpenses.forEach(item => {
+            let taxes = item.taxes.map(tax => {
+                return {id: tax.id};
+            });
             productExpenses.push({
                 productExpense: {
                     completed: item.completed,
@@ -38,7 +41,7 @@ export class InvoiceProfileTicket {
                     item: item.item,
                     quantity: item.quantity,
                     serialNumber: null,
-                    taxes: item.taxes,
+                    taxes: taxes,
                     user: item.user,
                 },
                 ticketUpdateId: item.ticketUpdate.id
