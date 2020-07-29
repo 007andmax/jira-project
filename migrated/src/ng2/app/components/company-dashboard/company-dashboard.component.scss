@@ -415,9 +415,35 @@ body {
         justify-content: space-between;
         .cmp-dboard-col {
             flex-direction: column;
+            .cmp-profile-dp {
+                width: 72px;
+                height: 72px;
+                align-items: center;
+                justify-content: center;
+                background: linear-gradient(to bottom, rgba(111, 201, 255, 0.18), rgba(238, 238, 238, 0.12) 95%);
+                @include border-radius(50%);
+                overflow: hidden;
+                figure {
+                    align-items: center;
+                    justify-content: center;
+                    width: 56px;
+                    height: 56px;
+                    background-color: #ffffff;
+                    @include box-shadow(0, 1px, 3px, 0 rgba(0, 0, 0, 0.1));
+                    @include border-radius(50%);
+                    font-size: 18px;
+                    font-weight: 500;
+                    font-family: $graphicSemibold;
+                    font-style: normal;
+                    line-height: 1.44;
+                    text-align: center;
+                    color: $bodyFontColor;
+                    text-transform: uppercase;
+                }
+            }
             &.left-profilebar {
                 width: 344px;
-                padding-bottom: 60px;
+                padding-bottom: 70px;
                 position: relative;
                 .profile-cmp-board {
                     width: 100%;
@@ -426,35 +452,167 @@ body {
                     justify-content: center;
                     border-bottom: 1px dotted #dfe3e8;
                     padding-bottom: 30px;
-                    .cmp-profile-dp {
-                        width: 72px;
-                        height: 72px;
-                        align-items: center;
-                        justify-content: center;
-                        background: linear-gradient(
-                            to bottom,
-                            rgba(111, 201, 255, 0.18),
-                            rgba(238, 238, 238, 0.12) 95%
-                        );
-                        @include border-radius(50%);
-                        overflow: hidden;
-                        figure {
-                            align-items: center;
-                            justify-content: center;
-                            width: 56px;
-                            height: 56px;
-                            background-color: #ffffff;
-                            @include box-shadow(0, 1px, 3px, 0 rgba(0, 0, 0, 0.1));
-                            @include border-radius(50%);
-                            font-size: 18px;
-                            font-weight: 500;
-                            font-family: $graphicSemibold;
-                            font-style: normal;
-                            line-height: 1.44;
-                            text-align: center;
-                            color: #4f5f79;
+                    .small-title {
+                        font-size: 11px;
+                        font-weight: 500;
+                        font-family: $graphicSemibold;
+                        line-height: 1.09;
+                        letter-spacing: normal;
+                        color: #9ca5b6;
+                        margin-bottom: 4px;
+                    }
+
+                    &.other-info {
+                        padding: 16px 0;
+                        flex-direction: column;
+                        align-items: flex-start;
+                        justify-content: flex-start;
+                        .other-info-col {
+                            width: 100%;
+                            flex-direction: column;
+                            margin-bottom: 20px;
+                            align-items: flex-start;
+                            & > a {
+                                font-size: 13px;
+                                line-height: 1.23;
+                                letter-spacing: normal;
+                                color: $bodyFontColor;
+                                word-break: break-all;
+                                max-width: 100%;
+                            }
+                            address {
+                                margin-bottom: 8px;
+                                font-size: 13px;
+                                line-height: 1.23;
+                            }
+                            .btn.btn-outline {
+                                height: 28px;
+                                width: auto;
+                                padding: 5px 8px;
+                                align-items: center;
+                                justify-content: center;
+                                @include flexbox;
+                                font-size: 12px;
+                                font-weight: 500;
+                                font-family: $graphicSemibold;
+                                line-height: 1.33;
+                                color: $primary-color;
+                                img {
+                                    margin-right: 4px;
+                                }
+                            }
+                            p {
+                                margin: 0;
+                                font-size: 12px;
+                                line-height: 1.33;
+                                letter-spacing: normal;
+                                color: $bodyFontColor;
+                            }
+                            &:last-child {
+                                margin-bottom: 0;
+                            }
+                        }
+                    }
+                    &.primary-contact {
+                        padding: 18px 0;
+                        align-items: flex-start;
+                        .small-title {
+                            margin-bottom: 12px;
                             text-transform: uppercase;
                         }
+                        .contact-info {
+                            flex-flow: revert;
+                            align-items: center;
+                            justify-content: space-between;
+                            width: 100%;
+                            figure {
+                                width: 48px;
+                                height: 48px;
+                                align-items: center;
+                                justify-content: center;
+                                overflow: hidden;
+                                img {
+                                    max-width: 100%;
+                                    max-height: 100%;
+                                }
+                            }
+                            .primary-contact-info {
+                                width: calc(100% - 60px);
+                                flex-direction: column;
+                                align-items: flex-start;
+                                justify-content: flex-start;
+                                .h5 {
+                                    margin: 0;
+                                    font-size: 12px;
+                                    line-height: 1.33;
+                                }
+                                a {
+                                    color: #4f5f79;
+                                    font-size: 12px;
+                                    line-height: 1.33;
+                                    margin: 1px 0;
+                                }
+                            }
+                        }
+                    }
+                    &.tags-area {
+                        padding: 16px 0;
+                        align-items: flex-start;
+                        border-bottom: none;
+                        .small-title {
+                            width: 100%;
+                            align-items: center;
+                            justify-content: space-between;
+                            margin-bottom: 11px;
+                            text-transform: uppercase;
+                            a {
+                                text-transform: capitalize;
+                            }
+                        }
+                        .tags-tab {
+                            flex-wrap: wrap;
+                            margin: 0 -4px;
+                            .tag {
+                                margin: 0 4px 8px 4px;
+                                border-radius: 4px;
+                                border: solid 1px #edf2f6;
+                                background-color: #f8f9fa;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                position: relative;
+                                padding: 7px 24px 7px 5px;
+                                font-size: 12px;
+                                font-weight: normal;
+                                font-stretch: normal;
+                                font-style: normal;
+                                line-height: 1;
+                                letter-spacing: normal;
+                                color: #4f5f79;
+                                .close {
+                                    position: absolute;
+                                    right: 5px;
+                                    width: 12px;
+                                }
+                            }
+                        }
+                    }
+                }
+                .btn-row {
+                    position: absolute;
+                    left: 24px;
+                    right: 0;
+                    bottom: 24px;
+                    right: 24px;
+                    margin: 0 -4px;
+                    background-color: #fff;
+                    @include flexbox;
+                    align-items: center;
+                    justify-content: center;
+                    .btn {
+                        margin: 0 4px;
+                        width: 144px;
+                        padding: 11px 5px;
                     }
                 }
                 .cmp-profile-user {
@@ -475,7 +633,7 @@ body {
                         line-height: 1.54;
                         letter-spacing: normal;
                         text-align: center;
-                        color: #4f5f79;
+                        color: $bodyFontColor;
                     }
                 }
 
@@ -509,13 +667,74 @@ body {
                         font-size: 12px;
                         font-family: $font-body;
                         line-height: 1;
-                        color: #4f5f79;
+                        color: $bodyFontColor;
                         margin: 0 2px;
                     }
                 }
             }
             &.right-stasticsbar {
                 width: 768px;
+                .cmp-dboard-stastics {
+                    padding: 24px 16px;
+                    ul.list-unstyled {
+                        margin: 0;
+                        align-items: center;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        margin: 0 -16px;
+                        min-width: 100%;
+                        li {
+                            align-items: center;
+                            padding: 0 16px;
+                            width: 25%;
+                            border-right: 2px solid #edf2f6;
+                            .cmp-profile-dp {
+                                width: 56px;
+                                height: 56px;
+                                figure {
+                                    width: 40px;
+                                    height: 40px;
+                                }
+                            }
+                            .stastics-info {
+                                flex-direction: column;
+                                align-items: start;
+                                padding-left: 8px;
+                                width: calc(100% - 56px);
+                                span {
+                                    font-weight: normal;
+                                    font-stretch: normal;
+                                    font-style: normal;
+                                    line-height: 1.54;
+                                    letter-spacing: normal;
+                                    color: #9ca5b6;
+                                    white-space: nowrap;
+                                }
+                            }
+                            &:last-child{
+                                border-right:0;
+                            }
+                        }
+                    }
+                }
+                .cmn-box{
+                    margin-bottom: 16px;
+                }
+                & > div{
+                    width: 100%;
+                }
+                .cmp-board-information {
+                    width: inherit;
+                    .cmp-board-info-row {
+                        margin: 0 -8px;width: calc(100% + 16px);
+                        .cmp-board-info-col {
+                            width: 50%;
+                            flex-direction: column;
+                            padding: 0 8px;
+                        }
+                    
+                    }
+                }
             }
         }
         .cmn-box {
