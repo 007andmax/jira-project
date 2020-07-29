@@ -455,7 +455,7 @@ body {
                     .small-title {
                         font-size: 11px;
                         font-weight: 500;
-                        font-family: $graphicSemibold;
+                        font-family: $graphicMedBold;
                         line-height: 1.09;
                         letter-spacing: normal;
                         color: #9ca5b6;
@@ -494,7 +494,7 @@ body {
                                 @include flexbox;
                                 font-size: 12px;
                                 font-weight: 500;
-                                font-family: $graphicSemibold;
+                                font-family: $graphicMedBold;
                                 line-height: 1.33;
                                 color: $primary-color;
                                 img {
@@ -711,28 +711,114 @@ body {
                                     white-space: nowrap;
                                 }
                             }
-                            &:last-child{
-                                border-right:0;
+                            &:last-child {
+                                border-right: 0;
                             }
                         }
                     }
                 }
-                .cmn-box{
+                .cmn-box {
                     margin-bottom: 16px;
                 }
-                & > div{
+                & > div {
                     width: 100%;
                 }
                 .cmp-board-information {
                     width: inherit;
                     .cmp-board-info-row {
-                        margin: 0 -8px;width: calc(100% + 16px);
+                        margin: 0 -8px;
+                        width: calc(100% + 16px);
                         .cmp-board-info-col {
                             width: 50%;
                             flex-direction: column;
                             padding: 0 8px;
                         }
-                    
+                        .cmp-board-invoice {
+                            width: 100%;
+                            flex-direction: column;
+                            h2 {
+                                font-size: 15px;
+                                font-weight: 600;
+                                font-style: normal;
+                                line-height: 1.47;
+                                letter-spacing: normal;
+                                margin-bottom: 10px;
+                                width: 100%;
+                            }
+                        }
+                        .cmp-dash-table-wrap {
+                            width: 100%;
+                            position: relative;
+                            table {
+                                width: 100%;
+                                thead {
+                                    th {
+                                        font-size: 10px;
+                                        font-family: $graphicMedBold;
+                                        font-weight: 500;
+                                        line-height: 1.2;
+                                        letter-spacing: normal;
+                                        color: #9ca5b6;
+                                        background-color: #f9fafb;
+                                        padding: 6px 10px 6px 0;
+                                        text-transform: uppercase;
+                                        &:last-child {
+                                            padding-right: 0;
+                                            text-align: right;
+                                        }
+                                    }
+                                }
+                                td {
+                                    font-size: 12px;
+                                    line-height: 1.33;
+                                    letter-spacing: normal;
+                                    color: #4f5f79;
+                                    padding: 12px 10px 12px 0;
+                                    border-bottom: 1px solid #edf0f2;
+                                    &:last-child {
+                                        padding-right: 0;
+                                        text-align: right;
+                                        font-family: $graphicMedBold;
+                                        font-weight: 500;
+                                    }
+                                    &.ov-d{
+                                        font-family: $graphicMedBold;
+                                        font-weight: 500;
+                                        color:#ff5263;
+                                    }
+                                    &.paid{
+                                        font-family: $graphicMedBold;
+                                        font-weight: 500;
+                                        color:#2ec866
+
+                                        ;
+                                    }
+                                }
+                                tr{
+                                    &:last-child{
+                                        td{
+                                            padding-bottom: 0;
+                                            border-bottom:none;
+                                        }
+                                    }
+                                }
+                            }
+                            &::after,
+                            &::before {
+                                content: "";
+                                background-color: #f9fafb;
+                                padding: 0;
+                                width: 24px;
+                                position: absolute;
+                                left: -24px;
+                                top: 0px;
+                                height: 24px;
+                            }
+                            &::after {
+                                left: auto;
+                                right: -24px;
+                            }
+                        }
                     }
                 }
             }
