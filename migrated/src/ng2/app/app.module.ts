@@ -20,7 +20,6 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule, MatIconModule } from "@angular/material";
 import { CronEditorModule } from "cron-editor";
 import { ImageCropperModule } from 'ngx-image-cropper';
-import { NgxEditorModule } from 'ngx-editor';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppComponent } from './app.component';
@@ -120,6 +119,7 @@ import { FileComponent } from './components/device/file-explorer/file-explorer.c
 import { PasswordComponent } from './components/device/password/password.component';
 
 import { NgxUploaderModule } from 'ngx-uploader';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ToastrModule } from 'ngx-toastr';
 import { SessionTimeoutComponent } from './components/device/session-timeout/session-timeout.component';
 import { LockScreenComponent } from './components/device/lock-screen/lock-screen.component';
@@ -320,7 +320,7 @@ angular.module('quicktech')
     InfiniteScrollModule,
     ClickOutsideModule,
     DataTablesModule,
-    
+    AngularEditorModule,
     NgxSelectModule,
     MatSelectModule,
     MatChipsModule,
@@ -421,7 +421,6 @@ angular.module('quicktech')
       }),
       CronEditorModule,
       ImageCropperModule,
-      NgxEditorModule ,
       FontAwesomeModule,
       NgxUploaderModule,
       ToastrModule.forRoot({
