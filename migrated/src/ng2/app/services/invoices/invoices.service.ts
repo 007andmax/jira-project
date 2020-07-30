@@ -20,7 +20,9 @@ export class InvoicesService {
     private http: HttpClient,
    
   ) { }
-  
+  public createPayment(data) {
+    return this.http.post(`${this.apiUrl}receivable/receivePayment`,data);
+  }
   public resendInvoices(invoiceIds) {
     return this.http.post(`${this.apiUrl}receivable/resend`,{ ids: invoiceIds });
   }

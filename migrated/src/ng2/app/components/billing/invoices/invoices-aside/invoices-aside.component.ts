@@ -7,6 +7,8 @@ import { Invoice } from '../class/invoice';
 import { FORMAT_DATE_2 } from 'src/ng2/app/const/date-picker';
 import { CompanySetting } from '../../../companies/class/company-setting';
 import * as moment from "moment";
+import { Payment } from './class/payment';
+import { NotificationStateService } from '../../../shared/notification/services/notification-state.service';
 
 
 @Component({
@@ -17,7 +19,8 @@ import * as moment from "moment";
 export class InvoicesAsideComponent implements OnInit {
   companies = [];
   reqCompanies = [];
-  reference: string = '';
+
+  payment: Payment = new Payment();
   amountReceived: number = 0;
   formatDate: string = FORMAT_DATE_2;
   today = new Date().getTime();
@@ -29,10 +32,12 @@ export class InvoicesAsideComponent implements OnInit {
   selectedCompany: any = null;
   isChangeAmountReceived: boolean = false;
   selectAllInvoice: boolean = false;
+  selectedPaymentMode = new CompanySetting('Cheque', 'CHEQUE');
   sub: Subscription = new Subscription();
   @Input() selectedInvoices: Array<Invoice> = [];
   @Output() onClose = new EventEmitter<any>();
   constructor(private companiesState: CompaniesStateService,
+    private notificationStateService: NotificationStateService,
     private invoicesService: InvoicesService) { }
 
   ngOnInit() {
@@ -47,10 +52,14 @@ export class InvoicesAsideComponent implements OnInit {
       this.selectedCompany = this.reqCompanies.find(item => item.id === this.selectedInvoices[0].companyId);
       this.onSelectCompany(this.selectedCompany);
     }
+    let today = new Date();
+    this.payment.setDate(today.getDate(), today.getMonth() + 1, today.getFullYear(), this.companiesState.getCurrentCompany().addresses[0].timeZone.timeOffset);
     console.log("selectedCompany", this.selectedCompany);
   }
   onSelectPaymentModes(data) {
-
+    console.log("data", data);
+    this.selectedPaymentMode = data;
+    this.payment.setPaymentMethod(data.value);
   }
   onChangeAmountReceived(event) {
     console.log("event", event.target.value);
@@ -74,10 +83,10 @@ export class InvoicesAsideComponent implements OnInit {
     console.log("this.isChangeAmountReceived", this.isChangeAmountReceived);
     if (!this.isChangeAmountReceived) {
       this.invoices[index].paymentAmount = (this.invoices[index].sum - this.invoices[index].paidSum);
-      this.amountReceived = this.invoices.reduce((a, b) =>{
-        if (b.selected)  return a +(b.sum - b.paidSum);
-        return a +0;
-    }, 0);;
+      this.amountReceived = this.invoices.reduce((a, b) => {
+        if (b.selected) return a + (b.sum - b.paidSum);
+        return a + 0;
+      }, 0);;
       console.log("this.amountReceived", this.amountReceived);
     }
     console.log("selectAllInvoice", this.selectAllInvoice);
@@ -89,8 +98,41 @@ export class InvoicesAsideComponent implements OnInit {
     })
     this.amountReceived = 0;
   }
-  checkShowClearAmounts () {
-   return this.invoices.find(item => item.selected);
+  public onChangePayment(val, invoice) {
+    let value = Number(val);
+    invoice.paymentAmount = value;
+
+  }
+  create() {
+
+    this.invoices.forEach(item => {
+      if (item.selected) {
+        this.payment.addInvoiceId(item.id);
+        this.payment.addPartialPayment(item.id, item.paymentAmount);
+      }
+    })
+    this.invoicesService.createPayment(this.payment).subscribe(data => {
+      this.notificationStateService.oninitShowNotification("The payment has been received");
+
+      this.close();
+      
+    })
+    console.log("this.payment", this.payment);
+  }
+  getRemainingBalance() {
+    let subTotal = this.getSubtotal();
+    let totalPayment = this.getTotalPayment();
+    return subTotal - totalPayment;
+  }
+  getTotalPayment() {
+    let total = 0;
+    this.invoices.forEach(item => {
+      if (item.selected) total += item.paymentAmount;
+    })
+    return total;
+  }
+  checkShowClearAmounts() {
+    return this.invoices.find(item => item.selected);
   }
   getSubtotal() {
     let subTotal = 0;
@@ -127,7 +169,8 @@ export class InvoicesAsideComponent implements OnInit {
   getDate(date) {
     return (date) ? moment(date).format('DD MMM YYYY') : '';
   }
-  onChangeDate() {
+  onChangeDate(data) {
+    this.payment.setDate(data.day, data.month, data.year, this.companiesState.getCurrentCompany().addresses[0].timeZone.timeOffset);
 
   }
   private getClientsList(data) {

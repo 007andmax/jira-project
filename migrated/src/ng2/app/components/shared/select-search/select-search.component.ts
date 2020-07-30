@@ -17,6 +17,7 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
   @Input() add: boolean = false;
   @Input() class: string = null;
   @Input() editItem: any = null;
+  @Input() isBlockClear: boolean = false;
   @Input() maxlength: number = null;
   @Input() placeholder: string = '';
   @Input() list = [];

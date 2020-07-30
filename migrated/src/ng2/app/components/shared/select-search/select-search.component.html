@@ -22,10 +22,10 @@
     (isPopupOpen)="isDropDownOpen()"
   />
   <span *ngIf="list && !isDisabled">
-    <i *ngIf="selectedItem && !isAdd"
+    <i *ngIf="selectedItem && !isAdd && !isBlockClear"
        class="icn-sm icn-remove-old"
        (click)="clearClient($event)"></i>
-    <i *ngIf="!selectedItem"
+    <i *ngIf="!selectedItem || isBlockClear"
        class="icn-sm report-caret-icon"></i>
     <i *ngIf="isAdd"  (click)="addItem()" class="icn-sm icn-product-save"></i>
   </span>
