@@ -74,7 +74,10 @@ export class InvoicesAsideComponent implements OnInit {
     console.log("this.isChangeAmountReceived", this.isChangeAmountReceived);
     if (!this.isChangeAmountReceived) {
       this.invoices[index].paymentAmount = (this.invoices[index].sum - this.invoices[index].paidSum);
-      this.amountReceived += (this.invoices[index].sum - this.invoices[index].paidSum);
+      this.amountReceived = this.invoices.reduce((a, b) =>{
+        if (b.selected)  return a +(b.sum - b.paidSum);
+        return a +0;
+    }, 0);;
       console.log("this.amountReceived", this.amountReceived);
     }
     console.log("selectAllInvoice", this.selectAllInvoice);
