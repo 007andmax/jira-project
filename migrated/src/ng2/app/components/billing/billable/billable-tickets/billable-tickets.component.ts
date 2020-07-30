@@ -82,7 +82,8 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
           this.billableProfile.tickets.push(ticket);
           this.billableProfile.updateCountTickets();
           this.billableProfile.updateTotal();
-          console.log("this.billableProfile.tickets",this.billableProfile.tickets);
+          console.log("this.billableProfile.tickets", this.billableProfile.tickets);
+          this.onFilterAfterAddTicket();
           this.cd.detectChanges();
         }
       }
@@ -146,6 +147,43 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
   }
   public getDate(date) {
     return moment(new Date(date)).format('DD MMM YYYY');
+  }
+  onFilterAfterAddTicket() {
+    let index = this.filter.findIndex(item => item.filter !== '');
+    let sort = this.filter[index].filter;
+    let field = this.filter[index].field;
+    if (field === 'closedAt') {
+      if (sort === 'ASC') {
+        this.onFilterСlosedAt();
+      } else {
+        this.onFilterСlosedAt();
+        this.billableProfile.tickets.reverse();
+      }
+    }
+    if (field === 'ticketNumber') {
+      if (sort === 'ASC') {
+        this.onFilterTicketNumber();
+      } else {
+        this.onFilterTicketNumber();
+        this.billableProfile.tickets.reverse();
+      }
+    }
+    if (field === 'subject') {
+      if (sort === 'ASC') {
+        this.onFilterSubject();
+      } else {
+        this.onFilterSubject();
+        this.billableProfile.tickets.reverse();
+      }
+    }
+    if (field === 'sum') {
+      if (sort === 'ASC') {
+        this.onFilterSum();
+      } else {
+        this.onFilterSum();
+        this.billableProfile.tickets.reverse();
+      }
+    }
   }
   onFilter(field) {
     let index = this.filter.findIndex(item => item.field === field);
