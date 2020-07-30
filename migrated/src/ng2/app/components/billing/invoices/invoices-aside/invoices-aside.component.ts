@@ -27,6 +27,7 @@ export class InvoicesAsideComponent implements OnInit {
   new CompanySetting('Credit Card', 'CREDIT_CARD'),
   new CompanySetting('Wire Transfer', 'WIRE_TRANSFER')];
   selectedCompany: any = null;
+  isChangeAmountReceived: boolean = false;
   selectAllInvoice: boolean = false;
   sub: Subscription = new Subscription();
   @Input() selectedInvoices: Array<Invoice> = [];
@@ -51,6 +52,11 @@ export class InvoicesAsideComponent implements OnInit {
   onSelectPaymentModes(data) {
 
   }
+  onChangeAmountReceived(event) {
+    console.log("event", event.target.value);
+    this.amountReceived = Number(event.target.value);
+    this.isChangeAmountReceived = (this.amountReceived > 0);
+  }
   onSelectInvoice(index) {
     this.selectAllInvoice = true;
     let sumPayment = 0;
@@ -64,6 +70,12 @@ export class InvoicesAsideComponent implements OnInit {
     if (sumPayment < this.amountReceived) {
       let paymentAmount = (this.amountReceived - sumPayment) - (this.invoices[index].sum - this.invoices[index].paidSum);
       this.invoices[index].paymentAmount = (paymentAmount > 0) ? (this.invoices[index].sum - this.invoices[index].paidSum) : (this.amountReceived - sumPayment);
+    }
+    console.log("this.isChangeAmountReceived", this.isChangeAmountReceived);
+    if (!this.isChangeAmountReceived) {
+      this.invoices[index].paymentAmount = (this.invoices[index].sum - this.invoices[index].paidSum);
+      this.amountReceived += (this.invoices[index].sum - this.invoices[index].paidSum);
+      console.log("this.amountReceived", this.amountReceived);
     }
     console.log("selectAllInvoice", this.selectAllInvoice);
   }

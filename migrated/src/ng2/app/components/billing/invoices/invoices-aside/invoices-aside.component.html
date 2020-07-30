@@ -41,6 +41,7 @@
           <div class="qt-input-prefix">$</div><input class="qt-input-prepend" number
           [money]="true"
           [(ngModel)]="amountReceived"
+          (change)="onChangeAmountReceived($event)"
           appToFixed >
         </div>
 
