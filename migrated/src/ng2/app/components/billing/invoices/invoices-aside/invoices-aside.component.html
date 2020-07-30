@@ -38,7 +38,10 @@
       <div class="qt-input-block qt-mr-16 qt-w100">
         <label class="qt-lh-154">Amount Received</label>
         <div class="qt-df qt-mb-10">
-          <div class="qt-input-prefix">$</div><input class="qt-input-prepend" type="text">
+          <div class="qt-input-prefix">$</div><input class="qt-input-prepend" number
+          [money]="true"
+          [(ngModel)]="amountReceived"
+          appToFixed >
         </div>
 
         <!-- <div class="qt-df qt-ai-c">
@@ -94,11 +97,12 @@
       <tbody>
         <ng-template ngFor let-invoice
                     [ngForOf]="invoices"
+                    let-i="index"
                     [ngForTrackBy]="trackById">
         <tr>
           <td class="unpaid-table__check">
             <label class="qt-checkbox pointer"  [attr.for]="'invoice-preview-' + invoice.id">
-              <input [attr.id]="'invoice-preview-' + invoice.id"  [(ngModel)]="invoice.selected" (change)="onSelectInvoice($event)"  type="checkbox" >
+              <input [attr.id]="'invoice-preview-' + invoice.id"  [(ngModel)]="invoice.selected" (change)="onSelectInvoice(i)"  type="checkbox" >
         <span ></span>
             </label>
           </td>
@@ -106,7 +110,10 @@
           <td class="unpaid-table__date" [textContent]="getDate(invoice.date)"></td>
           <td class="unpaid-table__amount qt-text-right" [textContent]="invoice.sum | currency"></td>
           <td class="unpaid-table__due qt-text-right" [textContent]="(invoice.sum - invoice.paidSum) | currency"></td>
-          <td class="unpaid-table__payment qt-text-right">1500.99</td>
+          <td class="unpaid-table__payment qt-text-right"><input *ngIf="invoice.selected" number
+            [money]="true"
+            [ngModel]="invoice.paymentAmount"
+            appToFixed /></td>
         </tr>
 </ng-template>
 

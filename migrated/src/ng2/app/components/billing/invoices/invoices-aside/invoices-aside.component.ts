@@ -18,6 +18,7 @@ export class InvoicesAsideComponent implements OnInit {
   companies = [];
   reqCompanies = [];
   reference: string = '';
+  amountReceived: number = 0;
   formatDate: string = FORMAT_DATE_2;
   today = new Date().getTime();
   invoices: Array<Invoice> = [];
@@ -50,12 +51,21 @@ export class InvoicesAsideComponent implements OnInit {
   onSelectPaymentModes(data) {
 
   }
-  onSelectInvoice(event) {
+  onSelectInvoice(index) {
     this.selectAllInvoice = true;
+    let sumPayment = 0;
     this.invoices.forEach(item => {
-      if (!item.selected) this.selectAllInvoice = false;
+      if (!item.selected) {
+        this.selectAllInvoice = false;
+        item.paymentAmount = 0;
+      }
+      if (item.selected) sumPayment += item.paymentAmount;
     })
-    console.log("selectAllInvoice",this.selectAllInvoice);
+    if (sumPayment < this.amountReceived) {
+      let paymentAmount = (this.amountReceived - sumPayment) - (this.invoices[index].sum - this.invoices[index].paidSum);
+      this.invoices[index].paymentAmount = (paymentAmount > 0) ? (this.invoices[index].sum - this.invoices[index].paidSum) : (this.amountReceived - sumPayment);
+    }
+    console.log("selectAllInvoice", this.selectAllInvoice);
   }
   getSubtotal() {
     let subTotal = 0;

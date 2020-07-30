@@ -19,6 +19,7 @@ export class Invoice {
     ticketNumbers: Array<String>;
     selected:boolean = false;
     blockSelected:boolean = false;
+    paymentAmount:number = 0;
     constructor(data) {
         this.companyId = (data.company) ? data.company.id : '';
         this.date = data.date;
