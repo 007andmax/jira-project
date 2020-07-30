@@ -76,7 +76,7 @@
    <div class="qt-pl-32 qt-pr-32">
     <div class="qt-df qt-jc-sb qt-mb-12 qt-ai-c">
       <div class="qt-fs-16 qt-ff-sb qt-color-dark qt-lh-163">Unpaid Invoices</div>
-      <div class="qt-fs-12 qt-ff-gm qt-color-info qt-lh-133">Clear applied amount</div>
+      <div class="qt-fs-12 qt-ff-gm qt-color-info qt-lh-133" *ngIf="checkShowClearAmounts()" (click)="clearAmounts()">Clear applied amount</div>
     </div>
 
     <table class="unpaid-table qt-mb-16" colspan="0">

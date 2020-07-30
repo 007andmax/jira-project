@@ -82,6 +82,16 @@ export class InvoicesAsideComponent implements OnInit {
     }
     console.log("selectAllInvoice", this.selectAllInvoice);
   }
+  clearAmounts() {
+    this.invoices.forEach(item => {
+      item.selected = false;
+      item.paymentAmount = 0;
+    })
+    this.amountReceived = 0;
+  }
+  checkShowClearAmounts () {
+   return this.invoices.find(item => item.selected);
+  }
   getSubtotal() {
     let subTotal = 0;
     this.invoices.forEach(item => {
