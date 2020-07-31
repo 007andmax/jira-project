@@ -430,7 +430,7 @@
       </div>
       <div class="center-category collapsed-nav nano-content company-dashboard-left-panel">
         <a class="left-panel-title font-medium"
-           href="#/clients/companyProfile/{{companyForCompanyProfile.id}}?tabName=dashboard"
+        ng-click="activateCompanyProfileTab('CompanyDashboardPage')"
            style="margin-bottom: 10px;"
            ng-class="{'active': getOpenedUsersTab() ==='dashboard'}">
           Dashboard
