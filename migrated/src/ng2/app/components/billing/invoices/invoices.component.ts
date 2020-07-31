@@ -31,8 +31,8 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   offset: number = 20;
   public direction: string = 'ASC';
   previewInvoice: Invoice;
-  selectedInvoices:Array<Invoice> = [];
-  @ViewChild('previewInvoiceAside') previewInvoiceAside:InvoicesAsidePreviewComponent;
+  selectedInvoices: Array<Invoice> = [];
+  @ViewChild('previewInvoiceAside') previewInvoiceAside: InvoicesAsidePreviewComponent;
   sub: Subscription = new Subscription();
   constructor(private invoicesService: InvoicesService,
     public cd: ChangeDetectorRef,
@@ -110,7 +110,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
   getTotal() {
     let total = 0;
     this.invoices.forEach(item => {
-      total +=item.sum;
+      total += item.sum;
     })
     return total;
   }
@@ -123,6 +123,14 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     }
     this.showCreateInvoice = true;
 
+  }
+  onCloseCreatePayment() {
+    this.showCreateInvoice = false;
+    this.selectedCompanyId = null;
+    this.invoices.forEach(item => {
+      item.selected = false;
+      item.blockSelected = false;
+    })
   }
   onPreviewInvoice(data) {
     this.previewInvoice = data;
