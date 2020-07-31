@@ -309,6 +309,12 @@
             $scope.goToTab(`#/ng2/company-password-manager`);
             return;
           }
+
+          if (tabToActivate == 'CompanyDashboardPage') {
+            $scope.goToTab(`#/ng2/company-dashboard`);
+            return;
+          }
+
           if (tabToActivate == 'CompanyProfileUsersPage') {
             $scope.goToTab(`#/ng2/company-user`);
             return;
@@ -321,6 +327,11 @@
 
           if (tabToActivate == 'CompanyProfileTicketsPage') {
             $scope.goToTab(`#/ng2/company-tickets`);
+            return;
+          }
+
+          if (tabToActivate == 'CompanyProfileDashboardPage') {
+            $scope.goToTab(`#/ng2/company-dashboard`);
             return;
           }
          
