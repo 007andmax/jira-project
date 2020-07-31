@@ -20,6 +20,7 @@ export class Invoice {
     selected:boolean = false;
     blockSelected:boolean = false;
     paymentAmount:number = 0;
+    totalSum:number;
     constructor(data) {
         this.companyId = (data.company) ? data.company.id : '';
         this.date = data.date;
@@ -44,5 +45,6 @@ export class Invoice {
         var dueDate = new Date(this.dueDate).getTime();
         let overDue = (dueDate - today) / 86400000;
         this.isOverDue = (overDue < 0);
+        this.totalSum = data.totalSum;
     }
 }

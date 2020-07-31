@@ -96,6 +96,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
         data.data.forEach(element => {
           let index = this.invoices.findIndex(item => item.id === element.id);
           let invoice = new Invoice(element);
+          invoice.sum = invoice.totalSum;
           if (index > -1) this.invoices[index] = invoice;
         });
       }
