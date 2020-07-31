@@ -36,7 +36,11 @@
       </div>
 
       <div class="qt-input-block qt-mr-16 qt-w100">
-        <label class="qt-lh-154">Amount Received</label>
+        <label class="qt-lh-154">Amount Received
+          <mat-error class="qt-tooltip-error" *ngIf="!validate.getAmountReceived()">
+            You must use the entire amount. $ {{getUnUsedAmountReceived()}} left unused
+          </mat-error>
+        </label>
         <div class="qt-df qt-mb-10">
           <div class="qt-input-prefix">$</div><input class="qt-input-prepend" number
           [money]="true"

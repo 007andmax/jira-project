@@ -9,6 +9,7 @@ import { CompanySetting } from '../../../companies/class/company-setting';
 import * as moment from "moment";
 import { Payment } from './class/payment';
 import { NotificationStateService } from '../../../shared/notification/services/notification-state.service';
+import { PaymentInvoice } from './class/payment-invoice';
 
 
 @Component({
@@ -19,7 +20,7 @@ import { NotificationStateService } from '../../../shared/notification/services/
 export class InvoicesAsideComponent implements OnInit {
   companies = [];
   reqCompanies = [];
-
+  validate: PaymentInvoice = new PaymentInvoice();
   payment: Payment = new Payment();
   amountReceived: number = 0;
   formatDate: string = FORMAT_DATE_2;
@@ -65,6 +66,7 @@ export class InvoicesAsideComponent implements OnInit {
     console.log("event", event.target.value);
     this.amountReceived = Number(event.target.value);
     this.isChangeAmountReceived = (this.amountReceived > 0);
+    if (!this.validate.getAmountReceived()) this.validate.checkAmountReceived(this.amountReceived, this.invoices);
   }
   onSelectInvoice(index) {
     this.selectAllInvoice = true;
@@ -89,6 +91,7 @@ export class InvoicesAsideComponent implements OnInit {
       }, 0);;
       console.log("this.amountReceived", this.amountReceived);
     }
+    if (!this.validate.getAmountReceived()) this.validate.checkAmountReceived(this.amountReceived, this.invoices);
     console.log("selectAllInvoice", this.selectAllInvoice);
   }
   clearAmounts() {
@@ -101,10 +104,10 @@ export class InvoicesAsideComponent implements OnInit {
   public onChangePayment(val, invoice) {
     let value = Number(val);
     invoice.paymentAmount = value;
-
+    if (!this.validate.getAmountReceived()) this.validate.checkAmountReceived(this.amountReceived, this.invoices);
   }
   create() {
-
+    if (!this.validate.isValidate(this.amountReceived, this.invoices)) return;
     this.invoices.forEach(item => {
       if (item.selected) {
         this.payment.addInvoiceId(item.id);
@@ -115,9 +118,13 @@ export class InvoicesAsideComponent implements OnInit {
       this.notificationStateService.oninitShowNotification("The payment has been received");
 
       this.close();
-      
+
     })
     console.log("this.payment", this.payment);
+  }
+  public getUnUsedAmountReceived() {
+    let totalPayment = this.getTotalPayment();
+    return (this.amountReceived - totalPayment).toFixed(2);
   }
   getRemainingBalance() {
     let subTotal = this.getSubtotal();
