@@ -162,10 +162,19 @@ export class InvoicesAsideComponent implements OnInit {
       this.invoicesFilter.setCompany(item.name);
       this.invoicesService.getInvoices(this.invoicesFilter.getFIlter()).subscribe((data: Array<Invoice>) => {
         this.invoices = data;
+     
         this.invoices.forEach(item => {
           let find = this.selectedInvoices.find(selectInvoice => selectInvoice.id === item.id);
           if (find) item.selected = true;
+          if (item.selected && !this.isChangeAmountReceived)  item.paymentAmount = (item.sum - item.paidSum);
         })
+        if (!this.isChangeAmountReceived) {
+          this.amountReceived = this.invoices.reduce((a, b) => {
+            if (b.selected) return a + (b.sum - b.paidSum);
+            return a + 0;
+          }, 0);;
+          console.log("this.amountReceived", this.amountReceived);
+        }
       })
       this.selectedCompany = item;
     } else {
