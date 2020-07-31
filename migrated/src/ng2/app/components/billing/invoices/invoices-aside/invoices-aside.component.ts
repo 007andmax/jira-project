@@ -96,7 +96,6 @@ export class InvoicesAsideComponent implements OnInit {
   }
   clearAmounts() {
     this.invoices.forEach(item => {
-      item.selected = false;
       item.paymentAmount = 0;
     })
     this.amountReceived = 0;
