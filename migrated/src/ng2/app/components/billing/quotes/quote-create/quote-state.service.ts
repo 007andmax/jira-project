@@ -634,6 +634,14 @@ public onInitServices(data) {
     }
   }
 
+  public getProductsQuote(itemsAray) {
+   return itemsAray.filter((item) => !item.hasOwnProperty('rate'));
+  }
+
+  public getServicesQuote(itemsAray) {
+    return itemsAray.filter((item) => item.hasOwnProperty('rate'));
+   }
+ 
   /**
    * set subject
    * @param value subject

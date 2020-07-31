@@ -126,6 +126,10 @@ export class QuoteService {
    * @param recipients - users list
    */
   public resend(item, recipients) {
+   /* this.itemsListArray = this.quoteStateService.getItemArray();
+    this.productsArray = this.getProductItems(this.itemsListArray, 'product');
+    this.servicesArray = this.getProductItems(this.itemsListArray, 'service');*/
+
     this.productsArray = this.getProductItems([...item.products], 'product');
     this.servicesArray = this.getProductItems([...item.services], 'service');
     return this.http.put(`${this.apiUrl}saleQuotes/${item.id}`, {

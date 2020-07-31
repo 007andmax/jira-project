@@ -1,5 +1,5 @@
-<div class="qt-pl-50 qt-pr-50 qt-pt-24 qt-pb-50">
-  <div class="invoice-info qt-fs-13 qt-pl-12 qt-pr-12 qt-pt-8 qt-pb-8 qt-color-dark qt-mb-24 qt-df qt-ai-c">
+<div class="qt-pl-30 qt-pr-30 qt-pt-24 qt-pb-50"  >
+  <div class="invoice-info qt-mr-20 qt-ml-20 qt-fs-13 qt-pl-12 qt-pr-12 qt-pt-8 qt-pb-8 qt-color-dark qt-mb-24 qt-df qt-ai-c">
     <div class="icon__company-info qt-sz-24 qt-ic-c qt-mr-4 qt-mb-0" style="margin-bottom: 0;"></div>
     This is a preview of your invoice. Switch back to Edit if you need to make changes.
   </div>
@@ -57,7 +57,7 @@
       [ngForTrackBy]="trackByIndex">
       <div class="qt-mb-16">
         <div class="invoice-preview__item-header qt-color-dark qt-df qt-pt-8 qt-pb-8 qt-pl-12 qt-pr-12 qt-ai-c">
-          <div class="invoice-preview__item-header-number qt-fs-12 qt-mr-12 qt-lh-133"><span class="qt-fs-11 qt-mr-4 qt-ff-sb qt-lh-127">#Ticket</span>{{ticket.number}}</div>
+          <div class="invoice-preview__item-header-number qt-fs-10 qt-ff-gm qt-mr-16 qt-lh-12">#Ticket {{ticket.number}}</div>
           <div class="invoice-preview__item-header-date qt-fs-12 qt-mr-12 qt-lh-133"><span class="qt-fs-11 qt-mr-4 qt-ff-sb qt-lh-127">Date</span>{{getDateTicket(ticket.closedAt)}}</div>
           <div class="qt-fs-12 qt-lh-133"><span class="qt-fs-11 qt-mr-4 qt-ff-sb qt-lh-127">Subject:</span>{{ticket.subject}}</div>
         </div>
@@ -139,7 +139,7 @@
 
       <div>
         <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-dark qt-ff-gm qt-lh-133">Terms & Conditions</div>
-        <div class="qt-fs-13 qt-lh-154 note" *ngIf="globalNote" [textContent]="globalNote.line1"></div>
+        <div class="qt-fs-13 qt-lh-154 note" *ngIf="invoice.invoiceDataDto.termsAndConditions" [textContent]="invoice.invoiceDataDto.termsAndConditions"></div>
       </div>
     </div>
 

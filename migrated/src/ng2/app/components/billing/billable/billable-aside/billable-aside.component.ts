@@ -110,14 +110,16 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
     return this.saveAndSendBtn.isBlock() && this.saveAndPrintBtn.isBlock() && this.saveAndDownloadBtn.isBlock();
   }
   unlock() {
+    this.isUnlock = true;
     this.billableService.unlock(this.invoice.lockId).subscribe(data => {
       this.billableStateService.setGlobalNote(null);
       this.billableStateService.setRegulatNote(null);
       this.opened = false;
       this.isInit = false;
       this.showPreloader = true;
-      this.isUnlock = true;
       this.clearTaimer();
+    },err => {
+      this.isUnlock = false;
     })
   }
   onShowNotificationAfterCreate() {
@@ -139,6 +141,7 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
       this.unlock();
       this.onShowNotificationAfterCreate();
       this.activeSaveBtns();
+      this.moToBillable();
     })
   }
   saveAndPrint() {
@@ -148,7 +151,17 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
       this.unlock();
       this.onShowNotificationAfterCreate();
       this.activeSaveBtns();
+      this.moToBillable();
     })
+  }
+  moToBillable() {
+    let body = document.querySelector('.left-panel__category-wrap');
+    var link = document.createElement('a');
+    body.appendChild(link);
+    link.href = `#/ng2/billable`;
+    var e = document.createEvent('MouseEvents');
+    e.initEvent('click', true, true);
+    link.dispatchEvent(e);
   }
   saveAndDownload() {
     this.disabledSaveBtns();
@@ -157,6 +170,7 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
       this.unlock();
       this.onShowNotificationAfterCreate();
       this.activeSaveBtns();
+      this.moToBillable();
     })
   }
   private getCompany(id) {

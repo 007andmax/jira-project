@@ -912,6 +912,7 @@ $scope.showErrorValidationCurrentDate = false;
               if (correctService.basedOnDefault) {
                 correctService.id = $scope.editContract.services[i].id.id
               }
+              if ($scope.action === "COPY") correctService.id = $scope.editContract.services[i].id;
               if ($scope.editContract.services[i].billable) {
                 correctService.rate = $scope.editContract.services[i].rate;
                 if ($scope.editContract.services[i].taxes.length) {

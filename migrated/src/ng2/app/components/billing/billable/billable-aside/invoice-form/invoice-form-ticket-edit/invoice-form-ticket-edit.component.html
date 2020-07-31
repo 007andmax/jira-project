@@ -3,7 +3,7 @@
     <div class="invoice-item__header qt-w100 qt-ml-30 qt-df qt-ai-c qt-pt-10 qt-pb-10 qt-h40">
       <div class="invoice-item__number qt-color-white qt-fs-10 qt-pt-4 qt-pb-4 qt-pl-4 qt-pr-4 qt-mr-16" [textContent]="'Tkt# ' + ticket.number"></div>
       <div class="qt-fs-12 qt-mr-16" ><span class="qt-fs-11 qt-ff-sb">Date</span> {{getDate(ticket.closedAt)}}</div>
-      <div class="qt-fs-12"><span class="qt-fs-11 qt-ff-sb">Subject:</span> {{ticket.subject}}</div> <!--<input [(ngModel)]="ticket.subject" (blur)="onChangeSubject()"/>-->
+      <div class="qt-fs-12"><span class="qt-fs-11 qt-ff-sb">Subject:</span> <input [(ngModel)]="ticket.subject" (blur)="onChangeSubject()"/></div> 
     </div>
     <div class="delete-item-container qt-pl-4">
       </div>

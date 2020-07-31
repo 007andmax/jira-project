@@ -22,7 +22,7 @@ import { BillableRealTimeService } from 'src/ng2/app/states/billable/billable-re
   styleUrls: ['./billable-tickets.component.scss']
 })
 export class BillableTicketsComponent implements OnInit, OnDestroy {
-  billableProfile: BillableProfile;
+  billableProfile: BillableProfile = null;
   filter: Array<CompanyFilterTop> = [new CompanyFilterTop('closedAt', ''),
   new CompanyFilterTop('ticketNumber', 'DESC'),
   new CompanyFilterTop('subject', ''),
@@ -48,7 +48,7 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
     if (this.companiesStateService.getCurrentCompany().addresses.length === 0) this.isCurrentCompanyAddressEmpty = false;
     this.billableProfile = this.billableStateService.getBillableProfile();
     if (!this.billableProfile) {
-      window.location.href = '#/ng2/billable';
+      this.moToBillable();
       return;
     }
     this.onFilterTicketNumber();
@@ -76,10 +76,28 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
           }
         }
       }
+      if (data.action == 'BILLABLE_EXPENSE_ADDED') {
+        if (data.data.companyId === this.billableProfile.id) {
+          let ticket = new BillableProfileTicket(data.data);
+          this.billableProfile.tickets.push(ticket);
+          this.billableProfile.updateCountTickets();
+          this.billableProfile.updateTotal();
+          this.onFilterAfterAddTicket();
+          this.cd.detectChanges();
+        }
+      }
     });
     this.sub.add(changeBillable);
   }
-
+  moToBillable() {
+    let body = document.querySelector('.left-panel__category-wrap');
+    var link = document.createElement('a');
+    body.appendChild(link);
+    link.href = `#/ng2/billable`;
+    var e = document.createEvent('MouseEvents');
+    e.initEvent('click', true, true);
+    link.dispatchEvent(e);
+  }
   goToSettings() {
     let body = document.querySelector('.left-panel__category-wrap');
     var link = document.createElement('a');
@@ -128,6 +146,43 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
   }
   public getDate(date) {
     return moment(new Date(date)).format('DD MMM YYYY');
+  }
+  onFilterAfterAddTicket() {
+    let index = this.filter.findIndex(item => item.filter !== '');
+    let sort = this.filter[index].filter;
+    let field = this.filter[index].field;
+    if (field === 'closedAt') {
+      if (sort === 'ASC') {
+        this.onFilterСlosedAt();
+      } else {
+        this.onFilterСlosedAt();
+        this.billableProfile.tickets.reverse();
+      }
+    }
+    if (field === 'ticketNumber') {
+      if (sort === 'ASC') {
+        this.onFilterTicketNumber();
+      } else {
+        this.onFilterTicketNumber();
+        this.billableProfile.tickets.reverse();
+      }
+    }
+    if (field === 'subject') {
+      if (sort === 'ASC') {
+        this.onFilterSubject();
+      } else {
+        this.onFilterSubject();
+        this.billableProfile.tickets.reverse();
+      }
+    }
+    if (field === 'sum') {
+      if (sort === 'ASC') {
+        this.onFilterSum();
+      } else {
+        this.onFilterSum();
+        this.billableProfile.tickets.reverse();
+      }
+    }
   }
   onFilter(field) {
     let index = this.filter.findIndex(item => item.field === field);

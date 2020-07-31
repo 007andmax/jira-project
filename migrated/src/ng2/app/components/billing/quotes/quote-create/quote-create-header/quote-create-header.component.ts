@@ -33,7 +33,7 @@ export class QuoteCreateHeaderComponent {
     private modalService: NgbModal,
     private quoteStateService: QuoteStateService,
     config: NgbModalConfig,
-  ) { 
+  ) {
     config.backdrop = 'static';
     config.keyboard = false;
   }
@@ -84,15 +84,19 @@ export class QuoteCreateHeaderComponent {
    * go to quotes state
    */
   public goToState(state) {
-    this.quoteStateService.goToState(state,{editMode:this.editMode});
+    this.quoteStateService.goToState(state, { editMode: this.editMode });
   }
 
   /**
    * save quote and open send modal
    */
   public saveAndSend() {
-    const modalRef = this.modalService.open(ModalQuoteComponent,  this.quoteStateService.quoteForCreate);
-    modalRef.componentInstance.data = this.quoteStateService.quoteForCreate;
+    const modalRef = this.modalService.open(ModalQuoteComponent, this.quoteStateService.quoteForCreate);
+    let data = JSON.parse(JSON.stringify(this.quoteStateService.quoteForCreate));
+    let itemsArray = this.quoteStateService.getItemArray();
+    data.products = this.quoteStateService.getProductsQuote(itemsArray);
+    data.services = this.quoteStateService.getServicesQuote(itemsArray);
+    modalRef.componentInstance.data = data;
   }
 
 }

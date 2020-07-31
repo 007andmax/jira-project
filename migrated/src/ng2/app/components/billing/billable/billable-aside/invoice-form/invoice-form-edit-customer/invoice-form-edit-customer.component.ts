@@ -51,7 +51,6 @@ export class InvoiceFormEditCustomerComponent implements OnInit, OnDestroy {
     });
   }
   invokeEvent(place: any) {
-
     this.company.addresses[0].locationLat = place.geometry.location.lat();
     this.company.addresses[0].locationLng = place.geometry.location.lng();
     this.company.addresses[0].address = this.addresstext.nativeElement.value;

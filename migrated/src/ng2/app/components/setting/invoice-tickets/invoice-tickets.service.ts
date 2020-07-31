@@ -64,6 +64,13 @@ export class InvoiceTicketsService {
       .pipe(map(data => data));
   }
 
+  public updateTermsAndConditions(termsAndConditions) {
+    return this.http.put(this.apiUrl + `settings/companyProfile/invoiceSettings`, {
+      termsAndConditions: termsAndConditions,
+      type: "INVOICE"
+    });
+  }
+
   /**
    * terms and conditions
    */
