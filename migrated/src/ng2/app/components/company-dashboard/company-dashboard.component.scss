@@ -409,12 +409,15 @@ body {
     /*** Company components Style ***/
 
     .cmp-dboard-row {
-        width: 100%;
+        // width: 100%;
         flex-direction: row;
         align-items: flex-start;
-        justify-content: space-between;
+        // justify-content: space-between;
+        margin: 0 -8px;
+        flex-wrap: wrap;
         .cmp-dboard-col {
             flex-direction: column;
+            margin: 0 8px;
             .cmp-profile-dp {
                 width: 72px;
                 height: 72px;
@@ -442,9 +445,12 @@ body {
                 }
             }
             &.left-profilebar {
-                width: 344px;
+                // width: 344px;
                 padding-bottom: 70px;
                 position: relative;
+                max-width: 30%;
+                width: 30%;
+
                 .profile-cmp-board {
                     width: 100%;
                     flex-direction: column;
@@ -673,16 +679,16 @@ body {
                 }
             }
             &.right-stasticsbar {
-                width: 768px;
+                width: calc(70% - 32px);
+                max-width: calc(70% - 32px);
                 .cmp-dboard-stastics {
                     padding: 24px 16px;
+                    flex-direction: column;
                     ul.list-unstyled {
-                        margin: 0;
                         align-items: center;
                         flex-direction: row;
                         justify-content: space-between;
                         margin: 0 -16px;
-                        min-width: 100%;
                         li {
                             align-items: center;
                             padding: 0 16px;
@@ -708,7 +714,7 @@ body {
                                     line-height: 1.54;
                                     letter-spacing: normal;
                                     color: #9ca5b6;
-                                    white-space: nowrap;
+                                    // white-space: nowrap;
                                 }
                             }
                             &:last-child {
@@ -724,7 +730,7 @@ body {
                     width: 100%;
                 }
                 .cmp-board-information {
-                    width: inherit;
+                    // width: inherit;
                     .cmp-board-info-row {
                         margin: 0 -8px;
                         width: calc(100% + 16px);
