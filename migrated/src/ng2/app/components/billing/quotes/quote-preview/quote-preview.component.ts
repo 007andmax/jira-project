@@ -11,7 +11,7 @@ import { ModalQuoteComponent } from "../../../../services/modal/modal-quote/moda
 import { NgbModal, NgbModalConfig } from "@ng-bootstrap/ng-bootstrap";
 import { FormGroup } from '@angular/forms';
 import { ISubscription } from 'rxjs/Subscription';
- 
+
 import { NotificationStateService } from '../../../shared/notification/services/notification-state.service';
 
 /**
@@ -52,10 +52,10 @@ export class QuotePreviewComponent implements OnInit {
     private dateService: DateService,
     private quoteService: QuoteService,
     private modalService: NgbModal,
-   
-    private notificationStateService:NotificationStateService,
+
+    private notificationStateService: NotificationStateService,
     config: NgbModalConfig,
-  ) { 
+  ) {
     config.backdrop = 'static';
     config.keyboard = false;
   }
@@ -69,7 +69,7 @@ export class QuotePreviewComponent implements OnInit {
     this.getItemsArray();
     this.editable = this.quoteStateService.getState().params.editable;
     this.editMode = this.quoteStateService.getState().params.editMode;
-      
+
     this.handleSendMode();
     if (this.editMode) this.quoteForm = this.quoteStateService.getQuoteForm();
     this.quote.client = this.quoteStateService.getClent();
@@ -81,7 +81,7 @@ export class QuotePreviewComponent implements OnInit {
   public getQuoteInfo() {
     this.quote = this.quoteStateService.getQuote();
     this.quoteForCreate = this.quoteStateService.getQuoteCreate();
-    
+
   }
 
   /**
@@ -89,7 +89,7 @@ export class QuotePreviewComponent implements OnInit {
    */
   public getCurrentCompany() {
     this.companiesService.getTechCompany().subscribe((res) => {
-        this.company = res;
+      this.company = res;
     });
   }
 
@@ -97,7 +97,7 @@ export class QuotePreviewComponent implements OnInit {
    * get client user name
    */
   public getCLientUserName(companyInfo) {
-    return (companyInfo) ?  `${companyInfo.contacts[0].firstName} ${companyInfo.contacts[0].lastName}` : '';
+    return (companyInfo) ? `${companyInfo.contacts[0].firstName} ${companyInfo.contacts[0].lastName}` : '';
   }
 
   /**
@@ -174,10 +174,10 @@ export class QuotePreviewComponent implements OnInit {
     if (isFormReady) {
       if (this.editMode && this.quoteForCreate.id) {
         this.quoteService.editQuote(this.quoteForCreate, this.quoteForCreate.id, false)
-        .pipe(takeUntil(this.unsubscribe))
-        .subscribe((res) => {
-          this.quoteStateService.goToQuote();
-        })
+          .pipe(takeUntil(this.unsubscribe))
+          .subscribe((res) => {
+            this.quoteStateService.goToQuote();
+          })
       } else {
         this.quoteService.createQuote({
           client: this.quote.client,
@@ -197,19 +197,18 @@ export class QuotePreviewComponent implements OnInit {
    * Create quote and approve
    */
   public approveQuote() {
-
     const isFormReady = this.quoteStateService.getType();
     if (isFormReady && this.editMode && this.quoteStateService.getQuoteCreate()['id']) {
       const currentQuote = this.quoteStateService.getQuoteCreate();
       this.quoteService.editQuote(currentQuote, currentQuote['id'], true)
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe((res) => {
-        this.quoteService.approveQuote(res['company'], res['id'])
+        .pipe(takeUntil(this.unsubscribe))
+        .subscribe((res) => {
+          this.quoteService.approveQuote(res['company'], res['id'])
             .pipe(takeUntil(this.unsubscribe))
             .subscribe((res) => {
               this.quoteStateService.goToQuote();
             });
-      })
+        })
     } else if (isFormReady) {
       this.quoteService.createQuote({
         client: this.quote.client,
@@ -227,7 +226,7 @@ export class QuotePreviewComponent implements OnInit {
               this.quoteStateService.goToQuote();
             });
         });
-    }  else {
+    } else {
       this.quoteStateService.emitValidation();
     }
   }
@@ -235,17 +234,14 @@ export class QuotePreviewComponent implements OnInit {
   onlySend() {
     const modalRef = this.modalService.open(ModalQuoteComponent, null);
     let data = JSON.parse(JSON.stringify(this.quoteForCreate));
-    let itemsArray =  data.itemsArray;
-    console.log("itemsArray", itemsArray);
+    let itemsArray = data.itemsArray;
     data.products = this.quoteStateService.getProductsQuote(itemsArray);
     data.services = this.quoteStateService.getServicesQuote(itemsArray);
     modalRef.componentInstance.data = data;
     modalRef.componentInstance.onlySendMode = true;
   }
-  onlyDownloadPdf () {
-    
-    this.quoteService.downloadPdf(this.quoteForCreate.id).subscribe((res) => this.quoteService.downLoadFile(res, this.quoteForCreate.id,this.quote.client.name,this.quoteForCreate.quoteNumber));
-    
+  onlyDownloadPdf() {
+    this.quoteService.downloadPdf(this.quoteForCreate.id).subscribe((res) => this.quoteService.downLoadFile(res, this.quoteForCreate.id, this.quote.client.name, this.quoteForCreate.quoteNumber));
   }
 
   /**
@@ -253,19 +249,19 @@ export class QuotePreviewComponent implements OnInit {
    */
   public downloadPdf() {
     const isFormReady = this.quoteStateService.getType();
-     
+
     if (isFormReady && this.editMode && this.quoteStateService.getQuoteCreate().id) {
       const currentQuote = this.quoteStateService.getQuoteCreate();
       this.quoteService.editQuote(currentQuote, currentQuote['id'], true)
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe((res) => {
-        const id = res['id'];
-        this.quoteService.downloadPdf(res['id']).subscribe((res) => {
-          this.quoteService.downLoadFile(res, id,this.quote.client.name,this.quoteForCreate.quoteNumber)
-          this.notificationStateService.oninitShowNotification('Quote has been saved');
-          this.quoteService.backToQuoteList();
+        .pipe(takeUntil(this.unsubscribe))
+        .subscribe((res) => {
+          const id = res['id'];
+          this.quoteService.downloadPdf(res['id']).subscribe((res) => {
+            this.quoteService.downLoadFile(res, id, this.quote.client.name, this.quoteForCreate.quoteNumber)
+            this.notificationStateService.oninitShowNotification('Quote has been saved');
+            this.quoteService.backToQuoteList();
+          })
         })
-      })
     } else if (isFormReady) {
       this.quoteService.createQuote({
         client: this.quote.client,
@@ -279,12 +275,12 @@ export class QuotePreviewComponent implements OnInit {
         .subscribe((res) => {
           const id = res['id'];
           this.quoteService.downloadPdf(res['id']).subscribe((res) => {
-            this.quoteService.downLoadFile(res, id,this.quote.client.name,this.quoteForCreate.quoteNumber);
+            this.quoteService.downLoadFile(res, id, this.quote.client.name, this.quoteForCreate.quoteNumber);
             this.notificationStateService.oninitShowNotification('Quote has been saved');
             this.quoteService.backToQuoteList();
           });
         });
-    }  else {
+    } else {
       this.quoteStateService.emitValidation();
     }
   }
@@ -295,8 +291,7 @@ export class QuotePreviewComponent implements OnInit {
   public saveAndSend() {
     const modalRef = this.modalService.open(ModalQuoteComponent, this.quoteForCreate);
     let data = JSON.parse(JSON.stringify(this.quoteForCreate));
-    let itemsArray =  data.itemsArray;
-    console.log("itemsArray", itemsArray);
+    let itemsArray = data.itemsArray;
     data.products = this.quoteStateService.getProductsQuote(itemsArray);
     data.services = this.quoteStateService.getServicesQuote(itemsArray);
     modalRef.componentInstance.data = data;
@@ -329,7 +324,7 @@ export class QuotePreviewComponent implements OnInit {
    * @param firstName first name
    * @param lastName last name
    */
-  public getUserWhoSend(firstName,lastName) {
+  public getUserWhoSend(firstName, lastName) {
     return `${firstName} ${lastName}`;
   }
   /**
@@ -353,12 +348,12 @@ export class QuotePreviewComponent implements OnInit {
     }
   }
 
-   /**
-   * Get format date
-   * @param date date
-   * @param milisecond milisecond
-   */
-  public getFormatDateWithTime (date,milisecond) {
+  /**
+  * Get format date
+  * @param date date
+  * @param milisecond milisecond
+  */
+  public getFormatDateWithTime(date, milisecond) {
     if (date) {
       let full_date = new Date(milisecond);
       let time = full_date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })

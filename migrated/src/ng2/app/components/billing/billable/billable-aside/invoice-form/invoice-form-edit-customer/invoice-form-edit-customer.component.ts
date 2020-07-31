@@ -28,7 +28,6 @@ export class InvoiceFormEditCustomerComponent implements OnInit, OnDestroy {
     let getCompanyFromEdit = this.billableStateService.getOnEditCustomer().subscribe((data: CompanyProfile) => {
       this.company = new CompanyProfile();
       this.company.onEditMode(JSON.parse(JSON.stringify(data)));
-      //this.company.
       this.cd.detectChanges();
     })
     this.sub.add(getCompanyFromEdit);
@@ -53,7 +52,6 @@ export class InvoiceFormEditCustomerComponent implements OnInit, OnDestroy {
     });
   }
   invokeEvent(place: any) {
-
     this.company.addresses[0].locationLat = place.geometry.location.lat();
     this.company.addresses[0].locationLng = place.geometry.location.lng();
     this.company.addresses[0].address = this.addresstext.nativeElement.value;
@@ -85,11 +83,8 @@ export class InvoiceFormEditCustomerComponent implements OnInit, OnDestroy {
     }
   }
   public onUpdate() {
-
     if (!this.validate.isValidate(this.company)) return;
-
     let updateCompany = this.companiesService.updateCompany(this.company).subscribe(data => {
-      console.log("data",data);
       this.onUpdateCompany.emit(null);
       this.close();
       this.cd.detectChanges();
@@ -97,16 +92,10 @@ export class InvoiceFormEditCustomerComponent implements OnInit, OnDestroy {
     this.sub.add(updateCompany);
   }
   close() {
-
     this.locationIsinit = false;
-
     this.company = new CompanyProfile();
-    //  this.company.fullVersion();
-
-    // this.listPersons.forEach(item => item.selected = false);
     this.validate = new CompanyInvoiceValdiate();
     this.dropDown.close();
-
   }
   public onChangeLastName() {
     this.validate.checkValidLastName(this.company.contacts[0].lastName);

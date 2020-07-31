@@ -82,7 +82,6 @@ export class BillableTicketsComponent implements OnInit, OnDestroy {
           this.billableProfile.tickets.push(ticket);
           this.billableProfile.updateCountTickets();
           this.billableProfile.updateTotal();
-          console.log("this.billableProfile.tickets", this.billableProfile.tickets);
           this.onFilterAfterAddTicket();
           this.cd.detectChanges();
         }

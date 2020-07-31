@@ -73,7 +73,6 @@ export class BillableComponent implements OnInit, OnDestroy {
             itemList.tickets.forEach(ticket => {
               if (ticket.id === item) ticket.lockedBy = null;
             });
-
           })
         });
       }
@@ -90,7 +89,6 @@ export class BillableComponent implements OnInit, OnDestroy {
     this.getCounters();
   }
   private addTicket(data, list) {
-    console.log("data",data);
     let clientCompanyId = data.data.companyId;
     let findIndex = list.findIndex(item => item.id === clientCompanyId);
     let company = this.companiesStateService.getCompanies().find(item => item.id === clientCompanyId);
@@ -98,12 +96,10 @@ export class BillableComponent implements OnInit, OnDestroy {
       let tickets = [new BillableProfileTicket(data.data)];
       let salesPerson = this.usersStateService.getAllUsers().find(item => item.id === company.techLeadId);
       list.push(new BillableProfile(company.id, tickets, company.name, this.ticketsListService.getUserName(salesPerson), company.isDefault));
-      console.log("data 1",list);
     } else {
       list[findIndex].addTicket(data.data);
       list[findIndex].updateCountTickets();
       list[findIndex].updateTotal();
-      console.log("data 2");
     }
   }
   private removeTicket(data, list) {

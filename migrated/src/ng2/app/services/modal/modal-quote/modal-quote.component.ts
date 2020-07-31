@@ -11,14 +11,14 @@ import { QuoteStateService } from "../../../components/billing/quotes/quote-crea
 import { QuoteService } from "../../quote/quote.service";
 import { takeUntil } from "rxjs/operators";
 import { Subject, Subscription } from "rxjs";
- 
+
 import { ConfirmStateService } from 'src/ng2/app/components/shared/confirm/services/confirm-state.service';
 import { ConfirmComponent } from 'src/ng2/app/components/shared/confirm/confirm.component';
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { NotificationStateService } from 'src/ng2/app/components/shared/notification/services/notification-state.service';
 import { SAVE_AND_SEND } from 'src/ng2/app/const/confirm';
- 
- 
+
+
 
 /**
  * Modal quote component
@@ -51,7 +51,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
   initialized: boolean = false;
   showConfirm: boolean = false;
   sub: Subscription = new Subscription();
-  isChange:boolean = false;
+  isChange: boolean = false;
 
 
   private unsubscribe: Subject<void> = new Subject();
@@ -77,23 +77,20 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
     config: NgbModalConfig,
-    private usersStateService:UsersStateService
+    private usersStateService: UsersStateService
   ) {
     config.backdrop = 'static';
     config.keyboard = false;
-    
+
   }
 
   /**
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-   
     (this.data) && this.initResendMode();
-    console.log("data", this.data);
     this.getAllUsers();
     this.userInput.nativeElement.onblur = (e) => {
-      
       if (this.matAutocomplete.isOpen) {
         let modal = this.matAutocomplete.panel.nativeElement;
         modal.parentNode.style.width = 'max-content';
@@ -102,8 +99,6 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) this.close();
       this.showConfirm = false;
-    
-
     })
     this.sub.add(getConfirm);
   }
@@ -129,7 +124,7 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
       this.showConfirm = true;
       this.confirmStateService.setConfirmAction(SAVE_AND_SEND);
       const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal' });
-      
+
       modalRef.componentInstance.message = 'Do you want to close this window? All entered information will be lost.';
     }
   }
@@ -161,7 +156,6 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
       this.selectedUsers.splice(index, 1);
       this.usersEmails.splice(index, 1);
       this.quoteStateService.setUsersEmail(this.usersEmails);
-      // this.isResend && (this.data.recipients = this.usersEmails);
     }
   }
 
@@ -185,21 +179,21 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
     this.showErrorClient = false;
     const company = (this.data && this.data.company && this.data.company.id) || this.quoteStateService.getClient();
     if (company || company.id) {
-     let userList =  this.usersStateService.getAllUsers();
-        this.initialized = true;
-        const techUser = userList.filter((item) => item.accountType === USER.TYPE.TECH && !item.deletedAt);
-        let clientUser = [];
-        if (typeof company === 'string' || company instanceof String) {
-          clientUser = userList.filter((item) => {
-            return item.accountType === USER.TYPE.CLIENT && item.company.id == company && !item.deletedAt
-          });
-        } else {
-          clientUser = userList.filter((item) => {
-            return item.accountType === USER.TYPE.CLIENT && item.company.id == company.id && !item.deletedAt
-          });
-        }
-        this.users = [...techUser, ...clientUser];
-   //   })
+      let userList = this.usersStateService.getAllUsers();
+      this.initialized = true;
+      const techUser = userList.filter((item) => item.accountType === USER.TYPE.TECH && !item.deletedAt);
+      let clientUser = [];
+      if (typeof company === 'string' || company instanceof String) {
+        clientUser = userList.filter((item) => {
+          return item.accountType === USER.TYPE.CLIENT && item.company.id == company && !item.deletedAt
+        });
+      } else {
+        clientUser = userList.filter((item) => {
+          return item.accountType === USER.TYPE.CLIENT && item.company.id == company.id && !item.deletedAt
+        });
+      }
+      this.users = [...techUser, ...clientUser];
+      //   })
     } else {
       this.showErrorClient = true;
     }
@@ -211,8 +205,6 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
    */
   public setSubject(value) {
     this.subject = value;
-    // this.quoteStateService.setSubject(value);
-    // this.isResend && (this.data.subject = value);
   }
 
   /**
@@ -221,8 +213,6 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
    */
   public setMessage(value) {
     this.message = value;
-    //  this.quoteStateService.setMessage(value);
-    // this.isResend && (this.data.message = value);
   }
 
   private onInitSubjectAndMessage() {
@@ -230,10 +220,10 @@ export class ModalQuoteComponent implements OnInit, OnDestroy {
     this.quoteStateService.setMessage(this.message);
   }
 
-public onCheckForClose() {
-  this.onCheckChange();
-  if (!this.isChange) this.close();
-}
+  public onCheckForClose() {
+    this.onCheckChange();
+    if (!this.isChange) this.close();
+  }
 
   /**
    * Save quote
@@ -251,7 +241,6 @@ public onCheckForClose() {
         } else {
           this.data.message = this.message;
           this.data.subject = this.subject;
-
           this.quoteService.resend(this.data, this.selectedUsers)
             .pipe(takeUntil(this.unsubscribe))
             .subscribe((res) => {
@@ -305,9 +294,7 @@ public onCheckForClose() {
   }
 
   public keyup(e) {
-
     if (e.keyCode === 13) {
-
       if (this.userInput.nativeElement.value.length > 0) {
         this.selectedUsers.push(this.userInput.nativeElement.value);
         this.usersEmails.push(this.userInput.nativeElement.value);

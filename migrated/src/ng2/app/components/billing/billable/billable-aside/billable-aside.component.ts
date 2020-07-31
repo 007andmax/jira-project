@@ -110,7 +110,6 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
     return this.saveAndSendBtn.isBlock() && this.saveAndPrintBtn.isBlock() && this.saveAndDownloadBtn.isBlock();
   }
   unlock() {
-    console.log("unlock");
     this.isUnlock = true;
     this.billableService.unlock(this.invoice.lockId).subscribe(data => {
       this.billableStateService.setGlobalNote(null);
@@ -234,7 +233,6 @@ export class BillableAsideComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
-    console.log("ngOnDestroy");
     if (!this.isUnlock && this.invoice) this.unlock();
   }
 }

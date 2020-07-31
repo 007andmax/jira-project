@@ -94,7 +94,6 @@ export class QuoteCreateHeaderComponent {
     const modalRef = this.modalService.open(ModalQuoteComponent, this.quoteStateService.quoteForCreate);
     let data = JSON.parse(JSON.stringify(this.quoteStateService.quoteForCreate));
     let itemsArray = this.quoteStateService.getItemArray();
-    console.log("itemsArray", itemsArray);
     data.products = this.quoteStateService.getProductsQuote(itemsArray);
     data.services = this.quoteStateService.getServicesQuote(itemsArray);
     modalRef.componentInstance.data = data;
