@@ -22,7 +22,7 @@ export class InvoiceFormTicketEditComponent implements OnInit {
     return moment(new Date(date)).format('DD/MM/YYYY');
   }
   onChangeSubject() {
-    this.ticketsService.changeSubjectNoteTicket(this.ticket.id, this.ticket.subject, "").subscribe(data => {
+    this.ticketsService.changeSubjectNoteTicket(this.ticket.id, this.ticket.subject, this.ticket.note).subscribe(data => {
       this.onUpdateSubject.emit(this.ticket.subject);
     })
   }

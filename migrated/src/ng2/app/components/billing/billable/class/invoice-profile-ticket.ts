@@ -11,6 +11,7 @@ export class InvoiceProfileTicket {
     serviceExpenses: Array<BillableProfileTicketServiceExpense>;
     servicesSum: number;
     subject: string;
+    note: string;
     taxSum: number;
     totalSum: number;
    
