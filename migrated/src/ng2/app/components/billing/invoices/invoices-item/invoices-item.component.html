@@ -1,7 +1,7 @@
 <tr [ngClass]="{'--selected': invoice.selected}">
   <td class="invoice-table__check">
     <div class="d-f">
-      <label class="qt-checkbox" [ngClass]="{'--disabled':invoice.blockSelected}" [attr.for]="'invoice-' + invoice.id">
+      <label class="qt-checkbox" [ngClass]="{'--disabled':invoice.blockSelected, 'pointer':!invoice.blockSelected}" [attr.for]="'invoice-' + invoice.id">
         <input [attr.id]="'invoice-' + invoice.id"  [(ngModel)]="invoice.selected"  type="checkbox" (change)="onChangeSelect()" [disabled]="invoice.blockSelected">
         <span ></span>
       </label>
@@ -18,7 +18,7 @@
     </td>
   <td class="invoce-table__read-on" [textContent]="getDate(invoice.readedAt)"></td>
   <td class="invoce-table__amount" [textContent]="invoice.sum | currency"></td>
-  <td class="invoce-table__balance-due" [textContent]="invoice.paidSum | currency"></td>
+  <td class="invoce-table__balance-due" [textContent]="((invoice.totalSum || invoice.sum) - invoice.paidSum) | currency"></td>
   <td class="invoce-table__menu" ngbDropdown>
     <div class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"  id="dropdownBasic1" ngbDropdownToggle></div>
     <ul class="qt-dropdown-menu invoice-items-dropdown"  ngbDropdownMenu aria-labelledby="dropdownBasic1">

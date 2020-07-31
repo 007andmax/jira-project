@@ -175,8 +175,8 @@
                     uib-tooltip="Invoice Preview"
                     tooltip-append-to-body="true">{{ payment.partialPaidInvoice }}</span>
             </div>
-            <div *ng-if="payment.invoiceNumbers && payment.invoiceNumbers.length > 0"
-              ng-repeat="invoiceNumber in payment.invoiceNumbers" ng-click="showInvoice(invoiceNumber)"><span
+            <div *ng-if="payment.partialPaidInvoices && payment.partialPaidInvoices.length > 0"
+              ng-repeat="invoiceNumber in payment.partialPaidInvoices" ng-click="showInvoice(invoiceNumber)"><span
               tooltip-placement="top" uib-tooltip="Invoice Preview"
               tooltip-append-to-body="true">{{ invoiceNumber }}</span></div>
           </div>

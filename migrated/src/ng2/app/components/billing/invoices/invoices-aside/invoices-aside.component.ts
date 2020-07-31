@@ -150,9 +150,25 @@ export class InvoicesAsideComponent implements OnInit {
   }
   onToggleAllInvoices(event) {
     console.log(event.target.checked);
+    let sumPayment = 0;
     this.invoices.forEach(item => {
       item.selected = event.target.checked;
+      if (item.selected) sumPayment += item.paymentAmount;
+      if (item.paymentAmount === 0) {
+        if (sumPayment < this.amountReceived) {
+          let paymentAmount = (this.amountReceived - sumPayment) - (item.sum - item.paidSum);
+          item.paymentAmount = (paymentAmount > 0) ? (item.sum - item.paidSum) : (this.amountReceived - sumPayment);
+        }
+        if (!this.isChangeAmountReceived)  item.paymentAmount = (item.sum - item.paidSum);
+      }
     })
+    
+    console.log("this.isChangeAmountReceived", this.isChangeAmountReceived);
+    if (!this.isChangeAmountReceived)  this.amountReceived = this.invoices.reduce((a, b) => {
+      if (b.selected) return a + (b.sum - b.paidSum);
+      return a + 0;
+    }, 0);
+    if (!this.validate.getAmountReceived()) this.validate.checkAmountReceived(this.amountReceived, this.invoices);
   }
   onSelectCompany(item) {
 

@@ -36,7 +36,9 @@
         };
 
         $scope.companies = CompaniesService.getClientCompanies();
-
+$scope.getPartialPaidInvoice = function (partialPaidInvoice) {
+return partialPaidInvoice.join(",");
+}
         $scope.getPaymentsList = function (data) {
           $scope.stopScroll = true;
           if (!$scope.stopReqeust) {

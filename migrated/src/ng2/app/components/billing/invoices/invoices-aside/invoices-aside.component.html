@@ -87,7 +87,7 @@
       <thead>
         <tr>
           <th class="unpaid-table__check" >
-            <label class="qt-checkbox" for="invoice-preview-all">
+            <label class="qt-checkbox pointer" for="invoice-preview-all">
               <input id="invoice-preview-all"  [(ngModel)]="selectAllInvoice"  type="checkbox" (change)="onToggleAllInvoices($event)">
               <span></span>
             </label>
@@ -136,7 +136,7 @@
             <textarea class="summary-info__textarea qt-textarea" [(ngModel)]="payment.note" placeholder="Partial Payment Recived from Aspen accounting office" appTextArea    maxlength="250"   cols="30" rows="1"></textarea>
           </div>
           <div class="qt-df qt-ai-c">
-            <label class="qt-checkbox receive-full-amount-check qt-mb-0" for="email-payment">
+            <label class="qt-checkbox receive-full-amount-check qt-mb-0 pointer" for="email-payment">
               <input id="email-payment" type="checkbox" [(ngModel)]="payment.isSendNotification" >
               <span></span>
             </label>
