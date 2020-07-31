@@ -79,58 +79,31 @@ export class AppService {
     //todo fix bug with multiple files download
     window.open(url, '_blank');
     return true;
-
-
-
   }
   public download(url, fileName) {
     let link = document.createElement('a');
     link.target = "_blank";
     link.href = url;
-
-
-    //Set HTML5 download attribute. This will prevent file from opening if supported.
     if (!fileName) {
       fileName = url.substring(url.lastIndexOf('/') + 1, url.length);
     }
-
-    // alert(url);
-    // alert(fileName);
     link.download = fileName;
-
-    // alert(link.download)
-
-    console.log("link", link);
-    //Dispatching click event.
-
     let e = document.createEvent('MouseEvents');
     e.initEvent('click', true, true);
     link.dispatchEvent(e);
-
-
   }
   private redownload(url, fileName, open = false) {
     let link = document.createElement('a');
     link.target = "_blank";
     link.href = url;
-
     if (link.download !== undefined) {
-      //Set HTML5 download attribute. This will prevent file from opening if supported.
       if (!fileName) {
         fileName = url.substring(url.lastIndexOf('/') + 1, url.length);
       }
-
-      // alert(url);
-      // alert(fileName);
       if (!open) {
         link.download = fileName;
-
       }
-
-      // alert(link.download)
     }
-    console.log("link", link);
-    //Dispatching click event.
     if (document.createEvent) {
       let e = document.createEvent('MouseEvents');
       e.initEvent('click', true, true);

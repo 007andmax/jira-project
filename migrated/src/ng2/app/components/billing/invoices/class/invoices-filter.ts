@@ -37,11 +37,9 @@ export class InvoicesFilter {
         this.companyName = data;
     }
     public setStartDate (data) {
-        console.log("data",data);
         this.startDate = data;
     }
     public setEndDate (data) {
-        console.log("data",data);
         this.endDate = data;
     }
     public setInvoiceNumber(data) {

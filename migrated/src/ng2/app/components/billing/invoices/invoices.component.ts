@@ -76,7 +76,6 @@ export class InvoicesComponent implements OnInit, OnDestroy {
     this.sub.add(getConfirm);
 
     let changeInvoice = this.invoiceRealTimeService.changeInvoice.subscribe(data => {
-      console.log("data", data);
       if (data.action === 'INVOICE_SAVED') {
         let index = this.invoices.findIndex(item => item.id === data.data.id);
         let invoice = new Invoice(data.data);
@@ -85,7 +84,6 @@ export class InvoicesComponent implements OnInit, OnDestroy {
         } else {
           this.invoices.unshift(invoice);
         }
-
       }
       if (data.action === 'INVOICE_STATUS' || data.action === 'INVOICE_ROLLBACK') {
         let index = this.invoices.findIndex(item => item.id === data.data.id);
@@ -183,11 +181,8 @@ export class InvoicesComponent implements OnInit, OnDestroy {
       return;
     }
     this.invoicesFilter.setOffset(this.page_number * this.offset);
-
-
     if (this.page_number > 0) this.showPendingPreloader = true;
     this.invoicesService.getInvoices(this.invoicesFilter.getFIlter()).subscribe((data: any) => {
-      console.log("data", data);
       this.invoices = [...this.invoices, ...data];
       if (this.selectedCompanyId) this.invoices.forEach(item => {
         if (item.companyId !== this.selectedCompanyId) item.blockSelected = true;
@@ -199,10 +194,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
       this.showPreloader = false;
       this.showPendingPreloader = false;
       this.cd.detectChanges();
-
     })
-
-
   }
   public setDefaultScoll() {
     this.page_number = 0;

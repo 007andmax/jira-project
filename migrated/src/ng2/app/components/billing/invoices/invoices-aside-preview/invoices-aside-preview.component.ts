@@ -21,7 +21,7 @@ export class InvoicesAsidePreviewComponent implements OnInit {
   @Output() onClose = new EventEmitter<any>();
   currentCompany: any;
   showPreloader: boolean = true;
-  toggleStatus:boolean = true;
+  toggleStatus: boolean = true;
   constructor(private invoicesService: InvoicesService,
     private appService: AppService,
     private modalService: NgbModal,
@@ -37,20 +37,18 @@ export class InvoicesAsidePreviewComponent implements OnInit {
     this.showPreloader = true;
     this.invoicesService.getInvoice(this.invoice.id).subscribe(data => {
       this.invoiceProfile = new InvoiceProfile(data);
-      console.log("invoiceProfile",this.invoiceProfile);
       this.showPreloader = false;
     })
   }
   resendInvoices() {
     this.invoicesService.resendInvoices([this.invoice.id]).subscribe(data => {
-
     })
   }
   getStatusDate(dateInvoice) {
     let date = new Date(dateInvoice);
     let typeTime = (date.getHours() > 12) ? "PM" : "AM",
-    hours = (date.getHours() > 12) ? date.getHours() - 12 : date.getHours(),
-    minutes = (date.getMinutes() > 10) ? date.getMinutes() : "0" + date.getMinutes();
+      hours = (date.getHours() > 12) ? date.getHours() - 12 : date.getHours(),
+      minutes = (date.getMinutes() > 10) ? date.getMinutes() : "0" + date.getMinutes();
     return `${this.getDateTicket(this.invoice.date)} ${(hours > 10) ? hours : "0" + hours}:${minutes} ${typeTime}`;
   }
   deleteInvoice() {
@@ -64,7 +62,7 @@ export class InvoicesAsidePreviewComponent implements OnInit {
     this.appService.download(`/invoice/show/${this.invoice.id}/pdf`, `${company.name}-${this.invoice.number}.pdf`);
   }
   print() {
-    var wnd = window.open('/invoice/show/' +this.invoice.id + '/pdf');
+    var wnd = window.open('/invoice/show/' + this.invoice.id + '/pdf');
     wnd.print();
   }
 

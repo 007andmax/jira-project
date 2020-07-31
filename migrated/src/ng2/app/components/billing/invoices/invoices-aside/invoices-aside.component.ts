@@ -44,26 +44,21 @@ export class InvoicesAsideComponent implements OnInit {
   ngOnInit() {
     if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
     let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
-
       this.getClientsList(data);
     })
     this.sub.add(getOnCompanies);
-    console.log("selectedInvoices", this.selectedInvoices);
     if (this.selectedInvoices.length > 0) {
       this.selectedCompany = this.reqCompanies.find(item => item.id === this.selectedInvoices[0].companyId);
       this.onSelectCompany(this.selectedCompany);
     }
     let today = new Date();
     this.payment.setDate(today.getDate(), today.getMonth() + 1, today.getFullYear(), this.companiesState.getCurrentCompany().addresses[0].timeZone.timeOffset);
-    console.log("selectedCompany", this.selectedCompany);
   }
   onSelectPaymentModes(data) {
-    console.log("data", data);
     this.selectedPaymentMode = data;
     this.payment.setPaymentMethod(data.value);
   }
   onChangeAmountReceived(event) {
-    console.log("event", event.target.value);
     this.amountReceived = Number(event.target.value);
     this.isChangeAmountReceived = (this.amountReceived > 0);
     if (!this.validate.getAmountReceived()) this.validate.checkAmountReceived(this.amountReceived, this.invoices);
@@ -82,17 +77,14 @@ export class InvoicesAsideComponent implements OnInit {
       let paymentAmount = (this.amountReceived - sumPayment) - (this.invoices[index].sum - this.invoices[index].paidSum);
       this.invoices[index].paymentAmount = (paymentAmount > 0) ? (this.invoices[index].sum - this.invoices[index].paidSum) : (this.amountReceived - sumPayment);
     }
-    console.log("this.isChangeAmountReceived", this.isChangeAmountReceived);
     if (!this.isChangeAmountReceived) {
       this.invoices[index].paymentAmount = (this.invoices[index].sum - this.invoices[index].paidSum);
       this.amountReceived = this.invoices.reduce((a, b) => {
         if (b.selected) return a + (b.sum - b.paidSum);
         return a + 0;
       }, 0);;
-      console.log("this.amountReceived", this.amountReceived);
     }
     if (!this.validate.getAmountReceived()) this.validate.checkAmountReceived(this.amountReceived, this.invoices);
-    console.log("selectAllInvoice", this.selectAllInvoice);
   }
   clearAmounts() {
     this.invoices.forEach(item => {
@@ -115,11 +107,8 @@ export class InvoicesAsideComponent implements OnInit {
     })
     this.invoicesService.createPayment(this.payment).subscribe(data => {
       this.notificationStateService.oninitShowNotification("The payment has been received");
-
       this.close();
-
     })
-    console.log("this.payment", this.payment);
   }
   public getUnUsedAmountReceived() {
     let totalPayment = this.getTotalPayment();
@@ -148,7 +137,6 @@ export class InvoicesAsideComponent implements OnInit {
     return subTotal;
   }
   onToggleAllInvoices(event) {
-    console.log(event.target.checked);
     let sumPayment = 0;
     this.invoices.forEach(item => {
       item.selected = event.target.checked;
@@ -158,37 +146,33 @@ export class InvoicesAsideComponent implements OnInit {
           let paymentAmount = (this.amountReceived - sumPayment) - (item.sum - item.paidSum);
           item.paymentAmount = (paymentAmount > 0) ? (item.sum - item.paidSum) : (this.amountReceived - sumPayment);
         }
-        if (!this.isChangeAmountReceived)  item.paymentAmount = (item.sum - item.paidSum);
+        if (!this.isChangeAmountReceived) item.paymentAmount = (item.sum - item.paidSum);
       }
     })
-    
-    console.log("this.isChangeAmountReceived", this.isChangeAmountReceived);
-    if (!this.isChangeAmountReceived)  this.amountReceived = this.invoices.reduce((a, b) => {
+    if (!this.isChangeAmountReceived) this.amountReceived = this.invoices.reduce((a, b) => {
       if (b.selected) return a + (b.sum - b.paidSum);
       return a + 0;
     }, 0);
     if (!this.validate.getAmountReceived()) this.validate.checkAmountReceived(this.amountReceived, this.invoices);
   }
   onSelectCompany(item) {
-
     if (item) {
       this.invoicesFilter.setLimit(10000);
       this.invoicesFilter.setStatus("UNPAID");
       this.invoicesFilter.setCompany(item.name);
       this.invoicesService.getInvoices(this.invoicesFilter.getFIlter()).subscribe((data: Array<Invoice>) => {
         this.invoices = data;
-     
+
         this.invoices.forEach(item => {
           let find = this.selectedInvoices.find(selectInvoice => selectInvoice.id === item.id);
           if (find) item.selected = true;
-          if (item.selected && !this.isChangeAmountReceived)  item.paymentAmount = (item.sum - item.paidSum);
+          if (item.selected && !this.isChangeAmountReceived) item.paymentAmount = (item.sum - item.paidSum);
         })
         if (!this.isChangeAmountReceived) {
           this.amountReceived = this.invoices.reduce((a, b) => {
             if (b.selected) return a + (b.sum - b.paidSum);
             return a + 0;
-          }, 0);;
-          console.log("this.amountReceived", this.amountReceived);
+          }, 0);
         }
       })
       this.selectedCompany = item;
@@ -202,7 +186,6 @@ export class InvoicesAsideComponent implements OnInit {
   }
   onChangeDate(data) {
     this.payment.setDate(data.day, data.month, data.year, this.companiesState.getCurrentCompany().addresses[0].timeZone.timeOffset);
-
   }
   private getClientsList(data) {
     this.reqCompanies = data;

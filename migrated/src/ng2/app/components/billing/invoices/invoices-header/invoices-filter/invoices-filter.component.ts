@@ -27,13 +27,11 @@ export class InvoicesFilterComponent implements OnInit {
   ngOnInit() {
     if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
     let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
-
       this.getClientsList(data);
     })
     this.sub.add(getOnCompanies);
   }
   onSelectStatus(status) {
-    console.log("status", status);
     this.invoicesFilter.setStatus((status) ? status.value : null);
     this.invoiceStateService.onInitFilter(this.invoicesFilter);
     this.onChangeCounterFilter();
@@ -43,11 +41,9 @@ export class InvoicesFilterComponent implements OnInit {
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
   public onClearAll() {
-
     this.companyDp.clearWithOutChanges();
     this.datesDp.clearWithOutChanges();
     this.statusDp.clearWithOutChanges();
-
     this.invoicesFilter.setStatus(null);
     this.invoicesFilter.setCompany(null);
     this.invoicesFilter.setStartDate(null);
@@ -68,14 +64,11 @@ export class InvoicesFilterComponent implements OnInit {
     this.onChangeCounterFilter();
   }
   public onSetNumberInvoice(event) {
-    console.log("event", event.target.value);
     this.invoicesFilter.setInvoiceNumber((event.target.value.length > 0) ? event.target.value : null);
     this.invoiceStateService.onInitFilter(this.invoicesFilter);
-
     this.onChangeCounterFilter();
   }
   public filterByDate(value) {
-    console.log("value", value);
     if (value.start !== '' && value.end !== '') {
       this.invoicesFilter.setStartDate(new Date(value.start).getTime());
       this.invoicesFilter.setEndDate(new Date(value.end).getTime());
@@ -84,7 +77,6 @@ export class InvoicesFilterComponent implements OnInit {
       this.invoicesFilter.setEndDate(null);
     }
     this.invoiceStateService.onInitFilter(this.invoicesFilter);
-
     this.onChangeCounterFilter();
   }
   public onChangeCounterFilter() {
