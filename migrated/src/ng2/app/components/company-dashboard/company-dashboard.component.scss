@@ -733,7 +733,7 @@ body {
                             flex-direction: column;
                             padding: 0 8px;
                         }
-                        .cmp-board-invoice {
+                        .cmn-box {
                             width: 100%;
                             flex-direction: column;
                             h2 {
@@ -744,6 +744,149 @@ body {
                                 letter-spacing: normal;
                                 margin-bottom: 10px;
                                 width: 100%;
+                            }
+                            &.cmp-board-contract {
+                                padding-top: 16px;
+                                .progress-contract {
+                                    width: 100%;
+                                    flex-direction: column;
+                                    .progress-count {
+                                        width: 100%;
+                                        align-items: flex-end;
+                                        line-height: 1;
+                                        .h1 {
+                                            font-size: 26px;
+                                            text-transform: none;
+                                            line-height: 1;
+                                        }
+                                        .st-hrs {
+                                            font-size: 12px;
+                                            line-height: 1.33;
+                                            letter-spacing: normal;
+                                            color: #9ca5b6;
+                                            margin-left: 5px;
+                                        }
+                                    }
+                                    .cmp-board-progresbbar {
+                                        width: 100%;
+                                        flex-direction: row;
+                                        align-items: center;
+                                        overflow: hidden;
+                                        @include border-radius(5.5px);
+                                        background-color: #efefef;
+                                        height: 10px;
+                                        margin: 16px 0 22px;
+                                        span {
+                                            font-size: 0;
+                                            width: auto;
+                                            height: 100%;
+                                        }
+                                    }
+
+                                    ul {
+                                        flex-direction: column;
+                                        width: 100%;
+                                        margin: 0;
+                                        li {
+                                            width: 100%;
+                                            padding: 12px 30px ;
+                                            border-bottom: 1px solid #edf0f2;
+                                            font-size: 12px;
+                                            font-weight: normal;
+                                            line-height: 1.33;
+                                            letter-spacing: normal;
+                                            color: #4f5f79;
+                                            position: relative;
+                                            &::before {
+                                                position: absolute;
+                                                left: 0;
+                                                top: 12px;
+                                                content: "";
+                                                height: 14px;
+                                                width: 14px;
+                                                @include border-radius(4px);
+                                                background-color: #0747a6;
+                                                display: block;
+                                            }
+                                            &:last-child{
+                                                border-bottom:0;
+                                                padding-bottom: 0;
+                                            }
+                                            &.remote-service{
+                                                &::before{
+                                                    background-color: #00ccff;
+                                                }
+                                            }
+                                            &.block-tile{
+                                                &::before{
+                                                    background-color: #052e6b;
+                                                }
+                                            }
+                                            &.manage-fully{
+                                               &::before{
+                                                background-color: #cdecff;
+                                               }
+                                            }
+                                            span {
+                                                width: 120px;
+                                                font-size: 12px;
+                                                font-weight: normal;
+                                                line-height: 1.33;
+                                                letter-spacing: normal;
+                                                color: #4f5f79;
+                                            }
+                                            b {
+                                                color: #364656;
+                                                font-weight: 500;
+                                                font-family:$graphicMedBold;
+                                            }
+                                        }
+                                    }
+
+                                    .contract-info {
+                                        width: 100%;
+                                        flex-direction: column;
+                                        @include border-radius(6px);
+                                        border: 1px dashed #c5cdd5;
+                                        background-color: #ffffff;
+                                        padding: 10px 12px 12px;
+                                        margin: 20px 0 12px 0;
+                                        h6 {
+                                            margin-bottom: 10px;
+                                            font-size: 12px;
+                                            font-weight: 500;
+                                            font-family: $graphicMedBold;
+                                            line-height: 1.33;
+                                            position: relative;
+                                            padding-left: 20px;
+                                            background: url(../../../../ng2/assets/img/company-details/tips.svg)
+                                                no-repeat left top;
+                                        }
+                                        p {
+                                            margin: 0;
+                                            font-size: 12px;
+                                            line-height: 1.33;
+                                            letter-spacing: normal;
+                                        }
+                                    }
+                                    .cmp-dash-table-wrap{
+                                        table{
+                                            tr{
+                                                td{
+                                                    &.hold{
+                                                     color:#ffb937
+                                                    }
+                                                    &.going{
+                                                       color:#16a4fa; 
+                                                    }
+                                                    &.expired{
+                                                        color:#ff5263;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                         .cmp-dash-table-wrap {
@@ -781,24 +924,22 @@ body {
                                         font-family: $graphicMedBold;
                                         font-weight: 500;
                                     }
-                                    &.ov-d{
+                                    &.ov-d {
                                         font-family: $graphicMedBold;
                                         font-weight: 500;
-                                        color:#ff5263;
+                                        color: #ff5263;
                                     }
-                                    &.paid{
+                                    &.paid {
                                         font-family: $graphicMedBold;
                                         font-weight: 500;
-                                        color:#2ec866
-
-                                        ;
+                                        color: #2ec866;
                                     }
                                 }
-                                tr{
-                                    &:last-child{
-                                        td{
+                                tr {
+                                    &:last-child {
+                                        td {
                                             padding-bottom: 0;
-                                            border-bottom:none;
+                                            border-bottom: none;
                                         }
                                     }
                                 }
@@ -830,4 +971,140 @@ body {
             padding: 24px;
         }
     }
+
+    /*** Sidebar ***/
+
+    .cmp-board-sidebar {
+        position: fixed;
+        right: -224px;
+        width: 222px;
+        bottom: 0;
+        top: 78px;
+        flex-direction: column;
+        @include border-radius(6px);
+        @include box-shadow(0, 10px, 10px, 0 rgba(192, 199, 208, 0.2));
+        @include transition(0.4s);
+        border-left: 1px solid #dfe3e8;
+        background-color: #ffffff;
+        z-index: 9999999999;
+        &.opened{
+            right:0;
+            .sidebar-toogle{
+                background: url(../../../../ng2/assets/img/company-details/tag-close-12.svg) no-repeat center #fff;
+                background-size: 16px;
+            }
+        }
+        .sidebar-header {
+            width: 100%;
+            padding: 20px 15px;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #fff;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1;
+            h3 {
+                margin: 0;
+                font-size: 13px;
+                font-family: $graphicSemibold;
+                font-weight: 600;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: 1.54;
+                letter-spacing: normal;
+                color: #364656;
+            }
+            .cmn-static-link {
+                font-size: 11px;
+                font-family: $graphicMedBold;
+                font-weight: 500;
+                line-height: 1.09;
+                letter-spacing: normal;
+                color: #16a4fa;
+            }
+        }
+        .btn {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            right: 14px;
+            @include border-radius(4px);
+            background-color: #e9f7ff;
+            font-size: 12px;
+            font-family: $graphicMedBold;
+            font-weight: 500;
+            line-height: 1.33;
+            letter-spacing: normal;
+            color: #16a4fa;
+            padding: 7.5px 15px;
+        }
+        ul {
+            width: 100%;
+            flex-direction: column;
+            padding: 60px 0 60px 0;
+            background-color: #fff;
+            max-height: calc(100% - 55px);overflow-y: auto;
+            margin: 0;
+            li {
+                align-items: flex-start;
+                justify-content: space-between;
+                padding: 7.5px 15px !important;
+                figure {
+                    width: 24px;
+                    height: 24px;
+                    align-items: center;
+                    justify-content: center;
+                    overflow: hidden;
+                    img {
+                        height: 100%;
+                        width: 100%;
+                        object-fit: cover;
+                    }
+                }
+                .user-list-info {
+                    flex-direction: column;
+                    width: calc(100% - 32px);
+                    h6 {
+                        font-size: 12px;
+                        font-weight: normal;
+                        font-family: $font-body;
+                        line-height: 1.33;
+                        margin-bottom: 8px;
+                        text-transform: none;
+                        a {
+                            color: #4f5f79;
+                            font-family:$graphicMedBold;
+                        }
+                    }
+                    span {
+                        font-size: 10px;
+                        line-height: 1.2;
+                        letter-spacing: normal;
+                    }
+                }
+            }
+        
+        }
+        .sidebar-toogle{
+            width: 37px;
+            height: 32px;
+            border-radius: 12px;
+            @include border-radius(12px 0 0 12px);
+            @include box-shadow(0 ,10px, 10px, 0 rgba(192, 199, 208, 0.2));
+            border: 1px solid #e1e9f5;
+            background-color: #ffffff;
+            position: absolute;
+            left: -36px; 
+            top: 16px;
+            font-size: 0;
+            text-indent: -5000px;
+            background: url(../../../../ng2/assets/img/company-details/history.svg) no-repeat center #fff;
+            
+        }
+    }
+
+
+
 }
