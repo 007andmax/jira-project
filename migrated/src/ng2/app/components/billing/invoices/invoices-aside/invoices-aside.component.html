@@ -27,29 +27,30 @@
 
     </div>
 
-    <div class="qt-df qt-pt-16 qt-pl-30 qt-pr-30 qt-mb-10">
+    <div class="qt-df qt-pt-16 qt-pl-30 qt-pr-30 qt-mb-16">
 
       <div class="qt-input-block qt-mr-16 qt-w100">
         <label class="qt-lh-154">Payment Date</label>
         <app-date-picker [formatDate]="formatDate" [editMode]="true" [editDate]="today" [useMinDate]="false" [useMaxDate]="true" (onChange)="onChangeDate($event)"></app-date-picker>
-  
+
       </div>
 
       <div class="qt-input-block qt-mr-16 qt-w100">
         <label class="qt-lh-154">Amount Received
-          <mat-error class="qt-tooltip-error" *ngIf="!validate.getAmountReceived()">
-            You must use the entire amount. $ {{getUnUsedAmountReceived()}} left unused
-          </mat-error>
         </label>
-        <div class="qt-df qt-mb-10">
+        <div class="qt-df"  [ngClass]="{'--input-error':!validate.getAmountReceived()}">
           <div class="qt-input-prefix">$</div><input class="qt-input-prepend" number
           [money]="true"
           [(ngModel)]="amountReceived"
           (change)="onChangeAmountReceived($event)"
           appToFixed >
+
+          <mat-error class="qt-tooltip-error" *ngIf="!validate.getAmountReceived()">
+            You must use the entire amount. $ {{getUnUsedAmountReceived()}} left unused
+          </mat-error>
         </div>
 
-        <!-- <div class="qt-df qt-ai-c">
+        <!-- <div class="qt-df qt-ai-c qt-mt-10">
           <label class="qt-checkbox receive-full-amount-check qt-mb-0">
             <input type="checkbox">
             <span></span>
@@ -115,7 +116,7 @@
           <td class="unpaid-table__date" [textContent]="getDate(invoice.date)"></td>
           <td class="unpaid-table__amount qt-text-right" [textContent]="invoice.sum | currency"></td>
           <td class="unpaid-table__due qt-text-right" [textContent]="(invoice.sum - invoice.paidSum) | currency"></td>
-          <td class="unpaid-table__payment qt-text-right"><input *ngIf="invoice.selected" number
+          <td class="unpaid-table__payment qt-text-right" [ngClass]="{'--checked':'invoice.selected'}"  ><input class="payment-input" *ngIf="invoice.selected" number
             [money]="true"
             [ngModel]="invoice.paymentAmount"
             (ngModelChange)="onChangePayment($event,invoice)"
@@ -178,5 +179,5 @@
  </div>
 
 
-   
+
 </div>
