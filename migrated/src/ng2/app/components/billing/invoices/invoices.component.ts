@@ -87,10 +87,17 @@ export class InvoicesComponent implements OnInit, OnDestroy {
         }
 
       }
-      if (data.action === 'INVOICE_STATUS' || data.action === 'INVOICE_ROLLBACK' || data.action === 'PAYMENT_RECEIVED') {
+      if (data.action === 'INVOICE_STATUS' || data.action === 'INVOICE_ROLLBACK') {
         let index = this.invoices.findIndex(item => item.id === data.data.id);
         let invoice = new Invoice(data.data);
         if (index > -1) this.invoices[index] = invoice;
+      }
+      if (data.action === 'PAYMENT_RECEIVED') {
+        data.data.forEach(element => {
+          let index = this.invoices.findIndex(item => item.id === element.id);
+          let invoice = new Invoice(element);
+          if (index > -1) this.invoices[index] = invoice;
+        });
       }
       if (data.action === 'INVOICE_DELETED') {
         let index = this.invoices.findIndex(item => item.id === data.data.id);
