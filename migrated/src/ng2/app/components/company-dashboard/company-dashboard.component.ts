@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Component, OnInit,ViewEncapsulation  } from '@angular/core';
-import {NgbDropdownToggle} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDropdownToggle,NgbModal} from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'company-dashboard',
@@ -10,12 +11,19 @@ import {NgbDropdownToggle} from '@ng-bootstrap/ng-bootstrap';
 })
 
 @NgModule({
-  imports: [NgbDropdownToggle]  
+  imports: [NgbDropdownToggle,NgbModal]  
 })
 export class CompanyDashboardComponent implements OnInit {
   
  
-  constructor() { }
+  constructor(private modalService: NgbModal) {}
+  closeResult = '';
+
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title',centered: true , windowClass: 'cmp-comapny-modal'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    });
+  }
 
   ngOnInit() {
   }

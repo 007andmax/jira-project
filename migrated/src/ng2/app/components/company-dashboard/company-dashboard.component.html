@@ -67,7 +67,26 @@
           </div>
           <div class="other-info-col d-flex">
             <div class="small-title">Working Hours</div>
-              
+            <div class="working-hrs d-flex">
+                <div ngbDropdown class="d-flex">
+                  <button class="selected-item" id="dropdownBasic1" ngbDropdownToggle>Opens  9:30 AM</button>
+                  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                    <button class="item" ngbDropdownItem>Monday<span>10 AM - 7 PM</span></button>
+                    <button class="item" ngbDropdownItem>Tuesday<span>10 AM - 7 PM</span></button>
+                    <button class="item" ngbDropdownItem>Wednesday<span>10 AM - 7 PM</span></button>
+                    <button class="item" ngbDropdownItem>Thursday<span>10 AM - 7 PM</span></button>
+                    <button class="item" ngbDropdownItem>Friday<span>10 AM - 7 PM</span></button>
+                    <button class="item" ngbDropdownItem>Saturday<span>10 AM - 7 PM</span></button>
+                    <button class="item" ngbDropdownItem>Sunday<span>Close</span></button>
+                    <div class="item"> 
+                      <button class="btn btn-outline" (click)="open(content)"> 
+                        <img src="../../../../../ng2/assets/img/company-details/edit-blue.svg" alt="user" />  
+                        Edit Suggestions</button>
+                    </div> 
+                  </div> 
+                </div>
+                <span class="closing-tag">Closing Soon</span>
+            </div>  
           </div>
           <div class="other-info-col d-flex">
             <div class="small-title">Industry</div>
@@ -484,4 +503,94 @@
       </ul>
       <a href="javascript:;" class="btn btn-load">Load More…</a>
   </aside>
+
+<!-- Modal -->
+
+<ng-template #content let-modal>
+  <div class="modal-header d-flex">
+    <h1>Edit Hours</h1>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      close
+    </button>
+  </div>
+  <div class="modal-body d-flex">
+      <h5>Select days with correct hours</h5>
+      <form method="post" class="d-flex">
+            <ul class="list-unstyled d-flex">
+                <li class="d-flex">
+                  <div class="cmn-checkbox">
+                      <input type="checkbox" id="1">
+                      <label for="1">Monday</label>
+                  </div>
+                  <div class="hours-row">
+
+                  </div>
+                </li>
+                <li class="d-flex">
+                  <div class="cmn-checkbox">
+                      <input type="checkbox" id="Tuesday">
+                      <label for="Tuesday">Tuesday</label>
+                  </div>
+                  <div class="hours-row">
+                      
+                  </div>
+                </li>
+                <li class="d-flex">
+                  <div class="cmn-checkbox">
+                      <input type="checkbox" id="Wednesday">
+                      <label for="Wednesday">Wednesday</label>
+                  </div>
+                  <div class="hours-row">
+                      
+                  </div>
+                </li>
+                <li class="d-flex">
+                  <div class="cmn-checkbox">
+                      <input type="checkbox" id="Thursday">
+                      <label for="1">Thursday</label>
+                  </div>
+                  <div class="hours-row">
+                      
+                  </div>
+                </li>
+                <li class="d-flex">
+                  <div class="cmn-checkbox">
+                      <input type="checkbox" id="Friday">
+                      <label for="1">Friday</label>
+                  </div>
+                  <div class="hours-row">
+                      
+                  </div>
+                </li>
+                <li class="d-flex">
+                  <div class="cmn-checkbox">
+                      <input type="checkbox" id="Saturday">
+                      <label for="1">Saturday</label>
+                  </div>
+                  <div class="hours-row">
+                      
+                  </div>
+                </li>
+                <li class="d-flex">
+                  <div class="cmn-checkbox">
+                      <input type="checkbox" id="Sunday">
+                      <label for="1">Sunday</label>
+                  </div>
+                  <div class="hours-row">
+                      
+                  </div>
+                </li>
+            </ul>
+      </form>
+      <div class="footer-area-modal d-flex">
+        <button type="button" class="btn btn-secondary" aria-label="Close" (click)="modal.dismiss('Cross click')">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="modal.close('Save click')">Save Changes</button>
+      </div>
+  </div>
+  
+</ng-template>
+
+
 </div>
+
+
