@@ -180,30 +180,15 @@
           templateUrl: '/ng1/scripts/core/dashboards/billing-dashboard/billing-dashboard.tpl.html',
           controller: 'quicktech.core.dashboards.billingDashboardCtrl'
         }))
-        .state('accounting.billable', waitForServices({
-          url: '/billable',
-          templateUrl: '/ng1/scripts/core/billable/billable.tpl.html',
-          controller: 'quicktech.core.billable.billableCtrl'
-        }))
         .state('services', waitForServices({
           url: '/accounting/services',
           templateUrl: '/ng1/scripts/core/services/services.tpl.html',
           controller: 'quicktech.core.services.servicesCtrl'
         }))
-        .state('payments', waitForServices({
-          url: '/accounting/payments/:mode',
-          templateUrl: '/ng1/scripts/core/billable/payments/payments.tpl.html',
-          controller: 'quicktech.core.payments.paymentsCtrl'
-        }))
         .state('service-agreements', waitForServices({
           url: '/accounting/service-agreements',
           templateUrl: '/ng1/scripts/core/service-agreements/service-agreements.tpl.html',
           controller: 'quicktech.core.serviceAgreements.serviceAgreementsCtrl'
-        }))
-        .state('credits', waitForServices({
-          url: '/accounting/credits',
-          templateUrl: '/ng1/scripts/core/billable/credits/credits.tpl.html',
-          controller: 'quicktech.core.billable.creditsCtrl'
         }))
         .state('new-payments', waitForServices({
           url: '/accounting/new-payments',
