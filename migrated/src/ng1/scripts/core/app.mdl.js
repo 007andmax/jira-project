@@ -14,7 +14,6 @@
       'quicktech.core.services',
       'quicktech.core.billable',
       'quicktech.core.receivable',
-      'quicktech.core.receiptArchive',
       'quicktech.core.leftPanel',
       'quicktech.core.rightPanel',
       'quicktech.core.settings',
