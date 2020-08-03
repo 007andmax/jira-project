@@ -1129,9 +1129,7 @@
         }, function (value) {
           if (value && value !== '^ ') {
 
-            if (!$rootScope.uploadedReceivable || !$rootScope.uploadedReceivable.list) {
-              uploadReceivable();
-            }
+            
 
             $scope.openedCategory = getOpenedCategory(value);
             if ($scope.openedCategory) {
@@ -1156,9 +1154,7 @@
         
           $scope.clearAllFilters()
 
-          if (section === 'billing') {
-            uploadReceivable();
-          }
+          
 
           if (ifIconPart) {
             deactivateAllCompanyProfileTabs();
@@ -1178,20 +1174,7 @@
 
 
 
-        function uploadReceivable() {
-          ReceivableService.getReceivableInvoicesData($scope, function (resp) {
-            $rootScope.uploadedReceivable = resp;
-          })
-        }
-
-        $scope.$watch(function () {
-          return $rootScope.shouldUpdateReceivable;
-        }, function (val) {
-          if (val) {
-            $rootScope.shouldUpdateReceivable = false;
-            uploadReceivable();
-          }
-        })
+       
 
         $scope.showLeftArrowToggleLeftPanel = function () {
           return window.outerWidth <= 1024

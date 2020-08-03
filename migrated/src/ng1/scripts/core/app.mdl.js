@@ -191,20 +191,10 @@
           templateUrl: '/ng1/scripts/core/services/services.tpl.html',
           controller: 'quicktech.core.services.servicesCtrl'
         }))
-        .state('receivable', waitForServices({
-          url: '/accounting/receivable/:mode',
-          templateUrl: '/ng1/scripts/core/receivable/receivable.tpl.html',
-          controller: 'quicktech.core.receivable.receivableCtrl'
-        }))
         .state('payments', waitForServices({
           url: '/accounting/payments/:mode',
           templateUrl: '/ng1/scripts/core/billable/payments/payments.tpl.html',
           controller: 'quicktech.core.payments.paymentsCtrl'
-        }))
-        .state('receipt-archive', waitForServices({
-          url: '/accounting/receipt-archive/:mode',
-          templateUrl: '/ng1/scripts/core/receipt-archive/receipt-archive.tpl.html',
-          controller: 'quicktech.core.receiptArchive.receiptArchiveCtrl'
         }))
         .state('service-agreements', waitForServices({
           url: '/accounting/service-agreements',
