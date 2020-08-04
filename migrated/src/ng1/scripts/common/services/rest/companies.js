@@ -65,18 +65,6 @@
       });
       return storage.companies[companyForChangeIndex].tags = newCompanyTags;
     }
-
-    
-
-    $http.get('/ps/settings').then(function (resp) {
-      Utils.customizeObj(resp.data, companyPaymentInfo);
-      checkInit();
-    },
-      function (resp) {
-        console.error(resp);
-        throw 'Cannot initialize CompanyPaymentInfo!';
-      });
-
     $http.get('/company/current').then(function (resp) {
       Utils.customizeObj(resp.data, storage.currentCompany);
       setRealTimeCurrentCompany();
@@ -94,15 +82,7 @@
     function getGlNumbers() {
       return angular.copy(glNumbers);
     }
-    function reloadCurrentCompany(callback) {
-      $http.get('/company/current').then(function (resp) {
-        if (callback) {
-          callback(resp.data);
-        } else {
-          Utils.customizeObj(resp.data, storage.currentCompany);
-        }
-      })
-    }
+    
 
     var checkInitsCount = 0;
     function setRealTimeGLNumbers(id) {
@@ -134,7 +114,8 @@
     }
     function checkInit() {
       checkInitsCount++;
-      if (checkInitsCount === 3) {
+      console.log("checkInitsCount",checkInitsCount);
+      if (checkInitsCount === 2) {
         initialized = true;
 
         for (var i = 0; i < initListeners.length; i++) {
@@ -239,14 +220,7 @@
       })
     }
 
-    RealTimeService.subscribe('/companySettings', serviceScope, function (newChange) {
-
-      if (newChange.action === 'SMTP_SETTINGS_UPDATED') {
-        $rootScope.SMTPChanged = newChange.data;
-      } else if (newChange.action === 'COMPANY_EMAIL_ALIAS_UPDATED') {
-        $rootScope.updatedAlias = newChange.data;
-      }
-    })
+    
 
     function _addAmountChangeListener(callback) {
       amountChangeListeners.push(callback);
@@ -283,14 +257,6 @@
       return storage.vendors;
     }
 
-    function getCompanyPaymentInfo() {
-      return companyPaymentInfo;
-
-    }
-
-
-     
-
     function getReferenceDate(callback) {
       $http.get('/settings/companyProfile/accountingStartDate')
         .then(function (res) {
@@ -298,9 +264,6 @@
         })
     }
 
-   
-
-  
 
     function getCompanyByAddressId(id) {
       var clients = storage.clientCompanies;
@@ -420,14 +383,6 @@
       });
       return info;
     }
-
-    
-     
-    
-
-    
-
-    
 
     function getCompanyData(scope, companyId, callback) {
 
@@ -565,26 +520,6 @@
       } else {
         Utils.handleCallback(future, callback);
       }
-    }
-
-
-    function getCompanyForSettingPage(callback) {
-
-      var info = {};
-
-      $http.get('/settings/companyProfile/').then(function (resp) {
-        Utils.customizeObj(resp.data, info);
-
-        if (callback) {
-          callback(resp.data);
-        }
-
-      }, function (resp) {
-        if (callback) {
-          callback(resp.data);
-        }
-      });
-      return info;
     }
 
     function isNameUnique(name, id, callback) {
@@ -757,7 +692,6 @@
       getClientCompaniesInfo: getClientCompaniesInfo,
       archive: archive,
       save: save,
-      getCompanyForSettingPage: getCompanyForSettingPage,
       getCompanyData: getCompanyData,
       getCompanyProfileData: getCompanyProfileData,
       isNameUnique: isNameUnique,
@@ -768,10 +702,8 @@
       deleteLogo: deleteLogo,
       getIndustries: getIndustries,
       isVendorHasProducts: isVendorHasProducts,
-      getCompanyPaymentInfo: getCompanyPaymentInfo,
       changePrimaryContact: changePrimaryContact,
       checkStorageCompanyLength: checkStorageCompanyLength,
-      reloadCurrentCompany: reloadCurrentCompany,
       getReferenceDate: getReferenceDate,
       sendEmail: sendEmail,
       updateCompanyTags: updateCompanyTags
