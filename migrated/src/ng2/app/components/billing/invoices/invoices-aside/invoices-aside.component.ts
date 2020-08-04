@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, ViewChild } from '@angular/core';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { Subscription } from 'rxjs';
 import { InvoicesService } from 'src/ng2/app/services/invoices/invoices.service';
@@ -10,6 +10,7 @@ import * as moment from "moment";
 import { Payment } from './class/payment';
 import { NotificationStateService } from '../../../shared/notification/services/notification-state.service';
 import { PaymentInvoice } from './class/payment-invoice';
+import { DisabledBtnDirective } from 'src/ng2/app/directives/disabled-btn.directive';
 
 
 @Component({
@@ -35,6 +36,7 @@ export class InvoicesAsideComponent implements OnInit {
   selectAllInvoice: boolean = false;
   selectedPaymentMode = new CompanySetting('Cheque', 'CHEQUE');
   sub: Subscription = new Subscription();
+  @ViewChild('recordPayment') recordPayment: DisabledBtnDirective;
   @Input() selectedInvoices: Array<Invoice> = [];
   @Output() onClose = new EventEmitter<any>();
   constructor(private companiesState: CompaniesStateService,
@@ -105,7 +107,9 @@ export class InvoicesAsideComponent implements OnInit {
         this.payment.addPartialPayment(item.id, item.paymentAmount);
       }
     })
+    this.recordPayment.setDisabled(true);
     this.invoicesService.createPayment(this.payment).subscribe(data => {
+      this.recordPayment.setDisabled(false);
       this.notificationStateService.oninitShowNotification("The payment has been received");
       this.close();
     })
