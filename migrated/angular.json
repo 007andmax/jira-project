@@ -281,7 +281,6 @@
               "src/ng1/scripts/common/services/rest/subscriptions.js",
               "src/ng1/scripts/common/services/rest/tags.js",
               "src/ng1/scripts/common/services/rest/taxes.js",
-              "src/ng1/scripts/common/services/rest/ticket-tags.js",
               "src/ng1/scripts/common/services/rest/tickets.js",
               "src/ng1/scripts/common/services/rest/tutorial.js",
               "src/ng1/scripts/common/services/rest/users.js",
