@@ -223,7 +223,9 @@
 
         $scope.$watch('invoiceNumberFilter', function (val) {
         });
-
+        ReceivableService.getReceivableInvoicesData($scope, function (resp) {
+          $rootScope.uploadedReceivable = resp;
+        })
 
         $scope.$watch('dateFilter', function (val) {
           $scope.resetAllFiltersForSort();
