@@ -97,6 +97,7 @@ export class InvoicesAsideComponent implements OnInit {
   public onChangePayment(val, invoice) {
     let value = Number(val);
     invoice.paymentAmount = value;
+    this.validate.setValidPayment(true);
     if (!this.validate.getAmountReceived()) this.validate.checkAmountReceived(this.amountReceived, this.invoices);
   }
   create() {
@@ -115,6 +116,7 @@ export class InvoicesAsideComponent implements OnInit {
       this.notificationStateService.oninitShowNotification("The payment has been received");
       this.close();
     },err => {
+      this.validate.setValidPayment(false);
       this.recordPayment.setDisabled(false);
       this.payment.resetInvoiceIds();
       this.payment.resetPartialPayments();
