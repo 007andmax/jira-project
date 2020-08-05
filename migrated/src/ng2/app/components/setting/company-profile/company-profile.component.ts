@@ -681,20 +681,24 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
       return;
     }
 let data = {};
-debugger;
 data['id'] = this.currentCompany.addresses[0].id;
 data['isPrimary'] = true;
 data['suiteNumber'] = this.cProfileForm.get('suiteNumber').value;
-let timeZone = this.cProfileForm.get('timeZone').value;
-let index = this.timezones.findIndex(value => value.city === timeZone);
+let dis = this.cProfile.address[0].timeZone == null ? '' : this.cProfile.address[0].timeZone.displayName;
 data['timeZone'] = {
   name: this.cProfileForm.get(
     'timeZone'
-  ).value.city || '',
-  displayName: '',
+  ).value == undefined ? '' : (this.cProfileForm.get(
+    'timeZone'
+  ).value.city || this.cProfile.address[0].timeZone.name),
+  displayName: this.cProfileForm.get(
+    'timeZone'
+  ).value == undefined ? '' : '' || dis,
   timeOffset: this.cProfileForm.get(
     'timeZone'
-  ).value.offset || ''
+  ).value == undefined ? '' : (this.cProfileForm.get(
+    'timeZone'
+  ).value.offset || this.cProfile.address[0].timeZone.timeOffset)
 };
 data['address'] = this.searchElementRef.nativeElement.value;
 data['postalCode'] = this.cProfileForm.get(
@@ -703,8 +707,10 @@ data['postalCode'] = this.cProfileForm.get(
 data['country'] = this.country;
 data['locale'] = this.cProfileForm.get(
   'timeZone'
+).value == undefined ? '' : (this.cProfileForm.get(
+  'timeZone'
 ).value.city
-|| '';
+|| this.cProfile.address[0].locale);
 data['countryCode'] = this.countryCode;
 data['locationLat'] = this.latitude;
 data['locationLng'] = this.longitude;
@@ -712,7 +718,7 @@ data['longCity'] = this.longCity;
 data['shortCity'] = this.shortCity;
 data['longState'] = this.longState;
 data['shortState'] = this.shortState;
-data['addressWithSuitNumberAndPostalCode'] = '';
+data['addressWithSuitNumberAndPostalCode'] = this.cProfile.address[0].addressWithSuitNumberAndPostalCode;
 data['fromGoogle'] = this.fromGoogle;
     // this.cProfile.address[0].suiteNumber = this.cProfileForm.get(
     //   'suiteNumber'

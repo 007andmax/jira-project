@@ -30,8 +30,8 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
   techUserIdList: any[] = [];
   techRoles: any;
   selectedTechUser: any;
-  techUseremailNotificationList: any;
-  archivedtechUseremailNotificationList: any;
+  techUseremailNotificationList: any = [];
+  archivedtechUseremailNotificationList: any = [];
   techUserForm: FormGroup;
 
   imageBase64 = '';
@@ -163,7 +163,8 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
         (techUsers: any) => {
           this.loading = false;$(".loading").css("display", "none");
           // this.archivedemailNotification(this.userlist);
-          this.IdList = this.userlist.map(({ id }) => id);
+          let users = this.userlist.filter(user => user.accountType.toLowerCase() === 'tech');
+          this.IdList = users.map(({ id }) => id);
           if (techUsers) {
             this.techUsers = techUsers;
             this.techUserIdList = techUsers.map(({ id }) => id);
@@ -218,11 +219,12 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       .pipe(
         map(eNotifications => {
           if (eNotifications) {
+            debugger;
             this.IdList.forEach(element => {
               this.archivedtechUseremailNotificationList.push(eNotifications[element]);
             });
             this.techUserIdList.forEach(element => {
-              this.archivedtechUseremailNotificationList.push(eNotifications[element]);
+              this.techUseremailNotificationList.push(eNotifications[element]);
             });
           }
         })
