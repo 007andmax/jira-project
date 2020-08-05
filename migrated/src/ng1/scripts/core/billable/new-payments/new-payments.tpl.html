@@ -62,7 +62,7 @@
 
             </div>
 
-            <button tooltip-append-to-body="true"
+           <!-- <button tooltip-append-to-body="true"
                     class="save-invoice-button btn btn-success"
                     modal-window-button="/ng1/scripts/core/billable/new-billable-modals/multiple-payments.tpl.html"
                     mw-controller="quicktech.core.receivable.receivePaymentCtrl"
@@ -71,7 +71,7 @@
 
 
               Process payment
-            </button>
+            </button>-->
           </div>
         </div>
       </div>
@@ -214,9 +214,9 @@
                 <i style="margin-left: 5px;" class="icn-more-light-grey icn-sm pointer dev-btn"></i>
               </div>
               <ul class="dropdown-menu dropdown-menu-right" role="menu" style="right: 0; overflow-y: visible">
-                <li ng-if="(payment.partialPaidInvoice && !payment.refundMethod)"><a
+                <!--<li ng-if="(payment.partialPaidInvoice && !payment.refundMethod)"><a
                   ng-click="openModal('edit-payments', payment)">Edit payment</a>
-                </li>
+                </li>-->
                 <li><a ng-click="rollbackInvoice(invoice)">Email receipt</a></li>
                 <li ng-if="!payment.refundMethod"><a ng-click="openModal('refund', payment)">Refund payment</a></li>
                 <li><a ng-click="deletePayment(payment.id)">Delete payment</a></li>
