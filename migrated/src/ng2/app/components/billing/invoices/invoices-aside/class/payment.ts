@@ -1,9 +1,11 @@
+import { PartialPayments } from './partial-payments';
+
 export class Payment {
     date: number;
     invoiceIds: Array<string> = [];
     isSendNotification: boolean = false;
     note: string = "";
-    partialPayments: any  = {};
+    partialPayments: Array<PartialPayments> = [];
     paymentMethod: string = "CHEQUE";
     reference :string;
     constructor() {
@@ -13,7 +15,7 @@ export class Payment {
         this.invoiceIds.push(id);
     }
     public addPartialPayment (id,data) {
-        this.partialPayments[id] = data;
+        this.partialPayments.push(new PartialPayments(id,data));
     }
     public setPaymentMethod (data) {
         this.paymentMethod = data;
