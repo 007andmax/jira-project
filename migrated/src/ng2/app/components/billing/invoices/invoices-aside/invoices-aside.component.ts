@@ -110,8 +110,14 @@ export class InvoicesAsideComponent implements OnInit {
     this.recordPayment.setDisabled(true);
     this.invoicesService.createPayment(this.payment).subscribe(data => {
       this.recordPayment.setDisabled(false);
+      this.payment.resetInvoiceIds();
+      this.payment.resetPartialPayments();
       this.notificationStateService.oninitShowNotification("The payment has been received");
       this.close();
+    },err => {
+      this.recordPayment.setDisabled(false);
+      this.payment.resetInvoiceIds();
+      this.payment.resetPartialPayments();
     })
   }
   public getUnUsedAmountReceived() {

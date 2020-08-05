@@ -11,6 +11,12 @@ export class Payment {
     constructor() {
 
     }
+    public resetInvoiceIds () {
+        this.invoiceIds = [];
+    }
+    public resetPartialPayments() {
+        this.partialPayments = [];
+    }
     public addInvoiceId(id) {
         this.invoiceIds.push(id);
     }
