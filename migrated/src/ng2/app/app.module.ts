@@ -418,6 +418,9 @@ angular.module('quicktech')
   .directive(
     'billableTicketsComponent',
     downgradeComponent({ component: BillableTicketsComponent }))
+    .directive(
+      'paymentsComponent',
+      downgradeComponent({ component: PaymentsComponent }))
   .directive(
     'inventoryComponent',
     downgradeComponent({ component: InventoryComponent }))
@@ -757,7 +760,8 @@ angular.module('quicktech')
     ModalCustomShareScreenComponent,
     BillableComponent,
     InvoicesComponent,
-    BillableTicketsComponent
+    BillableTicketsComponent,
+    PaymentsComponent
     // RecurringTicketsComponent
   ],
   exports: [

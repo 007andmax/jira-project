@@ -1,0 +1,21 @@
+tr:hover {
+    td {
+      background-color: #f9fafb;
+  
+    }
+  }
+  .invoce-table__invoice {
+    cursor: pointer;
+  }
+  tr.--selected {
+    td {
+      background-color: #f4fbff;
+      border-color: #16a4fa !important;
+    }
+  }
+  .pointer {
+    cursor: pointer !important;
+  }
+  .invoice-items-dropdown {
+    min-width: max-content;
+  }
