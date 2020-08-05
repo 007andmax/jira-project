@@ -273,6 +273,10 @@ import { InvoicesAsideComponent } from './components/billing/invoices/invoices-a
  import { InvoicesHeaderComponent } from './components/billing/invoices/invoices-header/invoices-header.component';
 import { InvoicesFilterComponent } from './components/billing/invoices/invoices-header/invoices-filter/invoices-filter.component';
 import { InvoicesAsidePreviewComponent } from './components/billing/invoices/invoices-aside-preview/invoices-aside-preview.component';
+import { PaymentsComponent } from './components/billing/payments/payments.component';
+import { PaymentsHeaderComponent } from './components/billing/payments/payments-header/payments-header.component';
+import { PaymentItemComponent } from './components/billing/payments/payment-item/payment-item.component';
+import { PaymentsFilterComponent } from './components/billing/payments/payments-header/payments-filter/payments-filter.component';
  
 
 
@@ -675,7 +679,11 @@ angular.module('quicktech')
     InvoicesItemComponent,
     InvoicesHeaderComponent,
     InvoicesFilterComponent,
-    InvoicesAsidePreviewComponent
+    InvoicesAsidePreviewComponent,
+    PaymentsComponent,
+    PaymentsHeaderComponent,
+    PaymentItemComponent,
+    PaymentsFilterComponent
   ],
   imports: [
     BrowserModule,

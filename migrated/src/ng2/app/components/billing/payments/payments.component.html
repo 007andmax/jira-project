@@ -1,0 +1,37 @@
+<div class="page-list invoices-page">
+
+  <div class="qt-df qt-fd-c qt-jc-sb invoices-page__list-container">
+    <div>
+      <app-payments-header (onCreateInvoice)="onCreatePayment()" (onSortBy)="sortBy($event)"></app-invoices-header>
+      <div class="table-container">
+        <table class="qt-table-modern billable-table">
+          <tbody
+          infiniteScroll
+          [infiniteScrollDistance]="2"
+          [infiniteScrollThrottle]="50"
+          [infiniteScrollDisabled]="infiniteScrollDisabled"
+          (scrolled)="onScroll()">
+       <ng-template ngFor let-invoice
+                    [ngForOf]="invoices"
+                    [ngForTrackBy]="trackById">
+                    <app-payments-item (onSelectInvoice)="onSelectInvoice()" (onPreviewInvoice)="onPreviewInvoice($event)" [invoice]="invoice"></app-invoices-item>
+       </ng-template>
+     </tbody>
+        </table>
+        <!-- <div class="loading pengind-loading" *ngIf="showPendingPreloader"></div> -->
+        <div class="loading" *ngIf="showPreloader"></div>
+
+
+      </div>
+    </div>
+
+    <div class="total-info">
+      <div class="loading pengind-loading" *ngIf="showPendingPreloader"></div>
+      <hr class="total-divider qt-mb-16">
+      <div class="qt-df qt-jc-fe">
+        <div><span class="qt-ff-sb qt-fs-13 qt-mr-5">Total:</span> <span class="qt-ff-sb qt-fs-16" [textContent]="getTotal() | currency"></span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
