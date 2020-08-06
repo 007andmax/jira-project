@@ -1,26 +1,24 @@
-<tr > <!--[ngClass]="{'--selected': invoice.selected}"-->
+<tr >  
   <td class="invoice-table__check">
-    <div class="d-f">
-     <!-- <label class="qt-checkbox" [ngClass]="{'--disabled':invoice.blockSelected, 'pointer':!invoice.blockSelected}" [attr.for]="'invoice-' + invoice.id">
-        <input [attr.id]="'invoice-' + invoice.id"  [(ngModel)]="invoice.selected"  type="checkbox" (change)="onChangeSelect()" [disabled]="invoice.blockSelected">
-        <span ></span>
-      </label>-->
-    </div>
+    
   </td>
 
-  <td class="invoce-table__date" [textContent]="payment.createdAt"></td>
-  <td class="invoce-table__invoice" [textContent]="getInvoices()" (click)="onShowPreviewInvoice()"></td>
-  <td class="invoce-table__company" [textContent]="payment.clientCompanyName"></td>
-  <td class="invoce-table__status" [textContent]="parsePaymentMethod(payment.paymentMethod)">
+  <td class="invoce-table__date" [textContent]="payment.createdAt" (click)="showDetailsPayment()"></td>
+  <td class="invoce-table__invoice" [innerHTML]="getInvoices()" (click)="onShowPreviewInvoice()"></td>
+  <td class="invoce-table__company" [textContent]="payment.clientCompanyName" (click)="showDetailsPayment()"></td>
+  <td class="invoce-table__status" [textContent]="parsePaymentMethod(payment.paymentMethod)" (click)="showDetailsPayment()">
     </td>
-  <td class="invoce-table__read-on" [textContent]="payment.reference"></td>
-  <td class="invoce-table__amount" [textContent]="0"></td>
-  <td class="invoce-table__balance-due" [textContent]="(payment.partialPaidAmount || payment.totalSum ) | currency"></td>
-  <td class="invoce-table__balance-due" [textContent]="payment.refundMethod ? 'Refund' : 'Paid'"></td>
+  <td class="invoce-table__read-on" [textContent]="payment.reference" (click)="showDetailsPayment()"></td>
+  <td class="invoce-table__amount"  ><ng-template #tipContent><div [textContent]="payment.note"></div></ng-template>
+    <div class="icon__payment-note qt-sz-16 qt-mr-8" *ngIf="payment.note && payment.note.length > 0" placement="left" [ngbTooltip]="tipContent"></div></td>
+  <td class="invoce-table__balance-due" [textContent]="(payment.partialPaidAmount || payment.totalSum ) | currency" (click)="showDetailsPayment()"></td>
+  <td class="invoce-table__balance-due" [textContent]="payment.refundMethod ? 'Refund' : 'Paid'" (click)="showDetailsPayment()"></td>
   <td class="invoce-table__menu" ngbDropdown>
     <div class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"  id="dropdownBasic1" ngbDropdownToggle></div>
     <ul class="qt-dropdown-menu invoice-items-dropdown"  ngbDropdownMenu aria-labelledby="dropdownBasic1">
-     <!--  <li class="pointer" ngbDropdownItem (click)="resendInvoices()"> <div class="icon__email-dark qt-sz-16 qt-mr-8"></div> Resend</li>
+      <li class="pointer" ngbDropdownItem (click)="deletePayment()">Delete payment</li>
+      <li class="pointer" ngbDropdownItem (click)="showRefundPayment()">Refund payment</li>
+    <!--   <li class="pointer" ngbDropdownItem (click)="resendInvoices()"> <div class="icon__payment-note qt-sz-16 qt-mr-8"></div> Resend</li>
       <li class="pointer" ngbDropdownItem *ngIf="!invoice.readedAt" (click)="markAsRead()"> <div class="icon__mark-as-read qt-sz-16 qt-mr-8"></div> Mark as Read</li>
       <li class="pointer" ngbDropdownItem (click)="exportAsPDF()"> <div class="icon__download-pdf qt-sz-16 qt-mr-8"></div> Export as PDF</li>
       <li class="pointer" ngbDropdownItem *ngIf="invoice.paidOn" (click)="refundPayments()"> <div class="icon__restart qt-sz-16 qt-mr-8"></div> Refund Payments</li>
@@ -58,7 +56,7 @@
           </div>
         </div>
 
-      </li> -->
+      </li>  -->
     </ul>
   </td>
 

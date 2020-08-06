@@ -141,6 +141,7 @@
         };
 
         $scope.rollbackInvoice = function (invoice) {
+          console.log("rollbackInvoice",invoice);
           if (!disableInvoiceButtons && !invoice.recurringInvoice) {
             var confirmMessage = 'Do you want to rollback invoice #' + invoice.number + '? ' +
               (invoice.ticketNumbers && invoice.ticketNumbers.length ? (invoice.ticketNumbers.length > 1 ? 'Tickets #' : 'Ticket #') +

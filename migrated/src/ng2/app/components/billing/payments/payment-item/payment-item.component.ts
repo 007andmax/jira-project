@@ -7,6 +7,8 @@ import { PaymentsStateService } from 'src/ng2/app/states/payments/payments-state
 import { AppService } from 'src/ng2/app/states/app/app.service';
 import { PaymentsService } from 'src/ng2/app/services/payments/payments.service';
 import * as moment from "moment";
+import { DELETE_PAYMENT } from 'src/ng2/app/const/confirm';
+import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
 
 @Component({
   selector: 'app-payment-item',
@@ -16,8 +18,9 @@ import * as moment from "moment";
 export class PaymentItemComponent implements OnInit {
   @Input() payment: Payment;
   company: any;
-  @Output() onPreviewInvoice = new EventEmitter<any>();
-  @Output() onSelectInvoice = new EventEmitter<any>();
+  @Output() onDetailsPayment = new EventEmitter<any>();
+  @Output() onSelectPayment = new EventEmitter<any>();
+  @Output() onRefundPayment = new EventEmitter<any>();
   allPayments = [];
   paymentSum: number;
   allPaymentsSum: number = 0;
@@ -29,56 +32,66 @@ export class PaymentItemComponent implements OnInit {
     private paymentsService: PaymentsService,) { }
 
   ngOnInit() {
-    
+
   }
   onChangeSelect() {
-    this.onSelectInvoice.emit(true);
+    this.onSelectPayment.emit(true);
   }
-  
+  showDetailsPayment() {
+    this.onDetailsPayment.emit(this.payment);
+  }
+  showRefundPayment() {
+    this.onRefundPayment.emit(this.payment);
+  }
   getInvoices() {
-    return (this.payment.partialPaidInvoices) ? this.payment.partialPaidInvoices.join("\n") : '';
+    return (this.payment.partialPaidInvoices) ? this.payment.partialPaidInvoices.join("<br/>") : '';
   }
   parsePaymentMethod(method) {
     return method.split('_').map((el) => el[0].toUpperCase() + el.slice(1).toLowerCase()).join(' ');
   };
 
-   
-   /*
-  deleteInvoice() {
-    this.confirmStateService.setConfirmAction(DELETE_INVOICE);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal'});
-    modalRef.componentInstance.message = `Do you want to delete invoice #${this.invoice.number} ?`;
-    this.invoiceStateService.setInvoiceForemove(this.invoice);
-  }
-  resendInvoices() {
-    this.invoicesService.resendArchiveInvoices([this.invoice.id]).subscribe(data => {
-
-    })
-  }
-  markAsRead() {
-    this.invoicesService.markAsRead(this.invoice.id).subscribe(data => {
-
-    })
-  }
-  onShowPreviewInvoice() {
-    this.onPreviewInvoice.emit(this.invoice);
-  }
-  rollbackInvoice() {
-    this.confirmStateService.setConfirmAction(ROLLBACK_INVOICE);
+  deletePayment() {
+    this.confirmStateService.setConfirmAction(DELETE_PAYMENT);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
-    modalRef.componentInstance.message = `Do you want to rollback invoice #${this.invoice.number}? 
-    ${(this.invoice.ticketNumbers && this.invoice.ticketNumbers.length ? (this.invoice.ticketNumbers.length > 1 ? 'Tickets #' : 'Ticket #') +
-        this.invoice.ticketNumbers.join(', #') + ' will be restored.' : '')}`;
-    this.invoiceStateService.setInvoiceForRollback(this.invoice);
+    modalRef.componentInstance.message = `Do you want to remove the payment?`;
+    this.paymentsStateService.setPaymentForemove(this.payment);
   }
-  refundPayments() {
-    this.confirmStateService.setConfirmAction(REFUND_PAYMENTS);
-    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
-    modalRef.componentInstance.message = `Invoice will be marked as not paid.`;
-    this.invoiceStateService.setInvoiceForRefund(this.invoice);
-  }
-  exportAsPDF() {
-    let company = this.companiesStateService.getCompanies().find(item => item.id === this.invoice.companyId);
-    this.appService.download(`/invoice/show/${this.invoice.id}/pdf`, `${company.name}-${this.invoice.number}.pdf`);
-  }*/
+  /*
+ deleteInvoice() {
+   this.confirmStateService.setConfirmAction(DELETE_INVOICE);
+   const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal'});
+   modalRef.componentInstance.message = `Do you want to delete invoice #${this.invoice.number} ?`;
+   this.invoiceStateService.setInvoiceForemove(this.invoice);
+ }
+ resendInvoices() {
+   this.invoicesService.resendArchiveInvoices([this.invoice.id]).subscribe(data => {
+
+   })
+ }
+ markAsRead() {
+   this.invoicesService.markAsRead(this.invoice.id).subscribe(data => {
+
+   })
+ }
+ onShowPreviewInvoice() {
+   this.onPreviewInvoice.emit(this.invoice);
+ }
+ rollbackInvoice() {
+   this.confirmStateService.setConfirmAction(ROLLBACK_INVOICE);
+   const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+   modalRef.componentInstance.message = `Do you want to rollback invoice #${this.invoice.number}? 
+   ${(this.invoice.ticketNumbers && this.invoice.ticketNumbers.length ? (this.invoice.ticketNumbers.length > 1 ? 'Tickets #' : 'Ticket #') +
+       this.invoice.ticketNumbers.join(', #') + ' will be restored.' : '')}`;
+   this.invoiceStateService.setInvoiceForRollback(this.invoice);
+ }
+ refundPayments() {
+   this.confirmStateService.setConfirmAction(REFUND_PAYMENTS);
+   const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+   modalRef.componentInstance.message = `Invoice will be marked as not paid.`;
+   this.invoiceStateService.setInvoiceForRefund(this.invoice);
+ }
+ exportAsPDF() {
+   let company = this.companiesStateService.getCompanies().find(item => item.id === this.invoice.companyId);
+   this.appService.download(`/invoice/show/${this.invoice.id}/pdf`, `${company.name}-${this.invoice.number}.pdf`);
+ }*/
 }

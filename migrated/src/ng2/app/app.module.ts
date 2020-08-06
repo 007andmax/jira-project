@@ -278,6 +278,7 @@ import { PaymentsHeaderComponent } from './components/billing/payments/payments-
 import { PaymentItemComponent } from './components/billing/payments/payment-item/payment-item.component';
 import { PaymentsFilterComponent } from './components/billing/payments/payments-header/payments-filter/payments-filter.component';
 import { PaymentsAsideComponent } from './components/billing/payments/payments-aside/payments-aside.component';
+import { RefundPaymentComponent } from './components/billing/payments/refund-payment/refund-payment.component';
  
 
 
@@ -688,7 +689,8 @@ angular.module('quicktech')
     PaymentsHeaderComponent,
     PaymentItemComponent,
     PaymentsFilterComponent,
-    PaymentsAsideComponent
+    PaymentsAsideComponent,
+    RefundPaymentComponent
   ],
   imports: [
     BrowserModule,

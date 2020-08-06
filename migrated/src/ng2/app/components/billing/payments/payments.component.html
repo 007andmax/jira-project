@@ -14,7 +14,7 @@
        <ng-template ngFor let-payment
                     [ngForOf]="payments"
                     [ngForTrackBy]="trackById">
-                    <app-payment-item (onSelectInvoice)="onSelectInvoice()" (onPreviewInvoice)="onPreviewInvoice($event)" [payment]="payment"></app-payment-item>
+                    <app-payment-item (onRefundPayment)="onRefundPayment($event)" (onSelectPayment)="onSelectInvoice()" (onDetailsPayment)="onDetailsPayment($event)" [payment]="payment"></app-payment-item>
        </ng-template>
      </tbody>
         </table>
@@ -31,5 +31,5 @@
 
   </div>
 </div>
-
-<!-- <app-payments-aside></app-payments-aside> -->
+<app-refund-payment *ngIf="showRefundPayment" [payment]="refundPayment" (onClose)="showRefundPayment = false"></app-refund-payment>
+ <app-payments-aside *ngIf="showDetailsPayment" [payment]="detailsPayment" (onClose)="showDetailsPayment = false"></app-payments-aside>

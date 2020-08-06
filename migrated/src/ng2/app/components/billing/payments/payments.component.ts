@@ -7,6 +7,7 @@ import { CompaniesStateService } from 'src/ng2/app/states/company/companies-stat
 import { PaymentsStateService } from 'src/ng2/app/states/payments/payments-state.service';
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { PaymentsListService } from './services/payments-list.service';
+import { DELETE_PAYMENT } from 'src/ng2/app/const/confirm';
 
 @Component({
   selector: 'payments',
@@ -25,10 +26,12 @@ export class PaymentsComponent implements OnInit {
   public infiniteScrollDisabled = false;
   public page_number: number = 0;
   showCreatePayment: boolean = false;
-  showPreviewPayment: boolean = false;
+  showDetailsPayment: boolean = false;
+  showRefundPayment: boolean = false;
   offset: number = 20;
   public direction: string = 'ASC';
-  previewPayment: Payment;
+  detailsPayment: Payment;
+  refundPayment: Payment;
   selectedPayments: Array<Payment> = [];
   //@ViewChild('previewInvoiceAside') previewInvoiceAside: InvoicesAsidePreviewComponent;
   sub: Subscription = new Subscription();
@@ -58,20 +61,20 @@ export class PaymentsComponent implements OnInit {
       this.onScroll();
     })
     this.sub.add(getOnInitFilter);
-    /*let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
-        if (this.confirmStateService.getConfirmAction() === DELETE_INVOICE) {
-          this.onRemoveInvoice(this.invoiceStateService.getInvoiceForRemove());
+        if (this.confirmStateService.getConfirmAction() === DELETE_PAYMENT) {
+          this.onRemovePayment(this.paymentsStateService.getPaymentForRemove());
         }
-        if (this.confirmStateService.getConfirmAction() === ROLLBACK_INVOICE) {
+       /* if (this.confirmStateService.getConfirmAction() === ROLLBACK_INVOICE) {
           this.onRollbackInvoice(this.invoiceStateService.getInvoiceForRollback());
         }
         if (this.confirmStateService.getConfirmAction() === REFUND_PAYMENTS) {
           this.onRollbackInvoice(this.invoiceStateService.getInvoiceForRefund());
-        }
+        }*/
       }
     })
-    this.sub.add(getConfirm);*/
+    this.sub.add(getConfirm); 
 
  /*   let changeInvoice = this.invoiceRealTimeService.changeInvoice.subscribe(data => {
       if (data.action === 'INVOICE_SAVED') {
@@ -141,6 +144,20 @@ export class PaymentsComponent implements OnInit {
 
     })
   }*/
+  onRefundPayment(data) {
+    this.refundPayment = data;
+    this.showRefundPayment = true;
+  }
+  onDetailsPayment(data) {
+this.detailsPayment = data;
+this.showDetailsPayment = true;
+
+  }
+  onRemovePayment(payment) {
+this.paymentsService.deletePayment(payment).subscribe(data => {
+
+})
+  }
   public sortBy(sort) {
     this.showPreloader = true;
     this.selectedPayments = [];

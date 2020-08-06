@@ -6,7 +6,7 @@
           Payment Detail
         </div>
 
-        <div class="qt-df qt-ai-c">
+        <div class="qt-df qt-ai-c" (click)="close()">
           <div class="icon__close qt-sz-24 qt-pointer"></div>
         </div>
 
@@ -15,50 +15,50 @@
       <div class="billing-aside-scroll-content qt-pt-50 qt-pr-50 qt-pb-50 qt-pl-50">
         <div class="payment-preview qt-pt-40 qt-pl-40 qt-pr-40 qt-pb-40">
 
-          <div class="qt-df company-info">
+          <div class="qt-df company-info" *ngIf="currentCompany">
             <div class="qt-lh-154">
-              <img class="company-logo qt-mb-8" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SCA_company_logo.svg/1280px-SCA_company_logo.svg.png">
+              <img class="company-logo qt-mb-8" [src]="getCompanyLogoUrl()">
 
-              <div class="qt-fs-13 qt-color-dark qt-ff-gm">Active Information Systems</div>
-              <div class="qt-fs-13"># 205, 5718 1a St SW, Calgary, AB T2H 0E8</div>
-              <div class="qt-fs-13">+1 (403) 266-1040</div>
+              <div class="qt-fs-13 qt-color-dark qt-ff-gm" [textContent]="currentCompany.name"></div>
+              <div class="qt-fs-13" [textContent]="currentCompany.addresses[0].addressWithSuitNumberAndPostalCode"></div>
+              <div class="qt-fs-13" [textContent]="(currentCompany.addresses[0].phoneNumbers.length > 0) ? currentCompany.addresses[0].phoneNumbers[0].number : ''"></div>
             </div>
           </div>
 
           <hr class="qt-divider qt-mt-24 qt-mb-40">
 
           <div class="qt-df">
-            <div class="payment-info qt-pr-15">
+            <div class="payment-info qt-pr-15" *ngIf="company">
               <div class="qt-ff-sb qt-fs-16 qt-lh-133 qt-mb-4 qt-color-dark">Amount Received</div>
-              <div class="qt-fs-40 qt-ff-sb qt-lh-12 qt-color-dark">$394.00</div>
-              <div class="qt-fs-13 qt-lh-154 qt-mb-24 qt-color-dark-light">(Dollars Three Hundred Ninety-Four)</div>
+              <div class="qt-fs-40 qt-ff-sb qt-lh-12 qt-color-dark" [textContent]="(payment.partialPaidAmount || payment.totalSum ) | currency"></div>
+            
 
               <div class="qt-fs-12 qt-lh-12 qt-mb-8 qt-text-upper qt-color-light">Received From</div>
-              <div class="qt-fs-13 qt-fs-gm qt-color-dark qt-lh-154">Bearstone EX</div>
-              <div class="qt-fs-13 qt-color-dark-light qt-lh-154">53 Industry Way SE Calgary,</div>
-              <div class="qt-fs-13 qt-color-dark-light qt-lh-154">AB T3S 0B5</div>
-              <div class="qt-fs-13 qt-color-dark-light qt-lh-154">amanda@bear-stone.com</div>
-            </div>
+              <div class="qt-fs-13 qt-fs-gm qt-color-dark qt-lh-154" [textContent]="company.name"></div>
+               <div class="qt-fs-13 qt-color-dark-light qt-lh-154" [textContent]="company.companyInfo.contacts[0].firstName + ' ' +
+              company.companyInfo.contacts[0].lastName"></div>
+               <div class="qt-fs-13 qt-color-dark-light qt-lh-154" [textContent]="company.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode"></div>
+              <div class="qt-fs-13 qt-color-dark-light qt-lh-154" [textContent]="company.companyInfo.contacts[0].primaryEmail"></div>
+           <div class="qt-fs-13 qt-color-dark-light qt-lh-154" [textContent]="(company.companyInfo.contacts[0].phoneNumbers && company.companyInfo.contacts[0].phoneNumbers.length > 0) ? company.companyInfo.contacts[0].phoneNumbers[0].number : ''"></div>
+           </div>
 
             <div class="qt-pl-40">
               <div class="payment-info-lines qt-mb-16">
                 <div class="qt-df">
                   <div class="payment-info-lines__title" >Payment Date</div>
-                  <div class="payment-info-lines__value">22 Apr 2020</div>
+                  <div class="payment-info-lines__value" [textContent]="getDate(this.payment.createdAt)"></div>
                 </div>
                 <div class="qt-df">
                   <div class="payment-info-lines__title">Reference Number</div>
-                  <div class="payment-info-lines__value">108487</div>
+                  <div class="payment-info-lines__value" [textContent]="payment.reference"></div>
                 </div>
                 <div class="qt-df">
                   <div class="payment-info-lines__title">Payment Mode</div>
-                  <div class="payment-info-lines__value">Wire Transfer</div>
+                  <div class="payment-info-lines__value" [textContent]="parsePaymentMethod(payment.paymentMethod)"></div>
                 </div>
               </div>
 
-              <div class="payment-info__notes">
-                Payment Received through Credit card Number
-                8954-8784-9696-2013, recurring invoice may apply for month of 1st week also ask for company GST No.
+              <div class="payment-info__notes" [textContent]="payment.note">
               </div>
             </div>
           </div>
@@ -73,19 +73,21 @@
               <tr>
                 <th class="payment-table__number">Invoice Number</th>
                 <th class="payment-table__date">Invoice Date</th>
-                <th class="payment-table__payment">Payment#</th>
                 <th class="payment-table__inv-amount">Invoice Amount</th>
                 <th class="payment-table__pay-amount">Payment Amount</th>
               </tr>
             </thead>
             <tbody>
+              <ng-template ngFor let-item
+              [ngForOf]="payment.paymentData"
+              [ngForTrackBy]="trackById">
               <tr>
                 <td class="payment-table__number">7848</td>
-                <td class="payment-table__date">03 Sep 2020</td>
-                <td class="payment-table__payment">1</td>
-                <td class="payment-table__inv-amount">$394</td>
-                <td class="payment-table__pay-amount">$394</td>
+                <td class="payment-table__date" [textContent]="getDate(item.invoiceDate)"></td>
+                <td class="payment-table__inv-amount" [textContent]="item.invoiceAmount | currency"></td>
+                <td class="payment-table__pay-amount" [textContent]="item.paidAmount | currency"></td>
               </tr>
+              </ng-template>
             </tbody>
           </table>
 

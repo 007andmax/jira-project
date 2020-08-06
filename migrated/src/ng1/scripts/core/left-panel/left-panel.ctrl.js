@@ -1640,7 +1640,7 @@
             return 'reports';
           } else if (url.indexOf('quotes') > -1) {
             return 'billing';
-          } else if (url.indexOf('billable') > -1) {
+          } else if (url.indexOf('billable') > -1 || url.indexOf('payments') > -1) {
             return 'billing';
           } else if (url.indexOf('tickets') > -1) {
             return 'tickets';
