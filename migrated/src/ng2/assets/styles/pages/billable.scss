@@ -46,7 +46,7 @@
       width: 12%;
       min-width: 135px;
     }
-   
+
   }
 }
 
@@ -689,4 +689,8 @@ app-invoice-form-ticket-edit-service,app-invoice-form-ticket-edit-product {
   .modal-body {
     padding: 15px;
   }
+}
+
+.invoice-preview-notes {
+  max-width: 530px;
 }
