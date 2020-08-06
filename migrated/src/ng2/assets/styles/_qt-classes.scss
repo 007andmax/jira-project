@@ -62,6 +62,8 @@
 .qt-pl-24 {padding-left: 24px;}
 .qt-pl-25 {padding-left: 25px;}
 .qt-pl-30 {padding-left: 30px;}
+.qt-pl-35 {padding-left: 35px;}
+.qt-pl-40 {padding-left: 40px;}
 .qt-pl-32 {padding-left: 32px;}
 .qt-pl-50 {padding-left: 50px;}
 
@@ -77,6 +79,7 @@
 .qt-pr-24 {padding-right: 24px;}
 .qt-pr-25 {padding-right: 25px;}
 .qt-pr-30 {padding-right: 30px;}
+.qt-pr-40 {padding-right: 40px;}
 .qt-pr-32 {padding-right: 32px;}
 .qt-pr-50 {padding-right: 50px;}
 
@@ -92,6 +95,7 @@
 .qt-pt-24 {padding-top: 24px;}
 .qt-pt-25 {padding-top: 25px;}
 .qt-pt-30 {padding-top: 30px;}
+.qt-pt-40 {padding-top: 40px;}
 .qt-pt-32 {padding-top: 32px;}
 .qt-pt-50 {padding-top: 50px;}
 
@@ -107,6 +111,7 @@
 .qt-pb-24 {padding-bottom: 24px;}
 .qt-pb-25 {padding-bottom: 25px;}
 .qt-pb-30 {padding-bottom: 30px;}
+.qt-pb-40 {padding-bottom: 40px;}
 .qt-pb-32 {padding-bottom: 32px;}
 .qt-pb-50 {padding-bottom: 50px;}
 
@@ -124,6 +129,7 @@
 .qt-ml-24 {margin-left: 24px;}
 .qt-ml-25 {margin-left: 25px;}
 .qt-ml-30 {margin-left: 30px;}
+.qt-ml-40 {margin-left: 40px;}
 .qt-ml-32 {margin-left: 32px;}
 .qt-ml-50 {margin-left: 50px;}
 
@@ -140,6 +146,7 @@
 .qt-mr-24 {margin-right: 24px;}
 .qt-mr-25 {margin-right: 25px;}
 .qt-mr-30 {margin-right: 30px;}
+.qt-mr-40 {margin-right: 40px;}
 .qt-mr-32 {margin-right: 32px;}
 .qt-mr-50 {margin-right: 50px;}
 
@@ -156,6 +163,7 @@
 .qt-mb-24 {margin-bottom: 24px;}
 .qt-mb-25 {margin-bottom: 25px;}
 .qt-mb-30 {margin-bottom: 30px;}
+.qt-mb-40 {margin-bottom: 40px;}
 .qt-mb-32 {margin-bottom: 32px;}
 .qt-mb-50 {margin-bottom: 50px;}
 
@@ -172,6 +180,7 @@
 .qt-mt-24 {margin-top: 24px;}
 .qt-mt-25 {margin-top: 25px;}
 .qt-mt-30 {margin-top: 30px;}
+.qt-mt-40 {margin-top: 40px;}
 .qt-mt-32 {margin-top: 32px;}
 .qt-mt-50 {margin-top: 32px;}
 
@@ -183,6 +192,7 @@
 .qt-fs-16 {font-size: 16px;}
 .qt-fs-20 {font-size: 20px;}
 .qt-fs-26 {font-size: 26px;}
+.qt-fs-40 {font-size: 40px;}
 
 .qt-text-upper {text-transform: uppercase;}
 
@@ -486,6 +496,11 @@
   line-height: 1.54;
 }
 
+.qt-lh-154 {
+  line-height: 1.63;
+}
+
+
 .qt-lh-12 {
   line-height: 1.2;
 }
@@ -503,14 +518,6 @@
   line-height: 1.33;
 }
 
-.qt-lh-163 {
-  line-height: 1.63;
-}
-
-.qt-lh-145 {
-  line-height: 1.45;
-}
-
 
 .qt-df-important {
   display: flex !important;
@@ -523,5 +530,7 @@
   }
 }
 
-
-
+.qt-divider {
+  border-top: 1px solid #dfe3e8;
+  border-bottom: none;
+}

@@ -1,19 +1,17 @@
-<tr >  
-  <td class="invoice-table__check">
-    
+<tr >
+  <td class="billable-payment-table__date" [textContent]="payment.createdAt" (click)="showDetailsPayment()"></td>
+  <td class="billable-payment-table__invoice" [innerHTML]="getInvoices()" (click)="onShowPreviewInvoice()"></td>
+  <td class="billable-payment-table__company" [textContent]="payment.clientCompanyName" (click)="showDetailsPayment()"></td>
+  <td class="billable-payment-table__payment-mode" [textContent]="parsePaymentMethod(payment.paymentMethod)" (click)="showDetailsPayment()"></td>
+  <td class="billable-payment-table__reference" [textContent]="payment.reference" (click)="showDetailsPayment()"></td>
+  <td class="billable-payment-table__payment"  ><ng-template #tipContent><div [textContent]="payment.note"></div></ng-template>
+    <div class="icon__payment-note qt-sz-24 qt-ic-c qt-mr-8 payments-page__payment-note-table-icon" *ngIf="payment.note && payment.note.length > 0" placement="top" [ngbTooltip]="tipContent"></div></td>
+  <td class="billable-payment-table__amount" [textContent]="(payment.partialPaidAmount || payment.totalSum ) | currency" (click)="showDetailsPayment()"></td>
+  <td class="billable-payment-table__status"   (click)="showDetailsPayment()">
+    <span class="tag__modern" [ngClass]="payment.refundMethod ? '--error' : '--success'" [textContent]="payment.refundMethod ? 'Refund' : 'Paid'">
+    </span>
   </td>
-
-  <td class="invoce-table__date" [textContent]="payment.createdAt" (click)="showDetailsPayment()"></td>
-  <td class="invoce-table__invoice" [innerHTML]="getInvoices()" (click)="onShowPreviewInvoice()"></td>
-  <td class="invoce-table__company" [textContent]="payment.clientCompanyName" (click)="showDetailsPayment()"></td>
-  <td class="invoce-table__status" [textContent]="parsePaymentMethod(payment.paymentMethod)" (click)="showDetailsPayment()">
-    </td>
-  <td class="invoce-table__read-on" [textContent]="payment.reference" (click)="showDetailsPayment()"></td>
-  <td class="invoce-table__amount"  ><ng-template #tipContent><div [textContent]="payment.note"></div></ng-template>
-    <div class="icon__payment-note qt-sz-16 qt-mr-8" *ngIf="payment.note && payment.note.length > 0" placement="left" [ngbTooltip]="tipContent"></div></td>
-  <td class="invoce-table__balance-due" [textContent]="(payment.partialPaidAmount || payment.totalSum ) | currency" (click)="showDetailsPayment()"></td>
-  <td class="invoce-table__balance-due" [textContent]="payment.refundMethod ? 'Refund' : 'Paid'" (click)="showDetailsPayment()"></td>
-  <td class="invoce-table__menu" ngbDropdown>
+  <td class="billable-payment-table__menu" ngbDropdown>
     <div class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"  id="dropdownBasic1" ngbDropdownToggle></div>
     <ul class="qt-dropdown-menu invoice-items-dropdown"  ngbDropdownMenu aria-labelledby="dropdownBasic1">
       <li class="pointer" ngbDropdownItem (click)="deletePayment()">Delete payment</li>

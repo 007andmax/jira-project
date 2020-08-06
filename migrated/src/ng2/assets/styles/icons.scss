@@ -353,12 +353,12 @@
   &__mark-as-read {
     background-image: url("assets/img/icons/mark_as_read.svg");
   }
-
-
-
-
-  // email-dark.svg
-  // edit.svg
+  &__refund-payment {
+    background-image: url("assets/img/icons/refund-payment.svg");
+  }
+  &__verified {
+    background-image: url("assets/img/icons/verified.svg");
+  }
 }
 
 .icn-20 {

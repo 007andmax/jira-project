@@ -1,13 +1,21 @@
-    <div class="payments-page__aside">
+    <div class="payments-page payments-page__aside">
 
-      <div class="aside-header qt-df qt-ai-c qt-jc-sb qt-pr-16 qt-pl-32">
+      <div class="aside-header qt-df qt-ai-c qt-jc-sb qt-pr-16 qt-pl-20">
 
         <div class="qt-fs-20 qt-ff-gm qt-color-dark">
           Payment Detail
         </div>
 
-        <div class="qt-df qt-ai-c" (click)="close()">
-          <div class="icon__close qt-sz-24 qt-pointer"></div>
+        <div class="qt-df qt-ai-c" >
+
+          <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__edit"></div>
+          <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__email-dark"></div>
+          <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__refund-payment"></div>
+          <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__download-pdf"></div>
+          <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__print"></div>
+          <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-16 header-circle-icon icon__remove"></div>
+
+          <div class="icon__close qt-sz-24 qt-pointer qt-ic-c" (click)="close()"></div>
         </div>
 
       </div>
@@ -28,13 +36,15 @@
           <hr class="qt-divider qt-mt-24 qt-mb-40">
 
           <div class="qt-df">
-            <div class="payment-info qt-pr-15" *ngIf="company">
-              <div class="qt-ff-sb qt-fs-16 qt-lh-133 qt-mb-4 qt-color-dark">Amount Received</div>
+            <div class="payments-page__payment-info qt-pr-15" *ngIf="company">
+              <div class="qt-ff-sb qt-fs-16 qt-lh-133 qt-mb-4 qt-color-dark qt-df qt-ai-c">
+               <div class="icon__verified qt-mr-5 qt-ic-c qt-sz-24"></div> Amount Received
+              </div>
               <div class="qt-fs-40 qt-ff-sb qt-lh-12 qt-color-dark" [textContent]="(payment.partialPaidAmount || payment.totalSum ) | currency"></div>
-            
 
-              <div class="qt-fs-12 qt-lh-12 qt-mb-8 qt-text-upper qt-color-light">Received From</div>
-              <div class="qt-fs-13 qt-fs-gm qt-color-dark qt-lh-154" [textContent]="company.name"></div>
+
+              <div class="qt-fs-10 qt-mt-25 qt-lh-12 qt-ff-sb  qt-mb-8 qt-text-upper qt-color-light">Received From</div>
+              <div class="qt-fs-13 qt-ff-gm qt-color-dark qt-lh-154" [textContent]="company.name"></div>
                <div class="qt-fs-13 qt-color-dark-light qt-lh-154" [textContent]="company.companyInfo.contacts[0].firstName + ' ' +
               company.companyInfo.contacts[0].lastName"></div>
                <div class="qt-fs-13 qt-color-dark-light qt-lh-154" [textContent]="company.companyInfo.addresses[0].addressWithSuitNumberAndPostalCode"></div>
@@ -42,7 +52,7 @@
            <div class="qt-fs-13 qt-color-dark-light qt-lh-154" [textContent]="(company.companyInfo.contacts[0].phoneNumbers && company.companyInfo.contacts[0].phoneNumbers.length > 0) ? company.companyInfo.contacts[0].phoneNumbers[0].number : ''"></div>
            </div>
 
-            <div class="qt-pl-40">
+            <div class="qt-pl-40 qt-w100">
               <div class="payment-info-lines qt-mb-16">
                 <div class="qt-df">
                   <div class="payment-info-lines__title" >Payment Date</div>
@@ -58,7 +68,9 @@
                 </div>
               </div>
 
-              <div class="payment-info__notes" [textContent]="payment.note">
+              <div class="payment-info__notes">
+                <div class="icon__payment-note qt-mb-5 qt-ic-c qt-sz-16"></div>
+                <div [textContent]="payment.note"></div>
               </div>
             </div>
           </div>

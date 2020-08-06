@@ -19,48 +19,43 @@
   <table class="qt-table-modern invoice-table">
     <thead>
       <tr>
-        <th class="invoice-table__check">
-        </th>
-
-        <th class="invoce-table__date pointer" (click)="sortBy('PAYMENT_DATE')">
+        <th class="billable-payment-table__date pointer" (click)="sortBy('PAYMENT_DATE')">
           Date
           <span class="qt-table-modern__sorting"></span>
         </th>
 
-        <th class="invoce-table__invoice pointer">
+        <th class="billable-payment-table__invoice pointer">
           Invoice#
           <span class="qt-table-modern__sorting"></span>
         </th>
 
-        <th class="invoce-table__company pointer" (click)="sortBy('COMPANY_NAME')">
+        <th class="billable-payment-table__company pointer" (click)="sortBy('COMPANY_NAME')">
           Company
           <span class="qt-table-modern__sorting"></span>
         </th>
-        
-        <th class="invoce-table__status" (click)="sortBy('PAYMENT_METHOD')">
+
+        <th class="billable-payment-table__payment-mode pointer" (click)="sortBy('PAYMENT_METHOD')">
           PaymentMode
           <span class="qt-table-modern__sorting"></span>
         </th>
 
-        <th class="invoce-table__read-on pointer" >
+        <th class="billable-payment-table__reference" >
           Reference#
-         
         </th>
 
-
-        <th class="invoce-table__amount pointer"  >
+        <th class="billable-payment-table__payment"  >
           Payment#
-           
+
         </th>
-        <th class="invoce-table__balance-due pointer" (click)="sortBy('AMOUNT')">
+        <th class="billable-payment-table__amount pointer" (click)="sortBy('AMOUNT')">
           Amount
           <span class="qt-table-modern__sorting"></span>
         </th>
-        <th class="invoce-table__balance-due pointer" (click)="sortBy('STATUS')">
+        <th class="billable-payment-table__status pointer" (click)="sortBy('STATUS')">
           Status
           <span class="qt-table-modern__sorting"></span>
         </th>
-        <th class="invoce-table__menu"></th>
+        <th class="billable-payment-table__menu"></th>
       </tr>
     </thead>
   </table>

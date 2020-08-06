@@ -1,4 +1,4 @@
-<div class="page-list invoices-page">
+<div class="payments-page page-list invoices-page">
 
   <div class="qt-df qt-fd-c qt-jc-sb invoices-page__list-container">
     <div>
@@ -32,4 +32,4 @@
   </div>
 </div>
 <app-refund-payment *ngIf="showRefundPayment" [payment]="refundPayment" (onClose)="showRefundPayment = false"></app-refund-payment>
- <app-payments-aside *ngIf="showDetailsPayment" [payment]="detailsPayment" (onClose)="showDetailsPayment = false"></app-payments-aside>
+<app-payments-aside *ngIf="showDetailsPayment" [payment]="detailsPayment" (onClose)="showDetailsPayment = false"></app-payments-aside>
