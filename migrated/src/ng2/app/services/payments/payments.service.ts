@@ -19,7 +19,9 @@ export class PaymentsService {
   public constructor(
     private http: HttpClient
   ) { }
- 
+  public refundPayments(data) {
+    return this.http.put(`${this.apiUrl}payments/refund`,data);
+  }
   public getPayments(data) {
     return this.http.post(`${this.apiUrl}payments`,data).pipe(map((res: any) => res.map(item => new Payment(item))));
   }

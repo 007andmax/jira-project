@@ -1,16 +1,61 @@
-<div class="payments-page__aside">
-
-  <div class="aside-header qt-df qt-ai-c qt-jc-sb qt-pr-16 qt-pl-32">
-
+<div class="payments-page payments-page__aside">
+  <div class="aside-header qt-df qt-ai-c qt-jc-sb qt-pr-16 qt-pl-20">
     <div class="qt-fs-20 qt-ff-gm qt-color-dark">
-      Payment Detail
+      Refund
     </div>
-
-    <div class="qt-df qt-ai-c" (click)="close()">
-      <div class="icon__close qt-sz-24 qt-pointer"></div>
+    <div class="qt-df qt-ai-c" >
+      <div class="icon__close qt-sz-24 qt-pointer qt-ic-c" (click)="close()"></div>
     </div>
-
   </div>
+  <div class="billing-aside-scroll-content qt-pt-50 qt-pr-50 qt-pb-50 qt-pl-50">
+    <div class="payment-preview qt-pt-40 qt-pl-40 qt-pr-40 qt-pb-40">
+      <div class="qt-df">
+        <div class="qt-pl-40 qt-w100">
+          <div class="payment-info-lines qt-mb-16">
+            <div class="qt-df">
+              <div class="payment-info-lines__title" >Amount Paid</div>
+              <div class="payment-info-lines__value" [textContent]="(payment.partialPaidAmount || payment.totalSum ) | currency"></div>
+            </div>
+            <div class="qt-df">
+              <div class="payment-info-lines__title">Paid by</div>
+              <div class="payment-info-lines__value"  [textContent]="parsePaymentMethod(payment.paymentMethod)"></div>
+            </div>
+            <div class="qt-df">
+              <div class="payment-info-lines__title">Refund Amount</div>
+              <div class="payment-info-lines__value" [textContent]="(payment.partialPaidAmount || payment.totalSum ) | currency"></div>
+            </div>
+            <div class="qt-df">
+              <div class="payment-info-lines__title">Refund Mode</div>
+              <div class="payment-info-lines__value"  >Refund payment</div>
+            </div>
+          </div>
 
+          <div class="payment-info__notes">
+            <div class="icon__payment-note qt-mb-5 qt-ic-c qt-sz-16"></div>
+            <div>
+              <textarea class="summary-info__textarea qt-textarea" [(ngModel)]="refundPayment.note" placeholder="Partial Payment Recived from Aspen accounting office" appTextArea    maxlength="250"   cols="30" rows="1"></textarea>
+            </div>
+            <div class="qt-df qt-ai-c">
+              <label class="qt-checkbox receive-full-amount-check qt-mb-0 pointer" for="email-payment">
+                <input id="email-payment" type="checkbox" [(ngModel)]="refundPayment.sendEmailNotification" >
+                <span></span>
+              </label>
+  
+              <div class="qt-fs-12 qt-ml-5">
+                Email Payment receipt
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr class="qt-divider qt-mt-40 qt-mb-16">
+    </div>
+  </div>
+  <div class="aside-footer qt-pr-30 qt-pl-30 qt-pb-16 qt-pt-16 qt-df qt-ai-c qt-jc-sb">
+    <div class="qt-df">
+      <button class="qt-button qt-mr-12" (click)="create()">Refund Payment</button>
+      <button class="qt-button --gray" (click)="close()">Cancel</button>
+    </div>
+   </div>
   
 </div>
