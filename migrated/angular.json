@@ -281,7 +281,6 @@
               "src/ng1/scripts/common/services/rest/tags.js",
               "src/ng1/scripts/common/services/rest/taxes.js",
               "src/ng1/scripts/common/services/rest/tickets.js",
-              "src/ng1/scripts/common/services/rest/tutorial.js",
               "src/ng1/scripts/common/services/rest/users.js",
               "src/ng1/scripts/core/billable/default-services/default-services.crtl.js",
               "src/ng1/scripts/core/billable/invoice-content.drv.js",
