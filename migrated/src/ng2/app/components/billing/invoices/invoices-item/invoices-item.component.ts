@@ -101,7 +101,7 @@ export class InvoicesItemComponent implements OnInit {
     this.invoiceStateService.setInvoiceForemove(this.invoice);
   }
   resendInvoices() {
-    this.invoicesService.resendArchiveInvoices([this.invoice.id]).subscribe(data => {
+    this.invoicesService.resendInvoices([this.invoice.id]).subscribe(data => {
 
     })
   }

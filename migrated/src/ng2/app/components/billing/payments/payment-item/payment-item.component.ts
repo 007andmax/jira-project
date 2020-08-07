@@ -19,8 +19,8 @@ export class PaymentItemComponent implements OnInit {
   @Input() payment: Payment;
   company: any;
   @Output() onDetailsPayment = new EventEmitter<any>();
-  @Output() onSelectPayment = new EventEmitter<any>();
   @Output() onRefundPayment = new EventEmitter<any>();
+  @Output() onPreviewInvoice = new EventEmitter<any>();
   allPayments = [];
   paymentSum: number;
   allPaymentsSum: number = 0;
@@ -34,17 +34,22 @@ export class PaymentItemComponent implements OnInit {
   ngOnInit() {
 
   }
-  onChangeSelect() {
-    this.onSelectPayment.emit(true);
-  }
+ 
   showDetailsPayment() {
     this.onDetailsPayment.emit(this.payment);
   }
   showRefundPayment() {
     this.onRefundPayment.emit(this.payment);
   }
+  onShowPreviewInvoice(index) {
+    this.onPreviewInvoice.emit(this.payment.paymentData[index].invoiceId);
+  }
   getInvoices() {
-    return (this.payment.partialPaidInvoices) ? this.payment.partialPaidInvoices.join("<br/>") : '';
+    let invoices = [];
+    invoices = this.payment.paymentData.map(item => {
+      return item.invoiceNumber;
+    })
+    return (invoices) ? invoices.join("<br/>") : '';
   }
   parsePaymentMethod(method) {
     return method.split('_').map((el) => el[0].toUpperCase() + el.slice(1).toLowerCase()).join(' ');

@@ -94,7 +94,7 @@
               [ngForOf]="payment.paymentData"
               [ngForTrackBy]="trackById">
               <tr>
-                <td class="payment-table__number">7848</td>
+                <td class="payment-table__number" [textContent]="item.invoiceNumber"></td>
                 <td class="payment-table__date" [textContent]="getDate(item.invoiceDate)"></td>
                 <td class="payment-table__inv-amount" [textContent]="item.invoiceAmount | currency"></td>
                 <td class="payment-table__pay-amount" [textContent]="item.paidAmount | currency"></td>

@@ -3,10 +3,12 @@ export class PaymentData {
     invoiceDate: number;
     invoiceId: string;
     paidAmount: number;
-    constructor(invoiceAmount, invoiceDate, invoiceId, paidAmount) {
+    invoiceNumber:string;
+    constructor(invoiceAmount, invoiceDate, invoiceId, paidAmount,invoiceNumber) {
         this.invoiceAmount = invoiceAmount;
         this.invoiceDate = invoiceDate;
         this.invoiceId = invoiceId;
         this.paidAmount = paidAmount;
+        this.invoiceNumber = invoiceNumber;
     }
 }

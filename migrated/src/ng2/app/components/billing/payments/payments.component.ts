@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { Payment } from './class/payment';
 import { PaymentsFilter } from './class/payments-filter';
 import { Subscription } from 'rxjs';
@@ -8,6 +8,8 @@ import { PaymentsStateService } from 'src/ng2/app/states/payments/payments-state
 import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
 import { PaymentsListService } from './services/payments-list.service';
 import { DELETE_PAYMENT } from 'src/ng2/app/const/confirm';
+import { Invoice } from '../invoices/class/invoice';
+import { InvoicesAsidePreviewComponent } from '../invoices/invoices-aside-preview/invoices-aside-preview.component';
 
 @Component({
   selector: 'payments',
@@ -28,12 +30,15 @@ export class PaymentsComponent implements OnInit {
   showCreatePayment: boolean = false;
   showDetailsPayment: boolean = false;
   showRefundPayment: boolean = false;
+  showEditPayment:boolean = false;
   offset: number = 20;
   public direction: string = 'ASC';
   detailsPayment: Payment;
   refundPayment: Payment;
+  previewInvoiceId: string;
+  showPreviewInvoice: boolean = false;
   selectedPayments: Array<Payment> = [];
-  //@ViewChild('previewInvoiceAside') previewInvoiceAside: InvoicesAsidePreviewComponent;
+  @ViewChild('previewInvoiceAside') previewInvoiceAside: InvoicesAsidePreviewComponent;
   sub: Subscription = new Subscription();
   constructor(private paymentsService: PaymentsService,
     public cd: ChangeDetectorRef,
@@ -61,102 +66,110 @@ export class PaymentsComponent implements OnInit {
       this.onScroll();
     })
     this.sub.add(getOnInitFilter);
-     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
         if (this.confirmStateService.getConfirmAction() === DELETE_PAYMENT) {
           this.onRemovePayment(this.paymentsStateService.getPaymentForRemove());
         }
-       /* if (this.confirmStateService.getConfirmAction() === ROLLBACK_INVOICE) {
-          this.onRollbackInvoice(this.invoiceStateService.getInvoiceForRollback());
-        }
-        if (this.confirmStateService.getConfirmAction() === REFUND_PAYMENTS) {
-          this.onRollbackInvoice(this.invoiceStateService.getInvoiceForRefund());
-        }*/
+        /* if (this.confirmStateService.getConfirmAction() === ROLLBACK_INVOICE) {
+           this.onRollbackInvoice(this.invoiceStateService.getInvoiceForRollback());
+         }
+         if (this.confirmStateService.getConfirmAction() === REFUND_PAYMENTS) {
+           this.onRollbackInvoice(this.invoiceStateService.getInvoiceForRefund());
+         }*/
       }
     })
-    this.sub.add(getConfirm); 
+    this.sub.add(getConfirm);
 
- /*   let changeInvoice = this.invoiceRealTimeService.changeInvoice.subscribe(data => {
-      if (data.action === 'INVOICE_SAVED') {
-        let index = this.invoices.findIndex(item => item.id === data.data.id);
-        let invoice = new Invoice(data.data);
-        if (index > -1) {
-          this.invoices[index] = invoice;
-        } else {
-          this.invoices.unshift(invoice);
-        }
-      }
-      if (data.action === 'INVOICE_STATUS' || data.action === 'INVOICE_ROLLBACK') {
-        let index = this.invoices.findIndex(item => item.id === data.data.id);
-        let invoice = new Invoice(data.data);
-        if (index > -1) this.invoices[index] = invoice;
-      }
-      if (data.action === 'PAYMENT_RECEIVED') {
-        data.data.forEach(element => {
-          let index = this.invoices.findIndex(item => item.id === element.id);
-          let invoice = new Invoice(element);
-          invoice.sum = invoice.totalSum;
-          if (index > -1) this.invoices[index] = invoice;
-        });
-      }
-      if (data.action === 'INVOICE_DELETED') {
-        let index = this.invoices.findIndex(item => item.id === data.data.id);
-        if (index > -1) this.invoices.splice(index, 1);
-      }
-    })
-    this.sub.add(changeInvoice);*/
+    /*   let changeInvoice = this.invoiceRealTimeService.changeInvoice.subscribe(data => {
+         if (data.action === 'INVOICE_SAVED') {
+           let index = this.invoices.findIndex(item => item.id === data.data.id);
+           let invoice = new Invoice(data.data);
+           if (index > -1) {
+             this.invoices[index] = invoice;
+           } else {
+             this.invoices.unshift(invoice);
+           }
+         }
+         if (data.action === 'INVOICE_STATUS' || data.action === 'INVOICE_ROLLBACK') {
+           let index = this.invoices.findIndex(item => item.id === data.data.id);
+           let invoice = new Invoice(data.data);
+           if (index > -1) this.invoices[index] = invoice;
+         }
+         if (data.action === 'PAYMENT_RECEIVED') {
+           data.data.forEach(element => {
+             let index = this.invoices.findIndex(item => item.id === element.id);
+             let invoice = new Invoice(element);
+             invoice.sum = invoice.totalSum;
+             if (index > -1) this.invoices[index] = invoice;
+           });
+         }
+         if (data.action === 'INVOICE_DELETED') {
+           let index = this.invoices.findIndex(item => item.id === data.data.id);
+           if (index > -1) this.invoices.splice(index, 1);
+         }
+       })
+       this.sub.add(changeInvoice);*/
   }
- /* getTotal() {
-    let total = 0;
-    this.invoices.forEach(item => {
-      total += item.sum;
-    })
-    return total;
-  }*/
- /* onCreatePayment() {
-    this.selectedInvoices = [];
-    if (this.selectedCompanyId) {
-      this.invoices.forEach(item => {
-        if (item.selected) this.selectedInvoices.push(item);
-      })
+  /* getTotal() {
+     let total = 0;
+     this.invoices.forEach(item => {
+       total += item.sum;
+     })
+     return total;
+   }*/
+  /* onCreatePayment() {
+     this.selectedInvoices = [];
+     if (this.selectedCompanyId) {
+       this.invoices.forEach(item => {
+         if (item.selected) this.selectedInvoices.push(item);
+       })
+     }
+     this.showCreateInvoice = true;
+ 
+   }*/
+  /* onCloseCreatePayment() {
+     this.showCreateInvoice = false;
+     this.selectedCompanyId = null;
+     this.invoices.forEach(item => {
+       item.selected = false;
+       item.blockSelected = false;
+     })
+   }*/
+  /*  onPreviewInvoice(data) {
+      this.previewInvoice = data;
+      if (this.showPreviewInvoice) {
+        this.cd.detectChanges();
+        this.previewInvoiceAside.onGetInvoice();
+      }
+      this.showPreviewInvoice = true;
     }
-    this.showCreateInvoice = true;
-
-  }*/
- /* onCloseCreatePayment() {
-    this.showCreateInvoice = false;
-    this.selectedCompanyId = null;
-    this.invoices.forEach(item => {
-      item.selected = false;
-      item.blockSelected = false;
-    })
-  }*/
-/*  onPreviewInvoice(data) {
-    this.previewInvoice = data;
+    onRollbackInvoice(invoice) {
+      this.invoicesService.rollback(invoice.id).subscribe(data => {
+  
+      })
+    }*/
+  onPreviewInvoice(data) {
+    this.previewInvoiceId = data;
     if (this.showPreviewInvoice) {
       this.cd.detectChanges();
       this.previewInvoiceAside.onGetInvoice();
     }
     this.showPreviewInvoice = true;
   }
-  onRollbackInvoice(invoice) {
-    this.invoicesService.rollback(invoice.id).subscribe(data => {
-
-    })
-  }*/
   onRefundPayment(data) {
     this.refundPayment = data;
     this.showRefundPayment = true;
   }
   onDetailsPayment(data) {
-this.detailsPayment = data;
-this.showDetailsPayment = true;
+    this.detailsPayment = data;
+    this.showDetailsPayment = true;
 
   }
   onRemovePayment(payment) {
-this.paymentsService.deletePayment(payment).subscribe(data => {
+    this.paymentsService.deletePayment(payment).subscribe(data => {
 
-})
+    })
   }
   public sortBy(sort) {
     this.showPreloader = true;
@@ -169,27 +182,27 @@ this.paymentsService.deletePayment(payment).subscribe(data => {
     window.scrollTo(0, 0);
     this.onScroll();
   }
- /* onSelectInvoice() {
-    let find = this.invoices.find(item => item.selected);
-    if (find) {
-      this.selectedCompanyId = find.companyId;
-      this.invoices.forEach(item => {
-        if (item.companyId !== this.selectedCompanyId) item.blockSelected = true;
-        if (item.companyId === this.selectedCompanyId) item.blockSelected = false;
-      })
-    } else {
-      this.selectedCompanyId = null;
-      this.invoices.forEach(item => {
-        item.blockSelected = false
-      })
-    }
-    this.cd.detectChanges();
-  }*/
- /* onRemoveInvoice(invoice) {
-    this.invoicesService.remove(invoice.id).subscribe(data => {
-      this.showPreviewInvoice = false;
-    })
-  }*/
+  /* onSelectInvoice() {
+     let find = this.invoices.find(item => item.selected);
+     if (find) {
+       this.selectedCompanyId = find.companyId;
+       this.invoices.forEach(item => {
+         if (item.companyId !== this.selectedCompanyId) item.blockSelected = true;
+         if (item.companyId === this.selectedCompanyId) item.blockSelected = false;
+       })
+     } else {
+       this.selectedCompanyId = null;
+       this.invoices.forEach(item => {
+         item.blockSelected = false
+       })
+     }
+     this.cd.detectChanges();
+   }*/
+  /* onRemoveInvoice(invoice) {
+     this.invoicesService.remove(invoice.id).subscribe(data => {
+       this.showPreviewInvoice = false;
+     })
+   }*/
   getInvoices() {
     if (this.paymentsListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
@@ -199,10 +212,10 @@ this.paymentsService.deletePayment(payment).subscribe(data => {
     if (this.page_number > 0) this.showPendingPreloader = true;
     this.paymentsService.getPayments(this.paymentsFilter.getFIlter()).subscribe((data: any) => {
       this.payments = [...this.payments, ...data];
-     /* if (this.selectedCompanyId) this.payments.forEach(item => {
-        if (item.companyId !== this.selectedCompanyId) item.blockSelected = true;
-        if (item.companyId === this.selectedCompanyId) item.blockSelected = false;
-      })*/
+      /* if (this.selectedCompanyId) this.payments.forEach(item => {
+         if (item.companyId !== this.selectedCompanyId) item.blockSelected = true;
+         if (item.companyId === this.selectedCompanyId) item.blockSelected = false;
+       })*/
       this.infiniteScrollDisabled = false;
       if (data.length < this.offset) this.paymentsListService.setBlockList(true);
       this.page_number += 1;

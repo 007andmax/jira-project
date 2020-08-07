@@ -37,4 +37,4 @@
 </div>
 
 <app-invoices-aside *ngIf="showCreateInvoice" (onClose)="onCloseCreatePayment()" [selectedInvoices]="selectedInvoices"></app-invoices-aside>
-<app-invoices-aside-preview #previewInvoiceAside *ngIf="showPreviewInvoice" (onClose)="showPreviewInvoice = false" [invoice]="previewInvoice"></app-invoices-aside-preview>
+<app-invoices-aside-preview #previewInvoiceAside *ngIf="showPreviewInvoice" (onClose)="showPreviewInvoice = false" [invoiceId]="previewInvoice.id"></app-invoices-aside-preview>

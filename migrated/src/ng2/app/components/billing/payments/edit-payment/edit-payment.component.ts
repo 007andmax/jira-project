@@ -1,0 +1,81 @@
+import { Component, OnInit, Input } from '@angular/core';
+import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
+import { Payment } from '../class/payment';
+import { FORMAT_DATE_2 } from 'src/ng2/app/const/date-picker';
+import { EditPayment } from '../class/edit-payment';
+import { PaymentInvoice } from '../../invoices/invoices-aside/class/payment-invoice';
+import { CompanySetting } from '../../../companies/class/company-setting';
+import { Subscription } from 'rxjs';
+import * as moment from "moment";
+
+@Component({
+  selector: 'app-edit-payment',
+  templateUrl: './edit-payment.component.html',
+  styleUrls: ['./edit-payment.component.scss']
+})
+export class EditPaymentComponent implements OnInit {
+  @Input() payment: Payment;
+  validate: PaymentInvoice = new PaymentInvoice();
+  amountReceived: number = 0;
+  paymentModes = [new CompanySetting('Cash', 'CASH'), new CompanySetting('Cheque', 'CHEQUE'), new CompanySetting('Debit Card', 'DEBIT_CARD'),
+  new CompanySetting('Credit Card', 'CREDIT_CARD'),
+  new CompanySetting('Wire Transfer', 'WIRE_TRANSFER')];
+  isChangeAmountReceived: boolean = false;
+  selectedPaymentMode = new CompanySetting('Cheque', 'CHEQUE');
+  sub: Subscription = new Subscription();
+  editPayment:EditPayment = new EditPayment();
+  formatDate: string = FORMAT_DATE_2;
+  companies = [];
+  selectedCompany: any = null;
+  constructor(private companiesState: CompaniesStateService,) { }
+
+  ngOnInit() {
+    if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
+    let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
+      this.getClientsList(data);
+    })
+  }
+  private getClientsList(data) {
+    this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+      this.selectedCompany = this.companies.find(item => item.id === this.payment.clientCompanyId);
+  }
+  onChangeDate(data) {
+    this.editPayment.setDate(data.day, data.month, data.year, this.companiesState.getCurrentCompany().addresses[0].timeZone.timeOffset);
+  }
+  onChangeAmountReceived(event) {
+    this.amountReceived = Number(event.target.value);
+    this.isChangeAmountReceived = (this.amountReceived > 0);
+    if (!this.validate.getAmountReceived()) this.validate.checkAmountReceivedEditAside(this.amountReceived, this.editPayment.paymentData);
+  }
+  public getUnUsedAmountReceived() {
+    let totalPayment = this.getTotalPayment();
+    return (this.amountReceived - totalPayment).toFixed(2);
+  }
+  onSelectPaymentModes(data) {
+    this.selectedPaymentMode = data;
+    this.editPayment.setPaymentMethod(data.value);
+  }
+  getSubtotal() {
+    let subTotal = 0;
+    this.payment.paymentData.forEach(item => {
+       subTotal += (item.invoiceAmount - item.paidAmount);
+    })
+    return subTotal;
+  }
+  public onChangePayment(val, invoice) {
+    let value = Number(val);
+    invoice.paymentAmount = value;
+    if (!this.validate.getAmountReceived()) this.validate.checkAmountReceivedEditAside(this.amountReceived, this.editPayment.paymentData);
+  }
+  getDate(date) {
+    return (date) ? moment(date).format('DD MMM YYYY') : '';
+  }
+  getTotalPayment() {
+    let total = 0;
+    this.editPayment.paymentData.forEach(item => {
+      total += item.paidAmount;
+    })
+    return total;
+  }
+}
