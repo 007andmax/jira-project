@@ -10,37 +10,41 @@
   <div class="billing-aside-scroll-content qt-pt-50 qt-pr-50 qt-pb-50 qt-pl-50">
     <div class="payment-preview qt-pt-40 qt-pl-40 qt-pr-40 qt-pb-40">
       <div class="qt-df">
-        <div class="qt-pl-40 qt-w100">
-          <div class="payment-info-lines qt-mb-16">
-            <div class="qt-df">
-              <div class="payment-info-lines__title" >Amount Paid</div>
-              <div class="payment-info-lines__value" [textContent]="(payment.partialPaidAmount || payment.totalSum ) | currency"></div>
-            </div>
-            <div class="qt-df">
-              <div class="payment-info-lines__title">Paid by</div>
-              <div class="payment-info-lines__value"  [textContent]="parsePaymentMethod(payment.paymentMethod)"></div>
-            </div>
-            <div class="qt-df">
-              <div class="payment-info-lines__title">Refund Amount</div>
-              <div class="payment-info-lines__value" [textContent]="(payment.partialPaidAmount || payment.totalSum ) | currency"></div>
-            </div>
-            <div class="qt-df">
-              <div class="payment-info-lines__title">Refund Mode</div>
-              <div class="payment-info-lines__value"  >Refund payment</div>
+        <div class="qt-w100">
+
+          <div class="qt-df qt-jc-sb">
+            <div>You can refund the payment</div>
+            <div class="payment-info-lines qt-mb-16 payment-refound-totals">
+              <div class="qt-df qt-jc-sb">
+                <div class="payment-info-lines__title" >Amount Paid</div>
+                <div class="payment-info-lines__value" [textContent]="(payment.partialPaidAmount || payment.totalSum ) | currency"></div>
+              </div>
+              <div class="qt-df qt-jc-sb">
+                <div class="payment-info-lines__title">Paid by</div>
+                <div class="payment-info-lines__value "  [textContent]="parsePaymentMethod(payment.paymentMethod)"></div>
+              </div>
+              <div class="qt-df qt-jc-sb">
+                <div class="payment-info-lines__title">Refund Amount</div>
+                <div class="payment-info-lines__value" [textContent]="(payment.partialPaidAmount || payment.totalSum ) | currency"></div>
+              </div>
+              <div class="qt-df qt-jc-sb">
+                <div class="payment-info-lines__title">Refund Mode</div>
+                <div class="payment-info-lines__value"  >Refund payment</div>
+              </div>
             </div>
           </div>
 
-          <div class="payment-info__notes">
-            <div class="icon__payment-note qt-mb-5 qt-ic-c qt-sz-16"></div>
+
+          <div>
             <div>
-              <textarea class="summary-info__textarea qt-textarea" [(ngModel)]="refundPayment.note" placeholder="Partial Payment Recived from Aspen accounting office" appTextArea    maxlength="250"   cols="30" rows="1"></textarea>
+              <textarea class="summary-info__textarea refound-textarea qt-textarea" [(ngModel)]="refundPayment.note" placeholder="Partial Payment Recived from Aspen accounting office" appTextArea    maxlength="250"   cols="30" rows="1"></textarea>
             </div>
-            <div class="qt-df qt-ai-c">
+            <div class="qt-df qt-ai-c qt-mt-15">
               <label class="qt-checkbox receive-full-amount-check qt-mb-0 pointer" for="email-payment">
                 <input id="email-payment" type="checkbox" [(ngModel)]="refundPayment.sendEmailNotification" >
                 <span></span>
               </label>
-  
+
               <div class="qt-fs-12 qt-ml-5">
                 Email Payment receipt
               </div>
@@ -48,7 +52,6 @@
           </div>
         </div>
       </div>
-      <hr class="qt-divider qt-mt-40 qt-mb-16">
     </div>
   </div>
   <div class="aside-footer qt-pr-30 qt-pl-30 qt-pb-16 qt-pt-16 qt-df qt-ai-c qt-jc-sb">
@@ -57,5 +60,5 @@
       <button class="qt-button --gray" (click)="close()">Cancel</button>
     </div>
    </div>
-  
+
 </div>

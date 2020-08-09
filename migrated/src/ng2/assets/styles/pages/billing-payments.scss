@@ -155,12 +155,26 @@
   }
 
   .billable-payment-table__menu {
-    width: 19px;
+    width: 28px;
     padding: 0 !important;
+    .icon__more {
+      height: 100%;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: auto;
+    }
   }
 
   app-payments-filter {
     width: 100%;
+  }
+
+  .refound-textarea {
+    min-height: 100px;
+  }
+
+  .payment-refound-totals {
+    width: 250px;
   }
 }
 
