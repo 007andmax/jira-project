@@ -234,8 +234,7 @@
     <div>
       <div>
         <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-dark qt-ff-gm qt-lh-133">Terms & Conditions</div>
-        <div class="qt-fs-13 qt-lh-154 note" *ngIf="invoiceProfile.globalNote" [textContent]="invoiceProfile.globalNote.line1 + (invoiceProfile.globalNote.line2 ||
-        '')"></div>
+        <div class="qt-fs-13 qt-lh-154 note" *ngIf="invoiceProfile.termsAndConditions" [textContent]="invoiceProfile.termsAndConditions"></div>
       </div>
     </div>
 
