@@ -10,9 +10,8 @@ export class PaymentsHeaderComponent implements OnInit {
 
   @ViewChild('filter') filter: PaymentsFilterComponent;
   countFilter: number = 0;
-
   toggleFilter: boolean = true;
-  @Output() onCreateInvoice = new EventEmitter<any>();
+  @Output() onCreatePayment = new EventEmitter<any>();
   @Output() onSortBy = new EventEmitter<any>();
   constructor() { }
 
@@ -27,7 +26,7 @@ export class PaymentsHeaderComponent implements OnInit {
   onChangeCountFilter(data) {
     this.countFilter = data;
   }
-  onShowCreateInvoice() {
-    this.onCreateInvoice.emit(null);
+  onShowCreatePayment() {
+    this.onCreatePayment.emit(null);
   }
 }

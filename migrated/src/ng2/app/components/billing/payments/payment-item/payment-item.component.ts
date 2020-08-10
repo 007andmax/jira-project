@@ -21,6 +21,7 @@ export class PaymentItemComponent implements OnInit {
   @Output() onDetailsPayment = new EventEmitter<any>();
   @Output() onRefundPayment = new EventEmitter<any>();
   @Output() onPreviewInvoice = new EventEmitter<any>();
+  @Output() onEditPayment = new EventEmitter<any>();
   allPayments = [];
   paymentSum: number;
   allPaymentsSum: number = 0;
@@ -34,7 +35,9 @@ export class PaymentItemComponent implements OnInit {
   ngOnInit() {
 
   }
- 
+  showEditPayment() {
+    this.onEditPayment.emit(this.payment);
+  }
   showDetailsPayment() {
     this.onDetailsPayment.emit(this.payment);
   }

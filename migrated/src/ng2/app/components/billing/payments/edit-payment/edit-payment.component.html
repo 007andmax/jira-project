@@ -69,7 +69,7 @@
    <div class="qt-pl-32 qt-pr-32">
     <div class="qt-df qt-jc-sb qt-mb-12 qt-ai-c">
       <div class="qt-fs-16 qt-ff-sb qt-color-dark qt-lh-163">Unpaid Invoices</div>
-      <div class="qt-fs-12 qt-ff-gm qt-color-info qt-lh-133 pointer" *ngIf="checkShowClearAmounts()" (click)="clearAmounts()">Clear applied amount</div>
+      <div class="qt-fs-12 qt-ff-gm qt-color-info qt-lh-133 pointer" *ngIf="checkShowClearAmounts()"  (click)="clearAmounts()">Clear applied amount</div>
     </div>
 
     <table class="unpaid-table qt-mb-16" colspan="0">
@@ -89,7 +89,7 @@
                     [ngForTrackBy]="trackById">
         <tr>
           
-          <td class="unpaid-table__invoice" [textContent]="'INV ' + invoice.number"></td>
+          <td class="unpaid-table__invoice" [textContent]="'INV ' + invoice.invoiceNumber"></td>
           <td class="unpaid-table__date" [textContent]="getDate(invoice.invoiceDate)"></td>
           <td class="unpaid-table__amount qt-text-right" [textContent]="invoice.paidAmount | currency"></td>
           <td class="unpaid-table__due qt-text-right" [textContent]="(invoice.invoiceAmount - invoice.paidAmount) | currency"></td>
@@ -112,16 +112,6 @@
           <div class="qt-fs-13 qt-lh-154 qt-pb-12"><span class="qt-ff-gm">Notes</span> (Internal use. Not visible to customer)</div>
           <div>
             <textarea class="summary-info__textarea qt-textarea" [(ngModel)]="editPayment.note" placeholder="Partial Payment Recived from Aspen accounting office" appTextArea    maxlength="250"   cols="30" rows="1"></textarea>
-          </div>
-          <div class="qt-df qt-ai-c">
-            <label class="qt-checkbox receive-full-amount-check qt-mb-0 pointer" for="email-payment">
-              <input id="email-payment" type="checkbox" [(ngModel)]="payment.isSendNotification" >
-              <span></span>
-            </label>
-
-            <div class="qt-fs-12 qt-ml-5">
-              Email Payment receipt
-            </div>
           </div>
         </div>
       </div>
@@ -146,7 +136,7 @@
 
  <div class="aside-footer qt-pr-30 qt-pl-30 qt-pb-16 qt-pt-16 qt-df qt-ai-c qt-jc-sb">
   <div class="qt-df">
-    <button class="qt-button qt-mr-12" (click)="create()">Record Payment</button>
+    <button class="qt-button qt-mr-12" (click)="edit()">Record Payment</button>
   <!--  <button class="qt-button qt-mr-12">Record Payment by CC</button>-->
     <button class="qt-button --gray" (click)="close()">Cancel</button>
   </div>

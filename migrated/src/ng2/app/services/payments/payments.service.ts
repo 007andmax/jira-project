@@ -19,6 +19,9 @@ export class PaymentsService {
   public constructor(
     private http: HttpClient
   ) { }
+  public editPayments(data) {
+    return this.http.put(`${this.apiUrl}payments/edit`,data);
+  }
   public refundPayments(data) {
     return this.http.put(`${this.apiUrl}payments/refund`,data);
   }

@@ -35,6 +35,7 @@ export class PaymentsComponent implements OnInit {
   public direction: string = 'ASC';
   detailsPayment: Payment;
   refundPayment: Payment;
+  editPayment: Payment;
   previewInvoiceId: string;
   showPreviewInvoice: boolean = false;
   selectedPayments: Array<Payment> = [];
@@ -149,6 +150,16 @@ export class PaymentsComponent implements OnInit {
   
       })
     }*/
+    onCloseCreatePayment() {
+      this.showCreatePayment = false;
+    }
+    onCreatePayment() {
+      this.showCreatePayment = true;
+    }
+    onEditPayment(data) {
+      this.editPayment = data;
+      this.showEditPayment = true;
+    }
   onPreviewInvoice(data) {
     this.previewInvoiceId = data;
     if (this.showPreviewInvoice) {

@@ -2,7 +2,7 @@
 
   <div class="qt-df qt-fd-c qt-jc-sb invoices-page__list-container">
     <div>
-      <app-payments-header (onCreateInvoice)="onCreatePayment()" (onSortBy)="sortBy($event)"></app-payments-header>
+      <app-payments-header (onCreatePayment)="onCreatePayment()" (onSortBy)="sortBy($event)"></app-payments-header>
       <div class="table-container">
         <table class="qt-table-modern billable-table">
           <tbody
@@ -14,7 +14,7 @@
        <ng-template ngFor let-payment
                     [ngForOf]="payments"
                     [ngForTrackBy]="trackById">
-                    <app-payment-item (onRefundPayment)="onRefundPayment($event)" (onPreviewInvoice)="onPreviewInvoice($event)" (onDetailsPayment)="onDetailsPayment($event)" [payment]="payment"></app-payment-item>
+                    <app-payment-item (onRefundPayment)="onRefundPayment($event)" (onEditPayment)="onEditPayment($event)" (onPreviewInvoice)="onPreviewInvoice($event)" (onDetailsPayment)="onDetailsPayment($event)" [payment]="payment"></app-payment-item>
        </ng-template>
      </tbody>
         </table>
@@ -34,4 +34,5 @@
 <app-refund-payment *ngIf="showRefundPayment" [payment]="refundPayment" (onClose)="showRefundPayment = false"></app-refund-payment>
 <app-payments-aside *ngIf="showDetailsPayment" [payment]="detailsPayment" (onClose)="showDetailsPayment = false"></app-payments-aside>
 <app-invoices-aside-preview #previewInvoiceAside *ngIf="showPreviewInvoice" (onClose)="showPreviewInvoice = false" [invoiceId]="previewInvoiceId"></app-invoices-aside-preview>
-<app-edit-payment *ngIf="showEditPayment" [payment]="refundPayment" (onClose)="showEditPayment = false"></app-edit-payment>
+<app-edit-payment *ngIf="showEditPayment" [payment]="editPayment" (onClose)="showEditPayment = false"></app-edit-payment>
+<app-invoices-aside *ngIf="showCreatePayment" (onClose)="onCloseCreatePayment()"></app-invoices-aside>

@@ -33,4 +33,14 @@ export class PaymentInvoice {
         return this.amountReceived;
 
     }
+    public isValidateEditAside(amountReceived: number, paymentData: Array<PaymentData>) {
+        let sumAmountReceived = 0;
+        paymentData.forEach(item => {
+             sumAmountReceived += item.paidAmount;
+        })
+        this.amountReceived = (sumAmountReceived === amountReceived);
+
+        return this.amountReceived;
+
+    }
 }
