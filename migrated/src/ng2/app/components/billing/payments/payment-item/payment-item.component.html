@@ -18,9 +18,9 @@
   <td class="billable-payment-table__menu" ngbDropdown>
     <div class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"  id="dropdownBasic1" ngbDropdownToggle></div>
     <ul class="qt-dropdown-menu invoice-items-dropdown"  ngbDropdownMenu aria-labelledby="dropdownBasic1">
+      <li class="pointer" ngbDropdownItem (click)="showEditPayment()" *ngIf="!payment.refundMethod">Edit payment</li>  
+      <li class="pointer" ngbDropdownItem (click)="showRefundPayment()" *ngIf="!payment.refundMethod">Refund payment</li>
       <li class="pointer" ngbDropdownItem (click)="deletePayment()">Delete payment</li>
-      <li class="pointer" ngbDropdownItem (click)="showRefundPayment()">Refund payment</li>
-      <li class="pointer" ngbDropdownItem (click)="showEditPayment()" >Edit payment</li> <!--*ngIf="(payment.partialPaidInvoice && !payment.refundMethod)"-->
     <!--   <li class="pointer" ngbDropdownItem (click)="resendInvoices()"> <div class="icon__payment-note qt-sz-16 qt-mr-8"></div> Resend</li>
       <li class="pointer" ngbDropdownItem *ngIf="!invoice.readedAt" (click)="markAsRead()"> <div class="icon__mark-as-read qt-sz-16 qt-mr-8"></div> Mark as Read</li>
       <li class="pointer" ngbDropdownItem (click)="exportAsPDF()"> <div class="icon__download-pdf qt-sz-16 qt-mr-8"></div> Export as PDF</li>
