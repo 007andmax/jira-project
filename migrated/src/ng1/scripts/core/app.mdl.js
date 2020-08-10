@@ -14,7 +14,6 @@
       'quicktech.core.services',
       'quicktech.core.billable',
       'quicktech.core.receivable',
-      'quicktech.core.receiptArchive',
       'quicktech.core.leftPanel',
       'quicktech.core.rightPanel',
       'quicktech.core.settings',
@@ -185,40 +184,15 @@
           templateUrl: '/ng1/scripts/core/dashboards/billing-dashboard/billing-dashboard.tpl.html',
           controller: 'quicktech.core.dashboards.billingDashboardCtrl'
         }))
-        .state('accounting.billable', waitForServices({
-          url: '/billable',
-          templateUrl: '/ng1/scripts/core/billable/billable.tpl.html',
-          controller: 'quicktech.core.billable.billableCtrl'
-        }))
         .state('services', waitForServices({
           url: '/accounting/services',
           templateUrl: '/ng1/scripts/core/services/services.tpl.html',
           controller: 'quicktech.core.services.servicesCtrl'
         }))
-        .state('receivable', waitForServices({
-          url: '/accounting/receivable/:mode',
-          templateUrl: '/ng1/scripts/core/receivable/receivable.tpl.html',
-          controller: 'quicktech.core.receivable.receivableCtrl'
-        }))
-        .state('payments', waitForServices({
-          url: '/accounting/payments/:mode',
-          templateUrl: '/ng1/scripts/core/billable/payments/payments.tpl.html',
-          controller: 'quicktech.core.payments.paymentsCtrl'
-        }))
-        .state('receipt-archive', waitForServices({
-          url: '/accounting/receipt-archive/:mode',
-          templateUrl: '/ng1/scripts/core/receipt-archive/receipt-archive.tpl.html',
-          controller: 'quicktech.core.receiptArchive.receiptArchiveCtrl'
-        }))
         .state('service-agreements', waitForServices({
           url: '/accounting/service-agreements',
           templateUrl: '/ng1/scripts/core/service-agreements/service-agreements.tpl.html',
           controller: 'quicktech.core.serviceAgreements.serviceAgreementsCtrl'
-        }))
-        .state('credits', waitForServices({
-          url: '/accounting/credits',
-          templateUrl: '/ng1/scripts/core/billable/credits/credits.tpl.html',
-          controller: 'quicktech.core.billable.creditsCtrl'
         }))
         .state('new-payments', waitForServices({
           url: '/accounting/new-payments',

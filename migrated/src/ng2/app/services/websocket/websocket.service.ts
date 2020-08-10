@@ -78,6 +78,7 @@ export class WebsocketService {
       that.subsribeToInvoiceNumber();
       that.subsribeToBillableCount();
       that.subsribeToInvoice();
+      that.subsribeToSubmittedTicket();
     });
   }
   private subsribeToDevices() {
@@ -330,8 +331,15 @@ export class WebsocketService {
 
     }, 3000);
   }
+  public subsribeToSubmittedTicket() {
+    setTimeout(() => {
+      this.stompClient.subscribe(`/user/watch/userSubmittedTicket`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.usersRealTimeService.handleRealTimeSubmittedTicket(newChange);
+      });
 
-  
+    }, 3000);
+  }
   public getClient() {
     return this.stompClient;
   }

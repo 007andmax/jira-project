@@ -199,7 +199,15 @@
     </div>
 
 
-    <div class="qt-df qt-w100 qt-jc-fe qt-color-dark qt-fs-12 qt-ff-gm qt-mb-20 qt-lh-133">
+    <div class="qt-df qt-w100 qt-jc-sb qt-color-dark qt-fs-12 qt-ff-gm qt-mb-20 qt-lh-133">
+
+      <div class="qt-mb-20 invoice-preview-notes">
+        <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-dark qt-ff-gm qt-lh-133">Customer Note</div>
+        <div class="qt-fs-13 qt-lh-154 note qt-ff-gr" *ngIf="invoiceProfile.regularNote" [textContent]="invoiceProfile.regularNote.line1 +
+        (invoiceProfile.regularNote.line2 || '')"></div>
+      </div>
+
+
       <div class="invoice-preview__total-block">
         <div class="qt-df qt-jc-sb qt-pl-12 qt-pr-12">
           <div class="qt-text-left">Sub Total</div>
@@ -224,12 +232,6 @@
     </div>
 
     <div>
-      <div class="qt-mb-20">
-        <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-dark qt-ff-gm qt-lh-133">Customer Note</div>
-        <div class="qt-fs-13 qt-lh-154 note" *ngIf="invoiceProfile.regularNote" [textContent]="invoiceProfile.regularNote.line1 +
-        (invoiceProfile.regularNote.line2 || '')"></div>
-      </div>
-
       <div>
         <div class="qt-fs-12 qt-mb-4 qt-ff-qm qt-color-dark qt-ff-gm qt-lh-133">Terms & Conditions</div>
         <div class="qt-fs-13 qt-lh-154 note" *ngIf="invoiceProfile.globalNote" [textContent]="invoiceProfile.globalNote.line1 + (invoiceProfile.globalNote.line2 ||

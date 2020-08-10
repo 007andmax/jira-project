@@ -44,13 +44,7 @@
 
         $scope.maxDate = new Date();
         $scope.date = $filter('date')(new Date(), 'dd MMM yyyy');
-
-
-
         var isNumberKey = $rootScope.isNumberKey
-
-
-
         $scope.setIsMultiple = function(val) {
           $scope.isMultiple = val;
         };

@@ -116,17 +116,23 @@
           <td class="unpaid-table__date" [textContent]="getDate(invoice.date)"></td>
           <td class="unpaid-table__amount qt-text-right" [textContent]="invoice.sum | currency"></td>
           <td class="unpaid-table__due qt-text-right" [textContent]="(invoice.sum - invoice.paidSum) | currency"></td>
-          <td class="unpaid-table__payment qt-text-right" [ngClass]="{'--checked':'invoice.selected'}"  ><input class="payment-input" *ngIf="invoice.selected" number
+          <td class="unpaid-table__payment qt-text-right" [ngClass]="{'--checked':'invoice.selected', '--input-error':!validate.getPayment() && invoice.selected}" ><input class="payment-input" *ngIf="invoice.selected" number
             [money]="true"
             [ngModel]="invoice.paymentAmount"
             (ngModelChange)="onChangePayment($event,invoice)"
-            appToFixed /></td>
+            appToFixed />
+           
+          </td>
         </tr>
 </ng-template>
 
       </tbody>
     </table>
-
+     <div class="error-payments --input-error" *ngIf="!validate.getPayment()">
+    <mat-error class="qt-tooltip-error" >
+      The payment amount is more than the Amount Due of invoices
+    </mat-error>
+  </div>
    </div>
     <div class="summary-info qt-df qt-pl-30 qt-pr-30 qt-pb-24 qt-jc-sb">
       <div>
@@ -172,7 +178,7 @@
 
  <div class="aside-footer qt-pr-30 qt-pl-30 qt-pb-16 qt-pt-16 qt-df qt-ai-c qt-jc-sb">
   <div class="qt-df">
-    <button class="qt-button qt-mr-12" (click)="create()">Record Payment</button>
+    <button class="qt-button qt-mr-12" appDisabledBtn #recordPayment="disabled" (onClick)="create()"  ><span *ngIf="!recordPayment.isBlock()">Record Payment</span> <app-preloader-ticket *ngIf="recordPayment.isBlock()"></app-preloader-ticket></button>
   <!--  <button class="qt-button qt-mr-12">Record Payment by CC</button>-->
     <button class="qt-button --gray" (click)="close()">Cancel</button>
   </div>

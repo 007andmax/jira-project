@@ -4,17 +4,18 @@
 
   angular.module('quicktech.core.billable').controller('quicktech.core.billable.newPaymentsCtrl',
     ['$scope', 'BillableService', 'CompaniesService', 'quicktech.common.services.SharedStateService',
-      'quicktech.common.services.PermissionsService', 'TicketsService', 'TaxesService', '$uibModal', '$rootScope', 'PaymentsService',
+      'quicktech.common.services.PermissionsService', 'TicketsService', 'TaxesService', '$uibModal', '$rootScope', 'PaymentsService', 'ReceivableService',
       function ($scope,
-                BillableService,
-                CompaniesService,
-                SharedStateService,
-                PermissionsService,
-                TicketsService,
-                TaxesService,
-                $uibModal,
-                $rootScope,
-                PaymentsService) {
+        BillableService,
+        CompaniesService,
+        SharedStateService,
+        PermissionsService,
+        TicketsService,
+        TaxesService,
+        $uibModal,
+        $rootScope,
+        PaymentsService,
+        ReceivableService) {
         $scope.showTooltipArray = [];
         $scope.payments = [];
         $scope.filteredPayments = [];
@@ -30,15 +31,15 @@
         $scope.stopScroll = false;
         $scope.sortByItem = null;
         $scope.invoiceNumberFilter = null;
-
-        $scope.getStopScrollStatus = function() {
+        $scope.invocesList = [];
+        $scope.getStopScrollStatus = function () {
           return $scope.stopScroll;
         };
 
         $scope.companies = CompaniesService.getClientCompanies();
-$scope.getPartialPaidInvoice = function (partialPaidInvoice) {
-return partialPaidInvoice.join(",");
-}
+        $scope.getPartialPaidInvoice = function (partialPaidInvoice) {
+          return partialPaidInvoice.join(",");
+        }
         $scope.getPaymentsList = function (data) {
           $scope.stopScroll = true;
           if (!$scope.stopReqeust) {
@@ -69,7 +70,7 @@ return partialPaidInvoice.join(",");
         };
 
 
-        $scope.openModal = function(modalType, payment) {
+        $scope.openModal = function (modalType, payment) {
           var template = '/ng1/scripts/core/billable/new-billable-modals/' + modalType + '.tpl.html';
 
           $scope.editedPayment = payment;
@@ -81,23 +82,35 @@ return partialPaidInvoice.join(",");
             controller: 'quicktech.core.billable.newModalsCtlr',
             windowClass: 'modal-receive-payment margin-top-modal-dialog',
             resolve: {
-              editedPayment: function() { return payment }
+              editedPayment: function () { return payment }
             }
 
           });
         };
-
-
-        $scope.parsePaymentMethod = function(method) {
-          return method.split('_').map(function(el) {
+        function removeDuplicates(myArr, prop) {
+          return myArr.filter((obj, pos, arr) => {
+            return arr.map(mapObj => mapObj[prop]).indexOf(obj[prop]) === pos;
+          });
+        }
+        $scope.getInvoices = function () {
+          ReceivableService.getInvoiceDataTable($scope, function (resp) {
+            $scope.invocesList = [...$scope.invocesList, ...resp];
+            $scope.invocesList = removeDuplicates($scope.invocesList, 'id');
+            $rootScope.allInvoices = $scope.invocesList;
+            console.log("$rootScope.allInvoices", $rootScope.allInvoices);
+          }, {})
+        };
+        $scope.getInvoices();
+        $scope.parsePaymentMethod = function (method) {
+          return method.split('_').map(function (el) {
             return el[0].toUpperCase() + el.slice(1).toLowerCase();
           }).join(' ');
         };
 
-        $scope.showInvoice = function(invoice, goBack) {
+        $scope.showInvoice = function (invoice, goBack) {
 
           if (typeof invoice === 'string') {
-            invoice = $rootScope.allInvoices.find(function(el) {
+            invoice = $rootScope.allInvoices.find(function (el) {
               return el.number === invoice;
             });
           }
@@ -105,7 +118,7 @@ return partialPaidInvoice.join(",");
 
           if (goBack) {
 
-            setTimeout(function() {
+            setTimeout(function () {
               window.scrollTo(0, 10);
               window.scrollTo(0, 0);
             }, 0)
@@ -120,7 +133,7 @@ return partialPaidInvoice.join(",");
         };
 
         $scope.setOrderByPayments = function (option) {
-          switch(option) {
+          switch (option) {
             case 'date':
               $scope.resetAllFiltersForSort();
               $scope.sortByItem = $scope.sortByItem !== 'PAYMENT_DATE_ASC' ? 'PAYMENT_DATE_ASC' : 'PAYMENT_DATE_DESC';
@@ -128,7 +141,7 @@ return partialPaidInvoice.join(",");
               $scope.getPaymentsList($scope.data);
               break;
             // case 'number': TODO: when back will be done
-            
+
             //   $scope.resetAllFiltersForSort();
             //   $scope.sortByItem = $scope.sortByItem !== 'INVOICE_NUMBER_ASC' ? 'INVOICE_NUMBER_ASC' : 'INVOICE_NUMBER_DESC';
             //   $scope.data = $scope.returnData();
@@ -136,7 +149,7 @@ return partialPaidInvoice.join(",");
             //   break;
             case 'name':
               $scope.resetAllFiltersForSort();
-              $scope.sortByItem = $scope.sortByItem !== 'COMPANY_NAME_ASC'? 'COMPANY_NAME_ASC' : 'COMPANY_NAME_DESC';
+              $scope.sortByItem = $scope.sortByItem !== 'COMPANY_NAME_ASC' ? 'COMPANY_NAME_ASC' : 'COMPANY_NAME_DESC';
               $scope.data = $scope.returnData();
               $scope.getPaymentsList($scope.data);
               break;
@@ -164,14 +177,14 @@ return partialPaidInvoice.join(",");
 
         };
 
-        $scope.returnData = function() {
+        $scope.returnData = function () {
           return ({
             limit: $scope.limitValue,
             offset: $scope.offset,
             invoiceNumber: $scope.invoiceNumber ? $scope.invoiceNumber : null,
             startDate: $scope.dateFilter.startDate ? new Date($scope.dateFilter.startDate).getTime() : null,
             endDate: $scope.dateFilter.endDate ? new Date($scope.dateFilter.endDate).getTime() : null,
-            companyName : $scope.companyFilterName ? $scope.companyFilterName : null,
+            companyName: $scope.companyFilterName ? $scope.companyFilterName : null,
             status: $scope.sortByValue ? $scope.sortByValue.toUpperCase() : null,
             sortBy: $scope.sortByItem ? $scope.sortByItem : null
           });
@@ -186,10 +199,10 @@ return partialPaidInvoice.join(",");
           }
         };
 
-        $scope.dateFilter = {startDate: null, endDate: null};
+        $scope.dateFilter = { startDate: null, endDate: null };
 
-        $scope.clearDateFilter = function() {
-          $scope.dateFilter =  {startDate: null, endDate: null};
+        $scope.clearDateFilter = function () {
+          $scope.dateFilter = { startDate: null, endDate: null };
           $scope.stopReqeust = false;
           $scope.filteredPayments = [];
           $scope.payments = [];
@@ -199,7 +212,7 @@ return partialPaidInvoice.join(",");
           $scope.getPaymentsList();
         };
 
-        $scope.sortBy = function(criteria) {
+        $scope.sortBy = function (criteria) {
           $scope.sortByValue = criteria;
           $scope.resetAllFiltersForSort();
           $scope.data = $scope.returnData();
@@ -208,22 +221,24 @@ return partialPaidInvoice.join(",");
 
         $scope.sortByValue = '';
 
-        $scope.$watch('invoiceNumberFilter', function(val) {
+        $scope.$watch('invoiceNumberFilter', function (val) {
         });
+        ReceivableService.getReceivableInvoicesData($scope, function (resp) {
+          $rootScope.uploadedReceivable = resp;
+        })
 
-
-        $scope.$watch('dateFilter', function(val) {
+        $scope.$watch('dateFilter', function (val) {
           $scope.resetAllFiltersForSort();
           $scope.data = $scope.returnData();
           $scope.getPaymentsList($scope.data);
 
         }, true);
 
-        $scope.$watch('stopScroll', function(val) {
+        $scope.$watch('stopScroll', function (val) {
         }, true);
 
-        $scope.resetAllFilters = function(dateFilterClear) {
-          $scope.dateFilter = !dateFilterClear ? {startDate: null, endDate: null} : $scope.dateFilter;
+        $scope.resetAllFilters = function (dateFilterClear) {
+          $scope.dateFilter = !dateFilterClear ? { startDate: null, endDate: null } : $scope.dateFilter;
           $scope.stopReqeust = false;
           $scope.filteredPayments = [];
           $scope.payments = [];
@@ -231,7 +246,7 @@ return partialPaidInvoice.join(",");
           $scope.offset = 0;
         };
 
-        $scope.resetAllFiltersForSort = function() {
+        $scope.resetAllFiltersForSort = function () {
           $scope.stopReqeust = false;
           $scope.filteredPayments = [];
           $scope.payments = [];
@@ -239,7 +254,7 @@ return partialPaidInvoice.join(",");
         };
 
 
-        $scope.resetFilter = function() {
+        $scope.resetFilter = function () {
           $scope.stopReqeust = false;
           $scope.filteredPayments = [];
           $scope.payments = [];
@@ -249,10 +264,10 @@ return partialPaidInvoice.join(",");
           $scope.getPaymentsList($scope.data)
         };
 
-        $scope.$watch('filterCompany', function(value, oldVal) {
+        $scope.$watch('filterCompany', function (value, oldVal) {
           $scope.companyFilterName = value;
 
-          if(value && value.length > 1) {
+          if (value && value.length > 1) {
             $scope.resetAllFiltersForSort();
             $scope.stopReqeust = false;
             $scope.offset = 0;
@@ -264,10 +279,10 @@ return partialPaidInvoice.join(",");
         });
 
 
-        $scope.onFilterPress = function(evt) {
+        $scope.onFilterPress = function (evt) {
         };
 
-        $scope.onBlurInvoice = function(invoiceNumber) {
+        $scope.onBlurInvoice = function (invoiceNumber) {
           $scope.resetAllFiltersForSort();
           $scope.invoiceNumber = $scope.invoiceNumberFilter;
           $scope.stopReqeust = false;
@@ -278,25 +293,25 @@ return partialPaidInvoice.join(",");
           $scope.getPaymentsList($scope.data);
         };
 
-        $scope.onKeyPressInvoice = function($event) {
+        $scope.onKeyPressInvoice = function ($event) {
           if ($event.keyCode === 13) {
             $('#inputNumber').blur();
           }
         };
 
-        $scope.deletePayment = function(id) {
-          PaymentsService.deletePayment(id, function(res) {
+        $scope.deletePayment = function (id) {
+          PaymentsService.deletePayment(id, function (res) {
           });
           $scope.filteredPayments = $scope.filteredPayments
             .filter((item) => item.id !== id)
         };
 
-        $scope.showTooltip = function(event, index, type) {
+        $scope.showTooltip = function (event, index, type) {
           event.stopPropagation();
           return type ? $scope.showTooltipArray[index] = true : $scope.showTooltipArray[index] = !$scope.showTooltipArray[index];
         };
 
-        $scope.hideAllTooltiip = function(event) {
+        $scope.hideAllTooltiip = function (event) {
           event.preventDefault();
           $scope.showTooltipArray = [];
           // $scope.filteredPayments.map(function(item) {

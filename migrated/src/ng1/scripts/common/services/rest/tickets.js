@@ -341,31 +341,7 @@
             }
             return resp.data;
           });
-      }
-     
-      function getLeftPanelCounts(scope, callback) {
-        if (!scope || !scope.$id) {
-          throw 'First argument must be Angularjs scope!'
-        }
-        $http.get('/data/getCounters').then(function (resp) {
-          Utils.customizeObj(resp.data, storage.leftPanelCounters);
-          if (callback) {
-            callback(storage.leftPanelCounters);
-          }
-        }, function (resp) {
-          if (callback) {
-            callback(resp.data);
-          }
-        });
-        RealTimeService.subscribe('/leftPanelCounts', scope, function (newChange) {
-          if (newChange.action == 'LEFT_PANEL_COUNTS') {
-            Utils.customizeObj(newChange.data, storage.leftPanelCounters);
-          }
-        });
-        return storage.leftPanelCounters;
-      }
-     
-      
+      } 
       
       function changePriority(ticketId, priority, callback) {
         if (!ticketId || !priority) {
@@ -466,59 +442,9 @@
           }
         });
       }
-      
-    
-     
-     
-     
- 
-     
-      // function increase
-      RealTimeService.subscribe('/tickets', scope, function (newChange) {
-       
-        // $timeout(changeTicketsCounts, 300)
-        // $timeout(changeTicketsCounts, 600)
-        // $timeout(changeTicketsCounts, 1000)
-        // $timeout(changeTicketsCounts, 1400)
-        // $timeout(changeTicketsCounts, 1800)
-        // ALL: {},
-        // UNASSIGNED: {},
-        // IN_PROGRESS: {},
-        // ON_HOLD: {},
-        // COMPLETED: {}
-        if (newChange.data && newChange.data.number) {
-          newChange.data.number = numberPrefix + newChange.data.number;
-        }
-        var ticketIndex = Utils.indexOfId(storage.tickets, newChange.data.id),
-          ticketById = storage.tickets[ticketIndex];
-        if (newChange.action === 'TICKET_DELETED') {
-          $rootScope.deletedTicket = newChange.data.id;
-          if (ticketIndex != null) {
-            storage.tickets.splice(ticketIndex, 1);
-            if (newChange.data.trash || newChange.data.spam) {
-              storage.ticketsQuantity--;
-              storage.ticketsQuantityCallback && storage.ticketsQuantityCallback(storage.ticketsQuantity);
-            }
-          }
-          if (storage.openedTicket && newChange.data.id === storage.openedTicket.id) {
-            $rootScope.$broadcast('ticket_is_not_available_anymore', newChange.data);
-            storage.openedTicket = undefined;
-          }
-        }  
-      });
-      //is need to insert ticket now or it will be received later by lazy loading
- 
-      
-   
-     
-     
-     
-     
-    
       return {
         getTicketFromStorage: getTicketFromStorage,
         search: search,
-        getCounts: getLeftPanelCounts,
         changePriority: changePriority,
         assignTo: assignTo,
         changeStatus: changeStatus,

@@ -6,6 +6,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 export class UsersRealTimeService {
 
   public changeUsersArray: EventEmitter<any> = new EventEmitter();
+  public changeSubmittedTicket: EventEmitter<any> = new EventEmitter();
 
   /**
    * Quote real time service constructor
@@ -18,5 +19,10 @@ export class UsersRealTimeService {
    */
   public handleRealTimeChanges(newChange) {
     this.changeUsersArray.emit(newChange);
+  }
+
+
+  public handleRealTimeSubmittedTicket(newChange) {
+    this.changeSubmittedTicket.emit(newChange);
   }
 }
