@@ -10,6 +10,7 @@ import { PaymentsListService } from './services/payments-list.service';
 import { DELETE_PAYMENT } from 'src/ng2/app/const/confirm';
 import { Invoice } from '../invoices/class/invoice';
 import { InvoicesAsidePreviewComponent } from '../invoices/invoices-aside-preview/invoices-aside-preview.component';
+import { PaymentsRealTimeService } from 'src/ng2/app/states/payments/payments-real-time.service';
 
 @Component({
   selector: 'payments',
@@ -30,7 +31,7 @@ export class PaymentsComponent implements OnInit {
   showCreatePayment: boolean = false;
   showDetailsPayment: boolean = false;
   showRefundPayment: boolean = false;
-  showEditPayment:boolean = false;
+  showEditPayment: boolean = false;
   offset: number = 20;
   public direction: string = 'ASC';
   detailsPayment: Payment;
@@ -47,6 +48,7 @@ export class PaymentsComponent implements OnInit {
     private companiesStateService: CompaniesStateService,
     private paymentsStateService: PaymentsStateService,
     private confirmStateService: ConfirmStateService,
+    private paymentsRealTimeService: PaymentsRealTimeService,
     private paymentsListService: PaymentsListService) { }
 
   ngOnInit() {
@@ -111,6 +113,15 @@ export class PaymentsComponent implements OnInit {
          }
        })
        this.sub.add(changeInvoice);*/
+    let changePaymentsArray = this.paymentsRealTimeService.changePaymentsArray.subscribe(data => {
+      if (data.action === 'PAYMENT_CREATED') {
+        let payment = new Payment(data.data);
+        if (this.paymentsFilter.checkPaymentForAdd(payment)) this.payments.unshift(payment);
+
+        console.log("data", data);
+      }
+    })
+    this.sub.add(changePaymentsArray);
   }
   /* getTotal() {
      let total = 0;
@@ -150,16 +161,16 @@ export class PaymentsComponent implements OnInit {
   
       })
     }*/
-    onCloseCreatePayment() {
-      this.showCreatePayment = false;
-    }
-    onCreatePayment() {
-      this.showCreatePayment = true;
-    }
-    onEditPayment(data) {
-      this.editPayment = data;
-      this.showEditPayment = true;
-    }
+  onCloseCreatePayment() {
+    this.showCreatePayment = false;
+  }
+  onCreatePayment() {
+    this.showCreatePayment = true;
+  }
+  onEditPayment(data) {
+    this.editPayment = data;
+    this.showEditPayment = true;
+  }
   onPreviewInvoice(data) {
     this.previewInvoiceId = data;
     if (this.showPreviewInvoice) {
