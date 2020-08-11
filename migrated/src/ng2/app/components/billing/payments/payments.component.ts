@@ -114,7 +114,6 @@ export class PaymentsComponent implements OnInit {
        })
        this.sub.add(changeInvoice);*/
     let changePaymentsArray = this.paymentsRealTimeService.changePaymentsArray.subscribe(data => {
-
       if (data.action === 'PAYMENT_CREATED') {
         let payment = new Payment(data.data);
         if (this.paymentsFilter.checkPaymentForAdd(payment)) this.payments.unshift(payment);
@@ -128,14 +127,13 @@ export class PaymentsComponent implements OnInit {
         });
         console.log("data", data);
       }
-      if (data.action === 'PAYMENTS_REFUNDED') {
-        
+      if (data.action === 'PAYMENTS_REFUNDED' || data.action === 'PAYMENT_EDITED') {
+        let payment = new Payment(data.data);
+        let index = this.payments.findIndex(item => item.id === payment.id);
+        if (index > -1) this.payments[index] = payment;
         console.log("data", data);
       }
-      if (data.action === 'PAYMENT_EDITED') {
-        
-        console.log("data", data);
-      }
+      this.cd.detectChanges();
     })
     this.sub.add(changePaymentsArray);
   }
