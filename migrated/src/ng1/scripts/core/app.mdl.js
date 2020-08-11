@@ -13,7 +13,6 @@
       'quicktech.core.products',
       'quicktech.core.services',
       'quicktech.core.billable',
-      'quicktech.core.receivable',
       'quicktech.core.leftPanel',
       'quicktech.core.rightPanel',
       'quicktech.core.settings',
@@ -193,11 +192,6 @@
           url: '/accounting/service-agreements',
           templateUrl: '/ng1/scripts/core/service-agreements/service-agreements.tpl.html',
           controller: 'quicktech.core.serviceAgreements.serviceAgreementsCtrl'
-        }))
-        .state('new-payments', waitForServices({
-          url: '/accounting/new-payments',
-          templateUrl: '/ng1/scripts/core/billable/new-payments/new-payments.tpl.html',
-          controller: 'quicktech.core.billable.newPaymentsCtrl'
         }))
         .state('quickSupport', waitForServices({
           url: '/quickSupport',

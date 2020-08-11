@@ -62,4 +62,7 @@ export class PaymentItemComponent implements OnInit {
     modalRef.componentInstance.message = `Do you want to remove the payment?`;
     this.paymentsStateService.setPaymentForemove(this.payment);
   }
+  public trackById(index, item) {
+    return item.id;
+  }
 }

@@ -104,4 +104,7 @@ export class EditPaymentComponent implements OnInit {
   close() {
     this.onClose.emit(null);
   }
+  public trackById(index, item) {
+    return item.id;
+  }
 }
