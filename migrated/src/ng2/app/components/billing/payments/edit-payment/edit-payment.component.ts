@@ -24,8 +24,7 @@ export class EditPaymentComponent implements OnInit {
   new CompanySetting('Wire Transfer', 'WIRE_TRANSFER')];
   isChangeAmountReceived: boolean = false;
   selectedPaymentMode = new CompanySetting('Cheque', 'CHEQUE');
- 
-  editPayment:EditPayment;
+  editPayment: EditPayment;
   formatDate: string = FORMAT_DATE_2;
   companies = [];
   selectedCompany: any = null;
@@ -34,7 +33,6 @@ export class EditPaymentComponent implements OnInit {
     private paymentsService: PaymentsService,) { }
 
   ngOnInit() {
-    console.log("this.payment",this.payment);
     this.editPayment = new EditPayment(JSON.parse(JSON.stringify(this.payment)));
     if (this.companiesState.getCompanies().length > 0) this.getClientsList(this.companiesState.getCompanies());
     let getOnCompanies = this.companiesState.getOnCompanies().subscribe((data) => {
@@ -42,13 +40,13 @@ export class EditPaymentComponent implements OnInit {
     })
     this.amountReceived = this.editPayment.paymentData.reduce((a, b) => {
       return a + b.paidAmount;
-      
     }, 0);;
+    this.sub.add(getOnCompanies);
   }
   private getClientsList(data) {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
       1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-      this.selectedCompany = this.companies.find(item => item.id === this.payment.clientCompanyId);
+    this.selectedCompany = this.companies.find(item => item.id === this.payment.clientCompanyId);
   }
   onChangeDate(data) {
     this.editPayment.setDate(data.day, data.month, data.year, this.companiesState.getCurrentCompany().addresses[0].timeZone.timeOffset);
@@ -75,7 +73,7 @@ export class EditPaymentComponent implements OnInit {
   getSubtotal() {
     let subTotal = 0;
     this.payment.paymentData.forEach(item => {
-       subTotal += (item.invoiceAmount - item.paidAmount);
+      subTotal += (item.invoiceAmount - item.paidAmount);
     })
     return subTotal;
   }
@@ -98,13 +96,9 @@ export class EditPaymentComponent implements OnInit {
     return total;
   }
   edit() {
-    console.log("this.amountReceived",this.amountReceived);
     if (!this.validate.isValidateEditAside(this.amountReceived, this.editPayment.paymentData)) return;
-   
     this.paymentsService.editPayments(this.editPayment.getDataForRequest(this.payment)).subscribe(data => {
-    /*  this.notificationStateService.oninitShowNotification("The payment has been received");
-      */
-     this.close();
+      this.close();
     })
   }
   close() {

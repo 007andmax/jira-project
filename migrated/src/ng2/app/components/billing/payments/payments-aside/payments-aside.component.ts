@@ -18,9 +18,6 @@ export class PaymentsAsideComponent implements OnInit {
   ngOnInit() {
     this.currentCompany = this.companiesStateService.getCurrentCompany();
     this.company = this.companiesStateService.getCompanies().find(item => item.id === this.payment.clientCompanyId);
-    console.log("this.currentCompany",this.currentCompany);
-    console.log("payment",this.payment);
-    console.log("сompany",this.company.companyInfo);
   }
   getCompanyLogoUrl() {
     if (this.currentCompany && this.currentCompany.logo && this.currentCompany.logo && this.currentCompany.logo.base64 && !this.currentCompany.logo.cropped) return this.currentCompany.logo.base64;

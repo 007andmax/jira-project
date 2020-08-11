@@ -44,7 +44,6 @@ export class PaymentsComponent implements OnInit {
   sub: Subscription = new Subscription();
   constructor(private paymentsService: PaymentsService,
     public cd: ChangeDetectorRef,
-    //private invoiceRealTimeService: InvoiceRealTimeService,
     private companiesStateService: CompaniesStateService,
     private paymentsStateService: PaymentsStateService,
     private confirmStateService: ConfirmStateService,
@@ -74,107 +73,29 @@ export class PaymentsComponent implements OnInit {
         if (this.confirmStateService.getConfirmAction() === DELETE_PAYMENT) {
           this.onRemovePayment(this.paymentsStateService.getPaymentForRemove());
         }
-        /* if (this.confirmStateService.getConfirmAction() === ROLLBACK_INVOICE) {
-           this.onRollbackInvoice(this.invoiceStateService.getInvoiceForRollback());
-         }
-         if (this.confirmStateService.getConfirmAction() === REFUND_PAYMENTS) {
-           this.onRollbackInvoice(this.invoiceStateService.getInvoiceForRefund());
-         }*/
       }
     })
     this.sub.add(getConfirm);
-
-    /*   let changeInvoice = this.invoiceRealTimeService.changeInvoice.subscribe(data => {
-         if (data.action === 'INVOICE_SAVED') {
-           let index = this.invoices.findIndex(item => item.id === data.data.id);
-           let invoice = new Invoice(data.data);
-           if (index > -1) {
-             this.invoices[index] = invoice;
-           } else {
-             this.invoices.unshift(invoice);
-           }
-         }
-         if (data.action === 'INVOICE_STATUS' || data.action === 'INVOICE_ROLLBACK') {
-           let index = this.invoices.findIndex(item => item.id === data.data.id);
-           let invoice = new Invoice(data.data);
-           if (index > -1) this.invoices[index] = invoice;
-         }
-         if (data.action === 'PAYMENT_RECEIVED') {
-           data.data.forEach(element => {
-             let index = this.invoices.findIndex(item => item.id === element.id);
-             let invoice = new Invoice(element);
-             invoice.sum = invoice.totalSum;
-             if (index > -1) this.invoices[index] = invoice;
-           });
-         }
-         if (data.action === 'INVOICE_DELETED') {
-           let index = this.invoices.findIndex(item => item.id === data.data.id);
-           if (index > -1) this.invoices.splice(index, 1);
-         }
-       })
-       this.sub.add(changeInvoice);*/
     let changePaymentsArray = this.paymentsRealTimeService.changePaymentsArray.subscribe(data => {
       if (data.action === 'PAYMENT_CREATED') {
         let payment = new Payment(data.data);
         if (this.paymentsFilter.checkPaymentForAdd(payment)) this.payments.unshift(payment);
-
-        console.log("data", data);
       }
       if (data.action === 'PAYMENTS_DELETED') {
         data.data.forEach(id => {
           let index = this.payments.findIndex(item => item.id === id);
           if (index > -1) this.payments.splice(index, 1);
         });
-        console.log("data", data);
       }
       if (data.action === 'PAYMENTS_REFUNDED' || data.action === 'PAYMENT_EDITED') {
         let payment = new Payment(data.data);
         let index = this.payments.findIndex(item => item.id === payment.id);
         if (index > -1) this.payments[index] = payment;
-        console.log("data", data);
       }
       this.cd.detectChanges();
     })
     this.sub.add(changePaymentsArray);
   }
-  /* getTotal() {
-     let total = 0;
-     this.invoices.forEach(item => {
-       total += item.sum;
-     })
-     return total;
-   }*/
-  /* onCreatePayment() {
-     this.selectedInvoices = [];
-     if (this.selectedCompanyId) {
-       this.invoices.forEach(item => {
-         if (item.selected) this.selectedInvoices.push(item);
-       })
-     }
-     this.showCreateInvoice = true;
- 
-   }*/
-  /* onCloseCreatePayment() {
-     this.showCreateInvoice = false;
-     this.selectedCompanyId = null;
-     this.invoices.forEach(item => {
-       item.selected = false;
-       item.blockSelected = false;
-     })
-   }*/
-  /*  onPreviewInvoice(data) {
-      this.previewInvoice = data;
-      if (this.showPreviewInvoice) {
-        this.cd.detectChanges();
-        this.previewInvoiceAside.onGetInvoice();
-      }
-      this.showPreviewInvoice = true;
-    }
-    onRollbackInvoice(invoice) {
-      this.invoicesService.rollback(invoice.id).subscribe(data => {
-  
-      })
-    }*/
   onCloseCreatePayment() {
     this.showCreatePayment = false;
   }
@@ -218,27 +139,6 @@ export class PaymentsComponent implements OnInit {
     window.scrollTo(0, 0);
     this.onScroll();
   }
-  /* onSelectInvoice() {
-     let find = this.invoices.find(item => item.selected);
-     if (find) {
-       this.selectedCompanyId = find.companyId;
-       this.invoices.forEach(item => {
-         if (item.companyId !== this.selectedCompanyId) item.blockSelected = true;
-         if (item.companyId === this.selectedCompanyId) item.blockSelected = false;
-       })
-     } else {
-       this.selectedCompanyId = null;
-       this.invoices.forEach(item => {
-         item.blockSelected = false
-       })
-     }
-     this.cd.detectChanges();
-   }*/
-  /* onRemoveInvoice(invoice) {
-     this.invoicesService.remove(invoice.id).subscribe(data => {
-       this.showPreviewInvoice = false;
-     })
-   }*/
   getInvoices() {
     if (this.paymentsListService.getBlockList()) {
       this.infiniteScrollDisabled = false;
@@ -248,10 +148,6 @@ export class PaymentsComponent implements OnInit {
     if (this.page_number > 0) this.showPendingPreloader = true;
     this.paymentsService.getPayments(this.paymentsFilter.getFIlter()).subscribe((data: any) => {
       this.payments = [...this.payments, ...data];
-      /* if (this.selectedCompanyId) this.payments.forEach(item => {
-         if (item.companyId !== this.selectedCompanyId) item.blockSelected = true;
-         if (item.companyId === this.selectedCompanyId) item.blockSelected = false;
-       })*/
       this.infiniteScrollDisabled = false;
       if (data.length < this.offset) this.paymentsListService.setBlockList(true);
       this.page_number += 1;
@@ -274,8 +170,5 @@ export class PaymentsComponent implements OnInit {
   public onScroll() {
     this.infiniteScrollDisabled = true;
     this.getInvoices();
-
   }
-
-
 }
