@@ -114,16 +114,21 @@ export class PaymentsComponent implements OnInit {
        })
        this.sub.add(changeInvoice);*/
     let changePaymentsArray = this.paymentsRealTimeService.changePaymentsArray.subscribe(data => {
-      let payment = new Payment(data.data);
+
       if (data.action === 'PAYMENT_CREATED') {
-      
+        let payment = new Payment(data.data);
         if (this.paymentsFilter.checkPaymentForAdd(payment)) this.payments.unshift(payment);
 
         console.log("data", data);
       }
       if (data.action === 'PAYMENTS_DELETED') {
-       // let payment = new Payment(data.data);
-      //  if (this.paymentsFilter.checkPaymentForAdd(payment)) this.payments.unshift(payment);
+        data.data.forEach(id => {
+          let index = this.payments.findIndex(item => item.id === id);
+          if (index > -1) this.payments.splice(index, 1);
+
+        });
+        // let payment = new Payment(data.data);
+        //  if (this.paymentsFilter.checkPaymentForAdd(payment)) this.payments.unshift(payment);
 
         console.log("data", data);
       }
