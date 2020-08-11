@@ -37,7 +37,7 @@
 
           <div>
             <div>
-              <textarea class="summary-info__textarea refound-textarea qt-textarea" [(ngModel)]="refundPayment.note" placeholder="Partial Payment Recived from Aspen accounting office" appTextArea    maxlength="250"   cols="30" rows="1"></textarea>
+              <textarea class="summary-info__textarea refound-textarea qt-textarea" [(ngModel)]="refundPayment.note" placeholder="Type your custom note here" appTextArea    maxlength="250"   cols="30" rows="1"></textarea>
             </div>
             <div class="qt-df qt-ai-c qt-mt-15">
               <label class="qt-checkbox receive-full-amount-check qt-mb-0 pointer" for="email-payment">
@@ -56,7 +56,7 @@
   </div>
   <div class="aside-footer qt-pr-30 qt-pl-30 qt-pb-16 qt-pt-16 qt-df qt-ai-c qt-jc-sb">
     <div class="qt-df">
-      <button class="qt-button qt-mr-12" (click)="create()">Refund Payment</button>
+      <button class="qt-button qt-mr-12" appDisabledBtn #refundPaymentBtn="disabled" (onClick)="create()"><span *ngIf="!refundPaymentBtn.isBlock()">Refund Payment</span> <app-preloader-ticket *ngIf="refundPaymentBtn.isBlock()"></app-preloader-ticket></button>
       <button class="qt-button --gray" (click)="close()">Cancel</button>
     </div>
    </div>
