@@ -33,6 +33,7 @@ import { CompanyTicketsComponent } from './components/company-tickets/company-ti
 import { BillableComponent } from './components/billing/billable/billable.component';
 import { BillableTicketsComponent } from './components/billing/billable/billable-tickets/billable-tickets.component';
 import { InvoicesComponent } from './components/billing/invoices/invoices.component';
+import { DefaultServicesComponent } from './components/billing/default-services/default-services.component';
 
 const routes: Routes = [
   {
@@ -180,6 +181,10 @@ const routes: Routes = [
   {
     path: 'ng2/billable',
     component: BillableComponent,
+  },
+  {
+    path: 'ng2/services',
+    component: DefaultServicesComponent,
   },
   {
     path: 'ng2/invoices',

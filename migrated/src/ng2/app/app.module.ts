@@ -273,6 +273,8 @@ import { InvoicesAsideComponent } from './components/billing/invoices/invoices-a
  import { InvoicesHeaderComponent } from './components/billing/invoices/invoices-header/invoices-header.component';
 import { InvoicesFilterComponent } from './components/billing/invoices/invoices-header/invoices-filter/invoices-filter.component';
 import { InvoicesAsidePreviewComponent } from './components/billing/invoices/invoices-aside-preview/invoices-aside-preview.component';
+import { DefaultServicesComponent } from './components/billing/default-services/default-services.component';
+import { DefaultServicesAddComponent } from './components/billing/default-services/default-services-add/default-services-add.component';
  
 
 
@@ -408,6 +410,9 @@ angular.module('quicktech')
   .directive(
     'billableComponent',
     downgradeComponent({ component: BillableComponent }))
+    .directive(
+      'defaultServicesComponent',
+      downgradeComponent({ component: DefaultServicesComponent }))
   .directive(
     'invoicesComponent',
     downgradeComponent({ component: InvoicesComponent }))
@@ -675,7 +680,9 @@ angular.module('quicktech')
     InvoicesItemComponent,
     InvoicesHeaderComponent,
     InvoicesFilterComponent,
-    InvoicesAsidePreviewComponent
+    InvoicesAsidePreviewComponent,
+    DefaultServicesComponent,
+    DefaultServicesAddComponent
   ],
   imports: [
     BrowserModule,
@@ -749,7 +756,8 @@ angular.module('quicktech')
     ModalCustomShareScreenComponent,
     BillableComponent,
     InvoicesComponent,
-    BillableTicketsComponent
+    BillableTicketsComponent,
+    DefaultServicesComponent
     // RecurringTicketsComponent
   ],
   exports: [

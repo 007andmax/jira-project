@@ -185,6 +185,10 @@
           templateUrl: '/ng1/scripts/core/services/services.tpl.html',
           controller: 'quicktech.core.services.servicesCtrl'
         }))
+        .state('new-services', waitForServices({
+          url: '/ng2/services',
+          template: '<default-services-component></default-services-component>'
+        }))
         .state('service-agreements', waitForServices({
           url: '/accounting/service-agreements',
           templateUrl: '/ng1/scripts/core/service-agreements/service-agreements.tpl.html',

@@ -849,6 +849,11 @@
              ng-click="stateGo($event, 'services', { tabName: 'default' })">
           Default Services
         </div>
+        <div class="center-category__category"
+        ng-class="{active: $state.includes('services')}"
+        ng-click="stateGo($event, 'new-services')">
+     Default Services 2
+   </div>
       <!--   <div class="center-category__category"
              ng-class="{active: $state.includes('accounting.billable')}"
              ng-click="stateGo($event, 'accounting.billable')">
