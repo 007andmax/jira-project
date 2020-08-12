@@ -125,8 +125,9 @@ export class PaymentsComponent implements OnInit {
   }
   onRemovePayment(payment) {
     this.paymentsService.deletePayment(payment).subscribe(data => {
-
     })
+    this.showDetailsPayment = false;
+    this.cd.detectChanges();
   }
   public sortBy(sort) {
     this.showPreloader = true;

@@ -29,7 +29,7 @@
   </div>
 </div>
 <app-refund-payment *ngIf="showRefundPayment" [payment]="refundPayment" (onClose)="showRefundPayment = false"></app-refund-payment>
-<app-payments-aside *ngIf="showDetailsPayment" [payment]="detailsPayment" (onClose)="showDetailsPayment = false"></app-payments-aside>
+<app-payments-aside *ngIf="showDetailsPayment" [payment]="detailsPayment" (onClose)="showDetailsPayment = false" (onEditPayment)="onEditPayment($event)" (onRefundPayment)="onRefundPayment($event)"></app-payments-aside>
 <app-invoices-aside-preview #previewInvoiceAside *ngIf="showPreviewInvoice" (onClose)="showPreviewInvoice = false" [invoiceId]="previewInvoiceId"></app-invoices-aside-preview>
 <app-edit-payment *ngIf="showEditPayment" [payment]="editPayment" (onClose)="showEditPayment = false"></app-edit-payment>
 <app-invoices-aside *ngIf="showCreatePayment" (onClose)="onCloseCreatePayment()"></app-invoices-aside>
