@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { Payment } from '../class/payment';
 import { FORMAT_DATE_2 } from 'src/ng2/app/const/date-picker';
@@ -8,6 +8,7 @@ import { CompanySetting } from '../../../companies/class/company-setting';
 import { Subscription } from 'rxjs';
 import * as moment from "moment";
 import { PaymentsService } from 'src/ng2/app/services/payments/payments.service';
+import { DisabledBtnDirective } from 'src/ng2/app/directives/disabled-btn.directive';
 
 @Component({
   selector: 'app-edit-payment',
@@ -28,6 +29,7 @@ export class EditPaymentComponent implements OnInit {
   formatDate: string = FORMAT_DATE_2;
   companies = [];
   selectedCompany: any = null;
+  @ViewChild('recordPayment') recordPayment: DisabledBtnDirective;
   sub: Subscription = new Subscription();
   constructor(private companiesState: CompaniesStateService,
     private paymentsService: PaymentsService,) { }
@@ -97,8 +99,12 @@ export class EditPaymentComponent implements OnInit {
   }
   edit() {
     if (!this.validate.isValidateEditAside(this.amountReceived, this.editPayment.paymentData)) return;
+    this.recordPayment.setDisabled(true);
     this.paymentsService.editPayments(this.editPayment.getDataForRequest(this.payment)).subscribe(data => {
+      this.recordPayment.setDisabled(false);
       this.close();
+    },err => {
+      this.recordPayment.setDisabled(false);
     })
   }
   close() {

@@ -8,13 +8,9 @@
 
         <div class="qt-df qt-ai-c" >
 
-          <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__edit" (click)="showEdit()"></div>
-          <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__email-dark"></div>
-          <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__refund-payment" (click)="showRefund()"></div>
-          <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__download-pdf"></div>
-          <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__print"></div>
+          <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__edit" *ngIf="!payment.refundMethod" (click)="showEdit()"></div>
+          <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__refund-payment" *ngIf="!payment.refundMethod" (click)="showRefund()"></div>
           <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-16 header-circle-icon icon__remove" (click)="deletePayment()"></div>
-
           <div class="icon__close qt-sz-24 qt-pointer qt-ic-c" (click)="close()"></div>
         </div>
 
