@@ -249,6 +249,7 @@ import { ServicePipe } from './pipe/service.pipe';
 import { LeftPanelSettingsComponent } from './components/left-panel/left-panel-settings/left-panel-settings.component';
 import { TicketsFilterComponent } from './components/tickets/tickets/tickets-header/tickets-filter/tickets-filter.component';
 import { DisabledBtnModule } from './modules/disabled-btn/disabled-btn.module';
+import { TechServiceReportComponent } from './components/reports/reports/tech-service-report/tech-service-report.component';
  
 
 
@@ -612,6 +613,8 @@ angular.module('quicktech')
     LeftPanelSettingsComponent,
 
     TicketsFilterComponent,
+
+    TechServiceReportComponent,
   ],
   imports: [
     BrowserModule,

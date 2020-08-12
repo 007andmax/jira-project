@@ -36,6 +36,9 @@ export class ReportsService {
   public getAccountingStartDate () {
     return this.http.get(this.apiUrl + `settings/companyProfile/accountingStartDate`);
   }
+  public getReportByTechService(data) {
+    return this.http.post(this.apiUrl + `reports/sales/byServices`, data);
+  }
   public getReportByGlNumber(data) {
     return this.http.post(this.apiUrl + `reports/sales/byGlNumber`, data);
   }

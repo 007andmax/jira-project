@@ -1,0 +1,92 @@
+<div>
+  <app-report-menu [report]="'tech-service'" (onRequest)="onRequest($event)" (getReport)="getReport($event)"></app-report-menu>
+ </div>
+ <app-report-additional-actions [report]="'tech-service'"  [template]="'CUSTOMER_REPORT'" ></app-report-additional-actions> <!--[fileName]="'customer-report-' + getSelectedClientName()"-->
+ <div class="loading" *ngIf="loadingInProgress"></div>
+ <div class="product-list___ticket report-show-footer-header"  id="product-list-ticket-data" >
+  <div  class="product-list-ticket"   *ngIf="!loadingInProgress">
+    <div class="customer-ticket" *ngIf="onInit" >
+      <div class="customer-ticket__report">
+        <div class="report-header">
+          <h1>Service Report</h1>
+          <div class="company-info">
+            <h3>{{ serviceReport.companyName || 'All companies' }}</h3>
+            <p><span>{{serviceReport.startDate}}</span> - <span>{{ serviceReport.endDate }}</span></p>
+          </div>
+        </div>
+        <div *ngIf="showHeader" class="customer-ticket__report--summary"  >
+          <h3>Resolved Services</h3>
+          <div class="customer-ticket__header">
+            <div class="customer-ticket__header--item canvas-chart no-value">
+              <nvd3 [options]="chartOptions" [data]="chartData"></nvd3>
+            
+            </div>
+            <div class="customer-ticket__header--item">
+              <ng-template ngFor let-time [ngForOf]="overallServiceTime" let-i="index" [ngForTrackBy]="trackByIndex" >
+                <p
+                [ngClass]="'service-color-' + i">
+               {{ time.name }} <span>{{ formatServiceTime(time.hours,time.minutes)}}</span>
+             </p>
+                </ng-template>
+             
+
+            </div>
+            <div class="customer-ticket__header--item">
+             
+              <div>
+                <p><span style="font-weight: 400;">{{formatServiceTime(timeSpent.hours,timeSpent.minutes)}}</span> hr</p>
+                <p style="color:#fff;">Time Spent</p>
+              </div>
+           <p class="ticket-report-time" >Total time of all services</p>
+            </div>
+          </div>
+
+        </div>
+        <div class="customer-ticket__report--details" >
+          <h3>Service Details</h3>
+          <div class="details-header clearfix">
+            <div class="col-md-8" style="width: 70%;">TICKET NUMBER</div>
+            <div class="col-md-2" style="width: 20%;">DATE / TIME</div>
+            <div class="col-md-2" style="width: 10%;">STATUS</div>
+          </div>
+          <ng-template ngFor let-item [ngForOf]="list" let-i="index" [ngForTrackBy]="trackByIndex" >
+          
+          <div class="details-content clearfix"  >
+            <div class="col-md-8 ellipsis" style="width: 70%;margin-bottom: 20px;" [textContent]="getDate(item.serviceExpenseDate)"></div>
+            <div class="col-md-2" style="width: 20%;margin-bottom: 20px;" [textContent]="'txt# ' + item.ticketNumber"></div>
+           
+          
+            <div
+                 class="services">
+               
+              <div  >
+                
+                <div   class="clearfix" >
+                  <div class="col-md-3 ellipsis">
+                    {{ ticket.expenseName }}
+                  </div>
+
+                  <div class="col-md-7" [innerHTML]="ticket.description"></div>
+
+                  <div class="col-md-2">
+                    Time: {{ getDurationFilter(ticket.serviceTime) }}
+                  </div>
+                </div>
+             
+              </div>
+             
+            </div>
+            <div class="col-md-3 pdf-w" style="margin-top: 20px;">Service user: {{ getUserName(ticket.serviceUser) }}</div>
+            <div class="col-md-3 pdf-w" style="margin-top: 20px;">Device: {{ getDeviceName(ticket.ticketDevice) }}</div>
+            <div class="col-md-3 pdf-w" style="margin-top: 20px;">Tech: {{ getUserName(ticket.ticketCreatedBy) }}</div>
+            <div ng-if="ticket.responseTime !== null" class="col-md-3 pdf-w" style="margin-top: 20px;">Service date: {{ parseDateService(ticket.expenseDate) }}</div>
+          </div>
+</ng-template>
+        </div>
+      </div>
+    </div>
+    
+   
+  <app-report-footer *ngIf="onInit"></app-report-footer>
+   </div>
+ </div>
