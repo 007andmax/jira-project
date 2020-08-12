@@ -1,5 +1,10 @@
 .invoices-page {
 
+  .table-container {
+    overflow-x: auto;
+    min-height: calc(100vh - 346px);
+  }
+
   .invoice-table {
     max-width: 1320px;
     min-width: 1064px;

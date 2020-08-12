@@ -15,6 +15,7 @@
   }
 
   .table-container {
+    overflow-x: auto;
     min-height: calc(100vh - 246px);
   }
 
