@@ -1,5 +1,73 @@
-<p>
-  default-services works!
-</p>
-<button (click)="showCreateService = true">create</button>
+<div class="page-list default-services-page">
+  <div class="qt-list-header sticky-list-header">
+    <div>
+      <h3 class="list-title">Default Services</h3>
+    </div>
+
+    <div class="d-f ai-c">
+      <button class="qt-btn --outline-blue" (click)="showCreateService">Create Service</button>
+    </div>
+  </div>
+
+  <div>
+    <table class="qt-table-modern default-service-table">
+      <thead>
+        <tr>
+          <th class="default-service-table__service-name">
+            Service Name
+            <span class="qt-table-modern__sorting"></span>
+          </th>
+          <th class="default-service-table__rate">
+            Hourly Rate($)
+            <span class="qt-table-modern__sorting"></span>
+          </th>
+          <th class="default-service-table__taxes">
+            Taxes
+            <span class="qt-table-modern__sorting"></span>
+          </th>
+          <th class="default-service-table__gl">
+            GL Number
+            <span class="qt-table-modern__sorting"></span>
+          </th>
+          <th class="default-service-table__billable">
+            Make Billable
+          </th>
+          <th class="default-service-table__default">
+            Set as Default
+          </th>
+          <th class="default-service-table__menu"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Managed Services</td>
+          <td>$125.00</td>
+          <td>GST 5%</td>
+          <td>
+            <input class="qt-input" type="text">
+          </td>
+          <td>
+            <div class="d-f">
+              <label class="qt-checkbox">
+                <input type="checkbox">
+                <span></span>
+              </label>
+            </div>
+          </td>
+          <td>
+            <div class="d-f">
+              <label class="qt-checkbox">
+                <input type="checkbox">
+                <span></span>
+              </label>
+            </div>
+          </td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
 <app-default-services-add *ngIf="showCreateService" (onClose)="showCreateService = false"></app-default-services-add>
