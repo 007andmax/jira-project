@@ -19,7 +19,7 @@
   <td class="invoce-table__read-on" [textContent]="getDate(invoice.readedAt)"></td>
   <td class="invoce-table__amount" [textContent]="invoice.sum | currency"></td>
   <td class="invoce-table__balance-due" [textContent]="((invoice.totalSum || invoice.sum) - invoice.paidSum) | currency"></td>
-  <td class="invoce-table__menu" ngbDropdown>
+  <td class="invoce-table__menu" ngbDropdown [placement]="'left-top'">
     <div class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"  id="dropdownBasic1" ngbDropdownToggle>
       <ul class="qt-dropdown-menu invoice-items-dropdown"  ngbDropdownMenu aria-labelledby="dropdownBasic1">
         <li class="pointer" ngbDropdownItem (click)="resendInvoices()"> <div class="icon__email-dark qt-sz-16 qt-mr-8"></div> Resend</li>
