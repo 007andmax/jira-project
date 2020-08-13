@@ -45,6 +45,8 @@ export class ReportSendEmailComponent implements OnInit {
   @Input() template: string = "PDF_TEMPLATE";
   @Input() orientation;
   @Input() selectedClient;
+  @Input() accountType = 'CLIENT';
+  
   constructor(private draftEmailStateService: DraftEmailStateService, private elRef: ElementRef,
     private draftEmailService: DraftEmailService, public cd: ChangeDetectorRef,
     public activeModal: NgbActiveModal,

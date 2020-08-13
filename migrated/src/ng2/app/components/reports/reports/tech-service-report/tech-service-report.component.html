@@ -1,10 +1,10 @@
 <div>
   <app-report-menu [report]="'tech-service'" (onRequest)="onRequest($event)" (getReport)="getReport($event)"></app-report-menu>
  </div>
- <app-report-additional-actions [report]="'tech-service'"  [template]="'CUSTOMER_REPORT'" ></app-report-additional-actions> <!--[fileName]="'customer-report-' + getSelectedClientName()"-->
+ <app-report-additional-actions [report]="'tech-service'" [accountType]="'TECH'"   [fileName]="'tech-service-report'" ></app-report-additional-actions> <!---->
  <div class="loading" *ngIf="loadingInProgress"></div>
  <div class="product-list___ticket report-show-footer-header"  id="product-list-ticket-data" >
-  <div  class="product-list-ticket"   *ngIf="!loadingInProgress">
+  <div  class="product-list-ticket" style="padding: 0px;"   *ngIf="!loadingInProgress">
     <div class="customer-ticket" *ngIf="onInit" >
       <div class="customer-ticket__report">
         <div class="report-header">
@@ -15,7 +15,10 @@
           </h3>
         </div>
         <div class="customer-ticket__report--details" >
-          <h3 [textContent]="'Tech User Name ' + ((techUser) ? techUser.firstName + ' ' + techUser.lastName : '')"></h3>
+          <div class="header-body" style="display: flex;justify-content: space-between;align-items: baseline;">
+          <h3 *ngIf="techUser" [textContent]="'Tech User : ' + ((techUser) ? techUser.firstName + ' ' + techUser.lastName : '')"></h3>
+          <h3 [textContent]="'Date: ' + getStartEndDate()"></h3>
+        </div>
           <div class="details-header clearfix">
             <div class="col-md-8" style="width: 20%;">Date</div>
             <div class="col-md-2" style="width: 20%;">Ticket</div>
@@ -32,8 +35,12 @@
             <div class="col-md-2" style="width: 20%;margin-bottom: 20px;" [textContent]="item.serviceName"></div>
             <div class="col-md-2" style="width: 20%;margin-bottom: 20px;" [textContent]="getDuration(item.quantity)"></div>
             </div>
+           
 </ng-template>
-        </div>
+<div class="details-content clearfix"  >
+<div class="col-md-2" style="float: right;margin-bottom: 20px;margin-right: 60px;" [textContent]="'Total Hours ' + getDuration(techService.totalQuantity)"></div>
+</div>    
+</div>
       </div>
     </div>
     

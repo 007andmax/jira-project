@@ -136,7 +136,7 @@ export class ReportMenuComponent implements OnInit {
   }
   onSelectTechUser(data) {
     this.ticketsReport.setTechUser(data);
-    this.techService.setTechUserId(data.id);
+    this.techService.setTechUserId((data) ? data.id : null);
   }
   getReportByTaxes() {
     if (!this.validate.isValidateTaxes(this.glNumber.startDate, this.glNumber.endDate)) return;

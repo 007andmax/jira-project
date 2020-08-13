@@ -13,8 +13,8 @@ export class TechServiceReportComponent implements OnInit {
   loadingInProgress: boolean = false;
   onInit = false;
   techService: TechService = new TechService();
-  techUser:User;
-  constructor(private usersStateService:UsersStateService) { }
+  techUser: User;
+  constructor(private usersStateService: UsersStateService) { }
 
   ngOnInit() {
   }
@@ -24,10 +24,10 @@ export class TechServiceReportComponent implements OnInit {
   }
   public getReport(data) {
     console.log("data", data);
-   this.techService = data;
-   this.techUser = this.usersStateService.getAllUsers().find(item => item.id === this.techService.techUserId);
+    this.techService = data;
+    this.techUser = this.usersStateService.getAllUsers().find(item => item.id === this.techService.techUserId);
     this.onInit = true;
-    console.log("this.techUser",this.techUser);
+    console.log("this.techUser", this.techUser);
   }
   public getDuration(quantity) {
     var timeInMinutes = quantity * 60,
@@ -35,7 +35,16 @@ export class TechServiceReportComponent implements OnInit {
       minutes = Math.round(timeInMinutes - (hours * 60));
     return `${(hours < 10) ? '0' + hours : hours} : ${(minutes < 10) ? '0' + minutes : minutes}`
   }
-  public getDate(date) {
-    return moment((date) ? new Date(date) : new Date()).format('DD/MM/YYYY');
+  public getStartEndDate() {
+
+    return `${moment( new Date(this.techService.startDate)).format('DD/MM/YYYY')} ${moment( new Date(this.techService.endDate)).format('DD/MM/YYYY')}`
+  }
+  public getDate(dateInvoice) {
+    let date = new Date(dateInvoice);
+    let typeTime = (date.getHours() > 12) ? "PM" : "AM",
+      hours = (date.getHours() > 12) ? date.getHours() - 12 : date.getHours(),
+      minutes = (date.getMinutes() > 10) ? date.getMinutes() : "0" + date.getMinutes();
+
+    return `${moment((date) ? new Date(date) : new Date()).format('DD/MM/YYYY')} ${(hours > 10) ? hours : "0" + hours}:${minutes} ${typeTime}`;
   }
 }
