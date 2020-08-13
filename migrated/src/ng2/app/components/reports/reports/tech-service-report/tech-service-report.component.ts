@@ -35,9 +35,8 @@ export class TechServiceReportComponent implements OnInit {
       minutes = Math.round(timeInMinutes - (hours * 60));
     return `${(hours < 10) ? '0' + hours : hours} : ${(minutes < 10) ? '0' + minutes : minutes}`
   }
-  public getStartEndDate() {
-
-    return `${moment( new Date(this.techService.startDate)).format('DD/MM/YYYY')} ${moment( new Date(this.techService.endDate)).format('DD/MM/YYYY')}`
+  public getDateForHeader(data) {
+    return moment( new Date(data)).format('MMM DD, YYYY');
   }
   public getDate(dateInvoice) {
     let date = new Date(dateInvoice);
