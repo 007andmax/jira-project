@@ -262,12 +262,14 @@
         </div>
         <div class="cmp-board-tickets cmn-box d-flex">
           <h2>Tickets</h2>
+          <nvd3 [options]="lineChartOptions" [data]="lineData"></nvd3>
         </div>
         <div class="cmp-board-information d-flex">
           <div class="cmp-board-info-row d-flex">
             <div class="cmp-board-info-col d-flex">
               <div class="cmp-board-revenue cmn-box d-flex">
                 <h2>Invoice Revenue</h2>
+                <nvd3 [options]="chartOptions" [data]="data"></nvd3>
               </div>
               <div class="cmp-board-invoice cmn-box d-flex">
                 <h2>Recent Invoices</h2>
