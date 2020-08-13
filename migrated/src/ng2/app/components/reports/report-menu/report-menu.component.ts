@@ -152,7 +152,10 @@ export class ReportMenuComponent implements OnInit {
   getReportByService() {
     if (!this.validate.isValidateService(this.selectedClient)) return;
     this.onRequest.emit(true);
-    this.reportsService.getReportByService(this.serviceReport.getForRequest()).subscribe(data => this.setDatareport(data));
+    this.reportsService.getReportByService(this.serviceReport.getForRequest()).subscribe((data: any) => {
+   
+      this.setDatareport(data)
+    });
   }
   getReportByTickets() {
     if (!this.validate.isValidateTickets(this.selectedClient)) return;
@@ -213,10 +216,14 @@ export class ReportMenuComponent implements OnInit {
 
     this.onRequest.emit(true);
 
-    
-      
-      this.reportsService.getReportByTechService(this.techService.getForRequest()).subscribe(data => this.setDatareport(data));
-     
+
+
+    this.reportsService.getReportByTechService(this.techService.getForRequest()).subscribe((data:any) => {
+      this.techService.setList(data.lines);
+      this.techService.setTotalQuantity(data.totalQuantity);
+      this.setDatareport(this.techService)
+    } );
+
 
   }
   private setDatareport(data) {
