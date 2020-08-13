@@ -1,7 +1,7 @@
 <div>
   <app-report-menu [report]="'tech-service'" (onRequest)="onRequest($event)" (getReport)="getReport($event)"></app-report-menu>
  </div>
- <app-report-additional-actions [report]="'tech-service'" [accountType]="'TECH'"   [fileName]="'tech-service-report'" ></app-report-additional-actions> <!---->
+ <app-report-additional-actions [report]="'tech-service'" [accountType]="'TECH'" [template]="'CUSTOMER_REPORT'"  [fileName]="'tech-service-report'" ></app-report-additional-actions> <!---->
  <div class="loading" *ngIf="loadingInProgress"></div>
  <div class="product-list___ticket report-show-footer-header"  id="product-list-ticket-data" >
   <div  class="product-list-ticket" style="padding: 0px;"   *ngIf="!loadingInProgress">
