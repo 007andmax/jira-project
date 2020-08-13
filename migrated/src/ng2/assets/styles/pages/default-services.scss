@@ -1,0 +1,103 @@
+.default-services-page {
+  min-height: calc(100vh - 78px);
+
+  &__header {
+    z-index: 1;
+  }
+
+  &__table-container {
+    overflow-x: auto;
+  }
+
+  &__question-icon {
+    display: inline-block;
+    position: relative;
+    top: 2px;
+    left: -1px;
+  }
+
+  .default-service-table {
+    max-width: 1320px;
+    margin: 0 auto;
+
+    th, td {
+      white-space: nowrap;
+    }
+
+    &__menu {
+      width: 28px;
+      max-width: 28px;
+      padding-left: 0;
+      padding-right: 0;
+      position: relative;
+     }
+
+     &__default {
+      text-align: center;
+      width: 105px;
+      max-width: 105px;
+      padding-left: 10px !important;
+    }
+
+    &__billable {
+      text-align: center;
+      width: 110px;
+      max-width: 110px;
+      padding-right: 5px !important;
+    }
+
+    &__gl {
+      width: 140px;
+      max-width: 140px;
+    }
+
+    &__service-name {
+      width: max-content;
+      max-width: 500px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    &__taxes {
+      width: 100px;
+    }
+
+    &__rate {
+      max-width: 140px;
+      width: 140px;
+    }
+
+    th.default-service-table__contracts {
+      padding-left: 0 !important;
+      text-transform: uppercase;
+      font-size: 10px;
+      padding-bottom: 5px !important;
+      padding-top: 10px !important;
+    }
+  }
+
+  .ql-input-number {
+    width: 112px;
+    height: 32px;
+    border-radius: 4px;
+    background-color: #f4f6f8;
+    border: none;
+  }
+
+}
+
+
+
+@media (min-width: 1920px) {
+  .default-service-table {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .default-services-page__table-container {
+    width: 85%;
+    max-width: 85%;
+    margin: 0 auto;
+  }
+}
