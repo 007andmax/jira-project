@@ -39,9 +39,10 @@ export class MultiDatepickerComponent implements OnInit {
    * @param date - date for select
    */
   onDateSelection(date: NgbDate) {
+    console.log(date);
     if (!this.fromDate && !this.toDate) {
       this.fromDate = date;
-    } else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
+    } else if (this.fromDate && !this.toDate) {
       this.toDate = date;
     } else {
       this.toDate = null;
