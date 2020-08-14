@@ -1103,7 +1103,7 @@ body {
         @include transition(0.4s);
         border-left: 1px solid #dfe3e8;
         background-color: #ffffff;
-        z-index: 9999999999;
+        z-index: 999;
         &.opened {
             right: 0;
             .sidebar-toogle {
@@ -1273,10 +1273,11 @@ body {
         .modal-dialog {
             width: 100%;
             width: 512px;
-            border-radius: 6px;
-            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+            @include border-radius(6px);
+            @include box-shadow(0 ,10px, 20px, -5px rgba(0, 0, 0, 0.1));
             background-color: #ffffff;
             border: none;
+            top:40%;
             .modal-content {
                 background-color: $white-color;
                 @include opacity(1);
@@ -1330,6 +1331,48 @@ body {
                                 align-items: center;
                                 justify-content: space-between;
                                 margin-bottom: 12px;
+
+                                .hours-row {
+                                    width: 268px;
+                                    @include flexbox;
+                                    align-items: center;
+                                    app-ticket-profile-updates-service-timepicker {
+                                        width: 100%;
+                                    }
+                                    p {
+                                        width: 100%;
+                                        align-items: center;
+                                        justify-content: space-between;
+                                        position: relative;
+                                        &::after
+                                        {
+                                            content:"";
+                                            width: 12px;
+                                            height: 1px;
+                                            background-color: #dfe3e8;
+                                            position: absolute;
+                                            top: 0;
+                                            bottom: 0;
+                                            left: 0;
+                                            right: 0;
+                                            margin: auto;
+                                        } 
+                                    }
+                                    .ui-timepicker-input {
+                                        width: 120px;
+                                        font-size: 13px;
+                                        line-height: 1.54;
+                                        letter-spacing: normal;
+                                        padding: 10px 10px;
+                                        @include flexbox;
+                                        @include border-radius(4px);
+                                        align-items: center;
+                                        margin: 0; 
+                                        font-family: $font-body;
+                                        text-transform: uppercase;
+                                        outline: none !important;
+                                    }
+                                }
                             }
                         }
                     }
@@ -1393,5 +1436,34 @@ body {
                 @include opacity(1);
             }
         }
+
+    }
+}
+
+.ui-timepicker-wrapper {
+    width: 120px !important;
+    max-height: 176px;
+    @include border-radius(4px);
+    @include box-shadow(0 ,2px, 20px, 10px rgba(0, 0, 0, 0.05));
+    border: solid 1px #dfe3e8;
+    background-color: #ffffff;
+    overflow-x: hidden;
+    .ui-timepicker-list {
+        width: 100%;
+        padding: 8px 0;
+        li{
+            font-size: 13px;
+            line-height: 1.54;
+            letter-spacing: normal;
+            color: #4f5f79;
+            font-family:$font-body; 
+            text-transform: uppercase;
+            &:hover{
+                background-color: rgba(237,242,246,0.5);
+                color: #4f5f79;
+            }
+        }
+        
+
     }
 }
