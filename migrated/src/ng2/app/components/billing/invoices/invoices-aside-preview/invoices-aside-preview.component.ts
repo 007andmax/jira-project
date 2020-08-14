@@ -16,7 +16,7 @@ import { InvoiceStateService } from 'src/ng2/app/states/invoice/invoice-state.se
   styleUrls: ['./invoices-aside-preview.component.scss']
 })
 export class InvoicesAsidePreviewComponent implements OnInit {
-  @Input() invoice: Invoice;
+  @Input() invoiceId: string;
   invoiceProfile: InvoiceProfile;
   @Output() onClose = new EventEmitter<any>();
   currentCompany: any;
@@ -35,13 +35,15 @@ export class InvoicesAsidePreviewComponent implements OnInit {
   }
   public onGetInvoice() {
     this.showPreloader = true;
-    this.invoicesService.getInvoice(this.invoice.id).subscribe(data => {
+    this.invoicesService.getInvoice(this.invoiceId).subscribe(data => {
       this.invoiceProfile = new InvoiceProfile(data);
+      this.invoiceProfile.onCheckIsOverDue();
+      this.invoiceProfile.setId(this.invoiceId);
       this.showPreloader = false;
     })
   }
   resendInvoices() {
-    this.invoicesService.resendInvoices([this.invoice.id]).subscribe(data => {
+    this.invoicesService.resendInvoices([this.invoiceId]).subscribe(data => {
     })
   }
   getStatusDate(dateInvoice) {
@@ -49,20 +51,20 @@ export class InvoicesAsidePreviewComponent implements OnInit {
     let typeTime = (date.getHours() > 12) ? "PM" : "AM",
       hours = (date.getHours() > 12) ? date.getHours() - 12 : date.getHours(),
       minutes = (date.getMinutes() > 10) ? date.getMinutes() : "0" + date.getMinutes();
-    return `${this.getDateTicket(this.invoice.date)} ${(hours > 10) ? hours : "0" + hours}:${minutes} ${typeTime}`;
+    return `${this.getDateTicket(this.invoiceProfile.date)} ${(hours > 10) ? hours : "0" + hours}:${minutes} ${typeTime}`;
   }
   deleteInvoice() {
     this.confirmStateService.setConfirmAction(DELETE_INVOICE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
-    modalRef.componentInstance.message = `Do you want to delete invoice #${this.invoice.number} ?`;
-    this.invoiceStateService.setInvoiceForemove(this.invoice);
+    modalRef.componentInstance.message = `Do you want to delete invoice #${this.invoiceProfile.number} ?`;
+    this.invoiceStateService.setInvoiceForemove(this.invoiceProfile);
   }
   downloadPDF() {
-    let company = this.companiesStateService.getCompanies().find(item => item.id === this.invoice.companyId);
-    this.appService.download(`/invoice/show/${this.invoice.id}/pdf`, `${company.name}-${this.invoice.number}.pdf`);
+    let company = this.companiesStateService.getCompanies().find(item => item.id === this.invoiceProfile.company.id);
+    this.appService.download(`/invoice/show/${this.invoiceProfile.id}/pdf`, `${company.name}-${this.invoiceProfile.number}.pdf`);
   }
   print() {
-    var wnd = window.open('/invoice/show/' + this.invoice.id + '/pdf');
+    var wnd = window.open('/invoice/show/' + this.invoiceProfile.id + '/pdf');
     wnd.print();
   }
 

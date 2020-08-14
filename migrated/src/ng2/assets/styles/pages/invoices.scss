@@ -61,7 +61,6 @@
 
   .invoices-date-filter {
     width: 23%;
-    margin-right: 8px;
     input {
       color: #364656
     }
@@ -383,7 +382,7 @@
 
   .aside-footer {
     height: 72px;
-    border: 1px solid #dfe3e8;
+    border-top: 1px solid #dfe3e8;
     background: white;
   }
   }
@@ -427,7 +426,7 @@
   }
 }
 
-app-invoices-item {
+app-invoices-item,app-payment-item {
   display: contents;
 }
 

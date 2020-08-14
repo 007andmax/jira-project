@@ -273,6 +273,13 @@ import { InvoicesAsideComponent } from './components/billing/invoices/invoices-a
  import { InvoicesHeaderComponent } from './components/billing/invoices/invoices-header/invoices-header.component';
 import { InvoicesFilterComponent } from './components/billing/invoices/invoices-header/invoices-filter/invoices-filter.component';
 import { InvoicesAsidePreviewComponent } from './components/billing/invoices/invoices-aside-preview/invoices-aside-preview.component';
+import { PaymentsComponent } from './components/billing/payments/payments.component';
+import { PaymentsHeaderComponent } from './components/billing/payments/payments-header/payments-header.component';
+import { PaymentItemComponent } from './components/billing/payments/payment-item/payment-item.component';
+import { PaymentsFilterComponent } from './components/billing/payments/payments-header/payments-filter/payments-filter.component';
+import { PaymentsAsideComponent } from './components/billing/payments/payments-aside/payments-aside.component';
+import { RefundPaymentComponent } from './components/billing/payments/refund-payment/refund-payment.component';
+import { EditPaymentComponent } from './components/billing/payments/edit-payment/edit-payment.component';
  
 
 
@@ -414,6 +421,9 @@ angular.module('quicktech')
   .directive(
     'billableTicketsComponent',
     downgradeComponent({ component: BillableTicketsComponent }))
+    .directive(
+      'paymentsComponent',
+      downgradeComponent({ component: PaymentsComponent }))
   .directive(
     'inventoryComponent',
     downgradeComponent({ component: InventoryComponent }))
@@ -675,7 +685,14 @@ angular.module('quicktech')
     InvoicesItemComponent,
     InvoicesHeaderComponent,
     InvoicesFilterComponent,
-    InvoicesAsidePreviewComponent
+    InvoicesAsidePreviewComponent,
+    PaymentsComponent,
+    PaymentsHeaderComponent,
+    PaymentItemComponent,
+    PaymentsFilterComponent,
+    PaymentsAsideComponent,
+    RefundPaymentComponent,
+    EditPaymentComponent
   ],
   imports: [
     BrowserModule,
@@ -749,7 +766,8 @@ angular.module('quicktech')
     ModalCustomShareScreenComponent,
     BillableComponent,
     InvoicesComponent,
-    BillableTicketsComponent
+    BillableTicketsComponent,
+    PaymentsComponent
     // RecurringTicketsComponent
   ],
   exports: [
