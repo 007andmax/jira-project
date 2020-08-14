@@ -7,9 +7,10 @@ import * as moment from "moment";
 import { AppService } from 'src/ng2/app/states/app/app.service';
 import { ConfirmStateService } from '../../../shared/confirm/services/confirm-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DELETE_INVOICE } from 'src/ng2/app/const/confirm';
+import { DELETE_INVOICE, ROLLBACK_INVOICE } from 'src/ng2/app/const/confirm';
 import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
 import { InvoiceStateService } from 'src/ng2/app/states/invoice/invoice-state.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-invoices-aside-preview',
   templateUrl: './invoices-aside-preview.component.html',
@@ -22,6 +23,7 @@ export class InvoicesAsidePreviewComponent implements OnInit {
   currentCompany: any;
   showPreloader: boolean = true;
   toggleStatus: boolean = true;
+  sub: Subscription = new Subscription();
   constructor(private invoicesService: InvoicesService,
     private appService: AppService,
     private modalService: NgbModal,
@@ -32,6 +34,14 @@ export class InvoicesAsidePreviewComponent implements OnInit {
   ngOnInit() {
     this.currentCompany = this.companiesStateService.getCurrentCompany();
     this.onGetInvoice();
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === DELETE_INVOICE) this.close();
+        if (this.confirmStateService.getConfirmAction() === ROLLBACK_INVOICE) this.close();
+        
+      }
+    })
+    this.sub.add(getConfirm);
   }
   public onGetInvoice() {
     this.showPreloader = true;
@@ -45,6 +55,15 @@ export class InvoicesAsidePreviewComponent implements OnInit {
   resendInvoices() {
     this.invoicesService.resendInvoices([this.invoiceId]).subscribe(data => {
     })
+  }
+  rollbackInvoice() {
+    this.confirmStateService.setConfirmAction(ROLLBACK_INVOICE);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    let ticketsNumbers =  this.invoiceProfile.tickets.map(item => item.number);
+    modalRef.componentInstance.message = `Do you want to rollback invoice #${this.invoiceProfile.number}? 
+    ${(ticketsNumbers && ticketsNumbers.length ? (ticketsNumbers.length > 1 ? 'Tickets #' : 'Ticket #') +
+    ticketsNumbers.join(', #') + ' will be restored.' : '')}`;
+    this.invoiceStateService.setInvoiceForRollback(this.invoiceProfile);
   }
   getStatusDate(dateInvoice) {
     let date = new Date(dateInvoice);
@@ -94,5 +113,8 @@ export class InvoicesAsidePreviewComponent implements OnInit {
   close() {
     this.onClose.emit(null);
     this.showPreloader = true;
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

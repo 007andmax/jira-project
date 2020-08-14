@@ -75,18 +75,19 @@ export class InvoicesAsideComponent implements OnInit {
       }
       if (item.selected) sumPayment += item.paymentAmount;
     })
-    if (sumPayment < this.amountReceived) {
+    if (this.invoices[index].selected && sumPayment < this.amountReceived) {
       let paymentAmount = (this.amountReceived - sumPayment) - (this.invoices[index].sum - this.invoices[index].paidSum);
       this.invoices[index].paymentAmount = (paymentAmount > 0) ? (this.invoices[index].sum - this.invoices[index].paidSum) : (this.amountReceived - sumPayment);
     }
     if (!this.isChangeAmountReceived) {
-      this.invoices[index].paymentAmount = (this.invoices[index].sum - this.invoices[index].paidSum);
+      if (this.invoices[index].selected)this.invoices[index].paymentAmount = (this.invoices[index].sum - this.invoices[index].paidSum);
       this.amountReceived = this.invoices.reduce((a, b) => {
         if (b.selected) return a + (b.sum - b.paidSum);
         return a + 0;
       }, 0);;
     }
     if (!this.validate.getAmountReceived()) this.validate.checkAmountReceived(this.amountReceived, this.invoices);
+    console.log("this.invoices",this.invoices);
   }
   clearAmounts() {
     this.invoices.forEach(item => {
@@ -95,7 +96,9 @@ export class InvoicesAsideComponent implements OnInit {
     this.amountReceived = 0;
   }
   public onChangePayment(val, invoice) {
+    console.log("?val",val);
     let value = Number(val);
+    console.log("value",value);
     invoice.paymentAmount = value;
     this.validate.setValidPayment(true);
     if (!this.validate.getAmountReceived()) this.validate.checkAmountReceived(this.amountReceived, this.invoices);

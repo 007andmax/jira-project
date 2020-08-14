@@ -92,7 +92,7 @@
           <td class="unpaid-table__invoice" [textContent]="'INV ' + invoice.invoiceNumber"></td>
           <td class="unpaid-table__date" [textContent]="getDate(invoice.invoiceDate)"></td>
           <td class="unpaid-table__amount qt-text-right" [textContent]="invoice.invoiceAmount | currency"></td>
-          <td class="unpaid-table__due qt-text-right" [textContent]="(invoice.invoiceAmount - invoice.paidAmount) | currency"></td>
+          <td class="unpaid-table__due qt-text-right" [textContent]="invoice.invoicePaidDue | currency"></td>
           <td class="unpaid-table__payment qt-text-right"  ><input class="payment-input"   number
             [money]="true"
             [ngModel]="invoice.paidAmount"

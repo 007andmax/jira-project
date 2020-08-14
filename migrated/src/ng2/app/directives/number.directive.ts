@@ -22,7 +22,11 @@ export class numberDirective {
         });
         if (this.money) {
             this.element.nativeElement.addEventListener("blur", (event) => {
-                if (event.target.value) event.target.value = parseFloat(event.target.value).toFixed(2);
+                if (event.target.value) {
+                    event.target.value = parseFloat(event.target.value).toFixed(2);
+                } else {
+                    event.target.value = 0;
+                }
             });
         }
 
@@ -30,7 +34,10 @@ export class numberDirective {
 
     ValidateMoney(event: any) {
         let value = Number(event.target.value);
+        console.log("value",value);
         if (!value && event.target.value !== "") {
+            console.log("event.target.value",event.target.value);
+
             event.target.value = this.lastValue;
             return;
         }
@@ -42,6 +49,7 @@ export class numberDirective {
         } else {
             this.lastValue = 1;
         }
+        console.log("event.target.value",event.target.value);
 
     }
 
