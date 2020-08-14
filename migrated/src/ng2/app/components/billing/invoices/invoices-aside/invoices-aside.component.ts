@@ -131,7 +131,7 @@ export class InvoicesAsideComponent implements OnInit {
   }
   getRemainingBalance() {
     let subTotal = this.getSubtotal();
-    let totalPayment = this.getTotalPayment();
+    let totalPayment = this.amountReceived;
     return subTotal - totalPayment;
   }
   getTotalPayment() {

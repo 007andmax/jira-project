@@ -75,7 +75,7 @@ export class EditPaymentComponent implements OnInit {
   getSubtotal() {
     let subTotal = 0;
     this.payment.paymentData.forEach(item => {
-      subTotal += (item.invoiceAmount - item.paidAmount);
+      subTotal += item.invoicePaidDue;
     })
     return subTotal;
   }
