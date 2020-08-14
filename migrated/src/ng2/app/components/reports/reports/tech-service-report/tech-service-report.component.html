@@ -25,23 +25,23 @@
           <div class="details-header clearfix" style="padding: 15px 20px;">
             <div  style="width: 20%;display: inline-block;">Date</div>
             <div  style="width: 10%;display: inline-block;">Ticket</div>
-            <div  style="width: 29%;display: inline-block;">Company</div>
-            <div  style="width: 29%;display: inline-block;">Service</div>
-            <div style="width: auto;display: inline-block;text-align: left;" >Time</div>
+            <div class="details-header-company"  style="width: 29%;display: inline-block;">Company</div>
+            <div class="details-header-service" style="width: 29%;display: inline-block;">Service</div>
+            <div class="time-header" style="width: auto;display: inline-block;text-align: left;" >Time</div>
           </div>
           <ng-template ngFor let-item [ngForOf]="techService.lines" let-i="index" [ngForTrackBy]="trackByIndex" >
           
           <div class="details-content clearfix"  style="margin: 0 20px;">
             <div  style="width: 20%;margin-bottom: 20px;display: inline-block;"  >{{getDate(item.serviceExpenseDate)}}</div>
             <div style="width: 10%;margin-bottom: 20px;display: inline-block;"  >{{'tkt# ' + item.ticketNumber}}</div>
-            <div style="width: 29%;margin-bottom: 20px;display: inline-block;"  >{{item.companyName}}</div>
-            <div  style="width: 29%;margin-bottom: 20px;display: inline-block;"  >{{item.serviceName}}</div>
-            <div  style="width: auto;margin-bottom: 20px;display: inline-block;"  >{{getDuration(item.quantity)}}</div>
+            <div class="details-content-company" style="width: 29%;margin-bottom: 20px;display: inline-block;"  >{{item.companyName}}</div>
+            <div class="details-content-service" style="width: 29%;margin-bottom: 20px;display: inline-block;"  >{{item.serviceName}}</div>
+            <div class="time-content"  style="width: auto;margin-bottom: 20px;display: inline-block;"  >{{getDuration(item.quantity)}}</div>
             </div>
            
 </ng-template>
-<div class="details-content clearfix"  >
-<div class="col-md-2" style="float: right;margin-bottom: 20px;text-align: right;padding: 0px 12px 0px 0px !important;"  >{{'Total Hours ' + getDuration(techService.totalQuantity)}}</div>
+<div class="details-content clearfix total-hours"  >
+<div class="col-md-2 total-hours-content" style="float: right;margin-bottom: 20px;text-align: right;padding: 0px 12px 0px 0px !important;"  >{{'Total Hours ' + getDuration(techService.totalQuantity)}}</div>
 </div>    
 </div>
       </div>
