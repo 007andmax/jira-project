@@ -23,20 +23,20 @@
           <h3 *ngIf="techUser" style="padding: 0px 20px;">{{'Tech User : ' + ((techUser) ? techUser.firstName + ' ' + techUser.lastName : '')}}</h3>
         </div>
           <div class="details-header clearfix" style="padding: 15px 20px;">
-            <div class="col-md-2" style="width: 20%;">Date</div>
-            <div class="col-md-2" style="width: 10%;">Ticket</div>
-            <div class="col-md-2" style="width: 30%;">Company</div>
-            <div class="col-md-2" style="width: 30%;">Service</div>
-            <div class="col-md-2"  style="width: auto;" >Time</div>
+            <div  style="width: 20%;display: inline-block;">Date</div>
+            <div  style="width: 10%;display: inline-block;">Ticket</div>
+            <div  style="width: 30%;display: inline-block;">Company</div>
+            <div  style="width: 30%;display: inline-block;">Service</div>
+            <div style="width: auto;display: inline-block;" >Time</div>
           </div>
           <ng-template ngFor let-item [ngForOf]="techService.lines" let-i="index" [ngForTrackBy]="trackByIndex" >
           
           <div class="details-content clearfix"  style="margin: 0 20px;">
-            <div class="col-md-4" style="width: 20%;margin-bottom: 20px;"  >{{getDate(item.serviceExpenseDate)}}</div>
-            <div class="col-md-2" style="width: 10%;margin-bottom: 20px;"  >{{'tkt# ' + item.ticketNumber}}</div>
-            <div class="col-md-2" style="width: 30%;margin-bottom: 20px;"  >{{item.companyName}}</div>
-            <div class="col-md-2" style="width: 30%;margin-bottom: 20px;"  >{{item.serviceName}}</div>
-            <div class="col-md-2" style="width: auto;margin-bottom: 20px;"  >{{getDuration(item.quantity)}}</div>
+            <div  style="width: 20%;margin-bottom: 20px;display: inline-block;"  >{{getDate(item.serviceExpenseDate)}}</div>
+            <div style="width: 10%;margin-bottom: 20px;display: inline-block;"  >{{'tkt# ' + item.ticketNumber}}</div>
+            <div style="width: 30%;margin-bottom: 20px;display: inline-block;"  >{{item.companyName}}</div>
+            <div  style="width: 30%;margin-bottom: 20px;display: inline-block;"  >{{item.serviceName}}</div>
+            <div  style="width: auto;margin-bottom: 20px;display: inline-block;"  >{{getDuration(item.quantity)}}</div>
             </div>
            
 </ng-template>
