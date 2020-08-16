@@ -85,7 +85,43 @@
     border: none;
   }
 
+
 }
+// add aside
+.default-services-page__aside {
+  color: #4f5f79;
+  background: white;
+  width: 592px;;
+  position: absolute;
+  border-left: 1px solid #dfe3e8;
+  height: 100%;
+  right: 0;
+  box-shadow: -8px 0 8px 0 rgba(0, 0, 0, 0.05);
+  position: fixed;
+  top: 79px;
+  right: 0;
+  height: calc(100vh - 79px);
+  z-index: 5;
+
+  .default-services-scroll-content {
+    overflow: auto;
+    height: calc(100% - 127px);
+  }
+
+  .aside-header {
+    height: 56px;
+    background-color: #f9fafb;
+    border-bottom: 1px solid #dfe3e8;
+  }
+
+  .add-tax-btn {
+    line-height: 1;
+    color: #16a4fa;
+  }
+
+}
+
+
 
 
 
