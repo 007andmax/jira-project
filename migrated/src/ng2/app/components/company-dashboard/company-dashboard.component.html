@@ -261,15 +261,49 @@
           </ul>
         </div>
         <div class="cmp-board-tickets cmn-box d-flex">
-          <h2>Tickets</h2>
+          <div class="cmp-board-title-wrap d-flex">
+            <h2>Tickets</h2> 
+            <div ngbDropdown class="d-flex">
+              <button class="selected-item" id="dropdownBasic1" ngbDropdownToggle>Last 12 months</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button class="item" ngbDropdownItem>Last 7 days</button>
+                <button class="item" ngbDropdownItem>Last 6 days</button>
+                <button class="item" ngbDropdownItem>Last 3 days</button>
+              </div> 
+            </div>
+           </div>
           <nvd3 [options]="lineChartOptions" [data]="lineData"></nvd3>
         </div>
         <div class="cmp-board-information d-flex">
           <div class="cmp-board-info-row d-flex">
             <div class="cmp-board-info-col d-flex">
               <div class="cmp-board-revenue cmn-box d-flex">
-                <h2>Invoice Revenue</h2>
+                 <div class="cmp-board-title-wrap d-flex">
+                  <h2>Invoice Revenue</h2> 
+                  <div ngbDropdown class="d-flex">
+                    <button class="selected-item" id="dropdownBasic1" ngbDropdownToggle>Last 12 months</button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                      <button class="item" ngbDropdownItem>Last 12 months</button>
+                      <button class="item" ngbDropdownItem>Last 6 months</button>
+                      <button class="item" ngbDropdownItem>Last 3 months</button>
+                    </div> 
+                  </div>
+                 </div>
                 <nvd3 [options]="chartOptions" [data]="data"></nvd3>
+                  <ul class=" list-unstyled chart-status">
+                      <li class="invoice">
+                          <span class="title">Invoiced</span>
+                          <span class="title-data">$4200</span>
+                      </li>
+                      <li class="collect">
+                        <span class="title">Collected</span>
+                        <span class="title-data">$1269</span>
+                     </li>
+                      <li class="out-standing">
+                        <span class="title">Outstanding</span>
+                        <span class="title-data">$251</span>
+                      </li>
+                  </ul>
               </div>
               <div class="cmp-board-invoice cmn-box d-flex">
                 <h2>Recent Invoices</h2>

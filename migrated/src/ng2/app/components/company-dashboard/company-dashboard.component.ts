@@ -27,7 +27,7 @@ export class CompanyDashboardComponent implements OnInit {
   lineChartOptions: any;
   data: any;
   lineData: any;
-  chartColors = ["#cdecff", "#0747a6", '#00ccff'];
+  chartColors = ["#0646a4", "#00ccff", '#2bc7c6'];
   constructor(private modalService: NgbModal) {}
   closeResult = '';
 
@@ -149,7 +149,7 @@ export class CompanyDashboardComponent implements OnInit {
           [ 1096516800000 , 13.742776534056] ]
       }
   ];
-  }
+  } 
 
   public onChangeStartTimePicker(data) {
     this.currentService.setDurationStart(data);
