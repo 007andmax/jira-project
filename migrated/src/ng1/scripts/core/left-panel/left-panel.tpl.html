@@ -860,7 +860,7 @@
      Billable Items
    </div>
 
-      
+
         <div class="center-category__category"
              ng-class="{active: $state.includes('receivable')}"
              ng-click="stateGo($event, 'receivable', {mode: 'list'})">
@@ -896,6 +896,12 @@
              ng-click="stateGo($event, 'service-agreements')"
              ng-show="PermissionsService.isAllowed('VIEW_SERVICE_AGREEMENTS')">
           Contracts
+        </div>
+        <div class="center-category__category"
+          ng-class="{active: $state.includes('service-agreements')}"
+          ng-click="stateGo($event, 'new-contracts')"
+          ng-show="PermissionsService.isAllowed('VIEW_SERVICE_AGREEMENTS')">
+          Contracts 2
         </div>
       </div>
     </div>

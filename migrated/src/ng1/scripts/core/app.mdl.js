@@ -207,6 +207,10 @@
           templateUrl: '/ng1/scripts/core/service-agreements/service-agreements.tpl.html',
           controller: 'quicktech.core.serviceAgreements.serviceAgreementsCtrl'
         }))
+        .state('new-contracts', waitForServices({
+          url: '/ng2/contracts',
+          template: '<contracts-component></contracts-component>'
+        }))
         .state('credits', waitForServices({
           url: '/accounting/credits',
           templateUrl: '/ng1/scripts/core/billable/credits/credits.tpl.html',
@@ -353,7 +357,7 @@
       'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.SharedStateService', '$http',
       function ($rootScope, $templateRequest, CompaniesService, $state, $uibModal, TicketsService, $stateParams,
                 UserConfirmationsService, SharedStateService, $http) {
-       
+
         $rootScope.debounce = function (fn, time) {
           var isCalled = false;
           var interval;

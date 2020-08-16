@@ -60,7 +60,7 @@
         //categories start
         $scope.countOfCategories = 10;
         $scope.inventoryCategoryList = ProductsService.getCategories($scope);
-         
+
         var company_id = localStorage.getItem('company_id') || null;
         $scope.checkDublicateCategory = function () {
           var duplicateCategory = $scope.inventoryCategoryList.filter(function (item) {
@@ -283,7 +283,7 @@
           return $rootScope.exampleCompanyDeleted;
         }, function (val) {
           if (val) {
-           
+
          /*   TicketsService.getAllCounts(function (resp) {
               $scope.ticketsCounter = resp;
             });*/
@@ -327,7 +327,7 @@
             $scope.goToTab(`#/ng2/company-tickets`);
             return;
           }
-         
+
           var tab = $scope[tabToActivate];
           deactivateAllCompanyProfileTabs();
           if (tab === false) {
@@ -751,14 +751,14 @@
         });
 
         $scope.$watch('ticketFilterTags', function (value) {
-         
+
 
           // var data = value.map(function(el) {
           //   return el.id;
           // })
           //
           // TicketsService.ticketSearch(data, function(resp) {
-          
+
           // })
           // if (value !== "" && value !== " " && value.length > 0) {
           //   ticketsSharedState.filter.completed = false;
@@ -821,7 +821,7 @@
         // $scope.stateBack(null, 'tickets', {
         //   listType: getTicketsListType()
         // });
-        
+
 
         $scope.$watch('ticketsSharedState.filter.techUserId', function (value) {
 
@@ -1066,7 +1066,7 @@
             value: jsonObj
           };
           CustomStorageService.saveUserCustomStorageItem(itemToSend, function (resp) {
-            
+
           })
         };
 
@@ -1076,7 +1076,7 @@
             colorCode: colorCode
           };
           ColorsService.putCompaniesColors(dataToSend, function (resp) {
-          
+
           })
         };
 
@@ -1085,13 +1085,13 @@
         });
 
         $scope.changeUserColor = function (type, colorCode) {
-         
+
           var dataToSend = {
             type: type,
             colorCode: colorCode
           };
           ColorsService.putUsersColors(dataToSend, function (resp) {
-            
+
           })
         };
 
@@ -1153,7 +1153,7 @@
         });
 
         $scope.toggleLeftPanel = function (section, ifIconPart) {
-        
+
           $scope.clearAllFilters()
 
           if (section === 'billing') {
@@ -1211,7 +1211,7 @@
 
         $scope.onClickReports = function () {
           $rootScope.isLeftPanelHidden = true;
-       
+
           $scope.openedCategory = getOpenedCategory($state.current.url + ' ' + $state.current.name);
           document.title = 'Reports'
         };
@@ -1288,7 +1288,7 @@
         $scope.clearTicketsFilters = function () {
           clearFilter(ticketsSharedState.filter);
         };
- 
+
         $scope.clearCompaniesFilters = function () {
           clearFilter(companiesSharedState.filter);
           $rootScope.showArchivedCompanies = false;
@@ -1475,7 +1475,7 @@
           }
         });
 
-       
+
 
         $scope.userReadable = function (text) {
           if (!text) {
@@ -1628,7 +1628,7 @@
             return 'companyProfile';
           } else if (url.indexOf('users') > -1) {
             return 'users';
-          } else if (url.indexOf('accounting') > -1) {
+          } else if (url.indexOf('accounting') > -1 || url.indexOf('new-contracts')) {
             return 'billing';
           } else if (url.indexOf('inventory') > -1) {
             return 'inventory';
@@ -1684,7 +1684,7 @@
         }
 
 
-    
+
         $rootScope.$on('onInitConpaiesList', function(){
           if (company_id) {
              $scope.companyProfilePageUsersList = UsersService.getAllByCompanyIdNonArchived(company_id);

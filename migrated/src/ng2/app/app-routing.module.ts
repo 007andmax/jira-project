@@ -32,7 +32,7 @@ import { TicketsComponent } from './components/tickets/tickets/tickets.component
 import { CompanyTicketsComponent } from './components/company-tickets/company-tickets.component';
 import { BillableComponent } from './components/billing/billable/billable.component';
 import { BillableTicketsComponent } from './components/billing/billable/billable-tickets/billable-tickets.component';
-
+import { ContractsComponent } from './components/billing/contracts/contracts.component';
 const routes: Routes = [
   {
     path: '',
@@ -93,7 +93,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'ng2/report/:id', 
+    path: 'ng2/report/:id',
     component: ItemReportComponent
   },
   {
@@ -184,6 +184,10 @@ const routes: Routes = [
     path: 'ng2/billable-tickets',
     component: BillableTicketsComponent,
   },
+  {
+    path: 'ng2/contracts',
+    component: ContractsComponent,
+  }
 ];
 
 /**
