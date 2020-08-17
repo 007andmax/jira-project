@@ -413,7 +413,7 @@ angular.module('quicktech')
     'companyProducts',
     downgradeComponent({ component: CompanyProductsComponent }))
   .directive(
-    'contracts',
+    'contractsComponent',
     downgradeComponent({ component: ContractsComponent }))
   .factory('ngZone', downgradeInjectable(NgZone));
 
@@ -738,7 +738,8 @@ angular.module('quicktech')
     CompanyProductsComponent,
     ModalCustomShareScreenComponent,
     BillableComponent,
-    BillableTicketsComponent
+    BillableTicketsComponent,
+    ContractsComponent
     // RecurringTicketsComponent
   ],
   exports: [
