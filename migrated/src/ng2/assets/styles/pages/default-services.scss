@@ -85,7 +85,51 @@
     border: none;
   }
 
+  .gl-number-dropdown {
+    background: #f4f6f8;
+    height: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    border-radius: 4px;
+    color: #4f5f79;
+    font-size: 13px;
+    position: relative;
+    margin-top: 7px;
+    margin-bottom: 7px;
+    p {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  }
 
+  .qt-number-dropdown-menu {
+    flex-direction: column;
+    max-height: 144px;
+    padding-top: 8px;
+    position: absolute;
+    transform: translate(0) !important;
+    top: 37px !important;
+    left: 16px !important;
+
+    button.dropdown-item {
+      text-align: left;
+      border: none;
+      background: white;
+      min-height: 32px;
+      color: #364656;
+      padding: 0 15px;
+      &:hover {
+        background: #edf2f67d;
+      }
+    }
+
+    &.show {
+      display: flex !important;
+    }
+  }
 }
 // add aside
 .default-services-page__aside {
@@ -119,6 +163,50 @@
     color: #16a4fa;
   }
 
+  .create-product-taxes-select {
+    .light-dropdown.new-taxes-area {
+      margin-top: 0 !important;
+    }
+
+    .label-name {
+      line-height: 1;
+      margin-bottom: 12px !important;
+      font-size: 13px !important;
+      color: #4f5f79;
+      font-family: Graphik-Medium, sans-serif !important;
+      height: 12px;
+    }
+
+    .add-tax.add-tax-inventory {
+      line-height: 1;
+      font-family: Graphik-Medium, sans-serif;
+      font-size: 12px;
+    }
+
+    .dropdown-menu.new-tax.show {
+      border: aliceblue;
+      right: -30px !important;
+      left: unset !important;
+      top: 7px !important;
+      box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
+      border: solid 1px #dfe3e8;
+      background-color: #ffffff;
+    }
+
+    .add-tax-dropdown:after,
+    .add-category-lp-dropdown > div:after {
+      left: unset;
+      right: 10px;
+      top: -5px;
+      border: 6px solid transparent;
+      border-bottom-color: #fff;
+      border-top: 0;
+    }
+  }
+}
+
+app-default-services-item {
+  display: contents;
 }
 
 

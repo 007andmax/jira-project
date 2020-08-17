@@ -19,8 +19,8 @@
 .tax-title {
   font-size: 15px;
   color: #364656;
-  margin-bottom: 10px;
-  font-weight: 700;
+  margin-bottom: 16px;
+  font-family: Graphik-Semibold, sans-serif;
 }
 
 .add-tax-inventory {
@@ -47,7 +47,7 @@
   }
 
   .add-tax-dropdown {
-    padding: 15px;
+    padding: 24px;
 
     input {
       height: 40px;
@@ -62,7 +62,8 @@
     .add-tax-label {
       font-size: 13px;
       margin-bottom: 11px;
-      font-weight: 600;
+      font-family: Graphik-Medium, sans-serif;
+
       color: #4f5f79;
     }
 
@@ -76,7 +77,7 @@
 }
 
 .label-name {
-  font-family: "Graphik Medium", sans-serif;
+  font-family: Graphik-Medium, sans-serif;
   font-size: 13px;
   margin-bottom: 8px;
 }
