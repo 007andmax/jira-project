@@ -1,0 +1,95 @@
+.contracts-page {
+  .table-container {
+    overflow-x: auto;
+    min-height: calc(100vh - 238px);
+  }
+
+  .contracts-table {
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+
+  .contracts-table td {
+    border: 1px solid transparent;
+  }
+
+  .contracts-table__menu {
+    width: 28px;
+    min-width: 28px;
+    padding-left: 0;
+    padding-right: 0;
+    .icon__more { height: 100%;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: auto;
+    }
+  }
+
+  .filter-button {
+    padding-left: 30px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 16px;
+    background-color: white;
+    color: #364656;
+    border: none;
+    background-image: url(../../src/ng2/assets/img/icons/filter.svg);
+    &.active {
+      background-color: #16a4fa10;
+      color: #16a4fa;
+      padding-left: 16px;
+      border: none;
+      background-image: none;
+    }
+  }
+
+  .contracts-table__amount {
+    width: 85px;
+    max-width: 85px;
+    padding-right: 10px !important;
+    padding-left: 10px !important;
+    text-align: right;
+  }
+
+  .contracts-table__review-date {
+    max-width: 105px;
+    width: 105px;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  .contracts-table__start-date {
+    width: 112px;
+    max-width: 112px;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  .contracts-table__status {
+    max-width: 105px;
+    width: 105px;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  .contracts-table__contract-type {
+    max-width: 225px;
+    width: 225px;
+  }
+
+  .contracts-table__company {
+    max-width: 230px;
+    width: 230px;
+  }
+
+  .contracts-table__description {
+    min-width: 200px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .contracts-table {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}

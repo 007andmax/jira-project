@@ -269,6 +269,8 @@ import { InvoiceFormTicketEditTaxesComponent } from './components/billing/billab
 import { InvoiceDiscountComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-discount/invoice-discount.component';
 import { ContractsComponent } from './components/billing/contracts/contracts.component';
 import { CreateContractsComponent } from './components/billing/contracts/create-contracts/create-contracts.component';
+import { ContractsHeaderComponent } from './components/billing/contracts/contracts-header/contracts-header.component';
+import { ContractsTableComponent } from './components/billing/contracts/contracts-table/contracts-table.component';
 
 
 
@@ -668,6 +670,8 @@ angular.module('quicktech')
     InvoiceDiscountComponent,
     ContractsComponent,
     CreateContractsComponent,
+    ContractsHeaderComponent,
+    ContractsTableComponent,
   ],
   imports: [
     BrowserModule,
