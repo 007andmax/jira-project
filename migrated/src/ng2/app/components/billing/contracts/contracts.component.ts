@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./contracts.component.scss']
 })
 export class ContractsComponent implements OnInit {
-
+  showCreate = false;
   constructor() { }
 
   ngOnInit() {

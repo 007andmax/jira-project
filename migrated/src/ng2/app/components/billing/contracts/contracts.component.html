@@ -1,3 +1,5 @@
 <p>
   contracts works!
 </p>
+<button (click)="showCreate = true">Create</button>
+<app-create-contracts *ngIf="showCreate" (onClose)="showCreate = false"></app-create-contracts>
