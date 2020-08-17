@@ -113,10 +113,10 @@
       <div class="qt-lh-154">
         <div class="qt-fs-10 qt-color-light qt-mb-8 qt-ff-sb qt-lh-12">BILLING ADDRESS</div>
         <div class="qt-fs-13 qt-color-dark qt-ff-gm" [textContent]="invoiceProfile.companyName"></div>
-        <div class="qt-fs-13"   [textContent]="invoiceProfile.invoiceContact.firstName + ' ' + invoiceProfile.invoiceContact.lastName"></div>
+        <div class="qt-fs-13"  *ngIf="invoiceProfile.invoiceContact" [textContent]="(invoiceProfile.invoiceContact.firstName && invoiceProfile.invoiceContact.lastName) ? invoiceProfile.invoiceContact.firstName + ' ' + invoiceProfile.invoiceContact.lastName : ''"></div>
         <div class="qt-fs-13" [textContent]="invoiceProfile.billingAddress"></div>
-        <div class="qt-fs-13" [textContent]="invoiceProfile.invoiceContact.primaryEmail"></div>
-        <div class="qt-fs-13" [textContent]="(invoiceProfile.invoiceContact.phoneNumbers && invoiceProfile.invoiceContact.phoneNumbers.length > 0) ? invoiceProfile.invoiceContact.phoneNumbers[0].number : ''"></div>
+        <div class="qt-fs-13" *ngIf="invoiceProfile.invoiceContact" [textContent]="(invoiceProfile.invoiceContact.primaryEmail) ? invoiceProfile.invoiceContact.primaryEmail : ''"></div>
+        <div class="qt-fs-13" *ngIf="invoiceProfile.invoiceContact" [textContent]="(invoiceProfile.invoiceContact.phoneNumbers && invoiceProfile.invoiceContact.phoneNumbers.length > 0) ? invoiceProfile.invoiceContact.phoneNumbers[0].number : ''"></div>
       </div>
 
       <div class="qt-fs-13 qt-text-right qt-lh-154">
@@ -213,7 +213,7 @@
       <div class="invoice-preview__total-block">
         <div class="qt-df qt-jc-sb qt-pl-12 qt-pr-12">
           <div class="qt-text-left">Sub Total</div>
-          <div class="invoice-info-value qt-text-right" [textContent]="(invoiceProfile.productsSum + invoiceProfile.servicesSum ) |
+          <div class="invoice-info-value qt-text-right" [textContent]="(invoiceProfile.totalSum - invoiceProfile.taxSum ) |
           currency"></div>
         </div>
 
