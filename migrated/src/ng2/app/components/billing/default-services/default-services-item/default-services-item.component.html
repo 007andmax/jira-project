@@ -1,0 +1,44 @@
+<tr>
+  <td class="default-service-table__service-name">Managed Services</td>
+  <td class="default-service-table__rate">$125.00</td>
+  <td class="default-service-table__taxes">GST 5%</td>
+  <td class="default-service-table__gl" ngbDropdown>
+   <p ngbDropdownToggle>Gl Number</p>
+    
+
+    <span *ngIf="glNumbers">
+     <i  
+        class="icn-sm report-caret-icon" ngbDropdownToggle></i>
+     </span>
+<div ngbDropdownMenu
+  aria-labelledby="dropdown1">
+<ng-template ngFor
+            let-item
+            [ngForOf]="glNumbers"
+            let-i="index">
+ <button ngbDropdownItem
+         [textContent]="item.glNumber"
+          ></button>
+</ng-template>
+</div>
+  </td>
+  <td class="default-service-table__billable">
+    <div class="d-f qt-jc-c">
+      <label class="qt-checkbox">
+        <input type="checkbox">
+        <span></span>
+      </label>
+    </div>
+  </td>
+  <td class="default-service-table__default">
+    <div class="d-f qt-jc-c">
+      <label class="qt-checkbox">
+        <input type="checkbox">
+        <span></span>
+      </label>
+    </div>
+  </td>
+  <td class="default-service-table__menu">
+    <div class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"></div>
+  </td>
+</tr>

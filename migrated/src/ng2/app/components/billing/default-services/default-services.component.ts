@@ -6,7 +6,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./default-services.component.scss']
 })
 export class DefaultServicesComponent implements OnInit {
-showCreateService:boolean = false;
+  showCreateService: boolean = false;
 
   constructor() { }
 

@@ -5,7 +5,7 @@
     </div>
 
     <div class="d-f ai-c">
-      <button class="qt-btn --outline-blue" (click)="showCreateService">Create Service</button>
+      <button class="qt-btn --outline-blue" (click)="showCreateService = true">Create Service</button>
     </div>
   </div>
 
@@ -40,33 +40,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td class="default-service-table__service-name">Managed Services</td>
-          <td class="default-service-table__rate">$125.00</td>
-          <td class="default-service-table__taxes">GST 5%</td>
-          <td class="default-service-table__gl">
-            <input class="ql-input-number" type="text">
-          </td>
-          <td class="default-service-table__billable">
-            <div class="d-f qt-jc-c">
-              <label class="qt-checkbox">
-                <input type="checkbox">
-                <span></span>
-              </label>
-            </div>
-          </td>
-          <td class="default-service-table__default">
-            <div class="d-f qt-jc-c">
-              <label class="qt-checkbox">
-                <input type="checkbox">
-                <span></span>
-              </label>
-            </div>
-          </td>
-          <td class="default-service-table__menu">
-            <div class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"></div>
-          </td>
-        </tr>
+        <app-default-services-item></app-default-services-item>
         <tr>
           <td class="default-service-table__service-name">Managed Services</td>
           <td class="default-service-table__rate">$125.00</td>
@@ -442,5 +416,5 @@
 </div>
 
 
-<!-- <app-default-services-add *ngIf="showCreateService" (onClose)="showCreateService = false"></app-default-services-add> -->
-<app-default-services-add ></app-default-services-add>
+  <app-default-services-add *ngIf="showCreateService" (onClose)="showCreateService = false"></app-default-services-add>  
+ 
