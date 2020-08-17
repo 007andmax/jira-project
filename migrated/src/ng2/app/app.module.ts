@@ -261,7 +261,7 @@ import { InvoiceRegularNoteComponent } from './components/billing/billable/billa
 
 import { TicketsFilterComponent } from './components/tickets/tickets/tickets-header/tickets-filter/tickets-filter.component';
 import { DisabledBtnModule } from './modules/disabled-btn/disabled-btn.module';
-  import { InvoiceFormTicketInfoComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-info/invoice-form-ticket-info.component';
+import { InvoiceFormTicketInfoComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-info/invoice-form-ticket-info.component';
 import { InvoiceFormTicketEditComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit.component';
 import { InvoiceFormTicketEditServiceComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-service/invoice-form-ticket-edit-service.component';
 import { InvoiceFormTicketEditProductComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-product/invoice-form-ticket-edit-product.component';
@@ -269,8 +269,8 @@ import { InvoiceFormTicketEditTaxesComponent } from './components/billing/billab
 import { InvoiceDiscountComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-discount/invoice-discount.component';
 import { InvoicesComponent } from './components/billing/invoices/invoices.component';
 import { InvoicesAsideComponent } from './components/billing/invoices/invoices-aside/invoices-aside.component';
- import { InvoicesItemComponent } from './components/billing/invoices/invoices-item/invoices-item.component';
- import { InvoicesHeaderComponent } from './components/billing/invoices/invoices-header/invoices-header.component';
+import { InvoicesItemComponent } from './components/billing/invoices/invoices-item/invoices-item.component';
+import { InvoicesHeaderComponent } from './components/billing/invoices/invoices-header/invoices-header.component';
 import { InvoicesFilterComponent } from './components/billing/invoices/invoices-header/invoices-filter/invoices-filter.component';
 import { InvoicesAsidePreviewComponent } from './components/billing/invoices/invoices-aside-preview/invoices-aside-preview.component';
 import { PaymentsComponent } from './components/billing/payments/payments.component';
@@ -280,7 +280,8 @@ import { PaymentsFilterComponent } from './components/billing/payments/payments-
 import { PaymentsAsideComponent } from './components/billing/payments/payments-aside/payments-aside.component';
 import { RefundPaymentComponent } from './components/billing/payments/refund-payment/refund-payment.component';
 import { EditPaymentComponent } from './components/billing/payments/edit-payment/edit-payment.component';
- 
+import { TechServiceReportComponent } from './components/reports/reports/tech-service-report/tech-service-report.component';
+
 
 
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
@@ -421,9 +422,9 @@ angular.module('quicktech')
   .directive(
     'billableTicketsComponent',
     downgradeComponent({ component: BillableTicketsComponent }))
-    .directive(
-      'paymentsComponent',
-      downgradeComponent({ component: PaymentsComponent }))
+  .directive(
+    'paymentsComponent',
+    downgradeComponent({ component: PaymentsComponent }))
   .directive(
     'inventoryComponent',
     downgradeComponent({ component: InventoryComponent }))
@@ -692,7 +693,8 @@ angular.module('quicktech')
     PaymentsFilterComponent,
     PaymentsAsideComponent,
     RefundPaymentComponent,
-    EditPaymentComponent
+    EditPaymentComponent,
+    TechServiceReportComponent,
   ],
   imports: [
     BrowserModule,

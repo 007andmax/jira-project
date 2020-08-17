@@ -6,7 +6,7 @@
       </div>
       <div class="new-companies-content__modal--content">
        
-         <draft-email-user-recipients [selectedClient]="selectedClient" [accountType]="null" [usersSelected]="usersSelected"  (onCompanyEmails)="onChangeCompanyEmails($event)"></draft-email-user-recipients>
+         <draft-email-user-recipients [selectedClient]="selectedClient" [accountType]="accountType" [usersSelected]="usersSelected"  (onCompanyEmails)="onChangeCompanyEmails($event)"></draft-email-user-recipients>
         <div class="col-md-12 tab-btns">
           <div [ngClass]="{active: tab == 'plain'}" (click)="tab = 'plain'">
             Plain Text

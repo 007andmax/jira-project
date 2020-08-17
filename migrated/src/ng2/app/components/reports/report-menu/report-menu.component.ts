@@ -18,6 +18,7 @@ import { ServiceReports } from '../class/service-reports';
 import { ExportCSV } from '../report-additional-actions/class/export-csv';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { ProductCompanyReport } from '../class/product-company-report';
+import { TechService } from '../class/tech-service';
 
 
 @Component({
@@ -29,6 +30,7 @@ export class ReportMenuComponent implements OnInit {
 
   selectedClient = null;
   className = '';
+  techService: TechService = new TechService();
   glNumber: GlNumber = new GlNumber();
   taxes: TaxesReport = new TaxesReport();
   accountsReceivable: AccountsReceivable = new AccountsReceivable();
@@ -52,7 +54,7 @@ export class ReportMenuComponent implements OnInit {
   constructor(private reportsService: ReportsService,
     private reportsStateService: ReportsStateService,
     private productService: ProductService,
-    private companiesStateService:CompaniesStateService,
+    private companiesStateService: CompaniesStateService,
     private ticketReportStateService: TicketReportStateService) { }
 
   ngOnInit() {
@@ -114,8 +116,8 @@ export class ReportMenuComponent implements OnInit {
       this.customerSalesReport.setCompanyId(selectClient.item.id);
       this.ticketsReport.setCompanyId(selectClient.item.id);
       this.serviceReport.setCompanyId(selectClient.item.id);
-      if (this.ticketsReport.startDate === '' && this.ticketsReport.endDate === '')  this.ticketsReport.setDatesByCompany(this.selectedClient);
-      if (this.serviceReport.startDate === '' && this.serviceReport.endDate === '')  this.serviceReport.setDatesByCompany(this.selectedClient);
+      if (this.ticketsReport.startDate === '' && this.ticketsReport.endDate === '') this.ticketsReport.setDatesByCompany(this.selectedClient);
+      if (this.serviceReport.startDate === '' && this.serviceReport.endDate === '') this.serviceReport.setDatesByCompany(this.selectedClient);
       this.validate.resetCompany();
     }
     this.onSelectedClient.emit(this.selectedClient);
@@ -134,6 +136,7 @@ export class ReportMenuComponent implements OnInit {
   }
   onSelectTechUser(data) {
     this.ticketsReport.setTechUser(data);
+    this.techService.setTechUserId((data) ? data.id : null);
   }
   getReportByTaxes() {
     if (!this.validate.isValidateTaxes(this.glNumber.startDate, this.glNumber.endDate)) return;
@@ -149,7 +152,10 @@ export class ReportMenuComponent implements OnInit {
   getReportByService() {
     if (!this.validate.isValidateService(this.selectedClient)) return;
     this.onRequest.emit(true);
-    this.reportsService.getReportByService(this.serviceReport.getForRequest()).subscribe(data => this.setDatareport(data));
+    this.reportsService.getReportByService(this.serviceReport.getForRequest()).subscribe((data: any) => {
+   
+      this.setDatareport(data)
+    });
   }
   getReportByTickets() {
     if (!this.validate.isValidateTickets(this.selectedClient)) return;
@@ -165,9 +171,9 @@ export class ReportMenuComponent implements OnInit {
   }
   getReportCompanyProducts() {
     // if (!this.validate.isValidateProduct(this.productSalesReport.startDate, this.productSalesReport.endDate, this.productSalesReport.companyId, this.productSalesReport.type)) return;
-    
+
     this.productsCompanyReport.setCompanyId(localStorage.getItem('company_id') || null);
-    
+
     this.selectedClient = this.companiesStateService.getCompanies().find(item => item.id === this.productsCompanyReport.companyId);
     if (this.productsCompanyReport.startDate === '' && this.productsCompanyReport.endDate === '') this.productsCompanyReport.setDatesByCompany(this.selectedClient);
     this.onSelectedClient.emit(this.selectedClient);
@@ -203,6 +209,23 @@ export class ReportMenuComponent implements OnInit {
 
 
   }
+
+  getReportByTechService() {
+
+    if (!this.validate.isValidateTechService(this.techService.startDate, this.glNumber.endDate)) return;
+
+    this.onRequest.emit(true);
+
+
+
+    this.reportsService.getReportByTechService(this.techService.getForRequest()).subscribe((data:any) => {
+      this.techService.setList(data.lines);
+      this.techService.setTotalQuantity(data.totalQuantity);
+      this.setDatareport(this.techService)
+    } );
+
+
+  }
   private setDatareport(data) {
 
     if (this.report === 'income-accounts') {
@@ -231,7 +254,9 @@ export class ReportMenuComponent implements OnInit {
       this.glNumber.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.glNumber.setEndDate(moment(value.end).format('YYYY/MM/DD'));
 
-      
+      this.techService.setStartDate(moment(value.start).format('YYYY-MM-DD'));
+      this.techService.setEndDate(moment(value.end).format('YYYY-MM-DD'));
+
 
       this.productsCompanyReport.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.productsCompanyReport.setEndDate(moment(value.end).format('YYYY/MM/DD'));
@@ -252,7 +277,8 @@ export class ReportMenuComponent implements OnInit {
       this.glNumber.resetDates();
       this.productSalesReport.resetDates();
       this.productsCompanyReport.resetDates();
-      
+      this.techService.resetDates();
+
       if (this.selectedClient) {
         this.ticketsReport.setDatesByCompany(this.selectedClient);
         this.serviceReport.setDatesByCompany(this.selectedClient);

@@ -27,6 +27,7 @@ export class ReportAdditionalActionsComponent implements OnInit, OnDestroy {
   @Input() fileName: string = "";
   @Input() id: string = null;
   @Input() template: string = "PDF_TEMPLATE";
+  @Input() accountType = 'CLIENT';
   @Input() selectedClient;
   @Output() changePurchaseCost = new EventEmitter<any>();
   constructor(private reportsService: ReportsService,
@@ -55,6 +56,8 @@ export class ReportAdditionalActionsComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.report = this.report;
     modalRef.componentInstance.template = this.template;
     modalRef.componentInstance.fileName = this.fileName;
+    modalRef.componentInstance.accountType = this.accountType;
+    
   }
   getPdfIdFromRest(action) {
     var dto = {
