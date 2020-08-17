@@ -13,8 +13,9 @@
     <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__email-dark" (click)="resendInvoices()"></div>
     <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__print" (click)="print()"></div>
     <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__download-pdf" (click)="downloadPDF()"></div>
-    <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__refund-payment" *ngIf="!invoiceProfile.paidOn" (click)="rollbackInvoice()"></div>
-    <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-16 header-circle-icon icon__remove" (click)="deleteInvoice()"></div>
+    <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__remove" *ngIf="!invoiceProfile.paidOn" (click)="rollbackInvoice()"></div>
+    <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__restart" *ngIf="invoiceProfile.paidOn" (click)="refundPayments()"></div>
+   <!--  <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-16 header-circle-icon icon__remove" (click)="deleteInvoice()"></div>-->
 
     <div class="icon__close qt-sz-24 qt-pointer qt-ic-c " (click)="close()"></div>
   </div>

@@ -7,7 +7,7 @@ import * as moment from "moment";
 import { AppService } from 'src/ng2/app/states/app/app.service';
 import { ConfirmStateService } from '../../../shared/confirm/services/confirm-state.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DELETE_INVOICE, ROLLBACK_INVOICE } from 'src/ng2/app/const/confirm';
+import { DELETE_INVOICE, ROLLBACK_INVOICE, REFUND_PAYMENTS } from 'src/ng2/app/const/confirm';
 import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
 import { InvoiceStateService } from 'src/ng2/app/states/invoice/invoice-state.service';
 import { Subscription } from 'rxjs';
@@ -36,9 +36,7 @@ export class InvoicesAsidePreviewComponent implements OnInit {
     this.onGetInvoice();
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       if (data) {
-        if (this.confirmStateService.getConfirmAction() === DELETE_INVOICE) this.close();
-        if (this.confirmStateService.getConfirmAction() === ROLLBACK_INVOICE) this.close();
-        
+        if (this.confirmStateService.getConfirmAction() === DELETE_INVOICE || this.confirmStateService.getConfirmAction() === ROLLBACK_INVOICE || this.confirmStateService.getConfirmAction() === REFUND_PAYMENTS) this.close();
       }
     })
     this.sub.add(getConfirm);
@@ -55,6 +53,12 @@ export class InvoicesAsidePreviewComponent implements OnInit {
   resendInvoices() {
     this.invoicesService.resendInvoices([this.invoiceId]).subscribe(data => {
     })
+  }
+  refundPayments() {
+    this.confirmStateService.setConfirmAction(REFUND_PAYMENTS);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    modalRef.componentInstance.message = `Invoice will be marked as not paid.`;
+    this.invoiceStateService.setInvoiceForRefund(this.invoiceProfile);
   }
   rollbackInvoice() {
     this.confirmStateService.setConfirmAction(ROLLBACK_INVOICE);

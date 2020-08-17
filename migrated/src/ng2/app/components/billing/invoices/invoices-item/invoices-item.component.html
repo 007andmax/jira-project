@@ -26,8 +26,8 @@
         <li class="pointer" ngbDropdownItem *ngIf="!invoice.readedAt" (click)="markAsRead()"> <div class="icon__mark-as-read qt-sz-16 qt-mr-8"></div> Mark as Read</li>
         <li class="pointer" ngbDropdownItem (click)="exportAsPDF()"> <div class="icon__download-pdf qt-sz-16 qt-mr-8"></div> Export as PDF</li>
         <li class="pointer" ngbDropdownItem *ngIf="invoice.paidOn" (click)="refundPayments()"> <div class="icon__restart qt-sz-16 qt-mr-8"></div> Refund Payments</li>
-        <li class="pointer" ngbDropdownItem *ngIf="!invoice.paidOn" (click)="rollbackInvoice()">  <div class="icon__restart qt-sz-16 qt-mr-8"></div> Rollback</li>
-        <li class="pointer" ngbDropdownItem (click)="deleteInvoice()"> <div class="icon__remove qt-sz-16 qt-mr-8"></div> Delete</li>
+        <li class="pointer" ngbDropdownItem *ngIf="!invoice.paidOn" (click)="rollbackInvoice()">  <div class="icon__remove qt-sz-16 qt-mr-8"></div> Rollback</li>
+        <!--<li class="pointer" ngbDropdownItem (click)="deleteInvoice()"> <div class="icon__remove qt-sz-16 qt-mr-8"></div> Delete</li>-->
         <li ngbDropdownItem class="payment-menu-item"> <div class="icon__payment-history qt-sz-16 qt-mr-8"></div> Payment history
 
           <div class="dropdown-submenu-wrapper payment-info-submenu">
