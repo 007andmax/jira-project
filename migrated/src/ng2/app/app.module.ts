@@ -180,6 +180,7 @@ import { AgmCoreModule } from '@agm/core';
 import { ProfileComponent } from './components/setting/my-profile/profile/profile.component';
 import { TagPipe } from './pipe/tag.pipe';
 
+import { NgxUploaderModule } from 'ngx-uploader';
 import { ToastrModule } from 'ngx-toastr';
 // import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { SelectDropDownModule } from 'ngx-select-dropdown';
@@ -281,6 +282,23 @@ import { PaymentsAsideComponent } from './components/billing/payments/payments-a
 import { RefundPaymentComponent } from './components/billing/payments/refund-payment/refund-payment.component';
 import { EditPaymentComponent } from './components/billing/payments/edit-payment/edit-payment.component';
 import { TechServiceReportComponent } from './components/reports/reports/tech-service-report/tech-service-report.component';
+import { DashboardComponent } from './components/device/dashboard/dashboard.component';
+import { HardwareComponent } from './components/device/hardware/hardware.component';
+import { SoftwareComponent } from './components/device/software/software.component';
+import { ServicesComponent } from './components/device/services/services.component';
+import { AntivirusComponent } from './components/device/antivirus/antivirus.component';
+import { TerminalComponent } from './components/device/terminal/terminal.component';
+import { PasswordComponent } from './components/device/password/password.component';
+import { WindowsComponent } from './components/device/windows-update/windows-update.component';
+import { StartupComponent } from './components/device/startup-programes/startup-programes.component';
+import { FileComponent } from './components/device/file-explorer/file-explorer.component';
+import { DeviceComponent } from './components/device/device.component';
+import { NavComponent } from './components/device/nav/nav.component';
+import { SessionTimeoutComponent } from './components/device/session-timeout/session-timeout.component';
+import { LockScreenComponent } from './components/device/lock-screen/lock-screen.component';
+import { TicketTaskComponent } from './components/device/ticket-task/ticket-task.component';
+import { searchTextPipe } from './components/device/_pipe/searchText.pipe';
+import { SoftwarePipe } from './pipe/software.pipe';
 
 
 
@@ -431,6 +449,36 @@ angular.module('quicktech')
   .directive(
     'companyProducts',
     downgradeComponent({ component: CompanyProductsComponent }))
+  .directive(
+    'dashboardComponent',
+    downgradeComponent({ component: DashboardComponent }))
+  .directive(
+    'hardwareComponent',
+    downgradeComponent({ component: HardwareComponent }))
+  .directive(
+    'softwareComponent',
+    downgradeComponent({ component: SoftwareComponent }))
+  .directive(
+    'servicesComponent',
+    downgradeComponent({ component: ServicesComponent }))
+  .directive(
+    'antivirusComponent',
+    downgradeComponent({ component: AntivirusComponent }))
+  .directive(
+    'terminalComponent',
+    downgradeComponent({ component: TerminalComponent }))
+  .directive(
+    'passwordComponent',
+    downgradeComponent({ component: PasswordComponent }))
+  .directive(
+    'windowsComponent',
+    downgradeComponent({ component: WindowsComponent }))
+  .directive(
+    'startupComponent',
+    downgradeComponent({ component: StartupComponent }))
+  .directive(
+    'fileComponent',
+    downgradeComponent({ component: FileComponent }))
   .factory('ngZone', downgradeInjectable(NgZone));
 
 /**
@@ -695,6 +743,23 @@ angular.module('quicktech')
     RefundPaymentComponent,
     EditPaymentComponent,
     TechServiceReportComponent,
+    DeviceComponent,
+    NavComponent,
+    DashboardComponent,
+    HardwareComponent,
+    SoftwareComponent,
+    StartupComponent,
+    ServicesComponent,
+    AntivirusComponent,
+    TerminalComponent,
+    WindowsComponent,
+    FileComponent,
+    PasswordComponent,
+    SessionTimeoutComponent,
+    LockScreenComponent,
+    TicketTaskComponent,
+    searchTextPipe,
+    SoftwarePipe
   ],
   imports: [
     BrowserModule,
@@ -729,7 +794,7 @@ angular.module('quicktech')
     ToastrModule.forRoot({
       closeButton: true,
       preventDuplicates: true,
-      timeOut: 3000
+      timeOut: 5000
     }),
     CronEditorModule,
     ImageCropperModule,
@@ -738,7 +803,8 @@ angular.module('quicktech')
     NvD3Module,
     BrowserAnimationsModule,
     IgxTimePickerModule,
-    DisabledBtnModule
+    DisabledBtnModule,
+    NgxUploaderModule
 
   ],
   entryComponents: [
@@ -769,7 +835,23 @@ angular.module('quicktech')
     BillableComponent,
     InvoicesComponent,
     BillableTicketsComponent,
-    PaymentsComponent
+    PaymentsComponent,
+    AppComponent,
+    DeviceComponent,
+    NavComponent,
+    DashboardComponent,
+    HardwareComponent,
+    SoftwareComponent,
+    StartupComponent,
+    ServicesComponent,
+    AntivirusComponent,
+    TerminalComponent,
+    WindowsComponent,
+    FileComponent,
+    PasswordComponent,
+    SessionTimeoutComponent,
+    LockScreenComponent,
+    TicketTaskComponent,
     // RecurringTicketsComponent
   ],
   exports: [
@@ -786,7 +868,36 @@ angular.module('quicktech')
     { provide: UrlHandlingStrategy, useClass: CustomHandlingStrategy },
     ApiPasswordManagerService
   ],
-  bootstrap: [AppComponent]
+ // bootstrap: [AppComponent]
 })
 export class AppModule {
+  ngDoBootstrap(app) {
+    fetch('url/to/fetch/component/name')
+      .then((name)=>{ bootstrapRootComponent(app, name)});
+  }
+}
+
+
+function bootstrapRootComponent(app, name) {
+  // define the possible bootstrap components 
+  // with their selectors (html host elements)
+  const options = {
+    'app': AppComponent,
+    'device': DeviceComponent
+  };
+  const component = options[name];
+  app.bootstrap(component);
+}
+
+function fetch(url) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      if (window.location.href.includes('/device/') === true) { 
+        resolve('device');
+      } else {
+        resolve('app');
+      }
+      
+    }, 2000);
+  });
 }

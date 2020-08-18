@@ -1,0 +1,866 @@
+/*** All css files include ***/
+@import "../assets/scss/variable";
+@import "../assets/scss/mixin";
+@import "../assets/scss/custom";
+
+main {
+    &.terminal-page-area {
+        margin-right: 352px !important;
+        @media only screen and (min-width: 1601px) {
+            margin-right: 512px !important;
+        }
+        .right-sidebar {
+            & > div {
+                & > .btn.btn-primary {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    @include border-radius(0);
+                    font-size: 13px;
+                    padding: 10px;
+                    img {
+                        max-width: 20px;
+                        margin-right: 5px;
+                    }
+                }
+            }
+            &.terminal-sidebar {
+                right: 0 !important;
+                border-left: 1px solid #dfe3e8;
+                -ms-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
+                -o-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
+                -webkit-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
+                -moz-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
+                box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
+                @media only screen and (min-width: 1601px) {
+                    width: 448px;
+                }
+                
+                    ul.nav-tabs {
+                        -ms-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
+                        -o-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
+                        -webkit-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
+                        -moz-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
+                        box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.15);
+                    }
+
+                    .tab-content {
+                        .tab-pane {
+                            .cmn-tbs-content {
+                                & > ul {
+                                    & > li {
+                                        border-bottom: 1px dotted #c4cbd5;
+                                        padding: 8px 0;
+                                        .terminal-cmd-opt {
+                                            display: -ms-flexbox;
+                                            display: -webkit-flex;
+                                            display: flex;
+                                            width: 100%;
+                                            flex-direction: row;
+                                            align-items: center;
+                                            justify-content: space-between;
+                                            margin-bottom: 5px;
+                                            .cmd-list-right {
+                                                width: 30px;
+                                                display: -ms-flexbox;
+                                                display: -webkit-flex;
+                                                display: flex;
+                                                align-items: center;
+                                                justify-content: space-between;
+                                                & > .btn-group {
+                                                    width: 8px;
+                                                    line-height: 1;
+                                                    & > button {
+                                                        width: 8px;
+                                                        height: 16px;
+                                                        font-size: 0;
+                                                        border: none;
+                                                        outline: none;
+                                                        padding: 0;
+                                                        margin: 0;
+                                                        background: url("../../../../../ng1/images/device/more-terminal.svg")
+                                                            no-repeat center;
+                                                        line-height: 1; 
+                                                    }
+
+                                                    .dropdown-menu {
+                                                        width: 120px;
+                                                        @include border-radius(4px);
+                                                        -ms-box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
+                                                        -o-box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
+                                                        -webkit-box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
+                                                        -moz-box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
+                                                        box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
+                                                        background-color: #ffffff;
+                                                        padding: 6px 0;
+                                                        right: 0 !important;
+                                                        top: 25px !important;
+                                                        min-width: initial !important;
+                                                        li {
+                                                            padding: 0;
+                                                            margin: 0;
+                                                            border: none;
+                                                            a {
+                                                                display: -ms-flexbox;
+                                                                display: -webkit-flex;
+                                                                display: flex;
+                                                                align-items: center;
+                                                                width: 100%;
+                                                                font-size: 13px;
+                                                                line-height: 1.54;
+                                                                letter-spacing: normal;
+                                                                color: #4f5f79;
+                                                                padding: 7px 15px;
+                                                                border: none;
+                                                                img {
+                                                                    max-width: 16px;
+                                                                    margin-right: 8px;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                            .cmd-list-left {
+                                                display: -ms-flexbox;
+                                                display: -webkit-flex;
+                                                display: flex;
+                                                align-items: center;
+                                                width: calc(100% - 50px);
+                                                img {
+                                                    margin-right: 4px;
+                                                    max-width: 16px;
+                                                }
+                                                h5 {
+                                                    margin: 2px 0 0;
+                                                    max-width: calc(100% - 20px);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                &.history-cmd {
+                                    & > ul {
+                                        & > li {
+                                            border-bottom: 1px dotted #c4cbd5;
+                                            padding: 8px 0;
+                                            .terminal-cmd-opt {
+                                                margin-bottom: 0;
+                                                .cmd-list-right {
+                                                    width: 70px;
+                                                    .date {
+                                                        font-size: 10px;
+                                                        font-weight: normal;
+                                                        line-height: 1.2;
+                                                        letter-spacing: normal;
+                                                        text-align: right;
+                                                        color: #4f5f79;
+                                                    }
+                                                }
+
+                                                .cmd-list-left {
+                                                    display: -ms-flexbox;
+                                                    display: -webkit-flex;
+                                                    display: flex;
+                                                    align-items: center;
+                                                    width: calc(100% - 80px);
+                                                    h5 {
+                                                        margin: 0;
+                                                        max-width: calc(100% - 20px);
+                                                        color: #4f5f79;
+                                                        font-size: 12px;
+                                                        font-family: $graphicMedBold;
+                                                    }
+                                                }
+                                            }
+                                            .cmd-details {
+                                                h5 {
+                                                    font-size: 12px;
+                                                    font-weight: bold;
+                                                    font-family: $sourceCode;
+                                                }
+                                                span {
+                                                    font-family: $sourceCode;
+                                                    font-size: 12px;
+                                                    font-weight: normal;
+                                                    font-style: normal;
+                                                    line-height: 1.33;
+                                                    letter-spacing: normal;
+                                                    color: #4f5f79;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                
+
+                .modal-content {
+                    &.toggle-area {
+                        width: 586px;
+                        -ms-box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
+                        -o-box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
+                        -webkit-box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
+                        -moz-box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
+                        box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
+                        border: 1px solid #dfe3e8;
+                        background-color: #ffffff;
+                        @include border-radius(5px);
+                        padding: 24px;
+                        // @media only screen and (max-width:1440px){
+                        //     max-height: 460px;
+                        //     overflow-y: auto;
+                        //     overflow-x: hidden;
+                        // }
+                        .modal-body {
+                            @media only screen and (max-height: 700px) {
+                                padding: 0;
+                                max-height: 410px;
+                                overflow-y: auto;
+                                overflow-x: hidden;
+                                flex-direction: column;
+                                float: left;
+                                width: 100%;
+                            }
+                            form {
+                                .f-row {
+                                    display: -ms-flexbox;
+                                    display: -webkit-flex;
+                                    display: flex;
+                                    flex-direction: row;
+                                    flex-wrap: wrap;
+                                    .f-col {
+                                        &.col-70 {
+                                            width: 65%;
+                                        }
+                                        &.col-30 {
+                                            width: 35%;
+                                        }
+                                        textarea {
+                                            height: 315px;
+                                        }
+                                    }
+                                    .btn {
+                                        min-width: inherit;
+                                        padding: 13px 16px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .dropdown{
+                    .dropdown-menu{
+                        box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
+                        border: solid 1px #dfe3e8;
+                        background-color: #ffffff;
+                        border-radius: 4px;
+                        padding-top: 8px;
+                        button{
+                            &.dropdown-item{
+                                padding: 6px 15px;
+                                font-size: 13px;
+                                font-weight: normal;
+                                font-style: normal;
+                                line-height: 1.54;
+                                letter-spacing: normal;
+                                color: #364656;
+                                height: auto;
+                                &:hover{
+                                    background-color: #edf2f6;
+                                }
+                                &:last-child{
+                                    border-top:1px solid  #dfe3e8;
+                                    font-size: 12px;
+                                    font-weight: 500;
+                                    font-style: normal;
+                                    line-height: 1.33;
+                                    letter-spacing: normal;
+                                    color: #16a4fa; 
+                                    font-family:$graphicMedBold;
+                                    padding: 12px 15px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            &.script-sidebar {
+                right: -600px;
+                -ms-box-shadow: -8px 0 16px 0 rgba(0, 0, 0, 0.1);
+                -o-box-shadow: -8px 0 16px 0 rgba(0, 0, 0, 0.1);
+                -webkit-box-shadow: -8px 0 16px 0 rgba(0, 0, 0, 0.1);
+                -moz-box-shadow: -8px 0 16px 0 rgba(0, 0, 0, 0.1);
+                box-shadow: -8px 0 16px 0 rgba(0, 0, 0, 0.1);
+                background-color: #ffffff;
+                width: 592px;
+                z-index: 99;
+                @include transition(0.4s);
+                &.opened {
+                    right: 0;
+                }
+
+                .script-side-heder {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 14px 32px;
+                    background-color: #f9fafb;
+                    border-bottom: 1px solid #dfe3e8;
+                    h2 {
+                        margin: 0;
+                        font-size: 20px;
+                    }
+                    .close-btn {
+                        width: 24px;
+                        height: 24px;
+                    }
+                }
+
+                & > div {
+                    
+                        .nav-tabs {
+                            padding: 18px 32px 0 32px;
+                        }
+                        .tab-content {
+                            padding: 67px 32px 100px 32px;
+                            ul {
+                                &.list-unstyled {
+                                    &.script-list {
+                                        @include border-radius(4px);
+                                        border: solid 1px #dfe3e8;
+                                        background-color: #ffffff;
+                                        li {
+                                            padding: 16px 16px 20px 16px;
+                                            border-bottom: 1px solid #dfe3e8;
+                                            display: -webkit-flex;
+                                            display: -ms-flexbox;
+                                            display: flex;
+                                            flex-direction: row;
+                                            align-items: flex-start;
+                                            .script-left {
+                                                display: -webkit-flex;
+                                                display: -ms-flexbox;
+                                                display: flex;
+                                                flex-direction: column;
+                                                align-items: flex-start;
+                                                width: calc(100% - 105px);
+                                                h5 {
+                                                    font-style: normal;
+                                                    line-height: 1.54;
+                                                    letter-spacing: normal;
+                                                    margin: 0;
+                                                }
+                                                span {
+                                                    font-size: 13px;
+                                                    font-weight: normal;
+                                                    font-stretch: normal;
+                                                    font-style: normal;
+                                                    line-height: 1.54;
+                                                    letter-spacing: normal;
+                                                    color: #4f5f79;
+                                                    max-width: 100%;
+                                                    display: block;
+                                                    white-space: nowrap;
+                                                    overflow: hidden;
+                                                    text-overflow: ellipsis;
+                                                    &.clone-cat {
+                                                        border-radius: 3px;
+                                                        border: solid 1px #dfe3e8;
+                                                        background-color: #f9fafb;
+                                                        font-size: 10px;
+                                                        font-weight: 500;
+                                                        font-stretch: normal;
+                                                        font-style: normal;
+                                                        line-height: 1.2;
+                                                        letter-spacing: normal;
+                                                        color: #4f5f79;
+                                                        padding: 3px 8px;
+                                                        margin-top: 3px;
+                                                    }
+                                                }
+                                            }
+                                            .script-right {
+                                                width: 105px;
+                                                display: -webkit-flex;
+                                                display: -ms-flexbox;
+                                                display: flex;
+                                                align-items: center;
+                                                justify-content: flex-end;
+                                                a {
+                                                    width: 32px;
+                                                    height: 32px;
+                                                    @include border-radius(8px);
+                                                    border: solid 1px #dfe3e8;
+                                                    background-color: #ffffff;
+                                                    display: -webkit-flex;
+                                                    display: -ms-flexbox;
+                                                    display: flex;
+                                                    align-items: center;
+                                                    justify-content: center;
+                                                    margin-left: 8px;
+                                                    position: relative;
+                                                    &::before {
+                                                        width: 85px;
+                                                        top: -42px;
+                                                    }
+                                                    &::after {
+                                                        bottom: auto;
+                                                        top: -9px;
+                                                    }
+                                                    &:hover {
+                                                        background-color: #f4f6f8;
+                                                        border-color: #f4f6f8;
+                                                    }
+                                                    img {
+                                                        max-width: 16px;
+                                                    }
+                                                }
+                                            }
+                                            &:last-child {
+                                                border-bottom: none;
+                                            }
+                                        }
+                                    }
+                                    &.pagination {
+                                        display: table;
+                                        align-items: center;
+                                        justify-content: center;
+                                        margin: 0;
+                                        width: auto;
+                                        margin: 0 auto;
+                                        border: 1px solid #dfe3e8;
+                                        float: none;
+                                        li {
+                                            padding: 0;
+                                            width: auto;
+                                            min-width: 28px;
+                                            height: 28px;
+                                            border: none;
+                                            a {
+                                                width: 100%;
+                                                line-height: 1;
+                                                height: 100%;
+                                                display: -ms-flexbox;
+                                                display: -webkit-flex;
+                                                display: flex;
+                                                align-items: center;
+                                                justify-content: center;
+                                                font-size: 12px;
+                                                font-weight: normal;
+                                                font-stretch: normal;
+                                                font-style: normal;
+                                                line-height: 1.33;
+                                                letter-spacing: normal;
+                                                text-align: center;
+                                                color: #4f5f79;
+                                                border: none;
+                                                padding: 0;
+                                                border-right: solid 1px #dfe3e8;
+                                                border-bottom: none;
+                                            }
+                                            &:last-child {
+                                                a {
+                                                    border-right: 0;
+                                                }
+                                            }
+                                            &:first-child {
+                                                a {
+                                                    border-left: 0;
+                                                }
+                                            }
+                                            &.current {
+                                                a {
+                                                    background-color: #16a4fa;
+                                                    color: #fff;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            .script-search {
+                                padding-left: 30px;
+                                background: url("../../../../../ng1/images/device/search-script.svg") no-repeat left
+                                    12px center;
+                            }
+                        }
+                    
+                }
+            }
+            &.script-details {
+                .script-side-heder {
+                    padding: 14px 32px 14px 15px;
+                    .close-btn {
+                        margin-right: 8px;
+                    }
+                    .clone-cat {
+                        @include border-radius(3px);
+                        border: solid 1px #dfe3e8;
+                        background-color: #fff;
+                        font-size: 10px;
+                        font-style: normal;
+                        line-height: 1.2;
+                        letter-spacing: normal;
+                        color: #4f5f79;
+                        padding: 3px 8px;
+                        font-family: $graphicMedBold;
+                    }
+                }
+                .script-details-area {
+                    display: -ms-flexbox;
+                    display: -webkit-flex;
+                    display: flex;
+                    width: 100%;
+                    flex-direction: column;
+                    padding: 15px 32px;
+                    .f-row {
+                        display: -ms-flexbox;
+                        display: -webkit-flex;
+                        display: flex;
+                        flex-direction: column;
+                        textarea {
+                            height: 200px;
+                        }
+                        .form-row {
+                            .btn {
+                                margin-right: 15px;
+                                padding: 10px 20px;
+                                font-size: 13px;
+                                &.btn-secondary {
+                                    border: solid 1px #c5cdd5;
+                                    background-color: #ffffff !important;
+                                }
+                            }
+                        }
+                    }
+                    h2 {
+                        font-size: 22px;
+                        font-weight: normal;
+                        font-style: normal;
+                        line-height: 1.45;
+                        letter-spacing: -0.5px;
+                        margin-bottom: 20px;
+                        font-family: $font-body;
+                        text-transform: none;
+                    }
+                    .script-info {
+                        display: -ms-flexbox;
+                        display: -webkit-flex;
+                        display: flex;
+                        align-items: flex-start;
+                        justify-content: space-between;
+                        flex-wrap: wrap;
+                        width: 100%;
+                        margin-bottom: 20px;
+                        .script-col {
+                            width: 25%;
+                            display: -ms-flexbox;
+                            display: -webkit-flex;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: flex-start;
+                            h5 {
+                                font-size: 12px;
+                                margin-bottom: 3px;
+                                text-transform: none;
+                            }
+                            span {
+                                font-size: 12px;
+                                font-weight: normal;
+                                font-stretch: normal;
+                                font-style: normal;
+                                line-height: 1.33;
+                                letter-spacing: normal;
+                                color: #364656;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .update-info {
+            display: inline-block;
+            vertical-align: middle;
+            a {
+                display: inline-block;
+                vertical-align: middle;
+                margin-left: 23px;
+                font-size: 12px;
+                font-family: $graphicMedBold;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: 1.33;
+                letter-spacing: normal;
+                color: #4f5f79;
+                padding-left: 25px;
+                min-height: 16px;
+                &:hover {
+                    color: #16a4fa;
+                }
+                &.Command {
+                    margin-left: 0;
+                    background: url("../assets/images/command-line-blue.svg") no-repeat left 0;
+                    &.active {
+                        background: url("../assets/images/command-line-blue.svg") no-repeat left 0;
+                        color: #16a4fa;
+                    }
+                }
+                &.Power {
+                    background: url("../assets/images/power-shell.svg") no-repeat left 0;
+                    &.active {
+                        background: url("../assets/images/power-shell.svg") no-repeat left 0;
+                        color: #16a4fa;
+                    }
+                }
+            }
+        }
+
+        .terminal-area {
+            float: left;
+            width: 100%;
+            .terminal-box {
+                float: left;
+                width: 100%;
+                height: 460px;
+                background-color: #151b21;
+                overflow: auto;
+                padding: 22px 20px;
+                font-size: 13px;
+                font-weight: normal;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: 1.54;
+                letter-spacing: normal;
+                color: $white-color;
+                font-family: $sourceCode;
+                p {
+                    margin-bottom: 0;
+                    font-family: $sourceCode;
+                }
+            }
+        }
+        .cmn-tbs-content {
+            &.command {
+                li {
+                    border-bottom: 1px dotted #ccc;
+                    padding: 7.5px 0;
+                    position: relative;
+                    padding-right: 15px;
+                }
+                h5 {
+                    margin-top: 0;
+                    font-size: 12px;
+                    color: #4f5f79;
+                    line-height: 1.33;
+                    margin-bottom: 3px;
+                }
+                span {
+                    font-size: 12px;
+                    font-weight: normal;
+                    font-stretch: normal;
+                    font-style: normal;
+                    line-height: 1.33;
+                    letter-spacing: normal;
+                    color: #4f5f79;
+                    font-family: $sourceCode;
+                }
+                .copy {
+                    font-size: 0;
+                    width: 16px;
+                    height: 16px;
+                    position: relative;
+                    font-family: $sourceCode;
+                    background: url("../../../../../ng1/images/device/send-to-front.svg") no-repeat center;
+                    &::before {
+                        font-weight: 400;
+                        font-family: $font-body;
+                    }
+                }
+            }
+            &.history-cmd {
+                padding-bottom: 40px;
+                p {
+                    margin-bottom: 18px;
+                    font-size: 12px;
+                    font-weight: normal;
+                    font-family: $sourceCode;
+                    line-height: 1.33;
+                    color: #4f5f79;
+                }
+            }
+        }
+    }
+}
+
+body {
+    &.ng7-device {
+        /*** Modal styles ***/
+        .modal {
+            &.cmn-terminal-modal{
+                .modal-dialog {
+                    .modal-content {
+                        @include border-radius(6px);
+                        -ms-box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+                        -o-box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+                        -webkit-box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+                        -moz-box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+                        box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+                        background-color: #ffffff;
+                        margin-bottom: 0;
+                        .modal-header {
+                            padding: 10px 16px 10px 32px;
+                            border-bottom: 1px solid #dfe3e8;
+                            display: -ms-flexbox;
+                            display: -webkit-flex;
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            h2 {
+                                font-size: 20px;
+                                font-weight: 600;
+                                font-stretch: normal;
+                                font-style: normal;
+                                line-height: 1.4;
+                                letter-spacing: -0.5px;
+                                text-transform: capitalize;
+                                font-family: $graphicSemibold;
+                                margin: 0;
+                            }
+                            button{
+                                &.close{
+                                    position: static;
+                                }
+                            }
+                        }
+                        .modal-body{
+                            padding: 15px 32px 32px 32px;
+                            .confirm-message{
+                                width: 100%;
+                                p{
+                                    margin: 0 0 40px 0;
+                                    line-height: 1.54;
+                                    letter-spacing: normal;
+                                    font-size: 13px;
+                                }
+                            }
+                            .confirm-btn {
+                                display: -ms-flexbox;
+                                display: -webkit-flex;
+                                display: flex;
+                                align-items: center;
+                                justify-content: flex-end;
+                                .btn{
+                                    padding:13px 16px;
+                                    text-align:center;
+                                    margin-left:10px;
+                                    font-size:13px;
+                                    &.btn-secondary{
+                                        border: solid 1px #c5cdd5;
+
+                                    }
+                                    &.btn-remove{
+                                        background-color: #ff5263;
+                                        border-color:#ff5263;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            &.category-modal{
+                .terminal-category-list {
+                    display: flex;
+                    width: 100%;
+                    flex-direction: column;
+                    ul.list-unstyled {
+                        margin: 0;
+                        display: flex;
+                        flex-direction: column;
+                        width: 100%;
+                        li {
+                            width: 100%;
+                            display: -ms-flexbox;
+                            display: -webkit-flex;
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            justify-content: space-between;
+                            margin-bottom: 8px;
+                            .form-input {
+                                width: calc(100% - 48px);
+                            }
+                            .cat-action {
+                                width: 40px;
+                                height: 40px;
+                                display: -ms-flexbox;
+                                display: -webkit-flex;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                @include border-radius(4px);
+                                border: solid 1px #dfe3e8;
+                                background-color: #ffffff;
+                                &.edit-cat{
+                                    background-color: #637382;
+                                    border-color: #637382;
+                                }
+                                &::before{
+                                    left: -14px;
+                                    margin: 0 auto;
+                                    top: -42px;
+                                }
+                                &::after {
+                                    bottom: auto;
+                                    top: -9px;
+                                }
+                                &.delete{
+                                    &:hover{
+                                        background-color: #f4f6f8;
+                                        border-color:#f4f6f8;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                
+                
+                
+                
+                
+                
+                
+            }
+            &.category-modal {
+                .confirm-btn {
+                    align-items: center;
+                    justify-content: flex-start !important;
+                    button{
+                        &.btn.btn-small {
+                            margin-left: 0 !important;
+                            background-color: transparent;
+                            border: 1px solid #16a4fa;
+                            color: #16a4fa;
+                            font-size: 12px !important;
+                            padding: 9px 8px !important;
+                            display: -ms-flexbox !important;
+                            display: -webkit-flex !important;
+                            display: flex !important;
+                            align-items: center;
+                            justify-content: center;
+                            line-height: 1;
+                            margin-top: 10px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

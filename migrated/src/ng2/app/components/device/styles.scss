@@ -1,0 +1,53 @@
+/* You can add global styles to this file, and also import other style files */
+
+/*** All css files include ***/
+@import '/assets/scss/fonts';
+@import '/assets/scss/variable';
+@import '/assets/scss/mixin';
+@import '/assets/scss/custom';
+@import '/assets/scss/layout';
+@import '/assets/scss/loading-indicator';
+
+
+
+.modal { 
+    .modal-dialog.session, .modal-dialog.lock
+    {
+        max-width: 420px;
+        button.close{
+            right: 8px;
+            top: 8px;
+        }
+    }
+    .modal-dialog.lock {
+        max-width: 552px;
+    }
+    .session .modal-content{
+        @include border-radius(3px !important);
+    }
+}
+
+.ng7-device {
+  /* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(92,105,119); 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(92,105,119); 
+}
+}
+

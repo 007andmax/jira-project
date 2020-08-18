@@ -212,7 +212,15 @@
             $scope.deviceReport[agentId] = report;
           });
         };
-
+        $scope.redirectDevice = function (agent) {
+          if (agent.agentId) {
+            localStorage.setItem('agentId', agent.agentId);
+            localStorage.setItem('type', agent.type);
+            var url = '/#/ng2/device/dashboard';
+            window.open(url,'_blank');
+          }
+          
+        };
         function markDeviceAsMaster() {
           $scope.agents = $scope.agents.map(function(agent) {
             if (agent.agentId === $scope.agent.agentId) {
