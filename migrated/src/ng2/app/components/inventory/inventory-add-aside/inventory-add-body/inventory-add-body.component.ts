@@ -19,13 +19,13 @@ import { GlNumberService } from 'src/ng2/app/services/gl-number/gl-number.servic
   templateUrl: './inventory-add-body.component.html',
   styleUrls: ['./inventory-add-body.component.scss']
 })
-export class InventoryAddBodyComponent implements OnInit,OnDestroy {
+export class InventoryAddBodyComponent implements OnInit, OnDestroy {
   @ViewChild('addTax') containerAddTax;
   @ViewChild('glNumberSelect') glNumberSelect: SelectSearchComponent;
   @ViewChild('categoriesSelect') categoriesSelect: SelectSearchComponent;
   @ViewChild('vendorsSelect') vendorsSelect: SelectSearchComponent;
-  @Output() onClose:EventEmitter<any> = new EventEmitter();
-  @Input() class:string;
+  @Output() onClose: EventEmitter<any> = new EventEmitter();
+  @Input() class: string;
   //opened: boolean = false;
   inventory: InventoryItem = new InventoryItem();
   glNumbers: Array<GlNumber> = [];
@@ -55,8 +55,10 @@ export class InventoryAddBodyComponent implements OnInit,OnDestroy {
     if (this.taxesStateService.getTaxes().length > 0) this.taxes = this.taxesStateService.getTaxes();
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
       this.taxes = data;
+      this.setDefaultTaxes();
     })
     this.sub.add(getOnTaxess);
+    this.setDefaultTaxes();
     if (this.companiesStateService.getCompanies().length > 0) this.onInitVendors(this.companiesStateService.getCompanies());
     let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
       this.onInitVendors(data);
@@ -132,17 +134,26 @@ export class InventoryAddBodyComponent implements OnInit,OnDestroy {
   public onShowAside() {
     let getShowAsideForAdd = this.inventoryStateService.getShowAsideForAdd().subscribe(() => {
       this.inventory = new InventoryItem();
-    //  this.opened = true;
+      this.setDefaultTaxes();
+      //  this.opened = true;
 
     })
     this.sub.add(getShowAsideForAdd);
+  }
+  private setDefaultTaxes() {
+    let taxes = this.taxes.filter(item => item.isDefault === true);
+    this.inventory.taxIds = taxes.map(item => {
+      return item.id;
+    });
+    console.log("taxes", taxes);
+    this.taxesStateService.setTaxesFromtEdit(taxes);
   }
   private sortGlNumbers(data) {
     return data.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
       1 : ((b.glNumber.toLowerCase() > a.glNumber.toLowerCase()) ? -1 : 0));
   }
   public close() {
-   // this.opened = false;
+    // this.opened = false;
     this.glNumberSelect.clearClient();
     this.categoriesSelect.clearClient();
     this.vendorsSelect.clearClient();
@@ -159,7 +170,7 @@ export class InventoryAddBodyComponent implements OnInit,OnDestroy {
     })
   }
   ngOnDestroy(): void {
-   this.sub.unsubscribe();
+    this.sub.unsubscribe();
   }
 
 }

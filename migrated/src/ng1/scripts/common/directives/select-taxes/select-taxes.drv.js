@@ -29,6 +29,7 @@
     this.showIcon = $ctrl.isIcon ? true : false;
     this.previewMode = $ctrl.isPreviewMode ? true : false;
 
+    console.log("$ctrl.entity.taxes",$ctrl.entity.taxes);
     $ctrl.searchTax = '';
     if ($ctrl.entity.taxes && $ctrl.entity.taxes.length) {
       $ctrl.selectedTaxes = createSelectedTaxes($ctrl.entity.taxes);
