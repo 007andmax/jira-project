@@ -3,6 +3,5 @@
  */
 export const environment = {
   production: true,
-  apiUrl: 'https://quicktech.com/',
-  apiEndpoint: 'https://quicktech.com/'
+  apiUrl: 'https://quicktech.com/'
 };

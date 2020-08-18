@@ -1,14 +1,13 @@
 import { environment } from './../../../../environments/environment';
 
-const BASE_URL = environment.apiEndpoint;
+const BASE_URL = environment.apiUrl;
 const DEVICE = 'devices';
-const MODULE = '';
 const API_V2 = 'v2'
 
 export const CONFIG = {
   EncrDecrKey: '123456$#@$^@1ERF',
   // oauth
-  userAuthURL: BASE_URL + DEVICE + MODULE + '/get_auth_token',
+  userAuthURL: BASE_URL + DEVICE + '/get_auth_token',
   getDevicesByCompanyURL: BASE_URL + DEVICE + '?companyId=',
   getCurrentUserURL: BASE_URL + 'users/current',
   getCurrentCompanyURL: BASE_URL + 'company/current',
@@ -18,23 +17,23 @@ export const CONFIG = {
   getVirusInfoURL: BASE_URL + DEVICE + '/extended?companyId=',
 
   // SOFTWARE
-  getAllSoftwareListURL: BASE_URL + DEVICE + MODULE + '/get_hardware',
-  deleteSoftwareURL: BASE_URL + DEVICE + MODULE + '/get_hardware',
+  getAllSoftwareListURL: BASE_URL + DEVICE + '/get_hardware',
+  deleteSoftwareURL: BASE_URL + DEVICE + '/get_hardware',
 
   // STARTUP
-  getALlStartupListURL: BASE_URL + DEVICE + MODULE + '/get_hardware',
+  getALlStartupListURL: BASE_URL + DEVICE + '/get_hardware',
 
   // SERVICES
-  getAllServicesListURL: BASE_URL + DEVICE + MODULE + '/get_hardware',
+  getAllServicesListURL: BASE_URL + DEVICE + '/get_hardware',
 
   // ANTIVIRUS
-  getAllAntivirusListURL: BASE_URL + DEVICE + MODULE + '/get_hardware',
+  getAllAntivirusListURL: BASE_URL + DEVICE + '/get_hardware',
   
   // TERMINAL
-  getAllTerminalListURL: BASE_URL + DEVICE + MODULE + '/get_hardware',
+  getAllTerminalListURL: BASE_URL + DEVICE + '/get_hardware',
 
   // WINDOW UPDATE
-  getAllWindowUpdateListURL: BASE_URL + DEVICE + MODULE + '/get_hardware',
+  getAllWindowUpdateListURL: BASE_URL + DEVICE + '/get_hardware',
 
   // TICKET
   getAllTicketListURL: BASE_URL + 'v2/tickets/getTickets?listType=ALL',

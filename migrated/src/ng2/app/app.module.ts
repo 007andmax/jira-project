@@ -293,8 +293,6 @@ import { StartupComponent } from './components/device/startup-programes/startup-
 import { FileComponent } from './components/device/file-explorer/file-explorer.component';
 import { DeviceComponent } from './components/device/device.component';
 import { NavComponent } from './components/device/nav/nav.component';
-import { SessionTimeoutComponent } from './components/device/session-timeout/session-timeout.component';
-import { LockScreenComponent } from './components/device/lock-screen/lock-screen.component';
 import { TicketTaskComponent } from './components/device/ticket-task/ticket-task.component';
 import { searchTextPipe } from './components/device/_pipe/searchText.pipe';
 import { SoftwarePipe } from './pipe/software.pipe';
@@ -754,8 +752,6 @@ angular.module('quicktech')
     WindowsComponent,
     FileComponent,
     PasswordComponent,
-    SessionTimeoutComponent,
-    LockScreenComponent,
     TicketTaskComponent,
     searchTextPipe,
     SoftwarePipe
@@ -848,8 +844,6 @@ angular.module('quicktech')
     WindowsComponent,
     FileComponent,
     PasswordComponent,
-    SessionTimeoutComponent,
-    LockScreenComponent,
     TicketTaskComponent,
     // RecurringTicketsComponent
   ],

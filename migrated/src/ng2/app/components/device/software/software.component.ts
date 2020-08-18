@@ -11,6 +11,7 @@ import { CONFIGCONSTANTS } from '../config/app-constants';
 import { Router } from '@angular/router';
 import { Subject } from "rxjs";
 import * as moment from "moment";
+import { environment } from './../../../../environments/environment';
 
 @Component({
   selector: 'app-software',
@@ -19,7 +20,7 @@ import * as moment from "moment";
 })
 export class SoftwareComponent implements OnInit, OnDestroy {
 
-  url = 'http://localhost:4200/upload';
+  url = environment.apiUrl + 'upload';
   formData: FormData;
   loading = false;
   myDateValue: Date;

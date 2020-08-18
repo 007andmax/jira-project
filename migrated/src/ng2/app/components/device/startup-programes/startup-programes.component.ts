@@ -4,6 +4,7 @@ import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions, 
 import { ToastrService } from 'ngx-toastr';
 import { startupService } from '../_services/startup.service';
 import { first } from 'rxjs/operators';
+import { environment } from './../../../../environments/environment';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { first } from 'rxjs/operators';
 export class StartupComponent implements OnInit {
 
  
-  url = 'http://localhost:4200/upload';
+  url = environment.apiUrl + 'upload';
   formData: FormData;
   files: UploadFile[];
   uploadInput: EventEmitter<UploadInput>;

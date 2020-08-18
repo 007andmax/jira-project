@@ -5,6 +5,7 @@ import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions, 
 import { WindowUpdateService } from '../_services/window-update.service';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
+import { environment } from './../../../../environments/environment';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class WindowsComponent implements OnInit {
   addUser = false;
   assignExpand = false;
 
-  url = 'http://localhost:4200/upload';
+  url = environment.apiUrl + 'upload';
   formData: FormData;
   files: UploadFile[];
   uploadInput: EventEmitter<UploadInput>;

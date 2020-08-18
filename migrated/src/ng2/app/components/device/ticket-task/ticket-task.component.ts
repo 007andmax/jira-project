@@ -23,7 +23,7 @@ export class TicketTaskComponent implements OnInit, OnDestroy {
     this.tabSet = content;
   };
   @ViewChild('ticketFrm') form: any;
-  url = environment.apiEndpoint + 'file?isAvatar=false';
+  url = environment.apiUrl + 'file?isAvatar=false';
   formData: FormData;
   files: UploadFile[];
   loading = false;

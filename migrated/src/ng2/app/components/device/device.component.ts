@@ -20,7 +20,7 @@ export class DeviceComponent implements OnInit {
   totalMinutes:any = 0;
   totalHours:any = 0;
   loading:boolean = false;
-  mainCompanyUuid: string = '9eb35e10-e243-4c07-baf0-c234fcd93766';
+  // mainCompanyUuid: string = '9eb35e10-e243-4c07-baf0-c234fcd93766';
   deviceDetail: any = {};
   restServerAddress = '';
   remoteConnectPort = 0;
@@ -84,9 +84,9 @@ export class DeviceComponent implements OnInit {
     .subscribe(
       resp => {
         localStorage.setItem('currentCompany', resp.id);
-        if (localStorage.getItem('currentCompany') === undefined || localStorage.getItem('currentCompany') === null) {
-          localStorage.setItem('currentCompany', this.mainCompanyUuid);
-        }
+        // if (localStorage.getItem('currentCompany') === undefined || localStorage.getItem('currentCompany') === null) {
+        //   localStorage.setItem('currentCompany', this.mainCompanyUuid);
+        // }
         
         this.getDevicesByCompany();
       },
