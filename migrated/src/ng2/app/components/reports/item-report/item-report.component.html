@@ -8,6 +8,7 @@
   <p class="report-title" *ngIf="report === 'ticket-report'">Tickets Report</p>
   <p class="report-title" *ngIf="report === 'service-report'">Service report</p>
   <p class="report-title" *ngIf="report === 'tech-service'">Tech Service report</p>
+  <p class="report-title" *ngIf="report === 'accounting-report'">Accounting report</p>
   
   <i class="back-page" (click)="back()"></i>
   <app-gl-number   *ngIf="report === 'income-accounts'"></app-gl-number>
@@ -18,6 +19,7 @@
   <app-ticket-report   *ngIf="report === 'ticket-report'"></app-ticket-report>
  <app-service-report *ngIf="report === 'service-report'"></app-service-report>
  <app-tech-service-report *ngIf="report === 'tech-service'"></app-tech-service-report>
+ <app-accounting-report *ngIf="report === 'accounting-report'"></app-accounting-report>
 </div>
 
 
