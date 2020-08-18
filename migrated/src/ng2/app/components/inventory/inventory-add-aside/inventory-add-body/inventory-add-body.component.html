@@ -42,7 +42,7 @@
 
   <div class="qt-inputs-row">
     <div class="create-product-taxes-select">
-      <app-taxes (taxesChange)="onTaxesChange($event)"></app-taxes>
+      <app-taxes [selectedTax]="defaultSelectedTax" (taxesChange)="onTaxesChange($event)"></app-taxes>
     </div>
   <!--        <div class="col-md-6"  *ngIf="!validate.getCostSale()">-->
   <!--        </div>-->

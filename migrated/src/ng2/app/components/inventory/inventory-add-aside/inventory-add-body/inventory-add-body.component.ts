@@ -30,6 +30,7 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
   inventory: InventoryItem = new InventoryItem();
   glNumbers: Array<GlNumber> = [];
   taxes: Array<Tax> = [];
+  defaultSelectedTax: Array<Tax> = [];
   sub: Subscription = new Subscription();
   vendors: Array<Company> = [];
   companies: Array<Company> = [];
@@ -146,6 +147,7 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
       return item.id;
     });
     console.log("taxes", taxes);
+    this.defaultSelectedTax = taxes;
     this.taxesStateService.setTaxesFromtEdit(taxes);
   }
   private sortGlNumbers(data) {
