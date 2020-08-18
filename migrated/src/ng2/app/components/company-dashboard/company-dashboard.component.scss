@@ -411,7 +411,7 @@ body {
     .cmp-dboard-row {
         // width: 100%;
         flex-direction: row;
-        align-items: flex-start;
+        // align-items: flex-start;
         // justify-content: space-between;
         margin: 0 -8px;
         flex-wrap: wrap;
@@ -734,35 +734,75 @@ body {
                 }
                 .cmn-box {
                     margin-bottom: 16px;
-                    &.cmp-board-tickets{
+                    &.cmp-board-tickets {
                         flex-direction: column;
-                        h2{
-                            width: 100%;
+                        .cmp-board-title-wrap {
                             margin-bottom: 35px;
+                            h2 {
+                                width: auto;
+                            }
+                            .chart-status {
+                                margin: 0;
+                                @include flexbox;
+                                align-items: center;
+                                justify-content: space-between;
+                                li {
+                                    width: auto;
+                                    padding: 0 20px;
+                                    position: relative;
+                                    font-size: 12px;
+                                    line-height: 1.33;
+                                    letter-spacing: normal;
+                                    color: #4f5f79;
+                                    @include flexbox;
+                                    align-items: center;
+                                    &:before {
+                                        content: "";
+                                        width: 12px;
+                                        height: 12px;
+                                        @include border-radius(4px);
+                                        background: transparent;
+                                        background-color: #0747a6;
+                                        position: absolute;
+                                        top: 0;
+                                        left: 0;
+                                    }
+                                    &.hold {
+                                        &:before {
+                                            background-color: #00ccff;
+                                        }
+                                    }
+                                    &.complete {
+                                        padding-right: 0;
+                                        &:before {
+                                            background-color: #2bc7c6;
+                                        }
+                                    }
+                                }
+                            }
                         }
-                        nvd3{
+
+                        nvd3 {
                             width: 100%;
                         }
-                        svg{ 
+                        svg {
                             width: 100%;
                         }
-                        .cmp-board-title-wrap{
-                            .dropdown{
-                                width: 125px;
+                        .cmp-board-title-wrap {
+                            .dropdown {
+                                width: 105px;
                             }
                         }
                     }
-                    &.cmp-board-revenue{
+                    &.cmp-board-revenue {
                         flex-direction: column;
-                        h2{
-                            width: 100%;
-                            margin-bottom: 35px;
+                        h2 {
+                            // width: 100%;
+                            // margin-bottom: 35px;
+                            font-size: 18px !important;
                         }
-                        nvd3{
-                           max-width: 220px;
-                           margin: 0 auto;
-                        }
-                        // svg{ 
+
+                        // svg{
                         //     width: 160px !important;
                         //     height: 160px !important;
                         // }
@@ -774,11 +814,11 @@ body {
                             border-top: 1px solid #edf0f2;
                             padding-top: 10px !important;
                             justify-content: center;
-                            @media only screen and (max-width:1439px) {
+                            @media only screen and (max-width: 1439px) {
                                 margin: 0 -16px !important;
                             }
                             li {
-                                width: auto; 
+                                width: auto;
                                 max-width: 90px;
                                 @include flexbox;
                                 flex-direction: column;
@@ -786,7 +826,7 @@ body {
                                 margin: 0 15px;
                                 .title {
                                     font-family: $font-body;
-                                    font-size: 11px; 
+                                    font-size: 11px;
                                     font-weight: normal;
                                     line-height: 1.09;
                                     letter-spacing: normal;
@@ -812,26 +852,50 @@ body {
                                     left: 0;
                                     top: 1px;
                                 }
-                                &:last-child{
-                                    margin-right:0;
+                                &:last-child {
+                                    margin-right: 0;
                                 }
-                                &:first-child{
+                                &:first-child {
                                     margin-left: 0;
                                 }
-                                &.collect{
-                                    &::before{
+                                &.collect {
+                                    &::before {
                                         background-color: #00ccff;
                                     }
                                 }
-                                &.out-standing{
-                                    &::before{
+                                &.out-standing {
+                                    &::before {
                                         background-color: #cdecff;
                                     }
                                 }
                             }
                         }
-                        
-                    } 
+                        .donalt-chart-wrapper {
+                            @include flexbox;
+                            align-items: center;
+                            justify-content: center;
+                            position: relative;
+                            .chart-content {
+                                position: absolute;
+                                left: 0;
+                                right: 0;
+                                top: 85px;
+                                width: 90px;
+                                margin: 0 auto;
+                                text-align: center;
+                                span {
+                                    font-size: 12px;
+                                    line-height: 1.33;
+                                    text-align: center;
+                                    color: #9ca5b6;
+                                }
+                            }
+                            nvd3 {
+                                max-width: 220px;
+                                margin: 0 auto;
+                            }
+                        }
+                    }
                 }
                 & > div {
                     width: 100%;
@@ -861,6 +925,7 @@ body {
                             }
                             &.cmp-board-contract {
                                 padding-top: 16px;
+                                margin-bottom: 0;
                                 .progress-contract {
                                     width: 100%;
                                     flex-direction: column;
@@ -1001,6 +1066,9 @@ body {
                                         }
                                     }
                                 }
+                            }
+                            &.cmp-board-invoice {
+                                margin-bottom: 0;
                             }
                         }
                         .cmp-dash-table-wrap {
@@ -1179,8 +1247,8 @@ body {
                 color: #4f5f79;
                 padding: 0 15px 0 0;
                 text-align: left;
-                background: url(../../../../ng2/assets/img/company-details/filter-drop-down.svg) no-repeat right
-                    center #fff;
+                background: url(../../../../ng2/assets/img/company-details/filter-drop-down.svg) no-repeat right center
+                    #fff;
                 background-size: 16px;
                 display: flex;
             }
@@ -1228,15 +1296,15 @@ body {
             align-items: center;
             justify-content: space-between;
             margin-bottom: 10px;
-            h2{
+            h2 {
                 margin-bottom: 0 !important;
             }
-            .dropdown{
+            .dropdown {
                 width: 160px;
-                .dropdown-toggle{
+                .dropdown-toggle {
                     font-size: 12px;
                 }
-                .dropdown-menu{
+                .dropdown-menu {
                     width: 160px;
                     left: auto !important;
                     right: 0 !important;
@@ -1432,10 +1500,10 @@ body {
             width: 100%;
             width: 512px;
             @include border-radius(6px);
-            @include box-shadow(0 ,10px, 20px, -5px rgba(0, 0, 0, 0.1));
+            @include box-shadow(0, 10px, 20px, -5px rgba(0, 0, 0, 0.1));
             background-color: #ffffff;
             border: none;
-            top:40%;
+            top: 40%;
             .modal-content {
                 background-color: $white-color;
                 @include opacity(1);
@@ -1502,9 +1570,8 @@ body {
                                         align-items: center;
                                         justify-content: space-between;
                                         position: relative;
-                                        &::after
-                                        {
-                                            content:"";
+                                        &::after {
+                                            content: "";
                                             width: 12px;
                                             height: 1px;
                                             background-color: #dfe3e8;
@@ -1514,7 +1581,7 @@ body {
                                             left: 0;
                                             right: 0;
                                             margin: auto;
-                                        } 
+                                        }
                                     }
                                     .ui-timepicker-input {
                                         width: 120px;
@@ -1525,7 +1592,7 @@ body {
                                         @include flexbox;
                                         @include border-radius(4px);
                                         align-items: center;
-                                        margin: 0; 
+                                        margin: 0;
                                         font-family: $font-body;
                                         text-transform: uppercase;
                                         outline: none !important;
@@ -1594,7 +1661,6 @@ body {
                 @include opacity(1);
             }
         }
-
     }
 }
 
@@ -1602,26 +1668,24 @@ body {
     width: 120px !important;
     max-height: 176px;
     @include border-radius(4px);
-    @include box-shadow(0 ,2px, 20px, 10px rgba(0, 0, 0, 0.05));
+    @include box-shadow(0, 2px, 20px, 10px rgba(0, 0, 0, 0.05));
     border: solid 1px #dfe3e8;
     background-color: #ffffff;
     overflow-x: hidden;
     .ui-timepicker-list {
         width: 100%;
         padding: 8px 0;
-        li{
+        li {
             font-size: 13px;
             line-height: 1.54;
             letter-spacing: normal;
             color: #4f5f79;
-            font-family:$font-body; 
+            font-family: $font-body;
             text-transform: uppercase;
-            &:hover{
-                background-color: rgba(237,242,246,0.5);
+            &:hover {
+                background-color: rgba(237, 242, 246, 0.5);
                 color: #4f5f79;
             }
         }
-        
-
     }
 }
