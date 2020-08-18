@@ -16,7 +16,7 @@ import { SelectModule } from 'ng2-select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { IgxTimePickerModule } from 'igniteui-angular';
 import { SidebarModule } from 'ng-sidebar';
-
+import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ClickOutsideModule } from 'ng4-click-outside';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MatSelectModule } from '@angular/material/select';
@@ -24,7 +24,6 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule, MatIconModule } from '@angular/material';
 import { CronEditorModule } from 'cron-editor';
 import { ImageCropperModule } from 'ngx-image-cropper';
-import { NgxEditorModule } from 'ngx-editor';
 import { NgxSelectModule } from 'ngx-select-ex';
 // import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -798,13 +797,13 @@ angular.module('quicktech')
     }),
     CronEditorModule,
     ImageCropperModule,
-    NgxEditorModule,
     FontAwesomeModule,
     NvD3Module,
     BrowserAnimationsModule,
     IgxTimePickerModule,
     DisabledBtnModule,
-    NgxUploaderModule
+    NgxUploaderModule,
+    AngularEditorModule
 
   ],
   entryComponents: [
