@@ -14,9 +14,10 @@
       </h1>
     </div>
 
-    <tabset>
+    <ngb-tabset>
       <!-- Profile -->
-      <tab heading="Profile" id="tab1">
+      <ngb-tab title="Profile" id="tab1">
+        <ng-template ngbTabContent>
         <div class="cmn-area profile">
           <div class="dp-area">
             <span class="dp" *ngIf="imageSrc">
@@ -276,8 +277,10 @@
             <input type="button" (click)="onSubmit()" class="btn btn-primary" value="Save Changes" />
           </form>
         </div>
-      </tab>
-      <tab heading="Workspace" id="workspace">
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab title="Workspace" id="workspace">
+        <ng-template ngbTabContent>
         <div class="cmn-area workspace">
           <form [formGroup]="cProfileForm" (ngSubmit)="onSubmit()">
             <div class="f-row">
@@ -301,7 +304,8 @@
             <input type="submit" class="btn btn-primary" value="Save Changes" />
           </form>
         </div>
-      </tab>
+        </ng-template>
+      </ngb-tab>
       <!-- Contact Details -->
       <!-- <tab heading="Contact Details">
               <div class="cmn-area contact">
@@ -336,7 +340,8 @@
               </div>
           </tab> -->
       <!-- Ticket Response Time Setting  -->
-      <tab heading="Operational Hours">
+      <ngb-tab title="Operational Hours">
+        <ng-template ngbTabContent>
         <div class="cmn-area ticket-response">
           <form #workingHoursForm="ngForm" (ngSubmit)="onWorkSubmit()">
             <div>
@@ -432,8 +437,9 @@
             <input type="submit" class="btn btn-primary" value="Save Changes" />
           </form>
         </div>
-      </tab>
-    </tabset>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
     <!-- <div class="loading" *ngIf="loading"></div> -->
   </div>
   

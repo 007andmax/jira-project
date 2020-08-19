@@ -90,9 +90,10 @@
             <span>Allow user to create custom Tags</span>	
           </div>	
         </div>
-    <tabset (click)="setTab()" #tabset>
+    <ngb-tabset (click)="setTab()" #tabset>
       <!-- Companies -->
-      <tab heading="Companies" id="tab1">
+      <ngb-tab title="Companies" id="tab1">
+        <ng-template ngbTabContent>
         <div class="cmn-area">
           <div class="data-table-wrap">
             <table
@@ -205,9 +206,11 @@
             </table>
           </div>
         </div>
-      </tab>
+        </ng-template>
+      </ngb-tab>
       <!-- Tickets -->
-      <tab #tickets heading="Tickets">
+      <ngb-tab #tickets title="Tickets">
+        <ng-template ngbTabContent>
         <div class="cmn-area">
           <div class="data-table-wrap">
             <table
@@ -325,14 +328,17 @@
             </table>
           </div>
         </div>
-      </tab>
+        </ng-template>
+      </ngb-tab>
       <!-- Devices  -->
-      <tab heading="Devices">
+      <ngb-tab title="Devices">
+        <ng-template ngbTabContent>
         <div class="cmn-area">
           <div class="data-table-wrap"></div>
         </div>
-      </tab>
-    </tabset>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
     <!-- <div class="loading" *ngIf="loading"></div> -->
   </div>
   

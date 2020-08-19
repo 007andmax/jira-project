@@ -13,9 +13,10 @@
         >Email Templates
       </h1>
     </div>
-    <tabset>
+    <ngb-tabset>
       <!-- Ticket Templates -->
-      <tab heading="Ticket Templates" id="tab1">
+      <ngb-tab title="Ticket Templates" id="tab1">
+        <ng-template ngbTabContent>
         <div class="cmn-area">
           <div class="data-table-wrap">
             <table class="dataTable display" style="width:100%">
@@ -63,9 +64,11 @@
             </table>
           </div>
         </div>
-      </tab>
+        </ng-template>
+      </ngb-tab>
       <!-- Agent Templates -->
-      <tab heading="Agent Templates">
+      <ngb-tab title="Agent Templates">
+        <ng-template ngbTabContent>
         <div class="cmn-area">
           <div class="data-table-wrap">
             <table class="dataTable display" style="width:100%">
@@ -113,9 +116,11 @@
             </table>
           </div>
         </div>
-      </tab>
+        </ng-template>
+      </ngb-tab>
       <!-- Invoice Templates  -->
-      <tab heading="Invoice Templates">
+      <ngb-tab title="Invoice Templates">
+        <ng-template ngbTabContent>
         <div class="cmn-area">
           <div class="data-table-wrap">
             <table class="dataTable display" style="width:100%">
@@ -163,8 +168,9 @@
             </table>
           </div>
         </div>
-      </tab>
-    </tabset>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
     <!-- <div class="loading" *ngIf="loading"></div> -->
   </div>
   

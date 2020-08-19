@@ -7,24 +7,32 @@
         <a href="javascript:;" class="btn-outline">Add Commision</a>
       </div>
     </div>
-      <tabset>
+      <ngb-tabset>
           <!-- Companies -->
-          <tab heading="Companies’s Sales Person" id="tab1">
+          <ngb-tab title="Companies’s Sales Person" id="tab1">
+            <ng-template ngbTabContent>
             <app-company-commission></app-company-commission>
-          </tab>
+            </ng-template>
+          </ngb-tab>
           <!-- Product -->
-          <tab heading="Product">
+          <ngb-tab title="Product">
+            <ng-template ngbTabContent>
              <app-product></app-product> 
-          </tab>
+             </ng-template>
+          </ngb-tab>
           <!-- Contract  -->
-          <tab heading="Contract">
+          <ngb-tab title="Contract">
+            <ng-template ngbTabContent>
               <app-contract></app-contract>
-          </tab>
+              </ng-template>
+          </ngb-tab>
           <!-- Service  -->
-          <tab heading="Service">
+          <ngb-tab title="Service">
+            <ng-template ngbTabContent>
               <app-service></app-service>
-          </tab>
-        </tabset>
+              </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
   </div>
 </div>
 

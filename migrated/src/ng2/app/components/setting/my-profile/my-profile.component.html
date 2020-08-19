@@ -7,23 +7,31 @@
     <div class="heading" >
       <h1><a href="javascript:;" (click)="onBackMenu()" class="back-menu" style="display: none;">backmneu</a>My Profile Settings</h1>
     </div>
-    <tabset> 
+    <ngb-tabset> 
       <!-- Profile -->
-      <tab heading="Profile" id="tab1">
+      <ngb-tab title="Profile" id="tab1">
+        <ng-template ngbTabContent>
         <app-profile></app-profile>
-      </tab>
+        </ng-template>
+      </ngb-tab>
       <!-- Account  -->
-      <tab heading="Account">
+      <ngb-tab title="Account">
+        <ng-template ngbTabContent>
         <app-account></app-account>
-      </tab>
+        </ng-template>
+      </ngb-tab>
       <!-- Email -->
-      <tab heading="Email Notifications">
+      <ngb-tab title="Email Notifications">
+        <ng-template ngbTabContent>
        <app-email-notifications></app-email-notifications>
-      </tab>
+       </ng-template>
+      </ngb-tab>
       <!-- Activity History -->
-      <tab heading="Activity History" class="history">
+      <ngb-tab title="Activity History" class="history">
+        <ng-template ngbTabContent>
         <app-activity-history></app-activity-history>
-      </tab>
-    </tabset>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
   </div>
 </div>

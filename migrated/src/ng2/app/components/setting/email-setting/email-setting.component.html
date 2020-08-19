@@ -4,16 +4,20 @@
     <div class="heading">
       <h1><a href="javascript:;" (click)="onBackMenu()" class="back-menu" style="display: none;">backmneu</a>Email Settings</h1>
     </div>
-    <tabset>
+    <ngb-tabset>
       <!-- Profile -->
-      <tab heading="Incoming Email" id="tab1">
+      <ngb-tab title="Incoming Email" id="tab1">
+        <ng-template ngbTabContent>
         <app-incoming-email [smtpSettingsInput]="smtpSettings" [supportMailBoxInput]="supportMailBox" *ngIf="showIn == true"></app-incoming-email>
-      </tab>
+        </ng-template>
+      </ngb-tab>
       <!-- Account  -->
-      <tab heading="Outgoing Email">
+      <ngb-tab title="Outgoing Email">
+        <ng-template ngbTabContent>
         <app-outgoing-email [smtpInput]="smtp" [supportMailBoxInput]="supportMailBox" [testEmailInput]="smtp.testEmail"
           [savedSMTPSettingsInput]="savedSMTPSettings" [portIsEmptyInput]="portIsEmpty" [usedEmailViaInput]="usedEmailVia" *ngIf="showIn == true"></app-outgoing-email>
-      </tab>
-    </tabset>
+          </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
   </div>
 </div>

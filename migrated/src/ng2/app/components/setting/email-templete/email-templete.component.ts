@@ -7,7 +7,7 @@ import { of } from "rxjs";
 import { ToastrService } from "ngx-toastr";
 import { DomSanitizer } from '@angular/platform-browser';	
 import { SanitizeHtmlPipe } from './../../../pipe/sanitize-html.pipe';
-
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 // import { AngularEditorConfig } from "@kolkov/angular-editor";
 
 declare var $: any;
@@ -58,7 +58,7 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   // };
 
   constructor(
-    private modalService: BsModalService,
+    private modalService: NgbModal,
     private emailService: EmailTempleteService,
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
@@ -67,13 +67,6 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
     this.ticketTemplates = this.emailService.getTicketTemplates();
     this.agentTemplates = this.emailService.getAgentTemplates();
     this.invoiceTemplates = this.emailService.getInvoiceTemplates();
-  }
-
-  openModal(template) {
-    this.modalRef = this.modalService.show(
-      template,
-      Object.assign({}, { class: "manage-tags modal-dialog-centered" })
-    );
   }
 
   ngOnInit() {
@@ -297,10 +290,11 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
           this.emailPreviewHtml = resp;	
           this.emailPreviewHtml = this.emailPreviewHtml.replace(/font-family: Graphik, sans-serif;/gi, '')	
           this.gettingEmailTemplatePreview = false;	
-          this.modalRef = this.modalService.show(	
-            template,	
-            Object.assign({}, { class: "manage-tags modal-dialog-centered" })	
-          );	
+          this.modalService.open(template, {ariaLabelledBy: 'modal-basic-title', windowClass: "manage-tags modal-dialog-centered", centered:true}).result.then((result) => {
+            
+          }, (reason) => {
+            
+          });
         })	
       )	
       .subscribe();

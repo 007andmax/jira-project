@@ -148,8 +148,6 @@ import { CompanyProductsComponent } from './components/companies/company-product
  * declare angular
  */
 declare var angular: any;
-import { TabsModule } from 'ngx-bootstrap/tabs';
-import { ModalModule, TypeaheadModule } from 'ngx-bootstrap';
 
 import { LeftPanelSettingComponent } from './components/left-panel/left-panel-setting/left-panel-setting.component';
 
@@ -492,9 +490,6 @@ angular.module('quicktech')
     DataTablesModule,
     NgSelectModule ,
     SelectDropDownModule,
-    TabsModule.forRoot(),
-    ModalModule.forRoot(),
-    TypeaheadModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAbP4DFpz4f9YcXMWUjdkOdyArX2peNt8s'
     }),
