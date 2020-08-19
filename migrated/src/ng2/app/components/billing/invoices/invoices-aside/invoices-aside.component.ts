@@ -87,7 +87,6 @@ export class InvoicesAsideComponent implements OnInit {
       }, 0);;
     }
     if (!this.validate.getAmountReceived()) this.validate.checkAmountReceived(this.amountReceived, this.invoices);
-    console.log("this.invoices",this.invoices);
   }
   clearAmounts() {
     this.invoices.forEach(item => {
@@ -96,9 +95,7 @@ export class InvoicesAsideComponent implements OnInit {
     this.amountReceived = 0;
   }
   public onChangePayment(val, invoice) {
-    console.log("?val",val);
     let value = Number(val);
-    console.log("value",value);
     invoice.paymentAmount = value;
     this.validate.setValidPayment(true);
     if (!this.validate.getAmountReceived()) this.validate.checkAmountReceived(this.amountReceived, this.invoices);

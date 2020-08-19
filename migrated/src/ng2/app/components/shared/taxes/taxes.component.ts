@@ -36,7 +36,6 @@ export class TaxesComponent implements OnInit, OnDestroy {
    * Initializes modal quotes. See [ngOnInit]{@see OnInit#ngOnInit}
    */
   public ngOnInit() {
-    console.log("TaxesComponent");
     if (this.taxesStateService.getTaxes().length > 0) this.taxes = this.taxesStateService.getTaxes();
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
       this.taxes = data;
@@ -58,7 +57,6 @@ export class TaxesComponent implements OnInit, OnDestroy {
   private onCheckEditItem() {
     let getTagsFromEdit = this.taxesStateService.getTaxesFromEdit().subscribe((data) => {
       this.selectedTax = data;
-      console.log("this.selectedTax",this.selectedTax);
       this.cd.detectChanges();
     });
     this.sub.add(getTagsFromEdit);

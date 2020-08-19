@@ -55,8 +55,6 @@ export class InventoryValidate {
         return this.category;
     }
     public checkPriceCost(price, cost) {
-        console.log("price",price);
-        console.log("cost",cost);
         cost = (!cost) ? 0 : cost;
         this.cost_sale = (Number(price) >= Number(cost)) ? true : false;
     }

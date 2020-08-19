@@ -146,7 +146,6 @@ export class InventoryAddBodyComponent implements OnInit, OnDestroy {
     this.inventory.taxIds = taxes.map(item => {
       return item.id;
     });
-    console.log("taxes", taxes);
     this.defaultSelectedTax = taxes;
     this.taxesStateService.setTaxesFromtEdit(taxes);
   }

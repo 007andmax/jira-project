@@ -23,11 +23,9 @@ export class TechServiceReportComponent implements OnInit {
     //  this.cd.detectChanges();
   }
   public getReport(data) {
-    console.log("data", data);
     this.techService = new TechService(JSON.parse(JSON.stringify(data)));
     this.techUser = this.usersStateService.getAllUsers().find(item => item.id === this.techService.techUserId);
     this.onInit = true;
-    console.log("this.techUser", this.techUser);
   }
   public getDuration(quantity) {
     var timeInMinutes = quantity * 60,

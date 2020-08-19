@@ -34,10 +34,7 @@ export class numberDirective {
 
     ValidateMoney(event: any) {
         let value = Number(event.target.value);
-        console.log("value",value);
         if (!value && event.target.value !== "") {
-            console.log("event.target.value",event.target.value);
-
             event.target.value = this.lastValue;
             return;
         }
@@ -49,8 +46,5 @@ export class numberDirective {
         } else {
             this.lastValue = 1;
         }
-        console.log("event.target.value",event.target.value);
-
     }
-
 }
