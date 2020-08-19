@@ -9,6 +9,14 @@
     box-shadow: -8px 0 8px 0 rgba(0, 0, 0, 0.05);
   }
 
+  .billable-table, .invoice-table {
+    min-width: 1064px;
+  }
+  .billable-table {
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+
   &__payment-note-table-icon {
     background-position: center;
     background-size: 16px;
@@ -74,9 +82,14 @@
     width: 100%;
   }
 
+  .table-container {
+    overflow-x: auto;
+  }
+
   .payment-table {
     border-spacing: 0;
     width: 100%;
+    min-width: 1064px;
     th, td {
       height: 40px;
       border-bottom: solid 1px #dfe3e8;
