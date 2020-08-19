@@ -89,7 +89,7 @@ export class AppComponent implements OnInit {
 
   }
   private onCheckInitAll() {
-    if (this.isCompaniesInit && this.isDevicesInit && this.isUsersInit) {
+    if (this.isCompaniesInit && this.isDevicesInit && this.isUsersInit && !this.appService.getIsInit()) {
       this.appService.onInit();
       this.showPreloader = false;
       this.cd.detectChanges();
