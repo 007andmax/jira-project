@@ -42,11 +42,11 @@
           </ng-template>
 
          
-<div class="details-content clearfix total-hours"  >
-<div class="col-md-4 total-hours-content" style="float: right;text-align: right;padding: 0px 12px 0px 0px !important;"  >{{'Total Payments ' + (accountingReport.paymentsAmount | currency)}}</div>
+<div class="details-content clearfix total-hours" style="position: relative;height: 60px;" >
+<div class="col-md-4 total-hours-content" style="float: right;text-align: left;padding: 0px 12px 0px 0px !important;position: absolute;right: -77px;top: 20px;"  >{{'Total Payments: ' + (accountingReport.paymentsAmount | currency)}}</div>
  </div>    
-<div class="details-content clearfix total-hours"  >
-    <div class="col-md-4 total-hours-content" style="float: right;text-align: right;padding: 0px 12px 0px 0px !important;"  >{{'Total Invoices ' + (accountingReport.invoicesTotalSum | currency)}}</div>
+<div class="details-content clearfix total-hours"  style="position: relative;height: 60px;">
+    <div class="col-md-4 total-hours-content" style="float: right;text-align: left;padding: 0px 12px 0px 0px !important;position: absolute;right: -85px;top: 20px;"  >{{'Total Invoices: ' + (accountingReport.invoicesTotalSum | currency)}}</div>
   </div>  
 </div>
       </div>
