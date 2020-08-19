@@ -19,6 +19,7 @@ import { ExportCSV } from '../report-additional-actions/class/export-csv';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { ProductCompanyReport } from '../class/product-company-report';
 import { TechService } from '../class/tech-service';
+import { AccountingReport } from '../class/accounting-report';
 
 
 @Component({
@@ -33,6 +34,7 @@ export class ReportMenuComponent implements OnInit {
   techService: TechService = new TechService();
   glNumber: GlNumber = new GlNumber();
   taxes: TaxesReport = new TaxesReport();
+  accountingReport:AccountingReport = new AccountingReport();
   accountsReceivable: AccountsReceivable = new AccountsReceivable();
   productSalesReport: ProductSalesReport = new ProductSalesReport();
   productsCompanyReport: ProductCompanyReport = new ProductCompanyReport();
@@ -108,8 +110,10 @@ export class ReportMenuComponent implements OnInit {
       this.customerSalesReport.setCompanyId(null);
       this.serviceReport.setCompanyId(null);
       this.ticketsReport.setCompanyId(null);
+      this.accountingReport.setCompanyId(null);
     } else {
       this.selectedClient = selectClient.item;
+      this.accountingReport.setCompanyId(selectClient.item.id);
       this.glNumber.setClientCompanyId(selectClient.item.id);
       this.accountsReceivable.setClientCompanyId(selectClient.item.id);
       this.productSalesReport.setCompanyId(selectClient.item.id);
@@ -156,6 +160,18 @@ export class ReportMenuComponent implements OnInit {
    
       this.setDatareport(data)
     });
+  }
+  getReportByAccounting() {
+    if (!this.validate.isValidateAccounting(this.accountingReport.startDate,this.accountingReport.endDate,this.selectedClient)) return;
+    this.onRequest.emit(true);
+    this.reportsService.getReportByAccounting(this.accountingReport.getForRequest()).subscribe((data:any) => {
+      this.accountingReport.setInvoices(data.invoices);
+      this.accountingReport.setInvoicesTotalSum(data.invoicesTotalSum);
+      this.accountingReport.setPaymentsAmount(data.paymentsAmount);
+      this.accountingReport.setPayments(data.payments);
+      this.setDatareport(this.accountingReport)
+    });
+
   }
   getReportByTickets() {
     if (!this.validate.isValidateTickets(this.selectedClient)) return;
@@ -271,9 +287,15 @@ export class ReportMenuComponent implements OnInit {
       this.ticketsReport.setEndDate(moment(value.end).format('YYYY/MM/DD'));
       this.serviceReport.setStartDate(moment(value.start).format('YYYY/MM/DD'));
       this.serviceReport.setEndDate(moment(value.end).format('YYYY/MM/DD'));
+
+      this.accountingReport.setStartDate(moment(value.start).format('YYYY-MM-DD'));
+      this.accountingReport.setEndDate(moment(value.end).format('YYYY-MM-DD'));
+
+      
       this.validate.resetDates();
       this.validate.resetMonthlyDetailed();
     } else {
+      this.accountingReport.resetDates();
       this.glNumber.resetDates();
       this.productSalesReport.resetDates();
       this.productsCompanyReport.resetDates();
