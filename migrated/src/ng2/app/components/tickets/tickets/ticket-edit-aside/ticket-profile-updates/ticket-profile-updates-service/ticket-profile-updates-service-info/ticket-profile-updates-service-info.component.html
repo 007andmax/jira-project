@@ -8,15 +8,15 @@
     </div>
      <div class="ticket-updates__ticket-body">
       <div class="d-f">
-        <div class="ticket-updates__done-status icon__task-pending" [ngClass]="{'--done':service.completed}" (click)="setComplete()"></div>
+        <div class="ticket-updates__done-status icon__task-pending"  *ngIf="update.type !== 'MIXED'" [ngClass]="{'--done':service.completed}" (click)="setComplete()"></div>
         <div class="ticket-updates__service-title" [textContent]="service.item.name"></div>
         <div class="ticket-updates__service-time-in" [textContent]="getTime(service.durationStart)"></div>
         <div class="ticket-updates__service-time-out" [textContent]="getTime(service.durationEnd)"></div>
         <div class="ticket-updates__service-duration" [textContent]="getDuration(service.quantity)"></div>
 
-        <app-date-picker  [placement]="'bottom-right'"  [useMinDate]="false" [editMode]="true" [editDate]="service.date" [type]="'ICON'" (onChange)="onChangeDatePicker($event)"></app-date-picker>
+        <app-date-picker  *ngIf="update.type !== 'MIXED'"  [placement]="'bottom-right'"  [useMinDate]="false" [editMode]="true" [editDate]="service.date" [type]="'ICON'" (onChange)="onChangeDatePicker($event)"></app-date-picker>
 
-        <app-teh-users [type]="'TICEKTS'" [editMode]="true" [selectedMode]="'SINGLE'" [editUsers]="userService" [users]="listTehUsers" (usersChange)="onChangeUser($event)"></app-teh-users>
+        <app-teh-users  *ngIf="update.type !== 'MIXED'" [type]="'TICEKTS'" [editMode]="true" [selectedMode]="'SINGLE'" [editUsers]="userService" [users]="listTehUsers" (usersChange)="onChangeUser($event)"></app-teh-users>
         </div>
 
       <div class="ticket-updates__service-subinfo">
@@ -29,7 +29,7 @@
     <span  class="tag__modern ticket-updates__service-tag-completed" *ngIf="!service.completed && service.date" [textContent]="'Due date - ' + getDate(service.date)"></span>
 
   </div>
-  <div ngbDropdown>
+  <div ngbDropdown  *ngIf="update.type !== 'MIXED'">
   <div class="ticket-updates__more icon__more" id="dropdownBasic1"
   ngbDropdownToggle></div>
   <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="dropdown-menu-qt">
