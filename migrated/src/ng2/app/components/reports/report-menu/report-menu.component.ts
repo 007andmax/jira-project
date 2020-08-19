@@ -165,10 +165,7 @@ export class ReportMenuComponent implements OnInit {
     if (!this.validate.isValidateAccounting(this.accountingReport.startDate,this.accountingReport.endDate,this.selectedClient)) return;
     this.onRequest.emit(true);
     this.reportsService.getReportByAccounting(this.accountingReport.getForRequest()).subscribe((data:any) => {
-      this.accountingReport.setInvoices(data.invoices);
-      this.accountingReport.setInvoicesTotalSum(data.invoicesTotalSum);
-      this.accountingReport.setPaymentsAmount(data.paymentsAmount);
-      this.accountingReport.setPayments(data.payments);
+      this.accountingReport.setDataFromRequest(data);
       this.setDatareport(this.accountingReport)
     });
 

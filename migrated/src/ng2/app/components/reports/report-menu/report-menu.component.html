@@ -15,7 +15,7 @@
           </mat-error>
         </div>
         <div class="form-group content custom-width dropdown-height">
-          <app-select-client-company   [blockEditMode]="true" style="width: 75%;" class="light-dropdown" [filter]="true"
+          <app-select-client-company   [blockEditMode]="true" style="width: 75%;" class="light-dropdown"  
             (selectedItem)="selectClient($event)"></app-select-client-company>
             <mat-error *ngIf="!validate.getCompany()">
               Please select the company name
