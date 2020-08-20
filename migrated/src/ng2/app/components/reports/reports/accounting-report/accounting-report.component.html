@@ -25,7 +25,7 @@
             <div  style="width: 15%;display: inline-block;">Transaction Type</div>
             <div class="details-header-company"  style="width: 15%;display: inline-block;">Source</div>
             <div class="details-header-service" style="width: 32%;display: inline-block;">Reference</div>
-            <div class="time-header" style="width: 15%;display: inline-block;text-align: left;" >Amount</div>
+            <div class="time-header" style="width: 15%;display: inline-block;text-align: left;padding: 0px 6px 0px 9px !important;" >Amount</div>
           </div>
           <ng-template ngFor let-item [ngForOf]="accountingReport.list" let-i="index" [ngForTrackBy]="trackByIndex">
           
@@ -34,17 +34,19 @@
               <div style="width: 15%;display: inline-block;">{{(item.type === 'INVOICE') ? 'Invoice' : 'Payment'}}</div>
               <div class="details-content-company" style="width: 15%;display: inline-block;">{{item.source}}</div>
               <div class="details-content-service" style="width: 32%;display: inline-block;">{{item.reference}}</div>
-              <div class="time-content" style="width: 15%;display: inline-block;">{{item.amount | currency}}</div>
+              <div class="time-content" style="width: 15%;display: inline-block;padding: 0px 6px 0px 9px !important;" *ngIf="item.type === 'INVOICE'">{{item.amount | currency}}</div>
+              <div class="time-content" style="width: 15%;display: inline-block;" *ngIf="item.type === 'PAYMENT'">{{(-item.amount | currency)}}</div>
+         
             </div>
           
           </ng-template>
 
          
 <div class="details-content clearfix totals" style="position: relative;height: 20px;" >
-<div class="col-md-4 total-payments-content" style="float: right;text-align: left;padding: 0px 12px 0px 0px !important;position: absolute;right: -58px;top: 20px;"  >{{'Total Payments: ' + (accountingReport.paymentsAmount | currency)}}</div>
+<div class="col-md-4 total-payments-content" style="float: right;text-align: left;padding: 0px 12px 0px 0px !important;position: absolute;top: 20px;" [ngStyle]="{'right':checkExistPayments() ? '-61px' : '-58px'}" >{{'Total Payments: ' + (accountingReport.paymentsAmount | currency)}}</div>
  </div>    
 <div class="details-content clearfix totals"  style="position: relative;height: 20px;">
-    <div class="col-md-4 total-invoices-content" style="float: right;text-align: left;padding: 0px 12px 0px 0px !important;position: absolute;right: -66px;top: 20px;"  >{{'Total Invoices: ' + (accountingReport.invoicesTotalSum | currency)}}</div>
+    <div class="col-md-4 total-invoices-content" style="float: right;text-align: left;padding: 0px 12px 0px 0px !important;position: absolute;top: 20px;" [ngStyle]="{'right':checkExistPayments() ? '-69px' : '-66px'}" >{{'Total Invoices: ' + (accountingReport.invoicesTotalSum | currency)}}</div>
   </div>  
 </div>
       </div>

@@ -20,6 +20,9 @@ export class AccountingReportComponent implements OnInit {
     this.loadingInProgress = data;
     //  this.cd.detectChanges();
   }
+  public checkExistPayments() {
+   return this.accountingReport.list.find(item => item.type === 'PAYMENT');
+  }
   public getReport(data) {
     console.log("data", data);
     this.accountingReport.setData(JSON.parse(JSON.stringify(data)));
