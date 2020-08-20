@@ -7,7 +7,7 @@
       <div class="ticket-updates__ticket-header-total">Total</div>
     </div>
     <div class="d-f ticket-updates__ticket-body" >
-      <div class="ticket-updates__done-status icon__task-pending" *ngIf="update.type !== 'MIXED'" [ngClass]="{'--done':product.completed}" (click)="setComplete()"></div>
+      <div class="ticket-updates__done-status icon__task-pending"   [ngClass]="{'--done':product.completed}" (click)="setComplete()"></div>
       <div class="ticket-updates__ticket-title">
         <pre [textContent]="product.item.description"></pre>
       </div>

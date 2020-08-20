@@ -8,7 +8,7 @@
     </div>
      <div class="ticket-updates__ticket-body">
       <div class="d-f">
-        <div class="ticket-updates__done-status icon__task-pending"  *ngIf="update.type !== 'MIXED'" [ngClass]="{'--done':service.completed}" (click)="setComplete()"></div>
+        <div class="ticket-updates__done-status icon__task-pending"    [ngClass]="{'--done':service.completed}" (click)="setComplete()"></div>
         <div class="ticket-updates__service-title" [textContent]="service.item.name"></div>
         <div class="ticket-updates__service-time-in" [textContent]="getTime(service.durationStart)"></div>
         <div class="ticket-updates__service-time-out" [textContent]="getTime(service.durationEnd)"></div>
