@@ -1,10 +1,10 @@
 <tr>
-  <td class="default-service-table__service-name">Managed Services</td>
-  <td class="default-service-table__rate">$125.00</td>
-  <td class="default-service-table__taxes">GST 5%</td>
+  <td class="default-service-table__service-name" [textContent]="service.name"></td>
+  <td class="default-service-table__rate" [textContent]="service.rate | currency"></td>
+  <td class="default-service-table__taxes" [textContent]="getSelectedTaxNames(service.taxes)"></td>
   <td class="default-service-table__gl" ngbDropdown>
     <div class="gl-number-dropdown">
-      <p ngbDropdownToggle>Gl Number</p>
+      <p ngbDropdownToggle [textContent]="(service.glNumber) ? service.glNumber.glNumber : ''"></p>
       <span *ngIf="glNumbers">
         <i class="icn-sm report-caret-icon" ngbDropdownToggle></i>
       </span>
@@ -20,16 +20,16 @@
   </td>
   <td class="default-service-table__billable">
     <div class="d-f qt-jc-c">
-      <label class="qt-checkbox">
-        <input type="checkbox">
+      <label class="qt-checkbox" [attr.for]="'service-billable-' + service.versionedId.id">
+        <input [attr.id]="'service-billable-' + service.versionedId.id" type="checkbox" [(ngModel)]="service.billable" [disabled]="!getPermissions('MANAGE_SERVICES')">
         <span></span>
       </label>
     </div>
   </td>
   <td class="default-service-table__default">
     <div class="d-f qt-jc-c">
-      <label class="qt-checkbox">
-        <input type="checkbox">
+      <label class="qt-checkbox" [attr.for]="'service-default-' + service.versionedId.id">
+        <input [attr.id]="'service-default-' + service.versionedId.id" type="checkbox" [(ngModel)]="service.canUseInTicket" [disabled]="!getPermissions('MANAGE_SERVICES')">
         <span></span>
       </label>
     </div>
