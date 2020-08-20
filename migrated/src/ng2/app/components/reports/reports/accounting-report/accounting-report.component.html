@@ -10,7 +10,7 @@
         <div class="report-header">
           <h1>Accounting report</h1>
           <div class="company-info">
-            
+            <h3>{{ company.name }}</h3>
             <p><span>{{getDateForHeader(accountingReport.startDate)}}</span> - <span>{{getDateForHeader(accountingReport.endDate)}}</span></p>
           </div>
         </div>
@@ -19,9 +19,7 @@
           </h3>
         </div>
         <div class="customer-ticket__report--details" style="padding: 0px 0px 100px 0px !important;">
-          <div class="header-body">
-          <h3 *ngIf="company" style="padding: 0px 20px;">{{company.name}}</h3>
-        </div>
+        
           <div class="details-header clearfix" style="padding: 15px 20px;">
             <div  style="width: 15%;display: inline-block;">Date</div>
             <div  style="width: 15%;display: inline-block;">Transaction Type</div>
@@ -43,7 +41,7 @@
 
          
 <div class="details-content clearfix total-hours" style="position: relative;height: 60px;" >
-<div class="col-md-4 total-hours-content" style="float: right;text-align: left;padding: 0px 12px 0px 0px !important;position: absolute;right: -77px;top: 20px;"  >{{'Total Payments: ' + (accountingReport.paymentsAmount | currency)}}</div>
+<div class="col-md-4 total-hours-content" style="float: right;text-align: left;padding: 0px 12px 0px 0px !important;position: absolute;right: -92px;top: 20px;"  >{{'Total Payments: ' + (accountingReport.paymentsAmount | currency)}}</div>
  </div>    
 <div class="details-content clearfix total-hours"  style="position: relative;height: 60px;">
     <div class="col-md-4 total-hours-content" style="float: right;text-align: left;padding: 0px 12px 0px 0px !important;position: absolute;right: -85px;top: 20px;"  >{{'Total Invoices: ' + (accountingReport.invoicesTotalSum | currency)}}</div>
