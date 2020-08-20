@@ -26,7 +26,7 @@
             <div  style="width: 15%;display: inline-block;">Date</div>
             <div  style="width: 15%;display: inline-block;">Transaction Type</div>
             <div class="details-header-company"  style="width: 15%;display: inline-block;">Source</div>
-            <div class="details-header-service" style="width: 35%;display: inline-block;">Reference</div>
+            <div class="details-header-service" style="width: 33%;display: inline-block;">Reference</div>
             <div class="time-header" style="width: 15%;display: inline-block;text-align: left;" >Amount</div>
           </div>
           <ng-template ngFor let-item [ngForOf]="accountingReport.list" let-i="index" [ngForTrackBy]="trackByIndex">
@@ -35,7 +35,7 @@
               <div style="width: 15%;display: inline-block;">{{getDate(item.date)}}</div>
               <div style="width: 15%;display: inline-block;">{{(item.type === 'INVOICE') ? 'Invoice' : 'Payment'}}</div>
               <div class="details-content-company" style="width: 15%;display: inline-block;">{{item.source}}</div>
-              <div class="details-content-service" style="width: 30%;display: inline-block;">{{item.reference}}</div>
+              <div class="details-content-service" style="width: 33%;display: inline-block;">{{item.reference}}</div>
               <div class="time-content" style="width: 15%;display: inline-block;">{{item.amount | currency}}</div>
             </div>
           
