@@ -1,7 +1,7 @@
 /*** All css files include ***/
-@import '../assets/scss/variable';
-@import '../assets/scss/mixin';
-@import '../assets/scss/custom';
+@import '../../../../assets/scss/device/variable';
+@import '../../../../assets/scss/device/mixin';
+@import '../../../../assets/scss/device/custom';
 
 
 .cmn-wrapper.hardware {
@@ -68,7 +68,7 @@
                     letter-spacing: normal;
                     color: #4f5f79;
                     padding-left: 18px;
-                    background: url(../assets/images/bullet.svg) no-repeat 5px center;
+                    background: url(../../../../../ng1/images/device/bullet.svg) no-repeat 5px center;
                     margin: 3px 0;
                     display: flex;
                     align-items: center;

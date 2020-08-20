@@ -1,7 +1,7 @@
 /*** All css files include ***/
-@import '../assets/scss/variable';
-@import '../assets/scss/mixin';
-@import '../assets/scss/custom';
+@import '../../../../assets/scss/device/variable';
+@import '../../../../assets/scss/device/mixin';
+@import '../../../../assets/scss/device/custom';
 
 
 .update-info {
@@ -24,22 +24,22 @@
             color: #16a4fa;
         }
         &.update{
-            background: url('../assets/images/allupdate.svg') no-repeat left 0;
+            background: url('../../../../../ng1/images/device/allupdate.svg') no-repeat left 0;
             margin-left: 0;
                 &.active{
-                    background: url('../assets/images/allupdate-blue.svg') no-repeat left 0;
+                    background: url('../../../../../ng1/images/device/allupdate-blue.svg') no-repeat left 0;
                     color: #16a4fa;
                 }
             }        
             &.hidden{
-                background: url('../assets/images/hide-update.svg') no-repeat left 0;
+                background: url('../../../../../ng1/images/device/hide-update.svg') no-repeat left 0;
                     &.active{
-                        background: url('../assets/images/hide-update-blue.svg') no-repeat left 0;
+                        background: url('../../../../../ng1/images/device/hide-update-blue.svg') no-repeat left 0;
                         color: #16a4fa;
                     }
             }
             &.installed{
-                background: url('../assets/images/install.svg') no-repeat left 0;
+                background: url('../../../../../ng1/images/device/install.svg') no-repeat left 0;
                 &:hover{
                     color: #16a4fa;
                 }

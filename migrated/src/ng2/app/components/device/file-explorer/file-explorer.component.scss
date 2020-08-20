@@ -1,7 +1,7 @@
 /*** All css files include ***/
-@import '../assets/scss/variable';
-@import '../assets/scss/mixin';
-@import '../assets/scss/custom';
+@import '../../../../assets/scss/device/variable';
+@import '../../../../assets/scss/device/mixin';
+@import '../../../../assets/scss/device/custom';
 
 
 
@@ -79,7 +79,7 @@
             padding-left: 34px;
             padding-right: 30px;
             font-size: 12px;
-            background: url(../assets/images/search-explore.svg) no-repeat left 12px center #fff;
+            background: url(../../../../../ng1/images/device/search-explore.svg) no-repeat left 12px center #fff;
             &:focus + .clear{
                 visibility: visible;
             }
@@ -95,7 +95,7 @@
             align-items: center;
             justify-content: center;
             font-size: 0;
-            background: url(../assets/images/search-clear.svg) no-repeat center transparent;
+            background: url(../../../../../ng1/images/device/search-clear.svg) no-repeat center transparent;
             color: #4f5f79;
             height: 100%;
             width: 35px;
@@ -162,7 +162,7 @@
                             background-color: #edf2f6 !important;
                         }
                         &::after{
-                            background: url('../assets/images/path-arrow.svg') no-repeat center;
+                            background: url('../../../../../ng1/images/device/path-arrow.svg') no-repeat center;
                             position: absolute;
                             right: 12px;
                             width: 8px;
@@ -180,13 +180,13 @@
                             font-family: $graphicMedBold;
                             font-weight: 500;
                             color: #364656;
-                            background: url('../assets/images/drive.svg') no-repeat left 16px center;
+                            background: url('../../../../../ng1/images/device/drive.svg') no-repeat left 16px center;
                         }
                     }
                     &.folder-list{
                         a{
                             color: #364656;
-                            background: url('../assets/images/folder.svg') no-repeat left 16px center;
+                            background: url('../../../../../ng1/images/device/folder.svg') no-repeat left 16px center;
                             padding-left: 40px;
                         }
                     }
@@ -194,7 +194,7 @@
             }
 
         }
-        .resizer{height: 100%;width: 8px;background: url('../assets/images/expand-column.svg') no-repeat center;cursor:e-resize;}
+        .resizer{height: 100%;width: 8px;background: url('../../../../../ng1/images/device/expand-column.svg') no-repeat center;cursor:e-resize;}
     }
     .contant-area{
         display: -ms-flexbox;
@@ -262,10 +262,10 @@
                 height: 8px;
                 font-size: 0;
                 margin-left: 3px;
-                background: url('../assets/images/descending.svg') no-repeat center;
+                background: url('../../../../../ng1/images/device/descending.svg') no-repeat center;
                 cursor: pointer;
                 &.asc{
-                    background: url('../assets/images/ascending.svg') no-repeat center;
+                    background: url('../../../../../ng1/images/device/ascending.svg') no-repeat center;
                 }
             }
         }
