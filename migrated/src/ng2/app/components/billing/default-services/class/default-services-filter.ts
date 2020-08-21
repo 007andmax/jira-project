@@ -6,7 +6,7 @@ export class DefaultServicesFilter {
     new FilterListTop('taxes', '')];
     constructor() {}
 
-    public onFilter(field, reqUsers) {
+    public onFilter(field, servicesList) {
        
         let index = this.filterTop.findIndex(item => item.field === field);
         if (index > -1) {
@@ -15,10 +15,10 @@ export class DefaultServicesFilter {
                 this.clearFilter();
                 if (sort === '' || sort === 'DESC') {
                     this.filterTop[index].filter = 'ASC';
-                    this.onFilterName(reqUsers);
+                    this.onFilterName(servicesList);
                 } else {
                     this.filterTop[index].filter = 'DESC';
-                     reqUsers.reverse();
+                     servicesList.reverse();
                 }
 
             }
@@ -26,10 +26,10 @@ export class DefaultServicesFilter {
                 this.clearFilter();
                 if (sort === '' || sort === 'DESC') {
                     this.filterTop[index].filter = 'ASC';
-                    this.onFilterRate(reqUsers);
+                    this.onFilterRate(servicesList);
                 } else {
                     this.filterTop[index].filter = 'DESC';
-                     reqUsers.reverse();
+                     servicesList.reverse();
                 }
 
 
@@ -38,20 +38,29 @@ export class DefaultServicesFilter {
                 this.clearFilter();
                 if (sort === '' || sort === 'DESC') {
                     this.filterTop[index].filter = 'ASC';
-                 //   this.onFilterContact(reqUsers);
+                    this.onFilterTaxes(servicesList);
                 } else {
                     this.filterTop[index].filter = 'DESC';
-                     reqUsers.reverse();
+                     servicesList.reverse();
                 }
             }
         }
     }
-    private onFilterRate(reqUsers) {
-        reqUsers.sort((a, b) => (a.rate > b.rate) ?
+    getSelectedTaxNames(taxes) {
+        return taxes && taxes.map((tax) => {
+          return tax.name + ' ' + tax.rate + '%';
+        }).join(', ') || '';
+      };
+    private onFilterRate(servicesList) {
+        servicesList.sort((a, b) => (a.rate > b.rate) ?
             1 : ((b.rate > a.rate) ? -1 : 0));
     }
-    private onFilterName(reqUsers) {
-        reqUsers.sort((a, b) => ((a.name).toLowerCase() > (b.name).toLowerCase()) ?
+    private onFilterTaxes(servicesList) {
+        servicesList.sort((a, b) => ((this.getSelectedTaxNames(a.taxes)).toLowerCase() > (this.getSelectedTaxNames(b.taxes)).toLowerCase()) ?
+            1 : (((this.getSelectedTaxNames(b.taxes)).toLowerCase() > (this.getSelectedTaxNames(a.taxes)).toLowerCase()) ? -1 : 0));
+    }
+    private onFilterName(servicesList) {
+        servicesList.sort((a, b) => ((a.name).toLowerCase() > (b.name).toLowerCase()) ?
             1 : (((b.name).toLowerCase() > (a.name).toLowerCase()) ? -1 : 0));
     }
     public clearFilter() {

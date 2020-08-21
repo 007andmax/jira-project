@@ -21,7 +21,7 @@
             Hourly Rate($)
             <span class="qt-table-modern__sorting"></span>
           </th>
-          <th class="default-service-table__taxes">
+          <th class="default-service-table__taxes" (click)="onFilter('taxes')">
             Taxes
             <span class="qt-table-modern__sorting"></span>
           </th>
@@ -43,7 +43,7 @@
         <ng-template ngFor let-item
         [ngForOf]="list"
         [ngForTrackBy]="trackById">
-        <app-default-services-item [service]="item"></app-default-services-item>
+        <app-default-services-item [service]="item" (onEditService)="onEditService($event)" ></app-default-services-item>
 </ng-template>
       </tbody>
     </table>
@@ -76,3 +76,4 @@
 
   <app-default-services-add *ngIf="showCreateService" (onClose)="showCreateService = false"></app-default-services-add>  
  
+<app-default-services-edit *ngIf="showEditService" (onClose)="showEditService = false"></app-default-services-edit>

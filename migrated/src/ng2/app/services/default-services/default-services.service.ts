@@ -22,4 +22,16 @@ export class DefaultServicesService {
   public getDefaultServices(){
     return this.http.get(this.apiUrl + `services/getDefaultServices`).pipe(map((data: any) => data.map(item => new DefaultServices(item))));
   }
+  
+  public changeBillableStatus(id,status){
+    return this.http.post(this.apiUrl + `services/changeBillableStatus?id=${id}&toBillable=${status}`,{});
+  }
+  public changeService(data){
+   
+    return this.http.put(this.apiUrl + `services/${data.versionedId.id}`,data);
+  }
+  public deleteService(id){
+   
+    return this.http.delete(this.apiUrl + `services/${id}`);
+  }
 }

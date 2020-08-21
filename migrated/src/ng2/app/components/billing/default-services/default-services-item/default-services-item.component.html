@@ -21,7 +21,7 @@
   <td class="default-service-table__billable">
     <div class="d-f qt-jc-c">
       <label class="qt-checkbox" [attr.for]="'service-billable-' + service.versionedId.id">
-        <input [attr.id]="'service-billable-' + service.versionedId.id" type="checkbox" [(ngModel)]="service.billable" [disabled]="!getPermissions('MANAGE_SERVICES')">
+        <input [attr.id]="'service-billable-' + service.versionedId.id" type="checkbox" [(ngModel)]="service.billable" [disabled]="!getPermissions('MANAGE_SERVICES')" (change)="onChangeBillalble()">
         <span></span>
       </label>
     </div>
@@ -29,12 +29,16 @@
   <td class="default-service-table__default">
     <div class="d-f qt-jc-c">
       <label class="qt-checkbox" [attr.for]="'service-default-' + service.versionedId.id">
-        <input [attr.id]="'service-default-' + service.versionedId.id" type="checkbox" [(ngModel)]="service.canUseInTicket" [disabled]="!getPermissions('MANAGE_SERVICES')">
+        <input [attr.id]="'service-default-' + service.versionedId.id" type="checkbox" [(ngModel)]="service.canUseInTicket" [disabled]="!getPermissions('MANAGE_SERVICES')" (change)="onChangeDefault()">
         <span></span>
       </label>
     </div>
   </td>
-  <td class="default-service-table__menu">
-    <div class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"></div>
+  <td class="default-service-table__menu" ngbDropdown>
+    <div class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"  id="dropdownBasic1" ngbDropdownToggle></div>
+    <ul class="qt-dropdown-menu invoice-items-dropdown"  ngbDropdownMenu aria-labelledby="dropdownBasic1">
+      <li class="pointer" ngbDropdownItem (click)="edit()"> Edit</li>
+      <li class="pointer" ngbDropdownItem (click)="delete()"> Delete</li>
+  </ul>
   </td>
 </tr>

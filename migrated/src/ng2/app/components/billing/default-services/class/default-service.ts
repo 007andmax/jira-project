@@ -32,4 +32,31 @@ export class DefaultServices implements Service {
             this[key] = data[key];
         }
     }
+    public getDataForUpdate() {
+        return {
+            blockTimeServiceAgreement: this.blockTimeServiceAgreement,
+            canUseInTicket: this.canUseInTicket,
+            commissionRate: this.commissionRate,
+            createdAt: this.createdAt,
+            deletedAt: this.deletedAt,
+            name: this.name,
+            oldVersion: this.oldVersion,
+            rate: this.rate,
+            serviceAgreement: this.serviceAgreement,
+            serviceContractServiceAgreement: this.serviceContractServiceAgreement,
+            taxes: this.taxes,
+            updatedAt: this.updatedAt,
+            versionedId: this.versionedId,
+            billable: this.billable,
+            company: this.company,
+            glNumber: this.glNumber,
+            isBasedOnDefault: this.isBasedOnDefault,
+            isDefault: this.isDefault,
+            isServiceToTrack: this.isServiceToTrack,
+            isStub: this.isStub,
+            originService: this.originService,
+            parentDefaultServiceId: this.parentDefaultServiceId,
+            id: this.versionedId.id
+        }
+    }
 }

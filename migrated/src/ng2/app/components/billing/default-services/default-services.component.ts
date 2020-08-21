@@ -1,31 +1,58 @@
-import { Component, OnInit, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { DefaultServices } from './class/default-service';
 import { DefaultServicesService } from 'src/ng2/app/services/default-services/default-services.service';
 import { DefaultServicesFilter } from './class/default-services-filter';
+import { ConfirmStateService } from '../../shared/confirm/services/confirm-state.service';
+import { REMOVE_DEFAULT_SERVICE } from 'src/ng2/app/const/confirm';
+import { DefaultServicesStateService } from 'src/ng2/app/states/default-services/default-services-state.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'default-services',
   templateUrl: './default-services.component.html',
   styleUrls: ['./default-services.component.scss']
 })
-export class DefaultServicesComponent implements OnInit {
+export class DefaultServicesComponent implements OnInit, OnDestroy {
   showCreateService: boolean = false;
+  showEditService: boolean = false;
   list: Array<DefaultServices> = [];
   filter: DefaultServicesFilter = new DefaultServicesFilter();
+  sub: Subscription = new Subscription();
   constructor(private defaultServicesService: DefaultServicesService,
+    private defaultServicesStateService: DefaultServicesStateService,
+    private confirmStateService: ConfirmStateService,
+
     public cd: ChangeDetectorRef,) { }
 
+
   ngOnInit() {
-    this.defaultServicesService.getDefaultServices().subscribe((data:Array<DefaultServices>) => {
+    this.defaultServicesService.getDefaultServices().subscribe((data: Array<DefaultServices>) => {
       this.list = data;
       this.filter.onFilter('name', this.list);
       this.cd.detectChanges();
     })
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === REMOVE_DEFAULT_SERVICE) this.removeService(this.defaultServicesStateService.getServiceForRemove());
+      }
+    })
+    this.sub.add(getConfirm);
+  }
+  public removeService(service) {
+    this.defaultServicesService.deleteService(service.versionedId.id).subscribe(data => {
+
+    })
+
+  }
+  onEditService(service) {
+    this.showEditService = true;
   }
   public onFilter(field) {
     this.filter.onFilter(field, this.list);
     this.cd.detectChanges();
-   
+
   }
- 
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }

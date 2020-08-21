@@ -277,6 +277,7 @@ import { DefaultServicesComponent } from './components/billing/default-services/
 import { DefaultServicesAddComponent } from './components/billing/default-services/default-services-add/default-services-add.component';
 import { DefaultServicesItemComponent } from './components/billing/default-services/default-services-item/default-services-item.component';
 import { DefaultServicesContractsComponent } from './components/billing/default-services/default-services-contracts/default-services-contracts.component';
+import { DefaultServicesEditComponent } from './components/billing/default-services/default-services-edit/default-services-edit.component';
  
 
 
@@ -686,7 +687,8 @@ angular.module('quicktech')
     DefaultServicesComponent,
     DefaultServicesAddComponent,
     DefaultServicesItemComponent,
-    DefaultServicesContractsComponent
+    DefaultServicesContractsComponent,
+    DefaultServicesEditComponent
   ],
   imports: [
     BrowserModule,

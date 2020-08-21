@@ -1,8 +1,14 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { GlNumber } from '../../../reports/class/gl-number';
 import { GlNumberStateService } from 'src/ng2/app/states/gl-number/gl-number-state.service';
 import { DefaultServices } from '../class/default-service';
 import { PermissionsService } from 'src/ng2/app/services/permissions/permissions.service';
+import { DefaultServicesService } from 'src/ng2/app/services/default-services/default-services.service';
+import { ConfirmStateService } from '../../../shared/confirm/services/confirm-state.service';
+import { REMOVE_DEFAULT_SERVICE } from 'src/ng2/app/const/confirm';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
+import { DefaultServicesStateService } from 'src/ng2/app/states/default-services/default-services-state.service';
 
 @Component({
   selector: 'app-default-services-item',
@@ -11,8 +17,13 @@ import { PermissionsService } from 'src/ng2/app/services/permissions/permissions
 })
 export class DefaultServicesItemComponent implements OnInit {
   @Input() service: DefaultServices;
+  @Output() onEditService = new EventEmitter<any>();
   glNumbers: Array<GlNumber> = [];
   constructor(private glNumberStateService: GlNumberStateService,
+    private confirmStateService: ConfirmStateService,
+    private modalService: NgbModal,
+    private defaultServicesStateService:DefaultServicesStateService,
+    private defaultServicesService: DefaultServicesService,
     private permissionsService: PermissionsService) { }
 
   ngOnInit() {
@@ -24,11 +35,30 @@ export class DefaultServicesItemComponent implements OnInit {
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
   }
+  onChangeBillalble() {
+    this.defaultServicesService.changeBillableStatus(this.service.versionedId.id, this.service.billable).subscribe(data => {
+
+    })
+  }
+  onChangeDefault() {
+    this.defaultServicesService.changeService(this.service.getDataForUpdate()).subscribe(data => {
+
+    })
+  }
   getSelectedTaxNames(taxes) {
     return taxes && taxes.map((tax) => {
       return tax.name + ' ' + tax.rate + '%';
     }).join(', ') || 'No taxes';
   };
+  edit() {
+this.onEditService.emit(this.service);
+  }
+  delete() {
+    this.confirmStateService.setConfirmAction(REMOVE_DEFAULT_SERVICE);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    modalRef.componentInstance.message = `Do you want to delete ${this.service.name}?`;
+    this.defaultServicesStateService.setServiceForRemove(this.service);
+  }
   private sortGlNumbers(data) {
     return data.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
       1 : ((b.glNumber.toLowerCase() > a.glNumber.toLowerCase()) ? -1 : 0));
