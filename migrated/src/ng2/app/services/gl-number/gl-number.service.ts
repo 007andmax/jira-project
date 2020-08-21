@@ -33,4 +33,8 @@ export class GlNumberService {
   public addGlNumber(glNumber,description) {
     return this.http.post(`${this.apiUrl}glNumber`,{glNumber:glNumber,description:description});
   }
+
+  public setGlNumberContract(id,type) {
+    return this.http.post(`${this.apiUrl}glNumber/${id}/${type}`,{});
+  }
 }

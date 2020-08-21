@@ -276,6 +276,7 @@ import { InvoicesAsidePreviewComponent } from './components/billing/invoices/inv
 import { DefaultServicesComponent } from './components/billing/default-services/default-services.component';
 import { DefaultServicesAddComponent } from './components/billing/default-services/default-services-add/default-services-add.component';
 import { DefaultServicesItemComponent } from './components/billing/default-services/default-services-item/default-services-item.component';
+import { DefaultServicesContractsComponent } from './components/billing/default-services/default-services-contracts/default-services-contracts.component';
  
 
 
@@ -684,7 +685,8 @@ angular.module('quicktech')
     InvoicesAsidePreviewComponent,
     DefaultServicesComponent,
     DefaultServicesAddComponent,
-    DefaultServicesItemComponent
+    DefaultServicesItemComponent,
+    DefaultServicesContractsComponent
   ],
   imports: [
     BrowserModule,
