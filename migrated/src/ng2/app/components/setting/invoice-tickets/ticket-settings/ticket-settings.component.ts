@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { InvoiceTicketsService } from '../invoice-tickets.service';
 import { UsersService } from 'src/ng2/app/services/users/users.service';
@@ -17,7 +17,9 @@ export class TicketSettingsComponent implements OnInit {
   nextValid: '';
   public currentUser: any;
   currentCompany: any;
-
+  @Input() taxIdDescInput: any;
+  @Input() taxIdInput: any;
+  @Input() conditionInput: any;
   constructor(
     private formBuilder: FormBuilder,
     private invoiceTicketsService: InvoiceTicketsService,
@@ -63,8 +65,15 @@ export class TicketSettingsComponent implements OnInit {
 
     this.getCurrentCompany();
     this.getActualNumber();
-    this.getTaxNumber();
-    this.getTermsAndConditions();
+    // this.getTaxNumber();
+    // this.getTermsAndConditions();
+    this.ticketForm.patchValue({
+      taxId: this.taxIdInput,
+      taxIdDescription: this.taxIdDescInput
+    });
+    this.ticketForm.patchValue({
+      conditions: this.conditionInput
+    });
   }
 
   // convenience getter for easy access to form fields

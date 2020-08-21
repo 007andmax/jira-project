@@ -53,6 +53,7 @@ import { CompanyPipe } from './pipe/company.pipe';
 import { PasswordManagerEditAsideComponent } from './components/password-manager/password-manager-edit-aside/password-manager-edit-aside.component';
 import { DeviceUserPipe } from './pipe/device-user.pipe';
 import { PasswordCategoryPipe } from './pipe/password-category.pipe';
+import { SanitizeHtmlPipe } from './pipe/sanitize-html.pipe';
 import { SelectClientCompanyComponent } from './components/shared/select-client-company/select-client-company.component';
 import { ProductListComponent } from './components/shared/product-list/product-list.component';
 import { ServicesListComponent } from './components/shared/services-list/services-list.component';
@@ -155,8 +156,6 @@ import { CompanyProductsComponent } from './components/companies/company-product
  * declare angular
  */
 declare var angular: any;
-import { TabsModule } from 'ngx-bootstrap/tabs';
-import { ModalModule, TypeaheadModule } from 'ngx-bootstrap';
 
 import { LeftPanelSettingComponent } from './components/left-panel/left-panel-setting/left-panel-setting.component';
 
@@ -498,6 +497,7 @@ angular.module('quicktech')
     PasswordManagerEditAsideComponent,
     DeviceUserPipe,
     PasswordCategoryPipe,
+    SanitizeHtmlPipe,
     QuotesComponent,
     QuoteCreateComponent,
     QuoteCreateContentComponent,
@@ -779,9 +779,6 @@ angular.module('quicktech')
     DataTablesModule,
     NgSelectModule,
     SelectDropDownModule,
-    TabsModule.forRoot(),
-    ModalModule.forRoot(),
-    TypeaheadModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAbP4DFpz4f9YcXMWUjdkOdyArX2peNt8s'
     }),

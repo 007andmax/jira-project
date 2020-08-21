@@ -10,6 +10,7 @@ import { forkJoin, Observable, Subject } from "rxjs";
 import { map } from "rxjs/operators";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
+import { TabsetComponent, TabDirective } from 'ngx-bootstrap/tabs';
 declare var $:any;
 @Component({
   selector: "app-manage-tags",
@@ -22,7 +23,8 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
   companyTags: any[] = [];
   serviceAllTickets: Observable<any>;
   serviceAllCompany: Observable<any>;
-
+  serviceCreateCustomTags: Observable<any>;	
+  allowCreateTags: any;
   compnayForm: FormGroup;
   submitted = false;
   edit = false;
@@ -38,6 +40,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     info: false
   };
   @ViewChild("tickets") tickets: ElementRef;
+  @ViewChild('tabset') tabset: TabsetComponent;
   dtTrigger = new Subject();
 
   constructor(
@@ -58,6 +61,7 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
       id: [""]
     });
 
+    this.getCurrentCompany();
     this.serviceAllTickets = this.tagsService.getAllTickets();
     this.serviceAllCompany = this.tagsService.getAllCompany();
 
@@ -85,6 +89,27 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
           this.loading = false;$(".loading").css("display", "none");
         }
       );
+  }
+
+  getCurrentCompany() {	
+    this.tagsService.getCurrentCompany().subscribe(	
+      res => {	
+        this.allowCreateTags = res['allowCreateTags'];	
+      },	
+      error => {	
+      }	
+    ); 	
+  }	
+	
+  saveAllowingCreateCustomTags() {	
+    this.tagsService.saveAllowingCreateCustomTags(this.allowCreateTags).subscribe(	
+      res => {	
+        	
+      },	
+      error => {	
+        this.allowCreateTags = !this.allowCreateTags;	
+      }	
+    ); 	
   }
 
   /**
@@ -130,10 +155,12 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     }
     this.searchTag = "";
     this.compnayForm.patchValue({ word: "" });
-    if (this.tickets.nativeElement.className.indexOf("active") > -1) {
-      this.setActiveTab = "ticket";
-    } else {
-      this.setActiveTab = "company";
+    if (this.tabset.tabs[0].active === true) {	
+      this.setActiveTab = "company";	
+    } else if (this.tabset.tabs[1].active === true) {	
+      this.setActiveTab = "ticket";	
+    } else if (this.tabset.tabs[2].active === true) {	
+      this.setActiveTab = "device";	
     }
   }
 

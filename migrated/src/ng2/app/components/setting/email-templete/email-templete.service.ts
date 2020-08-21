@@ -192,9 +192,9 @@ export class EmailTempleteService {
    * @param data 
    */
   getHtmlForPreview(type: string, data) {
-    return this.http.post(`${this.apiUrl}settings/emailPages/byType/${type}`, {
-      data
-    });
+    return this.http.post(`${this.apiUrl}settings/emailPages/preview/${type}`, {
+      subject: data.subject, body: data.body
+    }, {responseType: 'text'});
   }
 
   /**

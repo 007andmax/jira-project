@@ -465,6 +465,9 @@ table{
         -webkit-box-shadow:none;
         -moz-box-shadow:none;
         box-shadow:none;
+         position: relative;
+        top:auto;
+        left:auto;
         .modal-content{
             -ms-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
             -o-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
@@ -477,7 +480,7 @@ table{
             @include opacity(1);
             @include border-radius(5px);
             padding: 40px 32px 25px 32px;
-            margin:50px auto;
+            margin:0 auto;
             .modal-header,.modal-body{
                 padding: 0;
                 border:none;
@@ -500,12 +503,29 @@ table{
             outline: none;
             border: none;
             opacity: 1;
+            z-index: 1;
         }
       }
     .f-row  {
         margin-bottom: 0;
     }
 }
+
+@media only screen and (min-width: 576px)
+{
+    .modal-dialog-centered {
+        min-height: calc(100% - 3.5rem);
+        display: flex;
+        align-items: center;
+        margin: 1.75rem auto;
+        &::before{
+            height: calc(100vh - 3.5rem);
+        }
+       
+    }
+
+}
+
 .m-btn-row {
     -webkit-display: flex;
     display: flex;
@@ -839,6 +859,11 @@ header{
             }
         }
        
+    }
+    .tag_description {	
+        float: left;	
+        width: 100%;	
+        padding: 34px 48px 24px 48px;	
     }
 }
 
@@ -1424,7 +1449,7 @@ tabset {
     position: fixed;
     right: -700px;
     @include transition(0.5s);
-    z-index: 9999999;
+    z-index: 1000;
     @media only screen and (max-width: 768px){
         width: 100%;
         top: 0;

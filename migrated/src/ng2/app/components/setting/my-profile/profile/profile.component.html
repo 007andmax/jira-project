@@ -50,8 +50,16 @@
       </div>
       <div class="cropping">
         <div class="img-crop">
-          <image-cropper
+          <!-- <image-cropper
             [imageBase64]="imageBase64"
+            [imageChangedEvent]="imageChangedEvent"
+            [maintainAspectRatio]="false"
+            [aspectRatio]="4 / 3"
+            [resizeToWidth]="128"
+            format="png"
+            (imageCropped)="imageCropped($event)"
+          ></image-cropper> -->
+          <image-cropper
             [imageChangedEvent]="imageChangedEvent"
             [maintainAspectRatio]="false"
             [aspectRatio]="4 / 3"
