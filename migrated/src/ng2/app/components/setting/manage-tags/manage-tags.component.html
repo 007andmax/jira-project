@@ -90,7 +90,7 @@
             <span>Allow user to create custom Tags</span>	
           </div>	
         </div>
-    <ngb-tabset (click)="setTab()" #tabset>
+    <ngb-tabset (click)="setTab()" #tabset="ngbTabset">
       <!-- Companies -->
       <ngb-tab title="Companies" id="tab1">
         <ng-template ngbTabContent>
@@ -209,7 +209,7 @@
         </ng-template>
       </ngb-tab>
       <!-- Tickets -->
-      <ngb-tab #tickets title="Tickets">
+      <ngb-tab #tickets title="Tickets" id="tab2">
         <ng-template ngbTabContent>
         <div class="cmn-area">
           <div class="data-table-wrap">
@@ -331,7 +331,7 @@
         </ng-template>
       </ngb-tab>
       <!-- Devices  -->
-      <ngb-tab title="Devices">
+      <ngb-tab title="Devices" id="tab3">
         <ng-template ngbTabContent>
         <div class="cmn-area">
           <div class="data-table-wrap"></div>
