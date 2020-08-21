@@ -53,7 +53,7 @@ export class NavComponent implements OnInit {
       resp => {
         this.currentCompany = resp.name;
         localStorage.setItem('currentCompanyName', this.currentCompany);
-        localStorage.setItem('currentCompany', resp.id);
+        // localStorage.setItem('currentCompany', resp.id);
       },
       error => {
       this.toastr.error('Something went wrong please try again.');

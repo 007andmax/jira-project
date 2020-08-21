@@ -83,7 +83,7 @@ export class DeviceComponent implements OnInit {
     .pipe(first())
     .subscribe(
       resp => {
-        localStorage.setItem('currentCompany', resp.id);
+        // localStorage.setItem('currentCompany', resp.id);
         // if (localStorage.getItem('currentCompany') === undefined || localStorage.getItem('currentCompany') === null) {
         //   localStorage.setItem('currentCompany', this.mainCompanyUuid);
         // }
