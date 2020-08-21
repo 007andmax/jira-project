@@ -66,8 +66,8 @@ export class ProfileComponent implements OnInit {
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone
   ) {
-    this.getCurrentUser();
-    this.getUserProfile();
+    // this.getCurrentUser();
+    // this.getUserProfile();
   }
 
   ngOnInit() {

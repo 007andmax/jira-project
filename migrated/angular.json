@@ -367,8 +367,7 @@
               "src/ng1/scripts/js/vendors/date-range-picker/datepicker.en.js",
               "src/ng1/scripts/js/handlebars-v3.0.3.js",
               "src/ng1/scripts/core/assign-user-list/assign-user-list.ctrl.js",
-              "node_modules/datatables.net/js/jquery.dataTables.min.js",
-              "node_modules/timepicker/dist/jquery.timepicker.js"
+              "node_modules/datatables.net/js/jquery.dataTables.min.js"
             ],
             "es5BrowserSupport": true
           },
