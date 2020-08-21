@@ -281,6 +281,7 @@ import { PaymentsAsideComponent } from './components/billing/payments/payments-a
 import { RefundPaymentComponent } from './components/billing/payments/refund-payment/refund-payment.component';
 import { EditPaymentComponent } from './components/billing/payments/edit-payment/edit-payment.component';
 import { TechServiceReportComponent } from './components/reports/reports/tech-service-report/tech-service-report.component';
+import { AccountingReportComponent } from './components/reports/reports/accounting-report/accounting-report.component';
 
 
 
@@ -695,6 +696,7 @@ angular.module('quicktech')
     RefundPaymentComponent,
     EditPaymentComponent,
     TechServiceReportComponent,
+    AccountingReportComponent,
   ],
   imports: [
     BrowserModule,

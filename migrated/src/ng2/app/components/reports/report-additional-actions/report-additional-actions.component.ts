@@ -40,7 +40,7 @@ export class ReportAdditionalActionsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    if (this.report === "service-report" || this.report === "ticket-report") this.listExport = ['PDF'];
+    if (this.report === "service-report" || this.report === "ticket-report" || this.report === "accounting-report") this.listExport = ['PDF'];
     let exportCSV = this.reportsStateService.exportCSV.subscribe(data => {
       this.exportCSV = data;
     })
