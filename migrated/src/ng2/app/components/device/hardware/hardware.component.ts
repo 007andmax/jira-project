@@ -8,6 +8,7 @@ import { ExcelService } from '../_services/download_csv.service';
 import { CONFIGCONSTANTS } from '../config/app-constants';
 import { Router } from '@angular/router';
 import * as moment from "moment";
+import { System, Graphics, Motherboard, Bios, Processor, Display, LogicalDisk, Memory, Adapter, DeviceDetail } from './class/system';
 declare var $:any;
 @Component({
   selector: 'app-hardware',
@@ -18,19 +19,18 @@ export class HardwareComponent implements OnInit {
   
   companyUuid: string = '';
   hardwareDetail: object ={};
-  system: object = {};
-  graphics: object = {};
-  motherBoard: object = {};
-  bios: object = {};
-  processor: object = {};
-  display: object = {};
-  logicalDisks: object = {};
-  memory: object = {};
-  networkAdapters: object = {};
-  processors: object = {};
+  system: System;
+  graphics: Graphics;
+  motherBoard: Motherboard;
+  bios: Bios;
+  display: Display;
+  logicalDisks: LogicalDisk;
+  memory: Memory; 
+  networkAdapters: Adapter;
+  processors: Processor;
   deviceName: string = '';
   externalIp: string = '';
-  deviceDetail: object = {};
+  deviceDetail: DeviceDetail;
   loading: boolean = false;
   limit: number = 15;
   printSystem: Array<Array<string>>; 
