@@ -8,7 +8,6 @@ import { HardwareService } from './_services/hardware.service';
 import { DeviceDetailService } from './_services/device_detail.service';
 import { first } from 'rxjs/operators';
 declare var $:any;
-
 @Component({
   selector: 'app-root',
   templateUrl: './device.component.html',
@@ -44,7 +43,6 @@ export class DeviceComponent implements OnInit {
     }
     
   }
-
   private getDismiss(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -54,7 +52,6 @@ export class DeviceComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-
   lock() {
     // this.modalRef = this.modalService.show(
     //   LockScreenComponent,
@@ -76,7 +73,6 @@ export class DeviceComponent implements OnInit {
       this.updateTime();
     },1000);
   }
-
   getCurrentCompany() {
 	
     this.commonHttpServices.getCurrentCompany()
@@ -95,7 +91,6 @@ export class DeviceComponent implements OnInit {
       }
     );
   }
-
   getDeviceDetail() {
 	
     this.hardwareService.getAllHardwareList(localStorage.getItem('company_id'), this.deviceDetail.agentId)
@@ -109,7 +104,6 @@ export class DeviceComponent implements OnInit {
       }
     );
   }
-
   updateTime() {
     this.totalSeconds++;
     if (parseInt(this.totalSeconds) === 60) {
@@ -122,7 +116,6 @@ export class DeviceComponent implements OnInit {
     }
     $('#counter').text(this.padNumber(this.totalHours) + ' hr : ' + this.padNumber(this.totalMinutes) + ' min : ' + this.padNumber(this.totalSeconds) + ' sec');
   }
-
   getDevicesByCompany() {
     // localStorage.getItem('currentCompany')
     this.commonHttpServices.getDevicesByCompany(localStorage.getItem('company_id'))
@@ -147,7 +140,6 @@ export class DeviceComponent implements OnInit {
         this.toastr.error('Something went wrong please try again.');
       });
     }
-
     getViewer() {
       this.loading = true;
       this.remoteControlService.getViewer()
@@ -159,7 +151,6 @@ export class DeviceComponent implements OnInit {
         console.log('Something went wrong please try again.');
       });
     }
-
     getConstant(sessionId) {
       this.remoteControlService.getConstant()
       .pipe()
@@ -173,7 +164,6 @@ export class DeviceComponent implements OnInit {
         console.log('Something went wrong please try again.');
       });
     }
-
     createConnection(type) {
       this.loading = true;
       let data = {
@@ -199,7 +189,6 @@ export class DeviceComponent implements OnInit {
         this.toastr.error('Something went wrong please try again.');
       });
     }
-
   padNumber (value) {
     if(value == 0) {
       return '00';
@@ -208,5 +197,4 @@ export class DeviceComponent implements OnInit {
     }
     return value;
   }
-
 }

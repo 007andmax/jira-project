@@ -8,8 +8,6 @@ import { CONFIGCONSTANTS } from '../config/app-constants';
 import { environment } from '../../../../environments/environment';
 import { NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import {NgbCalendar, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
-
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -51,7 +49,6 @@ export class DashboardComponent implements OnInit {
     this.uploadInput = new EventEmitter<UploadInput>();
     this.humanizeBytes = humanizeBytes;
   }
-
   onUploadOutput(output: UploadOutput): void {
     if (output.type === 'allAddedToQueue') {
       const event: UploadInput = {
@@ -60,7 +57,6 @@ export class DashboardComponent implements OnInit {
         method: 'POST',
         data: { foo: 'bar' }
       };
-
       this.uploadInput.emit(event);
     } else if (output.type === 'addedToQueue' && typeof output.file !== 'undefined') {
       this.files.push(output.file);
@@ -78,10 +74,8 @@ export class DashboardComponent implements OnInit {
     } else if (output.type === 'rejected' && typeof output.file !== 'undefined') {
       console.log(output.file.name + ' rejected');
     }
-
     // this.files = this.files.filter(file => file.progress.status !== UploadStatus.Done);
   }
-
   startUpload(): void {
     const event: UploadInput = {
       type: 'uploadAll',
@@ -89,24 +83,18 @@ export class DashboardComponent implements OnInit {
       method: 'POST',
       data: { foo: 'bar' }
     };
-
     this.uploadInput.emit(event);
   }
-
   cancelUpload(id: string): void {
     this.uploadInput.emit({ type: 'cancel', id: id });
   }
-
   removeFile(id: string): void {
     this.uploadInput.emit({ type: 'remove', id: id });
   }
-
   removeAllFiles(): void {
     this.uploadInput.emit({ type: 'removeAll' });
   }
-
   myDateValue: Date;
-
   ngOnInit() {
     this.myDateValue = new Date();
     this.deviceDetail = JSON.parse(localStorage.getItem('deviceDetail'));
@@ -115,7 +103,6 @@ export class DashboardComponent implements OnInit {
     this.getDeviceDetail();
     this.getVirusInfo();
   }
-
   getDeviceDetail() {
 	
     this.hardwareService.getAllHardwareList(localStorage.getItem('company_id'), this.deviceDetail.agentId)
@@ -164,7 +151,6 @@ export class DashboardComponent implements OnInit {
         // this.logicalDisk.sort(function(x, y) {
         //   return (x.is_system === y.is_system)? 0 : x? -1 : 1;
         // });
-
         this.logicalDisk.sort((a, b) => {
           if (a['device_id'] && b['device_id']) {
             return ((a['device_id'].toLowerCase() > b['device_id'].toLowerCase()) ?
@@ -182,7 +168,6 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
-
   getVirusInfo() {
 	
     this.hardwareService.getVirusInfo(localStorage.getItem('company_id'))
@@ -197,11 +182,9 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
-
   onDateChange(newDate: Date) {
     console.log(newDate);
   }
-
   updateDashboard(type: any) {
     let obj = {
         system: {}
@@ -229,7 +212,6 @@ export class DashboardComponent implements OnInit {
     .subscribe(
       resp => {
         if (resp.errors === 'success') {
-
         }
       },
       error => {
@@ -237,11 +219,9 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
-
   convertToGB(value) {
     return (parseInt(value)/1024/1024/1024).toFixed(1)
   }
-
   saveLabel() {
     this.label = this.label.toUpperCase();
     const data = {
@@ -263,9 +243,7 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
-
   format(date: NgbDateStruct | null): string {
     return date ? date.day + '/' + date.month + '/' + date.year : '';
   }
-
 }

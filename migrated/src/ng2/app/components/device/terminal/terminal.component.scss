@@ -79,7 +79,7 @@ main {
                                                         outline: none;
                                                         padding: 0;
                                                         margin: 0;
-                                                        background: url("/ng2/assets/img/device/more-terminal.svg")
+                                                        background: url("../../../../assets/img/device/more-terminal.svg")
                                                             no-repeat center;
                                                         line-height: 1; 
                                                     }
@@ -501,7 +501,7 @@ main {
                             }
                             .script-search {
                                 padding-left: 30px;
-                                background: url("/ng2/assets/img/device/search-script.svg") no-repeat left
+                                background: url("../../../../assets/img/device/search-script.svg") no-repeat left
                                     12px center;
                             }
                         }
@@ -620,16 +620,16 @@ main {
                 }
                 &.Command {
                     margin-left: 0;
-                    background: url("/ng2/assets/img/device/command-line-blue.svg") no-repeat left 0;
+                    background: url("../../../../assets/img/device/command-line-blue.svg") no-repeat left 0;
                     &.active {
-                        background: url("/ng2/assets/img/device/command-line-blue.svg") no-repeat left 0;
+                        background: url("../../../../assets/img/device/command-line-blue.svg") no-repeat left 0;
                         color: #16a4fa;
                     }
                 }
                 &.Power {
-                    background: url("/ng2/assets/img/device/power-shell.svg") no-repeat left 0;
+                    background: url("../../../../assets/img/device/power-shell.svg") no-repeat left 0;
                     &.active {
-                        background: url("/ng2/assets/img/device/power-shell.svg") no-repeat left 0;
+                        background: url("../../../../assets/img/device/power-shell.svg") no-repeat left 0;
                         color: #16a4fa;
                     }
                 }
@@ -691,7 +691,7 @@ main {
                     height: 16px;
                     position: relative;
                     font-family: $sourceCode;
-                    background: url("/ng2/assets/img/device/send-to-front.svg") no-repeat center;
+                    background: url("../../../../assets/img/device/send-to-front.svg") no-repeat center;
                     &::before {
                         font-weight: 400;
                         font-family: $font-body;

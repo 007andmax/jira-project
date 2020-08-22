@@ -81,7 +81,6 @@ export class TerminalComponent implements OnInit {
     this.terminalService.getHistory(localStorage.getItem('agentId'))
     .pipe(first())
     .subscribe(data => {
-      debugger;
     },
     error => {
       const statusError = error;
@@ -94,7 +93,6 @@ export class TerminalComponent implements OnInit {
   }
 
   resetCmdModal() {
-    debugger;
     this.commandModal = {
       title: '',
       command: '',

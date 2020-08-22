@@ -3,7 +3,7 @@
 @import '../../../../assets/scss/device/mixin';
 @import '../../../../assets/scss/device/custom';
 
-
+    
 .update-info {
     display: inline-block;
     vertical-align: middle;
@@ -24,22 +24,22 @@
             color: #16a4fa;
         }
         &.update{
-            background: url('/ng2/assets/img/device/allupdate.svg') no-repeat left 0;
+            background: url('../../../../assets/img/device/allupdate.svg') no-repeat left 0;
             margin-left: 0;
                 &.active{
-                    background: url('/ng2/assets/img/device/allupdate-blue.svg') no-repeat left 0;
+                    background: url('../../../../assets/img/device/allupdate-blue.svg') no-repeat left 0;
                     color: #16a4fa;
                 }
             }        
             &.hidden{
-                background: url('/ng2/assets/img/device/hide-update.svg') no-repeat left 0;
+                background: url('../../../../assets/img/device/hide-update.svg') no-repeat left 0;
                     &.active{
-                        background: url('/ng2/assets/img/device/hide-update-blue.svg') no-repeat left 0;
+                        background: url('../../../../assets/img/device/hide-update-blue.svg') no-repeat left 0;
                         color: #16a4fa;
                     }
             }
             &.installed{
-                background: url('/ng2/assets/img/device/install.svg') no-repeat left 0;
+                background: url('../../../../assets/img/device/install.svg') no-repeat left 0;
                 &:hover{
                     color: #16a4fa;
                 }
