@@ -89,6 +89,9 @@
               "src/ng1/styles/daterangepicker.css",
               "node_modules/igniteui-angular/styles/igniteui-angular.css",
               "node_modules/timepicker/dist/jquery.timepicker.css",
+              "./node_modules/ngx-toastr/toastr.css",
+              "./node_modules/codemirror/lib/codemirror.css",
+              "./node_modules/codemirror/theme/neat.css",
               "src/ng2/app/components/device/styles.scss"
             ],
             "scripts": [

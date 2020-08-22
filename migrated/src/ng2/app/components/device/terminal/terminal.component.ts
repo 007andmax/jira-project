@@ -1,10 +1,10 @@
-import { Component, OnInit ,ViewEncapsulation, ViewChild  } from '@angular/core';
+import { Component, OnInit ,ViewEncapsulation, ViewChild, ElementRef  } from '@angular/core';
 import { TerminalService } from '../_services/terminal.service';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { isArray } from 'util';
-
+import 'codemirror/mode/clike/clike';
 
 
 @Component({
@@ -28,11 +28,19 @@ export class TerminalComponent implements OnInit {
   };
   deleteId = '';
   deleteTitle = '';
+  command = '';
   commandList = [];
+  historyList = [];
   cmdCategoryList = [];
   cmdCategoryReadList = [];
   runScript = false;
   scriptDetail = false;
+  @ViewChild('editor') editorElement:ElementRef;
+  code = '';
+  config = {
+    lineNumbers: true,
+    lineWrapping: true,
+  };
   constructor(private terminalService: TerminalService,
     private toastr: ToastrService,
     private modalService: NgbModal  
@@ -41,6 +49,7 @@ export class TerminalComponent implements OnInit {
   ngOnInit() {
     this.getCommandList();
     this.getCmdCategoryRead();
+    this.getHistory();
   }
 
   getCommandList () {
@@ -68,7 +77,24 @@ export class TerminalComponent implements OnInit {
     });
   }
 
+  getHistory () {
+    this.terminalService.getHistory(localStorage.getItem('agentId'))
+    .pipe(first())
+    .subscribe(data => {
+      debugger;
+    },
+    error => {
+      const statusError = error;
+      if (statusError && statusError.meta) {
+        this.toastr.error(statusError.meta.message);
+      } else {
+        this.toastr.error('Something went wrong please try again.');
+      }
+    });
+  }
+
   resetCmdModal() {
+    debugger;
     this.commandModal = {
       title: '',
       command: '',
@@ -76,6 +102,10 @@ export class TerminalComponent implements OnInit {
       categoryId: '',
       id: ''
     };
+    this.command = '';
+    document.querySelectorAll('.CodeMirror-line span').forEach(element => {
+      element.innerHTML = '';
+    });
   }
 
   getCmdCategory () {

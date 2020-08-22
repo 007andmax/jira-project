@@ -97,14 +97,10 @@
                 <div class="f-col col-100">
                   <label for="Title">Command</label>
                   <div class="form-row">
-                    <!-- <textarea class="form-input"
-                      [(ngModel)]="commandModal.command" 
-                      name="command" 
-                      #Command="ngModel" 
-                      required 
-                      [class.validation-error]="submitted == true && Command.errors && Command.errors.required"
-                    > </textarea> -->
-                    
+                    {{command}}
+                        <mat-codemirror name="command" [options]="{ theme: 'neat', mode: 'html' }"
+                        ></mat-codemirror>
+                     
                   </div>
                 </div>
                 <div class="m-btn-row">
@@ -114,7 +110,7 @@
                       href="javascript:;"
                       class="btn btn-secondary"
                       aria-label="Close"
-                      (click)="create = !create"
+                      (click)="resetCmdModal();create = !create"
                       >Cancel</a
                     >
                   </div>

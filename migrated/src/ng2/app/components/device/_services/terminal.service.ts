@@ -65,4 +65,11 @@ export class TerminalService {
             return data;
         }))
     }
+
+    getHistory(agentId: string) {
+        return this.http.get<any>(CONFIG.getHistoryURL + agentId)
+        .pipe(map(data => {
+            return data;
+        }))
+    }
 }
