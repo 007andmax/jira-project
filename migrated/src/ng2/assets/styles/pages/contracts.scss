@@ -87,6 +87,91 @@
   }
 }
 
+// contracts aside
+
+.contracts-page {
+  &__aside{
+    background: white;
+    width: 880px;
+    border-left: 1px solid #dfe3e8;
+    box-shadow: -8px 0 8px 0 rgba(0, 0, 0, 0.05);
+    position: fixed;
+    top: 79px;
+    right: 0;
+    height: calc(100vh - 79px);
+
+    .aside-header {
+      height: 56px;
+      background-color: #f9fafb;
+      border-bottom: 1px solid #dfe3e8;
+    }
+
+    .contracts-page-scroll-content {
+      overflow: auto;
+      height: calc(100% - 56px);
+    }
+
+    .contract-tipe-info {
+      border: 1px dotted #c5cdd5;
+      height: 32px;
+      width: 696px;
+      font-size: 12px;
+      line-height: 1.33;
+      color: #4f5f79;
+      border-radius: 6px;
+      margin-top: 12px;
+    }
+
+    .table-last-icon-wrapper {
+      margin-right: -20px;
+    }
+
+    .col-price {
+      width: 109px;
+    }
+    .col-tax {
+      width: 109px;
+    }
+    .col-count {
+      width: 84px;
+    }
+
+    .aside-footer {
+      height: 72px;
+      border: 1px solid #dfe3e8;
+      background: white;
+    }
+
+    .contract-total {
+      width: 275px;
+      border-radius: 6px;
+      border: dashed 1px #637381;
+      padding: 15px 20px;
+      &__divider {
+        border-top: 1px dashed #637381;
+        margin-top: 8px;
+      }
+    }
+  }
+
+
+  &__company-name-input {
+    width: 400px;
+  }
+
+  &__contract-type-name-input {
+    width: 280px;
+  }
+
+  &__gray-block {
+    border-top: 1px solid #dfe3e8;
+    border-bottom: 1px solid #dfe3e8;
+    background-color: #f9fafb;
+  }
+
+
+}
+
 @media (min-width: 1920px) {
   .contracts-table {
     width: 100% !important;

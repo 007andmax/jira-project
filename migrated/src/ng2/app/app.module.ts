@@ -271,6 +271,7 @@ import { ContractsComponent } from './components/billing/contracts/contracts.com
 import { CreateContractsComponent } from './components/billing/contracts/create-contracts/create-contracts.component';
 import { ContractsHeaderComponent } from './components/billing/contracts/contracts-header/contracts-header.component';
 import { ContractsTableComponent } from './components/billing/contracts/contracts-table/contracts-table.component';
+import { ContractsAsideComponent } from './components/billing/contracts/contracts-aside/contracts-aside.component';
 
 
 
@@ -672,6 +673,7 @@ angular.module('quicktech')
     CreateContractsComponent,
     ContractsHeaderComponent,
     ContractsTableComponent,
+    ContractsAsideComponent,
   ],
   imports: [
     BrowserModule,
