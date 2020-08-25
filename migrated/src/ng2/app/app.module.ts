@@ -298,6 +298,10 @@ import { searchTextPipe } from './components/device/_pipe/searchText.pipe';
 import { SoftwarePipe } from './pipe/software.pipe';
 
 
+/**
+ * declare angular
+ */
+declare var angular: any;
 
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
@@ -767,6 +771,7 @@ angular.module('quicktech')
     NgbModule,
     InfiniteScrollModule,
     ClickOutsideModule,
+    DataTablesModule,
     NgxSelectModule,
     MatSelectModule,
     MatChipsModule,

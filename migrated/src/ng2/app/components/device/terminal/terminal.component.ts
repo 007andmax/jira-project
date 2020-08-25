@@ -4,7 +4,6 @@ import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { isArray } from 'util';
-import 'codemirror/mode/clike/clike';
 
 
 @Component({
@@ -26,10 +25,25 @@ export class TerminalComponent implements OnInit {
     categoryId: '',
     id: ''
   };
+  myScriptModal = {
+    category: '',
+    categoryId: '',
+    search: ''
+  };
+  sharedScriptModal = {
+    category: '',
+    categoryId: '',
+    search: ''
+  };
+  lineNumber = [1];
   deleteId = '';
   deleteTitle = '';
   command = '';
   commandList = [];
+  myScriptList = [];
+  myScriptListFilter = [];
+  sharedScriptList = [];
+  sharedScriptListFilter = [];
   historyList = [];
   cmdCategoryList = [];
   cmdCategoryReadList = [];
@@ -50,6 +64,9 @@ export class TerminalComponent implements OnInit {
     this.getCommandList();
     this.getCmdCategoryRead();
     this.getHistory();
+    $('#cmd textarea').scroll(function(){
+      $('#cmd_line').scrollTop($('#cmd textarea').scrollTop());
+    });
   }
 
   getCommandList () {
@@ -58,13 +75,18 @@ export class TerminalComponent implements OnInit {
     .subscribe(data => {
       if (isArray(this.commandList)) {
         this.commandList = [];
+        let cmdList = [];
         let response = data;
         for (let key in response) {
           response[key].forEach(element => {
-            this.commandList.push(element);  
+            cmdList.push(element);  
           });
-          
         }
+        this.commandList = cmdList.filter(val => val.default === false);
+        this.myScriptList = cmdList.filter(val => val.default === false);
+        this.myScriptListFilter = cmdList.filter(val => val.default === false);
+        this.sharedScriptList = cmdList.filter(val => val.default === true);
+        this.sharedScriptListFilter = cmdList.filter(val => val.default === true);
       }
     },
     error => {
@@ -101,9 +123,6 @@ export class TerminalComponent implements OnInit {
       id: ''
     };
     this.command = '';
-    document.querySelectorAll('.CodeMirror-line span').forEach(element => {
-      element.innerHTML = '';
-    });
   }
 
   getCmdCategory () {
@@ -309,6 +328,68 @@ export class TerminalComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+  }
+
+  filterMyScript(category: any) {
+    if (category !== undefined) {
+      this.myScriptModal.category = category.name;
+      this.myScriptModal.categoryId = category.id;
+    }
+    if (this.myScriptModal.search === '' && this.myScriptModal.category === '') {
+      this.myScriptListFilter = this.myScriptList;
+    } else if (this.myScriptModal.category !== '' && this.myScriptModal.search !== '') {
+      this.myScriptListFilter = this.myScriptList.filter(val => val.title.toLowerCase().includes(this.myScriptModal.search.toLowerCase()) && val.categoryId === this.myScriptModal.categoryId);
+    } else if (this.myScriptModal.search !== '' && this.myScriptModal.category === '') {
+      this.myScriptListFilter = this.myScriptList.filter(val => val.title.toLowerCase().includes(this.myScriptModal.search.toLowerCase()))
+    } else if (this.myScriptModal.search === '' && this.myScriptModal.category !== '') {
+      this.myScriptListFilter = this.myScriptList.filter(val => val.categoryId === this.myScriptModal.categoryId)
+    }
+  }
+
+  filterSharedScript(category: any) {
+    if (category !== undefined) {
+      this.sharedScriptModal.category = category.name;
+      this.sharedScriptModal.categoryId = category.id;
+    }
+    if (this.sharedScriptModal.search === '' && this.sharedScriptModal.category === '') {
+      this.sharedScriptListFilter = this.sharedScriptList;
+    } else if (this.sharedScriptModal.category !== '' && this.sharedScriptModal.search !== '') {
+      this.sharedScriptListFilter = this.sharedScriptList.filter(val => val.title.toLowerCase().includes(this.sharedScriptModal.search.toLowerCase()) && val.categoryId === this.sharedScriptModal.categoryId);
+    } else if (this.sharedScriptModal.search !== '' && this.sharedScriptModal.category === '') {
+      this.sharedScriptListFilter = this.sharedScriptList.filter(val => val.title.toLowerCase().includes(this.sharedScriptModal.search.toLowerCase()))
+    } else if (this.sharedScriptModal.search === '' && this.sharedScriptModal.category !== '') {
+      this.sharedScriptListFilter = this.sharedScriptList.filter(val => val.categoryId === this.sharedScriptModal.categoryId)
+    }
+  }
+
+  openRunScript () {
+    this.runScript = !this.runScript;
+    if (this.runScript === true) {
+      this.myScriptListFilter = this.myScriptList;
+      this.sharedScriptListFilter = this.sharedScriptList;
+    }
+    this.myScriptModal = {
+      category: '',
+      categoryId: '',
+      search: ''
+    }
+    this.sharedScriptModal = {
+      category: '',
+      categoryId: '',
+      search: ''
+    }
+  }
+
+  countLineNumber() {
+    var text = $("#cmd textarea").val().toString();   
+    var lines = text.split(/\r*\n/);
+    var count = lines.length;
+    console.log(count);
+    this.lineNumber = [];
+    for (let index = 0; index < count; index++) {
+      this.lineNumber[index] = index + 1;
+    }
+    $('#cmd_line').scrollTop($('#cmd textarea').scrollTop());
   }
 
 
