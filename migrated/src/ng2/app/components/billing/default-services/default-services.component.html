@@ -27,7 +27,9 @@
           </th>
           <th class="default-service-table__gl">
             GL Number
-            <span class="icon__info-question default-services-page__question-icon qt-sz-12 qt-ic-c"></span>
+            <ng-template #tipContent class="tooltip">General ledger Number <br/>
+               are numerals you assign<br/> to different debit or<br/> credit entries to make<br/> accounting easier and<br/> more functional.</ng-template>
+            <span class="icon__info-question default-services-page__question-icon qt-sz-12 qt-ic-c" placement="top" [ngbTooltip]="tipContent"  ></span>
             <span class="qt-table-modern__sorting"></span>
           </th>
           <th class="default-service-table__billable">

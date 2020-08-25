@@ -11,7 +11,7 @@
 
       <div class="qt-number-dropdown-menu" ngbDropdownMenu aria-labelledby="dropdown1">
         <ng-template ngFor let-item [ngForOf]="glNumbers" let-i="index">
-          <button ngbDropdownItem [textContent]="item.glNumber"></button>
+          <button ngbDropdownItem [textContent]="item.glNumber + ((item.description != '') ?  ' (' + item.description + ')' : '')" (click)="changeGlNumber(item)"></button>
         </ng-template>
       </div>
     </div>

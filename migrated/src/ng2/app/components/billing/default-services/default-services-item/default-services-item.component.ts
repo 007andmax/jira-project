@@ -22,7 +22,7 @@ export class DefaultServicesItemComponent implements OnInit {
   constructor(private glNumberStateService: GlNumberStateService,
     private confirmStateService: ConfirmStateService,
     private modalService: NgbModal,
-    private defaultServicesStateService:DefaultServicesStateService,
+    private defaultServicesStateService: DefaultServicesStateService,
     private defaultServicesService: DefaultServicesService,
     private permissionsService: PermissionsService) { }
 
@@ -51,7 +51,11 @@ export class DefaultServicesItemComponent implements OnInit {
     }).join(', ') || 'No taxes';
   };
   edit() {
-this.onEditService.emit(this.service);
+    this.onEditService.emit(this.service);
+  }
+  changeGlNumber(item) {
+    this.service.glNumber = item;
+    this.onChangeDefault();
   }
   delete() {
     this.confirmStateService.setConfirmAction(REMOVE_DEFAULT_SERVICE);
