@@ -1,4 +1,4 @@
-<div class="page-list default-services-page">
+<div class="page-list default-services-page" >
   <div class="qt-list-header sticky-list-header default-services-page__header">
     <div>
       <h3 class="list-title">Default Services</h3>
@@ -47,10 +47,11 @@
 </ng-template>
       </tbody>
     </table>
+    <div class="loading" *ngIf="showPreloader"></div>
   </div>
 
 
-  <div class="default-services-page__table-container">
+  <div class="default-services-page__table-container"  *ngIf="!showPreloader">
     <table class="qt-table-modern default-service-table">
       <thead>
         <tr>

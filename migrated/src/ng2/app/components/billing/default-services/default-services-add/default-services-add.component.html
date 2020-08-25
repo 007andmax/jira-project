@@ -74,7 +74,7 @@
 
    <div class="aside-footer qt-pr-30 qt-pl-30 qt-pb-16 qt-pt-16 qt-df qt-ai-c qt-jc-sb">
     <div class="qt-df">
-      <button class="qt-button qt-mr-12" (click)="add()">Create Service</button>
+      <button class="qt-button qt-mr-12" appDisabledBtn #addBtn="disabled" (onClick)="add()"><span *ngIf="!addBtn.isBlock()">Create Service</span> <app-preloader-ticket *ngIf="addBtn.isBlock()"></app-preloader-ticket></button>
       <button class="qt-button --gray" (click)="close()">Cancel</button>
     </div>
 

@@ -14,6 +14,7 @@ import { DefaultServicesRealTimeService } from 'src/ng2/app/states/default-servi
   styleUrls: ['./default-services.component.scss']
 })
 export class DefaultServicesComponent implements OnInit, OnDestroy {
+  showPreloader:boolean = true;
   showCreateService: boolean = false;
   showEditService: boolean = false;
   editService: DefaultServices;
@@ -32,6 +33,7 @@ export class DefaultServicesComponent implements OnInit, OnDestroy {
     this.defaultServicesService.getDefaultServices().subscribe((data: Array<DefaultServices>) => {
       this.list = data;
       this.filter.onFilter('name', this.list);
+      this.showPreloader = false;
       this.cd.detectChanges();
     })
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {

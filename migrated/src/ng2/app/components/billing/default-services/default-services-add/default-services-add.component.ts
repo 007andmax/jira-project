@@ -9,6 +9,7 @@ import { GlNumberService } from 'src/ng2/app/services/gl-number/gl-number.servic
 import { DefaultServicesService } from 'src/ng2/app/services/default-services/default-services.service';
 import { TaxesStateService } from 'src/ng2/app/states/taxes/taxes-state.service';
 import { Tax } from 'src/ng2/app/interfaces/service/tax';
+import { DisabledBtnDirective } from 'src/ng2/app/directives/disabled-btn.directive';
 
 @Component({
   selector: 'app-default-services-add',
@@ -21,6 +22,7 @@ export class DefaultServicesAddComponent implements OnInit {
   sub: Subscription = new Subscription();
   validate: DefaultServiceValidate = new DefaultServiceValidate();
   defaultSelectedTax: Array<Tax> = [];
+  @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   @ViewChild('glNumberSelect') glNumberSelect: SelectSearchComponent;
   @Output() onClose = new EventEmitter<any>();
   constructor(private glNumberStateService: GlNumberStateService,
@@ -71,8 +73,12 @@ export class DefaultServicesAddComponent implements OnInit {
   add() {
     console.log("this.service",this.service);
     if (!this.validate.isValidate(this.service)) return;
+    this.addBtn.setDisabled(true);
     this.defaultServicesService.addService(this.service.getDataForAdd()).subscribe(data => {
+      this.addBtn.setDisabled(false);
       this.close();
+    },err => {
+      this.addBtn.setDisabled(false);
     })
   }
   onSelectGlNumbers(data) {
