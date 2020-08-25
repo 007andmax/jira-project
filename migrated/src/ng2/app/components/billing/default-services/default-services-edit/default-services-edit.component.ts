@@ -44,7 +44,7 @@ export class DefaultServicesEditComponent implements OnInit {
       1 : ((b.glNumber.toLowerCase() > a.glNumber.toLowerCase()) ? -1 : 0));
   }
   onChangeName() {
-    if (this.service.name != "") this.validate.resetName();
+    if (this.service.name.length > 3 && this.service.name.length < 100) this.validate.resetName();
   }
   onChangeRate(event) {
     this.service.rate = Number(event.target.value);

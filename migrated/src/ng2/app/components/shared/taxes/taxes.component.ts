@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, Input, ChangeDetectorRef } from '@angular/core';
 import { TaxesStateService } from 'src/ng2/app/states/taxes/taxes-state.service';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
@@ -27,6 +27,7 @@ export class TaxesComponent implements OnInit, OnDestroy {
   public constructor(
     private taxesStateService: TaxesStateService,
     private taxesService: TaxesService,
+    public cd: ChangeDetectorRef,
     private fb: FormBuilder
   ) { }
 
@@ -46,6 +47,8 @@ export class TaxesComponent implements OnInit, OnDestroy {
   public onAddTax() {
     this.taxesService.addTax(this.taxForm.value).subscribe((data: Tax) => {
       this.selected(data);
+      this.containerAddTax.close();
+      this.cd.detectChanges();
     })
   }
 

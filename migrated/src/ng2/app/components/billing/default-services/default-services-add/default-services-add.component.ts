@@ -29,6 +29,7 @@ export class DefaultServicesAddComponent implements OnInit {
     private glNumberService: GlNumberService,) { }
 
   ngOnInit() {
+    this.service.onInitForAdd();
     if (this.glNumberStateService.getGLNumbers().length > 0) this.glNumbers = this.sortGlNumbers(this.glNumberStateService.getGLNumbers());
     let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe((data) => {
       this.glNumbers = this.sortGlNumbers(data);
@@ -39,14 +40,14 @@ export class DefaultServicesAddComponent implements OnInit {
       this.setDefaultTaxes(data);
     })
     this.sub.add(getOnTaxess);
-    this.service.onInitForAdd();
+   
   }
   private sortGlNumbers(data) {
     return data.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
       1 : ((b.glNumber.toLowerCase() > a.glNumber.toLowerCase()) ? -1 : 0));
   }
   onChangeName() {
-    if (this.service.name != "") this.validate.resetName();
+    if (this.service.name.length > 3 && this.service.name.length < 100) this.validate.resetName();
   }
   onChangeRate(event) {
     this.service.rate = Number(event.target.value);
@@ -67,7 +68,8 @@ export class DefaultServicesAddComponent implements OnInit {
       this.service.glNumber = res;
     })
   }
-  save() {
+  add() {
+    console.log("this.service",this.service);
     if (!this.validate.isValidate(this.service)) return;
     this.defaultServicesService.addService(this.service.getDataForAdd()).subscribe(data => {
       this.close();

@@ -13,7 +13,7 @@
       <div class="qt-w100 qt-mb-16">
         <div class="qt-input-block" [ngClass]="{'--input-error':!validate.getName()}">
           <label>Customer Name</label>
-          <input  [value]="'Checks & System Maintenance'" [(ngModel)]="service.name" type="text" (input)="onChangeName()">
+          <input  [value]="'Checks & System Maintenance'" placeholder="Service Name" [(ngModel)]="service.name" type="text" (input)="onChangeName()">
           <mat-error class="qt-tooltip-error" *ngIf="!validate.getName()">
             Service name is required
           </mat-error>
@@ -24,7 +24,7 @@
         <div class="qt-w50 qt-mb-16 qt-mr-16">
           <div class="qt-input-block" [ngClass]="{'--input-error':!validate.getRate()}">
             <label>Hourly Rate($)</label>
-            <input   [(ngModel)]="service.rate" type="text" number
+            <input   [(ngModel)]="service.rate" type="text" number placeholder="Per Hour Rate"
             [money]="true"
              (input)="onChangeRate($event)" appToFixed>
              <mat-error class="qt-tooltip-error" *ngIf="!validate.getRate()">

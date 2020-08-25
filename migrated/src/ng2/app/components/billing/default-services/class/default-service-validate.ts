@@ -21,7 +21,7 @@ export class DefaultServiceValidate {
         this.name = true;
     }
     public isValidate(service: DefaultServices) {
-        if (service.name == "") this.name = false;
+        if (service.name.length < 3 || service.name.length > 100) this.name = false;
         if (service.rate < 0) this.rate = false;
         return this.rate && this.name;
     }
