@@ -3,14 +3,15 @@ import {
   OnInit,
   ViewChild,
   ElementRef,
-  OnDestroy
+  OnDestroy,
+  ViewContainerRef
 } from "@angular/core";
 import { TagsService } from "src/ng2/app/services/setting/tags.service";
 import { forkJoin, Observable, Subject } from "rxjs";
 import { map } from "rxjs/operators";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
-import { TabsetComponent, TabDirective } from 'ngx-bootstrap/tabs';
+import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 declare var $:any;
 @Component({
   selector: "app-manage-tags",
@@ -40,7 +41,11 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     info: false
   };
   @ViewChild("tickets") tickets: ElementRef;
-  @ViewChild('tabset') tabset: TabsetComponent;
+  private tabSet: ViewContainerRef;
+
+  @ViewChild(NgbTabset) set content(content: ViewContainerRef) {
+    this.tabSet = content;
+  };
   dtTrigger = new Subject();
 
   constructor(
@@ -155,11 +160,11 @@ export class ManageTagsComponent implements OnDestroy, OnInit {
     }
     this.searchTag = "";
     this.compnayForm.patchValue({ word: "" });
-    if (this.tabset.tabs[0].active === true) {	
+    if (this.tabSet['activeId'] === 'tab1') {	
       this.setActiveTab = "company";	
-    } else if (this.tabset.tabs[1].active === true) {	
+    } else if (this.tabSet['activeId'] === 'tab2') {	
       this.setActiveTab = "ticket";	
-    } else if (this.tabset.tabs[2].active === true) {	
+    } else if (this.tabSet['activeId'] === 'tab3') {	
       this.setActiveTab = "device";	
     }
   }

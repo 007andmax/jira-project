@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy, TemplateRef } from "@angular/core";
-import { BsModalRef, BsModalService } from "ngx-bootstrap";
 import { EmailTempleteService } from "./email-templete.service";
 import { map, catchError } from "rxjs/operators";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
@@ -40,7 +39,6 @@ export class EmailTempleteComponent implements OnInit, OnDestroy {
   public show = false;
   public buttonName: any = "Show Keyword Description + ";
   templatesData = { subject: {}, body: {} };
-  modalRef: BsModalRef;
   @ViewChild("body") body: ElementRef;
   @ViewChild("subject") subject: ElementRef;
 

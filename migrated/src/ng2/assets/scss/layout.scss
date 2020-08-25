@@ -868,7 +868,7 @@ header{
 }
 
 /*** Common Tabbings ***/
-tabset {
+ngb-tabset {
     float: left;
     width: 100%;
     ul.nav-tabs {
@@ -923,15 +923,15 @@ tabset {
                     @include transition(0.4s);
 
                 }
+                &:hover,&.active{
+                        color: #16a4fa;
+                        &::after{
+                            border-color: #16a4fa;
+                        }
+                    
+                } 
             }
-            &:hover,&.active{
-                .nav-link{
-                    color: #16a4fa;
-                    &::after{
-                        border-color: #16a4fa;
-                    }
-                }
-            }   
+              
         }
     }
     .tab-content{
