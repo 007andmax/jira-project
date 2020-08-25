@@ -30,6 +30,10 @@ export class DefaultServicesService {
    
     return this.http.put(this.apiUrl + `services/${data.versionedId.id}`,data);
   }
+  public addService(data){
+   
+    return this.http.post(this.apiUrl + `services`,data);
+  }
   public deleteService(id){
    
     return this.http.delete(this.apiUrl + `services/${id}`);

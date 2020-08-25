@@ -49,12 +49,18 @@ export class TaxesComponent implements OnInit, OnDestroy {
     })
   }
 
+  public setEditItem(data) {
+    this.selectedTax = data;
+  }
+
+
   /**
   * Subscribe for edit mode
   */
   private onCheckEditItem() {
     let getTagsFromEdit = this.taxesStateService.getTaxesFromEdit().subscribe((data) => {
       this.selectedTax = data;
+      console.log("this.selectedTax",this.selectedTax);
     });
     this.sub.add(getTagsFromEdit);
   }

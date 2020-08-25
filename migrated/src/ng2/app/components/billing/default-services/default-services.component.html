@@ -76,4 +76,4 @@
 
   <app-default-services-add *ngIf="showCreateService" (onClose)="showCreateService = false"></app-default-services-add>  
  
-<app-default-services-edit *ngIf="showEditService" (onClose)="showEditService = false"></app-default-services-edit>
+<app-default-services-edit *ngIf="showEditService" [service]="editService" (onClose)="showEditService = false"></app-default-services-edit>

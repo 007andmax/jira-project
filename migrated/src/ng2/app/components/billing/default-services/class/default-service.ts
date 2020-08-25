@@ -27,9 +27,31 @@ export class DefaultServices implements Service {
     isStub: boolean;
     originService: any;
     parentDefaultServiceId: string;
-    constructor(data) {
-        for (const key in data) {
-            this[key] = data[key];
+    constructor(data = null) {
+        if (data) {
+            for (const key in data) {
+                this[key] = data[key];
+            }
+        }
+
+    }
+    public onInitForAdd() {
+        this.billable = true;
+        this.isDefault = true;
+        this.name = "";
+        this.rate = 0;
+        this.taxes = [];
+    }
+    public getDataForAdd() {
+        return {
+            billable: this.billable,
+            glNumber: this.glNumber,
+            isDefault: this.isDefault,
+            name: this.name,
+            rate: this.rate,
+            taxIds: this.taxes.map((item => {
+                return item.id;
+            }))
         }
     }
     public getDataForUpdate() {

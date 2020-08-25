@@ -15,6 +15,7 @@ import { Subscription } from 'rxjs';
 export class DefaultServicesComponent implements OnInit, OnDestroy {
   showCreateService: boolean = false;
   showEditService: boolean = false;
+  editService:DefaultServices;
   list: Array<DefaultServices> = [];
   filter: DefaultServicesFilter = new DefaultServicesFilter();
   sub: Subscription = new Subscription();
@@ -45,6 +46,7 @@ export class DefaultServicesComponent implements OnInit, OnDestroy {
 
   }
   onEditService(service) {
+    this.editService = new DefaultServices(JSON.parse(JSON.stringify(service)));
     this.showEditService = true;
   }
   public onFilter(field) {
