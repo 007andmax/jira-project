@@ -7,6 +7,8 @@ import { DefaultServices } from '../class/default-service';
 import { DefaultServiceValidate } from '../class/default-service-validate';
 import { GlNumberService } from 'src/ng2/app/services/gl-number/gl-number.service';
 import { DefaultServicesService } from 'src/ng2/app/services/default-services/default-services.service';
+import { TaxesStateService } from 'src/ng2/app/states/taxes/taxes-state.service';
+import { Tax } from 'src/ng2/app/interfaces/service/tax';
 
 @Component({
   selector: 'app-default-services-add',
@@ -18,10 +20,12 @@ export class DefaultServicesAddComponent implements OnInit {
   glNumbers: Array<GlNumber> = [];
   sub: Subscription = new Subscription();
   validate: DefaultServiceValidate = new DefaultServiceValidate();
+  defaultSelectedTax: Array<Tax> = [];
   @ViewChild('glNumberSelect') glNumberSelect: SelectSearchComponent;
   @Output() onClose = new EventEmitter<any>();
   constructor(private glNumberStateService: GlNumberStateService,
     private defaultServicesService: DefaultServicesService,
+    private taxesStateService: TaxesStateService,
     private glNumberService: GlNumberService,) { }
 
   ngOnInit() {
@@ -30,6 +34,11 @@ export class DefaultServicesAddComponent implements OnInit {
       this.glNumbers = this.sortGlNumbers(data);
     })
     this.sub.add(getOnGlNumbers);
+    if (this.taxesStateService.getTaxes().length > 0) this.setDefaultTaxes(this.taxesStateService.getTaxes());
+    let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
+      this.setDefaultTaxes(data);
+    })
+    this.sub.add(getOnTaxess);
     this.service.onInitForAdd();
   }
   private sortGlNumbers(data) {
@@ -43,6 +52,12 @@ export class DefaultServicesAddComponent implements OnInit {
     this.service.rate = Number(event.target.value);
     console.log("this.service.rate",this.service.rate);
     if (this.service.rate >= 0) this.validate.resetRate();
+  }
+  private setDefaultTaxes(lsitTaxes) {
+    let taxes = lsitTaxes.filter(item => item.isDefault === true);
+    this.service.taxes = taxes;
+    this.defaultSelectedTax = taxes;
+    this.taxesStateService.setTaxesFromtEdit(taxes);
   }
   onTaxesChange(data) {
     this.service.taxes = data;

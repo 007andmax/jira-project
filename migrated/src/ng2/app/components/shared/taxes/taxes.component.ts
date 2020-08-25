@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, Input } from '@angular/core';
 import { TaxesStateService } from 'src/ng2/app/states/taxes/taxes-state.service';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
@@ -12,7 +12,7 @@ import { TaxesService } from 'src/ng2/app/services/taxes/taxes.service';
   styleUrls: ['./taxes.component.scss']
 })
 export class TaxesComponent implements OnInit, OnDestroy {
-  selectedTax = [];
+  @Input() selectedTax = [];
   taxes: Array<Tax> = [];
   sub = new Subscription();
   editItem: any;

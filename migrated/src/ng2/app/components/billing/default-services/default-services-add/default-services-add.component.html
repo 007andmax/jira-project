@@ -36,7 +36,7 @@
 
         <div class="qt-w50 qt-mb-16">
           <div class="create-product-taxes-select">
-            <app-taxes (taxesChange)="onTaxesChange($event)"></app-taxes>
+            <app-taxes [selectedTax]="defaultSelectedTax" (taxesChange)="onTaxesChange($event)"></app-taxes>
           </div>
         </div>
       </div>
