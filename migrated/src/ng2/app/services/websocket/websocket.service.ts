@@ -16,6 +16,7 @@ import { InventoryRealTimeService } from '../../states/inventory/inventory-real-
 import { TicketsRealTimeService } from '../../states/tickets/tickets-real-time.service';
 import { BillableRealTimeService } from '../../states/billable/billable-real-time.service';
 import { InvoiceRealTimeService } from '../../states/invoice/invoice-real-time.service';
+import { DefaultServicesRealTimeService } from '../../states/default-services/default-services-real-time.service';
 
 /**
  * Websocket service to work with api
@@ -51,6 +52,7 @@ export class WebsocketService {
     private ticketsRealTimeService: TicketsRealTimeService,
     private billableRealTimeService:BillableRealTimeService,
     private invoiceRealTimeService:InvoiceRealTimeService,
+    private defaultServicesRealTimeService:DefaultServicesRealTimeService,
 
 
   ) {
@@ -79,6 +81,7 @@ export class WebsocketService {
       that.subsribeToBillableCount();
       that.subsribeToInvoice();
       that.subsribeToSubmittedTicket();
+      that.subsribeToSubmittedService();
     });
   }
   private subsribeToDevices() {
@@ -336,6 +339,16 @@ export class WebsocketService {
       this.stompClient.subscribe(`/user/watch/userSubmittedTicket`, (message) => {
         var newChange = JSON.parse(message.body);
         this.usersRealTimeService.handleRealTimeSubmittedTicket(newChange);
+      });
+
+    }, 3000);
+  }
+
+  public subsribeToSubmittedService() {
+    setTimeout(() => {
+      this.stompClient.subscribe(`/user/watch/service`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.defaultServicesRealTimeService.handleRealTimeChanges(newChange);
       });
 
     }, 3000);

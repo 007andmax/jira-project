@@ -6,6 +6,7 @@ import { ConfirmStateService } from '../../shared/confirm/services/confirm-state
 import { REMOVE_DEFAULT_SERVICE } from 'src/ng2/app/const/confirm';
 import { DefaultServicesStateService } from 'src/ng2/app/states/default-services/default-services-state.service';
 import { Subscription } from 'rxjs';
+import { DefaultServicesRealTimeService } from 'src/ng2/app/states/default-services/default-services-real-time.service';
 
 @Component({
   selector: 'default-services',
@@ -15,12 +16,13 @@ import { Subscription } from 'rxjs';
 export class DefaultServicesComponent implements OnInit, OnDestroy {
   showCreateService: boolean = false;
   showEditService: boolean = false;
-  editService:DefaultServices;
+  editService: DefaultServices;
   list: Array<DefaultServices> = [];
   filter: DefaultServicesFilter = new DefaultServicesFilter();
   sub: Subscription = new Subscription();
   constructor(private defaultServicesService: DefaultServicesService,
     private defaultServicesStateService: DefaultServicesStateService,
+    private defaultServicesRealTimeService: DefaultServicesRealTimeService,
     private confirmStateService: ConfirmStateService,
 
     public cd: ChangeDetectorRef,) { }
@@ -38,6 +40,21 @@ export class DefaultServicesComponent implements OnInit, OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+    let changeServiceArray = this.defaultServicesRealTimeService.changeServiceArray.subscribe(newChange => {
+      if (newChange.action === 'SERVICE_SAVED') {
+        const Index = this.list.findIndex((item) => item.versionedId.id === newChange.data.versionedId.id);
+        if (Index > -1) this.list[Index] = newChange.data;
+        if (Index === -1) this.list.unshift(newChange.data);
+
+      }
+      if (newChange.action === 'SERVICE_DELETED') {
+        const Index = this.list.findIndex((item) => item.versionedId.id === newChange.data.versionedId.id);
+        if (Index > -1) this.list.splice(Index, 1);
+
+      }
+      this.cd.detectChanges();
+    })
+    this.sub.add(changeServiceArray);
   }
   public removeService(service) {
     this.defaultServicesService.deleteService(service.versionedId.id).subscribe(data => {
