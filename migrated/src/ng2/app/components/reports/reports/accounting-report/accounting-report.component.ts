@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AccountingReport } from '../../class/accounting-report';
 import * as moment from 'moment';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
@@ -12,13 +12,14 @@ export class AccountingReportComponent implements OnInit {
   onInit = false;
   company:any;
   accountingReport: AccountingReport = new AccountingReport();
-  constructor(private companiesStateService:CompaniesStateService) { }
+  constructor(private companiesStateService:CompaniesStateService,
+    public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
   }
   public onRequest(data) {
     this.loadingInProgress = data;
-    //  this.cd.detectChanges();
+      this.cd.detectChanges();
   }
   public checkExistPayments() {
    return this.accountingReport.list.find(item => item.type === 'PAYMENT');

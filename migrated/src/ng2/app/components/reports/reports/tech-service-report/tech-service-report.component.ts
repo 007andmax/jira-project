@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import * as moment from 'moment';
 import { TechService } from '../../class/tech-service';
 import { CurrentUser } from 'src/ng2/class/current-user/current-user';
@@ -14,13 +14,14 @@ export class TechServiceReportComponent implements OnInit {
   onInit = false;
   techService: TechService = new TechService();
   techUser: User;
-  constructor(private usersStateService: UsersStateService) { }
+  constructor(private usersStateService: UsersStateService,
+    public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
   }
   public onRequest(data) {
     this.loadingInProgress = data;
-    //  this.cd.detectChanges();
+      this.cd.detectChanges();
   }
   public getUserName(user) {
     return `${user.firstName} ${user.lastName}`;

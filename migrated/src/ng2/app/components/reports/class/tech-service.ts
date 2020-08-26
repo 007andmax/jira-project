@@ -9,7 +9,7 @@ export class TechService {
     constructor(data = null) {
         if (data) {
             this.startDate = data.startDate;
-            this.endDate = data.startDate;
+            this.endDate = data.endDate;
             this.techUserId = data.techUserId;
             this.lines = data.lines;
             this.totalQuantity = data.totalQuantity;
