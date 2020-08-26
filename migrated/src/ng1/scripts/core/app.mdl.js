@@ -186,7 +186,7 @@
           controller: 'quicktech.core.services.servicesCtrl'
         }))
         .state('new-services', waitForServices({
-          url: '/ng2/services',
+          url: '/ng2/default-services',
           template: '<default-services-component></default-services-component>'
         }))
         .state('service-agreements', waitForServices({

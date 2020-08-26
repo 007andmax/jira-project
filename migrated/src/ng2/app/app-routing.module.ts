@@ -183,7 +183,7 @@ const routes: Routes = [
     component: BillableComponent,
   },
   {
-    path: 'ng2/services',
+    path: 'ng2/default-services',
     component: DefaultServicesComponent,
   },
   {

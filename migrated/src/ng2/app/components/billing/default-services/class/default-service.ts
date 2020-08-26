@@ -66,7 +66,9 @@ export class DefaultServices implements Service {
             rate: this.rate,
             serviceAgreement: this.serviceAgreement,
             serviceContractServiceAgreement: this.serviceContractServiceAgreement,
-            taxes: this.taxes,
+            taxIds:  this.taxes.map((item => {
+                return item.id;
+            })),
             updatedAt: this.updatedAt,
             versionedId: this.versionedId,
             billable: this.billable,

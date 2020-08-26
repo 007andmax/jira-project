@@ -43,7 +43,8 @@ export class GlNumberStateService {
           this.glNumbers = this.glNumbers.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
             1 : ((b.glNumber.toLowerCase() > a.glNumber.toLowerCase()) ? -1 : 0));
         }
-        this.onChangeGlNumbers.emit(new GlNumberChange(newChange.action, newChange.data, this.glNumbers));
+        this.onInitGetGLNumbers(this.glNumbers);
+        //this.onChangeGlNumbers.emit(new GlNumberChange(newChange.action, newChange.data, this.glNumbers));
       }
     })
   }

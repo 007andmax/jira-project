@@ -2,7 +2,7 @@
   <td class="default-service-table__service-name" [textContent]="(type === 'BLOCK_TIME') ? 'Block Time Contracts' : 'User / Device Contracts'"></td>
   <td class="default-service-table__rate"  ></td>
   <td class="default-service-table__taxes"  ></td>
-  <td class="default-service-table__gl" ngbDropdown>
+  <td class="default-service-table__gl" ngbDropdown placement="bottom-right">
     <div class="gl-number-dropdown">
       <p ngbDropdownToggle [textContent]="(selectedGlNumber) ? selectedGlNumber.glNumber : ''"></p>
       <span *ngIf="glNumbers">
