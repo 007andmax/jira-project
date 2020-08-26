@@ -27,7 +27,7 @@
             <div  style="width: 10%;display: inline-block;">Ticket</div>
             <div class="details-header-company"  style="width: 29%;display: inline-block;">Company</div>
             <div class="details-content-user"  style="width: 15%;display: inline-block;">User</div>
-            <div class="details-header-service" style="width: 29%;display: inline-block;">Service</div>
+            <div class="details-header-service" style="width: 14%;display: inline-block;">Service</div>
             <div class="time-header" style="width: auto;display: inline-block;text-align: left;" >Time</div>
           </div>
           <ng-template ngFor let-item [ngForOf]="techService.lines" let-i="index" [ngForTrackBy]="trackByIndex" >
@@ -37,7 +37,7 @@
             <div style="width: 10%;display: inline-block;"  >{{'tkt# ' + item.ticketNumber}}</div>
             <div class="details-content-company" style="width: 29%;display: inline-block;"  >{{item.companyName}}</div>
             <div class="details-content-user" style="width: 15%;display: inline-block;"  >{{item.user}}</div>
-            <div class="details-content-service" style="width: 29%;display: inline-block;"  >{{item.serviceName}}</div>
+            <div class="details-content-service" style="width: 14%;display: inline-block;"  >{{item.serviceName}}</div>
             <div class="time-content"  style="width: auto;display: inline-block;"  >{{getDuration(item.quantity)}}</div>
             </div>
            
