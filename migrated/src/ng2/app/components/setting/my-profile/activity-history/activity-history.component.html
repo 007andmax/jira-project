@@ -1,5 +1,5 @@
 <!-- map area -->
-<div class="map-area">
+<div class="map-area his-map-area">
   <agm-map [latitude]="selectedDevice.latitude" [longitude]="selectedDevice.longitude" 
     [mapTypeControl]='true' [zoom]="15"  [title]="(selectedDevice.city ? selectedDevice.city + ', ' : '') + selectedDevice.country ">
     <agm-marker [latitude]="selectedDevice.latitude" [longitude]="selectedDevice.longitude"></agm-marker>
