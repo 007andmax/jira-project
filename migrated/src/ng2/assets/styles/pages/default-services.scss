@@ -108,11 +108,14 @@
   .qt-number-dropdown-menu {
     flex-direction: column;
     max-height: 144px;
+    height: fit-content;
     padding-top: 8px;
-    position: absolute;
+    position: fixed !important;
     transform: translate(0) !important;
-    top: 37px !important;
-    left: 16px !important;
+    top: unset !important;
+    left: unset !important;
+    // top: 37px !important;
+    // left: 16px !important;
 
     button.dropdown-item {
       text-align: left;
@@ -130,6 +133,13 @@
       display: flex !important;
     }
   }
+
+  .default-services-items-dropdown {
+    width: 140px;
+    min-width: 140px !important;
+
+  }
+
 }
 // add aside
 .default-services-page__aside {
@@ -203,12 +213,35 @@
       border-top: 0;
     }
   }
+
+  .qt-number-input {
+    .icn-product-save {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
 }
 
 app-default-services-item,app-default-services-contracts {
   display: contents;
 }
 
+.default-service-table__gl {
+  .tooltip {
+    top: -5px !important;
+
+    * {
+      text-transform: none !important;
+      text-align: left !important;
+      line-height: 1.33 !important;
+      font-size: 12px !important;
+      color: white !important;
+      font-family: 'Graphik-Regular', sans-serif !important;
+    }
+  }
+}
 
 
 
@@ -225,3 +258,6 @@ app-default-services-item,app-default-services-contracts {
     margin: 0 auto;
   }
 }
+
+
+

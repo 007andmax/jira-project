@@ -444,8 +444,6 @@
   border-bottom-left-radius: 0 !important;
 }
 
-
-
 .qt-dropdown-menu {
   list-style-type: none;
   position: absolute;
@@ -459,6 +457,11 @@
   &.--open-top {
     top: unset;
     bottom: calc(100% + 4px);
+  }
+  &.--fixed {
+    position: fixed !important;
+    top: unset !important;
+    left: unset !important;
   }
   li {
     height: 32px;
@@ -475,7 +478,6 @@
     }
   }
 }
-
 
 .qt-lh-15 {
   line-height: 1.5;
