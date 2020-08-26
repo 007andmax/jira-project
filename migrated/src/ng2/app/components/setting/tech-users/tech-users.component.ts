@@ -219,7 +219,6 @@ export class TechUsersComponent implements AfterViewInit, OnInit, OnDestroy {
       .pipe(
         map(eNotifications => {
           if (eNotifications) {
-            debugger;
             this.IdList.forEach(element => {
               this.archivedtechUseremailNotificationList.push(eNotifications[element]);
             });
