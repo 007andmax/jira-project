@@ -25,7 +25,6 @@ export class DefaultServicesComponent implements OnInit, OnDestroy {
     private defaultServicesStateService: DefaultServicesStateService,
     private defaultServicesRealTimeService: DefaultServicesRealTimeService,
     private confirmStateService: ConfirmStateService,
-
     public cd: ChangeDetectorRef,) { }
 
 

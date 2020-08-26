@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { GlNumber } from 'src/ng2/class/gl-number/gl-number';
 import { Subscription } from 'rxjs';
 import { GlNumberStateService } from 'src/ng2/app/states/gl-number/gl-number-state.service';
@@ -28,6 +28,7 @@ export class DefaultServicesAddComponent implements OnInit {
   constructor(private glNumberStateService: GlNumberStateService,
     private defaultServicesService: DefaultServicesService,
     private taxesStateService: TaxesStateService,
+    public cd: ChangeDetectorRef,
     private glNumberService: GlNumberService,) { }
 
   ngOnInit() {
@@ -35,6 +36,8 @@ export class DefaultServicesAddComponent implements OnInit {
     if (this.glNumberStateService.getGLNumbers().length > 0) this.glNumbers = this.sortGlNumbers(this.glNumberStateService.getGLNumbers());
     let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe((data) => {
       this.glNumbers = this.sortGlNumbers(data);
+      console.log("this.glNumbers",this.glNumbers);
+      this.cd.detectChanges();
     })
     this.sub.add(getOnGlNumbers);
     if (this.taxesStateService.getTaxes().length > 0) this.setDefaultTaxes(this.taxesStateService.getTaxes());
