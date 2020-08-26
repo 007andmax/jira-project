@@ -22,6 +22,9 @@ export class TechServiceReportComponent implements OnInit {
     this.loadingInProgress = data;
     //  this.cd.detectChanges();
   }
+  public getUserName(user) {
+    return `${user.firstName} ${user.lastName}`;
+  }
   public getReport(data) {
     console.log("data", data);
     this.techService = data;
@@ -36,7 +39,7 @@ export class TechServiceReportComponent implements OnInit {
     return `${(hours < 10) ? '0' + hours : hours} : ${(minutes < 10) ? '0' + minutes : minutes}`
   }
   public getDateForHeader(data) {
-    return moment( new Date(data)).format('MMM DD, YYYY');
+    return moment(new Date(data)).format('MMM DD, YYYY');
   }
   public getDate(dateInvoice) {
     let date = new Date(dateInvoice);
