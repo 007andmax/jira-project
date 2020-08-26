@@ -15,7 +15,16 @@ export class TechService {
             this.totalQuantity = data.totalQuantity;
         }
     }
-    public setTechUserId(data) {
+    public setData (data) {
+        this.startDate = data.startDate;
+        this.endDate = data.endDate;
+        this.techUserId = data.techUserId;
+        this.lines = data.lines.map(item => {
+            return new TechServiceItem(item);
+        });
+        this.totalQuantity = data.totalQuantity;
+    }
+    public setTechUserId (data) {
         this.techUserId = data;
     }
     public setList(data) {

@@ -22,6 +22,9 @@ export class TechServiceReportComponent implements OnInit {
     this.loadingInProgress = data;
     //  this.cd.detectChanges();
   }
+  public getUserName(user) {
+    return `${user.firstName} ${user.lastName}`;
+  }
   public getReport(data) {
     this.techService = new TechService(JSON.parse(JSON.stringify(data)));
     this.techUser = this.usersStateService.getAllUsers().find(item => item.id === this.techService.techUserId);

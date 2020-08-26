@@ -11,8 +11,12 @@
 .time-content {
     text-align: right;
 }
-.details-header-company,.details-header-service,.details-content-company,.details-content-service  {
+.details-header-company,.details-header-service,.details-content-company {
     width: auto !important;
+    flex: 1;
+}
+.details-content-service {
+    widows: 20% !important;
     flex: 1;
 }
 .total-hours {
@@ -24,4 +28,7 @@
         float: none !important;
         margin: 0px -7px 20px 0px;
     }
+}
+.details-content-user {
+    width:  15% !important;
 }

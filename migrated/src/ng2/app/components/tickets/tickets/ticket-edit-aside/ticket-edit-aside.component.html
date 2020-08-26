@@ -54,9 +54,9 @@
             <input id="ticket-subject"   [value]="ticketProfile.subject"/>
           </div>
           <div class="ticket-edit-aside__ticket-description-edit"
-               appClickOtside [init]="opened" [class]="'.ticket-edit-aside__ticket-text'" (onOutSide)="toggleNote()"
+               appClickOtside [init]="modeDescription === 'edit'" [class]="'.ticket-edit-aside__ticket-text'" (onOutSide)="toggleNote()"
           >
-          <div  class="form-control editor" contenteditable="true"     id="ticket-note" placeholder="Enter description here"></div> 
+          <div  class="form-control editor" (blur)="modeDescription = 'edit'" contenteditable="true"     id="ticket-note" placeholder="Enter description here"></div> 
           <!-- <textarea id="ticket-note" placeholder="Enter description here"  ></textarea> -->
           </div>
         </div>
