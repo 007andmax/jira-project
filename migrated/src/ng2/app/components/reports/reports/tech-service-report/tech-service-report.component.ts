@@ -27,7 +27,7 @@ export class TechServiceReportComponent implements OnInit {
   }
   public getReport(data) {
     console.log("data", data);
-    this.techService.setData(JSON.parse(JSON.stringify(data));
+    this.techService.setData(JSON.parse(JSON.stringify(data)));
     this.techUser = this.usersStateService.getAllUsers().find(item => item.id === this.techService.techUserId);
     this.onInit = true;
     console.log("this.techUser", this.techUser);
