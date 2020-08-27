@@ -5,8 +5,20 @@
     z-index: 1;
   }
 
+  .sticky-list-table-header {
+    z-index: 1;
+  }
+
   &__table-container {
     overflow-x: auto;
+
+    &.services-list {
+      max-height: calc(100vh - 390px);
+    }
+
+    &.--visible {
+      overflow-x: visible;
+    }
   }
 
   &__question-icon {
@@ -60,6 +72,7 @@
     }
 
     &__taxes {
+      max-width: 100px;
       width: 100px;
     }
 

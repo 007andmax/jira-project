@@ -9,8 +9,9 @@
     </div>
   </div>
 
-  <div class="default-services-page__table-container">
-    <table class="qt-table-modern default-service-table">
+
+  <div class="sticky-list-table-header">
+    <table class="qt-table-modern">
       <thead>
         <tr>
           <th class="default-service-table__service-name pointer" (click)="onFilter('name')">
@@ -41,19 +42,26 @@
           <th class="default-service-table__menu"></th>
         </tr>
       </thead>
+    </table>
+  </div>
+
+
+
+  <div class="default-services-page__table-container services-list">
+    <table class="qt-table-modern default-service-table">
       <tbody>
         <ng-template ngFor let-item
         [ngForOf]="list"
         [ngForTrackBy]="trackById">
         <app-default-services-item [service]="item" (onEditService)="onEditService($event)" ></app-default-services-item>
-</ng-template>
+      </ng-template>
       </tbody>
     </table>
     <div class="loading" *ngIf="showPreloader"></div>
   </div>
 
 
-  <div class="default-services-page__table-container"  *ngIf="!showPreloader">
+  <div class="default-services-page__table-container --visible"  *ngIf="!showPreloader">
     <table class="qt-table-modern default-service-table">
       <thead>
         <tr>
@@ -77,6 +85,6 @@
 </div>
 
 
-  <app-default-services-add *ngIf="showCreateService" (onClose)="showCreateService = false"></app-default-services-add>  
- 
+  <app-default-services-add *ngIf="showCreateService" (onClose)="showCreateService = false"></app-default-services-add>
+
 <app-default-services-edit *ngIf="showEditService" [service]="editService" (onClose)="showEditService = false"></app-default-services-edit>
