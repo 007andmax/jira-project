@@ -37,4 +37,7 @@ export class GlNumberService {
   public setGlNumberContract(id,type) {
     return this.http.post(`${this.apiUrl}glNumber/${id}/${type}`,{});
   }
+  public resetContract(type) {
+    return this.http.post(`${this.apiUrl}glNumber/resetContract/${type}`,{});
+  }
 }

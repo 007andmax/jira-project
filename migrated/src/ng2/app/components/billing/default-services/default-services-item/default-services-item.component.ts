@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { GlNumber } from '../../../reports/class/gl-number';
 import { GlNumberStateService } from 'src/ng2/app/states/gl-number/gl-number-state.service';
 import { DefaultServices } from '../class/default-service';
@@ -9,6 +9,8 @@ import { REMOVE_DEFAULT_SERVICE } from 'src/ng2/app/const/confirm';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
 import { DefaultServicesStateService } from 'src/ng2/app/states/default-services/default-services-state.service';
+import { GlNumberService } from 'src/ng2/app/services/gl-number/gl-number.service';
+import { SelectSearchComponent } from '../../../shared/select-search/select-search.component';
 
 @Component({
   selector: 'app-default-services-item',
@@ -16,6 +18,7 @@ import { DefaultServicesStateService } from 'src/ng2/app/states/default-services
   styleUrls: ['./default-services-item.component.scss']
 })
 export class DefaultServicesItemComponent implements OnInit {
+  @ViewChild('glNumberSelect') glNumberSelect: SelectSearchComponent;
   @Input() service: DefaultServices;
   @Output() onEditService = new EventEmitter<any>();
   glNumbers: Array<GlNumber> = [];
@@ -24,6 +27,7 @@ export class DefaultServicesItemComponent implements OnInit {
     private modalService: NgbModal,
     private defaultServicesStateService: DefaultServicesStateService,
     private defaultServicesService: DefaultServicesService,
+    private glNumberService: GlNumberService,
     private permissionsService: PermissionsService) { }
 
   ngOnInit() {
@@ -53,10 +57,22 @@ export class DefaultServicesItemComponent implements OnInit {
   edit() {
     this.onEditService.emit(this.service);
   }
-  changeGlNumber(item) {
-    this.service.glNumber = item;
-    this.onChangeDefault();
+  onAddGlNumber(data) {
+    this.glNumberService.addGlNumber(data, "").subscribe((res: any) => {
+      this.service.glNumber = res;
+      this.onChangeDefault();
+    })
   }
+  onSelectGlNumbers(data) {
+    this.service.glNumber = data;
+    if (data == null) {
+      this.glNumberSelect.clearWithOutChanges();
+      this.onChangeDefault();
+    } else {
+      this.onChangeDefault();
+    }
+  }
+   
   delete() {
     this.confirmStateService.setConfirmAction(REMOVE_DEFAULT_SERVICE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
