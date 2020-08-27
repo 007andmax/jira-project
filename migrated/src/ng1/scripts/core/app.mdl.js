@@ -11,7 +11,6 @@
       'quicktech.common.directives',
       'quicktech.core.companies',
       'quicktech.core.products',
-      'quicktech.core.services',
       'quicktech.core.billable',
       'quicktech.core.receivable',
       'quicktech.core.leftPanel',
@@ -179,11 +178,6 @@
           url: '/dashboard',
           templateUrl: '/ng1/scripts/core/dashboards/billing-dashboard/billing-dashboard.tpl.html',
           controller: 'quicktech.core.dashboards.billingDashboardCtrl'
-        }))
-        .state('services', waitForServices({
-          url: '/accounting/services',
-          templateUrl: '/ng1/scripts/core/services/services.tpl.html',
-          controller: 'quicktech.core.services.servicesCtrl'
         }))
         .state('new-services', waitForServices({
           url: '/ng2/default-services',

@@ -72,6 +72,9 @@ export class DefaultServicesComponent implements OnInit, OnDestroy {
     this.cd.detectChanges();
 
   }
+  public trackById(index, item) {
+    return item.id;
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
