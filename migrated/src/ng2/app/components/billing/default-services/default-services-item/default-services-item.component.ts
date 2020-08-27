@@ -35,6 +35,7 @@ export class DefaultServicesItemComponent implements OnInit {
     let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe((data) => {
       this.glNumbers = this.sortGlNumbers(data);
     })
+  
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
@@ -65,6 +66,7 @@ export class DefaultServicesItemComponent implements OnInit {
   }
   onSelectGlNumbers(data) {
     this.service.glNumber = data;
+    console.log("this.service",this.service);
     if (data == null) {
       this.glNumberSelect.clearWithOutChanges();
       this.onChangeDefault();

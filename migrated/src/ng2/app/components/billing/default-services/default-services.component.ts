@@ -44,8 +44,8 @@ export class DefaultServicesComponent implements OnInit, OnDestroy {
     let changeServiceArray = this.defaultServicesRealTimeService.changeServiceArray.subscribe(newChange => {
       if (newChange.action === 'SERVICE_SAVED') {
         const Index = this.list.findIndex((item) => item.versionedId.id === newChange.data.versionedId.id);
-        if (Index > -1) this.list[Index] = newChange.data;
-        if (Index === -1) this.list.unshift(newChange.data);
+        if (Index > -1) this.list[Index] = new DefaultServices(newChange.data);
+        if (Index === -1) this.list.unshift(new DefaultServices(newChange.data));
 
       }
       if (newChange.action === 'SERVICE_DELETED') {
