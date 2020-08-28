@@ -79,7 +79,7 @@
             padding-left: 34px;
             padding-right: 30px;
             font-size: 12px;
-            background: url(/html/ng2/assets/img/device/search-explore.svg) no-repeat left 12px center #fff;
+            background: url(/ng2/assets/img/device/search-explore.svg) no-repeat left 12px center #fff;
             &:focus + .clear{
                 visibility: visible;
             }
@@ -95,7 +95,7 @@
             align-items: center;
             justify-content: center;
             font-size: 0;
-            background: url(/html/ng2/assets/img/device/search-clear.svg) no-repeat center transparent;
+            background: url(/ng2/assets/img/device/search-clear.svg) no-repeat center transparent;
             color: #4f5f79;
             height: 100%;
             width: 35px;
@@ -162,7 +162,7 @@
                             background-color: #edf2f6 !important;
                         }
                         &::after{
-                            background: url('/html/ng2/assets/img/device/path-arrow.svg') no-repeat center;
+                            background: url('/ng2/assets/img/device/path-arrow.svg') no-repeat center;
                             position: absolute;
                             right: 12px;
                             width: 8px;
@@ -180,13 +180,13 @@
                             font-family: $graphicMedBold;
                             font-weight: 500;
                             color: #364656;
-                            background: url('/html/ng2/assets/img/device/drive.svg') no-repeat left 16px center;
+                            background: url('/ng2/assets/img/device/drive.svg') no-repeat left 16px center;
                         }
                     }
                     &.folder-list{
                         a{
                             color: #364656;
-                            background: url('/html/ng2/assets/img/device/folder.svg') no-repeat left 16px center;
+                            background: url('/ng2/assets/img/device/folder.svg') no-repeat left 16px center;
                             padding-left: 40px;
                         }
                     }
@@ -194,7 +194,7 @@
             }
 
         }
-        .resizer{height: 100%;width: 8px;background: url('/html/ng2/assets/img/device/expand-column.svg') no-repeat center;cursor:e-resize;}
+        .resizer{height: 100%;width: 8px;background: url('/ng2/assets/img/device/expand-column.svg') no-repeat center;cursor:e-resize;}
     }
     .contant-area{
         display: -ms-flexbox;
@@ -262,10 +262,10 @@
                 height: 8px;
                 font-size: 0;
                 margin-left: 3px;
-                background: url('/html/ng2/assets/img/device/descending.svg') no-repeat center;
+                background: url('/ng2/assets/img/device/descending.svg') no-repeat center;
                 cursor: pointer;
                 &.asc{
-                    background: url('/html/ng2/assets/img/device/ascending.svg') no-repeat center;
+                    background: url('/ng2/assets/img/device/ascending.svg') no-repeat center;
                 }
             }
         }
