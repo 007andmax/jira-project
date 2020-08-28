@@ -214,8 +214,7 @@
         <!--</div>-->
         <div>
           <div append-html-to-body data="deviceReport" ng-if="agent.agentId && agent.type !== 'printer'"
-               url="/ng1/scripts/core/companies/company-profile/tabs/devices-tab/report-device.tpl.html"
-               ng-click="getDeviceReport(agent);redirectDevice(agent);">
+               ng-click="redirectDevice(agent);">
             <i class="dev-btn devices-card pointer" uib-tooltip="report"></i>
           </div>
         </div>
