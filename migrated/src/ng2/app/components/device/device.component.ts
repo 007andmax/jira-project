@@ -25,7 +25,7 @@ export class DeviceComponent implements OnInit {
   restServerAddress = '';
   remoteConnectPort = 0;
   deviceType = '';
-  deviceImg = '../../../../ng2/assets/img/device/device.svg';
+  deviceImg = '/html/ng2/assets/img/device/device.svg';
   closeResult = '';
   constructor(private modalService: NgbModal, private commonHttpServices: CommonHttpServices,
     private commonServices: CommonServices, private toastr: ToastrService,
@@ -65,7 +65,7 @@ export class DeviceComponent implements OnInit {
   ngOnInit(): void {
     this.deviceType = localStorage.getItem('type');
     if (this.deviceType === 'printer') {
-      this.deviceImg = '../../../assets/img/device/Device_printer.svg';
+      this.deviceImg = '/html/ng2/assets/img/device/Device_printer.svg';
     }
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.

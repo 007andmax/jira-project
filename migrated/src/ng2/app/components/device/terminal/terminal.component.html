@@ -26,11 +26,11 @@
     <!-- Right Side bar -->
     <aside class="right-sidebar terminal-sidebar">
       <!-- <a href="javascript:;" class="panel-bar" (click)="toggleTicket();">
-      <img src="../../../../../ng2/assets/img/device/panel-open.svg" alt="Open" title="Ticket" />
+      <img src="/html/ng2/assets/img/device/panel-open.svg" alt="Open" title="Ticket" />
     </a> -->
       <div>
         <a href="javascript:;" class="add-btn" (click)="resetCmdModal();submitted = false;create = !create"
-          ><img src="../../../../../ng2/assets/img/device/add.svg" alt="add"
+          ><img src="/html/ng2/assets/img/device/add.svg" alt="add"
         /></a>
         <!-- Modal Add New Command -->
         <div class="modal-content toggle-area" [class.opened]="create">
@@ -71,7 +71,7 @@
                         #Category="ngModel" 
                         required readonly
                         [class.validation-error]="submitted == true && Category.errors && Category.errors.required">
-                      <img class="icn-sm report-caret-icon" src="../../../../../ng2/assets/img/device/selct-arrow.svg"/>
+                      <img class="icn-sm report-caret-icon" src="/html/ng2/assets/img/device/selct-arrow.svg"/>
                       <div ngbDropdownMenu
                            aria-labelledby="dropdownBasic1">
                            <button *ngFor="let category of cmdCategoryReadList" ngbDropdownItem (click)="commandModal.category = category.name;commandModal.categoryId = category.id;">{{category.name}}</button>
@@ -133,7 +133,7 @@
                   <div class="terminal-cmd-opt">
                     <div class="cmd-list-left">
                       <img
-                        src="../../../../../ng2/assets/img/device/command-line.svg"
+                        src="/html/ng2/assets/img/device/command-line.svg"
                         alt="command-line"
                         title="command-line"
                       />
@@ -166,7 +166,7 @@
                           <li role="menuitem" ngbDropdownItem>
                             <a class="dropdown-item" href="javascript:void(0);" (click)="submitted = false;openEditCommand(cmd)">
                               <img
-                                src="../../../../../ng2/assets/img/device/edit-cmd.svg"
+                                src="/html/ng2/assets/img/device/edit-cmd.svg"
                                 alt="edit-cmd"
                                 title="edit-cmd"
                               />
@@ -176,7 +176,7 @@
                           <li role="menuitem" ngbDropdownItem>
                             <a class="dropdown-item" href="javascript:void(0);" (click)="openModal(template, cmd.id, cmd.title, 'deleteCmd')">
                               <img
-                                src="../../../../../ng2/assets/img/device/remove-terminal.svg"
+                                src="/html/ng2/assets/img/device/remove-terminal.svg"
                                 alt="delete-cmd"
                                 title="delete-cmd"
                               />
@@ -328,7 +328,7 @@
           (click)="runScript = !runScript"
           class="btn btn-primary"
           ><img
-            src="../../../../../ng2/assets/img/device/run-script-blue.svg"
+            src="/html/ng2/assets/img/device/run-script-blue.svg"
             alt="run-script"
           />Run Script</a
         >
@@ -347,7 +347,7 @@
             (click)="runScript = !runScript"
           >
             <img
-              src="../../../../../ng2/assets/img/device/close.svg"
+              src="/html/ng2/assets/img/device/close.svg"
               alt="close"
               title="close"
             />
@@ -399,7 +399,7 @@
                       data-tooltip="Run Script"
                     >
                       <img
-                        src="../../../../../ng2/assets/img/device/play-script.svg"
+                        src="/html/ng2/assets/img/device/play-script.svg"
                         alt="play-script"
                         title="play-script"
                       />
@@ -411,7 +411,7 @@
                       (click)="scriptDetail = !scriptDetail"
                     >
                       <img
-                        src="../../../../../ng2/assets/img/device/view-script.svg"
+                        src="/html/ng2/assets/img/device/view-script.svg"
                         alt="view-script"
                         title="view-script"
                       />
@@ -434,7 +434,7 @@
                       data-tooltip="Run Script"
                     >
                       <img
-                        src="../../../../../ng2/assets/img/device/play-script.svg"
+                        src="/html/ng2/assets/img/device/play-script.svg"
                         alt="play-script"
                         title="play-script"
                       />
@@ -446,7 +446,7 @@
                       (click)="scriptDetail = !scriptDetail"
                     >
                       <img
-                        src="../../../../../ng2/assets/img/device/view-script.svg"
+                        src="/html/ng2/assets/img/device/view-script.svg"
                         alt="view-script"
                         title="view-script"
                       />
@@ -469,7 +469,7 @@
                       data-tooltip="Run Script"
                     >
                       <img
-                        src="../../../../../ng2/assets/img/device/play-script.svg"
+                        src="/html/ng2/assets/img/device/play-script.svg"
                         alt="play-script"
                         title="play-script"
                       />
@@ -481,7 +481,7 @@
                       (click)="scriptDetail = !scriptDetail"
                     >
                       <img
-                        src="../../../../../ng2/assets/img/device/view-script.svg"
+                        src="/html/ng2/assets/img/device/view-script.svg"
                         alt="view-script"
                         title="view-script"
                       />
@@ -504,7 +504,7 @@
                       data-tooltip="Run Script"
                     >
                       <img
-                        src="../../../../../ng2/assets/img/device/play-script.svg"
+                        src="/html/ng2/assets/img/device/play-script.svg"
                         alt="play-script"
                         title="play-script"
                       />
@@ -516,7 +516,7 @@
                       (click)="scriptDetail = !scriptDetail"
                     >
                       <img
-                        src="../../../../../ng2/assets/img/device/view-script.svg"
+                        src="/html/ng2/assets/img/device/view-script.svg"
                         alt="view-script"
                         title="view-script"
                       />
@@ -572,7 +572,7 @@
                       data-tooltip="Clone Script"
                     >
                       <img
-                        src="../../../../../ng2/assets/img/device/copy-script.svg"
+                        src="/html/ng2/assets/img/device/copy-script.svg"
                         alt="copy-script"
                         title="copy-script"
                       />
@@ -584,7 +584,7 @@
                       (click)="scriptDetail = !scriptDetail"
                     >
                       <img
-                        src="../../../../../ng2/assets/img/device/view-script.svg"
+                        src="/html/ng2/assets/img/device/view-script.svg"
                         alt="view-script"
                         title="view-script"
                       />
@@ -607,7 +607,7 @@
                       data-tooltip="Clone Script"
                     >
                       <img
-                        src="../../../../../ng2/assets/img/device/copy-script.svg"
+                        src="/html/ng2/assets/img/device/copy-script.svg"
                         alt="copy-script"
                         title="copy-script"
                       />
@@ -619,7 +619,7 @@
                       (click)="scriptDetail = !scriptDetail"
                     >
                       <img
-                        src="../../../../../ng2/assets/img/device/view-script.svg"
+                        src="/html/ng2/assets/img/device/view-script.svg"
                         alt="view-script"
                         title="view-script"
                       />
@@ -642,7 +642,7 @@
                       data-tooltip="Clone Script"
                     >
                       <img
-                        src="../../../../../ng2/assets/img/device/copy-script.svg"
+                        src="/html/ng2/assets/img/device/copy-script.svg"
                         alt="copy-script"
                         title="copy-script"
                       />
@@ -654,7 +654,7 @@
                       (click)="scriptDetail = !scriptDetail"
                     >
                       <img
-                        src="../../../../../ng2/assets/img/device/view-script.svg"
+                        src="/html/ng2/assets/img/device/view-script.svg"
                         alt="view-script"
                         title="view-script"
                       />
@@ -677,7 +677,7 @@
                       data-tooltip="Clone Script"
                     >
                       <img
-                        src="../../../../../ng2/assets/img/device/copy-script.svg"
+                        src="/html/ng2/assets/img/device/copy-script.svg"
                         alt="copy-script"
                         title="copy-script"
                       />
@@ -689,7 +689,7 @@
                       (click)="scriptDetail = !scriptDetail"
                     >
                       <img
-                        src="../../../../../ng2/assets/img/device/view-script.svg"
+                        src="/html/ng2/assets/img/device/view-script.svg"
                         alt="view-script"
                         title="view-script"
                       />
@@ -701,7 +701,7 @@
                 <li class="next">
                   <a href="javascript:;">
                     <img
-                      src="../../../../../ng2/assets/img/device/prev-pag.svg"
+                      src="/html/ng2/assets/img/device/prev-pag.svg"
                       alt="prev"
                       title="prev"
                     />
@@ -728,7 +728,7 @@
                 <li class="prev">
                   <a href="javascript:;">
                     <img
-                      src="../../../../../ng2/assets/img/device/next-pag.svg"
+                      src="/html/ng2/assets/img/device/next-pag.svg"
                       alt="next-pag"
                       title="next-pag"
                     />
@@ -754,7 +754,7 @@
               (click)="scriptDetail = !scriptDetail"
             >
               <img
-                src="../../../../../ng2/assets/img/device/back.svg"
+                src="/html/ng2/assets/img/device/back.svg"
                 alt="close"
                 title="close"
               /> </a
@@ -816,7 +816,7 @@
     <h2>Delete Script</h2>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <img
-      src="../../../../../ng2/assets/img/device/close.svg"
+      src="/html/ng2/assets/img/device/close.svg"
       alt="close"
       title="close"
     />
@@ -842,7 +842,7 @@
     <h2>Manage Category</h2>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <img
-      src="../../../../../ng2/assets/img/device/close.svg"
+      src="/html/ng2/assets/img/device/close.svg"
       alt="close"
       title="close"
     />
@@ -857,21 +857,21 @@
               <input *ngIf="category.create" type="text" class="form-input" name="cat_{{i}}" [(ngModel)]="category.name" placeholder="Write category Name"/>
               <a *ngIf="!category.create && category.edit" href="javascript:;" class="cat-action edit-cat" data-tooltip="Edit" (click)="updateCategory(category, i)">
                 <img 
-                    src="../../../../../ng2/assets/img/device/save-changes.svg"
+                    src="/html/ng2/assets/img/device/save-changes.svg"
                     alt="save-changes"
                     title="save-changes"
                   />
               </a>
               <a *ngIf="category.create" href="javascript:;" class="cat-action edit-cat" data-tooltip="Add" (click)="createCategory(category)">
                 <img
-                    src="../../../../../ng2/assets/img/device/save-changes.svg"
+                    src="/html/ng2/assets/img/device/save-changes.svg"
                     alt="save-changes"
                     title="save-changes"
                   />
               </a>
               <a *ngIf="!category.edit && !category.create" href="javascript:;" (click)="deleteCategory(category.id, i)" class="cat-action delete" data-tooltip="Delete">
                 <img
-                    src="../../../../../ng2/assets/img/device/remove-terminal.svg"
+                    src="/html/ng2/assets/img/device/remove-terminal.svg"
                     alt="close"
                     title="close"
                   />
@@ -886,7 +886,7 @@
       
       <button type="button" class="btn btn-small" (click)="addNewCategory()">
         <img
-        src="../../../../../ng2/assets/img/device/add-task.svg"
+        src="/html/ng2/assets/img/device/add-task.svg"
         alt="add-task"
         title="add-task"
       /> Add New Category
