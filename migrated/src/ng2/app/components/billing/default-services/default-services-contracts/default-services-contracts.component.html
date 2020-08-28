@@ -7,6 +7,7 @@
     <app-select-search [class]="['light-dropdown', 'new-product-gl-select', 'qt-select-input-40','--fixed']" [list]="glNumbers" #glNumberSelect    
     [placeholder]="'Select GL'"
     [change]="false"
+    [container]="'body'"
             [editItem]="selectedGlNumber"
             [add]="true" [field]="'glNumber'"
             (onAddItem)="onAddGlNumber($event)"

@@ -11,6 +11,7 @@
     [inputFormatter]="formatter"
     [resultFormatter]="formatter"
     [ngbTypeahead]="search"
+    [container]="container"
     (selectItem)="selectItem($event)"
     (input)="onCheckAdd($event)"
     (focus)="focus$.next('')"
