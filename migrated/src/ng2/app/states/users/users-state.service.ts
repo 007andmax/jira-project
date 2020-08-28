@@ -48,19 +48,25 @@ export class UsersStateService {
         const Index = this.allUsers.findIndex((item) => item.id === newChange.data.id);
         if (Index > -1) this.allUsers[Index] = new User(newChange.data);
         if (Index === -1) this.allUsers.unshift(new User(newChange.data));
-
       }
-     
       if (newChange.action === 'USERS_DEARCHIVED') {
         newChange.data.forEach(data => {
           const Index = this.allUsers.findIndex((item) => item.id === data.id);
           if (Index > -1) this.allUsers[Index] = new User(data);
-        });
-       
-        
+        }); 
       }
       this.onChangeUsers.emit(new UserChange(newChange.action,newChange.data,this.allUsers));
     })
+
+    this.usersRealTimeService.changeSubmittedTicket.subscribe(newChange => {
+      if (newChange.action === 'USER_SUBMITTED_TICKET') {
+        const Index = this.allUsers.findIndex((item) => item.id === newChange.data.id);
+        var prevValue = this.allUsers[Index].userStatistic.ticketsSubmitted || 0;
+        prevValue ++;
+        if (Index > -1) this.allUsers[Index].userStatistic.ticketsSubmitted = prevValue;
+      }
+      this.onChangeUsers.emit(new UserChange(newChange.action,newChange.data,this.allUsers));
+    });
   }
   public getChangeUsers() {
     return this.onChangeUsers;

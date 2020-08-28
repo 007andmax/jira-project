@@ -170,18 +170,6 @@
         Utils.handleCallback(future, callback);
       }
 
-      function deleteCategory(categoryId, callback) {
-
-        if (!categoryId) throw 'categoryId is required argument!';
-
-        var future = $http({
-          url: 'https://dev.quicktech.com/products/categories/' + categoryId,
-          method: 'DELETE'
-        });
-
-        Utils.handleCallback(future, callback);
-      }
-
       function saveProduct(product, callback) {
 
         if (!product) throw 'product is required!';
@@ -293,7 +281,6 @@
         getFullListForAutocomplete: getFullListForAutocomplete,
         getCategories: getCategories,
         saveCategory: saveCategory,
-        deleteCategory: deleteCategory,
         saveProduct: saveProduct,
         isILCUnique: isILCUnique,
         isMfgUnique: isMfgUnique,

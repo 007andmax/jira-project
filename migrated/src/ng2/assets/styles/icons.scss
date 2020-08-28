@@ -218,7 +218,7 @@
     background-image: url("assets/img/icons/tag-close.svg");
   }
   &__more {
-    background: url("assets/img/icons/more-vertical-ng2.png") ;
+    background-image: url("assets/img/icons/more-vertical-ng2.png") ;
   }
   &__claim-ticket {
     background-image: url("assets/img/icons/claim-ticket.svg");
@@ -227,10 +227,10 @@
     background: url("assets/img/icons/ticket-status.svg") ;
   }
   &__tips {
-    background: url("assets/img/icons/tips.svg");
+    background-image: url("assets/img/icons/tips.svg");
   }
-  &__check {
-    background-image: url("assets/img/icons/check.png");
+  &__invoice-check {
+    background-image: url("assets/img/icons/invoice-check.svg");
   }
   &__archive {
     background-image: url("assets/img/icons/archive.svg");
@@ -255,6 +255,9 @@
   }
   &__restart {
     background-image: url("assets/img/icons/restart.svg");
+  }
+  &__payment-note {
+    background-image: url("assets/img/icons/saved-note.svg");
   }
   &__shutdown {
     background-image: url("assets/img/icons/shutdown.svg");
@@ -309,6 +312,51 @@
   }
   &__filter-active {
     background-image: url("assets/img/icons/filter-active.svg");
+  }
+
+  &__faster-payment {
+    background-image: url("assets/img/icons/faster-payment.svg");
+  }
+
+  &__email-dark {
+    background-image: url("assets/img/icons/email-dark.svg");
+  }
+
+  &__check {
+    background-image: url("assets/img/icons/check.png");
+  }
+  &__collapse-task {
+    background-image: url("assets/img/icons/collapse-task.svg");
+  }
+  &__read-on {
+    background-image: url("assets/img/icons/read-on.svg");
+  }
+  &__invoice-email {
+    background-image: url("assets/img/icons/invoice-email.svg");
+  }
+  &__get-paid {
+    background-image: url("assets/img/icons/get-paid.svg");
+  }
+  &__edit {
+    background-image: url("assets/img/icons/edit.svg");
+  }
+  &__email-dark {
+    background-image: url("assets/img/icons/email-dark.svg");
+  }
+  &__download-pdf {
+    background-image: url("assets/img/icons/download-pdf.svg");
+  }
+  &__payment-history {
+    background-image: url("assets/img/icons/payment_history.svg");
+  }
+  &__mark-as-read {
+    background-image: url("assets/img/icons/mark_as_read.svg");
+  }
+  &__refund-payment {
+    background-image: url("assets/img/icons/refund-payment.svg");
+  }
+  &__verified {
+    background-image: url("assets/img/icons/verified.svg");
   }
 }
 

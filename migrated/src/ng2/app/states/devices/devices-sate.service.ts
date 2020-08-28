@@ -22,6 +22,9 @@ export class DevicesSateService {
       this.devicesService.getCompanyDevices(data.company.id).subscribe((data) => {
         this.setAllDevices(data);
         this.onInitGetDevices(data);
+      },err => {
+        this.setAllDevices(null);
+        this.onInitGetDevices(null);
       })
     })
     this.devicesRealTimeService.changeDevicesArray.subscribe(newChange => {

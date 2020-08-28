@@ -93,31 +93,4 @@ span.qt-input-search input.qt-input-search {
   }
 }
 
-.qt-checkbox {
-  margin: 0;
-
-  span {
-    border: 1px solid #C4CBD5;
-    background: white;
-    width: 16px;
-    height: 16px;
-    border-radius: 2px;
-    margin: 0;
-    display: block;
-  }
-
-
-  input {
-    opacity: 0;
-    position: absolute;
-    z-index: -100;
-    left: -200vw;
-    &:checked {
-      &~span {
-        background-image: url(assets/img/icons/checkbox-on.svg);
-        border: none;
-      }
-    }
-  }
-}
 

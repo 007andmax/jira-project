@@ -44,8 +44,8 @@ export class InvoiceDto {
         for (const key in data) {
             this[key] = data[key];
         }
-        this.tickets = data.tickets.map(item => {
+        this.tickets = (data.tickets) ? data.tickets.map(item => {
             return new InvoiceProfileTicket(item);
-        })
+        }) : [];
     }
 }

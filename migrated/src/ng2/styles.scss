@@ -2930,8 +2930,20 @@ app-ticket-edit-aside-devices  {
   }
 }
 
-.--input-error {
+input.--input-error {
   border: solid 1px #ff5263 !important;
+
+}
+
+.--input-error {
+  input {
+    border: solid 1px #ff5263 !important;
+    border-left: none !important;
+  }
+  .qt-input-prefix {
+    border: solid 1px #ff5263 !important;
+    border-right: none !important;
+  }
 }
 
 .relative {

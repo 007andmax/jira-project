@@ -5,13 +5,12 @@
   angular.module('quicktech.core.leftPanel').controller('quicktech.core.leftPanel.leftPanelCtrl',
     ['$scope', 'quicktech.common.services.SharedStateService', '$state', '$rootScope', 'DevicesService',
       'quicktech.common.services.PermissionsService',
-      'CompaniesService', 'TutorialsService', '$uibModal',
+      'CompaniesService', '$uibModal',
       'TicketsService', 'ColorsService', 'TagsService', 'CustomStorageService', 'UsersService',
-      '$timeout', '$location', 'ReceivableService', 'TaxesService', 'PaymentsService', 'ProductsService',
+      '$timeout', '$location', 'TaxesService', 'ProductsService',
       'quicktech.common.services.UserConfirmationsService', '$stateParams',
-      function ($scope, SharedStateService, $state, $rootScope, DevicesService, PermissionsService, CompaniesService,
-        TutorialsService, $uibModal, TicketsService, ColorsService, TagsService,
-        CustomStorageService, UsersService, $timeout, $location, ReceivableService, TaxesService, PaymentsService,
+      function ($scope, SharedStateService, $state, $rootScope, DevicesService, PermissionsService, CompaniesService, $uibModal, TicketsService, ColorsService, TagsService,
+        CustomStorageService, UsersService, $timeout, $location, TaxesService,
         ProductsService, UserConfirmationsService, $stateParams) {
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession'),
@@ -1052,9 +1051,7 @@
           $scope.companyProfilePasswordsFilter.userId = getUserIdByUserFullName(value)
         };
 
-        TutorialsService.getTypes(function (resp) {
-          $scope.tutorialTypes = resp;
-        });
+        
 
 
         $scope.changeTicketsTagColor = function (type, colorCode) {
@@ -1129,9 +1126,7 @@
         }, function (value) {
           if (value && value !== '^ ') {
 
-            if (!$rootScope.uploadedReceivable || !$rootScope.uploadedReceivable.list) {
-              uploadReceivable();
-            }
+            
 
             $scope.openedCategory = getOpenedCategory(value);
             if ($scope.openedCategory) {
@@ -1156,9 +1151,7 @@
 
           $scope.clearAllFilters()
 
-          if (section === 'billing') {
-            uploadReceivable();
-          }
+          
 
           if (ifIconPart) {
             deactivateAllCompanyProfileTabs();
@@ -1178,20 +1171,7 @@
 
 
 
-        function uploadReceivable() {
-          ReceivableService.getReceivableInvoicesData($scope, function (resp) {
-            $rootScope.uploadedReceivable = resp;
-          })
-        }
-
-        $scope.$watch(function () {
-          return $rootScope.shouldUpdateReceivable;
-        }, function (val) {
-          if (val) {
-            $rootScope.shouldUpdateReceivable = false;
-            uploadReceivable();
-          }
-        })
+       
 
         $scope.showLeftArrowToggleLeftPanel = function () {
           return window.outerWidth <= 1024
@@ -1640,7 +1620,7 @@
             return 'reports';
           } else if (url.indexOf('quotes') > -1) {
             return 'billing';
-          } else if (url.indexOf('billable') > -1) {
+          } else if (url.indexOf('billable') > -1 || url.indexOf('payments') > -1) {
             return 'billing';
           } else if (url.indexOf('tickets') > -1) {
             return 'tickets';

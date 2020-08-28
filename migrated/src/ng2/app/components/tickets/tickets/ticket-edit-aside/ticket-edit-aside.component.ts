@@ -79,6 +79,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       this.showPreloader = false;
       this.ticketStateService.getServicesList(this.ticketProfile);
       this.ticketStateService.subsribeToTicket(this.ticketProfile.id);
+      this.ticketMessage.reset();
       this.cd.detectChanges();
     })
     this.sub.add(getOnEditTicket);
@@ -192,6 +193,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     this.ticketProfile.updates = updates;
     this.cd.detectChanges();
   }
+   
   onChangeTags(data) {
     if (!this.opened) return;
     this.ticketProfile.tags = data;
@@ -216,6 +218,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
   }
 
   toggleSubject() {
+    console.log("toggleSubject");
     var textCurrent = this.elRef.nativeElement.querySelector("#ticket-subject").value;
     var textOld = this.ticketProfile.subject;
     this.modeSubject = (this.modeSubject === 'view') ? 'edit' : 'view';
@@ -225,14 +228,17 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     }
   }
   toggleNote() {
+    console.log("toggleNote");
     var textCurrent = this.elRef.nativeElement.querySelector("#ticket-note").innerHTML.replace(/<\/?[^>]+>/ig, "");
     var textOld = (this.ticketProfile.note) ?  this.ticketProfile.note.replace(/<\/?[^>]+>/ig, "") : "";
+    this.modeDescription = 'view';
     if (textCurrent != textOld) {
       this.ticketProfile.note = this.elRef.nativeElement.querySelector("#ticket-note").innerHTML;
       this.onChangeSubjectNote();
     }
   }
   onChangeSubjectNote() {
+    console.log("onChangeSubjectNote");
     this.ticketsService.changeSubjectNoteTicket(this.ticketProfile.id, this.ticketProfile.subject, this.ticketProfile.note).subscribe(data => {
     })
   }
@@ -300,7 +306,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
       value.push(currentUser.id);
     }
     this.ticketsService.assignUserToTicket(this.ticketProfile.id, value.join(",")).subscribe(res => {
-      this.ticketMessage.isClaimTicket = false;
+     // this.ticketMessage.isClaimTicket = false;
     })
 
   };
@@ -352,6 +358,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     this.rightPanel.close();
     this.ticketStateService.unsubscribeTicket();
     this.ticketStateService.onTicketClosed();
+    this.ticketMessage.reset();
   }
   getClassType() {
     return `priority-icon ticket-edit-aside__ticket-subject-flag ${(this.ticketProfile.priorityLevel && this.ticketProfile.priorityLevel !== "MEDIUM") ? '--' + this.ticketProfile.priorityLevel.toLowerCase() : ''}`;

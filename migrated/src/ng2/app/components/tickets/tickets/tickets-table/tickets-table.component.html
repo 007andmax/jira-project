@@ -1,19 +1,19 @@
 <div class="table-container" [ngStyle]="{'padding-bottom': (showPendingPreloader) ? '65px' : '0px'}">
-<table class="qt-table-modern ticket-table">
-  <tbody  infiniteScroll
-  [infiniteScrollDistance]="2"
-  [infiniteScrollThrottle]="15"
-  [infiniteScrollDisabled]="infiniteScrollDisabled"
-  (scrolled)="onScroll()">
+  <table class="qt-table-modern ticket-table">
+    <tbody  infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="15"
+    [infiniteScrollDisabled]="infiniteScrollDisabled"
+    (scrolled)="onScroll()">
 
-  <ng-template ngFor let-ticket
-              [ngForOf]="tickets"
-              [ngForTrackBy]="trackById">
-   <app-tickets-table-item [selected]="idEditTicket === ticket.id" (click)="editTicket(ticket.id)" [listColors]="listColors" [statusColor]="statusColor"  [setTicket]="ticket"></app-tickets-table-item>
- </ng-template>
-  </tbody>
-</table>
-<div class="loading pengind-loading" *ngIf="showPendingPreloader"></div>
+    <ng-template ngFor let-ticket
+                [ngForOf]="tickets"
+                [ngForTrackBy]="trackById">
+    <app-tickets-table-item [selected]="idEditTicket === ticket.id" (click)="editTicket(ticket.id)" [listColors]="listColors" [statusColor]="statusColor"  [setTicket]="ticket"></app-tickets-table-item>
+  </ng-template>
+    </tbody>
+  </table>
+  <div class="loading pengind-loading" *ngIf="showPendingPreloader"></div>
   <div class="loading" *ngIf="showPreloader"></div>
 </div>
 

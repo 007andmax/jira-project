@@ -50,11 +50,11 @@ export class InvoiceFormTicketEditServiceComponent implements OnInit {
   onSetEditTaxes() {
     let notFindTax = [];
     let taxes = this.taxes.filter(item => {
-      let index = this.service.taxes.findIndex(tax => tax.id === item.id);
+      let index = this.service.taxes.findIndex(tax => tax.name === item.name && tax.rate === item.rate);
       return (index > -1) ? true : false;
     })
     this.service.taxes.forEach(item => {
-      let index = this.taxes.findIndex(tax => tax.id === item.id);
+      let index = this.taxes.findIndex(tax => tax.name === item.name && tax.rate === item.rate);
       if (index === -1) {
         this.taxesDropDown.addTax(item);
         notFindTax.push(item);

@@ -56,7 +56,7 @@ export class InventoryValidate {
     }
     public checkPriceCost(price, cost) {
         cost = (!cost) ? 0 : cost;
-        this.cost_sale = (Number(price) > Number(cost)) ? true : false;
+        this.cost_sale = (Number(price) >= Number(cost)) ? true : false;
     }
 
     public checkValidDescription(description) {

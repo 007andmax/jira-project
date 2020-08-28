@@ -22,7 +22,11 @@ export class numberDirective {
         });
         if (this.money) {
             this.element.nativeElement.addEventListener("blur", (event) => {
-                if (event.target.value) event.target.value = parseFloat(event.target.value).toFixed(2);
+                if (event.target.value) {
+                    event.target.value = parseFloat(event.target.value).toFixed(2);
+                } else {
+                    event.target.value = 0;
+                }
             });
         }
 
@@ -42,7 +46,5 @@ export class numberDirective {
         } else {
             this.lastValue = 1;
         }
-
     }
-
 }

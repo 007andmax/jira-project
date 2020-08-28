@@ -261,7 +261,7 @@ import { InvoiceRegularNoteComponent } from './components/billing/billable/billa
 
 import { TicketsFilterComponent } from './components/tickets/tickets/tickets-header/tickets-filter/tickets-filter.component';
 import { DisabledBtnModule } from './modules/disabled-btn/disabled-btn.module';
-  import { InvoiceFormTicketInfoComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-info/invoice-form-ticket-info.component';
+import { InvoiceFormTicketInfoComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-info/invoice-form-ticket-info.component';
 import { InvoiceFormTicketEditComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit.component';
 import { InvoiceFormTicketEditServiceComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-service/invoice-form-ticket-edit-service.component';
 import { InvoiceFormTicketEditProductComponent } from './components/billing/billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-product/invoice-form-ticket-edit-product.component';
@@ -272,6 +272,21 @@ import { CreateContractsComponent } from './components/billing/contracts/create-
 import { ContractsHeaderComponent } from './components/billing/contracts/contracts-header/contracts-header.component';
 import { ContractsTableComponent } from './components/billing/contracts/contracts-table/contracts-table.component';
 import { ContractsAsideComponent } from './components/billing/contracts/contracts-aside/contracts-aside.component';
+import { InvoicesComponent } from './components/billing/invoices/invoices.component';
+import { InvoicesAsideComponent } from './components/billing/invoices/invoices-aside/invoices-aside.component';
+import { InvoicesItemComponent } from './components/billing/invoices/invoices-item/invoices-item.component';
+import { InvoicesHeaderComponent } from './components/billing/invoices/invoices-header/invoices-header.component';
+import { InvoicesFilterComponent } from './components/billing/invoices/invoices-header/invoices-filter/invoices-filter.component';
+import { InvoicesAsidePreviewComponent } from './components/billing/invoices/invoices-aside-preview/invoices-aside-preview.component';
+import { PaymentsComponent } from './components/billing/payments/payments.component';
+import { PaymentsHeaderComponent } from './components/billing/payments/payments-header/payments-header.component';
+import { PaymentItemComponent } from './components/billing/payments/payment-item/payment-item.component';
+import { PaymentsFilterComponent } from './components/billing/payments/payments-header/payments-filter/payments-filter.component';
+import { PaymentsAsideComponent } from './components/billing/payments/payments-aside/payments-aside.component';
+import { RefundPaymentComponent } from './components/billing/payments/refund-payment/refund-payment.component';
+import { EditPaymentComponent } from './components/billing/payments/edit-payment/edit-payment.component';
+import { TechServiceReportComponent } from './components/reports/reports/tech-service-report/tech-service-report.component';
+import { AccountingReportComponent } from './components/reports/reports/accounting-report/accounting-report.component';
 
 
 
@@ -408,8 +423,14 @@ angular.module('quicktech')
     'billableComponent',
     downgradeComponent({ component: BillableComponent }))
   .directive(
+    'invoicesComponent',
+    downgradeComponent({ component: InvoicesComponent }))
+  .directive(
     'billableTicketsComponent',
     downgradeComponent({ component: BillableTicketsComponent }))
+  .directive(
+    'paymentsComponent',
+    downgradeComponent({ component: PaymentsComponent }))
   .directive(
     'inventoryComponent',
     downgradeComponent({ component: InventoryComponent }))
@@ -674,6 +695,21 @@ angular.module('quicktech')
     ContractsHeaderComponent,
     ContractsTableComponent,
     ContractsAsideComponent,
+    InvoicesComponent,
+    InvoicesAsideComponent,
+    InvoicesItemComponent,
+    InvoicesHeaderComponent,
+    InvoicesFilterComponent,
+    InvoicesAsidePreviewComponent,
+    PaymentsComponent,
+    PaymentsHeaderComponent,
+    PaymentItemComponent,
+    PaymentsFilterComponent,
+    PaymentsAsideComponent,
+    RefundPaymentComponent,
+    EditPaymentComponent,
+    TechServiceReportComponent,
+    AccountingReportComponent,
   ],
   imports: [
     BrowserModule,
@@ -747,7 +783,10 @@ angular.module('quicktech')
     ModalCustomShareScreenComponent,
     BillableComponent,
     BillableTicketsComponent,
-    ContractsComponent
+    ContractsComponent,
+    InvoicesComponent,
+    BillableTicketsComponent,
+    PaymentsComponent
     // RecurringTicketsComponent
   ],
   exports: [

@@ -1,0 +1,146 @@
+<div class="invoices-page__aside">
+
+  <div class="aside-header qt-df qt-ai-c qt-jc-sb qt-pr-16 qt-pl-32">
+
+    <div class="qt-fs-20 qt-ff-gm qt-color-dark">
+      Edit Payment
+    </div>
+
+    <div class="qt-df qt-ai-c" (click)="close()">
+      <div class="icon__close qt-sz-24 qt-pointer qt-ic-c "></div>
+    </div>
+
+  </div>
+
+<div class="billing-aside-scroll-content">
+
+    <div class="qt-df qt-pos-rel address-block">
+      <div class="qt-w50 qt-pt-16 qt-pr-24 qt-pl-32 qt-pb-24">
+        <div class="qt-input-block">
+          <label class="qt-lh-154">Customer Name</label>
+          <app-select-search class="search-company invoices-company-filter"  #companyDp  [placeholder]="'Select Company'"
+    [change]="false" [isDisabled]="true" [class]="['qt-dropdown']" [field]="'name'" [editItem]="selectedCompany" [list]="companies"
+     ></app-select-search>
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="qt-df qt-pt-16 qt-pl-30 qt-pr-30 qt-mb-16">
+
+      <div class="qt-input-block qt-mr-16 qt-w100">
+        <label class="qt-lh-154">Payment Date</label>
+        <app-date-picker [formatDate]="formatDate" [editMode]="true" [editDate]="payment.createdAt" [useMinDate]="false" [useMaxDate]="true" (onChange)="onChangeDate($event)"></app-date-picker>
+
+      </div>
+
+      <div class="qt-input-block qt-mr-16 qt-w100">
+        <label class="qt-lh-154">Amount Received
+        </label>
+        <div class="qt-df"  [ngClass]="{'--input-error':!validate.getAmountReceived()}">
+          <div class="qt-input-prefix">$</div><input class="qt-input-prepend" number
+          [money]="true"
+          [(ngModel)]="amountReceived"
+          (change)="onChangeAmountReceived($event)"
+          appToFixed >
+
+          <mat-error class="qt-tooltip-error" *ngIf="!validate.getAmountReceived()">
+            You must use the entire amount. $ {{getUnUsedAmountReceived()}} left unused
+          </mat-error>
+        </div>
+
+      </div>
+
+      <div class="qt-input-block qt-mr-16 qt-w100">
+        <label class="qt-lh-154">Payment Mode</label>
+        <app-select-search class="search-company invoices-status-filter"  #statusDp  [placeholder]="'Select Status'"
+        [change]="false" [editItem]="selectedPaymentMode" [class]="['qt-dropdown']" [isBlockClear]="true" [field]="'title'" [list]="paymentModes"
+        (onSelectedItem)="onSelectPaymentModes($event)"></app-select-search>
+      </div>
+
+      <div class="qt-input-block qt-w100">
+        <label class="qt-lh-154">Reference#</label>
+        <input type="text"  [(ngModel)]="editPayment.reference">
+      </div>
+    </div>
+
+
+   <div class="qt-pl-32 qt-pr-32">
+    <div class="qt-df qt-jc-sb qt-mb-12 qt-ai-c">
+      <div class="qt-fs-16 qt-ff-sb qt-color-dark qt-lh-163">Unpaid Invoices</div>
+      <div class="qt-fs-12 qt-ff-gm qt-color-info qt-lh-133 pointer" *ngIf="checkShowClearAmounts()"  (click)="clearAmounts()">Clear applied amount</div>
+    </div>
+
+    <table class="unpaid-table qt-mb-16" colspan="0">
+      <thead>
+        <tr>
+          <th class="unpaid-table__invoice qt-text-left">Invoice#</th>
+          <th class="unpaid-table__date qt-text-left">Invoice Date</th>
+          <th class="unpaid-table__amount qt-text-right">Invoice Amount</th>
+          <th class="unpaid-table__due qt-text-right">Amount Due</th>
+          <th class="unpaid-table__payment qt-text-right">Payment</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-template ngFor let-invoice
+                    [ngForOf]="editPayment.paymentData"
+                    let-i="index"
+                    [ngForTrackBy]="trackById">
+        <tr>
+          
+          <td class="unpaid-table__invoice" [textContent]="'INV ' + invoice.invoiceNumber"></td>
+          <td class="unpaid-table__date" [textContent]="getDate(invoice.invoiceDate)"></td>
+          <td class="unpaid-table__amount qt-text-right" [textContent]="invoice.invoiceAmount | currency"></td>
+          <td class="unpaid-table__due qt-text-right" [textContent]="invoice.invoicePaidDue | currency"></td>
+          <td class="unpaid-table__payment qt-text-right"  ><input class="payment-input"   number
+            [money]="true"
+            [ngModel]="invoice.paidAmount"
+            (ngModelChange)="onChangePayment($event,invoice)"
+            appToFixed /></td>
+        </tr>
+</ng-template>
+
+      </tbody>
+    </table>
+
+   </div>
+    <div class="summary-info qt-df qt-pl-30 qt-pr-30 qt-pb-24 qt-jc-sb">
+      <div>
+
+        <div class="summary-info__notes qt-pt-16">
+          <div class="qt-fs-13 qt-lh-154 qt-pb-12"><span class="qt-ff-gm">Notes</span> (Internal use. Not visible to customer)</div>
+          <div>
+            <textarea class="summary-info__textarea qt-textarea" [(ngModel)]="editPayment.note" placeholder="Type your custom note here" appTextArea    maxlength="250"   cols="30" rows="1"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="invoice-total qt-color-dark" >
+          <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12">
+            <div>Sub Total</div>
+            <div [textContent]="getSubtotal() | currency"></div>
+          </div>
+          <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12">
+            <div>Total Payment</div>
+            <div [textContent]="amountReceived | currency"></div>
+          </div>
+         
+
+        </div>
+      </div>
+    </div>
+
+</div>
+
+ <div class="aside-footer qt-pr-30 qt-pl-30 qt-pb-16 qt-pt-16 qt-df qt-ai-c qt-jc-sb">
+  <div class="qt-df">
+    <button class="qt-button qt-mr-12" appDisabledBtn #recordPayment="disabled" (onClick)="edit()" ><span *ngIf="!recordPayment.isBlock()">Record Payment</span> <app-preloader-ticket *ngIf="recordPayment.isBlock()"></app-preloader-ticket></button>
+    <button class="qt-button --gray" (click)="close()">Cancel</button>
+  </div>
+ </div>
+
+
+
+</div>

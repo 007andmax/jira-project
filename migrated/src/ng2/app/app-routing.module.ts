@@ -33,6 +33,9 @@ import { CompanyTicketsComponent } from './components/company-tickets/company-ti
 import { BillableComponent } from './components/billing/billable/billable.component';
 import { BillableTicketsComponent } from './components/billing/billable/billable-tickets/billable-tickets.component';
 import { ContractsComponent } from './components/billing/contracts/contracts.component';
+import { InvoicesComponent } from './components/billing/invoices/invoices.component';
+import { PaymentsComponent } from './components/billing/payments/payments.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -181,13 +184,21 @@ const routes: Routes = [
     component: BillableComponent,
   },
   {
+    path: 'ng2/invoices',
+    component: InvoicesComponent,
+  },
+  {
     path: 'ng2/billable-tickets',
     component: BillableTicketsComponent,
   },
   {
     path: 'ng2/contracts',
     component: ContractsComponent,
-  }
+  },
+  {
+    path: 'ng2/payments',
+    component: PaymentsComponent,
+  },
 ];
 
 /**

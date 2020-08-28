@@ -862,10 +862,10 @@
 
 
         <div class="center-category__category"
-             ng-class="{active: $state.includes('receivable')}"
-             ng-click="stateGo($event, 'receivable', {mode: 'list'})">
-          Invoices
-        </div>
+        ng-class="{active: $state.includes('new-billable-invoices')}"
+        ng-click="stateGo($event, 'new-billable-invoices')">
+     Invoices
+   </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('quotes-component')}"
              ng-click="stateGo($event, 'quotes-component')">
@@ -881,9 +881,9 @@
              ng-click="stateGo($event, 'receipt-archive', {mode: 'group-by-company'})">
           Receipt Archive
         </div> -->
-        <div class="center-category__category"
-             ng-class="{active: $state.includes('new-payments')}"
-             ng-click="stateGo($event, 'new-payments')">
+        <div class="center-category__category" 
+        ng-class="{active: $state.includes('new-payments-ng2')}"
+          ng-click="stateGo($event, 'new-payments-ng2')">
           Payments
         </div>
         <!-- <div class="center-category__category"

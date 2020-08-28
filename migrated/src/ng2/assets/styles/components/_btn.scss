@@ -34,6 +34,15 @@
       color: #16a4fa;
     }
 
+    &.--transparent {
+      border: none;
+      background: transparent;
+      text-decoration: underline;
+      color: #16a4fa;
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+
     &.--btn40h {
       padding-left: 20px;
       padding-right: 20px;

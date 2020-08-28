@@ -47,7 +47,6 @@ export class InvoiceFormEditCustomerComponent implements OnInit, OnDestroy {
       });
     google.maps.event.addListener(autocomplete, 'place_changed', () => {
       const place = autocomplete.getPlace();
-
       this.invokeEvent(place);
     });
   }

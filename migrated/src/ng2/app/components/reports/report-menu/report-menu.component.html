@@ -1,5 +1,49 @@
 <!--MENU FOR NON-TECH REPORTS-->
 <div class="report-menu">
+  <div *ngIf="report === 'accounting-report'">
+    <div class="run-report-content clearfix" [ngClass]="className">
+      <div class="new-reports-reverse">
+        <button class="form-group btn btn-success" (click)="getReportByAccounting()">Get
+          Report
+        </button>
+
+      
+        <div class="form-group content">
+          <app-multi-datepicker #dp (selectedDate)="filterByDate($event)"></app-multi-datepicker>
+          <mat-error *ngIf="!validate.getDates()">
+            Please select the dates
+          </mat-error>
+        </div>
+        <div class="form-group content custom-width dropdown-height">
+          <app-select-client-company   [blockEditMode]="true" style="width: 75%;" class="light-dropdown"  
+            (selectedItem)="selectClient($event)"></app-select-client-company>
+            <mat-error *ngIf="!validate.getCompany()">
+              Please select the company name
+            </mat-error>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="report === 'tech-service'">
+    <div class="run-report-content clearfix" [ngClass]="className">
+      <div class="new-reports-reverse">
+        <button class="form-group btn btn-success" (click)="getReportByTechService()">Get
+          Report
+        </button>
+
+      
+        <div class="form-group content">
+          <app-multi-datepicker #dp (selectedDate)="filterByDate($event)"></app-multi-datepicker>
+          <mat-error *ngIf="!validate.getDates()">
+            Please select the dates
+          </mat-error>
+        </div>
+        <div class="grey-dropdown form-group content select-users-list" >
+          <app-tech-users-list-report (onChange)="onSelectTechUser($event)"></app-tech-users-list-report>
+        </div>
+      </div>
+    </div>
+  </div>
   <div *ngIf="report === 'income-accounts'">
     <div class="run-report-content clearfix" [ngClass]="className">
       <div class="new-reports-reverse">

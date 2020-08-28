@@ -12,26 +12,26 @@ import { Subscription } from 'rxjs';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss']
 })
-export class ProductListComponent implements OnInit,OnDestroy {
+export class ProductListComponent implements OnInit, OnDestroy {
   @ViewChild('products') products_dropDown: NgbDropdown;
   @Output() selectedProductItem = new EventEmitter<any>();
   itemList: any;
   @Input() editItem: any;
   @Input() type: string;
-  classAddProduct:string
+  classAddProduct: string
   public isFormValid = false;
   isCreateproduct: boolean = false;
   search: string = '';
   resetSearch: boolean = false;
   selectedItem = false;
-  sub:Subscription = new Subscription();
+  sub: Subscription = new Subscription();
   /**
    * Creates an instance of the ProductListComponent with the injected services
    * @param {ElementRef} elRef Service to work with template
    */
-  constructor(private elRef: ElementRef, 
-    public cd: ChangeDetectorRef, 
-    private inventoryStateService:InventoryStateService) { }
+  constructor(private elRef: ElementRef,
+    public cd: ChangeDetectorRef,
+    private inventoryStateService: InventoryStateService) { }
 
 
   /**
@@ -43,7 +43,7 @@ export class ProductListComponent implements OnInit,OnDestroy {
     if (this.type === 'RECURRING-TICKET') this.classAddProduct = 'recurring-ticket-add-product';
     if (this.type === 'TICKET') this.classAddProduct = 'ticket-add-product';
     if (this.inventoryStateService.getListProducts().length > 0) this.itemList = this.inventoryStateService.getListProducts();
-   let getOnProducts =  this.inventoryStateService.getOnProducts().subscribe(data => {
+    let getOnProducts = this.inventoryStateService.getOnProducts().subscribe(data => {
       this.itemList = data;
       this.onUpdateList();
     })
@@ -77,7 +77,7 @@ export class ProductListComponent implements OnInit,OnDestroy {
 
   }
 
-  
+
   onCreateProduct() {
     this.products_dropDown.close();
     this.isCreateproduct = true;
