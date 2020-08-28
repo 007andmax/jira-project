@@ -231,8 +231,8 @@
                          autocomplete="off"
                          class="cmn-select form-input"
                          readOnly>
-                  <img *ngIf="ticketModal.company.name == ''" class="icn-sm report-caret-icon" src=".//html/../ng2/assets/img/device/selct-arrow.svg"/>
-                  <img *ngIf="ticketModal.company.name != ''" (click)="clearDropdown('company');" class="icn-sm report-close-icon" src=".//html/../ng2/assets/img/device/close.svg"/>
+                  <img *ngIf="ticketModal.company.name == ''" class="icn-sm report-caret-icon" src="/html/ng2/assets/img/device/selct-arrow.svg"/>
+                  <img *ngIf="ticketModal.company.name != ''" (click)="clearDropdown('company');" class="icn-sm report-close-icon" src="/html/ng2/assets/img/device/close.svg"/>
                   <div ngbDropdownMenu
                        aria-labelledby="dropdownBasic1">
                     <button *ngFor="let company of companyClientList" ngbDropdownItem (click)="setUserList(company);">{{company.name}}</button>
@@ -258,8 +258,8 @@
                          #User="ngModel"
                          class="cmn-select form-input" required readOnly
                          [class.validation-error]="submitted == true && User.errors && User.errors.required">
-                  <img *ngIf="ticketModal.createduser.name == ''" class="icn-sm report-caret-icon" src=".//html/../ng2/assets/img/device/selct-arrow.svg"/>
-                  <img *ngIf="ticketModal.createduser.name != ''" (click)="clearDropdown('user');" class="icn-sm report-close-icon" src=".//html/../ng2/assets/img/device/close.svg"/>
+                  <img *ngIf="ticketModal.createduser.name == ''" class="icn-sm report-caret-icon" src="/html/ng2/assets/img/device/selct-arrow.svg"/>
+                  <img *ngIf="ticketModal.createduser.name != ''" (click)="clearDropdown('user');" class="icn-sm report-close-icon" src="/html/ng2/assets/img/device/close.svg"/>
                   <div ngbDropdownMenu
                        aria-labelledby="createduser">
                     <button *ngFor="let user of usersList" (click)="setUserData(user)" ngbDropdownItem>{{user.firstName}} {{user.lastName}}</button>
@@ -277,8 +277,8 @@
                 <div class="cmn-dropdown">
                   <div (click)="toggle('assign')" class="drop-down-select">
                       <span  class="d-block" >{{assignToLabel == '' ? 'Select User to assign' : assignToLabel}}</span>
-                      <img *ngIf="assignToLabel == ''" class="icn-sm report-caret-icon" src=".//html/../ng2/assets/img/device/selct-arrow.svg"/>
-                      <img *ngIf="assignToLabel != ''" (click)="clearDropdown('assign');" class="icn-sm report-close-icon" src=".//html/../ng2/assets/img/device/close.svg"/>
+                      <img *ngIf="assignToLabel == ''" class="icn-sm report-caret-icon" src="/html/ng2/assets/img/device/selct-arrow.svg"/>
+                      <img *ngIf="assignToLabel != ''" (click)="clearDropdown('assign');" class="icn-sm report-close-icon" src="/html/ng2/assets/img/device/close.svg"/>
                   </div>
                   
                   <div class="cmn-dropdon-list" *ngIf="expand">
@@ -310,8 +310,8 @@
                          autocomplete="off"
                          class="cmn-select form-input"
                          readOnly>
-                  <img *ngIf="ticketModal.linkedAgentId.hostName == ''" class="icn-sm report-caret-icon" src=".//html/../ng2/assets/img/device/selct-arrow.svg"/>
-                  <img *ngIf="ticketModal.linkedAgentId.hostName != ''" (click)="clearDropdown('device');" class="icn-sm report-close-icon" src=".//html/../ng2/assets/img/device/close.svg"/>
+                  <img *ngIf="ticketModal.linkedAgentId.hostName == ''" class="icn-sm report-caret-icon" src="/html/ng2/assets/img/device/selct-arrow.svg"/>
+                  <img *ngIf="ticketModal.linkedAgentId.hostName != ''" (click)="clearDropdown('device');" class="icn-sm report-close-icon" src="/html/ng2/assets/img/device/close.svg"/>
                   <div ngbDropdownMenu
                        aria-labelledby="linkAgent">
                     <button *ngFor="let agent of linkedAgentList" (click)="ticketModal.linkedAgentId = agent" ngbDropdownItem>{{agent.hostName}}</button>
