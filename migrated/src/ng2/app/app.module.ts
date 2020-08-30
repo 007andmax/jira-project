@@ -287,6 +287,11 @@ import { RefundPaymentComponent } from './components/billing/payments/refund-pay
 import { EditPaymentComponent } from './components/billing/payments/edit-payment/edit-payment.component';
 import { TechServiceReportComponent } from './components/reports/reports/tech-service-report/tech-service-report.component';
 import { AccountingReportComponent } from './components/reports/reports/accounting-report/accounting-report.component';
+import { ContractsAsideSelectTypeComponent } from './components/billing/contracts/contracts-aside/contracts-aside-select-type/contracts-aside-select-type.component';
+import { ContractsAsideHourlyBillingComponent } from './components/billing/contracts/contracts-aside/contracts-aside-hourly-billing/contracts-aside-hourly-billing.component';
+import { ContractsAsideBlockTimeBillingComponent } from './components/billing/contracts/contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing.component';
+import { ContractsAsideUserDeviceBillingComponent } from './components/billing/contracts/contracts-aside/contracts-aside-user-device-billing/contracts-aside-user-device-billing.component';
+import { ContractsAsideProductServiceContractsComponent } from './components/billing/contracts/contracts-aside/contracts-aside-product-service-contracts/contracts-aside-product-service-contracts.component';
 
 
 
@@ -710,6 +715,11 @@ angular.module('quicktech')
     EditPaymentComponent,
     TechServiceReportComponent,
     AccountingReportComponent,
+    ContractsAsideSelectTypeComponent,
+    ContractsAsideHourlyBillingComponent,
+    ContractsAsideBlockTimeBillingComponent,
+    ContractsAsideUserDeviceBillingComponent,
+    ContractsAsideProductServiceContractsComponent,
   ],
   imports: [
     BrowserModule,
