@@ -4,7 +4,7 @@
   <td class="default-service-table__taxes" [textContent]="getSelectedTaxNames(service.taxes)"></td>
 
   <td class="default-service-table__gl">
-    <app-select-search [class]="['light-dropdown', 'new-product-gl-select', 'qt-select-input-40']" [list]="glNumbers" #glNumberSelect
+    <app-select-search [class]="['light-dropdown', 'new-product-gl-select']" [list]="glNumbers" #glNumberSelect
             [placeholder]="'Select GL'"
             [container]="'body'"
             [change]="false"

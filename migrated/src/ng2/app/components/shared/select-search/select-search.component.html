@@ -1,13 +1,13 @@
 <div [ngClass]="class" >
   <input
-  [ngClass]="{'disabled': isDisabled}"
-  [disabled]="isDisabled"
+    [ngClass]="['qt-select', {'disabled': isDisabled}]"
+    [disabled]="isDisabled"
     [id]="id"
     [placeholder]="placeholder"
     type="text"
     [(ngModel)]="selectedItem"
     class="pointer typeahead-focus1"
-    [ngClass]="(!valid) ? 'no-valid' : ''"
+    [ngClass]="(!valid) ? 'no-valid' : 'AAAAAAAAAAAAAAAAA'"
     [inputFormatter]="formatter"
     [resultFormatter]="formatter"
     [ngbTypeahead]="search"
