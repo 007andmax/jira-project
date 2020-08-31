@@ -1,0 +1,17 @@
+<div class="left-panel-ng2__content--filters">
+  <app-select-search class="search-company"  #companyDp  [placeholder]="'Select Company'"
+    [change]="false" [class]="['qt-dropdown']" [field]="'name'" [list]="companies"
+    (onSelectedItem)="onSelectCompany($event)"></app-select-search>
+
+
+  <app-select-search  class="search-users"   #typesDp [placeholder]="'Contract Type'"
+    [change]="false" [class]="['qt-dropdown']"  [list]="listsTypes" [field]="'title'"
+    (onSelectedItem)="onSelectType($event)"></app-select-search>
+
+
+    <app-multi-datepicker   class="qt-input-block invoices-date-filter search-type" #datesDp (selectedDate)="filterByDate($event)"></app-multi-datepicker>
+
+    <app-select-search  class="search-status"  #statusDp  [placeholder]="'Select by Status'"
+    [change]="false" [class]="['qt-dropdown']" [list]="listsStatus" [field]="'title'"
+    (onSelectedItem)="onSelectStatus($event)"></app-select-search>
+</div>

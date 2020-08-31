@@ -293,6 +293,7 @@ import { ContractsAsideHourlyBillingComponent } from './components/billing/contr
 import { ContractsAsideBlockTimeBillingComponent } from './components/billing/contracts/contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing.component';
 import { ContractsAsideUserDeviceBillingComponent } from './components/billing/contracts/contracts-aside/contracts-aside-user-device-billing/contracts-aside-user-device-billing.component';
 import { ContractsAsideProductServiceContractsComponent } from './components/billing/contracts/contracts-aside/contracts-aside-product-service-contracts/contracts-aside-product-service-contracts.component';
+import { ContractsFilterComponent } from './components/billing/contracts/contracts-filter/contracts-filter.component';
 
 
 
@@ -722,6 +723,7 @@ angular.module('quicktech')
     ContractsAsideBlockTimeBillingComponent,
     ContractsAsideUserDeviceBillingComponent,
     ContractsAsideProductServiceContractsComponent,
+    ContractsFilterComponent,
   ],
   imports: [
     BrowserModule,
