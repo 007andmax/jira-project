@@ -366,8 +366,63 @@
   }
 // end user device billing
 }
+app-contracts-filter {
+  width: 100%;
+}
+.contracts-company-filter {
+  width: 35%;
+  margin-right: 8px;
+  input {
+    color: #364656
+  }
+  input::placeholder {
+    color: #4f5f79;
+    font-size: 12px;
+  }
+}
 
+.contracts-status-filter {
+  width: 21%;
+  
+  input {
+    color: #364656
+  }
+  input::placeholder {
+    color: #4f5f79;
+    font-size: 12px;
+  }
+}
+.contracts-number-filter {
+  width: 21%;
+  margin-right: 8px;
+  color: #364656;
+  &::placeholder {
+    color: #4f5f79;
+    font-size: 12px;
+  }
+}
 
+.contracts-date-filter {
+  width: 23%;
+  margin-right: 8px;
+  input {
+    color: #364656
+  }
+  input::placeholder {
+    color: #4f5f79;
+    font-size: 12px;
+  }
+  .date-picker {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+  }
+  .dropdown-menu {
+    left: auto;
+    right: 0;
+    margin-top: 0;
+  }
+}
 @media (min-width: 1920px) {
   .contracts-table {
     width: 100% !important;
