@@ -11,31 +11,31 @@
   <table class="qt-table-modern contracts-table">
     <thead>
       <tr>
-        <th class="contracts-table__company pointer">
+        <th class="contracts-table__company pointer" (click)="setFilter('company')">
           Company
           <span class="qt-table-modern__sorting"></span>
         </th>
-        <th class="contracts-table__description pointer">
+        <th class="contracts-table__description pointer" (click)="setFilter('description')">
           Description
           <span class="qt-table-modern__sorting"></span>
         </th>
-        <th class="contracts-table__contract-type pointer">
+        <th class="contracts-table__contract-type pointer" (click)="setFilter('type')">
           Contract Type
           <span class="qt-table-modern__sorting"></span>
         </th>
-        <th class="contracts-table__status pointer">
+        <th class="contracts-table__status pointer" (click)="setFilter('status')">
           Status
           <span class="qt-table-modern__sorting"></span>
         </th>
-        <th class="contracts-table__start-date pointer">
+        <th class="contracts-table__start-date pointer" (click)="setFilter('start_date')">
           Start Date
           <span class="qt-table-modern__sorting"></span>
         </th>
-        <th class="contracts-table__review-date pointer">
+        <th class="contracts-table__review-date pointer" (click)="setFilter('review_date')">
           Review Date
           <span class="qt-table-modern__sorting"></span>
         </th>
-        <th class="contracts-table__amount pointer">
+        <th class="contracts-table__amount pointer" (click)="setFilter('amount')">
           Amount
           <span class="qt-table-modern__sorting"></span>
         </th>

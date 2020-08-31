@@ -1,0 +1,25 @@
+import { Injectable } from '@angular/core';
+import { environment } from 'src/ng2/environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import { ContractItem } from '../../components/billing/contracts/class/contract-item';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ContractsService {
+
+  private apiUrl = environment.apiUrl;
+  
+  /**
+   * Companies api service constructor
+   * @param {HttpClient} http Service to work with request
+   */
+  public constructor(
+    private http: HttpClient
+  ) {}
+
+  public getServiceAgreements() {
+    return this.http.get(this.apiUrl + 'serviceAgreements/').pipe(map((data: any) => data.map(item => new ContractItem(item))));
+  }
+}

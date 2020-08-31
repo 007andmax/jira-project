@@ -1,96 +1,13 @@
 <div class="table-container">
   <table class="qt-table-modern contracts-table">
     <tbody>
-      <tr>
-        <td class="contracts-table__company">123dentist Summit Dental</td>
-        <td class="contracts-table__description" >Managed Services</td>
-        <td class="contracts-table__contract-type">Service Contract/by device</td>
-        <td class="contracts-table__status"><span class="tag__modern --warning">Expiring</span></td>
-        <td class="contracts-table__start-date">03 Sep 2020</td>
-        <td class="contracts-table__review-date">09 Jun 2020</td>
-        <td class="contracts-table__amount">$19,433.70</td>
-        <td class="contracts-table__menu">
-          <div class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"></div>
-        </td>
-      </tr>
 
-      <tr>
-        <td class="contracts-table__company">123dentist Summit Dental</td>
-        <td class="contracts-table__description" >Managed Services</td>
-        <td class="contracts-table__contract-type">Service Contract/by device</td>
-        <td class="contracts-table__status"><span class="tag__modern --warning">Expiring</span></td>
-        <td class="contracts-table__start-date">03 Sep 2020</td>
-        <td class="contracts-table__review-date">09 Jun 2020</td>
-        <td class="contracts-table__amount">$19,433.70</td>
-        <td class="contracts-table__menu">
-          <div class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"></div>
-        </td>
-      </tr>
-
-      <tr>
-        <td class="contracts-table__company">123dentist Summit Dental</td>
-        <td class="contracts-table__description" >Managed Services</td>
-        <td class="contracts-table__contract-type">Service Contract/by device</td>
-        <td class="contracts-table__status"><span class="tag__modern --warning">Expiring</span></td>
-        <td class="contracts-table__start-date">03 Sep 2020</td>
-        <td class="contracts-table__review-date">09 Jun 2020</td>
-        <td class="contracts-table__amount">$19,433.70</td>
-        <td class="contracts-table__menu">
-          <div class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"></div>
-        </td>
-      </tr>
-
-      <tr>
-        <td class="contracts-table__company">123dentist Summit Dental</td>
-        <td class="contracts-table__description" >Managed Services</td>
-        <td class="contracts-table__contract-type">Service Contract/by device</td>
-        <td class="contracts-table__status"><span class="tag__modern --warning">Expiring</span></td>
-        <td class="contracts-table__start-date">03 Sep 2020</td>
-        <td class="contracts-table__review-date">09 Jun 2020</td>
-        <td class="contracts-table__amount">$19,433.70</td>
-        <td class="contracts-table__menu">
-          <div class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"></div>
-        </td>
-      </tr>
-
-      <tr>
-        <td class="contracts-table__company">123dentist Summit Dental</td>
-        <td class="contracts-table__description" >Managed Services</td>
-        <td class="contracts-table__contract-type">Service Contract/by device</td>
-        <td class="contracts-table__status"><span class="tag__modern --error">Terminated</span></td>
-        <td class="contracts-table__start-date">03 Sep 2020</td>
-        <td class="contracts-table__review-date">09 Jun 2020</td>
-        <td class="contracts-table__amount">$19,433.70</td>
-        <td class="contracts-table__menu">
-          <div class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"></div>
-        </td>
-      </tr>
-
-      <tr>
-        <td class="contracts-table__company">123dentist Summit Dental</td>
-        <td class="contracts-table__description" >Managed Services</td>
-        <td class="contracts-table__contract-type">Service Contract/by device</td>
-        <td class="contracts-table__status"><span class="tag__modern --info">On going</span></td>
-        <td class="contracts-table__start-date">03 Sep 2020</td>
-        <td class="contracts-table__review-date">09 Jun 2020</td>
-        <td class="contracts-table__amount">$19,433.70</td>
-        <td class="contracts-table__menu">
-          <div class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"></div>
-        </td>
-      </tr>
-
-      <tr>
-        <td class="contracts-table__company">123dentist Summit Dental</td>
-        <td class="contracts-table__description" >Managed Services</td>
-        <td class="contracts-table__contract-type">Service Contract/by device</td>
-        <td class="contracts-table__status"><span class="tag__modern --warning">Expiring</span></td>
-        <td class="contracts-table__start-date">03 Sep 2020</td>
-        <td class="contracts-table__review-date">09 Jun 2020</td>
-        <td class="contracts-table__amount">$19,433.70</td>
-        <td class="contracts-table__menu">
-          <div class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"></div>
-        </td>
-      </tr>
+      <ng-template ngFor let-item
+      [ngForOf]="list"
+      [ngForTrackBy]="trackById">
+    <app-contracts-table-item [contact]="item"   ></app-contracts-table-item>
+    </ng-template>
+      
     </tbody>
   </table>
 </div>
