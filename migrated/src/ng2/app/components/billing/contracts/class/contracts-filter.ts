@@ -130,8 +130,12 @@ export class ContractsFilter {
       1 : ((b.status > a.status) ? -1 : 0));
   }
   private onFilterType(list) {
-    list.sort((a, b) => (a.type > b.type) ?
-      1 : ((b.type > a.type) ? -1 : 0));
+    list.sort((a, b) => {
+      let billTypeA = (a.billType) ? a.billType : "";
+      let billTypeB = (b.billType) ? b.billType : "";
+      return (a.type > b.type && (billTypeA == billTypeB) ? true :  billTypeA > billTypeB) ?
+        1 : ((b.type > a.type && (billTypeB == billTypeA) ? true : billTypeB > billTypeA) ? -1 : 0)
+    });
   }
   private onFilterDescription(list) {
     list.sort((a, b) => (a.description.toLowerCase() > b.description.toLowerCase()) ?

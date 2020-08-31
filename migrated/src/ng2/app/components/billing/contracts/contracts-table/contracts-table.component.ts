@@ -26,13 +26,17 @@ export class ContractsTableComponent implements OnInit {
         return contact;
       });
       this.filter.onFilter('company', this.list);
-      this.cd.detectChanges();
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+      }
     })
     this.contractsStateService.getFilter().subscribe(data => {
       console.log("data",data);
       this.filter.onFilter(data, this.list);
       console.log("this.list",this.list);
-      this.cd.detectChanges();
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+      }
     })
   }
 
