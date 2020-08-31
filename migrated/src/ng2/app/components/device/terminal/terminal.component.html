@@ -1,0 +1,900 @@
+<main class="terminal-page-area">
+  <div class="cmn-wrapper">
+    <div class="device-container">
+      <div class="page-container terminal">
+        <!-- Page Title -->
+        <div class="page-header">
+          <h3>Terminal</h3>
+          <div class="page-header-opt">
+            <div class="update-info">
+              <a class="Command active" href="javascript:;">Command Line</a>
+              <a class="Power" href="javascript:;">Power Shell</a>
+            </div>
+          </div>
+        </div>
+        <!-- Page Content -->
+        <div class="contant-area">
+          <div class="terminal-area">
+            <div class="terminal-box">
+              <p>C:\Users\Sam\Desktop</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Side bar -->
+    <aside class="right-sidebar terminal-sidebar">
+      <!-- <a href="javascript:;" class="panel-bar" (click)="toggleTicket();">
+      <img src="/html/ng2/assets/img/device/panel-open.svg" alt="Open" title="Ticket" />
+    </a> -->
+      <div>
+        <a href="javascript:;" class="add-btn" (click)="resetCmdModal();submitted = false;create = !create"
+          ><img src="/html/ng2/assets/img/device/add.svg" alt="add"
+        /></a>
+        <!-- Modal Add New Command -->
+        <div class="modal-content toggle-area" [class.opened]="create">
+          <div class="toggle-header">
+            <h2 class="h1">{{commandModal.id == '' ? 'Create' : 'Edit'}} Command</h2>
+          </div>
+          <div class="modal-body">
+            <form novalidate #commandFrm="ngForm">
+              <div class="f-row">
+                <div class="f-col col-100">
+                  <label for="Title">Command Title</label>
+                  <div class="form-row">
+                    <input
+                      type="text"
+                      id="title"
+                      class="form-input"
+                      placeholder="Command Title"
+                      [(ngModel)]="commandModal.title" 
+                      name="title" 
+                      #Title="ngModel" 
+                      required 
+                      [class.validation-error]="submitted == true && Title.errors && Title.errors.required"
+                    />
+                  </div>
+                </div>
+                <div class="f-col col-70">
+                  <label for="command">Category</label>
+                  <div class="form-row">
+                    <div class="grey-dropdown w-100" ngbDropdown>
+                      <input type="text"
+                        placeholder="Select Category"
+                        [(ngModel)]="commandModal.category"
+                        id="category"
+                        ngbDropdownToggle
+                        autocomplete="off"
+                        class="cmn-select form-input"
+                        name="category" 
+                        #Category="ngModel" 
+                        required readonly
+                        [class.validation-error]="submitted == true && Category.errors && Category.errors.required">
+                      <img class="icn-sm report-caret-icon" src="/html/ng2/assets/img/device/selct-arrow.svg"/>
+                      <div ngbDropdownMenu
+                           aria-labelledby="dropdownBasic1">
+                           <button *ngFor="let category of cmdCategoryReadList" ngbDropdownItem (click)="commandModal.category = category.name;commandModal.categoryId = category.id;">{{category.name}}</button>
+                           <button ngbDropdownItem (click)="manageCategory(templateManageCategory);">Manage Category</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="f-col col-30">
+                  <label for="command">Script Type</label>
+                  <div class="form-row">
+                    <select class="form-input cmn-select"
+                      name="type" 
+                    >
+                      <option value="">Select Script Type</option>
+                      <option>Command line</option>
+                      <option>Command line 1</option>
+                      <option>Command line 2</option>
+                      <option>Command line 3</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="f-col col-100">
+                  <label for="Title">Command</label>
+                  <div class="form-row">
+                    <!-- <textarea class="form-input"
+                      [(ngModel)]="commandModal.command" 
+                      name="command" 
+                      #Command="ngModel" 
+                      required 
+                      [class.validation-error]="submitted == true && Command.errors && Command.errors.required"
+                    > </textarea> -->
+                    
+                  </div>
+                </div>
+                <div class="m-btn-row">
+                  <div class="m-btn-col">
+                    <input type="submit" value="Save" (click)="createCommand()" class="btn btn-primary" />
+                    <a
+                      href="javascript:;"
+                      class="btn btn-secondary"
+                      aria-label="Close"
+                      (click)="create = !create"
+                      >Cancel</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <ngb-tabset>
+          <ngb-tab title="Command">
+            <ng-template ngbTabContent>
+            <div class="cmn-tbs-content command">
+              <ul class="list-unstyled">
+                <li *ngFor="let cmd of commandList">
+                  <div class="terminal-cmd-opt">
+                    <div class="cmd-list-left">
+                      <img
+                        src="/html/ng2/assets/img/device/command-line.svg"
+                        alt="command-line"
+                        title="command-line"
+                      />
+                      <h5>{{cmd.title}}</h5>
+                    </div>
+                    <div class="cmd-list-right">
+                      <a
+                        href="javascript:;"
+                        class="copy"
+                        datadata-tooltip="Copy to terminal"
+                        >Copy to terminal</a
+                      >
+                      <div class="btn-group" ngbDropdown>
+                        <button
+                          id="button-basic"
+                          ngbDropdownToggle
+                          type="button"
+                          class="dropdown-toggle"
+                          aria-controls="dropdown-basic"
+                        >
+                          Button dropdown
+                        </button>
+                        <ul
+                          id="dropdown-basic"
+                          ngbDropdownMenu
+                          class="dropdown-menu"
+                          role="menu"
+                          aria-labelledby="button-basic"
+                        >
+                          <li role="menuitem" ngbDropdownItem>
+                            <a class="dropdown-item" href="javascript:void(0);" (click)="submitted = false;openEditCommand(cmd)">
+                              <img
+                                src="/html/ng2/assets/img/device/edit-cmd.svg"
+                                alt="edit-cmd"
+                                title="edit-cmd"
+                              />
+                              Edit</a
+                            >
+                          </li>
+                          <li role="menuitem" ngbDropdownItem>
+                            <a class="dropdown-item" href="javascript:void(0);" (click)="openModal(template, cmd.id, cmd.title, 'deleteCmd')">
+                              <img
+                                src="/html/ng2/assets/img/device/remove-terminal.svg"
+                                alt="delete-cmd"
+                                title="delete-cmd"
+                              />
+                              Delete</a
+                            >
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="cmd-details">
+                    <span>{{cmd.command}}</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="History">
+            <ng-template ngbTabContent>
+            <div class="cmn-tbs-content history-cmd">
+              <ul class="list-unstyled">
+                <li>
+                  <div class="terminal-cmd-opt">
+                    <div class="cmd-list-left">
+                      <h5>Gordon Fitzgerald</h5>
+                    </div>
+                    <div class="cmd-list-right">
+                      <span class="date">3 Jun, 13:37:13</span>
+                    </div>
+                  </div>
+                  <div class="cmd-details">
+                    <h5>ipconfig / all</h5>
+                    <span
+                      >Window IP Configuration Ethernet adapter Local Area
+                      Connection 2:</span
+                    >
+                  </div>
+                </li>
+                <li>
+                  <div class="terminal-cmd-opt">
+                    <div class="cmd-list-left">
+                      <h5>Gordon Fitzgerald</h5>
+                    </div>
+                    <div class="cmd-list-right">
+                      <span class="date">3 Jun, 13:37:13</span>
+                    </div>
+                  </div>
+                  <div class="cmd-details">
+                    <h5>ipconfig / all</h5>
+                    <span
+                      >Window IP Configuration Ethernet adapter Local Area
+                      Connection 2:</span
+                    >
+                  </div>
+                </li>
+                <li>
+                  <div class="terminal-cmd-opt">
+                    <div class="cmd-list-left">
+                      <h5>Gordon Fitzgerald</h5>
+                    </div>
+                    <div class="cmd-list-right">
+                      <span class="date">3 Jun, 13:37:13</span>
+                    </div>
+                  </div>
+                  <div class="cmd-details">
+                    <h5>ipconfig / all</h5>
+                    <span
+                      >Window IP Configuration Ethernet adapter Local Area
+                      Connection 2:</span
+                    >
+                  </div>
+                </li>
+                <li>
+                  <div class="terminal-cmd-opt">
+                    <div class="cmd-list-left">
+                      <h5>Gordon Fitzgerald</h5>
+                    </div>
+                    <div class="cmd-list-right">
+                      <span class="date">3 Jun, 13:37:13</span>
+                    </div>
+                  </div>
+                  <div class="cmd-details">
+                    <h5>ipconfig / all</h5>
+                    <span
+                      >Window IP Configuration Ethernet adapter Local Area
+                      Connection 2:</span
+                    >
+                  </div>
+                </li>
+                <li>
+                  <div class="terminal-cmd-opt">
+                    <div class="cmd-list-left">
+                      <h5>Gordon Fitzgerald</h5>
+                    </div>
+                    <div class="cmd-list-right">
+                      <span class="date">3 Jun, 13:37:13</span>
+                    </div>
+                  </div>
+                  <div class="cmd-details">
+                    <h5>ipconfig / all</h5>
+                    <span
+                      >Window IP Configuration Ethernet adapter Local Area
+                      Connection 2:</span
+                    >
+                  </div>
+                </li>
+                <li>
+                  <div class="terminal-cmd-opt">
+                    <div class="cmd-list-left">
+                      <h5>Gordon Fitzgerald</h5>
+                    </div>
+                    <div class="cmd-list-right">
+                      <span class="date">3 Jun, 13:37:13</span>
+                    </div>
+                  </div>
+                  <div class="cmd-details">
+                    <h5>ipconfig / all</h5>
+                    <span
+                      >Window IP Configuration Ethernet adapter Local Area
+                      Connection 2:</span
+                    >
+                  </div>
+                </li>
+                <li>
+                  <div class="terminal-cmd-opt">
+                    <div class="cmd-list-left">
+                      <h5>Gordon Fitzgerald</h5>
+                    </div>
+                    <div class="cmd-list-right">
+                      <span class="date">3 Jun, 13:37:13</span>
+                    </div>
+                  </div>
+                  <div class="cmd-details">
+                    <h5>ipconfig / all</h5>
+                    <span
+                      >Window IP Configuration Ethernet adapter Local Area
+                      Connection 2:</span
+                    >
+                  </div>
+                </li>
+              </ul>
+            </div>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
+        <a
+          href="javascript:;"
+          (click)="runScript = !runScript"
+          class="btn btn-primary"
+          ><img
+            src="/html/ng2/assets/img/device/run-script-blue.svg"
+            alt="run-script"
+          />Run Script</a
+        >
+      </div>
+    </aside>
+
+    <!-- Script Sidebar  -->
+    <aside class="right-sidebar script-sidebar" [class.opened]="runScript">
+      <div>
+        <div class="script-side-heder">
+          <h2>Run Script</h2>
+          <a
+            href="javascript:;"
+            class="close-btn"
+            title="Close"
+            (click)="runScript = !runScript"
+          >
+            <img
+              src="/html/ng2/assets/img/device/close.svg"
+              alt="close"
+              title="close"
+            />
+          </a>
+        </div>
+        <ngb-tabset>
+          <ngb-tab title="My Scripts (3)">
+            <ng-template ngbTabContent>
+            <div class="cmn-tbs-content myScript">
+              <form method="POST">
+                <div class="f-row">
+                  <div class="f-col col-50">
+                    <label for="command">Category</label>
+                    <div class="form-row">
+                      <select class="form-input cmn-select">
+                        <option>Window > USB access</option>
+                        <option>Window > USB access 1</option>
+                        <option>Window > USB access 2</option>
+                        <option>Window > USB access 3</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="f-col col-50">
+                    <label for="command">Search Scripts</label>
+                    <div class="form-row">
+                      <input
+                        type="text"
+                        placeholder="Search description or filename"
+                        class="form-input script-search"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <ul class="list-unstyled script-list">
+                <li>
+                  <div class="script-left">
+                    <h5>Delete Temporary Files for all User (copy)</h5>
+                    <span
+                      >Deletes Temporary files for all users (including user
+                      profiles…</span
+                    >
+                    <span class="clone-cat">Cloned Scripts</span>
+                  </div>
+                  <div class="script-right">
+                    <a
+                      href="javascript:;"
+                      class="play-btn"
+                      data-tooltip="Run Script"
+                    >
+                      <img
+                        src="/html/ng2/assets/img/device/play-script.svg"
+                        alt="play-script"
+                        title="play-script"
+                      />
+                    </a>
+                    <a
+                      href="javascript:;"
+                      class="view-btn"
+                      data-tooltip="View Script"
+                      (click)="scriptDetail = !scriptDetail"
+                    >
+                      <img
+                        src="/html/ng2/assets/img/device/view-script.svg"
+                        alt="view-script"
+                        title="view-script"
+                      />
+                    </a>
+                  </div>
+                </li>
+                <li>
+                  <div class="script-left">
+                    <h5>Delete Temporary Files for all User (copy)</h5>
+                    <span
+                      >Deletes Temporary files for all users (including user
+                      profiles…</span
+                    >
+                    <span class="clone-cat">Cloned Scripts</span>
+                  </div>
+                  <div class="script-right">
+                    <a
+                      href="javascript:;"
+                      class="play-btn"
+                      data-tooltip="Run Script"
+                    >
+                      <img
+                        src="/html/ng2/assets/img/device/play-script.svg"
+                        alt="play-script"
+                        title="play-script"
+                      />
+                    </a>
+                    <a
+                      href="javascript:;"
+                      class="view-btn"
+                      data-tooltip="View Script"
+                      (click)="scriptDetail = !scriptDetail"
+                    >
+                      <img
+                        src="/html/ng2/assets/img/device/view-script.svg"
+                        alt="view-script"
+                        title="view-script"
+                      />
+                    </a>
+                  </div>
+                </li>
+                <li>
+                  <div class="script-left">
+                    <h5>Delete Temporary Files for all User (copy)</h5>
+                    <span
+                      >Deletes Temporary files for all users (including user
+                      profiles…</span
+                    >
+                    <span class="clone-cat">Cloned Scripts</span>
+                  </div>
+                  <div class="script-right">
+                    <a
+                      href="javascript:;"
+                      class="play-btn"
+                      data-tooltip="Run Script"
+                    >
+                      <img
+                        src="/html/ng2/assets/img/device/play-script.svg"
+                        alt="play-script"
+                        title="play-script"
+                      />
+                    </a>
+                    <a
+                      href="javascript:;"
+                      class="view-btn"
+                      data-tooltip="View Script"
+                      (click)="scriptDetail = !scriptDetail"
+                    >
+                      <img
+                        src="/html/ng2/assets/img/device/view-script.svg"
+                        alt="view-script"
+                        title="view-script"
+                      />
+                    </a>
+                  </div>
+                </li>
+                <li>
+                  <div class="script-left">
+                    <h5>Delete Temporary Files for all User (copy)</h5>
+                    <span
+                      >Deletes Temporary files for all users (including user
+                      profiles…</span
+                    >
+                    <span class="clone-cat">Cloned Scripts</span>
+                  </div>
+                  <div class="script-right">
+                    <a
+                      href="javascript:;"
+                      class="play-btn"
+                      data-tooltip="Run Script"
+                    >
+                      <img
+                        src="/html/ng2/assets/img/device/play-script.svg"
+                        alt="play-script"
+                        title="play-script"
+                      />
+                    </a>
+                    <a
+                      href="javascript:;"
+                      class="view-btn"
+                      data-tooltip="View Script"
+                      (click)="scriptDetail = !scriptDetail"
+                    >
+                      <img
+                        src="/html/ng2/assets/img/device/view-script.svg"
+                        alt="view-script"
+                        title="view-script"
+                      />
+                    </a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab heading="Shared Script Library (85)">
+            <ng-template ngbTabContent>
+            <div class="cmn-tbs-content script-library">
+              <form method="POST">
+                <div class="f-row">
+                  <div class="f-col col-50">
+                    <label for="command">Category</label>
+                    <div class="form-row">
+                      <select class="form-input cmn-select">
+                        <option>Window > USB access</option>
+                        <option>Window > USB access 1</option>
+                        <option>Window > USB access 2</option>
+                        <option>Window > USB access 3</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="f-col col-50">
+                    <label for="command">Search Scripts</label>
+                    <div class="form-row">
+                      <input
+                        type="text"
+                        placeholder="Search description or filename"
+                        class="form-input script-search"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <ul class="list-unstyled script-list">
+                <li>
+                  <div class="script-left">
+                    <h5>Delete Temporary Files for all User (copy)</h5>
+                    <span
+                      >Deletes Temporary files for all users (including user
+                      profiles…</span
+                    >
+                    <span class="clone-cat">Cloned Scripts</span>
+                  </div>
+                  <div class="script-right">
+                    <a
+                      href="javascript:;"
+                      class="play-btn"
+                      data-tooltip="Clone Script"
+                    >
+                      <img
+                        src="/html/ng2/assets/img/device/copy-script.svg"
+                        alt="copy-script"
+                        title="copy-script"
+                      />
+                    </a>
+                    <a
+                      href="javascript:;"
+                      class="view-btn"
+                      data-tooltip="View Script"
+                      (click)="scriptDetail = !scriptDetail"
+                    >
+                      <img
+                        src="/html/ng2/assets/img/device/view-script.svg"
+                        alt="view-script"
+                        title="view-script"
+                      />
+                    </a>
+                  </div>
+                </li>
+                <li>
+                  <div class="script-left">
+                    <h5>Delete Temporary Files for all User (copy)</h5>
+                    <span
+                      >Deletes Temporary files for all users (including user
+                      profiles…</span
+                    >
+                    <span class="clone-cat">Cloned Scripts</span>
+                  </div>
+                  <div class="script-right">
+                    <a
+                      href="javascript:;"
+                      class="play-btn"
+                      data-tooltip="Clone Script"
+                    >
+                      <img
+                        src="/html/ng2/assets/img/device/copy-script.svg"
+                        alt="copy-script"
+                        title="copy-script"
+                      />
+                    </a>
+                    <a
+                      href="javascript:;"
+                      class="view-btn"
+                      data-tooltip="View Script"
+                      (click)="scriptDetail = !scriptDetail"
+                    >
+                      <img
+                        src="/html/ng2/assets/img/device/view-script.svg"
+                        alt="view-script"
+                        title="view-script"
+                      />
+                    </a>
+                  </div>
+                </li>
+                <li>
+                  <div class="script-left">
+                    <h5>Delete Temporary Files for all User (copy)</h5>
+                    <span
+                      >Deletes Temporary files for all users (including user
+                      profiles…</span
+                    >
+                    <span class="clone-cat">Cloned Scripts</span>
+                  </div>
+                  <div class="script-right">
+                    <a
+                      href="javascript:;"
+                      class="play-btn"
+                      data-tooltip="Clone Script"
+                    >
+                      <img
+                        src="/html/ng2/assets/img/device/copy-script.svg"
+                        alt="copy-script"
+                        title="copy-script"
+                      />
+                    </a>
+                    <a
+                      href="javascript:;"
+                      class="view-btn"
+                      data-tooltip="View Script"
+                      (click)="scriptDetail = !scriptDetail"
+                    >
+                      <img
+                        src="/html/ng2/assets/img/device/view-script.svg"
+                        alt="view-script"
+                        title="view-script"
+                      />
+                    </a>
+                  </div>
+                </li>
+                <li>
+                  <div class="script-left">
+                    <h5>Delete Temporary Files for all User (copy)</h5>
+                    <span
+                      >Deletes Temporary files for all users (including user
+                      profiles…</span
+                    >
+                    <span class="clone-cat">Cloned Scripts</span>
+                  </div>
+                  <div class="script-right">
+                    <a
+                      href="javascript:;"
+                      class="play-btn"
+                      data-tooltip="Clone Script"
+                    >
+                      <img
+                        src="/html/ng2/assets/img/device/copy-script.svg"
+                        alt="copy-script"
+                        title="copy-script"
+                      />
+                    </a>
+                    <a
+                      href="javascript:;"
+                      class="view-btn"
+                      data-tooltip="View Script"
+                      (click)="scriptDetail = !scriptDetail"
+                    >
+                      <img
+                        src="/html/ng2/assets/img/device/view-script.svg"
+                        alt="view-script"
+                        title="view-script"
+                      />
+                    </a>
+                  </div>
+                </li>
+              </ul>
+              <ul class="list-unstyled pagination">
+                <li class="next">
+                  <a href="javascript:;">
+                    <img
+                      src="/html/ng2/assets/img/device/prev-pag.svg"
+                      alt="prev"
+                      title="prev"
+                    />
+                  </a>
+                </li>
+                <li>
+                  <a href="javascript:;">1</a>
+                </li>
+                <li>
+                  <a href="javascript:;">2</a>
+                </li>
+                <li class="current">
+                  <a href="javascript:;">3</a>
+                </li>
+                <li>
+                  <a href="javascript:;">4</a>
+                </li>
+                <li>
+                  <a href="javascript:;">…</a>
+                </li>
+                <li>
+                  <a href="javascript:;">17</a>
+                </li>
+                <li class="prev">
+                  <a href="javascript:;">
+                    <img
+                      src="/html/ng2/assets/img/device/next-pag.svg"
+                      alt="next-pag"
+                      title="next-pag"
+                    />
+                  </a>
+                </li>
+              </ul>
+            </div>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
+      </div>
+    </aside>
+
+    <!-- Script Details Sidebar  -->
+    <aside class="right-sidebar script-sidebar script-details" [class.opened]="scriptDetail">
+      <div>
+        <div class="script-side-heder">
+          <h2>
+            <a
+              href="javascript:;"
+              class="close-btn"
+              title="Close"
+              (click)="scriptDetail = !scriptDetail"
+            >
+              <img
+                src="/html/ng2/assets/img/device/back.svg"
+                alt="close"
+                title="close"
+              /> </a
+            >Run Script
+          </h2>
+          <span class="clone-cat">Cloned Scripts</span>
+        </div>
+        <div class="script-details-area">
+          <h2>
+            Delete Temporary Files for all user (including user profiles +
+            Windows Temp) and disables windows Update Service, to allow the
+            script to run
+          </h2>
+          <div class="script-info">
+            <div class="script-col">
+              <h5>File Type</h5>
+              <span>.bat</span>
+            </div>
+            <div class="script-col">
+              <h5>Run as:</h5>
+              <span>Current User</span>
+            </div>
+            <div class="script-col">
+              <h5>Variables</h5>
+              <span>No</span>
+            </div>
+            <div class="script-col">
+              <h5>Max Run Time</h5>
+              <span>10</span>
+            </div>
+          </div>
+          <form method="POST">
+            <div class="f-row">
+              <div class="f-col col-100">
+                <div class="form-row">
+                   <textarea class="form-input">
+                     
+                   </textarea>
+                </div>
+              </div>
+            </div>
+              <div class="f-row">
+              <div class="f-col col-100">
+                <div class="form-row">
+                   <button type="submit" class="btn btn-primary">Clone Script</button>
+                   <button type="submit" class="btn btn-secondary" (click)="scriptDetail = !scriptDetail">Back</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </aside>
+    
+<!-- Delete Confirmation -->
+
+<ng-template #template let-modal>
+  <div class="modal-header">
+    <h2>Delete Script</h2>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <img
+      src="/html/ng2/assets/img/device/close.svg"
+      alt="close"
+      title="close"
+    />
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="confirm-message">
+        <p>Are you sure you want to delete <strong>{{deleteTitle}}</strong> script?</p>
+    </div>
+    <div class="confirm-btn">
+      <button type="button" class="btn btn-secondary" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        Cancel
+      </button>
+      <button type="button" class="btn btn-remove" (click)="deleteCommand();modal.dismiss('Cross click')">
+        Remove
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #templateManageCategory let-modal>
+  <div class="modal-header">
+    <h2>Manage Category</h2>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <img
+      src="/html/ng2/assets/img/device/close.svg"
+      alt="close"
+      title="close"
+    />
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="terminal-category-list">
+       <form novalidate>
+      <ul class="list-unstyled">
+            <li *ngFor="let category of cmdCategoryList; let i = index;">
+              <input *ngIf="!category.create" type="text" class="form-input" name="cat_{{i}}" [(ngModel)]="category.name" (focus)="category.edit = true;"/>
+              <input *ngIf="category.create" type="text" class="form-input" name="cat_{{i}}" [(ngModel)]="category.name" placeholder="Write category Name"/>
+              <a *ngIf="!category.create && category.edit" href="javascript:;" class="cat-action edit-cat" data-tooltip="Edit" (click)="updateCategory(category, i)">
+                <img 
+                    src="/html/ng2/assets/img/device/save-changes.svg"
+                    alt="save-changes"
+                    title="save-changes"
+                  />
+              </a>
+              <a *ngIf="category.create" href="javascript:;" class="cat-action edit-cat" data-tooltip="Add" (click)="createCategory(category)">
+                <img
+                    src="/html/ng2/assets/img/device/save-changes.svg"
+                    alt="save-changes"
+                    title="save-changes"
+                  />
+              </a>
+              <a *ngIf="!category.edit && !category.create" href="javascript:;" (click)="deleteCategory(category.id, i)" class="cat-action delete" data-tooltip="Delete">
+                <img
+                    src="/html/ng2/assets/img/device/remove-terminal.svg"
+                    alt="close"
+                    title="close"
+                  />
+              </a>
+            </li>
+
+        </ul>
+      </form>  
+    </div>
+    
+    <div class="confirm-btn">
+      
+      <button type="button" class="btn btn-small" (click)="addNewCategory()">
+        <img
+        src="/html/ng2/assets/img/device/add-task.svg"
+        alt="add-task"
+        title="add-task"
+      /> Add New Category
+      </button>
+    </div>
+  </div>
+</ng-template>
+  </div>
+</main>
+<div class="loading" *ngIf="loading"></div>
+

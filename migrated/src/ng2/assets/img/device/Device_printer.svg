@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 64 (93537) - https://sketch.com -->
+    <title>Device_printer</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Device_printer" stroke="#FFFFFF">
+            <g>
+                <path d="M4,13 L2,13 C1.44771525,13 1,12.5522847 1,12 L1,6 C1,5.44771525 1.44771525,5 2,5 L14,5 C14.5522847,5 15,5.44771525 15,6 L15,12 C15,12.5522847 14.5522847,13 14,13 L12,13" id="Path"></path>
+                <polygon id="Rectangle" points="4 1 12 1 12 5 4 5"></polygon>
+                <polygon id="Rectangle" points="4 11 12 11 12 15 4 15"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

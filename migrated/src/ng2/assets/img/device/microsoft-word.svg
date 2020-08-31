@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+    <g fill="none" fill-rule="evenodd">
+        <path fill="#FFF" stroke="#265299" stroke-linejoin="round" d="M3 0h6l5 5v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V1a1 1 0 0 1 1-1z"/>
+        <path fill="#FFF" stroke="#265299" stroke-linecap="round" stroke-linejoin="round" d="M6 13.5h4"/>
+        <text fill="#265299" font-family="Graphik-Semibold, Graphik" font-size="6" font-weight="500">
+            <tspan x="5" y="12">W</tspan>
+        </text>
+        <path fill="#BAD4FF" stroke="#265299" stroke-linejoin="round" d="M9 0l5 5H9z"/>
+    </g>
+</svg>

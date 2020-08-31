@@ -5,19 +5,25 @@
     <div class="heading">
       <h1><a href="javascript:;" (click)="onBackMenu()" class="back-menu" style="display: none;">backmneu</a>Invoice and Ticket</h1>
     </div>
-    <tabset>
+    <ngb-tabset>
       <!-- Ticket Settings -->
-      <tab heading="Ticket Settings" id="tab1">
-        <app-ticket-settings></app-ticket-settings>
-      </tab>
+      <ngb-tab title="Ticket Settings" id="tab1">
+        <ng-template ngbTabContent>
+        <app-ticket-settings [taxIdDescInput]="taxIdDescription" [taxIdInput]="taxId" [conditionInput]="condition" *ngIf="showTab == true && showTerm == true"></app-ticket-settings>
+        </ng-template>
+      </ngb-tab>
       <!-- Invoice Settings -->
-      <tab heading="Invoice Settings">
-        <app-invoice-settings></app-invoice-settings>
-      </tab>
+      <ngb-tab title="Invoice Settings">
+        <ng-template ngbTabContent>
+        <app-invoice-settings [taxIdDescInput]="taxIdDescription" [taxIdInput]="taxId" [termInput]="term" [conditionInput]="condition" *ngIf="showTab == true && showTerm == true"></app-invoice-settings>
+        </ng-template>
+      </ngb-tab>
       <!-- Quotes Settings  -->
-      <tab heading="Quotes settings">
+      <ngb-tab title="Quotes settings">
+        <ng-template ngbTabContent>
         <app-quotes-settings></app-quotes-settings>
-      </tab>
-    </tabset>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
   </div>
 </div>

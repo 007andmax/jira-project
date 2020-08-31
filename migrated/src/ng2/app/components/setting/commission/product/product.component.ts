@@ -12,7 +12,12 @@ export class ProductComponent implements OnInit {
   categories: any;
   edit = false;
   selectedIdx = -1;
-
+  public deletePopup = false;	
+  public confirmPopup = false;	
+  rate: any;	
+  id: string;	
+  category: any;	
+  factItem = false;
   constructor(
     private commissionService: CommissionService,
     private toastrService: ToastrService
@@ -49,26 +54,26 @@ export class ProductComponent implements OnInit {
    * set product rate zero
    * @param category
    */
-  removeProduct(category: any) {
-    if (category && category.commissionRate) {
-      if (confirm(`Do you want ${category.name} commission rate to zero?`)) {
-        this.loading = true;$(".loading").css("display", "block");
-        this.commissionService
-          .setCategoryRate(category.id, '0', false)
-          .subscribe(
-            res => {
-              this.toastrService.success('Removed Successfully')
-              this.selectedIdx = -1;
-              this.loading = false;$(".loading").css("display", "none");
-              category.commissionRate = null;
-            },
-            error => {
-              this.toastrService.error('Bad Request')
-              this.loading = false;$(".loading").css("display", "none");
-            }
-          );
+  removeProduct() {	
+    if (this.category && this.category.commissionRate) {	
+      this.loading = true;$(".loading").css("display", "block");	
+      this.commissionService	
+        .setCategoryRate(this.category.id, '0', false)	
+        .subscribe(	
+          res => {	
+            this.toastrService.success('Removed Successfully')	
+            this.selectedIdx = -1;	
+            this.loading = false;$(".loading").css("display", "none");	
+            this.category.commissionRate = null;	
+            this.deletePopup = false;	
+          },	
+          error => {	
+            this.deletePopup = false;	
+            this.toastrService.error('Bad Request')	
+            this.loading = false;$(".loading").css("display", "none");	
+          }	
+        );	
       }
-    }
   }
 
   editProduct(i: number) {
@@ -81,31 +86,25 @@ export class ProductComponent implements OnInit {
    * @param id
    * @param category
    */
-  setCategoryRate(rate, id: string, category: any) {
+  setCategoryRate() {
     let data = {
       rate: '',
       setForOldExpenses: false
     };
 
-    if (rate || rate === 0) {
+    if (this.rate || this.rate === 0) {
       data = {
-        rate: rate,
-        setForOldExpenses: false
+        rate: this.rate,
+        setForOldExpenses: this.factItem
       };
-
-      if (category.commissionRate === null) {
-        if (confirm('Do you want this commission to fact old items?')) {
-          data.setForOldExpenses = true;
-        }
-      }
       this.loading = true;$(".loading").css("display", "block");
       this.commissionService
-        .setCategoryRate(id, data.rate, data.setForOldExpenses)
+        .setCategoryRate(this.id, data.rate, data.setForOldExpenses)
         .subscribe(
           (res: any) => {
             this.toastrService.success(`Commission Rate Changed Successfully`);
             this.loading = false;$(".loading").css("display", "none");
-            category.commissionRate = res.commissionRate.toFixed(2);
+            this.category.commissionRate = res.commissionRate.toFixed(2);
             this.selectedIdx = -1;
           },
           error => {
@@ -118,4 +117,23 @@ export class ProductComponent implements OnInit {
       this.selectedIdx = -1;
     }
   }
+
+  confirmDelete(data: any){	
+        this.category = data;	
+        this.deletePopup = true;	
+      }	
+    	
+      confirmEdit(rate, id: string, category: any){	
+        this.rate = rate;	
+        this.id = id;	
+        this.category = category;	
+        if (this.category.commissionRate === null) {	
+          this.confirmPopup = true;	
+        } else {	
+          this.confirmPopup = false;	
+          this.factItem = false;	
+          this.setCategoryRate();	
+        }	
+        	
+      }
 }

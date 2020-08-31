@@ -88,7 +88,8 @@
               "src/ng1/styles/nv.d3.css",
               "src/ng1/styles/daterangepicker.css",
               "node_modules/igniteui-angular/styles/igniteui-angular.css",
-              "node_modules/timepicker/dist/jquery.timepicker.css"
+              "node_modules/timepicker/dist/jquery.timepicker.css",
+              "src/ng2/app/components/device/styles.scss"
             ],
             "scripts": [
               "src/ng2/assets/md5-min.js",
@@ -366,8 +367,7 @@
               "src/ng1/scripts/js/vendors/date-range-picker/datepicker.en.js",
               "src/ng1/scripts/js/handlebars-v3.0.3.js",
               "src/ng1/scripts/core/assign-user-list/assign-user-list.ctrl.js",
-              "node_modules/datatables.net/js/jquery.dataTables.min.js",
-              "node_modules/timepicker/dist/jquery.timepicker.js"
+              "node_modules/datatables.net/js/jquery.dataTables.min.js"
             ],
             "es5BrowserSupport": true
           },
