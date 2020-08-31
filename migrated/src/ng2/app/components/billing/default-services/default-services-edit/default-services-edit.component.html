@@ -47,6 +47,7 @@
           <label>GL Number</label>
           <app-select-search [class]="['light-dropdown', 'new-product-gl-select', 'qt-select-input-40']" [list]="glNumbers" #glNumberSelect
           [placeholder]="'Select GL'"
+          [container]="'body'"
           [editItem]="service.glNumber"
           [add]="true" [field]="'glNumber'"
           (onAddItem)="onAddGlNumber($event)"
