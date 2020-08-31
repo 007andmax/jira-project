@@ -1,0 +1,239 @@
+<div class="contracts-page-scroll-content">
+  <div class="qt-pr-32 qt-pl-32 qt-pb-24 qt-pt-16">
+
+    <div class="qt-df">
+      <div class="contracts-page__company-name-input qt-input-block qt-mr-16">
+        <label>Company Name</label>
+        <input value="Bearstone EX" type="text">
+      </div>
+
+      <div class="contracts-page__contract-type-name-input qt-input-block">
+        <label>Contract Type</label>
+        <input value="Per User / Device Billing" type="text">
+      </div>
+    </div>
+
+    <div class="qt-pl-12 qt-pr-12 qt-df qt-ai-c contract-tipe-info qt-mb-16">
+      <div class="qt-sz-16 icon__tips qt-mr-5"></div>
+      <div>Contract time can be based on the amount of users or devices</div>
+    </div>
+
+    <div class="qt-df qt-mb-16">
+      <div class="qt-input-block --required qt-w25 qt-mr-16">
+        <label>Start Date</label>
+        <input value="22 Apr 2020" type="text">
+      </div>
+
+      <div class="qt-input-block --required qt-w25 qt-mr-16">
+        <label>Interval</label>
+        <input value="Monthly" type="text">
+      </div>
+
+      <div class="qt-input-block qt-w25 qt-mr-16">
+        <label>Num.of Intervals</label>
+        <input value="1" type="text">
+      </div>
+
+      <div class="qt-input-block qt-w25">
+        <label>Review Date</label>
+        <input value="29 Apr 2020" type="text">
+      </div>
+    </div>
+
+    <div>
+      <div class="qt-input-block --required qt-w100">
+        <label>Description</label>
+        <input placeholder="Write contract description" type="text">
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="qt-pt-15 qt-pl-32 qt-pr-32 qt-pb-24 contracts-page__gray-block">
+    <div class="qt-fs-15 qt-ff-sb qt-lh-147 qt-color-dark qt-mb-10">
+      Select how you bill your customer. Managed Services will be added to Service time
+    </div>
+
+    <div class="qt-df qt-ai-c qt-mb-25">
+      <div class="qt-fs-12 qt-color-dark qt-mr-8">Service Bill Type</div>
+
+      <div class="qt-radio qt-mr-16">
+        <input id="by-device" type="radio" name="radio" value="1" checked>
+        <label for="by-device">By Device</label>
+      </div>
+
+      <div class="qt-radio">
+        <input id="by-users" type="radio" name="radio" value="2">
+        <label for="by-users">By users</label>
+      </div>
+    </div>
+
+    <div class="table-last-icon-wrapper qt-mb-16">
+      <table class="qt-gray-table --last-icon">
+        <thead>
+          <tr>
+            <th>Device Name</th>
+            <th class="col-count">Count</th>
+            <th class="col-tax">Tax</th>
+            <th class="col-price">Price</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Managed workstations</td>
+            <td class="col-count">0</td>
+            <td class="col-tax">GST 5%</td>
+            <td class="col-price">$0.00</td>
+            <td><div class="icon__raw-clear qt-ic-c qt-sz-16"></div></td>
+          </tr>
+
+          <tr>
+            <td>Service workstations</td>
+            <td class="col-count">0</td>
+            <td class="col-tax">GST 5%</td>
+            <td class="col-price">$0.00</td>
+            <td><div class="icon__raw-clear qt-ic-c qt-sz-16"></div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <button class="qt-mb-24 qt-btn --outline --small">+ Add Service</button>
+
+    <div class="qt-fs-15 qt-ff-sb qt-lh-147 qt-color-dark qt-mb-16">
+      Create service that you want to track the time for. Tracked service time counts towards contract and is not billed to customer
+    </div>
+
+    <div class="table-last-icon-wrapper qt-mb-16">
+      <table class="qt-gray-table --last-icon">
+        <thead>
+          <tr>
+            <th>Service Name</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Managed Services Onsite</td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <td>Managed Services Remote</td>
+            <td>
+              <div class="icon__raw-clear qt-ic-c qt-sz-16"></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <button class="qt-btn --outline --small">+ Add Service</button>
+
+  </div>
+
+  <div class="qt-pt-16 qt-pl-32 qt-pr-32 qt-pb-32">
+    <div class="qt-df qt-mb-16">
+      <div class="qt-toggle --on qt-mr-8">
+        <div class="qt-toggle__circle"></div>
+      </div>
+
+      <div class="qt-fs-13 qt-ff-gm qt-lh-154 qt-color-dark-light">Track and bill services outside of included block time services</div>
+    </div>
+
+    <div class="table-last-icon-wrapper qt-mb-16">
+      <table class="qt-gray-table --last-icon">
+        <thead>
+          <tr>
+            <th>Service Name</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Managed Services Onsite</td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <td>Managed Services Remote</td>
+            <td>
+              <div class="icon__raw-clear qt-ic-c qt-sz-16"></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <button class="qt-btn --outline --small">+ Add Service</button>
+
+    <hr class="qt-horisontal-line qt-mb-16 qt-mt-16">
+
+    <div class="qt-df qt-mb-24">
+      <div class="qt-toggle --on qt-mr-8">
+        <div class="qt-toggle__circle"></div>
+      </div>
+
+      <div class="qt-fs-13 qt-ff-gm qt-lh-154 qt-color-dark-light">Set maximum amount of hours</div>
+    </div>
+
+    <div class="qt-df qt-mb-16">
+      <div class="qt-input-block --required qt-w25 qt-mr-16">
+        <label>Included block time</label>
+          <input value="1" type="text">
+      </div>
+
+      <div class="qt-input-block --required qt-w25 qt-mr-16">
+        <label>Rate exceding block time</label>
+        <div class="qt-df">
+          <div class="qt-input-prefix">$</div><input class="qt-input-prepend" value="0.00" type="text">
+        </div>
+      </div>
+
+      <div class="qt-input-block qt-w25 qt-mr-16">
+        <label>Select taxes</label>
+        <input value="GST 5%" type="text">
+      </div>
+
+      <div class="qt-w25"></div>
+
+    </div>
+
+    <hr class="qt-horisontal-line qt-mb-16 qt-mt-16">
+
+    <div class="qt-df qt-mb-16">
+      <div class="qt-toggle qt-mr-8">
+        <div class="qt-toggle__circle"></div>
+      </div>
+
+      <div class="qt-fs-13 qt-ff-gm qt-lh-154 qt-color-dark-light">Invoice as single item</div>
+    </div>
+
+    <hr class="qt-horisontal-line qt-mb-16 qt-mt-16">
+
+
+    <div class="qt-df qt-jc-fe">
+      <div class="contract-total qt-color-dark" >
+        <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
+          <div>Start Date</div>
+          <div>23 Jun 2020</div>
+        </div>
+        <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
+          <div>Expiry Date</div>
+          <div>23 Jun 2021</div>
+        </div>
+
+        <div class="contract-total__divider qt-mt-15 qt-mb-15"></div>
+
+        <div class="qt-df qt-jc-sb invoice-total__total-line">
+          <div class="qt-fs-13 qt-fw-b">Total</div>
+          <div class="qt-fs-16 qt-fw-b">$0.00</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -100,6 +100,202 @@
     right: 0;
     height: calc(100vh - 79px);
 
+  // select contract type
+  .contract-type-aside-content {
+    padding: 32px;
+    background-color: #f9fafb;
+
+  }
+  .contract-type-select {
+    border-radius: 6px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    width: 591px;
+    padding: 16px 12px 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    border: 2px solid transparent;
+
+    &.--selected {
+      border-color: #16a4fa;
+    }
+
+    &__title {
+      font-size: 13px;
+      line-height: 1.54;
+      color: #4f5f79;
+      font-family: Graphik-Medium, sans-serif;
+      margin-bottom: 4px;
+    }
+
+    &__text {
+      font-size: 13px;
+      line-height: 1.54;
+      color: #4f5f79;
+    }
+
+    &__radio {
+      display: flex;
+      margin-top: 4px;
+      margin-right: 16px;
+      width: 18px;
+    }
+
+    &__icon {
+      height: 48px;
+      width: 48px;
+      margin-left: 45px;
+    }
+  }
+  // end select contract type
+
+  // hourly billing aside
+.service-table {
+  &__check {
+    width: 36px;
+    padding: 0 9px;
+  }
+
+  .icon__question-help {
+    margin-left: 2px;
+  }
+
+  &__rate {
+    text-align: right;
+    width: 109px;
+    padding-right: 24px;
+    vertical-align: middle;
+  }
+
+  th.service-table__rate {
+    padding-right: 10px;
+  }
+
+  &__tax {
+    width: 110px;
+    padding: 0 12px;
+    text-align: right;
+  }
+
+  &__billable {
+    width: 74px;
+    padding: 0 12px;
+    .qt-checkbox {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+// end hourly billing aside
+
+// block time nilling aside
+.track-and-bill-table {
+  &__hourly-rate {
+    width: 109px;
+    text-align: right !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+  &__tax {
+    width: 110px;
+    text-align: right !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+  &__billable {
+    width: 64px;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    .qt-checkbox {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+.max-roll-over-input {
+  width: 104px;
+  margin-top: -11px;
+  margin-bottom: -11px;
+}
+.notify-to-agents-assign-icon {
+  margin-top: -4px;
+  margin-bottom: -4px;
+}
+
+// end block time nilling aside
+
+// product-service-contracts
+.product-bill-customer-select-nav {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  border-bottom: 1px solid #dfe3e8;
+
+  li {
+    font-size: 13px;
+    color: #4f5f79;
+    font-family: Graphik-Medium, sans-serif;
+    padding-bottom: 5px;
+    border-bottom: 3px solid transparent;
+    margin-right: 16px;
+    &.--selected {
+      color: #16a4fa;
+      border-color: #16a4fa;
+    }
+    cursor: pointer;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.contract-product-service-table {
+  &__date {
+    width: 109px;
+    padding: 0 12px !important;
+    text-align: right !important;
+  }
+
+  &__duration {
+    width: 90px;
+    padding: 0 12px !important;
+    text-align: right !important;
+  }
+
+  &__description {
+    padding: 0 12px !important;
+  }
+
+  &__service {
+    padding: 0 12px !important;
+    width: 223px;
+  }
+}
+
+.contract-product-products-table{
+  &__name {
+    padding: 0 12px !important;
+  }
+
+  &__quantity {
+    width: 110px;
+    padding: 0 12px !important;
+    text-align: right !important;
+  }
+
+  &__price {
+    width: 109px;
+    padding: 0 12px !important;
+    text-align: right !important;
+  }
+}
+
+// end product-service-contracts
+
+
+// start user device billing
     .aside-header {
       height: 56px;
       background-color: #f9fafb;
@@ -108,7 +304,7 @@
 
     .contracts-page-scroll-content {
       overflow: auto;
-      height: calc(100% - 56px);
+      height: calc(100% - 127px);
     }
 
     .contract-tipe-info {
@@ -146,7 +342,7 @@
       width: 275px;
       border-radius: 6px;
       border: dashed 1px #637381;
-      padding: 15px 20px;
+      padding: 0px 20px 8px 20px;
       &__divider {
         border-top: 1px dashed #637381;
         margin-top: 8px;
@@ -168,9 +364,9 @@
     border-bottom: 1px solid #dfe3e8;
     background-color: #f9fafb;
   }
-
-
+// end user device billing
 }
+
 
 @media (min-width: 1920px) {
   .contracts-table {
