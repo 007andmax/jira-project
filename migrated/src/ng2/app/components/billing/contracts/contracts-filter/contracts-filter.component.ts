@@ -89,6 +89,7 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
   }
   public filterByDate(value) {
     if (value.start !== '' && value.end !== '') {
+      console.log('value',value);
       this.contractsFilter.setStartDate(value.start);
       this.contractsFilter.setEndDate(value.end);
     } else {

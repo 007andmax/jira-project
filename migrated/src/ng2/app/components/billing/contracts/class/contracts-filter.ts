@@ -45,7 +45,11 @@ export class ContractsFilter {
     this.selectedEndDate = data.selectedEndDate;
   }
   public getFilterList(list) {
-   return list.filter((item) => ((this.selectedCompany) ?  item.company.id === this.selectedCompany.id : true));
+    this.clearFilter();
+   return list.filter((item) => ((this.selectedCompany) ?  item.company.id === this.selectedCompany.id : true) 
+   && ((this.selectedStatus) ?  item.status === this.selectedStatus.status : true)
+   && ((this.selectedStartDate && this.selectedEndDate) ?  item.startDate >= this.selectedStartDate && item.endDate <= this.selectedEndDate : true)
+   && ((this.selectedType) ?  item.type === this.selectedType.type && item.billType === this.selectedType.billType : true));
   }
   onSort(field, list) {
     let index = this.filter.findIndex(item => item.field === field);

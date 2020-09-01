@@ -21,11 +21,12 @@ export class ContractsTableComponent implements OnInit {
 
   ngOnInit() {
     this.contractsService.getServiceAgreements().subscribe(data => {
-      this.list = data.map(contact => {
+      this.reqList = data.map(contact => {
         let company = this.companiesStateService.getCompanies().find(item => item.id === contact.company.id);
         contact.company.name =  company.name;
         return contact;
       });
+      this.list = JSON.parse(JSON.stringify(this.reqList));
       this.filter.onSort('company', this.list);
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
@@ -42,7 +43,9 @@ export class ContractsTableComponent implements OnInit {
     this.contractsStateService.getFilter().subscribe(data => {
       console.log("data",data);
       this.filter.setFilters(data)
-      this.list = this.filter.getFilterList(this.list);
+     
+      this.list = this.filter.getFilterList(this.reqList);
+      this.filter.onSort('company', this.list);
       console.log("this.list",this.list);
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
