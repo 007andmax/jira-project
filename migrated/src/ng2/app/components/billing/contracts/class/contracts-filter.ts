@@ -37,7 +37,17 @@ export class ContractsFilter {
   public setEndDate(data) {
     this.selectedEndDate = data;
   }
-  onFilter(field, list) {
+  public setFilters(data) {
+    this.selectedCompany = data.selectedCompany;
+    this.selectedType = data.selectedType;
+    this.selectedStatus = data.selectedStatus;
+    this.selectedStartDate = data.selectedStartDate;
+    this.selectedEndDate = data.selectedEndDate;
+  }
+  public getFilterList(list) {
+   return list.filter((item) => ((this.selectedCompany) ?  item.company.id === this.selectedCompany.id : true));
+  }
+  onSort(field, list) {
     let index = this.filter.findIndex(item => item.field === field);
     if (index > -1) {
       let sort = this.filter[index].filter;

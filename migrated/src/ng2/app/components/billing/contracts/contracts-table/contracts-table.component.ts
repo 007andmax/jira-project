@@ -13,6 +13,7 @@ import { CompaniesStateService } from 'src/ng2/app/states/company/companies-stat
 export class ContractsTableComponent implements OnInit {
   filter: ContractsFilter = new ContractsFilter();
   list: Array<ContractItem> = [];
+  reqList: Array<ContractItem> = [];
   constructor(private contractsService: ContractsService,
     private contractsStateService: ContractsStateService,
     private companiesStateService:CompaniesStateService,
@@ -25,14 +26,23 @@ export class ContractsTableComponent implements OnInit {
         contact.company.name =  company.name;
         return contact;
       });
-      this.filter.onFilter('company', this.list);
+      this.filter.onSort('company', this.list);
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+      }
+    })
+    this.contractsStateService.getSort().subscribe(data => {
+      console.log("data",data);
+      this.filter.onSort(data, this.list);
+      console.log("this.list",this.list);
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }
     })
     this.contractsStateService.getFilter().subscribe(data => {
       console.log("data",data);
-      this.filter.onFilter(data, this.list);
+      this.filter.setFilters(data)
+      this.list = this.filter.getFilterList(this.list);
       console.log("this.list",this.list);
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();

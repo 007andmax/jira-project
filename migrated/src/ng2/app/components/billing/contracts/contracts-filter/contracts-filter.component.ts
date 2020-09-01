@@ -1,19 +1,12 @@
 import { Component, OnInit, ViewChild, OnDestroy, Output, EventEmitter, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { SelectSearchComponent } from '../../../shared/select-search/select-search.component';
-import { TicketsFilter } from '../../../tickets/tickets/class/tickets-filter';
-import { Company } from 'src/ng2/app/interfaces/company/company';
-import { ItemStatus } from '../../../left-panel/left-panel-tickets/tickets-status/class/item-status';
 import { ContractsFilterStatus } from '../class/contracts-filter-status';
 import { ContractsFilterType } from '../class/contracts-filter-type';
 import { ContractsFilter } from '../class/contracts-filter';
 import { Subscription } from 'rxjs';
 import { MultiDatepickerComponent } from '../../../shared/multi-datepicker/multi-datepicker.component';
-import { TicketsStateService } from 'src/ng2/app/states/tickets/tickets-state.service';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
-import { TicketsService } from 'src/ng2/app/services/tickets/tickets.service';
-import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
-import { CompaniesService } from 'src/ng2/app/services/company/companies.service';
-import { LeftPanelService } from 'src/ng2/app/services/left-panel/left-panel.service';
+import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-state.service';
 
 @Component({
   selector: 'app-contracts-filter',
@@ -38,7 +31,7 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
   new ContractsFilterStatus('Expired', 'EXPIRED')]
   sub: Subscription = new Subscription();
   @Output() changeCountFilter = new EventEmitter<any>();
-  constructor(private ticketsStateService: TicketsStateService,
+  constructor(private contractsStateService: ContractsStateService,
     private companiesState: CompaniesStateService,
     public cd: ChangeDetectorRef,) { }
   ngOnInit() {
@@ -57,7 +50,7 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
     this.companyDp.clearWithOutChanges();
     this.datesDp.clearWithOutChanges();
     this.statusDp.clearWithOutChanges();
-    this.ticketsStateService.onInitFilter(this.contractsFilter);
+    this.contractsStateService.setFilter(this.contractsFilter);
     this.onChangeCounterFilter();
 
   }
@@ -81,7 +74,7 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
     } else {
       this.contractsFilter.setCompany(item);
     }
-    this.ticketsStateService.onInitFilter(this.contractsFilter);
+    this.contractsStateService.setFilter(this.contractsFilter);
     this.onChangeCounterFilter();
   }
 
@@ -91,7 +84,7 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
     } else {
       this.contractsFilter.setStatus(item);
     }
-    this.ticketsStateService.onInitFilter(this.contractsFilter);
+    this.contractsStateService.setFilter(this.contractsFilter);
     this.onChangeCounterFilter();
   }
   public filterByDate(value) {
@@ -101,7 +94,7 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
     } else {
       this.contractsFilter.resetDates();
     }
-    this.ticketsStateService.onInitFilter(this.contractsFilter);
+    this.contractsStateService.setFilter(this.contractsFilter);
     this.onChangeCounterFilter();
   }
   onSelectType(item) {
@@ -110,7 +103,7 @@ export class ContractsFilterComponent implements OnInit, OnDestroy {
     } else {
       this.contractsFilter.setType(item);
     }
-    this.ticketsStateService.onInitFilter(this.contractsFilter);
+    this.contractsStateService.setFilter(this.contractsFilter);
     this.onChangeCounterFilter();
   }
   ngOnDestroy(): void {
