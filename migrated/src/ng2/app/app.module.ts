@@ -296,6 +296,7 @@ import { NavComponent } from './components/device/nav/nav.component';
 import { TicketTaskComponent } from './components/device/ticket-task/ticket-task.component';
 import { searchTextPipe } from './components/device/_pipe/searchText.pipe';
 import { SoftwarePipe } from './pipe/software.pipe';
+import { DropDownComponent } from './components/shared/drop-down/drop-down.component';
 
 
 
@@ -756,7 +757,8 @@ angular.module('quicktech')
     PasswordComponent,
     TicketTaskComponent,
     searchTextPipe,
-    SoftwarePipe
+    SoftwarePipe,
+    DropDownComponent,
   ],
   imports: [
     BrowserModule,

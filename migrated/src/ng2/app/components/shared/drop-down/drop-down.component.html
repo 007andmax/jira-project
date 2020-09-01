@@ -1,0 +1,40 @@
+<div [ngClass]="class" ngbDropdown [container]="container">
+  <p [textContent]="title"></p>
+  <mat-error *ngIf="errorMessage" [textContent]="errorMessage">
+   
+ </mat-error>
+  <input type="text"
+         [ngStyle]="{'width':widthInput, 'height': widthHeight}"
+         [ngClass]="{'disabled': isDisabled}"
+         [disabled]="isDisabled"
+         [value]="getSelectedItemText()"
+         autocomplete="new-password"
+         [placeholder]="placeholder"
+         id="dropdown1"
+         [attr.maxlength]="maxlength"
+         (input)="onCheckAdd($event)"
+         [readonly]="!change"
+         ngbDropdownToggle />
+
+         <span *ngIf="list && !isDisabled">
+            <i *ngIf="selectedItem && !isAdd && !isBlockClear"
+               class="icn-sm icn-remove-old"
+               (click)="clearClient($event)"></i>
+            <i *ngIf="!selectedItem || isBlockClear"
+               class="icn-sm report-caret-icon"></i>
+            <i *ngIf="isAdd"  (click)="addItem()" class="icn-sm icn-product-save"></i>
+          </span>
+          <i class="loading xs" *ngIf="!list"></i>
+  <div ngbDropdownMenu
+  [ngStyle]="{'width':dropdownWidth, 'height': dropdownHeight}"
+       aria-labelledby="dropdown1" class="test-class-dropdown" >
+    <ng-template ngFor
+                 let-item
+                 [ngForOf]="list"
+                 let-i="index">
+      <button ngbDropdownItem
+              [textContent]="(field) ? item[field] : item"
+              (click)="onSelect(item)"></button>
+    </ng-template>
+  </div>
+</div>
