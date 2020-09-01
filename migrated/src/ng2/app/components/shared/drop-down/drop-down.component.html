@@ -1,10 +1,11 @@
 <div [ngClass]="class" ngbDropdown [container]="container">
-  <p [textContent]="title"></p>
-  <mat-error *ngIf="errorMessage" [textContent]="errorMessage">
-   
+  <div *ngIf="title" class="app-drop-down__title" [textContent]="title"></div>
+
+  <mat-error class="app-drop-down__error" *ngIf="errorMessage" [textContent]="errorMessage">
+
  </mat-error>
   <input type="text"
-         [ngStyle]="{'width':widthInput, 'height': widthHeight}"
+         [ngStyle]="{'width':widthInput ? widthInput : '100%', 'height': widthHeight ? widthHeight : '40px' }"
          [ngClass]="{'disabled': isDisabled}"
          [disabled]="isDisabled"
          [value]="getSelectedItemText()"
@@ -16,7 +17,11 @@
          [readonly]="!change"
          ngbDropdownToggle />
 
-         <span *ngIf="list && !isDisabled">
+         <span
+          class="app-drop-down__right-icon"
+          *ngIf="list && !isDisabled"
+          [ngStyle]="{'bottom': widthHeight ? parseInt(widthHeight)/2 + 'px'  : '20px' }"
+          >
             <i *ngIf="selectedItem && !isAdd && !isBlockClear"
                class="icn-sm icn-remove-old"
                (click)="clearClient($event)"></i>

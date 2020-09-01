@@ -14,8 +14,21 @@
 
 <div class="billing-aside-scroll-content">
 
+
+
+
     <div class="qt-df qt-pos-rel address-block">
       <div class="qt-w50 qt-pt-16 qt-pr-24 qt-pl-32 qt-pb-24">
+
+       <app-drop-down
+        [title]="'Customer Name'"
+        [placeholder]="'placeholder'"
+        [errorMessage]="'This field is required'"
+       >
+
+       </app-drop-down>
+
+
         <div class="qt-input-block">
           <label class="qt-lh-154">Customer Name</label>
           <app-select-search class="search-company invoices-company-filter"  #companyDp  [placeholder]="'Select Company'"
@@ -121,7 +134,7 @@
             [ngModel]="invoice.paymentAmount"
             (ngModelChange)="onChangePayment($event,invoice)"
             appToFixed />
-           
+
           </td>
         </tr>
 </ng-template>
