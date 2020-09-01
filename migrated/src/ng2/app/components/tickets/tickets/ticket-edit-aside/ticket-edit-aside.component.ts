@@ -310,7 +310,8 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     })
 
   };
-  getCompantName() {
+  getCompanyName() {
+    if (!this.ticketProfile.company) return '';
     let find = this.companiesStateService.getCompanies().find(item => item.id === this.ticketProfile.company.id);
     return (find) ? find.name : '';
   }
