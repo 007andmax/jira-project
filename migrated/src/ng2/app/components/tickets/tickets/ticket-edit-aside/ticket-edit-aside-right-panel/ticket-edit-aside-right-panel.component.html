@@ -1,6 +1,6 @@
-<app-ticket-edit-aside-devices   [setCompanyId]="ticketProfile.companyId" *ngIf="toggleRightPanel && type === 'DEVICES'"></app-ticket-edit-aside-devices>
-<app-ticket-edit-aside-company-info [createdUser]="ticketProfile.createdUser" [setCompanyId]="ticketProfile.companyId" *ngIf="toggleRightPanel && type === 'COMPANY_INFO'"></app-ticket-edit-aside-company-info>
-<app-ticket-edit-aside-users [setCompanyId]="ticketProfile.companyId" *ngIf="toggleRightPanel && type === 'USERS'"></app-ticket-edit-aside-users>
+<app-ticket-edit-aside-devices   [setCompanyId]="ticketProfile.company.id" *ngIf="toggleRightPanel && type === 'DEVICES'"></app-ticket-edit-aside-devices>
+<app-ticket-edit-aside-company-info [createdUser]="ticketProfile.createdUser" [setCompanyId]="ticketProfile.company.id" *ngIf="toggleRightPanel && type === 'COMPANY_INFO'"></app-ticket-edit-aside-company-info>
+<app-ticket-edit-aside-users [setCompanyId]="ticketProfile.company.id" *ngIf="toggleRightPanel && type === 'USERS'"></app-ticket-edit-aside-users>
 <div class="ticket-edit-aside__menu">
   <div class="aside-menu-item icon__panel-open" [ngClass]="{ 'opened': opened}"  (click)="togglePanel()"></div>
   <div class="aside-menu-item icon__company-info" [ngClass]="{'active': type === 'COMPANY_INFO'}" (click)="toggleTypeOnPanel('COMPANY_INFO')"></div>
