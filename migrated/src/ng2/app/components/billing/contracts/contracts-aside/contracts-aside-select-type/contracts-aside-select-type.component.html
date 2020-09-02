@@ -2,9 +2,9 @@
 
   <div class="qt-mb-20 qt-ff-sb qt-fs-15 qt-lh-147 qt-color-dark">Select your contract type from below option</div>
 
-  <div class="contract-type-select qt-mb-16  --selected">
+  <div class="contract-type-select qt-mb-16" [ngClass]="{'--selected': selected_type === 'HOURLY'}" (click)="select('HOURLY')">
     <div class="qt-radio contract-type-select__radio">
-      <input id="hourly-billing" type="radio" name="radio" value="1" checked>
+      <input id="hourly-billing" type="radio" name="radio" value="1" [checked]="selected_type === 'HOURLY'">
       <label for="hourly-billing"></label>
     </div>
 
@@ -19,9 +19,9 @@
   </div>
 
 
-  <div class="contract-type-select qt-mb-16">
+  <div class="contract-type-select qt-mb-16" [ngClass]="{'--selected': selected_type === 'BLOCK_TIME'}" (click)="select('BLOCK_TIME')">
     <div class="qt-radio contract-type-select__radio">
-      <input id="block-time" type="radio" name="radio" value="1">
+      <input id="block-time" type="radio" name="radio" value="1" [checked]="selected_type === 'BLOCK_TIME'">
       <label for="block-time"></label>
     </div>
 
@@ -36,9 +36,9 @@
   </div>
 
 
-  <div class="contract-type-select qt-mb-16">
+  <div class="contract-type-select qt-mb-16" [ngClass]="{'--selected': selected_type === 'SERVICE_CONTRACT_DEVICE_USER'}" (click)="select('SERVICE_CONTRACT_DEVICE_USER')">
     <div class="qt-radio contract-type-select__radio">
-      <input id="per-user" type="radio" name="radio" value="1">
+      <input id="per-user" type="radio" name="radio" value="1" [checked]="selected_type === 'SERVICE_CONTRACT_DEVICE_USER'">
       <label for="per-user"></label>
     </div>
 
@@ -53,9 +53,9 @@
   </div>
 
 
-  <div class="contract-type-select">
+  <div class="contract-type-select" [ngClass]="{'--selected': selected_type === 'SERVICE_CONTRACT_OTHER'}" (click)="select('SERVICE_CONTRACT_OTHER')">
     <div class="qt-radio contract-type-select__radio">
-      <input id="product" type="radio" name="radio" value="1">
+      <input id="product" type="radio" name="radio" value="1" [checked]="selected_type === 'SERVICE_CONTRACT_OTHER'">
       <label for="product"></label>
     </div>
 

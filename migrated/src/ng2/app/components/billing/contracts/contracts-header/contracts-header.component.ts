@@ -17,6 +17,9 @@ export class ContractsHeaderComponent implements OnInit {
 
   ngOnInit() {
   }
+  public showCreate() {
+    this.contractsStateService.toggleCreate(true);
+  }
   public setSort(name) {
     this.contractsStateService.setSort(name);
   }

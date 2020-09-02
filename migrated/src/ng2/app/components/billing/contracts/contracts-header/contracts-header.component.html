@@ -7,7 +7,7 @@
    
     <button class="qt-btn --outline-blue btn-mr-8" (click)="clearAll()" *ngIf="countFilter > 0">Clear all</button>
     <button class="qt-btn filter-button qt-ml-8" [ngClass]="{'active':!toggleFilter}" (click)="toggleFilter = !toggleFilter" [textContent]="getTextCountFilters()"></button>
-    <button class="qt-btn --outline-blue qt-ml-8">Create Contract</button>
+    <button class="qt-btn --outline-blue qt-ml-8" (click)="showCreate()">Create Contract</button>
   </div>
 </div>
 <app-contracts-filter #filter (changeCountFilter)="onChangeCountFilter($event)" [hidden]="toggleFilter"></app-contracts-filter>

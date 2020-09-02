@@ -11,7 +11,8 @@ var $ = require("jquery");
 })
 export class SelectSearchComponent implements OnInit, OnDestroy {
 
-
+  
+  @Input() isSearch: boolean = true;
   @Input() field: string = null;
   @Input() change: boolean = true;
   @Input() add: boolean = false;

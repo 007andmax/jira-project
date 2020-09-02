@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-state.service';
 
 @Component({
   selector: 'contracts',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContractsComponent implements OnInit {
   showCreate = false;
-  constructor() { }
+  constructor(private contractsStateService: ContractsStateService) { }
 
   ngOnInit() {
+    this.contractsStateService.getOnToggleCreate().subscribe(data => {
+      this.showCreate = data;
+    })
   }
 
 }

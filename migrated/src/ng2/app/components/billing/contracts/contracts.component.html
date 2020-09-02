@@ -10,6 +10,6 @@
 </div>
 
 <!-- <button (click)="showCreate = true">Create</button> -->
-<!-- <app-create-contracts *ngIf="showCreate" (onClose)="showCreate = false"></app-create-contracts>  -->
+ <!-- <app-create-contracts *ngIf="showCreate" (onClose)="showCreate = false"></app-create-contracts> -->  
 
-<!--<app-contracts-aside></app-contracts-aside>-->
+<app-contracts-aside *ngIf="showCreate" (onClose)="showCreate = false"></app-contracts-aside>

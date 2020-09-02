@@ -20,6 +20,7 @@
     [attr.maxlength]="maxlength"
     (blur)="onChange($event)"
     (isPopupOpen)="isDropDownOpen()"
+    [readonly]="!isSearch"
   />
   <span *ngIf="list && !isDisabled">
     <i *ngIf="selectedItem && !isAdd && !isBlockClear"

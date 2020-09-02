@@ -48,7 +48,7 @@ export class ContractsFilter {
     this.clearFilter();
    return list.filter((item) => ((this.selectedCompany) ?  item.company.id === this.selectedCompany.id : true) 
    && ((this.selectedStatus) ?  item.status === this.selectedStatus.status : true)
-   && ((this.selectedStartDate && this.selectedEndDate) ?  item.startDate >= this.selectedStartDate && item.endDate <= this.selectedEndDate : true)
+   && ((this.selectedStartDate && this.selectedEndDate) ?  item.startDate >= this.selectedStartDate && item.startDate <= this.selectedEndDate : true)
    && ((this.selectedType) ?  item.type === this.selectedType.type && item.billType === this.selectedType.billType : true));
   }
   onSort(field, list) {
