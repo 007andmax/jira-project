@@ -119,19 +119,22 @@ export class TicketsFilter {
 
         }
         if (this.selectedTechUser) {
-            payload.groupFieldFilters[0].fieldFilterDtos.push({
-                operator: "EQ",
-                path: "assignedUser.id",
-                values: [this.selectedTechUser.id]
-            }, 
-            {
-                path: "multiAssignedUsers.id",
-                operator: "IN",
-                values: [
-                    this.selectedTechUser.id
-                ]
-            });
-            payload.groupFieldFilters[0].predicateRule = "OR";
+            payload.groupFieldFilters.push({
+                fieldFilterDtos: [{
+                    operator: "EQ",
+                    path: "assignedUser.id",
+                    values: [this.selectedTechUser.id]
+                },
+                {
+                    path: "multiAssignedUsers.id",
+                    operator: "IN",
+                    values: [
+                        this.selectedTechUser.id
+                    ]
+                }],
+                predicateRule: "OR"
+            })
+           
         }
         if (this.selectedUser) {
 
