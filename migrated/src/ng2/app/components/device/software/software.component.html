@@ -16,13 +16,13 @@
                     autocomplete="off"
                   />
                 </form>
-                <a (click)="printPdf();" data-tooltip="Print"><img src="../../../../ng1/images/device/print.svg"></a>
-                <a (click)="downloadCsv();" data-tooltip="Download CSV"><img src="../../../../ng1/images/device/download_csv.svg"></a>
+                <a (click)="printPdf();" data-tooltip="Print"><img src="/html/ng2/assets/img/device/print.svg"></a>
+                <a (click)="downloadCsv();" data-tooltip="Download CSV"><img src="/html/ng2/assets/img/device/download_csv.svg"></a>
               </div>
               <!-- <div class="page-header-opt">
                 <div class="selected-item" *ngIf="selectedList.length > 0">
                     <span>{{selectedList.length}} Selected</span>
-                    <a class="delete" title="Remove" (click)="openModal(templateDelete, 0);"><img src="../../../../../ng1/images/device/remove-primary.svg" alt="remove"/></a>
+                    <a class="delete" title="Remove" (click)="openModal(templateDelete, 0);"><img src="..//html/ng2/assets/img/device/remove-primary.svg" alt="remove"/></a>
                 </div>
               </div>     -->
           </div>
@@ -59,7 +59,7 @@
                           </div>
                         </td> -->
                         <td class="s-name">
-                          <!-- <span class="device-pic"><img src="../../../../../ng1/images/device/adb-reader.png" alt="adb-reader"/></span> -->
+                          <!-- <span class="device-pic"><img src="..//html/ng2/assets/img/device/adb-reader.png" alt="adb-reader"/></span> -->
                           <h5>{{software.softName || 'N/A'}}</h5>
                         </td>
                         <td class="pulisher">{{software.softPublisher || 'N/A'}}</td>
@@ -67,7 +67,7 @@
                         <td class="install">{{(software.softInstalledOn | date : DateFormat) || 'N/A'}}</td>
                         <td class="c-version">{{software.softVersion || 'N/A'}}</td>
                         <!-- <td class="action">
-                          <a class="remove" data-tooltip="Remove" (click)="openModal(templateDelete, index + 1);"><img src="../../../../../ng1/images/device/remove.svg" alt="remove"/></a>
+                          <a class="remove" data-tooltip="Remove" (click)="openModal(templateDelete, index + 1);"><img src="..//html/ng2/assets/img/device/remove.svg" alt="remove"/></a>
                         </td> -->
                       </tr>               
                     </tbody>
@@ -81,7 +81,7 @@
                       </div>
                     </td> 
                     <td class="s-name">
-                      <span class="device-pic"><img src="../../../../../ng1/images/device/adb-reader.png" alt="adb-reader"/></span>
+                      <span class="device-pic"><img src="..//html/ng2/assets/img/device/adb-reader.png" alt="adb-reader"/></span>
                       <h5>{{software.softName}}</h5>
                     </td>
                     <td class="pulisher">{{software.softPublisher}}</td>
@@ -89,7 +89,7 @@
                     <td class="install">{{(software.softInstalledOn | date : DateFormat) || 'N/A'}}</td>
                     <td class="c-version">{{software.softVersion || 'N/A'}}</td>
                     <td class="action">
-                      <a class="remove" data-tooltip="Remove" (click)="openModal(templateDelete, index + 1);"><img src="../../../../../ng1/images/device/remove.svg" alt="remove"/></a>
+                      <a class="remove" data-tooltip="Remove" (click)="openModal(templateDelete, index + 1);"><img src="..//html/ng2/assets/img/device/remove.svg" alt="remove"/></a>
                     </td>
                   </tr>
                 </table> -->

@@ -5,7 +5,6 @@ import { first } from 'rxjs/operators';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { isArray } from 'util';
 
-
 @Component({
   selector: 'app-terminal',
   templateUrl: './terminal.component.html',
@@ -35,7 +34,9 @@ export class TerminalComponent implements OnInit {
     categoryId: '',
     search: ''
   };
+  scriptDetailModal = {};
   lineNumber = [1];
+  lineNumberDetail = [1];
   deleteId = '';
   deleteTitle = '';
   command = '';
@@ -49,6 +50,9 @@ export class TerminalComponent implements OnInit {
   cmdCategoryReadList = [];
   runScript = false;
   scriptDetail = false;
+  sessionId = '';
+  finalCommand = '';
+  splitCommand = [];
   @ViewChild('editor') editorElement:ElementRef;
   code = '';
   config = {
@@ -216,12 +220,13 @@ export class TerminalComponent implements OnInit {
   
   createCommand() {
     this.submitted = true;
+    this.loading = true;
     if (this.form.invalid) {
       return;
     }
     let data = {
       title: this.commandModal.title,
-      categoryId: this.commandModal.categoryId,
+      categoryId: this.commandModal.categoryId !== undefined ? this.commandModal.categoryId : this.cmdCategoryReadList.filter(val => val.name === this.commandModal.category)[0].id,
       command: this.commandModal.command,
       id: this.commandModal.id
     }
@@ -230,6 +235,7 @@ export class TerminalComponent implements OnInit {
       this.terminalService.createCommand(data)
       .pipe(first())
       .subscribe(resp => {
+        this.loading = false;
         if (resp.id !== '') {
           this.toastr.success('Command Created Successfully');
           this.create=!this.create;
@@ -238,12 +244,13 @@ export class TerminalComponent implements OnInit {
       },
       error => {
         const statusError = error;
-        
+        this.loading = false;
       });
     } else {
       this.terminalService.updateCommand(data)
       .pipe(first())
       .subscribe(resp => {
+        this.loading = false;
         if (resp.id !== '') {
           this.toastr.success('Command Updated Successfully');
           this.create=!this.create;
@@ -252,7 +259,7 @@ export class TerminalComponent implements OnInit {
       },
       error => {
         const statusError = error;
-        
+        this.loading = false;
       });
     }
     
@@ -261,6 +268,10 @@ export class TerminalComponent implements OnInit {
   openEditCommand(data: any) {
     this.commandModal.title = data.title;
     this.commandModal.command = data.command;
+    this.lineNumber = [];
+    for (let index = 1; index <= data.command.split(/\r*\n/).length; index++) {
+      this.lineNumber.push(index);
+    }
     this.commandModal.id = data.id;
     this.commandModal.categoryId = data.cateogryId;
     let res = this.cmdCategoryReadList.filter(x => x.id == data.categoryId);
@@ -384,12 +395,77 @@ export class TerminalComponent implements OnInit {
     var text = $("#cmd textarea").val().toString();   
     var lines = text.split(/\r*\n/);
     var count = lines.length;
-    console.log(count);
     this.lineNumber = [];
     for (let index = 0; index < count; index++) {
       this.lineNumber[index] = index + 1;
     }
     $('#cmd_line').scrollTop($('#cmd textarea').scrollTop());
+  }
+
+  countLineNumberDetail() {
+    var text = $("#cmd_detail textarea").val().toString();   
+    var lines = text.split(/\r*\n/);
+    var count = lines.length;
+    this.lineNumberDetail = [];
+    for (let index = 0; index < count; index++) {
+      this.lineNumberDetail[index] = index + 1;
+    }
+    $('#cmd_detail_line').scrollTop($('#cmd_detail textarea').scrollTop());
+  }
+
+  viewScriptDetail(data) {
+    debugger;
+    this.scriptDetail = !this.scriptDetail;
+    this.scriptDetailModal = data;
+    this.lineNumberDetail = [];
+    for (let index = 1; index <= data.command.split(/\r*\n/).length; index++) {
+      this.lineNumberDetail.push(index);
+    }
+  }
+
+  copyToTerminal(cmd) {
+    if (JSON.parse(localStorage.getItem('deviceDetail')).online === false) {
+      this.finalCommand = cmd;
+      this.splitCommand = cmd.split(/\r*\n/);
+      this.sessionId = localStorage.getItem('uuid');
+      this.sendCommand();
+    } else {
+      this.toastr.error('The device is offline');
+    }
+    
+  }
+
+  sendCommand() {
+    let data = {
+      "companyId": localStorage.getItem('company_id'),
+      "agentId": localStorage.getItem('agentId'),
+      "sessionId": this.sessionId,
+      "scriptType": "cmd", // 'powershell'
+      "script": this.finalCommand,
+      "file": this.splitCommand.length > 1 ? true : false,
+      "keepOpen": true
+    }
+
+    this.terminalService.sendCommand(data)
+    .pipe(first())
+    .subscribe(resp => {
+      debugger;
+    },
+    error => {
+      const statusError = error;
+    });
+  }
+
+  cloneScript(id) {
+    this.terminalService.cloneCommand(id)
+    .pipe(first())
+    .subscribe(resp => {
+      this.toastr.success('Cloned Successfully');
+      this.getCommandList();
+    },
+    error => {
+      const statusError = error;
+    });
   }
 
 

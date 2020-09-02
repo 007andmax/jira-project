@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { HardwareService } from './_services/hardware.service';
 import { DeviceDetailService } from './_services/device_detail.service';
 import { first } from 'rxjs/operators';
+import { v4 as uuidv4 } from 'uuid';
 declare var $:any;
 @Component({
   selector: 'app-root',
@@ -60,6 +61,7 @@ export class DeviceComponent implements OnInit {
   }
   
   ngOnInit(): void {
+    localStorage.setItem('uuid', uuidv4());
     this.deviceType = localStorage.getItem('type');
     if (this.deviceType === 'printer') {
       this.deviceImg = '/html/ng2/assets/img/device/Device_printer.svg';

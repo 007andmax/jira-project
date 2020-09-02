@@ -72,4 +72,18 @@ export class TerminalService {
             return data;
         }))
     }
+
+    sendCommand(data: any) {
+        return this.http.post<any>(CONFIG.sendCommandURL, data)
+        .pipe(map(data => {
+            return data;
+        }))
+    }
+
+    cloneCommand(id: string) {
+        return this.http.post<any>(CONFIG.cloneCommandURL + id, {})
+        .pipe(map(data => {
+            return data;
+        }))
+    }
 }

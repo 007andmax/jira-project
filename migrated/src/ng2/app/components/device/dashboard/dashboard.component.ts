@@ -142,7 +142,7 @@ export class DashboardComponent implements OnInit {
             let size = this.convertToGB(element.size);
             let free = this.convertToGB(element.free_space)
             let osize = parseInt(size) - parseInt(free)
-            element.percent = (osize/parseInt(size)) * 100;
+            element.percent =  Math.round((osize/parseInt(size)) * 100);
           } else {
             element.percent = 0;
           }
@@ -220,7 +220,7 @@ export class DashboardComponent implements OnInit {
     );
   }
   convertToGB(value) {
-    return (parseInt(value)/1024/1024/1024).toFixed(1)
+    return (parseInt(value)/1024/1024/1024).toFixed(2)
   }
   saveLabel() {
     this.label = this.label.toUpperCase();

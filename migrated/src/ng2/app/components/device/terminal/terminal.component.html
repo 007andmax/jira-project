@@ -5,18 +5,20 @@
         <!-- Page Title -->
         <div class="page-header">
           <h3>Terminal</h3>
-          <div class="page-header-opt">
+          <!-- <div class="page-header-opt">
             <div class="update-info">
               <a class="Command active" href="javascript:;">Command Line</a>
               <a class="Power" href="javascript:;">Power Shell</a>
             </div>
-          </div>
+          </div> -->
         </div>
         <!-- Page Content -->
         <div class="contant-area">
           <div class="terminal-area">
             <div class="terminal-box">
-              <p>C:\Users\Sam\Desktop</p>
+              <p *ngIf="splitCommand.length === 0">C:\Users\Sam\Desktop></p>
+              <p *ngFor="let split of splitCommand"><span>C:\Users\Sam\Desktop></span><span>{{split}}</span></p>
+              <!-- <textarea>C:\Users\Sam\Desktop></textarea> -->
             </div>
           </div>
         </div>
@@ -70,7 +72,7 @@
                         #Category="ngModel" 
                         required readonly
                         [class.validation-error]="submitted == true && Category.errors && Category.errors.required">
-                      <img class="icn-sm report-caret-icon" src="/html/ng2/assets/img/device/selct-arrow.svg"/>
+                      <img class="icn-sm report-caret-icon" src="./..//html/ng2/assets/img/device/selct-arrow.svg"/>
                       <div ngbDropdownMenu
                            aria-labelledby="dropdownBasic1">
                            <button *ngFor="let category of cmdCategoryReadList" ngbDropdownItem (click)="commandModal.category = category.name;commandModal.categoryId = category.id;">{{category.name}}</button>
@@ -100,7 +102,7 @@
                           <ul id="cmd_line">
                             <li *ngFor="let line of lineNumber">{{line}}</li>
                           </ul>
-                          <textarea class="form-input" [(ngModel)]="commandModal.command" name="command" (keyup)="countLineNumber()">
+                          <textarea wrap="off" class="form-input" [(ngModel)]="commandModal.command" name="command" (keyup)="countLineNumber()">
                        
                           </textarea>
                         </div>
@@ -142,6 +144,7 @@
                         href="javascript:;"
                         class="copy"
                         datadata-tooltip="Copy to terminal"
+                        (click)="copyToTerminal(cmd.command);"
                         >Copy to terminal</a
                       >
                       <div class="btn-group" ngbDropdown>
@@ -369,7 +372,7 @@
                           class="cmn-select form-input"
                           name="my_category" 
                           readonly>
-                        <img class="icn-sm report-caret-icon" src="./../../../../../../ng1/images/device/selct-arrow.svg"/>
+                        <img class="icn-sm report-caret-icon" src="./..//html/ng2/assets/img/device/selct-arrow.svg"/>
                         <div ngbDropdownMenu
                              aria-labelledby="dropdownBasic2">
                              <button *ngFor="let category of cmdCategoryReadList" ngbDropdownItem (click)="filterMyScript(category);">{{category.name}}</button>
@@ -382,7 +385,7 @@
                     <div class="form-row">
                       <input
                         type="text"
-                        placeholder="Search description or filename"
+                        placeholder="Search Scripts"
                         class="form-input script-search"
                         [(ngModel)]="myScriptModal.search"
                         (keyup)="filterMyScript()"
@@ -405,6 +408,7 @@
                       href="javascript:;"
                       class="play-btn"
                       data-tooltip="Run Script"
+                      (click)="copyToTerminal(script.command)"
                     >
                       <img
                         src="/html/ng2/assets/img/device/play-script.svg"
@@ -416,7 +420,7 @@
                       href="javascript:;"
                       class="view-btn"
                       data-tooltip="View Script"
-                      (click)="scriptDetail = !scriptDetail"
+                      (click)="viewScriptDetail(script);"
                     >
                       <img
                         src="/html/ng2/assets/img/device/view-script.svg"
@@ -448,7 +452,7 @@
                           class="cmn-select form-input"
                           name="shared_category" 
                           readonly>
-                        <img class="icn-sm report-caret-icon" src="./../../../../../../ng1/images/device/selct-arrow.svg"/>
+                        <img class="icn-sm report-caret-icon" src="./..//html/ng2/assets/img/device/selct-arrow.svg"/>
                         <div ngbDropdownMenu
                              aria-labelledby="dropdownBasic2">
                              <button *ngFor="let category of cmdCategoryReadList" ngbDropdownItem (click)="filterSharedScript(category);">{{category.name}}</button>
@@ -478,13 +482,14 @@
                     <h5>{{shared.title}}</h5>
                     <span>{{shared.command}}</span
                     >
-                    <span class="clone-cat">Cloned Scripts</span>
+                    <!-- <span class="clone-cat">Cloned Scripts</span> -->
                   </div>
                   <div class="script-right">
                     <a
                       href="javascript:;"
                       class="play-btn"
                       data-tooltip="Clone Script"
+                      (click)="cloneScript(shared.id)"
                     >
                       <img
                         src="/html/ng2/assets/img/device/copy-script.svg"
@@ -496,7 +501,7 @@
                       href="javascript:;"
                       class="view-btn"
                       data-tooltip="View Script"
-                      (click)="scriptDetail = !scriptDetail"
+                      (click)="viewScriptDetail(shared)"
                     >
                       <img
                         src="/html/ng2/assets/img/device/view-script.svg"
@@ -507,7 +512,7 @@
                   </div>
                 </li>
               </ul>
-              <ul class="list-unstyled pagination" *ngIf="sharedScriptListFilter.length > 0">
+              <!-- <ul class="list-unstyled pagination" *ngIf="sharedScriptListFilter.length > 0">
                 <li class="next">
                   <a href="javascript:;">
                     <img
@@ -544,7 +549,7 @@
                     />
                   </a>
                 </li>
-              </ul>
+              </ul> -->
             </div>
             </ng-template>
           </ngb-tab>
@@ -573,9 +578,7 @@
         </div>
         <div class="script-details-area">
           <h2>
-            Delete Temporary Files for all user (including user profiles +
-            Windows Temp) and disables windows Update Service, to allow the
-            script to run
+            {{scriptDetailModal.title}}
           </h2>
           <!-- <div class="script-info">
             <div class="script-col">
@@ -599,17 +602,22 @@
             <div class="f-row">
               <div class="f-col col-100">
                 <div class="form-row">
-                   <textarea class="form-input">
-                     
-                   </textarea>
+                  <div id="cmd_detail">
+                    <ul id="cmd_detail_line">
+                      <li *ngFor="let line of lineNumberDetail">{{line}}</li>
+                    </ul>
+                    <textarea wrap="off" class="form-input" [(ngModel)]="scriptDetailModal.command" name="command" (keyup)="countLineNumberDetail()" disabled="true">
+                 
+                    </textarea>
+                  </div>
                 </div>
               </div>
             </div>
               <div class="f-row">
-              <div class="f-col col-100">
+              <div class="f-col col-100" *ngIf="scriptDetailModal.default === true">
                 <div class="form-row">
-                   <button type="submit" class="btn btn-primary">Clone Script</button>
-                   <button type="submit" class="btn btn-secondary" (click)="scriptDetail = !scriptDetail">Back</button>
+                   <button type="button" class="btn btn-primary" (click)="cloneScript(scriptDetailModal.id)">Clone Script</button>
+                   <button type="button" class="btn btn-secondary" (click)="scriptDetail = !scriptDetail">Back</button>
                 </div>
               </div>
             </div>
