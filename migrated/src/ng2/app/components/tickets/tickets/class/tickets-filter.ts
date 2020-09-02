@@ -123,8 +123,15 @@ export class TicketsFilter {
                 operator: "EQ",
                 path: "assignedUser.id",
                 values: [this.selectedTechUser.id]
+            }, 
+            {
+                path: "multiAssignedUsers.id",
+                operator: "IN",
+                values: [
+                    this.selectedTechUser.id
+                ]
             });
-            payload.groupFieldFilters[0].predicateRule = "AND";
+            payload.groupFieldFilters[0].predicateRule = "OR";
         }
         if (this.selectedUser) {
 
