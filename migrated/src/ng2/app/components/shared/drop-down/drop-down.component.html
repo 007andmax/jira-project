@@ -1,4 +1,8 @@
-<div [ngClass]="class" ngbDropdown [container]="container">
+<div ngbDropdown
+  [ngClass]="class"
+  [container]="container"
+  [ngStyle]="{'width':widthInput ? widthInput : '100%'}"
+>
   <div *ngIf="title" class="app-drop-down__title" [textContent]="title"></div>
 
   <mat-error class="app-drop-down__error" *ngIf="errorMessage" [textContent]="errorMessage">
@@ -20,7 +24,7 @@
          <span
           class="app-drop-down__right-icon"
           *ngIf="list && !isDisabled"
-          [ngStyle]="{'bottom': widthHeight ? parseInt(widthHeight)/2 + 'px'  : '20px' }"
+          [ngStyle]="{'bottom': heightInput ? 40/2 + 'px' : '20px' }"
           >
             <i *ngIf="selectedItem && !isAdd && !isBlockClear"
                class="icn-sm icn-remove-old"
@@ -31,15 +35,17 @@
           </span>
           <i class="loading xs" *ngIf="!list"></i>
   <div ngbDropdownMenu
-  [ngStyle]="{'width':dropdownWidth, 'height': dropdownHeight}"
-       aria-labelledby="dropdown1" class="test-class-dropdown" >
+      [ngStyle]="{'width': dropdownWidth ? dropdownWidth : '100%', 'height': dropdownHeight ? dropdownHeight : 'auto'}"
+       aria-labelledby="dropdown1" class="app-drop-down__dropdown" >
     <ng-template ngFor
                  let-item
                  [ngForOf]="list"
                  let-i="index">
       <button ngbDropdownItem
               [textContent]="(field) ? item[field] : item"
-              (click)="onSelect(item)"></button>
+              (click)="onSelect(item)"
+              title="(field) ? item[field] : item"
+              ></button>
     </ng-template>
   </div>
 </div>
