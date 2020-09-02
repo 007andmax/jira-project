@@ -12,7 +12,7 @@ export class DropDownComponent implements OnInit {
   @Input() dropdownHeight: string = null;
 
   @Input() widthInput: string = null;
-  @Input() widthHeight: string = null;
+  @Input() heightInput: string = null;
   @Input() title: string = null;
   @Input() errorMessage: string = null;
   
@@ -40,7 +40,7 @@ export class DropDownComponent implements OnInit {
 
   }
   ngDoCheck() {
-    this.list.sort((a, b) => a.name.localeCompare(b.name));
+    this.list.sort((a, b) => (this.field) ? a[this.field].localeCompare(b[this.field]) : a.localeCompare(b));
     if (this.reqList.length === 0) this.reqList = JSON.parse(JSON.stringify(this.list));
     if (this.editItem) this.selectedItem = (this.field) ? this.editItem : this.editItem;
   }
@@ -56,7 +56,7 @@ export class DropDownComponent implements OnInit {
   }
   public addNewItem(data) {
     this.reqList.push(data);
-    this.reqList.sort((a, b) => a.name.localeCompare(b.name));
+    this.reqList.sort((a, b) => (this.field) ? a[this.field].localeCompare(b[this.field]) : a.localeCompare(b));
   }
   addItem() {
     this.onAddItem.emit(this.selectedItem);

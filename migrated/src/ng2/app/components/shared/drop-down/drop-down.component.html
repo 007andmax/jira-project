@@ -5,7 +5,7 @@
 
  </mat-error>
   <input type="text"
-         [ngStyle]="{'width':widthInput ? widthInput : '100%', 'height': widthHeight ? widthHeight : '40px' }"
+         [ngStyle]="{'width':widthInput ? widthInput : '100%', 'height': heightInput ? heightInput : '40px' }"
          [ngClass]="{'disabled': isDisabled}"
          [disabled]="isDisabled"
          [value]="getSelectedItemText()"
@@ -25,7 +25,7 @@
             <i *ngIf="selectedItem && !isAdd && !isBlockClear"
                class="icn-sm icn-remove-old"
                (click)="clearClient($event)"></i>
-            <i *ngIf="!selectedItem || isBlockClear"
+            <i *ngIf="(!selectedItem || isBlockClear) && !isAdd"
                class="icn-sm report-caret-icon"></i>
             <i *ngIf="isAdd"  (click)="addItem()" class="icn-sm icn-product-save"></i>
           </span>
