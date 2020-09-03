@@ -1,0 +1,276 @@
+.default-services-page {
+  min-height: calc(100vh - 78px);
+
+  &__header {
+    z-index: 1;
+  }
+
+  .sticky-list-table-header {
+    z-index: 1;
+  }
+
+  &__table-container {
+    overflow-x: auto;
+
+    &.services-list {
+      max-height: calc(100vh - 390px);
+    }
+
+    &.--visible {
+      overflow-x: visible;
+    }
+  }
+
+  &__question-icon {
+    display: inline-block;
+    position: relative;
+    top: 2px;
+    left: -1px;
+  }
+
+  .default-service-table {
+    max-width: 1320px;
+    margin: 0 auto;
+
+    th, td {
+      white-space: nowrap;
+    }
+
+    &__menu {
+      width: 28px;
+      max-width: 28px;
+      padding-left: 0;
+      padding-right: 0;
+      position: relative;
+     }
+
+     &__default {
+      text-align: center;
+      width: 105px;
+      max-width: 105px;
+      padding-left: 10px !important;
+    }
+
+    &__billable {
+      text-align: center;
+      width: 110px;
+      max-width: 110px;
+      padding-right: 5px !important;
+    }
+
+    &__gl {
+      width: 140px;
+      max-width: 140px;
+    }
+
+    &__service-name {
+      width: max-content;
+      max-width: 500px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    &__taxes {
+      max-width: 100px;
+      width: 100px;
+    }
+
+    &__rate {
+      max-width: 140px;
+      width: 140px;
+    }
+
+    th.default-service-table__contracts {
+      padding-left: 0 !important;
+      text-transform: uppercase;
+      font-size: 10px;
+      padding-bottom: 5px !important;
+      padding-top: 10px !important;
+    }
+  }
+
+  .ql-input-number {
+    width: 112px;
+    height: 32px;
+    border-radius: 4px;
+    background-color: #f4f6f8;
+    border: none;
+  }
+
+  .gl-number-dropdown {
+    background: #f4f6f8;
+    height: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    border-radius: 4px;
+    color: #4f5f79;
+    font-size: 13px;
+    position: relative;
+    margin-top: 7px;
+    margin-bottom: 7px;
+    p {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  }
+
+  .qt-number-dropdown-menu {
+    flex-direction: column;
+    max-height: 144px;
+    height: fit-content;
+    padding-top: 8px;
+    position: fixed !important;
+    transform: translate(0) !important;
+    top: unset !important;
+    left: unset !important;
+    // top: 37px !important;
+    // left: 16px !important;
+
+    button.dropdown-item {
+      text-align: left;
+      border: none;
+      background: white;
+      min-height: 32px;
+      color: #364656;
+      padding: 0 15px;
+      &:hover {
+        background: #edf2f67d;
+      }
+    }
+
+    &.show {
+      display: flex !important;
+    }
+  }
+
+  .default-services-items-dropdown {
+    width: 140px;
+    min-width: 140px !important;
+
+  }
+
+}
+// add aside
+.default-services-page__aside {
+  color: #4f5f79;
+  background: white;
+  width: 592px;;
+  position: absolute;
+  border-left: 1px solid #dfe3e8;
+  height: 100%;
+  right: 0;
+  box-shadow: -8px 0 8px 0 rgba(0, 0, 0, 0.05);
+  position: fixed;
+  top: 79px;
+  right: 0;
+  height: calc(100vh - 79px);
+  z-index: 5;
+
+  .default-services-scroll-content {
+    overflow: auto;
+    height: calc(100% - 127px);
+  }
+
+  .aside-header {
+    height: 56px;
+    background-color: #f9fafb;
+    border-bottom: 1px solid #dfe3e8;
+  }
+
+  .add-tax-btn {
+    line-height: 1;
+    color: #16a4fa;
+  }
+
+  .create-product-taxes-select {
+    .light-dropdown.new-taxes-area {
+      margin-top: 0 !important;
+    }
+
+    .label-name {
+      line-height: 1;
+      margin-bottom: 12px !important;
+      font-size: 13px !important;
+      color: #4f5f79;
+      font-family: Graphik-Medium, sans-serif !important;
+      height: 12px;
+    }
+
+    .add-tax.add-tax-inventory {
+      line-height: 1;
+      font-family: Graphik-Medium, sans-serif;
+      font-size: 12px;
+    }
+
+    .dropdown-menu.new-tax.show {
+      border: aliceblue;
+      right: -30px !important;
+      left: unset !important;
+      top: 7px !important;
+      box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.05);
+      border: solid 1px #dfe3e8;
+      background-color: #ffffff;
+    }
+
+    .add-tax-dropdown:after,
+    .add-category-lp-dropdown > div:after {
+      left: unset;
+      right: 10px;
+      top: -5px;
+      border: 6px solid transparent;
+      border-bottom-color: #fff;
+      border-top: 0;
+    }
+  }
+
+  .qt-number-input {
+    .icn-product-save {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+}
+
+app-default-services-item,app-default-services-contracts {
+  display: contents;
+}
+
+.default-service-table__gl {
+  .tooltip {
+    top: -5px !important;
+
+    * {
+      text-transform: none !important;
+      text-align: left !important;
+      line-height: 1.33 !important;
+      font-size: 12px !important;
+      color: white !important;
+      font-family: 'Graphik-Regular', sans-serif !important;
+    }
+  }
+}
+
+
+
+
+@media (min-width: 1920px) {
+  .default-service-table {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .default-services-page__table-container {
+    width: 85%;
+    max-width: 85%;
+    margin: 0 auto;
+  }
+}
+
+
+

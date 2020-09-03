@@ -208,7 +208,7 @@
             return 'Company Profile';
           } else if ($state.includes("products")) {
             return 'Products';
-          } else if ($state.includes("services")) {
+          } else if ($state.includes("default-services")) {
             return 'Services';
           } else if ($state.includes("accounting.billable") || $state.includes("new-billable")) {
             return 'Billable';

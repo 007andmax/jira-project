@@ -13,6 +13,7 @@ export class SelectSearchComponent implements OnInit, OnDestroy {
 
   
   @Input() isSearch: boolean = true;
+  @Input() container: string = null;
   @Input() field: string = null;
   @Input() change: boolean = true;
   @Input() add: boolean = false;

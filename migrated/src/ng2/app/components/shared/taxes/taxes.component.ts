@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, ChangeDetectorRef, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, Input, ChangeDetectorRef } from '@angular/core';
 import { TaxesStateService } from 'src/ng2/app/states/taxes/taxes-state.service';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
@@ -48,8 +48,15 @@ export class TaxesComponent implements OnInit, OnDestroy {
   public onAddTax() {
     this.taxesService.addTax(this.taxForm.value).subscribe((data: Tax) => {
       this.selected(data);
+      this.containerAddTax.close();
+      this.cd.detectChanges();
     })
   }
+
+  public setEditItem(data) {
+    this.selectedTax = data;
+  }
+
 
   /**
   * Subscribe for edit mode
@@ -58,6 +65,7 @@ export class TaxesComponent implements OnInit, OnDestroy {
     let getTagsFromEdit = this.taxesStateService.getTaxesFromEdit().subscribe((data) => {
       this.selectedTax = data;
       this.cd.detectChanges();
+      console.log("this.selectedTax",this.selectedTax);
     });
     this.sub.add(getTagsFromEdit);
   }

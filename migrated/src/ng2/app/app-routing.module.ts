@@ -35,6 +35,7 @@ import { BillableTicketsComponent } from './components/billing/billable/billable
 import { ContractsComponent } from './components/billing/contracts/contracts.component';
 import { InvoicesComponent } from './components/billing/invoices/invoices.component';
 import { PaymentsComponent } from './components/billing/payments/payments.component';
+import { DefaultServicesComponent } from './components/billing/default-services/default-services.component';
 
 const routes: Routes = [
   {
@@ -182,6 +183,10 @@ const routes: Routes = [
   {
     path: 'ng2/billable',
     component: BillableComponent,
+  },
+  {
+    path: 'ng2/default-services',
+    component: DefaultServicesComponent,
   },
   {
     path: 'ng2/invoices',

@@ -17,6 +17,7 @@ import { TicketsRealTimeService } from '../../states/tickets/tickets-real-time.s
 import { BillableRealTimeService } from '../../states/billable/billable-real-time.service';
 import { InvoiceRealTimeService } from '../../states/invoice/invoice-real-time.service';
 import { PaymentsRealTimeService } from '../../states/payments/payments-real-time.service';
+import { DefaultServicesRealTimeService } from '../../states/default-services/default-services-real-time.service';
 
 /**
  * Websocket service to work with api
@@ -50,9 +51,11 @@ export class WebsocketService {
     private glNumberRealTimeService: GlNumberRealTimeService,
     private inventoryRealTimeService: InventoryRealTimeService,
     private ticketsRealTimeService: TicketsRealTimeService,
-    private billableRealTimeService: BillableRealTimeService,
-    private invoiceRealTimeService: InvoiceRealTimeService,
-    private paymentsRealTimeService: PaymentsRealTimeService
+    private paymentsRealTimeService: PaymentsRealTimeService,
+    private billableRealTimeService:BillableRealTimeService,
+    private invoiceRealTimeService:InvoiceRealTimeService,
+    private defaultServicesRealTimeService:DefaultServicesRealTimeService,
+
 
   ) {
   }
@@ -81,6 +84,7 @@ export class WebsocketService {
       that.subsribeToInvoice();
       that.subsribeToSubmittedTicket();
       that.subsribeToPayments();
+      that.subsribeToSubmittedService();
     });
   }
   private subsribeToDevices() {
@@ -347,6 +351,15 @@ export class WebsocketService {
       this.stompClient.subscribe(`/user/watch/payments`, (message) => {
         var newChange = JSON.parse(message.body);
         this.paymentsRealTimeService.handleRealTimeChanges(newChange);
+      });
+    });
+  }
+
+  public subsribeToSubmittedService() {
+    setTimeout(() => {
+      this.stompClient.subscribe(`/user/watch/service`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.defaultServicesRealTimeService.handleRealTimeChanges(newChange);
       });
 
     }, 3000);

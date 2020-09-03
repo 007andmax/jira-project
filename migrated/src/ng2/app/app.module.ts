@@ -298,6 +298,12 @@ import { ContractsAsideTopComponent } from './components/billing/contracts/contr
 import { ContractsAsideHourlyBillingDefaultServiceComponent } from './components/billing/contracts/contracts-aside/contracts-aside-hourly-billing/contracts-aside-hourly-billing-default-service/contracts-aside-hourly-billing-default-service.component';
 import { ContractsAsideHourlyBillingAddServiceComponent } from './components/billing/contracts/contracts-aside/contracts-aside-hourly-billing/contracts-aside-hourly-billing-add-service/contracts-aside-hourly-billing-add-service.component';
 
+import { DefaultServicesComponent } from './components/billing/default-services/default-services.component';
+import { DefaultServicesAddComponent } from './components/billing/default-services/default-services-add/default-services-add.component';
+import { DefaultServicesItemComponent } from './components/billing/default-services/default-services-item/default-services-item.component';
+import { DefaultServicesContractsComponent } from './components/billing/default-services/default-services-contracts/default-services-contracts.component';
+import { DefaultServicesEditComponent } from './components/billing/default-services/default-services-edit/default-services-edit.component';
+ 
 
 
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
@@ -432,6 +438,9 @@ angular.module('quicktech')
   .directive(
     'billableComponent',
     downgradeComponent({ component: BillableComponent }))
+    .directive(
+      'defaultServicesComponent',
+      downgradeComponent({ component: DefaultServicesComponent }))
   .directive(
     'invoicesComponent',
     downgradeComponent({ component: InvoicesComponent }))
@@ -730,6 +739,11 @@ angular.module('quicktech')
     ContractsAsideTopComponent,
     ContractsAsideHourlyBillingDefaultServiceComponent,
     ContractsAsideHourlyBillingAddServiceComponent,
+    DefaultServicesComponent,
+    DefaultServicesAddComponent,
+    DefaultServicesItemComponent,
+    DefaultServicesContractsComponent,
+    DefaultServicesEditComponent
   ],
   imports: [
     BrowserModule,
@@ -806,7 +820,8 @@ angular.module('quicktech')
     ContractsComponent,
     InvoicesComponent,
     BillableTicketsComponent,
-    PaymentsComponent
+    PaymentsComponent,
+    DefaultServicesComponent
     // RecurringTicketsComponent
   ],
   exports: [

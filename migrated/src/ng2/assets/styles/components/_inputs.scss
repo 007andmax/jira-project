@@ -94,3 +94,26 @@ span.qt-input-search input.qt-input-search {
 }
 
 
+ngb-typeahead-window.dropdown-menu {
+  width: 192px;
+  max-height: 176px !important;
+
+  button.dropdown-item {
+    display: block;
+    border: none;
+    height: 32px;
+    background: white;
+    width: 100%;
+    text-align: left;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    font-size: 11px;
+    color: #364656;
+
+    &:hover {
+      background-color: #edf2f687;
+    }
+  }
+}

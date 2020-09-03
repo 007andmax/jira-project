@@ -27,7 +27,7 @@ export class GlNumberStateService {
       if (newChange.action === "GL_NUMBER_SAVED") {
         let index = this.glNumbers.findIndex(item => item.id === newChange.data.id);
         if (index > -1) {
-          this.glNumbers[index] = newChange.data;
+          this.glNumbers[index] = new GlNumber(newChange.data);
           if (newChange.data.blockTime || newChange.data.serviceContract) {
             this.glNumbers.forEach((item, indexItem) => {
               if (newChange.data.blockTime && index !== indexItem) {
@@ -39,11 +39,13 @@ export class GlNumberStateService {
             });
           }
         } else {
-          this.glNumbers.push(newChange.data);
+          this.glNumbers.push(new GlNumber(newChange.data));
           this.glNumbers = this.glNumbers.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
             1 : ((b.glNumber.toLowerCase() > a.glNumber.toLowerCase()) ? -1 : 0));
         }
-        this.onChangeGlNumbers.emit(new GlNumberChange(newChange.action, newChange.data, this.glNumbers));
+        console.log("this.glNumbers",this.glNumbers);
+        this.onInitGetGLNumbers(this.glNumbers);
+        //this.onChangeGlNumbers.emit(new GlNumberChange(newChange.action, newChange.data, this.glNumbers));
       }
     })
   }
