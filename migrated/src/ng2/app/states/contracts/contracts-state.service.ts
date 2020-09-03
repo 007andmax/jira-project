@@ -4,12 +4,24 @@ import { Injectable, EventEmitter } from '@angular/core';
   providedIn: 'root'
 })
 export class ContractsStateService {
+  defaultServices:any = [];
   onFilter: EventEmitter<any> = new EventEmitter();
   onSort: EventEmitter<any> = new EventEmitter();
   onToggleCreate: EventEmitter<any> = new EventEmitter();
   onChangeType: EventEmitter<any> = new EventEmitter();
+  onDefaultServices: EventEmitter<any> = new EventEmitter();
   constructor() { }
 
+  public getDefaultService() {
+    return this.defaultServices;
+  }
+  public setDefaultService(data) {
+    this.defaultServices = data;
+    this.onDefaultServices.emit(data);
+  }
+  public getOnDefaultServices () {
+    return this.onDefaultServices;
+  }
   public setType(data) {
     this.onChangeType.emit(data);
   }
