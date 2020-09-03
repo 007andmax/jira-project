@@ -34,7 +34,7 @@ export class TerminalComponent implements OnInit {
     categoryId: '',
     search: ''
   };
-  scriptDetailModal = {};
+  scriptDetailModal:any = {};
   lineNumber = [1];
   lineNumberDetail = [1];
   deleteId = '';
