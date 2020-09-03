@@ -1,5 +1,6 @@
 import * as moment from "moment";
 import { ContractsHourlyService } from './contracts-hourly-service';
+import { DefaultServicesHourlyContract } from './default-service-hourly-contract';
 export class ContractsHourly {
     companyId: string;
     description: string = "";
@@ -9,11 +10,17 @@ export class ContractsHourly {
     type: string;
     reviewDate: string;
     constructor() {
-        
+
 
     }
+    public onAddServices(defaultServices: Array<DefaultServicesHourlyContract>) {
+        this.services = [];
+        defaultServices.forEach(item => {
+            if (item.selected) this.services.push(new ContractsHourlyService(item.isBasedOnDefault,item.billable,item.commissionRate,item.versionedId.id,item.name,item.rate,item.taxes.map(tax => tax.id)));
+        })
+    }
     public setCompanyId(data) {
-this.companyId = data;
+        this.companyId = data;
     }
     public setReviewDate(day, month, year, timeOffset) {
         let current = new Date();

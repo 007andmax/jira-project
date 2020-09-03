@@ -40,7 +40,8 @@ export class ContractsAsideHourlyBillingComponent implements OnInit {
     })
   }
   public onCreate() {
-    if (!this.validate.isValidate(this.contractsHourly)) return;
+    this.contractsHourly.onAddServices(this.defaultServices);
+    if (this.contractsHourly.services.length === 0 || !this.validate.isValidate(this.contractsHourly)) return;
     this.contractsService.validateCrossingDatesHourly(moment(this.contractsHourly.startDate).format('DD MMM YYYY'), moment(this.contractsHourly.endDate).format('DD MMM YYYY'), this.contractsHourly.companyId, null).subscribe((data: any) => {
       if (data.valid) {
         this.validate.resetDate();
@@ -52,9 +53,9 @@ export class ContractsAsideHourlyBillingComponent implements OnInit {
     })
   }
   public searchDuplicatedServiceNames() {
-   /* let servicesName = this.contractsHourly.de.map(item => {
-      if ()
-    });*/
+    let servicesName =  this.contractsHourly.services.map(item =>  item.name);
+    console.log("servicesName",servicesName);
+    console.log("this.contractsHourly.services",this.contractsHourly.services);
     this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsHourly.startDate).format('DD MMM YYYY'),
       moment(this.contractsHourly.endDate).format('DD MMM YYYY'), this.contractsHourly.companyId, null, servicesName).subscribe(data => {
         if (Object.keys(data).length === 0) {
