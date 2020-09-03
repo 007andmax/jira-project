@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { EmailSettingService } from '../email-setting.service';
 import { ToastrService } from 'ngx-toastr';
 import { SettingService } from 'src/ng2/app/services/setting/setting.service';
@@ -16,6 +16,8 @@ export class IncomingEmailComponent implements OnInit {
   constants: any;
   currentHost: '';
   inboxEnabled: boolean;
+  @Input() smtpSettingsInput: any;
+  @Input() supportMailBoxInput: any;
 
   constructor(
     private emailSettingService: EmailSettingService,
@@ -27,9 +29,11 @@ export class IncomingEmailComponent implements OnInit {
    * ng onInit
    */
   ngOnInit() {
+    this.smtpSettings = this.smtpSettingsInput;
+    this.supportMailBox = this.supportMailBoxInput;
     this.currentCompany();
     this.getConstants();
-    this.SMTPSettings();
+    // this.SMTPSettings();
   }
 
   /**

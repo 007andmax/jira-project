@@ -36,6 +36,16 @@ import { ContractsComponent } from './components/billing/contracts/contracts.com
 import { InvoicesComponent } from './components/billing/invoices/invoices.component';
 import { PaymentsComponent } from './components/billing/payments/payments.component';
 import { DefaultServicesComponent } from './components/billing/default-services/default-services.component';
+import { DashboardComponent } from './components/device/dashboard/dashboard.component';
+import { HardwareComponent } from './components/device/hardware/hardware.component';
+import { SoftwareComponent } from './components/device/software/software.component';
+import { ServicesComponent } from './components/device/services/services.component';
+import { AntivirusComponent } from './components/device/antivirus/antivirus.component';
+import { TerminalComponent } from './components/device/terminal/terminal.component';
+import { PasswordComponent } from './components/device/password/password.component';
+import { WindowsComponent } from './components/device/windows-update/windows-update.component';
+import { StartupComponent } from './components/device/startup-programes/startup-programes.component';
+import { FileComponent } from './components/device/file-explorer/file-explorer.component';
 
 const routes: Routes = [
   {
@@ -204,6 +214,46 @@ const routes: Routes = [
     path: 'ng2/payments',
     component: PaymentsComponent,
   },
+  {
+    path: 'ng2/device/dashboard',
+    component: DashboardComponent
+  },
+  {
+    path: 'ng2/device/hardware',
+    component: HardwareComponent
+  },
+  {
+    path: 'ng2/device/software',
+    component: SoftwareComponent
+  },
+  {
+    path: 'ng2/device/service',
+    component: ServicesComponent
+  },
+  {
+    path: 'ng2/device/antivirus',
+    component: AntivirusComponent
+  },
+  {
+    path: 'ng2/device/terminal',
+    component: TerminalComponent
+  },
+  {
+    path: 'ng2/device/password',
+    component: PasswordComponent
+  },
+  {
+    path: 'ng2/device/window',
+    component: WindowsComponent
+  },
+  {
+    path: 'ng2/device/startup',
+    component: StartupComponent
+  },
+  {
+    path: 'ng2/device/file',
+    component: FileComponent
+  }
 ];
 
 /**

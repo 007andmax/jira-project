@@ -16,7 +16,7 @@ import { SelectModule } from 'ng2-select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { IgxTimePickerModule } from 'igniteui-angular';
 import { SidebarModule } from 'ng-sidebar';
-
+import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ClickOutsideModule } from 'ng4-click-outside';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MatSelectModule } from '@angular/material/select';
@@ -24,7 +24,6 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule, MatIconModule } from '@angular/material';
 import { CronEditorModule } from 'cron-editor';
 import { ImageCropperModule } from 'ngx-image-cropper';
-import { NgxEditorModule } from 'ngx-editor';
 import { NgxSelectModule } from 'ngx-select-ex';
 // import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -54,6 +53,7 @@ import { CompanyPipe } from './pipe/company.pipe';
 import { PasswordManagerEditAsideComponent } from './components/password-manager/password-manager-edit-aside/password-manager-edit-aside.component';
 import { DeviceUserPipe } from './pipe/device-user.pipe';
 import { PasswordCategoryPipe } from './pipe/password-category.pipe';
+import { SanitizeHtmlPipe } from './pipe/sanitize-html.pipe';
 import { SelectClientCompanyComponent } from './components/shared/select-client-company/select-client-company.component';
 import { ProductListComponent } from './components/shared/product-list/product-list.component';
 import { ServicesListComponent } from './components/shared/services-list/services-list.component';
@@ -156,8 +156,6 @@ import { CompanyProductsComponent } from './components/companies/company-product
  * declare angular
  */
 declare var angular: any;
-import { TabsModule } from 'ngx-bootstrap/tabs';
-import { ModalModule, TypeaheadModule } from 'ngx-bootstrap';
 
 import { LeftPanelSettingComponent } from './components/left-panel/left-panel-setting/left-panel-setting.component';
 
@@ -180,6 +178,7 @@ import { AgmCoreModule } from '@agm/core';
 import { ProfileComponent } from './components/setting/my-profile/profile/profile.component';
 import { TagPipe } from './pipe/tag.pipe';
 
+import { NgxUploaderModule } from 'ngx-uploader';
 import { ToastrModule } from 'ngx-toastr';
 // import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { SelectDropDownModule } from 'ngx-select-dropdown';
@@ -303,7 +302,24 @@ import { DefaultServicesAddComponent } from './components/billing/default-servic
 import { DefaultServicesItemComponent } from './components/billing/default-services/default-services-item/default-services-item.component';
 import { DefaultServicesContractsComponent } from './components/billing/default-services/default-services-contracts/default-services-contracts.component';
 import { DefaultServicesEditComponent } from './components/billing/default-services/default-services-edit/default-services-edit.component';
- 
+
+import { DashboardComponent } from './components/device/dashboard/dashboard.component';
+import { HardwareComponent } from './components/device/hardware/hardware.component';
+import { SoftwareComponent } from './components/device/software/software.component';
+import { ServicesComponent } from './components/device/services/services.component';
+import { AntivirusComponent } from './components/device/antivirus/antivirus.component';
+import { TerminalComponent } from './components/device/terminal/terminal.component';
+import { PasswordComponent } from './components/device/password/password.component';
+import { WindowsComponent } from './components/device/windows-update/windows-update.component';
+import { StartupComponent } from './components/device/startup-programes/startup-programes.component';
+import { FileComponent } from './components/device/file-explorer/file-explorer.component';
+import { DeviceComponent } from './components/device/device.component';
+import { NavComponent } from './components/device/nav/nav.component';
+import { TicketTaskComponent } from './components/device/ticket-task/ticket-task.component';
+import { searchTextPipe } from './components/device/_pipe/searchText.pipe';
+import { SoftwarePipe } from './pipe/software.pipe';
+import { DropDownComponent } from './components/shared/drop-down/drop-down.component';
+
 
 
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
@@ -438,9 +454,9 @@ angular.module('quicktech')
   .directive(
     'billableComponent',
     downgradeComponent({ component: BillableComponent }))
-    .directive(
-      'defaultServicesComponent',
-      downgradeComponent({ component: DefaultServicesComponent }))
+  .directive(
+    'defaultServicesComponent',
+    downgradeComponent({ component: DefaultServicesComponent }))
   .directive(
     'invoicesComponent',
     downgradeComponent({ component: InvoicesComponent }))
@@ -459,6 +475,36 @@ angular.module('quicktech')
   .directive(
     'contractsComponent',
     downgradeComponent({ component: ContractsComponent }))
+  .directive(
+    'dashboardComponent',
+    downgradeComponent({ component: DashboardComponent }))
+  .directive(
+    'hardwareComponent',
+    downgradeComponent({ component: HardwareComponent }))
+  .directive(
+    'softwareComponent',
+    downgradeComponent({ component: SoftwareComponent }))
+  .directive(
+    'servicesComponent',
+    downgradeComponent({ component: ServicesComponent }))
+  .directive(
+    'antivirusComponent',
+    downgradeComponent({ component: AntivirusComponent }))
+  .directive(
+    'terminalComponent',
+    downgradeComponent({ component: TerminalComponent }))
+  .directive(
+    'passwordComponent',
+    downgradeComponent({ component: PasswordComponent }))
+  .directive(
+    'windowsComponent',
+    downgradeComponent({ component: WindowsComponent }))
+  .directive(
+    'startupComponent',
+    downgradeComponent({ component: StartupComponent }))
+  .directive(
+    'fileComponent',
+    downgradeComponent({ component: FileComponent }))
   .factory('ngZone', downgradeInjectable(NgZone));
 
 /**
@@ -481,6 +527,7 @@ angular.module('quicktech')
     PasswordManagerEditAsideComponent,
     DeviceUserPipe,
     PasswordCategoryPipe,
+    SanitizeHtmlPipe,
     QuotesComponent,
     QuoteCreateComponent,
     QuoteCreateContentComponent,
@@ -743,7 +790,23 @@ angular.module('quicktech')
     DefaultServicesAddComponent,
     DefaultServicesItemComponent,
     DefaultServicesContractsComponent,
-    DefaultServicesEditComponent
+    DefaultServicesEditComponent,
+    DeviceComponent,
+    NavComponent,
+    DashboardComponent,
+    HardwareComponent,
+    SoftwareComponent,
+    StartupComponent,
+    ServicesComponent,
+    AntivirusComponent,
+    TerminalComponent,
+    WindowsComponent,
+    FileComponent,
+    PasswordComponent,
+    TicketTaskComponent,
+    searchTextPipe,
+    SoftwarePipe,
+    DropDownComponent,
   ],
   imports: [
     BrowserModule,
@@ -768,9 +831,6 @@ angular.module('quicktech')
     DataTablesModule,
     NgSelectModule,
     SelectDropDownModule,
-    TabsModule.forRoot(),
-    ModalModule.forRoot(),
-    TypeaheadModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAbP4DFpz4f9YcXMWUjdkOdyArX2peNt8s'
     }),
@@ -778,16 +838,17 @@ angular.module('quicktech')
     ToastrModule.forRoot({
       closeButton: true,
       preventDuplicates: true,
-      timeOut: 3000
+      timeOut: 5000
     }),
     CronEditorModule,
     ImageCropperModule,
-    NgxEditorModule,
     FontAwesomeModule,
     NvD3Module,
     BrowserAnimationsModule,
     IgxTimePickerModule,
-    DisabledBtnModule
+    DisabledBtnModule,
+    NgxUploaderModule,
+    AngularEditorModule
 
   ],
   entryComponents: [
@@ -821,7 +882,21 @@ angular.module('quicktech')
     InvoicesComponent,
     BillableTicketsComponent,
     PaymentsComponent,
-    DefaultServicesComponent
+    DefaultServicesComponent,
+    AppComponent,
+    DeviceComponent,
+    NavComponent,
+    DashboardComponent,
+    HardwareComponent,
+    SoftwareComponent,
+    StartupComponent,
+    ServicesComponent,
+    AntivirusComponent,
+    TerminalComponent,
+    WindowsComponent,
+    FileComponent,
+    PasswordComponent,
+    TicketTaskComponent,
     // RecurringTicketsComponent
   ],
   exports: [
@@ -838,7 +913,36 @@ angular.module('quicktech')
     { provide: UrlHandlingStrategy, useClass: CustomHandlingStrategy },
     ApiPasswordManagerService
   ],
-  bootstrap: [AppComponent]
+  // bootstrap: [AppComponent]
 })
 export class AppModule {
+  ngDoBootstrap(app) {
+    fetch('url/to/fetch/component/name')
+      .then((name) => { bootstrapRootComponent(app, name) });
+  }
+}
+
+
+function bootstrapRootComponent(app, name) {
+  // define the possible bootstrap components 
+  // with their selectors (html host elements)
+  const options = {
+    'app': AppComponent,
+    'device': DeviceComponent
+  };
+  const component = options[name];
+  app.bootstrap(component);
+}
+
+function fetch(url) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      if (window.location.href.includes('/device/') === true) {
+        resolve('device');
+      } else {
+        resolve('app');
+      }
+
+    }, 2000);
+  });
 }

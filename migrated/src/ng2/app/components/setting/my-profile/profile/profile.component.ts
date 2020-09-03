@@ -1,7 +1,6 @@
 import {
   Component,
   OnInit,
-  TemplateRef,
   ElementRef,
   ViewChild,
   NgZone
@@ -14,7 +13,6 @@ import {
 } from '@angular/forms';
 import { SettingService } from 'src/ng2/app/services/setting/setting.service';
 import { UsersService } from 'src/ng2/app/services/users/users.service';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { Observable, Observer } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
@@ -41,7 +39,6 @@ export class ProfileComponent implements OnInit {
   imageAvatar: any;
   userProfile: any;
   userProfileAddr: any;
-  modalRef: BsModalRef;
   imageBase64 = '';
   imageSrc = '';
   public suffix = '';
@@ -61,13 +58,12 @@ export class ProfileComponent implements OnInit {
     private formBuilder: FormBuilder,
     private settingService: SettingService,
     private userService: UsersService,
-    private modalService: BsModalService,
     private toastr: ToastrService,
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone
   ) {
-    this.getCurrentUser();
-    this.getUserProfile();
+    // this.getCurrentUser();
+    // this.getUserProfile();
   }
 
   ngOnInit() {

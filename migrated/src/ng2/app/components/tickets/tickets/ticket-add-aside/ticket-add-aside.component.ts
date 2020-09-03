@@ -86,7 +86,7 @@ export class TicketAddAsideComponent implements OnInit {
     this.ticketAdd = new TicketAdd();
     this.ticketValidate = new TicketValidate();
     this.shareUsersList = [];
-    this.elRef.nativeElement.querySelector('#add-ticket-describe-issue').value = '';
+    this.elRef.nativeElement.querySelector('#add-ticket-describe-issue').innerHTML = '';
     this.opened = false;
     this.deviceDP.clearClient();
     this.userDP.clearClient();

@@ -38,6 +38,7 @@ export class TicketsTableComponent implements OnInit, OnDestroy {
     this.ticketsStateService.getOnAddTicket().subscribe(data => {
       if (this.ticketsListService.isTicketMatchesFilters(this.ticketsFilter, data)) {
         this.tickets.unshift(data);
+        this.cd.detectChanges();
       }
     })
     this.ticketStateService.getOnTicketClosed().subscribe(data => {

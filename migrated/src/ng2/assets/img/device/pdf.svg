@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" viewBox="0 0 16 18">
+    <g fill="none" fill-rule="evenodd">
+        <path stroke="#FF6E61" stroke-linejoin="round" d="M3 1h6l5 5v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
+        <text fill="#FF6E61" font-family="Graphik-Semibold, Graphik" font-size="4" font-weight="500">
+            <tspan x="4.172" y="14">PDF</tspan>
+        </text>
+        <path fill="#FFB0A8" stroke="#FF6E61" stroke-linejoin="round" d="M9 1l5 5H9z"/>
+    </g>
+</svg>
