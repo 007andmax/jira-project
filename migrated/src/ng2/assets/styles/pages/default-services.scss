@@ -11,11 +11,7 @@
 
   &__table-container {
     overflow-x: auto;
-
-    &.services-list {
-      max-height: calc(100vh - 390px);
-    }
-
+    
     &.--visible {
       overflow-x: visible;
     }

@@ -4,7 +4,7 @@
   <td class="default-service-table__taxes" [textContent]="getSelectedTaxNames(service.taxes)"></td>
 
   <td class="default-service-table__gl">
-    <app-select-search [class]="['light-dropdown', 'new-product-gl-select']" [list]="glNumbers" #glNumberSelect
+    <app-select-search [class]="['light-dropdown', 'new-product-gl-select', '--gray']" [list]="glNumbers" #glNumberSelect
             [placeholder]="'Select GL'"
             [container]="'body'"
             [change]="false"
@@ -45,11 +45,13 @@
       </label>
     </div>
   </td>
-  <td class="default-service-table__menu" ngbDropdown>
-    <div class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"  id="dropdownBasic1" ngbDropdownToggle></div>
-    <ul class="qt-dropdown-menu default-services-items-dropdown"  ngbDropdownMenu aria-labelledby="dropdownBasic1">
-      <li class="pointer" ngbDropdownItem (click)="edit()"> <div class="icon__edit qt-sz-16 qt-mr-8"></div> Edit</li>
-      <li class="pointer" ngbDropdownItem (click)="delete()"> <div class="icon__remove qt-sz-16 qt-mr-8"></div> Delete</li>
-  </ul>
+  <td class="default-service-table__menu" >
+    <div ngbDropdown ngbDropdown container="body">
+      <div class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain" ngbDropdownToggle></div>
+      <ul class="qt-dropdown-menu default-services-items-dropdown" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <li class="pointer" ngbDropdownItem (click)="edit()"> <div class="icon__edit qt-sz-16 qt-mr-8"></div> Edit</li>
+        <li class="pointer" ngbDropdownItem (click)="delete()"> <div class="icon__remove qt-sz-16 qt-mr-8"></div> Delete</li>
+      </ul>
+  </div>
   </td>
 </tr>
