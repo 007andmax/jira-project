@@ -222,7 +222,7 @@ form{
     }
     select.cmn-select{
         @include app-none();
-        background: url('/ng2/assets/img/device/selct-arrow.svg') no-repeat right 15px center;
+        background: url('../../../../ng2/assets/img/device/selct-arrow.svg') no-repeat right 15px center;
         padding-right: 30px;
         option{
             padding: 10px;
@@ -852,11 +852,11 @@ header{
                 left: -30px;
                 content: "";
                 position: absolute;
-                background:url("/ng2/assets/img/device/task-pending.svg") no-repeat center;
+                background:url("../../../assets/img/device/task-pending.svg") no-repeat center;
             }
             &.complete{
                 &::before{
-                    background:url("/ng2/assets/img/device/task-completed.svg") no-repeat center;
+                    background:url("../../../assets/img/device/task-completed.svg") no-repeat center;
                 }
             }
             h5 {
@@ -1357,12 +1357,12 @@ table {
             left: 0;
             top: 0;
             content: "";
-            background: url(/ng2/assets/img/device/checkbox.svg) no-repeat center;
+            background: url(../../../../ng2/assets/img/device/checkbox.svg) no-repeat center;
             height: 16px;
             width: 16px;
         }
     }
-    input:checked + label::after{background: url(/ng2/assets/img/device/checkbox-on.svg) no-repeat center;}
+    input:checked + label::after{background: url(../../../../ng2/assets/img/device/checkbox-on.svg) no-repeat center;}
 }
 
 /*** Page header ****/
@@ -1539,7 +1539,7 @@ table {
         letter-spacing: normal;
         color: $heavyMetal;
         outline: none !important;
-        // background: url('/ng2/assets/img/device/selct-arrow.svg') no-repeat right 15px center;
+        // background: url('../../../../ng2/assets/img/device/selct-arrow.svg') no-repeat right 15px center;
         cursor: pointer;
     }
     .selcted-dp {
@@ -1605,7 +1605,7 @@ table {
                 line-height: 1.54;
                 letter-spacing: normal;
                 color: #4f5f79;
-                background: url('/ng2/assets/img/device/search.svg') no-repeat left 10px center rgba(237, 242, 246,0.5);
+                background: url('../../../../ng2/assets/img/device/search.svg') no-repeat left 10px center rgba(237, 242, 246,0.5);
                 background-size: 20px auto;
                 &:focus{
                     @include opacity(1);
@@ -1671,7 +1671,7 @@ table {
 .device-small-dropdown{
     .dropdown-toggle{
         @include border-radius(3px);
-        background: url('/ng2/assets/img/device/filter-dropdown.svg') no-repeat right 8px center $white-color;
+        background: url('../../../../ng2/assets/img/device/filter-dropdown.svg') no-repeat right 8px center $white-color;
         font-size: 12px;
         font-weight: normal;
         font-stretch: normal;
@@ -1805,7 +1805,7 @@ table {
             justify-content: space-between;
             // @include opacity(0.7);
             @include border-radius(3px);
-            background: url(/ng2/assets/img/device/attachment-document.svg) no-repeat left 12px center rgba(237, 242, 246,0.7);
+            background: url(../../../../ng2/assets/img/device/attachment-document.svg) no-repeat left 12px center rgba(237, 242, 246,0.7);
             margin-bottom: 8px;
             height: 32px;
             align-items: center;
@@ -1827,7 +1827,7 @@ table {
                 right: 8px;
                 width: 16px;
                 height: 16px;
-                background: url(/ng2/assets/img/device/tag-close.svg) no-repeat center;
+                background: url(../../../../ng2/assets/img/device/tag-close.svg) no-repeat center;
                 cursor: pointer;
                 background-size: 16px auto;
             }
@@ -1862,14 +1862,14 @@ ul.user-list {
         &.device-selected{
             .user-added{
                 &::after{
-                    background: url(/ng2/assets/img/device/selected.svg) no-repeat center;
+                    background: url(../../../../ng2/assets/img/device/selected.svg) no-repeat center;
                 } 
          }
         }
         &.device-unselected{
             .user-added{
                 &::after{
-                    background: url(/ng2/assets/img/device/unselected.svg) no-repeat center;
+                    background: url(../../../../ng2/assets/img/device/unselected.svg) no-repeat center;
                 }
             }    
         }
@@ -1886,7 +1886,7 @@ ul.user-list {
                 left: 0;
                 right: 0;
                 margin: auto;
-                background: url(/ng2/assets/img/device/unselected.svg) no-repeat center;
+                background: url(../../../../ng2/assets/img/device/unselected.svg) no-repeat center;
                 position: absolute;
                 @include border-radius(50%);
             }
@@ -1931,7 +1931,7 @@ ul.user-list {
 /*** DatePicker ***/
 
 .datepicker{
-    background: url(/ng2/assets/img/device/calander.svg) no-repeat right 12px center;
+    background: url(../../../../ng2/assets/img/device/calander.svg) no-repeat right 12px center;
     padding-right: 30px;
 }
 .bs-datepicker{
@@ -1989,8 +1989,8 @@ ul.user-list {
 }
 .bs-datepicker-head button.next span, .bs-datepicker-head button.previous span{display: none;}
 .bs-datepicker-head button.next, .bs-datepicker-head button.previous{height: 16px !important;width: 16px !important;background-color: transparent;padding: 0;}
-.bs-datepicker-head button.next{background: url(/ng2/assets/img/device/next.svg) no-repeat center;float: right;}
-.bs-datepicker-head button.previous{background: url(/ng2/assets/img/device/prev.svg) no-repeat center;float: left;}
+.bs-datepicker-head button.next{background: url(../../../../ng2/assets/img/device/next.svg) no-repeat center;float: right;}
+.bs-datepicker-head button.previous{background: url(../../../../ng2/assets/img/device/prev.svg) no-repeat center;float: left;}
 .bs-datepicker-body table{table-layout: fixed;}
 bs-datepicker-navigation-view {
     width: 100%;
@@ -2138,7 +2138,7 @@ ngb-datepicker{
                     border: solid 1px #c4cbd5;
                     margin: 0 -1px;
                     outline: none !important;
-                    background: url('/ng2/assets/img/device/selct-arrow.svg') no-repeat right 10px center;
+                    background: url('../../../../ng2/assets/img/device/selct-arrow.svg') no-repeat right 10px center;
                     width: 90px;
                     &:first-child{
                             @include border-radius(4px 0 0 4px)
@@ -2166,7 +2166,7 @@ ngb-datepicker{
                         height: 16px !important;
                         width: 16px !important;
                         background-color: transparent;
-                        background: url(/ng2/assets/img/device/prev.svg) no-repeat left center;float: left;
+                        background: url(../../../../ng2/assets/img/device/prev.svg) no-repeat left center;float: left;
                         min-width: inherit;
                     }
                 }
@@ -2176,7 +2176,7 @@ ngb-datepicker{
                     &.btn-link {
                         
                         &.ngb-dp-arrow-btn{
-                            background: url(/ng2/assets/img/device/next.svg) no-repeat right center;float: right;
+                            background: url(../../../../ng2/assets/img/device/next.svg) no-repeat right center;float: right;
                             min-width: inherit;
                         }
                     }
@@ -2323,7 +2323,7 @@ ngb-datepicker{
             position: absolute;
             right: 32px;
             top: 32px;
-            background: url('/ng2/assets/img/device/close.svg') no-repeat center;
+            background: url('../../../../ng2/assets/img/device/close.svg') no-repeat center;
             background-size: 20px auto;
             font-size: 0;
             padding: 0;
@@ -2594,7 +2594,7 @@ ngx-loading > div {
             position: absolute;
             height: 24px;
             width: 24px;
-            background: url('/ng2/assets/img/device/close.svg');
+            background: url('../../../../ng2/assets/img/device/close.svg');
             font-size:0;
 
           } 
@@ -2743,7 +2743,7 @@ table.dataTable thead th.sorting_desc span, table.dataTable thead th.sorting_asc
         vertical-align: middle;
         height: 16px;
         width: 16px;
-        background: url('/ng2/assets/img/device/sorting.svg') no-repeat center;
+        background: url('../../../../ng2/assets/img/device/sorting.svg') no-repeat center;
         background-size: 16px auto;
         margin-left: 5px;
         margin-top: -2px;

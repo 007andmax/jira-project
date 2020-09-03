@@ -58,6 +58,9 @@ export const CONFIG = {
   deleteCategoryURL: BASE_URL + 'cmdCommands/categories/delete/',
   updateCategoryURL: BASE_URL + 'cmdCommands/categories/edit/',
   deleteCommandURL: BASE_URL + 'cmdCommands/delete/',
+  getHistoryURL: BASE_URL + DEVICE+ '/cmdHistory/',
+  sendCommandURL: BASE_URL + DEVICE + '/cmd',
+  cloneCommandURL: BASE_URL + 'cmdCommands/clone/',
 
   // DASHBOARD
   overrideHardwareURL: BASE_URL + DEVICE + '/overrideHardware'

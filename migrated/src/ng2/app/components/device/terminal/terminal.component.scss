@@ -79,7 +79,7 @@ main {
                                                         outline: none;
                                                         padding: 0;
                                                         margin: 0;
-                                                        background: url("/ng2/assets/img/device/more-terminal.svg")
+                                                        background: url("../../../../assets/img/device/more-terminal.svg")
                                                             no-repeat center;
                                                         line-height: 1; 
                                                     }
@@ -248,6 +248,40 @@ main {
                                         min-width: inherit;
                                         padding: 13px 16px;
                                     }
+                                }
+                            }
+
+                            #cmd {
+                                display: flex;
+                                border-radius: 4px;
+                                border: solid 1px #c4cbd5;
+                                height: 317px;
+                                #cmd_line {
+                                    width: 40px;
+                                    border-right: solid 1px #c4cbd5;
+                                    background-color: #f3f7f9; 
+                                    list-style-type: none; 
+                                    padding: 10px 0;
+                                    margin: 0;
+                                    overflow-y: auto;
+                                    border-top-left-radius: 4px;
+                                    border-bottom-left-radius: 4px;
+                                    &::-webkit-scrollbar {
+                                        width: 0;
+                                    }
+                                    li {
+                                        margin: 0;
+                                        padding: 0;
+                                        text-align: center;
+                                        color: #151b21;
+                                        &::before {
+                                            width: 0;
+                                        }
+                                    } 
+                                }
+                                textarea {
+                                    border-radius: 0;
+                                    border: none;
                                 }
                             }
                         }
@@ -485,7 +519,7 @@ main {
                             }
                             .script-search {
                                 padding-left: 30px;
-                                background: url("/ng2/assets/img/device/search-script.svg") no-repeat left
+                                background: url("../../../../assets/img/device/search-script.svg") no-repeat left
                                     12px center;
                             }
                         }
@@ -580,6 +614,40 @@ main {
                             }
                         }
                     }
+                    #cmd_detail {
+                        display: flex;
+                        border-radius: 4px;
+                        border: solid 1px #c4cbd5;
+                        height: 317px;
+                        #cmd_detail_line {
+                            width: 40px;
+                            border-right: solid 1px #c4cbd5;
+                            background-color: #f3f7f9; 
+                            list-style-type: none; 
+                            padding: 10px 0;
+                            margin: 0;
+                            overflow-y: auto;
+                            border-top-left-radius: 4px;
+                            border-bottom-left-radius: 4px;
+                            &::-webkit-scrollbar {
+                                width: 0;
+                            }
+                            li {
+                                margin: 0;
+                                padding: 0;
+                                text-align: center;
+                                color: #151b21;
+                                &::before {
+                                    width: 0;
+                                }
+                            } 
+                        }
+                        textarea {
+                            border-radius: 0;
+                            border: none;
+                            height: 100%;
+                        }
+                    }
                 }
             }
         }
@@ -604,16 +672,16 @@ main {
                 }
                 &.Command {
                     margin-left: 0;
-                    background: url("/ng2/assets/img/device/command-line-blue.svg") no-repeat left 0;
+                    background: url("../../../../assets/img/device/command-line-blue.svg") no-repeat left 0;
                     &.active {
-                        background: url("/ng2/assets/img/device/command-line-blue.svg") no-repeat left 0;
+                        background: url("../../../../assets/img/device/command-line-blue.svg") no-repeat left 0;
                         color: #16a4fa;
                     }
                 }
                 &.Power {
-                    background: url("/ng2/assets/img/device/power-shell.svg") no-repeat left 0;
+                    background: url("../../../../assets/img/device/power-shell.svg") no-repeat left 0;
                     &.active {
-                        background: url("/ng2/assets/img/device/power-shell.svg") no-repeat left 0;
+                        background: url("../../../../assets/img/device/power-shell.svg") no-repeat left 0;
                         color: #16a4fa;
                     }
                 }
@@ -675,7 +743,7 @@ main {
                     height: 16px;
                     position: relative;
                     font-family: $sourceCode;
-                    background: url("/ng2/assets/img/device/send-to-front.svg") no-repeat center;
+                    background: url("../../../../assets/img/device/send-to-front.svg") no-repeat center;
                     &::before {
                         font-weight: 400;
                         font-family: $font-body;

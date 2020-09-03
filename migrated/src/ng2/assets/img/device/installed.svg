@@ -1,6 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
     <g fill="none" fill-rule="evenodd">
+<<<<<<< HEAD
         <rect width="12" height="12" x="2" y="2" fill="#2EC866" rx="2"/>
         <path stroke="#FFF" stroke-linecap="round" stroke-linejoin="round" d="M5.58 8.04l1.274 2.03 3.726-4"/>
+=======
+        <rect width="16" height="16" fill="#16A4FA" rx="2"/>
+        <path stroke="#FFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7.953L6.04 11 12 5"/>
+>>>>>>> e411bae07... Image achnages and datatype changes added
     </g>
 </svg>

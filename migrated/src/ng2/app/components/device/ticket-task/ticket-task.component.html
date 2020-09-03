@@ -179,7 +179,6 @@
     </div>
  
   </aside>
-
 <!-- sidebar popup Ticket -->
 <div class="sidebar-popup" [ngClass]="{'opened': create && openPopup == 'open_ticket'}">
   <!-- header -->
@@ -200,7 +199,6 @@
           
         </ul>
       </div> 
-
     </div>
      <a class="close" href="javascript:;" (click)="create=!create;closeTicket();"><img src="/html/ng2/assets/img/device/close.svg" alt="close"/></a>
     </div>
@@ -410,7 +408,6 @@
     </form>
   </div> 
 </div>
-
 <!-- sidebar popup Task -->
 <div class="sidebar-popup task" [ngClass]="{'opened': create && openPopup == 'open_task'}">
   <!-- header -->
@@ -559,7 +556,6 @@
                       <a href="javascript:;" (click)="addUser = !addUser">
                          <img src="/html/ng2/assets/img/device/avatar-add.svg" alt="Add User">
                       </a>
-
                       <div class="cmn-dropdown">
                         <div class="cmn-dropdon-list"  *ngIf="addUser">
                            <form method="POST">
@@ -624,6 +620,4 @@
     </form>
   </div> 
 </div>
-
-
 </div>

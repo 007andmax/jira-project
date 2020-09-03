@@ -5,24 +5,25 @@
         <!-- Page Title -->
         <div class="page-header">
           <h3>Terminal</h3>
-          <div class="page-header-opt">
+          <!-- <div class="page-header-opt">
             <div class="update-info">
               <a class="Command active" href="javascript:;">Command Line</a>
               <a class="Power" href="javascript:;">Power Shell</a>
             </div>
-          </div>
+          </div> -->
         </div>
         <!-- Page Content -->
         <div class="contant-area">
           <div class="terminal-area">
             <div class="terminal-box">
-              <p>C:\Users\Sam\Desktop</p>
+              <p *ngIf="splitCommand.length === 0">C:\Users\Sam\Desktop></p>
+              <p *ngFor="let split of splitCommand"><span>C:\Users\Sam\Desktop></span><span>{{split}}</span></p>
+              <!-- <textarea>C:\Users\Sam\Desktop></textarea> -->
             </div>
           </div>
         </div>
       </div>
     </div>
-
     <!-- Right Side bar -->
     <aside class="right-sidebar terminal-sidebar">
       <!-- <a href="javascript:;" class="panel-bar" (click)="toggleTicket();">
@@ -71,7 +72,7 @@
                         #Category="ngModel" 
                         required readonly
                         [class.validation-error]="submitted == true && Category.errors && Category.errors.required">
-                      <img class="icn-sm report-caret-icon" src="/html/ng2/assets/img/device/selct-arrow.svg"/>
+                      <img class="icn-sm report-caret-icon" src="./..//html/ng2/assets/img/device/selct-arrow.svg"/>
                       <div ngbDropdownMenu
                            aria-labelledby="dropdownBasic1">
                            <button *ngFor="let category of cmdCategoryReadList" ngbDropdownItem (click)="commandModal.category = category.name;commandModal.categoryId = category.id;">{{category.name}}</button>
@@ -97,14 +98,14 @@
                 <div class="f-col col-100">
                   <label for="Title">Command</label>
                   <div class="form-row">
-                    <!-- <textarea class="form-input"
-                      [(ngModel)]="commandModal.command" 
-                      name="command" 
-                      #Command="ngModel" 
-                      required 
-                      [class.validation-error]="submitted == true && Command.errors && Command.errors.required"
-                    > </textarea> -->
-                    
+                        <div id="cmd">
+                          <ul id="cmd_line">
+                            <li *ngFor="let line of lineNumber">{{line}}</li>
+                          </ul>
+                          <textarea wrap="off" class="form-input" [(ngModel)]="commandModal.command" name="command" (keyup)="countLineNumber()">
+                       
+                          </textarea>
+                        </div>
                   </div>
                 </div>
                 <div class="m-btn-row">
@@ -114,7 +115,7 @@
                       href="javascript:;"
                       class="btn btn-secondary"
                       aria-label="Close"
-                      (click)="create = !create"
+                      (click)="resetCmdModal();create = !create"
                       >Cancel</a
                     >
                   </div>
@@ -123,7 +124,6 @@
             </form>
           </div>
         </div>
-
         <ngb-tabset>
           <ngb-tab title="Command">
             <ng-template ngbTabContent>
@@ -144,6 +144,7 @@
                         href="javascript:;"
                         class="copy"
                         datadata-tooltip="Copy to terminal"
+                        (click)="copyToTerminal(cmd.command);"
                         >Copy to terminal</a
                       >
                       <div class="btn-group" ngbDropdown>
@@ -325,7 +326,7 @@
         </ngb-tabset>
         <a
           href="javascript:;"
-          (click)="runScript = !runScript"
+          (click)="openRunScript();"
           class="btn btn-primary"
           ><img
             src="/html/ng2/assets/img/device/run-script-blue.svg"
@@ -334,7 +335,6 @@
         >
       </div>
     </aside>
-
     <!-- Script Sidebar  -->
     <aside class="right-sidebar script-sidebar" [class.opened]="runScript">
       <div>
@@ -354,7 +354,7 @@
           </a>
         </div>
         <ngb-tabset>
-          <ngb-tab title="My Scripts (3)">
+          <ngb-tab [title]="'My Scripts (' + myScriptList.length + ')'">
             <ng-template ngbTabContent>
             <div class="cmn-tbs-content myScript">
               <form method="POST">
@@ -362,12 +362,22 @@
                   <div class="f-col col-50">
                     <label for="command">Category</label>
                     <div class="form-row">
-                      <select class="form-input cmn-select">
-                        <option>Window > USB access</option>
-                        <option>Window > USB access 1</option>
-                        <option>Window > USB access 2</option>
-                        <option>Window > USB access 3</option>
-                      </select>
+                      <div class="grey-dropdown w-100" ngbDropdown>
+                        <input type="text"
+                          placeholder="Select Category"
+                          [(ngModel)]="myScriptModal.category"
+                          id="my_category"
+                          ngbDropdownToggle
+                          autocomplete="off"
+                          class="cmn-select form-input"
+                          name="my_category" 
+                          readonly>
+                        <img class="icn-sm report-caret-icon" src="./..//html/ng2/assets/img/device/selct-arrow.svg"/>
+                        <div ngbDropdownMenu
+                             aria-labelledby="dropdownBasic2">
+                             <button *ngFor="let category of cmdCategoryReadList" ngbDropdownItem (click)="filterMyScript(category);">{{category.name}}</button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div class="f-col col-50">
@@ -375,21 +385,22 @@
                     <div class="form-row">
                       <input
                         type="text"
-                        placeholder="Search description or filename"
+                        placeholder="Search Scripts"
                         class="form-input script-search"
+                        [(ngModel)]="myScriptModal.search"
+                        (keyup)="filterMyScript()"
+                        id="my_search"
+                        name="my_search"
                       />
                     </div>
                   </div>
                 </div>
               </form>
-              <ul class="list-unstyled script-list">
-                <li>
+              <ul class="list-unstyled script-list" *ngIf="myScriptListFilter.length > 0">
+                <li *ngFor="let script of myScriptListFilter">
                   <div class="script-left">
-                    <h5>Delete Temporary Files for all User (copy)</h5>
-                    <span
-                      >Deletes Temporary files for all users (including user
-                      profiles…</span
-                    >
+                    <h5>{{script.title}}</h5>
+                    <span>{{script.command}}</span>
                     <span class="clone-cat">Cloned Scripts</span>
                   </div>
                   <div class="script-right">
@@ -397,6 +408,7 @@
                       href="javascript:;"
                       class="play-btn"
                       data-tooltip="Run Script"
+                      (click)="copyToTerminal(script.command)"
                     >
                       <img
                         src="/html/ng2/assets/img/device/play-script.svg"
@@ -408,112 +420,7 @@
                       href="javascript:;"
                       class="view-btn"
                       data-tooltip="View Script"
-                      (click)="scriptDetail = !scriptDetail"
-                    >
-                      <img
-                        src="/html/ng2/assets/img/device/view-script.svg"
-                        alt="view-script"
-                        title="view-script"
-                      />
-                    </a>
-                  </div>
-                </li>
-                <li>
-                  <div class="script-left">
-                    <h5>Delete Temporary Files for all User (copy)</h5>
-                    <span
-                      >Deletes Temporary files for all users (including user
-                      profiles…</span
-                    >
-                    <span class="clone-cat">Cloned Scripts</span>
-                  </div>
-                  <div class="script-right">
-                    <a
-                      href="javascript:;"
-                      class="play-btn"
-                      data-tooltip="Run Script"
-                    >
-                      <img
-                        src="/html/ng2/assets/img/device/play-script.svg"
-                        alt="play-script"
-                        title="play-script"
-                      />
-                    </a>
-                    <a
-                      href="javascript:;"
-                      class="view-btn"
-                      data-tooltip="View Script"
-                      (click)="scriptDetail = !scriptDetail"
-                    >
-                      <img
-                        src="/html/ng2/assets/img/device/view-script.svg"
-                        alt="view-script"
-                        title="view-script"
-                      />
-                    </a>
-                  </div>
-                </li>
-                <li>
-                  <div class="script-left">
-                    <h5>Delete Temporary Files for all User (copy)</h5>
-                    <span
-                      >Deletes Temporary files for all users (including user
-                      profiles…</span
-                    >
-                    <span class="clone-cat">Cloned Scripts</span>
-                  </div>
-                  <div class="script-right">
-                    <a
-                      href="javascript:;"
-                      class="play-btn"
-                      data-tooltip="Run Script"
-                    >
-                      <img
-                        src="/html/ng2/assets/img/device/play-script.svg"
-                        alt="play-script"
-                        title="play-script"
-                      />
-                    </a>
-                    <a
-                      href="javascript:;"
-                      class="view-btn"
-                      data-tooltip="View Script"
-                      (click)="scriptDetail = !scriptDetail"
-                    >
-                      <img
-                        src="/html/ng2/assets/img/device/view-script.svg"
-                        alt="view-script"
-                        title="view-script"
-                      />
-                    </a>
-                  </div>
-                </li>
-                <li>
-                  <div class="script-left">
-                    <h5>Delete Temporary Files for all User (copy)</h5>
-                    <span
-                      >Deletes Temporary files for all users (including user
-                      profiles…</span
-                    >
-                    <span class="clone-cat">Cloned Scripts</span>
-                  </div>
-                  <div class="script-right">
-                    <a
-                      href="javascript:;"
-                      class="play-btn"
-                      data-tooltip="Run Script"
-                    >
-                      <img
-                        src="/html/ng2/assets/img/device/play-script.svg"
-                        alt="play-script"
-                        title="play-script"
-                      />
-                    </a>
-                    <a
-                      href="javascript:;"
-                      class="view-btn"
-                      data-tooltip="View Script"
-                      (click)="scriptDetail = !scriptDetail"
+                      (click)="viewScriptDetail(script);"
                     >
                       <img
                         src="/html/ng2/assets/img/device/view-script.svg"
@@ -527,7 +434,7 @@
             </div>
             </ng-template>
           </ngb-tab>
-          <ngb-tab heading="Shared Script Library (85)">
+          <ngb-tab [title]="'Shared Script Library (' + sharedScriptList.length + ')'">
             <ng-template ngbTabContent>
             <div class="cmn-tbs-content script-library">
               <form method="POST">
@@ -535,12 +442,22 @@
                   <div class="f-col col-50">
                     <label for="command">Category</label>
                     <div class="form-row">
-                      <select class="form-input cmn-select">
-                        <option>Window > USB access</option>
-                        <option>Window > USB access 1</option>
-                        <option>Window > USB access 2</option>
-                        <option>Window > USB access 3</option>
-                      </select>
+                      <div class="grey-dropdown w-100" ngbDropdown>
+                        <input type="text"
+                          placeholder="Select Category"
+                          [(ngModel)]="sharedScriptModal.category"
+                          id="shared_category"
+                          ngbDropdownToggle
+                          autocomplete="off"
+                          class="cmn-select form-input"
+                          name="shared_category" 
+                          readonly>
+                        <img class="icn-sm report-caret-icon" src="./..//html/ng2/assets/img/device/selct-arrow.svg"/>
+                        <div ngbDropdownMenu
+                             aria-labelledby="dropdownBasic2">
+                             <button *ngFor="let category of cmdCategoryReadList" ngbDropdownItem (click)="filterSharedScript(category);">{{category.name}}</button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div class="f-col col-50">
@@ -550,26 +467,29 @@
                         type="text"
                         placeholder="Search description or filename"
                         class="form-input script-search"
+                        (keyup)="filterSharedScript()"
+                        id="shared_search"
+                        name="shared_search"
+                        [(ngModel)]="sharedScriptModal.search"
                       />
                     </div>
                   </div>
                 </div>
               </form>
-              <ul class="list-unstyled script-list">
-                <li>
+              <ul class="list-unstyled script-list" *ngIf="sharedScriptListFilter.length > 0">
+                <li *ngFor="let shared of sharedScriptListFilter">
                   <div class="script-left">
-                    <h5>Delete Temporary Files for all User (copy)</h5>
-                    <span
-                      >Deletes Temporary files for all users (including user
-                      profiles…</span
+                    <h5>{{shared.title}}</h5>
+                    <span>{{shared.command}}</span
                     >
-                    <span class="clone-cat">Cloned Scripts</span>
+                    <!-- <span class="clone-cat">Cloned Scripts</span> -->
                   </div>
                   <div class="script-right">
                     <a
                       href="javascript:;"
                       class="play-btn"
                       data-tooltip="Clone Script"
+                      (click)="cloneScript(shared.id)"
                     >
                       <img
                         src="/html/ng2/assets/img/device/copy-script.svg"
@@ -581,112 +501,7 @@
                       href="javascript:;"
                       class="view-btn"
                       data-tooltip="View Script"
-                      (click)="scriptDetail = !scriptDetail"
-                    >
-                      <img
-                        src="/html/ng2/assets/img/device/view-script.svg"
-                        alt="view-script"
-                        title="view-script"
-                      />
-                    </a>
-                  </div>
-                </li>
-                <li>
-                  <div class="script-left">
-                    <h5>Delete Temporary Files for all User (copy)</h5>
-                    <span
-                      >Deletes Temporary files for all users (including user
-                      profiles…</span
-                    >
-                    <span class="clone-cat">Cloned Scripts</span>
-                  </div>
-                  <div class="script-right">
-                    <a
-                      href="javascript:;"
-                      class="play-btn"
-                      data-tooltip="Clone Script"
-                    >
-                      <img
-                        src="/html/ng2/assets/img/device/copy-script.svg"
-                        alt="copy-script"
-                        title="copy-script"
-                      />
-                    </a>
-                    <a
-                      href="javascript:;"
-                      class="view-btn"
-                      data-tooltip="View Script"
-                      (click)="scriptDetail = !scriptDetail"
-                    >
-                      <img
-                        src="/html/ng2/assets/img/device/view-script.svg"
-                        alt="view-script"
-                        title="view-script"
-                      />
-                    </a>
-                  </div>
-                </li>
-                <li>
-                  <div class="script-left">
-                    <h5>Delete Temporary Files for all User (copy)</h5>
-                    <span
-                      >Deletes Temporary files for all users (including user
-                      profiles…</span
-                    >
-                    <span class="clone-cat">Cloned Scripts</span>
-                  </div>
-                  <div class="script-right">
-                    <a
-                      href="javascript:;"
-                      class="play-btn"
-                      data-tooltip="Clone Script"
-                    >
-                      <img
-                        src="/html/ng2/assets/img/device/copy-script.svg"
-                        alt="copy-script"
-                        title="copy-script"
-                      />
-                    </a>
-                    <a
-                      href="javascript:;"
-                      class="view-btn"
-                      data-tooltip="View Script"
-                      (click)="scriptDetail = !scriptDetail"
-                    >
-                      <img
-                        src="/html/ng2/assets/img/device/view-script.svg"
-                        alt="view-script"
-                        title="view-script"
-                      />
-                    </a>
-                  </div>
-                </li>
-                <li>
-                  <div class="script-left">
-                    <h5>Delete Temporary Files for all User (copy)</h5>
-                    <span
-                      >Deletes Temporary files for all users (including user
-                      profiles…</span
-                    >
-                    <span class="clone-cat">Cloned Scripts</span>
-                  </div>
-                  <div class="script-right">
-                    <a
-                      href="javascript:;"
-                      class="play-btn"
-                      data-tooltip="Clone Script"
-                    >
-                      <img
-                        src="/html/ng2/assets/img/device/copy-script.svg"
-                        alt="copy-script"
-                        title="copy-script"
-                      />
-                    </a>
-                    <a
-                      href="javascript:;"
-                      class="view-btn"
-                      data-tooltip="View Script"
-                      (click)="scriptDetail = !scriptDetail"
+                      (click)="viewScriptDetail(shared)"
                     >
                       <img
                         src="/html/ng2/assets/img/device/view-script.svg"
@@ -697,7 +512,7 @@
                   </div>
                 </li>
               </ul>
-              <ul class="list-unstyled pagination">
+              <!-- <ul class="list-unstyled pagination" *ngIf="sharedScriptListFilter.length > 0">
                 <li class="next">
                   <a href="javascript:;">
                     <img
@@ -734,14 +549,13 @@
                     />
                   </a>
                 </li>
-              </ul>
+              </ul> -->
             </div>
             </ng-template>
           </ngb-tab>
         </ngb-tabset>
       </div>
     </aside>
-
     <!-- Script Details Sidebar  -->
     <aside class="right-sidebar script-sidebar script-details" [class.opened]="scriptDetail">
       <div>
@@ -764,11 +578,9 @@
         </div>
         <div class="script-details-area">
           <h2>
-            Delete Temporary Files for all user (including user profiles +
-            Windows Temp) and disables windows Update Service, to allow the
-            script to run
+            {{scriptDetailModal.title}}
           </h2>
-          <div class="script-info">
+          <!-- <div class="script-info">
             <div class="script-col">
               <h5>File Type</h5>
               <span>.bat</span>
@@ -785,22 +597,27 @@
               <h5>Max Run Time</h5>
               <span>10</span>
             </div>
-          </div>
+          </div> -->
           <form method="POST">
             <div class="f-row">
               <div class="f-col col-100">
                 <div class="form-row">
-                   <textarea class="form-input">
-                     
-                   </textarea>
+                  <div id="cmd_detail">
+                    <ul id="cmd_detail_line">
+                      <li *ngFor="let line of lineNumberDetail">{{line}}</li>
+                    </ul>
+                    <textarea wrap="off" class="form-input" [(ngModel)]="scriptDetailModal.command" name="command" (keyup)="countLineNumberDetail()" disabled="true">
+                 
+                    </textarea>
+                  </div>
                 </div>
               </div>
             </div>
               <div class="f-row">
-              <div class="f-col col-100">
+              <div class="f-col col-100" *ngIf="scriptDetailModal.default === true">
                 <div class="form-row">
-                   <button type="submit" class="btn btn-primary">Clone Script</button>
-                   <button type="submit" class="btn btn-secondary" (click)="scriptDetail = !scriptDetail">Back</button>
+                   <button type="button" class="btn btn-primary" (click)="cloneScript(scriptDetailModal.id)">Clone Script</button>
+                   <button type="button" class="btn btn-secondary" (click)="scriptDetail = !scriptDetail">Back</button>
                 </div>
               </div>
             </div>
@@ -810,7 +627,6 @@
     </aside>
     
 <!-- Delete Confirmation -->
-
 <ng-template #template let-modal>
   <div class="modal-header">
     <h2>Delete Script</h2>
@@ -836,7 +652,6 @@
     </div>
   </div>
 </ng-template>
-
 <ng-template #templateManageCategory let-modal>
   <div class="modal-header">
     <h2>Manage Category</h2>
@@ -877,7 +692,6 @@
                   />
               </a>
             </li>
-
         </ul>
       </form>  
     </div>
@@ -897,4 +711,3 @@
   </div>
 </main>
 <div class="loading" *ngIf="loading"></div>
-

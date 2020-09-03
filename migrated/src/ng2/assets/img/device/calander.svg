@@ -1,7 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
     <g fill="none" fill-rule="evenodd">
+<<<<<<< HEAD
         <path fill="#FFF" stroke="#4F5F79" stroke-linejoin="round" stroke-width="1.5" d="M1 3.996A1 1 0 0 1 2.007 3h11.986A1 1 0 0 1 15 3.996v9.008a1 1 0 0 1-1.007.996H2.007A1 1 0 0 1 1 13.004V3.996z"/>
         <path fill="#4F5F79" d="M1 7h14v1H1z"/>
+=======
+        <path fill="#FFF" stroke="#4F5F79" stroke-linejoin="round" stroke-width="1.5" d="M1 3.996C1 3.446 1.45 3 2.007 3h11.986C14.55 3 15 3.445 15 3.996v9.008c0 .55-.45.996-1.007.996H2.007C1.45 14 1 13.555 1 13.004V3.996z"/>
+        <path fill="#4F5F79" d="M1 7H15V8H1z"/>
+>>>>>>> e411bae07... Image achnages and datatype changes added
         <path fill="#FFF" stroke="#4F5F79" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.076 1.5L4 4M12.076 1.5L12 4"/>
     </g>
 </svg>
