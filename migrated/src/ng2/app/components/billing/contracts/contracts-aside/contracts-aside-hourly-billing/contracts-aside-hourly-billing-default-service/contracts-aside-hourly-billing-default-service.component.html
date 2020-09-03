@@ -1,7 +1,7 @@
 <tr>
   <td class="service-table__check">
     <label class="qt-checkbox">
-      <input type="checkbox">
+      <input type="checkbox" [(ngModel)]="defaultService.selected" (change)="toggleService()">
       <span></span>
     </label>
   </td>

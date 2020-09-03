@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { InvoiceFormTicketEditTaxesComponent } from '../../../../billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.component';
+import { DefaultServicesHourlyContract } from '../../class/default-service-hourly-contract';
 
 @Component({
   selector: 'app-contracts-aside-hourly-billing-default-service',
@@ -7,22 +8,22 @@ import { InvoiceFormTicketEditTaxesComponent } from '../../../../billable/billab
   styleUrls: ['./contracts-aside-hourly-billing-default-service.component.scss']
 })
 export class ContractsAsideHourlyBillingDefaultServiceComponent implements OnInit {
-@Input() defaultService;
-@ViewChild('taxes') taxesDropDown: InvoiceFormTicketEditTaxesComponent;
+  @Input() defaultService: DefaultServicesHourlyContract;
+  @ViewChild('taxes') taxesDropDown: InvoiceFormTicketEditTaxesComponent;
+  @Output() onSelectService = new EventEmitter<any>();
   constructor() { }
 
   ngOnInit() {
-  /*  let taxes = this.taxes.filter(item => {
-      let index = this.defaultService.taxes.findIndex(tax => tax.name === item.name && tax.rate === item.rate);
-      return (index > -1) ? true : false;
-    })*/
     this.taxesDropDown.setEditItems(this.defaultService.taxes);
   }
   onTaxesChange(data) {
     this.defaultService.taxes = data;
   }
+  toggleService() {
+    this.onSelectService.emit(null);
+  }
   public onChangeRate(val) {
     let value = Number(val);
     this.defaultService.rate = value;
-   }
+  }
 }

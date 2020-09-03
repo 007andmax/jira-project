@@ -21,7 +21,10 @@
     <div>
       <div class="qt-input-block --required qt-w100">
         <label>Description</label>
-        <input placeholder="Write contract description" type="text">
+        <input placeholder="Write contract description" type="text" [(ngModel)]="contractsHourly.description" (input)="onChangeDescription()">
+        <mat-error class="qt-tooltip-error" *ngIf="!validate.getDescription()">
+          Description is required
+        </mat-error>
       </div>
     </div>
 
@@ -39,7 +42,7 @@
         <tr>
           <th class="service-table__check" >
             <label class="qt-checkbox">
-              <input type="checkbox">
+              <input [(ngModel)]="selectAllServices"  type="checkbox" (change)="onToggleAllServices($event)">
               <span></span>
             </label>
           </th>
@@ -68,7 +71,7 @@
         <ng-template ngFor let-item
         [ngForOf]="defaultServices"
         [ngForTrackBy]="trackById">
-        <app-contracts-aside-hourly-billing-default-service [defaultService]="item"></app-contracts-aside-hourly-billing-default-service>
+        <app-contracts-aside-hourly-billing-default-service (onSelectService)="onSelectService()" [defaultService]="item"></app-contracts-aside-hourly-billing-default-service>
       </ng-template>
       
 
@@ -78,7 +81,9 @@
     </table>
 <app-contracts-aside-hourly-billing-add-service *ngIf="showAddService" [contractsHourly]="contractsHourly" (onAdd)="onAddService($event)" (onClose)="showAddService = false"></app-contracts-aside-hourly-billing-add-service>
     <button class="qt-mb-24 qt-btn --outline --small" (click)="showAddService = true" *ngIf="!showAddService">+ Add Custom Service</button>
-
+    <mat-error   *ngIf="!validate.getDate()">
+      The current company has a working hourly agreement for these dates
+    </mat-error>
   </div>
 
 </div>

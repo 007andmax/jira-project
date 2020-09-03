@@ -3,7 +3,7 @@ import { ContractsFilterType } from '../../class/contracts-filter-type';
 import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-state.service';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { Subscription } from 'rxjs';
-
+import * as moment from "moment";
 @Component({
   selector: 'app-contracts-aside-top',
   templateUrl: './contracts-aside-top.component.html',

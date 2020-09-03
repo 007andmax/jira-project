@@ -19,6 +19,9 @@ export class ContractsService {
     private http: HttpClient
   ) {}
 
+  public validateCrossingDatesHourly(startDate, endDate, companyId,agreementId) {
+    return this.http.get(this.apiUrl + `/serviceAgreements/validateCrossingDates?companyId=${companyId}&startDate=${startDate}&endDate=${endDate + ((agreementId) ? '&agreementId=' + agreementId : '')}`);
+  }
   public getServiceAgreements() {
     return this.http.get(this.apiUrl + 'serviceAgreements/').pipe(map((data: any) => data.map(item => new ContractItem(item))));
   }

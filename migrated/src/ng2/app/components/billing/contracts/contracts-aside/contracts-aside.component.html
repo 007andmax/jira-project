@@ -12,7 +12,7 @@
   </div>
 
    <app-contracts-aside-select-type *ngIf="step === 1" (onSelect)="onSelectType($event)"></app-contracts-aside-select-type> 
-   <app-contracts-aside-hourly-billing *ngIf="step === 2 && type === 'HOURLY'"></app-contracts-aside-hourly-billing> 
+   <app-contracts-aside-hourly-billing #hourlyContract *ngIf="step === 2 && type === 'HOURLY'"></app-contracts-aside-hourly-billing> 
    <app-contracts-aside-block-time-billing *ngIf="step === 2 && type === 'BLOCK_TIME'"></app-contracts-aside-block-time-billing> 
    <app-contracts-aside-user-device-billing *ngIf="step === 2 && type === 'SERVICE_CONTRACT_DEVICE_USER'"></app-contracts-aside-user-device-billing> 
   <app-contracts-aside-product-service-contracts *ngIf="step === 2 && type === 'SERVICE_CONTRACT_OTHER'"></app-contracts-aside-product-service-contracts>
@@ -20,7 +20,7 @@
   <div class="aside-footer qt-pr-30 qt-pl-30 qt-pb-16 qt-pt-16 qt-df qt-ai-c qt-jc-sb">
     <div class="qt-df">
       <button class="qt-button qt-mr-12" (click)="continue()">Continue</button>
-      <button class="qt-button qt-mr-12" *ngIf="step === 2">Create Contract</button>
+      <button class="qt-button qt-mr-12" *ngIf="step === 2" (click)="onCreate()">Create Contract</button>
       <button class="qt-button --gray" (click)="closed()">Cancel</button>
     </div>
    </div>

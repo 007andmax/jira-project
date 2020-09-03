@@ -9,13 +9,14 @@ import { SelectSearchComponent } from 'src/ng2/app/components/shared/select-sear
 import { DefaultServicesService } from 'src/ng2/app/services/default-services/default-services.service';
 import * as moment from "moment";
 import { ContractsHourly } from '../../class/contracts-hourly';
+import { DefaultServicesHourlyContract } from '../../class/default-service-hourly-contract';
 @Component({
   selector: 'app-contracts-aside-hourly-billing-add-service',
   templateUrl: './contracts-aside-hourly-billing-add-service.component.html',
   styleUrls: ['./contracts-aside-hourly-billing-add-service.component.scss']
 })
 export class ContractsAsideHourlyBillingAddServiceComponent implements OnInit {
-  service: DefaultServices = new DefaultServices();
+  service: DefaultServicesHourlyContract = new DefaultServicesHourlyContract();
 
   sub: Subscription = new Subscription();
   validate: DefaultServiceValidate = new DefaultServiceValidate();
@@ -23,7 +24,7 @@ export class ContractsAsideHourlyBillingAddServiceComponent implements OnInit {
   @ViewChild('addBtn') addBtn: DisabledBtnDirective;
   @Input() contractsHourly: ContractsHourly;
   @Output() onClose = new EventEmitter<any>();
-  @Output() onAdd= new EventEmitter<any>();
+  @Output() onAdd = new EventEmitter<any>();
   constructor(private taxesStateService: TaxesStateService,
     private defaultServicesService: DefaultServicesService) { }
 
@@ -53,11 +54,11 @@ export class ContractsAsideHourlyBillingAddServiceComponent implements OnInit {
   public searchDuplicatedServiceNames() {
     this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsHourly.startDate).format('DD MMM YYYY'),
       moment(this.contractsHourly.endDate).format('DD MMM YYYY'), this.contractsHourly.companyId, null, [this.service.name]).subscribe(data => {
-      if (Object.keys(data).length === 0)  {
-        this.add();
-      } else {
-        this.validate.setDuplicateName(false);
-      }
+        if (Object.keys(data).length === 0) {
+          this.add();
+        } else {
+          this.validate.setDuplicateName(false);
+        }
       }, err => {
         this.validate.setDuplicateName(false);
       })
@@ -66,7 +67,7 @@ export class ContractsAsideHourlyBillingAddServiceComponent implements OnInit {
     console.log("this.service", this.service);
     if (!this.validate.isValidate(this.service)) return;
     this.addBtn.setDisabled(true);
-    this.defaultServicesService.addService(this.service.getDataForAddDefault()).subscribe((data:any) => {
+    this.defaultServicesService.addService(this.service.getDataForAddDefault()).subscribe((data: any) => {
       this.addBtn.setDisabled(false);
       this.service.setVersionedId(data.versionedId);
       this.onAdd.emit(this.service);

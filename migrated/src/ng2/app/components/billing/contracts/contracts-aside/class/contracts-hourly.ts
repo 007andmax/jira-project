@@ -2,7 +2,7 @@ import * as moment from "moment";
 import { ContractsHourlyService } from './contracts-hourly-service';
 export class ContractsHourly {
     companyId: string;
-    description: string;
+    description: string = "";
     endDate: string;
     services: Array<ContractsHourlyService> = [];
     startDate: string;
