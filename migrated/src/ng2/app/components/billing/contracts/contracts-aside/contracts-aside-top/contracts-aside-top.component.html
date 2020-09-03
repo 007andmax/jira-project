@@ -3,7 +3,7 @@
     <label>Company Name</label>
     <app-select-search class="contracts-company-filter search-company"     [placeholder]="'Select Company'"
     [change]="false" [class]="['qt-dropdown']" [field]="'name'" [list]="companies"
-    (onSelectedItem)="onSelectCompany($event)"></app-select-search>
+    (onSelectedItem)="selectCompany($event)"></app-select-search>
   </div>
 
 

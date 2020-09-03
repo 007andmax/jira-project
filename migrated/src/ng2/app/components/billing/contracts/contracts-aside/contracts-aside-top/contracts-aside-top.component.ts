@@ -13,10 +13,11 @@ export class ContractsAsideTopComponent implements OnInit {
   companies = [];
   listsTypes = [new ContractsFilterType('Hourly', 'HOURLY', null),
   new ContractsFilterType('Block Time', 'BLOCK_TIME', null),
-  new ContractsFilterType('Service Contract/by device/by user', 'SERVICE_CONTRACT_DEVICE_USER',null),
+  new ContractsFilterType('Service Contract/by device/by user', 'SERVICE_CONTRACT_DEVICE_USER', null),
   new ContractsFilterType('Service Contract/by other', 'SERVICE_CONTRACT', 'OTHER')];
   @Input() selectedType = new ContractsFilterType('Hourly', 'HOURLY', null);
-  sub:Subscription = new Subscription();
+  @Output() onSelectCompany = new EventEmitter<any>();
+  sub: Subscription = new Subscription();
   constructor(private contractsStateService: ContractsStateService,
     private companiesState: CompaniesStateService,) { }
 
@@ -29,13 +30,13 @@ export class ContractsAsideTopComponent implements OnInit {
   }
   getClientsList(data) {
     this.companies = data.filter(item => item.accountType === 'CLIENT' && !item.deletedAt).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
-    1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
+      1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
   }
   onSelectType(data) {
     this.contractsStateService.setType(data);
     console.log("data", data);
   }
-  onSelectCompany(item) {
-
+  selectCompany(item) {
+    this.onSelectCompany.emit(item);
   }
 }

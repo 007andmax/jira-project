@@ -1,3 +1,42 @@
-<p>
-  contracts-aside-hourly-billing-add-service works!
-</p>
+<div class="qt-w100 qt-mb-16">
+  <div class="qt-input-block" [ngClass]="{'--input-error':!validate.getName()}">
+    <input  [value]="'Checks & System Maintenance'" placeholder="Service Name" [(ngModel)]="service.name" type="text" (input)="onChangeName()">
+    
+    <mat-error class="qt-tooltip-error" *ngIf="!validate.getDuplicateName()">
+      Duplicate name
+    </mat-error>
+    <mat-error class="qt-tooltip-error" *ngIf="!validate.getName()">
+      Service name is required
+    </mat-error>
+  </div>
+</div>
+<div class="qt-df">
+  <div class="qt-w50 qt-mb-16 qt-mr-16">
+    <div class="qt-input-block" [ngClass]="{'--input-error':!validate.getRate()}">
+      <input   [(ngModel)]="service.rate" type="text" number placeholder="Per Hour Rate"
+      [money]="true"
+       (input)="onChangeRate($event)" appToFixed>
+       <mat-error class="qt-tooltip-error" *ngIf="!validate.getRate()">
+        Hour rate is required
+      </mat-error>
+    </div>
+  </div>
+
+
+  <div class="qt-w50 qt-mb-16">
+    <div class="create-product-taxes-select">
+      <app-invoice-form-ticket-edit-taxes #taxes [selectedTax]="defaultSelectedTax" (taxesChange)="onTaxesChange($event)"></app-invoice-form-ticket-edit-taxes>
+
+     
+    </div>
+  </div>
+</div>
+<div class="qt-df qt-ai-c">
+  <label class="qt-checkbox receive-full-amount-check qt-mb-0 pointer" for="email-payment">
+    <input id="email-payment" type="checkbox"  [(ngModel)]="service.billable"  >
+    <span></span>
+  </label>
+</div>
+<button appDisabledBtn #addBtn="disabled" (onClick)="searchDuplicatedServiceNames()">add</button>
+<div class="icon__close qt-sz-24 qt-pointer qt-ic-c" (click)="closed()"></div>
+   

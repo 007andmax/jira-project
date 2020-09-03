@@ -9,7 +9,11 @@ export class ContractsHourly {
     type: string;
     reviewDate: string;
     constructor() {
+        
 
+    }
+    public setCompanyId(data) {
+this.companyId = data;
     }
     public setReviewDate(day, month, year, timeOffset) {
         let current = new Date();

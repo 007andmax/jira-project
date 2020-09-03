@@ -42,6 +42,19 @@ export class DefaultServices implements Service {
         this.rate = 0;
         this.taxes = [];
     }
+    
+    public getDataForAddDefault() {
+        return {
+            basedOnDefault: true,
+            billable: this.billable,
+            isDefault: this.isDefault,
+            name: this.name,
+            rate: this.rate,
+            taxIds: this.taxes.map((item => {
+                return item.id;
+            }))
+        }
+    }
     public getDataForAdd() {
         return {
             billable: this.billable,
@@ -53,6 +66,9 @@ export class DefaultServices implements Service {
                 return item.id;
             }))
         }
+    }
+    public setVersionedId (data) {
+        this.versionedId = data;
     }
     public getDataForUpdate() {
         return {

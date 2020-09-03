@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitter, ChangeDetectorRef, Input } from '@angular/core';
 import { Tax } from 'src/ng2/app/interfaces/service/tax';
 import { Subscription } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -11,7 +11,7 @@ import { TaxesService } from 'src/ng2/app/services/taxes/taxes.service';
   styleUrls: ['./invoice-form-ticket-edit-taxes.component.scss']
 })
 export class InvoiceFormTicketEditTaxesComponent implements OnInit, OnDestroy {
-  selectedTax = [];
+  @Input() selectedTax = [];
   taxes: Array<Tax> = [];
   sub = new Subscription();
   editItem: any;

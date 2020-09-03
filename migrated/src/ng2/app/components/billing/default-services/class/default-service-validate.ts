@@ -2,9 +2,13 @@ import { DefaultServices } from './default-service';
 
 export class DefaultServiceValidate {
     name: boolean = true;
+    duplicateName: boolean = true;
     rate:boolean = true;
     constructor() {
 
+    }
+    public setDuplicateName(data) {
+        this.duplicateName = data;
     }
     public getName() {
         return this.name;
@@ -12,9 +16,14 @@ export class DefaultServiceValidate {
     public getRate () {
         return this.rate;
     }
-
+    public getDuplicateName () {
+        return this.duplicateName;
+    }
     public resetRate() {
         this.rate = true;
+    }
+    public resetDuplicateName() {
+        this.duplicateName = true;
     }
 
     public resetName () {

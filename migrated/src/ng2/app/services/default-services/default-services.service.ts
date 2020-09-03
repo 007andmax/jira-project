@@ -19,6 +19,9 @@ export class DefaultServicesService {
     private http: HttpClient,
    
   ) { }
+  public searchDuplicatedServiceNames(startDate, endDate, companyId, agreementId,serviceNamesList) {
+    return this.http.post(this.apiUrl + `services/searchDuplicatedServiceNames?startDate=${startDate}&endDate=${endDate}&companyId=${companyId + ((agreementId) ? '&agreementId=' + agreementId : '')}`,serviceNamesList);
+  }
   public getDefaultServices(){
     return this.http.get(this.apiUrl + `services/getDefaultServices`).pipe(map((data: any) => data.map(item => new DefaultServices(item))));
   }

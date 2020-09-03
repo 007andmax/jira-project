@@ -278,7 +278,6 @@
               "src/ng1/scripts/common/services/rest/taxes.js",
               "src/ng1/scripts/common/services/rest/tickets.js",
               "src/ng1/scripts/common/services/rest/users.js",
-              "src/ng1/scripts/core/billable/default-services/default-services.crtl.js",
               "src/ng1/scripts/core/billable/prevent-hash-change.drv.js",
               "src/ng1/scripts/core/companies/company-profile/company-address-autocomplete.drv.js",
               "src/ng1/scripts/core/companies/company-profile/company-profile.ctrl.js",
