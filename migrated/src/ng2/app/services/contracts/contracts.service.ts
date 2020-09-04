@@ -19,6 +19,10 @@ export class ContractsService {
     private http: HttpClient
   ) {}
 
+  
+  public createContract(createBillableItem, data) {
+    return this.http.post(this.apiUrl + `serviceAgreements?createBillableItem=${createBillableItem}`,data);
+  }
   public validateCrossingDatesHourly(startDate, endDate, companyId,agreementId) {
     return this.http.get(this.apiUrl + `/serviceAgreements/validateCrossingDates?companyId=${companyId}&startDate=${startDate}&endDate=${endDate + ((agreementId) ? '&agreementId=' + agreementId : '')}`);
   }

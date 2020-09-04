@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { ContractsFilterType } from '../../class/contracts-filter-type';
 import { FORMAT_DATE_2 } from 'src/ng2/app/const/date-picker';
 import { ContractsHourly } from '../class/contracts-hourly';
@@ -24,6 +24,7 @@ export class ContractsAsideHourlyBillingComponent implements OnInit {
   today = new Date().getTime();
   showAddService: boolean = false;
   selectAllServices: boolean = false;
+  @Output() onClose = new EventEmitter<any>();
   constructor(private companiesStateService: CompaniesStateService,
     private contractsService: ContractsService,
     private defaultServicesService: DefaultServicesService,
@@ -59,7 +60,9 @@ export class ContractsAsideHourlyBillingComponent implements OnInit {
     this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsHourly.startDate).format('DD MMM YYYY'),
       moment(this.contractsHourly.endDate).format('DD MMM YYYY'), this.contractsHourly.companyId, null, servicesName).subscribe(data => {
         if (Object.keys(data).length === 0) {
-         
+         this.contractsService.createContract(false,this.contractsHourly.getDataForCreate()).subscribe(contract => {
+ this.onClose.emit(null);
+         })
         } else {
          
         }
