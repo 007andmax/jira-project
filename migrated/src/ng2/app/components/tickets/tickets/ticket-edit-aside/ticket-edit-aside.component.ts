@@ -193,6 +193,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     this.ticketProfile.updates = updates;
     this.cd.detectChanges();
   }
+   
   onChangeTags(data) {
     if (!this.opened) return;
     this.ticketProfile.tags = data;
@@ -217,6 +218,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
   }
 
   toggleSubject() {
+    console.log("toggleSubject");
     var textCurrent = this.elRef.nativeElement.querySelector("#ticket-subject").value;
     var textOld = this.ticketProfile.subject;
     this.modeSubject = (this.modeSubject === 'view') ? 'edit' : 'view';
@@ -226,14 +228,17 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     }
   }
   toggleNote() {
+    console.log("toggleNote");
     var textCurrent = this.elRef.nativeElement.querySelector("#ticket-note").innerHTML.replace(/<\/?[^>]+>/ig, "");
     var textOld = (this.ticketProfile.note) ?  this.ticketProfile.note.replace(/<\/?[^>]+>/ig, "") : "";
+    this.modeDescription = 'view';
     if (textCurrent != textOld) {
       this.ticketProfile.note = this.elRef.nativeElement.querySelector("#ticket-note").innerHTML;
       this.onChangeSubjectNote();
     }
   }
   onChangeSubjectNote() {
+    console.log("onChangeSubjectNote");
     this.ticketsService.changeSubjectNoteTicket(this.ticketProfile.id, this.ticketProfile.subject, this.ticketProfile.note).subscribe(data => {
     })
   }
@@ -305,8 +310,9 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     })
 
   };
-  getCompantName() {
-    let find = this.companiesStateService.getCompanies().find(item => item.id === this.ticketProfile.companyId);
+  getCompanyName() {
+    if (!this.ticketProfile.company) return '';
+    let find = this.companiesStateService.getCompanies().find(item => item.id === this.ticketProfile.company.id);
     return (find) ? find.name : '';
   }
   getNameCreateUser() {

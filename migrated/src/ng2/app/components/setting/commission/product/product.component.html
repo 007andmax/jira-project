@@ -22,7 +22,7 @@
               ><img src="../../../../../../ng1/images/setting-module/edit.svg" alt="Edit"
             /></a>
             <a href="javascript:;" data-tooltip="Remove" class="remove"
-            (click)="removeProduct(category)"
+            (click)="confirmDelete(category)"
               ><img src="../../../../../../ng1/images/setting-module/remove.svg" alt="Remove"
             /></a>
             <!-- Edit create Tags -->
@@ -53,7 +53,7 @@
                           <div class="m-btn-col">
                             <input
                               type="submit"
-                              (click)="setCategoryRate(commissionRate.value,category.id,category)"
+                              (click)="confirmEdit(commissionRate.value,category.id,category)"
                               value="Save"
                               class="btn btn-primary"
                             />
@@ -78,3 +78,81 @@
   </div>
   <!-- <div class="loading" *ngIf="loading"></div> -->
 </div>
+<div class="img-croparea deletePopup" *ngIf="deletePopup">	
+    <div class="crop-inner">	
+      <div class="cropping">	
+        <div class="popup-message">	
+          <span class="icon-part">	
+            <img	
+              src="../../../../../ng1/images/setting-module/delete-red.svg"	
+              alt="delete"	
+            />	
+          </span>	
+          <div class="message-right">	
+            <h1>Delete Commission Rate</h1>	
+            <p>Are you sure you want {{category.name}} commission rate to zero?</p>	
+          </div>	
+          <a class="close-ico" href="javascript:;" (click)="deletePopup = false"	
+            ><img	
+            src="../../../../../ng1/images/setting-module/close.svg"	
+              alt="close"	
+          /></a>	
+        </div>	
+        <div class="btn-crops">	
+          <button	
+            type="button"	
+            class="btn btn-primary"	
+            (click)="deletePopup = false;removeProduct()"	
+          >	
+            Yes, I am sure	
+          </button>	
+          <button	
+            type="button"	
+            class="btn btn-secondary"	
+            (click)="deletePopup = false"	
+          >	
+            Cancel	
+          </button>	
+        </div>	
+      </div>	
+    </div>	
+  </div>	
+  	
+  <div class="img-croparea deletePopup" *ngIf="confirmPopup">	
+    <div class="crop-inner">	
+      <div class="cropping">	
+        <div class="popup-message">	
+          <!-- <span class="icon-part">	
+            <img	
+              src="../../../../../ng1/images/setting-module/delete-red.svg"	
+              alt="delete"	
+            />	
+          </span> -->	
+          <div class="message-right">	
+            <p>Do you want this commission to fact old items?</p>	
+          </div>	
+          <a class="close-ico" href="javascript:;" (click)="factItem = false;confirmPopup = false;setCategoryRate();"	
+            ><img	
+              src="../../../../../ng1/images/setting-module/close.svg"	
+              alt="close"	
+          /></a>	
+        </div>	
+        <div class="btn-crops">	
+          <button	
+            type="button"	
+            class="btn btn-primary"	
+            (click)="factItem = true;confirmPopup = false;setCategoryRate()"	
+          >	
+            Yes, I want	
+          </button>	
+          <button	
+            type="button"	
+            class="btn btn-secondary"	
+            (click)="factItem = false;confirmPopup = false;setCategoryRate();"	
+          >	
+            Cancel	
+          </button>	
+        </div>	
+      </div>	
+    </div>	
+  </div>

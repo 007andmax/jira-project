@@ -22,6 +22,7 @@ export class TicketProfileUpdatesProductComponent implements OnInit {
     private modalService: NgbModal) { }
 
   ngOnInit() {
+   
   }
   public getTotal(price, quantity) {
     return price * quantity;

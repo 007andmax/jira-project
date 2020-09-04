@@ -114,16 +114,12 @@
     }
     function checkInit() {
       checkInitsCount++;
-      console.log("checkInitsCount",checkInitsCount);
       if (checkInitsCount === 2) {
         initialized = true;
-
         for (var i = 0; i < initListeners.length; i++) {
           initListeners[i]();
         }
       }
-
-
     }
 
     RealTimeService.subscribe('/company', serviceScope, function (newChange) {

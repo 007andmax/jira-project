@@ -7,10 +7,10 @@
       'quicktech.common.services.PermissionsService',
       'CompaniesService', '$uibModal',
       'TicketsService', 'ColorsService', 'TagsService', 'CustomStorageService', 'UsersService',
-      '$timeout', '$location', 'ReceivableService', 'TaxesService', 'PaymentsService', 'ProductsService',
+      '$timeout', '$location', 'TaxesService', 'ProductsService',
       'quicktech.common.services.UserConfirmationsService', '$stateParams',
       function ($scope, SharedStateService, $state, $rootScope, DevicesService, PermissionsService, CompaniesService, $uibModal, TicketsService, ColorsService, TagsService,
-        CustomStorageService, UsersService, $timeout, $location, ReceivableService, TaxesService, PaymentsService,
+        CustomStorageService, UsersService, $timeout, $location, TaxesService,
         ProductsService, UserConfirmationsService, $stateParams) {
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession'),
@@ -1620,7 +1620,7 @@
             return 'reports';
           } else if (url.indexOf('quotes') > -1) {
             return 'billing';
-          } else if (url.indexOf('billable') > -1) {
+          } else if (url.indexOf('billable') > -1 || url.indexOf('payments') > -1) {
             return 'billing';
           } else if (url.indexOf('tickets') > -1) {
             return 'tickets';

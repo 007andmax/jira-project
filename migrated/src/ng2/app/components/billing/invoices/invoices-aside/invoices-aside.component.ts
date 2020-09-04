@@ -75,12 +75,12 @@ export class InvoicesAsideComponent implements OnInit {
       }
       if (item.selected) sumPayment += item.paymentAmount;
     })
-    if (sumPayment < this.amountReceived) {
+    if (this.invoices[index].selected && sumPayment < this.amountReceived) {
       let paymentAmount = (this.amountReceived - sumPayment) - (this.invoices[index].sum - this.invoices[index].paidSum);
       this.invoices[index].paymentAmount = (paymentAmount > 0) ? (this.invoices[index].sum - this.invoices[index].paidSum) : (this.amountReceived - sumPayment);
     }
     if (!this.isChangeAmountReceived) {
-      this.invoices[index].paymentAmount = (this.invoices[index].sum - this.invoices[index].paidSum);
+      if (this.invoices[index].selected)this.invoices[index].paymentAmount = (this.invoices[index].sum - this.invoices[index].paidSum);
       this.amountReceived = this.invoices.reduce((a, b) => {
         if (b.selected) return a + (b.sum - b.paidSum);
         return a + 0;
@@ -128,7 +128,7 @@ export class InvoicesAsideComponent implements OnInit {
   }
   getRemainingBalance() {
     let subTotal = this.getSubtotal();
-    let totalPayment = this.getTotalPayment();
+    let totalPayment = this.amountReceived;
     return subTotal - totalPayment;
   }
   getTotalPayment() {

@@ -88,7 +88,8 @@
               "src/ng1/styles/nv.d3.css",
               "src/ng1/styles/daterangepicker.css",
               "node_modules/igniteui-angular/styles/igniteui-angular.css",
-              "node_modules/timepicker/dist/jquery.timepicker.css"
+              "node_modules/timepicker/dist/jquery.timepicker.css",
+              "src/ng2/app/components/device/styles.scss"
             ],
             "scripts": [
               "src/ng2/assets/md5-min.js",
@@ -133,7 +134,6 @@
               "src/ng1/scripts/core/left-panel/left-panel.mdl.js",
               "src/ng1/scripts/core/products/products.mdl.js",
               "src/ng1/scripts/core/quick-support/quick-support.mdl.js",
-              "src/ng1/scripts/core/receivable/receivable.mdl.js",
               "src/ng1/scripts/core/reports/reports.mdl.js",
               "src/ng1/scripts/core/right-panel/right-panel.mdl.js",
               "src/ng1/scripts/core/service-agreements/service-agreements.mdl.js",
@@ -268,10 +268,8 @@
               "src/ng1/scripts/common/services/rest/files.js",
               "src/ng1/scripts/common/services/rest/global-search.js",
               "src/ng1/scripts/common/services/rest/password-manager.js",
-              "src/ng1/scripts/common/services/rest/payments.js",
               "src/ng1/scripts/common/services/rest/products.js",
               "src/ng1/scripts/common/services/rest/realtime.js",
-              "src/ng1/scripts/common/services/rest/receivable.js",
               "src/ng1/scripts/common/services/rest/reports.js",
               "src/ng1/scripts/common/services/rest/service-agreements.js",
               "src/ng1/scripts/common/services/rest/services.js",
@@ -281,12 +279,7 @@
               "src/ng1/scripts/common/services/rest/taxes.js",
               "src/ng1/scripts/common/services/rest/tickets.js",
               "src/ng1/scripts/common/services/rest/users.js",
-              "src/ng1/scripts/core/billable/invoice-content.drv.js",
-              "src/ng1/scripts/core/billable/invoice-modal-window.drv.js",
-              "src/ng1/scripts/core/billable/invoice-time-filter.flt.js",
-              "src/ng1/scripts/core/billable/new-payments/new-payments.ctrl.js",
-              "src/ng1/scripts/core/billable/new-payments/newPaymentCtrl.js",
-              "src/ng1/scripts/core/billable/newBillableModals.ctrl.js",
+              "src/ng1/scripts/core/billable/default-services/default-services.crtl.js",
               "src/ng1/scripts/core/billable/prevent-hash-change.drv.js",
               "src/ng1/scripts/core/companies/company-profile/company-address-autocomplete.drv.js",
               "src/ng1/scripts/core/companies/company-profile/company-profile.ctrl.js",
@@ -336,7 +329,6 @@
               "src/ng1/scripts/core/quick-support/copy-url.drv.js",
               "src/ng1/scripts/core/quick-support/open-mail-manager.drv.js",
               "src/ng1/scripts/core/quick-support/quick-support.ctrl.js",
-              "src/ng1/scripts/core/receivable/receive-payment.ctrl.js",
               "src/ng1/scripts/core/reports/reports.ctrl.js",
               "src/ng1/scripts/core/right-panel/device-context-menu/device-context-menu.drv.js",
               "src/ng1/scripts/core/service-agreements/modal/block-time-billing-modal.ctrl.js",
@@ -369,8 +361,7 @@
               "src/ng1/scripts/js/vendors/date-range-picker/datepicker.en.js",
               "src/ng1/scripts/js/handlebars-v3.0.3.js",
               "src/ng1/scripts/core/assign-user-list/assign-user-list.ctrl.js",
-              "node_modules/datatables.net/js/jquery.dataTables.min.js",
-              "node_modules/timepicker/dist/jquery.timepicker.js"
+              "node_modules/datatables.net/js/jquery.dataTables.min.js"
             ],
             "es5BrowserSupport": true
           },

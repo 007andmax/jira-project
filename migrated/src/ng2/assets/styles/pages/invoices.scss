@@ -1,5 +1,16 @@
 .invoices-page {
 
+  .table-container {
+    overflow-x: auto;
+    min-height: calc(100vh - 346px);
+  }
+
+  .invoice-table {
+    max-width: 1320px;
+    // min-width: 1064px;
+    margin: 0 auto;
+  }
+
   .invoices-list-header {
     display: flex;
     flex-wrap: wrap;
@@ -50,7 +61,6 @@
 
   .invoices-date-filter {
     width: 23%;
-    margin-right: 8px;
     input {
       color: #364656
     }
@@ -105,12 +115,15 @@
   //   max-width: 216px;
   // }
 
+
+
   .invoice-table td {
     border: 1px solid transparent;
   }
 
   .invoice-table__check {
     width: 32px;
+    min-width: 32px;
     padding-right: 0;
   }
 
@@ -118,6 +131,7 @@
     padding-left: 8px;
     padding-right: 8px;
     width: 100px;
+    min-width: 100px;
   }
 
   .invoce-table__company {
@@ -125,12 +139,14 @@
     text-overflow: ellipsis;
     overflow: hidden;
     max-width: 100px;
+    width: 100vw;
   }
 
   .invoce-table__invoice {
     padding-left: 8px;
     padding-right: 8px;
     width: 93px;
+    min-width: 93px;
   }
   td.invoce-table__invoice {
     font-family: Graphik-Medium, sans-serif;
@@ -139,18 +155,21 @@
 
   .invoce-table__status {
     width: 133px;
+    min-width: 133px;
     padding-left: 8px;
     padding-right: 8px;
   }
 
   .invoce-table__read-on {
     width: 107px;
+    min-width: 107px;
     padding-left: 8px;
     padding-right: 8px;
   }
 
   .invoce-table__due-date {
     width: 116px;
+    min-width: 116px;
     padding-left: 8px;
     padding-right: 8px;
   }
@@ -159,12 +178,14 @@
 
 
     width: 89px;
+    min-width: 89px;
     padding-left: 8px;
     padding-right: 8px;
   }
 
   .invoce-table__balance-due {
     width: 110px;
+    min-width: 110px;
     padding-left: 8px;
     padding-right: 8px;
     text-align: right;
@@ -172,6 +193,7 @@
 
   .invoce-table__menu {
     width: 28px;
+    min-width: 28px;
     padding-left: 0;
     padding-right: 0;
 
@@ -360,7 +382,7 @@
 
   .aside-footer {
     height: 72px;
-    border: 1px solid #dfe3e8;
+    border-top: 1px solid #dfe3e8;
     background: white;
   }
   }
@@ -404,7 +426,7 @@
   }
 }
 
-app-invoices-item {
+app-invoices-item,app-payment-item {
   display: contents;
 }
 
@@ -640,4 +662,12 @@ app-invoices-item {
 
 .invoice-preview-notes {
   max-width: 530px;
+}
+
+
+@media (min-width: 1920px) {
+  .invoice-table {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
 }

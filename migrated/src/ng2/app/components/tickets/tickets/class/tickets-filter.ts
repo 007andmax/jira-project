@@ -112,7 +112,7 @@ export class TicketsFilter {
         if (this.selectedCompany) {
             payload.groupFieldFilters[0].fieldFilterDtos.push({
                 operator: "EQ",
-                path: "companyId",
+                path: "company.id",
                 values: [this.selectedCompany.id]
             });
             payload.groupFieldFilters[0].predicateRule = "AND";

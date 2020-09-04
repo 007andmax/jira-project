@@ -229,8 +229,8 @@
   &__tips {
     background-image: url("assets/img/icons/tips.svg");
   }
-  &__check {
-    background-image: url("assets/img/icons/check.png");
+  &__invoice-check {
+    background-image: url("assets/img/icons/invoice-check.svg");
   }
   &__archive {
     background-image: url("assets/img/icons/archive.svg");
@@ -255,6 +255,9 @@
   }
   &__restart {
     background-image: url("assets/img/icons/restart.svg");
+  }
+  &__payment-note {
+    background-image: url("assets/img/icons/saved-note.svg");
   }
   &__shutdown {
     background-image: url("assets/img/icons/shutdown.svg");
@@ -319,9 +322,8 @@
     background-image: url("assets/img/icons/email-dark.svg");
   }
 
-
   &__check {
-    background-image: url("assets/img/icons/check.svg");
+    background-image: url("assets/img/icons/check.png");
   }
   &__collapse-task {
     background-image: url("assets/img/icons/collapse-task.svg");
@@ -356,6 +358,12 @@
 
   // email-dark.svg
   // edit.svg
+  &__refund-payment {
+    background-image: url("assets/img/icons/refund-payment.svg");
+  }
+  &__verified {
+    background-image: url("assets/img/icons/verified.svg");
+  }
 }
 
 .icn-20 {

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" viewBox="0 0 16 18">
+    <g fill="none" fill-rule="evenodd">
+        <path fill="#FFF" stroke="#2A7E2E" stroke-linejoin="round" d="M3 1h6l5 5v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM6 14.5h4"/>
+        <text fill="#2A7E2E" font-family="Graphik-Semibold, Graphik" font-size="6" font-weight="500">
+            <tspan x="6" y="13">X</tspan>
+        </text>
+        <path fill="#AFDEB1" stroke="#2A7E2E" stroke-linejoin="round" d="M9 1l5 5H9z"/>
+    </g>
+</svg>

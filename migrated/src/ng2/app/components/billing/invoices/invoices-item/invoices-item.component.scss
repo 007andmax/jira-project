@@ -10,7 +10,14 @@ tr:hover {
 tr.--selected {
   td {
     background-color: #f4fbff;
-    border-color: #16a4fa !important;
+    border-top-color: #16a4fa !important;
+     border-bottom-color: #16a4fa !important;
+     &:first-child {
+      border-left-color: #16a4fa !important;
+     }
+     &:last-child {
+      border-right-color: #16a4fa !important;
+     }
   }
 }
 .pointer {

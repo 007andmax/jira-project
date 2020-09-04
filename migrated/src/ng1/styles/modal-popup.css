@@ -562,7 +562,7 @@ _::-webkit-:not(:root:root),
 .modal-dialog.modal-unlock-window {
   top: 200px;
   left: 50%;
-  width: 425px;
+  width: 425px !important;
 }
 
 .modal-unlock-window h3 {

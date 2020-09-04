@@ -12,7 +12,6 @@
       'quicktech.core.companies',
       'quicktech.core.products',
       'quicktech.core.billable',
-      'quicktech.core.receivable',
       'quicktech.core.leftPanel',
       'quicktech.core.rightPanel',
       'quicktech.core.settings',
@@ -153,6 +152,10 @@
           url: '/ng2/billable-tickets',
           template: '<billable-tickets-component></billable-tickets-component>'
         }))
+        .state('new-payments-ng2', waitForServices({
+          url: '/ng2/payments',
+          template: '<payments-component></payments-component>'
+        }))
         .state('new-billable-invoices', waitForServices({
           url: '/ng2/invoices',
           template: '<invoices-component></invoices-component>'
@@ -187,11 +190,6 @@
           url: '/accounting/service-agreements',
           templateUrl: '/ng1/scripts/core/service-agreements/service-agreements.tpl.html',
           controller: 'quicktech.core.serviceAgreements.serviceAgreementsCtrl'
-        }))
-        .state('new-payments', waitForServices({
-          url: '/accounting/new-payments',
-          templateUrl: '/ng1/scripts/core/billable/new-payments/new-payments.tpl.html',
-          controller: 'quicktech.core.billable.newPaymentsCtrl'
         }))
         .state('quickSupport', waitForServices({
           url: '/quickSupport',
@@ -298,6 +296,45 @@
         .state('glnumber-component', waitForServices({
           url: '/ng2/setting/glnumber',
           template: '<glnumber-settings-component></glnumber-settings-component>'
+        })) .state('device-dashboard', waitForServices({
+          url: '/ng2/device/dashboard',
+          template: '<dashboard-component></dashboard-component>'
+        }))
+        .state('device-hardware', waitForServices({
+          url: '/ng2/device/hardware',
+          template: '<hardware-component></hardware-component>'
+        }))
+        .state('device-software', waitForServices({
+          url: '/ng2/device/software',
+          template: '<software-component></software-component>'
+        }))
+        .state('device-service', waitForServices({
+          url: '/ng2/device/service',
+          template: '<services-component></services-component>'
+        }))
+        .state('device-antivirus', waitForServices({
+          url: '/ng2/device/antivirus',
+          template: '<antivirus-component></antivirus-component>'
+        }))
+        .state('device-terminal', waitForServices({
+          url: '/ng2/device/terminal',
+          template: '<terminal-component></terminal-component>'
+        }))
+        .state('device-password', waitForServices({
+          url: '/ng2/device/password',
+          template: '<password-component></password-component>'
+        }))
+        .state('device-windows', waitForServices({
+          url: '/ng2/device/windows',
+          template: '<windows-component></windows-component>'
+        }))
+        .state('device-startup', waitForServices({
+          url: '/ng2/device/startup',
+          template: '<startup-component></startup-component>'
+        }))
+        .state('device-file', waitForServices({
+          url: '/ng2/device/file',
+          template: '<file-component></file-component>'
         }));
 
       function waitForServices(conf) {

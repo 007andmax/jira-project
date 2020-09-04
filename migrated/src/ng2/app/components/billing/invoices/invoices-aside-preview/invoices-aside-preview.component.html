@@ -13,7 +13,9 @@
     <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__email-dark" (click)="resendInvoices()"></div>
     <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__print" (click)="print()"></div>
     <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__download-pdf" (click)="downloadPDF()"></div>
-    <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-16 header-circle-icon icon__remove" (click)="deleteInvoice()"></div>
+    <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__remove" *ngIf="!invoiceProfile.paidOn" (click)="rollbackInvoice()"></div>
+    <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-8 header-circle-icon icon__restart" *ngIf="invoiceProfile.paidOn" (click)="refundPayments()"></div>
+   <!--  <div class="qt-sz-32 qt-circle qt-bg-white qt-mr-16 header-circle-icon icon__remove" (click)="deleteInvoice()"></div>-->
 
     <div class="icon__close qt-sz-24 qt-pointer qt-ic-c " (click)="close()"></div>
   </div>
@@ -34,17 +36,17 @@
     <div class="invoice-status-timeline__line" *ngIf="toggleStatus">
       <div class="invoice-status-timeline__line-point"></div>
       <div class="invoice-status-timeline__line-point"></div>
-      <div class="invoice-status-timeline__line-point" [ngClass]="{'not-completed-status':!invoice.readedAt}"></div>
-      <div class="invoice-status-timeline__line-point" [ngClass]="{'not-completed-status':!invoice.paidOn}"></div>
+      <div class="invoice-status-timeline__line-point" [ngClass]="{'not-completed-status':!invoiceProfile.readedAt}"></div>
+      <div class="invoice-status-timeline__line-point" [ngClass]="{'not-completed-status':!invoiceProfile.paidOn}"></div>
     </div>
 
     <div class="invoice-status-timeline__steps qt-df" *ngIf="toggleStatus">
 
       <div class="qt-df qt-ai-c invoice-status-timeline__steps-info" >
-        <div class="step-citcle qt-mr-5 icon__check"></div>
+        <div class="step-citcle qt-mr-5 icon__invoice-check"></div>
         <div>
           <div class="qt-fs-12 qt-ff-gm qt-lh-133  qt-color-dark ">Create Invoice</div>
-          <div class="qt-fs-11 qt-lh-145 qt-color-dark-light" [textContent]="getStatusDate(invoice.date)"></div>
+          <div class="qt-fs-11 qt-lh-145 qt-color-dark-light" [textContent]="getStatusDate(invoiceProfile.date)"></div>
         </div>
       </div>
 
@@ -60,7 +62,7 @@
         <div class="step-citcle qt-mr-5 icon__read-on"></div>
         <div>
           <div class="qt-fs-12 qt-ff-gm qt-lh-133  qt-color-dark ">Read on</div>
-          <div class="qt-fs-11 qt-lh-145 qt-color-dark-light" *ngIf="invoice.readedAt" [textContent]="getStatusDate(invoice.readedAt)"></div>
+          <div class="qt-fs-11 qt-lh-145 qt-color-dark-light" *ngIf="invoiceProfile.readedAt" [textContent]="getStatusDate(invoiceProfile.readedAt)"></div>
         </div>
       </div>
 
@@ -68,7 +70,7 @@
         <div class="step-citcle qt-mr-5 icon__get-paid"></div>
         <div>
           <div class="qt-fs-12 qt-ff-gm qt-lh-133  qt-color-dark ">Get paid</div>
-          <div class="qt-fs-11 qt-lh-145 qt-color-dark-light" *ngIf="invoice.paidOn" [textContent]="getStatusDate(invoice.paidOn)"></div>
+          <div class="qt-fs-11 qt-lh-145 qt-color-dark-light" *ngIf="invoiceProfile.paidOn" [textContent]="getStatusDate(invoiceProfile.paidOn)"></div>
         </div>
       </div>
 
@@ -92,7 +94,7 @@
   </div> -->
 
   <div class="invoice-preview qt-pos-rel">
-    <div class="invoice-preview__status" [ngClass]="{'--paid': invoice.paidOn, '--overdue': invoice.isOverDue && !invoice.paidOn}"></div>
+    <div class="invoice-preview__status" [ngClass]="{'--paid': invoiceProfile.paidOn, '--overdue': invoiceProfile.isOverDue && !invoiceProfile.paidOn}"></div>
 
     <div class="qt-df qt-jc-sb qt-pb-24 company-info">
       <div class="qt-lh-154">
@@ -111,10 +113,10 @@
       <div class="qt-lh-154">
         <div class="qt-fs-10 qt-color-light qt-mb-8 qt-ff-sb qt-lh-12">BILLING ADDRESS</div>
         <div class="qt-fs-13 qt-color-dark qt-ff-gm" [textContent]="invoiceProfile.companyName"></div>
-        <div class="qt-fs-13"   [textContent]="invoiceProfile.invoiceContact.firstName + ' ' + invoiceProfile.invoiceContact.lastName"></div>
+        <div class="qt-fs-13"  *ngIf="invoiceProfile.invoiceContact" [textContent]="(invoiceProfile.invoiceContact.firstName && invoiceProfile.invoiceContact.lastName) ? invoiceProfile.invoiceContact.firstName + ' ' + invoiceProfile.invoiceContact.lastName : ''"></div>
         <div class="qt-fs-13" [textContent]="invoiceProfile.billingAddress"></div>
-        <div class="qt-fs-13" [textContent]="invoiceProfile.invoiceContact.primaryEmail"></div>
-        <div class="qt-fs-13" [textContent]="(invoiceProfile.invoiceContact.phoneNumbers && invoiceProfile.invoiceContact.phoneNumbers.length > 0) ? invoiceProfile.invoiceContact.phoneNumbers[0].number : ''"></div>
+        <div class="qt-fs-13" *ngIf="invoiceProfile.invoiceContact" [textContent]="(invoiceProfile.invoiceContact.primaryEmail) ? invoiceProfile.invoiceContact.primaryEmail : ''"></div>
+        <div class="qt-fs-13" *ngIf="invoiceProfile.invoiceContact" [textContent]="(invoiceProfile.invoiceContact.phoneNumbers && invoiceProfile.invoiceContact.phoneNumbers.length > 0) ? invoiceProfile.invoiceContact.phoneNumbers[0].number : ''"></div>
       </div>
 
       <div class="qt-fs-13 qt-text-right qt-lh-154">
@@ -211,7 +213,7 @@
       <div class="invoice-preview__total-block">
         <div class="qt-df qt-jc-sb qt-pl-12 qt-pr-12">
           <div class="qt-text-left">Sub Total</div>
-          <div class="invoice-info-value qt-text-right" [textContent]="(invoiceProfile.productsSum + invoiceProfile.servicesSum ) |
+          <div class="invoice-info-value qt-text-right" [textContent]="(invoiceProfile.totalSum - invoiceProfile.taxSum ) |
           currency"></div>
         </div>
 

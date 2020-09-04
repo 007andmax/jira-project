@@ -19,49 +19,51 @@
   <td class="invoce-table__read-on" [textContent]="getDate(invoice.readedAt)"></td>
   <td class="invoce-table__amount" [textContent]="invoice.sum | currency"></td>
   <td class="invoce-table__balance-due" [textContent]="((invoice.totalSum || invoice.sum) - invoice.paidSum) | currency"></td>
-  <td class="invoce-table__menu" ngbDropdown>
-    <div class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"  id="dropdownBasic1" ngbDropdownToggle></div>
-    <ul class="qt-dropdown-menu invoice-items-dropdown"  ngbDropdownMenu aria-labelledby="dropdownBasic1">
-      <li class="pointer" ngbDropdownItem (click)="resendInvoices()"> <div class="icon__email-dark qt-sz-16 qt-mr-8"></div> Resend</li>
-      <li class="pointer" ngbDropdownItem *ngIf="!invoice.readedAt" (click)="markAsRead()"> <div class="icon__mark-as-read qt-sz-16 qt-mr-8"></div> Mark as Read</li>
-      <li class="pointer" ngbDropdownItem (click)="exportAsPDF()"> <div class="icon__download-pdf qt-sz-16 qt-mr-8"></div> Export as PDF</li>
-      <li class="pointer" ngbDropdownItem *ngIf="invoice.paidOn" (click)="refundPayments()"> <div class="icon__restart qt-sz-16 qt-mr-8"></div> Refund Payments</li>
-      <li class="pointer" ngbDropdownItem *ngIf="!invoice.paidOn" (click)="rollbackInvoice()">  <div class="icon__restart qt-sz-16 qt-mr-8"></div> Rollback</li>
-      <li class="pointer" ngbDropdownItem (click)="deleteInvoice()"> <div class="icon__remove qt-sz-16 qt-mr-8"></div> Remove</li>
-      <li ngbDropdownItem class="payment-menu-item"> <div class="icon__payment-history qt-sz-16 qt-mr-8"></div> Payment history
+  <td class="invoce-table__menu" ngbDropdown [placement]="'left-top'">
+    <div class="qt-ic-c icon__more  qt-pointer qt-sz-16 qt-bg-contain"  id="dropdownBasic1" ngbDropdownToggle>
+      <ul class="qt-dropdown-menu invoice-items-dropdown"  ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <li class="pointer" ngbDropdownItem (click)="resendInvoices()"> <div class="icon__email-dark qt-sz-16 qt-mr-8"></div> Resend</li>
+        <li class="pointer" ngbDropdownItem *ngIf="!invoice.readedAt" (click)="markAsRead()"> <div class="icon__mark-as-read qt-sz-16 qt-mr-8"></div> Mark as Read</li>
+        <li class="pointer" ngbDropdownItem (click)="exportAsPDF()"> <div class="icon__download-pdf qt-sz-16 qt-mr-8"></div> Export as PDF</li>
+        <li class="pointer" ngbDropdownItem *ngIf="invoice.paidOn" (click)="refundPayments()"> <div class="icon__restart qt-sz-16 qt-mr-8"></div> Refund Payments</li>
+        <li class="pointer" ngbDropdownItem *ngIf="!invoice.paidOn" (click)="rollbackInvoice()">  <div class="icon__remove qt-sz-16 qt-mr-8"></div> Rollback</li>
+        <!--<li class="pointer" ngbDropdownItem (click)="deleteInvoice()"> <div class="icon__remove qt-sz-16 qt-mr-8"></div> Delete</li>-->
+        <li ngbDropdownItem class="payment-menu-item"> <div class="icon__payment-history qt-sz-16 qt-mr-8"></div> Payment history
 
-        <div class="dropdown-submenu-wrapper payment-info-submenu">
-          <div class="payment-info clearfix">
-            <ng-template ngFor let-payment
-            [ngForOf]="allPayments"
-             >
-            <div  class="col-md-12">
-              <div class="col-md-4" [textContent]="payment.createdAt">
+          <div class="dropdown-submenu-wrapper payment-info-submenu">
+            <div class="payment-info clearfix">
+              <ng-template ngFor let-payment
+              [ngForOf]="allPayments"
+               >
+              <div  class="col-md-12">
+                <div class="col-md-4" [textContent]="payment.createdAt">
 
-              </div>
-              <div class="col-md-4" [textContent]="parsePaymentMethod(payment.paymentMethod)">
+                </div>
+                <div class="col-md-4" [textContent]="parsePaymentMethod(payment.paymentMethod)">
 
-              </div>
-              <div class="col-md-4" [textContent]="(payment.partialPaidAmount || paymentSum) | currency">
+                </div>
+                <div class="col-md-4" [textContent]="(payment.partialPaidAmount || paymentSum) | currency">
 
+                </div>
               </div>
-            </div>
-            </ng-template>
-            <div class="col-md-12">
-              <div class="col-md-4">
-              </div>
-              <div class="col-md-4">
-                Total payment:
-              </div>
-              <div class="col-md-4" [textContent]="(allPaymentsSum || invoice.payment && invoice.payment.totalSum || invoice.sum) | currency">
+              </ng-template>
+              <div class="col-md-12">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4">
+                  Total payment:
+                </div>
+                <div class="col-md-4" [textContent]="(allPaymentsSum || invoice.payment && invoice.payment.totalSum || invoice.sum) | currency">
 
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-      </li>
-    </ul>
+        </li>
+      </ul>
+
+    </div>
   </td>
 
 </tr>

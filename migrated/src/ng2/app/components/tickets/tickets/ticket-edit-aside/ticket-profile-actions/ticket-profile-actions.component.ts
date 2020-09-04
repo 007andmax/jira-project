@@ -67,7 +67,7 @@ export class TicketProfileActionsComponent implements OnInit, OnDestroy {
     }
   }
   getDevicesByCompany() {
-    let find = (this.devicesSateService.getAllDevices()) ? this.devicesSateService.getAllDevices()[this.ticketProfile.companyId] : false;
+    let find = (this.devicesSateService.getAllDevices()) ? this.devicesSateService.getAllDevices()[this.ticketProfile.company.id] : false;
     return (find) ? find : []
   }
   isDeviceToLink() {

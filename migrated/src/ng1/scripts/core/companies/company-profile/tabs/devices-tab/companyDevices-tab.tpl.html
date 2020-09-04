@@ -90,7 +90,7 @@
                ng-mouseover="showDeviceLabelEditButtom = true"
                ng-mouseleave="showDeviceLabelEditButtom = false">
             <p class="ellipsis">
-              <span
+              <span class="pointer" 
                 ng-click="openDevicesDetails = !openDevicesDetails">{{agent.label || agent.hostName || agent.ip}}</span>
               <button class="company-edit-icn company-edit-icn-sm"
                       ng-show="showDeviceLabelEditButtom && !showDeviceLabelEditForm"
@@ -214,8 +214,7 @@
         <!--</div>-->
         <div>
           <div append-html-to-body data="deviceReport" ng-if="agent.agentId && agent.type !== 'printer'"
-               url="/ng1/scripts/core/companies/company-profile/tabs/devices-tab/report-device.tpl.html"
-               ng-click="getDeviceReport(agent)">
+               ng-click="redirectDevice(agent);">
             <i class="dev-btn devices-card pointer" uib-tooltip="report"></i>
           </div>
         </div>

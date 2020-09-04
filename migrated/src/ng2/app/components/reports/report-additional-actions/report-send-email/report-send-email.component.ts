@@ -10,6 +10,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ReportsService } from 'src/ng2/app/services/reports/reports.service';
 import { ReportEmail } from '../../class/report-email';
 import { ReportsStateService } from 'src/ng2/app/states/reports/reports-state.service';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-report-send-email',
@@ -21,17 +22,45 @@ export class ReportSendEmailComponent implements OnInit {
   messageContent: string = '';
   messageHTML: string = '';
 
-  editorConfig = {
+  editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: false,
     height: '10rem',
     minHeight: '5rem',
-    placeholder: 'Write your draft for companies',
+    maxHeight: 'auto',
+    width: 'auto',
+    minWidth: '0',
     translate: 'no',
-    toolbar: ["bold", "italic", "underline", "fontName",
-      "fontSize", "justifyLeft", "justifyCenter",
-      "justifyRight", "removeFormat", "orderedList",
-      "unorderedList"]
+    enableToolbar: true,
+    showToolbar: true,
+    placeholder: 'Write your draft for companies',
+    defaultParagraphSeparator: '',
+    defaultFontName: '',
+    defaultFontSize: '',
+    toolbarPosition: 'bottom',
+    fonts: [
+      { class: 'arial', name: 'Arial' },
+      { class: 'times-new-roman', name: 'Times New Roman' },
+      { class: 'calibri', name: 'Calibri' },
+      { class: 'comic-sans-ms', name: 'Comic Sans MS' }
+    ],
+    customClasses: [
+      {
+        name: 'quote',
+        class: 'quote',
+      },
+      {
+        name: 'redText',
+        class: 'redText'
+      },
+      {
+        name: 'titleText',
+        class: 'titleText',
+        tag: 'h1',
+      },
+    ],
+    uploadUrl: 'v1/image',
+    sanitize: true,
   };
   action: string = null;
   tab: string = 'plain';
@@ -45,6 +74,8 @@ export class ReportSendEmailComponent implements OnInit {
   @Input() template: string = "PDF_TEMPLATE";
   @Input() orientation;
   @Input() selectedClient;
+  @Input() accountType = 'CLIENT';
+  
   constructor(private draftEmailStateService: DraftEmailStateService, private elRef: ElementRef,
     private draftEmailService: DraftEmailService, public cd: ChangeDetectorRef,
     public activeModal: NgbActiveModal,

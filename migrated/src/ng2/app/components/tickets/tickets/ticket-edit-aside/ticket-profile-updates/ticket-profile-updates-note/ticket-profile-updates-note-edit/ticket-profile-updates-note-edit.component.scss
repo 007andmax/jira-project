@@ -217,9 +217,9 @@
 
       textarea {
         width: 100%;
+        display: block;
+        visibility: visible;
       }
-      textarea:last-child {
-        display: none;
-      }
+      
   }
 }

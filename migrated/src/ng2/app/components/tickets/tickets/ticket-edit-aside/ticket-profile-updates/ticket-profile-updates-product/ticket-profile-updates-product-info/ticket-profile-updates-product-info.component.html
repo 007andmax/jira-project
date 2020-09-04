@@ -7,7 +7,7 @@
       <div class="ticket-updates__ticket-header-total">Total</div>
     </div>
     <div class="d-f ticket-updates__ticket-body" >
-      <div class="ticket-updates__done-status icon__task-pending" [ngClass]="{'--done':product.completed}" (click)="setComplete()"></div>
+      <div class="ticket-updates__done-status icon__task-pending"   [ngClass]="{'--done':product.completed}" (click)="setComplete()"></div>
       <div class="ticket-updates__ticket-title">
         <pre [textContent]="product.item.description"></pre>
       </div>
@@ -15,20 +15,20 @@
       <div class="ticket-updates__ticket-qty" [textContent]="product.quantity"></div>
       <div class="ticket-updates__ticket-total" [textContent]="'$' + getTotal(product.price,product.quantity)"></div>
 
-      <app-date-picker placement="top" ngbTooltip="Date" [placement]="'bottom-right'" [useMinDate]="false" [editMode]="true" [editDate]="product.date" [type]="'ICON'" (onChange)="onChangeDatePicker($event)"></app-date-picker>
+      <app-date-picker    placement="top" ngbTooltip="Date" [placement]="'bottom-right'" [useMinDate]="false" [editMode]="true" [editDate]="product.date" [type]="'ICON'" (onChange)="onChangeDatePicker($event)"></app-date-picker>
 
-      <app-teh-users [type]="'TICEKTS'" [editMode]="true" [selectedMode]="'SINGLE'" [editUsers]="userService" [users]="listTehUsers" (usersChange)="onChangeUser($event)"></app-teh-users>
+      <app-teh-users    [type]="'TICEKTS'" [editMode]="true" [selectedMode]="'SINGLE'" [editUsers]="userService" [users]="listTehUsers" (usersChange)="onChangeUser($event)"></app-teh-users>
     </div>
     <span  class="tag__modern ticket-updates__service-tag-completed" *ngIf="product.completed" [textContent]="'Completed on ' + getDate(product.date)"></span>
     <span  class="tag__modern ticket-updates__service-tag-completed" *ngIf="!product.completed && product.date" [textContent]="'Due date - ' + getDate(product.date)"></span>
   </div>
-  <div ngbDropdown>
+  <div ngbDropdown >
     <div class="ticket-updates__more icon__more" id="dropdownBasic1"
     ngbDropdownToggle></div>
     <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="dropdown-menu-qt">
       <ul>
         <li ngbDropdownItem   (click)="edit()"><i class="icn-16 edit-grey-ng2"></i>Edit</li>
-        <li ngbDropdownItem (click)="removeProduct()"><i class="icn-16 archive-grey-ng2"></i>Delete</li>
+        <li ngbDropdownItem (click)="removeProduct()"   ><i class="icn-16 archive-grey-ng2"></i>Delete</li>
       </ul>
     </div>
   </div>

@@ -45,6 +45,7 @@
           ui-sref="accountsReceivable"
           -->
           <li class="content-report"  ng-click="setReport('accounts-receivable')"  ui-sref="new-item-report({ ticketId: 'accounts-receivable' })">Accounts receivable report</li>
+          <li class="content-report"  ng-click="setReport('accounting-report')"  ui-sref="new-item-report({ ticketId: 'accounting-report' })">Accounting report</li>
         </ul>
       </div>
     </div>
@@ -77,6 +78,8 @@
         <ul>
           <li class="content-report" ui-sref="techReport-ProductSales">Tech sales report</li>
           <li class="content-report" ui-sref="techReport-TicketCreated">Tech ticket report</li>
+          <li class="content-report"    ng-click="setReport('tech-service')"  ui-sref="new-item-report({ ticketId: 'tech-service' })" >Tech service report</li>
+      
         </ul>
       </div>
     </div>
