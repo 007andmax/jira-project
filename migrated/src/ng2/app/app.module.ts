@@ -319,6 +319,8 @@ import { TicketTaskComponent } from './components/device/ticket-task/ticket-task
 import { searchTextPipe } from './components/device/_pipe/searchText.pipe';
 import { SoftwarePipe } from './pipe/software.pipe';
 import { DropDownComponent } from './components/shared/drop-down/drop-down.component';
+import { ContractsAsideHourlyBillingPreviewComponent } from './components/billing/contracts/contracts-preview/contracts-aside-hourly-billing-preview/contracts-aside-hourly-billing-preview.component';
+import { ContractsPreviewComponent } from './components/billing/contracts/contracts-preview/contracts-preview.component';
 
 
 
@@ -807,6 +809,8 @@ angular.module('quicktech')
     searchTextPipe,
     SoftwarePipe,
     DropDownComponent,
+    ContractsAsideHourlyBillingPreviewComponent,
+    ContractsPreviewComponent,
   ],
   imports: [
     BrowserModule,

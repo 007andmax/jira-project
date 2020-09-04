@@ -1,14 +1,14 @@
 <tr>
-  <td class="contracts-table__company" [textContent]="contact.company.name"></td>
-  <td class="contracts-table__description" [textContent]="contact.description"></td>
-  <td class="contracts-table__contract-type" [textContent]="getType()"></td>
-  <td class="contracts-table__status"><span class="tag__modern" 
+  <td class="contracts-table__company" [textContent]="contact.company.name" (click)="preview()"></td>
+  <td class="contracts-table__description" [textContent]="contact.description" (click)="preview()"></td>
+  <td class="contracts-table__contract-type" [textContent]="getType()" (click)="preview()"></td>
+  <td class="contracts-table__status" (click)="preview()"><span class="tag__modern" 
     [ngClass]="{'--error' : contact.status === 'TERMINATED',
     '--warning' : contact.status === 'EXPIRED' || contact.status === 'PENDING',
     '--info' : contact.status === 'CURRENT'}" [textContent]="contractStatusDictionary[contact.status]"></span></td>
-  <td class="contracts-table__start-date" [textContent]="getDate(contact.startDate)"></td>
-  <td class="contracts-table__review-date" [textContent]="getDate(contact.reviewDate)"></td>
-  <td class="contracts-table__amount" [textContent]="contact.amount | currency"></td>
+  <td class="contracts-table__start-date" [textContent]="getDate(contact.startDate)" (click)="preview()"></td>
+  <td class="contracts-table__review-date" [textContent]="getDate(contact.reviewDate)" (click)="preview()"></td>
+  <td class="contracts-table__amount" [textContent]="contact.amount | currency" (click)="preview()"></td>
   <td class="contracts-table__menu">
     <div class="qt-ic-c icon__more qt-pointer qt-sz-16 qt-bg-contain"></div>
   </td>

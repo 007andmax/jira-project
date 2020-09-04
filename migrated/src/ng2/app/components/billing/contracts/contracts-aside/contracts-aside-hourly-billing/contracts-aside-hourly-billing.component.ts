@@ -48,30 +48,30 @@ export class ContractsAsideHourlyBillingComponent implements OnInit {
         this.validate.resetDate();
         this.searchDuplicatedServiceNames();
       } else {
-       
+
         this.validate.setDate(false);
       }
     })
   }
   public searchDuplicatedServiceNames() {
-    let servicesName =  this.contractsHourly.services.map(item =>  item.name);
-    console.log("servicesName",servicesName);
-    console.log("this.contractsHourly.services",this.contractsHourly.services);
+    let servicesName = this.contractsHourly.services.map(item => item.name);
+    console.log("servicesName", servicesName);
+    console.log("this.contractsHourly.services", this.contractsHourly.services);
     this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsHourly.startDate).format('DD MMM YYYY'),
       moment(this.contractsHourly.endDate).format('DD MMM YYYY'), this.contractsHourly.companyId, null, servicesName).subscribe(data => {
         if (Object.keys(data).length === 0) {
-         this.contractsService.createContract(false,this.contractsHourly.getDataForCreate()).subscribe(contract => {
- this.onClose.emit(null);
-         })
+          this.contractsService.createContract(false, this.contractsHourly.getDataForCreate()).subscribe(contract => {
+            this.onClose.emit(null);
+          })
         } else {
-         
+
         }
       }, err => {
-       
+
       })
   }
   onToggleAllServices(event) {
-  
+
     this.defaultServices.forEach(item => {
       item.selected = event.target.checked;
     })

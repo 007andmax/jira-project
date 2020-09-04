@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-state.service';
 import { ConstantsService } from 'src/ng2/app/services/constants/constants.service';
 import { ContractsAsideHourlyBillingComponent } from './contracts-aside-hourly-billing/contracts-aside-hourly-billing.component';
+import { ContractsService } from 'src/ng2/app/services/contracts/contracts.service';
+import { DefaultServicesService } from 'src/ng2/app/services/default-services/default-services.service';
 
 @Component({
   selector: 'app-contracts-aside',
@@ -13,13 +15,14 @@ export class ContractsAsideComponent implements OnInit {
   type: string = null;
   step: number = 1;
   constructor(private contractsStateService: ContractsStateService,
-    private constantsService: ConstantsService) { }
+    private defaultServicesService:DefaultServicesService
+   ) { }
 
   ngOnInit() {
     this.contractsStateService.getOnChangeType().subscribe(data => {
       this.type = `${data.type}${(data.billType) ? "_" + data.billType : ""}`;
     })
-    this.constantsService.getDefaultServices().subscribe(data => {
+    this.defaultServicesService.getDefaultServices().subscribe(data => {
       this.contractsStateService.setDefaultService(data);
     })
   }

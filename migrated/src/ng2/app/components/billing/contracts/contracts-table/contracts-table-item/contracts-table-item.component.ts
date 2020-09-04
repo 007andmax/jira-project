@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ContractItem } from '../../class/contract-item';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import * as moment from "moment";
@@ -10,28 +10,32 @@ import * as moment from "moment";
   styleUrls: ['./contracts-table-item.component.scss']
 })
 export class ContractsTableItemComponent implements OnInit {
-@Input() contact:ContractItem;
-contractTypeDictionary = {
-  HOURLY: 'Hourly',
-  BLOCK_TIME: 'Block Time',
-  SERVICE_CONTRACT: 'Service Contract'
-};
-billTypeDictionary = {
-  DEVICE: '/by device',
-  USER: '/by user',
-  OTHER: '/by other'
-};
+  @Input() contact: ContractItem;
+  @Output() onPreview = new EventEmitter();
+  contractTypeDictionary = {
+    HOURLY: 'Hourly',
+    BLOCK_TIME: 'Block Time',
+    SERVICE_CONTRACT: 'Service Contract'
+  };
+  billTypeDictionary = {
+    DEVICE: '/by device',
+    USER: '/by user',
+    OTHER: '/by other'
+  };
 
-contractStatusDictionary = {
-  CURRENT: 'Current',
-  PENDING: 'Pending',
-  TERMINATED: 'Terminated',
-  EXPIRED: 'Expired'
-};
-  constructor(private companiesStateService:CompaniesStateService) { }
+  contractStatusDictionary = {
+    CURRENT: 'Current',
+    PENDING: 'Pending',
+    TERMINATED: 'Terminated',
+    EXPIRED: 'Expired'
+  };
+  constructor(private companiesStateService: CompaniesStateService) { }
 
   ngOnInit() {
-   
+
+  }
+  preview() {
+    this.onPreview.emit(this.contact);
   }
   public getDate(date) {
     return moment(new Date(date)).format('DD MMM YYYY');

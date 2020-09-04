@@ -3,6 +3,7 @@ import { environment } from 'src/ng2/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { ContractItem } from '../../components/billing/contracts/class/contract-item';
+import { ServiceAgreement } from '../../components/billing/contracts/class/service-agreement';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,9 @@ export class ContractsService {
     private http: HttpClient
   ) {}
 
-  
+  public getServiceAgreement( agreementId) {
+    return this.http.get(this.apiUrl + `/serviceAgreements/${agreementId}`).pipe(map((data: any) => new ServiceAgreement(data)));
+  }
   public createContract(createBillableItem, data) {
     return this.http.post(this.apiUrl + `serviceAgreements?createBillableItem=${createBillableItem}`,data);
   }

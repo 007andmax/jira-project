@@ -16,14 +16,14 @@ export class ContractsTableComponent implements OnInit {
   reqList: Array<ContractItem> = [];
   constructor(private contractsService: ContractsService,
     private contractsStateService: ContractsStateService,
-    private companiesStateService:CompaniesStateService,
+    private companiesStateService: CompaniesStateService,
     public cd: ChangeDetectorRef,) { }
 
   ngOnInit() {
     this.contractsService.getServiceAgreements().subscribe(data => {
       this.reqList = data.map(contact => {
         let company = this.companiesStateService.getCompanies().find(item => item.id === contact.company.id);
-        contact.company.name =  company.name;
+        contact.company.name = company.name;
         return contact;
       });
       this.list = JSON.parse(JSON.stringify(this.reqList));
@@ -33,25 +33,29 @@ export class ContractsTableComponent implements OnInit {
       }
     })
     this.contractsStateService.getSort().subscribe(data => {
-      console.log("data",data);
+      console.log("data", data);
       this.filter.onSort(data, this.list);
-      console.log("this.list",this.list);
+      console.log("this.list", this.list);
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }
     })
     this.contractsStateService.getFilter().subscribe(data => {
-      console.log("data",data);
+      console.log("data", data);
       this.filter.setFilters(data)
-     
+
       this.list = this.filter.getFilterList(this.reqList);
       this.filter.onSort('company', this.list);
-      console.log("this.list",this.list);
+      console.log("this.list", this.list);
       if (!this.cd['destroyed']) {
         this.cd.detectChanges();
       }
     })
   }
 
-
+  onPreview(data) {
+    this.contractsService.getServiceAgreement(data.id).subscribe(data => {
+      this.contractsStateService.setPreview(data);
+    })
+  }
 }

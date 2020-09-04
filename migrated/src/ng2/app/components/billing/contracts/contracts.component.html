@@ -11,5 +11,5 @@
 
 <!-- <button (click)="showCreate = true">Create</button> -->
  <!-- <app-create-contracts *ngIf="showCreate" (onClose)="showCreate = false"></app-create-contracts> -->  
-
+<app-contracts-preview *ngIf="showPreview" [serviceAgreement]="serviceAgreement"></app-contracts-preview>
 <app-contracts-aside *ngIf="showCreate" (onClose)="showCreate = false"></app-contracts-aside>

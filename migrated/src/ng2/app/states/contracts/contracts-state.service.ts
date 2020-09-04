@@ -7,11 +7,25 @@ export class ContractsStateService {
   defaultServices:any = [];
   onFilter: EventEmitter<any> = new EventEmitter();
   onSort: EventEmitter<any> = new EventEmitter();
+  onPreview: EventEmitter<any> = new EventEmitter();
   onToggleCreate: EventEmitter<any> = new EventEmitter();
+  onTogglePreview: EventEmitter<any> = new EventEmitter();
   onChangeType: EventEmitter<any> = new EventEmitter();
   onDefaultServices: EventEmitter<any> = new EventEmitter();
   constructor() { }
 
+  public getOnTogglePreview () {
+   return this.onTogglePreview;
+  }
+  public togglePreview(data) {
+    this.onTogglePreview.emit(data);
+  }
+  public getOnPreview() {
+    return this.onPreview;
+  }
+  public setPreview(data) {
+    this.onPreview.emit(data);
+  }
   public getDefaultService() {
     return this.defaultServices;
   }
