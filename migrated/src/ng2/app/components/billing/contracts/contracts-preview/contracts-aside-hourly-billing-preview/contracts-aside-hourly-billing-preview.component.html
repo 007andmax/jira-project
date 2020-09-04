@@ -6,7 +6,7 @@
         <label>Company Name</label>
         <app-select-search class="contracts-company-filter search-company"     [placeholder]="'Select Company'"
          [editItem]="selectedCompany" [class]="['qt-dropdown']" [field]="'name'" [isDisabled]="true"
-        (onSelectedItem)="selectCompany($event)"></app-select-search>
+        ></app-select-search>
       </div>
     
     
@@ -14,7 +14,7 @@
         <label>Contract Type</label>
       <app-select-search  class="contracts-company-filter search-users "  [isDisabled]="true"  [placeholder]="'Contract Type'"
       [editItem]="selectedType" [class]="['qt-dropdown']"   [field]="'title'"
-    (onSelectedItem)="onSelectType($event)"></app-select-search>
+    ></app-select-search>
       </div>
     </div>
 

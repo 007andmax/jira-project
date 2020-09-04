@@ -5,7 +5,7 @@
       <ng-template ngFor let-item
       [ngForOf]="list"
       [ngForTrackBy]="trackById">
-    <app-contracts-table-item [contact]="item" (onPreview)="onPreview($event)"  ></app-contracts-table-item>
+    <app-contracts-table-item [contact]="item" (onEdit)="onEdit($event)" (onPreview)="onPreview($event)"  ></app-contracts-table-item>
     </ng-template>
       
     </tbody>

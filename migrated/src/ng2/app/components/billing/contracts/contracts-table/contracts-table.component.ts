@@ -58,4 +58,9 @@ export class ContractsTableComponent implements OnInit {
       this.contractsStateService.setPreview(data);
     })
   }
+  onEdit(data) {
+    this.contractsService.getServiceAgreement(data.id).subscribe(data => {
+      this.contractsStateService.setEdit(data);
+    })
+  }
 }

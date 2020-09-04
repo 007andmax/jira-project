@@ -1,0 +1,23 @@
+<div class="contracts-page__aside">
+  <div class="aside-header qt-df qt-ai-c qt-jc-sb qt-pr-16 qt-pl-32">
+
+    <div class="qt-fs-20 qt-ff-gm qt-color-dark">
+      Edit Contract
+    </div>
+
+    <div class="qt-df qt-ai-c">
+      <div class="icon__close qt-sz-24 qt-pointer qt-ic-c" (click)="closed()"></div>
+    </div>
+
+  </div>
+
+   <app-contracts-aside-hourly-edit  [contractsHourly]="serviceAgreement"></app-contracts-aside-hourly-edit> 
+   
+  <div class="aside-footer qt-pr-30 qt-pl-30 qt-pb-16 qt-pt-16 qt-df qt-ai-c qt-jc-sb">
+    <div class="qt-df">
+      <button class="qt-button qt-mr-12" *ngIf="step === 1" (click)="continue()">Continue</button>
+      <button class="qt-button qt-mr-12" *ngIf="step === 2" (click)="onCreate()">Create Contract</button>
+      <button class="qt-button --gray" (click)="closed()">Cancel</button>
+    </div>
+   </div>
+</div>

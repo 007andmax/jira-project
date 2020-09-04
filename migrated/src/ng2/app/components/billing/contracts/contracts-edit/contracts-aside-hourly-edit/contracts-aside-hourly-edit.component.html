@@ -1,0 +1,103 @@
+<div class="contracts-page-scroll-content">
+  <div class="qt-pr-32 qt-pl-32 qt-pb-8 qt-pt-16">
+
+    <div class="qt-df qt-mb-16">
+      <div class="qt-w50 qt-input-block qt-mr-16">
+        <label>Company Name</label>
+        <app-select-search class="contracts-company-filter search-company"     [placeholder]="'Select Company'"
+         [editItem]="selectedCompany" [class]="['qt-dropdown']" [field]="'name'" [isDisabled]="true"
+        ></app-select-search>
+      </div>
+    
+    
+      <div class="contracts-page__contract-type-name-input qt-input-block">
+        <label>Contract Type</label>
+      <app-select-search  class="contracts-company-filter search-users "  [isDisabled]="true"  [placeholder]="'Contract Type'"
+      [editItem]="selectedType" [class]="['qt-dropdown']"   [field]="'title'"
+    ></app-select-search>
+      </div>
+    </div>
+
+    <div class="qt-df qt-mb-16 qt-w50 qt-mr-16">
+      <div class="qt-input-block --required qt-w50 qt-mr-16">
+        <label>Start Date</label>
+        <app-date-picker [formatDate]="formatDate" [editMode]="true" [editDate]="contractsHourly.startDate"   (onChange)="onChangeStartDate($event)"></app-date-picker>
+
+      </div>
+
+      <div class="qt-input-block --required qt-w50">
+        <label>Review Date</label>
+        <app-date-picker [formatDate]="formatDate" [editMode]="true" [editDate]="contractsHourly.reviewDate"   (onChange)="onChangeReviewDate($event)"></app-date-picker>
+
+      </div>
+    </div>
+
+    <div>
+      <div class="qt-input-block --required qt-w100">
+        <label>Description</label>
+        <input placeholder="Write contract description" type="text" [(ngModel)]="contractsHourly.description" (input)="onChangeDescription()">
+        <mat-error class="qt-tooltip-error" *ngIf="!validate.getDescription()">
+          Description is required
+        </mat-error>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="qt-horisontal-line qt-mb-16">
+
+
+  <div class="qt-pl-32 qt-pr-32 qt-pb-20">
+
+    <div class="qt-mb-16 qt-ff-sb qt-fs-15 qt-lh-147 qt-color-dark">Check this services you want for this customer</div>
+
+    <table class="qt-gray-table service-table qt-mb-16" colspan="0">
+      <thead>
+        <tr>
+          <th class="service-table__check" >
+            <label class="qt-checkbox">
+              <input [(ngModel)]="selectAllServices"  type="checkbox" (change)="onToggleAllServices($event)">
+              <span></span>
+            </label>
+          </th>
+          <th class="service-table__name">Service Name</th>
+          <th class="service-table__billable">
+            <div class="qt-df qt-ai-c qt-jc-fe">
+              <div>Billable</div>
+              <div class="qt-sz-12 icon__question-help"></div>
+            </div>
+          </th>
+          <th class="service-table__tax">
+            <div class="qt-df qt-ai-c qt-jc-fe">
+              <div>Tax</div>
+              <div class="qt-sz-12 icon__question-help"></div>
+            </div>
+          </th>
+          <th class="service-table__rate">
+            <div class="qt-df qt-ai-c qt-jc-fe">
+              <div>Hourly Rate</div>
+              <div class="qt-sz-12 icon__question-help"></div>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-template ngFor let-item
+        [ngForOf]="defaultServices"
+        [ngForTrackBy]="trackById">
+        <app-contracts-aside-hourly-billing-default-service (onSelectService)="onSelectService()" [defaultService]="item"></app-contracts-aside-hourly-billing-default-service>
+      </ng-template>
+      
+
+         
+
+      </tbody>
+    </table>
+<app-contracts-aside-hourly-billing-add-service *ngIf="showAddService" [contractsHourly]="contractsHourly" (onAdd)="onAddService($event)" (onClose)="showAddService = false"></app-contracts-aside-hourly-billing-add-service>
+    <button class="qt-mb-24 qt-btn --outline --small" (click)="showAddService = true" *ngIf="!showAddService">+ Add Custom Service</button>
+    <mat-error   *ngIf="!validate.getDate()">
+      The current company has a working hourly agreement for these dates
+    </mat-error>
+  </div>
+
+</div>

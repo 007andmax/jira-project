@@ -321,6 +321,8 @@ import { SoftwarePipe } from './pipe/software.pipe';
 import { DropDownComponent } from './components/shared/drop-down/drop-down.component';
 import { ContractsAsideHourlyBillingPreviewComponent } from './components/billing/contracts/contracts-preview/contracts-aside-hourly-billing-preview/contracts-aside-hourly-billing-preview.component';
 import { ContractsPreviewComponent } from './components/billing/contracts/contracts-preview/contracts-preview.component';
+import { ContractsEditComponent } from './components/billing/contracts/contracts-edit/contracts-edit.component';
+import { ContractsAsideHourlyEditComponent } from './components/billing/contracts/contracts-edit/contracts-aside-hourly-edit/contracts-aside-hourly-edit.component';
 
 
 
@@ -811,6 +813,8 @@ angular.module('quicktech')
     DropDownComponent,
     ContractsAsideHourlyBillingPreviewComponent,
     ContractsPreviewComponent,
+    ContractsEditComponent,
+    ContractsAsideHourlyEditComponent,
   ],
   imports: [
     BrowserModule,

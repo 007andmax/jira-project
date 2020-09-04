@@ -12,6 +12,7 @@ import * as moment from "moment";
 export class ContractsTableItemComponent implements OnInit {
   @Input() contact: ContractItem;
   @Output() onPreview = new EventEmitter();
+  @Output() onEdit = new EventEmitter();
   contractTypeDictionary = {
     HOURLY: 'Hourly',
     BLOCK_TIME: 'Block Time',
@@ -33,6 +34,9 @@ export class ContractsTableItemComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+  editContract() {
+    this.onEdit.emit(this.contact);
   }
   preview() {
     this.onPreview.emit(this.contact);

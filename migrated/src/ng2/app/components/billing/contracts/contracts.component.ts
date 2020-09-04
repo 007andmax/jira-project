@@ -10,6 +10,7 @@ import { ServiceAgreement } from './class/service-agreement';
 export class ContractsComponent implements OnInit {
   showCreate = false;
   showPreview = false;
+  showEdit = false;
   serviceAgreement: ServiceAgreement;
   constructor(private contractsStateService: ContractsStateService) { }
 
@@ -22,8 +23,13 @@ export class ContractsComponent implements OnInit {
       this.showPreview = true;
     })
     this.contractsStateService.getOnTogglePreview().subscribe(data => {
-    
+
       this.showPreview = false;
+    })
+
+    this.contractsStateService.getOnEdit().subscribe(data => {
+      this.serviceAgreement = data;
+      this.showEdit = true;
     })
   }
 
