@@ -42,7 +42,22 @@
       </div>
 
       <div class="qt-df">
+
         <div class="qt-w50 qt-mb-16 qt-mr-16">
+          <app-drop-down
+            [title]="'GL Number'"
+            [placeholder]="'Select GL'"
+            [list]="glNumbers"
+            [field]="'glNumber'"
+            [search]="true"
+            [add]="true"
+            (onAddItem)="onAddGlNumber($event)"
+            (onSelectedItem)="onSelectGlNumbers($event)"
+          >
+          </app-drop-down>
+        </div>
+
+        <!-- <div class="qt-w50 qt-mb-16 qt-mr-16">
           <div class="qt-input-block qt-number-input">
             <label>GL Number</label>
             <app-select-search [class]="['light-dropdown', 'new-product-gl-select', 'qt-select-input-40']" [list]="glNumbers" #glNumberSelect
@@ -52,7 +67,7 @@
             (onAddItem)="onAddGlNumber($event)"
             (onSelectedItem)="onSelectGlNumbers($event)"></app-select-search>
           </div>
-        </div>
+        </div> -->
 
         <div class="qt-w50"></div>
       </div>

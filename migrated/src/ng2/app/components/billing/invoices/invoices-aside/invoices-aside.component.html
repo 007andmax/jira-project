@@ -20,50 +20,6 @@
     <div class="qt-df qt-pos-rel address-block">
       <div class="qt-w50 qt-pt-16 qt-pr-24 qt-pl-32 qt-pb-24">
 
-        <!-- Default / Remove -->
-       <app-drop-down
-        [title]="'Customer Name'"
-        [widthInput]="'100px'"
-        [heightInput]="'100px'"
-        [placeholder]="'placeholder'"
-        [errorMessage]="'This field is required'"
-        [list]="['e','e','f']"
-       
-       >
-
-       </app-drop-down>
-
-           <!-- Search / Remove -->
-
-       <app-drop-down
-       [title]="'Customer Name'"
-       [placeholder]="'placeholder'"
-       [errorMessage]="'This field is required'"
-       [list]="['e','e','f']"
-       [search]="true"
-       [change]="true"
-      >
-
-      </app-drop-down>
-
-
-        <!-- Add / Search / Remove -->
-
-        <app-drop-down
-        [title]="'Customer Name'"
-        [placeholder]="'placeholder'"
-        [errorMessage]="'This field is required'"
-        [list]="['e','e','f']"
-        [search]="true"
-        [change]="true"
-        [add]="true"
-       >
- 
-       </app-drop-down>
- 
-
-
-
         <div class="qt-input-block">
           <label class="qt-lh-154">Customer Name</label>
           <app-select-search class="search-company invoices-company-filter"  #companyDp  [placeholder]="'Select Company'"

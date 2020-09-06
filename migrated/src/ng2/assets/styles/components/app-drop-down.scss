@@ -19,7 +19,6 @@ app-drop-down {
     }
 
     &__title {
-      font-family: Graphik;
       font-size: 13px;
       font-weight: 500;
       line-height: 1.54;
@@ -33,31 +32,32 @@ app-drop-down {
       font-size: 11px;
       bottom: 35px;
     }
-    
-    &__dropdown {
-      background-color: white;
-      padding: 8px 0;
-
-      button {
-        height: 32px;
-        display: block;
-        border: none;
-        width: 100%;
-        text-align: left;
-        background: white;
-        font-size: 13px;
-        color: #364656;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-        padding: 0 15px;
-
-        &:hover {
-          background-color: #edf2f67a;
-        }
-      }
-
-    }
   }
+}
 
+.app-drop-down {
+  &__dropdown {
+    background-color: white;
+    padding: 8px 0;
+
+    button {
+      height: 32px;
+      display: block;
+      border: none;
+      width: 100%;
+      text-align: left;
+      background: white;
+      font-size: 13px;
+      color: #364656;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 0 15px;
+
+      &:hover {
+        background-color: #edf2f67a;
+      }
+    }
+
+  }
 }

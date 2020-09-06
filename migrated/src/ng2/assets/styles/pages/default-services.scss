@@ -11,7 +11,7 @@
 
   &__table-container {
     overflow-x: auto;
-    
+
     &.--visible {
       overflow-x: visible;
     }
@@ -229,6 +229,18 @@
       right: 12px;
       top: 50%;
       transform: translateY(-50%);
+    }
+  }
+
+  .create-product-taxes-select {
+    ul.dropdown-menu {
+      width: 100% !important;
+      left: 0 !important;
+    }
+    .icn-sm.icn-label-save {
+      right: 0;
+      margin-right: 0;
+      margin-top: 13px;
     }
   }
 }
