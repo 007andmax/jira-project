@@ -368,6 +368,13 @@
     padding: 12px;
     margin-left: 20px;
   }
+
+  &.--small {
+    height: 28px;
+    font-size: 12px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
 }
 
 .qt-popup-arrow {
@@ -669,6 +676,15 @@
   }
 }
 
+.qt-input-in-table {
+  width: 100%;
+  border-radius: 0;
+  border-width: 1px;
+  padding: 0 12px;
+  height: 100%;
+  border: solid 1px #9ca5b6;
+}
+
 .qt-btn {
   display: flex;
   align-items: center;
@@ -723,4 +739,35 @@
 .qt-input-block.--required label::after {
   content: '*';
   color: #ff5263;
+}
+
+.qt-taxes-multiselect {
+  .dropdown-menu .dropdown-item {
+    padding: 0 !important;
+    position: relative;
+    button {
+      border: none;
+      background: white;
+      width: 100%;
+      text-align: left;
+      height: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      &:hover {
+        background-color: #edf2f67a;
+      }
+    }
+  }
+  .dropdown-menu.show {
+    width: 100%;
+    min-width: 0;
+    left: 0 !important;
+  }
+  .icn-label-save {
+    position: absolute;
+    right: 5px !important;
+    margin-right: 0;
+    top: calc(50% + 5px);
+    transform: translateY(-50%);
+  }
 }

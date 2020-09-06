@@ -154,10 +154,15 @@
   &__check {
     width: 36px;
     padding: 0 9px;
+    vertical-align: middle;
   }
 
   .icon__question-help {
     margin-left: 2px;
+  }
+
+  td.service-table__name {
+    padding: 0;
   }
 
   &__rate {
@@ -166,20 +171,61 @@
     padding-right: 24px;
     vertical-align: middle;
   }
+  td.service-table__rate {
+    padding: 0;
+  }
 
   th.service-table__rate {
     padding-right: 10px;
+    vertical-align: middle;
   }
 
   &__tax {
     width: 110px;
     padding: 0 12px;
     text-align: right;
+    vertical-align: middle;
+  }
+  td.service-table__tax {
+    padding: 0;
+
+    .dropdown-menu .dropdown-item {
+      padding: 0 !important;
+      button {
+        border: none;
+        background: white;
+        width: 100%;
+        text-align: left;
+        height: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        &:hover {
+          background-color: #edf2f67a;
+        }
+      }
+    }
+    .dropdown-menu.show {
+      width: 100%;
+      min-width: 0;
+      left: 0 !important;
+    }
+
+    .new-taxes-area-edit {
+      width: 100%;
+      padding: 0;
+      input {
+        border: none !important;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-right: 20px !important;
+      }
+    }
   }
 
   &__billable {
     width: 74px;
     padding: 0 12px;
+    vertical-align: middle;
     .qt-checkbox {
       display: flex;
       justify-content: center;
@@ -383,7 +429,7 @@ app-contracts-filter {
 
 .contracts-status-filter {
   width: 21%;
-  
+
   input {
     color: #364656
   }

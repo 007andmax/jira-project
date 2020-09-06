@@ -4,14 +4,17 @@
   </div>
 
   <div class="d-f ai-c">
-   
+
     <button class="qt-btn --outline-blue btn-mr-8" (click)="clearAll()" *ngIf="countFilter > 0">Clear all</button>
     <button class="qt-btn filter-button qt-ml-8" [ngClass]="{'active':!toggleFilter}" (click)="toggleFilter = !toggleFilter" [textContent]="getTextCountFilters()"></button>
     <button class="qt-btn --outline-blue qt-ml-8" (click)="showCreate()">Create Contract</button>
   </div>
 </div>
-<app-contracts-filter #filter (changeCountFilter)="onChangeCountFilter($event)" [hidden]="toggleFilter"></app-contracts-filter>
+
 <div class="sticky-list-table-header contracts-list-table-header">
+
+  <app-contracts-filter #filter (changeCountFilter)="onChangeCountFilter($event)" [hidden]="toggleFilter"></app-contracts-filter>
+
   <table class="qt-table-modern contracts-table">
     <thead>
       <tr>

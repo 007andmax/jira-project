@@ -1,16 +1,39 @@
 <div class="qt-df qt-mb-16">
   <div class="qt-w50 qt-input-block qt-mr-16">
-    <label>Company Name</label>
+
+    <app-drop-down
+      [title]="'Company Name'"
+      [placeholder]="'Select Company'"
+      [list]="companies"
+      [field]="'name'"
+      [search]="true"
+      (onSelectedItem)="selectCompany($event)"
+    ></app-drop-down>
+
+    <!-- <label>Company Name</label>
     <app-select-search class="contracts-company-filter search-company"     [placeholder]="'Select Company'"
     [change]="false" [class]="['qt-dropdown']" [field]="'name'" [list]="companies"
-    (onSelectedItem)="selectCompany($event)"></app-select-search>
+    (onSelectedItem)="selectCompany($event)">
+    </app-select-search> -->
+
   </div>
 
 
-  <div class="contracts-page__contract-type-name-input qt-input-block">
+  <app-drop-down
+    [title]="'Contract Type'"
+    [placeholder]="'Contract Type'"
+    [widthInput]="'280px'"
+    [search]="true"
+    [list]="listsTypes"
+    [field]="'title'"
+    (onSelectedItem)="onSelectType($event)"
+  ></app-drop-down>
+
+
+  <!-- <div class="contracts-page__contract-type-name-input qt-input-block">
     <label>Contract Type</label>
   <app-select-search  class="contracts-company-filter search-users "    [placeholder]="'Contract Type'"
-[change]="false" [isSearch]="false" [isBlockClear]="true" [editItem]="selectedType" [class]="['qt-dropdown']"  [list]="listsTypes" [field]="'title'"
-(onSelectedItem)="onSelectType($event)"></app-select-search>
-  </div>
+    [change]="false" [isSearch]="false" [isBlockClear]="true" [editItem]="selectedType" [class]="['qt-dropdown']"  [list]="listsTypes" [field]="'title'"
+    (onSelectedItem)="onSelectType($event)"></app-select-search>
+  </div> -->
 </div>

@@ -6,7 +6,7 @@
     </label>
   </td>
   <td class="service-table__name">
-    <input type="text" [(ngModel)]="defaultService.name">
+    <input class="qt-input-in-table" type="text" [(ngModel)]="defaultService.name">
   </td>
   <td class="service-table__billable">
     <label class="qt-checkbox">
@@ -14,8 +14,8 @@
       <span></span>
     </label>
   </td>
-  <td class="service-table__tax"><app-invoice-form-ticket-edit-taxes #taxes (taxesChange)="onTaxesChange($event)"></app-invoice-form-ticket-edit-taxes></td>
-  <td class="service-table__rate"><input class="payment-input"   number
+  <td class="service-table__tax"><app-invoice-form-ticket-edit-taxes class="qt-taxes-multiselect" #taxes (taxesChange)="onTaxesChange($event)"></app-invoice-form-ticket-edit-taxes></td>
+  <td class="service-table__rate"><input class="payment-input qt-input-in-table"   number
     [money]="true"
     [ngModel]="defaultService.rate"
     (ngModelChange)="onChangeRate($event,invoice)"
