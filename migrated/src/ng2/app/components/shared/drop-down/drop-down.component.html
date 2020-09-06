@@ -35,7 +35,7 @@
           </span>
           <i class="loading xs" *ngIf="!list"></i>
   <div ngbDropdownMenu
-      [ngStyle]="{'width': dropdownWidth ? dropdownWidth : '100%', 'height': dropdownHeight ? dropdownHeight : '160px'}"
+      [ngStyle]="{'width': dropdownWidth ? dropdownWidth : '100%', 'max-height': dropdownHeight ? dropdownHeight : '160px'}"
        aria-labelledby="dropdown1" class="app-drop-down__dropdown" >
     <ng-template ngFor
                  let-item
