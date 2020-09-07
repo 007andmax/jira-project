@@ -27,7 +27,7 @@
                     <div>{{hostName || 'N/A'}}</div>
                   </li>
                   <li>
-                    <span>Deployment Date</span>
+                    <span>Install Date</span>
                     <!-- <div (click)="visible = !visible">{{(system?.install_date | date : DateFormat) || 'N/A'}}</div> -->
                     <!-- <ngb-datepicker class="dropdown-menu p-0"
                     [class.show]="visible">
@@ -105,7 +105,7 @@
                 <ul class="list-unstyled">
                   <li [ngClass]="{'e-drive':drive.is_system == false,'c-drive':drive.is_system == true, 'e-drive':drive.is_system == false && drive.device_id == 'E:', 'd-drive':drive.is_system == false && drive.device_id == 'D:', 'f-drive':drive.is_system == false && drive.device_id == 'F:'}" *ngFor="let drive of logicalDisk">
                     
-                    <div class="progress-circle p{{drive.percent}}">
+                    <div class="progress-circle p{{drive.percent}}" [ngClass]="{'over50': drive.percent >= 50}">
                       <span>{{drive.percent}}%</span>
                       <div class="left-half-clipper">
                          <div class="first50-bar"></div>
