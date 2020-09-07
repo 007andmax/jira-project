@@ -1,3 +1,5 @@
+import { Invoice } from './invoice';
+
 export class InvoicesFilter {
     companyName: string;
     endDate: number;
@@ -21,6 +23,14 @@ export class InvoicesFilter {
             status: this.status,
         }
     }
+     public checkAddInvoice (invoice:Invoice) 
+     {
+        if ((this.companyName) ? invoice.companyId === this.companyName : true 
+        && (this.invoiceNumber) ? invoice.ticketNumbers.includes(this.invoiceNumber) : true
+        && (this.status) ? invoice.status === this.status : true 
+        && (this.startDate && this.endDate) ? new Date(invoice.date).getTime() >= this.startDate && new Date(invoice.date).getTime() <= this.endDate : true) return true;
+        return false;
+     }
     public setLimit (data) {
         this.limit = data;
     }
