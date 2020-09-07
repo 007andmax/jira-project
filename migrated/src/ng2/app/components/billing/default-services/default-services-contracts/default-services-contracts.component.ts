@@ -45,6 +45,7 @@ export class DefaultServicesContractsComponent implements OnInit {
       })
     }
     this.cd.detectChanges();
+    console.log("selectedGlNumber",this.selectedGlNumber);
   }
   onAddGlNumber(data) {
     this.glNumberService.addGlNumber(data, "").subscribe((res: any) => {

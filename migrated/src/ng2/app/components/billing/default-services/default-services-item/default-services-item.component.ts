@@ -11,6 +11,7 @@ import { ConfirmComponent } from '../../../shared/confirm/confirm.component';
 import { DefaultServicesStateService } from 'src/ng2/app/states/default-services/default-services-state.service';
 import { GlNumberService } from 'src/ng2/app/services/gl-number/gl-number.service';
 import { SelectSearchComponent } from '../../../shared/select-search/select-search.component';
+import { DropDownComponent } from '../../../shared/drop-down/drop-down.component';
 
 @Component({
   selector: 'app-default-services-item',
@@ -18,7 +19,7 @@ import { SelectSearchComponent } from '../../../shared/select-search/select-sear
   styleUrls: ['./default-services-item.component.scss']
 })
 export class DefaultServicesItemComponent implements OnInit {
-  @ViewChild('glNumberSelect') glNumberSelect: SelectSearchComponent;
+  @ViewChild('glNumberSelect') glNumberSelect: DropDownComponent;
   @Input() service: DefaultServices;
   @Output() onEditService = new EventEmitter<any>();
   glNumbers: Array<GlNumber> = [];

@@ -4,14 +4,25 @@
   <td class="default-service-table__taxes"  ></td>
 
   <td class="default-service-table__gl">
-    <app-select-search [class]="['light-dropdown', 'new-product-gl-select', '--fixed']" [list]="glNumbers" #glNumberSelect
+
+    <app-drop-down 
+    [class]="['light-dropdown', 'new-product-gl-select', '--fixed']" [list]="glNumbers" #glNumberSelect
+    [placeholder]="'Select GL'"
+    [change]="true"
+    [container]="'body'"
+            [editItem]="selectedGlNumber"
+            [add]="true" [field]="'glNumber'"
+            (onAddItem)="onAddGlNumber($event)"
+            (onSelectedItem)="onSelectGlNumbers($event)"
+    ></app-drop-down>
+   <!-- <app-select-search [class]="['light-dropdown', 'new-product-gl-select', '--fixed']" [list]="glNumbers" #glNumberSelect
     [placeholder]="'Select GL'"
     [change]="false"
     [container]="'body'"
             [editItem]="selectedGlNumber"
             [add]="true" [field]="'glNumber'"
             (onAddItem)="onAddGlNumber($event)"
-            (onSelectedItem)="onSelectGlNumbers($event)"></app-select-search>
+            (onSelectedItem)="onSelectGlNumbers($event)"></app-select-search>-->
   </td>
  <!--  <td class="default-service-table__gl" ngbDropdown placement="bottom-right">
     <div class="gl-number-dropdown">
