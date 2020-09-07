@@ -62,7 +62,35 @@
        </app-drop-down>
  
 
+        <!-- Add / Search / Remove / class -->
 
+        <app-drop-down
+        [title]="'Customer Name'"
+        [class]="['1','2','3']"
+        [placeholder]="'placeholder'"
+        [errorMessage]="'This field is required'"
+        [list]="['e','e','f']"
+        [search]="true"
+        [change]="true"
+        [add]="true"
+        >
+
+        </app-drop-down>
+
+         <!-- Add / Search / Remove / uiType -->
+
+         <app-drop-down
+         [title]="'Customer Name'"
+         [uiType]="'4'"
+         [placeholder]="'placeholder'"
+         [errorMessage]="'This field is required'"
+         [list]="['e','e','f']"
+         [search]="true"
+         [change]="true"
+         [add]="true"
+         >
+ 
+         </app-drop-down>
 
         <div class="qt-input-block">
           <label class="qt-lh-154">Customer Name</label>
