@@ -1,0 +1,23 @@
+<tr>
+  <td class="service-table__check">
+    <label class="qt-checkbox">
+      <input type="checkbox" [(ngModel)]="service.selected" (change)="toggleService()">
+      <span></span>
+    </label>
+  </td>
+  <td class="service-table__name">
+    <input class="qt-input-in-table" type="text" [(ngModel)]="service.name">
+  </td>
+  <td class="service-table__billable">
+    <label class="qt-checkbox">
+      <input type="checkbox" [(ngModel)]="service.billable">
+      <span></span>
+    </label>
+  </td>
+  <td class="service-table__tax"><app-invoice-form-ticket-edit-taxes class="qt-taxes-multiselect" #taxes (taxesChange)="onTaxesChange($event)"></app-invoice-form-ticket-edit-taxes></td>
+  <td class="service-table__rate"><input class="payment-input qt-input-in-table"   number
+    [money]="true"
+    [ngModel]="service.rate"
+    (ngModelChange)="onChangeRate($event,invoice)"
+    appToFixed /></td>
+</tr>

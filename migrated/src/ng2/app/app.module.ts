@@ -323,6 +323,7 @@ import { ContractsAsideHourlyBillingPreviewComponent } from './components/billin
 import { ContractsPreviewComponent } from './components/billing/contracts/contracts-preview/contracts-preview.component';
 import { ContractsEditComponent } from './components/billing/contracts/contracts-edit/contracts-edit.component';
 import { ContractsAsideHourlyEditComponent } from './components/billing/contracts/contracts-edit/contracts-aside-hourly-edit/contracts-aside-hourly-edit.component';
+import { AppContractsAsideHourlyBillingEditDefaultServiceComponent } from './components/billing/contracts/contracts-edit/contracts-aside-hourly-edit/app-contracts-aside-hourly-billing-edit-default-service/app-contracts-aside-hourly-billing-edit-default-service.component';
 
 
 
@@ -815,6 +816,7 @@ angular.module('quicktech')
     ContractsPreviewComponent,
     ContractsEditComponent,
     ContractsAsideHourlyEditComponent,
+    AppContractsAsideHourlyBillingEditDefaultServiceComponent,
   ],
   imports: [
     BrowserModule,

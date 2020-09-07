@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-state.service';
 import { ServiceAgreement } from './class/service-agreement';
+import { DataType } from 'igniteui-angular';
 
 @Component({
   selector: 'contracts',
@@ -30,6 +31,10 @@ export class ContractsComponent implements OnInit {
     this.contractsStateService.getOnEdit().subscribe(data => {
       this.serviceAgreement = data;
       this.showEdit = true;
+    })
+    this.contractsStateService.getOnToggleEdit().subscribe(data => {
+      
+      this.showEdit = data;
     })
   }
 

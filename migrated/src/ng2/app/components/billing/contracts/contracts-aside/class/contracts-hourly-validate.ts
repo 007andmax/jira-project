@@ -21,7 +21,7 @@ export class ContractsHourlyValidate {
     public resetDescription() {
         this.description = true;
     }
-    public isValidate(contractsHourly: ContractsHourly) {
+    public isValidate(contractsHourly) {
         if (contractsHourly.description === "") this.description = false;
        
         return this.description;

@@ -83,9 +83,9 @@
       </thead>
       <tbody>
         <ng-template ngFor let-item
-        [ngForOf]="defaultServices"
+        [ngForOf]="contractsHourly.services"
         [ngForTrackBy]="trackById">
-        <app-contracts-aside-hourly-billing-default-service (onSelectService)="onSelectService()" [defaultService]="item"></app-contracts-aside-hourly-billing-default-service>
+        <app-app-contracts-aside-hourly-billing-edit-default-service (onSelectService)="onSelectService()" [service]="item"></app-app-contracts-aside-hourly-billing-edit-default-service>
       </ng-template>
       
 

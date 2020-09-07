@@ -1,4 +1,5 @@
 export class ContractsHourlyService {
+    selected:boolean = true;
     basedOnDefault: boolean;
     billable: boolean;
     commissionRate: number;

@@ -11,13 +11,12 @@
 
   </div>
 
-   <app-contracts-aside-hourly-edit  [contractsHourly]="serviceAgreement"></app-contracts-aside-hourly-edit> 
+   <app-contracts-aside-hourly-edit #hourlyContract [contractsHourly]="serviceAgreement" (onClose)="closed()"></app-contracts-aside-hourly-edit> 
    
   <div class="aside-footer qt-pr-30 qt-pl-30 qt-pb-16 qt-pt-16 qt-df qt-ai-c qt-jc-sb">
     <div class="qt-df">
-      <button class="qt-button qt-mr-12" *ngIf="step === 1" (click)="continue()">Continue</button>
-      <button class="qt-button qt-mr-12" *ngIf="step === 2" (click)="onCreate()">Create Contract</button>
-      <button class="qt-button --gray" (click)="closed()">Cancel</button>
+      <button class="qt-button qt-mr-12"   (click)="edit()">Edit</button>
+        <button class="qt-button --gray" (click)="closed()">Cancel</button>
     </div>
    </div>
 </div>
