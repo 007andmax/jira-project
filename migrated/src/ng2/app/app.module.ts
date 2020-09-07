@@ -303,6 +303,7 @@ import { TicketTaskComponent } from './components/device/ticket-task/ticket-task
 import { searchTextPipe } from './components/device/_pipe/searchText.pipe';
 import { SoftwarePipe } from './pipe/software.pipe';
 import { DropDownComponent } from './components/shared/drop-down/drop-down.component';
+import { DefaultServicesGlNumberComponent } from './components/billing/default-services/default-services-gl-number/default-services-gl-number.component';
 
 
 
@@ -773,6 +774,7 @@ angular.module('quicktech')
     searchTextPipe,
     SoftwarePipe,
     DropDownComponent,
+    DefaultServicesGlNumberComponent,
   ],
   imports: [
     BrowserModule,
