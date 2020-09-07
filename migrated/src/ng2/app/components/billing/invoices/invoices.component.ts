@@ -82,7 +82,7 @@ export class InvoicesComponent implements OnInit, OnDestroy {
         if (index > -1) {
           this.invoices[index] = invoice;
         } else {
-         if (this.invoicesFilter.checkAddInvoice(invoice)) this.invoices.unshift(invoice);
+         if (this.invoicesFilter.checkAddInvoice(invoice,this.companiesStateService.getCompanies())) this.invoices.unshift(invoice);
         }
       }
       if (data.action === 'INVOICE_STATUS' || data.action === 'INVOICE_ROLLBACK') {
