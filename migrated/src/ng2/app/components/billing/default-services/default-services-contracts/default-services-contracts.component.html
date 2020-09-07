@@ -5,7 +5,7 @@
 
   <td class="default-service-table__gl">
 
-    <app-drop-down 
+    <app-default-services-gl-number
     [class]="['light-dropdown', 'new-product-gl-select', '--fixed']" [list]="glNumbers" #glNumberSelect
     [placeholder]="'Select GL'"
     [change]="true"
@@ -14,7 +14,7 @@
             [add]="true" [field]="'glNumber'"
             (onAddItem)="onAddGlNumber($event)"
             (onSelectedItem)="onSelectGlNumbers($event)"
-    ></app-drop-down>
+    ></app-default-services-gl-number>
    <!-- <app-select-search [class]="['light-dropdown', 'new-product-gl-select', '--fixed']" [list]="glNumbers" #glNumberSelect
     [placeholder]="'Select GL'"
     [change]="false"
