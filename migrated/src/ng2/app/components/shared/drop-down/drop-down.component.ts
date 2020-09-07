@@ -26,27 +26,29 @@ export class DropDownComponent implements OnInit {
   @Input() isBlockClear: boolean = false;
   @Input() maxlength: number = null;
   @Input() isDisabled: boolean = false;
+  @Input() reducerItem: Function = (item) => (this.field) ? item[this.field] : item;
 
   @Input() list = [];
   @Input() placeholder = '';
+
   @Output() onAddItem = new EventEmitter<any>();
   @Output() onSelectedItem = new EventEmitter<any>();
   reqList = [];
-  
+
   public isAdd: boolean = false;
   constructor() { }
 
   ngOnInit() {
     if (this.class.length > 0) this.class = this.class;
-    if (this.uiType)  this.class.push(this.uiType);
-   
+    if (this.uiType)  this.class.push(`--${this.uiType}`);
+
   }
   ngDoCheck() {
     this.list.sort((a, b) => (this.field) ? a[this.field].localeCompare(b[this.field]) : a.localeCompare(b));
     if (this.reqList.length === 0) this.reqList = JSON.parse(JSON.stringify(this.list));
     if (this.editItem) this.selectedItem = (this.field) ? this.editItem : this.editItem;
   }
-  
+
   onCheckAdd(event) {
     if (this.search) this.list = this.reqList.filter(item => (this.field) ? item[this.field].toLowerCase().includes(event.target.value) : item.toLowerCase().includes(event.target.value))
     let index = this.list.findIndex(item => (this.field) ? item[this.field] === event.target.value : item === event.target.value);
@@ -75,7 +77,7 @@ export class DropDownComponent implements OnInit {
   clearClient() {
     this.isAdd = false;
     this.selectedItem = null;
-   
+
     console.log("clearClient");
     this.onSelectedItem.emit(null);
   }
@@ -83,4 +85,13 @@ export class DropDownComponent implements OnInit {
     this.isAdd = false;
     this.selectedItem = null;
   }
+
+  dividePosition(position) {
+    return `${(parseInt(position) / 2)}px`;
+  }
+
+  reduceItemName(item) {
+    return this.reducerItem(item);
+  }
+
 }

@@ -36,7 +36,7 @@ export class DefaultServicesItemComponent implements OnInit {
     let getOnGlNumbers = this.glNumberStateService.getOnGlNumbers().subscribe((data) => {
       this.glNumbers = this.sortGlNumbers(data);
     })
-  
+
   }
   public getPermissions(action) {
     return this.permissionsService.isAllowed(action)
@@ -75,7 +75,7 @@ export class DefaultServicesItemComponent implements OnInit {
       this.onChangeDefault();
     }
   }
-   
+
   delete() {
     this.confirmStateService.setConfirmAction(REMOVE_DEFAULT_SERVICE);
     const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
@@ -85,5 +85,9 @@ export class DefaultServicesItemComponent implements OnInit {
   private sortGlNumbers(data) {
     return data.sort((a, b) => (a.glNumber.toLowerCase() > b.glNumber.toLowerCase()) ?
       1 : ((b.glNumber.toLowerCase() > a.glNumber.toLowerCase()) ? -1 : 0));
+  }
+
+  glDropDownItemName(item) {
+    return `${item.glNumber} ${item.description ? `(${item.description})` : ''} `;
   }
 }

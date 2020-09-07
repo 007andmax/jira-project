@@ -24,7 +24,7 @@
          <span
           class="app-drop-down__right-icon"
           *ngIf="list && !isDisabled"
-          [ngStyle]="{'bottom': heightInput ? 40/2 + 'px' : '20px' }"
+          [ngStyle]="{'bottom': heightInput ? dividePosition(heightInput) : '20px' }"
           >
             <i *ngIf="selectedItem && !isAdd && !isBlockClear"
                class="icn-sm icn-remove-old"
@@ -42,9 +42,9 @@
                  [ngForOf]="list"
                  let-i="index">
       <button ngbDropdownItem
-              [textContent]="(field) ? item[field] : item"
+              [textContent]="reduceItemName(item)"
               (click)="onSelect(item)"
-              title="(field) ? item[field] : item"
+              [title]="reduceItemName(item)"
               ></button>
     </ng-template>
   </div>

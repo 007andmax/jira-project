@@ -34,7 +34,7 @@ export class DefaultServicesContractsComponent implements OnInit {
   onSelectGlNumbers(glNumber) {
     console.log("onSelectGlNumbers");
     if (glNumber == null) {
-     
+
       this.glNumberService.resetContract((this.type === 'BLOCK_TIME') ? 'blockTime' : 'serviceContract').subscribe(data => {
         this.selectedGlNumber = null;
         this.glNumberSelect.clearWithOutChanges();
@@ -51,6 +51,10 @@ export class DefaultServicesContractsComponent implements OnInit {
     this.glNumberService.addGlNumber(data, "").subscribe((res: any) => {
      this.onSelectGlNumbers(res);
     })
+  }
+
+  glDropDownItemName(item) {
+    return `${item.glNumber} ${item.description ? `(${item.description})` : ''} `;
   }
 
 }

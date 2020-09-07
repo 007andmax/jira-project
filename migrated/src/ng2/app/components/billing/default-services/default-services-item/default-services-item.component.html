@@ -4,17 +4,35 @@
   <td class="default-service-table__taxes" [textContent]="getSelectedTaxNames(service.taxes)"></td>
 
   <td class="default-service-table__gl">
-  
+    <app-drop-down
+      [class]="['--small-padding']"
+      [list]="glNumbers"
+      [placeholder]="'Select GL'"
+      [container]="'body'"
+      [change]="false"
+      [editItem]="service.glNumber"
+      [add]="true"
+      [field]="'glNumber'"
+      uiType="dark"
+      heightInput="32px"
+      dropdownWidth="192px"
+      [reducerItem]="glDropDownItemName"
+      (onAddItem)="onAddGlNumber($event)"
+      (onSelectedItem)="onSelectGlNumbers($event)"
+    >
+    </app-drop-down>
 
-            <app-default-services-gl-number
+
+            <!-- <app-default-services-gl-number
             [class]="['light-dropdown', 'new-product-gl-select', '--gray']" [list]="glNumbers" #glNumberSelect
             [placeholder]="'Select GL'"
             [container]="'body'"
             [change]="false"
             [editItem]="service.glNumber"
-            [add]="true" [field]="'glNumber'"
+            [add]="true"
+            [field]="'glNumber'"
             (onAddItem)="onAddGlNumber($event)"
-            (onSelectedItem)="onSelectGlNumbers($event)"></app-default-services-gl-number>
+            (onSelectedItem)="onSelectGlNumbers($event)"></app-default-services-gl-number> -->
   </td>
  <!--  <td class="default-service-table__gl" ngbDropdown >
     <div class="gl-number-dropdown">
