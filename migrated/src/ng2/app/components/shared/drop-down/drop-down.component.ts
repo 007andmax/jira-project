@@ -15,8 +15,8 @@ export class DropDownComponent implements OnInit {
   @Input() heightInput: string = null;
   @Input() title: string = null;
   @Input() errorMessage: string = null;
-  
   @Input() container: string = null;
+  @Input() uiType: string = null;
   @Input() field: string = null;
   @Input() search: boolean = false;
   @Input() change: boolean = false;
@@ -37,7 +37,9 @@ export class DropDownComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-
+    if (this.class.length > 0) this.class = this.class;
+    if (this.uiType)  this.class.push(this.uiType);
+   
   }
   ngDoCheck() {
     this.list.sort((a, b) => (this.field) ? a[this.field].localeCompare(b[this.field]) : a.localeCompare(b));
