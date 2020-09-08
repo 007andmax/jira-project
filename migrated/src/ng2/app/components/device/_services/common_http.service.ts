@@ -10,8 +10,8 @@ import { CONFIG } from '../config/app-config';
 export class CommonHttpServices {
     constructor (private http: HttpClient) {}
 
-    getDevicesByCompany (uuid: string) {
-        return this.http.get<any>(CONFIG.getVirusInfoURL + uuid)
+    getDevicesByCompany (uuid: string, agentId) {
+        return this.http.get<any>(CONFIG.getVirusInfoURL + uuid + '&agentId' + agentId)
         .pipe(map(data => {
             return data;
         }))

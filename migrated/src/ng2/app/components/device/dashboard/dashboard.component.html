@@ -27,14 +27,23 @@
                     <div>{{hostName || 'N/A'}}</div>
                   </li>
                   <li>
-                    <span>Install Date</span>
-                    <!-- <div (click)="visible = !visible">{{(system?.install_date | date : DateFormat) || 'N/A'}}</div> -->
-                    <!-- <ngb-datepicker class="dropdown-menu p-0"
-                    [class.show]="visible">
-                  </ngb-datepicker> -->
-                  <span class="edit-field">
-                    <input type="text" class="form-control sub-label-field" [(ngModel)]="system.install_date" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" (dateSelect)="updateDashboard('install_date')">
-                  </span>
+                    <span>Warranty</span>
+                    <!-- <div>{{system?.warranty || 'N/A'}}</div> -->
+                    <span class="edit-field">
+                      <input type="text" class="form-control sub-label-field" [(ngModel)]="system.warranty" (dateSelect)="updateDashboard('warranty')" ngbDatepicker #warranty="ngbDatepicker" (click)="warranty.toggle()">
+                    </span>
+                  </li>
+                  <li>
+                    <span>Windows Info</span>
+                    <div>{{system?.caption || 'N/A'}}</div>
+                    
+                  </li>
+                  <li>
+                    <span>Asset Tag</span>
+                    <div>{{system?.asset_tag || 'N/A'}}</div>
+                    <span class="edit-field">
+                      <input type="text" class="form-control sub-label-field" [(ngModel)]="system.asset_tag" (blur)="updateDashboard('asset_tag')">
+                    </span>
                   </li>
                   <li>
                     <span>Manufacturer</span>
@@ -44,11 +53,18 @@
                     </span>
                   </li>
                   <li>
-                    <span>Asset Tag</span>
-                    <div>{{system?.asset_tag || 'N/A'}}</div>
-                    <span class="edit-field">
-                      <input type="text" class="form-control sub-label-field" [(ngModel)]="system.asset_tag" (blur)="updateDashboard('asset_tag')">
-                    </span>
+                    <span>IP</span>
+                    <div>{{networkAdapters.ip_address || 'N/A'}}</div>
+                  </li>
+                  <li>
+                    <span>Install Date</span>
+                    <!-- <div (click)="visible = !visible">{{(system?.install_date | date : DateFormat) || 'N/A'}}</div> -->
+                    <!-- <ngb-datepicker class="dropdown-menu p-0"
+                    [class.show]="visible">
+                  </ngb-datepicker> -->
+                  <span class="edit-field">
+                    <input type="text" class="form-control sub-label-field" [(ngModel)]="system.install_date" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" (dateSelect)="updateDashboard('install_date')">
+                  </span>
                   </li>
                   <!-- <li>
                     <span>Warranty Date</span>
@@ -89,13 +105,7 @@
                     <span>Expire Date</span>
                     <div>2019-03-12</div>
                   </li> -->
-                  <li>
-                    <span>Warranty</span>
-                    <!-- <div>{{system?.warranty || 'N/A'}}</div> -->
-                    <span class="edit-field">
-                      <input type="text" class="form-control sub-label-field" [(ngModel)]="system.warranty" (dateSelect)="updateDashboard('warranty')" ngbDatepicker #warranty="ngbDatepicker" (click)="warranty.toggle()">
-                    </span>
-                  </li>
+                  
                 </ul>
               </div>
             </div>

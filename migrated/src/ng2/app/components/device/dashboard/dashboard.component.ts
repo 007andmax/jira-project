@@ -30,8 +30,12 @@ export class DashboardComponent implements OnInit {
     asset_tag: '',
     warranty: null,
     architecture: '',
-    model: ''
+    model: '',
+    caption: ''
   };
+  networkAdapters = {
+    ip_address: ''
+  }
   logicalDisk: any = [];
   virusInfo: any = [];
   hostName = '';
@@ -101,7 +105,7 @@ export class DashboardComponent implements OnInit {
     this.hostName = this.deviceDetail.hostName;
     this.label = this.deviceDetail.label;
     this.getDeviceDetail();
-    this.getVirusInfo();
+    // this.getVirusInfo();
   }
   getDeviceDetail() {
 	
@@ -119,6 +123,7 @@ export class DashboardComponent implements OnInit {
             "year": new Date(this.system.install_date).getFullYear(),
           };
         }
+        this.networkAdapters = resp['reports'][0].networkAdapters.filter(value => value.ip_enabled === true)[0] || {};
         if (this.system.warranty !== '') {
           this.system.warranty = {
             "day": new Date(this.system.warranty).getDate(),
