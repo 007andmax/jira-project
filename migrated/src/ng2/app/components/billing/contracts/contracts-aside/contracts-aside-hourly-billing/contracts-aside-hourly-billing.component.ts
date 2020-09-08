@@ -32,7 +32,8 @@ export class ContractsAsideHourlyBillingComponent implements OnInit {
 
   ngOnInit() {
     let today = new Date();
-    this.contractsHourly.setStartDate(today.getDate(), today.getMonth() + 1, today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    today.setMonth(today.getMonth() + 1);
+    this.contractsHourly.setStartDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
     this.contractsHourly.setReviewDate(today.getDate(), today.getMonth() + 1, today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
 
     if (this.contractsStateService.getDefaultService().length > 0) this.defaultServices = this.contractsStateService.getDefaultService();

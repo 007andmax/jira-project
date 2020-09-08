@@ -51,8 +51,8 @@ export class DatePickerComponent implements OnInit, OnDestroy {
   ngOnInit() {
     
 
-    if (this.useMinDate) this.minDateDP = this.sericeDatePicker.getDateStruct(this.minDate);
-    if (this.useMaxDate) this.maxDateDP = this.sericeDatePicker.getDateStruct(this.maxDate);
+   // if (this.useMinDate) this.minDateDP = this.sericeDatePicker.getDateStruct(this.minDate);
+  //  if (this.useMaxDate) this.maxDateDP = this.sericeDatePicker.getDateStruct(this.maxDate);
 
     this.oninitreset();
     this.onInitEditMode();
@@ -61,7 +61,11 @@ export class DatePickerComponent implements OnInit, OnDestroy {
     if (this.editMode) this.setEditDate(this.editDate);
 
   }
+  ngDoCheck() {
+    if (this.useMinDate) this.minDateDP = this.sericeDatePicker.getDateStruct(this.minDate);
+    if (this.useMaxDate) this.maxDateDP = this.sericeDatePicker.getDateStruct(this.maxDate);
 
+  }
   /**
   * Subscribe to clear date picker
   */

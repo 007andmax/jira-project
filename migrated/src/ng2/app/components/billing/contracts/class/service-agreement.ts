@@ -38,6 +38,8 @@ export class ServiceAgreement {
             this.services = data.services.map(item => {
                 return new ContractsHourlyService(item.basedOnDefault, item.billable, item.commissionRate, item.id, item.name, item.rate, item.taxIds);
             })
+            this.services.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
+            1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
         }
     }
     public setReviewDate(day, month, year, timeOffset) {
