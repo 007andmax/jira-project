@@ -18,7 +18,7 @@ export class ContractsHourly {
             companyId: this.companyId,
             description: this.description,
             endDate: this.endDate,
-            services: this.services,
+            services: this.services.map(item => item.getDataForCreate()),
             startDate: this.startDate,
             reviewDate:this.reviewDate,
             type: this.type

@@ -36,6 +36,6 @@ export class ContractsService {
     return this.http.get(this.apiUrl + `/serviceAgreements/validateCrossingDates?companyId=${companyId}&startDate=${startDate}&endDate=${endDate + ((agreementId) ? '&agreementId=' + agreementId : '')}`);
   }
   public getServiceAgreements() {
-    return this.http.get(this.apiUrl + 'serviceAgreements/').pipe(map((data: any) => data.map(item => new ContractItem(item))));
+    return this.http.get(this.apiUrl + 'serviceAgreements').pipe(map((data: any) => data.map(item => new ContractItem(item))));
   }
 }
