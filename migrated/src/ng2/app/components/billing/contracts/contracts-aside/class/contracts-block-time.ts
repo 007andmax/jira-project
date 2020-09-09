@@ -3,7 +3,8 @@ import * as moment from "moment";
 export class ContractsBlockTime {
     billType: any;
     blockRate: string = "";
-    blockTimeServices: Array<ContractsBlockTimeService> = [];
+    blockTimeServices: Array<ContractsBlockTimeService> = [new ContractsBlockTimeService("On site block time service", 5),
+    new ContractsBlockTimeService("Remote block time service", 5)];
     companyId: string;
     customInterval: any;
     description: string;
@@ -23,6 +24,9 @@ export class ContractsBlockTime {
     public setCompanyId(data) {
         this.companyId = data;
     }
+    public getBlockTimeServicesName() {
+        return this.blockTimeServices.map(item => item.name);
+    }
     public setStartDate(day, month, year, timeOffset) {
         let current = new Date();
 
@@ -30,12 +34,12 @@ export class ContractsBlockTime {
             let dateDatePicker = new Date(year, month - 1, day).getTime(); // timestamp from calendar
             let finalDate = new Date(dateDatePicker - (current.getTimezoneOffset() * 60000/* dont touch*/) - timeOffset /* timezone.timeOffset */);
             this.startDate = moment(finalDate.getTime()).format('YYYY/MM/DD');
-            //   this.endDate = moment(finalDate.getTime() + 86400000000 * 30 * 12 * 100).format('YYYY/MM/DD');
+            this.endDate = moment(finalDate.getTime() + 86400000000 * 30 * 12 * 100).format('YYYY/MM/DD');
         } else {
             let currentTime = new Date(current.getFullYear(), current.getMonth(), current.getDate()).getTime();
             let finalDate = new Date(currentTime - (current.getTimezoneOffset() * 60000) - timeOffset);
             this.startDate = moment(finalDate.getTime()).format('YYYY/MM/DD');
-            //   this.endDate = moment(finalDate.getTime() + 86400000000 * 30 * 12 * 100).format('YYYY/MM/DD');
+            this.endDate = moment(finalDate.getTime() + 86400000000 * 30 * 12 * 100).format('YYYY/MM/DD');
         }
     }
     public setReviewDate(day, month, year, timeOffset) {

@@ -3,7 +3,10 @@ import { ContractsFilterType } from '../../class/contracts-filter-type';
 import { FORMAT_DATE_2 } from 'src/ng2/app/const/date-picker';
 import { ContractsBlockTime } from '../class/contracts-block-time';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
-
+import { ContractsBlockTimeService } from '../class/contracts-block-time-service';
+import { ContractsService } from 'src/ng2/app/services/contracts/contracts.service';
+import { DefaultServicesService } from 'src/ng2/app/services/default-services/default-services.service';
+import * as moment from "moment";
 
 @Component({
   selector: 'app-contracts-aside-block-time-billing',
@@ -19,6 +22,8 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit {
   today = new Date().getTime();
   contractsBlockTime: ContractsBlockTime = new ContractsBlockTime();
   constructor(private companiesStateService: CompaniesStateService,
+    private contractsService: ContractsService,
+    private defaultServicesService: DefaultServicesService,
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -50,7 +55,31 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit {
     }
     return newMinStartDate;
   }
+  onCheckDuplicatedCustomService () {
+    if (this.contractsBlockTime.blockTimeServices.length === 0) return;
+    this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
+    moment(this.contractsBlockTime.endDate).format('DD MMM YYYY'), this.contractsBlockTime.companyId, null, this.contractsBlockTime.getBlockTimeServicesName()).subscribe(data => {
+   
+      if (Object.keys(data).length === 0) {
+       
+      } else {
+        let names = Object.keys(data);
+        console.log("names" ,names);
+        this.contractsBlockTime.blockTimeServices.forEach(item => {
+          let find  = names.find(name => name === item.name);
+          if (find) item.validate = false;
+        })
+      }
+    }, err => {
 
+    })
+  }
+  addCustomService() {
+    this.contractsBlockTime.blockTimeServices.push(new ContractsBlockTimeService("",5));
+  }
+  onRemoveCustomService(i) {
+    this.contractsBlockTime.blockTimeServices.splice(i, 1);
+  }
   onChangeIncludedBlockTime(event) {
     this.contractsBlockTime.includedHours = event.target.value;
   }
