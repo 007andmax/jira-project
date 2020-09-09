@@ -14,6 +14,7 @@ export class DropDownComponent implements OnInit {
   @Input() widthInput: string = null;
   @Input() heightInput: string = null;
   @Input() title: string = null;
+  @Input() sort: boolean = true;
   @Input() errorMessage: string = null;
   @Input() container: string = null;
   @Input() uiType: string = null;
@@ -32,21 +33,21 @@ export class DropDownComponent implements OnInit {
   @Output() onAddItem = new EventEmitter<any>();
   @Output() onSelectedItem = new EventEmitter<any>();
   reqList = [];
-  
+
   public isAdd: boolean = false;
   constructor() { }
 
   ngOnInit() {
     if (this.class.length > 0) this.class = this.class;
-    if (this.uiType)  this.class.push(this.uiType);
-   
+    if (this.uiType) this.class.push(this.uiType);
+
   }
   ngDoCheck() {
-    this.list.sort((a, b) => (this.field) ? a[this.field].localeCompare(b[this.field]) : a.localeCompare(b));
+    if (this.sort) this.list.sort((a, b) => (this.field) ? a[this.field].localeCompare(b[this.field]) : a.localeCompare(b));
     if (this.reqList.length === 0) this.reqList = JSON.parse(JSON.stringify(this.list));
     if (this.editItem) this.selectedItem = (this.field) ? this.editItem : this.editItem;
   }
-  
+
   onCheckAdd(event) {
     if (this.search) this.list = this.reqList.filter(item => (this.field) ? item[this.field].toLowerCase().includes(event.target.value) : item.toLowerCase().includes(event.target.value))
     let index = this.list.findIndex(item => (this.field) ? item[this.field] === event.target.value : item === event.target.value);
@@ -58,7 +59,7 @@ export class DropDownComponent implements OnInit {
   }
   public addNewItem(data) {
     this.reqList.push(data);
-    this.reqList.sort((a, b) => (this.field) ? a[this.field].localeCompare(b[this.field]) : a.localeCompare(b));
+    if (this.sort) this.reqList.sort((a, b) => (this.field) ? a[this.field].localeCompare(b[this.field]) : a.localeCompare(b));
   }
   addItem() {
     this.onAddItem.emit(this.selectedItem);
@@ -75,7 +76,7 @@ export class DropDownComponent implements OnInit {
   clearClient() {
     this.isAdd = false;
     this.selectedItem = null;
-   
+
     console.log("clearClient");
     this.onSelectedItem.emit(null);
   }

@@ -14,7 +14,7 @@
     
     <ul class="qt-dropdown-menu invoice-items-dropdown"  ngbDropdownMenu aria-labelledby="dropdownBasic1">
       <li class="pointer" ngbDropdownItem (click)="editContract()"  >Edit contract</li>  
-     
+      <li class="pointer" ngbDropdownItem (click)="terminateContract()"  *ngIf="contact.status !== 'TERMINATED'">Terminate</li>  
     </ul>
   </td>
 </tr>

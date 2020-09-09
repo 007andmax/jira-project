@@ -19,7 +19,10 @@ export class ContractsService {
   public constructor(
     private http: HttpClient
   ) {}
-
+  
+  public terminate( id) {
+    return this.http.put(this.apiUrl + `serviceAgreements/terminate/${id}`,{});
+  }
   public getServiceAgreement( agreementId) {
     return this.http.get(this.apiUrl + `/serviceAgreements/${agreementId}`).pipe(map((data: any) => new ServiceAgreement(data)));
   }

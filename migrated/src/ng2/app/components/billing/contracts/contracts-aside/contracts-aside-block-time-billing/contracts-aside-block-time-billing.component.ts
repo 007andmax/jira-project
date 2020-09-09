@@ -49,12 +49,22 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit {
       newMinStartDate = now.getTime() - (6 * day);
     }
     return newMinStartDate;
-
   }
 
-
+  onChangeIncludedBlockTime(event) {
+    this.contractsBlockTime.includedHours = event.target.value;
+  }
+  onChangeBlockRate(event) {
+    this.contractsBlockTime.blockRate = event.target.value;
+  }
+  onChangeRateExceeding(event) {
+    this.contractsBlockTime.rateExceeding = event.target.value;
+  }
   onSelectCompany(data) {
     this.contractsBlockTime.setCompanyId((data) ? data.id : null);
+  }
+  onTaxesChange(data) {
+    this.contractsBlockTime.taxIds = data.map(item => item.id);
   }
   onSelectInterval(data) {
     this.selectedInterval = data;
@@ -63,9 +73,9 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit {
     this.cd.detectChanges();
   }
   onChangeStartDate(data) {
-     this.contractsBlockTime.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.contractsBlockTime.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
   }
   onChangeReviewDate(data) {
-       this.contractsBlockTime.setReviewDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+    this.contractsBlockTime.setReviewDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
   }
 }

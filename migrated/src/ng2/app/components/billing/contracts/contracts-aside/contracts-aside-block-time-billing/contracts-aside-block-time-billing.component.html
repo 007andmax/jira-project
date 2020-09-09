@@ -19,6 +19,7 @@
       <div class="qt-input-block --required qt-w25 qt-mr-16">
         <app-drop-down
             [title]="'Interval'"
+            [sort]="false"
             [placeholder]="'Interval'"
             [widthInput]="'280px'"
             [editItem]="selectedInterval"
@@ -58,26 +59,42 @@
     <div class="qt-df qt-mb-24">
       <div class="qt-input-block --required qt-w25 qt-mr-16">
         <label>Included block time</label>
-          <input value="1" type="text">
+        <input class="payment-input qt-input-in-table"   number
+        [money]="true"
+        placeholder="1"
+        [ngModel]="contractsBlockTime.includedHours"
+        (ngModelChange)="onChangeIncludedBlockTime($event)"
+          />
       </div>
 
       <div class="qt-input-block --required qt-w25 qt-mr-16">
         <label>Block Rate</label>
         <div class="qt-df">
-          <div class="qt-input-prefix">$</div><input class="qt-input-prepend" value="0.00" type="text">
+          <div class="qt-input-prefix">$</div> 
+          <input class="qt-input-prepend"   number
+          [money]="true"
+          placeholder="0.00"
+          [ngModel]="contractsBlockTime.blockRate"
+          (ngModelChange)="onChangeBlockRate($event)"
+          appToFixed />
         </div>
       </div>
 
       <div class="qt-input-block --required qt-w25 qt-mr-16">
         <label>Rate exceding block time</label>
         <div class="qt-df">
-          <div class="qt-input-prefix">$</div><input class="qt-input-prepend" value="0.00" type="text">
+          <div class="qt-input-prefix">$</div>  <input class="qt-input-prepend"   number
+          [money]="true"
+          placeholder="0.00"
+          [ngModel]="contractsBlockTime.rateExceeding"
+          (ngModelChange)="onChangeRateExceeding($event,invoice)"
+          appToFixed />
         </div>
       </div>
 
       <div class="qt-input-block qt-w25 qt-mr-16">
         <label>Select taxes</label>
-        <input value="GST 5%" type="text">
+        <app-invoice-form-ticket-edit-taxes class="qt-taxes-multiselect" #taxes (taxesChange)="onTaxesChange($event)"></app-invoice-form-ticket-edit-taxes>
       </div>
 
     </div>

@@ -52,7 +52,11 @@ export class ContractsTableComponent implements OnInit {
       }
     })
   }
-
+  onTerminate(data) {
+    this.contractsService.terminate(data.id).subscribe(data => {
+    //  this.contractsStateService.setPreview(data);
+    })
+  }
   onPreview(data) {
     this.contractsService.getServiceAgreement(data.id).subscribe(data => {
       this.contractsStateService.setPreview(data);

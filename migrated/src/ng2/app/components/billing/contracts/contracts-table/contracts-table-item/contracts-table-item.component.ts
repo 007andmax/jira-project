@@ -13,6 +13,7 @@ export class ContractsTableItemComponent implements OnInit {
   @Input() contact: ContractItem;
   @Output() onPreview = new EventEmitter();
   @Output() onEdit = new EventEmitter();
+  @Output() onTerminate = new EventEmitter();
   contractTypeDictionary = {
     HOURLY: 'Hourly',
     BLOCK_TIME: 'Block Time',
@@ -34,6 +35,9 @@ export class ContractsTableItemComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+  terminateContract() {
+    this.onTerminate.emit(this.contact);
   }
   editContract() {
     this.onEdit.emit(this.contact);
