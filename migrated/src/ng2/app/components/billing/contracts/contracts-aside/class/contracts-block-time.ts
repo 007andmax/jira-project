@@ -2,7 +2,7 @@ import { ContractsBlockTimeService } from './contracts-block-time-service';
 import * as moment from "moment";
 export class ContractsBlockTime {
     billType: any;
-    blockRate: string = "";
+    blockRate: string = "0";
     blockTimeServices: Array<ContractsBlockTimeService> = [new ContractsBlockTimeService("On site block time service", 5),
     new ContractsBlockTimeService("Remote block time service", 5)];
     companyId: string;
@@ -11,9 +11,9 @@ export class ContractsBlockTime {
     enableTimeRollover: boolean;
     endDate: string;
     id: string;
-    includedHours: string = "";
+    includedHours: string = "0";
     intervalstring: any;
-    rateExceeding: string = "";
+    rateExceeding: string = "0";
     services: [];
     shares: [];
     startDate: string;

@@ -80,14 +80,15 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit {
   onRemoveCustomService(i) {
     this.contractsBlockTime.blockTimeServices.splice(i, 1);
   }
-  onChangeIncludedBlockTime(event) {
-    this.contractsBlockTime.includedHours = event.target.value;
+  onChangeIncludedBlockTime(value) {
+    console.log("event",value);
+    this.contractsBlockTime.includedHours = value;
   }
-  onChangeBlockRate(event) {
-    this.contractsBlockTime.blockRate = event.target.value;
+  onChangeBlockRate(value) {
+    this.contractsBlockTime.blockRate = value;
   }
-  onChangeRateExceeding(event) {
-    this.contractsBlockTime.rateExceeding = event.target.value;
+  onChangeRateExceeding(value) {
+    this.contractsBlockTime.rateExceeding = value;
   }
   onSelectCompany(data) {
     this.contractsBlockTime.setCompanyId((data) ? data.id : null);
