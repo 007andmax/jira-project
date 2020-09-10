@@ -128,6 +128,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     });
     this.ticketStateService.getOnChangeUpdatesTicket().subscribe(newChange => {
 
+      if (newChange.action === 'UPDATE_EXPENSE_DELETED') console.log("newChange",newChange.data);
       if (newChange.action == 'UPDATE_SAVED' || newChange.action == 'UPDATE_CREATED') {
         let update = this.ticketProfile.updates.find(item => item.id === newChange.data.id),
           attachments = newChange.data.attachments;
