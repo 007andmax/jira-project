@@ -26,6 +26,7 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
     private notificationStateService: NotificationStateService, ) { }
   ngOnInit() {
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      console.log("data",data);
       if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_UPDATE_TICKET) {
           this.removeUpdate();
