@@ -317,12 +317,12 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
               postalCode: res.addresses.length === 0 ? '' : res.addresses[0].postalCode
             });
             
-              this.country = res.addresses[0].country;
-              this.countryCode = res.addresses[0].countryCode;
-              this.longCity = res.addresses[0].longCity;
-              this.shortCity = res.addresses[0].shortCity;
-              this.longState = res.addresses[0].longState;
-              this.shortState = res.addresses[0].shortState;
+              this.country = res.addresses.length > 0 ? res.addresses[0].country : '';
+              this.countryCode = res.addresses.length > 0 ? res.addresses[0].countryCode : '';
+              this.longCity = res.addresses.length > 0 ? res.addresses[0].longCity : '';
+              this.shortCity = res.addresses.length > 0 ? res.addresses[0].shortCity : '';
+              this.longState = res.addresses.length > 0 ? res.addresses[0].longState : '';
+              this.shortState = res.addresses.length > 0 ? res.addresses[0].shortState : '';
 
             for (let i = 0; i < this.cProfile.address.length; i++) {
               const phoneNumbers = this.cProfile.address[i].phoneNumbers,
@@ -681,16 +681,17 @@ export class CompanyProfileComponent implements OnInit, OnDestroy {
       return;
     }
 let data = {};
-data['id'] = this.currentCompany.addresses[0].id;
+debugger;
+data['id'] = this.currentCompany.addresses.length > 0 ? this.currentCompany.addresses[0].id : '';
 data['isPrimary'] = true;
 data['suiteNumber'] = this.cProfileForm.get('suiteNumber').value;
-let dis = this.cProfile.address[0].timeZone == null ? '' : this.cProfile.address[0].timeZone.displayName;
+let dis = this.cProfile.address.length > 0 ? this.cProfile.address[0].timeZone == null ? '' : this.cProfile.address[0].timeZone.displayName : '';
 data['timeZone'] = {
   name: this.cProfileForm.get(
     'timeZone'
   ).value == undefined ? '' : (this.cProfileForm.get(
     'timeZone'
-  ).value.city || this.cProfile.address[0].timeZone.name),
+  ).value.city || (this.cProfile.address.length > 0 ? (this.cProfile.address[0].timeZone == null ? '' : this.cProfile.address[0].timeZone.name) : '')),
   displayName: this.cProfileForm.get(
     'timeZone'
   ).value == undefined ? '' : '' || dis,
@@ -698,7 +699,7 @@ data['timeZone'] = {
     'timeZone'
   ).value == undefined ? '' : (this.cProfileForm.get(
     'timeZone'
-  ).value.offset || this.cProfile.address[0].timeZone.timeOffset)
+  ).value.offset || (this.cProfile.address.length > 0 ? (this.cProfile.address[0].timeZone == null ? '' : this.cProfile.address[0].timeZone.timeOffset) : ''))
 };
 data['address'] = this.searchElementRef.nativeElement.value;
 data['postalCode'] = this.cProfileForm.get(
@@ -710,7 +711,7 @@ data['locale'] = this.cProfileForm.get(
 ).value == undefined ? '' : (this.cProfileForm.get(
   'timeZone'
 ).value.city
-|| this.cProfile.address[0].locale);
+|| (this.cProfile.address.length > 0 ? this.cProfile.address[0].locale : ''));
 data['countryCode'] = this.countryCode;
 data['locationLat'] = this.latitude;
 data['locationLng'] = this.longitude;
@@ -718,7 +719,7 @@ data['longCity'] = this.longCity;
 data['shortCity'] = this.shortCity;
 data['longState'] = this.longState;
 data['shortState'] = this.shortState;
-data['addressWithSuitNumberAndPostalCode'] = this.cProfile.address[0].addressWithSuitNumberAndPostalCode;
+data['addressWithSuitNumberAndPostalCode'] = this.cProfile.address.length > 0 ? this.cProfile.address[0].addressWithSuitNumberAndPostalCode : '';
 data['fromGoogle'] = this.fromGoogle;
     // this.cProfile.address[0].suiteNumber = this.cProfileForm.get(
     //   'suiteNumber'
