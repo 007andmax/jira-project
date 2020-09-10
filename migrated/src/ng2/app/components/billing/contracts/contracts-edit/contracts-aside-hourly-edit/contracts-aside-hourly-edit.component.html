@@ -4,7 +4,7 @@
     <div class="qt-df qt-mb-16">
       <div class="qt-w50 qt-input-block qt-mr-16">
         <label>Company Name</label>
-        <app-select-search class="contracts-company-filter search-company"     [placeholder]="'Select Company'"
+        <app-select-search class="search-company"     [placeholder]="'Select Company'"
          [editItem]="selectedCompany" [class]="['qt-dropdown']" [field]="'name'" [isDisabled]="true"
         ></app-select-search>
       </div>
@@ -12,7 +12,7 @@
     
       <div class="contracts-page__contract-type-name-input qt-input-block">
         <label>Contract Type</label>
-      <app-select-search  class="contracts-company-filter search-users "  [isDisabled]="true"  [placeholder]="'Contract Type'"
+      <app-select-search  class="search-users "  [isDisabled]="true"  [placeholder]="'Contract Type'"
       [editItem]="selectedType" [class]="['qt-dropdown']"   [field]="'title'"
     ></app-select-search>
       </div>

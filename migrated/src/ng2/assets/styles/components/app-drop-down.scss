@@ -22,10 +22,10 @@ app-drop-down {
       font-family: Graphik;
       font-size: 13px;
       font-weight: 500;
-      line-height: 1.54;
+      line-height: 12px;
       color: #4f5f79;
       font-family: Graphik-Medium, sans-serif;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
     &__error {
@@ -33,7 +33,7 @@ app-drop-down {
       font-size: 11px;
       bottom: 35px;
     }
-    
+
     &__dropdown {
       background-color: white;
       padding: 8px 0;

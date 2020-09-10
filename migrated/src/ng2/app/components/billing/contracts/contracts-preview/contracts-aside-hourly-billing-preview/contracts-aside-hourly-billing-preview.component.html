@@ -4,15 +4,15 @@
     <div class="qt-df qt-mb-16">
       <div class="qt-w50 qt-input-block qt-mr-16">
         <label>Company Name</label>
-        <app-select-search class="contracts-company-filter search-company"     [placeholder]="'Select Company'"
+        <app-select-search class="search-company" [placeholder]="'Select Company'"
          [editItem]="selectedCompany" [class]="['qt-dropdown']" [field]="'name'" [isDisabled]="true"
         ></app-select-search>
       </div>
-    
-    
+
+
       <div class="contracts-page__contract-type-name-input qt-input-block">
         <label>Contract Type</label>
-      <app-select-search  class="contracts-company-filter search-users "  [isDisabled]="true"  [placeholder]="'Contract Type'"
+      <app-select-search  class="search-users" [isDisabled]="true"  [placeholder]="'Contract Type'"
       [editItem]="selectedType" [class]="['qt-dropdown']"   [field]="'title'"
     ></app-select-search>
       </div>
@@ -37,7 +37,7 @@
       <div class="qt-input-block --required qt-w100">
         <label>Description</label>
         <input placeholder="Write contract description" type="text" [(ngModel)]="contractsHourly.description" disabled >
-       
+
       </div>
     </div>
 
@@ -50,10 +50,10 @@
 
     <div class="qt-mb-16 qt-ff-sb qt-fs-15 qt-lh-147 qt-color-dark">Check this services you want for this customer</div>
 
-    <table class="qt-gray-table service-table qt-mb-16" colspan="0">
+    <table class="qt-gray-table service-table --preview qt-mb-16" colspan="0">
       <thead>
         <tr>
-          
+
           <th class="service-table__name">Service Name</th>
           <th class="service-table__billable">
             <div class="qt-df qt-ai-c qt-jc-fe">
@@ -80,9 +80,9 @@
         [ngForOf]="contractsHourly.services"
         [ngForTrackBy]="trackById">
       <tr>
-       
+
         <td class="service-table__name" [textContent]="item.name">
-      
+
         </td>
         <td class="service-table__billable">
           <label class="qt-checkbox">
@@ -94,13 +94,13 @@
         <td class="service-table__rate" [textContent]="item.rate | currency"> </td>
       </tr>
       </ng-template>
-      
 
-  
+
+
 
       </tbody>
     </table>
- 
+
   </div>
 
 </div>

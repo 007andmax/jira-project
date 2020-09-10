@@ -12,7 +12,7 @@
     <div class="qt-df qt-mb-16">
       <div class="qt-input-block --required qt-w25 qt-mr-16">
         <label>Start Date</label>
-        <app-date-picker [formatDate]="formatDate" [editMode]="true" [editDate]="today"      [minDate]="minStartDate" (onChange)="onChangeStartDate($event)"></app-date-picker>
+        <app-date-picker [formatDate]="formatDate" [editMode]="true" [editDate]="today" [minDate]="minStartDate" (onChange)="onChangeStartDate($event)"></app-date-picker>
 
       </div>
 
@@ -21,12 +21,11 @@
             [title]="'Interval'"
             [sort]="false"
             [placeholder]="'Interval'"
-            [widthInput]="'280px'"
             [editItem]="selectedInterval"
             [list]="intervals"
             (onSelectedItem)="onSelectInterval($event)"
       ></app-drop-down>
-    
+
       </div>
 
       <!--<div class="qt-input-block qt-w25 qt-mr-16">
@@ -68,7 +67,7 @@
       <div class="qt-input-block --required qt-w25 qt-mr-16">
         <label>Block Rate</label>
         <div class="qt-df">
-          <div class="qt-input-prefix">$</div> 
+          <div class="qt-input-prefix">$</div>
           <input class="qt-input-prepend"  decimalNumber
           [useFixed]="true"
           placeholder="0.00"
@@ -113,7 +112,7 @@
            >
           <app-contracts-aside-block-time-billing-customer-service [service]="item" (onRemove)="onRemoveCustomService(i)" (onCheckName)="onCheckDuplicatedCustomService()"></app-contracts-aside-block-time-billing-customer-service>
           </ng-template>
-          
+
         </tbody>
       </table>
     </div>
@@ -150,10 +149,10 @@
           [ngForOf]="contractsBlockTime.services"
           let-i="index"
            >
-<app-contracts-aside-block-time-billing-default-service [service]="item"></app-contracts-aside-block-time-billing-default-service>
+            <app-contracts-aside-block-time-billing-default-service [service]="item"></app-contracts-aside-block-time-billing-default-service>
            </ng-template>
 
-         
+
         </tbody>
       </table>
     </div>
@@ -204,7 +203,7 @@
     </div>
 
     <hr class="qt-horisontal-line qt-mb-16 qt-mt-16">
-    
+
     <div class="qt-df qt-jc-fe">
       <div class="contract-total qt-color-dark" >
         <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">

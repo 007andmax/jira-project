@@ -476,6 +476,10 @@
     top: unset;
     bottom: calc(100% + 4px);
   }
+  &.--open-bot {
+    top: calc(100% - 4px) !important;
+    transform: none !important;
+  }
   &.--fixed {
     position: fixed !important;
     top: unset !important;
@@ -770,4 +774,8 @@
     top: calc(50% + 5px);
     transform: translateY(-50%);
   }
+}
+
+.qt-w-auto-important {
+  width: auto !important;
 }

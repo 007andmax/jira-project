@@ -21,7 +21,7 @@
     <div>
       <div class="qt-input-block --required qt-w100">
         <label>Description</label>
-        <input placeholder="Write contract description" type="text" [(ngModel)]="contractsHourly.description" (input)="onChangeDescription()">
+        <input [ngClass]="{'--input-error' : !validate.getDescription()}" placeholder="Write contract description" type="text" [(ngModel)]="contractsHourly.description" (input)="onChangeDescription()">
         <mat-error class="qt-tooltip-error" *ngIf="!validate.getDescription()">
           Description is required
         </mat-error>
@@ -73,9 +73,9 @@
         [ngForTrackBy]="trackById">
         <app-contracts-aside-hourly-billing-default-service (onSelectService)="onSelectService()" [defaultService]="item"></app-contracts-aside-hourly-billing-default-service>
       </ng-template>
-      
 
-         
+
+
 
       </tbody>
     </table>
