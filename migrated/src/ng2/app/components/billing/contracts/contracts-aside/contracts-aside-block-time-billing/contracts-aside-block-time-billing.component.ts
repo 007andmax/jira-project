@@ -80,16 +80,6 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit {
   onRemoveCustomService(i) {
     this.contractsBlockTime.blockTimeServices.splice(i, 1);
   }
-  onChangeIncludedBlockTime(value) {
-    console.log("event",value);
-    this.contractsBlockTime.includedHours = value;
-  }
-  onChangeBlockRate(value) {
-    this.contractsBlockTime.blockRate = value;
-  }
-  onChangeRateExceeding(value) {
-    this.contractsBlockTime.rateExceeding = value;
-  }
   onSelectCompany(data) {
     this.contractsBlockTime.setCompanyId((data) ? data.id : null);
   }
@@ -101,6 +91,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit {
     this.minStartDate = this.getMinStartDate(data, this.contractsBlockTime.startDate);
     console.log("this.minStartDate", this.minStartDate);
     this.cd.detectChanges();
+    console.log("this.contractsBlockTime.includedHours",this.contractsBlockTime);
   }
   onChangeStartDate(data) {
     this.contractsBlockTime.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);

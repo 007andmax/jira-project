@@ -325,6 +325,7 @@ import { ContractsEditComponent } from './components/billing/contracts/contracts
 import { ContractsAsideHourlyEditComponent } from './components/billing/contracts/contracts-edit/contracts-aside-hourly-edit/contracts-aside-hourly-edit.component';
 import { AppContractsAsideHourlyBillingEditDefaultServiceComponent } from './components/billing/contracts/contracts-edit/contracts-aside-hourly-edit/app-contracts-aside-hourly-billing-edit-default-service/app-contracts-aside-hourly-billing-edit-default-service.component';
 import { ContractsAsideBlockTimeBillingCustomerServiceComponent } from './components/billing/contracts/contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing-customer-service/contracts-aside-block-time-billing-customer-service.component';
+import { DecimalNumberDirective } from './directives/decimal-number.directive';
 
 
 
@@ -819,6 +820,7 @@ angular.module('quicktech')
     ContractsAsideHourlyEditComponent,
     AppContractsAsideHourlyBillingEditDefaultServiceComponent,
     ContractsAsideBlockTimeBillingCustomerServiceComponent,
+    DecimalNumberDirective,
   ],
   imports: [
     BrowserModule,

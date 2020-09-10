@@ -11,7 +11,7 @@ export class ContractsBlockTime {
     enableTimeRollover: boolean;
     endDate: string;
     id: string;
-    includedHours: string = "0";
+    includedHours: string = "";
     intervalstring: any;
     rateExceeding: string = "0";
     services: [];
