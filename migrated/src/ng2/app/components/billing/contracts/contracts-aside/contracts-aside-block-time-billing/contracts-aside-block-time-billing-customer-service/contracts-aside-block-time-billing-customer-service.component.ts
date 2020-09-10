@@ -15,7 +15,8 @@ export class ContractsAsideBlockTimeBillingCustomerServiceComponent implements O
   ngOnInit() {
   }
   onChange() {
-    this.service.validate = true;
+    this.service.setValidate(true);
+    this.service.setValidateDuplicated(true);
   }
   remove() {
     this.onRemove.emit(null);

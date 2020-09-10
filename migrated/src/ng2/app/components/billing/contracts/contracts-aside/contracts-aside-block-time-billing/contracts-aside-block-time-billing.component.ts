@@ -56,7 +56,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit {
     return newMinStartDate;
   }
   onCheckDuplicatedCustomService () {
-    if (this.contractsBlockTime.blockTimeServices.length === 0) return;
+    if (this.contractsBlockTime.blockTimeServices.length === 0 || !this.contractsBlockTime.checkDuplicatedBlockTimeServices()) return;
     this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
     moment(this.contractsBlockTime.endDate).format('DD MMM YYYY'), this.contractsBlockTime.companyId, null, this.contractsBlockTime.getBlockTimeServicesName()).subscribe(data => {
    

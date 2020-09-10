@@ -27,6 +27,20 @@ export class ContractsBlockTime {
     public getBlockTimeServicesName() {
         return this.blockTimeServices.map(item => item.name);
     }
+    public checkDuplicatedBlockTimeServices() {
+        this.blockTimeServices.forEach(item => {
+            item.validateDuplicated = true;
+        });
+        this.blockTimeServices.forEach((item1, i) => {
+            this.blockTimeServices.forEach((item2, u) => {
+                if (i != u && item1.name === item2.name && item1.validateDuplicated && item2.validateDuplicated)  item2.validateDuplicated = false;
+            })
+        })
+        console.log("blockTimeServices",this.blockTimeServices);
+        let validateDuplicated = (this.blockTimeServices.find(item => !item.validateDuplicated)) ? false : true;
+        let validate = (this.blockTimeServices.find(item => !item.validate)) ? false : true;
+        return validateDuplicated && validate;
+    }
     public setStartDate(day, month, year, timeOffset) {
         let current = new Date();
 

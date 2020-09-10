@@ -1,23 +1,29 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { ContractsService } from 'src/ng2/app/services/contracts/contracts.service';
 import { ContractItem } from '../class/contract-item';
 import { ContractsFilter } from '../class/contracts-filter';
 import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-state.service';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
+import { ConfirmStateService } from '../../../shared/confirm/services/confirm-state.service';
+import { REMOVE_CONTRACT } from 'src/ng2/app/const/confirm';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-contracts-table',
   templateUrl: './contracts-table.component.html',
   styleUrls: ['./contracts-table.component.scss']
 })
-export class ContractsTableComponent implements OnInit {
+export class ContractsTableComponent implements OnInit,OnDestroy {
   filter: ContractsFilter = new ContractsFilter();
   list: Array<ContractItem> = [];
   reqList: Array<ContractItem> = [];
+  sub:Subscription = new Subscription();
   constructor(private contractsService: ContractsService,
     private contractsStateService: ContractsStateService,
     private companiesStateService: CompaniesStateService,
+    private confirmStateService: ConfirmStateService,
     public cd: ChangeDetectorRef,) { }
+
 
   ngOnInit() {
     this.contractsService.getServiceAgreements().subscribe(data => {
@@ -51,10 +57,21 @@ export class ContractsTableComponent implements OnInit {
         this.cd.detectChanges();
       }
     })
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+      if (data) {
+        if (this.confirmStateService.getConfirmAction() === REMOVE_CONTRACT) this.onDelete(this.contractsStateService.getContractForDelete());
+      }
+    })
+    this.sub.add(getConfirm);
+  }
+  onDelete(data) {
+    this.contractsService.delete(data.id).subscribe(data => {
+      //  this.contractsStateService.setPreview(data);
+    })
   }
   onTerminate(data) {
     this.contractsService.terminate(data.id).subscribe(data => {
-    //  this.contractsStateService.setPreview(data);
+      //  this.contractsStateService.setPreview(data);
     })
   }
   onPreview(data) {
@@ -66,5 +83,8 @@ export class ContractsTableComponent implements OnInit {
     this.contractsService.getServiceAgreement(data.id).subscribe(data => {
       this.contractsStateService.setEdit(data);
     })
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

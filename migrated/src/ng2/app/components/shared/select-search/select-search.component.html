@@ -1,6 +1,7 @@
 <div [ngClass]="class" >
   <input
-    [ngClass]="['qt-select', {'disabled': isDisabled}]"
+ 
+    [ngClass]="{'qt-select':true,'disabled': isDisabled}"
     [disabled]="isDisabled"
     [id]="id"
     [placeholder]="placeholder"

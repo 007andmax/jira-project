@@ -2,6 +2,12 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ContractItem } from '../../class/contract-item';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import * as moment from "moment";
+import { PermissionsService } from 'src/ng2/app/services/permissions/permissions.service';
+import { ConfirmStateService } from 'src/ng2/app/components/shared/confirm/services/confirm-state.service';
+import { REMOVE_CONTRACT } from 'src/ng2/app/const/confirm';
+import { ConfirmComponent } from 'src/ng2/app/components/shared/confirm/confirm.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-state.service';
 
 
 @Component({
@@ -10,9 +16,10 @@ import * as moment from "moment";
   styleUrls: ['./contracts-table-item.component.scss']
 })
 export class ContractsTableItemComponent implements OnInit {
-  @Input() contact: ContractItem;
+  @Input() contract: ContractItem;
   @Output() onPreview = new EventEmitter();
   @Output() onEdit = new EventEmitter();
+  
   @Output() onTerminate = new EventEmitter();
   contractTypeDictionary = {
     HOURLY: 'Hourly',
@@ -31,24 +38,38 @@ export class ContractsTableItemComponent implements OnInit {
     TERMINATED: 'Terminated',
     EXPIRED: 'Expired'
   };
-  constructor(private companiesStateService: CompaniesStateService) { }
+  constructor(private companiesStateService: CompaniesStateService,
+    private confirmStateService: ConfirmStateService,
+    private modalService: NgbModal,
+    private contractsStateService: ContractsStateService,
+    private permissionsService: PermissionsService,) { }
 
   ngOnInit() {
 
   }
+  public getPermissions(action) {
+    return this.permissionsService.isAllowed(action)
+  }
+  deleteContract() {
+    this.confirmStateService.setConfirmAction(REMOVE_CONTRACT);
+    const modalRef = this.modalService.open(ConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    modalRef.componentInstance.message = `Are you sure you want to delete agreement?`;
+    this.contractsStateService.setContractForDelete(this.contract);
+    
+  }
   terminateContract() {
-    this.onTerminate.emit(this.contact);
+    this.onTerminate.emit(this.contract);
   }
   editContract() {
-    this.onEdit.emit(this.contact);
+    this.onEdit.emit(this.contract);
   }
   preview() {
-    this.onPreview.emit(this.contact);
+    this.onPreview.emit(this.contract);
   }
   public getDate(date) {
     return moment(new Date(date)).format('DD MMM YYYY');
   }
   public getType() {
-    return `${this.contractTypeDictionary[this.contact.type]}${(this.contact.billType) ? this.billTypeDictionary[this.contact.billType] : ""}`
+    return `${this.contractTypeDictionary[this.contract.type]}${(this.contract.billType) ? this.billTypeDictionary[this.contract.billType] : ""}`
   }
 }

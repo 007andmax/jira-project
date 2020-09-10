@@ -19,7 +19,9 @@ export class ContractsService {
   public constructor(
     private http: HttpClient
   ) {}
-  
+  public delete( id) {
+    return this.http.delete(this.apiUrl + `serviceAgreements/${id}`,{});
+  }
   public terminate( id) {
     return this.http.put(this.apiUrl + `serviceAgreements/terminate/${id}`,{});
   }
