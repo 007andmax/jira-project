@@ -124,7 +124,7 @@
 
   <div class="qt-pt-16 qt-pl-32 qt-pr-32 qt-pb-32">
     <div class="qt-df qt-mb-16">
-      <div class="qt-toggle --on qt-mr-8">
+      <div class="qt-toggle qt-mr-8" [ngClass]="{'--on':toggleContractServices}" (click)="toggleContractServices = !toggleContractServices">
         <div class="qt-toggle__circle"></div>
       </div>
 
@@ -134,7 +134,7 @@
       </div>
     </div>
 
-    <div class="table-last-icon-wrapper qt-mb-16">
+    <div class="table-last-icon-wrapper qt-mb-16" *ngIf="toggleContractServices">
       <table class="qt-gray-table track-and-bill-table --last-icon">
         <thead>
           <tr>
@@ -146,40 +146,19 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td class="track-and-bill-table__service-name">After hour support</td>
-            <td class="track-and-bill-table__billable">
-              <label class="qt-checkbox">
-                <input type="checkbox">
-                <span></span>
-              </label>
-            </td>
-            <td class="track-and-bill-table__tax">GST 5%</td>
-            <td class="track-and-bill-table__hourly-rate">$300.00</td>
-            <td>
-              <div class="icon__raw-clear qt-ic-c qt-sz-16"></div>
-            </td>
-          </tr>
+          <ng-template ngFor let-item
+          [ngForOf]="contractsBlockTime.services"
+          let-i="index"
+           >
+<app-contracts-aside-block-time-billing-default-service [service]="item"></app-contracts-aside-block-time-billing-default-service>
+           </ng-template>
 
-          <tr>
-            <td class="track-and-bill-table__service-name">Checks & System Maintenance</td>
-            <td class="track-and-bill-table__billable">
-              <label class="qt-checkbox">
-                <input type="checkbox">
-                <span></span>
-              </label>
-            </td>
-            <td class="track-and-bill-table__tax">GST 5%</td>
-            <td class="track-and-bill-table__hourly-rate">$250.00</td>
-            <td>
-              <div class="icon__raw-clear qt-ic-c qt-sz-16"></div>
-            </td>
-          </tr>
+         
         </tbody>
       </table>
     </div>
 
-    <button class="qt-btn --outline --small">+ Add Service</button>
+    <app-contracts-aside-block-time-billing-add-default-service *ngIf="toggleContractServices" (onSelect)="onAddDefaultService($event)"></app-contracts-aside-block-time-billing-add-default-service>
 
     <hr class="qt-horisontal-line qt-mb-16 qt-mt-16">
 

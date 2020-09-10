@@ -1,0 +1,12 @@
+<div class="add-service-container" ngbDropdown placement="top-right">
+  <button class="qt-btn --outline --small"   id="dropdownBasic2" ngbDropdownToggle>+ Add Service</button>
+  <div class="list-services" ngbDropdownMenu aria-labelledby="dropdownBasic2">
+    
+    <ng-template ngFor let-item
+    [ngForOf]="defaultServices"
+    let-i="index"
+     >
+     <button ngbDropdownItem [textContent]="item.name" (click)="select(item)"></button>
+    </ng-template>
+  </div>
+</div>

@@ -1,19 +1,18 @@
-import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
-import { ContractsHourlyService } from '../../../contracts-aside/class/contracts-hourly-service';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+
+import { ContractsBlockTimeDefaultService } from '../../class/contracts-block-time-default-service';
 import { InvoiceFormTicketEditTaxesComponent } from '../../../../billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.component';
 import { TaxesStateService } from 'src/ng2/app/states/taxes/taxes-state.service';
-import { Tax } from 'src/ng2/class/taxes/tax';
+
 
 @Component({
-  selector: 'app-app-contracts-aside-hourly-billing-edit-default-service',
-  templateUrl: './app-contracts-aside-hourly-billing-edit-default-service.component.html',
-  styleUrls: ['./app-contracts-aside-hourly-billing-edit-default-service.component.scss']
+  selector: 'app-contracts-aside-block-time-billing-default-service',
+  templateUrl: './contracts-aside-block-time-billing-default-service.component.html',
+  styleUrls: ['./contracts-aside-block-time-billing-default-service.component.scss']
 })
-export class AppContractsAsideHourlyBillingEditDefaultServiceComponent implements OnInit {
-  taxes: Array<Tax> = [];
-  @Input() service: ContractsHourlyService;
+export class ContractsAsideBlockTimeBillingDefaultServiceComponent implements OnInit {
+  @Input() service: ContractsBlockTimeDefaultService;
   @ViewChild('taxes') taxesDropDown: InvoiceFormTicketEditTaxesComponent;
-  @Output() onSelectService = new EventEmitter<any>();
   constructor(private taxesStateService: TaxesStateService,) { }
 
   ngOnInit() {
@@ -22,26 +21,21 @@ export class AppContractsAsideHourlyBillingEditDefaultServiceComponent implement
       this.getTaxes(data);
 
     })
-
   }
   getTaxes(taxes) {
-    this.taxes = taxes;
+
     let listTaxes = [];
     this.service.taxIds.forEach(id => {
-      let find = this.taxes.find(tax => tax.id === id);
+      let find = taxes.find(tax => tax.id === id);
       if (find) listTaxes.push(find);
 
     });
     this.taxesDropDown.setEditItems(listTaxes);
   }
   onTaxesChange(data) {
-    this.service.taxIds = data.map(item => {
-      return item.id;
-    });
+    this.service.taxIds = data.map(item => item.id);
   }
-  toggleService() {
-    this.onSelectService.emit(null);
-  }
+
   public onChangeRate(val) {
     let value = Number(val);
     this.service.rate = value;

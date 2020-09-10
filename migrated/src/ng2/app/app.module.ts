@@ -323,9 +323,11 @@ import { ContractsAsideHourlyBillingPreviewComponent } from './components/billin
 import { ContractsPreviewComponent } from './components/billing/contracts/contracts-preview/contracts-preview.component';
 import { ContractsEditComponent } from './components/billing/contracts/contracts-edit/contracts-edit.component';
 import { ContractsAsideHourlyEditComponent } from './components/billing/contracts/contracts-edit/contracts-aside-hourly-edit/contracts-aside-hourly-edit.component';
-import { AppContractsAsideHourlyBillingEditDefaultServiceComponent } from './components/billing/contracts/contracts-edit/contracts-aside-hourly-edit/app-contracts-aside-hourly-billing-edit-default-service/app-contracts-aside-hourly-billing-edit-default-service.component';
+import { ContractsAsideHourlyBillingEditDefaultServiceComponent } from './components/billing/contracts/contracts-edit/contracts-aside-hourly-edit/contracts-aside-hourly-billing-edit-default-service/contracts-aside-hourly-billing-edit-default-service.component';
 import { ContractsAsideBlockTimeBillingCustomerServiceComponent } from './components/billing/contracts/contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing-customer-service/contracts-aside-block-time-billing-customer-service.component';
 import { DecimalNumberDirective } from './directives/decimal-number.directive';
+import { ContractsAsideBlockTimeBillingDefaultServiceComponent } from './components/billing/contracts/contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing-default-service/contracts-aside-block-time-billing-default-service.component';
+import { ContractsAsideBlockTimeBillingAddDefaultServiceComponent } from './components/billing/contracts/contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing-add-default-service/contracts-aside-block-time-billing-add-default-service.component';
 
 
 
@@ -818,9 +820,11 @@ angular.module('quicktech')
     ContractsPreviewComponent,
     ContractsEditComponent,
     ContractsAsideHourlyEditComponent,
-    AppContractsAsideHourlyBillingEditDefaultServiceComponent,
     ContractsAsideBlockTimeBillingCustomerServiceComponent,
     DecimalNumberDirective,
+    ContractsAsideBlockTimeBillingDefaultServiceComponent,
+    ContractsAsideBlockTimeBillingAddDefaultServiceComponent,
+    ContractsAsideHourlyBillingEditDefaultServiceComponent
   ],
   imports: [
     BrowserModule,

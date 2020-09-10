@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AppContractsAsideHourlyBillingEditDefaultServiceComponent } from './app-contracts-aside-hourly-billing-edit-default-service.component';
+import { ContractsAsideHourlyBillingEditDefaultServiceComponent } from './contracts-aside-hourly-billing-edit-default-service.component';
 
-describe('AppContractsAsideHourlyBillingEditDefaultServiceComponent', () => {
+describe('ContractsAsideHourlyBillingEditDefaultServiceComponent', () => {
   let component: AppContractsAsideHourlyBillingEditDefaultServiceComponent;
   let fixture: ComponentFixture<AppContractsAsideHourlyBillingEditDefaultServiceComponent>;
 

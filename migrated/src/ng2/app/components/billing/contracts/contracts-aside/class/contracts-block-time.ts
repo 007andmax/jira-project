@@ -1,5 +1,6 @@
 import { ContractsBlockTimeService } from './contracts-block-time-service';
 import * as moment from "moment";
+import { ContractsBlockTimeDefaultService } from './contracts-block-time-default-service';
 export class ContractsBlockTime {
     billType: any;
     blockRate: string = "0";
@@ -14,13 +15,16 @@ export class ContractsBlockTime {
     includedHours: string = "";
     intervalstring: any;
     rateExceeding: string = "0";
-    services: [];
+    services: Array<ContractsBlockTimeDefaultService> = [];
     shares: [];
     startDate: string;
     taxIds: Array<string> = [];
     type: string;
     reviewDate: number;
     constructor() { }
+    public addDefaultService(item) {
+        this.services.push(new ContractsBlockTimeDefaultService(true, item.billable, item.commissionRate, item.versionedId.id, item.name, item.rate, item.taxes.map(tax => tax.id)))
+    }
     public setCompanyId(data) {
         this.companyId = data;
     }
@@ -33,10 +37,10 @@ export class ContractsBlockTime {
         });
         this.blockTimeServices.forEach((item1, i) => {
             this.blockTimeServices.forEach((item2, u) => {
-                if (i != u && item1.name === item2.name && item1.validateDuplicated && item2.validateDuplicated)  item2.validateDuplicated = false;
+                if (i != u && item1.name === item2.name && item1.validateDuplicated && item2.validateDuplicated) item2.validateDuplicated = false;
             })
         })
-        console.log("blockTimeServices",this.blockTimeServices);
+        console.log("blockTimeServices", this.blockTimeServices);
         let validateDuplicated = (this.blockTimeServices.find(item => !item.validateDuplicated)) ? false : true;
         let validate = (this.blockTimeServices.find(item => !item.validate)) ? false : true;
         return validateDuplicated && validate;

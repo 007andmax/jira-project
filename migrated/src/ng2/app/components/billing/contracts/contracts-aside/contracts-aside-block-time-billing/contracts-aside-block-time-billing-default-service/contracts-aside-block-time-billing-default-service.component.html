@@ -1,0 +1,18 @@
+<tr>
+  <td class="track-and-bill-table__service-name" [textContent]="service.name"></td>
+  <td class="track-and-bill-table__billable">
+    <label class="qt-checkbox">
+      <input type="checkbox" [(ngModel)]="service.billable">
+      <span></span>
+    </label>
+  </td>
+  <td class="track-and-bill-table__tax"><app-invoice-form-ticket-edit-taxes class="qt-taxes-multiselect" #taxes (taxesChange)="onTaxesChange($event)"></app-invoice-form-ticket-edit-taxes></td>
+  <td class="track-and-bill-table__hourly-rate"><input class="payment-input qt-input-in-table"   number
+    [money]="true"
+    [ngModel]="service.rate"
+    (ngModelChange)="onChangeRate($event,invoice)"
+    appToFixed /></td>
+  <td>
+    <div class="icon__raw-clear qt-ic-c qt-sz-16"></div>
+  </td>
+</tr>

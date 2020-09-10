@@ -20,6 +20,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit {
   minStartDate: number = null;
   formatDate: string = FORMAT_DATE_2;
   today = new Date().getTime();
+  toggleContractServices: boolean = false;
   contractsBlockTime: ContractsBlockTime = new ContractsBlockTime();
   constructor(private companiesStateService: CompaniesStateService,
     private contractsService: ContractsService,
@@ -55,27 +56,30 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit {
     }
     return newMinStartDate;
   }
-  onCheckDuplicatedCustomService () {
+  onAddDefaultService(data) {
+    this.contractsBlockTime.addDefaultService(data);
+  }
+  onCheckDuplicatedCustomService() {
     if (this.contractsBlockTime.blockTimeServices.length === 0 || !this.contractsBlockTime.checkDuplicatedBlockTimeServices()) return;
     this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
-    moment(this.contractsBlockTime.endDate).format('DD MMM YYYY'), this.contractsBlockTime.companyId, null, this.contractsBlockTime.getBlockTimeServicesName()).subscribe(data => {
-   
-      if (Object.keys(data).length === 0) {
-       
-      } else {
-        let names = Object.keys(data);
-        console.log("names" ,names);
-        this.contractsBlockTime.blockTimeServices.forEach(item => {
-          let find  = names.find(name => name === item.name);
-          if (find) item.validate = false;
-        })
-      }
-    }, err => {
+      moment(this.contractsBlockTime.endDate).format('DD MMM YYYY'), this.contractsBlockTime.companyId, null, this.contractsBlockTime.getBlockTimeServicesName()).subscribe(data => {
 
-    })
+        if (Object.keys(data).length === 0) {
+
+        } else {
+          let names = Object.keys(data);
+          console.log("names", names);
+          this.contractsBlockTime.blockTimeServices.forEach(item => {
+            let find = names.find(name => name === item.name);
+            if (find) item.validate = false;
+          })
+        }
+      }, err => {
+
+      })
   }
   addCustomService() {
-    this.contractsBlockTime.blockTimeServices.push(new ContractsBlockTimeService("",5));
+    this.contractsBlockTime.blockTimeServices.push(new ContractsBlockTimeService("", 5));
   }
   onRemoveCustomService(i) {
     this.contractsBlockTime.blockTimeServices.splice(i, 1);
@@ -91,7 +95,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit {
     this.minStartDate = this.getMinStartDate(data, this.contractsBlockTime.startDate);
     console.log("this.minStartDate", this.minStartDate);
     this.cd.detectChanges();
-    console.log("this.contractsBlockTime.includedHours",this.contractsBlockTime);
+    console.log("this.contractsBlockTime.includedHours", this.contractsBlockTime);
   }
   onChangeStartDate(data) {
     this.contractsBlockTime.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
