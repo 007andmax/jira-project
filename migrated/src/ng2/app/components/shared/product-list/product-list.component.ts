@@ -46,6 +46,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     let getOnProducts = this.inventoryStateService.getOnProducts().subscribe(data => {
       this.itemList = data;
       this.onUpdateList();
+      this.cd.detectChanges();
     })
     this.sub.add(getOnProducts);
     this.onUpdateList();
@@ -56,7 +57,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
     }
 
-    let getChangeProducts = this.inventoryStateService.getChangeProducts().subscribe((data: InventoryChange) => {
+ /*   let getChangeProducts = this.inventoryStateService.getChangeProducts().subscribe((data: InventoryChange) => {
       if (data.action === 'PRODUCT_SAVED') {
         const Index = this.itemList.findIndex((item) => item.id === data.data.category.id);
         if (Index > -1) {
@@ -66,7 +67,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
       this.onUpdateList();
       this.cd.detectChanges();
     })
-    this.sub.add(getChangeProducts);
+    this.sub.add(getChangeProducts);*/
 
   }
   public onUpdateList() {

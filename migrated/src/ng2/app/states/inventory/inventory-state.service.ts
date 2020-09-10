@@ -40,7 +40,14 @@ export class InventoryStateService {
       this.onInitGetCategoriess(this.categories);
     })
     this.inventoryRealTimeService.changeProductsArray.subscribe(newChange => {
-      this.onChangeProducts.emit(new InventoryChange(newChange.action, newChange.data, []));
+      if (newChange.action === 'PRODUCT_SAVED') {
+        const Index = this.productList.findIndex((item) => item.id === newChange.data.category.id);
+        if (Index > -1) {
+          this.productList[Index].products.push(newChange.data);
+        }
+      }
+      this.onInitGetProducts(this.productList);
+   //   this.onChangeProducts.emit(new InventoryChange(newChange.action, newChange.data, []));
     })
     this.productService.getCategories().subscribe((res: any) => {
       this.setproducts(res);
@@ -50,9 +57,9 @@ export class InventoryStateService {
     });
   }
   public getListProducts() {
-   return this.productList;
+    return this.productList;
   }
- 
+
   public setproducts(data) {
     this.productList = data;
   }
