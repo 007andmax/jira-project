@@ -7,6 +7,8 @@ import { ContractsBlockTimeService } from '../class/contracts-block-time-service
 import { ContractsService } from 'src/ng2/app/services/contracts/contracts.service';
 import { DefaultServicesService } from 'src/ng2/app/services/default-services/default-services.service';
 import * as moment from "moment";
+import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
+import { TehUsersSateService } from 'src/ng2/app/components/shared/teh-users/services/teh-users-sate.service';
 
 @Component({
   selector: 'app-contracts-aside-block-time-billing',
@@ -21,10 +23,16 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit {
   formatDate: string = FORMAT_DATE_2;
   today = new Date().getTime();
   toggleContractServices: boolean = false;
+  toggleTimeRollover: boolean = false;
+  toggleNotifyAgentsUser: boolean = false;
+  selectedUsers = [];
+  userList = [];
   contractsBlockTime: ContractsBlockTime = new ContractsBlockTime();
   constructor(private companiesStateService: CompaniesStateService,
     private contractsService: ContractsService,
+    private usersStateService: UsersStateService,
     private defaultServicesService: DefaultServicesService,
+    private tehState: TehUsersSateService,
     public cd: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -35,6 +43,15 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit {
 
     this.minStartDate = this.getMinStartDate('MONTHLY', this.contractsBlockTime.startDate);
     console.log("this.minStartDate", this.minStartDate);
+    this.getUsers();
+  }
+  selectAllUsers() {
+    this.tehState.setUsersFromtEdit(JSON.parse(JSON.stringify(this.userList)));
+    this.selectedUsers = JSON.parse(JSON.stringify(this.userList));
+  }
+  clearAllSelectedUsers() {
+    this.tehState.onInitClear();
+    this.selectedUsers = [];
   }
   getMinStartDate(interval, startDate) {
     let newMinStartDate;
@@ -77,6 +94,29 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit {
       }, err => {
 
       })
+  }
+  getUsers() {
+    let userList = this.usersStateService.getAllUsers().sort((a, b) => (`${a.firstName} ${a.lastName}`.toLowerCase() > `${b.firstName} ${b.lastName}`.toLowerCase()) ?
+      1 : ((`${b.firstName} ${b.lastName}`.toLowerCase() > `${a.firstName} ${a.lastName}`.toLowerCase()) ? -1 : 0));
+    let techusers = userList.filter((item) => item.accountType === "TECH" && !item.deletedAt);
+    let clientUsers = userList.filter((item) => item.accountType === "CLIENT" && !item.deletedAt && item.company.id === this.contractsBlockTime.companyId);
+    this.userList =  [...techusers, ...clientUsers];
+
+  }
+  public onChangeUser(data) {
+    console.log("data", data);
+    this.selectedUsers = data;
+  }
+  setToggleNotifyAgentsUser(data) {
+    this.toggleNotifyAgentsUser = data;
+  }
+  setToggleContractServices(data) {
+    this.toggleContractServices = data;
+    this.contractsBlockTime.services = [];
+  }
+  setToggleTimeRollover(data) {
+    this.toggleTimeRollover = data;
+    this.contractsBlockTime.maxRolloverHours = "";
   }
   addCustomService() {
     this.contractsBlockTime.blockTimeServices.push(new ContractsBlockTimeService("", 5));

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy, Input, ChangeDetectorRef } from '@angular/core';
 import { TehUsersService } from 'src/ng2/app/services/teh-users/teh-users.service';
 import { TehUsersSateService } from './services/teh-users-sate.service';
 import { Subscription } from 'rxjs';
@@ -18,6 +18,7 @@ export class TehUsersComponent implements OnInit, OnDestroy {
   set setUsers(value) {
     this.users = value;
     this.usersList = value;
+    console.log("this.usersList",this.usersList);
   }
   public usersList: Array<TechUserItem> = [];
   public showSelect = false;
@@ -38,7 +39,8 @@ export class TehUsersComponent implements OnInit, OnDestroy {
   */
   constructor(private tehService: TehUsersService,
     private tehState: TehUsersSateService,
-    public ticketsListService:TicketsListService
+    public cd: ChangeDetectorRef,
+    public ticketsListService: TicketsListService
   ) { }
 
   /**
@@ -51,7 +53,7 @@ export class TehUsersComponent implements OnInit, OnDestroy {
         if (index > -1) {
           item.selected = true;
           this.selectedUsers = [item];
-        } 
+        }
       })
     }
     this.onInitClearState();
@@ -120,7 +122,10 @@ export class TehUsersComponent implements OnInit, OnDestroy {
    * @param event event
    */
   public onSearch(event) {
+    console.log("event.target.value", event.target.value);
     this.usersList = this.users.filter(item => (item.firstName.toLowerCase() + ' ' + item.lastName.toLowerCase()).includes(event.target.value.toLowerCase()));
+    console.log("this.usersList", this.usersList);
+    this.cd.detectChanges();
   }
 
   /**

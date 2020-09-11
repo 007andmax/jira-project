@@ -328,6 +328,7 @@ import { ContractsAsideBlockTimeBillingCustomerServiceComponent } from './compon
 import { DecimalNumberDirective } from './directives/decimal-number.directive';
 import { ContractsAsideBlockTimeBillingDefaultServiceComponent } from './components/billing/contracts/contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing-default-service/contracts-aside-block-time-billing-default-service.component';
 import { ContractsAsideBlockTimeBillingAddDefaultServiceComponent } from './components/billing/contracts/contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing-add-default-service/contracts-aside-block-time-billing-add-default-service.component';
+import { ContractsAsideBlockTimeBillingUsersComponent } from './components/billing/contracts/contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing-users/contracts-aside-block-time-billing-users.component';
 
 
 
@@ -824,7 +825,8 @@ angular.module('quicktech')
     DecimalNumberDirective,
     ContractsAsideBlockTimeBillingDefaultServiceComponent,
     ContractsAsideBlockTimeBillingAddDefaultServiceComponent,
-    ContractsAsideHourlyBillingEditDefaultServiceComponent
+    ContractsAsideHourlyBillingEditDefaultServiceComponent,
+    ContractsAsideBlockTimeBillingUsersComponent
   ],
   imports: [
     BrowserModule,

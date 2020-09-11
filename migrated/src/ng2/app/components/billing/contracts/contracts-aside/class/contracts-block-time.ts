@@ -13,6 +13,7 @@ export class ContractsBlockTime {
     endDate: string;
     id: string;
     includedHours: string = "";
+    maxRolloverHours:string = "";
     intervalstring: any;
     rateExceeding: string = "0";
     services: Array<ContractsBlockTimeDefaultService> = [];

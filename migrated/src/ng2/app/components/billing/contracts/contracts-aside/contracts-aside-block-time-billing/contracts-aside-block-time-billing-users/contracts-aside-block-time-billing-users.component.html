@@ -1,0 +1,16 @@
+<div class="ticket-edit-user-tags">
+  <mat-chip-list class="example-chip" 
+    >
+    <mat-chip   class="selected-tag-user" *ngFor="let user of selectedUsers; let i = index"
+      [selectable]="selectable" [removable]="removable" (removed)="remove(i)">
+      <div class="assigne-user-item">
+        <div class="assigne-user-avatar" [textContent]="getAssignedUserNameForAvatar(user)"
+          [ngStyle]="{'background': getStyleAvatar(user),'background-size': 'cover'}"></div>
+        <div [textContent]="getUserName(user)"></div>
+
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      </div>
+
+    </mat-chip>
+  </mat-chip-list>
+</div>
