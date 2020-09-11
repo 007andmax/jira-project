@@ -109,8 +109,8 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
           this.elRef.nativeElement.querySelector("#ticket-note").innerHTML = this.ticketProfile.note;
           this.updateListAssignedUser();
           this.updateLisUpdateUser();
-
         }
+        this.cd.detectChanges();
       }
 
 
