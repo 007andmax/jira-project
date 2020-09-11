@@ -178,8 +178,11 @@ export class TicketProfileFormUpdateComponent implements OnInit {
     let completeServices = true;
     let completeProducts = true;
     this.ticketProfile.updates.forEach(update => {
-      if (completeServices) completeServices = (update.services.find(item => !item.completed) ? false : true);
-      if (completeProducts) completeProducts = (update.products.find(item => !item.completed) ? false : true);
+      if (update.type !== 'MIXED') {
+        if (completeServices) completeServices = (update.services.find(item => !item.completed) ? false : true);
+        if (completeProducts) completeProducts = (update.products.find(item => !item.completed) ? false : true);
+      }
+     
     });
     return completeServices && completeProducts;
 
