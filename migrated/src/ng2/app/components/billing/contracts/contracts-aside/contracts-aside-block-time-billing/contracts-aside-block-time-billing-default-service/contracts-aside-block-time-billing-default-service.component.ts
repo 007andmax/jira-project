@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 
 import { ContractsBlockTimeDefaultService } from '../../class/contracts-block-time-default-service';
 import { InvoiceFormTicketEditTaxesComponent } from '../../../../billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.component';
@@ -12,7 +12,8 @@ import { TaxesStateService } from 'src/ng2/app/states/taxes/taxes-state.service'
 })
 export class ContractsAsideBlockTimeBillingDefaultServiceComponent implements OnInit {
   @Input() service: ContractsBlockTimeDefaultService;
-  @ViewChild('taxes') taxesDropDown: InvoiceFormTicketEditTaxesComponent;
+  @Output() onRemove = new EventEmitter<any>();
+  @ViewChild('taxesDropDown') taxesDropDown: InvoiceFormTicketEditTaxesComponent;
   constructor(private taxesStateService: TaxesStateService,) { }
 
   ngOnInit() {
@@ -31,6 +32,9 @@ export class ContractsAsideBlockTimeBillingDefaultServiceComponent implements On
 
     });
     this.taxesDropDown.setEditItems(listTaxes);
+  }
+  remove() {
+    this.onRemove.emit(null);
   }
   onTaxesChange(data) {
     this.service.taxIds = data.map(item => item.id);

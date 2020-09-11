@@ -26,18 +26,11 @@ export class ContractsTableComponent implements OnInit,OnDestroy {
 
 
   ngOnInit() {
-    this.contractsService.getServiceAgreements().subscribe(data => {
-      this.reqList = data.map(contact => {
-        let company = this.companiesStateService.getCompanies().find(item => item.id === contact.company.id);
-        contact.company.name = company.name;
-        return contact;
-      });
-      this.list = JSON.parse(JSON.stringify(this.reqList));
-      this.filter.onSort('company', this.list);
-      if (!this.cd['destroyed']) {
-        this.cd.detectChanges();
-      }
+    if (this.companiesStateService.getCompanies().length > 0) this.getServiceAgreements(this.companiesStateService.getCompanies());
+    let getOnCompanies = this.companiesStateService.getOnCompanies().subscribe((data) => {
+      this.getServiceAgreements(data);
     })
+    this.sub.add(getOnCompanies);
     this.contractsStateService.getSort().subscribe(data => {
       console.log("data", data);
       this.filter.onSort(data, this.list);
@@ -63,6 +56,20 @@ export class ContractsTableComponent implements OnInit,OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+  }
+  getServiceAgreements(companies) {
+    this.contractsService.getServiceAgreements().subscribe(data => {
+      this.reqList = data.map(contact => {
+        let company = companies.find(item => item.id === contact.company.id);
+        contact.company.name = company.name;
+        return contact;
+      });
+      this.list = JSON.parse(JSON.stringify(this.reqList));
+      this.filter.onSort('company', this.list);
+      if (!this.cd['destroyed']) {
+        this.cd.detectChanges();
+      }
+    })
   }
   onDelete(data) {
     this.contractsService.delete(data.id).subscribe(data => {

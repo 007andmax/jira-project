@@ -149,7 +149,7 @@
           [ngForOf]="contractsBlockTime.services"
           let-i="index"
            >
-            <app-contracts-aside-block-time-billing-default-service [service]="item"></app-contracts-aside-block-time-billing-default-service>
+            <app-contracts-aside-block-time-billing-default-service [service]="item" (onRemove)="onRemoveDefaultService(i)"></app-contracts-aside-block-time-billing-default-service>
            </ng-template>
 
 

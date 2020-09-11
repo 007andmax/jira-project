@@ -81,6 +81,9 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit {
   addCustomService() {
     this.contractsBlockTime.blockTimeServices.push(new ContractsBlockTimeService("", 5));
   }
+  onRemoveDefaultService(i) {
+    this.contractsBlockTime.services.splice(i, 1);
+  }
   onRemoveCustomService(i) {
     this.contractsBlockTime.blockTimeServices.splice(i, 1);
   }

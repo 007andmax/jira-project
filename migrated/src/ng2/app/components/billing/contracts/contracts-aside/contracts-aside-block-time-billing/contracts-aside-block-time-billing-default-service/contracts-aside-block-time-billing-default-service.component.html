@@ -6,13 +6,13 @@
       <span></span>
     </label>
   </td>
-  <td class="track-and-bill-table__tax --editable"><app-invoice-form-ticket-edit-taxes class="qt-taxes-multiselect" #taxes (taxesChange)="onTaxesChange($event)"></app-invoice-form-ticket-edit-taxes></td>
-  <td class="track-and-bill-table__hourly-rate --editable"><input class="payment-input qt-input-in-table"   number
+  <td class="track-and-bill-table__tax --editable"><app-invoice-form-ticket-edit-taxes [hidden]="!service.billable" class="qt-taxes-multiselect" #taxesDropDown (taxesChange)="onTaxesChange($event)"></app-invoice-form-ticket-edit-taxes></td>
+  <td class="track-and-bill-table__hourly-rate --editable"><input *ngIf="service.billable" class="payment-input qt-input-in-table"   number
     [money]="true"
     [ngModel]="service.rate"
     (ngModelChange)="onChangeRate($event,invoice)"
     appToFixed /></td>
   <td>
-    <div class="icon__raw-clear qt-ic-c qt-sz-16"></div>
+    <div class="icon__raw-clear qt-ic-c qt-sz-16" (click)="remove()"></div>
   </td>
 </tr>
