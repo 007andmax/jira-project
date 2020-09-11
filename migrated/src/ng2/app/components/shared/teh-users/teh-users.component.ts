@@ -16,8 +16,8 @@ import { TicketsListService } from '../../tickets/tickets/services/tickets-list.
 export class TehUsersComponent implements OnInit, OnDestroy {
   @Input('users')
   set setUsers(value) {
-    this.users = value;
-    this.usersList = value;
+    this.users = JSON.parse(JSON.stringify(value));
+    this.usersList = JSON.parse(JSON.stringify(value));
     console.log("this.usersList",this.usersList);
   }
   public usersList: Array<TechUserItem> = [];

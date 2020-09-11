@@ -100,8 +100,14 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit {
       1 : ((`${b.firstName} ${b.lastName}`.toLowerCase() > `${a.firstName} ${a.lastName}`.toLowerCase()) ? -1 : 0));
     let techusers = userList.filter((item) => item.accountType === "TECH" && !item.deletedAt);
     let clientUsers = userList.filter((item) => item.accountType === "CLIENT" && !item.deletedAt && item.company.id === this.contractsBlockTime.companyId);
-    this.userList =  [...techusers, ...clientUsers];
+    this.userList = [...techusers, ...clientUsers];
 
+  }
+  parsedateForTotal(date) {
+    return moment(date).format('DD MMM YYYY');
+  }
+  getIntervalText() {
+    return this.selectedInterval.toLowerCase();
   }
   public onChangeUser(data) {
     console.log("data", data);
@@ -109,6 +115,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit {
   }
   setToggleNotifyAgentsUser(data) {
     this.toggleNotifyAgentsUser = data;
+    if (!data) this.clearAllSelectedUsers();
   }
   setToggleContractServices(data) {
     this.toggleContractServices = data;

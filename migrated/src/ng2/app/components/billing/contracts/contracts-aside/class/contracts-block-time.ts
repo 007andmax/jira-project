@@ -13,7 +13,7 @@ export class ContractsBlockTime {
     endDate: string;
     id: string;
     includedHours: string = "";
-    maxRolloverHours:string = "";
+    maxRolloverHours: string = "";
     intervalstring: any;
     rateExceeding: string = "0";
     services: Array<ContractsBlockTimeDefaultService> = [];
@@ -26,6 +26,15 @@ export class ContractsBlockTime {
     public addDefaultService(item) {
         this.services.push(new ContractsBlockTimeDefaultService(true, item.billable, item.commissionRate, item.versionedId.id, item.name, item.rate, item.taxes.map(tax => tax.id)))
     }
+    public calculateTotalAmount() {
+        let sum = 0;
+        if (Number(this.includedHours) && Number(this.blockRate)) {
+            sum = Number(this.includedHours) * Number(this.blockRate);
+        } else {
+            sum = 0;
+        }
+        return sum;
+    };
     public setCompanyId(data) {
         this.companyId = data;
     }
