@@ -24,6 +24,7 @@ export class DashboardComponent implements OnInit {
   options: UploaderOptions;
   show = false;
   deviceDetail: any = {};
+  windows_info:string = '';
   system = {
     install_date: null,
     manufacturer: '',
@@ -31,7 +32,8 @@ export class DashboardComponent implements OnInit {
     warranty: null,
     architecture: '',
     model: '',
-    caption: ''
+    caption: '',
+    version: ''
   };
   networkAdapters = {
     ip_address: ''
@@ -116,6 +118,7 @@ export class DashboardComponent implements OnInit {
         this.logicalDisk = resp.reports[0].logicalDisks;
         this.virusInfo = resp.reports[0].antivirus[0];
         this.system = resp.reports[0].system || {};
+        this.windows_info = this.system.caption + '(' + this.system.architecture + ') Version ' + this.system.version;
         if (this.system.install_date !== '') {
           this.system.install_date = {
             "day": new Date(this.system.install_date).getDate(),

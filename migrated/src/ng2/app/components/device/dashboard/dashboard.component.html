@@ -35,7 +35,7 @@
                   </li>
                   <li>
                     <span>Windows Info</span>
-                    <div>{{system?.caption || 'N/A'}}</div>
+                    <div>{{windows_info || 'N/A'}}</div>
                     
                   </li>
                   <li>
@@ -133,13 +133,13 @@
               <div class="dashboard-col col-50 services">
                 <h2>Services</h2>
                 <ul class="list-unstyled">
-                  <li [ngClass]="{'updated': virusInfo.isUpToDate == true, 'alert': virusInfo.isUpToDate == false}">
+                  <li [ngClass]="{'updated': virusInfo?.isUpToDate == true, 'alert': virusInfo?.isUpToDate == false}">
                     <figure>
                       <img src="/html/ng2/assets/img/device/virus-protection.svg" alt="virus-protection" />
                     </figure>
                     <h4>Virus Protection</h4>
-                    <span *ngIf="virusInfo.isUpToDate == true">Up-to-date</span>
-                    <span *ngIf="virusInfo.isUpToDate == false">Out-of-date</span>
+                    <span *ngIf="virusInfo?.isUpToDate == true">Up-to-date</span>
+                    <span *ngIf="virusInfo?.isUpToDate == false">Out-of-date</span>
                   </li>
                   <li class="alert">
                     <figure>

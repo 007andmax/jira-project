@@ -430,7 +430,7 @@ export class TerminalComponent implements OnInit {
   }
 
   copyToTerminal(cmd) {
-    if (JSON.parse(localStorage.getItem('deviceDetail')).online === false) {
+    if (JSON.parse(localStorage.getItem('deviceDetail')).online === true) {
       this.finalCommand = cmd;
       this.splitCommand = cmd.split(/\r*\n/);
       this.sessionId = localStorage.getItem('uuid');
