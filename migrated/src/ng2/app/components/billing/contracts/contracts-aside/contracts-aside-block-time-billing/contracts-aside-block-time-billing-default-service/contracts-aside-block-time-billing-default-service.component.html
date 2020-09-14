@@ -1,5 +1,13 @@
 <tr>
-  <td class="track-and-bill-table__service-name" [textContent]="service.name"></td>
+  <td class="track-and-bill-table__service-name">
+{{service.name}}
+    <mat-error  class="qt-tooltip-error qt-w-auto-important" *ngIf="!service.validate">
+      The selected service is existing on another contract with the same dates.
+    </mat-error>
+    <mat-error class="qt-tooltip-error qt-w-auto-important" *ngIf="!service.validateDuplicated">
+      Duplicate service name
+    </mat-error>
+  </td>
   <td class="track-and-bill-table__billable">
     <label class="qt-checkbox">
       <input type="checkbox" [(ngModel)]="service.billable">

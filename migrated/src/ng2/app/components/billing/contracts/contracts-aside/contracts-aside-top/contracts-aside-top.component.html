@@ -6,13 +6,13 @@
       [placeholder]="'Select Company'"
       [list]="companies"
       [change]="false"
+      [validate]="validateCompany"
+      [errorMessage]="'Company is required'"
       [field]="'name'"
       [search]="true"
       (onSelectedItem)="selectCompany($event)"
     ></app-drop-down>
-    <mat-error class="qt-tooltip-error" *ngIf="!validateCompany">
-      Company is required
-    </mat-error>
+   
 
     <!-- <label>Company Name</label>
     <app-select-search class="contracts-company-filter search-company"     [placeholder]="'Select Company'"

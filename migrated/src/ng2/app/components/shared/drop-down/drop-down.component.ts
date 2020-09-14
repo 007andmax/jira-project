@@ -19,6 +19,7 @@ export class DropDownComponent implements OnInit {
   @Input() container: string = null;
   @Input() uiType: string = null;
   @Input() field: string = null;
+  @Input() validate: boolean = false;
   @Input() search: boolean = false;
   @Input() change: boolean = false;
   @Input() add: boolean = false;

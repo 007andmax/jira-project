@@ -5,13 +5,14 @@
 >
   <div *ngIf="title" class="app-drop-down__title" [textContent]="title"></div>
 
-  <mat-error class="app-drop-down__error" *ngIf="errorMessage" [textContent]="errorMessage">
+  <mat-error class="app-drop-down__error" *ngIf="!validate" [textContent]="errorMessage">
 
  </mat-error>
   <input type="text"
          [ngStyle]="{'width':widthInput ? widthInput : '100%', 'height': heightInput ? heightInput : '40px' }"
          [ngClass]="{'disabled': isDisabled}"
          [disabled]="isDisabled"
+         [ngClass]="{'--input-error' : !validate}"
          [value]="getSelectedItemText()"
          autocomplete="new-password"
          [placeholder]="placeholder"

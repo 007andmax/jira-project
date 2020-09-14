@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy, EventEmitter, Output } from '@angular/core';
 import { ContractsFilterType } from '../../class/contracts-filter-type';
 import { FORMAT_DATE_2 } from 'src/ng2/app/const/date-picker';
 import { ContractsBlockTime } from '../class/contracts-block-time';
@@ -14,6 +14,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ContractsConfirmComponent } from '../../contracts-confirm/contracts-confirm.component';
 import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-state.service';
 import { Subscription } from 'rxjs';
+import { СontractsBlockTimeShare } from '../class/contracts-block-time-share';
 
 @Component({
   selector: 'app-contracts-aside-block-time-billing',
@@ -21,6 +22,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./contracts-aside-block-time-billing.component.scss']
 })
 export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestroy {
+  @Output() onClose = new EventEmitter<any>();
   selectedType = new ContractsFilterType('Block Time', 'BLOCK_TIME', null);
   intervals: Array<string> = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days'];
   selectedInterval: string = 'MONTHLY';
@@ -56,6 +58,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     this.getUsers();
     let getConfirm = this.сontractsStateService.getConfirm().subscribe(data => {
       console.log("data", data);
+      this.onCheckServicesForAdd(data);
     })
     this.sub.add(getConfirm);
   }
@@ -87,8 +90,36 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     }
     return newMinStartDate;
   }
+  onCheckServicesForAdd(createBillableItem) {
+    if (this.contractsBlockTime.blockTimeServices.length === 0 || !this.contractsBlockTime.checkDuplicatedBlockTimeServices() && !this.contractsBlockTime.checkDuplicatedServices()) return;
+    this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
+      moment(this.contractsBlockTime.endDate).format('DD MMM YYYY'), this.contractsBlockTime.companyId, null, this.contractsBlockTime.getAllServicesName()).subscribe(data => {
+
+        if (Object.keys(data).length === 0) {
+
+          this.contractsService.createContract(createBillableItem,this.contractsBlockTime.getDataForCreate()).subscribe(res => {
+            this.onClose.emit(null);
+          })
+
+        } else {
+          let names = Object.keys(data);
+          console.log("names", names);
+          this.contractsBlockTime.blockTimeServices.forEach(item => {
+            let find = names.find(name => name === item.name);
+            if (find) item.validate = false;
+          })
+          this.contractsBlockTime.services.forEach(item => {
+            let find = names.find(name => name === item.name);
+            if (find) item.validate = false;
+          })
+        }
+      }, err => {
+
+      })
+  }
   onAddDefaultService(data) {
     this.contractsBlockTime.addDefaultService(data);
+    this.onCheckDuplicatedService();
   }
   onCheckDuplicatedCustomService() {
     if (this.contractsBlockTime.blockTimeServices.length === 0 || !this.contractsBlockTime.checkDuplicatedBlockTimeServices()) return;
@@ -101,6 +132,25 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
           let names = Object.keys(data);
           console.log("names", names);
           this.contractsBlockTime.blockTimeServices.forEach(item => {
+            let find = names.find(name => name === item.name);
+            if (find) item.validate = false;
+          })
+        }
+      }, err => {
+
+      })
+  }
+  onCheckDuplicatedService() {
+    if (this.contractsBlockTime.services.length === 0 || !this.contractsBlockTime.checkDuplicatedServices()) return;
+    this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
+      moment(this.contractsBlockTime.endDate).format('DD MMM YYYY'), this.contractsBlockTime.companyId, null, this.contractsBlockTime.getServicesName()).subscribe(data => {
+
+        if (Object.keys(data).length === 0) {
+
+        } else {
+          let names = Object.keys(data);
+          console.log("names", names);
+          this.contractsBlockTime.services.forEach(item => {
             let find = names.find(name => name === item.name);
             if (find) item.validate = false;
           })
@@ -126,6 +176,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
   public onChangeUser(data) {
     console.log("data", data);
     this.selectedUsers = data;
+    this.contractsBlockTime.setShares(this.selectedUsers.map(item => new СontractsBlockTimeShare(item.id)));
   }
   setToggleNotifyAgentsUser(data) {
     this.toggleNotifyAgentsUser = data;
@@ -153,12 +204,13 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     this.validate.resetCompany();
   }
   onTaxesChange(data) {
-    this.contractsBlockTime.taxIds = data.map(item => item.id);
+    this.contractsBlockTime.setTaxIds(data.map(item => item.id));
   }
   onSelectInterval(data) {
     this.selectedInterval = data;
     this.minStartDate = this.getMinStartDate(data, this.contractsBlockTime.startDate);
     console.log("this.minStartDate", this.minStartDate);
+    this.contractsBlockTime.setInterval(data);
     this.cd.detectChanges();
     console.log("this.contractsBlockTime.includedHours", this.contractsBlockTime);
   }
