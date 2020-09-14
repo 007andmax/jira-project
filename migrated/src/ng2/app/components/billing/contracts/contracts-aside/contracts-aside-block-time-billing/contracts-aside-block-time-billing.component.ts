@@ -9,6 +9,7 @@ import { DefaultServicesService } from 'src/ng2/app/services/default-services/de
 import * as moment from "moment";
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { TehUsersSateService } from 'src/ng2/app/components/shared/teh-users/services/teh-users-sate.service';
+import { ContractsBlockTimeValidate } from '../class/contracts-block-time-validate';
 
 @Component({
   selector: 'app-contracts-aside-block-time-billing',
@@ -28,6 +29,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit {
   selectedUsers = [];
   userList = [];
   contractsBlockTime: ContractsBlockTime = new ContractsBlockTime();
+  validate: ContractsBlockTimeValidate = new ContractsBlockTimeValidate();
   constructor(private companiesStateService: CompaniesStateService,
     private contractsService: ContractsService,
     private usersStateService: UsersStateService,
@@ -136,6 +138,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit {
   }
   onSelectCompany(data) {
     this.contractsBlockTime.setCompanyId((data) ? data.id : null);
+    this.validate.resetCompany();
   }
   onTaxesChange(data) {
     this.contractsBlockTime.taxIds = data.map(item => item.id);
@@ -152,5 +155,8 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit {
   }
   onChangeReviewDate(data) {
     this.contractsBlockTime.setReviewDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
+  }
+  public onCreate() {
+    if (!this.validate.isValidate(this.contractsBlockTime)) return;
   }
 }

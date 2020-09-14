@@ -16,6 +16,7 @@ export class ContractsAsideTopComponent implements OnInit {
   new ContractsFilterType('Service Contract/by device/by user', 'SERVICE_CONTRACT_DEVICE_USER', null),
   new ContractsFilterType('Service Contract/by other', 'SERVICE_CONTRACT', 'OTHER')];
   @Input() selectedType = new ContractsFilterType('Hourly', 'HOURLY', null);
+  @Input() validateCompany: boolean = true;
   @Output() onSelectCompany = new EventEmitter<any>();
   sub: Subscription = new Subscription();
   constructor(private contractsStateService: ContractsStateService,

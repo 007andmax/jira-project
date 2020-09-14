@@ -3,19 +3,19 @@ import * as moment from "moment";
 import { ContractsBlockTimeDefaultService } from './contracts-block-time-default-service';
 export class ContractsBlockTime {
     billType: any;
-    blockRate: string = "0";
+    blockRate: string = "";
     blockTimeServices: Array<ContractsBlockTimeService> = [new ContractsBlockTimeService("On site block time service", 5),
     new ContractsBlockTimeService("Remote block time service", 5)];
     companyId: string;
     customInterval: any;
-    description: string;
+    description: string = "";
     enableTimeRollover: boolean;
     endDate: string;
     id: string;
     includedHours: string = "";
     maxRolloverHours: string = "";
     intervalstring: any;
-    rateExceeding: string = "0";
+    rateExceeding: string = "";
     services: Array<ContractsBlockTimeDefaultService> = [];
     shares: [];
     startDate: string;
