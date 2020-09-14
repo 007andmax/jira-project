@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { ContractsFilterType } from '../../class/contracts-filter-type';
 import { FORMAT_DATE_2 } from 'src/ng2/app/const/date-picker';
 import { ContractsBlockTime } from '../class/contracts-block-time';
@@ -10,13 +10,17 @@ import * as moment from "moment";
 import { UsersStateService } from 'src/ng2/app/states/users/users-state.service';
 import { TehUsersSateService } from 'src/ng2/app/components/shared/teh-users/services/teh-users-sate.service';
 import { ContractsBlockTimeValidate } from '../class/contracts-block-time-validate';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ContractsConfirmComponent } from '../../contracts-confirm/contracts-confirm.component';
+import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-state.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-contracts-aside-block-time-billing',
   templateUrl: './contracts-aside-block-time-billing.component.html',
   styleUrls: ['./contracts-aside-block-time-billing.component.scss']
 })
-export class ContractsAsideBlockTimeBillingComponent implements OnInit {
+export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestroy {
   selectedType = new ContractsFilterType('Block Time', 'BLOCK_TIME', null);
   intervals: Array<string> = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days'];
   selectedInterval: string = 'MONTHLY';
@@ -30,12 +34,16 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit {
   userList = [];
   contractsBlockTime: ContractsBlockTime = new ContractsBlockTime();
   validate: ContractsBlockTimeValidate = new ContractsBlockTimeValidate();
+  sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
+    private сontractsStateService: ContractsStateService,
     private contractsService: ContractsService,
     private usersStateService: UsersStateService,
     private defaultServicesService: DefaultServicesService,
     private tehState: TehUsersSateService,
+    private modalService: NgbModal,
     public cd: ChangeDetectorRef) { }
+
 
   ngOnInit() {
     let today = new Date();
@@ -46,6 +54,10 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit {
     this.minStartDate = this.getMinStartDate('MONTHLY', this.contractsBlockTime.startDate);
     console.log("this.minStartDate", this.minStartDate);
     this.getUsers();
+    let getConfirm = this.сontractsStateService.getConfirm().subscribe(data => {
+      console.log("data", data);
+    })
+    this.sub.add(getConfirm);
   }
   selectAllUsers() {
     this.tehState.setUsersFromtEdit(JSON.parse(JSON.stringify(this.userList)));
@@ -158,5 +170,11 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit {
   }
   public onCreate() {
     if (!this.validate.isValidate(this.contractsBlockTime)) return;
+    const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    modalRef.componentInstance.message = `Do we need to create the billable item now?`;
+    console.log("modalRef",modalRef);
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

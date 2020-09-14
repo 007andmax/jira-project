@@ -16,8 +16,15 @@ export class ContractsStateService {
   onToggleEdit: EventEmitter<any> = new EventEmitter();
   onChangeType: EventEmitter<any> = new EventEmitter();
   onDefaultServices: EventEmitter<any> = new EventEmitter();
+  onConfirm: EventEmitter<any> = new EventEmitter();
   constructor() { }
 
+  public setConfirm(data) {
+    this.onConfirm.emit(data);
+  }
+  public getConfirm() {
+    return this.onConfirm;
+  }
   public setContractForDelete(data) {
     this.contractForDelete = data;
   }

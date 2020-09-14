@@ -329,6 +329,7 @@ import { DecimalNumberDirective } from './directives/decimal-number.directive';
 import { ContractsAsideBlockTimeBillingDefaultServiceComponent } from './components/billing/contracts/contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing-default-service/contracts-aside-block-time-billing-default-service.component';
 import { ContractsAsideBlockTimeBillingAddDefaultServiceComponent } from './components/billing/contracts/contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing-add-default-service/contracts-aside-block-time-billing-add-default-service.component';
 import { ContractsAsideBlockTimeBillingUsersComponent } from './components/billing/contracts/contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing-users/contracts-aside-block-time-billing-users.component';
+import { ContractsConfirmComponent } from './components/billing/contracts/contracts-confirm/contracts-confirm.component';
 
 
 
@@ -826,7 +827,8 @@ angular.module('quicktech')
     ContractsAsideBlockTimeBillingDefaultServiceComponent,
     ContractsAsideBlockTimeBillingAddDefaultServiceComponent,
     ContractsAsideHourlyBillingEditDefaultServiceComponent,
-    ContractsAsideBlockTimeBillingUsersComponent
+    ContractsAsideBlockTimeBillingUsersComponent,
+    ContractsConfirmComponent
   ],
   imports: [
     BrowserModule,
@@ -917,6 +919,7 @@ angular.module('quicktech')
     FileComponent,
     PasswordComponent,
     TicketTaskComponent,
+    ContractsConfirmComponent
     // RecurringTicketsComponent
   ],
   exports: [
