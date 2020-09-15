@@ -1,4 +1,9 @@
 .contracts-page {
+
+  .contracts-list-header, .contracts-list-table-header {
+    z-index: 1;
+  }
+
   .table-container {
     overflow-x: auto;
     min-height: calc(100vh - 238px);
