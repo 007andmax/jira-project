@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { ConstantsService } from 'src/ng2/app/services/constants/constants.service';
 import { ContractsService } from 'src/ng2/app/services/contracts/contracts.service';
 import { ServiceAgreement } from '../class/service-agreement';
@@ -11,18 +11,25 @@ import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-st
 })
 export class ContractsPreviewComponent implements OnInit {
   @Input() serviceAgreement: ServiceAgreement;
+  
   constructor(private contractsService: ContractsService,
     private contractsStateService: ContractsStateService,) { }
 
   ngOnInit() {
-    
+
   }
   closed() {
     this.contractsStateService.togglePreview(false);
   }
-  terminateAndClose( ) {
+  edit() {
+    this.contractsService.getServiceAgreement(this.serviceAgreement.id).subscribe(data => {
+      this.closed();
+      this.contractsStateService.setEdit(data);
+    })
+  }
+  terminateAndClose() {
     this.contractsService.terminate(this.serviceAgreement.id).subscribe(data => {
-    this.closed();
+      this.closed();
     })
   }
 }
