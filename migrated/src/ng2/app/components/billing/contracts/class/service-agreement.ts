@@ -70,13 +70,13 @@ export class ServiceAgreement {
             //   this.endDate = moment(finalDate.getTime() + 86400000000 * 30 * 12 * 100).format('YYYY/MM/DD');
         }
     }
-    public getDataForUpdate() {
+    public getDataForUpdateHourly() {
         return {
             id:this.id,
             companyId: this.companyId,
             description: this.description,
             endDate: this.endDate,
-            services: this.services,
+            services: this.services.filter(item =>  item.selected).map(item => item.getDataForCreate()),
             startDate: this.startDate,
             reviewDate:this.reviewDate,
             type: this.type

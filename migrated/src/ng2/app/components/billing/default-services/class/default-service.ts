@@ -12,7 +12,7 @@ export class DefaultServices implements Service {
     deletedAt: number;
     name: string;
     oldVersion: boolean;
-    rate: number;
+    rate: number=0;
     serviceAgreement: ServiceAgreement;
     serviceContractServiceAgreement: any;
     taxes: import("../../../../interfaces/service/tax").Tax[];

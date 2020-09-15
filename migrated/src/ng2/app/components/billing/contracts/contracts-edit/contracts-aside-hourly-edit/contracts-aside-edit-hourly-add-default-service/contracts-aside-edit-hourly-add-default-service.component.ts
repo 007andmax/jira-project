@@ -55,7 +55,15 @@ export class ContractsAsideEditHourlyAddDefaultServiceComponent implements OnIni
     this.validate.resetDuplicateName();
   }
   selectService(data) {
-    this.service = new DefaultServicesHourlyContract(JSON.parse(JSON.stringify(data)));
+    this.validate.resetDuplicateName();
+    this.validate.resetValidate();
+    if (data) {
+      this.service = new DefaultServicesHourlyContract(JSON.parse(JSON.stringify(data)));
+    } else {
+      this.service = new DefaultServicesHourlyContract();
+      this.service.taxes = this.defaultSelectedTax;
+    }
+   
   }
   onChangeRate(event) {
     this.service.rate = Number(event.target.value);
@@ -66,13 +74,16 @@ export class ContractsAsideEditHourlyAddDefaultServiceComponent implements OnIni
     let taxes = lsitTaxes.filter(item => item.isDefault === true);
     this.service.taxes = taxes;
     this.defaultSelectedTax = taxes;
+    this.service.taxes = this.defaultSelectedTax;
     this.taxesStateService.setTaxesFromtEdit(taxes);
   }
   public searchDuplicatedServiceNames() {
     this.service.name = this.serviceDropDown.getInputText();
+    let find = this.defaultServices.find(item => item.name === this.service.name);
+    if (find) this.service.versionedId = find.versionedId;
     this.validate.resetDuplicateName();
     this.validate.resetValidate();
-    if (!this.validate.isValidate(this.service) || !this.checkDuplicatedService()) {
+    if (!this.validate.isValidate(this.service) || !this.checkDuplicatedContractService()) {
 
       console.log("this.validate", this.validate);
       return
@@ -88,6 +99,12 @@ export class ContractsAsideEditHourlyAddDefaultServiceComponent implements OnIni
         this.validate.setValidate(false);
       })
   }
+  checkDuplicatedContractService() {
+    let find = this.contractsHourly.services.find(item => item.name === this.service.name);
+    if (find) this.validate.setDuplicateName(false);
+    console.log("find", find);
+    return (find) ? false : true;
+  }
   checkDuplicatedService() {
     let find = this.defaultServices.find(item => item.name === this.service.name);
     if (find) this.validate.setDuplicateName(false);
@@ -98,16 +115,20 @@ export class ContractsAsideEditHourlyAddDefaultServiceComponent implements OnIni
     console.log("serviceDropDown", this.serviceDropDown.getInputText());
 
     console.log("this.service", this.service);
-
-    this.addBtn.setDisabled(true);
-    this.defaultServicesService.addService(this.service.getDataForAddDefault()).subscribe((data: any) => {
-      this.addBtn.setDisabled(false);
-      this.service.setVersionedId(data.versionedId);
+    if (this.checkDuplicatedService()) {
+      this.addBtn.setDisabled(true);
+      this.defaultServicesService.addService(this.service.getDataForAddDefault()).subscribe((data: any) => {
+        this.addBtn.setDisabled(false);
+        this.service.setVersionedId(data.versionedId);
+        this.onAdd.emit(this.service);
+        this.closed();
+      }, err => {
+        this.addBtn.setDisabled(false);
+      })
+    } else {
       this.onAdd.emit(this.service);
-      this.closed();
-    }, err => {
-      this.addBtn.setDisabled(false);
-    })
+    }
+
   }
   onTaxesChange(data) {
     this.service.taxes = data;
