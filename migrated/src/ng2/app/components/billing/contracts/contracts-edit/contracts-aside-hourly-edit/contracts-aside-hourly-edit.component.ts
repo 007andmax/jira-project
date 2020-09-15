@@ -9,6 +9,7 @@ import { DefaultServicesHourlyContract } from '../../contracts-aside/class/defau
 import { ContractsService } from 'src/ng2/app/services/contracts/contracts.service';
 import * as moment from "moment";
 import { DefaultServicesService } from 'src/ng2/app/services/default-services/default-services.service';
+import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-state.service';
 @Component({
   selector: 'app-contracts-aside-hourly-edit',
   templateUrl: './contracts-aside-hourly-edit.component.html',
@@ -26,13 +27,17 @@ export class ContractsAsideHourlyEditComponent implements OnInit {
   selectAllServices: boolean = true;
   constructor(private companiesStateService: CompaniesStateService,
     private contractsService: ContractsService,
+    private contractsStateService: ContractsStateService,
     private defaultServicesService: DefaultServicesService,
-    ) { }
+  ) { }
 
   ngOnInit() {
-    console.log("contractsHourly",this.contractsHourly);
+    console.log("contractsHourly", this.contractsHourly);
     this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.contractsHourly.companyId);
-    
+    this.defaultServicesService.getDefaultServices().subscribe(data => {
+      this.contractsStateService.setDefaultService(data);
+    })
+
   }
   public onEdit() {
     //this.contractsHourly.onAddServices(this.defaultServices);
@@ -54,7 +59,7 @@ export class ContractsAsideHourlyEditComponent implements OnInit {
     this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsHourly.startDate).format('DD MMM YYYY'),
       moment(this.contractsHourly.endDate).format('DD MMM YYYY'), this.contractsHourly.companyId, this.contractsHourly.id, servicesName).subscribe(data => {
         if (Object.keys(data).length === 0) {
-          this.contractsService.updateContract( this.contractsHourly.getDataForUpdate()).subscribe(contract => {
+          this.contractsService.updateContract(this.contractsHourly.getDataForUpdate()).subscribe(contract => {
             this.onClose.emit(null);
           })
         } else {
@@ -64,11 +69,11 @@ export class ContractsAsideHourlyEditComponent implements OnInit {
 
       })
   }
-  onAddService(data:DefaultServicesHourlyContract) {
-    console.log("data",data);
-    this.contractsHourly.services.push(new ContractsHourlyService(true,data.billable,data.commissionRate,data.versionedId.id,data.name,data.rate,data.taxes.map(item => item.id)));
+  onAddService(data: DefaultServicesHourlyContract) {
+    console.log("data", data);
+    this.contractsHourly.services.push(new ContractsHourlyService(true, data.billable, data.commissionRate, data.versionedId.id, data.name, data.rate, data.taxes.map(item => item.id)));
     this.showAddService = false;
-    console.log("this.contractsHourly.services",this.contractsHourly.services);
+    console.log("this.contractsHourly.services", this.contractsHourly.services);
   }
   onToggleAllServices(event) {
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-drop-down',
@@ -36,7 +36,7 @@ export class DropDownComponent implements OnInit {
   reqList = [];
 
   public isAdd: boolean = false;
-  constructor() { }
+  constructor(private elRef: ElementRef,) { }
 
   ngOnInit() {
     if (this.class.length > 0) this.class = this.class;
@@ -80,6 +80,9 @@ export class DropDownComponent implements OnInit {
 
     console.log("clearClient");
     this.onSelectedItem.emit(null);
+  }
+  public getInputText() {
+    return this.elRef.nativeElement.querySelector("#dropdown1").value;
   }
   public clearWithOutChanges() {
     this.isAdd = false;
