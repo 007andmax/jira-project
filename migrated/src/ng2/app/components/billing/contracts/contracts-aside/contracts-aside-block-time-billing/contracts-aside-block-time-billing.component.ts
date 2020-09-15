@@ -211,6 +211,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     this.minStartDate = this.getMinStartDate(data, this.contractsBlockTime.startDate);
     console.log("this.minStartDate", this.minStartDate);
     this.contractsBlockTime.setInterval(data);
+    this.contractsBlockTime.calculateEndDate();
     this.cd.detectChanges();
     console.log("this.contractsBlockTime.includedHours", this.contractsBlockTime);
   }

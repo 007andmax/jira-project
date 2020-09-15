@@ -30,7 +30,7 @@ export class ContractsBlockTime {
     public addDefaultService(item) {
         this.services.push(new ContractsBlockTimeDefaultService(true, item.billable, item.commissionRate, item.versionedId.id, item.name, item.rate, item.taxes.map(tax => tax.id)))
     }
-    public setTaxIds (data) {
+    public setTaxIds(data) {
         this.taxIds = data;
     }
     public setInterval(data) {
@@ -56,7 +56,7 @@ export class ContractsBlockTime {
             endDate: this.endDate,
             maxRolloverHours: this.maxRolloverHours,
             includedHours: this.includedHours,
-            interval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? this.intervalstring  : null,
+            interval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? this.intervalstring : null,
             rateExceeding: Number(this.rateExceeding),
             services: this.services.map(item => item.getDataForCreate()),
             shares: this.shares,
@@ -70,7 +70,7 @@ export class ContractsBlockTime {
         this.companyId = data;
     }
     public getAllServicesName() {
-        return [...this.getBlockTimeServicesName(),...this.getServicesName()];
+        return [...this.getBlockTimeServicesName(), ...this.getServicesName()];
     }
     public getBlockTimeServicesName() {
         return this.blockTimeServices.map(item => item.name);
@@ -113,22 +113,43 @@ export class ContractsBlockTime {
             let dateDatePicker = new Date(year, month - 1, day).getTime(); // timestamp from calendar
             let finalDate = new Date(dateDatePicker - (current.getTimezoneOffset() * 60000/* dont touch*/) - timeOffset /* timezone.timeOffset */);
             this.startDate = moment(finalDate.getTime()).format('YYYY/MM/DD');
-            let endDate = new Date(finalDate.getTime());
-            endDate.setFullYear(endDate.getFullYear() + 50);
-            endDate.setDate(endDate.getDate() - 1);
-            this.endDate = moment(endDate).format('YYYY/MM/DD');
+            this.calculateEndDate();
         } else {
             let currentTime = new Date(current.getFullYear(), current.getMonth(), current.getDate()).getTime();
             let finalDate = new Date(currentTime - (current.getTimezoneOffset() * 60000) - timeOffset);
             this.startDate = moment(finalDate.getTime()).format('YYYY/MM/DD');
-            let endDate = new Date(finalDate.getTime());
+            this.calculateEndDate();
+        }
+
+    }
+    public calculateEndDate() {
+        if (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') {
+            let endDate = new Date(this.startDate);
             endDate.setFullYear(endDate.getFullYear() + 50);
             endDate.setDate(endDate.getDate() - 1);
             this.endDate = moment(endDate).format('YYYY/MM/DD');
+
+        } else if (this.intervalstring === '30 days') {
+            let endDate = new Date(this.startDate);
+            endDate.setDate(endDate.getDate() + 29 * 12 * 50);
+            endDate.setDate(endDate.getDate() - 1);
+            this.endDate = moment(endDate).format('YYYY/MM/DD');
+
+        } else if (this.intervalstring === '15 days') {
+            let endDate = new Date(this.startDate);
+            endDate.setDate(endDate.getDate() + 28 * 12 * 50);
+            endDate.setDate(endDate.getDate() - 1);
+            this.endDate = moment(endDate).format('YYYY/MM/DD');
+
+        } else if (this.intervalstring === '7 days') {
+            let endDate = new Date(this.startDate);
+            endDate.setFullYear(endDate.getFullYear() + 50);
+            endDate.setDate(endDate.getDate() - 7);
+         //   endDate.setDate(endDate.getDate() - 1);
+            this.endDate = moment(endDate).format('YYYY/MM/DD');
+
         }
-     
     }
-    
     public setReviewDate(day, month, year, timeOffset) {
         let current = new Date();
 
