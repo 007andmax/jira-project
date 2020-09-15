@@ -120,7 +120,7 @@ export class DeviceComponent implements OnInit {
   }
   getDevicesByCompany() {
     // localStorage.getItem('currentCompany')
-    this.commonHttpServices.getDevicesByCompany(localStorage.getItem('company_id'))
+    this.commonHttpServices.getDevicesByCompany(localStorage.getItem('company_id'), localStorage.getItem('agentId'))
       .pipe()
       .subscribe(resp => {
         const tempObj = this.commonServices.cleanObject(resp);

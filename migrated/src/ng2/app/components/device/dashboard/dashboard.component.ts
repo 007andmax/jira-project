@@ -24,14 +24,20 @@ export class DashboardComponent implements OnInit {
   options: UploaderOptions;
   show = false;
   deviceDetail: any = {};
+  windows_info:string = '';
   system = {
     install_date: null,
     manufacturer: '',
     asset_tag: '',
     warranty: null,
     architecture: '',
-    model: ''
+    model: '',
+    caption: '',
+    version: ''
   };
+  networkAdapters = {
+    ip_address: ''
+  }
   logicalDisk: any = [];
   virusInfo: any = [];
   hostName = '';
@@ -101,7 +107,7 @@ export class DashboardComponent implements OnInit {
     this.hostName = this.deviceDetail.hostName;
     this.label = this.deviceDetail.label;
     this.getDeviceDetail();
-    this.getVirusInfo();
+    // this.getVirusInfo();
   }
   getDeviceDetail() {
 	
@@ -112,6 +118,7 @@ export class DashboardComponent implements OnInit {
         this.logicalDisk = resp.reports[0].logicalDisks;
         this.virusInfo = resp.reports[0].antivirus[0];
         this.system = resp.reports[0].system || {};
+        this.windows_info = this.system.caption + '(' + this.system.architecture + ') Version ' + this.system.version;
         if (this.system.install_date !== '') {
           this.system.install_date = {
             "day": new Date(this.system.install_date).getDate(),
@@ -119,6 +126,7 @@ export class DashboardComponent implements OnInit {
             "year": new Date(this.system.install_date).getFullYear(),
           };
         }
+        this.networkAdapters = resp['reports'][0].networkAdapters.filter(value => value.ip_enabled === true)[0] || {};
         if (this.system.warranty !== '') {
           this.system.warranty = {
             "day": new Date(this.system.warranty).getDate(),

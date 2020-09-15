@@ -34,7 +34,13 @@ export class TerminalComponent implements OnInit {
     categoryId: '',
     search: ''
   };
-  scriptDetailModal:any = {};
+  scriptDetailModal = {
+    title: '',
+    type: '',
+    command: '',
+    default: false,
+    id: ''
+  };
   lineNumber = [1];
   lineNumberDetail = [1];
   deleteId = '';
@@ -424,7 +430,7 @@ export class TerminalComponent implements OnInit {
   }
 
   copyToTerminal(cmd) {
-    if (JSON.parse(localStorage.getItem('deviceDetail')).online === false) {
+    if (JSON.parse(localStorage.getItem('deviceDetail')).online === true) {
       this.finalCommand = cmd;
       this.splitCommand = cmd.split(/\r*\n/);
       this.sessionId = localStorage.getItem('uuid');

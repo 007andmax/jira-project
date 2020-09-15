@@ -27,14 +27,23 @@
                     <div>{{hostName || 'N/A'}}</div>
                   </li>
                   <li>
-                    <span>Deployment Date</span>
-                    <!-- <div (click)="visible = !visible">{{(system?.install_date | date : DateFormat) || 'N/A'}}</div> -->
-                    <!-- <ngb-datepicker class="dropdown-menu p-0"
-                    [class.show]="visible">
-                  </ngb-datepicker> -->
-                  <span class="edit-field">
-                    <input type="text" class="form-control sub-label-field" [(ngModel)]="system.install_date" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" (dateSelect)="updateDashboard('install_date')">
-                  </span>
+                    <span>Warranty</span>
+                    <!-- <div>{{system?.warranty || 'N/A'}}</div> -->
+                    <span class="edit-field">
+                      <input type="text" class="form-control sub-label-field" [(ngModel)]="system.warranty" (dateSelect)="updateDashboard('warranty')" ngbDatepicker #warranty="ngbDatepicker" (click)="warranty.toggle()">
+                    </span>
+                  </li>
+                  <li>
+                    <span>Windows Info</span>
+                    <div>{{windows_info || 'N/A'}}</div>
+                    
+                  </li>
+                  <li>
+                    <span>Asset Tag</span>
+                    <div>{{system?.asset_tag || 'N/A'}}</div>
+                    <span class="edit-field">
+                      <input type="text" class="form-control sub-label-field" [(ngModel)]="system.asset_tag" (blur)="updateDashboard('asset_tag')">
+                    </span>
                   </li>
                   <li>
                     <span>Manufacturer</span>
@@ -44,11 +53,18 @@
                     </span>
                   </li>
                   <li>
-                    <span>Asset Tag</span>
-                    <div>{{system?.asset_tag || 'N/A'}}</div>
-                    <span class="edit-field">
-                      <input type="text" class="form-control sub-label-field" [(ngModel)]="system.asset_tag" (blur)="updateDashboard('asset_tag')">
-                    </span>
+                    <span>IP</span>
+                    <div>{{networkAdapters.ip_address || 'N/A'}}</div>
+                  </li>
+                  <li>
+                    <span>Install Date</span>
+                    <!-- <div (click)="visible = !visible">{{(system?.install_date | date : DateFormat) || 'N/A'}}</div> -->
+                    <!-- <ngb-datepicker class="dropdown-menu p-0"
+                    [class.show]="visible">
+                  </ngb-datepicker> -->
+                  <span class="edit-field">
+                    <input type="text" class="form-control sub-label-field" [(ngModel)]="system.install_date" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" (dateSelect)="updateDashboard('install_date')">
+                  </span>
                   </li>
                   <!-- <li>
                     <span>Warranty Date</span>
@@ -89,13 +105,7 @@
                     <span>Expire Date</span>
                     <div>2019-03-12</div>
                   </li> -->
-                  <li>
-                    <span>Warranty</span>
-                    <!-- <div>{{system?.warranty || 'N/A'}}</div> -->
-                    <span class="edit-field">
-                      <input type="text" class="form-control sub-label-field" [(ngModel)]="system.warranty" (dateSelect)="updateDashboard('warranty')" ngbDatepicker #warranty="ngbDatepicker" (click)="warranty.toggle()">
-                    </span>
-                  </li>
+                  
                 </ul>
               </div>
             </div>
@@ -105,7 +115,7 @@
                 <ul class="list-unstyled">
                   <li [ngClass]="{'e-drive':drive.is_system == false,'c-drive':drive.is_system == true, 'e-drive':drive.is_system == false && drive.device_id == 'E:', 'd-drive':drive.is_system == false && drive.device_id == 'D:', 'f-drive':drive.is_system == false && drive.device_id == 'F:'}" *ngFor="let drive of logicalDisk">
                     
-                    <div class="progress-circle p{{drive.percent}}">
+                    <div class="progress-circle p{{drive.percent}}" [ngClass]="{'over50': drive.percent >= 50}">
                       <span>{{drive.percent}}%</span>
                       <div class="left-half-clipper">
                          <div class="first50-bar"></div>
@@ -123,13 +133,13 @@
               <div class="dashboard-col col-50 services">
                 <h2>Services</h2>
                 <ul class="list-unstyled">
-                  <li [ngClass]="{'updated': virusInfo.isUpToDate == true, 'alert': virusInfo.isUpToDate == false}">
+                  <li [ngClass]="{'updated': virusInfo?.isUpToDate == true, 'alert': virusInfo?.isUpToDate == false}">
                     <figure>
                       <img src="/html/ng2/assets/img/device/virus-protection.svg" alt="virus-protection" />
                     </figure>
                     <h4>Virus Protection</h4>
-                    <span *ngIf="virusInfo.isUpToDate == true">Up-to-date</span>
-                    <span *ngIf="virusInfo.isUpToDate == false">Out-of-date</span>
+                    <span *ngIf="virusInfo?.isUpToDate == true">Up-to-date</span>
+                    <span *ngIf="virusInfo?.isUpToDate == false">Out-of-date</span>
                   </li>
                   <li class="alert">
                     <figure>
