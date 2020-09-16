@@ -104,6 +104,7 @@
     top: 79px;
     right: 0;
     height: calc(100vh - 79px);
+    z-index: 10;
 
   // select contract type
   .contract-type-aside-content {
@@ -155,6 +156,58 @@
   // end select contract type
 
   // hourly billing aside
+
+  .contract-aside-hourly-add-service {
+    &__name {
+      min-width: 509px;
+      width: 509px;
+      input {
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+      }
+    }
+
+    &__billable {
+      border-top: 1px solid;
+      border-bottom: 1px solid;
+      border-color: #c4cbd5;
+      min-width: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 40px;
+    }
+
+    &__tax {
+      min-width: 111px;
+      input {
+        border-radius: 0 !important;
+        border-right: 0px !important;
+      }
+    }
+
+    &__rate {
+      min-width: 108px;
+      input {
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+      }
+    }
+
+    &__cancel {
+      position: absolute;
+      right: -18px;
+      bottom: -4px;
+    }
+
+    &__add {
+      position: absolute;
+      right: -18px;
+      transform: rotate(45deg);
+      top: -2px;
+    }
+  }
+
   .service-table {
 
     &__check {
