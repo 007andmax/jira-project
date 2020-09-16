@@ -89,7 +89,6 @@
   .payment-table {
     border-spacing: 0;
     width: 100%;
-    min-width: 1064px;
     th, td {
       height: 40px;
       border-bottom: solid 1px #dfe3e8;
@@ -116,25 +115,6 @@
       color: #16a4fa;
       font-family: Graphik-Medium, sans-serif;
     }
-
-    .payment-table__date {
-      // width: 157px;
-    }
-
-    .payment-table__payment {
-      // width: 142px;
-    }
-
-    .payment-table__inv-amount {
-      // text-align: right;
-      // width: 133px;
-    }
-
-    .payment-table__pay-amount {
-      // text-align: right;
-      // width: 164px;
-    }
-
   }
 
   .billable-payment-table__reference {
