@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { Subject } from "rxjs";
 import { ISubscription } from "rxjs/Subscription";
 
@@ -37,7 +37,8 @@ export class CompanyPasswordManagerTableComponent implements OnInit {
   constructor(
     private apiPasswordManagerService: ApiPasswordManagerService,
     private passwordManagerService: PasswordManagerService,
-    private permissionsService: PermissionsService
+    private permissionsService: PermissionsService,
+    public cd: ChangeDetectorRef,
   ) { }
 
   /**
@@ -47,7 +48,7 @@ export class CompanyPasswordManagerTableComponent implements OnInit {
     this.getRecords();
     this.getSelectedCategory();
     this.subAddNewRecords = this.addNewRecords.subscribe(v => {
-       
+
       this.apiPasswordManagerService.getCompanyRecords(this.selectedCompany.id);
 
     });
@@ -90,8 +91,9 @@ export class CompanyPasswordManagerTableComponent implements OnInit {
   public deleteRecord(recordId) {
     if (this.permissionsService.isAllowed('DELETE_PASSWORD')) {
       this.apiPasswordManagerService.deleteRecord(recordId).subscribe((res) => {
-        this.passwordManagerService.deleteRecord(recordId);
-        return this.recordsData = this.recordsData.filter((item) => item.id !== recordId);
+     //   this.passwordManagerService.deleteRecord(recordId);
+        this.recordsData = this.recordsData.filter((item) => item.id !== recordId);
+        this.cd.detectChanges();
       });
     }
   }
@@ -101,7 +103,7 @@ export class CompanyPasswordManagerTableComponent implements OnInit {
    */
   public watchDeleteRecord() {
     this.passwordManagerService.deleteItemEditForm.subscribe((item) => {
-      return this.deleteRecord(item);
+      this.deleteRecord(item);
     });
   }
 
@@ -110,7 +112,10 @@ export class CompanyPasswordManagerTableComponent implements OnInit {
    * @param item - item for edit
    */
   public editRecord(item) {
+    console.log("editRecord",item);
+    console.log("VIEW_PASSWORD",this.permissionsService.isAllowed('VIEW_PASSWORD'));
     if (this.permissionsService.isAllowed('VIEW_PASSWORD')) {
+      console.log("VIEW_PASSWORD");
       this.passwordManagerService.addRecord(item);
     }
   }
