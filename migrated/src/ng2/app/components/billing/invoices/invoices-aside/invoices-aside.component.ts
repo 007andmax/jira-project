@@ -96,7 +96,7 @@ export class InvoicesAsideComponent implements OnInit {
   }
   public onChangePayment(val, invoice) {
     let value = Number(val);
-    invoice.paymentAmount = value;
+    invoice.paymentAmount = Math.floor((value)*100)/100;
     this.validate.setValidPayment(true);
     if (!this.validate.getAmountReceived()) this.validate.checkAmountReceived(this.amountReceived, this.invoices);
   }
@@ -178,11 +178,11 @@ export class InvoicesAsideComponent implements OnInit {
         this.invoices.forEach(item => {
           let find = this.selectedInvoices.find(selectInvoice => selectInvoice.id === item.id);
           if (find) item.selected = true;
-          if (item.selected && !this.isChangeAmountReceived) item.paymentAmount = (item.sum - item.paidSum);
+          if (item.selected && !this.isChangeAmountReceived) item.paymentAmount = Math.floor((item.sum - item.paidSum)*100)/100;
         })
         if (!this.isChangeAmountReceived) {
           this.amountReceived = this.invoices.reduce((a, b) => {
-            if (b.selected) return a + (b.sum - b.paidSum);
+            if (b.selected) return  Math.floor((a + (b.sum - b.paidSum))*100)/100;;
             return a + 0;
           }, 0);
         }

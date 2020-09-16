@@ -111,7 +111,7 @@
                 >
                   <div
                     class="email-note-wrape"
-                    *ngIf="techUseremailNotificationList"
+                    *ngIf="techUseremailNotificationList && techUseremailNotificationList[techUser.id]"
                   >
                     <h5>Set Email Notification for Tech User</h5>
                     <ul class="list-unstyled">
@@ -276,7 +276,7 @@
                 >
                   <div
                     class="email-note-wrape"
-                    *ngIf="archivedtechUseremailNotificationList"
+                    *ngIf="archivedtechUseremailNotificationList && archivedtechUseremailNotificationList[techUser.id]"
                   >
                     <h5>Set Email Notification for Tech User</h5>
                     <ul class="list-unstyled">

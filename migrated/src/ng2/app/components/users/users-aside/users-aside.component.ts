@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ImageCropperStateService } from 'src/ng2/app/states/image-cropper/image-cropper-state.service';
 import { CROPP_AVATAR_USER } from 'src/ng2/app/const/image-cropp';
 import { UserProfile } from '../class/user-profile';
@@ -30,6 +30,7 @@ export class UsersAsideComponent implements OnInit {
     private usersAsideService: UsersAsideService, private usersService: UsersService,
     private companiesState: SelectClientCompanyStateService,
     private companySubscriptionState:CompanySubscriptionStateService,
+    public cd: ChangeDetectorRef,
     private modalService: NgbModal,) { }
 
   ngOnInit() {
@@ -135,6 +136,7 @@ export class UsersAsideComponent implements OnInit {
     this.user = new UserProfile();
     this.validate = new UserValidate();
     this.companiesState.onInitClear();
+    this.cd.detectChanges();
   }
   removePhoneNumber (i) {
     this.user.phoneNumbers.splice(i);
