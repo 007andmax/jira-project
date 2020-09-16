@@ -81,6 +81,11 @@ export class ContractsTableComponent implements OnInit,OnDestroy {
       //  this.contractsStateService.setPreview(data);
     })
   }
+  onCopy(data) {
+    this.contractsService.getServiceAgreement(data.id).subscribe(data => {
+      this.contractsStateService.setContractForCopy(data);
+    })
+  }
   onPreview(data) {
     this.contractsService.getServiceAgreement(data.id).subscribe(data => {
       this.contractsStateService.setPreview(data);

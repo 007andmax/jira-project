@@ -16,6 +16,7 @@ export class ContractsComponent implements OnInit {
   constructor(private contractsStateService: ContractsStateService) { }
 
   ngOnInit() {
+   
     this.contractsStateService.getOnToggleCreate().subscribe(data => {
       this.showCreate = data;
     })

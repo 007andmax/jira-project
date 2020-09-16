@@ -1,11 +1,13 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { ContractItem } from '../../components/billing/contracts/class/contract-item';
-
+import { ServiceAgreement } from '../../components/billing/contracts/class/service-agreement';
+ 
 @Injectable({
   providedIn: 'root'
 })
 export class ContractsStateService {
   contractForDelete:ContractItem;
+  contractForCopy:ServiceAgreement;
   defaultServices: any = [];
   onFilter: EventEmitter<any> = new EventEmitter();
   onSort: EventEmitter<any> = new EventEmitter();
@@ -19,6 +21,9 @@ export class ContractsStateService {
   onConfirm: EventEmitter<any> = new EventEmitter();
   constructor() { }
 
+  public getContractForCopy() {
+    return this.contractForCopy;
+  }
   public setConfirm(data) {
     this.onConfirm.emit(data);
   }
@@ -27,6 +32,9 @@ export class ContractsStateService {
   }
   public setContractForDelete(data) {
     this.contractForDelete = data;
+  }
+  public setContractForCopy(data) {
+    this.contractForCopy = data;
   }
   public getContractForDelete() {
     return this.contractForDelete;

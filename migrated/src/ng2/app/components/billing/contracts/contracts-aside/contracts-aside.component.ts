@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-state.service';
 import { ConstantsService } from 'src/ng2/app/services/constants/constants.service';
 import { ContractsAsideHourlyBillingComponent } from './contracts-aside-hourly-billing/contracts-aside-hourly-billing.component';
@@ -17,10 +17,14 @@ export class ContractsAsideComponent implements OnInit {
   type: string = null;
   step: number = 1;
   constructor(private contractsStateService: ContractsStateService,
-    private defaultServicesService:DefaultServicesService
-   ) { }
+    private defaultServicesService: DefaultServicesService
+  ) { }
 
   ngOnInit() {
+    if (this.contractsStateService.getContractForCopy()) {
+      this.step = 2;
+      this.type = this.contractsStateService.getContractForCopy().type;
+    }
     this.contractsStateService.getOnChangeType().subscribe(data => {
       this.type = `${data.type}${(data.billType) ? "_" + data.billType : ""}`;
     })
