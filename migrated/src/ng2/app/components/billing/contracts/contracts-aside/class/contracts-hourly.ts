@@ -1,4 +1,5 @@
 import * as moment from "moment";
+import { ServiceAgreement } from '../../class/service-agreement';
 import { ContractsHourlyService } from './contracts-hourly-service';
 import { DefaultServicesHourlyContract } from './default-service-hourly-contract';
 export class ContractsHourly {
@@ -12,6 +13,15 @@ export class ContractsHourly {
     constructor() {
 
 
+    }
+    public setDataFromCopy(data:ServiceAgreement) {
+        this.companyId = data.companyId;
+        this.description = data.description;
+        this.endDate  = data.endDate;
+        this.services = data.services;
+        this.startDate = data.startDate;
+        this.type = data.type;
+        this.reviewDate = new Date(data.reviewDate).getTime();
     }
     public getDataForCreate() {
         return {

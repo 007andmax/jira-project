@@ -19,7 +19,7 @@ export class ContractsTableItemComponent implements OnInit {
   @Input() contract: ContractItem;
   @Output() onPreview = new EventEmitter();
   @Output() onEdit = new EventEmitter();
-  
+  @Output() onCopy = new EventEmitter();
   @Output() onTerminate = new EventEmitter();
   contractTypeDictionary = {
     HOURLY: 'Hourly',
@@ -59,6 +59,9 @@ export class ContractsTableItemComponent implements OnInit {
   }
   terminateContract() {
     this.onTerminate.emit(this.contract);
+  }
+  copyContract() {
+    this.onCopy.emit(this.contract);
   }
   editContract() {
     this.onEdit.emit(this.contract);

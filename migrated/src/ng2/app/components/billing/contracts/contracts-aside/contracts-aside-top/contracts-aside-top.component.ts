@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, ViewChild } from '@angular/core';
 import { ContractsFilterType } from '../../class/contracts-filter-type';
 import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-state.service';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
 import { Subscription } from 'rxjs';
 import * as moment from "moment";
+import { DropDownComponent } from 'src/ng2/app/components/shared/drop-down/drop-down.component';
 @Component({
   selector: 'app-contracts-aside-top',
   templateUrl: './contracts-aside-top.component.html',
@@ -18,6 +19,7 @@ export class ContractsAsideTopComponent implements OnInit {
   @Input() selectedType = new ContractsFilterType('Hourly', 'HOURLY', null);
   @Input() validateCompany: boolean = true;
   @Output() onSelectCompany = new EventEmitter<any>();
+  @ViewChild('companiesDP') companiesDP: DropDownComponent;
   sub: Subscription = new Subscription();
   constructor(private contractsStateService: ContractsStateService,
     private companiesState: CompaniesStateService,) { }

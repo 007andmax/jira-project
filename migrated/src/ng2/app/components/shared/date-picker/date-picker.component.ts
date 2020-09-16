@@ -66,6 +66,8 @@ export class DatePickerComponent implements OnInit, OnDestroy {
     if (this.useMaxDate) this.maxDateDP = this.sericeDatePicker.getDateStruct(this.maxDate);
 
   }
+
+   
   /**
   * Subscribe to clear date picker
   */
@@ -92,12 +94,13 @@ export class DatePickerComponent implements OnInit, OnDestroy {
     })
     this.sericeDatePicker.addSubscription(edit);
   }
-  private setEditDate(data: number) {
+  public setEditDate(data: number) {
     let date = new Date(data);
     this.navDate = this.sericeDatePicker.getNavDate(date);
     this.datepicker = this.sericeDatePicker.getDateForDatePicker(data);
     if (this.navDate) this.sericeDatePicker.updateMonthAndYearDatePicker(this.datepicker, this.navDate);
     this.date.setTitle(this.datepicker,this.formatDate);
+    console.log("this.datepicker",this.datepicker);
   }
 
   public geTextDate() {

@@ -21,13 +21,13 @@
     <div class="qt-df qt-mb-16 qt-w50 qt-mr-16">
       <div class="qt-input-block --required qt-w50 qt-mr-16">
         <label>Start Date</label>
-        <app-date-picker [formatDate]="formatDate" [editMode]="true" [editDate]="contractsHourly.startDate"   (onChange)="onChangeStartDate($event)"></app-date-picker>
+        <app-date-picker [formatDate]="formatDate" [editMode]="true" [editDate]="contractsHourly.getStartDateByMilliseconds()"   (onChange)="onChangeStartDate($event)"></app-date-picker>
 
       </div>
 
       <div class="qt-input-block --required qt-w50">
         <label>Review Date</label>
-        <app-date-picker [formatDate]="formatDate" [editMode]="true" [editDate]="contractsHourly.reviewDate"   (onChange)="onChangeReviewDate($event)"></app-date-picker>
+        <app-date-picker [formatDate]="formatDate" [editMode]="true" [editDate]="contractsHourly.getReviewDateByMilliseconds()"   (onChange)="onChangeReviewDate($event)"></app-date-picker>
 
       </div>
     </div>

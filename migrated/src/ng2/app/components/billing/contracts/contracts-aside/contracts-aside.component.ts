@@ -42,6 +42,7 @@ export class ContractsAsideComponent implements OnInit {
   }
   closed() {
     this.contractsStateService.toggleCreate(false);
+    this.contractsStateService.setContractForCopy(null);
   }
   onSelectType(data) {
     this.type = data;

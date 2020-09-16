@@ -18,6 +18,18 @@ export class ContractsPreviewComponent implements OnInit {
   ngOnInit() {
 
   }
+  copy() {
+   
+      this.closed();
+      this.contractsStateService.setContractForCopy(this.serviceAgreement);
+      this.contractsStateService.toggleCreate(true);
+    
+  }
+  terminateAndCopy() {
+    this.contractsService.terminate(this.serviceAgreement.id).subscribe(data => {
+     this.copy();
+    })
+  }
   closed() {
     this.contractsStateService.togglePreview(false);
   }

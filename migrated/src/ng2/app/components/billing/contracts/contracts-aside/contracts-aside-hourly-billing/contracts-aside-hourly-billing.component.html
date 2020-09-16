@@ -1,19 +1,19 @@
 <div class="contracts-page-scroll-content">
   <div class="qt-pr-32 qt-pl-32 qt-pb-8 qt-pt-16">
 
-   <app-contracts-aside-top (onSelectCompany)="onSelectCompany($event)" [selectedType]="selectedType" ></app-contracts-aside-top>
+   <app-contracts-aside-top #topContract (onSelectCompany)="onSelectCompany($event)" [selectedType]="selectedType" ></app-contracts-aside-top>
 
 
     <div class="qt-df qt-mb-16 qt-w50 qt-mr-16">
       <div class="qt-input-block --required qt-w50 qt-mr-16">
         <label>Start Date</label>
-        <app-date-picker [formatDate]="formatDate" [editMode]="true" [editDate]="today"   (onChange)="onChangeStartDate($event)"></app-date-picker>
+        <app-date-picker #startDateDP [formatDate]="formatDate" [editMode]="true" [editDate]="startDate" [useMinDate]="false"  (onChange)="onChangeStartDate($event)"></app-date-picker>
 
       </div>
 
       <div class="qt-input-block --required qt-w50">
         <label>Review Date</label>
-        <app-date-picker [formatDate]="formatDate" [editMode]="true" [editDate]="today"   (onChange)="onChangeReviewDate($event)"></app-date-picker>
+        <app-date-picker #reviewDateDP [formatDate]="formatDate" [editMode]="true" [editDate]="reviewDate" [useMinDate]="false"  (onChange)="onChangeReviewDate($event)"></app-date-picker>
 
       </div>
     </div>
