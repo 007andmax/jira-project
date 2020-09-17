@@ -4,12 +4,16 @@ import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { isArray } from 'util';
+import { WebsocketService } from 'src/ng2/app/services/websocket/websocket.service';
+import { CONFIGCONSTANTS } from '../config/app-constants';
+import { UserListService } from '../../users/services/user-list.service';
 
 @Component({
   selector: 'app-terminal',
   templateUrl: './terminal.component.html',
   styleUrls: ['./terminal.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  providers: [UserListService]
 })
 export class TerminalComponent implements OnInit {
   create = false;
@@ -65,12 +69,16 @@ export class TerminalComponent implements OnInit {
     lineNumbers: true,
     lineWrapping: true,
   };
+  DateTimeHistoryFormat = CONFIGCONSTANTS.DateTimeHistoryFormat;
   constructor(private terminalService: TerminalService,
     private toastr: ToastrService,
-    private modalService: NgbModal  
+    private modalService: NgbModal,
+    private socketService: WebsocketService,
+    private userListService: UserListService,
     ) { }
 
   ngOnInit() {
+    this.socketService.initializeWebSocketConnection();
     this.getCommandList();
     this.getCmdCategoryRead();
     this.getHistory();
@@ -113,6 +121,23 @@ export class TerminalComponent implements OnInit {
     this.terminalService.getHistory(localStorage.getItem('agentId'))
     .pipe(first())
     .subscribe(data => {
+      let obj = data[localStorage.getItem('agentId')]
+      let arr = obj.split(/\r*\n/);
+      let index = 0;
+      let arr1 = [];
+      
+      arr.forEach(element => {
+        if (Date.parse(element)) {
+          if (index !== 0) {
+            this.historyList.push(arr1);
+            arr1 = [];
+            index += 1;
+          } else {
+            index += 1;
+          }
+        }
+        arr1.push(element);
+      });
     },
     error => {
       const statusError = error;
@@ -420,7 +445,6 @@ export class TerminalComponent implements OnInit {
   }
 
   viewScriptDetail(data) {
-    debugger;
     this.scriptDetail = !this.scriptDetail;
     this.scriptDetailModal = data;
     this.lineNumberDetail = [];
@@ -455,7 +479,13 @@ export class TerminalComponent implements OnInit {
     this.terminalService.sendCommand(data)
     .pipe(first())
     .subscribe(resp => {
-      debugger;
+      let stompClient = this.socketService.getClient().subscribe(`/user/watch/cmdShellOutput`, (message) => {
+        var newChange = JSON.parse(message.body);
+        let arr = newChange.data.output.split(/\r*\n/)
+        this.splitCommand.concat(arr);
+        debugger;
+      });
+      this.userListService.addSubscription(stompClient);
     },
     error => {
       const statusError = error;

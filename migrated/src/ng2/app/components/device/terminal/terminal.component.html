@@ -200,115 +200,13 @@
             <ng-template ngbTabContent>
             <div class="cmn-tbs-content history-cmd">
               <ul class="list-unstyled">
-                <li>
+                <li *ngFor="let history of historyList">
                   <div class="terminal-cmd-opt">
                     <div class="cmd-list-left">
-                      <h5>Gordon Fitzgerald</h5>
+                      <h5>{{history[1]}}</h5>
                     </div>
                     <div class="cmd-list-right">
-                      <span class="date">3 Jun, 13:37:13</span>
-                    </div>
-                  </div>
-                  <div class="cmd-details">
-                    <h5>ipconfig / all</h5>
-                    <span
-                      >Window IP Configuration Ethernet adapter Local Area
-                      Connection 2:</span
-                    >
-                  </div>
-                </li>
-                <li>
-                  <div class="terminal-cmd-opt">
-                    <div class="cmd-list-left">
-                      <h5>Gordon Fitzgerald</h5>
-                    </div>
-                    <div class="cmd-list-right">
-                      <span class="date">3 Jun, 13:37:13</span>
-                    </div>
-                  </div>
-                  <div class="cmd-details">
-                    <h5>ipconfig / all</h5>
-                    <span
-                      >Window IP Configuration Ethernet adapter Local Area
-                      Connection 2:</span
-                    >
-                  </div>
-                </li>
-                <li>
-                  <div class="terminal-cmd-opt">
-                    <div class="cmd-list-left">
-                      <h5>Gordon Fitzgerald</h5>
-                    </div>
-                    <div class="cmd-list-right">
-                      <span class="date">3 Jun, 13:37:13</span>
-                    </div>
-                  </div>
-                  <div class="cmd-details">
-                    <h5>ipconfig / all</h5>
-                    <span
-                      >Window IP Configuration Ethernet adapter Local Area
-                      Connection 2:</span
-                    >
-                  </div>
-                </li>
-                <li>
-                  <div class="terminal-cmd-opt">
-                    <div class="cmd-list-left">
-                      <h5>Gordon Fitzgerald</h5>
-                    </div>
-                    <div class="cmd-list-right">
-                      <span class="date">3 Jun, 13:37:13</span>
-                    </div>
-                  </div>
-                  <div class="cmd-details">
-                    <h5>ipconfig / all</h5>
-                    <span
-                      >Window IP Configuration Ethernet adapter Local Area
-                      Connection 2:</span
-                    >
-                  </div>
-                </li>
-                <li>
-                  <div class="terminal-cmd-opt">
-                    <div class="cmd-list-left">
-                      <h5>Gordon Fitzgerald</h5>
-                    </div>
-                    <div class="cmd-list-right">
-                      <span class="date">3 Jun, 13:37:13</span>
-                    </div>
-                  </div>
-                  <div class="cmd-details">
-                    <h5>ipconfig / all</h5>
-                    <span
-                      >Window IP Configuration Ethernet adapter Local Area
-                      Connection 2:</span
-                    >
-                  </div>
-                </li>
-                <li>
-                  <div class="terminal-cmd-opt">
-                    <div class="cmd-list-left">
-                      <h5>Gordon Fitzgerald</h5>
-                    </div>
-                    <div class="cmd-list-right">
-                      <span class="date">3 Jun, 13:37:13</span>
-                    </div>
-                  </div>
-                  <div class="cmd-details">
-                    <h5>ipconfig / all</h5>
-                    <span
-                      >Window IP Configuration Ethernet adapter Local Area
-                      Connection 2:</span
-                    >
-                  </div>
-                </li>
-                <li>
-                  <div class="terminal-cmd-opt">
-                    <div class="cmd-list-left">
-                      <h5>Gordon Fitzgerald</h5>
-                    </div>
-                    <div class="cmd-list-right">
-                      <span class="date">3 Jun, 13:37:13</span>
+                      <span class="date">{{history[0] | date : DateTimeHistoryFormat}}</span>
                     </div>
                   </div>
                   <div class="cmd-details">
