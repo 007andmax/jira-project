@@ -11,7 +11,7 @@ import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-st
 })
 export class ContractsPreviewComponent implements OnInit {
   @Input() serviceAgreement: ServiceAgreement;
-  
+
   constructor(private contractsService: ContractsService,
     private contractsStateService: ContractsStateService,) { }
 
@@ -19,15 +19,15 @@ export class ContractsPreviewComponent implements OnInit {
 
   }
   copy() {
-   
-      this.closed();
-      this.contractsStateService.setContractForCopy(this.serviceAgreement);
-      this.contractsStateService.toggleCreate(true);
-    
+
+    this.closed();
+    this.contractsStateService.setContractForCopy(this.serviceAgreement);
+    this.contractsStateService.toggleCreate(true);
+
   }
   terminateAndCopy() {
     this.contractsService.terminate(this.serviceAgreement.id).subscribe(data => {
-     this.copy();
+      this.copy();
     })
   }
   closed() {

@@ -331,6 +331,7 @@ import { ContractsAsideBlockTimeBillingAddDefaultServiceComponent } from './comp
 import { ContractsAsideBlockTimeBillingUsersComponent } from './components/billing/contracts/contracts-aside/contracts-aside-block-time-billing/contracts-aside-block-time-billing-users/contracts-aside-block-time-billing-users.component';
 import { ContractsConfirmComponent } from './components/billing/contracts/contracts-confirm/contracts-confirm.component';
  import { ContractsAsideEditHourlyAddDefaultServiceComponent } from './components/billing/contracts/contracts-edit/contracts-aside-hourly-edit/contracts-aside-edit-hourly-add-default-service/contracts-aside-edit-hourly-add-default-service.component';
+import { ContractsAsideBlockTimeBillingPreviewComponent } from './components/billing/contracts/contracts-preview/contracts-aside-block-time-billing-preview/contracts-aside-block-time-billing-preview.component';
 
 
 
@@ -831,7 +832,9 @@ angular.module('quicktech')
     ContractsAsideBlockTimeBillingUsersComponent,
     ContractsConfirmComponent,
     
-    ContractsAsideEditHourlyAddDefaultServiceComponent
+    ContractsAsideEditHourlyAddDefaultServiceComponent,
+    
+    ContractsAsideBlockTimeBillingPreviewComponent
   ],
   imports: [
     BrowserModule,

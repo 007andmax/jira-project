@@ -15,7 +15,7 @@ export class ServiceAgreement {
     glNumber: any;
     id: string;
     includedHours: number;
-    interval: String;
+    interval: string;
     invoiceAsSingleItem: boolean;
     maxRolloverHours: any;
     productExpenses: any;
@@ -54,11 +54,11 @@ export class ServiceAgreement {
         if (day !== current.getDate() || current.getMonth() !== (month - 1)) {
             let dateDatePicker = new Date(year, month - 1, day).getTime(); // timestamp from calendar
             let finalDate = new Date(dateDatePicker - (current.getTimezoneOffset() * 60000/* dont touch*/) - timeOffset /* timezone.timeOffset */);
-          //  this.reviewDate = finalDate.getTime();
+            this.reviewDate = moment(finalDate.getTime()).format('YYYY/MM/DD');
         } else {
             let currentTime = new Date(current.getFullYear(), current.getMonth(), current.getDate()).getTime();
             let finalDate = new Date(currentTime - (current.getTimezoneOffset() * 60000) - timeOffset);
-           // this.reviewDate = finalDate.getTime()
+            this.reviewDate = moment(finalDate.getTime()).format('YYYY/MM/DD');
         }
     }
     public setStartDate(day, month, year, timeOffset) {
@@ -92,4 +92,13 @@ export class ServiceAgreement {
             type: this.type
         }
     }
+    public calculateTotalAmount() {
+        let sum = 0;
+        if (Number(this.includedHours) && Number(this.blockRate)) {
+            sum = Number(this.includedHours) * Number(this.blockRate);
+        } else {
+            sum = 0;
+        }
+        return sum;
+    };
 }

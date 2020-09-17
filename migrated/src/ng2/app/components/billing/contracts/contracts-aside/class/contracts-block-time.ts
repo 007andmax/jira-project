@@ -21,7 +21,7 @@ export class ContractsBlockTime {
     shares: Array<СontractsBlockTimeShare> = [];
     startDate: string;
     taxIds: Array<string> = [];
-    type: string;
+    type: string = "BLOCK_TIME";
     reviewDate: string;
     constructor() { }
     public setShares(data) {
@@ -63,7 +63,7 @@ export class ContractsBlockTime {
             startDate: this.startDate,
             reviewDate: this.reviewDate,
             taxIds: this.taxIds,
-            type: "BLOCK_TIME"
+            type: this.type
         }
     }
     public setCompanyId(data) {
@@ -145,7 +145,7 @@ export class ContractsBlockTime {
             let endDate = new Date(this.startDate);
             endDate.setFullYear(endDate.getFullYear() + 50);
             endDate.setDate(endDate.getDate() - 7);
-         //   endDate.setDate(endDate.getDate() - 1);
+            //   endDate.setDate(endDate.getDate() - 1);
             this.endDate = moment(endDate).format('YYYY/MM/DD');
 
         }

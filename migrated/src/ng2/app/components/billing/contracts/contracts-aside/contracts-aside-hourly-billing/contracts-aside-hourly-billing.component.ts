@@ -73,7 +73,7 @@ export class ContractsAsideHourlyBillingComponent implements OnInit {
     this.reviewDateDP.minDate = this.contractsStateService.getContractForCopy().getReviewDateByMilliseconds();
     this.startDateDP.setEditDate(this.contractsStateService.getContractForCopy().getStartDateByMilliseconds());
     this.reviewDateDP.setEditDate(this.contractsStateService.getContractForCopy().getReviewDateByMilliseconds());
-    this.topContract.companiesDP.editItem = this.companiesStateService.getCompanies().find(item => item.id === this.contractsHourly.companyId);
+    this.topContract.companiesDP.selectedItem = this.companiesStateService.getCompanies().find(item => item.id === this.contractsHourly.companyId);
   }
   public onCreate() {
     this.contractsHourly.onAddServices(this.defaultServices);

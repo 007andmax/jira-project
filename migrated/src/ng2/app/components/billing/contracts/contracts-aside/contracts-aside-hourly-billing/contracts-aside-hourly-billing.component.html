@@ -79,9 +79,9 @@
 
       </tbody>
     </table>
-<app-contracts-aside-hourly-billing-add-service *ngIf="showAddService" [contractsHourly]="contractsHourly" (onAdd)="onAddService($event)" (onClose)="showAddService = false"></app-contracts-aside-hourly-billing-add-service>
+    <app-contracts-aside-edit-hourly-add-default-service *ngIf="showAddService" [contractsHourly]="contractsHourly" (onAdd)="onAddService($event)" (onClose)="showAddService = false"></app-contracts-aside-edit-hourly-add-default-service>
     <button class="qt-mb-24 qt-btn --outline --small" (click)="showAddService = true" *ngIf="!showAddService">+ Add Custom Service</button>
-    <mat-error   *ngIf="!validate.getDate()">
+      <mat-error   *ngIf="!validate.getDate()">
       The current company has a working hourly agreement for these dates
     </mat-error>
   </div>

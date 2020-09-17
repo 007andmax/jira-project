@@ -11,7 +11,8 @@
 
   </div>
 
-  <app-contracts-aside-hourly-billing-preview [contractsHourly]="serviceAgreement"></app-contracts-aside-hourly-billing-preview>
+  <app-contracts-aside-hourly-billing-preview *ngIf="serviceAgreement.type === 'HOURLY'" [contractsHourly]="serviceAgreement"></app-contracts-aside-hourly-billing-preview>
+  <app-contracts-aside-block-time-billing-preview *ngIf="serviceAgreement.type === 'BLOCK_TIME'" [contractsBlockTime]="serviceAgreement"></app-contracts-aside-block-time-billing-preview>
   <div class="aside-footer qt-pr-30 qt-pl-30 qt-pb-16 qt-pt-16 qt-df qt-ai-c qt-jc-sb">
     <div class="qt-df">
       <button class="qt-button qt-mr-12"  (click)="copy()">Copy</button>
