@@ -1,4 +1,4 @@
-import { Component, OnInit ,ViewEncapsulation, ViewChild, ElementRef  } from '@angular/core';
+import { Component, OnInit ,ViewEncapsulation, ViewChild, ElementRef, ChangeDetectorRef  } from '@angular/core';
 import { TerminalService } from '../_services/terminal.service';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
@@ -75,16 +75,18 @@ export class TerminalComponent implements OnInit {
     private modalService: NgbModal,
     private socketService: WebsocketService,
     private userListService: UserListService,
+    public cd: ChangeDetectorRef,
     ) { }
 
   ngOnInit() {
-    this.socketService.initializeWebSocketConnection();
+    // this.socketService.initializeWebSocketConnection();
     this.getCommandList();
     this.getCmdCategoryRead();
     this.getHistory();
     $('#cmd textarea').scroll(function(){
       $('#cmd_line').scrollTop($('#cmd textarea').scrollTop());
     });
+    
   }
 
   getCommandList () {
@@ -456,7 +458,8 @@ export class TerminalComponent implements OnInit {
   copyToTerminal(cmd) {
     if (JSON.parse(localStorage.getItem('deviceDetail')).online === true) {
       this.finalCommand = cmd;
-      this.splitCommand = cmd.split(/\r*\n/);
+      let arr = cmd.split(/\r*\n/)
+      this.splitCommand = this.splitCommand.concat(arr);
       this.sessionId = localStorage.getItem('uuid');
       this.sendCommand();
     } else {
@@ -482,8 +485,9 @@ export class TerminalComponent implements OnInit {
       let stompClient = this.socketService.getClient().subscribe(`/user/watch/cmdShellOutput`, (message) => {
         var newChange = JSON.parse(message.body);
         let arr = newChange.data.output.split(/\r*\n/)
-        this.splitCommand.concat(arr);
-        debugger;
+        let arr1 = this.splitCommand.concat(arr);
+        this.splitCommand = arr1;
+        this.cd.detectChanges();
       });
       this.userListService.addSubscription(stompClient);
     },
