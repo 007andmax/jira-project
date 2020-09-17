@@ -1,10 +1,11 @@
 import { ContractsHourlyService } from '../contracts-aside/class/contracts-hourly-service';
 import * as moment from "moment";
+import { ServiceAgreementBlockTimeServices } from './service-agreement-block-time-services';
 export class ServiceAgreement {
     amount: number;
     billType: any;
     blockRate: number;
-    blockTimeServices: any;
+    blockTimeServices: Array<ServiceAgreementBlockTimeServices> = [];
     companyId: string;
     contractWithBlockTime: boolean;
     customBillingDate: any;
@@ -28,7 +29,7 @@ export class ServiceAgreement {
     shares: any;
     startDate: string;
     status: string;
-    taxIds: Array<String> = [];
+    taxIds: Array<string> = [];
     type: string;
     public getStartDateByMilliseconds() {
         return new Date(this.startDate).getTime();

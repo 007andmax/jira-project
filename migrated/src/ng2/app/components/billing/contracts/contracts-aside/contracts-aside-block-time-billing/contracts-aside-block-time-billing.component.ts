@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, OnDestroy, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy, EventEmitter, Output, ViewChild } from '@angular/core';
 import { ContractsFilterType } from '../../class/contracts-filter-type';
 import { FORMAT_DATE_2 } from 'src/ng2/app/const/date-picker';
 import { ContractsBlockTime } from '../class/contracts-block-time';
@@ -15,6 +15,11 @@ import { ContractsConfirmComponent } from '../../contracts-confirm/contracts-con
 import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-state.service';
 import { Subscription } from 'rxjs';
 import { СontractsBlockTimeShare } from '../class/contracts-block-time-share';
+import { DatePickerComponent } from 'src/ng2/app/components/shared/date-picker/date-picker.component';
+import { ContractsAsideTopComponent } from '../contracts-aside-top/contracts-aside-top.component';
+import { InvoiceFormTicketEditTaxesComponent } from '../../../billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.component';
+import { TaxesStateService } from 'src/ng2/app/states/taxes/taxes-state.service';
+import { Tax } from 'src/ng2/class/taxes/tax';
 
 @Component({
   selector: 'app-contracts-aside-block-time-billing',
@@ -23,17 +28,23 @@ import { СontractsBlockTimeShare } from '../class/contracts-block-time-share';
 })
 export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestroy {
   @Output() onClose = new EventEmitter<any>();
+  @ViewChild('startDateDP') startDateDP: DatePickerComponent;
+  @ViewChild('reviewDateDP') reviewDateDP: DatePickerComponent;
+  @ViewChild('topContract') topContract: ContractsAsideTopComponent;
+  @ViewChild('taxes') taxesDP: InvoiceFormTicketEditTaxesComponent;
   selectedType = new ContractsFilterType('Block Time', 'BLOCK_TIME', null);
   intervals: Array<string> = ['YEARLY', 'MONTHLY', '30 days', '15 days', '7 days'];
   selectedInterval: string = 'MONTHLY';
   minStartDate: number = null;
   formatDate: string = FORMAT_DATE_2;
-  today = new Date().getTime();
+  startDate = new Date().getTime();
+  reviewDate = new Date().getTime();
   toggleContractServices: boolean = false;
   toggleTimeRollover: boolean = false;
   toggleNotifyAgentsUser: boolean = false;
   selectedUsers = [];
   userList = [];
+  taxes: Array<Tax> = [];
   contractsBlockTime: ContractsBlockTime = new ContractsBlockTime();
   validate: ContractsBlockTimeValidate = new ContractsBlockTimeValidate();
   sub: Subscription = new Subscription();
@@ -44,6 +55,8 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     private defaultServicesService: DefaultServicesService,
     private tehState: TehUsersSateService,
     private modalService: NgbModal,
+    private taxesStateService: TaxesStateService,
+    private contractsStateService: ContractsStateService,
     public cd: ChangeDetectorRef) { }
 
 
@@ -61,6 +74,37 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
       this.onCheckServicesForAdd(data);
     })
     this.sub.add(getConfirm);
+    if (this.taxesStateService.getTaxes().length > 0) this.taxes = this.taxesStateService.getTaxes();
+    let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
+      this.taxes = data;
+    })
+    if (this.contractsStateService.getContractForCopy()) this.onInitCopy();
+  }
+  public onInitCopy() {
+    this.contractsBlockTime.setDataFromCopy(this.contractsStateService.getContractForCopy());
+    this.selectedInterval = this.contractsBlockTime.intervalstring;
+
+    this.startDate = this.contractsStateService.getContractForCopy().getStartDateByMilliseconds();
+    this.startDateDP.minDate = this.contractsStateService.getContractForCopy().getStartDateByMilliseconds();
+    this.reviewDate = this.contractsStateService.getContractForCopy().getReviewDateByMilliseconds();
+    this.reviewDateDP.minDate = this.contractsStateService.getContractForCopy().getReviewDateByMilliseconds();
+    this.startDateDP.setEditDate(this.contractsStateService.getContractForCopy().getStartDateByMilliseconds());
+    this.reviewDateDP.setEditDate(this.contractsStateService.getContractForCopy().getReviewDateByMilliseconds());
+    this.topContract.companiesDP.selectedItem = this.companiesStateService.getCompanies().find(item => item.id === this.contractsBlockTime.companyId);
+    this.taxesDP.setEditItems(this.taxes.filter(item => {
+      let find = this.contractsBlockTime.taxIds.find(taxId => taxId === item.id);
+      return (find) ? true : false;
+    }))
+    if (this.contractsBlockTime.services.length > 0) this.toggleContractServices = true;
+    if (this.contractsBlockTime.maxRolloverHours) this.toggleTimeRollover = true;
+    if (this.contractsBlockTime.shares.length > 0) {
+      this.selectedUsers = this.usersStateService.getAllUsers().filter(item => {
+        let find = this.contractsBlockTime.shares.find(user => user.userId === item.id);
+        return (find) ? true : false;
+      })
+      this.toggleNotifyAgentsUser = true;
+    } 
+    console.log("contractsBlockTime",this.contractsBlockTime);
   }
   selectAllUsers() {
     this.tehState.setUsersFromtEdit(JSON.parse(JSON.stringify(this.userList)));
@@ -97,7 +141,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
 
         if (Object.keys(data).length === 0) {
 
-          this.contractsService.createContract(createBillableItem,this.contractsBlockTime.getDataForCreate()).subscribe(res => {
+          this.contractsService.createContract(createBillableItem, this.contractsBlockTime.getDataForCreate()).subscribe(res => {
             this.onClose.emit(null);
           })
 
@@ -225,7 +269,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     if (!this.validate.isValidate(this.contractsBlockTime)) return;
     const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal' });
     modalRef.componentInstance.message = `Do we need to create the billable item now?`;
-    console.log("modalRef",modalRef);
+    console.log("modalRef", modalRef);
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();
