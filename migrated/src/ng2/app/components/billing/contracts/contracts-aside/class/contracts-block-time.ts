@@ -36,19 +36,20 @@ export class ContractsBlockTime {
         this.endDate= data.endDate;
         
         this.includedHours= String(data.includedHours);
-        this.maxRolloverHours= data.maxRolloverHours;
+        this.maxRolloverHours=  (data.maxRolloverHours) ? String(data.maxRolloverHours) : null;
         if (data.interval) {
             this.intervalstring = data.interval;
           } else {
             this.intervalstring = (data.customInterval === 30) ? '30 days' : (data.customInterval === 15) ? '15 days' : '7 days';
           }
         this.rateExceeding = Number(data.rateExceeding).toFixed(2);
-        this.services = data.services.map(item => new ContractsBlockTimeDefaultService(item.basedOnDefault, item.billable, item.commissionRate, item.id, item.name, item.rate, item.taxIds));
+        this.services = data.services.map(item => new ContractsBlockTimeDefaultService(item.basedOnDefault, item.billable, (item.commissionRate) ? item.commissionRate : 0, item.id, item.name, item.rate, item.taxIds));
         this.shares = data.shares.map(item => new СontractsBlockTimeShare(item.userId));
         this.startDate= data.startDate;
         this.taxIds = data.taxIds;
         
         this.reviewDate= data.reviewDate;
+        this.calculateEndDate();
     }
     public setShares(data) {
         this.shares = data;
@@ -72,6 +73,7 @@ export class ContractsBlockTime {
         return sum;
     };
     public getDataForCreate() {
+        
         return {
             blockRate: Number(this.blockRate),
             blockTimeServices: this.blockTimeServices.map(item => item.getDataForCreate()),
