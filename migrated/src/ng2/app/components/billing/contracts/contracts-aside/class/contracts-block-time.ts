@@ -25,30 +25,30 @@ export class ContractsBlockTime {
     type: string = "BLOCK_TIME";
     reviewDate: string;
     constructor() { }
-    public setDataFromCopy(data:ServiceAgreement) {
+    public setDataFromCopy(data: ServiceAgreement) {
         this.billType = data.billType;
-        this.blockRate= Number(data.blockRate).toFixed(2);
-        this.blockTimeServices = data.blockTimeServices.map(item => new ContractsBlockTimeService(item.name,item.rate));
-        this.companyId= data.companyId;
-        this.customInterval= data.customInterval;
-        this.description= data.description;
-        this.enableTimeRollover= data.enableTimeRollover;
-        this.endDate= data.endDate;
-        
-        this.includedHours= String(data.includedHours);
-        this.maxRolloverHours=  (data.maxRolloverHours) ? String(data.maxRolloverHours) : null;
+        this.blockRate = Number(data.blockRate).toFixed(2);
+        this.blockTimeServices = data.blockTimeServices.map(item => new ContractsBlockTimeService(item.name, item.rate));
+        this.companyId = data.companyId;
+        this.customInterval = data.customInterval;
+        this.description = data.description;
+        this.enableTimeRollover = data.enableTimeRollover;
+        this.endDate = data.endDate;
+
+        this.includedHours = String(data.includedHours);
+        this.maxRolloverHours = (data.maxRolloverHours) ? String(data.maxRolloverHours) : null;
         if (data.interval) {
             this.intervalstring = data.interval;
-          } else {
+        } else {
             this.intervalstring = (data.customInterval === 30) ? '30 days' : (data.customInterval === 15) ? '15 days' : '7 days';
-          }
+        }
         this.rateExceeding = Number(data.rateExceeding).toFixed(2);
         this.services = data.services.map(item => new ContractsBlockTimeDefaultService(item.basedOnDefault, item.billable, (item.commissionRate) ? item.commissionRate : 0, item.id, item.name, item.rate, item.taxIds));
         this.shares = data.shares.map(item => new СontractsBlockTimeShare(item.userId));
-        this.startDate= data.startDate;
+        this.startDate = data.startDate;
         this.taxIds = data.taxIds;
-        
-        this.reviewDate= data.reviewDate;
+
+        this.reviewDate = data.reviewDate;
         this.calculateEndDate();
     }
     public setShares(data) {
@@ -73,7 +73,7 @@ export class ContractsBlockTime {
         return sum;
     };
     public getDataForCreate() {
-        
+
         return {
             blockRate: Number(this.blockRate),
             blockTimeServices: this.blockTimeServices.map(item => item.getDataForCreate()),

@@ -10,6 +10,7 @@ import { ContractsService } from 'src/ng2/app/services/contracts/contracts.servi
 import * as moment from "moment";
 import { DefaultServicesService } from 'src/ng2/app/services/default-services/default-services.service';
 import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-state.service';
+import { ContractsBlockTimeDefaultService } from '../../contracts-aside/class/contracts-block-time-default-service';
 @Component({
   selector: 'app-contracts-aside-hourly-edit',
   templateUrl: './contracts-aside-hourly-edit.component.html',
@@ -71,7 +72,7 @@ export class ContractsAsideHourlyEditComponent implements OnInit {
   }
   onAddService(data: DefaultServicesHourlyContract) {
     console.log("data", data);
-    this.contractsHourly.services.push(new ContractsHourlyService(true, data.billable, data.commissionRate, data.versionedId.id, data.name, data.rate, data.taxes.map(item => item.id)));
+    this.contractsHourly.services.push(new ContractsBlockTimeDefaultService(true, data.billable, data.commissionRate, data.versionedId.id, data.name, data.rate, data.taxes.map(item => item.id)));
     this.showAddService = false;
     console.log("this.contractsHourly.services", this.contractsHourly.services);
   }

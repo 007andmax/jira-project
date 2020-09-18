@@ -11,8 +11,8 @@
 
   </div>
 
-   <app-contracts-aside-hourly-edit #hourlyContract [contractsHourly]="serviceAgreement" (onClose)="closed()"></app-contracts-aside-hourly-edit> 
-   
+   <app-contracts-aside-hourly-edit *ngIf="serviceAgreement.type === 'HOURLY'" #hourlyContract [contractsHourly]="serviceAgreement" (onClose)="closed()"></app-contracts-aside-hourly-edit> 
+   <app-contracts-aside-block-time-edit *ngIf="serviceAgreement.type === 'BLOCK_TIME'" #blockTimeContract [contractsBlockTime]="serviceAgreement" (onClose)="closed()"></app-contracts-aside-block-time-edit>
   <div class="aside-footer qt-pr-30 qt-pl-30 qt-pb-16 qt-pt-16 qt-df qt-ai-c qt-jc-sb">
     <div class="qt-df">
       <button class="qt-button qt-mr-12"   (click)="edit()">Edit</button>
