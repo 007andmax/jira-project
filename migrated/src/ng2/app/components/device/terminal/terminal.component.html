@@ -143,7 +143,7 @@
                       <a
                         href="javascript:;"
                         class="copy"
-                        datadata-tooltip="Copy to terminal"
+                        data-tooltip="Copy to terminal"
                         (click)="copyToTerminal(cmd.command);"
                         >Copy to terminal</a
                       >
@@ -209,11 +209,12 @@
                       <span class="date">{{history[0] | date : DateTimeHistoryFormat}}</span>
                     </div>
                   </div>
-                  <div class="cmd-details">
-                    <h5>ipconfig / all</h5>
-                    <span
+                  <div class="cmd-details" *ngFor="let sub of history">
+                    <!-- <h5>ipconfig / all</h5> -->
+                    <!-- <span
                       >Window IP Configuration Ethernet adapter Local Area
-                      Connection 2:</span
+                      Connection 2:</span -->
+                      <span>{{sub}}</span>
                     >
                   </div>
                 </li>

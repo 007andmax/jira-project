@@ -247,6 +247,10 @@ main {
                                     .btn {
                                         min-width: inherit;
                                         padding: 13px 16px;
+                                        &.btn-secondary {
+                                            border: solid 1px #c5cdd5;
+                                            background-color: #ffffff !important;
+                                        }
                                     }
                                 }
                             }

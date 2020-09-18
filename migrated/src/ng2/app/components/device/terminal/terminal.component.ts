@@ -20,6 +20,7 @@ export class TerminalComponent implements OnInit {
   closeResult = '';
   submitted = false;
   loading = false;
+  his = '';
   @ViewChild('commandFrm') form: any;
   commandModal = {
     title: '',
@@ -124,6 +125,7 @@ export class TerminalComponent implements OnInit {
     .pipe(first())
     .subscribe(data => {
       let obj = data[localStorage.getItem('agentId')]
+      this.his = obj;
       let arr = obj.split(/\r*\n/);
       let index = 0;
       let arr1 = [];
