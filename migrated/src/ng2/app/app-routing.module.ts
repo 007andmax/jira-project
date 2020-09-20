@@ -59,7 +59,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'ng2/company-dashboard',
+    path: 'ng2/company-dashboard/:id',
     component: CompanyDashboardComponent,
     pathMatch: 'full'
   },

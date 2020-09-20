@@ -115,7 +115,7 @@ export class CompaniesTableComponent implements OnInit, OnDestroy {
     var link = document.createElement('a');
     body.appendChild(link);
     // link.href = `#/clients/companyProfile/${this.company.id}?tabName=dashboard`;
-    link.href = '#/ng2/company-dashboard'
+    link.href = `#/ng2/company-dashboard/${this.company.id}`
     var e = document.createEvent('MouseEvents');
     e.initEvent('click', true, true);
     link.dispatchEvent(e);

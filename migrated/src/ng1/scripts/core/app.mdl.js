@@ -105,7 +105,7 @@
           template: '<company-tickets></company-tickets>'
         }))
         .state('company-dashboard', waitForServices({
-          url: '/ng2/company-dashboard',
+          url: '/ng2/company-dashboard/:companyId',
           template: '<company-dashboard></company-dashboard>'
         }))
         .state('inventory', waitForServices({
