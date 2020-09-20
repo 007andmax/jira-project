@@ -1,50 +1,48 @@
-<div class="qt-w100 qt-mb-16">
-  <div class="qt-input-block" [ngClass]="{'--input-error':!validate.getName()}">
-      <app-drop-down
+<div class="qt-df qt-pos-rel">
+
+
+  <div class="contract-aside-hourly-add-service__name">
+    <app-drop-down
       #serviceDropDown
-    [placeholder]="'Service Name'"
-    [list]="defaultServices"
-    [field]="'name'"
-    [change]="true"
-    [search]="true"
-    (onSelectedItem)="selectService($event)"
-  ></app-drop-down>
-    <mat-error class="qt-tooltip-error" *ngIf="!validate.getValidate() || !validate.getDuplicateName()">
-      Duplicate Service
-    </mat-error>
-    <mat-error class="qt-tooltip-error" *ngIf="!validate.getName()">
-      Service name is required
-    </mat-error>
-  </div>
-</div>
-<div class="qt-df">
-  <div class="qt-df qt-ai-c qt-w50 qt-mb-16">
-    <div class="qt-input-block qt-w50 qt-mr-16" [ngClass]="{'--input-error':!validate.getRate()}">
-      <input   [(ngModel)]="service.rate" type="text" number placeholder="Per Hour Rate"
-      [money]="true"
-       (input)="onChangeRate($event)" appToFixed>
-       <mat-error class="qt-tooltip-error" *ngIf="!validate.getRate()">
-        Hour rate is required
+      [placeholder]="'Service Name'"
+      [list]="defaultServices"
+      [field]="'name'"
+      [change]="true"
+      [search]="true"
+      (onSelectedItem)="selectService($event)"
+    ></app-drop-down>
+      <mat-error class="qt-tooltip-error" *ngIf="!validate.getValidate() || !validate.getDuplicateName()">
+        Duplicate Service
       </mat-error>
+      <mat-error class="qt-tooltip-error" *ngIf="!validate.getName()">
+        Service name is required
+      </mat-error>
+  </div>
+
+  <div class="contract-aside-hourly-add-service__billable">
+    <label class="qt-checkbox receive-full-amount-check qt-mb-0 pointer" for="email-payment">
+      <input id="email-payment" type="checkbox"  [(ngModel)]="service.billable"  >
+      <span></span>
+    </label>
+  </div>
+
+  <div class="contract-aside-hourly-add-service__tax ">
+    <div class="create-product-taxes-select">
+      <app-invoice-form-ticket-edit-taxes class="qt-taxes-multiselect" #taxes [selectedTax]="defaultSelectedTax" (taxesChange)="onTaxesChange($event)"></app-invoice-form-ticket-edit-taxes>
     </div>
-
-    <div class="qt-w50 qt-mr-16">
-      <div class="create-product-taxes-select">
-        <app-invoice-form-ticket-edit-taxes class="qt-taxes-multiselect" #taxes [selectedTax]="defaultSelectedTax" (taxesChange)="onTaxesChange($event)"></app-invoice-form-ticket-edit-taxes>
-      </div>
-    </div>
-
-    <button appDisabledBtn #addBtn="disabled" class="qt-button qt-mr-16" (onClick)="searchDuplicatedServiceNames()">Add</button>
-    <div class="icon__close qt-sz-24 qt-pointer qt-ic-c" (click)="closed()"></div>
-
   </div>
 
 
+  <div class="qt-input-block contract-aside-hourly-add-service__rate" [ngClass]="{'--input-error':!validate.getRate()}">
+    <input   [(ngModel)]="service.rate" type="text" number placeholder="Per Hour Rate"
+    [money]="true"
+    (input)="onChangeRate($event)" appToFixed>
+    <mat-error class="qt-tooltip-error" *ngIf="!validate.getRate()">
+      Hour rate is required
+    </mat-error>
+  </div>
 
-</div>
-<div class="qt-df qt-ai-c qt-mb-10">
-  <label class="qt-checkbox receive-full-amount-check qt-mb-0 pointer" for="email-payment">
-    <input id="email-payment" type="checkbox"  [(ngModel)]="service.billable"  >
-    <span></span>
-  </label>
+
+    <div class="icon__close contract-aside-hourly-add-service__add qt-sz-16 qt-pointer qt-ic-c" (onClick)="searchDuplicatedServiceNames()"></div>
+    <div class="icon__close contract-aside-hourly-add-service__cancel qt-sz-16 qt-pointer qt-ic-c" (click)="closed()"></div>
 </div>
