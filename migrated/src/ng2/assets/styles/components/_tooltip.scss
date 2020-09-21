@@ -37,8 +37,13 @@ ngb-tooltip-window {
     padding: .25rem .5rem;
     color: #fff;
     text-align: center;
-    background-color: #000;
+    background-color:  #4f5f79;
     border-radius: .25rem;
+
+    div {
+      white-space: normal;
+      text-align: left;
+    }
   }
 
   // arrow
@@ -70,7 +75,7 @@ ngb-tooltip-window {
     &::before {
       top: 0;
       border-width: .4rem .4rem 0;
-      border-top-color: #000;
+      border-top-color:  #4f5f79;
     }
   }
   &.bs-tooltip-bottom .arrow {
@@ -78,7 +83,7 @@ ngb-tooltip-window {
     &::before {
       bottom: 0;
       border-width: 0 .4rem .4rem;
-      border-bottom-color: #000;
+      border-bottom-color:  #4f5f79;
     }
   }
   &.bs-tooltip-left .arrow {
@@ -88,7 +93,7 @@ ngb-tooltip-window {
     &::before {
       left: 0;
       border-width: .4rem 0 .4rem .4rem;
-      border-left-color: #000;
+      border-left-color:  #4f5f79;
     }
   }
   &.bs-tooltip-right .arrow {
@@ -98,7 +103,7 @@ ngb-tooltip-window {
     &::before {
       right: 0;
       border-width: .4rem .4rem .4rem 0;
-      border-right-color: #000;
+      border-right-color:  #4f5f79;
     }
   }
 }

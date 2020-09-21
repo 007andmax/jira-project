@@ -39,8 +39,8 @@
             [dropdownHeight]="'180px'"
             [editItem]="selectedInterval"
             [list]="intervals"
-            
-            [isDisabled]="true" 
+
+            [isDisabled]="true"
       ></app-drop-down>
 
       </div>
@@ -60,8 +60,8 @@
     <div>
       <div class="qt-input-block --required qt-w100">
         <label>Description</label>
-        <input   placeholder="Write contract description" type="text" [(ngModel)]="contractsBlockTime.description"  readonly>
-       
+        <input placeholder="Write contract description" disabled type="text" [(ngModel)]="contractsBlockTime.description"  readonly>
+
       </div>
     </div>
 
@@ -76,39 +76,39 @@
     <div class="qt-df qt-mb-24">
       <div class="qt-input-block --required qt-w25 qt-mr-16">
         <label>Included block time</label>
-        <input class="payment-input qt-input-in-table" 
+        <input class="payment-input qt-input-in-table"
         [(ngModel)]="contractsBlockTime.includedHours"
         readonly
           />
-           
+
       </div>
 
       <div class="qt-input-block --required qt-w25 qt-mr-16">
         <label>Block Rate</label>
         <div class="qt-df">
           <div class="qt-input-prefix">$</div>
-          <input class="qt-input-prepend" 
+          <input class="qt-input-prepend"
           [value]="parseWithFixed(contractsBlockTime.blockRate)"
           readonly
             />
-            
+
         </div>
       </div>
 
       <div class="qt-input-block --required qt-w25 qt-mr-16">
         <label>Rate exceeding block time</label>
         <div class="qt-df">
-          <div class="qt-input-prefix">$</div>  <input class="qt-input-prepend" 
+          <div class="qt-input-prefix">$</div>  <input class="qt-input-prepend"
           [value]="parseWithFixed(contractsBlockTime.rateExceeding)"
           readonly
           />
-          
+
         </div>
       </div>
 
       <div class="qt-input-block qt-w25 qt-mr-16">
         <label>Select taxes</label>
-        <input class="qt-input-prepend" 
+        <input class="qt-input-prepend"
         [value]="getSelectedTaxes(contractsBlockTime.taxIds)"
         readonly
         />
@@ -135,21 +135,21 @@
            >
            <tr>
             <td class="contracts-aside-block-time-tabble-td">
-             
-             
+
+
               <input type="text" class="qt-input-in-table"   [(ngModel)]="item.name" readonly /></td>
             <td>
-             
+
             </td>
           </tr>
-          
+
           </ng-template>
 
         </tbody>
       </table>
     </div>
 
-   
+
 
   </div>
 
@@ -184,7 +184,7 @@
            <tr>
             <td class="track-and-bill-table__service-name">
           {{service.name}}
-             
+
             </td>
             <td class="track-and-bill-table__billable">
               <label class="qt-checkbox">
@@ -192,16 +192,16 @@
                 <span></span>
               </label>
             </td>
-            <td class="track-and-bill-table__tax --editable">  <input class="qt-input-prepend" 
+            <td class="track-and-bill-table__tax --editable">  <input class="qt-input-prepend"
               [hidden]="!service.billable"
               [value]="getSelectedTaxes(service.taxIds)"
               readonly
               />
               </td>
-            <td class="track-and-bill-table__hourly-rate --editable"><input *ngIf="service.billable" class="payment-input qt-input-in-table"  
+            <td class="track-and-bill-table__hourly-rate --editable"><input *ngIf="service.billable" class="payment-input qt-input-in-table"
               [value]="parseWithFixed(service.rate)" readonly/></td>
             <td>
-              
+
             </td>
           </tr>
 
@@ -212,7 +212,7 @@
       </table>
     </div>
 
-   
+
     <hr class="qt-horisontal-line qt-mb-16 qt-mt-16">
 
     <div class="qt-df qt-jc-sb qt-ai-c">
@@ -254,14 +254,14 @@
               <div class="assigne-user-avatar" [textContent]="getAssignedUserNameForAvatar(getUser(user.userId))"
                 [ngStyle]="{'background': getStyleAvatar(getUser(user.userId)),'background-size': 'cover'}"></div>
               <div class="assigne-user-name" [textContent]="getUserName(getUser(user.userId))"></div>
-      
-              
+
+
             </div>
-      
+
           </mat-chip>
         </mat-chip-list>
       </div>
-      
+
     <hr class="qt-horisontal-line qt-mb-16 qt-mt-16">
 
     <div class="qt-df qt-jc-fe">
