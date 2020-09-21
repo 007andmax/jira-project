@@ -18,6 +18,7 @@ import { BillableRealTimeService } from '../../states/billable/billable-real-tim
 import { InvoiceRealTimeService } from '../../states/invoice/invoice-real-time.service';
 import { PaymentsRealTimeService } from '../../states/payments/payments-real-time.service';
 import { DefaultServicesRealTimeService } from '../../states/default-services/default-services-real-time.service';
+import { ContractsRealTimeService } from '../../states/contracts/contracts-real-time.service';
 
 /**
  * Websocket service to work with api
@@ -52,10 +53,10 @@ export class WebsocketService {
     private inventoryRealTimeService: InventoryRealTimeService,
     private ticketsRealTimeService: TicketsRealTimeService,
     private paymentsRealTimeService: PaymentsRealTimeService,
-    private billableRealTimeService:BillableRealTimeService,
-    private invoiceRealTimeService:InvoiceRealTimeService,
-    private defaultServicesRealTimeService:DefaultServicesRealTimeService,
-
+    private billableRealTimeService: BillableRealTimeService,
+    private invoiceRealTimeService: InvoiceRealTimeService,
+    private defaultServicesRealTimeService: DefaultServicesRealTimeService,
+    private contractsRealTimeService: ContractsRealTimeService
 
   ) {
   }
@@ -85,6 +86,7 @@ export class WebsocketService {
       that.subsribeToSubmittedTicket();
       that.subsribeToPayments();
       that.subsribeToSubmittedService();
+      that.subsribeToSubmittedServiceAgreement();
     });
   }
   private subsribeToDevices() {
@@ -360,6 +362,16 @@ export class WebsocketService {
       this.stompClient.subscribe(`/user/watch/service`, (message) => {
         var newChange = JSON.parse(message.body);
         this.defaultServicesRealTimeService.handleRealTimeChanges(newChange);
+      });
+
+    }, 3000);
+  }
+
+  public subsribeToSubmittedServiceAgreement() {
+    setTimeout(() => {
+      this.stompClient.subscribe(`/user/watch/serviceAgreement`, (message) => {
+        var newChange = JSON.parse(message.body);
+        this.contractsRealTimeService.handleRealTimeChanges(newChange);
       });
 
     }, 3000);

@@ -7,21 +7,23 @@ import { CompaniesStateService } from 'src/ng2/app/states/company/companies-stat
 import { ConfirmStateService } from '../../../shared/confirm/services/confirm-state.service';
 import { REMOVE_CONTRACT } from 'src/ng2/app/const/confirm';
 import { Subscription } from 'rxjs';
+import { ContractsRealTimeService } from 'src/ng2/app/states/contracts/contracts-real-time.service';
 
 @Component({
   selector: 'app-contracts-table',
   templateUrl: './contracts-table.component.html',
   styleUrls: ['./contracts-table.component.scss']
 })
-export class ContractsTableComponent implements OnInit,OnDestroy {
+export class ContractsTableComponent implements OnInit, OnDestroy {
   filter: ContractsFilter = new ContractsFilter();
   list: Array<ContractItem> = [];
   reqList: Array<ContractItem> = [];
-  sub:Subscription = new Subscription();
+  sub: Subscription = new Subscription();
   constructor(private contractsService: ContractsService,
     private contractsStateService: ContractsStateService,
     private companiesStateService: CompaniesStateService,
     private confirmStateService: ConfirmStateService,
+    private contractsRealTimeService: ContractsRealTimeService,
     public cd: ChangeDetectorRef,) { }
 
 
@@ -56,6 +58,28 @@ export class ContractsTableComponent implements OnInit,OnDestroy {
       }
     })
     this.sub.add(getConfirm);
+    this.contractsRealTimeService.changeContractsArray.subscribe(data => {
+      if (data.action === 'SERVICE_AGREEMENT_SAVED') {
+        let findIndexReq = this.reqList.findIndex(item => item.id === data.data.id);
+        let findIndex = this.list.findIndex(item => item.id === data.data.id);
+        if (findIndexReq > -1) {
+          this.reqList[findIndexReq] = new ContractItem(data.data);
+        } else {
+          this.reqList.push(new ContractItem(data.data));
+        }
+        if (findIndex > -1) {
+          this.list[findIndex] = new ContractItem(data.data);
+        } else {
+          if (this.filter.checkFilterItem(data.data)) this.list.push(new ContractItem(data.data));
+        }
+
+      } else if (data.action === 'SERVICE_AGREEMENT_DELETED') {
+        let findIndexReq = this.reqList.findIndex(item => item.id === data.data.id);
+        let findIndex = this.list.findIndex(item => item.id === data.data.id);
+        if (findIndexReq > -1) this.reqList.splice(findIndexReq,1);
+        if (findIndex > -1) this.list.splice(findIndex,1);
+      }
+    })
   }
   getServiceAgreements(companies) {
     this.contractsService.getServiceAgreements().subscribe(data => {
