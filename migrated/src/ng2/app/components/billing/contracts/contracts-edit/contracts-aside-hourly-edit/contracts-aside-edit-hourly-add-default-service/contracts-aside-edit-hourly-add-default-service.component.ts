@@ -78,7 +78,12 @@ export class ContractsAsideEditHourlyAddDefaultServiceComponent implements OnIni
     this.taxesStateService.setTaxesFromtEdit(taxes);
   }
   public searchDuplicatedServiceNames() {
+    console.log("searchDuplicatedServiceNames");
     this.service.name = this.serviceDropDown.getInputText();
+    if (this.service.name.length === 0)  {
+      this.validate.setName(false);
+      return;
+    }
     let find = this.defaultServices.find(item => item.name === this.service.name);
     if (find) this.service.versionedId = find.versionedId;
     this.validate.resetDuplicateName();

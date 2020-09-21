@@ -26,6 +26,7 @@ export class DefaultServiceValidate {
         this.duplicateName = true;
     }
 
+
     public resetName () {
         this.name = true;
     }

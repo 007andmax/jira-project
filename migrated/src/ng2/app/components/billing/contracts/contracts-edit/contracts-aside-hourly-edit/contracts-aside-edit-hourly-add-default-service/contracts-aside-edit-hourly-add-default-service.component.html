@@ -43,6 +43,6 @@
   </div>
 
 
-    <div class="icon__close contract-aside-hourly-add-service__add qt-sz-16 qt-pointer qt-ic-c" (onClick)="searchDuplicatedServiceNames()"></div>
+    <div class="icon__close contract-aside-hourly-add-service__add qt-sz-16 qt-pointer qt-ic-c" appDisabledBtn #addBtn="disabled" (onClick)="searchDuplicatedServiceNames()"   ></div>
     <div class="icon__close contract-aside-hourly-add-service__cancel qt-sz-16 qt-pointer qt-ic-c" (click)="closed()"></div>
 </div>

@@ -3,6 +3,9 @@ import { DefaultServiceValidate } from '../../../../default-services/class/defau
 export class ContractsHourlyAddDefaultServiceValidate extends DefaultServiceValidate {
     validate:boolean = true;
 
+    public setName(data) {
+        this.name = data;
+    }
     public resetValidate() {
         this.validate = true;
     }

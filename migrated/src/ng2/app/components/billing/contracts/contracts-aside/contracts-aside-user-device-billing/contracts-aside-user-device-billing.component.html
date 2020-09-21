@@ -1,7 +1,7 @@
 <div class="contracts-page-scroll-content">
   <div class="qt-pr-32 qt-pl-32 qt-pb-24 qt-pt-16">
 
-    <app-contracts-aside-top [selectedType]="selectedType" ></app-contracts-aside-top>
+    <app-contracts-aside-top #topContract (onSelectCompany)="onSelectCompany($event)" [selectedType]="selectedType" ></app-contracts-aside-top>
 
 
     <div class="qt-pl-12 qt-pr-12 qt-df qt-ai-c contract-tipe-info qt-mb-16">
@@ -12,29 +12,44 @@
     <div class="qt-df qt-mb-16">
       <div class="qt-input-block --required qt-w25 qt-mr-16">
         <label>Start Date</label>
-        <input value="22 Apr 2020" type="text">
+        <app-date-picker #startDateDP [formatDate]="formatDate" [editMode]="true" [editDate]="startDate" [useMinDate]="false"  (onChange)="onChangeStartDate($event)"></app-date-picker>
+
       </div>
 
       <div class="qt-input-block --required qt-w25 qt-mr-16">
-        <label>Interval</label>
-        <input value="Monthly" type="text">
+      
+        <app-drop-down
+            [title]="'Interval'"
+            [sort]="false"
+            [placeholder]="'Interval'"
+            [dropdownHeight]="'180px'"
+            [editItem]="selectedInterval"
+            [list]="intervals"
+            [isBlockClear]="true"
+            (onSelectedItem)="onSelectInterval($event)"
+      ></app-drop-down>
       </div>
 
-      <div class="qt-input-block qt-w25 qt-mr-16">
+     <!-- <div class="qt-input-block qt-w25 qt-mr-16">
         <label>Num.of Intervals</label>
-        <input value="1" type="text">
-      </div>
+        <app-date-picker #reviewDateDP [formatDate]="formatDate" [editMode]="true" [editDate]="reviewDate" [useMinDate]="false"  (onChange)="onChangeReviewDate($event)"></app-date-picker>
 
+      </div>
+-->
       <div class="qt-input-block qt-w25">
         <label>Review Date</label>
-        <input value="29 Apr 2020" type="text">
+        <app-date-picker #reviewDateDP [formatDate]="formatDate" [editMode]="true"[editDate]="reviewDate"  [useMinDate]="false"   (onChange)="onChangeReviewDate($event)"></app-date-picker>
+
       </div>
     </div>
 
     <div>
       <div class="qt-input-block --required qt-w100">
         <label>Description</label>
-        <input placeholder="Write contract description" type="text">
+        <input [ngClass]="{'--input-error' : !validate.getDescription()}" placeholder="Write contract description" type="text" [(ngModel)]="contractsUserDevice.description" (input)="validate.resetDescription()">
+        <mat-error class="qt-tooltip-error" *ngIf="!validate.getDescription()">
+          Description is required
+        </mat-error>
       </div>
     </div>
 
