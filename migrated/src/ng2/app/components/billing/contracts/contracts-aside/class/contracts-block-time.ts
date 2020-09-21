@@ -80,7 +80,7 @@ export class ContractsBlockTime {
             companyId: this.companyId,
             customInterval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? null : (this.intervalstring === '30 days') ? 30 : (this.intervalstring === '15 days') ? 15 : 7,
             description: this.description,
-            enableTimeRollover: (this.maxRolloverHours.length > 0) ? true : false,
+            enableTimeRollover: (this.maxRolloverHours && this.maxRolloverHours.length > 0) ? true : false,
             endDate: this.endDate,
             maxRolloverHours: this.maxRolloverHours,
             includedHours: this.includedHours,

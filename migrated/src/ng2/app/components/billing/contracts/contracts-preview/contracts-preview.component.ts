@@ -34,10 +34,8 @@ export class ContractsPreviewComponent implements OnInit {
     this.contractsStateService.togglePreview(false);
   }
   edit() {
-    this.contractsService.getServiceAgreement(this.serviceAgreement.id).subscribe(data => {
       this.closed();
-      this.contractsStateService.setEdit(data);
-    })
+      this.contractsStateService.setEdit(this.serviceAgreement);
   }
   terminateAndClose() {
     this.contractsService.terminate(this.serviceAgreement.id).subscribe(data => {

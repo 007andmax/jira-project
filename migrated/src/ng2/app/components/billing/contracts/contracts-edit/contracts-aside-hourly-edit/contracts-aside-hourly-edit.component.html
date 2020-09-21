@@ -64,19 +64,21 @@
           <th class="service-table__billable">
             <div class="qt-df qt-ai-c qt-jc-fe">
               <div>Billable</div>
-              <div class="qt-sz-12 icon__question-help"></div>
+              <ng-template #billableContent>Use unchecked billable services<br>to track time spent on non <br>billable service hours.</ng-template>
+              <div class="qt-sz-12 icon__question-help" placement="top" [ngbTooltip]="billableContent"></div>
             </div>
           </th>
           <th class="service-table__tax">
             <div class="qt-df qt-ai-c qt-jc-fe">
               <div>Tax</div>
-              <div class="qt-sz-12 icon__question-help"></div>
+              <div class="qt-sz-12 icon__question-help" placement="top" ngbTooltip="Set default tax rate."></div>
             </div>
           </th>
           <th class="service-table__rate">
             <div class="qt-df qt-ai-c qt-jc-fe">
               <div>Hourly Rate</div>
-              <div class="qt-sz-12 icon__question-help"></div>
+              <ng-template #hourlyRateContent>Set custom rate that you <br>want to bill only this customer.</ng-template>
+              <div class="qt-sz-12 icon__question-help" placement="left" [ngbTooltip]="hourlyRateContent"></div>
             </div>
           </th>
         </tr>

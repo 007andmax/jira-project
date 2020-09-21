@@ -35,9 +35,7 @@ export class ContractsAsideHourlyEditComponent implements OnInit {
   ngOnInit() {
     console.log("contractsHourly", this.contractsHourly);
     this.selectedCompany = this.companiesStateService.getCompanies().find(item => item.id === this.contractsHourly.companyId);
-    this.defaultServicesService.getDefaultServices().subscribe(data => {
-      this.contractsStateService.setDefaultService(data);
-    })
+    
 
   }
   public onEdit() {

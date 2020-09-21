@@ -74,11 +74,19 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
       this.onCheckServicesForAdd(data);
     })
     this.sub.add(getConfirm);
-    if (this.taxesStateService.getTaxes().length > 0) this.taxes = this.taxesStateService.getTaxes();
+    if (this.taxesStateService.getTaxes().length > 0) {
+      this.taxes = this.taxesStateService.getTaxes();
+      this.setDefaultTaxes(this.taxesStateService.getTaxes());
+    }
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
       this.taxes = data;
+      this.setDefaultTaxes(data);
     })
     if (this.contractsStateService.getContractForCopy()) this.onInitCopy();
+  }
+  private setDefaultTaxes(lsitTaxes) {
+    let taxes = lsitTaxes.filter(item => item.isDefault === true);
+    this.taxesDP.setEditItems(taxes);
   }
   public onInitCopy() {
     this.contractsBlockTime.setDataFromCopy(this.contractsStateService.getContractForCopy());
@@ -103,8 +111,8 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
         return (find) ? true : false;
       })
       this.toggleNotifyAgentsUser = true;
-    } 
-    console.log("contractsBlockTime",this.contractsBlockTime);
+    }
+    console.log("contractsBlockTime", this.contractsBlockTime);
   }
   selectAllUsers() {
     this.tehState.setUsersFromtEdit(JSON.parse(JSON.stringify(this.userList)));

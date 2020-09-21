@@ -7,7 +7,7 @@ import { ContractsBlockTimeDefaultService } from '../contracts-aside/class/contr
 export class ServiceAgreement {
     amount: number;
     billType: any;
-    blockRate: number;
+    blockRate: string;
     blockTimeServices: Array<ServiceAgreementBlockTimeServices> = [];
     companyId: string;
     contractWithBlockTime: boolean;
@@ -24,7 +24,7 @@ export class ServiceAgreement {
     invoiceAsSingleItem: boolean;
     maxRolloverHours: any;
     productExpenses: any;
-    rateExceeding: number;
+    rateExceeding: string;
     reviewDate: string;
     serviceContractServices: any;
     serviceContractServicesToTrack: any;
@@ -73,6 +73,9 @@ export class ServiceAgreement {
                 return new ServiceAgreementBlockTimeServices(item);
             })
             this.maxRolloverHours = (data.maxRolloverHours) ? String(data.maxRolloverHours) : "";
+            this.rateExceeding = (data.rateExceeding) ? String(data.rateExceeding) : "";
+            this.blockRate = (data.blockRate) ? String(data.blockRate) : "";
+            
         }
     }
     public setReviewDate(day, month, year, timeOffset) {
