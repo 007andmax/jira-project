@@ -60,6 +60,9 @@ export class ContractsTableComponent implements OnInit, OnDestroy {
     this.sub.add(getConfirm);
     this.contractsRealTimeService.changeContractsArray.subscribe(data => {
       if (data.action === 'SERVICE_AGREEMENT_SAVED') {
+        let company = this.companiesStateService.getCompanies().find(item => item.id === data.company.id);
+        data.data.company.name = company.name;
+
         let findIndexReq = this.reqList.findIndex(item => item.id === data.data.id);
         let findIndex = this.list.findIndex(item => item.id === data.data.id);
         if (findIndexReq > -1) {
