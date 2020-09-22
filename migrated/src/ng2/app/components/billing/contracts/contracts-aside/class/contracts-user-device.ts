@@ -11,24 +11,31 @@ export class ContractsUserDevice {
     contractWithBlockTime: boolean;
     customInterval: any;
     description: string;
-    endDate:string;
+    endDate: string;
     id: string;
     includedHours: string = "";
     interval: string;
-    intervalstring:string;
+    intervalstring: string;
     invoiceAsSingleItem: boolean = false;
     productExpenses: any;
     rateExceeding: string = "";
     serviceContractServices: Array<ContractsUserDeviceService> = [];
     serviceContractServicesToTrack: Array<ContractsBlockTimeService> = [];
     serviceExpenses: any;
-    services:Array<ContractsBlockTimeDefaultService> = [];
+    services: Array<ContractsBlockTimeDefaultService> = [];
     startDate: string;
-    reviewDate:string;
+    reviewDate: string;
     taxIds: any;
     type: string = "SERVICE_CONTRACT";
     constructor() {
 
+    }
+    public calculateTotalAmount() {
+        let sum = 0;
+        this.serviceContractServices.forEach(item => {
+            sum += (item.count * item.rate);
+        })
+        return sum;
     }
     public addDefaultService(item) {
         this.services.push(new ContractsBlockTimeDefaultService(true, item.billable, item.commissionRate, item.versionedId.id, item.name, item.rate, item.taxes.map(tax => tax.id)))

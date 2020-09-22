@@ -222,18 +222,18 @@
       <div class="contract-total qt-color-dark" >
         <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
           <div>Start Date</div>
-          <div>23 Jun 2020</div>
+          <div [textContent]="parsedateForTotal(contractsUserDevice.startDate)"></div>
         </div>
         <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
-          <div>Expiry Date</div>
-          <div>23 Jun 2021</div>
+          <div>Review Date</div>
+          <div [textContent]="parsedateForTotal(contractsUserDevice.reviewDate)"></div>
         </div>
 
         <div class="contract-total__divider qt-mt-15 qt-mb-15"></div>
 
         <div class="qt-df qt-jc-sb invoice-total__total-line">
           <div class="qt-fs-13 qt-fw-b">Total</div>
-          <div class="qt-fs-16 qt-fw-b">$0.00</div>
+          <div class="qt-fs-16 qt-fw-b" [textContent]="contractsUserDevice.calculateTotalAmount() | currency"></div>
         </div>
 
       </div>

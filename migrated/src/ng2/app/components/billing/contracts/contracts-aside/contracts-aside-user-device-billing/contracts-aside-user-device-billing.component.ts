@@ -59,6 +59,9 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit {
     this.taxesDP.setEditItems(taxes);
     // this.taxesStateService.setTaxesFromtEdit(taxes);
   }
+  parsedateForTotal(date) {
+    return moment(date).format('DD MMM YYYY');
+  }
   setToggleContractServices(data) {
     this.toggleContractServices = data;
     this.contractsUserDevice.services = [];

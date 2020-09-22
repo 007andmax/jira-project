@@ -87,6 +87,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
   private setDefaultTaxes(lsitTaxes) {
     let taxes = lsitTaxes.filter(item => item.isDefault === true);
     this.taxesDP.setEditItems(taxes);
+    this.contractsBlockTime.setTaxIds(taxes.map(item => item.id));
   }
   public onInitCopy() {
     this.contractsBlockTime.setDataFromCopy(this.contractsStateService.getContractForCopy());
@@ -275,7 +276,8 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
   }
   public onCreate() {
     if (!this.validate.isValidate(this.contractsBlockTime)) return;
-    const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal' });
+    const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal',backdrop: false });
+    
     modalRef.componentInstance.message = `Do we need to create the billable item now?`;
     console.log("modalRef", modalRef);
   }

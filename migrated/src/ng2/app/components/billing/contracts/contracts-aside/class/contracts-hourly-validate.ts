@@ -2,12 +2,20 @@ import { ContractsHourly } from './contracts-hourly';
 
 export class ContractsHourlyValidate {
     description: boolean = true;
+
+    company:boolean = true;
     date: boolean = true;
     constructor() {
 
     }
+    public resetCompany() {
+        this.company = true;
+    }
     public resetDate() {
         this.date = true;
+    }
+    public getCompany() {
+        return this.company;
     }
     public getDate() {
         return this.date;
@@ -23,7 +31,7 @@ export class ContractsHourlyValidate {
     }
     public isValidate(contractsHourly) {
         if (contractsHourly.description === "") this.description = false;
-       
-        return this.description;
+        if (!contractsHourly.companyId) this.company = false;
+        return this.description && this.company;
     }
 }
