@@ -9,6 +9,7 @@ import { DeviceDetailService } from './_services/device_detail.service';
 import { first } from 'rxjs/operators';
 import { v4 as uuidv4 } from 'uuid';
 import { WebsocketService } from 'src/ng2/app/services/websocket/websocket.service';
+import { ShellStateService } from 'src/ng2/app/states/shell/shell-state.service';
 declare var $:any;
 @Component({
   selector: 'app-root',
@@ -33,7 +34,8 @@ export class DeviceComponent implements OnInit {
     private hardwareService: HardwareService,
     private deviceDetailService: DeviceDetailService, 
     private remoteControlService: RemoteControlService,
-    private socketService: WebsocketService) {}
+    private socketService: WebsocketService,
+    private shellStateService: ShellStateService) {}
   openModal(template) {
     if (this.deviceDetail.online === true) {
       this.modalService.open(template, {ariaLabelledBy: 'modal-basic-title' , centered:true}).result.then((result) => {
@@ -63,6 +65,7 @@ export class DeviceComponent implements OnInit {
   }
   
   ngOnInit(): void {
+    this.shellStateService.onInit();
     this.socketService.initializeWebSocketConnection();
     localStorage.setItem('uuid', uuidv4());
     this.deviceType = localStorage.getItem('type');

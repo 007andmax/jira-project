@@ -17,6 +17,7 @@ import { TicketsRealTimeService } from '../../states/tickets/tickets-real-time.s
 import { BillableRealTimeService } from '../../states/billable/billable-real-time.service';
 import { InvoiceRealTimeService } from '../../states/invoice/invoice-real-time.service';
 import { PaymentsRealTimeService } from '../../states/payments/payments-real-time.service';
+import { ShellRealTimeService } from '../../states/shell/shell-real-time.service';
 
 /**
  * Websocket service to work with api
@@ -52,7 +53,8 @@ export class WebsocketService {
     private ticketsRealTimeService: TicketsRealTimeService,
     private billableRealTimeService: BillableRealTimeService,
     private invoiceRealTimeService: InvoiceRealTimeService,
-    private paymentsRealTimeService: PaymentsRealTimeService
+    private paymentsRealTimeService: PaymentsRealTimeService,
+    private shellRealTimeService: ShellRealTimeService
 
   ) {
   }
@@ -301,7 +303,8 @@ export class WebsocketService {
     setTimeout(() => {
       this.stompClient.subscribe(`/user/watch/cmdShellOutput`, (message) => {
         var newChange = JSON.parse(message.body);
-        console.log("newChange", newChange);
+        // console.log("newChange", newChange);
+        this.shellRealTimeService.handleRealTimeChanges(newChange);
       });
 
     }, 3000);

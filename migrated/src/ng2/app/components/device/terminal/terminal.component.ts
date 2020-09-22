@@ -4,9 +4,12 @@ import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { isArray } from 'util';
+import { Subscription } from 'rxjs';
 import { WebsocketService } from 'src/ng2/app/services/websocket/websocket.service';
 import { CONFIGCONSTANTS } from '../config/app-constants';
 import { UserListService } from '../../users/services/user-list.service';
+import { CompaniesRealTimeService } from 'src/ng2/app/states/company/companies-real-time.service';
+import { ShellStateService } from 'src/ng2/app/states/shell/shell-state.service';
 
 @Component({
   selector: 'app-terminal',
@@ -21,6 +24,7 @@ export class TerminalComponent implements OnInit {
   submitted = false;
   loading = false;
   his = '';
+  sub: Subscription = new Subscription();
   @ViewChild('commandFrm') form: any;
   commandModal = {
     title: '',
@@ -46,6 +50,7 @@ export class TerminalComponent implements OnInit {
     default: false,
     id: ''
   };
+  editCmd = '';
   lineNumber = [1];
   lineNumberDetail = [1];
   deleteId = '';
@@ -76,14 +81,18 @@ export class TerminalComponent implements OnInit {
     private modalService: NgbModal,
     private socketService: WebsocketService,
     private userListService: UserListService,
+    private companiesRealTimeService: CompaniesRealTimeService,
+    private shellStateService: ShellStateService,
     public cd: ChangeDetectorRef,
     ) { }
 
   ngOnInit() {
+    
     // this.socketService.initializeWebSocketConnection();
     this.getCommandList();
     this.getCmdCategoryRead();
     this.getHistory();
+    // this.socketService.subsribeToCmdShellOutput();
     $('#cmd textarea').scroll(function(){
       $('#cmd_line').scrollTop($('#cmd textarea').scrollTop());
     });
@@ -124,6 +133,7 @@ export class TerminalComponent implements OnInit {
     this.terminalService.getHistory(localStorage.getItem('agentId'))
     .pipe(first())
     .subscribe(data => {
+      if (Object.keys(data).length > 0) {
       let obj = data[localStorage.getItem('agentId')]
       this.his = obj;
       let arr = obj.split(/\r*\n/);
@@ -142,6 +152,7 @@ export class TerminalComponent implements OnInit {
         }
         arr1.push(element);
       });
+    }
     },
     error => {
       const statusError = error;
@@ -484,14 +495,15 @@ export class TerminalComponent implements OnInit {
     this.terminalService.sendCommand(data)
     .pipe(first())
     .subscribe(resp => {
-      let stompClient = this.socketService.getClient().subscribe(`/user/watch/cmdShellOutput`, (message) => {
-        var newChange = JSON.parse(message.body);
-        let arr = newChange.data.output.split(/\r*\n/)
+
+      let getCmdOutput = this.shellStateService.getCmdOutput().subscribe((data) => {
+        let arr = data.data.output.split(/\r*\n/)
         let arr1 = this.splitCommand.concat(arr);
         this.splitCommand = arr1;
         this.cd.detectChanges();
-      });
-      this.userListService.addSubscription(stompClient);
+      })
+      this.sub.add(getCmdOutput);
+
     },
     error => {
       const statusError = error;

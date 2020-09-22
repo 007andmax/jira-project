@@ -20,6 +20,7 @@
               <p *ngFor="let split of splitCommand"><span>{{split}}</span></p>
               <!-- <textarea>C:\Users\Sam\Desktop></textarea> -->
             </div>
+            <textarea class="editCmd" (keyup.enter)="copyToTerminal(editCmd);editCmd = ''" [(ngModel)]="editCmd" rows="4" placeholder="> Enter a command"></textarea>
           </div>
         </div>
       </div>
