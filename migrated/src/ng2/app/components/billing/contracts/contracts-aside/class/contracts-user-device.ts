@@ -1,32 +1,49 @@
 import { ContractsBlockTimeService } from './contracts-block-time-service';
 import { ContractsUserDeviceService } from './contracts-user-device-service';
 import * as moment from "moment";
+import { ContractsBlockTimeDefaultService } from './contracts-block-time-default-service';
 
 export class ContractsUserDevice {
     billType: string;
-    blockTimeServices: any;
+    blockTimeServices: Array<ContractsBlockTimeService> = [new ContractsBlockTimeService("Managed Services Onsite", 5),
+    new ContractsBlockTimeService("Managed Services Remote", 5)];
     companyId: string;
     contractWithBlockTime: boolean;
     customInterval: any;
     description: string;
     endDate:string;
     id: string;
-    includedHours: any;
+    includedHours: string = "";
     interval: string;
     intervalstring:string;
-    invoiceAsSingleItem: boolean;
+    invoiceAsSingleItem: boolean = false;
     productExpenses: any;
-    rateExceeding: any;
+    rateExceeding: string = "";
     serviceContractServices: Array<ContractsUserDeviceService> = [];
     serviceContractServicesToTrack: Array<ContractsBlockTimeService> = [];
     serviceExpenses: any;
-    services: any;
+    services:Array<ContractsBlockTimeDefaultService> = [];
     startDate: string;
     reviewDate:string;
     taxIds: any;
     type: string = "SERVICE_CONTRACT";
     constructor() {
 
+    }
+    public addDefaultService(item) {
+        this.services.push(new ContractsBlockTimeDefaultService(true, item.billable, item.commissionRate, item.versionedId.id, item.name, item.rate, item.taxes.map(tax => tax.id)))
+    }
+    public setTaxIds(data) {
+        this.taxIds = data;
+    }
+    public getServiceContractServicesName() {
+        return this.serviceContractServices.map(item => item.name);
+    }
+    public getBlockTimeServicesName() {
+        return this.blockTimeServices.map(item => item.name);
+    }
+    public getServicesName() {
+        return this.services.map(item => item.name);
     }
     public setInterval(data) {
         this.intervalstring = data;
@@ -90,5 +107,47 @@ export class ContractsUserDevice {
             this.endDate = moment(endDate).format('YYYY/MM/DD');
 
         }
+    }
+    public checkDuplicatedServiceContractServices() {
+        this.serviceContractServices.forEach(item => {
+            item.validateDuplicated = true;
+        });
+        this.serviceContractServices.forEach((item1, i) => {
+            this.serviceContractServices.forEach((item2, u) => {
+                if (i != u && item1.name === item2.name && item1.validateDuplicated && item2.validateDuplicated) item2.validateDuplicated = false;
+            })
+        })
+        console.log("serviceContractServices", this.serviceContractServices);
+        let validateDuplicated = (this.serviceContractServices.find(item => !item.validateDuplicated)) ? false : true;
+        let validate = (this.serviceContractServices.find(item => !item.validate)) ? false : true;
+        return validateDuplicated && validate;
+    }
+    public checkDuplicatedBlockTimeServices() {
+        this.blockTimeServices.forEach(item => {
+            item.validateDuplicated = true;
+        });
+        this.blockTimeServices.forEach((item1, i) => {
+            this.blockTimeServices.forEach((item2, u) => {
+                if (i != u && item1.name === item2.name && item1.validateDuplicated && item2.validateDuplicated) item2.validateDuplicated = false;
+            })
+        })
+        console.log("blockTimeServices", this.blockTimeServices);
+        let validateDuplicated = (this.blockTimeServices.find(item => !item.validateDuplicated)) ? false : true;
+        let validate = (this.blockTimeServices.find(item => !item.validate)) ? false : true;
+        return validateDuplicated && validate;
+    }
+    public checkDuplicatedServices() {
+        this.services.forEach(item => {
+            item.validateDuplicated = true;
+        });
+        this.services.forEach((item1, i) => {
+            this.services.forEach((item2, u) => {
+                if (i != u && item1.name === item2.name && item1.validateDuplicated && item2.validateDuplicated) item2.validateDuplicated = false;
+            })
+        })
+        console.log("services", this.services);
+        let validateDuplicated = (this.services.find(item => !item.validateDuplicated)) ? false : true;
+        let validate = (this.services.find(item => !item.validate)) ? false : true;
+        return validateDuplicated && validate;
     }
 }

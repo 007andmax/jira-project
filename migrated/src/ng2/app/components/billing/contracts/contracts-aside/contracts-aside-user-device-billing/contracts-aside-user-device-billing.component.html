@@ -65,12 +65,12 @@
       <div class="qt-fs-12 qt-color-dark qt-mr-8">Service Bill Type</div>
 
       <div class="qt-radio qt-mr-16">
-        <input id="by-device" type="radio" name="radio" value="1" checked>
+        <input id="by-device" type="radio" name="radio" value="1" checked (change)="onSetServiceContractServicesType($event,'DEVICE')">
         <label for="by-device">By Device</label>
       </div>
 
       <div class="qt-radio">
-        <input id="by-users" type="radio" name="radio" value="2">
+        <input id="by-users" type="radio" name="radio" value="2" (change)="onSetServiceContractServicesType($event,'USER')">
         <label for="by-users">By users</label>
       </div>
     </div>
@@ -87,26 +87,17 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Managed workstations</td>
-            <td class="col-count">0</td>
-            <td class="col-tax">GST 5%</td>
-            <td class="col-price">$0.00</td>
-            <td><div class="icon__raw-clear qt-ic-c qt-sz-16"></div></td>
-          </tr>
-
-          <tr>
-            <td>Service workstations</td>
-            <td class="col-count">0</td>
-            <td class="col-tax">GST 5%</td>
-            <td class="col-price">$0.00</td>
-            <td><div class="icon__raw-clear qt-ic-c qt-sz-16"></div></td>
-          </tr>
+          <ng-template ngFor let-item
+          [ngForOf]="contractsUserDevice.serviceContractServices"
+          [ngForTrackBy]="trackById">
+          <app-contracts-aside-user-device-service   [service]="item" (onRemove)="onRemoveServiceContractServices(i)" (onCheckName)="onCheckDuplicatedServiceContractServices()"></app-contracts-aside-user-device-service>
+        </ng-template>
+          
         </tbody>
       </table>
     </div>
 
-    <button class="qt-mb-24 qt-btn --outline --small">+ Add Service</button>
+    <button class="qt-mb-24 qt-btn --outline --small" (click)="addServiceContractService()">+ Add Service</button>
 
     <div class="qt-fs-15 qt-ff-sb qt-lh-147 qt-color-dark qt-mb-16">
       Create service that you want to track the time for. Tracked service time counts towards contract and is not billed to customer
@@ -121,35 +112,30 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Managed Services Onsite</td>
-            <td></td>
-          </tr>
-
-          <tr>
-            <td>Managed Services Remote</td>
-            <td>
-              <div class="icon__raw-clear qt-ic-c qt-sz-16"></div>
-            </td>
-          </tr>
+          <ng-template ngFor let-item
+          [ngForOf]="contractsUserDevice.blockTimeServices"
+          let-i="index"
+           >
+          <app-contracts-aside-block-time-billing-customer-service [service]="item" (onRemove)="onRemoveBlockTimeServices(i)" (onCheckName)="onCheckDuplicatedBlockTimeServices()"></app-contracts-aside-block-time-billing-customer-service>
+          </ng-template>
         </tbody>
       </table>
     </div>
 
-    <button class="qt-btn --outline --small">+ Add Service</button>
+    <button class="qt-btn --outline --small" (click)="addBlockTimeService()">+ Add Service</button>
 
   </div>
 
   <div class="qt-pt-16 qt-pl-32 qt-pr-32 qt-pb-32">
     <div class="qt-df qt-mb-16">
-      <div class="qt-toggle --on qt-mr-8">
+      <div class="qt-toggle qt-mr-8" [ngClass]="{'--on':toggleContractServices}" (click)="setToggleContractServices(!toggleContractServices)">
         <div class="qt-toggle__circle"></div>
       </div>
 
       <div class="qt-fs-13 qt-ff-gm qt-lh-154 qt-color-dark-light">Track and bill services outside of included block time services</div>
     </div>
 
-    <div class="table-last-icon-wrapper qt-mb-16">
+    <div class="table-last-icon-wrapper qt-mb-16" *ngIf="toggleContractServices">
       <table class="qt-gray-table --last-icon">
         <thead>
           <tr>
@@ -158,49 +144,61 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Managed Services Onsite</td>
-            <td></td>
-          </tr>
-
-          <tr>
-            <td>Managed Services Remote</td>
-            <td>
-              <div class="icon__raw-clear qt-ic-c qt-sz-16"></div>
-            </td>
-          </tr>
+          <ng-template ngFor let-item
+          [ngForOf]="contractsUserDevice.services"
+          let-i="index"
+           >
+          <app-contracts-aside-block-time-billing-customer-service [service]="item" (onRemove)="onRemoveServices(i)" (onCheckName)="onCheckDuplicatedServices()"></app-contracts-aside-block-time-billing-customer-service>
+          </ng-template>
         </tbody>
       </table>
     </div>
 
-    <button class="qt-btn --outline --small">+ Add Service</button>
+    <app-contracts-aside-block-time-billing-add-default-service *ngIf="toggleContractServices" (onSelect)="onAddDefaultService($event)"></app-contracts-aside-block-time-billing-add-default-service>
 
     <hr class="qt-horisontal-line qt-mb-16 qt-mt-16">
 
     <div class="qt-df qt-mb-24">
-      <div class="qt-toggle --on qt-mr-8">
+      <div class="qt-toggle qt-mr-8" [ngClass]="{'--on':toggleMaximumAmountHours}" (click)="setToggleMaximumAmountHours(!toggleMaximumAmountHours)">
         <div class="qt-toggle__circle"></div>
       </div>
 
       <div class="qt-fs-13 qt-ff-gm qt-lh-154 qt-color-dark-light">Set maximum amount of hours</div>
     </div>
 
-    <div class="qt-df qt-mb-16">
+    <div class="qt-df qt-mb-16" [hidden]="!toggleMaximumAmountHours">
       <div class="qt-input-block --required qt-w25 qt-mr-16">
         <label>Included block time</label>
-          <input value="1" type="text">
+          <input  [ngClass]="{'--input-error' : !validate.getIncludedHours()}"  decimalNumber
+          placeholder="1"
+          (input)="validate.resetIncludedHours()"
+          [value]="contractsUserDevice.includedHours"
+          (onChange)="contractsUserDevice.includedHours=$event">
+          <mat-error class="qt-tooltip-error" *ngIf="!validate.getIncludedHours()">
+            Field is required
+          </mat-error>
       </div>
 
       <div class="qt-input-block --required qt-w25 qt-mr-16">
         <label>Rate exceding block time</label>
         <div class="qt-df">
-          <div class="qt-input-prefix">$</div><input class="qt-input-prepend" value="0.00" type="text">
+          <div class="qt-input-prefix">$</div><input class="qt-input-prepend"  
+           [ngClass]="{'--input-error' : !validate.getRateExceeding()}"  decimalNumber
+          [useFixed]="true"
+          placeholder="0.00"
+          [value]="contractsUserDevice.rateExceeding"
+          (input)="validate.resetRateExceeding()"
+          (onChange)="contractsUserDevice.rateExceeding=$event">
+          <mat-error class="qt-tooltip-error" *ngIf="!validate.getRateExceeding()">
+            Field is required
+          </mat-error>
         </div>
       </div>
 
       <div class="qt-input-block qt-w25 qt-mr-16">
         <label>Select taxes</label>
-        <input value="GST 5%" type="text">
+        <app-invoice-form-ticket-edit-taxes class="qt-taxes-multiselect" #taxes (taxesChange)="onTaxesChange($event)"></app-invoice-form-ticket-edit-taxes>
+     
       </div>
 
       <div class="qt-w25"></div>
@@ -210,7 +208,7 @@
     <hr class="qt-horisontal-line qt-mb-16 qt-mt-16">
 
     <div class="qt-df qt-mb-16">
-      <div class="qt-toggle qt-mr-8">
+      <div class="qt-toggle qt-mr-8" [ngClass]="{'--on':contractsUserDevice.invoiceAsSingleItem}" (click)="contractsUserDevice.invoiceAsSingleItem = !contractsUserDevice.invoiceAsSingleItem">
         <div class="qt-toggle__circle"></div>
       </div>
 
