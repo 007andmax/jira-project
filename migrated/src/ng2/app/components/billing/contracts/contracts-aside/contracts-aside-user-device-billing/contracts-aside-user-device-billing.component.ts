@@ -34,7 +34,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit {
   selectedInterval: string = 'MONTHLY';
    
   minStartDate: number = null;
-  toggleMaximumAmountHours: boolean = false;
+  
   toggleContractServices: boolean = false;
   defaultSelectedTax: Array<Tax> = [];
   constructor(private companiesStateService: CompaniesStateService,
@@ -88,7 +88,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit {
 
         if (Object.keys(data).length === 0) {
 
-          this.contractsService.createContract(createBillableItem, this.contractsUserDevice.getDataForCreate(this.toggleMaximumAmountHours)).subscribe(res => {
+          this.contractsService.createContract(createBillableItem, this.contractsUserDevice.getDataForCreate()).subscribe(res => {
             this.onClose.emit(null);
           })
 
@@ -180,7 +180,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit {
 
   }
   setToggleMaximumAmountHours(data) {
-    this.toggleMaximumAmountHours = data;
+    this.contractsUserDevice.contractWithBlockTime = data;
    
     if (data) {
       this.contractsUserDevice.blockRate = 0;
@@ -190,9 +190,9 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit {
       this.taxesDP.setEditItems(this.defaultSelectedTax);
     } else {
       this.contractsUserDevice.setTaxIds(null);
-      this.contractsUserDevice.blockRate = null;
-      this.contractsUserDevice.includedHours = null;
-      this.contractsUserDevice.rateExceeding = null;
+      this.contractsUserDevice.blockRate = undefined;
+      this.contractsUserDevice.includedHours = undefined;
+      this.contractsUserDevice.rateExceeding = undefined;
     }
     
     this.validate.resetIncludedHours();
@@ -259,7 +259,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit {
     console.log("this.contractsUserDevice.includedHours", this.contractsUserDevice);
   }
   public onCreate() {
-    if (!this.validate.isValidate(this.contractsUserDevice,this.toggleMaximumAmountHours)) return;
+    if (!this.validate.isValidate(this.contractsUserDevice)) return;
     const modalRef = this.modalService.open(ContractsConfirmComponent, { windowClass: 'xs-modal user-modal',backdrop: false });
     
     modalRef.componentInstance.message = `Do we need to create the billable item now?`;

@@ -10,7 +10,7 @@ export class ContractsUserDevice {
     blockTimeServices: Array<ContractsBlockTimeService> = [new ContractsBlockTimeService("Managed Services Onsite", 0),
     new ContractsBlockTimeService("Managed Services Remote", 0)];
     companyId: string;
-    contractWithBlockTime: boolean;
+    contractWithBlockTime: boolean = false;
     customInterval: any;
     description: string;
     endDate: string;
@@ -145,14 +145,14 @@ export class ContractsUserDevice {
         let validate = (this.blockTimeServices.find(item => !item.validate)) ? false : true;
         return validateDuplicated && validate;
     }
-    public getDataForCreate(toggleMaximumAmountHours) {
+    public getDataForCreate() {
 
         return {
             billType: this.billType,
             blockRate: this.blockRate,
-            blockTimeServices: (toggleMaximumAmountHours) ? this.blockTimeServices.map(item => item.getDataForCreate()) : null,
+            blockTimeServices: (this.contractWithBlockTime) ? this.blockTimeServices.map(item => item.getDataForCreate()) : null,
             companyId: this.companyId,
-            contractWithBlockTime: toggleMaximumAmountHours,
+            contractWithBlockTime: this.contractWithBlockTime,
             customInterval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? null : (this.intervalstring === '30 days') ? 30 : (this.intervalstring === '15 days') ? 15 : 7,
             description: this.description,
             endDate: this.endDate,
@@ -160,7 +160,7 @@ export class ContractsUserDevice {
             interval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? this.intervalstring : null,
             rateExceeding: this.rateExceeding,
             serviceContractServices: this.serviceContractServices.map(item => item.getDataForCreate()),
-            serviceContractServicesToTrack: (!toggleMaximumAmountHours) ? this.blockTimeServices.map(item => item.getDataForCreate()) : [],
+            serviceContractServicesToTrack: (!this.contractWithBlockTime) ? this.blockTimeServices.map(item => item.getDataForCreate()) : [],
             services: this.services.map(item => item.getDataForCreate()),
             
             startDate: this.startDate,
