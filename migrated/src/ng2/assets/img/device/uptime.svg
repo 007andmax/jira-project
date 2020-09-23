@@ -1,11 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-<<<<<<< HEAD
     <g fill="none" fill-rule="evenodd" stroke="#FFF" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="8" cy="8" r="7"/>
-        <path d="M8 5v3l2 1.5"/>
-=======
-    <g fill="none" fill-rule="evenodd" stroke="#FFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
-        <path d="M8 3L8 13M3 8L13 8"/>
->>>>>>> e411bae07... Image achnages and datatype changes added
+        <path d="M8 5L8 8 10 9.5"/>
     </g>
 </svg>
