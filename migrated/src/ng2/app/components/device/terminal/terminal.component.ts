@@ -68,7 +68,7 @@ export class TerminalComponent implements OnInit {
   scriptDetail = false;
   sessionId = '';
   finalCommand = '';
-  splitCommand = [];
+  splitCommand = ["C:\\>"];
   @ViewChild('editor') editorElement:ElementRef;
   code = '';
   config = {
@@ -472,7 +472,10 @@ export class TerminalComponent implements OnInit {
     if (JSON.parse(localStorage.getItem('deviceDetail')).online === true) {
       this.finalCommand = cmd;
       let arr = cmd.split(/\r*\n/)
-      this.splitCommand = this.splitCommand.concat(arr);
+      this.splitCommand[this.splitCommand.length - 1] = this.splitCommand[this.splitCommand.length - 1] + arr[0];
+      if (arr.splice(0, 1).length > 0) {
+        this.splitCommand = this.splitCommand.concat(arr.splice(0, 1));
+      }
       this.sessionId = localStorage.getItem('uuid');
       this.sendCommand();
     } else {

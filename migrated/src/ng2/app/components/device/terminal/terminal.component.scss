@@ -242,6 +242,7 @@ main {
                                         }
                                         textarea {
                                             height: 315px;
+                                            font-family: $sourceCode;
                                         }
                                     }
                                     .btn {
@@ -278,6 +279,7 @@ main {
                                         padding: 0;
                                         text-align: center;
                                         color: #151b21;
+                                        font-family: $sourceCode;
                                         &::before {
                                             width: 0;
                                         }
@@ -365,7 +367,7 @@ main {
                             padding: 18px 32px 0 32px;
                         }
                         .tab-content {
-                            padding: 67px 32px 100px 32px;
+                            padding: 24px 32px 100px 32px;
                             ul {
                                 &.list-unstyled {
                                     &.script-list {
@@ -724,6 +726,10 @@ main {
                 color: #4f5f79 !important;
                 font-family: $sourceCode;
             }
+            #button-cmd {
+                margin-top: 16px;
+
+            }
         }
         .cmn-tbs-content {
             &.command {
@@ -842,7 +848,7 @@ body {
                                     font-size:13px;
                                     &.btn-secondary{
                                         border: solid 1px #c5cdd5;
-
+                                        background-color: #ffffff !important;
                                     }
                                     &.btn-remove{
                                         background-color: #ff5263;

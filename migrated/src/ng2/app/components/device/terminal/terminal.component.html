@@ -16,11 +16,18 @@
         <div class="contant-area">
           <div class="terminal-area">
             <div class="terminal-box">
-              <p *ngIf="splitCommand.length === 0">C:\></p>
               <p *ngFor="let split of splitCommand"><span>{{split}}</span></p>
               <!-- <textarea>C:\Users\Sam\Desktop></textarea> -->
             </div>
-            <textarea class="editCmd" (keyup.enter)="copyToTerminal(editCmd);editCmd = ''" [(ngModel)]="editCmd" rows="4" placeholder="> Enter a command"></textarea>
+            <textarea class="editCmd" [(ngModel)]="editCmd" rows="4" placeholder="> Enter a command"></textarea>
+            <button
+              id="button-cmd"
+              type="button"
+              class="btn btn-primary"
+              (click)="copyToTerminal(editCmd);editCmd = ''"
+            >
+              Run Command
+            </button>
           </div>
         </div>
       </div>
