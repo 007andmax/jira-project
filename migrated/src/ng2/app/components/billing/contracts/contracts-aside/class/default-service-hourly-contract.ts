@@ -4,7 +4,7 @@ import { DefaultServices } from '../../../default-services/class/default-service
 import { ContractsHourlyService } from './contracts-hourly-service';
 
 export class DefaultServicesHourlyContract extends DefaultServices {
-    selected: boolean = true;
+    selected: boolean = false;
     versionedId: VersionedId = new VersionedId();
     public setDataFromCopy(data: ContractsHourlyService, taxesList: Array<Tax>) {
         this.selected = true;

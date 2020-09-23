@@ -48,22 +48,29 @@ export class ContractsAsideHourlyBillingComponent implements OnInit {
 
     if (this.taxesStateService.getTaxes().length > 0) this.taxes = this.taxesStateService.getTaxes();
     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
-      this.taxes =data;
+      this.taxes = data;
     })
-    if (this.contractsStateService.getContractForCopy())  {
+    if (this.contractsStateService.getContractForCopy()) {
       this.onInitCopy();
     } else {
-      if (this.contractsStateService.getDefaultService().length > 0)   this.defaultServices = this.contractsStateService.getDefaultService();
+      if (this.contractsStateService.getDefaultService().length > 0)  this.setDefaultServices(this.contractsStateService.getDefaultService());
       this.contractsStateService.getOnDefaultServices().subscribe(data => {
-        this.defaultServices = data.map(item => new DefaultServicesHourlyContract(item));   
+      this.setDefaultServices(data);
       })
     }
+  }
+  public setDefaultServices (data) {
+    this.defaultServices = data.map(item => {
+      let service = new DefaultServicesHourlyContract(item);
+      service.selected = true;
+      return service;
+    });
   }
   public onInitCopy() {
     this.contractsHourly.setDataFromCopy(this.contractsStateService.getContractForCopy());
     this.contractsHourly.services.forEach(item => {
       let service = new DefaultServicesHourlyContract();
-      service.setDataFromCopy(item,this.taxes);
+      service.setDataFromCopy(item, this.taxes);
       this.defaultServices.push(service);
     })
     this.selectAllServices = true;
