@@ -2,7 +2,6 @@ export class ContractsUserDeviceValidate {
     company:boolean = true;
     description:boolean = true;
     includedHours:boolean = true;
-    blockRate:boolean = true;
     rateExceeding:boolean = true;
 
     constructor() {}
@@ -10,9 +9,7 @@ export class ContractsUserDeviceValidate {
     public resetRateExceeding() {
         this.rateExceeding = true;
     }
-    public resetBlockRate() {
-        this.blockRate  = true;
-    }
+    
     public resetIncludedHours() {
         this.includedHours = true;
     }
@@ -31,20 +28,20 @@ export class ContractsUserDeviceValidate {
     public getIncludedHours () {
         return this.includedHours;
     }
-    public getBlockRate () {
-        return this.blockRate;
-    }
+    
     public getRateExceeding () {
         return this.rateExceeding;
     }
-    public isValidate(contractsBlockTime) {
+    public isValidate(contractsBlockTime,toggleMaximumAmountHours) {
         console.log("contractsBlockTime",contractsBlockTime);
         if (!contractsBlockTime.companyId) this.company = false;
         if (contractsBlockTime.description === "") this.description = false;
-        if (contractsBlockTime.includedHours === "") this.includedHours = false;
-        if (contractsBlockTime.blockRate === "") this.blockRate = false;
-        if (contractsBlockTime.rateExceeding === "") this.rateExceeding = false;
+        if (toggleMaximumAmountHours) {
+            if (contractsBlockTime.includedHours === "") this.includedHours = false;
+            if (contractsBlockTime.rateExceeding === "") this.rateExceeding = false;
+        }
        
-        return this.company && this.description && this.includedHours && this.blockRate && this.rateExceeding;
+       
+        return this.company && this.description && this.includedHours  && this.rateExceeding;
     }
 }

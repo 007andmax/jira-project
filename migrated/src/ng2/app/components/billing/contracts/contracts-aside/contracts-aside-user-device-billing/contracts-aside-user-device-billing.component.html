@@ -1,7 +1,7 @@
 <div class="contracts-page-scroll-content">
   <div class="qt-pr-32 qt-pl-32 qt-pb-24 qt-pt-16">
 
-    <app-contracts-aside-top #topContract (onSelectCompany)="onSelectCompany($event)" [selectedType]="selectedType" ></app-contracts-aside-top>
+    <app-contracts-aside-top #topContract (onSelectCompany)="onSelectCompany($event)" [validateCompany]="validate.company" [selectedType]="selectedType" ></app-contracts-aside-top>
 
 
     <div class="qt-pl-12 qt-pr-12 qt-df qt-ai-c contract-tipe-info qt-mb-16">
@@ -89,6 +89,7 @@
         <tbody>
           <ng-template ngFor let-item
           [ngForOf]="contractsUserDevice.serviceContractServices"
+          let-i="index"
           [ngForTrackBy]="trackById">
           <app-contracts-aside-user-device-service   [service]="item" (onRemove)="onRemoveServiceContractServices(i)" (onCheckName)="onCheckDuplicatedServiceContractServices()"></app-contracts-aside-user-device-service>
         </ng-template>
@@ -136,10 +137,13 @@
     </div>
 
     <div class="table-last-icon-wrapper qt-mb-16" *ngIf="toggleContractServices">
-      <table class="qt-gray-table --last-icon">
+      <table class="qt-gray-table track-and-bill-table --last-icon">
         <thead>
           <tr>
-            <th>Service Name</th>
+            <th class="track-and-bill-table__service-name">Service Name</th>
+            <th class="track-and-bill-table__billable">Billable</th>
+            <th class="track-and-bill-table__tax">Tax</th>
+            <th class="track-and-bill-table__hourly-rate">Hourly Rate</th>
             <th></th>
           </tr>
         </thead>
@@ -148,11 +152,14 @@
           [ngForOf]="contractsUserDevice.services"
           let-i="index"
            >
-          <app-contracts-aside-block-time-billing-customer-service [service]="item" (onRemove)="onRemoveServices(i)" (onCheckName)="onCheckDuplicatedServices()"></app-contracts-aside-block-time-billing-customer-service>
-          </ng-template>
+            <app-contracts-aside-block-time-billing-default-service [service]="item" (onRemove)="onRemoveDefaultService(i)"  ></app-contracts-aside-block-time-billing-default-service>
+           </ng-template>
+
+
         </tbody>
       </table>
     </div>
+
 
     <app-contracts-aside-block-time-billing-add-default-service *ngIf="toggleContractServices" (onSelect)="onAddDefaultService($event)"></app-contracts-aside-block-time-billing-add-default-service>
 

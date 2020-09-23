@@ -2,30 +2,32 @@ import { ContractsBlockTimeService } from './contracts-block-time-service';
 import { ContractsUserDeviceService } from './contracts-user-device-service';
 import * as moment from "moment";
 import { ContractsBlockTimeDefaultService } from './contracts-block-time-default-service';
+import { Tax } from 'src/ng2/class/taxes/tax';
 
 export class ContractsUserDevice {
-    billType: string;
-    blockTimeServices: Array<ContractsBlockTimeService> = [new ContractsBlockTimeService("Managed Services Onsite", 5),
-    new ContractsBlockTimeService("Managed Services Remote", 5)];
+    billType: string = "DEVICE";
+    blockRate: number;
+    blockTimeServices: Array<ContractsBlockTimeService> = [new ContractsBlockTimeService("Managed Services Onsite", 0),
+    new ContractsBlockTimeService("Managed Services Remote", 0)];
     companyId: string;
     contractWithBlockTime: boolean;
     customInterval: any;
     description: string;
     endDate: string;
     id: string;
-    includedHours: string = "";
+    includedHours: string = null;
     interval: string;
-    intervalstring: string;
+    intervalstring: string = "MONTHLY";
     invoiceAsSingleItem: boolean = false;
     productExpenses: any;
-    rateExceeding: string = "";
+    rateExceeding: string = null;
     serviceContractServices: Array<ContractsUserDeviceService> = [];
     serviceContractServicesToTrack: Array<ContractsBlockTimeService> = [];
     serviceExpenses: any;
     services: Array<ContractsBlockTimeDefaultService> = [];
     startDate: string;
     reviewDate: string;
-    taxIds: any;
+    taxIds: Array<Tax>;
     type: string = "SERVICE_CONTRACT";
     constructor() {
 
@@ -143,6 +145,29 @@ export class ContractsUserDevice {
         let validate = (this.blockTimeServices.find(item => !item.validate)) ? false : true;
         return validateDuplicated && validate;
     }
+    public getDataForCreate(toggleMaximumAmountHours) {
+
+        return {
+            billType: this.billType,
+            blockRate: this.blockRate,
+            blockTimeServices: (toggleMaximumAmountHours) ? this.blockTimeServices.map(item => item.getDataForCreate()) : null,
+            companyId: this.companyId,
+            contractWithBlockTime: toggleMaximumAmountHours,
+            customInterval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? null : (this.intervalstring === '30 days') ? 30 : (this.intervalstring === '15 days') ? 15 : 7,
+            description: this.description,
+            endDate: this.endDate,
+            includedHours: this.includedHours,
+            interval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? this.intervalstring : null,
+            rateExceeding: this.rateExceeding,
+            serviceContractServices: this.serviceContractServices.map(item => item.getDataForCreate()),
+            serviceContractServicesToTrack: (!toggleMaximumAmountHours) ? this.blockTimeServices.map(item => item.getDataForCreate()) : [],
+            services: this.services.map(item => item.getDataForCreate()),
+            
+            startDate: this.startDate,
+            taxIds: this.taxIds,
+            type: "SERVICE_CONTRACT"
+        }
+    }
     public checkDuplicatedServices() {
         this.services.forEach(item => {
             item.validateDuplicated = true;
@@ -156,5 +181,8 @@ export class ContractsUserDevice {
         let validateDuplicated = (this.services.find(item => !item.validateDuplicated)) ? false : true;
         let validate = (this.services.find(item => !item.validate)) ? false : true;
         return validateDuplicated && validate;
+    }
+    public getAllServicesName() {
+        return [...this.getBlockTimeServicesName(), ...this.getServicesName(), ...this.getServiceContractServicesName()];
     }
 }

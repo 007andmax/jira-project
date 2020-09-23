@@ -14,7 +14,7 @@
    <app-contracts-aside-select-type *ngIf="step === 1" (onSelect)="onSelectType($event)"></app-contracts-aside-select-type> 
    <app-contracts-aside-hourly-billing #hourlyContract *ngIf="step === 2 && type === 'HOURLY'" (onClose)="closed()"></app-contracts-aside-hourly-billing> 
    <app-contracts-aside-block-time-billing #blockTimeContract  *ngIf="step === 2 && type === 'BLOCK_TIME'" (onClose)="closed()"></app-contracts-aside-block-time-billing> 
-   <app-contracts-aside-user-device-billing *ngIf="step === 2 && type === 'SERVICE_CONTRACT_DEVICE_USER'"></app-contracts-aside-user-device-billing> 
+   <app-contracts-aside-user-device-billing #deviceUserContract *ngIf="step === 2 && type === 'SERVICE_CONTRACT_DEVICE_USER'" (onClose)="closed()"></app-contracts-aside-user-device-billing> 
   <app-contracts-aside-product-service-contracts *ngIf="step === 2 && type === 'SERVICE_CONTRACT_OTHER'"></app-contracts-aside-product-service-contracts>
 
   <div class="aside-footer qt-pr-30 qt-pl-30 qt-pb-16 qt-pt-16 qt-df qt-ai-c qt-jc-sb">

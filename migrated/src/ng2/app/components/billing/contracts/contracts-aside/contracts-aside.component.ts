@@ -5,6 +5,7 @@ import { ContractsAsideHourlyBillingComponent } from './contracts-aside-hourly-b
 import { ContractsService } from 'src/ng2/app/services/contracts/contracts.service';
 import { DefaultServicesService } from 'src/ng2/app/services/default-services/default-services.service';
 import { ContractsAsideBlockTimeBillingComponent } from './contracts-aside-block-time-billing/contracts-aside-block-time-billing.component';
+import { ContractsAsideUserDeviceBillingComponent } from './contracts-aside-user-device-billing/contracts-aside-user-device-billing.component';
 
 @Component({
   selector: 'app-contracts-aside',
@@ -14,6 +15,7 @@ import { ContractsAsideBlockTimeBillingComponent } from './contracts-aside-block
 export class ContractsAsideComponent implements OnInit {
   @ViewChild('hourlyContract') hourlyContract: ContractsAsideHourlyBillingComponent;
   @ViewChild('blockTimeContract') blockTimeContract: ContractsAsideBlockTimeBillingComponent;
+  @ViewChild('deviceUserContract') deviceUserContract: ContractsAsideUserDeviceBillingComponent;
   type: string = null;
   step: number = 1;
   constructor(private contractsStateService: ContractsStateService,
@@ -35,6 +37,7 @@ export class ContractsAsideComponent implements OnInit {
   onCreate() {
     if (this.hourlyContract) this.hourlyContract.onCreate();
     if (this.blockTimeContract) this.blockTimeContract.onCreate();
+    if (this.deviceUserContract) this.deviceUserContract.onCreate();
   }
   continue() {
     if (!this.type) return;
