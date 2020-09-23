@@ -156,13 +156,14 @@ export class ContractsUserDevice {
             customInterval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? null : (this.intervalstring === '30 days') ? 30 : (this.intervalstring === '15 days') ? 15 : 7,
             description: this.description,
             endDate: this.endDate,
+            invoiceAsSingleItem:this.invoiceAsSingleItem,
             includedHours: this.includedHours,
             interval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? this.intervalstring : null,
             rateExceeding: this.rateExceeding,
             serviceContractServices: this.serviceContractServices.map(item => item.getDataForCreate()),
             serviceContractServicesToTrack: (!this.contractWithBlockTime) ? this.blockTimeServices.map(item => item.getDataForCreate()) : [],
             services: this.services.map(item => item.getDataForCreate()),
-            
+            reviewDate:this.reviewDate,
             startDate: this.startDate,
             taxIds: this.taxIds,
             type: "SERVICE_CONTRACT"

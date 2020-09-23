@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { ContractsBlockTimeDefaultService } from '../contracts-aside/class/contracts-block-time-default-service';
 export class ServiceAgreement {
     amount: number;
-    billType: any;
+    billType: string;
     blockRate: string;
     blockTimeServices: Array<ServiceAgreementBlockTimeServices> = [];
     companyId: string;
