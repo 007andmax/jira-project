@@ -16,12 +16,12 @@ export class ContractsUserDevice {
     description: string;
     endDate: string;
     id: string;
-    includedHours: string = null;
+    includedHours: string;
     interval: string;
     intervalstring: string = "MONTHLY";
     invoiceAsSingleItem: boolean = false;
     productExpenses: any;
-    rateExceeding: string = null;
+    rateExceeding: string;
     serviceContractServices: Array<ContractsUserDeviceService> = [];
     serviceContractServicesToTrack: Array<ContractsBlockTimeService> = [];
     serviceExpenses: any;
@@ -33,13 +33,13 @@ export class ContractsUserDevice {
     constructor() {
 
     }
-    
+
     public setDataFromCopy(data: ServiceAgreement) {
         this.billType = data.billType;
         this.blockRate = (data.blockRate) ? Number(data.blockRate) : undefined;
-        this.blockTimeServices =  (data.blockTimeServices.length > 0) ? data.blockTimeServices.map(item => new ContractsBlockTimeService(item.name, item.rate)) : data.serviceContractServicesToTrack.map(item => new ContractsBlockTimeService(item.name, item.rate));
+        this.blockTimeServices = (data.blockTimeServices.length > 0) ? data.blockTimeServices.map(item => new ContractsBlockTimeService(item.name, item.rate)) : data.serviceContractServicesToTrack.map(item => new ContractsBlockTimeService(item.name, item.rate));
         this.companyId = data.companyId;
-        this.contractWithBlockTime =  (data.blockTimeServices.length > 0);
+        this.contractWithBlockTime = (data.blockTimeServices.length > 0);
         this.customInterval = data.customInterval;
         this.description = data.description;
         this.endDate = data.endDate;
@@ -50,12 +50,12 @@ export class ContractsUserDevice {
         } else {
             this.intervalstring = (data.customInterval === 30) ? '30 days' : (data.customInterval === 15) ? '15 days' : '7 days';
         }
-        this.rateExceeding = (data.rateExceeding) ?  Number(data.rateExceeding).toFixed(2) : undefined;
+        this.rateExceeding = (data.rateExceeding) ? Number(data.rateExceeding).toFixed(2) : undefined;
         this.serviceContractServices = data.serviceContractServices.map(item => new ContractsUserDeviceService(item.count, item.name, item.rate, item.taxIds));
         this.services = data.services.map(item => new ContractsBlockTimeDefaultService(item.basedOnDefault, item.billable, (item.commissionRate) ? item.commissionRate : 0, item.id, item.name, item.rate, item.taxIds));
         this.startDate = data.startDate;
         this.taxIds = data.taxIds;
-       
+
         this.reviewDate = data.reviewDate;
         this.calculateEndDate();
     }
@@ -153,6 +153,9 @@ export class ContractsUserDevice {
                 if (i != u && item1.name === item2.name && item1.validateDuplicated && item2.validateDuplicated) item2.validateDuplicated = false;
             })
         })
+        this.serviceContractServices.forEach(item => {
+            item.validate = (item.name.length > 0);
+        })
         console.log("serviceContractServices", this.serviceContractServices);
         let validateDuplicated = (this.serviceContractServices.find(item => !item.validateDuplicated)) ? false : true;
         let validate = (this.serviceContractServices.find(item => !item.validate)) ? false : true;
@@ -168,6 +171,9 @@ export class ContractsUserDevice {
             })
         })
         console.log("blockTimeServices", this.blockTimeServices);
+        this.blockTimeServices.forEach(item => {
+            item.validate = (item.name.length > 0);
+        })
         let validateDuplicated = (this.blockTimeServices.find(item => !item.validateDuplicated)) ? false : true;
         let validate = (this.blockTimeServices.find(item => !item.validate)) ? false : true;
         return validateDuplicated && validate;
@@ -179,18 +185,18 @@ export class ContractsUserDevice {
             blockRate: this.blockRate,
             blockTimeServices: (toggleMaximumAmountHours) ? this.blockTimeServices.map(item => item.getDataForCreate()) : null,
             companyId: this.companyId,
-            contractWithBlockTime: (this.blockTimeServices.length > 0),
+            contractWithBlockTime: toggleMaximumAmountHours,
             customInterval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? null : (this.intervalstring === '30 days') ? 30 : (this.intervalstring === '15 days') ? 15 : 7,
             description: this.description,
             endDate: this.endDate,
-            invoiceAsSingleItem:this.invoiceAsSingleItem,
+            invoiceAsSingleItem: this.invoiceAsSingleItem,
             includedHours: this.includedHours,
             interval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? this.intervalstring : null,
             rateExceeding: this.rateExceeding,
             serviceContractServices: this.serviceContractServices.map(item => item.getDataForCreate()),
             serviceContractServicesToTrack: (!toggleMaximumAmountHours) ? this.blockTimeServices.map(item => item.getDataForCreate()) : [],
             services: this.services.map(item => item.getDataForCreate()),
-            reviewDate:this.reviewDate,
+            reviewDate: this.reviewDate,
             startDate: this.startDate,
             taxIds: this.taxIds,
             type: "SERVICE_CONTRACT"

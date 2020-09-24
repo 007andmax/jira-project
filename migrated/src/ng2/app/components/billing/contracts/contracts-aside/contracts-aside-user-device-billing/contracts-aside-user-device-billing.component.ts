@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FORMAT_DATE_2 } from 'src/ng2/app/const/date-picker';
 import { DefaultServicesService } from 'src/ng2/app/services/default-services/default-services.service';
 import { CompaniesStateService } from 'src/ng2/app/states/company/companies-state.service';
@@ -18,13 +18,14 @@ import { ContractsConfirmComponent } from '../../contracts-confirm/contracts-con
 import { DatePickerComponent } from 'src/ng2/app/components/shared/date-picker/date-picker.component';
 import { ContractsAsideTopComponent } from '../contracts-aside-top/contracts-aside-top.component';
 import { ContractsBlockTimeService } from '../class/contracts-block-time-service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-contracts-aside-user-device-billing',
   templateUrl: './contracts-aside-user-device-billing.component.html',
   styleUrls: ['./contracts-aside-user-device-billing.component.scss']
 })
-export class ContractsAsideUserDeviceBillingComponent implements OnInit {
+export class ContractsAsideUserDeviceBillingComponent implements OnInit,OnDestroy {
   @ViewChild('taxes') taxesDP: InvoiceFormTicketEditTaxesComponent;
   @ViewChild('startDateDP') startDateDP: DatePickerComponent;
   @ViewChild('reviewDateDP') reviewDateDP: DatePickerComponent;
@@ -44,6 +45,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit {
   toggleMaximumAmountHours: boolean = false;
   toggleContractServices: boolean = false;
   defaultSelectedTax: Array<Tax> = [];
+  sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
     private taxesStateService: TaxesStateService,
     private defaultServicesService: DefaultServicesService,
@@ -69,6 +71,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit {
       console.log("data", data);
       this.onCheckServicesForAdd(data);
     })
+    this.sub.add(getConfirm);
     this.contractsUserDevice.serviceContractServices = [new ContractsUserDeviceService(0, "Managed workstations", 0, this.defaultSelectedTax.map(item => item.id)),
     new ContractsUserDeviceService(0, "Managed servers", 0, this.defaultSelectedTax.map(item => item.id))]
     if (this.сontractsStateService.getContractForCopy()) this.onInitCopy();
@@ -293,5 +296,8 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit {
 
     modalRef.componentInstance.message = `Do we need to create the billable item now?`;
     console.log("modalRef", modalRef);
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

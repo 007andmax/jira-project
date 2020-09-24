@@ -15,7 +15,7 @@ export class ContractsUserDeviceService {
         return {
             count: this.count,
             name: this.name,
-            rate: this.rate,
+            rate: String(this.rate),
             taxIds: this.taxIds,
         }
     }
