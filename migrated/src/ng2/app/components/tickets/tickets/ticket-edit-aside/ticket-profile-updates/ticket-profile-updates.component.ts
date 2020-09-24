@@ -7,7 +7,7 @@ import { ConfirmStateService } from 'src/ng2/app/components/shared/confirm/servi
 import { REMOVE_UPDATE_TICKET, REMOVE_UPDATE_TICKET_SERVICE, REMOVE_UPDATE_TICKET_PRODUCT } from 'src/ng2/app/const/confirm';
 import { TicketStateService } from '../services/ticket-state.service';
 import { Subscription } from 'rxjs';
- 
+
 
 @Component({
   selector: 'app-ticket-profile-updates',
@@ -18,7 +18,7 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
   @Input() updates: Array<TicketProfileUpdate>;
   @Input() ticketProfile: TicketProfile = new TicketProfile();
   @Output() onFetchUpdates = new EventEmitter<any>();
-  getConfirm: Subscription;
+  sub: Subscription = new Subscription();
   showLoadMoreUpdates = true;
   showPreloader: boolean = false;
   constructor(private ticketsService: TicketsService,
@@ -27,9 +27,10 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     private notificationStateService: NotificationStateService,) { }
   ngOnInit() {
-     this.getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
+    console.log("TicketProfileUpdatesComponent");
+    let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
       console.log("data", data);
-      if (data) {
+      if (data && this.ticketProfile.id) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_UPDATE_TICKET) {
           this.removeUpdate();
         }
@@ -42,7 +43,7 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
 
       }
     })
-  
+    this.sub.add(getConfirm);
   }
 
   removeService() {
@@ -54,7 +55,7 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
     })
   }
   removeUpdate() {
-    
+    console.log(this.sub);
     this.ticketsService.deleteUpdate(this.ticketProfile.id, this.ticketStateService.getUpdateForRemove().id).subscribe(data => {
       this.notificationStateService.oninitShowNotification(`The ticket update containing a note has been deleted`);
     })
@@ -73,9 +74,9 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
     return (this.showLoadMoreUpdates) ? this.updates.length + this.ticketProfile.unloadedUpdates : this.updates.length;
   }
   ngOnDestroy(): void {
-    console.log("TicketProfileUpdatesComponent ngOnDestroy",this.getConfirm);
-    this.getConfirm.unsubscribe();
-    console.log( this.getConfirm);
+    console.log("TicketProfileUpdatesComponent ngOnDestroy", this.sub);
+    this.sub.unsubscribe();
+    console.log(this.sub);
   }
   public trackByIndex(index, item) {
     return index;
