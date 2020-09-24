@@ -100,6 +100,7 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
 
       }
     })
+    this.sub.add(getConfirm);
     this.ticketsStateService.getOnUpdateTicket().subscribe(data => {
 
       if (this.opened) {
