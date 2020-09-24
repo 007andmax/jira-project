@@ -113,8 +113,11 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit,OnDestro
     this.contractsUserDevice.services = [];
   }
   onCheckServicesForAdd(createBillableItem) {
-    if (this.contractsUserDevice.blockTimeServices.length === 0 || this.contractsUserDevice.serviceContractServices.length === 0 || !this.contractsUserDevice.checkDuplicatedBlockTimeServices() && !this.contractsUserDevice.checkDuplicatedServiceContractServices()
-      || (this.toggleContractServices) ? this.contractsUserDevice.services.length === 0 || !this.contractsUserDevice.checkDuplicatedServices() : false) return;
+    if (this.contractsUserDevice.blockTimeServices.length === 0  || !this.contractsUserDevice.checkDuplicatedBlockTimeServices() || !this.contractsUserDevice.checkDuplicatedServiceContractServices()
+      || !this.contractsUserDevice.checkDuplicatedServices()) {
+        this.cd.detectChanges();
+        return;
+      };
     this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
       moment(this.contractsUserDevice.endDate).format('DD MMM YYYY'), this.contractsUserDevice.companyId, null, this.contractsUserDevice.getAllServicesName()).subscribe(data => {
 
@@ -250,6 +253,7 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit,OnDestro
   }
   onSelectCompany(data) {
     this.contractsUserDevice.setCompanyId((data) ? data.id : null);
+    if (data) this.validate.resetCompany();
   }
   onChangeStartDate(data) {
     this.contractsUserDevice.setStartDate(data.day, data.month, data.year, this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);

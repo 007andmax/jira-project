@@ -13,7 +13,7 @@ export class ContractsUserDevice {
     companyId: string;
     contractWithBlockTime: boolean = false;
     customInterval: any;
-    description: string;
+    description: string = "";
     endDate: string;
     id: string;
     includedHours: string;

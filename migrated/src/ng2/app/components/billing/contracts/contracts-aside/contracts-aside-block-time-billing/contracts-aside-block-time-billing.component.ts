@@ -147,7 +147,10 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     return newMinStartDate;
   }
   onCheckServicesForAdd(createBillableItem) {
-    if (this.contractsBlockTime.blockTimeServices.length === 0 || !this.contractsBlockTime.checkDuplicatedBlockTimeServices() && !this.contractsBlockTime.checkDuplicatedServices()) return;
+    if (this.contractsBlockTime.blockTimeServices.length === 0 || !this.contractsBlockTime.checkDuplicatedBlockTimeServices() || !this.contractsBlockTime.checkDuplicatedServices()) {
+      this.cd.detectChanges();
+      return;
+    }
     this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsBlockTime.startDate).format('DD MMM YYYY'),
       moment(this.contractsBlockTime.endDate).format('DD MMM YYYY'), this.contractsBlockTime.companyId, null, this.contractsBlockTime.getAllServicesName()).subscribe(data => {
 

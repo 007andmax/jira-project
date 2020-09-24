@@ -115,6 +115,9 @@ export class ContractsBlockTime {
                 if (i != u && item1.name === item2.name && item1.validateDuplicated && item2.validateDuplicated) item2.validateDuplicated = false;
             })
         })
+        this.blockTimeServices.forEach(item => {
+            item.validate = (item.name.length > 0);
+        })
         console.log("blockTimeServices", this.blockTimeServices);
         let validateDuplicated = (this.blockTimeServices.find(item => !item.validateDuplicated)) ? false : true;
         let validate = (this.blockTimeServices.find(item => !item.validate)) ? false : true;
@@ -128,6 +131,9 @@ export class ContractsBlockTime {
             this.services.forEach((item2, u) => {
                 if (i != u && item1.name === item2.name && item1.validateDuplicated && item2.validateDuplicated) item2.validateDuplicated = false;
             })
+        })
+        this.services.forEach(item => {
+            item.validate = (item.name.length > 0);
         })
         console.log("services", this.services);
         let validateDuplicated = (this.services.find(item => !item.validateDuplicated)) ? false : true;
