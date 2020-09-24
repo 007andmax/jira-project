@@ -118,7 +118,7 @@ export class DashboardComponent implements OnInit {
         this.logicalDisk = resp.reports[0].logicalDisks;
         this.virusInfo = resp.reports[0].antivirus[0];
         this.system = resp.reports[0].system || {};
-        this.windows_info = this.system.caption + '(' + this.system.architecture + ') Version ' + this.system.version;
+        this.windows_info = `${this.system.caption} ( ${this.system.architecture} ) Version ${this.system.version}`;
         if (this.system.install_date !== '') {
           this.system.install_date = {
             "day": new Date(this.system.install_date).getDate(),

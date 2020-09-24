@@ -75,6 +75,7 @@ export class TerminalComponent implements OnInit {
     lineNumbers: true,
     lineWrapping: true,
   };
+  terminalHit = false;
   DateTimeHistoryFormat = CONFIGCONSTANTS.DateTimeHistoryFormat;
   constructor(private terminalService: TerminalService,
     private toastr: ToastrService,
@@ -498,15 +499,17 @@ export class TerminalComponent implements OnInit {
     this.terminalService.sendCommand(data)
     .pipe(first())
     .subscribe(resp => {
-
-      let getCmdOutput = this.shellStateService.getCmdOutput().subscribe((data) => {
-        let arr = data.data.output.split(/\r*\n/)
-        let arr1 = this.splitCommand.concat(arr);
-        this.splitCommand = arr1;
-        this.cd.detectChanges();
-      })
-      this.sub.add(getCmdOutput);
-
+      if (!this.terminalHit) {
+        let getCmdOutput = this.shellStateService.getCmdOutput().subscribe((data) => {
+          let arr = data.data.output.split(/\r*\n/)
+          let arr1 = this.splitCommand.concat(arr);
+          this.splitCommand = arr1;
+          console.log(this.splitCommand)
+          this.cd.detectChanges();
+        })
+        this.sub.add(getCmdOutput);
+        this.terminalHit = true;
+      }
     },
     error => {
       const statusError = error;
