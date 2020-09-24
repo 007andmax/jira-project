@@ -25,7 +25,7 @@ export class ContractsAsideComponent implements OnInit {
   ngOnInit() {
     if (this.contractsStateService.getContractForCopy()) {
       this.step = 2;
-      this.type = this.contractsStateService.getContractForCopy().type;
+      this.type = `${this.contractsStateService.getContractForCopy().type}${(this.contractsStateService.getContractForCopy().billType) ? "_" + this.contractsStateService.getContractForCopy().billType : ""}`;
     }
     this.contractsStateService.getOnChangeType().subscribe(data => {
       this.type = `${data.type}${(data.billType) ? "_" + data.billType : ""}`;

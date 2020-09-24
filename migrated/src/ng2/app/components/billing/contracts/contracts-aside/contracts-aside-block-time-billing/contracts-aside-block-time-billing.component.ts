@@ -12,7 +12,7 @@ import { TehUsersSateService } from 'src/ng2/app/components/shared/teh-users/ser
 import { ContractsBlockTimeValidate } from '../class/contracts-block-time-validate';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ContractsConfirmComponent } from '../../contracts-confirm/contracts-confirm.component';
-import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-state.service';
+ 
 import { Subscription } from 'rxjs';
 import { СontractsBlockTimeShare } from '../class/contracts-block-time-share';
 import { DatePickerComponent } from 'src/ng2/app/components/shared/date-picker/date-picker.component';
@@ -20,6 +20,7 @@ import { ContractsAsideTopComponent } from '../contracts-aside-top/contracts-asi
 import { InvoiceFormTicketEditTaxesComponent } from '../../../billable/billable-aside/invoice-form/invoice-form-ticket-edit/invoice-form-ticket-edit-taxes/invoice-form-ticket-edit-taxes.component';
 import { TaxesStateService } from 'src/ng2/app/states/taxes/taxes-state.service';
 import { Tax } from 'src/ng2/class/taxes/tax';
+import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-state.service';
 
 @Component({
   selector: 'app-contracts-aside-block-time-billing',
@@ -56,7 +57,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     private tehState: TehUsersSateService,
     private modalService: NgbModal,
     private taxesStateService: TaxesStateService,
-    private contractsStateService: ContractsStateService,
+    
     public cd: ChangeDetectorRef) { }
 
 
@@ -82,7 +83,7 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
       this.taxes = data;
       this.setDefaultTaxes(data);
     })
-    if (this.contractsStateService.getContractForCopy()) this.onInitCopy();
+    if (this.сontractsStateService.getContractForCopy()) this.onInitCopy();
   }
   private setDefaultTaxes(lsitTaxes) {
     let taxes = lsitTaxes.filter(item => item.isDefault === true);
@@ -90,15 +91,15 @@ export class ContractsAsideBlockTimeBillingComponent implements OnInit, OnDestro
     this.contractsBlockTime.setTaxIds(taxes.map(item => item.id));
   }
   public onInitCopy() {
-    this.contractsBlockTime.setDataFromCopy(this.contractsStateService.getContractForCopy());
+    this.contractsBlockTime.setDataFromCopy(this.сontractsStateService.getContractForCopy());
     this.selectedInterval = this.contractsBlockTime.intervalstring;
 
-    this.startDate = this.contractsStateService.getContractForCopy().getStartDateByMilliseconds();
-    this.startDateDP.minDate = this.contractsStateService.getContractForCopy().getStartDateByMilliseconds();
-    this.reviewDate = this.contractsStateService.getContractForCopy().getReviewDateByMilliseconds();
-    this.reviewDateDP.minDate = this.contractsStateService.getContractForCopy().getReviewDateByMilliseconds();
-    this.startDateDP.setEditDate(this.contractsStateService.getContractForCopy().getStartDateByMilliseconds());
-    this.reviewDateDP.setEditDate(this.contractsStateService.getContractForCopy().getReviewDateByMilliseconds());
+    this.startDate = this.сontractsStateService.getContractForCopy().getStartDateByMilliseconds();
+    this.startDateDP.minDate = this.сontractsStateService.getContractForCopy().getStartDateByMilliseconds();
+    this.reviewDate = this.сontractsStateService.getContractForCopy().getReviewDateByMilliseconds();
+    this.reviewDateDP.minDate = this.сontractsStateService.getContractForCopy().getReviewDateByMilliseconds();
+    this.startDateDP.setEditDate(this.сontractsStateService.getContractForCopy().getStartDateByMilliseconds());
+    this.reviewDateDP.setEditDate(this.сontractsStateService.getContractForCopy().getReviewDateByMilliseconds());
     this.topContract.companiesDP.selectedItem = this.companiesStateService.getCompanies().find(item => item.id === this.contractsBlockTime.companyId);
     this.taxesDP.setEditItems(this.taxes.filter(item => {
       let find = this.contractsBlockTime.taxIds.find(taxId => taxId === item.id);

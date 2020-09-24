@@ -65,12 +65,12 @@
       <div class="qt-fs-12 qt-color-dark qt-mr-8">Service Bill Type</div>
 
       <div class="qt-radio qt-mr-16">
-        <input id="by-device" type="radio" name="radio" value="1" checked (change)="onSetServiceContractServicesType($event,'DEVICE')">
+        <input id="by-device" type="radio" name="radio" value="1" [checked]="contractsUserDevice.billType === 'DEVICE'" (change)="onSetServiceContractServicesType($event,'DEVICE')">
         <label for="by-device">By Device</label>
       </div>
 
       <div class="qt-radio">
-        <input id="by-users" type="radio" name="radio" value="2" (change)="onSetServiceContractServicesType($event,'USER')">
+        <input id="by-users" type="radio" name="radio" value="2" [checked]="contractsUserDevice.billType === 'USER'" (change)="onSetServiceContractServicesType($event,'USER')">
         <label for="by-users">By users</label>
       </div>
     </div>
@@ -166,14 +166,14 @@
     <hr class="qt-horisontal-line qt-mb-16 qt-mt-16">
 
     <div class="qt-df qt-mb-24">
-      <div class="qt-toggle qt-mr-8" [ngClass]="{'--on':contractsUserDevice.contractWithBlockTime}" (click)="setToggleMaximumAmountHours(!contractsUserDevice.contractWithBlockTime)">
+      <div class="qt-toggle qt-mr-8" [ngClass]="{'--on':toggleMaximumAmountHours}" (click)="setToggleMaximumAmountHours(!toggleMaximumAmountHours)">
         <div class="qt-toggle__circle"></div>
       </div>
 
       <div class="qt-fs-13 qt-ff-gm qt-lh-154 qt-color-dark-light">Set maximum amount of hours</div>
     </div>
 
-    <div class="qt-df qt-mb-16" [hidden]="!contractsUserDevice.contractWithBlockTime">
+    <div class="qt-df qt-mb-16" [hidden]="!toggleMaximumAmountHours">
       <div class="qt-input-block --required qt-w25 qt-mr-16">
         <label>Included block time</label>
           <input  [ngClass]="{'--input-error' : !validate.getIncludedHours()}"  decimalNumber

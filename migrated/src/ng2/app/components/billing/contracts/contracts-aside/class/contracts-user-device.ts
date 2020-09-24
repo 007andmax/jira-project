@@ -3,6 +3,7 @@ import { ContractsUserDeviceService } from './contracts-user-device-service';
 import * as moment from "moment";
 import { ContractsBlockTimeDefaultService } from './contracts-block-time-default-service';
 import { Tax } from 'src/ng2/class/taxes/tax';
+import { ServiceAgreement } from '../../class/service-agreement';
 
 export class ContractsUserDevice {
     billType: string = "DEVICE";
@@ -27,10 +28,36 @@ export class ContractsUserDevice {
     services: Array<ContractsBlockTimeDefaultService> = [];
     startDate: string;
     reviewDate: string;
-    taxIds: Array<Tax>;
+    taxIds: Array<string>;
     type: string = "SERVICE_CONTRACT";
     constructor() {
 
+    }
+    
+    public setDataFromCopy(data: ServiceAgreement) {
+        this.billType = data.billType;
+        this.blockRate = (data.blockRate) ? Number(data.blockRate) : undefined;
+        this.blockTimeServices =  (data.blockTimeServices.length > 0) ? data.blockTimeServices.map(item => new ContractsBlockTimeService(item.name, item.rate)) : data.serviceContractServicesToTrack.map(item => new ContractsBlockTimeService(item.name, item.rate));
+        this.companyId = data.companyId;
+        this.contractWithBlockTime =  (data.blockTimeServices.length > 0);
+        this.customInterval = data.customInterval;
+        this.description = data.description;
+        this.endDate = data.endDate;
+        this.invoiceAsSingleItem = data.invoiceAsSingleItem;
+        this.includedHours = String(data.includedHours);
+        if (data.interval) {
+            this.intervalstring = data.interval;
+        } else {
+            this.intervalstring = (data.customInterval === 30) ? '30 days' : (data.customInterval === 15) ? '15 days' : '7 days';
+        }
+        this.rateExceeding = (data.rateExceeding) ?  Number(data.rateExceeding).toFixed(2) : undefined;
+        this.serviceContractServices = data.serviceContractServices.map(item => new ContractsUserDeviceService(item.count, item.name, item.rate, item.taxIds));
+        this.services = data.services.map(item => new ContractsBlockTimeDefaultService(item.basedOnDefault, item.billable, (item.commissionRate) ? item.commissionRate : 0, item.id, item.name, item.rate, item.taxIds));
+        this.startDate = data.startDate;
+        this.taxIds = data.taxIds;
+       
+        this.reviewDate = data.reviewDate;
+        this.calculateEndDate();
     }
     public calculateTotalAmount() {
         let sum = 0;
@@ -145,14 +172,14 @@ export class ContractsUserDevice {
         let validate = (this.blockTimeServices.find(item => !item.validate)) ? false : true;
         return validateDuplicated && validate;
     }
-    public getDataForCreate() {
+    public getDataForCreate(toggleMaximumAmountHours) {
 
         return {
             billType: this.billType,
             blockRate: this.blockRate,
-            blockTimeServices: (this.contractWithBlockTime) ? this.blockTimeServices.map(item => item.getDataForCreate()) : null,
+            blockTimeServices: (toggleMaximumAmountHours) ? this.blockTimeServices.map(item => item.getDataForCreate()) : null,
             companyId: this.companyId,
-            contractWithBlockTime: this.contractWithBlockTime,
+            contractWithBlockTime: (this.blockTimeServices.length > 0),
             customInterval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? null : (this.intervalstring === '30 days') ? 30 : (this.intervalstring === '15 days') ? 15 : 7,
             description: this.description,
             endDate: this.endDate,
@@ -161,7 +188,7 @@ export class ContractsUserDevice {
             interval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? this.intervalstring : null,
             rateExceeding: this.rateExceeding,
             serviceContractServices: this.serviceContractServices.map(item => item.getDataForCreate()),
-            serviceContractServicesToTrack: (!this.contractWithBlockTime) ? this.blockTimeServices.map(item => item.getDataForCreate()) : [],
+            serviceContractServicesToTrack: (!toggleMaximumAmountHours) ? this.blockTimeServices.map(item => item.getDataForCreate()) : [],
             services: this.services.map(item => item.getDataForCreate()),
             reviewDate:this.reviewDate,
             startDate: this.startDate,
