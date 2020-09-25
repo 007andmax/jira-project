@@ -25,7 +25,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './contracts-aside-user-device-billing.component.html',
   styleUrls: ['./contracts-aside-user-device-billing.component.scss']
 })
-export class ContractsAsideUserDeviceBillingComponent implements OnInit,OnDestroy {
+export class ContractsAsideUserDeviceBillingComponent implements OnInit, OnDestroy {
   @ViewChild('taxes') taxesDP: InvoiceFormTicketEditTaxesComponent;
   @ViewChild('startDateDP') startDateDP: DatePickerComponent;
   @ViewChild('reviewDateDP') reviewDateDP: DatePickerComponent;
@@ -113,11 +113,11 @@ export class ContractsAsideUserDeviceBillingComponent implements OnInit,OnDestro
     this.contractsUserDevice.services = [];
   }
   onCheckServicesForAdd(createBillableItem) {
-    if (this.contractsUserDevice.blockTimeServices.length === 0  || !this.contractsUserDevice.checkDuplicatedBlockTimeServices() || !this.contractsUserDevice.checkDuplicatedServiceContractServices()
+    if (this.contractsUserDevice.blockTimeServices.length === 0 || !this.contractsUserDevice.checkDuplicatedBlockTimeServices() || !this.contractsUserDevice.checkDuplicatedServiceContractServices()
       || !this.contractsUserDevice.checkDuplicatedServices()) {
-        this.cd.detectChanges();
-        return;
-      };
+      this.cd.detectChanges();
+      return;
+    };
     this.defaultServicesService.searchDuplicatedServiceNames(moment(this.contractsUserDevice.startDate).format('DD MMM YYYY'),
       moment(this.contractsUserDevice.endDate).format('DD MMM YYYY'), this.contractsUserDevice.companyId, null, this.contractsUserDevice.getAllServicesName()).subscribe(data => {
 

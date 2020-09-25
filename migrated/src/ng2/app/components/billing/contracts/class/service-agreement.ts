@@ -26,8 +26,8 @@ export class ServiceAgreement {
     productExpenses: any;
     rateExceeding: string;
     reviewDate: string;
-    serviceContractServices: any;
-    serviceContractServicesToTrack: any;
+    serviceContractServices: Array<ServiceAgreementBlockTimeServices> = [];
+    serviceContractServicesToTrack: Array<ServiceAgreementBlockTimeServices> = [];
     serviceExpenses: any;
     services: Array<ContractsBlockTimeDefaultService> = [];
     shares: Array<СontractsBlockTimeShare> = [];
@@ -59,6 +59,9 @@ export class ServiceAgreement {
     public addDefaultService(item) {
         this.services.push(new ContractsBlockTimeDefaultService(true, item.billable, item.commissionRate, item.versionedId.id, item.name, item.rate, item.taxes.map(tax => tax.id)))
     }
+    public getServiceContractServicesName() {
+        return this.serviceContractServices.map(item => item.name);
+    }
     constructor(data = null) {
         if (data) {
             for (const key in data) {
@@ -69,13 +72,13 @@ export class ServiceAgreement {
             })
             this.services.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ?
                 1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
-            this.blockTimeServices = data.blockTimeServices.map(item => {
-                return new ServiceAgreementBlockTimeServices(item);
-            })
+            this.blockTimeServices = data.blockTimeServices.map(item => new ServiceAgreementBlockTimeServices(item));
+            this.serviceContractServicesToTrack = data.serviceContractServicesToTrack.map(item => new ServiceAgreementBlockTimeServices(item));
+            this.serviceContractServices = data.serviceContractServices.map(item => new ServiceAgreementBlockTimeServices(item))
             this.maxRolloverHours = (data.maxRolloverHours) ? String(data.maxRolloverHours) : "";
             this.rateExceeding = (data.rateExceeding) ? String(data.rateExceeding) : "";
             this.blockRate = (data.blockRate) ? String(data.blockRate) : "";
-            
+
         }
     }
     public setReviewDate(day, month, year, timeOffset) {
@@ -147,6 +150,9 @@ export class ServiceAgreement {
                 if (i != u && item1.name === item2.name && item1.validateDuplicated && item2.validateDuplicated) item2.validateDuplicated = false;
             })
         })
+        this.blockTimeServices.forEach(item => {
+            item.validate = (item.name.length > 0);
+        })
         console.log("blockTimeServices", this.blockTimeServices);
         let validateDuplicated = (this.blockTimeServices.find(item => !item.validateDuplicated)) ? false : true;
         let validate = (this.blockTimeServices.find(item => !item.validate)) ? false : true;
@@ -161,9 +167,29 @@ export class ServiceAgreement {
                 if (i != u && item1.name === item2.name && item1.validateDuplicated && item2.validateDuplicated) item2.validateDuplicated = false;
             })
         })
+        this.services.forEach(item => {
+            item.validate = (item.name.length > 0);
+        })
         console.log("services", this.services);
         let validateDuplicated = (this.services.find(item => !item.validateDuplicated)) ? false : true;
         let validate = (this.services.find(item => !item.validate)) ? false : true;
+        return validateDuplicated && validate;
+    }
+    public checkDuplicatedServiceContractServices() {
+        this.serviceContractServices.forEach(item => {
+            item.validateDuplicated = true;
+        });
+        this.serviceContractServices.forEach((item1, i) => {
+            this.serviceContractServices.forEach((item2, u) => {
+                if (i != u && item1.name === item2.name && item1.validateDuplicated && item2.validateDuplicated) item2.validateDuplicated = false;
+            })
+        })
+        this.serviceContractServices.forEach(item => {
+            item.validate = (item.name.length > 0);
+        })
+        console.log("serviceContractServices", this.serviceContractServices);
+        let validateDuplicated = (this.serviceContractServices.find(item => !item.validateDuplicated)) ? false : true;
+        let validate = (this.serviceContractServices.find(item => !item.validate)) ? false : true;
         return validateDuplicated && validate;
     }
     public getAllServicesName() {
@@ -184,6 +210,33 @@ export class ServiceAgreement {
             services: this.services.filter(item => item.selected).map(item => item.getDataForCreate()),
             startDate: this.startDate,
             reviewDate: this.reviewDate,
+            type: this.type
+        }
+    }
+    public getDataForUpdateServiceContract(toggleMaximumAmountHours) {
+
+        return {
+            id: this.id,
+            billType: this.billType,
+            blockRate: (this.blockRate) ? this.blockRate  : undefined,
+            blockTimeServices: (toggleMaximumAmountHours) ? this.blockTimeServices.map(item => item.getDataForUpdate()) : null,
+            companyId: this.companyId,
+            contractWithBlockTime: toggleMaximumAmountHours,
+            customInterval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? null : (this.intervalstring === '30 days') ? 30 : (this.intervalstring === '15 days') ? 15 : 7,
+            description: this.description,
+            endDate: this.endDate,
+            invoiceAsSingleItem: this.invoiceAsSingleItem,
+            includedHours: (this.includedHours) ? this.includedHours : null,
+            interval: (this.intervalstring === 'MONTHLY' || this.intervalstring === 'YEARLY') ? this.intervalstring : null,
+            rateExceeding: (this.rateExceeding && this.rateExceeding.length > 0) ? this.rateExceeding : null,
+            serviceExpenses: null,
+            productExpenses: null,
+            serviceContractServices: this.serviceContractServices.map(item => item.getDataForUpdate()),
+            serviceContractServicesToTrack: (!toggleMaximumAmountHours) ? this.blockTimeServices.map(item => item.getDataForUpdate()) : [],
+            services: this.services.map(item => item.getDataForCreate()),
+            reviewDate: this.reviewDate,
+            startDate: this.startDate,
+            taxIds: (toggleMaximumAmountHours) ? this.taxIds : null,
             type: this.type
         }
     }

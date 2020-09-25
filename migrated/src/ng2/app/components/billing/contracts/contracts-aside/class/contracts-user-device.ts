@@ -39,7 +39,7 @@ export class ContractsUserDevice {
         this.blockRate = (data.blockRate) ? Number(data.blockRate) : undefined;
         this.blockTimeServices = (data.blockTimeServices.length > 0) ? data.blockTimeServices.map(item => new ContractsBlockTimeService(item.name, item.rate)) : data.serviceContractServicesToTrack.map(item => new ContractsBlockTimeService(item.name, item.rate));
         this.companyId = data.companyId;
-        this.contractWithBlockTime = (data.blockTimeServices.length > 0);
+        this.contractWithBlockTime = (data.rateExceeding && data.includedHours) ? true  : false;
         this.customInterval = data.customInterval;
         this.description = data.description;
         this.endDate = data.endDate;

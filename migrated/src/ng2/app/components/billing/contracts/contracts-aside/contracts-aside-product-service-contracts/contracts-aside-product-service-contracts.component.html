@@ -1,7 +1,7 @@
 <div class="contracts-page-scroll-content">
   <div class="qt-pr-32 qt-pl-32 qt-pb-24 qt-pt-16">
 
-    <app-contracts-aside-top [selectedType]="selectedType" ></app-contracts-aside-top>
+    <app-contracts-aside-top #topContract (onSelectCompany)="onSelectCompany($event)" [validateCompany]="validate.company" [selectedType]="selectedType" ></app-contracts-aside-top>
 
 
     <div class="qt-pl-12 qt-pr-12 qt-df qt-ai-c contract-tipe-info qt-mb-16">

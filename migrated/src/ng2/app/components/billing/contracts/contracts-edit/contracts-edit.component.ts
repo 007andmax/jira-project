@@ -4,6 +4,7 @@ import { ContractsAsideHourlyEditComponent } from './contracts-aside-hourly-edit
 import { ContractsStateService } from 'src/ng2/app/states/contracts/contracts-state.service';
 import { ContractsAsideBlockTimeEditComponent } from './contracts-aside-block-time-edit/contracts-aside-block-time-edit.component';
 import { DefaultServicesService } from 'src/ng2/app/services/default-services/default-services.service';
+import { ContractsAsideUserDeviceEditComponent } from './contracts-aside-user-device-edit/contracts-aside-user-device-edit.component';
 
 @Component({
   selector: 'app-contracts-edit',
@@ -13,6 +14,7 @@ import { DefaultServicesService } from 'src/ng2/app/services/default-services/de
 export class ContractsEditComponent implements OnInit {
   @ViewChild('hourlyContract') hourlyContract: ContractsAsideHourlyEditComponent;
   @ViewChild('blockTimeContract') blockTimeContract: ContractsAsideBlockTimeEditComponent;
+  @ViewChild('serviceContract') serviceContract: ContractsAsideUserDeviceEditComponent;
   
   @Input() serviceAgreement: ServiceAgreement;
   constructor(private contractsStateService: ContractsStateService,
@@ -27,6 +29,7 @@ export class ContractsEditComponent implements OnInit {
   edit() {
     if (this.hourlyContract) this.hourlyContract.onEdit();
     if (this.blockTimeContract) this.blockTimeContract.onEdit();
+    if (this.serviceContract) this.serviceContract.onEdit();
   }
   closed() {
     this.contractsStateService.toggleEdit(false);
