@@ -78,6 +78,7 @@ export class InventoryComponent implements OnInit {
     })
     this.sub.add(getOnSortCategory);
     let getChangeProducts = this.inventoryStateService.getChangeProducts().subscribe((data: InventoryChange) => {
+      console.log("data",data);
       if (data.action === 'PRODUCT_SAVED') {
         const reqIndex = this.reqInventoryList.findIndex((item) => item.versionedId.id === data.data.versionedId.id);
         const Index = this.inventoryList.findIndex((item) => item.versionedId.id === data.data.versionedId.id);
