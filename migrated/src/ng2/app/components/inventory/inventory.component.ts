@@ -78,7 +78,7 @@ export class InventoryComponent implements OnInit {
     })
     this.sub.add(getOnSortCategory);
     let getChangeProducts = this.inventoryStateService.getChangeProducts().subscribe((data: InventoryChange) => {
-      console.log("data",data);
+    
       if (data.action === 'PRODUCT_SAVED') {
         const reqIndex = this.reqInventoryList.findIndex((item) => item.versionedId.id === data.data.versionedId.id);
         const Index = this.inventoryList.findIndex((item) => item.versionedId.id === data.data.versionedId.id);
@@ -86,15 +86,14 @@ export class InventoryComponent implements OnInit {
         if (reqIndex === -1) this.reqInventoryList.push(new InventoryItem(data.data));
         if (Index > -1) {
           this.inventoryList[Index] = new InventoryItem(data.data);
-          console.log("this.inventoryList[Index]",this.inventoryList[Index])
-        }
+         }
         if (Index === -1) {
           this.inventoryList.push(new InventoryItem(data.data));
           this.inventoryList = this.inventoryList.filter(item => (this.sortCategoty) ? item.category.id === this.sortCategoty.id : (!this.sortCategoty) ? true : false);
           this.inventoryList = this.inventoryList.filter(item => (this.productSearchName.length > 0) ? item.description.toLowerCase().includes(this.productSearchName.toLowerCase()) : true);
           this.filter.onFilter(this.inventoryList, this.companies, this.glNumbers);
         }
-        console.log("this.inventoryList[Index]",this.inventoryList);
+       
       }
       if (data.action === 'PRODUCT_DELETED') {
         const reqIndex = this.reqInventoryList.findIndex((item) => item.versionedId.id === data.data.versionedId.id);

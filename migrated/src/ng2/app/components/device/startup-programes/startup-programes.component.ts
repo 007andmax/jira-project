@@ -63,7 +63,7 @@ export class StartupComponent implements OnInit {
     } else if (output.type === 'drop') {
       this.dragOver = false;
     } else if (output.type === 'rejected' && typeof output.file !== 'undefined') {
-      console.log(output.file.name + ' rejected');
+    
     }
 
     // this.files = this.files.filter(file => file.progress.status !== UploadStatus.Done);
@@ -95,7 +95,7 @@ export class StartupComponent implements OnInit {
   myDateValue: Date;
 
   onDateChange(newDate: Date) {
-    console.log(newDate);
+   
   }
 
   show = false;

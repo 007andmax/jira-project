@@ -220,7 +220,6 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
   }
 
   toggleSubject() {
-    console.log("toggleSubject");
     var textCurrent = this.elRef.nativeElement.querySelector("#ticket-subject").value;
     var textOld = this.ticketProfile.subject;
     this.modeSubject = (this.modeSubject === 'view') ? 'edit' : 'view';
@@ -230,7 +229,6 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     }
   }
   toggleNote() {
-    console.log("toggleNote");
     var textCurrent = this.elRef.nativeElement.querySelector("#ticket-note").innerHTML.replace(/<\/?[^>]+>/ig, "");
     var textOld = (this.ticketProfile.note) ?  this.ticketProfile.note.replace(/<\/?[^>]+>/ig, "") : "";
     this.modeDescription = 'view';
@@ -240,7 +238,6 @@ export class TicketEditAsideComponent implements OnInit, OnDestroy {
     }
   }
   onChangeSubjectNote() {
-    console.log("onChangeSubjectNote");
     this.ticketsService.changeSubjectNoteTicket(this.ticketProfile.id, this.ticketProfile.subject, this.ticketProfile.note).subscribe(data => {
     })
   }

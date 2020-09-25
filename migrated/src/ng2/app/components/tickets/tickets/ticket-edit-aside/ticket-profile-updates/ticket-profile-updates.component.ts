@@ -27,10 +27,8 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
     public cd: ChangeDetectorRef,
     private notificationStateService: NotificationStateService,) { }
   ngOnInit() {
-    console.log("TicketProfileUpdatesComponent");
     let getConfirm = this.confirmStateService.getConfirm().subscribe(data => {
-      console.log("data", data);
-      if (data && this.ticketProfile.id) {
+      if (data) {
         if (this.confirmStateService.getConfirmAction() === REMOVE_UPDATE_TICKET) {
           this.removeUpdate();
         }
@@ -55,7 +53,6 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
     })
   }
   removeUpdate() {
-    console.log(this.sub);
     this.ticketsService.deleteUpdate(this.ticketProfile.id, this.ticketStateService.getUpdateForRemove().id).subscribe(data => {
       this.notificationStateService.oninitShowNotification(`The ticket update containing a note has been deleted`);
     })
@@ -74,9 +71,7 @@ export class TicketProfileUpdatesComponent implements OnInit, OnDestroy {
     return (this.showLoadMoreUpdates) ? this.updates.length + this.ticketProfile.unloadedUpdates : this.updates.length;
   }
   ngOnDestroy(): void {
-    console.log("TicketProfileUpdatesComponent ngOnDestroy", this.sub);
     this.sub.unsubscribe();
-    console.log(this.sub);
   }
   public trackByIndex(index, item) {
     return index;

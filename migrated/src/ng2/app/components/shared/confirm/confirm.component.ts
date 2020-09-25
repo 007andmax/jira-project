@@ -19,9 +19,7 @@ export class ConfirmComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("ConfirmComponent");
     this.action = this.confirmStateService.getConfirmAction();
-
   }
   closeModal() {
     this.activeModal.close();
@@ -40,7 +38,6 @@ export class ConfirmComponent implements OnInit {
   };
 
   approveConfirm() {
-    console.log("approveConfirm");
     this.activeModal.close();
     this.confirmStateService.setConfirm(true);
 

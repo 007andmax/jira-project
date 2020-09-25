@@ -25,12 +25,10 @@ export class AccountingReportComponent implements OnInit {
    return this.accountingReport.list.find(item => item.type === 'PAYMENT');
   }
   public getReport(data) {
-    console.log("data", data);
     this.accountingReport.setData(JSON.parse(JSON.stringify(data)));
     this.company = this.companiesStateService.getCompanies().find(item => item.id === this.accountingReport.companyId);
     // this.techUser = this.usersStateService.getAllUsers().find(item => item.id === this.techService.techUserId);
     this.onInit = true;
-    console.log("this.accountingReport", this.accountingReport);
   }
   public getDate(date) {
    
