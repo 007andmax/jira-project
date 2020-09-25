@@ -506,6 +506,9 @@ export class TerminalComponent implements OnInit {
           this.splitCommand = arr1;
           console.log(this.splitCommand)
           this.cd.detectChanges();
+          setTimeout(() => {
+            $('#terminal').scrollTop($('#terminal')[0].scrollHeight);
+          }, 50);
         })
         this.sub.add(getCmdOutput);
         this.terminalHit = true;
