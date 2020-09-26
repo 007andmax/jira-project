@@ -9,6 +9,8 @@
       [field]="'name'"
       [change]="true"
       [search]="true"
+      container="body"
+      dropdownWidth="509px"
       (onSelectedItem)="selectService($event)"
     ></app-drop-down>
       <mat-error class="qt-tooltip-error" *ngIf="!validate.getValidate() || !validate.getDuplicateName()">

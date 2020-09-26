@@ -11,7 +11,12 @@
 
   .contracts-table {
     max-width: 1320px;
+    min-width: 1064px;
     margin: 0 auto;
+  }
+
+  .contracts-list-table-header {
+    overflow-x: auto;
   }
 
   .contracts-table td {
@@ -570,6 +575,28 @@ app-contracts-aside-hourly-billing-default-service,app-contracts-aside-hourly-bi
 .contracts-aside-block-time-tabble-td {
   padding: 0 !important;
   position: relative;
+}
+
+app-contracts-aside-user-device-service {
+  display: contents;
+  td {
+    &.--editable {
+      padding-left: 0;
+      padding-right: 0;
+
+      .dropdown-toggle {
+        border-color: transparent !important;
+      }
+    }
+  }
+}
+
+app-contracts-aside-block-time-billing-customer-service {
+  display: contents;
+}
+
+app-contracts-aside-block-time-billing-default-service {
+  display: contents;
 }
 
 @media (min-width: 1920px) {
