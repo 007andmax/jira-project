@@ -3,7 +3,7 @@
     (selectedProductItem)="onChangeProduct($event)"></app-product-list></td>
   <td class="contract-product-products-table__quantity"><input   class="payment-input qt-input-in-table"   decimalNumber
     [value]="product.quantity"
-    (onChange)="product.quantity=$event" /></td>
+    (onChange)="onChangeQuantity($event)" /></td>
   <td class="contract-product-products-table__price"><input   class="payment-input qt-input-in-table"   number
     [money]="true"
     [ngModel]="product.salePrice"
