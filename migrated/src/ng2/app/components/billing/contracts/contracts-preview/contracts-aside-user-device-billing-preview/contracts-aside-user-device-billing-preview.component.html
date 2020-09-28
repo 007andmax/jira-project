@@ -105,17 +105,12 @@
           let-i="index"
           [ngForTrackBy]="trackById">
           <tr>
-            <td>  
-            <input type="text" class="qt-input-in-table"   [(ngModel)]="item.name" readonly /> 
+            <td [textContent]="item.name">  
+            
           </td>
-            <td class="col-count"> <input type="text" class="qt-input-in-table"    
-              [value]="item.count"
-              readonly  /></td> 
+            <td class="col-count" [textContent]="item.count">  </td> 
             <td class="col-tax" [textContent]="getSelectedTaxes(item.taxIds)"> </td>
-            <td class="col-price"><input type="text" class="payment-input qt-input-in-table"    
-              [value]="item.rate"
-              readonly
-              ></td>
+            <td class="col-price" [textContent]="item.rate"> </td>
             <td> </td>
           </tr>
           </ng-template>
@@ -144,9 +139,9 @@
           let-i="index"
            >
            <tr>
-            <td class="contracts-aside-block-time-tabble-td">
+            <td class="contracts-aside-block-time-tabble-td" [textContent]="item.name">
              
-              <input type="text" class="qt-input-in-table"   [(ngModel)]="item.name" readonly/></td>
+             </td>
             <td>
               
             </td>
@@ -222,30 +217,30 @@
     <div class="qt-df qt-mb-16" [hidden]="!(contractsUserDevice.includedHours && contractsUserDevice.rateExceeding)">
       <div class="qt-input-block --required qt-w25 qt-mr-16">
         <label>Included block time</label>
-          <input  
-          [value]="contractsUserDevice.includedHours"
-          readonly
-          >
+          <p  
+          [textContent]="contractsUserDevice.includedHours"
+           
+          ></p>
           
       </div>
 
       <div class="qt-input-block --required qt-w25 qt-mr-16">
         <label>Rate exceding block time</label>
         <div class="qt-df">
-          <div class="qt-input-prefix">$</div><input class="qt-input-prepend"  
-          [value]="contractsUserDevice.rateExceeding"
-          readonly
-          >
+          <div class="qt-input-prefix">$</div><p class="qt-input-prepend"  
+          [textContent]="contractsUserDevice.rateExceeding"
+           
+          ></p>
          
         </div>
       </div>
 
       <div class="qt-input-block qt-w25 qt-mr-16">
         <label>Select taxes</label>
-        <input class="qt-input-prepend"
-        [value]="getSelectedTaxes(contractsUserDevice.taxIds)"
-        readonly
-        />
+        <p class="qt-input-prepend"
+        [textContent]="getSelectedTaxes(contractsUserDevice.taxIds)"
+      
+        ></p>
       </div>
 
       <div class="qt-w25"></div>

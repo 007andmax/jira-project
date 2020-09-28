@@ -22,4 +22,13 @@ export class ContractItem {
 
         }
     }
+    public getStartDateByMilliseconds() {
+        return new Date(this.startDate).getTime();
+    }
+    public getReviewDateByMilliseconds() {
+        return new Date(this.reviewDate).getTime();
+    } 
+    public getEndDateByMilliseconds() {
+        return new Date(this.endDate).getTime();
+    } 
 }

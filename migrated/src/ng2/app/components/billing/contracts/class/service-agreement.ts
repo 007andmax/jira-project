@@ -77,7 +77,7 @@ export class ServiceAgreement {
             this.serviceContractServices = data.serviceContractServices.map(item => new ServiceAgreementBlockTimeServices(item))
             this.maxRolloverHours = (data.maxRolloverHours) ? String(data.maxRolloverHours) : "";
             this.rateExceeding = (data.rateExceeding) ? String(data.rateExceeding) : "";
-            this.blockRate = (data.blockRate) ? String(data.blockRate) : "";
+            this.blockRate = (typeof data.blockRate === "number") ? String(data.blockRate) : "";
 
         }
     }

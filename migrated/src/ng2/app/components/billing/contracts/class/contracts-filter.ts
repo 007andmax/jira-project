@@ -51,7 +51,7 @@ export class ContractsFilter {
   public checkFilterItem(item) {
     return ((this.selectedCompany) ?  item.company.id === this.selectedCompany.id : true) 
     && ((this.selectedStatus) ?  item.status === this.selectedStatus.status : true)
-    && ((this.selectedStartDate && this.selectedEndDate) ?  item.startDate >= this.selectedStartDate && item.startDate <= this.selectedEndDate : true)
+    && ((this.selectedStartDate && this.selectedEndDate) ?  item.getStartDateByMilliseconds() >= this.selectedStartDate && item.getStartDateByMilliseconds() <= this.selectedEndDate : true)
     && ((this.selectedType) ?  item.type === this.selectedType.type && item.billType === this.selectedType.billType : true)
   }
   onSort(field, list) {

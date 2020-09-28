@@ -36,7 +36,7 @@ export class ContractsUserDevice {
 
     public setDataFromCopy(data: ServiceAgreement) {
         this.billType = data.billType;
-        this.blockRate = (data.blockRate) ? Number(data.blockRate) : undefined;
+        this.blockRate = (data.blockRate.length > 0) ? Number(data.blockRate) : undefined;
         this.blockTimeServices = (data.blockTimeServices.length > 0) ? data.blockTimeServices.map(item => new ContractsBlockTimeService(item.name, item.rate)) : data.serviceContractServicesToTrack.map(item => new ContractsBlockTimeService(item.name, item.rate));
         this.companyId = data.companyId;
         this.contractWithBlockTime = (data.rateExceeding && data.includedHours) ? true  : false;
