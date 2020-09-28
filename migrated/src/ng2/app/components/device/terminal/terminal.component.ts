@@ -471,7 +471,7 @@ export class TerminalComponent implements OnInit {
   }
 
   copyToTerminal(cmd) {
-    if (JSON.parse(localStorage.getItem('deviceDetail')).online === false) {
+    if (JSON.parse(localStorage.getItem('deviceDetail')).online === true) {
       this.finalCommand = cmd;
       // let arr = cmd.split(/\r*\n/)
       // this.splitCommand[this.splitCommand.length - 1] = this.splitCommand[this.splitCommand.length - 1] + arr[0];
