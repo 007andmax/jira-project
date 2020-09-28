@@ -76,10 +76,10 @@
     <div class="qt-df qt-mb-24">
       <div class="qt-input-block --required qt-w25 qt-mr-16">
         <label>Included block time</label>
-        <p class="payment-input qt-input-in-table"
-        [textContent]="contractsBlockTime.includedHours"
-         
-          ></p>
+        <input class="payment-input qt-input-in-table"	
+                [(ngModel)]="contractsBlockTime.includedHours"	
+                 readonly	
+                  />
 
       </div>
 
@@ -87,9 +87,10 @@
         <label>Block Rate</label>
         <div class="qt-df">
           <div class="qt-input-prefix">$</div>
-          <p class="qt-input-prepend"
-          [textContent]="parseWithFixed(contractsBlockTime.blockRate)"
-           ></p>
+          <input class="qt-input-prepend"	
+           [value]="parseWithFixed(contractsBlockTime.blockRate)"	
+          readonly	
+             />
 
         </div>
       </div>
@@ -97,19 +98,21 @@
       <div class="qt-input-block --required qt-w25 qt-mr-16">
         <label>Rate exceeding block time</label>
         <div class="qt-df">
-          <div class="qt-input-prefix">$</div>  <p class="qt-input-prepend"
-          [textContent]="parseWithFixed(contractsBlockTime.rateExceeding)"
-          ></p>
+          <div class="qt-input-prefix">$</div>  
+          <input class="qt-input-prepend"	
+           [value]="parseWithFixed(contractsBlockTime.rateExceeding)"	
+          readonly	
+           />
 
         </div>
       </div>
 
       <div class="qt-input-block qt-w25 qt-mr-16">
         <label>Select taxes</label>
-        <p class="qt-input-prepend"
-        [textContent]="getSelectedTaxes(contractsBlockTime.taxIds)"
-        
-        ></p>
+        <input class="qt-input-prepend"	
+                [value]="getSelectedTaxes(contractsBlockTime.taxIds)"	
+                readonly	
+                />
       </div>
 
     </div>
@@ -132,10 +135,10 @@
           let-i="index"
            >
            <tr>
-            <td class="contracts-aside-block-time-tabble-td">
+            <td class="contracts-aside-block-time-tabble-td" [textContent]="item.name">
 
 
-              <p class="qt-input-in-table"   [textContent]="item.name" ></p></td>
+            </td>
             <td>
 
             </td>
@@ -190,14 +193,12 @@
                 <span></span>
               </label>
             </td>
-            <td class="track-and-bill-table__tax --editable">  <p class="qt-input-prepend"
-              [hidden]="!service.billable"
-              [textContent]="getSelectedTaxes(service.taxIds)"
-              
-              ></p>
-              </td>
-            <td class="track-and-bill-table__hourly-rate --editable"><p *ngIf="service.billable" class="payment-input qt-input-in-table"
-              [textContent]="parseWithFixed(service.rate)" ></p></td>
+            <td class="track-and-bill-table__tax --editable"> 
+              <input class="qt-input-prepend" [hidden]="!service.billable"
+                [value]="getSelectedTaxes(service.taxIds)" readonly />
+            </td>
+            <td class="track-and-bill-table__hourly-rate --editable"><span *ngIf="service.billable"  
+              [textContent]="parseWithFixed(service.rate)" ></span></td>
             <td>
 
             </td>
@@ -226,7 +227,7 @@
       <div class="qt-df qt-ai-c" *ngIf="contractsBlockTime.maxRolloverHours">
         <div class="qt-fs-13 qt-ff-gm qt-lh-154 qt-color-dark-light qt-mr-8">Max roll over hours:</div>
         <div class="qt-input-block max-roll-over-input">
-          <p  [textContent]="contractsBlockTime.maxRolloverHours" ></p>
+          <input  [value]="contractsBlockTime.maxRolloverHours" type="text" readonly>
         </div>
       </div>
     </div>
