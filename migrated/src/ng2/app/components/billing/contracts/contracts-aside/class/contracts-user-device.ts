@@ -4,6 +4,8 @@ import * as moment from "moment";
 import { ContractsBlockTimeDefaultService } from './contracts-block-time-default-service';
 import { Tax } from 'src/ng2/class/taxes/tax';
 import { ServiceAgreement } from '../../class/service-agreement';
+import { ContractsOtherProduct } from './contracts-other-product';
+import { ContractsOtherService } from './contracts-other-service';
 
 export class ContractsUserDevice {
     billType: string = "DEVICE";
@@ -20,11 +22,11 @@ export class ContractsUserDevice {
     interval: string;
     intervalstring: string = "MONTHLY";
     invoiceAsSingleItem: boolean = false;
-    productExpenses: any;
+    productExpenses: Array<ContractsOtherProduct> = [];
     rateExceeding: string;
     serviceContractServices: Array<ContractsUserDeviceService> = [];
     serviceContractServicesToTrack: Array<ContractsBlockTimeService> = [];
-    serviceExpenses: any;
+    serviceExpenses: Array<ContractsOtherService> = [];
     services: Array<ContractsBlockTimeDefaultService> = [];
     startDate: string;
     reviewDate: string;

@@ -13,7 +13,9 @@ import { InvoiceFormTicketEditTaxesComponent } from '../../../billable/billable-
 import { ContractsFilterType } from '../../class/contracts-filter-type';
 import { ContractsBlockTimeValidate } from '../class/contracts-block-time-validate';
 import { ContractsOther } from '../class/contracts-other';
- 
+import { ContractsOtherProduct } from '../class/contracts-other-product';
+import { ContractsOtherService } from '../class/contracts-other-service';
+import * as moment from "moment";
 import { ContractsAsideTopComponent } from '../contracts-aside-top/contracts-aside-top.component';
 
 @Component({
@@ -29,7 +31,7 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit {
   @ViewChild('topContract') topContract: ContractsAsideTopComponent;
 
   @Output() onClose = new EventEmitter<any>();
-   contractsOther: ContractsOther = new ContractsOther();
+  contractsOther: ContractsOther = new ContractsOther();
   formatDate: string = FORMAT_DATE_2;
   startDate = new Date().getTime();
   reviewDate = new Date().getTime();
@@ -41,6 +43,7 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit {
   toggleMaximumAmountHours: boolean = false;
   toggleContractServices: boolean = false;
   defaultSelectedTax: Array<Tax> = [];
+  type:string = "PRODUCTS";
   sub: Subscription = new Subscription();
   constructor(private companiesStateService: CompaniesStateService,
     private taxesStateService: TaxesStateService,
@@ -58,19 +61,31 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit {
     this.contractsOther.setReviewDate(today.getDate(), today.getMonth(), today.getFullYear(), this.companiesStateService.getCurrentCompany().addresses[0].timeZone.timeOffset);
 
     this.minStartDate = this.getMinStartDate('MONTHLY', this.contractsOther.startDate);
-   /* if (this.taxesStateService.getTaxes().length > 0) this.setDefaultTaxes(this.taxesStateService.getTaxes());
-    let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
-      this.setDefaultTaxes(data);
-
-    })
-    let getConfirm = this.сontractsStateService.getConfirm().subscribe(data => {
-      console.log("data", data);
-      this.onCheckServicesForAdd(data);
-    })
-    this.sub.add(getConfirm);
-    this.contractsUserDevice.serviceContractServices = [new ContractsUserDeviceService(0, "Managed workstations", 0, this.defaultSelectedTax.map(item => item.id)),
-    new ContractsUserDeviceService(0, "Managed servers", 0, this.defaultSelectedTax.map(item => item.id))]
-    if (this.сontractsStateService.getContractForCopy()) this.onInitCopy();*/
+    /* if (this.taxesStateService.getTaxes().length > 0) this.setDefaultTaxes(this.taxesStateService.getTaxes());
+     let getOnTaxess = this.taxesStateService.onGetTaxes.subscribe((data) => {
+       this.setDefaultTaxes(data);
+ 
+     })
+     let getConfirm = this.сontractsStateService.getConfirm().subscribe(data => {
+       console.log("data", data);
+       this.onCheckServicesForAdd(data);
+     })
+     this.sub.add(getConfirm);
+     this.contractsUserDevice.serviceContractServices = [new ContractsUserDeviceService(0, "Managed workstations", 0, this.defaultSelectedTax.map(item => item.id)),
+     new ContractsUserDeviceService(0, "Managed servers", 0, this.defaultSelectedTax.map(item => item.id))]
+     if (this.сontractsStateService.getContractForCopy()) this.onInitCopy();*/
+  }
+  addService() {
+    this.contractsOther.serviceExpenses.push(new ContractsOtherService(new Date().getTime(),"",0,""));
+  }
+  addProduct() {
+    this.contractsOther.productExpenses.push(new ContractsOtherProduct("",0,0));
+  }
+  onRemoveService(i) {
+    this.contractsOther.serviceExpenses.splice(i, 1);
+  }
+  onRemoveProduct(i) {
+    this.contractsOther.productExpenses.splice(i, 1);
   }
   onSelectCompany(data) {
     this.contractsOther.setCompanyId((data) ? data.id : null);
@@ -110,5 +125,8 @@ export class ContractsAsideProductServiceContractsComponent implements OnInit {
       newMinStartDate = now.getTime() - (6 * day);
     }
     return newMinStartDate;
+  }
+  parsedateForTotal(date) {
+    return moment(date).format('DD MMM YYYY');
   }
 }

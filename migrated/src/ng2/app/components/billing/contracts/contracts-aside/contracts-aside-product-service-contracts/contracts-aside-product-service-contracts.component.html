@@ -57,13 +57,13 @@
     </div>
 
     <ul class="product-bill-customer-select-nav qt-mb-16">
-      <li>Products (3)</li>
-      <li class="--selected">Service (2)</li>
+      <li [ngClass]="{'--selected' :type === 'PRODUCTS'}" (click)="type = 'PRODUCTS'">Products ({{contractsOther.productExpenses.length}})</li>
+      <li  [ngClass]="{'--selected' :type === 'SERVICES'}" (click)="type = 'SERVICES'">Service ({{contractsOther.serviceExpenses.length}})</li>
     </ul>
 
 
 
-    <div class="table-last-icon-wrapper qt-mb-16">
+    <div class="table-last-icon-wrapper qt-mb-16" *ngIf="type === 'SERVICES'">
       <table class="qt-gray-table contract-product-service-table --last-icon">
         <thead>
           <tr>
@@ -75,42 +75,22 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td class="contract-product-service-table__service">After hour support</td>
-            <td class="contract-product-service-table__description">Serverbase configuration</td>
-            <td class="contract-product-service-table__duration">01 h 20m</td>
-            <td class="contract-product-service-table__date">18 Apr 2020</td>
-            <td>
-              <div class="icon__raw-clear qt-ic-c qt-sz-16"></div>
-            </td>
-          </tr>
-
-          <tr>
-            <td class="contract-product-service-table__service">Manage Remote Support</td>
-            <td class="contract-product-service-table__description">Flashcard connection</td>
-            <td class="contract-product-service-table__duration">01 h 30m</td>
-            <td class="contract-product-service-table__date">14 Apr 2020</td>
-            <td>
-              <div class="icon__raw-clear qt-ic-c qt-sz-16"></div>
-            </td>
-          </tr>
-
-          <tr>
-            <td class="contract-product-service-table__service">Phone System Support</td>
-            <td class="contract-product-service-table__description">Remote access to card</td>
-            <td class="contract-product-service-table__duration">04 h 30m</td>
-            <td class="contract-product-service-table__date">31 Aug 2020</td>
-            <td>
-              <div class="icon__raw-clear qt-ic-c qt-sz-16"></div>
-            </td>
-          </tr>
+          <ng-template ngFor let-item
+          [ngForOf]="contractsOther.serviceExpenses"
+          let-i="index"
+           >
+            <app-contracts-aside-other-service [service]="item" (onRemove)="onRemoveService(i)"  ></app-contracts-aside-other-service>
+           </ng-template>
+          
+         
 
 
         </tbody>
       </table>
+     
     </div>
 
-    <div class="table-last-icon-wrapper qt-mb-16">
+    <div class="table-last-icon-wrapper qt-mb-16" *ngIf="type === 'PRODUCTS'">
       <table class="qt-gray-table contract-product-products-table --last-icon">
         <thead>
           <tr>
@@ -121,41 +101,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td class="contract-product-products-table__name">ADS: 30 inch screen and large</td>
-            <td class="contract-product-products-table__quantity">2</td>
-            <td class="contract-product-products-table__price">$160.00</td>
-            <td>
-              <div class="icon__raw-clear qt-ic-c qt-sz-16"></div>
-            </td>
-          </tr>
-
-          <tr>
-            <td class="contract-product-products-table__name">JBL In-ceiling speakers - White</td>
-            <td class="contract-product-products-table__quantity">1</td>
-            <td class="contract-product-products-table__price">$200.00</td>
-            <td>
-              <div class="icon__raw-clear qt-ic-c qt-sz-16"></div>
-            </td>
-          </tr>
-
-          <tr>
-            <td class="contract-product-products-table__name">3.5mm Stereo 12ft  Plug/Plug  M/M Cable</td>
-            <td class="contract-product-products-table__quantity">1</td>
-            <td class="contract-product-products-table__price">$125.00</td>
-            <td>
-              <div class="icon__raw-clear qt-ic-c qt-sz-16"></div>
-            </td>
-          </tr>
-
-
-
-
+          <ng-template ngFor let-item
+          [ngForOf]="contractsOther.productExpenses"
+          let-i="index"
+           >
+            <app-contracts-aside-other-product [product]="item" (onRemove)="onRemoveProduct(i)"  ></app-contracts-aside-other-product>
+           </ng-template>
+        
         </tbody>
       </table>
     </div>
-
-    <button class="qt-btn --outline --small">+ Add Service</button>
+    <button class="qt-btn --outline --small" (click)="addProduct()" *ngIf="type === 'PRODUCTS'">+ Add Product</button>
+    <button class="qt-btn --outline --small" (click)="addService()" *ngIf="type === 'SERVICES'">+ Add Service</button>
 
   </div>
 
@@ -166,18 +123,18 @@
 
         <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
           <div>Start Date</div>
-          <div>23 Jun 2020</div>
+          <div [textContent]="parsedateForTotal(contractsOther.startDate)"></div>
         </div>
         <div class="qt-df qt-jc-sb qt-fs-13 qt-mb-12 qt-mt-12">
-          <div>Expiry Date</div>
-          <div>23 Jun 2020</div>
+          <div>Review Date</div>
+          <div [textContent]="parsedateForTotal(contractsOther.reviewDate)"></div>
         </div>
 
         <div class="contract-total__divider qt-mt-15 qt-mb-15"></div>
 
         <div class="qt-df qt-jc-sb invoice-total__total-line">
           <div class="qt-fs-13 qt-fw-b">Total</div>
-          <div class="qt-fs-16 qt-fw-b">$485.00</div>
+          <div class="qt-fs-16 qt-fw-b" [textContent]="contractsOther.getTotalAmountOther() | currency"></div>
         </div>
 
       </div>

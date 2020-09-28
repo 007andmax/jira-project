@@ -1,0 +1,20 @@
+<tr>
+  <td class="contract-product-service-table__service" ngbDropdown placement="top-right"><input type="text" [value]="service.name" id="dropdownBasic2" ngbDropdownToggle readonly>
+    <ul class="qt-dropdown-menu list-services --open-bot" style="max-height: 165px;" ngbDropdownMenu aria-labelledby="dropdownBasic2">
+
+      <ng-template ngFor let-item
+      [ngForOf]="defaultServices"
+      let-i="index"
+       >
+       <li class="pointer" ngbDropdownItem [textContent]="item.name" (click)="select(item)"></li>
+      </ng-template>
+    </ul></td>
+  <td class="contract-product-service-table__description"><input type="text"  [(ngModel)]="service.description"/></td>
+  <td class="contract-product-service-table__duration">   <app-ticket-profile-updates-service-duration  (onChange)="onChangeDurationService($event)"    ></app-ticket-profile-updates-service-duration>
+  </td>
+  <td class="contract-product-service-table__date"> <app-date-picker  [placement]="'top'"  [editMode]="true" [editDate]="service.date" [useMinDate]="false"  (onChange)="onChangeDatePickerService($event)"></app-date-picker>
+  </td>
+  <td>
+    <div class="icon__raw-clear qt-ic-c qt-sz-16"></div>
+  </td>
+</tr>
