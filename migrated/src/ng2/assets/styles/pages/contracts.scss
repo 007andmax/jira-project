@@ -15,7 +15,7 @@
     margin: 0 auto;
   }
 
-  .contracts-list-table-header {
+  .contracts-table-header-wrapper {
     overflow-x: auto;
   }
 
@@ -463,12 +463,15 @@
 
     .col-price {
       width: 109px;
+      text-align: right;
     }
     .col-tax {
       width: 109px;
+      text-align: right;
     }
     .col-count {
       width: 84px;
+      text-align: right;
     }
 
     .aside-footer {
@@ -572,7 +575,7 @@ app-contracts-aside-hourly-billing-default-service,app-contracts-aside-hourly-bi
   display: contents;
 }
 
-.contracts-aside-block-time-tabble-td {
+.contracts-aside-block-time-tabble-td.--editable {
   padding: 0 !important;
   position: relative;
 }

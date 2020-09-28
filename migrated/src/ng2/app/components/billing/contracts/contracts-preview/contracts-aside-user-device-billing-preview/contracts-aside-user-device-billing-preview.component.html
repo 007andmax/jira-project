@@ -31,7 +31,7 @@
       </div>
 
       <div class="qt-input-block --required qt-w25 qt-mr-16">
-      
+
         <app-drop-down
             [title]="'Interval'"
             [sort]="false"
@@ -41,7 +41,7 @@
             [isDisabled]="true"
             [list]="intervals"
             [isBlockClear]="true"
-            
+
       ></app-drop-down>
       </div>
 
@@ -62,7 +62,7 @@
       <div class="qt-input-block --required qt-w100">
         <label>Description</label>
         <input  type="text" [(ngModel)]="contractsUserDevice.description" disabled>
-         
+
       </div>
     </div>
 
@@ -105,21 +105,21 @@
           let-i="index"
           [ngForTrackBy]="trackById">
           <tr>
-            <td [textContent]="item.name">  
-            
+            <td [textContent]="item.name">
+
           </td>
-            <td class="col-count" [textContent]="item.count">  </td> 
+            <td class="col-count" [textContent]="item.count">  </td>
             <td class="col-tax" [textContent]="getSelectedTaxes(item.taxIds)"> </td>
             <td class="col-price" [textContent]="item.rate"> </td>
             <td> </td>
           </tr>
           </ng-template>
-          
+
         </tbody>
       </table>
     </div>
 
-     
+
 
     <div class="qt-fs-15 qt-ff-sb qt-lh-147 qt-color-dark qt-mb-16">
       Create service that you want to track the time for. Tracked service time counts towards contract and is not billed to customer
@@ -140,19 +140,18 @@
            >
            <tr>
             <td class="contracts-aside-block-time-tabble-td" [textContent]="item.name">
-             
              </td>
             <td>
-              
+
             </td>
           </tr>
-          
+
           </ng-template>
         </tbody>
       </table>
     </div>
 
-    
+
 
   </div>
 
@@ -184,7 +183,7 @@
            <tr>
 
             <td class="service-table__name" [textContent]="item.name">
-    
+
             </td>
             <td class="service-table__billable">
               <label class="qt-checkbox">
@@ -194,6 +193,7 @@
             </td>
             <td class="service-table__tax" [textContent]="getSelectedTaxes(item.taxIds)"></td>
             <td class="service-table__rate" [textContent]="item.rate | currency"> </td>
+            <td></td>
           </tr>
           </ng-template>
 
@@ -203,7 +203,7 @@
     </div>
 
 
-    
+
     <hr class="qt-horisontal-line qt-mb-16 qt-mt-16">
 
     <div class="qt-df qt-mb-24">
@@ -218,7 +218,7 @@
       <div class="qt-input-block --required qt-w25 qt-mr-16">
         <label>Included block time</label>
         <input [value]="contractsUserDevice.includedHours" readonly>
-          
+
       </div>
 
       <div class="qt-input-block --required qt-w25 qt-mr-16">
@@ -226,7 +226,7 @@
         <div class="qt-df">
           <div class="qt-input-prefix">$</div>
           <input class="qt-input-prepend" [value]="contractsUserDevice.rateExceeding" readonly>
-         
+
         </div>
       </div>
 

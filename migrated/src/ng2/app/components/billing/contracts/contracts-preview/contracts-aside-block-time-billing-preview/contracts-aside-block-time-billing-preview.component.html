@@ -76,9 +76,9 @@
     <div class="qt-df qt-mb-24">
       <div class="qt-input-block --required qt-w25 qt-mr-16">
         <label>Included block time</label>
-        <input class="payment-input qt-input-in-table"	
-                [(ngModel)]="contractsBlockTime.includedHours"	
-                 readonly	
+        <input class="payment-input qt-input-in-table"
+                [(ngModel)]="contractsBlockTime.includedHours"
+                 readonly
                   />
 
       </div>
@@ -87,9 +87,9 @@
         <label>Block Rate</label>
         <div class="qt-df">
           <div class="qt-input-prefix">$</div>
-          <input class="qt-input-prepend"	
-           [value]="parseWithFixed(contractsBlockTime.blockRate)"	
-          readonly	
+          <input class="qt-input-prepend"
+           [value]="parseWithFixed(contractsBlockTime.blockRate)"
+          readonly
              />
 
         </div>
@@ -98,10 +98,10 @@
       <div class="qt-input-block --required qt-w25 qt-mr-16">
         <label>Rate exceeding block time</label>
         <div class="qt-df">
-          <div class="qt-input-prefix">$</div>  
-          <input class="qt-input-prepend"	
-           [value]="parseWithFixed(contractsBlockTime.rateExceeding)"	
-          readonly	
+          <div class="qt-input-prefix">$</div>
+          <input class="qt-input-prepend"
+           [value]="parseWithFixed(contractsBlockTime.rateExceeding)"
+          readonly
            />
 
         </div>
@@ -109,9 +109,9 @@
 
       <div class="qt-input-block qt-w25 qt-mr-16">
         <label>Select taxes</label>
-        <input class="qt-input-prepend"	
-                [value]="getSelectedTaxes(contractsBlockTime.taxIds)"	
-                readonly	
+        <input class="qt-input-prepend"
+                [value]="getSelectedTaxes(contractsBlockTime.taxIds)"
+                readonly
                 />
       </div>
 
@@ -136,11 +136,8 @@
            >
            <tr>
             <td class="contracts-aside-block-time-tabble-td" [textContent]="item.name">
-
-
             </td>
             <td>
-
             </td>
           </tr>
 
@@ -184,7 +181,7 @@
            >
            <tr>
             <td class="track-and-bill-table__service-name" [textContent]="service.name">
-        
+
 
             </td>
             <td class="track-and-bill-table__billable">
@@ -193,11 +190,11 @@
                 <span></span>
               </label>
             </td>
-            <td class="track-and-bill-table__tax --editable"> 
+            <td class="track-and-bill-table__tax --editable">
               <input class="qt-input-prepend" [hidden]="!service.billable"
                 [value]="getSelectedTaxes(service.taxIds)" readonly />
             </td>
-            <td class="track-and-bill-table__hourly-rate --editable"><span *ngIf="service.billable"  
+            <td class="track-and-bill-table__hourly-rate --editable"><span *ngIf="service.billable"
               [textContent]="parseWithFixed(service.rate)" ></span></td>
             <td>
 
