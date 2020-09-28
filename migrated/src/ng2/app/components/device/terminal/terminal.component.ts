@@ -69,6 +69,7 @@ export class TerminalComponent implements OnInit {
   sessionId = '';
   finalCommand = '';
   splitCommand = ["C:\\>"];
+  scriptType = 'cmd';
   @ViewChild('editor') editorElement:ElementRef;
   code = '';
   config = {
@@ -470,13 +471,13 @@ export class TerminalComponent implements OnInit {
   }
 
   copyToTerminal(cmd) {
-    if (JSON.parse(localStorage.getItem('deviceDetail')).online === true) {
+    if (JSON.parse(localStorage.getItem('deviceDetail')).online === false) {
       this.finalCommand = cmd;
-      let arr = cmd.split(/\r*\n/)
-      this.splitCommand[this.splitCommand.length - 1] = this.splitCommand[this.splitCommand.length - 1] + arr[0];
-      if (arr.splice(0, 1).length > 0) {
-        this.splitCommand = this.splitCommand.concat(arr.splice(0, 1));
-      }
+      // let arr = cmd.split(/\r*\n/)
+      // this.splitCommand[this.splitCommand.length - 1] = this.splitCommand[this.splitCommand.length - 1] + arr[0];
+      // if (arr.splice(0, 1).length > 0) {
+      //   this.splitCommand = this.splitCommand.concat(arr.splice(0, 1));
+      // }
       this.sessionId = localStorage.getItem('uuid');
       this.sendCommand();
     } else {
@@ -490,9 +491,9 @@ export class TerminalComponent implements OnInit {
       "companyId": localStorage.getItem('company_id'),
       "agentId": localStorage.getItem('agentId'),
       "sessionId": this.sessionId,
-      "scriptType": "cmd", // 'powershell'
+      "scriptType": this.scriptType, // 'powershell'
       "script": this.finalCommand,
-      "file": this.splitCommand.length > 1 ? true : false,
+      "file": true,
       "keepOpen": true
     }
 
@@ -529,6 +530,15 @@ export class TerminalComponent implements OnInit {
     error => {
       const statusError = error;
     });
+  }
+
+  switchTerminal(type) {
+    this.scriptType = type;
+    if (this.terminalHit === true) {
+      this.splitCommand = [this.splitCommand[this.splitCommand.length - 1]];
+    } else {
+      this.splitCommand = ["C:\\>"];
+    }
   }
 
 

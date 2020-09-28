@@ -679,6 +679,7 @@ main {
                 &.Command {
                     margin-left: 0;
                     background: url("../../../../assets/img/device/command-line-blue.svg") no-repeat left 0;
+                    cursor: pointer;
                     &.active {
                         background: url("../../../../assets/img/device/command-line-blue.svg") no-repeat left 0;
                         color: #16a4fa;
@@ -686,6 +687,7 @@ main {
                 }
                 &.Power {
                     background: url("../../../../assets/img/device/power-shell.svg") no-repeat left 0;
+                    cursor: pointer;
                     &.active {
                         background: url("../../../../assets/img/device/power-shell.svg") no-repeat left 0;
                         color: #16a4fa;

@@ -5,17 +5,17 @@
         <!-- Page Title -->
         <div class="page-header">
           <h3>Terminal</h3>
-          <!-- <div class="page-header-opt">
+          <div class="page-header-opt">
             <div class="update-info">
-              <a class="Command active" href="javascript:;">Command Line</a>
-              <a class="Power" href="javascript:;">Power Shell</a>
+              <a class="Command" [ngClass]="{'active': scriptType == 'cmd'}" (click)="switchTerminal('cmd')">Command Line</a>
+              <a class="Power" [ngClass]="{'active': scriptType == 'powershell'}" (click)="switchTerminal('powershell')">Power Shell</a>
             </div>
-          </div> -->
+          </div>
         </div>
         <!-- Page Content -->
         <div class="contant-area">
           <div class="terminal-area">
-            <div id="terminal" class="terminal-box">
+            <div id="terminal" class="terminal-box" [ngStyle]="{'background-color':scriptType === 'powershell' ? '#012456' : '#151b21' }">
               <p *ngFor="let split of splitCommand"><span>{{split}}</span></p>
               <!-- <textarea>C:\Users\Sam\Desktop></textarea> -->
             </div>
